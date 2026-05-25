@@ -7,3 +7,13 @@ updates:
     commit-message:
       prefix: "chore(actions)"
     open-pull-requests-limit: 5
+    # Group all github-actions bumps into ONE weekly PR instead of N.
+    # Eliminates the per-action PR spam (was 5+ branches open at once).
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+          - "major"
