@@ -9,7 +9,7 @@
 #' @references Montesinos Lopez Ch 11.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_gxe_interaction_model <- function(x, y, env) {
   g_id <- x

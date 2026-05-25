@@ -34,7 +34,7 @@ test_that("morie_datasets_arsau_uof_main_records(offline=FALSE) dispatches via m
       expect_equal(resource_id, "ea9dc29c-b4f1-4426-b1f2-974ce995aca1")
       stub_df
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_arsau_uof_main_records(year = "2024",
                                                  offline = FALSE)
   expect_equal(nrow(out), 2L)
@@ -47,7 +47,7 @@ test_that("morie_datasets_arsau_uof_main_records honours explicit resource_id ov
       expect_equal(resource_id, "override-id-xyz")
       data.frame(IncidentYear = 2099L, BatchFileName = "OVERRIDE")
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_arsau_uof_main_records(year = "2024",
                                                  offline = FALSE,
                                                  resource_id = "override-id-xyz")
@@ -88,7 +88,7 @@ test_that("morie_datasets_otis_d01_deaths_in_custody(offline=FALSE) dispatches v
       expect_equal(resource_id, "89e3b63f-5679-4fa4-b98a-fdd2dc486f29")
       stub_df
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_otis_d01_deaths_in_custody(offline = FALSE)
   expect_equal(nrow(out), 2L)
   expect_equal(out$Region_AtTimeOfDeath, c("Central", "Eastern"))
@@ -145,7 +145,7 @@ test_that("morie_datasets_tps_mha_apprehensions(offline=FALSE) routes through TP
       expect_equal(format, "json")
       stub_df
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_tps_mha_apprehensions(year = 2024L,
                                                 offline = FALSE)
   expect_equal(nrow(out), 2L)
@@ -166,7 +166,7 @@ test_that("morie_datasets_tps_mha_apprehensions(offline=FALSE) (3TT+) defaults t
       expect_equal(hub_id, "333c4e1c96314741a83425045b6a7642")
       data.frame(OBJECTID = 1L)
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_tps_mha_apprehensions(offline = FALSE)
   expect_equal(nrow(out), 1L)
 })
@@ -179,7 +179,7 @@ test_that("morie_datasets_tps_mha_apprehensions(offline=FALSE) honours explicit 
       expect_equal(layer_url, "https://example/override/Layer/0")
       data.frame(OBJECTID = 99L)
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_tps_mha_apprehensions(
     offline = FALSE,
     layer_url = "https://example/override/Layer/0")

@@ -10,16 +10,16 @@
 
 test_that(".morie_env returns NULL on unset, empty, and whitespace", {
   withr::with_envvar(list(TEST_VAR_XYZ = NA), {
-    expect_null(morie:::.morie_env("TEST_VAR_XYZ"))
+    expect_null(rmorie:::.morie_env("TEST_VAR_XYZ"))
   })
   withr::with_envvar(list(TEST_VAR_XYZ = ""), {
-    expect_null(morie:::.morie_env("TEST_VAR_XYZ"))
+    expect_null(rmorie:::.morie_env("TEST_VAR_XYZ"))
   })
   withr::with_envvar(list(TEST_VAR_XYZ = "   "), {
-    expect_null(morie:::.morie_env("TEST_VAR_XYZ"))
+    expect_null(rmorie:::.morie_env("TEST_VAR_XYZ"))
   })
   withr::with_envvar(list(TEST_VAR_XYZ = "/some/path"), {
-    expect_equal(morie:::.morie_env("TEST_VAR_XYZ"), "/some/path")
+    expect_equal(rmorie:::.morie_env("TEST_VAR_XYZ"), "/some/path")
   })
 })
 
@@ -41,7 +41,7 @@ test_that("path resolver succeeds via the bundled inst/extdata/arsau fixture", {
   # When env vars are unset, the resolver now finds the bundled
   # per-year layout that 3MMM.5 added.
   withr::with_envvar(list(MORIE_ARSAU_DIR = NA, MORIE_DATA_DIR = NA), {
-    p <- morie:::.morie_resolve_arsau_dir(data_dir = NULL)
+    p <- rmorie:::.morie_resolve_arsau_dir(data_dir = NULL)
     expect_true(dir.exists(p))
     expect_match(p, "extdata/arsau$")
   })
@@ -54,7 +54,7 @@ test_that("path resolver: MORIE_DATA_DIR /ARSAU upper-case path tried", {
   if (dir.exists(base)) unlink(base, recursive = TRUE)
   dir.create(fx, recursive = TRUE)
   withr::with_envvar(list(MORIE_ARSAU_DIR = NA, MORIE_DATA_DIR = base), {
-    p <- morie:::.morie_resolve_arsau_dir()
+    p <- rmorie:::.morie_resolve_arsau_dir()
     expect_equal(normalizePath(p), normalizePath(fx))
   })
   unlink(base, recursive = TRUE)
@@ -77,7 +77,7 @@ test_that("path resolver: require_exists=FALSE with no candidates returns NA", {
     # allow_bundled is conceptually False; here it returns the
     # bundled-fixture path string.  Smoke-confirm it returns a path
     # string rather than erroring out.
-    p <- morie:::.morie_resolve_arsau_dir(require_exists = FALSE)
+    p <- rmorie:::.morie_resolve_arsau_dir(require_exists = FALSE)
     expect_true(is.character(p) || is.na(p))
   })
 })
@@ -86,7 +86,7 @@ test_that("path resolver: require_exists=FALSE with no candidates returns NA", {
 # ── .arsau_make_entry: explicit invocation for coverage ────────────
 
 test_that(".arsau_make_entry constructs a well-formed entry", {
-  e <- morie:::.arsau_make_entry(
+  e <- rmorie:::.arsau_make_entry(
     "test", "kind", "file.csv", "sidecar.json",
     expected_rows = 10, expected_cols = 5, is_valid = TRUE,
     description_en = "test EN", description_fr = "test FR"
@@ -99,7 +99,7 @@ test_that(".arsau_make_entry constructs a well-formed entry", {
 })
 
 test_that(".arsau_make_entry coerces is_valid via isTRUE", {
-  e <- morie:::.arsau_make_entry(
+  e <- rmorie:::.arsau_make_entry(
     "x", "y", "z.csv", NULL, 0, 0, NA,
     description_en = "", description_fr = ""
   )
@@ -125,7 +125,7 @@ test_that("sidecar reader handles top-level only-fields shape", {
 # ── .arsau_coerce_year_key: underscore branch ─────────────────────-
 
 test_that(".arsau_coerce_year_key normalises underscore separator", {
-  expect_equal(morie:::.arsau_coerce_year_key("2020_2022", range_ok = TRUE),
+  expect_equal(rmorie:::.arsau_coerce_year_key("2020_2022", range_ok = TRUE),
                 "2020-2022")
 })
 

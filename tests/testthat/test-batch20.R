@@ -229,70 +229,70 @@ test_that("morie_stratified_sampling is an exported alias of strat", {
 })
 
 test_that("study_core .safe_divide handles zero and NA denominators", {
-  expect_true(is.na(morie:::.safe_divide(1, 0)))
-  expect_true(is.na(morie:::.safe_divide(1, NA)))
-  expect_equal(morie:::.safe_divide(6, 3), 2)
+  expect_true(is.na(rmorie:::.safe_divide(1, 0)))
+  expect_true(is.na(rmorie:::.safe_divide(1, NA)))
+  expect_equal(rmorie:::.safe_divide(6, 3), 2)
 })
 
 test_that("study_core .wald_ci returns a symmetric interval", {
-  ci <- morie:::.wald_ci(0.5, 0.1)
+  ci <- rmorie:::.wald_ci(0.5, 0.1)
   expect_length(ci, 2L)
   expect_true(ci[1] < ci[2])
   expect_equal(mean(ci), 0.5, tolerance = 1e-9)
 })
 
 test_that("study_core .binary_ci returns proportion, se and clipped CI", {
-  res <- morie:::.binary_ci(5, 20)
+  res <- rmorie:::.binary_ci(5, 20)
   expect_named(res, c("p", "se", "ci"))
   expect_equal(res$p, 0.25)
   expect_true(all(res$ci >= 0 & res$ci <= 1))
 })
 
 test_that("study_core .weighted_binary_estimate handles empty and valid input", {
-  empty <- morie:::.weighted_binary_estimate(numeric(0), numeric(0))
+  empty <- rmorie:::.weighted_binary_estimate(numeric(0), numeric(0))
   expect_equal(empty$n, 0L)
   expect_true(is.na(empty$p))
   set.seed(8)
   x <- rbinom(50, 1, 0.4)
   w <- runif(50, 0.5, 2)
-  res <- morie:::.weighted_binary_estimate(x, w)
+  res <- rmorie:::.weighted_binary_estimate(x, w)
   expect_true(res$p >= 0 && res$p <= 1)
   expect_equal(res$n, 50L)
   expect_true(is.finite(res$n_eff))
 })
 
 test_that("study_core .clip_exp bounds extreme exponents", {
-  expect_true(is.finite(morie:::.clip_exp(5000)))
-  expect_true(is.finite(morie:::.clip_exp(-5000)))
-  expect_equal(morie:::.clip_exp(0), 1)
+  expect_true(is.finite(rmorie:::.clip_exp(5000)))
+  expect_true(is.finite(rmorie:::.clip_exp(-5000)))
+  expect_equal(rmorie:::.clip_exp(0), 1)
 })
 
 test_that("study_core .na_omit_cols drops incomplete rows", {
   df <- data.frame(a = c(1, NA, 3), b = c(4, 5, 6))
-  out <- morie:::.na_omit_cols(df, c("a", "b"))
+  out <- rmorie:::.na_omit_cols(df, c("a", "b"))
   expect_equal(nrow(out), 2L)
 })
 
 test_that("study_reporting .binary_power_required_n behaves on effects", {
-  n <- morie:::.binary_power_required_n(0.3, 0.5)
+  n <- rmorie:::.binary_power_required_n(0.3, 0.5)
   expect_true(is.finite(n) && n > 0)
-  expect_true(is.na(morie:::.binary_power_required_n(0.4, 0.4)))
+  expect_true(is.na(rmorie:::.binary_power_required_n(0.4, 0.4)))
 })
 
 test_that("study_reporting .continuous_power_required_n behaves on effects", {
-  n <- morie:::.continuous_power_required_n(1, 2, 1.5)
+  n <- rmorie:::.continuous_power_required_n(1, 2, 1.5)
   expect_true(is.finite(n) && n > 0)
-  expect_true(is.na(morie:::.continuous_power_required_n(1, 1, 1)))
+  expect_true(is.na(rmorie:::.continuous_power_required_n(1, 1, 1)))
 })
 
 test_that("study_reporting .block_schedule returns empty frame on no strata", {
-  out <- morie:::.block_schedule("endpoint", NA_real_, character(0))
+  out <- rmorie:::.block_schedule("endpoint", NA_real_, character(0))
   expect_s3_class(out, "data.frame")
   expect_equal(nrow(out), 0L)
 })
 
 test_that("study_reporting .block_schedule builds a randomization schedule", {
-  out <- morie:::.block_schedule("hd", 40, c("Female", "Male"))
+  out <- rmorie:::.block_schedule("hd", 40, c("Female", "Male"))
   expect_s3_class(out, "data.frame")
   expect_true(nrow(out) > 0)
   expect_true(all(out$block_size == 4L))
@@ -435,7 +435,7 @@ test_that("morie_svm_kernel_trick honours gamma 'auto' and numeric gamma", {
 test_that("swiglu_activation runs with default identity projections", {
   set.seed(18)
   x <- matrix(rnorm(12), 4, 3)
-  res <- morie:::swiglu_activation(x)
+  res <- rmorie:::swiglu_activation(x)
   expect_type(res, "list")
   expect_named(res, c("tensor", "gate", "up", "method"))
   expect_equal(dim(res$tensor), c(4L, 3L))
@@ -447,7 +447,7 @@ test_that("swiglu_activation accepts explicit weights and biases", {
   x <- matrix(rnorm(8), 2, 4)
   W <- matrix(rnorm(12), 4, 3)
   V <- matrix(rnorm(12), 4, 3)
-  res <- morie:::swiglu_activation(x,
+  res <- rmorie:::swiglu_activation(x,
     W = W, V = V, b = rep(0.1, 3),
     c = rep(-0.1, 3)
   )
@@ -457,15 +457,15 @@ test_that("swiglu_activation accepts explicit weights and biases", {
 test_that("swiglu_activation errors when only one of W/V is supplied", {
   x <- matrix(rnorm(8), 2, 4)
   W <- diag(4)
-  expect_error(morie:::swiglu_activation(x, W = W), "both W and V")
+  expect_error(rmorie:::swiglu_activation(x, W = W), "both W and V")
 })
 
 test_that("morie_default_synthetic_name_map returns the canonical key set", {
   m_generic <- morie_default_synthetic_name_map("generic")
   expect_type(m_generic, "character")
-  expect_true(all(morie:::synthetic_required_keys() %in% names(m_generic)))
+  expect_true(all(rmorie:::synthetic_required_keys() %in% names(m_generic)))
   m_legacy <- morie_default_synthetic_name_map("morie_legacy")
-  expect_true(all(morie:::synthetic_required_keys() %in% names(m_legacy)))
+  expect_true(all(rmorie:::synthetic_required_keys() %in% names(m_legacy)))
   expect_equal(unname(m_legacy[["id"]]), "seqid")
 })
 
@@ -503,27 +503,27 @@ test_that("morie_generate_synthetic_data accepts a custom name map", {
 test_that("resolve_synthetic_name_map rejects malformed maps", {
   bad_missing <- c(id = "id")
   expect_error(
-    morie:::resolve_synthetic_name_map(bad_missing, "generic"),
+    rmorie:::resolve_synthetic_name_map(bad_missing, "generic"),
     "missing required keys"
   )
   full <- morie_default_synthetic_name_map("generic")
   dup <- full
   dup[["weight"]] <- dup[["id"]]
-  expect_error(morie:::resolve_synthetic_name_map(dup, "generic"), "unique")
+  expect_error(rmorie:::resolve_synthetic_name_map(dup, "generic"), "unique")
   expect_error(
-    morie:::resolve_synthetic_name_map(123, "generic"),
+    rmorie:::resolve_synthetic_name_map(123, "generic"),
     "named character vector"
   )
 })
 
 test_that("synthetic helpers inv_logit and inject_special_codes behave", {
-  expect_equal(morie:::inv_logit(0), 0.5)
-  expect_true(all(morie:::inv_logit(c(-10, 0, 10)) >= 0))
+  expect_equal(rmorie:::inv_logit(0), 0.5)
+  expect_true(all(rmorie:::inv_logit(c(-10, 0, 10)) >= 0))
   set.seed(4)
   x <- rep(1L, 200)
-  out <- morie:::inject_special_codes(x, rate = 0)
+  out <- rmorie:::inject_special_codes(x, rate = 0)
   expect_identical(out, x)
-  out2 <- morie:::inject_special_codes(rep(1L, 500), rate = 0.1)
+  out2 <- rmorie:::inject_special_codes(rep(1L, 500), rate = 0.1)
   expect_length(out2, 500L)
 })
 
@@ -548,7 +548,7 @@ test_that("morie_write_synthetic_data errors on an empty path", {
 
 test_that("study_core data-file module paths are not exercised offline", {
   if (FALSE) {
-    morie:::.run_data_wrangling_module_internal(data.frame(), cpads_csv = "x")
+    rmorie:::.run_data_wrangling_module_internal(data.frame(), cpads_csv = "x")
   }
   expect_true(TRUE)
 })

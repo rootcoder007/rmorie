@@ -20,7 +20,7 @@ morie_ghosal_hierarchical_bayes <- function(x, a_prior = 1.0, b_prior = 1.0,
                                       M = 400, seed = 0,
                                       deterministic_seed = NULL) {
   if (!is.null(deterministic_seed)) {
-    morie::morie_det_rng("ghhbp", deterministic_seed)
+    rmorie::morie_det_rng("ghhbp", deterministic_seed)
   } else {
     set.seed(seed)
   }

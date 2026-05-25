@@ -71,13 +71,13 @@ test_that("morie_list_morie_modules returns a 21-row data.frame", {
 })
 
 test_that(".cpads_default_csv returns a character path", {
-  p <- morie:::.cpads_default_csv()
+  p <- rmorie:::.cpads_default_csv()
   expect_type(p, "character")
 })
 
 test_that(".resolve_cpads_csv errors on a path it cannot find", {
   expect_error(
-    morie:::.resolve_cpads_csv(file.path(tempdir(), "does-not-exist-xyz.csv")),
+    rmorie:::.resolve_cpads_csv(file.path(tempdir(), "does-not-exist-xyz.csv")),
     "CPADS CSV not found"
   )
 })
@@ -99,7 +99,7 @@ test_that("fzlst returns NA-stub when n < 2", {
 
 test_that("hrzc1 returns insufficient-data stub when n too small", {
   set.seed(1)
-  out <- morie:::hrzc1(matrix(rnorm(8), 4, 2), c(1, 1, 1, 1), censor = 0)
+  out <- rmorie:::hrzc1(matrix(rnorm(8), 4, 2), c(1, 1, 1, 1), censor = 0)
   expect_true(all(is.na(out$estimate)))
   expect_match(out$method, "insufficient data")
 })

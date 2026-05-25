@@ -5,27 +5,27 @@ set.seed(1)
 
 test_that("quote_ident accepts valid identifiers + backticks them", {
   set.seed(1)
-  expect_equal(morie:::.morie_bq_quote_ident("my-project_1"), "`my-project_1`")
-  expect_equal(morie:::.morie_bq_quote_ident("table"), "`table`")
+  expect_equal(rmorie:::.morie_bq_quote_ident("my-project_1"), "`my-project_1`")
+  expect_equal(rmorie:::.morie_bq_quote_ident("table"), "`table`")
 })
 
 test_that("quote_ident rejects bad input", {
   set.seed(1)
-  expect_error(morie:::.morie_bq_quote_ident(""), "Illegal")
-  expect_error(morie:::.morie_bq_quote_ident("a;b"), "Illegal")
-  expect_error(morie:::.morie_bq_quote_ident(c("a", "b")), "Illegal")
-  expect_error(morie:::.morie_bq_quote_ident(123), "Illegal")
+  expect_error(rmorie:::.morie_bq_quote_ident(""), "Illegal")
+  expect_error(rmorie:::.morie_bq_quote_ident("a;b"), "Illegal")
+  expect_error(rmorie:::.morie_bq_quote_ident(c("a", "b")), "Illegal")
+  expect_error(rmorie:::.morie_bq_quote_ident(123), "Illegal")
 })
 
 test_that("billing_project resolves explicit > env > NULL", {
   set.seed(1)
-  expect_equal(morie:::.morie_bq_billing_project("p1"), "p1")
+  expect_equal(rmorie:::.morie_bq_billing_project("p1"), "p1")
   old <- Sys.getenv("GCP_PROJECT", unset = "")
   Sys.unsetenv("GCP_PROJECT")
   on.exit(if (nzchar(old)) Sys.setenv(GCP_PROJECT = old))
-  expect_null(morie:::.morie_bq_billing_project())
+  expect_null(rmorie:::.morie_bq_billing_project())
   Sys.setenv(GCP_PROJECT = "envproj")
-  expect_equal(morie:::.morie_bq_billing_project(), "envproj")
+  expect_equal(rmorie:::.morie_bq_billing_project(), "envproj")
 })
 
 test_that("bq_require errors when bigrquery missing", {
@@ -43,7 +43,7 @@ test_that("bq_require errors when bigrquery missing", {
 
   )
   set.seed(1)
-  expect_error(morie:::.morie_bq_require(), "bigrquery")
+  expect_error(rmorie:::.morie_bq_require(), "bigrquery")
 })
 
 test_that("build_sql constructs basic SELECT", {

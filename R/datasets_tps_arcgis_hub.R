@@ -87,7 +87,7 @@
 morie_datasets_tps_arcgis_hub_layers <- function(offline = TRUE) {
   if (isTRUE(offline)) {
     path <- system.file("extdata", "tps_arcgis_hub_catalog.csv",
-                        package = "morie")
+                        package = "rmorie")
     if (!nzchar(path)) {
       stop("bundled TPS ArcGIS Hub catalog fixture missing",
            call. = FALSE)
@@ -265,7 +265,7 @@ morie_datasets_tps_arcgis_hub_by_id <- function(hub_id,
     dest <- tempfile(fileext = suffix)
   }
   # 3XX: routes through .morie_dataset_http_bytes (libcurl-backed
-  # via morie::http::get_bytes from 3VV, with httr2 fallback) so
+  # via rmorie::http::get_bytes from 3VV, with httr2 fallback) so
   # the binary payload survives without NUL truncation across the
   # whole chain.
   bytes <- .morie_dataset_http_bytes(bin_url)
@@ -511,7 +511,7 @@ morie_datasets_toronto_zoning_per_neighbourhood <- function(
     } else {
       "toronto_zoning_stats_sample.csv"
     }
-    path <- system.file("extdata", fixture, package = "morie")
+    path <- system.file("extdata", fixture, package = "rmorie")
     if (!nzchar(path)) {
       stop(sprintf("bundled Toronto Zoning fixture %s missing",
                    fixture), call. = FALSE)

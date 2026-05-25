@@ -16,7 +16,7 @@
 #' @references Friedman, Hastie & Tibshirani (2010); Montesinos Lopez Ch 6.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_penalized_regression <- function(x, y, alpha = 0.5, lam = 1.0,
                                  max_iter = 1000, tol = 1e-6) {

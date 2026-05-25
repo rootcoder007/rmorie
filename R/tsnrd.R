@@ -18,7 +18,7 @@
 #'   perplexity, n_components, n, method.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_tsne_reduction <- function(x, n_components = 2L, perplexity = 30,
                            learning_rate = "auto", n_iter = 1000L,

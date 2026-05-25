@@ -42,7 +42,7 @@
 #' @references Anselin (1988); Schabenberger & Gotway (2005), Ch 7.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 sarre <- function(x, y, w) {
   X <- as.matrix(x)

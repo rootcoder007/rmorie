@@ -64,7 +64,7 @@ NULL
 # Read a bundled neighbourhood fixture from inst/extdata.
 .morie_to_neighbourhoods_fixture <- function(version) {
   fname <- .morie_to_fixture_name(version)
-  path <- system.file("extdata", fname, package = "morie")
+  path <- system.file("extdata", fname, package = "rmorie")
   if (!nzchar(path)) {
     stop(sprintf(paste0(
       "Bundled fixture %s not found in the installed morie package. ",
@@ -284,7 +284,7 @@ morie_tps_year_to_hood_version <- function(year) {
 #' @export
 morie_to_hood_crosswalk <- function() {
   path <- system.file("extdata", "to_hood_158_140_crosswalk.csv",
-                      package = "morie")
+                      package = "rmorie")
   if (!nzchar(path)) {
     stop(paste0(
       "Bundled 158<->140 crosswalk fixture missing from the installed ",

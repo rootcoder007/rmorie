@@ -26,7 +26,7 @@ transformed system A y = A X beta + eps, A = I - lambda W.
 }
 \examples{
 # See the package vignettes for usage examples:
-#   vignette(package = "morie")
+#   vignette(package = "rmorie")
 }
 \references{
 Anselin (1988); Schabenberger & Gotway (2005), Ch 7.

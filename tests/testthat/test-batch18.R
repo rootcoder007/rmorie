@@ -171,7 +171,7 @@ test_that("rkhsc fits Gaussian RKHS with default sigma", {
   set.seed(0)
   x <- seq(0, 1, length.out = 50)
   y <- sin(2 * pi * x) + rnorm(50, sd = 0.05)
-  r <- morie:::rkhsc(x, y, lam = 1e-4)
+  r <- rmorie:::rkhsc(x, y, lam = 1e-4)
   expect_type(r, "list")
   expect_named(r, c(
     "alpha", "fitted", "residuals", "sigma", "lambda",
@@ -188,18 +188,18 @@ test_that("rkhsc honours explicit sigma", {
   set.seed(1)
   x <- seq(0, 1, length.out = 20)
   y <- x + rnorm(20, sd = 0.1)
-  r <- morie:::rkhsc(x, y, sigma = 0.3)
+  r <- rmorie:::rkhsc(x, y, sigma = 0.3)
   expect_equal(r$sigma, 0.3)
 })
 
 test_that("rkhsc returns degenerate result when n < 2", {
-  r <- morie:::rkhsc(1, 1)
+  r <- rmorie:::rkhsc(1, 1)
   expect_true(is.na(r$estimate))
   expect_match(r$method, "n<2")
 })
 
 test_that("morie_rkhs_kernel_regression alias is identical to rkhsc", {
-  expect_identical(morie_rkhs_kernel_regression, morie:::rkhsc)
+  expect_identical(morie_rkhs_kernel_regression, rmorie:::rkhsc)
 })
 
 test_that("morie_rkhs_full returns documented structure", {
@@ -237,7 +237,7 @@ test_that("morie_rkhs_full accepts explicit bandwidth h and lam", {
 
 test_that("rlhf_reward uses uniform weights by default", {
   x <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 3, byrow = TRUE)
-  r <- morie:::rlhf_reward(x)
+  r <- rmorie:::rlhf_reward(x)
   expect_type(r, "list")
   expect_named(r, c("value", "tensor", "w", "b", "method"))
   expect_length(r$tensor, 3)
@@ -249,19 +249,19 @@ test_that("rlhf_reward uses uniform weights by default", {
 
 test_that("rlhf_reward honours supplied weights and bias", {
   x <- matrix(c(1, 0, 0, 1), nrow = 2, byrow = TRUE)
-  r <- morie:::rlhf_reward(x, w = c(2, 3), b = 1)
+  r <- rmorie:::rlhf_reward(x, w = c(2, 3), b = 1)
   expect_equal(r$tensor, c(3, 4))
   expect_equal(r$b, 1)
 })
 
 test_that("rlhf_reward errors on mismatched weight length", {
   x <- matrix(1:6, nrow = 3)
-  expect_error(morie:::rlhf_reward(x, w = c(1, 2, 3)), "length")
+  expect_error(rmorie:::rlhf_reward(x, w = c(1, 2, 3)), "length")
 })
 
 test_that("rms_norm returns documented structure", {
   x <- matrix(c(3, 4, 0, 0, 1, 1), nrow = 3, byrow = TRUE)
-  r <- morie:::rms_norm(x)
+  r <- rmorie:::rms_norm(x)
   expect_type(r, "list")
   expect_named(r, c("tensor", "rms", "eps", "method"))
   expect_identical(dim(r$tensor), dim(x))
@@ -272,7 +272,7 @@ test_that("rms_norm returns documented structure", {
 
 test_that("rms_norm applies gamma scale and custom eps", {
   x <- matrix(c(2, 2, 4, 4), nrow = 2, byrow = TRUE)
-  r <- morie:::rms_norm(x, gamma = c(2, 0.5), eps = 1e-3)
+  r <- rmorie:::rms_norm(x, gamma = c(2, 0.5), eps = 1e-3)
   expect_identical(dim(r$tensor), dim(x))
   expect_equal(r$eps, 1e-3)
 })

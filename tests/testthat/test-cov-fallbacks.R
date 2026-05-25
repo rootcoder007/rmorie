@@ -135,7 +135,7 @@ test_that("morie_svm_genomic base-R kernel-ridge fallback executes", {
 
 test_that("sobls base-R Halton fallback executes", {
   .mock_fail("randtoolbox")
-  .cov_fb(morie:::sobls(
+  .cov_fb(rmorie:::sobls(
     N = 64L, d = 2L,
     f = function(u) u[1] * u[2], seed = 0L
   ))
@@ -150,7 +150,7 @@ test_that("morie_wavelet_time_series base-R Haar DWT fallback executes", {
 test_that("signal filters take the fallback branch", {
   skip_if_not_installed("pkgload")
   # local_mocked_bindings() requires the morie package to be dev-loaded
-  # via pkgload (devtools::load_all). Under `library(morie); test_dir(...)` 
+  # via pkgload (devtools::load_all). Under `library(rmorie); test_dir(...)` 
   # against the INSTALLED package (the GitHub Actions Linux CI path),
   # pkgload does not have morie registered and local_mocked_bindings
   # errors. Skip cleanly in that case.

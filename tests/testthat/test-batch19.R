@@ -4,7 +4,7 @@
 
 test_that("repetition_penalty: alpha == 1 short-circuits with no penalised idx", {
   z <- c(-1, 0.5, 2, -3)
-  res <- morie:::repetition_penalty(z, generated = c(0L, 2L), alpha = 1)
+  res <- rmorie:::repetition_penalty(z, generated = c(0L, 2L), alpha = 1)
   expect_type(res, "list")
   expect_named(res, c("tensor", "penalised_idx", "alpha", "method"))
   expect_equal(res$tensor, z)
@@ -15,7 +15,7 @@ test_that("repetition_penalty: alpha == 1 short-circuits with no penalised idx",
 
 test_that("repetition_penalty: positive logits divided, negative multiplied", {
   z <- c(2, -2, 0.5, -1)
-  res <- morie:::repetition_penalty(z, generated = c(0L, 1L), alpha = 1.5)
+  res <- rmorie:::repetition_penalty(z, generated = c(0L, 1L), alpha = 1.5)
   expect_named(res, c("tensor", "penalised_idx", "alpha", "method"))
   expect_equal(res$tensor[1], 2 / 1.5)
   expect_equal(res$tensor[2], -2 * 1.5)
@@ -25,7 +25,7 @@ test_that("repetition_penalty: positive logits divided, negative multiplied", {
 
 test_that("repetition_penalty: out-of-range / duplicate generated ids dropped", {
   z <- c(1, 2, 3)
-  res <- morie:::repetition_penalty(z,
+  res <- rmorie:::repetition_penalty(z,
     generated = c(0L, 0L, 99L, -5L),
     alpha = 1.2
   )
@@ -477,7 +477,7 @@ test_that("morie_spatial_mixed_model alias is identical to smixd", {
 })
 
 test_that("sobls: default sample is N-by-d in the unit cube", {
-  res <- morie:::sobls(N = 64L, d = 2L)
+  res <- rmorie:::sobls(N = 64L, d = 2L)
   expect_type(res, "list")
   expect_true(is.matrix(res$sample))
   expect_equal(dim(res$sample), c(64L, 2L))
@@ -488,7 +488,7 @@ test_that("sobls: default sample is N-by-d in the unit cube", {
 })
 
 test_that("sobls: integrand path adds estimate and se", {
-  res <- morie:::sobls(
+  res <- rmorie:::sobls(
     N = 128L, d = 2L,
     f = function(u) u[1] * u[2], seed = 0L
   )
@@ -498,13 +498,13 @@ test_that("sobls: integrand path adds estimate and se", {
 })
 
 test_that("sobls: no scramble path returns valid sample", {
-  res <- morie:::sobls(N = 32L, d = 1L, scramble = FALSE)
+  res <- rmorie:::sobls(N = 32L, d = 1L, scramble = FALSE)
   expect_equal(dim(res$sample), c(32L, 1L))
   expect_true(all(is.finite(res$sample)))
 })
 
 test_that("morie_sobol_sequence alias is identical to sobls", {
-  expect_identical(morie:::morie_sobol_sequence, morie:::sobls)
+  expect_identical(rmorie:::morie_sobol_sequence, rmorie:::sobls)
 })
 
 test_that("spblk: box-form 1-D block returns estimate and se", {
@@ -620,7 +620,7 @@ test_that("morie_spectral_density: too-short input errors", {
 })
 
 test_that("sparse_attention: scalar N gives N-by-N mask", {
-  res <- morie:::sparse_attention(10L, window = 2L, stride = 4L)
+  res <- rmorie:::sparse_attention(10L, window = 2L, stride = 4L)
   expect_type(res, "list")
   expect_named(res, c("tensor", "boolean", "density", "method"))
   expect_equal(dim(res$boolean), c(10L, 10L))
@@ -632,11 +632,11 @@ test_that("sparse_attention: scalar N gives N-by-N mask", {
 })
 
 test_that("sparse_attention: random links increase density", {
-  d0 <- morie:::sparse_attention(20L,
+  d0 <- rmorie:::sparse_attention(20L,
     window = 1L, stride = 50L,
     n_random = 0L
   )$density
-  d1 <- morie:::sparse_attention(20L,
+  d1 <- rmorie:::sparse_attention(20L,
     window = 1L, stride = 50L,
     n_random = 5L, seed = 1L
   )$density
@@ -644,7 +644,7 @@ test_that("sparse_attention: random links increase density", {
 })
 
 test_that("sparse_attention: vector input uses its length as N", {
-  res <- morie:::sparse_attention(rep(0, 6))
+  res <- rmorie:::sparse_attention(rep(0, 6))
   expect_equal(dim(res$boolean), c(6L, 6L))
 })
 

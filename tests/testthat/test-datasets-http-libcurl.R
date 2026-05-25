@@ -23,7 +23,7 @@ test_that(".morie_http_get C++ symbol is exported and callable in this build", {
 })
 
 test_that(".morie_http_curl_version returns a non-empty version string", {
-  ver <- morie:::.morie_http_curl_version()
+  ver <- rmorie:::.morie_http_curl_version()
   expect_type(ver, "character")
   expect_true(nzchar(ver))
   # Loose shape check: libcurl version strings look like "8.7.1".
@@ -31,25 +31,25 @@ test_that(".morie_http_curl_version returns a non-empty version string", {
 })
 
 test_that(".morie_dataset_http_backend_cpp() reports TRUE when the C++ symbol is present", {
-  expect_true(morie:::.morie_dataset_http_backend_cpp())
+  expect_true(rmorie:::.morie_dataset_http_backend_cpp())
 })
 
 # ====================================== URL builder
 
 test_that(".morie_dataset_build_url returns the bare URL when query is NULL or empty", {
   expect_equal(
-    morie:::.morie_dataset_build_url("https://x.test/r.json"),
+    rmorie:::.morie_dataset_build_url("https://x.test/r.json"),
     "https://x.test/r.json")
   expect_equal(
-    morie:::.morie_dataset_build_url("https://x.test/r.json", NULL),
+    rmorie:::.morie_dataset_build_url("https://x.test/r.json", NULL),
     "https://x.test/r.json")
   expect_equal(
-    morie:::.morie_dataset_build_url("https://x.test/r.json", list()),
+    rmorie:::.morie_dataset_build_url("https://x.test/r.json", list()),
     "https://x.test/r.json")
 })
 
 test_that(".morie_dataset_build_url appends ?k=v on a URL without an existing query string", {
-  out <- morie:::.morie_dataset_build_url(
+  out <- rmorie:::.morie_dataset_build_url(
     "https://x.test/r.json",
     query = list(`$limit` = 5L))
   # Either ? or %3F (URLencode escapes $); we accept the encoded form.
@@ -58,7 +58,7 @@ test_that(".morie_dataset_build_url appends ?k=v on a URL without an existing qu
 })
 
 test_that(".morie_dataset_build_url appends &k=v when URL already has a query string", {
-  out <- morie:::.morie_dataset_build_url(
+  out <- rmorie:::.morie_dataset_build_url(
     "https://x.test/r.json?$select=id",
     query = list(`$limit` = 5L))
   # The existing ? remains, and the new pair joins with &.
@@ -67,7 +67,7 @@ test_that(".morie_dataset_build_url appends &k=v when URL already has a query st
 })
 
 test_that(".morie_dataset_build_url percent-encodes both key and value", {
-  out <- morie:::.morie_dataset_build_url(
+  out <- rmorie:::.morie_dataset_build_url(
     "https://x.test/r.json",
     query = list(`$where` = "year=2024 AND primary_type='THEFT'"))
   # $ -> %24, space -> %20, ' -> %27
@@ -77,7 +77,7 @@ test_that(".morie_dataset_build_url percent-encodes both key and value", {
 })
 
 test_that(".morie_dataset_build_url drops NULL/empty values", {
-  out <- morie:::.morie_dataset_build_url(
+  out <- rmorie:::.morie_dataset_build_url(
     "https://x.test/r.json",
     query = list(`$limit` = 5L,
                   `$where` = NULL,
@@ -88,7 +88,7 @@ test_that(".morie_dataset_build_url drops NULL/empty values", {
 })
 
 test_that(".morie_dataset_build_url preserves correct & ordering of multiple params", {
-  out <- morie:::.morie_dataset_build_url(
+  out <- rmorie:::.morie_dataset_build_url(
     "https://x.test/r.json",
     query = list(a = "1", b = "2", c = "3"))
   # 2 ampersands, 1 question mark.
@@ -109,8 +109,8 @@ test_that(".morie_dataset_http_text routes through .morie_http_get when the C++ 
                     headers = headers)
       "stub-body"
     },
-    .package = "morie")
-  out <- morie:::.morie_dataset_http_text(
+    .package = "rmorie")
+  out <- rmorie:::.morie_dataset_http_text(
     "https://x.test/r.csv",
     query = list(a = "1"))
   expect_equal(out, "stub-body")
@@ -128,8 +128,8 @@ test_that(".morie_dataset_http_json routes through .morie_http_get + jsonlite::f
       seen <<- list(url = url)
       '[{"a":1,"b":"two"}]'
     },
-    .package = "morie")
-  out <- morie:::.morie_dataset_http_json(
+    .package = "rmorie")
+  out <- rmorie:::.morie_dataset_http_json(
     "https://x.test/r.json",
     query = list(`$limit` = 1L))
   expect_s3_class(out, "data.frame")
@@ -146,9 +146,9 @@ test_that(".morie_dataset_http_json raises when libcurl returns empty body", {
                                  follow_redirects = TRUE) {
       ""  # transport failure
     },
-    .package = "morie")
+    .package = "rmorie")
   expect_error(
-    morie:::.morie_dataset_http_json("https://x.test/r.json"),
+    rmorie:::.morie_dataset_http_json("https://x.test/r.json"),
     regexp = "libcurl returned empty body")
 })
 
@@ -162,8 +162,8 @@ test_that(".morie_dataset_http_text + json forward custom headers (e.g. X-App-To
       captured <<- headers
       '[{"x":1}]'
     },
-    .package = "morie")
-  morie:::.morie_dataset_http_json(
+    .package = "rmorie")
+  rmorie:::.morie_dataset_http_json(
     "https://x.test/r.json",
     headers = c("X-App-Token: tok-abc",
                 "Accept: application/json"))
@@ -203,8 +203,8 @@ test_that(".morie_dataset_http_bytes routes through .morie_http_get_bytes when a
       # (with embedded NUL -- proves we preserve binary correctly).
       as.raw(c(0x61, 0x62, 0x63, 0x00, 0x64, 0x65, 0x66))
     },
-    .package = "morie")
-  out <- morie:::.morie_dataset_http_bytes(
+    .package = "rmorie")
+  out <- rmorie:::.morie_dataset_http_bytes(
     "https://x.test/bin",
     query = list(format = "shp"))
   expect_type(out, "raw")
@@ -226,8 +226,8 @@ test_that(".morie_dataset_http_bytes forwards custom headers", {
       captured <<- headers
       raw()
     },
-    .package = "morie")
-  morie:::.morie_dataset_http_bytes(
+    .package = "rmorie")
+  rmorie:::.morie_dataset_http_bytes(
     "https://x.test/bin",
     headers = c("X-App-Token: tok-xyz",
                 "Accept: application/zip"))
@@ -255,8 +255,8 @@ test_that(".morie_dataset_http_text_with_status returns list(body, status_code)"
                                              follow_redirects = TRUE) {
       list(body = "body-text", status_code = 200L)
     },
-    .package = "morie")
-  out <- morie:::.morie_dataset_http_text_with_status(
+    .package = "rmorie")
+  out <- rmorie:::.morie_dataset_http_text_with_status(
     "https://x.test/y", query = list(a = 1))
   expect_type(out, "list")
   expect_named(out, c("body", "status_code"))
@@ -272,8 +272,8 @@ test_that(".morie_dataset_http_text_with_status surfaces 4xx without throwing", 
                                              follow_redirects = TRUE) {
       list(body = '{"error":"unauthorised"}', status_code = 401L)
     },
-    .package = "morie")
-  out <- morie:::.morie_dataset_http_text_with_status(
+    .package = "rmorie")
+  out <- rmorie:::.morie_dataset_http_text_with_status(
     "https://x.test/y")
   expect_equal(out$status_code, 401L)
   expect_match(out$body, "unauthorised")
@@ -291,8 +291,8 @@ test_that(".morie_dataset_http_post_json_with_status serialises body + returns s
       seen <<- list(body = body, content_type = content_type)
       list(body = '{"ok":true}', status_code = 200L)
     },
-    .package = "morie")
-  out <- morie:::.morie_dataset_http_post_json_with_status(
+    .package = "rmorie")
+  out <- rmorie:::.morie_dataset_http_post_json_with_status(
     "https://x.test/y",
     body = list(x = 1L, y = "two"))
   expect_equal(out$status_code, 200L)

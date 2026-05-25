@@ -125,7 +125,7 @@ test_that("grouped_query_attention runs on small Q/K/V tensors", {
   Q <- matrix(stats::rnorm(8 * 4), 8L, 4L)
   K <- matrix(stats::rnorm(8 * 4), 8L, 4L)
   V <- matrix(stats::rnorm(8 * 4), 8L, 4L)
-  out <- tryCatch(morie:::grouped_query_attention(Q, K, V),
+  out <- tryCatch(rmorie:::grouped_query_attention(Q, K, V),
                   error = function(e) e)
   if (inherits(out, "error"))
     skip(sprintf("grpqa error: %s", conditionMessage(out)))
@@ -135,7 +135,7 @@ test_that("grouped_query_attention runs on small Q/K/V tensors", {
 test_that("mixture_of_experts runs on small input", {
   set.seed(11L)
   x <- matrix(stats::rnorm(20 * 4), 20L, 4L)
-  out <- tryCatch(morie:::mixture_of_experts(x), error = function(e) e)
+  out <- tryCatch(rmorie:::mixture_of_experts(x), error = function(e) e)
   if (inherits(out, "error"))
     skip(sprintf("moeml error: %s", conditionMessage(out)))
   expect_true(is.list(out) || is.matrix(out))

@@ -1,4 +1,4 @@
-library(morie)
+library(rmorie)
 
 test_that("synthetic generator returns expected generic schema", {
   dat <- morie_generate_synthetic_data(n = 1000, seed = 123, special_code_rate = 0)

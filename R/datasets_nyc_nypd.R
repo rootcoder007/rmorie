@@ -182,7 +182,7 @@ NULL
   }
   entry <- .MORIE_NYC_NYPD_REGISTRY[[dataset_key]]
   if (isTRUE(offline)) {
-    path <- system.file("extdata", entry$fixture, package = "morie")
+    path <- system.file("extdata", entry$fixture, package = "rmorie")
     if (!nzchar(path)) {
       stop(sprintf("bundled NYC NYPD fixture %s missing",
                    entry$fixture), call. = FALSE)
@@ -488,7 +488,7 @@ morie_datasets_nyc_police_precincts <- function(offline = TRUE,
   mode <- match.arg(mode)
   if (isTRUE(offline)) {
     path <- system.file("extdata", "nyc_police_precincts.csv",
-                        package = "morie")
+                        package = "rmorie")
     if (!nzchar(path)) {
       stop("bundled NYC police precincts fixture missing",
            call. = FALSE)
@@ -552,7 +552,7 @@ morie_datasets_nyc_boroughs <- function(offline = TRUE,
   mode <- match.arg(mode)
   if (isTRUE(offline)) {
     path <- system.file("extdata", "nyc_borough_boundaries.csv",
-                        package = "morie")
+                        package = "rmorie")
     if (!nzchar(path)) {
       stop("bundled NYC borough boundaries fixture missing",
            call. = FALSE)
@@ -640,7 +640,7 @@ morie_datasets_nyc_nypd_boro_crosswalk <- function() {
 # ---------------------------------------------------------------------------
 
 .morie_nyc_boundary_fixture <- function(fname, expected_rows = NULL) {
-  path <- system.file("extdata", fname, package = "morie")
+  path <- system.file("extdata", fname, package = "rmorie")
   if (!nzchar(path)) {
     stop(sprintf("bundled NYC boundary fixture missing: %s", fname),
          call. = FALSE)
@@ -759,7 +759,7 @@ morie_datasets_nyc_ntas_2020 <- function(offline = TRUE,
 }
 
 .morie_nyc_zcta_fixture <- function(fname, expected_rows = 221L) {
-  path <- system.file("extdata", fname, package = "morie")
+  path <- system.file("extdata", fname, package = "rmorie")
   if (!nzchar(path))
     stop(sprintf("bundled NYC boundary fixture missing: %s", fname),
          call. = FALSE)
@@ -895,7 +895,7 @@ morie_datasets_nyc_boundaries_catalog <- function() {
 #' @export
 morie_datasets_nyc_nypd_offense_codes <- function(max_features = NULL) {
   path <- system.file("extdata", "nyc_nypd_offense_codes.csv",
-                      package = "morie")
+                      package = "rmorie")
   if (!nzchar(path)) {
     stop("bundled NYPD offense codes fixture missing", call. = FALSE)
   }
@@ -930,7 +930,7 @@ morie_datasets_nyc_nypd_offense_codes <- function(max_features = NULL) {
 #' @export
 morie_datasets_nyc_nypd_law_books <- function() {
   path <- system.file("extdata", "nyc_nypd_law_books.csv",
-                      package = "morie")
+                      package = "rmorie")
   if (!nzchar(path)) {
     stop("bundled NYPD law books fixture missing", call. = FALSE)
   }

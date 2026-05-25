@@ -50,19 +50,19 @@ test_that("morie_estimate_late runs the covariate-adjusted 2SLS path", {
 test_that(".cpads_labeled_data handles data without an alc06 column", {
   d <- make_canonical_cpads()
   d$alc06 <- NULL
-  lab <- morie:::.cpads_labeled_data(d)
+  lab <- rmorie:::.cpads_labeled_data(d)
   expect_true("alc06_valid" %in% names(lab))
   expect_equal(lab$alc06_valid, lab$alcohol_past12m)
 })
 
 test_that(".run_data_wrangling_module_internal builds its logs", {
-  out <- morie:::.run_data_wrangling_module_internal(make_canonical_cpads())
+  out <- rmorie:::.run_data_wrangling_module_internal(make_canonical_cpads())
   expect_true(is.list(out))
 })
 
 test_that(".run_treatment_effects_module_internal runs on canonical data", {
   expect_true(is.list(
-    morie:::.run_treatment_effects_module_internal(make_canonical_cpads())
+    rmorie:::.run_treatment_effects_module_internal(make_canonical_cpads())
   ))
 })
 
@@ -70,7 +70,7 @@ test_that(".run_meta_synthesis_module_internal copies legacy artifacts", {
   od <- tempfile("morie-meta-")
   dir.create(od, recursive = TRUE)
   expect_true(is.list(
-    morie:::.run_meta_synthesis_module_internal(make_canonical_cpads(),
+    rmorie:::.run_meta_synthesis_module_internal(make_canonical_cpads(),
       output_dir = od
     )
   ))
@@ -81,14 +81,14 @@ test_that(".run_ebac_core_module_internal: empty-eligible guard + happy path", {
   d0 <- make_canonical_cpads()
   d0$ebac_tot <- NA_real_
   expect_error(
-    morie:::.run_ebac_core_module_internal(d0),
+    rmorie:::.run_ebac_core_module_internal(d0),
     "non-missing eBAC"
   )
   # canonical data -> the distribution table and weighted-group loop run.
   # suppressWarnings(): survey-weighted binomial glm emits base-R's benign
   # "non-integer #successes" notice, intrinsic to the runner, not the test.
   res <- suppressWarnings(
-    morie:::.run_ebac_core_module_internal(make_canonical_cpads())
+    rmorie:::.run_ebac_core_module_internal(make_canonical_cpads())
   )
   expect_true(is.list(res))
 })
@@ -110,7 +110,7 @@ test_that(".fuzzy_match_key resolves a dataset-name substring", {
   token <- strsplit(nm, "[^a-z0-9]+")[[1]]
   token <- token[nchar(token) >= 4][1]
   skip_if(is.na(token), "no usable name token")
-  matched <- morie:::.fuzzy_match_key(token)
+  matched <- rmorie:::.fuzzy_match_key(token)
   expect_true(is.null(matched) || matched %in% cat$key)
 })
 
@@ -122,7 +122,7 @@ test_that("morie_userguide accepts a name argument", {
 test_that("morie_load_cpads reaches the CKAN branch when local+cache miss", {
   testthat::local_mocked_bindings(
     morie_fetch_ckan = function(...) data.frame(seqid = 1:5),
-    .package = "morie"
+    .package = "rmorie"
   )
   dat <- morie_load_cpads(db_path = tempfile(fileext = ".db"), use_ckan = TRUE)
   expect_s3_class(dat, "data.frame")

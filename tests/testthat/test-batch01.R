@@ -93,7 +93,7 @@ test_that("morie_sample errors on unknown sample name", {
 
 test_that("morie_sample bundled-CSV path is structurally valid", {
   path <- system.file("extdata", "samples", "otis_b01_sample.csv",
-    package = "morie"
+    package = "rmorie"
   )
   expect_type(path, "character")
   if (FALSE) {

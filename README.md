@@ -74,7 +74,7 @@ package when no live OpenAI / Anthropic credentials are configured.
 ## Outputs-manifest example
 
 ```r
-library(morie)
+library(rmorie)
 
 manifest <- morie_read_outputs_manifest(project_root = "/path/to/project")
 audit    <- morie_audit_public_outputs(project_root = "/path/to/project",
@@ -85,7 +85,7 @@ morie_summarize_output_audit(audit)
 ## Synthetic data example
 
 ```r
-library(morie)
+library(rmorie)
 
 synthetic_path <- morie_write_synthetic_data(
   path      = "data/private/synthetic_study_data.csv",
@@ -98,7 +98,7 @@ synthetic_path <- morie_write_synthetic_data(
 ## Cross-project adaptation
 
 ```r
-library(morie)
+library(rmorie)
 
 name_map <- morie_default_synthetic_name_map("generic")
 name_map["cannabis_use"] <- "exposure_any"
@@ -121,7 +121,7 @@ correctness under SIU's heterogeneous markup.
 ### Fetch and parse the full corpus
 
 ```r
-library(morie)
+library(rmorie)
 
 # Use the shipped language-aware DRID manifest; English-only,
 # cache pages so re-runs are fast.

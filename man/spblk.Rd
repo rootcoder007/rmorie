@@ -39,7 +39,7 @@ Solve the OK system with point-to-block averaged covariances:
 }
 \examples{
 # See the package vignettes for usage examples:
-#   vignette(package = "morie")
+#   vignette(package = "rmorie")
 }
 \references{
 Schabenberger & Gotway (2005), Ch 4.

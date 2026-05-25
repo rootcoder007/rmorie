@@ -429,7 +429,7 @@ print.morie_stat_command <- function(x, ...) {
     }
   }
   # Try matching against installed R/ filenames.
-  r_dir <- system.file("R", package = "morie")
+  r_dir <- system.file("R", package = "rmorie")
   if (nzchar(r_dir) && dir.exists(r_dir)) {
     files <- list.files(r_dir, pattern = "\\\\.R$", full.names = FALSE)
     for (f in files) {

@@ -18,8 +18,8 @@
 }
 
 test_that(".haversine_km computes great-circle distance", {
-  expect_equal(morie:::.haversine_km(43.65, -79.38, 43.65, -79.38), 0)
-  d <- morie:::.haversine_km(43.65, -79.38, 43.66, -79.38)
+  expect_equal(rmorie:::.haversine_km(43.65, -79.38, 43.65, -79.38), 0)
+  d <- rmorie:::.haversine_km(43.65, -79.38, 43.66, -79.38)
   expect_true(d > 0.9 && d < 1.3) # ~1.1 km per 0.01 deg lat
 })
 

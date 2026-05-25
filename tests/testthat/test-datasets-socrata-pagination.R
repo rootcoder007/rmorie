@@ -20,8 +20,8 @@ test_that("paginate=FALSE (default) issues a single non-paginated request", {
       # 3-row stub frame.
       list(list(a = 1L), list(a = 2L), list(a = 3L))
     },
-    .package = "morie")
-  out <- morie:::.morie_dataset_socrata_fetch(
+    .package = "rmorie")
+  out <- rmorie:::.morie_dataset_socrata_fetch(
     "https://example.test/r.json",
     where = "year=2024", max_features = 50L)
   expect_equal(length(calls), 1L)
@@ -43,8 +43,8 @@ test_that("paginate=TRUE walks $offset and stops on empty page", {
       calls[[length(calls) + 1L]] <<- list(url = url, query = query)
       responses[[length(calls)]]
     },
-    .package = "morie")
-  out <- morie:::.morie_dataset_socrata_fetch(
+    .package = "rmorie")
+  out <- rmorie:::.morie_dataset_socrata_fetch(
     "https://example.test/r.json",
     paginate = TRUE, page_size = 3L)
   # 2 requests -- short 2nd page is the stop signal.
@@ -64,8 +64,8 @@ test_that("paginate=TRUE stops cleanly when server returns the first empty page"
       calls[[length(calls) + 1L]] <<- list(url = url, query = query)
       list()  # always empty
     },
-    .package = "morie")
-  out <- morie:::.morie_dataset_socrata_fetch(
+    .package = "rmorie")
+  out <- rmorie:::.morie_dataset_socrata_fetch(
     "https://example.test/r.json",
     paginate = TRUE, page_size = 100L)
   expect_equal(length(calls), 1L)
@@ -84,8 +84,8 @@ test_that("paginate=TRUE honours max_features as a total cap across pages", {
       n <- as.integer(query$`$limit`)
       lapply(seq_len(n), function(i) list(rownum = i))
     },
-    .package = "morie")
-  out <- morie:::.morie_dataset_socrata_fetch(
+    .package = "rmorie")
+  out <- rmorie:::.morie_dataset_socrata_fetch(
     "https://example.test/r.json",
     paginate = TRUE, page_size = 4L, max_features = 7L)
   expect_equal(length(calls), 2L)
@@ -105,8 +105,8 @@ test_that("paginate=TRUE respects max_pages safety net", {
       n <- as.integer(query$`$limit`)
       lapply(seq_len(n), function(i) list(rownum = i))  # always full page
     },
-    .package = "morie")
-  out <- morie:::.morie_dataset_socrata_fetch(
+    .package = "rmorie")
+  out <- rmorie:::.morie_dataset_socrata_fetch(
     "https://example.test/r.json",
     paginate = TRUE, page_size = 10L, max_pages = 3L)
   expect_equal(length(calls), 3L)
@@ -121,8 +121,8 @@ test_that("paginate=TRUE threads $where + $$app_token through every page", {
       calls[[length(calls) + 1L]] <<- list(url = url, query = query)
       list()  # empty -> single request
     },
-    .package = "morie")
-  out <- morie:::.morie_dataset_socrata_fetch(
+    .package = "rmorie")
+  out <- rmorie:::.morie_dataset_socrata_fetch(
     "https://example.test/r.json",
     where = "primary_type='THEFT'",
     app_token = "fake-token-abc",
@@ -135,7 +135,7 @@ test_that("paginate=TRUE threads $where + $$app_token through every page", {
 
 test_that("paginate=TRUE rejects page_size <= 0", {
   expect_error(
-    morie:::.morie_dataset_socrata_fetch(
+    rmorie:::.morie_dataset_socrata_fetch(
       "https://example.test/r.json",
       paginate = TRUE, page_size = 0L),
     regexp = "page_size >= 1")
@@ -156,7 +156,7 @@ test_that("morie_datasets_chicago_crime forwards paginate/page_size/max_pages", 
                     max_pages = max_pages)
       data.frame(id = 1L)
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_chicago_crime(offline = FALSE,
                                         paginate = TRUE,
                                         page_size = 500L,
@@ -179,7 +179,7 @@ test_that("morie_datasets_chicago_crime defaults paginate=FALSE", {
       seen <<- list(paginate = paginate)
       data.frame(id = 1L)
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_chicago_crime(offline = FALSE)
   expect_false(isTRUE(seen$paginate))
 })
@@ -197,7 +197,7 @@ test_that("morie_datasets_nyc_nypd_arrests_ytd forwards paginate + page_size", {
                     max_pages = max_pages, url = url)
       data.frame(stub = 1L)
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_nyc_nypd_arrests_ytd(offline = FALSE,
                                         paginate = TRUE,
                                         page_size = 50000L,
@@ -220,7 +220,7 @@ test_that("morie_datasets_nyc_nypd_by_key forwards paginate", {
       seen <<- list(paginate = paginate, page_size = page_size)
       data.frame(stub = 1L)
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_nyc_nypd_by_key("nypd_uof_incidents",
                                    offline = FALSE,
                                    paginate = TRUE,
@@ -241,7 +241,7 @@ test_that("morie_datasets_nyc_stop_and_frisk forwards paginate to the helper", {
       seen <<- list(paginate = paginate, page_size = page_size, url = url)
       data.frame(stub = 1L)
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_nyc_stop_and_frisk(year = 2024L, offline = FALSE,
                                       paginate = TRUE,
                                       page_size = 1000L)
@@ -261,7 +261,7 @@ test_that("morie_datasets_chicago_neighborhoods forwards paginate", {
       seen <<- list(paginate = paginate, page_size = page_size)
       data.frame(pri_neigh = "STUB")
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_chicago_neighborhoods(offline = FALSE,
                                          paginate = TRUE,
                                          page_size = 5000L)
@@ -282,7 +282,7 @@ test_that("chicago_crime(paginate=TRUE) walks $offset end-to-end against mocked 
       calls[[length(calls) + 1L]] <<- list(url = url, query = query)
       responses[[length(calls)]]
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_chicago_crime(offline = FALSE,
                                         paginate = TRUE,
                                         page_size = 2L)

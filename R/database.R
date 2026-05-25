@@ -150,7 +150,7 @@ morie_cache_clear <- function(subdir = NULL, confirm = interactive()) {
 #' morie_builtin_db()
 #' @export
 morie_builtin_db <- function() {
-  db <- system.file("extdata", "morie.db", package = "morie")
+  db <- system.file("extdata", "morie.db", package = "rmorie")
   if (nzchar(db)) {
     return(db)
   }
@@ -763,9 +763,9 @@ morie_dataset_info <- function(key) {
 #' @export
 morie_userguide <- function(name = NULL) {
   if (is.null(name)) {
-    dir(system.file("extdata", "userguides", package = "morie"))
+    dir(system.file("extdata", "userguides", package = "rmorie"))
   } else {
-    system.file("extdata", "userguides", name, package = "morie", mustWork = TRUE)
+    system.file("extdata", "userguides", name, package = "rmorie", mustWork = TRUE)
   }
 }
 
@@ -784,7 +784,7 @@ morie_userguide <- function(name = NULL) {
 #' @examples
 #' \donttest{
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' }
 #' @export
 morie_download_bootstrap <- function(survey = "all", limit = 32000L,

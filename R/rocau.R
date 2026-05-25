@@ -10,7 +10,7 @@
 #'   n_positive, n_negative, method.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_roc_auc_score <- function(y_true, y_score) {
   if (!requireNamespace("pROC", quietly = TRUE)) {

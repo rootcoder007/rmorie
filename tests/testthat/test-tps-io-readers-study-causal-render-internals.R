@@ -29,7 +29,7 @@ test_that(".morie_tps_read_csv reads a bundled CSV under cache layout", {
   state <- .with_fake_tps_cache("Assault", "CSV", "csv",
                                   "a,b\n1,x\n2,y\n3,z")
   on.exit(.restore_tps_cache(state), add = TRUE)
-  df <- morie:::.morie_tps_read_csv("Assault", NULL)
+  df <- rmorie:::.morie_tps_read_csv("Assault", NULL)
   expect_s3_class(df, "data.frame")
   expect_equal(nrow(df), 3L)
 })
@@ -38,7 +38,7 @@ test_that(".morie_tps_read_csv honours nrows truncation", {
   state <- .with_fake_tps_cache("Assault", "CSV", "csv",
                                   "a,b\n1,x\n2,y\n3,z\n4,w")
   on.exit(.restore_tps_cache(state), add = TRUE)
-  df <- morie:::.morie_tps_read_csv("Assault", nrows = 2L)
+  df <- rmorie:::.morie_tps_read_csv("Assault", nrows = 2L)
   expect_equal(nrow(df), 2L)
 })
 
@@ -62,7 +62,7 @@ test_that(".morie_tps_read_excel requires readxl + reads xlsx via cache", {
     if (is.na(old)) Sys.unsetenv("MORIE_TPS_DATA_DIR")
     else Sys.setenv(MORIE_TPS_DATA_DIR = old)
   }, add = TRUE)
-  df <- morie:::.morie_tps_read_excel("Assault", NULL)
+  df <- rmorie:::.morie_tps_read_excel("Assault", NULL)
   expect_s3_class(df, "data.frame")
   expect_equal(nrow(df), 3L)
 })
@@ -87,7 +87,7 @@ test_that(".morie_tps_read_geojson reads a GeoJSON via sf", {
     if (is.na(old)) Sys.unsetenv("MORIE_TPS_DATA_DIR")
     else Sys.setenv(MORIE_TPS_DATA_DIR = old)
   }, add = TRUE)
-  df <- morie:::.morie_tps_read_geojson("Assault", NULL)
+  df <- rmorie:::.morie_tps_read_geojson("Assault", NULL)
   expect_s3_class(df, "data.frame")
   expect_equal(nrow(df), 2L)
 })
@@ -99,7 +99,7 @@ test_that(".or_table returns OR/SE/p table on a logistic fit", {
   y <- stats::rbinom(n, 1L, 0.5)
   x <- stats::rnorm(n)
   fit <- suppressWarnings(stats::glm(y ~ x, family = stats::binomial()))
-  out <- morie:::.or_table(fit)
+  out <- rmorie:::.or_table(fit)
   expect_s3_class(out, "data.frame")
   expect_true(all(c("term", "log_odds", "OR", "p_value") %in% names(out)))
   # OR == exp(log_odds) up to clip_exp clipping.
@@ -110,7 +110,7 @@ test_that(".or_table prepends `model` when given a model label", {
   set.seed(2L); n <- 80L
   y <- stats::rbinom(n, 1L, 0.5); x <- stats::rnorm(n)
   fit <- suppressWarnings(stats::glm(y ~ x, family = stats::binomial()))
-  out <- morie:::.or_table(fit, model = "M1")
+  out <- rmorie:::.or_table(fit, model = "M1")
   expect_true("model" %in% names(out))
   expect_true(all(out$model == "M1"))
 })
@@ -119,7 +119,7 @@ test_that(".linear_coef_table returns coef/CI/p on a linear fit", {
   set.seed(3L); n <- 100L
   x <- stats::rnorm(n); y <- 1 + 2 * x + stats::rnorm(n, sd = 0.3)
   fit <- stats::lm(y ~ x)
-  out <- morie:::.linear_coef_table(fit, model = "demo")
+  out <- rmorie:::.linear_coef_table(fit, model = "demo")
   expect_s3_class(out, "data.frame")
   expect_true(all(c("estimate", "se", "ci_lower95", "ci_upper95",
                     "p_value") %in% names(out)))
@@ -134,7 +134,7 @@ test_that(".cpads_labeled_data labels gender/age/region/health", {
     physical_health = c(1L, 2L, 3L),
     alcohol_past12m = c(1, 0, 1),
     ebac_tot = c(0.05, NA, 0.02))
-  out <- morie:::.cpads_labeled_data(df)
+  out <- rmorie:::.cpads_labeled_data(df)
   expect_true("gender_label" %in% names(out))
   expect_true(is.factor(out$gender_label))
   expect_equal(levels(out$gender_label),
@@ -145,7 +145,7 @@ test_that(".cpads_labeled_data labels gender/age/region/health", {
 # =============================================================== study_reporting.R
 
 test_that(".read_existing_output returns fallback when file is absent", {
-  out <- morie:::.read_existing_output(tempfile("noout_"),
+  out <- rmorie:::.read_existing_output(tempfile("noout_"),
                                          "data.csv",
                                          fallback = list(default = TRUE))
   expect_equal(out, list(default = TRUE))
@@ -157,7 +157,7 @@ test_that(".read_existing_output reads CSV when file exists", {
   on.exit(unlink(d, recursive = TRUE), add = TRUE)
   utils::write.csv(data.frame(a = 1:3, b = c("x", "y", "z")),
                    file.path(d, "data.csv"), row.names = FALSE)
-  out <- morie:::.read_existing_output(d, "data.csv")
+  out <- rmorie:::.read_existing_output(d, "data.csv")
   expect_s3_class(out, "data.frame")
   expect_equal(nrow(out), 3L)
 })
@@ -166,7 +166,7 @@ test_that(".copy_legacy_artifacts no-ops when src files are absent", {
   out_dir <- tempfile("copy_legacy_")
   dir.create(out_dir)
   on.exit(unlink(out_dir, recursive = TRUE), add = TRUE)
-  copied <- morie:::.copy_legacy_artifacts(
+  copied <- rmorie:::.copy_legacy_artifacts(
     relative_paths = c("missing.csv"),
     output_dir = out_dir,
     root = tempfile("noroot_"))
@@ -181,7 +181,7 @@ test_that(".copy_legacy_artifacts copies present files + returns names", {
   dir.create(out_dir, recursive = TRUE)
   on.exit({ unlink(root, recursive = TRUE)
             unlink(out_dir, recursive = TRUE) }, add = TRUE)
-  copied <- morie:::.copy_legacy_artifacts(
+  copied <- rmorie:::.copy_legacy_artifacts(
     relative_paths = c("report.csv"),
     output_dir = out_dir,
     root = root)
@@ -194,11 +194,11 @@ test_that(".copy_legacy_artifacts copies present files + returns names", {
 test_that(".otis_classify_bin maps known bins to Solitary / Torture / Unknown", {
   # Bins are defined as character labels in .otis_mandela_solitary_bins
   # and .otis_mandela_torture_bins; an unknown label falls to "Unknown".
-  solitary <- morie:::.otis_mandela_solitary_bins
-  torture  <- morie:::.otis_mandela_torture_bins
+  solitary <- rmorie:::.otis_mandela_solitary_bins
+  torture  <- rmorie:::.otis_mandela_torture_bins
   expect_true(length(solitary) > 0L)
   expect_true(length(torture) > 0L)
-  out <- morie:::.otis_classify_bin(c(solitary[1], torture[1],
+  out <- rmorie:::.otis_classify_bin(c(solitary[1], torture[1],
                                         "DefinitelyNotAKnownBin"))
   expect_equal(out, c("Solitary Confinement (<=15d)",
                       "Torture (>=16d)", "Unknown"))
@@ -211,7 +211,7 @@ test_that(".dml_xfit_ridge_predict returns length-n_te numeric vector", {
   X_tr <- matrix(stats::rnorm(80L), 40L, 2L)
   y_tr <- X_tr[, 1L] - 0.5 * X_tr[, 2L] + stats::rnorm(40L, sd = 0.3)
   X_te <- matrix(stats::rnorm(20L), 10L, 2L)
-  pred <- morie:::.dml_xfit_ridge_predict(X_tr, y_tr, X_te,
+  pred <- rmorie:::.dml_xfit_ridge_predict(X_tr, y_tr, X_te,
                                             lambda = 1.0)
   expect_length(pred, 10L)
   expect_true(all(is.finite(pred)))
@@ -223,7 +223,7 @@ test_that(".tps_draw_compass invisibly returns NULL on base graphics", {
   pdf(file = NULL)
   on.exit(grDevices::dev.off(), add = TRUE)
   graphics::plot(0:10, 0:10, type = "n")
-  out <- morie:::.tps_draw_compass(5, 5, size = 1.0, use_gg = FALSE)
+  out <- rmorie:::.tps_draw_compass(5, 5, size = 1.0, use_gg = FALSE)
   expect_null(out)
 })
 
@@ -231,7 +231,7 @@ test_that(".tps_draw_scalebar invisibly returns NULL on base graphics", {
   pdf(file = NULL)
   on.exit(grDevices::dev.off(), add = TRUE)
   graphics::plot(0:10, 0:10, type = "n")
-  out <- morie:::.tps_draw_scalebar(2, 2, length_km = 3,
+  out <- rmorie:::.tps_draw_scalebar(2, 2, length_km = 3,
                                        use_gg = FALSE)
   expect_null(out)
 })
@@ -241,7 +241,7 @@ test_that(".tps_draw_compass returns a list of ggplot annotates on gg path", {
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     skip("ggplot2 not installed")
   }
-  out <- morie:::.tps_draw_compass(5, 5, size = 1.0, use_gg = TRUE)
+  out <- rmorie:::.tps_draw_compass(5, 5, size = 1.0, use_gg = TRUE)
   expect_type(out, "list")
 })
 
@@ -250,6 +250,6 @@ test_that(".tps_draw_scalebar returns a list of ggplot annotates on gg path", {
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     skip("ggplot2 not installed")
   }
-  out <- morie:::.tps_draw_scalebar(2, 2, length_km = 3, use_gg = TRUE)
+  out <- rmorie:::.tps_draw_scalebar(2, 2, length_km = 3, use_gg = TRUE)
   expect_type(out, "list")
 })

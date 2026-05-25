@@ -192,7 +192,7 @@ test_that("CSV-backed analyzers run on the bundled inst/extdata/arsau fixture", 
   # Open Government Licence -- Ontario). morie ships a tiny per-year
   # fixture under inst/extdata/arsau/<year>/ so analyzers run on a
   # fresh checkout without needing MORIE_ARSAU_DIR.
-  fixture_root <- system.file("extdata", "arsau", package = "morie")
+  fixture_root <- system.file("extdata", "arsau", package = "rmorie")
   skip_if(!nzchar(fixture_root) || !dir.exists(fixture_root),
           "bundled inst/extdata/arsau fixture not installed.")
   res <- suppressWarnings(tryCatch(

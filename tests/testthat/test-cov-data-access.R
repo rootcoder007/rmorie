@@ -46,7 +46,7 @@ test_that("morie_fetch extracts a zip member over file:// (covr-visible)", {
 })
 
 test_that(".morie_detect_format uses the Content-Type header when present", {
-  f <- morie:::.morie_detect_format
+  f <- rmorie:::.morie_detect_format
   testthat::local_mocked_bindings(
     curlGetHeaders = function(url, ...) {
       c("HTTP/1.1 200 OK", "content-type: application/json")
@@ -68,7 +68,7 @@ test_that(".morie_parse_file rejects an unsupported format", {
   file.create(p)
   on.exit(unlink(p), add = TRUE)
   expect_error(
-    morie:::.morie_parse_file(p, "bogus", TRUE),
+    rmorie:::.morie_parse_file(p, "bogus", TRUE),
     "Unsupported"
   )
 })
@@ -81,7 +81,7 @@ test_that("morie_ckan_search parses a mocked package_search response", {
     '"datastore_active":true,"url":"http://x/p.csv"}]}]}}'
   )
   testthat::local_mocked_bindings(
-    .morie_read_text = function(url) fake, .package = "morie"
+    .morie_read_text = function(url) fake, .package = "rmorie"
   )
   hits <- morie_ckan_search("cannabis", portal = "open.canada.ca")
   expect_s3_class(hits, "data.frame")
@@ -96,7 +96,7 @@ test_that("morie_ckan_search returns an empty frame on no results", {
     .morie_read_text = function(url) {
       '{"success":true,"result":{"results":[]}}'
     },
-    .package = "morie"
+    .package = "rmorie"
   )
   hits <- morie_ckan_search("nothing-matches-this", portal = "data.ontario.ca")
   expect_s3_class(hits, "data.frame")
@@ -110,7 +110,7 @@ test_that("morie_fetch_arcgis parses a mocked FeatureServer response", {
     '"exceededTransferLimit":false}'
   )
   testthat::local_mocked_bindings(
-    .morie_read_text = function(url) fake, .package = "morie"
+    .morie_read_text = function(url) fake, .package = "rmorie"
   )
   df <- morie_fetch_arcgis(
     "https://services.arcgis.com/X/arcgis/rest/services/L/FeatureServer/0"
@@ -125,7 +125,7 @@ test_that("morie_fetch_arcgis surfaces an ArcGIS error payload", {
     .morie_read_text = function(url) {
       '{"error":{"code":400,"message":"Invalid query"}}'
     },
-    .package = "morie"
+    .package = "rmorie"
   )
   expect_error(
     morie_fetch_arcgis("https://services.arcgis.com/X/Y/FeatureServer/0"),
@@ -138,7 +138,7 @@ test_that("morie_fetch dispatches format='arcgis' to morie_fetch_arcgis", {
     .morie_read_text = function(url) {
       '{"features":[{"attributes":{"OBJECTID":7}}],"exceededTransferLimit":false}'
     },
-    .package = "morie"
+    .package = "rmorie"
   )
   df <- morie_fetch("https://services.arcgis.com/X/Y/FeatureServer/0",
     format = "arcgis"

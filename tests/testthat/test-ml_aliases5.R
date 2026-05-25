@@ -210,7 +210,7 @@ test_that("rghfd computes Higuchi fractal dimension on a sample", {
 
 test_that("sparse_attention runs on a synthetic sequence", {
   set.seed(20L); x <- matrix(stats::rnorm(16 * 8), 16L, 8L)
-  out <- tryCatch(morie:::sparse_attention(x, window = 4L, stride = 4L),
+  out <- tryCatch(rmorie:::sparse_attention(x, window = 4L, stride = 4L),
                   error = function(e) e)
   if (inherits(out, "error")) skip(sprintf("spqkv: %s", conditionMessage(out)))
   expect_true(is.matrix(out) || is.list(out))

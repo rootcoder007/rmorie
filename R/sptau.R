@@ -15,7 +15,7 @@
 #' @references Cliff & Ord (1981). Schabenberger & Gotway (2005), Ch 1.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 sptau <- function(x, w) {
   x <- as.numeric(x)

@@ -13,7 +13,7 @@
 #' @importFrom stats predict
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_svm_hinge_primal <- function(x, y, C = 1.0, seed = 0L) {
   if (!requireNamespace("e1071", quietly = TRUE)) {

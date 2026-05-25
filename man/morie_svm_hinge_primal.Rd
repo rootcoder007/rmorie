@@ -24,5 +24,5 @@ Wraps \code{e1071::svm} with a linear kernel.
 }
 \examples{
 # See the package vignettes for usage examples:
-#   vignette(package = "morie")
+#   vignette(package = "rmorie")
 }

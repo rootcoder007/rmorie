@@ -13,7 +13,7 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  eval = requireNamespace("morie", quietly = TRUE)
+  eval = requireNamespace("rmorie", quietly = TRUE)
 )
 ```
 
@@ -36,7 +36,7 @@ ensemble on OTIS provincial data.
 # Loading the package
 
 ```{r setup}
-library(morie)
+library(rmorie)
 ```
 
 # The dataset catalogue

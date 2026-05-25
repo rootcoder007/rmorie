@@ -14,12 +14,12 @@ test_that("tps_layers returns name+url data.frame", {
 
 test_that("features_to_rows handles empty + with-geometry payload", {
   set.seed(1)
-  expect_equal(length(morie:::.morie_tps_features_to_rows(list(), FALSE)), 0L)
+  expect_equal(length(rmorie:::.morie_tps_features_to_rows(list(), FALSE)), 0L)
   features <- list(
     list(attributes = list(a = 1, b = "x"), geometry = list(x = 10, y = 20)),
     list(attributes = list(a = 2, b = "y"), geometry = list(x = 11, y = 21))
   )
-  out <- morie:::.morie_tps_features_to_rows(features, TRUE)
+  out <- rmorie:::.morie_tps_features_to_rows(features, TRUE)
   expect_length(out, 2L)
   expect_true("geom_x" %in% names(out[[1]]))
 })
@@ -27,7 +27,7 @@ test_that("features_to_rows handles empty + with-geometry payload", {
 test_that("features_to_rows tolerates missing attributes", {
   set.seed(1)
   features <- list(list(geometry = list(x = 1, y = 2)))
-  out <- morie:::.morie_tps_features_to_rows(features, TRUE)
+  out <- rmorie:::.morie_tps_features_to_rows(features, TRUE)
   expect_length(out, 1L)
 })
 
@@ -46,13 +46,13 @@ test_that("arcgis_query errors without httr2", {
 
   )
   set.seed(1)
-  expect_error(morie:::.morie_tps_arcgis_query("http://x"), "httr2")
+  expect_error(rmorie:::.morie_tps_arcgis_query("http://x"), "httr2")
 })
 
 test_that("arcgis_query fails clean off-network", {
   set.seed(1)
   res <- tryCatch(
-    morie:::.morie_tps_arcgis_query("http://127.0.0.1:1/layer", timeout = 1),
+    rmorie:::.morie_tps_arcgis_query("http://127.0.0.1:1/layer", timeout = 1),
     error = function(e) NULL
   )
   expect_null(res)
@@ -65,7 +65,7 @@ test_that("ingest_tps_feature_layer routes through TPS helper (mocked)", {
       data.frame(EVENT_UNIQUE_ID = "MOCK", OCC_YEAR = 2024L,
                   stringsAsFactors = FALSE)
     },
-    .package = "morie"
+    .package = "rmorie"
   )
   url <- morie_ingest_tps_layers()$url[1]
   res <- morie_ingest_tps_feature_layer(url, max_features = 1L)
@@ -79,7 +79,7 @@ test_that("ingest_tps_fetch routes through TPS helper (mocked)", {
       data.frame(EVENT_UNIQUE_ID = "MOCK", OCC_YEAR = 2024L,
                   stringsAsFactors = FALSE)
     },
-    .package = "morie"
+    .package = "rmorie"
   )
   res <- morie_ingest_tps_fetch("major-crime", max_features = 1L)
   expect_s3_class(res, "data.frame")

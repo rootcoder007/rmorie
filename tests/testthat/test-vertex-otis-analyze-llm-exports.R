@@ -170,7 +170,7 @@ test_that(".morie_tps_read_sf_path reads a GeoJSON-by-path via sf", {
   writeLines('{"type":"FeatureCollection","features":[
     {"type":"Feature","properties":{"a":1},"geometry":{"type":"Point","coordinates":[0,0]}}
   ]}', tmp)
-  df <- morie:::.morie_tps_read_sf_path(tmp, NULL)
+  df <- rmorie:::.morie_tps_read_sf_path(tmp, NULL)
   expect_s3_class(df, "data.frame")
   expect_equal(nrow(df), 1L)
 })
@@ -199,7 +199,7 @@ test_that(".morie_tps_read_kml reads a KML via sf + cache layout", {
     if (is.na(old)) Sys.unsetenv("MORIE_TPS_DATA_DIR")
     else Sys.setenv(MORIE_TPS_DATA_DIR = old)
   }, add = TRUE)
-  df <- tryCatch(morie:::.morie_tps_read_kml("Assault", NULL),
+  df <- tryCatch(rmorie:::.morie_tps_read_kml("Assault", NULL),
                  error = function(e) e)
   if (inherits(df, "error")) {
     skip(sprintf("kml reader failed (sf KML driver): %s",

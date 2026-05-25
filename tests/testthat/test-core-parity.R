@@ -11,23 +11,23 @@ test_that("shared C++ core kernels match base R", {
   x <- rnorm(500)
   y <- 0.6 * x + rnorm(500)
 
-  expect_equal(morie:::morie_mean_cpp(x), mean(x), tolerance = 1e-12)
-  expect_equal(morie:::morie_var_cpp(x, 1L), var(x), tolerance = 1e-10)
-  expect_equal(morie:::morie_var_cpp(x, 0L),
+  expect_equal(rmorie:::morie_mean_cpp(x), mean(x), tolerance = 1e-12)
+  expect_equal(rmorie:::morie_var_cpp(x, 1L), var(x), tolerance = 1e-10)
+  expect_equal(rmorie:::morie_var_cpp(x, 0L),
     sum((x - mean(x))^2) / length(x),
     tolerance = 1e-10
   )
-  expect_equal(morie:::morie_cor_pearson_cpp(x, y), cor(x, y),
+  expect_equal(rmorie:::morie_cor_pearson_cpp(x, y), cor(x, y),
     tolerance = 1e-9
   )
-  expect_equal(morie:::morie_normal_pdf_cpp(x, 0.3, 1.7),
+  expect_equal(rmorie:::morie_normal_pdf_cpp(x, 0.3, 1.7),
     dnorm(x, 0.3, 1.7),
     tolerance = 1e-12
   )
 })
 
 test_that("shared C++ core handles degenerate input", {
-  expect_true(is.na(morie:::morie_mean_cpp(numeric(0))))
-  expect_true(is.na(morie:::morie_var_cpp(c(5.0), 1L))) # n - ddof <= 0
-  expect_true(is.na(morie:::morie_cor_pearson_cpp(c(1.0), c(2.0)))) # n < 2
+  expect_true(is.na(rmorie:::morie_mean_cpp(numeric(0))))
+  expect_true(is.na(rmorie:::morie_var_cpp(c(5.0), 1L))) # n - ddof <= 0
+  expect_true(is.na(rmorie:::morie_cor_pearson_cpp(c(1.0), c(2.0)))) # n < 2
 })

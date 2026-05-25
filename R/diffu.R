@@ -63,7 +63,7 @@ morie_diffu_heat_diffusion <- function(T0, alpha = 0.01, dx = 0.1, dt = 0.01,
 #' @references Ho, Jain & Abbeel (2020), NeurIPS.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_diffu_diffusion_forward <- function(x0, t, betas = NULL, num_steps = 1000L,
                                     noise = NULL, seed = 0L) {

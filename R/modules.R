@@ -95,7 +95,7 @@ morie_list_morie_modules <- function() {
 #' @return Data frame with canonical MORIE analysis columns.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_canonicalize_cpads_data <- function(data) {
   required_raw <- c(
@@ -231,7 +231,7 @@ morie_run_morie_module <- function(module_name, cpads_csv = .cpads_default_csv()
 #' @return Named list of module outputs.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_run_morie_modules <- function(
   modules = morie_list_morie_modules()$name,

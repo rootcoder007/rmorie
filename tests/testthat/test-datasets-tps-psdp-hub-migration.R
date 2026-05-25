@@ -66,7 +66,7 @@ test_that("all 12 migrated wrappers route through morie_datasets_tps_arcgis_hub_
                       offline = offline)
         data.frame(stub = 1L)
       },
-      .package = "morie",
+      .package = "rmorie",
       code = entry$fn(year = 2024L, offline = FALSE))
     expect_equal(seen$hub_id, entry$hub_id,
                  info = sprintf("wrapper for %s did not dispatch to hub_id %s",
@@ -90,7 +90,7 @@ test_that("all 12 migrated wrappers default to where='1=1' when year is NULL", {
         seen_where <<- where
         data.frame()
       },
-      .package = "morie",
+      .package = "rmorie",
       code = entry$fn(offline = FALSE))
     expect_equal(seen_where, "1=1",
                  info = sprintf("default where wrong for %s",
@@ -119,7 +119,7 @@ test_that("legacy layer_url override still routes through .morie_tps_psdp_featur
       expect_equal(layer_url, "https://example.test/legacy/X/0")
       data.frame(OBJECTID = 99L)
     },
-    .package = "morie",
+    .package = "rmorie",
     code = morie_datasets_tps_assault(
       offline = FALSE,
       layer_url = "https://example.test/legacy/X/0"))
@@ -144,7 +144,7 @@ test_that("MHA layer_url override also bypasses the hub_id path (3TT+)", {
       expect_equal(layer_url, "https://example.test/mha-mirror/0")
       data.frame(OBJECTID = 77L)
     },
-    .package = "morie",
+    .package = "rmorie",
     code = morie_datasets_tps_mha_apprehensions(
       offline = FALSE,
       layer_url = "https://example.test/mha-mirror/0"))

@@ -13,7 +13,7 @@ test_that("statcan_csv_from_zip extracts a CSV member", {
     utils::zip(tmpzip, basename(tmpcsv), flags = "-q")
   )
   skip_if(!file.exists(tmpzip), "zip unavailable")
-  out <- tryCatch(morie:::.morie_statcan_csv_from_zip(tmpzip), error = function(e) NULL)
+  out <- tryCatch(rmorie:::.morie_statcan_csv_from_zip(tmpzip), error = function(e) NULL)
   skip_if(is.null(out), "zip roundtrip failed")
   expect_s3_class(out, "data.frame")
   expect_equal(nrow(out), 3L)
@@ -30,7 +30,7 @@ test_that("statcan_csv_from_zip errors when archive has no CSV", {
     utils::zip(tmpzip, basename(tmpfile), flags = "-q")
   )
   skip_if(!file.exists(tmpzip), "zip unavailable")
-  expect_error(morie:::.morie_statcan_csv_from_zip(tmpzip), "csv")
+  expect_error(rmorie:::.morie_statcan_csv_from_zip(tmpzip), "csv")
   unlink(c(tmpfile, tmpzip))
 })
 
@@ -45,7 +45,7 @@ test_that("statcan_csv_from_zip errors on bad member name", {
   )
   skip_if(!file.exists(tmpzip), "zip unavailable")
   expect_error(
-    morie:::.morie_statcan_csv_from_zip(tmpzip, member = "no.csv"),
+    rmorie:::.morie_statcan_csv_from_zip(tmpzip, member = "no.csv"),
     "not in the archive"
   )
   unlink(c(tmpcsv, tmpzip))

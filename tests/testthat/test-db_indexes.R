@@ -20,7 +20,7 @@
 # ---------------------------- registry sanity ----------------------------
 
 test_that(".morie_db_index_registry contains all expected dataset keys", {
-  reg <- morie:::.morie_db_index_registry()
+  reg <- rmorie:::.morie_db_index_registry()
   expected <- c("SIU", "a01", "b01", "b02", "b03", "b04", "b05",
                 "b06", "b07", "b08", "b09",
                 "c01", "c02", "c03", "c04", "c05", "c06", "c07",
@@ -33,19 +33,19 @@ test_that(".morie_db_index_registry contains all expected dataset keys", {
 })
 
 test_that(".morie_db_indexes_for matches OTIS short names directly", {
-  expect_true(length(morie:::.morie_db_indexes_for("b01")) > 0L)
-  expect_true(length(morie:::.morie_db_indexes_for("c01")) > 0L)
-  expect_true(length(morie:::.morie_db_indexes_for("d01")) > 0L)
+  expect_true(length(rmorie:::.morie_db_indexes_for("b01")) > 0L)
+  expect_true(length(rmorie:::.morie_db_indexes_for("c01")) > 0L)
+  expect_true(length(rmorie:::.morie_db_indexes_for("d01")) > 0L)
 })
 
 test_that(".morie_db_indexes_for resolves prefixed table names", {
   # "OTIS_b01" -> "b01"
-  expect_true(length(morie:::.morie_db_indexes_for("OTIS_b01")) > 0L)
-  expect_true(length(morie:::.morie_db_indexes_for("ARSAU_uof_main_records")) > 0L)
+  expect_true(length(rmorie:::.morie_db_indexes_for("OTIS_b01")) > 0L)
+  expect_true(length(rmorie:::.morie_db_indexes_for("ARSAU_uof_main_records")) > 0L)
 })
 
 test_that(".morie_db_indexes_for dispatches TPS crime-table family by name", {
-  specs <- morie:::.morie_db_indexes_for("assault")
+  specs <- rmorie:::.morie_db_indexes_for("assault")
   expect_true(length(specs) >= 4L)
   cols_indexed <- unlist(lapply(specs, function(s) s$cols))
   expect_true("OBJECTID" %in% cols_indexed)
@@ -53,7 +53,7 @@ test_that(".morie_db_indexes_for dispatches TPS crime-table family by name", {
 })
 
 test_that(".morie_db_indexes_for returns empty list for unknown tables", {
-  expect_length(morie:::.morie_db_indexes_for("__unknown_table__"), 0L)
+  expect_length(rmorie:::.morie_db_indexes_for("__unknown_table__"), 0L)
 })
 
 # ---------------------------- end-to-end create -------------------------

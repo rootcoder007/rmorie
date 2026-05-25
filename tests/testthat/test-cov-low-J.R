@@ -29,8 +29,8 @@ test_that("morie_hawkes_fit input guards", {
 
 test_that("hawkes phi<->theta round-trip", {
   th <- c(0.5, 0.3, 1.0, 2.0)
-  phi <- morie:::.hawkes_to_phi(th)
-  expect_equal(morie:::.hawkes_to_theta(phi), th, tolerance = 1e-9)
+  phi <- rmorie:::.hawkes_to_phi(th)
+  expect_equal(rmorie:::.hawkes_to_theta(phi), th, tolerance = 1e-9)
 })
 
 test_that("morie_random_search_cv runs in regression mode", {
@@ -109,8 +109,8 @@ test_that("fzcvm guards: too few obs + unknown cdf string", {
 })
 
 test_that(".morie_cvm_pvalue covers all interpolation regimes", {
-  expect_equal(morie:::.morie_cvm_pvalue(0), 1.0)
-  expect_equal(morie:::.morie_cvm_pvalue(0.1), 0.5)
+  expect_equal(rmorie:::.morie_cvm_pvalue(0), 1.0)
+  expect_equal(rmorie:::.morie_cvm_pvalue(0.1), 0.5)
 })
 
 test_that("irtsp fits a 2PL model to a binary roll-call matrix", {
@@ -165,13 +165,13 @@ test_that("hrzd1 fits Cox PH on single covariate", {
   x <- rnorm(n)
   t <- rexp(n, rate = exp(0.5 * x))
   event <- rbinom(n, 1, 0.8)
-  out <- morie:::hrzd1(t, x, event)
+  out <- rmorie:::hrzd1(t, x, event)
   expect_length(out$estimate, 1L)
   expect_equal(out$n, n)
 })
 
 test_that("hrzd1 insufficient-data branch", {
-  out <- morie:::hrzd1(c(1, 2, 3), c(0.1, 0.2, 0.3), c(1, 0, 1))
+  out <- rmorie:::hrzd1(c(1, 2, 3), c(0.1, 0.2, 0.3), c(1, 0, 1))
   expect_true(all(is.na(out$estimate)))
   expect_match(out$method, "insufficient data")
 })

@@ -38,7 +38,7 @@ test_that("morie_build_prompt errors on an empty question", {
 
 test_that("build_assistant_prompt alias mirrors morie_build_prompt", {
   expect_identical(
-    morie:::build_assistant_prompt("Q", context = "C"),
+    rmorie:::build_assistant_prompt("Q", context = "C"),
     morie_build_prompt("Q", context = "C")
   )
 })
@@ -182,7 +182,7 @@ test_that("morie_positional_encoding_abs alias matches the primary function", {
 })
 
 test_that("perplexity_metric computes perplexity from log-probs (base e)", {
-  r <- morie:::perplexity_metric(c(-1, -1, -1))
+  r <- rmorie:::perplexity_metric(c(-1, -1, -1))
   expect_type(r, "list")
   expect_named(r, c("value", "nll", "n", "method"))
   expect_equal(r$nll, 1)
@@ -191,14 +191,14 @@ test_that("perplexity_metric computes perplexity from log-probs (base e)", {
 })
 
 test_that("perplexity_metric accepts base 2", {
-  r <- morie:::perplexity_metric(c(-1, -2), base = "2")
+  r <- rmorie:::perplexity_metric(c(-1, -2), base = "2")
   expect_true(is.finite(r$value) && r$value > 0)
 })
 
 test_that("perplexity_metric errors on empty input and bad base", {
-  expect_error(morie:::perplexity_metric(numeric(0)), "at least one")
+  expect_error(rmorie:::perplexity_metric(numeric(0)), "at least one")
   expect_error(
-    morie:::perplexity_metric(c(-1, -1), base = "10"),
+    rmorie:::perplexity_metric(c(-1, -1), base = "10"),
     "'e' or '2'"
   )
 })
@@ -237,7 +237,7 @@ test_that("pspln fits a penalised spline and reports r2", {
   set.seed(9)
   x <- seq(0, 1, length.out = 60)
   y <- sin(3 * x) + rnorm(60, sd = 0.05)
-  r <- morie:::pspln(x, y, n_knots = 10L, lam = 0.1)
+  r <- rmorie:::pspln(x, y, n_knots = 10L, lam = 0.1)
   expect_type(r, "list")
   expect_named(r, c(
     "coef", "fitted", "residuals", "sse", "r2", "edf",
@@ -250,7 +250,7 @@ test_that("pspln fits a penalised spline and reports r2", {
 })
 
 test_that("pspln returns NA for a too-short series", {
-  r <- morie:::pspln(c(1, 2, 3), c(1, 2, 3), degree = 3L)
+  r <- rmorie:::pspln(c(1, 2, 3), c(1, 2, 3), degree = 3L)
   expect_true(is.na(r$estimate))
   expect_true(grepl("too small", r$method))
 })
@@ -261,14 +261,14 @@ test_that("morie_penalized_spline alias matches pspln", {
   x <- seq(0, 1, length.out = 50)
   y <- x^2 + rnorm(50, sd = 0.05)
   a <- morie_penalized_spline(x, y, n_knots = 8L, lam = 1)
-  b <- morie:::pspln(x, y, n_knots = 8L, lam = 1)
+  b <- rmorie:::pspln(x, y, n_knots = 8L, lam = 1)
   expect_equal(a$coef, b$coef)
 })
 
 test_that("quntf computes quantiles with asymptotic SEs (default taus)", {
   set.seed(11)
   x <- rnorm(300)
-  r <- morie:::quntf(x)
+  r <- rmorie:::quntf(x)
   expect_type(r, "list")
   expect_named(r, c(
     "taus", "quantiles", "se", "bandwidth", "estimate",
@@ -285,13 +285,13 @@ test_that("quntf computes quantiles with asymptotic SEs (default taus)", {
 test_that("quntf accepts a custom single tau", {
   set.seed(12)
   x <- rnorm(200)
-  r <- morie:::quntf(x, taus = 0.5)
+  r <- rmorie:::quntf(x, taus = 0.5)
   expect_length(r$quantiles, 1L)
   expect_true(is.finite(r$quantiles[1]))
 })
 
 test_that("quntf returns NA for n < 2", {
-  r <- morie:::quntf(c(3))
+  r <- rmorie:::quntf(c(3))
   expect_true(is.na(r$estimate))
   expect_identical(r$n, 1L)
 })
@@ -301,7 +301,7 @@ test_that("morie_quantile_function alias matches quntf", {
   x <- rnorm(150)
   expect_equal(
     morie_quantile_function(x, taus = 0.5)$quantiles,
-    morie:::quntf(x, taus = 0.5)$quantiles
+    rmorie:::quntf(x, taus = 0.5)$quantiles
   )
 })
 

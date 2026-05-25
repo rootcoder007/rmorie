@@ -8,7 +8,7 @@
 #'   rank, n, k, method}.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_johansen_cointegration <- function(x, k_ar_diff = 1) {
   Y <- as.matrix(x)

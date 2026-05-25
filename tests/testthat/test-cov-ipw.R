@@ -26,9 +26,9 @@ test_that("morie_validate_cpads_data flags missing variables and respects strict
 })
 
 test_that(".weighted_prop and .ess compute on simple inputs", {
-  expect_equal(morie:::.weighted_prop(c(1, 0, 1), c(2, 1, 1)), 0.75)
-  expect_equal(morie:::.ess(rep(1, 10)), 10)
-  expect_lt(morie:::.ess(c(rep(1, 9), 100)), 10)
+  expect_equal(rmorie:::.weighted_prop(c(1, 0, 1), c(2, 1, 1)), 0.75)
+  expect_equal(rmorie:::.ess(rep(1, 10)), 10)
+  expect_lt(rmorie:::.ess(c(rep(1, 9), 100)), 10)
 })
 
 test_that("morie_run_propensity_ipw_analysis returns IPW tables, writes CSVs", {

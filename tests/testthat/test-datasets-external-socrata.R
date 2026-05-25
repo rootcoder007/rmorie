@@ -45,7 +45,7 @@ test_that("morie_datasets_chicago_crime(offline=FALSE) dispatches via mocked Soc
       expect_equal(max_features, 50L)
       stub
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_chicago_crime(year = 2024L,
                                         max_features = 50L,
                                         offline = FALSE)
@@ -63,7 +63,7 @@ test_that("morie_datasets_chicago_crime(offline=FALSE) sends NULL where when yea
       expect_null(where)
       data.frame(id = 1L)
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_chicago_crime(offline = FALSE)
   expect_s3_class(out, "data.frame")
 })
@@ -105,7 +105,7 @@ test_that("morie_datasets_nyc_stop_and_frisk(offline=FALSE) routes by year to co
         expect_match(url, R$expect_url)
         data.frame(STOP_FRISK_ID = "LIVE", YEAR2 = R$year)
       },
-      .package = "morie",
+      .package = "rmorie",
       code = morie_datasets_nyc_stop_and_frisk(year = R$year,
                                                   offline = FALSE))
     expect_s3_class(out, "data.frame")
@@ -125,7 +125,7 @@ test_that("morie_datasets_nyc_stop_and_frisk(offline=FALSE) defaults to most-rec
       expect_match(url, "7v9w-k82r")
       data.frame(STOP_FRISK_ID = "DEFAULT")
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_nyc_stop_and_frisk(offline = FALSE)
   expect_equal(out$STOP_FRISK_ID, "DEFAULT")
 })
@@ -216,7 +216,7 @@ test_that("morie_datasets_chicago_neighborhoods(offline=FALSE) dispatches via mo
       data.frame(pri_neigh = "MOCK", sec_neigh = "MOCK",
                   shape_area = 1.0, shape_len = 1.0)
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_chicago_neighborhoods(offline = FALSE)
   expect_equal(out$pri_neigh, "MOCK")
 })
@@ -238,7 +238,7 @@ test_that("morie_datasets_chicago_neighborhoods(offline=FALSE, geometry=TRUE) re
                   shape_len = 1.0,
                   stringsAsFactors = FALSE)
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_chicago_neighborhoods(offline = FALSE,
                                                 geometry = TRUE)
   expect_true("the_geom" %in% names(out))
@@ -255,7 +255,7 @@ test_that("morie_datasets_chicago_neighborhoods honours resource_id override", {
       expect_match(url, "override-res-id\\.json")
       data.frame(pri_neigh = "OVERRIDE")
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_chicago_neighborhoods(
     offline = FALSE,
     resource_id = "override-res-id")

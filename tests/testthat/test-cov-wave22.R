@@ -6,13 +6,13 @@
 
 test_that(".morie_url_with_params returns url when every param is NULL", {
   expect_equal(
-    morie:::.morie_url_with_params("http://x", list(a = NULL, b = NULL)),
+    rmorie:::.morie_url_with_params("http://x", list(a = NULL, b = NULL)),
     "http://x"
   )
 })
 
 test_that(".morie_detect_format covers every content-type + extension", {
-  f <- morie:::.morie_detect_format
+  f <- rmorie:::.morie_detect_format
   cts <- list(
     c("application/zip", "zip"),
     c("text/tab-separated-values", "tsv"),
@@ -46,10 +46,10 @@ test_that(".morie_parse_file errors when a reader package is absent", {
     },
     .package = "base"
   )
-  expect_error(morie:::.morie_parse_file(p, "xlsx", TRUE), "readxl")
-  expect_error(morie:::.morie_parse_file(p, "json", TRUE), "jsonlite")
-  expect_error(morie:::.morie_parse_file(p, "xml", TRUE), "xml2")
-  expect_error(morie:::.morie_parse_file(p, "html", TRUE), "xml2")
+  expect_error(rmorie:::.morie_parse_file(p, "xlsx", TRUE), "readxl")
+  expect_error(rmorie:::.morie_parse_file(p, "json", TRUE), "jsonlite")
+  expect_error(rmorie:::.morie_parse_file(p, "xml", TRUE), "xml2")
+  expect_error(rmorie:::.morie_parse_file(p, "html", TRUE), "xml2")
 })
 
 test_that(".morie_parse_file html returns multiple tables / the document", {
@@ -63,10 +63,10 @@ test_that(".morie_parse_file html returns multiple tables / the document", {
   ), h)
   on.exit(unlink(h), add = TRUE)
   if (requireNamespace("rvest", quietly = TRUE)) {
-    multi <- morie:::.morie_parse_file(h, "html", TRUE)
+    multi <- rmorie:::.morie_parse_file(h, "html", TRUE)
     expect_true(is.list(multi))
   }
-  doc <- morie:::.morie_parse_file(h, "html", FALSE)
+  doc <- rmorie:::.morie_parse_file(h, "html", FALSE)
   expect_true(inherits(doc, "xml_document") || is.list(doc))
 })
 
@@ -105,22 +105,22 @@ test_that("morie_ckan_search jsonlite-missing + failed + empty-resources", {
 test_that("morie_ckan_search handles failure and empty-resource datasets", {
   testthat::local_mocked_bindings(
     .morie_read_text = function(url) '{"success":false}',
-    .package = "morie"
+    .package = "rmorie"
   )
   expect_error(morie_ckan_search("x"), "failed")
   testthat::local_mocked_bindings(
     .morie_read_text = function(url) {
       '{"success":true,"result":{"results":[{"title":"D","id":"d","resources":[]}]}}'
     },
-    .package = "morie"
+    .package = "rmorie"
   )
   # every dataset has empty resources -> all skipped -> rbind(list()) is NULL
   expect_null(morie_ckan_search("x"))
 })
 
 test_that(".nz returns empty string when every argument is blank", {
-  expect_equal(morie:::.nz(), "")
-  expect_equal(morie:::.nz(NULL, NA, ""), "")
+  expect_equal(rmorie:::.nz(), "")
+  expect_equal(rmorie:::.nz(NULL, NA, ""), "")
 })
 
 test_that("morie_fetch_arcgis: jsonlite stop, empty, and multi-page", {
@@ -139,7 +139,7 @@ test_that("morie_fetch_arcgis paginates and handles empty layers", {
     .morie_read_text = function(url) {
       '{"features":[{"attributes":{"A":1}}],"exceededTransferLimit":false}'
     },
-    .package = "morie"
+    .package = "rmorie"
   )
   e0 <- morie_fetch_arcgis("http://x/FeatureServer/0", max_records = 0)
   expect_equal(nrow(e0), 0L)
@@ -148,7 +148,7 @@ test_that("morie_fetch_arcgis paginates and handles empty layers", {
     .morie_read_text = function(url) {
       '{"features":[],"exceededTransferLimit":false}'
     },
-    .package = "morie"
+    .package = "rmorie"
   )
   expect_equal(nrow(morie_fetch_arcgis("http://x/FeatureServer/0")), 0L)
   # two pages: first exceeds the transfer limit, second does not
@@ -161,7 +161,7 @@ test_that("morie_fetch_arcgis paginates and handles empty layers", {
       } else {
         '{"features":[{"attributes":{"A":2}}],"exceededTransferLimit":false}'
       }
-    }, .package = "morie"
+    }, .package = "rmorie"
   )
   two <- morie_fetch_arcgis("http://x/FeatureServer/0", page_size = 1)
   expect_equal(nrow(two), 2L)

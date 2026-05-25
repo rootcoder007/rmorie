@@ -27,7 +27,7 @@ test_that("morie_datasets_arsau_uof_individual_records(offline=FALSE) dispatches
                    "690d4c5e-095e-49a0-bbab-b7fc680f3c6b")
       stub_df
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_arsau_uof_individual_records(year = "2024",
                                                        offline = FALSE)
   expect_equal(out$BatchFileName, "LIVE-IND-1")
@@ -50,7 +50,7 @@ test_that("morie_datasets_arsau_uof_probe_cycle_records(offline=FALSE) dispatche
       expect_equal(resource_id, "339b9e63-9521-44a6-8719-c2cb9aa39a8a")
       stub
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_arsau_uof_probe_cycle_records(year = "2023",
                                                        offline = FALSE)
   expect_equal(out$BatchFileName, "LIVE-PRB")
@@ -102,7 +102,7 @@ test_that("morie_datasets_arsau_detailed_dataset(offline=FALSE) dispatches with 
       data.frame(REPORTING_YEAR = 2021L,
                   RECORD_ID = "LIVE-DET")
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_arsau_detailed_dataset(offline = FALSE)
   expect_equal(out$RECORD_ID, "LIVE-DET")
 })
@@ -146,7 +146,7 @@ test_that("morie_datasets_ontario_ckan_by_key dispatches to live CKAN via mock",
       expect_equal(resource_id, "89e3b63f-5679-4fa4-b98a-fdd2dc486f29")
       data.frame(Year = 2024L, UniqueIndividual_ID = "LIVE-DC-1")
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_ontario_ckan_by_key("otis_d01_deaths_in_custody",
                                               offline = FALSE)
   expect_equal(out$UniqueIndividual_ID, "LIVE-DC-1")
@@ -165,7 +165,7 @@ test_that("morie_datasets_ontario_ckan_by_key honours resource_id override on li
       expect_equal(resource_id, "override-xyz")
       data.frame(x = 1L)
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_ontario_ckan_by_key(
     "otis_d01_deaths_in_custody",
     offline = FALSE,

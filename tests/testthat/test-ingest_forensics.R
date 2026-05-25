@@ -8,16 +8,16 @@ test_that("require_fbi_key errors when nothing supplied", {
   old <- Sys.getenv("FBI_CDE_API_KEY", unset = "")
   Sys.unsetenv("FBI_CDE_API_KEY")
   on.exit(if (nzchar(old)) Sys.setenv(FBI_CDE_API_KEY = old))
-  expect_error(morie:::.morie_forensics_require_fbi_key(), "FBI")
+  expect_error(rmorie:::.morie_forensics_require_fbi_key(), "FBI")
 })
 
 test_that("require_fbi_key honours explicit key + env", {
   set.seed(1)
-  expect_equal(morie:::.morie_forensics_require_fbi_key("abc"), "abc")
+  expect_equal(rmorie:::.morie_forensics_require_fbi_key("abc"), "abc")
   old <- Sys.getenv("FBI_CDE_API_KEY", unset = "")
   Sys.setenv(FBI_CDE_API_KEY = "envkey")
   on.exit({ Sys.unsetenv("FBI_CDE_API_KEY"); if (nzchar(old)) Sys.setenv(FBI_CDE_API_KEY = old) })
-  expect_equal(morie:::.morie_forensics_require_fbi_key(), "envkey")
+  expect_equal(rmorie:::.morie_forensics_require_fbi_key(), "envkey")
 })
 
 test_that("flatten_nibrs collapses nested + list values", {
@@ -29,7 +29,7 @@ test_that("flatten_nibrs collapses nested + list values", {
     extras = list(list(k = 1), list(k = 2)),
     nothing = NULL
   )
-  out <- morie:::.morie_forensics_flatten_nibrs(rec)
+  out <- rmorie:::.morie_forensics_flatten_nibrs(rec)
   expect_type(out, "list")
   expect_true(any(grepl("offense\\.", names(out))))
   expect_true("tags" %in% names(out))
@@ -37,15 +37,15 @@ test_that("flatten_nibrs collapses nested + list values", {
 
 test_that("rows_to_df returns empty frame for zero rows + columns hint", {
   set.seed(1)
-  expect_equal(nrow(morie:::.morie_forensics_rows_to_df(list())), 0L)
-  out <- morie:::.morie_forensics_rows_to_df(list(), columns = c("a", "b"))
+  expect_equal(nrow(rmorie:::.morie_forensics_rows_to_df(list())), 0L)
+  out <- rmorie:::.morie_forensics_rows_to_df(list(), columns = c("a", "b"))
   expect_equal(colnames(out), c("a", "b"))
 })
 
 test_that("rows_to_df binds heterogeneous rows", {
   set.seed(1)
   rows <- list(list(a = 1, b = "x"), list(a = 2, b = "y", c = TRUE))
-  out <- morie:::.morie_forensics_rows_to_df(rows)
+  out <- rmorie:::.morie_forensics_rows_to_df(rows)
   expect_s3_class(out, "data.frame")
   expect_true(all(c("a", "b", "c") %in% colnames(out)))
 })
@@ -70,7 +70,7 @@ test_that("namus_missing routes through http helper (mocked)", {
     .morie_dataset_http_json = function(...) {
       list(results = list(list(caseNumber = "MOCK-NAMUS")))
     },
-    .package = "morie"
+    .package = "rmorie"
   )
   res <- tryCatch(morie_ingest_forensics_namus_missing(max_features = 1L),
                   error = function(e) e)
@@ -83,7 +83,7 @@ test_that("nist_rds routes through http helper (mocked)", {
     .morie_dataset_http_json = function(...) {
       list(ResultData = list(list(id = "mock", title = "MOCK-NIST")))
     },
-    .package = "morie"
+    .package = "rmorie"
   )
   res <- tryCatch(morie_ingest_forensics_nist_rds(max_features = 1L),
                   error = function(e) e)
@@ -92,13 +92,13 @@ test_that("nist_rds routes through http helper (mocked)", {
 
 test_that("flatten_namus does not crash on minimal record", {
   set.seed(1)
-  out <- morie:::.morie_forensics_flatten_namus(list())
+  out <- rmorie:::.morie_forensics_flatten_namus(list())
   expect_type(out, "list")
 })
 
 test_that("flatten_nist does not crash on minimal record", {
   set.seed(1)
-  out <- morie:::.morie_forensics_flatten_nist(list())
+  out <- rmorie:::.morie_forensics_flatten_nist(list())
   expect_type(out, "list")
 })
 
@@ -114,7 +114,7 @@ test_that("get_json requires httr2 (superseded)", {
 test_that("get_json with httr2 fails clean off-network", {
   set.seed(1)
   res <- tryCatch(
-    morie:::.morie_forensics_get_json("http://127.0.0.1:1/path",
+    rmorie:::.morie_forensics_get_json("http://127.0.0.1:1/path",
                                       timeout = 1, label = "test"),
     error = function(e) NULL
   )
@@ -124,5 +124,5 @@ test_that("get_json with httr2 fails clean off-network", {
 test_that("rows_to_df preserves row count for homogeneous rows", {
   set.seed(1)
   rows <- list(list(a = 1L), list(a = 2L), list(a = 3L))
-  expect_equal(nrow(morie:::.morie_forensics_rows_to_df(rows)), 3L)
+  expect_equal(nrow(rmorie:::.morie_forensics_rows_to_df(rows)), 3L)
 })

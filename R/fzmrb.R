@@ -12,7 +12,7 @@
 #' @importFrom stats median pnorm
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 fzmrb <- function(x, t = NULL, h = NULL) {
   x <- as.numeric(x)

@@ -44,7 +44,7 @@ below), which honours, in order:
 \item \code{morie_cache_dir("arsau")} (only if already populated by
 a previous \code{morie_arsau_download()} call -- never
 auto-created at read-time, per CRAN policy)
-\item \code{system.file("extdata", "arsau", package = "morie")} --
+\item \code{system.file("extdata", "arsau", package = "rmorie")} --
 the bundled tiny fixture for unit tests + tutorials
 \item stop with a remediation paragraph
 }

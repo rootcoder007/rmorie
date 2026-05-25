@@ -51,7 +51,7 @@ morie_sample <- function(name = c("otis_b01", "otis_b09", "otis_c11", "tps_assau
     otis_c11 = "otis_c11_sample.csv",
     tps_assault = "tps_assault_sample.csv"
   )
-  path <- system.file("extdata", files[[name]], package = "morie")
+  path <- system.file("extdata", files[[name]], package = "rmorie")
   if (path == "" || !file.exists(path)) {
     stop("Sample file not found in installed morie/extdata. Reinstall the package.")
   }

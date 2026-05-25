@@ -42,7 +42,7 @@
 #'   \item \code{morie_cache_dir("arsau")} (only if already populated by
 #'         a previous \code{morie_arsau_download()} call -- never
 #'         auto-created at read-time, per CRAN policy)
-#'   \item \code{system.file("extdata", "arsau", package = "morie")} --
+#'   \item \code{system.file("extdata", "arsau", package = "rmorie")} --
 #'         the bundled tiny fixture for unit tests + tutorials
 #'   \item stop with a remediation paragraph
 #' }
@@ -115,7 +115,7 @@ NULL
   }
 
   # Bundled tiny fixture in the installed package.
-  fixture <- system.file("extdata", "arsau", package = "morie")
+  fixture <- system.file("extdata", "arsau", package = "rmorie")
   if (nzchar(fixture)) {
     candidates[["bundled fixture (inst/extdata/arsau)"]] <- fixture
   }

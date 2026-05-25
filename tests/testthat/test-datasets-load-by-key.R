@@ -133,7 +133,7 @@ test_that("3FFF2: mode='soda3' + app_token routed to Socrata wrapper", {
                     app_token = app_token, base_url = base_url)
       data.frame(arrest_key = "M-1")
     },
-    .package = "morie",
+    .package = "rmorie",
     code = morie_datasets_load_by_key("nypd_arrests_ytd",
                                          offline = FALSE,
                                          mode = "soda3",
@@ -165,7 +165,7 @@ test_that("3HHH5: source= disambiguates collision (Vancouver)", {
       data.frame(dataset_id = id, source = "van-mock",
                   stringsAsFactors = FALSE)
     },
-    .package = "morie",
+    .package = "rmorie",
     code = {
       df <- morie_datasets_load_by_key("public-art",
                                           source = "vancouver_opendata")
@@ -183,7 +183,7 @@ test_that("3HHH5: source= disambiguates collision (Toronto)", {
     .morie_ckan_resolve_first_csv = function(package_name, ckan_base) {
       sprintf("fake-resource-uuid-for-%s", package_name)
     },
-    .package = "morie",
+    .package = "rmorie",
     code = {
       df <- morie_datasets_load_by_key("public-art",
                                           source = "toronto_opendata")

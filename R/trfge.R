@@ -25,7 +25,7 @@
 morie_transformer_genomic <- function(x, y, markers, d_model = 8, lam = 1, seed = 0,
                                 deterministic_seed = NULL) {
   if (!is.null(deterministic_seed)) {
-    morie::morie_det_rng("trfge", deterministic_seed)
+    rmorie::morie_det_rng("trfge", deterministic_seed)
   } else {
     set.seed(seed)
   }

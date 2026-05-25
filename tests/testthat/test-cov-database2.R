@@ -45,7 +45,7 @@ test_that("morie_load_dataset resolves the direct-download tier", {
   .cdb2_have_db()
   testthat::local_mocked_bindings(
     morie_fetch = function(url, ...) data.frame(a = 1:4),
-    .package = "morie"
+    .package = "rmorie"
   )
   d <- morie_load_dataset("cu23bt",
     db_path = tempfile(fileext = ".db"),
@@ -59,7 +59,7 @@ test_that("morie_load_dataset resolves the ArcGIS tier", {
   .cdb2_have_db()
   testthat::local_mocked_bindings(
     morie_fetch_arcgis = function(layer_url, ...) data.frame(b = 1:7),
-    .package = "morie"
+    .package = "rmorie"
   )
   d <- morie_load_dataset("tpsassault",
     db_path = tempfile(fileext = ".db"),

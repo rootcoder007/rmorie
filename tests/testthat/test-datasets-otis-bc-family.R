@@ -200,7 +200,7 @@ test_that("every b/c wrapper auto-resolves canonical resource_id from the regist
         expect_equal(resource_id, R$rid)
         data.frame(EndFiscalYear = 2024L)
       },
-      .package = "morie",
+      .package = "rmorie",
       code = R$fn(offline = FALSE))
     expect_s3_class(out, "data.frame")
   }
@@ -216,7 +216,7 @@ test_that("OTIS b01 dispatches via mock when resource_id is supplied", {
       data.frame(EndFiscalYear = 2024L,
                   UniqueIndividual_ID = "LIVE-B01-1")
     },
-    .package = "morie",
+    .package = "rmorie",
     code = morie_datasets_otis_b01_segregation_detailed(
       offline = FALSE, resource_id = "future-b01-id"))
   expect_equal(out$UniqueIndividual_ID, "LIVE-B01-1")
@@ -230,7 +230,7 @@ test_that("OTIS c01 dispatches via mock when resource_id is supplied", {
       data.frame(EndFiscalYear = 2024L,
                   NumberIndividuals_InCustody = 7777L)
     },
-    .package = "morie",
+    .package = "rmorie",
     code = morie_datasets_otis_c01_individuals_total(
       offline = FALSE, resource_id = "future-c01-id"))
   expect_equal(out$NumberIndividuals_InCustody, 7777L)
@@ -246,7 +246,7 @@ test_that("OTIS c11 dispatches via mock when resource_id is supplied", {
                   NumberIndividuals_RestrictiveConfinement = 9L,
                   NumberIndividuals_Segregation = 5L)
     },
-    .package = "morie",
+    .package = "rmorie",
     code = morie_datasets_otis_c11_aggregate_lengths(
       offline = FALSE, resource_id = "future-c11-id"))
   expect_equal(out$NumberIndividuals_Segregation, 5L)

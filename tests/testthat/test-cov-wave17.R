@@ -28,14 +28,14 @@ test_that("morie_xavir_xavier_init leaves the global RNG state unchanged", {
 
 test_that(".morie_silverman_h handles degenerate (zero-spread) input", {
   # constant input -> sd = 0 and IQR = 0 -> the sigma<=0 fallback
-  h0 <- morie:::.morie_silverman_h(rep(3, 20))
+  h0 <- rmorie:::.morie_silverman_h(rep(3, 20))
   expect_true(is.finite(h0) && h0 > 0)
   # IQR = 0 but sd > 0 -> the iq>0 == FALSE branch (sigma <- s)
-  h1 <- morie:::.morie_silverman_h(c(rep(0, 18), 5, -5))
+  h1 <- rmorie:::.morie_silverman_h(c(rep(0, 18), 5, -5))
   expect_true(is.finite(h1) && h1 > 0)
   # ordinary spread -> the iq>0 branch (min(s, iq))
   set.seed(1)
-  h2 <- morie:::.morie_silverman_h(stats::rnorm(60))
+  h2 <- rmorie:::.morie_silverman_h(stats::rnorm(60))
   expect_true(is.finite(h2) && h2 > 0)
   # exercised end-to-end through a Fauzi callable on constant data
   expect_true(is.list(fzcvm(rep(7, 12))))

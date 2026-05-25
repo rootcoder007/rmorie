@@ -17,7 +17,7 @@
 #' @keywords internal
 #' @noRd
 .morie_dataset_pkg_csv <- function(name) {
-  path <- system.file("extdata", paste0(name, ".csv"), package = "morie")
+  path <- system.file("extdata", paste0(name, ".csv"), package = "rmorie")
   if (!nzchar(path)) {
     return(NA_character_)
   }
@@ -634,7 +634,7 @@ morie_datasets_siu_director_reports <- function() {
 morie_datasets_siu_report_text <- function(url = NULL, offline = FALSE) {
   if (isTRUE(offline)) {
     path <- system.file("extdata", "siu_24-OFD-001_synthetic.txt",
-                        package = "morie")
+                        package = "rmorie")
     if (!nzchar(path)) {
       stop("morie_datasets_siu_report_text(offline=TRUE): bundled synthetic missing.")
     }
@@ -1411,7 +1411,7 @@ morie_datasets_chicago_neighborhoods <- function(offline = TRUE,
   mode <- match.arg(mode)
   if (isTRUE(offline)) {
     path <- system.file("extdata", "chicago_neighborhoods.csv",
-                        package = "morie")
+                        package = "rmorie")
     if (!nzchar(path)) {
       stop("bundled Chicago neighborhoods fixture missing",
            call. = FALSE)
@@ -1610,7 +1610,7 @@ morie_datasets_chicago_crime_map <- function(date_from = NULL,
   if (isTRUE(offline)) {
     path <- system.file("extdata",
                         "chicago_crime_map_ahwe_kpsy_sample.csv",
-                        package = "morie")
+                        package = "rmorie")
     if (!nzchar(path)) {
       stop("bundled Chicago Crime Map fixture missing", call. = FALSE)
     }
@@ -1763,7 +1763,7 @@ morie_datasets_chicago_police_beats <- function(offline = TRUE,
   mode <- match.arg(mode)
   if (isTRUE(offline)) {
     path <- system.file("extdata", "chicago_police_beats.csv",
-                        package = "morie")
+                        package = "rmorie")
     if (!nzchar(path)) {
       stop("bundled Chicago Police Beats fixture missing",
            call. = FALSE)
@@ -1866,7 +1866,7 @@ morie_datasets_chicago_police_districts <- function(offline = TRUE,
   mode <- match.arg(mode)
   if (isTRUE(offline)) {
     path <- system.file("extdata", "chicago_police_districts.csv",
-                        package = "morie")
+                        package = "rmorie")
     if (!nzchar(path)) {
       stop("bundled Chicago Police Districts fixture missing",
            call. = FALSE)
@@ -2107,7 +2107,7 @@ morie_datasets_chicago_wards <- function(offline = TRUE,
                                           app_token = NULL) {
   if (isTRUE(offline)) {
     path <- system.file("extdata", "chicago_wards.csv",
-                        package = "morie")
+                        package = "rmorie")
     if (!nzchar(path)) {
       stop("bundled Chicago wards fixture missing", call. = FALSE)
     }
@@ -2171,7 +2171,7 @@ morie_datasets_chicago_community_areas <- function(offline = TRUE,
                                                      app_token = NULL) {
   if (isTRUE(offline)) {
     path <- system.file("extdata", "chicago_community_areas.csv",
-                        package = "morie")
+                        package = "rmorie")
     if (!nzchar(path)) {
       stop("bundled Chicago community areas fixture missing",
            call. = FALSE)
@@ -2254,7 +2254,7 @@ morie_datasets_chicago_iucr_codes <- function(offline = TRUE,
   mode <- match.arg(mode)
   if (isTRUE(offline)) {
     path <- system.file("extdata", "chicago_iucr_codes.csv",
-                        package = "morie")
+                        package = "rmorie")
     if (!nzchar(path)) {
       stop("bundled Chicago IUCR codes fixture missing",
            call. = FALSE)
@@ -2345,7 +2345,7 @@ morie_datasets_chicago_arrests <- function(year = NULL,
   if (isTRUE(offline)) {
     path <- system.file("extdata",
                         "chicago_arrests_dpt3_jri9_sample.csv",
-                        package = "morie")
+                        package = "rmorie")
     if (!nzchar(path)) {
       stop("bundled Chicago Arrests fixture missing", call. = FALSE)
     }
@@ -2446,7 +2446,7 @@ morie_datasets_cpd_public_arrests <- function(url = NULL,
   if (isTRUE(offline)) {
     path <- system.file("extdata",
                         "cpd_public_release_arrests_sample.csv",
-                        package = "morie")
+                        package = "rmorie")
     if (!nzchar(path)) {
       stop("bundled CPD public-arrests fixture missing",
            call. = FALSE)

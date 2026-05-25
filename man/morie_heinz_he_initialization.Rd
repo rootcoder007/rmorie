@@ -47,7 +47,7 @@ R parity for \code{morie.fn.heinz.he_initialization}.
 }
 \examples{
 # See the package vignettes for usage examples:
-#   vignette(package = "morie")
+#   vignette(package = "rmorie")
 }
 \references{
 He, Zhang, Ren & Sun (2015), ICCV.

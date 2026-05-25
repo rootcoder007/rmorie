@@ -69,7 +69,7 @@ test_that("pick_data_sheet errors without readxl", {
 
   )
   set.seed(1)
-  expect_error(morie:::.morie_cihi_pick_data_sheet("foo.xlsx"), "readxl")
+  expect_error(rmorie:::.morie_cihi_pick_data_sheet("foo.xlsx"), "readxl")
 })
 
 test_that("pick_data_sheet picks largest sheet when readxl present", {
@@ -80,7 +80,7 @@ test_that("pick_data_sheet picks largest sheet when readxl present", {
     small = data.frame(a = 1:2),
     big   = data.frame(a = 1:10, b = 1:10, c = 1:10)
   ), tmp)
-  out <- morie:::.morie_cihi_pick_data_sheet(tmp)
+  out <- rmorie:::.morie_cihi_pick_data_sheet(tmp)
   expect_s3_class(out, "data.frame")
   expect_identical(attr(out, "morie_cihi_sheet"), "big")
   unlink(tmp)

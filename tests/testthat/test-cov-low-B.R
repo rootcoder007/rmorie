@@ -4,7 +4,7 @@
 # ==== cslat.R ====
 test_that("causal_attention_mask works with integer length", {
   set.seed(1)
-  out <- morie:::causal_attention_mask(5L)
+  out <- rmorie:::causal_attention_mask(5L)
   expect_type(out, "list")
   expect_equal(out$n, 5L)
   expect_equal(out$method, "causal-mask")
@@ -14,7 +14,7 @@ test_that("causal_attention_mask works with integer length", {
 test_that("causal_attention_mask works with a tensor-like array (uses dim)", {
   set.seed(1)
   arr <- array(0, dim = c(2L, 4L, 3L))
-  out <- morie:::causal_attention_mask(arr)
+  out <- rmorie:::causal_attention_mask(arr)
   expect_type(out, "list")
   expect_equal(out$n, 4L)
   expect_equal(dim(out$tensor), c(4L, 4L))
@@ -23,7 +23,7 @@ test_that("causal_attention_mask works with a tensor-like array (uses dim)", {
 test_that("causal_attention_mask falls back to length() for plain vectors", {
   set.seed(1)
   v <- 1:7
-  out <- morie:::causal_attention_mask(v)
+  out <- rmorie:::causal_attention_mask(v)
   expect_false(is.null(out))
   expect_equal(out$n, 7L)
   expect_equal(dim(out$tensor), c(7L, 7L))

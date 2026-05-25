@@ -99,7 +99,7 @@ test_that("morie_siu_audit_case returns empty HTML + skipps fetch when set FALSE
 .mock_llm_json <- function(case_number = "24-OFD-001",
                             drid = 4001L) {
   # Build a minimal JSON response matching .siu_field_list() exactly.
-  fields <- morie:::.siu_field_list()
+  fields <- rmorie:::.siu_field_list()
   vals <- setNames(rep("", length(fields)), fields)
   vals["case_number"] <- case_number
   vals["drid"] <- as.character(drid)

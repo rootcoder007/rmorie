@@ -135,7 +135,7 @@ morie_datasets_arsau_uof_main_records <- function(year = "2024",
                                                     resource_id = NULL) {
   if (isTRUE(offline)) {
     path <- system.file("extdata", "arsau_uof_main_records_sample.csv",
-                        package = "morie")
+                        package = "rmorie")
     if (!nzchar(path)) {
       stop("bundled ARSAU UoF main_records fixture missing",
            call. = FALSE)
@@ -243,7 +243,7 @@ morie_datasets_tps_mha_apprehensions <- function(year = NULL,
                                                    layer_url = NULL) {
   if (isTRUE(offline)) {
     path <- system.file("extdata", "tps_mha_apprehensions_sample.csv",
-                        package = "morie")
+                        package = "rmorie")
     if (!nzchar(path)) {
       stop("bundled TPS MHA fixture missing", call. = FALSE)
     }
@@ -312,7 +312,7 @@ morie_datasets_tps_mha_apprehensions <- function(year = NULL,
 .morie_arsau_uof_dispatch <- function(kind, year, offline,
                                         resource_id, fixture_name) {
   if (isTRUE(offline)) {
-    path <- system.file("extdata", fixture_name, package = "morie")
+    path <- system.file("extdata", fixture_name, package = "rmorie")
     if (!nzchar(path)) {
       stop(sprintf("bundled ARSAU UoF fixture %s missing",
                    fixture_name), call. = FALSE)
@@ -1032,7 +1032,7 @@ morie_datasets_ontario_ckan_by_key <- function(dataset_key,
   }
   entry <- .MORIE_ONTARIO_CKAN_REGISTRY[[dataset_key]]
   if (isTRUE(offline)) {
-    path <- system.file("extdata", entry$fixture, package = "morie")
+    path <- system.file("extdata", entry$fixture, package = "rmorie")
     if (!nzchar(path)) {
       stop(sprintf("bundled Ontario CKAN fixture %s missing",
                    entry$fixture), call. = FALSE)

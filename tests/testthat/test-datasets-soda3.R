@@ -20,12 +20,12 @@ test_that(".morie_dataset_soda3_query(paginate=FALSE) hits SODA3 query.json with
                                           headers = character(),
                                           timeout_s = 60L) {
       capture$urls <- c(capture$urls,
-                         morie:::.morie_dataset_build_url(url, query))
+                         rmorie:::.morie_dataset_build_url(url, query))
       capture$headers[[length(capture$headers) + 1L]] <- headers
       list(list(id = "1"), list(id = "2"))
     },
-    .package = "morie")
-  out <- morie:::.morie_dataset_soda3_query(
+    .package = "rmorie")
+  out <- rmorie:::.morie_dataset_soda3_query(
     "ahwe-kpsy",
     soql = "SELECT * WHERE primary_type='THEFT' LIMIT 5",
     paginate = FALSE)
@@ -55,8 +55,8 @@ test_that(".morie_dataset_soda3_query(paginate=TRUE) walks LIMIT n OFFSET m bake
       call_count <<- call_count + 1L
       responses[[call_count]]
     },
-    .package = "morie")
-  out <- morie:::.morie_dataset_soda3_query(
+    .package = "rmorie")
+  out <- rmorie:::.morie_dataset_soda3_query(
     "ahwe-kpsy",
     soql = "SELECT * WHERE year=2024",
     paginate = TRUE, page_size = 3L)
@@ -79,8 +79,8 @@ test_that(".morie_dataset_soda3_query(paginate=TRUE) strips caller-supplied LIMI
                            query$query else "")
       list()  # empty -> single request
     },
-    .package = "morie")
-  morie:::.morie_dataset_soda3_query(
+    .package = "rmorie")
+  rmorie:::.morie_dataset_soda3_query(
     "ahwe-kpsy",
     soql = "SELECT * WHERE year=2024 LIMIT 999 OFFSET 50",
     paginate = TRUE, page_size = 100L)
@@ -101,8 +101,8 @@ test_that(".morie_dataset_soda3_query sends app_token as X-App-Token header (not
       capture$headers[[length(capture$headers) + 1L]] <- headers
       list()
     },
-    .package = "morie")
-  morie:::.morie_dataset_soda3_query(
+    .package = "rmorie")
+  rmorie:::.morie_dataset_soda3_query(
     "ahwe-kpsy", soql = "SELECT * LIMIT 1",
     app_token = "fake-token-abc")
   expect_equal(length(capture$headers), 1L)
@@ -145,7 +145,7 @@ test_that("morie_datasets_chicago_crime_map(offline=FALSE) routes to .morie_data
                     max_features = max_features)
       data.frame(stub = 1L)
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_chicago_crime_map(
     date_from = "2025-05-17",
     date_to = "2026-05-24",
@@ -169,7 +169,7 @@ test_that("morie_datasets_chicago_crime_map(offline=FALSE) ANDs an extra `where`
       seen <<- list(soql = soql)
       data.frame(stub = 1L)
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_chicago_crime_map(
     date_from = "2025-01-01",
     date_to = "2026-01-01",
@@ -192,7 +192,7 @@ test_that("morie_datasets_chicago_crime_map default date window is rolling 1 yea
       seen <<- list(soql = soql)
       data.frame()
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_chicago_crime_map(offline = FALSE)
   today <- format(Sys.Date(), "%Y-%m-%dT00:00:00.000")
   year_ago <- format(Sys.Date() - 365L, "%Y-%m-%dT00:00:00.000")
@@ -215,7 +215,7 @@ test_that("morie_datasets_chicago_crime_map forwards resource_id + paginate args
                     app_token = app_token)
       data.frame()
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_chicago_crime_map(
     offline = FALSE,
     resource_id = "override-map-xyz",
@@ -252,7 +252,7 @@ test_that("morie_datasets_chicago_crime_soql(offline=FALSE) routes to .morie_dat
       seen <<- list(view_id = view_id, soql = soql)
       data.frame(id = 1L)
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_chicago_crime_soql(
     where = "primary_type='HOMICIDE' AND year=2024",
     offline = FALSE)
@@ -274,7 +274,7 @@ test_that("morie_datasets_chicago_crime_soql honours select + order", {
       seen <<- list(soql = soql)
       data.frame()
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_chicago_crime_soql(
     select = "primary_type, count(*) as n",
     where = "year=2024",
@@ -297,7 +297,7 @@ test_that("morie_datasets_chicago_crime_soql resource_id override sends to the a
       seen <<- list(view_id = view_id)
       data.frame()
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_chicago_crime_soql(offline = FALSE,
                                       resource_id = "crimes")
   expect_equal(seen$view_id, "crimes")

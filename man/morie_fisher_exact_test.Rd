@@ -22,5 +22,5 @@ Fisher's exact test for 2x2 tables
 }
 \examples{
 # See the package vignettes for usage examples:
-#   vignette(package = "morie")
+#   vignette(package = "rmorie")
 }

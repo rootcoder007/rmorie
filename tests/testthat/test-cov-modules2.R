@@ -3,7 +3,7 @@
 # module-output writing, and the morie_run_morie_module(s) dispatch.
 
 test_that(".cpads_default_csv returns a CPADS csv path", {
-  p <- morie:::.cpads_default_csv()
+  p <- rmorie:::.cpads_default_csv()
   expect_type(p, "character")
   expect_match(p, "cpads", ignore.case = TRUE)
 })
@@ -12,9 +12,9 @@ test_that(".resolve_cpads_csv resolves an existing file, errors otherwise", {
   f <- tempfile(fileext = ".csv")
   file.create(f)
   on.exit(unlink(f), add = TRUE)
-  expect_equal(morie:::.resolve_cpads_csv(f), normalizePath(f))
+  expect_equal(rmorie:::.resolve_cpads_csv(f), normalizePath(f))
   expect_error(
-    morie:::.resolve_cpads_csv("no-such-cpads-xyzzy.csv"),
+    rmorie:::.resolve_cpads_csv("no-such-cpads-xyzzy.csv"),
     "not found"
   )
 })
@@ -48,9 +48,9 @@ test_that(".write_module_outputs: no dir returns as-is; a dir writes files", {
     note = "a one-line note",
     `pre.csv` = data.frame(z = 1)
   )
-  expect_identical(morie:::.write_module_outputs(outs, NULL), outs)
+  expect_identical(rmorie:::.write_module_outputs(outs, NULL), outs)
   od <- tempfile("mods-")
-  morie:::.write_module_outputs(outs, od)
+  rmorie:::.write_module_outputs(outs, od)
   expect_true(file.exists(file.path(od, "tbl.csv")))
   expect_true(file.exists(file.path(od, "note.txt")))
   expect_true(file.exists(file.path(od, "pre.csv")))

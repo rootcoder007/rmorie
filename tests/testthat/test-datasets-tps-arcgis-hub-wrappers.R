@@ -64,7 +64,7 @@ test_that("morie_datasets_tps_victims_of_crime dispatches to the canonical Victi
                     layer_idx = layer_idx)
       data.frame(stub = 1L)
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_tps_victims_of_crime()
   # 6afabfd5109847a2bbba3eaeb0275e35 = Victims of Crime (ASR-VC-TBL-001)
   # (one of the 2 missing items we discovered + added in 3SS).
@@ -78,7 +78,7 @@ test_that("morie_datasets_tps_use_of_force_gender_composition dispatches to RBDC
       seen <<- list(hub_id = hub_id)
       data.frame()
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_tps_use_of_force_gender_composition()
   expect_equal(seen$hub_id, "de9284945c3e479e938c4b77586535b1")
 })
@@ -90,7 +90,7 @@ test_that("morie_datasets_tps_police_divisions dispatches to the Police Division
       seen <<- list(hub_id = hub_id)
       data.frame()
     },
-    .package = "morie")
+    .package = "rmorie")
   # 3CCC3 added a bundled-fixture offline path; the hub_id dispatch
   # is only exercised when offline = FALSE. Other wrappers in this
   # suite don't have an offline mode and dispatch unconditionally.
@@ -105,7 +105,7 @@ test_that("morie_datasets_tps_budget_2026 dispatches to the canonical Budget_202
       seen <<- list(hub_id = hub_id)
       data.frame()
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_tps_budget_2026()
   expect_equal(seen$hub_id, "d80f9e0b3cc74f649e5e4593cdda207e")
 })
@@ -117,7 +117,7 @@ test_that("morie_datasets_tps_2008_firs (digit-prefixed slug) is callable + disp
       seen <<- list(hub_id = hub_id)
       data.frame()
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_tps_2008_firs()
   expect_equal(seen$hub_id, "b8e3ef826ea84cbcb85951d051afc2fa")
 })
@@ -138,7 +138,7 @@ test_that("a wrapper forwards format / where / max_features / layer_idx / offlin
                     dest = dest)
       data.frame()
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_tps_neighbourhood_crime_rates(
     format = "geojson",
     where = "OCC_YEAR=2024",
@@ -202,7 +202,7 @@ test_that("a sample of wrappers can be called with offline=TRUE without error", 
     morie_datasets_tps_arcgis_hub_by_id = function(hub_id, ...) {
       data.frame(hub_id_seen = hub_id, stringsAsFactors = FALSE)
     },
-    .package = "morie")
+    .package = "rmorie")
   for (fn in list(morie_datasets_tps_facilities,
                   morie_datasets_tps_patrol_zone,
                   morie_datasets_tps_killed_and_seriously_injured,

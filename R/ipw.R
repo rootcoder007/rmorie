@@ -5,7 +5,7 @@
 #' @return Character vector of missing variable names.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_validate_cpads_data <- function(data, strict = TRUE) {
   required <- morie_cpads_contract()$required_variables

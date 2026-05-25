@@ -16,38 +16,38 @@ test_that("entheo EEG/fMRI helpers run on matrix and vector inputs", {
   set.seed(1)
   eeg <- matrix(rnorm(3 * 48), nrow = 3)
   fmri <- matrix(rnorm(3 * 12), nrow = 3) # fewer fMRI frames
-  env <- morie:::.entheo_envelope(eeg)
+  env <- rmorie:::.entheo_envelope(eeg)
   expect_true(is.matrix(env))
-  expect_true(is.numeric(morie:::.entheo_envelope(rnorm(40))))
-  al <- morie:::.entheo_align(eeg, fmri) # triggers down-binning
+  expect_true(is.numeric(rmorie:::.entheo_envelope(rnorm(40))))
+  al <- rmorie:::.entheo_align(eeg, fmri) # triggers down-binning
   expect_equal(length(al$e), length(al$f))
-  b <- morie:::.entheo_binding_per_frame(eeg, fmri)
+  b <- rmorie:::.entheo_binding_per_frame(eeg, fmri)
   expect_true(is.numeric(b))
-  s <- morie:::.entheo_san_per_frame(eeg, fmri)
+  s <- rmorie:::.entheo_san_per_frame(eeg, fmri)
   expect_true(is.numeric(s))
 })
 
 # ---- hawkes_fit.R ---------------------------------------------------------
 
 test_that(".hawkes_kernel_funs builds every kernel family", {
-  expect_type(morie:::.hawkes_kernel_funs("exponential", c(0, 0.5, 1.2)), "list")
-  expect_type(morie:::.hawkes_kernel_funs("weibull", c(0, 0.5, 1.5, 2)), "list")
-  expect_type(morie:::.hawkes_kernel_funs("lomax", c(0, 0.5, 2.5, 1)), "list")
-  expect_type(morie:::.hawkes_kernel_funs("gamma", c(0, 0.5, 2, 1)), "list")
+  expect_type(rmorie:::.hawkes_kernel_funs("exponential", c(0, 0.5, 1.2)), "list")
+  expect_type(rmorie:::.hawkes_kernel_funs("weibull", c(0, 0.5, 1.5, 2)), "list")
+  expect_type(rmorie:::.hawkes_kernel_funs("lomax", c(0, 0.5, 2.5, 1)), "list")
+  expect_type(rmorie:::.hawkes_kernel_funs("gamma", c(0, 0.5, 2, 1)), "list")
   # degenerate parameters -> NULL
-  expect_null(morie:::.hawkes_kernel_funs("weibull", c(0, 0.5, 0, 1)))
+  expect_null(rmorie:::.hawkes_kernel_funs("weibull", c(0, 0.5, 0, 1)))
 })
 
 test_that(".hawkes_nll_pureR returns a finite negative log-likelihood", {
   set.seed(2)
   times <- sort(cumsum(rexp(40, rate = 1)))
-  nll <- morie:::.hawkes_nll_pureR(
+  nll <- rmorie:::.hawkes_nll_pureR(
     c(log(0.5), 0.3, 1.0),
     times, max(times), "exponential"
   )
   expect_true(is.finite(nll))
   expect_equal(
-    morie:::.hawkes_nll_pureR(
+    rmorie:::.hawkes_nll_pureR(
       c(log(0.5), 5, 1),
       times, max(times), "exponential"
     ),

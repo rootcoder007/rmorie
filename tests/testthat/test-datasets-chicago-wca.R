@@ -39,7 +39,7 @@ test_that("morie_datasets_chicago_wards(offline=FALSE) routes through SODA3 with
       seen <<- list(view_id = view_id, soql = soql)
       data.frame(ward = "1", shape_leng = "1", shape_area = "1")
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_chicago_wards(offline = FALSE)
   expect_equal(seen$view_id, "sp34-6z76")
   expect_match(seen$soql,
@@ -54,7 +54,7 @@ test_that("morie_datasets_chicago_wards(offline=FALSE, geometry=TRUE) drops the 
       seen <<- list(soql = soql)
       data.frame(the_geom = "GEOM", ward = "1")
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_chicago_wards(offline = FALSE, geometry = TRUE)
   expect_match(seen$soql, "^SELECT \\* ORDER BY ward$")
 })
@@ -73,7 +73,7 @@ test_that("morie_datasets_chicago_wards forwards paginate / page_size / app_toke
                     app_token = app_token, max_features = max_features)
       data.frame()
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_chicago_wards(offline = FALSE,
                                  paginate = TRUE,
                                  page_size = 50L,
@@ -112,7 +112,7 @@ test_that("morie_datasets_chicago_community_areas(offline=FALSE) routes through 
       seen <<- list(view_id = view_id, soql = soql)
       data.frame(community = "ROGERS PARK", area_numbe = "1")
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_chicago_community_areas(offline = FALSE)
   expect_equal(seen$view_id, "cauq-8yn6")
   expect_match(seen$soql,
@@ -127,7 +127,7 @@ test_that("morie_datasets_chicago_community_areas(offline=FALSE, geometry=TRUE) 
       seen <<- list(soql = soql)
       data.frame()
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_chicago_community_areas(offline = FALSE,
                                            geometry = TRUE)
   expect_match(seen$soql, "^SELECT \\* ORDER BY area_numbe$")
@@ -177,7 +177,7 @@ test_that("morie_datasets_chicago_iucr_codes(offline=FALSE) routes through SODA2
                   secondary_description = "FIRST DEGREE MURDER",
                   index_code = "I", active = TRUE)
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_chicago_iucr_codes(offline = FALSE,
                                       max_features = 50L,
                                       paginate = TRUE)
@@ -193,7 +193,7 @@ test_that("morie_datasets_chicago_iucr_codes honours resource_id override", {
       expect_match(url, "override-iucr-xyz\\.json$")
       data.frame()
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_chicago_iucr_codes(
     offline = FALSE,
     resource_id = "override-iucr-xyz")

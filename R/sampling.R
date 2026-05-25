@@ -108,7 +108,7 @@ morie_stratified_sample <- function(df, strata_col, n_per_stratum,
 #' @return Data frame of selected units with `.weight` column.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_cluster_sample <- function(df, cluster_col, n_clusters, seed = 42L) {
   set.seed(seed)
@@ -135,7 +135,7 @@ morie_cluster_sample <- function(df, cluster_col, n_clusters, seed = 42L) {
 #' @return Data frame of selected units with `.weight` (Hansen-Hurwitz weights).
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_pps_sample <- function(df, size_col, n, seed = 42L,
                               replace = FALSE) {
@@ -205,7 +205,7 @@ morie_bootstrap_sample <- function(df, statistic, n_bootstrap = 1000L, seed = 42
 #' @return Named list: `estimate`, `se`, `bias`.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_jackknife_estimate <- function(df, statistic) {
   n <- nrow(df)
@@ -230,7 +230,7 @@ morie_jackknife_estimate <- function(df, statistic) {
 #' @return Numeric ESS.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_effective_sample_size <- function(weights) {
   w <- as.numeric(weights)
@@ -244,7 +244,7 @@ morie_effective_sample_size <- function(weights) {
 #' @return Numeric design effect (= n / ESS).
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_design_effect <- function(weights) {
   w <- as.numeric(weights)
@@ -265,7 +265,7 @@ morie_design_effect <- function(weights) {
 #' @return Numeric vector of design weights (same length as `nrow(df)`).
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_compute_design_weights <- function(df, strata_col, population_sizes) {
   strata <- df[[strata_col]]

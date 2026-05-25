@@ -35,5 +35,5 @@ Draw multivariate normal samples under a structured covariance
 }
 \examples{
 # See the package vignettes for usage examples:
-#   vignette(package = "morie")
+#   vignette(package = "rmorie")
 }

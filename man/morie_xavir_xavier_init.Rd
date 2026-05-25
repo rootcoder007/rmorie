@@ -33,7 +33,7 @@ R parity for \code{morie.fn.xavir.xavier_init}.
 }
 \examples{
 # See the package vignettes for usage examples:
-#   vignette(package = "morie")
+#   vignette(package = "rmorie")
 }
 \references{
 Glorot & Bengio (2010), AISTATS.

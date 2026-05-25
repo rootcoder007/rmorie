@@ -52,7 +52,7 @@ Renders a sequential-colour choropleth from a polygon data.frame
 carrying one row per neighbourhood with a list-column of WGS84
 (lon, lat) rings (\code{geometry}) and a numeric \code{rate_col}.
 This signature deliberately matches what
-\code{morie::morie_fetch("https://.../NeighbourhoodCrimeRates...",
+\code{rmorie::morie_fetch("https://.../NeighbourhoodCrimeRates...",
 format = "geojson")} returns once unrolled.
 }
 \details{

@@ -236,7 +236,7 @@ morie_synth_corrections_uof <- function(key, n = 30L, seed = 1L) {
   bundled_path <- system.file(
     "extdata",
     sprintf("corrections_uof_%s_sample.csv", key),
-    package = "morie")
+    package = "rmorie")
   if (!nzchar(bundled_path) || !file.exists(bundled_path)) {
     stop(sprintf("morie_synth_corrections_uof: no bundled sample for key %s",
                  sQuote(key)), call. = FALSE)

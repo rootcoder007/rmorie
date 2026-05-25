@@ -47,7 +47,7 @@ R parity for \code{morie.fn.trfbl.transformer_block}.
 }
 \examples{
 # See the package vignettes for usage examples:
-#   vignette(package = "morie")
+#   vignette(package = "rmorie")
 }
 \references{
 Vaswani et al. (2017), NeurIPS.

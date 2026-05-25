@@ -179,7 +179,7 @@ morie_install_extras <- function(which = "missing",
 
 # Internal: read this package's Suggests field from its DESCRIPTION.
 .morie_get_suggests <- function() {
-  desc_path <- system.file("DESCRIPTION", package = "morie")
+  desc_path <- system.file("DESCRIPTION", package = "rmorie")
   if (!nzchar(desc_path)) {
     stop("Could not locate morie's DESCRIPTION; package not installed?",
          call. = FALSE)

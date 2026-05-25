@@ -30,7 +30,7 @@ test_that("morie_datasets_otis_a01_restrictive_confinement(offline=FALSE) auto-r
       data.frame(EndFiscalYear = 2024L,
                   UniqueIndividual_ID = "LIVE-A01-REG")
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_otis_a01_restrictive_confinement(offline = FALSE)
   expect_equal(out$UniqueIndividual_ID, "LIVE-A01-REG")
 })
@@ -43,7 +43,7 @@ test_that("morie_datasets_otis_a01_restrictive_confinement honours explicit reso
       data.frame(EndFiscalYear = 2024L,
                   UniqueIndividual_ID = "LIVE-A01-OVERRIDE")
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_otis_a01_restrictive_confinement(
     offline = FALSE, resource_id = "explicit-a01-override-id")
   expect_equal(out$UniqueIndividual_ID, "LIVE-A01-OVERRIDE")
@@ -118,7 +118,7 @@ test_that("every d02-d07 + a01 wrapper auto-resolves canonical resource_id from 
         expect_equal(resource_id, R$rid)
         data.frame(Year = 2024L, Number_CustodialDeaths = 1L)
       },
-      .package = "morie",
+      .package = "rmorie",
       code = R$fn(offline = FALSE))
     expect_s3_class(out, "data.frame")
   }
@@ -139,7 +139,7 @@ test_that("every d02-d07 wrapper honours explicit resource_id override", {
         expect_equal(resource_id, R$rid)
         data.frame(Year = 2024L, Number_CustodialDeaths = 1L)
       },
-      .package = "morie",
+      .package = "rmorie",
       code = R$fn(offline = FALSE, resource_id = R$rid))
     expect_s3_class(out, "data.frame")
   }
@@ -179,7 +179,7 @@ test_that("morie_datasets_ontario_ckan_by_key honours resource_id override on lo
       expect_equal(resource_id, "live-id-for-d06")
       data.frame(Year = 2024L, Alert_Type = "LIVE")
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_ontario_ckan_by_key(
     "otis_d06_cause_by_alert",
     offline = FALSE, resource_id = "live-id-for-d06")

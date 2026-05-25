@@ -18,7 +18,7 @@ test_that("morie_load_dataset reads from the built-in database tier", {
   DBI::dbDisconnect(con)
   testthat::local_mocked_bindings(
     morie_builtin_db = function() bdb,
-    .package = "morie"
+    .package = "rmorie"
   )
   d <- morie_load_dataset("ocp21", db_path = tempfile(fileext = ".db"))
   expect_s3_class(d, "data.frame")
@@ -30,7 +30,7 @@ test_that("morie_load_dataset ingests csv and rds local files", {
   # an empty built-in DB so the local-file tier is reached
   testthat::local_mocked_bindings(
     morie_builtin_db = function() tempfile(fileext = ".db"),
-    .package = "morie"
+    .package = "rmorie"
   )
   wd <- tempfile("ld-")
   dir.create(wd)

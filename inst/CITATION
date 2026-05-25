@@ -1,5 +1,5 @@
 citHeader(
-  "To cite morie in publications, please cite the language-specific ",
+  "To cite rmorie in publications, please cite the language-specific ",
   "software paper and any relevant methodology paper. There are five ",
   "deposits on Zenodo:"
 )
@@ -7,14 +7,14 @@ citHeader(
 # (1) morie R software paper (this package) -- also the R package source on Zenodo.
 bibentry(
   bibtype = "Manual",
-  key     = "ruhela_morie_r_2026",
-  title   = "morie: Multi-domain Open Research and Inferential Estimation in R",
+  key     = "ruhela_rmorie_r_2026",
+  title   = "rmorie: Multi-domain Open Research and Inferential Estimation in R",
   author  = person("Vansh Singh", "Ruhela",
                    comment = c(ORCID = "0009-0004-1750-3592")),
   year    = "2026",
   note    = paste("R package version", meta$Version),
   doi     = "10.5281/zenodo.20111233",
-  url     = "https://github.com/hadesllm/morie"
+  url     = "https://github.com/rootcoder007/rmorie"
 )
 
 # (2) morie Python software paper -- Python implementation, same toolkit.

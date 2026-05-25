@@ -58,10 +58,10 @@ test_that("morie_tps_list_datasets returns a tidy 3-column data.frame", {
 })
 
 test_that(".morie_tps_canonical is case-insensitive and errors on bogus names", {
-  expect_identical(morie:::.morie_tps_canonical("assault"),  "Assault")
-  expect_identical(morie:::.morie_tps_canonical("ASSAULT"),  "Assault")
-  expect_identical(morie:::.morie_tps_canonical("Assault"),  "Assault")
-  expect_error(morie:::.morie_tps_canonical("nonsense"),
+  expect_identical(rmorie:::.morie_tps_canonical("assault"),  "Assault")
+  expect_identical(rmorie:::.morie_tps_canonical("ASSAULT"),  "Assault")
+  expect_identical(rmorie:::.morie_tps_canonical("Assault"),  "Assault")
+  expect_error(rmorie:::.morie_tps_canonical("nonsense"),
                "unknown TPS dataset")
 })
 

@@ -72,18 +72,18 @@ test_that("unfdl converges on a small matrix", {
 
 # ==== entheo_analysis.R ====
 test_that("beautiful_loop_metric returns NA shell when EEG/fMRI missing", {
-  res <- morie:::beautiful_loop_metric(eeg = NULL, fmri = NULL)
+  res <- rmorie:::beautiful_loop_metric(eeg = NULL, fmri = NULL)
   expect_true(is.na(res$score_dmt))
   expect_true(is.na(res$score_pcb))
 })
 
 test_that("san_score returns NA shell when EEG/fMRI missing", {
-  res <- morie:::san_score(eeg = NULL, fmri = NULL)
+  res <- rmorie:::san_score(eeg = NULL, fmri = NULL)
   expect_true(is.na(res$score_dmt))
 })
 
 test_that(".entheo_align handles empty inputs", {
-  al <- morie:::.entheo_align(numeric(0), numeric(0))
+  al <- rmorie:::.entheo_align(numeric(0), numeric(0))
   expect_length(al$e, 0)
   expect_length(al$f, 0)
 })
@@ -125,24 +125,24 @@ test_that("morie_verify_statistical_output handles missing file", {
 
 # ==== study_core.R ====
 test_that(".safe_divide returns NA when denominator is 0 or NA", {
-  expect_true(is.na(morie:::.safe_divide(1, 0)))
-  expect_true(is.na(morie:::.safe_divide(1, NA_real_)))
-  expect_equal(morie:::.safe_divide(6, 2), 3)
+  expect_true(is.na(rmorie:::.safe_divide(1, 0)))
+  expect_true(is.na(rmorie:::.safe_divide(1, NA_real_)))
+  expect_equal(rmorie:::.safe_divide(6, 2), 3)
 })
 
 test_that(".clip_exp saturates at +/-700", {
-  expect_true(is.finite(morie:::.clip_exp(1e6)))
-  expect_gt(morie:::.clip_exp(-1e6), 0)
+  expect_true(is.finite(rmorie:::.clip_exp(1e6)))
+  expect_gt(rmorie:::.clip_exp(-1e6), 0)
 })
 
 # ==== workflow.R ====
 test_that("validate_workflow_map errors on bad shapes", {
   expect_error(
-    morie:::validate_workflow_map(list(a = "x")),
+    rmorie:::validate_workflow_map(list(a = "x")),
     "must be a named character vector"
   )
   expect_error(
-    morie:::validate_workflow_map(c("x", "y")),
+    rmorie:::validate_workflow_map(c("x", "y")),
     "must be a named character vector"
   )
 })

@@ -13,9 +13,9 @@
 # Both delegate to the package fns.
 
 make_synthetic_otis <- function(id, n = 200L, seed = 1L) {
-  morie::morie_synth_otis(id, n = n, seed = seed)
+  rmorie::morie_synth_otis(id, n = n, seed = seed)
 }
 
 make_synthetic_otis_datasets_complete <- function(n = 80L, seed = 2L) {
-  morie::morie_synth_otis_all(n = n, seed = seed)
+  rmorie::morie_synth_otis_all(n = n, seed = seed)
 }

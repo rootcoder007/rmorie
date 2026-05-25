@@ -20,7 +20,7 @@ test_that("morie_datasets_arcgis_item_metadata returns a 1-row data.frame with t
            tags = list("Toronto", "Zoning", "Neighbourhoods"),
            snippet = "Summary of the Zones of Toronto Neighbourhoods")
     },
-    .package = "morie")
+    .package = "rmorie")
   m <- morie_datasets_arcgis_item_metadata(
     "af06159170914808983959df6163fc86")
   expect_s3_class(m, "data.frame")
@@ -61,7 +61,7 @@ test_that("morie_datasets_arcgis_item_by_id(format='json') resolves item -> Feat
         list(attributes = list(id = 1L, name = "A")),
         list(attributes = list(id = 2L, name = "B"))))
     },
-    .package = "morie")
+    .package = "rmorie")
   df <- morie_datasets_arcgis_item_by_id(
     "af06159170914808983959df6163fc86",
     format = "json")
@@ -84,7 +84,7 @@ test_that("morie_datasets_arcgis_item_by_id(format='geojson') hits FeatureServer
       list(type = "FeatureCollection",
            features = list(list(type = "Feature")))
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_arcgis_item_by_id(
     "af06159170914808983959df6163fc86",
     format = "geojson",
@@ -103,7 +103,7 @@ test_that("morie_datasets_arcgis_item_by_id(format='csv') hits hub.arcgis.com do
       expect_equal(query$format, "csv")
       "a,b\n1,X\n2,Y\n"
     },
-    .package = "morie")
+    .package = "rmorie")
   df <- morie_datasets_arcgis_item_by_id(
     "af06159170914808983959df6163fc86",
     format = "csv")
@@ -181,7 +181,7 @@ test_that("morie_datasets_toronto_zoning_per_neighbourhood(offline=FALSE) routes
                     max_features = max_features)
       data.frame(stub = 1L)
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_toronto_zoning_per_neighbourhood(
     offline = FALSE, layer = "neighbourhoods",
     format = "json", max_features = 10L)
@@ -203,7 +203,7 @@ test_that("morie_datasets_toronto_zoning_per_neighbourhood(offline=FALSE, layer=
       seen <<- list(item_id = item_id, layer_idx = layer_idx)
       data.frame()
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_toronto_zoning_per_neighbourhood(
     offline = FALSE, layer = "zoning_stats")
   expect_equal(seen$layer_idx, 1L)

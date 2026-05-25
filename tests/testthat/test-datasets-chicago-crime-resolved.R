@@ -18,7 +18,7 @@ test_that("morie_datasets_chicago_crime(mode='soda2', offline=FALSE) routes thro
       seen <<- list(url = url, where = where)
       data.frame(id = 1L)
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_chicago_crime(year = 2024L, offline = FALSE,
                                   mode = "soda2")
   expect_match(seen$url, "ijzp-q8t2\\.json$")
@@ -39,7 +39,7 @@ test_that("morie_datasets_chicago_crime(mode='soda3', offline=FALSE) routes thro
                     app_token = app_token, max_features = max_features)
       data.frame(id = 1L)
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_chicago_crime(year = 2024L, offline = FALSE,
                                   mode = "soda3",
                                   max_features = 100L,
@@ -58,7 +58,7 @@ test_that("morie_datasets_chicago_crime(mode='soda3') defaults to SELECT * when 
       seen <<- list(soql = soql)
       data.frame()
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_chicago_crime(offline = FALSE, mode = "soda3")
   expect_equal(seen$soql, "SELECT *")
 })
@@ -75,7 +75,7 @@ test_that("morie_datasets_chicago_crime defaults mode='soda2' (backward-compat)"
       soda3_was_called <<- TRUE
       data.frame()
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_chicago_crime(offline = FALSE)
   expect_true(cpp_was_called)
   expect_false(soda3_was_called)
@@ -176,7 +176,7 @@ test_that("morie_datasets_chicago_crime_resolved forwards mode + paginate + app_
       data.frame(beat = "1234", district = "12", ward = "1",
                   community_area = "1", iucr = "110")
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_chicago_crime_resolved(
     offline = FALSE,
     mode = "soda3",

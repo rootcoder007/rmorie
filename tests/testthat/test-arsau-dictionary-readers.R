@@ -11,7 +11,7 @@
 
 test_that("morie_arsau_read_markdown_dictionary parses without crashing", {
   path <- system.file("extdata", "OTIS_DATA_DICTIONARY.md",
-                      package = "morie")
+                      package = "rmorie")
   skip_if(!nzchar(path) || !file.exists(path),
           "bundled OTIS markdown dictionary missing")
   # The OTIS markdown follows a slightly different table convention than

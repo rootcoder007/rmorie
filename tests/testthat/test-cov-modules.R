@@ -121,26 +121,26 @@ test_that("morie_canonicalize_cpads_data runs on raw and already-canonical input
 })
 
 test_that("study_core numeric helpers behave on edge inputs", {
-  expect_true(is.na(morie:::.safe_divide(1, 0)))
-  expect_equal(morie:::.safe_divide(6, 3), 2)
-  ci <- morie:::.wald_ci(0.5, 0.1)
+  expect_true(is.na(rmorie:::.safe_divide(1, 0)))
+  expect_equal(rmorie:::.safe_divide(6, 3), 2)
+  ci <- rmorie:::.wald_ci(0.5, 0.1)
   expect_length(ci, 2L)
-  bci <- morie:::.binary_ci(40, 100)
+  bci <- rmorie:::.binary_ci(40, 100)
   expect_equal(bci$p, 0.4)
-  wbe <- morie:::.weighted_binary_estimate(c(1, 0, 1, 1), c(2, 1, 1, 1))
+  wbe <- rmorie:::.weighted_binary_estimate(c(1, 0, 1, 1), c(2, 1, 1, 1))
   expect_equal(wbe$n, 4L)
-  empty <- morie:::.weighted_binary_estimate(numeric(0), numeric(0))
+  empty <- rmorie:::.weighted_binary_estimate(numeric(0), numeric(0))
   expect_true(is.na(empty$p))
-  expect_true(is.finite(morie:::.clip_exp(5000)))
+  expect_true(is.finite(rmorie:::.clip_exp(5000)))
 })
 
 test_that("data-wrangling and descriptive module internals run", {
   d <- make_canonical_cpads()
-  .cov_run(morie:::.run_data_wrangling_module_internal(
+  .cov_run(rmorie:::.run_data_wrangling_module_internal(
     d,
     cpads_csv = NULL, output_dir = NULL
   ))
-  .cov_run(morie:::.run_descriptive_statistics_module_internal(d))
+  .cov_run(rmorie:::.run_descriptive_statistics_module_internal(d))
 })
 
 test_that("inference / model module internals run", {
@@ -179,14 +179,14 @@ test_that("ebac module internals run", {
 
 test_that("power-design helpers run", {
   nb <- tryCatch(suppressWarnings(
-    morie:::.binary_power_required_n(0.20, 0.35)
+    rmorie:::.binary_power_required_n(0.20, 0.35)
   ), error = function(e) NA)
   expect_true(is.na(nb) || is.finite(nb))
-  .cov_run(morie:::.block_schedule(
+  .cov_run(rmorie:::.block_schedule(
     "heavy_drinking_30d", 200,
     c("Female", "Male")
   ))
-  .cov_run(morie:::.run_power_design_module_extended(
+  .cov_run(rmorie:::.run_power_design_module_extended(
     make_canonical_cpads(n = 1500L, seed = 606L)
   ))
 })
@@ -199,14 +199,14 @@ test_that("morie_run_propensity_ipw_analysis runs", {
 
 test_that("ipw micro-helpers run", {
   wp <- tryCatch(
-    suppressWarnings(morie:::.weighted_prop(
+    suppressWarnings(rmorie:::.weighted_prop(
       c(1, 0, 1),
       c(1, 1, 2)
     )),
     error = function(e) NA
   )
   expect_true(is.na(wp) || is.finite(wp))
-  es <- tryCatch(suppressWarnings(morie:::.ess(c(1, 2, 3, 4))),
+  es <- tryCatch(suppressWarnings(rmorie:::.ess(c(1, 2, 3, 4))),
     error = function(e) NA
   )
   expect_true(is.na(es) || is.finite(es))
@@ -233,7 +233,7 @@ test_that("morie_run_morie_module runs in-memory-safe modules via a raw CSV", {
 test_that("real on-disk CPADS CSV workflow is documented but not run", {
   if (FALSE) {
     real <- morie_load_cpads_data()
-    morie_run_morie_modules(cpads_csv = morie:::.cpads_default_csv())
+    morie_run_morie_modules(cpads_csv = rmorie:::.cpads_default_csv())
   }
   expect_true(TRUE)
 })

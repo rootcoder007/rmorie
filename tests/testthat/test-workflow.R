@@ -1,4 +1,4 @@
-library(morie)
+library(rmorie)
 
 test_that("morie_run_pipeline supports custom workflow map", {
   root <- file.path(tempdir(), paste0("morie-workflow-", as.integer(runif(1, 1, 1e8))))

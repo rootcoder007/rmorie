@@ -38,7 +38,7 @@ C((h, u)) = (sill - nugget) * exp(-h/range_s) * exp(-|u|/range_t)
 }
 \examples{
 # See the package vignettes for usage examples:
-#   vignette(package = "morie")
+#   vignette(package = "rmorie")
 }
 \references{
 Schabenberger & Gotway (2005), Ch 8.

@@ -26,7 +26,7 @@ Uses the formula from Hsieh et al. (1998):
 }
 \examples{
 # See the package vignettes for usage examples:
-#   vignette(package = "morie")
+#   vignette(package = "rmorie")
 }
 \references{
 Hsieh FY, Bloch DA, Larsen MD (1998). A simple method of sample size

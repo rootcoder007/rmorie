@@ -10,7 +10,7 @@
 # Usage:  Rscript tools/manual_examples.R [--apply]
 
 suppressMessages({
-  library(morie)
+  library(rmorie)
   library(callr)
 })
 
@@ -182,7 +182,7 @@ for (i in seq_along(EX)) {
   ok <- tryCatch({
     callr::r(
       function(src) {
-        suppressMessages(library(morie)); set.seed(1)
+        suppressMessages(library(rmorie)); set.seed(1)
         eval(parse(text = src), envir = new.env())
         TRUE
       },
@@ -224,7 +224,7 @@ if (APPLY) {
     src <- readLines(fp, warn = FALSE)
     # Find the `#' # See the package vignettes` line whose NEXT function
     # definition matches our fn. Replace it (and the 2nd boilerplate line
-    # `#'   vignette(package = "morie")`) with the crafted example lines.
+    # `#'   vignette(package = "rmorie")`) with the crafted example lines.
     for (i in seq_along(src)) {
       if (grepl("# See the package vignettes for usage", src[i], fixed = TRUE)) {
         # find next function def

@@ -2,127 +2,127 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 morie_crypto_liboqs_available <- function() {
-    .Call(`_morie_morie_crypto_liboqs_available`)
+    .Call(`_rmorie_morie_crypto_liboqs_available`)
 }
 
 morie_crypto_liboqs_version <- function() {
-    .Call(`_morie_morie_crypto_liboqs_version`)
+    .Call(`_rmorie_morie_crypto_liboqs_version`)
 }
 
 morie_crypto_mlkem768_keygen <- function() {
-    .Call(`_morie_morie_crypto_mlkem768_keygen`)
+    .Call(`_rmorie_morie_crypto_mlkem768_keygen`)
 }
 
 morie_crypto_mlkem768_encaps <- function(pk_sxp) {
-    .Call(`_morie_morie_crypto_mlkem768_encaps`, pk_sxp)
+    .Call(`_rmorie_morie_crypto_mlkem768_encaps`, pk_sxp)
 }
 
 morie_crypto_mlkem768_decaps <- function(sk_sxp, ct_sxp) {
-    .Call(`_morie_morie_crypto_mlkem768_decaps`, sk_sxp, ct_sxp)
+    .Call(`_rmorie_morie_crypto_mlkem768_decaps`, sk_sxp, ct_sxp)
 }
 
 morie_crypto_mldsa65_keygen <- function() {
-    .Call(`_morie_morie_crypto_mldsa65_keygen`)
+    .Call(`_rmorie_morie_crypto_mldsa65_keygen`)
 }
 
 morie_crypto_mldsa65_sign <- function(sk_sxp, message_sxp) {
-    .Call(`_morie_morie_crypto_mldsa65_sign`, sk_sxp, message_sxp)
+    .Call(`_rmorie_morie_crypto_mldsa65_sign`, sk_sxp, message_sxp)
 }
 
 morie_crypto_mldsa65_verify <- function(pk_sxp, message_sxp, signature_sxp) {
-    .Call(`_morie_morie_crypto_mldsa65_verify`, pk_sxp, message_sxp, signature_sxp)
+    .Call(`_rmorie_morie_crypto_mldsa65_verify`, pk_sxp, message_sxp, signature_sxp)
 }
 
 morie_crypto_sodium_available <- function() {
-    .Call(`_morie_morie_crypto_sodium_available`)
+    .Call(`_rmorie_morie_crypto_sodium_available`)
 }
 
 morie_crypto_sodium_version <- function() {
-    .Call(`_morie_morie_crypto_sodium_version`)
+    .Call(`_rmorie_morie_crypto_sodium_version`)
 }
 
 morie_crypto_chacha20poly1305_encrypt <- function(key_sxp, nonce_sxp, plaintext_sxp, aad_sxp) {
-    .Call(`_morie_morie_crypto_chacha20poly1305_encrypt`, key_sxp, nonce_sxp, plaintext_sxp, aad_sxp)
+    .Call(`_rmorie_morie_crypto_chacha20poly1305_encrypt`, key_sxp, nonce_sxp, plaintext_sxp, aad_sxp)
 }
 
 morie_crypto_chacha20poly1305_decrypt <- function(key_sxp, nonce_sxp, ct_with_tag_sxp, aad_sxp) {
-    .Call(`_morie_morie_crypto_chacha20poly1305_decrypt`, key_sxp, nonce_sxp, ct_with_tag_sxp, aad_sxp)
+    .Call(`_rmorie_morie_crypto_chacha20poly1305_decrypt`, key_sxp, nonce_sxp, ct_with_tag_sxp, aad_sxp)
 }
 
 morie_crypto_hkdf_sha256 <- function(ikm_sxp, length_sxp, salt_sxp, info_sxp) {
-    .Call(`_morie_morie_crypto_hkdf_sha256`, ikm_sxp, length_sxp, salt_sxp, info_sxp)
+    .Call(`_rmorie_morie_crypto_hkdf_sha256`, ikm_sxp, length_sxp, salt_sxp, info_sxp)
 }
 
 morie_crypto_random_bytes <- function(n) {
-    .Call(`_morie_morie_crypto_random_bytes`, n)
+    .Call(`_rmorie_morie_crypto_random_bytes`, n)
 }
 
 morie_dsp_lms_cpp <- function(x, d, order, mu) {
-    .Call(`_morie_morie_dsp_lms_cpp`, x, d, order, mu)
+    .Call(`_rmorie_morie_dsp_lms_cpp`, x, d, order, mu)
 }
 
 morie_dsp_nlms_cpp <- function(x, d, order, mu, eps) {
-    .Call(`_morie_morie_dsp_nlms_cpp`, x, d, order, mu, eps)
+    .Call(`_rmorie_morie_dsp_nlms_cpp`, x, d, order, mu, eps)
 }
 
 morie_dsp_rls_cpp <- function(x, d, order, lam, delta) {
-    .Call(`_morie_morie_dsp_rls_cpp`, x, d, order, lam, delta)
+    .Call(`_rmorie_morie_dsp_rls_cpp`, x, d, order, lam, delta)
 }
 
 morie_dsp_cross_correlation_cpp <- function(x, y, max_lag) {
-    .Call(`_morie_morie_dsp_cross_correlation_cpp`, x, y, max_lag)
+    .Call(`_rmorie_morie_dsp_cross_correlation_cpp`, x, y, max_lag)
 }
 
 morie_dsp_median_filter_cpp <- function(x, kernel_size) {
-    .Call(`_morie_morie_dsp_median_filter_cpp`, x, kernel_size)
+    .Call(`_rmorie_morie_dsp_median_filter_cpp`, x, kernel_size)
 }
 
 morie_normal_pdf_cpp <- function(x, mean, sd) {
-    .Call(`_morie_morie_normal_pdf_cpp`, x, mean, sd)
+    .Call(`_rmorie_morie_normal_pdf_cpp`, x, mean, sd)
 }
 
 morie_mean_cpp <- function(x) {
-    .Call(`_morie_morie_mean_cpp`, x)
+    .Call(`_rmorie_morie_mean_cpp`, x)
 }
 
 morie_var_cpp <- function(x, ddof = 1L) {
-    .Call(`_morie_morie_var_cpp`, x, ddof)
+    .Call(`_rmorie_morie_var_cpp`, x, ddof)
 }
 
 morie_cor_pearson_cpp <- function(x, y) {
-    .Call(`_morie_morie_cor_pearson_cpp`, x, y)
+    .Call(`_rmorie_morie_cor_pearson_cpp`, x, y)
 }
 
 morie_hawkes_ll_exp_const_cpp <- function(t, T_horizon, a0, eta, beta) {
-    .Call(`_morie_morie_hawkes_ll_exp_const_cpp`, t, T_horizon, a0, eta, beta)
+    .Call(`_rmorie_morie_hawkes_ll_exp_const_cpp`, t, T_horizon, a0, eta, beta)
 }
 
 morie_hawkes_ll_weibull_const_cpp <- function(t, T_horizon, a0, eta, alpha, lam) {
-    .Call(`_morie_morie_hawkes_ll_weibull_const_cpp`, t, T_horizon, a0, eta, alpha, lam)
+    .Call(`_rmorie_morie_hawkes_ll_weibull_const_cpp`, t, T_horizon, a0, eta, alpha, lam)
 }
 
 morie_hawkes_ll_lomax_const_cpp <- function(t, T_horizon, a0, eta, alpha, c) {
-    .Call(`_morie_morie_hawkes_ll_lomax_const_cpp`, t, T_horizon, a0, eta, alpha, c)
+    .Call(`_rmorie_morie_hawkes_ll_lomax_const_cpp`, t, T_horizon, a0, eta, alpha, c)
 }
 
 morie_hawkes_ll_gamma_const_cpp <- function(t, T_horizon, a0, eta, alpha, beta) {
-    .Call(`_morie_morie_hawkes_ll_gamma_const_cpp`, t, T_horizon, a0, eta, alpha, beta)
+    .Call(`_rmorie_morie_hawkes_ll_gamma_const_cpp`, t, T_horizon, a0, eta, alpha, beta)
 }
 
 morie_hawkes_kernel_density_cpp <- function(u, kind, psi) {
-    .Call(`_morie_morie_hawkes_kernel_density_cpp`, u, kind, psi)
+    .Call(`_rmorie_morie_hawkes_kernel_density_cpp`, u, kind, psi)
 }
 
 morie_hawkes_kernel_cdf_cpp <- function(u, kind, psi) {
-    .Call(`_morie_morie_hawkes_kernel_cdf_cpp`, u, kind, psi)
+    .Call(`_rmorie_morie_hawkes_kernel_cdf_cpp`, u, kind, psi)
 }
 
 morie_hawkes_pair_excitation_sum_cpp <- function(t, eta, kind, psi) {
-    .Call(`_morie_morie_hawkes_pair_excitation_sum_cpp`, t, eta, kind, psi)
+    .Call(`_rmorie_morie_hawkes_pair_excitation_sum_cpp`, t, eta, kind, psi)
 }
 
 morie_hawkes_baseline_integral_cpp <- function(T_horizon, alpha, n_grid = 0L) {
-    .Call(`_morie_morie_hawkes_baseline_integral_cpp`, T_horizon, alpha, n_grid)
+    .Call(`_rmorie_morie_hawkes_baseline_integral_cpp`, T_horizon, alpha, n_grid)
 }
 
 #' Synchronous HTTP(S) GET via the shared libcurl backend (C++).
@@ -139,7 +139,7 @@ morie_hawkes_baseline_integral_cpp <- function(T_horizon, alpha, n_grid = 0L) {
 #' @return Length-1 character vector with the response body.
 #' @keywords internal
 .morie_http_get <- function(url, timeout_s = 60L, headers = as.character( c()), user_agent = "", follow_redirects = TRUE) {
-    .Call(`_morie_morie_http_get_`, url, timeout_s, headers, user_agent, follow_redirects)
+    .Call(`_rmorie_morie_http_get_`, url, timeout_s, headers, user_agent, follow_redirects)
 }
 
 #' Binary-safe HTTP(S) GET via libcurl.
@@ -155,7 +155,7 @@ morie_hawkes_baseline_integral_cpp <- function(T_horizon, alpha, n_grid = 0L) {
 #'   empty-string-on-failure contract).
 #' @keywords internal
 .morie_http_get_bytes <- function(url, timeout_s = 60L, headers = as.character( c()), user_agent = "", follow_redirects = TRUE) {
-    .Call(`_morie_morie_http_get_bytes_`, url, timeout_s, headers, user_agent, follow_redirects)
+    .Call(`_rmorie_morie_http_get_bytes_`, url, timeout_s, headers, user_agent, follow_redirects)
 }
 
 #' Synchronous HTTP(S) POST via the shared libcurl backend (C++).
@@ -173,7 +173,7 @@ morie_hawkes_baseline_integral_cpp <- function(T_horizon, alpha, n_grid = 0L) {
 #'   string on libcurl-level transport failure.
 #' @keywords internal
 .morie_http_post <- function(url, body, content_type = "application/json", timeout_s = 60L, headers = as.character( c()), user_agent = "", follow_redirects = TRUE) {
-    .Call(`_morie_morie_http_post_`, url, body, content_type, timeout_s, headers, user_agent, follow_redirects)
+    .Call(`_rmorie_morie_http_post_`, url, body, content_type, timeout_s, headers, user_agent, follow_redirects)
 }
 
 #' Status-aware HTTP(S) GET via the libcurl backend (C++).
@@ -190,7 +190,7 @@ morie_hawkes_baseline_integral_cpp <- function(T_horizon, alpha, n_grid = 0L) {
 #'   level transport failure).
 #' @keywords internal
 .morie_http_get_with_status <- function(url, timeout_s = 60L, headers = as.character( c()), user_agent = "", follow_redirects = TRUE) {
-    .Call(`_morie_morie_http_get_with_status_`, url, timeout_s, headers, user_agent, follow_redirects)
+    .Call(`_rmorie_morie_http_get_with_status_`, url, timeout_s, headers, user_agent, follow_redirects)
 }
 
 #' Status-aware HTTP(S) POST via the libcurl backend (C++).
@@ -202,54 +202,54 @@ morie_hawkes_baseline_integral_cpp <- function(T_horizon, alpha, n_grid = 0L) {
 #' @return Named list with elements `body` + `status_code`.
 #' @keywords internal
 .morie_http_post_with_status <- function(url, body, content_type = "application/json", timeout_s = 60L, headers = as.character( c()), user_agent = "", follow_redirects = TRUE) {
-    .Call(`_morie_morie_http_post_with_status_`, url, body, content_type, timeout_s, headers, user_agent, follow_redirects)
+    .Call(`_rmorie_morie_http_post_with_status_`, url, body, content_type, timeout_s, headers, user_agent, follow_redirects)
 }
 
 #' libcurl version string the morie C++ backend was built against.
 #' @return Length-1 character vector.
 #' @keywords internal
 .morie_http_curl_version <- function() {
-    .Call(`_morie_morie_http_curl_version_`)
+    .Call(`_rmorie_morie_http_curl_version_`)
 }
 
 morie_matching_mahalanobis_pairs_cpp <- function(X_t, X_c, S_inv) {
-    .Call(`_morie_morie_matching_mahalanobis_pairs_cpp`, X_t, X_c, S_inv)
+    .Call(`_rmorie_morie_matching_mahalanobis_pairs_cpp`, X_t, X_c, S_inv)
 }
 
 morie_matching_euclidean_pairs_cpp <- function(X_t, X_c) {
-    .Call(`_morie_morie_matching_euclidean_pairs_cpp`, X_t, X_c)
+    .Call(`_rmorie_morie_matching_euclidean_pairs_cpp`, X_t, X_c)
 }
 
 morie_matching_nn_select_cpp <- function(D, with_replacement, caliper, n_neighbors) {
-    .Call(`_morie_morie_matching_nn_select_cpp`, D, with_replacement, caliper, n_neighbors)
+    .Call(`_rmorie_morie_matching_nn_select_cpp`, D, with_replacement, caliper, n_neighbors)
 }
 
 morie_matching_cem_strata_cpp <- function(X_binned) {
-    .Call(`_morie_morie_matching_cem_strata_cpp`, X_binned)
+    .Call(`_rmorie_morie_matching_cem_strata_cpp`, X_binned)
 }
 
 morie_matching_abadie_imbens_kernel_cpp <- function(y, t, treated_pos, control_pos) {
-    .Call(`_morie_morie_matching_abadie_imbens_kernel_cpp`, y, t, treated_pos, control_pos)
+    .Call(`_rmorie_morie_matching_abadie_imbens_kernel_cpp`, y, t, treated_pos, control_pos)
 }
 
 morie_spatial_nominate_iterate_cpp <- function(votes, X, w, nv, mid, beta, max_iter) {
-    .Call(`_morie_morie_spatial_nominate_iterate_cpp`, votes, X, w, nv, mid, beta, max_iter)
+    .Call(`_rmorie_morie_spatial_nominate_iterate_cpp`, votes, X, w, nv, mid, beta, max_iter)
 }
 
 morie_spatial_emirt_theta_update_cpp <- function(theta, a, d, votes) {
-    .Call(`_morie_morie_spatial_emirt_theta_update_cpp`, theta, a, d, votes)
+    .Call(`_rmorie_morie_spatial_emirt_theta_update_cpp`, theta, a, d, votes)
 }
 
 morie_spatial_smacof_step_cpp <- function(X, D, W) {
-    .Call(`_morie_morie_spatial_smacof_step_cpp`, X, D, W)
+    .Call(`_rmorie_morie_spatial_smacof_step_cpp`, X, D, W)
 }
 
 morie_spatial_classical_mds_cpp <- function(D, n_dims) {
-    .Call(`_morie_morie_spatial_classical_mds_cpp`, D, n_dims)
+    .Call(`_rmorie_morie_spatial_classical_mds_cpp`, D, n_dims)
 }
 
 morie_spatial_wordfish_omega_update_cpp <- function(dtm, psi, alpha, beta, omega) {
-    .Call(`_morie_morie_spatial_wordfish_omega_update_cpp`, dtm, psi, alpha, beta, omega)
+    .Call(`_rmorie_morie_spatial_wordfish_omega_update_cpp`, dtm, psi, alpha, beta, omega)
 }
 
 #' Fetch a single URL over HTTP(S) via libcurl
@@ -262,14 +262,14 @@ morie_spatial_wordfish_omega_update_cpp <- function(dtm, psi, alpha, beta, omega
 #' @return The response body as a length-1 character vector.
 #' @keywords internal
 .siu_http_get <- function(url, timeout_s = 60L) {
-    .Call(`_morie_siu_http_get`, url, timeout_s)
+    .Call(`_rmorie_siu_http_get`, url, timeout_s)
 }
 
 #' libcurl version string morie was built against
 #' @return A length-1 character vector.
 #' @keywords internal
 .siu_curl_version <- function() {
-    .Call(`_morie_siu_curl_version`)
+    .Call(`_rmorie_siu_curl_version`)
 }
 
 #' Fetch many URLs concurrently via libcurl, with rate-limiting + retry
@@ -298,7 +298,7 @@ morie_spatial_wordfish_omega_update_cpp <- function(dtm, psi, alpha, beta, omega
 #' @return A character vector of response bodies, parallel to \code{urls}.
 #' @keywords internal
 .siu_http_get_many <- function(urls, concurrency = 4L, timeout_s = 60L, rate_rps = 4.0, max_retries = 3L) {
-    .Call(`_morie_siu_http_get_many`, urls, concurrency, timeout_s, rate_rps, max_retries)
+    .Call(`_rmorie_siu_http_get_many`, urls, concurrency, timeout_s, rate_rps, max_retries)
 }
 
 #' Fetch many URLs and return body + http_code + attempts
@@ -314,7 +314,7 @@ morie_spatial_wordfish_omega_update_cpp <- function(dtm, psi, alpha, beta, omega
 #'   \code{http_code} (integer), \code{attempts} (integer).
 #' @keywords internal
 .siu_http_get_many_with_status <- function(urls, concurrency = 4L, timeout_s = 60L, rate_rps = 4.0, max_retries = 3L) {
-    .Call(`_morie_siu_http_get_many_with_status`, urls, concurrency, timeout_s, rate_rps, max_retries)
+    .Call(`_rmorie_siu_http_get_many_with_status`, urls, concurrency, timeout_s, rate_rps, max_retries)
 }
 
 #' Parse one SIU director's-report HTML page into the 64-column schema
@@ -326,7 +326,7 @@ morie_spatial_wordfish_omega_update_cpp <- function(dtm, psi, alpha, beta, omega
 #'   report-derived fields are populated, news fields left empty.
 #' @keywords internal
 .siu_parse_report <- function(html, drid, url) {
-    .Call(`_morie_siu_parse_report`, html, drid, url)
+    .Call(`_rmorie_siu_parse_report`, html, drid, url)
 }
 
 #' Parse one SIU news-release HTML page
@@ -339,6 +339,6 @@ morie_spatial_wordfish_omega_update_cpp <- function(dtm, psi, alpha, beta, omega
 #'   news_release_summary.
 #' @keywords internal
 .siu_parse_news <- function(html, nrid, url) {
-    .Call(`_morie_siu_parse_news`, html, nrid, url)
+    .Call(`_rmorie_siu_parse_news`, html, nrid, url)
 }
 

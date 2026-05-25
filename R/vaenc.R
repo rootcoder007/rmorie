@@ -20,7 +20,7 @@
 #' @references Kingma & Welling (2014), ICLR.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_vaenc_vae_elbo <- function(x, x_recon, mu, log_var, reduction = "mean") {
   x <- as.array(x)

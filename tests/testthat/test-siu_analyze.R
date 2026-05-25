@@ -279,25 +279,25 @@ test_that("all_analyses optionally writes per-surface .txt dumps", {
 
 test_that(".siu_an_truthy counts logicals", {
   set.seed(1)
-  expect_equal(morie:::.siu_an_truthy(c(TRUE, FALSE, TRUE, NA)), 2L)
-  expect_equal(morie:::.siu_an_truthy(c("yes", "no", "1", "True")), 3L)
+  expect_equal(rmorie:::.siu_an_truthy(c(TRUE, FALSE, TRUE, NA)), 2L)
+  expect_equal(rmorie:::.siu_an_truthy(c("yes", "no", "1", "True")), 3L)
 })
 
 test_that(".siu_an_falsy counts logicals", {
   set.seed(1)
-  expect_equal(morie:::.siu_an_falsy(c(TRUE, FALSE, FALSE, NA)), 2L)
-  expect_equal(morie:::.siu_an_falsy(c("yes", "no", "0", "False")), 3L)
+  expect_equal(rmorie:::.siu_an_falsy(c(TRUE, FALSE, FALSE, NA)), 2L)
+  expect_equal(rmorie:::.siu_an_falsy(c("yes", "no", "0", "False")), 3L)
 })
 
 test_that(".siu_an_load returns the df when passed a data.frame", {
   set.seed(1)
   d <- data.frame(a = 1:3)
-  expect_identical(morie:::.siu_an_load(d), d)
+  expect_identical(rmorie:::.siu_an_load(d), d)
 })
 
 test_that(".siu_an_load errors when path missing", {
   set.seed(1)
-  expect_error(morie:::.siu_an_load(tempfile("does_not_exist_")),
+  expect_error(rmorie:::.siu_an_load(tempfile("does_not_exist_")),
                "not found")
 })
 
@@ -305,20 +305,20 @@ test_that(".siu_an_load reads CSV from disk", {
   set.seed(1)
   csv <- tempfile("siu_", fileext = ".csv")
   utils::write.csv(.fake_siu_df(), csv, row.names = FALSE)
-  d <- morie:::.siu_an_load(csv)
+  d <- rmorie:::.siu_an_load(csv)
   expect_s3_class(d, "data.frame")
   expect_true(nrow(d) > 0L)
 })
 
 test_that(".siu_an_interval returns n/a on all-NA dates", {
   set.seed(1)
-  r <- morie:::.siu_an_interval("Test", rep(NA, 3), rep(NA, 3))
+  r <- rmorie:::.siu_an_interval("Test", rep(NA, 3), rep(NA, 3))
   expect_equal(r[[2]], "n/a")
 })
 
 test_that(".siu_an_interval computes mean/median of day-deltas", {
   set.seed(1)
-  r <- morie:::.siu_an_interval("test",
+  r <- rmorie:::.siu_an_interval("test",
                                 c("2024-01-01", "2024-01-05"),
                                 c("2024-01-02", "2024-01-10"))
   expect_equal(r[[2]], 2L)

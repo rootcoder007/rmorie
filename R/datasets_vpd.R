@@ -40,7 +40,7 @@
 #' @export
 morie_datasets_vpd_legal_disclaimer <- function() {
   path <- system.file("extdata", "vpd_legal_disclaimer.txt",
-                      package = "morie")
+                      package = "rmorie")
   if (!nzchar(path))
     stop("bundled VPD legal disclaimer missing", call. = FALSE)
   readLines(path, warn = FALSE)
@@ -184,7 +184,7 @@ morie_datasets_vpd_crime <- function(offline = TRUE,
     df <- utils::read.csv(csv_path, stringsAsFactors = FALSE)
   } else if (offline) {
     path <- system.file("extdata", "vpd_crime_sample.csv",
-                        package = "morie")
+                        package = "rmorie")
     if (!nzchar(path))
       stop("bundled VPD crime sample missing", call. = FALSE)
     df <- utils::read.csv(path, stringsAsFactors = FALSE)
