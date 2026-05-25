@@ -4,20 +4,16 @@
 # Pages at https://rootcoder007.github.io/rmorie/.
 #
 # Triggers:
-#   * push to main         -> build + deploy
-#   * v*.*.* tag push      -> build + deploy (versioned doc snapshot)
-#   * workflow_dispatch    -> ad-hoc rebuild
+#   * workflow_call from build.yml (every push to main, tag, PR)
+#   * workflow_dispatch -- ad-hoc rebuild
 #
-# Standalone workflow (not gated by the build DAG) because docs are
-# always safe to refresh -- a stale doc site is worse than a slightly
-# behind one. The site reflects whatever's in main at the moment.
+# Folded into build.yml as a DAG leaf 2026-05-25 so each push shows
+# exactly ONE Actions entry instead of two parallel runs.
 
 name: pkgdown
 
 on:
-  push:
-    branches: ["main"]
-    tags: ["v*.*.*"]
+  workflow_call:
   workflow_dispatch:
 
 permissions:
