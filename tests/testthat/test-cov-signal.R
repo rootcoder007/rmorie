@@ -24,6 +24,8 @@ test_that("morie_hurst_r estimates the Hurst exponent via pracma", {
 })
 
 test_that(".morie_py_call builds the bridge command and shells out", {
+  skip_if(!exists(".morie_py_call", envir = asNamespace("rmorie"), inherits = FALSE),
+          "rmorie slim build: no Python bridge")
   captured <- NULL
   testthat::local_mocked_bindings(
     system2 = function(command, args, ...) {
@@ -48,6 +50,8 @@ test_that("hfd returns a structured higuchi_fd list on a deterministic input", {
 })
 
 test_that("filters fall back to the Python bridge without the signal pkg", {
+  skip_if(!exists(".morie_py_call", envir = asNamespace("rmorie"), inherits = FALSE),
+          "rmorie slim build: no Python bridge")
   testthat::local_mocked_bindings(
     requireNamespace = function(package, ...) {
       if (identical(package, "signal")) FALSE else TRUE
@@ -66,6 +70,8 @@ test_that("filters fall back to the Python bridge without the signal pkg", {
 })
 
 test_that("morie_hurst_r falls back to the Python bridge without pracma", {
+  skip_if(!exists(".morie_py_call", envir = asNamespace("rmorie"), inherits = FALSE),
+          "rmorie slim build: no Python bridge")
   testthat::local_mocked_bindings(
     requireNamespace = function(package, ...) {
       if (identical(package, "pracma")) FALSE else TRUE

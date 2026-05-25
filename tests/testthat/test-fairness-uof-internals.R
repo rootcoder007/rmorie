@@ -70,17 +70,23 @@ test_that(".sim_result builds a morie_fairness_result list", {
 # ========================================================== fairness_gan.R
 
 test_that(".fairness_result builds a morie_fairness_result list", {
+  skip_if(!exists(".fairness_result", envir = asNamespace("rmorie"), inherits = FALSE),
+          "rmorie slim build: no fairness_gan internal helpers")
   out <- rmorie:::.fairness_result(title = "GAN", call = "demo")
   expect_type(out, "list")
   expect_s3_class(out, "morie_fairness_result")
 })
 
 test_that(".fairness_backend returns a backend list or NULL", {
+  skip_if(!exists(".fairness_result", envir = asNamespace("rmorie"), inherits = FALSE),
+          "rmorie slim build: no fairness_gan internal helpers")
   out <- rmorie:::.fairness_backend()
   expect_true(is.null(out) || is.list(out))
 })
 
 test_that(".fairness_no_backend_result builds a 'no backend' result", {
+  skip_if(!exists(".fairness_result", envir = asNamespace("rmorie"), inherits = FALSE),
+          "rmorie slim build: no fairness_gan internal helpers")
   out <- rmorie:::.fairness_no_backend_result(
     title = "GAN", call = "demo",
     note = "No backend available")
@@ -89,6 +95,8 @@ test_that(".fairness_no_backend_result builds a 'no backend' result", {
 })
 
 test_that(".fairness_he_init builds He-init MLP params with correct shapes", {
+  skip_if(!exists(".fairness_result", envir = asNamespace("rmorie"), inherits = FALSE),
+          "rmorie slim build: no fairness_gan internal helpers")
   set.seed(1L)
   params <- rmorie:::.fairness_he_init(c(4L, 8L, 2L))
   expect_length(params, 2L)
@@ -99,6 +107,8 @@ test_that(".fairness_he_init builds He-init MLP params with correct shapes", {
 })
 
 test_that(".fairness_mlp_forward runs a He-init MLP forward pass", {
+  skip_if(!exists(".fairness_result", envir = asNamespace("rmorie"), inherits = FALSE),
+          "rmorie slim build: no fairness_gan internal helpers")
   set.seed(2L)
   params <- rmorie:::.fairness_he_init(c(3L, 5L, 1L))
   x <- matrix(stats::rnorm(15), 5L, 3L)

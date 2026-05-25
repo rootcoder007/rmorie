@@ -75,7 +75,9 @@ test_that(".morie_did_have_* helpers return a logical", {
   expect_type(rmorie:::.morie_did_have_did(),    "logical")
   expect_type(rmorie:::.morie_did_have_bacondecomp(), "logical")
   expect_type(rmorie:::.morie_did_have_synthdid(), "logical")
-  expect_type(rmorie:::.morie_did_have_fwildboot(), "logical")
+  if (exists(".morie_did_have_fwildboot", envir = asNamespace("rmorie"), inherits = FALSE)) {
+    expect_type(rmorie:::.morie_did_have_fwildboot(), "logical")
+  }
   expect_type(rmorie:::.morie_did_have_sandwich(), "logical")
 })
 

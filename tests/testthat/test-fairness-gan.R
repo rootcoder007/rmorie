@@ -8,6 +8,9 @@ set.seed(1)
 # ---------------------------------------------------------------------------
 
 test_that("morie_fairness_spatial_gan returns rich result", {
+  skip_if(!exists("morie_fairness_spatial_gan", envir = asNamespace("rmorie")) ||
+          !exists("morie_fairness_ctgan_debiaser", envir = asNamespace("rmorie")),
+          "rmorie slim build: no torch/Python GAN backend")
   set.seed(1)
   pts <- matrix(rnorm(60), ncol = 2L)
   r <- morie_fairness_spatial_gan(pts, steps = 5L,
@@ -25,12 +28,18 @@ test_that("morie_fairness_spatial_gan returns rich result", {
 })
 
 test_that("morie_fairness_spatial_gan rejects bad shape", {
+  skip_if(!exists("morie_fairness_spatial_gan", envir = asNamespace("rmorie")) ||
+          !exists("morie_fairness_ctgan_debiaser", envir = asNamespace("rmorie")),
+          "rmorie slim build: no torch/Python GAN backend")
   r <- morie_fairness_spatial_gan(matrix(rnorm(9), ncol = 3L), steps = 2L)
   expect_false(isTRUE(r$fitted))
   expect_true(length(r$warnings) >= 1L)
 })
 
 test_that("morie_fairness_spatial_gan rejects too-few rows", {
+  skip_if(!exists("morie_fairness_spatial_gan", envir = asNamespace("rmorie")) ||
+          !exists("morie_fairness_ctgan_debiaser", envir = asNamespace("rmorie")),
+          "rmorie slim build: no torch/Python GAN backend")
   r <- morie_fairness_spatial_gan(matrix(c(1, 2), ncol = 2L), steps = 2L)
   expect_false(isTRUE(r$fitted))
 })
@@ -40,6 +49,9 @@ test_that("morie_fairness_spatial_gan rejects too-few rows", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_fairness_ctgan_debiaser missing column path", {
+  skip_if(!exists("morie_fairness_spatial_gan", envir = asNamespace("rmorie")) ||
+          !exists("morie_fairness_ctgan_debiaser", envir = asNamespace("rmorie")),
+          "rmorie slim build: no torch/Python GAN backend")
   df <- data.frame(group = c("A","B"), outcome = c(1,0),
                    stringsAsFactors = FALSE)
   r <- morie_fairness_ctgan_debiaser(df, outcome_col = "outcome",
@@ -50,6 +62,9 @@ test_that("morie_fairness_ctgan_debiaser missing column path", {
 })
 
 test_that("morie_fairness_ctgan_debiaser empty feature_cols", {
+  skip_if(!exists("morie_fairness_spatial_gan", envir = asNamespace("rmorie")) ||
+          !exists("morie_fairness_ctgan_debiaser", envir = asNamespace("rmorie")),
+          "rmorie slim build: no torch/Python GAN backend")
   df <- data.frame(group = c("A","B"), outcome = c(1,0),
                    stringsAsFactors = FALSE)
   r <- morie_fairness_ctgan_debiaser(df, outcome_col = "outcome",
@@ -59,6 +74,9 @@ test_that("morie_fairness_ctgan_debiaser empty feature_cols", {
 })
 
 test_that("morie_fairness_ctgan_debiaser single group rejected", {
+  skip_if(!exists("morie_fairness_spatial_gan", envir = asNamespace("rmorie")) ||
+          !exists("morie_fairness_ctgan_debiaser", envir = asNamespace("rmorie")),
+          "rmorie slim build: no torch/Python GAN backend")
   df <- data.frame(group = rep("A", 4), outcome = c(1,1,0,0),
                    x1 = rnorm(4), stringsAsFactors = FALSE)
   r <- morie_fairness_ctgan_debiaser(df, "outcome", "x1",
@@ -67,6 +85,9 @@ test_that("morie_fairness_ctgan_debiaser single group rejected", {
 })
 
 test_that("morie_fairness_ctgan_debiaser bad privileged rejected", {
+  skip_if(!exists("morie_fairness_spatial_gan", envir = asNamespace("rmorie")) ||
+          !exists("morie_fairness_ctgan_debiaser", envir = asNamespace("rmorie")),
+          "rmorie slim build: no torch/Python GAN backend")
   set.seed(2)
   df <- data.frame(group = sample(c("A","B"), 30, TRUE),
                    outcome = sample(0:1, 30, TRUE),
@@ -77,6 +98,9 @@ test_that("morie_fairness_ctgan_debiaser bad privileged rejected", {
 })
 
 test_that("morie_fairness_ctgan_debiaser end-to-end", {
+  skip_if(!exists("morie_fairness_spatial_gan", envir = asNamespace("rmorie")) ||
+          !exists("morie_fairness_ctgan_debiaser", envir = asNamespace("rmorie")),
+          "rmorie slim build: no torch/Python GAN backend")
   set.seed(3)
   n <- 60L
   df <- data.frame(

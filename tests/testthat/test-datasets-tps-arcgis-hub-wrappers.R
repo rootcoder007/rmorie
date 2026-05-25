@@ -16,7 +16,7 @@
 # ============================================== count + presence
 
 test_that("3TT adds exactly 60 new TPS-named exports (catalog has 71, minus 11 collisions)", {
-  exports <- ls("package:morie")
+  exports <- ls("package:rmorie")
   tps_exports <- grep("^morie_datasets_tps_", exports, value = TRUE)
   # Pre-3TT had 19 TPS exports. 3TT adds 60.
   expect_gte(length(tps_exports), 79L)
@@ -40,7 +40,7 @@ test_that("each of the 60 emitted wrappers exists and is a function", {
   cat$slug <- vapply(cat$title, slugify, character(1L))
   cat$name <- paste0("morie_datasets_tps_", cat$slug)
   # Count the existing exports.
-  exports <- ls("package:morie")
+  exports <- ls("package:rmorie")
   hits <- vapply(cat$name, function(n) n %in% exports, logical(1L))
   # At least 60 of the 71 catalog entries have a matching new
   # wrapper (the 11 collisions are skipped and the existing
@@ -167,7 +167,7 @@ test_that("dedupe held: pre-3TT TPS exports were not overwritten by the generato
                      "morie_datasets_tps_theft_over",
                      "morie_datasets_tps_mha_apprehensions")
   for (n in pre_3tt_names) {
-    expect_true(exists(n, where = "package:morie"),
+    expect_true(exists(n, where = "package:rmorie"),
                 info = sprintf("pre-3TT export %s missing!", n))
   }
 })
@@ -184,7 +184,7 @@ test_that("the 11 skipped catalog entries' equivalent slugs are NOT in the gener
     "morie_datasets_tps_mental_health_act_apprehensions",
     "morie_datasets_tps_shooting_and_firearm_discharges")
   for (n in shouldnt_exist) {
-    expect_false(exists(n, where = "package:morie"),
+    expect_false(exists(n, where = "package:rmorie"),
                  info = sprintf("collision-skip not honoured: %s exists", n))
   }
 })
