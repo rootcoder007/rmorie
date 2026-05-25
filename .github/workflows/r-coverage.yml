@@ -43,7 +43,7 @@ jobs:
       # Codecov v5 on public repos uses tokenless upload via OIDC; no
       # CODECOV_TOKEN secret needed.
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v6
         with:
           files: coverage.xml
           flags: r-tests
