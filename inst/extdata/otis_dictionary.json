@@ -1,0 +1,1518 @@
+{
+  "a01": [
+    {
+      "var": "EndFiscalYear",
+      "label": "End Fiscal Year",
+      "definition": "The end year of the fiscal year period in which an inmate was identified as being in restrictive confinement",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "UniqueIndividual_ID",
+      "label": "Unique Identifier",
+      "definition": "A random number assigned to an individual who was in restrictive confinement",
+      "data_type": "Text",
+      "data_format": "YYYY-XXXXX-AA",
+      "measurement_level": "Nominal",
+      "data_values": ""
+    },
+    {
+      "var": "Region_AtTimeOfPlacement",
+      "label": "Region At Time Of Placement",
+      "definition": "Region on file at the time of the inmate's placement in restrictive confinement",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Central\nEastern\nNorthern\nToronto\nWestern"
+    },
+    {
+      "var": "Region_MostRecentPlacement",
+      "label": "Region Based On Most Recent Placement",
+      "definition": "Region on file for the inmate's most recent placement in restrictive confinement during the reporting period",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Central\nEastern\nNorthern\nToronto\nWestern"
+    },
+    {
+      "var": "Gender",
+      "label": "Gender",
+      "definition": "Preferred gender identity of the inmate",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Female\nMale"
+    },
+    {
+      "var": "Age_Category",
+      "label": "Age Category",
+      "definition": "Age category of the inmate on April 1 of the reported fiscal year",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "18 to 24\n25 to 49\n50+"
+    },
+    {
+      "var": "MentalHealth_Alert",
+      "label": "Mental Health Alert",
+      "definition": "The presence of a mental health alert on file",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Boolean",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "SuicideRisk_Alert",
+      "label": "Suicide Risk Alert",
+      "definition": "The presence of a suicide risk alert on file",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Boolean",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "SuicideWatch_Alert",
+      "label": "Suicide Watch Alert",
+      "definition": "The presence of a suicide watch alert on file",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Boolean",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "Number_Of_Placements",
+      "label": "Number of Placements",
+      "definition": "Total number number of placements with the same characteristics",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Ratio",
+      "data_values": ""
+    }
+  ],
+  "b01": [
+    {
+      "var": "EndFiscalYear",
+      "label": "End Fiscal Year",
+      "definition": "The end year of the fiscal year period in which an inmate was identified as being in segregation conditions",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "UniqueIndividual_ID",
+      "label": "Unique Identifier",
+      "definition": "A random number assigned to an individual who was in segregation conditions",
+      "data_type": "Text",
+      "data_format": "YYYY-XXXXX-AA",
+      "measurement_level": "Nominal",
+      "data_values": ""
+    },
+    {
+      "var": "Gender",
+      "label": "Gender",
+      "definition": "Preferred gender identity of the inmate",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Female\nMale"
+    },
+    {
+      "var": "Region_AtTimeOfPlacement",
+      "label": "Region At Time Of Placement",
+      "definition": "Region on file at the time of the inmate's placement in segregation conditions",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Central\nEastern\nNorthern\nToronto\nWestern"
+    },
+    {
+      "var": "Region_MostRecentPlacement",
+      "label": "Region Based On Most Recent Placement",
+      "definition": "Region on file for the inmate's most recent placement in segregation conditions during the reporting period",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Central\nEastern\nNorthern\nToronto\nWestern"
+    },
+    {
+      "var": "Age_Category",
+      "label": "Age Category",
+      "definition": "Age category of the inmate on April 1 of the reported fiscal year",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "18 to 24\n25 to 49\n50+"
+    },
+    {
+      "var": "NumberConsecutiveDays_Segregation",
+      "label": "Number of Consecutive Days in Segregation Conditions",
+      "definition": "Duration of the segregation placement in days",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    },
+    {
+      "var": "SegReason_SecurityOfInstitution_SafetyOfOthers",
+      "label": "Segregation Reason - To Protect the Security of Institution or Safety of Others",
+      "definition": "The identified reason for the segregation placement was to protect the security of institution or safety of others",
+      "data_type": "Boolean",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "SegReason_InmateNeedsProtection",
+      "label": "Segregation Reason - Inmate Needs Protection",
+      "definition": "The identified reason for the segregation placement was to that the inmate was in need of protection",
+      "data_type": "Boolean",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "SegReason_InmateNeedsProtection_Medical",
+      "label": "Segregation Reason - Inmate Needs Protection for Medical Reasons",
+      "definition": "The identified reason for the segregation placement was to that the inmate was in need of protection for medical reasons",
+      "data_type": "Boolean",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "SegReason_SecurityOfInstitution_SafetyOfOthers_Medical",
+      "label": "Segregation Reason - To Protect the Security of Institution or Safety of Others for Medical Reasons",
+      "definition": "The identified reason for the segregation placement was to protect the security of institution or safety of others for medical reasons",
+      "data_type": "Boolean",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "SegReason_Disciplinary_Segregation",
+      "label": "Segregation Reason - Disciplinary Segregation",
+      "definition": "The identified reason for the segregation placement was for disciplinary segregation",
+      "data_type": "Boolean",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "SegReason_InmateRefuseSearch_Scan",
+      "label": "Segregation Reason - Inmate Refuses Search or Scan",
+      "definition": "The identified reason for the segregation placement was due to an inmate refusing a search or scan",
+      "data_type": "Boolean",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "MentalHealth_Alert",
+      "label": "Segregation Reason - Other",
+      "definition": "The presence of non-disciplinary segregation placements that were identified through an internal review",
+      "data_type": "Boolean",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Yes\nNo\nN/A\n"
+    },
+    {
+      "var": "SuicideRisk_Alert",
+      "label": "Mental Health Alert",
+      "definition": "The presence of a mental health alert on file",
+      "data_type": "Boolean",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "SuicideWatch_Alert",
+      "label": "Suicide Risk Alert",
+      "definition": "The presence of a suicide risk alert on file",
+      "data_type": "Boolean",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "SegReason_Other",
+      "label": "Suicide Watch Alert",
+      "definition": "The presence of a suicide watch alert on file",
+      "data_type": "Boolean",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "Number_Of_Placements",
+      "label": "Number of Placements",
+      "definition": "Total number number of placements with the same characteristics",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Ratio",
+      "data_values": ""
+    }
+  ],
+  "b02": [
+    {
+      "var": "EndFiscalYear",
+      "label": "End Fiscal Year",
+      "definition": "The end year of the fiscal year period in which an inmate was identified as being in segregation conditions",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "UniqueIndividual_ID",
+      "label": "Unique Identifier",
+      "definition": "A random number assigned to an individual who was in segregation conditions",
+      "data_type": "Text",
+      "data_format": "YYYY-XXXXX-AA",
+      "measurement_level": "Nominal",
+      "data_values": ""
+    },
+    {
+      "var": "Gender",
+      "label": "Gender",
+      "definition": "Preferred gender identity of the inmate",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Female\nMale"
+    },
+    {
+      "var": "Region_MostRecentPlacement",
+      "label": "Region Based On Most Recent Placement",
+      "definition": "Region on file for the inmate's most recent placement in segregation conditions during the reporting period",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Central\nEastern\nNorthern\nToronto\nWestern"
+    },
+    {
+      "var": "Age_Category",
+      "label": "Age Category",
+      "definition": "Age category of the inmate on April 1 of the reported fiscal year",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "18 to 24\n25 to 49\n50+"
+    },
+    {
+      "var": "TotalAggregatedDays_Segregation",
+      "label": "Number of Aggregate Days in Segregation Conditions",
+      "definition": "Total number of days in segregation conditions",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    }
+  ],
+  "b03": [
+    {
+      "var": "EndFiscalYear",
+      "label": "End Fiscal Year",
+      "definition": "The end year of the fiscal year period in which an inmate was identified as being in segregation conditions",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "Region_AtTimeOfPlacement",
+      "label": "Region At Time Of Placement",
+      "definition": "Region on file at the time of the inmate's placement in segregation conditions",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Central\nEastern\nNorthern\nToronto\nWestern"
+    },
+    {
+      "var": "Institution_AtTimeOfPlacement",
+      "label": "Institution At Time Of Placement",
+      "definition": "Institution on file at the time of the inmate's placement in segregation conditions",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Algoma Treatment and Remand Centre\nBrockville Jail\nCentral East Correctional Centre\nCentral North Correctional Centre\nElgin-Middlesex Detention Centre\nFort Frances Jail\nHamilton Wentworth Detention Centre\nKenora Jail\nMaplehurst Correctional Complex\nMonteith Correctional Complex\nNiagara Detention Centre\nNorth Bay Jail\nOntario Correctional Institute\nOttawa-Carleton Detention Centre\nQuinte Detention Centre\nSarnia Jail\nSouth West Detention Centre\nSt. Lawrence Valley Correctional and Treatment Centre\nStratford Jail\nSudbury Jail\nThunder Bay Correctional Centre\nThunder Bay Jail\nToronto East Detention Centre\nToronto South Detention Centre\nVanier Centre for Women"
+    },
+    {
+      "var": "Alert_Type",
+      "label": "Alert Type",
+      "definition": "The type of alert present on an inmate's file. Inmates may have more than one alert present",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Immigration Hold Flag\nMental Health Alert\nSerious Mental Illness Alert\nSuicide Risk Alert\nSuicide Watch Alert\nTransgender Alert"
+    },
+    {
+      "var": "Alert_Presence",
+      "label": "Alert Presence",
+      "definition": "Presence of the indicated alert on the inmate's file",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "Number_SegregationPlacements",
+      "label": "Number of Segregation Placements",
+      "definition": "Total number of segregation placements at any point in time during the fiscal year reporting period",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    }
+  ],
+  "b04": [
+    {
+      "var": "EndFiscalYear",
+      "label": "End Fiscal Year",
+      "definition": "The end year of the fiscal year period in which an inmate was identified as being in segregation conditions",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "Region_AtTimeOfPlacement",
+      "label": "Region At Time Of Placement",
+      "definition": "Region on file at the time of the inmate's placement in segregation conditions",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Central\nEastern\nNorthern\nToronto\nWestern"
+    },
+    {
+      "var": "Gender",
+      "label": "Gender",
+      "definition": "Preferred gender identity of the inmate",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Female\nMale\nAll"
+    },
+    {
+      "var": "Measure",
+      "label": "Measure",
+      "definition": "The type of measure calculated for consecutive days of segregation placements",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Maximum\nMedian\nMode"
+    },
+    {
+      "var": "NumberConsecutiveDays_Segregation",
+      "label": "Number of Consecutive Days in Segregation Conditions",
+      "definition": "Duration of the segregation placement in days",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    }
+  ],
+  "b05": [
+    {
+      "var": "EndFiscalYear",
+      "label": "End Fiscal Year",
+      "definition": "The end year of the fiscal year period in which an inmate was identified as being in segregation conditions",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "Consecutive_Duration",
+      "label": "Consecutive Duration of Days for Placements in Segregation Conditions",
+      "definition": "Duration of the segregation placement in days",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "1 day\n2 days\n3 days\n4 days\n5 days\n6 to 10 days\n11 to 15 days\n16 to 20 days\n21 to 25 days\n26 to 30 days\nGreater than 30 days"
+    },
+    {
+      "var": "Number_SegregationPlacements",
+      "label": "Number of Segregation Placements",
+      "definition": "Total number of segregation placements at any point in time during the fiscal year reporting period",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    }
+  ],
+  "b06": [
+    {
+      "var": "EndFiscalYear",
+      "label": "End Fiscal Year",
+      "definition": "The end year of the fiscal year period in which an inmate was identified as being in segregation conditions",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "Region_AtTimeOfPlacement",
+      "label": "Region At Time Of Placement",
+      "definition": "Region on file at the time of the inmate's placement in segregation conditions",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Central\nEastern\nNorthern\nToronto\nWestern"
+    },
+    {
+      "var": "Institution_AtTimeOfPlacement",
+      "label": "Institution At Time Of Placement",
+      "definition": "Institution on file at the time of the inmate's placement in segregation conditions",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Algoma Treatment and Remand Centre\nBrockville Jail\nCentral East Correctional Centre\nCentral North Correctional Centre\nElgin-Middlesex Detention Centre\nFort Frances Jail\nHamilton Wentworth Detention Centre\nKenora Jail\nMaplehurst Correctional Complex\nMonteith Correctional Complex\nNiagara Detention Centre\nNorth Bay Jail\nOntario Correctional Institute\nOttawa-Carleton Detention Centre\nQuinte Detention Centre\nSarnia Jail\nSouth West Detention Centre\nSt. Lawrence Valley Correctional and Treatment Centre\nStratford Jail\nSudbury Jail\nThunder Bay Correctional Centre\nThunder Bay Jail\nToronto East Detention Centre\nToronto South Detention Centre\nVanier Centre for Women"
+    },
+    {
+      "var": "Gender",
+      "label": "Gender",
+      "definition": "Preferred gender identity of the inmate",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Female\nMale"
+    },
+    {
+      "var": "Reason",
+      "label": "Reason",
+      "definition": "Identified reason for the segregation placement",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Close Confinement (Disciplinary Segregation)\nInmate Needs Protection\nInmate Needs Protection: Medical\nInmate Refused Search/Scan\nSecurity of Institution/Safety of Others\nSecurity of Institution/Safety of Others: Medical\nOther"
+    },
+    {
+      "var": "Number_SegregationPlacements",
+      "label": "Number of Segregation Placements",
+      "definition": "Total number of segregation placements at any point in time during the fiscal year reporting period",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    }
+  ],
+  "b07": [
+    {
+      "var": "EndFiscalYear",
+      "label": "End Fiscal Year",
+      "definition": "The end year of the fiscal year period in which an inmate was identified as being in segregation conditions",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "Alert_Type",
+      "label": "Alert Type",
+      "definition": "The type of alert present on an inmate's file Inmates may have more than one alert present",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Immigration Hold Flag\nMental Health Alert\nSerious Mental Illness Alert\nSuicide Risk Alert\nSuicide Watch Alert\nTransgender Alert"
+    },
+    {
+      "var": "Gender",
+      "label": "Gender",
+      "definition": "Preferred gender identity of the inmate",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Female\nMale"
+    },
+    {
+      "var": "Number_Segregation_Placements_Without_Alert",
+      "label": "Number of Segregation Placements Without Alert",
+      "definition": "Total number of segregation placements at any point in time during the fiscal year reporting period without the indicated alert on file",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    },
+    {
+      "var": "Number_Segregation_Placements_With_Alert",
+      "label": "Number of Segregation Placements With Alert",
+      "definition": "Total number of segregation placements at any point in time during the fiscal year reporting period with the indicated alert on file",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    }
+  ],
+  "b08": [
+    {
+      "var": "EndFiscalYear",
+      "label": "End Fiscal Year",
+      "definition": "The end year of the fiscal year period in which an inmate was identified as being in segregation conditions",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "Region_AtTimeOfPlacement",
+      "label": "Region At Time Of Placement",
+      "definition": "Region on file at the time of the inmate's placement in segregation conditions",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Central\nEastern\nNorthern\nToronto\nWestern"
+    },
+    {
+      "var": "Institution_AtTimeOfPlacement",
+      "label": "Institution At Time Of Placement",
+      "definition": "Institution on file at the time of the inmate's placement in segregation conditions",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Algoma Treatment and Remand Centre\nBrockville Jail\nCentral East Correctional Centre\nCentral North Correctional Centre\nElgin-Middlesex Detention Centre\nFort Frances Jail\nHamilton Wentworth Detention Centre\nKenora Jail\nMaplehurst Correctional Complex\nMonteith Correctional Complex\nNiagara Detention Centre\nNorth Bay Jail\nOntario Correctional Institute\nOttawa-Carleton Detention Centre\nQuinte Detention Centre\nSarnia Jail\nSouth West Detention Centre\nSt. Lawrence Valley Correctional and Treatment Centre\nStratford Jail\nSudbury Jail\nThunder Bay Correctional Centre\nThunder Bay Jail\nToronto East Detention Centre\nToronto South Detention Centre\nVanier Centre for Women"
+    },
+    {
+      "var": "Gender",
+      "label": "Gender",
+      "definition": "Preferred gender identity of the inmate",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Female\nMale\nAll"
+    },
+    {
+      "var": "Measure",
+      "label": "Measure",
+      "definition": "The type of measure calculated for consecutive days of segregation placements",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Median\nMode"
+    },
+    {
+      "var": "NumberConsecutiveDays_Segregation",
+      "label": "Number of Consecutive Days in Segregation Conditions",
+      "definition": "Duration of the segregation placement in days",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    }
+  ],
+  "b09": [
+    {
+      "var": "EndFiscalYear",
+      "label": "End Fiscal Year",
+      "definition": "The end year of the fiscal year period in which an inmate was identified as being in segregation conditions",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "NumberPlacements_Segregation",
+      "label": "Number of Times Placed in Segregation Conditions",
+      "definition": "The total number of segregation placements that an individual had during the fiscal year reporting period",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "1 placement\n2 placements\n3 placements\n4 placements\n5 placements\n6 to 10 placements\n11 to 15 placements\n16 to 20 placements\n21 to 25 placements\n26 to 30 placements\n31 to 35 placements\n36 to 40 placements\nmore than 40 placements"
+    },
+    {
+      "var": "Gender",
+      "label": "Gender",
+      "definition": "Preferred gender identity of the inmate",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Female\nMale"
+    },
+    {
+      "var": "NumberIndividuals_Segregation",
+      "label": "Total Number of Individuals in Segregation Conditions",
+      "definition": "Total number of unique individuals with at least one placement in segregation conditions at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    }
+  ],
+  "c01": [
+    {
+      "var": "EndFiscalYear",
+      "label": "End Fiscal Year",
+      "definition": "The end year of the fiscal year period in which an inmate was identified as being in custody",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "NumberIndividuals_InCustody",
+      "label": "Total Number of Individuals in Custody",
+      "definition": "Total number of unique individuals in custody at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    },
+    {
+      "var": "Gender",
+      "label": "Gender",
+      "definition": "Preferred gender identity of the inmate",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Female\nMale"
+    },
+    {
+      "var": "NumberIndividuals_RestrictiveConfinement",
+      "label": "Total Number of Individuals in Restrictive Confinement",
+      "definition": "Total number of unique individuals with at least one restrictive confinement placement at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    },
+    {
+      "var": "NumberIndividuals_Segregation",
+      "label": "Total Number of Individuals in Segregation Conditions",
+      "definition": "Total number of unique individuals with at least one placement in segregation conditions at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    }
+  ],
+  "c02": [
+    {
+      "var": "EndFiscalYear",
+      "label": "End Fiscal Year",
+      "definition": "The end year of the fiscal year period in which an inmate was identified as being in segregation conditions or restrictive confinement",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "Region_MostRecentPlacement",
+      "label": "Region Based On Most Recent Placement",
+      "definition": "Region on file for the inmate's most recent placement in segregation conditions or restrictive confinement during the reporting period",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Central\nEastern\nNorthern\nToronto\nWestern"
+    },
+    {
+      "var": "Institution_MostRecentPlacement",
+      "label": "Institution Based On Most Recent Placement",
+      "definition": "Institution on file for the inmate's most recent placement in segregation conditions or restrictive confinement during the reporting period",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Algoma Treatment and Remand Centre\nBrockville Jail\nCentral East Correctional Centre\nCentral North Correctional Centre\nElgin-Middlesex Detention Centre\nFort Frances Jail\nHamilton Wentworth Detention Centre\nKenora Jail\nMaplehurst Correctional Complex\nMonteith Correctional Complex\nNiagara Detention Centre\nNorth Bay Jail\nOntario Correctional Institute\nOttawa-Carleton Detention Centre\nQuinte Detention Centre\nSarnia Jail\nSouth West Detention Centre\nSt. Lawrence Valley Correctional and Treatment Centre\nStratford Jail\nSudbury Jail\nThunder Bay Correctional Centre\nThunder Bay Jail\nToronto East Detention Centre\nToronto South Detention Centre\nVanier Centre for Women"
+    },
+    {
+      "var": "Gender",
+      "label": "Gender",
+      "definition": "Preferred gender identity of the inmate",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Female\nMale"
+    },
+    {
+      "var": "NumberIndividuals_RestrictiveConfinement",
+      "label": "Total Number of Individuals in Restrictive Confinement",
+      "definition": "Total number of unique individuals with at least one restrictive confinement placement at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    },
+    {
+      "var": "NumberIndividuals_Segregation",
+      "label": "Total Number of Individuals in Segregation Conditions",
+      "definition": "Total number of unique individuals with at least one placement in segregation conditions at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    }
+  ],
+  "c03": [
+    {
+      "var": "EndFiscalYear",
+      "label": "End Fiscal Year",
+      "definition": "The end year of the fiscal year period in which an inmate was identified as being in segregation conditions or restrictive confinement",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "Race",
+      "label": "Race",
+      "definition": "The race of the inmate",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Another Race Category\nBlack\nEast Asian\nIndigenous\nLatino\nMiddle Eastern\nMore Than One Reported Race Category\nSouth Asian\nUnknown Or Not Reported \nWhite"
+    },
+    {
+      "var": "Gender",
+      "label": "Gender",
+      "definition": "Preferred gender identity of the inmate",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Female\nMale"
+    },
+    {
+      "var": "NumberIndividuals_InCustody",
+      "label": "Total Number of Individuals in Custody",
+      "definition": "Total number of unique individuals in custody at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    },
+    {
+      "var": "NumberIndividuals_RestrictiveConfinement",
+      "label": "Total Number of Individuals in Restrictive Confinement",
+      "definition": "Total number of unique individuals with at least one restrictive confinement placement at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    },
+    {
+      "var": "NumberIndividuals_Segregation",
+      "label": "Total Number of Individuals in Segregation Conditions",
+      "definition": "Total number of unique individuals with at least one placement in segregation conditions at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    }
+  ],
+  "c04": [
+    {
+      "var": "EndFiscalYear",
+      "label": "End Fiscal Year",
+      "definition": "The end year of the fiscal year period in which an inmate was identified as being in segregation conditions or restrictive confinement",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "Region_MostRecentPlacement",
+      "label": "Region Based On Most Recent Placement",
+      "definition": "Region on file for the inmate's most recent placement in segregation conditions or restrictive confinement during the reporting period",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Central\nEastern\nNorthern\nToronto\nWestern"
+    },
+    {
+      "var": "Race",
+      "label": "Race",
+      "definition": "The race of the inmate",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Another Race Category\nBlack\nEast Asian\nIndigenous\nLatino\nMiddle Eastern\nMore Than One Reported Race Category\nSouth Asian\nUnknown Or Not Reported \nWhite"
+    },
+    {
+      "var": "NumberIndividuals_RestrictiveConfinement",
+      "label": "Total Number of Individuals in Restrictive Confinement",
+      "definition": "Total number of unique individuals with at least one restrictive confinement placement at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    },
+    {
+      "var": "NumberIndividuals_Segregation",
+      "label": "Total Number of Individuals in Segregation Conditions",
+      "definition": "Total number of unique individuals with at least one placement in segregation conditions at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    }
+  ],
+  "c05": [
+    {
+      "var": "EndFiscalYear",
+      "label": "End Fiscal Year",
+      "definition": "The end year of the fiscal year period in which an inmate was identified as being in segregation conditions or restrictive confinement",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "Region_MostRecentPlacement",
+      "label": "Region Based On Most Recent Placement",
+      "definition": "Region on file for the inmate's most recent placement in segregation conditions or restrictive confinement during the reporting period",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Central\nEastern\nNorthern\nToronto\nWestern"
+    },
+    {
+      "var": "Religion",
+      "label": "Religion",
+      "definition": "The religious or spiritual affiliation of the inmate",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Another Religion/Spiritual Affiliation\nBuddhist\nChristian\nHindu\nIndigenous Spirituality\nJewish\nMore Than One Reported Religion or Spiritual Affiliation\nMuslim\nNo Religion\nSikh\nUnknown Or Not Reported"
+    },
+    {
+      "var": "NumberIndividuals_RestrictiveConfinement",
+      "label": "Total Number of Individuals in Restrictive Confinement",
+      "definition": "Total number of unique individuals with at least one restrictive confinement placement at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    },
+    {
+      "var": "NumberIndividuals_Segregation",
+      "label": "Total Number of Individuals in Segregation Conditions",
+      "definition": "Total number of unique individuals with at least one placement in segregation conditions at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    }
+  ],
+  "c06": [
+    {
+      "var": "EndFiscalYear",
+      "label": "End Fiscal Year",
+      "definition": "The end year of the fiscal year period in which an inmate was identified as being in segregation conditions or restrictive confinement",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "Region_MostRecentPlacement",
+      "label": "Region Based On Most Recent Placement",
+      "definition": "Region on file for the inmate's most recent placement in segregation conditions or restrictive confinement during the reporting period",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Central\nEastern\nNorthern\nToronto\nWestern"
+    },
+    {
+      "var": "Age_Category",
+      "label": "Age Category",
+      "definition": "Age category of the inmate on April 1 of the reported fiscal year",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "18 to 24\n25 to 49\n50+"
+    },
+    {
+      "var": "NumberIndividuals_RestrictiveConfinement",
+      "label": "Total Number of Individuals in Restrictive Confinement",
+      "definition": "Total number of unique individuals with at least one restrictive confinement placement at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    },
+    {
+      "var": "NumberIndividuals_Segregation",
+      "label": "Total Number of Individuals in Segregation Conditions",
+      "definition": "Total number of unique individuals with at least one placement in segregation conditions at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    }
+  ],
+  "c07": [
+    {
+      "var": "EndFiscalYear",
+      "label": "End Fiscal Year",
+      "definition": "The end year of the fiscal year period in which an inmate was identified as being in segregation conditions or restrictive confinement",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "Alert_Type",
+      "label": "Alert Type",
+      "definition": "The type of alert present on an inmate's file Inmates may have more than one alert present",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Immigration Hold Flag\nMental Health Alert\nSerious Mental Illness Alert\nSuicide Risk Alert\nSuicide Watch Alert\nTransgender Alert"
+    },
+    {
+      "var": "Gender",
+      "label": "Gender",
+      "definition": "Preferred gender identity of the inmate",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Female\nMale"
+    },
+    {
+      "var": "NumberIndividuals_InCustody",
+      "label": "Total Number of Individuals in Custody",
+      "definition": "Total number of unique individuals in custody at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    },
+    {
+      "var": "NumberIndividuals_RestrictiveConfinement",
+      "label": "Total Number of Individuals in Restrictive Confinement",
+      "definition": "Total number of unique individuals with at least one restrictive confinement placement at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    },
+    {
+      "var": "NumberIndividuals_Segregation",
+      "label": "Total Number of Individuals in Segregation Conditions",
+      "definition": "Total number of unique individuals with at least one placement in segregation conditions at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    }
+  ],
+  "c08": [
+    {
+      "var": "EndFiscalYear",
+      "label": "End Fiscal Year",
+      "definition": "The end year of the fiscal year period in which an inmate was identified as being in segregation conditions or restrictive confinement",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "Religion",
+      "label": "Religion",
+      "definition": "The religious or spiritual affiliation of the inmate",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Another Religion/Spiritual Affiliation\nBuddhist\nChristian\nHindu\nIndigenous Spirituality\nJewish\nMore Than One Reported Religion or Spiritual Affiliation\nMuslim\nNo Religion\nSikh\nUnknown Or Not Reported"
+    },
+    {
+      "var": "Gender",
+      "label": "Gender",
+      "definition": "Preferred gender identity of the inmate",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Female\nMale"
+    },
+    {
+      "var": "NumberIndividuals_InCustody",
+      "label": "Total Number of Individuals in Custody",
+      "definition": "Total number of unique individuals in custody at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    },
+    {
+      "var": "NumberIndividuals_RestrictiveConfinement",
+      "label": "Total Number of Individuals in Restrictive Confinement",
+      "definition": "Total number of unique individuals with at least one restrictive confinement placement at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    },
+    {
+      "var": "NumberIndividuals_Segregation",
+      "label": "Total Number of Individuals in Segregation Conditions",
+      "definition": "Total number of unique individuals with at least one placement in segregation conditions at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    }
+  ],
+  "c09": [
+    {
+      "var": "EndFiscalYear",
+      "label": "End Fiscal Year",
+      "definition": "The end year of the fiscal year period in which an inmate was identified as being in segregation conditions or restrictive confinement",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "Age_Category",
+      "label": "Age Category",
+      "definition": "Age category of the inmate on April 1 of the reported fiscal year",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "18 to 24\n25 to 49\n50+"
+    },
+    {
+      "var": "Gender",
+      "label": "Gender",
+      "definition": "Preferred gender identity of the inmate",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Female\nMale"
+    },
+    {
+      "var": "NumberIndividuals_InCustody",
+      "label": "Total Number of Individuals in Custody",
+      "definition": "Total number of unique individuals in custody at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    },
+    {
+      "var": "NumberIndividuals_RestrictiveConfinement",
+      "label": "Total Number of Individuals in Restrictive Confinement",
+      "definition": "Total number of unique individuals with at least one restrictive confinement placement at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    },
+    {
+      "var": "NumberIndividuals_Segregation",
+      "label": "Total Number of Individuals in Segregation Conditions",
+      "definition": "Total number of unique individuals with at least one placement in segregation conditions at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    }
+  ],
+  "c10": [
+    {
+      "var": "EndFiscalYear",
+      "label": "End Fiscal Year",
+      "definition": "The end year of the fiscal year period in which an inmate was identified as being in segregation conditions or restrictive confinement",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "Region_MostRecentPlacement",
+      "label": "Region Based On Most Recent Placement",
+      "definition": "Region on file for the inmate's most recent placement in segregation conditions or restrictive confinement during the reporting period",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Central\nEastern\nNorthern\nToronto\nWestern"
+    },
+    {
+      "var": "Institution_MostRecentPlacement",
+      "label": "Institution Based On Most Recent Placement",
+      "definition": "Institution on file for the inmate's most recent placement in segregation conditions or restrictive confinement during the reporting period",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Algoma Treatment and Remand Centre\nBrockville Jail\nCentral East Correctional Centre\nCentral North Correctional Centre\nElgin-Middlesex Detention Centre\nFort Frances Jail\nHamilton Wentworth Detention Centre\nKenora Jail\nMaplehurst Correctional Complex\nMonteith Correctional Complex\nNiagara Detention Centre\nNorth Bay Jail\nOntario Correctional Institute\nOttawa-Carleton Detention Centre\nQuinte Detention Centre\nSarnia Jail\nSouth West Detention Centre\nSt. Lawrence Valley Correctional and Treatment Centre\nStratford Jail\nSudbury Jail\nThunder Bay Correctional Centre\nThunder Bay Jail\nToronto East Detention Centre\nToronto South Detention Centre\nVanier Centre for Women"
+    },
+    {
+      "var": "Gender",
+      "label": "Gender",
+      "definition": "Preferred gender identity of the inmate",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Female\nMale\nAll"
+    },
+    {
+      "var": "Measure",
+      "label": "Measure",
+      "definition": "The type of measure calculated for aggregate days",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Maximum\nMedian\nMode"
+    },
+    {
+      "var": "TotalAggregatedDays_RestrictiveConfinement",
+      "label": "Number of Aggregate Days in Restrictive Confinement",
+      "definition": "Total number of aggregate days in restrictive confinement",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    },
+    {
+      "var": "TotalAggregatedDays_Segregation",
+      "label": "Number of Aggregate Days in Segregation Conditions",
+      "definition": "Total number of days in segregation conditions",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    }
+  ],
+  "c11": [
+    {
+      "var": "EndFiscalYear",
+      "label": "End Fiscal Year",
+      "definition": "The end year of the fiscal year period in which an inmate was identified as being in segregation conditions or restrictive confinement",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "Aggregate_Duration",
+      "label": "Aggregate Duration of Days in Restrictive Confinement or Segregation Conditions",
+      "definition": "The total number of aggregate days in restrictive confinement or segregation conditions",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "1 day\n2 days\n3 days\n4 days\n5 days\n6 to 10 days\n11 to 15 days\n16 to 20 days\n21 to 25 days\n26 to 30 days\nGreater than 30 days"
+    },
+    {
+      "var": "NumberIndividuals_RestrictiveConfinement",
+      "label": "Total Number of Individuals in Restrictive Confinement",
+      "definition": "Total number of unique individuals with at least one restrictive confinement placement at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    },
+    {
+      "var": "NumberIndividuals_Segregation",
+      "label": "Total Number of Individuals in Segregation",
+      "definition": "Total number of unique individuals with at least one segregation placement at any point in time during the fiscal year reporting period ",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    }
+  ],
+  "c12": [
+    {
+      "var": "EndFiscalYear",
+      "label": "End Fiscal Year",
+      "definition": "The end year of the fiscal year period in which an inmate was identified as being in segregation conditions or restrictive confinement",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "Region_MostRecentPlacement",
+      "label": "Region Based On Most Recent Placement",
+      "definition": "Region on file for the inmate's most recent placement in segregation conditions or restrictive confinement during the reporting period",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Central\nEastern\nNorthern\nToronto\nWestern"
+    },
+    {
+      "var": "Gender",
+      "label": "Gender",
+      "definition": "Preferred gender identity of the inmate",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Female\nMale\nAll"
+    },
+    {
+      "var": "Measure",
+      "label": "Measure",
+      "definition": "The type of measure calculated for aggregate days",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Maximum\nMedian\nMode"
+    },
+    {
+      "var": "TotalAggregatedDays_RestrictiveConfinement",
+      "label": "Number of Aggregate Days in Restrictive Confinement",
+      "definition": "Total number of aggregate days in restrictive confinement",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    },
+    {
+      "var": "TotalAggregatedDays_Segregation",
+      "label": "Number of Aggregate Days in Segregation Conditions",
+      "definition": "Total number of days in segregation conditions",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    }
+  ],
+  "d01": [
+    {
+      "var": "Year",
+      "label": "Calendar Year",
+      "definition": "Calendar year reporting period",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "UniqueIndividual_ID",
+      "label": "Unique Identifier",
+      "definition": "A random number assigned to an individual",
+      "data_type": "Text",
+      "data_format": "YYYY-XXXXX-AA",
+      "measurement_level": "Nominal",
+      "data_values": ""
+    },
+    {
+      "var": "Region_AtTimeOfDeath",
+      "label": "Region At Time Of Death",
+      "definition": "Region on file at the time of the individual's death",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Central\nEastern\nNorthern\nToronto\nWestern"
+    },
+    {
+      "var": "HousingUnit_Type",
+      "label": "Housing Unit Type",
+      "definition": "The location or conditions of confinement of the individual prior to death",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "General Population\nSegregation\nSpecialized Care\nProtective Custody Outside of a Facility"
+    },
+    {
+      "var": "MedicalCauseOfDeath",
+      "label": "Medical Cause of Death",
+      "definition": "The medical cause of death of the individual as determined by the Office of the Chief Coroner",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Drug Toxicity\nNatural Causes\nOther\nUnknown / To Be Determined"
+    },
+    {
+      "var": "MeansOfDeath",
+      "label": "Means of Death",
+      "definition": "The means of death as determined by the Office of the Chief Coroner",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Accident\nHomicide\nNatural Causes\nSuicide\nUndetermined\nTo Be Determined"
+    }
+  ],
+  "d02": [
+    {
+      "var": "Year",
+      "label": "Calendar Year",
+      "definition": "Calendar year reporting period",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "Gender",
+      "label": "Gender",
+      "definition": "Preferred gender identity of the individual",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Female\nMale"
+    },
+    {
+      "var": "Number_CustodialDeaths",
+      "label": "Number of Custodial Deaths",
+      "definition": "Number of deaths where an individual was under the ministry’s supervision, either inside an institution or escorted in the community (for example, at a hospital).",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    }
+  ],
+  "d03": [
+    {
+      "var": "Year",
+      "label": "Calendar Year",
+      "definition": "Calendar year reporting period",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "Race",
+      "label": "Race",
+      "definition": "The race of the individual",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Another Race Category Black\nEast Asian\nIndigenous\nLatino\nMiddle Eastern\nMore Than One Reported Race Category\nSouth Asian\nUnknown Or Not Reported \nWhite"
+    },
+    {
+      "var": "Number_CustodialDeaths",
+      "label": "Number of Custodial Deaths",
+      "definition": "Number of deaths where an individual was under the ministry’s supervision, either inside an institution or escorted in the community (for example, at a hospital).",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    }
+  ],
+  "d04": [
+    {
+      "var": "Year",
+      "label": "Calendar Year",
+      "definition": "Calendar year reporting period",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "Religion",
+      "label": "Religion",
+      "definition": "The religious or spiritual affiliation of the individual",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Another Religion/Spiritual Affiliation \nBuddhist\nChristian\nHindu\nIndigenous Spirituality\nJewish\nMuslim\nMore Than One Reported Religion or Spiritual Affiliation\nNo Religion\nSikh\nUnknown Or Not Reported"
+    },
+    {
+      "var": "Number_CustodialDeaths",
+      "label": "Number of Custodial Deaths",
+      "definition": "Number of deaths where an individual was under the ministry’s supervision, either inside an institution or escorted in the community (for example, at a hospital).",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    }
+  ],
+  "d05": [
+    {
+      "var": "Year",
+      "label": "Calendar Year",
+      "definition": "Calendar year reporting period",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "Age_Category",
+      "label": "Age Category",
+      "definition": "Age category of the individual at the time of death",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "18 to 24\n25 to 49\n50+"
+    },
+    {
+      "var": "Number_CustodialDeaths",
+      "label": "Number Custodial Deaths",
+      "definition": "Number of deaths where an individual was under the ministry’s supervision, either inside an institution or escorted in the community (for example, at a hospital).",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": ""
+    }
+  ],
+  "d06": [
+    {
+      "var": "Year",
+      "label": "Calendar Year",
+      "definition": "Calendar year reporting period",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "Alert_Type",
+      "label": "Alert Type",
+      "definition": "The type of alert present on an inmate's file. Inmates may have more than one alert present",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Mental Health Alert\nSuicide Risk Alert\nSuicide Watch Alert"
+    },
+    {
+      "var": "MedicalCauseOfDeath",
+      "label": "Medical Cause of Death",
+      "definition": "The medical cause of death of the individual as determined by the Office of the Chief Coroner",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Drug Toxicity\nNatural Causes\nOther\nUnknown / To Be Determined"
+    },
+    {
+      "var": "Number_CustodialDeaths",
+      "label": "Number Custodial Deaths",
+      "definition": "Number of deaths where an individual was under the ministry’s supervision, either inside an institution or escorted in the community (for example, at a hospital).",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    }
+  ],
+  "d07": [
+    {
+      "var": "Year",
+      "label": "Calendar Year",
+      "definition": "Calendar year reporting period",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "measurement_level": "Interval",
+      "data_values": ""
+    },
+    {
+      "var": "Alert_Type",
+      "label": "Alert Type",
+      "definition": "The type of alert present on an inmate's file. Inmates may have more than one alert present",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "Mental Health Alert\nSuicide Risk Alert\nSuicide Watch Alert"
+    },
+    {
+      "var": "HousingUnit_Type",
+      "label": "Housing Unit Type",
+      "definition": "The location or conditions of confinement of the individual prior to death",
+      "data_type": "Text",
+      "data_format": "",
+      "measurement_level": "Nominal",
+      "data_values": "General Population / Protective Custody Unit\nOutside of a Facility\nSegregation Conditions\nSpecialized Care Unit"
+    },
+    {
+      "var": "Number_CustodialDeaths",
+      "label": "Number Custodial Deaths",
+      "definition": "Number of deaths where an individual was under the ministry’s supervision, either inside an institution or escorted in the community (for example, at a hospital).",
+      "data_type": "Integer",
+      "data_format": "",
+      "measurement_level": "Interval/Ratio",
+      "data_values": ""
+    }
+  ]
+}

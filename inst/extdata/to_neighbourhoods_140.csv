@@ -1,0 +1,141 @@
+"_id","AREA_ID","AREA_ATTR_ID","PARENT_AREA_ID","AREA_SHORT_CODE","AREA_LONG_CODE","AREA_NAME","AREA_DESC","CLASSIFICATION","CLASSIFICATION_CODE","OBJECTID"
+1,2501286,26022481,NA,30,30,"Brookhaven-Amesbury (30)","Brookhaven-Amesbury (30)","Not an NIA or Emerging Neighbourhood",NA,17818369
+2,2501285,26022480,NA,106,106,"Humewood-Cedarvale (106)","Humewood-Cedarvale (106)","Not an NIA or Emerging Neighbourhood",NA,17818385
+3,2501284,26022479,NA,91,91,"Weston-Pelham Park (91)","Weston-Pelham Park (91)","Neighbourhood Improvement Area","NIA",17818401
+4,2501283,26022478,NA,48,48,"Hillcrest Village (48)","Hillcrest Village (48)","Not an NIA or Emerging Neighbourhood",NA,17818417
+5,2501282,26022477,NA,129,129,"Agincourt North (129)","Agincourt North (129)","Not an NIA or Emerging Neighbourhood",NA,17818433
+6,2501281,26022476,NA,97,97,"Yonge-St.Clair (97)","Yonge-St.Clair (97)","Not an NIA or Emerging Neighbourhood",NA,17818449
+7,2501280,26022475,NA,100,100,"Yonge-Eglinton (100)","Yonge-Eglinton (100)","Not an NIA or Emerging Neighbourhood",NA,17818465
+8,2501279,26022474,NA,9,9,"Edenbridge-Humber Valley (9)","Edenbridge-Humber Valley (9)","Not an NIA or Emerging Neighbourhood",NA,17818481
+9,2501278,26022473,NA,4,4,"Rexdale-Kipling (4)","Rexdale-Kipling (4)","Not an NIA or Emerging Neighbourhood",NA,17818497
+10,2501277,26022472,NA,51,51,"Willowdale East (51)","Willowdale East (51)","Not an NIA or Emerging Neighbourhood",NA,17818513
+11,2501276,26022471,NA,44,44,"Flemingdon Park (44)","Flemingdon Park (44)","Neighbourhood Improvement Area","NIA",17818529
+12,2501275,26022470,NA,10,10,"Princess-Rosethorn (10)","Princess-Rosethorn (10)","Not an NIA or Emerging Neighbourhood",NA,17818545
+13,2501274,26022469,NA,46,46,"Pleasant View (46)","Pleasant View (46)","Not an NIA or Emerging Neighbourhood",NA,17818561
+14,2501273,26022468,NA,93,93,"Dovercourt-Wallace Emerson-Junction (93)","Dovercourt-Wallace Emerson-Junction (93)","Not an NIA or Emerging Neighbourhood",NA,17818577
+15,2501272,26022467,NA,121,121,"Oakridge (121)","Oakridge (121)","Neighbourhood Improvement Area","NIA",17818593
+16,2501271,26022466,NA,110,110,"Keelesdale-Eglinton West (110)","Keelesdale-Eglinton West (110)","Neighbourhood Improvement Area","NIA",17818609
+17,2501270,26022465,NA,108,108,"Briar Hill-Belgravia (108)","Briar Hill-Belgravia (108)","Not an NIA or Emerging Neighbourhood",NA,17818625
+18,2501269,26022464,NA,104,104,"Mount Pleasant West (104)","Mount Pleasant West (104)","Not an NIA or Emerging Neighbourhood",NA,17818641
+19,2501268,26022463,NA,109,109,"Caledonia-Fairbank (109)","Caledonia-Fairbank (109)","Not an NIA or Emerging Neighbourhood",NA,17818657
+20,2501267,26022462,NA,112,112,"Beechborough-Greenbrook (112)","Beechborough-Greenbrook (112)","Neighbourhood Improvement Area","NIA",17818673
+21,2501266,26022461,NA,59,59,"Danforth East York (59)","Danforth East York (59)","Not an NIA or Emerging Neighbourhood",NA,17818689
+22,2501265,26022460,NA,99,99,"Mount Pleasant East (99)","Mount Pleasant East (99)","Not an NIA or Emerging Neighbourhood",NA,17818705
+23,2501264,26022459,NA,73,73,"Moss Park (73)","Moss Park (73)","Not an NIA or Emerging Neighbourhood",NA,17818721
+24,2501263,26022458,NA,90,90,"Junction Area (90)","Junction Area (90)","Not an NIA or Emerging Neighbourhood",NA,17818737
+25,2501262,26022457,NA,84,84,"Little Portugal (84)","Little Portugal (84)","Not an NIA or Emerging Neighbourhood",NA,17818753
+26,2501261,26022456,NA,98,98,"Rosedale-Moore Park (98)","Rosedale-Moore Park (98)","Not an NIA or Emerging Neighbourhood",NA,17818769
+27,2501260,26022455,NA,107,107,"Oakwood Village (107)","Oakwood Village (107)","Not an NIA or Emerging Neighbourhood",NA,17818785
+28,2501259,26022454,NA,54,54,"O'Connor-Parkview (54)","O'Connor-Parkview (54)","Not an NIA or Emerging Neighbourhood",NA,17818801
+29,2501258,26022453,NA,126,126,"Dorset Park (126)","Dorset Park (126)","Emerging Neighbourhood","EN",17818817
+30,2501257,26022452,NA,36,36,"Newtonbrook West (36)","Newtonbrook West (36)","Not an NIA or Emerging Neighbourhood",NA,17818833
+31,2501256,26022451,NA,71,71,"Cabbagetown-South St.James Town (71)","Cabbagetown-South St.James Town (71)","Not an NIA or Emerging Neighbourhood",NA,17818849
+32,2501255,26022450,NA,24,24,"Black Creek (24)","Black Creek (24)","Neighbourhood Improvement Area","NIA",17818865
+33,2501254,26022449,NA,67,67,"Playter Estates-Danforth (67)","Playter Estates-Danforth (67)","Not an NIA or Emerging Neighbourhood",NA,17818881
+34,2501253,26022448,NA,57,57,"Broadview North (57)","Broadview North (57)","Not an NIA or Emerging Neighbourhood",NA,17818897
+35,2501252,26022447,NA,15,15,"Kingsway South (15)","Kingsway South (15)","Not an NIA or Emerging Neighbourhood",NA,17818913
+36,2501251,26022446,NA,13,13,"Etobicoke West Mall (13)","Etobicoke West Mall (13)","Not an NIA or Emerging Neighbourhood",NA,17818929
+37,2501250,26022445,NA,68,68,"North Riverdale (68)","North Riverdale (68)","Not an NIA or Emerging Neighbourhood",NA,17818945
+38,2501249,26022444,NA,125,125,"Ionview (125)","Ionview (125)","Neighbourhood Improvement Area","NIA",17818961
+39,2501248,26022443,NA,47,47,"Don Valley Village (47)","Don Valley Village (47)","Not an NIA or Emerging Neighbourhood",NA,17818977
+40,2501247,26022442,NA,60,60,"Woodbine-Lumsden (60)","Woodbine-Lumsden (60)","Not an NIA or Emerging Neighbourhood",NA,17818993
+41,2501246,26022441,NA,96,96,"Casa Loma (96)","Casa Loma (96)","Not an NIA or Emerging Neighbourhood",NA,17819009
+42,2501245,26022440,NA,124,124,"Kennedy Park (124)","Kennedy Park (124)","Neighbourhood Improvement Area","NIA",17819025
+43,2501244,26022439,NA,74,74,"North St.James Town (74)","North St.James Town (74)","Not an NIA or Emerging Neighbourhood",NA,17819041
+44,2501243,26022438,NA,76,76,"Bay Street Corridor (76)","Bay Street Corridor (76)","Not an NIA or Emerging Neighbourhood",NA,17819057
+45,2501242,26022437,NA,86,86,"Roncesvalles (86)","Roncesvalles (86)","Not an NIA or Emerging Neighbourhood",NA,17819073
+46,2501241,26022436,NA,123,123,"Cliffcrest (123)","Cliffcrest (123)","Not an NIA or Emerging Neighbourhood",NA,17819089
+47,2501240,26022435,NA,120,120,"Clairlea-Birchmount (120)","Clairlea-Birchmount (120)","Not an NIA or Emerging Neighbourhood",NA,17819105
+48,2501239,26022434,NA,75,75,"Church-Yonge Corridor (75)","Church-Yonge Corridor (75)","Not an NIA or Emerging Neighbourhood",NA,17819121
+49,2501238,26022433,NA,134,134,"Highland Creek (134)","Highland Creek (134)","Not an NIA or Emerging Neighbourhood",NA,17819137
+50,2501237,26022432,NA,87,87,"High Park-Swansea (87)","High Park-Swansea (87)","Not an NIA or Emerging Neighbourhood",NA,17819153
+51,2501236,26022431,NA,50,50,"Newtonbrook East (50)","Newtonbrook East (50)","Not an NIA or Emerging Neighbourhood",NA,17819169
+52,2501235,26022430,NA,7,7,"Willowridge-Martingrove-Richview (7)","Willowridge-Martingrove-Richview (7)","Not an NIA or Emerging Neighbourhood",NA,17819185
+53,2501234,26022429,NA,25,25,"Glenfield-Jane Heights (25)","Glenfield-Jane Heights (25)","Neighbourhood Improvement Area","NIA",17819201
+54,2501233,26022428,NA,113,113,"Weston (113)","Weston (113)","Neighbourhood Improvement Area","NIA",17819217
+55,2501232,26022427,NA,11,11,"Eringate-Centennial-West Deane (11)","Eringate-Centennial-West Deane (11)","Not an NIA or Emerging Neighbourhood",NA,17819233
+56,2501231,26022426,NA,32,32,"Englemount-Lawrence (32)","Englemount-Lawrence (32)","Emerging Neighbourhood","EN",17819249
+57,2501230,26022425,NA,58,58,"Old East York (58)","Old East York (58)","Not an NIA or Emerging Neighbourhood",NA,17819265
+58,2501229,26022424,NA,34,34,"Bathurst Manor (34)","Bathurst Manor (34)","Not an NIA or Emerging Neighbourhood",NA,17819281
+59,2501228,26022423,NA,42,42,"Banbury-Don Mills (42)","Banbury-Don Mills (42)","Not an NIA or Emerging Neighbourhood",NA,17819297
+60,2501227,26022422,NA,117,117,"L'Amoreaux (117)","L'Amoreaux (117)","Not an NIA or Emerging Neighbourhood",NA,17819313
+61,2501226,26022421,NA,135,135,"Morningside (135)","Morningside (135)","Neighbourhood Improvement Area","NIA",17819329
+62,2501225,26022420,NA,17,17,"Mimico (includes Humber Bay Shores) (17)","Mimico (includes Humber Bay Shores) (17)","Not an NIA or Emerging Neighbourhood",NA,17819345
+63,2501224,26022419,NA,29,29,"Maple Leaf (29)","Maple Leaf (29)","Not an NIA or Emerging Neighbourhood",NA,17819361
+64,2501223,26022418,NA,105,105,"Lawrence Park North (105)","Lawrence Park North (105)","Not an NIA or Emerging Neighbourhood",NA,17819377
+65,2501222,26022417,NA,83,83,"Dufferin Grove (83)","Dufferin Grove (83)","Not an NIA or Emerging Neighbourhood",NA,17819393
+66,2501221,26022416,NA,103,103,"Lawrence Park South (103)","Lawrence Park South (103)","Not an NIA or Emerging Neighbourhood",NA,17819409
+67,2501220,26022415,NA,52,52,"Bayview Village (52)","Bayview Village (52)","Not an NIA or Emerging Neighbourhood",NA,17819425
+68,2501219,26022414,NA,114,114,"Lambton Baby Point (114)","Lambton Baby Point (114)","Not an NIA or Emerging Neighbourhood",NA,17819441
+69,2501218,26022413,NA,80,80,"Palmerston-Little Italy (80)","Palmerston-Little Italy (80)","Not an NIA or Emerging Neighbourhood",NA,17819457
+70,2501217,26022412,NA,18,18,"New Toronto (18)","New Toronto (18)","Not an NIA or Emerging Neighbourhood",NA,17819473
+71,2501216,26022411,NA,82,82,"Niagara (82)","Niagara (82)","Not an NIA or Emerging Neighbourhood",NA,17819489
+72,2501215,26022410,NA,39,39,"Bedford Park-Nortown (39)","Bedford Park-Nortown (39)","Not an NIA or Emerging Neighbourhood",NA,17819505
+73,2501214,26022409,NA,122,122,"Birchcliffe-Cliffside (122)","Birchcliffe-Cliffside (122)","Not an NIA or Emerging Neighbourhood",NA,17819521
+74,2501213,26022408,NA,127,127,"Bendale (127)","Bendale (127)","Not an NIA or Emerging Neighbourhood",NA,17819537
+75,2501212,26022407,NA,72,72,"Regent Park (72)","Regent Park (72)","Neighbourhood Improvement Area","NIA",17819553
+76,2501211,26022406,NA,45,45,"Parkwoods-Donalda (45)","Parkwoods-Donalda (45)","Not an NIA or Emerging Neighbourhood",NA,17819569
+77,2501210,26022405,NA,78,78,"Kensington-Chinatown (78)","Kensington-Chinatown (78)","Not an NIA or Emerging Neighbourhood",NA,17819585
+78,2501209,26022404,NA,56,56,"Leaside-Bennington (56)","Leaside-Bennington (56)","Not an NIA or Emerging Neighbourhood",NA,17819601
+79,2501208,26022403,NA,94,94,"Wychwood (94)","Wychwood (94)","Not an NIA or Emerging Neighbourhood",NA,17819617
+80,2501207,26022402,NA,53,53,"Henry Farm (53)","Henry Farm (53)","Not an NIA or Emerging Neighbourhood",NA,17819633
+81,2501206,26022401,NA,92,92,"Corso Italia-Davenport (92)","Corso Italia-Davenport (92)","Not an NIA or Emerging Neighbourhood",NA,17819649
+82,2501205,26022400,NA,3,3,"Thistletown-Beaumond Heights (3)","Thistletown-Beaumond Heights (3)","Neighbourhood Improvement Area","NIA",17819665
+83,2501204,26022399,NA,63,63,"The Beaches (63)","The Beaches (63)","Not an NIA or Emerging Neighbourhood",NA,17819681
+84,2501203,26022398,NA,118,118,"Tam O'Shanter-Sullivan (118)","Tam O'Shanter-Sullivan (118)","Not an NIA or Emerging Neighbourhood",NA,17819697
+85,2501202,26022397,NA,16,16,"Stonegate-Queensway (16)","Stonegate-Queensway (16)","Not an NIA or Emerging Neighbourhood",NA,17819713
+86,2501201,26022396,NA,140,140,"Guildwood (140)","Guildwood (140)","Not an NIA or Emerging Neighbourhood",NA,17819729
+87,2501200,26022395,NA,69,69,"Blake-Jones (69)","Blake-Jones (69)","Not an NIA or Emerging Neighbourhood",NA,17819745
+88,2501199,26022394,NA,14,14,"Islington-City Centre West (14)","Islington-City Centre West (14)","Not an NIA or Emerging Neighbourhood",NA,17819761
+89,2501198,26022393,NA,131,131,"Rouge (131)","Rouge (131)","Not an NIA or Emerging Neighbourhood",NA,17819777
+90,2501197,26022392,NA,12,12,"Markland Wood (12)","Markland Wood (12)","Not an NIA or Emerging Neighbourhood",NA,17819793
+91,2501196,26022391,NA,132,132,"Malvern (132)","Malvern (132)","Not an NIA or Emerging Neighbourhood",NA,17819809
+92,2501195,26022390,NA,19,19,"Long Branch (19)","Long Branch (19)","Not an NIA or Emerging Neighbourhood",NA,17819825
+93,2501194,26022389,NA,66,66,"Danforth (66)","Danforth (66)","Not an NIA or Emerging Neighbourhood",NA,17819841
+94,2501193,26022388,NA,65,65,"Greenwood-Coxwell (65)","Greenwood-Coxwell (65)","Not an NIA or Emerging Neighbourhood",NA,17819857
+95,2501192,26022387,NA,5,5,"Elms-Old Rexdale (5)","Elms-Old Rexdale (5)","Neighbourhood Improvement Area","NIA",17819873
+96,2501191,26022386,NA,33,33,"Clanton Park (33)","Clanton Park (33)","Not an NIA or Emerging Neighbourhood",NA,17819889
+97,2501190,26022385,NA,89,89,"Runnymede-Bloor West Village (89)","Runnymede-Bloor West Village (89)","Not an NIA or Emerging Neighbourhood",NA,17819905
+98,2501189,26022384,NA,62,62,"East End-Danforth (62)","East End-Danforth (62)","Not an NIA or Emerging Neighbourhood",NA,17819921
+99,2501188,26022383,NA,35,35,"Westminster-Branson (35)","Westminster-Branson (35)","Emerging Neighbourhood","EN",17819937
+100,2501187,26022382,NA,1,1,"West Humber-Clairville (1)","West Humber-Clairville (1)","Not an NIA or Emerging Neighbourhood",NA,17819953
+101,2501186,26022381,NA,41,41,"Bridle Path-Sunnybrook-York Mills (41)","Bridle Path-Sunnybrook-York Mills (41)","Not an NIA or Emerging Neighbourhood",NA,17819969
+102,2501185,26022380,NA,111,111,"Rockcliffe-Smythe (111)","Rockcliffe-Smythe (111)","Neighbourhood Improvement Area","NIA",17819985
+103,2501184,26022379,NA,79,79,"University (79)","University (79)","Not an NIA or Emerging Neighbourhood",NA,17820001
+104,2501183,26022378,NA,136,136,"West Hill (136)","West Hill (136)","Neighbourhood Improvement Area","NIA",17820017
+105,2501182,26022377,NA,28,28,"Rustic (28)","Rustic (28)","Neighbourhood Improvement Area","NIA",17820033
+106,2501181,26022376,NA,88,88,"High Park North (88)","High Park North (88)","Not an NIA or Emerging Neighbourhood",NA,17820049
+107,2501180,26022375,NA,61,61,"Taylor-Massey (61)","Taylor-Massey (61)","Neighbourhood Improvement Area","NIA",17820065
+108,2501179,26022374,NA,43,43,"Victoria Village (43)","Victoria Village (43)","Neighbourhood Improvement Area","NIA",17820081
+109,2501178,26022373,NA,40,40,"St.Andrew-Windfields (40)","St.Andrew-Windfields (40)","Not an NIA or Emerging Neighbourhood",NA,17820097
+110,2501177,26022372,NA,70,70,"South Riverdale (70)","South Riverdale (70)","Not an NIA or Emerging Neighbourhood",NA,17820113
+111,2501176,26022371,NA,85,85,"South Parkdale (85)","South Parkdale (85)","Neighbourhood Improvement Area","NIA",17820129
+112,2501175,26022370,NA,139,139,"Scarborough Village (139)","Scarborough Village (139)","Neighbourhood Improvement Area","NIA",17820145
+113,2501174,26022369,NA,31,31,"Yorkdale-Glen Park (31)","Yorkdale-Glen Park (31)","Emerging Neighbourhood","EN",17820161
+114,2501173,26022368,NA,23,23,"Pelmo Park-Humberlea (23)","Pelmo Park-Humberlea (23)","Not an NIA or Emerging Neighbourhood",NA,17820177
+115,2501172,26022367,NA,133,133,"Centennial Scarborough (133)","Centennial Scarborough (133)","Not an NIA or Emerging Neighbourhood",NA,17820193
+116,2501171,26022366,NA,22,22,"Humbermede (22)","Humbermede (22)","Neighbourhood Improvement Area","NIA",17820209
+117,2501170,26022365,NA,37,37,"Willowdale West (37)","Willowdale West (37)","Not an NIA or Emerging Neighbourhood",NA,17820225
+118,2501169,26022364,NA,81,81,"Trinity-Bellwoods (81)","Trinity-Bellwoods (81)","Not an NIA or Emerging Neighbourhood",NA,17820241
+119,2501168,26022363,NA,55,55,"Thorncliffe Park (55)","Thorncliffe Park (55)","Neighbourhood Improvement Area","NIA",17820257
+120,2501167,26022362,NA,138,138,"Eglinton East (138)","Eglinton East (138)","Neighbourhood Improvement Area","NIA",17820273
+121,2501166,26022361,NA,38,38,"Lansing-Westgate (38)","Lansing-Westgate (38)","Not an NIA or Emerging Neighbourhood",NA,17820289
+122,2501165,26022360,NA,27,27,"York University Heights (27)","York University Heights (27)","Neighbourhood Improvement Area","NIA",17820305
+123,2501164,26022359,NA,77,77,"Waterfront Communities-The Island (77)","Waterfront Communities-The Island (77)","Not an NIA or Emerging Neighbourhood",NA,17820321
+124,2501163,26022358,NA,115,115,"Mount Dennis (115)","Mount Dennis (115)","Neighbourhood Improvement Area","NIA",17820337
+125,2501162,26022357,NA,49,49,"Bayview Woods-Steeles (49)","Bayview Woods-Steeles (49)","Not an NIA or Emerging Neighbourhood",NA,17820353
+126,2501161,26022356,NA,64,64,"Woodbine Corridor (64)","Woodbine Corridor (64)","Not an NIA or Emerging Neighbourhood",NA,17820369
+127,2501160,26022355,NA,130,130,"Milliken (130)","Milliken (130)","Not an NIA or Emerging Neighbourhood",NA,17820385
+128,2501159,26022354,NA,137,137,"Woburn (137)","Woburn (137)","Neighbourhood Improvement Area","NIA",17820401
+129,2501158,26022353,NA,116,116,"Steeles (116)","Steeles (116)","Emerging Neighbourhood","EN",17820417
+130,2501157,26022352,NA,95,95,"Annex (95)","Annex (95)","Not an NIA or Emerging Neighbourhood",NA,17820433
+131,2501156,26022351,NA,101,101,"Forest Hill South (101)","Forest Hill South (101)","Not an NIA or Emerging Neighbourhood",NA,17820449
+132,2501155,26022350,NA,26,26,"Downsview-Roding-CFB (26)","Downsview-Roding-CFB (26)","Neighbourhood Improvement Area","NIA",17820465
+133,2501154,26022349,NA,6,6,"Kingsview Village-The Westway (6)","Kingsview Village-The Westway (6)","Neighbourhood Improvement Area","NIA",17820481
+134,2501153,26022348,NA,2,2,"Mount Olive-Silverstone-Jamestown (2)","Mount Olive-Silverstone-Jamestown (2)","Neighbourhood Improvement Area","NIA",17820497
+135,2501152,26022347,NA,119,119,"Wexford/Maryvale (119)","Wexford/Maryvale (119)","Not an NIA or Emerging Neighbourhood",NA,17820513
+136,2501151,26022346,NA,20,20,"Alderwood (20)","Alderwood (20)","Not an NIA or Emerging Neighbourhood",NA,17820529
+137,2501150,26022345,NA,21,21,"Humber Summit (21)","Humber Summit (21)","Neighbourhood Improvement Area","NIA",17820545
+138,2501149,26022344,NA,102,102,"Forest Hill North (102)","Forest Hill North (102)","Not an NIA or Emerging Neighbourhood",NA,17820561
+139,2501148,26022343,NA,8,8,"Humber Heights-Westmount (8)","Humber Heights-Westmount (8)","Emerging Neighbourhood","EN",17820577
+140,2501147,26022342,NA,128,128,"Agincourt South-Malvern West (128)","Agincourt South-Malvern West (128)","Not an NIA or Emerging Neighbourhood",NA,17820593

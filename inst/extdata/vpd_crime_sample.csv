@@ -1,0 +1,551 @@
+"TYPE","YEAR","MONTH","DAY","HOUR","MINUTE","HUNDRED_BLOCK","NEIGHBOURHOOD","X","Y"
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2003,1,8,23,30,"POWELL ST / GLEN DR","Strathcona",494089,5458895
+"Vehicle Collision or Pedestrian Struck (with Injury)",2003,1,9,18,40,"W BROADWAY AVE / VINE ST","Kitsilano",488530,5456804
+"Vehicle Collision or Pedestrian Struck (with Injury)",2003,2,5,9,46,"GRANVILLE ST / W 70TH AVE","Marpole",489763,5450647
+"Theft of Vehicle",2003,2,10,7,30,"46XX W 2ND AVE","West Point Grey",484494.7453,5457644.8461
+"Break and Enter Residential/Other",2003,3,7,5,5,"24XX CAROLINA ST","Mount Pleasant",493381.8024,5456736.4097
+"Other Theft",2003,3,20,18,0,"E HASTINGS ST / MAIN ST","Strathcona",492749.7913,5458737.3828
+"Break and Enter Commercial",2003,3,22,18,0,"28XX E 1ST AVE","Hastings-Sunrise",496594.7144,5457399.7182
+"Mischief",2003,3,28,8,21,"14XX LAMEYS MILL RD","Fairview",490007.6948,5457360.3881
+"Break and Enter Residential/Other",2003,4,8,8,30,"6XX SE MARINE DR","Sunset",493348.7346,5450928.7935
+"Mischief",2003,4,14,21,1,"13XX COMMERCIAL DR","Grandview-Woodland",494942.849,5457802.4478
+"Break and Enter Residential/Other",2003,4,15,15,0,"29XX W 45TH AVE","Kerrisdale",487565.5278,5453153.9596
+"Break and Enter Residential/Other",2003,4,22,9,0,"33XX E 28TH AVE","Renfrew-Collingwood",497699.1727,5454727.0973
+"Other Theft",2003,4,24,5,45,"22XX MARLIN QUAY","Victoria-Fraserview",495659.126,5450440.6006
+"Offence Against a Person",2003,4,26,0,0,"OFFSET TO PROTECT PRIVACY","Grandview-Woodland",0,0
+"Theft of Vehicle",2003,4,30,19,0,"33XX TRUTCH ST","Arbutus Ridge",487191.8934,5456036.9581
+"Mischief",2003,5,1,0,0,"58XX JOYCE ST","Killarney",497280.081,5453099.9717
+"Break and Enter Residential/Other",2003,5,2,8,30,"19XX W 7TH AVE","Kitsilano",489121.9801,5456979.1603
+"Break and Enter Commercial",2003,5,18,17,30,"13XX DAVIE ST","West End",490155.5609,5458929.7678
+"Vehicle Collision or Pedestrian Struck (with Injury)",2003,5,21,16,16,"13XX E BROADWAY AVE","Grandview-Woodland",494386,5456628
+"Offence Against a Person",2003,5,31,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Theft of Vehicle",2003,5,31,21,30,"7XX E 54TH AVE","Sunset",493409.9108,5451983.2858
+"Theft of Vehicle",2003,6,23,0,1,"34XX E 49TH AVE","Killarney",497655.5165,5452424.228
+"Mischief",2003,7,4,3,0,"57XX VICTORIA DR","Victoria-Fraserview",495225.3707,5453298.9954
+"Other Theft",2003,7,15,15,0,"3XX W GEORGIA ST","Central Business District",491651.5653,5458615.1512
+"Theft of Bicycle",2003,7,21,17,0,"ARBUTUS ST / W BROADWAY AVE","Kitsilano",488872.9023,5456795.4582
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2003,8,1,17,26,"KNIGHT ST / SE MARINE DR OFRP","Sunset",494376,5451033
+"Vehicle Collision or Pedestrian Struck (with Injury)",2003,8,11,8,35,"26XX 1 HWY","Hastings-Sunrise",497727,5458042
+"Break and Enter Commercial",2003,8,12,17,0,"57XX WEST BOULEVARD","Kerrisdale",488671.6649,5453511.3163
+"Homicide",2003,8,16,0,0,"OFFSET TO PROTECT PRIVACY","Shaughnessy",0,0
+"Theft from Vehicle",2003,8,16,12,45,"8XX BURRARD ST","Central Business District",491066.1932,5458945.8116
+"Theft of Bicycle",2003,8,18,22,29,"5XX E 13TH AVE","Mount Pleasant",493350.896,5456237.0696
+"Theft from Vehicle",2003,8,26,22,0,"34XX E HASTINGS ST","Hastings-Sunrise",497881.503,5458714.0205
+"Other Theft",2003,9,10,0,0,"61XX ALBERTA ST","Oakridge",491776.176,5452960.9786
+"Mischief",2003,9,25,22,30,"9XX SEYMOUR ST","Central Business District",491208.2714,5458510.421
+"Theft of Bicycle",2003,10,1,22,0,"22XX E 7TH AVE","Grandview-Woodland",495736.6941,5456817.952
+"Break and Enter Residential/Other",2003,10,3,23,0,"13XX W PENDER ST","Central Business District",490796.4177,5459620.8865
+"Vehicle Collision or Pedestrian Struck (with Injury)",2003,10,4,9,3,"27XX BLOCK WILLIAM ST","Hastings-Sunrise",496500,5457907
+"Other Theft",2003,10,5,22,37,"14XX E BROADWAY AVE","Kensington-Cedar Cottage",494585.3434,5456620.5618
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2003,11,17,17,5,"KNIGHT ST / E 41ST AVE","Kensington-Cedar Cottage",494389,5453331
+"Break and Enter Residential/Other",2003,11,24,12,0,"28XX W 17TH AVE","Arbutus Ridge",487671.1038,5456045.9981
+"Theft of Vehicle",2003,12,7,6,52,"22XX PANDORA ST","Grandview-Woodland",495733.2171,5458922.8419
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2003,12,28,12,47,"9XX BLOCK E 7TH AVE","Mount Pleasant",493871,5456815
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2003,12,31,0,0,"E 59TH AVE / FRASER ST","Sunset",493373,5451530
+"Homicide",2004,1,6,0,0,"OFFSET TO PROTECT PRIVACY","West End",0,0
+"Offence Against a Person",2004,2,13,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Break and Enter Commercial",2004,2,20,22,0,"11XX E PENDER ST","Strathcona",494113.028,5458586.536
+"Other Theft",2004,3,13,1,0,"9XX GRANVILLE ST","Central Business District",491132.8935,5458581.8434
+"Offence Against a Person",2004,4,1,0,0,"OFFSET TO PROTECT PRIVACY","West End",0,0
+"Theft of Vehicle",2004,4,5,5,15,"53XX ARGYLE ST","Kensington-Cedar Cottage",494806.8167,5453728.2456
+"Theft from Vehicle",2004,4,14,15,0,"7XX RICHARDS ST","Central Business District",491506.1,5458674.3113
+"Theft from Vehicle",2004,4,15,18,0,"5XX E 15TH AVE","Mount Pleasant",493200.2306,5456069.3562
+"Theft from Vehicle",2004,4,16,17,30,"5XX HORNBY ST","Central Business District",491449.6765,5459186.2905
+"Homicide",2004,4,28,0,0,"OFFSET TO PROTECT PRIVACY","Strathcona",0,0
+"Theft of Vehicle",2004,5,6,22,0,"16XX BEACH AVE","West End",489679.4415,5458940.0624
+"Theft of Vehicle",2004,5,8,10,0,"4XX E 17TH AVE","Riley Park",492986.8618,5455870.3039
+"Break and Enter Residential/Other",2004,5,12,13,24,"45XX W 15TH AVE","West Point Grey",484705.0551,5456298.7053
+"Theft of Vehicle",2004,5,28,1,30,"13XX W 4TH AVE","Fairview",490174.6495,5457110.6718
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2004,5,28,23,25,"87XX BLOCK HUDSON ST","Marpole",490215,5450403
+"Theft of Vehicle",2004,6,3,17,0,"13XX BROUGHTON ST","West End",490007.3972,5458916.4769
+"Other Theft",2004,6,13,4,0,"7XX NELSON ST","Central Business District",491044.0745,5458507.3886
+"Break and Enter Commercial",2004,6,17,19,0,"14XX CARTWRIGHT ST","Fairview",490145.2432,5457518.0383
+"Theft from Vehicle",2004,6,17,9,0,"10XX HARO ST","West End",490907.0265,5458966.1238
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2004,7,8,0,15,"14XX BLOCK SW MARINE DR","Marpole",489834,5450195
+"Break and Enter Residential/Other",2004,7,23,1,0,"36XX W 11TH AVE","Kitsilano",486516.6359,5456662.6503
+"Theft from Vehicle",2004,8,7,0,0,"1XX ALEXANDER ST","Central Business District",492580.9132,5459007.4397
+"Mischief",2004,8,12,21,0,"26XX VENABLES ST","Hastings-Sunrise",496223.5659,5458205.765
+"Break and Enter Residential/Other",2004,8,17,3,0,"13XX E 12TH AVE","Kensington-Cedar Cottage",494483.8556,5456316.7251
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2004,8,26,1,22,"18XX BLOCK W 4TH AVE","Kitsilano",489319,5457237
+"Homicide",2004,8,28,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Other Theft",2004,9,2,1,30,"7XX HOMER ST","Central Business District",491519.6896,5458558.166
+"Theft of Bicycle",2004,9,11,0,0,"33XX VICTORIA DR","Kensington-Cedar Cottage",495192.5449,5455784.1595
+"Theft from Vehicle",2004,10,7,21,0,"10XX GILFORD ST","West End",489771.9792,5459720.2803
+"Break and Enter Residential/Other",2004,10,13,16,0,"86XX MAIN ST","Sunset",492543.7293,5450458.989
+"Theft from Vehicle",2004,10,14,23,0,"13XX DAVIE ST","West End",490145.3665,5458952.8409
+"Theft of Bicycle",2004,11,9,19,0,"40XX W 10TH AVE","West Point Grey",485708.9432,5456778.4019
+"Break and Enter Commercial",2004,11,19,1,36,"9XX RICHARDS ST","Central Business District",491296.6695,5458463.958
+"Theft from Vehicle",2004,11,19,17,0,"E BROADWAY AVE / QUEBEC ST","Mount Pleasant",492508.8626,5456694.3105
+"Homicide",2004,11,30,0,0,"OFFSET TO PROTECT PRIVACY","Grandview-Woodland",0,0
+"Other Theft",2004,12,11,15,30,"16XX JOHNSTON ST","Fairview",490124.9546,5457766.1695
+"Theft of Vehicle",2004,12,27,14,0,"11XX FOUNDRY QUAY","Fairview",490504.3314,5457213.1437
+"Break and Enter Commercial",2004,12,29,19,30,"26XX MAIN ST","Mount Pleasant",492646.7379,5456579.1385
+"Homicide",2005,1,30,0,0,"OFFSET TO PROTECT PRIVACY","Oakridge",0,0
+"Homicide",2005,2,1,0,0,"OFFSET TO PROTECT PRIVACY","Killarney",0,0
+"Theft of Vehicle",2005,2,1,18,0,"30XX E 56TH AVE","Killarney",496813.7099,5451711.6384
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2005,2,7,10,56,"POWELL ST / GORE AVE","Strathcona",492893,5458938
+"Other Theft",2005,4,24,13,8,"11XX ROBSON ST","West End",490795.0156,5459233.3232
+"Other Theft",2005,4,29,13,36,"11XX HOWE ST","Central Business District",490849.9689,5458442.5047
+"Homicide",2005,5,12,0,0,"OFFSET TO PROTECT PRIVACY","West Point Grey",0,0
+"Offence Against a Person",2005,5,14,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Other Theft",2005,5,21,22,30,"COMMERCIAL DR / E 10TH AVE","Kensington-Cedar Cottage",494920.3381,5456517.1513
+"Theft of Vehicle",2005,5,23,19,45,"5XX E 59TH AVE","Sunset",493151.8743,5451531.9332
+"Theft of Vehicle",2005,5,28,18,0,"9XX RICHARDS ST","Central Business District",491206.5251,5458385.5403
+"Theft of Vehicle",2005,6,8,17,15,"88XX LAUREL ST","Marpole",490939.5424,5450221.7468
+"Break and Enter Commercial",2005,6,14,19,0,"4XX ROBSON ST","Central Business District",491477.4042,5458558.4432
+"Theft of Vehicle",2005,6,18,13,30,"10XX COTTON DR","Grandview-Woodland",494798.5713,5458176.9094
+"Homicide",2005,6,29,0,0,"OFFSET TO PROTECT PRIVACY","Renfrew-Collingwood",0,0
+"Mischief",2005,7,11,21,0,"7XX BEATTY ST","Central Business District",491837.5197,5458441.1982
+"Mischief",2005,7,13,19,0,"43XX W 10TH AVE","West Point Grey",485076.8572,5456794.8364
+"Other Theft",2005,7,31,18,0,"18XX MACDONALD ST","Kitsilano",487766.0328,5457457.1617
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2005,8,24,20,0,"CHARLES ST / RENFREW ST","Hastings-Sunrise",496787,5457834
+"Offence Against a Person",2005,8,25,0,0,"OFFSET TO PROTECT PRIVACY","Killarney",0,0
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2005,8,31,15,15,"23XX W 4TH AVE","Kitsilano",488458,5457310
+"Break and Enter Commercial",2005,9,3,16,0,"5XX W 12TH AVE","Fairview",491526.3604,5456417.3795
+"Break and Enter Commercial",2005,9,4,11,0,"71XX MACDONALD ST","Kerrisdale",487672.0591,5452058.8575
+"Break and Enter Residential/Other",2005,9,13,15,0,"29XX E 4TH AVE","Hastings-Sunrise",496829.7782,5457096.6167
+"Theft of Bicycle",2005,9,18,16,0,"HOWE ST / SMITHE ST","Central Business District",491095.1703,5458699.5476
+"Theft of Bicycle",2005,9,28,12,0,"3XX W 2ND AVE","Mount Pleasant",491829.1584,5457233.5919
+"Homicide",2005,10,8,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Break and Enter Residential/Other",2005,10,16,19,30,"10XX W 7TH AVE","Fairview",490722.9687,5456937.6514
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2005,10,20,18,25,"19XX BLOCK E BROADWAY AVE","Kensington-Cedar Cottage",495275,5456590
+"Mischief",2005,10,24,3,55,"8X W PENDER ST","Central Business District",492206.8702,5458693.4618
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2005,11,5,19,25,"4XX BLOCK SMITHE ST","Central Business District",491372,5458427
+"Offence Against a Person",2005,11,23,0,0,"OFFSET TO PROTECT PRIVACY","Mount Pleasant",0,0
+"Theft of Vehicle",2005,11,23,16,0,"11XX NELSON ST","West End",490662.6897,5458898.5787
+"Break and Enter Commercial",2005,12,14,19,24,"8XX HOMER ST","Central Business District",491437.5291,5458475.5308
+"Homicide",2005,12,18,0,0,"OFFSET TO PROTECT PRIVACY","Sunset",0,0
+"Theft of Bicycle",2005,12,21,18,0,"14XX HOMER ST","Central Business District",490792.9914,5457685.722
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2005,12,23,4,4,"19XX BLOCK E 41ST AVE","Victoria-Fraserview",495146,5453310
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2006,1,17,5,45,"QUEBEC ST / NATIONAL AVE","Central Business District",492583,5458026
+"Vehicle Collision or Pedestrian Struck (with Injury)",2006,1,17,8,22,"E 59TH AVE / MAIN ST","Sunset",492575,5451554
+"Break and Enter Commercial",2006,1,23,19,0,"15XX E 5TH AVE","Grandview-Woodland",494755.6684,5457034.3358
+"Offence Against a Person",2006,1,31,0,0,"OFFSET TO PROTECT PRIVACY","Riley Park",0,0
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2006,2,3,19,35,"E 55TH AVE / KERR ST","Killarney",496988,5451824
+"Theft of Vehicle",2006,2,4,22,30,"33XX SOPHIA ST","Riley Park",492828.7742,5455835.6456
+"Break and Enter Residential/Other",2006,2,6,4,50,"64XX VICTORIA DR","Victoria-Fraserview",495217.9657,5452541.5503
+"Theft from Vehicle",2006,2,26,15,0,"21XX W 39TH AVE","Arbutus Ridge",488521.7229,5453759.5672
+"Break and Enter Commercial",2006,2,27,7,35,"6X POWELL ST","Central Business District",492514.1843,5458945.2783
+"Theft of Vehicle",2006,3,3,15,0,"51XX ONTARIO ST","Riley Park",492329.7646,5454039.4245
+"Mischief",2006,3,4,0,8,"8XX HOWE ST","Central Business District",491166.1481,5458763.207
+"Theft from Vehicle",2006,4,25,22,0,"2XX RENFREW ST","Hastings-Sunrise",496796.4572,5458832.3774
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2006,5,9,15,30,"E 41ST AVE / MAIN ST","Sunset",492609,5453363
+"Theft of Bicycle",2006,5,11,12,0,"6XX W WATERFRONT RD","Central Business District",491948.5359,5459325.4557
+"Theft of Vehicle",2006,6,12,14,0,"46XX W 12TH AVE","West Point Grey",484549.3493,5456604.4909
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2006,6,27,12,43,"GRANVILLE ST / DRAKE ST","Central Business District",490706,5458156
+"Theft of Vehicle",2006,7,2,2,0,"41XX SKEENA ST","Renfrew-Collingwood",497927.8756,5455008.9663
+"Theft from Vehicle",2006,7,4,19,0,"1XX W 41ST AVE","Oakridge",492089.7242,5453388.691
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2006,7,9,11,41,"E HASTINGS ST / CARRALL ST","Central Business District",492412,5458751
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2006,7,28,6,40,"CLARK DR / N GRANDVIEW HWY","Strathcona",494368,5457062
+"Theft of Bicycle",2006,8,4,16,0,"1XX W 1ST AVE","Mount Pleasant",492142.6161,5457500.0876
+"Vehicle Collision or Pedestrian Struck (with Injury)",2006,9,9,11,19,"PRINCE EDWARD ST / E 49TH AVE","Sunset",492899,5452538
+"Mischief",2006,9,13,1,32,"7XX DAVIE ST","Central Business District",490814.4573,5458274.51
+"Break and Enter Commercial",2006,9,17,5,39,"45XX W 10TH AVE","West Point Grey",484609.467,5456806.7814
+"Theft of Bicycle",2006,9,24,9,0,"16XX HORNBY ST","Central Business District",490312.4093,5458037.9564
+"Break and Enter Commercial",2006,10,18,19,30,"28XX W BROADWAY AVE","Kitsilano",487700.7897,5456832.0184
+"Mischief",2006,10,29,0,57,"10XX GRANVILLE ST","Central Business District",491035.6913,5458497.8878
+"Theft of Vehicle",2006,11,3,6,0,"26XX W 4TH AVE","Kitsilano",488023.2795,5457293.6052
+"Vehicle Collision or Pedestrian Struck (with Injury)",2006,11,19,1,16,"18XX BLOCK FRANCES ST","Grandview-Woodland",495063,5458512
+"Theft of Bicycle",2006,11,30,20,0,"11XX E 12TH AVE","Mount Pleasant",494152.3073,5456329.2936
+"Break and Enter Commercial",2006,12,17,7,50,"11XX COMMERCIAL DR","Grandview-Woodland",494945.5032,5457977.3969
+"Theft from Vehicle",2007,1,3,23,30,"KINGSWAY AVE / TAUNTON ST","Renfrew-Collingwood",497121.1756,5453652.1738
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2007,2,1,12,0,"E 1ST AVE / RUPERT ST","Hastings-Sunrise",497540,5457400
+"Break and Enter Commercial",2007,2,18,4,44,"22XX W 1ST AVE","Kitsilano",488712.5754,5457569.6381
+"Theft of Vehicle",2007,3,7,21,30,"10XX HARWOOD ST","West End",490435.9692,5458336.0877
+"Break and Enter Residential/Other",2007,5,2,18,48,"46XX W 6TH AVE","West Point Grey",484455.8296,5457193.7046
+"Homicide",2007,5,19,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2007,6,29,22,19,"14XX BLOCK E 10TH AVE","Kensington-Cedar Cottage",494502,5456518
+"Mischief",2007,6,30,21,22,"69XX FRONTENAC ST","Killarney",498056.0334,5451959.3628
+"Offence Against a Person",2007,7,11,0,0,"OFFSET TO PROTECT PRIVACY","Fairview",0,0
+"Break and Enter Residential/Other",2007,7,15,0,0,"8XX W 67TH AVE","Marpole",490943.4914,5450875.8076
+"Theft of Vehicle",2007,7,15,0,0,"11XX E 53RD AVE","Sunset",493963.7814,5452119.8208
+"Break and Enter Commercial",2007,7,30,5,21,"7XX BEATTY ST","Central Business District",491731.7151,5458335.3969
+"Other Theft",2007,9,7,13,18,"6XX ROBSON ST","Central Business District",491356.587,5458679.4257
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2007,10,14,0,40,"85XX BLOCK OAK ST","Marpole",490514,5450734
+"Theft from Vehicle",2007,11,4,16,0,"11XX W 8TH AVE","Fairview",490461.2687,5456860.8896
+"Offence Against a Person",2007,11,11,0,0,"OFFSET TO PROTECT PRIVACY","West End",0,0
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2007,11,26,14,2,"VENABLES ST / RAYMUR AVE","Strathcona",493991,5458233
+"Break and Enter Residential/Other",2008,1,2,11,0,"12XX W 12TH AVE","Fairview",490277.5531,5456452.0806
+"Break and Enter Commercial",2008,1,3,18,30,"9XX POWELL ST","Strathcona",493947.9248,5458880.7983
+"Break and Enter Residential/Other",2008,1,5,15,30,"21XX TRIUMPH ST","Grandview-Woodland",495593.3878,5459024.5241
+"Homicide",2008,1,19,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Break and Enter Commercial",2008,1,31,20,0,"2XX E 11TH AVE","Mount Pleasant",492841.7294,5456479.5849
+"Theft from Vehicle",2008,3,6,21,5,"3XX ALEXANDER ST","Strathcona",492914.5747,5459043.2255
+"Mischief",2008,3,15,20,38,"BUTE ST / DAVIE ST","West End",490301.4017,5458792.1624
+"Offence Against a Person",2008,3,17,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Mischief",2008,3,22,20,0,"43XX ROSS ST","Kensington-Cedar Cottage",494083.5913,5454824.5785
+"Break and Enter Residential/Other",2008,3,26,2,30,"66XX ARGYLE ST","Victoria-Fraserview",494766.9342,5452350.9907
+"Offence Against a Person",2008,4,19,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Theft of Vehicle",2008,4,24,14,0,"6XX E 49TH AVE","Sunset",493250.0112,5452523.0269
+"Homicide",2008,5,7,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Break and Enter Residential/Other",2008,5,8,0,0,"4XX E 6TH AVE","Mount Pleasant",493145.6286,5456953.4585
+"Offence Against a Person",2008,6,10,0,0,"OFFSET TO PROTECT PRIVACY","Sunset",0,0
+"Break and Enter Residential/Other",2008,6,20,15,0,"62XX INVERNESS ST","Sunset",494180.1456,5452754.5758
+"Other Theft",2008,6,20,16,5,"7XX DUNSMUIR ST","Central Business District",491511.6366,5459023.6766
+"Theft of Vehicle",2008,6,25,11,39,"5XX E PENDER ST","Strathcona",493208.4766,5458612.4018
+"Offence Against a Person",2008,7,1,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Mischief",2008,7,25,7,31,"11XX SALSBURY DR","Grandview-Woodland",495088.4088,5458007.6638
+"Homicide",2008,7,28,0,0,"OFFSET TO PROTECT PRIVACY","Sunset",0,0
+"Offence Against a Person",2008,8,25,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Homicide",2008,8,30,0,0,"OFFSET TO PROTECT PRIVACY","Grandview-Woodland",0,0
+"Other Theft",2008,9,20,11,48,"CARRALL ST / EXPO BLVD","Central Business District",492278.8098,5458371.1047
+"Homicide",2008,12,12,0,0,"OFFSET TO PROTECT PRIVACY","Mount Pleasant",0,0
+"Theft from Vehicle",2008,12,29,22,0,"E 12TH AVE / NANAIMO ST","Kensington-Cedar Cottage",495879.522,5456266.5607
+"Theft of Bicycle",2009,1,12,19,0,"16XX W 7TH AVE","Fairview",489612.0808,5456965.9566
+"Offence Against a Person",2009,1,16,0,0,"OFFSET TO PROTECT PRIVACY","Mount Pleasant",0,0
+"Offence Against a Person",2009,2,1,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Break and Enter Commercial",2009,2,14,15,0,"11XX STATION ST","Strathcona",492834.924,5457930.2559
+"Break and Enter Residential/Other",2009,2,16,12,0,"57XX KILLARNEY ST","Killarney",496660.2242,5453284.6972
+"Break and Enter Commercial",2009,2,23,5,40,"48XX MAIN ST","Riley Park",492622.8611,5454382.3271
+"Break and Enter Residential/Other",2009,4,14,0,0,"69XX DUMFRIES ST","Victoria-Fraserview",494566.0501,5452065.0507
+"Mischief",2009,4,15,6,0,"1XX NANAIMO ST","Hastings-Sunrise",495893.2617,5459013.2891
+"Mischief",2009,4,16,17,0,"9XX E 13TH AVE","Mount Pleasant",493792.4108,5456224.0297
+"Theft of Vehicle",2009,4,23,14,0,"COTTON DR / WILLIAM ST","Grandview-Woodland",494801.364,5457912.0634
+"Theft of Vehicle",2009,5,29,18,0,"ARBUTUS ST / W 13TH AVE","Kitsilano",488860.5144,5456376.1918
+"Mischief",2009,5,30,11,50,"10XX BURRARD ST","Central Business District",490835.5218,5458718.9971
+"Theft of Vehicle",2009,6,8,23,0,"35XX DIEPPE DR","Renfrew-Collingwood",498212.3084,5455457.9352
+"Theft of Bicycle",2009,7,10,16,0,"11XX CHESTNUT ST","Kitsilano",489371.2063,5458167.6272
+"Offence Against a Person",2009,7,19,0,0,"OFFSET TO PROTECT PRIVACY","Strathcona",0,0
+"Homicide",2009,7,29,0,0,"OFFSET TO PROTECT PRIVACY","Sunset",0,0
+"Other Theft",2009,8,14,16,14,"57XX BALSAM ST","Kerrisdale",488249.5363,5453540.8656
+"Offence Against a Person",2009,8,25,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2009,9,26,3,24,"20XX BLOCK DUNDAS ST","Grandview-Woodland",495402,5459119
+"Other Theft",2009,12,4,18,30,"E 49TH AVE / VICTORIA DR","Victoria-Fraserview",495211.6049,5452489.3887
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2009,12,11,17,26,"CAMBIE ST / DUNSMUIR ST","Central Business District",491886,5458643
+"Break and Enter Residential/Other",2009,12,14,6,0,"21XX W 42ND AVE","Kerrisdale",488600.7907,5453441.6815
+"Break and Enter Residential/Other",2009,12,17,22,0,"23XX W BROADWAY AVE","Kitsilano",488458.8774,5456811.5161
+"Break and Enter Commercial",2010,1,8,1,0,"34XX LOUGHEED HWY","Renfrew-Collingwood",497775.7005,5456605.7661
+"Theft from Vehicle",2010,1,11,20,0,"MCGEER ST / QUEENS AVE","Renfrew-Collingwood",497611.5699,5454134.6833
+"Homicide",2010,1,16,0,0,"OFFSET TO PROTECT PRIVACY","Kensington-Cedar Cottage",0,0
+"Break and Enter Residential/Other",2010,3,12,20,50,"47XX ARBUTUS ST","Arbutus Ridge",488837.8938,5454530.2614
+"Theft from Vehicle",2010,3,13,11,0,"4XX RICHARDS ST","Central Business District",491861.1434,5459031.9759
+"Mischief",2010,3,28,17,0,"13XX SALSBURY DR","Grandview-Woodland",495085.1469,5457786.4896
+"Homicide",2010,3,29,0,0,"OFFSET TO PROTECT PRIVACY","Hastings-Sunrise",0,0
+"Break and Enter Commercial",2010,3,31,1,22,"63XX FRASER ST","Sunset",493399.4446,5452666.1249
+"Theft of Bicycle",2010,4,28,23,5,"19XX FERNDALE ST","Grandview-Woodland",495236.1328,5458543.8179
+"Theft of Vehicle",2010,5,17,18,0,"12XX BUTE ST","West End",490291.7511,5458775.7476
+"Theft of Vehicle",2010,8,18,22,30,"11XX GRANVILLE ST","Central Business District",490934.3357,5458381.2846
+"Theft of Bicycle",2010,9,7,12,0,"3XX W GEORGIA ST","Central Business District",491651.5653,5458615.1512
+"Offence Against a Person",2010,9,14,0,0,"OFFSET TO PROTECT PRIVACY","Sunset",0,0
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2010,11,3,10,37,"11XX STATION ST","Strathcona",492831,5457946
+"Theft of Vehicle",2010,11,27,20,0,"23XX PENTICTON ST","Hastings-Sunrise",496207.3613,5456785.5853
+"Theft from Vehicle",2011,1,24,5,0,"70XX ASH CRES","Oakridge",491332.7528,5452035.2172
+"Theft from Vehicle",2011,2,21,8,30,"5XX BURRARD ST","Central Business District",491374.3329,5459261.1093
+"Theft of Bicycle",2011,4,9,12,0,"6XX ABBOTT ST","Central Business District",492166.9595,5458515.5062
+"Homicide",2011,4,11,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Theft of Vehicle",2011,5,1,15,0,"25XX E 18TH AVE","Renfrew-Collingwood",496049.3753,5455694.2777
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2011,5,1,18,59,"E 41ST AVE / KILLARNEY ST","Killarney",496655,5453354
+"Offence Against a Person",2011,5,30,0,0,"OFFSET TO PROTECT PRIVACY","Strathcona",0,0
+"Theft of Bicycle",2011,7,11,12,0,"8XX HOMER ST","Central Business District",491473.3602,5458498.6413
+"Homicide",2011,7,26,0,0,"OFFSET TO PROTECT PRIVACY","Mount Pleasant",0,0
+"Offence Against a Person",2011,8,13,0,0,"OFFSET TO PROTECT PRIVACY","Strathcona",0,0
+"Theft of Bicycle",2011,9,6,15,0,"9XX JERVIS ST","West End",490492.6689,5459214.2957
+"Theft of Vehicle",2011,9,24,20,30,"6XX JERVIS ST","Central Business District",490851.4163,5459569.6028
+"Vehicle Collision or Pedestrian Struck (with Injury)",2011,9,28,16,22,"GRAVELEY ST / COMMERCIAL DR","Grandview-Woodland",494933,5457528
+"Break and Enter Residential/Other",2011,11,26,0,30,"15XX LAURIER AVE","Shaughnessy",489753.8012,5455356.8552
+"Theft from Vehicle",2012,3,11,5,45,"11XX HORNBY ST","Central Business District",490697.451,5458424.7387
+"Homicide",2012,3,19,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Theft of Bicycle",2012,4,30,22,0,"13XX E 31ST AVE","Kensington-Cedar Cottage",494383.5488,5454413.2742
+"Offence Against a Person",2012,5,13,0,0,"OFFSET TO PROTECT PRIVACY","Strathcona",0,0
+"Theft of Bicycle",2012,5,21,18,0,"8XX W 15TH AVE","Fairview",491011.9549,5456122.1657
+"Break and Enter Residential/Other",2012,6,15,14,30,"12XX E 63RD AVE","Sunset",494160.831,5451118.9965
+"Offence Against a Person",2012,6,16,0,0,"OFFSET TO PROTECT PRIVACY","Grandview-Woodland",0,0
+"Theft of Bicycle",2012,7,20,8,0,"9XX HOMER ST","Central Business District",491304.9684,5458328.8484
+"Break and Enter Residential/Other",2012,9,29,19,34,"32XX W 48TH AVE","Kerrisdale",487171.5517,5452877.1917
+"Mischief",2012,10,6,1,54,"1XX WATER ST","Central Business District",492243.075,5459021.0156
+"Homicide",2012,10,31,0,0,"OFFSET TO PROTECT PRIVACY","Hastings-Sunrise",0,0
+"Mischief",2012,11,3,2,44,"49XX DUCHESS ST","Renfrew-Collingwood",496220.8281,5454125.9635
+"Break and Enter Residential/Other",2012,12,5,10,45,"31XX E 50TH AVE","Killarney",497159.4914,5452334.2309
+"Theft from Vehicle",2012,12,30,0,0,"84XX KERR ST","Killarney",496926.6906,5450551.1908
+"Break and Enter Commercial",2013,3,15,12,51,"86XX MAIN ST","Sunset",492543.7293,5450458.989
+"Other Theft",2013,4,8,11,55,"4XX MAIN ST","Central Business District",492744.3493,5458647.2322
+"Other Theft",2013,4,9,14,40,"4XX E 24TH AVE","Riley Park",493001.7334,5455178.6463
+"Break and Enter Residential/Other",2013,5,25,2,0,"23XX WALL ST","Grandview-Woodland",495820.1925,5459725.2391
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2013,5,28,22,32,"E 1ST AVE / NOOTKA ST","Hastings-Sunrise",496983,5457402
+"Other Theft",2013,6,2,16,2,"17XX ADANAC ST","Grandview-Woodland",494979.8655,5458318.1661
+"Vehicle Collision or Pedestrian Struck (with Injury)",2013,6,6,17,44,"E 49TH AVE / VICTORIA DR","Victoria-Fraserview",495211,5452489
+"Theft from Vehicle",2013,6,27,20,12,"27XX W BROADWAY AVE","Kitsilano",487845.5455,5456828.7896
+"Break and Enter Residential/Other",2013,8,25,3,30,"20XX W 2ND AVE","Kitsilano",488975.204,5457464.5816
+"Theft of Bicycle",2013,10,14,18,45,"GRANVILLE ST / W GEORGIA ST","Central Business District",491408.2275,5458864.9388
+"Vehicle Collision or Pedestrian Struck (with Injury)",2013,11,18,22,51,"W 4TH AVE / BALSAM ST","Kitsilano",488371,5457288
+"Other Theft",2013,11,23,22,43,"23XX KINGSWAY AVE","Renfrew-Collingwood",495812.3675,5454309.9125
+"Break and Enter Residential/Other",2014,1,7,7,0,"14XX W 11TH AVE","Fairview",489997.0435,5456560.4157
+"Vehicle Collision or Pedestrian Struck (with Injury)",2014,1,16,8,50,"NOOTKA ST / E 27TH AVE","Renfrew-Collingwood",496970,5454829
+"Break and Enter Commercial",2014,3,3,5,5,"9XX DAVIE ST","Central Business District",490670.4538,5458416.7328
+"Theft from Vehicle",2014,3,4,23,30,"12XX NELSON ST","West End",490461.3512,5459087.382
+"Break and Enter Commercial",2014,3,14,5,3,"6XX E BROADWAY AVE","Mount Pleasant",493387.9879,5456644.704
+"Theft from Vehicle",2014,3,30,0,0,"86XX SELKIRK ST","Marpole",490295.32,5450600.9008
+"Other Theft",2014,4,7,14,0,"E 18TH AVE / SLOCAN ST","Renfrew-Collingwood",496394.6989,5455696.8183
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2014,4,8,12,47,"E BROADWAY AVE / ST CATHERINES ST","Mount Pleasant",493796,5456635
+"Homicide",2014,4,15,0,0,"OFFSET TO PROTECT PRIVACY","Strathcona",0,0
+"Break and Enter Residential/Other",2014,4,28,21,0,"5XX E 11TH AVE","Mount Pleasant",493259.0167,5456440.412
+"Homicide",2014,5,10,0,0,"OFFSET TO PROTECT PRIVACY","Renfrew-Collingwood",0,0
+"Theft of Bicycle",2014,5,15,16,0,"5XX W HASTINGS ST","Central Business District",491827.083,5459079.5453
+"Offence Against a Person",2014,5,25,0,0,"OFFSET TO PROTECT PRIVACY","West End",0,0
+"Theft of Bicycle",2014,6,1,12,0,"12XX JERVIS ST","West End",490179.7496,5458889.7497
+"Theft from Vehicle",2014,6,2,12,25,"56XX STANLEY PARK DR","Stanley Park",489611.3114,5462184.1929
+"Other Theft",2014,6,22,11,45,"8XX HOMER ST","Central Business District",491496.4147,5458521.8616
+"Theft from Vehicle",2014,7,4,8,45,"5XX PACIFIC ST","Central Business District",490685.8787,5457925.5769
+"Vehicle Collision or Pedestrian Struck (with Injury)",2014,7,10,16,16,"ROBSON ST / JERVIS ST","West End",490652,5459369
+"Vehicle Collision or Pedestrian Struck (with Injury)",2014,7,22,18,25,"RUPERT ST / E 41ST AVE","Killarney",496862,5453357
+"Mischief",2014,8,22,11,17,"11XX DAVIE ST","West End",490417.9352,5458679.8021
+"Break and Enter Commercial",2014,8,25,15,0,"11XX W HASTINGS ST","Central Business District",491263.5862,5459491.1278
+"Theft of Bicycle",2014,9,13,7,0,"15XX COMOX ST","West End",490102.6868,5459288.4938
+"Break and Enter Commercial",2014,10,12,2,0,"9X E 11TH AVE","Mount Pleasant",492485.003,5456487.2226
+"Vehicle Collision or Pedestrian Struck (with Injury)",2014,10,12,12,37,"PRIOR ST / MAIN ST","Central Business District",492731,5458227
+"Theft of Bicycle",2014,11,6,8,0,"5XX W 20TH AVE","South Cambie",491546.0822,5455616.3048
+"Mischief",2014,11,10,9,10,"6XX VERNON DR","Strathcona",494243.1223,5458527.2057
+"Vehicle Collision or Pedestrian Struck (with Injury)",2014,12,1,17,30,"KINGSWAY AVE / E KING EDWARD AVE","Kensington-Cedar Cottage",494737,5455082
+"Theft from Vehicle",2014,12,9,13,30,"X INDUSTRIAL AVE","Strathcona",492703.9591,5457531.8564
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2014,12,16,14,27,"45XX BLOCK W 10TH AVE","West Point Grey",484749,5456808
+"Theft from Vehicle",2014,12,18,21,0,"1XX W GEORGIA ST","Central Business District",491773.9448,5458495.4985
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2014,12,30,15,3,"OAK ST / W 15TH AVE","Fairview",490756,5456124
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2015,1,3,17,23,"63XX BLOCK ELLIOTT ST","Victoria-Fraserview",496020,5452651
+"Offence Against a Person",2015,1,24,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Vehicle Collision or Pedestrian Struck (with Injury)",2015,2,1,12,2,"COMMERCIAL DR / GRANDVIEW HWY N","Grandview-Woodland",494923,5456775
+"Break and Enter Commercial",2015,2,21,16,30,"11XX W GEORGIA ST","Central Business District",490967.3844,5459309.7253
+"Break and Enter Commercial",2015,2,24,18,45,"31XX E 51ST AVE","Killarney",497028.2616,5452244.6095
+"Other Theft",2015,3,4,12,0,"3XX ABBOTT ST","Central Business District",492213.8723,5458862.6471
+"Break and Enter Commercial",2015,4,9,23,0,"23XX WALL ST","Grandview-Woodland",495762.4191,5459683.3095
+"Break and Enter Commercial",2015,4,20,1,42,"5XX HORNBY ST","Central Business District",491479.4125,5459217.3937
+"Theft of Vehicle",2015,5,12,22,0,"54XX MCKINNON ST","Renfrew-Collingwood",497249.4784,5453579.0907
+"Break and Enter Commercial",2015,5,30,3,50,"15XX W 6TH AVE","Fairview",489824.1213,5457063.2755
+"Other Theft",2015,6,14,12,0,"14XX BURNABY ST","West End",489973.7858,5458950.8319
+"Theft of Bicycle",2015,6,28,10,35,"4X W 6TH AVE","Mount Pleasant",492306.322,5456990.1315
+"Mischief",2015,7,17,15,0,"1XX E HASTINGS ST","Central Business District",492636.1816,5458736.5923
+"Theft of Bicycle",2015,8,3,4,44,"5XX E HASTINGS ST","Strathcona",493212.0459,5458719.7881
+"Homicide",2015,8,8,0,0,"OFFSET TO PROTECT PRIVACY","Strathcona",0,0
+"Homicide",2015,8,18,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Break and Enter Residential/Other",2015,8,19,5,22,"78XX VICTORIA DR","Victoria-Fraserview",495193.8607,5451127.1835
+"Theft from Vehicle",2015,8,19,12,0,"1XX E HASTINGS ST","Central Business District",492571.6489,5458738.7436
+"Offence Against a Person",2015,8,31,0,0,"OFFSET TO PROTECT PRIVACY","West End",0,0
+"Other Theft",2015,9,1,13,20,"28XX GRANVILLE ST","Fairview",489910.8026,5456363.5816
+"Vehicle Collision or Pedestrian Struck (with Injury)",2015,9,7,15,3,"GORE AVE / PRIOR ST","Strathcona",492952,5458230
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2015,9,13,17,34,"23XX BLOCK SE MARINE DR","Victoria-Fraserview",495697,5450505
+"Homicide",2015,9,27,0,0,"OFFSET TO PROTECT PRIVACY","Shaughnessy",0,0
+"Theft from Vehicle",2015,10,15,20,0,"48XX HUDSON ST","Shaughnessy",490188.3097,5454457.9001
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2015,10,28,7,0,"1XX BLOCK E HASTINGS ST","Central Business District",492598,5458742
+"Offence Against a Person",2015,11,1,0,0,"OFFSET TO PROTECT PRIVACY","Fairview",0,0
+"Mischief",2015,11,17,9,0,"8XX SEYMOUR ST","Central Business District",491305.5679,5458621.4473
+"Break and Enter Commercial",2015,11,23,23,40,"16XX W 7TH AVE","Fairview",489732.9772,5456972.0677
+"Break and Enter Commercial",2015,11,26,17,0,"45XX W 5TH AVE","West Point Grey",484635.1949,5457295.0264
+"Break and Enter Commercial",2015,12,1,4,0,"45XX OAK ST","South Cambie",490713.8361,5454739.5944
+"Break and Enter Residential/Other",2015,12,22,18,23,"3XX W 44TH AVE","Oakridge",491736.3187,5453097.7243
+"Break and Enter Commercial",2016,1,11,13,8,"5X WATER ST","Central Business District",492335.0311,5459005.7049
+"Theft of Bicycle",2016,2,2,17,0,"21XX W 2ND AVE","Kitsilano",488844.8866,5457477.1179
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2016,2,8,9,14,"E 49TH AVE / FRASER ST","Sunset",493395,5452521
+"Break and Enter Residential/Other",2016,2,23,0,1,"2XX E 38 AV","Riley Park",492693.0814,5453735.4625
+"Theft of Vehicle",2016,3,3,22,0,"3XX LAKEWOOD DR","Grandview-Woodland",495518.4623,5458813.5524
+"Offence Against a Person",2016,3,6,0,0,"OFFSET TO PROTECT PRIVACY","Renfrew-Collingwood",0,0
+"Homicide",2016,3,10,0,0,"OFFSET TO PROTECT PRIVACY","",0,0
+"Theft of Vehicle",2016,3,10,8,30,"5XX BEATTY ST","Central Business District",492024.0432,5458628.8109
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2016,3,31,9,22,"RUPERT ST / E BROADWAY AVE","Renfrew-Collingwood",497539,5456571
+"Break and Enter Commercial",2016,4,28,22,8,"12XX MELVILLE ST","Central Business District",490961.7553,5459476.6715
+"Theft of Bicycle",2016,4,28,13,28,"13XX SEYMOUR ST","Central Business District",490699.6717,5457993.6499
+"Theft of Bicycle",2016,4,28,20,30,"16XX BEACH AVE","West End",489679.4415,5458940.0624
+"Vehicle Collision or Pedestrian Struck (with Injury)",2016,5,5,9,14,"THORNTON ST / TERMINAL AVE","Strathcona",493207,5457654
+"Theft of Bicycle",2016,5,8,13,23,"ABBOTT ST / WATER ST","Central Business District",492260.9736,5459020.968
+"Theft of Bicycle",2016,5,26,10,55,"11XX HAMILTON ST","Central Business District",491165.4836,5458114.9404
+"Other Theft",2016,5,28,13,21,"15XX COMMERCIAL DR","Grandview-Woodland",494939.2671,5457603.2309
+"Homicide",2016,6,6,0,0,"OFFSET TO PROTECT PRIVACY","Marpole",0,0
+"Mischief",2016,6,8,2,22,"4X DUNLEVY AVE","Strathcona",493068.4489,5459130.8235
+"Theft of Bicycle",2016,6,10,8,30,"26XX E BROADWAY AVE","Renfrew-Collingwood",496210.8434,5456579.1999
+"Theft from Vehicle",2016,7,7,13,0,"10XX SEYMOUR ST","Central Business District",491123.0816,5458425.3472
+"Offence Against a Person",2016,7,13,0,0,"OFFSET TO PROTECT PRIVACY","West End",0,0
+"Offence Against a Person",2016,8,5,0,0,"OFFSET TO PROTECT PRIVACY","Riley Park",0,0
+"Other Theft",2016,8,7,11,55,"5XX GRANVILLE ST","Central Business District",491556.8225,5459008.1222
+"Vehicle Collision or Pedestrian Struck (with Injury)",2016,8,25,21,47,"ROBSON ST / BUTE ST","West End",490767,5459254
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2016,8,29,17,26,"12XX BLOCK SEYMOUR ST","Central Business District",490875,5458182
+"Theft of Vehicle",2016,8,31,16,0,"18XX W 15TH AVE","Kitsilano",489369.7204,5456153.6648
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2016,9,3,22,37,"E BROADWAY AVE / ST CATHERINES ST","Mount Pleasant",493796,5456635
+"Homicide",2016,9,28,0,0,"OFFSET TO PROTECT PRIVACY","West End",0,0
+"Break and Enter Commercial",2016,10,24,20,30,"17XX W 5TH AVE","Fairview",489527.0248,5457166.4462
+"Mischief",2016,11,18,22,0,"717W W 8TH AVE","Fairview",491255.8333,5456839.955
+"Vehicle Collision or Pedestrian Struck (with Injury)",2016,12,1,18,31,"SALSBURY DR / WILLIAM ST","Grandview-Woodland",495082,5457910
+"Vehicle Collision or Pedestrian Struck (with Injury)",2017,1,10,6,45,"4XX BLOCK SW MARINE DR","Marpole",491595,5450891
+"Break and Enter Residential/Other",2017,1,31,15,53,"32XX CHARLES ST","Hastings-Sunrise",497386.4322,5457827.7468
+"Vehicle Collision or Pedestrian Struck (with Injury)",2017,2,11,2,38,"6XX BLOCK COMMERCIAL DR","Grandview-Woodland",494876,5458492
+"Homicide",2017,3,9,0,0,"OFFSET TO PROTECT PRIVACY","Kensington-Cedar Cottage",0,0
+"Mischief",2017,3,14,19,9,"LAUREL ST / W BROADWAY AVE","Fairview",490965.4176,5456741.2859
+"Homicide",2017,4,2,0,0,"OFFSET TO PROTECT PRIVACY","Grandview-Woodland",0,0
+"Homicide",2017,4,15,0,0,"OFFSET TO PROTECT PRIVACY","Sunset",0,0
+"Theft of Vehicle",2017,4,20,22,0,"36XX SE MARINE DR","Killarney",498129.6248,5450574.6636
+"Theft of Bicycle",2017,5,8,17,0,"10XX MAIN ST","Strathcona",492744.1467,5458124.6243
+"Theft from Vehicle",2017,5,14,20,0,"1XX W 17TH AVE","Riley Park",492088.4902,5455885.4832
+"Theft of Vehicle",2017,5,18,22,48,"E 49TH AVE / VICTORIA DR","Victoria-Fraserview",495211.6049,5452489.3887
+"Theft from Vehicle",2017,5,20,21,48,"1XX W PENDER ST","Central Business District",492074.1894,5458729.9836
+"Theft of Bicycle",2017,5,27,19,0,"6XX STAMPS LAND","Fairview",491399.9928,5457344.4715
+"Other Theft",2017,6,3,0,0,"X NK_LOC ST","Strathcona",492765.9374,5458793.3032
+"Theft from Vehicle",2017,6,25,12,0,"4XX HOMER ST","Central Business District",491910.0832,5458939.7438
+"Offence Against a Person",2017,6,27,0,0,"OFFSET TO PROTECT PRIVACY","West End",0,0
+"Vehicle Collision or Pedestrian Struck (with Injury)",2017,6,30,3,42,"HEATLEY AVE / PRIOR ST","Strathcona",493472,5458207
+"Theft from Vehicle",2017,7,8,11,0,"16XX NELSON ST","West End",490142.0665,5459403.1109
+"Break and Enter Residential/Other",2017,7,24,16,0,"19XX KITCHENER ST","Grandview-Woodland",495297.498,5457710.4151
+"Theft from Vehicle",2017,7,28,23,0,"34XX MONS DR","Renfrew-Collingwood",497735.5843,5455517.8603
+"Vehicle Collision or Pedestrian Struck (with Injury)",2017,8,9,12,35,"14XX BLOCK W 71ST AVE","Marpole",489940,5450480
+"Mischief",2017,9,6,21,30,"2XX E 14TH AVE","Mount Pleasant",492713.4506,5456189.1832
+"Mischief",2017,9,21,0,0,"40XX W 12TH AVE","West Point Grey",485875.1224,5456571.9355
+"Theft of Vehicle",2017,10,1,16,50,"15XX VINE ST","Kitsilano",488557.7014,5457772.9759
+"Vehicle Collision or Pedestrian Struck (with Injury)",2017,10,19,12,15,"31XX BLOCK E 49TH AVE","Killarney",497041,5452437
+"Vehicle Collision or Pedestrian Struck (with Injury)",2017,10,20,4,51,"23XX IRONWORKERS MEMORIAL BRDG","Hastings-Sunrise",498102.2667,5460027.7278
+"Other Theft",2017,10,26,0,0,"X NK_LOC ST","Strathcona",492765.9374,5458793.3032
+"Vehicle Collision or Pedestrian Struck (with Injury)",2017,10,28,8,57,"4XX MAIN ST","Strathcona",492749,5458648
+"Vehicle Collision or Pedestrian Struck (with Injury)",2017,11,14,17,54,"SE MARINE DR / ARGYLE ST","Victoria-Fraserview",494750,5450924
+"Theft from Vehicle",2017,11,15,23,0,"14XX HARWOOD ST","West End",489904.3811,5458879.0137
+"Break and Enter Residential/Other",2017,11,16,4,52,"4XX ALEXANDER ST","Strathcona",493090.5653,5459028.6988
+"Break and Enter Commercial",2017,11,24,18,0,"5X E 10TH AVE","Mount Pleasant",492442.7088,5456597.3659
+"Vehicle Collision or Pedestrian Struck (with Injury)",2017,11,25,18,0,"3XX N RENFREW ST","Hastings-Sunrise",496798,5459454
+"Other Theft",2017,12,2,18,0,"8XX DAVIE ST","Central Business District",490714.4899,5458386.2592
+"Break and Enter Commercial",2017,12,29,16,30,"10XX HOMER ST","Central Business District",491167.5589,5458189.1787
+"Homicide",2018,1,11,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Homicide",2018,1,18,0,0,"OFFSET TO PROTECT PRIVACY","Renfrew-Collingwood",0,0
+"Break and Enter Residential/Other",2018,2,8,22,0,"11XX W 59TH AVE","Marpole",490366.3914,5451614.8381
+"Vehicle Collision or Pedestrian Struck (with Injury)",2018,2,9,14,13,"E 16TH AVE / ST GEORGE ST","Riley Park",493175,5455971
+"Break and Enter Commercial",2018,3,21,20,51,"X W 7TH AVE","Mount Pleasant",492361.4337,5456889.225
+"Break and Enter Residential/Other",2018,4,16,12,0,"83XX CAPRI CRES","Killarney",497992.3176,5450615.7962
+"Offence Against a Person",2018,4,16,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Theft of Bicycle",2018,5,4,19,0,"5X KEEFER ST","Central Business District",492501.1305,5458496.1502
+"Theft of Bicycle",2018,5,24,11,6,"ABBOTT ST / W HASTINGS ST","Central Business District",492203.9207,5458810.8912
+"Offence Against a Person",2018,5,25,0,0,"OFFSET TO PROTECT PRIVACY","Kensington-Cedar Cottage",0,0
+"Vehicle Collision or Pedestrian Struck (with Injury)",2018,6,7,11,3,"W GEORGIA ST / RICHARDS ST","Central Business District",491549,5458724
+"Mischief",2018,6,18,11,45,"43XX SIDNEY ST","Kensington-Cedar Cottage",495429.6452,5454871.8608
+"Theft from Vehicle",2018,6,18,6,30,"31XX E GEORGIA ST","Hastings-Sunrise",497179.8718,5458386.1435
+"Vehicle Collision or Pedestrian Struck (with Injury)",2018,7,5,18,10,"W 42ND AVE / OAK ST","Oakridge",490673,5453366
+"Vehicle Collision or Pedestrian Struck (with Injury)",2018,7,13,14,50,"CLARK DR / E 2ND AVE","Strathcona",494370,5457335
+"Other Theft",2018,7,19,14,25,"5XX W 12TH AVE","Fairview",491525.979,5456417.3884
+"Other Theft",2018,8,21,9,5,"44XX GRANVILLE ST","Shaughnessy",489866.7862,5454767.5052
+"Break and Enter Commercial",2018,9,29,13,0,"92XX OAK ST","Marpole",490761.2208,5449838.7182
+"Break and Enter Commercial",2018,10,3,21,30,"3XX E 11TH AVE","Mount Pleasant",492916.2222,5456487.0574
+"Other Theft",2018,10,9,19,27,"7XX GRANVILLE ST","Central Business District",491292.7916,5458742.3123
+"Other Theft",2018,10,10,11,0,"4XX TERMINAL AVE","Strathcona",493132.6821,5457691.9731
+"Offence Against a Person",2018,11,3,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Mischief",2018,11,15,13,0,"4XX E BROADWAY AVE","Mount Pleasant",493088.8073,5456639.3913
+"Theft from Vehicle",2018,11,18,17,20,"ROBSON ST / THURLOW ST","West End",490920.4236,5459101.6058
+"Break and Enter Residential/Other",2018,12,23,13,0,"81XX CARTIER ST","Marpole",489976.6814,5451052.787
+"Homicide",2019,1,9,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2019,1,11,10,45,"DUMFRIES ST / E 33RD AVE","Kensington-Cedar Cottage",494640,5454159
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2019,2,5,10,16,"COMMERCIAL DR / E HASTINGS ST","Grandview-Woodland",494879,5458723
+"Offence Against a Person",2019,2,17,0,0,"OFFSET TO PROTECT PRIVACY","Hastings-Sunrise",0,0
+"Mischief",2019,3,1,18,0,"2XX E 23RD AVE","Riley Park",492761.9824,5455283.3312
+"Theft of Bicycle",2019,4,12,13,30,"E HASTINGS ST / HEATLEY AVE","Strathcona",493488.3945,5458716.0918
+"Offence Against a Person",2019,5,3,0,0,"OFFSET TO PROTECT PRIVACY","Strathcona",0,0
+"Theft from Vehicle",2019,5,23,18,30,"27XX COOPERATIVE WAY","Renfrew-Collingwood",496412.5967,5456077.1174
+"Offence Against a Person",2019,5,30,0,0,"OFFSET TO PROTECT PRIVACY","Sunset",0,0
+"Vehicle Collision or Pedestrian Struck (with Injury)",2019,6,7,19,16,"WINDERMERE ST / E HASTINGS ST","Hastings-Sunrise",497368,5458712
+"Theft from Vehicle",2019,6,19,20,30,"BUTE ST / JUNG LANE","West End",490106.6387,5458594.3853
+"Homicide",2019,6,25,0,0,"OFFSET TO PROTECT PRIVACY","Riley Park",0,0
+"Offence Against a Person",2019,7,2,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Theft of Vehicle",2019,7,31,18,30,"66XX GRANVILLE ST","Kerrisdale",489810.3716,5452505.909
+"Theft of Bicycle",2019,8,19,21,25,"MACDONALD ST / W 41ST AVE","Arbutus Ridge",487813.9924,5453563.5837
+"Break and Enter Residential/Other",2019,8,23,16,0,"16XX W 28TH AVE","Shaughnessy",489641.8016,5454878.258
+"Other Theft",2019,8,24,14,52,"8XX W PENDER ST","Central Business District",491499.2161,5459242.6241
+"Theft from Vehicle",2019,8,30,21,0,"4XX PRIOR ST","Strathcona",493125.2496,5458222.9432
+"Vehicle Collision or Pedestrian Struck (with Injury)",2019,9,20,10,55,"MAIN ST / E 37TH AVE","Riley Park",492601,5453836
+"Break and Enter Commercial",2019,10,9,16,30,"1XX W 2ND AVE","Mount Pleasant",492197.8464,5457401.8531
+"Theft from Vehicle",2019,10,14,21,0,"10XX ALBERNI ST","West End",491030.3956,5459151.6264
+"Other Theft",2019,10,30,16,36,"26XX RENFREW ST","Renfrew-Collingwood",496769.0086,5456394.7202
+"Theft of Vehicle",2019,11,7,7,0,"3XX E 6TH AVE","Mount Pleasant",492814.8722,5456966.9197
+"Break and Enter Residential/Other",2019,11,29,1,26,"8XX W 23RD AVE","South Cambie",490946.0637,5455335.0494
+"Theft of Vehicle",2019,12,14,14,0,"6XX E 63RD AVE","Sunset",493212.4662,5451158.7762
+"Break and Enter Commercial",2020,1,10,7,0,"6XX E 7TH AVE","Mount Pleasant",493442.5004,5456841.1333
+"Mischief",2020,2,25,10,0,"27XX W 14TH AVE","Kitsilano",487820.7336,5456319.9277
+"Mischief",2020,3,16,17,42,"1XX W PENDER ST","Central Business District",492053.6978,5458745.2403
+"Other Theft",2020,4,2,0,45,"15XX NELSON ST","West End",490205.5127,5459352.9426
+"Offence Against a Person",2020,4,10,0,0,"OFFSET TO PROTECT PRIVACY","West End",0,0
+"Offence Against a Person",2020,6,15,0,0,"OFFSET TO PROTECT PRIVACY","West End",0,0
+"Homicide",2020,7,1,0,0,"OFFSET TO PROTECT PRIVACY","Strathcona",0,0
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2020,8,20,15,23,"COLUMBIA ST / W KING EDWARD AVE","Riley Park",491993,5455137
+"Theft of Bicycle",2020,9,18,4,0,"2XX MAIN ST","Central Business District",492752.7913,5458906.3333
+"Mischief",2020,9,29,23,0,"15XX POWELL ST","Grandview-Woodland",494624.5145,5458952.8488
+"Theft of Bicycle",2020,10,2,19,0,"8X W 1ST AVE","Mount Pleasant",492272.1433,5457513.4793
+"Break and Enter Residential/Other",2020,10,3,12,55,"13XX LABURNUM ST","Kitsilano",488993.441,5457886.585
+"Theft of Bicycle",2020,10,7,7,50,"VINE ST / W 4TH AVE","Kitsilano",488541.8576,5457281.4428
+"Mischief",2020,11,8,12,51,"74XX HEATHER ST","Marpole",490983.0469,5451638.8553
+"Other Theft",2020,11,28,19,47,"35XX E HASTINGS ST","Hastings-Sunrise",497948.8688,5458704.5307
+"Mischief",2020,12,21,8,32,"14XX HOWE ST","Central Business District",490436.0475,5458026.7
+"Offence Against a Person",2021,1,28,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Homicide",2021,4,4,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Other Theft",2021,4,11,10,30,"37XX W BROADWAY AVE","West Point Grey",486446.5702,5456857.4282
+"Homicide",2021,4,17,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Mischief",2021,4,27,19,0,"29XX W 8TH AVE","Kitsilano",487533.3576,5456937.0809
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2021,5,7,10,49,"WILLIAM ST / CLARK DR","Strathcona",494377,5457923
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2021,6,2,1,30,"51XX BLOCK CAMBIE ST","Riley Park",491530,5454014
+"Homicide",2021,6,28,0,0,"OFFSET TO PROTECT PRIVACY","Victoria-Fraserview",0,0
+"Vehicle Collision or Pedestrian Struck (with Injury)",2021,6,30,23,0,"VICTORIA DR / E 2ND AVE","Grandview-Woodland",495214,5457325
+"Other Theft",2021,7,23,19,53,"21XX W 4TH AVE","Kitsilano",488880.804,5457277.688
+"Theft of Bicycle",2021,8,2,23,0,"28XX CAMBIE ST","Mount Pleasant",491642.6989,5456405.1298
+"Vehicle Collision or Pedestrian Struck (with Injury)",2021,8,15,22,9,"GRANDVIEW HWY / SKEENA ST","Renfrew-Collingwood",497923,5456152
+"Theft of Bicycle",2021,8,25,3,0,"50XX WALES ST","Renfrew-Collingwood",496236.668,5453972.7564
+"Other Theft",2021,8,27,0,48,"22XX E 44TH AVE","Victoria-Fraserview",495577.5239,5453064.1604
+"Theft of Vehicle",2021,9,7,3,15,"14XX HARWOOD ST","West End",489904.3811,5458879.0137
+"Theft of Vehicle",2021,9,7,20,0,"7XX HAWKS AVE","Strathcona",493656.0888,5458397.6214
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2021,9,27,8,23,"3XX BLOCK W CORDOVA ST","Central Business District",492052,5458992
+"Theft of Vehicle",2021,10,13,5,45,"25XX W 19TH AVE","Arbutus Ridge",488138.3494,5455863.0767
+"Vehicle Collision or Pedestrian Struck (with Injury)",2021,10,19,23,1,"COMMERCIAL DR / E HASTINGS ST","Grandview-Woodland",494879,5458723
+"Offence Against a Person",2021,11,4,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Other Theft",2021,11,10,17,0,"COMMERCIAL DR / E BROADWAY AVE","Kensington-Cedar Cottage",494921.9032,5456620.4272
+"Homicide",2021,12,22,0,0,"OFFSET TO PROTECT PRIVACY","Strathcona",0,0
+"Homicide",2023,1,3,0,0,"OFFSET TO PROTECT PRIVACY","Strathcona",0,0
+"Theft from Vehicle",2023,1,23,0,0,"27XX E 4TH AVE","Hastings-Sunrise",496562.8528,5457106.1106
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2023,1,28,1,5,"6XX E HASTINGS ST","Strathcona",493371,5458719
+"Mischief",2023,2,1,9,30,"41XX PERRY ST","Kensington-Cedar Cottage",494816.1708,5455118.2931
+"Homicide",2023,3,3,0,0,"OFFSET TO PROTECT PRIVACY","Killarney",0,0
+"Mischief",2023,3,14,21,30,"28XX VENABLES ST","Hastings-Sunrise",496624.6272,5458214.6499
+"Break and Enter Residential/Other",2023,4,11,11,0,"23XX W 8TH AVE","Kitsilano",488519.6555,5456902.2158
+"Break and Enter Commercial",2023,7,5,19,0,"10XX HORNBY ST","Central Business District",490837.7786,5458569.647
+"Vehicle Collision or Pedestrian Struck (with Injury)",2023,8,9,18,15,"E BROADWAY AVE / WOODLAND DR","Kensington-Cedar Cottage",494641,5456624
+"Offence Against a Person",2023,8,10,0,0,"OFFSET TO PROTECT PRIVACY","West End",0,0
+"Offence Against a Person",2023,8,11,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Homicide",2023,9,10,0,0,"OFFSET TO PROTECT PRIVACY","Kensington-Cedar Cottage",0,0
+"Vehicle Collision or Pedestrian Struck (with Injury)",2023,9,11,0,17,"10XX BLOCK BROUGHTON ST","West End",490270,5459188
+"Offence Against a Person",2023,9,20,0,0,"OFFSET TO PROTECT PRIVACY","Kensington-Cedar Cottage",0,0
+"Mischief",2023,9,29,16,0,"29XX E 22ND AVE","Renfrew-Collingwood",496921.5404,5455322.1063
+"Theft of Bicycle",2023,9,29,19,20,"CAMBIE ST / W 7TH AVE","Fairview",491643.103,5456918.3636
+"Mischief",2023,10,4,1,16,"10XX BURRARD ST","West End",490806.2772,5458701.6118
+"Offence Against a Person",2023,10,10,0,0,"OFFSET TO PROTECT PRIVACY","Kensington-Cedar Cottage",0,0
+"Theft from Vehicle",2023,10,11,15,0,"18XX E GEORGIA ST","Grandview-Woodland",495034.5431,5458409.185
+"Theft of Bicycle",2023,10,13,0,0,"1XX E 1ST AVE","Mount Pleasant",492549.337,5457488.6151
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2023,10,31,15,22,"W 33RD AVE / ARBUTUS ST","Arbutus Ridge",488828,5454382
+"Mischief",2023,11,7,19,0,"9XX KINGSWAY AVE","Kensington-Cedar Cottage",493799.9534,5455750.4866
+"Theft of Bicycle",2023,12,22,8,0,"34XX NAIRN AVE","Killarney",497831.0898,5451431.2777
+"Theft of Vehicle",2024,2,4,0,0,"24XX W 41ST AVE","Arbutus Ridge",488220.0477,5453561.7434
+"Other Theft",2024,2,11,21,23,"12XX DAVIE ST","West End",490242.6338,5458856.48
+"Break and Enter Commercial",2024,3,17,0,0,"10XX BROUGHTON ST","West End",490233.2324,5459143.9805
+"Homicide",2024,4,12,0,0,"OFFSET TO PROTECT PRIVACY","Sunset",0,0
+"Other Theft",2024,5,6,10,22,"4XX SW MARINE DR","Marpole",491555.6361,5450891.4319
+"Theft of Vehicle",2024,5,20,0,15,"63XX FLEMING ST","Victoria-Fraserview",494682.7962,5452704.1813
+"Theft from Vehicle",2024,6,9,5,0,"13XX E 17TH AVE","Kensington-Cedar Cottage",494340.632,5455839.3467
+"Other Theft",2024,6,21,14,30,"16XX W 4TH AVE","Fairview",489668.8673,5457247.6606
+"Homicide",2024,8,9,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Vehicle Collision or Pedestrian Struck (with Injury)",2024,9,24,11,30,"HELMCKEN ST / SEYMOUR ST","Central Business District",491008,5458315
+"Theft of Bicycle",2024,10,12,0,0,"6XX STAMPS LAND","Fairview",491414.6939,5457326.5415
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2024,11,6,21,7,"23XX BLOCK VICTORIA DR","Grandview-Woodland",495207,5456799
+"Vehicle Collision or Pedestrian Struck (with Injury)",2024,11,13,7,2,"KEEFER ST / MAIN ST","Central Business District",492745,5458530
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2024,11,29,23,28,"CARRALL ST / E CORDOVA ST","Central Business District",492416,5458858
+"Break and Enter Residential/Other",2025,1,4,6,0,"41XX ATLIN ST","Renfrew-Collingwood",496658.6989,5454961.9153
+"Offence Against a Person",2025,3,1,0,0,"OFFSET TO PROTECT PRIVACY","Grandview-Woodland",0,0
+"Vehicle Collision or Pedestrian Struck (with Injury)",2025,3,19,18,49,"12XX BLOCK SE MARINE DR","Sunset",494038,5450923
+"Mischief",2025,4,17,14,30,"2XX W 1ST AVE","Mount Pleasant",491871.3304,5457419.8614
+"Vehicle Collision or Pedestrian Struck (with Injury)",2025,6,24,11,28,"W 41ST AVE / MANITOBA ST","Oakridge",492127,5453391
+"Offence Against a Person",2025,6,25,0,0,"OFFSET TO PROTECT PRIVACY","Central Business District",0,0
+"Mischief",2025,6,29,20,0,"84XX YUKON ST","Marpole",491623.3749,5450889.0338
+"Other Theft",2025,7,5,19,0,"28XX MAIN ST","Mount Pleasant",492640.0137,5456351.5504
+"Offence Against a Person",2025,7,15,0,0,"OFFSET TO PROTECT PRIVACY","Fairview",0,0
+"Vehicle Collision or Pedestrian Struck (with Injury)",2025,7,15,12,50,"15XX BLOCK W 70TH AVE","Marpole",489740,5450648
+"Other Theft",2025,7,19,20,0,"17XX BEACH AVE","West End",489615.8598,5459101.3916
+"Vehicle Collision or Pedestrian Struck (with Injury)",2025,8,15,7,21,"HARO ST / THURLOW ST","West End",490842,5459023
+"Theft from Vehicle",2025,8,28,19,30,"6XX HOMER ST","Central Business District",491743.9877,5458771.2913
+"Vehicle Collision or Pedestrian Struck (with Fatality)",2025,9,9,9,40,"ANGUS DR / W 57TH AVE","Kerrisdale",489204,5451862
+"Mischief",2025,10,10,16,15,"5X E 26TH AVE","Riley Park",492424.1058,5455041.3129
+"Other Theft",2025,10,16,19,30,"E HASTINGS ST / PRINCESS AVE","Strathcona",493347.6087,5458719.8513
+"Break and Enter Residential/Other",2025,10,17,22,0,"38XX CLARK DR","Kensington-Cedar Cottage",494316.5383,5455293.7863
+"Mischief",2025,10,21,10,6,"9XX W GEORGIA ST","Central Business District",491249.6179,5459030.2409
+"Mischief",2025,10,24,18,58,"4XX POWELL ST","Strathcona",493076.9353,5458937.3096
+"Vehicle Collision or Pedestrian Struck (with Injury)",2025,11,7,13,43,"1XX KEEFER PL","Central Business District",492120,5458568
+"Theft of Vehicle",2025,11,16,18,0,"16XX W 64TH AVE","Marpole",489538.8139,5451162.466
+"Break and Enter Residential/Other",2026,1,16,1,8,"1XX KEEFER PL","Central Business District",492117.1624,5458563.9812
+"Homicide",2026,1,20,0,0,"OFFSET TO PROTECT PRIVACY","Kensington-Cedar Cottage",0,0
+"Theft from Vehicle",2026,2,24,2,58,"KEEFER ST / MAIN ST","Strathcona",492745.8373,5458530.0657
+"Vehicle Collision or Pedestrian Struck (with Injury)",2026,3,4,12,14,"VINE ST / W BROADWAY AVE","Kitsilano",488530,5456804
+"Vehicle Collision or Pedestrian Struck (with Injury)",2026,3,20,10,56,"W 42ND AVE / OAK ST","Oakridge",490673,5453366
+"Break and Enter Commercial",2026,5,10,20,35,"10XX EXPO BLVD","Central Business District",491544.5157,5458009.7425

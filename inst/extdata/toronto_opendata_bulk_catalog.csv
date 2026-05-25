@@ -1,0 +1,541 @@
+"package_name","title","num_resources","metadata_modified","license"
+"temporary-extension-and-special-occasion-permit-endorsements-for-liquor-licences","Temporary Extension and Special Occasion Permit Endorsements for Liquor Licences",8,"2026-05-24T15:21:21.040146","notspecified"
+"multi-tenant-house-licences","Multi-Tenant (Rooming) House Licences",4,"2026-05-24T15:14:15.577862","notspecified"
+"polls-conducted-by-the-city","Polls conducted by the City",5,"2026-05-24T15:00:15.852619",NA
+"rain-gauge-locations-and-precipitation","Rain Gauge Locations and Precipitation",14,"2026-05-24T14:53:20.403368","notspecified"
+"traffic-signal-timing","Traffic Signal Timing",1,"2026-05-24T14:15:14.080166","notspecified"
+"daily-shelter-overnight-service-occupancy-capacity","Daily Shelter & Overnight Service Occupancy & Capacity",24,"2026-05-24T13:35:55.941361","notspecified"
+"traffic-volumes-midblock-vehicle-speed-volume-and-classification-counts","Traffic Volumes - Midblock Vehicle Speed, Volume and Classification Counts",30,"2026-05-24T13:28:50.882409","notspecified"
+"motor-vehicle-collisions-involving-killed-or-seriously-injured-persons","Motor Vehicle Collisions Involving Killed or Seriously Injured Persons",8,"2026-05-24T13:06:23.549697","notspecified"
+"open-data-intake","Toronto Open Data Intake",8,"2026-05-24T13:01:46.214385","notspecified"
+"short-term-rentals-registration","Short Term Rentals Registration",4,"2026-05-24T12:00:16.354170","open-government-licence-toronto"
+"building-permits-cleared-permits","Building Permits - Cleared Permits",5,"2026-05-24T11:13:18.317621","notspecified"
+"web-analytics","Web Analytics",4,"2026-05-24T10:35:01.633767","open-government-licence-toronto"
+"building-construction-demolition-violations","Building Construction/Demolition Violations",4,"2026-05-24T10:28:28.283824","open-government-licence-toronto"
+"building-permits-active-permits","Building Permits - Active Permits",4,"2026-05-24T10:24:56.325144","notspecified"
+"preliminary-zoning-reviews","Preliminary Zoning Reviews",4,"2026-05-24T10:16:08.509567",NA
+"apartment-building-evaluation","Apartment Building Evaluation",8,"2026-05-24T09:34:26.378998","open-government-licence-toronto"
+"development-applications","Development Applications",4,"2026-05-24T07:25:42.302171","notspecified"
+"bodysafe","BodySafe",9,"2026-05-24T07:04:08.619994","notspecified"
+"traffic-calming-database","Traffic Calming Database",4,"2026-05-24T03:24:24.280589","notspecified"
+"open-data-web-analytics","Open Data Portal Usage",13,"2026-05-24T03:05:13.063489","notspecified"
+"dinesafe","Dinesafe",5,"2026-05-24T02:13:38.893661","notspecified"
+"residential-health-hazards","Highrise Residential Health Hazards",11,"2026-05-24T02:04:01.120049","notspecified"
+"traffic-volumes-at-intersections-for-all-modes","Traffic Volumes - Multimodal Intersection Turning Movement Counts",28,"2026-05-23T22:44:29.295627","notspecified"
+"property-boundaries","Property Boundaries",11,"2026-05-23T22:22:32.079583","notspecified"
+"festivals-events","Festivals & Events",3,"2026-05-23T21:15:13.252157","notspecified"
+"earlyon-child-and-family-centres","EarlyON Child and Family Centres",9,"2026-05-23T21:00:26.529289",NA
+"catalogue-quality-scores","Toronto Open Data Quality Scores",9,"2026-05-23T19:34:39.784503","notspecified"
+"municipal-licensing-and-standards-investigation-activity","Municipal Licensing and Standards - Investigation Activity",3,"2026-05-23T19:17:03.656619",NA
+"lobbyist-registry","Lobbyist Registry",2,"2026-05-23T19:16:53.173664","notspecified"
+"city-council-and-committees-meeting-schedule-reports","City Council and Committees Meeting Schedule Reports",21,"2026-05-23T18:07:29.861404","notspecified"
+"registry-of-declared-interest","Registry of Declared Interest",21,"2026-05-23T18:06:58.542977",NA
+"watermains","Watermains",16,"2026-05-23T16:20:10.294291","notspecified"
+"tobids-all-open-solicitations","Toronto Bids Solicitations",4,"2026-05-23T15:58:48.204421","notspecified"
+"licensed-dogs-and-cats","Licensed Dogs and Cats",4,"2026-05-23T15:19:03.826298","notspecified"
+"air-conditioned-and-cool-spaces-heat-relief-network","Air Conditioned and Cool Spaces (Heat Relief Network)",13,"2026-05-23T11:14:59.964144",NA
+"committee-of-adjustment-applications","Committee of Adjustment Applications",81,"2026-05-23T10:10:04.696385","open-government-licence-toronto"
+"non-regulated-lead-sample","Non Regulated Lead Sample",4,"2026-05-23T06:19:17.985511",NA
+"municipal-licensing-and-standards-business-licences-and-permits","Municipal Licensing and Standards - Business Licences and Permits",5,"2026-05-23T06:11:01.121283","notspecified"
+"ttc-routes-and-schedules","TTC Routes and Schedules",1,"2026-05-23T02:27:45.718768","notspecified"
+"traffic-signals-tabular","Traffic Signals Tabular",28,"2026-05-23T00:06:32.488382",NA
+"park-and-recreation-facility-projects","Park and Recreation Facility Projects",8,"2026-05-23T00:05:53.240574","notspecified"
+"toronto-s-dashboard-key-indicators","Toronto's Dashboard Key Indicators",7,"2026-05-23T00:00:40.299516","notspecified"
+"utility-cut-permits","Utility Cut Permits",4,"2026-05-23T00:00:34.122112","open-government-licence-toronto"
+"toronto-island-ferry-ticket-counts","Toronto Island Ferry Ticket Counts",4,"2026-05-22T23:17:27.181392","notspecified"
+"parks-drinking-fountains","Parks Drinking Water Sources",17,"2026-05-22T18:53:48.979002","notspecified"
+"washroom-facilities","Park Washroom Facilities",8,"2026-05-22T18:29:31.039894","notspecified"
+"toronto-centreline-tcl","Toronto Centreline (TCL)",9,"2026-05-22T18:13:56.166900","open-government-licence-toronto"
+"licensed-child-care-centres","Licensed Child Care Centres",9,"2026-05-22T17:03:59.010814","open-government-licence-toronto"
+"sewer-manholes","Sewer Maintenance Holes",8,"2026-05-22T16:46:33.700153","notspecified"
+"sewer-gravity-mains","Sewer Gravity Mains",16,"2026-05-22T16:44:33.949989","notspecified"
+"sewer-outfalls","Sewer Outfalls",8,"2026-05-22T16:39:03.989335","notspecified"
+"sewer-inlets","Sewer Inlets",8,"2026-05-22T16:35:49.540729","notspecified"
+"transit-oriented-communities","Transit Oriented Communities",16,"2026-05-22T16:31:29.499400","notspecified"
+"sewer-junctions","Sewer Junctions",8,"2026-05-22T16:29:05.533203","notspecified"
+"tobids-non-competitive-contracts","Toronto Bids Non-Competitive Contracts",4,"2026-05-22T16:09:15.372072","notspecified"
+"sidewalk-construction-program","Sidewalk Construction Program",8,"2026-05-22T14:48:53.318069",NA
+"address-points-municipal-toronto-one-address-repository","Address Points (Municipal) - Toronto One Address Repository",10,"2026-05-22T11:41:30.867832","notspecified"
+"intersection-file-city-of-toronto","Intersection File - City of Toronto",9,"2026-05-22T09:06:45.251788","notspecified"
+"topographic-mapping-physical-location-of-trees","Topographic Mapping – Physical location of trees",2,"2026-05-22T06:28:59.589320","open-government-licence-toronto"
+"topographic-mapping-waterbodies-rivers","Topographic Mapping - Waterbodies & Rivers",1,"2026-05-22T06:27:09.699972","notspecified"
+"red-light-cameras","Red Light Cameras",13,"2026-05-22T05:03:36.593874","open-government-licence-toronto"
+"registered-programs-and-drop-in-courses-offering","Registered Programs and Drop In Courses Offering",16,"2026-05-21T21:39:21.283760",NA
+"heritage-register","Heritage Register",2,"2026-05-21T19:34:36.090347",NA
+"members-of-toronto-city-council-meeting-attendance","Members of Toronto City Council - Meeting Attendance",21,"2026-05-21T18:08:54.078910","notspecified"
+"tobids-awarded-contracts","Toronto Bids Awarded Contracts",4,"2026-05-21T16:05:40.770119","notspecified"
+"outbreaks-in-toronto-healthcare-institutions","Outbreaks in Toronto Healthcare Institutions",44,"2026-05-21T16:05:08.446753","notspecified"
+"road-reconstruction-program","Road Reconstruction Program",8,"2026-05-21T14:58:56.092529","notspecified"
+"road-resurfacing-program","Road Resurfacing Program",8,"2026-05-21T14:54:09.249408","notspecified"
+"development-pipeline","Development Pipeline",4,"2026-05-21T07:25:07.872577","notspecified"
+"tennis-courts-facilities","Tennis Courts Facilities",11,"2026-05-21T04:08:43.656159","notspecified"
+"monthly-communicable-disease-surveillance-data","Monthly Communicable Disease Surveillance Data",12,"2026-05-20T15:27:54.459794","notspecified"
+"noise-exemption-permits","Noise Exemption Permits",11,"2026-05-19T23:04:17.909392","notspecified"
+"z39-50-library-catalogue","Z39.50 - Library Catalogue",1,"2026-05-19T21:02:10.622677","notspecified"
+"water-valves","Water Valves",8,"2026-05-19T15:28:00.055032","notspecified"
+"private-transportation-companies-vehicle-operating-data","Private Transportation Companies – Vehicle Operating Data",12,"2026-05-19T12:42:19.194675","notspecified"
+"private-transportation-companies-summary-and-trip-data","Private Transportation Companies - Summary and Trip Data",18,"2026-05-19T12:42:04.736676","notspecified"
+"bike-share-toronto-ridership-data","Bike Share Toronto Ridership Data",13,"2026-05-19T11:27:46.786627",NA
+"short-term-rental-program-data","Short Term Rental Registration & Enforcement overview",4,"2026-05-19T02:04:36.650171","notspecified"
+"real-estate-asset-inventory","Real Estate Asset Inventory",16,"2026-05-18T19:07:38.431139","notspecified"
+"water-hydrants","Water Hydrants",8,"2026-05-18T15:26:44.317799","notspecified"
+"water-fittings","Water Fittings",8,"2026-05-18T15:25:43.331781","notspecified"
+"building-permits-signs","Building Permits - Signs",5,"2026-05-18T12:00:27.704356",NA
+"building-permits-pool-enclosures","Building Permits - Pool Enclosures",5,"2026-05-18T12:00:19.440507","notspecified"
+"building-permits-solar-hot-water-heaters","Building Permits - Solar Hot Water Heaters",5,"2026-05-18T12:00:15.439824",NA
+"dogs-issued-dangerous-dog-orders","Registry of Dogs Subject to and Issued a Dangerous Dog Order",4,"2026-05-18T10:14:47.695167","notspecified"
+"building-permits-green-roofs","Building Permits - Green Roofs",5,"2026-05-18T10:07:04.268346","notspecified"
+"light-duty-city-vehicle-utilization-data","Light duty city vehicle utilization data",4,"2026-05-18T08:08:40.570903",NA
+"traffic-and-parking-by-law-schedules","Traffic and Parking By-Law Schedules",4,"2026-05-18T02:27:53.983048","notspecified"
+"residential-front-yard-parking","Residential Front Yard Parking",4,"2026-05-18T00:00:22.737708",NA
+"toronto-shelter-system-flow","Toronto Shelter System Flow",4,"2026-05-15T20:04:30.137783","notspecified"
+"central-intake-calls","Central Intake calls",8,"2026-05-15T18:19:31.975248","notspecified"
+"sewer-pressurized-mains","Sewer Pressurized Mains",8,"2026-05-14T16:35:46.500426","notspecified"
+"members-of-toronto-city-council-voting-record","Members of Toronto City Council - Voting Record",21,"2026-05-13T18:08:26.354402","notspecified"
+"report-request-log-city-council-and-its-committees","Report Request Log – City Council and its Committees",4,"2026-05-13T16:32:11.870895","notspecified"
+"library-branch-general-information","Library Branch General Information",11,"2026-05-13T14:19:00.322216","notspecified"
+"public-art","Public Art",13,"2026-05-13T13:41:35.826593","open-government-licence-toronto"
+"parking-tickets","Parking Tickets",19,"2026-05-13T12:26:19.647272","notspecified"
+"permanent-bicycle-counters","Permanent Bicycle Counters",25,"2026-05-12T20:09:26.465589","notspecified"
+"cafeto-curb-lane-parklet-cafe-locations","CaféTO Locations",9,"2026-05-12T18:55:19.225598","notspecified"
+"labour-force-survey","Labour Force Survey",9,"2026-05-12T15:49:30.031278",NA
+"street-furniture-bicycle-parking","Street Furniture - Bicycle Parking - Bicycle Locking Ring",25,"2026-05-12T03:06:10.334145","notspecified"
+"city-of-toronto-free-public-wifi","City of Toronto Free Public WiFi",8,"2026-05-11T19:05:56.070423","notspecified"
+"311-service-requests-customer-initiated","311 Service Requests - Customer Initiated",18,"2026-05-08T20:32:21.438621","notspecified"
+"business-improvement-areas","Business Improvement Areas",13,"2026-05-08T03:05:43.599316","open-government-licence-toronto"
+"green-spaces","Green Spaces",9,"2026-05-05T21:59:37.698087","notspecified"
+"freedom-of-information-requests-summary","Freedom of Information Requests Summary",17,"2026-05-05T19:33:49.858272","notspecified"
+"merged-gtfs-ttc-routes-and-schedules","Merged GTFS - TTC Routes and Schedules",1,"2026-05-05T14:36:11.005999","notspecified"
+"surface-routes-and-schedules-for-bustime","Surface Routes and Schedules for BusTime",1,"2026-05-05T14:20:31.324266","notspecified"
+"school-safety-zone-watch-your-speed-program-locations","School Safety Zone Watch Your Speed Program – Locations",13,"2026-05-05T12:00:31.320815","open-government-licence-toronto"
+"mobile-watch-your-speed-program-speed-summary","Mobile Watch Your Speed Program – Speed Summary",4,"2026-05-05T12:00:20.622059","open-government-licence-toronto"
+"safety-zone-watch-your-speed-program-monthly-summary","Safety Zone Watch Your Speed Program – Monthly Summary",4,"2026-05-05T10:20:07.641308","open-government-licence-toronto"
+"apartment-building-registration","Apartment Building Registration",4,"2026-05-05T09:00:19.735676","open-government-licence-toronto"
+"deaths-of-shelter-residents","Deaths of Shelter Residents",8,"2026-05-04T05:49:28.145472","notspecified"
+"clothing-drop-box-locations","Clothing Drop-Box Locations",14,"2026-05-03T06:19:49.550051","open-government-licence-toronto"
+"residential-fire-inspection-results","Residential Fire Inspection Results",8,"2026-05-02T12:21:09.205680",NA
+"toronto-animal-services-service-requests-complaints","Toronto Animal Services - Service Requests & Complaints",7,"2026-05-01T20:27:51.701662","notspecified"
+"parks-and-recreation-facilities","Parks and Recreation Facilities",9,"2026-05-01T20:25:02.836532","notspecified"
+"toronto-signature-sites","Toronto Signature Sites",9,"2026-05-01T12:04:55.446414","open-government-licence-toronto"
+"marriage-licence-statistics","Marriage Licence Statistics",4,"2026-05-01T12:00:28.959256","open-government-licence-toronto"
+"stillbirth-registration-statistics","Stillbirth Registration Statistics",4,"2026-05-01T12:00:25.869919","open-government-licence-toronto"
+"death-registry-statistics","Death Registry Statistics",4,"2026-05-01T12:00:22.187767","open-government-licence-toronto"
+"bridge-structure","Bridge Structures",9,"2026-05-01T09:34:31.421079","notspecified"
+"municipal-licensing-and-standards-toronto-animal-shelter-activity","Municipal Licensing and Standards - Toronto Animal Shelter Activity",19,"2026-05-01T05:10:05.967041",NA
+"properties-requiring-a-cultural-heritage-evaluation-report-under-opa-720","Properties Requiring a Cultural Heritage Evaluation Report Under OPA 720",8,"2026-05-01T03:34:17.175604","notspecified"
+"police-annual-statistical-report-traffic-collisions","Police Annual Statistical Report - Traffic Collisions",9,"2026-04-23T19:34:02.168379","notspecified"
+"persons-in-crisis-calls-for-service-attended","Persons in Crisis Calls for Service Attended",4,"2026-04-23T18:33:55.053487","notspecified"
+"mental-health-apprehensions","Mental Health Act Apprehensions",4,"2026-04-23T18:11:05.337075","notspecified"
+"theft-from-motor-vehicle","Theft from Motor Vehicle",9,"2026-04-23T17:55:20.690139","notspecified"
+"bicycle-thefts","Bicycle Thefts",13,"2026-04-23T17:42:11.746520","notspecified"
+"shootings-firearm-discharges","Shootings & Firearm Discharges",13,"2026-04-23T17:33:59.619871","notspecified"
+"police-annual-statistical-report-homicide","Police Annual Statistical Report - Homicides",21,"2026-04-23T17:28:12.411687","notspecified"
+"major-crime-indicators","Community Safety Indicators",7,"2026-04-23T17:22:34.957961","notspecified"
+"parking-occupancy","Parking Occupancy",4,"2026-04-23T13:54:29.467466","notspecified"
+"budget-operating-budget-program-summary-by-expenditure-category","Budget - Operating Budget Program Summary by Expenditure Category",18,"2026-04-20T15:48:42.740661","notspecified"
+"city-vehicle-availability","City Vehicle Availability",4,"2026-04-18T06:24:01.680046",NA
+"budget-capital-budget-plan-by-ward-10-yr-approved","Budget - Capital Budget & Plan By Ward (10 yr Approved)",18,"2026-04-16T15:49:48.507514","notspecified"
+"on-street-permit-parking-area-maps","On-Street Permit Parking Area Maps",13,"2026-04-16T04:10:44.919576","notspecified"
+"bicycle-parking-high-capacity-outdoor","Bicycle Parking - High Capacity (Outdoor)",13,"2026-04-16T03:05:03.534045","notspecified"
+"community-grants-allocations","Community Grants Allocations",22,"2026-04-15T21:28:58.474453",NA
+"toronto-beaches-water-quality","Toronto Beaches Water Quality",9,"2026-04-15T21:06:39.881974","notspecified"
+"library-branch-programs-and-events-feed","Library Branch Programs and Events Feed",4,"2026-04-15T20:04:44.596177","notspecified"
+"3d-massing","3D Massing",19,"2026-04-13T21:20:18.993574","notspecified"
+"water-pressure-districts","Water Pressure Districts",8,"2026-04-09T15:22:25.669797",NA
+"311-contact-centre-performance-metrics","311 Contact Centre Performance Metrics",1,"2026-04-08T14:18:36.624662","notspecified"
+"toronto-raccoon-activity-index","Toronto Raccoon Activity Index",1,"2026-04-07T14:11:44.342863","notspecified"
+"topographic-mapping-building-outlines","Topographic Mapping – Building Outlines",8,"2026-04-05T00:37:29.007680","notspecified"
+"long-term-care-locations-city-operated","Long-Term Care Locations, City Operated",8,"2026-04-02T20:55:16.673514","notspecified"
+"paramedic-services-incident-data","Paramedic Services Incident Data",4,"2026-04-01T17:38:17.747515","notspecified"
+"land-ambulance-response-time-standard","Land Ambulance Response Time Standard",2,"2026-04-01T17:33:59.732256","notspecified"
+"pre-hospital-emergency-care-performance-metrics","Pre-Hospital Emergency Care Performance Metrics",2,"2026-04-01T17:31:10.879199",NA
+"specialized-patient-transports-by-paramedics","Specialized Patient Transports by Paramedics",2,"2026-04-01T17:26:50.193831","notspecified"
+"by-election-results-unofficial","By-Elections – Unofficial Results",2,"2026-04-01T16:21:05.366364","notspecified"
+"imagination-manufacturing-innovation-and-technology-imit-program-recipients","Imagination, Manufacturing, Innovation and Technology (IMIT) Program Recipients",4,"2026-04-01T04:14:17.417573","open-government-licence-toronto"
+"deaths-of-people-experiencing-homelessness","Deaths of People Experiencing Homelessness",16,"2026-03-23T17:35:13.083018","notspecified"
+"deaths-of-people-experiencing-homelessness-archival","Deaths of People Experiencing Homelessness (Archival)",12,"2026-03-23T16:26:54.048719","notspecified"
+"upcoming-and-recently-completed-affordable-housing-units","Affordable Housing Pipeline",8,"2026-03-23T04:48:32.536870","notspecified"
+"bicycle-cordon-count-2010-2013-2014","Bicycle Cordon Count: 2010, 2013, 2014",10,"2026-03-19T13:48:41.539863","notspecified"
+"bicycle-and-micromobility-cordon-count","Bicycle and Micromobility Cordon Count",10,"2026-03-19T13:48:19.760512","notspecified"
+"street-furniture-public-washroom","Street Furniture - Automated Public Washroom",13,"2026-03-16T22:18:50.790178","notspecified"
+"site-and-area-specific-policies","Site and area Specific policies",13,"2026-03-16T20:30:39.871456",NA
+"environmentally-significant-areas","Environmentally Significant Areas",13,"2026-03-16T19:16:38.998600",NA
+"cycling-network","Cycling Network",8,"2026-03-16T19:15:26.721099",NA
+"natural-heritage-system","Natural Heritage System",3,"2026-03-16T19:14:44.131398","notspecified"
+"library-circulation","Library Circulation",4,"2026-03-16T19:06:18.826743","notspecified"
+"library-workstation-usage","Library Workstation Usage",11,"2026-03-16T19:06:05.406016","notspecified"
+"secondary-plans","Secondary Plans",20,"2026-03-16T19:05:55.846370",NA
+"library-card-registrations","Library Card Registrations",4,"2026-03-16T19:05:47.419191","notspecified"
+"library-circulation-by-cardholder-type","Library Circulation by Cardholder Type",4,"2026-03-16T19:01:36.231842","notspecified"
+"library-branch-space-rentals","Library Branch Space Rentals",4,"2026-03-16T19:01:16.203940","notspecified"
+"library-visits","Library Visits",4,"2026-03-16T19:00:58.073988","notspecified"
+"active-affordable-and-social-housing-units","Active Affordable and Social Housing Units",4,"2026-03-16T02:04:13.820385","notspecified"
+"licensed-dog-and-cat-names","Licensed Dog and Cat Names",20,"2026-03-12T18:35:48.907327","notspecified"
+"tps-operating-budget","Historical Toronto Police Operating Budget",1,"2026-03-12T13:15:06.838135","notspecified"
+"neighbourhood-crime-rates","Neighbourhood Crime Rates",8,"2026-03-12T13:15:05.078864","notspecified"
+"hate-crimes-open-data","Hate Crimes",4,"2026-03-12T13:14:57.701327","notspecified"
+"intimate-partner-and-family-violence","Intimate Partner and Family Violence",4,"2026-03-12T13:14:56.677509",NA
+"police-annual-statistical-report-shooting-occurrences","Police Annual Statistical Report - Shooting Occurrences",4,"2026-03-12T13:14:55.874311",NA
+"police-annual-statistical-report-regulated-interactions-demographics","Police Annual Statistical Report - Regulated Interactions Demographics",4,"2026-03-12T13:14:55.076292","open-government-licence-toronto"
+"field-information-reports","Field Information Reports",24,"2026-03-12T13:14:54.196299","open-government-licence-toronto"
+"patrol-zones","Patrol Zones",13,"2026-03-12T13:14:53.257031","open-government-licence-toronto"
+"police-annual-statistical-report-victims-of-crime","Police Annual Statistical Report - Victims of Crimes",4,"2026-03-12T13:14:52.350329","notspecified"
+"police-annual-statistical-report-regulated-interactions","Police Annual Statistical Report - Regulated Interactions",4,"2026-03-12T13:14:51.530451","notspecified"
+"police-annual-statistical-report-search-of-persons","Police Annual Statistical Report - Search of Persons",4,"2026-03-12T13:14:50.430395","notspecified"
+"police-annual-statistical-report-reported-crimes","Police Annual Statistical Report - Reported Crimes",4,"2026-03-12T13:14:49.490902","notspecified"
+"police-annual-statistical-report-complaint-dispositions","Police Annual Statistical Report - Complaint Dispositions",4,"2026-03-12T13:14:48.584570","notspecified"
+"police-annual-statistical-report-investigated-alleged-misconduct","Police Annual Statistical Report - Investigated Alleged Misconduct",4,"2026-03-12T13:14:47.726663","notspecified"
+"police-annual-statistical-report-total-public-complaints","Police Annual Statistical Report - Total Public Complaints",4,"2026-03-12T13:14:46.896987","notspecified"
+"police-annual-statistical-report-gross-operating-budget","Police Annual Statistical Report - Gross Operating Budget",4,"2026-03-12T13:14:46.019183","notspecified"
+"police-annual-statistical-report-personnel-by-rank-by-division","Police Annual Statistical Report - Personnel by Rank by Division",4,"2026-03-12T13:14:45.096518","notspecified"
+"police-annual-statistical-report-personnel-by-rank","Police Annual Statistical Report - Personnel by Rank",4,"2026-03-12T13:14:44.203033","notspecified"
+"police-annual-statistical-report-miscellaneous-firearms","Police Annual Statistical Report - Miscellaneous Firearms",4,"2026-03-12T13:14:43.297348","notspecified"
+"police-annual-statistical-report-top-20-offences-of-firearms-seizures","Police Annual Statistical Report - Top 20 Offences of Firearms Seizures",4,"2026-03-12T13:14:42.473341","notspecified"
+"police-annual-statistical-report-tickets-issued","Police Annual Statistical Report - Tickets Issued",4,"2026-03-12T13:14:41.586859","notspecified"
+"police-annual-statistical-report-arrested-and-charged-persons","Police Annual Statistical Report - Arrested and Charged Persons",4,"2026-03-12T13:14:40.739882","notspecified"
+"police-annual-statistical-report-calls-for-service-attended","Police Annual Statistical Report - Calls for Service Attended",4,"2026-03-12T13:14:40.194982","notspecified"
+"police-annual-statistical-report-miscellaneous-calls-for-service","Police Annual Statistical Report - Miscellaneous Calls for Service",4,"2026-03-12T13:14:39.597813","notspecified"
+"police-annual-statistical-report-administrative","Police Annual Statistical Report - Administrative",4,"2026-03-12T13:14:38.976183","notspecified"
+"police-race-and-identity-based-data-collection-arrests-strip-searches","Police Race and Identity Based Data - Arrests and Strip Searches",4,"2026-03-12T13:14:38.278619","notspecified"
+"police-race-and-identity-based-data-use-of-force","Police Race and Identity Based Data - Use of Force",28,"2026-03-12T13:14:37.459286","notspecified"
+"police-annual-statistical-report-dispatched-calls-by-division","Police Annual Statistical Report - Dispatched Calls by Division",4,"2026-03-12T13:14:36.757654","notspecified"
+"police-annual-statistical-report-firearms-top-5-calibres","Police Annual Statistical Report - Firearms Top 5 Calibres",4,"2026-03-12T13:14:36.075253","notspecified"
+"police-annual-statistical-report-gross-expenditures-by-division","Police Annual Statistical Report - Gross Expenditures by Division",4,"2026-03-12T13:14:35.429541","notspecified"
+"police-annual-statistical-report-miscellaneous-data","Police Annual Statistical Report - Miscellaneous Data",4,"2026-03-12T13:14:34.841832","notspecified"
+"police-annual-statistical-report-personnel-by-command","Police Annual Statistical Report - Personnel by Command",4,"2026-03-12T13:14:34.278750","notspecified"
+"automated-speed-enforcement-ase-charges","Automated Speed Enforcement (ASE) Charges",1,"2026-03-10T17:15:12.742447","notspecified"
+"fatal-and-non-fatal-suspected-opioid-overdoses-in-the-shelter-system","Fatal and non-fatal suspected opioid overdoses in the shelter system",11,"2026-03-09T18:14:28.814350","notspecified"
+"small-business-property-tax-subclass-eligible-properties","Small Business Property Tax Subclass: Eligible Properties",8,"2026-03-06T19:41:07.189639","notspecified"
+"solid-waste-pickup-schedule","Solid Waste Collection Schedule",48,"2026-03-05T17:19:53.619854","open-government-licence-toronto"
+"heritage-conservation-districts","Heritage Conservation Districts",1,"2026-03-02T22:19:29.830519",NA
+"area-speed-limit-reductions","Area Speed Limit Reductions",8,"2026-02-24T20:52:40.371432","notspecified"
+"ttc-bus-delay-data","TTC Bus Delay Data",20,"2026-02-23T20:38:55.148222",NA
+"ttc-subway-delay-data","TTC Subway Delay Data",19,"2026-02-23T20:36:57.580760",NA
+"ttc-streetcar-delay-data","TTC Streetcar Delay Data",21,"2026-02-23T20:36:20.210918",NA
+"ttc-lrt-delay-data","TTC LRT Delay Data",8,"2026-02-23T20:35:40.785351","notspecified"
+"fire-hydrants","Fire Hydrants",13,"2026-02-23T16:36:53.926999","notspecified"
+"wellbeing-youth-adult-education-upgrading","Wellbeing Youth - Adult Education Upgrading",13,"2026-02-23T16:03:19.669435",NA
+"wellbeing-youth-affordable-housing-access","Wellbeing Youth - Affordable Housing Access",13,"2026-02-23T16:03:06.225960",NA
+"wellbeing-youth-alternative-adult-education","Wellbeing Youth - Alternative Adult Education",13,"2026-02-23T16:02:57.171122",NA
+"wellbeing-youth-concurrent-disorder-programs","Wellbeing Youth - Concurrent Disorder Programs",13,"2026-02-23T16:02:46.446219",NA
+"wellbeing-youth-disability-supports-services","Wellbeing Youth - Disability Supports Services",13,"2026-02-23T16:02:37.521329",NA
+"wellbeing-youth-sexual-health-services","Wellbeing Youth - Sexual Health Services",15,"2026-02-23T16:02:27.815563",NA
+"wellbeing-youth-housing-eviction-help","Wellbeing Youth - Housing Eviction Help",13,"2026-02-23T16:02:16.256798",NA
+"wellbeing-youth-legal-justice-support","Wellbeing Youth - Legal Justice Support",13,"2026-02-23T16:02:02.716214",NA
+"wellbeing-youth-legal-support-advocacy","Wellbeing Youth - Legal Support Advocacy",13,"2026-02-23T16:01:53.569543",NA
+"wellbeing-youth-life-skills-training","Wellbeing Youth - Life Skills Training",13,"2026-02-23T16:00:08.593537",NA
+"wellbeing-youth-newcomer-settlement-services","Wellbeing Youth - Newcomer Settlement Services",13,"2026-02-23T15:59:53.836321",NA
+"wellbeing-youth-substance-use-treatment","Wellbeing Youth - Substance Use Treatment",13,"2026-02-23T15:59:44.377783",NA
+"wellbeing-youth-aboriginal-youth-services","Wellbeing Youth- Aboriginal Youth Services",13,"2026-02-23T15:59:34.152422",NA
+"wellbeing-youth-educational-support","Wellbeing Youth - Educational Support",13,"2026-02-23T15:59:24.989978",NA
+"wellbeing-youth-employment-resources","Wellbeing Youth - Employment Resources",13,"2026-02-23T15:59:14.213239",NA
+"wellbeing-youth-financial-services","Wellbeing Youth - Financial Services",13,"2026-02-23T15:59:04.090742",NA
+"wellbeing-youth-health-services","Wellbeing Youth - Health Services",13,"2026-02-23T15:58:53.651203",NA
+"wellbeing-youth-lgbtq-resources","Wellbeing Youth - LGBTQ Resources",13,"2026-02-23T15:58:43.906769",NA
+"wellbeing-youth-mental-health","Wellbeing Youth - Mental Health",13,"2026-02-23T15:58:32.679279",NA
+"wellbeing-youth-parenting-programs","Wellbeing Youth - Parenting Programs",13,"2026-02-23T15:58:22.779633",NA
+"wellbeing-youth-recreation","Wellbeing Youth - Recreation",13,"2026-02-23T15:58:13.716158",NA
+"wellbeing-youth-refugee-housing","Wellbeing Youth - Refugee Housing",13,"2026-02-23T15:58:02.876334",NA
+"wellbeing-youth-transitional-housing","Wellbeing Youth - Transitional Housing",13,"2026-02-23T15:57:52.814192",NA
+"fire-services-emergency-incident-basic-detail","Fire Services Emergency Incident Basic Detail",124,"2026-02-20T22:20:32.885192","open-government-licence-toronto"
+"transport-bus-initiative-usage","Transport Bus Initiative Usage",4,"2026-02-20T21:57:24.931519","notspecified"
+"solarto","SolarTO",8,"2026-02-20T21:48:31.517369",NA
+"subsidized-housing-listings","Subsidized Housing Listings",8,"2026-02-20T21:36:41.483300","notspecified"
+"section-37","Community Benefits Secured (Planning Act Sections 37 and 45)",4,"2026-02-20T21:36:32.337313","notspecified"
+"current-and-future-climate","Current and Future Climate",4,"2026-02-20T21:35:18.539119",NA
+"basement-flooding-study-areas","Basement Flooding Study Areas",8,"2026-02-20T21:35:01.024487","notspecified"
+"city-operated-electric-vehicle-charging-station-map","The City Operated Electric Vehicle Charging Station Map",8,"2026-02-20T21:34:25.448297","notspecified"
+"park-and-recreation-facility-study-areas","Park and Recreation Facility Study Areas",8,"2026-02-20T21:34:15.174117","notspecified"
+"topographic-mapping-water-line","Topographic Mapping - Water Line",8,"2026-02-20T21:34:02.891913",NA
+"topographic-mapping-railway","Topographic Mapping - Railway",8,"2026-02-20T21:33:50.675689","notspecified"
+"green-streets","Green Streets",8,"2026-02-20T21:33:34.131529","notspecified"
+"litter-bin-collection-frequency","Litter Bin Collection Frequency",8,"2026-02-20T21:33:22.510104",NA
+"strollto","StrollTO",16,"2026-02-20T21:33:05.916593",NA
+"off-leash-areas","Off Leash Areas",8,"2026-02-20T21:32:29.265388","notspecified"
+"covid-19-immunization-clinics","COVID-19 Immunization Clinics",9,"2026-02-20T21:30:38.594468","notspecified"
+"covid-19-testing-sites","COVID-19 Testing Sites",13,"2026-02-20T21:30:25.964199","notspecified"
+"bicycle-parking-racks","Bicycle Parking Racks",14,"2026-02-20T21:30:09.206468",NA
+"zoning-by-law","Zoning By-law",92,"2026-02-20T21:29:42.613615",NA
+"blacklegged-tick-surveillance","Blacklegged Tick Surveillance",9,"2026-02-20T21:23:26.860120",NA
+"community-council-boundaries","Community Council Boundaries",14,"2026-02-20T21:23:16.093222",NA
+"archaeological-potential-interim","Archaeological Potential - Interim",16,"2026-02-20T21:08:19.721515",NA
+"toronto-fire-services-run-areas","Toronto Fire Services Run Areas",11,"2026-02-20T21:07:49.240940",NA
+"sign-bylaw-districts","Sign Bylaw Districts",13,"2026-02-20T21:07:38.191667","open-government-licence-toronto"
+"outdoor-artificial-ice-rinks","Outdoor Artificial Ice Rinks",18,"2026-02-20T21:06:33.382774","notspecified"
+"indoor-ice-rinks","Indoor Ice Rinks",19,"2026-02-20T21:06:21.714288","notspecified"
+"traffic-control-devices","Traffic Control Devices",9,"2026-02-20T21:06:09.432423",NA
+"topographic-mapping-edge-of-road","Topographic Mapping – Edge of Road",11,"2026-02-20T21:05:56.490239",NA
+"topographic-mapping-physical-area-of-sidewalks","Topographic Mapping – Physical area of sidewalks",11,"2026-02-20T21:02:42.450577",NA
+"topographic-mapping-poles","Topographic Mapping - Poles",10,"2026-02-20T20:59:54.211455",NA
+"pedestrian-network","Pedestrian Network",16,"2026-02-20T20:56:58.265773",NA
+"cultural-hotspot-points-of-interest","Cultural Hotspot - Points of Interest",14,"2026-02-20T20:55:50.098604","notspecified"
+"fire-station-locations","Fire Facility Locations",14,"2026-02-20T20:55:37.205452","notspecified"
+"mbncanada-performance-measures","MBNCanada Performance Measures",20,"2026-02-20T20:55:05.250647","notspecified"
+"doors-open-toronto-2016","Doors Open Toronto 2016",5,"2026-02-20T20:54:40.810702","notspecified"
+"doors-open-toronto-2017","Doors Open Toronto 2017",5,"2026-02-20T20:54:35.622631","notspecified"
+"doors-open-toronto-2018","Doors Open Toronto 2018",5,"2026-02-20T20:54:30.885706","notspecified"
+"councillors-constituency-services-office-expense-reporting","Councillors' Constituency Services & Office Expense Reporting",9,"2026-02-20T20:54:26.485556","notspecified"
+"metadata-catalog","Metadata Catalog",24,"2026-02-20T20:54:21.665475","notspecified"
+"toronto-police-staffing-by-command","Toronto Police Staffing by Command",4,"2026-02-20T20:48:50.708247","notspecified"
+"toronto-police-budget-by-command","Toronto Police Budget By Command",4,"2026-02-20T20:48:46.440859",NA
+"topographic-mapping-physical-area-of-parking-lots","Topographic Mapping – Physical area of parking lots",11,"2026-02-20T20:48:40.928291",NA
+"annual-summary-of-reportable-communicable-diseases","Annual Summary of Reportable Communicable Diseases",9,"2026-02-20T20:46:41.065363",NA
+"business-incubation","Business Incubation",5,"2026-02-20T20:46:36.619850","open-government-licence-toronto"
+"king-st-transit-pilot-2015-king-street-traffic-counts","King St. Transit Pilot - 2015 King Street Traffic Counts",5,"2026-02-20T20:46:32.614910","open-government-licence-toronto"
+"king-st-transit-pilot-bluetooth-travel-time-summary","King St. Transit Pilot - Bluetooth Travel Time Summary",5,"2026-02-20T20:46:27.491783","open-government-licence-toronto"
+"king-st-transit-pilot-traffic-pedestrian-volumes-summary","King St. Transit Pilot - Traffic & Pedestrian Volumes Summary",5,"2026-02-20T20:46:22.402248","open-government-licence-toronto"
+"transportation-innovation-zones-stakeholder-workshops-results","Transportation Innovation Zones - Stakeholder Workshops Results",4,"2026-02-20T20:46:13.247581","open-government-licence-toronto"
+"air-conditioned-public-places-cooling-centres","Air Conditioned Public Places & Cooling Centres",7,"2026-02-20T20:46:08.397083","notspecified"
+"civic-issue-questionnaire","Civic Issue Campaign Results",5,"2026-02-20T20:46:03.900688","open-government-licence-toronto"
+"neighbourhood-profiles","Neighbourhood Profiles",17,"2026-02-20T20:45:59.186007","notspecified"
+"daily-shelter-occupancy","Daily Shelter Occupancy",16,"2026-02-20T20:45:24.191521",NA
+"covid-19-cases-in-toronto","COVID-19 Cases in Toronto",4,"2026-02-20T20:44:43.252193","notspecified"
+"elections-subdivisions","Elections Subdivisions",46,"2026-02-20T19:18:37.211877",NA
+"elections-voting-locations","Elections Voting Locations",46,"2026-02-20T19:17:03.274650",NA
+"neighbourhoods","Neighbourhoods",16,"2026-02-20T19:15:33.677378","notspecified"
+"places-of-worship","Places of Worship",14,"2026-02-20T19:14:54.432214","open-government-licence-toronto"
+"police-facility-locations","Police Facility Locations",13,"2026-02-20T19:14:40.693345","notspecified"
+"renewable-energy-installations","Renewable Energy Installations",15,"2026-02-20T19:14:30.071500","open-government-licence-toronto"
+"retirement-homes","Retirement Homes",14,"2026-02-20T19:14:18.603862","notspecified"
+"street-tree-data","Street Tree Data",15,"2026-02-20T19:14:07.043695","notspecified"
+"former-municipality-boundaries","Former Municipality Boundaries",13,"2026-02-20T19:04:51.094842",NA
+"places-of-interest-and-toronto-attractions","Places of Interest and Toronto Attractions",9,"2026-02-20T19:04:39.994577","notspecified"
+"ambulance-station-locations","Ambulance Station Locations",8,"2026-02-20T19:04:27.899125",NA
+"toronto-community-housing-data","Toronto Community Housing Data",14,"2026-02-20T19:04:17.564828","notspecified"
+"council-and-standing-committee-meeting-statistics","Council and Standing Committee Meeting Statistics",9,"2026-02-20T19:04:04.007797","notspecified"
+"neighbourhood-improvement-areas","Neighbourhood Improvement Areas",12,"2026-02-20T19:03:54.596536","notspecified"
+"proclamations","Proclamations",17,"2026-02-20T19:03:42.518658",NA
+"bicycle-parking-bike-stations-indoor","Bicycle Parking - Bike Stations (Indoor)",9,"2026-02-20T19:03:22.847124","notspecified"
+"bicycle-shops","Bicycle Shops",13,"2026-02-20T19:03:01.505249","notspecified"
+"city-wards","City Wards",18,"2026-02-20T19:02:50.452267",NA
+"toronto-beaches-observations","Toronto Beaches Observations",4,"2026-02-20T19:02:37.545995","notspecified"
+"cultural-festivals-funding-program-recipients","Cultural Festivals Funding Program recipients",4,"2026-02-20T19:02:31.471623","notspecified"
+"pollinateto-primary-project-garden-locations","PollinateTO Primary Project Garden Locations",8,"2026-02-20T19:02:27.514203","notspecified"
+"presto-card-access","Presto Card Access",8,"2026-02-20T19:02:15.318457","notspecified"
+"downsview-secondary-plan","Update Downsview",32,"2026-02-20T19:02:02.395846","notspecified"
+"immunization-coverage-for-students","Immunization Coverage for students",37,"2026-02-20T19:00:40.234624","notspecified"
+"wards-and-elected-councillors","Wards and Elected Councillors",8,"2026-02-20T18:59:54.419060","notspecified"
+"elected-officials-contact-information","Elected Officials' Contact Information",9,"2026-02-20T18:59:42.732523",NA
+"traffic-cameras","Traffic Cameras",9,"2026-02-20T18:58:03.746755","notspecified"
+"tenant-notification-for-rent-reduction","Tenant Notification for Rent Reduction",49,"2026-02-20T18:57:53.248610","notspecified"
+"toronto-police-budget","Toronto Police Budget",28,"2026-02-20T18:46:25.161150",NA
+"chemical-tracking-chemtrac","Chemical Tracking (ChemTrac)",47,"2026-02-20T18:45:39.647817","notspecified"
+"street-furniture-information-pillar-wayfinding-structure","Street Furniture - Information Pillar-Wayfinding Structure",13,"2026-02-20T18:44:05.354280","open-government-licence-toronto"
+"street-furniture-bench","Street Furniture - Bench",13,"2026-02-20T18:43:53.464407","open-government-licence-toronto"
+"street-furniture-poster-board","Street Furniture - Poster Board",13,"2026-02-20T18:43:41.557390","open-government-licence-toronto"
+"street-furniture-litter-receptacle","Street Furniture - Litter Receptacle",13,"2026-02-20T18:43:29.970269","open-government-licence-toronto"
+"street-furniture-poster-structure","Street Furniture - Poster Structure",13,"2026-02-20T18:43:12.228894","open-government-licence-toronto"
+"street-furniture-publication-structure","Street Furniture - Publication Structure",13,"2026-02-20T18:42:45.857172","open-government-licence-toronto"
+"street-furniture-transit-shelter","Street Furniture - Transit Shelter",13,"2026-02-20T18:42:33.553224","open-government-licence-toronto"
+"fire-incidents","Fire Incidents",4,"2026-02-20T18:33:47.972448","notspecified"
+"automated-speed-enforcement-locations","Automated Speed Enforcement Locations",13,"2026-02-20T18:32:13.530700","notspecified"
+"tps-police-divisions","TPS Police Divisions",13,"2026-02-20T18:31:15.455486","notspecified"
+"police-boundaries","Police Boundaries",8,"2026-02-20T18:31:14.158106",NA
+"demolition-and-replacement-of-rental-housing-units","Demolition and Replacement of Rental Housing Units",4,"2026-02-20T18:05:13.272549","notspecified"
+"centralized-waiting-list-activity-for-social-housing","Centralized Waiting List Activity for Social Housing",4,"2026-02-20T18:05:09.334539","open-government-licence-toronto"
+"school-locations-all-types","School Locations - All Types",13,"2026-02-20T17:59:53.125409","notspecified"
+"toronto-district-school-board-locations","Toronto District School Board Locations",9,"2026-02-20T17:59:40.461170","notspecified"
+"tcdsb-schools","TCDSB - Schools",13,"2026-02-20T17:59:28.760914",NA
+"cost-of-living-in-toronto-for-low-income-households","Cost of Living in Toronto for Low-Income Households",6,"2026-02-19T22:40:01.007413","notspecified"
+"minister-approved-major-transit-station-areas","Minister-Approved Major Transit Station Areas",2,"2026-02-03T16:36:23.527141","notspecified"
+"red-light-camera-annual-charges","Red Light Camera Annual Charges",1,"2026-02-03T13:15:13.947986",NA
+"pcard-expenditures","PCard Expenditures",2,"2026-01-02T22:21:20.121538",NA
+"annual-energy-consumption","Annual Energy Consumption [City Owned/Operated Buildings]",13,"2025-12-23T18:32:21.125160","notspecified"
+"toronto-employment-survey-summary-tables","Toronto Employment Survey Summary Tables",7,"2025-12-16T21:29:13.418415",NA
+"topographic-mapping-impermeable-surface","Topographic Mapping – Impermeable Surface",1,"2025-12-02T15:52:03.181438",NA
+"housing-to-action-plan","HousingTO Action Plan",1,"2025-10-28T15:15:42.305338","notspecified"
+"elections-by-election-voter-statistics","Elections - By-Election Voter Statistics",15,"2025-10-28T14:53:44.888271","notspecified"
+"ttc-gtfs-realtime-gtfs-rt","TTC GTFS-Realtime (GTFS-RT)",1,"2025-10-14T15:21:26.791047","notspecified"
+"green-p-parking","Green P Parking",3,"2025-10-09T16:00:05.353194","notspecified"
+"community-referrals-by-ems-crems","Community Referrals by EMS (CREMS)",2,"2025-10-01T12:56:45.492942",NA
+"elections-official-by-election-results","Elections - Official By-Election Results",15,"2025-09-30T20:48:07.072992",NA
+"paramedic-services-911-language-interpretation","Paramedic Services 911 Language Interpretation",2,"2025-09-23T13:13:15.056516",NA
+"ttc-real-time-next-vehicle-arrival-nvas","TTC Real-Time Next Vehicle Arrival (NVAS)",1,"2025-09-08T13:48:03.860705","notspecified"
+"revenues-and-expenses","Financial Information Return - Revenues (Schedule 10) and Expenses (Schedule 40)",1,"2025-08-29T12:54:08.859803","notspecified"
+"heritage-formerly-listed","Heritage Formerly Listed",1,"2025-07-31T20:36:20.493010","notspecified"
+"poverty-reduction-strategy-consultation-qualitative-input","Poverty Reduction Strategy Consultation - Qualitative Input",5,"2025-07-24T19:55:45.268476",NA
+"wellbeing-toronto-demographics","Wellbeing Toronto - Demographics",2,"2025-07-24T19:55:44.663687",NA
+"wellbeing-toronto-civics-equity-indicators","Wellbeing Toronto - Civics & Equity Indicators",1,"2025-07-24T19:55:43.971230","open-government-licence-toronto"
+"wellbeing-toronto-culture","Wellbeing Toronto - Culture",1,"2025-07-24T19:55:43.384994","open-government-licence-toronto"
+"ttc-ridership-all-day-weekday-for-surface-routes","TTC Ridership - All Day Weekday for Surface Routes",1,"2025-07-24T19:55:42.770247","open-government-licence-toronto"
+"multi-use-trail-entrances","Multi-Use Trail Entrances",1,"2025-07-24T19:55:38.302333",NA
+"sidewalk-inventory","Sidewalk Inventory",3,"2025-07-24T19:55:35.487563","open-government-licence-toronto"
+"sexual-health-clinic-locations-hours-and-services","Sexual Health Clinic Locations, Hours and Services",2,"2025-07-24T19:55:33.514806","open-government-licence-toronto"
+"human-rights-office-service-statistics","Human Rights Office Service Statistics",2,"2025-07-24T19:55:32.955960","open-government-licence-toronto"
+"cultural-spaces","Cultural Spaces",3,"2025-07-24T19:55:32.335994","notspecified"
+"parking-ticket-trials","Parking Ticket Trials",2,"2025-07-24T19:55:31.809598","open-government-licence-toronto"
+"automatic-external-defibrillators-aed-locations","Automatic External Defibrillators (AED) Locations",9,"2025-07-24T19:55:31.203578",NA
+"heritage-shoreline-evolution","Heritage Shoreline Evolution",1,"2025-07-24T19:55:28.187329",NA
+"elections-voter-statistics","Elections - Voter Statistics",7,"2025-07-24T19:55:23.984438","notspecified"
+"bicycle-counts","Bicycle Counts",4,"2025-07-24T19:55:22.662309","open-government-licence-toronto"
+"taxicab-stand-locations","Taxicab Stand Locations",2,"2025-07-24T19:55:22.072841","open-government-licence-toronto"
+"casino-survey-results","Casino Survey Results",3,"2025-07-24T19:55:21.482502","notspecified"
+"licensed-dogs-and-cats-reports","Licensed Dogs and Cats Reports",25,"2025-07-24T19:55:20.556326","notspecified"
+"archives-name-authorities-list-of-authorized-names","Archives Name Authorities - List of Authorized Names",2,"2025-07-24T19:55:16.964523","open-government-licence-toronto"
+"ontario-early-years-centres-toronto","Ontario Early Years Centres (Toronto)",1,"2025-07-24T19:55:15.664541","open-government-licence-toronto"
+"web-map-services","Web Map Services",19,"2025-07-24T19:55:13.485290","open-government-licence-toronto"
+"watermain-breaks","Watermain Breaks",2,"2025-07-24T19:55:12.928061",NA
+"water-billing-by-ward","Water Billing by Ward",5,"2025-07-24T19:55:12.253721",NA
+"turn-restrictions","Turn Restrictions",1,"2025-07-24T19:55:11.019669","notspecified"
+"toronto-public-library-branch-locations","Toronto Public Library Branch Locations",2,"2025-07-24T19:55:10.469987",NA
+"supportive-housing-locations-city-operated","Supportive Housing Locations, City Operated",2,"2025-07-24T19:55:07.167186",NA
+"sports-recreation-program-enrollment-drop-in-usage-and-permit-activity-summary","Sports & Recreation - Program Enrollment, Drop-In Usage and Permit Activity Summary",2,"2025-07-24T19:55:05.787952",NA
+"solid-waste-management-services-transfer-station-locations","Solid Waste Management Services - Transfer Station Locations",2,"2025-07-24T19:55:05.290794",NA
+"solid-waste-management-districts","Solid Waste Management Districts",1,"2025-07-24T19:55:04.776422","open-government-licence-toronto"
+"solid-waste-daytime-curbside-collection-areas","Solid Waste Daytime Curbside Collection Areas",2,"2025-07-24T19:55:04.187529",NA
+"solid-waste-recycled-material-sales-revenue","Solid Waste - Recycled Material Sales Revenue",2,"2025-07-24T19:55:03.675126",NA
+"social-housing-wait-list-rent-bank-loans-granted-and-shelter-use-summary","Social Housing - Wait List , Rent Bank Loans Granted and Shelter Use Summary",2,"2025-07-24T19:55:03.205966","open-government-licence-toronto"
+"shelter-profile-information","Shelter Profile Information",3,"2025-07-24T19:55:02.643239","notspecified"
+"regional-municipal-boundary","Regional Municipal Boundary",1,"2025-07-24T19:54:59.755790","open-government-licence-toronto"
+"priority-investment-neighbourhoods","Priority Investment Neighbourhoods",1,"2025-07-24T19:54:58.792510",NA
+"parks","Parks",1,"2025-07-24T19:54:56.073405","notspecified"
+"one-way-streets","One Way Streets",1,"2025-07-24T19:54:54.138324","open-government-licence-toronto"
+"municipal-land-transfer-tax-revenue-summary","Municipal Land Transfer Tax Revenue Summary",2,"2025-07-24T19:54:49.660475","open-government-licence-toronto"
+"inventory-of-applications","Inventory of Applications",1,"2025-07-24T19:54:48.187757","open-government-licence-toronto"
+"hostel-services-homeless-shelter-locations","Hostel Services: Homeless Shelter Locations",2,"2025-07-24T19:54:47.646942","notspecified"
+"forest-and-land-cover","Forest and Land Cover",4,"2025-07-24T19:54:45.748692",NA
+"drop-in-locations-toronto-drop-in-network-members-tdin","Drop-In Locations (Toronto Drop-In Network Members - TDIN)",2,"2025-07-24T19:54:41.633736","notspecified"
+"daily-bread-food-banks-client-visits-by-month","Daily Bread Food Banks - Client Visits by Month",2,"2025-07-24T19:54:40.602131",NA
+"core-service-review-quantitative-data","Core Service Review - Quantitative Data",3,"2025-07-24T19:54:40.012727",NA
+"core-service-review-qualitative-data","Core Service Review - Qualitative Data",2,"2025-07-24T19:54:39.441625",NA
+"consulting-services-expenditures","Consulting Services Expenditures",4,"2025-07-24T19:54:38.914346","notspecified"
+"clerks-record-classification-system-internally-approved-rsmt","Clerks - Record Classification System - Internally Approved (RSMT)",3,"2025-07-24T19:54:38.425671","open-government-licence-toronto"
+"clerks-record-classification-system-authoritative-source-rsmt","Clerks - Record Classification System - Authoritative Source (RSMT)",3,"2025-07-24T19:54:37.834524","open-government-licence-toronto"
+"clerk-s-directory-of-record-for-record-series-management-tool-rsmt","Clerk's Directory of Record for Record Series Management Tool (RSMT)",3,"2025-07-24T19:54:37.206998","open-government-licence-toronto"
+"city-subject-thesaurus","City Subject Thesaurus",4,"2025-07-24T19:54:35.743778","open-government-licence-toronto"
+"bikeways","Bikeways",14,"2025-07-24T19:54:31.849234","notspecified"
+"bicycle-post-and-ring-locations","Bicycle Post and Ring Locations",3,"2025-07-24T19:54:31.197145",NA
+"bicycle-count-and-locations","Bicycle Count and Locations",2,"2025-07-24T19:54:30.548032",NA
+"311-service-request-codes","311 Service Request Codes",1,"2025-07-24T19:54:28.334781","open-government-licence-toronto"
+"311-open311-api-calls-for-service-requests","311 - Open311 API Calls for Service Requests",2,"2025-07-24T19:54:27.770688",NA
+"toronto-population-health-status-indicators","Population Health Status Indicators",7,"2025-07-09T18:41:32.484807","notspecified"
+"2024-city-budget-pre-budget-consultation","City Budget Pre-Budget Consultation",9,"2025-07-04T16:53:33.827099","notspecified"
+"neighbourhood-intensification-estimates-to-2051","Neighbourhood Intensification Estimates to 2051",1,"2025-07-03T14:44:59.705377","notspecified"
+"count-yourself-in-workforce-survey","Count Yourself In Workforce Survey",7,"2025-07-02T15:45:14.553913","notspecified"
+"free-floating-carshare-program","Free Floating Carshare Program",1,"2025-05-27T19:26:02.176079","notspecified"
+"travel-times-bluetooth","Travel Times - Bluetooth",6,"2025-05-05T13:17:16.468434","notspecified"
+"chinatown-tomorrow-planning-initiative-consultation","Chinatown Tomorrow Planning Initiative Consultation",1,"2025-04-15T19:49:55.451631","notspecified"
+"bike-share-toronto","Bike Share Toronto",4,"2025-03-27T16:51:48.752332","notspecified"
+"ttc-subway-shapefiles","TTC Subway Shapefiles",1,"2025-03-26T17:53:55.123669","notspecified"
+"agency-survey-results-on-covid-19-recovery-and-rebuild","Agency Survey Results on COVID-19 Recovery And Rebuild",2,"2025-03-26T16:12:13.405022",NA
+"competitive-call-award-results","Competitive Contracts",1,"2025-03-25T15:43:16.337627","notspecified"
+"non-competitive-contracts","Non Competitive Contracts",1,"2025-03-25T15:39:50.487825","notspecified"
+"ttc-ridership-analysis","TTC Ridership Analysis",1,"2025-03-25T15:28:42.145501",NA
+"waste-wizard-lookup-table","Waste Wizard",2,"2025-03-25T01:00:33.842613","notspecified"
+"transformto-community-feedback","TransformTO Community Feedback",1,"2025-03-25T00:57:50.695731",NA
+"toronto-office-of-recovery-and-rebuild-public-survey-results","Toronto Office of Recovery and Rebuild – Public Survey Results",2,"2025-03-25T00:54:06.665821",NA
+"toronto-economic-bulletin","Toronto Economic Bulletin",1,"2025-03-25T00:51:18.858708","notspecified"
+"rain-gauge-locations-and-water-collected","Rain Gauge Locations and Water Collected",1,"2025-03-25T00:36:06.348220","notspecified"
+"lobbying-bylaw-public-consultation-on-amendments","Lobbying Bylaw - Public Consultation on Amendments",2,"2025-03-24T20:52:35.769081","notspecified"
+"input-from-roundtables-public-and-stakeholders-on-recovery-and-rebuild","Input from Roundtables, Public and Stakeholders on Recovery and Rebuild",2,"2025-03-24T20:42:39.784546","notspecified"
+"hotel-association-member-list-for-the-greater-toronto-area","Hotel Association Member List for the Greater Toronto Area",2,"2025-03-24T20:40:30.196261",NA
+"elections-school-ward","Elections - School Ward",8,"2025-03-24T20:07:25.564411",NA
+"elections-advance-poll-voter-turnout","Elections - Advance Poll Voter Turnout",1,"2025-03-24T20:05:57.755302","notspecified"
+"election-results-official","Elections – Official Results",6,"2025-03-24T20:03:57.904622","notspecified"
+"doors-open-toronto-2019","Doors Open Toronto 2019",2,"2025-03-24T19:55:46.742130",NA
+"current-value-assessment-cva-tax-impact-residential-properties","Current Value Assessment (CVA)  Tax Impact Residential Properties",1,"2025-03-24T19:50:17.799604",NA
+"city-of-toronto-act-cota-consultation-2015","City of Toronto Act (COTA) Consultation, 2015",3,"2025-03-24T19:44:53.480688","notspecified"
+"bridges-elevated-roadways-and-culverts-in-toronto","Bridges, Elevated Roadways, and Culverts in Toronto",10,"2025-03-24T19:02:24.847560","notspecified"
+"bloor-street-bike-lanes-feedback-survey","Bloor Street Bike Lanes Feedback Survey",4,"2025-03-24T18:59:55.091756",NA
+"basement-flooding-by-ward","Basement flooding by ward",1,"2025-03-24T18:45:54.039045","notspecified"
+"10-year-cycling-network-plan-trails-2016","10 Year Cycling Network Plan – Trails (2016)",1,"2025-03-21T20:23:13.370457","notspecified"
+"10-year-cycling-network-plan-on-street-2016","10 Year Cycling Network Plan – On-Street (2016)",1,"2025-03-21T20:22:49.798265","notspecified"
+"budget-capital-budget-plan-by-ward-10-year-recommended","Budget - Capital Budget & Plan By Ward (10 Year Recommended)",3,"2025-02-19T20:18:51.265043","notspecified"
+"elections-campaign-contributions","Elections - Campaign Contributions",2,"2025-01-28T21:39:23.096491","open-government-licence-toronto"
+"2022-2024-cycling-program","Near-term Cycling Program",2,"2025-01-08T17:25:37.577715","notspecified"
+"public-notices","Public Notices",1,"2025-01-07T16:34:13.834215","notspecified"
+"major-city-wide-cycling-routes","Major City-Wide Cycling Routes",1,"2025-01-03T15:59:57.780886","notspecified"
+"triangular-irregular-network-tin","Triangular Irregular Network (TIN)",1,"2024-10-22T19:34:03.231047","notspecified"
+"rent-bank-access-centres","Rent Bank  Access Centres",3,"2024-10-16T17:21:37.432796","notspecified"
+"social-housing-unit-density-by-neighbourhoods","Social Housing Unit Density by Neighbourhoods",1,"2024-10-16T15:19:52.068747",NA
+"council-business-travel-expenses","Council Business Travel Expenses",4,"2024-10-15T17:50:11.942980",NA
+"head-of-household","Head of Household",3,"2024-09-09T19:37:36.870550","notspecified"
+"events-at-nathan-phillips-square","Events at Nathan Phillips Square",1,"2024-08-20T20:15:11.087174","notspecified"
+"ttc-bustime-real-time-next-vehicle-arrival-nvas","TTC BusTime Real-Time Next Vehicle Arrival (NVAS)",2,"2024-08-14T14:12:26.070551","notspecified"
+"hr-number-of-job-applications-received-per-external-advertisement","HR Number of Job Applications Received per External Advertisement",1,"2024-08-08T00:12:30.573217",NA
+"call-documents-for-the-purchase-of-goods-and-services","Solicitations for the Purchase of Goods and Services",1,"2024-08-08T00:08:43.554117","notspecified"
+"child-care-licensed-child-care-spaces","Child Care -  Licensed Child Care Spaces",2,"2024-08-08T00:06:38.416247",NA
+"ward-profiles-25-ward-model","Ward Profiles (25-Ward Model)",3,"2024-07-22T19:14:26.348613","notspecified"
+"community-planning-boundaries","Community Planning Boundaries",3,"2024-06-26T16:09:53.874508","notspecified"
+"hate-activity-policy-survey","Hate Activity Policy Survey",2,"2024-05-21T14:32:31.875357",NA
+"development-charge-revenues","Development Charge Revenues",7,"2024-05-17T13:00:24.614768","open-government-licence-toronto"
+"city-initiated-appeals-to-property-assessment","City Initiated Appeals To Property Assessment",7,"2024-05-15T17:55:19.981474","notspecified"
+"court-services-customer-satisfaction-survey","Court Services Customer Satisfaction Survey",1,"2024-05-13T14:19:58.775764",NA
+"court-services-customer-satisfaction-survey-results-2017","Court Services Customer Satisfaction Survey Results 2017",2,"2024-05-13T14:14:25.341937",NA
+"community-council-boundaries-survey-results","Community Council Boundaries Survey Results",2,"2024-04-29T18:09:01.643467",NA
+"wellbeing-toronto-youth-services","Wellbeing Toronto - Youth Services",3,"2024-04-03T12:43:43.636456","open-government-licence-toronto"
+"wellbeing-toronto-transportation","Wellbeing Toronto - Transportation",1,"2024-04-03T12:43:43.103435",NA
+"wellbeing-toronto-safety","Wellbeing Toronto - Safety",1,"2024-04-03T12:43:42.287575","open-government-licence-toronto"
+"wellbeing-toronto-recreation","Wellbeing Toronto - Recreation",1,"2024-04-03T12:43:41.819411","open-government-licence-toronto"
+"wellbeing-toronto-housing","Wellbeing Toronto - Housing",1,"2024-04-03T12:43:41.172435","open-government-licence-toronto"
+"wellbeing-toronto-health","Wellbeing Toronto - Health",1,"2024-04-03T12:43:40.534316","open-government-licence-toronto"
+"wellbeing-toronto-environment","Wellbeing Toronto - Environment",1,"2024-04-03T12:43:39.985989","open-government-licence-toronto"
+"wellbeing-toronto-education","Wellbeing Toronto - Education",1,"2024-04-03T12:43:39.481155","open-government-licence-toronto"
+"wellbeing-toronto-economics","Wellbeing Toronto - Economics",1,"2024-04-03T12:43:38.994265","open-government-licence-toronto"
+"wellbeing-toronto-demographics-taxfiler-indicators","Wellbeing Toronto - Demographics: TaxFiler Indicators",1,"2024-04-03T12:43:38.471626","open-government-licence-toronto"
+"wellbeing-toronto-demographics-nhs-indicators","Wellbeing Toronto - Demographics: NHS Indicators",2,"2024-04-03T12:43:37.697524","open-government-licence-toronto"
+"wellbeing-toronto-aboriginal-service-organizations","Wellbeing Toronto - Aboriginal Service Organizations",2,"2024-04-03T12:43:34.676214",NA
+"2013-street-needs-assessment-results","2013 Street Needs Assessment Results",1,"2024-02-07T13:53:38.087643","notspecified"
+"2018-street-needs-assessment-results","2018 Street Needs Assessment Results",1,"2024-02-07T13:53:10.631105","notspecified"
+"2021-street-needs-assessment-results","2021 Street Needs Assessment Results",1,"2024-02-07T13:39:55.161394","notspecified"
+"ward-profiles-2018-47-ward-model","Ward Profiles, 2018 (47-Ward Model)",3,"2024-01-03T16:21:33.916948",NA
+"ward-profiles-2014-2018-wards","Ward Profiles, 2014-2018 Wards (44-Ward Model)",7,"2024-01-03T16:20:46.925118","notspecified"
+"multilingual-policy-language-survey","Multilingual Policy - Language Survey",2,"2023-12-06T16:16:28.434010",NA
+"participatory-budgeting-pilot","Participatory Budgeting Pilot",4,"2023-12-06T16:16:02.795103",NA
+"pan-am-parapan-am-venues-to2015","Pan Am-Parapan Am Venues - TO2015",1,"2023-12-06T16:15:35.410416",NA
+"vehicles-utilizing-green-technology","Vehicles Utilizing Green Technology",4,"2023-11-16T16:54:25.232275",NA
+"school-safety-zone-watch-your-speed-program-detailed-speed-counts","School Safety Zone Watch Your Speed Program – Detailed Speed Counts",8,"2023-10-31T19:53:09.230811","open-government-licence-toronto"
+"mobile-watch-your-speed-program-detailed-speed-counts","Mobile Watch Your Speed Program – Detailed Speed Counts",7,"2023-10-31T19:52:45.779007","open-government-licence-toronto"
+"traffic-signal-vehicle-and-pedestrian-volumes","Traffic Signal Vehicle and Pedestrian Volumes",2,"2023-09-27T14:05:17.963141",NA
+"unclaimed-deposits","Unclaimed Deposits",2,"2023-09-13T13:51:57.345631","open-government-licence-toronto"
+"live-green-toronto-membership-card-businesses","Live Green Toronto Membership Card Businesses",2,"2023-08-15T16:59:18.120821",NA
+"public-engagement-review-survey","Public Engagement Review Survey",3,"2023-08-04T19:02:26.080472","open-government-licence-toronto"
+"credit-balance-property-tax","Credit Balance - Property Tax",1,"2023-08-04T17:20:22.071663","open-government-licence-toronto"
+"election-results-unofficial","Elections – Unofficial Results",3,"2023-07-19T19:36:07.013944","notspecified"
+"historic-rain-gauge-locations-and-precipitation","Historic Rain Gauge Locations and Precipitation",2,"2023-07-17T15:15:37.131837",NA
+"realtime-feed-of-searches-conducted-on-torontopubliclibrary-ca","Realtime Feed of Searches Conducted on torontopubliclibrary.ca",1,"2023-06-05T18:00:36.055809","notspecified"
+"long-term-financial-plan-public-consultation","Long-term Financial Plan Public Consultation",4,"2023-05-17T15:48:42.863875",NA
+"woodbine-racetrack-casino-consultation-2015","Woodbine Racetrack Casino Consultation 2015",6,"2023-05-08T16:46:06.535174",NA
+"e-bike-survey-response-results","E-Bike Survey Response Results",1,"2023-04-28T13:10:45.535248","notspecified"
+"tax-rebates-tax-exemptions","Tax Rebates - Tax Exemptions",2,"2023-04-06T13:54:12.949761",NA
+"climate-perception-study","Climate Perception Study",7,"2023-04-05T20:02:31.246421","open-government-licence-toronto"
+"ttc-ridership-revenues","TTC  - Ridership Revenues",2,"2023-03-01T14:46:14.072156","open-government-licence-toronto"
+"ttc-monthly-ridership","TTC - Monthly Ridership",2,"2023-03-01T14:46:13.483983",NA
+"ttc-average-weekday-ridership","TTC - Average Weekday Ridership",2,"2023-03-01T14:46:13.021464",NA
+"ttc-annual-passenger-rides-peak-000s","TTC Annual Passenger Rides Peak (000s)",2,"2023-03-01T14:46:12.661477","open-government-licence-toronto"
+"ttc-annual-passenger-rides-non-peak-000s","TTC - Annual Passenger Rides Non-Peak (000s)",2,"2023-03-01T14:46:12.319197","open-government-licence-toronto"
+"transportation-division-bridge-data","Transportation Division Bridge Data",2,"2023-03-01T14:46:11.792462","notspecified"
+"recreational-drop-in-programs","Recreational Drop in Programs",4,"2023-03-01T14:46:05.803569","notspecified"
+"public-art-and-monuments","Public Art and Monuments",3,"2023-03-01T14:46:05.066051","open-government-licence-toronto"
+"municipal-licensing-and-standards-business-licence-renewals-and-new-issues-summary","Municipal Licensing and Standards - Business Licence Renewals and New Issues Summary",2,"2023-03-01T14:46:00.575351","open-government-licence-toronto"
+"hr-total-general-job-applications-submitted-online","HR Total General Job Applications Submitted Online",2,"2023-03-01T14:45:58.215878","open-government-licence-toronto"
+"heat-alerts-and-extreme-heat-alerts","Heat Alerts and Extreme Heat Alerts",2,"2023-03-01T14:45:57.093632","open-government-licence-toronto"
+"flood-reporting-noted-by-toronto-water-districts","Flood Reporting Noted by Toronto Water Districts",2,"2023-03-01T14:45:56.443787","notspecified"
+"fire-services-incident-data","Fire Services Incident Data",5,"2023-03-01T14:45:56.022688","open-government-licence-toronto"
+"child-care-wait-list-for-a-fee-subsidy","Child Care - Wait List for a Fee Subsidy",2,"2023-03-01T14:45:49.864075","open-government-licence-toronto"
+"transformto-net-zero-strategy-public-consultation-resident-survey","TransformTO Net Zero Strategy Public Consultation – Resident Survey",3,"2023-02-03T17:07:11.616745",NA
+"road-restrictions","Road Restrictions",4,"2022-12-06T19:31:21.785812","notspecified"
+"ttc-ridership-subway-scarborough-rt-station-usage","TTC Ridership - Subway-Scarborough RT Station Usage",5,"2022-11-14T19:38:12.180662",NA
+"ravine-natural-feature-protection-area","Ravine & Natural Feature Protection area",1,"2022-11-08T14:22:31.165888",NA
+"topographic-mapping-treed-area","Topographic Mapping – Treed Area",2,"2022-03-25T15:06:19.159497","open-government-licence-toronto"
+"solid-waste-in-park-assets","Solid Waste In-Park Assets",2,"2022-03-25T15:06:12.450192","open-government-licence-toronto"
+"registered-residential-non-residential-condominiums","Registered Residential & Non-Residential Condominiums",5,"2022-03-25T15:06:07.305274","open-government-licence-toronto"
+"king-st-transit-pilot-bluetooth-travel-time-segments","King St. Transit Pilot - Bluetooth Travel Time Segments",3,"2022-03-25T15:05:48.263776","open-government-licence-toronto"
+"traffic-counts-cycling","Traffic Counts - Cycling",4,"2022-03-10T22:01:36.103059","open-government-licence-toronto"
+"toronto-office-of-recovery-and-rebuild-survey-for-individuals-vulnerable-populations","Toronto Office of Recovery and Rebuild Survey for Individuals - Vulnerable Populations",2,"2022-03-10T22:00:13.062296","open-government-licence-toronto"
+"toronto-office-of-recovery-and-rebuild-story-form-vulnerable-populations","Toronto Office of Recovery and Rebuild Story Form – Vulnerable Populations",2,"2022-03-10T22:00:09.229014","open-government-licence-toronto"
+"toronto-office-of-recovery-and-rebuild-group-discussion-vulnerable-populations","Toronto Office of Recovery and Rebuild Group Discussion - Vulnerable Populations",2,"2022-03-10T21:59:53.431855","open-government-licence-toronto"
+"special-committee-on-governance-consultation-with-neighbourhood-associations-workshop","Special Committee on Governance -- Consultation with Neighbourhood Associations  -- Workshop",2,"2022-03-10T20:56:14.039693","open-government-licence-toronto"
+"signs-third-party-sign-inventory","Signs - Third Party Sign Inventory",2,"2022-03-10T20:54:58.065973","open-government-licence-toronto"
+"seniors-survey-2017","Seniors Survey 2017",2,"2022-03-10T20:51:46.638240","open-government-licence-toronto"
+"reducing-single-use-and-takeaway-items","Reducing Single Use and Takeaway Items",3,"2022-03-10T20:42:46.191000","open-government-licence-toronto"
+"recreational-courses-historical-data","Recreational Courses Historical Data",2,"2022-03-10T20:42:24.485544","open-government-licence-toronto"
+"public-consultations-on-civic-governance-and-decision-making","Special Committee on Governance -- Public Consultations on Civic Governance and decision making",2,"2022-03-10T20:08:49.595505","open-government-licence-toronto"
+"public-consultation-on-governance-and-decision-making-survey-1","Special Committee on Governance -- Public Consultation on Governance and Decision Making -- Survey #1",2,"2022-03-10T20:08:47.030894","open-government-licence-toronto"
+"parking-lot-facilities","Parking Lot Facilities",2,"2022-03-10T19:27:06.743541","open-government-licence-toronto"
+"open-government-staff-survey","Open Government Staff Survey",1,"2022-03-10T19:25:47.574412","open-government-licence-toronto"
+"open-government-public-survey","Open Government Public Survey",2,"2022-03-10T19:25:46.172273","open-government-licence-toronto"
+"king-st-transit-pilot-detailed-traffic-pedestrian-volumes","King St. Transit Pilot - Detailed Traffic & Pedestrian Volumes",3,"2022-03-10T18:46:47.132735","open-government-licence-toronto"
+"king-st-transit-pilot-detailed-bluetooth-travel-time","King St. Transit Pilot - Detailed Bluetooth Travel Time",3,"2022-03-10T18:46:28.548645","open-government-licence-toronto"
+"king-street-pilot-disaggregate-headway-and-travel-time","King Street Pilot - Disaggregate headway and travel time",3,"2022-03-10T18:45:27.040561","open-government-licence-toronto"
+"humber-bay-parks-survey-results-data","Humber Bay Parks Survey Results Data",2,"2022-03-10T18:44:21.679213","open-government-licence-toronto"
