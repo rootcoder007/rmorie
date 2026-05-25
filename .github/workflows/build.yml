@@ -1,30 +1,29 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #
-# build.yml -- single-DAG orchestrator for rmorie CI.
+# build.yml -- fan-out/fan-in DAG orchestrator for rmorie CI.
 #
-# This is the ONLY workflow that fires on push/PR. It chains the
-# CI-tier child workflows (r-cmd-check, r-coverage-and-lint) into
-# one connected DAG so the GitHub Actions UI shows a single unified
-# pipeline -- the same style as morie's build.yml.
+# The DAG fans OUT from `setup` into every leaf in parallel (no
+# inter-leaf dependencies), then fans IN to a single `summary` node
+# that fails if any leaf failed. This minimises wall-clock time:
+# coverage no longer waits for r-cmd-check to finish.
 #
-# Topology (DAG: one source, one sink, no cycles):
+# Topology:
 #
-#   setup
-#     |-> r-cmd-check ---+-> r-coverage
-#     |                   +-> r-lint
-#     |                   +-> r-goodpractice (covr + cyclocomp + rcmdcheck)
-#     |                   +-> r-pkgcheck (rOpenSci)
-#     +-> [CodeQL deferred until repo is public]
-#                                              v
-#                                           summary
+#                       +-> r-cmd-check (matrix: 5 cells)         -+
+#                       |                                          |
+#                       +-> r-coverage (covr + codecov)            -+
+#                       |                                          |
+#                       +-> r-lint (lintr::lint_package)           -+
+#                       |                                          |
+#   setup ------------> +-> r-goodpractice (cyclocomp + rcmdcheck) -+-> summary
+#                       |                                          |
+#                       +-> r-pkgcheck (rOpenSci)                  -+
+#                       |                                          |
+#                       +-> codeql (actions + c-cpp)               -+
 #
-# The summary node fans-in on every leaf and FAILS if any of them
-# failed -- branch-protection on `main` can require exactly ONE
-# required check (`build / summary`).
-#
-# CodeQL is intentionally absent: GitHub's CodeQL Action requires
-# Advanced Security or a public repository. rmorie is private during
-# the rOpenSci review; CodeQL will be added once we go public.
+# Each leaf is workflow_call into its own reusable file. Failure of
+# any single leaf fails `summary`, which is the one required check
+# for branch-protection on `main`.
 
 name: build
 
@@ -35,9 +34,12 @@ on:
     branches: ["main", "release/**"]
   workflow_dispatch:
 
-# Permissions union of every child workflow's needs.
+# Permissions union of every leaf workflow's needs.
 permissions:
   contents: read
+  security-events: write   # codeql SARIF upload
+  actions: read            # codeql 'actions' language
+  packages: read           # codeql pulls query packs from ghcr
 
 concurrency:
   group: build-${{ github.workflow }}-${{ github.ref }}
@@ -62,31 +64,64 @@ jobs:
           echo "ref:            ${{ github.ref }}"
           echo "sha:            ${{ github.sha }}"
 
+  # ---- Fan-out: every leaf depends ONLY on `setup` ----
+
   r-cmd-check:
     needs: setup
     uses: ./.github/workflows/r-cmd-check.yml
     secrets: inherit
 
-  r-coverage-and-lint:
-    needs: r-cmd-check
-    uses: ./.github/workflows/r-coverage-and-lint.yml
+  r-coverage:
+    needs: setup
+    uses: ./.github/workflows/r-coverage.yml
     secrets: inherit
+
+  r-lint:
+    needs: setup
+    uses: ./.github/workflows/r-lint.yml
+    secrets: inherit
+
+  r-goodpractice:
+    needs: setup
+    uses: ./.github/workflows/r-goodpractice.yml
+    secrets: inherit
+
+  r-pkgcheck:
+    needs: setup
+    uses: ./.github/workflows/r-pkgcheck.yml
+    secrets: inherit
+
+  codeql:
+    needs: setup
+    uses: ./.github/workflows/codeql.yml
+    secrets: inherit
+
+  # ---- Fan-in: single required check ----
 
   summary:
     name: summary
     needs:
       - setup
       - r-cmd-check
-      - r-coverage-and-lint
+      - r-coverage
+      - r-lint
+      - r-goodpractice
+      - r-pkgcheck
+      - codeql
     if: always()
     runs-on: ubuntu-latest
     steps:
-      - name: Tabulate
+      - name: Tabulate per-leaf results
         run: |
           set -eu
-          echo "setup               = ${{ needs.setup.result }}"
-          echo "r-cmd-check         = ${{ needs.r-cmd-check.result }}"
-          echo "r-coverage-and-lint = ${{ needs.r-coverage-and-lint.result }}"
+          echo "Per-leaf result table:"
+          echo "  setup          = ${{ needs.setup.result }}"
+          echo "  r-cmd-check    = ${{ needs.r-cmd-check.result }}"
+          echo "  r-coverage     = ${{ needs.r-coverage.result }}"
+          echo "  r-lint         = ${{ needs.r-lint.result }}"
+          echo "  r-goodpractice = ${{ needs.r-goodpractice.result }}"
+          echo "  r-pkgcheck     = ${{ needs.r-pkgcheck.result }}"
+          echo "  codeql         = ${{ needs.codeql.result }}"
       - name: Fail if any leaf failed
         run: |
           set -eu
@@ -94,7 +129,11 @@ jobs:
           for r in \
             "${{ needs.setup.result }}" \
             "${{ needs.r-cmd-check.result }}" \
-            "${{ needs.r-coverage-and-lint.result }}"; do
+            "${{ needs.r-coverage.result }}" \
+            "${{ needs.r-lint.result }}" \
+            "${{ needs.r-goodpractice.result }}" \
+            "${{ needs.r-pkgcheck.result }}" \
+            "${{ needs.codeql.result }}"; do
             if [ "$r" != "success" ]; then
               fail=1
             fi
