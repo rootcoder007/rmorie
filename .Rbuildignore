@@ -21,3 +21,4 @@
 ^Meta$
 ^_pkgdown\.yml$
 ^src/\.clangd$
+^codecov\.yml$

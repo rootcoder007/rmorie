@@ -1,0 +1,67 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+#
+# r-pkgcheck.yml -- rOpenSci's own pkgcheck. Runs pkgstats + covr +
+# goodpractice + rcmdcheck internally and produces the markdown
+# comment the rOpenSci bot uses on the review thread.
+# Called via build.yml (workflow_call) or manually (workflow_dispatch).
+
+name: rOpenSci pkgcheck
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
+permissions:
+  contents: read
+
+jobs:
+  pkgcheck:
+    name: rOpenSci pkgcheck
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - uses: r-lib/actions/setup-pandoc@a51a8012b0aab7c32ef9d19bf54da93f3254335e # v2
+      - uses: r-lib/actions/setup-r@a51a8012b0aab7c32ef9d19bf54da93f3254335e # v2
+        with:
+          r-version: 'release'
+          use-public-rspm: true
+
+      # pkgcheck's internal rcmdcheck builds the PDF manual; needs
+      # inconsolata + supporting LaTeX. Without it pkgcheck reports
+      # a spurious "R CMD check found 1 warning".
+      - uses: r-lib/actions/setup-tinytex@a51a8012b0aab7c32ef9d19bf54da93f3254335e # v2
+      - name: Install LaTeX helpers
+        run: |
+          tlmgr update --self
+          tlmgr install inconsolata helvetic times courier ec parskip url upquote
+
+      - name: Install universal-ctags
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y universal-ctags
+
+      - uses: r-lib/actions/setup-r-dependencies@a51a8012b0aab7c32ef9d19bf54da93f3254335e # v2
+        with:
+          extra-packages: |
+            any::rcmdcheck
+            any::goodpractice
+            any::cyclocomp
+            ropensci-review-tools/pkgstats
+            ropensci-review-tools/pkgcheck
+
+      - name: Run pkgcheck
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          Rscript -e 'cks <- pkgcheck::pkgcheck("."); md <- pkgcheck::checks_to_markdown(cks); writeLines(md, "pkgcheck.md"); cat(md)'
+
+      - name: Upload pkgcheck.md
+        uses: actions/upload-artifact@v5
+        with:
+          name: pkgcheck-markdown
+          path: pkgcheck.md

@@ -1,0 +1,55 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+#
+# codeql.yml -- CodeQL static analysis for actions + c-cpp.
+#
+# Public-repo-only: CodeQL requires "Code scanning enabled" which is
+# free on public repos, but needs GitHub Advanced Security on private.
+# rmorie went public 2026-05-25 so this is now active.
+#
+# Languages:
+#   actions  -- workflow files (catches SHA-unpinned actions, etc.)
+#   c-cpp    -- src/*.cpp (Rcpp + C++ backends)
+#
+# We deliberately do NOT scan R itself -- there's no R extractor
+# in CodeQL. Lintr + goodpractice + rOpenSci pkgcheck cover R.
+
+name: CodeQL
+
+on:
+  workflow_call:
+  schedule:
+    - cron: "27 3 * * 1"   # weekly Mon 03:27 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+  packages: read
+
+concurrency:
+  group: codeql-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ["actions", "c-cpp"]
+
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@9e0d7b8d25671d64c341c19c0152d693099fb5ba # v4
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: none
+
+      - name: Perform CodeQL analysis
+        uses: github/codeql-action/analyze@9e0d7b8d25671d64c341c19c0152d693099fb5ba # v4
+        with:
+          category: "/language:${{ matrix.language }}"
