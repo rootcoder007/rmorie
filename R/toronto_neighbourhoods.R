@@ -65,6 +65,9 @@ NULL
 .morie_to_neighbourhoods_fixture <- function(version) {
   fname <- .morie_to_fixture_name(version)
   path <- system.file("extdata", fname, package = "rmorie")
+  if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+    path <- system.file("extdata", fname, package = "rmoriedata")
+  }
   if (!nzchar(path)) {
     stop(sprintf(paste0(
       "Bundled fixture %s not found in the installed morie package. ",
@@ -285,6 +288,9 @@ morie_tps_year_to_hood_version <- function(year) {
 morie_to_hood_crosswalk <- function() {
   path <- system.file("extdata", "to_hood_158_140_crosswalk.csv",
                       package = "rmorie")
+  if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+    path <- system.file("extdata", "to_hood_158_140_crosswalk.csv", package = "rmoriedata")
+  }
   if (!nzchar(path)) {
     stop(paste0(
       "Bundled 158<->140 crosswalk fixture missing from the installed ",
