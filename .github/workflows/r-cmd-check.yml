@@ -1,22 +1,22 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+#
+# r-cmd-check.yml -- reusable matrix R CMD check.
+#
+# Triggered via the build.yml orchestrator (workflow_call). Kept
+# workflow_dispatch so it can be re-run manually for debugging.
 name: R CMD check
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+  # Parallel compile for source-installed Suggests (C++ heavy deps).
   MAKEFLAGS: "-j4"
 
 on:
-  push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
+  workflow_call:
   workflow_dispatch:
 
 permissions:
   contents: read
-
-concurrency:
-  group: r-cmd-check-${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
   R-CMD-check:
@@ -56,5 +56,5 @@ jobs:
       - uses: r-lib/actions/check-r-package@a51a8012b0aab7c32ef9d19bf54da93f3254335e # v2
         with:
           upload-snapshots: true
-          args: 'c("--no-manual")'
+          args: 'c("--no-manual", "--as-cran")'
           error-on: '"error"'
