@@ -1,0 +1,106 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+#
+# build.yml -- single-DAG orchestrator for rmorie CI.
+#
+# This is the ONLY workflow that fires on push/PR. It chains the
+# CI-tier child workflows (r-cmd-check, r-coverage-and-lint) into
+# one connected DAG so the GitHub Actions UI shows a single unified
+# pipeline -- the same style as morie's build.yml.
+#
+# Topology (DAG: one source, one sink, no cycles):
+#
+#   setup
+#     |-> r-cmd-check ---+-> r-coverage
+#     |                   +-> r-lint
+#     |                   +-> r-goodpractice (covr + cyclocomp + rcmdcheck)
+#     |                   +-> r-pkgcheck (rOpenSci)
+#     +-> [CodeQL deferred until repo is public]
+#                                              v
+#                                           summary
+#
+# The summary node fans-in on every leaf and FAILS if any of them
+# failed -- branch-protection on `main` can require exactly ONE
+# required check (`build / summary`).
+#
+# CodeQL is intentionally absent: GitHub's CodeQL Action requires
+# Advanced Security or a public repository. rmorie is private during
+# the rOpenSci review; CodeQL will be added once we go public.
+
+name: build
+
+on:
+  push:
+    branches: ["main", "release/**"]
+  pull_request:
+    branches: ["main", "release/**"]
+  workflow_dispatch:
+
+# Permissions union of every child workflow's needs.
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  setup:
+    name: setup
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.meta.outputs.version }}
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - name: Read DESCRIPTION version
+        id: meta
+        run: |
+          v=$(grep '^Version:' DESCRIPTION | awk '{print $2}')
+          echo "version=$v" >> "$GITHUB_OUTPUT"
+      - name: Report
+        run: |
+          echo "rmorie version: ${{ steps.meta.outputs.version }}"
+          echo "ref:            ${{ github.ref }}"
+          echo "sha:            ${{ github.sha }}"
+
+  r-cmd-check:
+    needs: setup
+    uses: ./.github/workflows/r-cmd-check.yml
+    secrets: inherit
+
+  r-coverage-and-lint:
+    needs: r-cmd-check
+    uses: ./.github/workflows/r-coverage-and-lint.yml
+    secrets: inherit
+
+  summary:
+    name: summary
+    needs:
+      - setup
+      - r-cmd-check
+      - r-coverage-and-lint
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tabulate
+        run: |
+          set -eu
+          echo "setup               = ${{ needs.setup.result }}"
+          echo "r-cmd-check         = ${{ needs.r-cmd-check.result }}"
+          echo "r-coverage-and-lint = ${{ needs.r-coverage-and-lint.result }}"
+      - name: Fail if any leaf failed
+        run: |
+          set -eu
+          fail=0
+          for r in \
+            "${{ needs.setup.result }}" \
+            "${{ needs.r-cmd-check.result }}" \
+            "${{ needs.r-coverage-and-lint.result }}"; do
+            if [ "$r" != "success" ]; then
+              fail=1
+            fi
+          done
+          if [ "$fail" -eq 1 ]; then
+            echo "::error::At least one CI leaf failed/cancelled -- see the table above."
+            exit 1
+          fi
+          echo "All CI leaves green."

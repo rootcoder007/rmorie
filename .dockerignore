@@ -1,0 +1,24 @@
+# Dev-only -- don't ship into the image
+.git/
+.github/
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+*.Rcheck/
+*.tar.gz
+docs/
+papers/
+data-raw/
+scripts/
+dev/
+tests/
+vignettes/
+renv/
+.Rprofile
+renv.lock
+CONTRIBUTING.md
+CODE_OF_CONDUCT.md
+SECURITY.md
+Makefile
+cran-comments.md
