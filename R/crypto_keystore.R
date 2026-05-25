@@ -4,7 +4,19 @@
 #
 # R port of morie/crypto/keystore.py.
 
-.MORIE_KEYSTORE_DEFAULT_PATH <- "~/.morie/keys/keystore.json"
+# CRAN policy: packages must not write outside tempdir() without
+# explicit user opt-in. The keystore default path therefore resolves
+# to a session-scoped tempdir() location; users who want persistent
+# keys set MORIE_KEYSTORE_PATH (or pass path = ... explicitly to the
+# keystore_create / load / store / wipe functions).
+.morie_keystore_default_path <- function() {
+  override <- Sys.getenv("MORIE_KEYSTORE_PATH", "")
+  if (nzchar(override)) {
+    path.expand(override)
+  } else {
+    file.path(tempdir(), ".morie", "keys", "keystore.json")
+  }
+}
 .MORIE_SCRYPT_N  <- 2L^14L
 .MORIE_SCRYPT_R  <- 8L
 .MORIE_SCRYPT_P  <- 1L
@@ -90,7 +102,7 @@
 #' @return Invisibly, NULL.
 #' @export
 morie_crypto_keystore_create <- function(password,
-                                         path = .MORIE_KEYSTORE_DEFAULT_PATH) {
+                                         path = .morie_keystore_default_path()) {
   .morie_keystore_require()
   p <- .morie_resolve_path(path)
   if (file.exists(p)) {
@@ -112,7 +124,7 @@ morie_crypto_keystore_create <- function(password,
 #' @return Invisibly, NULL.
 #' @export
 morie_crypto_keystore_store <- function(name, pk, sk, password,
-                                        path = .MORIE_KEYSTORE_DEFAULT_PATH) {
+                                        path = .morie_keystore_default_path()) {
   .morie_keystore_require()
   if (!is.character(name) || length(name) != 1L) {
     stop("name must be a single character string", call. = FALSE)
@@ -142,7 +154,7 @@ morie_crypto_keystore_store <- function(name, pk, sk, password,
 #' @return Named list with pk (raw) and sk (raw).
 #' @export
 morie_crypto_keystore_load <- function(name, password,
-                                       path = .MORIE_KEYSTORE_DEFAULT_PATH) {
+                                       path = .morie_keystore_default_path()) {
   .morie_keystore_require()
   if (!is.character(name) || length(name) != 1L) {
     stop("name must be a single character string", call. = FALSE)
@@ -173,7 +185,7 @@ morie_crypto_keystore_load <- function(name, password,
 #' @return Character vector of identifiers.
 #' @export
 morie_crypto_keystore_list <- function(password,
-                                       path = .MORIE_KEYSTORE_DEFAULT_PATH) {
+                                       path = .morie_keystore_default_path()) {
   .morie_keystore_require()
   store <- .morie_read_store(path)
   salt <- .morie_hex_to_raw(store$salt)
