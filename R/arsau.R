@@ -118,6 +118,11 @@ NULL
   fixture <- system.file("extdata", "arsau", package = "rmorie")
   if (nzchar(fixture)) {
     candidates[["bundled fixture (inst/extdata/arsau)"]] <- fixture
+  } else if (requireNamespace("rmoriedata", quietly = TRUE)) {
+    fixture <- system.file("extdata", "arsau", package = "rmoriedata")
+    if (nzchar(fixture)) {
+      candidates[["bundled fixture (rmoriedata extdata/arsau)"]] <- fixture
+    }
   }
 
   if (!require_exists) {

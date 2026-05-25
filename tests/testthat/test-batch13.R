@@ -18,7 +18,7 @@ test_that("morie_license_metadata returns expected named list", {
     "package", "spdx", "fsf_libre",
     "osi_approved", "kernel_compatible"
   ))
-  expect_identical(md$package, "morie")
+  expect_identical(md$package, "rmorie")
   expect_identical(md$spdx, "GPL-2.0-only")
 })
 

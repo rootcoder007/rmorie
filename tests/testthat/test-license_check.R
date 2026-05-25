@@ -31,7 +31,7 @@ test_that("morie_license_metadata returns the kernel-adjunct GPL-2.0 metadata", 
   expect_type(out, "list")
   expect_true("spdx" %in% names(out))
   expect_match(out$spdx, "GPL", ignore.case = TRUE)
-  expect_equal(out$package, "morie")
+  expect_equal(out$package, "rmorie")
 })
 
 test_that("morie_check_plugin_license accepts a compatible SPDX", {
