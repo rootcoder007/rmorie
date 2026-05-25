@@ -1,0 +1,6 @@
+EndFiscalYear,Alert_Type,Gender,NumberIndividuals_InCustody,NumberIndividuals_RestrictiveConfinement,NumberIndividuals_Segregation
+2022,Mental Health Alert,Male,1200,80,55
+2023,Suicide Risk Alert,Female,200,15,10
+2023,Suicide Watch Alert,Male,150,12,8
+2024,Mental Health Alert,Female,600,40,28
+2024,None,Male,4000,220,150

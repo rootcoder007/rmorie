@@ -1,0 +1,22 @@
+name: R-CMD-check (subdir marker)
+
+# This workflow exists so rOpenSci's pkgcheck detects CI inside the
+# package sub-directory ("r-package/morie/"). The actual matrix R CMD
+# check across (ubuntu, macos, windows) x (release, devel, oldrel) is
+# configured at the repository root in `.github/workflows/r-cmd-check.yml`
+# and runs on every push/PR. This file is dispatch-only so it doesn't
+# duplicate that run; pkgcheck only needs the file to exist.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  marker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Note
+        run: |
+          echo "Matrix R-CMD-check is at ../../.github/workflows/r-cmd-check.yml"

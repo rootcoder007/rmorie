@@ -1,0 +1,6 @@
+SECTION,CATEGORY,UNITS OF MEASURE,YEAR_2020,YEAR_2021,YEAR_2022
+SYNTHETIC,synth_category_1,count,100,110,120
+SYNTHETIC,synth_category_2,count,200,220,240
+SYNTHETIC,synth_category_3,count,300,330,360
+SYNTHETIC,synth_category_4,count,400,440,480
+SYNTHETIC,synth_category_5,count,500,550,600

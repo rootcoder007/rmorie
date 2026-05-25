@@ -1,0 +1,6 @@
+OBJECTID,ZoneDesc,Neighbourhood_Name,SUM_Area
+1,Commercial,SYNTH Neighbourhood One,12345.6789
+2,Residential,SYNTH Neighbourhood One,98765.4321
+3,Industrial,SYNTH Neighbourhood Two,5432.10
+4,Commercial,SYNTH Neighbourhood Three,33333.33
+5,Mixed Use,SYNTH Neighbourhood Four,7777.77

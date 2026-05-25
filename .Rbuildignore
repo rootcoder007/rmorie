@@ -1,0 +1,24 @@
+^data-raw$
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.github$
+^cran-comments\.md$
+^doc$
+^Meta$
+
+# Build artifacts and check outputs (must never be in CRAN tarball)
+^.*\.tar\$
+^.*\.tar\.gz\$
+^morie\.Rcheck\$
+^build\$
+^Meta\$
+^\.DS_Store\$
+^\.RData\$
+^PI_HANDOFF\.md\$
+^src/\.clangd$
+^src/Makevars$
+^src/Makevars\.win$
+^\.lintr$
+^scripts$
+^_pkgdown\.yml$
+^docs$

@@ -1,0 +1,17 @@
+# The shared numeric core (morie_core.h) uses C++17 features.
+CXX_STD = CXX17
+# The SIU parser (siu_parser.cpp) links libcurl; the flags below are
+# filled in by ./configure (via curl-config) at install time, so the
+# committed Makefile carries no non-portable shell-call extension.
+PKG_CPPFLAGS = @cflags@
+# Append R's BLAS/LAPACK/Fortran flags so RcppArmadillo's
+# dgesvx_/dgemm_/etc resolve at link time on Linux (macOS hides
+# this via the Accelerate framework but Linux/Pi exposes the gap).
+#
+# Wrap the LAPACK/BLAS pair in -Wl,--no-as-needed because Debian/Ubuntu
+# ld defaults to --as-needed, which silently drops -llapack -lblas
+# when no preceding .o file directly references them (RcppArmadillo's
+# header-only inline calls slip past that check and the symbols stay
+# unresolved). Restore --as-needed after for the Fortran runtime so we
+# don't carry libgfortran as a hard dep if it's not actually used.
+PKG_LIBS = @libs@ @as_needed_open@ $(LAPACK_LIBS) $(BLAS_LIBS) @as_needed_close@ $(FLIBS)

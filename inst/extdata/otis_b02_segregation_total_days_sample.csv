@@ -1,0 +1,6 @@
+EndFiscalYear,UniqueIndividual_ID,Gender,Region_MostRecentPlacement,Age_Category,TotalAggregatedDays_Segregation
+2022,2022-SYNTH-001-SEG,Male,Toronto,25 to 49,14
+2023,2023-SYNTH-002-SEG,Male,Eastern,18 to 24,30
+2023,2023-SYNTH-003-SEG,Female,Western,50 to 64,45
+2024,2024-SYNTH-004-SEG,Male,Northern,25 to 49,7
+2024,2024-SYNTH-005-SEG,Female,Central,50 to 64,60

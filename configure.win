@@ -1,0 +1,21 @@
+#!/bin/sh
+# morie configure.win -- detect libcurl (via pkg-config, provided by
+# Rtools) for the SIU parser and write src/Makevars.win.
+
+CURL_CFLAGS=`pkg-config --cflags libcurl 2>/dev/null`
+CURL_LIBS=`pkg-config --libs libcurl 2>/dev/null`
+if [ -z "${CURL_LIBS}" ]; then
+  CURL_LIBS="-lcurl"
+fi
+
+# Windows linker (Rtools' GNU ld) does NOT need the --no-as-needed
+# guard around LAPACK/BLAS (the Win build flow links via R's own
+# Rblas/Rlapack with eager DT_NEEDED on the .o side). Stub the
+# as_needed substitutions to empty so the .win Makevars stays clean.
+sed -e "s|@cflags@|${CURL_CFLAGS}|" \
+    -e "s|@libs@|${CURL_LIBS}|" \
+    -e "s|@as_needed_open@||" \
+    -e "s|@as_needed_close@||" \
+  src/Makevars.win.in > src/Makevars.win
+
+exit 0

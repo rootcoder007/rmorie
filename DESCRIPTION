@@ -1,0 +1,149 @@
+Package: morie
+Type: Package
+Title: Multi-Domain Open Research and Inferential Estimation
+Version: 0.9.5.12
+Authors@R: c(
+  person(
+    given = "Vansh Singh",
+    family = "Ruhela",
+    email = "hadesllm@proton.me",
+    role = c("aut", "cre"),
+    comment = c(ORCID = "0009-0004-1750-3592")
+  )
+ )
+Author: Vansh Singh Ruhela [aut, cre] (<https://orcid.org/0009-0004-1750-3592>)
+Maintainer: Vansh Singh Ruhela <hadesllm@proton.me>
+Description: Multi-domain scientific computing toolkit (branded as
+  'morie' (morie 森, the Fates' Forest), combining the Greek 'Moirai' (the three
+  Fates) with the Japanese 'mori' (forest, three trees in the kanji
+  stacked into one ideogram)) for observational inference and
+  intervention analysis across
+  scientific-experimentation contexts, hosting the MRM (Multilevel
+  Reconciliation Methodology) framework for Canadian carceral, police,
+  and oversight data as its primary application.
+  Provides general-purpose causal estimators (ATE, ATT, ATC, GATE, CATE,
+  LATE, AIPW, G-computation), survey sampling methods (stratified, cluster,
+  PPS, bootstrap, calibration weights), propensity-score and doubly-robust
+  estimators, and sensitivity analyses (E-value, Rosenbaum bounds).
+  Companion modules support signal processing and spectral analysis,
+  cryptographic primitives, spatial statistics, statistical physics of
+  crime (Hawkes self-exciting processes, reaction-diffusion, Levy flight,
+  urban scaling), and classical-test-theory and item-response-theory
+  psychometrics, alongside ingestion utilities for officially published
+  Ontario Special Investigations Unit (police-oversight) and federal
+  Structured Intervention Unit reports.
+License: AGPL-3
+LazyData: true
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Depends:
+  R (>= 4.3.0)
+Note: Tested on R 4.3.0, 4.4.x, 4.5.2, 4.5.3 (CRAN). Use CRAN R on Apple
+  Silicon (Homebrew R may segfault with RSQLite).
+Imports:
+  stats,
+  utils,
+  Rcpp
+LinkingTo: Rcpp, RcppArmadillo
+SystemRequirements: libcurl: libcurl-devel (rpm) or libcurl4-openssl-dev (deb)
+Suggests:
+  AER,
+  arrow,
+  bacondecomp,
+  basicspace,
+  bigrquery,
+  cansim,
+  car,
+  caret,
+  cmprsk,
+  data.table,
+  DBI,
+  dbscan,
+  did,
+  digest,
+  dlm,
+  DoubleML,
+  duckdb,
+  e1071,
+  ebal,
+  eegkit,
+  elasticnet,
+  emhawkes,
+  EValue,
+  fixest,
+  FNN,
+  gbm,
+  geepack,
+  ggplot2,
+  glmnet,
+  gmm,
+  hawkes,
+  httr2,
+  iml,
+  ivreg,
+  jsonlite,
+  knitr,
+  lmtest,
+  MASS,
+  Matching,
+  MatchIt,
+  MCMCpack,
+  mgcv,
+  mlr3,
+  mlr3learners,
+  MSwM,
+  nortest,
+  openssl,
+  oro.nifti,
+  patchwork,
+  pdftools,
+  pkgload,
+  plm,
+  pracma,
+  pROC,
+  pscl,
+  psych,
+  R.matlab,
+  randomForest,
+  randtoolbox,
+  ranger,
+  rddensity,
+  rdrobust,
+  readr,
+  readxl,
+  rmarkdown,
+  rmgarch,
+  rpart,
+  RPostgres,
+  RSQLite,
+  Rtsne,
+  rugarch,
+  rvest,
+  sandwich,
+  seewave,
+  sf,
+  signal,
+  smacof,
+  smotefamily,
+  sodium,
+  spdep,
+  survey,
+  survival,
+  synthdid,
+  testthat (>= 3.0.0),
+  torch,
+  urca,
+  vars,
+  wavelets,
+  WeightIt,
+  withr,
+  writexl,
+  xgboost,
+  xml2
+VignetteBuilder: knitr
+URL: https://github.com/rootcoder007/rmorie
+BugReports: https://github.com/rootcoder007/rmorie/issues
+Config/testthat/edition: 3
+Remotes:
+  synth-inference/synthdid

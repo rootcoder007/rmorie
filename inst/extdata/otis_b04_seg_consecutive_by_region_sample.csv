@@ -1,0 +1,6 @@
+EndFiscalYear,Region_AtTimeOfPlacement,Gender,Measure,NumberConsecutiveDays_Segregation
+2022,Toronto,Male,Mean,12.5
+2023,Eastern,Female,Median,7
+2023,Central,Male,Max,45
+2024,Western,Female,Mean,14.2
+2024,Northern,Male,Median,9

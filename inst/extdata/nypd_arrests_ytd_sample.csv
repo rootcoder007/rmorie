@@ -1,0 +1,6 @@
+"arrest_key","arrest_date","pd_cd","pd_desc","ky_cd","ofns_desc","law_code","law_cat_cd","arrest_boro","arrest_precinct","jurisdiction_code","age_group","perp_sex","perp_race","x_coord_cd","y_coord_cd","latitude","longitude","geocoded_column"
+"NYPD-YA-SYNTH-001","2025-01-11T00:00:00.000","397","ROBBERY","105","ROBBERY","PL 1601005","F","B","42","0","18-24","M","BLACK","","","40.83","-73.92",""
+"NYPD-YA-SYNTH-002","2025-02-12T00:00:00.000","101","ASSAULT 3","344","ASSAULT 3 & RELATED OFFENSES","PL 1200001","M","M","32","0","25-44","M","BLACK HISPANIC","","","40.81","-73.95",""
+"NYPD-YA-SYNTH-003","2025-03-13T00:00:00.000","259","MISCHIEF","351","CRIMINAL MISCHIEF & RELATED OF","PL 1450005","M","K","75","0","45-64","F","WHITE","","","40.66","-73.88",""
+"NYPD-YA-SYNTH-004","2025-04-14T00:00:00.000","511","CONTROLLED SUBSTANCE POSSESSION","235","DANGEROUS DRUGS","PL 2210020","V","Q","109","0","18-24","M","WHITE HISPANIC","","","40.76","-73.92",""
+"NYPD-YA-SYNTH-005","2025-05-15T00:00:00.000","339","PETIT LARCENY OPEN","341","PETIT LARCENY","PL 1552510","M","S","120","0","25-44","F","ASIAN/PACIFIC ISLANDER","","","40.59","-74.10",""

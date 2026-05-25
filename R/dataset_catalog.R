@@ -1,0 +1,411 @@
+# dataset_catalog.R -- MORIE dataset catalog (short keys)
+#
+# Mirrors the Python DATASET_CATALOG in data.py exactly. Both languages
+# share the same SQLite cache (data/cache/morie.db) via DBI.
+#
+# Short key format: {source}{survey}{year}{type}
+#   oc=opencanada, hib=healthinfobase, cihi=CIHI
+#   mf=pumf, bt=bootstrap
+
+#' List all datasets in the MORIE catalog
+#'
+#' Returns a data.frame describing every dataset available through the
+#' MORIE data management system. Each row maps a short catalog key to its
+#' source, survey, year, file format, local path, SQLite table name,
+#' and CKAN resource ID (if available).
+#'
+#' Keys match the Python DATASET_CATALOG in \code{data.py} exactly.
+#' Use \code{\link{morie_load_dataset}} to load by key.
+#'
+#' @return A data.frame with 44 rows (one per dataset) and columns:
+#'   key, name, source, survey, year, format, type, large_file,
+#'   local_path, table_name, ckan_resource_id, download_url, zip_member.
+#'   The \code{download_url} / \code{zip_member} columns are empty for
+#'   datasets reachable through the SQLite cache or the CKAN datastore.
+#' @examples
+#' cat <- morie_dataset_catalog()
+#' nrow(cat)
+#' head(cat[, c("key", "name", "source", "year")])
+#' # Find Ontario carceral datasets:
+#' cat[
+#'   grepl("OTIS|Ontario", paste(cat$source, cat$survey)),
+#'   c("key", "year")
+#' ]
+#' @export
+morie_dataset_catalog <- function() {
+  entries <- list(
+    # -- OpenCanada (oc) PUMF microdata --
+    list(
+      key = "ocp21", name = "CPADS 2021-2022 PUMF",
+      source = "oc", survey = "cpads", year = "2021-2022",
+      format = "csv", type = "pumf", large_file = FALSE,
+      local_path = "data/datasets/oc/CPADS/2021-2022/cpads-2021-2022-pumf2.csv",
+      table_name = "ocp21",
+      ckan_resource_id = "d2639429-c304-45a6-90b3-770562f4d46d"
+    ),
+    list(
+      key = "occ22", name = "CCS 2018-2022 PUMF",
+      source = "oc", survey = "ccs", year = "2018-2022",
+      format = "csv", type = "pumf", large_file = FALSE,
+      local_path = "data/datasets/oc/CCS/2018-2022/ccs_pumf_2018to2022_final.csv",
+      table_name = "occ22", ckan_resource_id = "262e6163-ba41-4562-bd2b-8996e738b1d4"
+    ),
+    list(
+      key = "occ23", name = "CCS 2023 PUMF",
+      source = "oc", survey = "ccs", year = "2023",
+      format = "csv", type = "pumf", large_file = FALSE,
+      local_path = "data/datasets/oc/CCS/2023/ccs_2023_pumf.csv",
+      table_name = "occ23", ckan_resource_id = "100c5845-664e-4c66-be15-3625ce236d8b"
+    ),
+    list(
+      key = "occ24", name = "CCS 2024 PUMF",
+      source = "oc", survey = "ccs", year = "2024",
+      format = "csv", type = "pumf", large_file = FALSE,
+      local_path = "data/datasets/oc/CCS/2024/ccs_pumf_2024-002.csv",
+      table_name = "occ24", ckan_resource_id = "420925be-399a-473b-8be3-26875a1c132a"
+    ),
+    list(
+      key = "ocs22mf", name = "CSADS 2021-2022 PUMF",
+      source = "oc", survey = "csads", year = "2021-2022",
+      format = "csv", type = "pumf", large_file = FALSE,
+      local_path = "data/datasets/oc/CSADS/2021-2022/csads202122pumf.csv",
+      table_name = "ocs22mf",
+      ckan_resource_id = "f6761337-47e9-455a-a3c4-ea8516aa634f"
+    ),
+    list(
+      key = "ocs22bt", name = "CSADS 2021-2022 Bootstrap",
+      source = "oc", survey = "csads", year = "2021-2022",
+      format = "csv", type = "bootstrap", large_file = TRUE,
+      local_path = "data/datasets/oc/CSADS/2021-2022/csads202122bootstrap.csv",
+      table_name = "ocs22bt",
+      ckan_resource_id = "ebdc36e1-910d-4685-81a3-6acfe44729bc"
+    ),
+    list(
+      key = "ocs24mf", name = "CSADS 2023-2024 PUMF",
+      source = "oc", survey = "csads", year = "2023-2024",
+      format = "csv", type = "pumf", large_file = FALSE,
+      local_path = "data/datasets/oc/CSADS/2023-2024/csads202324pumf.csv",
+      table_name = "ocs24mf",
+      ckan_resource_id = "81a3adf0-61d0-4691-afba-588fa5f563da"
+    ),
+    list(
+      key = "ocs24bt", name = "CSADS 2023-2024 Bootstrap",
+      source = "oc", survey = "csads", year = "2023-2024",
+      format = "csv", type = "bootstrap", large_file = TRUE,
+      local_path = "data/datasets/oc/CSADS/2023-2024/csads202324bootstrap.csv",
+      table_name = "ocs24bt", ckan_resource_id = "", download_url = "https://open.canada.ca/data/dataset/1f15ca45-8bfd-4f9c-9ec6-2c0c440e69c2/resource/58682536-1325-405a-83f0-7b1284b4f717/download/202324-csads-ecade-pumf-fmgd-bootstrap-weights-poids-de-bootstrap.csv"
+    ),
+    list(
+      key = "cu20mf", name = "CSUS 2019-2020 PUMF",
+      source = "oc", survey = "csus", year = "2019-2020",
+      format = "csv", type = "pumf", large_file = FALSE,
+      local_path = "data/datasets/oc/CSUS/2019-2020/CADS201920pumf.csv",
+      table_name = "cu20mf", ckan_resource_id = "", download_url = "https://www150.statcan.gc.ca/n1/pub/13-25-0005/2021001/CSV.zip", zip_member = "CADS201920pumf.csv"
+    ),
+    list(
+      key = "cu20bt", name = "CSUS 2019-2020 Bootstrap",
+      source = "oc", survey = "csus", year = "2019-2020",
+      format = "csv", type = "bootstrap", large_file = TRUE,
+      local_path = "data/datasets/oc/CSUS/2019-2020/CADS201920bsw.csv",
+      table_name = "cu20bt", ckan_resource_id = "", download_url = "https://www150.statcan.gc.ca/n1/pub/13-25-0005/2021001/CSV.zip", zip_member = "CADS201920bsw.csv"
+    ),
+    list(
+      key = "cu23mf", name = "CSUS 2023 PUMF",
+      source = "oc", survey = "csus", year = "2023",
+      format = "csv", type = "pumf", large_file = FALSE,
+      local_path = "data/datasets/oc/CSUS/2023/csus2023_pumf_final.csv",
+      table_name = "cu23mf", ckan_resource_id = "c2c1795b-4501-49ba-9dd1-5b8360cc3b2e"
+    ),
+    list(
+      key = "cu23bt", name = "CSUS 2023 Bootstrap",
+      source = "oc", survey = "csus", year = "2023",
+      format = "csv", type = "bootstrap", large_file = TRUE,
+      local_path = "data/datasets/oc/CSUS/2023/csus2023_pumf_bwt.csv",
+      table_name = "cu23bt", ckan_resource_id = "", download_url = "https://open.canada.ca/data/dataset/65e2d45e-efc6-4c29-9a9b-db59bc96aa0e/resource/7d19d47a-5f42-4447-b735-aa4d677ad5ed/download/csus2023_pumf_bwt.csv"
+    ),
+    # -- HealthInfobase (hib) aggregates --
+    list(
+      key = "hibp", name = "CPADS Aggregate",
+      source = "hib", survey = "cpads", year = "",
+      format = "csv", type = "aggregate", large_file = FALSE,
+      local_path = "data/datasets/hib/CPADS/CPADS.csv",
+      table_name = "hibp", ckan_resource_id = ""
+    ),
+    list(
+      key = "hibsa", name = "CSADS Provinces",
+      source = "hib", survey = "csads", year = "",
+      format = "csv", type = "aggregate", large_file = FALSE,
+      local_path = "data/datasets/hib/CSADS/provinces.csv",
+      table_name = "hibsa", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csads/downloadable/CSADS-data.zip", zip_member = "provinces.csv"
+    ),
+    list(
+      key = "hibsb", name = "CSADS Trends",
+      source = "hib", survey = "csads", year = "",
+      format = "csv", type = "aggregate", large_file = FALSE,
+      local_path = "data/datasets/hib/CSADS/trends.csv",
+      table_name = "hibsb", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csads/downloadable/CSADS-data.zip", zip_member = "trends.csv"
+    ),
+    list(
+      key = "hibua", name = "CSUS Alcohol",
+      source = "hib", survey = "csus", year = "",
+      format = "csv", type = "aggregate", large_file = FALSE,
+      local_path = "data/datasets/hib/CSUS/Alcohol.csv",
+      table_name = "hibua", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Alcohol.csv"
+    ),
+    list(
+      key = "hibub", name = "CSUS Cannabis",
+      source = "hib", survey = "csus", year = "",
+      format = "csv", type = "aggregate", large_file = FALSE,
+      local_path = "data/datasets/hib/CSUS/Cannabis.csv",
+      table_name = "hibub", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Cannabis.csv"
+    ),
+    list(
+      key = "hibuc", name = "CSUS Smoking & Vaping",
+      source = "hib", survey = "csus", year = "",
+      format = "csv", type = "aggregate", large_file = FALSE,
+      local_path = "data/datasets/hib/CSUS/Cigarette smoking and vaping.csv",
+      table_name = "hibuc", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Cigarette smoking and vaping.csv"
+    ),
+    list(
+      key = "hibud", name = "CSUS Illegal Substances",
+      source = "hib", survey = "csus", year = "",
+      format = "csv", type = "aggregate", large_file = FALSE,
+      local_path = "data/datasets/hib/CSUS/Illegal substances.csv",
+      table_name = "hibud", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Illegal substances.csv"
+    ),
+    list(
+      key = "hibue", name = "CSUS Opioids",
+      source = "hib", survey = "csus", year = "",
+      format = "csv", type = "aggregate", large_file = FALSE,
+      local_path = "data/datasets/hib/CSUS/Opioids.csv",
+      table_name = "hibue", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Opioids.csv"
+    ),
+    list(
+      key = "hibuf", name = "CSUS OTC Products",
+      source = "hib", survey = "csus", year = "",
+      format = "csv", type = "aggregate", large_file = FALSE,
+      local_path = "data/datasets/hib/CSUS/Over the counter products.csv",
+      table_name = "hibuf", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Over the counter products.csv"
+    ),
+    list(
+      key = "hibug", name = "CSUS Polysubstance",
+      source = "hib", survey = "csus", year = "",
+      format = "csv", type = "aggregate", large_file = FALSE,
+      local_path = "data/datasets/hib/CSUS/Polysubstance.csv",
+      table_name = "hibug", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Polysubstance.csv"
+    ),
+    list(
+      key = "hibuh", name = "CSUS Sedatives",
+      source = "hib", survey = "csus", year = "",
+      format = "csv", type = "aggregate", large_file = FALSE,
+      local_path = "data/datasets/hib/CSUS/Sedatives.csv",
+      table_name = "hibuh", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Sedatives.csv"
+    ),
+    list(
+      key = "hibui", name = "CSUS Stimulants",
+      source = "hib", survey = "csus", year = "",
+      format = "csv", type = "aggregate", large_file = FALSE,
+      local_path = "data/datasets/hib/CSUS/Stimulants.csv",
+      table_name = "hibui", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Stimulants.csv"
+    ),
+    list(
+      key = "hibuj", name = "CSUS Substance Use Harms",
+      source = "hib", survey = "csus", year = "",
+      format = "csv", type = "aggregate", large_file = FALSE,
+      local_path = "data/datasets/hib/CSUS/Substance use harms.csv",
+      table_name = "hibuj", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Substance use harms.csv"
+    ),
+    list(
+      key = "hibuk", name = "CSUS Treatment",
+      source = "hib", survey = "csus", year = "",
+      format = "csv", type = "aggregate", large_file = FALSE,
+      local_path = "data/datasets/hib/CSUS/Treatment.csv",
+      table_name = "hibuk", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Treatment.csv"
+    ),
+    # -- CIHI (cihi) indicator library --
+    list(
+      key = "cihidt", name = "CIHI All Indicators",
+      source = "cihi", survey = "indicators", year = "",
+      format = "xlsx", type = "indicator", large_file = FALSE,
+      local_path = "data/datasets/cihi/indicator-library-all-indicator-data-en.xlsx",
+      table_name = "cihidt", ckan_resource_id = "", download_url = "https://www.cihi.ca/sites/default/files/document/indicator-library-all-indicator-data-en.xlsx"
+    ),
+    list(
+      key = "cihi820a", name = "CIHI 820: Substance Use Harm",
+      source = "cihi", survey = "indicators", year = "",
+      format = "xlsx", type = "indicator", large_file = FALSE,
+      local_path = "data/datasets/cihi/820/820-hospital-stays-for-harm-caused-by-substance-use-data-table-en.xlsx",
+      table_name = "cihi820a", ckan_resource_id = "", download_url = "https://www.cihi.ca/sites/default/files/document/data-file/820-hospital-stays-for-harm-caused-by-substance-use-data-table-en.xlsx"
+    ),
+    list(
+      key = "cihi820b", name = "CIHI 820: Substance Use Breakdown 2024-2025",
+      source = "cihi", survey = "indicators", year = "2024-2025",
+      format = "xlsx", type = "indicator", large_file = FALSE,
+      local_path = "data/datasets/cihi/820/820-hospital-stays-harm-due-to-substance-use-breakdown-2024-2025-data-tables-en-additional.xlsx",
+      table_name = "cihi820b", ckan_resource_id = "", download_url = "https://www.cihi.ca/sites/default/files/document/hospital-stays-harm-due-to-substance-use-breakdown-2024-2025-data-tables-en.xlsx"
+    ),
+    list(
+      key = "cihi849", name = "CIHI 849: Alcohol Use Harm",
+      source = "cihi", survey = "indicators", year = "",
+      format = "xlsx", type = "indicator", large_file = FALSE,
+      local_path = "data/datasets/cihi/849/849-hospital-stays-for-harm-caused-by-alcohol-use-data-table-en.xlsx",
+      table_name = "cihi849", ckan_resource_id = "", download_url = "https://www.cihi.ca/sites/default/files/document/data-file/849-hospital-stays-for-harm-caused-by-alcohol-use-data-table-en.xlsx"
+    ),
+    list(
+      key = "cihi885a", name = "CIHI 885: Youth Services",
+      source = "cihi", survey = "indicators", year = "",
+      format = "xlsx", type = "indicator", large_file = FALSE,
+      local_path = "data/datasets/cihi/885/885-youth-age-12-to-25-who-accessed-integrated-youth-services-for-mental-health-substance-use-and-well-being-support-data-table-en.xlsx",
+      table_name = "cihi885a", ckan_resource_id = "", download_url = "https://www.cihi.ca/sites/default/files/document/data-file/885-youth-age-12-to-25-who-accessed-integrated-youth-services-for-mental-health-substance-use-and-well-being-support-data-table-en.xlsx"
+    ),
+    list(
+      key = "cihi885b", name = "CIHI 885: Youth Sites 2024-2025",
+      source = "cihi", survey = "indicators", year = "2024-2025",
+      format = "xlsx", type = "indicator", large_file = FALSE,
+      local_path = "data/datasets/cihi/885/885-number-integrated-youth-services-sites-2024-2025-data-tables-en-additonal.xlsx",
+      table_name = "cihi885b", ckan_resource_id = "", download_url = "https://www.cihi.ca/sites/default/files/document/integrated-youth-services-sites-2024-2025-data-tables-en.xlsx"
+    ),
+    # VSR Research Data
+    list(
+      key = "mapq", name = "MAPQ: Modified Attitudes on Psychedelics Questionnaire",
+      source = "vsr", survey = "mapq", year = "2026",
+      format = "xlsx", type = "psychometric", large_file = FALSE,
+      local_path = "data/datasets/vsr/TKARONTOMAPQ.xlsx",
+      table_name = "mapq", ckan_resource_id = ""
+    ),
+    list(
+      key = "otis", name = "OTIS: Ontario Restrictive Confinement 2023-2025",
+      source = "vsr", survey = "otis", year = "2023-2025",
+      format = "rdata", type = "correctional", large_file = FALSE,
+      local_path = "data/cache/correctional_stats_report_environment1b.RData",
+      table_name = "otis", ckan_resource_id = ""
+    ),
+    list(
+      key = "otisexp", name = "OTIS Expanded (1.9M placement records)",
+      source = "vsr", survey = "otis", year = "2023-2025",
+      format = "rds", type = "correctional", large_file = TRUE,
+      local_path = "data/cache/dt_expanded.rds",
+      table_name = "otisexp", ckan_resource_id = ""
+    ),
+    list(
+      key = "otisfin", name = "OTIS Complete Analysis Environment",
+      source = "vsr", survey = "otis", year = "2023-2025",
+      format = "rdata", type = "correctional", large_file = TRUE,
+      local_path = "data/cache/finne_env.RData",
+      table_name = "otisfin", ckan_resource_id = ""
+    ),
+    # -- OTIS public release per-table CSVs (used by mrm_otis_*) --
+    # CKAN IDs from data.ontario.ca/dataset/data-on-inmates-in-ontario
+    list(
+      key = "otisa01", name = "OTIS a01: Restrictive Confinement - Detailed Dataset",
+      source = "otis", survey = "a01", year = "2023-2025",
+      format = "csv", type = "correctional", large_file = FALSE,
+      local_path = "data/datasets/OTIS/a01_restrictive_confinement_detailed_dataset.csv",
+      table_name = "otisa01",
+      ckan_resource_id = "5a0c5804-a055-4031-9743-73f556e43bb4"
+    ),
+    list(
+      key = "otisb01", name = "OTIS b01: Segregation - Detailed Dataset",
+      source = "otis", survey = "b01", year = "2023-2025",
+      format = "csv", type = "correctional", large_file = FALSE,
+      local_path = "data/datasets/OTIS/b01_segregation_detailed_dataset.csv",
+      table_name = "otisb01",
+      ckan_resource_id = "406e6d90-d568-4553-8ca7-bc9f90e133b9"
+    ),
+    list(
+      key = "otisb09", name = "OTIS b09: Individuals in Segregation - Number of Placements",
+      source = "otis", survey = "b09", year = "2023-2025",
+      format = "csv", type = "correctional", large_file = FALSE,
+      local_path = "data/datasets/OTIS/b09_individuals_in_segregation_number_of_times_in_segregation.csv",
+      table_name = "otisb09",
+      ckan_resource_id = "df24e943-d52b-43a8-a10e-a3cc906e26bb"
+    ),
+    list(
+      key = "otisc11", name = "OTIS c11: Individuals in Segregation/RC by Aggregate Length",
+      source = "otis", survey = "c11", year = "2023-2025",
+      format = "csv", type = "correctional", large_file = FALSE,
+      local_path = "data/datasets/OTIS/c11_individuals_in_segregation_and_restrictive_confinement_aggregate_lengths.csv",
+      table_name = "otisc11",
+      ckan_resource_id = "9c7b74a5-53ad-4ef0-a7a6-97772cd01c55"
+    ),
+    # -- SIU public case-level data (used by mrm_siu_*) --
+    list(
+      key = "siu", name = "Ontario SIU: case-level investigations (2014-present)",
+      source = "vsr", survey = "siu", year = "2014-present",
+      format = "csv", type = "oversight", large_file = FALSE,
+      local_path = "data/datasets/vsr/SIU.csv",
+      table_name = "siu", ckan_resource_id = ""
+    ),
+    # -- TPS per-category public crime events (used by mrm_tps_*) --
+    list(
+      key = "tpsassault", name = "TPS Assault open-data events 2014-present",
+      source = "tps", survey = "assault", year = "2014-present",
+      format = "csv", type = "crime", large_file = TRUE,
+      local_path = "data/datasets/TPS/Assault/CSV",
+      table_name = "tpsassault", ckan_resource_id = "",
+      arcgis_url = paste0(
+        "https://services.arcgis.com/S9th0jAJ7bqgIRjw",
+        "/arcgis/rest/services/Assault_Open_Data",
+        "/FeatureServer/0"
+      )
+    ),
+    list(
+      key = "tpshomicides", name = "TPS Homicides open-data events 2004-present",
+      source = "tps", survey = "homicides", year = "2004-present",
+      format = "csv", type = "crime", large_file = FALSE,
+      local_path = "data/datasets/TPS/Homicides/CSV",
+      table_name = "tpshomicides", ckan_resource_id = "",
+      arcgis_url = paste0(
+        "https://services.arcgis.com/S9th0jAJ7bqgIRjw",
+        "/arcgis/rest/services",
+        "/Homicides_Open_Data_ASR_RC_TBL_002",
+        "/FeatureServer/0"
+      )
+    ),
+    list(
+      key = "tpsshootings", name = "TPS Shootings and Firearm Discharges 2004-present",
+      source = "tps", survey = "shootings", year = "2004-present",
+      format = "csv", type = "crime", large_file = TRUE,
+      local_path = "data/datasets/TPS/ShootingAndFirearmDiscarges/CSV",
+      table_name = "tpsshootings", ckan_resource_id = "",
+      arcgis_url = paste0(
+        "https://services.arcgis.com/S9th0jAJ7bqgIRjw",
+        "/arcgis/rest/services",
+        "/Shooting_and_Firearm_Discharges_Open_Data",
+        "/FeatureServer/0"
+      )
+    )
+  )
+  # Tolerate entries that omit optional columns (download_url,
+  # zip_member): fill any missing column with "" before binding.
+  all_cols <- unique(unlist(lapply(entries, names)))
+  do.call(rbind, lapply(entries, function(e) {
+    for (col in setdiff(all_cols, names(e))) e[[col]] <- ""
+    as.data.frame(e[all_cols], stringsAsFactors = FALSE)
+  }))
+}
+
+# Backward-compatible mapping: old long keys -> new short keys
+.OLD_TO_SHORT <- c(
+  opencanada_cpads_2021 = "ocp21",
+  opencanada_ccs_2018 = "occ22",
+  opencanada_ccs_2023 = "occ23",
+  opencanada_ccs_2024 = "occ24",
+  opencanada_csads_2021_pumf = "ocs22mf",
+  opencanada_csads_2021_bootstrap = "ocs22bt",
+  opencanada_csads_2023_pumf = "ocs24mf",
+  opencanada_csads_2023_bootstrap = "ocs24bt",
+  opencanada_csus_2019_pumf = "cu20mf",
+  opencanada_csus_2019_bootstrap = "cu20bt",
+  opencanada_csus_2023_pumf = "cu23mf",
+  opencanada_csus_2023_bootstrap = "cu23bt",
+  healthinfobase_cpads = "hibp",
+  healthinfobase_csads_provinces = "hibsa",
+  healthinfobase_csads_trends = "hibsb",
+  healthinfobase_csus_alcohol = "hibua",
+  healthinfobase_csus_cannabis = "hibub",
+  healthinfobase_csus_opioids = "hibue",
+  cihi_820_substance_harm = "cihi820a",
+  cihi_849_alcohol_harm = "cihi849",
+  cihi_885_youth_services = "cihi885a"
+)

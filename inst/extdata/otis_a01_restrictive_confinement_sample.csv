@@ -1,0 +1,6 @@
+"EndFiscalYear","UniqueIndividual_ID","Region_AtTimeOfPlacement","Region_MostRecentPlacement","Gender","Age_Category","MentalHealth_Alert","SuicideRisk_Alert","SuicideWatch_Alert","Number_Of_Placements"
+2022,"2022-SYNTH-001-RC","Toronto","Toronto","Male","25 to 49","Yes","No","No",8
+2022,"2022-SYNTH-002-RC","Eastern","Eastern","Female","18 to 24","No","No","No",1
+2023,"2023-SYNTH-003-RC","Central","Central","Male","50 to 64","Yes","Yes","No",5
+2023,"2023-SYNTH-004-RC","Western","Western","Male","25 to 49","No","No","No",2
+2024,"2024-SYNTH-005-RC","Northern","Northern","Female","50 to 64","Yes","No","Yes",12

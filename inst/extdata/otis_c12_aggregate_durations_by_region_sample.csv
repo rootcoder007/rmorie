@@ -1,0 +1,6 @@
+EndFiscalYear,Region_MostRecentPlacement,Gender,Measure,TotalAggregatedDays_RestrictiveConfinement,TotalAggregatedDays_Segregation
+2022,Toronto,Male,Mean,42.8,20.5
+2023,Eastern,Female,Median,28,12
+2023,Central,Male,Max,175,88
+2024,Western,Female,Mean,35.2,17.1
+2024,Northern,Male,Median,24,10

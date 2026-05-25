@@ -1,0 +1,6 @@
+EndFiscalYear,UniqueIndividual_ID,Gender,Region_AtTimeOfPlacement,Region_MostRecentPlacement,Age_Category,NumberConsecutiveDays_Segregation,SegReason_SecurityOfInstitution_SafetyOfOthers,SegReason_InmateNeedsProtection,SegReason_InmateNeedsProtection_Medical,SegReason_SecurityOfInstitution_SafetyOfOthers_Medical,SegReason_Disciplinary_Segregation,SegReason_InmateRefuseSearch_Scan,MentalHealth_Alert,SuicideRisk_Alert,SuicideWatch_Alert,SegReason_Other,Number_Of_Placements
+2022,2022-SYNTH-001-SEG,Male,Toronto,Toronto,25 to 49,7,,,,,,,Yes,No,No,,1
+2022,2022-SYNTH-002-SEG,Female,Central,Central,18 to 24,15,,,,,,,No,No,No,,2
+2023,2023-SYNTH-003-SEG,Male,Eastern,Eastern,50 to 64,22,,,,,,,Yes,Yes,No,,3
+2023,2023-SYNTH-004-SEG,Male,Western,Western,25 to 49,5,,,,,,,No,No,No,,1
+2024,2024-SYNTH-005-SEG,Female,Northern,Northern,50 to 64,30,,,,,,,Yes,No,Yes,,4
