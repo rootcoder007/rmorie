@@ -27,7 +27,7 @@
 #' morie_crypto_sodium_available()
 #' @export
 morie_crypto_sodium_available <- function() {
-  .Call(`_morie_morie_crypto_sodium_available`)
+  .Call(`_rmorie_morie_crypto_sodium_available`)
 }
 
 #' libsodium runtime version string
@@ -38,7 +38,7 @@ morie_crypto_sodium_available <- function() {
 #' @return Single character.
 #' @export
 morie_crypto_sodium_version <- function() {
-  .Call(`_morie_morie_crypto_sodium_version`)
+  .Call(`_rmorie_morie_crypto_sodium_version`)
 }
 
 #' ChaCha20-Poly1305 IETF authenticated encryption
@@ -73,7 +73,7 @@ morie_crypto_sodium_version <- function() {
 morie_crypto_chacha20_poly1305_encrypt <- function(key, nonce, plaintext,
                                                       aad = raw(0)) {
   stopifnot(is.raw(key), is.raw(nonce), is.raw(plaintext), is.raw(aad))
-  out <- .Call(`_morie_morie_crypto_chacha20poly1305_encrypt`,
+  out <- .Call(`_rmorie_morie_crypto_chacha20poly1305_encrypt`,
                 key, nonce, plaintext, aad)
   n_pt <- length(plaintext)
   list(ct = out[seq_len(n_pt)], tag = out[(n_pt + 1L):(n_pt + 16L)])
@@ -96,7 +96,7 @@ morie_crypto_chacha20_poly1305_decrypt <- function(key, nonce,
                                                       ct_with_tag,
                                                       aad = raw(0)) {
   stopifnot(is.raw(key), is.raw(nonce), is.raw(ct_with_tag), is.raw(aad))
-  .Call(`_morie_morie_crypto_chacha20poly1305_decrypt`,
+  .Call(`_rmorie_morie_crypto_chacha20poly1305_decrypt`,
         key, nonce, ct_with_tag, aad)
 }
 
@@ -119,7 +119,7 @@ morie_crypto_hkdf_sha256 <- function(ikm, length = 32L,
   if (is.character(salt)) salt <- charToRaw(paste(salt, collapse = ""))
   if (is.character(info)) info <- charToRaw(paste(info, collapse = ""))
   stopifnot(is.raw(ikm), is.raw(salt), is.raw(info))
-  .Call(`_morie_morie_crypto_hkdf_sha256`,
+  .Call(`_rmorie_morie_crypto_hkdf_sha256`,
         ikm, as.integer(length), salt, info)
 }
 
@@ -131,5 +131,5 @@ morie_crypto_hkdf_sha256 <- function(ikm, length = 32L,
 #' @return Raw vector of length `n`.
 #' @export
 morie_crypto_random_bytes <- function(n) {
-  .Call(`_morie_morie_crypto_random_bytes`, as.integer(n))
+  .Call(`_rmorie_morie_crypto_random_bytes`, as.integer(n))
 }
