@@ -481,6 +481,8 @@ morie_datasets_nyc_nypd_vehicle_stops <- function(year = NULL,
 #' when `geometry = TRUE`.
 #'
 #' @inheritParams morie_datasets_chicago_wards
+#' @param mode One of `"soda2"` (default JSON resource endpoint) or
+#'   `"soda3"` (SoQL `query` endpoint). 3AAA dual-mode dispatch.
 #' @return A `data.frame`.
 #' @export
 morie_datasets_nyc_police_precincts <- function(offline = TRUE,
