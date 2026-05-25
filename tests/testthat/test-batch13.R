@@ -164,7 +164,7 @@ test_that("morie_simulate_longitudinal_panel handles missing and outliers", {
 })
 
 test_that("lr_warmup ramps then clamps the learning rate", {
-  res <- morie:::lr_warmup(c(0, 500, 1000, 2000),
+  res <- rmorie:::lr_warmup(c(0, 500, 1000, 2000),
     lr_target = 1e-3, warmup_steps = 1000L
   )
   expect_type(res, "list")
@@ -179,7 +179,7 @@ test_that("lr_warmup ramps then clamps the learning rate", {
 })
 
 test_that("lr_warmup rejects non-positive warmup_steps", {
-  expect_error(morie:::lr_warmup(c(1, 2), warmup_steps = 0L))
+  expect_error(rmorie:::lr_warmup(c(1, 2), warmup_steps = 0L))
 })
 
 test_that("morie_learning_curve returns scores across training sizes", {
@@ -491,7 +491,7 @@ test_that("morie_monte_carlo_integration honours custom bounds", {
 })
 
 test_that("morie_monte_carlo_integration alias matches mcint_crude", {
-  expect_identical(morie_monte_carlo_integration, morie:::mcint_crude)
+  expect_identical(morie_monte_carlo_integration, rmorie:::mcint_crude)
 })
 
 test_that("midranks returns average ranks and a tie correction", {

@@ -41,5 +41,5 @@ Wraps \code{Rtsne::Rtsne}.
 }
 \examples{
 # See the package vignettes for usage examples:
-#   vignette(package = "morie")
+#   vignette(package = "rmorie")
 }

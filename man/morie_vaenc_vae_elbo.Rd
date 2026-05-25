@@ -36,7 +36,7 @@ ELBO uses Gaussian (MSE) reconstruction term.
 }
 \examples{
 # See the package vignettes for usage examples:
-#   vignette(package = "morie")
+#   vignette(package = "rmorie")
 }
 \references{
 Kingma & Welling (2014), ICLR.

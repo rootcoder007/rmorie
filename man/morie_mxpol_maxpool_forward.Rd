@@ -27,7 +27,7 @@ R parity for \code{morie.fn.mxpol.maxpool_forward}.
 }
 \examples{
 # See the package vignettes for usage examples:
-#   vignette(package = "morie")
+#   vignette(package = "rmorie")
 }
 \references{
 Goodfellow et al. (2016), Deep Learning, Ch 9.3.

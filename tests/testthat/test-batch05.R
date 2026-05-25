@@ -4,7 +4,7 @@
 # fzedg, fzhdc, fzhok.
 
 test_that("load_dmt_imaging returns synthetic fallback structure", {
-  res <- morie:::load_dmt_imaging(
+  res <- rmorie:::load_dmt_imaging(
     subject_id = 1L,
     root = tempfile("no_such_root_")
   )
@@ -20,7 +20,7 @@ test_that("load_dmt_imaging returns synthetic fallback structure", {
 })
 
 test_that("load_dmt_imaging synthetic record has eeg/fmri/behavioural", {
-  res <- morie:::load_dmt_imaging(
+  res <- rmorie:::load_dmt_imaging(
     subject_id = 3L,
     root = tempfile("missing_")
   )
@@ -35,7 +35,7 @@ test_that("load_dmt_imaging synthetic record has eeg/fmri/behavioural", {
 })
 
 test_that("load_dmt_imaging handles NULL subject_id (all subjects)", {
-  res <- morie:::load_dmt_imaging(
+  res <- rmorie:::load_dmt_imaging(
     subject_id = NULL,
     root = tempfile("absent_")
   )
@@ -45,7 +45,7 @@ test_that("load_dmt_imaging handles NULL subject_id (all subjects)", {
 })
 
 test_that("load_dmt_imaging accepts multiple subject ids", {
-  res <- morie:::load_dmt_imaging(
+  res <- rmorie:::load_dmt_imaging(
     subject_id = c(1L, 2L),
     root = tempfile("absent_")
   )
@@ -76,7 +76,7 @@ test_that("load_dmt_imaging accepts multiple subject ids", {
 
 test_that("preprocess_eeg returns cleaned record with expected names", {
   rec <- .batch05_record()
-  res <- morie:::preprocess_eeg(rec)
+  res <- rmorie:::preprocess_eeg(rec)
   expect_true(is.list(res))
   expect_named(res, c(
     "record", "n_bad", "sfreq", "bandpass", "notch",
@@ -92,7 +92,7 @@ test_that("preprocess_eeg returns cleaned record with expected names", {
 
 test_that("preprocess_eeg respects custom bandpass/notch/threshold", {
   rec <- .batch05_record(seed = 2L)
-  res <- morie:::preprocess_eeg(rec,
+  res <- rmorie:::preprocess_eeg(rec,
     bandpass = c(2, 30), notch = 50,
     asr_threshold = 5
   )
@@ -106,14 +106,14 @@ test_that("preprocess_eeg warns when eeg matrices absent", {
   rec <- .batch05_record()
   rec$eeg$data_dmt <- NULL
   rec$eeg$data_pcb <- NULL
-  res <- morie:::preprocess_eeg(rec)
+  res <- rmorie:::preprocess_eeg(rec)
   expect_true(length(res$warnings) >= 1L)
   expect_equal(res$n_bad, 0L)
 })
 
 test_that("preprocess_fmri returns cleaned record with expected names", {
   rec <- .batch05_record()
-  res <- morie:::preprocess_fmri(rec)
+  res <- rmorie:::preprocess_fmri(rec)
   expect_true(is.list(res))
   expect_named(res, c(
     "record", "n_scrubbed", "motion_threshold_mm",
@@ -127,7 +127,7 @@ test_that("preprocess_fmri returns cleaned record with expected names", {
 
 test_that("preprocess_fmri respects custom threshold and component count", {
   rec <- .batch05_record(seed = 3L)
-  res <- morie:::preprocess_fmri(rec,
+  res <- rmorie:::preprocess_fmri(rec,
     motion_threshold_mm = 0.1,
     n_noise_components = 2L
   )
@@ -139,13 +139,13 @@ test_that("preprocess_fmri respects custom threshold and component count", {
 test_that("preprocess_fmri warns when motion absent and matrices missing", {
   rec <- .batch05_record()
   rec$fmri$motion_fd_mm <- NULL
-  res1 <- morie:::preprocess_fmri(rec)
+  res1 <- rmorie:::preprocess_fmri(rec)
   expect_true(length(res1$warnings) >= 1L)
 
   rec2 <- .batch05_record()
   rec2$fmri$data_dmt <- NULL
   rec2$fmri$data_pcb <- NULL
-  res2 <- morie:::preprocess_fmri(rec2)
+  res2 <- rmorie:::preprocess_fmri(rec2)
   expect_true(length(res2$warnings) >= 1L)
   expect_equal(res2$n_scrubbed, 0L)
 })
@@ -218,30 +218,30 @@ test_that("internal fast kernels match base-R results", {
   set.seed(30)
   x <- stats::rnorm(40)
   y <- stats::rnorm(40)
-  expect_equal(morie:::morie_normal_pdf(x, 0, 1), dnorm(x, 0, 1),
+  expect_equal(rmorie:::morie_normal_pdf(x, 0, 1), dnorm(x, 0, 1),
     tolerance = 1e-8
   )
-  expect_equal(morie:::morie_mean(x), mean(x), tolerance = 1e-8)
-  expect_equal(morie:::morie_var(x), stats::var(x), tolerance = 1e-8)
-  expect_equal(morie:::morie_var(x, ddof = 0),
+  expect_equal(rmorie:::morie_mean(x), mean(x), tolerance = 1e-8)
+  expect_equal(rmorie:::morie_var(x), stats::var(x), tolerance = 1e-8)
+  expect_equal(rmorie:::morie_var(x, ddof = 0),
     sum((x - mean(x))^2) / length(x),
     tolerance = 1e-8
   )
-  expect_equal(morie:::morie_cor_pearson(x, y),
+  expect_equal(rmorie:::morie_cor_pearson(x, y),
     suppressWarnings(stats::cor(x, y)),
     tolerance = 1e-8
   )
 })
 
 test_that("internal morie_var handles degenerate ddof", {
-  res <- morie:::morie_var(c(1), ddof = 1)
+  res <- rmorie:::morie_var(c(1), ddof = 1)
   expect_true(is.na(res))
 })
 
 test_that("flash_attention self-attention returns expected shape", {
   set.seed(40)
   Q <- matrix(stats::rnorm(10 * 4), 10, 4)
-  res <- morie:::flash_attention(Q)
+  res <- rmorie:::flash_attention(Q)
   expect_true(is.list(res))
   expect_named(res, c("tensor", "block_size", "method"))
   expect_true(is.matrix(res$tensor))
@@ -255,7 +255,7 @@ test_that("flash_attention accepts separate K, V and a mask", {
   K <- matrix(stats::rnorm(8 * 3), 8, 3)
   V <- matrix(stats::rnorm(8 * 3), 8, 3)
   mask <- matrix(0, 6, 8)
-  res <- morie:::flash_attention(Q,
+  res <- rmorie:::flash_attention(Q,
     K = K, V = V, block_size = 4L,
     mask = mask
   )

@@ -554,8 +554,8 @@ test_that("network / local-file database paths are exercised only offline-safe",
 test_that("data.R documented datasets are loadable when built", {
   expect_true(TRUE)
   if (FALSE) {
-    data("dataset_catalog", package = "morie")
-    data("substance_categories", package = "morie")
-    data("ckan_metadata", package = "morie")
+    data("dataset_catalog", package = "rmorie")
+    data("substance_categories", package = "rmorie")
+    data("ckan_metadata", package = "rmorie")
   }
 })

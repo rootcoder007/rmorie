@@ -63,7 +63,7 @@ test_that("default mode='soda2' routes through .morie_dataset_socrata_fetch for 
         soda3_called <<- TRUE
         data.frame()
       },
-      .package = "morie",
+      .package = "rmorie",
       code = eval(w$fn)(offline = FALSE))
     expect_true(soda2_called,
                 info = sprintf("%s default did not call SODA2", w$name))
@@ -89,7 +89,7 @@ test_that("mode='soda3' routes through .morie_dataset_soda3_query for every wrap
                       app_token = app_token)
         data.frame()
       },
-      .package = "morie",
+      .package = "rmorie",
       code = eval(w$fn)(offline = FALSE, mode = "soda3",
                           app_token = "tok-3vv2"))
     expect_equal(seen$view_id, w$rid,
@@ -119,7 +119,7 @@ test_that("chicago_neighborhoods + beats + districts with mode='soda3' + geometr
         seen_soql <<- soql
         data.frame()
       },
-      .package = "morie",
+      .package = "rmorie",
       code = R$fn(offline = FALSE, mode = "soda3", geometry = FALSE))
     expect_equal(seen_soql,
                  sprintf("SELECT %s", R$expect_cols))
@@ -137,7 +137,7 @@ test_that("chicago_neighborhoods + beats + districts with mode='soda3' + geometr
         seen_soql <<- soql
         data.frame()
       },
-      .package = "morie",
+      .package = "rmorie",
       code = fn(offline = FALSE, mode = "soda3", geometry = TRUE))
     expect_equal(seen_soql, "SELECT *")
   }
@@ -153,7 +153,7 @@ test_that("chicago_arrests(year=N) emits date_extract_y filter in BOTH modes", {
       seen_where <<- where
       data.frame()
     },
-    .package = "morie",
+    .package = "rmorie",
     code = morie_datasets_chicago_arrests(year = 2024L, offline = FALSE,
                                             mode = "soda2"))
   expect_equal(seen_where, "date_extract_y(arrest_date) = 2024")
@@ -165,7 +165,7 @@ test_that("chicago_arrests(year=N) emits date_extract_y filter in BOTH modes", {
       seen_soql <<- soql
       data.frame()
     },
-    .package = "morie",
+    .package = "rmorie",
     code = morie_datasets_chicago_arrests(year = 2024L, offline = FALSE,
                                             mode = "soda3"))
   expect_equal(seen_soql, "SELECT * WHERE date_extract_y(arrest_date) = 2024")

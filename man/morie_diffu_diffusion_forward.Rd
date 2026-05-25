@@ -40,7 +40,7 @@ with linear \eqn{\beta}{beta} schedule from \code{1e-4} to \code{0.02}.
 }
 \examples{
 # See the package vignettes for usage examples:
-#   vignette(package = "morie")
+#   vignette(package = "rmorie")
 }
 \references{
 Ho, Jain & Abbeel (2020), NeurIPS.

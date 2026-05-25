@@ -16,7 +16,7 @@
 #   Rscript tools/generate_runnable_examples.R [--apply | --dry]
 
 suppressMessages({
-  library(morie)
+  library(rmorie)
   library(callr)
 })
 
@@ -285,7 +285,7 @@ for (i in seq_along(boilerplate_fns)) {
   ok <- tryCatch({
     callr::r(
       function(nm, args) {
-        suppressMessages(library(morie))
+        suppressMessages(library(rmorie))
         set.seed(1)
         do.call(nm, args)
         TRUE

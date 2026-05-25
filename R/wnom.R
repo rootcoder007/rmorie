@@ -18,7 +18,7 @@
 #'   `method`.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 wnom <- function(votes, x, z_yea, z_nay, beta = 15, w = NULL) {
   X <- if (is.matrix(x)) x else matrix(as.numeric(x), ncol = 1L)

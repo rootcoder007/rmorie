@@ -5,48 +5,48 @@ set.seed(1)
 
 test_that("internal formatters handle finite + non-finite", {
   set.seed(1)
-  expect_equal(morie:::.tbl_fmt_num(0.1234), "0.12")
-  expect_equal(morie:::.tbl_fmt_num(0.1234, apa = TRUE), ".12")
-  expect_equal(morie:::.tbl_fmt_num(NA), "")
-  expect_equal(morie:::.tbl_fmt_pval(0.0001), "<0.001")
-  expect_equal(morie:::.tbl_fmt_pval(0.0001, apa = TRUE), "<.001")
-  expect_equal(morie:::.tbl_stars(0.0001), "***")
-  expect_equal(morie:::.tbl_stars(0.02), "*")
-  expect_equal(morie:::.tbl_stars(0.2), "")
+  expect_equal(rmorie:::.tbl_fmt_num(0.1234), "0.12")
+  expect_equal(rmorie:::.tbl_fmt_num(0.1234, apa = TRUE), ".12")
+  expect_equal(rmorie:::.tbl_fmt_num(NA), "")
+  expect_equal(rmorie:::.tbl_fmt_pval(0.0001), "<0.001")
+  expect_equal(rmorie:::.tbl_fmt_pval(0.0001, apa = TRUE), "<.001")
+  expect_equal(rmorie:::.tbl_stars(0.0001), "***")
+  expect_equal(rmorie:::.tbl_stars(0.02), "*")
+  expect_equal(rmorie:::.tbl_stars(0.2), "")
 })
 
 test_that("smd handles zero pooled-sd", {
   set.seed(1)
-  expect_equal(morie:::.tbl_smd(1, 1, 0, 0), 0)
-  expect_gt(abs(morie:::.tbl_smd(0, 1, 1, 1)), 0)
+  expect_equal(rmorie:::.tbl_smd(1, 1, 0, 0), 0)
+  expect_gt(abs(rmorie:::.tbl_smd(0, 1, 1, 1)), 0)
 })
 
 test_that("footnote registry adds + renders text/latex/html", {
   set.seed(1)
-  reg <- morie:::.tbl_footnotes_new()
-  morie:::.tbl_footnotes_add(reg, "note 1")
-  morie:::.tbl_footnotes_add(reg, "note 1")  # dedupe
-  morie:::.tbl_footnotes_add(reg, "note 2")
+  reg <- rmorie:::.tbl_footnotes_new()
+  rmorie:::.tbl_footnotes_add(reg, "note 1")
+  rmorie:::.tbl_footnotes_add(reg, "note 1")  # dedupe
+  rmorie:::.tbl_footnotes_add(reg, "note 2")
   expect_length(reg$notes, 2L)
-  expect_type(morie:::.tbl_footnotes_render(reg, "text"), "character")
-  expect_match(morie:::.tbl_footnotes_render(reg, "latex"), "textsuperscript")
-  expect_match(morie:::.tbl_footnotes_render(reg, "html"), "<sup>")
-  expect_equal(morie:::.tbl_footnotes_render(morie:::.tbl_footnotes_new()), "")
+  expect_type(rmorie:::.tbl_footnotes_render(reg, "text"), "character")
+  expect_match(rmorie:::.tbl_footnotes_render(reg, "latex"), "textsuperscript")
+  expect_match(rmorie:::.tbl_footnotes_render(reg, "html"), "<sup>")
+  expect_equal(rmorie:::.tbl_footnotes_render(rmorie:::.tbl_footnotes_new()), "")
 })
 
 test_that("to_format dataframe pass-through + csv", {
   set.seed(1)
   df <- data.frame(a = 1:2, b = c("p", "q"))
-  expect_identical(morie:::.tbl_to_format(df, "dataframe"), df)
-  expect_type(morie:::.tbl_to_format(df, "csv", title = "T"), "character")
+  expect_identical(rmorie:::.tbl_to_format(df, "dataframe"), df)
+  expect_type(rmorie:::.tbl_to_format(df, "csv", title = "T"), "character")
 })
 
 test_that("to_format markdown/latex/html via knitr", {
   set.seed(1)
   df <- data.frame(a = 1:2, b = 3:4)
-  expect_type(morie:::.tbl_to_format(df, "markdown"), "character")
-  expect_type(morie:::.tbl_to_format(df, "latex"), "character")
-  expect_type(morie:::.tbl_to_format(df, "html"), "character")
+  expect_type(rmorie:::.tbl_to_format(df, "markdown"), "character")
+  expect_type(rmorie:::.tbl_to_format(df, "latex"), "character")
+  expect_type(rmorie:::.tbl_to_format(df, "html"), "character")
 })
 
 test_that("format_number switches across styles", {

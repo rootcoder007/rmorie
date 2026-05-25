@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #
-# morie::entheo_dmt -- R parity of morie.entheo_dmt (Timmermann 2023
+# rmorie::entheo_dmt -- R parity of morie.entheo_dmt (Timmermann 2023
 # DMT_Imaging dataset loaders + Layer-2 analyses).
 #
 # Layer 1: available_subjects(), load_fmri_subject(), load_eeg_region(),
 #          dataset_overview().
-# Layer 2: spectral_band_power() (delegates to morie::rgpsd Welch PSD),
+# Layer 2: spectral_band_power() (delegates to rmorie::rgpsd Welch PSD),
 #          dynamic_functional_connectivity() (sliding-window Pearson FC),
 #          lz_complexity() (Lempel-Ziv 1976), analyze_subject() (joint).
 #
@@ -204,7 +204,7 @@ morie_entheo_dataset_overview <- function() {
     interpretation = paste(
       "Use morie_entheo_load_fmri_subject(id, condition) for BOLD AAL",
       "matrices and morie_entheo_load_eeg_region(region) for IRASA EEG",
-      "regressors. Layer-2 analyses delegate to morie::rgpsd for Welch",
+      "regressors. Layer-2 analyses delegate to rmorie::rgpsd for Welch",
       "PSD and to internal sliding-window FC / Lempel-Ziv routines."
     ),
     payload = list(
@@ -261,7 +261,7 @@ morie_entheo_spectral_band_power <- function(signal,
   if (is.null(nperseg)) {
     nperseg <- min(length(sig), max(64L, as.integer(4 * fs)))
   }
-  # Delegate to morie::rgpsd (parity with Python morie.fn.psdwl.psdwl).
+  # Delegate to rmorie::rgpsd (parity with Python morie.fn.psdwl.psdwl).
   res <- rgpsd(sig, fs = fs, nperseg = nperseg)
   f <- as.numeric(res$extra$frequencies)
   psd <- as.numeric(res$extra$psd)

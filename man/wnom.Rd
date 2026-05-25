@@ -38,6 +38,6 @@ P(yea) = Phi(U_yea - U_nay).
 }
 \examples{
 # See the package vignettes for usage examples:
-#   vignette(package = "morie")
+#   vignette(package = "rmorie")
 }
 \keyword{internal}

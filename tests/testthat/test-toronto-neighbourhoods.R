@@ -67,7 +67,7 @@ test_that("morie_to_neighbourhoods(offline=FALSE) dispatches via mocked CKAN hel
                    "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}")
       stub_df
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_to_neighbourhoods("158", offline = FALSE)
   expect_equal(nrow(out), 2L)
   expect_equal(out$AREA_NAME[2], "Niagara")
@@ -79,7 +79,7 @@ test_that("morie_to_neighbourhoods(offline=FALSE, resource_id=X) honours overrid
       expect_equal(resource_id, "custom-resource-id-xyz")
       data.frame(AREA_NAME = "OverrideHit")
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_to_neighbourhoods("nia", offline = FALSE,
                                    resource_id = "custom-resource-id-xyz")
   expect_equal(out$AREA_NAME, "OverrideHit")

@@ -110,7 +110,7 @@ test_that("cntrl_estimator internal helper works directly", {
   set.seed(5)
   y <- rnorm(100, mean = 2)
   cc <- y + rnorm(100, sd = 0.5)
-  res <- morie:::cntrl_estimator(y, cc, mean(cc))
+  res <- rmorie:::cntrl_estimator(y, cc, mean(cc))
   expect_true(is.finite(res$estimate))
   expect_equal(res$n, 100L)
 })
@@ -298,7 +298,7 @@ test_that("morie_copula_estimation works for clayton and gumbel families", {
 })
 
 test_that("copul internal helper flags too-few observations", {
-  res <- morie:::copul(c(1, 2), c(3, 4))
+  res <- rmorie:::copul(c(1, 2), c(3, 4))
   expect_true(is.na(res$estimate))
   expect_equal(res$n, 2L)
 })
@@ -352,7 +352,7 @@ test_that("morie_one_sample_coverage handles too-short input", {
 })
 
 test_that("causal_attention_mask builds a triangular -Inf mask", {
-  res <- morie:::causal_attention_mask(5L)
+  res <- rmorie:::causal_attention_mask(5L)
   expect_true(is.list(res))
   expect_true(all(c("tensor", "n", "method") %in% names(res)))
   expect_equal(res$n, 5L)
@@ -362,14 +362,14 @@ test_that("causal_attention_mask builds a triangular -Inf mask", {
 })
 
 test_that("causal_attention_mask infers length from a vector", {
-  res <- morie:::causal_attention_mask(c(1, 2, 3, 4))
+  res <- rmorie:::causal_attention_mask(c(1, 2, 3, 4))
   expect_equal(res$n, 4L)
   expect_equal(dim(res$tensor), c(4L, 4L))
 })
 
 test_that("cosine_lr_schedule decays from lr_max", {
   steps <- c(0, 250, 500, 750, 1000)
-  res <- morie:::cosine_lr_schedule(steps,
+  res <- rmorie:::cosine_lr_schedule(steps,
     lr_max = 1e-3,
     total_steps = 1000L
   )
@@ -387,7 +387,7 @@ test_that("cosine_lr_schedule decays from lr_max", {
 })
 
 test_that("cosine_lr_schedule applies a warmup ramp", {
-  res <- morie:::cosine_lr_schedule(c(0, 50, 100, 500),
+  res <- rmorie:::cosine_lr_schedule(c(0, 50, 100, 500),
     lr_max = 1e-2, lr_min = 1e-4,
     total_steps = 1000L,
     warmup_steps = 100L
@@ -398,7 +398,7 @@ test_that("cosine_lr_schedule applies a warmup ramp", {
 
 test_that("cosine_lr_schedule errors when warmup exceeds total", {
   expect_error(
-    morie:::cosine_lr_schedule(c(1, 2),
+    rmorie:::cosine_lr_schedule(c(1, 2),
       total_steps = 10L,
       warmup_steps = 20L
     ),

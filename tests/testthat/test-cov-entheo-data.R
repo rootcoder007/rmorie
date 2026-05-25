@@ -23,7 +23,7 @@ test_that("load_dmt_imaging with NULL subject id uses the default panel", {
 })
 
 test_that(".entheo_synthetic_record builds eeg / fmri / behavioural blocks", {
-  rec <- morie:::.entheo_synthetic_record("09")
+  rec <- rmorie:::.entheo_synthetic_record("09")
   expect_equal(rec$subject_id, "09")
   expect_equal(dim(rec$eeg$data_dmt), c(32L, 480L))
   expect_equal(rec$fmri$n_parcels, 100L)
@@ -33,7 +33,7 @@ test_that(".entheo_synthetic_record builds eeg / fmri / behavioural blocks", {
 
 test_that(".entheo_list_subjects reads ids from a fMRI directory", {
   expect_equal(
-    morie:::.entheo_list_subjects(tempfile("none-")),
+    rmorie:::.entheo_list_subjects(tempfile("none-")),
     character(0)
   )
   root <- tempfile("dmt-root-")
@@ -42,7 +42,7 @@ test_that(".entheo_list_subjects reads ids from a fMRI directory", {
     root, "fMRI",
     c("LongS05DMT.mat", "LongS05PCB.mat", "LongS12DMT.mat")
   ))
-  expect_equal(morie:::.entheo_list_subjects(root), c("05", "12"))
+  expect_equal(rmorie:::.entheo_list_subjects(root), c("05", "12"))
 })
 
 test_that(".entheo_load_real returns NULL without R.matlab", {
@@ -52,13 +52,13 @@ test_that(".entheo_load_real returns NULL without R.matlab", {
     },
     .package = "base"
   )
-  expect_null(morie:::.entheo_load_real("05", tempfile("r-")))
+  expect_null(rmorie:::.entheo_load_real("05", tempfile("r-")))
 })
 
 test_that(".entheo_load_real returns NULL when the .mat files are absent", {
   root <- tempfile("dmt-empty-")
   dir.create(file.path(root, "fMRI"), recursive = TRUE)
-  expect_null(morie:::.entheo_load_real("05", root))
+  expect_null(rmorie:::.entheo_load_real("05", root))
 })
 
 test_that("load_dmt_imaging reads a real subject via a mocked R.matlab", {

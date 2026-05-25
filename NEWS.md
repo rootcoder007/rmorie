@@ -455,7 +455,7 @@ uploaded to win-builder with incomplete cache-isolation).
   `\donttest{}` to `\dontrun{}` (example.org doesn't host CSV;
   the URL is a documentation placeholder).
 * Two `crimsl.utoronto.ca` references in `R/mandela.R` and
-  `R/morie-package.R` rewritten as plain-text references; the
+  `R/rmorie-package.R` rewritten as plain-text references; the
   U of T web server returns 403 to win-builder's IP even though
   the URLs are publicly reachable from browsers.
 * New `inst/WORDLIST` listing real technical terms (AIPW, ATC,
@@ -970,7 +970,7 @@ bump.
 
 * Completes Python <-> R full parity: adds Python
   `morie.mrm_classify_mandela()` as the dual of the R-side
-  `morie::mrm_classify_mandela()` (which had shipped in v0.1.14).
+  `rmorie::mrm_classify_mandela()` (which had shipped in v0.1.14).
   All 25 v0.2.0-era callables now exist on both language sides.
 * Version bumped from 0.1.15 to 0.2.0 to mark the cumulative
   significance of the empirical-workflow work shipped since

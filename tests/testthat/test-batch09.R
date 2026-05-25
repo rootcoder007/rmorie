@@ -63,13 +63,13 @@ test_that("print.morie_hawkes_fit returns its argument invisibly", {
 })
 
 test_that("internal hawkes parameter helpers round-trip", {
-  nm <- morie:::.hawkes_param_names("exponential")
+  nm <- rmorie:::.hawkes_param_names("exponential")
   expect_equal(nm, c("a0", "eta", "beta"))
-  expect_error(morie:::.hawkes_param_names("nope"), "unknown kernel")
+  expect_error(rmorie:::.hawkes_param_names("nope"), "unknown kernel")
 
   theta <- c(0.5, 0.3, 2.0)
-  phi <- morie:::.hawkes_to_phi(theta)
-  back <- morie:::.hawkes_to_theta(phi)
+  phi <- rmorie:::.hawkes_to_phi(theta)
+  back <- rmorie:::.hawkes_to_theta(phi)
   expect_equal(back, theta, tolerance = 1e-8)
   expect_true(back[2] > 0 && back[2] < 1)
 })
@@ -77,31 +77,31 @@ test_that("internal hawkes parameter helpers round-trip", {
 test_that("internal hawkes likelihood + start helpers behave", {
   set.seed(105)
   ev <- sort(cumsum(stats::rexp(20, rate = 2)))
-  st <- morie:::.hawkes_start("exponential", ev, ev[length(ev)])
+  st <- rmorie:::.hawkes_start("exponential", ev, ev[length(ev)])
   expect_length(st, 3L)
   expect_true(all(is.finite(st)))
 
-  pen <- morie:::.hawkes_nll_pureR(
+  pen <- rmorie:::.hawkes_nll_pureR(
     c(0, 1.5, 1), ev, ev[length(ev)],
     "exponential"
   )
   expect_equal(pen, 1e12)
-  ok <- morie:::.hawkes_nll_pureR(
+  ok <- rmorie:::.hawkes_nll_pureR(
     c(-0.5, 0.3, 2), ev, ev[length(ev)],
     "exponential"
   )
   expect_true(is.finite(ok))
 
-  expect_null(morie:::.hawkes_kernel_funs("exponential", c(0, 0.3, 0)))
-  expect_true(is.list(morie:::.hawkes_kernel_funs(
+  expect_null(rmorie:::.hawkes_kernel_funs("exponential", c(0, 0.3, 0)))
+  expect_true(is.list(rmorie:::.hawkes_kernel_funs(
     "gamma",
     c(0, 0.3, 1.5, 2)
   )))
 
-  lp <- morie:::.hawkes_loglik_poisson(20, ev[length(ev)])
+  lp <- rmorie:::.hawkes_loglik_poisson(20, ev[length(ev)])
   expect_true(is.finite(lp))
 
-  rs <- morie:::.hawkes_restarts(c(0, 0, 0))
+  rs <- rmorie:::.hawkes_restarts(c(0, 0, 0))
   expect_length(rs, 5L)
   expect_true(all(vapply(rs, length, integer(1)) == 3L))
 })
@@ -176,7 +176,7 @@ test_that("morie_horowitz_binary_response returns NA on insufficient data", {
 })
 
 test_that("morie_horowitz_binary_response alias is bound to hrzb1", {
-  expect_identical(morie_horowitz_binary_response, morie:::hrzb1)
+  expect_identical(morie_horowitz_binary_response, rmorie:::hrzb1)
 })
 
 test_that("morie_horowitz_smoothed_maximum_score fits with the default bandwidth", {

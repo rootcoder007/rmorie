@@ -25,7 +25,7 @@ Concentrated log-likelihood in rho.
 }
 \examples{
 # See the package vignettes for usage examples:
-#   vignette(package = "morie")
+#   vignette(package = "rmorie")
 }
 \references{
 Anselin (1988); Schabenberger & Gotway (2005), Ch 7.

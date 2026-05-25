@@ -1,4 +1,4 @@
-library(morie)
+library(rmorie)
 
 make_fixture_project <- function() {
   root <- file.path(tempdir(), paste0("morie-fixture-", as.integer(stats::runif(1, 1, 1e9))))

@@ -56,7 +56,7 @@ R parity for \code{morie.fn.mhatf.multi_head_attention_full}.
 }
 \examples{
 # See the package vignettes for usage examples:
-#   vignette(package = "morie")
+#   vignette(package = "rmorie")
 }
 \references{
 Vaswani et al. (2017), NeurIPS.

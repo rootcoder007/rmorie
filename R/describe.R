@@ -26,7 +26,7 @@
   if (!is.null(.morie_describe_env$corpus)) {
     return(.morie_describe_env$corpus)
   }
-  rds <- system.file("extdata", "describe_corpus.Rds", package = "morie")
+  rds <- system.file("extdata", "describe_corpus.Rds", package = "rmorie")
   if (!nzchar(rds) || !file.exists(rds)) {
     stop(
       "describe_corpus.Rds not found in the morie installation. ",
@@ -134,7 +134,7 @@ morie_describe_by_name <- function(name) {
                     sQuote(name), key))
     message(sprintf("The describe corpus contains %d entries.",
                     length(corpus)))
-    message("To browse: head(names(morie:::.morie_load_describe_corpus()), 20).")
+    message("To browse: head(names(rmorie:::.morie_load_describe_corpus()), 20).")
     return(invisible(NULL))
   }
   body <- corpus[[key]]

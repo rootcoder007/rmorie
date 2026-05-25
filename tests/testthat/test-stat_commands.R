@@ -104,17 +104,17 @@ test_that("clear_stat_commands resets registry, then re-seed", {
   expect_equal(n_cleared, n_before)
   expect_equal(n_stat_commands(), 0L)
   # Re-seed for downstream tests
-  morie:::.morie_seed_stat_commands()
-  morie:::.morie_auto_register_stat_commands()
+  rmorie:::.morie_seed_stat_commands()
+  rmorie:::.morie_auto_register_stat_commands()
   expect_true(n_stat_commands() >= 1L)
 })
 
 test_that(".morie_infer_category prefix lookup", {
-  expect_equal(morie:::.morie_infer_category("morie_did_event_study"), "DiD")
-  expect_equal(morie:::.morie_infer_category("morie_tps_compute"), "TPS Spatial")
-  expect_equal(morie:::.morie_infer_category("morie_otis_load"), "OTIS")
+  expect_equal(rmorie:::.morie_infer_category("morie_did_event_study"), "DiD")
+  expect_equal(rmorie:::.morie_infer_category("morie_tps_compute"), "TPS Spatial")
+  expect_equal(rmorie:::.morie_infer_category("morie_otis_load"), "OTIS")
   # Unknown prefix falls back
-  out <- morie:::.morie_infer_category("totally_random_xyz_func")
+  out <- rmorie:::.morie_infer_category("totally_random_xyz_func")
   expect_true(is.character(out))
 })
 

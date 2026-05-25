@@ -418,25 +418,25 @@ test_that("correlation_matrix returns r and p tables", {
 
 test_that("auto_test routes to one_sample when y is NULL", {
   set.seed(1)
-  res <- morie::auto_test(rnorm(40))
+  res <- rmorie::auto_test(rnorm(40))
   expect_match(res$method, "One.sample", ignore.case = TRUE)
 })
 
 test_that("auto_test paired requires equal-length input", {
   set.seed(1)
-  expect_error(morie::auto_test(rnorm(10), rnorm(11), paired = TRUE))
+  expect_error(rmorie::auto_test(rnorm(10), rnorm(11), paired = TRUE))
 })
 
 test_that("auto_test paired routes to a paired test", {
   set.seed(1)
   x <- rnorm(40); y <- x + rnorm(40, sd = 0.5)
-  res <- morie::auto_test(x, y, paired = TRUE)
+  res <- rmorie::auto_test(x, y, paired = TRUE)
   expect_true(grepl("Paired|Wilcoxon", res$method))
 })
 
 test_that("auto_test unpaired routes to either t-test or Mann-Whitney", {
   set.seed(1); s <- make_two_samples(80)
-  res <- morie::auto_test(s$x, s$y)
+  res <- rmorie::auto_test(s$x, s$y)
   expect_true(is.finite(res$p_value))
 })
 

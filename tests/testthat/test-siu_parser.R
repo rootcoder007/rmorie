@@ -172,7 +172,7 @@ test_that("parse_news_html on empty input returns NA fields", {
 
 test_that(".siu_p_blank_row template carries the SIU columns", {
   set.seed(1)
-  bl <- morie:::.siu_p_blank_row()
+  bl <- rmorie:::.siu_p_blank_row()
   expect_type(bl, "list")
   expect_true("parser_version" %in% names(bl))
   expect_true("case_number" %in% names(bl))
@@ -181,26 +181,26 @@ test_that(".siu_p_blank_row template carries the SIU columns", {
 
 test_that(".siu_p_has_rvest returns logical", {
   set.seed(1)
-  expect_true(is.logical(morie:::.siu_p_has_rvest()))
+  expect_true(is.logical(rmorie:::.siu_p_has_rvest()))
 })
 
 test_that(".siu_p_stripped_text removes script/style tags", {
   set.seed(1)
   h <- "<html><script>alert('x')</script><p>Hello world</p></html>"
-  out <- morie:::.siu_p_stripped_text(h)
+  out <- rmorie:::.siu_p_stripped_text(h)
   expect_false(grepl("alert", out))
   expect_true(grepl("Hello", out))
 })
 
 test_that(".siu_p_stripped_text decodes &", {
   set.seed(1)
-  out <- morie:::.siu_p_stripped_text("<p>A & B</p>")
+  out <- rmorie:::.siu_p_stripped_text("<p>A & B</p>")
   expect_true(grepl("A & B", out, fixed = TRUE))
 })
 
 test_that(".siu_p_re_escape escapes regex specials", {
   set.seed(1)
-  s <- morie:::.siu_p_re_escape("Hello.World(*)")
+  s <- rmorie:::.siu_p_re_escape("Hello.World(*)")
   # The escape inserts a backslash before each regex special, so
   # the output literally contains "Hello\.World".
   expect_true(grepl("Hello\\\\.World", s) || grepl("\\\\\\.", s))
@@ -209,103 +209,103 @@ test_that(".siu_p_re_escape escapes regex specials", {
 test_that(".siu_p_parse_drid_from_url extracts the integer", {
   set.seed(1)
   expect_equal(
-    morie:::.siu_p_parse_drid_from_url("foo.php?drid=42&x=y"), 42L)
+    rmorie:::.siu_p_parse_drid_from_url("foo.php?drid=42&x=y"), 42L)
 })
 
 test_that(".siu_p_parse_drid_from_url returns NA on missing", {
   set.seed(1)
-  expect_true(is.na(morie:::.siu_p_parse_drid_from_url("no-drid-here")))
+  expect_true(is.na(rmorie:::.siu_p_parse_drid_from_url("no-drid-here")))
 })
 
 test_that(".siu_p_parse_drid_from_url handles NULL/empty", {
   set.seed(1)
-  expect_true(is.na(morie:::.siu_p_parse_drid_from_url(NULL)))
-  expect_true(is.na(morie:::.siu_p_parse_drid_from_url("")))
+  expect_true(is.na(rmorie:::.siu_p_parse_drid_from_url(NULL)))
+  expect_true(is.na(rmorie:::.siu_p_parse_drid_from_url("")))
 })
 
 test_that(".siu_p_parse_nrid_from_url extracts the integer", {
   set.seed(1)
   expect_equal(
-    morie:::.siu_p_parse_nrid_from_url("x.php?nrid=99"), 99L)
+    rmorie:::.siu_p_parse_nrid_from_url("x.php?nrid=99"), 99L)
 })
 
 test_that(".siu_p_normalise_sex maps common variants", {
   set.seed(1)
-  expect_equal(morie:::.siu_p_normalise_sex("woman"), "Female")
-  expect_equal(morie:::.siu_p_normalise_sex("man"), "Male")
-  expect_equal(morie:::.siu_p_normalise_sex("F"), "Female")
-  expect_equal(morie:::.siu_p_normalise_sex("nonbinary"), "Non-binary")
-  expect_true(is.na(morie:::.siu_p_normalise_sex(NA)))
-  expect_true(is.na(morie:::.siu_p_normalise_sex("")))
+  expect_equal(rmorie:::.siu_p_normalise_sex("woman"), "Female")
+  expect_equal(rmorie:::.siu_p_normalise_sex("man"), "Male")
+  expect_equal(rmorie:::.siu_p_normalise_sex("F"), "Female")
+  expect_equal(rmorie:::.siu_p_normalise_sex("nonbinary"), "Non-binary")
+  expect_true(is.na(rmorie:::.siu_p_normalise_sex(NA)))
+  expect_true(is.na(rmorie:::.siu_p_normalise_sex("")))
 })
 
 test_that(".siu_p_normalise_yes_no handles common variants", {
   set.seed(1)
-  expect_true(morie:::.siu_p_normalise_yes_no("yes"))
-  expect_true(morie:::.siu_p_normalise_yes_no("TRUE"))
-  expect_true(morie:::.siu_p_normalise_yes_no("1"))
-  expect_false(morie:::.siu_p_normalise_yes_no("no"))
-  expect_false(morie:::.siu_p_normalise_yes_no("0"))
-  expect_true(is.na(morie:::.siu_p_normalise_yes_no(NA)))
-  expect_true(is.na(morie:::.siu_p_normalise_yes_no("maybe")))
+  expect_true(rmorie:::.siu_p_normalise_yes_no("yes"))
+  expect_true(rmorie:::.siu_p_normalise_yes_no("TRUE"))
+  expect_true(rmorie:::.siu_p_normalise_yes_no("1"))
+  expect_false(rmorie:::.siu_p_normalise_yes_no("no"))
+  expect_false(rmorie:::.siu_p_normalise_yes_no("0"))
+  expect_true(is.na(rmorie:::.siu_p_normalise_yes_no(NA)))
+  expect_true(is.na(rmorie:::.siu_p_normalise_yes_no("maybe")))
 })
 
 test_that(".siu_p_parse_date parses 'Month DD YYYY'", {
   set.seed(1)
-  d <- morie:::.siu_p_parse_date("March 5, 2022")
+  d <- rmorie:::.siu_p_parse_date("March 5, 2022")
   expect_equal(d$iso, "2022-03-05")
   expect_equal(d$raw, "March 5, 2022")
 })
 
 test_that(".siu_p_parse_date parses ISO", {
   set.seed(1)
-  d <- morie:::.siu_p_parse_date("2024-06-30")
+  d <- rmorie:::.siu_p_parse_date("2024-06-30")
   expect_equal(d$iso, "2024-06-30")
 })
 
 test_that(".siu_p_parse_date returns NA fields for empty/NULL", {
   set.seed(1)
-  d <- morie:::.siu_p_parse_date(NULL)
+  d <- rmorie:::.siu_p_parse_date(NULL)
   expect_true(is.na(d$iso))
 })
 
 test_that(".siu_p_parse_date returns iso=NA for garbage", {
   set.seed(1)
-  d <- morie:::.siu_p_parse_date("not a date")
+  d <- rmorie:::.siu_p_parse_date("not a date")
   expect_true(is.na(d$iso))
 })
 
 test_that(".siu_p_find_case_number returns the SIU case pattern", {
   set.seed(1)
   expect_equal(
-    morie:::.siu_p_find_case_number("blah 22-OCI-123 blah"),
+    rmorie:::.siu_p_find_case_number("blah 22-OCI-123 blah"),
     "22-OCI-123")
-  expect_true(is.na(morie:::.siu_p_find_case_number("no case here")))
+  expect_true(is.na(rmorie:::.siu_p_find_case_number("no case here")))
 })
 
 test_that(".siu_p_detect_language returns 'unknown' on neutral text", {
   set.seed(1)
-  expect_equal(morie:::.siu_p_detect_language("nothing relevant"),
+  expect_equal(rmorie:::.siu_p_detect_language("nothing relevant"),
                "unknown")
 })
 
 test_that(".siu_p_detect_language returns 'en' on 2+ English markers", {
   set.seed(1)
   txt <- "The Investigation. Civilian Witnesses. Subject Officers."
-  expect_equal(morie:::.siu_p_detect_language(txt), "en")
+  expect_equal(rmorie:::.siu_p_detect_language(txt), "en")
 })
 
 test_that(".siu_p_detect_police_service prefers full names", {
   set.seed(1)
   expect_equal(
-    morie:::.siu_p_detect_police_service(
+    rmorie:::.siu_p_detect_police_service(
       "The Toronto Police Service responded."),
     "Toronto Police Service")
 })
 
 test_that(".siu_p_detect_police_service falls back to abbreviations", {
   set.seed(1)
-  out <- morie:::.siu_p_detect_police_service(
+  out <- rmorie:::.siu_p_detect_police_service(
     "Officers from the OPP attended.")
   expect_equal(out, "Ontario Provincial Police")
 })
@@ -313,12 +313,12 @@ test_that(".siu_p_detect_police_service falls back to abbreviations", {
 test_that(".siu_p_detect_police_service returns NA on no match", {
   set.seed(1)
   expect_true(
-    is.na(morie:::.siu_p_detect_police_service("nothing relevant here")))
+    is.na(rmorie:::.siu_p_detect_police_service("nothing relevant here")))
 })
 
 test_that(".siu_p_scan_mh_race finds keywords", {
   set.seed(1)
-  hits <- morie:::.siu_p_scan_mh_race(
+  hits <- rmorie:::.siu_p_scan_mh_race(
     "The man had mental health concerns and was Indigenous.")
   expect_true(grepl("mental health", hits, fixed = TRUE))
   expect_true(grepl("Indigenous", hits, fixed = TRUE))
@@ -326,9 +326,9 @@ test_that(".siu_p_scan_mh_race finds keywords", {
 
 test_that(".siu_p_scan_mh_race returns empty on null narrative", {
   set.seed(1)
-  expect_equal(morie:::.siu_p_scan_mh_race(NULL), "")
-  expect_equal(morie:::.siu_p_scan_mh_race(NA), "")
-  expect_equal(morie:::.siu_p_scan_mh_race(""), "")
+  expect_equal(rmorie:::.siu_p_scan_mh_race(NULL), "")
+  expect_equal(rmorie:::.siu_p_scan_mh_race(NA), "")
+  expect_equal(rmorie:::.siu_p_scan_mh_race(""), "")
 })
 
 test_that(".siu_p_extract_summary returns first paragraph >80 chars", {
@@ -338,14 +338,14 @@ test_that(".siu_p_extract_summary returns first paragraph >80 chars", {
 ",
                 paste(rep("Lorem ipsum dolor sit amet ", 10),
                       collapse = ""))
-  out <- morie:::.siu_p_extract_summary(txt)
+  out <- rmorie:::.siu_p_extract_summary(txt)
   expect_true(nzchar(out))
   expect_true(nchar(out) <= 1500L)
 })
 
 test_that(".siu_p_extract_summary returns NA when no long paragraph", {
   set.seed(1)
-  expect_true(is.na(morie:::.siu_p_extract_summary("short.\
+  expect_true(is.na(rmorie:::.siu_p_extract_summary("short.\
 \
 also short.")))
 })
@@ -354,38 +354,38 @@ test_that(".siu_p_label_value pulls a value after a label", {
   set.seed(1)
   txt <- "Police Service: Toronto Police Service\
 Other stuff"
-  out <- morie:::.siu_p_label_value(txt, "Police Service")
+  out <- rmorie:::.siu_p_label_value(txt, "Police Service")
   expect_true(!is.null(out) && grepl("Toronto", out))
 })
 
 test_that(".siu_p_label_value returns NULL on miss", {
   set.seed(1)
   expect_null(
-    morie:::.siu_p_label_value("nothing here", "Police Service"))
+    rmorie:::.siu_p_label_value("nothing here", "Police Service"))
 })
 
 test_that(".siu_p_label_int returns NA on missing label", {
   set.seed(1)
   expect_true(
-    is.na(morie:::.siu_p_label_int("nothing here", "Number of Officers")))
+    is.na(rmorie:::.siu_p_label_int("nothing here", "Number of Officers")))
 })
 
 test_that(".siu_p_label_int extracts integers", {
   set.seed(1)
   txt <- "Number of Officers: 5\
 more"
-  expect_equal(morie:::.siu_p_label_int(txt, "Number of Officers"), 5L)
+  expect_equal(rmorie:::.siu_p_label_int(txt, "Number of Officers"), 5L)
 })
 
 test_that(".siu_p_find_news_release_link finds nrid links via regex fallback", {
   set.seed(1)
   h <- '<a href="news_template.php?nrid=999">news</a>'
-  out <- morie:::.siu_p_find_news_release_link(h, NULL)
+  out <- rmorie:::.siu_p_find_news_release_link(h, NULL)
   expect_true(grepl("nrid=999", out))
 })
 
 test_that(".siu_p_find_news_release_link returns NA on miss", {
   set.seed(1)
   expect_true(
-    is.na(morie:::.siu_p_find_news_release_link("<a>no link</a>", NULL)))
+    is.na(rmorie:::.siu_p_find_news_release_link("<a>no link</a>", NULL)))
 })

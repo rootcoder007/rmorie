@@ -59,7 +59,7 @@ morie_gpl_compatible_licenses <- function() {
 #' @export
 morie_license_metadata <- function() {
   list(
-    package = "morie",
+    package = "rmorie",
     spdx = "GPL-2.0-only",
     fsf_libre = "yes",
     osi_approved = "yes",

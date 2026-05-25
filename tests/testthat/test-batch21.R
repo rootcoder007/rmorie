@@ -87,7 +87,7 @@ test_that("morie_terry_hoeffding_test returns NA when a sample is too small", {
 })
 
 test_that("bpe_tokenizer produces merges and vocab from a corpus string", {
-  res <- morie:::bpe_tokenizer("low lower lowest low", num_merges = 5L)
+  res <- rmorie:::bpe_tokenizer("low lower lowest low", num_merges = 5L)
   expect_type(res, "list")
   expect_named(res, c(
     "merges", "vocab", "corpus", "n_merges", "n_vocab",
@@ -100,20 +100,20 @@ test_that("bpe_tokenizer produces merges and vocab from a corpus string", {
 })
 
 test_that("bpe_tokenizer accepts a character vector of words", {
-  res <- morie:::bpe_tokenizer(c("aa", "ab", "aa"), num_merges = 3L)
+  res <- rmorie:::bpe_tokenizer(c("aa", "ab", "aa"), num_merges = 3L)
   expect_true(res$n_vocab > 0L)
   expect_length(res$merges, res$n_merges)
 })
 
 test_that("bpe_tokenizer handles empty input", {
-  res <- morie:::bpe_tokenizer(character(0))
+  res <- rmorie:::bpe_tokenizer(character(0))
   expect_equal(res$n_merges, 0L)
   expect_equal(res$n_vocab, 0L)
   expect_length(res$vocab, 0L)
 })
 
 test_that("temperature_scaling returns a normalised softmax tensor", {
-  res <- morie:::temperature_scaling(c(1, 2, 3, 4))
+  res <- rmorie:::temperature_scaling(c(1, 2, 3, 4))
   expect_type(res, "list")
   expect_named(res, c("tensor", "entropy", "temperature", "method"))
   expect_length(res$tensor, 4L)
@@ -124,14 +124,14 @@ test_that("temperature_scaling returns a normalised softmax tensor", {
 })
 
 test_that("temperature_scaling with high temperature flattens the tensor", {
-  hot <- morie:::temperature_scaling(c(0, 5, 10), temperature = 100)
-  cold <- morie:::temperature_scaling(c(0, 5, 10), temperature = 0.1)
+  hot <- rmorie:::temperature_scaling(c(0, 5, 10), temperature = 100)
+  cold <- rmorie:::temperature_scaling(c(0, 5, 10), temperature = 0.1)
   expect_gt(hot$entropy, cold$entropy)
   expect_equal(hot$temperature, 100)
 })
 
 test_that("temperature_scaling errors on a non-positive temperature", {
-  expect_error(morie:::temperature_scaling(1:3, temperature = 0),
+  expect_error(rmorie:::temperature_scaling(1:3, temperature = 0),
     "Temperature",
     ignore.case = TRUE
   )
@@ -166,7 +166,7 @@ test_that("morie_tolerance_limits returns NA for a single observation", {
 })
 
 test_that("top_k_decoding filters logits to the top k", {
-  res <- morie:::top_k_decoding(c(1, 5, 2, 8, 3), k = 2L)
+  res <- rmorie:::top_k_decoding(c(1, 5, 2, 8, 3), k = 2L)
   expect_type(res, "list")
   expect_named(res, c("tensor", "topk_indices", "topk_logits", "k", "method"))
   expect_equal(res$k, 2L)
@@ -177,18 +177,18 @@ test_that("top_k_decoding filters logits to the top k", {
 })
 
 test_that("top_k_decoding clamps k to the vocabulary length", {
-  res <- morie:::top_k_decoding(c(1, 2, 3), k = 99L)
+  res <- rmorie:::top_k_decoding(c(1, 2, 3), k = 99L)
   expect_equal(res$k, 3L)
   expect_length(res$tensor, 3L)
 })
 
 test_that("top_k_decoding honours the temperature argument", {
-  res <- morie:::top_k_decoding(c(1, 2, 3, 4), k = 3L, temperature = 2)
+  res <- rmorie:::top_k_decoding(c(1, 2, 3, 4), k = 3L, temperature = 2)
   expect_equal(sum(res$tensor), 1, tolerance = 1e-8)
 })
 
 test_that("top_p_nucleus performs nucleus filtering on the default path", {
-  res <- morie:::top_p_nucleus(c(1, 2, 3, 4, 5))
+  res <- rmorie:::top_p_nucleus(c(1, 2, 3, 4, 5))
   expect_type(res, "list")
   expect_named(res, c("tensor", "keep_mask", "n_kept", "p", "method"))
   expect_equal(sum(res$tensor), 1, tolerance = 1e-8)
@@ -199,14 +199,14 @@ test_that("top_p_nucleus performs nucleus filtering on the default path", {
 })
 
 test_that("top_p_nucleus honours custom p and temperature", {
-  res <- morie:::top_p_nucleus(c(1, 2, 3, 4), p = 0.5, temperature = 2)
+  res <- rmorie:::top_p_nucleus(c(1, 2, 3, 4), p = 0.5, temperature = 2)
   expect_equal(res$p, 0.5)
   expect_equal(sum(res$tensor), 1, tolerance = 1e-8)
 })
 
 test_that("top_p_nucleus errors when p is out of range", {
-  expect_error(morie:::top_p_nucleus(1:3, p = 0), "(0, 1]", fixed = TRUE)
-  expect_error(morie:::top_p_nucleus(1:3, p = 1.5), "(0, 1]", fixed = TRUE)
+  expect_error(rmorie:::top_p_nucleus(1:3, p = 0), "(0, 1]", fixed = TRUE)
+  expect_error(rmorie:::top_p_nucleus(1:3, p = 1.5), "(0, 1]", fixed = TRUE)
 })
 
 test_that("morie_thin_plate_spline fits a smooth surface", {
@@ -231,14 +231,14 @@ test_that("tpspn accepts a vector predictor and a smoothing penalty", {
   set.seed(26)
   x <- runif(20)
   y <- x^2 + rnorm(20, sd = 0.05)
-  res <- morie:::tpspn(x, y, lam = 1)
+  res <- rmorie:::tpspn(x, y, lam = 1)
   expect_equal(res$d, 1L)
   expect_equal(res$lambda, 1)
   expect_length(res$fitted, 20L)
 })
 
 test_that("tpspn returns an NA estimate when n is too small", {
-  res <- morie:::tpspn(matrix(c(1, 2), ncol = 1), c(1, 2))
+  res <- rmorie:::tpspn(matrix(c(1, 2), ncol = 1), c(1, 2))
   expect_true(is.na(res$estimate))
   expect_true(grepl("too small", res$method))
 })

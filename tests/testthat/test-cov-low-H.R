@@ -29,7 +29,7 @@ test_that(".hrzi1_obj returns big penalty for zero-norm beta", {
   set.seed(1)
   X <- matrix(rnorm(40), 20, 2)
   y <- rnorm(20)
-  out <- morie:::.hrzi1_obj(c(0, 0), X, y, h0 = 1)
+  out <- rmorie:::.hrzi1_obj(c(0, 0), X, y, h0 = 1)
   expect_equal(out, 1e12)
 })
 
@@ -37,20 +37,20 @@ test_that("hrzi1 returns NA estimate on insufficient data", {
   set.seed(1)
   X <- matrix(rnorm(8), 4, 2)
   y <- rnorm(4)
-  res <- morie:::hrzi1(X, y)
+  res <- rmorie:::hrzi1(X, y)
   expect_true(all(is.na(res$estimate)))
   expect_match(res$method, "insufficient")
 })
 
 test_that("%||% returns rhs for NULL", {
-  expect_equal(morie:::`%||%`(NULL, "fallback"), "fallback")
-  expect_equal(morie:::`%||%`("value", "fallback"), "value")
+  expect_equal(rmorie:::`%||%`(NULL, "fallback"), "fallback")
+  expect_equal(rmorie:::`%||%`("value", "fallback"), "value")
 })
 
 test_that("is_absolute_path detects unix + windows roots", {
-  expect_true(morie:::is_absolute_path("/etc/passwd"))
-  expect_true(morie:::is_absolute_path("C:/Users/x"))
-  expect_false(morie:::is_absolute_path("relative/path"))
+  expect_true(rmorie:::is_absolute_path("/etc/passwd"))
+  expect_true(rmorie:::is_absolute_path("C:/Users/x"))
+  expect_false(rmorie:::is_absolute_path("relative/path"))
 })
 
 test_that("morie_find_project_root errors when no markers found", {
@@ -134,30 +134,30 @@ test_that("spblk solves block kriging on 2D coords with explicit quadrature pts"
 })
 
 test_that(".morie_url_with_params handles NULL + existing query", {
-  expect_equal(morie:::.morie_url_with_params("http://x", NULL), "http://x")
-  out_existing <- morie:::.morie_url_with_params("http://x?a=1", list(b = "v"))
+  expect_equal(rmorie:::.morie_url_with_params("http://x", NULL), "http://x")
+  out_existing <- rmorie:::.morie_url_with_params("http://x?a=1", list(b = "v"))
   expect_match(out_existing, "&b=v")
 })
 
 test_that(".morie_ckan_portal resolves known + errors on unknown", {
-  expect_match(morie:::.morie_ckan_portal("open.canada.ca"), "^https://")
+  expect_match(rmorie:::.morie_ckan_portal("open.canada.ca"), "^https://")
   expect_error(
-    morie:::.morie_ckan_portal("not-a-portal"),
+    rmorie:::.morie_ckan_portal("not-a-portal"),
     "Unknown CKAN portal"
   )
 })
 
 test_that(".morie_detect_format falls back on URL extension", {
-  expect_equal(morie:::.morie_detect_format("http://x.invalid/foo.csv"), "csv")
-  expect_equal(morie:::.morie_detect_format("http://x.invalid/foo.json"), "json")
-  expect_equal(morie:::.morie_detect_format("http://x.invalid/foo.bogus"), "csv")
+  expect_equal(rmorie:::.morie_detect_format("http://x.invalid/foo.csv"), "csv")
+  expect_equal(rmorie:::.morie_detect_format("http://x.invalid/foo.json"), "json")
+  expect_equal(rmorie:::.morie_detect_format("http://x.invalid/foo.bogus"), "csv")
 })
 
 test_that(".morie_parse_file errors on unsupported format", {
   tmp <- tempfile(fileext = ".dat")
   writeLines("x", tmp)
   withr::defer(unlink(tmp))
-  expect_error(morie:::.morie_parse_file(tmp, "weirdfmt", TRUE), "Unsupported parse format")
+  expect_error(rmorie:::.morie_parse_file(tmp, "weirdfmt", TRUE), "Unsupported parse format")
 })
 
 test_that("morie_fetch requires zip_member for zip format", {

@@ -18,13 +18,13 @@ test_that("morie_cache_dir honours MORIE_CACHE_DIR then R_user_dir", {
   }, add = TRUE)
   Sys.setenv(MORIE_CACHE_DIR = file.path(tempdir(), "morie-override"))
   expect_equal(
-    morie:::morie_cache_dir(),
+    rmorie:::morie_cache_dir(),
     file.path(tempdir(), "morie-override")
   )
   Sys.unsetenv("MORIE_CACHE_DIR")
   # Default falls back to tools::R_user_dir("morie", which = "cache").
   expect_equal(
-    morie:::morie_cache_dir(),
+    rmorie:::morie_cache_dir(),
     tools::R_user_dir("morie", which = "cache")
   )
 })
@@ -88,9 +88,9 @@ test_that("morie_cache_file ingests csv and rds, errors on other formats", {
 })
 
 test_that(".fuzzy_match_key resolves exact, legacy and substring keys", {
-  expect_equal(morie:::.fuzzy_match_key("ocp21"), "ocp21")
-  expect_equal(morie:::.fuzzy_match_key("opencanada_cpads_2021"), "ocp21")
-  expect_null(morie:::.fuzzy_match_key("totally-not-a-key-xyzzy"))
+  expect_equal(rmorie:::.fuzzy_match_key("ocp21"), "ocp21")
+  expect_equal(rmorie:::.fuzzy_match_key("opencanada_cpads_2021"), "ocp21")
+  expect_null(rmorie:::.fuzzy_match_key("totally-not-a-key-xyzzy"))
 })
 
 test_that("morie_load_dataset errors on an unknown key", {

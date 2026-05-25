@@ -39,7 +39,7 @@
 #' @export
 morie_datasets_statcan_ccjs_cubes <- function() {
   path <- system.file("extdata", "statcan_ccjs_cubes.csv",
-                      package = "morie")
+                      package = "rmorie")
   if (!nzchar(path))
     stop("bundled StatCan CCJS cube registry missing", call. = FALSE)
   utils::read.csv(path, stringsAsFactors = FALSE,

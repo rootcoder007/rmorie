@@ -18,10 +18,10 @@
 # <https://www.gnu.org/licenses/>.
 
 # ---------------------------------------------------------------------------
-# morie::explain - human-readable descriptions of module-output CSVs
+# rmorie::explain - human-readable descriptions of module-output CSVs
 # ---------------------------------------------------------------------------
-# R port of src/morie/explain.py.  Backs `morie::explain_file()` and
-# `morie::cheatsheet()` (R analogues of the `morie explain` and
+# R port of src/morie/explain.py.  Backs `rmorie::explain_file()` and
+# `rmorie::cheatsheet()` (R analogues of the `morie explain` and
 # `morie cheatsheet` CLI subcommands).  Explanations target a user
 # who just ran a morie module and is staring at 10-15 CSVs not
 # knowing where to start.

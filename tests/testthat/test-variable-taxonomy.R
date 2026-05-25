@@ -157,14 +157,14 @@ test_that("identifier pair refuses test", {
 # ── Override registry integrity ────────────────────────────────────
 
 test_that("INVARIANT_OVERRIDES registry is not empty", {
-  expect_true(length(morie:::.MORIE_INVARIANT_OVERRIDES) > 0)
+  expect_true(length(rmorie:::.MORIE_INVARIANT_OVERRIDES) > 0)
 })
 
 test_that("each override has valid field names", {
   valid <- c("level", "cardinality", "role", "cross_year_safe",
               "dictionary_described", "valid_values", "nullable",
               "raw_dtype", "notes", "source")
-  for (entry in morie:::.MORIE_INVARIANT_OVERRIDES) {
+  for (entry in rmorie:::.MORIE_INVARIANT_OVERRIDES) {
     unknown <- setdiff(names(entry$patch), valid)
     if (length(unknown) > 0L) {
       stop(sprintf("override (%s, %s) has unknown fields: %s",

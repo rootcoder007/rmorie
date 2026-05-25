@@ -5,7 +5,7 @@
 test_that("quntf returns full structure on normal data with default taus", {
   set.seed(1)
   x <- rnorm(200)
-  out <- morie:::quntf(x)
+  out <- rmorie:::quntf(x)
   expect_type(out, "list")
   expect_named(out, c("taus", "quantiles", "se", "bandwidth", "estimate", "n", "method"))
   expect_length(out$taus, 5L)
@@ -16,11 +16,11 @@ test_that("quntf returns full structure on normal data with default taus", {
 
 test_that("quntf returns the n<2 short-circuit list", {
   set.seed(1)
-  out <- morie:::quntf(numeric(0))
+  out <- rmorie:::quntf(numeric(0))
   expect_true(is.na(out$estimate))
   expect_equal(out$n, 0L)
   expect_match(out$method, "n<2")
-  out1 <- morie:::quntf(3.14)
+  out1 <- rmorie:::quntf(3.14)
   expect_equal(out1$n, 1L)
   expect_match(out1$method, "n<2")
 })
@@ -28,7 +28,7 @@ test_that("quntf returns the n<2 short-circuit list", {
 test_that("quntf handles zero-IQR (constant or near-constant) input", {
   set.seed(1)
   x <- rep(2.5, 50)
-  out <- morie:::quntf(x, taus = c(0.25, 0.5, 0.75))
+  out <- rmorie:::quntf(x, taus = c(0.25, 0.5, 0.75))
   expect_length(out$quantiles, 3L)
   expect_true(all(out$quantiles == 2.5))
 })

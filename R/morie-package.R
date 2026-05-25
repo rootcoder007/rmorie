@@ -90,7 +90,7 @@
 #' (kernel ABI requirement) and are not part of the CRAN tarball.
 #'
 #' @keywords internal
-#' @aliases morie-package
+#' @aliases rrmorie-package
 #' @importFrom stats aggregate anova ave deviance median na.omit plogis
 #'   qf setNames update weighted.mean
 #' @importFrom utils str

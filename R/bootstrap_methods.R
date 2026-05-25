@@ -24,7 +24,7 @@
 # permutation tests, subsampling, the .632/.632+ estimator, and k-fold CV.
 # All functions take a vector or matrix `data` and a `statistic` function
 # (statistic(data) -> numeric scalar).  Results are returned as plain
-# `list`s with a class attribute so morie::print methods can dispatch.
+# `list`s with a class attribute so rmorie::print methods can dispatch.
 
 # ---- Result container constructors ----------------------------------------
 

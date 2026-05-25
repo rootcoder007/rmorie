@@ -403,13 +403,13 @@ test_that("morie_paths returns the standard named path list", {
 })
 
 test_that("paths internal helpers behave", {
-  expect_equal(morie:::`%||%`(NULL, "fallback"), "fallback")
-  expect_true(is.na(morie:::`%||%`(NA, "fallback")))
-  expect_equal(morie:::`%||%`("", "fallback"), "")
-  expect_equal(morie:::`%||%`("kept", "fallback"), "kept")
-  expect_true(morie:::is_absolute_path("/usr/local"))
-  expect_true(morie:::is_absolute_path("C:/Users"))
-  expect_false(morie:::is_absolute_path("relative/path"))
+  expect_equal(rmorie:::`%||%`(NULL, "fallback"), "fallback")
+  expect_true(is.na(rmorie:::`%||%`(NA, "fallback")))
+  expect_equal(rmorie:::`%||%`("", "fallback"), "")
+  expect_equal(rmorie:::`%||%`("kept", "fallback"), "kept")
+  expect_true(rmorie:::is_absolute_path("/usr/local"))
+  expect_true(rmorie:::is_absolute_path("C:/Users"))
+  expect_false(rmorie:::is_absolute_path("relative/path"))
 })
 
 test_that("morie_pca_dimension_reduction reduces a numeric matrix", {

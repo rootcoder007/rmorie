@@ -1,4 +1,4 @@
 library(testthat)
-library(morie)
+library(rmorie)
 
 test_check("morie")

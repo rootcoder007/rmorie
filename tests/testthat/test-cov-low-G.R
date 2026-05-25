@@ -25,7 +25,7 @@ test_that("rgeeg honours custom bands and nperseg", {
 
 test_that("sparse_attention works with integer length input", {
   set.seed(1)
-  r <- morie:::sparse_attention(16L, window = 2L, stride = 4L)
+  r <- rmorie:::sparse_attention(16L, window = 2L, stride = 4L)
   expect_equal(dim(r$tensor), c(16, 16))
   expect_equal(r$method, "sparse-attention")
 })
@@ -138,13 +138,13 @@ test_that("mrm_tps_kulldorff_scan returns empty df when n<100", {
 })
 
 test_that(".poisson_lrt returns 0 on degenerate inputs", {
-  expect_equal(morie:::.poisson_lrt(0, 0, 1, 10), 0)
-  expect_equal(morie:::.poisson_lrt(5, 5, 5, 5), 0)
+  expect_equal(rmorie:::.poisson_lrt(0, 0, 1, 10), 0)
+  expect_equal(rmorie:::.poisson_lrt(5, 5, 5, 5), 0)
 })
 
 test_that(".haversine_km_mat returns 0 for identical points", {
-  expect_equal(morie:::.haversine_km_mat(43.6, -79.4, 43.6, -79.4), 0)
-  expect_true(morie:::.haversine_km_mat(43.6, -79.4, 43.7, -79.4) > 0)
+  expect_equal(rmorie:::.haversine_km_mat(43.6, -79.4, 43.6, -79.4), 0)
+  expect_true(rmorie:::.haversine_km_mat(43.6, -79.4, 43.7, -79.4) > 0)
 })
 
 test_that("mrm_tps_levy_scaling returns NA on tiny data", {

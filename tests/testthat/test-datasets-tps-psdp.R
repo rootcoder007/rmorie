@@ -164,7 +164,7 @@ test_that("offline=FALSE (3TT+) routes through morie_datasets_tps_arcgis_hub_by_
           expect_equal(layer_idx, 0L)
           stub
         },
-        .package = "morie",
+        .package = "rmorie",
         code = R$fn(year = 2024L, offline = FALSE))
     })
     expect_s3_class(captured, "data.frame")
@@ -180,7 +180,7 @@ test_that("offline=FALSE honours layer_url override", {
       expect_equal(layer_url, "https://example/override/X/0")
       data.frame(OBJECTID = 99L)
     },
-    .package = "morie",
+    .package = "rmorie",
     code = morie_datasets_tps_assault(
       offline = FALSE,
       layer_url = "https://example/override/X/0"))
@@ -200,7 +200,7 @@ test_that("offline=FALSE (3TT+) defaults to where = '1=1' when year is NULL", {
       expect_equal(hub_id, "d0e1e98de5f945faa2fe635dee3f4062")  # robbery
       data.frame(OBJECTID = 1L)
     },
-    .package = "morie",
+    .package = "rmorie",
     code = morie_datasets_tps_robbery(offline = FALSE))
 })
 
@@ -208,7 +208,7 @@ test_that("offline=FALSE (3TT+) defaults to where = '1=1' when year is NULL", {
 
 test_that(".morie_tps_psdp_dispatch errors on unknown layer_key", {
   expect_error(
-    morie:::.morie_tps_psdp_dispatch("nonexistent", NULL, NULL,
+    rmorie:::.morie_tps_psdp_dispatch("nonexistent", NULL, NULL,
                                        TRUE, NULL),
     regexp = "unknown TPS PSDP layer_key")
 })

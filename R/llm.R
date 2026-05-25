@@ -280,7 +280,7 @@ morie_llm_probe_freeapi <- function(timeout = 4) {
 #' @return data.frame with columns model / family / size / label / alias.
 #' @export
 morie_llm_list_freeapi_models <- function() {
-  json_dir <- system.file("ollama_json", package = "morie")
+  json_dir <- system.file("ollama_json", package = "rmorie")
   rows <- list()
   seen <- character(0)
   if (nzchar(json_dir) && dir.exists(json_dir) &&

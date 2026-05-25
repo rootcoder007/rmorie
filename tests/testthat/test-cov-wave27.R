@@ -46,7 +46,7 @@ test_that("statistical callables run end to end on valid data", {
   ok("sptau", sptau(v, w))
   ok("morie_kalman_filter", morie_kalman_filter(m2))
   ok("vecm_wide", morie_vecm(matrix(rnorm(40), 2, 20))) # transpose path
-  ok("vines_ok", morie:::vines(m2))
+  ok("vines_ok", rmorie:::vines(m2))
   ok("ksr10", morie_ksr10_kosorok_m_estimator(v))
   ok("ksr19", morie_ksr19_kosorok_cox_partial_likelihood(m2, vp, y01))
   ok("irtsp", irtsp(matrix(rbinom(600, 1, 0.5), 120, 5)))
@@ -71,9 +71,9 @@ test_that("statistical callables run end to end on valid data", {
   ok("rgfir", rgfir(v, cutoff = 0.2))
   ok("fzlst", fzlst(vp))
   ok("polrz", polrz(v))
-  ok("quntf", morie:::quntf(v))
+  ok("quntf", rmorie:::quntf(v))
   ok("nstat", nstat(v, coords))
-  ok(".morie_beta_weights", morie:::.morie_beta_weights(1, 6, 8))
+  ok(".morie_beta_weights", rmorie:::.morie_beta_weights(1, 6, 8))
   expect_true(TRUE)
 })
 
@@ -84,19 +84,19 @@ test_that("Horowitz semiparametric callables run on adequate samples", {
   y <- as.numeric(X %*% c(0.8, -0.4) + rnorm(n))
   yb <- rbinom(n, 1, plogis(X[, 1]))
   z <- rbinom(n, 1, 0.5)
-  ok("hrzb1", morie:::hrzb1(X, yb))
-  ok("hrzb2", morie:::hrzb2(X, yb))
-  ok("hrzc1", morie:::hrzc1(X, abs(y) + 0.1))
-  ok("hrzd1", morie:::hrzd1(abs(y) + 0.1, X, rbinom(n, 1, 0.6)))
-  ok("hrzi1", morie:::hrzi1(X, yb))
-  ok("hrzi2", morie:::hrzi2(X, yb))
-  ok("hrzk1", morie:::hrzk1(y))
-  ok("hrzk2", morie:::hrzk2(X[, 1], y))
-  ok("hrzk3", morie:::hrzk3(X[, 1], y))
-  ok("hrzp1", morie:::hrzp1(X[, 1], y, z))
-  ok("hrzq1", morie:::hrzq1(X, y))
-  ok("hrzt1", morie:::hrzt1(X, y, rbinom(n, 1, 0.5)))
-  ok("hrzt2", morie:::hrzt2(X, y, z, rbinom(n, 1, 0.5)))
+  ok("hrzb1", rmorie:::hrzb1(X, yb))
+  ok("hrzb2", rmorie:::hrzb2(X, yb))
+  ok("hrzc1", rmorie:::hrzc1(X, abs(y) + 0.1))
+  ok("hrzd1", rmorie:::hrzd1(abs(y) + 0.1, X, rbinom(n, 1, 0.6)))
+  ok("hrzi1", rmorie:::hrzi1(X, yb))
+  ok("hrzi2", rmorie:::hrzi2(X, yb))
+  ok("hrzk1", rmorie:::hrzk1(y))
+  ok("hrzk2", rmorie:::hrzk2(X[, 1], y))
+  ok("hrzk3", rmorie:::hrzk3(X[, 1], y))
+  ok("hrzp1", rmorie:::hrzp1(X[, 1], y, z))
+  ok("hrzq1", rmorie:::hrzq1(X, y))
+  ok("hrzt1", rmorie:::hrzt1(X, y, rbinom(n, 1, 0.5)))
+  ok("hrzt2", rmorie:::hrzt2(X, y, z, rbinom(n, 1, 0.5)))
   expect_true(TRUE)
 })
 
@@ -128,20 +128,20 @@ test_that("degenerate inputs reach the documented guard branches", {
   fr <- fzmrb(c(1, 2, 3, 4, 5), t = 5.4)
   expect_equal(fr$estimate, 0)
   # hrzt1: a treatment arm with < 2 members -> "one arm empty"
-  h1 <- morie:::hrzt1(matrix(rnorm(40), 40, 1), rnorm(40), rep(1L, 40))
+  h1 <- rmorie:::hrzt1(matrix(rnorm(40), 40, 1), rnorm(40), rep(1L, 40))
   expect_match(h1$method, "one arm empty")
   # hrzt2: an instrument arm with < 5 members -> "one arm of Z empty"
-  h2 <- morie:::hrzt2(
+  h2 <- rmorie:::hrzt2(
     NULL, rnorm(30), c(rep(1L, 28), 0L, 0L),
     rbinom(30, 1, 0.5)
   )
   expect_match(h2$method, "one arm")
   # retlv: GEV fit on near-constant maxima fails -> the fail branch
-  rl <- morie:::retlv(rep(7, 6) + rnorm(6, 0, 1e-9))
+  rl <- rmorie:::retlv(rep(7, 6) + rnorm(6, 0, 1e-9))
   expect_true(is.list(rl))
   # vines: perfectly collinear columns -> non-PD R -> loglik NA
   cv <- rnorm(40)
-  vn <- morie:::vines(cbind(cv, cv, cv))
+  vn <- rmorie:::vines(cbind(cv, cv, cv))
   expect_true(is.na(vn$loglik) || is.numeric(vn$loglik))
   # sptau: n == 3 -> the Cc <= 0 NA branch
   s3 <- sptau(c(1, 2, 3), matrix(1, 3, 3))
@@ -157,8 +157,8 @@ test_that("fwpas covers both transpose branches", {
 })
 
 test_that(".morie_cvm_pvalue mid-range + dataset_profile fallbacks", {
-  expect_true(is.numeric(morie:::.morie_cvm_pvalue(0.2)))
-  expect_equal(morie:::morie_infer_measurement_level(
+  expect_true(is.numeric(rmorie:::.morie_cvm_pvalue(0.2)))
+  expect_equal(rmorie:::morie_infer_measurement_level(
     factor(sample(letters[1:4], 40, TRUE))
   ), "nominal")
   prof <- morie_profile_dataset(data.frame(a = rnorm(30), b = rnorm(30)))
@@ -175,17 +175,17 @@ test_that(".cpads_default_csv + .resolve_cpads_csv cover their search paths", {
   rel <- "data/datasets/oc/CPADS/2021-2022/cpads-2021-2022-pumf2.csv"
   dir.create(dirname(rel), recursive = TRUE)
   writeLines("x", rel)
-  expect_match(morie:::.cpads_default_csv(), "pumf2\\.csv$") # file.exists hit
-  expect_match(morie:::.resolve_cpads_csv(rel), "pumf2\\.csv$")
-  expect_error(morie:::.resolve_cpads_csv("no/such/file.csv")) # search to root
+  expect_match(rmorie:::.cpads_default_csv(), "pumf2\\.csv$") # file.exists hit
+  expect_match(rmorie:::.resolve_cpads_csv(rel), "pumf2\\.csv$")
+  expect_error(rmorie:::.resolve_cpads_csv("no/such/file.csv")) # search to root
 })
 
 test_that("RNG sync helpers cover the .Random.seed branches", {
   set.seed(1)
   invisible(runif(1)) # ensure .Random.seed exists
   morie_sync_rng(42L)
-  s <- morie:::.Random.seed_safe()
-  morie:::.Random.seed_restore(s)
+  s <- rmorie:::.Random.seed_safe()
+  rmorie:::.Random.seed_restore(s)
   expect_true(TRUE)
 })
 
@@ -195,7 +195,7 @@ test_that(".run_power_design_module_extended handles a single-gender frame", {
   d <- make_canonical_cpads()
   d$gender <- 1L # collapse to one gender level
   ok("power_design_1gender", suppressWarnings(
-    morie:::.run_power_design_module_extended(d)
+    rmorie:::.run_power_design_module_extended(d)
   ))
   expect_true(TRUE)
 })
@@ -220,7 +220,7 @@ test_that("morie_load_dataset covers the unsupported-format stop", {
       if ("arcgis_url" %in% names(c0)) c0$arcgis_url <- ""
       c0
     },
-    .package = "morie"
+    .package = "rmorie"
   )
   expect_error(morie_load_dataset("covtest"), "Unsupported format")
 })
@@ -248,6 +248,6 @@ test_that("entheo per-frame helpers hit the short-window skip", {
   set.seed(105)
   eeg <- matrix(rnorm(2 * 12), 2, 12)
   fmri <- matrix(rnorm(2 * 4), 2, 4)
-  expect_true(is.numeric(morie:::.entheo_binding_per_frame(eeg, fmri)))
-  expect_true(is.numeric(morie:::.entheo_san_per_frame(eeg, fmri)))
+  expect_true(is.numeric(rmorie:::.entheo_binding_per_frame(eeg, fmri)))
+  expect_true(is.numeric(rmorie:::.entheo_san_per_frame(eeg, fmri)))
 })

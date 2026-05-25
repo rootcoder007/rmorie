@@ -19,7 +19,7 @@
 #' @references He, Zhang, Ren & Sun (2015), ICCV.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_heinz_he_initialization <- function(fan_in, fan_out = NULL, seed = 42L,
                                     mode = "normal",

@@ -12,12 +12,12 @@
 
 test_that(".frns helpers cover empty / degenerate inputs", {
   expect_error(
-    morie:::.frns_check_aligned(list("a", integer(0)), list("b", integer(0))),
+    rmorie:::.frns_check_aligned(list("a", integer(0)), list("b", integer(0))),
     "empty"
   )
-  expect_equal(morie:::.frns_gini(5), 0) # single element -> 0
-  expect_equal(morie:::.frns_gini(numeric(0)), 0) # empty -> 0
-  expect_true(is.na(morie:::.frns_worst_abs(c(NA_real_, NaN, Inf, -Inf))))
+  expect_equal(rmorie:::.frns_gini(5), 0) # single element -> 0
+  expect_equal(rmorie:::.frns_gini(numeric(0)), 0) # empty -> 0
+  expect_true(is.na(rmorie:::.frns_worst_abs(c(NA_real_, NaN, Inf, -Inf))))
 })
 
 # ---- morie_fairness_disparate_impact --------------------------------------------
@@ -122,17 +122,17 @@ test_that("morie_fairness_bias_amplification: amplified and quiet regimes", {
 # ---- study_reporting.R : internal module runners --------------------------
 
 test_that(".run_power_design_module_extended runs on canonical CPADS data", {
-  out <- morie:::.run_power_design_module_extended(make_canonical_cpads())
+  out <- rmorie:::.run_power_design_module_extended(make_canonical_cpads())
   expect_true(is.list(out))
 })
 
 test_that(".run_tables_module_internal runs with and without an output dir", {
-  expect_true(is.list(morie:::.run_tables_module_internal(
+  expect_true(is.list(rmorie:::.run_tables_module_internal(
     make_canonical_cpads()
   )))
   od <- tempfile("morie-tables-")
   dir.create(od, recursive = TRUE)
-  expect_true(is.list(morie:::.run_tables_module_internal(
+  expect_true(is.list(rmorie:::.run_tables_module_internal(
     make_canonical_cpads(),
     output_dir = od
   )))
@@ -140,7 +140,7 @@ test_that(".run_tables_module_internal runs with and without an output dir", {
 
 test_that(".run_final_report_module_internal builds the coverage report", {
   # no output_dir -> a fresh tempdir is created
-  r1 <- morie:::.run_final_report_module_internal(make_canonical_cpads())
+  r1 <- rmorie:::.run_final_report_module_internal(make_canonical_cpads())
   expect_true(is.list(r1))
   expect_true("ebac_final_output_coverage" %in% names(r1))
 
@@ -152,7 +152,7 @@ test_that(".run_final_report_module_internal builds the coverage report", {
     row.names = FALSE
   )
   dir.create(file.path(od, "broken.csv")) # read.csv on a dir -> NULL -> next
-  r2 <- morie:::.run_final_report_module_internal(make_canonical_cpads(),
+  r2 <- rmorie:::.run_final_report_module_internal(make_canonical_cpads(),
     output_dir = od
   )
   expect_true(nrow(r2$ebac_final_output_shapes) >= 1L)

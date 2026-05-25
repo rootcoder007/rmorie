@@ -14,7 +14,7 @@ test_that("morie_hawkes_fit returns a fit for each kernel", {
     expect_identical(fit$n_events, 250L)
     expect_identical(
       length(fit$estimate),
-      length(morie:::.hawkes_param_names(k))
+      length(rmorie:::.hawkes_param_names(k))
     )
   }
 })
@@ -31,8 +31,8 @@ test_that("the C++ and pure-R Hawkes likelihoods agree", {
     list(k = "gamma", th = c(-1, 0.4, 2.5, 1.0))
   )
   for (cs in cases) {
-    a <- morie:::.hawkes_nll_cpp(cs$th, ev, end_time, cs$k)
-    b <- morie:::.hawkes_nll_pureR(cs$th, ev, end_time, cs$k)
+    a <- rmorie:::.hawkes_nll_cpp(cs$th, ev, end_time, cs$k)
+    b <- rmorie:::.hawkes_nll_pureR(cs$th, ev, end_time, cs$k)
     expect_equal(a, b, tolerance = 1e-6)
   }
 })
@@ -50,7 +50,7 @@ test_that("morie_hawkes_fit reports the Poisson baseline and degeneracy", {
   # the Poisson baseline is exact
   expect_equal(
     fit$loglik_poisson,
-    morie:::.hawkes_loglik_poisson(300, fit$end_time)
+    rmorie:::.hawkes_loglik_poisson(300, fit$end_time)
   )
   # the Hawkes family nests Poisson, so it can never do worse
   expect_gte(fit$loglik_gain, -1e-6)
@@ -66,7 +66,7 @@ test_that("morie_hawkes_fit reports the Poisson baseline and degeneracy", {
 
 test_that("the unconstrained reparameterisation round-trips", {
   for (theta in list(c(-1, 0.4, 1.5), c(0.5, 0.8, 2.0, 1.3))) {
-    phi <- morie:::.hawkes_to_phi(theta)
-    expect_equal(morie:::.hawkes_to_theta(phi), theta, tolerance = 1e-12)
+    phi <- rmorie:::.hawkes_to_phi(theta)
+    expect_equal(rmorie:::.hawkes_to_theta(phi), theta, tolerance = 1e-12)
   }
 })

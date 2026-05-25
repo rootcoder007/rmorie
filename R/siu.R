@@ -485,7 +485,7 @@ morie_siu_index <- function(lang = c("all", "en", "fr", "valid"),
 # so morie_siu_index() can serve the full table.
 .siu_load_manifest_raw <- function() {
   p <- system.file("extdata", "siu_drid_manifest.csv.gz",
-    package = "morie"
+    package = "rmorie"
   )
   if (!nzchar(p) || !file.exists(p)) {
     return(NULL)
@@ -538,7 +538,7 @@ morie_siu_index <- function(lang = c("all", "en", "fr", "valid"),
   }
   shipped <- read_one(system.file("extdata",
     "siu_canonical_overrides.csv.gz",
-    package = "morie"
+    package = "rmorie"
   ))
   user <- if (!is.null(user_cache_dir)) {
     read_one(file.path(
@@ -664,7 +664,7 @@ morie_siu_record_correction <- function(case_number, field,
 # Internal: read the shipped DRID manifest if present. Returns NULL on
 # any failure so the harvester degrades gracefully to a full sweep.
 .siu_load_manifest <- function() {
-  p <- system.file("extdata", "siu_drid_manifest.csv.gz", package = "morie")
+  p <- system.file("extdata", "siu_drid_manifest.csv.gz", package = "rmorie")
   if (!nzchar(p) || !file.exists(p)) {
     return(NULL)
   }

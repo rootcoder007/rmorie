@@ -12,7 +12,7 @@
 #
 # What it tests:
 #   1. install.packages() into a tempdir library succeeds
-#   2. library(morie) loads
+#   2. library(rmorie) loads
 #   3. morie_dataset_catalog() shows the 41-entry catalog
 #   4. Pure-R math functions work on synthetic data (no fs deps)
 #   5. C++ Hawkes fitter works (no fs deps)
@@ -51,7 +51,7 @@ if (inherits(res, "error")) {
 
 # 3. Load
 suppressMessages(library(morie, lib.loc = lib))
-cat("[3/7] library(morie) loaded.\n")
+cat("[3/7] library(rmorie) loaded.\n")
 
 # 4. Catalog visibility (must work without any network or fs)
 cat("[4/7] morie_dataset_catalog():\n")

@@ -195,6 +195,6 @@ test_that("suggest_plan adds survey_weighted_estimates when weight present", {
 
 test_that("internal match returns FALSE for empty name", {
   set.seed(1)
-  expect_false(morie:::.morie_dataset_match("", "id"))
-  expect_true(morie:::.morie_dataset_match("case_id", "id"))
+  expect_false(rmorie:::.morie_dataset_match("", "id"))
+  expect_true(rmorie:::.morie_dataset_match("case_id", "id"))
 })

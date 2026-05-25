@@ -110,7 +110,7 @@ test_that("vines computes partial-correlation matrix and loglik", {
   set.seed(0)
   Sigma <- matrix(c(1, 0.5, 0.3, 0.5, 1, 0.4, 0.3, 0.4, 1), 3)
   z <- MASS::mvrnorm(200, c(0, 0, 0), Sigma)
-  r <- morie:::vines(z)
+  r <- rmorie:::vines(z)
   expect_type(r, "list")
   expect_true(all(c(
     "partial_corr", "R", "loglik", "estimate",
@@ -123,13 +123,13 @@ test_that("vines computes partial-correlation matrix and loglik", {
 })
 
 test_that("vines returns NA estimate when n<3 or d<2", {
-  r <- morie:::vines(matrix(c(1, 2), ncol = 1))
+  r <- rmorie:::vines(matrix(c(1, 2), ncol = 1))
   expect_true(is.na(r$estimate))
   expect_match(r$method, "n<3")
 })
 
 test_that("morie_vine_copula alias is identical to vines", {
-  expect_identical(morie_vine_copula, morie:::vines)
+  expect_identical(morie_vine_copula, rmorie:::vines)
 })
 
 test_that("vrgm returns the documented empirical variogram structure", {
@@ -273,7 +273,7 @@ test_that("morie_wavelet_time_series errors on too-short series", {
 })
 
 test_that("word_embedding looks up rows with a random embedding matrix", {
-  r <- morie:::word_embedding(c(0L, 5L, 99L),
+  r <- rmorie:::word_embedding(c(0L, 5L, 99L),
     vocab_size = 100L,
     d_model = 8L, seed = 1L
   )
@@ -288,15 +288,15 @@ test_that("word_embedding looks up rows with a random embedding matrix", {
 
 test_that("word_embedding accepts a user-supplied embedding matrix", {
   E <- matrix(seq_len(20), nrow = 5, ncol = 4)
-  r <- morie:::word_embedding(c(0L, 4L), E = E)
+  r <- rmorie:::word_embedding(c(0L, 4L), E = E)
   expect_equal(r$tensor[1, ], E[1, ])
   expect_equal(r$tensor[2, ], E[5, ])
 })
 
 test_that("word_embedding errors on out-of-range token ids", {
   E <- matrix(0, nrow = 5, ncol = 3)
-  expect_error(morie:::word_embedding(c(0L, 10L), E = E), "out of range")
-  expect_error(morie:::word_embedding(c(-1L), E = E), "out of range")
+  expect_error(rmorie:::word_embedding(c(0L, 10L), E = E), "out of range")
+  expect_error(rmorie:::word_embedding(c(-1L), E = E), "out of range")
 })
 
 test_that("wnom computes the NOMINATE log-likelihood and GMP", {

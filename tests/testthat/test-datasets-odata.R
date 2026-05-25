@@ -18,13 +18,13 @@ test_that(".morie_dataset_odata_fetch(paginate=FALSE) hits /api/odata/v4/<id> wi
                                           headers = character(),
                                           timeout_s = 60L) {
       capture$urls <- c(capture$urls,
-                         morie:::.morie_dataset_build_url(url, query))
+                         rmorie:::.morie_dataset_build_url(url, query))
       list(value = list(list(id = "1", primary_type = "THEFT"),
                           list(id = "2", primary_type = "BATTERY")),
            `@odata.context` = "https://x/api/odata/v4/$metadata")
     },
-    .package = "morie")
-  out <- morie:::.morie_dataset_odata_fetch(
+    .package = "rmorie")
+  out <- rmorie:::.morie_dataset_odata_fetch(
     "ijzp-q8t2",
     select = "id,primary_type",
     top = 2L)
@@ -48,8 +48,8 @@ test_that(".morie_dataset_odata_fetch strips @odata.* metadata cols from rows", 
                                           timeout_s = 60L) {
       list(value = list(list(id = 1L)))
     },
-    .package = "morie")
-  out <- morie:::.morie_dataset_odata_fetch("ijzp-q8t2")
+    .package = "rmorie")
+  out <- rmorie:::.morie_dataset_odata_fetch("ijzp-q8t2")
   expect_false("@odata.id" %in% names(out))
   expect_true("id" %in% names(out))
   expect_true("primary_type" %in% names(out))
@@ -78,12 +78,12 @@ test_that(".morie_dataset_odata_fetch(paginate=TRUE) follows @odata.nextLink unt
                                           headers = character(),
                                           timeout_s = 60L) {
       capture$urls <- c(capture$urls,
-                         morie:::.morie_dataset_build_url(url, query))
+                         rmorie:::.morie_dataset_build_url(url, query))
       call_count <<- call_count + 1L
       responses[[call_count]]
     },
-    .package = "morie")
-  out <- morie:::.morie_dataset_odata_fetch("ijzp-q8t2",
+    .package = "rmorie")
+  out <- rmorie:::.morie_dataset_odata_fetch("ijzp-q8t2",
                                               paginate = TRUE)
   # 3 requests: initial + 2 nextLinks. The 3rd returns empty -> stop.
   expect_equal(length(capture$urls), 3L)
@@ -104,12 +104,12 @@ test_that(".morie_dataset_odata_fetch(paginate=TRUE) stops when @odata.nextLink 
                                           headers = character(),
                                           timeout_s = 60L) {
       capture$urls <- c(capture$urls,
-                         morie:::.morie_dataset_build_url(url, query))
+                         rmorie:::.morie_dataset_build_url(url, query))
       # Single page, no nextLink -> stop after 1 request.
       list(value = list(list(id = "1"), list(id = "2")))
     },
-    .package = "morie")
-  out <- morie:::.morie_dataset_odata_fetch("ijzp-q8t2",
+    .package = "rmorie")
+  out <- rmorie:::.morie_dataset_odata_fetch("ijzp-q8t2",
                                               paginate = TRUE)
   expect_equal(length(capture$urls), 1L)
   expect_equal(nrow(out), 2L)
@@ -134,8 +134,8 @@ test_that(".morie_dataset_odata_fetch(paginate=TRUE) honours max_features by tru
         responses[[count]]
       }
     }),
-    .package = "morie")
-  out <- morie:::.morie_dataset_odata_fetch("ijzp-q8t2",
+    .package = "rmorie")
+  out <- rmorie:::.morie_dataset_odata_fetch("ijzp-q8t2",
                                               paginate = TRUE,
                                               max_features = 4L)
   expect_equal(nrow(out), 4L)
@@ -152,8 +152,8 @@ test_that(".morie_dataset_odata_fetch sends app_token as X-App-Token header", {
       capture$headers[[length(capture$headers) + 1L]] <- headers
       list(value = list())
     },
-    .package = "morie")
-  morie:::.morie_dataset_odata_fetch("ijzp-q8t2",
+    .package = "rmorie")
+  rmorie:::.morie_dataset_odata_fetch("ijzp-q8t2",
                                        app_token = "tok-odata-xyz")
   expect_equal(capture$headers[[1L]], "X-App-Token: tok-odata-xyz")
 })
@@ -167,11 +167,11 @@ test_that(".morie_dataset_odata_fetch passes $filter verbatim (caller-supplied)"
                                           headers = character(),
                                           timeout_s = 60L) {
       capture$urls <- c(capture$urls,
-                         morie:::.morie_dataset_build_url(url, query))
+                         rmorie:::.morie_dataset_build_url(url, query))
       list(value = list())
     },
-    .package = "morie")
-  morie:::.morie_dataset_odata_fetch(
+    .package = "rmorie")
+  rmorie:::.morie_dataset_odata_fetch(
     "ijzp-q8t2",
     filter = "year eq 2024",
     orderby = "year desc")
@@ -214,7 +214,7 @@ test_that("morie_datasets_chicago_crime_odata(offline=FALSE) routes to .morie_da
                     max_features = max_features)
       data.frame(id = 1L)
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_chicago_crime_odata(
     select = "id,primary_type,year",
     orderby = "year desc",
@@ -242,7 +242,7 @@ test_that("morie_datasets_chicago_crime_odata(resource_id='crimes') routes via p
       seen <<- list(view_id = view_id)
       data.frame()
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_chicago_crime_odata(offline = FALSE,
                                        resource_id = "crimes")
   expect_equal(seen$view_id, "crimes")
@@ -264,7 +264,7 @@ test_that("morie_datasets_chicago_crime_odata forwards paginate + max_pages + ap
                     app_token = app_token, max_features = max_features)
       data.frame()
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_chicago_crime_odata(offline = FALSE,
                                        paginate = TRUE,
                                        max_pages = 50L,

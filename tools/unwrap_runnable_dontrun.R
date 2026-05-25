@@ -18,7 +18,7 @@
 # Usage:  Rscript tools/unwrap_runnable_dontrun.R [--apply]
 
 suppressMessages({
-  library(morie)
+  library(rmorie)
   library(callr)
 })
 
@@ -93,7 +93,7 @@ for (i in seq_along(all_blocks)) {
   status <- tryCatch({
     callr::r(
       function(src) {
-        suppressMessages(library(morie))
+        suppressMessages(library(rmorie))
         set.seed(1)
         eval(parse(text = src), envir = new.env())
         TRUE

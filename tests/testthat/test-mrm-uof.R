@@ -10,58 +10,58 @@
 # ── Numeric helpers ────────────────────────────────────────────────
 
 test_that("gini returns NA on empty / zero-sum", {
-  expect_true(is.na(morie:::.uof_gini(numeric(0))))
-  expect_true(is.na(morie:::.uof_gini(c(0, 0, 0))))
+  expect_true(is.na(rmorie:::.uof_gini(numeric(0))))
+  expect_true(is.na(rmorie:::.uof_gini(c(0, 0, 0))))
 })
 
 test_that("gini is 0 for perfectly equal counts", {
-  expect_lt(morie:::.uof_gini(rep(10, 100)), 0.01)
+  expect_lt(rmorie:::.uof_gini(rep(10, 100)), 0.01)
 })
 
 test_that("gini grows with concentration", {
-  even   <- morie:::.uof_gini(rep(10, 10))
-  uneven <- morie:::.uof_gini(c(rep(1, 9), 90))
+  even   <- rmorie:::.uof_gini(rep(10, 10))
+  uneven <- rmorie:::.uof_gini(c(rep(1, 9), 90))
   expect_gt(uneven, even)
   expect_gt(uneven, 0.5)
 })
 
 test_that("hill_alpha returns NA below threshold or for short input", {
-  expect_true(is.na(morie:::.uof_hill_alpha(c(0.1, 0.2))))
-  expect_true(is.na(morie:::.uof_hill_alpha(numeric(0))))
-  expect_true(is.na(morie:::.uof_hill_alpha(c(1, 1, 1)))) # denom = 0
+  expect_true(is.na(rmorie:::.uof_hill_alpha(c(0.1, 0.2))))
+  expect_true(is.na(rmorie:::.uof_hill_alpha(numeric(0))))
+  expect_true(is.na(rmorie:::.uof_hill_alpha(c(1, 1, 1)))) # denom = 0
 })
 
 test_that("hill_alpha is finite for Pareto-like data", {
   set.seed(1); x <- (1 + 1 / runif(200))^2
-  expect_true(is.finite(morie:::.uof_hill_alpha(x)))
+  expect_true(is.finite(rmorie:::.uof_hill_alpha(x)))
 })
 
 test_that("topk_share collapses to 1.0 when k >= n", {
-  expect_equal(morie:::.uof_topk_share(c(1, 2, 3), 10), 1)
+  expect_equal(rmorie:::.uof_topk_share(c(1, 2, 3), 10), 1)
 })
 
 test_that("topk_share NA on empty / zero sum", {
-  expect_true(is.na(morie:::.uof_topk_share(numeric(0), 5)))
-  expect_true(is.na(morie:::.uof_topk_share(c(0, 0, 0), 5)))
+  expect_true(is.na(rmorie:::.uof_topk_share(numeric(0), 5)))
+  expect_true(is.na(rmorie:::.uof_topk_share(c(0, 0, 0), 5)))
 })
 
 test_that("wilson_ci returns NA on n=0 and finite bounds otherwise", {
-  expect_equal(morie:::.uof_wilson_ci(0L, 0L), c(NA_real_, NA_real_))
-  ci <- morie:::.uof_wilson_ci(5L, 10L)
+  expect_equal(rmorie:::.uof_wilson_ci(0L, 0L), c(NA_real_, NA_real_))
+  ci <- rmorie:::.uof_wilson_ci(5L, 10L)
   expect_true(all(is.finite(ci)) && ci[1] < ci[2] && ci[1] >= 0 && ci[2] <= 1)
 })
 
 test_that("cramers_v NA on degenerate r/c or n=0", {
-  expect_true(is.na(morie:::.uof_cramers_v(10, 100, 1, 2)))
-  expect_true(is.na(morie:::.uof_cramers_v(10, 0, 2, 2)))
-  v <- morie:::.uof_cramers_v(40, 100, 3, 3)
+  expect_true(is.na(rmorie:::.uof_cramers_v(10, 100, 1, 2)))
+  expect_true(is.na(rmorie:::.uof_cramers_v(10, 0, 2, 2)))
+  v <- rmorie:::.uof_cramers_v(40, 100, 3, 3)
   expect_true(is.finite(v) && v > 0)
 })
 
 test_that("fmt_pct handles non-finite", {
-  expect_equal(morie:::.uof_fmt_pct(NA_real_), "n/a")
-  expect_equal(morie:::.uof_fmt_pct(NaN), "n/a")
-  expect_match(morie:::.uof_fmt_pct(0.5), "50.00%")
+  expect_equal(rmorie:::.uof_fmt_pct(NA_real_), "n/a")
+  expect_equal(rmorie:::.uof_fmt_pct(NaN), "n/a")
+  expect_match(rmorie:::.uof_fmt_pct(0.5), "50.00%")
 })
 
 

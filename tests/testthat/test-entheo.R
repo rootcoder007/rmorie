@@ -29,7 +29,7 @@ test_that("load_dmt_imaging errors cleanly without bundled data", {
 
 test_that("beautiful_loop_metric runs on synthetic EEG", {
   eeg <- .make_synthetic_eeg(n_channels = 16L, n_samples = 512L)
-  out <- tryCatch(morie:::beautiful_loop_metric(eeg), error = function(e) e)
+  out <- tryCatch(rmorie:::beautiful_loop_metric(eeg), error = function(e) e)
   if (inherits(out, "error")) {
     skip(sprintf("beautiful_loop_metric error: %s",
                  conditionMessage(out)))
@@ -40,7 +40,7 @@ test_that("beautiful_loop_metric runs on synthetic EEG", {
 test_that("beautiful_loop_metric accepts an optional fMRI matrix", {
   eeg  <- .make_synthetic_eeg(n_channels = 16L, n_samples = 512L)
   fmri <- .make_synthetic_fmri(n_voxels = 50L,  n_volumes = 100L)
-  out  <- tryCatch(morie:::beautiful_loop_metric(eeg, fmri = fmri),
+  out  <- tryCatch(rmorie:::beautiful_loop_metric(eeg, fmri = fmri),
                    error = function(e) e)
   if (inherits(out, "error")) {
     skip(sprintf("beautiful_loop_metric + fmri error: %s",
@@ -51,7 +51,7 @@ test_that("beautiful_loop_metric accepts an optional fMRI matrix", {
 
 test_that("san_score runs on synthetic EEG", {
   eeg <- .make_synthetic_eeg(n_channels = 16L, n_samples = 512L)
-  out <- tryCatch(morie:::san_score(eeg), error = function(e) e)
+  out <- tryCatch(rmorie:::san_score(eeg), error = function(e) e)
   if (inherits(out, "error")) {
     skip(sprintf("san_score error: %s", conditionMessage(out)))
   }
@@ -67,7 +67,7 @@ test_that("preprocess_eeg returns a preprocessed record", {
     data_pcb = .make_synthetic_eeg(n_channels = 8L,
                                     n_samples = 256L, fs = 256L, seed = 2L),
     sfreq = 256))
-  out <- tryCatch(morie:::preprocess_eeg(record), error = function(e) e)
+  out <- tryCatch(rmorie:::preprocess_eeg(record), error = function(e) e)
   if (inherits(out, "error")) {
     skip(sprintf("preprocess_eeg error: %s", conditionMessage(out)))
   }
@@ -80,7 +80,7 @@ test_that("preprocess_fmri returns a preprocessed record", {
     data_pcb = .make_synthetic_fmri(n_voxels = 50L, n_volumes = 100L, seed = 3L),
     motion_fd_mm = runif(100L, 0, 0.4)),
                  tr = 2)
-  out <- tryCatch(morie:::preprocess_fmri(record), error = function(e) e)
+  out <- tryCatch(rmorie:::preprocess_fmri(record), error = function(e) e)
   if (inherits(out, "error")) {
     skip(sprintf("preprocess_fmri error: %s", conditionMessage(out)))
   }

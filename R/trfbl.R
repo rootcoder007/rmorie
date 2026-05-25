@@ -19,7 +19,7 @@
 #' @references Vaswani et al. (2017), NeurIPS.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_trfbl_transformer_block <- function(x, num_heads = 2L, d_ff = NULL,
                                     seed = 0L,

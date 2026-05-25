@@ -82,7 +82,7 @@ test_that("morie_datasets_tps_major_crime(offline=FALSE) dispatches via .morie_d
       expect_match(where, "OCC_YEAR = 2024|1=1")
       stub_df
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_tps_major_crime(year = 2024L,
                                           max_features = 10L)
   expect_s3_class(out, "data.frame")
@@ -103,7 +103,7 @@ test_that("morie_datasets_tps_homicide dispatches via .morie_dataset_tps_fetch",
       expect_match(layer_url, "Homicides")
       stub_df
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_tps_homicide(year = 2023L)
   expect_s3_class(out, "data.frame")
   expect_equal(out$OBJECTID, 1L)
@@ -143,7 +143,7 @@ test_that("morie_datasets_siu_report_text errors when no url + not offline", {
 # ================================================================ siu_fetch.R
 
 test_that(".siu_fetch_parse_case_page returns NA-stub on empty html", {
-  out <- morie:::.siu_fetch_parse_case_page(
+  out <- rmorie:::.siu_fetch_parse_case_page(
     html = "", case_number = "24-OFD-001",
     url = "https://www.siu.on.ca/en/news_template.php?nrid=1")
   expect_type(out, "list")
@@ -160,7 +160,7 @@ test_that(".siu_fetch_parse_case_page extracts incident date + service + decisio
     "Police Service: Toronto Police Service",
     "The director found no reasonable grounds to believe.",
     sep = "\n")
-  out <- morie:::.siu_fetch_parse_case_page(
+  out <- rmorie:::.siu_fetch_parse_case_page(
     html = html, case_number = "24-OFD-001",
     url = "https://example/")
   expect_equal(out$incident_iso,     "2024-01-05")

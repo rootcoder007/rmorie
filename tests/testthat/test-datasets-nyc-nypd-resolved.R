@@ -34,7 +34,7 @@ test_that("default mode='soda2' for NYPD wrappers routes through .morie_dataset_
       soda3 <<- TRUE
       data.frame()
     },
-    .package = "morie",
+    .package = "rmorie",
     code = morie_datasets_nyc_nypd_arrests_ytd(offline = FALSE))
   expect_true(soda2)
   expect_false(soda3)
@@ -51,7 +51,7 @@ test_that("mode='soda3' routes through .morie_dataset_soda3_query with NYC base_
                     app_token = app_token, base_url = base_url)
       data.frame()
     },
-    .package = "morie",
+    .package = "rmorie",
     code = morie_datasets_nyc_nypd_arrests_historic(
       year = 2024L, offline = FALSE,
       mode = "soda3", app_token = "tok-nypd"))
@@ -69,7 +69,7 @@ test_that("NYPD complaint hits cmplnt_fr_dt year filter under both modes", {
       seen_w <<- where
       data.frame()
     },
-    .package = "morie",
+    .package = "rmorie",
     code = morie_datasets_nyc_nypd_complaint_historic(
       year = 2024L, offline = FALSE, mode = "soda2"))
   expect_equal(seen_w, "date_extract_y(cmplnt_fr_dt) = 2024")
@@ -80,7 +80,7 @@ test_that("NYPD complaint hits cmplnt_fr_dt year filter under both modes", {
       seen_s <<- soql
       data.frame()
     },
-    .package = "morie",
+    .package = "rmorie",
     code = morie_datasets_nyc_nypd_complaint_historic(
       year = 2024L, offline = FALSE, mode = "soda3"))
   expect_equal(seen_s, "SELECT * WHERE date_extract_y(cmplnt_fr_dt) = 2024")
@@ -123,7 +123,7 @@ test_that("morie_datasets_nyc_boroughs(mode='soda3') routes via SODA3 + the_geom
                     base_url = base_url)
       data.frame()
     },
-    .package = "morie",
+    .package = "rmorie",
     code = morie_datasets_nyc_boroughs(offline = FALSE,
                                           mode = "soda3"))
   expect_equal(seen$view_id, "gthc-hcne")
@@ -230,7 +230,7 @@ test_that("morie_datasets_nyc_nypd_resolved forwards mode + app_token to by_key"
                     app_token = app_token)
       data.frame(arrest_boro = "M", arrest_precinct = "1")
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_nyc_nypd_resolved(
     "nypd_arrests_ytd",
     offline = FALSE, mode = "soda3",

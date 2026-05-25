@@ -61,7 +61,7 @@ test_that("morie_datasets_tps_arcgis_hub_layers(offline=FALSE) hits the TPS Hub 
                  tags = list("Police"),
                  snippet = "B snippet."))))
     },
-    .package = "morie")
+    .package = "rmorie")
   cat <- morie_datasets_tps_arcgis_hub_layers(offline = FALSE)
   expect_equal(nrow(cat), 2L)
   expect_setequal(cat$title, c("Test Dataset A", "Test Dataset B"))
@@ -73,20 +73,20 @@ test_that("morie_datasets_tps_arcgis_hub_layers(offline=FALSE) hits the TPS Hub 
 test_that(".morie_dataset_tps_hub_resolve(offline=TRUE) finds the FeatureServer URL in the catalog", {
   cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
   pic_id <- cat$hub_id[cat$title == "Persons in Crisis Calls for Service Attended Open Data"]
-  resolved <- morie:::.morie_dataset_tps_hub_resolve(pic_id, offline = TRUE)
+  resolved <- rmorie:::.morie_dataset_tps_hub_resolve(pic_id, offline = TRUE)
   expect_match(resolved, "Persons_in_Crisis")
   expect_match(resolved, "/FeatureServer$")
 })
 
 test_that(".morie_dataset_tps_hub_resolve errors on a non-hex hub_id", {
   expect_error(
-    morie:::.morie_dataset_tps_hub_resolve("not-a-hex", offline = TRUE),
+    rmorie:::.morie_dataset_tps_hub_resolve("not-a-hex", offline = TRUE),
     regexp = "32-char hex GUID")
 })
 
 test_that(".morie_dataset_tps_hub_resolve errors on a hex GUID not in the catalog", {
   expect_error(
-    morie:::.morie_dataset_tps_hub_resolve(
+    rmorie:::.morie_dataset_tps_hub_resolve(
       "ffffffffffffffffffffffffffffffff",
       offline = TRUE),
     regexp = "not in the bundled catalog")
@@ -101,8 +101,8 @@ test_that(".morie_dataset_tps_hub_resolve(offline=FALSE) hits the ArcGIS Online 
       list(url = "https://services.arcgis.com/X/arcgis/rest/services/Foo/FeatureServer",
            title = "Foo", type = "Feature Service")
     },
-    .package = "morie")
-  out <- morie:::.morie_dataset_tps_hub_resolve(
+    .package = "rmorie")
+  out <- rmorie:::.morie_dataset_tps_hub_resolve(
     "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", offline = FALSE)
   expect_match(out, "/Foo/FeatureServer$")
 })
@@ -123,7 +123,7 @@ test_that("morie_datasets_tps_arcgis_hub_by_id(format='json') hits FeatureServer
         list(attributes = list(EVENT_UNIQUE_ID = "AAA", OCC_YEAR = 2024)),
         list(attributes = list(EVENT_UNIQUE_ID = "BBB", OCC_YEAR = 2024))))
     },
-    .package = "morie")
+    .package = "rmorie")
   cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
   pic_id <- cat$hub_id[cat$title == "Persons in Crisis Calls for Service Attended Open Data"]
   df <- morie_datasets_tps_arcgis_hub_by_id(
@@ -141,7 +141,7 @@ test_that("morie_datasets_tps_arcgis_hub_by_id(format='json') returns empty fram
     .morie_dataset_http_json = function(url, query = NULL) {
       list(features = list())
     },
-    .package = "morie")
+    .package = "rmorie")
   cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
   pic_id <- cat$hub_id[cat$title == "Persons in Crisis Calls for Service Attended Open Data"]
   df <- morie_datasets_tps_arcgis_hub_by_id(pic_id, format = "json")
@@ -161,7 +161,7 @@ test_that("morie_datasets_tps_arcgis_hub_by_id(format='geojson') hits FeatureSer
                                   geometry = list(type = "Polygon"),
                                   properties = list(name = "D52"))))
     },
-    .package = "morie")
+    .package = "rmorie")
   cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
   pd_id <- cat$hub_id[cat$title == "Police Divisions"]
   out <- morie_datasets_tps_arcgis_hub_by_id(pd_id, format = "geojson")
@@ -179,7 +179,7 @@ test_that("morie_datasets_tps_arcgis_hub_by_id(format='csv') hits hub.arcgis.com
       expect_equal(query$format, "csv")
       "col_a,col_b\n1,X\n2,Y\n"
     },
-    .package = "morie")
+    .package = "rmorie")
   cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
   ho_id <- cat$hub_id[cat$title == "Homicides Open Data (ASR-RC-TBL-002)"]
   df <- morie_datasets_tps_arcgis_hub_by_id(ho_id, format = "csv")

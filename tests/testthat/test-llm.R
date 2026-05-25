@@ -16,24 +16,24 @@ test_that("env helper returns trimmed value or default", {
   set.seed(1)
   .clean_llm_env()
   Sys.setenv(MORIE_TEST_LLM_ENV = "  hi  ")
-  expect_equal(morie:::.morie_llm_env("MORIE_TEST_LLM_ENV"), "hi")
-  expect_equal(morie:::.morie_llm_env("__no_such__", default = "x"), "x")
+  expect_equal(rmorie:::.morie_llm_env("MORIE_TEST_LLM_ENV"), "hi")
+  expect_equal(rmorie:::.morie_llm_env("__no_such__", default = "x"), "x")
 })
 
 test_that("ollama_base strips trailing slash", {
   set.seed(1)
   .clean_llm_env()
   Sys.setenv(OLLAMA_BASE_URL = "http://x/")
-  expect_equal(morie:::.morie_llm_ollama_base(), "http://x")
+  expect_equal(rmorie:::.morie_llm_ollama_base(), "http://x")
 })
 
 test_that("gemini/openai/api key helpers return NULL when unset", {
   set.seed(1)
   .clean_llm_env()
-  expect_null(morie:::.morie_llm_gemini_key())
-  expect_null(morie:::.morie_llm_openai_key())
-  expect_null(morie:::.morie_llm_api_base())
-  expect_null(morie:::.morie_llm_api_key())
+  expect_null(rmorie:::.morie_llm_gemini_key())
+  expect_null(rmorie:::.morie_llm_openai_key())
+  expect_null(rmorie:::.morie_llm_api_base())
+  expect_null(rmorie:::.morie_llm_api_key())
 })
 
 test_that("probe_ollama caches via options", {
@@ -68,9 +68,9 @@ test_that("detect_provider picks gemini when key set", {
 
 test_that("system_prompt + messages helpers shape correctly", {
   set.seed(1)
-  sp <- morie:::.morie_llm_system_prompt("context")
+  sp <- rmorie:::.morie_llm_system_prompt("context")
   expect_type(sp, "character")
-  msgs <- morie:::.morie_llm_messages("hi", context = list(study = "x"))
+  msgs <- rmorie:::.morie_llm_messages("hi", context = list(study = "x"))
   expect_length(msgs, 2L)
   expect_equal(msgs[[2]]$role, "user")
   expect_equal(msgs[[2]]$content, "hi")
@@ -79,16 +79,16 @@ test_that("system_prompt + messages helpers shape correctly", {
 
 test_that("local_fallback returns informative text", {
   set.seed(1)
-  out <- morie:::.morie_llm_local_fallback("anything")
+  out <- rmorie:::.morie_llm_local_fallback("anything")
   expect_type(out, "character")
   expect_match(out, "local-only")
 })
 
 test_that("extract_text handles empty + valid choices", {
   set.seed(1)
-  expect_equal(morie:::.morie_llm_extract_text(list(choices = list())), "")
+  expect_equal(rmorie:::.morie_llm_extract_text(list(choices = list())), "")
   d <- list(choices = list(list(message = list(content = "yes"))))
-  expect_equal(morie:::.morie_llm_extract_text(d), "yes")
+  expect_equal(rmorie:::.morie_llm_extract_text(d), "yes")
 })
 
 test_that("ask returns local-fallback when provider=local", {
@@ -118,14 +118,14 @@ test_that("messages_to_prompt concatenates role labels", {
     list(role = "user", content = "q"),
     list(role = "assistant", content = "a")
   )
-  out <- morie:::.morie_llm_messages_to_prompt(msgs)
+  out <- rmorie:::.morie_llm_messages_to_prompt(msgs)
   expect_match(out, "System")
   expect_match(out, "Assistant")
 })
 
 test_that("strip_think removes <think> blocks", {
   set.seed(1)
-  out <- morie:::.morie_llm_strip_think("hi  <think>secret</think>  bye")
+  out <- rmorie:::.morie_llm_strip_think("hi  <think>secret</think>  bye")
   expect_type(out, "character")
 })
 
@@ -134,7 +134,7 @@ test_that("freeapi_model honours moriefam env", {
   .clean_llm_env()
   Sys.setenv(moriefam = "myfree:model")
   on.exit(Sys.unsetenv("moriefam"))
-  expect_equal(morie:::.morie_llm_freeapi_model(), "myfree:model")
+  expect_equal(rmorie:::.morie_llm_freeapi_model(), "myfree:model")
 })
 
 test_that("probe_freeapi cached FALSE returns FALSE", {
@@ -189,7 +189,7 @@ test_that("list_freeapi_models routes through http helper (mocked)", {
     .morie_dataset_http_json = function(...) {
       list(data = list(list(id = "mock-model")))
     },
-    .package = "morie"
+    .package = "rmorie"
   )
   res <- tryCatch(morie_llm_list_freeapi_models(), error = function(e) e)
   expect_true(is.data.frame(res) || is.list(res) || inherits(res, "error"))

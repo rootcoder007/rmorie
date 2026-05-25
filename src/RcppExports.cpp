@@ -13,7 +13,7 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 
 // morie_crypto_liboqs_available
 bool morie_crypto_liboqs_available();
-RcppExport SEXP _morie_morie_crypto_liboqs_available() {
+RcppExport SEXP _rmorie_morie_crypto_liboqs_available() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -23,7 +23,7 @@ END_RCPP
 }
 // morie_crypto_liboqs_version
 std::string morie_crypto_liboqs_version();
-RcppExport SEXP _morie_morie_crypto_liboqs_version() {
+RcppExport SEXP _rmorie_morie_crypto_liboqs_version() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -33,7 +33,7 @@ END_RCPP
 }
 // morie_crypto_mlkem768_keygen
 Rcpp::List morie_crypto_mlkem768_keygen();
-RcppExport SEXP _morie_morie_crypto_mlkem768_keygen() {
+RcppExport SEXP _rmorie_morie_crypto_mlkem768_keygen() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -43,7 +43,7 @@ END_RCPP
 }
 // morie_crypto_mlkem768_encaps
 Rcpp::List morie_crypto_mlkem768_encaps(SEXP pk_sxp);
-RcppExport SEXP _morie_morie_crypto_mlkem768_encaps(SEXP pk_sxpSEXP) {
+RcppExport SEXP _rmorie_morie_crypto_mlkem768_encaps(SEXP pk_sxpSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -54,7 +54,7 @@ END_RCPP
 }
 // morie_crypto_mlkem768_decaps
 SEXP morie_crypto_mlkem768_decaps(SEXP sk_sxp, SEXP ct_sxp);
-RcppExport SEXP _morie_morie_crypto_mlkem768_decaps(SEXP sk_sxpSEXP, SEXP ct_sxpSEXP) {
+RcppExport SEXP _rmorie_morie_crypto_mlkem768_decaps(SEXP sk_sxpSEXP, SEXP ct_sxpSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -66,7 +66,7 @@ END_RCPP
 }
 // morie_crypto_mldsa65_keygen
 Rcpp::List morie_crypto_mldsa65_keygen();
-RcppExport SEXP _morie_morie_crypto_mldsa65_keygen() {
+RcppExport SEXP _rmorie_morie_crypto_mldsa65_keygen() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -76,7 +76,7 @@ END_RCPP
 }
 // morie_crypto_mldsa65_sign
 SEXP morie_crypto_mldsa65_sign(SEXP sk_sxp, SEXP message_sxp);
-RcppExport SEXP _morie_morie_crypto_mldsa65_sign(SEXP sk_sxpSEXP, SEXP message_sxpSEXP) {
+RcppExport SEXP _rmorie_morie_crypto_mldsa65_sign(SEXP sk_sxpSEXP, SEXP message_sxpSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -88,7 +88,7 @@ END_RCPP
 }
 // morie_crypto_mldsa65_verify
 bool morie_crypto_mldsa65_verify(SEXP pk_sxp, SEXP message_sxp, SEXP signature_sxp);
-RcppExport SEXP _morie_morie_crypto_mldsa65_verify(SEXP pk_sxpSEXP, SEXP message_sxpSEXP, SEXP signature_sxpSEXP) {
+RcppExport SEXP _rmorie_morie_crypto_mldsa65_verify(SEXP pk_sxpSEXP, SEXP message_sxpSEXP, SEXP signature_sxpSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -101,7 +101,7 @@ END_RCPP
 }
 // morie_crypto_sodium_available
 bool morie_crypto_sodium_available();
-RcppExport SEXP _morie_morie_crypto_sodium_available() {
+RcppExport SEXP _rmorie_morie_crypto_sodium_available() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -111,7 +111,7 @@ END_RCPP
 }
 // morie_crypto_sodium_version
 std::string morie_crypto_sodium_version();
-RcppExport SEXP _morie_morie_crypto_sodium_version() {
+RcppExport SEXP _rmorie_morie_crypto_sodium_version() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -121,7 +121,7 @@ END_RCPP
 }
 // morie_crypto_chacha20poly1305_encrypt
 SEXP morie_crypto_chacha20poly1305_encrypt(SEXP key_sxp, SEXP nonce_sxp, SEXP plaintext_sxp, SEXP aad_sxp);
-RcppExport SEXP _morie_morie_crypto_chacha20poly1305_encrypt(SEXP key_sxpSEXP, SEXP nonce_sxpSEXP, SEXP plaintext_sxpSEXP, SEXP aad_sxpSEXP) {
+RcppExport SEXP _rmorie_morie_crypto_chacha20poly1305_encrypt(SEXP key_sxpSEXP, SEXP nonce_sxpSEXP, SEXP plaintext_sxpSEXP, SEXP aad_sxpSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -135,7 +135,7 @@ END_RCPP
 }
 // morie_crypto_chacha20poly1305_decrypt
 SEXP morie_crypto_chacha20poly1305_decrypt(SEXP key_sxp, SEXP nonce_sxp, SEXP ct_with_tag_sxp, SEXP aad_sxp);
-RcppExport SEXP _morie_morie_crypto_chacha20poly1305_decrypt(SEXP key_sxpSEXP, SEXP nonce_sxpSEXP, SEXP ct_with_tag_sxpSEXP, SEXP aad_sxpSEXP) {
+RcppExport SEXP _rmorie_morie_crypto_chacha20poly1305_decrypt(SEXP key_sxpSEXP, SEXP nonce_sxpSEXP, SEXP ct_with_tag_sxpSEXP, SEXP aad_sxpSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -149,7 +149,7 @@ END_RCPP
 }
 // morie_crypto_hkdf_sha256
 SEXP morie_crypto_hkdf_sha256(SEXP ikm_sxp, SEXP length_sxp, SEXP salt_sxp, SEXP info_sxp);
-RcppExport SEXP _morie_morie_crypto_hkdf_sha256(SEXP ikm_sxpSEXP, SEXP length_sxpSEXP, SEXP salt_sxpSEXP, SEXP info_sxpSEXP) {
+RcppExport SEXP _rmorie_morie_crypto_hkdf_sha256(SEXP ikm_sxpSEXP, SEXP length_sxpSEXP, SEXP salt_sxpSEXP, SEXP info_sxpSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -163,7 +163,7 @@ END_RCPP
 }
 // morie_crypto_random_bytes
 SEXP morie_crypto_random_bytes(int n);
-RcppExport SEXP _morie_morie_crypto_random_bytes(SEXP nSEXP) {
+RcppExport SEXP _rmorie_morie_crypto_random_bytes(SEXP nSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -174,7 +174,7 @@ END_RCPP
 }
 // morie_dsp_lms_cpp
 List morie_dsp_lms_cpp(NumericVector x, NumericVector d, int order, double mu);
-RcppExport SEXP _morie_morie_dsp_lms_cpp(SEXP xSEXP, SEXP dSEXP, SEXP orderSEXP, SEXP muSEXP) {
+RcppExport SEXP _rmorie_morie_dsp_lms_cpp(SEXP xSEXP, SEXP dSEXP, SEXP orderSEXP, SEXP muSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -188,7 +188,7 @@ END_RCPP
 }
 // morie_dsp_nlms_cpp
 List morie_dsp_nlms_cpp(NumericVector x, NumericVector d, int order, double mu, double eps);
-RcppExport SEXP _morie_morie_dsp_nlms_cpp(SEXP xSEXP, SEXP dSEXP, SEXP orderSEXP, SEXP muSEXP, SEXP epsSEXP) {
+RcppExport SEXP _rmorie_morie_dsp_nlms_cpp(SEXP xSEXP, SEXP dSEXP, SEXP orderSEXP, SEXP muSEXP, SEXP epsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -203,7 +203,7 @@ END_RCPP
 }
 // morie_dsp_rls_cpp
 List morie_dsp_rls_cpp(NumericVector x, NumericVector d, int order, double lam, double delta);
-RcppExport SEXP _morie_morie_dsp_rls_cpp(SEXP xSEXP, SEXP dSEXP, SEXP orderSEXP, SEXP lamSEXP, SEXP deltaSEXP) {
+RcppExport SEXP _rmorie_morie_dsp_rls_cpp(SEXP xSEXP, SEXP dSEXP, SEXP orderSEXP, SEXP lamSEXP, SEXP deltaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -218,7 +218,7 @@ END_RCPP
 }
 // morie_dsp_cross_correlation_cpp
 NumericVector morie_dsp_cross_correlation_cpp(NumericVector x, NumericVector y, int max_lag);
-RcppExport SEXP _morie_morie_dsp_cross_correlation_cpp(SEXP xSEXP, SEXP ySEXP, SEXP max_lagSEXP) {
+RcppExport SEXP _rmorie_morie_dsp_cross_correlation_cpp(SEXP xSEXP, SEXP ySEXP, SEXP max_lagSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -231,7 +231,7 @@ END_RCPP
 }
 // morie_dsp_median_filter_cpp
 NumericVector morie_dsp_median_filter_cpp(NumericVector x, int kernel_size);
-RcppExport SEXP _morie_morie_dsp_median_filter_cpp(SEXP xSEXP, SEXP kernel_sizeSEXP) {
+RcppExport SEXP _rmorie_morie_dsp_median_filter_cpp(SEXP xSEXP, SEXP kernel_sizeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -243,7 +243,7 @@ END_RCPP
 }
 // morie_normal_pdf_cpp
 NumericVector morie_normal_pdf_cpp(NumericVector x, double mean, double sd);
-RcppExport SEXP _morie_morie_normal_pdf_cpp(SEXP xSEXP, SEXP meanSEXP, SEXP sdSEXP) {
+RcppExport SEXP _rmorie_morie_normal_pdf_cpp(SEXP xSEXP, SEXP meanSEXP, SEXP sdSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -256,7 +256,7 @@ END_RCPP
 }
 // morie_mean_cpp
 double morie_mean_cpp(NumericVector x);
-RcppExport SEXP _morie_morie_mean_cpp(SEXP xSEXP) {
+RcppExport SEXP _rmorie_morie_mean_cpp(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -267,7 +267,7 @@ END_RCPP
 }
 // morie_var_cpp
 double morie_var_cpp(NumericVector x, int ddof);
-RcppExport SEXP _morie_morie_var_cpp(SEXP xSEXP, SEXP ddofSEXP) {
+RcppExport SEXP _rmorie_morie_var_cpp(SEXP xSEXP, SEXP ddofSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -279,7 +279,7 @@ END_RCPP
 }
 // morie_cor_pearson_cpp
 double morie_cor_pearson_cpp(NumericVector x, NumericVector y);
-RcppExport SEXP _morie_morie_cor_pearson_cpp(SEXP xSEXP, SEXP ySEXP) {
+RcppExport SEXP _rmorie_morie_cor_pearson_cpp(SEXP xSEXP, SEXP ySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -291,7 +291,7 @@ END_RCPP
 }
 // morie_hawkes_ll_exp_const_cpp
 double morie_hawkes_ll_exp_const_cpp(NumericVector t, double T_horizon, double a0, double eta, double beta);
-RcppExport SEXP _morie_morie_hawkes_ll_exp_const_cpp(SEXP tSEXP, SEXP T_horizonSEXP, SEXP a0SEXP, SEXP etaSEXP, SEXP betaSEXP) {
+RcppExport SEXP _rmorie_morie_hawkes_ll_exp_const_cpp(SEXP tSEXP, SEXP T_horizonSEXP, SEXP a0SEXP, SEXP etaSEXP, SEXP betaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -306,7 +306,7 @@ END_RCPP
 }
 // morie_hawkes_ll_weibull_const_cpp
 double morie_hawkes_ll_weibull_const_cpp(NumericVector t, double T_horizon, double a0, double eta, double alpha, double lam);
-RcppExport SEXP _morie_morie_hawkes_ll_weibull_const_cpp(SEXP tSEXP, SEXP T_horizonSEXP, SEXP a0SEXP, SEXP etaSEXP, SEXP alphaSEXP, SEXP lamSEXP) {
+RcppExport SEXP _rmorie_morie_hawkes_ll_weibull_const_cpp(SEXP tSEXP, SEXP T_horizonSEXP, SEXP a0SEXP, SEXP etaSEXP, SEXP alphaSEXP, SEXP lamSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -322,7 +322,7 @@ END_RCPP
 }
 // morie_hawkes_ll_lomax_const_cpp
 double morie_hawkes_ll_lomax_const_cpp(NumericVector t, double T_horizon, double a0, double eta, double alpha, double c);
-RcppExport SEXP _morie_morie_hawkes_ll_lomax_const_cpp(SEXP tSEXP, SEXP T_horizonSEXP, SEXP a0SEXP, SEXP etaSEXP, SEXP alphaSEXP, SEXP cSEXP) {
+RcppExport SEXP _rmorie_morie_hawkes_ll_lomax_const_cpp(SEXP tSEXP, SEXP T_horizonSEXP, SEXP a0SEXP, SEXP etaSEXP, SEXP alphaSEXP, SEXP cSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -338,7 +338,7 @@ END_RCPP
 }
 // morie_hawkes_ll_gamma_const_cpp
 double morie_hawkes_ll_gamma_const_cpp(NumericVector t, double T_horizon, double a0, double eta, double alpha, double beta);
-RcppExport SEXP _morie_morie_hawkes_ll_gamma_const_cpp(SEXP tSEXP, SEXP T_horizonSEXP, SEXP a0SEXP, SEXP etaSEXP, SEXP alphaSEXP, SEXP betaSEXP) {
+RcppExport SEXP _rmorie_morie_hawkes_ll_gamma_const_cpp(SEXP tSEXP, SEXP T_horizonSEXP, SEXP a0SEXP, SEXP etaSEXP, SEXP alphaSEXP, SEXP betaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -354,7 +354,7 @@ END_RCPP
 }
 // morie_hawkes_kernel_density_cpp
 NumericVector morie_hawkes_kernel_density_cpp(NumericVector u, std::string kind, NumericVector psi);
-RcppExport SEXP _morie_morie_hawkes_kernel_density_cpp(SEXP uSEXP, SEXP kindSEXP, SEXP psiSEXP) {
+RcppExport SEXP _rmorie_morie_hawkes_kernel_density_cpp(SEXP uSEXP, SEXP kindSEXP, SEXP psiSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -367,7 +367,7 @@ END_RCPP
 }
 // morie_hawkes_kernel_cdf_cpp
 NumericVector morie_hawkes_kernel_cdf_cpp(NumericVector u, std::string kind, NumericVector psi);
-RcppExport SEXP _morie_morie_hawkes_kernel_cdf_cpp(SEXP uSEXP, SEXP kindSEXP, SEXP psiSEXP) {
+RcppExport SEXP _rmorie_morie_hawkes_kernel_cdf_cpp(SEXP uSEXP, SEXP kindSEXP, SEXP psiSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -380,7 +380,7 @@ END_RCPP
 }
 // morie_hawkes_pair_excitation_sum_cpp
 NumericVector morie_hawkes_pair_excitation_sum_cpp(NumericVector t, double eta, std::string kind, NumericVector psi);
-RcppExport SEXP _morie_morie_hawkes_pair_excitation_sum_cpp(SEXP tSEXP, SEXP etaSEXP, SEXP kindSEXP, SEXP psiSEXP) {
+RcppExport SEXP _rmorie_morie_hawkes_pair_excitation_sum_cpp(SEXP tSEXP, SEXP etaSEXP, SEXP kindSEXP, SEXP psiSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -394,7 +394,7 @@ END_RCPP
 }
 // morie_hawkes_baseline_integral_cpp
 double morie_hawkes_baseline_integral_cpp(double T_horizon, NumericVector alpha, int n_grid);
-RcppExport SEXP _morie_morie_hawkes_baseline_integral_cpp(SEXP T_horizonSEXP, SEXP alphaSEXP, SEXP n_gridSEXP) {
+RcppExport SEXP _rmorie_morie_hawkes_baseline_integral_cpp(SEXP T_horizonSEXP, SEXP alphaSEXP, SEXP n_gridSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -407,7 +407,7 @@ END_RCPP
 }
 // morie_http_get_
 std::string morie_http_get_(std::string url, int timeout_s, Rcpp::CharacterVector headers, std::string user_agent, bool follow_redirects);
-RcppExport SEXP _morie_morie_http_get_(SEXP urlSEXP, SEXP timeout_sSEXP, SEXP headersSEXP, SEXP user_agentSEXP, SEXP follow_redirectsSEXP) {
+RcppExport SEXP _rmorie_morie_http_get_(SEXP urlSEXP, SEXP timeout_sSEXP, SEXP headersSEXP, SEXP user_agentSEXP, SEXP follow_redirectsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -422,7 +422,7 @@ END_RCPP
 }
 // morie_http_get_bytes_
 Rcpp::RawVector morie_http_get_bytes_(std::string url, int timeout_s, Rcpp::CharacterVector headers, std::string user_agent, bool follow_redirects);
-RcppExport SEXP _morie_morie_http_get_bytes_(SEXP urlSEXP, SEXP timeout_sSEXP, SEXP headersSEXP, SEXP user_agentSEXP, SEXP follow_redirectsSEXP) {
+RcppExport SEXP _rmorie_morie_http_get_bytes_(SEXP urlSEXP, SEXP timeout_sSEXP, SEXP headersSEXP, SEXP user_agentSEXP, SEXP follow_redirectsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -437,7 +437,7 @@ END_RCPP
 }
 // morie_http_post_
 std::string morie_http_post_(std::string url, std::string body, std::string content_type, int timeout_s, Rcpp::CharacterVector headers, std::string user_agent, bool follow_redirects);
-RcppExport SEXP _morie_morie_http_post_(SEXP urlSEXP, SEXP bodySEXP, SEXP content_typeSEXP, SEXP timeout_sSEXP, SEXP headersSEXP, SEXP user_agentSEXP, SEXP follow_redirectsSEXP) {
+RcppExport SEXP _rmorie_morie_http_post_(SEXP urlSEXP, SEXP bodySEXP, SEXP content_typeSEXP, SEXP timeout_sSEXP, SEXP headersSEXP, SEXP user_agentSEXP, SEXP follow_redirectsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -454,7 +454,7 @@ END_RCPP
 }
 // morie_http_get_with_status_
 Rcpp::List morie_http_get_with_status_(std::string url, int timeout_s, Rcpp::CharacterVector headers, std::string user_agent, bool follow_redirects);
-RcppExport SEXP _morie_morie_http_get_with_status_(SEXP urlSEXP, SEXP timeout_sSEXP, SEXP headersSEXP, SEXP user_agentSEXP, SEXP follow_redirectsSEXP) {
+RcppExport SEXP _rmorie_morie_http_get_with_status_(SEXP urlSEXP, SEXP timeout_sSEXP, SEXP headersSEXP, SEXP user_agentSEXP, SEXP follow_redirectsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -469,7 +469,7 @@ END_RCPP
 }
 // morie_http_post_with_status_
 Rcpp::List morie_http_post_with_status_(std::string url, std::string body, std::string content_type, int timeout_s, Rcpp::CharacterVector headers, std::string user_agent, bool follow_redirects);
-RcppExport SEXP _morie_morie_http_post_with_status_(SEXP urlSEXP, SEXP bodySEXP, SEXP content_typeSEXP, SEXP timeout_sSEXP, SEXP headersSEXP, SEXP user_agentSEXP, SEXP follow_redirectsSEXP) {
+RcppExport SEXP _rmorie_morie_http_post_with_status_(SEXP urlSEXP, SEXP bodySEXP, SEXP content_typeSEXP, SEXP timeout_sSEXP, SEXP headersSEXP, SEXP user_agentSEXP, SEXP follow_redirectsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -486,7 +486,7 @@ END_RCPP
 }
 // morie_http_curl_version_
 std::string morie_http_curl_version_();
-RcppExport SEXP _morie_morie_http_curl_version_() {
+RcppExport SEXP _rmorie_morie_http_curl_version_() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -496,7 +496,7 @@ END_RCPP
 }
 // morie_matching_mahalanobis_pairs_cpp
 arma::mat morie_matching_mahalanobis_pairs_cpp(const arma::mat& X_t, const arma::mat& X_c, const arma::mat& S_inv);
-RcppExport SEXP _morie_morie_matching_mahalanobis_pairs_cpp(SEXP X_tSEXP, SEXP X_cSEXP, SEXP S_invSEXP) {
+RcppExport SEXP _rmorie_morie_matching_mahalanobis_pairs_cpp(SEXP X_tSEXP, SEXP X_cSEXP, SEXP S_invSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -509,7 +509,7 @@ END_RCPP
 }
 // morie_matching_euclidean_pairs_cpp
 arma::mat morie_matching_euclidean_pairs_cpp(const arma::mat& X_t, const arma::mat& X_c);
-RcppExport SEXP _morie_morie_matching_euclidean_pairs_cpp(SEXP X_tSEXP, SEXP X_cSEXP) {
+RcppExport SEXP _rmorie_morie_matching_euclidean_pairs_cpp(SEXP X_tSEXP, SEXP X_cSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -521,7 +521,7 @@ END_RCPP
 }
 // morie_matching_nn_select_cpp
 List morie_matching_nn_select_cpp(const arma::mat& D, bool with_replacement, double caliper, int n_neighbors);
-RcppExport SEXP _morie_morie_matching_nn_select_cpp(SEXP DSEXP, SEXP with_replacementSEXP, SEXP caliperSEXP, SEXP n_neighborsSEXP) {
+RcppExport SEXP _rmorie_morie_matching_nn_select_cpp(SEXP DSEXP, SEXP with_replacementSEXP, SEXP caliperSEXP, SEXP n_neighborsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -535,7 +535,7 @@ END_RCPP
 }
 // morie_matching_cem_strata_cpp
 IntegerVector morie_matching_cem_strata_cpp(const IntegerMatrix& X_binned);
-RcppExport SEXP _morie_morie_matching_cem_strata_cpp(SEXP X_binnedSEXP) {
+RcppExport SEXP _rmorie_morie_matching_cem_strata_cpp(SEXP X_binnedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -546,7 +546,7 @@ END_RCPP
 }
 // morie_matching_abadie_imbens_kernel_cpp
 double morie_matching_abadie_imbens_kernel_cpp(NumericVector y, IntegerVector t, IntegerVector treated_pos, IntegerVector control_pos);
-RcppExport SEXP _morie_morie_matching_abadie_imbens_kernel_cpp(SEXP ySEXP, SEXP tSEXP, SEXP treated_posSEXP, SEXP control_posSEXP) {
+RcppExport SEXP _rmorie_morie_matching_abadie_imbens_kernel_cpp(SEXP ySEXP, SEXP tSEXP, SEXP treated_posSEXP, SEXP control_posSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -560,7 +560,7 @@ END_RCPP
 }
 // morie_spatial_nominate_iterate_cpp
 Rcpp::List morie_spatial_nominate_iterate_cpp(arma::mat votes, arma::mat X, arma::vec w, arma::mat nv, arma::mat mid, double beta, int max_iter);
-RcppExport SEXP _morie_morie_spatial_nominate_iterate_cpp(SEXP votesSEXP, SEXP XSEXP, SEXP wSEXP, SEXP nvSEXP, SEXP midSEXP, SEXP betaSEXP, SEXP max_iterSEXP) {
+RcppExport SEXP _rmorie_morie_spatial_nominate_iterate_cpp(SEXP votesSEXP, SEXP XSEXP, SEXP wSEXP, SEXP nvSEXP, SEXP midSEXP, SEXP betaSEXP, SEXP max_iterSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -577,7 +577,7 @@ END_RCPP
 }
 // morie_spatial_emirt_theta_update_cpp
 arma::mat morie_spatial_emirt_theta_update_cpp(arma::mat theta, const arma::mat& a, const arma::vec& d, const arma::mat& votes);
-RcppExport SEXP _morie_morie_spatial_emirt_theta_update_cpp(SEXP thetaSEXP, SEXP aSEXP, SEXP dSEXP, SEXP votesSEXP) {
+RcppExport SEXP _rmorie_morie_spatial_emirt_theta_update_cpp(SEXP thetaSEXP, SEXP aSEXP, SEXP dSEXP, SEXP votesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -591,7 +591,7 @@ END_RCPP
 }
 // morie_spatial_smacof_step_cpp
 Rcpp::List morie_spatial_smacof_step_cpp(arma::mat X, const arma::mat& D, arma::mat W);
-RcppExport SEXP _morie_morie_spatial_smacof_step_cpp(SEXP XSEXP, SEXP DSEXP, SEXP WSEXP) {
+RcppExport SEXP _rmorie_morie_spatial_smacof_step_cpp(SEXP XSEXP, SEXP DSEXP, SEXP WSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -604,7 +604,7 @@ END_RCPP
 }
 // morie_spatial_classical_mds_cpp
 Rcpp::List morie_spatial_classical_mds_cpp(const arma::mat& D, int n_dims);
-RcppExport SEXP _morie_morie_spatial_classical_mds_cpp(SEXP DSEXP, SEXP n_dimsSEXP) {
+RcppExport SEXP _rmorie_morie_spatial_classical_mds_cpp(SEXP DSEXP, SEXP n_dimsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -616,7 +616,7 @@ END_RCPP
 }
 // morie_spatial_wordfish_omega_update_cpp
 arma::vec morie_spatial_wordfish_omega_update_cpp(const arma::mat& dtm, const arma::vec& psi, const arma::vec& alpha, const arma::vec& beta, arma::vec omega);
-RcppExport SEXP _morie_morie_spatial_wordfish_omega_update_cpp(SEXP dtmSEXP, SEXP psiSEXP, SEXP alphaSEXP, SEXP betaSEXP, SEXP omegaSEXP) {
+RcppExport SEXP _rmorie_morie_spatial_wordfish_omega_update_cpp(SEXP dtmSEXP, SEXP psiSEXP, SEXP alphaSEXP, SEXP betaSEXP, SEXP omegaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -631,7 +631,7 @@ END_RCPP
 }
 // siu_http_get
 std::string siu_http_get(std::string url, int timeout_s);
-RcppExport SEXP _morie_siu_http_get(SEXP urlSEXP, SEXP timeout_sSEXP) {
+RcppExport SEXP _rmorie_siu_http_get(SEXP urlSEXP, SEXP timeout_sSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -643,7 +643,7 @@ END_RCPP
 }
 // siu_curl_version
 std::string siu_curl_version();
-RcppExport SEXP _morie_siu_curl_version() {
+RcppExport SEXP _rmorie_siu_curl_version() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -653,7 +653,7 @@ END_RCPP
 }
 // siu_http_get_many
 Rcpp::CharacterVector siu_http_get_many(Rcpp::CharacterVector urls, int concurrency, int timeout_s, double rate_rps, int max_retries);
-RcppExport SEXP _morie_siu_http_get_many(SEXP urlsSEXP, SEXP concurrencySEXP, SEXP timeout_sSEXP, SEXP rate_rpsSEXP, SEXP max_retriesSEXP) {
+RcppExport SEXP _rmorie_siu_http_get_many(SEXP urlsSEXP, SEXP concurrencySEXP, SEXP timeout_sSEXP, SEXP rate_rpsSEXP, SEXP max_retriesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -668,7 +668,7 @@ END_RCPP
 }
 // siu_http_get_many_with_status
 Rcpp::List siu_http_get_many_with_status(Rcpp::CharacterVector urls, int concurrency, int timeout_s, double rate_rps, int max_retries);
-RcppExport SEXP _morie_siu_http_get_many_with_status(SEXP urlsSEXP, SEXP concurrencySEXP, SEXP timeout_sSEXP, SEXP rate_rpsSEXP, SEXP max_retriesSEXP) {
+RcppExport SEXP _rmorie_siu_http_get_many_with_status(SEXP urlsSEXP, SEXP concurrencySEXP, SEXP timeout_sSEXP, SEXP rate_rpsSEXP, SEXP max_retriesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -683,7 +683,7 @@ END_RCPP
 }
 // siu_parse_report
 Rcpp::CharacterVector siu_parse_report(std::string html, int drid, std::string url);
-RcppExport SEXP _morie_siu_parse_report(SEXP htmlSEXP, SEXP dridSEXP, SEXP urlSEXP) {
+RcppExport SEXP _rmorie_siu_parse_report(SEXP htmlSEXP, SEXP dridSEXP, SEXP urlSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -696,7 +696,7 @@ END_RCPP
 }
 // siu_parse_news
 Rcpp::CharacterVector siu_parse_news(std::string html, int nrid, std::string url);
-RcppExport SEXP _morie_siu_parse_news(SEXP htmlSEXP, SEXP nridSEXP, SEXP urlSEXP) {
+RcppExport SEXP _rmorie_siu_parse_news(SEXP htmlSEXP, SEXP nridSEXP, SEXP urlSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -709,63 +709,63 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_morie_morie_crypto_liboqs_available", (DL_FUNC) &_morie_morie_crypto_liboqs_available, 0},
-    {"_morie_morie_crypto_liboqs_version", (DL_FUNC) &_morie_morie_crypto_liboqs_version, 0},
-    {"_morie_morie_crypto_mlkem768_keygen", (DL_FUNC) &_morie_morie_crypto_mlkem768_keygen, 0},
-    {"_morie_morie_crypto_mlkem768_encaps", (DL_FUNC) &_morie_morie_crypto_mlkem768_encaps, 1},
-    {"_morie_morie_crypto_mlkem768_decaps", (DL_FUNC) &_morie_morie_crypto_mlkem768_decaps, 2},
-    {"_morie_morie_crypto_mldsa65_keygen", (DL_FUNC) &_morie_morie_crypto_mldsa65_keygen, 0},
-    {"_morie_morie_crypto_mldsa65_sign", (DL_FUNC) &_morie_morie_crypto_mldsa65_sign, 2},
-    {"_morie_morie_crypto_mldsa65_verify", (DL_FUNC) &_morie_morie_crypto_mldsa65_verify, 3},
-    {"_morie_morie_crypto_sodium_available", (DL_FUNC) &_morie_morie_crypto_sodium_available, 0},
-    {"_morie_morie_crypto_sodium_version", (DL_FUNC) &_morie_morie_crypto_sodium_version, 0},
-    {"_morie_morie_crypto_chacha20poly1305_encrypt", (DL_FUNC) &_morie_morie_crypto_chacha20poly1305_encrypt, 4},
-    {"_morie_morie_crypto_chacha20poly1305_decrypt", (DL_FUNC) &_morie_morie_crypto_chacha20poly1305_decrypt, 4},
-    {"_morie_morie_crypto_hkdf_sha256", (DL_FUNC) &_morie_morie_crypto_hkdf_sha256, 4},
-    {"_morie_morie_crypto_random_bytes", (DL_FUNC) &_morie_morie_crypto_random_bytes, 1},
-    {"_morie_morie_dsp_lms_cpp", (DL_FUNC) &_morie_morie_dsp_lms_cpp, 4},
-    {"_morie_morie_dsp_nlms_cpp", (DL_FUNC) &_morie_morie_dsp_nlms_cpp, 5},
-    {"_morie_morie_dsp_rls_cpp", (DL_FUNC) &_morie_morie_dsp_rls_cpp, 5},
-    {"_morie_morie_dsp_cross_correlation_cpp", (DL_FUNC) &_morie_morie_dsp_cross_correlation_cpp, 3},
-    {"_morie_morie_dsp_median_filter_cpp", (DL_FUNC) &_morie_morie_dsp_median_filter_cpp, 2},
-    {"_morie_morie_normal_pdf_cpp", (DL_FUNC) &_morie_morie_normal_pdf_cpp, 3},
-    {"_morie_morie_mean_cpp", (DL_FUNC) &_morie_morie_mean_cpp, 1},
-    {"_morie_morie_var_cpp", (DL_FUNC) &_morie_morie_var_cpp, 2},
-    {"_morie_morie_cor_pearson_cpp", (DL_FUNC) &_morie_morie_cor_pearson_cpp, 2},
-    {"_morie_morie_hawkes_ll_exp_const_cpp", (DL_FUNC) &_morie_morie_hawkes_ll_exp_const_cpp, 5},
-    {"_morie_morie_hawkes_ll_weibull_const_cpp", (DL_FUNC) &_morie_morie_hawkes_ll_weibull_const_cpp, 6},
-    {"_morie_morie_hawkes_ll_lomax_const_cpp", (DL_FUNC) &_morie_morie_hawkes_ll_lomax_const_cpp, 6},
-    {"_morie_morie_hawkes_ll_gamma_const_cpp", (DL_FUNC) &_morie_morie_hawkes_ll_gamma_const_cpp, 6},
-    {"_morie_morie_hawkes_kernel_density_cpp", (DL_FUNC) &_morie_morie_hawkes_kernel_density_cpp, 3},
-    {"_morie_morie_hawkes_kernel_cdf_cpp", (DL_FUNC) &_morie_morie_hawkes_kernel_cdf_cpp, 3},
-    {"_morie_morie_hawkes_pair_excitation_sum_cpp", (DL_FUNC) &_morie_morie_hawkes_pair_excitation_sum_cpp, 4},
-    {"_morie_morie_hawkes_baseline_integral_cpp", (DL_FUNC) &_morie_morie_hawkes_baseline_integral_cpp, 3},
-    {"_morie_morie_http_get_", (DL_FUNC) &_morie_morie_http_get_, 5},
-    {"_morie_morie_http_get_bytes_", (DL_FUNC) &_morie_morie_http_get_bytes_, 5},
-    {"_morie_morie_http_post_", (DL_FUNC) &_morie_morie_http_post_, 7},
-    {"_morie_morie_http_get_with_status_", (DL_FUNC) &_morie_morie_http_get_with_status_, 5},
-    {"_morie_morie_http_post_with_status_", (DL_FUNC) &_morie_morie_http_post_with_status_, 7},
-    {"_morie_morie_http_curl_version_", (DL_FUNC) &_morie_morie_http_curl_version_, 0},
-    {"_morie_morie_matching_mahalanobis_pairs_cpp", (DL_FUNC) &_morie_morie_matching_mahalanobis_pairs_cpp, 3},
-    {"_morie_morie_matching_euclidean_pairs_cpp", (DL_FUNC) &_morie_morie_matching_euclidean_pairs_cpp, 2},
-    {"_morie_morie_matching_nn_select_cpp", (DL_FUNC) &_morie_morie_matching_nn_select_cpp, 4},
-    {"_morie_morie_matching_cem_strata_cpp", (DL_FUNC) &_morie_morie_matching_cem_strata_cpp, 1},
-    {"_morie_morie_matching_abadie_imbens_kernel_cpp", (DL_FUNC) &_morie_morie_matching_abadie_imbens_kernel_cpp, 4},
-    {"_morie_morie_spatial_nominate_iterate_cpp", (DL_FUNC) &_morie_morie_spatial_nominate_iterate_cpp, 7},
-    {"_morie_morie_spatial_emirt_theta_update_cpp", (DL_FUNC) &_morie_morie_spatial_emirt_theta_update_cpp, 4},
-    {"_morie_morie_spatial_smacof_step_cpp", (DL_FUNC) &_morie_morie_spatial_smacof_step_cpp, 3},
-    {"_morie_morie_spatial_classical_mds_cpp", (DL_FUNC) &_morie_morie_spatial_classical_mds_cpp, 2},
-    {"_morie_morie_spatial_wordfish_omega_update_cpp", (DL_FUNC) &_morie_morie_spatial_wordfish_omega_update_cpp, 5},
-    {"_morie_siu_http_get", (DL_FUNC) &_morie_siu_http_get, 2},
-    {"_morie_siu_curl_version", (DL_FUNC) &_morie_siu_curl_version, 0},
-    {"_morie_siu_http_get_many", (DL_FUNC) &_morie_siu_http_get_many, 5},
-    {"_morie_siu_http_get_many_with_status", (DL_FUNC) &_morie_siu_http_get_many_with_status, 5},
-    {"_morie_siu_parse_report", (DL_FUNC) &_morie_siu_parse_report, 3},
-    {"_morie_siu_parse_news", (DL_FUNC) &_morie_siu_parse_news, 3},
+    {"_rmorie_morie_crypto_liboqs_available", (DL_FUNC) &_rmorie_morie_crypto_liboqs_available, 0},
+    {"_rmorie_morie_crypto_liboqs_version", (DL_FUNC) &_rmorie_morie_crypto_liboqs_version, 0},
+    {"_rmorie_morie_crypto_mlkem768_keygen", (DL_FUNC) &_rmorie_morie_crypto_mlkem768_keygen, 0},
+    {"_rmorie_morie_crypto_mlkem768_encaps", (DL_FUNC) &_rmorie_morie_crypto_mlkem768_encaps, 1},
+    {"_rmorie_morie_crypto_mlkem768_decaps", (DL_FUNC) &_rmorie_morie_crypto_mlkem768_decaps, 2},
+    {"_rmorie_morie_crypto_mldsa65_keygen", (DL_FUNC) &_rmorie_morie_crypto_mldsa65_keygen, 0},
+    {"_rmorie_morie_crypto_mldsa65_sign", (DL_FUNC) &_rmorie_morie_crypto_mldsa65_sign, 2},
+    {"_rmorie_morie_crypto_mldsa65_verify", (DL_FUNC) &_rmorie_morie_crypto_mldsa65_verify, 3},
+    {"_rmorie_morie_crypto_sodium_available", (DL_FUNC) &_rmorie_morie_crypto_sodium_available, 0},
+    {"_rmorie_morie_crypto_sodium_version", (DL_FUNC) &_rmorie_morie_crypto_sodium_version, 0},
+    {"_rmorie_morie_crypto_chacha20poly1305_encrypt", (DL_FUNC) &_rmorie_morie_crypto_chacha20poly1305_encrypt, 4},
+    {"_rmorie_morie_crypto_chacha20poly1305_decrypt", (DL_FUNC) &_rmorie_morie_crypto_chacha20poly1305_decrypt, 4},
+    {"_rmorie_morie_crypto_hkdf_sha256", (DL_FUNC) &_rmorie_morie_crypto_hkdf_sha256, 4},
+    {"_rmorie_morie_crypto_random_bytes", (DL_FUNC) &_rmorie_morie_crypto_random_bytes, 1},
+    {"_rmorie_morie_dsp_lms_cpp", (DL_FUNC) &_rmorie_morie_dsp_lms_cpp, 4},
+    {"_rmorie_morie_dsp_nlms_cpp", (DL_FUNC) &_rmorie_morie_dsp_nlms_cpp, 5},
+    {"_rmorie_morie_dsp_rls_cpp", (DL_FUNC) &_rmorie_morie_dsp_rls_cpp, 5},
+    {"_rmorie_morie_dsp_cross_correlation_cpp", (DL_FUNC) &_rmorie_morie_dsp_cross_correlation_cpp, 3},
+    {"_rmorie_morie_dsp_median_filter_cpp", (DL_FUNC) &_rmorie_morie_dsp_median_filter_cpp, 2},
+    {"_rmorie_morie_normal_pdf_cpp", (DL_FUNC) &_rmorie_morie_normal_pdf_cpp, 3},
+    {"_rmorie_morie_mean_cpp", (DL_FUNC) &_rmorie_morie_mean_cpp, 1},
+    {"_rmorie_morie_var_cpp", (DL_FUNC) &_rmorie_morie_var_cpp, 2},
+    {"_rmorie_morie_cor_pearson_cpp", (DL_FUNC) &_rmorie_morie_cor_pearson_cpp, 2},
+    {"_rmorie_morie_hawkes_ll_exp_const_cpp", (DL_FUNC) &_rmorie_morie_hawkes_ll_exp_const_cpp, 5},
+    {"_rmorie_morie_hawkes_ll_weibull_const_cpp", (DL_FUNC) &_rmorie_morie_hawkes_ll_weibull_const_cpp, 6},
+    {"_rmorie_morie_hawkes_ll_lomax_const_cpp", (DL_FUNC) &_rmorie_morie_hawkes_ll_lomax_const_cpp, 6},
+    {"_rmorie_morie_hawkes_ll_gamma_const_cpp", (DL_FUNC) &_rmorie_morie_hawkes_ll_gamma_const_cpp, 6},
+    {"_rmorie_morie_hawkes_kernel_density_cpp", (DL_FUNC) &_rmorie_morie_hawkes_kernel_density_cpp, 3},
+    {"_rmorie_morie_hawkes_kernel_cdf_cpp", (DL_FUNC) &_rmorie_morie_hawkes_kernel_cdf_cpp, 3},
+    {"_rmorie_morie_hawkes_pair_excitation_sum_cpp", (DL_FUNC) &_rmorie_morie_hawkes_pair_excitation_sum_cpp, 4},
+    {"_rmorie_morie_hawkes_baseline_integral_cpp", (DL_FUNC) &_rmorie_morie_hawkes_baseline_integral_cpp, 3},
+    {"_rmorie_morie_http_get_", (DL_FUNC) &_rmorie_morie_http_get_, 5},
+    {"_rmorie_morie_http_get_bytes_", (DL_FUNC) &_rmorie_morie_http_get_bytes_, 5},
+    {"_rmorie_morie_http_post_", (DL_FUNC) &_rmorie_morie_http_post_, 7},
+    {"_rmorie_morie_http_get_with_status_", (DL_FUNC) &_rmorie_morie_http_get_with_status_, 5},
+    {"_rmorie_morie_http_post_with_status_", (DL_FUNC) &_rmorie_morie_http_post_with_status_, 7},
+    {"_rmorie_morie_http_curl_version_", (DL_FUNC) &_rmorie_morie_http_curl_version_, 0},
+    {"_rmorie_morie_matching_mahalanobis_pairs_cpp", (DL_FUNC) &_rmorie_morie_matching_mahalanobis_pairs_cpp, 3},
+    {"_rmorie_morie_matching_euclidean_pairs_cpp", (DL_FUNC) &_rmorie_morie_matching_euclidean_pairs_cpp, 2},
+    {"_rmorie_morie_matching_nn_select_cpp", (DL_FUNC) &_rmorie_morie_matching_nn_select_cpp, 4},
+    {"_rmorie_morie_matching_cem_strata_cpp", (DL_FUNC) &_rmorie_morie_matching_cem_strata_cpp, 1},
+    {"_rmorie_morie_matching_abadie_imbens_kernel_cpp", (DL_FUNC) &_rmorie_morie_matching_abadie_imbens_kernel_cpp, 4},
+    {"_rmorie_morie_spatial_nominate_iterate_cpp", (DL_FUNC) &_rmorie_morie_spatial_nominate_iterate_cpp, 7},
+    {"_rmorie_morie_spatial_emirt_theta_update_cpp", (DL_FUNC) &_rmorie_morie_spatial_emirt_theta_update_cpp, 4},
+    {"_rmorie_morie_spatial_smacof_step_cpp", (DL_FUNC) &_rmorie_morie_spatial_smacof_step_cpp, 3},
+    {"_rmorie_morie_spatial_classical_mds_cpp", (DL_FUNC) &_rmorie_morie_spatial_classical_mds_cpp, 2},
+    {"_rmorie_morie_spatial_wordfish_omega_update_cpp", (DL_FUNC) &_rmorie_morie_spatial_wordfish_omega_update_cpp, 5},
+    {"_rmorie_siu_http_get", (DL_FUNC) &_rmorie_siu_http_get, 2},
+    {"_rmorie_siu_curl_version", (DL_FUNC) &_rmorie_siu_curl_version, 0},
+    {"_rmorie_siu_http_get_many", (DL_FUNC) &_rmorie_siu_http_get_many, 5},
+    {"_rmorie_siu_http_get_many_with_status", (DL_FUNC) &_rmorie_siu_http_get_many_with_status, 5},
+    {"_rmorie_siu_parse_report", (DL_FUNC) &_rmorie_siu_parse_report, 3},
+    {"_rmorie_siu_parse_news", (DL_FUNC) &_rmorie_siu_parse_news, 3},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_morie(DllInfo *dll) {
+RcppExport void R_init_rmorie(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }

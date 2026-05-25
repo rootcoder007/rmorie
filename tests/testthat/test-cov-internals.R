@@ -55,7 +55,7 @@ test_that("entheo_analysis: beautiful_loop_metric / san_score run", {
 
 test_that("entheo_data: load_dmt_imaging covers root / subject branches", {
   res <- tryCatch(
-    morie:::load_dmt_imaging(
+    rmorie:::load_dmt_imaging(
       subject_id = "07",
       root = tempfile("envroot_")
     ),
@@ -63,7 +63,7 @@ test_that("entheo_data: load_dmt_imaging covers root / subject branches", {
   )
   expect_true(inherits(res, "error") || is.list(res))
   res2 <- tryCatch(
-    morie:::load_dmt_imaging(
+    rmorie:::load_dmt_imaging(
       subject_id = NULL,
       root = tempfile("absent_")
     ),
@@ -75,7 +75,7 @@ test_that("entheo_data: load_dmt_imaging covers root / subject branches", {
 test_that("entheo_preprocess: preprocess_eeg / preprocess_fmri run", {
   rec <- .cov_entheo_record(seed = 21L)
   r1 <- tryCatch(
-    morie:::preprocess_eeg(rec,
+    rmorie:::preprocess_eeg(rec,
       bandpass = c(0.5, 45),
       notch = 60, asr_threshold = 1.0
     ),
@@ -83,7 +83,7 @@ test_that("entheo_preprocess: preprocess_eeg / preprocess_fmri run", {
   )
   expect_true(inherits(r1, "error") || is.list(r1))
   r2 <- tryCatch(
-    morie:::preprocess_fmri(rec,
+    rmorie:::preprocess_fmri(rec,
       motion_threshold_mm = 0.05,
       n_noise_components = 3L
     ),
@@ -91,7 +91,7 @@ test_that("entheo_preprocess: preprocess_eeg / preprocess_fmri run", {
   )
   expect_true(inherits(r2, "error") || is.list(r2))
   rec2 <- .cov_entheo_record(seed = 22L, with_pcb = FALSE)
-  r3 <- tryCatch(morie:::preprocess_eeg(rec2), error = function(e) e)
+  r3 <- tryCatch(rmorie:::preprocess_eeg(rec2), error = function(e) e)
   expect_true(inherits(r3, "error") || is.list(r3))
 })
 
@@ -209,7 +209,7 @@ test_that("mrm_tps: levy / moran / recurrence run on varied data", {
 test_that("fast: morie_fast_available + .cpp_available", {
   fa <- morie_fast_available()
   expect_type(fa, "logical")
-  ca <- tryCatch(morie:::.cpp_available(), error = function(e) e)
+  ca <- tryCatch(rmorie:::.cpp_available(), error = function(e) e)
   expect_true(inherits(ca, "error") || is.logical(ca))
 })
 
@@ -290,7 +290,7 @@ test_that("aaa_helpers_det_rng: morie_det_rng + sha helpers", {
   expect_true(is.numeric(s1))
   hx <- morie_det_rng_sha_hex("cov_internals", 7L)
   expect_equal(nchar(hx), 64L)
-  sh <- tryCatch(morie:::.morie_sha256_hex("cov_internals:7"),
+  sh <- tryCatch(rmorie:::.morie_sha256_hex("cov_internals:7"),
     error = function(e) e
   )
   expect_true(inherits(sh, "error") || is.character(sh))

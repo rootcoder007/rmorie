@@ -88,7 +88,7 @@ test_that("morie_irt_spatial alias is identical to irtsp", {
 test_that("isotn produces a monotone increasing fit", {
   x <- 0:9
   y <- c(1, 3, 2, 5, 4, 6, 7, 8, 7, 10)
-  res <- morie:::isotn(x, y)
+  res <- rmorie:::isotn(x, y)
   expect_type(res, "list")
   expect_named(res, c(
     "x_sorted", "fitted", "residuals", "sse", "r2",
@@ -103,24 +103,24 @@ test_that("isotn produces a monotone increasing fit", {
 test_that("isotn supports decreasing fits and explicit weights", {
   x <- 0:9
   y <- c(10, 8, 9, 6, 7, 5, 4, 3, 4, 1)
-  res <- morie:::isotn(x, y, weights = rep(1, 10), increasing = FALSE)
+  res <- rmorie:::isotn(x, y, weights = rep(1, 10), increasing = FALSE)
   expect_true(all(diff(res$fitted) <= 1e-9))
   expect_length(res$residuals, 10L)
 })
 
 test_that("isotn returns NA estimate for too-short input", {
-  res <- morie:::isotn(1, 2)
+  res <- rmorie:::isotn(1, 2)
   expect_identical(res$method, "Isotonic (n<2)")
   expect_true(is.na(res$estimate))
   expect_equal(res$n, 1L)
 })
 
 test_that("morie_isotonic_regression alias is identical to isotn", {
-  expect_identical(morie:::morie_isotonic_regression, morie:::isotn)
+  expect_identical(rmorie:::morie_isotonic_regression, rmorie:::isotn)
 })
 
 test_that("jkest computes jackknife bias and variance for the mean", {
-  res <- morie:::jkest(c(3, 5, 7, 9, 11))
+  res <- rmorie:::jkest(c(3, 5, 7, 9, 11))
   expect_type(res, "list")
   expect_named(res, c(
     "estimate", "theta_hat", "bias", "var", "se",
@@ -135,20 +135,20 @@ test_that("jkest computes jackknife bias and variance for the mean", {
 
 test_that("jkest accepts a custom statistic", {
   set.seed(21)
-  res <- morie:::jkest(rnorm(15), statistic = stats::var)
+  res <- rmorie:::jkest(rnorm(15), statistic = stats::var)
   expect_true(is.finite(res$estimate))
   expect_true(is.finite(res$var) && res$var >= 0)
 })
 
 test_that("jkest returns NA for too-short input", {
-  res <- morie:::jkest(c(4))
+  res <- rmorie:::jkest(c(4))
   expect_identical(res$method, "Jackknife (n<2)")
   expect_true(is.na(res$estimate))
   expect_equal(res$n, 1L)
 })
 
 test_that("morie_jackknife_estimator alias is identical to jkest", {
-  expect_identical(morie:::morie_jackknife_estimator, morie:::jkest)
+  expect_identical(rmorie:::morie_jackknife_estimator, rmorie:::jkest)
 })
 
 test_that("morie_johansen_cointegration runs on a small I(1) system", {

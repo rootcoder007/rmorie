@@ -13,7 +13,7 @@
 #' @references Su et al. (2021), arXiv:2104.09864.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_rotrp_rotary_position_embedding <- function(x, base = 10000) {
   x <- as.matrix(x)

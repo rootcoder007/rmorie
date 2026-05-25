@@ -18,7 +18,7 @@
 # Usage:  Rscript tools/generate_unit_tests.R [--apply]
 
 suppressMessages({
-  library(morie)
+  library(rmorie)
   library(callr)
 })
 
@@ -46,7 +46,7 @@ cat(sprintf("collected %d example calls\n", length(calls)))
 probe <- function(fname, code) {
   callr::r(
     function(src) {
-      suppressMessages(library(morie))
+      suppressMessages(library(rmorie))
       set.seed(1)
       out <- eval(parse(text = src), envir = new.env())
       list(

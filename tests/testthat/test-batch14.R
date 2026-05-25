@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-# test-batch14.R: coverage for mnpbt.R, modules.R, moeml.R, morie-package.R,
+# test-batch14.R: coverage for mnpbt.R, modules.R, moeml.R, rrmorie-package.R,
 #   mrkvr.R, mrm_kulldorff.R, mrm_lisa.R, mrm_mandela_spectrum.R, mrm_otis.R,
 #   mrm_samples.R, mrm_siu.R (rOpenSci #770 coverage campaign)
 
@@ -72,10 +72,10 @@ test_that("modules.R CPADS-data callables are exercised offline-safe", {
   expect_true(TRUE)
 })
 
-test_that("morie:::mixture_of_experts() runs with default gating/experts", {
+test_that("rmorie:::mixture_of_experts() runs with default gating/experts", {
   set.seed(16)
   x <- matrix(rnorm(12L), nrow = 4L, ncol = 3L)
-  res <- morie:::mixture_of_experts(x)
+  res <- rmorie:::mixture_of_experts(x)
   expect_type(res, "list")
   expect_named(res, c("tensor", "gate", "topk_idx", "load", "method"))
   expect_equal(res$method, "MoE")
@@ -86,21 +86,21 @@ test_that("morie:::mixture_of_experts() runs with default gating/experts", {
   expect_true(all(is.finite(res$load)))
 })
 
-test_that("morie:::mixture_of_experts() honours a custom W_gate and top_k", {
+test_that("rmorie:::mixture_of_experts() honours a custom W_gate and top_k", {
   set.seed(17)
   x <- matrix(rnorm(15L), nrow = 5L, ncol = 3L)
   W_gate <- matrix(rnorm(12L), nrow = 3L, ncol = 4L)
-  res <- morie:::mixture_of_experts(x, W_gate = W_gate, top_k = 1L)
+  res <- rmorie:::mixture_of_experts(x, W_gate = W_gate, top_k = 1L)
   expect_equal(dim(res$gate), c(5L, 4L))
   expect_true(all(rowSums(res$gate > 0) == 1L))
   expect_equal(dim(res$topk_idx), c(5L, 1L))
   expect_true(all(res$topk_idx >= 0L & res$topk_idx <= 3L))
 })
 
-test_that("morie:::mixture_of_experts() clamps top_k to the number of experts", {
+test_that("rmorie:::mixture_of_experts() clamps top_k to the number of experts", {
   set.seed(18)
   x <- matrix(rnorm(8L), nrow = 4L, ncol = 2L)
-  res <- morie:::mixture_of_experts(x, top_k = 99L)
+  res <- rmorie:::mixture_of_experts(x, top_k = 99L)
   expect_equal(ncol(res$topk_idx), 2L)
 })
 
@@ -147,17 +147,17 @@ test_that("morie_marker_variance() accepts an explicit fixed-effect design", {
 })
 
 test_that(".haversine_km_mat() returns 0 distance for identical points", {
-  d <- morie:::.haversine_km_mat(43.6, -79.4, 43.6, -79.4)
+  d <- rmorie:::.haversine_km_mat(43.6, -79.4, 43.6, -79.4)
   expect_equal(d, 0)
-  d2 <- morie:::.haversine_km_mat(43.6, -79.4, 43.7, -79.4)
+  d2 <- rmorie:::.haversine_km_mat(43.6, -79.4, 43.7, -79.4)
   expect_true(d2 > 0 && is.finite(d2))
 })
 
 test_that(".poisson_lrt() handles documented degenerate cases", {
-  expect_equal(morie:::.poisson_lrt(0, 1, 0.5, 100), 0.0)
-  expect_equal(morie:::.poisson_lrt(5, 0, 1, 100), 0.0)
-  expect_equal(morie:::.poisson_lrt(3, 10, 5, 100), 0.0)
-  lrt <- morie:::.poisson_lrt(20, 30, 5, 100)
+  expect_equal(rmorie:::.poisson_lrt(0, 1, 0.5, 100), 0.0)
+  expect_equal(rmorie:::.poisson_lrt(5, 0, 1, 100), 0.0)
+  expect_equal(rmorie:::.poisson_lrt(3, 10, 5, 100), 0.0)
+  lrt <- rmorie:::.poisson_lrt(20, 30, 5, 100)
   expect_true(lrt > 0 && is.finite(lrt))
 })
 
@@ -191,7 +191,7 @@ test_that(".knn_weights_lisa() builds a row-normalised weight matrix", {
   set.seed(21)
   lat <- 43.6 + runif(8L) * 0.05
   lon <- -79.4 + runif(8L) * 0.05
-  W <- morie:::.knn_weights_lisa(lat, lon, k = 3L)
+  W <- rmorie:::.knn_weights_lisa(lat, lon, k = 3L)
   expect_equal(dim(W), c(8L, 8L))
   expect_true(all(abs(rowSums(W) - 1) < 1e-8))
   expect_equal(diag(W), rep(0, 8L))
@@ -374,23 +374,23 @@ test_that("mrm_otis_mandela_spectrum() validates inputs", {
 })
 
 test_that(".gini_int() spans the documented [0, 1] range", {
-  expect_equal(morie:::.gini_int(rep(5, 10L)), 0)
-  expect_true(is.na(morie:::.gini_int(numeric(0))))
-  expect_true(is.na(morie:::.gini_int(rep(0, 5L))))
-  g <- morie:::.gini_int(c(1, 1, 1, 100))
+  expect_equal(rmorie:::.gini_int(rep(5, 10L)), 0)
+  expect_true(is.na(rmorie:::.gini_int(numeric(0))))
+  expect_true(is.na(rmorie:::.gini_int(rep(0, 5L))))
+  g <- rmorie:::.gini_int(c(1, 1, 1, 100))
   expect_true(g > 0 && g < 1)
 })
 
 test_that(".hill_mle() returns NA for too-short tails", {
-  expect_true(is.na(morie:::.hill_mle(c(5), x_min = 1)))
-  a <- morie:::.hill_mle(c(2, 4, 8, 16, 32), x_min = 1)
+  expect_true(is.na(rmorie:::.hill_mle(c(5), x_min = 1)))
+  a <- rmorie:::.hill_mle(c(2, 4, 8, 16, 32), x_min = 1)
   expect_true(is.finite(a))
 })
 
 test_that(".cramer_v() handles degenerate tables", {
-  expect_true(is.na(morie:::.cramer_v(matrix(5, 1L, 1L))))
+  expect_true(is.na(rmorie:::.cramer_v(matrix(5, 1L, 1L))))
   tbl <- table(c(1, 1, 0, 0), c(1, 1, 0, 0))
-  v <- morie:::.cramer_v(tbl)
+  v <- rmorie:::.cramer_v(tbl)
   expect_true(is.finite(v) && v >= 0 && v <= 1)
 })
 
@@ -549,10 +549,10 @@ test_that("morie_fetch_tps() and morie_fetch_siu() are network fetchers", {
 })
 
 test_that(".parse_iso() parses ISO dates and tolerates junk", {
-  d <- morie:::.parse_iso(c("2023-01-15", "2024-06-30"))
+  d <- rmorie:::.parse_iso(c("2023-01-15", "2024-06-30"))
   expect_s3_class(d, "Date")
   expect_equal(length(d), 2L)
-  expect_true(is.na(morie:::.parse_iso("not-a-date")))
+  expect_true(is.na(rmorie:::.parse_iso("not-a-date")))
 })
 
 make_siu <- function(n = 60L, seed = 40L) {

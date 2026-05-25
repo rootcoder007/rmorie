@@ -22,7 +22,7 @@ morie_ksr07_kosorok_bootstrap_empirical <- function(x, B = 1000, seed = 0,
   x <- as.numeric(x)
   n <- length(x)
   if (!is.null(deterministic_seed)) {
-    morie::morie_det_rng("ksr07", deterministic_seed)
+    rmorie::morie_det_rng("ksr07", deterministic_seed)
   } else {
     set.seed(seed)
   }

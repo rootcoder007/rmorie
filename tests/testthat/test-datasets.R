@@ -14,31 +14,31 @@ test_that("tps_layers returns a 3-row data.frame with name+url", {
 
 test_that("year_where helper builds canonical SQL", {
   set.seed(1)
-  expect_equal(morie:::.morie_dataset_year_where(NULL), "1=1")
-  expect_equal(morie:::.morie_dataset_year_where(2024), "OCC_YEAR = 2024")
+  expect_equal(rmorie:::.morie_dataset_year_where(NULL), "1=1")
+  expect_equal(rmorie:::.morie_dataset_year_where(2024), "OCC_YEAR = 2024")
 })
 
 test_that("records_to_df handles empty, list, df", {
   set.seed(1)
-  expect_equal(nrow(morie:::.morie_dataset_records_to_df(NULL)), 0L)
-  expect_equal(nrow(morie:::.morie_dataset_records_to_df(list())), 0L)
+  expect_equal(nrow(rmorie:::.morie_dataset_records_to_df(NULL)), 0L)
+  expect_equal(nrow(rmorie:::.morie_dataset_records_to_df(list())), 0L)
   df0 <- data.frame(a = 1:2)
-  expect_identical(morie:::.morie_dataset_records_to_df(df0), df0)
+  expect_identical(rmorie:::.morie_dataset_records_to_df(df0), df0)
   recs <- list(list(a = 1, b = "x"), list(a = 2, b = "y"))
-  out <- morie:::.morie_dataset_records_to_df(recs)
+  out <- rmorie:::.morie_dataset_records_to_df(recs)
   expect_s3_class(out, "data.frame")
   expect_equal(nrow(out), 2L)
 })
 
 test_that("pkg_csv resolves to NA or a real path", {
   set.seed(1)
-  p <- morie:::.morie_dataset_pkg_csv("__no_such_synth__")
+  p <- rmorie:::.morie_dataset_pkg_csv("__no_such_synth__")
   expect_true(is.na(p) || file.exists(p))
 })
 
 test_that("read_synthetic with absent name + columns returns 0-row frame", {
   set.seed(1)
-  out <- morie:::.morie_dataset_read_synthetic(
+  out <- rmorie:::.morie_dataset_read_synthetic(
     "__never_existing__", "xx", columns = c("a", "b")
   )
   expect_s3_class(out, "data.frame")
@@ -49,7 +49,7 @@ test_that("read_synthetic with absent name + columns returns 0-row frame", {
 test_that("read_synthetic with absent name + no columns errors", {
   set.seed(1)
   expect_error(
-    morie:::.morie_dataset_read_synthetic("__never_existing__", "xx"),
+    rmorie:::.morie_dataset_read_synthetic("__never_existing__", "xx"),
     "synthetic"
   )
 })
@@ -72,7 +72,7 @@ test_that("tps_shootings call routes through TPS PSDP helper (mocked)", {
       data.frame(EVENT_UNIQUE_ID = "MOCK-001", OCC_YEAR = 2024L,
                   stringsAsFactors = FALSE)
     },
-    .package = "morie"
+    .package = "rmorie"
   )
   res <- morie_datasets_tps_shootings(year = 2024, max_features = 1L)
   expect_s3_class(res, "data.frame")
@@ -85,7 +85,7 @@ test_that("tps_homicide call routes through TPS PSDP helper (mocked)", {
       data.frame(EVENT_UNIQUE_ID = "MOCK-H01", OCC_YEAR = 2024L,
                   stringsAsFactors = FALSE)
     },
-    .package = "morie"
+    .package = "rmorie"
   )
   res <- morie_datasets_tps_homicide(year = 2024, max_features = 1L)
   expect_s3_class(res, "data.frame")
@@ -122,7 +122,7 @@ test_that("otis_a01 offline returns frame; offline=FALSE goes to live CKAN", {
                  UniqueIndividual_ID = "mock-1",
                  stringsAsFactors = FALSE)
     },
-    .package = "morie",
+    .package = "rmorie",
     code = {
       live <- morie_datasets_otis_a01(offline = FALSE)
       expect_s3_class(live, "data.frame")
@@ -183,7 +183,7 @@ test_that("chicago_crime call routes through socrata get (mocked)", {
     .morie_dataset_http_json = function(url, ...) {
       list(case_number = "MOCK1", year = "2024")
     },
-    .package = "morie"
+    .package = "rmorie"
   )
   res <- tryCatch(
     morie_datasets_chicago_crime(year = 2024, max_features = 1L),
@@ -236,7 +236,7 @@ test_that("ckan_search routes through http_json helper (mocked)", {
       list(result = list(results = list(
         list(id = "mock-pkg-1", title = "Mocked Corrections Dataset"))))
     },
-    .package = "morie"
+    .package = "rmorie"
   )
   res <- morie_datasets_ckan_search("https://open.canada.ca/data", "corrections", rows = 1L)
   expect_s3_class(res, "data.frame")
@@ -249,7 +249,7 @@ test_that("ckan_package routes through http helpers (mocked)", {
     .morie_dataset_http_json = function(url, ...) {
       list(result = list(resources = list()))
     },
-    .package = "morie"
+    .package = "rmorie"
   )
   res <- morie_datasets_ckan_package("https://open.canada.ca/data", "__no_pkg__")
   expect_type(res, "list")

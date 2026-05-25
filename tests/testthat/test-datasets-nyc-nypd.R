@@ -166,7 +166,7 @@ test_that("each NYPD wrapper auto-resolves canonical resource_id from registry o
                        R$rid))
         data.frame(stub = 1L)
       },
-      .package = "morie",
+      .package = "rmorie",
       code = R$fn(offline = FALSE))
     expect_s3_class(out, "data.frame")
   }
@@ -183,7 +183,7 @@ test_that("year filter emits the right SoQL $where for date-column datasets", {
       expect_equal(where, "date_extract_y(arrest_date) = 2024")
       data.frame(stub = 1L)
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_nyc_nypd_arrests_historic(year = 2024L,
                                                     offline = FALSE)
   expect_s3_class(out, "data.frame")
@@ -200,7 +200,7 @@ test_that("year filter for hate_crimes uses complaint_year_number (no date_extra
       expect_equal(where, "complaint_year_number = 2023")
       data.frame(stub = 1L)
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_nyc_nypd_hate_crimes(year = 2023L,
                                                offline = FALSE)
   expect_s3_class(out, "data.frame")
@@ -217,7 +217,7 @@ test_that("year filter is omitted for uof_subjects (no date column)", {
       expect_null(where)
       data.frame(stub = 1L)
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_nyc_nypd_uof_subjects(year = 2024L,
                                                 offline = FALSE)
   expect_s3_class(out, "data.frame")
@@ -234,7 +234,7 @@ test_that("resource_id override is honoured", {
       expect_match(url, "override-nypd-xyz\\.json$")
       data.frame(stub = 1L)
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_nyc_nypd_arrests_historic(
     offline = FALSE, resource_id = "override-nypd-xyz")
   expect_s3_class(out, "data.frame")
@@ -260,7 +260,7 @@ test_that("morie_datasets_nyc_nypd_by_key dispatches to mocked Socrata on live",
       expect_match(url, "f4tj-796d\\.json$")
       data.frame(stub = 1L)
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_nyc_nypd_by_key("nypd_uof_incidents",
                                           offline = FALSE)
   expect_s3_class(out, "data.frame")

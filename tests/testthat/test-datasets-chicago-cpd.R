@@ -52,7 +52,7 @@ test_that("morie_datasets_chicago_arrests(offline=FALSE) dispatches via mocked S
       expect_equal(max_features, 50L)
       stub
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_chicago_arrests(year = 2024L,
                                           max_features = 50L,
                                           offline = FALSE)
@@ -71,7 +71,7 @@ test_that("morie_datasets_chicago_arrests(offline=FALSE) honours alias resource_
                    "data\\.cityofchicago\\.org/resource/arrests\\.json$")
       data.frame(cb_no = "ALIAS")
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_chicago_arrests(offline = FALSE,
                                           resource_id = "arrests")
   expect_equal(out$cb_no, "ALIAS")
@@ -90,7 +90,7 @@ test_that("morie_datasets_chicago_arrests forwards paginate + page_size", {
                     max_pages = max_pages)
       data.frame(cb_no = "STUB")
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_chicago_arrests(offline = FALSE,
                                    paginate = TRUE,
                                    page_size = 5000L,
@@ -111,7 +111,7 @@ test_that("morie_datasets_chicago_arrests(offline=FALSE) sends NULL where when y
       expect_null(where)
       data.frame(cb_no = "NOFILT")
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_chicago_arrests(offline = FALSE)
   expect_equal(out$cb_no, "NOFILT")
 })
@@ -153,7 +153,7 @@ test_that("morie_datasets_cpd_public_arrests(offline=FALSE) hits .morie_dataset_
       seen_url <<- url
       raw_csv
     },
-    .package = "morie")
+    .package = "rmorie")
   df <- morie_datasets_cpd_public_arrests(
     offline = FALSE,
     url = "https://www.chicagopolice.org/wp-content/uploads/PublicReleaseArrestDataUPDATE.csv")
@@ -172,7 +172,7 @@ test_that("morie_datasets_cpd_public_arrests(offline=FALSE) honours max_features
     "14,1424,2016,11,BLK,06,S3,D3,A,M\n")
   testthat::local_mocked_bindings(
     .morie_dataset_http_text = function(url, query = NULL) raw_csv,
-    .package = "morie")
+    .package = "rmorie")
   df <- morie_datasets_cpd_public_arrests(
     offline = FALSE,
     url = "https://x.test/y.csv",
@@ -234,7 +234,7 @@ test_that("morie_datasets_chicago_police_beats(offline=FALSE, geometry=FALSE) re
       data.frame(beat_num = "1234", beat = "3",
                   sector = "2", district = "12")
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_chicago_police_beats(offline = FALSE)
   expect_equal(out$beat_num, "1234")
 })
@@ -253,7 +253,7 @@ test_that("morie_datasets_chicago_police_beats(offline=FALSE, geometry=TRUE) dro
                   beat = "3", sector = "2", district = "12",
                   stringsAsFactors = FALSE)
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_chicago_police_beats(offline = FALSE,
                                                geometry = TRUE)
   expect_true("the_geom" %in% names(out))
@@ -272,7 +272,7 @@ test_that("morie_datasets_chicago_police_beats forwards paginate args", {
                     max_pages = max_pages)
       data.frame(beat_num = "STUB")
     },
-    .package = "morie")
+    .package = "rmorie")
   morie_datasets_chicago_police_beats(offline = FALSE,
                                         paginate = TRUE,
                                         page_size = 277L,
@@ -314,7 +314,7 @@ test_that("morie_datasets_chicago_police_districts(offline=FALSE, geometry=FALSE
                    "data\\.cityofchicago\\.org/resource/24zt-jpfn\\.json\\?\\$select=dist_num,dist_label$")
       data.frame(dist_num = "1", dist_label = "1ST")
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_chicago_police_districts(offline = FALSE)
   expect_equal(out$dist_label, "1ST")
 })
@@ -330,7 +330,7 @@ test_that("morie_datasets_chicago_police_districts honours resource_id override"
       expect_match(url, "override-pd-xyz\\.json")
       data.frame(dist_num = "0", dist_label = "OVERRIDE")
     },
-    .package = "morie")
+    .package = "rmorie")
   out <- morie_datasets_chicago_police_districts(
     offline = FALSE,
     resource_id = "override-pd-xyz")

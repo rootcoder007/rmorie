@@ -5,7 +5,7 @@
 # and skipped on CRAN / offline machines.
 
 test_that(".morie_url_with_params builds and encodes query strings", {
-  f <- morie:::.morie_url_with_params
+  f <- rmorie:::.morie_url_with_params
   expect_equal(f("http://x/a"), "http://x/a")
   expect_equal(f("http://x/a", NULL), "http://x/a")
   expect_equal(f("http://x/a", list(q = "b")), "http://x/a?q=b")
@@ -16,7 +16,7 @@ test_that(".morie_url_with_params builds and encodes query strings", {
 })
 
 test_that(".morie_ckan_portal resolves names and passes through URLs", {
-  f <- morie:::.morie_ckan_portal
+  f <- rmorie:::.morie_ckan_portal
   expect_equal(f("open.canada.ca"), "https://open.canada.ca/data/en")
   expect_equal(f("data.ontario.ca"), "https://data.ontario.ca")
   expect_equal(
@@ -27,7 +27,7 @@ test_that(".morie_ckan_portal resolves names and passes through URLs", {
 })
 
 test_that(".morie_detect_format falls back to the URL extension", {
-  f <- morie:::.morie_detect_format
+  f <- rmorie:::.morie_detect_format
   # file:// URLs carry no Content-Type header -> extension fallback.
   expect_equal(f("file:///tmp/x.csv"), "csv")
   expect_equal(f("file:///tmp/x.json"), "json")

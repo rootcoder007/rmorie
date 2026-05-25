@@ -13,7 +13,7 @@
 #' @references Schabenberger & Gotway (2005), Ch 8.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 stkrg <- function(x, coords, times, target,
                   sill = 1, nugget = 0, range_s = 1, range_t = 1) {

@@ -40,7 +40,7 @@ test_that("morie_siu_cache_path default lives under tempdir", {
 
 test_that(".siu_fetch_resolve_url absolutizes relative", {
   set.seed(1)
-  out <- morie:::.siu_fetch_resolve_url(
+  out <- rmorie:::.siu_fetch_resolve_url(
     "case_summary_details.php?drid=42",
     "https://www.siu.on.ca/en/directors_reports.php")
   expect_match(out, "^https://www\\.siu\\.on\\.ca/en/")
@@ -49,7 +49,7 @@ test_that(".siu_fetch_resolve_url absolutizes relative", {
 
 test_that(".siu_fetch_resolve_url passes through absolute URLs", {
   set.seed(1)
-  out <- morie:::.siu_fetch_resolve_url(
+  out <- rmorie:::.siu_fetch_resolve_url(
     "https://other.example/foo",
     "https://www.siu.on.ca/")
   expect_equal(out, "https://other.example/foo")
@@ -57,14 +57,14 @@ test_that(".siu_fetch_resolve_url passes through absolute URLs", {
 
 test_that(".siu_fetch_to_iso parses 'Month D, YYYY'", {
   set.seed(1)
-  expect_equal(morie:::.siu_fetch_to_iso("March 5, 2022"),
+  expect_equal(rmorie:::.siu_fetch_to_iso("March 5, 2022"),
                "2022-03-05")
 })
 
 test_that(".siu_fetch_to_iso returns empty string on miss", {
   set.seed(1)
-  expect_equal(morie:::.siu_fetch_to_iso(""), "")
-  expect_equal(morie:::.siu_fetch_to_iso("not a date"), "")
+  expect_equal(rmorie:::.siu_fetch_to_iso(""), "")
+  expect_equal(rmorie:::.siu_fetch_to_iso("not a date"), "")
 })
 
 
@@ -79,7 +79,7 @@ test_that("extract_links returns case_number/url pairs from index HTML", {
     '<a href="case_summary_details.php?drid=11">22-OCI-001</a>',
     '<a href="case_summary_details.php?drid=12">22-OCI-002</a>',
     '</body></html>')
-  m <- morie:::.siu_fetch_extract_links(
+  m <- rmorie:::.siu_fetch_extract_links(
     idx, "https://www.siu.on.ca/en/directors_reports.php")
   expect_true(is.matrix(m) || is.data.frame(m))
   expect_true(nrow(m) >= 1L)
@@ -89,7 +89,7 @@ test_that("extract_links returns case_number/url pairs from index HTML", {
 
 test_that("extract_links returns empty matrix on no anchors", {
   set.seed(1)
-  m <- morie:::.siu_fetch_extract_links(
+  m <- rmorie:::.siu_fetch_extract_links(
     "<html></html>", "https://x/")
   expect_true(nrow(m) == 0L)
   expect_equal(colnames(m), c("case_number", "url"))
@@ -102,7 +102,7 @@ test_that("extract_links returns empty matrix on no anchors", {
 
 test_that("parse_case_page returns the 7-key schema on empty HTML", {
   set.seed(1)
-  rec <- morie:::.siu_fetch_parse_case_page("", "22-OCI-001",
+  rec <- rmorie:::.siu_fetch_parse_case_page("", "22-OCI-001",
                                             "https://x/y")
   expect_type(rec, "list")
   expect_equal(rec$case_number, "22-OCI-001")
@@ -119,7 +119,7 @@ test_that("parse_case_page parses dates from a small HTML fixture", {
     "Director's Decision: November 1, 2022 ",
     "Police Service: Toronto Police Service ",
     "no reasonable grounds")
-  rec <- morie:::.siu_fetch_parse_case_page(h, "22-OCI-002",
+  rec <- rmorie:::.siu_fetch_parse_case_page(h, "22-OCI-002",
                                             "https://x/y")
   expect_equal(rec$incident_iso, "2022-03-05")
   expect_equal(rec$notification_iso, "2022-03-06")
@@ -131,7 +131,7 @@ test_that("parse_case_page parses dates from a small HTML fixture", {
 
 test_that("parse_case_page tolerates partial matches", {
   set.seed(1)
-  rec <- morie:::.siu_fetch_parse_case_page(
+  rec <- rmorie:::.siu_fetch_parse_case_page(
     "Incident: April 1, 2023",
     "22-OCI-003", "https://x/z")
   expect_equal(rec$incident_iso, "2023-04-01")
@@ -141,7 +141,7 @@ test_that("parse_case_page tolerates partial matches", {
 
 test_that("parse_case_page director_decision_text captures 'charges were laid'", {
   set.seed(1)
-  rec <- morie:::.siu_fetch_parse_case_page(
+  rec <- rmorie:::.siu_fetch_parse_case_page(
     "All evidence reviewed, charges were laid in this matter.",
     "22-OCI-004", "https://x/q")
   expect_true(grepl("charges", rec$director_decision_text,
@@ -194,7 +194,7 @@ test_that("fetch_cases returns a CSV path with the mocked SIU HTTP layer", {
     .siu_fetch_http_get = function(url, ...) {
       if (grepl("case_summary_details", url)) detail_html else index_html
     },
-    .package = "morie"
+    .package = "rmorie"
   )
   set.seed(1)
   d <- tempfile("siu_mock_")
@@ -218,7 +218,7 @@ test_that("fetch_dataframe returns a parsed data.frame via the mocked HTTP layer
         "<html><body><p>case detail body</p></body></html>"
       else index_html
     },
-    .package = "morie"
+    .package = "rmorie"
   )
   set.seed(1)
   d <- tempfile("siu_mock_df_")
@@ -238,7 +238,7 @@ test_that(".siu_fetch_http_get errors on a clearly unreachable host (offline-fri
   # 192.0.2.0/24 is TEST-NET-1 -- reserved for documentation; will not
   # route. Confirms the error path is reachable without leaking out.
   res <- tryCatch(
-    morie:::.siu_fetch_http_get(
+    rmorie:::.siu_fetch_http_get(
       "http://192.0.2.123/never-routes", timeout_s = 2L),
     error = function(e) e
   )

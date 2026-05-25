@@ -27,7 +27,7 @@
 #'   r2, n, K, method}.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_midas_regression <- function(x, y, K = NULL) {
   Y <- as.numeric(y)

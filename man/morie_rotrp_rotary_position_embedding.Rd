@@ -26,7 +26,7 @@ Each pair (2i, 2i+1) is rotated by
 }
 \examples{
 # See the package vignettes for usage examples:
-#   vignette(package = "morie")
+#   vignette(package = "rmorie")
 }
 \references{
 Su et al. (2021), arXiv:2104.09864.

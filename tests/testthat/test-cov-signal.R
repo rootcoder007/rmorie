@@ -31,7 +31,7 @@ test_that(".morie_py_call builds the bridge command and shells out", {
       "bridge-result"
     }, .package = "base"
   )
-  out <- morie:::.morie_py_call("hfd", c(1, 2, 3), 10L)
+  out <- rmorie:::.morie_py_call("hfd", c(1, 2, 3), 10L)
   expect_equal(out, "bridge-result")
   # a multi-element numeric arg is formatted as [1,2,3]
   expect_true(any(grepl("[1,2,3]", captured, fixed = TRUE)))
@@ -56,7 +56,7 @@ test_that("filters fall back to the Python bridge without the signal pkg", {
   )
   testthat::local_mocked_bindings(
     .morie_py_call = function(fn_name, ...) paste0("bridge:", fn_name),
-    .package = "morie"
+    .package = "rmorie"
   )
   expect_equal(buttlp(1:10, 100, 10), "bridge:buttlp")
   expect_equal(butthp(1:10, 100, 10), "bridge:butthp")
@@ -74,7 +74,7 @@ test_that("morie_hurst_r falls back to the Python bridge without pracma", {
   )
   testthat::local_mocked_bindings(
     .morie_py_call = function(fn_name, ...) "bridge:hurst",
-    .package = "morie"
+    .package = "rmorie"
   )
   expect_equal(morie_hurst_r(cumsum(stats::rnorm(64))), "bridge:hurst")
 })

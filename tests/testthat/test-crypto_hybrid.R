@@ -64,6 +64,6 @@ test_that("hybrid_decrypt validates inputs then surfaces not-implemented", {
 
 test_that(".morie_wrapping_key produces 32 bytes", {
   set.seed(1)
-  out <- morie:::.morie_wrapping_key(as.raw(1:8), as.raw(9:16))
+  out <- rmorie:::.morie_wrapping_key(as.raw(1:8), as.raw(9:16))
   expect_equal(length(out), 32L)
 })

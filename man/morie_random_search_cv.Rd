@@ -44,5 +44,5 @@ Uses \code{caret::train} with \code{search = "random"}.
 }
 \examples{
 # See the package vignettes for usage examples:
-#   vignette(package = "morie")
+#   vignette(package = "rmorie")
 }

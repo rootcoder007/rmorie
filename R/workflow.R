@@ -41,7 +41,7 @@ validate_workflow_map <- function(script_map) {
 #' @return Named list with step metadata and exit status.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_run_workflow_step <- function(
   step,

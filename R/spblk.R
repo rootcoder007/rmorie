@@ -15,7 +15,7 @@
 #' @references Schabenberger & Gotway (2005), Ch 4.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 spblk <- function(x, coords, blocks, n_quad = 25,
                   nugget = 0, sill = 1, range_ = 1) {

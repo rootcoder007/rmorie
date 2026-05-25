@@ -125,7 +125,7 @@ morie_datasets_chicago_socrata_by_id <- function(soda_id,
       fname),
       call. = FALSE)
   }
-  path <- system.file("extdata", fname, package = "morie")
+  path <- system.file("extdata", fname, package = "rmorie")
   if (!nzchar(path))
     stop(sprintf("bundled bulk catalog missing: %s", fname),
           call. = FALSE)

@@ -34,7 +34,7 @@
 #'   Pass \code{NULL} to mean "no live path".
 #' @param bundled_name Character; the bundled fixture stem (without
 #'   \code{.csv}). The file is looked up via
-#'   \code{system.file("extdata", paste0(bundled_name, ".csv"), package = "morie")}.
+#'   \code{system.file("extdata", paste0(bundled_name, ".csv"), package = "rmorie")}.
 #'   Pass \code{NULL} or \code{NA_character_} to mean "no bundled
 #'   fixture".
 #' @param synth_fn A function that returns the synthetic frame. Pass
@@ -62,7 +62,7 @@
         !nzchar(bundled_name)) return(NULL)
     path <- system.file("extdata",
                         paste0(bundled_name, ".csv"),
-                        package = "morie")
+                        package = "rmorie")
     if (!nzchar(path) || !file.exists(path)) return(NULL)
     out <- tryCatch(utils::read.csv(path,
                                      check.names = FALSE,

@@ -44,7 +44,7 @@
 }
 
 test_that(".siu_parse_report extracts the 64-column schema", {
-  r <- morie:::.siu_parse_report(
+  r <- rmorie:::.siu_parse_report(
     .fake_siu_report(), 4242L,
     "http://x/drid=4242"
   )
@@ -69,7 +69,7 @@ test_that(".siu_parse_report extracts the 64-column schema", {
 })
 
 test_that(".siu_parse_report handles an empty / non-existent drid page", {
-  r <- morie:::.siu_parse_report(
+  r <- rmorie:::.siu_parse_report(
     "<html><body></body></html>", 7L,
     "http://x/drid=7"
   )
@@ -79,7 +79,7 @@ test_that(".siu_parse_report handles an empty / non-existent drid page", {
 })
 
 test_that(".siu_parse_news extracts title, date and summary", {
-  n <- morie:::.siu_parse_news(
+  n <- rmorie:::.siu_parse_news(
     .fake_siu_news(), 999L,
     "http://x/nrid=999"
   )
@@ -95,7 +95,7 @@ test_that(".siu_parse_report recognises a non-binary affected person", {
     .fake_siu_report(),
     fixed = TRUE
   )
-  r <- morie:::.siu_parse_report(html, 1L, "http://x")
+  r <- rmorie:::.siu_parse_report(html, 1L, "http://x")
   expect_equal(r[["sex_gender_affected"]], "Non-binary")
 })
 
@@ -104,9 +104,9 @@ test_that(".siu_discover_max_drid parses the index and adds a margin", {
     .siu_http_get = function(url, ...) {
       "<tr class=\"dr-item\" id=\"5090\"><tr class=\"dr-item\" id=\"5094\">"
     },
-    .package = "morie"
+    .package = "rmorie"
   )
-  expect_equal(morie:::.siu_discover_max_drid(margin = 10L), 5104L)
+  expect_equal(rmorie:::.siu_discover_max_drid(margin = 10L), 5104L)
 })
 
 test_that("morie_fetch_siu assembles one row per case (offline, mocked)", {
@@ -130,7 +130,7 @@ test_that("morie_fetch_siu assembles one row per case (offline, mocked)", {
         }
       }, character(1), USE.NAMES = FALSE)
     },
-    .package = "morie"
+    .package = "rmorie"
   )
   out <- morie_fetch_siu(
     cache_dir = tempfile("siu-"), overwrite = TRUE,
@@ -160,7 +160,7 @@ test_that("morie_fetch_siu returns the cached path without re-fetching", {
 })
 
 test_that(".siu_curl_version reports a libcurl build string", {
-  v <- morie:::.siu_curl_version()
+  v <- rmorie:::.siu_curl_version()
   expect_type(v, "character")
   expect_match(v, "libcurl", fixed = TRUE)
 })
@@ -168,7 +168,7 @@ test_that(".siu_curl_version reports a libcurl build string", {
 test_that(".siu_http_get / .siu_http_get_many fetch over the network", {
   testthat::skip_if_offline("www.siu.on.ca")
   one <- tryCatch(
-    morie:::.siu_http_get(
+    rmorie:::.siu_http_get(
       "https://www.siu.on.ca/en/directors_report_details.php?drid=5080"
     ),
     error = function(e) ""
@@ -187,7 +187,7 @@ test_that(".siu_http_get / .siu_http_get_many fetch over the network", {
   skip_if(nchar(one) < 1000, "SIU site unreachable or degraded")
   expect_true(nchar(one) > 1000)
   many <- tryCatch(
-    morie:::.siu_http_get_many(sprintf(
+    rmorie:::.siu_http_get_many(sprintf(
       "https://www.siu.on.ca/en/directors_report_details.php?drid=%d",
       5080:5083
     ), 4L),
@@ -219,7 +219,7 @@ test_that("morie_fetch_siu runs end-to-end, one row per case (network)", {
 test_that(".siu_http_get_many_with_status returns parallel slots", {
   # Offline-safe: a length-zero URL vector should still return the
   # three-slot list shape, exercising the C++ early-return path.
-  res <- morie:::.siu_http_get_many_with_status(character(0))
+  res <- rmorie:::.siu_http_get_many_with_status(character(0))
   expect_named(res, c("body", "http_code", "attempts"))
   expect_length(res$body, 0L)
   expect_length(res$http_code, 0L)
@@ -237,7 +237,7 @@ test_that(".siu_http_get_many rate-limit gate spaces requests (network)", {
   )
   t0 <- Sys.time()
   res <- tryCatch(
-    morie:::.siu_http_get_many_with_status(
+    rmorie:::.siu_http_get_many_with_status(
       urls,
       concurrency = 8L, timeout_s = 30L,
       rate_rps = 4.0, max_retries = 1L
@@ -261,18 +261,18 @@ test_that("html_to_text handles pathological input without segfault", {
   # unclosed <script> tags or megabyte-scale bodies. These three
   # adversarial inputs all crashed the parser pre-fix; they must now
   # return cleanly (any string, including "").
-  expect_silent(morie:::.siu_parse_report(
+  expect_silent(rmorie:::.siu_parse_report(
     paste0(
       "<html><body><script>", strrep("x", 200000L),
       " // unclosed script"
     ),
     9991L, "test"
   ))
-  expect_silent(morie:::.siu_parse_report(
+  expect_silent(rmorie:::.siu_parse_report(
     paste0(strrep("<a>", 10000L), "case # 99-TST-001"),
     9992L, "test"
   ))
-  expect_silent(morie:::.siu_parse_report(
+  expect_silent(rmorie:::.siu_parse_report(
     paste0("<html><body>", strrep("plain text ", 600000L), "</body></html>"),
     9993L, "test"
   ))
@@ -291,11 +291,11 @@ test_that("morie_siu_audit_case reads from cached HTML", {
   # Build a minimal fake cache: one SIU.csv row + one cached drid HTML.
   d <- tempfile("siu-")
   dir.create(file.path(d, "html"), recursive = TRUE)
-  hdr <- paste(names(morie:::.siu_parse_report(
+  hdr <- paste(names(rmorie:::.siu_parse_report(
     .fake_siu_report(),
     1L, "x"
   )), collapse = ",")
-  vals <- as.character(morie:::.siu_parse_report(
+  vals <- as.character(rmorie:::.siu_parse_report(
     .fake_siu_report(),
     1L, "x"
   ))
@@ -321,7 +321,7 @@ test_that("morie_siu_audit_case reads from cached HTML", {
 })
 
 test_that("LLM providers table has the four documented backends", {
-  ps <- morie:::.siu_llm_providers()
+  ps <- rmorie:::.siu_llm_providers()
   expect_setequal(names(ps), c("gemini", "claude", "vertex", "ollama"))
   expect_equal(ps$gemini$env_required, "GOOGLE_API_KEY")
   expect_equal(ps$claude$env_required, "ANTHROPIC_API_KEY")
@@ -335,11 +335,11 @@ test_that("LLM providers table has the four documented backends", {
 test_that("morie_siu_llm_extract returns a 64-col row from mocked JSON", {
   d <- tempfile("siu-")
   dir.create(file.path(d, "html"), recursive = TRUE)
-  hdr <- paste(names(morie:::.siu_parse_report(
+  hdr <- paste(names(rmorie:::.siu_parse_report(
     .fake_siu_report(),
     1L, "x"
   )), collapse = ",")
-  vals <- as.character(morie:::.siu_parse_report(
+  vals <- as.character(rmorie:::.siu_parse_report(
     .fake_siu_report(),
     1L, "x"
   ))
@@ -370,11 +370,11 @@ test_that("morie_siu_llm_extract returns a 64-col row from mocked JSON", {
 test_that("morie_siu_anomaly_check returns per-field verdicts", {
   d <- tempfile("siu-")
   dir.create(file.path(d, "html"), recursive = TRUE)
-  hdr <- paste(names(morie:::.siu_parse_report(
+  hdr <- paste(names(rmorie:::.siu_parse_report(
     .fake_siu_report(),
     1L, "x"
   )), collapse = ",")
-  vals <- as.character(morie:::.siu_parse_report(
+  vals <- as.character(rmorie:::.siu_parse_report(
     .fake_siu_report(),
     1L, "x"
   ))
@@ -411,7 +411,7 @@ test_that(".siu_llm_call fails fast when no env vars are set", {
       OLLAMA_HOST = "", VERTEX_ACCESS_TOKEN = ""
     ),
     expect_error(
-      morie:::.siu_llm_call("gemini", "test prompt"),
+      rmorie:::.siu_llm_call("gemini", "test prompt"),
       "GOOGLE_API_KEY"
     )
   )
@@ -422,11 +422,11 @@ test_that("morie_siu_compare lines up parser vs external table", {
   # user-supplied external table. No network, no LLM.
   d <- tempfile("siu-")
   dir.create(file.path(d, "html"), recursive = TRUE)
-  hdr <- paste(names(morie:::.siu_parse_report(
+  hdr <- paste(names(rmorie:::.siu_parse_report(
     .fake_siu_report(),
     1L, "x"
   )), collapse = ",")
-  vals <- as.character(morie:::.siu_parse_report(
+  vals <- as.character(rmorie:::.siu_parse_report(
     .fake_siu_report(),
     1L, "x"
   ))
@@ -470,11 +470,11 @@ test_that("morie_siu_translate routes through provider with target lang", {
   # check the override gets written with target_lang in the note.
   d <- tempfile("siu-")
   dir.create(file.path(d, "html"), recursive = TRUE)
-  hdr <- paste(names(morie:::.siu_parse_report(
+  hdr <- paste(names(rmorie:::.siu_parse_report(
     .fake_siu_report(),
     1L, "x"
   )), collapse = ",")
-  vals <- as.character(morie:::.siu_parse_report(
+  vals <- as.character(rmorie:::.siu_parse_report(
     .fake_siu_report(),
     1L, "x"
   ))
@@ -500,7 +500,7 @@ test_that("morie_siu_translate routes through provider with target lang", {
                              mock_response_text = NULL) {
       mock
     },
-    .package = "morie"
+    .package = "rmorie"
   )
   # Force translate even though _language might match
   out <- morie_siu_translate(
@@ -532,7 +532,7 @@ test_that(".siu_apply_canonical_overrides overwrites named cells", {
     verified_value = c("Clair Road East, City of Guelph", "Black", "ignored"),
     stringsAsFactors = FALSE
   )
-  out <- morie:::.siu_apply_canonical_overrides(df, overrides)
+  out <- rmorie:::.siu_apply_canonical_overrides(df, overrides)
   expect_equal(out$location_of_call[1L], "Clair Road East, City of Guelph")
   expect_equal(out$mental_health_or_race_indications[2L], "Black")
   # Untouched cells stay
@@ -554,7 +554,7 @@ test_that("morie_siu_record_correction round-trips through cache_dir", {
   p <- file.path(d, "canonical_overrides.csv")
   expect_true(file.exists(p))
   # Loader reads it back
-  loaded <- morie:::.siu_load_canonical_overrides(user_cache_dir = d)
+  loaded <- rmorie:::.siu_load_canonical_overrides(user_cache_dir = d)
   expect_equal(loaded$verified_value[
     loaded$case_number == "17-OVI-201" &
       loaded$field == "location_of_call"
@@ -687,7 +687,7 @@ test_that(".siu_llm_call chain failover surfaces all provider errors", {
       OLLAMA_HOST = "http://127.0.0.1:1"
     ),
     expect_error(
-      morie:::.siu_llm_call(c("gemini", "ollama"), "test prompt",
+      rmorie:::.siu_llm_call(c("gemini", "ollama"), "test prompt",
         timeout_s = 2L
       ),
       "All LLM providers failed"
@@ -700,7 +700,7 @@ test_that(".siu_load_manifest returns NULL when no manifest is shipped", {
   # gracefully return NULL so the harvester degrades to a full sweep.
   # When the manifest does ship, this test will exercise the parse
   # path instead (still expects a tibble-like data.frame).
-  m <- morie:::.siu_load_manifest()
+  m <- rmorie:::.siu_load_manifest()
   if (is.null(m)) {
     expect_null(m)
   } else {

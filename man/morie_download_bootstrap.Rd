@@ -31,6 +31,6 @@ package. Data is cached in the user cache database for future use.
 \examples{
 \donttest{
 # See the package vignettes for usage examples:
-#   vignette(package = "morie")
+#   vignette(package = "rmorie")
 }
 }

@@ -3,17 +3,17 @@
 
 # ==== aaa_helpers_time_series_advanced.R ====
 test_that("%||% returns first arg when non-null and non-empty", {
-  expect_equal(morie:::`%||%`(1, 2), 1)
-  expect_equal(morie:::`%||%`("a", "b"), "a")
+  expect_equal(rmorie:::`%||%`(1, 2), 1)
+  expect_equal(rmorie:::`%||%`("a", "b"), "a")
 })
 
 test_that("%||% returns second arg when first is NULL", {
-  expect_equal(morie:::`%||%`(NULL, 5), 5)
+  expect_equal(rmorie:::`%||%`(NULL, 5), 5)
 })
 
 test_that(".morie_beta_weights returns a length-K probability vector", {
   set.seed(1)
-  w <- morie:::.morie_beta_weights(2, 3, 12)
+  w <- rmorie:::.morie_beta_weights(2, 3, 12)
   expect_length(w, 12)
   expect_equal(sum(w), 1, tolerance = 1e-10)
   expect_true(all(w >= 0))
@@ -21,7 +21,7 @@ test_that(".morie_beta_weights returns a length-K probability vector", {
 
 test_that(".morie_beta_weights falls back to uniform when weights collapse to zero", {
   set.seed(1)
-  w <- morie:::.morie_beta_weights(1, 1, 4)
+  w <- rmorie:::.morie_beta_weights(1, 1, 4)
   expect_length(w, 4)
   expect_true(all(is.finite(w)))
   expect_equal(sum(w), 1, tolerance = 1e-10)
@@ -31,7 +31,7 @@ test_that(".morie_beta_weights falls back to uniform when weights collapse to ze
 test_that("retlv returns a Coles-2001 return-level list on Gumbel-like maxima", {
   set.seed(1)
   x <- 10 + 2 * (-log(-log(stats::runif(300))))
-  out <- morie:::retlv(x, return_period = 100)
+  out <- rmorie:::retlv(x, return_period = 100)
   expect_false(is.null(out))
   expect_true(is.list(out))
   expect_true("estimate" %in% names(out))
@@ -40,7 +40,7 @@ test_that("retlv returns a Coles-2001 return-level list on Gumbel-like maxima", 
 test_that("retlv exposes mu/sigma/xi/se/n when GEV fit succeeds", {
   set.seed(1)
   x <- 10 + 2 * (-log(-log(stats::runif(400))))
-  out <- morie:::retlv(x, return_period = 50)
+  out <- rmorie:::retlv(x, return_period = 50)
   if (is.finite(out$estimate)) {
     expect_true(all(c("mu", "sigma", "xi", "se", "n", "return_period") %in% names(out)))
     expect_equal(out$return_period, 50)
@@ -52,7 +52,7 @@ test_that("retlv exposes mu/sigma/xi/se/n when GEV fit succeeds", {
 })
 
 test_that("morie_return_level alias is identical to retlv", {
-  expect_identical(morie_return_level, morie:::retlv)
+  expect_identical(morie_return_level, rmorie:::retlv)
 })
 
 # ==== siu.R ====
@@ -69,7 +69,7 @@ test_that("morie_fetch_siu returns existing SIU.csv without reparsing", {
 # ==== hrzq1.R ====
 test_that("hrzq1 returns NA estimates when n is below threshold", {
   set.seed(1)
-  out <- morie:::hrzq1(c(1, 2, 3), c(4, 5, 6), tau = 0.5)
+  out <- rmorie:::hrzq1(c(1, 2, 3), c(4, 5, 6), tau = 0.5)
   expect_true(is.list(out))
   expect_true(all(is.na(out$estimate)))
   expect_match(out$method, "insufficient data or invalid tau")
@@ -79,7 +79,7 @@ test_that("hrzq1 rejects out-of-range tau", {
   set.seed(1)
   x <- stats::rnorm(50)
   y <- 1 + 2 * x + stats::rnorm(50)
-  out <- morie:::hrzq1(x, y, tau = 1.5)
+  out <- rmorie:::hrzq1(x, y, tau = 1.5)
   expect_match(out$method, "insufficient data or invalid tau")
 })
 
@@ -87,7 +87,7 @@ test_that("hrzq1 recovers slope on a clean linear signal at tau=0.5", {
   set.seed(1)
   x <- stats::rnorm(200)
   y <- 1 + 2 * x + stats::rnorm(200, sd = 0.5)
-  out <- morie:::hrzq1(x, y, tau = 0.5)
+  out <- rmorie:::hrzq1(x, y, tau = 0.5)
   expect_false(is.null(out))
   expect_true(is.finite(out$estimate))
   expect_true(abs(out$estimate - 2) < 0.5)

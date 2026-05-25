@@ -33,7 +33,7 @@ for (f in list.files("R", pattern = "\\.R$", full.names = TRUE)) {
 #   #' @examples
 #   #' \dontrun{
 #   #' # See the package vignettes for usage examples:
-#   #' #   vignette(package = "morie")
+#   #' #   vignette(package = "rmorie")
 #   #' }
 is_boiler <- function(src, i) {
   if (i + 4L > length(src)) return(FALSE)

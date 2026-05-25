@@ -1,7 +1,7 @@
 # morie/_fast.R — R-side wrappers for the Rcpp hot kernels.
 #
 # This file shadows morie.fast in the Python side: users get the same
-# numerical results from `morie:::morie_normal_pdf(x, 0, 1)` as they do
+# numerical results from `rmorie:::morie_normal_pdf(x, 0, 1)` as they do
 # from `morie.fast.normal_pdf(x, 0, 1)` in Python.
 #
 # When the package is built WITHOUT the C++ toolchain (rare on CRAN

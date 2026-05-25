@@ -108,7 +108,7 @@ morie_sync_rng <- function(seed) {
 #' @return A p x p numeric matrix A.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_generate_ar_coefficients <- function(p, rng,
                                            spectral_radius = 0.8,
@@ -134,7 +134,7 @@ morie_generate_ar_coefficients <- function(p, rng,
 #' @return A list of length \code{lags}, each a p x p matrix.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_generate_var_coefficients <- function(p, lags, rng,
                                             spectral_radius = 0.8,
@@ -160,7 +160,7 @@ morie_generate_var_coefficients <- function(p, lags, rng,
 #' @return An n x p matrix of samples.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_mvn_with_covariance <- function(n, p, rng,
                                       kernel = c("ar1", "independent", "compound", "toeplitz"),

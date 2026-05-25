@@ -21,7 +21,7 @@ Two-way GxE ANOVA with EMS variance components
 }
 \examples{
 # See the package vignettes for usage examples:
-#   vignette(package = "morie")
+#   vignette(package = "rmorie")
 }
 \references{
 Montesinos Lopez Ch 11.

@@ -29,6 +29,6 @@ position is the ideal point (Eq 4.36 in Armstrong et al. 2014).
 }
 \examples{
 # See the package vignettes for usage examples:
-#   vignette(package = "morie")
+#   vignette(package = "rmorie")
 }
 \keyword{internal}

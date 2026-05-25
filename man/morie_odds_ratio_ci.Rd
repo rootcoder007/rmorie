@@ -19,5 +19,5 @@ Odds ratio and 95\% CI from a 2x2 contingency table
 }
 \examples{
 # See the package vignettes for usage examples:
-#   vignette(package = "morie")
+#   vignette(package = "rmorie")
 }

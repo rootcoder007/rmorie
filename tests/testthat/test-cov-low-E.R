@@ -4,14 +4,14 @@
 # ==== entheo_data.R ====
 test_that("load_dmt_imaging returns synthetic when root missing", {
   set.seed(1)
-  out <- morie:::load_dmt_imaging(subject_id = 1L, root = tempfile("no_such_root_"))
+  out <- rmorie:::load_dmt_imaging(subject_id = 1L, root = tempfile("no_such_root_"))
   expect_type(out, "list")
   expect_true(out$synthetic)
 })
 
 test_that("load_dmt_imaging null subject_id falls back to default list", {
   set.seed(1)
-  out <- morie:::load_dmt_imaging(subject_id = NULL, root = tempfile("missing_"))
+  out <- rmorie:::load_dmt_imaging(subject_id = NULL, root = tempfile("missing_"))
   expect_true(out$synthetic)
   expect_true(length(out$subject_ids) >= 1L)
 })
@@ -20,7 +20,7 @@ test_that(".entheo_list_subjects returns empty when fMRI dir missing", {
   td <- tempfile("dmt_root_")
   dir.create(td)
   withr::defer(unlink(td, recursive = TRUE))
-  expect_equal(morie:::.entheo_list_subjects(td), character(0))
+  expect_equal(rmorie:::.entheo_list_subjects(td), character(0))
 })
 
 test_that(".entheo_list_subjects picks up .mat filenames", {
@@ -31,7 +31,7 @@ test_that(".entheo_list_subjects picks up .mat filenames", {
   file.create(file.path(td, "fMRI", "LongS04PCB.mat"))
   file.create(file.path(td, "fMRI", "LongS09DMT.mat"))
   file.create(file.path(td, "fMRI", "LongS09PCB.mat"))
-  ids <- morie:::.entheo_list_subjects(td)
+  ids <- rmorie:::.entheo_list_subjects(td)
   expect_equal(ids, c("04", "09"))
 })
 
@@ -100,7 +100,7 @@ test_that("morie_cache_dir respects MORIE_CACHE_DIR", {
   # v0.9.5 CRAN Policy fix: cache override env var is MORIE_CACHE_DIR.
   withr::local_envvar(c(MORIE_CACHE_DIR = file.path(tempdir(), "morie-low-E")))
   expect_equal(
-    morie:::morie_cache_dir(),
+    rmorie:::morie_cache_dir(),
     file.path(tempdir(), "morie-low-E")
   )
 })
@@ -142,7 +142,7 @@ test_that("morie_cache_load returns NULL for missing table", {
 
 test_that(".morie_db_handle rejects non-DBI con", {
   expect_error(
-    morie:::.morie_db_handle(con = list(fake = TRUE)),
+    rmorie:::.morie_db_handle(con = list(fake = TRUE)),
     "DBIConnection"
   )
 })

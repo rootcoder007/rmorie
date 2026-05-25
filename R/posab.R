@@ -14,7 +14,7 @@
 #' @references Vaswani et al. (2017), NeurIPS.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_posab_positional_encoding_abs <- function(seq_len, d_model, base = 10000) {
   seq_len <- as.integer(seq_len)

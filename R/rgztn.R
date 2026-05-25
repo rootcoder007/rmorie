@@ -14,7 +14,7 @@
 #'   n, method.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_regularization_path <- function(x, y, penalty = c("ridge", "lasso", "elasticnet"),
                                 alphas = NULL, l1_ratio = 0.5) {

@@ -13,9 +13,9 @@ test_that(".dccmd_negll guards return 1e10 on out-of-domain parameters", {
   set.seed(1)
   Z <- matrix(rnorm(60), 30, 2)
   Q_bar <- crossprod(Z) / 30
-  expect_equal(morie:::.dccmd_negll(c(-0.01, 0.5), Q_bar, 30, Z), 1e10)
-  expect_equal(morie:::.dccmd_negll(c(0.1, -0.01), Q_bar, 30, Z), 1e10)
-  expect_equal(morie:::.dccmd_negll(c(0.6, 0.5), Q_bar, 30, Z), 1e10)
+  expect_equal(rmorie:::.dccmd_negll(c(-0.01, 0.5), Q_bar, 30, Z), 1e10)
+  expect_equal(rmorie:::.dccmd_negll(c(0.1, -0.01), Q_bar, 30, Z), 1e10)
+  expect_equal(rmorie:::.dccmd_negll(c(0.6, 0.5), Q_bar, 30, Z), 1e10)
 })
 
 # ==== mrm_doe.R ====
@@ -32,7 +32,7 @@ test_that("mrm_random_latin gives reproducible permuted Latin square", {
 # ==== entheo_preprocess.R ====
 test_that("preprocess_eeg warns on absent eeg matrices", {
   rec <- list(eeg = list(sfreq = NA, data_dmt = NULL, data_pcb = NULL))
-  res <- morie:::preprocess_eeg(rec)
+  res <- rmorie:::preprocess_eeg(rec)
   expect_equal(res$sfreq, 250)
   expect_equal(res$n_bad, 0L)
   expect_equal(res$n_channels, 0L)
@@ -46,14 +46,14 @@ test_that("preprocess_fmri warns when motion_fd_mm absent", {
     data_dmt = matrix(rnorm(40), 5, 8),
     data_pcb = NULL
   ))
-  res <- morie:::preprocess_fmri(rec_no_fd)
+  res <- rmorie:::preprocess_fmri(rec_no_fd)
   expect_equal(res$n_scrubbed, 0L)
 })
 
 test_that(".entheo_asr_trim returns a list with arr + n_bad fields", {
   set.seed(1)
   x <- matrix(rnorm(50), 5, 10)
-  tr <- morie:::.entheo_asr_trim(x, threshold = 5)
+  tr <- rmorie:::.entheo_asr_trim(x, threshold = 5)
   expect_type(tr, "list")
   expect_true(all(c("arr", "n_bad") %in% names(tr)))
   expect_equal(dim(tr$arr), dim(x))
@@ -94,29 +94,29 @@ test_that("mrm_median_causal_effect errors when no valid matches", {
 
 # ==== study_reporting.R ====
 test_that(".binary_power_required_n returns NA on zero effect", {
-  expect_true(is.na(morie:::.binary_power_required_n(0.3, 0.3)))
+  expect_true(is.na(rmorie:::.binary_power_required_n(0.3, 0.3)))
 })
 
 test_that(".continuous_power_required_n returns NA on zero/NA pooled d", {
-  expect_true(is.na(morie:::.continuous_power_required_n(1, 1, 1)))
+  expect_true(is.na(rmorie:::.continuous_power_required_n(1, 1, 1)))
 })
 
 test_that(".block_schedule returns empty data.frame on empty strata or NA n", {
-  empty1 <- morie:::.block_schedule("ep1", required_n = 40, strata_levels = character())
+  empty1 <- rmorie:::.block_schedule("ep1", required_n = 40, strata_levels = character())
   expect_equal(nrow(empty1), 0L)
-  empty2 <- morie:::.block_schedule("ep1", required_n = NA_real_, strata_levels = c("M", "F"))
+  empty2 <- rmorie:::.block_schedule("ep1", required_n = NA_real_, strata_levels = c("M", "F"))
   expect_equal(nrow(empty2), 0L)
 })
 
 # ==== synthetic.R ====
 test_that("resolve_synthetic_name_map rejects bad inputs", {
   expect_error(
-    morie:::resolve_synthetic_name_map(c("a", "b"), profile = "generic"),
+    rmorie:::resolve_synthetic_name_map(c("a", "b"), profile = "generic"),
     "named character vector"
   )
   bad <- c(id = "x", weight = "w")
   expect_error(
-    morie:::resolve_synthetic_name_map(bad, profile = "generic"),
+    rmorie:::resolve_synthetic_name_map(bad, profile = "generic"),
     "missing required keys"
   )
 })
@@ -132,7 +132,7 @@ test_that("morie_generate_synthetic_data validates n and special_code_rate", {
 test_that("inject_special_codes is identity when rate == 0", {
   set.seed(1)
   x <- 1:50
-  expect_identical(morie:::inject_special_codes(x, rate = 0), x)
+  expect_identical(rmorie:::inject_special_codes(x, rate = 0), x)
 })
 
 # ==== frns_predpol.R ====
@@ -174,11 +174,11 @@ test_that("morie_predpol_score_disparity guards", {
 # ==== frns_metrics.R ====
 test_that(".frns_check_aligned errors on length mismatch and empty input", {
   expect_error(
-    morie:::.frns_check_aligned(list("a", 1:3), list("b", 1:2)),
+    rmorie:::.frns_check_aligned(list("a", 1:3), list("b", 1:2)),
     "length mismatch"
   )
   expect_error(
-    morie:::.frns_check_aligned(list("a", integer(0)), list("b", integer(0))),
+    rmorie:::.frns_check_aligned(list("a", integer(0)), list("b", integer(0))),
     "inputs are empty"
   )
 })
@@ -186,7 +186,7 @@ test_that(".frns_check_aligned errors on length mismatch and empty input", {
 test_that(".frns_resolve_privileged errors on unknown privileged key", {
   rates <- list(A = list(rate = 0.5), B = list(rate = 0.7))
   expect_error(
-    morie:::.frns_resolve_privileged("Z", rates),
+    rmorie:::.frns_resolve_privileged("Z", rates),
     "privileged group 'Z' not found"
   )
 })

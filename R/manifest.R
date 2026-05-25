@@ -9,7 +9,7 @@ escape_regex <- function(x) {
 #' @return `TRUE` when validation passes.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_validate_outputs_manifest <- function(manifest, strict = TRUE) {
   required <- c("output", "public_path", "size_kb", "modified")
@@ -233,7 +233,7 @@ morie_audit_public_outputs <- function(project_root = NULL, manifest = NULL) {
 #' @return Named list with high-level diagnostics.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_summarize_output_audit <- function(audit_tbl) {
   if (!is.data.frame(audit_tbl)) {

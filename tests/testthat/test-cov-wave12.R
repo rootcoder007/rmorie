@@ -3,21 +3,21 @@
 # (bpblm, fzcvm, ghsrv, fast, det-rng helpers, beta weights, rgwav).
 
 test_that("bits_per_byte computes BPB and validates input", {
-  r <- morie:::bits_per_byte(c(1, 2, 3))
+  r <- rmorie:::bits_per_byte(c(1, 2, 3))
   expect_equal(r$nll_nats, 6)
   expect_equal(r$n_tokens, 3L)
   expect_equal(r$n_bytes, 3L)
   expect_equal(r$value, 6 / (3 * log(2)))
-  expect_equal(morie:::bits_per_byte(c(1, 2), n_bytes = 10)$n_bytes, 10L)
-  expect_error(morie:::bits_per_byte(numeric(0)), "at least one")
-  expect_error(morie:::bits_per_byte(c(1, 2), n_bytes = 0), "must be > 0")
+  expect_equal(rmorie:::bits_per_byte(c(1, 2), n_bytes = 10)$n_bytes, 10L)
+  expect_error(rmorie:::bits_per_byte(numeric(0)), "at least one")
+  expect_error(rmorie:::bits_per_byte(c(1, 2), n_bytes = 0), "must be > 0")
 })
 
 test_that(".morie_beta_weights and %||% behave", {
-  w <- morie:::.morie_beta_weights(2, 5, 12)
+  w <- rmorie:::.morie_beta_weights(2, 5, 12)
   expect_length(w, 12L)
   expect_equal(sum(w), 1)
-  nz <- morie:::`%||%`
+  nz <- rmorie:::`%||%`
   expect_equal(nz(NULL, 5), 5)
   expect_equal(nz(3, 5), 3)
 })
@@ -41,11 +41,11 @@ test_that("fzcvm runs and .morie_cvm_pvalue spans its table", {
   rf <- fzcvm(stats::rnorm(120), cdf = function(t) stats::pnorm(t))
   expect_true(is.numeric(rf$p_value))
   expect_error(fzcvm(stats::rnorm(20), cdf = "exp"), "function")
-  expect_equal(morie:::.morie_cvm_pvalue(0), 1.0)
-  expect_equal(morie:::.morie_cvm_pvalue(0.1), 0.5)
-  expect_true(morie:::.morie_cvm_pvalue(2) > 0)
-  expect_true(morie:::.morie_cvm_pvalue(0.5) > 0 &&
-    morie:::.morie_cvm_pvalue(0.5) < 0.1)
+  expect_equal(rmorie:::.morie_cvm_pvalue(0), 1.0)
+  expect_equal(rmorie:::.morie_cvm_pvalue(0.1), 0.5)
+  expect_true(rmorie:::.morie_cvm_pvalue(2) > 0)
+  expect_true(rmorie:::.morie_cvm_pvalue(0.5) > 0 &&
+    rmorie:::.morie_cvm_pvalue(0.5) < 0.1)
 })
 
 test_that("det-rng helpers derive stable SHA-keyed seeds", {
@@ -57,7 +57,7 @@ test_that("det-rng helpers derive stable SHA-keyed seeds", {
     "no SHA-256 backend"
   )
   expect_equal(
-    morie:::.morie_sha256_hex("abc"),
+    rmorie:::.morie_sha256_hex("abc"),
     "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
   )
   s <- morie_det_rng("ksr07_bootstrap", 42L)
@@ -70,17 +70,17 @@ test_that("det-rng helpers derive stable SHA-keyed seeds", {
 
 test_that("fast.R kernels work on the C++ and the base-R fallback path", {
   expect_type(morie_fast_available(), "logical")
-  expect_equal(morie:::morie_mean(1:10), 5.5)
-  expect_equal(morie:::morie_cor_pearson(1:10, 1:10), 1)
-  expect_equal(morie:::morie_normal_pdf(0), stats::dnorm(0))
+  expect_equal(rmorie:::morie_mean(1:10), 5.5)
+  expect_equal(rmorie:::morie_cor_pearson(1:10, 1:10), 1)
+  expect_equal(rmorie:::morie_normal_pdf(0), stats::dnorm(0))
   testthat::local_mocked_bindings(
-    .cpp_available = function() FALSE, .package = "morie"
+    .cpp_available = function() FALSE, .package = "rmorie"
   )
-  expect_equal(morie:::morie_mean(1:10), 5.5)
-  expect_equal(morie:::morie_var(1:10), stats::var(1:10))
-  expect_true(is.na(morie:::morie_var(5, ddof = 1)))
-  expect_equal(morie:::morie_cor_pearson(1:5, 1:5), 1)
-  expect_equal(morie:::morie_normal_pdf(0, 0, 1), stats::dnorm(0))
+  expect_equal(rmorie:::morie_mean(1:10), 5.5)
+  expect_equal(rmorie:::morie_var(1:10), stats::var(1:10))
+  expect_true(is.na(rmorie:::morie_var(5, ddof = 1)))
+  expect_equal(rmorie:::morie_cor_pearson(1:5, 1:5), 1)
+  expect_equal(rmorie:::morie_normal_pdf(0, 0, 1), stats::dnorm(0))
 })
 
 test_that("rgwav denoises via wavelets and via the MA fallback", {

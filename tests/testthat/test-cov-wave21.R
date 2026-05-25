@@ -61,7 +61,7 @@ test_that("morie_download_bootstrap validates survey and runs the loop", {
   # branch (morie_fetch_ckan mocked so no network is touched).
   testthat::local_mocked_bindings(
     morie_fetch_ckan = function(dataset_key, ...) data.frame(z = 1:3),
-    .package = "morie"
+    .package = "rmorie"
   )
   expect_null(suppressMessages(
     morie_download_bootstrap("csads_2021",

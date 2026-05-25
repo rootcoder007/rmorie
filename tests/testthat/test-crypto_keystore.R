@@ -11,34 +11,34 @@ set.seed(1)
 
 test_that("hex<->raw roundtrip works", {
   set.seed(1)
-  expect_equal(length(morie:::.morie_hex_to_raw("")), 0L)
+  expect_equal(length(rmorie:::.morie_hex_to_raw("")), 0L)
   r <- as.raw(c(0x00, 0x10, 0xff))
-  h <- morie:::.morie_raw_to_hex(r)
+  h <- rmorie:::.morie_raw_to_hex(r)
   expect_equal(nchar(h), 6L)
-  expect_identical(morie:::.morie_hex_to_raw(h), r)
+  expect_identical(rmorie:::.morie_hex_to_raw(h), r)
 })
 
 test_that("hex_to_raw rejects bad input", {
   set.seed(1)
-  expect_error(morie:::.morie_hex_to_raw("abc"), "odd length")
-  expect_error(morie:::.morie_hex_to_raw(c("aa", "bb")), "single")
+  expect_error(rmorie:::.morie_hex_to_raw("abc"), "odd length")
+  expect_error(rmorie:::.morie_hex_to_raw(c("aa", "bb")), "single")
 })
 
 test_that("raw_to_hex rejects non-raw", {
   set.seed(1)
-  expect_error(morie:::.morie_raw_to_hex("abc"), "raw")
+  expect_error(rmorie:::.morie_raw_to_hex("abc"), "raw")
 })
 
 test_that("resolve_path expands ~", {
   set.seed(1)
-  out <- morie:::.morie_resolve_path("~/foo")
+  out <- rmorie:::.morie_resolve_path("~/foo")
   expect_type(out, "character")
   expect_false(startsWith(out, "~"))
 })
 
 test_that("read_store errors on missing keystore", {
   set.seed(1)
-  expect_error(morie:::.morie_read_store(tempfile()), "not found")
+  expect_error(rmorie:::.morie_read_store(tempfile()), "not found")
 })
 
 test_that("create -> store -> load roundtrip recovers sk", {
@@ -109,6 +109,6 @@ test_that("load with wrong password fails clean", {
 
 test_that("derive_key requires raw salt + single-string password", {
   set.seed(1)
-  expect_error(morie:::.morie_derive_key("pw", "notraw"), "raw")
-  expect_error(morie:::.morie_derive_key(c("a", "b"), as.raw(1:4)), "single")
+  expect_error(rmorie:::.morie_derive_key("pw", "notraw"), "raw")
+  expect_error(rmorie:::.morie_derive_key(c("a", "b"), as.raw(1:4)), "single")
 })

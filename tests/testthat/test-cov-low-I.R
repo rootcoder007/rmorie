@@ -5,13 +5,13 @@ test_that("vines runs on multivariate normal sample", {
   set.seed(1)
   Sigma <- matrix(c(1, 0.5, 0.3, 0.5, 1, 0.4, 0.3, 0.4, 1), 3)
   z <- MASS::mvrnorm(200, c(0, 0, 0), Sigma)
-  out <- morie:::vines(z)
+  out <- rmorie:::vines(z)
   expect_equal(out$d, 3L)
   expect_true(is.finite(out$loglik))
 })
 
 test_that("vines short-circuits when n<3 or d<2", {
-  out_n <- morie:::vines(matrix(rnorm(4), 2, 2))
+  out_n <- rmorie:::vines(matrix(rnorm(4), 2, 2))
   expect_true(is.na(out_n$estimate))
 })
 
@@ -58,13 +58,13 @@ test_that("hrzp1 runs on default Robinson inputs", {
   z <- runif(n)
   x <- rnorm(n)
   y <- 2 * x + sin(2 * pi * z) + 0.3 * rnorm(n)
-  out <- morie:::hrzp1(x, y, z)
+  out <- rmorie:::hrzp1(x, y, z)
   expect_true(is.finite(out$estimate))
   expect_equal(out$n, n)
 })
 
 test_that("hrzp1 insufficient-data guard returns NA", {
-  out <- morie:::hrzp1(1:3, 1:3, 1:3)
+  out <- rmorie:::hrzp1(1:3, 1:3, 1:3)
   expect_true(is.na(out$estimate))
   expect_match(out$method, "insufficient")
 })

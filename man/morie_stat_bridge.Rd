@@ -8,7 +8,7 @@ R port of \code{morie.stat_bridge}. Exposes the same three modes
 available on the Python side --- registry enumeration, a formatted
 help dump, and command execution --- so an external runner (e.g.
 the Go TIDE TUI, a shell pipeline) can drive morie's R surface via
-\code{Rscript -e 'morie::stat_bridge_main(...)'}.
+\code{Rscript -e 'rmorie::stat_bridge_main(...)'}.
 }
 \details{
 Two layers are provided:

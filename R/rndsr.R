@@ -19,7 +19,7 @@
 #'   sampled_scores, n_iter, task, n, method.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_random_search_cv <- function(x, y, method = NULL, n_iter = 20L, cv = 5L,
                              task = "auto", seed = 0L,

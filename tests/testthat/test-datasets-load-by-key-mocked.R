@@ -131,7 +131,7 @@ test_that("morie_datasets_load_by_key with mocked HTTP routes through Socrata la
                                          headers = character()) {
       stub_records
     },
-    .package = "morie"
+    .package = "rmorie"
   )
   # Force the live (non-offline) Socrata path. Since http_json is
   # mocked, no real network call happens.

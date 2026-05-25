@@ -60,7 +60,7 @@ morie_datasets_ottawa_open_crime_adjacent_layers <- function(offline = TRUE) {
       "search API directly."), fname),
       call. = FALSE)
   }
-  path <- system.file("extdata", fname, package = "morie")
+  path <- system.file("extdata", fname, package = "rmorie")
   if (!nzchar(path))
     stop(sprintf("bundled fixture missing: %s", fname), call. = FALSE)
   utils::read.csv(path, stringsAsFactors = FALSE, check.names = FALSE)
@@ -197,7 +197,7 @@ morie_datasets_edmonton_socrata_by_id <- function(soda_id,
 # ---------------------------------------------------------------------------
 
 .morie_canadian_fixture <- function(fname) {
-  path <- system.file("extdata", fname, package = "morie")
+  path <- system.file("extdata", fname, package = "rmorie")
   if (!nzchar(path))
     stop(sprintf("bundled fixture missing: %s", fname), call. = FALSE)
   utils::read.csv(path, stringsAsFactors = FALSE, check.names = FALSE)
