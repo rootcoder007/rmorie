@@ -46,7 +46,11 @@ test_that("ChaCha20-Poly1305 detects tag forgery", {
   pt <- charToRaw("secret")
   enc <- morie_crypto_chacha20_poly1305_encrypt(k, n, pt)
   bad <- c(enc$ct, enc$tag)
-  bad[length(bad)] <- as.raw(0L)  # flip the last tag byte
+  # Bit-flip (XOR with 0x01) instead of assigning 0x00: the latter is
+  # a no-op 1/256 of the time when the random tag's last byte is
+  # already 0x00, which flaked CI under that probability.
+  i <- length(bad)
+  bad[i] <- xor(bad[i], as.raw(0x01))
   expect_error(
     morie_crypto_chacha20_poly1305_decrypt(k, n, bad),
     regexp = "decrypt failed")
