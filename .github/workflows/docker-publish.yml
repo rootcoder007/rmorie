@@ -1,0 +1,87 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+#
+# docker-publish.yml -- build + push the rmorie container to GHCR.
+#
+# Triggers:
+#   * push of a `v*.*.*` tag           -> tagged immutable release
+#   * manual workflow_dispatch         -> ad-hoc rebuild
+#   * weekly cron                      -> refresh `latest` against new
+#                                         base-image security patches
+#
+# After the FIRST successful run, the container becomes visible on
+# the repo's "Packages" sidebar (replacing the "Release your first
+# package" placeholder GitHub shows on empty-package repos).
+#
+# Image coordinates:
+#   ghcr.io/rootcoder007/rmorie:latest
+#   ghcr.io/rootcoder007/rmorie:0.9.5.12          (semver, no v prefix)
+#   ghcr.io/rootcoder007/rmorie:0.9                (minor track)
+#   ghcr.io/rootcoder007/rmorie:0.9.5              (patch track)
+#
+# Multi-arch: linux/amd64 + linux/arm64 so both x86 CI runners and
+# Apple Silicon dev machines pull a native image.
+
+name: Publish container
+
+on:
+  push:
+    tags: ["v*.*.*"]
+  schedule:
+    - cron: "27 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write   # required to push to ghcr.io
+
+concurrency:
+  group: docker-publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+
+      - name: Set up QEMU (multi-arch)
+        uses: docker/setup-qemu-action@5306bad0baa6b616b9934712d4b9d8a82c633d62 # v3.6.0
+        with:
+          platforms: linux/amd64,linux/arm64
+
+      - name: Set up Buildx
+        uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435 # v3.11.1
+
+      - name: Login to GHCR
+        uses: docker/login-action@184bdaa0721073962dff0199f1fb9940f07167d1 # v3.5.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@c1e51972afc2121e065aed6d45c65596fe445f3f # v5.8.0
+        with:
+          images: ghcr.io/${{ github.repository_owner }}/rmorie
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}.{{minor}}.{{patch}}
+            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') || startsWith(github.ref, 'refs/tags/v') }}
+            type=sha,prefix=sha-
+
+      - name: Build + push
+        uses: docker/build-push-action@67b0fc23b9a4f1baaad2dbc4ce75b6cdc9ce99dd # v6.10.0
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
