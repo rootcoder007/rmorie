@@ -1,0 +1,6 @@
+BatchFileName,Indiv_Index,Weapon,Location,Indiv_Weapon_Index
+SYNTHETIC-FIXTURE-WPN-001,1,Knife,Hand,1
+SYNTHETIC-FIXTURE-WPN-002,2,Firearm,Waistband,2
+SYNTHETIC-FIXTURE-WPN-003,3,Bat,Hand,3
+SYNTHETIC-FIXTURE-WPN-004,4,Vehicle,Driver,4
+SYNTHETIC-FIXTURE-WPN-005,5,None,,5

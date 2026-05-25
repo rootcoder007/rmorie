@@ -10,6 +10,13 @@
 # return rmgarch-shaped values, so the branch executes end to end.
 
 test_that("morie_dcc_multivariate_garch assembles the rmgarch-path result", {
+  # local_mocked_bindings(.package = "rmgarch") tries to resolve the
+  # rmgarch namespace before installing the mock; if rmgarch isn't
+  # installed (e.g. on minimal CI runners) that resolution fails with
+  # "no package called 'rmgarch'" rather than skipping. Same for rugarch.
+  skip_if_not_installed("rmgarch")
+  skip_if_not_installed("rugarch")
+
   set.seed(31)
   X <- matrix(rnorm(40 * 3), 40, 3)
 
