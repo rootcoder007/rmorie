@@ -950,8 +950,8 @@ bump.
 * Five-paper publication set complete: empirical applications paper
   (*Solitary Confinement, Self-Excitation, and Institutional Churn:
   Empirical Applications of MRM to Canadian Carceral and Police Data*)
-  published on Zenodo at
-  [10.5281/zenodo.20175689](https://doi.org/10.5281/zenodo.20175689).
+
+  [
 * Terminology locked across all 5 papers: `ac` (alert complexity)
   and `vm` (volatility measure of placements, "regional-transition
   count" alongside) are now the canonical operational terms.
@@ -1056,5 +1056,5 @@ bump.
 * `estimate_irm()` is a thin R wrapper around `DoubleML::DoubleMLIRM` from
   the CRAN `DoubleML` package; `DoubleML`, `mlr3`, and `mlr3learners` are in
   `Suggests` and the function gates them with `requireNamespace()`.
-* CITATION includes both the software DOI (`10.5281/zenodo.20111233`) and
-  the companion paper DOI (`10.5281/zenodo.20096350`).
+
+

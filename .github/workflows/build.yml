@@ -138,6 +138,49 @@ jobs:
 
   # ---- Fan-in: single required check ----
 
+  # Trigger r-universe rebuild ONLY when:
+  #   - this is a push (not a PR) to main, AND
+  #   - all upstream quality leaves succeeded.
+  # Mechanism: push an empty commit to the registry repo
+  # (rootcoder007.r-universe.dev); GitHub's push webhook fires, which
+  # r-universe.dev's backend is subscribed to, which triggers the pull
+  # + nightly-style build of all packages in packages.json.
+  #
+  # Requires: a secret R_UNIVERSE_TRIGGER_PAT with `contents: write`
+  # scope on rootcoder007/rootcoder007.r-universe.dev. continue-on-error
+  # so a missing/expired PAT never blocks the rest of CI.
+  r-universe-sync:
+    needs:
+      - setup
+      - r-cmd-check
+      - r-pkgcheck
+      - codeql
+      - pkgdown
+    if: >
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      success()
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Push empty commit to registry repo
+        env:
+          R_UNIVERSE_TRIGGER_PAT: ${{ secrets.R_UNIVERSE_TRIGGER_PAT }}
+        run: |
+          if [ -z "$R_UNIVERSE_TRIGGER_PAT" ]; then
+            echo "::warning::R_UNIVERSE_TRIGGER_PAT not set; skipping r-universe sync."
+            exit 0
+          fi
+          tmp=$(mktemp -d)
+          git clone --depth=1 \
+            "https://x-access-token:${R_UNIVERSE_TRIGGER_PAT}@github.com/rootcoder007/rootcoder007.r-universe.dev" \
+            "$tmp"
+          cd "$tmp"
+          git config user.email "noreply@anthropic.com"
+          git config user.name "rmorie CI"
+          git commit --allow-empty -m "sync: rmorie ${{ github.sha }}"
+          git push
+
   summary:
     name: summary
     needs:

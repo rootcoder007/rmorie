@@ -1,10 +1,15 @@
 # morie 森 — The Fates' Forest
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/rootcoder007/morie/actions/workflows/r-cmd-check.yml/badge.svg)](https://github.com/rootcoder007/morie/actions/workflows/r-cmd-check.yml)
-[![codecov](https://codecov.io/gh/rootcoder007/morie/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rootcoder007/morie)
+[![Project Status: Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN status](https://www.r-pkg.org/badges/version/rmorie)](https://CRAN.R-project.org/package=rmorie)
+[![r-universe](https://rootcoder007.r-universe.dev/badges/rmorie)](https://rootcoder007.r-universe.dev/rmorie)
+[![R-CMD-check](https://github.com/rootcoder007/rmorie/actions/workflows/r-cmd-check.yml/badge.svg)](https://github.com/rootcoder007/rmorie/actions/workflows/r-cmd-check.yml)
+[![Codecov test coverage](https://codecov.io/gh/rootcoder007/rmorie/graph/badge.svg)](https://app.codecov.io/gh/rootcoder007/rmorie)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
-[![rOpenSci review](https://img.shields.io/badge/rOpenSci-under_review_%23770-orange)](https://github.com/ropensci/software-review/issues/770)
+[![rOpenSci](https://badges.ropensci.org/770_status.svg)](https://github.com/ropensci/software-review/issues/770)
+[![GitHub last commit](https://img.shields.io/github/last-commit/rootcoder007/rmorie.svg)](https://github.com/rootcoder007/rmorie/commits/main)
 <!-- badges: end -->
 
 `morie` is a dual-language (R + Python) scientific computing package for
@@ -62,9 +67,9 @@ From r-universe (development snapshot):
 
 ```r
 install.packages(
-  "morie",
-  repos = c(hadesllm = "https://hadesllm.r-universe.dev",
-            CRAN     = "https://cloud.r-project.org")
+  "rmorie",
+  repos = c(rootcoder007 = "https://rootcoder007.r-universe.dev",
+            CRAN         = "https://cloud.r-project.org")
 )
 ```
 
@@ -236,46 +241,35 @@ software and the relevant companion papers.
   author  = {Ruhela, Vansh Singh},
   year    = {2026},
   note    = {R package version 0.9.5.4},
-  doi     = {10.5281/zenodo.20111233},
   url     = {https://github.com/rootcoder007/morie}
 }
 
 @Misc{ruhela_morie_python_2026,
-  title     = {morie: Multi-domain Open Research and Inferential Estimation in Python},
-  author    = {Ruhela, Vansh Singh},
-  year      = {2026},
-  publisher = {Zenodo},
-  doi       = {10.5281/zenodo.20096350},
-  url       = {https://doi.org/10.5281/zenodo.20096350}
+  title  = {morie: Multi-domain Open Research and Inferential Estimation in Python},
+  author = {Ruhela, Vansh Singh},
+  year   = {2026}
 }
 
 @Misc{ruhela_mrm_framework_2026,
-  title     = {MRM: Multilevel Reconciliation Methodology --- A multi-source statistical foundation for Canadian carceral, police, and oversight data},
-  author    = {Ruhela, Vansh Singh},
-  year      = {2026},
-  publisher = {Zenodo},
-  doi       = {10.5281/zenodo.20096075},
-  url       = {https://doi.org/10.5281/zenodo.20096075}
+  title  = {MRM: Multilevel Reconciliation Methodology --- A multi-source statistical foundation for Canadian carceral, police, and oversight data},
+  author = {Ruhela, Vansh Singh},
+  year   = {2026}
 }
 
 @Misc{ruhela_hawkes_2026,
-  title     = {Criminological Hawkes Process via MORIE: Markovian and Non-Markovian Self-Exciting Point Processes for Toronto Crime},
-  author    = {Ruhela, Vansh Singh},
-  year      = {2026},
-  publisher = {Zenodo},
-  doi       = {10.5281/zenodo.20102198},
-  url       = {https://doi.org/10.5281/zenodo.20102198}
+  title  = {Criminological Hawkes Process via MORIE: Markovian and Non-Markovian Self-Exciting Point Processes for Toronto Crime},
+  author = {Ruhela, Vansh Singh},
+  year   = {2026}
 }
 
 @Misc{ruhela_empirical_2026,
-  title     = {Solitary Confinement, Self-Excitation, and Institutional Churn: Empirical Applications of MRM to Canadian Carceral and Police Data},
-  author    = {Ruhela, Vansh Singh},
-  year      = {2026},
-  publisher = {Zenodo},
-  doi       = {10.5281/zenodo.20175689},
-  url       = {https://doi.org/10.5281/zenodo.20175689}
+  title  = {Solitary Confinement, Self-Excitation, and Institutional Churn: Empirical Applications of MRM to Canadian Carceral and Police Data},
+  author = {Ruhela, Vansh Singh},
+  year   = {2026}
 }
 ```
+
+(DOIs will be re-added once we re-deposit on Zenodo.)
 
 ## License
 
