@@ -53,7 +53,7 @@ Wraps the City of Chicago "Boundaries - Wards (2023-)" open dataset
 returns empty objects -- this is a filtered/derived view on
 Socrata. Live mode uses SODA3
 (\verb{/api/v3/views/sp34-6z76/query.json}) via
-\code{\link[=.morie_dataset_soda3_query]{.morie_dataset_soda3_query()}}.
+\code{.morie_dataset_soda3_query()}.
 
 Offline mode reads a bundled 50-row attribute-only fixture
 (\code{inst/extdata/chicago_wards.csv}: \code{ward} / \code{shape_leng} /

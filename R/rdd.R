@@ -30,7 +30,7 @@ NULL
 #' RDD kernel functions
 #'
 #' Vectorised kernel functions on the support |u| <= 1 (Gaussian is on
-#' the real line). Used by [morie_rdd_local_linear()] and friends for
+#' the real line). Used by RDD local-linear estimators and friends for
 #' kernel weighting around the cutoff.
 #'
 #' \itemize{

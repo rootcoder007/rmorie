@@ -107,8 +107,8 @@ morie_fairness_noisy_or_detection <- function(crime_xy, officer_xy,
 #' @param groups Character vector of group labels (groups[1] = reference).
 #' @param group_props Optional sampling proportions.
 #' @param n_areas Number of areas (>= number of groups).
-#' @param base_rate Reference-group favourable-outcome rate in `[0, 1]`.
-#' @param bias Injected disparity in `[-1, 1]`.
+#' @param base_rate Reference-group favourable-outcome rate in 0--1.
+#' @param bias Injected disparity in -1--1.
 #' @param seed Reproducibility seed.
 #' @return A data.frame with columns area, group, true_outcome,
 #'   detected, risk_score.

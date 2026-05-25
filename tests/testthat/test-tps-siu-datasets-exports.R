@@ -114,11 +114,17 @@ test_that("morie_datasets_tps_homicide dispatches via .morie_dataset_tps_fetch",
 test_that("morie_datasets_siu_director_reports returns df with case_number + url", {
   # When rvest is present and the live SIU site responds, this returns a
   # populated frame; when rvest is missing, it warns + returns a 0-row
-  # frame. We tolerate both via a mocked rvest-absent path.
+  # frame. Hits siu.on.ca live -- skip on CRAN + offline runners.
+  testthat::skip_on_cran()
+  testthat::skip_if_offline(host = "www.siu.on.ca")
   out <- tryCatch(morie_datasets_siu_director_reports(),
                   warning = function(w) {
                     suppressWarnings(
                       morie_datasets_siu_director_reports())
+                  },
+                  error = function(e) {
+                    testthat::skip(paste0(
+                      "SIU site unreachable: ", conditionMessage(e)))
                   })
   expect_s3_class(out, "data.frame")
   expect_true("case_number" %in% names(out))

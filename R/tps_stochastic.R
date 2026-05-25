@@ -524,7 +524,7 @@ morie_tps_langevin_simulate <- function(df, ds_name = "?",
 #' then evolves an initial gaussian density centred on the last
 #' observation by an explicit advection-diffusion finite-difference
 #' scheme with reflective boundaries on a grid spanning
-#' [0, 1.5 * max(counts) + 1].
+#' from 0 to 1.5 * max(counts) + 1.
 #'
 #' @param df A \code{data.frame}.
 #' @param ds_name Character label.

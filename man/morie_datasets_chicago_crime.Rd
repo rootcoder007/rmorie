@@ -27,9 +27,9 @@ morie_datasets_chicago_crime(
 API path for live mode:
 \itemize{
 \item \code{"soda2"} -> \verb{/resource/<id>.json?$where=...} via
-\code{\link[=.morie_dataset_socrata_fetch]{.morie_dataset_socrata_fetch()}} (URL-param SoQL grammar).
+\code{.morie_dataset_socrata_fetch()} (URL-param SoQL grammar).
 \item \code{"soda3"} -> \verb{/api/v3/views/<id>/query.json?query=SELECT ...}
-via \code{\link[=.morie_dataset_soda3_query]{.morie_dataset_soda3_query()}} (full SoQL passthrough).
+via \code{.morie_dataset_soda3_query()} (full SoQL passthrough).
 Both modes return the same 22-column schema; SODA3 is required
 when a derived/map view is involved (none here, but available
 for parity with \code{\link[=morie_datasets_chicago_crime_map]{morie_datasets_chicago_crime_map()}}) and for
