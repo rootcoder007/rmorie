@@ -13,11 +13,21 @@
 # auto-cleans at session exit.
 Sys.setenv(MORIE_CACHE_DIR = tempfile("morie-test-cache-"))
 
-# NOT_CRAN=true tells testthat we're not running under R CMD check
-# --as-cran, so testthat::skip_on_cran() becomes a no-op and the 17
-# CRAN-defensive tests actually execute locally and in CI. Under
-# real CRAN check the variable is unset, so the skips fire as
-# designed. `devtools::test()` sets this automatically; this line
-# covers the bare `testthat::test_dir()` invocation our covr
-# scripts use.
-Sys.setenv(NOT_CRAN = "true")
+# NOT_CRAN handling.
+#
+# Bare `testthat::test_dir()` (e.g. our covr scripts) does NOT set
+# NOT_CRAN automatically; without it, `skip_on_cran()` would skip the
+# network-tied tests we want to exercise locally. `devtools::test()`
+# sets NOT_CRAN=true itself, so that path is already covered.
+#
+# Under R CMD check, however, the network/slow tests gated by
+# `skip_on_cran()` MUST skip -- they make live API calls to CKAN /
+# StatCan / Socrata endpoints that take 30+ s to time out per request
+# on Windows runners and hang the whole `checking tests` step.
+#
+# R CMD check sets `R_TESTS` for every testthat invocation under it,
+# so we use that as the discriminator: only set NOT_CRAN=true when
+# `R_TESTS` is empty (i.e. not running under R CMD check).
+if (!nzchar(Sys.getenv("R_TESTS"))) {
+  Sys.setenv(NOT_CRAN = "true")
+}
