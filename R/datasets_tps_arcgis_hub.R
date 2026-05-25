@@ -86,11 +86,23 @@
 #' @export
 morie_datasets_tps_arcgis_hub_layers <- function(offline = TRUE) {
   if (isTRUE(offline)) {
+    # Look in rmorie first, then rmoriedata (companion ships this one).
+    # Return empty data.frame on miss so morie_dataset_portal_catalog()
+    # and other downstream consumers can still build successfully.
     path <- system.file("extdata", "tps_arcgis_hub_catalog.csv",
                         package = "rmorie")
+    if (!nzchar(path) &&
+        requireNamespace("rmoriedata", quietly = TRUE)) {
+      path <- system.file("extdata", "tps_arcgis_hub_catalog.csv",
+                          package = "rmoriedata")
+    }
     if (!nzchar(path)) {
-      stop("bundled TPS ArcGIS Hub catalog fixture missing",
-           call. = FALSE)
+      warning("TPS ArcGIS Hub catalog fixture not bundled; ",
+              "returning empty data.frame. Install the rmoriedata ",
+              "companion: ",
+              "remotes::install_github('rootcoder007/rmoriedata')",
+              call. = FALSE)
+      return(data.frame())
     }
     df <- utils::read.csv(path, stringsAsFactors = FALSE,
                            check.names = FALSE)

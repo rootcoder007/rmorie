@@ -157,7 +157,7 @@ test_that("inference / model module internals run", {
     ".run_treatment_effects_module_internal",
     ".run_dag_specification_module_internal"
   )) {
-    f <- tryCatch(get(fn, envir = asNamespace("morie")),
+    f <- tryCatch(get(fn, envir = asNamespace("rmorie")),
       error = function(e) NULL
     )
     if (!is.null(f)) .cov_run(f(d))
@@ -170,7 +170,7 @@ test_that("ebac module internals run", {
     ".run_ebac_core_module_internal",
     ".run_ebac_gender_smote_sensitivity_module_internal"
   )) {
-    f <- tryCatch(get(fn, envir = asNamespace("morie")),
+    f <- tryCatch(get(fn, envir = asNamespace("rmorie")),
       error = function(e) NULL
     )
     if (!is.null(f)) .cov_run(f(d))

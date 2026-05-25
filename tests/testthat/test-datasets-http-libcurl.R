@@ -14,11 +14,11 @@
 test_that(".morie_http_get C++ symbol is exported and callable in this build", {
   expect_true(.morie_dataset_http_backend_cpp <- exists(
     ".morie_dataset_http_backend_cpp",
-    where = asNamespace("morie"), mode = "function") |
+    where = asNamespace("rmorie"), mode = "function") |
     exists(".morie_http_get",
-    where = asNamespace("morie"), mode = "function"))
+    where = asNamespace("rmorie"), mode = "function"))
   expect_true(exists(".morie_http_get",
-                       where = asNamespace("morie"),
+                       where = asNamespace("rmorie"),
                        mode = "function"))
 })
 
@@ -178,7 +178,7 @@ test_that(".siu_http_get still works (3VV preserved siu_parser's transport)", {
   # We don't call .siu_http_get over the wire; we just verify the
   # symbol stayed exported through the 3VV refactor.
   expect_true(exists(".siu_http_get",
-                       where = asNamespace("morie"),
+                       where = asNamespace("rmorie"),
                        mode = "function"))
 })
 
@@ -186,7 +186,7 @@ test_that(".siu_http_get still works (3VV preserved siu_parser's transport)", {
 
 test_that(".morie_http_get_bytes C++ symbol exists + returns a raw vector", {
   expect_true(exists(".morie_http_get_bytes",
-                       where = asNamespace("morie"),
+                       where = asNamespace("rmorie"),
                        mode = "function"))
 })
 
@@ -240,10 +240,10 @@ test_that(".morie_dataset_http_bytes forwards custom headers", {
 
 test_that(".morie_http_get_with_status + .morie_http_post_with_status exist", {
   expect_true(exists(".morie_http_get_with_status",
-                       where = asNamespace("morie"),
+                       where = asNamespace("rmorie"),
                        mode = "function"))
   expect_true(exists(".morie_http_post_with_status",
-                       where = asNamespace("morie"),
+                       where = asNamespace("rmorie"),
                        mode = "function"))
 })
 

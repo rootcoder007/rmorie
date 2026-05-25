@@ -44,8 +44,11 @@ A result list; see \code{\link{morie_did_2x2}}.  \code{p_value}
 is the bootstrap p-value.
 }
 \description{
-Recommended when the number of clusters is small (< 50).  Prefers
-\code{fwildclusterboot::boottest} when available; falls back to a
-Rademacher / Webb implementation that mirrors the Python module
-otherwise.
+Recommended when the number of clusters is small (< 50). Uses a
+base-R Rademacher / Webb wild-cluster-bootstrap implementation
+that mirrors the Python module. Earlier morie versions also
+delegated to \code{fwildclusterboot::boottest} when installed; we
+dropped that branch because fwildclusterboot is GitHub-only and
+transitively requires summclust, also GitHub-only, which made the
+CI dependency resolver unreliable.
 }

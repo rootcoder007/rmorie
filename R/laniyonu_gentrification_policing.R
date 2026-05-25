@@ -166,7 +166,7 @@ NULL
 .lan_sdm_decompose <- function(rho, beta_direct, beta_spatial, W,
                                 coefficient_names) {
   if (exists("morie_spatial_spillover_decomposition",
-             envir = asNamespace("morie"), inherits = FALSE)) {
+             envir = asNamespace("rmorie"), inherits = FALSE)) {
     return(morie_spatial_spillover_decomposition(
       rho = rho, beta_direct = beta_direct, beta_spatial = beta_spatial,
       W = W, coefficient_names = coefficient_names

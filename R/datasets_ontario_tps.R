@@ -88,7 +88,7 @@
   # Delegate to the existing TPS ingest helper so this stays a thin
   # wrapper that callers (and mocks) can target cleanly.
   if (exists(".morie_dataset_tps_fetch",
-             envir = asNamespace("morie"), inherits = FALSE)) {
+             envir = asNamespace("rmorie"), inherits = FALSE)) {
     return(.morie_dataset_tps_fetch(
       layer_url, where = where, max_features = max_features,
       return_geometry = return_geometry))

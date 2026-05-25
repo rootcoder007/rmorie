@@ -416,7 +416,7 @@
 #' head(df)
 morie_synth_otis <- function(id, n = 200L, seed = 1L) {
   helper_name <- paste0(".morie_otis_", id, "_panel")
-  ns <- asNamespace("morie")
+  ns <- asNamespace("rmorie")
   if (!exists(helper_name, envir = ns, inherits = FALSE)) {
     return(.morie_otis_b01_panel(n = n, seed = seed))
   }

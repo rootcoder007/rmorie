@@ -310,7 +310,7 @@ test_that(".morie_fairness_mean_finite ignores Inf/NaN/NA", {
 
 test_that(".morie_fairness_init_registry seeds the 'generic' profile", {
   rmorie:::.morie_fairness_init_registry()
-  reg <- get(".morie_fairness_registry", envir = asNamespace("morie"))
+  reg <- get(".morie_fairness_registry", envir = asNamespace("rmorie"))
   expect_true(exists("generic", envir = reg, inherits = FALSE))
 })
 

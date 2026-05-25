@@ -344,7 +344,7 @@ morie_tps_load <- function(name, format = "csv", nrows = NULL) {
   }
   fn_name <- .MORIE_TPS_DISPATCH[[fmt]]
   fn <- get(fn_name, mode = "function",
-            envir = asNamespace("morie"),
+            envir = asNamespace("rmorie"),
             inherits = FALSE)
   fn(name, nrows)
 }

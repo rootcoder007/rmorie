@@ -200,7 +200,7 @@ test_that("bootstrap_methods internal cross_validate / repeated_cv / leave_one_o
   # leave_one_out_cv but they are shadowed in the package namespace by
   # validation.R's cross_validate. Reach them directly via the source
   # so we still cover those branches.
-  ns <- asNamespace("morie")
+  ns <- asNamespace("rmorie")
   # The package namespace only carries the LAST-loaded definition; the
   # bootstrap_methods.R versions still exist as the file is sourced.
   # We can't easily get the shadowed copies, so we exercise the

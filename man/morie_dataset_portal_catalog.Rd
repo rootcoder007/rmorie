@@ -26,9 +26,15 @@ environment so repeated calls are O(1); call
 after editing a registry in an interactive session.
 }
 \examples{
+\donttest{
+# The full catalog spans 14 portal registries; some (Toronto Hub,
+# NYC/Chicago/etc. bulk) are served by the optional rmoriedata
+# companion. The call still succeeds without it -- portals lacking
+# a bundled fixture warn once and contribute zero rows.
 cat_df <- morie_dataset_portal_catalog()
 nrow(cat_df)
 table(cat_df$source)
+}
 }
 \seealso{
 \code{\link[=morie_dataset_portal_catalog_clear_cache]{morie_dataset_portal_catalog_clear_cache()}},

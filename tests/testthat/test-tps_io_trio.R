@@ -127,7 +127,7 @@ test_that("the ArcGIS helper surfaces a clean install message when httr2 is abse
   # current process; verify that the helper at least exists and is a
   # function (i.e. exported by the package namespace correctly).
   expect_true(is.function(
-    get(".morie_tps_arcgis_query", envir = asNamespace("morie"))
+    get(".morie_tps_arcgis_query", envir = asNamespace("rmorie"))
   ))
 })
 

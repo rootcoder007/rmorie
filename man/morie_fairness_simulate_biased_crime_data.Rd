@@ -17,15 +17,15 @@ morie_fairness_simulate_biased_crime_data(
 \arguments{
 \item{n}{Number of records.}
 
-\item{groups}{Character vector of group labels (groups[1] = reference).}
+\item{groups}{Character vector of group labels (groups\link{1} = reference).}
 
 \item{group_props}{Optional sampling proportions.}
 
 \item{n_areas}{Number of areas (>= number of groups).}
 
-\item{base_rate}{Reference-group favourable-outcome rate in \verb{[0, 1]}.}
+\item{base_rate}{Reference-group favourable-outcome rate in 0--1.}
 
-\item{bias}{Injected disparity in \verb{[-1, 1]}.}
+\item{bias}{Injected disparity in -1--1.}
 
 \item{seed}{Reproducibility seed.}
 }

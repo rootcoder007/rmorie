@@ -42,7 +42,7 @@ test_that("morie_vertex_resolve_config returns project/location/model from env",
 
 test_that("morie_vertex_access_token returns cached token without invoking gcloud", {
   cache <- get(".morie_vertex_token_cache",
-               envir = asNamespace("morie"))
+               envir = asNamespace("rmorie"))
   old_tok <- cache$token
   old_exp <- cache$expires_at
   cache$token      <- "test-cached-token"

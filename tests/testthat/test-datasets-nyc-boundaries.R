@@ -93,14 +93,14 @@ test_that("morie_datasets_nyc_boundaries_catalog lists 7 boundary types", {
   # Every loader name exists as an exported morie function.
   for (lname in cat_df$loader)
     expect_true(exists(lname, mode = "function",
-                         envir = asNamespace("morie")),
+                         envir = asNamespace("rmorie")),
                  info = sprintf("missing loader: %s", lname))
 })
 
 test_that("catalog row counts match each loader's actual row count", {
   cat_df <- morie_datasets_nyc_boundaries_catalog()
   for (i in seq_len(nrow(cat_df))) {
-    fn <- get(cat_df$loader[i], envir = asNamespace("morie"))
+    fn <- get(cat_df$loader[i], envir = asNamespace("rmorie"))
     actual <- nrow(fn(offline = TRUE))
     expect_equal(actual, cat_df$n_rows[i],
                   info = sprintf("loader: %s", cat_df$loader[i]))

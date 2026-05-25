@@ -84,7 +84,7 @@ morie_dsp_alpha_trimmed_mean <- function(x, window = 5L, alpha = 0.2) {
 
 #' @noRd
 .morie_dsp_cpp_ok <- function(name) {
-  exists(name, envir = asNamespace("morie"), inherits = FALSE)
+  exists(name, envir = asNamespace("rmorie"), inherits = FALSE)
 }
 
 #' Median filter

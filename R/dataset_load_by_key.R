@@ -119,8 +119,8 @@ morie_datasets_load_by_key <- function(dataset_key,
   is_targeted <- !grepl("(_by_id|_by_key|_ckan_resource|_cube_metadata)$",
                           loader)
   if (is_targeted &&
-      exists(loader, mode = "function", envir = asNamespace("morie"))) {
-    fn <- get(loader, envir = asNamespace("morie"))
+      exists(loader, mode = "function", envir = asNamespace("rmorie"))) {
+    fn <- get(loader, envir = asNamespace("rmorie"))
     args <- formals(fn)
     call_args <- list()
     if ("offline" %in% names(args)) call_args$offline <- offline

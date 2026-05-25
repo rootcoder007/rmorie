@@ -284,7 +284,7 @@ test_that("morie_otis_analyze_ruhela_master runs over datasets list", {
 # ---------------------------------------------------------------------------
 
 test_that("residual morie_otis_analyze_* exports each enter cleanly", {
-  ns <- tryCatch(asNamespace("morie"), error = function(e) NULL)
+  ns <- tryCatch(asNamespace("rmorie"), error = function(e) NULL)
   skip_if(is.null(ns), "morie namespace unavailable")
   candidates <- ls(ns, pattern = "^morie_otis_analyze_")
   skip_if(length(candidates) == 0, "no morie_otis_analyze_* exports found")

@@ -113,7 +113,7 @@ test_that("morie_ghosal_bernstein_von_mises handles n<2 gracefully", {
 test_that("morie_ghosal_bernstein_von_mises supports deterministic_seed path", {
   skip_if_not(
     exists("morie_det_rng",
-      where = asNamespace("morie"), inherits = FALSE
+      where = asNamespace("rmorie"), inherits = FALSE
     ),
     "morie_det_rng unavailable"
   )
@@ -301,7 +301,7 @@ test_that("morie_ghosal_dpmixture_density handles empty input", {
 test_that("morie_ghosal_dpmixture_density supports deterministic_seed path", {
   skip_if_not(
     exists("morie_det_rng",
-      where = asNamespace("morie"), inherits = FALSE
+      where = asNamespace("rmorie"), inherits = FALSE
     ),
     "morie_det_rng unavailable"
   )
@@ -473,7 +473,7 @@ test_that("morie_ghosal_hierarchical_bayes handles n<2", {
 test_that("morie_ghosal_hierarchical_bayes supports deterministic_seed path", {
   skip_if_not(
     exists("morie_det_rng",
-      where = asNamespace("morie"), inherits = FALSE
+      where = asNamespace("rmorie"), inherits = FALSE
     ),
     "morie_det_rng unavailable"
   )
