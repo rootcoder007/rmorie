@@ -32,6 +32,9 @@ morie_datasets_toronto_open_crime_adjacent_layers <- function(offline = TRUE) {
     path <- system.file("extdata",
                          "toronto_opendata_crime_adjacent_catalog.csv",
                          package = "rmorie")
+    if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+      path <- system.file("extdata", "toronto_opendata_crime_adjacent_catalog.csv", package = "rmoriedata")
+    }
     if (!nzchar(path))
       stop("bundled Toronto crime-adjacent catalog missing", call. = FALSE)
     return(utils::read.csv(path, stringsAsFactors = FALSE,
@@ -75,6 +78,9 @@ morie_datasets_toronto_ambulance_stations <- function(offline = TRUE,
   if (offline) {
     path <- system.file("extdata", "toronto_ambulance_stations.csv",
                         package = "rmorie")
+    if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+      path <- system.file("extdata", "toronto_ambulance_stations.csv", package = "rmoriedata")
+    }
     if (!nzchar(path))
       stop("bundled TO ambulance stations missing", call. = FALSE)
     df <- utils::read.csv(path, stringsAsFactors = FALSE,
@@ -107,6 +113,9 @@ morie_datasets_toronto_asr_miscellaneous <- function(offline = TRUE,
   if (offline) {
     path <- system.file("extdata", "toronto_asr_miscellaneous.csv",
                         package = "rmorie")
+    if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+      path <- system.file("extdata", "toronto_asr_miscellaneous.csv", package = "rmoriedata")
+    }
     if (!nzchar(path))
       stop("bundled TO ASR misc data missing", call. = FALSE)
     df <- utils::read.csv(path, stringsAsFactors = FALSE,

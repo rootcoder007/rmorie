@@ -27,6 +27,10 @@
     return(.morie_describe_env$corpus)
   }
   rds <- system.file("extdata", "describe_corpus.Rds", package = "rmorie")
+  if ((!nzchar(rds) || !file.exists(rds)) &&
+      requireNamespace("rmoriedata", quietly = TRUE)) {
+    rds <- system.file("extdata", "describe_corpus.Rds", package = "rmoriedata")
+  }
   if (!nzchar(rds) || !file.exists(rds)) {
     stop(
       "describe_corpus.Rds not found in the morie installation. ",

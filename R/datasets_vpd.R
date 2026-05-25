@@ -41,6 +41,9 @@
 morie_datasets_vpd_legal_disclaimer <- function() {
   path <- system.file("extdata", "vpd_legal_disclaimer.txt",
                       package = "rmorie")
+  if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+    path <- system.file("extdata", "vpd_legal_disclaimer.txt", package = "rmoriedata")
+  }
   if (!nzchar(path))
     stop("bundled VPD legal disclaimer missing", call. = FALSE)
   readLines(path, warn = FALSE)
