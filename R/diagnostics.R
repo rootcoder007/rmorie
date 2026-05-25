@@ -279,8 +279,8 @@ compute_influence <- function(y, X, y_hat = NULL) {
 
 #' Variance Inflation Factors
 #'
-#' For each column j of X, regresses \code{X[, j]} on the remaining columns
-#' (plus an intercept) and returns 1/(1 - R^2).
+#' For each column j of X, regresses column j on the remaining
+#' columns (plus an intercept) and returns 1/(1 - R^2).
 #'
 #' @param X Design matrix (without intercept).
 #' @param column_names Optional character vector of names.

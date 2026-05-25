@@ -728,6 +728,8 @@ decision_curve_analysis <- function(y_true, y_pred, thresholds = NULL) {
 
 #' Bootstrap optimism-corrected performance
 #' @inheritParams bootstrap_validate
+#' @param n_bootstrap Integer; number of bootstrap resamples used to
+#'   estimate the optimism correction (default 200).
 #' @export
 detect_overfitting <- function(fit_fn, predict_fn, X, y,
                                 scoring = "roc_auc",

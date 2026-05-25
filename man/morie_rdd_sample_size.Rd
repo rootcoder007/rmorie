@@ -14,6 +14,25 @@ morie_rdd_sample_size(
   alpha = 0.05
 )
 }
+\arguments{
+\item{tau}{Numeric; the treatment-effect size used by power /
+sample-size calculators.}
+
+\item{sigma}{Numeric; outcome standard deviation.}
+
+\item{cutoff_density}{Numeric; running-variable density at the
+cutoff.}
+
+\item{bandwidth}{Numeric; the local-polynomial bandwidth on each
+side of the cutoff. \code{NULL} invokes the data-driven CCT selector.}
+
+\item{power}{Numeric in \verb{(0, 1)}; target statistical power.}
+
+\item{kernel}{One of \code{"triangular"} (default), \code{"epanechnikov"},
+\code{"uniform"}, or \code{"gaussian"}.}
+
+\item{alpha}{Significance level (default \code{0.05}).}
+}
 \description{
 RDD sample-size determination
 }

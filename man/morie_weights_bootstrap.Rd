@@ -6,6 +6,16 @@
 \usage{
 morie_weights_bootstrap(weights, n_replicates = 200, strata = NULL, seed = 42)
 }
+\arguments{
+\item{weights}{Numeric vector of unit-level design weights.}
+
+\item{n_replicates}{Integer; replicate count.}
+
+\item{strata}{Optional vector of stratum identifiers aligned with
+\code{weights}.}
+
+\item{seed}{Integer RNG seed.}
+}
 \description{
 Bootstrap replicate weights (Rao-Wu rescaling within strata).
 }

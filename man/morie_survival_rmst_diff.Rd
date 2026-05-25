@@ -13,6 +13,20 @@ morie_survival_rmst_diff(
   confidence = 0.95
 )
 }
+\arguments{
+\item{time1}{Time vector for group 1 (\code{rmst_diff}).}
+
+\item{event1}{Event vector for group 1 (\code{rmst_diff}).}
+
+\item{time2}{Time vector for group 2 (\code{rmst_diff}).}
+
+\item{event2}{Event vector for group 2 (\code{rmst_diff}).}
+
+\item{tau}{RMST truncation horizon (\code{morie_survival_rmst}/\code{rmst_diff}).}
+
+\item{confidence}{Confidence level for interval estimates (default
+\code{0.95}).}
+}
 \description{
 Difference in RMST between two groups.
 }

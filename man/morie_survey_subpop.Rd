@@ -6,6 +6,22 @@
 \usage{
 morie_survey_subpop(df, domain_col, domain_value, outcome_col, weight_col)
 }
+\arguments{
+\item{df}{A \code{data.frame} holding the (unit-level) sample data plus
+any weight/strata/cluster/domain columns referenced by name.}
+
+\item{domain_col}{Character; column name of the subpopulation /
+domain indicator in \code{df}.}
+
+\item{domain_value}{Value (matching \code{df[[domain_col]]}) defining
+the subpopulation to estimate.}
+
+\item{outcome_col}{Character; column name of the outcome variable
+in \code{df}.}
+
+\item{weight_col}{Character; column name of the design weight
+variable in \code{df}.}
+}
 \description{
 Subpopulation (domain) mean with Woodruff linearised SE.
 }

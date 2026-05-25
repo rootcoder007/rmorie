@@ -12,6 +12,18 @@ morie_weights_fay_brr(
   seed = 42
 )
 }
+\arguments{
+\item{weights}{Numeric vector of unit-level design weights.}
+
+\item{strata}{Optional vector of stratum identifiers aligned with
+\code{weights}.}
+
+\item{fay_coefficient}{Fay's coefficient (\eqn{k}) for Fay's-BRR.}
+
+\item{n_replicates}{Integer; replicate count.}
+
+\item{seed}{Integer RNG seed.}
+}
 \description{
 Fay's BRR weights with perturbation coefficient \code{fay_coefficient} in [0,1).
 }

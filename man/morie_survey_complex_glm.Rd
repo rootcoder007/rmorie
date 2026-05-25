@@ -14,6 +14,25 @@ morie_survey_complex_glm(
   strata_col = NULL
 )
 }
+\arguments{
+\item{df}{A \code{data.frame} holding the (unit-level) sample data plus
+any weight/strata/cluster/domain columns referenced by name.}
+
+\item{formula}{A \code{formula} (e.g. \code{y ~ x1 + x2}) for survey-weighted
+regression / GLM.}
+
+\item{weight_col}{Character; column name of the design weight
+variable in \code{df}.}
+
+\item{family}{A \code{family} object (e.g. \code{stats::binomial()}) passed
+to the survey-weighted GLM.}
+
+\item{cluster_col}{Character; column name of the cluster identifier
+in \code{df}.}
+
+\item{strata_col}{Character; column name of the stratum identifier
+in \code{df}.}
+}
 \description{
 Complex-survey GLM constructor (single-shot wrapper that builds a design
 and fits a \code{svyglm} in one call). Cluster-robust SEs via the design.

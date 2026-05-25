@@ -6,6 +6,15 @@
 \usage{
 leave_one_out_cv(X, y, model_fn, score_fn)
 }
+\arguments{
+\item{X}{Numeric matrix or data.frame of predictors.}
+
+\item{y}{Numeric or factor outcome vector aligned with rows of \code{X}.}
+
+\item{model_fn}{Function \verb{(X, y) -> fitted-model} used on each training fold.}
+
+\item{score_fn}{Function \verb{(y_true, y_pred) -> numeric} returning a single performance metric.}
+}
 \value{
 A \code{morie_cv_result}.
 }

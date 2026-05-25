@@ -22,6 +22,9 @@ morie_otis_descriptives(...)
 
 morie_otis_dml(...)
 }
+\arguments{
+\item{...}{Arguments forwarded verbatim to the canonical short-named OTIS primitive (e.g. \code{morie_otis_rplace}, \code{morie_otis_astcmb}, \code{morie_otis_volat}, \code{morie_otis_rctrnd}, \code{morie_otis_otdesc}). See those functions for full per-primitive argument lists.}
+}
 \description{
 Six lightweight callables mirroring the Python module
 \code{morie.otis}: regional-placement matrices, alert-state combo

@@ -11,6 +11,17 @@ morie_survival_left_truncated_km(
   confidence = 0.95
 )
 }
+\arguments{
+\item{entry_time}{Left-truncation entry times.}
+
+\item{exit_time}{Exit (event/censoring) times for the
+left-truncated KM estimator.}
+
+\item{event}{Integer/logical vector; 1 = event, 0 = censored.}
+
+\item{confidence}{Confidence level for interval estimates (default
+\code{0.95}).}
+}
 \description{
 Left-truncated Kaplan-Meier with delayed entry.
 }

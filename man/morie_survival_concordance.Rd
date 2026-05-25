@@ -6,6 +6,14 @@
 \usage{
 morie_survival_concordance(time, event, risk_score)
 }
+\arguments{
+\item{time}{Numeric vector of event/censoring times.}
+
+\item{event}{Integer/logical vector; 1 = event, 0 = censored.}
+
+\item{risk_score}{Numeric vector of predicted risk scores aligned
+with \code{time} for concordance / discrimination metrics.}
+}
 \description{
 Uses \code{survival::concordance()} (which handles ties + censoring correctly).
 }

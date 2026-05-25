@@ -13,6 +13,24 @@ morie_weights_combined(
   trim_percentiles = NULL
 )
 }
+\arguments{
+\item{selection_probs}{Numeric vector of selection probabilities
+for \code{design}.}
+
+\item{responded}{Logical/integer 0/1 vector of response indicators.}
+
+\item{adjustment_cells}{Optional cell identifiers used by
+\code{nonresponse} adjustment.}
+
+\item{calibration_strata}{Optional strata for the calibration
+step of \code{combined}.}
+
+\item{population_totals}{Named numeric vector of target totals to
+calibrate to.}
+
+\item{trim_percentiles}{Two-element numeric vector \code{c(lower, upper)}
+of percentile bounds for trimming.}
+}
 \description{
 Combined design x nonresponse x post-strat (x trim) pipeline.
 }

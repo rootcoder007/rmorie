@@ -17,6 +17,8 @@ morie_spatial_voting_cjr_irt(
 \item{n_dims}{Ideal-point dimensions.}
 
 \item{n_samples}{MCMC samples. @param burn_in Burn-in length.}
+
+\item{burn_in}{Integer; MCMC burn-in iterations.}
 }
 \value{
 Never returns; raises \code{NotYetPorted}.

@@ -111,29 +111,60 @@ morie_dataset_portal_catalog_clear_cache <- function() {
 #'
 #' @param portal Optional character filter restricting output to a
 #'   single portal. `NULL` (default) returns every dataset across all
-#'   registries.
+#'   registries and hard-requires the `rmoriedata` companion (which
+#'   ships the bulk CKAN / Socrata / Hub catalog snapshots). A
+#'   per-portal call works without `rmoriedata` for portals whose
+#'   registry lives in code (`"nyc_nypd"`, `"tps_psdp"`,
+#'   `"ontario_ckan"`, `"statcan_ccjs"`, etc.); portals served by
+#'   `rmoriedata` (`"nyc_opendata"`, `"chicago"`, `"tps_arcgis_hub"`,
+#'   `"vancouver_opendata"`, etc.) return zero rows with a one-time
+#'   warning when the companion is absent.
 #' @return A `data.frame` with columns `dataset_key`, `source`,
 #'   `id`, `api_modes`, `loader`, `dict_url`, `n_rows_bundled`.
 #' @examples
-#' cat_df <- morie_dataset_portal_catalog()
-#' nrow(cat_df)
-#' table(cat_df$source)
+#' # Per-portal slice: registry lives in code, works without rmoriedata.
+#' nypd <- morie_dataset_portal_catalog(portal = "nyc_nypd")
+#' nrow(nypd)
+#' head(nypd$dataset_key)
+#'
+#' # Full catalog hard-requires rmoriedata for the bulk snapshots:
+#' if (requireNamespace("rmoriedata", quietly = TRUE)) {
+#'   cat_df <- morie_dataset_portal_catalog()
+#'   table(cat_df$source)
+#' }
 #' @seealso [morie_dataset_portal_catalog_clear_cache()],
 #'   [morie_datasets_load_by_key()], [morie_datasets_browse()]
 #' @export
 morie_dataset_portal_catalog <- function(portal = NULL) {
+  portal_choices <- c("chicago", "nyc_nypd", "nyc_opendata",
+                      "tps_arcgis_hub", "tps_psdp",
+                      "ontario_ckan", "vancouver_opendata",
+                      "vpd_geodash", "statcan_ccjs",
+                      "montreal_opendata", "toronto_opendata",
+                      "calgary_opendata", "edmonton_opendata",
+                      "ottawa_opendata")
+  if (!is.null(portal)) {
+    portal <- match.arg(portal, choices = portal_choices)
+  } else {
+    # Full catalog needs the rmoriedata bulk snapshots (~2.4 MB of
+    # CSVs that would otherwise blow CRAN's 5 MB source cap). Bail
+    # early with a clean install hint rather than build a partial
+    # catalog that quietly misses 10k+ rows from the bulk portals.
+    if (!requireNamespace("rmoriedata", quietly = TRUE)) {
+      stop("morie_dataset_portal_catalog() needs the rmoriedata ",
+           "companion (it ships the bulk CKAN/Socrata/Hub catalog ",
+           "snapshots). Install with: ",
+           "remotes::install_github('rootcoder007/rmoriedata'). ",
+           "Or call with portal=<one of nyc_nypd, tps_psdp, ",
+           "ontario_ckan, statcan_ccjs, vpd_geodash> for portals ",
+           "whose registry lives in code.",
+           call. = FALSE)
+    }
+  }
   cached <- .morie_portal_catalog_env$full
   if (!is.null(cached)) {
     out <- cached
     if (!is.null(portal)) {
-      portal <- match.arg(portal,
-                          choices = c("chicago", "nyc_nypd", "nyc_opendata",
-                                      "tps_arcgis_hub", "tps_psdp",
-                                      "ontario_ckan", "vancouver_opendata",
-                                      "vpd_geodash", "statcan_ccjs",
-                                      "montreal_opendata", "toronto_opendata",
-                                      "calgary_opendata", "edmonton_opendata",
-                                      "ottawa_opendata"))
       out <- out[out$source == portal, , drop = FALSE]
       rownames(out) <- NULL
     }
@@ -141,6 +172,14 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
   }
   rows <- list()
   push <- function(r) rows[[length(rows) + 1L]] <<- r
+  # Helper: only run a portal block when we're building the full
+  # catalog OR the requested portal matches. Inside the builder we
+  # suppress per-loader warnings about missing rmoriedata fixtures
+  # because the no-portal call has already hard-required the
+  # companion above, and per-portal calls fall through to the
+  # direct-loader warning surface.
+  want <- function(src) is.null(portal) || identical(portal, src)
+  quiet <- function(expr) suppressWarnings(expr)
 
   socrata_modes <- "soda2,soda2_csv,soda2_geojson,soda3,odata"
 
@@ -162,7 +201,7 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
   }
 
   # --- NYC OpenData BULK (3GGG1, 2851 entities) ----------------
-  nyc_bulk <- morie_datasets_nyc_opendata_bulk_layers(offline = TRUE)
+  nyc_bulk <- quiet(morie_datasets_nyc_opendata_bulk_layers(offline = TRUE))
   for (i in seq_len(nrow(nyc_bulk))) {
     push(data.frame(
       dataset_key = nyc_bulk$soda_id[i],
@@ -177,7 +216,7 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
   }
 
   # --- Chicago Open Data BULK (3GGG2, 1856 entities) -----------
-  chi_bulk <- morie_datasets_chicago_opendata_bulk_layers(offline = TRUE)
+  chi_bulk <- quiet(morie_datasets_chicago_opendata_bulk_layers(offline = TRUE))
   for (i in seq_len(nrow(chi_bulk))) {
     push(data.frame(
       dataset_key = chi_bulk$soda_id[i],
@@ -225,7 +264,7 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
   }
 
   # --- TPS ArcGIS Hub (71 catalog items, by hub_id) -------------
-  hub <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
+  hub <- quiet(morie_datasets_tps_arcgis_hub_layers(offline = TRUE))
   for (i in seq_len(nrow(hub))) {
     push(data.frame(
       dataset_key = sprintf("hub:%s", hub$hub_id[i]),
@@ -267,7 +306,7 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
   }
 
   # --- Vancouver Open Data BULK (3HHH2, 190 datasets) ---------
-  van_bulk <- morie_datasets_vancouver_opendata_bulk_layers(offline = TRUE)
+  van_bulk <- quiet(morie_datasets_vancouver_opendata_bulk_layers(offline = TRUE))
   for (i in seq_len(nrow(van_bulk))) {
     lk <- van_bulk$dataset_id[i]
     push(data.frame(
@@ -281,7 +320,7 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
   }
 
   # --- Calgary Open Data BULK (3GGG4, 933 entities) -----------
-  cal_bulk <- morie_datasets_calgary_opendata_bulk_layers(offline = TRUE)
+  cal_bulk <- quiet(morie_datasets_calgary_opendata_bulk_layers(offline = TRUE))
   cal_n_map <- c("78gh-n26t" = 200L, "bdez-pds9" = 200L,
                   "cqsb-2hhg" = 43L)
   cal_loader_map <- c("78gh-n26t" = "morie_datasets_calgary_community_crime_stats",
@@ -302,7 +341,7 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
   }
 
   # --- Edmonton Open Data BULK (3GGG, 2027 entities) ----------
-  edm_bulk <- morie_datasets_edmonton_opendata_bulk_layers(offline = TRUE)
+  edm_bulk <- quiet(morie_datasets_edmonton_opendata_bulk_layers(offline = TRUE))
   edm_n_map <- c("e7aq-scxv" = 10L, "b4y7-zhnz" = 31L)
   edm_loader_map <- c("e7aq-scxv" = "morie_datasets_edmonton_police_stations",
                        "b4y7-zhnz" = "morie_datasets_edmonton_fire_stations")
@@ -321,7 +360,7 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
   }
 
   # --- Ottawa Open Data BULK (3GGG5, 287 datasets) ------------
-  ott_bulk <- morie_datasets_ottawa_opendata_bulk_layers(offline = TRUE)
+  ott_bulk <- quiet(morie_datasets_ottawa_opendata_bulk_layers(offline = TRUE))
   for (i in seq_len(nrow(ott_bulk))) {
     push(data.frame(
       dataset_key = ott_bulk$hub_id[i],
@@ -335,7 +374,7 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
   }
 
   # --- Toronto Open Data BULK (3GGG3, 540 packages) -----------
-  tor_bulk <- morie_datasets_toronto_opendata_bulk_layers(offline = TRUE)
+  tor_bulk <- quiet(morie_datasets_toronto_opendata_bulk_layers(offline = TRUE))
   tor_loader_map <- c(
     "ambulance-station-locations" = "morie_datasets_toronto_ambulance_stations",
     "police-annual-statistical-report-miscellaneous-data" = "morie_datasets_toronto_asr_miscellaneous")
@@ -357,7 +396,7 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
   }
 
   # --- Montreal Open Data BULK (3HHH1, 401 packages) ----------
-  mtl_bulk <- morie_datasets_montreal_opendata_bulk_layers(offline = TRUE)
+  mtl_bulk <- quiet(morie_datasets_montreal_opendata_bulk_layers(offline = TRUE))
   for (i in seq_len(nrow(mtl_bulk))) {
     lk <- mtl_bulk$package_name[i]
     push(data.frame(

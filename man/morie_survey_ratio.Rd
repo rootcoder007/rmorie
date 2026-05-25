@@ -6,6 +6,17 @@
 \usage{
 morie_survey_ratio(y, x, weights, X_population_total)
 }
+\arguments{
+\item{y}{Numeric vector of outcome values aligned with the sample.}
+
+\item{x}{Numeric vector of auxiliary values aligned with \code{y} (used
+in ratio estimation).}
+
+\item{weights}{Numeric vector of design weights aligned with \code{y}.}
+
+\item{X_population_total}{Known population total for the auxiliary
+variable \code{x} (ratio estimator).}
+}
 \description{
 Ratio estimator of a population total using known X_pop.
 }

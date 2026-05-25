@@ -7,6 +7,8 @@
 morie_psymet_splithalf(data, method = c("first_last", "odd_even"))
 }
 \arguments{
+\item{data}{Numeric matrix or data.frame of items.}
+
 \item{method}{"first_last" or "odd_even".}
 }
 \description{

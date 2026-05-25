@@ -158,6 +158,9 @@ morie_tps_psdp_layers <- function() {
   entry <- .MORIE_TPS_PSDP_REGISTRY[[layer_key]]
   if (isTRUE(offline)) {
     path <- system.file("extdata", entry$fixture, package = "rmorie")
+    if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+      path <- system.file("extdata", entry$fixture, package = "rmoriedata")
+    }
     if (!nzchar(path)) {
       stop(sprintf("bundled TPS PSDP fixture %s missing",
                    entry$fixture), call. = FALSE)
@@ -353,6 +356,9 @@ morie_datasets_tps_police_divisions <- function(offline = TRUE,
   if (offline) {
     path <- system.file("extdata", "tps_police_divisions.csv",
                         package = "rmorie")
+    if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+      path <- system.file("extdata", "tps_police_divisions.csv", package = "rmoriedata")
+    }
     if (!nzchar(path))
       stop("bundled TPS police divisions fixture missing",
            call. = FALSE)

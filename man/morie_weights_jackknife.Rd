@@ -6,6 +6,15 @@
 \usage{
 morie_weights_jackknife(weights, strata = NULL, jk_type = c("JK1", "JKn"))
 }
+\arguments{
+\item{weights}{Numeric vector of unit-level design weights.}
+
+\item{strata}{Optional vector of stratum identifiers aligned with
+\code{weights}.}
+
+\item{jk_type}{Character; jackknife type (\code{"jk1"}, \code{"jk2"},
+\code{"jkn"}).}
+}
 \description{
 When the \code{survey} package is installed and \code{strata} is supplied, defers
 to \code{survey::as.svrepdesign(..., type = "JKn")} for variance compatibility.

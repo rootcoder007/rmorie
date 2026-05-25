@@ -15,6 +15,29 @@ morie_rdd_local_randomisation(
   alpha = 0.05
 )
 }
+\arguments{
+\item{data}{A \code{data.frame} holding the outcome, running variable,
+treatment, and any covariates referenced by name.}
+
+\item{outcome}{Character; column name of the response variable in
+\code{data}.}
+
+\item{running}{Character; column name of the running (forcing)
+variable in \code{data}.}
+
+\item{cutoff}{Numeric scalar; the threshold on \code{running}. Default
+\code{0} (the canonical normalisation).}
+
+\item{window}{Numeric; half-width of the local randomisation
+window.}
+
+\item{n_permutations}{Integer; permutation count for the
+randomisation-based inference.}
+
+\item{seed}{Integer; RNG seed for permutation / bootstrap routines.}
+
+\item{alpha}{Significance level (default \code{0.05}).}
+}
 \description{
 Local-randomisation RDD via permutation in a fixed window
 }

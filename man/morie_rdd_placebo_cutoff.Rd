@@ -16,6 +16,32 @@ morie_rdd_placebo_cutoff(
   alpha = 0.05
 )
 }
+\arguments{
+\item{data}{A \code{data.frame} holding the outcome, running variable,
+treatment, and any covariates referenced by name.}
+
+\item{outcome}{Character; column name of the response variable in
+\code{data}.}
+
+\item{running}{Character; column name of the running (forcing)
+variable in \code{data}.}
+
+\item{true_cutoff}{Numeric; the actual policy cutoff (placebo
+robustness re-runs the analysis at \code{placebo_cutoffs}).}
+
+\item{placebo_cutoffs}{Numeric vector of false cutoffs to test.}
+
+\item{bandwidth}{Numeric; the local-polynomial bandwidth on each
+side of the cutoff. \code{NULL} invokes the data-driven CCT selector.}
+
+\item{p}{Integer; local-polynomial order (default 1 for local-
+linear). 2 picks up quadratic curvature for bias correction.}
+
+\item{kernel}{One of \code{"triangular"} (default), \code{"epanechnikov"},
+\code{"uniform"}, or \code{"gaussian"}.}
+
+\item{alpha}{Significance level (default \code{0.05}).}
+}
 \description{
 Placebo cutoff falsification test
 }

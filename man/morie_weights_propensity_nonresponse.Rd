@@ -6,6 +6,14 @@
 \usage{
 morie_weights_propensity_nonresponse(weights, responded, X)
 }
+\arguments{
+\item{weights}{Numeric vector of unit-level design weights.}
+
+\item{responded}{Logical/integer 0/1 vector of response indicators.}
+
+\item{X}{A numeric matrix or \code{data.frame} of auxiliary variables
+(one row per unit) used by GREG / nonresponse propensity models.}
+}
 \description{
 Propensity-score non-response weights (logistic).
 }

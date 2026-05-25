@@ -6,6 +6,11 @@
 \usage{
 morie_survival_compare_parametric(time, event)
 }
+\arguments{
+\item{time}{Numeric vector of event/censoring times.}
+
+\item{event}{Integer/logical vector; 1 = event, 0 = censored.}
+}
 \description{
 Compare parametric survival models by AIC/BIC.
 }

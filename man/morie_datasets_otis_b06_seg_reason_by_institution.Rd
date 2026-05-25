@@ -15,6 +15,12 @@ morie_datasets_otis_b06_seg_reason_by_institution(
 fixture. If \code{FALSE}, hit Ontario CKAN (\code{resource_id} required).}
 
 \item{resource_id}{Optional CKAN resource id (required for live).}
+
+\item{source}{One of \code{NULL} (default, ships an empty 0-row frame
+with the documented schema when no real CKAN row is bundled),
+\code{"real"} (force the real CKAN sample bundled in \verb{inst/extdata/},
+error if absent), or \code{"synth"} (return a deterministic
+\code{set.seed()} synthetic for didactic examples).}
 }
 \description{
 OTIS b06 -- Segregation placements: reason for placement by institution

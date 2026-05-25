@@ -26,11 +26,17 @@ morie_datasets_chicago_police_districts(
 
 \item{resource_id}{Optional Socrata resource id override.}
 
+\item{mode}{One of \code{"soda2"} (default JSON resource endpoint) or
+\code{"soda3"} (SoQL \code{query} endpoint). 3VV+ dual-mode dispatch.}
+
 \item{paginate}{Logical; 3OO opt-in pagination.}
 
 \item{page_size}{Per-page row count when paginating.}
 
 \item{max_pages}{Safety net on paginated walks.}
+
+\item{app_token}{Optional Socrata API app token for higher rate
+limits; passed as the \code{X-App-Token} header.}
 }
 \value{
 A \code{data.frame} with 2 attribute cols (offline) or 3

@@ -36,6 +36,7 @@
 #'  Chernozhukov, V. et al. (2018). Double/debiased machine learning
 #'  for treatment and structural parameters. \emph{Econometrics
 #'  Journal}, 21(1), C1-C68.
+#' @param ... Arguments forwarded verbatim to the canonical short-named OTIS primitive (e.g. `morie_otis_rplace`, `morie_otis_astcmb`, `morie_otis_volat`, `morie_otis_rctrnd`, `morie_otis_otdesc`). See those functions for full per-primitive argument lists.
 #' @name morie_otis_primitives
 NULL
 

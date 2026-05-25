@@ -6,6 +6,11 @@
 \usage{
 morie_survival_martingale(cox_result)
 }
+\arguments{
+\item{cox_result}{A \code{coxph}-style fit (as returned by
+\code{morie_survival_cox}); used by residual diagnostics
+(\code{coxsnell}, \code{martingale}, \code{deviance}).}
+}
 \description{
 Martingale residuals.
 }

@@ -12,6 +12,20 @@ morie_weights_replicate_variance(
   strata = NULL
 )
 }
+\arguments{
+\item{full_estimate}{Numeric scalar; full-sample point estimate.}
+
+\item{replicate_estimates}{Numeric vector of replicate point
+estimates.}
+
+\item{method}{Character; calibration / smoothing / variance method.
+Allowed values depend on the caller.}
+
+\item{fay_coefficient}{Fay's coefficient (\eqn{k}) for Fay's-BRR.}
+
+\item{strata}{Optional vector of stratum identifiers aligned with
+\code{weights}.}
+}
 \description{
 \code{method} selects the rescaling: "JK1", "JKn", "BRR", "Fay", "bootstrap", "SDR".
 }

@@ -15,7 +15,19 @@ repeated_cv(
 )
 }
 \arguments{
+\item{X}{Numeric matrix or data.frame of predictors.}
+
+\item{y}{Numeric or factor outcome vector aligned with rows of \code{X}.}
+
+\item{model_fn}{Function \verb{(X, y) -> fitted-model} used on each training fold.}
+
+\item{score_fn}{Function \verb{(y_true, y_pred) -> numeric} returning a single performance metric.}
+
+\item{n_folds}{Integer; number of folds per repeat (default 10).}
+
 \item{n_repeats}{Number of repetitions.}
+
+\item{seed}{Integer RNG seed for reproducibility.}
 }
 \value{
 A \code{morie_cv_result} pooling scores across repeats.

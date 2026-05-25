@@ -15,6 +15,30 @@ morie_rdd_geographic(
   alpha = 0.05
 )
 }
+\arguments{
+\item{data}{A \code{data.frame} holding the outcome, running variable,
+treatment, and any covariates referenced by name.}
+
+\item{outcome}{Character; column name of the response variable in
+\code{data}.}
+
+\item{distance_to_boundary}{Character; column name of the signed
+distance to the geographic boundary in \code{data}.}
+
+\item{side}{Character; column name encoding the treatment side
+(e.g. \code{"left"}/\code{"right"}).}
+
+\item{bandwidth}{Numeric; the local-polynomial bandwidth on each
+side of the cutoff. \code{NULL} invokes the data-driven CCT selector.}
+
+\item{p}{Integer; local-polynomial order (default 1 for local-
+linear). 2 picks up quadratic curvature for bias correction.}
+
+\item{kernel}{One of \code{"triangular"} (default), \code{"epanechnikov"},
+\code{"uniform"}, or \code{"gaussian"}.}
+
+\item{alpha}{Significance level (default \code{0.05}).}
+}
 \description{
 Geographic / boundary RDD on a signed distance
 }

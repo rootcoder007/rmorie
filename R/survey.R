@@ -7,6 +7,56 @@
 # post-stratification fall-backs in base R so users without `survey`
 # installed still get correct point estimates with Taylor SEs.
 
+#' Shared parameters for morie_survey_* design-based estimators
+#'
+#' Roxygen-only stub holding the @param entries shared across the
+#' survey family (HT, Hajek, ratio, calibration, post-stratification,
+#' subpopulation, complex-design GLM, mean). Functions reference these
+#' via `@inheritParams morie_survey_params`.
+#'
+#' @param df A `data.frame` holding the (unit-level) sample data plus
+#'   any weight/strata/cluster/domain columns referenced by name.
+#' @param design A `survey::svydesign` object (when interfacing with
+#'   the `survey` package directly).
+#' @param y Numeric vector of outcome values aligned with the sample.
+#' @param x Numeric vector of auxiliary values aligned with `y` (used
+#'   in ratio estimation).
+#' @param weights Numeric vector of design weights aligned with `y`.
+#' @param inclusion_probs Numeric vector of inclusion probabilities
+#'   (`pi_i`) for the Horvitz-Thompson estimator.
+#' @param X_population_total Known population total for the auxiliary
+#'   variable `x` (ratio estimator).
+#' @param aux_vars Character vector of column names of auxiliary
+#'   variables used for calibration (raking, GREG, etc.).
+#' @param population_totals Named numeric vector of population totals
+#'   to calibrate to (one entry per `aux_vars` element).
+#' @param population_counts Named numeric vector of population counts
+#'   by stratum (post-stratification target).
+#' @param strata_col Character; column name of the stratum identifier
+#'   in `df`.
+#' @param cluster_col Character; column name of the cluster identifier
+#'   in `df`.
+#' @param weight_col Character; column name of the design weight
+#'   variable in `df`.
+#' @param domain_col Character; column name of the subpopulation /
+#'   domain indicator in `df`.
+#' @param domain_value Value (matching `df[[domain_col]]`) defining
+#'   the subpopulation to estimate.
+#' @param outcome_col Character; column name of the outcome variable
+#'   in `df`.
+#' @param variable Character; column name of the outcome variable in
+#'   the `design` object (`morie_survey_mean`).
+#' @param formula A `formula` (e.g. `y ~ x1 + x2`) for survey-weighted
+#'   regression / GLM.
+#' @param family A `family` object (e.g. `stats::binomial()`) passed
+#'   to the survey-weighted GLM.
+#' @param max_iter Iteration cap for the iterative calibration loop.
+#' @param tol Convergence tolerance for calibration.
+#' @keywords internal
+#' @name morie_survey_params
+NULL
+
+
 .req_survey <- function() {
   morie_ensure_extras("survey")
 }
@@ -48,6 +98,7 @@ morie_survey_design <- function(data, weights_col, strata_col = NULL,
 
 #' Horvitz-Thompson estimator of a population total.
 #' @return list with `total`, `se`, `ci_lower`, `ci_upper`.
+#' @inheritParams morie_survey_params
 #' @export
 morie_survey_ht_total <- function(y, inclusion_probs) {
   y <- as.numeric(y)
@@ -66,6 +117,7 @@ morie_survey_ht_total <- function(y, inclusion_probs) {
 }
 
 #' Hajek (ratio) estimator of a population mean.
+#' @inheritParams morie_survey_params
 #' @export
 morie_survey_hajek_mean <- function(y, weights) {
   y <- as.numeric(y)
@@ -85,6 +137,7 @@ morie_survey_hajek_mean <- function(y, weights) {
 }
 
 #' Survey-weighted mean (delegates to `survey::svymean` when available).
+#' @inheritParams morie_survey_params
 #' @export
 morie_survey_mean <- function(design, variable) {
   if (inherits(design, "survey.design") ||
@@ -100,6 +153,7 @@ morie_survey_mean <- function(design, variable) {
 }
 
 #' Ratio estimator of a population total using known X_pop.
+#' @inheritParams morie_survey_params
 #' @export
 morie_survey_ratio <- function(y, x, weights, X_population_total) {
   y <- as.numeric(y)
@@ -127,6 +181,7 @@ morie_survey_ratio <- function(y, x, weights, X_population_total) {
 #'
 #' Delegates to `survey::postStratify()` when given a design; otherwise
 #' computes raw post-stratification factors in base R.
+#' @inheritParams morie_survey_params
 #' @export
 morie_survey_poststratify <- function(df, strata_col, population_counts) {
   if (!strata_col %in% names(df))
@@ -156,6 +211,7 @@ morie_survey_poststratify <- function(df, strata_col, population_counts) {
 #'
 #' For multi-variable marginals use `morie_weights_rake()`; this helper is the
 #' single-variable convenience.
+#' @inheritParams morie_survey_params
 #' @export
 morie_survey_calibrate <- function(df, aux_vars, population_totals,
                                    max_iter = 50, tol = 1e-6) {
@@ -196,6 +252,7 @@ morie_survey_calibrate <- function(df, aux_vars, population_totals,
 }
 
 #' Subpopulation (domain) mean with Woodruff linearised SE.
+#' @inheritParams morie_survey_params
 #' @export
 morie_survey_subpop <- function(df, domain_col, domain_value,
                                 outcome_col, weight_col) {
@@ -225,6 +282,7 @@ morie_survey_subpop <- function(df, domain_col, domain_value,
 #' Wraps `survey::svyglm()`. Family argument accepts the same strings as the
 #' Python module ("gaussian", "binomial", "poisson", "gamma", "negativebinomial")
 #' or any R `family` object.
+#' @inheritParams morie_survey_params
 #' @export
 morie_survey_glm <- function(design, formula,
                              family = c("gaussian", "binomial", "poisson",
@@ -253,6 +311,7 @@ morie_survey_glm <- function(design, formula,
 
 #' Complex-survey GLM constructor (single-shot wrapper that builds a design
 #' and fits a `svyglm` in one call). Cluster-robust SEs via the design.
+#' @inheritParams morie_survey_params
 #' @export
 morie_survey_complex_glm <- function(df, formula, weight_col,
                                      family = "gaussian",

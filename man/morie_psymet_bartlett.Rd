@@ -6,6 +6,9 @@
 \usage{
 morie_psymet_bartlett(data)
 }
+\arguments{
+\item{data}{Numeric matrix or data.frame of items.}
+}
 \value{
 list with \code{chisq}, \code{df}, \code{pval}.
 }

@@ -13,6 +13,25 @@ morie_iv_conditional_lr(
   beta0 = 0
 )
 }
+\arguments{
+\item{data}{A \code{data.frame} (or tibble) holding the outcome,
+endogenous regressors, instruments, and any exogenous controls.}
+
+\item{outcome}{Character; column name of the response variable.}
+
+\item{endogenous}{Character vector; column names of the endogenous
+regressors.}
+
+\item{instruments}{Character vector; column names of the
+instrumental variables.}
+
+\item{exogenous}{Optional character vector of additional exogenous
+regressors included in both the structural equation and the
+first stage. \code{NULL} (default) for a just-identified design.}
+
+\item{beta0}{Numeric scalar or vector; the structural-coefficient
+value(s) to test under H0. Length must match \code{length(endogenous)}.}
+}
 \description{
 Conditional likelihood-ratio (CLR) test of Moreira (2003)
 }

@@ -6,6 +6,16 @@
 \usage{
 morie_rdd_bandwidth_rot(x, y, cutoff = 0)
 }
+\arguments{
+\item{x}{Numeric vector of running-variable values (used by
+bandwidth selectors + density tests that don't take a
+\code{data.frame}).}
+
+\item{y}{Numeric vector of outcome values aligned with \code{x}.}
+
+\item{cutoff}{Numeric scalar; the threshold on \code{running}. Default
+\code{0} (the canonical normalisation).}
+}
 \description{
 Rule-of-thumb (ROT) bandwidth -- Silverman-style on running variable
 }

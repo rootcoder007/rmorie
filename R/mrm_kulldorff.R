@@ -61,6 +61,12 @@ NULL
 #' @param window_years Time-cylinder length in years.
 #' @param n_centers Number of random candidate centres sub-sampled.
 #' @param n_permutations Monte-Carlo permutations.
+#' @param n_top_clusters Integer; number of top clusters to return.
+#'   Accepted for Python signature parity. The current implementation
+#'   returns a single primary cluster (the secondary-cluster loop in
+#'   `morie.mrm_kulldorff.py` `break`s out pending a proper
+#'   mask-and-rescan rewrite); values >1 are reserved for that
+#'   future TRUE multi-cluster mode.
 #' @param seed Random seed.
 #' @return A one-row data.frame describing the top cluster, with
 #'   columns \code{center_lat}, \code{center_lon}, \code{radius_km},

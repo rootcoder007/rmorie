@@ -23,5 +23,8 @@ utils::globalVariables(c(
   # Python-port placeholders (intentional `exists()`-guarded lookups)
   "morie_tps_load_tps_dataset",
   "morie_tps_load_tps",
-  "morie_spatial_spillover_decomposition"
+  "morie_spatial_spillover_decomposition",
+  # geepack::geeglm NSE: cluster id column added at runtime then passed
+  # by bare name to the formula-style `id` arg (see 3MMM.48 fix).
+  ".gee_cluster_id_int_"
 ))

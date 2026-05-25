@@ -6,6 +6,20 @@
 \usage{
 morie_rdd_mccrary(x, cutoff = 0, n_bins = 50, bandwidth = NULL)
 }
+\arguments{
+\item{x}{Numeric vector of running-variable values (used by
+bandwidth selectors + density tests that don't take a
+\code{data.frame}).}
+
+\item{cutoff}{Numeric scalar; the threshold on \code{running}. Default
+\code{0} (the canonical normalisation).}
+
+\item{n_bins}{Integer; bin count for histogram-based density tests
+and binned-plot reductions.}
+
+\item{bandwidth}{Numeric; the local-polynomial bandwidth on each
+side of the cutoff. \code{NULL} invokes the data-driven CCT selector.}
+}
 \description{
 McCrary (2008) density manipulation test
 }

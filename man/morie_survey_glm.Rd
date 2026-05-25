@@ -10,6 +10,16 @@ morie_survey_glm(
   family = c("gaussian", "binomial", "poisson", "gamma", "negativebinomial")
 )
 }
+\arguments{
+\item{design}{A \code{survey::svydesign} object (when interfacing with
+the \code{survey} package directly).}
+
+\item{formula}{A \code{formula} (e.g. \code{y ~ x1 + x2}) for survey-weighted
+regression / GLM.}
+
+\item{family}{A \code{family} object (e.g. \code{stats::binomial()}) passed
+to the survey-weighted GLM.}
+}
 \description{
 Wraps \code{survey::svyglm()}. Family argument accepts the same strings as the
 Python module ("gaussian", "binomial", "poisson", "gamma", "negativebinomial")

@@ -12,6 +12,55 @@
 #   Fine & Gray (1999). JASA, 94(446), 496-509.
 #   Kalbfleisch & Prentice (2002). The Statistical Analysis of Failure Time Data.
 
+#' Shared parameters for morie_survival_* estimators
+#'
+#' Roxygen-only stub holding the @param entries shared across the
+#' survival family (KM, Nelson-Aalen, Cox, RMST, AFT, parametric,
+#' Fine-Gray competing risks, Turnbull, landmark, concordance).
+#' Functions reference these via `@inheritParams morie_survival_params`.
+#'
+#' @param time Numeric vector of event/censoring times.
+#' @param event Integer/logical vector; 1 = event, 0 = censored.
+#' @param group Factor/character grouping variable for HR / log-rank
+#'   stratified comparisons.
+#' @param confidence Confidence level for interval estimates (default
+#'   `0.95`).
+#' @param tau RMST truncation horizon (`morie_survival_rmst`/`rmst_diff`).
+#' @param dist Distribution name for parametric/AFT fits (e.g.
+#'   `"weibull"`, `"lognormal"`, `"loglogistic"`).
+#' @param risk_score Numeric vector of predicted risk scores aligned
+#'   with `time` for concordance / discrimination metrics.
+#' @param cox_result A `coxph`-style fit (as returned by
+#'   `morie_survival_cox`); used by residual diagnostics
+#'   (`coxsnell`, `martingale`, `deviance`).
+#' @param data A `data.frame` whose columns supply `duration_col`,
+#'   `event_col`, `covariate_cols`, etc.
+#' @param duration_col Character; column name of the event/censoring
+#'   time in `data`.
+#' @param event_col Character; column name of the event-indicator
+#'   variable in `data`.
+#' @param covariate_cols Character vector of covariate column names.
+#' @param landmark_time Numeric landmark time at which to subset
+#'   the cohort before fitting (lead-time bias correction).
+#' @param event_of_interest Integer event-type code for competing-
+#'   risks analyses (Fine-Gray, CIF).
+#' @param time1 Time vector for group 1 (`rmst_diff`).
+#' @param event1 Event vector for group 1 (`rmst_diff`).
+#' @param time2 Time vector for group 2 (`rmst_diff`).
+#' @param event2 Event vector for group 2 (`rmst_diff`).
+#' @param entry_time Left-truncation entry times.
+#' @param exit_time Exit (event/censoring) times for the
+#'   left-truncated KM estimator.
+#' @param left Left-bracket times for interval-censored data
+#'   (`morie_survival_turnbull`).
+#' @param right Right-bracket times for interval-censored data.
+#' @param max_iter Iteration cap for the Turnbull NPMLE EM loop.
+#' @param tol Convergence tolerance for the Turnbull EM.
+#' @keywords internal
+#' @name morie_survival_params
+NULL
+
+
 .req_survival <- function() {
   morie_ensure_extras("survival")
 }
@@ -196,6 +245,7 @@ morie_survival_schoenfeld <- function(cox_result) {
 }
 
 #' Cox-Snell residuals from a fitted morie Cox model.
+#' @inheritParams morie_survival_params
 #' @export
 morie_survival_coxsnell <- function(cox_result) {
   .req_survival()
@@ -208,6 +258,7 @@ morie_survival_coxsnell <- function(cox_result) {
 }
 
 #' Martingale residuals.
+#' @inheritParams morie_survival_params
 #' @export
 morie_survival_martingale <- function(cox_result) {
   .req_survival()
@@ -217,6 +268,7 @@ morie_survival_martingale <- function(cox_result) {
 }
 
 #' Deviance residuals.
+#' @inheritParams morie_survival_params
 #' @export
 morie_survival_deviance <- function(cox_result) {
   .req_survival()
@@ -229,6 +281,7 @@ morie_survival_deviance <- function(cox_result) {
 #'
 #' Wraps `survival::survreg()`. Supported `dist`: "weibull", "lognormal",
 #' "loglogistic", "exponential", "gaussian".
+#' @inheritParams morie_survival_params
 #' @export
 morie_survival_aft <- function(data, duration_col, event_col, covariate_cols,
                                dist = c("weibull", "lognormal", "loglogistic",
@@ -259,6 +312,7 @@ morie_survival_aft <- function(data, duration_col, event_col, covariate_cols,
 #'
 #' For "exponential", "weibull", "lognormal", "loglogistic", "gaussian".
 #' Use `morie_survival_aft()` for covariate-adjusted parametric models.
+#' @inheritParams morie_survival_params
 #' @export
 morie_survival_parametric <- function(time, event,
                                        dist = c("weibull", "exponential",
@@ -283,6 +337,7 @@ morie_survival_parametric <- function(time, event,
 #' Harrell's concordance index (C-statistic).
 #'
 #' Uses `survival::concordance()` (which handles ties + censoring correctly).
+#' @inheritParams morie_survival_params
 #' @export
 morie_survival_concordance <- function(time, event, risk_score) {
   .req_survival()
@@ -299,6 +354,7 @@ morie_survival_concordance <- function(time, event, risk_score) {
 #' Integrates the Kaplan-Meier estimator from 0 to `tau` using trapezoidal
 #' integration on the step-function. SE follows the Klein-Moeschberger
 #' formula (approximation matches the Python module).
+#' @inheritParams morie_survival_params
 #' @export
 morie_survival_rmst <- function(time, event, tau = NULL, confidence = 0.95) {
   .req_survival()
@@ -314,6 +370,7 @@ morie_survival_rmst <- function(time, event, tau = NULL, confidence = 0.95) {
 }
 
 #' Difference in RMST between two groups.
+#' @inheritParams morie_survival_params
 #' @export
 morie_survival_rmst_diff <- function(time1, event1, time2, event2,
                                      tau = NULL, confidence = 0.95) {
@@ -334,6 +391,7 @@ morie_survival_rmst_diff <- function(time1, event1, time2, event2,
 #' Wraps `survival::survfit()` with multi-state `Surv()`.
 #' @param event Integer event code: 0 = censored, 1 = event of interest,
 #'   >=2 = competing event.
+#' @inheritParams morie_survival_params
 #' @export
 morie_survival_cif <- function(time, event, event_of_interest = 1L,
                                confidence = 0.95) {
@@ -365,6 +423,7 @@ morie_survival_cif <- function(time, event, event_of_interest = 1L,
 #' Fine-Gray subdistribution hazard model (competing risks).
 #'
 #' Requires the `cmprsk` package.
+#' @inheritParams morie_survival_params
 #' @export
 morie_survival_finegray <- function(data, duration_col, event_col,
                                     covariate_cols, event_of_interest = 1L,
@@ -413,6 +472,7 @@ coef.crr <- function(object, ...) {
 }
 
 #' Hazard ratio between two groups via a simple Cox model.
+#' @inheritParams morie_survival_params
 #' @export
 morie_survival_hr <- function(time, event, group, confidence = 0.95) {
   .req_survival()
@@ -433,6 +493,7 @@ morie_survival_hr <- function(time, event, group, confidence = 0.95) {
 }
 
 #' Landmark dataset constructor.
+#' @inheritParams morie_survival_params
 #' @export
 morie_survival_landmark <- function(data, duration_col, event_col, landmark_time) {
   df <- data[data[[duration_col]] >= landmark_time, , drop = FALSE]
@@ -441,6 +502,7 @@ morie_survival_landmark <- function(data, duration_col, event_col, landmark_time
 }
 
 #' Left-truncated Kaplan-Meier with delayed entry.
+#' @inheritParams morie_survival_params
 #' @export
 morie_survival_left_truncated_km <- function(entry_time, exit_time, event,
                                              confidence = 0.95) {
@@ -458,6 +520,7 @@ morie_survival_left_truncated_km <- function(entry_time, exit_time, event,
 }
 
 #' Compare parametric survival models by AIC/BIC.
+#' @inheritParams morie_survival_params
 #' @export
 morie_survival_compare_parametric <- function(time, event) {
   dists <- c("exponential", "weibull", "lognormal", "loglogistic", "gaussian")
@@ -481,6 +544,7 @@ morie_survival_compare_parametric <- function(time, event) {
 #'
 #' Delegates to `survival::survfit()` with `Surv(left, right, type = "interval2")`.
 #' Hand-rolled EM is left as a stub for environments without `survival`.
+#' @inheritParams morie_survival_params
 #' @export
 morie_survival_turnbull <- function(left, right, max_iter = 200, tol = 1e-6) {
   if (!requireNamespace("survival", quietly = TRUE)) {

@@ -6,6 +6,14 @@
 \usage{
 morie_weights_nonresponse(weights, responded, adjustment_cells = NULL)
 }
+\arguments{
+\item{weights}{Numeric vector of unit-level design weights.}
+
+\item{responded}{Logical/integer 0/1 vector of response indicators.}
+
+\item{adjustment_cells}{Optional cell identifiers used by
+\code{nonresponse} adjustment.}
+}
 \description{
 Within each cell, scales respondent weights up by total/responder ratio.
 Non-respondents end up with weight 0.

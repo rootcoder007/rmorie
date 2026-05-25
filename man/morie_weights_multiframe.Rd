@@ -13,6 +13,23 @@ morie_weights_multiframe(
   theta = 0.5
 )
 }
+\arguments{
+\item{weights_a}{Numeric vector of weights from frame A
+(\code{multiframe}).}
+
+\item{weights_b}{Numeric vector of weights from frame B
+(\code{multiframe}).}
+
+\item{overlap_a}{Logical vector flagging frame-A units in overlap.}
+
+\item{overlap_b}{Logical vector flagging frame-B units in overlap.}
+
+\item{method}{Character; calibration / smoothing / variance method.
+Allowed values depend on the caller.}
+
+\item{theta}{Numeric tuning parameter passed to \code{multiframe}
+(Hartley-style overlap composition).}
+}
 \description{
 Multi-frame (dual-frame) survey weights (Hartley compositing).
 }

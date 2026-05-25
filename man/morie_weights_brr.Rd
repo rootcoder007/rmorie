@@ -6,6 +6,16 @@
 \usage{
 morie_weights_brr(weights, strata, n_replicates = NULL, seed = 42)
 }
+\arguments{
+\item{weights}{Numeric vector of unit-level design weights.}
+
+\item{strata}{Optional vector of stratum identifiers aligned with
+\code{weights}.}
+
+\item{n_replicates}{Integer; replicate count.}
+
+\item{seed}{Integer RNG seed.}
+}
 \description{
 Each stratum is split into two halves; signs from a random Hadamard-like
 matrix double one half and zero the other. For exact Hadamard ordering use

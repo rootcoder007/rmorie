@@ -6,6 +6,13 @@
 \usage{
 morie_psymet_parallel(data, nsim = 100, seed = 42)
 }
+\arguments{
+\item{data}{Numeric matrix or data.frame of items.}
+
+\item{nsim}{Integer; number of simulated random datasets (default 100).}
+
+\item{seed}{Integer; RNG seed for reproducibility.}
+}
 \description{
 Delegates to \code{psych::fa.parallel()} when available; otherwise compares
 observed eigenvalues to the 95th percentile of random-data eigenvalues.

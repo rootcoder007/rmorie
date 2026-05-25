@@ -156,6 +156,7 @@ morie_psymet_alphadel <- function(data) {
 
 #' Composite reliability from standardized factor loadings.
 #' CR = (sum lambda)^2 / ((sum lambda)^2 + sum(1 - lambda^2))
+#' @param loads Numeric vector of standardised factor loadings (lambda).
 #' @export
 morie_psymet_cr <- function(loads) {
   lam <- as.numeric(loads)
@@ -165,6 +166,7 @@ morie_psymet_cr <- function(loads) {
 }
 
 #' Average variance extracted (AVE) from factor loadings. Mean(lambda^2).
+#' @param loads Numeric vector of standardised factor loadings (lambda).
 #' @export
 morie_psymet_ave <- function(loads) {
   mean(as.numeric(loads)^2)
@@ -175,6 +177,7 @@ morie_psymet_ave <- function(loads) {
 #' Delegates to `psych::KMO()` when available; otherwise computes from the
 #' partial-correlation anti-image matrix using base R.
 #' @return list with `msa` (overall) and named numeric vector `items`.
+#' @param data Numeric matrix or data.frame of items.
 #' @export
 morie_psymet_kmo <- function(data) {
   X <- .as_item_matrix(data)
@@ -207,6 +210,7 @@ morie_psymet_kmo <- function(data) {
 
 #' Bartlett's test of sphericity.
 #' @return list with `chisq`, `df`, `pval`.
+#' @param data Numeric matrix or data.frame of items.
 #' @export
 morie_psymet_bartlett <- function(data) {
   X <- .as_item_matrix(data)
@@ -224,6 +228,9 @@ morie_psymet_bartlett <- function(data) {
 #'
 #' Delegates to `psych::fa.parallel()` when available; otherwise compares
 #' observed eigenvalues to the 95th percentile of random-data eigenvalues.
+#' @param data Numeric matrix or data.frame of items.
+#' @param nsim Integer; number of simulated random datasets (default 100).
+#' @param seed Integer; RNG seed for reproducibility.
 #' @export
 morie_psymet_parallel <- function(data, nsim = 100, seed = 42) {
   X <- .as_item_matrix(data)
@@ -254,6 +261,7 @@ morie_psymet_parallel <- function(data, nsim = 100, seed = 42) {
 
 #' Spearman-Brown split-half reliability.
 #' @param method "first_last" or "odd_even".
+#' @param data Numeric matrix or data.frame of items.
 #' @export
 morie_psymet_splithalf <- function(data, method = c("first_last", "odd_even")) {
   method <- match.arg(method)
@@ -277,6 +285,8 @@ morie_psymet_splithalf <- function(data, method = c("first_last", "odd_even")) {
 #'
 #' Upper/lower groups by total score (default 27% per Kelley).
 #' @return data.frame with `item`, `d`.
+#' @param data Numeric matrix or data.frame of items.
+#' @param pct Numeric in (0, 0.5); proportion for the upper/lower group split (default 0.27, the Kelley-Cureton rule).
 #' @export
 morie_psymet_discrimination <- function(data, pct = 0.27) {
   X <- .as_item_matrix(data)

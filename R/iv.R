@@ -24,6 +24,46 @@ NULL
 
 
 # ---------------------------------------------------------------------------
+# Shared @param block for the morie_iv_* family. Functions inherit via
+# @inheritParams morie_iv_params (a roxygen-only stub).
+# ---------------------------------------------------------------------------
+
+#' Shared parameters for morie_iv_* estimators and diagnostics
+#'
+#' Roxygen-only stub holding the @param entries shared across the IV
+#' family (Anderson-Rubin, conditional-LR, Hansen J, Sargan, etc.).
+#' Functions reference these via `@inheritParams morie_iv_params` so
+#' each `@param` is documented once and the Rd files stay consistent.
+#'
+#' @param data A `data.frame` (or tibble) holding the outcome,
+#'   endogenous regressors, instruments, and any exogenous controls.
+#' @param outcome Character; column name of the response variable.
+#' @param endogenous Character vector; column names of the endogenous
+#'   regressors.
+#' @param instruments Character vector; column names of the
+#'   instrumental variables.
+#' @param exogenous Optional character vector of additional exogenous
+#'   regressors included in both the structural equation and the
+#'   first stage. `NULL` (default) for a just-identified design.
+#' @param beta0 Numeric scalar or vector; the structural-coefficient
+#'   value(s) to test under H0. Length must match `length(endogenous)`.
+#' @param alpha Significance level (default `0.05`); controls the
+#'   confidence-set / acceptance-region cut-off.
+#' @param grid_min Numeric; lower bound of the AR confidence-set
+#'   grid search over candidate `beta0` values.
+#' @param grid_max Numeric; upper bound of the AR confidence-set grid.
+#' @param grid_n Integer; number of grid points used in
+#'   `morie_iv_anderson_rubin_ci` (default 100).
+#' @param n_endogenous Integer; number of endogenous regressors used
+#'   to look up the Stock-Yogo critical-value table.
+#' @param n_instruments Integer; number of instruments used to look
+#'   up the Stock-Yogo critical-value table.
+#' @keywords internal
+#' @name morie_iv_params
+NULL
+
+
+# ---------------------------------------------------------------------------
 # Internal helpers
 # ---------------------------------------------------------------------------
 
@@ -292,6 +332,7 @@ morie_iv_wald <- function(data, outcome, treatment, instrument, alpha = 0.05) {
 # ---------------------------------------------------------------------------
 
 #' First-stage F-statistics and partial R^2
+#' @inheritParams morie_iv_params
 #' @export
 morie_iv_first_stage_diagnostics <- function(data, endogenous, instruments,
                                              exogenous = NULL) {
@@ -368,6 +409,7 @@ morie_iv_cragg_donald <- function(data, endogenous, instruments,
 }
 
 #' Stock-Yogo critical values
+#' @inheritParams morie_iv_params
 #' @export
 morie_iv_stock_yogo <- function(n_endogenous = 1, n_instruments = 1) {
   # TODO: ship full Stock & Yogo (2005, Table 5.2) lookup table -- currently
@@ -386,6 +428,7 @@ morie_iv_stock_yogo <- function(n_endogenous = 1, n_instruments = 1) {
 }
 
 #' Kleibergen-Paap rank statistic
+#' @inheritParams morie_iv_params
 #' @export
 morie_iv_kleibergen_paap <- function(data, endogenous, instruments,
                                      exogenous = NULL) {
@@ -395,6 +438,7 @@ morie_iv_kleibergen_paap <- function(data, endogenous, instruments,
 }
 
 #' Anderson-Rubin (AR) weak-IV-robust test
+#' @inheritParams morie_iv_params
 #' @export
 morie_iv_anderson_rubin <- function(data, outcome, endogenous, instruments,
                                     exogenous = NULL, beta0 = NULL,
@@ -429,6 +473,7 @@ morie_iv_anderson_rubin <- function(data, outcome, endogenous, instruments,
 
 #' Grid-based Anderson-Rubin confidence interval for a single endogenous
 #' variable.
+#' @inheritParams morie_iv_params
 #' @export
 morie_iv_anderson_rubin_ci <- function(data, outcome, endogenous, instruments,
                                        exogenous = NULL, grid_min = -10,
@@ -445,6 +490,7 @@ morie_iv_anderson_rubin_ci <- function(data, outcome, endogenous, instruments,
 }
 
 #' Conditional likelihood-ratio (CLR) test of Moreira (2003)
+#' @inheritParams morie_iv_params
 #' @export
 morie_iv_conditional_lr <- function(data, outcome, endogenous, instruments,
                                     exogenous = NULL, beta0 = 0) {
@@ -457,6 +503,7 @@ morie_iv_conditional_lr <- function(data, outcome, endogenous, instruments,
 }
 
 #' Sargan test of overidentifying restrictions (homoskedastic)
+#' @inheritParams morie_iv_params
 #' @export
 morie_iv_sargan <- function(data, outcome, endogenous, instruments,
                             exogenous = NULL) {
@@ -488,6 +535,7 @@ morie_iv_sargan <- function(data, outcome, endogenous, instruments,
 }
 
 #' Hansen J test of overidentifying restrictions (robust)
+#' @inheritParams morie_iv_params
 #' @export
 morie_iv_hansen_j <- function(data, outcome, endogenous, instruments,
                               exogenous = NULL) {
@@ -507,6 +555,7 @@ morie_iv_hansen_j <- function(data, outcome, endogenous, instruments,
 }
 
 #' Hausman test: OLS vs 2SLS
+#' @inheritParams morie_iv_params
 #' @export
 morie_iv_hausman <- function(data, outcome, endogenous, instruments,
                              exogenous = NULL) {
@@ -538,6 +587,7 @@ morie_iv_hausman <- function(data, outcome, endogenous, instruments,
 `%||%` <- function(a, b) if (is.null(a)) b else a
 
 #' Durbin-Wu-Hausman test of endogeneity
+#' @inheritParams morie_iv_params
 #' @export
 morie_iv_durbin_wu_hausman <- function(data, outcome, endogenous, instruments,
                                        exogenous = NULL) {
@@ -712,6 +762,7 @@ morie_iv_panel <- function(data, outcome, endogenous, instruments, unit,
 # ---------------------------------------------------------------------------
 
 #' Composite IV diagnostics
+#' @inheritParams morie_iv_params
 #' @export
 morie_iv_diagnostics <- function(data, outcome, endogenous, instruments,
                                  exogenous = NULL) {
@@ -729,6 +780,7 @@ morie_iv_diagnostics <- function(data, outcome, endogenous, instruments,
 }
 
 #' IV residual analysis
+#' @inheritParams morie_iv_params
 #' @export
 morie_iv_residual_analysis <- function(data, outcome, endogenous, instruments,
                                        exogenous = NULL) {
