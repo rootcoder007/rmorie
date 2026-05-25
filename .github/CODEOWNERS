@@ -1,0 +1,9 @@
+# Default reviewer for everything
+*       @rootcoder007
+
+# Security-critical paths
+SECURITY.md             @rootcoder007
+.github/workflows/      @rootcoder007
+.github/dependabot.yml  @rootcoder007
+configure*              @rootcoder007
+src/                    @rootcoder007
