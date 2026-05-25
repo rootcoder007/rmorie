@@ -524,6 +524,9 @@ morie_datasets_toronto_zoning_per_neighbourhood <- function(
       "toronto_zoning_stats_sample.csv"
     }
     path <- system.file("extdata", fixture, package = "rmorie")
+    if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+      path <- system.file("extdata", fixture, package = "rmoriedata")
+    }
     if (!nzchar(path)) {
       stop(sprintf("bundled Toronto Zoning fixture %s missing",
                    fixture), call. = FALSE)
