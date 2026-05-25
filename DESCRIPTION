@@ -13,14 +13,11 @@ Authors@R: c(
  )
 Author: Vansh Singh Ruhela [aut, cre] (<https://orcid.org/0009-0004-1750-3592>)
 Maintainer: Vansh Singh Ruhela <hadesllm@proton.me>
-Description: Multi-domain scientific computing toolkit (branded as
-  'morie' (morie 森, the Fates' Forest), combining the Greek 'Moirai' (the three
-  Fates) with the Japanese 'mori' (forest, three trees in the kanji
-  stacked into one ideogram)) for observational inference and
-  intervention analysis across
-  scientific-experimentation contexts, hosting the MRM (Multilevel
-  Reconciliation Methodology) framework for Canadian carceral, police,
-  and oversight data as its primary application.
+Description: Multi-domain scientific computing toolkit for observational
+  inference and intervention analysis across scientific-experimentation
+  contexts, hosting the MRM (Multilevel Reconciliation Methodology)
+  framework for Canadian carceral, police, and oversight data as its
+  primary application.
   Provides general-purpose causal estimators (ATE, ATT, ATC, GATE, CATE,
   LATE, AIPW, G-computation), survey sampling methods (stratified, cluster,
   PPS, bootstrap, calibration weights), propensity-score and doubly-robust

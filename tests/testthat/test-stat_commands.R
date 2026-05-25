@@ -125,7 +125,9 @@ test_that("custom handler_stat default wraps errors", {
   log_entries <- character(0)
   log_list <- list(write = function(msg) log_entries <<- c(log_entries, msg))
   cmd$handler_stat(c("test_cmd_err", "1"), log_list, function(x) NULL)
-  expect_true(any(grepl("Error", log_entries)))
+  # Accept both "ERR:" (current prefix used to avoid r-lib/actions
+  # /check-r-package log-scanner annotations) and the legacy "Error:".
+  expect_true(any(grepl("ERR|Error", log_entries)))
 })
 
 test_that("default handler_stat with successful result calls store", {
