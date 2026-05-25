@@ -176,6 +176,7 @@ morie_datasets_arsau_uof_main_records <- function(year = "2024",
 #'   (5 rows). If `FALSE`, hit the live CKAN datastore-dump JSON
 #'   endpoint for resource id `89e3b63f-5679-4fa4-b98a-fdd2dc486f29`.
 #' @param resource_id Optional CKAN resource id override.
+#' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A `data.frame`.
 #' @references Ontario Open Data Catalogue, "Data on Inmates in
 #'   Ontario"

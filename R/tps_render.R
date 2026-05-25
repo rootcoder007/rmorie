@@ -682,7 +682,7 @@ morie_tps_render_quad <- function(data, outfile = NULL, ...) {
   panels <- list()
   if (!is.null(data$polys) && !is.null(data$count_col)) {
     panels$choropleth <- tryCatch(
-      morie_tps_render_choropleth(data$polys, value_col = data$count_col, ...),
+      morie_tps_render_choropleth(data$polys, rate_col = data$count_col, ...),
       error = function(e) NULL)
   }
   if (!is.null(data$points)) {

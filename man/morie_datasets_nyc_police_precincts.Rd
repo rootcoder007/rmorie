@@ -27,9 +27,6 @@ morie_datasets_nyc_police_precincts(
 \item{resource_id}{Optional view id override (default
 \code{"sp34-6z76"}).}
 
-\item{mode}{One of \code{"soda2"} (default JSON resource endpoint) or
-\code{"soda3"} (SoQL \code{query} endpoint). 3VV+ dual-mode dispatch.}
-
 \item{paginate}{Logical; 3OO/3QQ opt-in pagination via
 \verb{LIMIT n OFFSET m}.}
 

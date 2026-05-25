@@ -35,9 +35,6 @@ morie_datasets_chicago_wards(
 
 \item{app_token}{Optional Socrata app token (sent as
 \code{X-App-Token}).}
-
-\item{mode}{One of \code{"soda2"} (default JSON resource endpoint) or
-\code{"soda3"} (SoQL \code{query} endpoint). 3VV+ dual-mode dispatch.}
 }
 \value{
 A \code{data.frame} with 3 attribute cols (offline) or 4

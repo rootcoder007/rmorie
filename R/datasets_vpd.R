@@ -185,6 +185,10 @@ morie_datasets_vpd_crime <- function(offline = TRUE,
   } else if (offline) {
     path <- system.file("extdata", "vpd_crime_sample.csv",
                         package = "rmorie")
+    if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+      path <- system.file("extdata", "vpd_crime_sample.csv",
+                          package = "rmoriedata")
+    }
     if (!nzchar(path))
       stop("bundled VPD crime sample missing", call. = FALSE)
     df <- utils::read.csv(path, stringsAsFactors = FALSE)
