@@ -42,8 +42,18 @@ test_that("morie_datasets_statcan_full_csv_url returns canonical zip URL", {
 })
 
 test_that("morie_datasets_statcan_full_csv_url respects language=fr", {
-  skip_on_cran()
-  skip_if_offline("www150.statcan.gc.ca")
+  testthat::local_mocked_bindings(
+    .morie_dataset_http_json = function(url) {
+      list(
+        status = "SUCCESS",
+        object = paste0(
+          "https://www150.statcan.gc.ca/n1/tbl/csv/",
+          "35100002-fra.zip"
+        )
+      )
+    },
+    .package = "rmorie"
+  )
   u <- morie_datasets_statcan_full_csv_url(35100002L, language = "fr")
   expect_match(u, "fra\\.zip$")
 })
