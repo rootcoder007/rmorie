@@ -249,7 +249,7 @@ morie_matching_common_support <- function(data, treatment,
 
 #' @noRd
 .morie_matching_have_cpp <- function(name) {
-  exists(name, envir = asNamespace("morie"), inherits = FALSE)
+  exists(name, envir = asNamespace("rmorie"), inherits = FALSE)
 }
 
 #' Nearest-neighbour propensity-score matching

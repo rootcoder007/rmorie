@@ -78,7 +78,7 @@ test_that("the describe corpus is cached across calls", {
   # First call populates the cache; the second should not touch
   # the disk again. We test this indirectly by confirming the
   # cache env has been populated after a successful lookup.
-  env <- get(".morie_describe_env", envir = asNamespace("morie"))
+  env <- get(".morie_describe_env", envir = asNamespace("rmorie"))
   rm(list = ls(env), envir = env)        # clear cache
   expect_null(env$corpus)
   result <- suppressMessages(morie_describe_by_name("aalen"))

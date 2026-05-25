@@ -36,7 +36,7 @@
 test_that("entheo_analysis: beautiful_loop_metric / san_score run", {
   rec <- .cov_entheo_record(seed = 11L)
   for (fn in c("beautiful_loop_metric", "san_score")) {
-    f <- tryCatch(get(fn, envir = asNamespace("morie")),
+    f <- tryCatch(get(fn, envir = asNamespace("rmorie")),
       error = function(e) NULL
     )
     if (!is.null(f)) {
@@ -96,7 +96,7 @@ test_that("entheo_preprocess: preprocess_eeg / preprocess_fmri run", {
 })
 
 test_that("aaa_helpers_llm_arch: .softmax_last runs", {
-  f <- tryCatch(get(".softmax_last", envir = asNamespace("morie")),
+  f <- tryCatch(get(".softmax_last", envir = asNamespace("rmorie")),
     error = function(e) NULL
   )
   if (!is.null(f)) {
@@ -112,7 +112,7 @@ test_that("aaa_helpers_llm_arch: .softmax_last runs", {
 })
 
 test_that("bpblm: bits_per_byte runs", {
-  f <- tryCatch(get("bits_per_byte", envir = asNamespace("morie")),
+  f <- tryCatch(get("bits_per_byte", envir = asNamespace("rmorie")),
     error = function(e) NULL
   )
   if (!is.null(f)) {
@@ -297,7 +297,7 @@ test_that("aaa_helpers_det_rng: morie_det_rng + sha helpers", {
 })
 
 test_that("aaa_helpers_fauzi: .morie_silverman_h", {
-  f <- tryCatch(get(".morie_silverman_h", envir = asNamespace("morie")),
+  f <- tryCatch(get(".morie_silverman_h", envir = asNamespace("rmorie")),
     error = function(e) NULL
   )
   if (!is.null(f)) {
@@ -310,7 +310,7 @@ test_that("aaa_helpers_fauzi: .morie_silverman_h", {
 })
 
 test_that("aaa_helpers_time_series_advanced: beta weights", {
-  f <- tryCatch(get(".morie_beta_weights", envir = asNamespace("morie")),
+  f <- tryCatch(get(".morie_beta_weights", envir = asNamespace("rmorie")),
     error = function(e) NULL
   )
   if (!is.null(f)) {

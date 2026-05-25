@@ -418,7 +418,7 @@ morie_spatial_voting_double_centering <- function(D) {
 
 #' @noRd
 .sv_have_cpp <- function(name = "morie_spatial_classical_mds_cpp") {
-  exists(name, envir = asNamespace("morie"), inherits = FALSE)
+  exists(name, envir = asNamespace("rmorie"), inherits = FALSE)
 }
 
 #' Classical (metric) multidimensional scaling

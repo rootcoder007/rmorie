@@ -2,7 +2,7 @@
 % Please edit documentation in R/rmorie-package.R
 \docType{package}
 \name{rmorie-package}
-\alias{morie}
+\alias{rmorie}
 \alias{rmorie-package}
 \title{morie: Multi-Domain Open Research and Inferential Estimation}
 \description{
@@ -107,8 +107,8 @@ the R and Python sides. The optional Linux-kernel adjuncts under
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/hadesllm/morie}
-  \item Report bugs at \url{https://github.com/hadesllm/morie/issues}
+  \item \url{https://github.com/rootcoder007/rmorie}
+  \item Report bugs at \url{https://github.com/rootcoder007/rmorie/issues}
 }
 
 }

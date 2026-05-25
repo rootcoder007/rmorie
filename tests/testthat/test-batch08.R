@@ -490,7 +490,7 @@ test_that("morie_grid_search_cv errors clearly when caret is missing", {
 })
 
 test_that("gradient_clipping rescales gradients to the max norm", {
-  fn <- tryCatch(get("gradient_clipping", envir = asNamespace("morie")),
+  fn <- tryCatch(get("gradient_clipping", envir = asNamespace("rmorie")),
     error = function(e) NULL
   )
   skip_if(is.null(fn), "gradient_clipping not in namespace")
@@ -507,7 +507,7 @@ test_that("gradient_clipping rescales gradients to the max norm", {
 })
 
 test_that("gradient_clipping leaves small gradients unchanged", {
-  fn <- tryCatch(get("gradient_clipping", envir = asNamespace("morie")),
+  fn <- tryCatch(get("gradient_clipping", envir = asNamespace("rmorie")),
     error = function(e) NULL
   )
   skip_if(is.null(fn), "gradient_clipping not in namespace")
@@ -519,7 +519,7 @@ test_that("gradient_clipping leaves small gradients unchanged", {
 })
 
 test_that("grouped_query_attention produces attention weights", {
-  fn <- tryCatch(get("grouped_query_attention", envir = asNamespace("morie")),
+  fn <- tryCatch(get("grouped_query_attention", envir = asNamespace("rmorie")),
     error = function(e) NULL
   )
   skip_if(is.null(fn), "grouped_query_attention not in namespace")
@@ -540,7 +540,7 @@ test_that("grouped_query_attention produces attention weights", {
 })
 
 test_that("grouped_query_attention rejects incompatible head counts", {
-  fn <- tryCatch(get("grouped_query_attention", envir = asNamespace("morie")),
+  fn <- tryCatch(get("grouped_query_attention", envir = asNamespace("rmorie")),
     error = function(e) NULL
   )
   skip_if(is.null(fn), "grouped_query_attention not in namespace")

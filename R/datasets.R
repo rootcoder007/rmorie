@@ -93,7 +93,7 @@
 #' @noRd
 .morie_dataset_http_backend_cpp <- function() {
   exists(".morie_http_get",
-         where = asNamespace("morie"),
+         where = asNamespace("rmorie"),
          mode = "function")
 }
 
@@ -140,7 +140,7 @@
                                                     timeout_s = 60L) {
   full_url <- .morie_dataset_build_url(url, query)
   if (exists(".morie_http_get_with_status",
-              where = asNamespace("morie"),
+              where = asNamespace("rmorie"),
               mode = "function")) {
     return(.morie_http_get_with_status(
       full_url, timeout_s = as.integer(timeout_s),
@@ -178,7 +178,7 @@
   body_str <- jsonlite::toJSON(body, auto_unbox = auto_unbox,
                                  null = "null")
   if (exists(".morie_http_post_with_status",
-              where = asNamespace("morie"),
+              where = asNamespace("rmorie"),
               mode = "function")) {
     return(.morie_http_post_with_status(
       full_url, body = as.character(body_str),
@@ -221,7 +221,7 @@
   body_str <- jsonlite::toJSON(body, auto_unbox = auto_unbox,
                                  null = "null")
   if (exists(".morie_http_post",
-              where = asNamespace("morie"),
+              where = asNamespace("rmorie"),
               mode = "function")) {
     resp <- .morie_http_post(full_url,
                               body = as.character(body_str),
@@ -265,7 +265,7 @@
                                         timeout_s = 60L) {
   full_url <- .morie_dataset_build_url(url, query)
   if (exists(".morie_http_get_bytes",
-              where = asNamespace("morie"),
+              where = asNamespace("rmorie"),
               mode = "function")) {
     return(.morie_http_get_bytes(full_url,
                                   timeout_s = as.integer(timeout_s),

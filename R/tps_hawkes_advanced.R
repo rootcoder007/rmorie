@@ -101,7 +101,7 @@ NULL
 
 .tps_hwka_cpp_ok <- function() {
   exists("morie_hawkes_pair_excitation_sum_cpp",
-         envir = asNamespace("morie"), inherits = FALSE)
+         envir = asNamespace("rmorie"), inherits = FALSE)
 }
 
 .tps_hwka_kernel_density <- function(u, kind, psi) {
