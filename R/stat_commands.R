@@ -72,12 +72,20 @@ stat_command <- function(name, category, usage, description,
   if (is.null(handler_stat)) {
     handler_stat <- function(parts, log, store) {
       args <- if (length(parts) > 1L) parts[-1L] else list()
+      # CLI args arrive as strings; coerce numeric-looking ones so handlers
+      # that expect numeric inputs (e.g. bonferroni(p, alpha)) don't fall
+      # over downstream on sprintf("%.4f", "0.05") and friends.
+      args <- lapply(args, function(x) {
+        if (!is.character(x)) return(x)
+        n <- suppressWarnings(as.numeric(x))
+        if (length(n) == 1L && !is.na(n)) n else x
+      })
       out <- tryCatch(do.call(handler_repl, as.list(args)),
                       error = function(e) {
-                        if (is.function(log)) log(sprintf("Error: %s", conditionMessage(e)))
+                        if (is.function(log)) log(sprintf("ERR: %s", conditionMessage(e)))
                         else if (is.list(log) && is.function(log$write))
-                          log$write(sprintf("Error: %s", conditionMessage(e)))
-                        else message("Error: ", conditionMessage(e))
+                          log$write(sprintf("ERR: %s", conditionMessage(e)))
+                        else message("ERR: ", conditionMessage(e))
                         NULL
                       })
       if (!is.null(out) && !is.null(store)) {
