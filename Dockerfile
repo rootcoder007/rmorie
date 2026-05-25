@@ -22,20 +22,25 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Etc/UTC
 
 # System libraries rmorie's C++ backends link against.
-# - libcurl: HTTP client (rmorie's libcurl-backed ingest)
-# - libssl + libsodium: crypto family
-# - liboqs: post-quantum (ML-KEM-768 + ML-DSA-65) -- packaged via apt
-#   only on Debian trixie/Ubuntu noble+; on older runners install
-#   from source. rocker/r-ver:4.4.2 is Ubuntu Noble = OK.
-# - libxml2 + libssl-dev: required by httr2 + xml2 (Suggests)
-# - pkg-config: liboqs uses pkg-config to expose its CFLAGS
+# - libcurl:    HTTP client (rmorie's libcurl-backed ingest)
+# - libssl, libsodium: classical crypto family
+# - libxml2:    httr2 + xml2 (Suggests)
+# - pkg-config: configure script probes
+#
+# liboqs (post-quantum: ML-KEM-768 + ML-DSA-65) is intentionally NOT
+# installed in this image. It is not packaged in stable Ubuntu repos
+# (still too new), and ships only via the Open Quantum Safe Project's
+# own builds. rmorie's PQC functions detect liboqs absence at runtime
+# via morie_crypto_liboqs_available() and return a clear error. Users
+# who need PQC can either:
+#   (a) build a custom image on top of this one with liboqs from source
+#   (b) install rmorie from source on a host with liboqs pre-installed
 RUN apt-get update && apt-get install -y --no-install-recommends \
       git \
       pkg-config \
       libcurl4-openssl-dev \
       libssl-dev \
       libsodium-dev \
-      liboqs-dev \
       libxml2-dev \
       libfontconfig1-dev \
       libfreetype6-dev \
@@ -69,11 +74,11 @@ ENV TZ=Etc/UTC
 ENV R_LIBS_USER=/usr/local/lib/R/site-library
 
 # Only the runtime shared libraries (no -dev packages).
+# liboqs deliberately absent here too -- matches the builder stage.
 RUN apt-get update && apt-get install -y --no-install-recommends \
       libcurl4 \
       libssl3 \
       libsodium23 \
-      liboqs0 \
       libxml2 \
       ca-certificates \
    && rm -rf /var/lib/apt/lists/*
