@@ -1,7 +1,7 @@
 citHeader(
   "To cite rmorie in publications, please cite the language-specific ",
   "software paper and any relevant methodology paper. There are five ",
-  "deposits on Zenodo:"
+  "papers in the morie publication set:"
 )
 
 # (1) morie R software paper (this package) -- also the R package source on Zenodo.
@@ -13,7 +13,6 @@ bibentry(
                    comment = c(ORCID = "0009-0004-1750-3592")),
   year    = "2026",
   note    = paste("R package version", meta$Version),
-  doi     = "10.5281/zenodo.20111233",
   url     = "https://github.com/rootcoder007/rmorie"
 )
 
@@ -25,9 +24,6 @@ bibentry(
   author    = person("Vansh Singh", "Ruhela",
                      comment = c(ORCID = "0009-0004-1750-3592")),
   year      = "2026",
-  publisher = "Zenodo",
-  doi       = "10.5281/zenodo.20096350",
-  url       = "https://doi.org/10.5281/zenodo.20096350"
 )
 
 # (3) MRM framework paper -- theoretical foundations.
@@ -38,9 +34,6 @@ bibentry(
   author    = person("Vansh Singh", "Ruhela",
                      comment = c(ORCID = "0009-0004-1750-3592")),
   year      = "2026",
-  publisher = "Zenodo",
-  doi       = "10.5281/zenodo.20096075",
-  url       = "https://doi.org/10.5281/zenodo.20096075"
 )
 
 # (4) Hawkes methodology paper.
@@ -51,9 +44,6 @@ bibentry(
   author    = person("Vansh Singh", "Ruhela",
                      comment = c(ORCID = "0009-0004-1750-3592")),
   year      = "2026",
-  publisher = "Zenodo",
-  doi       = "10.5281/zenodo.20102198",
-  url       = "https://doi.org/10.5281/zenodo.20102198"
 )
 
 # (5) Empirical applications paper.
@@ -64,7 +54,4 @@ bibentry(
   author    = person("Vansh Singh", "Ruhela",
                      comment = c(ORCID = "0009-0004-1750-3592")),
   year      = "2026",
-  publisher = "Zenodo",
-  doi       = "10.5281/zenodo.20175689",
-  url       = "https://doi.org/10.5281/zenodo.20175689"
 )

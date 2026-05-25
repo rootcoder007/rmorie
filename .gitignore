@@ -19,3 +19,17 @@ renv/sandbox/
 .clangd
 *.o.tmp
 *.o
+
+# Papers / preprints / Zenodo deposits -- managed in the morie repo,
+# not rmorie. Stops accidental commits of generated PDFs or LaTeX
+# artefacts here.
+papers/
+paper.md
+paper.bib
+*.pdf
+*.aux
+*.log
+*.bbl
+*.blg
+*.out
+*.synctex.gz
