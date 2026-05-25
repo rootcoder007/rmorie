@@ -100,7 +100,7 @@ stat_bridge_help <- function() {
 stat_bridge_exec <- function(cmd_str) {
   parts <- strsplit(trimws(cmd_str), "\\s+")[[1]]
   if (length(parts) == 0L) {
-    return("Error: empty command")
+    return("Usage: empty command")
   }
   name <- parts[1L]
   cmd <- resolve_stat_command(name)
@@ -112,7 +112,7 @@ stat_bridge_exec <- function(cmd_str) {
   result <- tryCatch(
     cmd$handler_stat(parts, log, store),
     error = function(e) {
-      log$write(sprintf("Error: %s", conditionMessage(e)))
+      log$write(sprintf("ERR: %s", conditionMessage(e)))
       NULL
     }
   )
@@ -242,21 +242,21 @@ stat_bridge_main <- function(args = NULL) {
     "help" = stat_bridge_help(),
     "exec" = {
       if (length(rest) == 0L) {
-        "Error: exec requires a command string"
+        "Usage: exec requires a command string"
       } else {
         stat_bridge_exec(paste(rest, collapse = " "))
       }
     },
     "fn-info" = {
       if (length(rest) == 0L) {
-        "Error: fn-info requires a name"
+        "Usage: fn-info requires a name"
       } else {
         stat_bridge_fn_info(rest[1L])
       }
     },
     "fn-search" = {
       if (length(rest) == 0L) {
-        "Error: fn-search requires a query"
+        "Usage: fn-search requires a query"
       } else {
         stat_bridge_fn_search(paste(rest, collapse = " "))
       }

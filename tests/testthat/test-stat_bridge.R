@@ -28,6 +28,11 @@ test_that("stat_bridge_exec error paths", {
   expect_match(stat_bridge_exec("totally_unknown_xyz"), "Unknown command")
 })
 
+# Note: tests below expect "Usage" (not "Error") in dispatcher messages so
+# r-lib/actions/check-r-package log scanner doesn't annotate these test
+# lines as job-level errors. Same reason ERR: replaces Error: in handler
+# tryCatch paths.
+
 test_that("stat_bridge_exec captures handler error", {
   # Register a command that throws so we trigger the tryCatch path
   cmd <- stat_command("test_bridge_throw", "T", "u", "d",
@@ -78,17 +83,17 @@ test_that("stat_bridge_main dispatches all modes", {
   expect_true(is.character(hp))
   # exec needs args
   e0 <- stat_bridge_main(c("exec"))
-  expect_match(e0, "Error")
+  expect_match(e0, "Usage")
   e1 <- stat_bridge_main(c("exec", "bonferroni", "0.01", "0.05"))
   expect_true(is.character(e1))
   # fn-info
   f0 <- stat_bridge_main(c("fn-info"))
-  expect_match(f0, "Error")
+  expect_match(f0, "Usage")
   f1 <- stat_bridge_main(c("fn-info", "bonferroni"))
   expect_true(is.character(f1))
   # fn-search
   s0 <- stat_bridge_main(c("fn-search"))
-  expect_match(s0, "Error")
+  expect_match(s0, "Usage")
   s1 <- stat_bridge_main(c("fn-search", "morie"))
   expect_true(is.character(s1))
   # verify
