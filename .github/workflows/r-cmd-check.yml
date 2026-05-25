@@ -55,10 +55,6 @@ jobs:
     env:
       _R_CHECK_FORCE_SUGGESTS_: false
       R_KEEP_PKG_SOURCE: yes
-      # Whether this cell runs the post-check quality steps
-      # (lintr, covr, goodpractice). Only the primary ubuntu-release
-      # cell pays that cost.
-      RMORIE_RUN_QA: ${{ matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release' }}
 
     steps:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
@@ -70,35 +66,11 @@ jobs:
           r-version: ${{ matrix.config.r }}
           use-public-rspm: true
 
-      # cache-version: 1 -- pak's binary cache persists across runs +
-      # leaves IF this key matches. Bump to invalidate (e.g. on Rcpp
-      # toolchain change).
-      #
-      # Use the YAML literal-block (|) form so each package is on its
-      # own line. The folded-scalar (>-) form collapses everything to
-      # one space-separated string which pak then mis-resolves.
       - uses: r-lib/actions/setup-r-dependencies@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
         with:
           cache-version: 1
-          extra-packages: |
-            any::rcmdcheck
-            any::lintr
-            any::covr
-            any::xml2
-            any::goodpractice
-            any::cyclocomp
+          extra-packages: any::rcmdcheck
           needs: check
-
-      # On Windows runners, actions/checkout sometimes drops the
-      # 100755 index bit when materialising the tree to disk. R CMD
-      # build then emits "file '...' did not have execute permissions:
-      # corrected" warnings. Re-apply +x explicitly so the warning
-      # never fires; no-op on Linux/Mac (already 0755 from checkout).
-      - name: Ensure configure scripts are executable (Windows fix)
-        if: matrix.config.os == 'windows-2025'
-        shell: bash
-        run: |
-          chmod +x configure cleanup configure.win 2>/dev/null || true
 
       - uses: r-lib/actions/check-r-package@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
         with:
@@ -106,32 +78,10 @@ jobs:
           args: 'c("--no-manual", "--as-cran")'
           error-on: '"error"'
 
-      # --- POST-CHECK QA steps (ubuntu-release only) -------------------
-      # These previously ran as separate workflows that each re-installed
-      # R + every Suggests from scratch. Folded in here so they reuse
-      # the already-installed library state. Each step is independently
-      # failure-tolerant (continue-on-error) so a single QA hiccup
-      # doesn't fail the whole r-cmd-check leaf.
-
-      - name: Run lintr
-        if: env.RMORIE_RUN_QA == 'true'
-        continue-on-error: true
-        run: Rscript -e 'lintr::lint_package()'
-
-      - name: Run covr + cobertura
-        if: env.RMORIE_RUN_QA == 'true'
-        continue-on-error: true
-        run: |
-          Rscript -e 'cov <- covr::package_coverage(type = "tests", quiet = TRUE); covr::to_cobertura(cov, filename = "coverage.xml"); cat(sprintf("Coverage: %.2f%%\n", covr::percent_coverage(cov)))'
-
-      - name: Upload coverage to Codecov
-        if: env.RMORIE_RUN_QA == 'true'
-        continue-on-error: true
-        uses: codecov/codecov-action@v5
-        with:
-          files: coverage.xml
-
-      - name: Run goodpractice
-        if: env.RMORIE_RUN_QA == 'true'
-        continue-on-error: true
-        run: Rscript -e 'g <- goodpractice::gp("."); print(g)'
+      # POST-CHECK QA (lintr / covr / goodpractice / pkgcheck) was
+      # folded INTO this cell in 3MMM.62; reverted in 3MMM.72 -- it
+      # added +40 min of sequential duplicate work (covr re-runs all
+      # tests instrumented; goodpractice re-runs R CMD check). Those
+      # checks now live as separate jobs in r-coverage-and-lint.yml
+      # (lintr + covr parallel on every push; goodpractice + pkgcheck
+      # workflow_dispatch only).
