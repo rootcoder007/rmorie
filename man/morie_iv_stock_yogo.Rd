@@ -6,6 +6,13 @@
 \usage{
 morie_iv_stock_yogo(n_endogenous = 1, n_instruments = 1)
 }
+\arguments{
+\item{n_endogenous}{Integer; number of endogenous regressors used
+to look up the Stock-Yogo critical-value table.}
+
+\item{n_instruments}{Integer; number of instruments used to look
+up the Stock-Yogo critical-value table.}
+}
 \description{
 Stock-Yogo critical values
 }

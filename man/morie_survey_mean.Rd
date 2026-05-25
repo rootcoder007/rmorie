@@ -6,6 +6,13 @@
 \usage{
 morie_survey_mean(design, variable)
 }
+\arguments{
+\item{design}{A \code{survey::svydesign} object (when interfacing with
+the \code{survey} package directly).}
+
+\item{variable}{Character; column name of the outcome variable in
+the \code{design} object (\code{morie_survey_mean}).}
+}
 \description{
 Survey-weighted mean (delegates to \code{survey::svymean} when available).
 }

@@ -635,6 +635,9 @@ morie_datasets_siu_report_text <- function(url = NULL, offline = FALSE) {
   if (isTRUE(offline)) {
     path <- system.file("extdata", "siu_24-OFD-001_synthetic.txt",
                         package = "rmorie")
+    if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+      path <- system.file("extdata", "siu_24-OFD-001_synthetic.txt", package = "rmoriedata")
+    }
     if (!nzchar(path)) {
       stop("morie_datasets_siu_report_text(offline=TRUE): bundled synthetic missing.")
     }
@@ -777,7 +780,7 @@ morie_datasets_siu_report_fields <- function(text_or_url) {
 #' parameters (`$where`, `$limit`, `$offset`). SODA3
 #' (`/api/v3/views/<id>/query.<ext>`) takes a single full SoQL string
 #' via `?query=SELECT ... WHERE ... ORDER BY ... LIMIT ... OFFSET ...`.
-#' This helper is the SODA3 sibling of `.morie_dataset_socrata_fetch()`.
+#' This helper is the SODA3 sibling of \code{.morie_dataset_socrata_fetch()}.
 #'
 #' Use SODA3 when:
 #'   * The dataset is a *filtered view* or *map view* (e.g.
@@ -883,7 +886,7 @@ morie_datasets_siu_report_fields <- function(text_or_url) {
 #'   * **Base datasets** (e.g. `ijzp-q8t2`): all three modes work.
 #'   * **Derived / map / filtered views** (e.g. `ahwe-kpsy`): OData
 #'     returns `value: [{}]` (empty objects) -- same failure mode as
-#'     SODA2. Use SODA3 (`.morie_dataset_soda3_query()`) for these.
+#'     SODA2. Use SODA3 (\code{.morie_dataset_soda3_query()}) for these.
 #'
 #' **Known Socrata limitation -- `$filter`**. As of 2026-05 Socrata's
 #' OData parser frequently rejects equality filters with
@@ -1043,9 +1046,9 @@ morie_datasets_siu_report_fields <- function(text_or_url) {
 #' @param mode One of `"soda2"` (default) or `"soda3"`. Selects the
 #'   API path for live mode:
 #'   * `"soda2"` -> `/resource/<id>.json?$where=...` via
-#'     `.morie_dataset_socrata_fetch()` (URL-param SoQL grammar).
+#'     \code{.morie_dataset_socrata_fetch()} (URL-param SoQL grammar).
 #'   * `"soda3"` -> `/api/v3/views/<id>/query.json?query=SELECT ...`
-#'     via `.morie_dataset_soda3_query()` (full SoQL passthrough).
+#'     via \code{.morie_dataset_soda3_query()} (full SoQL passthrough).
 #'   Both modes return the same 22-column schema; SODA3 is required
 #'   when a derived/map view is involved (none here, but available
 #'   for parity with [morie_datasets_chicago_crime_map()]) and for
@@ -1380,7 +1383,7 @@ morie_datasets_nist_rds <- function(dataset_id = NULL, query = NULL,
 #' (`pri_neigh`, `sec_neigh`, `shape_area`, `shape_len`) -- the
 #' `the_geom` MultiPolygon column is stripped to keep the bundled
 #' size sane (full GeoJSON is ~800 KB). Live mode hits the SODA2
-#' endpoint via `.morie_dataset_socrata_fetch()` (mockable).
+#' endpoint via \code{.morie_dataset_socrata_fetch()} (mockable).
 #'
 #' To get the polygons, pass `geometry = TRUE` in live mode, which
 #' includes the SODA2 `the_geom` column.
@@ -1391,6 +1394,15 @@ morie_datasets_nist_rds <- function(dataset_id = NULL, query = NULL,
 #'   `the_geom` MultiPolygon column in the live-mode result.
 #' @param max_features Optional cap on returned rows.
 #' @param resource_id Optional Socrata resource id override.
+#' @param mode One of `"soda2"` (default JSON resource endpoint) or
+#'   `"soda3"` (SoQL `query` endpoint). 3VV+ dual-mode dispatch.
+#' @param paginate Logical; if `TRUE` and `offline = FALSE`, walk
+#'   SODA2 `$offset` in `page_size` chunks (3OO).
+#' @param page_size Per-page row count when paginating (default 1000,
+#'   the unauthenticated Socrata ceiling).
+#' @param max_pages Safety net on paginated walks (default 200).
+#' @param app_token Optional Socrata API app token for higher rate
+#'   limits; passed as the `X-App-Token` header.
 #' @return A `data.frame` with 4 attribute columns (offline mode) or
 #'   5 cols including `the_geom` (live mode with `geometry = TRUE`).
 #' @references City of Chicago Data Portal, "Boundaries -
@@ -1412,6 +1424,9 @@ morie_datasets_chicago_neighborhoods <- function(offline = TRUE,
   if (isTRUE(offline)) {
     path <- system.file("extdata", "chicago_neighborhoods.csv",
                         package = "rmorie")
+    if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+      path <- system.file("extdata", "chicago_neighborhoods.csv", package = "rmoriedata")
+    }
     if (!nzchar(path)) {
       stop("bundled Chicago neighborhoods fixture missing",
            call. = FALSE)
@@ -1556,7 +1571,7 @@ morie_datasets_chicago_crime_odata <- function(filter = NULL,
 #' (`[{}]`) -- column resolution doesn't fire on map/filtered views.
 #' This loader uses the SODA3 endpoint
 #' `/api/v3/views/ahwe-kpsy/query.json?query=SELECT ... WHERE ...`
-#' via `.morie_dataset_soda3_query()`.
+#' via \code{.morie_dataset_soda3_query()}.
 #'
 #' The live ahwe-kpsy view returns a **39-column** schema:
 #'   * 22 base ijzp-q8t2 columns (id, case_number, date, ..., location)
@@ -1611,6 +1626,9 @@ morie_datasets_chicago_crime_map <- function(date_from = NULL,
     path <- system.file("extdata",
                         "chicago_crime_map_ahwe_kpsy_sample.csv",
                         package = "rmorie")
+    if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+      path <- system.file("extdata", "chicago_crime_map_ahwe_kpsy_sample.csv", package = "rmoriedata")
+    }
     if (!nzchar(path)) {
       stop("bundled Chicago Crime Map fixture missing", call. = FALSE)
     }
@@ -1731,7 +1749,7 @@ morie_datasets_chicago_crime_soql <- function(where = NULL,
 #' (`inst/extdata/chicago_police_beats.csv`) -- the `the_geom`
 #' MultiPolygon column is stripped to keep bundle size sane.
 #' Live mode hits the SODA2 JSON endpoint via
-#' `.morie_dataset_socrata_fetch()` (mockable); pass `geometry = TRUE`
+#' \code{.morie_dataset_socrata_fetch()} (mockable); pass `geometry = TRUE`
 #' to include `the_geom`. Threads through the 3OO pagination args.
 #'
 #' @param offline If `TRUE` (default), read the bundled fixture.
@@ -1743,6 +1761,10 @@ morie_datasets_chicago_crime_soql <- function(where = NULL,
 #' @param paginate Logical; 3OO opt-in pagination.
 #' @param page_size Per-page row count when paginating.
 #' @param max_pages Safety net on paginated walks.
+#' @param mode One of `"soda2"` (default JSON resource endpoint) or
+#'   `"soda3"` (SoQL `query` endpoint). 3VV+ dual-mode dispatch.
+#' @param app_token Optional Socrata API app token for higher rate
+#'   limits; passed as the `X-App-Token` header.
 #' @return A `data.frame` with 4 attribute cols (offline) or 5
 #'   including `the_geom` (live, `geometry = TRUE`).
 #' @references City of Chicago Data Portal, "Boundaries - Police
@@ -1764,6 +1786,9 @@ morie_datasets_chicago_police_beats <- function(offline = TRUE,
   if (isTRUE(offline)) {
     path <- system.file("extdata", "chicago_police_beats.csv",
                         package = "rmorie")
+    if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+      path <- system.file("extdata", "chicago_police_beats.csv", package = "rmoriedata")
+    }
     if (!nzchar(path)) {
       stop("bundled Chicago Police Beats fixture missing",
            call. = FALSE)
@@ -1846,6 +1871,10 @@ morie_datasets_chicago_police_beats <- function(offline = TRUE,
 #' @param paginate Logical; 3OO opt-in pagination.
 #' @param page_size Per-page row count when paginating.
 #' @param max_pages Safety net on paginated walks.
+#' @param mode One of `"soda2"` (default JSON resource endpoint) or
+#'   `"soda3"` (SoQL `query` endpoint). 3VV+ dual-mode dispatch.
+#' @param app_token Optional Socrata API app token for higher rate
+#'   limits; passed as the `X-App-Token` header.
 #' @return A `data.frame` with 2 attribute cols (offline) or 3
 #'   including `the_geom` (live, `geometry = TRUE`).
 #' @references City of Chicago Data Portal, "Boundaries - Police
@@ -1867,6 +1896,9 @@ morie_datasets_chicago_police_districts <- function(offline = TRUE,
   if (isTRUE(offline)) {
     path <- system.file("extdata", "chicago_police_districts.csv",
                         package = "rmorie")
+    if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+      path <- system.file("extdata", "chicago_police_districts.csv", package = "rmoriedata")
+    }
     if (!nzchar(path)) {
       stop("bundled Chicago Police Districts fixture missing",
            call. = FALSE)
@@ -2070,7 +2102,7 @@ morie_datasets_chicago_crime_resolved <- function(
 #' returns empty objects -- this is a filtered/derived view on
 #' Socrata. Live mode uses SODA3
 #' (`/api/v3/views/sp34-6z76/query.json`) via
-#' `.morie_dataset_soda3_query()`.
+#' \code{.morie_dataset_soda3_query()}.
 #'
 #' Offline mode reads a bundled 50-row attribute-only fixture
 #' (`inst/extdata/chicago_wards.csv`: `ward` / `shape_leng` /
@@ -2087,6 +2119,8 @@ morie_datasets_chicago_crime_resolved <- function(
 #'   `LIMIT n OFFSET m`.
 #' @param page_size Per-page row count when paginating.
 #' @param max_pages Safety net.
+#' @param mode One of `"soda2"` (default JSON resource endpoint) or
+#'   `"soda3"` (SoQL `query` endpoint). 3VV+ dual-mode dispatch.
 #' @param app_token Optional Socrata app token (sent as
 #'   `X-App-Token`).
 #' @return A `data.frame` with 3 attribute cols (offline) or 4
@@ -2108,6 +2142,9 @@ morie_datasets_chicago_wards <- function(offline = TRUE,
   if (isTRUE(offline)) {
     path <- system.file("extdata", "chicago_wards.csv",
                         package = "rmorie")
+    if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+      path <- system.file("extdata", "chicago_wards.csv", package = "rmoriedata")
+    }
     if (!nzchar(path)) {
       stop("bundled Chicago wards fixture missing", call. = FALSE)
     }
@@ -2172,6 +2209,9 @@ morie_datasets_chicago_community_areas <- function(offline = TRUE,
   if (isTRUE(offline)) {
     path <- system.file("extdata", "chicago_community_areas.csv",
                         package = "rmorie")
+    if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+      path <- system.file("extdata", "chicago_community_areas.csv", package = "rmoriedata")
+    }
     if (!nzchar(path)) {
       stop("bundled Chicago community areas fixture missing",
            call. = FALSE)
@@ -2235,6 +2275,10 @@ morie_datasets_chicago_community_areas <- function(offline = TRUE,
 #' @param paginate Logical; 3OO opt-in pagination.
 #' @param page_size Per-page row count when paginating.
 #' @param max_pages Safety net.
+#' @param mode One of `"soda2"` (default JSON resource endpoint) or
+#'   `"soda3"` (SoQL `query` endpoint). 3VV+ dual-mode dispatch.
+#' @param app_token Optional Socrata API app token for higher rate
+#'   limits; passed as the `X-App-Token` header.
 #' @return A `data.frame`.
 #' @references City of Chicago Data Portal, "Chicago Police
 #'   Department - Illinois Uniform Crime Reporting (IUCR) Codes"
@@ -2255,6 +2299,9 @@ morie_datasets_chicago_iucr_codes <- function(offline = TRUE,
   if (isTRUE(offline)) {
     path <- system.file("extdata", "chicago_iucr_codes.csv",
                         package = "rmorie")
+    if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+      path <- system.file("extdata", "chicago_iucr_codes.csv", package = "rmoriedata")
+    }
     if (!nzchar(path)) {
       stop("bundled Chicago IUCR codes fixture missing",
            call. = FALSE)
@@ -2309,7 +2356,7 @@ morie_datasets_chicago_iucr_codes <- function(offline = TRUE,
 #' Offline mode reads a bundled 5-row synthetic fixture
 #' (`inst/extdata/chicago_arrests_dpt3_jri9_sample.csv`) carrying the
 #' real upstream snake_case schema. Live mode hits the SODA2 endpoint
-#' via `.morie_dataset_socrata_fetch()` and honours the 3OO opt-in
+#' via \code{.morie_dataset_socrata_fetch()} and honours the 3OO opt-in
 #' pagination (`paginate = TRUE`).
 #'
 #' @param year Integer or `NULL`; server-side year filter (uses
@@ -2326,6 +2373,10 @@ morie_datasets_chicago_iucr_codes <- function(offline = TRUE,
 #' @param page_size Per-page row count when paginating (default 1,000,
 #'   the unauthenticated SODA2 ceiling).
 #' @param max_pages Safety net on paginated walks (default 200).
+#' @param mode One of `"soda2"` (default JSON resource endpoint) or
+#'   `"soda3"` (SoQL `query` endpoint). 3VV+ dual-mode dispatch.
+#' @param app_token Optional Socrata API app token for higher rate
+#'   limits; passed as the `X-App-Token` header.
 #' @return A `data.frame` with the documented 24-col Socrata schema.
 #' @references City of Chicago Data Portal, "Arrests" (`dpt3-jri9`).
 #' @examples
@@ -2346,6 +2397,9 @@ morie_datasets_chicago_arrests <- function(year = NULL,
     path <- system.file("extdata",
                         "chicago_arrests_dpt3_jri9_sample.csv",
                         package = "rmorie")
+    if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+      path <- system.file("extdata", "chicago_arrests_dpt3_jri9_sample.csv", package = "rmoriedata")
+    }
     if (!nzchar(path)) {
       stop("bundled Chicago Arrests fixture missing", call. = FALSE)
     }
@@ -2447,6 +2501,9 @@ morie_datasets_cpd_public_arrests <- function(url = NULL,
     path <- system.file("extdata",
                         "cpd_public_release_arrests_sample.csv",
                         package = "rmorie")
+    if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+      path <- system.file("extdata", "cpd_public_release_arrests_sample.csv", package = "rmoriedata")
+    }
     if (!nzchar(path)) {
       stop("bundled CPD public-arrests fixture missing",
            call. = FALSE)

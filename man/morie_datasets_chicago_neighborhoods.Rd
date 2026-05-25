@@ -26,6 +26,20 @@ fixture from \code{inst/extdata/chicago_neighborhoods.csv}.}
 \item{max_features}{Optional cap on returned rows.}
 
 \item{resource_id}{Optional Socrata resource id override.}
+
+\item{mode}{One of \code{"soda2"} (default JSON resource endpoint) or
+\code{"soda3"} (SoQL \code{query} endpoint). 3VV+ dual-mode dispatch.}
+
+\item{paginate}{Logical; if \code{TRUE} and \code{offline = FALSE}, walk
+SODA2 \verb{$offset} in \code{page_size} chunks (3OO).}
+
+\item{page_size}{Per-page row count when paginating (default 1000,
+the unauthenticated Socrata ceiling).}
+
+\item{max_pages}{Safety net on paginated walks (default 200).}
+
+\item{app_token}{Optional Socrata API app token for higher rate
+limits; passed as the \code{X-App-Token} header.}
 }
 \value{
 A \code{data.frame} with 4 attribute columns (offline mode) or

@@ -14,6 +14,28 @@ morie_iv_anderson_rubin(
   alpha = 0.05
 )
 }
+\arguments{
+\item{data}{A \code{data.frame} (or tibble) holding the outcome,
+endogenous regressors, instruments, and any exogenous controls.}
+
+\item{outcome}{Character; column name of the response variable.}
+
+\item{endogenous}{Character vector; column names of the endogenous
+regressors.}
+
+\item{instruments}{Character vector; column names of the
+instrumental variables.}
+
+\item{exogenous}{Optional character vector of additional exogenous
+regressors included in both the structural equation and the
+first stage. \code{NULL} (default) for a just-identified design.}
+
+\item{beta0}{Numeric scalar or vector; the structural-coefficient
+value(s) to test under H0. Length must match \code{length(endogenous)}.}
+
+\item{alpha}{Significance level (default \code{0.05}); controls the
+confidence-set / acceptance-region cut-off.}
+}
 \description{
 Anderson-Rubin (AR) weak-IV-robust test
 }

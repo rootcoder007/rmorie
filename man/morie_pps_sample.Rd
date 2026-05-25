@@ -14,6 +14,8 @@ morie_pps_sample(df, size_col, n, seed = 42L, replace = FALSE)
 \item{n}{Number of units to select.}
 
 \item{seed}{Random seed.}
+
+\item{replace}{Logical; \code{FALSE} (default) uses PPS-without-replacement (Madow systematic-like), matching \code{morie.sampling.pps_sample} since 2026-05-22. \code{TRUE} reverts to the legacy Hansen-Hurwitz with-replacement scheme.}
 }
 \value{
 Data frame of selected units with \code{.weight} (Hansen-Hurwitz weights).

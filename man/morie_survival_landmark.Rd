@@ -6,6 +6,19 @@
 \usage{
 morie_survival_landmark(data, duration_col, event_col, landmark_time)
 }
+\arguments{
+\item{data}{A \code{data.frame} whose columns supply \code{duration_col},
+\code{event_col}, \code{covariate_cols}, etc.}
+
+\item{duration_col}{Character; column name of the event/censoring
+time in \code{data}.}
+
+\item{event_col}{Character; column name of the event-indicator
+variable in \code{data}.}
+
+\item{landmark_time}{Numeric landmark time at which to subset
+the cohort before fitting (lead-time bias correction).}
+}
 \description{
 Landmark dataset constructor.
 }

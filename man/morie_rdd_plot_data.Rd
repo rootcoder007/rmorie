@@ -16,6 +16,34 @@ morie_rdd_plot_data(
   kernel = "triangular"
 )
 }
+\arguments{
+\item{data}{A \code{data.frame} holding the outcome, running variable,
+treatment, and any covariates referenced by name.}
+
+\item{outcome}{Character; column name of the response variable in
+\code{data}.}
+
+\item{running}{Character; column name of the running (forcing)
+variable in \code{data}.}
+
+\item{cutoff}{Numeric scalar; the threshold on \code{running}. Default
+\code{0} (the canonical normalisation).}
+
+\item{n_bins}{Integer; bin count for histogram-based density tests
+and binned-plot reductions.}
+
+\item{p_global}{Integer; polynomial order for the global
+component of \code{morie_rdd_plot_data}.}
+
+\item{p_local}{Integer; polynomial order for the local component
+of \code{morie_rdd_plot_data}.}
+
+\item{bandwidth}{Numeric; the local-polynomial bandwidth on each
+side of the cutoff. \code{NULL} invokes the data-driven CCT selector.}
+
+\item{kernel}{One of \code{"triangular"} (default), \code{"epanechnikov"},
+\code{"uniform"}, or \code{"gaussian"}.}
+}
 \description{
 Binned scatter + global-polynomial data for an RD plot
 }

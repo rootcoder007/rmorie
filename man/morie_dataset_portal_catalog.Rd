@@ -9,7 +9,14 @@ morie_dataset_portal_catalog(portal = NULL)
 \arguments{
 \item{portal}{Optional character filter restricting output to a
 single portal. \code{NULL} (default) returns every dataset across all
-registries.}
+registries and hard-requires the \code{rmoriedata} companion (which
+ships the bulk CKAN / Socrata / Hub catalog snapshots). A
+per-portal call works without \code{rmoriedata} for portals whose
+registry lives in code (\code{"nyc_nypd"}, \code{"tps_psdp"},
+\code{"ontario_ckan"}, \code{"statcan_ccjs"}, etc.); portals served by
+\code{rmoriedata} (\code{"nyc_opendata"}, \code{"chicago"}, \code{"tps_arcgis_hub"},
+\code{"vancouver_opendata"}, etc.) return zero rows with a one-time
+warning when the companion is absent.}
 }
 \value{
 A \code{data.frame} with columns \code{dataset_key}, \code{source},
@@ -26,14 +33,15 @@ environment so repeated calls are O(1); call
 after editing a registry in an interactive session.
 }
 \examples{
-\donttest{
-# The full catalog spans 14 portal registries; some (Toronto Hub,
-# NYC/Chicago/etc. bulk) are served by the optional rmoriedata
-# companion. The call still succeeds without it -- portals lacking
-# a bundled fixture warn once and contribute zero rows.
-cat_df <- morie_dataset_portal_catalog()
-nrow(cat_df)
-table(cat_df$source)
+# Per-portal slice: registry lives in code, works without rmoriedata.
+nypd <- morie_dataset_portal_catalog(portal = "nyc_nypd")
+nrow(nypd)
+head(nypd$dataset_key)
+
+# Full catalog hard-requires rmoriedata for the bulk snapshots:
+if (requireNamespace("rmoriedata", quietly = TRUE)) {
+  cat_df <- morie_dataset_portal_catalog()
+  table(cat_df$source)
 }
 }
 \seealso{

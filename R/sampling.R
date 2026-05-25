@@ -132,6 +132,7 @@ morie_cluster_sample <- function(df, cluster_col, n_clusters, seed = 42L) {
 #' @param size_col Name of the size measure column.
 #' @param n Number of units to select.
 #' @param seed Random seed.
+#' @param replace Logical; `FALSE` (default) uses PPS-without-replacement (Madow systematic-like), matching `morie.sampling.pps_sample` since 2026-05-22. `TRUE` reverts to the legacy Hansen-Hurwitz with-replacement scheme.
 #' @return Data frame of selected units with `.weight` (Hansen-Hurwitz weights).
 #' @examples
 #' # See the package vignettes for usage examples:

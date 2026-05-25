@@ -13,6 +13,67 @@
 #   Wolter (2007). Introduction to Variance Estimation (2nd ed.).
 #   Fay (1989). Proc. SRM Section, ASA.
 
+#' Shared parameters for morie_weights_* helpers
+#'
+#' Roxygen-only stub holding the @param entries shared across the
+#' weights family (design / calibration / replication / trimming /
+#' diagnostics). Functions reference these via
+#' `@inheritParams morie_weights_params`.
+#'
+#' @param weights Numeric vector of unit-level design weights.
+#' @param weights_a Numeric vector of weights from frame A
+#'   (`multiframe`).
+#' @param weights_b Numeric vector of weights from frame B
+#'   (`multiframe`).
+#' @param df A `data.frame` of unit-level covariates aligned with
+#'   `weights`.
+#' @param X A numeric matrix or `data.frame` of auxiliary variables
+#'   (one row per unit) used by GREG / nonresponse propensity models.
+#' @param population_totals Named numeric vector of target totals to
+#'   calibrate to.
+#' @param population_size Optional known population size used by
+#'   `normalize` (target sum = population_size when supplied).
+#' @param totals Named numeric vector of calibration targets used by
+#'   `calibrate_to_totals`.
+#' @param method Character; calibration / smoothing / variance method.
+#'   Allowed values depend on the caller.
+#' @param theta Numeric tuning parameter passed to `multiframe`
+#'   (Hartley-style overlap composition).
+#' @param overlap_a Logical vector flagging frame-A units in overlap.
+#' @param overlap_b Logical vector flagging frame-B units in overlap.
+#' @param strata Optional vector of stratum identifiers aligned with
+#'   `weights`.
+#' @param adjustment_cells Optional cell identifiers used by
+#'   `nonresponse` adjustment.
+#' @param calibration_strata Optional strata for the calibration
+#'   step of `combined`.
+#' @param selection_probs Numeric vector of selection probabilities
+#'   for `design`.
+#' @param responded Logical/integer 0/1 vector of response indicators.
+#' @param trim_percentiles Two-element numeric vector `c(lower, upper)`
+#'   of percentile bounds for trimming.
+#' @param lower_percentile Lower percentile cut for `trim`.
+#' @param upper_percentile Upper percentile cut for `trim`.
+#' @param fay_coefficient Fay's coefficient (\eqn{k}) for Fay's-BRR.
+#' @param shrinkage_factor Numeric in `[0, 1]`; smoothing pull-toward-
+#'   mean factor.
+#' @param target Numeric target sum (`normalize`).
+#' @param replicate_estimates Numeric vector of replicate point
+#'   estimates.
+#' @param full_estimate Numeric scalar; full-sample point estimate.
+#' @param jk_type Character; jackknife type (`"jk1"`, `"jk2"`,
+#'   `"jkn"`).
+#' @param n_replicates Integer; replicate count.
+#' @param k Numeric multiplier for `detect_extreme` (Tukey MAD cut).
+#' @param max_iter Iteration cap for calibration / IPF.
+#' @param tol Convergence tolerance for calibration.
+#' @param seed Integer RNG seed.
+#' @param ... Additional method-specific arguments.
+#' @keywords internal
+#' @name morie_weights_params
+NULL
+
+
 .has_survey_pkg <- function() requireNamespace("survey", quietly = TRUE)
 
 # ---------------------------------------------------------------------------
@@ -22,6 +83,7 @@
 #' Design weights from inclusion probabilities.
 #'
 #' \eqn{w_i = 1 / \pi_i}{w_i = 1 / pi_i}.
+#' @inheritParams morie_weights_params
 #' @export
 morie_weights_design <- function(selection_probs) {
   p <- as.numeric(selection_probs)
@@ -37,6 +99,7 @@ morie_weights_design <- function(selection_probs) {
 #' Post-stratification weight adjustment.
 #'
 #' \eqn{w_i^{ps} = w_i \cdot N_h / \hat{N}_h}{w_i^ps = w_i * N_h / N_hat_h}.
+#' @inheritParams morie_weights_params
 #' @export
 morie_weights_poststratify <- function(weights, strata, population_totals) {
   w <- as.numeric(weights)
@@ -119,6 +182,7 @@ morie_weights_rake <- function(weights, df, margins,
 #' Closed-form linear calibration to match population totals on auxiliary X.
 #' When `survey` is installed, defers to `survey::calibrate()` for a fully
 #' design-aware result; otherwise computes the linear adjustment in base R.
+#' @inheritParams morie_weights_params
 #' @export
 morie_weights_greg <- function(weights, X, population_totals,
                                max_iter = 50, tol = 1e-8) {
@@ -151,6 +215,7 @@ morie_weights_greg <- function(weights, X, population_totals,
 }
 
 #' Dispatch helper -- calibrate to totals via "raking" or "greg".
+#' @inheritParams morie_weights_params
 #' @export
 morie_weights_calibrate_to_totals <- function(weights, df, totals,
                                               method = c("raking", "greg"),
@@ -180,6 +245,7 @@ morie_weights_calibrate_to_totals <- function(weights, df, totals,
 #'
 #' `method = "percentile"` clips at the specified percentiles;
 #' `method = "winsorize"` replaces outliers with the boundary values.
+#' @inheritParams morie_weights_params
 #' @export
 morie_weights_trim <- function(weights, lower_percentile = 1,
                                upper_percentile = 99,
@@ -198,6 +264,7 @@ morie_weights_trim <- function(weights, lower_percentile = 1,
 }
 
 #' Smooth survey weights via shrinkage toward the mean (or log-mean).
+#' @inheritParams morie_weights_params
 #' @export
 morie_weights_smooth <- function(weights,
                                  method = c("linear_shrinkage", "log_transform"),
@@ -226,6 +293,7 @@ morie_weights_smooth <- function(weights,
 #'
 #' Within each cell, scales respondent weights up by total/responder ratio.
 #' Non-respondents end up with weight 0.
+#' @inheritParams morie_weights_params
 #' @export
 morie_weights_nonresponse <- function(weights, responded,
                                       adjustment_cells = NULL) {
@@ -250,6 +318,7 @@ morie_weights_nonresponse <- function(weights, responded,
 }
 
 #' Propensity-score non-response weights (logistic).
+#' @inheritParams morie_weights_params
 #' @export
 morie_weights_propensity_nonresponse <- function(weights, responded, X) {
   w <- as.numeric(weights)
@@ -265,6 +334,7 @@ morie_weights_propensity_nonresponse <- function(weights, responded, X) {
 }
 
 #' Combined design x nonresponse x post-strat (x trim) pipeline.
+#' @inheritParams morie_weights_params
 #' @export
 morie_weights_combined <- function(selection_probs, responded,
                                    adjustment_cells = NULL,
@@ -281,6 +351,7 @@ morie_weights_combined <- function(selection_probs, responded,
 }
 
 #' Normalise weights so they sum to n (sample) or N (population).
+#' @inheritParams morie_weights_params
 #' @export
 morie_weights_normalize <- function(weights,
                                     target = c("sample_size", "population"),
@@ -304,6 +375,7 @@ morie_weights_normalize <- function(weights,
 #'
 #' Returns a named list with summary statistics, Kish ESS, design effect,
 #' weight-range ratio, and percentile vector.
+#' @inheritParams morie_weights_params
 #' @export
 morie_weights_diagnostics <- function(weights) {
   w <- as.numeric(weights)
@@ -336,6 +408,7 @@ morie_weights_diagnostics <- function(weights) {
 }
 
 #' Kish effective sample size: \eqn{(\sum w_i)^2 / \sum w_i^2}{(sum w_i)^2 / sum w_i^2}.
+#' @inheritParams morie_weights_params
 #' @export
 morie_weights_ess <- function(weights) {
   w <- as.numeric(weights)
@@ -345,6 +418,7 @@ morie_weights_ess <- function(weights) {
 }
 
 #' Kish design effect (n / ESS).
+#' @inheritParams morie_weights_params
 #' @export
 morie_weights_deff <- function(weights) {
   w <- as.numeric(weights)
@@ -354,6 +428,7 @@ morie_weights_deff <- function(weights) {
 }
 
 #' Detect extreme weights at +/- k * IQR or by absolute percentile.
+#' @inheritParams morie_weights_params
 #' @export
 morie_weights_detect_extreme <- function(weights, k = 3) {
   w <- as.numeric(weights)
@@ -378,6 +453,7 @@ morie_weights_detect_extreme <- function(weights, k = 3) {
 #'
 #' When the `survey` package is installed and `strata` is supplied, defers
 #' to `survey::as.svrepdesign(..., type = "JKn")` for variance compatibility.
+#' @inheritParams morie_weights_params
 #' @export
 morie_weights_jackknife <- function(weights, strata = NULL,
                                     jk_type = c("JK1", "JKn")) {
@@ -423,6 +499,7 @@ morie_weights_jackknife <- function(weights, strata = NULL,
 #' Each stratum is split into two halves; signs from a random Hadamard-like
 #' matrix double one half and zero the other. For exact Hadamard ordering use
 #' `survey::as.svrepdesign(..., type = "BRR")`.
+#' @inheritParams morie_weights_params
 #' @export
 morie_weights_brr <- function(weights, strata, n_replicates = NULL,
                               seed = 42) {
@@ -466,6 +543,7 @@ morie_weights_brr <- function(weights, strata, n_replicates = NULL,
 }
 
 #' Fay's BRR weights with perturbation coefficient `fay_coefficient` in [0,1).
+#' @inheritParams morie_weights_params
 #' @export
 morie_weights_fay_brr <- function(weights, strata, fay_coefficient = 0.5,
                                   n_replicates = NULL, seed = 42) {
@@ -504,6 +582,7 @@ morie_weights_fay_brr <- function(weights, strata, fay_coefficient = 0.5,
 }
 
 #' Bootstrap replicate weights (Rao-Wu rescaling within strata).
+#' @inheritParams morie_weights_params
 #' @export
 morie_weights_bootstrap <- function(weights, n_replicates = 200,
                                     strata = NULL, seed = 42) {
@@ -536,6 +615,7 @@ morie_weights_bootstrap <- function(weights, n_replicates = 200,
 }
 
 #' Successive Difference Replication (SDR) weights.
+#' @inheritParams morie_weights_params
 #' @export
 morie_weights_sdr <- function(weights, n_replicates = 100, seed = 42) {
   w <- as.numeric(weights)
@@ -558,6 +638,7 @@ morie_weights_sdr <- function(weights, n_replicates = 100, seed = 42) {
 #' Variance estimation from replicate estimates.
 #'
 #' `method` selects the rescaling: "JK1", "JKn", "BRR", "Fay", "bootstrap", "SDR".
+#' @inheritParams morie_weights_params
 #' @export
 morie_weights_replicate_variance <- function(full_estimate, replicate_estimates,
                                              method = c("JK1", "JKn", "BRR",
@@ -614,6 +695,7 @@ morie_weights_replicate_variance <- function(full_estimate, replicate_estimates,
 # ---------------------------------------------------------------------------
 
 #' Multi-frame (dual-frame) survey weights (Hartley compositing).
+#' @inheritParams morie_weights_params
 #' @export
 morie_weights_multiframe <- function(weights_a, weights_b,
                                      overlap_a, overlap_b,

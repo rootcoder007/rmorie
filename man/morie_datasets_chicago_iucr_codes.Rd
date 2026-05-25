@@ -24,11 +24,17 @@ morie_datasets_chicago_iucr_codes(
 
 \item{resource_id}{Optional view id override.}
 
+\item{mode}{One of \code{"soda2"} (default JSON resource endpoint) or
+\code{"soda3"} (SoQL \code{query} endpoint). 3VV+ dual-mode dispatch.}
+
 \item{paginate}{Logical; 3OO opt-in pagination.}
 
 \item{page_size}{Per-page row count when paginating.}
 
 \item{max_pages}{Safety net.}
+
+\item{app_token}{Optional Socrata API app token for higher rate
+limits; passed as the \code{X-App-Token} header.}
 }
 \value{
 A \code{data.frame}.

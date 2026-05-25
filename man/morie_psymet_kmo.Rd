@@ -6,6 +6,9 @@
 \usage{
 morie_psymet_kmo(data)
 }
+\arguments{
+\item{data}{Numeric matrix or data.frame of items.}
+}
 \value{
 list with \code{msa} (overall) and named numeric vector \code{items}.
 }

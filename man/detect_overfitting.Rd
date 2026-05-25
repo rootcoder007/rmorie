@@ -25,6 +25,9 @@ detect_overfitting(
 
 \item{scoring}{"roc_auc", "accuracy", "brier".}
 
+\item{n_bootstrap}{Integer; number of bootstrap resamples used to
+estimate the optimism correction (default 200).}
+
 \item{random_state}{Seed.}
 }
 \description{

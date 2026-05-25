@@ -6,6 +6,19 @@
 \usage{
 morie_weights_greg(weights, X, population_totals, max_iter = 50, tol = 1e-08)
 }
+\arguments{
+\item{weights}{Numeric vector of unit-level design weights.}
+
+\item{X}{A numeric matrix or \code{data.frame} of auxiliary variables
+(one row per unit) used by GREG / nonresponse propensity models.}
+
+\item{population_totals}{Named numeric vector of target totals to
+calibrate to.}
+
+\item{max_iter}{Iteration cap for calibration / IPF.}
+
+\item{tol}{Convergence tolerance for calibration.}
+}
 \description{
 Closed-form linear calibration to match population totals on auxiliary X.
 When \code{survey} is installed, defers to \code{survey::calibrate()} for a fully

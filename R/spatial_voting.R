@@ -1000,6 +1000,9 @@ morie_spatial_voting_bayesian_am <- function(Z, n_samples = 1000L,
 #' @return Never returns; raises `NotYetPorted`.
 #' @references Oh & Raftery (2001) JASA 96(455).
 #' @examples \dontrun{morie_spatial_voting_bayesian_mds(matrix(0, 5, 5))}
+#' @param n_dims Integer; latent dimensionality.
+#' @param n_samples Integer; posterior-sample count.
+#' @param sigma_init Numeric; initial value for the latent-coordinate scale (default 1).
 #' @export
 morie_spatial_voting_bayesian_mds <- function(D, n_dims = 2L,
                                               n_samples = 1000L,
@@ -1029,6 +1032,7 @@ morie_spatial_voting_bayesian_mds <- function(D, n_dims = 2L,
 #' @return Never returns; raises `NotYetPorted`.
 #' @references Bakker, R. and Poole, K. T. (2013).
 #' @examples \dontrun{morie_spatial_voting_bayesian_unfolding(matrix(0, 3, 4))}
+#' @param n_samples Integer; posterior-sample count.
 #' @export
 morie_spatial_voting_bayesian_unfolding <- function(D, n_dims = 2L,
                                                     n_samples = 1000L,
@@ -1056,6 +1060,7 @@ morie_spatial_voting_bayesian_unfolding <- function(D, n_dims = 2L,
 #' @return Never returns; raises `NotYetPorted`.
 #' @references Clinton, Jackman & Rivers (2004).
 #' @examples \dontrun{morie_spatial_voting_cjr_irt(matrix(0, 5, 5))}
+#' @param burn_in Integer; MCMC burn-in iterations.
 #' @export
 morie_spatial_voting_cjr_irt <- function(votes, n_dims = 1L,
                                          n_samples = 1000L,
@@ -1090,6 +1095,8 @@ morie_spatial_voting_cjr_irt <- function(votes, n_dims = 1L,
 #' v <- matrix(stats::rbinom(20, 1, 0.5), 4, 5)
 #' morie_spatial_voting_bayesian_irt_likelihood(
 #'   v, matrix(rnorm(4), 4, 1), rep(0, 5), matrix(rnorm(5), 5, 1))
+#' @param x Matrix or data.frame of vote data (rows = legislators, columns = roll-call votes).
+#' @param beta Numeric vector of item-difficulty parameters; one entry per column of `x`.
 #' @export
 morie_spatial_voting_bayesian_irt_likelihood <- function(votes, x, alpha, beta) {
   votes <- as.matrix(votes)
@@ -1661,6 +1668,8 @@ morie_spatial_voting_nominate_bootstrap <- function(votes,
 #' @references Carroll, R., Lewis, J. B., Lo, J., Poole, K. T., and
 #'   Rosenthal, H. (2013); Neal, R. M. (2003) *Annals of Statistics*.
 #' @examples \dontrun{morie_spatial_voting_alpha_nominate(matrix(0, 5, 5))}
+#' @param n_dims Integer; latent ideal-point dimensionality (default 2).
+#' @param burn_in Integer; MCMC burn-in iterations to discard before summarising the posterior.
 #' @export
 morie_spatial_voting_alpha_nominate <- function(votes, n_dims = 2L,
                                                 n_samples = 500L,
@@ -1702,6 +1711,7 @@ morie_spatial_voting_alpha_nominate <- function(votes, n_dims = 2L,
 #' @references Quinn, K. M. (2004). "Bayesian Factor Analysis for Mixed
 #'   Ordinal and Continuous Responses." *Political Analysis*, 12(4).
 #' @examples \dontrun{morie_spatial_voting_ordinal_irt(matrix(1L, 5, 3))}
+#' @param burn_in Integer; MCMC burn-in iterations.
 #' @export
 morie_spatial_voting_ordinal_irt <- function(Y, n_dims = 1L,
                                              n_samples = 500L,
@@ -1749,6 +1759,8 @@ morie_spatial_voting_ordinal_irt <- function(Y, n_dims = 1L,
 #'   Estimation via Markov Chain Monte Carlo for the U.S. Supreme Court,
 #'   1953-1999." *Political Analysis*, 10(2).
 #' @examples \dontrun{morie_spatial_voting_dynamic_irt(matrix(0, 4, 4), 1:4)}
+#' @param time_periods Integer vector of period indices (one per roll call) for the dynamic-IRT random-walk prior on ideal points.
+#' @param burn_in Integer; MCMC burn-in iterations.
 #' @export
 morie_spatial_voting_dynamic_irt <- function(votes, time_periods,
                                              n_samples = 500L,

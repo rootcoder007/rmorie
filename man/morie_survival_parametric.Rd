@@ -10,6 +10,14 @@ morie_survival_parametric(
   dist = c("weibull", "exponential", "lognormal", "loglogistic", "gaussian")
 )
 }
+\arguments{
+\item{time}{Numeric vector of event/censoring times.}
+
+\item{event}{Integer/logical vector; 1 = event, 0 = censored.}
+
+\item{dist}{Distribution name for parametric/AFT fits (e.g.
+\code{"weibull"}, \code{"lognormal"}, \code{"loglogistic"}).}
+}
 \description{
 For "exponential", "weibull", "lognormal", "loglogistic", "gaussian".
 Use \code{morie_survival_aft()} for covariate-adjusted parametric models.

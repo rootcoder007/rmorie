@@ -11,6 +11,16 @@ morie_weights_trim(
   method = c("percentile", "winsorize")
 )
 }
+\arguments{
+\item{weights}{Numeric vector of unit-level design weights.}
+
+\item{lower_percentile}{Lower percentile cut for \code{trim}.}
+
+\item{upper_percentile}{Upper percentile cut for \code{trim}.}
+
+\item{method}{Character; calibration / smoothing / variance method.
+Allowed values depend on the caller.}
+}
 \description{
 \code{method = "percentile"} clips at the specified percentiles;
 \code{method = "winsorize"} replaces outliers with the boundary values.

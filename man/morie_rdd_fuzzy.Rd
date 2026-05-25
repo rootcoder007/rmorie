@@ -16,6 +16,33 @@ morie_rdd_fuzzy(
   alpha = 0.05
 )
 }
+\arguments{
+\item{data}{A \code{data.frame} holding the outcome, running variable,
+treatment, and any covariates referenced by name.}
+
+\item{outcome}{Character; column name of the response variable in
+\code{data}.}
+
+\item{running}{Character; column name of the running (forcing)
+variable in \code{data}.}
+
+\item{treatment}{Character; column name of the treatment-receipt
+variable (fuzzy designs).}
+
+\item{cutoff}{Numeric scalar; the threshold on \code{running}. Default
+\code{0} (the canonical normalisation).}
+
+\item{bandwidth}{Numeric; the local-polynomial bandwidth on each
+side of the cutoff. \code{NULL} invokes the data-driven CCT selector.}
+
+\item{p}{Integer; local-polynomial order (default 1 for local-
+linear). 2 picks up quadratic curvature for bias correction.}
+
+\item{kernel}{One of \code{"triangular"} (default), \code{"epanechnikov"},
+\code{"uniform"}, or \code{"gaussian"}.}
+
+\item{alpha}{Significance level (default \code{0.05}).}
+}
 \description{
 Fuzzy RDD treatment effect via instrumented Wald ratio
 }

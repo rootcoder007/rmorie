@@ -6,6 +6,19 @@
 \usage{
 morie_rdd_bandwidth_ik(x, y, cutoff = 0, kernel = "triangular")
 }
+\arguments{
+\item{x}{Numeric vector of running-variable values (used by
+bandwidth selectors + density tests that don't take a
+\code{data.frame}).}
+
+\item{y}{Numeric vector of outcome values aligned with \code{x}.}
+
+\item{cutoff}{Numeric scalar; the threshold on \code{running}. Default
+\code{0} (the canonical normalisation).}
+
+\item{kernel}{One of \code{"triangular"} (default), \code{"epanechnikov"},
+\code{"uniform"}, or \code{"gaussian"}.}
+}
 \description{
 Dispatches to \code{rdrobust::rdbwselect(bwselect = "mserd")} which
 implements the modern IK-equivalent CCT MSE-optimal rule.

@@ -11,6 +11,20 @@ morie_iv_first_stage_diagnostics(
   exogenous = NULL
 )
 }
+\arguments{
+\item{data}{A \code{data.frame} (or tibble) holding the outcome,
+endogenous regressors, instruments, and any exogenous controls.}
+
+\item{endogenous}{Character vector; column names of the endogenous
+regressors.}
+
+\item{instruments}{Character vector; column names of the
+instrumental variables.}
+
+\item{exogenous}{Optional character vector of additional exogenous
+regressors included in both the structural equation and the
+first stage. \code{NULL} (default) for a just-identified design.}
+}
 \description{
 First-stage F-statistics and partial R^2
 }

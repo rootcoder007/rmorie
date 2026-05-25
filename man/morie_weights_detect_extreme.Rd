@@ -6,6 +6,11 @@
 \usage{
 morie_weights_detect_extreme(weights, k = 3)
 }
+\arguments{
+\item{weights}{Numeric vector of unit-level design weights.}
+
+\item{k}{Numeric multiplier for \code{detect_extreme} (Tukey MAD cut).}
+}
 \description{
 Detect extreme weights at +/- k * IQR or by absolute percentile.
 }

@@ -12,6 +12,21 @@ morie_survival_aft(
   dist = c("weibull", "lognormal", "loglogistic", "exponential", "gaussian")
 )
 }
+\arguments{
+\item{data}{A \code{data.frame} whose columns supply \code{duration_col},
+\code{event_col}, \code{covariate_cols}, etc.}
+
+\item{duration_col}{Character; column name of the event/censoring
+time in \code{data}.}
+
+\item{event_col}{Character; column name of the event-indicator
+variable in \code{data}.}
+
+\item{covariate_cols}{Character vector of covariate column names.}
+
+\item{dist}{Distribution name for parametric/AFT fits (e.g.
+\code{"weibull"}, \code{"lognormal"}, \code{"loglogistic"}).}
+}
 \description{
 Wraps \code{survival::survreg()}. Supported \code{dist}: "weibull", "lognormal",
 "loglogistic", "exponential", "gaussian".

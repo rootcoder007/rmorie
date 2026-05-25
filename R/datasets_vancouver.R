@@ -49,6 +49,9 @@ morie_datasets_vancouver_opendata_layers <- function(offline = TRUE,
   if (isTRUE(offline)) {
     path <- system.file("extdata", "vancouver_opendata_catalog.csv",
                         package = "rmorie")
+    if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+      path <- system.file("extdata", "vancouver_opendata_catalog.csv", package = "rmoriedata")
+    }
     if (!nzchar(path))
       stop("bundled Vancouver Open Data catalog fixture missing",
            call. = FALSE)
@@ -101,6 +104,9 @@ NULL
 
 .morie_vancouver_fixture <- function(fname) {
   path <- system.file("extdata", fname, package = "rmorie")
+  if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+    path <- system.file("extdata", fname, package = "rmoriedata")
+  }
   if (!nzchar(path))
     stop(sprintf("bundled Vancouver fixture missing: %s", fname),
          call. = FALSE)

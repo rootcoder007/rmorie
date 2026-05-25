@@ -19,6 +19,8 @@ morie_spatial_voting_ordinal_irt(
 
 \item{n_samples}{MCMC samples. @param burn_in Burn-in length.}
 
+\item{burn_in}{Integer; MCMC burn-in iterations.}
+
 \item{seed}{RNG seed.}
 }
 \value{

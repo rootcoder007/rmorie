@@ -6,6 +6,12 @@
 \usage{
 morie_survey_ht_total(y, inclusion_probs)
 }
+\arguments{
+\item{y}{Numeric vector of outcome values aligned with the sample.}
+
+\item{inclusion_probs}{Numeric vector of inclusion probabilities
+(\code{pi_i}) for the Horvitz-Thompson estimator.}
+}
 \value{
 list with \code{total}, \code{se}, \code{ci_lower}, \code{ci_upper}.
 }

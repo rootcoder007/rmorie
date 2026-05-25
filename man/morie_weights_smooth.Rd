@@ -10,6 +10,15 @@ morie_weights_smooth(
   shrinkage_factor = 0.5
 )
 }
+\arguments{
+\item{weights}{Numeric vector of unit-level design weights.}
+
+\item{method}{Character; calibration / smoothing / variance method.
+Allowed values depend on the caller.}
+
+\item{shrinkage_factor}{Numeric in \verb{[0, 1]}; smoothing pull-toward-
+mean factor.}
+}
 \description{
 Smooth survey weights via shrinkage toward the mean (or log-mean).
 }

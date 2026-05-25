@@ -10,6 +10,14 @@ morie_weights_normalize(
   population_size = NULL
 )
 }
+\arguments{
+\item{weights}{Numeric vector of unit-level design weights.}
+
+\item{target}{Numeric target sum (\code{normalize}).}
+
+\item{population_size}{Optional known population size used by
+\code{normalize} (target sum = population_size when supplied).}
+}
 \description{
 Normalise weights so they sum to n (sample) or N (population).
 }

@@ -6,6 +6,17 @@
 \usage{
 morie_survival_hr(time, event, group, confidence = 0.95)
 }
+\arguments{
+\item{time}{Numeric vector of event/censoring times.}
+
+\item{event}{Integer/logical vector; 1 = event, 0 = censored.}
+
+\item{group}{Factor/character grouping variable for HR / log-rank
+stratified comparisons.}
+
+\item{confidence}{Confidence level for interval estimates (default
+\code{0.95}).}
+}
 \description{
 Hazard ratio between two groups via a simple Cox model.
 }

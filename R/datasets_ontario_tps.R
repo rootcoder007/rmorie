@@ -136,6 +136,9 @@ morie_datasets_arsau_uof_main_records <- function(year = "2024",
   if (isTRUE(offline)) {
     path <- system.file("extdata", "arsau_uof_main_records_sample.csv",
                         package = "rmorie")
+    if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+      path <- system.file("extdata", "arsau_uof_main_records_sample.csv", package = "rmoriedata")
+    }
     if (!nzchar(path)) {
       stop("bundled ARSAU UoF main_records fixture missing",
            call. = FALSE)
@@ -244,6 +247,9 @@ morie_datasets_tps_mha_apprehensions <- function(year = NULL,
   if (isTRUE(offline)) {
     path <- system.file("extdata", "tps_mha_apprehensions_sample.csv",
                         package = "rmorie")
+    if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+      path <- system.file("extdata", "tps_mha_apprehensions_sample.csv", package = "rmoriedata")
+    }
     if (!nzchar(path)) {
       stop("bundled TPS MHA fixture missing", call. = FALSE)
     }
@@ -313,6 +319,9 @@ morie_datasets_tps_mha_apprehensions <- function(year = NULL,
                                         resource_id, fixture_name) {
   if (isTRUE(offline)) {
     path <- system.file("extdata", fixture_name, package = "rmorie")
+    if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+      path <- system.file("extdata", fixture_name, package = "rmoriedata")
+    }
     if (!nzchar(path)) {
       stop(sprintf("bundled ARSAU UoF fixture %s missing",
                    fixture_name), call. = FALSE)
@@ -703,6 +712,11 @@ morie_datasets_ontario_ckan_layers <- function() {
 #' @param offline If `TRUE` (default), read the bundled synthetic
 #'   fixture. If `FALSE`, hit Ontario CKAN (`resource_id` required).
 #' @param resource_id Optional CKAN resource id (required for live).
+#' @param source One of `NULL` (default, ships an empty 0-row frame
+#'   with the documented schema when no real CKAN row is bundled),
+#'   `"real"` (force the real CKAN sample bundled in `inst/extdata/`,
+#'   error if absent), or `"synth"` (return a deterministic
+#'   `set.seed()` synthetic for didactic examples).
 #' @return A `data.frame` with the canonical 10-col schema
 #'   (`EndFiscalYear`, `UniqueIndividual_ID`,
 #'   `Region_AtTimeOfPlacement`, `Region_MostRecentPlacement`,
@@ -1033,6 +1047,9 @@ morie_datasets_ontario_ckan_by_key <- function(dataset_key,
   entry <- .MORIE_ONTARIO_CKAN_REGISTRY[[dataset_key]]
   if (isTRUE(offline)) {
     path <- system.file("extdata", entry$fixture, package = "rmorie")
+    if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+      path <- system.file("extdata", entry$fixture, package = "rmoriedata")
+    }
     if (!nzchar(path)) {
       stop(sprintf("bundled Ontario CKAN fixture %s missing",
                    entry$fixture), call. = FALSE)

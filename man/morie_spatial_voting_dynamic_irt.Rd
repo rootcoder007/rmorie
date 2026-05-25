@@ -15,7 +15,11 @@ morie_spatial_voting_dynamic_irt(
 \arguments{
 \item{votes}{Vote matrix. @param time_periods Per-vote period indices.}
 
+\item{time_periods}{Integer vector of period indices (one per roll call) for the dynamic-IRT random-walk prior on ideal points.}
+
 \item{n_samples}{MCMC samples. @param burn_in Burn-in length.}
+
+\item{burn_in}{Integer; MCMC burn-in iterations.}
 
 \item{seed}{RNG seed.}
 }

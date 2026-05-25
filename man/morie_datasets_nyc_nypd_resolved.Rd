@@ -31,6 +31,9 @@ is the total cap across walked pages.}
 
 \item{resource_id}{Optional Socrata resource id override.}
 
+\item{mode}{One of \code{"soda2"} (default JSON resource endpoint) or
+\code{"soda3"} (SoQL \code{query} endpoint). 3AAA dual-mode dispatch.}
+
 \item{paginate}{Logical; if \code{TRUE} and \code{offline = FALSE}, walk
 SODA2 \verb{$offset} in \code{page_size} chunks until exhausted or
 \code{max_features} is reached. Default \code{FALSE} (single 1,000-row
@@ -41,6 +44,9 @@ the unauthenticated SODA2 ceiling).}
 
 \item{max_pages}{Safety net on paginated walks (default 200 ->
 up to 200,000 rows without an app_token).}
+
+\item{app_token}{Optional Socrata API app token for higher rate
+limits; passed as the \code{X-App-Token} header.}
 
 \item{resolvers}{Character subset of \code{c("boro", "precinct")} to
 join. Default joins both.}

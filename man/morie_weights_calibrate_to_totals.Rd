@@ -12,6 +12,20 @@ morie_weights_calibrate_to_totals(
   ...
 )
 }
+\arguments{
+\item{weights}{Numeric vector of unit-level design weights.}
+
+\item{df}{A \code{data.frame} of unit-level covariates aligned with
+\code{weights}.}
+
+\item{totals}{Named numeric vector of calibration targets used by
+\code{calibrate_to_totals}.}
+
+\item{method}{Character; calibration / smoothing / variance method.
+Allowed values depend on the caller.}
+
+\item{...}{Additional method-specific arguments.}
+}
 \description{
 Dispatch helper -- calibrate to totals via "raking" or "greg".
 }

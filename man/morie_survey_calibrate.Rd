@@ -12,6 +12,20 @@ morie_survey_calibrate(
   tol = 1e-06
 )
 }
+\arguments{
+\item{df}{A \code{data.frame} holding the (unit-level) sample data plus
+any weight/strata/cluster/domain columns referenced by name.}
+
+\item{aux_vars}{Character vector of column names of auxiliary
+variables used for calibration (raking, GREG, etc.).}
+
+\item{population_totals}{Named numeric vector of population totals
+to calibrate to (one entry per \code{aux_vars} element).}
+
+\item{max_iter}{Iteration cap for the iterative calibration loop.}
+
+\item{tol}{Convergence tolerance for calibration.}
+}
 \description{
 For multi-variable marginals use \code{morie_weights_rake()}; this helper is the
 single-variable convenience.

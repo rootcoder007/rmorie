@@ -12,6 +12,23 @@ morie_rdd_cattaneo_density(
   bandwidth = NULL
 )
 }
+\arguments{
+\item{x}{Numeric vector of running-variable values (used by
+bandwidth selectors + density tests that don't take a
+\code{data.frame}).}
+
+\item{cutoff}{Numeric scalar; the threshold on \code{running}. Default
+\code{0} (the canonical normalisation).}
+
+\item{p}{Integer; local-polynomial order (default 1 for local-
+linear). 2 picks up quadratic curvature for bias correction.}
+
+\item{kernel}{One of \code{"triangular"} (default), \code{"epanechnikov"},
+\code{"uniform"}, or \code{"gaussian"}.}
+
+\item{bandwidth}{Numeric; the local-polynomial bandwidth on each
+side of the cutoff. \code{NULL} invokes the data-driven CCT selector.}
+}
 \description{
 Cattaneo-Jansson-Ma (2020) local-polynomial density test
 }

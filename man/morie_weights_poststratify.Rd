@@ -6,6 +6,15 @@
 \usage{
 morie_weights_poststratify(weights, strata, population_totals)
 }
+\arguments{
+\item{weights}{Numeric vector of unit-level design weights.}
+
+\item{strata}{Optional vector of stratum identifiers aligned with
+\code{weights}.}
+
+\item{population_totals}{Named numeric vector of target totals to
+calibrate to.}
+}
 \description{
 \eqn{w_i^{ps} = w_i \cdot N_h / \hat{N}_h}{w_i^ps = w_i * N_h / N_hat_h}.
 }

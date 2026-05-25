@@ -9,7 +9,11 @@ morie_spatial_voting_bayesian_irt_likelihood(votes, x, alpha, beta)
 \arguments{
 \item{votes}{Binary matrix. @param x Ideal points.}
 
+\item{x}{Matrix or data.frame of vote data (rows = legislators, columns = roll-call votes).}
+
 \item{alpha}{Difficulty. @param beta Discrimination.}
+
+\item{beta}{Numeric vector of item-difficulty parameters; one entry per column of \code{x}.}
 }
 \value{
 List with \code{loglik}, \code{vote_probs}, \code{n_correct}, \code{n_total},

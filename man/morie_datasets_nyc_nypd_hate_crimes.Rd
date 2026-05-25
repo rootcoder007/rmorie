@@ -36,6 +36,12 @@ the unauthenticated SODA2 ceiling).}
 
 \item{max_pages}{Safety net on paginated walks (default 200 ->
 up to 200,000 rows without an app_token).}
+
+\item{mode}{One of \code{"soda2"} (default JSON resource endpoint) or
+\code{"soda3"} (SoQL \code{query} endpoint). 3AAA dual-mode dispatch.}
+
+\item{app_token}{Optional Socrata API app token for higher rate
+limits; passed as the \code{X-App-Token} header.}
 }
 \description{
 NYPD Hate Crimes

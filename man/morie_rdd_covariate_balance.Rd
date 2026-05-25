@@ -14,6 +14,27 @@ morie_rdd_covariate_balance(
   alpha = 0.05
 )
 }
+\arguments{
+\item{data}{A \code{data.frame} holding the outcome, running variable,
+treatment, and any covariates referenced by name.}
+
+\item{running}{Character; column name of the running (forcing)
+variable in \code{data}.}
+
+\item{covariates}{Character vector of column names whose balance
+at the cutoff is checked.}
+
+\item{cutoff}{Numeric scalar; the threshold on \code{running}. Default
+\code{0} (the canonical normalisation).}
+
+\item{bandwidth}{Numeric; the local-polynomial bandwidth on each
+side of the cutoff. \code{NULL} invokes the data-driven CCT selector.}
+
+\item{kernel}{One of \code{"triangular"} (default), \code{"epanechnikov"},
+\code{"uniform"}, or \code{"gaussian"}.}
+
+\item{alpha}{Significance level (default \code{0.05}).}
+}
 \description{
 Runs a sharp-RDD null test on each covariate.
 }

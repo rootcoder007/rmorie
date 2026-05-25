@@ -6,6 +6,16 @@
 \usage{
 morie_survival_rmst(time, event, tau = NULL, confidence = 0.95)
 }
+\arguments{
+\item{time}{Numeric vector of event/censoring times.}
+
+\item{event}{Integer/logical vector; 1 = event, 0 = censored.}
+
+\item{tau}{RMST truncation horizon (\code{morie_survival_rmst}/\code{rmst_diff}).}
+
+\item{confidence}{Confidence level for interval estimates (default
+\code{0.95}).}
+}
 \description{
 Integrates the Kaplan-Meier estimator from 0 to \code{tau} using trapezoidal
 integration on the step-function. SE follows the Klein-Moeschberger

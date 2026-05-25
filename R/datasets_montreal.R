@@ -50,6 +50,9 @@ morie_datasets_montreal_justice_safety_layers <- function(offline = TRUE) {
     path <- system.file("extdata",
                          "montreal_justice_safety_catalog.csv",
                          package = "rmorie")
+    if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+      path <- system.file("extdata", "montreal_justice_safety_catalog.csv", package = "rmoriedata")
+    }
     if (!nzchar(path))
       stop("bundled MTL justice/safety catalog missing", call. = FALSE)
     return(utils::read.csv(path, stringsAsFactors = FALSE,
@@ -119,6 +122,9 @@ morie_datasets_montreal_sim_interventions <- function(offline = TRUE,
     path <- system.file("extdata",
                          "montreal_sim_interventions_sample.csv",
                          package = "rmorie")
+    if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+      path <- system.file("extdata", "montreal_sim_interventions_sample.csv", package = "rmoriedata")
+    }
     if (!nzchar(path))
       stop("bundled SIM interventions sample missing", call. = FALSE)
     df <- utils::read.csv(path, stringsAsFactors = FALSE)
@@ -152,6 +158,9 @@ morie_datasets_montreal_sim_intervention_types <- function() {
   path <- system.file("extdata",
                        "montreal_sim_intervention_types.csv",
                        package = "rmorie")
+  if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+    path <- system.file("extdata", "montreal_sim_intervention_types.csv", package = "rmoriedata")
+  }
   if (!nzchar(path))
     stop("bundled SIM intervention types fixture missing",
          call. = FALSE)

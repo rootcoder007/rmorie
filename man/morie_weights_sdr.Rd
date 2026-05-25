@@ -6,6 +6,13 @@
 \usage{
 morie_weights_sdr(weights, n_replicates = 100, seed = 42)
 }
+\arguments{
+\item{weights}{Numeric vector of unit-level design weights.}
+
+\item{n_replicates}{Integer; replicate count.}
+
+\item{seed}{Integer RNG seed.}
+}
 \description{
 Successive Difference Replication (SDR) weights.
 }

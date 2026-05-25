@@ -6,6 +6,16 @@
 \usage{
 morie_survival_turnbull(left, right, max_iter = 200, tol = 1e-06)
 }
+\arguments{
+\item{left}{Left-bracket times for interval-censored data
+(\code{morie_survival_turnbull}).}
+
+\item{right}{Right-bracket times for interval-censored data.}
+
+\item{max_iter}{Iteration cap for the Turnbull NPMLE EM loop.}
+
+\item{tol}{Convergence tolerance for the Turnbull EM.}
+}
 \description{
 Delegates to \code{survival::survfit()} with \code{Surv(left, right, type = "interval2")}.
 Hand-rolled EM is left as a stub for environments without \code{survival}.

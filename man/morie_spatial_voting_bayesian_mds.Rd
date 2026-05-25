@@ -15,7 +15,13 @@ morie_spatial_voting_bayesian_mds(
 \arguments{
 \item{D}{Distance matrix. @param n_dims Dimensions. @param n_samples MCMC samples.}
 
+\item{n_dims}{Integer; latent dimensionality.}
+
+\item{n_samples}{Integer; posterior-sample count.}
+
 \item{burn_in}{Burn-in length. @param sigma_init Initial sigma.}
+
+\item{sigma_init}{Numeric; initial value for the latent-coordinate scale (default 1).}
 }
 \value{
 Never returns; raises \code{NotYetPorted}.

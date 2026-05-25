@@ -6,6 +6,22 @@
 \usage{
 morie_rdd_bandwidth_cct(x, y, cutoff = 0, kernel = "triangular", p = 1)
 }
+\arguments{
+\item{x}{Numeric vector of running-variable values (used by
+bandwidth selectors + density tests that don't take a
+\code{data.frame}).}
+
+\item{y}{Numeric vector of outcome values aligned with \code{x}.}
+
+\item{cutoff}{Numeric scalar; the threshold on \code{running}. Default
+\code{0} (the canonical normalisation).}
+
+\item{kernel}{One of \code{"triangular"} (default), \code{"epanechnikov"},
+\code{"uniform"}, or \code{"gaussian"}.}
+
+\item{p}{Integer; local-polynomial order (default 1 for local-
+linear). 2 picks up quadratic curvature for bias correction.}
+}
 \description{
 Calonico-Cattaneo-Titiunik (CCT) MSE-optimal bandwidth
 }

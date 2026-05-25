@@ -6,6 +6,9 @@
 \usage{
 morie_weights_deff(weights)
 }
+\arguments{
+\item{weights}{Numeric vector of unit-level design weights.}
+}
 \description{
 Kish design effect (n / ESS).
 }

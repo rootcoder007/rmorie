@@ -15,7 +15,11 @@ morie_spatial_voting_alpha_nominate(
 \arguments{
 \item{votes}{Vote matrix. @param n_dims Latent dimensions.}
 
+\item{n_dims}{Integer; latent ideal-point dimensionality (default 2).}
+
 \item{n_samples}{MCMC samples. @param burn_in Burn-in length.}
+
+\item{burn_in}{Integer; MCMC burn-in iterations to discard before summarising the posterior.}
 
 \item{seed}{RNG seed.}
 }

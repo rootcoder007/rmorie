@@ -6,6 +6,16 @@
 \usage{
 morie_survey_poststratify(df, strata_col, population_counts)
 }
+\arguments{
+\item{df}{A \code{data.frame} holding the (unit-level) sample data plus
+any weight/strata/cluster/domain columns referenced by name.}
+
+\item{strata_col}{Character; column name of the stratum identifier
+in \code{df}.}
+
+\item{population_counts}{Named numeric vector of population counts
+by stratum (post-stratification target).}
+}
 \description{
 Delegates to \code{survey::postStratify()} when given a design; otherwise
 computes raw post-stratification factors in base R.

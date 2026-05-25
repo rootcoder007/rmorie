@@ -6,6 +6,11 @@
 \usage{
 morie_survey_hajek_mean(y, weights)
 }
+\arguments{
+\item{y}{Numeric vector of outcome values aligned with the sample.}
+
+\item{weights}{Numeric vector of design weights aligned with \code{y}.}
+}
 \description{
 Hajek (ratio) estimator of a population mean.
 }

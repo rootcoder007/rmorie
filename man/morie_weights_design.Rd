@@ -6,6 +6,10 @@
 \usage{
 morie_weights_design(selection_probs)
 }
+\arguments{
+\item{selection_probs}{Numeric vector of selection probabilities
+for \code{design}.}
+}
 \description{
 \eqn{w_i = 1 / \pi_i}{w_i = 1 / pi_i}.
 }

@@ -7,7 +7,15 @@
 morie_survival_cif(time, event, event_of_interest = 1L, confidence = 0.95)
 }
 \arguments{
+\item{time}{Numeric vector of event/censoring times.}
+
 \item{event}{Integer event code: 0 = censored, 1 = event of interest,=2 = competing event.}
+
+\item{event_of_interest}{Integer event-type code for competing-
+risks analyses (Fine-Gray, CIF).}
+
+\item{confidence}{Confidence level for interval estimates (default
+\code{0.95}).}
 }
 \description{
 Wraps \code{survival::survfit()} with multi-state \code{Surv()}.

@@ -13,6 +13,24 @@ morie_survival_finegray(
   confidence = 0.95
 )
 }
+\arguments{
+\item{data}{A \code{data.frame} whose columns supply \code{duration_col},
+\code{event_col}, \code{covariate_cols}, etc.}
+
+\item{duration_col}{Character; column name of the event/censoring
+time in \code{data}.}
+
+\item{event_col}{Character; column name of the event-indicator
+variable in \code{data}.}
+
+\item{covariate_cols}{Character vector of covariate column names.}
+
+\item{event_of_interest}{Integer event-type code for competing-
+risks analyses (Fine-Gray, CIF).}
+
+\item{confidence}{Confidence level for interval estimates (default
+\code{0.95}).}
+}
 \description{
 Requires the \code{cmprsk} package.
 }

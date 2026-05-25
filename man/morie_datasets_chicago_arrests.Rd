@@ -30,6 +30,9 @@ the bundled synthetic frame.}
 the UUID (\code{dpt3-jri9}, default) or the publisher's alias
 (\code{arrests}).}
 
+\item{mode}{One of \code{"soda2"} (default JSON resource endpoint) or
+\code{"soda3"} (SoQL \code{query} endpoint). 3VV+ dual-mode dispatch.}
+
 \item{paginate}{Logical; if \code{TRUE} and \code{offline = FALSE}, walk
 SODA2 \verb{$offset} in \code{page_size} chunks. Default \code{FALSE}.}
 
@@ -37,6 +40,9 @@ SODA2 \verb{$offset} in \code{page_size} chunks. Default \code{FALSE}.}
 the unauthenticated SODA2 ceiling).}
 
 \item{max_pages}{Safety net on paginated walks (default 200).}
+
+\item{app_token}{Optional Socrata API app token for higher rate
+limits; passed as the \code{X-App-Token} header.}
 }
 \value{
 A \code{data.frame} with the documented 24-col Socrata schema.
