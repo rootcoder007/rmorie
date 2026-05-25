@@ -1,9 +1,22 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #
-# r-cmd-check.yml -- reusable matrix R CMD check.
+# r-cmd-check.yml -- consolidated R CMD check + quality leaves.
 #
-# Triggered via the build.yml orchestrator (workflow_call). Kept
-# workflow_dispatch so it can be re-run manually for debugging.
+# Refactor 3MMM.62 (2026-05-25): folds the previously-standalone
+# r-lint, r-coverage, r-goodpractice, and r-pkgcheck workflows into
+# POST-CHECK steps on the ubuntu-latest + release cell, so they share
+# the installed R library and built package state. Saves ~3 redundant
+# install+compile passes per build.
+#
+# Topology:
+#   matrix R-CMD-check (5 cells: mac/win/ubuntu-{release,devel,oldrel-1})
+#     |-- check-r-package (all cells)
+#     |-- (ubuntu-release only) lintr + covr + goodpractice + pkgcheck
+#     |-- (ubuntu-release only) codecov upload
+#
+# Standalone r-lint.yml / r-coverage.yml / r-goodpractice.yml /
+# r-pkgcheck.yml are retained as workflow_dispatch-only for manual
+# debugging but no longer fire from build.yml.
 name: R CMD check
 
 env:
@@ -37,6 +50,10 @@ jobs:
     env:
       _R_CHECK_FORCE_SUGGESTS_: false
       R_KEEP_PKG_SOURCE: yes
+      # Whether this cell runs the post-check quality steps
+      # (lintr, covr, goodpractice, pkgcheck). Only the primary
+      # ubuntu-release cell pays that cost.
+      RMORIE_RUN_QA: ${{ matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release' }}
 
     steps:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
@@ -48,9 +65,32 @@ jobs:
           r-version: ${{ matrix.config.r }}
           use-public-rspm: true
 
+      # pkgcheck builds the PDF manual under the hood; needs LaTeX.
+      # Only install on the QA cell to keep mac/win/devel/oldrel fast.
+      - name: Install TinyTeX (QA cell only)
+        if: env.RMORIE_RUN_QA == 'true'
+        uses: r-lib/actions/setup-tinytex@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
+      - name: Install LaTeX helpers (QA cell only)
+        if: env.RMORIE_RUN_QA == 'true'
+        run: |
+          tlmgr update --self
+          tlmgr install inconsolata helvetic times courier ec parskip url upquote
+
+      # cache-version: 1 -- pak's binary cache persists across runs +
+      # leaves IF this key matches. Bump to invalidate (e.g. on Rcpp
+      # toolchain change).
       - uses: r-lib/actions/setup-r-dependencies@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
         with:
-          extra-packages: any::rcmdcheck
+          cache-version: 1
+          extra-packages: >-
+            any::rcmdcheck
+            any::lintr
+            any::covr
+            any::xml2
+            any::goodpractice
+            any::cyclocomp
+            any::pkgcheck
+            any::pkgstats
           needs: check
 
       - uses: r-lib/actions/check-r-package@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
@@ -58,3 +98,38 @@ jobs:
           upload-snapshots: true
           args: 'c("--no-manual", "--as-cran")'
           error-on: '"error"'
+
+      # --- POST-CHECK QA steps (ubuntu-release only) -------------------
+      # These previously ran as separate workflows that each re-installed
+      # R + every Suggests from scratch. Folded in here so they reuse
+      # the already-installed library state. Each step is independently
+      # failure-tolerant (continue-on-error) so a single QA hiccup
+      # doesn't fail the whole r-cmd-check leaf.
+
+      - name: Run lintr
+        if: env.RMORIE_RUN_QA == 'true'
+        continue-on-error: true
+        run: Rscript -e 'lintr::lint_package()'
+
+      - name: Run covr + cobertura
+        if: env.RMORIE_RUN_QA == 'true'
+        continue-on-error: true
+        run: |
+          Rscript -e 'cov <- covr::package_coverage(type = "tests", quiet = TRUE); covr::to_cobertura(cov, filename = "coverage.xml"); cat(sprintf("Coverage: %.2f%%\n", covr::percent_coverage(cov)))'
+
+      - name: Upload coverage to Codecov
+        if: env.RMORIE_RUN_QA == 'true'
+        continue-on-error: true
+        uses: codecov/codecov-action@v5
+        with:
+          files: coverage.xml
+
+      - name: Run goodpractice
+        if: env.RMORIE_RUN_QA == 'true'
+        continue-on-error: true
+        run: Rscript -e 'g <- goodpractice::gp("."); print(g)'
+
+      - name: Run rOpenSci pkgcheck
+        if: env.RMORIE_RUN_QA == 'true'
+        continue-on-error: true
+        run: Rscript -e 'pc <- pkgcheck::pkgcheck("."); print(pc)'

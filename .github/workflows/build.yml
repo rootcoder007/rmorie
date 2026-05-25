@@ -6,16 +6,15 @@
 # then GATES the container build behind ALL quality leaves passing,
 # then fans IN to a single `summary` node.
 #
-# Topology:
+# Topology (3MMM.62 consolidation, 2026-05-25):
 #
-#                       +-> r-cmd-check (matrix: 5 cells)   -+
-#                       +-> r-coverage (covr + codecov)      -+
-#                       +-> r-lint (lintr)                    -+
-#   setup ------------> +-> r-goodpractice (cyclocomp+...)    +-> docker-publish -+
-#                       +-> r-pkgcheck (rOpenSci)             -+    (gated)        |
-#                       +-> codeql (actions + c-cpp)          -+                   v
-#                       +-> pkgdown (build + deploy Pages)    -+               summary
-#                                                              |
+#                       +-> r-cmd-check (matrix: 5 cells)     -+
+#                       |     ubuntu-release ALSO runs:        |
+#                       |     lintr + covr + goodpractice +    |
+#                       |     pkgcheck (shared R library)      +-> docker-publish -+
+#   setup ------------> +-> codeql (actions + c-cpp)          -+    (gated)        |
+#                       +-> pkgdown (build + deploy Pages)    -+                   v
+#                                                              |               summary
 #                                                              +-- (also)
 #
 # docker-publish ONLY runs when every quality leaf is green. If any
@@ -87,31 +86,18 @@ jobs:
           echo "sha:              ${{ github.sha }}"
           echo "should_publish:   ${{ steps.gate.outputs.should_publish }}"
 
-  # ---- Fan-out: every quality leaf depends ONLY on `setup` ----
+  # ---- Fan-out: 3 leaves (was 7) ----
+  #
+  # Refactor 3MMM.62: r-cmd-check now ALSO runs lintr / covr / goodpractice /
+  # pkgcheck as post-check steps on its ubuntu-release matrix cell, so they
+  # share the just-installed R library and built package state. The previously-
+  # separate r-lint / r-coverage / r-goodpractice / r-pkgcheck workflows are
+  # retained as workflow_dispatch-only for manual debugging but no longer fire
+  # from the DAG.
 
   r-cmd-check:
     needs: setup
     uses: ./.github/workflows/r-cmd-check.yml
-    secrets: inherit
-
-  r-coverage:
-    needs: setup
-    uses: ./.github/workflows/r-coverage.yml
-    secrets: inherit
-
-  r-lint:
-    needs: setup
-    uses: ./.github/workflows/r-lint.yml
-    secrets: inherit
-
-  r-goodpractice:
-    needs: setup
-    uses: ./.github/workflows/r-goodpractice.yml
-    secrets: inherit
-
-  r-pkgcheck:
-    needs: setup
-    uses: ./.github/workflows/r-pkgcheck.yml
     secrets: inherit
 
   codeql:
@@ -130,10 +116,6 @@ jobs:
     needs:
       - setup
       - r-cmd-check
-      - r-coverage
-      - r-lint
-      - r-goodpractice
-      - r-pkgcheck
       - codeql
     # Only run when every upstream leaf succeeded. GitHub's default
     # behaviour skips on upstream failure; we make that explicit.
@@ -150,10 +132,6 @@ jobs:
     needs:
       - setup
       - r-cmd-check
-      - r-coverage
-      - r-lint
-      - r-goodpractice
-      - r-pkgcheck
       - codeql
       - pkgdown
       - docker-publish
@@ -165,11 +143,7 @@ jobs:
           set -eu
           echo "Per-leaf result table:"
           echo "  setup            = ${{ needs.setup.result }}"
-          echo "  r-cmd-check      = ${{ needs.r-cmd-check.result }}"
-          echo "  r-coverage       = ${{ needs.r-coverage.result }}"
-          echo "  r-lint           = ${{ needs.r-lint.result }}"
-          echo "  r-goodpractice   = ${{ needs.r-goodpractice.result }}"
-          echo "  r-pkgcheck       = ${{ needs.r-pkgcheck.result }}"
+          echo "  r-cmd-check      = ${{ needs.r-cmd-check.result }} (also runs lint/covr/goodpractice/pkgcheck on ubuntu-release)"
           echo "  codeql           = ${{ needs.codeql.result }}"
           echo "  pkgdown          = ${{ needs.pkgdown.result }}"
           echo "  docker-publish   = ${{ needs.docker-publish.result }}"
@@ -183,10 +157,6 @@ jobs:
           for r in \
             "${{ needs.setup.result }}" \
             "${{ needs.r-cmd-check.result }}" \
-            "${{ needs.r-coverage.result }}" \
-            "${{ needs.r-lint.result }}" \
-            "${{ needs.r-goodpractice.result }}" \
-            "${{ needs.r-pkgcheck.result }}" \
             "${{ needs.codeql.result }}" \
             "${{ needs.pkgdown.result }}"; do
             if [ "$r" != "success" ]; then
