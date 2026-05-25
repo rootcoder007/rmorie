@@ -26,7 +26,7 @@ jobs:
       _R_CHECK_FORCE_SUGGESTS_: false
 
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - uses: r-lib/actions/setup-pandoc@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
       - uses: r-lib/actions/setup-r@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
         with:
