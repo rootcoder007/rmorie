@@ -6,15 +6,16 @@
 # then GATES the container build behind ALL quality leaves passing,
 # then fans IN to a single `summary` node.
 #
-# Topology (3MMM.62 consolidation, 2026-05-25):
+# Topology (3MMM.62 + 3MMM.64 consolidation, 2026-05-25):
 #
 #                       +-> r-cmd-check (matrix: 5 cells)     -+
 #                       |     ubuntu-release ALSO runs:        |
-#                       |     lintr + covr + goodpractice +    |
-#                       |     pkgcheck (shared R library)      +-> docker-publish -+
-#   setup ------------> +-> codeql (actions + c-cpp)          -+    (gated)        |
-#                       +-> pkgdown (build + deploy Pages)    -+                   v
-#                                                              |               summary
+#                       |     lintr + covr + goodpractice      |
+#                       |     (shared R library)               +-> docker-publish -+
+#   setup ------------> +-> r-pkgcheck (rOpenSci pkgcheck)    -+    (gated)        |
+#                       +-> codeql (actions + c-cpp)          -+                   v
+#                       +-> pkgdown (build + deploy Pages)    -+               summary
+#                                                              |
 #                                                              +-- (also)
 #
 # docker-publish ONLY runs when every quality leaf is green. If any
@@ -86,18 +87,27 @@ jobs:
           echo "sha:              ${{ github.sha }}"
           echo "should_publish:   ${{ steps.gate.outputs.should_publish }}"
 
-  # ---- Fan-out: 3 leaves (was 7) ----
+  # ---- Fan-out: 4 leaves (was 7) ----
   #
-  # Refactor 3MMM.62: r-cmd-check now ALSO runs lintr / covr / goodpractice /
-  # pkgcheck as post-check steps on its ubuntu-release matrix cell, so they
-  # share the just-installed R library and built package state. The previously-
-  # separate r-lint / r-coverage / r-goodpractice / r-pkgcheck workflows are
-  # retained as workflow_dispatch-only for manual debugging but no longer fire
-  # from the DAG.
+  # Refactor 3MMM.62 + 3MMM.64: r-cmd-check now ALSO runs lintr / covr /
+  # goodpractice as post-check steps on its ubuntu-release matrix cell,
+  # so they share the just-installed R library and built package state.
+  # The previously-separate r-lint / r-coverage / r-goodpractice
+  # workflows are retained as workflow_dispatch-only for manual debug.
+  #
+  # r-pkgcheck stays a separate leaf -- pkgcheck/pkgstats are GitHub-
+  # only (ropensci-review-tools/*), need universal-ctags system dep,
+  # and pull in their own LaTeX PDF build. Embedding broke pak
+  # dependency resolution on first try (3MMM.62 -> 3MMM.64).
 
   r-cmd-check:
     needs: setup
     uses: ./.github/workflows/r-cmd-check.yml
+    secrets: inherit
+
+  r-pkgcheck:
+    needs: setup
+    uses: ./.github/workflows/r-pkgcheck.yml
     secrets: inherit
 
   codeql:
@@ -116,6 +126,7 @@ jobs:
     needs:
       - setup
       - r-cmd-check
+      - r-pkgcheck
       - codeql
     # Only run when every upstream leaf succeeded. GitHub's default
     # behaviour skips on upstream failure; we make that explicit.
@@ -132,6 +143,7 @@ jobs:
     needs:
       - setup
       - r-cmd-check
+      - r-pkgcheck
       - codeql
       - pkgdown
       - docker-publish
@@ -143,7 +155,8 @@ jobs:
           set -eu
           echo "Per-leaf result table:"
           echo "  setup            = ${{ needs.setup.result }}"
-          echo "  r-cmd-check      = ${{ needs.r-cmd-check.result }} (also runs lint/covr/goodpractice/pkgcheck on ubuntu-release)"
+          echo "  r-cmd-check      = ${{ needs.r-cmd-check.result }} (also runs lint/covr/goodpractice on ubuntu-release)"
+          echo "  r-pkgcheck       = ${{ needs.r-pkgcheck.result }}"
           echo "  codeql           = ${{ needs.codeql.result }}"
           echo "  pkgdown          = ${{ needs.pkgdown.result }}"
           echo "  docker-publish   = ${{ needs.docker-publish.result }}"
@@ -157,6 +170,7 @@ jobs:
           for r in \
             "${{ needs.setup.result }}" \
             "${{ needs.r-cmd-check.result }}" \
+            "${{ needs.r-pkgcheck.result }}" \
             "${{ needs.codeql.result }}" \
             "${{ needs.pkgdown.result }}"; do
             if [ "$r" != "success" ]; then

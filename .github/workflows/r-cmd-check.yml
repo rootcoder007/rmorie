@@ -1,22 +1,27 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #
-# r-cmd-check.yml -- consolidated R CMD check + quality leaves.
+# r-cmd-check.yml -- consolidated R CMD check + lint/covr/goodpractice.
 #
-# Refactor 3MMM.62 (2026-05-25): folds the previously-standalone
-# r-lint, r-coverage, r-goodpractice, and r-pkgcheck workflows into
-# POST-CHECK steps on the ubuntu-latest + release cell, so they share
-# the installed R library and built package state. Saves ~3 redundant
-# install+compile passes per build.
+# Refactor 3MMM.62 + 3MMM.64 (2026-05-25): folds the previously-standalone
+# r-lint, r-coverage, and r-goodpractice workflows into POST-CHECK steps
+# on the ubuntu-latest + release cell so they share the installed R
+# library and built package state. Saves ~3 redundant install+compile
+# passes per build.
+#
+# r-pkgcheck.yml stays separate -- pkgcheck/pkgstats are GitHub-only
+# (ropensci-review-tools/*), need universal-ctags system dep, and run
+# their own LaTeX PDF build. Embedding here triggered pak dependency-
+# resolution failures (3MMM.64); leaving it as a workflow_call leaf
+# under build.yml is cheaper than the workarounds.
 #
 # Topology:
 #   matrix R-CMD-check (5 cells: mac/win/ubuntu-{release,devel,oldrel-1})
 #     |-- check-r-package (all cells)
-#     |-- (ubuntu-release only) lintr + covr + goodpractice + pkgcheck
+#     |-- (ubuntu-release only) lintr + covr + goodpractice
 #     |-- (ubuntu-release only) codecov upload
 #
-# Standalone r-lint.yml / r-coverage.yml / r-goodpractice.yml /
-# r-pkgcheck.yml are retained as workflow_dispatch-only for manual
-# debugging but no longer fire from build.yml.
+# Standalone r-lint.yml / r-coverage.yml / r-goodpractice.yml are
+# retained as workflow_dispatch-only for manual debugging.
 name: R CMD check
 
 env:
@@ -51,8 +56,8 @@ jobs:
       _R_CHECK_FORCE_SUGGESTS_: false
       R_KEEP_PKG_SOURCE: yes
       # Whether this cell runs the post-check quality steps
-      # (lintr, covr, goodpractice, pkgcheck). Only the primary
-      # ubuntu-release cell pays that cost.
+      # (lintr, covr, goodpractice). Only the primary ubuntu-release
+      # cell pays that cost.
       RMORIE_RUN_QA: ${{ matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release' }}
 
     steps:
@@ -65,32 +70,23 @@ jobs:
           r-version: ${{ matrix.config.r }}
           use-public-rspm: true
 
-      # pkgcheck builds the PDF manual under the hood; needs LaTeX.
-      # Only install on the QA cell to keep mac/win/devel/oldrel fast.
-      - name: Install TinyTeX (QA cell only)
-        if: env.RMORIE_RUN_QA == 'true'
-        uses: r-lib/actions/setup-tinytex@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
-      - name: Install LaTeX helpers (QA cell only)
-        if: env.RMORIE_RUN_QA == 'true'
-        run: |
-          tlmgr update --self
-          tlmgr install inconsolata helvetic times courier ec parskip url upquote
-
       # cache-version: 1 -- pak's binary cache persists across runs +
       # leaves IF this key matches. Bump to invalidate (e.g. on Rcpp
       # toolchain change).
+      #
+      # Use the YAML literal-block (|) form so each package is on its
+      # own line. The folded-scalar (>-) form collapses everything to
+      # one space-separated string which pak then mis-resolves.
       - uses: r-lib/actions/setup-r-dependencies@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
         with:
           cache-version: 1
-          extra-packages: >-
+          extra-packages: |
             any::rcmdcheck
             any::lintr
             any::covr
             any::xml2
             any::goodpractice
             any::cyclocomp
-            any::pkgcheck
-            any::pkgstats
           needs: check
 
       - uses: r-lib/actions/check-r-package@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
@@ -128,8 +124,3 @@ jobs:
         if: env.RMORIE_RUN_QA == 'true'
         continue-on-error: true
         run: Rscript -e 'g <- goodpractice::gp("."); print(g)'
-
-      - name: Run rOpenSci pkgcheck
-        if: env.RMORIE_RUN_QA == 'true'
-        continue-on-error: true
-        run: Rscript -e 'pc <- pkgcheck::pkgcheck("."); print(pc)'
