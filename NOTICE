@@ -1,0 +1,63 @@
+rmorie -- Multi-domain Open Research and Inferential Estimation (R)
+Copyright (C) 2026 Vansh Singh Ruhela <hadesllm@proton.me>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+The full AGPL-3.0-or-later text is in the LICENSE file at this
+repository's root.
+
+================================================================================
+Contact
+================================================================================
+
+Author:       Vansh Singh Ruhela
+Email:        hadesllm@proton.me
+ORCID:        https://orcid.org/0009-0004-1750-3592
+GitHub:       https://github.com/rootcoder007/rmorie
+Issues:       https://github.com/rootcoder007/rmorie/issues
+Security:     SECURITY.md (vuln disclosure policy)
+
+================================================================================
+AGPL section 13 -- network use disclosure
+================================================================================
+
+If you offer a modified version of rmorie to users over a network (a web
+service, a remote API, a SaaS deployment, etc.), section 13 of the AGPL
+requires you to make the complete corresponding source code available to
+those users. The canonical upstream source is at:
+
+    https://github.com/rootcoder007/rmorie
+
+Modified deployments should either:
+
+  (a) link to the upstream source AND publish their own modifications, or
+  (b) operate the service exclusively for users who can already access
+      the source (e.g., internal corporate use behind a firewall is OK
+      as long as employees can pull the code).
+
+See https://www.gnu.org/licenses/agpl-3.0.html for the canonical license
+text, and https://www.gnu.org/licenses/why-affero-gpl.html for the
+project's reasoning behind choosing AGPL over GPL.
+
+================================================================================
+SPDX identifier
+================================================================================
+
+Every source file in this repository carries the line:
+
+    # SPDX-License-Identifier: AGPL-3.0-or-later
+
+(R files use `#`, C++ files use `//`). Removing or modifying this
+identifier does not change the license — see LICENSE for the binding
+text.
