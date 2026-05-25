@@ -14,7 +14,7 @@
 #   setup ------------> +-> r-goodpractice (cyclocomp+...)    +-> docker-publish -+
 #                       +-> r-pkgcheck (rOpenSci)             -+    (gated)        |
 #                       +-> codeql (actions + c-cpp)          -+                   v
-#                                                              +--------------> summary
+#                       +-> pkgdown (build + deploy Pages)    -+               summary
 #                                                              |
 #                                                              +-- (also)
 #
@@ -45,6 +45,8 @@ permissions:
   security-events: write   # codeql SARIF upload
   actions: read            # codeql 'actions' language
   packages: write          # docker-publish pushes to ghcr.io
+  pages: write             # pkgdown deploys to GitHub Pages
+  id-token: write          # pkgdown OIDC for actions/deploy-pages
 
 concurrency:
   group: build-${{ github.workflow }}-${{ github.ref }}
@@ -117,6 +119,11 @@ jobs:
     uses: ./.github/workflows/codeql.yml
     secrets: inherit
 
+  pkgdown:
+    needs: setup
+    uses: ./.github/workflows/pkgdown.yml
+    secrets: inherit
+
   # ---- Quality gate: docker only after every quality leaf is green ----
 
   docker-publish:
@@ -148,6 +155,7 @@ jobs:
       - r-goodpractice
       - r-pkgcheck
       - codeql
+      - pkgdown
       - docker-publish
     if: always()
     runs-on: ubuntu-latest
@@ -163,6 +171,7 @@ jobs:
           echo "  r-goodpractice   = ${{ needs.r-goodpractice.result }}"
           echo "  r-pkgcheck       = ${{ needs.r-pkgcheck.result }}"
           echo "  codeql           = ${{ needs.codeql.result }}"
+          echo "  pkgdown          = ${{ needs.pkgdown.result }}"
           echo "  docker-publish   = ${{ needs.docker-publish.result }}"
       - name: Fail if any leaf failed
         run: |
@@ -178,7 +187,8 @@ jobs:
             "${{ needs.r-lint.result }}" \
             "${{ needs.r-goodpractice.result }}" \
             "${{ needs.r-pkgcheck.result }}" \
-            "${{ needs.codeql.result }}"; do
+            "${{ needs.codeql.result }}" \
+            "${{ needs.pkgdown.result }}"; do
             if [ "$r" != "success" ]; then
               fail=1
             fi
