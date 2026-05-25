@@ -1137,9 +1137,16 @@ morie_otis_analyze_b01_ruhela_per_year <- function(data = NULL,
       work_g <- work[order(work[[cluster_group]]), , drop = FALSE]
       for (gee_label in c("GEE-Poisson")) {
         # geepack doesn't have direct NB; restrict to Poisson family
+        # geepack::geese.fit calls `which(diff(as.numeric(id)) != 0)`
+        # to detect cluster boundaries. If id is character/factor,
+        # as.numeric() produces NAs and the diff() then propagates
+        # NaN into the working-correlation estimator. Pre-convert to
+        # integer factor codes so the cluster boundaries are unambiguous.
+        id_int <- as.integer(factor(work_g[[cluster_group]]))
+        work_g$.gee_cluster_id_int_ <- id_int
         res_g <- tryCatch(
           geepack::geeglm(fml, data = work_g,
-                          id = work_g[[cluster_group]],
+                          id = .gee_cluster_id_int_,
                           family = stats::poisson(),
                           corstr = "exchangeable"),
           error = function(e) e)

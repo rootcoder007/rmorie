@@ -257,7 +257,10 @@ test_that("local_fdr handles a constant-z degenerate input", {
 
 test_that("permutation_fwer requires ncol(null) == length(obs)", {
   set.seed(1)
-  expect_error(permutation_fwer(c(1, 2), matrix(rnorm(20), 10, 3)))
+  # Build a well-shaped 10x3 matrix (no recycling warning from matrix())
+  # then assert permutation_fwer rejects it because length(obs)=2 != ncol=3.
+  bad_null <- matrix(rnorm(30), 10, 3)
+  expect_error(permutation_fwer(c(1, 2), bad_null))
 })
 
 test_that("permutation_fwer two-sided / greater / less branches run", {
@@ -293,5 +296,8 @@ test_that("permutation_fdr returns q in [0, 1]", {
 
 test_that("permutation_fdr rejects ncol(null) mismatch", {
   set.seed(1)
-  expect_error(permutation_fdr(c(0.1, 0.2), matrix(runif(20), 10, 3)))
+  # Build a well-shaped 10x3 matrix (no recycling warning from matrix())
+  # then assert permutation_fdr rejects it because length(obs)=2 != ncol=3.
+  bad_null <- matrix(runif(30), 10, 3)
+  expect_error(permutation_fdr(c(0.1, 0.2), bad_null))
 })
