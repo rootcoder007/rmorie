@@ -1,8 +1,8 @@
 # morie 森 — The Fates' Forest
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/hadesllm/morie/actions/workflows/r-cmd-check.yml/badge.svg)](https://github.com/hadesllm/morie/actions/workflows/r-cmd-check.yml)
-[![codecov](https://codecov.io/gh/hadesllm/morie/branch/main/graph/badge.svg)](https://app.codecov.io/gh/hadesllm/morie)
+[![R-CMD-check](https://github.com/rootcoder007/morie/actions/workflows/r-cmd-check.yml/badge.svg)](https://github.com/rootcoder007/morie/actions/workflows/r-cmd-check.yml)
+[![codecov](https://codecov.io/gh/rootcoder007/morie/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rootcoder007/morie)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![rOpenSci review](https://img.shields.io/badge/rOpenSci-under_review_%23770-orange)](https://github.com/ropensci/software-review/issues/770)
 <!-- badges: end -->
@@ -237,7 +237,7 @@ software and the relevant companion papers.
   year    = {2026},
   note    = {R package version 0.9.5.4},
   doi     = {10.5281/zenodo.20111233},
-  url     = {https://github.com/hadesllm/morie}
+  url     = {https://github.com/rootcoder007/morie}
 }
 
 @Misc{ruhela_morie_python_2026,
