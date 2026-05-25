@@ -6,17 +6,21 @@
 # then GATES the container build behind ALL quality leaves passing,
 # then fans IN to a single `summary` node.
 #
-# Topology (3MMM.62 + 3MMM.64 consolidation, 2026-05-25):
+# Topology (3MMM.72 revert, 2026-05-25):
 #
 #                       +-> r-cmd-check (matrix: 5 cells)     -+
-#                       |     ubuntu-release ALSO runs:        |
-#                       |     lintr + covr + goodpractice      |
-#                       |     (shared R library)               +-> docker-publish -+
-#   setup ------------> +-> r-pkgcheck (rOpenSci pkgcheck)    -+    (gated)        |
-#                       +-> codeql (actions + c-cpp)          -+                   v
-#                       +-> pkgdown (build + deploy Pages)    -+               summary
-#                                                              |
-#                                                              +-- (also)
+#                       +-> r-coverage (covr + codecov)       -+
+#                       +-> r-lint (lintr)                    -+
+#   setup ------------> +-> codeql (actions + c-cpp)          -+-> docker-publish -+
+#                       +-> pkgdown (build + deploy Pages)    -+    (gated)        |
+#                                                                                  v
+#                                                                              summary
+#
+# r-pkgcheck and r-goodpractice removed from auto-fire fan-out in
+# 3MMM.72 -- both re-run R CMD check + covr + cyclocomp + lintr
+# internally (~1 hour per push each). They remain available via
+# workflow_dispatch from the Actions tab for pre-rOpenSci-submission
+# audits, not on every push.
 #
 # docker-publish ONLY runs when every quality leaf is green. If any
 # fails, the container leaf is skipped and a broken image cannot be
@@ -105,10 +109,24 @@ jobs:
     uses: ./.github/workflows/r-cmd-check.yml
     secrets: inherit
 
-  r-pkgcheck:
+  # covr + lint run in parallel with r-cmd-check (small jobs, ~5-15 min
+  # each). Previously folded into r-cmd-check post-check steps (3MMM.62)
+  # which serialized them after the check; reverted 3MMM.72 because the
+  # consolidation added 40+ min instead of saving time.
+  r-coverage:
     needs: setup
-    uses: ./.github/workflows/r-pkgcheck.yml
+    uses: ./.github/workflows/r-coverage.yml
     secrets: inherit
+
+  r-lint:
+    needs: setup
+    uses: ./.github/workflows/r-lint.yml
+    secrets: inherit
+
+  # r-pkgcheck and r-goodpractice are workflow_dispatch-only since
+  # 3MMM.72 -- both re-run R CMD check + covr + cyclocomp + lintr
+  # internally (~1 hour per push each). Fire manually from the
+  # Actions tab before rOpenSci submission.
 
   codeql:
     needs: setup
@@ -126,7 +144,8 @@ jobs:
     needs:
       - setup
       - r-cmd-check
-      - r-pkgcheck
+      - r-coverage
+      - r-lint
       - codeql
     # Only run when every upstream leaf succeeded. GitHub's default
     # behaviour skips on upstream failure; we make that explicit.
@@ -153,7 +172,8 @@ jobs:
     needs:
       - setup
       - r-cmd-check
-      - r-pkgcheck
+      - r-coverage
+      - r-lint
       - codeql
       - pkgdown
     if: >
@@ -186,7 +206,8 @@ jobs:
     needs:
       - setup
       - r-cmd-check
-      - r-pkgcheck
+      - r-coverage
+      - r-lint
       - codeql
       - pkgdown
       - docker-publish
@@ -198,8 +219,9 @@ jobs:
           set -eu
           echo "Per-leaf result table:"
           echo "  setup            = ${{ needs.setup.result }}"
-          echo "  r-cmd-check      = ${{ needs.r-cmd-check.result }} (also runs lint/covr/goodpractice on ubuntu-release)"
-          echo "  r-pkgcheck       = ${{ needs.r-pkgcheck.result }}"
+          echo "  r-cmd-check      = ${{ needs.r-cmd-check.result }}"
+          echo "  r-coverage       = ${{ needs.r-coverage.result }}"
+          echo "  r-lint           = ${{ needs.r-lint.result }}"
           echo "  codeql           = ${{ needs.codeql.result }}"
           echo "  pkgdown          = ${{ needs.pkgdown.result }}"
           echo "  docker-publish   = ${{ needs.docker-publish.result }}"
@@ -213,7 +235,8 @@ jobs:
           for r in \
             "${{ needs.setup.result }}" \
             "${{ needs.r-cmd-check.result }}" \
-            "${{ needs.r-pkgcheck.result }}" \
+            "${{ needs.r-coverage.result }}" \
+            "${{ needs.r-lint.result }}" \
             "${{ needs.codeql.result }}" \
             "${{ needs.pkgdown.result }}"; do
             if [ "$r" != "success" ]; then
