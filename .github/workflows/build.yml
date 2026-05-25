@@ -2,44 +2,49 @@
 #
 # build.yml -- fan-out/fan-in DAG orchestrator for rmorie CI.
 #
-# The DAG fans OUT from `setup` into every leaf in parallel (no
-# inter-leaf dependencies), then fans IN to a single `summary` node
-# that fails if any leaf failed. This minimises wall-clock time:
-# coverage no longer waits for r-cmd-check to finish.
+# The DAG fans OUT from `setup` into every quality leaf in parallel,
+# then GATES the container build behind ALL quality leaves passing,
+# then fans IN to a single `summary` node.
 #
 # Topology:
 #
-#                       +-> r-cmd-check (matrix: 5 cells)         -+
-#                       |                                          |
-#                       +-> r-coverage (covr + codecov)            -+
-#                       |                                          |
-#                       +-> r-lint (lintr::lint_package)           -+
-#                       |                                          |
-#   setup ------------> +-> r-goodpractice (cyclocomp + rcmdcheck) -+-> summary
-#                       |                                          |
-#                       +-> r-pkgcheck (rOpenSci)                  -+
-#                       |                                          |
-#                       +-> codeql (actions + c-cpp)               -+
+#                       +-> r-cmd-check (matrix: 5 cells)   -+
+#                       +-> r-coverage (covr + codecov)      -+
+#                       +-> r-lint (lintr)                    -+
+#   setup ------------> +-> r-goodpractice (cyclocomp+...)    +-> docker-publish -+
+#                       +-> r-pkgcheck (rOpenSci)             -+    (gated)        |
+#                       +-> codeql (actions + c-cpp)          -+                   v
+#                                                              +--------------> summary
+#                                                              |
+#                                                              +-- (also)
 #
-# Each leaf is workflow_call into its own reusable file. Failure of
-# any single leaf fails `summary`, which is the one required check
-# for branch-protection on `main`.
+# docker-publish ONLY runs when every quality leaf is green. If any
+# fails, the container leaf is skipped and a broken image cannot be
+# published. The push step inside docker-publish itself only fires
+# when the workflow is invoked for a release (tag push, manual
+# dispatch) -- branch pushes build the image but do not push to GHCR.
 
 name: build
 
 on:
   push:
     branches: ["main", "release/**"]
+    tags: ["v*.*.*"]
   pull_request:
     branches: ["main", "release/**"]
   workflow_dispatch:
+    inputs:
+      publish_container:
+        description: "Publish container to GHCR after green CI"
+        type: boolean
+        default: false
 
 # Permissions union of every leaf workflow's needs.
 permissions:
   contents: read
   security-events: write   # codeql SARIF upload
   actions: read            # codeql 'actions' language
-  packages: read           # codeql pulls query packs from ghcr
+  packages: write          # docker-publish pushes to ghcr.io
 
 concurrency:
   group: build-${{ github.workflow }}-${{ github.ref }}
@@ -51,6 +56,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.meta.outputs.version }}
+      should_publish: ${{ steps.gate.outputs.should_publish }}
     steps:
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
       - name: Read DESCRIPTION version
@@ -58,13 +64,28 @@ jobs:
         run: |
           v=$(grep '^Version:' DESCRIPTION | awk '{print $2}')
           echo "version=$v" >> "$GITHUB_OUTPUT"
+      - name: Decide whether to publish container
+        id: gate
+        run: |
+          # Publish when:
+          #   - tag push (v*.*.*) — release
+          #   - workflow_dispatch with publish_container=true — manual
+          # Otherwise build the image to verify, but don't push.
+          if [[ "${{ github.ref }}" == refs/tags/v* ]] || \
+             [[ "${{ github.event_name }}" == "workflow_dispatch" && \
+                "${{ github.event.inputs.publish_container }}" == "true" ]]; then
+            echo "should_publish=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "should_publish=false" >> "$GITHUB_OUTPUT"
+          fi
       - name: Report
         run: |
-          echo "rmorie version: ${{ steps.meta.outputs.version }}"
-          echo "ref:            ${{ github.ref }}"
-          echo "sha:            ${{ github.sha }}"
+          echo "rmorie version:   ${{ steps.meta.outputs.version }}"
+          echo "ref:              ${{ github.ref }}"
+          echo "sha:              ${{ github.sha }}"
+          echo "should_publish:   ${{ steps.gate.outputs.should_publish }}"
 
-  # ---- Fan-out: every leaf depends ONLY on `setup` ----
+  # ---- Fan-out: every quality leaf depends ONLY on `setup` ----
 
   r-cmd-check:
     needs: setup
@@ -96,6 +117,25 @@ jobs:
     uses: ./.github/workflows/codeql.yml
     secrets: inherit
 
+  # ---- Quality gate: docker only after every quality leaf is green ----
+
+  docker-publish:
+    needs:
+      - setup
+      - r-cmd-check
+      - r-coverage
+      - r-lint
+      - r-goodpractice
+      - r-pkgcheck
+      - codeql
+    # Only run when every upstream leaf succeeded. GitHub's default
+    # behaviour skips on upstream failure; we make that explicit.
+    if: ${{ success() }}
+    uses: ./.github/workflows/docker-publish.yml
+    secrets: inherit
+    with:
+      push: ${{ needs.setup.outputs.should_publish == 'true' }}
+
   # ---- Fan-in: single required check ----
 
   summary:
@@ -108,6 +148,7 @@ jobs:
       - r-goodpractice
       - r-pkgcheck
       - codeql
+      - docker-publish
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -115,17 +156,21 @@ jobs:
         run: |
           set -eu
           echo "Per-leaf result table:"
-          echo "  setup          = ${{ needs.setup.result }}"
-          echo "  r-cmd-check    = ${{ needs.r-cmd-check.result }}"
-          echo "  r-coverage     = ${{ needs.r-coverage.result }}"
-          echo "  r-lint         = ${{ needs.r-lint.result }}"
-          echo "  r-goodpractice = ${{ needs.r-goodpractice.result }}"
-          echo "  r-pkgcheck     = ${{ needs.r-pkgcheck.result }}"
-          echo "  codeql         = ${{ needs.codeql.result }}"
+          echo "  setup            = ${{ needs.setup.result }}"
+          echo "  r-cmd-check      = ${{ needs.r-cmd-check.result }}"
+          echo "  r-coverage       = ${{ needs.r-coverage.result }}"
+          echo "  r-lint           = ${{ needs.r-lint.result }}"
+          echo "  r-goodpractice   = ${{ needs.r-goodpractice.result }}"
+          echo "  r-pkgcheck       = ${{ needs.r-pkgcheck.result }}"
+          echo "  codeql           = ${{ needs.codeql.result }}"
+          echo "  docker-publish   = ${{ needs.docker-publish.result }}"
       - name: Fail if any leaf failed
         run: |
           set -eu
           fail=0
+          # docker-publish is allowed to be 'skipped' when a quality
+          # leaf failed -- that's the gating behaviour. But any other
+          # leaf being non-success fails the summary.
           for r in \
             "${{ needs.setup.result }}" \
             "${{ needs.r-cmd-check.result }}" \
@@ -138,8 +183,13 @@ jobs:
               fail=1
             fi
           done
+          # docker-publish: success or skipped is OK; failure is not.
+          if [ "${{ needs.docker-publish.result }}" = "failure" ] || \
+             [ "${{ needs.docker-publish.result }}" = "cancelled" ]; then
+            fail=1
+          fi
           if [ "$fail" -eq 1 ]; then
-            echo "::error::At least one CI leaf failed/cancelled -- see the table above."
+            echo "::error::At least one CI leaf failed -- see the table above."
             exit 1
           fi
           echo "All CI leaves green."

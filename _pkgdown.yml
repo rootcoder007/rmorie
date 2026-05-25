@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+url: https://rootcoder007.github.io/rmorie/
+
+template:
+  bootstrap: 5
+  bootswatch: cosmo
+
+home:
+  links:
+    - text: Source on GitHub
+      href: https://github.com/rootcoder007/rmorie
+    - text: Companion data package
+      href: https://github.com/rootcoder007/rmoriedata
+    - text: Container on GHCR
+      href: https://github.com/rootcoder007/rmorie/pkgs/container/rmorie
+
+navbar:
+  structure:
+    left:  [intro, reference, news]
+    right: [search, github]
+  components:
+    intro:
+      text: Intro
+      href: articles/intro.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    news:
+      text: Changelog
+      href: news/index.html
+    github:
+      icon: fab fa-github
+      href: https://github.com/rootcoder007/rmorie
+
+reference:
+  - title: Package overview
+    contents:
+      - rmorie-package
+  - title: All exported functions
+    contents:
+      - has_keyword("")

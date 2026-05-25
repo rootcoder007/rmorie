@@ -1,38 +1,48 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #
-# docker-publish.yml -- build + push the rmorie container to GHCR.
+# docker-publish.yml -- reusable leaf in the build DAG.
 #
-# Triggers:
-#   * push of a `v*.*.*` tag           -> tagged immutable release
-#   * manual workflow_dispatch         -> ad-hoc rebuild
-#   * weekly cron                      -> refresh `latest` against new
-#                                         base-image security patches
+# This workflow ONLY runs as a child of build.yml; it has no direct
+# triggers of its own (no push, no PR, no tag, no cron). The build.yml
+# orchestrator decides WHEN to publish:
 #
-# After the FIRST successful run, the container becomes visible on
-# the repo's "Packages" sidebar (replacing the "Release your first
-# package" placeholder GitHub shows on empty-package repos).
+#   - on every push to `main` or `release/**`: build only (push: false)
+#   - on a `v*.*.*` tag push:                   build + push to GHCR
+#   - on workflow_dispatch:                     build + push (manual)
 #
-# Image coordinates:
-#   ghcr.io/rootcoder007/rmorie:latest
-#   ghcr.io/rootcoder007/rmorie:0.9.5.12          (semver, no v prefix)
-#   ghcr.io/rootcoder007/rmorie:0.9                (minor track)
-#   ghcr.io/rootcoder007/rmorie:0.9.5              (patch track)
+# Critically, docker-publish is a LEAF of the build DAG that depends
+# on every quality leaf (r-cmd-check, r-coverage, r-lint, r-goodpractice,
+# r-pkgcheck, codeql). If ANY of those fail, this leaf is skipped --
+# so a broken package can never publish a broken container.
 #
-# Multi-arch: linux/amd64 + linux/arm64 so both x86 CI runners and
-# Apple Silicon dev machines pull a native image.
+# Image coordinates (when publishing):
+#   ghcr.io/rootcoder007/rmorie:latest      (main + tag)
+#   ghcr.io/rootcoder007/rmorie:0.9.5.12    (semver patch)
+#   ghcr.io/rootcoder007/rmorie:0.9.5       (patch track)
+#   ghcr.io/rootcoder007/rmorie:0.9         (minor track)
+#   ghcr.io/rootcoder007/rmorie:sha-<7>     (every push)
+#
+# Multi-arch: linux/amd64 + linux/arm64.
 
 name: Publish container
 
 on:
-  push:
-    tags: ["v*.*.*"]
-  schedule:
-    - cron: "27 5 * * 1"
+  workflow_call:
+    inputs:
+      push:
+        description: "Push to GHCR (true on tags/dispatch; false otherwise)"
+        type: boolean
+        default: false
   workflow_dispatch:
+    inputs:
+      push:
+        description: "Push to GHCR"
+        type: boolean
+        default: true
 
 permissions:
   contents: read
-  packages: write   # required to push to ghcr.io
+  packages: write
 
 concurrency:
   group: docker-publish-${{ github.ref }}
@@ -54,6 +64,7 @@ jobs:
         uses: docker/setup-buildx-action@d7f5e7f509e45cec5c76c4d5afdd7de93d0b3df5 # v4.1.0
 
       - name: Login to GHCR
+        if: ${{ inputs.push }}
         uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee # v4.2.0
         with:
           registry: ghcr.io
@@ -74,13 +85,13 @@ jobs:
             type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') || startsWith(github.ref, 'refs/tags/v') }}
             type=sha,prefix=sha-
 
-      - name: Build + push
+      - name: Build (+ optionally push)
         uses: docker/build-push-action@f9f3042f7e2789586610d6e8b85c8f03e5195baf # v7.2.0
         with:
           context: .
           file: ./Dockerfile
           platforms: linux/amd64,linux/arm64
-          push: true
+          push: ${{ inputs.push }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
