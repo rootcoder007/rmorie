@@ -16,3 +16,4 @@ renv/staging/
 renv/python/
 renv/sandbox/
 .renv-token
+.clangd

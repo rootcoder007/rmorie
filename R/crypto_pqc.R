@@ -23,7 +23,7 @@
 #' @return Single logical.
 #' @export
 morie_crypto_liboqs_available <- function() {
-  .Call(`_morie_morie_crypto_liboqs_available`)
+  .Call(`_rmorie_morie_crypto_liboqs_available`)
 }
 
 #' liboqs runtime version string
@@ -31,7 +31,7 @@ morie_crypto_liboqs_available <- function() {
 #' @return Single character (e.g. `"0.15.0"`); empty if liboqs absent.
 #' @export
 morie_crypto_liboqs_version <- function() {
-  .Call(`_morie_morie_crypto_liboqs_version`)
+  .Call(`_rmorie_morie_crypto_liboqs_version`)
 }
 
 # ============================================================
@@ -51,7 +51,7 @@ morie_crypto_liboqs_version <- function() {
 #' }
 #' @export
 morie_crypto_mlkem768_keygen <- function() {
-  .Call(`_morie_morie_crypto_mlkem768_keygen`)
+  .Call(`_rmorie_morie_crypto_mlkem768_keygen`)
 }
 
 #' ML-KEM-768 encapsulation
@@ -65,7 +65,7 @@ morie_crypto_mlkem768_keygen <- function() {
 #' @export
 morie_crypto_mlkem768_encaps <- function(pk) {
   stopifnot(is.raw(pk))
-  .Call(`_morie_morie_crypto_mlkem768_encaps`, pk)
+  .Call(`_rmorie_morie_crypto_mlkem768_encaps`, pk)
 }
 
 #' ML-KEM-768 decapsulation
@@ -79,7 +79,7 @@ morie_crypto_mlkem768_encaps <- function(pk) {
 #' @export
 morie_crypto_mlkem768_decaps <- function(sk, ct) {
   stopifnot(is.raw(sk), is.raw(ct))
-  .Call(`_morie_morie_crypto_mlkem768_decaps`, sk, ct)
+  .Call(`_rmorie_morie_crypto_mlkem768_decaps`, sk, ct)
 }
 
 # ============================================================
@@ -94,7 +94,7 @@ morie_crypto_mlkem768_decaps <- function(sk, ct) {
 #' @return List with `pk` (raw, 1952 B) and `sk` (raw, 4032 B).
 #' @export
 morie_crypto_mldsa65_keygen <- function() {
-  .Call(`_morie_morie_crypto_mldsa65_keygen`)
+  .Call(`_rmorie_morie_crypto_mldsa65_keygen`)
 }
 
 #' ML-DSA-65 signature
@@ -108,7 +108,7 @@ morie_crypto_mldsa65_keygen <- function() {
 #' @export
 morie_crypto_mldsa65_sign <- function(sk, message) {
   stopifnot(is.raw(sk), is.raw(message))
-  .Call(`_morie_morie_crypto_mldsa65_sign`, sk, message)
+  .Call(`_rmorie_morie_crypto_mldsa65_sign`, sk, message)
 }
 
 #' ML-DSA-65 signature verification
@@ -121,5 +121,5 @@ morie_crypto_mldsa65_sign <- function(sk, message) {
 #' @export
 morie_crypto_mldsa65_verify <- function(pk, message, signature) {
   stopifnot(is.raw(pk), is.raw(message), is.raw(signature))
-  .Call(`_morie_morie_crypto_mldsa65_verify`, pk, message, signature)
+  .Call(`_rmorie_morie_crypto_mldsa65_verify`, pk, message, signature)
 }
