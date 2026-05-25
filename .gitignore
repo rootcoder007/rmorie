@@ -17,3 +17,5 @@ renv/python/
 renv/sandbox/
 .renv-token
 .clangd
+*.o.tmp
+*.o
