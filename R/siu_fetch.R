@@ -47,7 +47,7 @@ morie_siu_index_url <- function() {
 # `siu_fetch.SIU_LATEST_YEAR` if/when it lands upstream.
 .siu_fetch_latest_year <- 2023L
 .siu_fetch_user_agent <-
-  "morie/0.9 (+https://github.com/hadesllm/morie)"
+  "morie/0.9 (+https://github.com/rootcoder007/morie)"
 .siu_fetch_rate_seconds <- 2.0
 
 
