@@ -1150,6 +1150,25 @@ morie_otis_analyze_b01_ruhela_per_year <- function(data = NULL,
             conditionMessage(res_g), "--", "--", "--")
           next
         }
+        # Validate the sandwich estimator before letting summary()
+        # take sqrt of it. On small/degenerate data the robust
+        # covariance matrix's diagonal can be negative or NaN, which
+        # silently produces NaN standard errors. Detect + report
+        # explicitly instead of letting NaN propagate into the table.
+        vb <- tryCatch(res_g$geese$vbeta, error = function(e) NULL)
+        if (is.null(vb) || any(!is.finite(diag(vb))) ||
+            any(diag(vb) < 0)) {
+          rows[[length(rows) + 1L]] <- c(
+            sprintf("%s (cluster:%s)", gee_label, cluster_group),
+            treatment, "degenerate covariance",
+            paste0("GEE sandwich variance matrix is non-PSD ",
+                   "(diag(vbeta) has NaN or negative entries); ",
+                   "likely small clusters, collinear factor levels, ",
+                   "or near-zero outcome counts. Use a stratified ",
+                   "non-GEE model or pool clusters."),
+            "--", "--", "--")
+          next
+        }
         co <- summary(res_g)$coefficients
         rn <- rownames(co)
         t_idx <- grep(treatment, rn, fixed = TRUE)

@@ -267,10 +267,13 @@ test_that("morie_otis_analyze_ruhela_grid runs over datasets list", {
 test_that("morie_otis_analyze_ruhela_master runs over datasets list", {
   set.seed(53)
   ds <- make_datasets_list(seed = 53)
-  # suppressWarnings absorbs geepack's degenerate-covariance NaN
-  # warning on small synthetic test data (incidental, not a real bug).
-  res <- suppressWarnings(tryCatch(morie_otis_analyze_ruhela_master(ds),
-                                   error = function(e) NULL))
+  # .otis_aggregate_glm now detects degenerate GEE sandwich covariance
+  # (negative or NaN diag(vbeta)) and reports it explicitly in the
+  # results table instead of letting NaN propagate via summary(). So
+  # this test no longer needs suppressWarnings -- the function emits
+  # a clean structured result row.
+  res <- tryCatch(morie_otis_analyze_ruhela_master(ds),
+                  error = function(e) NULL)
   skip_if(is.null(res), "needs richer dataset list")
   expect_true(is.list(res))
 })
