@@ -63,7 +63,7 @@ technically return HTTP 200 but ships rows as empty objects
 (\verb{[\{\}]}) -- column resolution doesn't fire on map/filtered views.
 This loader uses the SODA3 endpoint
 \verb{/api/v3/views/ahwe-kpsy/query.json?query=SELECT ... WHERE ...}
-via \code{\link[=.morie_dataset_soda3_query]{.morie_dataset_soda3_query()}}.
+via \code{.morie_dataset_soda3_query()}.
 
 The live ahwe-kpsy view returns a \strong{39-column} schema:
 \itemize{

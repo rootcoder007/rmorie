@@ -31,7 +31,7 @@
 #'   cumulative-logit models for actuarial-risk audit.
 #'   \emph{Race & Justice}, 15(3), 428--453.
 #' @name mrm_primitives_ordinal
-#' @seealso \code{\link{mrm_score_net_residual}}
+#' @seealso \code{mrm_score_net_residual} (internal helper)
 NULL
 
 

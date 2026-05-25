@@ -15,6 +15,6 @@ compute_vif(X, column_names = NULL)
 Named numeric vector of VIFs.
 }
 \description{
-For each column j of X, regresses X\link{,j} on the remaining columns
+For each column j of X, regresses X[, j] on the remaining columns
 (plus an intercept) and returns 1/(1 - R^2).
 }

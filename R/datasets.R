@@ -777,7 +777,7 @@ morie_datasets_siu_report_fields <- function(text_or_url) {
 #' parameters (`$where`, `$limit`, `$offset`). SODA3
 #' (`/api/v3/views/<id>/query.<ext>`) takes a single full SoQL string
 #' via `?query=SELECT ... WHERE ... ORDER BY ... LIMIT ... OFFSET ...`.
-#' This helper is the SODA3 sibling of [.morie_dataset_socrata_fetch()].
+#' This helper is the SODA3 sibling of `.morie_dataset_socrata_fetch()`.
 #'
 #' Use SODA3 when:
 #'   * The dataset is a *filtered view* or *map view* (e.g.
@@ -883,7 +883,7 @@ morie_datasets_siu_report_fields <- function(text_or_url) {
 #'   * **Base datasets** (e.g. `ijzp-q8t2`): all three modes work.
 #'   * **Derived / map / filtered views** (e.g. `ahwe-kpsy`): OData
 #'     returns `value: [{}]` (empty objects) -- same failure mode as
-#'     SODA2. Use SODA3 ([.morie_dataset_soda3_query()]) for these.
+#'     SODA2. Use SODA3 (`.morie_dataset_soda3_query()`) for these.
 #'
 #' **Known Socrata limitation -- `$filter`**. As of 2026-05 Socrata's
 #' OData parser frequently rejects equality filters with
@@ -1043,9 +1043,9 @@ morie_datasets_siu_report_fields <- function(text_or_url) {
 #' @param mode One of `"soda2"` (default) or `"soda3"`. Selects the
 #'   API path for live mode:
 #'   * `"soda2"` -> `/resource/<id>.json?$where=...` via
-#'     [.morie_dataset_socrata_fetch()] (URL-param SoQL grammar).
+#'     `.morie_dataset_socrata_fetch()` (URL-param SoQL grammar).
 #'   * `"soda3"` -> `/api/v3/views/<id>/query.json?query=SELECT ...`
-#'     via [.morie_dataset_soda3_query()] (full SoQL passthrough).
+#'     via `.morie_dataset_soda3_query()` (full SoQL passthrough).
 #'   Both modes return the same 22-column schema; SODA3 is required
 #'   when a derived/map view is involved (none here, but available
 #'   for parity with [morie_datasets_chicago_crime_map()]) and for
@@ -1556,7 +1556,7 @@ morie_datasets_chicago_crime_odata <- function(filter = NULL,
 #' (`[{}]`) -- column resolution doesn't fire on map/filtered views.
 #' This loader uses the SODA3 endpoint
 #' `/api/v3/views/ahwe-kpsy/query.json?query=SELECT ... WHERE ...`
-#' via [.morie_dataset_soda3_query()].
+#' via `.morie_dataset_soda3_query()`.
 #'
 #' The live ahwe-kpsy view returns a **39-column** schema:
 #'   * 22 base ijzp-q8t2 columns (id, case_number, date, ..., location)
@@ -2070,7 +2070,7 @@ morie_datasets_chicago_crime_resolved <- function(
 #' returns empty objects -- this is a filtered/derived view on
 #' Socrata. Live mode uses SODA3
 #' (`/api/v3/views/sp34-6z76/query.json`) via
-#' [.morie_dataset_soda3_query()].
+#' `.morie_dataset_soda3_query()`.
 #'
 #' Offline mode reads a bundled 50-row attribute-only fixture
 #' (`inst/extdata/chicago_wards.csv`: `ward` / `shape_leng` /

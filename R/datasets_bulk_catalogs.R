@@ -125,9 +125,20 @@ morie_datasets_chicago_socrata_by_id <- function(soda_id,
       fname),
       call. = FALSE)
   }
+  # Look in rmorie first (tiny CSVs ship here), then rmoriedata
+  # (heavy bulk catalogs ship there). Return an empty data.frame on
+  # miss so downstream consumers can cleanly concat zero-row frames.
   path <- system.file("extdata", fname, package = "rmorie")
-  if (!nzchar(path))
-    stop(sprintf("bundled bulk catalog missing: %s", fname),
-          call. = FALSE)
+  if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+    path <- system.file("extdata", fname, package = "rmoriedata")
+  }
+  if (!nzchar(path)) {
+    warning(sprintf(
+      "bulk catalog '%s' not bundled; returning empty data.frame. %s",
+      fname,
+      "Install the rmoriedata companion: remotes::install_github('rootcoder007/rmoriedata')"),
+      call. = FALSE)
+    return(data.frame())
+  }
   utils::read.csv(path, stringsAsFactors = FALSE, check.names = FALSE)
 }

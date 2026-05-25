@@ -90,12 +90,12 @@
 #' (kernel ABI requirement) and are not part of the CRAN tarball.
 #'
 #' @keywords internal
-#' @aliases rrmorie-package
+#' @aliases rmorie-package
 #' @importFrom stats aggregate anova ave deviance median na.omit plogis
 #'   qf setNames update weighted.mean
 #' @importFrom utils str
 #' @importFrom Rcpp sourceCpp
-#' @useDynLib morie, .registration = TRUE
+#' @useDynLib rmorie, .registration = TRUE
 "_PACKAGE"
 
 # `weight` is referenced as a data-frame column name inside

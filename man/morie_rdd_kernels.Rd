@@ -25,7 +25,7 @@ Numeric vector of kernel weights, same length as \code{u}.
 }
 \description{
 Vectorised kernel functions on the support |u| <= 1 (Gaussian is on
-the real line). Used by \code{\link[=morie_rdd_local_linear]{morie_rdd_local_linear()}} and friends for
+the real line). Used by RDD local-linear estimators and friends for
 kernel weighting around the cutoff.
 }
 \details{
