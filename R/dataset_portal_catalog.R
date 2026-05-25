@@ -111,9 +111,10 @@ morie_dataset_portal_catalog_clear_cache <- function() {
 #'
 #' @param portal Optional character filter restricting output to a
 #'   single portal. `NULL` (default) returns every dataset across all
-#'   registries and hard-requires the `rmoriedata` companion (which
-#'   ships the bulk CKAN / Socrata / Hub catalog snapshots). A
-#'   per-portal call works without `rmoriedata` for portals whose
+#'   registries. Bulk portals (NYC OpenData, Chicago, Toronto Hub,
+#'   etc.) prefer the `rmoriedata` companion when installed, otherwise
+#'   contribute zero rows with a one-time warning per portal.
+#'   A per-portal call works without `rmoriedata` for portals whose
 #'   registry lives in code (`"nyc_nypd"`, `"tps_psdp"`,
 #'   `"ontario_ckan"`, `"statcan_ccjs"`, etc.); portals served by
 #'   `rmoriedata` (`"nyc_opendata"`, `"chicago"`, `"tps_arcgis_hub"`,
@@ -122,16 +123,16 @@ morie_dataset_portal_catalog_clear_cache <- function() {
 #' @return A `data.frame` with columns `dataset_key`, `source`,
 #'   `id`, `api_modes`, `loader`, `dict_url`, `n_rows_bundled`.
 #' @examples
-#' # Per-portal slice: registry lives in code, works without rmoriedata.
+#' # Per-portal slice: registry lives in code, fastest path.
 #' nypd <- morie_dataset_portal_catalog(portal = "nyc_nypd")
 #' nrow(nypd)
 #' head(nypd$dataset_key)
 #'
-#' # Full catalog hard-requires rmoriedata for the bulk snapshots:
-#' if (requireNamespace("rmoriedata", quietly = TRUE)) {
-#'   cat_df <- morie_dataset_portal_catalog()
-#'   table(cat_df$source)
-#' }
+#' # Full catalog: bulk portals (NYC OpenData, Chicago, Toronto Hub,
+#' # etc.) prefer the rmoriedata companion when installed, otherwise
+#' # contribute zero rows with a one-time warning per portal.
+#' cat_df <- morie_dataset_portal_catalog()
+#' table(cat_df$source)
 #' @seealso [morie_dataset_portal_catalog_clear_cache()],
 #'   [morie_datasets_load_by_key()], [morie_datasets_browse()]
 #' @export
@@ -145,22 +146,13 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
                       "ottawa_opendata")
   if (!is.null(portal)) {
     portal <- match.arg(portal, choices = portal_choices)
-  } else {
-    # Full catalog needs the rmoriedata bulk snapshots (~2.4 MB of
-    # CSVs that would otherwise blow CRAN's 5 MB source cap). Bail
-    # early with a clean install hint rather than build a partial
-    # catalog that quietly misses 10k+ rows from the bulk portals.
-    if (!requireNamespace("rmoriedata", quietly = TRUE)) {
-      stop("morie_dataset_portal_catalog() needs the rmoriedata ",
-           "companion (it ships the bulk CKAN/Socrata/Hub catalog ",
-           "snapshots). Install with: ",
-           "remotes::install_github('rootcoder007/rmoriedata'). ",
-           "Or call with portal=<one of nyc_nypd, tps_psdp, ",
-           "ontario_ckan, statcan_ccjs, vpd_geodash> for portals ",
-           "whose registry lives in code.",
-           call. = FALSE)
-    }
   }
+  # No hard-require on rmoriedata: each bulk loader now falls back
+  # rmorie -> rmoriedata -> empty-frame-with-warning (3MMM.51+ sweep).
+  # In morie the bulk fixtures ship locally so the catalog builds
+  # with all ~10k rows; in rmorie they come from rmoriedata; with
+  # neither the catalog is the ~86-row code-only subset and emits
+  # one warning per missing bulk portal.
   cached <- .morie_portal_catalog_env$full
   if (!is.null(cached)) {
     out <- cached

@@ -9,9 +9,10 @@ morie_dataset_portal_catalog(portal = NULL)
 \arguments{
 \item{portal}{Optional character filter restricting output to a
 single portal. \code{NULL} (default) returns every dataset across all
-registries and hard-requires the \code{rmoriedata} companion (which
-ships the bulk CKAN / Socrata / Hub catalog snapshots). A
-per-portal call works without \code{rmoriedata} for portals whose
+registries. Bulk portals (NYC OpenData, Chicago, Toronto Hub,
+etc.) prefer the \code{rmoriedata} companion when installed, otherwise
+contribute zero rows with a one-time warning per portal.
+A per-portal call works without \code{rmoriedata} for portals whose
 registry lives in code (\code{"nyc_nypd"}, \code{"tps_psdp"},
 \code{"ontario_ckan"}, \code{"statcan_ccjs"}, etc.); portals served by
 \code{rmoriedata} (\code{"nyc_opendata"}, \code{"chicago"}, \code{"tps_arcgis_hub"},
@@ -33,16 +34,16 @@ environment so repeated calls are O(1); call
 after editing a registry in an interactive session.
 }
 \examples{
-# Per-portal slice: registry lives in code, works without rmoriedata.
+# Per-portal slice: registry lives in code, fastest path.
 nypd <- morie_dataset_portal_catalog(portal = "nyc_nypd")
 nrow(nypd)
 head(nypd$dataset_key)
 
-# Full catalog hard-requires rmoriedata for the bulk snapshots:
-if (requireNamespace("rmoriedata", quietly = TRUE)) {
-  cat_df <- morie_dataset_portal_catalog()
-  table(cat_df$source)
-}
+# Full catalog: bulk portals (NYC OpenData, Chicago, Toronto Hub,
+# etc.) prefer the rmoriedata companion when installed, otherwise
+# contribute zero rows with a one-time warning per portal.
+cat_df <- morie_dataset_portal_catalog()
+table(cat_df$source)
 }
 \seealso{
 \code{\link[=morie_dataset_portal_catalog_clear_cache]{morie_dataset_portal_catalog_clear_cache()}},
