@@ -112,23 +112,36 @@ test_that("morie_datasets_tps_homicide dispatches via .morie_dataset_tps_fetch",
 # ================================================================ datasets.R (SIU)
 
 test_that("morie_datasets_siu_director_reports returns df with case_number + url", {
-  # When rvest is present and the live SIU site responds, this returns a
-  # populated frame; when rvest is missing, it warns + returns a 0-row
-  # frame. Hits siu.on.ca live -- skip on CRAN + offline runners.
-  testthat::skip_on_cran()
-  testthat::skip_if_offline(host = "www.siu.on.ca")
-  out <- tryCatch(morie_datasets_siu_director_reports(),
-                  warning = function(w) {
-                    suppressWarnings(
-                      morie_datasets_siu_director_reports())
-                  },
-                  error = function(e) {
-                    testthat::skip(paste0(
-                      "SIU site unreachable: ", conditionMessage(e)))
-                  })
+  # Mocks the live xml2::read_html() call to siu.on.ca so this test
+  # runs offline + on CRAN. Returns a tiny synthetic SIU directory
+  # page with 3 PDF anchors carrying the case-number regex
+  # ([0-9]{2}-[A-Z]{2,4}-[0-9]{3,4}) the function parses.
+  if (!requireNamespace("rvest", quietly = TRUE) ||
+      !requireNamespace("xml2", quietly = TRUE)) {
+    skip("rvest + xml2 not available")
+  }
+  fake_html <- xml2::read_html(paste(
+    "<html><body>",
+    "<a href='/24-OFD-001_report.pdf'>24-OFD-001</a>",
+    "<a href='/23-PSD-042_report.pdf'>23-PSD-042</a>",
+    "<a href='/25-OCD-007_report.pdf'>25-OCD-007</a>",
+    "</body></html>", sep = ""))
+  testthat::local_mocked_bindings(
+    read_html = function(url, ...) {
+      # Verify the function calls the canonical URL; if it ever
+      # changes to a different endpoint, the test should fail loudly.
+      expect_match(url, "siu\\.on\\.ca/en/directors_reports\\.php")
+      fake_html
+    },
+    .package = "xml2"
+  )
+  out <- morie_datasets_siu_director_reports()
   expect_s3_class(out, "data.frame")
   expect_true("case_number" %in% names(out))
   expect_true("url"         %in% names(out))
+  expect_equal(nrow(out), 3L)
+  expect_true(all(c("24-OFD-001", "23-PSD-042", "25-OCD-007") %in%
+                  out$case_number))
 })
 
 test_that("morie_datasets_siu_report_text(offline=TRUE) reads bundled synthetic", {
