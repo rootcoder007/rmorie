@@ -1,0 +1,6 @@
+"Year","Alert_Type","MedicalCauseOfDeath","Number_CustodialDeaths"
+2022,"Mental Health Alert","Drug Toxicity",3
+2022,"Suicide Risk Alert","Self-Inflicted",2
+2023,"Mental Health Alert","Natural",8
+2023,"None","Natural",12
+2024,"Mental Health Alert","Drug Toxicity",5

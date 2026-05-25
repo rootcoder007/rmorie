@@ -1,0 +1,6 @@
+EndFiscalYear,Region_MostRecentPlacement,Institution_MostRecentPlacement,Gender,NumberIndividuals_RestrictiveConfinement,NumberIndividuals_Segregation
+2022,Toronto,SYNTH Institution 1,Male,60,40
+2023,Eastern,SYNTH Institution 2,Female,8,5
+2023,Central,SYNTH Institution 3,Male,35,22
+2024,Western,SYNTH Institution 4,Female,12,8
+2024,Northern,SYNTH Institution 5,Male,45,30

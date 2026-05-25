@@ -1,0 +1,6 @@
+EndFiscalYear,Region_MostRecentPlacement,Institution_MostRecentPlacement,Gender,Measure,TotalAggregatedDays_RestrictiveConfinement,TotalAggregatedDays_Segregation
+2022,Toronto,SYNTH Institution 1,Male,Mean,45.2,22.1
+2023,Eastern,SYNTH Institution 2,Female,Median,30,14
+2023,Central,SYNTH Institution 3,Male,Max,180,90
+2024,Western,SYNTH Institution 4,Female,Mean,38.5,18.4
+2024,Northern,SYNTH Institution 5,Male,Median,25,12

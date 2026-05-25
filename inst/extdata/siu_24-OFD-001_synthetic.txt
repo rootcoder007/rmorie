@@ -1,0 +1,105 @@
+SIU Director's Report — Case 24-OFD-001 (SYNTHETIC FIXTURE — NOT A REAL CASE)
+
+This is a synthetic test fixture bundled with the morie R package and
+released under AGPL-3.0-or-later. It exists solely so that
+`morie_datasets_siu_report_text(offline = TRUE)` can be exercised in
+unit tests without hitting the live SIU site at
+https://www.siu.on.ca/en/directors_reports.php. Any resemblance to a
+real case, person, location, officer, civilian, or police service is
+unintentional.
+
+Mandate of the SIU
+
+The Special Investigations Unit is a civilian law enforcement agency
+that investigates incidents involving an official where there has been
+death, serious injury, the discharge of a firearm at a person or an
+allegation of sexual assault. Under the Special Investigations Unit Act,
+2019 (the Act), the Director of the SIU determines whether an official
+in respect of any matter under investigation can or should be charged
+with a criminal offence.
+
+The Investigation
+
+Notification of the SIU
+
+On January 5, 2024, the Sample Regional Police Service (the SRPS)
+notified the SIU of the following incident at 12:45 a.m.
+
+According to the SRPS, on January 5, 2024, the SRPS responded to a call
+for service at a residence in the Sample Region. The man, who was in
+mental health crisis, was reported to be holding a knife. The Subject
+Official (SO) discharged a conducted energy weapon. The man was taken
+into custody and conveyed to hospital, where he was treated and
+released.
+
+Incident: January 5, 2024
+Notification: January 5, 2024
+Director's Decision: March 15, 2024
+Police Service: Sample Regional Police Service
+
+The Team
+
+Date and time team dispatched: 01/05/2024 at 1:30 a.m.
+Date and time SIU arrived at scene: 01/05/2024 at 3:00 a.m.
+Number of SIU Investigators assigned: 2
+Number of SIU Forensic Investigators assigned: 1
+
+Affected Person (aka "Complainant"):
+
+42-year-old male; interviewed; medical records obtained and reviewed.
+
+Subject Official (SO)
+
+SO #1 Declined to be interviewed, as is the subject official's legal
+right. Notes received and reviewed.
+
+Witness Officials (WO)
+
+WO #1 Interviewed
+WO #2 Notes reviewed; interview deemed not necessary.
+
+Civilian Witnesses (CW)
+
+CW #1 Interviewed
+
+Evidence
+
+The Scene
+
+The scene was located in the driveway of a residence in the Sample
+Region. A conducted energy weapon cartridge and probes were located on
+the ground.
+
+Communications Recordings
+
+Communications recordings were obtained and reviewed.
+
+Video / Audio / Photographic Evidence
+
+In-car camera footage and body-worn camera footage from the SO and
+WO #1 were obtained and reviewed.
+
+Materials Obtained from Police Service
+
+The SRPS provided the SIU with the following: incident details; event
+chronology; SO and WO #1 notes; training records for the SO; and use of
+force qualifications.
+
+Director's Decision
+
+For the reasons that follow, the Director found no reasonable grounds to
+believe that the SO committed a criminal offence in connection with the
+incident on January 5, 2024.
+
+Date: March 15, 2024
+
+Electronically approved by
+
+Director of the Special Investigations Unit
+
+Endnotes
+
+1. This synthetic SIU director's report is part of the morie R package
+   test fixtures and has no real-world counterpart.
+2. The morie R package and its fixtures are licensed under
+   AGPL-3.0-or-later.

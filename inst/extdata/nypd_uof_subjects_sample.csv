@@ -1,0 +1,6 @@
+"tri_incident_number","subject_injury_level","subject_injured","age","subject_race","subject_gender","force_against_mos","subject_used_force"
+"TRI-SYNTH-001","NONE","N",22,"BLACK","MALE","N","N"
+"TRI-SYNTH-002","MINOR","Y",35,"BLACK HISPANIC","MALE","Y","Y"
+"TRI-SYNTH-003","SUBSTANTIAL","Y",45,"WHITE","FEMALE","N","N"
+"TRI-SYNTH-004","NONE","N",28,"WHITE HISPANIC","MALE","N","N"
+"TRI-SYNTH-005","MINOR","Y",50,"ASIAN / PACIFIC ISLANDER","FEMALE","N","N"

@@ -1,0 +1,9 @@
+# The shared numeric core (morie_core.h) uses C++17 features.
+CXX_STD = CXX17
+# The SIU parser (siu_parser.cpp) links libcurl; the flags below are
+# filled in by ./configure.win (via pkg-config) at install time.
+PKG_CPPFLAGS = @cflags@
+# Append R's BLAS/LAPACK/Fortran flags for RcppArmadillo symbols.
+# (Windows linker doesn't honour --no-as-needed so plain append is
+# fine; the flag is GNU-ld-specific and only matters on Linux.)
+PKG_LIBS = @libs@ @as_needed_open@ $(LAPACK_LIBS) $(BLAS_LIBS) @as_needed_close@ $(FLIBS)

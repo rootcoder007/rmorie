@@ -1,0 +1,11 @@
+product_id,cube_title_en,dimensions,frequency
+35100177,"Incident-based crime statistics, by detailed violations, Canada, provinces, territories, Census Metropolitan Areas and Canadian Forces Military Police",Geography;Violations;Statistics,Annual
+35100068,"Police personnel and selected crime statistics, municipal police services",Geography;Statistics,Annual
+35100018,"Persons charged by type of violation, Canada, provinces and territories (number of persons)",Geography;Violations;Sex of accused,Annual
+35100026,"Number, percentage and rate of homicide victims, by gender and Indigenous identity",Geography;Indigenous identity;Gender,Annual
+35100051,"Adult criminal court statistics, by sex of accused and most serious offence",Geography;Most serious offence;Sex,Annual
+35100074,"Adult sentenced custody admissions to provincial and territorial correctional services by gender and Indigenous identity",Geography;Gender;Indigenous identity,Annual
+35100135,"Youth court statistics, by gender of accused and most serious offence",Geography;Most serious offence;Gender,Annual
+35100154,"Adult correctional services, average counts of offenders in provincial and territorial programs",Geography;Programs;Statistics,Annual
+35100066,"Average counts of young persons in provincial and territorial correctional services",Geography;Programs;Statistics,Annual
+35100002,"Family violence in Canada: A statistical profile, victims of police-reported family violence",Geography;Victim age;Sex,Annual

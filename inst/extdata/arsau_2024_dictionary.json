@@ -1,0 +1,1333 @@
+{
+  "uof_main_records": [
+    {
+      "var": "Id_",
+      "label": "Row ID",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": ""
+    },
+    {
+      "var": "IncidentYear",
+      "label": "Incident Year",
+      "data_type": "Date (Year)",
+      "data_format": "YYYY",
+      "data_values": "2023\n2024"
+    },
+    {
+      "var": "BatchFileName",
+      "label": "Batch File Name",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": ""
+    },
+    {
+      "var": "PoliceServiceType",
+      "label": "Police Service Type",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Municipal Police\nOntario Provincial Police \nOther Agency"
+    },
+    {
+      "var": "PoliceService",
+      "label": "Police Service",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Aylmer \nBarrie \nBelleville \nBrantford \nBrockville \nChatham-Kent \nCobourg \nCornwall \nDeep River \nDurham Regional \nGananoque \nGreater Sudbury \nGuelph \nHalton Regional \nHamilton \nHanover \nKawartha Lake\nKingston \nLaSalle \nLondon \nNiagara Regional \nNishnawbe Aski \nNorth Bay \nOPP \nOttawa \nOwen Sound \nPeel Regional \nPeterborough \nPort Hope \nSarnia \nSaugeen Shores \nSault Ste. Marie \nSmiths Falls \nSouth Simcoe \nSt. Thomas \nStratford \nStrathroy-Caradoc \nThunder Bay \nTimmins \nToronto \nWaterloo Regional \nWest Grey \nWindsor \nWoodstock \nYork Regional "
+    },
+    {
+      "var": "OPP_PoliceService_Region",
+      "label": "OPP Police Service Region",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Central Region\nEast Region\nGeneral Headquarters\nHighway Safety Division\nNorth East Region\nNorth West Region\nWest Region"
+    },
+    {
+      "var": "IncidentNumber",
+      "label": "Incident Occurrence Number",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": ""
+    },
+    {
+      "var": "Date",
+      "label": "Date of Incident",
+      "data_type": "Date",
+      "data_format": "yyyy-mm-dd",
+      "data_values": ""
+    },
+    {
+      "var": "ApproximateTimeForceApplied",
+      "label": "Approximate Time Force Applied",
+      "data_type": "Time",
+      "data_format": "HH:MM:SS",
+      "data_values": ""
+    },
+    {
+      "var": "LocationType_ResidentialBuilding",
+      "label": "Location Type - Residential Building",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "LocationType_NonResidentialBuilding",
+      "label": "Location Type - Non Residential Building",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "LocationType_MotorVehicle",
+      "label": "Location Type - Motor Vehicle",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "LocationType_OpenSpace",
+      "label": "Location Type - Open Space",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "LocationType_PublicTransportation",
+      "label": "Location Type - Public Transportation",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "ReportType",
+      "label": "Report Type",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Individual\nTeam"
+    },
+    {
+      "var": "TypeTeam",
+      "label": "Team Type",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Apprehension Squad\nCanine Unit\nContainment Team\nDrug Enforcement Unit\nGuns and Gangs Unit\nHostage Rescue Team\nMajor Crime Unit\nMobile Surveillance Unit\nPublic Order Unit\nTactical Team\nOther"
+    },
+    {
+      "var": "NumberTeam",
+      "label": "Number Officers in Team",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": "Number between 1 and 99"
+    },
+    {
+      "var": "Attire",
+      "label": "Attire",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Non-Uniform\nUniform"
+    },
+    {
+      "var": "AssignmentType",
+      "label": "Assignment Type",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Administrative\nCanine\nContainment\nCourt Appearance\nCourt Security\nDrugs\nGuns and Gangs\nInvestigations\nMarine\nMental Health Response Unit\nMounted\nOff Duty\nOther\nPaid Duty\nPatrol\nPrisoner Transportation/Care/Control\nPublic Order\nTactical/Containment/Hostage Rescue\nTargeted Community Response Units/Hostage Rescue\nTraffic"
+    },
+    {
+      "var": "IncidentType",
+      "label": "Incident Type",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Active Attacker\nAlarm\nAnimal Complaint\nAssisting Other /Agency\nBarricaded Individual/Disturbance/Individual in Crisis/Wellness/Safety Check\nExecuting Warrant\nFamily/Neighbour/Other Type of Dispute\nHumane Destruction of Animal\nInvestigation\nOther Federal/Provincial Statutes\nPerson Stop\nPolice Custody Related \nProperty Crime\nPublic Order\nStolen Vehicle\nTraffic\nViolent Crime (including Intimate Partner Violence)\nWeapon(s)"
+    },
+    {
+      "var": "HumaneDestructionAnimal_Distance",
+      "label": "Humane Destruction of Animal Distance",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Less than 3 metres (approx. 10ft)\n3 to 7 metres (approx. 10 to 23 ft)\nGreater than 7 metres (approx. 23 ft)"
+    },
+    {
+      "var": "HumaneDestructionAnimal_Handgun",
+      "label": "Humane Destruction of Animal - Handgun",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "HumaneDestructionAnimal_Rifle",
+      "label": "Humane Destruction of Animal - Rifle",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "HumaneDestructionAnimal_Shotgun",
+      "label": "Humane Destruction of Animal - Shotgun",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "HumaneDestructionAnimal_NumberRoundsDischarged",
+      "label": "Humane Destruction of Animal - Number of Rounds Discharged",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": "Number between 1 and 9 "
+    },
+    {
+      "var": "InteractionType",
+      "label": "Individual or Animal Interaction",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Interaction with Individual(s)\nNo Interaction with Individual(s)\nInteraction with Animal"
+    },
+    {
+      "var": "NumberIndiv",
+      "label": "Number of Individuals ",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": "Number between 1 and 99 "
+    },
+    {
+      "var": "NumberOtherOfficers",
+      "label": "Number of Officers",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": "Number between 0 and 99 "
+    },
+    {
+      "var": "OfficerInvolvedInjuries_PhysicalInjuries",
+      "label": "Officer Involved - Physical Injuries",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "OfficerInvolvedInjuries_Treatment_No",
+      "label": "Officer Involved - Treatment - None",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "OfficerInvolvedInjuries_Treatment_FirstAid",
+      "label": "Officer Involved - Treatment - First Aid",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "OfficerInvolvedInjuries_Treatment_MedicalPersonnelScene",
+      "label": "Officer Involved - Treatment - Medical Personnel at the Scene",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "OfficerInvolvedInjuries_Treatment_AdmissionMedicalFacility",
+      "label": "Officer Involved - Treatment - Admission at Medical Facility",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "OfficerInvolvedInjuries_Treatment_MedicalFacility",
+      "label": "Officer Involved - Treatment - at Medical Facility",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "OfficerInvolvedInjuries_Treatment_Unknown",
+      "label": "Officer Involved - Treatment - Unknown",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "OfficerInvolvedInjuries_Treatment_Other",
+      "label": "Officer Involved - Treatment - Other",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoInteractIndiv_ReasonUseOfForce_EffectArrest",
+      "label": "Reason for Use of Force - Effect Arrest",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoInteractIndiv_ReasonUseOfForce_PreventOffence",
+      "label": "Reason for Use of Force - Prevent Offence",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoInteractIndiv_ReasonUseOfForce_PreventEscape",
+      "label": "Reason for Use of Force - Prevent Escape",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoInteractIndiv_ReasonUseOfForce_ProtectOtherOfficers",
+      "label": "Reason for Use of Force - Protect Other Officers",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoInteractIndiv_ReasonUseOfForce_ProtectPublic",
+      "label": "Reason for Use of Force - Protect Public",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoInteractIndiv_ReasonUseOfForce_ProtectSelf",
+      "label": "Reason for Use of Force - Protect Self",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoInteractIndiv_ReasonUseOfForce_ProtectIndiv",
+      "label": "Reason for Use of Force - Protect Individual(s)",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoInteractIndiv_ReasonUseOfForce_Unintentional",
+      "label": "Reason for Use of Force - Unintentional",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoInteractIndiv_ReasonUseOfForce_Other",
+      "label": "Reason for Use of Force - Other",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoInteractIndiv_TypeForceUsed_CEW_Check",
+      "label": "Type of Force Used - CEW",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoInteractIndiv_TypeForceUsed_CEW_Discharged",
+      "label": "Type of Force Used - CEW - Discharged",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoInteractIndiv_TypeForceUsed_Firearm_Handgun_Check",
+      "label": "Type of Force Used - Handgun",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoInteractIndiv_TypeForceUsed_Firearm_Handgun_Drawn",
+      "label": "Type of Force Used - Handgun - Drawn",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoInteractIndiv_TypeForceUsed_Firearm_Handgun_Discharged",
+      "label": "Type of Force Used - Handgun - Drawn -Discharged",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoInteractIndiv_TypeForceUsed_Firearm_Rifle_Check",
+      "label": "Type of Force Used -  Rifle",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoInteractIndiv_TypeForceUsed_Firearm_Rifle_Discharged",
+      "label": "Type of Force Used -  Rifle -Discharged",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoInteractIndiv_TypeForceUsed_Firearm_ShotgunLethal_Check",
+      "label": "Type of Force Used - Lethal Shotgun",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoInteractIndiv_TypeForceUsed_Firearm_ShotgunLethal_Discharged",
+      "label": "Type of Force Used - Lethal Shotgun -Discharged",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoIndivAnimalOnly_ReasonUseOfForce_EffectArrest",
+      "label": "Reason for Use of Force - Effect Arrest",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoIndivAnimalOnly_ReasonUseOfForce_PreventOffence",
+      "label": "Reason for Use of Force - Prevent Offence",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoIndivAnimalOnly_ReasonUseOfForce_PreventEscape",
+      "label": "Reason for Use of Force - Prevent Escape",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoIndivAnimalOnly_ReasonUseOfForce_ProtectOtherOfficers",
+      "label": "Reason for Use of Force - Protect Other Officers",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoIndivAnimalOnly_ReasonUseOfForce_ProtectPublic",
+      "label": "Reason for Use of Force - Protect Public",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoIndivAnimalOnly_ReasonUseOfForce_ProtectSelf",
+      "label": "Reason for Use of Force - Protect Self",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoIndivAnimalOnly_ReasonUseOfForce_ProtectIndiv",
+      "label": "Reason for Use of Force - Protect Individual(s)",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoIndivAnimalOnly_ReasonUseOfForce_Unintentional",
+      "label": "Reason for Use of Force - Unintentional",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoIndivAnimalOnly_ReasonUseOfForce_Other",
+      "label": "Reason for Use of Force - Other",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoIndivAnimalOnly_TypeForceUsed_CEW",
+      "label": "No Individual- Animal Only -Type Force Used - CEW",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "NoIndivAnimalOnly_TypeForceUsed_Firearm",
+      "label": "No Individual- Animal Only -Type Force Used - Firearm",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "Inclusion_SOLGEN_ARA_Analysis",
+      "label": "Inclusion in SOLGEN UoF ARA Analysis",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes\nNo"
+    }
+  ],
+  "uof_individual_records": [
+    {
+      "var": "Id_",
+      "label": "Row ID",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": ""
+    },
+    {
+      "var": "BatchFileName",
+      "label": "Batch File Name",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": ""
+    },
+    {
+      "var": "Indiv_Index",
+      "label": "Individual Index",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": "Number between 1 and 99"
+    },
+    {
+      "var": "Race",
+      "label": "Race",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Black\nEast/Southeast Asian \nIndigenous \nLatino \nMiddle Eastern \nSouth Asian \nWhite"
+    },
+    {
+      "var": "DifficultyPerceiving",
+      "label": "Difficulty Perceiving Race",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "AgeCategory",
+      "label": "Age Category",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "17 and younger\n18 – 24 \n25 – 34 \n35 – 44 \n45 – 54 \n55 – 64 \n65 and older"
+    },
+    {
+      "var": "Gender",
+      "label": "Gender",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Male\nFemale\nTrans/Non-binary/Other"
+    },
+    {
+      "var": "DistanceBetweenOfficerAndIndiv",
+      "label": "Distance Between Officer and Individual",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Less than 3 metres (approx. 10ft)\n3 to 7 metres (approx. 10 to 23 ft)\nGreater than 7 metres (approx. 23 ft)"
+    },
+    {
+      "var": "ReasonUseOfForce_EffectArrest",
+      "label": "Reason for Use of Force - Effect Arrest",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "ReasonUseOfForce_PreventOffence",
+      "label": "Reason for Use of Force - Prevent Offence",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "ReasonUseOfForce_PreventEscape",
+      "label": "Reason for Use of Force - Prevent Escape",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "ReasonUseOfForce_ProtectOtherOfficers",
+      "label": "Reason for Use of Force - Protect Other Officers",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "ReasonUseOfForce_ProtectPublic",
+      "label": "Reason for Use of Force - Protect Public",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "ReasonUseOfForce_ProtectSelf",
+      "label": "Reason for Use of Force - Protect Self",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "ReasonUseOfForce_ProtectIndiv",
+      "label": "Reason for Use of Force - Protect Individual(s)",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "ReasonUseOfForce_Unintentional",
+      "label": "Reason for Use of Force - Unintentional",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "ReasonUseOfForce_Other",
+      "label": "Reason for Use of Force - Other",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "FactorsInfluenceResponse_NatureIncident",
+      "label": "Factors Influencing Officer Response - Incident Nature of Call",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "FactorsInfluenceResponse_PastHistory",
+      "label": "Factors Influencing Officer Response - Past History",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "FactorsInfluenceResponse_PhysicalSizeStrength",
+      "label": "Factors Influencing Officer Response - Physical Size- Strength",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "FactorsInfluenceResponse_OtherFactors",
+      "label": "Factors Influencing Officer Response - Other",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "IndivActions_ResistantPassive",
+      "label": "Individual Actions - Resistant Passive",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "IndivActions_ResistantActive",
+      "label": "Individual Actions - Resistant Active",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "IndivActions_Assaultive",
+      "label": "Individual Actions - Assaultive",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "IndivActions_SeriousBodilyHarmDeath",
+      "label": "Individual Actions - Serious Bodily Harm",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "PerceiveAccessWeapon",
+      "label": "Perceived Access to Weapon",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "OfficerResponses_DirectionsToComply",
+      "label": "Officer Response - Direction to Comply",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "OfficerResponses_Comply",
+      "label": "Officer Response - Individual Complied",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "OfficerResponses_AttemptDeescalation",
+      "label": "Officer Response - Attempt/Use De-escalation",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "OfficerResponses_DeescalationTechniques_Communication",
+      "label": "Officer Response - Use De-escalation Techniques - Communication",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "OfficerResponses_DeescalationTechniques_Containment",
+      "label": "Officer Response - Use De-escalation Techniques - Containment",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "OfficerResponses_DeescalationTechniques_Cover",
+      "label": "Officer Response - Use De-escalation Techniques - Cover",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "OfficerResponses_DeescalationTechniques_Distance",
+      "label": "Officer Response - Use De-escalation Techniques - Distance",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "OfficerResponses_DeescalationTechniques_Repositioning",
+      "label": "Officer Response - Use De-escalation Techniques - Repositioning",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "OfficerResponses_DeescalationTechniques_Teamwork",
+      "label": "Officer Response - Use De-escalation Techniques - Teamwork",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "OfficerResponses_DeescalationTechniques_Time",
+      "label": "Officer Response - Use De-escalation Techniques - Time",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "OfficerResponses_DeescalationTechniques_Other",
+      "label": "Officer Response - Use De-escalation Techniques - Other",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "OfficerResponses_AssistCtrlBhvr",
+      "label": "Officer Response - Assist Controlling Behaviour",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "OfficerResponses_Reason_ImminentThreat",
+      "label": "Officer Response - Reason - Imminent Threat",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "OfficerResponses_Reason_ActionRequiredImmediately",
+      "label": "Officer Response - Reason - Action Required Immediately",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "OfficerResponses_Reason_DeescalationUsedOtherOfficers",
+      "label": "Officer Response - Reason - Use De-escalation Used/Attempted by Other Officers",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "OfficerResponses_Reason_Other",
+      "label": "Officer Response - Reason - Other",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_PhysicalControl_Check",
+      "label": "Type Force Used - Physical Control",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_PhysicalControl_EscortTechniques",
+      "label": "Type Force Used - Physical Control - Escort Techniques",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_PhysicalControl_Grounding",
+      "label": "Type Force Used - Physical Control - Grounding",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_PhysicalControl_JointLocks",
+      "label": "Type Force Used - Physical Control - Joint Locks",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_PhysicalControl_Pinning",
+      "label": "Type Force Used - Physical Control - Pinning",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_PhysicalControl_PressurePoints",
+      "label": "Type Force Used - Physical Control - Pressure Points",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_PhysicalControl_Strikes",
+      "label": "Type Force Used - Physical Control - Strikes",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_PhysicalControl_Other",
+      "label": "Type Force Used - Physical Control - Other",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_PhysicalControl_AssistCtrlBhvr",
+      "label": "Type Force Used - Physical Control - Assist Controlling Behaviour",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "TypeForceUsed_IntermWeapon_Check",
+      "label": "Type Force Used - Intermediate Weapon",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_IntermWeapon_OC_Check",
+      "label": "Type Force Used - Intermediate Weapon -OC",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_IntermWeapon_OC_AssistCtrlBhvr",
+      "label": "Type Force Used - Intermediate Weapon -OC - Assist Controlling Behaviour",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "TypeForceUsed_IntermWeapon_Baton_Check",
+      "label": "Type Force Used - Intermediate Weapon - Baton",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_IntermWeapon_Baton_Hard",
+      "label": "Type Force Used - Intermediate Weapon - Baton - Hard",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_IntermWeapon_Baton_Soft",
+      "label": "Type Force Used - Intermediate Weapon - Baton - Soft",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_IntermWeapon_Baton_AssistCtrlBhvr",
+      "label": "Type Force Used - Intermediate Weapon - Assist Controlling Behaviour",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "TypeForceUsed_IntermWeapon_CEW_Check",
+      "label": "Type Force Used - Intermediate Weapon - Conducted Energy Weapon",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_IntermWeapon_CEW_AssistCtrlBhvr",
+      "label": "Type Force Used - Intermediate Weapon - Conducted Energy Weapon - Assist Controlling Behaviour",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "TypeForceUsed_IntermWeapon_CEW_WhyNot_CartridgeMalfunction",
+      "label": "Type Force Used - Intermediate Weapon - Conducted Energy Weapon - Why Not - Cartridge Malfunction ",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_IntermWeapon_CEW_WhyNot_Disconnect",
+      "label": "Type Force Used - Intermediate Weapon - Conducted Energy Weapon - Why Not - Disconnect",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_IntermWeapon_CEW_WhyNot_InsufficientProbeSpread",
+      "label": "Type Force Used - Intermediate Weapon - Conducted Energy Weapon - Why Not - Insufficient Probe Spread",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_IntermWeapon_CEW_WhyNot_OperatorError",
+      "label": "Type Force Used - Intermediate Weapon - Conducted Energy Weapon - Why Not - Operator Error",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_IntermWeapon_CEW_WhyNot_ProbeMiss",
+      "label": "Type Force Used - Intermediate Weapon - Conducted Energy Weapon - Why Not - Probe Miss",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_IntermWeapon_CEW_WhyNot_WeaponMalfunction",
+      "label": "Type Force Used - Intermediate Weapon - Conducted Energy Weapon - Why Not - Weapon Malfunction",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_IntermWeapon_CEW_WhyNot_Other",
+      "label": "Type Force Used - Intermediate Weapon - Conducted Energy Weapon - Why Not - Other",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_IntermWeapon_CEW_Drawn",
+      "label": "Type Force Used - Intermediate Weapon - Conducted Energy Weapon - Drawn",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_IntermWeapon_CEW_Pointed",
+      "label": "Type Force Used - Intermediate Weapon - Conducted Energy Weapon - Pointed",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_IntermWeapon_CEW_Discharged",
+      "label": "Type Force Used - Intermediate Weapon - Conducted Energy Weapon - Discharged",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_IntermWeapon_CEW_DeloymentMode_Cartridge",
+      "label": "Type Force Used - Intermediate Weapon - Conducted Energy Weapon - Deployment Mode - Cartridge",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_IntermWeapon_CEW_DeloymentMode_DrivePushStun",
+      "label": "Type Force Used - Intermediate Weapon - Conducted Energy Weapon - Deployment Mode - Drive Push Stun",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_IntermWeapon_CEW_DeloymentMode_ThreePointContact",
+      "label": "Type Force Used - Intermediate Weapon - Conducted Energy Weapon - 3 Point Contact",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_IntermWeapon_CEW_DrivePushStunCycles",
+      "label": "Type Force Used - Intermediate Weapon - Conducted Energy Weapon - Drive Push Stun Cycles Details",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Single Cycle (5 seconds) \nExtended Cycle (more than 5 seconds) \nMultiple Cycles"
+    },
+    {
+      "var": "TypeForceUsed_IntermWeapon_CEW_ThreePointContactCycles",
+      "label": "Type Force Used - Intermediate Weapon - Conducted Energy Weapon - Three Point Contact Cycles Details",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Single Cycle (5 seconds) \nExtended Cycle (more than 5 seconds) \nMultiple Cycles"
+    },
+    {
+      "var": "TypeForceUsed_LLFirearm_Check",
+      "label": "Type Force Used - Less Lethal Firearm",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_LLFirearm_Shotgun_Check",
+      "label": "Type Force Used - Less Lethal Firearm - Shotgun",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_LLFirearm_Shotgun_Pointed",
+      "label": "Type Force Used - Less Lethal Firearm - Shotgun - Pointed",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_LLFirearm_Shotgun_Discharged",
+      "label": "Type Force Used - Less Lethal Firearm - Shotgun - Discharged",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_LLFirearm_Shotgun_AssistCtrlBhvr",
+      "label": "Type Force Used - Less Lethal Firearm - Shotgun - Assist Controlling Behaviour",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "TypeForceUsed_LLFirearm_ExtRangeImpactWeapon_Check",
+      "label": "Type Force Used - Less Lethal Firearm - Extended Range Impact Weapon",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_LLFirearm_ExtRangeImpactWeapon_Pointed",
+      "label": "Type Force Used - Less Lethal Firearm - Extended Range Impact Weapon - Pointed",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_LLFirearm_ExtRangeImpactWeapon_Discharged",
+      "label": "Type Force Used - Less Lethal Firearm - Extended Range Impact Weapon - Discharged",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_LLFirearm_ExtRangeImpactWeapon_AssistCtrlBhvr",
+      "label": "Type Force Used - Less Lethal Firearm - Extended Range Impact Weapon - Assist Controlling Behaviour",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "TypeForceUsed_Other_Check",
+      "label": "Type Force Used - Other",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_Other_AssistCtrlBhvr",
+      "label": "Type Force Used - Other- Assist Controlling Behaviour",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "TypeForceUsed_Firearm_Check",
+      "label": "Type Force Used - Firearm",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_Firearm_Handgun_Check",
+      "label": "Type Force Used - Firearm - Handgun",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_Firearm_Handgun_Drawn",
+      "label": "Type Force Used - Firearm - Handgun - Drawn",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_Firearm_Handgun_Pointed",
+      "label": "Type Force Used - Firearm - Handgun - Pointed",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_Firearm_Handgun_Discharged",
+      "label": "Type Force Used - Firearm - Handgun - Discharged",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_Firearm_Handgun_AssistCtrlBhvr",
+      "label": "Type Force Used - Firearm - Handgun - Assist Controlling Behaviour",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "TypeForceUsed_Firearm_Rifle_Check",
+      "label": "Type Force Used - Firearm - Rifle",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_Firearm_Rifle_Pointed",
+      "label": "Type Force Used - Firearm - Rifle - Pointed",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_Firearm_Rifle_Discharged",
+      "label": "Type Force Used - Firearm - Rifle - Discharged",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_Firearm_Rifle_AssistCtrlBhvr",
+      "label": "Type Force Used - Firearm - Rifle - Assist Controlling Behaviour",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "TypeForceUsed_Firearm_ShotgunLethal_Check",
+      "label": "Type Force Used - Firearm - Shotgun Lethal",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_Firearm_ShotgunLethal_Pointed",
+      "label": "Type Force Used - Firearm - Shotgun Lethal - Pointed",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_Firearm_ShotgunLethal_Discharged",
+      "label": "Type Force Used - Firearm - Shotgun Lethal - Discharged",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_Firearm_ShotgunLethal_AssistCtrlBhvr",
+      "label": "Type Force Used - Firearm - Shotgun Lethal - Assist Controlling Behaviour",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "TypeForceUsed_Firearm_IssuePoliceChallenge",
+      "label": "Type Force Used - Firearm - Issue Police Challenge",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "TypeForceUsed_Firearm_Comply",
+      "label": "Type Force Used - Firearm - Comply",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes\nNo"
+    },
+    {
+      "var": "TypeForceUsed_Firearm_NoChallengeWhyNot_NotViable",
+      "label": "Type Force Used - Firearm - No Challenge - Why Not - Not Viable",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_Firearm_NoChallengeWhyNot_IssuedByAnOtherOfficer",
+      "label": "Type Force Used - Firearm - No Challenge - Why Not - Issued by Another Officer",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "TypeForceUsed_Firearm_NoChallengeWhyNot_Other",
+      "label": "Type Force Used - Firearm - No Challenge - Why Not - Other",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "IndivInjuries_PhysicalInjuries",
+      "label": "Individual Injuries - Physical Injuries",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Yes \nNo \nFatal \nDon’t Know"
+    },
+    {
+      "var": "IndivInjuries_Treatment_No",
+      "label": "Individual Injuries - Treatment - None",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "IndivInjuries_Treatment_FirstAid",
+      "label": "Individual Injuries - Treatment - First Aid",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "IndivInjuries_Treatment_MedicalPersonnelScene",
+      "label": "Individual Injuries - Treatment - Medical Personnel at Scene",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "IndivInjuries_Treatment_AdmissionMedicalFacility",
+      "label": "Individual Injuries - Treatment - Admission at Medical Facility",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "IndivInjuries_Treatment_MedicalFacility",
+      "label": "Individual Injuries - Treatment - at Medical Facility",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "IndivInjuries_Treatment_Unknown",
+      "label": "Individual Injuries - Treatment - Unknown",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    },
+    {
+      "var": "IndivInjuries_Treatment_Other",
+      "label": "Individual Injuries - Treatment - Other",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "1 \n<Blank>"
+    }
+  ],
+  "uof_weapon_records": [
+    {
+      "var": "id_",
+      "label": "Row ID",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": ""
+    },
+    {
+      "var": "BatchFileName",
+      "label": "Batch File Name",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": ""
+    },
+    {
+      "var": "Indiv_Index",
+      "label": "Individual Index",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": "Number between 1 and 99"
+    },
+    {
+      "var": "Indiv_Weapon_Index",
+      "label": "Individual Weapon Index",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": "Number greater than 0"
+    },
+    {
+      "var": "Weapon",
+      "label": "Weapon Type",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Aerosol\nCanine\nClub or Impact Weapon\nHandgun\nLong Gun\nKnife/Edged\nVehicle\nUnknown Type of Weapon\nOther\nDATA NOT AVAILABLE"
+    },
+    {
+      "var": "Location",
+      "label": "Weapon Location",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Accessible\nIn Hand\nOn Individual\nDATA NOT AVAILABLE\n<Blank>"
+    }
+  ],
+  "uof_probe_cycle_records": [
+    {
+      "var": "Id_",
+      "label": "Row ID",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": ""
+    },
+    {
+      "var": "BatchFileName",
+      "label": "Batch File Name",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": ""
+    },
+    {
+      "var": "Indiv_Index",
+      "label": "Individual Index",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": "Number between 1 and 99"
+    },
+    {
+      "var": "CEW_CartridgeProbe_CartridgeProbeCycles_Cyc",
+      "label": "Cartridge Probe Cycles",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Single Cycle (5 seconds) \nExtended Cycle (more than 5 seconds) \nMultiple Cycles\nMissing Data"
+    }
+  ]
+}

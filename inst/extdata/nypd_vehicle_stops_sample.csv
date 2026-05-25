@@ -1,0 +1,6 @@
+"evnt_key","occur_dt","occur_tm","cmd_cd","veh_seized_flg","veh_searched_flg","veh_search_consent_flg","veh_checkpoint_flg","force_used_flg","arrest_made_flg","summon_issued_flg","veh_category","rpted_age","sex_cd","race_desc","latitude","longitude","x_coord_cd","y_coord_cd"
+"NYPD-VS-SYNTH-001","2024-01-15","14:30:00","042","N","N","","","","N","Y","PASSENGER VEHICLE",25,"M","BLACK","40.83","-73.92","",""
+"NYPD-VS-SYNTH-002","2024-02-15","22:00:00","032","N","Y","","","","Y","Y","TAXI",40,"F","BLACK HISPANIC","40.81","-73.95","",""
+"NYPD-VS-SYNTH-003","2024-03-15","03:45:00","075","Y","Y","","","","Y","N","PASSENGER VEHICLE",32,"M","WHITE","40.66","-73.88","",""
+"NYPD-VS-SYNTH-004","2024-04-15","18:00:00","109","N","N","","","","N","Y","COMMERCIAL VEHICLE",50,"M","WHITE HISPANIC","40.76","-73.92","",""
+"NYPD-VS-SYNTH-005","2024-05-15","09:15:00","120","N","N","","","","N","Y","PASSENGER VEHICLE",22,"F","ASIAN / PACIFIC ISLANDER","40.59","-74.10","",""

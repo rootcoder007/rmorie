@@ -1,0 +1,31 @@
+linters: linters_with_defaults(
+    line_length_linter = line_length_linter(250L),
+    object_name_linter = NULL,
+    commented_code_linter = NULL,
+    object_length_linter = object_length_linter(length = 80L),
+    indentation_linter = NULL,
+    object_usage_linter = NULL,
+    brace_linter = NULL,
+    commas_linter = NULL
+  )
+exclusions: list(
+    "data-raw" = Inf,
+    "tests/testthat" = list(
+      undesirable_function_linter = Inf,
+      library_call_linter = Inf
+    ),
+    "vignettes" = list(
+      library_call_linter = Inf,
+      line_length_linter = Inf
+    ),
+    "R/RcppExports.R" = Inf,
+    "R/synth_otis.R" = list(line_length_linter = Inf),
+    "R/tps_spatial_advanced.R" = list(line_length_linter = Inf),
+    "R/dataset_catalog.R" = list(line_length_linter = Inf),
+    "R/datasets_tps_arcgis_hub_wrappers.R" = list(line_length_linter = Inf),
+    "R/fairness_gan.R" = list(line_length_linter = Inf),
+    "R/fairness_predpol.R" = list(line_length_linter = Inf),
+    "R/ingest_forensics.R" = list(line_length_linter = Inf),
+    "R/study_reporting.R" = list(line_length_linter = Inf)
+  )
+encoding: "UTF-8"

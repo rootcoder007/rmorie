@@ -1,0 +1,6 @@
+EndFiscalYear,Alert_Type,Gender,Number_Segregation_Placements_Without_Alert,Number_Segregation_Placements_With_Alert
+2022,Mental Health Alert,Male,80,40
+2023,Suicide Risk Alert,Female,30,15
+2023,Suicide Watch Alert,Male,12,8
+2024,Mental Health Alert,Female,45,20
+2024,None,Male,200,60

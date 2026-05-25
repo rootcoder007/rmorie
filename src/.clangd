@@ -1,0 +1,24 @@
+# clangd configuration for the R package's C++ sources (morie_fast.cpp,
+# RcppExports.cpp).
+#
+# Why this file exists: Rcpp.h and the R C-API headers (R.h, Rinternals.h
+# ...) are build-TIME dependencies -- they live inside the R installation
+# and the Rcpp package, not in this repository. A standalone editor clang
+# has no path to them, so it reports a spurious "'Rcpp.h' file not found"
+# and, cascading from that, "unknown type name 'NumericVector'" and
+# "undeclared identifier 'Rcpp'" diagnostics.
+#
+# Those are NOT build errors -- R CMD INSTALL compiles morie_fast.cpp
+# cleanly: R's build mechanism injects the include paths below.
+#
+# The -I paths are the local R 4.6 / Rcpp install. They are
+# machine-specific; regenerate with:
+#   R CMD config --cppflags
+#   Rscript -e 'cat(Rcpp:::CxxFlags())'
+# CXX_STD = CXX17 (see Makevars) matches the -std flag.
+
+CompileFlags:
+  Add:
+    - -std=c++17
+    - -I/opt/homebrew/Cellar/r/4.6.0/lib/R/include
+    - -I/opt/homebrew/lib/R/4.6/site-library/Rcpp/include

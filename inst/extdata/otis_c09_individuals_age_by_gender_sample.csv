@@ -1,0 +1,6 @@
+EndFiscalYear,Age_Category,Gender,NumberIndividuals_InCustody,NumberIndividuals_RestrictiveConfinement,NumberIndividuals_Segregation
+2022,18 to 24,Male,1500,90,60
+2022,25 to 49,Female,250,18,12
+2023,50 to 64,Male,800,50,35
+2023,65 and over,Female,100,8,5
+2024,25 to 49,Male,4200,240,160

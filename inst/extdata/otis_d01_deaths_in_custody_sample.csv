@@ -1,0 +1,6 @@
+Year,UniqueIndividual_ID,Region_AtTimeOfDeath,HousingUnit_Type,MedicalCauseofDeath,MeansofDeath
+2022,2022-SYNTH-001-DC,Central,General Population,Natural,Cardiovascular
+2022,2022-SYNTH-002-DC,Eastern,Segregation,Other,To Be Determined
+2023,2023-SYNTH-003-DC,Western,General Population,Drug Overdose,Accidental
+2023,2023-SYNTH-004-DC,Central,Health Care Unit,Natural,Respiratory
+2024,2024-SYNTH-005-DC,Northern,General Population,External,Self-Inflicted

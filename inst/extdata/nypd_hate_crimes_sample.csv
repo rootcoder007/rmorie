@@ -1,0 +1,6 @@
+"full_complaint_id","complaint_year_number","month_number","record_create_date","complaint_precinct_code","patrol_borough_name","county","law_code_category_description","offense_description","pd_code_description","bias_motive_description","offense_category","arrest_date","arrest_id"
+"NYPD-HC-SYNTH-001",2022,3,"2022-03-15","84","PATROL BORO BKLYN NORTH","KINGS","FELONY","ASSAULT 2","","ANTI-LGBTQ+","ASSAULT","2022-03-16","ARR-SYNTH-001"
+"NYPD-HC-SYNTH-002",2023,7,"2023-07-22","32","PATROL BORO MAN NORTH","NEW YORK","FELONY","AGGRAVATED HARASSMENT","","ANTI-BLACK","HARASSMENT","2023-07-23","ARR-SYNTH-002"
+"NYPD-HC-SYNTH-003",2024,1,"2024-01-08","75","PATROL BORO BKLYN NORTH","KINGS","MISDEMEANOR","MISCHIEF GRAFFITI","","ANTI-JEWISH","MISCHIEF","",""
+"NYPD-HC-SYNTH-004",2024,11,"2024-11-12","109","PATROL BORO QUEENS NORTH","QUEENS","FELONY","ASSAULT 3","","ANTI-ASIAN","ASSAULT","2024-11-13","ARR-SYNTH-004"
+"NYPD-HC-SYNTH-005",2025,2,"2025-02-04","120","PATROL BORO STATEN ISLAND","RICHMOND","MISDEMEANOR","HARASSMENT","","ANTI-MUSLIM","HARASSMENT","",""

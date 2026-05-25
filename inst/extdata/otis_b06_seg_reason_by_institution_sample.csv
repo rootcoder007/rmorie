@@ -1,0 +1,6 @@
+EndFiscalYear,Region_AtTimeOfPlacement,Institution_AtTimeOfPlacement,Gender,Reason,Number_SegregationPlacements
+2022,Toronto,SYNTH Institution 1,Male,Security of Institution,35
+2023,Eastern,SYNTH Institution 2,Female,Inmate Needs Protection,12
+2023,Central,SYNTH Institution 3,Male,Disciplinary,8
+2024,Western,SYNTH Institution 4,Female,Inmate Refused Search,4
+2024,Northern,SYNTH Institution 5,Male,Medical Reasons,6

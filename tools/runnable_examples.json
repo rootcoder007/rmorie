@@ -1,0 +1,538 @@
+{
+  "agset": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "bayesian_lasso_full": {
+    "status": "ok",
+    "call": "bayesian_lasso_full(x = matrix(rnorm(150), 50, 3), y = rnorm(50),      n_iter = 50L, burn = 10L, lam = 1, seed = 1L, deterministic_seed = TRUE)"
+  },
+  "estimate_propensity_scores": {
+    "status": "ok",
+    "call": "estimate_propensity_scores(data = {     set.seed(1)     n <- 100     data.frame(t = rbinom(n, 1, 0.4), x1 = rnorm(n), x2 = rnorm(n)) }, treatment = \"t\", covariates = c(\"x1\", \"x2\"), trim = c(0.01,  0.99))"
+  },
+  "estimate_ate": {
+    "status": "ok",
+    "call": "estimate_ate(data = {     set.seed(1)     n <- 100     data.frame(t = rbinom(n, 1, 0.4), y = rbinom(n, 1, 0.3),          x1 = rnorm(n), x2 = rnorm(n)) }, treatment = \"t\", outcome = \"y\", covariates = c(\"x1\", \"x2\"))"
+  },
+  "estimate_att": {
+    "status": "ok",
+    "call": "estimate_att(data = {     set.seed(1)     n <- 100     data.frame(t = rbinom(n, 1, 0.4), y = rbinom(n, 1, 0.3),          x1 = rnorm(n), x2 = rnorm(n)) }, treatment = \"t\", outcome = \"y\", covariates = c(\"x1\", \"x2\"))"
+  },
+  "estimate_atc": {
+    "status": "ok",
+    "call": "estimate_atc(data = {     set.seed(1)     n <- 100     data.frame(t = rbinom(n, 1, 0.4), y = rbinom(n, 1, 0.3),          x1 = rnorm(n), x2 = rnorm(n)) }, treatment = \"t\", outcome = \"y\", covariates = c(\"x1\", \"x2\"))"
+  },
+  "estimate_aipw": {
+    "status": "ok",
+    "call": "estimate_aipw(data = {     set.seed(1)     n <- 100     data.frame(t = rbinom(n, 1, 0.4), y = rbinom(n, 1, 0.3),          x1 = rnorm(n), x2 = rnorm(n)) }, treatment = \"t\", outcome = \"y\", covariates = c(\"x1\", \"x2\"))"
+  },
+  "estimate_gate": {
+    "status": "ok",
+    "call": "estimate_gate(data = {     set.seed(1)     n <- 200     data.frame(t = rbinom(n, 1, 0.5), y = rnorm(n), x1 = rnorm(n),          grp = sample(c(\"A\", \"B\"), n, TRUE)) }, treatment = \"t\", outcome = \"y\", covariates = \"x1\", group_col = \"grp\")"
+  },
+  "estimate_cate": {
+    "status": "ok",
+    "call": "estimate_cate(data = {     set.seed(1)     n <- 100     data.frame(t = rbinom(n, 1, 0.4), y = rbinom(n, 1, 0.3),          x1 = rnorm(n), x2 = rnorm(n)) }, treatment = \"t\", outcome = \"y\", covariates = c(\"x1\", \"x2\"))"
+  },
+  "estimate_late": {
+    "status": "ok",
+    "call": "estimate_late(data = {     set.seed(1)     n <- 200     z <- rbinom(n, 1, 0.5)     t <- rbinom(n, 1, plogis(0.5 * z))     y <- rnorm(n, 0.3 * t)     data.frame(z = z, t = t, y = y, x1 = rnorm(n)) }, treatment = \"t\", outcome = \"y\", instrument = \"z\", covariates = \"x1\")"
+  },
+  "morie_e_value": {
+    "status": "ok",
+    "call": "morie_e_value(rr = 2.5)"
+  },
+  "sensitivity_rosenbaum": {
+    "status": "ok",
+    "call": "sensitivity_rosenbaum(treated = rnorm(30, 0.5), control = rnorm(30))"
+  },
+  "estimate_g_computation": {
+    "status": "ok",
+    "call": "estimate_g_computation(data = {     set.seed(1)     n <- 100     data.frame(t = rbinom(n, 1, 0.4), y = rbinom(n, 1, 0.3),          x1 = rnorm(n), x2 = rnorm(n)) }, treatment = \"t\", outcome = \"y\", covariates = c(\"x1\", \"x2\"))"
+  },
+  "cndrc": {
+    "status": "ok",
+    "call": "cndrc(preference_matrix = {     m <- matrix(rnorm(25), 5, 5)     m })"
+  },
+  "cnn1d_conv1d_forward": {
+    "status": "ok",
+    "call": "cnn1d_conv1d_forward(x = rnorm(50), w = rnorm(3))"
+  },
+  "cnn2d_conv2d_forward": {
+    "status": "ok",
+    "call": "cnn2d_conv2d_forward(x = rnorm(50), w = rnorm(3))"
+  },
+  "contingency_coefficient": {
+    "status": "ok",
+    "call": "contingency_coefficient(x = matrix(sample(1:5, 50, TRUE), 10,      5))"
+  },
+  "eg_coint": {
+    "status": "ok",
+    "call": "eg_coint(y1 = rnorm(100), y2 = rnorm(100))"
+  },
+  "cokrg": {
+    "status": "ok",
+    "call": "cokrg(x = rnorm(50), y = rnorm(50), coords = matrix(runif(100),      50, 2), target = rnorm(50))"
+  },
+  "control_comparison": {
+    "status": "ok",
+    "call": "control_comparison(groups = list(rnorm(20), rnorm(20), rnorm(20)))"
+  },
+  "morie_builtin_db": {
+    "status": "ok",
+    "call": "morie_builtin_db()"
+  },
+  "morie_db_connect": {
+    "status": "ok",
+    "call": "morie_db_connect()"
+  },
+  "morie_cache_store": {
+    "status": "ok",
+    "call": "morie_cache_store(data = data.frame(x = rnorm(50), y = rnorm(50)),      table_name = \"demo\")"
+  },
+  "morie_cache_load": {
+    "status": "ok",
+    "call": "morie_cache_load(table_name = \"demo\")"
+  },
+  "morie_cache_list": {
+    "status": "ok",
+    "call": "morie_cache_list()"
+  },
+  "morie_cache_file": {
+    "status": "error",
+    "call": "morie_cache_file(path = tempfile(fileext = \".rds\"), table_name = \"demo\")"
+  },
+  "morie_load_cpads": {
+    "status": "error",
+    "call": "morie_load_cpads()"
+  },
+  "morie_fetch_ckan": {
+    "status": "error",
+    "call": "morie_fetch_ckan()"
+  },
+  "morie_load_dataset": {
+    "status": "error",
+    "call": "morie_load_dataset(key = \"ocp21\")"
+  },
+  "morie_list_datasets": {
+    "status": "ok",
+    "call": "morie_list_datasets()"
+  },
+  "morie_dataset_info": {
+    "status": "ok",
+    "call": "morie_dataset_info(key = \"ocp21\")"
+  },
+  "morie_userguide": {
+    "status": "ok",
+    "call": "morie_userguide()"
+  },
+  "morie_download_bootstrap": {
+    "status": "error",
+    "call": "morie_download_bootstrap()"
+  },
+  "dcc_multivariate_garch": {
+    "status": "ok",
+    "call": "dcc_multivariate_garch(x = matrix(rnorm(150), 50, 3))"
+  },
+  "diffu_heat_diffusion": {
+    "status": "ok",
+    "call": "diffu_heat_diffusion(T0 = rep(0, 10))"
+  },
+  "diffu_diffusion_forward": {
+    "status": "error",
+    "call": "diffu_diffusion_forward(x0 = rnorm(50), t = seq(0, 1, length.out = 50))"
+  },
+  "fwpas_forward_pass_dense": {
+    "status": "ok",
+    "call": "fwpas_forward_pass_dense(x = rnorm(50), w = rnorm(3), b = rnorm(3))"
+  },
+  "fzmrb": {
+    "status": "error",
+    "call": "fzmrb(x = rnorm(50), t = seq(0, 1, length.out = 50), h = 0.1)"
+  },
+  "ganls_gan_loss": {
+    "status": "ok",
+    "call": "ganls_gan_loss(D_real = rnorm(20), D_fake = rnorm(20))"
+  },
+  "ghosal_neutral_right": {
+    "status": "ok",
+    "call": "ghosal_neutral_right(time = cumsum(rexp(50)))"
+  },
+  "ghosal_survival_beta_process": {
+    "status": "ok",
+    "call": "ghosal_survival_beta_process(time = cumsum(rexp(50)))"
+  },
+  "morie_grid_search_cv": {
+    "status": "ok",
+    "call": "morie_grid_search_cv(x = matrix(rnorm(150), 50, 3), y = rnorm(50),      method = \"lm\", tune_grid = data.frame(intercept = c(TRUE,          FALSE)), cv = 3L, task = \"regression\", seed = 1L)"
+  },
+  "gxe_interaction_model": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "heinz_he_initialization": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "idlpt": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "morie_two_sample_t_test": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "morie_one_sample_t_test": {
+    "status": "ok",
+    "call": "morie_one_sample_t_test(x = rnorm(50))"
+  },
+  "morie_paired_t_test": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "chi_square_test": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "fisher_exact_test": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "anova_one_way": {
+    "status": "error",
+    "call": "anova_one_way()"
+  },
+  "morie_kruskal_wallis_test": {
+    "status": "error",
+    "call": "morie_kruskal_wallis_test()"
+  },
+  "morie_mann_whitney_test": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "wilcoxon_signed_rank_test": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "shapiro_wilk_test": {
+    "status": "ok",
+    "call": "shapiro_wilk_test(x = rnorm(50))"
+  },
+  "morie_levene_test": {
+    "status": "error",
+    "call": "morie_levene_test()"
+  },
+  "proportion_ci": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "odds_ratio_ci": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "risk_ratio_ci": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "risk_difference_ci": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "morie_cohens_d": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "morie_hedges_g": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "morie_eta_squared": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "morie_omega_squared": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "morie_cramers_v": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "spearman_rho": {
+    "status": "ok",
+    "call": "spearman_rho(x = rnorm(50), y = rnorm(50))"
+  },
+  "morie_kendall_tau": {
+    "status": "ok",
+    "call": "morie_kendall_tau(x = rnorm(50), y = rnorm(50))"
+  },
+  "point_biserial_r": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "morie_power_t_test": {
+    "status": "ok",
+    "call": "morie_power_t_test(n = 30L, delta = 0.5, sd = 1, sig_level = 0.05,      power = NULL, alternative = \"two.sided\", type = \"two.sample\")"
+  },
+  "morie_power_prop_test": {
+    "status": "ok",
+    "call": "morie_power_prop_test(n = 50L, p1 = 0.4, p2 = 0.5, sig_level = 0.05,      power = NULL)"
+  },
+  "sample_size_logistic": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "cpads_contract": {
+    "status": "ok",
+    "call": "cpads_contract()"
+  },
+  "validate_cpads_data": {
+    "status": "error",
+    "call": "validate_cpads_data(data = data.frame(x = rnorm(50), y = rnorm(50)))"
+  },
+  "run_propensity_ipw_analysis": {
+    "status": "error",
+    "call": "run_propensity_ipw_analysis(data = data.frame(x = rnorm(50),      y = rnorm(50)))"
+  },
+  "run_ebac_selection_ipw_analysis": {
+    "status": "error",
+    "call": "run_ebac_selection_ipw_analysis(data = data.frame(x = rnorm(50),      y = rnorm(50)))"
+  },
+  "johansen_cointegration": {
+    "status": "error",
+    "call": "johansen_cointegration(x = rnorm(50))"
+  },
+  "ksr17_kosorok_counting_process": {
+    "status": "ok",
+    "call": "ksr17_kosorok_counting_process(t = seq(0, 1, length.out = 50),      event = rbinom(50, 1, 0.8))"
+  },
+  "ksr18_kosorok_nelson_aalen": {
+    "status": "ok",
+    "call": "ksr18_kosorok_nelson_aalen(t = seq(0, 1, length.out = 50), event = rbinom(50,      1, 0.8))"
+  },
+  "ksr19_kosorok_cox_partial_likelihood": {
+    "status": "ok",
+    "call": "ksr19_kosorok_cox_partial_likelihood(x = rnorm(50), t = seq(0,      1, length.out = 50), event = rbinom(50, 1, 0.8))"
+  },
+  "ksr20_kosorok_censoring_survival": {
+    "status": "ok",
+    "call": "ksr20_kosorok_censoring_survival(t = seq(0, 1, length.out = 50),      event = rbinom(50, 1, 0.8))"
+  },
+  "morie_sync_rng": {
+    "status": "ok",
+    "call": "morie_sync_rng(seed = 1L)"
+  },
+  "morie_generate_ar_coefficients": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "morie_generate_var_coefficients": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "morie_mvn_with_covariance": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "morie_simulate_longitudinal_panel": {
+    "status": "ok",
+    "call": "morie_simulate_longitudinal_panel()"
+  },
+  "validate_outputs_manifest": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "read_outputs_manifest": {
+    "status": "error",
+    "call": "read_outputs_manifest()"
+  },
+  "build_outputs_manifest": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "audit_public_outputs": {
+    "status": "error",
+    "call": "audit_public_outputs()"
+  },
+  "summarize_output_audit": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "mhatf_multi_head_attention_full": {
+    "status": "error",
+    "call": "mhatf_multi_head_attention_full(x = rnorm(50))"
+  },
+  "midas_regression": {
+    "status": "error",
+    "call": "midas_regression(x = rnorm(50), y = rnorm(50))"
+  },
+  "list_morie_modules": {
+    "status": "ok",
+    "call": "list_morie_modules()"
+  },
+  "canonicalize_cpads_data": {
+    "status": "error",
+    "call": "canonicalize_cpads_data(data = data.frame(x = rnorm(50), y = rnorm(50)))"
+  },
+  "load_cpads_data": {
+    "status": "error",
+    "call": "load_cpads_data()"
+  },
+  "run_morie_module": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "run_morie_modules": {
+    "status": "error",
+    "call": "run_morie_modules()"
+  },
+  "mxpol_maxpool_forward": {
+    "status": "error",
+    "call": "mxpol_maxpool_forward(x = rnorm(50))"
+  },
+  "okrig": {
+    "status": "ok",
+    "call": "okrig(x = rnorm(50), coords = matrix(runif(100), 50, 2), target = rnorm(50))"
+  },
+  "ordered_alternatives_test": {
+    "status": "ok",
+    "call": "ordered_alternatives_test(groups = list(rnorm(20), rnorm(20),      rnorm(20)))"
+  },
+  "penalized_regression": {
+    "status": "error",
+    "call": "penalized_regression(x = rnorm(50), y = rnorm(50))"
+  },
+  "morie_build_prompt": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "ask_percy": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "posab_positional_encoding_abs": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "regularization_path": {
+    "status": "error",
+    "call": "regularization_path(x = rnorm(50), y = rnorm(50))"
+  },
+  "random_search_cv": {
+    "status": "error",
+    "call": "random_search_cv(x = rnorm(50), y = rnorm(50))"
+  },
+  "roc_auc_score": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "rotrp_rotary_position_embedding": {
+    "status": "error",
+    "call": "rotrp_rotary_position_embedding(x = rnorm(50))"
+  },
+  "simple_random_sample": {
+    "status": "ok",
+    "call": "simple_random_sample(df = data.frame(x = rnorm(50), y = rnorm(50)),      n = 50L)"
+  },
+  "morie_stratified_sample": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "morie_cluster_sample": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "morie_pps_sample": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "morie_bootstrap_sample": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "jackknife_estimate": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "morie_effective_sample_size": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "morie_design_effect": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "compute_design_weights": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "calibration_weights": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "sarla": {
+    "status": "error",
+    "call": "sarla(x = rnorm(50), y = rnorm(50), w = rnorm(3))"
+  },
+  "sarre": {
+    "status": "error",
+    "call": "sarre(x = rnorm(50), y = rnorm(50), w = rnorm(3))"
+  },
+  "spblk": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "sptau": {
+    "status": "error",
+    "call": "sptau(x = rnorm(50), w = rnorm(3))"
+  },
+  "stkrg": {
+    "status": "error",
+    "call": "stkrg(x = rnorm(50), coords = matrix(runif(100), 50, 2), times = sort(cumsum(rexp(50))),      target = rnorm(50))"
+  },
+  "svm_hinge_primal": {
+    "status": "error",
+    "call": "svm_hinge_primal(x = rnorm(50), y = rnorm(50))"
+  },
+  "trfbl_transformer_block": {
+    "status": "error",
+    "call": "trfbl_transformer_block(x = rnorm(50))"
+  },
+  "tsne_reduction": {
+    "status": "error",
+    "call": "tsne_reduction(x = rnorm(50))"
+  },
+  "ukrig": {
+    "status": "ok",
+    "call": "ukrig(x = rnorm(50), coords = matrix(runif(100), 50, 2), target = rnorm(50))"
+  },
+  "unfdl": {
+    "status": "error",
+    "call": "unfdl(x = rnorm(50))"
+  },
+  "vaenc_vae_elbo": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "wnom": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "default_workflow_map": {
+    "status": "ok",
+    "call": "default_workflow_map()"
+  },
+  "run_workflow_step": {
+    "status": "no-heuristic",
+    "call": ""
+  },
+  "morie_run_pipeline": {
+    "status": "ok",
+    "call": "morie_run_pipeline()"
+  },
+  "xavir_xavier_init": {
+    "status": "no-heuristic",
+    "call": ""
+  }
+}

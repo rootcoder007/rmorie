@@ -1,0 +1,6 @@
+EndFiscalYear,Region_AtTimeOfPlacement,Institution_AtTimeOfPlacement,Alert_Type,Alert_Presence,Number_SegregationPlacements
+2022,Toronto,SYNTH Institution 1,Mental Health Alert,With Alert,8
+2023,Eastern,SYNTH Institution 2,Suicide Risk Alert,With Alert,4
+2023,Central,SYNTH Institution 3,Suicide Watch Alert,With Alert,2
+2024,Western,SYNTH Institution 4,Mental Health Alert,Without Alert,12
+2024,Northern,SYNTH Institution 5,None,Without Alert,25

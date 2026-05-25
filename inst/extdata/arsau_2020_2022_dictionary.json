@@ -1,0 +1,1231 @@
+{
+  "UseOfForce_DetailedDataset_2020-2022.csv": [
+    {
+      "var": "id_",
+      "label": "Row ID",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": ""
+    },
+    {
+      "var": "REPORTING_YEAR",
+      "label": "Reporting Year",
+      "data_type": "Date",
+      "data_format": "",
+      "data_values": "2020, 2021, 2022"
+    },
+    {
+      "var": "RECORD_ID",
+      "label": "Record ID",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": ""
+    },
+    {
+      "var": "POLICE_SERVICE",
+      "label": "Police Service",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Aylmer Police Service, Barrie Police Service, Belleville Police Service, Brantford Police Service, Brockville Police Service, Chatham-Kent Police Service, Cobourg Police Service, Cornwall Police Service, Deep River Police Service, Dryden Police Service, Durham Regional Police Service, Gananoque Police Service, Greater Sudbury Police Service, Guelph Police Service, Halton Regional Police Service, Hamilton Police Service, Hanover Police Service, Kawartha Lakes Police Service, Kingston Police Service, LaSalle Police Service, London Police Service, Niagara Regional Police Service, North Bay Police Service, OPP, Ottawa Police Service, Owen Sound Police Service, Peel Regional Police Service, Peterborough Police Service, Port Hope Police Service, Sarnia Police Service, Saugeen Shores Police Service, Sault Ste Marie Police Service, Smiths Falls Police Service, South Simcoe Police Service, St Thomas Police Service, Stratford Police Service, Strathroy-Caradoc Police Service, Thunder Bay Police Service, Timmins Police Service, Toronto Police Service, Waterloo Regional Police Service, West Grey Police Service, Windsor Police Service, Woodstock Police Service, York Regional Police Service"
+    },
+    {
+      "var": "REPORT_TYPE",
+      "label": "Report Type",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Individual, Team"
+    },
+    {
+      "var": "TEAM_TYPE",
+      "label": "Team Type",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Tactical or Emergency Response Team, Specialized Team, Unknown"
+    },
+    {
+      "var": "NUMBER_POLICE_OFFICERS_INVOLVED",
+      "label": "Number Police Officers Involved",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": ""
+    },
+    {
+      "var": "ASSIGNMENT_TYPE",
+      "label": "Assignment Type",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Drugs, Investigation, Patrol, Specialized Unit, Tactical, Traffic, Other"
+    },
+    {
+      "var": "TYPE_INCIDENT_ALARM",
+      "label": "Type Incident Alarm",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Alarm\n"
+    },
+    {
+      "var": "TYPE_INCIDENT_BREAK_ENTER",
+      "label": "Type Incident Break Enter",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Break and Enter\n"
+    },
+    {
+      "var": "TYPE_INCIDENT_DOMESTIC_DISTURBANCE",
+      "label": "Type Incident Domestic Disturbance",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Domestic Disturbance\n"
+    },
+    {
+      "var": "TYPE_INCIDENT_HOMICIDE",
+      "label": "Type Incident Homicide",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Homicide\n"
+    },
+    {
+      "var": "TYPE_INCIDENT_OTHER_DISTURBANCE",
+      "label": "Type Incident Other Disturbance",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Other Disturbance\n"
+    },
+    {
+      "var": "TYPE_INCIDENT_ROBBERY",
+      "label": "Type Incident Robbery",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Robbery\n"
+    },
+    {
+      "var": "TYPE_INCIDENT_SERIOUS_INJURY",
+      "label": "Type Incident Serious Injury",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Serious Injury\n"
+    },
+    {
+      "var": "TYPE_INCIDENT_SUSPICIOUS_PERSON",
+      "label": "Type Incident Suspicious Person",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Suspicious Person\n"
+    },
+    {
+      "var": "TYPE_INCIDENT_TRAFFIC",
+      "label": "Type Incident Traffic",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Traffic\n"
+    },
+    {
+      "var": "TYPE_INCIDENT_WEAPONS_CALL",
+      "label": "Type Incident Weapons Call",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Weapons Call\n"
+    },
+    {
+      "var": "TYPE_INCIDENT_OTHER",
+      "label": "Type Incident Other",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Other\n"
+    },
+    {
+      "var": "POLICE_PRESENCE",
+      "label": "Police Presence",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Officer Alone, Police Assisted"
+    },
+    {
+      "var": "NUMBER_OF_POLICE_PRESENT",
+      "label": "Number Of Police Present",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": ""
+    },
+    {
+      "var": "ATTIRE",
+      "label": "Attire",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Uniform, Civilian clothes, Missing"
+    },
+    {
+      "var": "NUMBER_OF_SUBJECTS",
+      "label": "Number Of Subjects",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "One, Two, Three, Four or More"
+    },
+    {
+      "var": "RACE_SUBJECT1",
+      "label": "Perceived Race of Subject 1",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Black, East/Southeast Asian, Indigenous,  Latino, Middle Eastern, South Asian, White"
+    },
+    {
+      "var": "RACE_SUBJECT2",
+      "label": "Perceived Race of Subject 2",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Black, East/Southeast Asian, Indigenous, Latino, Middle Eastern,  South Asian, White"
+    },
+    {
+      "var": "RACE_SUBJECT3",
+      "label": "Perceived Race of Subject 3",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Black, East/Southeast Asian, Indigenous, Latino, Middle Eastern,  South Asian, White"
+    },
+    {
+      "var": "RACE",
+      "label": "Race",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Black, East/Southeast Asian,  Indigenous, Latino, Middle Eastern, Multiple Races, South Asian, White"
+    },
+    {
+      "var": "TYPE_FORCE_FIREARM_DISCHARGED",
+      "label": "Type of Force - Firearm Discharged",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Firearm Discharged"
+    },
+    {
+      "var": "TYPE_FORCE_FIREARM_DISCHARGED_RANK",
+      "label": "Type Force Firearm Discharged Rank",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": "Value between 1-10"
+    },
+    {
+      "var": "TYPE_FORCE_FIREAM_DISCHARGED_FORCE_EFFECTIVE",
+      "label": "Type Force Firearm Discharged Force Effective",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes,  No"
+    },
+    {
+      "var": "TYPE_FORCE_FIREARM_POINTED_UNKNOWN",
+      "label": "Type of Force - Firearm Pointed/Unknown",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Firearm Pointed/Unknown"
+    },
+    {
+      "var": "TYPE_FORCE_FIREAM_POINTED_AT_PERSON_RANK",
+      "label": "Type Force Firearm Pointed At Person Rank",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": "Value between 1-10"
+    },
+    {
+      "var": "TYPE_FORCE_FIREAM_POINTED_AT_PERSON_FORCE_EFFECTIVE",
+      "label": "Type Force Firearm Pointed At Person Force Effective",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes,  No"
+    },
+    {
+      "var": "TYPE_FORCE_HANDGUN_DRAWN",
+      "label": "Type of Force - Handgun Drawn",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Handgun Drawn"
+    },
+    {
+      "var": "TYPE_FORCE_HANDGUN_DRAWN_RANK",
+      "label": "Type Force Handgun Drawn Rank",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": "Value between 1-10"
+    },
+    {
+      "var": "TYPE_FORCE_HANDGUN_DRAWN_FORCE_EFFECTIVE",
+      "label": "Type Force Handgun Drawn Force Effective",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes, No"
+    },
+    {
+      "var": "TYPE_FORCE_LLF_DISCHARGED",
+      "label": "Type of Force - Less Lethal Firearm - Discharged",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "LLF Discharged"
+    },
+    {
+      "var": "TYPE_FORCE_LLF_POINTED_UNKOWN",
+      "label": "Type of Force - Less Lethal Firearm - Pointed/Unknown",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "LLF Pointed/Unknown"
+    },
+    {
+      "var": "TYPE_FORCE_CEW",
+      "label": "Type of Force - CEW",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "CEW"
+    },
+    {
+      "var": "TYPE_FORCE_IMPACT_WEAPON_HARD",
+      "label": "Type of Force - Impact Weapon - Hard",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Impact Weapon Hard"
+    },
+    {
+      "var": "TYPE_FORCE_IMPACT_WEAPON_HARD_RANK",
+      "label": "Type Force Impact Weapon Hard Rank",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": "Value between 1-10"
+    },
+    {
+      "var": "TYPE_FORCE_IMPACT_WEAPON_HARD_FORCE_EFFECTIVE",
+      "label": "Type Force Impact Weapon Hard Force Effective",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes, No"
+    },
+    {
+      "var": "TYPE_FORCE_IMPACT_WEAPON_SOFT",
+      "label": "Type of Force - Impact Weapon - Soft",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Impact Weapon Soft"
+    },
+    {
+      "var": "TYPE_FORCE_IMPACT_WEAPON_SOFT_RANK",
+      "label": "Type Force Impact Weapon Soft Rank",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": "Value between 1-10"
+    },
+    {
+      "var": "TYPE_FORCE_IMPACT_WEAPON_SOFT_FORCE_EFFECTIVE",
+      "label": "Type Force Impact Weapon Soft Force Effective",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes, No"
+    },
+    {
+      "var": "TYPE_FORCE_AEROSOL",
+      "label": "Type of Force - Aerosol",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Aerosol"
+    },
+    {
+      "var": "TYPE_FORCE_USED_AEROSOL_WEAPON_RANK",
+      "label": "Type Force Used Aerosol Weapon Rank",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": "Value between 1-10"
+    },
+    {
+      "var": "TYPE_FORCE_USED_AEROSOL_WEAPON_FORCE_EFFECTIVE",
+      "label": "Type Force Used Aerosol Weapon Force Effective",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes, No"
+    },
+    {
+      "var": "TYPE_FORCE_EMPTY_HAND_HARD",
+      "label": "Type of Force - Empty Hand Technique - Hard",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Empty Hand Hard"
+    },
+    {
+      "var": "TYPE_FORCE_EMPTY_HAND_TECHNIQUES_HARD_RANK",
+      "label": "Type Force Empty Hand Techniques Hard Rank",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": "Value between 1-10"
+    },
+    {
+      "var": "TYPE_FORCE_EMPTY_HAND_TECHNIQUES_HARD_FORCE_EFFECTIVE",
+      "label": "Type Force Empty Hand Techniques Hard Force Effective",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes, No"
+    },
+    {
+      "var": "TYPE_FORCE_EMPTY_HAND_SOFT",
+      "label": "Type of Force - Empty Hand Technique - Soft",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Empty Hand Soft"
+    },
+    {
+      "var": "TYPE_FORCE_EMPTY_HAND_TECHNIQUES_SOFT_RANK",
+      "label": "Type Force Empty Hand Techniques Soft Rank",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": "Value between 1-10"
+    },
+    {
+      "var": "TYPE_FORCE_EMPTY_HAND_TECHNIQUES_SOFT_FORCE_EFFECTIVE",
+      "label": "Type Force Empty Hand Techniques Soft Force Effective",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes, No"
+    },
+    {
+      "var": "TYPE_FORCE_PHYSICAL_FORCE",
+      "label": "Type of Force - Physical Force",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Physical Force"
+    },
+    {
+      "var": "TYPE_FORCE_OTHER",
+      "label": "Type of Force - Other",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Other"
+    },
+    {
+      "var": "TYPE_FORCE_OTHER_RANK",
+      "label": "Type Force Other Rank",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": "Value between 1-10"
+    },
+    {
+      "var": "TYPE_FORCE_OTHER_FORCE_EFFECTIVE",
+      "label": "Type Force Other Force Effective",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes, No"
+    },
+    {
+      "var": "REASON_FORCE_EFFECT_ARREST",
+      "label": "Reason for Force - Effect Arrest",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Effect Arrest"
+    },
+    {
+      "var": "REASON_FORCE_PROTECT_SELF",
+      "label": "Reason for Force - Protect Self",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Protect Self"
+    },
+    {
+      "var": "REASON_FORCE_PROTECT_PUBLIC",
+      "label": "Reason for Force - Protect the Public",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Protect Public"
+    },
+    {
+      "var": "REASON_FORCE_PREVENT_ESCAPE",
+      "label": "Reason for Force - Prevent Escape",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Prevent Escape"
+    },
+    {
+      "var": "REASON_FORCE_ACCIDENTAL",
+      "label": "Reason for Force - Accidental",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Accidental"
+    },
+    {
+      "var": "REASON_FORCE_PREVENT_COMMISSION_OF_OFFENCE",
+      "label": "Reason for Force - Prevent Commission of an Offence",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Prevent Commission of Offence"
+    },
+    {
+      "var": "REASON_FORCE_OTHER",
+      "label": "Reason for Force - Other",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Other"
+    },
+    {
+      "var": "REASON_FORCE_PROTECT_OTHER_OFFICER",
+      "label": "Reason for Force - Protect Another Officer",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Protect Other Officer"
+    },
+    {
+      "var": "REASON_FORCE_PROTECT_SUBJECT",
+      "label": "Reason for Force - Protect the Subject",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Protect Subject"
+    },
+    {
+      "var": "TYPE_FIREARM_USED_REVOLVER_CHECK",
+      "label": "Type Firearm Used Revolver Check",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Revolver\n"
+    },
+    {
+      "var": "TYPE_FIREARM_USED.REVOLVER_NUMBER_ROUNDS",
+      "label": "Type Firearm Used Revolver Number Rounds",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": ""
+    },
+    {
+      "var": "TYPE_FIREARM_USED_RIFLE_CHECK",
+      "label": "Type Firearm Used Rifle Check",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Rifle\n"
+    },
+    {
+      "var": "TYPE_FIREARM_USED_RIFLE_NUMBER_ROUNDS",
+      "label": "Type Firearm Used Rifle Number Rounds",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": ""
+    },
+    {
+      "var": "TYPE_FIREARM_USED_SEMIAUTOMATIC_CHECK",
+      "label": "Type Firearm Used Semiautomatic Check",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Semi-automatic\n"
+    },
+    {
+      "var": "TYPE_FIREARM_USED_SEMIAUTOMATIC_NUMBER_ROUNDS",
+      "label": "Type Firearm Used Semiautomatic Number Rounds",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": ""
+    },
+    {
+      "var": "TYPE_FIREARM_USED_SHOTGUN_CHECK",
+      "label": "Type Firearm Used Shotgun Check",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Shotgun\n"
+    },
+    {
+      "var": "TYPE_FIREARM_USED_SHOTGUN_NUMBER_ROUNDS",
+      "label": "Type Firearm Used Shotgun Number Rounds",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": ""
+    },
+    {
+      "var": "TYPE_FIREARM_USED_OTHER_CHECK",
+      "label": "Type Firearm Used Other Check",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Other\n"
+    },
+    {
+      "var": "TYPE_FIREARM_USED_OTHER_NUMBER_ROUNDS",
+      "label": "Type Firearm Used Other Number Rounds",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": ""
+    },
+    {
+      "var": "DISTANCE_SUBJECT1",
+      "label": "Distance to Subject 1",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Less than 2 metres, 2 to 3 metres, 3 to 5 metres, 5 to 7 metres,  7 to 10 metres, Greater than 10 metres"
+    },
+    {
+      "var": "DISTANCE_SUBJECT2",
+      "label": "Distance to Subject 2",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Less than 2 metres, 2 to 3 metres, 3 to 5 metres, 5 to 7 metres,  7 to 10 metres, Greater than 10 metres"
+    },
+    {
+      "var": "DISTANCE_SUBJECT3",
+      "label": "Distance to Subject 3",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Less than 2 metres, 2 to 3 metres, 3 to 5 metres, 5 to 7 metres,  7 to 10 metres, Greater than 10 metres"
+    },
+    {
+      "var": "ALTERNATIVE_STRATEGIES_USED_CONCEALMENT",
+      "label": "Alternative Strategies Used Concealment",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Concealment\n"
+    },
+    {
+      "var": "ALTERNATIVE_STRATEGIES_USED_COVER",
+      "label": "Alternative Strategies Used Cover",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Cover\n"
+    },
+    {
+      "var": "ALTERNATIVE_STRATEGIES_USED_VERBAL_INTERACTION",
+      "label": "Alternative Strategies Used Verbal Interaction",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Verbal Interaction\n"
+    },
+    {
+      "var": "ALTERNATIVE_STRATEGIES_USED_OTHER",
+      "label": "Alternative Strategies Used Other",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Other\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT1_BASEBALLBATCLUB",
+      "label": "Weapons Carried Subject 1 Baseball Bat/Club",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Baseball Bat/Club for Subject 1\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT2_BASEBALLBATCLUB",
+      "label": "Weapons Carried Subject 3 Baseball Bat/Club",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Baseball Bat/Club for Subject 2\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT3_BASEBALLBATCLUB",
+      "label": "Weapons Carried Subject 2 Baseball Bat/Club",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Baseball Bat/Club for Subject 3\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT1_KNIFEEDGEDWEAPON",
+      "label": "Weapons Carried Subject 1 Knife/Edged Weapon",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Knife/Edged Weapon for Subject 1\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT2_KNIFEEDGEDWEAPON",
+      "label": "Weapons Carried Subject 2 Knife/Edged Weapon",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Knife/Edged Weapon for Subject 2\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT3_KNIFEEDGEDWEAPON",
+      "label": "Weapons Carried Subject 3 Knife/Edged Weapon",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Knife/Edged Weapon for Subject 3\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT1_REVOLVER",
+      "label": "Weapons Carried Subject 1 Revolver",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Revolver for Subject 1\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT2_REVOLVER",
+      "label": "Weapons Carried Subject 2 Revolver",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Revolver for Subject 2\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT3_REVOLVER",
+      "label": "Weapons Carried Subject 3 Revolver",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Revolver for Subject 3\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT1_RIFLE",
+      "label": "Weapons Carried Subject 1 Rifle",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Rifle for Subject 1\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT2_RIFLE",
+      "label": "Weapons Carried Subject 2 Rifle",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Rifle for Subject 2\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT3_RIFLE",
+      "label": "Weapons Carried Subject 3 Rifle",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Rifle for Subject 3\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT1_SEMIAUTOMATIC",
+      "label": "Weapons Carried Subject 1 Semi-automatic",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Semi-automatic for Subject 1\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT2_SEMIAUTOMATIC",
+      "label": "Weapons Carried Subject 2 Semi-automatic",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Semi-automatic for Subject 2\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT3_SEMIAUTOMATIC",
+      "label": "Weapons Carried Subject 3 Semi-automatic",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Semi-automatic for Subject 3\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT1_SHOTGUN",
+      "label": "Weapons Carried Subject 1 Shotgun",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Shotgun for Subject 1\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT2_SHOTGUN",
+      "label": "Weapons Carried Subject 2 Shotgun",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Shotgun for Subject 2\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT3_SHOTGUN",
+      "label": "Weapons Carried Subject 3 Shotgun",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Shotgun for Subject 3\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT1_NONE",
+      "label": "Weapons Carried Subject 1 None",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "None for Subject 1\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT2_NONE",
+      "label": "Weapons Carried Subject 2 None",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "None for Subject 2\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT3_NONE",
+      "label": "Weapons Carried Subject 3 None",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "None for Subject 3\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT1_UNKNOWN",
+      "label": "Weapons Carried Subject 1 Unknown",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Unknown for Subject 1\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT2_UNKNOWN",
+      "label": "Weapons Carried Subject 2 Unknown",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Unknown for Subject 2\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT3_UNKNOWN",
+      "label": "Weapons Carried Subject 3 Unknown",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Unknown for Subject 3\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT1_OTHER",
+      "label": "Weapons Carried Subject 1 Other",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Other for Subject 1\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT2_OTHER",
+      "label": "Weapons Carried Subject 2 Other",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Other for Subject 2\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_SUBJECT3_OTHER",
+      "label": "Weapons Carried Subject 3 Other",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Other for Subject 3\n"
+    },
+    {
+      "var": "WEAPONS_CARRIED_FIREARM",
+      "label": "Weapons Carried - Firearm",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Firearm, NA"
+    },
+    {
+      "var": "WEAPONS_CARRIED_KNIFE_EDGED_WEAPON",
+      "label": "Weapons Carried - Knife or Edged Weapon",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Knife/Edged Weapon, NA"
+    },
+    {
+      "var": "WEAPONS_CARRIED_IMPACT_WEAPON",
+      "label": "Weapons Carried - Impact Weapon",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Impact Weapon, NA"
+    },
+    {
+      "var": "WEAPONS_CARRIED_UNARMED",
+      "label": "Weapons Carried - Unarmed",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Unarmed, NA"
+    },
+    {
+      "var": "WEAPONS_CARRIED_UNKNOWN_WEAPON",
+      "label": "Weapons Carried - Unknown Weapon",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Unknown Weapon, NA"
+    },
+    {
+      "var": "WEAPONS_CARRIED_OTHER_WEAPON",
+      "label": "Weapons Carried - Other Weapon",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Other Weapon, NA"
+    },
+    {
+      "var": "LOCATION_WEAPONS_SUBJECT1_ATHAND",
+      "label": "Location Weapons Subject 1 At hand",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "At Hand for Subject 1\n"
+    },
+    {
+      "var": "LOCATION_WEAPONS_SUBJECT2_ATHAND",
+      "label": "Location Weapons Subject 2 At hand",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "At Hand for Subject 2\n"
+    },
+    {
+      "var": "LOCATION_WEAPONS_SUBJECT3_ATHAND",
+      "label": "Location Weapons Subject 3 At hand",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "At Hand for Subject 3\n"
+    },
+    {
+      "var": "LOCATION_WEAPONS_SUBJECT1_CONCEALED_PERSON",
+      "label": "Location Weapons Subject 1 Concealed on Person",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Concealed on person for Subject 1\n"
+    },
+    {
+      "var": "LOCATION_WEAPONS_SUBJECT2_CONCEALED_PERSON",
+      "label": "Location Weapons Subject 2 Concealed on Person",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Concealed on person for Subject 2\n"
+    },
+    {
+      "var": "LOCATION_WEAPONS_SUBJECT3_CONCEALED_PERSON",
+      "label": "Location Weapons Subject 3 Concealed on Person",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Concealed on person for Subject 3\n"
+    },
+    {
+      "var": "LOCATION_WEAPONS_SUBJECT1_INHAND",
+      "label": "Location Weapons Subject 1 In-hand",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "In-hand for Subject 1\n"
+    },
+    {
+      "var": "LOCATION_WEAPONS_SUBJECT2_INHAND",
+      "label": "Location Weapons Subject 2 In-hand",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "In-hand for Subject 2\n"
+    },
+    {
+      "var": "LOCATION_WEAPONS_SUBJECT3_INHAND",
+      "label": "Location Weapons Subject 3 In-hand",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "In-hand for Subject 3\n"
+    },
+    {
+      "var": "TOTALROUNDSFIRED_ALLSUBJECTS",
+      "label": "Total Rounds Fired All Subjects",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": ""
+    },
+    {
+      "var": "LOCATION_INCIDENT_OUTDOOR_LANEWAY",
+      "label": "Location of Incident - Outdoor - Laneway",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Outdoors-Laneway"
+    },
+    {
+      "var": "LOCATION_INCIDENT_OUTDOOR_MOTOR_VEHICLE",
+      "label": "Location of Incident - Outdoor - Motor Vehicle",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Outdoors-Motor Vehicle"
+    },
+    {
+      "var": "LOCATION_INCIDENT_OUTDOOR_PARK",
+      "label": "Location of Incident - Outdoor - Park",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Outdoors-Park"
+    },
+    {
+      "var": "LOCATION_INCIDENT_OUTDOOR_ROADWAY",
+      "label": "Location of Incident - Outdoor - Roadway",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Outdoors-Roadway"
+    },
+    {
+      "var": "LOCATION_INCIDENT_OUTDOOR_RURAL",
+      "label": "Location of Incident - Outdoor - Rural",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Outdoors-Rural"
+    },
+    {
+      "var": "LOCATION_INCIDENT_OUTDOOR_YARD",
+      "label": "Location of Incident - Outdoor - Yard",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Outdoors-Yard"
+    },
+    {
+      "var": "LOCATION_INCIDENT_OUTDOOR_OTHER",
+      "label": "Location of Incident - Outdoor - Other",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Outdoors-Other"
+    },
+    {
+      "var": "LOCATION_INCIDENT_INDOOR_PRIVATE_PROPERTY_APARTMENT",
+      "label": "Location of Incident - Indoor - Private Property - Apartment",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Indoors-Apartment"
+    },
+    {
+      "var": "LOCATION_INCIDENT_INDOOR_PRIVATE_PROPERTY_HALLWAY",
+      "label": "Location of Incident - Indoor - Private Property - Hallway",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Indoors-Hallway"
+    },
+    {
+      "var": "LOCATION_INCIDENT_INDOOR_PRIVATE_PROPERTY_HOUSE",
+      "label": "Location of Incident - Indoor - Private Property - House",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Indoors-House"
+    },
+    {
+      "var": "LOCATION_INCIDENT_INDOOR_PUBLIC_PROPERTY_COMMERCIAL_SITE",
+      "label": "Location of Incident - Indoor - Public Property - Commercial Site",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Indoors-Commercial Site"
+    },
+    {
+      "var": "LOCATION_INCIDENT_INDOOR_PUBLIC_PROPERTY_FINANCIAL_INSTITUTION",
+      "label": "Location of Incident - Indoor - Public Property - Financial Institution",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Indoors-Financial Institution"
+    },
+    {
+      "var": "LOCATION_INCIDENT_INDOOR_PUBLIC_PROPERTY_PUBLIC_INSTITUTION",
+      "label": "Location of Incident - Indoor - Public Property - Public Institution",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Indoors-Public Institution"
+    },
+    {
+      "var": "LOCATION_INCIDENT_INDOOR_OTHER",
+      "label": "Location of Incident - Indoor - Other",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Indoors-Other"
+    },
+    {
+      "var": "WEATHER_CONDITIONS_CLEAR",
+      "label": "Weather Conditions - Clear",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Clear"
+    },
+    {
+      "var": "WEATHER_CONDITIONS_CLOUDY",
+      "label": "Weather Conditions - Cloudy",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Cloudy"
+    },
+    {
+      "var": "WEATHER_CONDITIONS_FOG",
+      "label": "Weather Conditions - Fog",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Fog"
+    },
+    {
+      "var": "WEATHER_CONDITIONS_RAIN",
+      "label": "Weather Conditions - Rain",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Rain"
+    },
+    {
+      "var": "WEATHER_CONDITIONS_SNOW_SLEET",
+      "label": "Weather Conditions - Snow or Sleet",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Snow/Sleet"
+    },
+    {
+      "var": "WEATHER_CONDITIONS_SUNNY",
+      "label": "Weather Conditions - Sunny",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Sunny"
+    },
+    {
+      "var": "WEATHER_CONDITIONS_OTHER",
+      "label": "Weather Conditions - Other",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Other"
+    },
+    {
+      "var": "LIGHTING_CONDITIONS_DARK",
+      "label": "Lighting Conditions - Dark",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Dark"
+    },
+    {
+      "var": "LIGHTING_CONDITIONS_DAYLIGHT",
+      "label": "Lighting Conditions - Daylight",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Daylight"
+    },
+    {
+      "var": "LIGHTING_CONDITIONS_DUSK",
+      "label": "Lighting Conditions - Dusk",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Dusk"
+    },
+    {
+      "var": "LIGHTING_CONDITIONS_GOOD_ARTIFICIAL_LIGHT",
+      "label": "Lighting Conditions - Good Artificial Light",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Good Artificial Light"
+    },
+    {
+      "var": "LIGHTING_CONDITIONS_POOR_ARTIFICIAL_LIGHT",
+      "label": "Lighting Conditions - Poor Artificial Light",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Poor Artificial Light"
+    },
+    {
+      "var": "LIGHTING_CONDITIONS_OTHER",
+      "label": "Lighting Conditions - Other",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Other"
+    },
+    {
+      "var": "PERSON_INJURED_SELF_MEDICAL_ATTENTION_REQUIRED",
+      "label": "Person Injured Self Medical Attention Required",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes, No\n"
+    },
+    {
+      "var": "PERSON _INJURED_SELF_NATUREINJURIES",
+      "label": "Person Injured Self Nature Injuries",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Minor, Serious\n"
+    },
+    {
+      "var": "PERSON_INJURED_OTHER_POLICE_OFFICER_MEDICAL_ATTENTION_REQUIRED",
+      "label": "Person Injured Other Police Officer Medical Attention Required",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes, No\n"
+    },
+    {
+      "var": "PERSON_INJURED_OTHER_POLICE_OFFICER_NATURE_INJURIES",
+      "label": "Person Injured Other Police Officer Nature Injuries",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Minor, Serious, Fatal, Unknown\n"
+    },
+    {
+      "var": "PERSON_INJURED_THIRD PARTY_MEDICAL_ATTENTION_REQUIRED",
+      "label": "Person Injured Third Party Medical Attention Required",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes, No\n"
+    },
+    {
+      "var": "PERSON_INJURED_THIRD_PARTY_NATURE_INJURIES",
+      "label": "Person Injured Third Party Nature Injuries",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Minor, Serious, Fatal, Unknown\n"
+    },
+    {
+      "var": "PERSON_INJURED_SUBJECT1_MEDICAL_ATTENTION_REQUIRED",
+      "label": "Person Injured Subject 1 Medical Attention Required",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes, No\n"
+    },
+    {
+      "var": "PERSON_INJURED_SUBJECT1_NATURE_INJURIES",
+      "label": "Person Injured Subject 1 Nature Injuries",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Minor, Serious, Fatal, Unknown\n"
+    },
+    {
+      "var": "PERSON_INJURED_SUBJECT2_MEDICAL_ATTENTION_REQUIRED",
+      "label": "Person Injured Subject 2 Medical Attention Required",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes, No\n"
+    },
+    {
+      "var": "PERSON_INJURED_SUBJECT2_NATURE_INJURIES",
+      "label": "Person Injured Subject 2 Nature Injuries",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Minor, Serious, Fatal, Unknown\n"
+    },
+    {
+      "var": "PERSON_INJURED_SUBJECT3_MEDICAL_ATTENTION_REQUIRED",
+      "label": "Person Injured Subject 3 Medical Attention Required",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Yes, No\n"
+    },
+    {
+      "var": "PERSON_INJURED_SUBJECT3_NATURE_INJURIES",
+      "label": "Person Injured Subject 3 Nature Injuries",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Minor, Serious, Fatal, Unknown\n"
+    },
+    {
+      "var": "REVIEWED_SUPERVISOR",
+      "label": "Reviewed Supervisor",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes, No\n"
+    },
+    {
+      "var": "REVIEWED_TRAINING_ANALYST",
+      "label": "Reviewed Training Analyst",
+      "data_type": "Boolean",
+      "data_format": "",
+      "data_values": "Yes, No\n"
+    }
+  ],
+  "UseofForce_AgrregateSummaryByYear_2020-2022.csv": [
+    {
+      "var": "id_",
+      "label": "Row ID",
+      "data_type": "Integer",
+      "data_format": "",
+      "data_values": ""
+    },
+    {
+      "var": "SECTION",
+      "label": "Section",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "REPORT_SCOPE, REPORT_TYPE, TEAM_TYPE, LENGTH_OF_SERVICE_CATEGORY, LENGTH_OF_SERVICE_STATISTIC, RANK, RANK, ATTIRE, ASSIGNMENT_TYPE, NUMBER_OF_SUBJECTS, POLICE_OFFICERS_INVOLVED, REASON_FORCE, WEAPONS_CARRIED, TYPE_FORCE, RACE"
+    },
+    {
+      "var": "CATEGORY",
+      "label": "Category",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "1 to 3 Subjects - Individual Reports, 1 to 3 Subjects - Team Reports, 4 or More Subject Reports, Out of Scope for Race-Based Analysis, Submitted Reports, Individual, Team, Specialized Team, Tactical or Emergency Response Team, Unknown, 0 to 4 years, 5 to 9 years, 10 to 14 years, 15 to 19 years, 20 to 24 years, 25 to 29 years, 30 to 34 years, 35 to 39 years, 40 to 54 years, Maximum Length of Service, Median Length of Service, Minimum Length of Service, Constable, Management, Sergeant/Detective, Civilian clothes, Missing, Uniform, Drugs, Investigation, Other, Patrol, Specialized Unit, Tactical, Traffic, One, Three, Two, 1 to 5 Officers, 6 to 10 Officers, More than 10 Officers, Maximum Number of Officers, Median Number of Officers, Minimum Number of Officers, Accidental, Effect Arrest, Prevent Commission of Offence, Prevent Escape, Protect Other Officer, Protect Public, Protect Self, Protect Subject, Firearm, Impact Weapon, Knife/Edged Weapon, Other Weapon, Unarmed, Unknown Weapon, Aerosol, CEW, Empty Hand Hard, Empty Hand Soft, Firearm Discharged, Firearm Pointed/Unknown, Handgun Drawn, Impact Weapon Hard, Impact Weapon Soft, LLF Discharged, LLF Pointed/Unknown, Physical Force, Black, East/Southeast Asian, Indigenous, Latino, Middle Eastern, Multiple Races, South Asian, White"
+    },
+    {
+      "var": "UNITS OF MEASURE",
+      "label": "Units of Measure",
+      "data_type": "Text",
+      "data_format": "",
+      "data_values": "Number of Reports, Percentage of Reports, Percentage of Team Reports, Percentage of Individual Reports, Number of Years, Number of Officers"
+    },
+    {
+      "var": "YEAR_2020",
+      "label": "Year 2020",
+      "data_type": "Decimal",
+      "data_format": "",
+      "data_values": ""
+    },
+    {
+      "var": "YEAR_2021",
+      "label": "Year 2021",
+      "data_type": "Decimal",
+      "data_format": "",
+      "data_values": ""
+    },
+    {
+      "var": "YEAR_2022",
+      "label": "Year 2022",
+      "data_type": "Decimal",
+      "data_format": "",
+      "data_values": ""
+    }
+  ]
+}
