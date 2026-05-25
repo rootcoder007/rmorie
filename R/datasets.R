@@ -2119,8 +2119,6 @@ morie_datasets_chicago_crime_resolved <- function(
 #'   `LIMIT n OFFSET m`.
 #' @param page_size Per-page row count when paginating.
 #' @param max_pages Safety net.
-#' @param mode One of `"soda2"` (default JSON resource endpoint) or
-#'   `"soda3"` (SoQL `query` endpoint). 3VV+ dual-mode dispatch.
 #' @param app_token Optional Socrata app token (sent as
 #'   `X-App-Token`).
 #' @return A `data.frame` with 3 attribute cols (offline) or 4

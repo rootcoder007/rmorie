@@ -17,6 +17,12 @@ fixture from \code{inst/extdata/otis_d01_deaths_in_custody_sample.csv}
 endpoint for resource id \verb{89e3b63f-5679-4fa4-b98a-fdd2dc486f29}.}
 
 \item{resource_id}{Optional CKAN resource id override.}
+
+\item{source}{One of \code{NULL} (default, ships an empty 0-row frame
+with the documented schema when no real CKAN row is bundled),
+\code{"real"} (force the real CKAN sample bundled in \verb{inst/extdata/},
+error if absent), or \code{"synth"} (return a deterministic
+\code{set.seed()} synthetic for didactic examples).}
 }
 \value{
 A \code{data.frame}.
