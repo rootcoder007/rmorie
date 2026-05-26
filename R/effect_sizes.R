@@ -170,7 +170,6 @@ r_effect_size <- function(x, y, confidence = 0.95) {
 #' Coefficient of determination R^2
 #'
 #' @param x,y Numeric vectors (NA dropped).
-#' @param confidence Confidence level for CI. Default 0.95.
 #' @return A `morie_effect_size`.
 #' @export
 r_squared <- function(x, y) {
