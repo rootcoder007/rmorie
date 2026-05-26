@@ -1339,14 +1339,36 @@ morie_did_chaisemartin_dhaultfoeuille <- function(data, outcome, treatment,
   # Recent DIDmultiplegt requires the `mode` arg with no default. The
   # original CdH (2020) instantaneous-effect estimator lives at
   # mode = "old", which keeps the historical Y/G/T/D arg names and
-  # `brep` for bootstrap reps. mode = "dyn" dispatches to
-  # did_multiplegt_dyn() which uses lowercase outcome/group/time/
-  # treatment and rejects Y/G/T/D + brep entirely.
-  fit <- DIDmultiplegt::did_multiplegt(
-    mode = "old",
-    df = as.data.frame(data),
-    Y = outcome, G = unit, T = time, D = treatment,
-    brep = n_bootstrap
+  # `brep` for bootstrap reps.
+  #
+  # did_multiplegt_old internally calls plotrix::plotCI to draw a
+  # bootstrap diagnostic plot, which fails on small samples with
+  # "need finite 'ylim' values" when the bootstrap CIs are
+  # degenerate. We don't care about the plot side-effect; if the
+  # plot path errors we fall back to brep = 0 (no bootstrap, no
+  # plot, SE = NA, but point estimate preserved).
+  .didcall <- function(brep_arg) {
+    DIDmultiplegt::did_multiplegt(
+      mode = "old",
+      df = as.data.frame(data),
+      Y = outcome, G = unit, T = time, D = treatment,
+      brep = brep_arg
+    )
+  }
+  fit <- tryCatch(
+    .didcall(n_bootstrap),
+    error = function(e) {
+      msg <- conditionMessage(e)
+      if (grepl("finite|plot\\.window|plotCI|ylim|xlim", msg)) {
+        warning(
+          "DIDmultiplegt bootstrap-plot failed with: ", msg,
+          ". Falling back to brep = 0; SE will be NA.",
+          call. = FALSE
+        )
+        return(.didcall(0L))
+      }
+      stop(e)
+    }
   )
   est <- as.numeric(fit$effect)
   se_est <- if (!is.null(fit$se_effect)) as.numeric(fit$se_effect) else NA_real_
