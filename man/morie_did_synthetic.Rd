@@ -36,9 +36,10 @@ morie_did_synthetic(
 A result list; see \code{\link{morie_did_2x2}}.
 }
 \description{
-Requires the \pkg{synthdid} package
-(\code{remotes::install_github("synth-inference/synthdid")}); the
-algorithm has no comparably-faithful base-R port shipped here.
+Thin wrapper around \code{synthdid::synthdid_estimate}. Requires
+the \pkg{synthdid} package
+(\code{remotes::install_github("synth-inference/synthdid")});
+synthdid is not on CRAN and has no comparable alternative.
 }
 \references{
 Arkhangelsky, D., et al. (2021). Synthetic

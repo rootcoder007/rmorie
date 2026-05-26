@@ -30,9 +30,10 @@ morie_did_staggered(
 
 \item{covariates}{Optional covariates for doubly-robust estimation.}
 
-\item{n_bootstrap}{Number of bootstrap replications for inference.}
+\item{n_bootstrap}{Number of bootstrap replications for inference
+(forwarded as \code{biters}).}
 
-\item{seed}{RNG seed.}
+\item{seed}{RNG seed (unused; retained for back-compat).}
 
 \item{alpha}{Significance level.}
 }
@@ -42,5 +43,6 @@ A list with \code{group_time}, \code{overall}, \code{by_cohort},
 }
 \description{
 Convenience wrapper around \code{\link{morie_did_group_time_att}} and
-\code{\link{morie_did_aggregate_gt_att}}.
+\code{\link{morie_did_aggregate_gt_att}}. For the canonical CRAN
+aggregator interface see \code{did::aggte}.
 }

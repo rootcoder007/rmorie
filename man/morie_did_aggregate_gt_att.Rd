@@ -26,5 +26,8 @@ A data frame with \code{group}, \code{estimate},
 \code{std_error}, \code{ci_lower}, \code{ci_upper}.
 }
 \description{
-Aggregate group-time ATTs into summary parameters
+Mirrors the aggregation schemes available in
+\code{did::aggte} (overall ATT, by-cohort, by-calendar-time,
+by-event-time) but produces a tidy \code{data.frame} consumed by
+the rmorie / MRM downstream pipelines.
 }

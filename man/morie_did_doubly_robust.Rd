@@ -30,15 +30,18 @@ any covariate columns.}
 
 \item{covariates}{Optional character vector of covariate column names.}
 
-\item{ps_model}{One of \code{"logistic"} (default) or \code{"gbm"}.}
+\item{ps_model}{Unused; retained for back-compat. \pkg{DRDID} fits
+a logistic propensity-score model internally.}
 
-\item{or_model}{One of \code{"linear"} (default) or \code{"gbm"}.}
+\item{or_model}{Unused; retained for back-compat. \pkg{DRDID} fits
+a linear outcome model internally.}
 
 \item{cluster}{Optional cluster ID column for CR1 standard errors.}
 
-\item{n_bootstrap}{Number of bootstrap replications.}
+\item{n_bootstrap}{Number of bootstrap replications (forwarded as
+\code{nboot}).}
 
-\item{seed}{RNG seed.}
+\item{seed}{RNG seed (set before the call).}
 
 \item{alpha}{Significance level for confidence intervals (default 0.05).}
 }
@@ -46,8 +49,15 @@ any covariate columns.}
 A result list; see \code{\link{morie_did_2x2}}.
 }
 \description{
-Combines an outcome regression model with an inverse-probability
-weighting model.  Consistent if either model is correctly specified.
+Thin wrapper around \code{DRDID::drdid_rc} for the 2x2
+repeated-cross-section setting. Combines an outcome regression
+model with an inverse-probability weighting model and is
+consistent if either model is correctly specified. Hard-errors if
+\pkg{DRDID} is not installed.
+}
+\details{
+For panel data (same units observed in both periods) prefer
+\code{DRDID::drdid_panel} directly.
 }
 \references{
 Sant'Anna, P. H. C., & Zhao, J. (2020). Doubly robust
