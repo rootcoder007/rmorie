@@ -12,7 +12,7 @@ morie_chi_square_test(observed, expected = NULL)
 \item{expected}{Expected counts for GOF (optional; uniform if NULL).}
 }
 \value{
-Named list: \code{chi_sq}, \code{df}, \code{p_value}, \code{morie_cramers_v}.
+Named list: \code{chi_sq}, \code{df}, \code{p_value}, \code{cramers_v}.
 }
 \description{
 Chi-square test of independence or goodness-of-fit

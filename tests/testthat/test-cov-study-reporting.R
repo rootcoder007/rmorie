@@ -38,7 +38,7 @@ test_that(".read_existing_output reads a CSV or returns the fallback", {
 })
 
 test_that(".legacy_reference_root resolves a path or errors off-project", {
-  # .legacy_reference_root() builds on morie_find_project_root(), which
+  # .legacy_reference_root() builds on .morie_project_root(), which
   # legitimately errors when the working directory is outside the
   # morie project tree (e.g. under covr / R CMD check).
   res <- tryCatch(rmorie:::.legacy_reference_root(),

@@ -172,16 +172,6 @@ test_that("morie_jackknife_estimate: returns estimate, se and bias", {
   expect_true(is.finite(res$bias))
 })
 
-test_that("morie_effective_sample_size: equal weights give n", {
-  expect_equal(morie_effective_sample_size(rep(1, 20)), 20)
-})
-
-test_that("morie_effective_sample_size: drops NA and non-positive weights", {
-  ess <- morie_effective_sample_size(c(1, 2, NA, -1, 3))
-  expect_true(is.finite(ess))
-  expect_true(ess > 0)
-})
-
 test_that("morie_design_effect: equal weights give DEFF of 1", {
   expect_equal(morie_design_effect(rep(2, 15)), 1)
 })

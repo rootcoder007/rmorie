@@ -15,24 +15,6 @@ test_that("effect_size_result builds expected list", {
   expect_equal(r$extra$foo, 1)
 })
 
-test_that("cohens_d returns morie_effect_size with finite estimate", {
-  r <- cohens_d(x_a, y_a)
-  expect_s3_class(r, "morie_effect_size")
-  expect_true(is.finite(r$estimate))
-  expect_true(is.finite(r$se))
-})
-
-test_that("cohens_d errors on tiny groups", {
-  expect_error(cohens_d(c(1), c(2)), "at least 2")
-})
-
-test_that("hedges_g returns bias-corrected d", {
-  r <- hedges_g(x_a, y_a)
-  expect_s3_class(r, "morie_effect_size")
-  expect_true(is.finite(r$estimate))
-  expect_true(r$extra$correction_factor <= 1)
-})
-
 test_that("glass_delta x and y control work", {
   ry <- glass_delta(x_a, y_a, control = "y")
   rx <- glass_delta(x_a, y_a, control = "x")
@@ -58,9 +40,7 @@ test_that("r_effect_size handles n <= 3", {
   expect_s3_class(r, "morie_effect_size")
 })
 
-test_that("eta/partial_eta/omega/epsilon squared all work", {
-  expect_equal(eta_squared(0, 0)$estimate, 0)
-  expect_true(eta_squared(10, 20)$estimate > 0)
+test_that("partial_eta/omega/epsilon squared all work", {
   expect_equal(partial_eta_squared(0, 0)$estimate, 0)
   expect_true(partial_eta_squared(5, 5)$estimate > 0)
   expect_equal(omega_squared(0, 0, 1, 1)$estimate, 0)
@@ -105,7 +85,6 @@ test_that("association measures work", {
   expect_true(is.finite(cohens_f(0.25)$estimate))
   expect_true(is.infinite(cohens_f(1)$estimate))
   tbl <- matrix(c(20, 10, 5, 25), nrow = 2)
-  expect_s3_class(cramers_v(tbl), "morie_effect_size")
   expect_s3_class(phi_coefficient(tbl), "morie_effect_size")
   expect_error(phi_coefficient(matrix(1:9, nrow = 3)), "2x2")
 })

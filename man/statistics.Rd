@@ -18,7 +18,7 @@ interval, effect size, point estimate, sample size and a free-form
 \code{welch_ttest}, \code{paired_ttest}
 \item ANOVA / non-parametric ANOVA: \code{one_way_anova},
 \code{two_way_anova}, \code{repeated_measures_anova},
-\code{kruskal_wallis}, \code{friedman_test}
+\code{friedman_test} (\code{stats::kruskal.test} for K-W)
 \item Chi-squared family: \code{chi2_goodness_of_fit},
 \code{chi2_independence}, \code{mcnemar_test}, \code{cochrans_q}
 \item Correlation: \code{pearson_correlation},
@@ -27,14 +27,16 @@ interval, effect size, point estimate, sample size and a free-form
 \code{semi_partial_correlation}
 \item Non-parametric: \code{mann_whitney_u},
 \code{wilcoxon_signed_rank}, \code{ks_test_one_sample},
-\code{ks_test_two_sample}, \code{anderson_darling},
-\code{levene_test}, \code{bartlett_test}, \code{runs_test}
-\item Normality: \code{shapiro_wilk}, \code{dagostino_pearson},
-\code{jarque_bera}, \code{lilliefors_test}
+\code{ks_test_two_sample}, \code{levene_test},
+\code{bartlett_test}, \code{runs_test}
+(\code{nortest::ad.test} for Anderson-Darling)
+\item Normality: \code{dagostino_pearson}, \code{lilliefors_test}
+(\code{stats::shapiro.test} for Shapiro-Wilk,
+\code{tseries::jarque.bera.test} for Jarque-Bera)
 \item Proportions: \code{one_proportion_ztest},
 \code{two_proportion_ztest}, \code{fisher_exact_test}
-\item Agreement: \code{cohens_kappa}, \code{fleiss_kappa},
-\code{intraclass_correlation}
+\item Agreement: \code{cohens_kappa}, \code{intraclass_correlation}
+(\code{irr::kappam.fleiss} for Fleiss' kappa)
 \item Convenience: \code{normality_suite},
 \code{variance_equality_suite}, \code{correlation_matrix},
 \code{auto_test}

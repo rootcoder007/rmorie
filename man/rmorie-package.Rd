@@ -46,23 +46,11 @@ person-year regional-transition count)
 }
 }
 
-\section{Companion papers (Zenodo DOIs)}{
+\section{Companion papers}{
 
-If you use morie in your work, please cite the relevant companion
-papers (see \code{citation("morie")} or the \file{CITATION.cff}
-file in the source distribution):
-\itemize{
-\item morie (R software paper):
-\doi{10.5281/zenodo.20111233}
-\item morie (Python software paper):
-\doi{10.5281/zenodo.20096350}
-\item MRM framework paper:
-\doi{10.5281/zenodo.20096075}
-\item Hawkes-process methodology paper:
-\doi{10.5281/zenodo.20102198}
-\item Empirical applications paper:
-\doi{10.5281/zenodo.20175689}
-}
+If you use rmorie in your work, please cite the relevant companion
+papers (see \code{citation("rmorie")} for the current list). DOIs
+are pending re-deposit.
 }
 
 \section{Key external citations used by MRM modules}{

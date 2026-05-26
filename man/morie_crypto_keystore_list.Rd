@@ -4,7 +4,7 @@
 \alias{morie_crypto_keystore_list}
 \title{List key names in the morie keystore}
 \usage{
-morie_crypto_keystore_list(password, path = .MORIE_KEYSTORE_DEFAULT_PATH)
+morie_crypto_keystore_list(password, path = .morie_keystore_default_path())
 }
 \arguments{
 \item{password}{Character scalar.}

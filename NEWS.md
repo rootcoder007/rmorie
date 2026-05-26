@@ -1,4 +1,39 @@
-# morie 0.9.5.12 - 2026-05-25
+# rmorie 0.9.6 (in development)
+
+## Breaking - CRAN-equivalent functions removed
+
+To reduce code duplication with established CRAN packages and address
+rOpenSci feedback on `fn_call_network_size`, the following functions
+have been removed in favour of their well-maintained CRAN equivalents:
+
+| Removed from rmorie | Use instead |
+|---|---|
+| `cohens_d` / `morie_cohens_d` | `effectsize::cohens_d` |
+| `cramers_v` / `morie_cramers_v` | `effectsize::cramers_v` |
+| `eta_squared` / `morie_eta_squared` | `effectsize::eta_squared` |
+| `hedges_g` / `morie_hedges_g` | `effectsize::hedges_g` |
+| `morie_effective_sample_size` | `posterior::ess_basic` or `coda::effectiveSize` |
+| `morie_find_project_root` | `here::here()` or `rprojroot::find_root()` |
+| `fleiss_kappa` | `irr::kappam.fleiss` |
+| `kruskal_wallis` | `stats::kruskal.test` (base R) |
+| `shapiro_wilk` | `stats::shapiro.test` (base R) |
+| `anderson_darling` | `nortest::ad.test` |
+| `jarque_bera` | `tseries::jarque.bera.test` |
+
+Install the replacements with
+`install.packages(c("effectsize", "irr", "nortest", "tseries", "here"))`.
+
+`morie_two_sample_t_test()` / `morie_chi_square_test()` /
+`morie_anova_one_way()` now return list fields named `cohens_d` /
+`cramers_v` / `eta_squared` (was `morie_cohens_d` / `morie_cramers_v` /
+`morie_eta_squared`); the computation is inlined and unchanged.
+Internal callers of `morie_find_project_root()` now go through a private
+`.morie_project_root()` wrapper around `here::here()`.
+
+DESCRIPTION: adds `here` to Imports; adds `effectsize`, `irr`, `tseries`
+to Suggests.
+
+# rmorie 0.9.5.12 - 2026-05-25
 
 ## CI: drop fwildclusterboot (pak recursive Remotes unreliable) (3MMM.40c)
 

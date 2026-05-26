@@ -10,7 +10,7 @@ morie_design_effect(weights)
 \item{weights}{Numeric vector of sampling weights.}
 }
 \value{
-Numeric design effect (= n / ESS).
+Numeric design effect (= n / Kish effective sample size).
 }
 \description{
 Design effect (DEFF)

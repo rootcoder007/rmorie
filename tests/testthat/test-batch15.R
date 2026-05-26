@@ -366,28 +366,6 @@ test_that("morie_ordered_alternatives_test works on two groups", {
   expect_true(is.finite(r$E_J))
 })
 
-test_that("morie_find_project_root detects a synthetic project root", {
-  root <- file.path(tempdir(), paste0("morie_root_", as.integer(runif(1, 1, 1e6))))
-  dir.create(file.path(root, "docs", "source"), recursive = TRUE)
-  file.create(file.path(root, "pyproject.toml"))
-  sub <- file.path(root, "a", "b")
-  dir.create(sub, recursive = TRUE)
-  detected <- morie_find_project_root(start = sub, max_up = 10L)
-  expect_true(is.character(detected))
-  expect_equal(
-    normalizePath(detected, winslash = "/", mustWork = FALSE),
-    normalizePath(root, winslash = "/", mustWork = FALSE)
-  )
-  unlink(root, recursive = TRUE)
-})
-
-test_that("morie_find_project_root errors when no markers exist", {
-  bare <- file.path(tempdir(), paste0("morie_bare_", as.integer(runif(1, 1, 1e6))))
-  dir.create(bare, recursive = TRUE)
-  expect_error(morie_find_project_root(start = bare, max_up = 2L))
-  unlink(bare, recursive = TRUE)
-})
-
 test_that("morie_paths returns the standard named path list", {
   root <- file.path(tempdir(), paste0("morie_paths_", as.integer(runif(1, 1, 1e6))))
   dir.create(root, recursive = TRUE)

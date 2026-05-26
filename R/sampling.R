@@ -225,24 +225,10 @@ morie_jackknife_estimate <- function(df, statistic) {
 # Effective sample size and design effect
 # ---------------------------------------------------------------------------
 
-#' Kish effective sample size
-#'
-#' @param weights Numeric vector of sampling weights.
-#' @return Numeric ESS.
-#' @examples
-#' # See the package vignettes for usage examples:
-#' #   vignette(package = "rmorie")
-#' @export
-morie_effective_sample_size <- function(weights) {
-  w <- as.numeric(weights)
-  w <- w[!is.na(w) & w > 0]
-  (sum(w)^2) / sum(w^2)
-}
-
 #' Design effect (DEFF)
 #'
 #' @param weights Numeric vector of sampling weights.
-#' @return Numeric design effect (= n / ESS).
+#' @return Numeric design effect (= n / Kish effective sample size).
 #' @examples
 #' # See the package vignettes for usage examples:
 #' #   vignette(package = "rmorie")
@@ -250,7 +236,9 @@ morie_effective_sample_size <- function(weights) {
 morie_design_effect <- function(weights) {
   w <- as.numeric(weights)
   w <- w[!is.na(w) & w > 0]
-  length(w) / morie_effective_sample_size(w)
+  # Kish effective sample size inlined: (sum(w)^2) / sum(w^2)
+  ess <- (sum(w)^2) / sum(w^2)
+  length(w) / ess
 }
 
 

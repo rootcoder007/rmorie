@@ -4,7 +4,7 @@
 \alias{morie_crypto_keystore_create}
 \title{Create a new empty morie keystore}
 \usage{
-morie_crypto_keystore_create(password, path = .MORIE_KEYSTORE_DEFAULT_PATH)
+morie_crypto_keystore_create(password, path = .morie_keystore_default_path())
 }
 \arguments{
 \item{password}{Character scalar: keystore password.}

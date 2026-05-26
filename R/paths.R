@@ -13,36 +13,27 @@ is_absolute_path <- function(path) {
   grepl("^(/|[A-Za-z]:[/\\\\])", path)
 }
 
-#' Find a project root directory
-#'
-#' Searches upward from `start` for a directory containing the current
-#' Sphinx/package-root markers, while still tolerating legacy Quarto-era
-#' markers in older checkouts.
-#'
-#' @param start Starting directory.
-#' @param max_up Maximum number of parent traversals.
-#' @return Absolute path to the detected project root.
-#' @examples
-#' tryCatch(morie_find_project_root(),
-#'   error = function(e) message("not inside a morie project tree")
-#' )
-#' @export
-morie_find_project_root <- function(start = getwd(), max_up = 10L) {
+# Internal: locate the host project root.
+# Wraps `here::here()` (preferred) and falls back to an upward DESCRIPTION
+# / pyproject.toml walk so an installed package still has a sensible
+# heuristic. Always wrap call sites in `tryCatch()` because callers run
+# inside an installed package have no project root at all.
+.morie_project_root <- function(start = getwd(), max_up = 10L) {
+  out <- tryCatch(here::here(), error = function(e) NULL)
+  if (!is.null(out) && nzchar(out) && dir.exists(out)) {
+    return(normalizePath(out, winslash = "/", mustWork = FALSE))
+  }
   current <- normalizePath(start, winslash = "/", mustWork = FALSE)
-
   for (i in seq_len(max_up)) {
-    has_pyproject <- file.exists(file.path(current, "pyproject.toml"))
-    has_libexec <- dir.exists(file.path(current, "libexec", "config"))
-    has_sphinx <- dir.exists(file.path(current, "docs", "source"))
-    if (has_pyproject && (has_libexec || has_sphinx)) {
+    if (file.exists(file.path(current, "DESCRIPTION")) ||
+        file.exists(file.path(current, "pyproject.toml")) ||
+        file.exists(file.path(current, ".here"))) {
       return(current)
     }
-
     parent <- dirname(current)
     if (identical(parent, current)) break
     current <- parent
   }
-
   stop(
     "Unable to detect project root. Provide `project_root` explicitly.",
     call. = FALSE
@@ -60,7 +51,7 @@ morie_find_project_root <- function(start = getwd(), max_up = 10L) {
 #' )
 #' @export
 morie_paths <- function(project_root = NULL) {
-  root <- project_root %||% morie_find_project_root()
+  root <- project_root %||% .morie_project_root()
   root <- normalizePath(root, winslash = "/", mustWork = FALSE)
 
   list(

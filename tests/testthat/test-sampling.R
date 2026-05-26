@@ -126,18 +126,6 @@ test_that("jackknife SE is close to bootstrap SE for mean", {
   expect_lt(abs(jk$se - 0.1), 0.03)
 })
 
-# ── morie_effective_sample_size ─────────────────────────────────────────────────────
-
-test_that("ESS equals n for equal weights", {
-  w <- rep(1, 100)
-  expect_equal(morie_effective_sample_size(w), 100)
-})
-
-test_that("ESS < n for unequal weights", {
-  w <- c(rep(1, 90), rep(10, 10))
-  expect_lt(morie_effective_sample_size(w), 100)
-})
-
 # ── morie_design_effect ─────────────────────────────────────────────────────────────
 
 test_that("DEFF = 1 for equal weights", {

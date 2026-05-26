@@ -404,7 +404,7 @@
   # The legacy migration tree exists only in a source checkout; an
   # installed package has no project root. Degrade to NA so callers
   # (.copy_legacy_artifacts) simply copy nothing rather than erroring.
-  root <- tryCatch(morie_find_project_root(), error = function(e) NA_character_)
+  root <- tryCatch(.morie_project_root(), error = function(e) NA_character_)
   if (is.na(root)) {
     return(NA_character_)
   }
@@ -588,7 +588,7 @@
   # The user-guide PDF lives in a source checkout only; tolerate its
   # absence (and a missing project root) when run from an installed
   # package rather than letting the whole report module error out.
-  proj_root <- tryCatch(morie_find_project_root(), error = function(e) NA_character_)
+  proj_root <- tryCatch(.morie_project_root(), error = function(e) NA_character_)
   user_guide_present <- !is.na(proj_root) && file.exists(file.path(
     proj_root, "docs", "source", "modules",
     "20212022-cpads-pumf-user-guide.pdf"
