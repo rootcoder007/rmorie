@@ -3,7 +3,6 @@
 <!-- badges: start -->
 [![Project Status: Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![CRAN status](https://www.r-pkg.org/badges/version/rmorie)](https://CRAN.R-project.org/package=rmorie)
 [![r-universe](https://rootcoder007.r-universe.dev/badges/rmorie)](https://rootcoder007.r-universe.dev/rmorie)
 [![R-CMD-check](https://github.com/rootcoder007/rmorie/actions/workflows/r-cmd-check.yml/badge.svg)](https://github.com/rootcoder007/rmorie/actions/workflows/r-cmd-check.yml)
 [![Codecov test coverage](https://codecov.io/gh/rootcoder007/rmorie/graph/badge.svg)](https://app.codecov.io/gh/rootcoder007/rmorie)
