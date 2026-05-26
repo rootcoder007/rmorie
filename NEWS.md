@@ -1,5 +1,38 @@
 # rmorie 0.9.6 (in development)
 
+## Phase 1.k: stats extenders -- DescTools / performance / ppcor / coin / randtests
+
+A new file `R/extenders_stats.R` adds 17 wrapper-as-extender entry
+points under the canonical `morie_<pkg>_*` prefix that delegate to
+five CRAN statistics packages.  Each function follows the
+`requireNamespace`-guarded hard-error pattern used by the other
+1.g/1.h/1.i/1.j extenders and returns a thin two-slot list with
+`$method` (qualified upstream name) and `$raw` (upstream object):
+
+* `morie_desc_cramers_v`, `morie_desc_kappa`,
+  `morie_desc_winsorize`, `morie_desc_gini`, `morie_desc_atkinson`
+  -> `DescTools::{CramerV, CohenKappa/KappaM, Winsorize, Gini,
+  Atkinson}`.
+* `morie_performance_check_model`, `morie_performance_r2`,
+  `morie_performance_check_collinearity`,
+  `morie_performance_check_outliers` -> `performance::{check_model,
+  r2, check_collinearity, check_outliers}`.
+* `morie_ppcor_partial`, `morie_ppcor_semipartial` ->
+  `ppcor::{pcor, pcor.test, spcor, spcor.test}` (matrix-wise when
+  `y`/`z` are omitted, single-triple test otherwise).
+* `morie_coin_independence`, `morie_coin_wilcoxon`,
+  `morie_coin_oneway` -> `coin::{independence_test, wilcox_test,
+  oneway_test}`.
+* `morie_randtests_runs`, `morie_randtests_turning_point`,
+  `morie_randtests_bartels` -> `randtests::{runs.test,
+  turning.point.test, bartels.rank.test}`.
+
+DESCRIPTION: adds `DescTools`, `ppcor`, `randtests` to Suggests
+(alphabetised).  `coin` and `performance` were already listed.
+
+Tests: `tests/testthat/test-extenders-stats.R` covers one happy
+path per function, each gated by `skip_if_not_installed()`.
+
 ### Phase 1.g gap: TwoWayFEWeights + synthdid extender
 
 Two new wrapper-as-extender entry points have been added to
