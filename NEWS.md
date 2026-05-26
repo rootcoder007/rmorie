@@ -1,5 +1,11 @@
 # rmorie 0.9.6 (in development)
 
+## Phase 1.l: RDD/IRT extenders -- rddensity / rdlocrand / rdpower / anchors / anominate
+* New file `R/extenders_rdd.R` with 5 wrappers (morie_rdd_density_test, morie_rdd_local_randinf, morie_rdd_power_calc, morie_anchors_analyze, morie_anominate_ideal_points)
+* DESCRIPTION: Suggests += anchors, anominate, rdlocrand, rdpower (rddensity was already listed)
+* Tests in tests/testthat/test-extenders-rdd.R
+* Note: the rdpower wrapper is exported as `morie_rdd_power_calc` because `morie_rdd_power` already exists in `R/rdd.R` as a closed-form analytical power formula taking `(n, tau, sigma)`; the simulation-based `rdpower::rdpower` surface is preserved alongside.
+
 ## Phase 1.k: stats extenders -- DescTools / performance / ppcor / coin / randtests
 
 A new file `R/extenders_stats.R` adds 17 wrapper-as-extender entry
