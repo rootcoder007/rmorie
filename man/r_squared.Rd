@@ -8,8 +8,6 @@ r_squared(x, y)
 }
 \arguments{
 \item{x, y}{Numeric vectors (NA dropped).}
-
-\item{confidence}{Confidence level for CI. Default 0.95.}
 }
 \value{
 A \code{morie_effect_size}.
