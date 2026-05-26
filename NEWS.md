@@ -1,5 +1,10 @@
 # rmorie 0.9.6 (in development)
 
+## Phase 1.m: spatial/multivariate extenders -- gstat / copula / kernlab / metafor / mvtnorm
+* New file `R/extenders_spatial.R` with 8 wrappers covering variograms, kriging, copulas, kernel PCA, spectral clustering, meta-analysis, multivariate normal sampling and CDF (morie_geostat_variogram, morie_geostat_krige, morie_copula_fit, morie_copula_sample, morie_kernel_pca, morie_spectral_cluster, morie_meta_rma, morie_mvnorm_sample, morie_mvnorm_pmv)
+* DESCRIPTION: Suggests += copula, gstat, kernlab, metafor, mvtnorm
+* Tests in tests/testthat/test-extenders-spatial.R
+
 ## Phase 1.l: RDD/IRT extenders -- rddensity / rdlocrand / rdpower / anchors / anominate
 * New file `R/extenders_rdd.R` with 5 wrappers (morie_rdd_density_test, morie_rdd_local_randinf, morie_rdd_power_calc, morie_anchors_analyze, morie_anominate_ideal_points)
 * DESCRIPTION: Suggests += anchors, anominate, rdlocrand, rdpower (rddensity was already listed)
