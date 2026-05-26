@@ -90,54 +90,11 @@ effect_size_result <- function(measure, estimate,
 # STANDARDISED MEAN DIFFERENCES
 # =====================================================================
 
-#' Cohen's d for independent samples
-#'
-#' @param x,y Numeric vectors (NA dropped).
-#' @param confidence Confidence level for CI. Default 0.95.
-#' @return A `morie_effect_size`.
-#' @export
-cohens_d <- function(x, y, confidence = 0.95) {
-  x <- .arr(x)
-  y <- .arr(y)
-  nx <- length(x)
-  ny <- length(y)
-  if (nx < 2L || ny < 2L) {
-    stop("cohens_d: need at least 2 finite observations per group; ",
-         "got nx=", nx, ", ny=", ny, call. = FALSE)
-  }
-  sp <- sqrt(((nx - 1) * var(x) + (ny - 1) * var(y)) / (nx + ny - 2))
-  d  <- if (sp > 0) (mean(x) - mean(y)) / sp else 0
-  se <- sqrt((nx + ny) / (nx * ny) + d^2 / (2 * (nx + ny - 2)))
-  z  <- qnorm((1 + confidence) / 2)
-  effect_size_result("Cohen's d", d, d - z * se, d + z * se, se, nx + ny)
-}
-
-
-#' Hedges' g — bias-corrected Cohen's d
-#'
-#' Applies J = 1 - 3 / (4 * df - 1).
-#'
-#' @inheritParams cohens_d
-#' @return A `morie_effect_size`.
-#' @export
-hedges_g <- function(x, y, confidence = 0.95) {
-  x <- .arr(x)
-  y <- .arr(y)
-  d_res <- cohens_d(x, y, confidence)
-  df_val <- length(x) + length(y) - 2
-  J <- if (df_val > 1) 1 - 3 / (4 * df_val - 1) else 1
-  g  <- d_res$estimate * J
-  se <- if (!is.na(d_res$se)) d_res$se * J else 0
-  z  <- qnorm((1 + confidence) / 2)
-  effect_size_result("Hedges' g", g, g - z * se, g + z * se, se,
-                      d_res$n, extra = list(correction_factor = J))
-}
-
-
 #' Glass's delta — control-group SD denominator
 #'
-#' @inheritParams cohens_d
+#' @param x,y Numeric vectors (NA dropped).
 #' @param control Which group is the control: `"x"` or `"y"` (default).
+#' @param confidence Confidence level for CI. Default 0.95.
 #' @return A `morie_effect_size`.
 #' @export
 glass_delta <- function(x, y, control = "y", confidence = 0.95) {
@@ -162,7 +119,8 @@ glass_delta <- function(x, y, control = "y", confidence = 0.95) {
 #'
 #' Estimates P(X > Y) for randomly drawn observations from each group.
 #'
-#' @inheritParams cohens_d
+#' @param x,y Numeric vectors (NA dropped).
+#' @param confidence Confidence level for CI. Default 0.95.
 #' @return A `morie_effect_size`.
 #' @export
 cles <- function(x, y, confidence = 0.95) {
@@ -189,7 +147,8 @@ cles <- function(x, y, confidence = 0.95) {
 
 #' Pearson r as an effect size with Fisher-z CI
 #'
-#' @inheritParams cohens_d
+#' @param x,y Numeric vectors (NA dropped).
+#' @param confidence Confidence level for CI. Default 0.95.
 #' @return A `morie_effect_size`.
 #' @export
 r_effect_size <- function(x, y, confidence = 0.95) {
@@ -210,7 +169,8 @@ r_effect_size <- function(x, y, confidence = 0.95) {
 
 #' Coefficient of determination R^2
 #'
-#' @inheritParams cohens_d
+#' @param x,y Numeric vectors (NA dropped).
+#' @param confidence Confidence level for CI. Default 0.95.
 #' @return A `morie_effect_size`.
 #' @export
 r_squared <- function(x, y) {
@@ -221,18 +181,6 @@ r_squared <- function(x, y) {
     if (!is.na(r_res$ci_lower)) r_res$ci_lower^2 else NA_real_,
     if (!is.na(r_res$ci_upper)) r_res$ci_upper^2 else NA_real_,
     n = r_res$n)
-}
-
-
-#' Eta-squared from ANOVA sums of squares
-#'
-#' @param ss_effect Sum of squares for the effect.
-#' @param ss_total  Total sum of squares.
-#' @return A `morie_effect_size`.
-#' @export
-eta_squared <- function(ss_effect, ss_total) {
-  eta2 <- if (ss_total > 0) ss_effect / ss_total else 0
-  effect_size_result("Eta-squared", eta2)
 }
 
 
@@ -442,28 +390,6 @@ cohens_f <- function(eta2) {
 }
 
 
-#' Cramer's V for a contingency table
-#'
-#' @param contingency_table Numeric matrix or table.
-#' @param confidence Confidence level. Default 0.95.
-#' @return A `morie_effect_size`.
-#' @export
-cramers_v <- function(contingency_table, confidence = 0.95) {
-  tbl <- as.matrix(contingency_table)
-  storage.mode(tbl) <- "double"
-  cs   <- suppressWarnings(chisq.test(tbl, correct = FALSE))
-  chi2 <- as.numeric(cs$statistic)
-  n    <- sum(tbl)
-  k    <- min(dim(tbl)) - 1
-  v    <- if (n * k > 0) sqrt(chi2 / (n * k)) else 0
-  # Bias-corrected V (Bergsma 2013).
-  v_bc <- max(0, v^2 - k * (nrow(tbl) - 1) / (n - 1))
-  v_bc <- if (v_bc > 0) sqrt(v_bc) else 0
-  effect_size_result("Cramer's V", v, n = as.integer(n),
-                      extra = list(bias_corrected_v = v_bc))
-}
-
-
 #' Phi coefficient for a 2x2 contingency table
 #'
 #' @param contingency_table 2x2 numeric matrix.
@@ -489,7 +415,8 @@ phi_coefficient <- function(contingency_table) {
 
 #' Rank-biserial correlation (matched rank version)
 #'
-#' @inheritParams cohens_d
+#' @param x,y Numeric vectors (NA dropped).
+#' @param confidence Confidence level for CI. Default 0.95.
 #' @return A `morie_effect_size`.
 #' @export
 rank_biserial_correlation <- function(x, y, confidence = 0.95) {
@@ -516,7 +443,8 @@ rank_biserial_correlation <- function(x, y, confidence = 0.95) {
 
 #' Cliff's delta
 #'
-#' @inheritParams cohens_d
+#' @param x,y Numeric vectors (NA dropped).
+#' @param confidence Confidence level for CI. Default 0.95.
 #' @return A `morie_effect_size`.
 #' @export
 cliffs_delta <- function(x, y, confidence = 0.95) {
@@ -540,7 +468,8 @@ cliffs_delta <- function(x, y, confidence = 0.95) {
 
 #' Vargha-Delaney A statistic
 #'
-#' @inheritParams cohens_d
+#' @param x,y Numeric vectors (NA dropped).
+#' @param confidence Confidence level for CI. Default 0.95.
 #' @return A `morie_effect_size`.
 #' @export
 vargha_delaney_a <- function(x, y, confidence = 0.95) {
@@ -623,7 +552,8 @@ coefficient_of_variation <- function(x) {
 
 #' Variance ratio (F-test for equality of variances)
 #'
-#' @inheritParams cohens_d
+#' @param x,y Numeric vectors (NA dropped).
+#' @param confidence Confidence level for CI. Default 0.95.
 #' @return A `morie_effect_size`.
 #' @export
 variance_ratio <- function(x, y, confidence = 0.95) {

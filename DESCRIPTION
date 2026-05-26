@@ -39,6 +39,7 @@ Depends:
 Note: Tested on R 4.3.0, 4.4.x, 4.5.2, 4.5.3 (CRAN). Use CRAN R on Apple
   Silicon (Homebrew R may segfault with RSQLite).
 Imports:
+  here,
   stats,
   utils,
   Rcpp
@@ -65,6 +66,7 @@ Suggests:
   e1071,
   ebal,
   eegkit,
+  effectsize,
   elasticnet,
   emhawkes,
   EValue,
@@ -78,6 +80,7 @@ Suggests:
   hawkes,
   httr2,
   iml,
+  irr,
   ivreg,
   jsonlite,
   knitr,
@@ -131,6 +134,7 @@ Suggests:
   synthdid,
   testthat (>= 3.0.0),
   torch,
+  tseries,
   urca,
   vars,
   wavelets,

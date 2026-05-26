@@ -53,16 +53,6 @@ test_that("is_absolute_path detects unix + windows roots", {
   expect_false(rmorie:::is_absolute_path("relative/path"))
 })
 
-test_that("morie_find_project_root errors when no markers found", {
-  tmp <- tempfile()
-  dir.create(tmp)
-  withr::defer(unlink(tmp, recursive = TRUE))
-  expect_error(
-    morie_find_project_root(start = tmp, max_up = 2L),
-    "Unable to detect project root"
-  )
-})
-
 test_that("morie_paths returns named list when given explicit root", {
   tmp <- tempfile()
   dir.create(tmp)

@@ -142,7 +142,7 @@
     stringsAsFactors = FALSE
   )
   if (!is.null(output_dir)) {
-    project_root <- tryCatch(morie_find_project_root(dirname(output_dir)), error = function(e) NULL)
+    project_root <- tryCatch(.morie_project_root(dirname(output_dir)), error = function(e) NULL)
     if (!is.null(project_root)) {
       wrangled_dir <- file.path(project_root, "data", "private", "outputs", "wrangled")
       dir.create(wrangled_dir, recursive = TRUE, showWarnings = FALSE)

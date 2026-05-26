@@ -373,7 +373,7 @@ test_that("morie_indicator_kriging errors on dimension mismatch", {
 test_that("morie_two_sample_t_test returns tidy fields", {
   set.seed(25)
   r <- morie_two_sample_t_test(rnorm(50, 0.5), rnorm(50, 0))
-  expect_named(r, c("t", "df", "p_value", "ci_diff", "morie_cohens_d"))
+  expect_named(r, c("t", "df", "p_value", "ci_diff", "cohens_d"))
   expect_true(is.finite(r$t))
   expect_true(r$p_value >= 0 && r$p_value <= 1)
   expect_length(r$ci_diff, 2)
@@ -406,13 +406,13 @@ test_that("morie_paired_t_test returns mean_diff", {
 test_that("morie_chi_square_test handles matrix (independence) input", {
   m <- matrix(c(20, 30, 25, 25), nrow = 2)
   r <- morie_chi_square_test(m)
-  expect_named(r, c("chi_sq", "df", "p_value", "morie_cramers_v"))
-  expect_true(is.finite(r$morie_cramers_v))
+  expect_named(r, c("chi_sq", "df", "p_value", "cramers_v"))
+  expect_true(is.finite(r$cramers_v))
 })
 
 test_that("morie_chi_square_test handles vector (GOF) input", {
   r <- suppressWarnings(morie_chi_square_test(c(10, 12, 8, 15)))
-  expect_true(is.na(r$morie_cramers_v))
+  expect_true(is.na(r$cramers_v))
   expect_true(is.finite(r$chi_sq))
 })
 
@@ -423,15 +423,15 @@ test_that("morie_fisher_exact_test returns odds ratio and CI", {
   expect_length(r$ci, 2)
 })
 
-test_that("morie_anova_one_way returns F and morie_eta_squared", {
+test_that("morie_anova_one_way returns F and eta_squared", {
   set.seed(29)
   r <- morie_anova_one_way(rnorm(30, 0), rnorm(30, 0.5), rnorm(30, 1))
   expect_named(r, c(
     "F", "df_between", "df_within", "p_value",
-    "morie_eta_squared"
+    "eta_squared"
   ))
   expect_true(is.finite(r$F))
-  expect_true(r$morie_eta_squared >= 0 && r$morie_eta_squared <= 1)
+  expect_true(r$eta_squared >= 0 && r$eta_squared <= 1)
 })
 
 test_that("morie_anova_one_way errors with fewer than two groups", {
@@ -512,35 +512,9 @@ test_that("morie_risk_difference_ci returns rd and ordered CI", {
   expect_true(r$ci_lower <= r$ci_upper)
 })
 
-test_that("morie_cohens_d pooled and unpooled both return finite values", {
-  set.seed(35)
-  x1 <- rnorm(40, 1)
-  x2 <- rnorm(40, 0)
-  expect_true(is.finite(morie_cohens_d(x1, x2)))
-  expect_true(is.finite(morie_cohens_d(x1, x2, pooled = FALSE)))
-})
-
-test_that("morie_hedges_g applies the bias correction", {
-  set.seed(36)
-  x1 <- rnorm(40, 1)
-  x2 <- rnorm(40, 0)
-  g <- morie_hedges_g(x1, x2)
-  d <- morie_cohens_d(x1, x2)
-  expect_true(is.finite(g))
-  expect_true(abs(g) <= abs(d))
-})
-
-test_that("morie_eta_squared and morie_omega_squared return values in range", {
-  e <- morie_eta_squared(5.2, 2, 87)
+test_that("morie_omega_squared returns value in range", {
   o <- morie_omega_squared(f_stat = 5.2, df_between = 2, df_within = 87, n = 90)
-  expect_true(e >= 0 && e <= 1)
   expect_true(o >= 0 && o <= 1)
-})
-
-test_that("morie_cramers_v returns a value in [0, 1]", {
-  m <- matrix(c(20, 30, 25, 25), nrow = 2)
-  v <- suppressWarnings(morie_cramers_v(m))
-  expect_true(v >= 0 && v <= 1)
 })
 
 test_that("morie_spearman_rho and morie_kendall_tau return correlation + p", {

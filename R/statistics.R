@@ -14,7 +14,7 @@
 #'     \code{welch_ttest}, \code{paired_ttest}
 #'   \item ANOVA / non-parametric ANOVA: \code{one_way_anova},
 #'     \code{two_way_anova}, \code{repeated_measures_anova},
-#'     \code{kruskal_wallis}, \code{friedman_test}
+#'     \code{friedman_test} (\code{stats::kruskal.test} for K-W)
 #'   \item Chi-squared family: \code{chi2_goodness_of_fit},
 #'     \code{chi2_independence}, \code{mcnemar_test}, \code{cochrans_q}
 #'   \item Correlation: \code{pearson_correlation},
@@ -23,14 +23,16 @@
 #'     \code{semi_partial_correlation}
 #'   \item Non-parametric: \code{mann_whitney_u},
 #'     \code{wilcoxon_signed_rank}, \code{ks_test_one_sample},
-#'     \code{ks_test_two_sample}, \code{anderson_darling},
-#'     \code{levene_test}, \code{bartlett_test}, \code{runs_test}
-#'   \item Normality: \code{shapiro_wilk}, \code{dagostino_pearson},
-#'     \code{jarque_bera}, \code{lilliefors_test}
+#'     \code{ks_test_two_sample}, \code{levene_test},
+#'     \code{bartlett_test}, \code{runs_test}
+#'     (\code{nortest::ad.test} for Anderson-Darling)
+#'   \item Normality: \code{dagostino_pearson}, \code{lilliefors_test}
+#'     (\code{stats::shapiro.test} for Shapiro-Wilk,
+#'     \code{tseries::jarque.bera.test} for Jarque-Bera)
 #'   \item Proportions: \code{one_proportion_ztest},
 #'     \code{two_proportion_ztest}, \code{fisher_exact_test}
-#'   \item Agreement: \code{cohens_kappa}, \code{fleiss_kappa},
-#'     \code{intraclass_correlation}
+#'   \item Agreement: \code{cohens_kappa}, \code{intraclass_correlation}
+#'     (\code{irr::kappam.fleiss} for Fleiss' kappa)
 #'   \item Convenience: \code{normality_suite},
 #'     \code{variance_equality_suite}, \code{correlation_matrix},
 #'     \code{auto_test}
@@ -332,26 +334,6 @@ repeated_measures_anova <- function(data, outcome, subject, within) {
     test_statistic = f_stat, p_value = p,
     df = df_cond, effect_size = eta2, n = n,
     extra = list(df_error = df_error, ss_cond = ss_cond, ss_error = ss_error)
-  )
-}
-
-#' Kruskal-Wallis H-test
-#' @param ... Two or more numeric vectors.
-#' @export
-kruskal_wallis <- function(...) {
-  groups <- list(...)
-  cleaned <- lapply(groups, .stat_validate)
-  vals <- unlist(cleaned)
-  grp <- factor(rep(seq_along(cleaned), lengths(cleaned)))
-  kt <- stats::kruskal.test(vals, grp)
-  k <- length(cleaned)
-  n_total <- length(vals)
-  h_stat <- unname(kt$statistic)
-  eta2_h <- if ((n_total - k) > 0) (h_stat - k + 1) / (n_total - k) else 0
-  .stat_result(
-    method = "Kruskal-Wallis H-test",
-    test_statistic = h_stat, p_value = kt$p.value,
-    df = k - 1, effect_size = max(eta2_h, 0), n = n_total
   )
 }
 
@@ -702,39 +684,6 @@ ks_test_two_sample <- function(x, y) {
   )
 }
 
-#' Anderson-Darling test
-#'
-#' For \code{dist != "norm"} this is an API stub returning NA p-values;
-#' Anderson-Darling for arbitrary distributions requires the
-#' \pkg{ADGofTest} or \pkg{goftest} packages. For the normal case we
-#' fall back on \code{nortest::ad.test} when available.
-#'
-#' @param x Numeric vector.
-#' @param dist Distribution name.
-#' @export
-anderson_darling <- function(x, dist = "norm") {
-  x <- .stat_validate(x)
-  stat <- NA_real_
-  p <- NA_real_
-  if (dist == "norm" && requireNamespace("nortest", quietly = TRUE)) {
-    res <- nortest::ad.test(x)
-    stat <- unname(res$statistic)
-    p <- res$p.value
-  } else {
-    # Compute statistic manually for normal; p approximate
-    n <- length(x)
-    z <- (sort(x) - mean(x)) / sd(x)
-    i <- seq_len(n)
-    A2 <- -n - mean((2 * i - 1) * (stats::pnorm(z, log.p = TRUE) +
-        stats::pnorm(z[n + 1 - i], lower.tail = FALSE, log.p = TRUE)))
-    stat <- A2
-  }
-  .stat_result(
-    method = sprintf("Anderson-Darling test (%s)", dist),
-    test_statistic = stat, p_value = p, n = length(x)
-  )
-}
-
 #' Levene's test for equality of variances
 #' @param ... Two or more numeric vectors.
 #' @param center One of "median" (Brown-Forsythe), "mean", "trimmed".
@@ -810,19 +759,6 @@ runs_test <- function(x, cutoff = NULL) {
 # NORMALITY TESTS
 # ===================================================================
 
-#' Shapiro-Wilk test for normality
-#' @param x Numeric vector (n <= 5000).
-#' @export
-shapiro_wilk <- function(x) {
-  x <- .stat_validate(x)
-  sw <- stats::shapiro.test(x)
-  .stat_result(
-    method = "Shapiro-Wilk test",
-    test_statistic = unname(sw$statistic),
-    p_value = sw$p.value, n = length(x)
-  )
-}
-
 #' D'Agostino-Pearson omnibus normality test
 #'
 #' API stub: implemented via the K2 statistic = Z(skew)^2 + Z(kurt)^2
@@ -861,26 +797,6 @@ dagostino_pearson <- function(x) {
   .stat_result(
     method = "D'Agostino-Pearson test",
     test_statistic = K2, p_value = p, df = 2, n = n
-  )
-}
-
-#' Jarque-Bera test for normality
-#' @param x Numeric vector.
-#' @export
-jarque_bera <- function(x) {
-  x <- .stat_validate(x)
-  n <- length(x)
-  m <- mean(x)
-  s <- sd(x)
-  if (s == 0)
-    return(.stat_result("Jarque-Bera test", 0, 1, df = 2, n = n))
-  skew <- mean((x - m)^3) / s^3
-  kurt <- mean((x - m)^4) / s^4 - 3
-  jb <- n / 6 * (skew^2 + kurt^2 / 4)
-  p <- 1 - stats::pchisq(jb, df = 2)
-  .stat_result(
-    method = "Jarque-Bera test",
-    test_statistic = jb, p_value = p, df = 2, n = n
   )
 }
 
@@ -1023,34 +939,6 @@ cohens_kappa <- function(rater1, rater2, confidence = 0.95) {
   )
 }
 
-#' Fleiss' kappa for multiple raters
-#' @param ratings_matrix Matrix; rows = subjects, cols = categories,
-#'   cells = number of raters assigning subject i to category j.
-#' @export
-fleiss_kappa <- function(ratings_matrix) {
-  tab <- as.matrix(ratings_matrix)
-  n <- nrow(tab)
-  k <- ncol(tab)
-  N_raters <- sum(tab[1, ])
-  p_j <- colSums(tab) / (n * N_raters)
-  P_i <- (rowSums(tab^2) - N_raters) / (N_raters * (N_raters - 1))
-  P_bar <- mean(P_i)
-  P_e <- sum(p_j^2)
-  kap <- if ((1 - P_e) > 0) (P_bar - P_e) / (1 - P_e) else 0
-  se_num <- 2 / (n * N_raters * (N_raters - 1))
-  se_term <- sum(p_j * (1 - p_j))^2
-  denom <- (1 - P_e)^2
-  se <- if (denom > 0) sqrt(se_num * (se_term / denom)) else 0
-  z <- if (se > 0) kap / se else 0
-  p_val <- 2 * stats::pnorm(-abs(z))
-  .stat_result(
-    method = "Fleiss' kappa",
-    test_statistic = z, p_value = p_val,
-    effect_size = kap, estimate = kap, n = n,
-    extra = list(n_raters = N_raters, n_categories = k)
-  )
-}
-
 #' Intraclass correlation coefficient (Shrout & Fleiss 1979)
 #' @param data Long-format data frame.
 #' @param targets Subject ID column.
@@ -1109,16 +997,44 @@ intraclass_correlation <- function(data, targets, raters, ratings,
 # ===================================================================
 
 #' Run a suite of normality tests
+#'
+#' Internal Shapiro-Wilk and Jarque-Bera helpers were removed in v0.9.6;
+#' the suite now calls \code{stats::shapiro.test} directly and computes
+#' the Jarque-Bera statistic inline. Users wanting a stand-alone
+#' Jarque-Bera test should call \code{tseries::jarque.bera.test}.
+#'
 #' @param x Numeric vector.
 #' @return A list of \code{morie_test_result}.
 #' @export
 normality_suite <- function(x) {
   x <- .stat_validate(x)
   out <- list()
-  if (length(x) >= 3L && length(x) <= 5000L)
-    out <- c(out, list(shapiro_wilk(x)))
+  if (length(x) >= 3L && length(x) <= 5000L) {
+    sw <- stats::shapiro.test(x)
+    out <- c(out, list(.stat_result(
+      method = "Shapiro-Wilk test",
+      test_statistic = unname(sw$statistic),
+      p_value = sw$p.value, n = length(x)
+    )))
+  }
   if (length(x) >= 20L) out <- c(out, list(dagostino_pearson(x)))
-  out <- c(out, list(jarque_bera(x)), list(lilliefors_test(x)))
+  # Jarque-Bera inlined (was jarque_bera()).
+  n <- length(x)
+  m <- mean(x)
+  s <- sd(x)
+  if (s == 0) {
+    jb_res <- .stat_result("Jarque-Bera test", 0, 1, df = 2, n = n)
+  } else {
+    skew <- mean((x - m)^3) / s^3
+    kurt <- mean((x - m)^4) / s^4 - 3
+    jb <- n / 6 * (skew^2 + kurt^2 / 4)
+    p <- 1 - stats::pchisq(jb, df = 2)
+    jb_res <- .stat_result(
+      method = "Jarque-Bera test",
+      test_statistic = jb, p_value = p, df = 2, n = n
+    )
+  }
+  out <- c(out, list(jb_res), list(lilliefors_test(x)))
   out
 }
 

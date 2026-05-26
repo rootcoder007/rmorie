@@ -9,7 +9,7 @@ morie_crypto_keystore_store(
   pk,
   sk,
   password,
-  path = .MORIE_KEYSTORE_DEFAULT_PATH
+  path = .morie_keystore_default_path()
 )
 }
 \arguments{

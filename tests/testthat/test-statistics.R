@@ -106,12 +106,6 @@ test_that("repeated_measures_anova runs on long-format synthetic", {
   expect_equal(res$df, 2)
 })
 
-test_that("kruskal_wallis returns Kruskal-Wallis test result", {
-  set.seed(1)
-  res <- kruskal_wallis(rnorm(20), rnorm(20, mean = 1), rnorm(20, mean = 2))
-  expect_s3_class(res, "morie_test_result")
-  expect_equal(res$df, 2)
-})
 
 test_that("friedman_test rejects unequal lengths", {
   expect_error(friedman_test(1:5, 1:6, 1:5))
@@ -253,12 +247,6 @@ test_that("ks_test_two_sample runs", {
   expect_true(is.finite(res$test_statistic))
 })
 
-test_that("anderson_darling normal-branch returns finite statistic", {
-  set.seed(1)
-  res <- anderson_darling(rnorm(60))
-  expect_true(is.finite(res$test_statistic))
-})
-
 test_that("levene_test variants 'mean' / 'median' / 'trimmed'", {
   set.seed(1)
   for (c in c("mean", "median", "trimmed")) {
@@ -288,12 +276,6 @@ test_that("runs_test runs on numeric input with default cutoff", {
 # Normality
 # ---------------------------------------------------------------------------
 
-test_that("shapiro_wilk runs on n <= 5000", {
-  set.seed(1)
-  res <- shapiro_wilk(rnorm(100))
-  expect_s3_class(res, "morie_test_result")
-})
-
 test_that("dagostino_pearson degrades when n < 8", {
   res <- dagostino_pearson(rnorm(5))
   expect_true(is.na(res$test_statistic) || is.na(res$p_value))
@@ -302,17 +284,6 @@ test_that("dagostino_pearson degrades when n < 8", {
 test_that("dagostino_pearson runs on n >= 20", {
   set.seed(1)
   res <- dagostino_pearson(rnorm(60))
-  expect_true(is.finite(res$test_statistic))
-})
-
-test_that("jarque_bera degenerate input has p=1", {
-  res <- jarque_bera(rep(5, 30))
-  expect_equal(res$p_value, 1)
-})
-
-test_that("jarque_bera detects highly non-normal", {
-  set.seed(1)
-  res <- jarque_bera(rexp(200))
   expect_true(is.finite(res$test_statistic))
 })
 
@@ -360,17 +331,6 @@ test_that("cohens_kappa returns kappa estimate", {
   r2 <- ifelse(runif(60) > 0.2, r1, sample(c("a", "b", "c"), 60, replace = TRUE))
   res <- cohens_kappa(r1, r2)
   expect_true(is.finite(res$estimate))
-})
-
-test_that("fleiss_kappa runs on a ratings matrix", {
-  set.seed(1)
-  mat <- matrix(0, nrow = 20, ncol = 3)
-  for (i in seq_len(20)) {
-    pick <- sample.int(3, 5, replace = TRUE)
-    for (k in pick) mat[i, k] <- mat[i, k] + 1
-  }
-  res <- fleiss_kappa(mat)
-  expect_s3_class(res, "morie_test_result")
 })
 
 test_that("intraclass_correlation supports several types", {

@@ -483,31 +483,6 @@ test_that("estimate_ate_gcomputation recovers tau", {
 # 10. effect_sizes.R -- Cohen's d, Hedges' g, Glass's delta, odds ratio
 # ---------------------------------------------------------------------------
 
-test_that("cohens_d recovers known effect d = 1.0", {
-  set.seed(81L)
-  x <- rnorm(5000, mean = 1.0, sd = 1.0)
-  y <- rnorm(5000, mean = 0.0, sd = 1.0)
-  res <- cohens_d(x, y)
-  expect_true(is.list(res))
-  expect_equal(as.numeric(res$estimate), 1.0, tolerance = 0.05)
-  # CI brackets truth
-  expect_lt(res$ci_lower, 1.0)
-  expect_gt(res$ci_upper, 1.0)
-})
-
-test_that("hedges_g approx d with small-sample correction", {
-  set.seed(82L)
-  x <- rnorm(50, mean = 0.5, sd = 1.0)
-  y <- rnorm(50, mean = 0.0, sd = 1.0)
-  d_res <- cohens_d(x, y)
-  g_res <- hedges_g(x, y)
-  # Hedges' g must be in magnitude <= |Cohen's d| (J <= 1)
-  expect_lte(abs(g_res$estimate), abs(d_res$estimate) + 1e-12)
-  # Correction factor near 1 for moderate n
-  J <- g_res$extra$correction_factor
-  expect_true(J > 0.95 && J < 1.0)
-})
-
 test_that("glass_delta uses control SD denominator", {
   set.seed(83L)
   # Control = y, sd_y = 2; sd_x = 0.5 -> Cohen's d would be ~ (1-0)/sqrt(mean(0.5^2,2^2)/2)

@@ -4,7 +4,11 @@
 \alias{morie_crypto_keystore_load}
 \title{Load a key pair from the morie keystore}
 \usage{
-morie_crypto_keystore_load(name, password, path = .MORIE_KEYSTORE_DEFAULT_PATH)
+morie_crypto_keystore_load(
+  name,
+  password,
+  path = .morie_keystore_default_path()
+)
 }
 \arguments{
 \item{name}{Identifier.}
