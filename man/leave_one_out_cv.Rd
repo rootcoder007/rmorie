@@ -11,13 +11,20 @@ leave_one_out_cv(X, y, model_fn, score_fn)
 
 \item{y}{Numeric or factor outcome vector aligned with rows of \code{X}.}
 
-\item{model_fn}{Function \verb{(X, y) -> fitted-model} used on each training fold.}
+\item{model_fn}{Function \verb{(X, y) -> fitted-model} used on each
+training fold.}
 
-\item{score_fn}{Function \verb{(y_true, y_pred) -> numeric} returning a single performance metric.}
+\item{score_fn}{Function \verb{(y_true, y_pred) -> numeric} returning a
+single performance metric.}
 }
 \value{
 A \code{morie_cv_result}.
 }
 \description{
-Leave-one-out cross-validation
+Convenience wrapper that calls \code{.boot_cross_validate()}
+with \code{n_folds = length(y)}. \code{rsample::loo_cv} is the
+tidymodels equivalent (cross-referenced).
+}
+\seealso{
+\code{rsample::loo_cv}, \code{caret::trainControl}.
 }

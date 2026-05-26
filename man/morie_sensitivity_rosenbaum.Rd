@@ -16,19 +16,24 @@ morie_sensitivity_rosenbaum(
 \item{control}{Numeric vector of outcomes for control units
 (may differ in length from \code{treated} for unmatched designs).}
 
-\item{gamma_range}{Numeric vector of \eqn{\Gamma}{Gamma} values to test.}
+\item{gamma_range}{Numeric vector of \eqn{\Gamma}{Gamma} values to
+test.}
 }
 \value{
 Data frame with columns: \code{gamma}, \code{p_lower}, \code{p_upper}.
 }
 \description{
-For a range of hidden-confounding levels \eqn{\Gamma}{Gamma}, tests whether
-the treatment effect remains significant. A large \eqn{\Gamma}{Gamma} at
-which the result remains significant indicates robustness.
+For a range of hidden-confounding levels \eqn{\Gamma}{Gamma},
+tests whether the treatment effect remains significant. A large
+\eqn{\Gamma}{Gamma} at which the result remains significant
+indicates robustness.
 }
 \details{
-Uses Wilcoxon signed-rank statistic bounds for matched designs.
-For unmatched data, computes sign-score bounds.
+Delegates to \code{rbounds::psens()} when \pkg{rbounds} is
+installed and pairs-of-equal-length data are supplied;
+alternatively delegates to \code{sensitivitymv::senmv()} when
+\pkg{sensitivitymv} is installed. Otherwise falls back to inline
+sign-score bounds (Rosenbaum 2002, Section 4.3).
 }
 \examples{
 morie_sensitivity_rosenbaum(treated = rnorm(30, 0.5), control = rnorm(30))

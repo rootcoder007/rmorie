@@ -19,9 +19,11 @@ repeated_cv(
 
 \item{y}{Numeric or factor outcome vector aligned with rows of \code{X}.}
 
-\item{model_fn}{Function \verb{(X, y) -> fitted-model} used on each training fold.}
+\item{model_fn}{Function \verb{(X, y) -> fitted-model} used on each
+training fold.}
 
-\item{score_fn}{Function \verb{(y_true, y_pred) -> numeric} returning a single performance metric.}
+\item{score_fn}{Function \verb{(y_true, y_pred) -> numeric} returning a
+single performance metric.}
 
 \item{n_folds}{Integer; number of folds per repeat (default 10).}
 
@@ -33,5 +35,12 @@ repeated_cv(
 A \code{morie_cv_result} pooling scores across repeats.
 }
 \description{
-Repeated K-fold cross-validation
+Repeats \code{.boot_cross_validate()} \code{n_repeats} times
+with different RNG seeds and pools the per-fold scores.
+\code{caret::trainControl(method = "repeatedcv")} and
+\code{rsample::vfold_cv} both implement the same partitioning
+(cross-referenced).
+}
+\seealso{
+\code{caret::trainControl}, \code{rsample::vfold_cv}.
 }

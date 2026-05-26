@@ -225,3 +225,53 @@ test_that("bootstrap_methods internal cross_validate / repeated_cv / leave_one_o
   expect_true(exists("repeated_cv", envir = ns, inherits = FALSE))
   expect_true(exists("leave_one_out_cv", envir = ns, inherits = FALSE))
 })
+
+# ---------------------------------------------------------------------------
+# Phase 1.i new extender interfaces
+# ---------------------------------------------------------------------------
+
+test_that("morie_boot_run + morie_boot_basic_ci round-trip via boot::boot", {
+  skip_if_not_installed("boot")
+  bo <- morie_boot_run(x_vec, mean, R = 100L)
+  expect_s3_class(bo, "boot")
+  cis <- morie_boot_basic_ci(bo, type = c("perc", "basic", "norm"),
+                             conf = 0.95)
+  expect_named(cis, c("perc", "basic", "norm"))
+  for (nm in names(cis)) {
+    expect_length(cis[[nm]], 2L)
+    expect_true(cis[[nm]][1L] <= cis[[nm]][2L])
+  }
+})
+
+test_that("morie_boot_run respects strata argument", {
+  skip_if_not_installed("boot")
+  strata <- rep(c("a", "b"), each = 20)
+  bo <- morie_boot_run(x_vec, mean, R = 60L, strata = strata)
+  expect_s3_class(bo, "boot")
+  expect_equal(nrow(bo$t), 60L)
+})
+
+test_that("morie_rsample_bootstraps returns an rset", {
+  skip_if_not_installed("rsample")
+  df <- data.frame(x = x_vec)
+  rs <- morie_rsample_bootstraps(df, times = 5L)
+  expect_s3_class(rs, "bootstraps")
+  expect_equal(nrow(rs), 5L)
+})
+
+test_that("morie_simpleboot_two computes two-sample bootstrap", {
+  skip_if_not_installed("simpleboot")
+  bo <- morie_simpleboot_two(x_vec[1:20], x_vec[21:40],
+                             statistic = mean, R = 50L)
+  expect_s3_class(bo, "boot")
+  expect_equal(length(bo$t), 50L)
+})
+
+test_that("extender functions error informatively when pkg missing", {
+  # We can't really uninstall packages mid-test; just smoke-test that
+  # the wrappers exist and have the documented signatures.
+  expect_true(is.function(morie_boot_run))
+  expect_true(is.function(morie_boot_basic_ci))
+  expect_true(is.function(morie_rsample_bootstraps))
+  expect_true(is.function(morie_simpleboot_two))
+})

@@ -76,6 +76,220 @@ DESCRIPTION: adds `tipr`, `sensemakr`, `konfound` to Suggests.
 Tests: `tests/testthat/test-sensitivity.R` extended with eight new
 test_that() blocks (one happy path + one missing-package error path
 per new extender, all gated by `skip_if_not_installed`).
+## R/causal.R rewrite + new causal extenders
+
+The causal-inference subsystem (~876 LOC) has been thin-wrapped over
+the canonical CRAN causal-inference packages while preserving every
+inline math fallback for CRAN-only installs (dual-arm pattern).
+
+* `morie_estimate_propensity_scores()` delegates to
+  `WeightIt::weightit(method = "glm", estimand = "ATE")` when
+  available; falls back to `stats::glm(family = binomial())`.
+* `morie_estimate_ate()` / `morie_estimate_att()` /
+  `morie_estimate_atc()` inherit the WeightIt delegation through
+  the propensity-score helper; Hajek difference and
+  influence-function SE remain inline to preserve the closed-form
+  result shape.
+* `morie_estimate_aipw()` keeps the AIPW score inline; the propensity
+  arm picks up WeightIt automatically. Rd cross-references `AIPW::AIPW`
+  as the canonical SuperLearner-based alternative.
+* `morie_estimate_g_computation()` delegates the standardisation step
+  to `stdReg::stdGlm()` when available; falls back to the inline
+  `glm()` + treatment-flipped counterfactual contrast.
+* `morie_estimate_late()` already used `ivreg::ivreg()`; now also
+  recognises `AER::ivreg()` as a second delegation arm, falling back
+  to manual 2SLS otherwise.
+* `morie_estimate_double_ml()` / `morie_estimate_irm()` continue to
+  delegate to `DoubleML::DoubleMLPLR` / `DoubleMLIRM` when available;
+  fall back to the cross-fit ridge implementation.
+* `morie_e_value()` delegates to `EValue::evalue()` when available;
+  falls back to the inline closed-form RR -> E-value formula.
+* `morie_sensitivity_rosenbaum()` delegates to `rbounds::psens()`
+  when available; falls back to the inline sign-score bound.
+
+Four new extender functions are introduced for CRAN dependencies
+that previously had no `morie_*` entry point:
+
+* `morie_causal_impact(data, pre_period, post_period, model_args)` ->
+  `CausalImpact::CausalImpact()` (Brodersen et al. 2015 Bayesian
+  structural time-series intervention analysis).
+* `morie_causal_weighting(data, treatment, covariates, method,
+  estimand, ...)` -> `WeightIt::weightit()` (full method palette:
+  glm / cbps / ebal / ps / energy / optweight).
+* `morie_causal_robust_se(model, type, cluster, ...)` ->
+  `sandwich::vcovHC()` / `vcovHAC()` / `vcovCL()` (HC0-HC5, HAC,
+  one-way cluster-robust variance).
+* `morie_causal_mediation(y, d, m, x, trim, boot, ...)` ->
+  `causalweight::medweight()` (semiparametric IPW direct / indirect
+  effect decomposition).
+
+The four extenders hard-error on missing packages (no inline
+fallback) since each upstream implementation is too large to
+re-implement compactly. New tests live in
+`tests/testthat/test-causal-extenders.R` and are guarded with
+`skip_if_not_installed()`.
+
+DESCRIPTION Suggests now lists `AIPW`, `CausalImpact`,
+`causalweight`, `rbounds`, `sensitivitymv`, and `stdReg` so the
+extenders and the delegation arms can find their upstream packages
+when available.
+
+## R/bootstrap_methods.R rewrite - delegate to boot / bootstrap / resample / rsample / simpleboot / coin / ipred / sandwich
+
+The bootstrap / resampling subsystem (~867 LOC) has been re-routed
+through the canonical CRAN packages while preserving the rmorie API
+and the `morie_bootstrap_result` / `morie_jackknife_result` /
+`morie_permutation_test_result` / `morie_cv_result` S3 return
+shapes so that `stat_commands`, the `print` methods, and MRM
+analyses keep working unchanged.
+
+Thin-wrapped (with `requireNamespace`-guarded delegation arm + inline
+fallback so the wrapper keeps working on minimal installs):
+
+* `bootstrap()` -- nonparametric bootstrap now delegates to
+  `boot::boot` (stratification via `strata=`) and `boot::boot.ci`
+  for `percentile / basic / normal / bca` CIs. The `studentized`
+  CI path and the `cluster` resampling path remain inline because
+  `boot::boot.ci(type = "stud")` requires a precomputed variance
+  estimator and `boot::boot` does not expose
+  cluster-of-clusters resampling for the rmorie
+  `statistic(data) -> scalar` signature.
+* `parametric_bootstrap()` -- delegates to
+  `boot::boot(sim = "parametric")` with an MLE / ran.gen pair built
+  from the requested distribution.
+* `block_bootstrap()` -- moving / stationary blocks delegate to
+  `boot::tsboot(sim = "fixed" / "geom")`; the circular-block path
+  stays inline because `boot::tsboot` does not expose a circular sim
+  mode.
+* `jackknife()` -- delegates to `bootstrap::jackknife` when
+  installed (rmorie reconstructs pseudovalues / influence values
+  around the returned `jack.values`).
+* `permutation_test()` / `paired_permutation_test()` -- inline
+  shuffle loops retained (the rmorie API returns the full null
+  distribution which downstream MRM code consumes); `coin`'s
+  `oneway_test(distribution = "approximate")` and
+  `symmetry_test(distribution = "approximate")` are cross-referenced
+  as the canonical CRAN equivalents.
+* `bootstrap_632()` -- inline `.632 / .632+` retained because the
+  rmorie API takes naked `model_fn` / `score_fn` callables;
+  `ipred::errorest(estimator = "632plus")` is cross-referenced.
+* `repeated_cv()` / `leave_one_out_cv()` -- delegate to
+  `rsample::vfold_cv` for fold construction when no stratification
+  or grouping is requested; `caret::trainControl` and
+  `rsample::loo_cv` cross-referenced.
+
+Kept as in-house implementations (no clean CRAN drop-in for the
+rmorie API):
+
+* `subsampling()` -- Politis-Romano-Wolf rate scaling over a
+  user-supplied `statistic(data)`; `np::npsubsample` is closest
+  but is kernel-specific.
+* `delete_d_jackknife()` -- generalised jackknife with custom
+  `max_subsets` enumeration cap; `resample::jackknife` is
+  cross-referenced.
+* `wild_bootstrap()` -- returns the full resampled coefficient
+  distribution; `sandwich::vcovBS` (variance only) and
+  `fwildclusterboot::boottest` (p-value only) cross-referenced.
+
+Added four new extender entry points (thin pass-through to the
+canonical packages):
+
+* `morie_boot_run(data, statistic, R, strata, ...)` -- direct
+  `boot::boot` bridge with rmorie-style `statistic(data) -> scalar`
+  adapter.
+* `morie_boot_basic_ci(boot_obj, type, conf)` -- direct
+  `boot::boot.ci` bridge returning tidy
+  `list(perc = c(lo, hi), bca = c(lo, hi), ...)`.
+* `morie_rsample_bootstraps(data, times, ...)` -- direct
+  `rsample::bootstraps` bridge returning an `rset`.
+* `morie_simpleboot_two(x, y, statistic, R, ...)` -- direct
+  `simpleboot::two.boot` bridge for two-sample bootstrap of a
+  scalar statistic.
+
+DESCRIPTION: adds `boot`, `bootstrap`, `coin`, `ipred`, `resample`,
+`rsample`, `simpleboot` to Suggests (`sandwich` was already
+present).
+
+Function inventory is preserved: 11 prior exports kept
+(`bootstrap`, `parametric_bootstrap`, `wild_bootstrap`,
+`block_bootstrap`, `jackknife`, `delete_d_jackknife`,
+`permutation_test`, `paired_permutation_test`, `subsampling`,
+`bootstrap_632`, `repeated_cv`, `leave_one_out_cv`) plus 4 new
+(`morie_boot_run`, `morie_boot_basic_ci`,
+`morie_rsample_bootstraps`, `morie_simpleboot_two`). All 20 (15
+prior + 5 new) `tests/testthat/test-bootstrap_methods.R`
+test_that blocks pass (73 expectations, 2 conditional skips when
+`rsample` or `simpleboot` is not installed).
+
+## R/effects.R rewrite - thin-wrap over emmeans / marginaleffects / broom / stdReg / rbounds / EValue (phase 1.j)
+
+The treatment-effect / marginal-effects module has been thin-wrapped
+around its canonical CRAN extender packages and gained a new family
+of `morie_effects_*` wrappers over Vincent Arel-Bundock's
+`marginaleffects` API plus the `emmeans` and `broom` ecosystems.
+
+Thin-wrapped (existing API preserved; `requireNamespace`-guarded
+delegation arm + inline fallback so the wrapper keeps working on
+CRAN-only installs):
+
+* `estimate_ate()` -- guarded HC3 SE via `sandwich::vcovHC` +
+  `lmtest::coeftest`; falls back to naive model SE with a warning.
+* `estimate_plr()`, `estimate_pliv()` -- already DoubleML-aware;
+  retained as is with style cleanups (snake-case locals,
+  `stats::qnorm` / `stats::pnorm` qualification, brace style).
+* `estimate_ate_gcomputation()` -- delegates to `stdReg::stdGlm()`
+  for the canonical regression-standardisation backend (analytic
+  SE on the contrast scale, no bootstrap needed); falls back to
+  the legacy inline bootstrap implementation when `stdReg` is
+  absent.
+* `sensitivity_rosenbaum()` -- delegates to `rbounds::psens()` when
+  `rbounds` is installed and the matched-pair count is sufficient;
+  falls back to the inline normal-approximation Wilcoxon
+  signed-rank bounds otherwise.
+* `e_value()` -- delegates to `EValue::evalues.OLS()` when both
+  `EValue` is installed AND the caller supplies an outcome
+  standard deviation via the new `sd_y` argument; falls back to
+  the closed-form continuous-scale RR proxy so the Python and R
+  ports stay numerically aligned by default.
+
+New extender wrappers (each a thin pass-through; the underlying
+package's native object is returned verbatim so downstream code
+keeps working with the canonical API):
+
+* `morie_effects_emmeans(model, specs, ...)` ->
+  `emmeans::emmeans()`. Use `emmeans::pairs()` /
+  `emmeans::contrast()` on the returned `emmGrid` for pairwise or
+  custom contrasts.
+* `morie_effects_predictions(model, newdata, ...)` ->
+  `marginaleffects::predictions()`.
+* `morie_effects_comparisons(model, variables, ...)` ->
+  `marginaleffects::comparisons()`.
+* `morie_effects_slopes(model, variables, ...)` ->
+  `marginaleffects::slopes()`.
+* `morie_effects_tidy(model, ...)` -> `broom::tidy()` (with a
+  `summary()`-based fallback frame for the `lm` / `glm` classes
+  rmorie's MRM pipeline ships, so downstream tidy callers work
+  even on minimal-Suggests CI runs).
+
+The `effects` and `margins` packages are added to Suggests for
+the cross-reference path -- users who want Fox's `effect()` /
+`predictorEffects()` or Leeper's Stata-style `margins::margins()`
+can call them directly on a model fitted via rmorie, without an
+intervening wrapper.
+
+DESCRIPTION: adds `broom`, `effects`, `emmeans`, `marginaleffects`,
+`margins`, `performance`, `rbounds`, `stdReg` to Suggests.
+
+Net: `R/effects.R` grows from 461 to ~640 LOC because the legacy
+treatment-effect functions now carry both a CRAN-delegation arm
+AND an inline fallback (CRAN policy does not allow Suggests to be
+hard required), plus 5 new extender wrappers + 1 shared helper.
+All 6 legacy exports preserved (`estimate_ate`, `estimate_plr`,
+`estimate_pliv`, `estimate_ate_gcomputation`,
+`sensitivity_rosenbaum`, `e_value`); 5 new exports added
+(`morie_effects_emmeans`, `morie_effects_predictions`,
+`morie_effects_comparisons`, `morie_effects_slopes`,
+`morie_effects_tidy`).
 
 ## R/multiple_testing.R rewrite - delegate to poolr / qvalue / harmonicmeanp / gMCP / mutoss
 

@@ -30,5 +30,12 @@ delete_d_jackknife(
 A \code{morie_jackknife_result}.
 }
 \description{
-Delete-d (generalised) jackknife
+Generalised jackknife removing \code{d} observations per replicate;
+all subsets are enumerated when \eqn{C(n, d) \le} \code{max_subsets}
+and Monte-Carlo sampled otherwise. \pkg{resample} exposes the
+equivalent generalised jackknife API via \code{resample::jackknife}
+(cross-referenced).
+}
+\seealso{
+\code{resample::jackknife}.
 }

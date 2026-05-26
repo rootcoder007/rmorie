@@ -25,9 +25,11 @@ morie_estimate_gate(
 
 \item{group_col}{Name of the grouping variable (e.g. \code{"gender"}).}
 
-\item{propensity_col}{Optional: name of a pre-computed propensity score column.}
+\item{propensity_col}{Optional: name of a pre-computed propensity
+score column.}
 
-\item{outcome_model}{Family for the outcome model: \code{"linear"} or \code{"logistic"}.}
+\item{outcome_model}{Family for the outcome model: \code{"linear"} or
+\code{"logistic"}.}
 }
 \value{
 Data frame with columns: \code{group}, \code{ate}, \code{se},

@@ -43,13 +43,13 @@ A list with components: \code{ate}, \code{se}, \code{ci_lower}, \code{ci_upper},
 \code{n}, \code{method} (\code{"IRM (DoubleML)"}).
 }
 \description{
-Implements the IRM variant of Chernozhukov et al. (2018) double machine
-learning, which allows treatment-effect heterogeneity by fitting separate
-outcome regressions for \eqn{T=0} and \eqn{T=1} alongside a propensity
-model. Uses \code{DoubleML::DoubleMLIRM} when available; otherwise falls
-back to a hand-rolled cross-fit estimator using logistic regression for
-the propensity score and ridge regression for the conditional outcome
-regressions.
+Implements the IRM variant of Chernozhukov et al. (2018) double
+machine learning, which allows treatment-effect heterogeneity by
+fitting separate outcome regressions for \eqn{T=0} and \eqn{T=1}
+alongside a propensity model. Uses \code{DoubleML::DoubleMLIRM}
+when available; otherwise falls back to a hand-rolled cross-fit
+estimator using logistic regression for the propensity score and
+ridge regression for the conditional outcome regressions.
 
 Thin R wrapper that dispatches to the CRAN \code{DoubleML} package's
 \code{DoubleML::DoubleMLIRM} \link[R6]{R6Class}, mirroring the Python sibling
@@ -104,10 +104,10 @@ if (requireNamespace("DoubleML", quietly = TRUE) &&
 }
 }
 \references{
-Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo, E., Hansen, C.,
-Newey, W., & Robins, J. (2018). Double/debiased machine learning for
-treatment and structural parameters. \emph{The Econometrics Journal},
-21(1), C1--C68.
+Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo, E.,
+Hansen, C., Newey, W., & Robins, J. (2018). Double/debiased
+machine learning for treatment and structural parameters.
+\emph{The Econometrics Journal}, 21(1), C1--C68.
 
 Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo, E., Hansen, C.,
 Newey, W., & Robins, J. (2018). Double/debiased machine learning for

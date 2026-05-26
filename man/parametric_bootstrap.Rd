@@ -36,5 +36,10 @@ A \code{morie_bootstrap_result}.
 }
 \description{
 Generates bootstrap samples from a fitted parametric distribution
-rather than from the empirical sample.
+rather than from the empirical sample. Delegates to
+\code{boot::boot(sim = "parametric")} when \pkg{boot} is installed;
+otherwise uses an inline \code{rnorm/rpois/rbinom/rexp/rgamma} loop.
+}
+\seealso{
+\code{boot::boot}.
 }
