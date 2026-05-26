@@ -27,8 +27,7 @@ A subset of \code{data} on common support.
 }
 \description{
 Drops units whose propensity score falls outside the overlap region
-of treated and control units.  Mirrors Python
-\code{morie.matching.common_support}.
+of treated and control units.
 }
 \examples{
 \dontrun{

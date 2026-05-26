@@ -13,19 +13,17 @@ morie_matching_full(data, treatment, covariates, ps = NULL, n_subclasses = 10L)
 
 \item{covariates}{Character vector of covariates.}
 
-\item{ps}{Optional pre-computed propensity scores.}
+\item{ps}{Optional pre-computed propensity scores (ignored; retained
+for back-compat).}
 
-\item{n_subclasses}{Number of propensity-score strata for the fallback.}
+\item{n_subclasses}{Carried for back-compat (ignored under MatchIt).}
 }
 \value{
-A list of class \code{morie_match_result}; \code{matched_data}
-contains a \code{._full_weight} column.
+A list of class \code{morie_match_result}.
 }
 \description{
-Places every unit into a subclass containing at least one treated and one
-control unit.  Delegates to \pkg{MatchIt}'s \code{method = "full"}
-(which calls \pkg{optmatch}) when available; otherwise approximates
-via quantile-based stratification of the propensity score.
+Thin wrapper around \code{MatchIt::matchit(method = "full")}, which
+calls \pkg{optmatch}.
 }
 \examples{
 \dontrun{

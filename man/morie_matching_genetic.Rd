@@ -21,7 +21,8 @@ morie_matching_genetic(
 
 \item{covariates}{Character vector of covariates.}
 
-\item{n_neighbors}{Number of matches per treated unit.}
+\item{n_neighbors}{Number of matches per treated unit
+(\code{M} in \pkg{Matching}).}
 
 \item{pop_size}{Genetic-algorithm population size (default 50).}
 
@@ -33,10 +34,10 @@ morie_matching_genetic(
 A list of class \code{morie_match_result}.
 }
 \description{
-Uses a genetic algorithm to find weights for Mahalanobis distance
-matching that maximise covariate balance.  Delegates to
-\pkg{Matching::GenMatch} + \pkg{Matching::Match} when available;
-otherwise runs a base-R genetic algorithm.
+Thin wrapper around \code{Matching::GenMatch} + \code{Matching::Match}
+that returns a \code{morie_match_result}.  Uses a genetic algorithm
+to find covariate weights for Mahalanobis distance matching that
+maximise covariate balance.
 }
 \examples{
 \dontrun{

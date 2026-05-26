@@ -25,14 +25,16 @@ morie_matching_variable_ratio(
 
 \item{caliper}{Caliper on the propensity score (in SD units).}
 
-\item{ps}{Optional pre-computed propensity scores.}
+\item{ps}{Optional pre-computed propensity scores (ignored; retained
+for back-compat).}
 }
 \value{
 A list of class \code{morie_match_result}.
 }
 \description{
-Matches each treated unit to between \code{min_ratio} and
-\code{max_ratio} controls within a caliper.
+Thin wrapper around \code{MatchIt::matchit(method = "nearest",
+ratio = max_ratio, min.controls = min_ratio)} which supports
+variable-ratio nearest-neighbour matching natively.
 }
 \examples{
 \dontrun{

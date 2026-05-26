@@ -29,7 +29,9 @@ A list of class \code{morie_match_result}.
 \description{
 Finds the largest matched sample with maximum absolute SMD below
 \code{balance_threshold}.  Uses an iterative caliper-tightening
-heuristic over \code{morie_matching_nearest_neighbor}.
+heuristic over \code{morie_matching_nearest_neighbor}; for an
+exact mixed-integer-programming alternative see
+\code{\link[designmatch:cardmatch]{designmatch::cardmatch}}.
 }
 \examples{
 \dontrun{

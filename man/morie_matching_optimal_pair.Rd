@@ -21,15 +21,15 @@ morie_matching_optimal_pair(
 
 \item{distance}{One of \code{"propensity"} or \code{"mahalanobis"}.}
 
-\item{ps}{Optional pre-computed propensity scores.}
+\item{ps}{Optional pre-computed propensity scores (ignored; retained
+for back-compat).}
 }
 \value{
 A list of class \code{morie_match_result}.
 }
 \description{
-Optimal 1:1 pair matching that minimises the total within-pair distance.
-Delegates to \pkg{MatchIt}'s \code{method = "optimal"} (which calls
-\pkg{optmatch}); otherwise uses a greedy approximation.
+Thin wrapper around \code{MatchIt::matchit(method = "optimal")}, which
+calls \pkg{optmatch}.
 }
 \examples{
 \dontrun{

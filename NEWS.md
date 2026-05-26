@@ -1,5 +1,50 @@
 # rmorie 0.9.6 (in development)
 
+## R/matching.R rewrite - delegate to MatchIt / cobalt / WeightIt
+
+The matching subsystem (~2,183 LOC) has been rewritten to forward to
+the canonical CRAN packages instead of carrying ~950 LOC of base-R
+fallback code:
+
+* `morie_matching_nearest_neighbor()`, `morie_matching_exact()`,
+  `morie_matching_cem()`, `morie_matching_mahalanobis()`,
+  `morie_matching_optimal_pair()`, `morie_matching_full()`,
+  `morie_matching_subclassify()`, `morie_matching_variable_ratio()`
+  are now thin wrappers over `MatchIt::matchit()` and now hard-error
+  if MatchIt (or its optional `optmatch` back end) is not installed.
+* `morie_matching_genetic()` is a thin wrapper over
+  `Matching::GenMatch()` + `Matching::Match()` and hard-errors if
+  `Matching` is missing.
+* `morie_matching_entropy_balance()` is a thin wrapper over
+  `WeightIt::weightit(method = "ebal")` (or `ebal::ebalance` as a
+  fallback) and hard-errors if neither is installed.
+* `morie_matching_balance()`, `morie_matching_balance_table()`,
+  `morie_matching_love_plot_data()` are kept (they return the
+  `morie_balance_result` shape downstream MRM code consumes) but
+  the Rd cross-references now point users at `cobalt::bal.tab()` /
+  `cobalt::love.plot()` for richer balance reporting.
+* `morie_matching_cardinality()` keeps its iterative-caliper
+  heuristic; the Rd now cross-references
+  `designmatch::cardmatch()` for the exact
+  mixed-integer-programming alternative.
+
+The carceral-domain helpers (`morie_matching_att_matched` /
+`ate_matched` / `atc_matched`, `morie_matching_abadie_imbens_se`,
+`morie_matching_rosenbaum_bounds`, `morie_matching_doubly_robust`,
+`morie_matching_multi_treatment`, `morie_matching_longitudinal`,
+`morie_matching_quality`, `morie_matching_overlap`,
+`morie_matching_estimate_propensity` / `_trim_propensity` /
+`_common_support`) are unchanged - they encode rmorie-specific output
+shapes (`morie_match_result`, `morie_te_result`) that the MRM /
+SIU / OTIS code paths depend on.
+
+Net: `R/matching.R` shrinks from 2,183 to 1,586 LOC (-597, -28%);
+all 27 `morie_matching_*` exports preserved; behaviour-compatible for
+callers that already have `MatchIt` installed (which is the case for
+all matching tests in the rmorie suite).
+
+DESCRIPTION: adds `cobalt`, `designmatch` to Suggests.
+
 ## Breaking - CRAN-equivalent functions removed
 
 To reduce code duplication with established CRAN packages and address

@@ -32,8 +32,7 @@ of the retained rows.
 }
 \description{
 Estimates the probability of treatment via logistic regression or
-gradient boosting on a set of covariates.  Mirrors Python
-\code{morie.matching.estimate_propensity_score}.
+gradient boosting on a set of covariates.
 }
 \examples{
 \dontrun{

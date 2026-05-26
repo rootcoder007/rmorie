@@ -34,9 +34,7 @@ prior to distance matching.}
 A list of class \code{morie_match_result}.
 }
 \description{
-Matches on Mahalanobis distance over the supplied covariates, optionally
-combined with exact matching on discrete variables.  Delegates to
-\pkg{MatchIt} when available.
+Thin wrapper around \code{MatchIt::matchit(distance = "mahalanobis")}.
 }
 \examples{
 \dontrun{

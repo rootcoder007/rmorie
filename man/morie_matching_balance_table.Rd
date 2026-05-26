@@ -20,7 +20,8 @@ A data frame.
 }
 \description{
 Thin wrapper around \code{morie_matching_balance} returning only the
-data-frame component.
+data-frame component.  See \code{\link[cobalt:bal.tab]{cobalt::bal.tab}}
+for an alternative with categorical-variable support.
 }
 \examples{
 \dontrun{

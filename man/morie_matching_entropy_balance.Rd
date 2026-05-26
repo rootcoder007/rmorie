@@ -23,19 +23,19 @@ morie_matching_entropy_balance(
 \item{max_moment}{Highest moment to balance (1 = means, 2 = means + var,
 3 = + skewness).}
 
-\item{max_iter}{Maximum Newton iterations.}
+\item{max_iter}{Maximum Newton iterations (forwarded to \pkg{ebal}).}
 
-\item{tol}{Convergence tolerance on the gradient.}
+\item{tol}{Convergence tolerance (forwarded to \pkg{ebal}).}
 }
 \value{
 A numeric vector of weights aligned to the rows of \code{data}
 after dropping NAs.  Treated units receive weight 1.
 }
 \description{
-Computes weights for the control group so that the weighted moments of
-the covariates match those of the treated group.  Delegates to
-\pkg{WeightIt} (method \code{"ebal"}) or \pkg{ebal} when available;
-otherwise solves the dual problem via base-R Newton iteration.
+Thin wrapper around \code{WeightIt::weightit(method = "ebal")} (or
+\code{ebal::ebalance} if \pkg{WeightIt} is unavailable).  Computes
+weights for the control group so that the weighted moments of the
+covariates match those of the treated group.
 }
 \examples{
 \dontrun{
