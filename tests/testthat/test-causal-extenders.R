@@ -4,7 +4,6 @@ library(testthat)
 #   * morie_causal_impact()    -> CausalImpact
 #   * morie_causal_weighting() -> WeightIt
 #   * morie_causal_robust_se() -> sandwich
-#   * morie_causal_mediation() -> causalweight
 #
 # Every test is guarded with skip_if_not_installed() so the suite stays
 # green on CRAN-only / minimal Suggests installs (per Phase 1.f
@@ -52,19 +51,6 @@ test_that("morie_causal_robust_se hard-errors when sandwich is missing", {
     )
   )
 })
-
-test_that("morie_causal_mediation hard-errors when causalweight is missing", {
-  with_mocked_bindings(
-    .causal_have_causalweight = function() FALSE,
-    .package = "rmorie",
-    code = expect_error(
-      morie_causal_mediation(y = rnorm(20), d = rbinom(20, 1, 0.5),
-                             m = rnorm(20), x = matrix(rnorm(40), 20, 2)),
-      regexp = "causalweight"
-    )
-  )
-})
-
 
 # ---------------------------------------------------------------------------
 # morie_causal_impact -- live CausalImpact integration
@@ -156,26 +142,3 @@ test_that("morie_causal_robust_se type='CL' requires a cluster argument", {
 })
 
 
-# ---------------------------------------------------------------------------
-# morie_causal_mediation -- live causalweight integration
-# ---------------------------------------------------------------------------
-
-test_that("morie_causal_mediation returns the decomposition fields", {
-  skip_if_not_installed("causalweight")
-
-  set.seed(4)
-  n <- 250L
-  x <- matrix(rnorm(n * 2), n, 2)
-  d <- rbinom(n, 1, plogis(0.3 * x[, 1]))
-  m <- 0.5 * d + 0.4 * x[, 1] + rnorm(n)
-  y <- 0.2 * d + 0.6 * m + 0.3 * x[, 2] + rnorm(n)
-
-  res <- morie_causal_mediation(y = y, d = d, m = m, x = x,
-                                trim = 0.05, boot = 50L)
-  expected <- c("total_effect",
-                "direct_effect_treated", "direct_effect_control",
-                "indirect_effect_treated", "indirect_effect_control",
-                "se", "n_dropped", "medweight")
-  expect_true(all(expected %in% names(res)))
-  expect_true(is.numeric(res$total_effect))
-})

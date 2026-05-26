@@ -37,8 +37,6 @@
 #'   ebal / ps / energy / optweight).
 #' * \code{morie_causal_robust_se()} -> \pkg{sandwich}
 #'   (HC0-HC5 / cluster / HAC robust variance matrices).
-#' * \code{morie_causal_mediation()} -> \pkg{causalweight}
-#'   (semiparametric IPW mediation decomposition).
 #'
 #' @name causal
 #' @keywords internal
@@ -75,9 +73,6 @@ NULL
 }
 .causal_have_causalimpact <- function() {
   requireNamespace("CausalImpact", quietly = TRUE)
-}
-.causal_have_causalweight <- function() {
-  requireNamespace("causalweight", quietly = TRUE)
 }
 .causal_have_sandwich     <- function() {
   requireNamespace("sandwich",     quietly = TRUE)
@@ -1317,78 +1312,9 @@ morie_causal_robust_se <- function(model,
 }
 
 
-#' Semiparametric IPW mediation analysis via \pkg{causalweight}
-#'
-#' Thin wrapper around \code{causalweight::medweight()} delivering
-#' the semiparametric inverse-probability-weighting decomposition of
-#' a treatment effect into direct and indirect (through-mediator)
-#' components, with bootstrap inference.
-#'
-#' Hard-errors if \pkg{causalweight} is not installed -- the
-#' two-step IPW + bootstrap machinery has no compact inline
-#' equivalent.
-#'
-#' @param y Numeric outcome vector.
-#' @param d Binary treatment vector (0/1).
-#' @param m Numeric mediator vector (or matrix for multiple
-#'   mediators).
-#' @param x Numeric covariate matrix.
-#' @param trim Trimming threshold for propensity scores (default
-#'   0.05); units with weights yielding extreme propensities are
-#'   dropped.
-#' @param boot Number of bootstrap replications for inference
-#'   (default 100).
-#' @param ... Additional arguments forwarded to
-#'   \code{causalweight::medweight()}.
-#' @return Named list with elements \code{total_effect},
-#'   \code{direct_effect_treated}, \code{direct_effect_control},
-#'   \code{indirect_effect_treated},
-#'   \code{indirect_effect_control}, \code{se} (named numeric
-#'   vector), \code{n_dropped} (units removed by trimming),
-#'   and \code{medweight} (the original object).
-#' @export
-#' @references
-#'   Bodory H, Huber M (2024). The \pkg{causalweight} package for
-#'   causal inference in R.
-morie_causal_mediation <- function(y, d, m, x,
-                                   trim = 0.05, boot = 100L, ...) {
-  if (!.causal_have_causalweight()) {
-    stop(
-      "morie_causal_mediation requires the 'causalweight' package. ",
-      "Install with install.packages('causalweight').",
-      call. = FALSE
-    )
-  }
-  res <- causalweight::medweight(y = y, d = d, m = m, x = x,
-                                 trim = trim, boot = boot, ...)
-  eff <- as.numeric(res$effects)
-  se  <- as.numeric(res$se)
-  nms <- c("total_effect",
-           "direct_effect_treated", "direct_effect_control",
-           "indirect_effect_treated", "indirect_effect_control")
-  # The causalweight effects vector orders effects as
-  # (total, dir.treat, dir.contr, indir.treat, indir.contr); guard
-  # length so we never index out of bounds.
-  pad <- function(v) {
-    out <- rep(NA_real_, length(nms))
-    out[seq_len(min(length(v), length(nms)))] <-
-      v[seq_len(min(length(v), length(nms)))]
-    stats::setNames(out, nms)
-  }
-  named_eff <- pad(eff)
-  named_se  <- pad(se)
-  list(
-    total_effect = unname(named_eff["total_effect"]),
-    direct_effect_treated = unname(named_eff["direct_effect_treated"]),
-    direct_effect_control = unname(named_eff["direct_effect_control"]),
-    indirect_effect_treated = unname(named_eff["indirect_effect_treated"]),
-    indirect_effect_control = unname(named_eff["indirect_effect_control"]),
-    se = named_se,
-    n_dropped = if (!is.null(res$ntrimmed)) {
-      as.integer(res$ntrimmed)
-    } else {
-      NA_integer_
-    },
-    medweight = res
-  )
-}
+# causalweight was archived from CRAN on 2026-05-18 because its
+# dependency LARF was also archived. The morie_causal_mediation
+# wrapper that previously lived here was dropped because the upstream
+# package is no longer available via install.packages(). If
+# causalweight (and LARF) return to CRAN, restore this wrapper from
+# git history (commit 4d78188).

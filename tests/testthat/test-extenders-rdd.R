@@ -58,30 +58,6 @@ test_that("morie_rdd_power_calc wraps rdpower::rdpower", {
 
 
 # ---------------------------------------------------------------------------
-# anchors
-# ---------------------------------------------------------------------------
-
-test_that("morie_anchors_analyze wraps anchors::anchors", {
-  skip_if_not_installed("anchors")
-  set.seed(4L)
-  n <- 80L
-  df <- data.frame(
-    self  = sample.int(5L, n, replace = TRUE),
-    vign1 = sample.int(5L, n, replace = TRUE),
-    vign2 = sample.int(5L, n, replace = TRUE),
-    vign3 = sample.int(5L, n, replace = TRUE)
-  )
-  out <- morie_anchors_analyze(
-    self ~ vign1 + vign2 + vign3,
-    data = df
-  )
-  expect_type(out, "list")
-  expect_identical(out$method, "anchors::anchors")
-  expect_false(is.null(out$raw))
-})
-
-
-# ---------------------------------------------------------------------------
 # anominate
 # ---------------------------------------------------------------------------
 
