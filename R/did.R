@@ -1336,12 +1336,14 @@ morie_did_chaisemartin_dhaultfoeuille <- function(data, outcome, treatment,
                                                   seed = 42L, alpha = 0.05) {
   .morie_did_need("DIDmultiplegt", "morie_did_chaisemartin_dhaultfoeuille")
   set.seed(seed)
-  # Recent DIDmultiplegt requires the `mode` arg with no default. Use
-  # "dyn" (dynamic effects) since that's the canonical de Chaisemartin
-  # / D'Haultfoeuille estimator; callers can pass mode = "old"/"between"/
-  # "within" via `...` if they want a different aggregation.
+  # Recent DIDmultiplegt requires the `mode` arg with no default. The
+  # original CdH (2020) instantaneous-effect estimator lives at
+  # mode = "old", which keeps the historical Y/G/T/D arg names and
+  # `brep` for bootstrap reps. mode = "dyn" dispatches to
+  # did_multiplegt_dyn() which uses lowercase outcome/group/time/
+  # treatment and rejects Y/G/T/D + brep entirely.
   fit <- DIDmultiplegt::did_multiplegt(
-    mode = "dyn",
+    mode = "old",
     df = as.data.frame(data),
     Y = outcome, G = unit, T = time, D = treatment,
     brep = n_bootstrap

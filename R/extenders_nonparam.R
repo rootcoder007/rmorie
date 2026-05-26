@@ -218,15 +218,21 @@ morie_quantile_reg <- function(formula, tau = 0.5, data, ...) {
 #' }
 morie_np_kernel_reg <- function(formula, data, ...) {
   .morie_nonparam_need("np", "morie_np_kernel_reg")
-  # np::npreg refits using bws$call's `data` arg by NAME; under
-  # `R CMD check`'s clean-env it can't find that name and fails with
-  #   `'data' must be a data.frame, environment, or list`.
-  # Pass `data = data` explicitly to BOTH calls so the data is in
-  # scope regardless of caller environment.
-  bws <- np::npregbw(formula = formula, data = data, ...)
-  fit <- np::npreg(bws = bws, data = data)
+  # np's formula method uses NSE: npreg.formula re-resolves the
+  # formula's `data` argument by NAME via `model.frame()` in the
+  # formula's own environment, which inside this wrapper is the test/
+  # caller scope -- not our local `data`. That fails with
+  #   `'data' must be a data.frame, environment, or list`
+  # because the symbol `data` resolves to the wrapper's argument,
+  # not a top-level frame. Bypass by building the model frame
+  # ourselves and dispatching the default (non-formula) np method.
+  mf <- stats::model.frame(formula, data = as.data.frame(data))
+  y  <- stats::model.response(mf)
+  X  <- mf[, -1L, drop = FALSE]
+  bws <- np::npregbw(xdat = X, ydat = y, ...)
+  fit <- np::npreg(bws = bws)
   list(
-    method = "np::npreg (bws via npregbw)",
+    method = "np::npreg (default method via npregbw)",
     raw = list(bws = bws, fit = fit)
   )
 }
