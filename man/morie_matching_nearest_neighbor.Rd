@@ -22,32 +22,29 @@ morie_matching_nearest_neighbor(
 
 \item{covariates}{Character vector of covariates for the propensity model.}
 
-\item{n_neighbors}{Number of matches per treated unit.}
+\item{n_neighbors}{Number of matches per treated unit
+(forwarded as \code{ratio}).}
 
 \item{caliper}{Maximum logit-propensity distance for a valid match,
 expressed in SD units of the logit (or \code{NULL} for no caliper).}
 
 \item{replace}{If \code{TRUE}, controls may be re-used.}
 
-\item{ps}{Optional pre-computed propensity scores.}
+\item{ps}{Optional pre-computed propensity scores
+(ignored; retained for back-compat).}
 
 \item{alpha}{Significance level (carried through to \code{details}).}
 }
 \value{
-A list with class \code{morie_match_result} carrying
-\code{matched_data}, \code{n_treated}, \code{n_matched_control},
-\code{match_pairs}, \code{method}, and \code{details}.
+A list of class \code{morie_match_result}.
 }
 \description{
-For each treated unit, finds the \code{n_neighbors} closest control units
-by logit-propensity-score distance.  Delegates to \pkg{MatchIt} when
-installed; otherwise uses a base-R implementation.
+Thin wrapper around \code{MatchIt::matchit(method = "nearest")} that
+returns a \code{morie_match_result} list for compatibility with the
+rmorie balance / treatment-effect helpers.
 }
 \examples{
 \dontrun{
-set.seed(1)
-df <- data.frame(d = rbinom(200, 1, 0.4),
-                 x1 = rnorm(200), x2 = rnorm(200))
 res <- morie_matching_nearest_neighbor(df, "d", c("x1", "x2"),
                                        caliper = 0.2)
 }

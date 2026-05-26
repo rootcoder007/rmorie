@@ -14,17 +14,15 @@ morie_matching_cem(data, treatment, covariates, n_bins = 5L)
 \item{covariates}{Character vector of covariates.}
 
 \item{n_bins}{Either a single integer (applied to every covariate) or a
-named list mapping covariate name to the number of bins.}
+named list mapping covariate name to the number of bins
+(forwarded as \code{cutpoints}).}
 }
 \value{
-A list of class \code{morie_match_result}; \code{matched_data}
-contains a \code{._cem_weight} column.
+A list of class \code{morie_match_result}.
 }
 \description{
-Coarsens continuous covariates into bins, then performs exact matching
-on the coarsened values.  Returns the matched (uncoarsened) data along
-with stratum weights.  Delegates to \pkg{MatchIt}'s \code{method = "cem"}
-(which itself calls \pkg{cem}) when available.
+Thin wrapper around \code{MatchIt::matchit(method = "cem")}, which in
+turn calls the \pkg{cem} package.
 }
 \examples{
 \dontrun{

@@ -29,9 +29,9 @@ A data frame with columns \code{gamma}, \code{p_lower},
 Computes bounds on the p-value for the treatment effect over a grid of
 values of \code{gamma} (the maximum odds ratio of differential treatment
 assignment due to an unobserved confounder).  Uses the Wilcoxon
-signed-rank approach.  When \pkg{sensitivitymv} is installed, callers
-should prefer it for exact bounds; this function provides a base-R
-implementation parallel to the Python version.
+signed-rank approach.  For exact bounds, see
+\code{\link[sensitivitymv:senmv]{sensitivitymv::senmv}} or the
+\pkg{rbounds} package.
 }
 \examples{
 \dontrun{

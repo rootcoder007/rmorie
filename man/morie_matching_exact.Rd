@@ -17,9 +17,7 @@ morie_matching_exact(data, treatment, exact_vars)
 A list of class \code{morie_match_result}.
 }
 \description{
-Matches treated and control units that share identical values on every
-variable in \code{exact_vars}.  Delegates to \pkg{MatchIt} when
-available.
+Thin wrapper around \code{MatchIt::matchit(method = "exact")}.
 }
 \examples{
 \dontrun{

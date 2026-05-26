@@ -38,8 +38,7 @@ A list of class \code{morie_match_result}.
 }
 \description{
 Matches treated and control units on the basis of their pre-treatment
-covariate values.  Mirrors Python
-\code{morie.matching.match_longitudinal}.
+covariate values.
 }
 \examples{
 \dontrun{

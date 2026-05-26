@@ -28,8 +28,8 @@ A data frame with columns \code{covariate}, \code{smd_before},
 }
 \description{
 Returns a data frame suitable for plotting absolute SMDs before and
-after matching.  Delegates to \pkg{cobalt::love.plot}'s data when
-available.
+after matching.  For a publication-ready plot, pass the same
+\code{matchit} object to \code{\link[cobalt:love.plot]{cobalt::love.plot}}.
 }
 \examples{
 \dontrun{
