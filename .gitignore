@@ -33,3 +33,9 @@ paper.bib
 *.blg
 *.out
 *.synctex.gz
+
+# Phase 1 wrapper-as-extender playbook (working notes; lives outside the repo)
+REPLACE_INVENTORY.md
+
+# Hex sticker artwork drafts (kept locally; not shipped with the R package)
+inst/figures/
