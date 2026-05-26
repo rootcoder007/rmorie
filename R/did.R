@@ -1336,7 +1336,12 @@ morie_did_chaisemartin_dhaultfoeuille <- function(data, outcome, treatment,
                                                   seed = 42L, alpha = 0.05) {
   .morie_did_need("DIDmultiplegt", "morie_did_chaisemartin_dhaultfoeuille")
   set.seed(seed)
+  # Recent DIDmultiplegt requires the `mode` arg with no default. Use
+  # "dyn" (dynamic effects) since that's the canonical de Chaisemartin
+  # / D'Haultfoeuille estimator; callers can pass mode = "old"/"between"/
+  # "within" via `...` if they want a different aggregation.
   fit <- DIDmultiplegt::did_multiplegt(
+    mode = "dyn",
     df = as.data.frame(data),
     Y = outcome, G = unit, T = time, D = treatment,
     brep = n_bootstrap

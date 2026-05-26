@@ -238,8 +238,31 @@ test_that("morie_did_triple_difference returns finite estimate", {
 
 test_that("morie_did_bacon_decomposition returns components and overall", {
   # Phase 1.e: now a bacondecomp::bacon wrapper.
+  # bacondecomp::bacon requires (a) weakly-increasing treatment per
+  # unit and (b) genuine staggered timing (>=2 treatment cohorts) to
+  # produce 2x2 comparisons. make_did_panel only ever treats at t=4,
+  # so we build a staggered panel inline here.
   skip_if_not_installed("bacondecomp")
-  df <- make_did_panel(n_units = 30, n_periods = 6, tau = 0.5, seed = 6)
+  set.seed(11)
+  n_units <- 40L
+  n_periods <- 8L
+  # Three cohorts: control (never), early (t>=4), late (t>=6).
+  cohort <- rep(c("never", "early", "late"),
+                length.out = n_units)
+  treat_time <- ifelse(cohort == "early", 4L,
+                       ifelse(cohort == "late", 6L, NA_integer_))
+  rows <- list()
+  for (u in seq_len(n_units)) {
+    a_i <- stats::rnorm(1)
+    for (t in seq_len(n_periods)) {
+      d_it <- as.integer(!is.na(treat_time[u]) && t >= treat_time[u])
+      y <- a_i + 0.1 * t + 0.5 * d_it + stats::rnorm(1, sd = 0.4)
+      rows[[length(rows) + 1L]] <- data.frame(
+        unit = u, time = t, y = y, d = d_it
+      )
+    }
+  }
+  df <- do.call(rbind, rows)
   res <- morie_did_bacon_decomposition(df, "y", "d", "unit", "time")
   expect_true("components" %in% names(res))
   expect_true("overall_estimate" %in% names(res))

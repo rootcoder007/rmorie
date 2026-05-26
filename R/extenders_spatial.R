@@ -134,9 +134,16 @@ morie_geostat_variogram <- function(formula, data, ...) {
 #' }
 morie_geostat_krige <- function(formula, data, newdata, model, ...) {
   .morie_spatial_need("gstat", "morie_geostat_krige")
+  # gstat::krige is an S4 generic; the second formal arg is named
+  # `locations`, not `data`. Passing `data = data` leaves `locations`
+  # as "missing" and dispatch fails with
+  #   unable to find an inherited method for function 'krige'
+  #   for signature 'formula = "formula", locations = "missing"'
+  # Keep the morie-side parameter named `data` for caller ergonomics
+  # but rename at the gstat call site.
   raw <- gstat::krige(
     formula = formula,
-    data = data,
+    locations = data,
     newdata = newdata,
     model = model,
     ...

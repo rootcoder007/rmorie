@@ -18,7 +18,9 @@ test_that("morie_rdd_density_test wraps rddensity::rddensity", {
   expect_type(out, "list")
   expect_identical(out$method, "rddensity::rddensity")
   expect_false(is.null(out$raw))
-  expect_s3_class(out$raw, "rddensity")
+  # rddensity::rddensity returns class "CJMrddensity" (Cattaneo-
+  # Jansson-Ma) in current CRAN versions, not bare "rddensity".
+  expect_s3_class(out$raw, "CJMrddensity")
 })
 
 

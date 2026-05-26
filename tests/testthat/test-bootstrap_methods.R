@@ -263,7 +263,9 @@ test_that("morie_simpleboot_two computes two-sample bootstrap", {
   skip_if_not_installed("simpleboot")
   bo <- morie_simpleboot_two(x_vec[1:20], x_vec[21:40],
                              statistic = mean, R = 50L)
-  expect_s3_class(bo, "boot")
+  # Recent simpleboot returns class "simpleboot" only (older versions
+  # also carried "boot"). Accept the canonical primary class.
+  expect_s3_class(bo, "simpleboot")
   expect_equal(length(bo$t), 50L)
 })
 
