@@ -1,5 +1,82 @@
 # rmorie 0.9.6 (in development)
 
+### Phase 1.g gap: TwoWayFEWeights + synthdid extender
+
+Two new wrapper-as-extender entry points have been added to
+`R/did.R` to close the Phase 1.e gap.  Both follow the
+`requireNamespace`-guarded hard-error pattern of the existing DiD
+wrappers and ship under the canonical `morie_did_*` namespace:
+
+* `morie_did_twoway_fe_weights(panel, group, time, treatment, outcome,
+  type = "feTR", ...)` -- thin interface to
+  `TwoWayFEWeights::twowayfeweights` (de Chaisemartin &
+  D'Haultfoeuille, 2020).  Returns an
+  `morie_did_twfe_diagnostics` S3 list with the negative-weight
+  count, the sum of weights, and the full `twowayfeweights` object
+  as `$raw`.  Complements `morie_did_panel_fe` (which estimates the
+  TWFE coefficient itself) and
+  `morie_did_chaisemartin_dhaultfoeuille` (which uses the same
+  identification argument to deliver the DID-M estimator).
+* `morie_did_synthdid_estimate(panel, unit, time, treatment, outcome,
+  vcov_method = "placebo", ...)` -- thin interface to
+  `synthdid::synthdid_estimate` (Arkhangelsky et al., 2021) under
+  the synthdid-canonical name.  Parallel to the existing
+  `morie_did_synthetic`, which keeps the rmorie result-list shape;
+  this extender surfaces the full synthdid object and the requested
+  variance estimator (`placebo`, `bootstrap`, `jackknife`).
+
+DESCRIPTION: adds `TwoWayFEWeights` to Suggests.  `synthdid` was
+already listed in 0.9.5.12.
+
+Tests: `tests/testthat/test-did-extender.R` covers both the happy
+path (skipped when the optional package is not installed) and the
+missing-package error path.
+
+### Phase 1.g sensitivity rewrite - extend EValue / tipr / sensemakr / konfound
+
+The sensitivity subsystem (`R/sensitivity.R`, ~733 LOC) keeps its
+existing inline math as a fallback arm but cross-references the
+canonical CRAN packages (`rbounds`, `tipr`, `sensemakr`, `specr`,
+`episensr`) in the Rd files, and four new wrapper-as-extender entry
+points have been added so MRM / paper callers can reach the full
+surface of these packages from inside rmorie:
+
+* `morie_sensitivity_evalue(estimate, se, sd, type = "OLS", ...)` --
+  thin interface to the `EValue::evalues.*` dispatch family
+  (`evalues.OLS`, `evalues.RR`, `evalues.OR`, `evalues.HR`,
+  `evalues.MD`).  Pairs with the typed `e_value_rr/_or/_hr/_d`
+  wrappers, which call the same backend but with a fixed scale.
+* `morie_sensitivity_tipping_point(estimate, smd, r2, ...)` --
+  thin interface to `tipr::tip` for unmeasured-confounder tipping
+  points.  Pairs with `tipping_point_analysis` (which targets
+  missing-data sensitivity rather than unmeasured confounders).
+* `morie_sensitivity_omitted_var_bias(model, treatment,
+  benchmark_covariates, ...)` -- thin interface to
+  `sensemakr::sensemakr` on a fitted `lm`.  Pairs with
+  `omitted_variable_bias` (closed-form Cinelli-Hazlett robustness
+  value when only `estimate` + `se` + dof are available).
+* `morie_sensitivity_konfound(estimate, se, n, n_covariates, ...)`
+  -- thin interface to `konfound::pkonfound` for the Frank et al.
+  (2013) percent-bias-to-invalidate and impact-threshold-of-a-
+  confounding-variable (ITCV).
+
+All four hard-error with a clear `install.packages(...)` message if
+the optional dependency is missing, matching the Phase 1.e / 1.f
+pattern.
+
+`rosenbaum_bounds`, `tipping_point_analysis`, `omitted_variable_bias`,
+`specification_curve`, and `probabilistic_bias_analysis` are kept
+in-house (the rmorie result shapes are part of the public API and
+the inline math remains the reference fallback).  `manski_bounds`,
+`bias_adjusted_estimate`, and `sensitivity_summary` are novel /
+aggregator code with no clean CRAN counterpart.
+
+DESCRIPTION: adds `tipr`, `sensemakr`, `konfound` to Suggests.
+
+Tests: `tests/testthat/test-sensitivity.R` extended with eight new
+test_that() blocks (one happy path + one missing-package error path
+per new extender, all gated by `skip_if_not_installed`).
+
 ## R/multiple_testing.R rewrite - delegate to poolr / qvalue / harmonicmeanp / gMCP / mutoss
 
 The multiple-testing-correction subsystem (~916 LOC) has been
