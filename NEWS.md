@@ -1,5 +1,76 @@
 # rmorie 0.9.6 (in development)
 
+## R/multiple_testing.R rewrite - delegate to poolr / qvalue / harmonicmeanp / gMCP / mutoss
+
+The multiple-testing-correction subsystem (~916 LOC) has been
+rewritten to forward to the canonical CRAN / Bioconductor packages
+where one exists. Every wrapper preserves the rmorie API and the
+`morie_multiple_testing_result` / `morie_rich_result` S3 shape so
+that the `stat_commands` dispatcher, the
+`print.morie_multiple_testing_result` method, and MRM analyses keep
+working unchanged.
+
+Thin-wrapped (with `requireNamespace`-guarded delegation arm + inline
+fallback so the wrapper keeps working on CRAN-only installs):
+
+* `bonferroni()`, `holm()`, `hochberg()`, `hommel()`,
+  `benjamini_hochberg()`, `benjamini_yekutieli()` -- already
+  `stats::p.adjust` wrappers, retained as-is.
+* `sidak()`, `holm_sidak()` -- inline closed-form math; `mutoss`
+  cross-referenced in Rd as the canonical step-down equivalent.
+* `storey_q()` -- delegates to `qvalue::qvalue` (Bioconductor) when
+  installed; falls back to the inline Storey cutoff otherwise.
+* `estimate_pi0()` -- delegates to `qvalue::pi0est` for `storey` /
+  `bootstrap` methods when installed; falls back to inline
+  estimators.
+* `fisher_combined()` -- delegates to `poolr::fisher` when installed.
+* `stouffer_combined()` -- delegates to `poolr::stouffer` when
+  installed and no weights are supplied (weighted Stouffer stays
+  inline because `poolr` does not take per-test weights).
+* `tippett_combined()` -- delegates to `poolr::tippett` when
+  installed.
+* `harmonic_mean_p()` -- delegates to `harmonicmeanp::p.hmp` when
+  installed.
+* `n_effective_tests()` -- delegates to `poolr::meff` (Galwey /
+  Li-Ji / Nyholt) when installed.
+* `fixed_sequence()`, `fallback_procedure()` -- `gMCP` cross-
+  referenced in Rd as the canonical graphical-MCP equivalent;
+  inline implementations retained to preserve the rmorie
+  stage-list return shape.
+
+Kept as in-house implementations (no clean CRAN drop-in for the
+rmorie API):
+
+* `cauchy_combination()` -- Liu and Xie 2020; ACAT is GitHub-only.
+* `hierarchical_bonferroni()` -- rmorie-specific stage-list return
+  shape; `gMCP` covers the concept with a different graphical API.
+* `local_fdr()` -- Efron empirical-Bayes KDE shape that `locfdr`
+  does not match in return structure.
+* `permutation_fwer()`, `permutation_fdr()` -- step-down max-T and
+  empirical-null-p FDR over user-supplied null matrices; no CRAN
+  function exposes the same API.
+* `adjust_p_values()` -- front-end dispatcher across the rmorie
+  wrappers; consumed by `stat_commands`.
+
+DESCRIPTION: adds `poolr`, `qvalue`, `gMCP`, `harmonicmeanp`,
+`multcomp`, `mutoss` to Suggests.
+
+Net: `R/multiple_testing.R` grows from 916 to 1118 LOC because each
+thin-wrap function now carries both a CRAN-delegation arm AND an
+inline fallback (CRAN policy does not allow Suggests to be hard
+required, and `qvalue` is Bioconductor only). Function inventory
+is unchanged: 25 exports preserved (`bonferroni`, `sidak`, `holm`,
+`hochberg`, `hommel`, `holm_sidak`, `benjamini_hochberg`, `bh`,
+`benjamini_yekutieli`, `by_fdr`, `storey_q`, `fisher_combined`,
+`stouffer_combined`, `tippett_combined`, `simes_combined`,
+`harmonic_mean_p`, `cauchy_combination`, `fixed_sequence`,
+`fallback_procedure`, `hierarchical_bonferroni`, `estimate_pi0`,
+`adjust_p_values`, `n_effective_tests`, `local_fdr`,
+`permutation_fwer`, `permutation_fdr`, plus the
+`print.morie_multiple_testing_result` S3 method). All 85
+`tests/testthat/test-multiple_testing.R` assertions pass on a
+fallback-only install.
+
 ## R/did.R rewrite - delegate to did / DRDID / fixest / HonestDiD / bacondecomp / DIDmultiplegt
 
 The DiD subsystem (~1,719 LOC) has been rewritten to forward to the

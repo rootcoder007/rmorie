@@ -7,8 +7,8 @@
 permutation_fdr(test_stats, null_stats, alpha = 0.05, labels = NULL)
 }
 \arguments{
-\item{test_stats}{Numeric vector of observed p-values (named after the
-Python sibling argument to keep cross-language parity).}
+\item{test_stats}{Numeric vector of observed p-values (named after
+the Python sibling argument to keep cross-language parity).}
 
 \item{null_stats}{Numeric matrix of permutation-null p-values with
 \eqn{n_{perm}} rows and \eqn{m} columns.}
@@ -23,11 +23,11 @@ p-values), \code{adjusted} (q-values), \code{rejected},
 \code{method}, \code{alpha}, \code{n_rejected}, \code{n_tests}.
 }
 \description{
-Estimates the false discovery rate at each candidate threshold using a
-matrix of p-values computed under the permutation null, and selects the
-largest threshold whose estimated FDR is at most \code{alpha}. Q-values
-are assigned as the minimum estimated FDR across thresholds at least as
-large as each observed p-value.
+Estimates the false discovery rate at each candidate threshold
+using a matrix of p-values computed under the permutation null,
+and selects the largest threshold whose estimated FDR is at most
+\code{alpha}. Q-values are assigned as the minimum estimated FDR
+across thresholds at least as large as each observed p-value.
 }
 \examples{
 set.seed(1)

@@ -20,5 +20,7 @@ adjust_p_values(p_values, method = "bh", alpha = 0.05, labels = NULL)
 \item{labels}{Optional character vector of test labels.}
 }
 \description{
-Convenience dispatcher for p-value adjustment methods
+Front-end over \code{stats::p.adjust} and the rmorie wrappers
+above. Preserves the rmorie API used by
+\code{stat_commands}.
 }

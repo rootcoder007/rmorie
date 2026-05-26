@@ -16,5 +16,6 @@ fallback_procedure(p_values, weights, alpha = 0.05, labels = NULL)
 \item{labels}{Optional character vector of test labels.}
 }
 \description{
-Fallback (fixed-sequence with alpha spending)
+Wiens-Dmitrienko fallback; \pkg{gMCP} can express the same
+procedure as a graphical multiple-comparison transition.
 }

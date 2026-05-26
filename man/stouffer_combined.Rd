@@ -12,5 +12,6 @@ stouffer_combined(p_values, weights = NULL)
 \item{weights}{Optional non-negative weights (any scale).}
 }
 \description{
-Stouffer's z-score method
+Delegates to \code{poolr::stouffer} when installed and no weights
+are supplied; otherwise computes the weighted z-sum inline.
 }

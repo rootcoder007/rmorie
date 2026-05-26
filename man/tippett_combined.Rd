@@ -10,5 +10,6 @@ tippett_combined(p_values)
 \item{p_values}{Numeric vector of raw p-values.}
 }
 \description{
-Tippett's minimum-p method
+Delegates to \code{poolr::tippett} when installed; otherwise
+computes the closed form inline.
 }

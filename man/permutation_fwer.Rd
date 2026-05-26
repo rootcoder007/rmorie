@@ -2,7 +2,7 @@
 % Please edit documentation in R/multiple_testing.R
 \name{permutation_fwer}
 \alias{permutation_fwer}
-\title{Permutation-based FWER control via step-down max-T (Westfall--Young)}
+\title{Permutation-based FWER control via step-down max-T (Westfall-Young)}
 \usage{
 permutation_fwer(
   test_stats,
@@ -13,14 +13,15 @@ permutation_fwer(
 )
 }
 \arguments{
-\item{test_stats}{Numeric vector of length \eqn{m} of observed test
-statistics.}
+\item{test_stats}{Numeric vector of length \eqn{m} of observed
+test statistics.}
 
-\item{null_stats}{Numeric matrix with \eqn{n_{perm}} rows and \eqn{m}
-columns containing test statistics computed on permuted data.}
+\item{null_stats}{Numeric matrix with \eqn{n_{perm}} rows and
+\eqn{m} columns containing test statistics computed on permuted
+data.}
 
-\item{alternative}{One of \code{"two_sided"} (default), \code{"greater"},
-or \code{"less"}.}
+\item{alternative}{One of \code{"two_sided"} (default),
+\code{"greater"}, or \code{"less"}.}
 
 \item{alpha}{Significance level for rejection (default 0.05).}
 
@@ -32,10 +33,10 @@ A \code{morie_rich_result} list with \code{original},
 \code{n_rejected}, \code{n_tests}.
 }
 \description{
-Given observed test statistics and a matrix of test statistics under the
-permutation null, computes step-down max-T adjusted p-values that
-strongly control the family-wise error rate without requiring
-independence across tests.
+Given observed test statistics and a matrix of test statistics
+under the permutation null, computes step-down max-T adjusted
+p-values that strongly control the family-wise error rate without
+requiring independence across tests.
 }
 \examples{
 set.seed(1)
