@@ -16,5 +16,7 @@ estimate_pi0(p_values, method = c("storey", "bootstrap", "two_step"))
 A scalar pi0 estimate in \verb{[0, 1]}.
 }
 \description{
-Estimate the proportion of true null hypotheses (pi0)
+Delegates to \code{qvalue::pi0est} (Bioconductor) when installed
+and \code{method = "storey"}. Otherwise computes the cutoff-based
+or bootstrap-based estimator inline.
 }

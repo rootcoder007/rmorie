@@ -14,8 +14,9 @@ bonferroni(p_values, alpha = 0.05, labels = NULL)
 \item{labels}{Optional character vector of test labels.}
 }
 \value{
-A \code{morie_rich_result} list (see \code{morie_multiple_testing}).
+A \code{morie_rich_result} list (see
+\code{morie_multiple_testing}).
 }
 \description{
-Wraps \code{stats::p.adjust(method = "bonferroni")}.
+Thin wrapper over \code{stats::p.adjust(method = "bonferroni")}.
 }

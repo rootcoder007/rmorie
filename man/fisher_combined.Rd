@@ -10,5 +10,6 @@ fisher_combined(p_values)
 \item{p_values}{Numeric vector of raw p-values.}
 }
 \description{
-Fisher's method for combining independent p-values
+Delegates to \code{poolr::fisher} when installed; otherwise
+computes the chi-square statistic inline.
 }
