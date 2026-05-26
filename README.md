@@ -269,8 +269,6 @@ software and the relevant companion papers.
 }
 ```
 
-(DOIs will be re-added once we re-deposit on Zenodo.)
-
 ## License
 
 morie is licensed under **AGPL-3.0-or-later**. See `LICENSE` for the

@@ -1,5 +1,11 @@
 # rmorie 0.9.6 (in development)
 
+## Citation cleanup: remove Zenodo references
+* `README.md`: removed the "(DOIs will be re-added once we re-deposit on Zenodo.)" promise. The Zenodo deposits for the morie publication set were taken down; we are not committing to re-depositing.
+* `inst/CITATION`: removed the stale "also the R package source on Zenodo" comment.
+* `NEWS.md`: removed Zenodo DOI references from the historical 0.9.5.7 changelog entry.
+* No live DOI strings ever shipped in rmorie; this just removes the language that implied otherwise.
+
 ## Phase 1 hotfix: drop wrappers for CRAN-archived packages
 * Removed `morie_anchors_analyze` (Phase 1.l) -- upstream `anchors` was archived from CRAN on 2022-03-06 (check problems not corrected). pak resolver could not solve the dependency, blocking CI.
 * Removed `morie_causal_mediation` (Phase 1.h) -- upstream `causalweight` was archived from CRAN on 2026-05-18 because its dependency `LARF` was archived. Same pak resolver failure.
@@ -1523,10 +1529,8 @@ bump.
 * R 4.6.0 strict-`Author` compatibility: `DESCRIPTION` now carries
   an explicit `Author:` field alongside the modern `Authors@R:` so
   `R CMD check` passes on the 4.6.0 series.
-* DOI propagation: empirical-paper Zenodo DOI now reaches Sphinx
-  docs, `pyproject.toml [project.urls]`, `papers/README.md`, and
-  CITATION.cff. Sphinx install snippets + Docker tag examples
-  un-pinned from stale versions.
+* Sphinx install snippets + Docker tag examples un-pinned from
+  stale versions.
 
 # morie 0.9.5.6 — 2026-05-11
 

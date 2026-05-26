@@ -4,7 +4,7 @@ citHeader(
   "papers in the morie publication set:"
 )
 
-# (1) morie R software paper (this package) -- also the R package source on Zenodo.
+# (1) morie R software paper (this package).
 bibentry(
   bibtype = "Manual",
   key     = "ruhela_rmorie_r_2026",
