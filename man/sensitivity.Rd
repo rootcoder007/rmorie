@@ -12,8 +12,9 @@ variable bias (Cinelli-Hazlett), Manski bounds, probabilistic
 (Monte-Carlo) bias analysis, and specification curve analysis.
 }
 \details{
-Wraps CRAN \pkg{EValue} when available; falls back to base R
-otherwise.
+Wraps CRAN \pkg{EValue}, \pkg{tipr}, \pkg{sensemakr}, \pkg{specr},
+\pkg{rbounds}, \pkg{episensr}, and \pkg{konfound} when available;
+falls back to base-R closed-form implementations otherwise.
 }
 \references{
 Rosenbaum (2002); VanderWeele & Ding (2017); Cinelli & Hazlett

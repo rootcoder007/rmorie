@@ -38,6 +38,8 @@ partial R^2.}
 A \code{morie_ovb} named-list.
 }
 \description{
-Wraps \pkg{sensemakr} when available; otherwise applies the
-closed-form Cinelli-Hazlett robustness-value formulas in base R.
+Closed-form Cinelli-Hazlett robustness-value implementation in
+base R.  For the full \pkg{sensemakr} treatment (benchmark plots,
+adjusted t-statistics, contour plots) on a fitted \code{lm}
+object, use \code{\link{morie_sensitivity_omitted_var_bias}}.
 }

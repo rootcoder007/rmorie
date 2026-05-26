@@ -1461,3 +1461,164 @@ morie_did_diagnostics <- function(data, outcome, treatment, post,
        outcome_stats = outcome_stats,
        covariate_balance = cov_balance)
 }
+
+
+# ---------------------------------------------------------------------------
+# 22. TwoWayFEWeights extender (de Chaisemartin & D'Haultfoeuille 2020)
+# ---------------------------------------------------------------------------
+
+#' Diagnose TWFE-DiD weights (de Chaisemartin & D'Haultfoeuille, 2020)
+#'
+#' Thin interface to \code{TwoWayFEWeights::twowayfeweights}: returns the
+#' decomposition of the two-way fixed-effects DiD estimand into the
+#' weighted average of the \eqn{N \times T}{N x T} unit-time ATEs.  Use
+#' this to quantify how many of the implicit comparisons receive
+#' negative weight, which is the canonical diagnostic for whether a
+#' TWFE specification can be interpreted as a convex combination of
+#' treatment effects.
+#'
+#' Wrapper-as-extender: \code{morie_did_panel_fe} already estimates the
+#' TWFE coefficient; this function exposes the diagnostic side of the
+#' same backend so that downstream MRM analyses can flag heterogeneous-
+#' treatment-effects bias without leaving the rmorie API.
+#'
+#' @param panel A long-format balanced (or near-balanced) panel
+#'   \code{data.frame}.
+#' @param group Name of the unit / group identifier column.
+#' @param time Name of the time period column.
+#' @param treatment Name of the binary or continuous treatment column.
+#' @param outcome Optional outcome column.  When supplied,
+#'   \pkg{TwoWayFEWeights} computes the weights AND the implied TWFE
+#'   coefficient; when \code{NULL}, only the weights are returned
+#'   (faster, dimension-free).
+#' @param type Weight type passed through to
+#'   \code{TwoWayFEWeights::twowayfeweights}: \code{"feTR"} (default,
+#'   feasible \code{TR} weights), \code{"feS"}, \code{"fdTR"}, or
+#'   \code{"fdS"}.  See the \pkg{TwoWayFEWeights} documentation.
+#' @param ... Additional arguments forwarded to
+#'   \code{TwoWayFEWeights::twowayfeweights}.
+#' @return An S3 list of class \code{morie_did_twfe_diagnostics} with
+#'   elements \code{n_negative_weights}, \code{sum_weights},
+#'   \code{sum_negative_weights}, \code{share_negative_weights},
+#'   \code{method}, and \code{raw} (the full
+#'   \code{twowayfeweights} object).
+#' @references de Chaisemartin, C., & D'Haultfoeuille, X. (2020).
+#'   Two-way fixed effects estimators with heterogeneous treatment
+#'   effects.  \emph{American Economic Review}, 110(9), 2964--2996.
+#' @seealso \code{\link{morie_did_panel_fe}},
+#'   \code{\link{morie_did_chaisemartin_dhaultfoeuille}}.
+#' @export
+morie_did_twoway_fe_weights <- function(panel, group, time, treatment,
+                                        outcome = NULL,
+                                        type = "feTR", ...) {
+  .morie_did_need("TwoWayFEWeights", "morie_did_twoway_fe_weights")
+  df <- as.data.frame(panel)
+  args <- list(df = df, Y = outcome, G = group, T = time, D = treatment,
+               type = type, ...)
+  # twowayfeweights() requires Y; when caller omits it, pass a constant
+  # so the diagnostic still runs (weights are independent of Y values).
+  if (is.null(args$Y)) {
+    df[["morie_twfe_y_const"]] <- 0
+    args$df <- df
+    args$Y <- "morie_twfe_y_const"
+  }
+  fit <- do.call(TwoWayFEWeights::twowayfeweights, args)
+  weights <- tryCatch(as.numeric(fit$weights),
+                      error = function(e) NA_real_)
+  n_neg <- if (all(is.na(weights))) NA_integer_
+           else sum(weights < 0, na.rm = TRUE)
+  sum_w <- if (all(is.na(weights))) NA_real_
+           else sum(weights, na.rm = TRUE)
+  sum_neg <- if (all(is.na(weights))) NA_real_
+             else sum(weights[weights < 0], na.rm = TRUE)
+  share_neg <- if (all(is.na(weights)) || length(weights) == 0L) NA_real_
+               else n_neg / length(weights)
+  structure(
+    list(
+      n_negative_weights      = n_neg,
+      sum_weights             = sum_w,
+      sum_negative_weights    = sum_neg,
+      share_negative_weights  = share_neg,
+      method = "twoway_fe_weights (TwoWayFEWeights)",
+      raw    = fit
+    ),
+    class = c("morie_did_twfe_diagnostics", "list")
+  )
+}
+
+
+# ---------------------------------------------------------------------------
+# 23. Synthetic DiD explicit-name extender (Arkhangelsky et al., 2021)
+# ---------------------------------------------------------------------------
+
+#' Synthetic DiD via \code{synthdid::synthdid_estimate} (explicit-name API)
+#'
+#' Parallel to \code{\link{morie_did_synthetic}}, this is the
+#' explicit-name wrapper that surfaces the full \code{synthdid}
+#' estimator and its placebo / jackknife variance pieces.  Use this
+#' when you want to pass through additional \pkg{synthdid} arguments
+#' or inspect the unit / time weights side-by-side; use
+#' \code{morie_did_synthetic} when you want the rmorie result-list
+#' shape consumed by \code{morie_did_*} downstream code.
+#'
+#' Wrapper-as-extender: rmorie already wraps \pkg{synthdid} once via
+#' \code{morie_did_synthetic}; this entry point gives MRM / paper
+#' callers the canonical Arkhangelsky et al. (2021) API with a
+#' \code{morie_*} name so they don't need to load \pkg{synthdid}
+#' directly.
+#'
+#' @param panel Long-format balanced panel.
+#' @param unit Unit identifier column.
+#' @param time Time period column.
+#' @param treatment Binary treatment indicator that turns on at onset
+#'   for treated units and is zero everywhere for controls (the
+#'   \pkg{synthdid} W convention).
+#' @param outcome Outcome column.
+#' @param vcov_method Variance estimator passed to
+#'   \code{stats::vcov.synthdid_estimate}: one of \code{"placebo"}
+#'   (default), \code{"bootstrap"}, \code{"jackknife"}.
+#' @param ... Additional arguments forwarded to
+#'   \code{synthdid::synthdid_estimate} (e.g. \code{zeta},
+#'   \code{omega.intercept}).
+#' @return An S3 list of class \code{morie_did_synthdid_result} with
+#'   elements \code{att}, \code{std_error}, \code{vcov_method},
+#'   \code{n_treated}, \code{n_control}, \code{n_pre},
+#'   \code{n_post}, \code{method}, and \code{raw} (the full
+#'   \code{synthdid_estimate} object).
+#' @references Arkhangelsky, D., Athey, S., Hirshberg, D. A., Imbens,
+#'   G. W., & Wager, S. (2021). Synthetic difference-in-differences.
+#'   \emph{American Economic Review}, 111(12), 4088--4118.
+#' @seealso \code{\link{morie_did_synthetic}}.
+#' @export
+morie_did_synthdid_estimate <- function(panel, unit, time, treatment,
+                                        outcome,
+                                        vcov_method = "placebo", ...) {
+  .morie_did_need("synthdid", "morie_did_synthdid_estimate")
+  df <- as.data.frame(panel)
+  cols <- c(unit, time, outcome, treatment)
+  setup <- synthdid::panel.matrices(
+    df[, cols, drop = FALSE],
+    unit = 1, time = 2, outcome = 3, treatment = 4
+  )
+  est <- do.call(synthdid::synthdid_estimate,
+                 c(list(Y = setup$Y, N0 = setup$N0, T0 = setup$T0), list(...)))
+  att <- as.numeric(est)
+  se_est <- tryCatch(sqrt(stats::vcov(est, method = vcov_method)),
+                     error = function(e) NA_real_)
+  n_total <- nrow(setup$Y)
+  t_total <- ncol(setup$Y)
+  structure(
+    list(
+      att          = att,
+      std_error    = as.numeric(se_est),
+      vcov_method  = vcov_method,
+      n_treated    = n_total - as.integer(setup$N0),
+      n_control    = as.integer(setup$N0),
+      n_pre        = as.integer(setup$T0),
+      n_post       = t_total - as.integer(setup$T0),
+      method       = "synthdid_estimate (synthdid)",
+      raw          = est
+    ),
+    class = c("morie_did_synthdid_result", "list")
+  )
+}
