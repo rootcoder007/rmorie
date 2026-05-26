@@ -1,5 +1,10 @@
 # rmorie 0.9.6 (in development)
 
+## Phase 1.n: FDR/nonparam extenders -- locfdr / fdrtool / quantreg / np / dirichletprocess / lcmm
+* New file `R/extenders_nonparam.R` with 6 wrappers (morie_locfdr_estimate, morie_fdr_qvalues, morie_quantile_reg, morie_np_kernel_reg, morie_dp_gaussian_mixture, morie_lcmm_latent_class)
+* DESCRIPTION: Suggests += dirichletprocess, fdrtool, lcmm, locfdr, np, quantreg (skip any already present)
+* Tests in tests/testthat/test-extenders-nonparam.R
+
 ## Phase 1.l: RDD/IRT extenders -- rddensity / rdlocrand / rdpower / anchors / anominate
 * New file `R/extenders_rdd.R` with 5 wrappers (morie_rdd_density_test, morie_rdd_local_randinf, morie_rdd_power_calc, morie_anchors_analyze, morie_anominate_ideal_points)
 * DESCRIPTION: Suggests += anchors, anominate, rdlocrand, rdpower (rddensity was already listed)
