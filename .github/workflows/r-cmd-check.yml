@@ -72,10 +72,27 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
 
+      # Mirror morie's CI shape: drop --as-cran from per-push (51min+ on
+      # rmorie Linux due to --as-cran URL-probing + 112 source-installed
+      # Suggests). Plain check on per-push; --as-cran gated to
+      # release/** branches and workflow_dispatch. Same trade-off morie
+      # made: "Drop --as-cran (too strict pre-CRAN); re-enable for the
+      # CRAN-submission PR."
+      - name: Resolve check args (--as-cran on release/dispatch only)
+        id: check_args
+        run: |
+          if [[ "${{ github.ref }}" == refs/heads/release/* ]] || \
+             [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "args=c(\"--no-manual\", \"--as-cran\")" >> "$GITHUB_OUTPUT"
+          else
+            echo "args=c(\"--no-manual\")" >> "$GITHUB_OUTPUT"
+          fi
+        shell: bash
+
       - uses: r-lib/actions/check-r-package@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
         with:
           upload-snapshots: true
-          args: 'c("--no-manual", "--as-cran")'
+          args: ${{ steps.check_args.outputs.args }}
           error-on: '"error"'
 
       # POST-CHECK QA (lintr / covr / goodpractice / pkgcheck) was
