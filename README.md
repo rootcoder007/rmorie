@@ -231,42 +231,22 @@ CodeQL.
 
 ## Citation
 
-Run `citation("morie")` after installation. Please cite **both** the
-software and the relevant companion papers.
+Run `citation("rmorie")` after installation, or cite directly:
 
 ```bibtex
-@Manual{ruhela_morie_R_2026,
-  title   = {morie: Multi-domain Open Research and Inferential Estimation in R},
+@Manual{ruhela_rmorie_2026,
+  title   = {rmorie: Multi-domain Open Research and Inferential Estimation in R},
   author  = {Ruhela, Vansh Singh},
   year    = {2026},
   note    = {R package version 0.9.5.4},
-  url     = {https://github.com/rootcoder007/morie}
-}
-
-@Misc{ruhela_morie_python_2026,
-  title  = {morie: Multi-domain Open Research and Inferential Estimation in Python},
-  author = {Ruhela, Vansh Singh},
-  year   = {2026}
-}
-
-@Misc{ruhela_mrm_framework_2026,
-  title  = {MRM: Multilevel Reconciliation Methodology --- A multi-source statistical foundation for Canadian carceral, police, and oversight data},
-  author = {Ruhela, Vansh Singh},
-  year   = {2026}
-}
-
-@Misc{ruhela_hawkes_2026,
-  title  = {Criminological Hawkes Process via MORIE: Markovian and Non-Markovian Self-Exciting Point Processes for Toronto Crime},
-  author = {Ruhela, Vansh Singh},
-  year   = {2026}
-}
-
-@Misc{ruhela_empirical_2026,
-  title  = {Solitary Confinement, Self-Excitation, and Institutional Churn: Empirical Applications of MRM to Canadian Carceral and Police Data},
-  author = {Ruhela, Vansh Singh},
-  year   = {2026}
+  url     = {https://github.com/rootcoder007/rmorie}
 }
 ```
+
+Methodology and empirical-applications papers (MRM framework,
+criminological Hawkes process, solitary-confinement / self-excitation
+/ institutional churn) are in preparation; they will be linked here
+once publicly available.
 
 ## License
 

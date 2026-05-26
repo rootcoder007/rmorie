@@ -1515,12 +1515,10 @@ bump.
   entry.) The Linux-kernel adjuncts in `kernel-module/` and `daemon/`
   remain `GPL-2.0-only` (kernel ABI requirement) and are not part of
   the CRAN tarball.
-* Five-paper publication set complete: empirical applications paper
-  (*Solitary Confinement, Self-Excitation, and Institutional Churn:
-  Empirical Applications of MRM to Canadian Carceral and Police Data*)
-
-  [
-* Terminology locked across all 5 papers: `ac` (alert complexity)
+* Companion papers in preparation (methodology + empirical
+  applications). The papers will be linked from the citation block
+  once they are publicly available with DOIs or preprint URLs.
+* Terminology locked across the codebase: `ac` (alert complexity)
   and `vm` (volatility measure of placements, "regional-transition
   count" alongside) are now the canonical operational terms.
 * Roxygen man pages for the fast Rcpp kernels: `morie_mean`,
