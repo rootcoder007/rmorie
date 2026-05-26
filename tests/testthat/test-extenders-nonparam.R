@@ -73,7 +73,10 @@ test_that("morie_np_kernel_reg wraps np::npregbw + np::npreg", {
     morie_np_kernel_reg(y ~ x, data = df)
   ))
   expect_type(out, "list")
-  expect_identical(out$method, "np::npreg (bws via npregbw)")
+  # The wrapper bypasses np's formula method (which has an NSE bug
+  # inside the test scope) and dispatches the default xdat/ydat
+  # method via npregbw -> npreg. Method string updated to match.
+  expect_identical(out$method, "np::npreg (default method via npregbw)")
   expect_false(is.null(out$raw))
   expect_true(!is.null(out$raw$bws))
   expect_true(!is.null(out$raw$fit))
