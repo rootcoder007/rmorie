@@ -62,6 +62,12 @@ test_that(".entheo_load_real returns NULL when the .mat files are absent", {
 })
 
 test_that("load_dmt_imaging reads a real subject via a mocked R.matlab", {
+  # local_mocked_bindings(.package = "R.matlab") resolves the
+  # R.matlab namespace BEFORE installing the mock; without R.matlab
+  # installed (minimal CI / Pi without the Suggests dep) it crashes
+  # "no package called 'R.matlab'" rather than skipping.
+  skip_if_not_installed("R.matlab")
+
   root <- tempfile("dmt-real-")
   dir.create(file.path(root, "fMRI"), recursive = TRUE)
   file.create(file.path(
