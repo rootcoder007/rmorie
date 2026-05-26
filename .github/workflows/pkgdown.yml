@@ -53,6 +53,14 @@ jobs:
           path: docs
 
   deploy:
+    # The `github-pages` environment is restricted (by default) to
+    # the main branch -- PR builds run from `refs/pull/N/merge` and
+    # get rejected with "Branch is not allowed to deploy to
+    # github-pages due to environment protection rules". Build the
+    # site on every push/PR so we catch breakage early, but only
+    # PUBLISH from main. PR previews can be downloaded from the
+    # build job's artifact.
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     environment:
