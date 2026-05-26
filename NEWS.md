@@ -1,5 +1,70 @@
 # rmorie 0.9.6 (in development)
 
+## R/did.R rewrite - delegate to did / DRDID / fixest / HonestDiD / bacondecomp / DIDmultiplegt
+
+The DiD subsystem (~1,719 LOC) has been rewritten to forward to the
+canonical CRAN packages instead of carrying ~700 LOC of base-R
+fallback code:
+
+* `morie_did_panel_fe()` is now a thin wrapper over
+  `fixest::feols(y ~ d | unit + time)` with cluster-robust SE and
+  hard-errors if `fixest` is not installed (the base-R two-way
+  within-transform fallback has been removed).
+* `morie_did_event_study()` is a thin wrapper over `fixest::feols`
+  with `fixest::i(rel_time, ref = -1)` relative-time dummies plus
+  unit and time fixed effects; hard-errors if `fixest` is missing.
+* `morie_did_group_time_att()` is a thin wrapper over `did::att_gt`
+  for the Callaway-Sant'Anna group-time ATTs and hard-errors if
+  `did` is not installed (the base-R bootstrap fallback has been
+  removed).
+* `morie_did_doubly_robust()` is a thin wrapper over
+  `DRDID::drdid_rc` (Sant'Anna-Zhao 2020 repeated-cross-section
+  doubly-robust DiD) and hard-errors if `DRDID` is missing
+  (the hand-written GBM-or-logistic + linear-or-GBM bootstrap
+  fallback has been removed). The `ps_model` / `or_model`
+  arguments are retained for back-compat but ignored; DRDID uses
+  logistic propensity and linear outcome regression internally.
+* `morie_did_bacon_decomposition()` is a thin wrapper over
+  `bacondecomp::bacon` and hard-errors if `bacondecomp` is not
+  installed (the base-R timing-pair enumeration fallback has been
+  removed).
+* `morie_did_chaisemartin_dhaultfoeuille()` is a thin wrapper over
+  `DIDmultiplegt::did_multiplegt` and hard-errors if
+  `DIDmultiplegt` is not installed (the base-R switcher-comparison
+  bootstrap fallback has been removed).
+* `morie_did_synthetic()` continues to delegate to
+  `synthdid::synthdid_estimate` (no change; synthdid is the only
+  R implementation).
+* `morie_did_sensitivity_analysis()` keeps its delta-bound CI
+  sweep but the Rd now cross-references
+  `HonestDiD::createSensitivityResults_relativeMagnitudes` as the
+  reference implementation of Rambachan-Roth 2023 for event-study
+  estimates.
+
+The OLS-based wrappers (`morie_did_2x2`,
+`morie_did_repeated_cross_section`, `morie_did_triple_difference`,
+`morie_did_continuous_treatment`, `morie_did_fuzzy`) continue to
+use the in-package `.morie_did_ols_robust_se` helper because the
+specs are simple OLS / 2SLS regressions and a CRAN dependency for
+trivially-short OLS would be a regression. The same helper is
+reused by `morie_did_wild_cluster_bootstrap`, which remains
+base-R by design (fwildclusterboot is GitHub-only; see 0.9.5.12
+NEWS).
+
+Aggregators that consume DiD output and produce rmorie-specific
+tables (`morie_did_aggregate_gt_att`, `morie_did_staggered`,
+`morie_did_parallel_trends_data`,
+`morie_did_test_parallel_trends`, `morie_did_placebo_test_*`,
+`morie_did_heterogeneous`, `morie_did_diagnostics`) are unchanged.
+
+Net: `R/did.R` shrinks from 1,719 to 1,463 LOC (-256, -15%);
+all 22 `morie_did_*` exports preserved; result-list shape is
+unchanged so downstream callers see the same fields.
+
+DESCRIPTION: adds `DRDID`, `HonestDiD`, `DIDmultiplegt` to
+Suggests (`fixest`, `did`, `bacondecomp`, `synthdid` were
+already listed).
+
 ## R/matching.R rewrite - delegate to MatchIt / cobalt / WeightIt
 
 The matching subsystem (~2,183 LOC) has been rewritten to forward to

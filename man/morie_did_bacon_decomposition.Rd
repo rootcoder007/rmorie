@@ -22,10 +22,10 @@ A list with \code{components} (data frame) and
 \code{overall_estimate}.
 }
 \description{
-Decomposes a two-way fixed-effects DiD estimate into a weighted
-average of all possible 2x2 DiD comparisons.  Prefers
-\code{bacondecomp::bacon}; falls back to a base-R implementation that
-mirrors the Python module otherwise.
+Thin wrapper around \code{bacondecomp::bacon}. Decomposes a
+two-way fixed-effects DiD estimate into a weighted average of all
+possible 2x2 DiD comparisons. Hard-errors if \pkg{bacondecomp} is
+not installed.
 }
 \references{
 Goodman-Bacon, A. (2021). Difference-in-differences with

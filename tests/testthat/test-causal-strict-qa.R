@@ -388,6 +388,8 @@ test_that("morie_did_2x2 recovers tau=3.0 (canonical 2-period 2-group)", {
 })
 
 test_that("morie_did_panel_fe recovers tau in panel data", {
+  # Phase 1.e: now a fixest::feols wrapper.
+  skip_if_not_installed("fixest")
   d <- make_did_dgp(n_unit = 200L, T_per = 4L, tau = 3.0, seed = 22L)
   # Treatment is treat * post (1 only in last period for treated half)
   d$d_it <- d$treat * d$post
@@ -398,6 +400,8 @@ test_that("morie_did_panel_fe recovers tau in panel data", {
 })
 
 test_that("morie_did_doubly_robust recovers tau", {
+  # Phase 1.e: now a DRDID::drdid_rc wrapper.
+  skip_if_not_installed("DRDID")
   d <- make_did_dgp(n_unit = 300L, T_per = 2L, tau = 3.0, seed = 23L)
   # Need a covariate; add x = unit FE proxy
   d$x <- rnorm(nrow(d))
@@ -437,6 +441,7 @@ test_that("morie_did_event_study returns event-time coefficient frame", {
     }
   }
   panel <- do.call(rbind, rows)
+  skip_if_not_installed("fixest")
   res <- morie_did_event_study(panel, outcome = "y", unit = "unit",
                                time = "time", treatment_time = "g",
                                leads = 2L, lags = 2L)

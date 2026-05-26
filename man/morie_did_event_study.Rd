@@ -51,8 +51,12 @@ A list with \code{coefficients} (data frame),
 \code{pre_trend_p_value}, and \code{details}.
 }
 \description{
-Constructs relative-time dummies \eqn{1\{t - g = k\}} for
-\eqn{k \in [-\text{leads}, \text{lags}]}{k in [-leads, lags]} (omitting
-\code{reference_period}) and regresses the outcome on these
-indicators with unit and time fixed effects.
+Thin wrapper around \code{fixest::feols} with \code{fixest::i()}
+relative-time dummies, plus unit and time fixed effects. The
+\code{reference_period} is dropped as the baseline. Hard-errors if
+\pkg{fixest} is not installed.
+}
+\details{
+For sun-Abraham interaction-weighted estimation prefer
+\code{fixest::sunab()} directly.
 }

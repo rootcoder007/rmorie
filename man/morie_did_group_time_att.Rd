@@ -38,9 +38,10 @@ or \code{"outcome_regression"}.}
 \item{control_group}{\code{"never_treated"} or
 \code{"not_yet_treated"}.}
 
-\item{n_bootstrap}{Number of bootstrap replications for inference.}
+\item{n_bootstrap}{Number of bootstrap replications for inference
+(forwarded as \code{biters}).}
 
-\item{seed}{RNG seed.}
+\item{seed}{RNG seed (unused; retained for back-compat).}
 
 \item{alpha}{Significance level.}
 }
@@ -50,11 +51,10 @@ A data frame with columns \code{cohort}, \code{time},
 \code{p_value}.
 }
 \description{
-For each cohort \eqn{g} and each post-treatment calendar period
-\code{t}, estimates \eqn{\mathrm{ATT}(g, t)}{ATT(g, t)}.  Prefers
-\code{did::att_gt} (the reference implementation by Callaway &
-Sant'Anna); falls back to a base-R bootstrap-based estimator that
-mirrors the Python module when \pkg{did} is unavailable.
+Thin wrapper around \code{did::att_gt}. For each cohort \eqn{g} and
+each post-treatment calendar period \code{t}, estimates
+\eqn{\mathrm{ATT}(g, t)}{ATT(g, t)}. Hard-errors if \pkg{did} is
+not installed.
 }
 \references{
 Callaway, B., & Sant'Anna, P. H. C. (2021).
