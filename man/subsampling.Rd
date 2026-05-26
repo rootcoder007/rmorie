@@ -31,5 +31,9 @@ A \code{morie_bootstrap_result}.
 }
 \description{
 Draws without replacement at a smaller sample size; valid under
-weaker conditions than the bootstrap.
+weaker conditions than the bootstrap. No clean CRAN function
+exposes the same \verb{(data, statistic, subsample_size, n_subsamples)}
+API; \pkg{np}'s \code{npsubsample} is closest but is kernel-specific.
+Kept as an in-house implementation and flagged
+novel/no-clean-CRAN-equivalent.
 }

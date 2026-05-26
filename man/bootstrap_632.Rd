@@ -25,5 +25,16 @@ Named numeric list with apparent_error, bootstrap_error,
 error_632, error_632plus.
 }
 \description{
-.632 and .632+ bootstrap estimators for prediction error
+Computes apparent error, mean OOB bootstrap error, the .632
+estimator (Efron 1983), and the .632+ no-information-adjusted
+estimator (Efron and Tibshirani 1997). \code{ipred::errorest(...,
+estimator = "632plus")} implements the same family in
+\pkg{ipred}; it is cross-referenced for users who already work
+with \pkg{ipred}'s \verb{predict.\\<learner\\>} ecosystem. The inline
+implementation is retained because rmorie's API takes naked
+\code{model_fn} / \code{score_fn} callables and is consumed by
+downstream MRM code.
+}
+\seealso{
+\code{ipred::errorest}.
 }

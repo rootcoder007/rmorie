@@ -31,6 +31,8 @@ here a simple rank-match).}
 Data frame with \code{Gamma}, \code{p_lower}, \code{p_upper}.
 }
 \description{
-Wraps \pkg{rbounds} when available; otherwise computes normal-
-approximation Wilcoxon signed-rank bounds in base R.
+Thin wrapper over \code{rbounds::psens()} when \pkg{rbounds} is
+installed (rank-matched-pair signed-rank bounds across a Gamma
+grid). Without \pkg{rbounds}, falls back to a base R normal-
+approximation Wilcoxon signed-rank computation.
 }

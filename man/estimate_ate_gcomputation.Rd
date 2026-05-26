@@ -28,6 +28,9 @@ Named list with \code{ate}, \code{se}, \code{ci_lower}, \code{ci_upper},
 \code{n_obs}, \code{outcome_model}.
 }
 \description{
-Fits the outcome model, predicts counterfactuals under T=1 and T=0,
-averages the difference. Bootstrap SE uses 500 resamples.
+Thin wrapper over \code{stdReg::stdGlm()} (Sjolander's
+regression-standardisation back end) when \pkg{stdReg} is
+installed. Without \pkg{stdReg}, falls back to an inline outcome-
+regression + bootstrap implementation (500 resamples, seed 42)
+that mirrors the legacy rmorie behaviour.
 }

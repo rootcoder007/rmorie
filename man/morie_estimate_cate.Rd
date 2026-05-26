@@ -23,9 +23,11 @@ morie_estimate_cate(
 
 \item{covariates}{Character vector of covariate names.}
 
-\item{propensity_col}{Optional: name of a pre-computed propensity score column.}
+\item{propensity_col}{Optional: name of a pre-computed propensity
+score column.}
 
-\item{outcome_model}{Family for the outcome model: \code{"linear"} or \code{"logistic"}.}
+\item{outcome_model}{Family for the outcome model: \code{"linear"} or
+\code{"logistic"}.}
 
 \item{meta_learner}{\code{"t_learner"} (default) or \code{"s_learner"}.}
 }
@@ -33,12 +35,15 @@ morie_estimate_cate(
 Numeric vector of per-unit CATE estimates.
 }
 \description{
-The \strong{T-learner} fits separate outcome models on treated and control
-units, then predicts the counterfactual for each unit:
+The \strong{T-learner} fits separate outcome models on treated and
+control units, then predicts the counterfactual for each unit:
 \eqn{\widehat{CATE}_i = \hat{\mu}_1(X_i) - \hat{\mu}_0(X_i)}{CATE_hat_i = mu_hat_1(X_i) - mu_hat_0(X_i)}.
 }
 \details{
 The \strong{S-learner} fits one model with treatment as a feature.
+
+For random-forest CATE estimation prefer \code{grf::causal_forest}
+(richer heterogeneity, honest sample splitting).
 }
 \examples{
 morie_estimate_cate(

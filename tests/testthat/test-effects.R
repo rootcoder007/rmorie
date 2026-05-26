@@ -149,3 +149,99 @@ test_that("e_value errors on non-positive se", {
   expect_error(e_value(0.5, 0), "se must be > 0")
   expect_error(e_value(0.5, -1), "se must be > 0")
 })
+
+test_that("e_value sd_y routes through EValue when installed", {
+  skip_if_not_installed("EValue")
+  v <- e_value(0.5, 0.1, null = 0, sd_y = 1.5)
+  expect_true(is.numeric(v) && v >= 1)
+})
+
+# ---------------------------------------------------------------------
+# Marginal-effects extenders (Phase 1.j)
+# ---------------------------------------------------------------------
+
+mk_model <- function(n = 80L) {
+  df <- mk_data(n)
+  list(
+    df  = df,
+    fit = stats::lm(y ~ d + x1 + x2, data = df)
+  )
+}
+
+test_that("morie_effects_emmeans wraps emmeans::emmeans", {
+  skip_if_not_installed("emmeans")
+  obj <- mk_model()
+  em  <- morie_effects_emmeans(obj$fit, specs = ~ d)
+  expect_s4_class(em, "emmGrid")
+})
+
+test_that("morie_effects_emmeans errors when emmeans absent", {
+  skip_if(requireNamespace("emmeans", quietly = TRUE))
+  obj <- mk_model()
+  expect_error(morie_effects_emmeans(obj$fit, specs = ~ d),
+               "emmeans")
+})
+
+test_that("morie_effects_predictions wraps marginaleffects::predictions", {
+  skip_if_not_installed("marginaleffects")
+  obj <- mk_model()
+  out <- morie_effects_predictions(obj$fit)
+  expect_true(is.data.frame(out) ||
+                inherits(out, "predictions"))
+  expect_true(nrow(out) > 0L)
+})
+
+test_that("morie_effects_predictions respects newdata", {
+  skip_if_not_installed("marginaleffects")
+  obj <- mk_model()
+  nd  <- obj$df[seq_len(5L), ]
+  out <- morie_effects_predictions(obj$fit, newdata = nd)
+  expect_equal(nrow(out), 5L)
+})
+
+test_that("morie_effects_comparisons wraps marginaleffects::comparisons", {
+  skip_if_not_installed("marginaleffects")
+  obj <- mk_model()
+  out <- morie_effects_comparisons(obj$fit, variables = "d")
+  expect_true(is.data.frame(out) ||
+                inherits(out, "comparisons"))
+  expect_true(nrow(out) > 0L)
+})
+
+test_that("morie_effects_slopes wraps marginaleffects::slopes", {
+  skip_if_not_installed("marginaleffects")
+  obj <- mk_model()
+  out <- morie_effects_slopes(obj$fit, variables = "x1")
+  expect_true(is.data.frame(out) ||
+                inherits(out, "slopes"))
+  expect_true(nrow(out) > 0L)
+})
+
+test_that("morie_effects_tidy uses broom when installed", {
+  skip_if_not_installed("broom")
+  obj <- mk_model()
+  td  <- morie_effects_tidy(obj$fit)
+  expect_s3_class(td, "data.frame")
+  expect_true(all(c("term", "estimate", "std.error", "p.value") %in%
+                    names(td)))
+})
+
+test_that("morie_effects_tidy has summary-based fallback", {
+  obj <- mk_model()
+  # Always works on lm/glm via the fallback path; broom path returns
+  # the same canonical columns, so the assertion holds either way.
+  td <- morie_effects_tidy(obj$fit)
+  expect_s3_class(td, "data.frame")
+  expect_true("term" %in% names(td))
+  expect_true("estimate" %in% names(td))
+})
+
+test_that("estimate_ate_gcomputation stdReg path runs when installed", {
+  skip_if_not_installed("stdReg")
+  df <- mk_data(60L)
+  res <- estimate_ate_gcomputation(df, "d", "y", c("x1", "x2"),
+                                    outcome_model = "linear")
+  expect_true(is.list(res))
+  expect_true(is.numeric(res$ate))
+  expect_equal(res$n_obs, 60L)
+})
