@@ -48,6 +48,8 @@ SystemRequirements: libcurl: libcurl-devel (rpm) or libcurl4-openssl-dev (deb)
 Suggests:
   AER,
   AIPW,
+  anchors,
+  anominate,
   arrow,
   bacondecomp,
   basicspace,
@@ -138,6 +140,8 @@ Suggests:
   ranger,
   rbounds,
   rddensity,
+  rdlocrand,
+  rdpower,
   rdrobust,
   readr,
   readxl,
