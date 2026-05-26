@@ -1,7 +1,12 @@
 # rmorie 0.9.6 (in development)
 
+## Phase 1.n: FDR/nonparam extenders -- locfdr / fdrtool / quantreg / np / dirichletprocess / lcmm
+* New file `R/extenders_nonparam.R` with 6 wrappers (morie_locfdr_estimate, morie_fdr_qvalues, morie_quantile_reg, morie_np_kernel_reg, morie_dp_gaussian_mixture, morie_lcmm_latent_class)
+* DESCRIPTION: Suggests += dirichletprocess, fdrtool, lcmm, locfdr, np, quantreg
+* Tests in tests/testthat/test-extenders-nonparam.R
+
 ## Phase 1.m: spatial/multivariate extenders -- gstat / copula / kernlab / metafor / mvtnorm
-* New file `R/extenders_spatial.R` with 8 wrappers covering variograms, kriging, copulas, kernel PCA, spectral clustering, meta-analysis, multivariate normal sampling and CDF (morie_geostat_variogram, morie_geostat_krige, morie_copula_fit, morie_copula_sample, morie_kernel_pca, morie_spectral_cluster, morie_meta_rma, morie_mvnorm_sample, morie_mvnorm_pmv)
+* New file `R/extenders_spatial.R` with 9 wrappers covering variograms, kriging, copulas, kernel PCA, spectral clustering, meta-analysis, multivariate normal sampling and CDF (morie_geostat_variogram, morie_geostat_krige, morie_copula_fit, morie_copula_sample, morie_kernel_pca, morie_spectral_cluster, morie_meta_rma, morie_mvnorm_sample, morie_mvnorm_pmv)
 * DESCRIPTION: Suggests += copula, gstat, kernlab, metafor, mvtnorm
 * Tests in tests/testthat/test-extenders-spatial.R
 
