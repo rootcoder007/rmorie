@@ -1,5 +1,11 @@
 # rmorie 0.9.6 (in development)
 
+## Phase 1 hotfix: drop wrappers for CRAN-archived packages
+* Removed `morie_anchors_analyze` (Phase 1.l) -- upstream `anchors` was archived from CRAN on 2022-03-06 (check problems not corrected). pak resolver could not solve the dependency, blocking CI.
+* Removed `morie_causal_mediation` (Phase 1.h) -- upstream `causalweight` was archived from CRAN on 2026-05-18 because its dependency `LARF` was archived. Same pak resolver failure.
+* DESCRIPTION: Suggests -= anchors, causalweight (35 wrapper extenders remain across Phases 1.k-1.n).
+* Both wrappers can be restored from git history (a9469ec, 4d78188) if the upstream packages return to CRAN.
+
 ## Phase 1.n: FDR/nonparam extenders -- locfdr / fdrtool / quantreg / np / dirichletprocess / lcmm
 * New file `R/extenders_nonparam.R` with 6 wrappers (morie_locfdr_estimate, morie_fdr_qvalues, morie_quantile_reg, morie_np_kernel_reg, morie_dp_gaussian_mixture, morie_lcmm_latent_class)
 * DESCRIPTION: Suggests += dirichletprocess, fdrtool, lcmm, locfdr, np, quantreg

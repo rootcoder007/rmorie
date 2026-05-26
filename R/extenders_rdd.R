@@ -177,44 +177,11 @@ morie_rdd_power_calc <- function(data, cutoff = 0, ...) {
 }
 
 
-# ---------------------------------------------------------------------
-# anchors
-# ---------------------------------------------------------------------
-
-#' Vignette / anchor analysis for ordinal surveys via \pkg{anchors}
-#'
-#' Thin extender over \code{anchors::anchors} for the King-Wand
-#' anchoring-vignette adjustment of ordinal survey responses
-#' (King, Murray, Salomon & Tandon, 2004; Wand, King & Lau, 2011).
-#'
-#' @param formula An \code{anchors} formula of the form
-#'   \code{self ~ vignette1 + vignette2 + ...} (or richer
-#'   \code{cpolr} / \code{chopit} multi-RHS forms; see
-#'   \code{?anchors::anchors}).
-#' @param data A data frame containing the self-assessment and
-#'   vignette items.
-#' @param ... Further arguments forwarded to
-#'   \code{anchors::anchors} (e.g. \code{method}, \code{subset},
-#'   \code{combn}, \code{options}).
-#'
-#' @return A list with \code{$method = "anchors::anchors"} and
-#'   \code{$raw} (an \code{anchors} object).
-#' @export
-#' @examples
-#' \dontrun{
-#'   if (requireNamespace("anchors", quietly = TRUE)) {
-#'     data("freedom", package = "anchors")
-#'     morie_anchors_analyze(
-#'       self ~ vign1 + vign2 + vign3 + vign4 + vign5 + vign6,
-#'       data = freedom
-#'     )
-#'   }
-#' }
-morie_anchors_analyze <- function(formula, data, ...) {
-  .morie_rdd_need("anchors", "morie_anchors_analyze")
-  raw <- anchors::anchors(formula, data = data, ...)
-  list(method = "anchors::anchors", raw = raw)
-}
+# anchors package was archived from CRAN on 2022-03-06 (check problems
+# not corrected). The morie_anchors_analyze wrapper that previously
+# lived here was dropped because the upstream package is no longer
+# available via install.packages(). If anchors returns to CRAN, restore
+# this wrapper from git history (commit a9469ec).
 
 
 # ---------------------------------------------------------------------
