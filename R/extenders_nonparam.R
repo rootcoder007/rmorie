@@ -218,8 +218,13 @@ morie_quantile_reg <- function(formula, tau = 0.5, data, ...) {
 #' }
 morie_np_kernel_reg <- function(formula, data, ...) {
   .morie_nonparam_need("np", "morie_np_kernel_reg")
+  # np::npreg refits using bws$call's `data` arg by NAME; under
+  # `R CMD check`'s clean-env it can't find that name and fails with
+  #   `'data' must be a data.frame, environment, or list`.
+  # Pass `data = data` explicitly to BOTH calls so the data is in
+  # scope regardless of caller environment.
   bws <- np::npregbw(formula = formula, data = data, ...)
-  fit <- np::npreg(bws = bws)
+  fit <- np::npreg(bws = bws, data = data)
   list(
     method = "np::npreg (bws via npregbw)",
     raw = list(bws = bws, fit = fit)

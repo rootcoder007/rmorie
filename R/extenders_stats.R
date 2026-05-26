@@ -121,7 +121,11 @@ morie_desc_kappa <- function(x, y = NULL, ...) {
 #' @export
 morie_desc_winsorize <- function(x, probs = c(0.05, 0.95), ...) {
   .morie_stats_need("DescTools", "morie_desc_winsorize")
-  raw <- DescTools::Winsorize(x, probs = probs, ...)
+  # DescTools::Winsorize signature varies across versions: some accept
+  # `probs =`, others require explicit `val =` (the numeric boundary
+  # pair). Compute the boundaries here so we are version-agnostic.
+  val <- stats::quantile(x, probs = probs, na.rm = TRUE)
+  raw <- DescTools::Winsorize(x, val = val, ...)
   list(method = "DescTools::Winsorize", raw = raw)
 }
 
