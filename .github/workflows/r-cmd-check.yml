@@ -28,6 +28,16 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
   # Parallel compile for source-installed Suggests (C++ heavy deps).
   MAKEFLAGS: "-j4"
+  # rgl is pulled transitively by car/caret/effects/emmeans (Suggests).
+  # On macOS-ARM64 the CRAN rgl binary tries to dlopen libGLU.1.dylib at
+  # .onLoad; XQuartz is not preinstalled on the runner -> segfault during
+  # `checking dependencies in R code`, which crashes the whole check.
+  # RGL_USE_NULL=TRUE makes rgl initialise in headless / null-device
+  # mode and skip the OpenGL load entirely. Much cheaper than the
+  # alternative (`brew install --cask xquartz`, ~150 MB, ~3 min). Set
+  # on all OS cells: rgl is a CI-only transitive dep, no graphics tests
+  # run here.
+  RGL_USE_NULL: "TRUE"
 
 on:
   workflow_call:
