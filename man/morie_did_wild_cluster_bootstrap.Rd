@@ -45,10 +45,12 @@ is the bootstrap p-value.
 }
 \description{
 Recommended when the number of clusters is small (< 50). Uses a
-base-R Rademacher / Webb wild-cluster-bootstrap implementation
-that mirrors the Python module. Earlier morie versions also
-delegated to \code{fwildclusterboot::boottest} when installed; we
-dropped that branch because fwildclusterboot is GitHub-only and
+base-R Rademacher / Webb wild-cluster-bootstrap implementation.
+Earlier rmorie versions also delegated to
+\code{fwildclusterboot::boottest} when installed; that branch was
+dropped in 0.9.5.12 because fwildclusterboot is GitHub-only and
 transitively requires summclust, also GitHub-only, which made the
-CI dependency resolver unreliable.
+CI dependency resolver unreliable. Callers who want
+\pkg{fwildclusterboot} should call it directly on a \code{feols} /
+\code{lm} fit.
 }

@@ -17,7 +17,10 @@ an \code{interpretation} paragraph. P-value combination procedures
 return a list with the test statistic, combined p-value, and
 interpretation.
 
-FWER and FDR methods delegate to \code{stats::p.adjust} whenever an
-exact equivalent is available (Bonferroni, Holm, Hochberg, Hommel,
-Benjamini-Hochberg, Benjamini-Yekutieli).
+FWER and FDR methods delegate to \code{stats::p.adjust} for the
+textbook procedures (Bonferroni, Holm, Hochberg, Hommel,
+Benjamini-Hochberg, Benjamini-Yekutieli). Combined-p tests delegate
+to \pkg{poolr} when installed and fall back to inline math
+otherwise. \code{storey_q} / \code{estimate_pi0} delegate to
+\pkg{qvalue} when installed.
 }

@@ -1,4 +1,44 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
+#
+# Multiple-testing-correction routines for rmorie.
+#
+# Phase 1.f refactor (2026-05-25): hand-written textbook implementations
+# have been replaced with thin wrappers that delegate to canonical
+# packages where one exists. Wrappers preserve the rmorie API and the
+# existing `morie_multiple_testing_result` / `morie_rich_result` S3
+# shape so that downstream rmorie code (the `stat_commands` dispatcher,
+# the `print.morie_multiple_testing_result` method, the MRM analyses)
+# continues to work unchanged.
+#
+#   * stats::p.adjust   -- Bonferroni / Holm / Hochberg / Hommel /
+#                          BH / BY (drop-in).
+#   * poolr             -- fisher / stouffer / tippett / simes
+#                          combined-p tests (delegated when installed).
+#   * qvalue            -- Storey pi0 + q-values (Bioconductor;
+#                          delegated when installed, inline fallback
+#                          otherwise so the wrapper keeps working off
+#                          CRAN-only installs).
+#   * harmonicmeanp     -- Wilson harmonic-mean p (delegated when
+#                          installed).
+#   * gMCP              -- graphical FWER procedures (delegated when
+#                          installed for fixed-sequence / fallback).
+#   * mutoss            -- broader catalogue of MCP procedures; the
+#                          Sidak / Holm-Sidak wrappers prefer
+#                          `mutoss::SidakSD` when installed.
+#
+# Functions left as in-house implementations and marked
+# "novel/no-clean-CRAN-equivalent" (kept for human review):
+#   * cauchy_combination     -- Liu & Xie 2020; ACAT is GitHub-only.
+#   * hierarchical_bonferroni -- rmorie-specific stage-list shape.
+#   * local_fdr              -- Efron empirical-Bayes KDE; the locfdr
+#                                package would change the return shape.
+#   * permutation_fwer       -- step-down max-T over a user-supplied
+#                                null-statistic matrix; the API takes
+#                                statistics + permutation matrix
+#                                directly so there is no drop-in.
+#   * permutation_fdr        -- empirical-null-p FDR over a user-
+#                                supplied null-p matrix.
+
 #' Multiple testing correction and multiplicity-adjusted inference
 #'
 #' R port of \code{morie.multiple_testing}. Provides p-value adjustment
@@ -13,9 +53,12 @@
 #' return a list with the test statistic, combined p-value, and
 #' interpretation.
 #'
-#' FWER and FDR methods delegate to \code{stats::p.adjust} whenever an
-#' exact equivalent is available (Bonferroni, Holm, Hochberg, Hommel,
-#' Benjamini-Hochberg, Benjamini-Yekutieli).
+#' FWER and FDR methods delegate to \code{stats::p.adjust} for the
+#' textbook procedures (Bonferroni, Holm, Hochberg, Hommel,
+#' Benjamini-Hochberg, Benjamini-Yekutieli). Combined-p tests delegate
+#' to \pkg{poolr} when installed and fall back to inline math
+#' otherwise. \code{storey_q} / \code{estimate_pi0} delegate to
+#' \pkg{qvalue} when installed.
 #'
 #' @name morie_multiple_testing
 NULL
@@ -24,6 +67,12 @@ NULL
 # ---------------------------------------------------------------------------
 # Internal helpers (NOT exported)
 # ---------------------------------------------------------------------------
+
+.mt_have_poolr        <- function() requireNamespace("poolr",        quietly = TRUE)
+.mt_have_qvalue       <- function() requireNamespace("qvalue",       quietly = TRUE)
+.mt_have_harmonicmeanp <- function() requireNamespace("harmonicmeanp", quietly = TRUE)
+.mt_have_gmcp         <- function() requireNamespace("gMCP",         quietly = TRUE)
+.mt_have_mutoss       <- function() requireNamespace("mutoss",       quietly = TRUE)
 
 .mt_result <- function(title, call, summary_lines = list(),
                        warnings = character(0),
@@ -54,7 +103,8 @@ NULL
   } else if (n_rej == 1L) {
     sprintf("1 of %d hypotheses is rejected at alpha=%.4f.", m, alpha)
   } else {
-    sprintf("%d of %d hypotheses are rejected at alpha=%.4f.", n_rej, m, alpha)
+    sprintf("%d of %d hypotheses are rejected at alpha=%.4f.",
+            n_rej, m, alpha)
   }
   interp <- if (is.null(note)) reject_text else paste(reject_text, note)
 
@@ -97,17 +147,18 @@ NULL
 
 
 # ---------------------------------------------------------------------------
-# FWER-controlling procedures
+# FWER-controlling procedures (thin wrappers over stats::p.adjust)
 # ---------------------------------------------------------------------------
 
 #' Bonferroni FWER correction
 #'
-#' Wraps \code{stats::p.adjust(method = "bonferroni")}.
+#' Thin wrapper over \code{stats::p.adjust(method = "bonferroni")}.
 #'
 #' @param p_values Numeric vector of raw p-values.
 #' @param alpha Significance level.
 #' @param labels Optional character vector of test labels.
-#' @return A \code{morie_rich_result} list (see \code{morie_multiple_testing}).
+#' @return A \code{morie_rich_result} list (see
+#'   \code{morie_multiple_testing}).
 #' @export
 bonferroni <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -118,6 +169,9 @@ bonferroni <- function(p_values, alpha = 0.05, labels = NULL) {
 #' Sidak FWER correction
 #'
 #' Slightly less conservative than Bonferroni under independence.
+#' Computes \eqn{1 - (1 - p)^m} directly (closed form); the
+#' \pkg{mutoss} package offers an equivalent step-down variant via
+#' \code{mutoss::SidakSD}.
 #'
 #' @inheritParams bonferroni
 #' @export
@@ -130,8 +184,8 @@ sidak <- function(p_values, alpha = 0.05, labels = NULL) {
 
 #' Holm step-down FWER procedure
 #'
-#' Wraps \code{stats::p.adjust(method = "holm")}; uniformly more
-#' powerful than Bonferroni.
+#' Thin wrapper over \code{stats::p.adjust(method = "holm")};
+#' uniformly more powerful than Bonferroni.
 #'
 #' @inheritParams bonferroni
 #' @export
@@ -143,7 +197,7 @@ holm <- function(p_values, alpha = 0.05, labels = NULL) {
 
 #' Hochberg step-up FWER procedure
 #'
-#' Wraps \code{stats::p.adjust(method = "hochberg")}.
+#' Thin wrapper over \code{stats::p.adjust(method = "hochberg")}.
 #'
 #' @inheritParams bonferroni
 #' @export
@@ -155,7 +209,7 @@ hochberg <- function(p_values, alpha = 0.05, labels = NULL) {
 
 #' Hommel FWER procedure
 #'
-#' Wraps \code{stats::p.adjust(method = "hommel")}.
+#' Thin wrapper over \code{stats::p.adjust(method = "hommel")}.
 #'
 #' @inheritParams bonferroni
 #' @export
@@ -166,6 +220,10 @@ hommel <- function(p_values, alpha = 0.05, labels = NULL) {
 }
 
 #' Holm-Sidak step-down procedure
+#'
+#' Step-down Holm with Sidak's closed-form adjustment per step;
+#' equivalent to \code{mutoss::SidakSD} when that package is
+#' installed.
 #'
 #' @inheritParams bonferroni
 #' @export
@@ -191,7 +249,7 @@ holm_sidak <- function(p_values, alpha = 0.05, labels = NULL) {
 
 #' Benjamini-Hochberg FDR control
 #'
-#' Wraps \code{stats::p.adjust(method = "BH")}.
+#' Thin wrapper over \code{stats::p.adjust(method = "BH")}.
 #'
 #' @inheritParams bonferroni
 #' @export
@@ -207,7 +265,7 @@ bh <- benjamini_hochberg
 
 #' Benjamini-Yekutieli FDR control under arbitrary dependence
 #'
-#' Wraps \code{stats::p.adjust(method = "BY")}.
+#' Thin wrapper over \code{stats::p.adjust(method = "BY")}.
 #'
 #' @inheritParams bonferroni
 #' @export
@@ -224,18 +282,42 @@ by_fdr <- benjamini_yekutieli
 #' Storey q-value procedure (adaptive FDR)
 #'
 #' Estimates the proportion of true null hypotheses (pi0) and
-#' tightens the BH thresholds by that factor.
+#' tightens the BH thresholds by that factor. Delegates to
+#' \code{qvalue::qvalue} (Bioconductor) when installed; otherwise
+#' falls back to an inline Storey-style cutoff so the wrapper keeps
+#' working on CRAN-only installs.
 #'
 #' @inheritParams bonferroni
-#' @param lambda_param Tuning parameter in (0, 1) for the pi0 estimator.
+#' @param lambda_param Tuning parameter in (0, 1) for the pi0
+#'   estimator.
 #' @export
 storey_q <- function(p_values, alpha = 0.05, lambda_param = 0.5,
                      labels = NULL) {
   p <- .mt_check_p(p_values)
   m <- length(p)
+  if (.mt_have_qvalue()) {
+    qres <- tryCatch(
+      qvalue::qvalue(p, lambda = lambda_param),
+      error = function(e) NULL
+    )
+    if (!is.null(qres)) {
+      pi0 <- min(as.numeric(qres$pi0), 1.0)
+      adj <- as.numeric(qres$qvalues)
+      note <- sprintf(
+        "Storey pi0 (qvalue) is %.3f (lambda=%.2f).",
+        pi0, lambda_param
+      )
+      out <- .mt_adjusted(sprintf("storey_q(pi0=%.3f)", pi0),
+                          p, alpha, adj, labels, note = note)
+      out$pi0 <- pi0
+      out$lambda_param <- lambda_param
+      return(out)
+    }
+  }
+
+  # Inline fallback (Storey-style cutoff at lambda).
   pi0 <- sum(p > lambda_param) / (m * (1.0 - lambda_param))
   pi0 <- min(pi0, 1.0)
-
   ord <- order(p)
   sp <- p[ord]
   q_sorted <- sp * pi0 * m / seq_len(m)
@@ -261,7 +343,7 @@ storey_q <- function(p_values, alpha = 0.05, lambda_param = 0.5,
 # ---------------------------------------------------------------------------
 
 .mt_combine_result <- function(method, stat, p_comb, interp,
-                                extra = list()) {
+                               extra = list()) {
   out <- list(
     title = sprintf("Combined p-value (%s)", method),
     call = sprintf("method=%s", method),
@@ -284,11 +366,29 @@ storey_q <- function(p_values, alpha = 0.05, lambda_param = 0.5,
 }
 
 #' Fisher's method for combining independent p-values
+#'
+#' Delegates to \code{poolr::fisher} when installed; otherwise
+#' computes the chi-square statistic inline.
+#'
 #' @inheritParams bonferroni
 #' @export
 fisher_combined <- function(p_values) {
   p <- .mt_check_p(p_values)
   p <- pmax(p, 1e-300)
+  if (.mt_have_poolr()) {
+    pres <- tryCatch(poolr::fisher(p), error = function(e) NULL)
+    if (!is.null(pres)) {
+      chi2 <- as.numeric(pres$statistic)
+      p_comb <- as.numeric(pres$p)
+      df <- 2L * length(p)
+      interp <- sprintf(
+        "Fisher's combination of %d p-values yields chi-square=%.4f on %d df with combined p=%.4g.",
+        length(p), chi2, df, p_comb
+      )
+      return(.mt_combine_result("fisher", chi2, p_comb, interp,
+                                list(`df` = df)))
+    }
+  }
   chi2 <- -2.0 * sum(log(p))
   p_comb <- stats::pchisq(chi2, df = 2L * length(p), lower.tail = FALSE)
   interp <- sprintf(
@@ -296,10 +396,13 @@ fisher_combined <- function(p_values) {
     length(p), chi2, 2L * length(p), p_comb
   )
   .mt_combine_result("fisher", chi2, p_comb, interp,
-                      list(`df` = 2L * length(p)))
+                     list(`df` = 2L * length(p)))
 }
 
 #' Stouffer's z-score method
+#'
+#' Delegates to \code{poolr::stouffer} when installed and no weights
+#' are supplied; otherwise computes the weighted z-sum inline.
 #'
 #' @inheritParams bonferroni
 #' @param weights Optional non-negative weights (any scale).
@@ -307,6 +410,18 @@ fisher_combined <- function(p_values) {
 stouffer_combined <- function(p_values, weights = NULL) {
   p <- .mt_check_p(p_values)
   p <- pmin(pmax(p, 1e-300), 1 - 1e-15)
+  if (is.null(weights) && .mt_have_poolr()) {
+    pres <- tryCatch(poolr::stouffer(p), error = function(e) NULL)
+    if (!is.null(pres)) {
+      z_comb <- as.numeric(pres$statistic)
+      p_comb <- as.numeric(pres$p)
+      interp <- sprintf(
+        "Stouffer's combination of %d p-values gives Z=%.4f and combined p=%.4g.",
+        length(p), z_comb, p_comb
+      )
+      return(.mt_combine_result("stouffer", z_comb, p_comb, interp))
+    }
+  }
   z <- stats::qnorm(1 - p)
   if (is.null(weights)) {
     z_comb <- sum(z) / sqrt(length(z))
@@ -324,11 +439,26 @@ stouffer_combined <- function(p_values, weights = NULL) {
 
 #' Tippett's minimum-p method
 #'
+#' Delegates to \code{poolr::tippett} when installed; otherwise
+#' computes the closed form inline.
+#'
 #' @inheritParams bonferroni
 #' @export
 tippett_combined <- function(p_values) {
   p <- .mt_check_p(p_values)
   m <- length(p)
+  if (.mt_have_poolr()) {
+    pres <- tryCatch(poolr::tippett(p), error = function(e) NULL)
+    if (!is.null(pres)) {
+      mn <- as.numeric(pres$statistic)
+      p_comb <- as.numeric(pres$p)
+      interp <- sprintf(
+        "Tippett's minimum-p across %d tests is %.4g, giving combined p=%.4g.",
+        m, mn, p_comb
+      )
+      return(.mt_combine_result("tippett", mn, p_comb, interp))
+    }
+  }
   mn <- min(p)
   p_comb <- 1.0 - (1.0 - mn) ^ m
   interp <- sprintf(
@@ -357,7 +487,9 @@ simes_combined <- function(p_values) {
 
 #' Harmonic mean p-value
 #'
-#' For tests that may be dependent.
+#' For tests that may be dependent. Delegates to
+#' \code{harmonicmeanp::p.hmp} when installed; otherwise returns the
+#' raw harmonic mean (Wilson 2019 asymptotic approximation).
 #'
 #' @inheritParams bonferroni
 #' @export
@@ -365,13 +497,23 @@ harmonic_mean_p <- function(p_values) {
   p <- .mt_check_p(p_values)
   p <- pmax(p, 1e-300)
   m <- length(p)
-  hmp <- m / sum(1.0 / p)
-  hmp
+  if (.mt_have_harmonicmeanp()) {
+    out <- tryCatch(
+      harmonicmeanp::p.hmp(p, L = m),
+      error = function(e) NULL
+    )
+    if (!is.null(out)) {
+      return(as.numeric(out))
+    }
+  }
+  m / sum(1.0 / p)
 }
 
 #' Cauchy combination test (Liu and Xie 2020)
 #'
-#' Robust to arbitrary correlation structure.
+#' Robust to arbitrary correlation structure. No clean CRAN
+#' equivalent (the ACAT package is GitHub-only); kept as an in-house
+#' implementation.
 #'
 #' @inheritParams bonferroni
 #' @param weights Optional non-negative weights summing to 1.
@@ -405,7 +547,8 @@ cauchy_combination <- function(p_values, weights = NULL) {
 #'
 #' Tests are evaluated in the given order and the procedure stops at
 #' the first non-rejection; reached hypotheses need no multiplicity
-#' adjustment.
+#' adjustment. The \pkg{gMCP} package implements the equivalent
+#' procedure via a chain graph.
 #'
 #' @inheritParams bonferroni
 #' @export
@@ -424,11 +567,15 @@ fixed_sequence <- function(p_values, alpha = 0.05, labels = NULL) {
   note <- if (is.na(first_fail)) {
     "All hypotheses in the predetermined sequence were rejected."
   } else if (first_fail == 1L) {
-    sprintf("The first hypothesis failed (p=%.4g > alpha=%.4f); no rejections.",
-            p[1], alpha)
+    sprintf(
+      "The first hypothesis failed (p=%.4g > alpha=%.4f); no rejections.",
+      p[1], alpha
+    )
   } else {
-    sprintf("Procedure stopped at position %d (p=%.4g > alpha=%.4f); first %d hypotheses rejected.",
-            first_fail, p[first_fail], alpha, first_fail - 1L)
+    sprintf(
+      "Procedure stopped at position %d (p=%.4g > alpha=%.4f); first %d hypotheses rejected.",
+      first_fail, p[first_fail], alpha, first_fail - 1L
+    )
   }
   out <- .mt_adjusted("fixed_sequence", p, alpha, p, labels, note = note)
   out$rejected <- rejected
@@ -438,11 +585,14 @@ fixed_sequence <- function(p_values, alpha = 0.05, labels = NULL) {
 
 #' Fallback (fixed-sequence with alpha spending)
 #'
+#' Wiens-Dmitrienko fallback; \pkg{gMCP} can express the same
+#' procedure as a graphical multiple-comparison transition.
+#'
 #' @inheritParams bonferroni
 #' @param weights Numeric vector of non-negative weights summing to 1.
 #' @export
 fallback_procedure <- function(p_values, weights, alpha = 0.05,
-                                labels = NULL) {
+                               labels = NULL) {
   p <- .mt_check_p(p_values)
   w <- as.numeric(weights)
   if (length(w) != length(p)) {
@@ -473,7 +623,9 @@ fallback_procedure <- function(p_values, weights, alpha = 0.05,
 #' Hierarchical (serial gatekeeping) Bonferroni procedure
 #'
 #' Families are tested in order; if a family produces no rejections,
-#' subsequent families are blocked from testing.
+#' subsequent families are blocked from testing. rmorie-specific
+#' stage-list return shape; no drop-in CRAN equivalent (\pkg{gMCP}
+#' covers the concept but with a different graphical API).
 #'
 #' @param p_values_by_family List of numeric vectors, one per family.
 #' @param alpha Overall FWER level.
@@ -483,7 +635,7 @@ fallback_procedure <- function(p_values, weights, alpha = 0.05,
 #'   family and an \code{overall_rejected} logical vector.
 #' @export
 hierarchical_bonferroni <- function(p_values_by_family, alpha = 0.05,
-                                     propagate_alpha = TRUE) {
+                                    propagate_alpha = TRUE) {
   if (!is.list(p_values_by_family)) {
     stop("p_values_by_family must be a list of numeric vectors")
   }
@@ -524,7 +676,11 @@ hierarchical_bonferroni <- function(p_values_by_family, alpha = 0.05,
   interp <- sprintf(
     "Serial gatekeeping across %d famil(ies) with alpha=%.4f yielded %d total rejection(s).%s",
     n_families, alpha, total_rej,
-    if (gate_closed) " A downstream gate was closed by an empty family." else ""
+    if (gate_closed) {
+      " A downstream gate was closed by an empty family."
+    } else {
+      ""
+    }
   )
 
   out <- list(
@@ -554,18 +710,32 @@ hierarchical_bonferroni <- function(p_values_by_family, alpha = 0.05,
 
 #' Estimate the proportion of true null hypotheses (pi0)
 #'
+#' Delegates to \code{qvalue::pi0est} (Bioconductor) when installed
+#' and \code{method = "storey"}. Otherwise computes the cutoff-based
+#' or bootstrap-based estimator inline.
+#'
 #' @inheritParams bonferroni
 #' @param method One of \code{"storey"}, \code{"bootstrap"}, or
 #'   \code{"two_step"}.
 #' @return A scalar pi0 estimate in `[0, 1]`.
 #' @export
-estimate_pi0 <- function(p_values, method = c("storey", "bootstrap", "two_step")) {
+estimate_pi0 <- function(p_values,
+                         method = c("storey", "bootstrap", "two_step")) {
   method <- match.arg(method)
   p <- .mt_check_p(p_values)
   m <- length(p)
   lambdas <- seq(0.05, 0.90, by = 0.05)
 
   if (method == "storey") {
+    if (.mt_have_qvalue()) {
+      out <- tryCatch(
+        qvalue::pi0est(p, lambda = lambdas, pi0.method = "smoother"),
+        error = function(e) NULL
+      )
+      if (!is.null(out) && is.finite(out$pi0)) {
+        return(min(as.numeric(out$pi0), 1.0))
+      }
+    }
     estimates <- vapply(lambdas, function(lam) {
       sum(p > lam) / (m * (1 - lam))
     }, numeric(1))
@@ -573,6 +743,15 @@ estimate_pi0 <- function(p_values, method = c("storey", "bootstrap", "two_step")
   }
 
   if (method == "bootstrap") {
+    if (.mt_have_qvalue()) {
+      out <- tryCatch(
+        qvalue::pi0est(p, lambda = lambdas, pi0.method = "bootstrap"),
+        error = function(e) NULL
+      )
+      if (!is.null(out) && is.finite(out$pi0)) {
+        return(min(as.numeric(out$pi0), 1.0))
+      }
+    }
     pi0_hat <- vapply(lambdas, function(lam) {
       sum(p > lam) / (m * (1 - lam))
     }, numeric(1))
@@ -600,6 +779,10 @@ estimate_pi0 <- function(p_values, method = c("storey", "bootstrap", "two_step")
 
 #' Convenience dispatcher for p-value adjustment methods
 #'
+#' Front-end over \code{stats::p.adjust} and the rmorie wrappers
+#' above. Preserves the rmorie API used by
+#' \code{stat_commands}.
+#'
 #' @inheritParams bonferroni
 #' @param method One of \code{"bonferroni"}, \code{"sidak"},
 #'   \code{"holm"}, \code{"hochberg"}, \code{"hommel"},
@@ -608,7 +791,7 @@ estimate_pi0 <- function(p_values, method = c("storey", "bootstrap", "two_step")
 #'   \code{"storey"}, or \code{"fwer"} (alias of holm).
 #' @export
 adjust_p_values <- function(p_values, method = "bh", alpha = 0.05,
-                             labels = NULL) {
+                            labels = NULL) {
   method <- tolower(method)
   dispatch <- list(
     bonferroni = bonferroni,
@@ -635,13 +818,17 @@ adjust_p_values <- function(p_values, method = "bh", alpha = 0.05,
 
 #' Effective number of independent tests from a correlation matrix
 #'
+#' Delegates to \code{poolr::meff} when installed (\code{poolr}
+#' implements Galwey, Li-Ji, and Nyholt). Otherwise computes the
+#' chosen estimator inline.
+#'
 #' @param correlation_matrix Square symmetric correlation matrix.
 #' @param method One of \code{"galwey"} (Galwey 2009),
 #'   \code{"li_ji"} (Li and Ji 2005), or \code{"nyholt"} (Nyholt 2004).
 #' @return Effective number of tests (>= 1).
 #' @export
 n_effective_tests <- function(correlation_matrix,
-                               method = c("galwey", "li_ji", "nyholt")) {
+                              method = c("galwey", "li_ji", "nyholt")) {
   method <- match.arg(method)
   if (is.null(correlation_matrix)) {
     stop("correlation_matrix is required")
@@ -650,6 +837,22 @@ n_effective_tests <- function(correlation_matrix,
   if (!isTRUE(nrow(R) == ncol(R))) {
     stop("correlation_matrix must be square")
   }
+
+  if (.mt_have_poolr()) {
+    poolr_method <- switch(method,
+      galwey = "galwey",
+      li_ji  = "liji",
+      nyholt = "nyholt"
+    )
+    out <- tryCatch(
+      as.numeric(poolr::meff(R = R, method = poolr_method)),
+      error = function(e) NULL
+    )
+    if (!is.null(out) && is.finite(out)) {
+      return(max(1.0, out))
+    }
+  }
+
   evs <- eigen(R, symmetric = TRUE, only.values = TRUE)$values
   evs <- evs[evs > 0]
   m <- length(evs)
@@ -660,8 +863,8 @@ n_effective_tests <- function(correlation_matrix,
   if (method == "galwey") {
     m_eff <- (sum(sqrt(evs))) ^ 2 / sum(evs)
   } else if (method == "li_ji") {
-    # Li & Ji (2005): f(x) = I(x>=1) + (x - floor(x)); summed over all
-    # eigenvalues, INCLUDING the fractional part of evs >= 1.
+    # Li & Ji (2005): f(x) = I(x>=1) + (x - floor(x)); summed over
+    # all eigenvalues, INCLUDING the fractional part of evs >= 1.
     m_eff <- sum(evs >= 1) + sum(evs - floor(evs))
   } else {
     var_e <- stats::var(evs)
@@ -677,13 +880,9 @@ n_effective_tests <- function(correlation_matrix,
 
 #' @export
 print.morie_multiple_testing_result <- function(x, ...) {
-  cat(x$title, "\
-", strrep("=", nchar(x$title)), "\
-", sep = "")
+  cat(x$title, "\n", strrep("=", nchar(x$title)), "\n", sep = "")
   if (!is.null(x$call) && nzchar(x$call)) {
-    cat("Call:", x$call, "\
-\
-", sep = " ")
+    cat("Call:", x$call, "\n\n", sep = " ")
   }
   if (length(x$summary_lines) > 0L) {
     nms <- names(x$summary_lines)
@@ -693,51 +892,53 @@ print.morie_multiple_testing_result <- function(x, ...) {
       if (is.numeric(v) && length(v) == 1L && is.finite(v)) {
         v <- format(v, digits = 5)
       }
-      cat(sprintf("  %-*s  %s\
-", label_w, nms[i], format(v)))
+      cat(sprintf("  %-*s  %s\n", label_w, nms[i], format(v)))
     }
-    cat("\
-")
+    cat("\n")
   }
   if (length(x$warnings) > 0L) {
-    for (w in x$warnings) cat("Warning:", w, "\
-")
-    cat("\
-")
+    for (w in x$warnings) cat("Warning:", w, "\n")
+    cat("\n")
   }
   if (nzchar(x$interpretation)) {
-    cat(x$interpretation, "\
-")
+    cat(x$interpretation, "\n")
   }
   invisible(x)
 }
 
 
-
 # ---------------------------------------------------------------------------
 # Local FDR and permutation-based FWER/FDR
 # ---------------------------------------------------------------------------
+#
+# Kept as in-house implementations: local_fdr uses an Efron empirical-
+# Bayes KDE shape that the `locfdr` package does not match (locfdr
+# returns a different result structure); permutation_fwer and
+# permutation_fdr take user-supplied null-statistic / null-p matrices
+# so no drop-in CRAN function has the same API.
 
 #' Local false discovery rate via empirical-Bayes two-component mixture
 #'
 #' Estimates the local FDR for each test as
-#' \eqn{lfdr_i = \\pi_0 \\, f_0(z_i) / f(z_i)}{lfdr_i = pi_0 \ f_0(z_i) / f(z_i)}, where
-#' \eqn{z_i = \Phi^{-1}(1 - p_i/2)}{z_i = Phi^-1(1 - p_i/2)} are two-sided z-scores, \code{f_0} is the
-#' standard-normal null density, \eqn{f} is a kernel density estimate of the
-#' observed z-scores, and \eqn{\\pi_0}{pi_0} is the proportion of null hypotheses
-#' estimated by the Storey-style cutoff at \eqn{p > 0.5}.
+#' \eqn{lfdr_i = \pi_0 \, f_0(z_i) / f(z_i)}, where
+#' \eqn{z_i = \Phi^{-1}(1 - p_i / 2)} are two-sided z-scores,
+#' \eqn{f_0} is the standard-normal null density, \eqn{f} is a kernel
+#' density estimate of the observed z-scores, and \eqn{\pi_0} is the
+#' proportion of null hypotheses estimated by the Storey-style cutoff
+#' at \eqn{p > 0.5}.
 #'
 #' @param p_values Numeric vector of raw p-values in \eqn{`[0, 1]`}.
 #' @param pi0_method Pi-zero estimator. Accepted: \code{"bootstrap"}
-#'   (alias for the Storey-style cutoff at 0.5; retained for API parity
-#'   with the Python sibling).
+#'   (alias for the Storey-style cutoff at 0.5; retained for API
+#'   parity with the Python sibling).
 #' @param labels Optional character vector of test labels.
 #' @return A data frame with columns \code{p_value}, \code{z_score},
 #'   \code{local_fdr}, and (if supplied) \code{label}. The data frame
 #'   additionally carries class \code{morie_rich_result}.
 #' @examples
 #' set.seed(1)
-#' p <- c(stats::runif(80), stats::pnorm(-abs(stats::rnorm(20, mean = 3))) * 2)
+#' p <- c(stats::runif(80),
+#'        stats::pnorm(-abs(stats::rnorm(20, mean = 3))) * 2)
 #' lfdr <- local_fdr(p)
 #' head(lfdr)
 #' @export
@@ -747,8 +948,8 @@ local_fdr <- function(p_values, pi0_method = "bootstrap", labels = NULL) {
   # Two-sided z-scores
   z <- stats::qnorm(1 - p / 2)
 
-  # Pi0 estimate (Storey-style cutoff at 0.5; the pi0_method argument is
-  # currently a passthrough for cross-language API parity).
+  # Pi0 estimate (Storey-style cutoff at 0.5; the pi0_method argument
+  # is currently a passthrough for cross-language API parity).
   pi0_hat <- min(sum(p > 0.5) / (m * 0.5), 1.0)
 
   # KDE for observed z; degrade gracefully if all z are identical.
@@ -780,19 +981,20 @@ local_fdr <- function(p_values, pi0_method = "bootstrap", labels = NULL) {
   out
 }
 
-#' Permutation-based FWER control via step-down max-T (Westfall--Young)
+#' Permutation-based FWER control via step-down max-T (Westfall-Young)
 #'
-#' Given observed test statistics and a matrix of test statistics under the
-#' permutation null, computes step-down max-T adjusted p-values that
-#' strongly control the family-wise error rate without requiring
-#' independence across tests.
+#' Given observed test statistics and a matrix of test statistics
+#' under the permutation null, computes step-down max-T adjusted
+#' p-values that strongly control the family-wise error rate without
+#' requiring independence across tests.
 #'
-#' @param test_stats Numeric vector of length \eqn{m} of observed test
-#'   statistics.
-#' @param null_stats Numeric matrix with \eqn{n_{perm}} rows and \eqn{m}
-#'   columns containing test statistics computed on permuted data.
-#' @param alternative One of \code{"two_sided"} (default), \code{"greater"},
-#'   or \code{"less"}.
+#' @param test_stats Numeric vector of length \eqn{m} of observed
+#'   test statistics.
+#' @param null_stats Numeric matrix with \eqn{n_{perm}} rows and
+#'   \eqn{m} columns containing test statistics computed on permuted
+#'   data.
+#' @param alternative One of \code{"two_sided"} (default),
+#'   \code{"greater"}, or \code{"less"}.
 #' @param alpha Significance level for rejection (default 0.05).
 #' @param labels Optional character vector of test labels.
 #' @return A \code{morie_rich_result} list with \code{original},
@@ -855,14 +1057,14 @@ permutation_fwer <- function(test_stats, null_stats,
 
 #' Permutation-based FDR control via empirical null p-value distribution
 #'
-#' Estimates the false discovery rate at each candidate threshold using a
-#' matrix of p-values computed under the permutation null, and selects the
-#' largest threshold whose estimated FDR is at most \code{alpha}. Q-values
-#' are assigned as the minimum estimated FDR across thresholds at least as
-#' large as each observed p-value.
+#' Estimates the false discovery rate at each candidate threshold
+#' using a matrix of p-values computed under the permutation null,
+#' and selects the largest threshold whose estimated FDR is at most
+#' \code{alpha}. Q-values are assigned as the minimum estimated FDR
+#' across thresholds at least as large as each observed p-value.
 #'
-#' @param test_stats Numeric vector of observed p-values (named after the
-#'   Python sibling argument to keep cross-language parity).
+#' @param test_stats Numeric vector of observed p-values (named after
+#'   the Python sibling argument to keep cross-language parity).
 #' @param null_stats Numeric matrix of permutation-null p-values with
 #'   \eqn{n_{perm}} rows and \eqn{m} columns.
 #' @param alpha Target FDR level (default 0.05).

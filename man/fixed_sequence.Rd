@@ -16,5 +16,6 @@ fixed_sequence(p_values, alpha = 0.05, labels = NULL)
 \description{
 Tests are evaluated in the given order and the procedure stops at
 the first non-rejection; reached hypotheses need no multiplicity
-adjustment.
+adjustment. The \pkg{gMCP} package implements the equivalent
+procedure via a chain graph.
 }

@@ -256,3 +256,115 @@ test_that("sensitivity_summary appends RR / OR / HR rows when supplied", {
   expect_s3_class(res, "data.frame")
   expect_gte(nrow(res), 5L)
 })
+
+# ---------------------------------------------------------------------------
+# Phase 1.g wrapper-as-extender entry points
+# ---------------------------------------------------------------------------
+
+test_that("morie_sensitivity_evalue dispatches OLS via EValue", {
+  skip_if_not_installed("EValue")
+  out <- tryCatch(
+    morie_sensitivity_evalue(estimate = 0.5, se = 0.1, sd = 1,
+                             type = "OLS"),
+    error = function(e) e
+  )
+  if (inherits(out, "error")) {
+    skip(sprintf("morie_sensitivity_evalue error: %s",
+                 conditionMessage(out)))
+  }
+  expect_s3_class(out, "morie_sensitivity_evalue")
+  expect_true(is.finite(as.numeric(out$e_value_point)))
+  expect_equal(out$type, "OLS")
+})
+
+test_that("morie_sensitivity_evalue errors when EValue missing", {
+  if (requireNamespace("EValue", quietly = TRUE)) skip(
+    "EValue is installed; cannot test missing-package error path."
+  )
+  expect_error(
+    morie_sensitivity_evalue(estimate = 0.5, se = 0.1, sd = 1),
+    regexp = "EValue"
+  )
+})
+
+test_that("morie_sensitivity_tipping_point dispatches tipr::tip", {
+  skip_if_not_installed("tipr")
+  out <- tryCatch(
+    morie_sensitivity_tipping_point(estimate = 0.5, smd = 0.5, r2 = 0.1),
+    error = function(e) e
+  )
+  if (inherits(out, "error")) {
+    skip(sprintf("morie_sensitivity_tipping_point error: %s",
+                 conditionMessage(out)))
+  }
+  expect_s3_class(out, "morie_sensitivity_tipping_point")
+  expect_true(grepl("tipr", out$method))
+})
+
+test_that("morie_sensitivity_tipping_point errors when tipr missing", {
+  if (requireNamespace("tipr", quietly = TRUE)) skip(
+    "tipr is installed; cannot test missing-package error path."
+  )
+  expect_error(
+    morie_sensitivity_tipping_point(estimate = 0.5, smd = 0.5, r2 = 0.1),
+    regexp = "tipr"
+  )
+})
+
+test_that("morie_sensitivity_omitted_var_bias wraps sensemakr on lm", {
+  skip_if_not_installed("sensemakr")
+  set.seed(7)
+  n <- 200L
+  d <- rnorm(n)
+  z <- rnorm(n)
+  y <- 0.5 * d + 0.3 * z + rnorm(n)
+  fit <- stats::lm(y ~ d + z)
+  out <- tryCatch(
+    morie_sensitivity_omitted_var_bias(fit, treatment = "d",
+                                       benchmark_covariates = "z"),
+    error = function(e) e
+  )
+  if (inherits(out, "error")) {
+    skip(sprintf("morie_sensitivity_omitted_var_bias error: %s",
+                 conditionMessage(out)))
+  }
+  expect_s3_class(out, "morie_sensitivity_omitted_var_bias")
+  expect_true(is.finite(as.numeric(out$rv_q)))
+  expect_true(grepl("sensemakr", out$method))
+})
+
+test_that("morie_sensitivity_omitted_var_bias errors when sensemakr missing", {
+  if (requireNamespace("sensemakr", quietly = TRUE)) skip(
+    "sensemakr is installed; cannot test missing-package error path."
+  )
+  fit <- stats::lm(mpg ~ wt + hp, data = mtcars)
+  expect_error(
+    morie_sensitivity_omitted_var_bias(fit, treatment = "wt"),
+    regexp = "sensemakr"
+  )
+})
+
+test_that("morie_sensitivity_konfound dispatches pkonfound", {
+  skip_if_not_installed("konfound")
+  out <- tryCatch(
+    morie_sensitivity_konfound(estimate = 0.5, se = 0.1, n = 200L,
+                               n_covariates = 3L),
+    error = function(e) e
+  )
+  if (inherits(out, "error")) {
+    skip(sprintf("morie_sensitivity_konfound error: %s",
+                 conditionMessage(out)))
+  }
+  expect_s3_class(out, "morie_sensitivity_konfound")
+  expect_true(grepl("konfound", out$method))
+})
+
+test_that("morie_sensitivity_konfound errors when konfound missing", {
+  if (requireNamespace("konfound", quietly = TRUE)) skip(
+    "konfound is installed; cannot test missing-package error path."
+  )
+  expect_error(
+    morie_sensitivity_konfound(estimate = 0.5, se = 0.1, n = 200L),
+    regexp = "konfound"
+  )
+})

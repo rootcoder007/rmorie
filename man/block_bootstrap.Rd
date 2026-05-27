@@ -34,5 +34,13 @@ block_bootstrap(
 A \code{morie_bootstrap_result}.
 }
 \description{
-Resamples blocks of consecutive observations.
+Resamples blocks of consecutive observations. Delegates to
+\code{boot::tsboot} when \pkg{boot} is installed (fixed and
+stationary / geometric blocks); a circular-block path is
+implemented inline because \code{boot::tsboot} does not expose a
+circular-block sim mode directly. Falls back to a pure-R loop
+otherwise.
+}
+\seealso{
+\code{boot::tsboot}.
 }

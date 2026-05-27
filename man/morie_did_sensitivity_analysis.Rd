@@ -39,9 +39,16 @@ A data frame with columns \code{delta}, \code{ci_lower},
 \code{ci_upper}, \code{covers_zero}.
 }
 \description{
-For each \eqn{\delta}{delta}, computes a bias-adjusted confidence set under
-the bound \eqn{|\mathrm{bias}| \le \delta \hat\sigma}{|bias| <= delta hatsigma} (Rambachan &
-Roth, 2023, conservative version).
+For each \eqn{\delta}{delta}, computes a bias-adjusted confidence
+set under the bound
+\eqn{|\mathrm{bias}| \le \delta \hat\sigma}{|bias| <= delta hatsigma}
+(Rambachan & Roth, 2023, conservative version).
+}
+\details{
+For the full Rambachan-Roth fixed-length-confidence-interval (FLCI)
+procedure with event-time pre-trends prefer
+\code{HonestDiD::createSensitivityResults_relativeMagnitudes} on
+an event-study coefficient vector.
 }
 \references{
 Rambachan, A., & Roth, J. (2023). A more credible approach

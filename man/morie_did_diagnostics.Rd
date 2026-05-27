@@ -35,3 +35,8 @@ A list with \code{sample_sizes}, \code{outcome_stats},
 Reports group / period sample sizes, outcome distributions, and
 baseline covariate balance (standardised mean differences).
 }
+\details{
+For richer covariate-balance reporting (variance ratios, KS
+statistics, love plots) prefer \code{cobalt::bal.tab} /
+\code{cobalt::love.plot}.
+}

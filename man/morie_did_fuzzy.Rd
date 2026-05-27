@@ -41,3 +41,8 @@ Uses \eqn{Z \times \mathrm{Post}}{Z x Post} as an instrument for
 \eqn{D \times \mathrm{Post}}{D x Post} to recover a local average treatment
 effect under imperfect compliance.
 }
+\details{
+For the de Chaisemartin-D'Haultfoeuille fuzzy DiD estimator on
+panel data prefer \code{\link{morie_did_chaisemartin_dhaultfoeuille}}
+(\pkg{DIDmultiplegt}).
+}

@@ -38,4 +38,9 @@ reference:
       - rmorie-package
   - title: All exported functions
     contents:
-      - has_keyword("")
+      # matches(".") catches every exported topic regardless of keyword.
+      # Topics tagged `@keywords internal` are auto-excluded by pkgdown.
+      # has_keyword("") only matched explicitly-empty-keyword topics, so
+      # 1512 exports without any \keyword line failed the index-coverage
+      # check that pkgdown::build_reference_index() runs.
+      - matches(".")

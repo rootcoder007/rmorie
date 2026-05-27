@@ -15,7 +15,8 @@ morie_estimate_double_ml(
 )
 }
 \arguments{
-\item{data}{A data frame with treatment, outcome, and covariate columns.}
+\item{data}{A data frame with treatment, outcome, and covariate
+columns.}
 
 \item{outcome}{Name of the continuous outcome column.}
 
@@ -25,23 +26,25 @@ morie_estimate_double_ml(
 
 \item{n_folds}{Number of cross-fitting folds (default 5).}
 
-\item{n_rep}{Number of repeated cross-fitting repetitions (DoubleML only;
-ignored by the ridge fallback). Default 1.}
+\item{n_rep}{Number of repeated cross-fitting repetitions
+(DoubleML only; ignored by the ridge fallback). Default 1.}
 
-\item{random_state}{Integer seed for cross-fit folds and learners (default 42).}
+\item{random_state}{Integer seed for cross-fit folds and learners
+(default 42).}
 }
 \value{
-Named list with elements \code{ate}, \code{se}, \code{ci_lower},
-\code{ci_upper}, \code{n}, \code{method}.
+Named list with elements \code{ate}, \code{se},
+\code{ci_lower}, \code{ci_upper}, \code{n}, \code{method}.
 }
 \description{
-Implements Chernozhukov et al. (2018) double/debiased machine learning
-for the partially linear regression model. When the
+Implements Chernozhukov et al. (2018) double/debiased machine
+learning for the partially linear regression model. When the
 \pkg{DoubleML} R package is installed, delegates to
 \code{DoubleML::DoubleMLPLR} with random-forest nuisance learners.
-Otherwise falls back to a hand-rolled cross-fit ridge implementation:
-residualise \eqn{Y} and \eqn{D} on \eqn{X} via K-fold ridge, then
-regress the outcome residual on the treatment residual.
+Otherwise falls back to a hand-rolled cross-fit ridge
+implementation: residualise \eqn{Y} and \eqn{D} on \eqn{X} via
+K-fold ridge, then regress the outcome residual on the treatment
+residual.
 }
 \examples{
 set.seed(1)
@@ -53,8 +56,8 @@ df <- data.frame(y = y, d = d, x1 = X[, 1], x2 = X[, 2], x3 = X[, 3])
 morie_estimate_double_ml(df, "y", "d", c("x1", "x2", "x3"))
 }
 \references{
-Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo, E., Hansen, C.,
-Newey, W., & Robins, J. (2018). Double/debiased machine learning for
-treatment and structural parameters. \emph{The Econometrics Journal},
-21(1), C1--C68.
+Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo, E.,
+Hansen, C., Newey, W., & Robins, J. (2018). Double/debiased
+machine learning for treatment and structural parameters.
+\emph{The Econometrics Journal}, 21(1), C1--C68.
 }

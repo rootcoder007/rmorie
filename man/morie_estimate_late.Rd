@@ -15,20 +15,24 @@ morie_estimate_late(data, treatment, outcome, instrument, covariates = NULL)
 
 \item{instrument}{Name of the binary instrument column.}
 
-\item{covariates}{Optional character vector of exogenous covariates.}
+\item{covariates}{Optional character vector of exogenous
+covariates.}
 }
 \value{
 Named list: \code{late}, \code{se}, \code{ci_lower}, \code{ci_upper},
 \code{first_stage_f}, \code{n}.
 }
 \description{
-Uses a binary instrument \eqn{Z} to identify the LATE (Imbens & Angrist, 1994):
+Uses a binary instrument \eqn{Z} to identify the LATE
+(Imbens & Angrist, 1994):
 \deqn{LATE = \frac{Cov(Y, Z)}{Cov(T, Z)}}{LATE = (Cov(Y, Z))/(Cov(T, Z))}
 }
 \details{
-With covariates, uses two-stage OLS (Wald within residuals).
-Requires \code{ivreg::ivreg()} if available; otherwise falls back to the
-closed-form Wald estimator.
+With covariates, the routine delegates to \code{ivreg::ivreg()}
+(\pkg{ivreg}) or \code{AER::ivreg()} when either package is
+installed; otherwise it falls back to a manual two-stage OLS.
+Without covariates the closed-form Wald estimator and its
+delta-method SE are used.
 }
 \examples{
 set.seed(1)
@@ -39,6 +43,6 @@ y <- 0.8 * t + rnorm(n)
 morie_estimate_late(data.frame(t = t, y = y, z = z), "t", "y", "z")
 }
 \references{
-Imbens GW, Angrist JD (1994). Identification and estimation of local
-average treatment effects. \emph{Econometrica}, 62(2), 467-475.
+Imbens GW, Angrist JD (1994). Identification and estimation of
+local average treatment effects. \emph{Econometrica}, 62(2), 467-475.
 }

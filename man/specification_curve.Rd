@@ -40,5 +40,8 @@ A \code{morie_spec_curve} named-list.
 \description{
 Estimates the treatment effect across many reasonable model
 specifications to assess robustness. Combines covariate sets x
-sample filters x model families.
+sample filters x model families.  Cross-references \pkg{specr}
+(\code{specr::specr}) as the canonical modern implementation with
+built-in plotting; use \pkg{specr} directly when you want the
+published specification-curve plot.
 }

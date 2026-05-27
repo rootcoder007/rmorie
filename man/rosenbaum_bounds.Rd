@@ -25,6 +25,10 @@ rosenbaum_bounds(
 A \code{morie_rosenbaum_bounds} named-list.
 }
 \description{
-Wraps \pkg{rbounds} when available (and \code{method == "wilcoxon"});
-falls back to a base-R normal-approximation implementation.
+Phase 1.g delegates to \pkg{rbounds} when installed and the
+\code{wilcoxon} or \code{sign} method is requested; otherwise
+falls back to the base-R normal-approximation implementation
+originally shipped with rmorie.  The \code{mcnemar} path is always
+served by the inline binomial formula (rbounds does not expose a
+McNemar entry point on CRAN).
 }

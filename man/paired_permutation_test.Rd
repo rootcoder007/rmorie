@@ -28,5 +28,12 @@ paired_permutation_test(
 A \code{morie_permutation_test_result}.
 }
 \description{
-Paired permutation test (sign-flipping)
+Performs a sign-flipping paired permutation test on the paired
+differences. \code{coin::symmetry_test(distribution = "approximate")}
+is the canonical CRAN equivalent (cross-referenced); rmorie keeps
+the inline path because the rmorie API returns the full null
+distribution.
+}
+\seealso{
+\code{coin::symmetry_test}.
 }

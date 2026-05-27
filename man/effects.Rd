@@ -2,25 +2,54 @@
 % Please edit documentation in R/effects.R
 \name{effects}
 \alias{effects}
-\title{Treatment effect estimators (ATE, LATE, G-computation, sensitivity)}
+\title{Treatment effect estimators and marginal-effects extenders}
 \description{
-Provides:
-\itemize{
-\item \code{estimate_ate()} — IPW-weighted OLS ATE.
-\item \code{estimate_plr()} — Partially Linear Regression via
-DoubleML.jl-style cross-fitting (uses \pkg{DoubleML} if
-installed; otherwise base R cross-fit ridge fallback).
-\item \code{estimate_pliv()} — Partially Linear IV (LATE) via
-DoubleML or 2SLS fallback.
-\item \code{estimate_ate_gcomputation()} — G-computation
-(outcome-regression / standardisation) ATE with bootstrap SE.
-\item \code{sensitivity_rosenbaum()} — Rosenbaum bounds for hidden
-confounding (wraps \pkg{rbounds} when available, else base R).
-\item \code{e_value()} — VanderWeele-Ding E-value (wraps
-\pkg{EValue} when available, else base R).
+Two function families live here:
 }
+\details{
+\strong{Treatment-effect estimators (legacy)}
+\itemize{
+\item \code{estimate_ate()} -- IPW-weighted OLS ATE.
+\item \code{estimate_plr()} -- Partially Linear Regression via
+\pkg{DoubleML}; falls back to base R cross-fit ridge.
+\item \code{estimate_pliv()} -- Partially Linear IV (LATE) via
+\pkg{DoubleML}; falls back to 2SLS.
+\item \code{estimate_ate_gcomputation()} -- G-computation ATE.
+Thin wrapper over \code{stdReg::stdGlm()} when installed; falls
+back to inline bootstrap standardisation otherwise.
+\item \code{sensitivity_rosenbaum()} -- Rosenbaum bounds. Thin
+wrapper over \code{rbounds::psens()} when installed; otherwise
+normal-approximation Wilcoxon signed-rank bounds.
+\item \code{e_value()} -- VanderWeele-Ding E-value. Thin wrapper
+over \code{EValue::evalues.OLS()} when installed; otherwise the
+closed-form continuous-scale RR proxy.
+}
+
+\strong{Marginal-effects extenders} (Phase 1.j additions; thin
+wrappers over Vincent Arel-Bundock's universal API and the
+\pkg{emmeans} / \pkg{broom} ecosystems):
+\itemize{
+\item \code{morie_effects_emmeans()} -> \code{emmeans::emmeans()}.
+\item \code{morie_effects_predictions()} ->
+\code{marginaleffects::predictions()}.
+\item \code{morie_effects_comparisons()} ->
+\code{marginaleffects::comparisons()}.
+\item \code{morie_effects_slopes()} ->
+\code{marginaleffects::slopes()}.
+\item \code{morie_effects_tidy()} -> \code{broom::tidy()} (falls
+back to a \code{summary()}-based tidy frame when \pkg{broom}
+is unavailable).
+}
+
+Each extender requires the underlying CRAN package and signals a
+clean \code{stop()} when it is missing, leaving the upstream model
+object untouched. They return the underlying package's native
+object verbatim so downstream code (e.g. \pkg{ggplot2} plumbing,
+rmorie's MRM step) keeps working with the canonical API.
 }
 \references{
 Chernozhukov et al. (2018); Robins (1986); VanderWeele & Ding
-(2017); Rosenbaum (2002).
+(2017); Rosenbaum (2002); Arel-Bundock (2024,
+\pkg{marginaleffects}); Lenth (2024, \pkg{emmeans});
+Robinson, Hayes & Couch (2024, \pkg{broom}).
 }
