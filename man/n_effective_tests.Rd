@@ -16,5 +16,7 @@ n_effective_tests(correlation_matrix, method = c("galwey", "li_ji", "nyholt"))
 Effective number of tests (>= 1).
 }
 \description{
-Effective number of independent tests from a correlation matrix
+Delegates to \code{poolr::meff} when installed (\code{poolr}
+implements Galwey, Li-Ji, and Nyholt). Otherwise computes the
+chosen estimator inline.
 }

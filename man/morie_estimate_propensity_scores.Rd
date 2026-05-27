@@ -18,13 +18,17 @@ morie_estimate_propensity_scores(
 
 \item{covariates}{Character vector of covariate names.}
 
-\item{trim}{Quantile pair used to winsorize extreme scores (default 0.01, 0.99).}
+\item{trim}{Quantile pair used to winsorize extreme scores
+(default 0.01, 0.99).}
 }
 \value{
-Numeric vector of propensity scores (same length as \code{nrow(data)}).
+Numeric vector of propensity scores (same length as
+\code{nrow(data)}).
 }
 \description{
-Estimate propensity scores via logistic regression
+Thin wrapper over \code{WeightIt::weightit(method = "glm",
+estimand = "ATE")} when \pkg{WeightIt} is installed; falls back
+to \code{stats::glm(family = binomial())} otherwise.
 }
 \examples{
 df <- data.frame(t = c(0, 1, 0, 1, 0, 1), x = rnorm(6))

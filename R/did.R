@@ -1,19 +1,45 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #
-# Difference-in-Differences (DiD) estimators for morie.  Ports the public
-# API of `src/morie/did.py` (~2593 LOC) to R.
+# Difference-in-Differences (DiD) estimators for rmorie.
 #
-# Strategy: prefer CRAN wrappers.  Two-way fixed-effects DiD dispatches to
-# `fixest::feols`; Callaway--Sant'Anna group-time ATTs to `did::att_gt`;
-# Goodman-Bacon decomposition to `bacondecomp::bacon`; synthetic DiD to
-# `synthdid::synthdid_estimate`; wild cluster bootstrap to
-# `fwildclusterboot::boottest`; cluster-robust SE to `sandwich::vcovCL`.
-# When an optional CRAN package is unavailable we either fall back to a
-# hand-rolled base-R implementation that mirrors the Python module or
-# raise a clean stop() with an install hint, depending on the
-# delegation's complexity.
+# Phase 1.e refactor (2026-05-25): hand-written base-R DiD implementations
+# have been replaced with thin wrappers over canonical CRAN packages.
+# Every method-style entry point now delegates to the reference
+# implementation:
 #
-# Public R names mirror the Python module under the `morie_did_*` prefix.
+#   * fixest      -- two-way fixed-effects DiD (`feols`) and event study
+#                    (`feols` + `i()`).
+#   * did         -- Callaway-Sant'Anna group-time ATTs (`att_gt`).
+#   * DRDID       -- Sant'Anna-Zhao doubly-robust DiD (`drdid_panel` /
+#                    `drdid_rc`).
+#   * bacondecomp -- Goodman-Bacon decomposition (`bacon`).
+#   * DIDmultiplegt -- de Chaisemartin-D'Haultfoeuille DID-M
+#                    (`did_multiplegt`).
+#   * HonestDiD   -- Rambachan-Roth sensitivity to parallel-trends
+#                    violations
+#                    (`createSensitivityResults_relativeMagnitudes`).
+#   * synthdid    -- Arkhangelsky et al. synthetic DiD
+#                    (`synthdid_estimate`).
+#
+# Wrappers preserve the `morie_did_*` API and the existing result-list
+# shape (`estimate`, `std_error`, `t_stat`, `p_value`, `ci_lower`,
+# `ci_upper`, `n_treated`, `n_control`, `method`, `details`) so that
+# downstream rmorie code and MRM analyses continue to work unchanged.
+#
+# Internal helpers (`.morie_did_*`) are kept: they are pinned by
+# `tests/testthat/test-did_matching-internals.R` and they back the
+# small OLS-based estimators (2x2, repeated cross-section, triple-diff,
+# continuous-treatment, fuzzy) where adding a CRAN dependency for
+# trivially-short OLS would be a regression. The same helpers are
+# reused by the wild-cluster-bootstrap path, which is base-R by
+# design (fwildclusterboot is GitHub-only; see 0.9.5.12 NEWS).
+#
+# Aggregators that consume DiD output and produce rmorie-specific
+# tables (`morie_did_aggregate_gt_att`, `morie_did_staggered`,
+# `morie_did_parallel_trends_data`, `morie_did_test_parallel_trends`,
+# `morie_did_placebo_test_*`, `morie_did_heterogeneous`,
+# `morie_did_diagnostics`) are kept verbatim -- their output shapes
+# are part of the rmorie API.
 
 #' @importFrom stats lm glm coef vcov pnorm pt pf pchisq qnorm qt qchisq
 #'   model.matrix model.frame fitted residuals binomial as.formula sigma
@@ -32,6 +58,20 @@ NULL
 .morie_did_have_bacondecomp    <- function() requireNamespace("bacondecomp",    quietly = TRUE)
 .morie_did_have_synthdid       <- function() requireNamespace("synthdid",       quietly = TRUE)
 .morie_did_have_sandwich       <- function() requireNamespace("sandwich",       quietly = TRUE)
+.morie_did_have_drdid          <- function() requireNamespace("DRDID",          quietly = TRUE)
+.morie_did_have_honestdid      <- function() requireNamespace("HonestDiD",      quietly = TRUE)
+.morie_did_have_didmultiplegt  <- function() requireNamespace("DIDmultiplegt",  quietly = TRUE)
+
+#' @keywords internal
+.morie_did_need <- function(pkg, fn) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    stop(sprintf(
+      "`%s()` requires the '%s' package. Install it with %s",
+      fn, pkg, sprintf("install.packages(\"%s\")", pkg)),
+      call. = FALSE)
+  }
+  invisible(TRUE)
+}
 
 #' @keywords internal
 .morie_did_make_ci <- function(estimate, se, alpha = 0.05) {
@@ -118,6 +158,29 @@ NULL
   v - um - tm + gm
 }
 
+#' @keywords internal
+.morie_did_outcome_regression_att <- function(y, X, treat) {
+  X <- as.matrix(X)
+  fit <- stats::lm.fit(cbind(1, X[treat == 0, , drop = FALSE]),
+                       y[treat == 0])
+  beta <- fit$coefficients
+  beta[is.na(beta)] <- 0
+  X1   <- cbind(1, X[treat == 1, , drop = FALSE])
+  y0_hat <- as.numeric(X1 %*% beta)
+  mean(y[treat == 1] - y0_hat)
+}
+
+#' @keywords internal
+.morie_did_ipw_att <- function(y, treat, ps) {
+  ps <- pmin(pmax(ps, 0.01), 0.99)
+  w  <- ps / (1 - ps)
+  if (sum(treat == 1) == 0) return(0)
+  mean(y[treat == 1]) -
+    sum(w[treat == 0] * y[treat == 0]) / sum(w[treat == 0])
+}
+
+`%||%` <- function(a, b) if (is.null(a)) b else a
+
 
 # ---------------------------------------------------------------------------
 # 1. Classic 2x2 DiD
@@ -131,6 +194,12 @@ NULL
 #' With covariates, fits the regression
 #' \eqn{Y = \alpha + \beta D + \gamma P + \tau (D \times P) + X\delta + \varepsilon}{Y = alpha + beta D + gamma P + tau (D x P) + Xdelta + epsilon}
 #' and reports \eqn{\hat\tau}{hattau}.
+#'
+#' For multi-period staggered designs prefer
+#' \code{\link{morie_did_group_time_att}} (Callaway-Sant'Anna via
+#' \pkg{did}). \code{\link{morie_did_doubly_robust}} (via \pkg{DRDID})
+#' is the recommended option when pre-treatment covariates are
+#' available.
 #'
 #' @param data A data frame containing the outcome, treatment, post and
 #'   any covariate columns.
@@ -157,7 +226,6 @@ NULL
 #' @export
 morie_did_2x2 <- function(data, outcome, treatment, post,
                           covariates = NULL, cluster = NULL, alpha = 0.05) {
-  cols <- c(outcome, treatment, post, covariates, cluster)
   df <- .morie_did_drop_na(data, c(outcome, treatment, post))
   d <- as.numeric(df[[treatment]])
   p <- as.numeric(df[[post]])
@@ -240,15 +308,16 @@ morie_did_repeated_cross_section <- function(data, outcome, treatment, post,
 
 
 # ---------------------------------------------------------------------------
-# 3. Panel two-way fixed-effects DiD
+# 3. Panel two-way fixed-effects DiD -- thin fixest::feols wrapper
 # ---------------------------------------------------------------------------
 
 #' Two-way fixed-effects DiD (panel)
 #'
-#' Estimates \eqn{Y_{it} = \alpha_i + \lambda_t + \tau D_{it} + X'\delta
-#' + \varepsilon_{it}}{Y_it = alpha_i + lambda_t + tau D_it + X'delta + varepsilon_it}.  Prefers \code{fixest::feols} for fast within
-#' estimation with cluster-robust SE; falls back to a base-R two-way
-#' within-transform when \pkg{fixest} is not installed.
+#' Thin wrapper around \code{fixest::feols} estimating
+#' \eqn{Y_{it} = \alpha_i + \lambda_t + \tau D_{it} + X'\delta
+#' + \varepsilon_{it}}{Y_it = alpha_i + lambda_t + tau D_it + X'delta + varepsilon_it}
+#' with cluster-robust standard errors. Hard-errors if \pkg{fixest} is
+#' not installed.
 #'
 #' @inheritParams morie_did_2x2
 #' @param unit Unit identifier column.
@@ -258,64 +327,46 @@ morie_did_repeated_cross_section <- function(data, outcome, treatment, post,
 morie_did_panel_fe <- function(data, outcome, treatment, unit, time,
                                covariates = NULL, cluster = NULL,
                                alpha = 0.05) {
+  .morie_did_need("fixest", "morie_did_panel_fe")
   df <- .morie_did_drop_na(data, c(outcome, treatment, unit, time))
-  if (.morie_did_have_fixest()) {
-    rhs <- if (length(covariates))
-      paste(c(treatment, covariates), collapse = " + ")
-    else treatment
-    fe_part <- paste(unit, time, sep = " + ")
-    f <- stats::as.formula(paste(outcome, "~", rhs, "|", fe_part))
-    cluster_var <- if (!is.null(cluster)) cluster else unit
-    fit <- fixest::feols(f, data = df,
-                         cluster = stats::as.formula(paste0("~", cluster_var)))
-    cf <- fixest::coeftable(fit)
-    est    <- cf[treatment, "Estimate"]
-    se_est <- cf[treatment, "Std. Error"]
-    return(.morie_did_result(
-      est, se_est,
-      n_treated = sum(as.numeric(df[[treatment]]) == 1),
-      n_control = sum(as.numeric(df[[treatment]]) == 0),
-      method = "did_panel_fe (fixest)", alpha = alpha,
-      details = list(fit = fit,
-                     n_units   = length(unique(df[[unit]])),
-                     n_periods = length(unique(df[[time]])))
-    ))
-  }
-  # Base-R two-way within fallback
-  y_dm <- .morie_did_within_transform(df, outcome,   unit, time)
-  d_dm <- .morie_did_within_transform(df, treatment, unit, time)
-  cols <- list(d_dm)
-  if (length(covariates)) {
-    for (c_ in covariates)
-      cols[[length(cols) + 1]] <- .morie_did_within_transform(df, c_, unit, time)
-  }
-  X <- do.call(cbind, cols)
-  colnames(X) <- c(treatment, covariates)
-  cluster_ids <- if (!is.null(cluster)) df[[cluster]] else df[[unit]]
-  fit <- .morie_did_ols_robust_se(X, y_dm, cluster_ids = cluster_ids)
-  est <- fit$beta[1]
-  se_est <- fit$se[1]
+  rhs <- if (length(covariates))
+    paste(c(treatment, covariates), collapse = " + ")
+  else treatment
+  fe_part <- paste(unit, time, sep = " + ")
+  f <- stats::as.formula(paste(outcome, "~", rhs, "|", fe_part))
+  cluster_var <- if (!is.null(cluster)) cluster else unit
+  fit <- fixest::feols(
+    f, data = df,
+    cluster = stats::as.formula(paste0("~", cluster_var))
+  )
+  cf <- fixest::coeftable(fit)
+  est    <- cf[treatment, "Estimate"]
+  se_est <- cf[treatment, "Std. Error"]
   .morie_did_result(
     est, se_est,
     n_treated = sum(as.numeric(df[[treatment]]) == 1),
     n_control = sum(as.numeric(df[[treatment]]) == 0),
-    method = "did_panel_fe (base-R within)", alpha = alpha,
-    details = list(n_units   = length(unique(df[[unit]])),
+    method = "did_panel_fe (fixest)", alpha = alpha,
+    details = list(fit = fit,
+                   n_units   = length(unique(df[[unit]])),
                    n_periods = length(unique(df[[time]])))
   )
 }
 
 
 # ---------------------------------------------------------------------------
-# 4. Event study
+# 4. Event study -- thin fixest::feols + i() wrapper
 # ---------------------------------------------------------------------------
 
 #' Event-study DiD specification
 #'
-#' Constructs relative-time dummies \eqn{1\{t - g = k\}} for
-#' \eqn{k \in [-\text{leads}, \text{lags}]}{k in [-leads, lags]} (omitting
-#' \code{reference_period}) and regresses the outcome on these
-#' indicators with unit and time fixed effects.
+#' Thin wrapper around \code{fixest::feols} with \code{fixest::i()}
+#' relative-time dummies, plus unit and time fixed effects. The
+#' \code{reference_period} is dropped as the baseline. Hard-errors if
+#' \pkg{fixest} is not installed.
+#'
+#' For sun-Abraham interaction-weighted estimation prefer
+#' \code{fixest::sunab()} directly.
 #'
 #' @param data Panel data frame.
 #' @param outcome Outcome column.
@@ -340,34 +391,44 @@ morie_did_event_study <- function(data, outcome, unit, time, treatment_time,
                                   covariates = NULL, reference_period = -1L,
                                   leads = 4L, lags = 4L,
                                   cluster = NULL, alpha = 0.05) {
+  .morie_did_need("fixest", "morie_did_event_study")
   df <- data
-  df[["_rel_time"]] <- as.numeric(df[[time]]) - as.numeric(df[[treatment_time]])
-  periods <- setdiff(seq.int(-leads, lags), reference_period)
-  for (k in periods) {
-    nm <- paste0("_rel_", k)
-    df[[nm]] <- as.numeric(df[["_rel_time"]] == k)
-    df[[nm]][is.na(df[[nm]])] <- 0
-  }
-  y_dm <- .morie_did_within_transform(df, outcome, unit, time)
-  X_cols <- paste0("_rel_", periods)
-  if (length(covariates)) X_cols <- c(X_cols, covariates)
-  X_dm <- vapply(X_cols, function(nm) .morie_did_within_transform(df, nm, unit, time),
-                 numeric(nrow(df)))
-  cluster_ids <- if (!is.null(cluster)) df[[cluster]] else df[[unit]]
-  fit <- .morie_did_ols_robust_se(X_dm, y_dm, cluster_ids = cluster_ids)
-  beta <- fit$beta
-  se <- fit$se
-  coefs <- lapply(seq_along(periods), function(i) {
-    est_k <- beta[i]
-    se_k <- se[i]
-    ci <- if (is.finite(se_k)) .morie_did_make_ci(est_k, se_k, alpha) else c(NA, NA)
-    p_k <- if (se_k > 0) .morie_did_pvalue(est_k / se_k) else NA_real_
-    data.frame(relative_time = periods[i], estimate = est_k,
-               std_error = se_k, ci_lower = ci[1], ci_upper = ci[2],
-               p_value = p_k)
-  })
-  coef_df <- do.call(rbind, coefs)
-  # Add the reference period (zero by construction)
+  rel_time <- as.numeric(df[[time]]) - as.numeric(df[[treatment_time]])
+  # Truncate to [-leads, lags] so dummies outside the window are absorbed.
+  rel_time_trunc <- pmin(pmax(rel_time, -leads), lags)
+  rel_time_trunc[!is.finite(rel_time_trunc)] <- reference_period
+  df[["morie_rel_time"]] <- rel_time_trunc
+  cluster_var <- if (!is.null(cluster)) cluster else unit
+  cov_part <- if (length(covariates))
+    paste("+", paste(covariates, collapse = " + "))
+  else ""
+  f <- stats::as.formula(sprintf(
+    "%s ~ i(morie_rel_time, ref = %d) %s | %s + %s",
+    outcome, as.integer(reference_period), cov_part, unit, time
+  ))
+  fit <- fixest::feols(
+    f, data = df,
+    cluster = stats::as.formula(paste0("~", cluster_var))
+  )
+  cf <- fixest::coeftable(fit)
+  coef_names <- rownames(cf)
+  # Parse the relative-time integer out of the "morie_rel_time::K" labels.
+  rel_int <- suppressWarnings(as.integer(sub(".*::", "", coef_names)))
+  keep <- !is.na(rel_int)
+  est_k <- cf[keep, "Estimate"]
+  se_k  <- cf[keep, "Std. Error"]
+  rel_k <- rel_int[keep]
+  z <- stats::qnorm(1 - alpha / 2)
+  coef_df <- data.frame(
+    relative_time = rel_k,
+    estimate      = as.numeric(est_k),
+    std_error     = as.numeric(se_k),
+    ci_lower      = as.numeric(est_k) - z * as.numeric(se_k),
+    ci_upper      = as.numeric(est_k) + z * as.numeric(se_k),
+    p_value       = ifelse(se_k > 0, .morie_did_pvalue(est_k / se_k),
+                           NA_real_)
+  )
+  # Insert the reference period (zero by construction).
   coef_df <- rbind(coef_df,
                    data.frame(relative_time = reference_period,
                               estimate = 0, std_error = 0,
@@ -375,23 +436,23 @@ morie_did_event_study <- function(data, outcome, unit, time, treatment_time,
                               p_value = NA_real_))
   coef_df <- coef_df[order(coef_df$relative_time), ]
   rownames(coef_df) <- NULL
-  pre_idx <- which(periods < 0)
-  if (length(pre_idx) > 0) {
-    pre_beta <- beta[pre_idx]
-    pre_se   <- pmax(se[pre_idx], 1e-10)
-    chi2 <- sum((pre_beta / pre_se)^2)
-    f_stat <- chi2 / length(pre_idx)
-    f_p    <- stats::pchisq(chi2, df = length(pre_idx), lower.tail = FALSE)
+  pre <- coef_df[coef_df$relative_time < 0 &
+                   coef_df$relative_time != reference_period, ]
+  if (nrow(pre) > 0) {
+    pre_se <- pmax(pre$std_error, 1e-10)
+    chi2 <- sum((pre$estimate / pre_se)^2)
+    f_stat <- chi2 / nrow(pre)
+    f_p    <- stats::pchisq(chi2, df = nrow(pre), lower.tail = FALSE)
   } else {
     f_stat <- NA_real_
-    f_p <- NA_real_
+    f_p    <- NA_real_
   }
   list(
     coefficients      = coef_df,
     reference_period  = reference_period,
     pre_trend_f_stat  = f_stat,
     pre_trend_p_value = f_p,
-    details           = list(beta = beta, se = se, periods = periods)
+    details           = list(fit = fit, backend = "fixest")
   )
 }
 
@@ -405,6 +466,9 @@ morie_did_event_study <- function(data, outcome, unit, time, treatment_time,
 #' Regresses the outcome on group-by-time interactions in the pre-period
 #' and reports both per-period coefficients and a joint Wald (chi-square)
 #' test that they are all zero.
+#'
+#' For the Callaway-Sant'Anna pre-test on the group-time ATTs prefer
+#' \code{did::conditional_did_pretest}.
 #'
 #' @param data A data frame.
 #' @param outcome Outcome column name.
@@ -436,7 +500,6 @@ morie_did_test_parallel_trends <- function(data, outcome, treatment, time,
                 parallel_trends_plausible = TRUE))
   }
   df_pre <- df[df[[time]] %in% pre_periods, , drop = FALSE]
-  ref_period <- pre_periods[1]
   test_periods <- pre_periods[-1]
   d_vals <- as.numeric(df_pre[[treatment]])
   y_vals <- as.numeric(df_pre[[outcome]])
@@ -463,10 +526,6 @@ morie_did_test_parallel_trends <- function(data, outcome, treatment, time,
   is_ <- pmax(fit$se[(start_idx + 1):(start_idx + length(test_periods))], 1e-10)
   chi2 <- sum((ib / is_)^2)
   joint_p <- stats::pchisq(chi2, df = length(test_periods), lower.tail = FALSE)
-  # chi2 already IS a chi-square; dividing by k gave a mean-chi-square,
-  # NOT an F. p-value uses pchisq(chi2, k). Report both for callers that
-  # need either label; keep joint_f_stat as alias of joint_chi2 for
-  # backward compatibility.
   list(
     coefficients              = coef_df,
     joint_chi2                = chi2,
@@ -517,37 +576,15 @@ morie_did_parallel_trends_data <- function(data, outcome, treatment, time,
 
 
 # ---------------------------------------------------------------------------
-# 7. Callaway-Sant'Anna group-time ATTs
+# 7. Callaway-Sant'Anna group-time ATTs -- thin did::att_gt wrapper
 # ---------------------------------------------------------------------------
-
-#' @keywords internal
-.morie_did_outcome_regression_att <- function(y, X, treat) {
-  X <- as.matrix(X)
-  fit <- stats::lm.fit(cbind(1, X[treat == 0, , drop = FALSE]),
-                       y[treat == 0])
-  beta <- fit$coefficients
-  beta[is.na(beta)] <- 0
-  X1   <- cbind(1, X[treat == 1, , drop = FALSE])
-  y0_hat <- as.numeric(X1 %*% beta)
-  mean(y[treat == 1] - y0_hat)
-}
-
-#' @keywords internal
-.morie_did_ipw_att <- function(y, treat, ps) {
-  ps <- pmin(pmax(ps, 0.01), 0.99)
-  w  <- ps / (1 - ps)
-  if (sum(treat == 1) == 0) return(0)
-  mean(y[treat == 1]) -
-    sum(w[treat == 0] * y[treat == 0]) / sum(w[treat == 0])
-}
 
 #' Callaway--Sant'Anna group-time average treatment effects
 #'
-#' For each cohort \eqn{g} and each post-treatment calendar period
-#' \code{t}, estimates \eqn{\mathrm{ATT}(g, t)}{ATT(g, t)}.  Prefers
-#' \code{did::att_gt} (the reference implementation by Callaway &
-#' Sant'Anna); falls back to a base-R bootstrap-based estimator that
-#' mirrors the Python module when \pkg{did} is unavailable.
+#' Thin wrapper around \code{did::att_gt}. For each cohort \eqn{g} and
+#' each post-treatment calendar period \code{t}, estimates
+#' \eqn{\mathrm{ATT}(g, t)}{ATT(g, t)}. Hard-errors if \pkg{did} is
+#' not installed.
 #'
 #' @param data Panel data.
 #' @param outcome Outcome column.
@@ -560,8 +597,9 @@ morie_did_parallel_trends_data <- function(data, outcome, treatment, time,
 #'   or \code{"outcome_regression"}.
 #' @param control_group \code{"never_treated"} or
 #'   \code{"not_yet_treated"}.
-#' @param n_bootstrap Number of bootstrap replications for inference.
-#' @param seed RNG seed.
+#' @param n_bootstrap Number of bootstrap replications for inference
+#'   (forwarded as \code{biters}).
+#' @param seed RNG seed (unused; retained for back-compat).
 #' @param alpha Significance level.
 #' @return A data frame with columns \code{cohort}, \code{time},
 #'   \code{att}, \code{std_error}, \code{ci_lower}, \code{ci_upper},
@@ -576,144 +614,47 @@ morie_did_group_time_att <- function(data, outcome, unit, time, treatment_time,
                                      control_group = "never_treated",
                                      n_bootstrap = 200L, seed = 42L,
                                      alpha = 0.05) {
-  if (.morie_did_have_did()) {
-    df <- data
-    # `did::att_gt` expects 0 for never-treated, not Inf.
-    g_col <- as.numeric(df[[treatment_time]])
-    g_col[!is.finite(g_col)] <- 0
-    df[["_gname"]] <- g_col
-    method_map <- c(doubly_robust = "dr",
-                    ipw = "ipw",
-                    outcome_regression = "reg")
-    est_method <- if (method %in% names(method_map))
-      method_map[[method]]
-    else "dr"
-    xformla <- if (length(covariates))
-      stats::as.formula(paste("~", paste(covariates, collapse = " + ")))
-    else stats::as.formula("~ 1")
-    # Translate Python's "never_treated"/"not_yet_treated" -> did's
-    # "nevertreated"/"notyettreated" (no underscores). Without this,
-    # did::att_gt errors and the CRAN-delegated path is dead.
-    cg_did <- switch(control_group,
-                     never_treated = "nevertreated",
-                     not_yet_treated = "notyettreated",
-                     control_group)
-    fit <- did::att_gt(yname = outcome, tname = time, idname = unit,
-                       gname = "_gname", xformla = xformla, data = df,
-                       control_group = cg_did,
-                       est_method = est_method,
-                       bstrap = TRUE, biters = n_bootstrap,
-                       alp = alpha, panel = TRUE, allow_unbalanced_panel = TRUE)
-    out <- data.frame(
-      cohort    = fit$group,
-      time      = fit$t,
-      att       = fit$att,
-      std_error = fit$se,
-      ci_lower  = fit$att - stats::qnorm(1 - alpha / 2) * fit$se,
-      ci_upper  = fit$att + stats::qnorm(1 - alpha / 2) * fit$se,
-      p_value   = 2 * stats::pnorm(-abs(fit$att / fit$se))
-    )
-    out <- out[out$cohort > 0, , drop = FALSE]
-    attr(out, "fit") <- fit
-    return(out)
-  }
-  # Base-R fallback ------------------------------------------------------------
-  rng <- if (exists(".Random.seed", envir = .GlobalEnv))
-    get(".Random.seed", envir = .GlobalEnv) else NULL
-  set.seed(seed)
-  on.exit({
-    if (!is.null(rng)) assign(".Random.seed", rng, envir = .GlobalEnv)
-  })
+  .morie_did_need("did", "morie_did_group_time_att")
   df <- data
-  df[["_g"]] <- as.numeric(df[[treatment_time]])
-  cohorts <- sort(unique(df[is.finite(df[["_g"]]), "_g"]))
-  all_times <- sort(unique(df[[time]]))
-  results <- list()
-  estimate_one <- function(y_d, treat_ind, X_cov) {
-    if (identical(method, "ipw")) {
-      ps <- if (ncol(X_cov) > 0 && stats::sd(treat_ind) > 0) {
-        gfit <- tryCatch(stats::glm.fit(cbind(1, X_cov), treat_ind,
-                                        family = stats::binomial("logit")),
-                         error = function(e) NULL)
-        if (is.null(gfit)) rep(mean(treat_ind), length(treat_ind))
-        else 1 / (1 + exp(-as.numeric(cbind(1, X_cov) %*% gfit$coefficients)))
-      } else rep(mean(treat_ind), length(treat_ind))
-      return(.morie_did_ipw_att(y_d, as.integer(treat_ind), ps))
-    }
-    if (identical(method, "outcome_regression"))
-      return(.morie_did_outcome_regression_att(y_d, X_cov,
-                                               as.integer(treat_ind)))
-    # Doubly robust (simplified, mirrors did.py)
-    if (sum(treat_ind == 0) < 2) {
-      if (sum(treat_ind == 1) > 0) return(mean(y_d[treat_ind == 1]))
-      return(0)
-    }
-    fit_o <- stats::lm.fit(cbind(1, X_cov[treat_ind == 0, , drop = FALSE]),
-                           y_d[treat_ind == 0])
-    b <- fit_o$coefficients
-    b[is.na(b)] <- 0
-    mu0 <- as.numeric(cbind(1, X_cov) %*% b)
-    if (sum(treat_ind == 1) == 0) return(0)
-    mean(y_d[treat_ind == 1] - mu0[treat_ind == 1])
-  }
-  for (g in cohorts) {
-    post_times <- all_times[all_times >= g]
-    pre_times  <- all_times[all_times < g]
-    if (length(pre_times) == 0) next
-    pre_time <- max(pre_times)
-    for (tt in post_times) {
-      cohort_units <- unique(df[df[["_g"]] == g, unit, drop = TRUE])
-      ctrl_units <- if (identical(control_group, "never_treated"))
-        unique(df[!is.finite(df[["_g"]]), unit, drop = TRUE])
-      else
-        unique(df[df[["_g"]] > tt, unit, drop = TRUE])
-      if (!length(ctrl_units) || !length(cohort_units)) next
-      relevant <- c(cohort_units, ctrl_units)
-      sub <- df[df[[unit]] %in% relevant & df[[time]] %in% c(pre_time, tt), ,
-                drop = FALSE]
-      wide_pre  <- stats::aggregate(stats::as.formula(paste(outcome, "~", unit)),
-                                    data = sub[sub[[time]] == pre_time, ],
-                                    FUN = mean)
-      wide_post <- stats::aggregate(stats::as.formula(paste(outcome, "~", unit)),
-                                    data = sub[sub[[time]] == tt, ],
-                                    FUN = mean)
-      m <- merge(wide_pre, wide_post, by = unit,
-                 suffixes = c(".pre", ".post"))
-      if (!nrow(m)) next
-      delta_y <- as.numeric(m[[paste0(outcome, ".post")]] -
-                              m[[paste0(outcome, ".pre")]])
-      treat_indicator <- as.numeric(m[[unit]] %in% cohort_units)
-      cov_data <- if (length(covariates)) {
-        idx <- match(m[[unit]], df[df[[time]] == pre_time, unit, drop = TRUE])
-        as.matrix(df[df[[time]] == pre_time, ][idx, covariates, drop = FALSE])
-      } else matrix(1, nrow = nrow(m), ncol = 1)
-      storage.mode(cov_data) <- "double"
-      att_hat <- estimate_one(delta_y, treat_indicator, cov_data)
-      n <- length(delta_y)
-      boot <- replicate(n_bootstrap, {
-        idx <- sample.int(n, n, replace = TRUE)
-        tryCatch(estimate_one(delta_y[idx], treat_indicator[idx],
-                              cov_data[idx, , drop = FALSE]),
-                 error = function(e) NA_real_)
-      })
-      boot <- boot[is.finite(boot)]
-      se_hat <- if (length(boot) > 1) stats::sd(boot) else NA_real_
-      ci <- if (is.finite(se_hat)) .morie_did_make_ci(att_hat, se_hat, alpha)
-      else c(NA_real_, NA_real_)
-      p_val <- if (is.finite(se_hat) && se_hat > 0)
-        .morie_did_pvalue(att_hat / se_hat) else NA_real_
-      results[[length(results) + 1]] <- data.frame(
-        cohort = g, time = tt, att = att_hat,
-        std_error = se_hat, ci_lower = ci[1], ci_upper = ci[2],
-        p_value = p_val
-      )
-    }
-  }
-  if (!length(results))
-    return(data.frame(cohort = numeric(), time = numeric(), att = numeric(),
-                      std_error = numeric(), ci_lower = numeric(),
-                      ci_upper = numeric(), p_value = numeric()))
-  do.call(rbind, results)
+  # `did::att_gt` expects 0 for never-treated, not Inf.
+  g_col <- as.numeric(df[[treatment_time]])
+  g_col[!is.finite(g_col)] <- 0
+  df[["morie_gname"]] <- g_col
+  method_map <- c(doubly_robust = "dr",
+                  ipw = "ipw",
+                  outcome_regression = "reg")
+  est_method <- if (method %in% names(method_map))
+    method_map[[method]]
+  else "dr"
+  xformla <- if (length(covariates))
+    stats::as.formula(paste("~", paste(covariates, collapse = " + ")))
+  else stats::as.formula("~ 1")
+  # Translate Python's "never_treated"/"not_yet_treated" -> did's
+  # "nevertreated"/"notyettreated" (no underscores).
+  cg_did <- switch(control_group,
+                   never_treated = "nevertreated",
+                   not_yet_treated = "notyettreated",
+                   control_group)
+  fit <- did::att_gt(yname = outcome, tname = time, idname = unit,
+                     gname = "morie_gname", xformla = xformla, data = df,
+                     control_group = cg_did,
+                     est_method = est_method,
+                     bstrap = TRUE, biters = n_bootstrap,
+                     alp = alpha, panel = TRUE,
+                     allow_unbalanced_panel = TRUE)
+  z <- stats::qnorm(1 - alpha / 2)
+  out <- data.frame(
+    cohort    = fit$group,
+    time      = fit$t,
+    att       = fit$att,
+    std_error = fit$se,
+    ci_lower  = fit$att - z * fit$se,
+    ci_upper  = fit$att + z * fit$se,
+    p_value   = 2 * stats::pnorm(-abs(fit$att / fit$se))
+  )
+  out <- out[out$cohort > 0, , drop = FALSE]
+  attr(out, "fit") <- fit
+  out
 }
 
 
@@ -722,6 +663,11 @@ morie_did_group_time_att <- function(data, outcome, unit, time, treatment_time,
 # ---------------------------------------------------------------------------
 
 #' Aggregate group-time ATTs into summary parameters
+#'
+#' Mirrors the aggregation schemes available in
+#' \code{did::aggte} (overall ATT, by-cohort, by-calendar-time,
+#' by-event-time) but produces a tidy \code{data.frame} consumed by
+#' the rmorie / MRM downstream pipelines.
 #'
 #' @param gt_results Output of \code{\link{morie_did_group_time_att}}.
 #' @param aggregation One of \code{"overall"} (default), \code{"cohort"},
@@ -737,7 +683,7 @@ morie_did_aggregate_gt_att <- function(gt_results,
                                        att_col = "att",
                                        se_col = "std_error") {
   df <- gt_results
-  df[["_rel_time"]] <- df[[time_col]] - df[[cohort_col]]
+  df[["morie_rel_time"]] <- df[[time_col]] - df[[cohort_col]]
   if (identical(aggregation, "overall")) {
     est <- mean(df[[att_col]], na.rm = TRUE)
     se  <- sqrt(mean(df[[se_col]]^2, na.rm = TRUE) / nrow(df))
@@ -748,14 +694,12 @@ morie_did_aggregate_gt_att <- function(gt_results,
   group_col <- switch(aggregation,
                       cohort        = cohort_col,
                       calendar_time = time_col,
-                      event_time    = "_rel_time",
+                      event_time    = "morie_rel_time",
                       stop("Unknown aggregation: ", aggregation))
   rows <- lapply(split(df, df[[group_col]]), function(g) {
     est <- mean(g[[att_col]], na.rm = TRUE)
     # SE of a simple average of k independent estimates:
     #   sqrt(sum(se_i^2)) / k  ==  sqrt(mean(se_i^2) / k)
-    # (was: sqrt(mean(se^2)/nrow(g)) which collides with `k` only when
-    # nrow(g) == 1; underestimated by sqrt(k) for k > 1.)
     k <- nrow(g)
     se <- sqrt(mean(g[[se_col]]^2, na.rm = TRUE) / k)
     ci  <- .morie_did_make_ci(est, se)
@@ -773,7 +717,8 @@ morie_did_aggregate_gt_att <- function(gt_results,
 #' Staggered DiD via group-time ATTs with aggregation
 #'
 #' Convenience wrapper around \code{\link{morie_did_group_time_att}} and
-#' \code{\link{morie_did_aggregate_gt_att}}.
+#' \code{\link{morie_did_aggregate_gt_att}}. For the canonical CRAN
+#' aggregator interface see \code{did::aggte}.
 #'
 #' @inheritParams morie_did_group_time_att
 #' @return A list with \code{group_time}, \code{overall}, \code{by_cohort},
@@ -797,19 +742,28 @@ morie_did_staggered <- function(data, outcome, unit, time, treatment_time,
 
 
 # ---------------------------------------------------------------------------
-# 10. Doubly-robust DiD (Sant'Anna & Zhao 2020)
+# 10. Doubly-robust DiD -- thin DRDID::drdid wrapper
 # ---------------------------------------------------------------------------
 
 #' Doubly-robust DiD (Sant'Anna & Zhao, 2020)
 #'
-#' Combines an outcome regression model with an inverse-probability
-#' weighting model.  Consistent if either model is correctly specified.
+#' Thin wrapper around \code{DRDID::drdid_rc} for the 2x2
+#' repeated-cross-section setting. Combines an outcome regression
+#' model with an inverse-probability weighting model and is
+#' consistent if either model is correctly specified. Hard-errors if
+#' \pkg{DRDID} is not installed.
+#'
+#' For panel data (same units observed in both periods) prefer
+#' \code{DRDID::drdid_panel} directly.
 #'
 #' @inheritParams morie_did_2x2
-#' @param ps_model One of \code{"logistic"} (default) or \code{"gbm"}.
-#' @param or_model One of \code{"linear"} (default) or \code{"gbm"}.
-#' @param n_bootstrap Number of bootstrap replications.
-#' @param seed RNG seed.
+#' @param ps_model Unused; retained for back-compat. \pkg{DRDID} fits
+#'   a logistic propensity-score model internally.
+#' @param or_model Unused; retained for back-compat. \pkg{DRDID} fits
+#'   a linear outcome model internally.
+#' @param n_bootstrap Number of bootstrap replications (forwarded as
+#'   \code{nboot}).
+#' @param seed RNG seed (set before the call).
 #' @return A result list; see \code{\link{morie_did_2x2}}.
 #' @references Sant'Anna, P. H. C., & Zhao, J. (2020). Doubly robust
 #'   difference-in-differences estimators. \emph{Journal of
@@ -822,10 +776,7 @@ morie_did_doubly_robust <- function(data, outcome, treatment, post,
                                     cluster = NULL,
                                     n_bootstrap = 200L, seed = 42L,
                                     alpha = 0.05) {
-  if ((identical(ps_model, "gbm") || identical(or_model, "gbm")) &&
-      !requireNamespace("gbm", quietly = TRUE))
-    stop("ps_model='gbm' or or_model='gbm' requires the 'gbm' package: ",
-         "install.packages('gbm')", call. = FALSE)
+  .morie_did_need("DRDID", "morie_did_doubly_robust")
   rng <- if (exists(".Random.seed", envir = .GlobalEnv))
     get(".Random.seed", envir = .GlobalEnv) else NULL
   set.seed(seed)
@@ -833,91 +784,26 @@ morie_did_doubly_robust <- function(data, outcome, treatment, post,
     if (!is.null(rng)) assign(".Random.seed", rng, envir = .GlobalEnv)
   })
   df <- .morie_did_drop_na(data, c(outcome, treatment, post, covariates))
-  d <- as.numeric(df[[treatment]])
-  p <- as.numeric(df[[post]])
-  y <- as.numeric(df[[outcome]])
-  Xc <- as.matrix(df[, covariates, drop = FALSE])
-  storage.mode(Xc) <- "double"
-
-  dr_estimate <- function(d_v, p_v, y_v, X_v) {
-    ps_vals <- if (identical(ps_model, "gbm")) {
-      df_ps <- data.frame(d = d_v, X_v)
-      g <- gbm::gbm(d ~ ., data = df_ps, distribution = "bernoulli",
-                    n.trees = 50, interaction.depth = 3,
-                    bag.fraction = 1, train.fraction = 1,
-                    keep.data = FALSE, verbose = FALSE)
-      gbm::predict.gbm(g, newdata = df_ps, n.trees = 50, type = "response")
-    } else {
-      gfit <- tryCatch(stats::glm.fit(cbind(1, X_v), d_v,
-                                      family = stats::binomial("logit")),
-                       error = function(e) NULL)
-      if (is.null(gfit)) rep(mean(d_v), length(d_v))
-      else 1 / (1 + exp(-as.numeric(cbind(1, X_v) %*% gfit$coefficients)))
-    }
-    ps_vals <- pmin(pmax(ps_vals, 0.01), 0.99)
-    ctrl_post  <- d_v == 0 & p_v == 1
-    ctrl_pre   <- d_v == 0 & p_v == 0
-    treat_post <- d_v == 1 & p_v == 1
-    treat_pre  <- d_v == 1 & p_v == 0
-    if (sum(ctrl_post) < 2 || sum(ctrl_pre) < 2) {
-      if (sum(treat_post) && sum(treat_pre))
-        return((mean(y_v[treat_post]) - mean(y_v[treat_pre])) -
-                 (mean(y_v[ctrl_post]) - mean(y_v[ctrl_pre])))
-      return(0)
-    }
-    fit_or <- function(mask) {
-      if (identical(or_model, "gbm")) {
-        df_or <- data.frame(y = y_v[mask], X_v[mask, , drop = FALSE])
-        g <- gbm::gbm(y ~ ., data = df_or, distribution = "gaussian",
-                      n.trees = 50, interaction.depth = 3,
-                      bag.fraction = 1, train.fraction = 1,
-                      keep.data = FALSE, verbose = FALSE)
-        gbm::predict.gbm(g, newdata = data.frame(y = 0, X_v),
-                         n.trees = 50)
-      } else {
-        fit <- stats::lm.fit(cbind(1, X_v[mask, , drop = FALSE]), y_v[mask])
-        b <- fit$coefficients
-        b[is.na(b)] <- 0
-        as.numeric(cbind(1, X_v) %*% b)
-      }
-    }
-    mu0_post <- fit_or(ctrl_post)
-    mu0_pre  <- fit_or(ctrl_pre)
-    if (sum(d_v == 1) == 0) return(0)
-    att_or <- mean(y_v[treat_post] - mu0_post[treat_post]) -
-              mean(y_v[treat_pre]  - mu0_pre[treat_pre])
-    w <- ps_vals / (1 - ps_vals)
-    ipw_correction <- 0
-    if (sum(d_v == 0) > 0) {
-      m_post <- d_v == 0 & p_v == 1
-      m_pre  <- d_v == 0 & p_v == 0
-      if (sum(m_post) && sum(m_pre)) {
-        w_post <- w[m_post]
-        w_pre <- w[m_pre]
-        rp <- y_v[m_post] - mu0_post[m_post]
-        rq <- y_v[m_pre]  - mu0_pre[m_pre]
-        ipw_correction <- sum(w_post * rp) / max(sum(w_post), 1e-10) -
-                          sum(w_pre  * rq) / max(sum(w_pre),  1e-10)
-      }
-    }
-    att_or - ipw_correction
-  }
-
-  est <- dr_estimate(d, p, y, Xc)
-  n <- nrow(df)
-  boot <- replicate(n_bootstrap, {
-    idx <- sample.int(n, n, replace = TRUE)
-    tryCatch(dr_estimate(d[idx], p[idx], y[idx], Xc[idx, , drop = FALSE]),
-             error = function(e) NA_real_)
-  })
-  boot <- boot[is.finite(boot)]
-  se_est <- if (length(boot) > 1) stats::sd(boot) else NA_real_
+  y  <- as.numeric(df[[outcome]])
+  d  <- as.numeric(df[[treatment]])
+  p  <- as.numeric(df[[post]])
+  covariates_mat <- as.matrix(df[, covariates, drop = FALSE])
+  storage.mode(covariates_mat) <- "double"
+  # DRDID expects an intercept-prepended covariate matrix.
+  X <- cbind(`(Intercept)` = 1, covariates_mat)
+  fit <- DRDID::drdid_rc(
+    y = y, post = p, D = d, covariates = X,
+    boot = TRUE, nboot = n_bootstrap,
+    inffunc = TRUE
+  )
+  est    <- as.numeric(fit$ATT)
+  se_est <- as.numeric(fit$se)
   .morie_did_result(
     est, se_est,
     n_treated = sum(d == 1), n_control = sum(d == 0),
-    method = "did_doubly_robust", alpha = alpha,
-    details = list(n_bootstrap = length(boot),
-                   ps_model = ps_model, or_model = or_model)
+    method = "did_doubly_robust (DRDID::drdid_rc)", alpha = alpha,
+    details = list(fit = fit, n_bootstrap = n_bootstrap,
+                   backend = "DRDID")
   )
 }
 
@@ -965,15 +851,15 @@ morie_did_triple_difference <- function(data, outcome, treatment, post,
 
 
 # ---------------------------------------------------------------------------
-# 12. Goodman-Bacon decomposition
+# 12. Goodman-Bacon decomposition -- thin bacondecomp::bacon wrapper
 # ---------------------------------------------------------------------------
 
 #' Goodman-Bacon decomposition of the TWFE DiD estimator
 #'
-#' Decomposes a two-way fixed-effects DiD estimate into a weighted
-#' average of all possible 2x2 DiD comparisons.  Prefers
-#' \code{bacondecomp::bacon}; falls back to a base-R implementation that
-#' mirrors the Python module otherwise.
+#' Thin wrapper around \code{bacondecomp::bacon}. Decomposes a
+#' two-way fixed-effects DiD estimate into a weighted average of all
+#' possible 2x2 DiD comparisons. Hard-errors if \pkg{bacondecomp} is
+#' not installed.
 #'
 #' @param data Balanced panel data.
 #' @param outcome Outcome column.
@@ -988,127 +874,28 @@ morie_did_triple_difference <- function(data, outcome, treatment, post,
 #' @export
 morie_did_bacon_decomposition <- function(data, outcome, treatment,
                                           unit, time) {
-  if (.morie_did_have_bacondecomp()) {
-    f <- stats::as.formula(paste(outcome, "~", treatment))
-    fit <- tryCatch(
-      bacondecomp::bacon(f, data = data,
-                         id_var = unit, time_var = time, quietly = TRUE),
-      error = function(e) NULL
-    )
-    if (!is.null(fit)) {
-      comp <- if (is.data.frame(fit)) fit else fit$two_by_twos
-      overall <- if (is.list(fit) && !is.null(fit$Estimate)) fit$Estimate
-                 else sum(comp$estimate * comp$weight)
-      return(list(components = comp, overall_estimate = overall,
-                  details = list(backend = "bacondecomp")))
-    }
-  }
-  # Base-R fallback ------------------------------------------------------------
-  df <- data
-  periods <- sort(unique(df[[time]]))
-  T_total <- length(periods)
-  unit_timing <- vapply(unique(df[[unit]]), function(u) {
-    treated_t <- df[df[[unit]] == u & df[[treatment]] == 1, time, drop = TRUE]
-    if (!length(treated_t)) Inf else min(treated_t)
-  }, numeric(1))
-  names(unit_timing) <- unique(df[[unit]])
-  df[["_treat_time"]] <- unit_timing[as.character(df[[unit]])]
-  timing_groups <- split(names(unit_timing), unit_timing)
-  group_keys <- sort(as.numeric(names(timing_groups))[
-    is.finite(as.numeric(names(timing_groups)))])
-  never_key <- if ("Inf" %in% names(timing_groups)) "Inf" else NULL
-  simple_2x2 <- function(units_t, units_c, pre_p, post_p) {
-    f <- function(units, pds)
-      df[df[[unit]] %in% units & df[[time]] %in% pds, outcome, drop = TRUE]
-    t_pre  <- f(units_t, pre_p)
-    t_post <- f(units_t, post_p)
-    c_pre  <- f(units_c, pre_p)
-    c_post <- f(units_c, post_p)
-    if (!length(t_pre) || !length(t_post) ||
-        !length(c_pre) || !length(c_post)) return(NULL)
-    (mean(t_post) - mean(t_pre)) - (mean(c_post) - mean(c_pre))
-  }
-  components <- list()
-  if (length(group_keys) >= 2) {
-    pairs <- utils::combn(group_keys, 2)
-    for (idx in seq_len(ncol(pairs))) {
-      g_e <- pairs[1, idx]
-      g_l <- pairs[2, idx]
-      pre_pds <- periods[periods < g_e]
-      mid_pds <- periods[periods >= g_e & periods < g_l]
-      if (length(pre_pds) && length(mid_pds)) {
-        est <- simple_2x2(timing_groups[[as.character(g_e)]],
-                          timing_groups[[as.character(g_l)]],
-                          pre_pds, mid_pds)
-        if (!is.null(est)) {
-          n_e <- length(timing_groups[[as.character(g_e)]])
-          n_l <- length(timing_groups[[as.character(g_l)]])
-          w <- (n_e * n_l * length(mid_pds) * length(pre_pds)) / T_total^2
-          components[[length(components) + 1]] <- data.frame(
-            group1 = g_e, group2 = g_l, estimate = est,
-            weight = w, type = "earlier_vs_later"
-          )
-        }
-      }
-      post_pds <- periods[periods >= g_l]
-      if (length(mid_pds) && length(post_pds)) {
-        est <- simple_2x2(timing_groups[[as.character(g_l)]],
-                          timing_groups[[as.character(g_e)]],
-                          mid_pds, post_pds)
-        if (!is.null(est)) {
-          n_e <- length(timing_groups[[as.character(g_e)]])
-          n_l <- length(timing_groups[[as.character(g_l)]])
-          w <- (n_e * n_l * length(post_pds) * length(mid_pds)) / T_total^2
-          components[[length(components) + 1]] <- data.frame(
-            group1 = g_l, group2 = g_e, estimate = est,
-            weight = w, type = "later_vs_earlier"
-          )
-        }
-      }
-    }
-  }
-  if (!is.null(never_key)) {
-    for (g in group_keys) {
-      pre_pds  <- periods[periods < g]
-      post_pds <- periods[periods >= g]
-      if (length(pre_pds) && length(post_pds)) {
-        est <- simple_2x2(timing_groups[[as.character(g)]],
-                          timing_groups[[never_key]],
-                          pre_pds, post_pds)
-        if (!is.null(est)) {
-          n_t <- length(timing_groups[[as.character(g)]])
-          n_c <- length(timing_groups[[never_key]])
-          w <- (n_t * n_c * length(post_pds) * length(pre_pds)) / T_total^2
-          components[[length(components) + 1]] <- data.frame(
-            group1 = g, group2 = "never_treated", estimate = est,
-            weight = w, type = "treated_vs_never"
-          )
-        }
-      }
-    }
-  }
-  comp_df <- if (length(components)) do.call(rbind, components)
-             else data.frame(group1 = numeric(), group2 = character(),
-                             estimate = numeric(), weight = numeric(),
-                             type = character())
-  overall <- if (nrow(comp_df) > 0) {
-    comp_df$weight <- comp_df$weight / sum(comp_df$weight)
-    sum(comp_df$estimate * comp_df$weight)
-  } else NA_real_
-  list(components = comp_df, overall_estimate = overall,
-       details = list(backend = "base-R"))
+  .morie_did_need("bacondecomp", "morie_did_bacon_decomposition")
+  f <- stats::as.formula(paste(outcome, "~", treatment))
+  fit <- bacondecomp::bacon(f, data = data,
+                            id_var = unit, time_var = time, quietly = TRUE)
+  comp <- if (is.data.frame(fit)) fit else fit$two_by_twos
+  overall <- if (is.list(fit) && !is.null(fit$Estimate)) fit$Estimate
+             else sum(comp$estimate * comp$weight)
+  list(components = comp, overall_estimate = overall,
+       details = list(backend = "bacondecomp"))
 }
 
 
 # ---------------------------------------------------------------------------
-# 13. Synthetic DiD
+# 13. Synthetic DiD -- thin synthdid wrapper
 # ---------------------------------------------------------------------------
 
 #' Synthetic Difference-in-Differences (Arkhangelsky et al., 2021)
 #'
-#' Requires the \pkg{synthdid} package
-#' (\code{remotes::install_github("synth-inference/synthdid")}); the
-#' algorithm has no comparably-faithful base-R port shipped here.
+#' Thin wrapper around \code{synthdid::synthdid_estimate}. Requires
+#' the \pkg{synthdid} package
+#' (\code{remotes::install_github("synth-inference/synthdid")});
+#' synthdid is not on CRAN and has no comparable alternative.
 #'
 #' @param data Balanced panel.
 #' @param outcome,unit,time,treatment_time Column names.
@@ -1126,44 +913,28 @@ morie_did_synthetic <- function(data, outcome, unit, time, treatment_time,
                                 treated_units = NULL, zeta = NULL,
                                 n_bootstrap = 200L, seed = 42L,
                                 alpha = 0.05) {
-  if (!.morie_did_have_synthdid())
-    stop("morie_did_synthetic requires the 'synthdid' package: ",
-         "remotes::install_github('synth-inference/synthdid')",
-         call. = FALSE)
+  .morie_did_need("synthdid", "morie_did_synthetic")
   df <- data
-  df[["_g"]] <- as.numeric(df[[treatment_time]])
+  df[["morie_g"]] <- as.numeric(df[[treatment_time]])
   if (is.null(treated_units))
-    treated_units <- unique(df[is.finite(df[["_g"]]), unit, drop = TRUE])
-  treat_onset <- df[df[[unit]] %in% treated_units, "_g", drop = TRUE]
+    treated_units <- unique(df[is.finite(df[["morie_g"]]), unit, drop = TRUE])
+  treat_onset <- df[df[[unit]] %in% treated_units, "morie_g", drop = TRUE]
   if (!length(treat_onset))
     stop("No treated units found.", call. = FALSE)
   first_treat <- min(treat_onset, na.rm = TRUE)
-  # Build the synthdid panel matrix (units x times) with treated rows last.
   units_all <- unique(df[[unit]])
   control_units <- setdiff(units_all, treated_units)
-  ordered_units <- c(control_units, treated_units)
+  df[["morie_W"]] <- as.numeric(df[[unit]] %in% treated_units &
+                                  df[[time]] >= first_treat)
   setup <- synthdid::panel.matrices(
-    df[, c(unit, time, outcome,
-           setNames(list(as.numeric(df[[time]] >= first_treat &
-                                      df[[unit]] %in% treated_units)),
-                    "_W")[[1]]) %||% c(unit, time, outcome),
-       drop = FALSE]
+    df[, c(unit, time, outcome, "morie_W")],
+    unit = 1, time = 2, outcome = 3, treatment = 4
   )
-  # Fallback: build manually if panel.matrices unhappy.
-  if (is.null(setup) || !is.list(setup)) {
-    df[["_W"]] <- as.numeric(df[[unit]] %in% treated_units &
-                               df[[time]] >= first_treat)
-    setup <- synthdid::panel.matrices(
-      df[, c(unit, time, outcome, "_W")],
-      unit = 1, time = 2, outcome = 3, treatment = 4
-    )
-  }
   est <- synthdid::synthdid_estimate(setup$Y, setup$N0, setup$T0,
-                                      zeta = zeta)
+                                     zeta = zeta)
   tau <- as.numeric(est)
   # Use S3-dispatched stats::vcov(); synthdid::vcov.synthdid_estimate
   # is unexported in CRAN builds and direct namespace access fails.
-  # (audit a2a39fe4)
   se_est <- tryCatch(sqrt(stats::vcov(est, method = "placebo")),
                      error = function(e) NA_real_)
   ci <- if (is.finite(se_est)) .morie_did_make_ci(tau, se_est, alpha)
@@ -1181,22 +952,22 @@ morie_did_synthetic <- function(data, outcome, unit, time, treatment_time,
   )
 }
 
-`%||%` <- function(a, b) if (is.null(a)) b else a
-
 
 # ---------------------------------------------------------------------------
-# 14. Wild cluster bootstrap
+# 14. Wild cluster bootstrap (base-R)
 # ---------------------------------------------------------------------------
 
 #' DiD with wild cluster bootstrap p-values (Cameron-Gelbach-Miller, 2008)
 #'
 #' Recommended when the number of clusters is small (< 50). Uses a
-#' base-R Rademacher / Webb wild-cluster-bootstrap implementation
-#' that mirrors the Python module. Earlier morie versions also
-#' delegated to \code{fwildclusterboot::boottest} when installed; we
-#' dropped that branch because fwildclusterboot is GitHub-only and
+#' base-R Rademacher / Webb wild-cluster-bootstrap implementation.
+#' Earlier rmorie versions also delegated to
+#' \code{fwildclusterboot::boottest} when installed; that branch was
+#' dropped in 0.9.5.12 because fwildclusterboot is GitHub-only and
 #' transitively requires summclust, also GitHub-only, which made the
-#' CI dependency resolver unreliable.
+#' CI dependency resolver unreliable. Callers who want
+#' \pkg{fwildclusterboot} should call it directly on a `feols` /
+#' `lm` fit.
 #'
 #' @inheritParams morie_did_2x2
 #' @param n_bootstrap Number of bootstrap replications.
@@ -1213,7 +984,6 @@ morie_did_wild_cluster_bootstrap <- function(data, outcome, treatment, post,
                                              seed = 42L, alpha = 0.05) {
   df <- .morie_did_drop_na(data, c(outcome, treatment, post, cluster))
   df[["dp_interact"]] <- as.numeric(df[[treatment]]) * as.numeric(df[[post]])
-  # Base-R Rademacher / Webb wild-cluster bootstrap ---------------------------
   set.seed(seed)
   d <- as.numeric(df[[treatment]])
   p <- as.numeric(df[[post]])
@@ -1307,7 +1077,7 @@ morie_did_continuous_treatment <- function(data, outcome, dose, post,
 
 
 # ---------------------------------------------------------------------------
-# 16. Fuzzy DiD
+# 16. Fuzzy DiD (LATE) via 2SLS
 # ---------------------------------------------------------------------------
 
 #' Fuzzy DiD (LATE) via 2SLS
@@ -1315,6 +1085,10 @@ morie_did_continuous_treatment <- function(data, outcome, dose, post,
 #' Uses \eqn{Z \times \mathrm{Post}}{Z x Post} as an instrument for
 #' \eqn{D \times \mathrm{Post}}{D x Post} to recover a local average treatment
 #' effect under imperfect compliance.
+#'
+#' For the de Chaisemartin-D'Haultfoeuille fuzzy DiD estimator on
+#' panel data prefer \code{\link{morie_did_chaisemartin_dhaultfoeuille}}
+#' (\pkg{DIDmultiplegt}).
 #'
 #' @inheritParams morie_did_2x2
 #' @param assignment Intent-to-treat assignment column.
@@ -1396,9 +1170,9 @@ morie_did_placebo_test_time <- function(data, outcome, treatment, time,
   rows <- list()
   for (pt in placebo_times) {
     df_test <- df_pre
-    df_test[["_placebo_post"]] <- as.integer(df_test[[time]] >= pt)
-    if (length(unique(df_test[["_placebo_post"]])) < 2) next
-    res <- morie_did_2x2(df_test, outcome, treatment, "_placebo_post",
+    df_test[["morie_placebo_post"]] <- as.integer(df_test[[time]] >= pt)
+    if (length(unique(df_test[["morie_placebo_post"]])) < 2) next
+    res <- morie_did_2x2(df_test, outcome, treatment, "morie_placebo_post",
                          covariates = covariates, cluster = cluster,
                          alpha = alpha)
     rows[[length(rows) + 1]] <- data.frame(
@@ -1504,15 +1278,15 @@ morie_did_heterogeneous <- function(data, outcome, treatment, post, moderator,
   if (is.numeric(m) && length(unique(m)) > n_quantiles) {
     breaks <- stats::quantile(m, probs = seq(0, 1, length.out = n_quantiles + 1),
                               na.rm = TRUE)
-    df[["_mod_group"]] <- as.integer(cut(m, breaks = unique(breaks),
-                                         include.lowest = TRUE))
+    df[["morie_mod_group"]] <- as.integer(cut(m, breaks = unique(breaks),
+                                              include.lowest = TRUE))
   } else {
-    df[["_mod_group"]] <- m
+    df[["morie_mod_group"]] <- m
   }
   rows <- list()
-  for (g_val in sort(unique(df[["_mod_group"]]))) {
+  for (g_val in sort(unique(df[["morie_mod_group"]]))) {
     if (is.na(g_val)) next
-    grp <- df[df[["_mod_group"]] %in% g_val, , drop = FALSE]
+    grp <- df[df[["morie_mod_group"]] %in% g_val, , drop = FALSE]
     if (length(unique(grp[[treatment]])) < 2 ||
         length(unique(grp[[post]])) < 2) next
     res <- morie_did_2x2(grp, outcome, treatment, post,
@@ -1535,17 +1309,20 @@ morie_did_heterogeneous <- function(data, outcome, treatment, post, moderator,
 
 
 # ---------------------------------------------------------------------------
-# 19. de Chaisemartin & D'Haultfoeuille (2020)
+# 19. de Chaisemartin & D'Haultfoeuille -- thin DIDmultiplegt wrapper
 # ---------------------------------------------------------------------------
 
 #' Heterogeneity-robust DiD (de Chaisemartin & D'Haultfoeuille, 2020)
 #'
-#' Computes the instantaneous treatment effect for switchers using
-#' appropriate comparisons.
+#' Thin wrapper around \code{DIDmultiplegt::did_multiplegt}. Computes
+#' the instantaneous treatment effect for switchers using
+#' appropriate comparisons. Hard-errors if \pkg{DIDmultiplegt} is
+#' not installed.
 #'
 #' @param data Panel data.
 #' @param outcome,treatment,unit,time Column names.
-#' @param n_bootstrap Bootstrap replications.
+#' @param n_bootstrap Bootstrap replications (forwarded as
+#'   \code{brep}).
 #' @param seed RNG seed.
 #' @param alpha Significance level.
 #' @return A result list; see \code{\link{morie_did_2x2}}.
@@ -1557,81 +1334,73 @@ morie_did_chaisemartin_dhaultfoeuille <- function(data, outcome, treatment,
                                                   unit, time,
                                                   n_bootstrap = 200L,
                                                   seed = 42L, alpha = 0.05) {
-  df <- data[order(data[[unit]], data[[time]]), , drop = FALSE]
-  periods <- sort(unique(df[[time]]))
-  estimates <- c()
-  weights <- c()
-  for (t_idx in seq.int(2, length(periods))) {
-    t_cur <- periods[t_idx]
-    t_prev <- periods[t_idx - 1]
-    df_cur  <- df[df[[time]] == t_cur, ]
-    rownames(df_cur)  <- df_cur[[unit]]
-    df_prev <- df[df[[time]] == t_prev, ]
-    rownames(df_prev) <- df_prev[[unit]]
-    common <- intersect(df_cur[[unit]], df_prev[[unit]])
-    if (!length(common)) next
-    d_cur  <- as.numeric(df_cur[as.character(common), treatment])
-    d_prev <- as.numeric(df_prev[as.character(common), treatment])
-    y_cur  <- as.numeric(df_cur[as.character(common), outcome])
-    y_prev <- as.numeric(df_prev[as.character(common), outcome])
-    switchers <- d_cur == 1 & d_prev == 0
-    controls  <- d_cur == 0 & d_prev == 0
-    n_sw <- sum(switchers)
-    n_ct <- sum(controls)
-    if (!n_sw || !n_ct) next
-    delta_sw <- mean(y_cur[switchers] - y_prev[switchers])
-    delta_ct <- mean(y_cur[controls]  - y_prev[controls])
-    estimates <- c(estimates, delta_sw - delta_ct)
-    weights <- c(weights, n_sw)
-  }
-  if (!length(estimates))
-    return(.morie_did_result(NA_real_, NA_real_, 0, 0,
-                             method = "chaisemartin_dhaultfoeuille",
-                             alpha = alpha))
-  w <- weights / sum(weights)
-  delta_hat <- sum(w * estimates)
-  units_all <- unique(df[[unit]])
-  rng <- if (exists(".Random.seed", envir = .GlobalEnv))
-    get(".Random.seed", envir = .GlobalEnv) else NULL
+  .morie_did_need("DIDmultiplegt", "morie_did_chaisemartin_dhaultfoeuille")
   set.seed(seed)
-  on.exit({
-    if (!is.null(rng)) assign(".Random.seed", rng, envir = .GlobalEnv)
-  })
-  boot <- replicate(n_bootstrap, {
-    b_units <- sample(units_all, length(units_all), replace = TRUE)
-    df_b_parts <- lapply(seq_along(b_units), function(j) {
-      sub <- df[df[[unit]] == b_units[j], , drop = FALSE]
-      sub[[unit]] <- paste0(sub[[unit]], "_", j)
-      sub
-    })
-    df_b <- do.call(rbind, df_b_parts)
-    r <- tryCatch(morie_did_chaisemartin_dhaultfoeuille(
-      df_b, outcome, treatment, unit, time,
-      n_bootstrap = 0L, seed = seed, alpha = alpha
-    ), error = function(e) NULL)
-    if (is.null(r)) NA_real_ else r$estimate
-  })
-  boot <- boot[is.finite(boot)]
-  se_est <- if (n_bootstrap > 0 && length(boot) > 1) stats::sd(boot)
-            else NA_real_
-  .morie_did_result(
-    delta_hat, se_est,
-    n_treated = sum(weights),
-    n_control = length(units_all) - sum(weights),
-    method = "chaisemartin_dhaultfoeuille", alpha = alpha
+  # Recent DIDmultiplegt requires the `mode` arg with no default. The
+  # original CdH (2020) instantaneous-effect estimator lives at
+  # mode = "old", which keeps the historical Y/G/T/D arg names and
+  # `brep` for bootstrap reps.
+  #
+  # did_multiplegt_old internally calls plotrix::plotCI to draw a
+  # bootstrap diagnostic plot, which fails on small samples with
+  # "need finite 'ylim' values" when the bootstrap CIs are
+  # degenerate. We don't care about the plot side-effect; if the
+  # plot path errors we fall back to brep = 0 (no bootstrap, no
+  # plot, SE = NA, but point estimate preserved).
+  .didcall <- function(brep_arg) {
+    DIDmultiplegt::did_multiplegt(
+      mode = "old",
+      df = as.data.frame(data),
+      Y = outcome, G = unit, T = time, D = treatment,
+      brep = brep_arg
+    )
+  }
+  fit <- tryCatch(
+    .didcall(n_bootstrap),
+    error = function(e) {
+      msg <- conditionMessage(e)
+      if (grepl("finite|plot\\.window|plotCI|ylim|xlim", msg)) {
+        warning(
+          "DIDmultiplegt bootstrap-plot failed with: ", msg,
+          ". Falling back to brep = 0; SE will be NA.",
+          call. = FALSE
+        )
+        return(.didcall(0L))
+      }
+      stop(e)
+    }
   )
+  est <- as.numeric(fit$effect)
+  se_est <- if (!is.null(fit$se_effect)) as.numeric(fit$se_effect) else NA_real_
+  units_all <- unique(data[[unit]])
+  treated_units <- unique(data[data[[treatment]] == 1, unit, drop = TRUE])
+  res <- .morie_did_result(
+    est, se_est,
+    n_treated = length(treated_units),
+    n_control = length(setdiff(units_all, treated_units)),
+    method = "chaisemartin_dhaultfoeuille", alpha = alpha,
+    details = list(fit = fit, backend = "DIDmultiplegt")
+  )
+  res$method <- "chaisemartin_dhaultfoeuille"
+  res
 }
 
 
 # ---------------------------------------------------------------------------
-# 20. Sensitivity analysis (Rambachan & Roth, 2023)
+# 20. Sensitivity analysis -- thin HonestDiD wrapper
 # ---------------------------------------------------------------------------
 
 #' Sensitivity of DiD estimate to parallel-trends violations
 #'
-#' For each \eqn{\delta}{delta}, computes a bias-adjusted confidence set under
-#' the bound \eqn{|\mathrm{bias}| \le \delta \hat\sigma}{|bias| <= delta hatsigma} (Rambachan &
-#' Roth, 2023, conservative version).
+#' For each \eqn{\delta}{delta}, computes a bias-adjusted confidence
+#' set under the bound
+#' \eqn{|\mathrm{bias}| \le \delta \hat\sigma}{|bias| <= delta hatsigma}
+#' (Rambachan & Roth, 2023, conservative version).
+#'
+#' For the full Rambachan-Roth fixed-length-confidence-interval (FLCI)
+#' procedure with event-time pre-trends prefer
+#' \code{HonestDiD::createSensitivityResults_relativeMagnitudes} on
+#' an event-study coefficient vector.
 #'
 #' @inheritParams morie_did_2x2
 #' @param delta_range Numeric vector of \eqn{\delta}{delta} values to evaluate
@@ -1671,6 +1440,10 @@ morie_did_sensitivity_analysis <- function(data, outcome, treatment, post,
 #' Reports group / period sample sizes, outcome distributions, and
 #' baseline covariate balance (standardised mean differences).
 #'
+#' For richer covariate-balance reporting (variance ratios, KS
+#' statistics, love plots) prefer \code{cobalt::bal.tab} /
+#' \code{cobalt::love.plot}.
+#'
 #' @inheritParams morie_did_2x2
 #' @return A list with \code{sample_sizes}, \code{outcome_stats},
 #'   \code{covariate_balance}.
@@ -1688,7 +1461,7 @@ morie_did_diagnostics <- function(data, outcome, treatment, post,
       treatment = g[[treatment]][1],
       post      = g[[post]][1],
       mean   = mean(y),
-      std    = stats::sd(y),   # py-parity name (was 'sd' pre-2026-05-22)
+      std    = stats::sd(y),
       median = stats::median(y),
       min    = min(y),
       max    = max(y),
@@ -1716,4 +1489,165 @@ morie_did_diagnostics <- function(data, outcome, treatment, post,
   list(sample_sizes = sizes,
        outcome_stats = outcome_stats,
        covariate_balance = cov_balance)
+}
+
+
+# ---------------------------------------------------------------------------
+# 22. TwoWayFEWeights extender (de Chaisemartin & D'Haultfoeuille 2020)
+# ---------------------------------------------------------------------------
+
+#' Diagnose TWFE-DiD weights (de Chaisemartin & D'Haultfoeuille, 2020)
+#'
+#' Thin interface to \code{TwoWayFEWeights::twowayfeweights}: returns the
+#' decomposition of the two-way fixed-effects DiD estimand into the
+#' weighted average of the \eqn{N \times T}{N x T} unit-time ATEs.  Use
+#' this to quantify how many of the implicit comparisons receive
+#' negative weight, which is the canonical diagnostic for whether a
+#' TWFE specification can be interpreted as a convex combination of
+#' treatment effects.
+#'
+#' Wrapper-as-extender: \code{morie_did_panel_fe} already estimates the
+#' TWFE coefficient; this function exposes the diagnostic side of the
+#' same backend so that downstream MRM analyses can flag heterogeneous-
+#' treatment-effects bias without leaving the rmorie API.
+#'
+#' @param panel A long-format balanced (or near-balanced) panel
+#'   \code{data.frame}.
+#' @param group Name of the unit / group identifier column.
+#' @param time Name of the time period column.
+#' @param treatment Name of the binary or continuous treatment column.
+#' @param outcome Optional outcome column.  When supplied,
+#'   \pkg{TwoWayFEWeights} computes the weights AND the implied TWFE
+#'   coefficient; when \code{NULL}, only the weights are returned
+#'   (faster, dimension-free).
+#' @param type Weight type passed through to
+#'   \code{TwoWayFEWeights::twowayfeweights}: \code{"feTR"} (default,
+#'   feasible \code{TR} weights), \code{"feS"}, \code{"fdTR"}, or
+#'   \code{"fdS"}.  See the \pkg{TwoWayFEWeights} documentation.
+#' @param ... Additional arguments forwarded to
+#'   \code{TwoWayFEWeights::twowayfeweights}.
+#' @return An S3 list of class \code{morie_did_twfe_diagnostics} with
+#'   elements \code{n_negative_weights}, \code{sum_weights},
+#'   \code{sum_negative_weights}, \code{share_negative_weights},
+#'   \code{method}, and \code{raw} (the full
+#'   \code{twowayfeweights} object).
+#' @references de Chaisemartin, C., & D'Haultfoeuille, X. (2020).
+#'   Two-way fixed effects estimators with heterogeneous treatment
+#'   effects.  \emph{American Economic Review}, 110(9), 2964--2996.
+#' @seealso \code{\link{morie_did_panel_fe}},
+#'   \code{\link{morie_did_chaisemartin_dhaultfoeuille}}.
+#' @export
+morie_did_twoway_fe_weights <- function(panel, group, time, treatment,
+                                        outcome = NULL,
+                                        type = "feTR", ...) {
+  .morie_did_need("TwoWayFEWeights", "morie_did_twoway_fe_weights")
+  df <- as.data.frame(panel)
+  args <- list(df = df, Y = outcome, G = group, T = time, D = treatment,
+               type = type, ...)
+  # twowayfeweights() requires Y; when caller omits it, pass a constant
+  # so the diagnostic still runs (weights are independent of Y values).
+  if (is.null(args$Y)) {
+    df[["morie_twfe_y_const"]] <- 0
+    args$df <- df
+    args$Y <- "morie_twfe_y_const"
+  }
+  fit <- do.call(TwoWayFEWeights::twowayfeweights, args)
+  weights <- tryCatch(as.numeric(fit$weights),
+                      error = function(e) NA_real_)
+  n_neg <- if (all(is.na(weights))) NA_integer_
+           else sum(weights < 0, na.rm = TRUE)
+  sum_w <- if (all(is.na(weights))) NA_real_
+           else sum(weights, na.rm = TRUE)
+  sum_neg <- if (all(is.na(weights))) NA_real_
+             else sum(weights[weights < 0], na.rm = TRUE)
+  share_neg <- if (all(is.na(weights)) || length(weights) == 0L) NA_real_
+               else n_neg / length(weights)
+  structure(
+    list(
+      n_negative_weights      = n_neg,
+      sum_weights             = sum_w,
+      sum_negative_weights    = sum_neg,
+      share_negative_weights  = share_neg,
+      method = "twoway_fe_weights (TwoWayFEWeights)",
+      raw    = fit
+    ),
+    class = c("morie_did_twfe_diagnostics", "list")
+  )
+}
+
+
+# ---------------------------------------------------------------------------
+# 23. Synthetic DiD explicit-name extender (Arkhangelsky et al., 2021)
+# ---------------------------------------------------------------------------
+
+#' Synthetic DiD via \code{synthdid::synthdid_estimate} (explicit-name API)
+#'
+#' Parallel to \code{\link{morie_did_synthetic}}, this is the
+#' explicit-name wrapper that surfaces the full \code{synthdid}
+#' estimator and its placebo / jackknife variance pieces.  Use this
+#' when you want to pass through additional \pkg{synthdid} arguments
+#' or inspect the unit / time weights side-by-side; use
+#' \code{morie_did_synthetic} when you want the rmorie result-list
+#' shape consumed by \code{morie_did_*} downstream code.
+#'
+#' Wrapper-as-extender: rmorie already wraps \pkg{synthdid} once via
+#' \code{morie_did_synthetic}; this entry point gives MRM / paper
+#' callers the canonical Arkhangelsky et al. (2021) API with a
+#' \code{morie_*} name so they don't need to load \pkg{synthdid}
+#' directly.
+#'
+#' @param panel Long-format balanced panel.
+#' @param unit Unit identifier column.
+#' @param time Time period column.
+#' @param treatment Binary treatment indicator that turns on at onset
+#'   for treated units and is zero everywhere for controls (the
+#'   \pkg{synthdid} W convention).
+#' @param outcome Outcome column.
+#' @param vcov_method Variance estimator passed to
+#'   \code{stats::vcov.synthdid_estimate}: one of \code{"placebo"}
+#'   (default), \code{"bootstrap"}, \code{"jackknife"}.
+#' @param ... Additional arguments forwarded to
+#'   \code{synthdid::synthdid_estimate} (e.g. \code{zeta},
+#'   \code{omega.intercept}).
+#' @return An S3 list of class \code{morie_did_synthdid_result} with
+#'   elements \code{att}, \code{std_error}, \code{vcov_method},
+#'   \code{n_treated}, \code{n_control}, \code{n_pre},
+#'   \code{n_post}, \code{method}, and \code{raw} (the full
+#'   \code{synthdid_estimate} object).
+#' @references Arkhangelsky, D., Athey, S., Hirshberg, D. A., Imbens,
+#'   G. W., & Wager, S. (2021). Synthetic difference-in-differences.
+#'   \emph{American Economic Review}, 111(12), 4088--4118.
+#' @seealso \code{\link{morie_did_synthetic}}.
+#' @export
+morie_did_synthdid_estimate <- function(panel, unit, time, treatment,
+                                        outcome,
+                                        vcov_method = "placebo", ...) {
+  .morie_did_need("synthdid", "morie_did_synthdid_estimate")
+  df <- as.data.frame(panel)
+  cols <- c(unit, time, outcome, treatment)
+  setup <- synthdid::panel.matrices(
+    df[, cols, drop = FALSE],
+    unit = 1, time = 2, outcome = 3, treatment = 4
+  )
+  est <- do.call(synthdid::synthdid_estimate,
+                 c(list(Y = setup$Y, N0 = setup$N0, T0 = setup$T0), list(...)))
+  att <- as.numeric(est)
+  se_est <- tryCatch(sqrt(stats::vcov(est, method = vcov_method)),
+                     error = function(e) NA_real_)
+  n_total <- nrow(setup$Y)
+  t_total <- ncol(setup$Y)
+  structure(
+    list(
+      att          = att,
+      std_error    = as.numeric(se_est),
+      vcov_method  = vcov_method,
+      n_treated    = n_total - as.integer(setup$N0),
+      n_control    = as.integer(setup$N0),
+      n_pre        = as.integer(setup$T0),
+      n_post       = t_total - as.integer(setup$T0),
+      method       = "synthdid_estimate (synthdid)",
+      raw          = est
+    ),
+    class = c("morie_did_synthdid_result", "list")
+  )
 }

@@ -28,6 +28,16 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
   # Parallel compile for source-installed Suggests (C++ heavy deps).
   MAKEFLAGS: "-j4"
+  # rgl is pulled transitively by car/caret/effects/emmeans (Suggests).
+  # On macOS-ARM64 the CRAN rgl binary tries to dlopen libGLU.1.dylib at
+  # .onLoad; XQuartz is not preinstalled on the runner -> segfault during
+  # `checking dependencies in R code`, which crashes the whole check.
+  # RGL_USE_NULL=TRUE makes rgl initialise in headless / null-device
+  # mode and skip the OpenGL load entirely. Much cheaper than the
+  # alternative (`brew install --cask xquartz`, ~150 MB, ~3 min). Set
+  # on all OS cells: rgl is a CI-only transitive dep, no graphics tests
+  # run here.
+  RGL_USE_NULL: "TRUE"
 
 on:
   workflow_call:
@@ -72,10 +82,27 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
 
+      # Mirror morie's CI shape: drop --as-cran from per-push (51min+ on
+      # rmorie Linux due to --as-cran URL-probing + 112 source-installed
+      # Suggests). Plain check on per-push; --as-cran gated to
+      # release/** branches and workflow_dispatch. Same trade-off morie
+      # made: "Drop --as-cran (too strict pre-CRAN); re-enable for the
+      # CRAN-submission PR."
+      - name: Resolve check args (--as-cran on release/dispatch only)
+        id: check_args
+        run: |
+          if [[ "${{ github.ref }}" == refs/heads/release/* ]] || \
+             [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "args=c(\"--no-manual\", \"--as-cran\")" >> "$GITHUB_OUTPUT"
+          else
+            echo "args=c(\"--no-manual\")" >> "$GITHUB_OUTPUT"
+          fi
+        shell: bash
+
       - uses: r-lib/actions/check-r-package@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
         with:
           upload-snapshots: true
-          args: 'c("--no-manual", "--as-cran")'
+          args: ${{ steps.check_args.outputs.args }}
           error-on: '"error"'
 
       # POST-CHECK QA (lintr / covr / goodpractice / pkgcheck) was

@@ -17,5 +17,5 @@ bh(p_values, alpha = 0.05, labels = NULL)
 \item{labels}{Optional character vector of test labels.}
 }
 \description{
-Wraps \code{stats::p.adjust(method = "BH")}.
+Thin wrapper over \code{stats::p.adjust(method = "BH")}.
 }

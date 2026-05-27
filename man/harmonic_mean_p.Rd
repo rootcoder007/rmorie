@@ -10,5 +10,7 @@ harmonic_mean_p(p_values)
 \item{p_values}{Numeric vector of raw p-values.}
 }
 \description{
-For tests that may be dependent.
+For tests that may be dependent. Delegates to
+\code{harmonicmeanp::p.hmp} when installed; otherwise returns the
+raw harmonic mean (Wilson 2019 asymptotic approximation).
 }

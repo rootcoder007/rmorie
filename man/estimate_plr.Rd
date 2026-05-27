@@ -31,7 +31,8 @@ Named list with \code{ate}, \code{se}, \code{ci_lower}, \code{ci_upper},
 \code{pval}, \code{n_obs}, \code{method}.
 }
 \description{
-Wraps \pkg{DoubleML} when available. Without DoubleML, falls back
-to a hand-rolled cross-fitting estimator using ridge regression
-(\pkg{glmnet}) or, last-ditch, OLS partialling out.
+Wraps \pkg{DoubleML} (+ \pkg{mlr3} / \pkg{mlr3learners}) when
+available. Without DoubleML, falls back to a hand-rolled
+cross-fitting estimator using ridge regression (\pkg{glmnet}) or,
+last-ditch, OLS partialling out.
 }

@@ -15,4 +15,7 @@ sidak(p_values, alpha = 0.05, labels = NULL)
 }
 \description{
 Slightly less conservative than Bonferroni under independence.
+Computes \eqn{1 - (1 - p)^m} directly (closed form); the
+\pkg{mutoss} package offers an equivalent step-down variant via
+\code{mutoss::SidakSD}.
 }

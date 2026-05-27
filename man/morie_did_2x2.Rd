@@ -43,6 +43,13 @@ With covariates, fits the regression
 \eqn{Y = \alpha + \beta D + \gamma P + \tau (D \times P) + X\delta + \varepsilon}{Y = alpha + beta D + gamma P + tau (D x P) + Xdelta + epsilon}
 and reports \eqn{\hat\tau}{hattau}.
 }
+\details{
+For multi-period staggered designs prefer
+\code{\link{morie_did_group_time_att}} (Callaway-Sant'Anna via
+\pkg{did}). \code{\link{morie_did_doubly_robust}} (via \pkg{DRDID})
+is the recommended option when pre-treatment covariates are
+available.
+}
 \examples{
 \dontrun{
 df <- data.frame(

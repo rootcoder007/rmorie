@@ -22,17 +22,27 @@ morie_estimate_aipw(
 
 \item{covariates}{Character vector of covariate names.}
 
-\item{propensity_col}{Optional: name of a pre-computed propensity score column.}
+\item{propensity_col}{Optional: name of a pre-computed propensity
+score column.}
 
-\item{outcome_model}{Family for the outcome model: \code{"linear"} or \code{"logistic"}.}
+\item{outcome_model}{Family for the outcome model: \code{"linear"} or
+\code{"logistic"}.}
 }
 \value{
 Named list: \code{ate}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{n}.
 }
 \description{
 Combines IPW and outcome regression corrections. Consistent if
-\strong{either} the propensity model \strong{or} the outcome model is correctly
-specified.
+\strong{either} the propensity model \strong{or} the outcome model
+is correctly specified.
+}
+\details{
+The propensity step delegates to \pkg{WeightIt} when installed
+(via \code{morie_estimate_propensity_scores}). The outcome
+regression and the doubly-robust influence-function score are
+evaluated inline to preserve the closed-form SE used downstream.
+Where richer outputs are desired, \code{AIPW::AIPW} (with SuperLearner
+nuisance learners) is the canonical CRAN counterpart.
 }
 \examples{
 set.seed(1)

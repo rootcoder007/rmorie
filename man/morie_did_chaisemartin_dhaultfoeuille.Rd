@@ -20,7 +20,8 @@ morie_did_chaisemartin_dhaultfoeuille(
 
 \item{outcome, treatment, unit, time}{Column names.}
 
-\item{n_bootstrap}{Bootstrap replications.}
+\item{n_bootstrap}{Bootstrap replications (forwarded as
+\code{brep}).}
 
 \item{seed}{RNG seed.}
 
@@ -30,8 +31,10 @@ morie_did_chaisemartin_dhaultfoeuille(
 A result list; see \code{\link{morie_did_2x2}}.
 }
 \description{
-Computes the instantaneous treatment effect for switchers using
-appropriate comparisons.
+Thin wrapper around \code{DIDmultiplegt::did_multiplegt}. Computes
+the instantaneous treatment effect for switchers using
+appropriate comparisons. Hard-errors if \pkg{DIDmultiplegt} is
+not installed.
 }
 \references{
 de Chaisemartin, C., & D'Haultfoeuille, X. (2020). Two-way

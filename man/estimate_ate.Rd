@@ -16,8 +16,12 @@ estimate_ate(data, outcome, treatment, weights_col)
 \item{weights_col}{Name of the weights column (e.g. IPTW).}
 }
 \value{
-Named list with \code{ate} and \code{se} (HC3-robust).
+Named list with \code{ate} and \code{se} (HC3-robust when available).
 }
 \description{
-IPW-weighted OLS ATE
+Thin wrapper over a weighted \code{stats::lm()} plus HC3 robust SEs
+from \pkg{sandwich} + \pkg{lmtest} when installed. Note: this is the
+legacy shape used by older MRM pipelines; new code should prefer
+\code{morie_estimate_ate()} (in \code{R/causal.R}) for the richer
+\code{morie_te_result} return shape.
 }

@@ -63,7 +63,16 @@ COPY man/ man/
 # Install only hard dependencies (Imports + LinkingTo). Suggests
 # stay opt-in so the image is small. Users opt-in at runtime via
 # `rmorie::rmorie_install_extras()`.
-RUN R -e 'install.packages(c("Rcpp", "RcppArmadillo"), repos = "https://p3m.dev/cran/__linux__/noble/latest")'
+#
+# remotes::install_deps reads DESCRIPTION and installs all non-base
+# Imports + LinkingTo packages. Hard-listing them in
+# install.packages() drifts (the wrapper-as-extender campaign added
+# `here` to Imports; the old line installed only Rcpp/RcppArmadillo
+# and the build failed with "dependency 'here' is not available").
+RUN R -e 'install.packages("remotes", repos = "https://p3m.dev/cran/__linux__/noble/latest"); \
+          remotes::install_deps(".", dependencies = c("Depends","Imports","LinkingTo"), \
+                                repos = "https://p3m.dev/cran/__linux__/noble/latest", \
+                                upgrade = "never")'
 RUN R CMD INSTALL --no-test-load --no-help --no-html .
 
 # ---- Stage 2: runtime ----

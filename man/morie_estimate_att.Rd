@@ -15,7 +15,8 @@ morie_estimate_att(data, treatment, outcome, covariates, propensity_col = NULL)
 
 \item{covariates}{Character vector of covariate names.}
 
-\item{propensity_col}{Optional: name of a pre-computed propensity score column.}
+\item{propensity_col}{Optional: name of a pre-computed propensity
+score column.}
 }
 \value{
 Named list: \code{att}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{n_treated}.
@@ -23,6 +24,11 @@ Named list: \code{att}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{n_tre
 \description{
 Treated units receive weight 1; controls receive
 \eqn{w_i = \hat{e}(X_i)/(1-\hat{e}(X_i))}{w_i = e_hat(X_i)/(1-e_hat(X_i))}.
+}
+\details{
+Propensity-score estimation delegates to \pkg{WeightIt} when
+installed (via \code{morie_estimate_propensity_scores}); the
+weighted-difference and influence-function SE run inline.
 }
 \examples{
 set.seed(2)

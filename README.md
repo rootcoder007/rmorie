@@ -3,7 +3,6 @@
 <!-- badges: start -->
 [![Project Status: Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![CRAN status](https://www.r-pkg.org/badges/version/rmorie)](https://CRAN.R-project.org/package=rmorie)
 [![r-universe](https://rootcoder007.r-universe.dev/badges/rmorie)](https://rootcoder007.r-universe.dev/rmorie)
 [![R-CMD-check](https://github.com/rootcoder007/rmorie/actions/workflows/r-cmd-check.yml/badge.svg)](https://github.com/rootcoder007/rmorie/actions/workflows/r-cmd-check.yml)
 [![Codecov test coverage](https://codecov.io/gh/rootcoder007/rmorie/graph/badge.svg)](https://app.codecov.io/gh/rootcoder007/rmorie)
@@ -232,44 +231,22 @@ CodeQL.
 
 ## Citation
 
-Run `citation("morie")` after installation. Please cite **both** the
-software and the relevant companion papers.
+Run `citation("rmorie")` after installation, or cite directly:
 
 ```bibtex
-@Manual{ruhela_morie_R_2026,
-  title   = {morie: Multi-domain Open Research and Inferential Estimation in R},
+@Manual{ruhela_rmorie_2026,
+  title   = {rmorie: Multi-domain Open Research and Inferential Estimation in R},
   author  = {Ruhela, Vansh Singh},
   year    = {2026},
   note    = {R package version 0.9.5.4},
-  url     = {https://github.com/rootcoder007/morie}
-}
-
-@Misc{ruhela_morie_python_2026,
-  title  = {morie: Multi-domain Open Research and Inferential Estimation in Python},
-  author = {Ruhela, Vansh Singh},
-  year   = {2026}
-}
-
-@Misc{ruhela_mrm_framework_2026,
-  title  = {MRM: Multilevel Reconciliation Methodology --- A multi-source statistical foundation for Canadian carceral, police, and oversight data},
-  author = {Ruhela, Vansh Singh},
-  year   = {2026}
-}
-
-@Misc{ruhela_hawkes_2026,
-  title  = {Criminological Hawkes Process via MORIE: Markovian and Non-Markovian Self-Exciting Point Processes for Toronto Crime},
-  author = {Ruhela, Vansh Singh},
-  year   = {2026}
-}
-
-@Misc{ruhela_empirical_2026,
-  title  = {Solitary Confinement, Self-Excitation, and Institutional Churn: Empirical Applications of MRM to Canadian Carceral and Police Data},
-  author = {Ruhela, Vansh Singh},
-  year   = {2026}
+  url     = {https://github.com/rootcoder007/rmorie}
 }
 ```
 
-(DOIs will be re-added once we re-deposit on Zenodo.)
+Methodology and empirical-applications papers (MRM framework,
+criminological Hawkes process, solitary-confinement / self-excitation
+/ institutional churn) are in preparation; they will be linked here
+once publicly available.
 
 ## License
 

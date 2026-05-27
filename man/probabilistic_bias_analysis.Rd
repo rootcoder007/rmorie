@@ -29,5 +29,9 @@ Named list with bias-adjusted distribution summaries.
 }
 \description{
 Draws bias parameters from prior distributions and returns the
-distribution of bias-adjusted estimates.
+distribution of bias-adjusted estimates.  Cross-references
+\pkg{episensr} (\code{episensr::probsens}) for the canonical
+multi-bias version with separate selection-bias and
+misclassification-bias models; use \pkg{episensr} directly when
+you need those.
 }
