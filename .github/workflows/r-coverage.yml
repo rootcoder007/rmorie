@@ -37,8 +37,38 @@ jobs:
           needs: coverage
 
       - name: Run covr
+        # quiet=FALSE so the failing test name shows up in the CI log
+        # (the previous run silently halted at "testthat.Rout.fail").
+        # If covr still dies, the next step dumps every .Rout.fail
+        # under /tmp so the actual testthat output is recoverable.
         run: |
-          Rscript -e 'cov <- covr::package_coverage(type = "tests", quiet = TRUE); covr::to_cobertura(cov, filename = "coverage.xml"); cat(sprintf("Coverage: %.2f%%\n", covr::percent_coverage(cov)))'
+          Rscript -e 'cov <- covr::package_coverage(type = "tests", quiet = FALSE); covr::to_cobertura(cov, filename = "coverage.xml"); cat(sprintf("Coverage: %.2f%%\n", covr::percent_coverage(cov)))'
+
+      - name: Dump testthat.Rout.fail on failure
+        if: failure()
+        run: |
+          echo "=== searching /tmp for testthat.Rout.fail ==="
+          find /tmp -name 'testthat.Rout.fail' -print 2>/dev/null | while read -r f; do
+            echo ""
+            echo "===== $f ====="
+            tail -200 "$f"
+          done
+          echo ""
+          echo "=== also dumping any rmorie-Ex.Rout.fail ==="
+          find /tmp -name '*.Rout.fail' -print 2>/dev/null | while read -r f; do
+            echo ""
+            echo "===== $f ====="
+            tail -200 "$f"
+          done
+
+      - name: Upload .Rout.fail as artifact
+        if: failure()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: rmorie-covr-rout-fail
+          path: /tmp/**/*.Rout.fail
+          if-no-files-found: ignore
+          retention-days: 7
 
       # Codecov v5 on public repos uses tokenless upload via OIDC; no
       # CODECOV_TOKEN secret needed.
