@@ -19,6 +19,18 @@ Japanese **森** (/moɾi/, "MOH-ree", "forest" — three trees stacked into
 one ideogram). It expands to **Multi-domain Open Research and
 Inferential Estimation**.
 
+## Documentation
+
+- **Reference manual** (all `morie_*` functions, one searchable doc):
+  <https://rootcoder007.r-universe.dev/rmorie/doc/manual.html>
+- **Package website** (browsable, with articles):
+  <https://rootcoder007.github.io/rmorie/>
+- **r-universe project page**: <https://rootcoder007.r-universe.dev/rmorie>
+
+> With 559 exported functions, the full reference is large — use the
+> manual or the package site above rather than scrolling the function
+> index. This README covers install + the most common workflows only.
+
 ## What's in v0.9.5
 
 - **559 exported `morie_*` R functions** — every public callable is now
