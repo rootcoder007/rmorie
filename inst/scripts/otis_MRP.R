@@ -8,7 +8,7 @@
 ##
 ##    Vansh Singh Ruhela
 ##    MA, Centre for Criminology and Sociolegal Studies, U of T
-##    vansh.ruhela@mail.utoronto.ca
+##    vsruhela@proton.me
 ##    ORCID: 0009-0004-1750-3592
 ##    Supervisor: Prof. Ángela Zorro Medina
 ##    Submission target: August 17, 2026
