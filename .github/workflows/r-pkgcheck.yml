@@ -51,6 +51,7 @@ jobs:
             any::rcmdcheck
             any::goodpractice
             any::cyclocomp
+            any::rgenoud
             ropensci-review-tools/pkgstats
             ropensci-review-tools/pkgcheck
 
