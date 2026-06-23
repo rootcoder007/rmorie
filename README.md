@@ -1,4 +1,4 @@
-# rmorie
+# R-MORIE
 
 <!-- badges: start -->
 [![Project Status: Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
@@ -10,10 +10,10 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/rootcoder007/rmorie.svg)](https://github.com/rootcoder007/rmorie/commits/main)
 <!-- badges: end -->
 
-`rmorie` (**Multi-domain Open Research and Inferential Estimation**) is the
-R-only member of the morie toolkit — an R package for causal inference,
-sampling, psychometrics, point-process modeling, and criminological
-accountability analysis, with no Python dependencies.
+R-MORIE (**Multi-domain Open Research and Inferential Estimation**) is an
+R package for causal inference, sampling, psychometrics, point-process
+modeling, and criminological accountability analysis, with no Python
+dependencies.
 
 ## Documentation
 
@@ -259,5 +259,5 @@ once publicly available.
 
 ## License
 
-morie is licensed under **AGPL-3.0-or-later**. See `LICENSE` for the
+R-MORIE is licensed under **AGPL-3.0-or-later**. See `LICENSE` for the
 full text and `LICENSING.md` for the per-component breakdown.
