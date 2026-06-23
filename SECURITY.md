@@ -9,7 +9,7 @@
 
 ## Reporting a Vulnerability
 
-Please report security vulnerabilities by email to **hadesllm@proton.me**
+Please report security vulnerabilities by email to **vsruhela@proton.me**
 with the subject line `[SECURITY] rmorie`. Encrypted reports preferred —
 PGP key on Keybase at @rootcoder007.
 
