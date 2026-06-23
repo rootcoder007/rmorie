@@ -288,10 +288,10 @@ cheatsheet <- function() {
     "=================",
     "",
     "Install",
-    "  curl -fsSL https://hadesllm.github.io/morie/install.sh | bash",
+    "  curl -fsSL https://rootcoder007.github.io/morie/install.sh | bash",
     "  brew tap rootcoder007/morie && brew install morie",
     "  pip install morie",
-    "  install.packages('morie', repos = 'https://hadesllm.r-universe.dev')",
+    "  install.packages('morie', repos = 'https://rootcoder007.r-universe.dev')",
     "  docker run --rm ghcr.io/rootcoder007/morie:latest morie --help",
     "",
     "Learn",
@@ -327,10 +327,10 @@ cheatsheet <- function() {
     "  morie --help                    Top-level help",
     "",
     "Refs",
-    "  Docs:     https://hadesllm.github.io/morie/",
+    "  Docs:     https://rootcoder007.github.io/morie/",
     "  Issues:   https://github.com/rootcoder007/morie/issues",
     "  PyPI:     https://pypi.org/project/morie/",
-    "  R:        https://hadesllm.r-universe.dev/morie",
+    "  R:        https://rootcoder007.r-universe.dev/morie",
     sep = "\
 "
   )

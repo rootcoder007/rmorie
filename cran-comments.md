@@ -90,8 +90,8 @@ See `NEWS.md` for the full changelog.
   workflow).
 * win-builder R-devel / R-release / R-oldrelease: tarball submitted
   (3 jobs, results emailed to the maintainer).
-* r-universe (Linux + macOS + Windows binaries): the `hadesllm`
-  r-universe builds morie continuously; `R CMD check` reports OK on
+* r-universe (Linux + macOS + Windows binaries): the `rootcoder007`
+  r-universe builds rmorie continuously; `R CMD check` reports OK on
   the linux-devel x86_64 and arm64 runners.
 
 ## R CMD check results
@@ -107,7 +107,7 @@ The single NOTE is the standard CRAN-incoming feasibility check:
 
 ```
 * checking CRAN incoming feasibility ... NOTE
-Maintainer: 'Vansh Singh Ruhela <hadesllm@proton.me>'
+Maintainer: 'Vansh Singh Ruhela <vsruhela@proton.me>'
 New submission
 Package was archived on CRAN
 CRAN repository db overrides:

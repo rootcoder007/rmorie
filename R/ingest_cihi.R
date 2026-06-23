@@ -30,7 +30,7 @@
 #' @return base R data.frame.
 #' @export
 morie_ingest_cihi_xlsx <- function(url, sheet = NULL, timeout = 120,
-                                   user_agent = "morie/r (+https://hadesllm.com)", ...) {
+                                   user_agent = "morie/r (+https://github.com/rootcoder007/rmorie)", ...) {
   if (!is.character(url) || length(url) != 1L || !nzchar(url))
     stop("`url` must be a single non-empty string.", call. = FALSE)
   morie_ensure_extras(c("httr2", "readxl"))

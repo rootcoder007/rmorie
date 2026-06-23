@@ -8,7 +8,7 @@ morie_ingest_statcan_csv(
   url,
   member = NULL,
   timeout = 600,
-  user_agent = "morie/r (+https://hadesllm.com)",
+  user_agent = "morie/r (+https://github.com/rootcoder007/rmorie)",
   ...
 )
 }

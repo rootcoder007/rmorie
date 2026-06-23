@@ -8,7 +8,7 @@ morie_ingest_cihi_xlsx(
   url,
   sheet = NULL,
   timeout = 120,
-  user_agent = "morie/r (+https://hadesllm.com)",
+  user_agent = "morie/r (+https://github.com/rootcoder007/rmorie)",
   ...
 )
 }

@@ -19,7 +19,7 @@
 # `morie_ingest_bigquery_table()` for analysts who prefer SQL on the
 # full historical mirror; see ingest_bigquery.R.
 
-.MORIE_CHICAGO_DEFAULT_UA <- "morie/r (+https://hadesllm.com)"
+.MORIE_CHICAGO_DEFAULT_UA <- "morie/r (+https://github.com/rootcoder007/rmorie)"
 .MORIE_CHICAGO_DEFAULT_TIMEOUT <- 60
 
 # Socrata server-side cap is 50,000 rows per response.

@@ -24,7 +24,7 @@
 # Parquet needs `arrow` (Suggests).  Each optional dep errors cleanly
 # with an install hint when missing.
 
-.MORIE_CKAN_DEFAULT_UA <- "morie/r (+https://hadesllm.com)"
+.MORIE_CKAN_DEFAULT_UA <- "morie/r (+https://github.com/rootcoder007/rmorie)"
 .MORIE_CKAN_DEFAULT_TIMEOUT <- 30
 
 # NOTE: canonical .morie_ckan_portal lives in data_access.R; that one
