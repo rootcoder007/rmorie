@@ -18,7 +18,7 @@
 # (auxiliary sphere); we force `outSR=4326` so `geom_x`/`geom_y`
 # come back as longitude/latitude, not metres.
 
-.MORIE_TPS_DEFAULT_UA <- "morie/r (+https://hadesllm.com)"
+.MORIE_TPS_DEFAULT_UA <- "morie/r (+https://github.com/rootcoder007/rmorie)"
 .MORIE_TPS_DEFAULT_TIMEOUT <- 60
 
 # Canonical TPS open-data layer endpoints (verified 2026-05-13).

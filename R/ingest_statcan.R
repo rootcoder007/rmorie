@@ -98,7 +98,7 @@
 morie_ingest_statcan_csv <- function(url,
                                      member = NULL,
                                      timeout = 600,
-                                     user_agent = "morie/r (+https://hadesllm.com)",
+                                     user_agent = "morie/r (+https://github.com/rootcoder007/rmorie)",
                                      ...) {
   if (!is.character(url) || length(url) != 1L || !nzchar(url)) {
     stop("`url` must be a single non-empty string.", call. = FALSE)
