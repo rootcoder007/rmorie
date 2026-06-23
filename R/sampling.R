@@ -317,3 +317,16 @@ morie_calibration_weights <- function(df, aux_vars, population_totals,
   }
   w
 }
+
+#' Kish effective sample size
+#'
+#' @param weights Numeric vector of sampling weights.
+#' @return Numeric effective sample size (Kish's formula).
+#' @examples
+#' morie_effective_sample_size(c(1, 1, 2, 3, 5))
+#' @export
+morie_effective_sample_size <- function(weights) {
+  w <- as.numeric(weights)
+  w <- w[!is.na(w) & w > 0]
+  (sum(w)^2) / sum(w^2)
+}

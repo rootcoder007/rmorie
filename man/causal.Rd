@@ -43,8 +43,6 @@ point:
 ebal / ps / energy / optweight).
 \item \code{morie_causal_robust_se()} -> \pkg{sandwich}
 (HC0-HC5 / cluster / HAC robust variance matrices).
-\item \code{morie_causal_mediation()} -> \pkg{causalweight}
-(semiparametric IPW mediation decomposition).
 }
 }
 \keyword{internal}

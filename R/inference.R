@@ -567,3 +567,43 @@ morie_sample_size_logistic <- function(p0, or, alpha = 0.05, power = 0.80,
   n <- as.integer(ceiling((z_a + z_b)^2 / (p_bar * (1 - p_bar) * (log(or))^2)))
   n
 }
+
+#' Cohen's d effect size
+#'
+#' @param x1 Numeric vector (group 1).
+#' @param x2 Numeric vector (group 2).
+#' @param pooled Use pooled SD (default `TRUE`). If `FALSE`, uses `sd(x2)`.
+#' @return Numeric Cohen's d.
+#' @examples
+#' morie_cohens_d(rnorm(50, mean = 1), rnorm(50, mean = 0))
+#' @export
+morie_cohens_d <- function(x1, x2, pooled = TRUE) {
+  m1 <- mean(x1, na.rm = TRUE)
+  m2 <- mean(x2, na.rm = TRUE)
+  n1 <- sum(!is.na(x1))
+  n2 <- sum(!is.na(x2))
+  s1 <- stats::sd(x1, na.rm = TRUE)
+  s2 <- stats::sd(x2, na.rm = TRUE)
+  sd_denom <- if (pooled) {
+    sqrt(((n1 - 1) * s1^2 + (n2 - 1) * s2^2) / (n1 + n2 - 2))
+  } else {
+    s2
+  }
+  (m1 - m2) / sd_denom
+}
+
+#' Cramer's V for categorical association
+#'
+#' @param contingency_table A numeric matrix of observed counts.
+#' @return Numeric Cramer's V in the interval \[0, 1\].
+#' @examples
+#' morie_cramers_v(matrix(c(10, 20, 30, 40), nrow = 2))
+#' @export
+morie_cramers_v <- function(contingency_table) {
+  m <- as.matrix(contingency_table)
+  result <- stats::chisq.test(m, correct = FALSE)
+  chi2 <- as.numeric(result$statistic)
+  n <- sum(m)
+  k <- min(nrow(m), ncol(m))
+  sqrt(chi2 / (n * (k - 1)))
+}
