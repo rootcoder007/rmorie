@@ -81,10 +81,29 @@ test_that("unknown dataset_key raises clear error", {
     regexp = "unknown dataset_key")
 })
 
+# Skip a test when a remote endpoint is reachable at the network layer
+# (so skip_if_offline passes) but the upstream service itself is
+# returning a proxy error page (Envoy/nginx 5xx, etc.).
+.skip_on_upstream_error <- function(expr) {
+  tryCatch(
+    expr,
+    error = function(e) {
+      msg <- conditionMessage(e)
+      if (grepl("non-JSON|HTTP fetch|upstream|503|502|504",
+                msg, ignore.case = TRUE)) {
+        testthat::skip(paste("Upstream service unhealthy:", msg))
+      }
+      stop(e)
+    }
+  )
+}
+
 test_that("3FFF1: MTL CKAN generic dispatch auto-resolves first CSV resource", {
   skip_on_cran()
   skip_if_offline("donnees.montreal.ca")
-  df <- morie_datasets_load_by_key("communique-presse", max_features = 5L)
+  df <- .skip_on_upstream_error(
+    morie_datasets_load_by_key("communique-presse", max_features = 5L)
+  )
   expect_s3_class(df, "data.frame")
   expect_true(nrow(df) >= 1L)
   expect_true(nrow(df) <= 5L)
@@ -93,9 +112,11 @@ test_that("3FFF1: MTL CKAN generic dispatch auto-resolves first CSV resource", {
 test_that("3FFF1: TO CKAN generic dispatch auto-resolves first CSV resource", {
   skip_on_cran()
   skip_if_offline("ckan0.cf.opendata.inter.prod-toronto.ca")
-  df <- morie_datasets_load_by_key(
-    "police-annual-statistical-report-shooting-occurrences",
-    max_features = 5L)
+  df <- .skip_on_upstream_error(
+    morie_datasets_load_by_key(
+      "police-annual-statistical-report-shooting-occurrences",
+      max_features = 5L)
+  )
   expect_s3_class(df, "data.frame")
   expect_true(nrow(df) >= 1L)
 })

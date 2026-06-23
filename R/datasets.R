@@ -308,6 +308,15 @@
       stop(sprintf("morie HTTP fetch failed (libcurl returned empty body): %s",
                    full_url), call. = FALSE)
     }
+    # Validate the body is JSON-shaped before handing to jsonlite.
+    # Upstream proxies (Envoy, nginx) return text/HTML error pages on
+    # 5xx that jsonlite cannot parse; surface a clear error instead.
+    first <- substr(trimws(body), 1L, 1L)
+    if (!first %in% c("{", "[")) {
+      stop(sprintf(
+        "morie HTTP fetch returned non-JSON body (likely an upstream proxy error): %s\nFirst 200 chars: %s",
+        full_url, substr(body, 1L, 200L)), call. = FALSE)
+    }
     return(jsonlite::fromJSON(body, simplifyVector = TRUE))
   }
   if (!requireNamespace("httr2", quietly = TRUE)) {
