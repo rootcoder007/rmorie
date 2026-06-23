@@ -142,11 +142,11 @@ publishes the docs site at <https://rootcoder007.github.io/rmorie/>.
 
   ```
   Co-Authored-By: Claude <noreply@anthropic.com>
-  Co-Authored-By: Vansh Singh Ruhela (rootcoder007) <hadesllm@proton.me>
+  Co-Authored-By: Vansh Singh Ruhela (rootcoder007) <vsruhela@proton.me>
   ```
 
 ## Contact
 
-Vansh Singh Ruhela ([rootcoder007]) · [hadesllm@proton.me](mailto:hadesllm@proton.me)
+Vansh Singh Ruhela ([rootcoder007]) · [vsruhela@proton.me](mailto:vsruhela@proton.me)
 
 [rootcoder007]: https://github.com/rootcoder007

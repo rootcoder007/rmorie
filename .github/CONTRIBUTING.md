@@ -63,7 +63,7 @@ commits — each one should compile and pass tests on its own.
 Please be respectful. We follow the
 [Contributor Covenant v2.1](https://www.contributor-covenant.org/version/2/1/code_of_conduct/);
 the full text is in [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md).
-Reports go to <hadesllm@proton.me>.
+Reports go to <vsruhela@proton.me>.
 
 ## Security disclosures
 
@@ -75,7 +75,7 @@ address and embargo policy.
 
 Vansh Singh Ruhela
 ([@rootcoder007](https://github.com/rootcoder007),
-<hadesllm@proton.me>,
+<vsruhela@proton.me>,
 ORCID [0009-0004-1750-3592](https://orcid.org/0009-0004-1750-3592)).
 
 ## A note on the AGPL-3.0 license
