@@ -39,3 +39,6 @@ REPLACE_INVENTORY.md
 
 # Hex sticker artwork drafts (kept locally; not shipped with the R package)
 inst/figures/
+
+# local Serena scope — never commit
+.serena/
