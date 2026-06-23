@@ -34,7 +34,7 @@ jobs:
           use-public-rspm: true
       - uses: r-lib/actions/setup-r-dependencies@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
         with:
-          extra-packages: any::goodpractice any::rcmdcheck any::covr any::cyclocomp any::lintr
+          extra-packages: any::goodpractice any::rcmdcheck any::covr any::cyclocomp any::lintr any::rgenoud
 
       - name: Run goodpractice
         run: Rscript -e 'g <- goodpractice::gp("."); print(g)'

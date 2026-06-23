@@ -33,7 +33,9 @@ jobs:
           use-public-rspm: true
       - uses: r-lib/actions/setup-r-dependencies@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
         with:
-          extra-packages: any::covr any::xml2
+          # rgenoud: runtime Depends of Matching/rbounds (Rosenbaum + genetic
+          # matching tests); covr runs the full suite so it's needed here too.
+          extra-packages: any::covr any::xml2 any::rgenoud
           needs: coverage
 
       - name: Run covr
