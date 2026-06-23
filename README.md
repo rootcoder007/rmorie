@@ -240,14 +240,15 @@ CodeQL.
 
 ## Citation
 
-Run `citation("rmorie")` after installation, or cite directly:
+Run `citation("rmorie")` after installation for the BibTeX entry stamped
+with the exact installed version (sourced from `inst/CITATION`), or cite
+the software directly:
 
 ```bibtex
 @Manual{ruhela_rmorie_2026,
   title   = {rmorie: Multi-domain Open Research and Inferential Estimation in R},
   author  = {Ruhela, Vansh Singh},
   year    = {2026},
-  note    = {R package version 0.9.5.4},
   url     = {https://github.com/rootcoder007/rmorie}
 }
 ```
