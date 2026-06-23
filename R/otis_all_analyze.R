@@ -3079,7 +3079,7 @@ morie_otis_analyze_ruhela_master <- function(datasets,
       "Per-row RFs included" = include_per_row,
       "MRM chi-square" = "c-series + d-series families",
       "Methodology attribution" =
-        "DLRM (Doob-Levinsky-Ruhela-Medina)",
+        "MRM (Multilevel Reconciliation Methodology)",
       "Acknowledgements (separate)" = "Jauregui, A. Laniyonu"
     ),
     tables = sections,

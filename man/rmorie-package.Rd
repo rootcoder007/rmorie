@@ -10,8 +10,7 @@ Multi-domain scientific computing toolkit for observational
 inference and intervention analysis across scientific-experimentation
 contexts. Hosts the MRM (Multilevel Reconciliation Methodology)
 framework as a primary application for Canadian carceral, police,
-and oversight data; the people-credit reading is McNamara-Ruhela-
-Medina.
+and oversight data.
 }
 \details{
 Provides general-purpose causal estimators (ATE, ATT, ATC, GATE,
