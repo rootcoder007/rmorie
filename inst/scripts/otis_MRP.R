@@ -10,7 +10,6 @@
 ##    MA, Centre for Criminology and Sociolegal Studies, U of T
 ##    vsruhela@proton.me
 ##    ORCID: 0009-0004-1750-3592
-##    Supervisor: Prof. Ángela Zorro Medina
 ##    Submission target: August 17, 2026
 ##
 ##  Reproduces every numerical claim in CRIM_MRP_v2.{md,docx,tex}.

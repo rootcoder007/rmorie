@@ -24,7 +24,7 @@ Python and R packages. The R package mirrors a substantial subset of
 the Python package, focused on the surfaces that are most useful from
 within an R workflow: dataset loading, causal estimators, survey
 sampling and weighting, basic spectral analysis, and helpers for the
-MRM (McNamara--Ruhela--Medina) framework that is MORIE's primary
+MRM (Multilevel Reconciliation Methodology) framework that is MORIE's primary
 sociolegal-data application.
 
 This vignette walks through a minimal end-to-end session: load the
