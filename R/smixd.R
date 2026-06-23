@@ -22,7 +22,12 @@
   beta <- as.numeric(solve(XtSiX, crossprod(Xw, yw)))
   resid <- yw - Xw %*% beta
   sigma2 <- as.numeric(sum(resid^2)) / max(n - p, 1)
-  if (sigma2 <= 0) {
+  # Degenerate (near-perfect) fit: residual variance is numerically zero.
+  # The exact-zero boundary is not portable across BLAS/LAPACK
+  # (x86_64 yields exactly 0; aarch64 leaves a tiny positive value), so use
+  # a scale-aware tolerance to trigger the penalty consistently.
+  tol <- .Machine$double.eps^0.5 * max(1, mean(yw^2))
+  if (!is.finite(sigma2) || sigma2 <= tol) {
     return(1e12)
   }
   logdet_S <- 2 * sum(log(diag(L)))
