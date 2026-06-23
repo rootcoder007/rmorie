@@ -6,7 +6,7 @@
 # producing CSVs for every result table and a manifest.json with
 # expected vs observed values for every numerical claim.
 #
-# Vansh Singh Ruhela <vansh.ruhela@mail.utoronto.ca>
+# Vansh Singh Ruhela <vsruhela@proton.me>
 # ORCID 0009-0004-1750-3592
 #
 # USAGE:

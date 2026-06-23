@@ -23,7 +23,7 @@
 ##     6. Writes timestamped CSV + manifest.json + run.log into
 ##        results_YYYYMMDD-HHMMSS/ next to this script.
 ##
-##   Vansh Singh Ruhela <vansh.ruhela@mail.utoronto.ca>
+##   Vansh Singh Ruhela <vsruhela@proton.me>
 ##   ORCID 0009-0004-1750-3592
 ##
 ##   USAGE (from any OS terminal that can run R):
@@ -732,7 +732,7 @@ summary_lines <- c(
   "6. Wrote every result to its own CSV (numbered 01..07).",
   "7. Wrote manifest.json with expected vs observed for every claim.",
   "",
-  paste0("Contact: vansh.ruhela@mail.utoronto.ca"),
+  paste0("Contact: vsruhela@proton.me"),
   paste0("ORCID:   0009-0004-1750-3592"),
   "Licence: AGPL-3.0-or-later (scripts); OGL-Ontario (data)"
 )

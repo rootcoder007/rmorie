@@ -13,7 +13,7 @@
 # All numbered results are written to results_<TIMESTAMP>/ with a
 # manifest.json that records expected vs observed for every claim.
 #
-# Vansh Singh Ruhela <vansh.ruhela@mail.utoronto.ca>
+# Vansh Singh Ruhela <vsruhela@proton.me>
 # ORCID 0009-0004-1750-3592
 #
 # USAGE:
@@ -161,7 +161,7 @@ if ! ask_yn "Do you already have this .RData file on this machine?" Y; then
   say "  hosted publicly. To obtain it, please:"
   say ""
   say "    1. If you are a U of T collaborator on this MRP, contact"
-  say "       Vansh Singh Ruhela <vansh.ruhela@mail.utoronto.ca>"
+  say "       Vansh Singh Ruhela <vsruhela@proton.me>"
   say "       (ORCID 0009-0004-1750-3592) to request the secure"
   say "       transfer."
   say ""
@@ -305,5 +305,5 @@ else
   say "Done. The analysis exited with code ${RUN_EXIT} — see run.log for details."
 fi
 say ""
-say "Questions? Contact Vansh Singh Ruhela <vansh.ruhela@mail.utoronto.ca>"
+say "Questions? Contact Vansh Singh Ruhela <vsruhela@proton.me>"
 exit ${RUN_EXIT}
