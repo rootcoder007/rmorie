@@ -23,3 +23,9 @@
 ^src/\.clangd$
 ^codecov\.yml$
 ^bin$
+^\.pre-commit-config\.yaml$
+^\.serena$
+^\.DS_Store$
+^\.Rhistory$
+^\.RData$
+^\.vscode$
