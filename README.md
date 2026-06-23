@@ -7,7 +7,6 @@
 [![R-CMD-check](https://github.com/rootcoder007/rmorie/actions/workflows/r-cmd-check.yml/badge.svg)](https://github.com/rootcoder007/rmorie/actions/workflows/r-cmd-check.yml)
 [![Codecov test coverage](https://codecov.io/gh/rootcoder007/rmorie/graph/badge.svg)](https://app.codecov.io/gh/rootcoder007/rmorie)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
-[![rOpenSci](https://badges.ropensci.org/770_status.svg)](https://github.com/ropensci/software-review/issues/770)
 [![GitHub last commit](https://img.shields.io/github/last-commit/rootcoder007/rmorie.svg)](https://github.com/rootcoder007/rmorie/commits/main)
 <!-- badges: end -->
 
@@ -262,8 +261,3 @@ once publicly available.
 
 morie is licensed under **AGPL-3.0-or-later**. See `LICENSE` for the
 full text and `LICENSING.md` for the per-component breakdown.
-
-## rOpenSci review
-
-morie is under review at rOpenSci:
-[ropensci/software-review#770](https://github.com/ropensci/software-review/issues/770).
