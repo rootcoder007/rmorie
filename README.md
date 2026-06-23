@@ -1,4 +1,4 @@
-# morie 森 — The Fates' Forest
+# rmorie
 
 <!-- badges: start -->
 [![Project Status: Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
@@ -11,13 +11,10 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/rootcoder007/rmorie.svg)](https://github.com/rootcoder007/rmorie/commits/main)
 <!-- badges: end -->
 
-`morie` is a dual-language (R + Python) scientific computing package for
-causal inference, sampling, psychometrics, point-process modeling, and
-criminological accountability analysis. The name is a compound: the Greek
-*Moirai* (/ˈmɔɪraɪ/, "MOY-rye", the three Fates) paired with the
-Japanese **森** (/moɾi/, "MOH-ree", "forest" — three trees stacked into
-one ideogram). It expands to **Multi-domain Open Research and
-Inferential Estimation**.
+`rmorie` (**Multi-domain Open Research and Inferential Estimation**) is the
+R-only member of the morie toolkit — an R package for causal inference,
+sampling, psychometrics, point-process modeling, and criminological
+accountability analysis, with no Python dependencies.
 
 ## Documentation
 
