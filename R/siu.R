@@ -1216,15 +1216,21 @@ morie_siu_compare <- function(case_number, external,
       # output of `gcloud auth print-access-token` on a machine
       # where gcloud is signed in to the relevant project.
       #
-      # GCP_PROJECT defaults to "hadesllm" and GCP_LOCATION to
-      # "us-central1" if unset; override either via env. Model
-      # defaults to gemini-2.5-flash; override via VERTEX_MODEL.
+      # GCP_PROJECT is REQUIRED and has no default -- set it to YOUR OWN
+      # Google Cloud project so Vertex calls bill against your quota,
+      # never a third party's. GCP_LOCATION defaults to "us-central1"
+      # and the model to gemini-2.5-flash; override either via env.
       env_required = "VERTEX_ACCESS_TOKEN",
       build = function(env, prompt) {
-        project <- if (nzchar(Sys.getenv("GCP_PROJECT", ""))) {
-          Sys.getenv("GCP_PROJECT")
-        } else {
-          "hadesllm"
+        project <- Sys.getenv("GCP_PROJECT", "")
+        if (!nzchar(project)) {
+          stop(
+            "Vertex AI requires your own Google Cloud project. Set the ",
+            "GCP_PROJECT environment variable, e.g. ",
+            "Sys.setenv(GCP_PROJECT = \"your-gcp-project-id\"). ",
+            "Calls bill against this project's quota.",
+            call. = FALSE
+          )
         }
         location <- if (nzchar(Sys.getenv("GCP_LOCATION", ""))) {
           Sys.getenv("GCP_LOCATION")
