@@ -4,7 +4,7 @@
 [![Project Status: Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![r-universe](https://rootcoder007.r-universe.dev/badges/rmorie)](https://rootcoder007.r-universe.dev/rmorie)
-[![R-CMD-check](https://github.com/rootcoder007/rmorie/actions/workflows/r-cmd-check.yml/badge.svg)](https://github.com/rootcoder007/rmorie/actions/workflows/r-cmd-check.yml)
+[![CI](https://github.com/rootcoder007/rmorie/actions/workflows/build.yml/badge.svg)](https://github.com/rootcoder007/rmorie/actions/workflows/build.yml)
 [![Codecov test coverage](https://codecov.io/gh/rootcoder007/rmorie/graph/badge.svg)](https://app.codecov.io/gh/rootcoder007/rmorie)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![GitHub last commit](https://img.shields.io/github/last-commit/rootcoder007/rmorie.svg)](https://github.com/rootcoder007/rmorie/commits/main)
