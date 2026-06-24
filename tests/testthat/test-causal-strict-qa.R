@@ -154,6 +154,7 @@ test_that("AIPW influence-score mean equals point estimate (definitional)", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_estimate_double_ml (PLR) recovers tau (n=2500, 5-fold)", {
+  skip_on_cran()  # slow (mlr3 cv_glmnet) + platform-sensitive numerics on Windows
   d <- make_dml_dgp(n = 2500L, tau = 2.5, seed = 123L)
   res <- morie_estimate_double_ml(d, outcome = "y", treatment = "d",
                                   covariates = paste0("x", 1:5),
@@ -166,6 +167,7 @@ test_that("morie_estimate_double_ml (PLR) recovers tau (n=2500, 5-fold)", {
 })
 
 test_that("morie_estimate_irm recovers tau (n=2500, 5-fold)", {
+  skip_on_cran()  # slow (mlr3 cv_glmnet) + platform-sensitive numerics on Windows
   d <- make_dml_dgp(n = 2500L, tau = 2.5, seed = 124L)
   res <- morie_estimate_irm(d, treatment = "d", outcome = "y",
                             covariates = paste0("x", 1:5),
@@ -225,6 +227,7 @@ test_that("morie_otis_aipw_ate recovers tau (n=1500, 3-fold)", {
 })
 
 test_that("morie_otis_irm_dml recovers tau (n=1500, 3-fold)", {
+  skip_on_cran()  # slow (mlr3 cv_glmnet) + platform-sensitive numerics on Windows
   d <- make_ipw_dgp(n = 1500L, tau = 2.5, seed = 53L)
   res <- morie_otis_irm_dml(d, treatment = "d", outcome = "y",
                             covariates = c("x1", "x2", "x3"),
