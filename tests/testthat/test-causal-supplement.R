@@ -38,6 +38,7 @@ test_that("morie_estimate_double_ml returns expected fields", {
 })
 
 test_that("morie_estimate_double_ml recovers true ATE on simple DGP", {
+  skip_on_cran()  # slow (mlr3 cv_glmnet) + platform-sensitive numerics on Windows
   df <- make_dml_df(n = 1000, tau = 0.5, seed = 2)
   res <- morie_estimate_double_ml(df, "y", "d", c("x1", "x2", "x3"),
                                   n_folds = 5L)
@@ -80,6 +81,7 @@ test_that("morie_estimate_irm returns expected fields", {
 })
 
 test_that("morie_estimate_irm recovers true ATE on simple DGP", {
+  skip_on_cran()  # slow (mlr3 cv_glmnet) + platform-sensitive numerics on Windows
   df <- make_dml_df(n = 1000, tau = 0.5, seed = 3)
   res <- morie_estimate_irm(df, "d", "y", c("x1", "x2", "x3"),
                             n_folds = 5L, random_state = 3L)
@@ -87,6 +89,7 @@ test_that("morie_estimate_irm recovers true ATE on simple DGP", {
 })
 
 test_that("morie_estimate_irm CI covers true effect with high probability", {
+  skip_on_cran()  # slow (mlr3 cv_glmnet) + platform-sensitive numerics on Windows
   df <- make_dml_df(n = 800, tau = 0.5, seed = 4)
   res <- morie_estimate_irm(df, "d", "y", c("x1", "x2", "x3"),
                             n_folds = 5L, random_state = 4L)
@@ -126,6 +129,7 @@ test_that("morie_estimate_irm errors on degenerate (single-arm) treatment", {
 })
 
 test_that("morie_estimate_double_ml is reasonably stable across seeds", {
+  skip_on_cran()  # slow (mlr3 cv_glmnet) + platform-sensitive numerics on Windows
   df <- make_dml_df(n = 500, tau = 0.5, seed = 5)
   r1 <- morie_estimate_double_ml(df, "y", "d", c("x1", "x2", "x3"),
                                  n_folds = 3L, random_state = 1L)
