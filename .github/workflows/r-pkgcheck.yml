@@ -20,6 +20,10 @@ jobs:
   pkgcheck:
     name: rOpenSci pkgcheck
     runs-on: ubuntu-latest
+    # rmorie is dependency-heavy (~150 Suggests) so pkgcheck legitimately
+    # runs ~1-2h (install + covr + R CMD check over 1855 functions). Cap it
+    # so an upstream binary-repo (r2u) outage can't silently burn 6h.
+    timeout-minutes: 150
     permissions:
       contents: read
       issues: write
