@@ -1,69 +1,31 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #
-# r-pkgcheck.yml -- rOpenSci's own pkgcheck. Runs pkgstats + covr +
-# goodpractice + rcmdcheck internally and produces the markdown
-# comment the rOpenSci bot uses on the review thread.
+# r-pkgcheck.yml -- rOpenSci's pkgcheck via the official containerized
+# pkgcheck-action. The container ships pkgstats/ami/ctags/cloc pre-built,
+# which avoids the pak dependency-resolution conflicts (pkgstats->ami,
+# cyclocomp) that broke the previous manual setup-r-dependencies install.
+# This is the same engine the @ropensci-review-bot uses on review threads.
 # Called via build.yml (workflow_call) or manually (workflow_dispatch).
-
 name: rOpenSci pkgcheck
 
 on:
   workflow_call:
   workflow_dispatch:
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
-
 permissions:
   contents: read
+  issues: write
 
 jobs:
   pkgcheck:
     name: rOpenSci pkgcheck
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
+      issues: write
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
-      - uses: r-lib/actions/setup-pandoc@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
-      - uses: r-lib/actions/setup-r@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
+      - uses: ropensci-review-tools/pkgcheck-action@fa6dc3e9dec0580397ae44ec6fb9e7953947758c # main
         with:
-          r-version: 'release'
-          use-public-rspm: true
-
-      # pkgcheck's internal rcmdcheck builds the PDF manual; needs
-      # inconsolata + supporting LaTeX. Without it pkgcheck reports
-      # a spurious "R CMD check found 1 warning".
-      - uses: r-lib/actions/setup-tinytex@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
-      - name: Install LaTeX helpers
-        run: |
-          tlmgr update --self
-          tlmgr install inconsolata helvetic times courier ec parskip url upquote
-
-      - name: Install universal-ctags
-        run: |
-          sudo apt-get update -y
-          sudo apt-get install -y universal-ctags
-
-      - uses: r-lib/actions/setup-r-dependencies@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
-        with:
-          cache-version: 1
-          extra-packages: |
-            any::rcmdcheck
-            any::goodpractice
-            any::cyclocomp
-            any::rgenoud
-            ropensci-review-tools/pkgstats
-            ropensci-review-tools/pkgcheck
-
-      - name: Run pkgcheck
-        env:
-          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          Rscript -e 'cks <- pkgcheck::pkgcheck("."); md <- pkgcheck::checks_to_markdown(cks); writeLines(md, "pkgcheck.md"); cat(md)'
-
-      - name: Upload pkgcheck.md
-        uses: actions/upload-artifact@v5
-        with:
-          name: pkgcheck-markdown
-          path: pkgcheck.md
+          ref: ${{ github.sha }}
+          post-to-issue: false
+          summary-only: false
