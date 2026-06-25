@@ -49,10 +49,12 @@ permissions:
 jobs:
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
-    # R-devel is a moving target: an upstream dependency that won't compile on the
-    # latest devel snapshot (e.g. RSQLite's Boost/C++ source build) should report
-    # its status without failing the whole build. Cells without allow_failure stay
-    # strictly required.
+    # R-devel is a moving target. Its current snapshot defaults to -std=gnu++20 and
+    # systemically breaks source builds of upstream deps (RSQLite's vendored Boost,
+    # ECOSolveR, ...) that have nothing to do with rmorie. There is no package-side
+    # fix (CXX_STD in ~/.R/Makevars does NOT override R's default standard, verified
+    # 2026-06-25). So the devel cell reports its status without failing the build;
+    # all other cells stay strictly required.
     continue-on-error: ${{ matrix.config.allow_failure || false }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
@@ -84,18 +86,6 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
           use-public-rspm: true
-
-      # R-devel bumped its default C++ standard to gnu++20, under which RSQLite's
-      # vendored (old) Boost ptr_container/MPL headers fail to compile from source.
-      # release/oldrel get RSQLite as a binary and never hit this. Pin source
-      # builds on devel back to C++17 (honoured by pak/R CMD INSTALL) so the old
-      # Boost compiles. Belt-and-suspenders with the devel continue-on-error.
-      - name: Force C++17 for source builds on R-devel
-        if: matrix.config.r == 'devel'
-        shell: bash
-        run: |
-          mkdir -p ~/.R
-          echo 'CXX_STD = CXX17' >> ~/.R/Makevars
 
       - name: Pre-install rmoriebricklayer (r-universe; not yet on CRAN)
         run: install.packages("rmoriebricklayer", repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))
