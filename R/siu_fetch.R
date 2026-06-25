@@ -99,66 +99,56 @@ morie_siu_cache_path <- function(cache_dir = file.path(tempdir(), "morie", "siu"
 # regex sweep that matches the Python implementation. Returns a
 # character matrix with columns "case_number" and "url".
 .siu_fetch_extract_links <- function(index_html, base_url) {
+  # The SIU index is a table of <tr class="dr-item" id="DRID"> rows; each
+  # row carries the case number in a <nobr> (e.g. "26-OCI-168") and a
+  # "Read Full Text" link to directors_report_details.php?drid=DRID.
+  cn_pat   <- "[0-9]{2,4}-[A-Z]{2,5}-[0-9]+"
+  href_pat <- "directors_report_details\\.php\\?drid=[0-9]+"
+  empty <- matrix(character(0L), ncol = 2L,
+    dimnames = list(NULL, c("case_number", "url")))
+
   if (requireNamespace("xml2", quietly = TRUE) &&
       requireNamespace("rvest", quietly = TRUE)) {
     doc <- tryCatch(xml2::read_html(index_html), error = function(e) NULL)
     if (!is.null(doc)) {
-      anchors <- rvest::html_elements(doc,
-        "a[href*='case_summary_details.php']"
-      )
-      hrefs <- rvest::html_attr(anchors, "href")
-      texts <- trimws(rvest::html_text2(anchors))
-      ok <- !is.na(hrefs) & nzchar(hrefs)
-      hrefs <- hrefs[ok]
-      texts <- texts[ok]
-      cn_pat <- "([A-Za-z]+-?[0-9]+|[0-9]+-[A-Z]+-[0-9]+)"
-      m <- regmatches(texts, regexpr(cn_pat, texts))
-      keep <- nzchar(m)
-      if (any(keep)) {
-        return(cbind(
-          case_number = m[keep],
-          url = .siu_fetch_resolve_url(hrefs[keep], base_url)
-        ))
+      rows <- rvest::html_elements(doc, "tr.dr-item, .dr-item")
+      out <- lapply(rows, function(row) {
+        a <- rvest::html_element(row, "a[href*='directors_report_details']")
+        href <- rvest::html_attr(a, "href")
+        if (is.na(href) || !nzchar(href)) {
+          return(NULL)
+        }
+        txt <- rvest::html_text2(row)
+        cn <- regmatches(txt, regexpr(cn_pat, txt))
+        if (!length(cn) || !nzchar(cn)) {
+          cn <- sub(".*drid=([0-9]+).*", "drid-\\1", href)
+        }
+        c(case_number = cn, url = .siu_fetch_resolve_url(href, base_url))
+      })
+      out <- out[!vapply(out, is.null, logical(1L))]
+      if (length(out)) {
+        return(do.call(rbind, out))
       }
     }
   }
-  # Regex fallback (mirrors siu_fetch._extract_case_links).
-  pat <- paste0(
-    'href="(case_summary_details\\.php\\?[^"]+)"[^>]*>',
-    "(?:\\s*<[^>]+>)*\\s*",
-    "([A-Za-z\\-]+[0-9]+|[0-9]+-[A-Z]+-[0-9]+)"
-  )
-  m <- gregexpr(pat, index_html, perl = TRUE, ignore.case = TRUE)[[1L]]
-  if (m[1L] < 0L) {
-    return(matrix(character(0L), ncol = 2L,
-      dimnames = list(NULL, c("case_number", "url"))))
-  }
-  starts <- as.integer(m)
-  lens <- attr(m, "match.length")
-  groups <- regmatches(index_html, regexec(pat, index_html,
-    perl = TRUE, ignore.case = TRUE))[[1L]]
-  # Single-shot regex only captures the first match through regexec;
-  # iterate via substring + re-match for the rest.
+  # Regex fallback: split into dr-item rows, pull (case_number, drid) each.
+  rows <- strsplit(index_html, '<tr[^>]*class="dr-item"', perl = TRUE)[[1L]]
+  if (length(rows) > 1L) rows <- rows[-1L]
   out <- list()
-  pos <- 1L
-  remaining <- index_html
-  while (TRUE) {
-    g <- regexec(pat, remaining, perl = TRUE, ignore.case = TRUE)
-    mm <- regmatches(remaining, g)[[1L]]
-    if (length(mm) < 3L) break
+  for (row in rows) {
+    href <- regmatches(row, regexpr(href_pat, row, perl = TRUE))
+    if (!length(href) || !nzchar(href)) next
+    cn <- regmatches(row, regexpr(cn_pat, row, perl = TRUE))
+    if (!length(cn) || !nzchar(cn)) {
+      cn <- sub(".*drid=([0-9]+).*", "drid-\\1", href)
+    }
     out[[length(out) + 1L]] <- c(
-      case_number = mm[3L],
-      url = .siu_fetch_resolve_url(mm[2L], base_url)
+      case_number = cn,
+      url = .siu_fetch_resolve_url(href, base_url)
     )
-    hit <- regexpr(pat, remaining, perl = TRUE, ignore.case = TRUE)
-    if (hit < 0L) break
-    cut <- as.integer(hit) + attr(hit, "match.length")
-    if (cut >= nchar(remaining)) break
-    remaining <- substr(remaining, cut + 1L, nchar(remaining))
   }
   if (!length(out)) {
-    return(matrix(character(0L), ncol = 2L,
-      dimnames = list(NULL, c("case_number", "url"))))
+    return(empty)
   }
   do.call(rbind, out)
 }
@@ -168,6 +158,10 @@ morie_siu_cache_path <- function(cache_dir = file.path(tempdir(), "morie", "siu"
 .siu_fetch_resolve_url <- function(rel, base_url) {
   vapply(rel, function(r) {
     if (grepl("^https?://", r, ignore.case = TRUE)) return(r)
+    if (startsWith(r, "/")) {
+      host <- sub("^(https?://[^/]+).*", "\\1", base_url)
+      return(paste0(host, r))
+    }
     paste0(sub("/[^/]*$", "/", base_url), sub("^/", "", r))
   }, character(1L), USE.NAMES = FALSE)
 }
