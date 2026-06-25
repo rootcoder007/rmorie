@@ -74,11 +74,18 @@ test_that(".siu_fetch_to_iso returns empty string on miss", {
 
 test_that("extract_links returns case_number/url pairs from index HTML", {
   set.seed(1)
+  # Mirrors the redesigned SIU index: <tr class="dr-item"> rows with the
+  # case number in a <nobr> and a "Read Full Text" link to
+  # directors_report_details.php?drid=N (href is an absolute /en/ path).
   idx <- paste0(
-    '<html><body>',
-    '<a href="case_summary_details.php?drid=11">22-OCI-001</a>',
-    '<a href="case_summary_details.php?drid=12">22-OCI-002</a>',
-    '</body></html>')
+    '<html><body><table>',
+    '<tr class="dr-item" id="11"><td><nobr>22-OCI-001</nobr></td>',
+    '<td>Mar 5, 2022</td>',
+    '<td><a href="/en/directors_report_details.php?drid=11">Read Full Text</a></td></tr>',
+    '<tr class="dr-item" id="12"><td><nobr>22-OCI-002</nobr></td>',
+    '<td>Mar 6, 2022</td>',
+    '<td><a href="/en/directors_report_details.php?drid=12">Read Full Text</a></td></tr>',
+    '</table></body></html>')
   m <- rmorie:::.siu_fetch_extract_links(
     idx, "https://www.siu.on.ca/en/directors_reports.php")
   expect_true(is.matrix(m) || is.data.frame(m))
@@ -184,15 +191,19 @@ test_that("fetch_cases returns a CSV path with the mocked SIU HTTP layer", {
   # exercises the index-parse + detail-fetch + CSV-write pipeline
   # without touching www.siu.on.ca.
   index_html <- paste0(
-    "<html><body>",
-    "<a href='case_summary_details.php?nid=1'>23-OFD-001</a>",
-    "<a href='case_summary_details.php?nid=2'>23-OFD-002</a>",
-    "</body></html>"
+    "<html><body><table>",
+    "<tr class='dr-item' id='1'><td><nobr>23-OFD-001</nobr></td>",
+    "<td>Jan 1, 2023</td>",
+    "<td><a href='/en/directors_report_details.php?drid=1'>Read Full Text</a></td></tr>",
+    "<tr class='dr-item' id='2'><td><nobr>23-OFD-002</nobr></td>",
+    "<td>Jan 2, 2023</td>",
+    "<td><a href='/en/directors_report_details.php?drid=2'>Read Full Text</a></td></tr>",
+    "</table></body></html>"
   )
   detail_html <- "<html><body><p>Director's report body.</p></body></html>"
   testthat::local_mocked_bindings(
     .siu_fetch_http_get = function(url, ...) {
-      if (grepl("case_summary_details", url)) detail_html else index_html
+      if (grepl("directors_report_details", url)) detail_html else index_html
     },
     .package = "rmorie"
   )
@@ -208,13 +219,15 @@ test_that("fetch_cases returns a CSV path with the mocked SIU HTTP layer", {
 
 test_that("fetch_dataframe returns a parsed data.frame via the mocked HTTP layer", {
   index_html <- paste0(
-    "<html><body>",
-    "<a href='case_summary_details.php?nid=1'>23-OFD-003</a>",
-    "</body></html>"
+    "<html><body><table>",
+    "<tr class='dr-item' id='3'><td><nobr>23-OFD-003</nobr></td>",
+    "<td>Jan 3, 2023</td>",
+    "<td><a href='/en/directors_report_details.php?drid=3'>Read Full Text</a></td></tr>",
+    "</table></body></html>"
   )
   testthat::local_mocked_bindings(
     .siu_fetch_http_get = function(url, ...) {
-      if (grepl("case_summary_details", url))
+      if (grepl("directors_report_details", url))
         "<html><body><p>case detail body</p></body></html>"
       else index_html
     },
