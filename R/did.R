@@ -924,8 +924,12 @@ morie_did_synthetic <- function(data, outcome, unit, time, treatment_time,
   first_treat <- min(treat_onset, na.rm = TRUE)
   units_all <- unique(df[[unit]])
   control_units <- setdiff(units_all, treated_units)
-  df[["morie_W"]] <- as.numeric(df[[unit]] %in% treated_units &
-                                  df[[time]] >= first_treat)
+  # Keep the treatment indicator LOGICAL: synthdid::panel.matrices builds
+  # W = matrix(treatment, ...) and then apply(W, 1, any). A double W makes
+  # any() coerce double -> logical and warn; a logical column avoids it and
+  # still satisfies panel.matrices' `%in% c(0, 1)` validation.
+  df[["morie_W"]] <- df[[unit]] %in% treated_units &
+                                  df[[time]] >= first_treat
   setup <- synthdid::panel.matrices(
     df[, c(unit, time, outcome, "morie_W")],
     unit = 1, time = 2, outcome = 3, treatment = 4
@@ -1625,6 +1629,11 @@ morie_did_synthdid_estimate <- function(panel, unit, time, treatment,
   .morie_did_need("synthdid", "morie_did_synthdid_estimate")
   df <- as.data.frame(panel)
   cols <- c(unit, time, outcome, treatment)
+  # A 0/1 *double* treatment column makes synthdid's apply(W, 1, any) coerce
+  # double -> logical and warn; pass it as logical (only when already valid
+  # 0/1, so genuinely invalid input still hits panel.matrices' own check).
+  if (is.numeric(df[[treatment]]) && all(df[[treatment]] %in% c(0, 1)))
+    df[[treatment]] <- as.logical(df[[treatment]])
   setup <- synthdid::panel.matrices(
     df[, cols, drop = FALSE],
     unit = 1, time = 2, outcome = 3, treatment = 4
