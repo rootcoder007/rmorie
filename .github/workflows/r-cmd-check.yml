@@ -60,7 +60,11 @@ jobs:
           - { os: windows-latest, r: 'release' }
           - { os: ubuntu-latest,  r: 'release' }
           - { os: ubuntu-latest,  r: 'devel'   }
-          - { os: ubuntu-latest,  r: 'oldrel-1' }
+          # Pin oldrel to jammy (22.04): Posit Package Manager ships mature
+          # binary packages for oldrel on 22.04, avoiding the ~40-min from-source
+          # dependency builds seen on ubuntu-latest (24.04), where P3M lacks
+          # oldrel binaries for newer package versions.
+          - { os: ubuntu-22.04,   r: 'oldrel-1' }
 
     env:
       _R_CHECK_FORCE_SUGGESTS_: false
