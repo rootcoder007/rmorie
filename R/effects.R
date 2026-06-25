@@ -140,6 +140,11 @@ estimate_plr <- function(data, treatment, outcome, covariates,
     # backend launch error seen on some R-devel builds) fall through to the
     # base-R cross-fit below rather than propagating -- this is the documented
     # fallback behaviour, previously only reached when DoubleML was absent.
+    # future (via mlr3/DoubleML) runs a connection-misuse check on each resolve
+    # that segfaults R uncatchably on some oldrel builds (so the tryCatch below
+    # cannot save it). Disable that diagnostic for this call only; restore after.
+    .morie_old_fut <- options(future.connections.onMisuse = "ignore")
+    on.exit(options(.morie_old_fut), add = TRUE)
     dml_res <- tryCatch({
       dml_data <- DoubleML::DoubleMLData$new(
         data = df, y_col = outcome, d_cols = treatment,
@@ -255,6 +260,11 @@ estimate_pliv <- function(data, treatment, outcome, instrument,
     # Attempt the DoubleML path; on ANY runtime failure (e.g. an mlr3/future
     # backend launch error seen on some R-devel builds) fall through to the
     # 2SLS base-R fallback below rather than propagating.
+    # future (via mlr3/DoubleML) runs a connection-misuse check on each resolve
+    # that segfaults R uncatchably on some oldrel builds (so the tryCatch below
+    # cannot save it). Disable that diagnostic for this call only; restore after.
+    .morie_old_fut <- options(future.connections.onMisuse = "ignore")
+    on.exit(options(.morie_old_fut), add = TRUE)
     dml_res <- tryCatch({
       dml_data <- DoubleML::DoubleMLData$new(
         data = df, y_col = outcome, d_cols = treatment,
