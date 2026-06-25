@@ -71,7 +71,7 @@ COPY man/ man/
 # and the build failed with "dependency 'here' is not available").
 RUN R -e 'install.packages("remotes", repos = "https://p3m.dev/cran/__linux__/noble/latest"); \
           remotes::install_deps(".", dependencies = c("Depends","Imports","LinkingTo"), \
-                                repos = "https://p3m.dev/cran/__linux__/noble/latest", \
+                                repos = c("https://rootcoder007.r-universe.dev", "https://p3m.dev/cran/__linux__/noble/latest"), \
                                 upgrade = "never")'
 RUN R CMD INSTALL --no-test-load --no-help --no-html .
 

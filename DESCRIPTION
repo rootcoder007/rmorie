@@ -42,7 +42,8 @@ Imports:
   here,
   stats,
   utils,
-  Rcpp
+  Rcpp,
+  rmoriebricklayer
 LinkingTo: Rcpp, RcppArmadillo
 SystemRequirements: libcurl: libcurl-devel (rpm) or libcurl4-openssl-dev (deb)
 Suggests:
@@ -210,3 +211,5 @@ biocViews:
 Remotes:
   rootcoder007/rmoriedata,
   synth-inference/synthdid
+Additional_repositories:
+  https://rootcoder007.r-universe.dev
