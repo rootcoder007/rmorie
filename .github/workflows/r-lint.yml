@@ -25,6 +25,10 @@ jobs:
         with:
           r-version: 'release'
           use-public-rspm: true
+      - name: Pre-install rmoriebricklayer (r-universe; not yet on CRAN)
+        run: install.packages("rmoriebricklayer", repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))
+        shell: Rscript {0}
+
       - uses: r-lib/actions/setup-r-dependencies@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
         with:
           extra-packages: any::lintr

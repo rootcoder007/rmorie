@@ -55,17 +55,51 @@
 }
 
 # Read text from a URL (used for JSON/XML/HTML API responses).
+# Falls back to a Wayback Machine snapshot (via rmoriebricklayer) if the
+# live source is unreachable.
 .morie_read_text <- function(url) {
-  con <- url(url)
-  on.exit(close(con), add = TRUE)
-  paste(readLines(con, warn = FALSE), collapse = "\n")
+  read_one <- function(u) {
+    con <- base::url(u)
+    on.exit(close(con), add = TRUE)
+    paste(readLines(con, warn = FALSE), collapse = "\n")
+  }
+  tryCatch(read_one(url), error = function(e) {
+    wb <- tryCatch(rmoriebricklayer::wayback_snapshot_url(url),
+      error = function(e2) NULL
+    )
+    if (is.null(wb)) {
+      stop("Read failed and no Wayback snapshot is available for: ", url,
+        call. = FALSE
+      )
+    }
+    read_one(wb)
+  })
 }
 
 # Download a URL to a temp file, returning the local path.
+# Falls back to a Wayback Machine snapshot (via rmoriebricklayer) if the
+# live source is unreachable.
 .morie_download <- function(url, ext = "") {
   if (!nzchar(ext)) ext <- tools::file_ext(sub("\\?.*$", "", url))
   tmp <- tempfile(fileext = if (nzchar(ext)) paste0(".", ext) else "")
-  utils::download.file(url, tmp, mode = "wb", quiet = TRUE)
+  ok <- tryCatch(
+    {
+      utils::download.file(url, tmp, mode = "wb", quiet = TRUE)
+      TRUE
+    },
+    error = function(e) FALSE
+  )
+  if (!ok) {
+    wb <- tryCatch(rmoriebricklayer::wayback_snapshot_url(url),
+      error = function(e) NULL
+    )
+    if (is.null(wb)) {
+      stop("Download failed and no Wayback snapshot is available for: ", url,
+        call. = FALSE
+      )
+    }
+    utils::download.file(wb, tmp, mode = "wb", quiet = TRUE)
+  }
   tmp
 }
 
