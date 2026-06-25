@@ -136,28 +136,35 @@ estimate_plr <- function(data, treatment, outcome, covariates,
   if (requireNamespace("DoubleML", quietly = TRUE) &&
         requireNamespace("mlr3learners", quietly = TRUE) &&
         requireNamespace("mlr3", quietly = TRUE)) {
-    dml_data <- DoubleML::DoubleMLData$new(
-      data = df, y_col = outcome, d_cols = treatment,
-      x_cols = covariates
-    )
-    ml_l <- mlr3::lrn("regr.cv_glmnet", s = "lambda.min")
-    ml_m <- mlr3::lrn("regr.cv_glmnet", s = "lambda.min")
-    plr  <- DoubleML::DoubleMLPLR$new(
-      data = dml_data, ml_l = ml_l, ml_m = ml_m,
-      n_folds = n_folds, n_rep = 1L
-    )
-    set.seed(random_state)
-    plr$fit()
-    ci <- plr$confint(level = 0.95)
-    return(list(
-      ate      = as.numeric(plr$coef[[1]]),
-      se       = as.numeric(plr$se[[1]]),
-      ci_lower = as.numeric(ci[1, 1]),
-      ci_upper = as.numeric(ci[1, 2]),
-      pval     = as.numeric(plr$pval[[1]]),
-      n_obs    = n_obs,
-      method   = "DoubleML PLR"
-    ))
+    # Attempt the DoubleML path; on ANY runtime failure (e.g. an mlr3/future
+    # backend launch error seen on some R-devel builds) fall through to the
+    # base-R cross-fit below rather than propagating -- this is the documented
+    # fallback behaviour, previously only reached when DoubleML was absent.
+    dml_res <- tryCatch({
+      dml_data <- DoubleML::DoubleMLData$new(
+        data = df, y_col = outcome, d_cols = treatment,
+        x_cols = covariates
+      )
+      ml_l <- mlr3::lrn("regr.cv_glmnet", s = "lambda.min")
+      ml_m <- mlr3::lrn("regr.cv_glmnet", s = "lambda.min")
+      plr  <- DoubleML::DoubleMLPLR$new(
+        data = dml_data, ml_l = ml_l, ml_m = ml_m,
+        n_folds = n_folds, n_rep = 1L
+      )
+      set.seed(random_state)
+      plr$fit()
+      ci <- plr$confint(level = 0.95)
+      list(
+        ate      = as.numeric(plr$coef[[1]]),
+        se       = as.numeric(plr$se[[1]]),
+        ci_lower = as.numeric(ci[1, 1]),
+        ci_upper = as.numeric(ci[1, 2]),
+        pval     = as.numeric(plr$pval[[1]]),
+        n_obs    = n_obs,
+        method   = "DoubleML PLR"
+      )
+    }, error = function(e) NULL)
+    if (!is.null(dml_res)) return(dml_res)
   }
 
   set.seed(random_state)
@@ -206,7 +213,7 @@ estimate_plr <- function(data, treatment, outcome, covariates,
     ci_upper = ate + z * se,
     pval     = 2 * (1 - stats::pnorm(abs(ate / se))),
     n_obs    = n_obs,
-    method   = "cross-fit ridge (DoubleML not installed)"
+    method   = "cross-fit ridge (base R fallback)"
   )
 }
 
@@ -245,32 +252,38 @@ estimate_pliv <- function(data, treatment, outcome, instrument,
   if (requireNamespace("DoubleML", quietly = TRUE) &&
         requireNamespace("mlr3learners", quietly = TRUE) &&
         requireNamespace("mlr3", quietly = TRUE)) {
-    dml_data <- DoubleML::DoubleMLData$new(
-      data = df, y_col = outcome, d_cols = treatment,
-      z_cols = instrument, x_cols = covariates
-    )
-    ml_l <- mlr3::lrn("regr.cv_glmnet", s = "lambda.min")
-    ml_m <- mlr3::lrn("regr.cv_glmnet", s = "lambda.min")
-    ml_r <- mlr3::lrn("regr.cv_glmnet", s = "lambda.min")
-    pliv <- DoubleML::DoubleMLPLIV$new(
-      data = dml_data, ml_l = ml_l, ml_m = ml_m, ml_r = ml_r,
-      n_folds = n_folds, n_rep = 1L
-    )
-    set.seed(random_state)
-    pliv$fit()
-    ci <- pliv$confint(level = 0.95)
-    return(list(
-      late     = as.numeric(pliv$coef[[1]]),
-      se       = as.numeric(pliv$se[[1]]),
-      ci_lower = as.numeric(ci[1, 1]),
-      ci_upper = as.numeric(ci[1, 2]),
-      pval     = as.numeric(pliv$pval[[1]]),
-      n_obs    = n_obs,
-      method   = "DoubleML PLIV"
-    ))
+    # Attempt the DoubleML path; on ANY runtime failure (e.g. an mlr3/future
+    # backend launch error seen on some R-devel builds) fall through to the
+    # 2SLS base-R fallback below rather than propagating.
+    dml_res <- tryCatch({
+      dml_data <- DoubleML::DoubleMLData$new(
+        data = df, y_col = outcome, d_cols = treatment,
+        z_cols = instrument, x_cols = covariates
+      )
+      ml_l <- mlr3::lrn("regr.cv_glmnet", s = "lambda.min")
+      ml_m <- mlr3::lrn("regr.cv_glmnet", s = "lambda.min")
+      ml_r <- mlr3::lrn("regr.cv_glmnet", s = "lambda.min")
+      pliv <- DoubleML::DoubleMLPLIV$new(
+        data = dml_data, ml_l = ml_l, ml_m = ml_m, ml_r = ml_r,
+        n_folds = n_folds, n_rep = 1L
+      )
+      set.seed(random_state)
+      pliv$fit()
+      ci <- pliv$confint(level = 0.95)
+      list(
+        late     = as.numeric(pliv$coef[[1]]),
+        se       = as.numeric(pliv$se[[1]]),
+        ci_lower = as.numeric(ci[1, 1]),
+        ci_upper = as.numeric(ci[1, 2]),
+        pval     = as.numeric(pliv$pval[[1]]),
+        n_obs    = n_obs,
+        method   = "DoubleML PLIV"
+      )
+    }, error = function(e) NULL)
+    if (!is.null(dml_res)) return(dml_res)
   }
 
-  warning("DoubleML not available; falling back to 2SLS.",
+  warning("DoubleML path failed or unavailable; falling back to 2SLS.",
           call. = FALSE)
   x_first  <- as.data.frame(df[, c(covariates, instrument),
                                drop = FALSE])
