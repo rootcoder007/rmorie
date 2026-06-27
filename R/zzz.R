@@ -28,3 +28,12 @@ utils::globalVariables(c(
   # by bare name to the formula-style `id` arg (see 3MMM.48 fix).
   ".gee_cluster_id_int_"
 ))
+
+.onLoad <- function(libname, pkgname) {
+  # The fast-stat kernels in src/morie_fast.cpp resolve rmbl_* routines
+  # that rmoriebricklayer registers via R_RegisterCCallable (LinkingTo).
+  # R_GetCCallable only finds them once the provider's DLL is loaded, and
+  # a DESCRIPTION Imports: alone does not load it -- so load its namespace
+  # (which triggers its useDynLib + registration) before any C call.
+  requireNamespace("rmoriebricklayer", quietly = TRUE)
+}
