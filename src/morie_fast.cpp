@@ -20,6 +20,14 @@
 
 #include "morie_core.h"
 
+// Shared compiled core for the rmorie ecosystem: the fast summary-stat
+// kernels below resolve (via LinkingTo: rmoriebricklayer) to the single
+// copy registered in rmoriebricklayer -- the same kernels rmoriedata
+// links -- rather than recompiling a separate copy here. The domain
+// kernels (Hawkes, below) stay on the vendored morie_core.h, which is
+// also the Python-side source of truth.
+#include <rmoriebricklayer.h>
+
 using namespace Rcpp;
 
 namespace {
@@ -34,17 +42,22 @@ NumericVector morie_normal_pdf_cpp(NumericVector x, double mean, double sd) {
         Rcpp::stop("sd must be positive");
     }
     NumericVector out(x.size());
-    morie::core::normal_pdf(x.begin(), len(x), mean, sd, out.begin());
+    for (R_xlen_t i = 0; i < x.size(); ++i) {
+        out[i] = rmbl_normal_pdf(x[i], mean, sd);  // shared core
+    }
     return out;
 }
 
 // [[Rcpp::export]]
 double morie_mean_cpp(NumericVector x) {
-    return morie::core::mean(x.begin(), len(x));
+    return rmbl_mean(x.begin(), len(x));  // shared core
 }
 
 // [[Rcpp::export]]
 double morie_var_cpp(NumericVector x, int ddof = 1) {
+    if (ddof == 1) {
+        return rmbl_var(x.begin(), len(x));  // shared core (n-1 denominator)
+    }
     return morie::core::variance(x.begin(), len(x), ddof);
 }
 
@@ -53,7 +66,7 @@ double morie_cor_pearson_cpp(NumericVector x, NumericVector y) {
     if (x.size() != y.size()) {
         return NA_REAL;
     }
-    return morie::core::cor_pearson(x.begin(), y.begin(), len(x));
+    return rmbl_cor_pearson(x.begin(), y.begin(), len(x));  // shared core
 }
 
 // --- Hawkes negative log-likelihoods (constant baseline) -----------------
