@@ -145,7 +145,11 @@ NULL
   scores <- as.numeric(scores)
   n <- length(scores)
   grp <- tapply(scores, cluster, sum)
-  v <- sum(grp^2) / (n^2)
+  # na.rm: a factor `cluster` may carry levels with no rows in this subset
+  # (e.g. per-year analysis of an individual-clustered panel). tapply emits
+  # NA for those empty clusters; they contribute nothing to the variance, so
+  # drop them rather than poisoning the sum to NA (which produced an NA SE).
+  v <- sum(grp^2, na.rm = TRUE) / (n^2)
   sqrt(max(v, 0))
 }
 
