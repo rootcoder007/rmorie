@@ -18,7 +18,7 @@
 #include <vector>
 
 // parser_version stamped into every emitted row.
-#define MORIE_SIU_PARSER_VERSION "0.9.5.12"
+#define MORIE_SIU_PARSER_VERSION "0.9.6"
 
 namespace {
 
@@ -35,7 +35,7 @@ struct CurlGlobal {
 const CurlGlobal kCurlGlobal;
 
 const char* kUserAgent =
-  "morie/0.9.5 (+https://github.com/hadesllm/morie)";
+  "morie/0.9.6 (+https://github.com/hadesllm/morie)";
 
 // libcurl write callback: append received bytes to a std::string.
 size_t write_cb(char* ptr, size_t size, size_t nmemb, void* userdata) {

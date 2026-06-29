@@ -1,5 +1,8 @@
 # rmorie 0.9.6 (in development)
 
+## Bugfix: cluster-robust SE with empty cluster levels
+* `.otis_cluster_se()`: use `sum(grp^2, na.rm = TRUE)`. A factor `cluster` carrying levels absent from a subset (e.g. per-year analysis of an individual-clustered panel) made `tapply()` emit `NA` for the empty clusters, yielding an `NA` SE that errored downstream (`if (se > 0)`: "missing value where TRUE/FALSE needed"). Empty clusters contribute nothing, so they are now dropped. Fixes `morie_otis_irm_dml()` on per-year clustered runs. Regression test added.
+
 ## Citation cleanup: remove Zenodo references
 * `README.md`: removed the "(DOIs will be re-added once we re-deposit on Zenodo.)" promise. The Zenodo deposits for the morie publication set were taken down; we are not committing to re-depositing.
 * `inst/CITATION`: removed the stale "also the R package source on Zenodo" comment.
