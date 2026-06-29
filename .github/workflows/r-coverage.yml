@@ -41,6 +41,12 @@ jobs:
           # matching tests); covr runs the full suite so it's needed here too.
           extra-packages: any::covr any::xml2 any::rgenoud
           needs: coverage
+        env:
+          # ECOSolveR (pulled in via HonestDiD) vendors a SuiteSparse/AMD
+          # Makefile that races under parallel make on hosted runners, so
+          # build the dependency tree serially here. rmorie's own compile
+          # (the "Run covr" step below) keeps the workflow-level -j4.
+          MAKEFLAGS: "-j1"
 
       - name: Run covr
         # quiet=FALSE so the failing test name shows up in the CI log
