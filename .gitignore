@@ -42,3 +42,6 @@ inst/figures/
 
 # local Serena scope — never commit
 .serena/
+
+# never ship private wrangled data
+data/private/

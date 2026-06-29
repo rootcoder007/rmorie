@@ -1,3 +1,8 @@
+# rmorie 0.9.8
+
+* Ecosystem connect: fast stats via the shared rmoriebricklayer C core; `morie_bricklayer()` assembler + `morie_core.h` sync-check.
+* Version 0.9.8 to match the morie family; source/UA URLs -> github.com/rootcoder007.
+
 # rmorie 0.9.6 (in development)
 
 ## Bugfix: cluster-robust SE with empty cluster levels
