@@ -9,7 +9,7 @@
 # package-level home so morie_synth_otis() is part of the public API.)
 #
 # Source of truth: inst/extdata/otis_dictionary.json (extracted from
-# the Ontario MCSCS XLSX dictionary
+# the Ontario Solicitor General XLSX dictionary
 # od-restrictiveconfinement-segregation-deaths-dd20251103-datadictionary.xlsx).
 #
 # Per-dataset OTIS synthetic-fixture dispatcher. Each OTIS publication
@@ -394,7 +394,7 @@
 #' Returns a data.frame mirroring the column shape + categorical level
 #' set of the published OTIS dataset for the given \code{id} (a01,
 #' b01..b09, c01..c12, or d01..d07). Schema is derived from the
-#' Ontario MCSCS XLSX data dictionary that ships at
+#' Ontario Solicitor General XLSX data dictionary that ships at
 #' \code{inst/extdata/otis_dictionary.json}. Values are randomly drawn
 #' from the dictionary categorical levels (or 0..80 for count
 #' columns); used only for offline-no-fixture fallback in tests and

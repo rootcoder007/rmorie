@@ -22,7 +22,7 @@ A \code{data.frame} with the dictionary-derived schema.
 Returns a data.frame mirroring the column shape + categorical level
 set of the published OTIS dataset for the given \code{id} (a01,
 b01..b09, c01..c12, or d01..d07). Schema is derived from the
-Ontario MCSCS XLSX data dictionary that ships at
+Ontario Solicitor General XLSX data dictionary that ships at
 \code{inst/extdata/otis_dictionary.json}. Values are randomly drawn
 from the dictionary categorical levels (or 0..80 for count
 columns); used only for offline-no-fixture fallback in tests and
