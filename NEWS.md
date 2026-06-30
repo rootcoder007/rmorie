@@ -1,3 +1,8 @@
+# rmorie 0.9.9
+
+* Version 0.9.9 (version-locked with morie 0.9.9).
+* Citation no longer pins a package version (prevents stale "(v...)" in citations).
+
 # rmorie 0.9.8
 
 * Ecosystem connect: fast stats via the shared rmoriebricklayer C core; `morie_bricklayer()` assembler + `morie_core.h` sync-check.
