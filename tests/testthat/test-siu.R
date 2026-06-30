@@ -228,6 +228,11 @@ test_that(".siu_http_get_many_with_status returns parallel slots", {
 
 test_that(".siu_http_get_many rate-limit gate spaces requests (network)", {
   testthat::skip_if_offline("www.siu.on.ca")
+  # Wall-clock timing assertion below is flaky on CI runners (coarse clock
+  # resolution on Windows + variable network latency); skip on CI/CRAN. The
+  # rate-limiter logic itself is covered by the deterministic unit tests.
+  testthat::skip_on_cran()
+  testthat::skip_on_ci()
   # 8 requests at 4 rps should take >= ~1.5s of pure gating overhead
   # (gap between starts = 250 ms; 8 - 1 = 7 gaps -> 1.75s floor before
   # any request latency). Measure to confirm the throttle activates.
