@@ -42,10 +42,11 @@ jobs:
           extra-packages: any::covr any::xml2 any::rgenoud
           needs: coverage
         env:
-          # ECOSolveR (pulled in via HonestDiD) vendors a SuiteSparse/AMD
-          # Makefile that races under parallel make on hosted runners, so
-          # build the dependency tree serially here. rmorie's own compile
-          # (the "Run covr" step below) keeps the workflow-level -j4.
+          # ECOSolveR (a healthy CRAN package by B. Narasimhan, pulled in via
+          # HonestDiD -- https://cran.r-project.org/package=ECOSolveR) vendors a
+          # SuiteSparse/AMD Makefile that can race under parallel make, so build
+          # the dependency tree serially here, the same way CRAN builds it.
+          # rmorie's own compile (the "Run covr" step below) keeps -j4.
           MAKEFLAGS: "-j1"
 
       - name: Run covr
