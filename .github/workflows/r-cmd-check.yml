@@ -92,6 +92,12 @@ jobs:
         shell: Rscript {0}
 
       - uses: r-lib/actions/setup-r-dependencies@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
+        env:
+          # ECOSolveR (via HonestDiD) vendors a SuiteSparse/AMD Makefile that
+          # races under parallel make whenever the dep cache misses; build the
+          # dependency tree serially (same as r-coverage.yml). rmorie's own
+          # compile in check-r-package keeps the workflow-level -j4.
+          MAKEFLAGS: "-j1"
         with:
           cache-version: 2
           # rgenoud is a runtime Depends of Matching/rbounds (used by the
