@@ -15,7 +15,7 @@ test_that("morie_estimate_dr_forest returns a doubly-robust ATE near the truth",
   expect_type(res, "list")
   expect_true(is.finite(res$ate) && is.finite(res$se) && res$se > 0)
   expect_true(res$ci_lower < res$ci_upper)
-  expect_identical(res$n, n)
+  expect_equal(res$n, n)
   expect_true(res$ate > 0.3 && res$ate < 1.7)      # near the true ATE of 1.0
 })
 
