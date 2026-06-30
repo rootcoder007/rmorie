@@ -49,6 +49,9 @@ jobs:
           # rmorie's own compile (the "Run covr" step below) keeps -j4.
           MAKEFLAGS: "-j1"
 
+      - name: Reinstall rmoriebricklayer (overwrite any cache-restored 0.2.0)
+        run: install.packages("rmoriebricklayer", repos = "https://rootcoder007.r-universe.dev")
+        shell: Rscript {0}
       - name: Run covr
         # quiet=FALSE so the failing test name shows up in the CI log
         # (the previous run silently halted at "testthat.Rout.fail").
