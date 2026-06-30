@@ -101,6 +101,9 @@ jobs:
           extra-packages: any::rcmdcheck any::rgenoud
           needs: check
 
+      - name: Reinstall rmoriebricklayer (overwrite any cache-restored 0.2.0)
+        run: install.packages("rmoriebricklayer", repos = "https://rootcoder007.r-universe.dev")
+        shell: Rscript {0}
       # Mirror morie's CI shape: drop --as-cran from per-push (51min+ on
       # rmorie Linux due to --as-cran URL-probing + 112 source-installed
       # Suggests). Plain check on per-push; --as-cran gated to
