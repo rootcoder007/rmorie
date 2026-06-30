@@ -119,3 +119,61 @@ morie_bricklayer <- function(yes = FALSE, check = FALSE) {
   }
   invisible(present)
 }
+
+#' Resolve a Wayback Machine snapshot URL (via rmoriebricklayer)
+#'
+#' Thin bridge to \code{rmoriebricklayer::wayback_snapshot_url()}: given a live
+#' URL, returns the closest \code{archive.org} snapshot URL (or \code{NULL} if
+#' none exists). Lets the morie family reuse the shared bricklayer Wayback
+#' helpers -- e.g. to reach an archived copy of an Ontario Data Catalogue page
+#' (the "Data on Inmates in Ontario" / OTIS releases) when the live portal is
+#' unreachable -- instead of duplicating them.
+#'
+#' @param url A live URL to look up on the Wayback Machine.
+#' @param timestamp Optional \code{YYYYMMDD[hhmmss]} to request the snapshot
+#'   closest to that time; \code{NULL} (default) returns the most recent.
+#' @return The snapshot URL (https), or \code{NULL} if unavailable.
+#' @seealso \code{\link{morie_bricklayer}}, \code{\link{morie_download}}
+#' @examples
+#' \dontrun{
+#' morie_wayback_url("https://data.ontario.ca/dataset/data-on-inmates-in-ontario")
+#' }
+#' @export
+morie_wayback_url <- function(url, timestamp = NULL) {
+  if (!requireNamespace("rmoriebricklayer", quietly = TRUE)) {
+    stop("rmoriebricklayer is required for morie_wayback_url(); run morie_bricklayer().",
+         call. = FALSE)
+  }
+  rmoriebricklayer::wayback_snapshot_url(url, timestamp = timestamp)
+}
+
+#' Download a file with an automatic Wayback fallback (via rmoriebricklayer)
+#'
+#' Thin bridge to \code{rmoriebricklayer::friendly_download()}: downloads
+#' \code{url} to \code{target_path}, falling back to the archived Wayback
+#' snapshot if the live source is unreachable -- useful for pinned open-data
+#' sources (e.g. the OTIS "Data on Inmates in Ontario" releases) that may move
+#' or change upstream.
+#'
+#' @param url Live source URL.
+#' @param target_path Destination file path.
+#' @param attempt_wayback Logical or \code{NULL}; whether to fall back to the
+#'   Wayback snapshot when the live fetch fails (passed through to bricklayer;
+#'   \code{NULL} uses the bricklayer default).
+#' @return The downloaded path, per \code{rmoriebricklayer::friendly_download()}.
+#' @seealso \code{\link{morie_bricklayer}}, \code{\link{morie_wayback_url}}
+#' @examples
+#' \dontrun{
+#' morie_download(
+#'   "https://data.ontario.ca/dataset/data-on-inmates-in-ontario",
+#'   tempfile(fileext = ".html"))
+#' }
+#' @export
+morie_download <- function(url, target_path, attempt_wayback = NULL) {
+  if (!requireNamespace("rmoriebricklayer", quietly = TRUE)) {
+    stop("rmoriebricklayer is required for morie_download(); run morie_bricklayer().",
+         call. = FALSE)
+  }
+  rmoriebricklayer::friendly_download(url, target_path,
+                                      attempt_wayback = attempt_wayback)
+}
