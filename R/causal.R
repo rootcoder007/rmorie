@@ -14,6 +14,8 @@
 #'   the inline Hajek / influence-function estimator preserved.
 #' * \code{morie_estimate_aipw()} -> \pkg{AIPW} when installed, else
 #'   the inline doubly-robust estimator.
+#' * \code{morie_estimate_dr_forest()} -> \pkg{grf} causal forest with
+#'   doubly-robust (AIPW) averaging; honest random-forest nuisances.
 #' * \code{morie_estimate_g_computation()} -> \pkg{stdReg}
 #'   (\code{stdReg::stdGlm}) when installed, else inline G-formula.
 #' * \code{morie_estimate_late()} -> \pkg{AER} / \pkg{ivreg}
@@ -79,6 +81,9 @@ NULL
 }
 .causal_have_aer          <- function() {
   requireNamespace("AER",          quietly = TRUE)
+}
+.causal_have_grf          <- function() {
+  requireNamespace("grf",          quietly = TRUE)
 }
 .causal_have_ivreg        <- function() {
   requireNamespace("ivreg",        quietly = TRUE) ||
@@ -388,6 +393,50 @@ morie_estimate_aipw <- function(data, treatment, outcome, covariates,
   ci <- .wald_ci(ate, se)
 
   list(ate = ate, se = se, ci_lower = ci[1], ci_upper = ci[2], n = length(y))
+}
+
+#' Doubly-robust ATE via causal forest (grf)
+#'
+#' Thin wrapper over \pkg{grf}: fits \code{grf::causal_forest()} and returns
+#' the augmented-IPW (doubly-robust) average treatment effect from
+#' \code{grf::average_treatment_effect(method = "AIPW")}. Uses honest
+#' random-forest nuisance estimates -- a machine-learning alternative to the
+#' GLM-based \code{morie_estimate_aipw()} and the cross-fit
+#' \code{morie_estimate_irm()}. Requires \pkg{grf} (Suggests).
+#'
+#' @inheritParams morie_estimate_aipw
+#' @param target_sample Sample to average over, passed to grf: one of
+#'   \code{"all"}, \code{"treated"}, \code{"control"}, \code{"overlap"}.
+#' @return A list with \code{ate}, \code{se}, \code{ci_lower},
+#'   \code{ci_upper}, \code{n}.
+#' @examples
+#' if (requireNamespace("grf", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(t = rbinom(200, 1, 0.4), y = rnorm(200), x = rnorm(200))
+#'   morie_estimate_dr_forest(df, "t", "y", "x")
+#' }
+#' @export
+morie_estimate_dr_forest <- function(data, treatment, outcome, covariates,
+                                     target_sample = c("all", "treated",
+                                                       "control", "overlap")) {
+  if (!.causal_have_grf()) {
+    stop("Package 'grf' is required for morie_estimate_dr_forest(); ",
+         "install it or use morie_estimate_aipw().", call. = FALSE)
+  }
+  target_sample <- match.arg(target_sample)
+  X <- stats::model.matrix(
+    stats::as.formula(paste("~", paste(covariates, collapse = " + "))),
+    data = data
+  )[, -1, drop = FALSE]
+  Y <- as.numeric(data[[outcome]])
+  W <- as.numeric(data[[treatment]])
+  cf <- grf::causal_forest(X, Y, W)
+  est <- grf::average_treatment_effect(cf, target.sample = target_sample,
+                                       method = "AIPW")
+  ate <- unname(est[["estimate"]])
+  se <- unname(est[["std.err"]])
+  ci <- .wald_ci(ate, se)
+  list(ate = ate, se = se, ci_lower = ci[1], ci_upper = ci[2], n = length(Y))
 }
 
 
