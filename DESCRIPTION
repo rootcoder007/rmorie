@@ -95,6 +95,7 @@ Suggests:
   glmnet,
   gMCP,
   gmm,
+  grf,
   gstat,
   harmonicmeanp,
   hawkes,
