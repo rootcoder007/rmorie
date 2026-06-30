@@ -19,6 +19,8 @@ implementation as a fallback (dual-arm pattern):
 the inline Hajek / influence-function estimator preserved.
 \item \code{morie_estimate_aipw()} -> \pkg{AIPW} when installed, else
 the inline doubly-robust estimator.
+\item \code{morie_estimate_dr_forest()} -> \pkg{grf} causal forest with
+doubly-robust (AIPW) averaging; honest random-forest nuisances.
 \item \code{morie_estimate_g_computation()} -> \pkg{stdReg}
 (\code{stdReg::stdGlm}) when installed, else inline G-formula.
 \item \code{morie_estimate_late()} -> \pkg{AER} / \pkg{ivreg}
