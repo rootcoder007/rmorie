@@ -16,7 +16,7 @@
 # the image is reproducible across rebuilds.
 
 # ---- Stage 1: builder ----
-FROM rocker/r-ver:4.4.2 AS builder
+FROM rocker/r-ver:4.6.1 AS builder
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Etc/UTC
@@ -76,7 +76,7 @@ RUN R -e 'install.packages("remotes", repos = "https://p3m.dev/cran/__linux__/no
 RUN R CMD INSTALL --no-test-load --no-help --no-html .
 
 # ---- Stage 2: runtime ----
-FROM rocker/r-ver:4.4.2 AS runtime
+FROM rocker/r-ver:4.6.1 AS runtime
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Etc/UTC
