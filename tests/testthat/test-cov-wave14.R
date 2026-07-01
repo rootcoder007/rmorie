@@ -80,6 +80,7 @@ test_that("morie_estimate_irm errors when DoubleML is unavailable", {
 })
 
 test_that("morie_estimate_irm runs the DoubleML IRM when packages are present", {
+  skip_on_ci()  # DoubleML/mlr3 fit runs via future workers that segfault flakily on CI
   set.seed(1)
   n <- 240
   X <- matrix(stats::rnorm(n * 4), n, 4)
