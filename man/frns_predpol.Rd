@@ -12,12 +12,10 @@ statistics, per-group breakdowns, and a plain-language
 }
 \description{
 R parity for the Python \code{morie.fairness.predpol} module. A
-clean-room, city-agnostic reimplementation of the district-level
-analysis of the SciencesPo \emph{Predictive-policing-Chicago} project
-(Lacherade, Szabo, Krikava & Aeby, 2021): rank areas by the risk an
-algorithm predicts, rank them by their realised outcome rate, and
-test whether the disagreement tracks the areas' demographic
-composition.
+city-agnostic district-level calibration audit: rank areas by the
+risk an algorithm predicts, rank them by their realised outcome
+rate, and test whether the disagreement tracks the areas'
+demographic composition.
 }
 \details{
 Functions:
@@ -29,9 +27,6 @@ per-group mean rank gap (the over-/under-prediction signal).
 \item \code{morie_predpol_score_disparity()}: descriptive per-group risk-score
 summary with a one-way ANOVA.
 }
-
-Written from the project's published methodology; no code copied
-(that repository carries no licence and is not redistributable).
 }
 \examples{
 agg <- morie_predpol_aggregate_areas(
