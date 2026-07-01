@@ -723,7 +723,25 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
                                con = NULL) {
   matched <- .fuzzy_match_key(key)
   if (is.null(matched)) {
-    stop("Unknown dataset key: '", key, "'. See morie_dataset_catalog().", call. = FALSE)
+    # Unified OPEN-data front door: if `key` is a bundled data slug (open data
+    # shipped in rmoriedata), load it from there so newcomers have one reliable
+    # entry point. NOTE: paid/curated data is NOT reachable here -- it is
+    # site-gated behind sign-up and never served by this open loader.
+    if (requireNamespace("rmoriedata", quietly = TRUE)) {
+      slugs <- tryCatch(rmoriedata::morie_data_catalog()$slug,
+        error = function(e) character())
+      if (key %in% slugs) {
+        return(as.data.frame(rmoriedata::morie_data_load(key)))
+      }
+    }
+    stop(
+      "Unknown dataset '", key, "'. Open-data access points:\n",
+      "  - morie_dataset_catalog()           remote/CKAN dataset KEYS (e.g. 'ocp21')\n",
+      "  - rmoriedata::morie_data_catalog()  bundled data SLUGS (e.g. 'chicago_iucr_codes')\n",
+      "  - morie_datasets_*()                dedicated fetchers ",
+      "(e.g. morie_datasets_chicago_iucr_codes())",
+      call. = FALSE
+    )
   }
   catalog <- morie_dataset_catalog()
   entry <- catalog[catalog$key == matched, ]
