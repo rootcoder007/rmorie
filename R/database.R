@@ -34,9 +34,68 @@
         call. = FALSE
       )
     }
-    return(list(con = con, close = FALSE))
+    return(list(type = "dbi", con = con, close = FALSE))
   }
-  list(con = morie_db_connect(db_path), close = TRUE)
+  # Explicit db_path -> the user wants a SQL (SQLite/DuckDB) file backend.
+  if (!is.null(db_path) && nzchar(db_path)) {
+    return(list(type = "dbi", con = morie_db_connect(db_path), close = TRUE))
+  }
+  # Explicit backend choice via env: rds | parquet | duckdb | sqlite.
+  be <- Sys.getenv("MORIE_CACHE_BACKEND", "")
+  if (be == "rds") {
+    return(list(type = "rds", dir = .morie_cache_fs_dir(), close = FALSE))
+  }
+  if (be == "parquet") {
+    return(list(type = "parquet", dir = .morie_cache_fs_dir(), close = FALSE))
+  }
+  if (be %in% c("duckdb", "sqlite")) {
+    return(list(type = "dbi", con = morie_db_connect(), close = TRUE))
+  }
+  # Back-compat: honour MORIE_CACHE_DB or an existing cache DB file -> SQL.
+  cache_dir <- file.path(tempdir(), "morie")
+  if (nzchar(Sys.getenv("MORIE_CACHE_DB", "")) ||
+    file.exists(file.path(cache_dir, "morie.duckdb")) ||
+    file.exists(file.path(cache_dir, "morie.db"))) {
+    return(list(type = "dbi", con = morie_db_connect(), close = TRUE))
+  }
+  # Default: zero/light-compile file backend. Parquet (cross-language) when
+  # nanoparquet is available; else base-R RDS. DuckDB/SQLite stay opt-in (see
+  # morie_db_connect); PostgreSQL etc. via `con=`.
+  if (requireNamespace("nanoparquet", quietly = TRUE)) {
+    return(list(type = "parquet", dir = .morie_cache_fs_dir(), close = FALSE))
+  }
+  list(type = "rds", dir = .morie_cache_fs_dir(), close = FALSE)
+}
+
+# ---- Filesystem cache backends (no compiled DB dependency) -------------------
+# One file per table under a session-scoped cache dir. Parquet (via nanoparquet,
+# cross-language: Python/DuckDB/Arrow/Rust can read it) is the default when
+# available; RDS (base R) is the zero-dependency fallback. This is what lets
+# morie_cache_* work on a fresh install with no DuckDB/RSQLite. For SQL /
+# out-of-core queries, install duckdb (see morie_db_connect); for the multi-user
+# server tier, pass a PostgreSQL `con=`.
+.morie_cache_fs_dir <- function() {
+  d <- file.path(tempdir(), "morie", "fscache")
+  dir.create(d, recursive = TRUE, showWarnings = FALSE)
+  d
+}
+.morie_cache_fs_path <- function(dir, table_name, ext) {
+  if (!is.character(table_name) || length(table_name) != 1L ||
+    grepl("[/\\\\]|\\.\\.", table_name)) {
+    stop("Invalid table_name for the file cache: ", table_name, call. = FALSE)
+  }
+  file.path(dir, paste0(table_name, ".", ext))
+}
+# Crash-safe write: serialise to a temp file, then atomic rename over target,
+# so a crash mid-write cannot corrupt an existing cached table.
+.morie_atomic_write <- function(path, writer) {
+  tmp <- paste0(path, ".tmp", Sys.getpid())
+  writer(tmp)
+  if (!file.rename(tmp, path)) {
+    file.copy(tmp, path, overwrite = TRUE)
+    unlink(tmp)
+  }
+  invisible(path)
 }
 
 #' morie cache contract
@@ -160,12 +219,18 @@ morie_builtin_db <- function() {
 
 #' Connect to the MORIE cache database
 #'
-#' Opens (or creates) the per-user cache database. The default backend
-#' is **DuckDB** — zero-config like SQLite, but vectorised + columnar,
-#' so it handles the multi-GB-scale open-data PUMFs (TPS, CPADS bulk)
-#' that morie ingests without breaking down on analytical queries. For
-#' back-compat, an existing SQLite cache at `morie.db` is reused; if
-#' duckdb is unavailable, falls back to SQLite.
+#' Opens (or creates) a per-user **SQL** cache database. This is the
+#' opt-in SQL backend and requires DuckDB or RSQLite to be installed.
+#'
+#' Note: the DEFAULT cache used by `morie_cache_store()` / `_load()` /
+#' `_list()` needs **no SQL backend at all** — it uses a zero/light
+#' dependency file store: Parquet via \pkg{nanoparquet} (cross-language)
+#' when available, else base-R `.rds`. Install `duckdb` (or `RSQLite`),
+#' or set `MORIE_CACHE_BACKEND=duckdb`/`sqlite`, or pass `db_path=`, to
+#' use SQL instead — DuckDB is preferred (vectorised + columnar, handles
+#' multi-GB PUMFs and out-of-core analytical queries); an existing
+#' `morie.db` / `morie.duckdb` cache is reused for back-compat. For the
+#' multi-user server tier, pass your own PostgreSQL `con=`.
 #'
 #' For non-default backends (PostgreSQL, MariaDB, MS SQL Server, ...),
 #' construct your own DBI connection and pass it as `con` to the
@@ -275,6 +340,18 @@ morie_db_connect <- function(db_path = NULL) {
 #' @export
 morie_cache_store <- function(data, table_name, db_path = NULL, con = NULL) {
   h <- .morie_db_handle(con, db_path)
+  if (h$type == "parquet") {
+    p <- .morie_cache_fs_path(h$dir, table_name, "parquet")
+    .morie_atomic_write(p, function(f) {
+      nanoparquet::write_parquet(as.data.frame(data), f)
+    })
+    return(invisible(nrow(data)))
+  }
+  if (h$type == "rds") {
+    p <- .morie_cache_fs_path(h$dir, table_name, "rds")
+    .morie_atomic_write(p, function(f) saveRDS(as.data.frame(data), f))
+    return(invisible(nrow(data)))
+  }
   if (h$close) on.exit(DBI::dbDisconnect(h$con), add = TRUE)
   DBI::dbWriteTable(h$con, table_name, data, overwrite = TRUE)
   # Auto-create the cardinality-driven indexes for known dataset
@@ -305,6 +382,20 @@ morie_cache_store <- function(data, table_name, db_path = NULL, con = NULL) {
 #' @export
 morie_cache_load <- function(table_name, db_path = NULL, con = NULL) {
   h <- .morie_db_handle(con, db_path)
+  if (h$type == "parquet") {
+    p <- .morie_cache_fs_path(h$dir, table_name, "parquet")
+    if (!file.exists(p)) {
+      return(NULL)
+    }
+    return(as.data.frame(nanoparquet::read_parquet(p)))
+  }
+  if (h$type == "rds") {
+    p <- .morie_cache_fs_path(h$dir, table_name, "rds")
+    if (!file.exists(p)) {
+      return(NULL)
+    }
+    return(readRDS(p))
+  }
   if (h$close) on.exit(DBI::dbDisconnect(h$con), add = TRUE)
   if (!DBI::dbExistsTable(h$con, table_name)) {
     return(NULL)
@@ -327,6 +418,28 @@ morie_cache_load <- function(table_name, db_path = NULL, con = NULL) {
 #' @export
 morie_cache_list <- function(db_path = NULL, con = NULL) {
   h <- .morie_db_handle(con, db_path)
+  if (h$type %in% c("parquet", "rds")) {
+    ext <- if (h$type == "parquet") "parquet" else "rds"
+    files <- list.files(h$dir, pattern = paste0("\\.", ext, "$"),
+      full.names = TRUE)
+    if (length(files) == 0L) {
+      return(data.frame(table = character(), rows = integer(),
+        stringsAsFactors = FALSE))
+    }
+    rows <- vapply(files, function(f) {
+      if (ext == "parquet") {
+        n <- tryCatch(as.integer(nanoparquet::read_parquet_info(f)$num_rows),
+          error = function(e) NA_integer_)
+        if (is.na(n)) as.integer(nrow(nanoparquet::read_parquet(f))) else n
+      } else {
+        as.integer(nrow(readRDS(f)))
+      }
+    }, integer(1))
+    return(data.frame(
+      table = sub(paste0("\\.", ext, "$"), "", basename(files)),
+      rows = unname(rows), stringsAsFactors = FALSE
+    ))
+  }
   if (h$close) on.exit(DBI::dbDisconnect(h$con), add = TRUE)
   tables <- DBI::dbListTables(h$con)
   if (length(tables) == 0L) {
