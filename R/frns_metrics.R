@@ -21,7 +21,7 @@
 #' `interpretation`, mirroring the payload of the Python
 #' `RichResult`.
 #'
-#' Prior art reimplemented independently (no code copied): IBM AI
+#' Prior art: IBM AI
 #' Fairness 360 metric definitions; the COMPAS audit in pbiecek's
 #' *XAI Stories*; the SciencesPo *Predictive-policing-Chicago* project
 #' (Lacherade, Szabo, Krikava & Aeby, 2021); and Barman & Barman,
