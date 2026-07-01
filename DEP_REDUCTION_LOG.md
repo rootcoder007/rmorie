@@ -29,6 +29,24 @@ Verification: read.dcf parses; Suggests=137; no dropped pkg used in active code;
 man references are text-only (no \link). Full build/load validation on zeus +
 local R pending.
 
+## Batch 2 (2026-07-01) — THE boost/Windows-timeout fix  [137 -> 134]
+Root cause (confirmed from full r-universe run #76 logs, BOTH Windows targets):
+the R-devel + R-oldrel Windows jobs are stuck ~48 min compiling **RSQLite**'s
+vendored boost (DbDataFrame.cpp:64, `boost::for_each` over stable_vector<DbColumn>
+-> boost concept-check cascade). Benign warnings; the COST is g++ template
+instantiation on MinGW. This is what pushes Windows past the 100-min cap.
+Fix: drop **RSQLite, duckdb, cansim** from Suggests (pure DESCRIPTION change).
+- RSQLite entered the build via our Suggests + transitively via cansim -> BOTH
+  removed. duckdb pulled by nothing. Verified: RSQLite + duckdb now GONE from the
+  entire recursive build tree.
+- NO code changes: install-on-demand guards already existed (database.R
+  requireNamespace for RSQLite/duckdb; ingest_statcan.R requireNamespace("cansim");
+  all DB/cansim tests skip_if_not_installed). DBI kept (pure R, free).
+- SQL cache / DuckDB / StatCan-fetch still work if the user installs the backend.
+- Tradeoff: R CMD check NOTEs (undeclared `::`); non-blocking (error_on=warning;
+  r-universe tolerates NOTEs).
+Full analysis: GRAD_STUDIES/rmorie_boost_windows_timeout_2026-07-01.txt.
+
 ## Planned next batches (not yet done)
 - Batch 2 (single trivial call -> inline base-R, then drop):
   data.table (as.data.table @irm.R:80), lmtest (coeftest @effects.R:86),
