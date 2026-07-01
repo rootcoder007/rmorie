@@ -47,6 +47,33 @@ Fix: drop **RSQLite, duckdb, cansim** from Suggests (pure DESCRIPTION change).
   r-universe tolerates NOTEs).
 Full analysis: GRAD_STUDIES/rmorie_boost_windows_timeout_2026-07-01.txt.
 
+## Batch 3 / Phase 1 (2026-07-01) — RDS/Parquet default cache backend  [Suggests 135]
+Make the cache work out-of-box with NO compiled DB. `.morie_db_handle` now
+dispatches: con/db_path/MORIE_CACHE_DB/existing-DB-file/`MORIE_CACHE_BACKEND` ->
+DBI (back-compat); else DEFAULT = **Parquet via nanoparquet** (cross-language:
+Python/DuckDB/Arrow/Rust can read it; pure-C, compiles in seconds, no boost) ->
+falls back to base-R **.rds** if nanoparquet absent.
+- New internal backends in R/database.R: `.morie_cache_fs_dir`, `.morie_cache_fs_path`,
+  `.morie_atomic_write` (crash-safe temp+rename). morie_cache_store/load/list
+  dispatch on `h$type` (dbi | parquet | rds).
+- DuckDB/RSQLite stay OPT-IN (morie_db_connect, still guarded); PostgreSQL via `con=`.
+- Addresses the .rds critique: interop -> Parquet default (cross-lang); corruption
+  -> atomic writes + rebuildable cache; SQL/out-of-core -> opt into DuckDB; concurrency
+  -> Postgres server tier. Whole-table store/overwrite means row-update concern N/A.
+- nanoparquet added to Suggests (tiny pure-C; no timeout risk). 134 -> 135.
+- Tests: tests/testthat/test-fs-cache.R (parquet + rds round-trip + path-traversal
+  guard). Validated on Mac: FAIL 0 | PASS 13; existing DB tests unaffected.
+- Roxygen for morie_db_connect updated (stale "default DuckDB" -> RDS/Parquet default);
+  man/ hand-synced (roxygenise blocked by Mac bricklayer-load; regen in CI later).
+
+## Family consistency (2026-07-01) — sibling SQLite audit
+- rmorielite: NO DBI/RSQLite/sqlite -> clean, nothing to do.
+- rmoriebricklayer: C++ engine, no DB deps -> clean.
+- rmoriedata: Suggests DBI+RSQLite, ships inst/extdata/rmoriedata.sqlite +
+  data_store.R (morie_data_load reads sqlite) -> SAME boost/compile risk on its
+  own r-universe Windows build. NEEDS migration SQLite -> Parquet (nanoparquet) on
+  its `alpha` branch for consistency + to drop RSQLite. (Planned next.)
+
 ## Planned next batches (not yet done)
 - Batch 2 (single trivial call -> inline base-R, then drop):
   data.table (as.data.table @irm.R:80), lmtest (coeftest @effects.R:86),
