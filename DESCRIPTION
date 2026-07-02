@@ -181,7 +181,12 @@ Suggests:
   withr,
   writexl,
   xgboost,
-  xml2
+  xml2,
+  cansim,
+  duckdb,
+  mutoss,
+  resample,
+  RSQLite
 VignetteBuilder: knitr
 URL: https://github.com/rootcoder007/rmorie
 BugReports: https://github.com/rootcoder007/rmorie/issues
