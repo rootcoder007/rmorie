@@ -278,6 +278,8 @@ test_that("rms_norm applies gamma scale and custom eps", {
 })
 
 test_that("morie_random_search_cv runs a small regression search", {
+  skip_if_not_installed("caret")
+  skip_if_not_installed("elasticnet")
   set.seed(0)
   n <- 40
   p <- 3

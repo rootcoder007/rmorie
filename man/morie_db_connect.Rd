@@ -30,8 +30,7 @@ to use SQL instead — DuckDB is preferred (vectorised + columnar, handles
 multi-GB PUMFs and out-of-core analytical queries); an existing
 \code{morie.db} / \code{morie.duckdb} cache is reused for back-compat.
 For the multi-user server tier, pass your own PostgreSQL \code{con=}.
-}
-\details{
+
 For non-default backends (PostgreSQL, MariaDB, MS SQL Server, ...),
 construct your own DBI connection and pass it as \code{con} to the
 \verb{morie_cache_*} and \code{morie_load_dataset} functions:
