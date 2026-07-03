@@ -174,3 +174,25 @@ test_that("end-to-end: simulate -> ilr -> bhm recovers the lime signal", {
   eff <- fit$coefficients$post_mean[fit$coefficients$term == "lime_treatment"]
   expect_gt(eff, 0.3)          # the lime effect is recovered through the pipeline
 })
+
+test_that("USGS soil zip parser reads the CSV member (no network)", {
+  # fixture: a tiny zipped CSV mimicking the ngdb schema
+  tmp <- tempfile(fileext = ".zip")
+  csv <- tempfile(fileext = ".csv")
+  write.csv(data.frame(lab_id = 1:2, ca_pct = c(3.1, 8.2), fe_pct = c(2.0, 1.1)),
+            csv, row.names = FALSE)
+  old <- setwd(dirname(csv)); on.exit(setwd(old), add = TRUE)
+  utils::zip(tmp, basename(csv), flags = "-q")
+  df <- .morie_read_usgs_soil_zip(tmp, nrows = NULL)
+  expect_s3_class(df, "data.frame")
+  expect_true(all(c("lab_id", "ca_pct", "fe_pct") %in% names(df)))
+  expect_equal(nrow(df), 2L)
+})
+
+test_that("PMI schema is a typed zero-row STO-2022 template", {
+  s <- morie_taphonomy_pmi_schema()
+  expect_identical(nrow(s), 0L)
+  expect_true(all(c("accumulated_deg_days", "burial_depth_cm", "pmi_days") %in%
+                    names(s)))
+  expect_identical(unname(attr(s, "role")[["pmi_days"]]), "outcome")
+})

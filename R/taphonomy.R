@@ -939,3 +939,110 @@ morie_taphonomy_ilr <- function(x, pseudocount = 1e-6) {
   colnames(ilr) <- paste0("ilr", seq_len(D - 1L))
   ilr
 }
+
+
+# ===========================================================================
+# Open-data ingestion: real comparanda for calibration
+# ===========================================================================
+
+# Default USGS National Geochemical Database (soil) bulk CSV (verified
+# 2026-07-03; 54 MB zip -> 482 MB CSV; subject to federal-portal reorg).
+.MORIE_USGS_NGDBSOIL_URL <- "https://mrdata.usgs.gov/ngdb/soil/ngdbsoil-csv.zip"
+
+# Read the CSV out of a downloaded ngdbsoil zip WITHOUT extracting the full
+# 482 MB (base R `unz()` streams the member). Split out for testing.
+.morie_read_usgs_soil_zip <- function(zip_path, nrows = NULL) {
+  members <- utils::unzip(zip_path, list = TRUE)$Name
+  csv <- grep("\\.csv$", members, value = TRUE, ignore.case = TRUE)[1]
+  if (is.na(csv)) stop("no CSV member found in ", basename(zip_path),
+                       call. = FALSE)
+  # read.csv opens AND closes the unz() connection it is handed; do not close
+  # it again here (double-close errors on an already-closed connection).
+  utils::read.csv(unz(zip_path, csv),
+                  nrows = if (is.null(nrows)) -1L else as.integer(nrows),
+                  check.names = FALSE, stringsAsFactors = FALSE)
+}
+
+#' Fetch USGS National Geochemical Database soil geochemistry
+#'
+#' Downloads the U.S. Geological Survey National Geochemical Database (soil)
+#' bulk CSV -- \strong{real, open} elemental concentrations (Ca, Fe, ...) that
+#' are the compositional analogue of pXRF bone/relic spectra. Use it to
+#' calibrate the compositional pipeline (\code{\link{morie_taphonomy_clr}} /
+#' \code{\link{morie_taphonomy_ilr}} / DML) on genuine open data before real
+#' scans exist. Dependency-free: the CSV is read straight from the zip with base
+#' R (no GDAL/\pkg{sf}); the WFS endpoint is GML-only and deliberately not used.
+#'
+#' The download is ~54 MB (482 MB uncompressed); it is cached in \code{dest} and
+#' reused unless \code{refresh = TRUE}. Network + size mean this never runs in
+#' examples/tests.
+#'
+#' @param dest Cache directory for the zip (default \code{tempdir()}; never
+#'   \code{~}).
+#' @param nrows Rows to read (default 1000 for a quick slice; \code{NULL} = all
+#'   1.5M+).
+#' @param url Source URL (default the USGS NGDB soil zip).
+#' @param refresh Re-download even if the cached zip exists.
+#' @return A \code{data.frame} of soil samples with elemental-concentration
+#'   columns; \code{attr(., "source")} records the URL.
+#' @source \url{https://mrdata.usgs.gov/ngdb/soil/}
+#' @seealso \code{\link{morie_taphonomy_clr}}, \code{\link{morie_taphonomy_ilr}}
+#' @examples
+#' \donttest{
+#' # ~54 MB download:
+#' # soil <- morie_taphonomy_fetch_usgs_soil(nrows = 500)
+#' }
+#' @export
+morie_taphonomy_fetch_usgs_soil <- function(dest = tempdir(),
+                                            nrows = 1000L,
+                                            url = .MORIE_USGS_NGDBSOIL_URL,
+                                            refresh = FALSE) {
+  if (!dir.exists(dest)) dir.create(dest, recursive = TRUE)
+  zip_path <- file.path(dest, basename(url))
+  if (refresh || !file.exists(zip_path)) {
+    utils::download.file(url, zip_path, mode = "wb", quiet = TRUE)
+  }
+  df <- .morie_read_usgs_soil_zip(zip_path, nrows)
+  attr(df, "source") <- url
+  df
+}
+
+#' STO-2022 taphonomic-observation schema (PMI nuisance variables)
+#'
+#' A typed, zero-row template of the taphonomic-observation and environmental
+#' variables used for post-mortem-interval (PMI) work, aligned with the Standard
+#' for Taphonomic Observations in Support of the PMI (2022) -- the same variable
+#' family the geoFOR project records. \strong{geoFOR itself is an interactive
+#' web application with no open data API}, so this schema lets you structure your
+#' own case observations into the high-dimensional nuisance set \eqn{X} for the
+#' DML / Bayesian estimators (baseline expected decay given environment). No rows
+#' are fabricated.
+#'
+#' @return A zero-row \code{data.frame}; each column carries a \code{"role"}
+#'   attribute (\code{"observation"}, \code{"environment"}, or \code{"outcome"}).
+#' @source geoFOR (\url{https://www.geoforapp.info}); Standard for Taphonomic
+#'   Observations in Support of the PMI (2022).
+#' @examples
+#' str(morie_taphonomy_pmi_schema())
+#' @export
+morie_taphonomy_pmi_schema <- function() {
+  spec <- c(
+    decomp_stage        = "integer",  # ordinal TBS-style stage
+    body_scoring_tbs    = "numeric",  # Total Body Score
+    accumulated_deg_days = "numeric", # ADD (thermal history)
+    temp_c              = "numeric",
+    humidity_pct        = "numeric",
+    precipitation_mm    = "numeric",
+    burial_depth_cm     = "numeric",
+    soil_ph             = "numeric",
+    scavenger_activity  = "integer",  # 1 = present
+    insect_activity     = "integer",  # 1 = present
+    pmi_days            = "numeric"   # outcome
+  )
+  roles <- c(rep("observation", 2), rep("environment", 8), "outcome")
+  cols <- Map(function(t) switch(t, integer = integer(0), numeric(0)), spec)
+  df <- as.data.frame(cols, stringsAsFactors = FALSE)
+  names(df) <- names(spec)
+  attr(df, "role") <- stats::setNames(roles, names(spec))
+  df
+}
