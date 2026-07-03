@@ -45,3 +45,32 @@ test_that("CATE path: 'none' reports no SE; 'bootstrap' gives a valid SE + CI", 
   expect_true(is.finite(r_boot$p_value))
   expect_equal(r_boot$value, r_none$value, tolerance = 1e-8)  # same point est
 })
+
+test_that("decay chain is a valid absorbing DTMC (rows sum to 1)", {
+  ch <- morie_taphonomy_decay_chain(preservation = 0.6)
+  expect_true(all(abs(rowSums(ch$P) - 1) < 1e-12))       # row-stochastic
+  expect_identical(ch$absorbing, c("skeletal", "mummified"))
+  # absorbing states are self-loops
+  expect_equal(ch$P["skeletal", "skeletal"], 1)
+  expect_equal(ch$P["mummified", "mummified"], 1)
+})
+
+test_that("absorption probabilities sum to 1 and rise with preservation", {
+  a0 <- morie_taphonomy_decay_absorption(morie_taphonomy_decay_chain(0.0))
+  a1 <- morie_taphonomy_decay_absorption(morie_taphonomy_decay_chain(0.8))
+  expect_equal(sum(a0$absorption), 1, tolerance = 1e-10)
+  expect_equal(sum(a1$absorption), 1, tolerance = 1e-10)
+  # more preservation -> more mummification
+  expect_gt(a1$absorption[["mummified"]], a0$absorption[["mummified"]])
+  expect_gt(a0$expected_steps, 0)
+})
+
+test_that("decay delta is positive and simulate reaches an absorbing state", {
+  d <- morie_taphonomy_decay_delta(0.8)
+  expect_gt(d$delta, 0)
+  expect_equal(d$p_mummified_treated - d$p_mummified_natural, d$delta,
+               tolerance = 1e-12)
+  path <- morie_taphonomy_decay_simulate(morie_taphonomy_decay_chain(0.8),
+                                         n_steps = 500L, seed = 1L)
+  expect_true(utils::tail(path, 1) %in% c("skeletal", "mummified"))
+})

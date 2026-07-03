@@ -312,3 +312,195 @@ morie_taphonomy_preservation_delta <- function(data,
     interpretation = interp
   )
 }
+
+
+# ===========================================================================
+# Stochastic decay modelling -- absorbing Markov chain (DTMC)
+# ===========================================================================
+
+#' Build a taphonomic decay Markov chain (DTMC)
+#'
+#' A discrete-time absorbing Markov chain over decomposition stages. From each
+#' transient stage a body either \emph{progresses} one step toward the terminal
+#' \code{"skeletal"} state (ordinary decay) or \emph{diverts} to the terminal
+#' \code{"mummified"} state (preserved). A \code{preservation} factor -- the
+#' desiccant/bacteriocidal effect of quicklime, aridity, sealing -- shifts mass
+#' from progression toward diversion, so a high-lime interment routes the body
+#' to \code{"mummified"} rather than \code{"skeletal"}. Compare the natural
+#' (\code{preservation = 0}) chain against a treated one to quantify how much
+#' the burial practice changes the fate distribution.
+#'
+#' @param preservation Preservation factor in \code{[0, 1]}: 0 = ordinary
+#'   decay, higher = stronger diversion toward mummification.
+#' @param decay_rate Base per-step progression probability in \code{(0, 1]}
+#'   (default 0.5).
+#' @param mummify_rate Base per-step diversion-to-mummified probability in
+#'   \code{[0, 1]} (default 0.5); scaled by \code{preservation}.
+#' @param states Character vector of transient decomposition stages (default
+#'   \code{c("fresh", "bloat", "active", "advanced")}).
+#' @return A named \code{list}: \code{P} (row-stochastic transition matrix,
+#'   \code{double}), \code{states}, \code{transient}, \code{absorbing}
+#'   (\code{c("skeletal", "mummified")}), and \code{preservation}.
+#' @seealso \code{\link{morie_taphonomy_decay_absorption}},
+#'   \code{\link{morie_taphonomy_decay_simulate}},
+#'   \code{\link{morie_taphonomy_decay_delta}}
+#' @examples
+#' ch <- morie_taphonomy_decay_chain(preservation = 0.7)
+#' round(ch$P, 3)
+#' @export
+morie_taphonomy_decay_chain <- function(preservation = 0,
+                                        decay_rate = 0.5,
+                                        mummify_rate = 0.5,
+                                        states = c("fresh", "bloat", "active",
+                                                   "advanced")) {
+  if (!is.numeric(preservation) || preservation < 0 || preservation > 1) {
+    stop("`preservation` must be in [0, 1]", call. = FALSE)
+  }
+  if (decay_rate <= 0 || decay_rate > 1 || mummify_rate < 0 || mummify_rate > 1) {
+    stop("`decay_rate` in (0,1] and `mummify_rate` in [0,1] required",
+         call. = FALSE)
+  }
+  transient <- as.character(states)
+  if (length(transient) < 1L || anyDuplicated(transient)) {
+    stop("`states` must be >= 1 unique transient stage(s)", call. = FALSE)
+  }
+  absorbing <- c("skeletal", "mummified")
+  all_states <- c(transient, absorbing)
+  m <- length(all_states)
+  k <- length(transient)
+  P <- matrix(0, m, m, dimnames = list(all_states, all_states))
+
+  for (i in seq_len(k)) {
+    prog <- decay_rate * (1 - preservation)  # advance one decay stage
+    mum  <- mummify_rate * preservation      # divert to mummified
+    tot  <- prog + mum
+    if (tot > 1) {                            # renormalise if leaving prob > 1
+      prog <- prog / tot
+      mum  <- mum / tot
+      tot  <- 1
+    }
+    stay <- 1 - tot                           # geometric dwell in current stage
+    nxt  <- if (i < k) transient[i + 1L] else "skeletal"
+    P[i, nxt] <- P[i, nxt] + prog
+    P[i, "mummified"] <- P[i, "mummified"] + mum
+    P[i, transient[i]] <- P[i, transient[i]] + stay
+  }
+  P["skeletal", "skeletal"] <- 1
+  P["mummified", "mummified"] <- 1
+
+  list(P = P, states = all_states, transient = transient,
+       absorbing = absorbing, preservation = preservation)
+}
+
+#' Absorption analysis of a taphonomic decay chain
+#'
+#' Uses the fundamental matrix \eqn{N = (I - Q)^{-1}} of the absorbing chain to
+#' compute, for a body entering at \code{start}, the probability of each
+#' terminal fate (\code{"skeletal"} vs \code{"mummified"}) and the expected
+#' number of steps to absorption (Grinstead & Snell, Ch. 11).
+#'
+#' @param chain A chain from \code{\link{morie_taphonomy_decay_chain}}.
+#' @param start Transient stage the body enters at (default the first).
+#' @return A named \code{list}: \code{absorption} (named probabilities over the
+#'   absorbing states, summing to 1, \code{double}), \code{expected_steps}
+#'   (\code{double}), \code{fundamental} (matrix \code{N}), and \code{B} (full
+#'   transient-by-absorbing probability matrix).
+#' @references Grinstead CM, Snell JL (1997). \emph{Introduction to
+#'   Probability} (2nd ed.), Ch. 11 (Absorbing Markov Chains). AMS.
+#' @examples
+#' morie_taphonomy_decay_absorption(morie_taphonomy_decay_chain(0.7))$absorption
+#' @export
+morie_taphonomy_decay_absorption <- function(chain,
+                                             start = chain$transient[1]) {
+  tr <- chain$transient
+  ab <- chain$absorbing
+  if (!start %in% tr) {
+    stop(sprintf("`start` must be a transient state (%s)",
+                 paste(tr, collapse = ", ")), call. = FALSE)
+  }
+  Q <- chain$P[tr, tr, drop = FALSE]
+  R <- chain$P[tr, ab, drop = FALSE]
+  N <- solve(diag(length(tr)) - Q)      # fundamental matrix
+  B <- N %*% R                           # absorption probabilities
+  list(
+    absorption     = B[start, ],
+    expected_steps = as.numeric(rowSums(N)[start]),
+    fundamental    = N,
+    B              = B
+  )
+}
+
+#' Simulate one decay path through a taphonomic Markov chain
+#'
+#' Draws a single realised trajectory from death through the transient stages
+#' until an absorbing fate is reached (or \code{n_steps} elapses).
+#'
+#' @param chain A chain from \code{\link{morie_taphonomy_decay_chain}}.
+#' @param start Starting transient stage (default the first).
+#' @param n_steps Maximum steps to simulate (default 100).
+#' @param seed RNG seed (default 42) for reproducibility.
+#' @return A character vector: the sequence of visited states, ending at an
+#'   absorbing state if reached.
+#' @examples
+#' morie_taphonomy_decay_simulate(morie_taphonomy_decay_chain(0.7), seed = 1)
+#' @export
+morie_taphonomy_decay_simulate <- function(chain, start = chain$transient[1],
+                                           n_steps = 100L, seed = 42L) {
+  if (!start %in% chain$transient) {
+    stop("`start` must be a transient state", call. = FALSE)
+  }
+  set.seed(seed)
+  s <- start
+  path <- character(n_steps + 1L)
+  path[1] <- s
+  used <- 1L
+  for (i in seq_len(n_steps)) {
+    s <- sample(chain$states, 1L, prob = chain$P[s, ])
+    path[i + 1L] <- s
+    used <- i + 1L
+    if (s %in% chain$absorbing) break
+  }
+  path[seq_len(used)]
+}
+
+#' Natural-vs-treated fate delta for a taphonomic decay chain
+#'
+#' The Markov-chain analogue of the preservation "delta": the change in the
+#' probability of ending \code{"mummified"} when a preservation factor (e.g.
+#' quicklime) is applied, relative to the natural \code{preservation = 0}
+#' baseline. A large positive delta means the burial practice -- not chance --
+#' drives the preserved outcome.
+#'
+#' @param preservation Preservation factor in \code{(0, 1]} for the treated
+#'   chain.
+#' @param start Starting transient stage (default the first).
+#' @param ... Passed to \code{\link{morie_taphonomy_decay_chain}}
+#'   (\code{decay_rate}, \code{mummify_rate}, \code{states}).
+#' @return A named \code{list} (all \code{double}): \code{p_mummified_natural},
+#'   \code{p_mummified_treated}, \code{delta}, and a plain-language
+#'   \code{interpretation}.
+#' @examples
+#' morie_taphonomy_decay_delta(0.7)$delta
+#' @export
+morie_taphonomy_decay_delta <- function(preservation, start = NULL, ...) {
+  if (!is.numeric(preservation) || preservation <= 0 || preservation > 1) {
+    stop("`preservation` must be in (0, 1] for a contrast", call. = FALSE)
+  }
+  nat_chain <- morie_taphonomy_decay_chain(preservation = 0, ...)
+  trt_chain <- morie_taphonomy_decay_chain(preservation = preservation, ...)
+  if (is.null(start)) start <- nat_chain$transient[1]
+  p_nat <- morie_taphonomy_decay_absorption(nat_chain, start)$absorption[["mummified"]]
+  p_trt <- morie_taphonomy_decay_absorption(trt_chain, start)$absorption[["mummified"]]
+  delta <- p_trt - p_nat
+  list(
+    p_mummified_natural = p_nat,
+    p_mummified_treated = p_trt,
+    delta = delta,
+    interpretation = sprintf(
+      paste0("P(mummified) rises from %.3f (natural, no preservation) to %.3f ",
+             "under preservation=%.2f -- a fate delta of %+.3f. The preserved ",
+             "outcome is driven by the burial practice, not baseline decay ",
+             "dynamics."),
+      p_nat, p_trt, preservation, delta)
+  )
+}
