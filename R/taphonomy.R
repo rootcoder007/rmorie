@@ -676,10 +676,12 @@ morie_taphonomy_preservation_lr <- function(evidence, natural, alternative) {
 #'   \code{list(lime_treatment = list(mean = 0.3, sd = 0.1))}.
 #' @param prior_sd_default Diffuse prior sd for unlisted coefficients
 #'   (default 10).
-#' @param backend \code{"conjugate"} (default; closed-form posterior, no deps)
-#'   or \code{"cmdstanr"} (full-Bayes HMC/NUTS via \pkg{cmdstanr} + a built
-#'   CmdStan -- the same model, sampled). The Stan path additionally returns the
-#'   \code{stanfit} object.
+#' @param backend One of \code{"conjugate"} (default; closed-form posterior, no
+#'   deps), \code{"cmdstanr"} (full-Bayes HMC/NUTS via \pkg{cmdstanr} + a built
+#'   CmdStan), \code{"brms"} (\pkg{brms} formula sampler), or \code{"rstanarm"}
+#'   (\pkg{rstanarm} \code{stan_glmer}) -- the same informative-prior
+#'   hierarchical model, sampled either way. Any HMC backend additionally returns
+#'   the fitted \code{stanfit} object.
 #' @param chains,iter,seed HMC settings for \code{backend = "cmdstanr"}
 #'   (chains, warmup = sampling iterations per chain, RNG seed).
 #' @return A named \code{list} (all estimates \code{double}): \code{coefficients}
@@ -703,7 +705,8 @@ morie_taphonomy_bhm <- function(data,
                                 group = NULL,
                                 priors = NULL,
                                 prior_sd_default = 10,
-                                backend = c("conjugate", "cmdstanr"),
+                                backend = c("conjugate", "cmdstanr", "brms",
+                                            "rstanarm"),
                                 chains = 4L, iter = 1000L, seed = 42L) {
   backend <- match.arg(backend)
   if (!is.data.frame(data)) stop("`data` must be a data.frame", call. = FALSE)
@@ -750,6 +753,10 @@ morie_taphonomy_bhm <- function(data,
   if (backend == "cmdstanr") {
     return(.morie_bhm_cmdstanr(X, y, terms, m0, s0, gfac, group, chains, iter,
                                seed))
+  }
+  if (backend %in% c("brms", "rstanarm")) {
+    return(.morie_bhm_formula_stan(backend, frame, outcome, covariates, group,
+                                   m0, s0, terms, chains, iter, seed))
   }
 
   # Empirical-Bayes noise variance from the OLS fit.
@@ -903,6 +910,99 @@ generated quantities {
       lime_row$ci_upper, lime_row$prob_positive,
       if (J == 0L) "" else sprintf(" %d partially-pooled group intercepts.", J))
   )
+}
+
+# Coefficient summary from a draws matrix (rows = draws, cols = terms).
+.morie_bhm_coefs_from_draws <- function(bmat, terms) {
+  q <- function(x, prob) stats::quantile(x, prob, names = FALSE)
+  data.frame(
+    term = terms,
+    post_mean = apply(bmat, 2, mean),
+    post_sd = apply(bmat, 2, stats::sd),
+    ci_lower = apply(bmat, 2, q, 0.025),
+    ci_upper = apply(bmat, 2, q, 0.975),
+    prob_positive = apply(bmat, 2, function(x) mean(x > 0)),
+    row.names = NULL, stringsAsFactors = FALSE)
+}
+
+# HMC via the formula-based samplers (brms / rstanarm). Same model, same
+# informative Normal priors, same return structure as the other backends.
+.morie_bhm_formula_stan <- function(backend, frame, outcome, covariates, group,
+                                    m0, s0, terms, chains, iter, seed) {
+  if (!requireNamespace(backend, quietly = TRUE)) {
+    stop(sprintf("backend = '%s' needs the '%s' package (install.packages('%s')).",
+                 backend, backend, backend), call. = FALSE)
+  }
+  rhs <- paste(covariates, collapse = " + ")
+  form <- stats::as.formula(
+    if (is.null(group)) paste(outcome, "~", rhs)
+    else paste(outcome, "~", rhs, "+ (1 |", group, ")"))
+  total_iter <- 2L * iter  # warmup = iter, sampling = iter
+
+  if (backend == "rstanarm") {
+    fitfun <- if (is.null(group)) rstanarm::stan_glm else rstanarm::stan_glmer
+    fit <- fitfun(
+      form, data = frame, family = stats::gaussian(),
+      prior = rstanarm::normal(location = m0[-1], scale = s0[-1], autoscale = FALSE),
+      prior_intercept = rstanarm::normal(location = m0[1], scale = s0[1],
+                                         autoscale = FALSE),
+      chains = chains, iter = total_iter, seed = seed, refresh = 0)
+    draws <- as.matrix(fit)
+    bmat <- draws[, terms, drop = FALSE]
+    sigma <- mean(draws[, "sigma"])
+    ge <- NULL
+    if (!is.null(group)) {
+      re <- rstanarm::ranef(fit)[[group]]
+      lv <- rownames(re)
+      ge <- data.frame(group = lv, pooled_intercept = re[["(Intercept)"]],
+                       n = as.integer(table(frame[[group]])[lv]),
+                       row.names = NULL, stringsAsFactors = FALSE)
+    }
+    label <- "rstanarm (NUTS)"
+  } else {                                  # brms
+    pr <- brms::set_prior(sprintf("normal(%g, %g)", m0[1], s0[1]),
+                          class = "Intercept")
+    for (i in seq_along(covariates)) {
+      pr <- pr + brms::set_prior(sprintf("normal(%g, %g)", m0[i + 1], s0[i + 1]),
+                                 class = "b", coef = covariates[i])
+    }
+    br_backend <- if (requireNamespace("cmdstanr", quietly = TRUE)) "cmdstanr"
+                  else "rstan"
+    fit <- brms::brm(form, data = frame, family = stats::gaussian(), prior = pr,
+                     chains = chains, iter = total_iter, warmup = iter,
+                     seed = seed, backend = br_backend, refresh = 0, silent = 2)
+    dm <- posterior::as_draws_matrix(fit)
+    bmat <- as.matrix(dm[, c("b_Intercept", paste0("b_", covariates)),
+                         drop = FALSE])
+    colnames(bmat) <- terms
+    sigma <- mean(as.numeric(dm[, "sigma"]))
+    ge <- NULL
+    if (!is.null(group)) {
+      re <- brms::ranef(fit)[[group]][, "Estimate", "Intercept"]
+      ge <- data.frame(group = names(re), pooled_intercept = as.numeric(re),
+                       n = as.integer(table(frame[[group]])[names(re)]),
+                       row.names = NULL, stringsAsFactors = FALSE)
+    }
+    label <- "brms (NUTS)"
+  }
+
+  coefs <- .morie_bhm_coefs_from_draws(bmat, terms)
+  fitted <- tryCatch(as.numeric(stats::fitted(fit)[, "Estimate"]),
+                     error = function(e) as.numeric(stats::fitted(fit)))
+  lime_row <- coefs[coefs$term %in% c("lime_treatment", terms[2]), ][1, ]
+  list(
+    coefficients = coefs, sigma = sigma, group_effects = ge, fitted = fitted,
+    n = nrow(frame), backend = label, stanfit = fit,
+    interpretation = sprintf(
+      paste0("Bayesian preservation model (n=%d, HMC/NUTS via %s, %d chains x ",
+             "%d draws). Posterior effect of '%s' = %.3f [%.3f, %.3f], ",
+             "P(effect>0)=%.3f. Full-Bayes posterior (no conjugacy ",
+             "approximation).%s"),
+      nrow(frame), sub(" .*", "", label), chains, iter, lime_row$term,
+      lime_row$post_mean, lime_row$ci_lower, lime_row$ci_upper,
+      lime_row$prob_positive,
+      if (is.null(ge)) "" else sprintf(" %d partially-pooled group intercepts.",
+                                       nrow(ge))))
 }
 
 
