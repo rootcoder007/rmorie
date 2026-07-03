@@ -638,3 +638,160 @@ morie_taphonomy_preservation_lr <- function(evidence, natural, alternative) {
   out$loglik_h2 <- ll2
   out
 }
+
+
+# ===========================================================================
+# Bayesian preservation model (conjugate + empirical-Bayes hierarchy)
+# ===========================================================================
+
+#' Bayesian hierarchical preservation model
+#'
+#' A conjugate Gaussian-linear Bayesian model for a continuous preservation
+#' outcome, with \strong{informative Normal priors} on the coefficients -- so
+#' domain knowledge (e.g. quicklime's desiccant effect) enters as a prior and
+#' the data updates it to a posterior. The coefficient posterior is closed-form
+#' (no MCMC): with prior \eqn{\beta \sim N(m_0, \mathrm{diag}(s_0^2))} and noise
+#' variance \eqn{\sigma^2} estimated from the OLS residuals (empirical Bayes),
+#' \deqn{\Sigma = (X^\top X / \sigma^2 + \Lambda_0)^{-1}, \quad
+#'       \mu = \Sigma (X^\top y / \sigma^2 + \Lambda_0 m_0).}
+#'
+#' When \code{group} is supplied, a second level is added: group intercepts are
+#' partially pooled toward the grand mean by empirical-Bayes (normal-normal)
+#' shrinkage \eqn{\lambda_j = \tau^2 / (\tau^2 + \sigma^2 / n_j)}, giving a
+#' genuine two-level hierarchical model.
+#'
+#' For full hierarchical inference by HMC/NUTS, fit \pkg{rstanarm}
+#' (\code{stan_glmer}) or \pkg{brms} instead; this function is the
+#' dependency-free conjugate core.
+#'
+#' @param data A non-empty \code{data.frame}.
+#' @param outcome Continuous outcome column (default \code{"preservation_score"}).
+#' @param covariates Character vector of predictors. Defaults to the schema
+#'   covariates + measurements present in \code{data}.
+#' @param group Optional column giving a grouping factor (e.g. burial context)
+#'   for partial-pooled random intercepts.
+#' @param priors Optional named list mapping a coefficient name to
+#'   \code{list(mean=, sd=)} -- its informative Normal prior. Unlisted
+#'   coefficients get a diffuse prior (\code{sd = prior_sd_default}). Use e.g.
+#'   \code{list(lime_treatment = list(mean = 0.3, sd = 0.1))}.
+#' @param prior_sd_default Diffuse prior sd for unlisted coefficients
+#'   (default 10).
+#' @return A named \code{list} (all estimates \code{double}): \code{coefficients}
+#'   (\code{data.frame}: term, post_mean, post_sd, ci_lower, ci_upper,
+#'   prob_positive), \code{sigma}, \code{group_effects} (NULL unless
+#'   \code{group}), \code{fitted} (posterior-predictive mean per row), \code{n},
+#'   and a plain-language \code{interpretation}.
+#' @references Gelman A, et al. (2013). \emph{Bayesian Data Analysis} (3rd ed.),
+#'   Ch. 5 (hierarchical models) & Ch. 14 (conjugate regression). CRC.
+#' @examples
+#' \donttest{
+#' df <- data.frame(preservation_score = rnorm(20),
+#'                  lime_treatment = rbinom(20, 1, 0.5))
+#' morie_taphonomy_bhm(df, covariates = "lime_treatment",
+#'   priors = list(lime_treatment = list(mean = 0.3, sd = 0.1)))$coefficients
+#' }
+#' @export
+morie_taphonomy_bhm <- function(data,
+                                outcome = "preservation_score",
+                                covariates = NULL,
+                                group = NULL,
+                                priors = NULL,
+                                prior_sd_default = 10) {
+  if (!is.data.frame(data)) stop("`data` must be a data.frame", call. = FALSE)
+  if (nrow(data) == 0L) stop("`data` is empty", call. = FALSE)
+  if (!outcome %in% names(data)) {
+    stop(sprintf("column '%s' not found", outcome), call. = FALSE)
+  }
+  if (is.null(covariates)) {
+    v <- .taphonomy_vars()
+    covariates <- intersect(names(c(v$covariates, v$measurements)), names(data))
+  }
+  covariates <- setdiff(covariates, c(outcome, group))
+  if (length(covariates) == 0L) stop("no covariates available", call. = FALSE)
+
+  frame <- stats::na.omit(data[, c(outcome, covariates, group), drop = FALSE])
+  y <- as.numeric(frame[[outcome]])
+  n <- length(y)
+  # numeric design matrix with intercept
+  Xc <- lapply(covariates, function(c) {
+    col <- frame[[c]]
+    if (is.numeric(col)) col else as.numeric(as.factor(col))
+  })
+  X <- cbind(1, do.call(cbind, Xc))
+  terms <- c("(Intercept)", covariates)
+  colnames(X) <- terms
+  p <- ncol(X)
+
+  # Prior mean m0 and precision Lambda0 = diag(1/s0^2).
+  m0 <- numeric(p)
+  s0 <- rep(prior_sd_default, p)
+  names(m0) <- names(s0) <- terms
+  for (nm in names(priors)) {
+    if (nm %in% terms) {
+      m0[nm] <- priors[[nm]]$mean
+      s0[nm] <- priors[[nm]]$sd
+    }
+  }
+  Lambda0 <- diag(1 / s0^2, p, p)
+
+  # Empirical-Bayes noise variance from the OLS fit.
+  ols <- stats::lm.fit(X, y)
+  dof <- max(1L, n - p)
+  sigma2 <- sum(ols$residuals^2) / dof
+  if (!is.finite(sigma2) || sigma2 <= 0) sigma2 <- stats::var(y)
+
+  # Closed-form Gaussian posterior.
+  Sigma <- solve(crossprod(X) / sigma2 + Lambda0)
+  mu <- as.numeric(Sigma %*% (crossprod(X, y) / sigma2 + Lambda0 %*% m0))
+  post_sd <- sqrt(diag(Sigma))
+  z <- 1.959964
+  coefs <- data.frame(
+    term         = terms,
+    post_mean    = mu,
+    post_sd      = post_sd,
+    ci_lower     = mu - z * post_sd,
+    ci_upper     = mu + z * post_sd,
+    prob_positive = stats::pnorm(mu / post_sd),
+    row.names    = NULL,
+    stringsAsFactors = FALSE
+  )
+  fitted <- as.numeric(X %*% mu)
+
+  # Optional second level: empirical-Bayes partial-pooled random intercepts.
+  group_effects <- NULL
+  if (!is.null(group)) {
+    g <- as.factor(frame[[group]])
+    resid <- y - fitted
+    gm <- tapply(resid, g, mean)
+    nj <- tapply(resid, g, length)
+    within <- sigma2
+    tau2 <- max(0, stats::var(gm) - mean(within / nj))  # method-of-moments
+    lambda <- tau2 / (tau2 + within / nj)                # shrinkage per group
+    group_effects <- data.frame(
+      group    = names(gm),
+      raw_mean = as.numeric(gm),
+      shrinkage = as.numeric(lambda),
+      pooled_intercept = as.numeric(lambda * gm),  # shrunk toward 0 (grand mean)
+      n = as.integer(nj),
+      row.names = NULL, stringsAsFactors = FALSE
+    )
+  }
+
+  lime_row <- coefs[coefs$term %in% c("lime_treatment", covariates[1]), ][1, ]
+  list(
+    coefficients   = coefs,
+    sigma          = sqrt(sigma2),
+    group_effects  = group_effects,
+    fitted         = fitted,
+    n              = n,
+    interpretation = sprintf(
+      paste0("Bayesian preservation model (n=%d, conjugate Gaussian, EB noise ",
+             "sd=%.3f). Posterior effect of '%s' = %.3f [%.3f, %.3f], ",
+             "P(effect>0)=%.3f. Priors update to posteriors: an informative ",
+             "lime prior encodes the desiccant belief, the data revises it.%s"),
+      n, sqrt(sigma2), lime_row$term, lime_row$post_mean,
+      lime_row$ci_lower, lime_row$ci_upper, lime_row$prob_positive,
+      if (is.null(group)) "" else
+        sprintf(" %d group intercepts partially pooled.", nrow(group_effects)))
+  )
+}
