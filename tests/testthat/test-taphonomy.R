@@ -139,3 +139,38 @@ test_that("BHM partial-pools group intercepts with shrinkage in [0,1]", {
   expect_true(all(b$group_effects$shrinkage >= 0 & b$group_effects$shrinkage <= 1))
   expect_equal(nrow(b$group_effects), 5L)
 })
+
+test_that("simulated pXRF is a valid closed composition, lime skews to calcium", {
+  ctl <- morie_taphonomy_simulate_pxrf(200, "control", seed = 1)
+  trt <- morie_taphonomy_simulate_pxrf(200, "treatment", seed = 1)
+  elts <- attr(ctl, "elements")
+  expect_true(all(abs(rowSums(as.matrix(ctl[, elts])) - 1) < 1e-9))  # closed
+  expect_equal(unique(trt$lime_treatment), 1L)
+  # treatment is calcium-skewed relative to control
+  expect_gt(mean(trt$Ca), mean(ctl$Ca))
+})
+
+test_that("CLR sums to zero per row; ILR is full-rank (D-1) and finite", {
+  comp <- morie_taphonomy_simulate_pxrf(10, "treatment", seed = 2)[, 1:6]
+  clr <- morie_taphonomy_clr(comp)
+  expect_true(all(abs(rowSums(clr)) < 1e-9))       # CLR closure
+  ilr <- morie_taphonomy_ilr(comp)
+  expect_equal(ncol(ilr), 5L)                      # D-1 coordinates
+  expect_true(all(is.finite(ilr)))
+})
+
+test_that("end-to-end: simulate -> ilr -> bhm recovers the lime signal", {
+  set.seed(3)
+  ctl <- morie_taphonomy_simulate_pxrf(120, "control", seed = 10)
+  trt <- morie_taphonomy_simulate_pxrf(120, "treatment", seed = 11)
+  raw <- rbind(ctl, trt)
+  ilr <- morie_taphonomy_ilr(raw[, 1:6])
+  df <- data.frame(
+    preservation_score = 0.6 * raw$lime_treatment + stats::rnorm(nrow(raw), 0, 0.3),
+    lime_treatment = raw$lime_treatment,
+    ilr
+  )
+  fit <- morie_taphonomy_bhm(df, covariates = "lime_treatment")
+  eff <- fit$coefficients$post_mean[fit$coefficients$term == "lime_treatment"]
+  expect_gt(eff, 0.3)          # the lime effect is recovered through the pipeline
+})
