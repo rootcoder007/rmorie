@@ -102,3 +102,40 @@ test_that("preservation LR favours the model the evidence resembles", {
   expect_gt(out$lr, 1)
   expect_equal(out$log_lr, out$loglik_h1 - out$loglik_h2, tolerance = 1e-10)
 })
+
+test_that("BHM recovers a known effect and the informative prior pulls it", {
+  set.seed(1)
+  n <- 200L
+  lime <- stats::rbinom(n, 1, 0.5)
+  df <- data.frame(preservation_score = 0.5 * lime + stats::rnorm(n, 0, 0.3),
+                   lime_treatment = lime)
+  # diffuse prior -> posterior near the true 0.5
+  b_diffuse <- morie_taphonomy_bhm(df, covariates = "lime_treatment")
+  eff <- b_diffuse$coefficients
+  lime_mean <- eff$post_mean[eff$term == "lime_treatment"]
+  expect_gt(lime_mean, 0.3)
+  expect_lt(lime_mean, 0.7)
+  expect_true(all(eff$post_sd > 0))              # posterior sds are double > 0
+  expect_true(all(eff$prob_positive >= 0 & eff$prob_positive <= 1))
+
+  # a tight prior centred at 0 shrinks the estimate toward 0
+  b_tight <- morie_taphonomy_bhm(df, covariates = "lime_treatment",
+    priors = list(lime_treatment = list(mean = 0, sd = 0.01)))
+  lime_tight <- b_tight$coefficients$post_mean[b_tight$coefficients$term == "lime_treatment"]
+  expect_lt(abs(lime_tight), abs(lime_mean))     # prior pulls toward 0
+})
+
+test_that("BHM partial-pools group intercepts with shrinkage in [0,1]", {
+  set.seed(2)
+  n <- 150L
+  grp <- sample(letters[1:5], n, replace = TRUE)
+  df <- data.frame(
+    preservation_score = stats::rnorm(n),
+    lime_treatment = stats::rbinom(n, 1, 0.5),
+    context = grp
+  )
+  b <- morie_taphonomy_bhm(df, covariates = "lime_treatment", group = "context")
+  expect_false(is.null(b$group_effects))
+  expect_true(all(b$group_effects$shrinkage >= 0 & b$group_effects$shrinkage <= 1))
+  expect_equal(nrow(b$group_effects), 5L)
+})
