@@ -504,3 +504,137 @@ morie_taphonomy_decay_delta <- function(preservation, start = NULL, ...) {
       p_nat, p_trt, preservation, delta)
   )
 }
+
+
+# ===========================================================================
+# Forensic likelihood-ratio framework
+# ===========================================================================
+
+# ENFSI (2015) verbal-equivalent scale for a likelihood ratio supporting H1.
+.taphonomy_lr_verbal <- function(lr) {
+  if (!is.finite(lr)) return("extremely strong support (LR effectively infinite)")
+  x <- if (lr >= 1) lr else 1 / lr
+  side <- if (lr >= 1) "H1" else "H2"
+  band <- if (x <= 1) {
+    "no support either way"
+  } else if (x <= 10) {
+    "weak support"
+  } else if (x <= 100) {
+    "moderate support"
+  } else if (x <= 1000) {
+    "moderately strong support"
+  } else if (x <= 10000) {
+    "strong support"
+  } else if (x <= 1e6) {
+    "very strong support"
+  } else {
+    "extremely strong support"
+  }
+  if (band == "no support either way") band else paste(band, "for", side)
+}
+
+#' Gaussian log-likelihood of forensic evidence under a model
+#'
+#' Sum of independent normal log-densities for a vector of measured evidence
+#' (e.g. pXRF residual calcium, CT tissue density) under a model with expected
+#' \code{mean} and \code{sd}. Building block for
+#' \code{\link{morie_taphonomy_likelihood_ratio}}: evaluate the evidence under
+#' each competing hypothesis' model, then take the ratio.
+#'
+#' @param evidence Numeric vector of measured values.
+#' @param mean Numeric model mean(s), recycled to \code{length(evidence)}.
+#' @param sd Numeric model standard deviation(s) (> 0), recycled.
+#' @return A single \code{double}: the total log-likelihood.
+#' @examples
+#' morie_taphonomy_evidence_loglik(c(1200, 1310), mean = 1250, sd = 80)
+#' @export
+morie_taphonomy_evidence_loglik <- function(evidence, mean, sd) {
+  evidence <- as.numeric(evidence)
+  if (length(evidence) == 0L) stop("`evidence` is empty", call. = FALSE)
+  if (any(!is.finite(evidence))) stop("`evidence` has non-finite values",
+                                      call. = FALSE)
+  if (any(sd <= 0)) stop("`sd` must be > 0", call. = FALSE)
+  sum(stats::dnorm(evidence, mean = mean, sd = sd, log = TRUE))
+}
+
+#' Forensic likelihood ratio for two competing hypotheses
+#'
+#' Given the log-likelihood of the evidence under a natural/target hypothesis
+#' (\code{loglik_h1}) and an alternative (\code{loglik_h2}), returns the
+#' likelihood ratio \eqn{LR = P(E \mid H_1) / P(E \mid H_2)} with its base-10
+#' logarithm and the ENFSI (2015) verbal equivalent. Computed in log space for
+#' numerical stability. This is the standard way to state forensic evidence:
+#' the LR reports how much the evidence favours \eqn{H_1} over \eqn{H_2}; it is
+#' \emph{not} the posterior odds and does not "prove" either hypothesis.
+#'
+#' @param loglik_h1,loglik_h2 Log-likelihoods of the evidence under \eqn{H_1}
+#'   and \eqn{H_2} (e.g. from \code{\link{morie_taphonomy_evidence_loglik}}).
+#' @return A named \code{list} (\code{double} where numeric): \code{lr},
+#'   \code{log10_lr}, \code{log_lr}, \code{verbal}, and \code{interpretation}.
+#' @references ENFSI (2015). \emph{Guideline for Evaluative Reporting in
+#'   Forensic Science}. European Network of Forensic Science Institutes.
+#'   Aitken CGG, Taroni F (2004). \emph{Statistics and the Evaluation of
+#'   Evidence for Forensic Scientists} (2nd ed.). Wiley.
+#' @examples
+#' morie_taphonomy_likelihood_ratio(loglik_h1 = -3.1, loglik_h2 = -12.7)$verbal
+#' @export
+morie_taphonomy_likelihood_ratio <- function(loglik_h1, loglik_h2) {
+  loglik_h1 <- as.numeric(loglik_h1)
+  loglik_h2 <- as.numeric(loglik_h2)
+  log_lr <- loglik_h1 - loglik_h2
+  lr <- exp(log_lr)
+  log10_lr <- log_lr / log(10)
+  verbal <- .taphonomy_lr_verbal(lr)
+  list(
+    lr = lr,
+    log10_lr = log10_lr,
+    log_lr = log_lr,
+    verbal = verbal,
+    interpretation = sprintf(
+      paste0("LR = %.4g (log10 = %.3f): the evidence is %s. The observed state ",
+             "is %s more probable under H1 (natural preservation model) than ",
+             "under H2. This quantifies support; it is not proof and not a ",
+             "posterior probability."),
+      lr, log10_lr, verbal,
+      if (is.finite(lr) && lr >= 1) sprintf("%.4g times", lr)
+      else if (is.finite(lr)) sprintf("%.4g times less", 1 / lr)
+      else "infinitely")
+  )
+}
+
+#' Preservation likelihood ratio from measured evidence
+#'
+#' Convenience wrapper: evaluate measured non-invasive evidence under a natural
+#' preservation model (\eqn{H_1}) and an alternative model (\eqn{H_2}) and
+#' return the forensic likelihood ratio. Each model is a list with numeric
+#' \code{mean} and \code{sd} (recycled over the evidence vector).
+#'
+#' @param evidence Numeric vector of measured values (e.g. pXRF calcium).
+#' @param natural List \code{list(mean=, sd=)} for the natural-preservation
+#'   hypothesis \eqn{H_1}.
+#' @param alternative List \code{list(mean=, sd=)} for the alternative
+#'   hypothesis \eqn{H_2}.
+#' @return The list from \code{\link{morie_taphonomy_likelihood_ratio}}, with
+#'   \code{loglik_h1} and \code{loglik_h2} attached.
+#' @examples
+#' morie_taphonomy_preservation_lr(
+#'   evidence = c(1200, 1310, 1180),
+#'   natural = list(mean = 1250, sd = 90),      # lime-processed signature
+#'   alternative = list(mean = 300, sd = 120)   # untreated/decayed signature
+#' )$verbal
+#' @export
+morie_taphonomy_preservation_lr <- function(evidence, natural, alternative) {
+  for (m in list(natural, alternative)) {
+    if (!all(c("mean", "sd") %in% names(m))) {
+      stop("`natural` and `alternative` must each be list(mean=, sd=)",
+           call. = FALSE)
+    }
+  }
+  ll1 <- morie_taphonomy_evidence_loglik(evidence, natural$mean, natural$sd)
+  ll2 <- morie_taphonomy_evidence_loglik(evidence, alternative$mean,
+                                         alternative$sd)
+  out <- morie_taphonomy_likelihood_ratio(ll1, ll2)
+  out$loglik_h1 <- ll1
+  out$loglik_h2 <- ll2
+  out
+}

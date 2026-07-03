@@ -74,3 +74,31 @@ test_that("decay delta is positive and simulate reaches an absorbing state", {
                                          n_steps = 500L, seed = 1L)
   expect_true(utils::tail(path, 1) %in% c("skeletal", "mummified"))
 })
+
+test_that("evidence log-likelihood matches dnorm and rejects bad sd", {
+  ll <- morie_taphonomy_evidence_loglik(c(1200, 1310), mean = 1250, sd = 80)
+  expect_equal(ll, sum(dnorm(c(1200, 1310), 1250, 80, log = TRUE)))
+  expect_error(morie_taphonomy_evidence_loglik(1, 0, sd = 0), "sd")
+})
+
+test_that("likelihood ratio is stable in log space with correct verbal band", {
+  r <- morie_taphonomy_likelihood_ratio(loglik_h1 = -3.1, loglik_h2 = -12.7)
+  expect_equal(r$log_lr, -3.1 - (-12.7))
+  expect_equal(r$lr, exp(-3.1 + 12.7))
+  expect_true(grepl("for H1", r$verbal))         # H1 strongly favoured
+  # symmetric: swapping hypotheses inverts the LR
+  r2 <- morie_taphonomy_likelihood_ratio(-12.7, -3.1)
+  expect_equal(r2$lr, 1 / r$lr, tolerance = 1e-10)
+  expect_true(grepl("for H2", r2$verbal))
+})
+
+test_that("preservation LR favours the model the evidence resembles", {
+  # evidence near the 'natural' (lime) mean -> LR supports H1
+  out <- morie_taphonomy_preservation_lr(
+    evidence = c(1200, 1310, 1180),
+    natural = list(mean = 1250, sd = 90),
+    alternative = list(mean = 300, sd = 120)
+  )
+  expect_gt(out$lr, 1)
+  expect_equal(out$log_lr, out$loglik_h1 - out$loglik_h2, tolerance = 1e-10)
+})
