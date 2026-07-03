@@ -795,3 +795,147 @@ morie_taphonomy_bhm <- function(data,
         sprintf(" %d group intercepts partially pooled.", nrow(group_effects)))
   )
 }
+
+
+# ===========================================================================
+# Synthetic pXRF (compositional) generation + log-ratio transforms
+# ===========================================================================
+
+#' Simulate synthetic pXRF compositional data (Dirichlet)
+#'
+#' \strong{Synthetic data for testing/calibration ONLY -- never a substitute for
+#' real comparanda, and never write the output to \code{inst/extdata}.} Portable
+#' X-ray fluorescence yields elemental concentrations that are strictly
+#' non-negative and closed (a composition on the simplex), so Gaussian noise is
+#' the wrong model; this samples from a \strong{Dirichlet} distribution instead.
+#' A control profile (natural soil/bone matrix) and a treatment profile
+#' (quicklime -- heavily skewed to calcium) let you exercise the causal /
+#' compositional pipeline before real scans exist.
+#'
+#' Dirichlet variates are drawn via normalised Gamma (\eqn{X_i \sim
+#' \mathrm{Gamma}(\alpha_i, 1)}, \eqn{Y = X / \sum X}) so no extra package is
+#' needed.
+#'
+#' @param n Number of samples (rows).
+#' @param condition \code{"control"} (natural) or \code{"treatment"} (lime).
+#' @param elements Character vector of element names (default Ca, P, Fe, Sr,
+#'   Pb, Zn).
+#' @param alpha Optional Dirichlet concentration vector (one per element).
+#'   Defaults encode the control vs lime profiles; required if you pass custom
+#'   \code{elements}.
+#' @param seed Optional RNG seed.
+#' @param as_ppm If \code{TRUE}, scale proportions to parts-per-million summing
+#'   to \code{total_ppm}; else return proportions summing to 1.
+#' @param total_ppm Total for the ppm scaling (default 1e6).
+#' @return A \code{data.frame}: one column per element, plus \code{condition}
+#'   and \code{lime_treatment} (1 = treatment). Attributes \code{elements},
+#'   \code{alpha}, and \code{synthetic = TRUE} are attached.
+#' @seealso \code{\link{morie_taphonomy_clr}}, \code{\link{morie_taphonomy_ilr}}
+#' @examples
+#' head(morie_taphonomy_simulate_pxrf(5, "treatment", seed = 1))
+#' @export
+morie_taphonomy_simulate_pxrf <- function(n,
+                                          condition = c("control", "treatment"),
+                                          elements = c("Ca", "P", "Fe", "Sr",
+                                                       "Pb", "Zn"),
+                                          alpha = NULL,
+                                          seed = NULL,
+                                          as_ppm = FALSE,
+                                          total_ppm = 1e6) {
+  condition <- match.arg(condition)
+  if (!is.null(seed)) set.seed(seed)
+  if (is.null(alpha)) {
+    alpha <- if (condition == "control") {
+      c(30, 15, 5, 1, 0.5, 0.5)          # natural soil/bone matrix
+    } else {
+      c(85, 5, 2, 0.5, 0.2, 0.2)         # quicklime: heavy calcium spike
+    }
+    if (length(elements) != length(alpha)) {
+      stop("supply `alpha` when using non-default `elements`", call. = FALSE)
+    }
+  }
+  if (length(alpha) != length(elements)) {
+    stop("length(alpha) must equal length(elements)", call. = FALSE)
+  }
+  if (any(alpha <= 0)) stop("`alpha` must be > 0", call. = FALSE)
+  D <- length(elements)
+  g <- matrix(stats::rgamma(n * D, shape = rep(alpha, each = n), rate = 1),
+              nrow = n, ncol = D)
+  comp <- g / rowSums(g)
+  if (as_ppm) comp <- comp * total_ppm
+  out <- as.data.frame(comp)
+  names(out) <- elements
+  out$condition <- condition
+  out$lime_treatment <- as.integer(condition == "treatment")
+  attr(out, "elements") <- elements
+  attr(out, "alpha") <- alpha
+  attr(out, "synthetic") <- TRUE
+  out
+}
+
+# Close a composition matrix to the simplex, guarding zeros with a pseudocount.
+.taphonomy_close <- function(x, pseudocount) {
+  X <- as.matrix(x)
+  if (!is.numeric(X)) stop("`x` must be a numeric composition", call. = FALSE)
+  if (any(X < 0)) stop("compositions must be non-negative", call. = FALSE)
+  X <- X + pseudocount
+  X / rowSums(X)
+}
+
+#' Centred log-ratio (CLR) transform of compositional data
+#'
+#' Maps closed compositions off the simplex into real space via
+#' \eqn{\mathrm{clr}(x) = \log x - \overline{\log x}} (row-wise). Removes the
+#' closure so downstream Gaussian/causal models are not fed singular covariance.
+#' CLR is rank-deficient (columns sum to zero); for regression/DML inputs prefer
+#' \code{\link{morie_taphonomy_ilr}}.
+#'
+#' @param x Numeric matrix/data.frame of compositions (rows = samples).
+#' @param pseudocount Small value added before the log to guard zeros
+#'   (default 1e-6).
+#' @return A numeric matrix (same shape) of CLR coordinates.
+#' @references Aitchison J (1986). \emph{The Statistical Analysis of
+#'   Compositional Data}. Chapman & Hall.
+#' @examples
+#' morie_taphonomy_clr(morie_taphonomy_simulate_pxrf(3, seed = 1)[, 1:6])
+#' @export
+morie_taphonomy_clr <- function(x, pseudocount = 1e-6) {
+  X <- .taphonomy_close(x, pseudocount)
+  L <- log(X)
+  clr <- L - rowMeans(L)
+  colnames(clr) <- colnames(X)
+  clr
+}
+
+#' Isometric log-ratio (ILR) transform of compositional data
+#'
+#' Maps a \eqn{D}-part composition to \eqn{D-1} unconstrained, orthonormal
+#' coordinates -- unlike CLR these are \strong{full rank}, so they can go
+#' straight into \code{\link{morie_taphonomy_preservation_delta}} /
+#' \code{\link{morie_taphonomy_bhm}} without singular design matrices. Uses the
+#' Egozcue et al. (2003) pivot-coordinate basis
+#' \deqn{\mathrm{ilr}_i(x) = \sqrt{\tfrac{i}{i+1}}\,
+#'   \log\frac{(\prod_{k\le i} x_k)^{1/i}}{x_{i+1}},}
+#' computed in closed form so R and Python return identical values.
+#'
+#' @param x Numeric matrix/data.frame of compositions (>= 2 parts).
+#' @param pseudocount Zero-guarding pseudocount (default 1e-6).
+#' @return A numeric matrix with \code{ncol(x) - 1} columns (\code{ilr1}...).
+#' @references Egozcue JJ, et al. (2003). Isometric logratio transformations
+#'   for compositional data analysis. \emph{Mathematical Geology} 35(3),
+#'   279--300. \doi{10.1023/A:1023818214614}
+#' @examples
+#' morie_taphonomy_ilr(morie_taphonomy_simulate_pxrf(3, seed = 1)[, 1:6])
+#' @export
+morie_taphonomy_ilr <- function(x, pseudocount = 1e-6) {
+  X <- .taphonomy_close(x, pseudocount)
+  D <- ncol(X)
+  if (D < 2L) stop("need >= 2 parts for ILR", call. = FALSE)
+  L <- log(X)
+  ilr <- vapply(seq_len(D - 1L), function(i) {
+    sqrt(i / (i + 1)) * (rowMeans(L[, seq_len(i), drop = FALSE]) - L[, i + 1L])
+  }, numeric(nrow(X)))
+  if (is.null(dim(ilr))) ilr <- matrix(ilr, nrow = nrow(X))
+  colnames(ilr) <- paste0("ilr", seq_len(D - 1L))
+  ilr
+}
