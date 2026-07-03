@@ -196,3 +196,29 @@ test_that("PMI schema is a typed zero-row STO-2022 template", {
                     names(s)))
   expect_identical(unname(attr(s, "role")[["pmi_days"]]), "outcome")
 })
+
+test_that("MorphoSource key resolves arg > env, errors when required + absent", {
+  withr::local_envvar(MORPHOSOURCE_API_KEY = "")
+  expect_identical(.morie_morphosource_key("explicit"), "explicit")     # arg wins
+  withr::local_envvar(MORPHOSOURCE_API_KEY = "from_env")
+  expect_identical(.morie_morphosource_key(), "from_env")               # env fallback
+  withr::local_envvar(MORPHOSOURCE_API_KEY = "")
+  expect_null(.morie_morphosource_key(required = FALSE))                # optional
+  expect_error(.morie_morphosource_key(required = TRUE), "MORPHOSOURCE_API_KEY")
+})
+
+test_that("MorphoSource search params encode query + facets + paging", {
+  p <- .morie_morphosource_search_params(query = "cranium", media_type = "Mesh",
+                                         per_page = 25L, page = 2L)
+  expect_identical(p[["q"]], "cranium")
+  expect_identical(p[["search_field"]], "all_fields")
+  expect_identical(p[["f.media_type"]], "Mesh")
+  expect_identical(p[["per_page"]], 25L)
+  expect_identical(p[["page"]], 2L)
+})
+
+test_that("MorphoSource download refuses a missing use_statement", {
+  withr::local_envvar(MORPHOSOURCE_API_KEY = "k")
+  expect_error(morie_taphonomy_morphosource_fetch(media_id = 1, use_statement = ""),
+               "use_statement")
+})

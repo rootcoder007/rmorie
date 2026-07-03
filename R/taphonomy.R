@@ -1046,3 +1046,186 @@ morie_taphonomy_pmi_schema <- function() {
   attr(df, "role") <- stats::setNames(roles, names(spec))
   df
 }
+
+
+# ===========================================================================
+# MorphoSource client -- 3D bioarchaeology media (user-supplied API key)
+# ===========================================================================
+#
+# Endpoints + auth verified 2026-07-03 against MorphoSource's own client
+# (github.com/Imageomics/pyMorphoSource): base https://www.morphosource.org/api
+# (override MORPHOSOURCE_API_URL); search = GET /media|/physical-objects with
+# q + search_field=all_fields + f.<facet> + per_page/page; download = POST
+# /download/<id> with an Authorization: <key> header + a use-statement body,
+# returning response.media.download_url. The key is read from the caller's own
+# environment -- never hard-coded, never in the URL/argv.
+
+# Resolve the API base (env override -> default).
+.morie_morphosource_api <- function() {
+  base <- Sys.getenv("MORPHOSOURCE_API_URL", unset = "")
+  if (nzchar(base)) base else "https://www.morphosource.org/api"
+}
+
+# Resolve the user's API key: explicit arg -> MORPHOSOURCE_API_KEY env.
+# `required = FALSE` for public search; TRUE for downloads.
+.morie_morphosource_key <- function(api_key = NULL, required = TRUE) {
+  key <- if (!is.null(api_key) && nzchar(api_key)) {
+    api_key
+  } else {
+    Sys.getenv("MORPHOSOURCE_API_KEY", unset = "")
+  }
+  if (!nzchar(key)) {
+    if (required) {
+      stop("MorphoSource API key required. Pass `api_key=` or export ",
+           "MORPHOSOURCE_API_KEY (get a token from your account at ",
+           "https://www.morphosource.org). Never hard-code the key.",
+           call. = FALSE)
+    }
+    return(NULL)
+  }
+  key
+}
+
+# Build the GET search query list (testable without network).
+.morie_morphosource_search_params <- function(query = NULL, media_type = NULL,
+                                              taxonomy_gbif = NULL,
+                                              visibility = NULL, media_tag = NULL,
+                                              per_page = 10L, page = 1L) {
+  params <- list()
+  if (!is.null(query) && nzchar(query)) {
+    params[["q"]] <- query
+    params[["search_field"]] <- "all_fields"
+  }
+  facets <- list(media_type = media_type, taxonomy_gbif = taxonomy_gbif,
+                 publication_status = visibility, tag = media_tag)
+  for (k in names(facets)) {
+    if (!is.null(facets[[k]])) params[[paste0("f.", k)]] <- facets[[k]]
+  }
+  params[["per_page"]] <- as.integer(per_page)
+  params[["page"]] <- as.integer(page)
+  params
+}
+
+#' Search MorphoSource for 3D media or physical objects
+#'
+#' Queries the open MorphoSource repository (CT / micro-CT / 3D scans of
+#' skeletal and occasionally mummified remains) -- real bioarchaeology comparanda
+#' for the taphonomy pipeline. Public search needs no key; a key (for restricted
+#' records) is read from \code{api_key} or the \code{MORPHOSOURCE_API_KEY}
+#' environment variable, sent in an \code{Authorization} header (never the URL).
+#'
+#' @param query Free-text query (searches all fields).
+#' @param type \code{"media"} (default) or \code{"physical-objects"}.
+#' @param media_type,taxonomy_gbif,visibility,media_tag Optional facet filters.
+#' @param per_page,page Pagination (default 10 / 1).
+#' @param api_key Optional key; else \code{MORPHOSOURCE_API_KEY}. Never
+#'   hard-code it.
+#' @return A \code{list}: \code{items} (raw records), \code{n},
+#'   \code{total_pages}, and \code{df} (a \code{data.frame} of \code{id} +
+#'   \code{title} where present).
+#' @source \url{https://www.morphosource.org}; API verified against
+#'   \url{https://github.com/Imageomics/pyMorphoSource}.
+#' @seealso \code{\link{morie_taphonomy_morphosource_fetch}}
+#' @examples
+#' \donttest{
+#' # res <- morie_taphonomy_morphosource_search("Homo sapiens cranium")
+#' }
+#' @export
+morie_taphonomy_morphosource_search <- function(query = NULL,
+                                                type = c("media",
+                                                         "physical-objects"),
+                                                media_type = NULL,
+                                                taxonomy_gbif = NULL,
+                                                visibility = NULL,
+                                                media_tag = NULL,
+                                                per_page = 10L, page = 1L,
+                                                api_key = NULL) {
+  type <- match.arg(type)
+  url <- paste0(.morie_morphosource_api(), "/", type)
+  params <- .morie_morphosource_search_params(query, media_type, taxonomy_gbif,
+                                              visibility, media_tag, per_page,
+                                              page)
+  key <- .morie_morphosource_key(api_key, required = FALSE)
+  headers <- if (!is.null(key)) paste0("Authorization: ", key) else character()
+  resp <- .morie_dataset_http_text_with_status(url, query = params,
+                                               headers = headers)
+  if (resp$status_code >= 400L) {
+    stop("MorphoSource search failed (HTTP ", resp$status_code, ")",
+         call. = FALSE)
+  }
+  parsed <- jsonlite::fromJSON(resp$body, simplifyVector = FALSE)$response
+  items_name <- if (type == "media") "media" else "physical_objects"
+  items <- parsed[[items_name]]
+  if (is.null(items)) items <- list()
+  ids <- vapply(items, function(x) as.character(x$id %||% NA), character(1))
+  titles <- vapply(items, function(x) as.character(x$title %||% NA), character(1))
+  list(
+    items = items,
+    n = length(items),
+    total_pages = parsed$pages$total_pages %||% NA_integer_,
+    df = data.frame(id = ids, title = titles, stringsAsFactors = FALSE)
+  )
+}
+
+#' Download a MorphoSource media bundle
+#'
+#' Resolves and downloads a media bundle by id. MorphoSource enforces a
+#' \strong{data-use agreement} on every download, so \code{use_statement} is
+#' required and \code{agreements_accepted} is sent as \code{TRUE}; restricted
+#' media additionally need per-item permission granted on the website. The key
+#' comes from \code{api_key} or \code{MORPHOSOURCE_API_KEY} and travels only in
+#' the \code{Authorization} header.
+#'
+#' @param media_id MorphoSource media id.
+#' @param use_statement Required free-text statement of intended use.
+#' @param use_categories Optional character vector of use categories.
+#' @param use_category_other Optional free-text for the "other" category.
+#' @param dest Directory to write the bundle (default \code{tempdir()}).
+#' @param api_key Optional key; else \code{MORPHOSOURCE_API_KEY}.
+#' @return Path to the downloaded \code{.zip} bundle.
+#' @source \url{https://www.morphosource.org}
+#' @seealso \code{\link{morie_taphonomy_morphosource_search}}
+#' @examples
+#' \donttest{
+#' # morie_taphonomy_morphosource_fetch(
+#' #   media_id = 000000, use_statement = "Non-commercial taphonomy research")
+#' }
+#' @export
+morie_taphonomy_morphosource_fetch <- function(media_id, use_statement,
+                                               use_categories = NULL,
+                                               use_category_other = NULL,
+                                               dest = tempdir(),
+                                               api_key = NULL) {
+  if (missing(use_statement) || !is.character(use_statement) ||
+      !nzchar(use_statement)) {
+    stop("MorphoSource requires a non-empty `use_statement` (data-use ",
+         "agreement).", call. = FALSE)
+  }
+  key <- .morie_morphosource_key(api_key, required = TRUE)
+  headers <- paste0("Authorization: ", key)
+  url <- paste0(.morie_morphosource_api(), "/download/", media_id)
+  body <- list(use_statement = use_statement, agreements_accepted = TRUE)
+  if (!is.null(use_categories)) body$use_categories <- use_categories
+  if (!is.null(use_category_other)) body$use_category_other <- use_category_other
+
+  resp <- .morie_dataset_http_post_json_with_status(url, body = body,
+                                                    headers = headers)
+  if (resp$status_code == 403L) {
+    stop("Restricted media: request download permission at ",
+         "https://www.morphosource.org for media id ", media_id, call. = FALSE)
+  }
+  if (resp$status_code >= 400L) {
+    stop("MorphoSource download request failed (HTTP ", resp$status_code, ")",
+         call. = FALSE)
+  }
+  dl_url <- jsonlite::fromJSON(resp$body,
+                               simplifyVector = FALSE)$response$media$download_url
+  if (is.null(dl_url) || !nzchar(dl_url)) {
+    stop("MorphoSource returned no download_url", call. = FALSE)
+  }
+  bytes <- .morie_dataset_http_bytes(dl_url, headers = headers)
+  if (!dir.exists(dest)) dir.create(dest, recursive = TRUE)
+  path <- file.path(dest, paste0("morphosource_", media_id, ".zip"))
+  writeBin(bytes, path)
+  path
+}
