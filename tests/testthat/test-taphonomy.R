@@ -144,6 +144,28 @@ test_that("BHM cmdstanr HMC backend recovers the effect (needs CmdStan)", {
   expect_false(is.null(fit$stanfit))  # the cmdstanr fit is returned
 })
 
+for (be in c("brms", "rstanarm")) {
+  test_that(sprintf("BHM %s HMC backend recovers the effect (needs %s+CmdStan)",
+                    be, be), {
+    skip_if_not_installed(be)
+    skip_if(!nzchar(Sys.getenv("CMDSTAN")) &&
+              !requireNamespace("rstan", quietly = TRUE), "no Stan backend")
+    set.seed(1)
+    n <- 120L
+    lime <- stats::rbinom(n, 1, 0.5)
+    df <- data.frame(preservation_score = 0.5 * lime + stats::rnorm(n, 0, 0.3),
+                     lime_treatment = lime)
+    fit <- morie_taphonomy_bhm(df, covariates = "lime_treatment",
+                               backend = be, chains = 2L, iter = 300L)
+    expect_match(fit$backend, "NUTS")
+    expect_match(fit$backend, be, fixed = TRUE)
+    eff <- fit$coefficients$post_mean[fit$coefficients$term == "lime_treatment"]
+    expect_gt(eff, 0.3)
+    expect_lt(eff, 0.7)
+    expect_false(is.null(fit$stanfit))
+  })
+}
+
 test_that("BHM partial-pools group intercepts with shrinkage in [0,1]", {
   set.seed(2)
   n <- 150L
