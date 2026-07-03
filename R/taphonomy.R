@@ -676,6 +676,12 @@ morie_taphonomy_preservation_lr <- function(evidence, natural, alternative) {
 #'   \code{list(lime_treatment = list(mean = 0.3, sd = 0.1))}.
 #' @param prior_sd_default Diffuse prior sd for unlisted coefficients
 #'   (default 10).
+#' @param backend \code{"conjugate"} (default; closed-form posterior, no deps)
+#'   or \code{"cmdstanr"} (full-Bayes HMC/NUTS via \pkg{cmdstanr} + a built
+#'   CmdStan -- the same model, sampled). The Stan path additionally returns the
+#'   \code{stanfit} object.
+#' @param chains,iter,seed HMC settings for \code{backend = "cmdstanr"}
+#'   (chains, warmup = sampling iterations per chain, RNG seed).
 #' @return A named \code{list} (all estimates \code{double}): \code{coefficients}
 #'   (\code{data.frame}: term, post_mean, post_sd, ci_lower, ci_upper,
 #'   prob_positive), \code{sigma}, \code{group_effects} (NULL unless
@@ -696,7 +702,10 @@ morie_taphonomy_bhm <- function(data,
                                 covariates = NULL,
                                 group = NULL,
                                 priors = NULL,
-                                prior_sd_default = 10) {
+                                prior_sd_default = 10,
+                                backend = c("conjugate", "cmdstanr"),
+                                chains = 4L, iter = 1000L, seed = 42L) {
+  backend <- match.arg(backend)
   if (!is.data.frame(data)) stop("`data` must be a data.frame", call. = FALSE)
   if (nrow(data) == 0L) stop("`data` is empty", call. = FALSE)
   if (!outcome %in% names(data)) {
@@ -733,6 +742,15 @@ morie_taphonomy_bhm <- function(data,
     }
   }
   Lambda0 <- diag(1 / s0^2, p, p)
+
+  gfac <- if (!is.null(group)) as.factor(frame[[group]]) else NULL
+
+  # HMC/NUTS backend: same informative-prior hierarchical model, fit by Stan
+  # (Chernozhukov-free full Bayes) instead of the conjugate closed form.
+  if (backend == "cmdstanr") {
+    return(.morie_bhm_cmdstanr(X, y, terms, m0, s0, gfac, group, chains, iter,
+                               seed))
+  }
 
   # Empirical-Bayes noise variance from the OLS fit.
   ols <- stats::lm.fit(X, y)
@@ -784,6 +802,7 @@ morie_taphonomy_bhm <- function(data,
     group_effects  = group_effects,
     fitted         = fitted,
     n              = n,
+    backend        = "conjugate (closed form)",
     interpretation = sprintf(
       paste0("Bayesian preservation model (n=%d, conjugate Gaussian, EB noise ",
              "sd=%.3f). Posterior effect of '%s' = %.3f [%.3f, %.3f], ",
@@ -793,6 +812,96 @@ morie_taphonomy_bhm <- function(data,
       lime_row$ci_lower, lime_row$ci_upper, lime_row$prob_positive,
       if (is.null(group)) "" else
         sprintf(" %d group intercepts partially pooled.", nrow(group_effects)))
+  )
+}
+
+# Stan program for the HMC/NUTS backend: the same informative-prior Gaussian
+# hierarchical model as the conjugate core (non-centred group intercepts).
+.MORIE_TAPHONOMY_BHM_STAN <- "
+data {
+  int<lower=1> N;
+  int<lower=1> K;
+  matrix[N, K] X;
+  vector[N] y;
+  vector[K] prior_mean;
+  vector<lower=0>[K] prior_sd;
+  int<lower=0> J;
+  array[N] int<lower=0> g;
+}
+parameters {
+  vector[K] beta;
+  real<lower=0> sigma;
+  vector[J] z;
+  real<lower=0> tau;
+}
+model {
+  beta ~ normal(prior_mean, prior_sd);
+  sigma ~ exponential(1);
+  tau ~ exponential(1);
+  z ~ normal(0, 1);
+  vector[N] mu = X * beta;
+  if (J > 0)
+    for (n in 1:N) mu[n] += z[g[n]] * tau;
+  y ~ normal(mu, sigma);
+}
+generated quantities {
+  vector[J] group_intercept;
+  for (j in 1:J) group_intercept[j] = z[j] * tau;
+}
+"
+
+# HMC/NUTS fit via cmdstanr, returning the same structure as the conjugate path.
+.morie_bhm_cmdstanr <- function(X, y, terms, m0, s0, gfac, group, chains, iter,
+                                seed) {
+  if (!requireNamespace("cmdstanr", quietly = TRUE)) {
+    stop("backend = 'cmdstanr' needs the 'cmdstanr' package and a built ",
+         "CmdStan. Install: install.packages('cmdstanr', repos = c(",
+         "'https://stan-dev.r-universe.dev', getOption('repos'))); ",
+         "cmdstanr::install_cmdstan().", call. = FALSE)
+  }
+  n <- nrow(X)
+  J <- if (is.null(gfac)) 0L else nlevels(gfac)
+  g <- if (is.null(gfac)) rep(0L, n) else as.integer(gfac)
+  standata <- list(N = n, K = ncol(X), X = X, y = as.numeric(y),
+                   prior_mean = as.numeric(m0), prior_sd = as.numeric(s0),
+                   J = J, g = g)
+  mod <- cmdstanr::cmdstan_model(
+    cmdstanr::write_stan_file(.MORIE_TAPHONOMY_BHM_STAN))
+  fit <- mod$sample(data = standata, chains = chains,
+                    parallel_chains = chains, iter_warmup = iter,
+                    iter_sampling = iter, seed = seed, refresh = 0,
+                    show_messages = FALSE, show_exceptions = FALSE)
+  q <- function(x, prob) stats::quantile(x, prob, names = FALSE)
+  bs <- fit$summary("beta", mean = mean, sd = stats::sd,
+                    ci_lower = \(x) q(x, 0.025), ci_upper = \(x) q(x, 0.975),
+                    prob_positive = \(x) mean(x > 0))
+  coefs <- data.frame(term = terms, post_mean = bs$mean, post_sd = bs$sd,
+                      ci_lower = bs$ci_lower, ci_upper = bs$ci_upper,
+                      prob_positive = bs$prob_positive,
+                      row.names = NULL, stringsAsFactors = FALSE)
+  sigma <- fit$summary("sigma", "mean")$mean
+  group_effects <- NULL
+  if (J > 0L) {
+    gi <- fit$summary("group_intercept", mean = mean, sd = stats::sd)
+    group_effects <- data.frame(group = levels(gfac),
+                                pooled_intercept = gi$mean, post_sd = gi$sd,
+                                n = as.integer(table(gfac)),
+                                row.names = NULL, stringsAsFactors = FALSE)
+  }
+  fitted <- as.numeric(X %*% coefs$post_mean)
+  if (J > 0L) fitted <- fitted + group_effects$pooled_intercept[g]
+  lime_row <- coefs[coefs$term %in% c("lime_treatment", terms[2]), ][1, ]
+  list(
+    coefficients = coefs, sigma = sigma, group_effects = group_effects,
+    fitted = fitted, n = n, backend = "cmdstanr (NUTS)", stanfit = fit,
+    interpretation = sprintf(
+      paste0("Bayesian preservation model (n=%d, HMC/NUTS via cmdstanr, %d ",
+             "chains x %d draws). Posterior effect of '%s' = %.3f [%.3f, %.3f], ",
+             "P(effect>0)=%.3f. Full-Bayes posterior (no conjugacy ",
+             "approximation).%s"),
+      n, chains, iter, lime_row$term, lime_row$post_mean, lime_row$ci_lower,
+      lime_row$ci_upper, lime_row$prob_positive,
+      if (J == 0L) "" else sprintf(" %d partially-pooled group intercepts.", J))
   )
 }
 
