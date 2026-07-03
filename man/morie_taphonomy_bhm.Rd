@@ -10,7 +10,11 @@ morie_taphonomy_bhm(
   covariates = NULL,
   group = NULL,
   priors = NULL,
-  prior_sd_default = 10
+  prior_sd_default = 10,
+  backend = c("conjugate", "cmdstanr"),
+  chains = 4L,
+  iter = 1000L,
+  seed = 42L
 )
 }
 \arguments{
@@ -31,6 +35,14 @@ coefficients get a diffuse prior (\code{sd = prior_sd_default}). Use e.g.
 
 \item{prior_sd_default}{Diffuse prior sd for unlisted coefficients
 (default 10).}
+
+\item{backend}{\code{"conjugate"} (default; closed-form posterior, no deps)
+or \code{"cmdstanr"} (full-Bayes HMC/NUTS via \pkg{cmdstanr} + a built
+CmdStan -- the same model, sampled). The Stan path additionally returns the
+\code{stanfit} object.}
+
+\item{chains, iter, seed}{HMC settings for \code{backend = "cmdstanr"}
+(chains, warmup = sampling iterations per chain, RNG seed).}
 }
 \value{
 A named \code{list} (all estimates \code{double}): \code{coefficients}
