@@ -198,7 +198,10 @@ morie_ingest_statcan_cansim <- function(table_id,
   # reads internally; STATCAN_API_KEY is morie's alias.
   api_key <- Sys.getenv("STATCAN_API_KEY", "")
   if (nzchar(api_key) && !nzchar(Sys.getenv("CANSIM_API_KEY", ""))) {
+    # Bridge the key to the name cansim reads, but restore the user's
+    # environment on exit (CRAN: do not persistently modify the user's env).
     Sys.setenv(CANSIM_API_KEY = api_key)
+    on.exit(Sys.unsetenv("CANSIM_API_KEY"), add = TRUE)
   }
 
   tryCatch(
