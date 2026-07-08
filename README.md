@@ -26,7 +26,7 @@ dependencies.
 > manual or the package site above rather than scrolling the function
 > index. This README covers install + the most common workflows only.
 
-## What's in v0.9.9
+## What's in v1.0.0
 
 - **1,859 exported `morie_*` R functions** — every public callable is now
   prefixed to avoid name collisions with other CRAN packages
