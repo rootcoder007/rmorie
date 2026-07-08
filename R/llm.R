@@ -14,6 +14,11 @@
 # public functions are prefixed `morie_llm_*` and exported. Streaming
 # is not supported in this R port (always returns the full string).
 
+# Process-lifetime probe cache. Uses a package-internal environment rather
+# than options() so we never modify the user's global options (CRAN policy);
+# matches the .morie_*_env pattern used elsewhere in the package.
+.morie_llm_cache <- new.env(parent = emptyenv())
+
 DEFAULT_OLLAMA_BASE_URL <- "http://localhost:11434"
 DEFAULT_GEMINI_MODEL    <- "gemini-2.5-flash"
 DEFAULT_API_MODEL       <- "google/gemma-3-27b-it"
@@ -46,7 +51,7 @@ if (nzchar(v)) v else NULL }
 #' @export
 morie_llm_probe_ollama <- function(timeout = 2) {
   if (!requireNamespace("httr2", quietly = TRUE)) return(FALSE)
-  cache <- getOption("morie.llm.ollama_cached", default = NULL)
+  cache <- .morie_llm_cache$ollama_cached
   if (!is.null(cache)) return(cache)
   out <- tryCatch({
     req <- httr2::request(paste0(.morie_llm_ollama_base(), "/api/tags"))
@@ -54,7 +59,7 @@ morie_llm_probe_ollama <- function(timeout = 2) {
     resp <- httr2::req_perform(req)
     httr2::resp_status(resp) < 400
   }, error = function(e) FALSE)
-  options(morie.llm.ollama_cached = out)
+  .morie_llm_cache$ollama_cached <- out
   out
 }
 
@@ -250,7 +255,7 @@ FREEAPI_BASE_URL      <- "https://ollamafreeapi.duckdns.org"  # community-hosted
 #' @export
 morie_llm_probe_freeapi <- function(timeout = 4) {
   if (!requireNamespace("httr2", quietly = TRUE)) return(FALSE)
-  cache <- getOption("morie.llm.freeapi_cached", default = NULL)
+  cache <- .morie_llm_cache$freeapi_cached
   if (!is.null(cache)) return(cache)
   try_probe <- function() {
     req <- httr2::request(paste0(FREEAPI_BASE_URL, "/api/tags"))
@@ -264,7 +269,7 @@ morie_llm_probe_freeapi <- function(timeout = 4) {
     out <- tryCatch(try_probe(), error = function(e) FALSE)
   }
   out <- isTRUE(out)
-  options(morie.llm.freeapi_cached = out)
+  .morie_llm_cache$freeapi_cached <- out
   out
 }
 
