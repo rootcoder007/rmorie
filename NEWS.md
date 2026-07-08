@@ -1,3 +1,10 @@
+# rmorie 1.0.0
+
+* Version 1.0.0 (first alpha), version-locked with morie 1.0.0.
+* New modules: forensic toxicology (`morie_tox_*`), cluster-robust double
+  machine learning (`morie_dml_clustered`), and spatiotemporal Hawkes
+  (`morie_hawkes_st_*`).
+
 # rmorie 0.9.9
 
 * Version 0.9.9 (version-locked with morie 0.9.9).
