@@ -46,3 +46,7 @@ inst/figures/
 # never ship private wrangled data
 data/private/
 .DS_Store
+
+# gcov coverage artifacts
+*.gcda
+*.gcno
