@@ -52,6 +52,12 @@ dependencies.
 - **C/C++ computational backend** — Hawkes self-exciting point process
   likelihood (Markovian + non-Markovian), HTML-to-text state machine,
   SIU parser. See `src/`.
+- **Causal-taphonomy suite** — Bayesian hierarchical preservation model
+  (cmdstanr / brms / rstanarm HMC backends), absorbing-DTMC decay chains,
+  forensic likelihood ratios, pXRF compositional transforms, and USGS
+  NGDB / MorphoSource open-data ingest.
+- **`agent()`** — call the rmorie CLI agent from R (with
+  `agent_available()` to probe for the binary).
 
 ## Scientific guardrail
 
