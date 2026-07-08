@@ -32,6 +32,9 @@ jobs:
         with:
           r-version: 'release'
           use-public-rspm: true
+          extra-repositories: |
+            https://rootcoder007.r-universe.dev
+            https://stan-dev.r-universe.dev
       - name: Pre-install rmoriebricklayer (r-universe; not yet on CRAN)
         run: install.packages("rmoriebricklayer", repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))
         shell: Rscript {0}
