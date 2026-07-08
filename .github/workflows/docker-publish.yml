@@ -110,5 +110,11 @@ jobs:
           push: ${{ inputs.push }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          # mode=min (final-stage layers only), NOT mode=max: max exported
+          # every intermediate build layer (~1 GB of buildkit blobs) into the
+          # shared 10 GB Actions cache, which evicted the ~1.65 GB R
+          # dependency caches (LRU) and forced a full 144-package source
+          # recompile (~2 h) on nearly every push. min keeps Docker layer
+          # reuse without starving the R caches.
           cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-to: type=gha,mode=min
