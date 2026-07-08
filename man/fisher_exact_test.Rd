@@ -11,6 +11,9 @@ fisher_exact_test(contingency_table, alternative = "two.sided")
 
 \item{alternative}{One of "two.sided", "less", "greater".}
 }
+\value{
+An object of class \code{"morie_test_result"}.
+}
 \description{
 Fisher's exact test for a 2x2 table
 }

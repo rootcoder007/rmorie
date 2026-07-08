@@ -9,6 +9,9 @@ tippett_combined(p_values)
 \arguments{
 \item{p_values}{Numeric vector of raw p-values.}
 }
+\value{
+An object of class \code{"morie_multiple_testing_result"}.
+}
 \description{
 Delegates to \code{poolr::tippett} when installed; otherwise
 computes the closed form inline.

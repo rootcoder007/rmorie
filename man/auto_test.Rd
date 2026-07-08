@@ -15,6 +15,9 @@ auto_test(x, y = NULL, paired = FALSE, confidence = 0.95)
 
 \item{confidence}{Confidence level.}
 }
+\value{
+An object of class \code{"morie_test_result"}.
+}
 \description{
 Decision logic:
 \enumerate{

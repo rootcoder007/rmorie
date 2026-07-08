@@ -13,6 +13,9 @@ morie_arsau_load_main_records(year, language = "en", data_dir = NULL)
 
 \item{data_dir}{Optional explicit ARSAU root.}
 }
+\value{
+An object of class \code{"morie_arsau_result"}.
+}
 \description{
 Load ARSAU main_records CSV for the given year.
 }

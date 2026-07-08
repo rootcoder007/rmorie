@@ -55,6 +55,8 @@ cached HTML.}
 \value{
 Invisibly, a data frame of newly-recorded
 (case_number, field, verified_value) translations.
+
+The input, invisibly.
 }
 \description{
 For SIU cases whose parser-emitted text isn't in the reader's

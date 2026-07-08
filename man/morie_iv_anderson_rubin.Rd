@@ -36,6 +36,9 @@ value(s) to test under H0. Length must match \code{length(endogenous)}.}
 \item{alpha}{Significance level (default \code{0.05}); controls the
 confidence-set / acceptance-region cut-off.}
 }
+\value{
+A named list with elements \code{statistic}, \code{F_statistic}, \code{p_value}, \code{name}, \code{df}, \code{df_resid}, \code{beta0}.
+}
 \description{
 Anderson-Rubin (AR) weak-IV-robust test
 }

@@ -13,6 +13,9 @@ the \code{survey} package directly).}
 \item{variable}{Character; column name of the outcome variable in
 the \code{design} object (\code{morie_survey_mean}).}
 }
+\value{
+A named \code{list} (see Details).
+}
 \description{
 Survey-weighted mean (delegates to \code{survey::svymean} when available).
 }

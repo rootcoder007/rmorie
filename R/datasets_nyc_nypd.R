@@ -298,6 +298,7 @@ morie_datasets_nyc_nypd_by_key <- function(dataset_key,
 
 #' NYPD Arrests Data (Historic)
 #' @inheritParams morie_datasets_nyc_nypd_by_key
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_nyc_nypd_arrests_historic <- function(year = NULL,
                                                        max_features = NULL,
@@ -319,6 +320,7 @@ morie_datasets_nyc_nypd_arrests_historic <- function(year = NULL,
 
 #' NYPD Arrest Data (Year to Date)
 #' @inheritParams morie_datasets_nyc_nypd_by_key
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_nyc_nypd_arrests_ytd <- function(year = NULL,
                                                   max_features = NULL,
@@ -340,6 +342,7 @@ morie_datasets_nyc_nypd_arrests_ytd <- function(year = NULL,
 
 #' NYPD Complaint Data Historic
 #' @inheritParams morie_datasets_nyc_nypd_by_key
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_nyc_nypd_complaint_historic <- function(year = NULL,
                                                          max_features = NULL,
@@ -361,6 +364,7 @@ morie_datasets_nyc_nypd_complaint_historic <- function(year = NULL,
 
 #' NYPD Complaint Data Current (Year To Date)
 #' @inheritParams morie_datasets_nyc_nypd_by_key
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_nyc_nypd_complaint_ytd <- function(year = NULL,
                                                     max_features = NULL,
@@ -382,6 +386,7 @@ morie_datasets_nyc_nypd_complaint_ytd <- function(year = NULL,
 
 #' NYPD Hate Crimes
 #' @inheritParams morie_datasets_nyc_nypd_by_key
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_nyc_nypd_hate_crimes <- function(year = NULL,
                                                   max_features = NULL,
@@ -403,6 +408,7 @@ morie_datasets_nyc_nypd_hate_crimes <- function(year = NULL,
 
 #' NYPD Use of Force Incidents
 #' @inheritParams morie_datasets_nyc_nypd_by_key
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_nyc_nypd_uof_incidents <- function(year = NULL,
                                                     max_features = NULL,
@@ -424,6 +430,7 @@ morie_datasets_nyc_nypd_uof_incidents <- function(year = NULL,
 
 #' NYPD Use of Force: Subjects
 #' @inheritParams morie_datasets_nyc_nypd_by_key
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_nyc_nypd_uof_subjects <- function(year = NULL,
                                                    max_features = NULL,
@@ -445,6 +452,7 @@ morie_datasets_nyc_nypd_uof_subjects <- function(year = NULL,
 
 #' NYPD Vehicle Stop Reports
 #' @inheritParams morie_datasets_nyc_nypd_by_key
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_nyc_nypd_vehicle_stops <- function(year = NULL,
                                                     max_features = NULL,

@@ -1011,6 +1011,7 @@ mrm_uof_data_quality_audit <- function(df, sidecar = NULL, expected_schema = NUL
 # Print method
 # ---------------------------------------------------------------------------
 
+#' @return \code{x}, invisibly.
 #' @export
 print.morie_mrm_uof_result <- function(x, ...) {
   cat(x$title, "\n", strrep("=", nchar(x$title)), "\n", sep = "")

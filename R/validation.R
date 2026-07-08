@@ -91,6 +91,7 @@ column_rule <- function(name, dtype = NULL, required = TRUE,
 #' @param data A data frame.
 #' @param rules List of \code{column_rule} objects.
 #' @param raise_on_error If TRUE, throw on first error.
+#' @return An object of class \code{"class_name"}.
 #' @export
 validate_schema <- function(data, rules, raise_on_error = FALSE) {
   errors <- character(0)
@@ -216,6 +217,7 @@ validate_schema <- function(data, rules, raise_on_error = FALSE) {
 #' @param child Data frame with foreign key.
 #' @param parent Data frame with primary key.
 #' @param child_key,parent_key Column names.
+#' @return A logical scalar.
 #' @export
 check_referential_integrity <- function(child, parent, child_key, parent_key) {
   pv <- unique(parent[[parent_key]])
@@ -246,6 +248,7 @@ check_referential_integrity <- function(child, parent, child_key, parent_key) {
 #' @param freshness_days Days for full timeliness score.
 #' @param key_cols Columns that should be unique together.
 #' @param consistency_rules List of functions \code{(df) -> logical(1)}.
+#' @return An object of class \code{"class_name"}.
 #' @export
 score_data_quality <- function(data, date_cols = NULL, freshness_days = 365L,
                                 key_cols = NULL, consistency_rules = NULL) {
@@ -363,6 +366,7 @@ score_data_quality <- function(data, date_cols = NULL, freshness_days = 365L,
 #' @param groups Group labels for grouped_kfold.
 #' @param confidence Confidence level for the score CI.
 #' @param random_state Seed.
+#' @return An object of class \code{"class_name"}.
 #' @export
 cross_validate <- function(fit_fn, predict_fn, X, y,
                             method = "stratified_kfold",
@@ -549,6 +553,7 @@ nested_cross_validate <- function(fit_fn = NULL, predict_fn = NULL,
 #' @inheritParams cross_validate
 #' @param n_bootstraps Number of bootstrap replicates.
 #' @param method "632" or "632plus".
+#' @return An object of class \code{"class_name"}.
 #' @export
 bootstrap_validate <- function(fit_fn, predict_fn, X, y,
                                 n_bootstraps = 200L,
@@ -601,6 +606,7 @@ bootstrap_validate <- function(fit_fn, predict_fn, X, y,
 #' @param y_true Integer 0/1 vector.
 #' @param y_pred Predicted probabilities.
 #' @param n_groups Hosmer-Lemeshow groups.
+#' @return An object of class \code{"class_name"}.
 #' @export
 assess_calibration <- function(y_true, y_pred, n_groups = 10L) {
   y_true <- as.integer(y_true)
@@ -646,6 +652,7 @@ assess_calibration <- function(y_true, y_pred, n_groups = 10L) {
 #' @param n_bootstrap Bootstrap reps for AUC CI.
 #' @param confidence Confidence level.
 #' @param random_state Seed.
+#' @return An object of class \code{"class_name"}.
 #' @export
 assess_discrimination <- function(y_true, y_pred, y_pred_ref = NULL,
                                    n_bootstrap = 1000L,
@@ -698,6 +705,7 @@ assess_discrimination <- function(y_true, y_pred, y_pred_ref = NULL,
 #' @inheritParams assess_calibration
 #' @param thresholds Numeric vector of thresholds (defaults to
 #'   \code{seq(0.01, 0.99, 0.01)}).
+#' @return An object of class \code{"class_name"}.
 #' @export
 decision_curve_analysis <- function(y_true, y_pred, thresholds = NULL) {
   y_true <- as.integer(y_true)
@@ -730,6 +738,7 @@ decision_curve_analysis <- function(y_true, y_pred, thresholds = NULL) {
 #' @inheritParams bootstrap_validate
 #' @param n_bootstrap Integer; number of bootstrap resamples used to
 #'   estimate the optimism correction (default 200).
+#' @return An object of class \code{"class_name"}.
 #' @export
 detect_overfitting <- function(fit_fn, predict_fn, X, y,
                                 scoring = "roc_auc",
@@ -780,6 +789,7 @@ detect_overfitting <- function(fit_fn, predict_fn, X, y,
 #' @param split_date Date to split on, or NULL.
 #' @param split_quantile Quantile of dates (if \code{split_date} is NULL).
 #' @param scoring Scoring metric.
+#' @return An object of class \code{"class_name"}.
 #' @export
 temporal_validate <- function(fit_fn, predict_fn, X, y, date_col,
                                split_date = NULL,
@@ -822,6 +832,7 @@ temporal_validate <- function(fit_fn, predict_fn, X, y, date_col,
 #' @param y_external Outcome vector.
 #' @param X_development Optional development-data features for KS-based
 #'   domain-shift diagnostics.
+#' @return An object of class \code{"class_name"}.
 #' @export
 external_validate <- function(predict_fn, X_external, y_external,
                                X_development = NULL) {
@@ -852,6 +863,7 @@ external_validate <- function(predict_fn, X_external, y_external,
 #' @param data Data frame (used for a SHA-256 checksum).
 #' @param parameters Optional list of analysis parameters.
 #' @param seeds Optional named list of random seeds.
+#' @return An object of class \code{"class_name"}.
 #' @export
 create_reproducibility_manifest <- function(data, parameters = NULL,
                                              seeds = NULL) {

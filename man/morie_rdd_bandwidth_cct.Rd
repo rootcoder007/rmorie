@@ -22,6 +22,9 @@ bandwidth selectors + density tests that don't take a
 \item{p}{Integer; local-polynomial order (default 1 for local-
 linear). 2 picks up quadratic curvature for bias correction.}
 }
+\value{
+A named list with elements \code{bandwidth}, \code{method}, \code{details}.
+}
 \description{
 Calonico-Cattaneo-Titiunik (CCT) MSE-optimal bandwidth
 }

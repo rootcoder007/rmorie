@@ -17,6 +17,9 @@ morie_iv_wald(data, outcome, treatment, instrument, alpha = 0.05)
 
 \item{alpha}{Significance level.}
 }
+\value{
+A named list with elements \code{coefficients}, \code{std_errors}, \code{t_stats}, \code{p_values}, \code{ci_lower}, \code{ci_upper}, \code{variable_names}, \code{n_obs}, \code{method}, \code{details}.
+}
 \description{
 \eqn{\hat\beta = (\bar y_{z=1} - \bar y_{z=0}) /
                 (\bar d_{z=1} - \bar d_{z=0})}{hatbeta = (bar y_z=1 - bar y_z=0) / (bar d_z=1 - bar d_z=0)}.

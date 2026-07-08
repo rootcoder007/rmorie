@@ -13,6 +13,9 @@ assess_calibration(y_true, y_pred, n_groups = 10L)
 
 \item{n_groups}{Hosmer-Lemeshow groups.}
 }
+\value{
+An object of class \code{"class_name"}.
+}
 \description{
 Comprehensive calibration assessment for binary outcomes
 }

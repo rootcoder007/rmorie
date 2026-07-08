@@ -72,6 +72,7 @@ NULL
 #' @param cluster_col Optional PSU/cluster column.
 #' @param fpc_col Optional finite-population-correction column.
 #' @param nest If TRUE, treat cluster IDs as nested within strata.
+#' @return An object of class \code{"morie_survey_design_fallback"}.
 #' @export
 morie_survey_design <- function(data, weights_col, strata_col = NULL,
                                 cluster_col = NULL, fpc_col = NULL,
@@ -118,6 +119,7 @@ morie_survey_ht_total <- function(y, inclusion_probs) {
 
 #' Hajek (ratio) estimator of a population mean.
 #' @inheritParams morie_survey_params
+#' @return A named list with elements \code{mean}, \code{se}, \code{ci_lower}, \code{ci_upper}.
 #' @export
 morie_survey_hajek_mean <- function(y, weights) {
   y <- as.numeric(y)
@@ -138,6 +140,7 @@ morie_survey_hajek_mean <- function(y, weights) {
 
 #' Survey-weighted mean (delegates to `survey::svymean` when available).
 #' @inheritParams morie_survey_params
+#' @return A named \code{list} (see Details).
 #' @export
 morie_survey_mean <- function(design, variable) {
   if (inherits(design, "survey.design") ||
@@ -154,6 +157,7 @@ morie_survey_mean <- function(design, variable) {
 
 #' Ratio estimator of a population total using known X_pop.
 #' @inheritParams morie_survey_params
+#' @return A named list with elements \code{ratio}, \code{total_estimate}, \code{se}, \code{ci_lower}, \code{ci_upper}.
 #' @export
 morie_survey_ratio <- function(y, x, weights, X_population_total) {
   y <- as.numeric(y)
@@ -182,6 +186,7 @@ morie_survey_ratio <- function(y, x, weights, X_population_total) {
 #' Delegates to `survey::postStratify()` when given a design; otherwise
 #' computes raw post-stratification factors in base R.
 #' @inheritParams morie_survey_params
+#' @return A numeric vector of post-stratification weights.
 #' @export
 morie_survey_poststratify <- function(df, strata_col, population_counts) {
   if (!strata_col %in% names(df))
@@ -212,6 +217,7 @@ morie_survey_poststratify <- function(df, strata_col, population_counts) {
 #' For multi-variable marginals use `morie_weights_rake()`; this helper is the
 #' single-variable convenience.
 #' @inheritParams morie_survey_params
+#' @return A numeric vector of calibration weights.
 #' @export
 morie_survey_calibrate <- function(df, aux_vars, population_totals,
                                    max_iter = 50, tol = 1e-6) {
@@ -253,6 +259,7 @@ morie_survey_calibrate <- function(df, aux_vars, population_totals,
 
 #' Subpopulation (domain) mean with Woodruff linearised SE.
 #' @inheritParams morie_survey_params
+#' @return A named list with elements \code{mean}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{n_domain}.
 #' @export
 morie_survey_subpop <- function(df, domain_col, domain_value,
                                 outcome_col, weight_col) {
@@ -283,6 +290,7 @@ morie_survey_subpop <- function(df, domain_col, domain_value,
 #' Python module ("gaussian", "binomial", "poisson", "gamma", "negativebinomial")
 #' or any R `family` object.
 #' @inheritParams morie_survey_params
+#' @return A \code{svyglm} object (survey-weighted GLM fit).
 #' @export
 morie_survey_glm <- function(design, formula,
                              family = c("gaussian", "binomial", "poisson",
@@ -312,6 +320,7 @@ morie_survey_glm <- function(design, formula,
 #' Complex-survey GLM constructor (single-shot wrapper that builds a design
 #' and fits a `svyglm` in one call). Cluster-robust SEs via the design.
 #' @inheritParams morie_survey_params
+#' @return A \code{svyglm} object (survey-weighted GLM fit).
 #' @export
 morie_survey_complex_glm <- function(df, formula, weight_col,
                                      family = "gaussian",

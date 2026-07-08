@@ -545,6 +545,7 @@ morie_laniyonu_actuarial_risk_disparity <- function(
 }
 
 
+#' @return \code{x}, invisibly.
 #' @export
 print.morie_laniyonu_ard_result <- function(x, ...) {
   cat(x$title, "\

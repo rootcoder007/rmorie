@@ -972,6 +972,7 @@ morie_tps_moran_sweep_heatmap <- function(polygons,
 # Print method
 # ---------------------------------------------------------------------------
 
+#' @return \code{x}, invisibly.
 #' @export
 print.morie_tps_spatial_advanced_result <- function(x, ...) {
   cat(x$title, "\

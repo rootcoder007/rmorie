@@ -43,6 +43,9 @@ up to 200,000 rows without an app_token).}
 \item{app_token}{Optional Socrata API app token for higher rate
 limits; passed as the \code{X-App-Token} header.}
 }
+\value{
+A \code{data.frame}.
+}
 \description{
 NYPD Arrests Data (Historic)
 }

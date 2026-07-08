@@ -9,6 +9,9 @@ morie_otis_analyze_d01(data)
 \arguments{
 \item{data}{d01 data.frame.}
 }
+\value{
+A logical scalar.
+}
 \description{
 Person-level custodial deaths (d01)
 }

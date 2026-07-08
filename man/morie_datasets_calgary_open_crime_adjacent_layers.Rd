@@ -18,6 +18,10 @@ morie_datasets_ottawa_open_crime_adjacent_layers(offline = TRUE)
 \value{
 A \code{data.frame} with \code{soda_id}, \code{title}, \code{type},
 \code{search_keyword}.
+
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 }
 \description{
 Phase 3FFF3. Bundled snapshot of 157 City-of-Calgary Socrata

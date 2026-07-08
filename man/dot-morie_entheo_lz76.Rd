@@ -6,6 +6,9 @@
 \usage{
 .morie_entheo_lz76(b)
 }
+\value{
+A numeric scalar: the Lempel-Ziv (LZ76) complexity of the binary sequence \code{b}.
+}
 \description{
 Lempel-Ziv (LZ76) complexity helper.
 }

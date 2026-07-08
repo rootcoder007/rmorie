@@ -13,6 +13,9 @@ to look up the Stock-Yogo critical-value table.}
 \item{n_instruments}{Integer; number of instruments used to look
 up the Stock-Yogo critical-value table.}
 }
+\value{
+A named \code{list} of Stock-Yogo weak-instrument critical values.
+}
 \description{
 Stock-Yogo critical values
 }

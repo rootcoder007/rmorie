@@ -16,6 +16,8 @@ morie_datasets_chicago_socrata_by_id(soda_id, limit = 1000L)
 }
 \value{
 A \code{data.frame} of records.
+
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 }
 \description{
 Fetch a NYC OpenData Socrata dataset by ID

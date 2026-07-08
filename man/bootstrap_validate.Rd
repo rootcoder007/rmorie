@@ -32,6 +32,9 @@ bootstrap_validate(
 
 \item{random_state}{Seed.}
 }
+\value{
+An object of class \code{"class_name"}.
+}
 \description{
 Bootstrap .632 / .632+ validation
 }

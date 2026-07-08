@@ -11,6 +11,9 @@ stouffer_combined(p_values, weights = NULL)
 
 \item{weights}{Optional non-negative weights (any scale).}
 }
+\value{
+An object of class \code{"morie_multiple_testing_result"}.
+}
 \description{
 Delegates to \code{poolr::stouffer} when installed and no weights
 are supplied; otherwise computes the weighted z-sum inline.

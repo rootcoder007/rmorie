@@ -18,6 +18,9 @@ morie_survival_parametric(
 \item{dist}{Distribution name for parametric/AFT fits (e.g.
 \code{"weibull"}, \code{"lognormal"}, \code{"loglogistic"}).}
 }
+\value{
+A named list with elements \code{distribution}, \code{coefficients}, \code{scale}, \code{log_likelihood}, \code{aic}, \code{bic}, \code{n_observations}, \code{n_events}.
+}
 \description{
 For "exponential", "weibull", "lognormal", "loglogistic", "gaussian".
 Use \code{morie_survival_aft()} for covariate-adjusted parametric models.

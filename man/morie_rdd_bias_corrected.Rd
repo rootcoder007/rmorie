@@ -43,6 +43,9 @@ linear). 2 picks up quadratic curvature for bias correction.}
 
 \item{alpha}{Significance level (default \code{0.05}).}
 }
+\value{
+A numeric value.
+}
 \description{
 CCT bias-corrected, robust-SE RDD inference
 }

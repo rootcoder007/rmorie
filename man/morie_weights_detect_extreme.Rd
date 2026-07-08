@@ -11,6 +11,9 @@ morie_weights_detect_extreme(weights, k = 3)
 
 \item{k}{Numeric multiplier for \code{detect_extreme} (Tukey MAD cut).}
 }
+\value{
+A named list with elements \code{n_extreme}, \code{threshold_lower}, \code{threshold_upper}, \code{extreme_indices}, \code{extreme_values}, \code{pct_extreme}.
+}
 \description{
 Detect extreme weights at +/- k * IQR or by absolute percentile.
 }

@@ -23,6 +23,9 @@ format_dataframe(
 
 \item{title}{Title.}
 }
+\value{
+A character string.
+}
 \description{
 Apply uniform formatting to numeric columns
 }

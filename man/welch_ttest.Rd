@@ -11,6 +11,9 @@ welch_ttest(x, y, confidence = 0.95)
 
 \item{confidence}{Confidence level.}
 }
+\value{
+An object of class \code{"morie_test_result"}.
+}
 \description{
 Welch's t-test (convenience wrapper)
 }

@@ -9,6 +9,9 @@ morie_otis_analyze_b09(data)
 \arguments{
 \item{data}{b09 data.frame.}
 }
+\value{
+An object of class \code{"morie_otis_analysis_result"}.
+}
 \description{
 Individuals by number of placements x gender (b09)
 }

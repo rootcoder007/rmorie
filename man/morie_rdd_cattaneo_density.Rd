@@ -29,6 +29,9 @@ linear). 2 picks up quadratic curvature for bias correction.}
 \item{bandwidth}{Numeric; the local-polynomial bandwidth on each
 side of the cutoff. \code{NULL} invokes the data-driven CCT selector.}
 }
+\value{
+A named \code{list} (see Details).
+}
 \description{
 Cattaneo-Jansson-Ma (2020) local-polynomial density test
 }

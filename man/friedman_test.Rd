@@ -9,6 +9,9 @@ friedman_test(...)
 \arguments{
 \item{...}{Three or more equal-length numeric vectors.}
 }
+\value{
+An object of class \code{"morie_test_result"}.
+}
 \description{
 Friedman test (repeated-measures rank ANOVA)
 }

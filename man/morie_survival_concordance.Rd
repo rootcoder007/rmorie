@@ -14,6 +14,9 @@ morie_survival_concordance(time, event, risk_score)
 \item{risk_score}{Numeric vector of predicted risk scores aligned
 with \code{time} for concordance / discrimination metrics.}
 }
+\value{
+A numeric value (scalar).
+}
 \description{
 Uses \code{survival::concordance()} (which handles ties + censoring correctly).
 }

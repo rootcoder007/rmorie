@@ -9,6 +9,9 @@ lilliefors_test(x)
 \arguments{
 \item{x}{Numeric vector.}
 }
+\value{
+An object of class \code{"morie_test_result"}.
+}
 \description{
 Uses \pkg{nortest::lillie.test} when available; otherwise falls back
 to a plain KS test with estimated parameters (p-value approximate).

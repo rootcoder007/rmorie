@@ -9,6 +9,9 @@ cochrans_q(...)
 \arguments{
 \item{...}{Three or more matched binary 0/1 vectors.}
 }
+\value{
+An object of class \code{"morie_test_result"}.
+}
 \description{
 Cochran's Q test
 }

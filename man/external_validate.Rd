@@ -17,6 +17,9 @@ external_validate(predict_fn, X_external, y_external, X_development = NULL)
 \item{X_development}{Optional development-data features for KS-based
 domain-shift diagnostics.}
 }
+\value{
+An object of class \code{"class_name"}.
+}
 \description{
 External validation on new data
 }

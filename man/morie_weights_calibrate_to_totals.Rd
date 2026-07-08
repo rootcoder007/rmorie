@@ -26,6 +26,9 @@ Allowed values depend on the caller.}
 
 \item{...}{Additional method-specific arguments.}
 }
+\value{
+A named list with elements \code{weights}, \code{converged}, \code{iterations}, \code{max_adjustment}, \code{diagnostics}.
+}
 \description{
 Dispatch helper -- calibrate to totals via "raking" or "greg".
 }

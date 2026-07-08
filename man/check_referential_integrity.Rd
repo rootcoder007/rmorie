@@ -13,6 +13,9 @@ check_referential_integrity(child, parent, child_key, parent_key)
 
 \item{child_key, parent_key}{Column names.}
 }
+\value{
+A logical scalar.
+}
 \description{
 Check referential integrity (child FK -> parent PK)
 }

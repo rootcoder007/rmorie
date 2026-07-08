@@ -9,6 +9,9 @@ morie_otis_analyze_c01(data)
 \arguments{
 \item{data}{c01 data.frame.}
 }
+\value{
+An object of class \code{"morie_otis_analysis_result"}.
+}
 \description{
 Total individuals x custody/RC/seg x gender (c01)
 }

@@ -511,6 +511,7 @@ morie_tps_category_correlation_matrix <- function(dfs) {
 #'
 #' @param x A \code{morie_tps_result} list.
 #' @param ... Ignored.
+#' @return \code{x}, invisibly.
 #' @export
 print.morie_tps_result <- function(x, ...) {
   cat(x$title, "\

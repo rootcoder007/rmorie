@@ -19,6 +19,9 @@ variable in \code{data}.}
 \item{landmark_time}{Numeric landmark time at which to subset
 the cohort before fitting (lead-time bias correction).}
 }
+\value{
+A \code{data.frame} of landmark survival estimates.
+}
 \description{
 Landmark dataset constructor.
 }

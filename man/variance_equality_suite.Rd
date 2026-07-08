@@ -9,6 +9,9 @@ variance_equality_suite(...)
 \arguments{
 \item{...}{Two or more numeric vectors.}
 }
+\value{
+A named list (see Description).
+}
 \description{
 Run a suite of homogeneity-of-variance tests
 }

@@ -18,8 +18,8 @@
 #   * HonestDiD   -- Rambachan-Roth sensitivity to parallel-trends
 #                    violations
 #                    (`createSensitivityResults_relativeMagnitudes`).
-#   * synthdid    -- Arkhangelsky et al. synthetic DiD
-#                    (`synthdid_estimate`).
+#   * coresynth   -- Arkhangelsky et al. synthetic DiD, SDID via the
+#                    unified Formula interface (`scm_fit(method="sdid")`).
 #
 # Wrappers preserve the `morie_did_*` API and the existing result-list
 # shape (`estimate`, `std_error`, `t_stat`, `p_value`, `ci_lower`,
@@ -56,7 +56,7 @@ NULL
 .morie_did_have_fixest         <- function() requireNamespace("fixest",         quietly = TRUE)
 .morie_did_have_did            <- function() requireNamespace("did",            quietly = TRUE)
 .morie_did_have_bacondecomp    <- function() requireNamespace("bacondecomp",    quietly = TRUE)
-.morie_did_have_synthdid       <- function() requireNamespace("synthdid",       quietly = TRUE)
+.morie_did_have_coresynth      <- function() requireNamespace("coresynth",      quietly = TRUE)
 .morie_did_have_sandwich       <- function() requireNamespace("sandwich",       quietly = TRUE)
 .morie_did_have_drdid          <- function() requireNamespace("DRDID",          quietly = TRUE)
 .morie_did_have_honestdid      <- function() requireNamespace("HonestDiD",      quietly = TRUE)
@@ -887,21 +887,22 @@ morie_did_bacon_decomposition <- function(data, outcome, treatment,
 
 
 # ---------------------------------------------------------------------------
-# 13. Synthetic DiD -- thin synthdid wrapper
+# 13. Synthetic DiD -- coresynth SDID wrapper
 # ---------------------------------------------------------------------------
 
 #' Synthetic Difference-in-Differences (Arkhangelsky et al., 2021)
 #'
-#' Thin wrapper around \code{synthdid::synthdid_estimate}. Requires
-#' the \pkg{synthdid} package
-#' (\code{remotes::install_github("synth-inference/synthdid")});
-#' synthdid is not on CRAN and has no comparable alternative.
+#' Wraps the \pkg{coresynth} SDID estimator via its unified Formula
+#' interface (\code{coresynth::scm_fit(method = "sdid")}) with bootstrap
+#' inference (\code{coresynth::sdid_inference}). \pkg{coresynth} is on
+#' CRAN (it replaces the earlier GitHub-only \pkg{synthdid} backend).
 #'
 #' @param data Balanced panel.
 #' @param outcome,unit,time,treatment_time Column names.
 #' @param treated_units Optional explicit list of treated unit IDs.
-#' @param zeta Optional regularisation parameter (auto-selected if NULL).
-#' @param n_bootstrap Bootstrap replications for placebo SE.
+#' @param zeta Retained for back-compat; ignored (coresynth auto-selects
+#'   the SDID regularisation).
+#' @param n_bootstrap Bootstrap replications for the SE / CI.
 #' @param seed RNG seed.
 #' @param alpha Significance level.
 #' @return A result list; see \code{\link{morie_did_2x2}}.
@@ -913,8 +914,8 @@ morie_did_synthetic <- function(data, outcome, unit, time, treatment_time,
                                 treated_units = NULL, zeta = NULL,
                                 n_bootstrap = 200L, seed = 42L,
                                 alpha = 0.05) {
-  .morie_did_need("synthdid", "morie_did_synthetic")
-  df <- data
+  .morie_did_need("coresynth", "morie_did_synthetic")
+  df <- as.data.frame(data)
   df[["morie_g"]] <- as.numeric(df[[treatment_time]])
   if (is.null(treated_units))
     treated_units <- unique(df[is.finite(df[["morie_g"]]), unit, drop = TRUE])
@@ -924,35 +925,41 @@ morie_did_synthetic <- function(data, outcome, unit, time, treatment_time,
   first_treat <- min(treat_onset, na.rm = TRUE)
   units_all <- unique(df[[unit]])
   control_units <- setdiff(units_all, treated_units)
-  # Keep the treatment indicator LOGICAL: synthdid::panel.matrices builds
-  # W = matrix(treatment, ...) and then apply(W, 1, any). A double W makes
-  # any() coerce double -> logical and warn; a logical column avoids it and
-  # still satisfies panel.matrices' `%in% c(0, 1)` validation.
-  df[["morie_W"]] <- df[[unit]] %in% treated_units &
-                                  df[[time]] >= first_treat
-  setup <- synthdid::panel.matrices(
-    df[, c(unit, time, outcome, "morie_W")],
-    unit = 1, time = 2, outcome = 3, treatment = 4
-  )
-  est <- synthdid::synthdid_estimate(setup$Y, setup$N0, setup$T0,
-                                     zeta = zeta)
-  tau <- as.numeric(est)
-  # Use S3-dispatched stats::vcov(); synthdid::vcov.synthdid_estimate
-  # is unexported in CRAN builds and direct namespace access fails.
-  se_est <- tryCatch(sqrt(stats::vcov(est, method = "placebo")),
-                     error = function(e) NA_real_)
-  ci <- if (is.finite(se_est)) .morie_did_make_ci(tau, se_est, alpha)
+  # 0/1 treatment indicator: treated unit AND post-onset period. coresynth's
+  # Formula interface (outcome ~ treatment | unit + time) reads this directly.
+  df[["morie_W"]] <- as.integer(df[[unit]] %in% treated_units &
+                                  df[[time]] >= first_treat)
+  fml <- stats::as.formula(
+    sprintf("`%s` ~ morie_W | `%s` + `%s`", outcome, unit, time))
+  fit <- coresynth::scm_fit(fml, data = df, method = "sdid")
+  tau <- as.numeric(fit$estimate)
+  # Bootstrap inference (maps the existing n_bootstrap arg); populates
+  # se / ci / p directly. zeta is retained for back-compat but ignored:
+  # coresynth auto-selects SDID regularisation.
+  inf <- tryCatch(
+    coresynth::sdid_inference(fit, method = "bootstrap",
+                              n_boot = n_bootstrap, level = 1 - alpha,
+                              seed = seed),
+    error = function(e) NULL)
+  se_est <- if (!is.null(inf) && !is.null(inf$se)) as.numeric(inf$se)
+            else NA_real_
+  ci <- if (!is.null(inf) && !is.null(inf$ci_lower))
+          c(inf$ci_lower, inf$ci_upper)
+        else if (is.finite(se_est)) .morie_did_make_ci(tau, se_est, alpha)
         else c(NA_real_, NA_real_)
+  pval <- if (!is.null(inf) && !is.null(inf$p_value)) as.numeric(inf$p_value)
+          else if (is.finite(se_est) && se_est > 0)
+            .morie_did_pvalue(tau / se_est) else NA_real_
   list(
     estimate = tau, std_error = se_est,
     t_stat   = if (is.finite(se_est) && se_est > 0) tau / se_est else NA_real_,
-    p_value  = if (is.finite(se_est) && se_est > 0)
-                 .morie_did_pvalue(tau / se_est) else NA_real_,
+    p_value  = pval,
     ci_lower = ci[1], ci_upper = ci[2],
     n_treated = length(treated_units),
     n_control = length(control_units),
-    method = "synthetic_did (synthdid)",
-    details = list(fit = est, weights = attr(est, "weights"))
+    method = "synthetic_did (coresynth)",
+    details = list(fit = fit, unit_weights = fit$unit_weights,
+                   time_weights = fit$time_weights)
   )
 }
 
@@ -1584,40 +1591,38 @@ morie_did_twoway_fe_weights <- function(panel, group, time, treatment,
 # 23. Synthetic DiD explicit-name extender (Arkhangelsky et al., 2021)
 # ---------------------------------------------------------------------------
 
-#' Synthetic DiD via \code{synthdid::synthdid_estimate} (explicit-name API)
+#' Synthetic DiD via \code{coresynth::scm_fit} (explicit-name API)
 #'
 #' Parallel to \code{\link{morie_did_synthetic}}, this is the
-#' explicit-name wrapper that surfaces the full \code{synthdid}
-#' estimator and its placebo / jackknife variance pieces.  Use this
-#' when you want to pass through additional \pkg{synthdid} arguments
-#' or inspect the unit / time weights side-by-side; use
+#' explicit-name wrapper that surfaces the full \pkg{coresynth} SDID
+#' estimator and its placebo / bootstrap / jackknife variance pieces.
+#' Use this when you want to pass through additional \pkg{coresynth}
+#' arguments or inspect the unit / time weights side-by-side; use
 #' \code{morie_did_synthetic} when you want the rmorie result-list
 #' shape consumed by \code{morie_did_*} downstream code.
 #'
-#' Wrapper-as-extender: rmorie already wraps \pkg{synthdid} once via
+#' Wrapper-as-extender: rmorie already wraps \pkg{coresynth} once via
 #' \code{morie_did_synthetic}; this entry point gives MRM / paper
-#' callers the canonical Arkhangelsky et al. (2021) API with a
-#' \code{morie_*} name so they don't need to load \pkg{synthdid}
+#' callers the canonical Arkhangelsky et al. (2021) SDID API with a
+#' \code{morie_*} name so they don't need to load \pkg{coresynth}
 #' directly.
 #'
 #' @param panel Long-format balanced panel.
 #' @param unit Unit identifier column.
 #' @param time Time period column.
-#' @param treatment Binary treatment indicator that turns on at onset
-#'   for treated units and is zero everywhere for controls (the
-#'   \pkg{synthdid} W convention).
+#' @param treatment Binary (0/1) treatment indicator that turns on at
+#'   onset for treated units and is zero everywhere for controls.
 #' @param outcome Outcome column.
-#' @param vcov_method Variance estimator passed to
-#'   \code{stats::vcov.synthdid_estimate}: one of \code{"placebo"}
+#' @param vcov_method Inference method passed to
+#'   \code{coresynth::sdid_inference}: one of \code{"placebo"}
 #'   (default), \code{"bootstrap"}, \code{"jackknife"}.
 #' @param ... Additional arguments forwarded to
-#'   \code{synthdid::synthdid_estimate} (e.g. \code{zeta},
-#'   \code{omega.intercept}).
+#'   \code{coresynth::scm_fit} (e.g. \code{predictors}, \code{covariates}).
 #' @return An S3 list of class \code{morie_did_synthdid_result} with
 #'   elements \code{att}, \code{std_error}, \code{vcov_method},
 #'   \code{n_treated}, \code{n_control}, \code{n_pre},
 #'   \code{n_post}, \code{method}, and \code{raw} (the full
-#'   \code{synthdid_estimate} object).
+#'   \code{coresynth} SDID fit object).
 #' @references Arkhangelsky, D., Athey, S., Hirshberg, D. A., Imbens,
 #'   G. W., & Wager, S. (2021). Synthetic difference-in-differences.
 #'   \emph{American Economic Review}, 111(12), 4088--4118.
@@ -1626,36 +1631,41 @@ morie_did_twoway_fe_weights <- function(panel, group, time, treatment,
 morie_did_synthdid_estimate <- function(panel, unit, time, treatment,
                                         outcome,
                                         vcov_method = "placebo", ...) {
-  .morie_did_need("synthdid", "morie_did_synthdid_estimate")
+  .morie_did_need("coresynth", "morie_did_synthdid_estimate")
   df <- as.data.frame(panel)
-  cols <- c(unit, time, outcome, treatment)
-  # A 0/1 *double* treatment column makes synthdid's apply(W, 1, any) coerce
-  # double -> logical and warn; pass it as logical (only when already valid
-  # 0/1, so genuinely invalid input still hits panel.matrices' own check).
-  if (is.numeric(df[[treatment]]) && all(df[[treatment]] %in% c(0, 1)))
-    df[[treatment]] <- as.logical(df[[treatment]])
-  setup <- synthdid::panel.matrices(
-    df[, cols, drop = FALSE],
-    unit = 1, time = 2, outcome = 3, treatment = 4
-  )
-  est <- do.call(synthdid::synthdid_estimate,
-                 c(list(Y = setup$Y, N0 = setup$N0, T0 = setup$T0), list(...)))
-  att <- as.numeric(est)
-  se_est <- tryCatch(sqrt(stats::vcov(est, method = vcov_method)),
-                     error = function(e) NA_real_)
-  n_total <- nrow(setup$Y)
-  t_total <- ncol(setup$Y)
+  # coresynth reads a 0/1 integer treatment indicator directly.
+  if (is.logical(df[[treatment]]))
+    df[[treatment]] <- as.integer(df[[treatment]])
+  fml <- stats::as.formula(
+    sprintf("`%s` ~ `%s` | `%s` + `%s`", outcome, treatment, unit, time))
+  fit <- do.call(coresynth::scm_fit,
+                 c(list(fml, data = df, method = "sdid"), list(...)))
+  att <- as.numeric(fit$estimate)
+  # vcov_method maps to coresynth's inference method (placebo/bootstrap/
+  # jackknife). placebo returns no closed-form se, so derive it as the sd
+  # of the placebo effect distribution (standard placebo inference).
+  inf <- tryCatch(
+    coresynth::sdid_inference(fit, method = vcov_method),
+    error = function(e) NULL)
+  se_est <- if (!is.null(inf) && !is.null(inf$se)) as.numeric(inf$se)
+            else if (!is.null(inf) && !is.null(inf$placebo_effects))
+              stats::sd(inf$placebo_effects)
+            else NA_real_
+  n_total <- length(unique(df[[unit]]))
+  t_total <- length(unique(df[[time]]))
+  n_pre   <- as.integer(fit$T_pre)
+  n_treat <- as.integer(fit$N_tr)
   structure(
     list(
       att          = att,
-      std_error    = as.numeric(se_est),
+      std_error    = se_est,
       vcov_method  = vcov_method,
-      n_treated    = n_total - as.integer(setup$N0),
-      n_control    = as.integer(setup$N0),
-      n_pre        = as.integer(setup$T0),
-      n_post       = t_total - as.integer(setup$T0),
-      method       = "synthdid_estimate (synthdid)",
-      raw          = est
+      n_treated    = n_treat,
+      n_control    = n_total - n_treat,
+      n_pre        = n_pre,
+      n_post       = t_total - n_pre,
+      method       = "sdid (coresynth)",
+      raw          = fit
     ),
     class = c("morie_did_synthdid_result", "list")
   )

@@ -252,6 +252,7 @@ morie_hawkes_st_fit <- function(events, end_time = NULL, area = 1,
   out
 }
 
+#' @return \code{x}, invisibly.
 #' @export
 print.morie_hawkes_st_fit <- function(x, ...) {
   p <- x$params

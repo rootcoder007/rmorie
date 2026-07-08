@@ -39,6 +39,9 @@ regression_table(
 
 \item{title}{Title.}
 }
+\value{
+A character string.
+}
 \description{
 Side-by-side regression table for multiple model fits
 }

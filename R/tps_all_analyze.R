@@ -633,6 +633,7 @@ morie_tps_analyze_all <- function(dfs, out_dir = NULL) {
 # Print method
 # ---------------------------------------------------------------------------
 
+#' @return \code{x}, invisibly.
 #' @export
 print.morie_tps_result <- function(x, ...) {
   cat(x$title, "\

@@ -20,6 +20,9 @@ format_number(
 
 \item{apa}{APA-style leading-zero suppression.}
 }
+\value{
+A logical scalar.
+}
 \description{
 Format a single number according to style conventions
 }

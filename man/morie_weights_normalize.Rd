@@ -18,6 +18,9 @@ morie_weights_normalize(
 \item{population_size}{Optional known population size used by
 \code{normalize} (target sum = population_size when supplied).}
 }
+\value{
+A logical scalar.
+}
 \description{
 Normalise weights so they sum to n (sample) or N (population).
 }
