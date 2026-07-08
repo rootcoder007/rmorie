@@ -44,6 +44,9 @@ side of the cutoff. \code{NULL} invokes the data-driven CCT selector.}
 \item{kernel}{One of \code{"triangular"} (default), \code{"epanechnikov"},
 \code{"uniform"}, or \code{"gaussian"}.}
 }
+\value{
+A named \code{list} (see Details).
+}
 \description{
 Binned scatter + global-polynomial data for an RD plot
 }

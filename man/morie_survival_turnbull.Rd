@@ -16,6 +16,9 @@ morie_survival_turnbull(left, right, max_iter = 200, tol = 1e-06)
 
 \item{tol}{Convergence tolerance for the Turnbull EM.}
 }
+\value{
+A named list with elements \code{times}, \code{survival}, \code{method}.
+}
 \description{
 Delegates to \code{survival::survfit()} with \code{Surv(left, right, type = "interval2")}.
 Hand-rolled EM is left as a stub for environments without \code{survival}.

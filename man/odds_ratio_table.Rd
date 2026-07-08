@@ -26,6 +26,9 @@ odds_ratio_table(
 
 \item{title}{Title.}
 }
+\value{
+A character string.
+}
 \description{
 Odds-ratio table from a fitted logistic GLM
 }

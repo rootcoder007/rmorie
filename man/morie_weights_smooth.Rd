@@ -19,6 +19,9 @@ Allowed values depend on the caller.}
 \item{shrinkage_factor}{Numeric in \verb{[0, 1]}; smoothing pull-toward-
 mean factor.}
 }
+\value{
+A numeric value.
+}
 \description{
 Smooth survey weights via shrinkage toward the mean (or log-mean).
 }

@@ -275,6 +275,7 @@ mrm_gentrification_panel <- function(df,
 # Print method (shared across MRM primitives)
 # ---------------------------------------------------------------------------
 
+#' @return \code{x}, invisibly.
 #' @export
 print.morie_mrm_result <- function(x, ...) {
   cat(x$title, "\

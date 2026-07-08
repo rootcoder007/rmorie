@@ -16,6 +16,9 @@ morie_survival_rmst(time, event, tau = NULL, confidence = 0.95)
 \item{confidence}{Confidence level for interval estimates (default
 \code{0.95}).}
 }
+\value{
+A named list with elements \code{rmst}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{tau}.
+}
 \description{
 Integrates the Kaplan-Meier estimator from 0 to \code{tau} using trapezoidal
 integration on the step-function. SE follows the Klein-Moeschberger

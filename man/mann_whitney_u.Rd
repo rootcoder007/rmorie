@@ -11,6 +11,9 @@ mann_whitney_u(x, y, alternative = "two.sided")
 
 \item{alternative}{One of "two.sided", "less", "greater".}
 }
+\value{
+An object of class \code{"morie_test_result"}.
+}
 \description{
 Mann-Whitney U / Wilcoxon rank-sum test
 }

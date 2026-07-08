@@ -9,6 +9,9 @@ morie_weights_ess(weights)
 \arguments{
 \item{weights}{Numeric vector of unit-level design weights.}
 }
+\value{
+A logical scalar.
+}
 \description{
 Kish effective sample size: \eqn{(\sum w_i)^2 / \sum w_i^2}{(sum w_i)^2 / sum w_i^2}.
 }

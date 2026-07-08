@@ -244,6 +244,7 @@ morie_fairness_apply_profile <- function(df, profile) {
 # print
 # ---------------------------------------------------------------------------
 
+#' @return \code{x}, invisibly.
 #' @export
 print.morie_city_profile <- function(x, ...) {
   cat("morie_city_profile:", x$name, "\

@@ -22,6 +22,9 @@ instrumental variables.}
 regressors included in both the structural equation and the
 first stage. \code{NULL} (default) for a just-identified design.}
 }
+\value{
+A named \code{list} (see Details).
+}
 \description{
 Hansen J test of overidentifying restrictions (robust)
 }

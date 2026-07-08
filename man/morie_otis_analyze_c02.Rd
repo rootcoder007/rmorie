@@ -9,6 +9,9 @@ morie_otis_analyze_c02(data)
 \arguments{
 \item{data}{c02 data.frame.}
 }
+\value{
+An object of class \code{"morie_otis_analysis_result"}.
+}
 \description{
 Individuals in RC/seg by institution (c02)
 }

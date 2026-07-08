@@ -32,6 +32,9 @@ first stage. \code{NULL} (default) for a just-identified design.}
 \item{beta0}{Numeric scalar or vector; the structural-coefficient
 value(s) to test under H0. Length must match \code{length(endogenous)}.}
 }
+\value{
+A named list with elements \code{statistic}, \code{F_statistic}, \code{p_value}, \code{name}, \code{df}, \code{df_resid}, \code{beta0}.
+}
 \description{
 Conditional likelihood-ratio (CLR) test of Moreira (2003)
 }

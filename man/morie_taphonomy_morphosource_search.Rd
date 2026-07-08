@@ -5,7 +5,7 @@
 \title{Search MorphoSource for 3D media or physical objects}
 \source{
 \url{https://www.morphosource.org}; API verified against
-  \url{https://github.com/Imageomics/pyMorphoSource}.
+\url{https://github.com/Imageomics/pyMorphoSource}.
 }
 \usage{
 morie_taphonomy_morphosource_search(
@@ -34,8 +34,8 @@ hard-code it.}
 }
 \value{
 A \code{list}: \code{items} (raw records), \code{n},
-  \code{total_pages}, and \code{df} (a \code{data.frame} of \code{id} +
-  \code{title} where present).
+\code{total_pages}, and \code{df} (a \code{data.frame} of \code{id} +
+\code{title} where present).
 }
 \description{
 Queries the open MorphoSource repository (CT / micro-CT / 3D scans of

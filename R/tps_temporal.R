@@ -501,6 +501,7 @@ morie_tps_arima_forecast <- function(df, h = 12L, ds_name = "?") {
 # Print method (shared with tps_stochastic)
 # ---------------------------------------------------------------------------
 
+#' @return \code{x}, invisibly.
 #' @export
 print.morie_tps_temporal_result <- function(x, ...) {
   cat(x$title, "\

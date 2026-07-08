@@ -26,6 +26,8 @@ morie_arsau_analyze_aggregate_summary(
 \value{
 A list classed
 \code{c("morie_arsau_result", "morie_rich_result", "list")}.
+
+An object of class \code{"morie_arsau_analysis_result"}.
 }
 \description{
 The aggregate file is a long-format

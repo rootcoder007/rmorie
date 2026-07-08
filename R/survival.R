@@ -151,6 +151,7 @@ morie_survival_nelsonaalen <- function(time, event, confidence = 0.95) {
 #'
 #' @param time,event,group Vectors.
 #' @param weight One of "logrank", "peto", "gehan", "tarone".
+#' @return A named list with elements \code{method}, \code{test_statistic}, \code{p_value}, \code{df}, \code{n_groups}, \code{n_total}.
 #' @export
 morie_survival_logrank <- function(time, event, group,
                                    weight = c("logrank", "peto", "gehan", "tarone")) {
@@ -190,6 +191,7 @@ morie_survival_logrank <- function(time, event, group,
 #' @param ties "efron" (default) or "breslow".
 #' @param confidence Confidence level (default 0.95).
 #' @param penalizer L2 penalty (passed via `ridge()` term in the formula).
+#' @return A named list with elements \code{coefficients}, \code{standard_errors}, \code{hazard_ratios}, \code{z_scores}, \code{p_values}, \code{ci_lower}, \code{ci_upper}, \code{covariate_names}, \code{concordance}, \code{log_likelihood}, \code{n_events}, \code{n_observations}, \code{method}, \code{baseline_hazard}, \code{.coxph}.
 #' @export
 morie_survival_cox <- function(data, duration_col, event_col, covariate_cols,
                                ties = c("efron", "breslow"),
@@ -231,6 +233,7 @@ morie_survival_cox <- function(data, duration_col, event_col, covariate_cols,
 #'
 #' Wraps `survival::cox.zph()` (scaled Schoenfeld residuals).
 #' @param cox_result Object returned by `morie_survival_cox()`.
+#' @return A named list with elements \code{residuals}, \code{scaled}, \code{zph_table}.
 #' @export
 morie_survival_schoenfeld <- function(cox_result) {
   .req_survival()
@@ -246,6 +249,7 @@ morie_survival_schoenfeld <- function(cox_result) {
 
 #' Cox-Snell residuals from a fitted morie Cox model.
 #' @inheritParams morie_survival_params
+#' @return A numeric value (scalar).
 #' @export
 morie_survival_coxsnell <- function(cox_result) {
   .req_survival()
@@ -259,6 +263,7 @@ morie_survival_coxsnell <- function(cox_result) {
 
 #' Martingale residuals.
 #' @inheritParams morie_survival_params
+#' @return A numeric vector of martingale residuals.
 #' @export
 morie_survival_martingale <- function(cox_result) {
   .req_survival()
@@ -269,6 +274,7 @@ morie_survival_martingale <- function(cox_result) {
 
 #' Deviance residuals.
 #' @inheritParams morie_survival_params
+#' @return A numeric vector of deviance residuals.
 #' @export
 morie_survival_deviance <- function(cox_result) {
   .req_survival()
@@ -282,6 +288,7 @@ morie_survival_deviance <- function(cox_result) {
 #' Wraps `survival::survreg()`. Supported `dist`: "weibull", "lognormal",
 #' "loglogistic", "exponential", "gaussian".
 #' @inheritParams morie_survival_params
+#' @return A named list with elements \code{distribution}, \code{coefficients}, \code{scale}, \code{log_likelihood}, \code{aic}, \code{bic}, \code{n_observations}, \code{n_events}, \code{.survreg}.
 #' @export
 morie_survival_aft <- function(data, duration_col, event_col, covariate_cols,
                                dist = c("weibull", "lognormal", "loglogistic",
@@ -313,6 +320,7 @@ morie_survival_aft <- function(data, duration_col, event_col, covariate_cols,
 #' For "exponential", "weibull", "lognormal", "loglogistic", "gaussian".
 #' Use `morie_survival_aft()` for covariate-adjusted parametric models.
 #' @inheritParams morie_survival_params
+#' @return A named list with elements \code{distribution}, \code{coefficients}, \code{scale}, \code{log_likelihood}, \code{aic}, \code{bic}, \code{n_observations}, \code{n_events}.
 #' @export
 morie_survival_parametric <- function(time, event,
                                        dist = c("weibull", "exponential",
@@ -338,6 +346,7 @@ morie_survival_parametric <- function(time, event,
 #'
 #' Uses `survival::concordance()` (which handles ties + censoring correctly).
 #' @inheritParams morie_survival_params
+#' @return A numeric value (scalar).
 #' @export
 morie_survival_concordance <- function(time, event, risk_score) {
   .req_survival()
@@ -355,6 +364,7 @@ morie_survival_concordance <- function(time, event, risk_score) {
 #' integration on the step-function. SE follows the Klein-Moeschberger
 #' formula (approximation matches the Python module).
 #' @inheritParams morie_survival_params
+#' @return A named list with elements \code{rmst}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{tau}.
 #' @export
 morie_survival_rmst <- function(time, event, tau = NULL, confidence = 0.95) {
   .req_survival()
@@ -371,6 +381,7 @@ morie_survival_rmst <- function(time, event, tau = NULL, confidence = 0.95) {
 
 #' Difference in RMST between two groups.
 #' @inheritParams morie_survival_params
+#' @return A named list with elements \code{rmst_diff}, \code{se}, \code{z}, \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{rmst_group1}, \code{rmst_group2}, \code{tau}.
 #' @export
 morie_survival_rmst_diff <- function(time1, event1, time2, event2,
                                      tau = NULL, confidence = 0.95) {
@@ -392,6 +403,7 @@ morie_survival_rmst_diff <- function(time1, event1, time2, event2,
 #' @param event Integer event code: 0 = censored, 1 = event of interest,
 #'   >=2 = competing event.
 #' @inheritParams morie_survival_params
+#' @return A named list with elements \code{times}, \code{cif}, \code{ci_lower}, \code{ci_upper}, \code{event_of_interest}, \code{n_total}, \code{method}.
 #' @export
 morie_survival_cif <- function(time, event, event_of_interest = 1L,
                                confidence = 0.95) {
@@ -424,6 +436,7 @@ morie_survival_cif <- function(time, event, event_of_interest = 1L,
 #'
 #' Requires the `cmprsk` package.
 #' @inheritParams morie_survival_params
+#' @return A named list with elements \code{coefficients}, \code{standard_errors}, \code{hazard_ratios}, \code{p_values}, \code{ci_lower}, \code{ci_upper}, \code{covariate_names}, \code{n_events}, \code{n_observations}, \code{method}.
 #' @export
 morie_survival_finegray <- function(data, duration_col, event_col,
                                     covariate_cols, event_of_interest = 1L,
@@ -473,6 +486,7 @@ coef.crr <- function(object, ...) {
 
 #' Hazard ratio between two groups via a simple Cox model.
 #' @inheritParams morie_survival_params
+#' @return A named list with elements \code{hr}, \code{ci_lower}, \code{ci_upper}, \code{p_value}, \code{log_hr}, \code{se}.
 #' @export
 morie_survival_hr <- function(time, event, group, confidence = 0.95) {
   .req_survival()
@@ -494,6 +508,7 @@ morie_survival_hr <- function(time, event, group, confidence = 0.95) {
 
 #' Landmark dataset constructor.
 #' @inheritParams morie_survival_params
+#' @return A \code{data.frame} of landmark survival estimates.
 #' @export
 morie_survival_landmark <- function(data, duration_col, event_col, landmark_time) {
   df <- data[data[[duration_col]] >= landmark_time, , drop = FALSE]
@@ -503,6 +518,7 @@ morie_survival_landmark <- function(data, duration_col, event_col, landmark_time
 
 #' Left-truncated Kaplan-Meier with delayed entry.
 #' @inheritParams morie_survival_params
+#' @return A named list with elements \code{times}, \code{survival}, \code{ci_lower}, \code{ci_upper}, \code{at_risk}, \code{events}, \code{censored}, \code{method}.
 #' @export
 morie_survival_left_truncated_km <- function(entry_time, exit_time, event,
                                              confidence = 0.95) {
@@ -521,6 +537,7 @@ morie_survival_left_truncated_km <- function(entry_time, exit_time, event,
 
 #' Compare parametric survival models by AIC/BIC.
 #' @inheritParams morie_survival_params
+#' @return A logical scalar.
 #' @export
 morie_survival_compare_parametric <- function(time, event) {
   dists <- c("exponential", "weibull", "lognormal", "loglogistic", "gaussian")
@@ -545,6 +562,7 @@ morie_survival_compare_parametric <- function(time, event) {
 #' Delegates to `survival::survfit()` with `Surv(left, right, type = "interval2")`.
 #' Hand-rolled EM is left as a stub for environments without `survival`.
 #' @inheritParams morie_survival_params
+#' @return A named list with elements \code{times}, \code{survival}, \code{method}.
 #' @export
 morie_survival_turnbull <- function(left, right, max_iter = 200, tol = 1e-6) {
   if (!requireNamespace("survival", quietly = TRUE)) {

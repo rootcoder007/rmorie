@@ -30,6 +30,9 @@ temporal_validate(
 
 \item{scoring}{Scoring metric.}
 }
+\value{
+An object of class \code{"class_name"}.
+}
 \description{
 Train on earlier data, test on later data
 }

@@ -11,6 +11,9 @@ morie_psymet_splithalf(data, method = c("first_last", "odd_even"))
 
 \item{method}{"first_last" or "odd_even".}
 }
+\value{
+A numeric scalar: the Spearman-Brown split-half reliability.
+}
 \description{
 Spearman-Brown split-half reliability.
 }

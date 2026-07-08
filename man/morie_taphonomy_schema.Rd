@@ -8,8 +8,8 @@ morie_taphonomy_schema()
 }
 \value{
 A zero-row \code{data.frame}; each column has the correct type and a
-  \code{"role"} attribute (\code{"treatment"}, \code{"covariate"},
-  \code{"measurement"}, or \code{"outcome"}).
+\code{"role"} attribute (\code{"treatment"}, \code{"covariate"},
+\code{"measurement"}, or \code{"outcome"}).
 }
 \description{
 Returns an empty, typed \code{data.frame} documenting the columns

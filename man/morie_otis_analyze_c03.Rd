@@ -9,6 +9,9 @@ morie_otis_analyze_c03(data)
 \arguments{
 \item{data}{c03 data.frame.}
 }
+\value{
+An object of class \code{"morie_otis_analysis_result"}.
+}
 \description{
 Individuals x race x gender (c03)
 }

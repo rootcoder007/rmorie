@@ -39,6 +39,9 @@ linear). 2 picks up quadratic curvature for bias correction.}
 
 \item{alpha}{Significance level (default \code{0.05}).}
 }
+\value{
+A \code{data.frame} of RDD estimates across bandwidths, one row per bandwidth.
+}
 \description{
 Bandwidth sensitivity sweep
 }

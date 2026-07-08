@@ -13,6 +13,9 @@ partial_correlation(x, y, covariates, confidence = 0.95)
 
 \item{confidence}{Confidence level.}
 }
+\value{
+An object of class \code{"morie_test_result"}.
+}
 \description{
 Partial Pearson correlation controlling for covariates
 }

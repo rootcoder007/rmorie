@@ -19,6 +19,9 @@ bandwidth selectors + density tests that don't take a
 \item{kernel}{One of \code{"triangular"} (default), \code{"epanechnikov"},
 \code{"uniform"}, or \code{"gaussian"}.}
 }
+\value{
+A named list with elements \code{bandwidth}, \code{method}, \code{details}.
+}
 \description{
 Dispatches to \code{rdrobust::rdbwselect(bwselect = "mserd")} which
 implements the modern IK-equivalent CCT MSE-optimal rule.

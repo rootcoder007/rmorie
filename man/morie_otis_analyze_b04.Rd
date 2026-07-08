@@ -9,6 +9,9 @@ morie_otis_analyze_b04(data)
 \arguments{
 \item{data}{b04 data.frame.}
 }
+\value{
+An object of class \code{"morie_otis_analysis_result"}.
+}
 \description{
 Placement durations by region & gender (b04)
 }

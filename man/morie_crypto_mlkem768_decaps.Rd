@@ -4,7 +4,7 @@
 \alias{morie_crypto_mlkem768_decaps}
 \title{ML-KEM-768 decapsulation}
 \usage{
-morie_crypto_mlkem768_decaps(sk, ct)
+morie_crypto_mlkem768_decaps(sk_sxp, ct_sxp)
 }
 \arguments{
 \item{sk}{2400-byte raw vector (recipient's ML-KEM-768 secret key).}

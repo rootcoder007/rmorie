@@ -9,6 +9,9 @@ morie_otis_analyze_b06(data)
 \arguments{
 \item{data}{b06 data.frame.}
 }
+\value{
+An object of class \code{"morie_otis_analysis_result"}.
+}
 \description{
 Reasons for placement x institution x gender (b06)
 }

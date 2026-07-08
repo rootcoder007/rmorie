@@ -25,6 +25,9 @@ fixture from \code{inst/extdata/tps_mha_apprehensions_sample.csv}
 
 \item{layer_url}{Optional ArcGIS layer URL override.}
 }
+\value{
+A \code{data.frame}.
+}
 \description{
 TPS PSDP -- Assault
 }

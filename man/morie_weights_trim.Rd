@@ -21,6 +21,9 @@ morie_weights_trim(
 \item{method}{Character; calibration / smoothing / variance method.
 Allowed values depend on the caller.}
 }
+\value{
+A numeric vector of trimmed weights.
+}
 \description{
 \code{method = "percentile"} clips at the specified percentiles;
 \code{method = "winsorize"} replaces outliers with the boundary values.

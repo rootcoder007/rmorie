@@ -27,7 +27,7 @@ morie_taphonomy_fetch_usgs_soil(
 }
 \value{
 A \code{data.frame} of soil samples with elemental-concentration
-  columns; \code{attr(., "source")} records the URL.
+columns; \code{attr(., "source")} records the URL.
 }
 \description{
 Downloads the U.S. Geological Survey National Geochemical Database (soil)

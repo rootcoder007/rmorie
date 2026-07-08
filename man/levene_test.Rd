@@ -11,6 +11,9 @@ levene_test(..., center = "median")
 
 \item{center}{One of "median" (Brown-Forsythe), "mean", "trimmed".}
 }
+\value{
+An object of class \code{"morie_test_result"}.
+}
 \description{
 Levene's test for equality of variances
 }

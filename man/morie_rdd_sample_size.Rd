@@ -33,6 +33,9 @@ side of the cutoff. \code{NULL} invokes the data-driven CCT selector.}
 
 \item{alpha}{Significance level (default \code{0.05}).}
 }
+\value{
+An integer scalar: the required sample size.
+}
 \description{
 RDD sample-size determination
 }

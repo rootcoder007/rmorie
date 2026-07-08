@@ -6,6 +6,9 @@
 \usage{
 .morie_entheo_trapz(y, x)
 }
+\value{
+A numeric scalar: the trapezoidal integral of \code{y} over \code{x}.
+}
 \description{
 Trapezoidal integration on a 1-D grid.
 }

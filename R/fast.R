@@ -32,6 +32,7 @@ morie_normal_pdf <- function(x, mean = 0, sd = 1) {
 #'
 #' Single-pass C++ kernel.  Equivalent to \code{mean(x)}.
 #' @keywords internal
+#' @return A numeric scalar: the mean of \code{x}.
 morie_mean <- function(x) {
   if (.cpp_available()) {
     morie_mean_cpp(as.numeric(x))
@@ -46,6 +47,7 @@ morie_mean <- function(x) {
 #' @param x numeric vector
 #' @param ddof integer; default 1 (sample variance)
 #' @keywords internal
+#' @return A numeric scalar: the variance of \code{x}.
 morie_var <- function(x, ddof = 1) {
   if (.cpp_available()) {
     morie_var_cpp(as.numeric(x), as.integer(ddof))
@@ -63,6 +65,7 @@ morie_var <- function(x, ddof = 1) {
 #' Single-pass C++ kernel.  Equivalent to \code{cor(x, y)} when both
 #' vectors are equal-length and complete (no NA handling).
 #' @keywords internal
+#' @return A numeric scalar: the Pearson correlation between \code{x} and \code{y}.
 morie_cor_pearson <- function(x, y) {
   if (.cpp_available()) {
     morie_cor_pearson_cpp(as.numeric(x), as.numeric(y))

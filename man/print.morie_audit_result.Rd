@@ -11,6 +11,9 @@
 
 \item{...}{Unused.}
 }
+\value{
+\code{x}, invisibly.
+}
 \description{
 Print method for audit results.
 }

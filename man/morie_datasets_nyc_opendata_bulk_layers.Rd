@@ -32,6 +32,20 @@ morie_datasets_vancouver_opendata_bulk_layers(offline = TRUE)
 }
 \value{
 Tabular catalog snapshot.
+
+A \code{data.frame}.
+
+A \code{data.frame}.
+
+A \code{data.frame}.
+
+A \code{data.frame}.
+
+A \code{data.frame}.
+
+A \code{data.frame}.
+
+A \code{data.frame}.
 }
 \description{
 Phase 3HHH1. Bundled snapshot of every CKAN package on

@@ -15,6 +15,9 @@ fallback_procedure(p_values, weights, alpha = 0.05, labels = NULL)
 
 \item{labels}{Optional character vector of test labels.}
 }
+\value{
+An object of class \code{"morie_multiple_testing_result"}.
+}
 \description{
 Wiens-Dmitrienko fallback; \pkg{gMCP} can express the same
 procedure as a graphical multiple-comparison transition.

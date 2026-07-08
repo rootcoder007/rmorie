@@ -6,6 +6,9 @@
 \usage{
 ARSAU_YEARS()
 }
+\value{
+A character vector.
+}
 \description{
 Known ARSAU year/range keys.
 }

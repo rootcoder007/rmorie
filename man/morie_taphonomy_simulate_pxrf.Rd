@@ -35,8 +35,8 @@ to \code{total_ppm}; else return proportions summing to 1.}
 }
 \value{
 A \code{data.frame}: one column per element, plus \code{condition}
-  and \code{lime_treatment} (1 = treatment). Attributes \code{elements},
-  \code{alpha}, and \code{synthetic = TRUE} are attached.
+and \code{lime_treatment} (1 = treatment). Attributes \code{elements},
+\code{alpha}, and \code{synthetic = TRUE} are attached.
 }
 \description{
 \strong{Synthetic data for testing/calibration ONLY -- never a substitute for

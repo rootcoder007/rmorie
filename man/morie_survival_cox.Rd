@@ -29,6 +29,9 @@ morie_survival_cox(
 
 \item{penalizer}{L2 penalty (passed via \code{ridge()} term in the formula).}
 }
+\value{
+A named list with elements \code{coefficients}, \code{standard_errors}, \code{hazard_ratios}, \code{z_scores}, \code{p_values}, \code{ci_lower}, \code{ci_upper}, \code{covariate_names}, \code{concordance}, \code{log_likelihood}, \code{n_events}, \code{n_observations}, \code{method}, \code{baseline_hazard}, \code{.coxph}.
+}
 \description{
 Wraps \code{survival::coxph()} with Efron (default) or Breslow tie handling
 and returns a tidy list including hazard ratios, CIs, p-values, and the

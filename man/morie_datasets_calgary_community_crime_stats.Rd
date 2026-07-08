@@ -23,6 +23,10 @@ morie_datasets_calgary_fire_stations(offline = TRUE, max_features = NULL)
 \value{
 A \code{data.frame} with \code{community}, \code{category}, \code{crime_count},
 \code{year}, \code{month}.
+
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 }
 \description{
 Phase 3FFF3. Bundled 200-row sample of Calgary's per-community

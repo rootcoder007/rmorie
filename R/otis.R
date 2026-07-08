@@ -623,25 +623,31 @@ morie_otis_otdml <- function(df,
 # ---------------------------------------------------------------------------
 
 #' @rdname morie_otis_primitives
+#' @return An object of class \code{"morie_otis_result"}.
 #' @export
 morie_otis_regional_placement <- function(...) morie_otis_rplace(...)
 
 #' @rdname morie_otis_primitives
+#' @return An object of class \code{"morie_otis_result"}.
 #' @export
 morie_otis_alert_state_combo <- function(...) morie_otis_astcmb(...)
 
 #' @rdname morie_otis_primitives
+#' @return An object of class \code{"morie_otis_result"}.
 #' @export
 morie_otis_volatility <- function(...) morie_otis_volat(...)
 
 #' @rdname morie_otis_primitives
+#' @return An object of class \code{"morie_otis_result"}.
 #' @export
 morie_otis_rc_trends <- function(...) morie_otis_rctrnd(...)
 
 #' @rdname morie_otis_primitives
+#' @return An object of class \code{"morie_otis_result"}.
 #' @export
 morie_otis_descriptives <- function(...) morie_otis_otdesc(...)
 
 #' @rdname morie_otis_primitives
+#' @return An object of class \code{"morie_otis_result"}.
 #' @export
 morie_otis_dml <- function(...) morie_otis_otdml(...)

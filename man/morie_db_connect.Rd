@@ -20,16 +20,15 @@ Opens (or creates) a per-user \strong{SQL} cache database. This is the
 opt-in SQL backend and requires DuckDB or RSQLite to be installed.
 }
 \details{
-The DEFAULT cache used by \code{morie_cache_store()} / \code{_load()} /
-\code{_list()} needs \strong{no SQL backend at all} — it uses a
-zero/light dependency file store: Parquet via \pkg{nanoparquet}
-(cross-language) when available, else base-R \code{.rds}. Install
-\code{duckdb} (or \code{RSQLite}), or set
-\code{MORIE_CACHE_BACKEND=duckdb}/\code{sqlite}, or pass \code{db_path=},
-to use SQL instead — DuckDB is preferred (vectorised + columnar, handles
+Note: the DEFAULT cache used by \code{morie_cache_store()} / \verb{_load()} /
+\verb{_list()} needs \strong{no SQL backend at all} — it uses a zero/light
+dependency file store: Parquet via \pkg{nanoparquet} (cross-language)
+when available, else base-R \code{.rds}. Install \code{duckdb} (or \code{RSQLite}),
+or set \code{MORIE_CACHE_BACKEND=duckdb}/\code{sqlite}, or pass \verb{db_path=}, to
+use SQL instead — DuckDB is preferred (vectorised + columnar, handles
 multi-GB PUMFs and out-of-core analytical queries); an existing
-\code{morie.db} / \code{morie.duckdb} cache is reused for back-compat.
-For the multi-user server tier, pass your own PostgreSQL \code{con=}.
+\code{morie.db} / \code{morie.duckdb} cache is reused for back-compat. For the
+multi-user server tier, pass your own PostgreSQL \verb{con=}.
 
 For non-default backends (PostgreSQL, MariaDB, MS SQL Server, ...),
 construct your own DBI connection and pass it as \code{con} to the

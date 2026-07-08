@@ -17,8 +17,8 @@ chain.}
 }
 \value{
 A named \code{list} (all \code{double}): \code{p_mummified_natural},
-  \code{p_mummified_treated}, \code{delta}, and a plain-language
-  \code{interpretation}.
+\code{p_mummified_treated}, \code{delta}, and a plain-language
+\code{interpretation}.
 }
 \description{
 The Markov-chain analogue of the preservation "delta": the change in the

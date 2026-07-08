@@ -23,14 +23,17 @@ Character scalar: the agent's combined stdout/stderr.
 }
 \description{
 Thin wrapper that shells out to the \code{rmorie} command-line agent (a
-separate, optional binary from rmorie-cli). The agent can run R, read/write
-files, remember notes, and use any configured model backend (Anthropic,
-OpenAI-compatible, Google Gemini, or a local Ollama model).
+separate, optional binary from \pkg{rmorie-cli}). The agent can run R,
+read/write files, remember notes, and use any configured model backend
+(Anthropic, OpenAI-compatible, Google Gemini, or a local Ollama model).
+The CLI is the single implementation; this function only forwards to it,
+so every MORIE package can offer agentic help without duplicating logic.
 }
 \details{
-Requires the \code{rmorie} binary on \code{PATH}. Cloud backends read
-\code{RMORIE_AGENT_API_KEY} from the environment (never passed through R). If
-the binary is absent a clear message is returned instead of an error.
+Requires the \code{rmorie} binary on \code{PATH}. Cloud backends
+read \code{RMORIE_AGENT_API_KEY} from the environment (the key is never
+passed through R). If the binary is absent a clear message is returned
+instead of an error.
 }
 \examples{
 \dontrun{

@@ -17,7 +17,7 @@ hypothesis \eqn{H_2}.}
 }
 \value{
 The list from \code{\link{morie_taphonomy_likelihood_ratio}}, with
-  \code{loglik_h1} and \code{loglik_h2} attached.
+\code{loglik_h1} and \code{loglik_h2} attached.
 }
 \description{
 Convenience wrapper: evaluate measured non-invasive evidence under a natural

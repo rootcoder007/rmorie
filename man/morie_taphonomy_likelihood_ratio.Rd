@@ -12,7 +12,7 @@ and \eqn{H_2} (e.g. from \code{\link{morie_taphonomy_evidence_loglik}}).}
 }
 \value{
 A named \code{list} (\code{double} where numeric): \code{lr},
-  \code{log10_lr}, \code{log_lr}, \code{verbal}, and \code{interpretation}.
+\code{log10_lr}, \code{log_lr}, \code{verbal}, and \code{interpretation}.
 }
 \description{
 Given the log-likelihood of the evidence under a natural/target hypothesis
@@ -28,7 +28,7 @@ morie_taphonomy_likelihood_ratio(loglik_h1 = -3.1, loglik_h2 = -12.7)$verbal
 }
 \references{
 ENFSI (2015). \emph{Guideline for Evaluative Reporting in
-  Forensic Science}. European Network of Forensic Science Institutes.
-  Aitken CGG, Taroni F (2004). \emph{Statistics and the Evaluation of
-  Evidence for Forensic Scientists} (2nd ed.). Wiley.
+Forensic Science}. European Network of Forensic Science Institutes.
+Aitken CGG, Taroni F (2004). \emph{Statistics and the Evaluation of
+Evidence for Forensic Scientists} (2nd ed.). Wiley.
 }

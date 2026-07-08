@@ -66,6 +66,7 @@ Suggests:
   cobalt,
   coin,
   copula,
+  coresynth,
   data.table,
   DBI,
   dbscan,
@@ -174,7 +175,6 @@ Suggests:
   stdReg,
   survey,
   survival,
-  synthdid,
   testthat (>= 3.0.0),
   tipr,
   TwoWayFEWeights,
@@ -206,8 +206,7 @@ biocViews:
   Visualization
 Remotes:
   rootcoder007/rmoriedata,
-  stan-dev/cmdstanr,
-  synth-inference/synthdid
+  stan-dev/cmdstanr
 Additional_repositories:
   https://rootcoder007.r-universe.dev,
   https://stan-dev.r-universe.dev

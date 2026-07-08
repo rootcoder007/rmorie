@@ -13,6 +13,9 @@ point_biserial_correlation(binary, continuous, confidence = 0.95)
 
 \item{confidence}{Confidence level.}
 }
+\value{
+An object of class \code{"morie_test_result"}.
+}
 \description{
 Point-biserial correlation
 }

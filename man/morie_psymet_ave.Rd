@@ -9,6 +9,9 @@ morie_psymet_ave(loads)
 \arguments{
 \item{loads}{Numeric vector of standardised factor loadings (lambda).}
 }
+\value{
+A numeric value (scalar).
+}
 \description{
 Average variance extracted (AVE) from factor loadings. Mean(lambda^2).
 }

@@ -28,6 +28,9 @@ instrumental variables.}
 regressors included in both the structural equation and the
 first stage. \code{NULL} (default) for a just-identified design.}
 }
+\value{
+A named list with elements \code{statistic}, \code{p_value}, \code{name}.
+}
 \description{
 Durbin-Wu-Hausman test of endogeneity
 }

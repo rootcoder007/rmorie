@@ -17,6 +17,9 @@ risks analyses (Fine-Gray, CIF).}
 \item{confidence}{Confidence level for interval estimates (default
 \code{0.95}).}
 }
+\value{
+A named list with elements \code{times}, \code{cif}, \code{ci_lower}, \code{ci_upper}, \code{event_of_interest}, \code{n_total}, \code{method}.
+}
 \description{
 Wraps \code{survival::survfit()} with multi-state \code{Surv()}.
 }

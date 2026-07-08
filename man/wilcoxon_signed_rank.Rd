@@ -13,6 +13,9 @@ wilcoxon_signed_rank(x, y = NULL, alternative = "two.sided")
 
 \item{alternative}{One of "two.sided", "less", "greater".}
 }
+\value{
+An object of class \code{"morie_test_result"}.
+}
 \description{
 Wilcoxon signed-rank test (one-sample or paired)
 }

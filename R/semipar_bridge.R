@@ -482,6 +482,7 @@ SemiparKernels <- function() {
 }
 
 
+#' @return \code{x}, invisibly.
 #' @export
 print.morie_semipar_kernels <- function(x, ...) {
   cat("morie SemiparKernels\

@@ -32,6 +32,9 @@ hazard_ratio_table(
 
 \item{title}{Title.}
 }
+\value{
+A character string.
+}
 \description{
 Hazard-ratio table from Cox model components
 }
