@@ -157,6 +157,11 @@ estimate_plr <- function(data, treatment, outcome, covariates,
         n_folds = n_folds, n_rep = 1L
       )
       set.seed(random_state)
+      # Silence {future}'s false RNG-misuse warning: cross-fitting is seeded
+      # via set.seed(random_state) above, so it is a false alarm that would
+      # otherwise trip R CMD check stop_on_warning. Restored on exit.
+      .op <- options(future.rng.onMisuse = "ignore")
+      on.exit(options(.op), add = TRUE)
       plr$fit()
       ci <- plr$confint(level = 0.95)
       list(
@@ -278,6 +283,11 @@ estimate_pliv <- function(data, treatment, outcome, instrument,
         n_folds = n_folds, n_rep = 1L
       )
       set.seed(random_state)
+      # Silence {future}'s false RNG-misuse warning: cross-fitting is seeded
+      # via set.seed(random_state) above, so it is a false alarm that would
+      # otherwise trip R CMD check stop_on_warning. Restored on exit.
+      .op <- options(future.rng.onMisuse = "ignore")
+      on.exit(options(.op), add = TRUE)
       pliv$fit()
       ci <- pliv$confint(level = 0.95)
       list(
