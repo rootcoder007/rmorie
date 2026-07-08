@@ -16,14 +16,21 @@ directory.}
 A DBI connection object.
 }
 \description{
-Opens (or creates) the per-user cache database. The default backend
-is \strong{DuckDB} — zero-config like SQLite, but vectorised + columnar,
-so it handles the multi-GB-scale open-data PUMFs (TPS, CPADS bulk)
-that morie ingests without breaking down on analytical queries. For
-back-compat, an existing SQLite cache at \code{morie.db} is reused; if
-duckdb is unavailable, falls back to SQLite.
+Opens (or creates) a per-user \strong{SQL} cache database. This is the
+opt-in SQL backend and requires DuckDB or RSQLite to be installed.
 }
 \details{
+The DEFAULT cache used by \code{morie_cache_store()} / \code{_load()} /
+\code{_list()} needs \strong{no SQL backend at all} — it uses a
+zero/light dependency file store: Parquet via \pkg{nanoparquet}
+(cross-language) when available, else base-R \code{.rds}. Install
+\code{duckdb} (or \code{RSQLite}), or set
+\code{MORIE_CACHE_BACKEND=duckdb}/\code{sqlite}, or pass \code{db_path=},
+to use SQL instead — DuckDB is preferred (vectorised + columnar, handles
+multi-GB PUMFs and out-of-core analytical queries); an existing
+\code{morie.db} / \code{morie.duckdb} cache is reused for back-compat.
+For the multi-user server tier, pass your own PostgreSQL \code{con=}.
+
 For non-default backends (PostgreSQL, MariaDB, MS SQL Server, ...),
 construct your own DBI connection and pass it as \code{con} to the
 \verb{morie_cache_*} and \code{morie_load_dataset} functions:

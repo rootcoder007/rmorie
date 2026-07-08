@@ -32,7 +32,7 @@ breakdown, any advisory \code{warnings}, and a plain-language
 \code{interpretation}, mirroring the payload of the Python
 \code{RichResult}.
 
-Prior art reimplemented independently (no code copied): IBM AI
+Prior art: IBM AI
 Fairness 360 metric definitions; the COMPAS audit in pbiecek's
 \emph{XAI Stories}; the SciencesPo \emph{Predictive-policing-Chicago} project
 (Lacherade, Szabo, Krikava & Aeby, 2021); and Barman & Barman,

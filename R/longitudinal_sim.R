@@ -2,20 +2,15 @@
 
 #' Synchronised longitudinal-panel simulation (R parity)
 #'
-#' Clean-room R parity of `morie.longitudinal_sim` for synchronised
+#' R parity of `morie.longitudinal_sim` for synchronised
 #' multivariate longitudinal-panel simulation.  Implements SyncRNG,
 #' VAR coefficient generation with stationarity preservation, MVN
 #' draws under structured covariance kernels, and tidy panel output.
 #'
-#' Clean-room note: this module re-implements the techniques used in
-#' the Hlozek--Bangari Collaborative-CIFAR-Catalyst project
-#' (\url{https://github.com/bangari-19/Collaborative-CIFAR-Project-})
-#' without copying any source.  That repository is unlicensed.  The
-#' techniques themselves --- synchronised PRNG streams, lagged AR
+#' The techniques --- synchronised PRNG streams, lagged AR
 #' coefficient matrices, multivariate normal generation under
 #' Toeplitz / compound-symmetric covariance --- are standard methods
-#' from Hamilton (1994) and Diggle, Liang, Zeger (1994), implemented
-#' here independently.
+#' from Hamilton (1994) and Diggle, Liang & Zeger (1994).
 #'
 #' @return The simulation callables return tidy longitudinal-panel
 #'   \code{data.frame}s; \code{morie_sync_rng()} returns an environment

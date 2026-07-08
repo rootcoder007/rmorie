@@ -2,12 +2,10 @@
 #' Generalised predictive-policing disparity audit
 #'
 #' R parity for the Python `morie.fairness.predpol` module. A
-#' clean-room, city-agnostic reimplementation of the district-level
-#' analysis of the SciencesPo *Predictive-policing-Chicago* project
-#' (Lacherade, Szabo, Krikava & Aeby, 2021): rank areas by the risk an
-#' algorithm predicts, rank them by their realised outcome rate, and
-#' test whether the disagreement tracks the areas' demographic
-#' composition.
+#' city-agnostic district-level calibration audit: rank areas by the
+#' risk an algorithm predicts, rank them by their realised outcome
+#' rate, and test whether the disagreement tracks the areas'
+#' demographic composition.
 #'
 #' Functions:
 #' * `morie_predpol_aggregate_areas()`: roll per-record data up to one row
@@ -16,9 +14,6 @@
 #'   per-group mean rank gap (the over-/under-prediction signal).
 #' * `morie_predpol_score_disparity()`: descriptive per-group risk-score
 #'   summary with a one-way ANOVA.
-#'
-#' Written from the project's published methodology; no code copied
-#' (that repository carries no licence and is not redistributable).
 #'
 #' @return \code{morie_predpol_aggregate_areas()} returns a per-area
 #'   \code{data.frame}; \code{morie_predpol_calibration_audit()} and
