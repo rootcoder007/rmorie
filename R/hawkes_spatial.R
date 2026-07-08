@@ -53,7 +53,9 @@ NULL
 #' @export
 morie_hawkes_st_intensity <- function(events, t_q, x_q, y_q, params) {
   .hst_check_params(params)
-  t <- as.numeric(events$t); x <- as.numeric(events$x); y <- as.numeric(events$y)
+  t <- as.numeric(events$t)
+  x <- as.numeric(events$x)
+  y <- as.numeric(events$y)
   past <- which(t < t_q)
   lam <- params$mu
   if (length(past)) {
@@ -87,8 +89,13 @@ morie_hawkes_st_intensity <- function(events, t_q, x_q, y_q, params) {
 #' @export
 morie_hawkes_st_loglik <- function(events, params, end_time = NULL, area = 1) {
   .hst_check_params(params)
-  t <- as.numeric(events$t); x <- as.numeric(events$x); y <- as.numeric(events$y)
-  o <- order(t); t <- t[o]; x <- x[o]; y <- y[o]
+  t <- as.numeric(events$t)
+  x <- as.numeric(events$x)
+  y <- as.numeric(events$y)
+  o <- order(t)
+  t <- t[o]
+  x <- x[o]
+  y <- y[o]
   n <- length(t)
   T_h <- end_time %||% max(t)
   if (n == 0L) return(-params$mu * T_h * area)
@@ -141,7 +148,10 @@ morie_hawkes_st_simulate <- function(params, end_time, region, seed = NULL,
     stop("`region` must be c(xmin, xmax, ymin, ymax)", call. = FALSE)
   }
   if (!is.null(seed)) set.seed(seed)
-  xmin <- region[1]; xmax <- region[2]; ymin <- region[3]; ymax <- region[4]
+  xmin <- region[1]
+  xmax <- region[2]
+  ymin <- region[3]
+  ymax <- region[4]
   area <- (xmax - xmin) * (ymax - ymin)
 
   n_imm <- stats::rpois(1, params$mu * area * end_time)
@@ -152,8 +162,14 @@ morie_hawkes_st_simulate <- function(params, end_time, region, seed = NULL,
 
   # Process each parent generation, appending offspring.
   queue_from <- 1L
-  all_t <- t; all_x <- x; all_y <- y; all_g <- gen
-  cur_t <- t; cur_x <- x; cur_y <- y; cur_g <- gen
+  all_t <- t
+  all_x <- x
+  all_y <- y
+  all_g <- gen
+  cur_t <- t
+  cur_x <- x
+  cur_y <- y
+  cur_g <- gen
   while (length(cur_t) > 0L && length(all_t) < max_events) {
     n_off <- stats::rpois(length(cur_t), params$alpha)
     keep <- n_off > 0L
@@ -167,11 +183,19 @@ morie_hawkes_st_simulate <- function(params, end_time, region, seed = NULL,
     ox <- px + stats::rnorm(m, 0, params$sigma)
     oy <- py + stats::rnorm(m, 0, params$sigma)
     within <- ot < end_time
-    ot <- ot[within]; ox <- ox[within]; oy <- oy[within]; og <- pg[within] + 1L
+    ot <- ot[within]
+    ox <- ox[within]
+    oy <- oy[within]
+    og <- pg[within] + 1L
     if (length(ot) == 0L) break
-    all_t <- c(all_t, ot); all_x <- c(all_x, ox); all_y <- c(all_y, oy)
+    all_t <- c(all_t, ot)
+    all_x <- c(all_x, ox)
+    all_y <- c(all_y, oy)
     all_g <- c(all_g, og)
-    cur_t <- ot; cur_x <- ox; cur_y <- oy; cur_g <- og
+    cur_t <- ot
+    cur_x <- ox
+    cur_y <- oy
+    cur_g <- og
   }
   o <- order(all_t)
   data.frame(t = all_t[o], x = all_x[o], y = all_y[o], gen = all_g[o])

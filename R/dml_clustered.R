@@ -79,10 +79,13 @@ morie_dml_clustered <- function(data, treatment, outcome, covariates,
 
   set.seed(seed)
   folds <- sample(rep(seq_len(n_folds), length.out = n))
-  e_hat <- numeric(n); mu1 <- numeric(n); mu0 <- numeric(n)
+  e_hat <- numeric(n)
+  mu1 <- numeric(n)
+  mu0 <- numeric(n)
 
   for (k in seq_len(n_folds)) {
-    te <- which(folds == k); tr <- setdiff(seq_len(n), te)
+    te <- which(folds == k)
+    tr <- setdiff(seq_len(n), te)
     if (is.null(ps)) {
       e_hat[te] <- .dmlc_ps(X[tr, , drop = FALSE], d[tr],
                             X[te, , drop = FALSE], eps)
@@ -169,7 +172,8 @@ print.morie_dml_clustered <- function(x, ...) {
 # Cameron-Gelbach-Miller up to two-way.
 .dmlc_multiway_se <- function(infl, clusters, n) {
   if (length(clusters) == 1L) return(.dmlc_cluster_se(infl, clusters[[1]], n))
-  a <- clusters[[1]]; b <- clusters[[2]]
+  a <- clusters[[1]]
+  b <- clusters[[2]]
   inter <- paste(a, b, sep = "|")
   va <- .dmlc_cluster_se(infl, a, n)^2
   vb <- .dmlc_cluster_se(infl, b, n)^2
