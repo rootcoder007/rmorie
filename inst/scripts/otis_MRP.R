@@ -143,7 +143,8 @@ if (INPUT_MODE == "rdata") {
     SuicideRisk_Alert          = c("Yes","No"),
     SuicideWatch_Alert         = c("Yes","No")
   )
-  min_rows <- 70000L; max_rows <- 90000L
+  min_rows <- 70000L
+  max_rows <- 90000L
 
   if (file.exists(provenance_path)) {
     cat("      Using schema from: ", provenance_path, "\n")
@@ -462,7 +463,8 @@ fwrite(nb_table, file.path(OUTPUT_DIR, "05_nb_glmm_coefficients.csv"))
 
 if (INPUT_MODE == "rdata" && exists("res_pool") && exists("res_by_year")) {
   cat("\n[7/8] Pre-computed DML estimates from RData\n")
-  setDT(res_pool); setDT(res_by_year)
+  setDT(res_pool)
+  setDT(res_by_year)
   fwrite(res_pool,    file.path(OUTPUT_DIR, "06_DML_res_pool.csv"))
   fwrite(res_by_year, file.path(OUTPUT_DIR, "07_DML_res_by_year.csv"))
 

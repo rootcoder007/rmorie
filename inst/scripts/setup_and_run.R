@@ -725,7 +725,7 @@ summary_lines <- c(
   "2. Built the person-year analytical panel.",
   "3. Computed full-sample and matched-sample descriptives.",
   "4. Fit the negative-binomial GLMM (glmmTMB nbinom2).",
-  if (!isTRUE(SYNTHETIC_MODE) && grepl("\\.RData$", input_path, ignore.case=TRUE))
+  if (!isTRUE(SYNTHETIC_MODE) && grepl("\\.RData$", input_path, ignore.case = TRUE))
     "5. Cross-checked Double Machine Learning estimates."
   else
     "5. (DML estimates require the author's .RData; not run here.)",
