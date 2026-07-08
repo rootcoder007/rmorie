@@ -11,6 +11,9 @@ repeated_measures_anova(data, outcome, subject, within)
 
 \item{outcome, subject, within}{Column names.}
 }
+\value{
+An object of class \code{"morie_test_result"}.
+}
 \description{
 Sphericity assumption is left to the user; this routine computes the
 uncorrected F. Pair with \code{ez::ezANOVA} for GG/HF correction if

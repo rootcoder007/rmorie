@@ -22,6 +22,9 @@ real CKAN sample at
 \code{"synthetic"}, \code{"empty"}; takes precedence over
 \code{offline} when supplied.}
 }
+\value{
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+}
 \description{
 Inmate-participant race
 }

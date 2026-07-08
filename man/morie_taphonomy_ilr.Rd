@@ -29,6 +29,6 @@ morie_taphonomy_ilr(morie_taphonomy_simulate_pxrf(3, seed = 1)[, 1:6])
 }
 \references{
 Egozcue JJ, et al. (2003). Isometric logratio transformations
-  for compositional data analysis. \emph{Mathematical Geology} 35(3),
-  279--300. \doi{10.1023/A:1023818214614}
+for compositional data analysis. \emph{Mathematical Geology} 35(3),
+279--300. \doi{10.1023/A:1023818214614}
 }

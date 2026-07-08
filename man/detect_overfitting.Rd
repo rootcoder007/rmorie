@@ -30,6 +30,9 @@ estimate the optimism correction (default 200).}
 
 \item{random_state}{Seed.}
 }
+\value{
+An object of class \code{"class_name"}.
+}
 \description{
 Bootstrap optimism-corrected performance
 }

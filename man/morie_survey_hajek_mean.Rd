@@ -11,6 +11,9 @@ morie_survey_hajek_mean(y, weights)
 
 \item{weights}{Numeric vector of design weights aligned with \code{y}.}
 }
+\value{
+A named list with elements \code{mean}, \code{se}, \code{ci_lower}, \code{ci_upper}.
+}
 \description{
 Hajek (ratio) estimator of a population mean.
 }

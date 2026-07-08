@@ -26,6 +26,7 @@ morie_datasets_nyc_opendata_bulk_layers <- function(offline = TRUE) {
 
 #' Chicago Open Data bulk catalog (1856 entities)
 #' @rdname morie_datasets_nyc_opendata_bulk_layers
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_chicago_opendata_bulk_layers <- function(offline = TRUE) {
   .morie_bulk_fixture("chicago_opendata_bulk_catalog.csv", offline)
@@ -33,6 +34,7 @@ morie_datasets_chicago_opendata_bulk_layers <- function(offline = TRUE) {
 
 #' Toronto Open Data bulk CKAN catalog (540 packages)
 #' @rdname morie_datasets_nyc_opendata_bulk_layers
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_toronto_opendata_bulk_layers <- function(offline = TRUE) {
   .morie_bulk_fixture("toronto_opendata_bulk_catalog.csv", offline)
@@ -40,6 +42,7 @@ morie_datasets_toronto_opendata_bulk_layers <- function(offline = TRUE) {
 
 #' Calgary Open Data bulk catalog (933 entities)
 #' @rdname morie_datasets_nyc_opendata_bulk_layers
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_calgary_opendata_bulk_layers <- function(offline = TRUE) {
   .morie_bulk_fixture("calgary_opendata_bulk_catalog.csv", offline)
@@ -47,6 +50,7 @@ morie_datasets_calgary_opendata_bulk_layers <- function(offline = TRUE) {
 
 #' Edmonton Open Data bulk catalog (2027 entities)
 #' @rdname morie_datasets_nyc_opendata_bulk_layers
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_edmonton_opendata_bulk_layers <- function(offline = TRUE) {
   .morie_bulk_fixture("edmonton_opendata_bulk_catalog.csv", offline)
@@ -54,6 +58,7 @@ morie_datasets_edmonton_opendata_bulk_layers <- function(offline = TRUE) {
 
 #' Ottawa Open Data bulk ArcGIS Hub catalog (287 datasets)
 #' @rdname morie_datasets_nyc_opendata_bulk_layers
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_ottawa_opendata_bulk_layers <- function(offline = TRUE) {
   .morie_bulk_fixture("ottawa_opendata_bulk_catalog.csv", offline)
@@ -66,6 +71,7 @@ morie_datasets_ottawa_opendata_bulk_layers <- function(offline = TRUE) {
 #' Loi/Justice/Securite subset from 3EEE1.
 #'
 #' @rdname morie_datasets_nyc_opendata_bulk_layers
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_montreal_opendata_bulk_layers <- function(offline = TRUE) {
   .morie_bulk_fixture("montreal_opendata_bulk_catalog.csv", offline)
@@ -78,6 +84,7 @@ morie_datasets_montreal_opendata_bulk_layers <- function(offline = TRUE) {
 #' license, records_count).
 #'
 #' @rdname morie_datasets_nyc_opendata_bulk_layers
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_vancouver_opendata_bulk_layers <- function(offline = TRUE) {
   .morie_bulk_fixture("vancouver_opendata_bulk_catalog.csv", offline)
@@ -105,6 +112,7 @@ morie_datasets_nyc_socrata_by_id <- function(soda_id,
 
 #' Fetch a Chicago Open Data Socrata dataset by ID
 #' @rdname morie_datasets_nyc_socrata_by_id
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_chicago_socrata_by_id <- function(soda_id,
                                                    limit = 1000L) {

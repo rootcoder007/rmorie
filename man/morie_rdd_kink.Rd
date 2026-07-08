@@ -35,6 +35,9 @@ side of the cutoff. \code{NULL} invokes the data-driven CCT selector.}
 
 \item{alpha}{Significance level (default \code{0.05}).}
 }
+\value{
+A named list with elements \code{estimate}, \code{std_error}, \code{t_stat}, \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{n_obs}, \code{method}, \code{details}.
+}
 \description{
 Regression kink design -- slope discontinuity at the cutoff
 }

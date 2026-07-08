@@ -23,6 +23,9 @@ score_data_quality(
 
 \item{consistency_rules}{List of functions \code{(df) -> logical(1)}.}
 }
+\value{
+An object of class \code{"class_name"}.
+}
 \description{
 Multi-dimensional data quality scores
 }

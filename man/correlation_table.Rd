@@ -29,6 +29,9 @@ correlation_table(
 
 \item{title}{Title.}
 }
+\value{
+A character string.
+}
 \description{
 Pairwise correlation matrix with significance stars
 }

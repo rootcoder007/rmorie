@@ -11,6 +11,9 @@ morie_arsau_available_years(data_dir = NULL, language = "en")
 
 \item{language}{"en" or "fr".}
 }
+\value{
+An object of class \code{"morie_arsau_result"}.
+}
 \description{
 List ARSAU year / year-range buckets.
 }

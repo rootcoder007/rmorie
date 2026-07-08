@@ -49,6 +49,25 @@ morie_datasets_vancouver_public_art(offline = TRUE, max_features = NULL)
 
 \item{max_features}{Optional row cap.}
 }
+\value{
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+}
 \description{
 Phase 3DDD1. Five small fixtures harvested live from
 opendata.vancouver.ca for offline reproducibility -- chosen to

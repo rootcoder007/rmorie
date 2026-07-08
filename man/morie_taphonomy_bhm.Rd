@@ -48,10 +48,10 @@ the fitted \code{stanfit} object.}
 }
 \value{
 A named \code{list} (all estimates \code{double}): \code{coefficients}
-  (\code{data.frame}: term, post_mean, post_sd, ci_lower, ci_upper,
-  prob_positive), \code{sigma}, \code{group_effects} (NULL unless
-  \code{group}), \code{fitted} (posterior-predictive mean per row), \code{n},
-  and a plain-language \code{interpretation}.
+(\code{data.frame}: term, post_mean, post_sd, ci_lower, ci_upper,
+prob_positive), \code{sigma}, \code{group_effects} (NULL unless
+\code{group}), \code{fitted} (posterior-predictive mean per row), \code{n},
+and a plain-language \code{interpretation}.
 }
 \description{
 A conjugate Gaussian-linear Bayesian model for a continuous preservation
@@ -83,5 +83,5 @@ morie_taphonomy_bhm(df, covariates = "lime_treatment",
 }
 \references{
 Gelman A, et al. (2013). \emph{Bayesian Data Analysis} (3rd ed.),
-  Ch. 5 (hierarchical models) & Ch. 14 (conjugate regression). CRC.
+Ch. 5 (hierarchical models) & Ch. 14 (conjugate regression). CRC.
 }

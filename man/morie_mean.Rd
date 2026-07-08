@@ -6,6 +6,9 @@
 \usage{
 morie_mean(x)
 }
+\value{
+A numeric scalar: the mean of \code{x}.
+}
 \description{
 Single-pass C++ kernel.  Equivalent to \code{mean(x)}.
 }

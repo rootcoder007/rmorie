@@ -13,6 +13,9 @@ morie_arsau_load_probe_cycle_records(year, language = "en", data_dir = NULL)
 
 \item{data_dir}{Optional explicit ARSAU root.}
 }
+\value{
+An object of class \code{"morie_arsau_result"}.
+}
 \description{
 Load ARSAU probe_cycle_records CSV (CEW telemetry).
 }

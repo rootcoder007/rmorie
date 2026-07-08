@@ -26,6 +26,9 @@ to calibrate to (one entry per \code{aux_vars} element).}
 
 \item{tol}{Convergence tolerance for calibration.}
 }
+\value{
+A numeric vector of calibration weights.
+}
 \description{
 For multi-variable marginals use \code{morie_weights_rake()}; this helper is the
 single-variable convenience.

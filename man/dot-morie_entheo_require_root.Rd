@@ -6,6 +6,9 @@
 \usage{
 .morie_entheo_require_root()
 }
+\value{
+A character scalar: the DMT-data root directory (errors if it cannot be resolved).
+}
 \description{
 Require the dataset root or stop with a curated error.
 }

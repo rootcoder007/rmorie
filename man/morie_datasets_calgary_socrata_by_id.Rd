@@ -16,6 +16,8 @@ morie_datasets_edmonton_socrata_by_id(soda_id, limit = 1000L)
 }
 \value{
 A \code{data.frame} of records.
+
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 }
 \description{
 Phase 3FFF3. Generic SODA2 fetch wrapper for arbitrary Calgary

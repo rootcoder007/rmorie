@@ -562,6 +562,7 @@ morie_tps_kde_density <- function(df,
 # Print method
 # ---------------------------------------------------------------------------
 
+#' @return \code{x}, invisibly.
 #' @export
 print.morie_tps_spatial_result <- function(x, ...) {
   cat(x$title, "\

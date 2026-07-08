@@ -53,12 +53,12 @@ carries its own orthogonal SE.}
 }
 \value{
 A named \code{list} (RichResult-style; all estimates are
-  \code{double}): \code{value} (the preservation delta = ATE / mean CATE),
-  \code{se}, \code{p_value} (Wald; \code{NA} on the CATE path -- no valid SE),
-  \code{ci_lower}, \code{ci_upper}, \code{n} (integer count),
-  \code{e_value}, \code{e_value_ci}, \code{estimator}, \code{cate_per_unit}
-  and \code{cate_sd} (NULL unless \code{estimator = "cate"}), \code{warnings},
-  and a plain-language \code{interpretation}.
+\code{double}): \code{value} (the preservation delta = ATE / mean CATE),
+\code{se}, \code{p_value} (Wald; \code{NA} on the CATE path -- no valid SE),
+\code{ci_lower}, \code{ci_upper}, \code{n} (integer count),
+\code{e_value}, \code{e_value_ci}, \code{estimator}, \code{cate_per_unit}
+and \code{cate_sd} (NULL unless \code{estimator = "cate"}), \code{warnings},
+and a plain-language \code{interpretation}.
 }
 \description{
 Recasts a taphonomy question as a treatment-effect estimate: how much of the
@@ -80,5 +80,5 @@ if (requireNamespace("DoubleML", quietly = TRUE)) {
 }
 \seealso{
 \code{\link{morie_estimate_irm}}, \code{\link{morie_estimate_cate}},
-  \code{\link{morie_e_value}}, \code{\link{morie_causal_impact}}
+\code{\link{morie_e_value}}, \code{\link{morie_causal_impact}}
 }

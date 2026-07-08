@@ -23,6 +23,9 @@ morie_arsau_describe(
 
 \item{n_preview_rows}{Number of rows from the CSV head to include.}
 }
+\value{
+An object of class \code{"morie_arsau_result"}.
+}
 \description{
 Describe a single ARSAU dataset entry.
 }

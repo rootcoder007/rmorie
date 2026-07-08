@@ -9,6 +9,9 @@ morie_otis_analyze_b03(data)
 \arguments{
 \item{data}{b03 data.frame.}
 }
+\value{
+An object of class \code{"morie_otis_analysis_result"}.
+}
 \description{
 Segregation placements by alert x institution (b03)
 }

@@ -13,6 +13,9 @@ fixed_sequence(p_values, alpha = 0.05, labels = NULL)
 
 \item{labels}{Optional character vector of test labels.}
 }
+\value{
+An object of class \code{"morie_multiple_testing_result"}.
+}
 \description{
 Tests are evaluated in the given order and the procedure stops at
 the first non-rejection; reached hypotheses need no multiplicity

@@ -16,6 +16,9 @@ morie_survival_logrank(
 
 \item{weight}{One of "logrank", "peto", "gehan", "tarone".}
 }
+\value{
+A named list with elements \code{method}, \code{test_statistic}, \code{p_value}, \code{df}, \code{n_groups}, \code{n_total}.
+}
 \description{
 Delegates to \code{survival::survdiff()} for the standard log-rank weight (rho=0)
 and Peto-Peto (rho=1). Gehan/Tarone-Ware are not supported by \code{survdiff}

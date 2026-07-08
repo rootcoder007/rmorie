@@ -5,14 +5,14 @@
 \title{STO-2022 taphonomic-observation schema (PMI nuisance variables)}
 \source{
 geoFOR (\url{https://www.geoforapp.info}); Standard for Taphonomic
-  Observations in Support of the PMI (2022).
+Observations in Support of the PMI (2022).
 }
 \usage{
 morie_taphonomy_pmi_schema()
 }
 \value{
 A zero-row \code{data.frame}; each column carries a \code{"role"}
-  attribute (\code{"observation"}, \code{"environment"}, or \code{"outcome"}).
+attribute (\code{"observation"}, \code{"environment"}, or \code{"outcome"}).
 }
 \description{
 A typed, zero-row template of the taphonomic-observation and environmental

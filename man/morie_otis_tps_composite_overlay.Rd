@@ -14,6 +14,9 @@ morie_otis_tps_composite_overlay(otis_b01, tps_datasets)
 category (e.g. \code{list(assault = <df>, robbery = <df>)}). Each
 data.frame must have \code{OCC_YEAR} or \code{REPORT_YEAR}.}
 }
+\value{
+An object of class \code{"morie_otis_analysis_result"}.
+}
 \description{
 Same body as \code{\link{morie_otis_tps_yoy_correlation}}; the alias
 preserves the Python entry-point name.

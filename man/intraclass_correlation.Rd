@@ -17,6 +17,9 @@ intraclass_correlation(data, targets, raters, ratings, icc_type = "ICC3k")
 
 \item{icc_type}{One of "ICC1", "ICC1k", "ICC2", "ICC2k", "ICC3", "ICC3k".}
 }
+\value{
+An object of class \code{"morie_test_result"}.
+}
 \description{
 Intraclass correlation coefficient (Shrout & Fleiss 1979)
 }

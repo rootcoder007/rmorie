@@ -4,7 +4,7 @@
 \alias{morie_crypto_mldsa65_verify}
 \title{ML-DSA-65 signature verification}
 \usage{
-morie_crypto_mldsa65_verify(pk, message, signature)
+morie_crypto_mldsa65_verify(pk_sxp, message_sxp, signature_sxp)
 }
 \arguments{
 \item{pk}{1952-byte raw vector (signer's public key).}

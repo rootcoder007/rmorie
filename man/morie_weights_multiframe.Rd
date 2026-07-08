@@ -30,6 +30,9 @@ Allowed values depend on the caller.}
 \item{theta}{Numeric tuning parameter passed to \code{multiframe}
 (Hartley-style overlap composition).}
 }
+\value{
+A named list with elements \code{weights_a}, \code{weights_b}.
+}
 \description{
 Multi-frame (dual-frame) survey weights (Hartley compositing).
 }

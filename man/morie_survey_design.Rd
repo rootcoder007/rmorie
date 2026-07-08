@@ -26,6 +26,9 @@ morie_survey_design(
 
 \item{nest}{If TRUE, treat cluster IDs as nested within strata.}
 }
+\value{
+An object of class \code{"morie_survey_design_fallback"}.
+}
 \description{
 Returns a \code{survey::svydesign} object when \code{survey} is available; otherwise
 returns a lightweight list with the same fields the morie helpers consume.

@@ -6,6 +6,9 @@
 \usage{
 n_stat_commands()
 }
+\value{
+A numeric value (scalar).
+}
 \description{
 Total number of registered commands (excluding aliases)
 }

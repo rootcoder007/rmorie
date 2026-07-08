@@ -11,6 +11,9 @@ chi2_independence(contingency_table, correction = TRUE)
 
 \item{correction}{Yates's continuity correction (2x2).}
 }
+\value{
+An object of class \code{"morie_test_result"}.
+}
 \description{
 Chi-squared test of independence
 }

@@ -31,6 +31,9 @@ calibrate to.}
 \item{trim_percentiles}{Two-element numeric vector \code{c(lower, upper)}
 of percentile bounds for trimming.}
 }
+\value{
+A numeric vector of combined weights.
+}
 \description{
 Combined design x nonresponse x post-strat (x trim) pipeline.
 }

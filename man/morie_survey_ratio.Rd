@@ -17,6 +17,9 @@ in ratio estimation).}
 \item{X_population_total}{Known population total for the auxiliary
 variable \code{x} (ratio estimator).}
 }
+\value{
+A named list with elements \code{ratio}, \code{total_estimate}, \code{se}, \code{ci_lower}, \code{ci_upper}.
+}
 \description{
 Ratio estimator of a population total using known X_pop.
 }

@@ -11,6 +11,9 @@ semi_partial_correlation(x, y, covariates)
 
 \item{covariates}{Matrix or data frame of covariates.}
 }
+\value{
+An object of class \code{"morie_test_result"}.
+}
 \description{
 Semi-partial (part) correlation
 }

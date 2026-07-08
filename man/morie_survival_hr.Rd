@@ -17,6 +17,9 @@ stratified comparisons.}
 \item{confidence}{Confidence level for interval estimates (default
 \code{0.95}).}
 }
+\value{
+A named list with elements \code{hr}, \code{ci_lower}, \code{ci_upper}, \code{p_value}, \code{log_hr}, \code{se}.
+}
 \description{
 Hazard ratio between two groups via a simple Cox model.
 }

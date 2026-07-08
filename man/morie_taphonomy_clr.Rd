@@ -27,5 +27,5 @@ morie_taphonomy_clr(morie_taphonomy_simulate_pxrf(3, seed = 1)[, 1:6])
 }
 \references{
 Aitchison J (1986). \emph{The Statistical Analysis of
-  Compositional Data}. Chapman & Hall.
+Compositional Data}. Chapman & Hall.
 }

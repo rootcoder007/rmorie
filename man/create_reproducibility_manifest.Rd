@@ -13,6 +13,9 @@ create_reproducibility_manifest(data, parameters = NULL, seeds = NULL)
 
 \item{seeds}{Optional named list of random seeds.}
 }
+\value{
+An object of class \code{"class_name"}.
+}
 \description{
 Create a manifest of the environment for reproducibility
 }

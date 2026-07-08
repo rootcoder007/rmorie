@@ -13,6 +13,9 @@ morie_arsau_available_datasets(year = NULL, language = "en", data_dir = NULL)
 
 \item{data_dir}{Optional explicit ARSAU root.}
 }
+\value{
+An object of class \code{"morie_arsau_result"}.
+}
 \description{
 List ARSAU dataset kinds, optionally restricted to one year.
 }

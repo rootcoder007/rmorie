@@ -11,6 +11,9 @@ chi2_goodness_of_fit(observed, expected = NULL)
 
 \item{expected}{Expected counts or NULL for uniform.}
 }
+\value{
+An object of class \code{"morie_test_result"}.
+}
 \description{
 Chi-squared goodness-of-fit test
 }

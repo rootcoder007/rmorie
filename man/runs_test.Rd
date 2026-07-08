@@ -11,6 +11,9 @@ runs_test(x, cutoff = NULL)
 
 \item{cutoff}{Cut-off (median by default).}
 }
+\value{
+An object of class \code{"morie_test_result"}.
+}
 \description{
 Wald-Wolfowitz runs test for randomness
 }

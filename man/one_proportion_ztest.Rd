@@ -15,6 +15,9 @@ one_proportion_ztest(count, nobs, value = 0.5, confidence = 0.95)
 
 \item{confidence}{Confidence level (Wilson CI).}
 }
+\value{
+An object of class \code{"morie_test_result"}.
+}
 \description{
 One-sample z-test for a proportion
 }

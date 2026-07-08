@@ -30,9 +30,9 @@ bound the unmeasured-confounding needed to nullify it).
 }
 \references{
 Chernozhukov V, et al. (2018). Double/debiased machine learning.
-  \emph{The Econometrics Journal} 21(1), C1--C68. \doi{10.1111/ectj.12097}
+\emph{The Econometrics Journal} 21(1), C1--C68. \doi{10.1111/ectj.12097}
 
 VanderWeele TJ, Ding P (2017). Sensitivity analysis in observational
-  research: introducing the E-value. \emph{Annals of Internal Medicine}
-  167(4), 268--274. \doi{10.7326/M16-2607}
+research: introducing the E-value. \emph{Annals of Internal Medicine}
+167(4), 268--274. \doi{10.7326/M16-2607}
 }

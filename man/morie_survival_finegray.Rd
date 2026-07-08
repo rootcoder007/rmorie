@@ -31,6 +31,9 @@ risks analyses (Fine-Gray, CIF).}
 \item{confidence}{Confidence level for interval estimates (default
 \code{0.95}).}
 }
+\value{
+A named list with elements \code{coefficients}, \code{standard_errors}, \code{hazard_ratios}, \code{p_values}, \code{ci_lower}, \code{ci_upper}, \code{covariate_names}, \code{n_events}, \code{n_observations}, \code{method}.
+}
 \description{
 Requires the \code{cmprsk} package.
 }

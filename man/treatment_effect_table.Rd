@@ -22,6 +22,9 @@ and \code{p_value}.}
 
 \item{title}{Title.}
 }
+\value{
+A character string.
+}
 \description{
 Summary table of causal effect estimates from multiple estimators
 }

@@ -17,6 +17,9 @@ morie_arsau_load_detailed_dataset(
 
 \item{data_dir}{Optional explicit ARSAU root.}
 }
+\value{
+An object of class \code{"morie_arsau_result"}.
+}
 \description{
 Load ARSAU detailed-incident-level CSV (2020-2022 only).
 }

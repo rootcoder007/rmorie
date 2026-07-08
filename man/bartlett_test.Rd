@@ -9,6 +9,9 @@ bartlett_test(...)
 \arguments{
 \item{...}{Two or more numeric vectors.}
 }
+\value{
+An object of class \code{"morie_test_result"}.
+}
 \description{
 Bartlett's test for equality of variances
 }

@@ -269,6 +269,7 @@ morie_otis_tps_per_region_rollup <- function(otis_b01) {
 #' preserves the Python entry-point name.
 #'
 #' @inheritParams morie_otis_tps_yoy_correlation
+#' @return An object of class \code{"morie_otis_analysis_result"}.
 #' @export
 morie_otis_tps_composite_overlay <- function(otis_b01, tps_datasets) {
   morie_otis_tps_yoy_correlation(otis_b01, tps_datasets)

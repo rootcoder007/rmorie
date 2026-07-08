@@ -49,6 +49,7 @@
 #' \env{MORIE_DMT_IMAGING_ROOT}. Returns NULL if absent on disk.
 #' Parity with Python ``DATASET_ROOT`` / ``_require_root``.
 #' @keywords internal
+#' @return A character scalar: the resolved DMT-data root directory.
 .morie_entheo_dmt_root <- function() {
   cand <- Sys.getenv("MORIE_DMT_IMAGING_ROOT", "")
   if (!nzchar(cand)) {
@@ -59,6 +60,7 @@
 
 #' Require the dataset root or stop with a curated error.
 #' @keywords internal
+#' @return A character scalar: the DMT-data root directory (errors if it cannot be resolved).
 .morie_entheo_require_root <- function() {
   root <- .morie_entheo_dmt_root()
   if (is.null(root)) {
@@ -74,6 +76,7 @@
 
 #' Lightweight .mat loader (delegates to R.matlab).
 #' @keywords internal
+#' @return A named \code{list} of the variables loaded from the MATLAB \code{.mat} file at \code{path}.
 .morie_entheo_loadmat <- function(path) {
   if (!requireNamespace("R.matlab", quietly = TRUE)) {
     stop(
@@ -219,6 +222,7 @@ morie_entheo_dataset_overview <- function() {
 
 #' Trapezoidal integration on a 1-D grid.
 #' @keywords internal
+#' @return A numeric scalar: the trapezoidal integral of \code{y} over \code{x}.
 .morie_entheo_trapz <- function(y, x) {
   if (length(y) < 2L) return(NA_real_)
   sum(diff(x) * (y[-1] + y[-length(y)]) / 2)
@@ -388,6 +392,7 @@ morie_entheo_dynamic_functional_connectivity <- function(bold,
 
 #' Lempel-Ziv (LZ76) complexity helper.
 #' @keywords internal
+#' @return A numeric scalar: the Lempel-Ziv (LZ76) complexity of the binary sequence \code{b}.
 .morie_entheo_lz76 <- function(b) {
   n <- length(b)
   if (n == 0L) return(0L)

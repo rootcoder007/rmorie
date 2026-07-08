@@ -22,7 +22,7 @@ morie_taphonomy_decay_simulate(
 }
 \value{
 A character vector: the sequence of visited states, ending at an
-  absorbing state if reached.
+absorbing state if reached.
 }
 \description{
 Draws a single realised trajectory from death through the transient stages

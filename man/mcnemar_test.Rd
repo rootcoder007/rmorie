@@ -11,6 +11,9 @@ mcnemar_test(contingency_table, exact = FALSE)
 
 \item{exact}{Use exact binomial.}
 }
+\value{
+An object of class \code{"morie_test_result"}.
+}
 \description{
 McNemar's test (paired nominal data)
 }

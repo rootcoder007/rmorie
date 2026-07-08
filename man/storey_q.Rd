@@ -16,6 +16,9 @@ estimator.}
 
 \item{labels}{Optional character vector of test labels.}
 }
+\value{
+An object of class \code{"morie_multiple_testing_result"}.
+}
 \description{
 Estimates the proportion of true null hypotheses (pi0) and
 tightens the BH thresholds by that factor. Delegates to

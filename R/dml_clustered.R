@@ -125,6 +125,7 @@ morie_dml_clustered <- function(data, treatment, outcome, covariates,
   out
 }
 
+#' @return \code{x}, invisibly.
 #' @export
 print.morie_dml_clustered <- function(x, ...) {
   cat(sprintf("Cluster-robust DML (AIPW)\n  ATE = %.4g  SE = %.4g [%s]\n",
