@@ -56,10 +56,12 @@ Suggests:
   bigrquery,
   boot,
   bootstrap,
+  brms,
   broom,
   car,
   caret,
   CausalImpact,
+  cmdstanr,
   cmprsk,
   cobalt,
   coin,
@@ -127,6 +129,7 @@ Suggests:
   pkgload,
   plm,
   poolr,
+  posterior,
   ppcor,
   pracma,
   pROC,
@@ -156,6 +159,7 @@ Suggests:
   Rtsne,
   rugarch,
   rvest,
+  rstanarm,
   sandwich,
   seewave,
   sensemakr,
@@ -204,4 +208,5 @@ Remotes:
   rootcoder007/rmoriedata,
   synth-inference/synthdid
 Additional_repositories:
-  https://rootcoder007.r-universe.dev
+  https://rootcoder007.r-universe.dev,
+  https://stan-dev.r-universe.dev
