@@ -29,7 +29,7 @@ distribution.
 of parity gap and inequality.
 }
 
-Prior art reimplemented independently (no code copied): the COMPAS
+Prior art: the COMPAS
 fairness audit in pbiecek's \emph{XAI Stories} and IBM's AI Fairness
 360 definitions; the predictive-policing disparity framing of the
 SciencesPo \emph{Predictive-policing-Chicago} project (Lacherade,

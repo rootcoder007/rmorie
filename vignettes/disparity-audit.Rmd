@@ -86,7 +86,7 @@ disparate over-policing.
 * `?frns_predpol` — the predictive-policing calibration audit.
 * `?frns_temporal` — the multi-city temporal audit.
 
-The methods are clean-room reimplementations from published
+The methods are implemented from published
 descriptions (IBM AIF360; the SciencesPo Predictive-policing-Chicago
 project; Barman & Barman, arXiv:2603.18987; the COMPAS *XAI Stories*
 audit).

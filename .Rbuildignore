@@ -3,6 +3,7 @@
 ^\.github$
 ^\.gitignore$
 ^\.dockerignore$
+^data/private$
 ^\.lintr$
 ^\.Rprofile$
 ^cran-comments\.md$

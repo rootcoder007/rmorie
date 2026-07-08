@@ -576,29 +576,6 @@ std::string section_text_by_title(const std::string& html,
                                   bounds.second - bounds.first));
 }
 
-// Plain text of the report section whose <h2> carries id="section_<n>".
-// Stops at the NEXT <h2> (the next section heading) OR at the first
-// page-chrome boundary (<footer, <aside, <nav) -- whichever comes
-// first. Without the chrome cutoff, the LAST section on a page (no
-// further <h2> follows it) silently includes the site footer, which
-// leaks left-nav phrases like "First Nations, Inuit and Metis
-// Liaison Program" into every report's narrative_summary,
-// supplemental_materials, and mental_health_or_race_indications.
-std::string section_text(const std::string& html, int n) {
-  const std::string anchor = "id=\"section_" + std::to_string(n) + "\"";
-  std::string::size_type a = html.find(anchor);
-  if (a == std::string::npos) return std::string();
-  std::string::size_type body = html.find('>', a);
-  if (body == std::string::npos) return std::string();
-  ++body;
-  std::string::size_type b = html.size();
-  for (const char* terminator : {"<h2", "<footer", "<aside", "<nav"}) {
-    const std::string::size_type t = html.find(terminator, body);
-    if (t != std::string::npos && t < b) b = t;
-  }
-  return html_to_text(html.substr(body, b - body));
-}
-
 // First capture group of `pat` in `text`, or "" when there is no match.
 std::string rx1(const std::string& text, const std::string& pat) {
   try {

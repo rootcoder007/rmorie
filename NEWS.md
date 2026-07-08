@@ -1451,10 +1451,10 @@ can hold those systems accountable.
   accumulated local effects, ceteris paribus, and sampling-based SHAP
   values; all model-agnostic.
 
-The methods are clean-room reimplementations written from published
+The methods are implemented from published
 descriptions — IBM AIF360; the SciencesPo *Predictive-policing-Chicago*
 project; Barman & Barman (arXiv:2603.18987); and the COMPAS audit in
-pbiecek's *XAI Stories*. No third-party code was copied.
+pbiecek's *XAI Stories*.
 
 # morie 0.7.4 — 2026-05-16
 
@@ -1578,7 +1578,7 @@ bump.
 * Adds 4 bundled reference samples in `inst/extdata/` (random
   1000-row b01 + b09 + c11 + tps_assault, ~420 KB total) so the
   examples run offline.
-* Adds `simulate_longitudinal_panel()` — clean-room VAR(L) panel
+* Adds `simulate_longitudinal_panel()` — VAR(L) panel
   simulator with structured covariance kernels.
 * Adds a GPL-2.0-only signaling layer: SPDX headers on every new
   source file, `check_plugin_license()` runtime guard, optional

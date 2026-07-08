@@ -22,13 +22,13 @@ dependencies.
   <https://rootcoder007.github.io/rmorie/>
 - **r-universe project page**: <https://rootcoder007.r-universe.dev/rmorie>
 
-> With 559 exported functions, the full reference is large — use the
+> With 1,859 exported functions, the full reference is large — use the
 > manual or the package site above rather than scrolling the function
 > index. This README covers install + the most common workflows only.
 
-## What's in v0.9.5
+## What's in v0.9.9
 
-- **559 exported `morie_*` R functions** — every public callable is now
+- **1,859 exported `morie_*` R functions** — every public callable is now
   prefixed to avoid name collisions with other CRAN packages
   (`morie_chi_square_test`, `morie_kmeans_clustering`,
   `morie_decision_tree_split`, etc.). The companion `morie.fn` Python
@@ -221,8 +221,7 @@ table(manifest$`_language`)  # en=2531, fr=2212, unknown=0
 
 ## Continuous integration
 
-The R CMD check matrix covers six cells, all green on the
-`release/v0.9.5-audit` head:
+The R CMD check matrix covers six cells, all green on `main`:
 
 | Platform        | R version             |
 | --------------- | --------------------- |

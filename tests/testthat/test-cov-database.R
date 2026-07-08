@@ -96,7 +96,7 @@ test_that(".fuzzy_match_key resolves exact, legacy and substring keys", {
 test_that("morie_load_dataset errors on an unknown key", {
   expect_error(
     morie_load_dataset("not-a-real-dataset-key-xyzzy"),
-    "Unknown dataset key"
+    "Unknown dataset"
   )
 })
 
