@@ -75,6 +75,9 @@ RUN R -e 'install.packages("remotes", repos = "https://p3m.dev/cran/__linux__/no
                                 upgrade = "never")'
 RUN R CMD INSTALL --no-test-load --no-help --no-html .
 
+# Smoke-check the package loads and the new tox surface is exported.
+RUN R -e 'library(rmorie); stopifnot(is.function(morie_tox_calibration))' >/dev/null
+
 # ---- Stage 2: runtime ----
 FROM rocker/r-ver:4.6.1 AS runtime
 
