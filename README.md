@@ -256,11 +256,6 @@ the software directly:
 }
 ```
 
-Methodology and empirical-applications papers (MRM framework,
-criminological Hawkes process, solitary-confinement / self-excitation
-/ institutional churn) are in preparation; they will be linked here
-once publicly available.
-
 ## License
 
 R-MORIE is licensed under **AGPL-3.0-or-later**. See `LICENSE` for the
