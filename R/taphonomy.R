@@ -966,8 +966,12 @@ generated quantities {
       pr <- pr + brms::set_prior(sprintf("normal(%g, %g)", m0[i + 1], s0[i + 1]),
                                  class = "b", coef = covariates[i])
     }
-    br_backend <- if (requireNamespace("cmdstanr", quietly = TRUE)) "cmdstanr"
-                  else "rstan"
+    # The cmdstanr R package alone is not enough -- sampling needs the
+    # CmdStan binary. Fall back to rstan when the binary is absent.
+    has_cmdstan <- requireNamespace("cmdstanr", quietly = TRUE) &&
+      !is.null(tryCatch(cmdstanr::cmdstan_version(error_on_NA = FALSE),
+                        error = function(e) NULL))
+    br_backend <- if (has_cmdstan) "cmdstanr" else "rstan"
     fit <- brms::brm(form, data = frame, family = stats::gaussian(), prior = pr,
                      chains = chains, iter = total_iter, warmup = iter,
                      seed = seed, backend = br_backend, refresh = 0, silent = 2)
