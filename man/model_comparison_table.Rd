@@ -24,6 +24,9 @@ model_comparison_table(
 
 \item{title}{Title.}
 }
+\value{
+A character string.
+}
 \description{
 Compare multiple model fits on AIC, BIC, log-likelihood and (optional)
 LR tests

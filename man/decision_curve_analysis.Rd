@@ -14,6 +14,9 @@ decision_curve_analysis(y_true, y_pred, thresholds = NULL)
 \item{thresholds}{Numeric vector of thresholds (defaults to
 \code{seq(0.01, 0.99, 0.01)}).}
 }
+\value{
+An object of class \code{"class_name"}.
+}
 \description{
 Decision curve analysis
 }

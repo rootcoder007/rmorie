@@ -278,6 +278,7 @@ morie_write_audit_markdown <- function(out_path, audit_result) {
 #' Print method for audit results.
 #' @param x A \code{morie_audit_result}.
 #' @param ... Unused.
+#' @return \code{x}, invisibly.
 #' @export
 print.morie_audit_result <- function(x, ...) {
   cat(x$title, "\n", strrep("=", nchar(x$title)), "\n", sep = "")

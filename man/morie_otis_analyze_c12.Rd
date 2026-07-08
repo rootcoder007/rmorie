@@ -9,6 +9,9 @@ morie_otis_analyze_c12(data)
 \arguments{
 \item{data}{c12 data.frame.}
 }
+\value{
+An object of class \code{"morie_otis_analysis_result"}.
+}
 \description{
 RC/seg aggregate durations by region & gender (c12)
 }

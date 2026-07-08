@@ -13,6 +13,9 @@ validate_schema(data, rules, raise_on_error = FALSE)
 
 \item{raise_on_error}{If TRUE, throw on first error.}
 }
+\value{
+An object of class \code{"class_name"}.
+}
 \description{
 Validate a data frame against a list of column rules
 }

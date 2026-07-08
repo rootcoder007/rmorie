@@ -8,6 +8,9 @@ Parity with Python \code{DATASET_ROOT} / \verb{_require_root}.}
 \usage{
 .morie_entheo_dmt_root()
 }
+\value{
+A character scalar: the resolved DMT-data root directory.
+}
 \description{
 Resolve the DMT_Imaging dataset root, honouring
 \env{MORIE_DMT_IMAGING_ROOT}. Returns NULL if absent on disk.

@@ -26,6 +26,9 @@ Allowed values depend on the caller.}
 \item{strata}{Optional vector of stratum identifiers aligned with
 \code{weights}.}
 }
+\value{
+A named \code{list} (see Details).
+}
 \description{
 \code{method} selects the rescaling: "JK1", "JKn", "BRR", "Fay", "bootstrap", "SDR".
 }

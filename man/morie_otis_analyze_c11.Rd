@@ -9,6 +9,9 @@ morie_otis_analyze_c11(data)
 \arguments{
 \item{data}{c11 data.frame.}
 }
+\value{
+An object of class \code{"morie_otis_analysis_result"}.
+}
 \description{
 Individuals by aggregate-duration bin (c11)
 }

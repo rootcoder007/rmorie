@@ -26,6 +26,9 @@ assess_discrimination(
 
 \item{random_state}{Seed.}
 }
+\value{
+An object of class \code{"class_name"}.
+}
 \description{
 Discrimination assessment for binary classifier
 }

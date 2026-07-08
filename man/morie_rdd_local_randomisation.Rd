@@ -38,6 +38,9 @@ randomisation-based inference.}
 
 \item{alpha}{Significance level (default \code{0.05}).}
 }
+\value{
+A named list with elements \code{estimate}, \code{std_error}, \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{n_obs}, \code{method}, \code{details}.
+}
 \description{
 Local-randomisation RDD via permutation in a fixed window
 }

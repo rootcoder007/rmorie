@@ -11,6 +11,9 @@ morie_survival_compare_parametric(time, event)
 
 \item{event}{Integer/logical vector; 1 = event, 0 = censored.}
 }
+\value{
+A logical scalar.
+}
 \description{
 Compare parametric survival models by AIC/BIC.
 }

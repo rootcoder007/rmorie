@@ -720,6 +720,7 @@ morie_fairness_bias_amplification <- function(y_pred, group,
 # print
 # ---------------------------------------------------------------------------
 
+#' @return \code{x}, invisibly.
 #' @export
 print.morie_fairness_result <- function(x, ...) {
   cat(x$title, "\

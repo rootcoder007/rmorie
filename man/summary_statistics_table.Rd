@@ -26,6 +26,9 @@ summary_statistics_table(
 
 \item{title}{Title.}
 }
+\value{
+A character string.
+}
 \description{
 Descriptive statistics for a set of variables
 }

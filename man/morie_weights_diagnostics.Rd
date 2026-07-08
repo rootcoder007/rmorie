@@ -9,6 +9,9 @@ morie_weights_diagnostics(weights)
 \arguments{
 \item{weights}{Numeric vector of unit-level design weights.}
 }
+\value{
+A named \code{list} (see Details).
+}
 \description{
 Returns a named list with summary statistics, Kish ESS, design effect,
 weight-range ratio, and percentile vector.

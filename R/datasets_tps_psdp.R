@@ -215,6 +215,7 @@ morie_tps_psdp_layers <- function() {
 
 #' TPS PSDP -- Assault
 #' @inheritParams morie_datasets_tps_mha_apprehensions
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_tps_assault <- function(year = NULL,
                                          max_features = NULL,
@@ -226,6 +227,7 @@ morie_datasets_tps_assault <- function(year = NULL,
 
 #' TPS PSDP -- Auto Theft
 #' @inheritParams morie_datasets_tps_mha_apprehensions
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_tps_autotheft <- function(year = NULL,
                                            max_features = NULL,
@@ -237,6 +239,7 @@ morie_datasets_tps_autotheft <- function(year = NULL,
 
 #' TPS PSDP -- Bicycle Theft
 #' @inheritParams morie_datasets_tps_mha_apprehensions
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_tps_bicycletheft <- function(year = NULL,
                                               max_features = NULL,
@@ -248,6 +251,7 @@ morie_datasets_tps_bicycletheft <- function(year = NULL,
 
 #' TPS PSDP -- Break and Enter
 #' @inheritParams morie_datasets_tps_mha_apprehensions
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_tps_breakandenter <- function(year = NULL,
                                                max_features = NULL,
@@ -259,6 +263,7 @@ morie_datasets_tps_breakandenter <- function(year = NULL,
 
 #' TPS PSDP -- Hate Crimes
 #' @inheritParams morie_datasets_tps_mha_apprehensions
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_tps_hatecrimes <- function(year = NULL,
                                             max_features = NULL,
@@ -270,6 +275,7 @@ morie_datasets_tps_hatecrimes <- function(year = NULL,
 
 #' TPS PSDP -- Homicides
 #' @inheritParams morie_datasets_tps_mha_apprehensions
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_tps_homicides <- function(year = NULL,
                                            max_features = NULL,
@@ -281,6 +287,7 @@ morie_datasets_tps_homicides <- function(year = NULL,
 
 #' TPS PSDP -- Intimate Partner and Family Violence
 #' @inheritParams morie_datasets_tps_mha_apprehensions
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_tps_intimate_partner_family_violence <- function(
   year = NULL, max_features = NULL,
@@ -291,6 +298,7 @@ morie_datasets_tps_intimate_partner_family_violence <- function(
 
 #' TPS PSDP -- Robbery
 #' @inheritParams morie_datasets_tps_mha_apprehensions
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_tps_robbery <- function(year = NULL,
                                          max_features = NULL,
@@ -302,6 +310,7 @@ morie_datasets_tps_robbery <- function(year = NULL,
 
 #' TPS PSDP -- Shooting and Firearm Discharges
 #' @inheritParams morie_datasets_tps_mha_apprehensions
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_tps_shooting_firearm_discharges <- function(
   year = NULL, max_features = NULL,
@@ -312,6 +321,7 @@ morie_datasets_tps_shooting_firearm_discharges <- function(
 
 #' TPS PSDP -- Theft From Motor Vehicle
 #' @inheritParams morie_datasets_tps_mha_apprehensions
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_tps_theft_from_motor_vehicle <- function(
   year = NULL, max_features = NULL,
@@ -322,6 +332,7 @@ morie_datasets_tps_theft_from_motor_vehicle <- function(
 
 #' TPS PSDP -- Theft Over
 #' @inheritParams morie_datasets_tps_mha_apprehensions
+#' @return A \code{data.frame}.
 #' @export
 morie_datasets_tps_theft_over <- function(year = NULL,
                                             max_features = NULL,

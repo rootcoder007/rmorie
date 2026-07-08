@@ -13,6 +13,9 @@ two_way_anova(data, outcome, factor_a, factor_b)
 
 \item{factor_a, factor_b}{Names of factor columns.}
 }
+\value{
+An object of class \code{"morie_test_result"}.
+}
 \description{
 Uses base R \code{aov}, then \code{drop1} for Type-II sums of squares.
 }

@@ -14,6 +14,7 @@
 #' of a source checkout. Users can override per-call via the `path`
 #' argument of [morie_tps_load_dataset()].
 #'
+#' @return A logical scalar.
 #' @export
 morie_tps_data_dir <- function() {
   # Mirror Python's `Path(__file__).resolve().parents[5] / data/datasets/TPS`

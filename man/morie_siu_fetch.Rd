@@ -7,6 +7,9 @@
 \usage{
 morie_siu_index_url()
 }
+\value{
+A character string.
+}
 \description{
 On-demand scraper for the Ontario Special Investigations Unit (SIU)
 Director's Reports index at \url{https://www.siu.on.ca/en/directors_reports.php}.

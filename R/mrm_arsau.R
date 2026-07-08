@@ -118,6 +118,7 @@ NULL
 #' @param year 2023 or 2024.
 #' @param language "en" or "fr".
 #' @param data_dir Optional explicit ARSAU root.
+#' @return An object of class \code{"morie_arsau_analysis_result"}.
 #' @export
 morie_arsau_analyze_main_records <- function(year, language = "en", data_dir = NULL) {
   loaded <- morie_arsau_load_main_records(year, language = language, data_dir = data_dir)
@@ -153,6 +154,7 @@ morie_arsau_analyze_main_records <- function(year, language = "en", data_dir = N
 #' @inheritParams morie_arsau_analyze_main_records
 #' @param bootstrap_reps Forwarded to
 #'   \code{mrm_uof_demographic_disparity}.
+#' @return An object of class \code{"morie_arsau_analysis_result"}.
 #' @export
 morie_arsau_analyze_individual_records <- function(year, language = "en",
                                                      data_dir = NULL,
@@ -218,6 +220,7 @@ morie_arsau_analyze_individual_records <- function(year, language = "en",
 #' Analysis of ARSAU probe_cycle_records (CEW telemetry).
 #'
 #' @inheritParams morie_arsau_analyze_main_records
+#' @return An object of class \code{"morie_arsau_analysis_result"}.
 #' @export
 morie_arsau_analyze_probe_cycle_records <- function(year, language = "en",
                                                       data_dir = NULL) {
@@ -274,6 +277,7 @@ morie_arsau_analyze_probe_cycle_records <- function(year, language = "en",
 #'
 #' @inheritParams morie_arsau_analyze_main_records
 #' @param allow_invalid See \code{\link{morie_arsau_load_weapon_records}}.
+#' @return An object of class \code{"morie_arsau_analysis_result"}.
 #' @export
 morie_arsau_analyze_weapon_records <- function(year, allow_invalid = FALSE,
                                                  language = "en", data_dir = NULL) {
@@ -344,6 +348,7 @@ morie_arsau_analyze_weapon_records <- function(year, allow_invalid = FALSE,
 #' YEAR_2022 columns against the REPORT_SCOPE headline volume row.
 #'
 #' @inheritParams morie_arsau_load_aggregate_summary
+#' @return An object of class \code{"morie_arsau_analysis_result"}.
 #' @export
 morie_arsau_analyze_aggregate_summary <- function(year_range = "2020-2022",
                                                     language = "en", data_dir = NULL) {
@@ -396,6 +401,7 @@ morie_arsau_analyze_aggregate_summary <- function(year_range = "2020-2022",
 #' Wide-format analysis of the 2020-2022 detailed-incident dataset.
 #'
 #' @inheritParams morie_arsau_load_detailed_dataset
+#' @return An object of class \code{"morie_arsau_analysis_result"}.
 #' @export
 morie_arsau_analyze_detailed_dataset <- function(year_range = "2020-2022",
                                                    language = "en", data_dir = NULL) {
@@ -427,6 +433,7 @@ morie_arsau_analyze_detailed_dataset <- function(year_range = "2020-2022",
 }
 
 
+#' @return \code{x}, invisibly.
 #' @export
 print.morie_arsau_analysis_result <- function(x, ...) {
   cat(x$title, "\n", strrep("=", nchar(x$title)), "\n", sep = "")

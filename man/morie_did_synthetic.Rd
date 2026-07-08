@@ -24,9 +24,10 @@ morie_did_synthetic(
 
 \item{treated_units}{Optional explicit list of treated unit IDs.}
 
-\item{zeta}{Optional regularisation parameter (auto-selected if NULL).}
+\item{zeta}{Retained for back-compat; ignored (coresynth auto-selects
+the SDID regularisation).}
 
-\item{n_bootstrap}{Bootstrap replications for placebo SE.}
+\item{n_bootstrap}{Bootstrap replications for the SE / CI.}
 
 \item{seed}{RNG seed.}
 
@@ -36,10 +37,10 @@ morie_did_synthetic(
 A result list; see \code{\link{morie_did_2x2}}.
 }
 \description{
-Thin wrapper around \code{synthdid::synthdid_estimate}. Requires
-the \pkg{synthdid} package
-(\code{remotes::install_github("synth-inference/synthdid")});
-synthdid is not on CRAN and has no comparable alternative.
+Wraps the \pkg{coresynth} SDID estimator via its unified Formula
+interface (\code{coresynth::scm_fit(method = "sdid")}) with bootstrap
+inference (\code{coresynth::sdid_inference}). \pkg{coresynth} is on
+CRAN (it replaces the earlier GitHub-only \pkg{synthdid} backend).
 }
 \references{
 Arkhangelsky, D., et al. (2021). Synthetic

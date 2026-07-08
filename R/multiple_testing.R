@@ -174,6 +174,7 @@ bonferroni <- function(p_values, alpha = 0.05, labels = NULL) {
 #' \code{mutoss::SidakSD}.
 #'
 #' @inheritParams bonferroni
+#' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @export
 sidak <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -188,6 +189,7 @@ sidak <- function(p_values, alpha = 0.05, labels = NULL) {
 #' uniformly more powerful than Bonferroni.
 #'
 #' @inheritParams bonferroni
+#' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @export
 holm <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -200,6 +202,7 @@ holm <- function(p_values, alpha = 0.05, labels = NULL) {
 #' Thin wrapper over \code{stats::p.adjust(method = "hochberg")}.
 #'
 #' @inheritParams bonferroni
+#' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @export
 hochberg <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -212,6 +215,7 @@ hochberg <- function(p_values, alpha = 0.05, labels = NULL) {
 #' Thin wrapper over \code{stats::p.adjust(method = "hommel")}.
 #'
 #' @inheritParams bonferroni
+#' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @export
 hommel <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -226,6 +230,7 @@ hommel <- function(p_values, alpha = 0.05, labels = NULL) {
 #' installed.
 #'
 #' @inheritParams bonferroni
+#' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @export
 holm_sidak <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -252,6 +257,7 @@ holm_sidak <- function(p_values, alpha = 0.05, labels = NULL) {
 #' Thin wrapper over \code{stats::p.adjust(method = "BH")}.
 #'
 #' @inheritParams bonferroni
+#' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @export
 benjamini_hochberg <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -268,6 +274,7 @@ bh <- benjamini_hochberg
 #' Thin wrapper over \code{stats::p.adjust(method = "BY")}.
 #'
 #' @inheritParams bonferroni
+#' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @export
 benjamini_yekutieli <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -290,6 +297,7 @@ by_fdr <- benjamini_yekutieli
 #' @inheritParams bonferroni
 #' @param lambda_param Tuning parameter in (0, 1) for the pi0
 #'   estimator.
+#' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @export
 storey_q <- function(p_values, alpha = 0.05, lambda_param = 0.5,
                      labels = NULL) {
@@ -371,6 +379,7 @@ storey_q <- function(p_values, alpha = 0.05, lambda_param = 0.5,
 #' computes the chi-square statistic inline.
 #'
 #' @inheritParams bonferroni
+#' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @export
 fisher_combined <- function(p_values) {
   p <- .mt_check_p(p_values)
@@ -406,6 +415,7 @@ fisher_combined <- function(p_values) {
 #'
 #' @inheritParams bonferroni
 #' @param weights Optional non-negative weights (any scale).
+#' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @export
 stouffer_combined <- function(p_values, weights = NULL) {
   p <- .mt_check_p(p_values)
@@ -443,6 +453,7 @@ stouffer_combined <- function(p_values, weights = NULL) {
 #' computes the closed form inline.
 #'
 #' @inheritParams bonferroni
+#' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @export
 tippett_combined <- function(p_values) {
   p <- .mt_check_p(p_values)
@@ -471,6 +482,7 @@ tippett_combined <- function(p_values) {
 #' Simes test for the global null
 #'
 #' @inheritParams bonferroni
+#' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @export
 simes_combined <- function(p_values) {
   p <- .mt_check_p(p_values)
@@ -492,6 +504,7 @@ simes_combined <- function(p_values) {
 #' raw harmonic mean (Wilson 2019 asymptotic approximation).
 #'
 #' @inheritParams bonferroni
+#' @return A numeric value.
 #' @export
 harmonic_mean_p <- function(p_values) {
   p <- .mt_check_p(p_values)
@@ -517,6 +530,7 @@ harmonic_mean_p <- function(p_values) {
 #'
 #' @inheritParams bonferroni
 #' @param weights Optional non-negative weights summing to 1.
+#' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @export
 cauchy_combination <- function(p_values, weights = NULL) {
   p <- .mt_check_p(p_values)
@@ -551,6 +565,7 @@ cauchy_combination <- function(p_values, weights = NULL) {
 #' procedure via a chain graph.
 #'
 #' @inheritParams bonferroni
+#' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @export
 fixed_sequence <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -590,6 +605,7 @@ fixed_sequence <- function(p_values, alpha = 0.05, labels = NULL) {
 #'
 #' @inheritParams bonferroni
 #' @param weights Numeric vector of non-negative weights summing to 1.
+#' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @export
 fallback_procedure <- function(p_values, weights, alpha = 0.05,
                                labels = NULL) {
@@ -789,6 +805,7 @@ estimate_pi0 <- function(p_values,
 #'   \code{"holm_sidak"}, \code{"bh"} / \code{"benjamini_hochberg"} /
 #'   \code{"fdr"}, \code{"by"} / \code{"benjamini_yekutieli"},
 #'   \code{"storey"}, or \code{"fwer"} (alias of holm).
+#' @return A named \code{list} of adjusted p-values with method metadata (as built by the selected adjustment method).
 #' @export
 adjust_p_values <- function(p_values, method = "bh", alpha = 0.05,
                             labels = NULL) {
@@ -878,6 +895,7 @@ n_effective_tests <- function(correlation_matrix,
 # Print method (delegates to existing morie_rich_result printer)
 # ---------------------------------------------------------------------------
 
+#' @return \code{x}, invisibly.
 #' @export
 print.morie_multiple_testing_result <- function(x, ...) {
   cat(x$title, "\n", strrep("=", nchar(x$title)), "\n", sep = "")

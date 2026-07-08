@@ -11,6 +11,9 @@ cauchy_combination(p_values, weights = NULL)
 
 \item{weights}{Optional non-negative weights summing to 1.}
 }
+\value{
+An object of class \code{"morie_multiple_testing_result"}.
+}
 \description{
 Robust to arbitrary correlation structure. No clean CRAN
 equivalent (the ACAT package is GitHub-only); kept as an in-house

@@ -22,6 +22,9 @@ left-truncated KM estimator.}
 \item{confidence}{Confidence level for interval estimates (default
 \code{0.95}).}
 }
+\value{
+A named list with elements \code{times}, \code{survival}, \code{ci_lower}, \code{ci_upper}, \code{at_risk}, \code{events}, \code{censored}, \code{method}.
+}
 \description{
 Left-truncated Kaplan-Meier with delayed entry.
 }

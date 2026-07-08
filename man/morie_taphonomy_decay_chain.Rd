@@ -26,8 +26,8 @@ decay, higher = stronger diversion toward mummification.}
 }
 \value{
 A named \code{list}: \code{P} (row-stochastic transition matrix,
-  \code{double}), \code{states}, \code{transient}, \code{absorbing}
-  (\code{c("skeletal", "mummified")}), and \code{preservation}.
+\code{double}), \code{states}, \code{transient}, \code{absorbing}
+(\code{c("skeletal", "mummified")}), and \code{preservation}.
 }
 \description{
 A discrete-time absorbing Markov chain over decomposition stages. From each
@@ -46,6 +46,6 @@ round(ch$P, 3)
 }
 \seealso{
 \code{\link{morie_taphonomy_decay_absorption}},
-  \code{\link{morie_taphonomy_decay_simulate}},
-  \code{\link{morie_taphonomy_decay_delta}}
+\code{\link{morie_taphonomy_decay_simulate}},
+\code{\link{morie_taphonomy_decay_delta}}
 }

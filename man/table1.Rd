@@ -50,6 +50,9 @@ factor / logical if NULL).}
 
 \item{title}{Table title.}
 }
+\value{
+A vector of the computed values.
+}
 \description{
 Table 1 (baseline characteristics) stratified by group
 }

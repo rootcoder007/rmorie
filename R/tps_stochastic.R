@@ -639,6 +639,7 @@ morie_tps_fokker_planck_grid <- function(df, ds_name = "?",
 # Print method
 # ---------------------------------------------------------------------------
 
+#' @return \code{x}, invisibly.
 #' @export
 print.morie_tps_stochastic_result <- function(x, ...) {
   cat(x$title, "\

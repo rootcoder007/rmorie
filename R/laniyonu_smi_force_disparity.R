@@ -423,6 +423,7 @@ morie_laniyonu_smi_force_disparity <- function(
 }
 
 
+#' @return \code{x}, invisibly.
 #' @export
 print.morie_laniyonu_smi_result <- function(x, ...) {
   cat(x$title, "\

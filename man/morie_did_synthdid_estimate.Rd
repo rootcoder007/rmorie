@@ -2,7 +2,7 @@
 % Please edit documentation in R/did.R
 \name{morie_did_synthdid_estimate}
 \alias{morie_did_synthdid_estimate}
-\title{Synthetic DiD via \code{synthdid::synthdid_estimate} (explicit-name API)}
+\title{Synthetic DiD via \code{coresynth::scm_fit} (explicit-name API)}
 \usage{
 morie_did_synthdid_estimate(
   panel,
@@ -21,41 +21,39 @@ morie_did_synthdid_estimate(
 
 \item{time}{Time period column.}
 
-\item{treatment}{Binary treatment indicator that turns on at onset
-for treated units and is zero everywhere for controls (the
-\pkg{synthdid} W convention).}
+\item{treatment}{Binary (0/1) treatment indicator that turns on at
+onset for treated units and is zero everywhere for controls.}
 
 \item{outcome}{Outcome column.}
 
-\item{vcov_method}{Variance estimator passed to
-\code{stats::vcov.synthdid_estimate}: one of \code{"placebo"}
+\item{vcov_method}{Inference method passed to
+\code{coresynth::sdid_inference}: one of \code{"placebo"}
 (default), \code{"bootstrap"}, \code{"jackknife"}.}
 
 \item{...}{Additional arguments forwarded to
-\code{synthdid::synthdid_estimate} (e.g. \code{zeta},
-\code{omega.intercept}).}
+\code{coresynth::scm_fit} (e.g. \code{predictors}, \code{covariates}).}
 }
 \value{
 An S3 list of class \code{morie_did_synthdid_result} with
 elements \code{att}, \code{std_error}, \code{vcov_method},
 \code{n_treated}, \code{n_control}, \code{n_pre},
 \code{n_post}, \code{method}, and \code{raw} (the full
-\code{synthdid_estimate} object).
+\code{coresynth} SDID fit object).
 }
 \description{
 Parallel to \code{\link{morie_did_synthetic}}, this is the
-explicit-name wrapper that surfaces the full \code{synthdid}
-estimator and its placebo / jackknife variance pieces.  Use this
-when you want to pass through additional \pkg{synthdid} arguments
-or inspect the unit / time weights side-by-side; use
+explicit-name wrapper that surfaces the full \pkg{coresynth} SDID
+estimator and its placebo / bootstrap / jackknife variance pieces.
+Use this when you want to pass through additional \pkg{coresynth}
+arguments or inspect the unit / time weights side-by-side; use
 \code{morie_did_synthetic} when you want the rmorie result-list
 shape consumed by \code{morie_did_*} downstream code.
 }
 \details{
-Wrapper-as-extender: rmorie already wraps \pkg{synthdid} once via
+Wrapper-as-extender: rmorie already wraps \pkg{coresynth} once via
 \code{morie_did_synthetic}; this entry point gives MRM / paper
-callers the canonical Arkhangelsky et al. (2021) API with a
-\code{morie_*} name so they don't need to load \pkg{synthdid}
+callers the canonical Arkhangelsky et al. (2021) SDID API with a
+\code{morie_*} name so they don't need to load \pkg{coresynth}
 directly.
 }
 \references{

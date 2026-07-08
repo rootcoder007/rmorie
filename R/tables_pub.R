@@ -150,6 +150,7 @@ NULL
 #' @param output_format "dataframe", "latex", "html", "markdown",
 #'   "text", "csv".
 #' @param title Table title.
+#' @return A vector of the computed values.
 #' @export
 table1 <- function(data, group_col = NULL,
                     continuous_vars = NULL, categorical_vars = NULL,
@@ -356,6 +357,7 @@ table1 <- function(data, group_col = NULL,
 #' @param apa APA p-value formatting.
 #' @param output_format Output target.
 #' @param title Title.
+#' @return A character string.
 #' @export
 regression_table <- function(models, exponentiate = FALSE,
                               show_ci = TRUE, show_stars = TRUE,
@@ -461,6 +463,7 @@ regression_table <- function(models, exponentiate = FALSE,
 #' @param apa APA formatting.
 #' @param output_format Output target.
 #' @param title Title.
+#' @return A character string.
 #' @export
 odds_ratio_table <- function(model, confidence = 0.95, digits = 3L,
                               apa = FALSE, output_format = "dataframe",
@@ -511,6 +514,7 @@ odds_ratio_table <- function(model, confidence = 0.95, digits = 3L,
 #' @param apa APA formatting.
 #' @param output_format Output target.
 #' @param title Title.
+#' @return A character string.
 #' @export
 hazard_ratio_table <- function(params, se, pvalues, confidence = 0.95,
                                 digits = 3L, apa = FALSE,
@@ -559,6 +563,7 @@ hazard_ratio_table <- function(params, se, pvalues, confidence = 0.95,
 #' @param digits Decimal places.
 #' @param output_format Output target.
 #' @param title Title.
+#' @return A character string.
 #' @export
 correlation_table <- function(data, method = "pearson", show_stars = TRUE,
                                 mask_diagonal = TRUE, digits = 3L,
@@ -605,6 +610,7 @@ correlation_table <- function(data, method = "pearson", show_stars = TRUE,
 #' @param digits Decimal places.
 #' @param output_format Output target.
 #' @param title Title.
+#' @return A character string.
 #' @export
 model_comparison_table <- function(models, nested = FALSE, digits = 3L,
                                      output_format = "dataframe",
@@ -679,6 +685,7 @@ model_comparison_table <- function(models, nested = FALSE, digits = 3L,
 #' @param digits Decimal places.
 #' @param output_format Output target.
 #' @param title Title.
+#' @return A character string.
 #' @export
 anova_table <- function(model, typ = 2L, digits = 3L,
                           output_format = "dataframe",
@@ -727,6 +734,7 @@ anova_table <- function(model, typ = 2L, digits = 3L,
 #' @param style "fixed", "scientific", "percent", "integer".
 #' @param digits Decimal places.
 #' @param apa APA-style leading-zero suppression.
+#' @return A logical scalar.
 #' @export
 format_number <- function(x, style = c("fixed", "scientific",
                                           "percent", "integer"),
@@ -746,6 +754,7 @@ format_number <- function(x, style = c("fixed", "scientific",
 #' @param pval_cols Columns to format as p-values.
 #' @param output_format Output target.
 #' @param title Title.
+#' @return A character string.
 #' @export
 format_dataframe <- function(df, numeric_fmt = "%.2f",
                                 pval_cols = NULL,
@@ -778,6 +787,7 @@ format_dataframe <- function(df, numeric_fmt = "%.2f",
 #' @param digits Decimal places.
 #' @param output_format Output target.
 #' @param title Title.
+#' @return A character string.
 #' @export
 summary_statistics_table <- function(data, variables = NULL,
                                         stats = c("n", "mean", "sd",
@@ -845,6 +855,7 @@ summary_statistics_table <- function(data, variables = NULL,
 #' @param digits Decimal places.
 #' @param output_format Output target.
 #' @param title Title.
+#' @return A character string.
 #' @export
 treatment_effect_table <- function(estimators, digits = 3L,
                                       output_format = "dataframe",

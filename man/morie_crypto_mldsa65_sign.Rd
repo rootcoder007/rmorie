@@ -4,7 +4,7 @@
 \alias{morie_crypto_mldsa65_sign}
 \title{ML-DSA-65 signature}
 \usage{
-morie_crypto_mldsa65_sign(sk, message)
+morie_crypto_mldsa65_sign(sk_sxp, message_sxp)
 }
 \arguments{
 \item{sk}{4032-byte raw vector (signer's secret key).}

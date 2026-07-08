@@ -160,6 +160,7 @@ resolve_stat_command <- function(name) {
 
 
 #' Sorted vector of all command names + aliases
+#' @return A vector of the computed values.
 #' @export
 all_stat_command_names <- function() {
   sort(unique(c(names(.morie_stat_commands$registry),
@@ -200,6 +201,7 @@ run_stat_command <- function(name, ...) {
 
 
 #' Total number of registered commands (excluding aliases)
+#' @return A numeric value (scalar).
 #' @export
 n_stat_commands <- function() {
   length(.morie_stat_commands$registry)
@@ -377,6 +379,7 @@ local({
 # Print method
 # ---------------------------------------------------------------------------
 
+#' @return \code{x}, invisibly.
 #' @export
 print.morie_stat_command <- function(x, ...) {
   cat(sprintf("morie stat command: %s\

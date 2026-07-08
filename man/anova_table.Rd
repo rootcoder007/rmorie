@@ -23,6 +23,9 @@ anova_table(
 
 \item{title}{Title.}
 }
+\value{
+A character string.
+}
 \description{
 Uses \code{stats::anova} for sequential (Type-I) tests, or
 \code{car::Anova} for Type-II/III if \pkg{car} is installed.

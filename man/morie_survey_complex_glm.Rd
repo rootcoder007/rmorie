@@ -33,6 +33,9 @@ in \code{df}.}
 \item{strata_col}{Character; column name of the stratum identifier
 in \code{df}.}
 }
+\value{
+A \code{svyglm} object (survey-weighted GLM fit).
+}
 \description{
 Complex-survey GLM constructor (single-shot wrapper that builds a design
 and fits a \code{svyglm} in one call). Cluster-robust SEs via the design.

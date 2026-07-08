@@ -6,6 +6,9 @@
 \usage{
 morie_cor_pearson(x, y)
 }
+\value{
+A numeric scalar: the Pearson correlation between \code{x} and \code{y}.
+}
 \description{
 Single-pass C++ kernel.  Equivalent to \code{cor(x, y)} when both
 vectors are equal-length and complete (no NA handling).

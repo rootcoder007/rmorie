@@ -9,6 +9,9 @@ morie_otis_analyze_c07(data)
 \arguments{
 \item{data}{c07 data.frame.}
 }
+\value{
+An object of class \code{"morie_otis_analysis_result"}.
+}
 \description{
 Individuals x alerts x gender (c07)
 }

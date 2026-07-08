@@ -9,6 +9,9 @@ simes_combined(p_values)
 \arguments{
 \item{p_values}{Numeric vector of raw p-values.}
 }
+\value{
+An object of class \code{"morie_multiple_testing_result"}.
+}
 \description{
 Simes test for the global null
 }

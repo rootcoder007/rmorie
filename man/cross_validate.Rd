@@ -42,6 +42,9 @@ cross_validate(
 
 \item{random_state}{Seed.}
 }
+\value{
+An object of class \code{"class_name"}.
+}
 \description{
 Cross-validate a model using a user-supplied fit/predict pair
 }

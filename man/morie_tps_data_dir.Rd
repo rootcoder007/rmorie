@@ -6,6 +6,9 @@
 \usage{
 morie_tps_data_dir()
 }
+\value{
+A logical scalar.
+}
 \description{
 Resolves to \verb{<repo>/data/datasets/TPS/} when \code{morie} is loaded out
 of a source checkout. Users can override per-call via the \code{path}

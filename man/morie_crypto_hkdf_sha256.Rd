@@ -4,9 +4,9 @@
 \alias{morie_crypto_hkdf_sha256}
 \title{HKDF-SHA256 (RFC 5869)}
 \usage{
-morie_crypto_hkdf_sha256(ikm, length = 32L, salt = raw(0), info = raw(0))
+morie_crypto_hkdf_sha256(ikm_sxp, length_sxp, salt_sxp, info_sxp)
 
-morie_crypto_hkdf_sha256(ikm, length = 32L, salt = raw(0), info = raw(0))
+morie_crypto_hkdf_sha256(ikm_sxp, length_sxp, salt_sxp, info_sxp)
 }
 \arguments{
 \item{ikm}{Input keying material (raw vector).}

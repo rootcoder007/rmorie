@@ -32,6 +32,9 @@ morie_iv_cue_gmm(
 
 \item{alpha}{Significance level for confidence intervals.}
 }
+\value{
+A named list with elements \code{coefficients}, \code{std_errors}, \code{t_stats}, \code{p_values}, \code{ci_lower}, \code{ci_upper}, \code{variable_names}, \code{n_obs}, \code{method}, \code{details}.
+}
 \description{
 Continuously-Updated GMM (CUE-GMM)
 }

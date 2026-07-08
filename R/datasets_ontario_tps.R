@@ -735,6 +735,7 @@ morie_datasets_otis_a01_restrictive_confinement <- function(
 
 #' OTIS d02 -- Deaths in custody by gender
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_d02_deaths_by_gender <- function(offline = TRUE,
                                                        resource_id = NULL, source = NULL) {
@@ -746,6 +747,7 @@ morie_datasets_otis_d02_deaths_by_gender <- function(offline = TRUE,
 
 #' OTIS d03 -- Deaths in custody by race
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_d03_deaths_by_race <- function(offline = TRUE,
                                                      resource_id = NULL, source = NULL) {
@@ -757,6 +759,7 @@ morie_datasets_otis_d03_deaths_by_race <- function(offline = TRUE,
 
 #' OTIS d04 -- Deaths in custody by religion
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_d04_deaths_by_religion <- function(offline = TRUE,
                                                          resource_id = NULL, source = NULL) {
@@ -768,6 +771,7 @@ morie_datasets_otis_d04_deaths_by_religion <- function(offline = TRUE,
 
 #' OTIS d05 -- Deaths in custody by age category
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_d05_deaths_by_age_category <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -779,6 +783,7 @@ morie_datasets_otis_d05_deaths_by_age_category <- function(
 
 #' OTIS d06 -- Deaths in custody by alert type x institution
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_d06_cause_by_alert <- function(offline = TRUE,
                                                      resource_id = NULL, source = NULL) {
@@ -790,6 +795,7 @@ morie_datasets_otis_d06_cause_by_alert <- function(offline = TRUE,
 
 #' OTIS d07 -- Deaths in custody alerts x housing unit
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_d07_alerts_by_housing_unit <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -816,6 +822,7 @@ morie_datasets_otis_b01_segregation_detailed <- function(
 
 #' OTIS b02 -- Segregation total days per individual
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_b02_segregation_total_days <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -826,6 +833,7 @@ morie_datasets_otis_b02_segregation_total_days <- function(
 
 #' OTIS b03 -- Segregation placements: alerts + hold by institution
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_b03_seg_alerts_by_institution <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -836,6 +844,7 @@ morie_datasets_otis_b03_seg_alerts_by_institution <- function(
 
 #' OTIS b04 -- Segregation consecutive durations by region
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_b04_seg_consecutive_by_region <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -846,6 +855,7 @@ morie_datasets_otis_b04_seg_consecutive_by_region <- function(
 
 #' OTIS b05 -- Segregation placements by consecutive-length bucket
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_b05_seg_consecutive_lengths <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -856,6 +866,7 @@ morie_datasets_otis_b05_seg_consecutive_lengths <- function(
 
 #' OTIS b06 -- Segregation placements: reason for placement by institution
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_b06_seg_reason_by_institution <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -866,6 +877,7 @@ morie_datasets_otis_b06_seg_reason_by_institution <- function(
 
 #' OTIS b07 -- Segregation placements: alerts + hold by gender
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_b07_seg_alerts_by_gender <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -876,6 +888,7 @@ morie_datasets_otis_b07_seg_alerts_by_gender <- function(
 
 #' OTIS b08 -- Segregation consecutive durations by institution
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_b08_seg_consecutive_by_institution <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -887,6 +900,7 @@ morie_datasets_otis_b08_seg_consecutive_by_institution <- function(
 
 #' OTIS b09 -- Individuals in segregation by number of times placed
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_b09_seg_n_times <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -901,6 +915,7 @@ morie_datasets_otis_b09_seg_n_times <- function(
 
 #' OTIS c01 -- Total individuals (in custody / restrictive confinement / segregation)
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_c01_individuals_total <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -911,6 +926,7 @@ morie_datasets_otis_c01_individuals_total <- function(
 
 #' OTIS c02 -- Individuals by institution
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_c02_individuals_by_institution <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -922,6 +938,7 @@ morie_datasets_otis_c02_individuals_by_institution <- function(
 
 #' OTIS c03 -- Individuals by race x gender
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_c03_individuals_race_by_gender <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -932,6 +949,7 @@ morie_datasets_otis_c03_individuals_race_by_gender <- function(
 
 #' OTIS c04 -- Individuals by race x region
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_c04_individuals_race_by_region <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -942,6 +960,7 @@ morie_datasets_otis_c04_individuals_race_by_region <- function(
 
 #' OTIS c05 -- Individuals by religion x region
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_c05_individuals_religion_by_region <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -953,6 +972,7 @@ morie_datasets_otis_c05_individuals_religion_by_region <- function(
 
 #' OTIS c06 -- Individuals by age category x region
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_c06_individuals_age_by_region <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -963,6 +983,7 @@ morie_datasets_otis_c06_individuals_age_by_region <- function(
 
 #' OTIS c07 -- Individuals: alerts + hold flags
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_c07_individuals_alerts <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -973,6 +994,7 @@ morie_datasets_otis_c07_individuals_alerts <- function(
 
 #' OTIS c08 -- Individuals by religion x gender
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_c08_individuals_religion_by_gender <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -984,6 +1006,7 @@ morie_datasets_otis_c08_individuals_religion_by_gender <- function(
 
 #' OTIS c09 -- Individuals by age category x gender
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_c09_individuals_age_by_gender <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -994,6 +1017,7 @@ morie_datasets_otis_c09_individuals_age_by_gender <- function(
 
 #' OTIS c10 -- Aggregate durations by institution
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_c10_aggregate_durations_by_institution <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -1005,6 +1029,7 @@ morie_datasets_otis_c10_aggregate_durations_by_institution <- function(
 
 #' OTIS c11 -- Aggregate lengths
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_c11_aggregate_lengths <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -1015,6 +1040,7 @@ morie_datasets_otis_c11_aggregate_lengths <- function(
 
 #' OTIS c12 -- Aggregate durations by region
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @export
 morie_datasets_otis_c12_aggregate_durations_by_region <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {

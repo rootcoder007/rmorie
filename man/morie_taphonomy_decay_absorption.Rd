@@ -13,9 +13,9 @@ morie_taphonomy_decay_absorption(chain, start = chain$transient[1])
 }
 \value{
 A named \code{list}: \code{absorption} (named probabilities over the
-  absorbing states, summing to 1, \code{double}), \code{expected_steps}
-  (\code{double}), \code{fundamental} (matrix \code{N}), and \code{B} (full
-  transient-by-absorbing probability matrix).
+absorbing states, summing to 1, \code{double}), \code{expected_steps}
+(\code{double}), \code{fundamental} (matrix \code{N}), and \code{B} (full
+transient-by-absorbing probability matrix).
 }
 \description{
 Uses the fundamental matrix \eqn{N = (I - Q)^{-1}} of the absorbing chain to
@@ -28,5 +28,5 @@ morie_taphonomy_decay_absorption(morie_taphonomy_decay_chain(0.7))$absorption
 }
 \references{
 Grinstead CM, Snell JL (1997). \emph{Introduction to
-  Probability} (2nd ed.), Ch. 11 (Absorbing Markov Chains). AMS.
+Probability} (2nd ed.), Ch. 11 (Absorbing Markov Chains). AMS.
 }

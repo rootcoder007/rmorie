@@ -9,6 +9,9 @@ morie_otis_analyze_b05(data)
 \arguments{
 \item{data}{b05 data.frame.}
 }
+\value{
+An object of class \code{"morie_otis_analysis_result"}.
+}
 \description{
 Distribution of placements by binned duration (b05)
 }

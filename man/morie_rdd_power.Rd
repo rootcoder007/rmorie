@@ -33,6 +33,9 @@ side of the cutoff. \code{NULL} invokes the data-driven CCT selector.}
 
 \item{alpha}{Significance level (default \code{0.05}).}
 }
+\value{
+A named list with elements \code{power}, \code{std_error}, \code{effective_n}, \code{tau}, \code{sigma}, \code{alpha}.
+}
 \description{
 RDD power calculation
 }

@@ -38,6 +38,9 @@ morie_rdd_sharp(
 
 \item{alpha}{Significance level.}
 }
+\value{
+A named list with elements \code{estimate}, \code{std_error}, \code{t_stat}, \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{n_obs}, \code{method}, \code{details}.
+}
 \description{
 Sharp RDD treatment effect at the cutoff
 }
