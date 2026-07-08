@@ -148,8 +148,18 @@ for (be in c("brms", "rstanarm")) {
   test_that(sprintf("BHM %s HMC backend recovers the effect (needs %s+CmdStan)",
                     be, be), {
     skip_if_not_installed(be)
-    skip_if(!nzchar(Sys.getenv("CMDSTAN")) &&
-              !requireNamespace("rstan", quietly = TRUE), "no Stan backend")
+    if (be == "brms") {
+      # brms compiles its Stan model at run time. That needs the CmdStan
+      # binary; the rstan compile path additionally needs BH + a full
+      # toolchain ("Boost not found" on leaves without it). rstanarm ships
+      # pre-compiled models, so only brms is gated on CmdStan.
+      skip_if_not_installed("cmdstanr")
+      skip_if(inherits(try(cmdstanr::cmdstan_path(), silent = TRUE),
+                       "try-error"), "CmdStan not installed")
+    } else {
+      skip_if(!nzchar(Sys.getenv("CMDSTAN")) &&
+                !requireNamespace("rstan", quietly = TRUE), "no Stan backend")
+    }
     set.seed(1)
     n <- 120L
     lime <- stats::rbinom(n, 1, 0.5)
