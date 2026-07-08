@@ -113,6 +113,26 @@ jobs:
       - name: Reinstall rmoriebricklayer (overwrite any cache-restored 0.2.0)
         run: install.packages("rmoriebricklayer", repos = "https://rootcoder007.r-universe.dev")
         shell: Rscript {0}
+
+      # Exercise the true cmdstanr backend (github.com/stan-dev/cmdstan) on
+      # ONE leaf only -- a full CmdStan toolchain build is ~10 min uncached,
+      # so the other leaves cover the brms rstan-fallback path instead.
+      - name: Cache CmdStan (ubuntu release leaf only)
+        if: matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release'
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        with:
+          path: ~/.cmdstan
+          key: cmdstan-${{ runner.os }}-v1
+
+      - name: Install CmdStan (ubuntu release leaf only)
+        if: matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release'
+        run: |
+          if (is.null(cmdstanr::cmdstan_version(error_on_NA = FALSE))) {
+            cmdstanr::check_cmdstan_toolchain(fix = TRUE)
+            cmdstanr::install_cmdstan(cores = 2)
+          }
+          cat("CmdStan:", cmdstanr::cmdstan_version(), "\n")
+        shell: Rscript {0}
       # Mirror morie's CI shape: drop --as-cran from per-push (51min+ on
       # rmorie Linux due to --as-cran URL-probing + 112 source-installed
       # Suggests). Plain check on per-push; --as-cran gated to
