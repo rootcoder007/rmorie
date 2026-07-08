@@ -123,6 +123,13 @@ jobs:
     uses: ./.github/workflows/r-lint.yml
     secrets: inherit
 
+  # DRY version gate: fails if VERSION_INVENTORY.csv drifts from a fresh
+  # regen (i.e. a version stamp changed without re-running the script).
+  version-drift:
+    needs: setup
+    uses: ./.github/workflows/version-drift.yml
+    secrets: inherit
+
   # r-pkgcheck and r-goodpractice are workflow_dispatch-only since
   # 3MMM.72 -- both re-run R CMD check + covr + cyclocomp + lintr
   # internally (~1 hour per push each). Fire manually from the
@@ -208,6 +215,7 @@ jobs:
       - r-cmd-check
       - r-coverage
       - r-lint
+      - version-drift
       - codeql
       - pkgdown
       - docker-publish
@@ -222,6 +230,7 @@ jobs:
           echo "  r-cmd-check      = ${{ needs.r-cmd-check.result }}"
           echo "  r-coverage       = ${{ needs.r-coverage.result }}"
           echo "  r-lint           = ${{ needs.r-lint.result }}"
+          echo "  version-drift    = ${{ needs.version-drift.result }}"
           echo "  codeql           = ${{ needs.codeql.result }}"
           echo "  pkgdown          = ${{ needs.pkgdown.result }}"
           echo "  docker-publish   = ${{ needs.docker-publish.result }}"
