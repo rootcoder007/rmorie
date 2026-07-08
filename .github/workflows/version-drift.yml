@@ -1,0 +1,45 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+#
+# version-drift.yml -- CI gate enforcing the DRY version contract.
+#
+# 1. Re-run scripts/version-inventory.sh from a fresh checkout.
+# 2. Compare the regenerated VERSION_INVENTORY.csv against the committed copy.
+# 3. Fail if they differ.
+#
+# Guarantees the committed CSV is always a faithful snapshot of the repo's
+# version mentions: bump DESCRIPTION's Version (and the src/ C++ User-Agent
+# literal) without regenerating the inventory, and CI catches it. Ported from
+# the morie repo; rmorie's canonical version lives in DESCRIPTION.
+name: version-drift
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  drift-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Install ripgrep
+        run: sudo apt-get update && sudo apt-get install -y ripgrep
+
+      - name: Regenerate inventory
+        run: |
+          cp VERSION_INVENTORY.csv VERSION_INVENTORY.csv.committed
+          ./scripts/version-inventory.sh
+
+      - name: Compare against committed copy
+        run: |
+          if ! diff -u VERSION_INVENTORY.csv.committed VERSION_INVENTORY.csv; then
+            echo ""
+            echo "::error::VERSION_INVENTORY.csv is out of date."
+            echo "Run scripts/version-inventory.sh locally and commit the result."
+            exit 1
+          fi
+          echo "Inventory matches committed snapshot."
