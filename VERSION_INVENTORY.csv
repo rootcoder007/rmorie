@@ -141,7 +141,6 @@ File,Line,Status,Version,Context
 ./R/wsrpw.R,4,STALE_OR_DEP,5.7.3,"#' (Gibbons Ch 5.7.3)"
 ./README.md,24,STALE_OR_DEP,1.0.0,"## What's in v1.0.0"
 ./cran-comments.md,1,CURRENT,1.0.3,"# cran-comments.md — rmorie 1.0.3"
-./cran-comments.md,17,STALE_OR_DEP,0.9.4,"An ancestor package (`morie` 0.9.4) was archived in 2026 after"
 ./man/midranks.Rd,5,STALE_OR_DEP,5.6.2,"\title{Midrank vector with tie summary (Gibbons Ch 5.6.2)}"
 ./man/morie_causal_weighting.Rd,55,STALE_OR_DEP,1.4.0,"Observational Studies. R package version 1.4.0."
 ./man/morie_contingency_coefficient.Rd,5,STALE_OR_DEP,14.2.1,"\title{Pearson contingency coefficient C (Gibbons Ch 14.2.1)}"
