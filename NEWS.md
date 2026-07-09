@@ -1,3 +1,29 @@
+# rmorie 1.0.3
+
+* CRAN-submission housekeeping: refreshed `cran-comments.md`, added the
+  CRAN version/downloads badges and the hex logo (`man/figures/logo.png`,
+  generated reproducibly by `data-raw/hex_logo.R`).
+* Version-locked with morie 1.0.3.
+
+# rmorie 1.0.2
+
+* All DoubleML fits now run under a shared sequential-plan guard that
+  also restores the caller's {future} plan on exit, fixing
+  `FutureLaunchError` and the R-devel connection-diagnostic crash
+  introduced by {future} 1.70.0.
+* `future` declared in `Suggests` (fixes the `'::' import not declared`
+  NOTE).
+
+# rmorie 1.0.1
+
+* Resolved all crypto codoc WARNINGs and the Rcpp wrapper name-collision
+  class (12 internally-renamed exports); CI now guards against new
+  collisions.
+* TPS data directory now resolves from the project root instead of a
+  fixed parent-hop count.
+* Live CKAN generic-dispatch tests are skipped when the portal returns
+  0 rows (oldrel flake).
+
 # rmorie 1.0.0
 
 * Version 1.0.0 (first alpha), version-locked with morie 1.0.0.
