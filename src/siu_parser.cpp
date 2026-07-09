@@ -35,7 +35,7 @@ struct CurlGlobal {
 const CurlGlobal kCurlGlobal;
 
 const char* kUserAgent =
-  "morie/1.0.0 (+https://github.com/rootcoder007/morie)";
+  "morie/1.0.1 (+https://github.com/rootcoder007/morie)";
 
 // libcurl write callback: append received bytes to a std::string.
 size_t write_cb(char* ptr, size_t size, size_t nmemb, void* userdata) {
