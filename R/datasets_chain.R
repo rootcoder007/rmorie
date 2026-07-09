@@ -1,25 +1,25 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #
-# Unified dataset-loader chain: live network -> bundled fixture ->
+# Unified dataset-loader chain: live network -> included fixture ->
 # synthetic generator -> typed-empty schema. Used by morie_datasets_*
-# loaders that support a `source = c("auto", "live", "bundled",
+# loaders that support a `source = c("auto", "live", "included",
 # "synthetic", "empty")` argument so the same call site works on a
 # fresh checkout, in CI with no network, and inside CRAN-safe tests
 # that mock out the live endpoint.
 
-#' Resolve a dataset loader through the live -> bundled -> synthetic chain.
+#' Resolve a dataset loader through the live -> included -> synthetic chain.
 #'
 #' Internal dispatch used by the unified \code{morie_datasets_*}
-#' loaders that accept a \code{source = c("auto", "live", "bundled",
+#' loaders that accept a \code{source = c("auto", "live", "included",
 #' "synthetic", "empty")} argument. The chain is:
 #'
 #' \describe{
 #'   \item{auto}{Try \code{live_fn()} first (network). If it errors or
-#'     returns \code{NULL}, fall back to the bundled fixture, then to
+#'     returns \code{NULL}, fall back to the included fixture, then to
 #'     \code{synth_fn(...)}, then to a typed-empty 0-row frame built
 #'     from \code{columns}. Whichever step succeeds first is returned.}
 #'   \item{live}{Run \code{live_fn()} only; error if it fails.}
-#'   \item{bundled}{Read the bundled \code{inst/extdata/<fixture>.csv}
+#'   \item{included}{Read the included \code{inst/extdata/<fixture>.csv}
 #'     only; error if missing.}
 #'   \item{synthetic}{Run \code{synth_fn()} only; error if no generator
 #'     is wired up for this dataset.}
@@ -27,15 +27,15 @@
 #'     \code{columns}; error if no schema is wired up.}
 #' }
 #'
-#' @param source One of \code{"auto"}, \code{"live"}, \code{"bundled"},
+#' @param source One of \code{"auto"}, \code{"live"}, \code{"included"},
 #'   \code{"synthetic"}, \code{"empty"}.
 #' @param live_fn A function that returns the live frame. May error or
 #'   return \code{NULL}; either is treated as a miss in \code{"auto"}.
 #'   Pass \code{NULL} to mean "no live path".
-#' @param bundled_name Character; the bundled fixture stem (without
+#' @param bundled_name Character; the included fixture stem (without
 #'   \code{.csv}). The file is looked up via
 #'   \code{system.file("extdata", paste0(bundled_name, ".csv"), package = "rmorie")}.
-#'   Pass \code{NULL} or \code{NA_character_} to mean "no bundled
+#'   Pass \code{NULL} or \code{NA_character_} to mean "no included
 #'   fixture".
 #' @param synth_fn A function that returns the synthetic frame. Pass
 #'   \code{NULL} to mean "no synthetic generator".

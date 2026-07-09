@@ -17,7 +17,7 @@ morie_datasets_nyc_police_precincts(
 )
 }
 \arguments{
-\item{offline}{If \code{TRUE} (default), read the bundled fixture.}
+\item{offline}{If \code{TRUE} (default), read the included fixture.}
 
 \item{geometry}{If \code{TRUE} and \code{offline = FALSE}, include the
 \code{the_geom} MultiPolygon.}

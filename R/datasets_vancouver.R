@@ -26,13 +26,13 @@
 
 #' Vancouver Open Data full dataset catalog (Opendatasoft v2.1)
 #'
-#' Phase 3CCC4. Bundled snapshot of every City-of-Vancouver dataset
+#' Phase 3CCC4. Included snapshot of every City-of-Vancouver dataset
 #' published on opendata.vancouver.ca (190 datasets as of
 #' 2026-05-24). Each row identifies a dataset by its Opendatasoft
 #' `dataset_id` slug (used as the URL path segment for records /
 #' exports endpoints).
 #'
-#' @param offline If `TRUE` (default), reads the bundled CSV; if
+#' @param offline If `TRUE` (default), reads the included CSV; if
 #'   `FALSE`, paginates the live catalog endpoint.
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `dataset_id`, `title`, `publisher`,
@@ -79,7 +79,7 @@ morie_datasets_vancouver_opendata_layers <- function(offline = TRUE,
   df
 }
 
-#' Bundled Vancouver Open Data crime-adjacent civic datasets
+#' Included Vancouver Open Data crime-adjacent civic datasets
 #'
 #' Phase 3DDD1. Five small fixtures harvested live from
 #' opendata.vancouver.ca for offline reproducibility -- chosen to
@@ -204,12 +204,12 @@ morie_datasets_vancouver_fire_halls <- function(offline = TRUE,
 }
 
 # ---------------------------------------------------------------------------
-# Phase 3EEE3 -- 4 more bundled Vancouver fixtures
+# Phase 3EEE3 -- 4 more included Vancouver fixtures
 # ---------------------------------------------------------------------------
 
 #' Vancouver community centre locations
 #'
-#' Phase 3EEE3. Bundled 27-row snapshot of City-run community
+#' Phase 3EEE3. Included 27-row snapshot of City-run community
 #' centres. Useful as an "anchor institutions" overlay for analyses
 #' of neighbourhood-level crime + social-service access.
 #'
@@ -230,7 +230,7 @@ morie_datasets_vancouver_community_centres <- function(offline = TRUE,
 
 #' Vancouver community food markets and farmers markets
 #'
-#' Phase 3EEE3. Bundled 91-row snapshot of community + farmers
+#' Phase 3EEE3. Included 91-row snapshot of community + farmers
 #' markets across Vancouver. Useful for food-access / quality-of-life
 #' overlays.
 #'
@@ -251,7 +251,7 @@ morie_datasets_vancouver_community_food_markets <- function(offline = TRUE,
 
 #' Vancouver designated disability parking spaces
 #'
-#' Phase 3EEE3. Bundled 100-row sample of designated disability
+#' Phase 3EEE3. Included 100-row sample of designated disability
 #' parking locations across Vancouver (out of 159 total).
 #'
 #' @rdname vancouver_crime_adjacent
@@ -271,7 +271,7 @@ morie_datasets_vancouver_disability_parking <- function(offline = TRUE,
 
 #' Vancouver public art registry
 #'
-#' Phase 3EEE3. Bundled 100-row sample of Vancouver's public art
+#' Phase 3EEE3. Included 100-row sample of Vancouver's public art
 #' registry (out of 747 total) -- artist, install year,
 #' neighbourhood, primary material. Useful as a CPTED-style
 #' "place-making" overlay variable.

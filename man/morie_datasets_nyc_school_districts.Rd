@@ -7,7 +7,7 @@
 morie_datasets_nyc_school_districts(offline = TRUE, max_features = NULL)
 }
 \arguments{
-\item{offline}{If \code{TRUE} (default), reads the bundled CSV; if
+\item{offline}{If \code{TRUE} (default), reads the included CSV; if
 \code{FALSE}, fetches via SODA2.}
 
 \item{max_features}{Optional row cap.}
@@ -16,7 +16,7 @@ morie_datasets_nyc_school_districts(offline = TRUE, max_features = NULL)
 A \code{data.frame} with \code{schooldist}, \code{shape_leng}, \code{shape_area}.
 }
 \description{
-Phase 3CCC2. Bundled snapshot of NYC OpenData
+Phase 3CCC2. Included snapshot of NYC OpenData
 \verb{8ugf-3d8u} (33 districts).
 }
 \examples{

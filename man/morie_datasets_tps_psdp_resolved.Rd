@@ -23,7 +23,7 @@ loader.}
 
 \item{max_features}{Optional row cap.}
 
-\item{offline}{If \code{TRUE} (default), all data come from bundled
+\item{offline}{If \code{TRUE} (default), all data come from included
 fixtures.}
 
 \item{layer_url}{Backward-compat override for non-canonical
@@ -40,7 +40,7 @@ resolver columns.
 \description{
 Phase 3CCC3. Pulls a TPS PSDP crime dataset
 (\code{morie_datasets_tps_assault()} etc.) and left-joins its native
-DIVISION + HOOD_158 + HOOD_140 columns against the bundled
+DIVISION + HOOD_158 + HOOD_140 columns against the included
 boundary metadata loaders (\code{\link[=morie_datasets_tps_police_divisions]{morie_datasets_tps_police_divisions()}},
 \code{\link[=morie_to_neighbourhoods]{morie_to_neighbourhoods()}} 158 + 140 + NIA flags) and the PSDP
 layer registry (\code{\link[=morie_tps_psdp_layers]{morie_tps_psdp_layers()}}).

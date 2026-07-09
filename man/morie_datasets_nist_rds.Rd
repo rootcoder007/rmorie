@@ -18,7 +18,7 @@ morie_datasets_nist_rds(
 
 \item{max_features}{Integer or \code{NULL}; cap on returned rows.}
 
-\item{offline}{Logical; if \code{TRUE}, return a bundled synthetic frame.}
+\item{offline}{Logical; if \code{TRUE}, return a included synthetic frame.}
 }
 \value{
 A \code{data.frame} with the NIST RDS catalog schema.

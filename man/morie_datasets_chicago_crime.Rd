@@ -21,7 +21,7 @@ morie_datasets_chicago_crime(
 \item{max_features}{Integer or \code{NULL}; cap on returned rows. When
 \code{paginate = TRUE} this is the total cap across all walked pages.}
 
-\item{offline}{Logical; if \code{TRUE}, return the bundled synthetic frame.}
+\item{offline}{Logical; if \code{TRUE}, return the included synthetic frame.}
 
 \item{mode}{One of \code{"soda2"} (default) or \code{"soda3"}. Selects the
 API path for live mode:

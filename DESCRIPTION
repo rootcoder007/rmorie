@@ -1,7 +1,7 @@
 Package: rmorie
 Type: Package
 Title: Multi-Domain Open Research and Inferential Estimation
-Version: 1.0.2
+Version: 1.0.4
 Authors@R: c(
   person(
     given = "Vansh Singh",
@@ -29,7 +29,7 @@ Description: Multi-domain scientific computing toolkit for observational
   psychometrics, alongside ingestion utilities for officially published
   Ontario Special Investigations Unit (police-oversight) and federal
   Structured Intervention Unit reports.
-License: AGPL (>= 3) + file LICENSE
+License: AGPL (>= 3)
 LazyData: true
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -205,9 +205,6 @@ biocViews:
   Bayesian,
   MultipleComparison,
   Visualization
-Remotes:
-  rootcoder007/rmoriedata,
-  stan-dev/cmdstanr
 Additional_repositories:
   https://rootcoder007.r-universe.dev,
   https://stan-dev.r-universe.dev

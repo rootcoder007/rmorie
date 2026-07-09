@@ -2,7 +2,7 @@
 % Please edit documentation in R/otis_analyze.R
 \name{morie_otis_all_analyses}
 \alias{morie_otis_all_analyses}
-\title{Run the full OTIS analysis bundle}
+\title{Run the full OTIS analysis capsule}
 \usage{
 morie_otis_all_analyses(df, year, sex = NULL, out_dir = NULL)
 }

@@ -4,7 +4,7 @@
 # factory for the 11 open-data crime layers. Mirrors the canonical
 # TPS PSDP layer registry and wraps each layer with:
 #
-#   * offline = TRUE  -- read a small bundled synthetic fixture from
+#   * offline = TRUE  -- read a small included synthetic fixture from
 #                         inst/extdata/tps_psdp_<key>_sample.csv
 #   * offline = FALSE -- hit the registered ArcGIS FeatureServer layer
 #                         via .morie_tps_psdp_feature_query() (mockable)
@@ -27,7 +27,7 @@
 #   Cluster F: ShootingAndFirearmDischarges 22-col (OCC_TIME_RANGE +
 #     DEATH + INJURIES + EVENT_TYPE).
 #
-# All eleven carry BOTH HOOD_158 and HOOD_140 columns so the bundled
+# All eleven carry BOTH HOOD_158 and HOOD_140 columns so the included
 # 158<->140 crosswalk + the cake-cutting helpers (see
 # R/toronto_neighbourhoods.R) work end-to-end on any TPS PSDP layer.
 
@@ -43,7 +43,7 @@
 #   arcgis_url - direct FeatureServer layer URL (the pre-3TT+ live
 #                  path; still honoured when the caller passes
 #                  layer_url = ... as an override).
-#   fixture    - bundled offline sample CSV.
+#   fixture    - included offline sample CSV.
 #   label      - human-readable label for the discovery table.
 #   hub_id     - 32-char hex GUID matching the canonical TPS Hub
 #                  catalog entry; the new 3TT+ default live path
@@ -204,7 +204,7 @@ morie_tps_psdp_layers <- function() {
     max_features = max_features,
     layer_idx = 0L,
     offline = TRUE)  # offline=TRUE here means "resolve the
-                      # FeatureServer URL via the bundled catalog
+                      # FeatureServer URL via the included catalog
                       # (no network for the resolve step)"; the
                       # data query itself always hits the network.
 }
@@ -348,13 +348,13 @@ morie_datasets_tps_theft_over <- function(year = NULL,
 
 #' Toronto Police Service police division boundaries
 #'
-#' Phase 3CCC3. Bundled snapshot of the TPS Hub
+#' Phase 3CCC3. Included snapshot of the TPS Hub
 #' `fda21b25213c4c07b08c5162cba5081f` (TPS_POLICE_DIVISIONS) -- the
 #' 16 post-amalgamation TPS divisions (D11, D12, D13, D14, D22, D23,
 #' D31, D32, D33, D41, D42, D43, D51, D52, D53, D55) with unit name,
 #' address, and area_sqkm.
 #'
-#' @param offline If `TRUE` (default), reads the bundled CSV.
+#' @param offline If `TRUE` (default), reads the included CSV.
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `DIV`, `UNIT_NAME`, `ADDRESS`,
 #'   `CITY`, `AREA_SQKM`, plus shape area / perimeter fields.
@@ -389,7 +389,7 @@ morie_datasets_tps_police_divisions <- function(offline = TRUE,
 #'
 #' Phase 3CCC3. Pulls a TPS PSDP crime dataset
 #' (`morie_datasets_tps_assault()` etc.) and left-joins its native
-#' DIVISION + HOOD_158 + HOOD_140 columns against the bundled
+#' DIVISION + HOOD_158 + HOOD_140 columns against the included
 #' boundary metadata loaders ([morie_datasets_tps_police_divisions()],
 #' [morie_to_neighbourhoods()] 158 + 140 + NIA flags) and the PSDP
 #' layer registry ([morie_tps_psdp_layers()]).
@@ -417,7 +417,7 @@ morie_datasets_tps_police_divisions <- function(offline = TRUE,
 #' @param year Optional year filter passed through to the underlying
 #'   loader.
 #' @param max_features Optional row cap.
-#' @param offline If `TRUE` (default), all data come from bundled
+#' @param offline If `TRUE` (default), all data come from included
 #'   fixtures.
 #' @param layer_url Backward-compat override for non-canonical
 #'   FeatureServer URL.

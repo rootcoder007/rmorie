@@ -4,7 +4,7 @@
 # pedagogical-narrative lookup for morie callables.
 #
 # This file ships the R-side mirror of the Python
-# `morie.describe()` function. It loads the bundled
+# `morie.describe()` function. It loads the included
 # describe_corpus.Rds (a named character vector containing the
 # ~36,000 describe_<name>.md narratives shipped under
 # src/morie/fn/) and prints the relevant narrative for a given
@@ -16,7 +16,7 @@
 # Package-level cache for the describe corpus (lazy-loaded).
 .morie_describe_env <- new.env(parent = emptyenv())
 
-#' Load the bundled describe corpus (lazy, cached for the session).
+#' Load the included describe corpus (lazy, cached for the session).
 #'
 #' @return Named character vector. Names are the callable mnemonics
 #'   (the short 4--7 character forms); values are the markdown
@@ -61,7 +61,7 @@
 #' Print the pedagogical narrative for a morie callable.
 #'
 #' Loads the describe_<name>.md narrative shipped in the package's
-#' \code{inst/extdata/describe_corpus.Rds} bundle and prints it to
+#' \code{inst/extdata/describe_corpus.Rds} capsule and prints it to
 #' the console. This is the R-side mirror of the Python
 #' \code{morie.describe()} function (closing the v0.9.5.4 parity
 #' gap; shipped in v0.9.5.5).

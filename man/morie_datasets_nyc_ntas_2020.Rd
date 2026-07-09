@@ -7,7 +7,7 @@
 morie_datasets_nyc_ntas_2020(offline = TRUE, max_features = NULL)
 }
 \arguments{
-\item{offline}{If \code{TRUE} (default), reads the bundled CSV.}
+\item{offline}{If \code{TRUE} (default), reads the included CSV.}
 
 \item{max_features}{Optional row cap.}
 }
@@ -16,7 +16,7 @@ A \code{data.frame} with 11 cols including \code{nta2020}, \code{ntaname},
 \code{borocode}, \code{boroname}, \code{countyfips}, \code{cdta2020}, \code{cdtaname}.
 }
 \description{
-Phase 3CCC2. Bundled snapshot of NYC OpenData
+Phase 3CCC2. Included snapshot of NYC OpenData
 \verb{9nt8-h7nd} (262 NTAs from the 2020 census revision).
 Carries boro + county FIPS + parent CDTA so it can be aggregated
 upward without spatial intersection.

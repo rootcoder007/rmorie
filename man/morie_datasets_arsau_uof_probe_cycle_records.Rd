@@ -14,7 +14,7 @@ morie_datasets_arsau_uof_probe_cycle_records(
 \arguments{
 \item{year}{Reporting year (\code{"2023"} or \code{"2024"}).}
 
-\item{offline}{If \code{TRUE} (default), read the bundled fixture. If
+\item{offline}{If \code{TRUE} (default), read the included fixture. If
 \code{FALSE}, hit the live CKAN endpoint via httr2.}
 
 \item{resource_id}{Optional CKAN resource id override.}

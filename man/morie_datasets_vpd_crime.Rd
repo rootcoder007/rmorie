@@ -14,7 +14,7 @@ morie_datasets_vpd_crime(
 }
 \arguments{
 \item{offline}{If \code{TRUE} (default) and \code{zip_path}/\code{csv_path} are
-\code{NULL}, reads the bundled 550-row sample.}
+\code{NULL}, reads the included 550-row sample.}
 
 \item{zip_path}{Optional path to a user-downloaded
 \code{crimedata_csv_AllNeighbourhoods_AllYears.zip}. Mutually
@@ -38,7 +38,7 @@ source modes:
 }
 \details{
 \describe{
-\item{\code{offline = TRUE} (default)}{Reads a bundled stratified
+\item{\code{offline = TRUE} (default)}{Reads a included stratified
 550-row sample (50 rows per \code{TYPE} x 11 categories) covering
 years 2003-2026 and all 25 VPD-defined neighbourhoods.
 Intended for tests + intro examples -- NOT for analysis.}
@@ -51,7 +51,7 @@ VPD's terms + conditions there).}
 (skip the zip if the caller already has the CSV on disk).}
 }
 
-The bundled sample is open-licensed under VPD's GeoDASH terms;
+The included sample is open-licensed under VPD's GeoDASH terms;
 the full feed requires manual T&C acceptance per VPD policy and
 there is no automation-friendly API. See
 \code{\link[=morie_datasets_vpd_legal_disclaimer]{morie_datasets_vpd_legal_disclaimer()}} for the full text.
@@ -86,7 +86,7 @@ Management System (RMS); filtered + aggregated to comply
 with the BC Freedom of Information & Protection of Privacy
 Act (BC FIPPA).
 \item \strong{\verb{Offence Against a Person} is INTENTIONALLY aggregated}
-to reduce re-identification risk. It bundles robbery,
+to reduce re-identification risk. It capsules robbery,
 assault (incl. sexual assault, domestic assault), and
 other violent incidents EXCEPT \verb{Assaults Against Police}.
 Sub-categories are deliberately NOT exposed; do not

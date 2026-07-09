@@ -20,7 +20,7 @@ A \code{data.frame}.
 \description{
 Returns a small data.frame mirroring the column shape of the
 published corrections-UoF resource for the given short \code{key}.
-Schemas are derived from the bundled
+Schemas are derived from the included
 \code{inst/extdata/corrections_uof_dictionary.json} (parsed from
 \code{datadictionary_correctionsribd_en_fr20250822.xlsx}). Values
 are uniformly drawn from the dictionary "Data Values" examples

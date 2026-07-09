@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #
 # Phase 3GGG1-5: bulk catalog snapshots harvested live from each
-# portal's catalog API, then bundled as inst/extdata CSVs for
+# portal's catalog API, then included as inst/extdata CSVs for
 # offline-first cross-portal discovery.
 #
 # Sizes (approximate, as of 2026-05-24):
@@ -17,7 +17,7 @@
 # (CKAN/Hub variants drop columns that don't map cleanly.)
 
 #' NYC OpenData bulk catalog (2851 entities)
-#' @param offline If `TRUE` (default), reads bundled CSV.
+#' @param offline If `TRUE` (default), reads included CSV.
 #' @return Tabular catalog snapshot.
 #' @export
 morie_datasets_nyc_opendata_bulk_layers <- function(offline = TRUE) {
@@ -66,7 +66,7 @@ morie_datasets_ottawa_opendata_bulk_layers <- function(offline = TRUE) {
 
 #' Montreal Open Data bulk CKAN catalog (401 packages, 3HHH1)
 #'
-#' Phase 3HHH1. Bundled snapshot of every CKAN package on
+#' Phase 3HHH1. Included snapshot of every CKAN package on
 #' donnees.montreal.ca -- substantially broader than the 23-row
 #' Loi/Justice/Securite subset from 3EEE1.
 #'
@@ -79,7 +79,7 @@ morie_datasets_montreal_opendata_bulk_layers <- function(offline = TRUE) {
 
 #' Vancouver Open Data bulk Opendatasoft v2.1 catalog (190 datasets, 3HHH2)
 #'
-#' Phase 3HHH2. Bundled snapshot of every dataset on
+#' Phase 3HHH2. Included snapshot of every dataset on
 #' opendata.vancouver.ca with richer schema (publisher, theme,
 #' license, records_count).
 #'

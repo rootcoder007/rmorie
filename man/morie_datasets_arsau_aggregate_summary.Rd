@@ -8,7 +8,7 @@ rollup)}
 morie_datasets_arsau_aggregate_summary(offline = TRUE, resource_id = NULL)
 }
 \arguments{
-\item{offline}{If \code{TRUE} (default), read the bundled synthetic
+\item{offline}{If \code{TRUE} (default), read the included synthetic
 fixture. If \code{FALSE}, hit Ontario CKAN.}
 
 \item{resource_id}{Optional override.}

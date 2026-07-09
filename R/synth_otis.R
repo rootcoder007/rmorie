@@ -409,7 +409,7 @@
 #' @return A \code{data.frame} with the dictionary-derived schema.
 #' @seealso \code{\link{morie_synth_otis_all}} for the full 29-dataset
 #'   list; \code{\link{morie_datasets_otis_a01}} and friends for the
-#'   real bundled+live loaders.
+#'   real included+live loaders.
 #' @export
 #' @examples
 #' df <- morie_synth_otis("c11", n = 50)

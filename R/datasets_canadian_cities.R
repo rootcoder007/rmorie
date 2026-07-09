@@ -23,11 +23,11 @@
 
 #' Calgary Open Data crime-adjacent catalog
 #'
-#' Phase 3FFF3. Bundled snapshot of 157 City-of-Calgary Socrata
+#' Phase 3FFF3. Included snapshot of 157 City-of-Calgary Socrata
 #' datasets matched on crime-adjacent keywords (crime, police,
 #' fire, ambulance, traffic, incident, collision, bylaw, 311).
 #'
-#' @param offline If `TRUE` (default), reads the bundled CSV.
+#' @param offline If `TRUE` (default), reads the included CSV.
 #' @return A `data.frame` with `soda_id`, `title`, `type`,
 #'   `search_keyword`.
 #' @export
@@ -77,11 +77,11 @@ morie_datasets_ottawa_open_crime_adjacent_layers <- function(offline = TRUE) {
 
 #' Calgary Community Crime Statistics (sample)
 #'
-#' Phase 3FFF3. Bundled 200-row sample of Calgary's per-community
+#' Phase 3FFF3. Included 200-row sample of Calgary's per-community
 #' per-month crime counts (Socrata id `78gh-n26t`). Covers all 8
 #' canonical CPS categories.
 #'
-#' @param offline If `TRUE` (default), reads bundled CSV.
+#' @param offline If `TRUE` (default), reads included CSV.
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `community`, `category`, `crime_count`,
 #'   `year`, `month`.
@@ -98,7 +98,7 @@ morie_datasets_calgary_community_crime_stats <- function(offline = TRUE,
 
 #' Calgary Fire Response Calls (sample)
 #'
-#' Phase 3FFF3. Bundled 200-row sample of Calgary fire response
+#' Phase 3FFF3. Included 200-row sample of Calgary fire response
 #' calls (Socrata id `bdez-pds9`).
 #'
 #' @rdname morie_datasets_calgary_community_crime_stats
@@ -153,10 +153,10 @@ morie_datasets_calgary_socrata_by_id <- function(soda_id,
 
 #' Edmonton Police Station locations
 #'
-#' Phase 3FFF3. Bundled 10-row fixture of Edmonton Police Service
+#' Phase 3FFF3. Included 10-row fixture of Edmonton Police Service
 #' station locations (Socrata id `e7aq-scxv`).
 #'
-#' @param offline If `TRUE` (default), reads bundled CSV.
+#' @param offline If `TRUE` (default), reads included CSV.
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `name`, `address`, `latitude`,
 #'   `longitude`.

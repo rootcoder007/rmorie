@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Bundled reference data samples and dataset fetchers
+#' Included reference data samples and dataset fetchers
 #'
 #' MORIE ships a small set of reference CSVs in `inst/extdata/` so that
 #' the `mrm_otis_*()` and `mrm_tps_*()` callables can be exercised
@@ -30,7 +30,7 @@
 NULL
 
 
-#' Load a bundled MORIE reference sample by name
+#' Load a included MORIE reference sample by name
 #'
 #' Returns a small CSV that ships with the package, suitable for
 #' running examples and tests of the `mrm_*()` callables without any

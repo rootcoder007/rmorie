@@ -1,12 +1,7 @@
-# R-MORIE
+# R-MORIE <img src="man/figures/logo.png" align="right" height="139" alt="rmorie hex logo" />
 
 <!-- badges: start -->
-[![Project Status: Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![r-universe](https://rootcoder007.r-universe.dev/badges/rmorie)](https://rootcoder007.r-universe.dev/rmorie)
-[![CI](https://github.com/rootcoder007/rmorie/actions/workflows/build.yml/badge.svg)](https://github.com/rootcoder007/rmorie/actions/workflows/build.yml)
-[![Codecov test coverage](https://codecov.io/gh/rootcoder007/rmorie/graph/badge.svg)](https://app.codecov.io/gh/rootcoder007/rmorie)
-[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+[![Status](https://img.shields.io/badge/status-active-success.svg)](https://www.repostatus.org/#active) [![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) [![r-universe](https://rootcoder007.r-universe.dev/badges/rmorie)](https://rootcoder007.r-universe.dev/rmorie) [![CI](https://github.com/rootcoder007/rmorie/actions/workflows/build.yml/badge.svg)](https://github.com/rootcoder007/rmorie/actions/workflows/build.yml) [![Coverage](https://codecov.io/gh/rootcoder007/rmorie/graph/badge.svg)](https://app.codecov.io/gh/rootcoder007/rmorie) [![AGPL-3.0](https://img.shields.io/badge/AGPL--3.0-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 <!-- badges: end -->
 
 R-MORIE (**Multi-domain Open Research and Inferential Estimation**) is an
@@ -243,9 +238,12 @@ CodeQL.
 
 ## Citation
 
-Run `citation("rmorie")` after installation for the BibTeX entry stamped
-with the exact installed version (sourced from `inst/CITATION`), or cite
-the software directly:
+If you use rmorie in your research, please cite the software:
+
+> Ruhela, V. S. (2026). *rmorie: Multi-domain Open Research and Inferential Estimation in R.* https://github.com/rootcoder007/rmorie
+
+BibTeX (or run `citation("rmorie")` after installation for the entry
+stamped with the exact installed version, sourced from `inst/CITATION`):
 
 ```bibtex
 @Manual{ruhela_rmorie_2026,
@@ -255,6 +253,9 @@ the software directly:
   url     = {https://github.com/rootcoder007/rmorie}
 }
 ```
+
+See [`CITATION.cff`](https://github.com/rootcoder007/rmorie/blob/main/CITATION.cff)
+for the machine-readable metadata GitHub's "Cite this repository" button uses.
 
 ## License
 

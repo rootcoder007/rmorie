@@ -42,7 +42,7 @@ jobs:
         with:
           # rgenoud: runtime Depends of Matching/rbounds (Rosenbaum + genetic
           # matching tests); covr runs the full suite so it's needed here too.
-          extra-packages: any::covr any::xml2 any::rgenoud
+          extra-packages: any::covr any::xml2 any::rgenoud github::rootcoder007/rmorie-bricklayer/bricklayer github::rootcoder007/rmoriedata github::stan-dev/cmdstanr
           needs: coverage
         env:
           # ECOSolveR (a healthy CRAN package by B. Narasimhan, pulled in via

@@ -13,5 +13,6 @@ bibentry(
   author  = person("Vansh Singh", "Ruhela",
                    comment = c(ORCID = "0009-0004-1750-3592")),
   year    = "2026",
+  note    = paste("R package version", meta$Version),
   url     = "https://github.com/rootcoder007/rmorie"
 )

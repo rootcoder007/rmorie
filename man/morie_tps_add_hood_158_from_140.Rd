@@ -28,7 +28,7 @@ first match from \code{c("HOOD_140", "hood_140", "NEIGHBOURHOOD_140", "neighbour
 }
 \description{
 Looks up each row's \code{HOOD_140} (or \code{hood_140} / \code{NEIGHBOURHOOD_140}
-/ \code{neighbourhood_140}) in the bundled crosswalk and writes the
+/ \code{neighbourhood_140}) in the included crosswalk and writes the
 PRIMARY-overlap 158 hood code into a new column (default name
 \code{HOOD_158_equiv}).
 }

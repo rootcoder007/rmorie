@@ -18,7 +18,7 @@ directory (CRAN-safe: never writes without an explicit
 \code{out_dir}).
 }
 
-\code{morie_otis_otdml} is excluded from the bundle because it
+\code{morie_otis_otdml} is excluded from the capsule because it
 requires the caller to specify \code{(treatment, outcome,
 covariates)} -- call it directly when needed.
 \subsection{Year-lock invariant}{
