@@ -16,7 +16,8 @@ morie_tps_sdb_reaction_diffusion(
   dt = 0.04,
   nx = 90L,
   ny = 60L,
-  save_fig = TRUE
+  save_fig = TRUE,
+  fig_dir = NULL
 )
 }
 \arguments{
@@ -33,7 +34,10 @@ morie_tps_sdb_reaction_diffusion(
 
 \item{nx, ny}{Grid resolution.}
 
-\item{save_fig}{Whether to write a 1x3 PNG triptych
+\item{save_fig}{Whether to write a 1x3 PNG triptych}
+
+\item{fig_dir}{Directory to write the PNG into; \code{NULL} (the
+default) skips writing and says so in the result.
 (seed / A(x,t) / rho(x,t)) to the manifest figure directory.}
 }
 \value{

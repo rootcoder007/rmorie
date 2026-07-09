@@ -4,12 +4,19 @@
 \alias{morie_tps_lotka_volterra_police_crime}
 \title{Lotka-Volterra predator-prey on yearly crime counts}
 \usage{
-morie_tps_lotka_volterra_police_crime(category = "Assault", save_fig = TRUE)
+morie_tps_lotka_volterra_police_crime(
+  category = "Assault",
+  save_fig = TRUE,
+  fig_dir = NULL
+)
 }
 \arguments{
 \item{category}{TPS category name.}
 
 \item{save_fig}{Whether to write a yearly time-series PNG.}
+
+\item{fig_dir}{Directory to write the PNG into; \code{NULL} (the
+default) skips writing and says so in the result.}
 }
 \value{
 A \code{morie_rich_result} with the four LV parameters, the
