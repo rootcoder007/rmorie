@@ -12,11 +12,7 @@ rmorie Imports `rmoriebricklayer` and Suggests `rmoriedata`, both
 submitted to CRAN ahead of this package. `Additional_repositories`
 covers `cmdstanr` (stan-dev r-universe); `qvalue` is on Bioconductor.
 
-## History with CRAN
-
-An ancestor package (`morie` 0.9.4) was archived in 2026 after
-Prof. Uwe Ligges flagged writes to `~/.cache` — a CRAN Policy
-violation. rmorie was rebuilt around that lesson:
+## CRAN policy posture
 
 * `morie_cache_dir()` resolves to `tools::R_user_dir("morie", "cache")`
   only on explicit user opt-in; every default writes under `tempdir()`.

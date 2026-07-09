@@ -238,9 +238,12 @@ CodeQL.
 
 ## Citation
 
-Run `citation("rmorie")` after installation for the BibTeX entry stamped
-with the exact installed version (sourced from `inst/CITATION`), or cite
-the software directly:
+If you use rmorie in your research, please cite the software:
+
+> Ruhela, V. S. (2026). *rmorie: Multi-domain Open Research and Inferential Estimation in R.* https://github.com/rootcoder007/rmorie
+
+BibTeX (or run `citation("rmorie")` after installation for the entry
+stamped with the exact installed version, sourced from `inst/CITATION`):
 
 ```bibtex
 @Manual{ruhela_rmorie_2026,
@@ -250,6 +253,9 @@ the software directly:
   url     = {https://github.com/rootcoder007/rmorie}
 }
 ```
+
+See [`CITATION.cff`](https://github.com/rootcoder007/rmorie/blob/main/CITATION.cff)
+for the machine-readable metadata GitHub's "Cite this repository" button uses.
 
 ## License
 
