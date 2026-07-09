@@ -110,3 +110,24 @@ test_that("stochastic callables accept OCC_DATE fallback", {
   rr <- morie_tps_hawkes_temporal_fit(df, ds_name = "DateOnly")
   expect_s3_class(rr, "morie_tps_stochastic_result")
 })
+test_that(".tps_stoch_date_series handles TPS month names and epoch-ms OCC_DATE", {
+  # TPS publishes OCC_MONTH as month names.
+  df_names <- data.frame(
+    OCC_YEAR = c(2020L, 2021L), OCC_MONTH = c("January", "July"),
+    OCC_DAY = c(5L, 12L), stringsAsFactors = FALSE
+  )
+  ts1 <- rmorie:::.tps_stoch_date_series(df_names)
+  expect_length(ts1, 2L)
+  expect_identical(format(sort(ts1), "%Y-%m-%d"), c("2020-01-05", "2021-07-12"))
+
+  # ArcGIS serves OCC_DATE as epoch milliseconds; must parse, not error.
+  df_ms <- data.frame(OCC_DATE = c(1577836800000, 1609459200000))
+  ts2 <- rmorie:::.tps_stoch_date_series(df_ms)
+  expect_length(ts2, 2L)
+  expect_identical(format(sort(ts2), "%Y"), c("2020", "2021"))
+
+  # Unparseable character dates degrade to empty, never an error.
+  df_bad <- data.frame(OCC_DATE = c("not-a-date", "also-bad"),
+                       stringsAsFactors = FALSE)
+  expect_silent(rmorie:::.tps_stoch_date_series(df_bad))
+})
