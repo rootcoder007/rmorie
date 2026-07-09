@@ -213,6 +213,14 @@ morie_tps_hawkes_temporal_fit <- function(df, ds_name = "?",
   t0 <- min(dt)
   t <- as.numeric(difftime(dt, t0, units = "days"))
   t <- sort(t)
+  # Daily-resolution sources tie same-day events at identical t, which
+  # degenerates the exponential-kernel likelihood (omega -> Inf).
+  # Spread ties deterministically within their day.
+  if (anyDuplicated(t)) {
+    t <- t + stats::ave(rep(0, length(t)), t,
+                        FUN = function(x) seq_along(x) / (length(x) + 1))
+    t <- sort(t)
+  }
   T_window <- t[length(t)]
   n <- length(t)
 
