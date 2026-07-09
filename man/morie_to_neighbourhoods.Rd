@@ -15,7 +15,7 @@ morie_to_neighbourhoods(
 (historical 2014--2021 scheme), or \code{"nia"} (Neighbourhood
 Improvement Areas).}
 
-\item{offline}{If \code{TRUE} (default), read the small bundled synthetic
+\item{offline}{If \code{TRUE} (default), read the small included synthetic
 fixture from \verb{inst/extdata/}. If \code{FALSE}, hit the live City of
 Toronto CKAN \code{datastore_search} endpoint via httr2.}
 

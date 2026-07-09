@@ -7,7 +7,7 @@
 morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
 }
 \arguments{
-\item{offline}{If \code{TRUE} (default), read the bundled 71-row
+\item{offline}{If \code{TRUE} (default), read the included 71-row
 catalog fixture (\code{inst/extdata/tps_arcgis_hub_catalog.csv}).
 Live mode hits the TPS Hub search API.}
 }

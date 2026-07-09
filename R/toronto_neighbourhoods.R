@@ -22,7 +22,7 @@
 #   * morie_tps_resolve_hood_col()      -- pick the right hood column
 #   * morie_tps_assert_hood_version()   -- error / warn on version drift
 #   * morie_tps_year_to_hood_version()  -- recommended schema per year
-#   * morie_to_hood_crosswalk()         -- bundled 140<->158 mapping
+#   * morie_to_hood_crosswalk()         -- included 140<->158 mapping
 #
 # Upstream sources
 # ----------------
@@ -34,7 +34,7 @@
 #     - https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/
 #         datastore_search?resource_id=<id>
 #
-# Bundled small synthetic fixtures live in inst/extdata/:
+# Included small synthetic fixtures live in inst/extdata/:
 #   to_neighbourhoods_158.csv
 #   to_neighbourhoods_140.csv
 #   to_neighbourhood_improvement_areas.csv
@@ -52,7 +52,7 @@
 #' @name morie_toronto_neighbourhoods
 NULL
 
-# Map a "version" string to the bundled fixture filename.
+# Map a "version" string to the included fixture filename.
 .morie_to_fixture_name <- function(version) {
   switch(version,
     "158" = "to_neighbourhoods_158.csv",
@@ -61,7 +61,7 @@ NULL
     stop("unknown version: ", version, call. = FALSE))
 }
 
-# Read a bundled neighbourhood fixture from inst/extdata.
+# Read a included neighbourhood fixture from inst/extdata.
 .morie_to_neighbourhoods_fixture <- function(version) {
   fname <- .morie_to_fixture_name(version)
   path <- system.file("extdata", fname, package = "rmorie")
@@ -118,7 +118,7 @@ NULL
 #' @param version One of `"158"` (current City scheme), `"140"`
 #'   (historical 2014--2021 scheme), or `"nia"` (Neighbourhood
 #'   Improvement Areas).
-#' @param offline If `TRUE` (default), read the small bundled synthetic
+#' @param offline If `TRUE` (default), read the small included synthetic
 #'   fixture from `inst/extdata/`. If `FALSE`, hit the live City of
 #'   Toronto CKAN `datastore_search` endpoint via httr2.
 #' @param resource_id Optional CKAN resource id override. Used only
@@ -245,9 +245,9 @@ morie_tps_year_to_hood_version <- function(year) {
   ifelse(is.na(y), NA_character_, ifelse(y >= 2022L, "158", "140"))
 }
 
-#' Load the bundled BIDIRECTIONAL 158 <-> 140 neighbourhood crosswalk
+#' Load the included BIDIRECTIONAL 158 <-> 140 neighbourhood crosswalk
 #'
-#' Returns the bundled `inst/extdata/to_hood_158_140_crosswalk.csv`,
+#' Returns the included `inst/extdata/to_hood_158_140_crosswalk.csv`,
 #' computed from polygon intersection of the two upstream Open Toronto
 #' GeoJSON layers (`Neighbourhoods - 4326.geojson` and
 #' `Neighbourhoods - historical 140 - 4326.geojson`) reprojected to
@@ -269,13 +269,13 @@ morie_tps_year_to_hood_version <- function(year) {
 #'     inside its parent 140), so
 #'     [morie_tps_aggregate_158_to_140()] is mathematically EXACT
 #'     (lossless sum) for the 1:1 + split cohort. Only the one
-#'     split+merge sliver in the bundled OT data has a non-100
+#'     split+merge sliver in the included OT data has a non-100
 #'     reverse percent.}
 #'   \item{relation}{"1:1" / "split" (one 140 -> N 158s) / "merge"
 #'     (multiple 140s -> one 158) / "split+merge"}
 #' }
 #'
-#' Empirical distribution on the bundled OT data:
+#' Empirical distribution on the included OT data:
 #'
 #'   * 123 1:1 rows (78\% of 140 hoods)            -- both percents == 100
 #'   * 34 split rows (16 historical hoods)         -- pct_158_in_140 == 100
@@ -323,7 +323,7 @@ morie_to_hood_crosswalk <- function() {
 #' Add an equivalent HOOD_158 column to a HOOD_140-keyed data.frame
 #'
 #' Looks up each row's `HOOD_140` (or `hood_140` / `NEIGHBOURHOOD_140`
-#' / `neighbourhood_140`) in the bundled crosswalk and writes the
+#' / `neighbourhood_140`) in the included crosswalk and writes the
 #' PRIMARY-overlap 158 hood code into a new column (default name
 #' `HOOD_158_equiv`).
 #'
@@ -478,7 +478,7 @@ morie_tps_disaggregate_140_to_158 <- function(df,
 #' uniform-density assumption when the source is a clean cake-cut --
 #' the partition is exhaustive and disjoint by construction. The only
 #' lossy case is the `split+merge` edge (one Willowdale East sliver
-#' in the bundled OT data); the function handles it via the
+#' in the included OT data); the function handles it via the
 #' `pct_158_in_140` weights regardless.
 #'
 #' @param df A `data.frame` keyed on a 158-hood column.

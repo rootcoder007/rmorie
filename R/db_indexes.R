@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #
 # Per-dataset index registry. Empirical cardinality measurements from
-# the real bundled datasets drove these choices — high-cardinality
+# the real included datasets drove these choices — high-cardinality
 # columns (>1000 distinct values + frequent point-lookup or join key)
 # get B-tree indexes; medium-cardinality columns (rollup dimensions
 # like year × region) get composite indexes with the high-card column.

@@ -32,7 +32,7 @@ verbatim; see limitation above).}
 
 \item{max_features}{Optional total row cap across pages.}
 
-\item{offline}{Logical; default \code{TRUE} reads the bundled 22-col
+\item{offline}{Logical; default \code{TRUE} reads the included 22-col
 \code{chicago_crime_synthetic.csv} fixture.}
 
 \item{resource_id}{Optional view id override (default

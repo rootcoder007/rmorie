@@ -200,7 +200,7 @@ NULL
 #'
 #' @param df Tract-year panel.  One row per tract per year.
 #' @param year_col,tract_id_col,stops_col,population_col,crime_col,demand_col
-#'   Column names; defaults match the morie toy bundle schema.
+#'   Column names; defaults match the morie toy capsule schema.
 #' @param baseline_income_col,baseline_rent_col Baseline-period income
 #'   and rent (2000 in the paper).
 #' @param growth_college_col,growth_rent_col Growth columns.  If

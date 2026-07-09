@@ -38,7 +38,7 @@ df <- morie_datasets_nyc_nypd_arrests_ytd(
   offline = FALSE, paginate = TRUE, max_features = 5000L)
 }\if{html}{\out{</div>}}
 
-The bundled fixtures (offline mode) are unaffected -- they ship 5
+The included fixtures (offline mode) are unaffected -- they ship 5
 rows each as deterministic sample data, and \code{max_features} simply
 truncates the fixture.
 }

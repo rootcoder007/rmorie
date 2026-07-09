@@ -33,7 +33,7 @@ morie_laniyonu_gentrification_policing(
 \arguments{
 \item{df}{Tract-year panel.  One row per tract per year.}
 
-\item{year_col, tract_id_col, stops_col, population_col, crime_col, demand_col}{Column names; defaults match the morie toy bundle schema.}
+\item{year_col, tract_id_col, stops_col, population_col, crime_col, demand_col}{Column names; defaults match the morie toy capsule schema.}
 
 \item{baseline_income_col, baseline_rent_col}{Baseline-period income
 and rent (2000 in the paper).}

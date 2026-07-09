@@ -28,7 +28,7 @@ morie_datasets_montreal_opendata_bulk_layers(offline = TRUE)
 morie_datasets_vancouver_opendata_bulk_layers(offline = TRUE)
 }
 \arguments{
-\item{offline}{If \code{TRUE} (default), reads bundled CSV.}
+\item{offline}{If \code{TRUE} (default), reads included CSV.}
 }
 \value{
 Tabular catalog snapshot.
@@ -48,11 +48,11 @@ A \code{data.frame}.
 A \code{data.frame}.
 }
 \description{
-Phase 3HHH1. Bundled snapshot of every CKAN package on
+Phase 3HHH1. Included snapshot of every CKAN package on
 donnees.montreal.ca -- substantially broader than the 23-row
 Loi/Justice/Securite subset from 3EEE1.
 
-Phase 3HHH2. Bundled snapshot of every dataset on
+Phase 3HHH2. Included snapshot of every dataset on
 opendata.vancouver.ca with richer schema (publisher, theme,
 license, records_count).
 }

@@ -31,7 +31,7 @@
 #'       \item Debian/Ubuntu: \code{sudo apt-get install libcurl4-openssl-dev}
 #'       \item Fedora/RHEL:   \code{sudo dnf install libcurl-devel}
 #'       \item macOS:         pre-installed (Apple's libcurl); or \code{brew install curl}
-#'       \item Windows:       bundled with Rtools
+#'       \item Windows:       included with Rtools
 #'     }
 #'   \item \strong{libsodium} (required for ChaCha20-Poly1305 + HKDF-SHA256)
 #'     \itemize{

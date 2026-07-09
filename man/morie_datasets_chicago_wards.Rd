@@ -16,7 +16,7 @@ morie_datasets_chicago_wards(
 )
 }
 \arguments{
-\item{offline}{If \code{TRUE} (default), read the bundled fixture.}
+\item{offline}{If \code{TRUE} (default), read the included fixture.}
 
 \item{geometry}{If \code{TRUE} and \code{offline = FALSE}, include the
 \code{the_geom} MultiPolygon.}
@@ -55,7 +55,7 @@ Socrata. Live mode uses SODA3
 (\verb{/api/v3/views/sp34-6z76/query.json}) via
 \code{.morie_dataset_soda3_query()}.
 
-Offline mode reads a bundled 50-row attribute-only fixture
+Offline mode reads a included 50-row attribute-only fixture
 (\code{inst/extdata/chicago_wards.csv}: \code{ward} / \code{shape_leng} /
 \code{shape_area}). Live mode with \code{geometry = TRUE} also includes the
 \code{the_geom} MultiPolygon column.

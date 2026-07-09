@@ -17,7 +17,7 @@ morie_datasets_chicago_neighborhoods(
 )
 }
 \arguments{
-\item{offline}{If \code{TRUE} (default), read the bundled attribute-only
+\item{offline}{If \code{TRUE} (default), read the included attribute-only
 fixture from \code{inst/extdata/chicago_neighborhoods.csv}.}
 
 \item{geometry}{If \code{TRUE} and \code{offline = FALSE}, include the
@@ -54,9 +54,9 @@ Wraps the City of Chicago "Boundaries - Neighborhoods" open dataset
 approximate and the names are not official.
 }
 \details{
-Offline mode reads a bundled 98-row attribute-only fixture
+Offline mode reads a included 98-row attribute-only fixture
 (\code{pri_neigh}, \code{sec_neigh}, \code{shape_area}, \code{shape_len}) -- the
-\code{the_geom} MultiPolygon column is stripped to keep the bundled
+\code{the_geom} MultiPolygon column is stripped to keep the included
 size sane (full GeoJSON is ~800 KB). Live mode hits the SODA2
 endpoint via \code{.morie_dataset_socrata_fetch()} (mockable).
 

@@ -7,14 +7,14 @@
 morie_datasets_toronto_open_crime_adjacent_layers(offline = TRUE)
 }
 \arguments{
-\item{offline}{If \code{TRUE} (default), reads the bundled CSV.}
+\item{offline}{If \code{TRUE} (default), reads the included CSV.}
 }
 \value{
 A \code{data.frame} with \code{package_name}, \code{title},
 \code{num_resources}, \code{metadata_modified}, \code{search_keyword}.
 }
 \description{
-Phase 3EEE2. Bundled snapshot of 208 City-of-Toronto CKAN
+Phase 3EEE2. Included snapshot of 208 City-of-Toronto CKAN
 packages matched on crime-adjacent keywords (311, fire, police,
 ambulance, parking, traffic collision, by-law, emergency, crime,
 wellbeing). Each row identifies a package by its CKAN slug;

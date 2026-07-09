@@ -15,7 +15,7 @@
 
 #' Toronto Open Data crime-adjacent CKAN catalog
 #'
-#' Phase 3EEE2. Bundled snapshot of 208 City-of-Toronto CKAN
+#' Phase 3EEE2. Included snapshot of 208 City-of-Toronto CKAN
 #' packages matched on crime-adjacent keywords (311, fire, police,
 #' ambulance, parking, traffic collision, by-law, emergency, crime,
 #' wellbeing). Each row identifies a package by its CKAN slug;
@@ -23,7 +23,7 @@
 #' [morie_datasets_toronto_open_ckan_resource()] or visit the
 #' open.toronto.ca dataset page.
 #'
-#' @param offline If `TRUE` (default), reads the bundled CSV.
+#' @param offline If `TRUE` (default), reads the included CSV.
 #' @return A `data.frame` with `package_name`, `title`,
 #'   `num_resources`, `metadata_modified`, `search_keyword`.
 #' @export
@@ -65,11 +65,11 @@ morie_datasets_toronto_open_crime_adjacent_layers <- function(offline = TRUE) {
 
 #' Toronto Ambulance station locations
 #'
-#' Phase 3EEE2. Bundled snapshot of `ambulance-station-locations`
+#' Phase 3EEE2. Included snapshot of `ambulance-station-locations`
 #' (46 EMS stations across Toronto). Useful as a control overlay
 #' for crime + EMS dispatch analyses.
 #'
-#' @param offline If `TRUE` (default), reads bundled CSV.
+#' @param offline If `TRUE` (default), reads included CSV.
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with full station address + EMS metadata.
 #' @export
@@ -97,13 +97,13 @@ morie_datasets_toronto_ambulance_stations <- function(offline = TRUE,
 
 #' TPS Annual Statistical Report -- Miscellaneous data (aggregated)
 #'
-#' Phase 3EEE2. Bundled snapshot of
+#' Phase 3EEE2. Included snapshot of
 #' `police-annual-statistical-report-miscellaneous-data` -- 40 rows
 #' of year x section x category x subtype aggregates covering hate
 #' crime counts, IMPACT calls, and other Toronto Police aggregates
 #' that aren't in the per-incident ArcGIS Hub layers.
 #'
-#' @param offline If `TRUE` (default), reads bundled CSV.
+#' @param offline If `TRUE` (default), reads included CSV.
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `YEAR`, `SECTION`, `CATEGORY`,
 #'   `SUBTYPE`, `COUNT_`.

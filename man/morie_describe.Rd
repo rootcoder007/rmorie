@@ -18,7 +18,7 @@ and prints a helpful diagnostic.
 }
 \description{
 Loads the describe_\if{html}{\out{<name>}}.md narrative shipped in the package's
-\code{inst/extdata/describe_corpus.Rds} bundle and prints it to
+\code{inst/extdata/describe_corpus.Rds} capsule and prints it to
 the console. This is the R-side mirror of the Python
 \code{morie.describe()} function (closing the v0.9.5.4 parity
 gap; shipped in v0.9.5.5).

@@ -11,7 +11,7 @@
 \alias{morie_datasets_vancouver_community_food_markets}
 \alias{morie_datasets_vancouver_disability_parking}
 \alias{morie_datasets_vancouver_public_art}
-\title{Bundled Vancouver Open Data crime-adjacent civic datasets}
+\title{Included Vancouver Open Data crime-adjacent civic datasets}
 \usage{
 morie_datasets_vancouver_graffiti(offline = TRUE, max_features = NULL)
 
@@ -44,7 +44,7 @@ morie_datasets_vancouver_disability_parking(
 morie_datasets_vancouver_public_art(offline = TRUE, max_features = NULL)
 }
 \arguments{
-\item{offline}{If \code{TRUE} (default), reads the bundled CSV; if
+\item{offline}{If \code{TRUE} (default), reads the included CSV; if
 \code{FALSE}, paginates the live catalog endpoint.}
 
 \item{max_features}{Optional row cap.}
@@ -75,18 +75,18 @@ surface neighbourhood-level civic context useful in carceral /
 policing analysis even though VPD itself publishes crime data
 separately (see \code{\link[=morie_datasets_vpd_crime]{morie_datasets_vpd_crime()}}).
 
-Phase 3EEE3. Bundled 27-row snapshot of City-run community
+Phase 3EEE3. Included 27-row snapshot of City-run community
 centres. Useful as an "anchor institutions" overlay for analyses
 of neighbourhood-level crime + social-service access.
 
-Phase 3EEE3. Bundled 91-row snapshot of community + farmers
+Phase 3EEE3. Included 91-row snapshot of community + farmers
 markets across Vancouver. Useful for food-access / quality-of-life
 overlays.
 
-Phase 3EEE3. Bundled 100-row sample of designated disability
+Phase 3EEE3. Included 100-row sample of designated disability
 parking locations across Vancouver (out of 159 total).
 
-Phase 3EEE3. Bundled 100-row sample of Vancouver's public art
+Phase 3EEE3. Included 100-row sample of Vancouver's public art
 registry (out of 747 total) -- artist, install year,
 neighbourhood, primary material. Useful as a CPTED-style
 "place-making" overlay variable.

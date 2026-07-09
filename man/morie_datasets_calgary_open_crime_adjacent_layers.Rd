@@ -13,7 +13,7 @@ morie_datasets_edmonton_open_crime_adjacent_layers(offline = TRUE)
 morie_datasets_ottawa_open_crime_adjacent_layers(offline = TRUE)
 }
 \arguments{
-\item{offline}{If \code{TRUE} (default), reads the bundled CSV.}
+\item{offline}{If \code{TRUE} (default), reads the included CSV.}
 }
 \value{
 A \code{data.frame} with \code{soda_id}, \code{title}, \code{type},
@@ -24,7 +24,7 @@ A \code{data.frame} of the requested dataset (a 0-row typed frame when the data 
 A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 }
 \description{
-Phase 3FFF3. Bundled snapshot of 157 City-of-Calgary Socrata
+Phase 3FFF3. Included snapshot of 157 City-of-Calgary Socrata
 datasets matched on crime-adjacent keywords (crime, police,
 fire, ambulance, traffic, incident, collision, bylaw, 311).
 }

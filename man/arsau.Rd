@@ -45,7 +45,7 @@ below), which honours, in order:
 a previous \code{morie_arsau_download()} call -- never
 auto-created at read-time, per CRAN policy)
 \item \code{system.file("extdata", "arsau", package = "rmorie")} --
-the bundled tiny fixture for unit tests + tutorials
+the included tiny fixture for unit tests + tutorials
 \item stop with a remediation paragraph
 }
 }

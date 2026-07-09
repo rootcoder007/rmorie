@@ -28,7 +28,7 @@ MRM (Multilevel Reconciliation Methodology) framework that is MORIE's primary
 sociolegal-data application.
 
 This vignette walks through a minimal end-to-end session: load the
-package, look at the bundled dataset catalogue, load one dataset, and
+package, look at the included dataset catalogue, load one dataset, and
 run an average-treatment-effect estimator on a small synthetic example.
 A second vignette (`mrm-otis-walkthrough`) covers the MRM ten-estimator
 ensemble on OTIS provincial data.
@@ -42,7 +42,7 @@ library(rmorie)
 # The dataset catalogue
 
 `morie_dataset_catalog()` returns a data frame summarising every
-dataset bundled with the package or accessible via the package's
+dataset shipped with the package or accessible via the package's
 loaders. This is the easiest way to discover what's available without
 leaving the R session.
 

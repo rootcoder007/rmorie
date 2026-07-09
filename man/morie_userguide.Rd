@@ -14,7 +14,7 @@ If \code{NULL}, lists all available userguides.}
 File path string, or character vector of filenames.
 }
 \description{
-Lists or retrieves bundled userguide PDF files. These are the official
+Lists or retrieves included userguide PDF files. These are the official
 PUMF codebooks and user guides from Health Canada / Statistics Canada.
 }
 \examples{

@@ -27,7 +27,7 @@
 #' Phase 3CCC4. Single-view aggregator over morie's per-portal
 #' registries. Returns one row per (portal, dataset) pair with a
 #' uniform schema so callers can answer questions like "which TPS
-#' datasets does morie ship?" or "what fixtures are bundled for
+#' datasets does morie ship?" or "what fixtures are included for
 #' Chicago?" without knowing each portal's registry shape.
 #'
 #' API mode column legend (`api_modes`):
@@ -418,7 +418,7 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
       stringsAsFactors = FALSE))
   }
 
-  # --- VPD GeoDASH (manual download, sample bundled) -----------
+  # --- VPD GeoDASH (manual download, sample included) -----------
   push(data.frame(
     dataset_key = "vpd_crime",
     source = "vpd_geodash",

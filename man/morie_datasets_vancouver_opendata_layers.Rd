@@ -7,7 +7,7 @@
 morie_datasets_vancouver_opendata_layers(offline = TRUE, max_features = NULL)
 }
 \arguments{
-\item{offline}{If \code{TRUE} (default), reads the bundled CSV; if
+\item{offline}{If \code{TRUE} (default), reads the included CSV; if
 \code{FALSE}, paginates the live catalog endpoint.}
 
 \item{max_features}{Optional row cap.}
@@ -17,7 +17,7 @@ A \code{data.frame} with \code{dataset_id}, \code{title}, \code{publisher},
 \code{records_count}.
 }
 \description{
-Phase 3CCC4. Bundled snapshot of every City-of-Vancouver dataset
+Phase 3CCC4. Included snapshot of every City-of-Vancouver dataset
 published on opendata.vancouver.ca (190 datasets as of
 2026-05-24). Each row identifies a dataset by its Opendatasoft
 \code{dataset_id} slug (used as the URL path segment for records /

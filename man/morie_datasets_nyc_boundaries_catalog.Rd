@@ -19,7 +19,7 @@ NOTE: school/council/community/NTA boundaries are NOT directly
 row-key joinable to NYPD CJ data -- the CJ rows carry lat/long
 (or just precinct/borough), not a district ID. Use these loaders
 standalone for geographic context, or pair with a spatial join
-via the \code{sf} package on \code{the_geom} (not bundled to keep morie
+via the \code{sf} package on \code{the_geom} (not included to keep morie
 lightweight).
 }
 \examples{

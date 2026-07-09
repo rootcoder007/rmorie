@@ -43,7 +43,7 @@
 #'         a previous \code{morie_arsau_download()} call -- never
 #'         auto-created at read-time, per CRAN policy)
 #'   \item \code{system.file("extdata", "arsau", package = "rmorie")} --
-#'         the bundled tiny fixture for unit tests + tutorials
+#'         the included tiny fixture for unit tests + tutorials
 #'   \item stop with a remediation paragraph
 #' }
 #'
@@ -114,7 +114,7 @@ NULL
     }
   }
 
-  # Bundled tiny fixture in the installed package.
+  # Included tiny fixture in the installed package.
   fixture <- system.file("extdata", "arsau", package = "rmorie")
   if (nzchar(fixture)) {
     candidates[["bundled fixture (inst/extdata/arsau)"]] <- fixture

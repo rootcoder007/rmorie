@@ -17,7 +17,7 @@ morie_datasets_chicago_iucr_codes(
 )
 }
 \arguments{
-\item{offline}{If \code{TRUE} (default), read the bundled full
+\item{offline}{If \code{TRUE} (default), read the included full
 410-row fixture.}
 
 \item{max_features}{Optional row cap.}
@@ -61,7 +61,7 @@ description. Five columns:
 Available via SODA2 (single-shot or paginated) -- this is a
 base dataset, not a filtered view.
 
-Offline mode reads a bundled 410-row complete fixture
+Offline mode reads a included 410-row complete fixture
 (\code{inst/extdata/chicago_iucr_codes.csv}).
 }
 \examples{

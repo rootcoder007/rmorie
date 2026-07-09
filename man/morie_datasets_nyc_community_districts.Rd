@@ -7,7 +7,7 @@
 morie_datasets_nyc_community_districts(offline = TRUE, max_features = NULL)
 }
 \arguments{
-\item{offline}{If \code{TRUE} (default), reads the bundled CSV.}
+\item{offline}{If \code{TRUE} (default), reads the included CSV.}
 
 \item{max_features}{Optional row cap.}
 }
@@ -15,6 +15,6 @@ morie_datasets_nyc_community_districts(offline = TRUE, max_features = NULL)
 A \code{data.frame} with \code{boro_cd}, \code{shape_leng}, \code{shape_area}.
 }
 \description{
-Phase 3CCC2. Bundled snapshot of NYC OpenData
+Phase 3CCC2. Included snapshot of NYC OpenData
 \verb{5crt-au7u} (71 districts).
 }

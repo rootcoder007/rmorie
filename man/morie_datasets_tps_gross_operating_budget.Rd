@@ -27,7 +27,7 @@ morie_datasets_tps_gross_operating_budget(
 (default \code{0L}, the first layer).}
 
 \item{offline}{Logical; if \code{TRUE}, the hub_id is resolved via the
-bundled catalog (no network needed for the resolution step).
+included catalog (no network needed for the resolution step).
 Default \code{TRUE} -- you can run this against the 71 catalog
 entries without network. Live data fetches always hit the
 network regardless of this argument; "offline" here only

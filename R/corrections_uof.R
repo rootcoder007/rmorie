@@ -7,7 +7,7 @@
 #   https://data.ontario.ca/dataset/use-of-force-in-correctional-institutions
 #
 # Each loader follows the same offline-first pattern morie uses for
-# OTIS / ARSAU UoF / TPS Hub data: a 50-row real CKAN slice bundled
+# OTIS / ARSAU UoF / TPS Hub data: a 50-row real CKAN slice included
 # at inst/extdata/corrections_uof_<key>_sample.csv (default), with
 # offline = FALSE hitting the live CKAN datastore_dump JSON endpoint
 # for the canonical resource id.
@@ -51,7 +51,7 @@ morie_corrections_uof_resource_ids <- function() {
 #' Generic Corrections-UoF loader.
 #'
 #' Internal helper that every per-resource loader delegates to via
-#' the shared \code{.morie_load_chain()} (live -> bundled ->
+#' the shared \code{.morie_load_chain()} (live -> included ->
 #' synthetic -> empty). Not exported.
 #' @keywords internal
 #' @noRd
@@ -82,12 +82,12 @@ morie_corrections_uof_resource_ids <- function() {
 }
 
 #' Use-of-force incidents (head dataset)
-#' @param offline Logical; \code{TRUE} (default) reads the bundled
+#' @param offline Logical; \code{TRUE} (default) reads the included
 #'   real CKAN sample at
 #'   \code{inst/extdata/corrections_uof_incidents_sample.csv}.
 #'   \code{FALSE} hits the live CKAN endpoint.
 #' @param resource_id Optional CKAN resource id override.
-#' @param source One of \code{"auto"}, \code{"live"}, \code{"bundled"},
+#' @param source One of \code{"auto"}, \code{"live"}, \code{"included"},
 #'   \code{"synthetic"}, \code{"empty"}; takes precedence over
 #'   \code{offline} when supplied.
 #' @return \code{data.frame}.
@@ -220,7 +220,7 @@ morie_datasets_corrections_uof_religion <- function(offline = TRUE,
 #'
 #' Returns a small data.frame mirroring the column shape of the
 #' published corrections-UoF resource for the given short \code{key}.
-#' Schemas are derived from the bundled
+#' Schemas are derived from the included
 #' \code{inst/extdata/corrections_uof_dictionary.json} (parsed from
 #' \code{datadictionary_correctionsribd_en_fr20250822.xlsx}). Values
 #' are uniformly drawn from the dictionary "Data Values" examples
@@ -242,7 +242,7 @@ morie_datasets_corrections_uof_religion <- function(offline = TRUE,
 morie_synth_corrections_uof <- function(key, n = 30L, seed = 1L) {
   set.seed(seed)
   n <- as.integer(n)
-  # Pull the column names from the bundled real CKAN sample so the
+  # Pull the column names from the included real CKAN sample so the
   # synthetic frame matches exactly what the offline path returns.
   bundled_path <- system.file(
     "extdata",

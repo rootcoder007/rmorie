@@ -27,7 +27,7 @@ morie_datasets_nyc_nypd_resolved(
 \item{max_features}{Optional row cap. When \code{paginate = TRUE} this
 is the total cap across walked pages.}
 
-\item{offline}{If \code{TRUE} (default), read the bundled fixture.}
+\item{offline}{If \code{TRUE} (default), read the included fixture.}
 
 \item{resource_id}{Optional Socrata resource id override.}
 
@@ -59,7 +59,7 @@ resolver columns.
 Phase 3AAA. Pulls a slice of any
 \code{\link[=morie_datasets_nyc_nypd_by_key]{morie_datasets_nyc_nypd_by_key()}}-resolvable dataset and
 left-joins its borough + precinct foreign keys against the
-bundled resolvers (\code{\link[=morie_datasets_nyc_boroughs]{morie_datasets_nyc_boroughs()}} +
+included resolvers (\code{\link[=morie_datasets_nyc_boroughs]{morie_datasets_nyc_boroughs()}} +
 \code{\link[=morie_datasets_nyc_police_precincts]{morie_datasets_nyc_police_precincts()}}).
 }
 \details{

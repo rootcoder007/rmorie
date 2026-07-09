@@ -15,7 +15,7 @@ morie_datasets_ontario_ckan_by_key(
 \code{\link[=morie_datasets_ontario_ckan_layers]{morie_datasets_ontario_ckan_layers()}} (e.g.
 \code{"arsau_uof_main_records_2024"}).}
 
-\item{offline}{If \code{TRUE} (default), read the bundled synthetic
+\item{offline}{If \code{TRUE} (default), read the included synthetic
 fixture. If \code{FALSE}, hit the live Ontario CKAN datastore-dump
 endpoint.}
 

@@ -36,7 +36,7 @@
 #        SQLite Geodatabase. We default to the ArcGIS REST
 #        FeatureServer JSON for the live-mode path.
 #
-# Each loader supports offline = TRUE (read a small bundled synthetic
+# Each loader supports offline = TRUE (read a small included synthetic
 # fixture from inst/extdata/) and offline = FALSE (hit the live
 # upstream via a mockable internal helper:
 #
@@ -110,7 +110,7 @@
 #' Ontario Use-of-Force main records (one row per incident)
 #'
 #' Wraps the Ontario Police Use-of-Force Race-Based Data Strategy
-#' resource. Offline mode reads a small bundled synthetic fixture
+#' resource. Offline mode reads a small included synthetic fixture
 #' from `inst/extdata/arsau_uof_main_records_sample.csv` (5 rows in
 #' the canonical 23-column subset of the 65-column upstream schema,
 #' clearly stamped `SYNTHETIC-FIXTURE-XXX`). Live mode hits the
@@ -119,7 +119,7 @@
 #'
 #' @param year Reporting year (`"2023"` or `"2024"`). Honoured only
 #'   when `offline = FALSE`.
-#' @param offline If `TRUE` (default), read the bundled fixture. If
+#' @param offline If `TRUE` (default), read the included fixture. If
 #'   `FALSE`, hit the live CKAN endpoint via httr2.
 #' @param resource_id Optional CKAN resource id override.
 #' @return A `data.frame`.
@@ -171,7 +171,7 @@ morie_datasets_arsau_uof_main_records <- function(year = "2024",
 #' Schema: `Year, UniqueIndividual_ID, Region_AtTimeOfDeath,
 #' HousingUnit_Type, MedicalCauseofDeath, MeansofDeath`.
 #'
-#' @param offline If `TRUE` (default), read the bundled synthetic
+#' @param offline If `TRUE` (default), read the included synthetic
 #'   fixture from `inst/extdata/otis_d01_deaths_in_custody_sample.csv`
 #'   (5 rows). If `FALSE`, hit the live CKAN datastore-dump JSON
 #'   endpoint for resource id `89e3b63f-5679-4fa4-b98a-fdd2dc486f29`.
@@ -228,7 +228,7 @@ morie_datasets_otis_d01_deaths_in_custody <- function(offline = TRUE,
 #'   `OCC_YEAR = <year>` WHERE clause when `offline = FALSE`).
 #' @param max_features Optional cap on returned rows
 #'   (`offline = FALSE` only).
-#' @param offline If `TRUE` (default), read the bundled synthetic
+#' @param offline If `TRUE` (default), read the included synthetic
 #'   fixture from `inst/extdata/tps_mha_apprehensions_sample.csv`
 #'   (5 rows in the canonical TPS PSDP 22-column schema). If
 #'   `FALSE`, hit the TPS PSDP ArcGIS FeatureServer.
@@ -286,7 +286,7 @@ morie_datasets_tps_mha_apprehensions <- function(year = NULL,
     max_features = max_features,
     layer_idx = 0L,
     offline = TRUE)  # offline=TRUE only means "resolve URL from
-                      # the bundled catalog" -- the data query
+                      # the included catalog" -- the data query
                       # still hits the network.
 }
 
@@ -391,7 +391,7 @@ morie_datasets_arsau_uof_weapon_records <- function(year = "2024",
 #' Ontario Use-of-Force aggregate summary (5-year 2020-2022, pre-RBDS
 #' rollup)
 #'
-#' @param offline If `TRUE` (default), read the bundled synthetic
+#' @param offline If `TRUE` (default), read the included synthetic
 #'   fixture. If `FALSE`, hit Ontario CKAN.
 #' @param resource_id Optional override.
 #' @return A `data.frame`.
@@ -471,7 +471,7 @@ morie_datasets_arsau_detailed_dataset <- function(offline = TRUE,
     family = "otis", year = "all"),
   # OTIS a01 + d02-d07 ship in the same dataset package but the CKAN
   # resource ids are not yet wired into this registry; offline mode
-  # works against bundled fixtures, live mode requires the user pass
+  # works against included fixtures, live mode requires the user pass
   # resource_id = ... explicitly. PRs welcome to fill these in.
   otis_a01_restrictive_confinement = list(
     resource_id = "5a0c5804-a055-4031-9743-73f556e43bb4",
@@ -653,7 +653,7 @@ morie_datasets_ontario_ckan_layers <- function() {
 # These seven OTIS datasets ship in the Ontario "Data on Inmates in
 # Ontario" CKAN package but the canonical resource_ids for d02-d07 +
 # a01 are not yet wired into the morie registry. Offline mode (default)
-# works against bundled synthetic fixtures; live mode (offline = FALSE)
+# works against included synthetic fixtures; live mode (offline = FALSE)
 # raises with a clear "lookup pending" message until the resource_id
 # is supplied via the registry or the resource_id= override.
 
@@ -666,7 +666,7 @@ morie_datasets_ontario_ckan_layers <- function() {
                                                   registry_key = NULL,
                                                   source = NULL) {
   # Derive `source` from the older `offline` arg for back-compat:
-  # offline = TRUE  -> source = "bundled" (existing behaviour: read the
+  # offline = TRUE  -> source = "included" (existing behaviour: read the
   #                    inst/extdata/*_sample.csv; error if missing)
   # offline = FALSE -> source = "live"    (existing behaviour: hit the
   #                    live Ontario CKAN endpoint; error on miss)
@@ -710,12 +710,12 @@ morie_datasets_ontario_ckan_layers <- function() {
 }
 
 #' OTIS a01 -- Restrictive Confinement (detailed per-individual)
-#' @param offline If `TRUE` (default), read the bundled synthetic
+#' @param offline If `TRUE` (default), read the included synthetic
 #'   fixture. If `FALSE`, hit Ontario CKAN (`resource_id` required).
 #' @param resource_id Optional CKAN resource id (required for live).
 #' @param source One of `NULL` (default, ships an empty 0-row frame
-#'   with the documented schema when no real CKAN row is bundled),
-#'   `"real"` (force the real CKAN sample bundled in `inst/extdata/`,
+#'   with the documented schema when no real CKAN row is included),
+#'   `"real"` (force the real CKAN sample included in `inst/extdata/`,
 #'   error if absent), or `"synth"` (return a deterministic
 #'   `set.seed()` synthetic for didactic examples).
 #' @return A `data.frame` with the canonical 10-col schema
@@ -1055,7 +1055,7 @@ morie_datasets_otis_c12_aggregate_durations_by_region <- function(
 #' @param dataset_key One of the keys in
 #'   [morie_datasets_ontario_ckan_layers()] (e.g.
 #'   `"arsau_uof_main_records_2024"`).
-#' @param offline If `TRUE` (default), read the bundled synthetic
+#' @param offline If `TRUE` (default), read the included synthetic
 #'   fixture. If `FALSE`, hit the live Ontario CKAN datastore-dump
 #'   endpoint.
 #' @param resource_id Optional CKAN resource_id override.

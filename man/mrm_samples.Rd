@@ -2,7 +2,7 @@
 % Please edit documentation in R/mrm_samples.R
 \name{mrm_samples}
 \alias{mrm_samples}
-\title{Bundled reference data samples and dataset fetchers}
+\title{Included reference data samples and dataset fetchers}
 \value{
 The on-demand fetchers (\code{morie_fetch_tps()},
 \code{morie_fetch_siu()}) return the file path to the downloaded or
