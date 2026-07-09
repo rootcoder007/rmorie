@@ -20,7 +20,7 @@
 #' @param categories TPS categories (see [morie_tps_layer_urls()]).
 #'   Default `"Homicides"`.
 #' @param which Figure families to render: any of `"hawkes"`,
-#'   `"sarima"`.
+#'   `"sarima"`, `"langevin"`, `"fokker_planck"`.
 #' @param cache_dir Passed to [morie_fetch_tps()]; defaults to a
 #'   session temporary directory.
 #' @return Invisibly, a character vector of the PNG paths written.
@@ -33,7 +33,8 @@
 #' @export
 morie_tps_figures <- function(out_dir,
                               categories = "Homicides",
-                              which = c("hawkes", "sarima"),
+                              which = c("hawkes", "sarima",
+                                        "langevin", "fokker_planck"),
                               cache_dir = file.path(tempdir(), "morie", "tps")) {
   stopifnot(is.character(out_dir), length(out_dir) == 1L)
   which <- match.arg(which, several.ok = TRUE)
@@ -99,6 +100,55 @@ morie_tps_figures <- function(out_dir,
         graphics::legend("topright", c("actual", "forecast"),
                          col = c("#3584e4", "#ff7800"),
                          pch = c(16, 1), bty = "n")
+        grDevices::dev.off()
+        written <- c(written, p)
+      }
+    }
+    if ("langevin" %in% which) {
+      lv <- tryCatch(morie_tps_langevin_simulate(df, ds_name = cat_name),
+                     error = function(e) NULL)
+      if (!is.null(lv) && !is.null(lv$paths)) {
+        p <- file.path(out_dir, sprintf("langevin_%s.png", cat_name))
+        grDevices::png(p, width = 1140, height = 620, res = 110)
+        graphics::par(mar = c(3.5, 4, 2.5, 1))
+        k <- min(30L, ncol(lv$paths))
+        graphics::matplot(lv$paths[, seq_len(k)], type = "l", lty = 1,
+                          col = grDevices::adjustcolor("#3584e4", 0.25),
+                          xlab = "day", ylab = "incidents / day",
+                          main = sprintf(
+                            "%s -- Langevin OU paths (theta=%.2f)",
+                            cat_name, lv$theta))
+        graphics::abline(h = lv$mu, col = "#ff7800", lty = 2, lwd = 2)
+        graphics::legend("topright",
+                         c("simulated paths",
+                           sprintf("long-run mean mu = %.1f", lv$mu)),
+                         col = c("#3584e4", "#ff7800"),
+                         lty = c(1, 2), bty = "n")
+        grDevices::dev.off()
+        written <- c(written, p)
+      }
+    }
+
+    if ("fokker_planck" %in% which) {
+      fp <- tryCatch(morie_tps_fokker_planck_grid(df, ds_name = cat_name),
+                     error = function(e) NULL)
+      if (!is.null(fp) && !is.null(fp$density)) {
+        p <- file.path(out_dir, sprintf("fokker_planck_%s.png", cat_name))
+        grDevices::png(p, width = 1140, height = 620, res = 110)
+        graphics::par(mar = c(3.5, 4, 2.5, 1))
+        graphics::plot(fp$grid, fp$density, type = "l", lwd = 1.6,
+                       col = "#3584e4", xlab = "incidents / day",
+                       ylab = "density",
+                       main = sprintf(
+                         "%s -- Fokker-Planck evolved density", cat_name))
+        graphics::lines(fp$grid,
+                        stats::dnorm(fp$grid, fp$mu,
+                                     sqrt(fp$stationary_var)),
+                        col = "#ff7800", lty = 2, lwd = 2)
+        graphics::legend("topright",
+                         c("evolved p(x, T)", "OU stationary density"),
+                         col = c("#3584e4", "#ff7800"),
+                         lty = c(1, 2), bty = "n")
         grDevices::dev.off()
         written <- c(written, p)
       }

@@ -1,3 +1,28 @@
+# rmorie 1.0.5
+
+## Figures actually write now
+
+* Statistical-physics suite: the eight `morie_tps_*` statphysics
+  functions previously accepted `save_fig = TRUE` and *reported* a
+  written figure while writing nothing (there was no `png()` call in
+  the file). Each now takes `fig_dir =` and writes a real PNG
+  (SDB attractiveness/density fields, Levy CCDF + Hill fit,
+  urban-scaling log-log fit, Lotka-Volterra trajectories, Turing
+  lattice, inspection-game phase heatmap, premise co-occurrence
+  network) -- or says plainly that it skipped.
+* New dataset bridges `morie_tps_load_tps_dataset()` and
+  `morie_tps_load_tps()` replace the never-shipped stubs the
+  statphysics suite guarded on ("NotYetPorted"): local project export
+  when present, otherwise a live fetch from the public TPS ArcGIS
+  portal. The data-seeded statphysics analyses now run anywhere.
+* `morie_tps_figures()` gains `"langevin"` and `"fokker_planck"`
+  families (OU path fan + evolved-vs-stationary density).
+* New `morie_otis_figures()`: five OTIS exploratory figures
+  (placement-length survival tail with the 15-day Mandela threshold,
+  alert-prevalence trends, alert co-occurrence Cramer's V,
+  age-by-year, regional Pareto) rendered offline from the bundled
+  b01 sample.
+
 # rmorie 1.0.4
 
 * New `morie_tps_figures()`: portable batch export of the TPS

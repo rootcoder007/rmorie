@@ -8,7 +8,8 @@ morie_tps_levy_flight_alpha(
   category = "Assault",
   sample_rows = 30000L,
   lmin_km = 0.5,
-  save_fig = TRUE
+  save_fig = TRUE,
+  fig_dir = NULL
 )
 }
 \arguments{
@@ -19,6 +20,9 @@ morie_tps_levy_flight_alpha(
 \item{lmin_km}{Lower tail cutoff in km.}
 
 \item{save_fig}{Whether to emit a log-log empirical-vs-fit PNG.}
+
+\item{fig_dir}{Directory to write the PNG into; \code{NULL} (the
+default) skips writing and says so in the result.}
 }
 \value{
 A \code{morie_rich_result} with \eqn{\hat\alpha}{hatalpha},

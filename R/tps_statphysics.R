@@ -169,6 +169,144 @@ NULL
 
 
 # ---------------------------------------------------------------------------
+# 0. Figure writer + dataset bridges
+# ---------------------------------------------------------------------------
+
+# Write one PNG under the caller-supplied fig_dir and return its path
+# for the result's Figure line; with fig_dir = NULL nothing is written
+# and the returned note says exactly that (no silent claims).
+.tps_sp_fig <- function(fig_dir, name, draw, save_fig = TRUE,
+                        width = 1140, height = 620) {
+  if (!isTRUE(save_fig)) return("(skipped)")
+  if (is.null(fig_dir)) return("(skipped: pass fig_dir= to write the PNG)")
+  dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)
+  path <- file.path(fig_dir, name)
+  grDevices::png(path, width = width, height = height, res = 110)
+  on.exit(grDevices::dev.off(), add = TRUE)
+  draw()
+  path
+}
+
+#' Load a TPS incident dataset for the statistical-physics suite
+#'
+#' Portable dataset bridge: uses a local project export via
+#' [morie_tps_load_dataset()] when one exists, otherwise fetches the
+#' category live from the public Toronto Police Service ArcGIS portal
+#' via [morie_fetch_tps()] (cached under `cache_dir`). No private
+#' infrastructure is involved, so results reproduce on any machine.
+#'
+#' @param category TPS category name (see [morie_tps_layer_urls()]).
+#' @param nrows Optional row cap applied after load.
+#' @param cache_dir Cache directory for the live fetch; defaults to a
+#'   session temporary directory.
+#' @return A `data.frame` of incidents.
+#' @examples
+#' \donttest{
+#' try(head(morie_tps_load_tps_dataset("Homicides", nrows = 100)))
+#' }
+#' @export
+morie_tps_load_tps_dataset <- function(category, nrows = NULL,
+                                       cache_dir = file.path(tempdir(),
+                                                             "morie", "tps")) {
+  # Synthetic-injection contract: the test suites (helper-tps.R) and
+  # tps_hawkes_advanced.R have installed a same-named loader into the
+  # global environment since before this live bridge existed. Honour
+  # such an override so tests and user-supplied loaders stay offline.
+  ov <- globalenv()
+  if (exists("morie_tps_load_tps_dataset", envir = ov, inherits = FALSE)) {
+    f <- get("morie_tps_load_tps_dataset", envir = ov)
+    if (is.function(f)) return(f(category, nrows = nrows))
+  }
+  df <- tryCatch(morie_tps_load_dataset(category, nrows = nrows),
+                 error = function(e) NULL)
+  if (!is.null(df)) return(df)
+  csv <- morie_fetch_tps(category, cache_dir = cache_dir)
+  df <- utils::read.csv(csv, stringsAsFactors = FALSE, check.names = FALSE)
+  if (!is.null(nrows) && nrow(df) > nrows) {
+    df <- df[seq_len(nrows), , drop = FALSE]
+  }
+  df
+}
+
+#' Load a TPS hub layer (incident category or aggregate layer)
+#'
+#' Companion bridge for layers outside the incident registry, notably
+#' `"NeighbourhoodCrimeRates"` (per-ward annualised counts and
+#' populations). Attributes are paged from the public TPS ArcGIS hub
+#' with the same exceededTransferLimit-driven pager contract as
+#' [morie_fetch_tps()].
+#'
+#' @param name Layer name: an incident category or
+#'   `"NeighbourhoodCrimeRates"`.
+#' @param format Kept for call-site compatibility; attributes are
+#'   always returned as a `data.frame`.
+#' @param cache_dir Cache directory; defaults to a session temporary
+#'   directory.
+#' @return A `data.frame` of layer attributes.
+#' @examples
+#' \donttest{
+#' try(nrow(morie_tps_load_tps("NeighbourhoodCrimeRates")))
+#' }
+#' @export
+morie_tps_load_tps <- function(name, format = "geojson",
+                               cache_dir = file.path(tempdir(),
+                                                     "morie", "tps")) {
+  # Same global-override contract as morie_tps_load_tps_dataset().
+  ov <- globalenv()
+  if (exists("morie_tps_load_tps", envir = ov, inherits = FALSE)) {
+    f <- get("morie_tps_load_tps", envir = ov)
+    if (is.function(f)) return(f(name, format = format))
+  }
+  if (name %in% names(morie_tps_layer_urls())) {
+    return(morie_tps_load_tps_dataset(name, cache_dir = cache_dir))
+  }
+  hub <- c(NeighbourhoodCrimeRates = paste0(
+    "https://services.arcgis.com/S9th0jAJ7bqgIRjw/arcgis/rest/",
+    "services/Neighbourhood_Crime_Rates_Open_Data/FeatureServer/0"))
+  if (!name %in% names(hub)) {
+    stop("Unknown TPS layer: ", name, ". Known: ",
+         paste(c(names(morie_tps_layer_urls()), names(hub)),
+               collapse = ", "))
+  }
+  if (!requireNamespace("jsonlite", quietly = TRUE)) {
+    stop("jsonlite required for morie_tps_load_tps().")
+  }
+  dir.create(cache_dir, recursive = TRUE, showWarnings = FALSE)
+  out <- file.path(cache_dir, paste0("tps_hub_", name, ".csv"))
+  if (file.exists(out)) {
+    return(utils::read.csv(out, stringsAsFactors = FALSE,
+                           check.names = FALSE))
+  }
+  offset <- 0L
+  rows <- list()
+  repeat {
+    url <- sprintf(paste0("%s/query?where=1%%3D1&outFields=*&",
+                          "returnGeometry=false&f=json&",
+                          "resultRecordCount=2000&resultOffset=%d"),
+                   hub[[name]], offset)
+    page <- tryCatch(jsonlite::fromJSON(url, simplifyVector = FALSE),
+                     error = function(e) NULL)
+    if (is.null(page)) {
+      stop("morie_tps_load_tps(): ArcGIS request failed at offset ",
+           offset, " for layer '", name, "'.")
+    }
+    feats <- page$features
+    if (length(feats) == 0L) break
+    for (f in feats) rows[[length(rows) + 1L]] <- f$attributes
+    offset <- offset + length(feats)
+    if (!isTRUE(page$exceededTransferLimit)) break
+  }
+  if (length(rows) == 0L) stop("No features returned for ", name)
+  df <- do.call(rbind, lapply(rows, function(r) {
+    as.data.frame(lapply(r, function(v) if (is.null(v)) NA else v),
+                  stringsAsFactors = FALSE)
+  }))
+  utils::write.csv(df, out, row.names = FALSE)
+  df
+}
+
+
+# ---------------------------------------------------------------------------
 # 1. Short-D'Orsogna-Brantingham reaction-diffusion (data-seeded)
 # ---------------------------------------------------------------------------
 
@@ -195,6 +333,8 @@ NULL
 #' @param dt Integration step size.
 #' @param nx,ny Grid resolution.
 #' @param save_fig Whether to write a 1x3 PNG triptych
+#' @param fig_dir Directory to write the PNG into; `NULL` (the
+#'   default) skips writing and says so in the result.
 #'   (seed / A(x,t) / rho(x,t)) to the manifest figure directory.
 #'
 #' @return A \code{morie_rich_result} list with the steady-state
@@ -224,7 +364,8 @@ morie_tps_sdb_reaction_diffusion <- function(category = "Assault",
                                               n_steps = 800L,
                                               dt = 0.04,
                                               nx = 90L, ny = 60L,
-                                              save_fig = TRUE) {
+                                              save_fig = TRUE,
+                        fig_dir = NULL) {
   # Data loader and DBSCAN companion are not guaranteed to be present
   # in every install (the R-side dataset bridge is a separate module).
   if (!exists("morie_tps_load_tps_dataset", mode = "function")) {
@@ -302,6 +443,16 @@ morie_tps_sdb_reaction_diffusion <- function(category = "Assault",
     }
   }
 
+
+  fig_note <- .tps_sp_fig(fig_dir, sprintf("sdb_pde_%s.png", category),
+    save_fig = save_fig, width = 1400, height = 520, draw = function() {
+      graphics::par(mfrow = c(1, 2), mar = c(2, 2, 2.5, 1))
+      graphics::image(A, col = grDevices::hcl.colors(64, "Inferno"),
+                      axes = FALSE,
+                      main = sprintf("%s: attractiveness A(x)", category))
+      graphics::image(rho, col = grDevices::hcl.colors(64, "Viridis"),
+                      axes = FALSE, main = "offender density rho(x)")
+    })
   .tps_sp_result(
     title = sprintf("SDB reaction-diffusion -- %s", category),
     summary_lines = list(
@@ -313,7 +464,7 @@ morie_tps_sdb_reaction_diffusion <- function(category = "Assault",
       DBSCAN_clusters = if (is.na(n_dbscan)) "(unavailable)" else n_dbscan,
       MeanA       = .tps_sp_round(mean(A), 4L),
       MeanRho     = .tps_sp_round(mean(rho), 4L),
-      Figure      = if (isTRUE(save_fig)) "(written to figure dir)" else "(skipped)"
+      Figure      = fig_note
     ),
     interpretation = paste0(
       "The PDE evolves an attractiveness field A and a criminal ",
@@ -349,6 +500,8 @@ morie_tps_sdb_reaction_diffusion <- function(category = "Assault",
 #' @param sample_rows Maximum rows to load.
 #' @param lmin_km Lower tail cutoff in km.
 #' @param save_fig Whether to emit a log-log empirical-vs-fit PNG.
+#' @param fig_dir Directory to write the PNG into; `NULL` (the
+#'   default) skips writing and says so in the result.
 #'
 #' @return A \code{morie_rich_result} with \eqn{\hat\alpha}{hatalpha},
 #'   bootstrap SE, sample-size diagnostics, and a Lévy-regime
@@ -367,7 +520,8 @@ morie_tps_sdb_reaction_diffusion <- function(category = "Assault",
 morie_tps_levy_flight_alpha <- function(category = "Assault",
                                           sample_rows = 30000L,
                                           lmin_km = 0.5,
-                                          save_fig = TRUE) {
+                                          save_fig = TRUE,
+                        fig_dir = NULL) {
   if (!exists("morie_tps_load_tps_dataset", mode = "function")) {
     stop("NotYetPorted: morie_tps_load_tps_dataset() unavailable; ",
          "Levy-flight alpha requires the dataset bridge.")
@@ -422,6 +576,19 @@ morie_tps_levy_flight_alpha <- function(category = "Assault",
   }, numeric(1))
   se <- stats::sd(boots)
 
+
+  fig_note <- .tps_sp_fig(fig_dir, sprintf("levy_alpha_%s.png", category),
+    save_fig = save_fig, draw = function() {
+      ss <- sort(steps)
+      ccdf <- rev(seq_along(ss)) / length(ss)
+      graphics::plot(ss, ccdf, log = "xy", pch = 16, cex = 0.4,
+                     col = "#3584e4", xlab = "step length (km)",
+                     ylab = "P(S > s)",
+                     main = sprintf("%s: Levy tail alpha = %.2f +/- %.2f",
+                                    category, alpha, se))
+      graphics::lines(ss, (ss / lmin_km)^(-(alpha - 1)),
+                      col = "#ff7800", lwd = 2)
+    })
   .tps_sp_result(
     title = sprintf("Levy alpha -- %s", category),
     summary_lines = list(
@@ -432,7 +599,7 @@ morie_tps_levy_flight_alpha <- function(category = "Assault",
       SE_boot200  = .tps_sp_round(se, 3L),
       median_step_km = .tps_sp_round(stats::median(steps), 2L),
       max_step_km    = .tps_sp_round(max(steps), 2L),
-      Figure      = if (isTRUE(save_fig)) "(written to figure dir)" else "(skipped)"
+      Figure      = fig_note
     ),
     interpretation = sprintf(
       paste0("Step-length distribution between consecutive %s ",
@@ -467,6 +634,8 @@ morie_tps_levy_flight_alpha <- function(category = "Assault",
 #' @param year Reference year used to choose the appropriate population
 #'   and crime columns.
 #' @param save_fig Whether to write a log-log scatter + fit PNG.
+#' @param fig_dir Directory to write the PNG into; `NULL` (the
+#'   default) skips writing and says so in the result.
 #'
 #' @return A \code{morie_rich_result} with \eqn{\hat\beta}{hatbeta}, its
 #'   standard error, R-squared, the back-transformed prefactor
@@ -486,7 +655,8 @@ morie_tps_levy_flight_alpha <- function(category = "Assault",
 #' @export
 morie_tps_urban_scaling_beta <- function(category = "Assault",
                                            year = 2024L,
-                                           save_fig = TRUE) {
+                                           save_fig = TRUE,
+                        fig_dir = NULL) {
   if (!exists("morie_tps_load_tps", mode = "function")) {
     stop("NotYetPorted: morie_tps_load_tps() unavailable; ",
          "urban-scaling regression requires the dataset bridge.")
@@ -537,6 +707,16 @@ morie_tps_urban_scaling_beta <- function(category = "Assault",
             else if (beta < 0.95) "sub-linear (beta < 1)"
             else "linear (beta ~ 1)"
 
+
+  fig_note <- .tps_sp_fig(fig_dir,
+    sprintf("urban_scaling_%s_%d.png", tolower(category), year),
+    save_fig = save_fig, draw = function() {
+      graphics::plot(lx, ly, pch = 16, col = "#3584e4",
+                     xlab = "log population", ylab = "log crime count",
+                     main = sprintf("%s %d: beta = %.2f (R2 = %.2f)",
+                                    category, year, beta, r2))
+      graphics::abline(a = log(Y0), b = beta, col = "#ff7800", lwd = 2)
+    })
   .tps_sp_result(
     title = sprintf("Urban scaling beta -- %s, %d", category, year),
     summary_lines = list(
@@ -549,7 +729,7 @@ morie_tps_urban_scaling_beta <- function(category = "Assault",
       R2          = .tps_sp_round(r2, 3L),
       Y0          = .tps_sp_round(Y0, 4L),
       Regime      = regime,
-      Figure      = if (isTRUE(save_fig)) "(written to figure dir)" else "(skipped)"
+      Figure      = fig_note
     ),
     interpretation = sprintf(
       paste0("Across Toronto's 158 wards, %s %d scales as ",
@@ -587,6 +767,8 @@ morie_tps_urban_scaling_beta <- function(category = "Assault",
 #'
 #' @param category TPS category name.
 #' @param save_fig Whether to write a yearly time-series PNG.
+#' @param fig_dir Directory to write the PNG into; `NULL` (the
+#'   default) skips writing and says so in the result.
 #'
 #' @return A \code{morie_rich_result} with the four LV parameters, the
 #'   linearised cycle period, the year range, and a qualitative
@@ -604,7 +786,8 @@ morie_tps_urban_scaling_beta <- function(category = "Assault",
 #'
 #' @export
 morie_tps_lotka_volterra_police_crime <- function(category = "Assault",
-                                                    save_fig = TRUE) {
+                                                    save_fig = TRUE,
+                        fig_dir = NULL) {
   if (!exists("morie_tps_load_tps_dataset", mode = "function")) {
     stop("NotYetPorted: morie_tps_load_tps_dataset() unavailable; ",
          "Lotka-Volterra fit requires the dataset bridge.")
@@ -640,6 +823,20 @@ morie_tps_lotka_volterra_police_crime <- function(category = "Assault",
   beta_lv  <- alpha / max(stats::median(y), 1)
   delta_lv <- gamma / max(stats::median(x), 1)
 
+
+  fig_note <- .tps_sp_fig(fig_dir,
+    sprintf("lotka_volterra_%s.png", category),
+    save_fig = save_fig, draw = function() {
+      graphics::matplot(years, cbind(x, y), type = "b", pch = c(16, 1),
+                        lty = 1, col = c("#3584e4", "#ff7800"),
+                        xlab = "year", ylab = "count",
+                        main = sprintf("%s: LV cycle T ~ %.1f yr",
+                                       category, Tperiod))
+      graphics::legend("topleft",
+                       c("crime (prey)", "police proxy (predator)"),
+                       col = c("#3584e4", "#ff7800"), pch = c(16, 1),
+                       bty = "n")
+    })
   .tps_sp_result(
     title = sprintf("Lotka-Volterra -- %s", category),
     summary_lines = list(
@@ -650,7 +847,7 @@ morie_tps_lotka_volterra_police_crime <- function(category = "Assault",
       gamma      = .tps_sp_round(gamma, 3L),
       delta      = .tps_sp_round(delta_lv, 5L),
       cycle_yr   = .tps_sp_round(Tperiod, 1L),
-      Figure     = if (isTRUE(save_fig)) "(written to figure dir)" else "(skipped)"
+      Figure     = fig_note
     ),
     interpretation = sprintf(
       paste0("Yearly %s counts treated as prey; predator proxy is a ",
@@ -690,6 +887,8 @@ morie_tps_lotka_volterra_police_crime <- function(category = "Assault",
 #' @param dt Step size.
 #' @param n Grid side length.
 #' @param save_fig Whether to write a 1x3 snapshot panel PNG.
+#' @param fig_dir Directory to write the PNG into; `NULL` (the
+#'   default) skips writing and says so in the result.
 #'
 #' @return A \code{morie_rich_result} with the steady-state spike
 #'   count, mean fields, and the integration parameters.
@@ -709,7 +908,8 @@ morie_tps_sdb_turing_demo <- function(eta = 0.20, omega = 0.033,
                                         theta = 0.56, D = 30.0,
                                         gamma = 0.019,
                                         n_steps = 6000L, dt = 0.005,
-                                        n = 80L, save_fig = TRUE) {
+                                        n = 80L, save_fig = TRUE,
+                        fig_dir = NULL) {
   set.seed(7L)
   A0 <- theta * gamma / max(omega, 1e-6) ^ 2
   A <- A0 + 0.02 * A0 * matrix(stats::rnorm(n * n), n, n)
@@ -740,6 +940,15 @@ morie_tps_sdb_turing_demo <- function(eta = 0.20, omega = 0.033,
   }
   thresh <- stats::quantile(as.numeric(A), 0.92, names = FALSE)
   n_spikes <- sum((A > thresh) & (.tps_sp_local_max3x3(A) == A))
+
+  fig_note <- .tps_sp_fig(fig_dir, "sdb_turing_demo.png",
+    save_fig = save_fig, width = 1400, height = 520, draw = function() {
+      graphics::par(mfrow = c(1, 2), mar = c(2, 2, 2.5, 1))
+      graphics::image(A, col = grDevices::hcl.colors(64, "Inferno"),
+                      axes = FALSE, main = "attractiveness A: Turing lattice")
+      graphics::image(rho, col = grDevices::hcl.colors(64, "Viridis"),
+                      axes = FALSE, main = "offender density rho")
+    })
   .tps_sp_result(
     title = "SDB Turing-pattern demo",
     summary_lines = list(
@@ -750,7 +959,7 @@ morie_tps_sdb_turing_demo <- function(eta = 0.20, omega = 0.033,
       SteadySpikes = n_spikes,
       MeanA = .tps_sp_round(mean(A), 4L),
       MeanRho = .tps_sp_round(mean(rho), 4L),
-      Figure = if (isTRUE(save_fig)) "(written to figure dir)" else "(skipped)"
+      Figure = fig_note
     ),
     interpretation = paste0(
       "Canonical Turing-instability hot-spot lattice -- the ",
@@ -781,6 +990,8 @@ morie_tps_sdb_turing_demo <- function(eta = 0.20, omega = 0.033,
 #' @param n_temptations,n_costs Grid resolution.
 #' @param n_steps Replicator iterations per grid point.
 #' @param save_fig Whether to write the phase-diagram PNG.
+#' @param fig_dir Directory to write the PNG into; `NULL` (the
+#'   default) skips writing and says so in the result.
 #'
 #' @return A \code{morie_rich_result} containing the mean, min, max
 #'   steady-state defector frequency across the grid, plus the
@@ -801,7 +1012,8 @@ morie_tps_sdb_turing_demo <- function(eta = 0.20, omega = 0.033,
 morie_tps_inspection_game_phase <- function(n_temptations = 20L,
                                               n_costs = 20L,
                                               n_steps = 600L,
-                                              save_fig = TRUE) {
+                                              save_fig = TRUE,
+                        fig_dir = NULL) {
   Ts <- seq(0.05, 1.8, length.out = n_temptations)
   gs <- seq(0.05, 1.2, length.out = n_costs)
   crime <- matrix(0, nrow = n_temptations, ncol = n_costs)
@@ -835,6 +1047,14 @@ morie_tps_inspection_game_phase <- function(n_temptations = 20L,
       crime[i, j] <- x[2]
     }
   }
+
+  fig_note <- .tps_sp_fig(fig_dir, "inspection_game_phase.png",
+    save_fig = save_fig, draw = function() {
+      graphics::image(Ts, gs, crime,
+                      col = grDevices::hcl.colors(64, "Inferno"),
+                      xlab = "temptation T", ylab = "inspection cost g",
+                      main = "Inspection game: stationary criminal share")
+    })
   .tps_sp_result(
     title = "Helbing-Szolnoki inspection-game phase diagram",
     summary_lines = list(
@@ -844,7 +1064,7 @@ morie_tps_inspection_game_phase <- function(n_temptations = 20L,
       mean_crime_rate = .tps_sp_round(mean(crime), 3L),
       min_crime_rate  = .tps_sp_round(min(crime), 3L),
       max_crime_rate  = .tps_sp_round(max(crime), 3L),
-      Figure = if (isTRUE(save_fig)) "(written to figure dir)" else "(skipped)"
+      Figure = fig_note
     ),
     interpretation = paste0(
       "Steady-state defector ('predator') frequency across the ",
@@ -875,6 +1095,8 @@ morie_tps_inspection_game_phase <- function(n_temptations = 20L,
 #' @param sample_rows Maximum rows to load.
 #' @param top_n_premises Number of premise nodes to keep.
 #' @param save_fig Whether to emit a circular layout PNG.
+#' @param fig_dir Directory to write the PNG into; `NULL` (the
+#'   default) skips writing and says so in the result.
 #'
 #' @return A \code{morie_rich_result} with node count, edge count,
 #'   strongest edge weight, and the adjacency payload.
@@ -895,7 +1117,8 @@ morie_tps_inspection_game_phase <- function(n_temptations = 20L,
 morie_tps_criminal_network_graph <- function(category = "Assault",
                                                sample_rows = 30000L,
                                                top_n_premises = 20L,
-                                               save_fig = TRUE) {
+                                               save_fig = TRUE,
+                        fig_dir = NULL) {
   if (!exists("morie_tps_load_tps_dataset", mode = "function")) {
     stop("NotYetPorted: morie_tps_load_tps_dataset() unavailable; ",
          "criminal-network graph requires the dataset bridge.")
@@ -933,6 +1156,34 @@ morie_tps_criminal_network_graph <- function(category = "Assault",
   diag(co) <- 0L
   n_edges <- sum(co > 0) %/% 2L
   max_w <- max(co)
+
+  fig_note <- .tps_sp_fig(fig_dir, sprintf("network_%s.png", category),
+    save_fig = save_fig, width = 900, height = 900, draw = function() {
+      n_nodes <- length(nodes)
+      th <- seq(0, 2 * pi, length.out = n_nodes + 1L)[-1L]
+      px <- cos(th)
+      py <- sin(th)
+      graphics::par(mar = c(1, 1, 2.5, 1))
+      graphics::plot(px, py, type = "n", axes = FALSE,
+                     xlab = "", ylab = "",
+                     xlim = c(-1.35, 1.35), ylim = c(-1.35, 1.35),
+                     main = sprintf("%s: premise co-occurrence network",
+                                    category))
+      mw <- max(co[upper.tri(co)], 1)
+      for (i in seq_len(n_nodes - 1L)) {
+        for (j in seq(i + 1L, n_nodes)) {
+          if (co[i, j] > 0) {
+            graphics::segments(px[i], py[i], px[j], py[j],
+              col = grDevices::adjustcolor("#3584e4",
+                alpha.f = 0.15 + 0.6 * co[i, j] / mw),
+              lwd = 0.5 + 2.5 * co[i, j] / mw)
+          }
+        }
+      }
+      graphics::points(px, py, pch = 21, bg = "#26a269",
+                       cex = 0.8 + 2.2 * sqrt(sizes / max(sizes)))
+      graphics::text(px * 1.18, py * 1.18, nodes, cex = 0.62)
+    })
   .tps_sp_result(
     title = sprintf("Criminal network -- %s", category),
     summary_lines = list(
@@ -940,7 +1191,7 @@ morie_tps_criminal_network_graph <- function(category = "Assault",
       Nodes = n,
       Edges_pos = n_edges,
       max_edge_weight = as.integer(max_w),
-      Figure = if (isTRUE(save_fig)) "(written to figure dir)" else "(skipped)"
+      Figure = fig_note
     ),
     interpretation = paste0(
       "Circular co-occurrence network. Each node is a premise type ",
@@ -971,6 +1222,8 @@ morie_tps_criminal_network_graph <- function(category = "Assault",
 #' @param categories Character vector of TPS category names; default
 #'   is the canonical nine-category TPS set.
 #' @param save_fig Whether to ask each sub-routine to write its
+#' @param fig_dir Directory to write the PNG into; `NULL` (the
+#'   default) skips writing and says so in the result.
 #'   figure.
 #'
 #' @return A named list of lists of \code{morie_rich_result} objects.
@@ -986,7 +1239,8 @@ morie_tps_criminal_network_graph <- function(category = "Assault",
 #'
 #' @export
 morie_tps_statphysics_analyze_all <- function(categories = NULL,
-                                                save_fig = TRUE) {
+                                                save_fig = TRUE,
+                        fig_dir = NULL) {
   if (is.null(categories)) {
     categories <- c("Assault", "AutoTheft", "BicycleTheft",
                     "BreakandEnter", "Homicides", "Robbery",
@@ -997,13 +1251,13 @@ morie_tps_statphysics_analyze_all <- function(categories = NULL,
   for (cat in categories) {
     out[[cat]] <- list(
       sdb_pde       = morie_tps_sdb_reaction_diffusion(cat,
-                                                        save_fig = save_fig),
+                                                        save_fig = save_fig, fig_dir = fig_dir),
       levy          = morie_tps_levy_flight_alpha(cat,
-                                                    save_fig = save_fig),
+                                                    save_fig = save_fig, fig_dir = fig_dir),
       urban_scaling = morie_tps_urban_scaling_beta(cat,
-                                                    save_fig = save_fig),
+                                                    save_fig = save_fig, fig_dir = fig_dir),
       lotka_volterra = morie_tps_lotka_volterra_police_crime(
-        cat, save_fig = save_fig)
+        cat, save_fig = save_fig, fig_dir = fig_dir)
     )
   }
   out

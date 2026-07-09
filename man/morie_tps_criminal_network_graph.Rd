@@ -8,7 +8,8 @@ morie_tps_criminal_network_graph(
   category = "Assault",
   sample_rows = 30000L,
   top_n_premises = 20L,
-  save_fig = TRUE
+  save_fig = TRUE,
+  fig_dir = NULL
 )
 }
 \arguments{
@@ -19,6 +20,9 @@ morie_tps_criminal_network_graph(
 \item{top_n_premises}{Number of premise nodes to keep.}
 
 \item{save_fig}{Whether to emit a circular layout PNG.}
+
+\item{fig_dir}{Directory to write the PNG into; \code{NULL} (the
+default) skips writing and says so in the result.}
 }
 \value{
 A \code{morie_rich_result} with node count, edge count,
