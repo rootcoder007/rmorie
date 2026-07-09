@@ -191,7 +191,12 @@ morie_survival_logrank <- function(time, event, group,
 #' @param ties "efron" (default) or "breslow".
 #' @param confidence Confidence level (default 0.95).
 #' @param penalizer L2 penalty (passed via `ridge()` term in the formula).
-#' @return A named list with elements \code{coefficients}, \code{standard_errors}, \code{hazard_ratios}, \code{z_scores}, \code{p_values}, \code{ci_lower}, \code{ci_upper}, \code{covariate_names}, \code{concordance}, \code{log_likelihood}, \code{n_events}, \code{n_observations}, \code{method}, \code{baseline_hazard}, \code{.coxph}.
+#' @return A named list with elements \code{coefficients},
+#'   \code{standard_errors}, \code{hazard_ratios}, \code{z_scores},
+#'   \code{p_values}, \code{ci_lower}, \code{ci_upper},
+#'   \code{covariate_names}, \code{concordance}, \code{log_likelihood},
+#'   \code{n_events}, \code{n_observations}, \code{method},
+#'   \code{baseline_hazard}, \code{.coxph}.
 #' @export
 morie_survival_cox <- function(data, duration_col, event_col, covariate_cols,
                                ties = c("efron", "breslow"),

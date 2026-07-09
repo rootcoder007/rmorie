@@ -4,7 +4,7 @@
 \alias{morie_crypto_mlkem768_encaps}
 \title{ML-KEM-768 encapsulation}
 \usage{
-morie_crypto_mlkem768_encaps(pk_sxp)
+morie_crypto_mlkem768_encaps(pk)
 }
 \arguments{
 \item{pk}{1184-byte raw vector (recipient's ML-KEM-768 public key).}

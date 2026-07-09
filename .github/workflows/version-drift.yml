@@ -43,3 +43,9 @@ jobs:
             exit 1
           fi
           echo "Inventory matches committed snapshot."
+
+      # Guard the Rcpp-export / hand-wrapper name-collision bug class that
+      # otherwise only surfaces as a per-platform R CMD check codoc WARNING
+      # (and silently for no-arg exports). Catches it in seconds pre-merge.
+      - name: Check for Rcpp export/wrapper name collisions
+        run: ./scripts/check-rcpp-collisions.sh
