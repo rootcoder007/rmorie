@@ -1000,11 +1000,10 @@ morie_estimate_double_ml <- function(data, outcome, treatment, covariates,
     ml_m <- mlr3::lrn("regr.ranger", num.trees = 100L, max.depth = 5L)
     plr <- DoubleML::DoubleMLPLR$new(dml_data, ml_l = ml_l, ml_m = ml_m,
                                      n_folds = n_folds, n_rep = n_rep)
-    # Silence {future}'s false RNG-misuse warning: cross-fitting is seeded
-    # via set.seed(random_state) above, so it is a false alarm that would
-    # otherwise trip R CMD check stop_on_warning. Restored on exit.
-    .op <- options(future.rng.onMisuse = "ignore")
-    on.exit(options(.op), add = TRUE)
+    # Sequential in-process cross-fit + future diagnostics silenced;
+    # see R/dml_guard.R. Restored on exit.
+    .gst <- .morie_dml_guard_begin()
+    on.exit(.morie_dml_guard_end(.gst), add = TRUE)
     plr$fit()
     ate <- as.numeric(plr$coef[1])
     se <- as.numeric(plr$se[1])
@@ -1093,11 +1092,10 @@ morie_estimate_irm <- function(data, treatment, outcome, covariates,
                       predict_type = "prob")
     irm <- DoubleML::DoubleMLIRM$new(dml_data, ml_g = ml_g, ml_m = ml_m,
                                      n_folds = n_folds)
-    # Silence {future}'s false RNG-misuse warning: cross-fitting is seeded
-    # via set.seed(random_state) above, so it is a false alarm that would
-    # otherwise trip R CMD check stop_on_warning. Restored on exit.
-    .op <- options(future.rng.onMisuse = "ignore")
-    on.exit(options(.op), add = TRUE)
+    # Sequential in-process cross-fit + future diagnostics silenced;
+    # see R/dml_guard.R. Restored on exit.
+    .gst <- .morie_dml_guard_begin()
+    on.exit(.morie_dml_guard_end(.gst), add = TRUE)
     irm$fit()
     ate <- as.numeric(irm$coef[1])
     se <- as.numeric(irm$se[1])
