@@ -8,7 +8,8 @@ morie_tps_inspection_game_phase(
   n_temptations = 20L,
   n_costs = 20L,
   n_steps = 600L,
-  save_fig = TRUE
+  save_fig = TRUE,
+  fig_dir = NULL
 )
 }
 \arguments{
@@ -17,6 +18,9 @@ morie_tps_inspection_game_phase(
 \item{n_steps}{Replicator iterations per grid point.}
 
 \item{save_fig}{Whether to write the phase-diagram PNG.}
+
+\item{fig_dir}{Directory to write the PNG into; \code{NULL} (the
+default) skips writing and says so in the result.}
 }
 \value{
 A \code{morie_rich_result} containing the mean, min, max

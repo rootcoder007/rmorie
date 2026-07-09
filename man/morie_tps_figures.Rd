@@ -7,7 +7,7 @@
 morie_tps_figures(
   out_dir,
   categories = "Homicides",
-  which = c("hawkes", "sarima"),
+  which = c("hawkes", "sarima", "langevin", "fokker_planck"),
   cache_dir = file.path(tempdir(), "morie", "tps")
 )
 }
@@ -19,7 +19,7 @@ missing). Required; nothing is written anywhere else.}
 Default \code{"Homicides"}.}
 
 \item{which}{Figure families to render: any of \code{"hawkes"},
-\code{"sarima"}.}
+\code{"sarima"}, \code{"langevin"}, \code{"fokker_planck"}.}
 
 \item{cache_dir}{Passed to \code{\link[=morie_fetch_tps]{morie_fetch_tps()}}; defaults to a
 session temporary directory.}
