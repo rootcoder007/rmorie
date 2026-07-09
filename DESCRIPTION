@@ -86,6 +86,7 @@ Suggests:
   EValue,
   fdrtool,
   fixest,
+  future,
   FNN,
   gbm,
   geepack,
