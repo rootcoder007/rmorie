@@ -736,7 +736,7 @@ backends against them.
 Cross-portal `morie_dataset_portal_catalog()` grows from ~1,044
 rows to **9,242 rows across 14 portals**. Every Socrata / CKAN /
 ArcGIS Hub / Opendatasoft portal morie touches now has its full
-public catalog bundled offline.
+public catalog integrated offline.
 
 ### Phase 3GGG -- 6-portal bulk harvest
 
@@ -780,7 +780,7 @@ vancouver_opendata    190    vpd_geodash              1
                                                      9242
 ```
 
-Bundled fixture footprint: ~3.4 MB of catalog metadata; per-row
+Integrated fixture footprint: ~3.4 MB of catalog metadata; per-row
 unwound this is the metadata equivalent of every NYC dataset
 descriptor + every CKAN package summary + every Hub item -- offline
 queryable via `morie_datasets_browse(keyword=...)`.
@@ -805,7 +805,7 @@ across 4 different API protocols.
   TWN, ...) + `morie_parse_nypd_law_code()` vectorised regex
   parser. Added as 4th resolver in
   `morie_datasets_nyc_nypd_resolved()`.
-* **3CCC2**: NYC multi-boundary loader bundle -- 5 new fixtures
+* **3CCC2**: NYC multi-boundary loader set -- 5 new fixtures
   (school districts / council districts / community districts /
   NTAs 2020 / ZCTAs) + `morie_datasets_nyc_boundaries_catalog()`
   unified index.
@@ -829,7 +829,7 @@ across 4 different API protocols.
   property use inspection districts (23), fire halls (20).
 * **3DDD2**: VPD GeoDASH crime loader. T&Cs gate auto-download,
   so morie ships a stratified 550-row sample (50 x 11 TYPE
-  categories) + bundled legal disclaimer + user-`zip_path =` mode
+  categories) + integrated legal disclaimer + user-`zip_path =` mode
   for the full 915k-row feed.
 * **3DDD3**: Statistics Canada CCJS / CODR WDS REST API.
   10-cube registry covering federal crime + corrections;
@@ -844,7 +844,7 @@ across 4 different API protocols.
 
 * **3EEE1**: Montreal Open Data CKAN -- 23-row Loi/Justice/
   Securite catalog + SIM (fire/EMS) interventions flagship loader
-  with 349-row stratified bundled sample + 170-row
+  with 349-row stratified integrated sample + 170-row
   INCIDENT_TYPE_DESC dict + generic CKAN dispatcher.
 * **3EEE2**: Toronto Open Data CKAN beyond TPS Hub -- 208-row
   crime-adjacent catalog + ambulance stations + TPS ASR misc
@@ -868,7 +868,7 @@ across 4 different API protocols.
   Edmonton are Socrata (data.calgary.ca, data.edmonton.ca);
   Ottawa is ArcGIS Hub (open.ottawa.ca, dispatches through the
   existing 3SS+ generic ArcGIS pipeline). Crime-adjacent catalogs
-  + per-dataset bundled fixtures + generic Socrata-by-id
+  + per-dataset integrated fixtures + generic Socrata-by-id
   dispatchers.
 
 ### Catalog totals (across 14 portals)
@@ -958,7 +958,7 @@ string-only variant `morie_describe_by_name()`.
   the pedagogical narrative for the named callable.
 * `morie_describe_by_name(name)` — string-only variant.
 
-**Bundled data**:
+**Integrated data**:
 
 * `inst/extdata/describe_corpus.Rds` — a single xz-compressed Rds
   (~1.6 MB on disk) containing 36,433 named character entries.
@@ -969,9 +969,9 @@ string-only variant `morie_describe_by_name()`.
 
 **Build tooling**:
 
-* `tools/bundle-describe-files.R` — re-runs the Python-to-R sync
+* `tools/capsule-describe-files.R` — re-runs the Python-to-R sync
   when `src/morie/fn/describe_*.md` changes. Run from the repo
-  root with `Rscript tools/bundle-describe-files.R`.
+  root with `Rscript tools/capsule-describe-files.R`.
 
 **Tests**:
 
@@ -1316,7 +1316,7 @@ catalog.
 * **`morie_fetch()`** — a universal URL fetcher. It auto-detects the
   resource format from the HTTP `Content-Type` header (falling back to
   the URL extension) and parses CSV, TSV, JSON, XML, HTML, XLSX, and
-  ZIP-bundled files. Every step is overridable: pass an explicit
+  ZIP-integrated files. Every step is overridable: pass an explicit
   `format`, extra query `params`, or a `zip_member` to extract.
 * **`morie_ckan_search()`** — discover datasets on any CKAN open-data
   portal (`open.canada.ca`, `data.ontario.ca`, `open.toronto.ca`, or a
@@ -1329,7 +1329,7 @@ catalog.
   `morie_load_dataset()` resolver. CKAN resource ids were added for the
   CCS 2018-2022/2023/2024 and CSUS 2023 PUMFs; direct-download URLs for
   23 further datasets (CIHI indicator tables, StatCan and
-  Health-Infobase zip bundles); and verified ArcGIS layer URLs for the
+  Health-Infobase zip capsules); and verified ArcGIS layer URLs for the
   three TPS crime series.
 * **`morie_load_dataset(refresh = TRUE)`** — bypass the built-in
   database and user cache to re-fetch a dataset from its remote
@@ -1403,7 +1403,7 @@ New: a shared C/C++ computational backend and a Hawkes-process engine.
   hybrid gamma-tail) with an R-side fitter that detects Poisson
   degeneracy and uses multi-start restarts.
 * **IP / licensing cleanup** — copyrighted pop-culture quotes and a
-  bundled copyrighted demo dataset were replaced with public-domain
+  integrated copyrighted demo dataset were replaced with public-domain
   content; franchise-derived function codes were renamed to neutral
   names.
 
@@ -1585,7 +1585,7 @@ bump.
 * Version bumped from 0.1.15 to 0.2.0 to mark the cumulative
   significance of the empirical-workflow work shipped since
   v0.1.3:  12 mrm_* callables, ArcGIS REST + on-demand SIU
-  scraper + OTIS CKAN fetchers, four bundled reference samples,
+  scraper + OTIS CKAN fetchers, four integrated reference samples,
   the longitudinal-panel simulator, the animated demo entrypoint,
   the GPL-2.0-only signaling layer with optional kernel module
   and LSM-style userspace audit daemon, the §"Empirical workflow
@@ -1608,7 +1608,7 @@ bump.
   `fetch_siu_cases` (on-demand scraper for the Ontario SIU public
   Director's Reports). OTIS CKAN resource IDs registered for
   a01/b01/b09/c11; loadable via `morie_load_dataset()`.
-* Adds 4 bundled reference samples in `inst/extdata/` (random
+* Adds 4 integrated reference samples in `inst/extdata/` (random
   1000-row b01 + b09 + c11 + tps_assault, ~420 KB total) so the
   examples run offline.
 * Adds `simulate_longitudinal_panel()` — VAR(L) panel
@@ -1618,7 +1618,7 @@ bump.
   out-of-tree kernel module (`kernel-module/morie.c`), optional
   userspace audit daemon (`daemon/morie_lsm.py`).
 * Adds an animated demo: `python -m morie.demo` showcases every
-  new callable end-to-end on the bundled samples with rich-based
+  new callable end-to-end on the integrated samples with rich-based
   spinners + progress bars (DoubleML / Optuna style).
 * 5 companion papers updated and verified against the new
   callables: morie-empirical-paper §6 + §7.1-§7.11 every numeric

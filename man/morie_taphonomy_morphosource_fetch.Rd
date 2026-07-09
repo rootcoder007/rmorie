@@ -2,7 +2,7 @@
 % Please edit documentation in R/taphonomy.R
 \name{morie_taphonomy_morphosource_fetch}
 \alias{morie_taphonomy_morphosource_fetch}
-\title{Download a MorphoSource media bundle}
+\title{Download a MorphoSource media capsule}
 \source{
 \url{https://www.morphosource.org}
 }
@@ -25,15 +25,15 @@ morie_taphonomy_morphosource_fetch(
 
 \item{use_category_other}{Optional free-text for the "other" category.}
 
-\item{dest}{Directory to write the bundle (default \code{tempdir()}).}
+\item{dest}{Directory to write the capsule (default \code{tempdir()}).}
 
 \item{api_key}{Optional key; else \code{MORPHOSOURCE_API_KEY}.}
 }
 \value{
-Path to the downloaded \code{.zip} bundle.
+Path to the downloaded \code{.zip} capsule.
 }
 \description{
-Resolves and downloads a media bundle by id. MorphoSource enforces a
+Resolves and downloads a media capsule by id. MorphoSource enforces a
 \strong{data-use agreement} on every download, so \code{use_statement} is
 required and \code{agreements_accepted} is sent as \code{TRUE}; restricted
 media additionally need per-item permission granted on the website. The key

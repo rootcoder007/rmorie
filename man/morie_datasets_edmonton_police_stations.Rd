@@ -10,7 +10,7 @@ morie_datasets_edmonton_police_stations(offline = TRUE, max_features = NULL)
 morie_datasets_edmonton_fire_stations(offline = TRUE, max_features = NULL)
 }
 \arguments{
-\item{offline}{If \code{TRUE} (default), reads bundled CSV.}
+\item{offline}{If \code{TRUE} (default), reads included CSV.}
 
 \item{max_features}{Optional row cap.}
 }
@@ -21,6 +21,6 @@ A \code{data.frame} with \code{name}, \code{address}, \code{latitude},
 A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 }
 \description{
-Phase 3FFF3. Bundled 10-row fixture of Edmonton Police Service
+Phase 3FFF3. Included 10-row fixture of Edmonton Police Service
 station locations (Socrata id \code{e7aq-scxv}).
 }

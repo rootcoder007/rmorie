@@ -2,7 +2,7 @@
 % Please edit documentation in R/tps_all_analyze.R
 \name{morie_tps_analyze_one}
 \alias{morie_tps_analyze_one}
-\title{Run the standard TPS analysis bundle on one data.frame}
+\title{Run the standard TPS analysis capsule on one data.frame}
 \usage{
 morie_tps_analyze_one(df, name = "?")
 }

@@ -10,7 +10,7 @@ morie_datasets_tps_police_divisions(offline = TRUE, max_features = NULL)
 morie_datasets_tps_police_divisions(offline = TRUE, max_features = NULL)
 }
 \arguments{
-\item{offline}{If \code{TRUE} (default), reads the bundled CSV.}
+\item{offline}{If \code{TRUE} (default), reads the included CSV.}
 
 \item{max_features}{Optional row cap.}
 }
@@ -26,7 +26,7 @@ Toronto PS ArcGIS Hub dataset wrapper. Thin dispatch to
 \code{\link[=morie_datasets_tps_arcgis_hub_by_id]{morie_datasets_tps_arcgis_hub_by_id()}} with the canonical
 hub item_id \code{fda21b25213c4c07b08c5162cba5081f}.
 
-Phase 3CCC3. Bundled snapshot of the TPS Hub
+Phase 3CCC3. Included snapshot of the TPS Hub
 \code{fda21b25213c4c07b08c5162cba5081f} (TPS_POLICE_DIVISIONS) -- the
 16 post-amalgamation TPS divisions (D11, D12, D13, D14, D22, D23,
 D31, D32, D33, D41, D42, D43, D51, D52, D53, D55) with unit name,

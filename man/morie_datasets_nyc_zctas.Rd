@@ -7,7 +7,7 @@
 morie_datasets_nyc_zctas(offline = TRUE, max_features = NULL)
 }
 \arguments{
-\item{offline}{If \code{TRUE} (default), reads the bundled CSV.}
+\item{offline}{If \code{TRUE} (default), reads the included CSV.}
 
 \item{max_features}{Optional row cap.}
 }
@@ -16,7 +16,7 @@ A \code{data.frame} with \code{zcta5}, \code{arealand}, \code{areawater},
 \code{centlat}, \code{centlon}, \code{intptlat}, \code{intptlon}.
 }
 \description{
-Phase 3CCC2. Bundled snapshot of NYC OpenData
+Phase 3CCC2. Included snapshot of NYC OpenData
 \verb{35j5-n34v} (221 ZCTAs intersecting NYC). ZCTAs are the Census
 Bureau's geographic approximation of USPS ZIP code service areas
 -- pair with NYPD address-bearing data via ZIP code lookups for

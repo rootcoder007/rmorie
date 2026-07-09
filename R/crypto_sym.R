@@ -32,7 +32,7 @@ morie_crypto_sodium_available <- function() {
 
 #' libsodium runtime version string
 #'
-#' Phase 3JJJ1. Returns the bundled libsodium version (e.g.,
+#' Phase 3JJJ1. Returns the included libsodium version (e.g.,
 #' `"1.0.20"`); empty string if libsodium wasn't linked.
 #'
 #' @return Single character.

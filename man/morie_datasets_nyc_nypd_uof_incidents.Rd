@@ -22,7 +22,7 @@ morie_datasets_nyc_nypd_uof_incidents(
 \item{max_features}{Optional row cap. When \code{paginate = TRUE} this
 is the total cap across walked pages.}
 
-\item{offline}{If \code{TRUE} (default), read the bundled fixture.}
+\item{offline}{If \code{TRUE} (default), read the included fixture.}
 
 \item{resource_id}{Optional Socrata resource id override.}
 

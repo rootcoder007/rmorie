@@ -10,6 +10,6 @@ morie_crypto_sodium_version()
 Single character.
 }
 \description{
-Phase 3JJJ1. Returns the bundled libsodium version (e.g.,
+Phase 3JJJ1. Returns the included libsodium version (e.g.,
 \code{"1.0.20"}); empty string if libsodium wasn't linked.
 }

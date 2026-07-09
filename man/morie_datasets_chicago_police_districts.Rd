@@ -17,7 +17,7 @@ morie_datasets_chicago_police_districts(
 )
 }
 \arguments{
-\item{offline}{If \code{TRUE} (default), read the bundled fixture.}
+\item{offline}{If \code{TRUE} (default), read the included fixture.}
 
 \item{geometry}{If \code{TRUE} and \code{offline = FALSE}, include
 \code{the_geom} (MultiPolygon).}
@@ -55,7 +55,7 @@ special "31" headquarters polygon. Attribute schema:
 \item{dist_label}{Display label (e.g. \code{"1ST"}, \code{"22ND"}).}
 }
 
-Offline mode reads a bundled attribute-only fixture
+Offline mode reads a included attribute-only fixture
 (\code{inst/extdata/chicago_police_districts.csv}). Live mode hits
 SODA2 JSON; pass \code{geometry = TRUE} for \code{the_geom}.
 

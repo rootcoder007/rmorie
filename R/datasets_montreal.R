@@ -30,13 +30,13 @@
 
 #' Donnees Montreal "Loi, justice et securite publique" catalog
 #'
-#' Phase 3EEE1. Bundled 23-row snapshot of every CKAN package in
+#' Phase 3EEE1. Included 23-row snapshot of every CKAN package in
 #' the Law / Justice / Public Safety group on donnees.montreal.ca.
 #' Includes the SIM fire/EMS interventions dataset, SPVM police
 #' station boundaries, municipal regulations, traffic collisions,
 #' and ~20 others.
 #'
-#' @param offline If `TRUE` (default), reads the bundled CSV; if
+#' @param offline If `TRUE` (default), reads the included CSV; if
 #'   `FALSE`, hits `/action/package_search` live.
 #' @return A `data.frame` with `package_name`, `title`,
 #'   `num_resources`, `metadata_modified`, `language`, `license`.
@@ -76,7 +76,7 @@ morie_datasets_montreal_justice_safety_layers <- function(offline = TRUE) {
 
 #' SIM Montreal Fire Service intervention records (sample)
 #'
-#' Phase 3EEE1. Bundled stratified 349-row sample (50 rows per
+#' Phase 3EEE1. Included stratified 349-row sample (50 rows per
 #' DESCRIPTION_GROUPE category) of SIM (Service de securite
 #' incendie de Montreal) interventions, drawn from the full
 #' 172,899-row open feed for years 2005-2026.
@@ -84,7 +84,7 @@ morie_datasets_montreal_justice_safety_layers <- function(offline = TRUE) {
 #' Three source modes:
 #'
 #' \describe{
-#'   \item{`offline = TRUE` (default)}{Bundled 349-row sample for
+#'   \item{`offline = TRUE` (default)}{Included 349-row sample for
 #'     tests + intro examples.}
 #'   \item{`csv_path = "..."`}{Reads a user-downloaded
 #'     `donneesouvertes-interventions-sim.csv` (or yearly variant)
@@ -99,7 +99,7 @@ morie_datasets_montreal_justice_safety_layers <- function(offline = TRUE) {
 #'   MTM zone 8 NAD83 / EPSG:32188), LONGITUDE, LATITUDE (WGS84,
 #'   obfuscated to intersections per privacy policy).
 #'
-#' @param offline If `TRUE` (default), reads the bundled sample.
+#' @param offline If `TRUE` (default), reads the included sample.
 #' @param csv_path Optional path to a user-downloaded full CSV.
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with the 13 SIM columns.
@@ -142,7 +142,7 @@ morie_datasets_montreal_sim_interventions <- function(offline = TRUE,
 
 #' SIM intervention TYPE -> French description dictionary
 #'
-#' Phase 3EEE1. Bundled lookup table mapping the
+#' Phase 3EEE1. Included lookup table mapping the
 #' `INCIDENT_TYPE_DESC` codes used in SIM interventions to their
 #' canonical French descriptions (from the dataset's own
 #' `type-interventions-descriptions20161122.csv` sidecar).
@@ -171,7 +171,7 @@ morie_datasets_montreal_sim_intervention_types <- function() {
 #'
 #' Phase 3EEE1. Generic loader that hits CKAN's `datastore_search`
 #' endpoint for a given `resource_id`. Useful for any MTL package
-#' beyond the bundled SIM sample.
+#' beyond the included SIM sample.
 #'
 #' @param resource_id CKAN resource UUID (from `package_show`).
 #' @param limit Page size (CKAN default 100, max varies by host).

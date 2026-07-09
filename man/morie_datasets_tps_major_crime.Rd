@@ -19,7 +19,7 @@ server-side.}
 
 \item{include_geometry}{Logical; include \code{geom_x} / \code{geom_y}.}
 
-\item{offline}{Logical; return the bundled synthetic frame instead
+\item{offline}{Logical; return the included synthetic frame instead
 of hitting the live ArcGIS endpoint.}
 }
 \value{

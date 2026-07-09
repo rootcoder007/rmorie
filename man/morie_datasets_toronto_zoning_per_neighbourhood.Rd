@@ -23,7 +23,7 @@ demographics) or \code{"zoning_stats"} (per-zone area table).}
 
 \item{max_features}{Optional row cap.}
 
-\item{offline}{Logical; if \code{TRUE} (default), read the bundled
+\item{offline}{Logical; if \code{TRUE} (default), read the included
 synthetic fixture.}
 }
 \value{
@@ -53,7 +53,7 @@ neighbourhood, one per \code{ZoneDesc} (Commercial, Residential,
 Industrial, etc.).}
 }
 
-Offline mode reads bundled 5-row synthetic fixtures
+Offline mode reads included 5-row synthetic fixtures
 (\code{toronto_zoning_neighbourhoods_sample.csv} /
 \code{toronto_zoning_stats_sample.csv}) -- SYNTH-stamped, not
 attributable to actual Toronto neighbourhoods. Live mode hits

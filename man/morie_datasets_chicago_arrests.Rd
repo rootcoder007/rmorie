@@ -24,7 +24,7 @@ morie_datasets_chicago_arrests(
 \code{paginate = TRUE} this is the total cap across walked pages.}
 
 \item{offline}{Logical; if \code{TRUE} (default, safer post-3EE), read
-the bundled synthetic frame.}
+the included synthetic frame.}
 
 \item{resource_id}{Optional Socrata resource id override. Accepts
 the UUID (\code{dpt3-jri9}, default) or the publisher's alias
@@ -62,7 +62,7 @@ alias the publisher assigned (\verb{/resource/arrests.json}). morie
 defaults to the UUID for stability; pass \code{resource_id = "arrests"}
 if you want to exercise the alias path.
 
-Offline mode reads a bundled 5-row synthetic fixture
+Offline mode reads a included 5-row synthetic fixture
 (\code{inst/extdata/chicago_arrests_dpt3_jri9_sample.csv}) carrying the
 real upstream snake_case schema. Live mode hits the SODA2 endpoint
 via \code{.morie_dataset_socrata_fetch()} and honours the 3OO opt-in

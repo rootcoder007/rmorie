@@ -17,7 +17,7 @@ morie_datasets_chicago_police_beats(
 )
 }
 \arguments{
-\item{offline}{If \code{TRUE} (default), read the bundled fixture.}
+\item{offline}{If \code{TRUE} (default), read the included fixture.}
 
 \item{geometry}{If \code{TRUE} and \code{offline = FALSE}, include
 \code{the_geom} (MultiPolygon).}
@@ -58,9 +58,9 @@ codes (verified live 2026-05). Attribute schema:
 \item{district}{Parent district number (string).}
 }
 
-Offline mode reads a bundled attribute-only fixture
+Offline mode reads a included attribute-only fixture
 (\code{inst/extdata/chicago_police_beats.csv}) -- the \code{the_geom}
-MultiPolygon column is stripped to keep bundle size sane.
+MultiPolygon column is stripped to keep capsule size sane.
 Live mode hits the SODA2 JSON endpoint via
 \code{.morie_dataset_socrata_fetch()} (mockable); pass \code{geometry = TRUE}
 to include \code{the_geom}. Threads through the 3OO pagination args.

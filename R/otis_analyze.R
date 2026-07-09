@@ -14,7 +14,7 @@
 #'     \code{out_dir}).
 #' }
 #'
-#' \code{morie_otis_otdml} is excluded from the bundle because it
+#' \code{morie_otis_otdml} is excluded from the capsule because it
 #' requires the caller to specify \code{(treatment, outcome,
 #' covariates)} -- call it directly when needed.
 #'
@@ -83,7 +83,7 @@ morie_otis_load <- function(csv_path = NULL, use_readr = FALSE) {
     return(utils::read.csv(cached, check.names = FALSE,
                             stringsAsFactors = FALSE))
   }
-  # Fall back to the bundled OTIS A01 fixture (real CKAN slice from
+  # Fall back to the included OTIS A01 fixture (real CKAN slice from
   # data.ontario.ca; Open Government Licence -- Ontario). morie ships
   # this so morie_otis_load() works on a fresh checkout without
   # requiring users to download the full OTIS first.
@@ -95,7 +95,7 @@ morie_otis_load <- function(csv_path = NULL, use_readr = FALSE) {
 # Driver
 # ---------------------------------------------------------------------------
 
-#' Run the full OTIS analysis bundle
+#' Run the full OTIS analysis capsule
 #'
 #' Calls \code{morie_otis_rplace} / \code{morie_otis_astcmb} /
 #' \code{morie_otis_volat} / \code{morie_otis_rctrnd} /

@@ -13,7 +13,7 @@ A \code{data.frame} with 8 columns:
 \code{data_dictionary_url} (XLSX, when published as a dataset
 attachment; \code{NA_character_} otherwise),
 \code{footnotes_url} (PDF, when published; \code{NA_character_} otherwise),
-\code{fixture} (bundled-fixture filename).
+\code{fixture} (included-fixture filename).
 
 Currently only \code{nypd_arrests_ytd} carries the
 canonical NYC OpenData attachment URLs (XLSX dictionary + PDF

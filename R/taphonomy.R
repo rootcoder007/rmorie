@@ -1380,9 +1380,9 @@ morie_taphonomy_morphosource_search <- function(query = NULL,
   )
 }
 
-#' Download a MorphoSource media bundle
+#' Download a MorphoSource media capsule
 #'
-#' Resolves and downloads a media bundle by id. MorphoSource enforces a
+#' Resolves and downloads a media capsule by id. MorphoSource enforces a
 #' \strong{data-use agreement} on every download, so \code{use_statement} is
 #' required and \code{agreements_accepted} is sent as \code{TRUE}; restricted
 #' media additionally need per-item permission granted on the website. The key
@@ -1393,9 +1393,9 @@ morie_taphonomy_morphosource_search <- function(query = NULL,
 #' @param use_statement Required free-text statement of intended use.
 #' @param use_categories Optional character vector of use categories.
 #' @param use_category_other Optional free-text for the "other" category.
-#' @param dest Directory to write the bundle (default \code{tempdir()}).
+#' @param dest Directory to write the capsule (default \code{tempdir()}).
 #' @param api_key Optional key; else \code{MORPHOSOURCE_API_KEY}.
-#' @return Path to the downloaded \code{.zip} bundle.
+#' @return Path to the downloaded \code{.zip} capsule.
 #' @source \url{https://www.morphosource.org}
 #' @seealso \code{\link{morie_taphonomy_morphosource_search}}
 #' @examples

@@ -23,7 +23,7 @@ A \code{data.frame} of records.
 \description{
 Phase 3EEE1. Generic loader that hits CKAN's \code{datastore_search}
 endpoint for a given \code{resource_id}. Useful for any MTL package
-beyond the bundled SIM sample.
+beyond the included SIM sample.
 }
 \examples{
 \dontrun{

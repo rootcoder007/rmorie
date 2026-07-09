@@ -16,7 +16,7 @@ morie_datasets_chicago_community_areas(
 )
 }
 \arguments{
-\item{offline}{If \code{TRUE} (default), read the bundled fixture.}
+\item{offline}{If \code{TRUE} (default), read the included fixture.}
 
 \item{geometry}{If \code{TRUE} and \code{offline = FALSE}, include the
 \code{the_geom} MultiPolygon.}
@@ -52,7 +52,7 @@ Resolves the \code{community_area} foreign key carried by every
 \details{
 \strong{SODA3-only} (same filtered/derived-view caveat as Wards).
 
-Offline mode reads a bundled 77-row attribute-only fixture
+Offline mode reads a included 77-row attribute-only fixture
 (\code{inst/extdata/chicago_community_areas.csv}: 5 cols --
 \code{area_numbe}, \code{community}, \code{area_num_1}, \code{shape_area},
 \code{shape_len}). The \code{community} column carries the official

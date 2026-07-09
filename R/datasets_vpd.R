@@ -16,7 +16,7 @@
 #   4. Pass the local zip path to morie_datasets_vpd_crime().
 #
 # morie ships a stratified 550-row sample (50/TYPE x 11 categories)
-# for offline introspection + tests. The bundled
+# for offline introspection + tests. The included
 # vpd_legal_disclaimer.txt surfaces VPD's terms verbatim so callers
 # can read them programmatically.
 #
@@ -29,7 +29,7 @@
 # For Person-against incidents the address is randomized to several
 # blocks + offset to an intersection per VPD's privacy guarantee.
 
-#' Read VPD's legal disclaimer (bundled verbatim from the zip)
+#' Read VPD's legal disclaimer (included verbatim from the zip)
 #'
 #' Phase 3DDD2. Returns the legal disclaimer text shipped with
 #' VPD's open crime data download. Useful in headless or
@@ -55,7 +55,7 @@ morie_datasets_vpd_legal_disclaimer <- function() {
 #' source modes:
 #'
 #' \describe{
-#'   \item{`offline = TRUE` (default)}{Reads a bundled stratified
+#'   \item{`offline = TRUE` (default)}{Reads a included stratified
 #'     550-row sample (50 rows per `TYPE` x 11 categories) covering
 #'     years 2003-2026 and all 25 VPD-defined neighbourhoods.
 #'     Intended for tests + intro examples -- NOT for analysis.}
@@ -68,7 +68,7 @@ morie_datasets_vpd_legal_disclaimer <- function() {
 #'     (skip the zip if the caller already has the CSV on disk).}
 #' }
 #'
-#' The bundled sample is open-licensed under VPD's GeoDASH terms;
+#' The included sample is open-licensed under VPD's GeoDASH terms;
 #' the full feed requires manual T&C acceptance per VPD policy and
 #' there is no automation-friendly API. See
 #' [morie_datasets_vpd_legal_disclaimer()] for the full text.
@@ -102,7 +102,7 @@ morie_datasets_vpd_legal_disclaimer <- function() {
 #'         with the BC Freedom of Information & Protection of Privacy
 #'         Act (BC FIPPA).
 #'   \item \strong{`Offence Against a Person` is INTENTIONALLY aggregated}
-#'         to reduce re-identification risk. It bundles robbery,
+#'         to reduce re-identification risk. It capsules robbery,
 #'         assault (incl. sexual assault, domestic assault), and
 #'         other violent incidents EXCEPT `Assaults Against Police`.
 #'         Sub-categories are deliberately NOT exposed; do not
@@ -139,7 +139,7 @@ morie_datasets_vpd_legal_disclaimer <- function() {
 #' }
 #'
 #' @param offline If `TRUE` (default) and `zip_path`/`csv_path` are
-#'   `NULL`, reads the bundled 550-row sample.
+#'   `NULL`, reads the included 550-row sample.
 #' @param zip_path Optional path to a user-downloaded
 #'   `crimedata_csv_AllNeighbourhoods_AllYears.zip`. Mutually
 #'   exclusive with `csv_path`.

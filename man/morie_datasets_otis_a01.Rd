@@ -7,7 +7,7 @@
 morie_datasets_otis_a01(offline = TRUE, ...)
 }
 \arguments{
-\item{offline}{Logical. \code{TRUE} (default) reads the bundled
+\item{offline}{Logical. \code{TRUE} (default) reads the included
 \code{otis_a01_restrictive_confinement_sample.csv} fixture. \code{FALSE}
 fetches the live CKAN dataset.}
 

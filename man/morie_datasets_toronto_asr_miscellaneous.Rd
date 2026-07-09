@@ -7,7 +7,7 @@
 morie_datasets_toronto_asr_miscellaneous(offline = TRUE, max_features = NULL)
 }
 \arguments{
-\item{offline}{If \code{TRUE} (default), reads bundled CSV.}
+\item{offline}{If \code{TRUE} (default), reads included CSV.}
 
 \item{max_features}{Optional row cap.}
 }
@@ -16,7 +16,7 @@ A \code{data.frame} with \code{YEAR}, \code{SECTION}, \code{CATEGORY},
 \code{SUBTYPE}, \code{COUNT_}.
 }
 \description{
-Phase 3EEE2. Bundled snapshot of
+Phase 3EEE2. Included snapshot of
 \code{police-annual-statistical-report-miscellaneous-data} -- 40 rows
 of year x section x category x subtype aggregates covering hate
 crime counts, IMPACT calls, and other Toronto Police aggregates
