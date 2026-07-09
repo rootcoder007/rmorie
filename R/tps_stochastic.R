@@ -67,7 +67,12 @@ NULL
   ts <- NULL
   if (all(c("OCC_YEAR", "OCC_MONTH", "OCC_DAY") %in% names(df))) {
     y <- suppressWarnings(as.integer(df[["OCC_YEAR"]]))
+    # TPS publishes OCC_MONTH as month names ("January"); accept both.
     m <- suppressWarnings(as.integer(df[["OCC_MONTH"]]))
+    if (all(is.na(m))) {
+      m <- match(tolower(substr(as.character(df[["OCC_MONTH"]]), 1, 3)),
+                 tolower(month.abb))
+    }
     d <- suppressWarnings(as.integer(df[["OCC_DAY"]]))
     keep <- !is.na(y) & !is.na(m) & !is.na(d)
     if (any(keep)) {
@@ -81,8 +86,20 @@ NULL
   if (is.null(ts) || length(ts) == 0L) {
     for (col in c("OCC_DATE", "REPORT_DATE")) {
       if (col %in% names(df)) {
-        ts <- suppressWarnings(as.POSIXct(
-          as.character(df[[col]]), tz = "UTC"))
+        v <- df[[col]]
+        num <- suppressWarnings(as.numeric(v))
+        if (all(is.na(v) | !is.na(num))) {
+          # ArcGIS serves epoch milliseconds; seconds if plausibly small.
+          num <- num[!is.na(num)]
+          div <- if (length(num) && stats::median(num) > 1e11) 1000 else 1
+          ts <- as.POSIXct(num / div, origin = "1970-01-01", tz = "UTC")
+        } else {
+          # Character dates; parse failures yield NA, never an error.
+          ts <- tryCatch(
+            suppressWarnings(as.POSIXct(as.character(v), tz = "UTC")),
+            error = function(e) as.POSIXct(character(0))
+          )
+        }
         ts <- ts[!is.na(ts)]
         if (length(ts) > 0L) break
       }
