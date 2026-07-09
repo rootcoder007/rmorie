@@ -1,3 +1,18 @@
+# rmorie 1.0.4
+
+* New `morie_tps_figures()`: portable batch export of the TPS
+  stochastic diagnostic figures (Hawkes fit panel with time-rescaling
+  residuals + KS diagnostic; SARIMA hold-out panel), fetching live
+  from the public TPS ArcGIS portal and writing only under the
+  caller's `out_dir`. OTIS/SIU figure exports follow in the next
+  patch release.
+* `.tps_stoch_date_series()` now parses TPS month-name `OCC_MONTH`
+  and ArcGIS epoch-millisecond `OCC_DATE` values (previously every
+  live-fetched tps_stochastic analysis errored).
+* `morie_tps_hawkes_temporal_fit()` deterministically spreads
+  same-day tied events within the day, fixing the degenerate
+  `omega -> Inf` decay on daily-resolution sources.
+
 # rmorie 1.0.3
 
 * CRAN-submission housekeeping: refreshed `cran-comments.md`, added the
