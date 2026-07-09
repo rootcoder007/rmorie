@@ -1,0 +1,73 @@
+cff-version: 1.2.0
+message: "If you use rmorie in your research, please cite the software (see preferred-citation below). Methodology and empirical-applications papers (MRM framework, criminological Hawkes process, solitary-confinement / self-excitation / institutional churn) are in preparation and will be added once publicly available with DOIs."
+title: "rmorie: Multi-domain Open Research and Inferential Estimation in R"
+authors:
+  - family-names: "Ruhela"
+    given-names: "Vansh Singh"
+    orcid: "https://orcid.org/0009-0004-1750-3592"
+    name-particle: "Singh"
+    # IPA: /ʋənʃ sɪŋ ɾʊˈɦeːlɑː/
+version: "1.0.3"
+date-released: "2026-07-09"
+url: "https://github.com/rootcoder007/rmorie"
+repository-code: "https://github.com/rootcoder007/rmorie"
+license: "AGPL-3.0-or-later"
+preferred-citation:
+  type: software
+  title: "rmorie: Multi-domain Open Research and Inferential Estimation in R"
+  authors:
+    - family-names: "Ruhela"
+      given-names: "Vansh Singh"
+      orcid: "https://orcid.org/0009-0004-1750-3592"
+  year: "2026"
+  url: "https://github.com/rootcoder007/rmorie"
+references:
+  # Methodology + empirical-applications papers are in preparation and
+  # will be added once publicly available with DOIs or preprint URLs.
+  - type: software
+    title: "Claude — Anthropic frontier model family"
+    authors:
+      - name: "Anthropic, P.B.C."
+    year: "2024"
+    url: "https://www.anthropic.com/claude"
+    notes: "Frontier AI assistance used during rmorie development. Author retains full responsibility for code and methods."
+  - type: software
+    title: "Claude Code — official command-line interface for Claude"
+    authors:
+      - name: "Anthropic, P.B.C."
+    year: "2024"
+    url: "https://claude.com/claude-code"
+    notes: "Primary development assistant for the rmorie codebase."
+  - type: generic
+    title: "Predictive Policing in the City of Chicago"
+    authors:
+      - family-names: "Lachérade"
+        given-names: "P."
+      - family-names: "Szabo"
+        given-names: "B."
+      - family-names: "Krikava"
+        given-names: "J."
+      - family-names: "Aeby"
+        given-names: "M."
+    year: "2021"
+    url: "https://github.com/marquito95/Predictive-policing-Chicago"
+    notes: "SciencesPo 'Decoding Biases in AI' project auditing Chicago's Strategic Subjects List for racial bias. rmorie's predictive-policing calibration audit (morie_frns_predpol_*) is an independent clean-room reimplementation of this project's published methodology -- no code copied."
+  - type: article
+    title: "Unmasking Algorithmic Bias in Predictive Policing: A GAN-Based Simulation Framework with Multi-City Temporal Analysis"
+    authors:
+      - family-names: "Barman"
+        given-names: "Pronob Kumar"
+      - family-names: "Barman"
+        given-names: "Pronoy Kumar"
+    year: "2026"
+    url: "https://arxiv.org/abs/2603.18987"
+    notes: "Source of the four temporal bias metrics and the composite Bias Amplification Score reimplemented in rmorie's fairness modules."
+  - type: generic
+    title: "XAI Stories: Case Studies -- COMPAS Recidivism"
+    authors:
+      - family-names: "Biecek"
+        given-names: "Przemysław"
+      - name: "et al."
+    year: "2021"
+    url: "https://pbiecek.github.io/xai_stories/story-compas.html"
+    notes: "The COMPAS explainability audit whose explainer recipe rmorie's fairness XAI module independently reimplements."

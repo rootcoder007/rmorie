@@ -2,6 +2,8 @@ File,Line,Status,Version,Context
 ./AGENTS.md,90,STALE_OR_DEP,0.9.4,"Ligges archived morie 0.9.4 and asked us to wait. Same applies"
 ./AGENTS.md,97,STALE_OR_DEP,0.9.4,"touch `R_user_dir()` only on explicit user opt-in. morie 0.9.4"
 ./AGENTS.md,130,STALE_OR_DEP,0.9.5,"- DESCRIPTION: `Version: 0.9.5.x`"
+./CITATION.cff,1,STALE_OR_DEP,1.2.0,"cff-version: 1.2.0"
+./CITATION.cff,10,CURRENT,1.0.3,"version: 1.0.3"
 ./DESCRIPTION,4,CURRENT,1.0.3,"Version: 1.0.3"
 ./DESCRIPTION,36,STALE_OR_DEP,7.3.3,"RoxygenNote: 7.3.3"
 ./DESCRIPTION,38,STALE_OR_DEP,4.3.0,"R (>= 4.3.0)"
