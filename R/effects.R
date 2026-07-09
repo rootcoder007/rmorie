@@ -140,11 +140,10 @@ estimate_plr <- function(data, treatment, outcome, covariates,
     # backend launch error seen on some R-devel builds) fall through to the
     # base-R cross-fit below rather than propagating -- this is the documented
     # fallback behaviour, previously only reached when DoubleML was absent.
-    # future (via mlr3/DoubleML) runs a connection-misuse check on each resolve
-    # that segfaults R uncatchably on some oldrel builds (so the tryCatch below
-    # cannot save it). Disable that diagnostic for this call only; restore after.
-    .morie_old_fut <- options(future.connections.onMisuse = "ignore")
-    on.exit(options(.morie_old_fut), add = TRUE)
+    # Sequential in-process cross-fit + future diagnostics silenced;
+    # see R/dml_guard.R. Restored on exit.
+    .gst <- .morie_dml_guard_begin()
+    on.exit(.morie_dml_guard_end(.gst), add = TRUE)
     dml_res <- tryCatch({
       dml_data <- DoubleML::DoubleMLData$new(
         data = df, y_col = outcome, d_cols = treatment,
@@ -157,11 +156,6 @@ estimate_plr <- function(data, treatment, outcome, covariates,
         n_folds = n_folds, n_rep = 1L
       )
       set.seed(random_state)
-      # Silence {future}'s false RNG-misuse warning: cross-fitting is seeded
-      # via set.seed(random_state) above, so it is a false alarm that would
-      # otherwise trip R CMD check stop_on_warning. Restored on exit.
-      .op <- options(future.rng.onMisuse = "ignore")
-      on.exit(options(.op), add = TRUE)
       plr$fit()
       ci <- plr$confint(level = 0.95)
       list(
@@ -265,11 +259,10 @@ estimate_pliv <- function(data, treatment, outcome, instrument,
     # Attempt the DoubleML path; on ANY runtime failure (e.g. an mlr3/future
     # backend launch error seen on some R-devel builds) fall through to the
     # 2SLS base-R fallback below rather than propagating.
-    # future (via mlr3/DoubleML) runs a connection-misuse check on each resolve
-    # that segfaults R uncatchably on some oldrel builds (so the tryCatch below
-    # cannot save it). Disable that diagnostic for this call only; restore after.
-    .morie_old_fut <- options(future.connections.onMisuse = "ignore")
-    on.exit(options(.morie_old_fut), add = TRUE)
+    # Sequential in-process cross-fit + future diagnostics silenced;
+    # see R/dml_guard.R. Restored on exit.
+    .gst <- .morie_dml_guard_begin()
+    on.exit(.morie_dml_guard_end(.gst), add = TRUE)
     dml_res <- tryCatch({
       dml_data <- DoubleML::DoubleMLData$new(
         data = df, y_col = outcome, d_cols = treatment,
@@ -283,11 +276,6 @@ estimate_pliv <- function(data, treatment, outcome, instrument,
         n_folds = n_folds, n_rep = 1L
       )
       set.seed(random_state)
-      # Silence {future}'s false RNG-misuse warning: cross-fitting is seeded
-      # via set.seed(random_state) above, so it is a false alarm that would
-      # otherwise trip R CMD check stop_on_warning. Restored on exit.
-      .op <- options(future.rng.onMisuse = "ignore")
-      on.exit(options(.op), add = TRUE)
       pliv$fit()
       ci <- pliv$confint(level = 0.95)
       list(
