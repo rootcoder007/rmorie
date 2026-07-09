@@ -11,14 +11,14 @@ morie_datasets_otis_d03_deaths_by_race(
 )
 }
 \arguments{
-\item{offline}{If \code{TRUE} (default), read the bundled synthetic
+\item{offline}{If \code{TRUE} (default), read the included synthetic
 fixture. If \code{FALSE}, hit Ontario CKAN (\code{resource_id} required).}
 
 \item{resource_id}{Optional CKAN resource id (required for live).}
 
 \item{source}{One of \code{NULL} (default, ships an empty 0-row frame
-with the documented schema when no real CKAN row is bundled),
-\code{"real"} (force the real CKAN sample bundled in \verb{inst/extdata/},
+with the documented schema when no real CKAN row is included),
+\code{"real"} (force the real CKAN sample included in \verb{inst/extdata/},
 error if absent), or \code{"synth"} (return a deterministic
 \code{set.seed()} synthetic for didactic examples).}
 }

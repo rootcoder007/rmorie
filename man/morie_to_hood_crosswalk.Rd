@@ -2,7 +2,7 @@
 % Please edit documentation in R/toronto_neighbourhoods.R
 \name{morie_to_hood_crosswalk}
 \alias{morie_to_hood_crosswalk}
-\title{Load the bundled BIDIRECTIONAL 158 <-> 140 neighbourhood crosswalk}
+\title{Load the included BIDIRECTIONAL 158 <-> 140 neighbourhood crosswalk}
 \usage{
 morie_to_hood_crosswalk()
 }
@@ -11,7 +11,7 @@ A \code{data.frame} with the columns above. \code{hood_140} and
 \code{hood_158} are character (zero-padded to 3 chars).
 }
 \description{
-Returns the bundled \code{inst/extdata/to_hood_158_140_crosswalk.csv},
+Returns the included \code{inst/extdata/to_hood_158_140_crosswalk.csv},
 computed from polygon intersection of the two upstream Open Toronto
 GeoJSON layers (\verb{Neighbourhoods - 4326.geojson} and
 \verb{Neighbourhoods - historical 140 - 4326.geojson}) reprojected to
@@ -34,13 +34,13 @@ child has \code{pct_158_in_140 == 100} (each 158 is entirely
 inside its parent 140), so
 \code{\link[=morie_tps_aggregate_158_to_140]{morie_tps_aggregate_158_to_140()}} is mathematically EXACT
 (lossless sum) for the 1:1 + split cohort. Only the one
-split+merge sliver in the bundled OT data has a non-100
+split+merge sliver in the included OT data has a non-100
 reverse percent.}
 \item{relation}{"1:1" / "split" (one 140 -> N 158s) / "merge"
 (multiple 140s -> one 158) / "split+merge"}
 }
 
-Empirical distribution on the bundled OT data:
+Empirical distribution on the included OT data:
 \itemize{
 \item 123 1:1 rows (78\\% of 140 hoods)            -- both percents == 100
 \item 34 split rows (16 historical hoods)         -- pct_158_in_140 == 100

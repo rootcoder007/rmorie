@@ -16,7 +16,7 @@ A \code{data.frame} with 246 rows x 5 cols.
 NYC OpenData does NOT publish a standalone NYPD-offense-code
 table; the canonical mapping is implicit in the
 (\code{ky_cd}, \code{ofns_desc}, \code{pd_cd}, \code{pd_desc}, \code{law_cat_cd}) tuples
-carried by every Arrests / Complaints record. This bundled
+carried by every Arrests / Complaints record. This included
 fixture was derived by running a \verb{$group} query on the NYPD
 Arrests YTD feed (\code{uip8-fykc}) at fixture-creation time, giving
 the 246 distinct offense tuples currently in active use.

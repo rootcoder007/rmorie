@@ -23,7 +23,7 @@ This vignette documents the `mrm_otis_*()`, `mrm_tps_*()`, and
 `mrm_siu_*()` empirical callables. Each function is a one-line entry
 point to a verified analysis used in the *MRM empirical paper*
 (Ruhela 2026, in preparation). Every example below runs on the small
-reference samples bundled with the package, so the vignette is
+reference samples shipped with the package, so the vignette is
 network-free.
 
 For the full datasets:
@@ -94,7 +94,7 @@ locality-preserving \u2014 over 95% of placements remain within the same
 region in the full b01.
 
 ```{r region, eval = FALSE}
-# (Region columns are present only in the full b01, not the bundled
+# (Region columns are present only in the full b01, not the included
 # sample; uncomment after morie_load_dataset("otisb01") or
 # morie_fetch_tps(...) if needed.)
 res <- mrm_otis_region_locality(b01)

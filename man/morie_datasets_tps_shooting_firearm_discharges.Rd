@@ -18,7 +18,7 @@ morie_datasets_tps_shooting_firearm_discharges(
 \item{max_features}{Optional cap on returned rows
 (\code{offline = FALSE} only).}
 
-\item{offline}{If \code{TRUE} (default), read the bundled synthetic
+\item{offline}{If \code{TRUE} (default), read the included synthetic
 fixture from \code{inst/extdata/tps_mha_apprehensions_sample.csv}
 (5 rows in the canonical TPS PSDP 22-column schema). If
 \code{FALSE}, hit the TPS PSDP ArcGIS FeatureServer.}

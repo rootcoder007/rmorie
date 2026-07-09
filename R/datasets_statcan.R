@@ -25,7 +25,7 @@
 
 #' Statistics Canada CCJS cube registry (curated subset)
 #'
-#' Phase 3DDD3. Bundled 10-row registry of high-traffic
+#' Phase 3DDD3. Included 10-row registry of high-traffic
 #' Canadian Centre for Justice and Community Safety Statistics
 #' cubes published through StatCan CODR -- the federal-level
 #' complement to morie's provincial loaders (Ontario OTIS, BC VPD,

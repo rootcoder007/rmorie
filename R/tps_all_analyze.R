@@ -2,7 +2,7 @@
 #' RichResult-emitting analyses for the 13 TPS crime datasets
 #'
 #' R-side port of \code{morie.tps_all_analyze}. Provides a uniform
-#' bundle (temporal + spatial + offence + neighbourhood-concentration)
+#' capsule (temporal + spatial + offence + neighbourhood-concentration)
 #' that runs on any of Toronto Police Service's 13 public crime CSVs
 #' plus a cross-category comparison driver.
 #'
@@ -18,8 +18,8 @@
 #'     top-10/top-20 share across HOOD_158.
 #'   \item \code{\link{morie_tps_crime_compare}}: side-by-side counts
 #'     and YoY across multiple TPS data.frames.
-#'   \item \code{\link{morie_tps_analyze_one}}: full bundle on one frame.
-#'   \item \code{\link{morie_tps_analyze_all}}: full bundle across every
+#'   \item \code{\link{morie_tps_analyze_one}}: full capsule on one frame.
+#'   \item \code{\link{morie_tps_analyze_all}}: full capsule across every
 #'     TPS data.frame supplied in a named list.
 #'   \item \code{morie_tps_analyze_assault()}, ...,
 #'     \code{morie_tps_analyze_theftover()}: 13 thin convenience aliases.
@@ -444,7 +444,7 @@ morie_tps_crime_compare <- function(dfs) {
 # 6. Master per-dataset driver
 # ---------------------------------------------------------------------------
 
-#' Run the standard TPS analysis bundle on one data.frame
+#' Run the standard TPS analysis capsule on one data.frame
 #'
 #' Chains temporal + spatial + offence + concentration into a single
 #' nested result.  This is the function the 13 convenience aliases
@@ -502,7 +502,7 @@ morie_tps_analyze_one <- function(df, name = "?") {
   function(df) morie_tps_analyze_one(df, name = name)
 }
 
-#' Convenience alias: full TPS bundle on the Assault dataset.
+#' Convenience alias: full TPS capsule on the Assault dataset.
 #' @param df A TPS Assault data.frame.
 #' @return A \code{morie_tps_result}.
 #' @export
@@ -561,7 +561,7 @@ morie_tps_analyze_theftover <- .tps_alias_factory("TheftOver")
 # 8. Master orchestrator
 # ---------------------------------------------------------------------------
 
-#' Run the full TPS analysis bundle across many TPS data.frames
+#' Run the full TPS analysis capsule across many TPS data.frames
 #'
 #' Mirrors \code{morie.tps_all_analyze.analyze_all}.  Caller supplies
 #' the data.frames; loading from disk is left to the user (R-side loaders

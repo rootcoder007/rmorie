@@ -2,7 +2,7 @@
 % Please edit documentation in R/tps_all_analyze.R
 \name{morie_tps_analyze_all}
 \alias{morie_tps_analyze_all}
-\title{Run the full TPS analysis bundle across many TPS data.frames}
+\title{Run the full TPS analysis capsule across many TPS data.frames}
 \usage{
 morie_tps_analyze_all(dfs, out_dir = NULL)
 }

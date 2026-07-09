@@ -15,7 +15,7 @@ morie_datasets_cpd_public_arrests(
 the loader errors with a "lookup pending" message pointing at
 the chicagopolice.org landing page.}
 
-\item{offline}{Logical; if \code{TRUE} (default), read the bundled
+\item{offline}{Logical; if \code{TRUE} (default), read the included
 synthetic 5-row fixture
 (\code{inst/extdata/cpd_public_release_arrests_sample.csv}).}
 

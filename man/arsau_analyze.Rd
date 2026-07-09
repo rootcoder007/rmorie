@@ -10,7 +10,7 @@ Each public callable in this file loads one ARSAU dataset via the
 chains the jurisdiction-agnostic MRM Use-of-Force primitives from
 \code{R/mrm_uof.R} over it, returning a single named-list result
 (classed \code{c("morie_arsau_result", "morie_rich_result", "list")})
-that bundles the loaded data, every sub-analysis, and a
+that capsules the loaded data, every sub-analysis, and a
 multi-paragraph natural-language interpretation.
 }
 \details{

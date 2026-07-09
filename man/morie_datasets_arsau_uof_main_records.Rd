@@ -14,7 +14,7 @@ morie_datasets_arsau_uof_main_records(
 \item{year}{Reporting year (\code{"2023"} or \code{"2024"}). Honoured only
 when \code{offline = FALSE}.}
 
-\item{offline}{If \code{TRUE} (default), read the bundled fixture. If
+\item{offline}{If \code{TRUE} (default), read the included fixture. If
 \code{FALSE}, hit the live CKAN endpoint via httr2.}
 
 \item{resource_id}{Optional CKAN resource id override.}
@@ -24,7 +24,7 @@ A \code{data.frame}.
 }
 \description{
 Wraps the Ontario Police Use-of-Force Race-Based Data Strategy
-resource. Offline mode reads a small bundled synthetic fixture
+resource. Offline mode reads a small included synthetic fixture
 from \code{inst/extdata/arsau_uof_main_records_sample.csv} (5 rows in
 the canonical 23-column subset of the 65-column upstream schema,
 clearly stamped \code{SYNTHETIC-FIXTURE-XXX}). Live mode hits the

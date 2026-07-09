@@ -14,7 +14,7 @@
 \alias{morie_tps_analyze_shootingandfirearmdiscarges}
 \alias{morie_tps_analyze_theftfrommovingvehicle}
 \alias{morie_tps_analyze_theftover}
-\title{Convenience alias: full TPS bundle on the Assault dataset.}
+\title{Convenience alias: full TPS capsule on the Assault dataset.}
 \usage{
 morie_tps_analyze_assault(df)
 
@@ -49,5 +49,5 @@ morie_tps_analyze_theftover(df)
 A \code{morie_tps_result}.
 }
 \description{
-Convenience alias: full TPS bundle on the Assault dataset.
+Convenience alias: full TPS capsule on the Assault dataset.
 }

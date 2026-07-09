@@ -39,7 +39,7 @@ Unlike \code{\link[=morie_tps_disaggregate_140_to_158]{morie_tps_disaggregate_14
 uniform-density assumption when the source is a clean cake-cut --
 the partition is exhaustive and disjoint by construction. The only
 lossy case is the \code{split+merge} edge (one Willowdale East sliver
-in the bundled OT data); the function handles it via the
+in the included OT data); the function handles it via the
 \code{pct_158_in_140} weights regardless.
 }
 \examples{

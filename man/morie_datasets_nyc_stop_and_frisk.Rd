@@ -20,7 +20,7 @@ morie_datasets_nyc_stop_and_frisk(
 \item{max_features}{Integer or \code{NULL}; cap on returned rows. When
 \code{paginate = TRUE} this is the total cap across all walked pages.}
 
-\item{offline}{Logical; if \code{TRUE}, return the bundled synthetic frame.}
+\item{offline}{Logical; if \code{TRUE}, return the included synthetic frame.}
 
 \item{paginate}{Logical; if \code{TRUE} and \code{offline = FALSE}, walk
 SODA2 \verb{$offset} in \code{page_size} chunks. Default \code{FALSE}.}

@@ -16,7 +16,7 @@ morie_datasets_calgary_fire_response_calls(offline = TRUE, max_features = NULL)
 morie_datasets_calgary_fire_stations(offline = TRUE, max_features = NULL)
 }
 \arguments{
-\item{offline}{If \code{TRUE} (default), reads bundled CSV.}
+\item{offline}{If \code{TRUE} (default), reads included CSV.}
 
 \item{max_features}{Optional row cap.}
 }
@@ -29,10 +29,10 @@ A \code{data.frame} of the requested dataset (a 0-row typed frame when the data 
 A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 }
 \description{
-Phase 3FFF3. Bundled 200-row sample of Calgary's per-community
+Phase 3FFF3. Included 200-row sample of Calgary's per-community
 per-month crime counts (Socrata id \verb{78gh-n26t}). Covers all 8
 canonical CPS categories.
 
-Phase 3FFF3. Bundled 200-row sample of Calgary fire response
+Phase 3FFF3. Included 200-row sample of Calgary fire response
 calls (Socrata id \code{bdez-pds9}).
 }

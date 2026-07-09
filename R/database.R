@@ -723,7 +723,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
                                con = NULL) {
   matched <- .fuzzy_match_key(key)
   if (is.null(matched)) {
-    # Unified OPEN-data front door: if `key` is a bundled data slug (open data
+    # Unified OPEN-data front door: if `key` is a included data slug (open data
     # shipped in rmoriedata), load it from there so newcomers have one reliable
     # entry point. NOTE: paid/curated data is NOT reachable here -- it is
     # site-gated behind sign-up and never served by this open loader.
@@ -809,7 +809,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
   }
 
   # 5. Direct download URL -- open-data files not exposed through the CKAN
-  #    datastore (direct CSV/XLSX, or a file bundled inside a .zip archive).
+  #    datastore (direct CSV/XLSX, or a file included inside a .zip archive).
   if (has("download_url")) {
     message("Downloading ", matched, " from ", entry$download_url, " ...")
     zm <- if ("zip_member" %in% names(entry)) entry$zip_member else ""
@@ -883,7 +883,7 @@ morie_dataset_info <- function(key) {
 
 #' Get path to an MORIE userguide
 #'
-#' Lists or retrieves bundled userguide PDF files. These are the official
+#' Lists or retrieves included userguide PDF files. These are the official
 #' PUMF codebooks and user guides from Health Canada / Statistics Canada.
 #'
 #' @param name Filename (e.g., \code{"20212022-cpads-pumf-user-guide.pdf"}).

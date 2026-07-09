@@ -7,7 +7,7 @@
 morie_datasets_toronto_ambulance_stations(offline = TRUE, max_features = NULL)
 }
 \arguments{
-\item{offline}{If \code{TRUE} (default), reads bundled CSV.}
+\item{offline}{If \code{TRUE} (default), reads included CSV.}
 
 \item{max_features}{Optional row cap.}
 }
@@ -15,7 +15,7 @@ morie_datasets_toronto_ambulance_stations(offline = TRUE, max_features = NULL)
 A \code{data.frame} with full station address + EMS metadata.
 }
 \description{
-Phase 3EEE2. Bundled snapshot of \code{ambulance-station-locations}
+Phase 3EEE2. Included snapshot of \code{ambulance-station-locations}
 (46 EMS stations across Toronto). Useful as a control overlay
 for crime + EMS dispatch analyses.
 }

@@ -11,7 +11,7 @@ morie_datasets_otis_d01_deaths_in_custody(
 )
 }
 \arguments{
-\item{offline}{If \code{TRUE} (default), read the bundled synthetic
+\item{offline}{If \code{TRUE} (default), read the included synthetic
 fixture from \code{inst/extdata/otis_d01_deaths_in_custody_sample.csv}
 (5 rows). If \code{FALSE}, hit the live CKAN datastore-dump JSON
 endpoint for resource id \verb{89e3b63f-5679-4fa4-b98a-fdd2dc486f29}.}
@@ -19,8 +19,8 @@ endpoint for resource id \verb{89e3b63f-5679-4fa4-b98a-fdd2dc486f29}.}
 \item{resource_id}{Optional CKAN resource id override.}
 
 \item{source}{One of \code{NULL} (default, ships an empty 0-row frame
-with the documented schema when no real CKAN row is bundled),
-\code{"real"} (force the real CKAN sample bundled in \verb{inst/extdata/},
+with the documented schema when no real CKAN row is included),
+\code{"real"} (force the real CKAN sample included in \verb{inst/extdata/},
 error if absent), or \code{"synth"} (return a deterministic
 \code{set.seed()} synthetic for didactic examples).}
 }

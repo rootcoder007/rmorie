@@ -24,7 +24,7 @@ morie_datasets_nibrs(
 
 \item{api_key}{Character; FBI CDE API key (or \code{NULL} -> env var).}
 
-\item{offline}{Logical; if \code{TRUE}, return a bundled synthetic frame.}
+\item{offline}{Logical; if \code{TRUE}, return a included synthetic frame.}
 }
 \value{
 A \code{data.frame}.

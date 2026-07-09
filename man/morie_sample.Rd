@@ -2,7 +2,7 @@
 % Please edit documentation in R/mrm_samples.R
 \name{morie_sample}
 \alias{morie_sample}
-\title{Load a bundled MORIE reference sample by name}
+\title{Load a included MORIE reference sample by name}
 \usage{
 morie_sample(name = c("otis_b01", "otis_b09", "otis_c11", "tps_assault"))
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasets_vpd.R
 \name{morie_datasets_vpd_legal_disclaimer}
 \alias{morie_datasets_vpd_legal_disclaimer}
-\title{Read VPD's legal disclaimer (bundled verbatim from the zip)}
+\title{Read VPD's legal disclaimer (included verbatim from the zip)}
 \usage{
 morie_datasets_vpd_legal_disclaimer()
 }

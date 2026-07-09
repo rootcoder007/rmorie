@@ -18,7 +18,7 @@
 #' Resolution rules:
 #'
 #' \describe{
-#'   \item{Bundled-fixture loaders}{If the catalog's `loader`
+#'   \item{Included-fixture loaders}{If the catalog's `loader`
 #'     column names a function that takes no required arguments
 #'     beyond optionally `offline`/`max_features`, that function is
 #'     called directly with `offline = offline` + `max_features`.}
@@ -33,7 +33,7 @@
 #'   \item{StatCan WDS}{For statcan_ccjs entries, returns the cube
 #'     metadata via [morie_datasets_statcan_cube_metadata()].}
 #'   \item{Vancouver Opendatasoft}{For vancouver_opendata entries
-#'     beyond the 9 bundled fixtures, dispatches to
+#'     beyond the 9 included fixtures, dispatches to
 #'     [morie_datasets_vancouver_opendata_by_id()].}
 #' }
 #'
@@ -43,7 +43,7 @@
 #'
 #' @param dataset_key A `dataset_key` from
 #'   [morie_dataset_portal_catalog()].
-#' @param offline If `TRUE` (default), prefer bundled fixtures.
+#' @param offline If `TRUE` (default), prefer included fixtures.
 #'   `FALSE` forces live mode for loaders that support it.
 #' @param max_features Optional row cap forwarded to the underlying
 #'   loader.
@@ -61,7 +61,7 @@
 #'   is raised to pick the intended portal.
 #' @return A `data.frame` (or, for StatCan, the WDS metadata list).
 #' @examples
-#' # All three calls below resolve to bundled offline fixtures (no
+#' # All three calls below resolve to included offline fixtures (no
 #' # network). The first call warms the cross-portal catalog cache
 #' # (~2.8s); subsequent calls reuse it (<0.1s each).
 #' df1 <- morie_datasets_load_by_key("vpd_crime")           # 550 rows
@@ -112,7 +112,7 @@ morie_datasets_load_by_key <- function(dataset_key,
   id     <- row$id
   loader <- row$loader
 
-  # --- Targeted (bundled-fixture) wrappers --------------------
+  # --- Targeted (included-fixture) wrappers --------------------
   # The catalog loader names a real morie function. If it does NOT
   # contain "by_id" / "by_key" / "ckan_resource" / "cube_metadata"
   # / "vancouver_opendata_by_id", call it directly.

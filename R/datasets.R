@@ -5,7 +5,7 @@
 #
 # Ported from src/morie/datasets.py.  Each function is a thin, stable
 # wrapper that resolves to either a live HTTP fetch (httr2) or a
-# bundled-in-package synthetic frame.  Synthetic frames are CSVs under
+# included-in-package synthetic frame.  Synthetic frames are CSVs under
 # `inst/extdata/` of the morie R package; absence of a synthetic CSV is
 # surfaced as a clean `FileNotFoundError`-style condition.
 
@@ -13,7 +13,7 @@
 # Internal helpers
 # ---------------------------------------------------------------------------
 
-#' Resolve a bundled synthetic CSV path from the morie R package.
+#' Resolve a included synthetic CSV path from the morie R package.
 #' @keywords internal
 #' @noRd
 .morie_dataset_pkg_csv <- function(name) {
@@ -24,7 +24,7 @@
   path
 }
 
-#' Read a bundled synthetic frame, warning the user it's a toy dataset.
+#' Read a included synthetic frame, warning the user it's a toy dataset.
 #' @keywords internal
 #' @noRd
 .morie_dataset_read_synthetic <- function(name, kind, columns = NULL) {
@@ -414,7 +414,7 @@
 #'   server-side.
 #' @param max_features Integer or `NULL`; cap on returned rows.
 #' @param include_geometry Logical; include `geom_x` / `geom_y`.
-#' @param offline Logical; return the bundled synthetic frame instead
+#' @param offline Logical; return the included synthetic frame instead
 #'   of hitting the live ArcGIS endpoint.
 #' @return A `data.frame` with the documented TPS schema.
 #' @export
@@ -467,7 +467,7 @@ morie_datasets_tps_homicide <- function(year = NULL, max_features = NULL) {
   )
 }
 
-#' List the TPS open-data layers bundled with morie.
+#' List the TPS open-data layers included with morie.
 #'
 #' @return A `data.frame` with columns `name` and `url`.
 #' @export
@@ -490,7 +490,7 @@ morie_datasets_tps_layers <- function() {
 #' \enumerate{
 #'   \item A pre-wrangled local RDS at `morie_cpads_contract()$expected_wrangled_path`
 #'         (only useful if you've already produced one), OR
-#'   \item the bundled 30-row real PUMF sample at
+#'   \item the included 30-row real PUMF sample at
 #'         `inst/extdata/cpads_pumf_synthetic.csv` (when `offline = TRUE`,
 #'         the default; carries all 394 raw PUMF columns plus the 11
 #'         morie canonical analysis aliases), OR
@@ -510,7 +510,7 @@ morie_datasets_tps_layers <- function() {
 #' Sister surveys (CSADS, CSUS, CTADS) are at
 #' \url{https://health-infobase.canada.ca/substance-use/}.
 #'
-#' @param offline Logical. `TRUE` (default) prefers the bundled fixture
+#' @param offline Logical. `TRUE` (default) prefers the included fixture
 #'   for fast/CRAN-safe runs; `FALSE` fetches the live PUMF.
 #' @param mode Character; one of `"datastore_search"` (default;
 #'   queryable CKAN datastore endpoint, supports `limit`/`q`) or
@@ -582,7 +582,7 @@ morie_datasets_cpads <- function(offline = TRUE,
 #' Earlier morie versions wrongly claimed this data was FOI-only;
 #' that was incorrect and has been retracted as of 3MMM.
 #'
-#' @param offline Logical. `TRUE` (default) reads the bundled
+#' @param offline Logical. `TRUE` (default) reads the included
 #'   `otis_a01_restrictive_confinement_sample.csv` fixture. `FALSE`
 #'   fetches the live CKAN dataset.
 #' @param ... Forwarded to
@@ -636,7 +636,7 @@ morie_datasets_siu_director_reports <- function() {
 #' Download an SIU director's-report PDF and return its plain text.
 #'
 #' @param url Character; direct PDF URL.  Required unless `offline = TRUE`.
-#' @param offline Logical; if `TRUE`, return the bundled synthetic
+#' @param offline Logical; if `TRUE`, return the included synthetic
 #'   `24-OFD-001` report text instead of hitting the SIU site.
 #' @return Character scalar (the plain text).
 #' @export
@@ -1051,7 +1051,7 @@ morie_datasets_siu_report_fields <- function(text_or_url) {
 #' @param year Integer or `NULL`; server-side year filter.
 #' @param max_features Integer or `NULL`; cap on returned rows. When
 #'   `paginate = TRUE` this is the total cap across all walked pages.
-#' @param offline Logical; if `TRUE`, return the bundled synthetic frame.
+#' @param offline Logical; if `TRUE`, return the included synthetic frame.
 #' @param mode One of `"soda2"` (default) or `"soda3"`. Selects the
 #'   API path for live mode:
 #'   * `"soda2"` -> `/resource/<id>.json?$where=...` via
@@ -1136,7 +1136,7 @@ morie_datasets_chicago_crime <- function(year = NULL,
 #'   `NULL` defaults to the most-recent registered year.
 #' @param max_features Integer or `NULL`; cap on returned rows. When
 #'   `paginate = TRUE` this is the total cap across all walked pages.
-#' @param offline Logical; if `TRUE`, return the bundled synthetic frame.
+#' @param offline Logical; if `TRUE`, return the included synthetic frame.
 #' @param paginate Logical; if `TRUE` and `offline = FALSE`, walk
 #'   SODA2 `$offset` in `page_size` chunks. Default `FALSE`.
 #' @param page_size Integer; per-page row count when paginating
@@ -1277,7 +1277,7 @@ morie_datasets_ckan_package <- function(portal, package_id) {
 #' @param state Character; two-letter US state code, or `NULL` for national.
 #' @param offense Character; NIBRS offence slug, or `NULL` for all.
 #' @param api_key Character; FBI CDE API key (or `NULL` -> env var).
-#' @param offline Logical; if `TRUE`, return a bundled synthetic frame.
+#' @param offline Logical; if `TRUE`, return a included synthetic frame.
 #' @return A `data.frame`.
 #' @export
 morie_datasets_nibrs <- function(year = NULL, max_features = NULL,
@@ -1315,7 +1315,7 @@ morie_datasets_nibrs <- function(year = NULL, max_features = NULL,
 #'
 #' @param state Character; two-letter US state code or `NULL` (national).
 #' @param max_features Integer or `NULL`; cap on returned rows.
-#' @param offline Logical; if `TRUE`, return a bundled synthetic frame.
+#' @param offline Logical; if `TRUE`, return a included synthetic frame.
 #' @return A `data.frame`.
 #' @export
 morie_datasets_namus_missing_persons <- function(state = NULL,
@@ -1350,7 +1350,7 @@ morie_datasets_namus_missing_persons <- function(state = NULL,
 #' @param dataset_id Character or `NULL`; specific NIST RDS id.
 #' @param query Character or `NULL`; free-text search.
 #' @param max_features Integer or `NULL`; cap on returned rows.
-#' @param offline Logical; if `TRUE`, return a bundled synthetic frame.
+#' @param offline Logical; if `TRUE`, return a included synthetic frame.
 #' @return A `data.frame` with the NIST RDS catalog schema.
 #' @export
 morie_datasets_nist_rds <- function(dataset_id = NULL, query = NULL,
@@ -1388,16 +1388,16 @@ morie_datasets_nist_rds <- function(dataset_id = NULL, query = NULL,
 #' (updated 2025-02-20). The City notes these boundaries are
 #' approximate and the names are not official.
 #'
-#' Offline mode reads a bundled 98-row attribute-only fixture
+#' Offline mode reads a included 98-row attribute-only fixture
 #' (`pri_neigh`, `sec_neigh`, `shape_area`, `shape_len`) -- the
-#' `the_geom` MultiPolygon column is stripped to keep the bundled
+#' `the_geom` MultiPolygon column is stripped to keep the included
 #' size sane (full GeoJSON is ~800 KB). Live mode hits the SODA2
 #' endpoint via \code{.morie_dataset_socrata_fetch()} (mockable).
 #'
 #' To get the polygons, pass `geometry = TRUE` in live mode, which
 #' includes the SODA2 `the_geom` column.
 #'
-#' @param offline If `TRUE` (default), read the bundled attribute-only
+#' @param offline If `TRUE` (default), read the included attribute-only
 #'   fixture from `inst/extdata/chicago_neighborhoods.csv`.
 #' @param geometry If `TRUE` and `offline = FALSE`, include the
 #'   `the_geom` MultiPolygon column in the live-mode result.
@@ -1516,7 +1516,7 @@ morie_datasets_chicago_neighborhoods <- function(offline = TRUE,
 #' @param top Optional per-request row count (= `$top`).
 #' @param skip Optional start offset (= `$skip`).
 #' @param max_features Optional total row cap across pages.
-#' @param offline Logical; default `TRUE` reads the bundled 22-col
+#' @param offline Logical; default `TRUE` reads the included 22-col
 #'   `chicago_crime_synthetic.csv` fixture.
 #' @param resource_id Optional view id override (default
 #'   `"ijzp-q8t2"`; pass `"crimes"` for the publisher alias).
@@ -1592,7 +1592,7 @@ morie_datasets_chicago_crime_odata <- function(filter = NULL,
 #'     row to other Chicago boundary layers (wards, community areas,
 #'     etc.) via Socrata's automatic point-in-polygon computation
 #'
-#' Offline mode reads a bundled 5-row 39-col fixture
+#' Offline mode reads a included 5-row 39-col fixture
 #' (`inst/extdata/chicago_crime_map_ahwe_kpsy_sample.csv`).
 #'
 #' @param date_from Lower bound on `date` (inclusive). Accepts a
@@ -1604,7 +1604,7 @@ morie_datasets_chicago_crime_odata <- function(filter = NULL,
 #' @param where Optional additional SoQL `WHERE` fragment ANDed onto
 #'   the date window. e.g. `"primary_type='HOMICIDE'"`.
 #' @param max_features Optional total row cap.
-#' @param offline Logical; if `TRUE` (default), read the bundled
+#' @param offline Logical; if `TRUE` (default), read the included
 #'   39-col fixture.
 #' @param resource_id Optional view id override (default
 #'   `"ahwe-kpsy"`).
@@ -1754,14 +1754,14 @@ morie_datasets_chicago_crime_soql <- function(where = NULL,
 #'   \item{district}{Parent district number (string).}
 #' }
 #'
-#' Offline mode reads a bundled attribute-only fixture
+#' Offline mode reads a included attribute-only fixture
 #' (`inst/extdata/chicago_police_beats.csv`) -- the `the_geom`
-#' MultiPolygon column is stripped to keep bundle size sane.
+#' MultiPolygon column is stripped to keep capsule size sane.
 #' Live mode hits the SODA2 JSON endpoint via
 #' \code{.morie_dataset_socrata_fetch()} (mockable); pass `geometry = TRUE`
 #' to include `the_geom`. Threads through the 3OO pagination args.
 #'
-#' @param offline If `TRUE` (default), read the bundled fixture.
+#' @param offline If `TRUE` (default), read the included fixture.
 #' @param geometry If `TRUE` and `offline = FALSE`, include
 #'   `the_geom` (MultiPolygon).
 #' @param max_features Optional row cap.
@@ -1855,7 +1855,7 @@ morie_datasets_chicago_police_beats <- function(offline = TRUE,
 #'   \item{dist_label}{Display label (e.g. `"1ST"`, `"22ND"`).}
 #' }
 #'
-#' Offline mode reads a bundled attribute-only fixture
+#' Offline mode reads a included attribute-only fixture
 #' (`inst/extdata/chicago_police_districts.csv`). Live mode hits
 #' SODA2 JSON; pass `geometry = TRUE` for `the_geom`.
 #'
@@ -1872,7 +1872,7 @@ morie_datasets_chicago_police_beats <- function(offline = TRUE,
 #' you'd typically hit the GeoJSON variant via `sf::st_read()`
 #' yourself rather than going through this loader).
 #'
-#' @param offline If `TRUE` (default), read the bundled fixture.
+#' @param offline If `TRUE` (default), read the included fixture.
 #' @param geometry If `TRUE` and `offline = FALSE`, include
 #'   `the_geom` (MultiPolygon).
 #' @param max_features Optional row cap.
@@ -1964,7 +1964,7 @@ morie_datasets_chicago_police_districts <- function(offline = TRUE,
 #'   `iucr`                   \tab [morie_datasets_chicago_iucr_codes()]   \tab `iucr == iucr`           \cr
 #' }
 #'
-#' The resolvers are loaded in offline mode (they're all bundled +
+#' The resolvers are loaded in offline mode (they're all included +
 #' small), so this analyzer only touches the network for the crime
 #' pull itself. Resolver columns are prefixed with the source name
 #' (`ward_*`, `community_*`, `beat_*`, `district_*`, `iucr_*`) to
@@ -2113,12 +2113,12 @@ morie_datasets_chicago_crime_resolved <- function(
 #' (`/api/v3/views/sp34-6z76/query.json`) via
 #' \code{.morie_dataset_soda3_query()}.
 #'
-#' Offline mode reads a bundled 50-row attribute-only fixture
+#' Offline mode reads a included 50-row attribute-only fixture
 #' (`inst/extdata/chicago_wards.csv`: `ward` / `shape_leng` /
 #' `shape_area`). Live mode with `geometry = TRUE` also includes the
 #' `the_geom` MultiPolygon column.
 #'
-#' @param offline If `TRUE` (default), read the bundled fixture.
+#' @param offline If `TRUE` (default), read the included fixture.
 #' @param geometry If `TRUE` and `offline = FALSE`, include the
 #'   `the_geom` MultiPolygon.
 #' @param max_features Optional row cap.
@@ -2190,7 +2190,7 @@ morie_datasets_chicago_wards <- function(offline = TRUE,
 #'
 #' **SODA3-only** (same filtered/derived-view caveat as Wards).
 #'
-#' Offline mode reads a bundled 77-row attribute-only fixture
+#' Offline mode reads a included 77-row attribute-only fixture
 #' (`inst/extdata/chicago_community_areas.csv`: 5 cols --
 #' `area_numbe`, `community`, `area_num_1`, `shape_area`,
 #' `shape_len`). The `community` column carries the official
@@ -2272,10 +2272,10 @@ morie_datasets_chicago_community_areas <- function(offline = TRUE,
 #' Available via SODA2 (single-shot or paginated) -- this is a
 #' base dataset, not a filtered view.
 #'
-#' Offline mode reads a bundled 410-row complete fixture
+#' Offline mode reads a included 410-row complete fixture
 #' (`inst/extdata/chicago_iucr_codes.csv`).
 #'
-#' @param offline If `TRUE` (default), read the bundled full
+#' @param offline If `TRUE` (default), read the included full
 #'   410-row fixture.
 #' @param max_features Optional row cap.
 #' @param resource_id Optional view id override.
@@ -2360,7 +2360,7 @@ morie_datasets_chicago_iucr_codes <- function(offline = TRUE,
 #' defaults to the UUID for stability; pass `resource_id = "arrests"`
 #' if you want to exercise the alias path.
 #'
-#' Offline mode reads a bundled 5-row synthetic fixture
+#' Offline mode reads a included 5-row synthetic fixture
 #' (`inst/extdata/chicago_arrests_dpt3_jri9_sample.csv`) carrying the
 #' real upstream snake_case schema. Live mode hits the SODA2 endpoint
 #' via \code{.morie_dataset_socrata_fetch()} and honours the 3OO opt-in
@@ -2371,7 +2371,7 @@ morie_datasets_chicago_iucr_codes <- function(offline = TRUE,
 #' @param max_features Integer or `NULL`; cap on returned rows. When
 #'   `paginate = TRUE` this is the total cap across walked pages.
 #' @param offline Logical; if `TRUE` (default, safer post-3EE), read
-#'   the bundled synthetic frame.
+#'   the included synthetic frame.
 #' @param resource_id Optional Socrata resource id override. Accepts
 #'   the UUID (`dpt3-jri9`, default) or the publisher's alias
 #'   (`arrests`).
@@ -2489,7 +2489,7 @@ morie_datasets_chicago_arrests <- function(year = NULL,
 #' @param url Optional direct-CSV URL. If `NULL` and `offline = FALSE`,
 #'   the loader errors with a "lookup pending" message pointing at
 #'   the chicagopolice.org landing page.
-#' @param offline Logical; if `TRUE` (default), read the bundled
+#' @param offline Logical; if `TRUE` (default), read the included
 #'   synthetic 5-row fixture
 #'   (`inst/extdata/cpd_public_release_arrests_sample.csv`).
 #' @param max_features Integer or `NULL`; cap on returned rows.

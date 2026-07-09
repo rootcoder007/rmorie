@@ -30,3 +30,6 @@
 ^\.Rhistory$
 ^\.RData$
 ^\.vscode$
+^LICENSE$
+^NOTICE$
+^CITATION\.cff$
