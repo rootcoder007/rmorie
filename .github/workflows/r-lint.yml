@@ -34,6 +34,6 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
         with:
-          extra-packages: any::lintr
+          extra-packages: any::lintr github::rootcoder007/rmorie-bricklayer/bricklayer github::rootcoder007/rmoriedata github::stan-dev/cmdstanr
       - name: Run lintr
         run: Rscript -e 'lintr::lint_package()'
