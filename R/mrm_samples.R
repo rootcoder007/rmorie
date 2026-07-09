@@ -195,7 +195,11 @@ morie_fetch_tps <- function(
     if (!isTRUE(page$exceededTransferLimit)) break
   }
   if (length(rows) == 0L) stop("No features returned for ", category)
-  df <- do.call(rbind, lapply(rows, function(r) as.data.frame(r, stringsAsFactors = FALSE)))
+  df <- do.call(rbind, lapply(rows, function(r) {
+    # ArcGIS omits fields as JSON null; NULL columns crash data.frame().
+    as.data.frame(lapply(r, function(v) if (is.null(v)) NA else v),
+                  stringsAsFactors = FALSE)
+  }))
   utils::write.csv(df, out, row.names = FALSE)
   out
 }

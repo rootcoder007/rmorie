@@ -208,6 +208,15 @@ NULL
 morie_tps_load_tps_dataset <- function(category, nrows = NULL,
                                        cache_dir = file.path(tempdir(),
                                                              "morie", "tps")) {
+  # Synthetic-injection contract: the test suites (helper-tps.R) and
+  # tps_hawkes_advanced.R have installed a same-named loader into the
+  # global environment since before this live bridge existed. Honour
+  # such an override so tests and user-supplied loaders stay offline.
+  ov <- globalenv()
+  if (exists("morie_tps_load_tps_dataset", envir = ov, inherits = FALSE)) {
+    f <- get("morie_tps_load_tps_dataset", envir = ov)
+    if (is.function(f)) return(f(category, nrows = nrows))
+  }
   df <- tryCatch(morie_tps_load_dataset(category, nrows = nrows),
                  error = function(e) NULL)
   if (!is.null(df)) return(df)
@@ -242,6 +251,12 @@ morie_tps_load_tps_dataset <- function(category, nrows = NULL,
 morie_tps_load_tps <- function(name, format = "geojson",
                                cache_dir = file.path(tempdir(),
                                                      "morie", "tps")) {
+  # Same global-override contract as morie_tps_load_tps_dataset().
+  ov <- globalenv()
+  if (exists("morie_tps_load_tps", envir = ov, inherits = FALSE)) {
+    f <- get("morie_tps_load_tps", envir = ov)
+    if (is.function(f)) return(f(name, format = format))
+  }
   if (name %in% names(morie_tps_layer_urls())) {
     return(morie_tps_load_tps_dataset(name, cache_dir = cache_dir))
   }
