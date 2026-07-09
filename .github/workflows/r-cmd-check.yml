@@ -96,6 +96,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
         env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
           # ECOSolveR (via HonestDiD) vendors a SuiteSparse/AMD Makefile that
           # races under parallel make whenever the dep cache misses; build the
           # dependency tree serially (same as r-coverage.yml). rmorie's own
@@ -122,14 +123,19 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: ~/.cmdstan
-          key: cmdstan-${{ runner.os }}-v1
+          key: cmdstan-${{ runner.os }}-2.39.0
 
       - name: Install CmdStan (ubuntu release leaf only)
         if: matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release'
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if (is.null(cmdstanr::cmdstan_version(error_on_NA = FALSE))) {
             cmdstanr::check_cmdstan_toolchain(fix = TRUE)
-            cmdstanr::install_cmdstan(cores = 2)
+            # Pinned: querying releases/latest unauthenticated gets rate-limited
+            # on shared runners (main-branch cache misses hit this; PR caches are
+            # branch-scoped and invisible to main).
+            cmdstanr::install_cmdstan(cores = 2, version = "2.39.0")
           }
           cat("CmdStan:", cmdstanr::cmdstan_version(), "\n")
         shell: Rscript {0}

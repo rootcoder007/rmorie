@@ -7,7 +7,8 @@
 morie_tps_urban_scaling_beta(
   category = "Assault",
   year = 2024L,
-  save_fig = TRUE
+  save_fig = TRUE,
+  fig_dir = NULL
 )
 }
 \arguments{
@@ -17,6 +18,9 @@ morie_tps_urban_scaling_beta(
 and crime columns.}
 
 \item{save_fig}{Whether to write a log-log scatter + fit PNG.}
+
+\item{fig_dir}{Directory to write the PNG into; \code{NULL} (the
+default) skips writing and says so in the result.}
 }
 \value{
 A \code{morie_rich_result} with \eqn{\hat\beta}{hatbeta}, its

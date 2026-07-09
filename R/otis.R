@@ -12,10 +12,14 @@
 #' \code{payload} entries.
 #'
 #' Data source: Ontario's public "Data on Inmates in Ontario" detailed
-#' records (Ministry of the Solicitor General), extracted from the
-#' Offender Tracking Information System (OTIS) and released under the
-#' Open Government Licence -- Ontario (Jahn v. Ontario, 2020). The
-#' canonical table has 76,934 rows (FY 2022/23 -- 2024/25). See
+#' records, annually released on the Ontario Data Catalogue under the
+#' Open Government Licence -- Ontario (Jahn v. Ontario, 2020).
+#' Authorship chain: authored by the Service Management and Oversight
+#' Branch; maintained by the Ministry of the Solicitor General
+#' (maintainer branch: Business Intelligence and Insights Branch);
+#' source system: the Offender Tracking Information System (OTIS) --
+#' OTIS names the upstream system, not the download. The canonical
+#' table has 76,934 rows (FY 2022/23 -- 2024/25). See
 #' \code{\link{morie_otis_load}} in \code{otis_analyze.R} for the
 #' canonical loader.
 #'

@@ -51,6 +51,7 @@ jobs:
           # the dependency tree serially here, the same way CRAN builds it.
           # rmorie's own compile (the "Run covr" step below) keeps -j4.
           MAKEFLAGS: "-j1"
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Reinstall rmoriebricklayer (overwrite any cache-restored 0.2.0)
         run: install.packages("rmoriebricklayer", repos = "https://rootcoder007.r-universe.dev")

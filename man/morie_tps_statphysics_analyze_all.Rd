@@ -4,13 +4,20 @@
 \alias{morie_tps_statphysics_analyze_all}
 \title{Run all four statistical-physics analyses on a list of categories}
 \usage{
-morie_tps_statphysics_analyze_all(categories = NULL, save_fig = TRUE)
+morie_tps_statphysics_analyze_all(
+  categories = NULL,
+  save_fig = TRUE,
+  fig_dir = NULL
+)
 }
 \arguments{
 \item{categories}{Character vector of TPS category names; default
 is the canonical nine-category TPS set.}
 
-\item{save_fig}{Whether to ask each sub-routine to write its
+\item{save_fig}{Whether to ask each sub-routine to write its}
+
+\item{fig_dir}{Directory to write the PNG into; \code{NULL} (the
+default) skips writing and says so in the result.
 figure.}
 }
 \value{

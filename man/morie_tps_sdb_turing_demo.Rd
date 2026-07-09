@@ -13,7 +13,8 @@ morie_tps_sdb_turing_demo(
   n_steps = 6000L,
   dt = 0.005,
   n = 80L,
-  save_fig = TRUE
+  save_fig = TRUE,
+  fig_dir = NULL
 )
 }
 \arguments{
@@ -26,6 +27,9 @@ morie_tps_sdb_turing_demo(
 \item{n}{Grid side length.}
 
 \item{save_fig}{Whether to write a 1x3 snapshot panel PNG.}
+
+\item{fig_dir}{Directory to write the PNG into; \code{NULL} (the
+default) skips writing and says so in the result.}
 }
 \value{
 A \code{morie_rich_result} with the steady-state spike
