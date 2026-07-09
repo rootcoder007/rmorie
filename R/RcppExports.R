@@ -49,7 +49,7 @@ morie_crypto_chacha20poly1305_decrypt <- function(key_sxp, nonce_sxp, ct_with_ta
     .Call(`_rmorie_morie_crypto_chacha20poly1305_decrypt`, key_sxp, nonce_sxp, ct_with_tag_sxp, aad_sxp)
 }
 
-morie_crypto_hkdf_sha256 <- function(ikm_sxp, length_sxp, salt_sxp, info_sxp) {
+.rmorie_hkdf_sha256_impl <- function(ikm_sxp, length_sxp, salt_sxp, info_sxp) {
     .Call(`_rmorie_morie_crypto_hkdf_sha256`, ikm_sxp, length_sxp, salt_sxp, info_sxp)
 }
 
