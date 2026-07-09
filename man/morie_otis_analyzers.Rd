@@ -7,7 +7,13 @@
 morie_otis_analyzers()
 }
 \value{
-A named list with elements \code{b01}, \code{b02}, \code{b03}, \code{b04}, \code{b05}, \code{b06}, \code{b07}, \code{b08}, \code{b09}, \code{c01}, \code{c02}, \code{c03}, \code{c04}, \code{c05}, \code{c06}, \code{c07}, \code{c08}, \code{c09}, \code{c10}, \code{c11}, \code{c12}, \code{d01}, \code{d02}, \code{d03}, \code{d04}, \code{d05}, \code{d06}, \code{d07}.
+A named list with elements \code{b01}, \code{b02},
+\code{b03}, \code{b04}, \code{b05}, \code{b06}, \code{b07},
+\code{b08}, \code{b09}, \code{c01}, \code{c02}, \code{c03},
+\code{c04}, \code{c05}, \code{c06}, \code{c07}, \code{c08},
+\code{c09}, \code{c10}, \code{c11}, \code{c12}, \code{d01},
+\code{d02}, \code{d03}, \code{d04}, \code{d05}, \code{d06},
+\code{d07}.
 }
 \description{
 Mirrors \code{_ANALYSES} in

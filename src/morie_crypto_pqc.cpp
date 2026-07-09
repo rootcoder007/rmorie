@@ -34,7 +34,7 @@ static void morie_oqs_ready() {
 }
 #endif
 
-// [[Rcpp::export]]
+// [[Rcpp::export(name = ".rmorie_liboqs_available_impl")]]
 bool morie_crypto_liboqs_available() {
 #ifdef MORIE_HAVE_LIBOQS
   return true;
@@ -43,7 +43,7 @@ bool morie_crypto_liboqs_available() {
 #endif
 }
 
-// [[Rcpp::export]]
+// [[Rcpp::export(name = ".rmorie_liboqs_version_impl")]]
 std::string morie_crypto_liboqs_version() {
 #ifdef MORIE_HAVE_LIBOQS
   morie_oqs_ready();
@@ -63,7 +63,7 @@ std::string morie_crypto_liboqs_version() {
 //   ciphertext  : 1088 bytes
 //   shared sec  :   32 bytes
 
-// [[Rcpp::export]]
+// [[Rcpp::export(name = ".rmorie_mlkem768_keygen_impl")]]
 Rcpp::List morie_crypto_mlkem768_keygen() {
 #ifdef MORIE_HAVE_LIBOQS
   morie_oqs_ready();
@@ -86,7 +86,7 @@ Rcpp::List morie_crypto_mlkem768_keygen() {
 #endif
 }
 
-// [[Rcpp::export]]
+// [[Rcpp::export(name = ".rmorie_mlkem768_encaps_impl")]]
 Rcpp::List morie_crypto_mlkem768_encaps(SEXP pk_sxp) {
 #ifdef MORIE_HAVE_LIBOQS
   morie_oqs_ready();
@@ -115,7 +115,7 @@ Rcpp::List morie_crypto_mlkem768_encaps(SEXP pk_sxp) {
 #endif
 }
 
-// [[Rcpp::export]]
+// [[Rcpp::export(name = ".rmorie_mlkem768_decaps_impl")]]
 SEXP morie_crypto_mlkem768_decaps(SEXP sk_sxp, SEXP ct_sxp) {
 #ifdef MORIE_HAVE_LIBOQS
   morie_oqs_ready();
@@ -155,7 +155,7 @@ SEXP morie_crypto_mlkem768_decaps(SEXP sk_sxp, SEXP ct_sxp) {
 //   secret key  : 4032 bytes
 //   signature   : 3309 bytes (max; actual is variable up to this)
 
-// [[Rcpp::export]]
+// [[Rcpp::export(name = ".rmorie_mldsa65_keygen_impl")]]
 Rcpp::List morie_crypto_mldsa65_keygen() {
 #ifdef MORIE_HAVE_LIBOQS
   morie_oqs_ready();
@@ -177,7 +177,7 @@ Rcpp::List morie_crypto_mldsa65_keygen() {
 #endif
 }
 
-// [[Rcpp::export]]
+// [[Rcpp::export(name = ".rmorie_mldsa65_sign_impl")]]
 SEXP morie_crypto_mldsa65_sign(SEXP sk_sxp, SEXP message_sxp) {
 #ifdef MORIE_HAVE_LIBOQS
   morie_oqs_ready();
@@ -213,7 +213,7 @@ SEXP morie_crypto_mldsa65_sign(SEXP sk_sxp, SEXP message_sxp) {
 #endif
 }
 
-// [[Rcpp::export]]
+// [[Rcpp::export(name = ".rmorie_mldsa65_verify_impl")]]
 bool morie_crypto_mldsa65_verify(SEXP pk_sxp, SEXP message_sxp,
                                    SEXP signature_sxp) {
 #ifdef MORIE_HAVE_LIBOQS
