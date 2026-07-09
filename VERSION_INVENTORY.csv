@@ -173,7 +173,7 @@ File,Line,Status,Version,Context
 ./man/morie_van_der_waerden_test.Rd,6,STALE_OR_DEP,8.3.2,"(Gibbons Ch 8.3.2)}"
 ./man/morie_wilcoxon_power.Rd,6,STALE_OR_DEP,5.7.3,"(Gibbons Ch 5.7.3)}"
 ./man/normality_suite.Rd,16,STALE_OR_DEP,0.9.6,"Internal Shapiro-Wilk and Jarque-Bera helpers were removed in v0.9.6;"
-./src/morie_crypto_sym.cpp,158,STALE_OR_DEP,1.0.20,"// libsodium's crypto_kdf_hkdf_sha256_* arrived in v1.0.20. Fall back"
+./src/morie_crypto_sym.cpp,162,STALE_OR_DEP,1.0.20,"// libsodium's crypto_kdf_hkdf_sha256_* arrived in v1.0.20. Fall back"
 ./src/morie_fast.cpp,3,STALE_OR_DEP,0.9.1,"// Since v0.9.1 these functions are thin Rcpp adapters over the shared"
 ./src/morie_hawkes.cpp,59,STALE_OR_DEP,0.9.5.6,"// v0.9.5.6+: scipy.stats.lomax convention."
 ./src/morie_hawkes.cpp,87,STALE_OR_DEP,0.9.5.6,"// v0.9.5.6+: scipy convention 1 - (c/(u+c))^alpha (was: alpha-1)."
