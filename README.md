@@ -6,9 +6,6 @@
 [![r-universe](https://rootcoder007.r-universe.dev/badges/rmorie)](https://rootcoder007.r-universe.dev/rmorie)
 [![CI](https://github.com/rootcoder007/rmorie/actions/workflows/build.yml/badge.svg)](https://github.com/rootcoder007/rmorie/actions/workflows/build.yml)
 [![Codecov test coverage](https://codecov.io/gh/rootcoder007/rmorie/graph/badge.svg)](https://app.codecov.io/gh/rootcoder007/rmorie)
-[![CRAN status](https://www.r-pkg.org/badges/version/rmorie)](https://CRAN.R-project.org/package=rmorie)
-[![CRAN total downloads](https://cranlogs.r-pkg.org/badges/grand-total/rmorie)](https://CRAN.R-project.org/package=rmorie)
-[![CRAN monthly downloads](https://cranlogs.r-pkg.org/badges/rmorie)](https://CRAN.R-project.org/package=rmorie)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 <!-- badges: end -->
 
