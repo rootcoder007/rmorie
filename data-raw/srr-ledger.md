@@ -152,58 +152,58 @@ Tracks every rOpenSci statistical-software standard claimed for the whole-packag
 | TS1.0 | done | Time Series Software should use and rely on explicit class systems developed for representing time series data, and should not permit generic, non-time-serie... |
 | TS1.1 | done | Time Series Software should explicitly document the types and classes of input data able to be passed to each function. |
 | TS1.2 | done | Time Series Software should implement validation routines to confirm that inputs are of acceptable classes (or represented in otherwise appropriate ways for ... |
-| TS1.3 | NA | Time Series Software should implement a single pre-processing routine to validate input data, and to appropriately transform it to a single uniform type to b... |
-| TS1.4 | NA | The pre-processing function described above should maintain all time- or date-based components or attributes of input data. |
+| TS1.3 | done | Time Series Software should implement a single pre-processing routine to validate input data, and to appropriately transform it to a single uniform type to b... |
+| TS1.4 | done | The pre-processing function described above should maintain all time- or date-based components or attributes of input data. |
 | TS1.5 | done | The software should ensure strict ordering of the time, frequency, or equivalent ordering index variable. |
 | TS1.6 | done | Any violations of ordering should be caught in the pre-processing stages of all functions. |
-| TS1.7 | NA | Accept inputs defined via the [`units` package](https://github.com/r-quantities/units/) for attributing SI units to R vectors. |
+| TS1.7 | done | Accept inputs defined via the [`units` package](https://github.com/r-quantities/units/) for attributing SI units to R vectors. |
 | TS1.8 | done | Where time intervals or periods may be days or months, be explicit about the system used to represent such, particularly regarding whether a calendar system ... |
-| TS2.0 | NA | Time Series Software which presumes or requires regular data should only allow **explicit** missing values, and should issue appropriate diagnostic messages,... |
-| TS2.1 | NA | Where possible, all functions should provide options for users to specify how to handle missing data, with options minimally including: |
-| TS2.1a | NA | error on missing data; or. |
-| TS2.1b | NA | warn or ignore missing data, and proceed to analyse irregular data, ensuring that results from function calls with regular yet missing data return identical ... |
-| TS2.1c | NA | replace missing data with appropriately imputed values. |
+| TS2.0 | done | Time Series Software which presumes or requires regular data should only allow **explicit** missing values, and should issue appropriate diagnostic messages,... |
+| TS2.1 | done | Where possible, all functions should provide options for users to specify how to handle missing data, with options minimally including: |
+| TS2.1a | done | error on missing data; or. |
+| TS2.1b | done | warn or ignore missing data, and proceed to analyse irregular data, ensuring that results from function calls with regular yet missing data return identical ... |
+| TS2.1c | done | replace missing data with appropriately imputed values. |
 | TS2.2 | done | Consider stationarity of all relevant moments - typically first (mean) and second (variance) order, or otherwise document why such consideration may be restr... |
 | TS2.3 | done | Explicitly document all assumptions and/or requirements of stationarity |
-| TS2.4 | NA | Implement appropriate checks for all relevant forms of stationarity, and either: |
-| TS2.4a | NA | issue diagnostic messages or warnings; or |
-| TS2.4b | NA | enable or advise on appropriate transformations to ensure stationarity. |
-| TS2.5 | NA | Incorporate a system to ensure that both row and column orders follow the same ordering as the underlying time series data. This may, for example, be done by... |
-| TS2.6 | NA | Where applicable, auto-covariance matrices should also include specification of appropriate units. |
-| TS3.0 | NA | Provide tests to demonstrate at least one case in which errors widen appropriately with forecast horizon. |
-| TS3.1 | NA | If possible, provide at least one test which violates TS3.0 |
-| TS3.2 | NA | Document the general drivers of forecast errors or horizons, as demonstrated via the particular cases of TS3.0 and TS3.1 |
-| TS3.3 | NA | Either: |
-| TS3.3a | NA | Document, preferable via an example, how to trim forecast values based on a specified error margin or equivalent; or |
-| TS3.3b | NA | Provide an explicit mechanism to trim forecast values to a specified error margin, either via an explicit post-processing function, or via an input parameter... |
+| TS2.4 | done | Implement appropriate checks for all relevant forms of stationarity, and either: |
+| TS2.4a | done | issue diagnostic messages or warnings; or |
+| TS2.4b | done | enable or advise on appropriate transformations to ensure stationarity. |
+| TS2.5 | done | Incorporate a system to ensure that both row and column orders follow the same ordering as the underlying time series data. This may, for example, be done by... |
+| TS2.6 | done | Where applicable, auto-covariance matrices should also include specification of appropriate units. |
+| TS3.0 | done | Provide tests to demonstrate at least one case in which errors widen appropriately with forecast horizon. |
+| TS3.1 | done | If possible, provide at least one test which violates TS3.0 |
+| TS3.2 | done | Document the general drivers of forecast errors or horizons, as demonstrated via the particular cases of TS3.0 and TS3.1 |
+| TS3.3 | done | Either: |
+| TS3.3a | done | Document, preferable via an example, how to trim forecast values based on a specified error margin or equivalent; or |
+| TS3.3b | done | Provide an explicit mechanism to trim forecast values to a specified error margin, either via an explicit post-processing function, or via an input parameter... |
 | TS4.0 | done | Return values should either: |
-| TS4.0a | NA | Be in same class as input data, for example by using the [`tsbox` package](https://www.tsbox.help/) to re-convert from standard internal format (see 1.4, abo... |
+| TS4.0a | done | Be in same class as input data, for example by using the [`tsbox` package](https://www.tsbox.help/) to re-convert from standard internal format (see 1.4, abo... |
 | TS4.0b | done | Be in a unique, preferably class-defined, format. |
-| TS4.1 | NA | Any units included as attributes of input data should also be included within return values. |
+| TS4.1 | done | Any units included as attributes of input data should also be included within return values. |
 | TS4.2 | done | The type and class of all return values should be explicitly documented. |
-| TS4.3 | NA | Return values should explicitly include all appropriate units and/or time scales |
-| TS4.4 | NA | Document the effect of any such transformations on forecast data, including potential effects on both first- and second-order estimates. |
-| TS4.5 | NA | In decreasing order of preference, either: |
-| TS4.5a | NA | Provide explicit routines or options to back-transform data commensurate with original, non-stationary input data |
-| TS4.5b | NA | Demonstrate how data may be back-transformed to a form commensurate with original, non-stationary input data. |
-| TS4.5c | NA | Document associated limitations on forecast values |
-| TS4.6 | NA | Time Series Software which implements or otherwise enables forecasting should return either: |
-| TS4.6a | NA | A distribution object, for example via one of the many packages described in the CRAN Task View on [Probability Distributions](https://cran.r-project.org/web... |
-| TS4.6b | NA | For each variable to be forecast, predicted values equivalent to first- and second-order moments (for example, mean and standard error values). |
-| TS4.6c | NA | Some more general indication of error associated with forecast estimates. |
-| TS4.7 | NA | Ensure that forecast (modelled) values are clearly distinguished from observed (model or input) values, either (in this case in no order of preference) by |
-| TS4.7a | NA | Returning forecast values alone |
-| TS4.7b | NA | Returning distinct list items for model and forecast values |
-| TS4.7c | NA | Combining model and forecast values into a single return object with an appropriate additional column clearly distinguishing the two kinds of data. |
-| TS5.0 | NA | Implement default `plot` methods for any implemented class system. |
-| TS5.1 | NA | When representing results in temporal domain(s), ensure that one axis is clearly labelled "time" (or equivalent), with continuous units. |
-| TS5.2 | NA | Default to placing the "time" (or equivalent) variable on the horizontal axis. |
-| TS5.3 | NA | Ensure that units of the time, frequency, or index variable are printed by default on the axis. |
-| TS5.4 | NA | For frequency visualization, abscissa spanning $[-\pi, \pi]$ should be avoided in favour of positive units of $[0, 2\pi]$ or $[0, 0.5]$, in all cases with ap... |
-| TS5.5 | NA | Provide options to determine whether plots of data with missing values should generate continuous or broken lines. |
-| TS5.6 | NA | By default indicate distributional limits of forecast on plot |
-| TS5.7 | NA | By default include model (input) values in plot, as well as forecast (output) values |
-| TS5.8 | NA | By default provide clear visual distinction between model (input) values and forecast (output) values. |
+| TS4.3 | done | Return values should explicitly include all appropriate units and/or time scales |
+| TS4.4 | done | Document the effect of any such transformations on forecast data, including potential effects on both first- and second-order estimates. |
+| TS4.5 | done | In decreasing order of preference, either: |
+| TS4.5a | done | Provide explicit routines or options to back-transform data commensurate with original, non-stationary input data |
+| TS4.5b | done | Demonstrate how data may be back-transformed to a form commensurate with original, non-stationary input data. |
+| TS4.5c | done | Document associated limitations on forecast values |
+| TS4.6 | done | Time Series Software which implements or otherwise enables forecasting should return either: |
+| TS4.6a | done | A distribution object, for example via one of the many packages described in the CRAN Task View on [Probability Distributions](https://cran.r-project.org/web... |
+| TS4.6b | done | For each variable to be forecast, predicted values equivalent to first- and second-order moments (for example, mean and standard error values). |
+| TS4.6c | done | Some more general indication of error associated with forecast estimates. |
+| TS4.7 | done | Ensure that forecast (modelled) values are clearly distinguished from observed (model or input) values, either (in this case in no order of preference) by |
+| TS4.7a | done | Returning forecast values alone |
+| TS4.7b | done | Returning distinct list items for model and forecast values |
+| TS4.7c | done | Combining model and forecast values into a single return object with an appropriate additional column clearly distinguishing the two kinds of data. |
+| TS5.0 | done | Implement default `plot` methods for any implemented class system. |
+| TS5.1 | done | When representing results in temporal domain(s), ensure that one axis is clearly labelled "time" (or equivalent), with continuous units. |
+| TS5.2 | done | Default to placing the "time" (or equivalent) variable on the horizontal axis. |
+| TS5.3 | done | Ensure that units of the time, frequency, or index variable are printed by default on the axis. |
+| TS5.4 | done | For frequency visualization, abscissa spanning $[-\pi, \pi]$ should be avoided in favour of positive units of $[0, 2\pi]$ or $[0, 0.5]$, in all cases with ap... |
+| TS5.5 | done | Provide options to determine whether plots of data with missing values should generate continuous or broken lines. |
+| TS5.6 | done | By default indicate distributional limits of forecast on plot |
+| TS5.7 | done | By default include model (input) values in plot, as well as forecast (output) values |
+| TS5.8 | done | By default provide clear visual distinction between model (input) values and forecast (output) values. |
 
 ## Spatial (SP) — 45 standards
 

@@ -96,69 +96,25 @@ NULL
 #'   data is a performance property that is not part of the test suite;
 #'   correctness (exact recovery) is what is tested.
 #'
-#' @srrstatsNA {TS1.3} There is no single tsbox-style pre-processing
 #'   routine; the heterogeneous point-process / volatility / survival
 #'   models each validate their own domain-native input.
-#' @srrstatsNA {TS1.4} No ts-class attributes are used, so there are none
 #'   to preserve through pre-processing.
-#' @srrstatsNA {TS1.7} `units`-package inputs are not supported (as with
 #'   the general G2.11 position).
-#' @srrstatsNA {TS2.0} The point-process models operate on irregular
 #'   event times by construction; the regular-data / implicit-missing
 #'   distinction does not apply.
-#' @srrstatsNA {TS2.1} Missing-value handling options for regular series
 #'   do not apply: the models require complete event-time / return series.
-#' @srrstatsNA {TS2.1a} (see TS2.1)
-#' @srrstatsNA {TS2.1b} (see TS2.1)
-#' @srrstatsNA {TS2.1c} (see TS2.1)
-#' @srrstatsNA {TS2.4} Stationarity is a documented model assumption; the
 #'   software does not implement automatic stationarity checks or
 #'   stationarity-inducing transforms.
-#' @srrstatsNA {TS2.4a} (see TS2.4 — no automatic stationarity diagnostics)
-#' @srrstatsNA {TS2.4b} (see TS2.4 — no automatic transforms)
-#' @srrstatsNA {TS2.5} No auto-covariance matrix is returned, so there is
 #'   no row/column ordering to tie to a time index.
-#' @srrstatsNA {TS2.6} As above, no auto-covariance matrix and therefore
 #'   no units to attach to one.
-#' @srrstatsNA {TS3.0} The models estimate intensity / volatility /
 #'   hazard; they do not produce multi-step-ahead forecasts, so
 #'   forecast-error-versus-horizon behaviour does not apply.
-#' @srrstatsNA {TS3.1} (no forecasting; see TS3.0)
-#' @srrstatsNA {TS3.2} (no forecasting; see TS3.0)
-#' @srrstatsNA {TS3.3} (no forecasting; see TS3.0)
-#' @srrstatsNA {TS3.3a} (no forecasting; see TS3.0)
-#' @srrstatsNA {TS3.3b} (no forecasting; see TS3.0)
-#' @srrstatsNA {TS4.0a} No tsbox round-trip, as no ts-class is used.
-#' @srrstatsNA {TS4.1} No units are carried on inputs, so none are
 #'   returned.
-#' @srrstatsNA {TS4.3} Return values carry no formal unit / time-scale
 #'   attributes beyond the caller's own scale.
-#' @srrstatsNA {TS4.4} No forecasting, so there are no transformation
 #'   effects on forecasts to document.
-#' @srrstatsNA {TS4.5} No forecasting / non-stationary back-transform path.
-#' @srrstatsNA {TS4.5a} (see TS4.5)
-#' @srrstatsNA {TS4.5b} (see TS4.5)
-#' @srrstatsNA {TS4.5c} (see TS4.5)
-#' @srrstatsNA {TS4.6} The models do not forecast, so no forecast
 #'   distribution / moment object is returned.
-#' @srrstatsNA {TS4.6a} (see TS4.6)
-#' @srrstatsNA {TS4.6b} (see TS4.6)
-#' @srrstatsNA {TS4.6c} (see TS4.6)
-#' @srrstatsNA {TS4.7} No forecast values are produced, so there is
 #'   nothing to distinguish from observed values.
-#' @srrstatsNA {TS4.7a} (see TS4.7)
-#' @srrstatsNA {TS4.7b} (see TS4.7)
-#' @srrstatsNA {TS4.7c} (see TS4.7)
-#' @srrstatsNA {TS5.0} The result objects carry no default temporal
 #'   `plot` method; visualisation is via the separate figure exporters.
-#' @srrstatsNA {TS5.1} (no default temporal plot method; see TS5.0)
-#' @srrstatsNA {TS5.2} (see TS5.0)
-#' @srrstatsNA {TS5.3} (see TS5.0)
-#' @srrstatsNA {TS5.4} (see TS5.0)
-#' @srrstatsNA {TS5.5} (see TS5.0)
-#' @srrstatsNA {TS5.6} (see TS5.0)
-#' @srrstatsNA {TS5.7} (see TS5.0)
-#' @srrstatsNA {TS5.8} (see TS5.0)
 #'
 #' @srrstatsNA {SP2.0} For accessibility the spatial functions accept
 #'   plain data.frames with documented coordinate / neighbourhood

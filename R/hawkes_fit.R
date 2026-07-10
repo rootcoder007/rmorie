@@ -1,47 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' srr time-series (TS) standards
-#'
-#' rmorie's time-domain methods are estimation models — self-exciting
-#' (Hawkes) point processes, GARCH volatility, and survival/time-to-event
-#' — rather than regular-series horizon forecasters. The TS standards that
-#' apply to that estimation paradigm are addressed here; the standards
-#' assuming a formal ts/tsibble class system, regular-series imputation,
-#' multi-step forecasting with prediction intervals, or default temporal
-#' plot methods are declared not-applicable in the NA_standards block of
-#' `srr-stats-standards.R`, with reasons.
-#'
-#' @srrstats {TS1.0} The time-domain input is an explicit numeric vector
-#'   of event times (point processes) or a numeric return series (GARCH);
-#'   using these domain-native representations rather than a generic
-#'   ts-class is a documented design choice for point-process software.
-#' @srrstats {TS1.1} The accepted input types/classes are documented on
-#'   each function's `@param` (e.g. `times` is a sorted numeric vector).
-#' @srrstats {TS1.2} Inputs are validated: `morie_hawkes_fit` requires
-#'   sorted, non-decreasing, non-NA event times and errors otherwise;
-#'   numeric series pass through `.morie_check_numvec`.
-#' @srrstats {TS1.5} Strict ordering of the time index is required — event
-#'   times must be non-decreasing.
-#' @srrstats {TS1.6} Ordering violations are caught in pre-processing
-#'   (an unsorted `times` vector is rejected with an informative error).
-#' @srrstats {TS1.8} Time units are the caller's own; functions document
-#'   that intensities/rates are expressed per unit of the supplied time
-#'   scale, making no implicit calendar assumption.
-#' @srrstats {TS2.2} Stationarity of the relevant moment is treated
-#'   explicitly: GARCH models the conditional second moment (variance),
-#'   and the Hawkes stationarity condition (branching ratio < 1) is
-#'   documented.
-#' @srrstats {TS2.3} Stationarity assumptions are documented per model
-#'   (GARCH covariance-stationarity; Hawkes sub-criticality).
-#' @srrstats {TS4.0} Return values use a defined result structure.
-#' @srrstats {TS4.0b} Results are returned in a unique, class-defined
-#'   format (`morie_rich_result` / the Hawkes fit object with `loglik`,
-#'   `aic`, `converged`, `backend`).
-#' @srrstats {TS4.2} The type and class of return values are documented
-#'   in each function's `@return`.
-#' @noRd
-NULL
-
 # --- R-side Hawkes-process fitter (v0.9.1, task #74) ----------------------
 #
 # Fits a self-exciting (Hawkes) point process to event times by maximum
