@@ -508,6 +508,18 @@ morie_ml_train <- function(model, x, y, verbose = FALSE) {
   if (anyNA(X) || anyNA(y)) stop("`x`/`y` contain missing values; impute first",
                                  call. = FALSE)
   L <- .ml_loss[[model$loss]]
+  # Standardise the feature columns (not the intercept) so the optimiser
+  # converges regardless of feature scale; the fitted weights are mapped
+  # back to the raw scale below so predict() works on untransformed data.
+  feats <- seq_len(ncol(X))[-1]
+  ctr <- if (length(feats)) colMeans(X[, feats, drop = FALSE]) else numeric(0)
+  scl <- if (length(feats)) apply(X[, feats, drop = FALSE], 2, stats::sd)
+         else numeric(0)
+  scl[!is.finite(scl) | scl == 0] <- 1
+  Xs <- X
+  if (length(feats)) {
+    Xs[, feats] <- sweep(sweep(X[, feats, drop = FALSE], 2, ctr), 2, scl, "/")
+  }
   set.seed(model$seed)
   w <- rep(0, ncol(X))
   loss_path <- numeric(model$epochs)
@@ -516,13 +528,13 @@ morie_ml_train <- function(model, x, y, verbose = FALSE) {
   converged <- FALSE
   for (ep in seq_len(model$epochs)) {
     if (model$optimizer == "sgd") {
-      idx_batches <- split(sample(nrow(X)),
-                           ceiling(seq_len(nrow(X)) / model$batch_size))
+      idx_batches <- split(sample(nrow(Xs)),
+                           ceiling(seq_len(nrow(Xs)) / model$batch_size))
     } else {
-      idx_batches <- list(seq_len(nrow(X)))
+      idx_batches <- list(seq_len(nrow(Xs)))
     }
     for (bi in idx_batches) {
-      Xb <- X[bi, , drop = FALSE]; yb <- y[bi]
+      Xb <- Xs[bi, , drop = FALSE]; yb <- y[bi]
       p <- L$link(as.numeric(Xb %*% w))
       g <- as.numeric(L$grad(Xb, p, yb)) + model$l2 * w
       grad_norm <- c(grad_norm, sqrt(sum(g^2)))
@@ -536,12 +548,20 @@ morie_ml_train <- function(model, x, y, verbose = FALSE) {
         w <- w - model$learning_rate * g
       }
     }
-    p_full <- L$link(as.numeric(X %*% w))
+    p_full <- L$link(as.numeric(Xs %*% w))
     loss_path[ep] <- L$loss(p_full, y) + model$l2 * sum(w^2) / 2
     if (verbose) message(sprintf("epoch %d loss %.6f", ep, loss_path[ep]))
+    if (!is.finite(loss_path[ep])) {  # diverged; stop before NA-comparing
+      loss_path <- loss_path[seq_len(ep)]; converged <- FALSE; break
+    }
     if (ep > 1 && abs(loss_path[ep - 1] - loss_path[ep]) < model$tol) {
       loss_path <- loss_path[seq_len(ep)]; converged <- TRUE; break
     }
+  }
+  # Map weights from standardised space back to the raw feature scale.
+  if (length(feats)) {
+    w[feats] <- w[feats] / scl
+    w[1] <- w[1] - sum(w[feats] * ctr)
   }
   fit <- list(weights = stats::setNames(w, colnames(X)),
               loss_path = loss_path, grad_norm = grad_norm,
