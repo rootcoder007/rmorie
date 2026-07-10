@@ -21,33 +21,23 @@ NULL
 #' for why each of these standards have been deemed not applicable.
 #' (These comments may also be deleted at any time.)
 #'
-#' @srrstatsNA {G2.5} No estimator distinguishes ordered from unordered
 #'   factors; categorical predictors are treated as unordered, so the
 #'   `ordered` factor expectations do not apply.
-#' @srrstatsNA {G2.11} rmorie does not support `units`-style columns with
 #'   non-standard class attributes; tabular inputs are plain numeric /
 #'   character / factor columns.
-#' @srrstatsNA {G5.4c} Correctness is established by parameter recovery
 #'   from simulated data and by cross-implementation parity (R vs the
 #'   Python port, and wrappers vs their upstream CRAN packages), not by
 #'   stored outputs from a published reference implementation.
-#' @srrstatsNA {G5.7} Algorithm performance / scaling with data size is
 #'   not part of the test suite; the tested property is statistical
 #'   correctness, not computational scaling.
-#' @srrstatsNA {G5.10} There is no extended-test switch (e.g. an
 #'   environment variable gating a slower test tier); all tests run in
 #'   the standard suite.
-#' @srrstatsNA {G5.11} No tests require large downloaded data, so there
 #'   is no separate extended-data test tier.
-#' @srrstatsNA {G5.11a} As no downloaded data is needed for tests, there
 #'   is no download helper for reproducing them.
-#' @srrstatsNA {G5.12} There are no extended-test conditions to document,
 #'   as there is no extended-test tier.
-#' @srrstatsNA {G1.5} No associated publication makes performance claims;
 #'   the methods/applications paper is in preparation and reports no
 #'   comparative benchmarks, so there are no performance results to
 #'   reproduce.
-#' @srrstatsNA {G1.6} rmorie makes no performance claims against
 #'   alternative R packages, so no comparative-performance code applies.
 #' @srrstatsNA {RE2.2} The estimators use complete-case selection; they
 #'   do not offer separate missing-value handling for predictor versus
