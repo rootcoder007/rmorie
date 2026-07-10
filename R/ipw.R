@@ -67,9 +67,12 @@ morie_run_propensity_ipw_analysis <- function(
   needed <- unique(c(treatment, outcome, covariates, "weight"))
   frame <- stats::na.omit(data[, needed, drop = FALSE])
 
-  ps_formula <- stats::as.formula(
-    paste(treatment, "~", paste(covariates, collapse = " + "))
-  )
+  covariates <- .viable_terms(frame, covariates)
+  ps_formula <- if (length(covariates) == 0L) {
+    stats::as.formula(paste(treatment, "~ 1"))
+  } else {
+    stats::as.formula(paste(treatment, "~", paste(covariates, collapse = " + ")))
+  }
   ps_model <- stats::glm(ps_formula, data = frame, family = stats::binomial())
   frame$ps <- pmin(pmax(stats::predict(ps_model, type = "response"), 0.01), 0.99)
   frame$ipw <- ifelse(frame[[treatment]] == 1, 1 / frame$ps, 1 / (1 - frame$ps))

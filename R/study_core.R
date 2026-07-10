@@ -2,6 +2,32 @@
   data[stats::complete.cases(data[, cols, drop = FALSE]), cols, drop = FALSE]
 }
 
+# Keep only model terms with variation in `data`: factors need >= 2 observed
+# levels, other columns >= 2 unique non-NA values. Degenerate terms (common
+# in small or synthetic CPADS extracts) otherwise abort model.matrix with
+# "contrasts can be applied only to factors with 2 or more levels".
+.viable_terms <- function(data, terms) {
+  keep <- vapply(terms, function(t) {
+    v <- data[[t]]
+    if (is.null(v)) return(FALSE)
+    v <- v[!is.na(v)]
+    if (is.factor(v)) nlevels(droplevels(v)) >= 2L else length(unique(v)) >= 2L
+  }, logical(1))
+  dropped <- terms[!keep]
+  if (length(dropped) > 0L) {
+    warning("dropping model terms with a single observed level: ",
+            paste(dropped, collapse = ", "), call. = FALSE)
+  }
+  terms[keep]
+}
+
+# reformulate() with degenerate-term protection; intercept-only on total loss.
+.robust_formula <- function(response, terms, data) {
+  terms <- .viable_terms(data, terms)
+  if (length(terms) == 0L) return(stats::as.formula(paste(response, "~ 1")))
+  stats::reformulate(terms, response = response)
+}
+
 .safe_divide <- function(num, den) {
   if (is.na(den) || den == 0) {
     return(NA_real_)
@@ -298,6 +324,7 @@
   prevalence_rows <- list()
   for (lvl in levels(data$gender_label)) {
     subset <- data[data$gender_label == lvl & !is.na(data$heavy_drinking_30d), ]
+    if (nrow(subset) == 0L) next  # level absent in this (synthetic) extract
     est <- .weighted_binary_estimate(subset$heavy_drinking_30d, subset$weight)
     prevalence_rows[[length(prevalence_rows) + 1L]] <- data.frame(
       variable = "heavy_drinking_30d",
@@ -313,8 +340,11 @@
   effect_rows <- list()
   gsum <- do.call(rbind, lapply(levels(data$gender_label), function(lvl) {
     subset <- data[data$gender_label == lvl & !is.na(data$heavy_drinking_30d), ]
-    data.frame(level = lvl, p = .weighted_binary_estimate(subset$heavy_drinking_30d, subset$weight)$p, stringsAsFactors = FALSE)
+    if (nrow(subset) == 0L) return(NULL)
+    data.frame(level = lvl, p = .weighted_binary_estimate(subset$heavy_drinking_30d, subset$weight)$p,
+               n = nrow(subset), stringsAsFactors = FALSE)
   }))
+  if (is.null(gsum)) gsum <- data.frame(level = character(), p = numeric(), n = integer())
   if (nrow(gsum) >= 2L) {
     cmb <- utils::combn(gsum$level, 2, simplify = FALSE)
     for (pair in cmb) {
@@ -334,7 +364,15 @@
     }
   }
   test_rows <- list()
-  chi <- stats::chisq.test(table(data$cannabis_any_use, data$heavy_drinking_30d))
+  chi_tab <- table(data$cannabis_any_use, data$heavy_drinking_30d)
+  if (all(dim(chi_tab) >= 2L)) {
+    chi <- stats::chisq.test(chi_tab)
+  } else {
+    warning("skipping chi-square test: cannabis_any_use x heavy_drinking_30d ",
+            "table is degenerate (needs 2x2)", call. = FALSE)
+    chi <- list(statistic = NA_real_, parameter = NA_real_, p.value = NA_real_,
+                method = "skipped: degenerate table")
+  }
   test_rows[[1L]] <- data.frame(
     test_name = "Cannabis vs heavy drinking independence",
     comparison = "cannabis_any_use x heavy_drinking_30d",
@@ -353,10 +391,18 @@
     first_two <- gsum$level[1:2]
     s1 <- data[data$gender_label == first_two[1] & !is.na(data$heavy_drinking_30d), ]
     s2 <- data[data$gender_label == first_two[2] & !is.na(data$heavy_drinking_30d), ]
-    pt <- stats::prop.test(
-      x = c(sum(s1$heavy_drinking_30d == 1, na.rm = TRUE), sum(s2$heavy_drinking_30d == 1, na.rm = TRUE)),
-      n = c(sum(!is.na(s1$heavy_drinking_30d)), sum(!is.na(s2$heavy_drinking_30d)))
-    )
+    pt_n <- c(sum(!is.na(s1$heavy_drinking_30d)), sum(!is.na(s2$heavy_drinking_30d)))
+    if (all(pt_n > 0L)) {
+      pt <- stats::prop.test(
+        x = c(sum(s1$heavy_drinking_30d == 1, na.rm = TRUE), sum(s2$heavy_drinking_30d == 1, na.rm = TRUE)),
+        n = pt_n
+      )
+    } else {
+      warning("skipping two-proportion test: a gender group has no ",
+              "non-missing heavy_drinking_30d observations", call. = FALSE)
+      pt <- list(statistic = NA_real_, parameter = NA_real_, p.value = NA_real_,
+                 method = "skipped: empty group")
+    }
     test_rows[[2L]] <- data.frame(
       test_name = "Heavy drinking by gender",
       comparison = paste(first_two, collapse = " vs "),
@@ -558,8 +604,14 @@
     data[data$alcohol_past12m == 1, , drop = FALSE],
     c("ebac_tot", "cannabis_any_use", "heavy_drinking_30d", "age_group_label", "gender_label", "province_region_label", "mental_health_label", "physical_health_label", "weight")
   )
-  fit_primary <- stats::lm(ebac_tot ~ cannabis_any_use + age_group_label + gender_label + province_region_label + mental_health_label + physical_health_label, data = frame, weights = weight)
-  fit_sens <- stats::lm(ebac_tot ~ cannabis_any_use + heavy_drinking_30d + age_group_label + gender_label + province_region_label + mental_health_label + physical_health_label, data = frame, weights = weight)
+  demog <- c("age_group_label", "gender_label", "province_region_label",
+             "mental_health_label", "physical_health_label")
+  fit_primary <- stats::lm(
+    .robust_formula("ebac_tot", c("cannabis_any_use", demog), frame),
+    data = frame, weights = weight)
+  fit_sens <- stats::lm(
+    .robust_formula("ebac_tot", c("cannabis_any_use", "heavy_drinking_30d", demog), frame),
+    data = frame, weights = weight)
   coef_tbl <- function(fit, model) {
     sm <- summary(fit)$coefficients
     ci <- .safe_confint(fit)
@@ -621,7 +673,10 @@
   se_ipw <- prop_out$ipw_results$se[1]
 
   out_model <- stats::glm(
-    heavy_drinking_30d ~ cannabis_any_use + age_group_label + gender_label + province_region_label + mental_health_label + physical_health_label,
+    .robust_formula("heavy_drinking_30d",
+                    c("cannabis_any_use", "age_group_label", "gender_label",
+                      "province_region_label", "mental_health_label",
+                      "physical_health_label"), frame),
     data = frame,
     family = stats::quasibinomial(),
     weights = weight
@@ -658,7 +713,9 @@
     c("heavy_drinking_30d", "cannabis_any_use", "age_group_label", "gender_label", "province_region_label", "mental_health_label", "physical_health_label", "weight")
   )
   ps_model <- stats::glm(
-    cannabis_any_use ~ age_group_label + gender_label + province_region_label + mental_health_label + physical_health_label,
+    .robust_formula("cannabis_any_use",
+                    c("age_group_label", "gender_label", "province_region_label",
+                      "mental_health_label", "physical_health_label"), frame),
     data = frame,
     family = stats::binomial()
   )
@@ -822,37 +879,44 @@
     note = c("drinkers available", "ebac domain observed", "survey weights are positive", "both treatment classes observed"),
     stringsAsFactors = FALSE
   )
+  demog <- c("age_group_label", "gender_label", "province_region_label",
+             "mental_health_label", "physical_health_label")
+  eligible$.ebac_missing <- is.na(eligible$ebac_tot)
   miss_fit <- stats::glm(
-    I(is.na(ebac_tot)) ~ cannabis_any_use + age_group_label + gender_label + province_region_label + mental_health_label + physical_health_label,
+    .robust_formula(".ebac_missing", c("cannabis_any_use", demog), eligible),
     data = eligible,
     family = stats::binomial(),
     weights = weight
   )
   miss_fit_eligible <- stats::glm(
-    I(is.na(ebac_tot)) ~ cannabis_any_use + age_group_label + gender_label,
+    .robust_formula(".ebac_missing",
+                    c("cannabis_any_use", "age_group_label", "gender_label"),
+                    eligible),
     data = eligible,
     family = stats::binomial(),
     weights = weight
   )
   logit_primary <- stats::glm(
-    ebac_legal ~ cannabis_any_use + age_group_label + gender_label + province_region_label + mental_health_label + physical_health_label,
+    .robust_formula("ebac_legal", c("cannabis_any_use", demog), observed),
     data = observed,
     family = stats::quasibinomial(),
     weights = weight
   )
   lin_primary <- stats::lm(
-    ebac_tot ~ cannabis_any_use + age_group_label + gender_label + province_region_label + mental_health_label + physical_health_label,
+    .robust_formula("ebac_tot", c("cannabis_any_use", demog), observed),
     data = observed,
     weights = weight
   )
   logit_sens <- stats::glm(
-    ebac_legal ~ cannabis_any_use + heavy_drinking_30d + age_group_label + gender_label + province_region_label + mental_health_label + physical_health_label,
+    .robust_formula("ebac_legal",
+                    c("cannabis_any_use", "heavy_drinking_30d", demog), observed),
     data = observed,
     family = stats::quasibinomial(),
     weights = weight
   )
   lin_sens <- stats::lm(
-    ebac_tot ~ cannabis_any_use + heavy_drinking_30d + age_group_label + gender_label + province_region_label + mental_health_label + physical_health_label,
+    .robust_formula("ebac_tot",
+                    c("cannabis_any_use", "heavy_drinking_30d", demog), observed),
     data = observed,
     weights = weight
   )
