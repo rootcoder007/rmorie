@@ -296,7 +296,7 @@ morie_ts_undifference <- function(dx, init = attr(dx, "init"),
   if (is.null(lag)) lag <- 1L
   v <- as.numeric(dx)
   for (i in rev(seq_along(init))) {
-    v <- diffinv(v, lag = lag, xi = init[[i]])
+    v <- stats::diffinv(v, lag = lag, xi = init[[i]])
   }
   v
 }
