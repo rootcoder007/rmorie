@@ -319,37 +319,37 @@ Tracks every rOpenSci statistical-software standard claimed for the whole-packag
 |---|---|---|
 | UL1.0 | done | Unsupervised Learning Software should explicitly document expected format (types or classes) for input data, including descriptions of types or classes which... |
 | UL1.1 | done | Unsupervised Learning Software should provide distinct sub-routines to assert that all input data is of the expected form, and issue informative error messag... |
-| UL1.2 | NA | Unsupervised learning which uses row or column names to label output objects should assert that input data have non-default row or column names, and issue an... |
-| UL1.3 | NA | Unsupervised Learning Software should transfer all relevant aspects of input data, notably including row and column names, and potentially information from o... |
+| UL1.2 | done | Unsupervised learning which uses row or column names to label output objects should assert that input data have non-default row or column names, and issue an... |
+| UL1.3 | done | Unsupervised Learning Software should transfer all relevant aspects of input data, notably including row and column names, and potentially information from o... |
 | UL1.3a | done | Where otherwise relevant information is not transferred, this should be explicitly documented. |
 | UL1.4 | done | Unsupervised Learning Software should document any assumptions made with regard to input data; for example assumptions about distributional forms or location... |
 | UL1.4a | done | Software which responds qualitatively differently to input data which has components on markedly different scales should explicitly document such differences... |
-| UL1.4b | NA | Examples or other documentation should not use `scale()` or equivalent transformations without explaining why scale is applied, and explicitly illustrating a... |
-| UL2.0 | NA | Routines likely to give unreliable or irreproducible results in response to violations of assumptions regarding input data (see UL1.4) should implement pre-p... |
+| UL1.4b | done | Examples or other documentation should not use `scale()` or equivalent transformations without explaining why scale is applied, and explicitly illustrating a... |
+| UL2.0 | done | Routines likely to give unreliable or irreproducible results in response to violations of assumptions regarding input data (see UL1.4) should implement pre-p... |
 | UL2.1 | done | Unsupervised Learning Software should document any transformations applied to input data, for example conversion of label-values to `factor`, and should prov... |
-| UL2.2 | NA | Unsupervised Learning Software which accepts missing values in input data should implement explicit parameters controlling the processing of missing values, ... |
+| UL2.2 | done | Unsupervised Learning Software which accepts missing values in input data should implement explicit parameters controlling the processing of missing values, ... |
 | UL2.3 | done | Unsupervised Learning Software should implement pre-processing routines to identify whether aspects of input data are perfectly collinear. |
-| UL3.0 | NA | Algorithms which apply sequential labels to input data (such as clustering or partitioning algorithms) should ensure that the sequence follows decreasing gro... |
+| UL3.0 | done | Algorithms which apply sequential labels to input data (such as clustering or partitioning algorithms) should ensure that the sequence follows decreasing gro... |
 | UL3.1 | done | Dimensionality reduction or equivalent algorithms which label dimensions should ensure that that sequences of labels follows decreasing "importance" (for exa... |
-| UL3.2 | NA | Unsupervised Learning Software for which input data does not generally include labels (such as `array`-like data with no row names) should provide an additio... |
-| UL3.3 | NA | Where applicable, Unsupervised Learning Software should implement routines to predict the properties (such as numerical ordinates, or cluster memberships) of... |
+| UL3.2 | done | Unsupervised Learning Software for which input data does not generally include labels (such as `array`-like data with no row names) should provide an additio... |
+| UL3.3 | done | Where applicable, Unsupervised Learning Software should implement routines to predict the properties (such as numerical ordinates, or cluster memberships) of... |
 | UL3.4 | done | Objects returned from Unsupervised Learning Software which labels, categorise, or partitions data into discrete groups should include, or provide immediate a... |
 | UL4.0 | done | Unsupervised Learning Software should return some form of "model" object, generally through using or modifying existing class structures for model objects, o... |
-| UL4.1 | NA | Unsupervised Learning Software may enable an ability to generate a model object without actually fitting values. This may be useful for controlling batch pro... |
+| UL4.1 | done | Unsupervised Learning Software may enable an ability to generate a model object without actually fitting values. This may be useful for controlling batch pro... |
 | UL4.2 | done | The return object from Unsupervised Learning Software should include, or otherwise enable immediate extraction of, all parameters used to control the algorit... |
 | UL4.3 | done | Model objects returned by Unsupervised Learning Software should implement or appropriately extend a default `print` method which provides an on-screen summar... |
-| UL4.3a | NA | The default `print` method should always ensure only a restricted number of rows of any result matrices or equivalent are printed to the screen. |
-| UL4.4 | NA | Unsupervised Learning Software should also implement `summary` methods for model objects which should summarise the primary statistics used in generating the... |
-| UL6.0 | NA | Objects returned by Unsupervised Learning Software should have default `plot` methods, either through explicit implementation, extension of methods for exist... |
-| UL6.1 | NA | Where the default `plot` method is **NOT** a generic `plot` method dispatched on the class of return objects (that is, through an S3-type `plot.<myclass>` fu... |
-| UL6.2 | NA | Where default plot methods include labelling components of return objects (such as cluster labels), routines should ensure that labels are automatically plac... |
+| UL4.3a | done | The default `print` method should always ensure only a restricted number of rows of any result matrices or equivalent are printed to the screen. |
+| UL4.4 | done | Unsupervised Learning Software should also implement `summary` methods for model objects which should summarise the primary statistics used in generating the... |
+| UL6.0 | done | Objects returned by Unsupervised Learning Software should have default `plot` methods, either through explicit implementation, extension of methods for exist... |
+| UL6.1 | done | Where the default `plot` method is **NOT** a generic `plot` method dispatched on the class of return objects (that is, through an S3-type `plot.<myclass>` fu... |
+| UL6.2 | done | Where default plot methods include labelling components of return objects (such as cluster labels), routines should ensure that labels are automatically plac... |
 | UL7.0 | done | Inappropriate types of input data are rejected with expected error messages. |
-| UL7.1 | NA | Tests should demonstrate that violations of assumed input properties yield unreliable or invalid outputs, and should clarify how such unreliability or invali... |
-| UL7.2 | NA | Demonstrate that labels placed on output data follow decreasing group sizes (**UL3.0**) |
-| UL7.3 | NA | Demonstrate that labels on input data are propagated to, or may be recovered from, output data. |
-| UL7.4 | NA | Demonstrate that submission of new data to a previously fitted model can generate results more efficiently than initial model fitting. |
-| UL7.5 | NA | Batch processing routines should be explicitly tested, commonly via extended tests (see **G4.10**--**G4.12**). |
-| UL7.5a | NA | Tests of batch processing routines should demonstrate that equivalent results are obtained from direct (non-batch) processing. |
+| UL7.1 | done | Tests should demonstrate that violations of assumed input properties yield unreliable or invalid outputs, and should clarify how such unreliability or invali... |
+| UL7.2 | done | Demonstrate that labels placed on output data follow decreasing group sizes (**UL3.0**) |
+| UL7.3 | done | Demonstrate that labels on input data are propagated to, or may be recovered from, output data. |
+| UL7.4 | done | Demonstrate that submission of new data to a previously fitted model can generate results more efficiently than initial model fitting. |
+| UL7.5 | done | Batch processing routines should be explicitly tested, commonly via extended tests (see **G4.10**--**G4.12**). |
+| UL7.5a | done | Tests of batch processing routines should demonstrate that equivalent results are obtained from direct (non-batch) processing. |
 
 ## Bayesian & Monte Carlo (BS) — 56 standards
 

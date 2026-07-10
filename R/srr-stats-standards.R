@@ -132,49 +132,29 @@ NULL
 #'   figure exporters are smoke-tested for successful file creation, not
 #'   pixel-level appearance.
 #'
-#' @srrstatsNA {UL1.2} The methods operate on numeric coordinate matrices
 #'   that need not carry row/column names, so non-default-name assertion
 #'   does not apply.
-#' @srrstatsNA {UL1.3} Row/column names are not required and are not
 #'   propagated onto the compact numeric result.
-#' @srrstatsNA {UL1.4b} Examples do not use `scale()` implicitly; scaling,
 #'   where relevant, is discussed rather than silently applied.
-#' @srrstatsNA {UL2.0} No automatic assumption-violation diagnostics or
 #'   auto-transformation step is implemented; scaling is the caller's
 #'   decision, documented per method.
-#' @srrstatsNA {UL2.2} The unsupervised methods require complete numeric
 #'   input; there is no missing-value handling parameter.
-#' @srrstatsNA {UL3.0} Cluster labels are the underlying algorithm's
 #'   (k-means / dbscan) native labels; they are not re-ordered by
 #'   decreasing group size.
-#' @srrstatsNA {UL3.2} Case labelling of unlabelled array input is not
 #'   provided; results are indexed positionally.
-#' @srrstatsNA {UL3.3} There is no predict-on-new-data method; results are
 #'   computed for the submitted data set.
-#' @srrstatsNA {UL4.1} The methods always fit; there is no
 #'   generate-object-without-fitting mode.
-#' @srrstatsNA {UL4.3a} The `print` method summarises parameters rather
 #'   than printing large result matrices, so row-count restriction does
 #'   not arise.
-#' @srrstatsNA {UL4.4} A dedicated `summary` method beyond the rich
 #'   `print` output is not implemented.
-#' @srrstatsNA {UL6.0} The result objects carry no default `plot` method;
 #'   visualisation is via the separate figure exporters.
-#' @srrstatsNA {UL6.1} (no default clustering/ordination plot dispatch;
 #'   see UL6.0)
-#' @srrstatsNA {UL6.2} (no default plot method, so no automatic label
 #'   placement; see UL6.0)
-#' @srrstatsNA {UL7.1} Deliberate demonstrations that assumption
 #'   violations yield invalid output are not part of the suite; input
 #'   validation prevents the ill-posed cases instead.
-#' @srrstatsNA {UL7.2} As cluster labels are not re-ordered by size
 #'   (UL3.0), there is no size-ordering to test.
-#' @srrstatsNA {UL7.3} Input labels are not propagated (UL1.3), so there
 #'   is no label recovery to test.
-#' @srrstatsNA {UL7.4} There is no new-data prediction method, so its
 #'   relative efficiency cannot be tested.
-#' @srrstatsNA {UL7.5} No batch-processing routines are implemented.
-#' @srrstatsNA {UL7.5a} (no batch processing; see UL7.5)
 #'
 #'   section; prior specification is documented at the function level.
 #'   guidance lives in the function documentation.
