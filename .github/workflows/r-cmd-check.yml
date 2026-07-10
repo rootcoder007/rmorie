@@ -108,7 +108,7 @@ jobs:
           # genetic-matching + Rosenbaum-bounds wrappers) that is not pulled
           # in transitively here; request it explicitly so Matching::GenMatch
           # / rbounds::psens don't crash with "no package called 'rgenoud'".
-          extra-packages: any::rcmdcheck any::rgenoud github::rootcoder007/rmorie-bricklayer/bricklayer github::rootcoder007/rmoriedata github::stan-dev/cmdstanr
+          extra-packages: any::rcmdcheck any::rgenoud github::rootcoder007/rmorie-bricklayer github::rootcoder007/rmoriedata github::stan-dev/cmdstanr
           needs: check
 
       - name: Reinstall rmoriebricklayer (overwrite any cache-restored 0.2.0)

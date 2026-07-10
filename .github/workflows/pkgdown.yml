@@ -59,7 +59,7 @@ jobs:
           MAKEFLAGS: "-j1"
         with:
           cache-version: 2
-          extra-packages: any::pkgdown, local::. github::rootcoder007/rmorie-bricklayer/bricklayer github::rootcoder007/rmoriedata github::stan-dev/cmdstanr
+          extra-packages: any::pkgdown, local::. github::rootcoder007/rmorie-bricklayer github::rootcoder007/rmoriedata github::stan-dev/cmdstanr
           needs: website
 
       - name: Build pkgdown site
