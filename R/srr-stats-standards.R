@@ -12,54 +12,6 @@
 #' @srrstatsVerbose TRUE
 #'
 #' @srrstatsTODO {G1.4a} *All internal (non-exported) functions should also be documented in standard [`roxygen2`](https://roxygen2.r-lib.org/) format, along with a final `@noRd` tag to suppress automatic generation of `.Rd` files or [`@keywords internal`](https://roxygen2.r-lib.org/reference/tags-index-crossref.html?q=keywords%20internal#null) if documentation is still desired.* 
-#' @srrstatsTODO {RE1.0} *Regression Software should enable models to be specified via a formula interface, unless reasons for not doing so are explicitly documented.*
-#' @srrstatsTODO {RE1.1} *Regression Software should document how formula interfaces are converted to matrix representations of input data.* 
-#' @srrstatsTODO {RE1.2} *Regression Software should document expected format (types or classes) for inputting predictor variables, including descriptions of types or classes which are not accepted.* 
-#' @srrstatsTODO {RE1.3} *Regression Software which passes or otherwise transforms aspects of input data onto output structures should ensure that those output structures retain all relevant aspects of input data, notably including row and column names, and potentially information from other `attributes()`.*
-#' @srrstatsTODO {RE1.3a} *Where otherwise relevant information is not transferred, this should be explicitly documented.* 
-#' @srrstatsTODO {RE1.4} *Regression Software should document any assumptions made with regard to input data; for example distributional assumptions, or assumptions that predictor data have mean values of zero. Implications of violations of these assumptions should be both documented and tested.* 
-#' @srrstatsTODO {RE2.0} *Regression Software should document any transformations applied to input data, for example conversion of label-values to `factor`, and should provide ways to explicitly avoid any default transformations (with error or warning conditions where appropriate).*
-#' @srrstatsTODO {RE2.1} *Regression Software should implement explicit parameters controlling the processing of missing values, ideally distinguishing `NA` or `NaN` values from `Inf` values (for example, through use of `na.omit()` and related functions from the `stats` package).* 
-#' @srrstatsTODO {RE2.2} *Regression Software should provide different options for processing missing values in predictor and response data. For example, it should be possible to fit a model with no missing predictor data in order to generate values for all associated response points, even where submitted response values may be missing.*
-#' @srrstatsTODO {RE2.3} *Where applicable, Regression Software should enable data to be centred (for example, through converting to zero-mean equivalent values; or to z-scores) or offset (for example, to zero-intercept equivalent values) via additional parameters, with the effects of any such parameters clearly documented and tested.*
-#' @srrstatsTODO {RE2.4} *Regression Software should implement pre-processing routines to identify whether aspects of input data are perfectly collinear, notably including:*
-#' @srrstatsTODO {RE2.4a} *Perfect collinearity among predictor variables*
-#' @srrstatsTODO {RE2.4b} *Perfect collinearity between independent and dependent variables* 
-#' @srrstatsTODO {RE3.0} *Issue appropriate warnings or other diagnostic messages for models which fail to converge.*
-#' @srrstatsTODO {RE3.1} *Enable such messages to be optionally suppressed, yet should ensure that the resultant model object nevertheless includes sufficient data to identify lack of convergence.*
-#' @srrstatsTODO {RE3.2} *Ensure that convergence thresholds have sensible default values, demonstrated through explicit documentation.*
-#' @srrstatsTODO {RE3.3} *Allow explicit setting of convergence thresholds, unless reasons against doing so are explicitly documented.* 
-#' @srrstatsTODO {RE4.0} *Regression Software should return some form of "model" object, generally through using or modifying existing class structures for model objects (such as `lm`, `glm`, or model objects from other packages), or creating a new class of model objects.*
-#' @srrstatsTODO {RE4.1} *Regression Software may enable an ability to generate a model object without actually fitting values. This may be useful for controlling batch processing of computationally intensive fitting algorithms.* 
-#' @srrstatsTODO {RE4.2} *Model coefficients (via `coef()` / `coefficients()`)*
-#' @srrstatsTODO {RE4.3} *Confidence intervals on those coefficients (via `confint()`)*
-#' @srrstatsTODO {RE4.4} *The specification of the model, generally as a formula (via `formula()`)*
-#' @srrstatsTODO {RE4.5} *Numbers of observations submitted to model (via `nobs()`)*
-#' @srrstatsTODO {RE4.6} *The variance-covariance matrix of the model parameters (via `vcov()`)*
-#' @srrstatsTODO {RE4.7} *Where appropriate, convergence statistics* 
-#' @srrstatsTODO {RE4.8} *Response variables, and associated "metadata" where applicable.*
-#' @srrstatsTODO {RE4.9} *Modelled values of response variables.*
-#' @srrstatsTODO {RE4.10} *Model Residuals, including sufficient documentation to enable interpretation of residuals, and to enable users to submit residuals to their own tests.*
-#' @srrstatsTODO {RE4.11} *Goodness-of-fit and other statistics associated such as effect sizes with model coefficients.*
-#' @srrstatsTODO {RE4.12} *Where appropriate, functions used to transform input data, and associated inverse transform functions.* 
-#' @srrstatsTODO {RE4.13} *Predictor variables, and associated "metadata" where applicable.* 
-#' @srrstatsTODO {RE4.14} *Where possible, values should also be provided for extrapolation or forecast *errors*.*
-#' @srrstatsTODO {RE4.15} *Sufficient documentation and/or testing should be provided to demonstrate that forecast errors, confidence intervals, or equivalent values increase with forecast horizons.* 
-#' @srrstatsTODO {RE4.16} *Regression Software which models distinct responses for different categorical groups should include the ability to submit new groups to `predict()` methods.* 
-#' @srrstatsTODO {RE4.17} *Model objects returned by Regression Software should implement or appropriately extend a default `print` method which provides an on-screen summary of model (input) parameters and (output) coefficients.*
-#' @srrstatsTODO {RE4.18} *Regression Software may also implement `summary` methods for model objects, and in particular should implement distinct `summary` methods for any cases in which calculation of summary statistics is computationally non-trivial (for example, for bootstrapped estimates of confidence intervals).* 
-#' @srrstatsTODO {RE5.0} *Scaling relationships between sizes of input data (numbers of observations, with potential extension to numbers of variables/columns) and speed of algorithm.* 
-#' @srrstatsTODO {RE6.0} *Model objects returned by Regression Software (see* **RE4***) should have default `plot` methods, either through explicit implementation, extension of methods for existing model objects, or through ensuring default methods work appropriately.*
-#' @srrstatsTODO {RE6.1} *Where the default `plot` method is **NOT** a generic `plot` method dispatched on the class of return objects (that is, through an S3-type `plot.<myclass>` function or equivalent), that method dispatch (or equivalent) should nevertheless exist in order to explicitly direct users to the appropriate function.*
-#' @srrstatsTODO {RE6.2} *The default `plot` method should produce a plot of the `fitted` values of the model, with optional visualisation of confidence intervals or equivalent.* 
-#' @srrstatsTODO {RE6.3} *Where a model object is used to generate a forecast (for example, through a `predict()` method), the default `plot` method should provide clear visual distinction between modelled (interpolated) and forecast (extrapolated) values.* 
-#' @srrstatsTODO {RE7.0} *Tests with noiseless, exact relationships between predictor (independent) data.*
-#' @srrstatsTODO {RE7.0a} In particular, these tests should confirm ability to reject perfectly noiseless input data.
-#' @srrstatsTODO {RE7.1} *Tests with noiseless, exact relationships between predictor (independent) and response (dependent) data.*
-#' @srrstatsTODO {RE7.1a} *In particular, these tests should confirm that model fitting is at least as fast or (preferably) faster than testing with equivalent noisy data (see RE2.4b).* 
-#' @srrstatsTODO {RE7.2} Demonstrate that output objects retain aspects of input data such as row or case names (see **RE1.3**).
-#' @srrstatsTODO {RE7.3} Demonstrate and test expected behaviour when objects returned from regression software are submitted to the accessor methods of **RE4.2**--**RE4.7**.
-#' @srrstatsTODO {RE7.4} Extending directly from **RE4.15**, where appropriate, tests should demonstrate and confirm that forecast errors, confidence intervals, or equivalent values increase with forecast horizons.
 #' @srrstatsTODO {TS1.0} *Time Series Software should use and rely on explicit class systems developed for representing time series data, and should not permit generic, non-time-series input* 
 #' @srrstatsTODO {TS1.1} *Time Series Software should explicitly document the types and classes of input data able to be passed to each function.* 
 #' @srrstatsTODO {TS1.2} *Time Series Software should implement validation routines to confirm that inputs are of acceptable classes (or represented in otherwise appropriate ways for software which does not use class systems).*
@@ -425,5 +377,51 @@ NULL
 #'   reproduce.
 #' @srrstatsNA {G1.6} rmorie makes no performance claims against
 #'   alternative R packages, so no comparative-performance code applies.
+#' @srrstatsNA {RE2.2} The estimators use complete-case selection; they
+#'   do not offer separate missing-value handling for predictor versus
+#'   response data.
+#' @srrstatsNA {RE2.3} Centring / offsetting (z-scoring, zero-intercept)
+#'   is left to the caller; no built-in centring parameter is provided.
+#' @srrstatsNA {RE2.4b} Perfect collinearity between predictor and
+#'   response is a degenerate case that surfaces as a fitting error
+#'   rather than being separately pre-detected.
+#' @srrstatsNA {RE4.1} Estimators always fit; there is no
+#'   generate-object-without-fitting mode.
+#' @srrstatsNA {RE4.7} The primary estimators are closed-form
+#'   (OLS / IPW) with no iterative convergence; iterative backends report
+#'   their own convergence diagnostics upstream.
+#' @srrstatsNA {RE4.8} Response-variable metadata beyond the variable
+#'   name is not attached to the compact result object.
+#' @srrstatsNA {RE4.9} Per-observation modelled (fitted) response values
+#'   are not returned by default; the result reports the estimate and its
+#'   inference.
+#' @srrstatsNA {RE4.13} Predictor-variable metadata is not attached to
+#'   the result object.
+#' @srrstatsNA {RE4.14} The DiD/causal estimators are not forecasting
+#'   models; extrapolation / forecast errors do not apply (forecasting is
+#'   handled by the time-series estimators).
+#' @srrstatsNA {RE4.15} As above: no forecast errors to document for the
+#'   regression estimators.
+#' @srrstatsNA {RE4.16} The estimators do not model distinct responses
+#'   per categorical group requiring submission of new group levels.
+#' @srrstatsNA {RE4.18} A dedicated `summary` method beyond the rich
+#'   `print` output is not implemented.
+#' @srrstatsNA {RE5.0} Scaling of run time with data size is not tested;
+#'   the tested property is statistical correctness.
+#' @srrstatsNA {RE6.0} The compact result objects do not carry a default
+#'   `plot` method; visualisation is provided by the separate figure
+#'   exporters (`morie_otis_figures`, etc.).
+#' @srrstatsNA {RE6.1} No default regression `plot` method, so its
+#'   internals do not apply.
+#' @srrstatsNA {RE6.2} As above, no default regression `plot` method.
+#' @srrstatsNA {RE6.3} The regression estimators do not generate
+#'   forecasts, so forecast-plotting does not apply.
+#' @srrstatsNA {RE7.2} The compact result object does not retain input
+#'   row / case names, so there is nothing to test for their retention.
+#' @srrstatsNA {RE7.4} No forecast errors are produced by the regression
+#'   estimators, so there are none to test.
+#' @srrstatsNA {RE7.1a} Relative fitting speed on noiseless versus noisy
+#'   data is a performance property that is not part of the test suite;
+#'   correctness (exact recovery) is what is tested.
 #' @noRd
 NULL
