@@ -173,6 +173,7 @@ Suggests:
   smotefamily,
   sodium,
   spdep,
+  srr,
   stdReg,
   survey,
   survival,
