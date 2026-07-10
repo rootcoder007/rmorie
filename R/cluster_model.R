@@ -181,7 +181,8 @@ plot.morie_cluster <- function(x, ...) {
                             ylab = "", ...); return(invisible(NULL)) }
   plot(ctr[, 1], ctr[, 2], xlab = x$feature_names[1], ylab = x$feature_names[2],
        pch = 19, main = "morie_cluster centroids", ...)
-  if (x$k <= 20L) text(ctr[, 1], ctr[, 2], labels = seq_len(x$k), pos = 3)
+  if (x$k <= 20L) graphics::text(ctr[, 1], ctr[, 2], labels = seq_len(x$k),
+                                 pos = 3)
   else warning("too many clusters to label readably", call. = FALSE)  # UL6.2
   invisible(NULL)
 }

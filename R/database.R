@@ -475,11 +475,14 @@ morie_cache_list <- function(db_path = NULL, con = NULL) {
 #' @param con Optional pre-opened DBI connection (overrides `db_path`).
 #' @return Number of rows cached (invisible).
 #' @examples
-#' tdir <- tempfile("morie-cache-")
-#' dir.create(tdir)
-#' f <- file.path(tdir, "demo.csv")
-#' write.csv(data.frame(x = 1:3, y = 4:6), f, row.names = FALSE)
-#' morie_cache_file(f, "demo", db_path = file.path(tdir, "cache.db"))
+#' # The SQLite backend needs the optional 'RSQLite' package.
+#' if (requireNamespace("RSQLite", quietly = TRUE)) {
+#'   tdir <- tempfile("morie-cache-")
+#'   dir.create(tdir)
+#'   f <- file.path(tdir, "demo.csv")
+#'   write.csv(data.frame(x = 1:3, y = 4:6), f, row.names = FALSE)
+#'   morie_cache_file(f, "demo", db_path = file.path(tdir, "cache.db"))
+#' }
 #' @export
 morie_cache_file <- function(path, table_name, db_path = NULL, con = NULL) {
   ext <- tolower(tools::file_ext(path))

@@ -168,6 +168,7 @@ residuals.morie_lm <- function(object, ...) object$residuals
 #' @param object A `morie_lm`.
 #' @param ... Unused.
 #' @return Number of observations used in the fit.
+#' @importFrom stats nobs
 #' @export
 nobs.morie_lm <- function(object, ...) object$n_obs
 

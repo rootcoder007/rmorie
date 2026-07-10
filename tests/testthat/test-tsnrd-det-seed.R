@@ -6,6 +6,7 @@
 #   * default deterministic_seed = NULL path is unchanged
 
 skip_if_no_hash <- function() {
+  testthat::skip_if_not_installed("Rtsne")   # morie_tsne_reduction wraps Rtsne
   ok <- requireNamespace("digest", quietly = TRUE) ||
     requireNamespace("openssl", quietly = TRUE)
   testthat::skip_if_not(ok, "neither 'digest' nor 'openssl' available")
