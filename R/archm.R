@@ -3,6 +3,8 @@
 # Internal: ARCH(1)-in-mean negative log-likelihood. Extracted from the
 # morie_arch_in_mean() optimiser closure so the parameter-domain guard is
 # directly unit-testable. `y` is the series, `n` its length.
+#' Internal helper: Archm Negll
+#' @noRd
 .archm_negll <- function(p, y, n) {
   mu <- p[1]
   delta <- p[2]

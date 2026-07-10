@@ -159,6 +159,8 @@
 #'   estimator's own documentation.
 #' @srrstats {G1.4} All exported functions are documented with
 #'   roxygen2; the entire man/ tree is roxygen-generated.
+#' @srrstats {G1.4a} All internal (non-exported) functions are documented
+#'   in roxygen2 format with a final `@noRd` tag.
 #' @keywords internal
 #' @aliases rmorie-package
 #' @importFrom stats aggregate anova ave deviance median na.omit plogis qf setNames update weighted.mean

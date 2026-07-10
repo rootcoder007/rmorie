@@ -14,6 +14,8 @@
 # --- internal helpers ------------------------------------------------------
 
 # Append a named list of query parameters to a URL, URL-encoding values.
+#' Internal helper: Morie Url With Params
+#' @noRd
 .morie_url_with_params <- function(url, params = NULL) {
   if (is.null(params) || length(params) == 0L) {
     return(url)
@@ -40,6 +42,8 @@
     "https://ckan0.cf.opendata.inter.prod-toronto.ca"
 )
 
+#' Internal helper: Morie Ckan Portal
+#' @noRd
 .morie_ckan_portal <- function(portal) {
   if (grepl("^https?://", portal)) {
     return(sub("/+$", "", portal))
@@ -57,6 +61,8 @@
 # Read text from a URL (used for JSON/XML/HTML API responses).
 # Falls back to a Wayback Machine snapshot (via rmoriebricklayer) if the
 # live source is unreachable.
+#' Internal helper: Morie Read Text
+#' @noRd
 .morie_read_text <- function(url) {
   read_one <- function(u) {
     con <- base::url(u)
@@ -79,6 +85,8 @@
 # Download a URL to a temp file, returning the local path.
 # Falls back to a Wayback Machine snapshot (via rmoriebricklayer) if the
 # live source is unreachable.
+#' Internal helper: Morie Download
+#' @noRd
 .morie_download <- function(url, ext = "") {
   if (!nzchar(ext)) ext <- tools::file_ext(sub("\\?.*$", "", url))
   tmp <- tempfile(fileext = if (nzchar(ext)) paste0(".", ext) else "")
@@ -105,6 +113,8 @@
 
 # Detect the format of a URL from its HTTP Content-Type header, falling
 # back to the URL file extension. Returns one of the morie_fetch formats.
+#' Internal helper: Morie Detect Format
+#' @noRd
 .morie_detect_format <- function(url) {
   ct <- tryCatch(
     {
@@ -153,6 +163,8 @@
 }
 
 # Parse a downloaded local file according to a known format.
+#' Internal helper: Morie Parse File
+#' @noRd
 .morie_parse_file <- function(path, format, simplify, ...) {
   if (format %in% c("xlsx")) {
     if (!requireNamespace("readxl", quietly = TRUE)) {
@@ -373,6 +385,8 @@ morie_ckan_search <- function(query, portal = "open.canada.ca",
 }
 
 # Small helper: first non-empty scalar, else "".
+#' Internal helper: Nz
+#' @noRd
 .nz <- function(...) {
   for (x in list(...)) {
     if (!is.null(x) && length(x) >= 1L && !is.na(x[[1L]]) &&

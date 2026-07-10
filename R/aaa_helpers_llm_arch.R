@@ -6,6 +6,8 @@
 #' @name llm_arch_helpers
 NULL
 
+#' Internal helper: Softmax Last
+#' @noRd
 .softmax_last <- function(x) {
   # softmax along the last axis of an array
   d <- dim(x)

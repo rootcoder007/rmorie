@@ -81,6 +81,8 @@ CCRSO_TABLE3_AGE <- data.frame(
 
 # -- Helper: build a Rich-style named-list result --------------------
 
+#' Internal helper: Doob Result
+#' @noRd
 .doob_result <- function(title, summary_lines, tables = list(),
                           interpretation = NULL, payload = list(),
                           warnings = character()) {

@@ -83,11 +83,15 @@ NULL
 # Internal helpers
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Stat Validate
+#' @noRd
 .stat_validate <- function(x, name = "x") {
   x <- suppressWarnings(as.numeric(x))
   x[is.finite(x)]
 }
 
+#' Internal helper: Stat Result
+#' @noRd
 .stat_result <- function(method, test_statistic, p_value,
                          df = NA_real_, ci_lower = NA_real_,
                          ci_upper = NA_real_, effect_size = NA_real_,
@@ -134,6 +138,8 @@ print.morie_test_result <- function(x, ...) {
   invisible(x)
 }
 
+#' Internal helper: Cohens D Ind
+#' @noRd
 .cohens_d_ind <- function(x, y) {
   nx <- length(x)
   ny <- length(y)
@@ -142,18 +148,24 @@ print.morie_test_result <- function(x, ...) {
   (mean(x) - mean(y)) / sp
 }
 
+#' Internal helper: Cohens D One
+#' @noRd
 .cohens_d_one <- function(x, mu0) {
   s <- sd(x)
   if (s == 0) return(0)
   (mean(x) - mu0) / s
 }
 
+#' Internal helper: Cohens D Paired
+#' @noRd
 .cohens_d_paired <- function(d) {
   s <- sd(d)
   if (s == 0) return(0)
   mean(d) / s
 }
 
+#' Internal helper: Mean Ci
+#' @noRd
 .mean_ci <- function(x, confidence = 0.95) {
   n <- length(x)
   se <- sd(x) / sqrt(n)
@@ -161,6 +173,8 @@ print.morie_test_result <- function(x, ...) {
   c(mean(x) - tcrit * se, mean(x) + tcrit * se)
 }
 
+#' Internal helper: Diff Ci
+#' @noRd
 .diff_ci <- function(x, y, confidence = 0.95, equal_var = TRUE) {
   nx <- length(x)
   ny <- length(y)
@@ -508,6 +522,8 @@ cochrans_q <- function(...) {
 # CORRELATION
 # ===================================================================
 
+#' Internal helper: Fisher Z Ci
+#' @noRd
 .fisher_z_ci <- function(r, n, confidence) {
   z <- atanh(r)
   se <- if (n > 3) 1 / sqrt(n - 3) else Inf

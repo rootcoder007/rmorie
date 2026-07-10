@@ -18,6 +18,8 @@ is_absolute_path <- function(path) {
 # / pyproject.toml walk so an installed package still has a sensible
 # heuristic. Always wrap call sites in `tryCatch()` because callers run
 # inside an installed package have no project root at all.
+#' Internal helper: Morie Project Root
+#' @noRd
 .morie_project_root <- function(start = getwd(), max_up = 10L) {
   out <- tryCatch(here::here(), error = function(e) NULL)
   if (!is.null(out) && nzchar(out) && dir.exists(out)) {

@@ -96,6 +96,8 @@ NULL
 
 # ---- internal helpers ------------------------------------------------------
 
+#' Internal helper: Sv As Matrix
+#' @noRd
 .sv_as_matrix <- function(x) {
   if (is.null(x)) return(NULL)
   m <- as.matrix(x)
@@ -103,15 +105,21 @@ NULL
   m
 }
 
+#' Internal helper: Sv Nanmean Col
+#' @noRd
 .sv_nanmean_col <- function(M) {
   apply(M, 2, function(v) mean(v, na.rm = TRUE))
 }
 
+#' Internal helper: Sv Pairwise Dist
+#' @noRd
 .sv_pairwise_dist <- function(X) {
   X <- as.matrix(X)
   as.matrix(stats::dist(X))
 }
 
+#' Internal helper: Sv Double Centering
+#' @noRd
 .sv_double_centering <- function(D) {
   D <- as.matrix(D)
   n <- nrow(D)
@@ -120,6 +128,8 @@ NULL
   -0.5 * H %*% A %*% H
 }
 
+#' Internal helper: Sv Safe Pinv
+#' @noRd
 .sv_safe_pinv <- function(M, tol = 1e-12) {
   s <- svd(M)
   d <- s$d
@@ -127,6 +137,8 @@ NULL
   s$v %*% (diag(inv_d, nrow = length(inv_d)) %*% t(s$u))
 }
 
+#' Internal helper: Sv Isotonic Pava
+#' @noRd
 .sv_isotonic_pava <- function(y, w = NULL) {
   n <- length(y)
   if (is.null(w)) w <- rep(1, n)
@@ -994,6 +1006,8 @@ morie_spatial_voting_procrustes <- function(X, X_target) {
 # 8. Bayesian methods -- STUBBED (porting MCMC samplers exceeds session)
 # ===========================================================================
 
+#' Internal helper: NOT PORTED
+#' @noRd
 .NOT_PORTED <- function(name) {
   stop(sprintf("NotYetPorted: %s -- the Bayesian MCMC backend is not yet ported to R. ",
                name),

@@ -73,16 +73,32 @@
 # Internal helpers
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Boot Have Boot
+#' @noRd
 .boot_have_boot       <- function() requireNamespace("boot",       quietly = TRUE)
+#' Internal helper: Boot Have Bootstrap
+#' @noRd
 .boot_have_bootstrap  <- function() requireNamespace("bootstrap",  quietly = TRUE)
+#' Internal helper: Boot Have Resample
+#' @noRd
 .boot_have_resample   <- function() requireNamespace("resample",   quietly = TRUE)
+#' Internal helper: Boot Have Rsample
+#' @noRd
 .boot_have_rsample    <- function() requireNamespace("rsample",    quietly = TRUE)
+#' Internal helper: Boot Have Simpleboot
+#' @noRd
 .boot_have_simpleboot <- function() requireNamespace("simpleboot", quietly = TRUE)
+#' Internal helper: Boot Have Coin
+#' @noRd
 .boot_have_coin       <- function() requireNamespace("coin",       quietly = TRUE)
+#' Internal helper: Boot Have Ipred
+#' @noRd
 .boot_have_ipred      <- function() requireNamespace("ipred",      quietly = TRUE)
 
 # Result container constructors (unchanged shapes).
 
+#' Internal helper: New Bootstrap Result
+#' @noRd
 .new_bootstrap_result <- function(estimate, se, ci_lower, ci_upper, bias,
                                   n_boot, method, ci_method,
                                   boot_distribution, original_estimate,
@@ -98,6 +114,8 @@
   )
 }
 
+#' Internal helper: New Jackknife Result
+#' @noRd
 .new_jackknife_result <- function(estimate, se, ci_lower, ci_upper, bias,
                                   n, jackknife_estimates, pseudovalues,
                                   influence_values) {
@@ -111,6 +129,8 @@
   )
 }
 
+#' Internal helper: New Permutation Test Result
+#' @noRd
 .new_permutation_test_result <- function(observed_statistic, p_value,
                                          null_distribution, n_permutations,
                                          alternative,
@@ -126,6 +146,8 @@
   )
 }
 
+#' Internal helper: New Cv Result
+#' @noRd
 .new_cv_result <- function(scores, mean_score, se_score, ci_lower, ci_upper,
                            n_folds, metric, fold_sizes) {
   structure(
@@ -137,11 +159,15 @@
 }
 
 # Helper: percentile-of-vector (matches numpy.percentile linear interp).
+#' Internal helper: Pct
+#' @noRd
 .pct <- function(x, p) {
   unname(stats::quantile(x, probs = p / 100, names = FALSE, type = 7))
 }
 
 # Helper: subset rows of a vector or matrix.
+#' Internal helper: Idx
+#' @noRd
 .idx <- function(data, idx) {
   if (is.matrix(data) || is.data.frame(data)) {
     data[idx, , drop = FALSE]
@@ -150,16 +176,22 @@
   }
 }
 
+#' Internal helper: Nrow Like
+#' @noRd
 .nrow_like <- function(data) {
   if (is.matrix(data) || is.data.frame(data)) nrow(data) else length(data)
 }
 
 # Adapt rmorie `statistic(data)` signature to boot's `statistic(data, idx)`.
+#' Internal helper: Boot Statistic Adapter
+#' @noRd
 .boot_statistic_adapter <- function(statistic) {
   function(d, i) as.numeric(statistic(.idx(d, i)))
 }
 
 # Extract `(ci_lo, ci_hi)` from a `boot.ci` object by ci_method label.
+#' Internal helper: Boot Ci Extract
+#' @noRd
 .boot_ci_extract <- function(bci, ci_method) {
   type_key <- switch(
     ci_method,
@@ -346,6 +378,8 @@ bootstrap <- function(data, statistic, n_boot = 2000L, ci_level = 0.95,
 # BCa (bias-corrected and accelerated) percentile interval (inline
 # fallback). `boot::boot.ci(type = "bca")` is the canonical CRAN
 # equivalent and is used by `bootstrap()` when \pkg{boot} is installed.
+#' Internal helper: Bca Interval
+#' @noRd
 .bca_interval <- function(data, statistic, boot_stats, original, ci_level) {
   n <- .nrow_like(data)
   alpha <- 1 - ci_level
@@ -442,6 +476,8 @@ parametric_bootstrap <- function(data, statistic, distribution = "normal",
 }
 
 # Build `mle` argument for the parametric ran.gen.
+#' Internal helper: Param Boot Pars
+#' @noRd
 .param_boot_pars <- function(distribution, data, dp) {
   switch(
     distribution,
@@ -464,6 +500,8 @@ parametric_bootstrap <- function(data, statistic, distribution = "normal",
 }
 
 # Build ran.gen() for boot::boot(sim = "parametric").
+#' Internal helper: Param Boot Rangen
+#' @noRd
 .param_boot_rangen <- function(distribution, n) {
   switch(
     distribution,
@@ -551,6 +589,8 @@ wild_bootstrap <- function(y, X, statistic_idx = 2L, n_boot = 999L,
 }
 
 # Wild-bootstrap weight draws.
+#' Internal helper: Wild Weights
+#' @noRd
 .wild_weights <- function(weight_distribution, n) {
   if (weight_distribution == "rademacher") {
     sample(c(-1, 1), size = n, replace = TRUE)
@@ -628,6 +668,8 @@ block_bootstrap <- function(data, statistic, block_size,
   )
 }
 
+#' Internal helper: Block Boot Inline
+#' @noRd
 .block_boot_inline <- function(data, statistic, block_size, n_boot, method) {
   n <- .nrow_like(data)
   n_blocks <- as.integer(ceiling(n / block_size))
@@ -845,6 +887,8 @@ permutation_test <- function(group1, group2, statistic = "mean_diff",
 }
 
 # Resolve the two-sample permutation statistic.
+#' Internal helper: Perm Stat Fn
+#' @noRd
 .perm_stat_fn <- function(statistic) {
   if (is.function(statistic)) return(statistic)
   switch(
@@ -1114,6 +1158,8 @@ bootstrap_632 <- function(X, y, model_fn, score_fn,
 
 # Build CV fold index list. Uses rsample::vfold_cv when available and
 # no stratification / grouping is requested.
+#' Internal helper: Build Folds
+#' @noRd
 .build_folds <- function(n, n_folds, stratify, groups) {
   if (!is.null(groups)) {
     groups <- as.vector(groups)

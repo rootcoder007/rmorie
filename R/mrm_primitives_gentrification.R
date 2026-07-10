@@ -33,6 +33,8 @@ NULL
 # Internal helper (shared wrapper for MRM primitives)
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Mrm Result
+#' @noRd
 .mrm_result <- function(title, call, summary_lines = list(),
                         warnings = character(0),
                         interpretation = "",

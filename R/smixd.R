@@ -4,6 +4,8 @@
 # Extracted from the smixd() optimiser closure so the non-positive-
 # -definite-covariance, singular-information and non-positive-variance
 # guards are all directly unit-testable. `theta` = c(log phi, log nu).
+#' Internal helper: Smixd Negreml
+#' @noRd
 .smixd_negreml <- function(theta, D, n, X, y, p) {
   phi <- exp(theta[1])
   nu <- exp(theta[2])

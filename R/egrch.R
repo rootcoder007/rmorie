@@ -4,6 +4,8 @@
 # the morie_egarch_model() base-R optimiser closure so the |beta| >= 1
 # stationarity guard is directly unit-testable. `r` is the centred
 # series, `n` its length, `EZ` = E|Z| for a standard normal.
+#' Internal helper: Egrch Negll
+#' @noRd
 .egrch_negll <- function(p, r, n, EZ) {
   omega <- p[1]
   alpha <- p[2]

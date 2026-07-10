@@ -57,11 +57,15 @@ effect_size_result <- function(measure, estimate,
 
 # -- Helpers ----------------------------------------------------------
 
+#' Internal helper: Arr
+#' @noRd
 .arr <- function(x) {
   v <- as.numeric(x)
   v[is.finite(v)]
 }
 
+#' Internal helper: Bootstrap Ci
+#' @noRd
 .bootstrap_ci <- function(func, args, n_boot = 2000L,
                             confidence = 0.95, seed = 42L) {
   set.seed(seed)

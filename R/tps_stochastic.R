@@ -37,6 +37,8 @@ NULL
 # Internal helpers (NOT exported)
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Tps Stoch Result
+#' @noRd
 .tps_stoch_result <- function(title, call, summary_lines = list(),
                                warnings = character(0),
                                interpretation = "",
@@ -54,6 +56,8 @@ NULL
   out
 }
 
+#' Internal helper: Tps Stoch Round
+#' @noRd
 .tps_stoch_round <- function(x, k) {
   if (!is.finite(x)) return(NA_real_)
   round(x, k)
@@ -63,6 +67,8 @@ NULL
 # Prefer integer-triple OCC_YEAR/OCC_MONTH/OCC_DAY (local-time
 # decomposition unaffected by ArcGIS UTC conversion); fall back to
 # OCC_DATE / REPORT_DATE.
+#' Internal helper: Tps Stoch Date Series
+#' @noRd
 .tps_stoch_date_series <- function(df, min_year = 2014L) {
   ts <- NULL
   if (all(c("OCC_YEAR", "OCC_MONTH", "OCC_DAY") %in% names(df))) {
@@ -118,6 +124,8 @@ NULL
 # Negative log-likelihood of exponential-kernel Hawkes:
 #   lambda(t) = mu + kappa*omega * sum_{t_i<t} exp(-omega*(t - t_i))
 # Closed-form integral: mu*T + kappa * sum_i (1 - exp(-omega*(T - t_i)))
+#' Internal helper: Tps Stoch Neg Loglik Hawkes
+#' @noRd
 .tps_stoch_neg_loglik_hawkes <- function(params, t, T_window) {
   mu <- params[1L]
   kappa <- params[2L]
@@ -143,6 +151,8 @@ NULL
 
 
 # Build daily counts from a POSIXct vector. Returns list(dates, counts).
+#' Internal helper: Tps Stoch Daily
+#' @noRd
 .tps_stoch_daily <- function(ts) {
   if (length(ts) == 0L) {
     return(list(dates = as.POSIXct(character(0), tz = "UTC"),
@@ -157,6 +167,8 @@ NULL
 }
 
 # Build monthly counts from a POSIXct vector.
+#' Internal helper: Tps Stoch Monthly
+#' @noRd
 .tps_stoch_monthly <- function(ts) {
   if (length(ts) == 0L) {
     return(list(dates = as.POSIXct(character(0), tz = "UTC"),

@@ -70,6 +70,8 @@ NULL
 # Assert a data.frame-like table with the required columns present.
 # Coerces tibbles / data.tables / matrices to a plain data.frame and
 # rejects list-columns. Optionally reports missing values in `required`.
+#' Internal helper: Morie Check Data
+#' @noRd
 .morie_check_data <- function(data, required = character(), arg = "data",
                               check_na = FALSE) {
   if (is.matrix(data)) data <- as.data.frame(data)
@@ -101,6 +103,8 @@ NULL
 }
 
 # Assert a single-valued input of the given type.
+#' Internal helper: Morie Check Scalar
+#' @noRd
 .morie_check_scalar <- function(x,
                                 type = c("numeric", "character",
                                          "logical", "integer"),
@@ -120,6 +124,8 @@ NULL
 }
 
 # Coerce to a finite numeric vector of at least `min_len` elements.
+#' Internal helper: Morie Check Numvec
+#' @noRd
 .morie_check_numvec <- function(x, arg = "x", finite = TRUE, min_len = 1L) {
   x <- as.numeric(x)                                # G2.4b / G2.6
   if (length(x) < min_len) {

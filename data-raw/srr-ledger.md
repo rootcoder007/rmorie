@@ -28,7 +28,7 @@ Tracks every rOpenSci statistical-software standard claimed for the whole-packag
 | G1.2 | done | Statistical Software should include a* Life Cycle Statement *describing current and anticipated future states of development. |
 | G1.3 | done | All statistical terminology should be clarified and unambiguously defined. |
 | G1.4 | done | Software should use [`roxygen2`](https://roxygen2.r-lib.org/) to document all functions. |
-| G1.4a | TODO | All internal (non-exported) functions should also be documented in standard [`roxygen2`](https://roxygen2.r-lib.org/) format, along with a final `@noRd` tag ... |
+| G1.4a | done | All internal (non-exported) functions should also be documented in standard [`roxygen2`](https://roxygen2.r-lib.org/) format, along with a final `@noRd` tag ... |
 | G1.5 | NA | Software should include all code necessary to reproduce results which form the basis of performance claims made in associated publications. |
 | G1.6 | NA | Software should include code necessary to compare performance claims with alternative implementations in other R packages. |
 | G2.0 | done | Implement assertions on lengths of inputs, particularly through asserting that inputs expected to be single- or multi-valued are indeed so. |

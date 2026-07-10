@@ -75,6 +75,8 @@ morie_cor_pearson <- function(x, y) {
 }
 
 # Internal: detect whether the Rcpp .so was successfully built.
+#' Internal helper: Cpp Available
+#' @noRd
 .cpp_available <- function() {
   tryCatch(
     {

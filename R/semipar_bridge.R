@@ -86,26 +86,38 @@ KERNEL_BIWEIGHT <- 4L
 # Internal kernel functions
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Kernel Gaussian
+#' @noRd
 .kernel_gaussian <- function(u) {
   (1.0 / sqrt(2.0 * pi)) * exp(-0.5 * u * u)
 }
 
+#' Internal helper: Kernel Epanechnikov
+#' @noRd
 .kernel_epanechnikov <- function(u) {
   ifelse(abs(u) <= 1.0, 0.75 * (1.0 - u * u), 0.0)
 }
 
+#' Internal helper: Kernel Uniform
+#' @noRd
 .kernel_uniform <- function(u) {
   ifelse(abs(u) <= 1.0, 0.5, 0.0)
 }
 
+#' Internal helper: Kernel Triangular
+#' @noRd
 .kernel_triangular <- function(u) {
   ifelse(abs(u) <= 1.0, 1.0 - abs(u), 0.0)
 }
 
+#' Internal helper: Kernel Biweight
+#' @noRd
 .kernel_biweight <- function(u) {
   ifelse(abs(u) <= 1.0, (15.0 / 16.0) * (1.0 - u * u) ^ 2, 0.0)
 }
 
+#' Internal helper: Kernel Fn
+#' @noRd
 .kernel_fn <- function(kernel_type) {
   switch(kernel_type + 1L,
          .kernel_gaussian,
@@ -116,6 +128,8 @@ KERNEL_BIWEIGHT <- 4L
          .kernel_gaussian)
 }
 
+#' Internal helper: Resolve Kernel
+#' @noRd
 .resolve_kernel <- function(kernel) {
   if (is.numeric(kernel)) return(as.integer(kernel))
   if (is.character(kernel)) {

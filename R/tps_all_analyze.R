@@ -51,6 +51,8 @@ NULL
 # Internal: rich-result wrapper (matches morie.fn._richresult.RichResult shape)
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Tps Result
+#' @noRd
 .tps_result <- function(title, summary_lines = list(),
                         tables = list(),
                         warnings = character(0),
@@ -77,6 +79,8 @@ NULL
 # Internal: column-detection + value-counts helpers
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Tps Safe Year Col
+#' @noRd
 .tps_safe_year_col <- function(df) {
   for (c in c("OCC_YEAR", "REPORT_YEAR", "Year")) {
     if (c %in% names(df)) return(c)
@@ -84,6 +88,8 @@ NULL
   NULL
 }
 
+#' Internal helper: Tps Vc Rows
+#' @noRd
 .tps_vc_rows <- function(x, top = 20L) {
   counts <- sort(table(x, useNA = "ifany"), decreasing = TRUE)
   if (length(counts) > top) counts <- counts[seq_len(top)]
@@ -497,6 +503,8 @@ morie_tps_analyze_one <- function(df, name = "?") {
 # 7. Convenience aliases (13)
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Tps Alias Factory
+#' @noRd
 .tps_alias_factory <- function(name) {
   force(name)
   function(df) morie_tps_analyze_one(df, name = name)

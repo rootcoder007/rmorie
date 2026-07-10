@@ -3,6 +3,8 @@
 # Internal: generalised-Pareto per-exceedance log-density. Lifted from
 # the gpfit() optimiser closure so the xi ~ 0 (exponential) and
 # out-of-support branches are directly unit-testable.
+#' Internal helper: Gpfit Log Gp
+#' @noRd
 .gpfit_log_gp <- function(par, y) {
   sigma <- exp(par[1])
   xi <- par[2]

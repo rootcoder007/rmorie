@@ -52,6 +52,8 @@ NULL
 # Helpers
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Lan Smi Result
+#' @noRd
 .lan_smi_result <- function(alpha_v, intercept, year_effects,
                               area_random_effect_sd, dispersion,
                               n_events, n_area_years, log_likelihood,
@@ -103,6 +105,8 @@ NULL
 }
 
 
+#' Internal helper: Lan Smi Coef
+#' @noRd
 .lan_smi_coef <- function(name, estimate, std_error) {
   list(name = name,
        estimate = as.numeric(estimate),
@@ -114,6 +118,8 @@ NULL
 # Synthetic Area Exposure (SAE) — base-R logistic + tract scoring
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Lan Smi Sae
+#' @noRd
 .lan_smi_sae <- function(survey_df, survey_trait_col, survey_covariate_cols,
                           area_df, area_population_col) {
   needed_s <- c(survey_trait_col, survey_covariate_cols)
@@ -141,6 +147,8 @@ NULL
 # Negative-binomial fitter
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Lan Smi Fit Nb
+#' @noRd
 .lan_smi_fit_nb <- function(X, y, offset_vec, max_iter, tol) {
   # Prefer MASS::glm.nb when available; fall back to optim-based MLE.
   if (requireNamespace("MASS", quietly = TRUE)) {

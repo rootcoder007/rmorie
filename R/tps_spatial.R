@@ -89,6 +89,8 @@ NULL
 # Internal helpers (NOT exported)
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Tps Spatial Result
+#' @noRd
 .tps_spatial_result <- function(title, call,
                                  summary_lines = list(),
                                  warnings = character(0),
@@ -107,6 +109,8 @@ NULL
 }
 
 
+#' Internal helper: Tps Hood Counts
+#' @noRd
 .tps_hood_counts <- function(df, hood_col = "HOOD_158") {
   s <- df[[hood_col]]
   s <- s[!is.na(s)]
@@ -116,6 +120,8 @@ NULL
 }
 
 
+#' Internal helper: Tps Knn Adjacency
+#' @noRd
 .tps_knn_adjacency <- function(coords, k) {
   n <- nrow(coords)
   if (n < 2L) {
@@ -144,6 +150,8 @@ NULL
 }
 
 
+#' Internal helper: Tps Cliff Ord Variance
+#' @noRd
 .tps_cliff_ord_variance <- function(W, n, S0) {
   W_sym <- (W + t(W)) / 2
   S1 <- 2 * sum(W_sym^2)

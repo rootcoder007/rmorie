@@ -42,6 +42,8 @@ NULL
 
 # ---- internal helpers -----------------------------------------------------
 
+#' Internal helper: Frns Check Aligned
+#' @noRd
 .frns_check_aligned <- function(...) {
   args <- list(...)
   lengths <- vapply(args, function(a) length(a[[2]]), integer(1))
@@ -58,6 +60,8 @@ NULL
   if (lengths[1] == 0L) stop("inputs are empty", call. = FALSE)
 }
 
+#' Internal helper: Frns Favorable Rates
+#' @noRd
 .frns_favorable_rates <- function(outcome, group, favorable) {
   groups <- unique(group)
   rates <- list()
@@ -70,6 +74,8 @@ NULL
   rates
 }
 
+#' Internal helper: Frns Resolve Privileged
+#' @noRd
 .frns_resolve_privileged <- function(privileged, rates) {
   # Returns list(privileged = <key>, warning = <chr or NULL>).
   keys <- names(rates)
@@ -94,6 +100,8 @@ NULL
   ))
 }
 
+#' Internal helper: Frns Rates From Labels
+#' @noRd
 .frns_rates_from_labels <- function(y_true, y_pred, group, favorable) {
   groups <- unique(group)
   out <- list()
@@ -113,6 +121,8 @@ NULL
   out
 }
 
+#' Internal helper: Frns Gini
+#' @noRd
 .frns_gini <- function(x) {
   # Gini via the sorted-rank formula; equals sum_i sum_j |x_i-x_j| /
   # (2 n sum x). Returns 0 for all-zero or single-element input.
@@ -126,6 +136,8 @@ NULL
   (2 * sum(idx * x)) / (n * total) - (n + 1) / n
 }
 
+#' Internal helper: Frns Worst Abs
+#' @noRd
 .frns_worst_abs <- function(values) {
   # The element with the largest absolute value (finite only); NA if none.
   finite <- values[is.finite(values)]

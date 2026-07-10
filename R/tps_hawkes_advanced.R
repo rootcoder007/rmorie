@@ -70,6 +70,8 @@ NULL
 .TPS_HAWKES_KERNELS   <- c("exponential", "gamma", "weibull", "lomax")
 .TPS_HAWKES_BASELINES <- c("constant", "sinusoidal")
 
+#' Internal helper: Tps Hwka Result
+#' @noRd
 .tps_hwka_result <- function(title, summary_lines = list(),
                               warnings = character(0),
                               interpretation = "",
@@ -86,10 +88,14 @@ NULL
   out
 }
 
+#' Internal helper: Tps Hwka N Kernel Params
+#' @noRd
 .tps_hwka_n_kernel_params <- function(kind) {
   if (identical(kind, "exponential")) 1L else 2L
 }
 
+#' Internal helper: Tps Hwka N Baseline Params
+#' @noRd
 .tps_hwka_n_baseline_params <- function(kind) {
   if (identical(kind, "constant")) 1L else 4L
 }
@@ -99,11 +105,15 @@ NULL
 # Kernel densities and CDFs (vectorised; mirrors the Python branch table)
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Tps Hwka Cpp Ok
+#' @noRd
 .tps_hwka_cpp_ok <- function() {
   exists("morie_hawkes_pair_excitation_sum_cpp",
          envir = asNamespace("rmorie"), inherits = FALSE)
 }
 
+#' Internal helper: Tps Hwka Kernel Density
+#' @noRd
 .tps_hwka_kernel_density <- function(u, kind, psi) {
   if (.tps_hwka_cpp_ok()) {
     return(morie_hawkes_kernel_density_cpp(as.numeric(u), kind,
@@ -143,6 +153,8 @@ NULL
   )
 }
 
+#' Internal helper: Tps Hwka Kernel Cdf
+#' @noRd
 .tps_hwka_kernel_cdf <- function(u, kind, psi) {
   if (.tps_hwka_cpp_ok()) {
     return(morie_hawkes_kernel_cdf_cpp(as.numeric(u), kind,
@@ -163,6 +175,8 @@ NULL
 # Baseline nu(t) and its integral
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Tps Hwka Baseline
+#' @noRd
 .tps_hwka_baseline <- function(t, kind, alpha, T_) {
   t <- as.numeric(t)
   switch(kind,
@@ -175,6 +189,8 @@ NULL
   )
 }
 
+#' Internal helper: Tps Hwka Baseline Integral
+#' @noRd
 .tps_hwka_baseline_integral <- function(T_, kind, alpha) {
   if (identical(kind, "constant")) return(exp(alpha[1]) * T_)
   if (identical(kind, "sinusoidal") && .tps_hwka_cpp_ok()) {
@@ -194,6 +210,8 @@ NULL
 # Negative log-likelihood (general, base-R O(n^2))
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Tps Hwka Split Theta
+#' @noRd
 .tps_hwka_split_theta <- function(theta, kernel_kind, baseline_kind) {
   nb <- .tps_hwka_n_baseline_params(baseline_kind)
   nk <- .tps_hwka_n_kernel_params(kernel_kind)
@@ -206,6 +224,8 @@ NULL
        psi = theta[(nb + 2L):length(theta)])
 }
 
+#' Internal helper: Tps Hwka Neg Loglik General
+#' @noRd
 .tps_hwka_neg_loglik_general <- function(theta, t, T_,
                                           kernel_kind,
                                           baseline_kind) {
@@ -269,6 +289,8 @@ NULL
 # expose a univariate log-likelihood under the exponential-kernel
 # constant-baseline parameterisation; both are gated via
 # requireNamespace and stubbed when neither is installed.
+#' Internal helper: Tps Hwka Neg Loglik External Exp
+#' @noRd
 .tps_hwka_neg_loglik_external_exp <- function(theta, t, T_) {
   if (requireNamespace("hawkes", quietly = TRUE)) {
     a0   <- theta[1]
@@ -304,6 +326,8 @@ NULL
 # Initial-guess heuristic
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Tps Hwka X0
+#' @noRd
 .tps_hwka_x0 <- function(kernel_kind, baseline_kind, n, T_, mean_dt) {
   rate <- max(n / T_, 1e-3)
   a <- if (identical(baseline_kind, "constant")) {
@@ -326,6 +350,8 @@ NULL
 # Time-rescaling residuals (Brown et al. 2002)
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Tps Hwka Time Rescaling
+#' @noRd
 .tps_hwka_time_rescaling <- function(theta, t, T_,
                                       kernel_kind, baseline_kind) {
   nb <- .tps_hwka_n_baseline_params(baseline_kind)
@@ -361,6 +387,8 @@ NULL
 # Public single-fit driver
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Tps Hwka Fit One
+#' @noRd
 .tps_hwka_fit_one <- function(t, T_, kernel_kind, baseline_kind) {
   t <- as.numeric(t)
   t <- t[t >= 0 & t < T_]
@@ -431,6 +459,8 @@ NULL
 # Event-to-days conversion (TPS daily resolution + ties jitter)
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Tps Hwka Events To Days
+#' @noRd
 .tps_hwka_events_to_days <- function(df, max_n) {
   date_col <- intersect(c("OCC_DATE", "REPORT_DATE"), colnames(df))[1]
   if (is.na(date_col)) {

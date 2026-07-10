@@ -100,6 +100,8 @@ NULL
 
 # Canonical taphonomy variable set. Grouped by causal role. Kept internal so
 # the schema and the estimator agree on one source of truth.
+#' Internal helper: Taphonomy Vars
+#' @noRd
 .taphonomy_vars <- function() {
   list(
     # Anthropogenic "processing" — candidate treatment(s).
@@ -164,6 +166,8 @@ morie_taphonomy_schema <- function() {
 # risk ratio for the E-value, per VanderWeele & Ding (2017): RR ~= exp(0.91 * d).
 # E-values are defined on ratio scales; this is the standard continuous-outcome
 # bridge. Returns a value >= 1 (E-value machinery expects RR on the ">1" side).
+#' Internal helper: Taphonomy Smd To Rr
+#' @noRd
 .taphonomy_smd_to_rr <- function(d) {
   rr <- exp(0.91 * d)
   if (rr < 1) rr <- 1 / rr
@@ -572,6 +576,8 @@ morie_taphonomy_decay_delta <- function(preservation, start = NULL, ...) {
 # ===========================================================================
 
 # ENFSI (2015) verbal-equivalent scale for a likelihood ratio supporting H1.
+#' Internal helper: Taphonomy Lr Verbal
+#' @noRd
 .taphonomy_lr_verbal <- function(lr) {
   if (!is.finite(lr)) return("extremely strong support (LR effectively infinite)")
   x <- if (lr >= 1) lr else 1 / lr
@@ -919,6 +925,8 @@ generated quantities {
 "
 
 # HMC/NUTS fit via cmdstanr, returning the same structure as the conjugate path.
+#' Internal helper: Morie Bhm Cmdstanr
+#' @noRd
 .morie_bhm_cmdstanr <- function(X, y, terms, m0, s0, gfac, group, chains, iter,
                                 seed) {
   if (!requireNamespace("cmdstanr", quietly = TRUE)) {
@@ -974,6 +982,8 @@ generated quantities {
 }
 
 # Coefficient summary from a draws matrix (rows = draws, cols = terms).
+#' Internal helper: Morie Bhm Coefs From Draws
+#' @noRd
 .morie_bhm_coefs_from_draws <- function(bmat, terms) {
   q <- function(x, prob) stats::quantile(x, prob, names = FALSE)
   data.frame(
@@ -988,6 +998,8 @@ generated quantities {
 
 # HMC via the formula-based samplers (brms / rstanarm). Same model, same
 # informative Normal priors, same return structure as the other backends.
+#' Internal helper: Morie Bhm Formula Stan
+#' @noRd
 .morie_bhm_formula_stan <- function(backend, frame, outcome, covariates, group,
                                     m0, s0, terms, chains, iter, seed) {
   if (!requireNamespace(backend, quietly = TRUE)) {
@@ -1148,6 +1160,8 @@ morie_taphonomy_simulate_pxrf <- function(n,
 }
 
 # Close a composition matrix to the simplex, guarding zeros with a pseudocount.
+#' Internal helper: Taphonomy Close
+#' @noRd
 .taphonomy_close <- function(x, pseudocount) {
   X <- as.matrix(x)
   if (!is.numeric(X)) stop("`x` must be a numeric composition", call. = FALSE)
@@ -1225,6 +1239,8 @@ morie_taphonomy_ilr <- function(x, pseudocount = 1e-6) {
 
 # Read the CSV out of a downloaded ngdbsoil zip WITHOUT extracting the full
 # 482 MB (base R `unz()` streams the member). Split out for testing.
+#' Internal helper: Morie Read Usgs Soil Zip
+#' @noRd
 .morie_read_usgs_soil_zip <- function(zip_path, nrows = NULL) {
   members <- utils::unzip(zip_path, list = TRUE)$Name
   csv <- grep("\\.csv$", members, value = TRUE, ignore.case = TRUE)[1]
@@ -1335,6 +1351,8 @@ morie_taphonomy_pmi_schema <- function() {
 # environment -- never hard-coded, never in the URL/argv.
 
 # Resolve the API base (env override -> default).
+#' Internal helper: Morie Morphosource Api
+#' @noRd
 .morie_morphosource_api <- function() {
   base <- Sys.getenv("MORPHOSOURCE_API_URL", unset = "")
   if (nzchar(base)) base else "https://www.morphosource.org/api"
@@ -1342,6 +1360,8 @@ morie_taphonomy_pmi_schema <- function() {
 
 # Resolve the user's API key: explicit arg -> MORPHOSOURCE_API_KEY env.
 # `required = FALSE` for public search; TRUE for downloads.
+#' Internal helper: Morie Morphosource Key
+#' @noRd
 .morie_morphosource_key <- function(api_key = NULL, required = TRUE) {
   key <- if (!is.null(api_key) && nzchar(api_key)) {
     api_key
@@ -1361,6 +1381,8 @@ morie_taphonomy_pmi_schema <- function() {
 }
 
 # Build the GET search query list (testable without network).
+#' Internal helper: Morie Morphosource Search Params
+#' @noRd
 .morie_morphosource_search_params <- function(query = NULL, media_type = NULL,
                                               taxonomy_gbif = NULL,
                                               visibility = NULL, media_tag = NULL,

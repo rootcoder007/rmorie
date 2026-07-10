@@ -11,6 +11,8 @@ NULL
 # values; not exported.
 `%||%` <- function(a, b) if (is.null(a)) b else a
 
+#' Internal helper: Morie Beta Weights
+#' @noRd
 .morie_beta_weights <- function(t1, t2, K) {
   k <- seq_len(K) / (K + 1)
   w <- (k^(t1 - 1)) * ((1 - k)^(t2 - 1))

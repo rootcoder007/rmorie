@@ -230,6 +230,8 @@ clear_stat_commands <- function() {
 # 620-command tree lives in Python; the R surface starts with the
 # multiple-testing and semiparametric callables ported alongside this
 # file.
+#' Internal helper: Morie Seed Stat Commands
+#' @noRd
 .morie_seed_stat_commands <- function() {
   seeds <- list(
     list(
@@ -431,6 +433,8 @@ print.morie_stat_command <- function(x, ...) {
 # Infer a category for a function `fn_name` by searching the installed
 # R/ directory for files whose names begin with a known prefix.  Falls
 # back to scanning the function's source attributes when available.
+#' Internal helper: Morie Infer Category
+#' @noRd
 .morie_infer_category <- function(fn_name) {
   # Cheap path: prefix match against the static map.
   for (px in names(.MORIE_CATEGORY_PREFIX_MAP)) {
@@ -500,6 +504,8 @@ print.morie_stat_command <- function(x, ...) {
 # Fires once when the package namespace is loaded.  Wrapped in try() so a
 # downstream failure (e.g. missing optional dep used by a handler) never
 # aborts the load.
+#' Internal helper: OnLoad
+#' @noRd
 .onLoad <- function(libname, pkgname) {
   try(.morie_auto_register_stat_commands(), silent = TRUE)
   invisible(NULL)

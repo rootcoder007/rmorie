@@ -1,3 +1,5 @@
+#' Internal helper: Binary Power Required N
+#' @noRd
 .binary_power_required_n <- function(p1, p2, alpha = 0.05, power = 0.80) {
   h <- abs(2 * asin(sqrt(p1)) - 2 * asin(sqrt(p2)))
   if (is.na(h) || h <= 0) {
@@ -8,6 +10,8 @@
   2 * ((z_alpha + z_beta) / h)^2
 }
 
+#' Internal helper: Continuous Power Required N
+#' @noRd
 .continuous_power_required_n <- function(mean1, mean2, sd_pooled, alpha = 0.05, power = 0.80) {
   d <- abs(.safe_divide(mean1 - mean2, sd_pooled))
   if (is.na(d) || d <= 0) {
@@ -18,6 +22,8 @@
   2 * ((z_alpha + z_beta) / d)^2
 }
 
+#' Internal helper: Block Schedule
+#' @noRd
 .block_schedule <- function(endpoint, required_n, strata_levels, target_power = 0.8) {
   out <- list()
   if (length(strata_levels) == 0L || is.na(required_n)) {
@@ -63,6 +69,8 @@
   do.call(rbind, out)
 }
 
+#' Internal helper: Run Power Design Module Extended
+#' @noRd
 .run_power_design_module_extended <- function(data) {
   data <- .cpads_labeled_data(data)
   binary_endpoints <- list(
@@ -392,6 +400,8 @@
   )
 }
 
+#' Internal helper: Read Existing Output
+#' @noRd
 .read_existing_output <- function(output_dir, file_name, fallback = NULL) {
   path <- file.path(output_dir, file_name)
   if (file.exists(path)) {
@@ -400,6 +410,8 @@
   fallback
 }
 
+#' Internal helper: Legacy Reference Root
+#' @noRd
 .legacy_reference_root <- function() {
   # The legacy migration tree exists only in a source checkout; an
   # installed package has no project root. Degrade to NA so callers
@@ -411,6 +423,8 @@
   file.path(root, "migration_files", "one")
 }
 
+#' Internal helper: Copy Legacy Artifacts
+#' @noRd
 .copy_legacy_artifacts <- function(relative_paths, output_dir, root = file.path(.legacy_reference_root(), "six", "outputs")) {
   copied <- character()
   for (rel in relative_paths) {
@@ -424,6 +438,8 @@
   copied
 }
 
+#' Internal helper: Run Ebac Integrations Module Internal
+#' @noRd
 .run_ebac_integrations_module_internal <- function(data, output_dir = NULL) {
   if (is.null(output_dir)) {
     output_dir <- tempfile("morie-ebac-integrations-")
@@ -523,6 +539,8 @@
   )
 }
 
+#' Internal helper: Run Figures Module Internal
+#' @noRd
 .run_figures_module_internal <- function(data, output_dir = NULL) {
   if (!is.null(output_dir)) {
     .copy_legacy_artifacts(
@@ -547,6 +565,8 @@
   list()
 }
 
+#' Internal helper: Run Tables Module Internal
+#' @noRd
 .run_tables_module_internal <- function(data, output_dir = NULL) {
   if (!is.null(output_dir)) {
     .copy_legacy_artifacts("table1.html", output_dir = output_dir, root = .legacy_reference_root())
@@ -554,6 +574,8 @@
   list()
 }
 
+#' Internal helper: Run Final Report Module Internal
+#' @noRd
 .run_final_report_module_internal <- function(data, output_dir = NULL) {
   if (is.null(output_dir)) {
     output_dir <- tempfile("morie-final-report-")

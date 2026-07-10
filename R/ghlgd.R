@@ -4,6 +4,8 @@
 # Extracted from the morie_ghosal_log_density() optimiser closure for direct
 # unit-testing. `Bx`/`Bg` are the data and grid basis matrices, `gz` the
 # standardised evaluation grid, `n` the sample size.
+#' Internal helper: Ghlgd Negll
+#' @noRd
 .ghlgd_negll <- function(theta, Bx, Bg, gz, n) {
   eta_x <- Bx %*% theta
   eta_g <- Bg %*% theta

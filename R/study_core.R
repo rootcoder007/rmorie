@@ -1,3 +1,5 @@
+#' Internal helper: Na Omit Cols
+#' @noRd
 .na_omit_cols <- function(data, cols) {
   data[stats::complete.cases(data[, cols, drop = FALSE]), cols, drop = FALSE]
 }
@@ -6,6 +8,8 @@
 # levels, other columns >= 2 unique non-NA values. Degenerate terms (common
 # in small or synthetic CPADS extracts) otherwise abort model.matrix with
 # "contrasts can be applied only to factors with 2 or more levels".
+#' Internal helper: Viable Terms
+#' @noRd
 .viable_terms <- function(data, terms) {
   keep <- vapply(terms, function(t) {
     v <- data[[t]]
@@ -22,12 +26,16 @@
 }
 
 # reformulate() with degenerate-term protection; intercept-only on total loss.
+#' Internal helper: Robust Formula
+#' @noRd
 .robust_formula <- function(response, terms, data) {
   terms <- .viable_terms(data, terms)
   if (length(terms) == 0L) return(stats::as.formula(paste(response, "~ 1")))
   stats::reformulate(terms, response = response)
 }
 
+#' Internal helper: Safe Divide
+#' @noRd
 .safe_divide <- function(num, den) {
   if (is.na(den) || den == 0) {
     return(NA_real_)
@@ -35,6 +43,8 @@
   as.numeric(num) / as.numeric(den)
 }
 
+#' Internal helper: Wald Ci
+#' @noRd
 .wald_ci <- function(estimate, se) {
   c(
     estimate - 1.96 * se,
@@ -42,6 +52,8 @@
   )
 }
 
+#' Internal helper: Binary Ci
+#' @noRd
 .binary_ci <- function(successes, n) {
   p <- .safe_divide(successes, n)
   se <- sqrt(p * (1 - p) / max(n, 1))
@@ -49,6 +61,8 @@
   list(p = p, se = se, ci = ci)
 }
 
+#' Internal helper: Weighted Binary Estimate
+#' @noRd
 .weighted_binary_estimate <- function(x, w) {
   keep <- !(is.na(x) | is.na(w))
   x <- as.numeric(x[keep])
@@ -63,10 +77,14 @@
   list(p = p, se = se, ci = ci, n = length(x), n_eff = n_eff)
 }
 
+#' Internal helper: Clip Exp
+#' @noRd
 .clip_exp <- function(x) {
   exp(pmin(pmax(as.numeric(x), -700), 700))
 }
 
+#' Internal helper: Safe Confint
+#' @noRd
 .safe_confint <- function(fit) {
   est <- stats::coef(fit)
   se <- sqrt(diag(stats::vcov(fit)))
@@ -75,6 +93,8 @@
   out
 }
 
+#' Internal helper: Or Table
+#' @noRd
 .or_table <- function(fit, model = NULL, lower_se_name = FALSE) {
   est <- stats::coef(fit)
   se <- sqrt(diag(stats::vcov(fit)))
@@ -102,6 +122,8 @@
   out
 }
 
+#' Internal helper: Linear Coef Table
+#' @noRd
 .linear_coef_table <- function(fit, model) {
   sm <- summary(fit)$coefficients
   ci <- .safe_confint(fit)
@@ -118,6 +140,8 @@
   )
 }
 
+#' Internal helper: Cpads Labeled Data
+#' @noRd
 .cpads_labeled_data <- function(data) {
   out <- data
   out$gender_label <- factor(
@@ -147,6 +171,8 @@
   out
 }
 
+#' Internal helper: Run Data Wrangling Module Internal
+#' @noRd
 .run_data_wrangling_module_internal <- function(data, cpads_csv = NULL, output_dir = NULL) {
   resolved <- if (!is.null(cpads_csv)) .resolve_cpads_csv(cpads_csv) else NA_character_
   raw <- if (!is.na(resolved)) utils::read.csv(resolved, stringsAsFactors = FALSE) else data
@@ -182,6 +208,8 @@
   )
 }
 
+#' Internal helper: Run Descriptive Statistics Module Internal
+#' @noRd
 .run_descriptive_statistics_module_internal <- function(data) {
   data <- .cpads_labeled_data(data)
   vars <- intersect(c("alcohol_past12m", "heavy_drinking_30d", "cannabis_any_use", "ebac_legal"), names(data))
@@ -251,6 +279,8 @@
   )
 }
 
+#' Internal helper: Run Distribution Tests Module Internal
+#' @noRd
 .run_distribution_tests_module_internal <- function(data) {
   data <- .cpads_labeled_data(data)
   tests <- list()
@@ -319,6 +349,8 @@
   )
 }
 
+#' Internal helper: Run Frequentist Module Internal
+#' @noRd
 .run_frequentist_module_internal <- function(data) {
   data <- .cpads_labeled_data(data)
   prevalence_rows <- list()
@@ -425,6 +457,8 @@
   )
 }
 
+#' Internal helper: Run Bayesian Module Internal
+#' @noRd
 .run_bayesian_module_internal <- function(data) {
   x <- data$heavy_drinking_30d
   x <- x[!is.na(x)]
@@ -486,6 +520,8 @@
   )
 }
 
+#' Internal helper: Run Logistic Models Module Internal
+#' @noRd
 .run_logistic_models_module_internal <- function(data) {
   data <- .cpads_labeled_data(data)
   frame <- .na_omit_cols(
@@ -538,6 +574,8 @@
   )
 }
 
+#' Internal helper: Run Model Comparison Module Internal
+#' @noRd
 .run_model_comparison_module_internal <- function(data) {
   data <- .cpads_labeled_data(data)
   frame <- .na_omit_cols(
@@ -598,6 +636,8 @@
   )
 }
 
+#' Internal helper: Run Regression Models Module Internal
+#' @noRd
 .run_regression_models_module_internal <- function(data) {
   data <- .cpads_labeled_data(data)
   frame <- .na_omit_cols(
@@ -644,6 +684,8 @@
   )
 }
 
+#' Internal helper: Run Propensity Scores Module Internal
+#' @noRd
 .run_propensity_scores_module_internal <- function(data) {
   out <- morie_run_propensity_ipw_analysis(data)
   frame <- out$analysis_frame
@@ -662,6 +704,8 @@
   out
 }
 
+#' Internal helper: Run Causal Estimators Module Internal
+#' @noRd
 .run_causal_estimators_module_internal <- function(data) {
   data <- .cpads_labeled_data(data)
   frame <- .na_omit_cols(
@@ -706,6 +750,8 @@
   list(causal_estimator_comparison = methods)
 }
 
+#' Internal helper: Run Treatment Effects Module Internal
+#' @noRd
 .run_treatment_effects_module_internal <- function(data) {
   data <- .cpads_labeled_data(data)
   frame <- .na_omit_cols(
@@ -783,6 +829,8 @@
   )
 }
 
+#' Internal helper: Run Dag Specification Module Internal
+#' @noRd
 .run_dag_specification_module_internal <- function(data) {
   map_tbl <- data.frame(
     requirement_id = c("cpads-exposure", "cpads-outcome", "cpads-covariates", "cpads-ebac"),
@@ -812,6 +860,8 @@
   list(official_doc_alignment_checklist = map_tbl)
 }
 
+#' Internal helper: Run Meta Synthesis Module Internal
+#' @noRd
 .run_meta_synthesis_module_internal <- function(data, output_dir = NULL) {
   output_dir <- output_dir %||% Sys.getenv("MORIE_OUTPUT_DIR", "")
   if (nzchar(output_dir)) {
@@ -824,6 +874,8 @@
   list()
 }
 
+#' Internal helper: Run Ebac Core Module Internal
+#' @noRd
 .run_ebac_core_module_internal <- function(data) {
   data <- .cpads_labeled_data(data)
   eligible <- data[data$alcohol_past12m == 1, , drop = FALSE]
@@ -935,6 +987,8 @@
   )
 }
 
+#' Internal helper: Run Ebac Gender Smote Sensitivity Module Internal
+#' @noRd
 .run_ebac_gender_smote_sensitivity_module_internal <- function(data) {
   data <- .cpads_labeled_data(data)
   observed <- .na_omit_cols(
@@ -1012,6 +1066,8 @@
   )
 }
 
+#' Internal helper: Run Ebac Selection Adjustment Ipw Module Internal
+#' @noRd
 .run_ebac_selection_adjustment_ipw_module_internal <- function(data) {
   data <- .cpads_labeled_data(data)
   out <- morie_run_ebac_selection_ipw_analysis(data)

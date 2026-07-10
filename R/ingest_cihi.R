@@ -1,4 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
+#' Internal helper: Morie Cihi Pick Data Sheet
+#' @noRd
 .morie_cihi_pick_data_sheet <- function(path, ...) {
   morie_ensure_extras("readxl")
   sheets <- readxl::excel_sheets(path)

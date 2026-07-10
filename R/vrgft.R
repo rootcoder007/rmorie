@@ -3,6 +3,8 @@
 # Internal: parametric variogram model value at distance h. Extracted
 # from the vrgft() optimiser closure so the model switch (including the
 # unknown-model stop) is directly unit-testable.
+#' Internal helper: Vrgft Model
+#' @noRd
 .vrgft_model <- function(h, c0, c1, a, model) {
   switch(model,
     exponential = c0 + c1 * (1 - exp(-h / a)),
@@ -16,6 +18,8 @@
 }
 
 # Internal: variogram weighted-least-squares objective.
+#' Internal helper: Vrgft Obj
+#' @noRd
 .vrgft_obj <- function(p, mids, gammas, weights, model) {
   pred <- .vrgft_model(mids, p[1], p[2], p[3], model)
   sum(weights * (gammas - pred)^2)

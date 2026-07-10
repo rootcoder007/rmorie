@@ -59,6 +59,8 @@
 )
 
 # Internal: resolve FBI CDE API key from arg -> env, or stop.
+#' Internal helper: Morie Forensics Require Fbi Key
+#' @noRd
 .morie_forensics_require_fbi_key <- function(api_key = NULL) {
   key <- if (!is.null(api_key) && nzchar(api_key)) {
     api_key
@@ -80,6 +82,8 @@
 # Internal: flatten one nested NIBRS JSON record to a single row.
 # Nested dicts become dotted keys; scalar lists are ";"-joined;
 # nested lists are JSON-serialised.
+#' Internal helper: Morie Forensics Flatten Nibrs
+#' @noRd
 .morie_forensics_flatten_nibrs <- function(rec) {
   if (!requireNamespace("jsonlite", quietly = TRUE)) {
     stop(
@@ -124,6 +128,8 @@
 # 3ZZ: routes through .morie_dataset_http_text_with_status (libcurl
 # backend with httr2 fallback), inspects HTTP status code for
 # 401/403 (auth) + 4xx (generic) custom error formatting.
+#' Internal helper: Morie Forensics Get Json
+#' @noRd
 .morie_forensics_get_json <- function(url,
                                       params = list(),
                                       headers = list(),
@@ -170,6 +176,8 @@
 
 # Internal: rbind a list of named-list rows into a data.frame,
 # tolerating heterogeneous columns (missing -> NA).
+#' Internal helper: Morie Forensics Rows To Df
+#' @noRd
 .morie_forensics_rows_to_df <- function(rows, columns = NULL) {
   if (length(rows) == 0L) {
     if (is.null(columns)) {
@@ -307,6 +315,8 @@ morie_ingest_forensics_nibrs <- function(year,
 }
 
 # Internal: pull morie's documented columns out of one NamUs record.
+#' Internal helper: Morie Forensics Flatten Namus
+#' @noRd
 .morie_forensics_flatten_namus <- function(rec) {
   sub_id <- rec$subjectIdentification
   if (is.null(sub_id)) sub_id <- list()
@@ -462,6 +472,8 @@ morie_ingest_forensics_namus_missing <- function(
 }
 
 # Internal: pull morie's documented columns out of one NIST RDS record.
+#' Internal helper: Morie Forensics Flatten Nist
+#' @noRd
 .morie_forensics_flatten_nist <- function(rec) {
   keyword <- rec$keyword
   if (is.null(keyword)) keyword <- rec$theme

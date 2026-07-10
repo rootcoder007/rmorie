@@ -46,6 +46,8 @@ morie_bkprp_backpropagation <- function(x, y, w = NULL, b = NULL,
   )
 }
 
+#' Internal helper: Bkprp Sigma
+#' @noRd
 .bkprp_sigma <- function(z, activation) {
   switch(activation,
     "identity" = z,
@@ -58,6 +60,8 @@ morie_bkprp_backpropagation <- function(x, y, w = NULL, b = NULL,
   )
 }
 
+#' Internal helper: Bkprp Sigma Prime
+#' @noRd
 .bkprp_sigma_prime <- function(z, activation, a) {
   switch(activation,
     "identity" = matrix(1, nrow(z), ncol(z)),

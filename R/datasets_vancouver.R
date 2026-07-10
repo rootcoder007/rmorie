@@ -102,6 +102,8 @@ morie_datasets_vancouver_opendata_layers <- function(offline = TRUE,
 #' @name vancouver_crime_adjacent
 NULL
 
+#' Internal helper: Morie Vancouver Fixture
+#' @noRd
 .morie_vancouver_fixture <- function(fname) {
   path <- system.file("extdata", fname, package = "rmorie")
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {

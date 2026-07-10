@@ -84,6 +84,8 @@ NULL
 # Internal: locate a (possibly whitespace-corrupted) outcome column
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Morie Arsau Locate Outcome Col
+#' @noRd
 .morie_arsau_locate_outcome_col <- function(df, target) {
   if (target %in% names(df)) return(target)
   trimmed <- tolower(trimws(names(df)))
@@ -100,6 +102,8 @@ NULL
 # the top so they appear in the wrapped result's printed banner.
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Morie Arsau Wrap
+#' @noRd
 .morie_arsau_wrap <- function(title, call, sub_results, data, sidecar,
                               year_or_range, kind, language, is_valid,
                               extra_interpretation = "") {

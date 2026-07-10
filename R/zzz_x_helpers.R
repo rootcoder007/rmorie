@@ -9,6 +9,8 @@
 # This is invoked at the top of every morie ML-callable function so
 # users can pass a vector predictor without hitting glmnet's
 # "x should be a matrix with 2 or more columns" error.
+#' Internal helper: Morie Ensure Design Matrix
+#' @noRd
 .morie_ensure_design_matrix <- function(x) {
   if (is.data.frame(x)) return(x)
   if (is.vector(x) && !is.list(x)) {

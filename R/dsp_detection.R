@@ -423,6 +423,8 @@ morie_dsp_csd <- function(x, y, fs = 1, nperseg = 256L) {
 # ---- internal helpers -------------------------------------------------
 
 # Local unwrap (numeric vector).
+#' Internal helper: Unwrap D
+#' @noRd
 .unwrap_d <- function(p, tol = pi) {
   d <- diff(p)
   adj <- ifelse(d >  tol, d - 2 * pi,

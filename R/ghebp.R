@@ -3,6 +3,8 @@
 # Internal: Antoniak DP empirical-Bayes negative log-likelihood in the
 # concentration parameter alpha. Extracted from the
 # morie_ghosal_empirical_bayes() optimiser closure for direct unit-testing.
+#' Internal helper: Ghebp Negll
+#' @noRd
 .ghebp_negll <- function(a, K_n, n) {
   -(K_n * log(a) + lgamma(a) - lgamma(a + n))
 }

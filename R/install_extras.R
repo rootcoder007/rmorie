@@ -178,6 +178,8 @@ morie_install_extras <- function(which = "missing",
 
 
 # Internal: read this package's Suggests field from its DESCRIPTION.
+#' Internal helper: Morie Get Suggests
+#' @noRd
 .morie_get_suggests <- function() {
   desc_path <- system.file("DESCRIPTION", package = "rmorie")
   if (!nzchar(desc_path)) {
@@ -196,6 +198,8 @@ morie_install_extras <- function(which = "missing",
 
 
 # Internal: is a CRAN package installed locally?
+#' Internal helper: Morie Pkg Installed
+#' @noRd
 .morie_pkg_installed <- function(pkg) {
   isTRUE(requireNamespace(pkg, quietly = TRUE))
 }
@@ -307,6 +311,8 @@ morie_ensure_extras <- function(pkgs, ask = interactive(), repos = NULL) {
 # Uses configure-time flags written into DESCRIPTION at install
 # (Phase 3JJJ1/2: MORIE_HAVE_SODIUM / MORIE_HAVE_LIBOQS), with
 # library-load fallback for libcurl (Imports R-side).
+#' Internal helper: Morie Check System Libs
+#' @noRd
 .morie_check_system_libs <- function() {
   list(
     libcurl   = .morie_pkg_installed("curl") || .morie_pkg_installed("httr2"),

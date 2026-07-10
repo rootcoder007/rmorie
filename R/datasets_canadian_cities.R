@@ -54,6 +54,8 @@ morie_datasets_ottawa_open_crime_adjacent_layers <- function(offline = TRUE) {
                                 offline)
 }
 
+#' Internal helper: Morie Canadian Cat Fixture
+#' @noRd
 .morie_canadian_cat_fixture <- function(fname, offline) {
   if (!isTRUE(offline)) {
     stop(sprintf(paste0(
@@ -205,6 +207,8 @@ morie_datasets_edmonton_socrata_by_id <- function(soda_id,
 # Helpers
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Morie Canadian Fixture
+#' @noRd
 .morie_canadian_fixture <- function(fname) {
   path <- system.file("extdata", fname, package = "rmorie")
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {

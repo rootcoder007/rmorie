@@ -4,6 +4,8 @@
 # Given the in-coalition membership `mask` and the coalition weight
 # `tot_in`, returns a length-n 0/1 vector marking which players are
 # pivotal. Shared by the Monte-Carlo and exact-enumeration paths.
+#' Internal helper: Vtpwr Swing Increment
+#' @noRd
 .vtpwr_swing_increment <- function(mask, tot_in, w, quota, n) {
   inc <- numeric(n)
   for (i in seq_len(n)) {
@@ -17,6 +19,8 @@
 }
 
 # Internal: pivotal player in one ordering, for Shapley-Shubik.
+#' Internal helper: Vtpwr Pivot
+#' @noRd
 .vtpwr_pivot <- function(ord, w, quota) {
   cum <- 0
   for (idx in ord) {
@@ -30,6 +34,8 @@
 }
 
 # Internal: all permutations of a vector, as a matrix (one per row).
+#' Internal helper: Vtpwr Perms
+#' @noRd
 .vtpwr_perms <- function(v) {
   if (length(v) == 1L) {
     return(matrix(v, 1L, 1L))
@@ -40,6 +46,8 @@
 }
 
 # Internal: Monte-Carlo voting-power indices for large games (n > 10).
+#' Internal helper: Vtpwr Mc
+#' @noRd
 .vtpwr_mc <- function(w, quota, n) {
   set.seed(0L)
   n_mc <- 20000L
@@ -59,6 +67,8 @@
 }
 
 # Internal: exact voting-power indices by full enumeration (n <= 10).
+#' Internal helper: Vtpwr Exact
+#' @noRd
 .vtpwr_exact <- function(w, quota, n) {
   swings <- rep(0, n)
   for (mask_int in 0:(2^n - 1L)) {

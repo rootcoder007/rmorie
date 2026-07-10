@@ -6,6 +6,8 @@
 #' @name horowitz_helpers
 NULL
 
+#' Internal helper: Hrz Silverman
+#' @noRd
 .hrz_silverman <- function(x) {
   x <- as.numeric(x)
   n <- length(x)
@@ -23,9 +25,13 @@ NULL
 .hrz_R_K_gaussian <- 1.0 / (2.0 * sqrt(pi))
 
 
+#' Internal helper: Hrz Gauss Kernel
+#' @noRd
 .hrz_gauss_kernel <- function(u) exp(-0.5 * u^2) / sqrt(2 * pi)
 
 
+#' Internal helper: Hrz Nw Loo
+#' @noRd
 .hrz_nw_loo <- function(z, y, h) {
   if (is.null(dim(z))) {
     u <- outer(z, z, `-`) / h
@@ -46,6 +52,8 @@ NULL
 }
 
 
+#' Internal helper: Hrz Probit Newton
+#' @noRd
 .hrz_probit_newton <- function(D, Z, maxit = 50, tol = 1e-8) {
   q <- ncol(Z)
   beta <- rep(0, q)
@@ -67,6 +75,8 @@ NULL
 }
 
 
+#' Internal helper: Hrz Logit Newton
+#' @noRd
 .hrz_logit_newton <- function(D, X, maxit = 50, tol = 1e-8) {
   p <- ncol(X)
   beta <- rep(0, p)
@@ -86,6 +96,8 @@ NULL
 }
 
 
+#' Internal helper: Hrz Qreg Irls
+#' @noRd
 .hrz_qreg_irls <- function(X, y, tau = 0.5, maxit = 50, tol = 1e-6) {
   beta <- as.numeric(stats::coef(stats::lm.fit(X, y)))
   for (k in 1:maxit) {
@@ -107,6 +119,8 @@ NULL
 }
 
 
+#' Internal helper: Hrz Hermite
+#' @noRd
 .hrz_hermite <- function(t, J) {
   n <- length(t)
   H <- matrix(0, n, J)

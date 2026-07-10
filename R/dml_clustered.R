@@ -139,6 +139,8 @@ print.morie_dml_clustered <- function(x, ...) {
 }
 
 # Ridge-logistic propensity (tiny ridge for separation), predicted + clipped.
+#' Internal helper: Dmlc Ps
+#' @noRd
 .dmlc_ps <- function(Xtr, dtr, Xte, eps) {
   fit <- tryCatch(
     stats::glm.fit(Xtr, dtr, family = stats::binomial()),
@@ -151,6 +153,8 @@ print.morie_dml_clustered <- function(x, ...) {
 }
 
 # Per-arm OLS outcome regression; robust to rank-deficiency and thin arms.
+#' Internal helper: Dmlc Ols
+#' @noRd
 .dmlc_ols <- function(X, idx, y, te, p) {
   if (length(idx) < p + 2L) {
     return(rep(if (length(idx)) mean(y[idx]) else mean(y), length(te)))
@@ -165,12 +169,16 @@ print.morie_dml_clustered <- function(x, ...) {
 }
 
 # Liang-Zeger one-way cluster-robust SE of a mean, from the influence function.
+#' Internal helper: Dmlc Cluster Se
+#' @noRd
 .dmlc_cluster_se <- function(infl, cluster, n) {
   grp <- tapply(infl, cluster, sum)
   sqrt(max(sum(grp^2, na.rm = TRUE) / (n^2), 0))
 }
 
 # Cameron-Gelbach-Miller up to two-way.
+#' Internal helper: Dmlc Multiway Se
+#' @noRd
 .dmlc_multiway_se <- function(infl, clusters, n) {
   if (length(clusters) == 1L) return(.dmlc_cluster_se(infl, clusters[[1]], n))
   a <- clusters[[1]]

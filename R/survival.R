@@ -61,14 +61,20 @@
 NULL
 
 
+#' Internal helper: Req Survival
+#' @noRd
 .req_survival <- function() {
   morie_ensure_extras("survival")
 }
 
+#' Internal helper: Req Cmprsk
+#' @noRd
 .req_cmprsk <- function() {
   morie_ensure_extras("cmprsk")
 }
 
+#' Internal helper: Validate Te
+#' @noRd
 .validate_te <- function(time, event) {
   t <- as.numeric(time)
   e <- as.numeric(event)

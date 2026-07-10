@@ -202,10 +202,14 @@ morie_tps_project_xy <- function(lat, lon,
 # Internal: ggplot2-or-base dispatcher
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Tps Has Ggplot2
+#' @noRd
 .tps_has_ggplot2 <- function() {
   requireNamespace("ggplot2", quietly = TRUE)
 }
 
+#' Internal helper: Tps Save Plot
+#' @noRd
 .tps_save_plot <- function(p_or_recordedplot, outfile, fig_w, fig_h,
                             use_gg) {
   outfile <- path.expand(outfile)
@@ -614,6 +618,8 @@ morie_tps_render_yearly_grid <- function(polys,
 # ----------------------------------------------------------------------------
 
 # Internal: draw a north-arrow compass in plot coordinates.
+#' Internal helper: Tps Draw Compass
+#' @noRd
 .tps_draw_compass <- function(x, y, size = 1.5, use_gg = FALSE) {
   if (use_gg && .tps_has_ggplot2()) {
     arrow_df <- data.frame(
@@ -641,6 +647,8 @@ morie_tps_render_yearly_grid <- function(polys,
 }
 
 # Internal: draw a scalebar of `length_km` near (x, y) in km space.
+#' Internal helper: Tps Draw Scalebar
+#' @noRd
 .tps_draw_scalebar <- function(x, y, length_km = 5, use_gg = FALSE) {
   if (use_gg && .tps_has_ggplot2()) {
     list(
