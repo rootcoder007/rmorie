@@ -31,35 +31,35 @@ Tracks every rOpenSci statistical-software standard claimed for the whole-packag
 | G1.4a | TODO | All internal (non-exported) functions should also be documented in standard [`roxygen2`](https://roxygen2.r-lib.org/) format, along with a final `@noRd` tag ... |
 | G1.5 | TODO | Software should include all code necessary to reproduce results which form the basis of performance claims made in associated publications. |
 | G1.6 | TODO | Software should include code necessary to compare performance claims with alternative implementations in other R packages. |
-| G2.0 | TODO | Implement assertions on lengths of inputs, particularly through asserting that inputs expected to be single- or multi-valued are indeed so. |
-| G2.0a | TODO | Provide explicit secondary documentation of any expectations on lengths of inputs |
-| G2.1 | TODO | Implement assertions on types of inputs (see the initial point on nomenclature above). |
-| G2.1a | TODO | Provide explicit secondary documentation of expectations on data types of all vector inputs. |
-| G2.2 | TODO | Appropriately prohibit or restrict submission of multivariate input to parameters expected to be univariate. |
-| G2.3 | TODO | For univariate character input: |
-| G2.3a | TODO | Use `match.arg()` or equivalent where applicable to only permit expected values. |
-| G2.3b | TODO | Either: use `tolower()` or equivalent to ensure input of character parameters is not case dependent; or explicitly document that parameters are strictly case... |
-| G2.4 | TODO | Provide appropriate mechanisms to convert between different data types, potentially including: |
-| G2.4a | TODO | explicit conversion to `integer` via `as.integer()` |
-| G2.4b | TODO | explicit conversion to continuous via `as.numeric()` |
-| G2.4c | TODO | explicit conversion to character via `as.character()` (and not `paste` or `paste0`) |
-| G2.4d | TODO | explicit conversion to factor via `as.factor()` |
-| G2.4e | TODO | explicit conversion from factor via `as...()` functions |
-| G2.5 | TODO | Where inputs are expected to be of `factor` type, secondary documentation should explicitly state whether these should be `ordered` or not, and those inputs ... |
-| G2.6 | TODO | Software which accepts one-dimensional input should ensure values are appropriately pre-processed regardless of class structures. |
-| G2.7 | TODO | Software should accept as input as many of the above standard tabular forms as possible, including extension to domain-specific forms. |
-| G2.8 | TODO | Software should provide appropriate conversion or dispatch routines as part of initial pre-processing to ensure that all other sub-functions of a package rec... |
-| G2.9 | TODO | Software should issue diagnostic messages for type conversion in which information is lost (such as conversion of variables from factor to character; standar... |
-| G2.10 | TODO | Software should ensure that extraction or filtering of single columns from tabular inputs should not presume any particular default behaviour, and should ens... |
-| G2.11 | TODO | Software should ensure that `data.frame`-like tabular objects which have columns which do not themselves have standard class attributes (typically, `vector`)... |
-| G2.12 | TODO | Software should ensure that `data.frame`-like tabular objects which have list columns should ensure that those columns are appropriately pre-processed either... |
-| G2.13 | TODO | Statistical Software should implement appropriate checks for missing data as part of initial pre-processing prior to passing data to analytic algorithms. |
-| G2.14 | TODO | Where possible, all functions should provide options for users to specify how to handle missing (`NA`) data, with options minimally including: |
-| G2.14a | TODO | error on missing data |
-| G2.14b | TODO | ignore missing data with default warnings or messages issued |
-| G2.14c | TODO | replace missing data with appropriately imputed values |
-| G2.15 | TODO | Functions should never assume non-missingness, and should never pass data with potential missing values to any base routines with default `na.rm = FALSE`-typ... |
-| G2.16 | TODO | All functions should also provide options to handle undefined values (e.g., `NaN`, `Inf` and `-Inf`), including potentially ignoring or removing such values. |
+| G2.0 | done | Implement assertions on lengths of inputs, particularly through asserting that inputs expected to be single- or multi-valued are indeed so. |
+| G2.0a | done | Provide explicit secondary documentation of any expectations on lengths of inputs |
+| G2.1 | done | Implement assertions on types of inputs (see the initial point on nomenclature above). |
+| G2.1a | done | Provide explicit secondary documentation of expectations on data types of all vector inputs. |
+| G2.2 | done | Appropriately prohibit or restrict submission of multivariate input to parameters expected to be univariate. |
+| G2.3 | done | For univariate character input: |
+| G2.3a | done | Use `match.arg()` or equivalent where applicable to only permit expected values. |
+| G2.3b | done | Either: use `tolower()` or equivalent to ensure input of character parameters is not case dependent; or explicitly document that parameters are strictly case... |
+| G2.4 | done | Provide appropriate mechanisms to convert between different data types, potentially including: |
+| G2.4a | done | explicit conversion to `integer` via `as.integer()` |
+| G2.4b | done | explicit conversion to continuous via `as.numeric()` |
+| G2.4c | done | explicit conversion to character via `as.character()` (and not `paste` or `paste0`) |
+| G2.4d | done | explicit conversion to factor via `as.factor()` |
+| G2.4e | done | explicit conversion from factor via `as...()` functions |
+| G2.5 | NA | Where inputs are expected to be of `factor` type, secondary documentation should explicitly state whether these should be `ordered` or not, and those inputs ... |
+| G2.6 | done | Software which accepts one-dimensional input should ensure values are appropriately pre-processed regardless of class structures. |
+| G2.7 | done | Software should accept as input as many of the above standard tabular forms as possible, including extension to domain-specific forms. |
+| G2.8 | done | Software should provide appropriate conversion or dispatch routines as part of initial pre-processing to ensure that all other sub-functions of a package rec... |
+| G2.9 | done | Software should issue diagnostic messages for type conversion in which information is lost (such as conversion of variables from factor to character; standar... |
+| G2.10 | done | Software should ensure that extraction or filtering of single columns from tabular inputs should not presume any particular default behaviour, and should ens... |
+| G2.11 | NA | Software should ensure that `data.frame`-like tabular objects which have columns which do not themselves have standard class attributes (typically, `vector`)... |
+| G2.12 | done | Software should ensure that `data.frame`-like tabular objects which have list columns should ensure that those columns are appropriately pre-processed either... |
+| G2.13 | done | Statistical Software should implement appropriate checks for missing data as part of initial pre-processing prior to passing data to analytic algorithms. |
+| G2.14 | done | Where possible, all functions should provide options for users to specify how to handle missing (`NA`) data, with options minimally including: |
+| G2.14a | done | error on missing data |
+| G2.14b | done | ignore missing data with default warnings or messages issued |
+| G2.14c | done | replace missing data with appropriately imputed values |
+| G2.15 | done | Functions should never assume non-missingness, and should never pass data with potential missing values to any base routines with default `na.rm = FALSE`-typ... |
+| G2.16 | done | All functions should also provide options to handle undefined values (e.g., `NaN`, `Inf` and `-Inf`), including potentially ignoring or removing such values. |
 | G3.0 | TODO | Statistical software should never compare floating point numbers for equality. All numeric equality comparisons should either ensure that they are made betwe... |
 | G3.1 | TODO | Statistical software which relies on covariance calculations should enable users to choose between different algorithms for calculating covariances, and shou... |
 | G3.1a | TODO | The ability to use arbitrarily specified covariance methods should be documented (typically in examples or vignettes). |

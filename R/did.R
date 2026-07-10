@@ -120,6 +120,11 @@ NULL
 
 #' @keywords internal
 .morie_did_drop_na <- function(data, cols) {
+  # Every did estimator routes through here, so validate once at the
+  # shared entry: assert a data.frame with the required columns, then
+  # drop incomplete rows (G2.14b ignore-with-message).
+  data <- .morie_check_data(data, required = cols, arg = "data",
+                            check_na = TRUE)
   data[stats::complete.cases(data[, cols, drop = FALSE]), , drop = FALSE]
 }
 
