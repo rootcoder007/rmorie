@@ -39,58 +39,30 @@ NULL
 #'   comparative benchmarks, so there are no performance results to
 #'   reproduce.
 #'   alternative R packages, so no comparative-performance code applies.
-#' @srrstatsNA {SP2.0} For accessibility the spatial functions accept
 #'   plain data.frames with documented coordinate / neighbourhood
 #'   columns rather than requiring a dedicated spatial class as input;
 #'   `sf` / `spdep` structures are constructed internally.
-#' @srrstatsNA {SP2.0a} rmorie implements no new spatial input class, so
 #'   there is no new-class conversion to document.
-#' @srrstatsNA {SP2.2b} Round-trip translation tests into external
 #'   spatial workflows are not provided; interoperability is via the
 #'   wrapped spdep/sf/gstat calls themselves.
-#' @srrstatsNA {SP2.3} Tests use bundled coordinate data rather than
 #'   loading GDAL/sf raster/vector files.
-#' @srrstatsNA {SP2.4} rmorie performs no coordinate reprojection, so
 #'   PROJ6/WKT2 compliance is delegated entirely to `sf`.
-#' @srrstatsNA {SP2.4a} (see SP2.4 — no CRS strings handled by rmorie)
-#' @srrstatsNA {SP2.5} rmorie implements no spatial input class carrying
 #'   CRS metadata; CRS handling is left to `sf`.
-#' @srrstatsNA {SP2.5a} (see SP2.5 — no new spatial classes)
-#' @srrstatsNA {SP2.8} There is no single spatial pre-processing routine;
 #'   each method validates its own coordinate/neighbour input.
-#' @srrstatsNA {SP2.9} No dedicated spatial metadata attributes are
 #'   carried, so there are none to preserve through pre-processing.
-#' @srrstatsNA {SP3.2} No routine samples input data by local spatial
 #'   density.
-#' @srrstatsNA {SP3.5} rmorie implements no spatial machine-learning
 #'   models, so dimension-broadcasting concerns do not apply.
-#' @srrstatsNA {SP3.6} (no spatial ML; sampling-procedure effects N/A)
-#' @srrstatsNA {SP4.0a} Results are returned as analysis objects, not in
 #'   the same class as the coordinate input.
-#' @srrstatsNA {SP4.1} No units are carried on coordinate inputs, so none
 #'   are returned.
-#' @srrstatsNA {SP5.0} The spatial result objects carry no default
 #'   `plot` method; mapping is provided by the separate figure
 #'   exporters (`morie_tps_figures`, Moran heatmap helpers).
-#' @srrstatsNA {SP5.1} (no default spatial plot method; see SP5.0)
-#' @srrstatsNA {SP5.2} (see SP5.0)
-#' @srrstatsNA {SP5.3} Interactive html visualisation is not implemented.
-#' @srrstatsNA {SP6.0} rmorie implements no coordinate-transform routine,
 #'   so coordinate-recovery tests do not apply.
-#' @srrstatsNA {SP6.1} The methods are planar-only; there is no
 #'   Cartesian-versus-curvilinear duality to test.
-#' @srrstatsNA {SP6.1a} (planar-only; see SP6.1)
-#' @srrstatsNA {SP6.1b} (planar-only; see SP6.1)
-#' @srrstatsNA {SP6.2} Extreme-geographical-coordinate (polar/dateline)
 #'   tests do not apply to the projected-neighbourhood methods.
-#' @srrstatsNA {SP6.3} Neighbour construction delegates to spdep's tested
 #'   knn / distance routines; rmorie does not re-test every neighbour
 #'   definition exhaustively.
-#' @srrstatsNA {SP6.4} (weighting schemes are spdep's; not exhaustively
 #'   re-tested here; see SP6.3)
-#' @srrstatsNA {SP6.5} Spatial clustering correctness is delegated to the
 #'   underlying dbscan / scan-statistic implementations.
-#' @srrstatsNA {SP6.6} rmorie implements no spatial machine-learning
 #'   software, so its tests do not apply.
 #'
 #' @srrstatsNA {EA2.0} rmorie's exploratory layer summarises and tests
