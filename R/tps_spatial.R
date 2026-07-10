@@ -1,5 +1,53 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+#' srr spatial (SP) standards
+#'
+#' rmorie's spatial methods (Moran's I global/local/LISA, Getis-Ord
+#' G*, Ripley's K, DBSCAN, Kulldorff scan) operate on planar/projected
+#' neighbourhood structures and delegate to `spdep` / `sf` / `gstat`.
+#' The applicable standards are addressed here; class-system, CRS
+#' reprojection, and plot-method standards that do not fit rmorie's
+#' coordinate-column interface are declared NA (with reasons) in
+#' `srr-stats-standards.R`.
+#'
+#' @srrstats {SP1.0} The domain of applicability is documented: the
+#'   methods apply to planar / projected geographic neighbourhoods
+#'   (Toronto neighbourhood polygons and point coordinates).
+#' @srrstats {SP1.1} The dimensional domain is two-dimensional
+#'   (planar x/y or lon/lat), documented per function.
+#' @srrstats {SP2.1} rmorie uses `sf` and `spdep`, never the retired
+#'   `sp` package.
+#' @srrstats {SP2.2} Spatial routines wrap and interoperate with the
+#'   established `spdep` / `sf` / `gstat` ecosystem.
+#' @srrstats {SP2.2a} The wrapping of those packages is documented on
+#'   each function and in the spatial vignette.
+#' @srrstats {SP2.0b} Functions validate their spatial input and return
+#'   an explicit no-analysis result (rather than a misleading number)
+#'   when required spatial columns are absent.
+#' @srrstats {SP2.6} Accepted input types (coordinate / neighbourhood
+#'   columns) are documented per function.
+#' @srrstats {SP2.7} Input validation confirms the required spatial
+#'   columns are present before analysis.
+#' @srrstats {SP3.0} Neighbour construction is user-controllable.
+#' @srrstats {SP3.0a} Regular-grid neighbours support rook/queen
+#'   contiguity via the underlying `spdep` neighbour styles.
+#' @srrstats {SP3.0b} Irregular-space neighbourhoods are controlled by
+#'   an integer number of neighbours (`k_neighbours`) or a distance band.
+#' @srrstats {SP3.1} Neighbour contributions can be distance-weighted
+#'   through the spatial-weights construction, not only uniform cut-offs.
+#' @srrstats {SP3.3} Spatial autocorrelation is explicitly quantified and
+#'   distinguished from non-spatial covariation (global/local Moran's I,
+#'   LISA, Getis-Ord G*).
+#' @srrstats {SP3.4} Spatial clustering uses explicitly spatial
+#'   algorithms (DBSCAN on coordinates, Kulldorff spatial scan), not a
+#'   non-spatial clusterer with proximity as a mere weight.
+#' @srrstats {SP4.0} Return values use a defined result structure.
+#' @srrstats {SP4.0b} Results are returned in a class-defined format
+#'   (`.tps_spatial_result` / `morie_rich_result`).
+#' @srrstats {SP4.2} The type and class of return values are documented.
+#' @noRd
+NULL
+
 #' Spatial analyses for TPS crime data
 #'
 #' R parity of \code{morie.tps_spatial}: Moran's I (global), LISA
