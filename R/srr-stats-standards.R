@@ -12,54 +12,6 @@
 #' @srrstatsVerbose TRUE
 #'
 #' @srrstatsTODO {G1.4a} *All internal (non-exported) functions should also be documented in standard [`roxygen2`](https://roxygen2.r-lib.org/) format, along with a final `@noRd` tag to suppress automatic generation of `.Rd` files or [`@keywords internal`](https://roxygen2.r-lib.org/reference/tags-index-crossref.html?q=keywords%20internal#null) if documentation is still desired.* 
-#' @srrstatsTODO {EA1.0} *Identify one or more target audiences for whom the software is intended*
-#' @srrstatsTODO {EA1.1} *Identify the kinds of data the software is capable of analysing (see *Kinds of Data* below).*
-#' @srrstatsTODO {EA1.2} *Identify the kinds of questions the software is intended to help explore.* 
-#' @srrstatsTODO {EA1.3} *Identify the kinds of data each function is intended to accept as input* 
-#' @srrstatsTODO {EA2.0} *EDA Software which accepts standard tabular data and implements or relies upon extensive table filter and join operations should utilise an **index column** system*
-#' @srrstatsTODO {EA2.1} *All values in an index column must be unique, and this uniqueness should be affirmed as a pre-processing step for all input data.*
-#' @srrstatsTODO {EA2.2} *Index columns should be explicitly identified, either:*
-#' @srrstatsTODO {EA2.2a} *by using an appropriate class system, or*
-#' @srrstatsTODO {EA2.2b} *through setting an `attribute` on a table, `x`, of `attr(x, "index") <- <index_col_name>`.* 
-#' @srrstatsTODO {EA2.3} *Table join operations should not be based on any assumed variable or column names* 
-#' @srrstatsTODO {EA2.4} *Use and demand an explicit class system for such input (for example, via the [`DM` package](https://github.com/krlmlr/dm)).*
-#' @srrstatsTODO {EA2.5} *Ensure all individual tables follow the above standards for Index Columns* 
-#' @srrstatsTODO {EA2.6} *Routines should appropriately process vector data regardless of additional attributes* 
-#' @srrstatsTODO {EA3.0} *The algorithmic components of EDA Software should enable automated extraction and/or reporting of statistics as some sufficiently "meta" level (such as variable or model selection), for which previous or reference implementations require manual intervention.*
-#' @srrstatsTODO {EA3.1} *EDA software should enable standardised comparison of inputs, processes, models, or outputs which previous or reference implementations otherwise only enable in some comparably unstandardised form.* 
-#' @srrstatsTODO {EA4.0} *EDA Software should ensure all return results have types which are consistent with input types.* 
-#' @srrstatsTODO {EA4.1} *EDA Software should implement parameters to enable explicit control of numeric precision*
-#' @srrstatsTODO {EA4.2} *The primary routines of EDA Software should return objects for which default `print` and `plot` methods give sensible results. Default `summary` methods may also be implemented.* 
-#' @srrstatsTODO {EA5.0} *Graphical presentation in EDA software should be as accessible as possible or practicable. In particular, EDA software should consider accessibility in terms of:*
-#' @srrstatsTODO {EA5.0a} *Typeface sizes, which should default to sizes which explicitly enhance accessibility*
-#' @srrstatsTODO {EA5.0b} *Default colour schemes, which should be carefully constructed to ensure accessibility.*
-#' @srrstatsTODO {EA5.1} *Any explicit specifications of typefaces which override default values provided through other packages (including the `graphics` package) should consider accessibility* 
-#' @srrstatsTODO {EA5.2} *Screen-based output should never rely on default print formatting of `numeric` types, rather should also use some version of `round(., digits)`, `formatC`, `sprintf`, or similar functions for numeric formatting according the parameter described in* **EA4.1**.
-#' @srrstatsTODO {EA5.3} *Column-based summary statistics should always indicate the `storage.mode`, `class`, or equivalent defining attribute of each column.* 
-#' @srrstatsTODO {EA5.4} *All visualisations should ensure values are rounded sensibly (for example, via `pretty()` function).*
-#' @srrstatsTODO {EA5.5} *All visualisations should include units on all axes where such are specified or otherwise obtainable from input data or other routines.* 
-#' @srrstatsTODO {EA5.6} *Any packages which internally bundle libraries used for dynamic visualization and which are also bundled in other, pre-existing R packages, should explain the necessity and advantage of re-bundling that library.* 
-#' @srrstatsTODO {EA6.0} *Return values from all functions should be tested, including tests for the following characteristics:*
-#' @srrstatsTODO {EA6.0a} *Classes and types of objects*
-#' @srrstatsTODO {EA6.0b} *Dimensions of tabular objects*
-#' @srrstatsTODO {EA6.0c} *Column names (or equivalent) of tabular objects*
-#' @srrstatsTODO {EA6.0d} *Classes or types of all columns contained within `data.frame`-type tabular objects *
-#' @srrstatsTODO {EA6.0e} *Values of single-valued objects; for `numeric` values either using `testthat::expect_equal()` or equivalent with a defined value for the `tolerance` parameter, or using `round(..., digits = x)` with some defined value of `x` prior to testing equality.* 
-#' @srrstatsTODO {EA6.1} *The properties of graphical output from EDA software should be explicitly tested, for example via the [`vdiffr` package](https://github.com/r-lib/vdiffr) or equivalent.* 
-#' @srrstatsTODO {PD1.0} *Software should provide references justifying choice and usage of particular probability distributions.* 
-#' @srrstatsTODO {PD2.0} *Where possible, software should represent probability distributions using a package for general representation.* 
-#' @srrstatsTODO {PD3.0} *Manipulation of probability distributions should very generally be analytic, with numeric manipulations only implemented with clear justification (ideally including references).* 
-#' @srrstatsTODO {PD3.1} *Operations on probability distributions should generally be contained within separate functions which themselves accept the names of the distributions as one input parameter.* 
-#' @srrstatsTODO {PD3.2} *Use of optimisation routines to estimate parameters from probability distributions should explicitly specify and explain values of all parameters, including all uses of default parameters.*
-#' @srrstatsTODO {PD3.3} *Return objects which include values generated from optimisation algorithms should include information on optimisation algorithm and performance, minimally including the name of the algorithm used, the convergence tolerance, and the number of iterations.* 
-#' @srrstatsTODO {PD3.4} *Use of routines to integrate probability distributions should explicitly document conditions under which integrals are expected to remain stable, and ideally include pre-processing checks for potentially unstable behaviour.*
-#' @srrstatsTODO {PD3.5} *Integration routines should only rely on discrete summation where such use can be justified (for example, through providing a literature reference), in which case the following applies:*
-#' @srrstatsTODO {PD3.5a} *Use of discrete summation to approximate integrals must demonstrate that the Reimann sum has a finite limit (or, equivalently, must explicitly describe the conditions under which the sum may be expected to be finite).* 
-#' @srrstatsTODO {PD4.0} *The numeric outputs of probability distribution functions should be tested, not just output structures. These tests should generally be tests for numeric equality.* 
-#' @srrstatsTODO {PD4.1} *Tests for numeric equality should compare the output of of probability distribution functions with the output of code which explicitly demonstrates how such values are derived (generally defined in the same location in test files).* 
-#' @srrstatsTODO {PD4.2} *All functions constructed in accordance with **PD2.1** - that is, which use a fixed distribution, and which name that distribution as an input parameter - should be tested using at least two different distributions.* 
-#' @srrstatsTODO {PD4.3} *Tests of optimisation or integration algorithms should compare default results with results generated with alternative values for every parameter, including all parameters for the chosen algorithm (whether exposed as function inputs or not).* 
-#' @srrstatsTODO {PD4.4} *Tests of optimisation or integration algorithms should compare equivalent results generated with at least one alternative algorithm.* 
 #' @srrstatsTODO {UL1.0} *Unsupervised Learning Software should explicitly document expected format (types or classes) for input data, including descriptions of types or classes which are not accepted; for example, specification that software accepts only numeric inputs in `vector` or `matrix` form, or that all inputs must be in `data.frame` form with both column and row names.*
 #' @srrstatsTODO {UL1.1} *Unsupervised Learning Software should provide distinct sub-routines to assert that all input data is of the expected form, and issue informative error messages when incompatible data are submitted.* 
 #' @srrstatsTODO {UL1.2} *Unsupervised learning which uses row or column names to label output objects should assert that input data have non-default row or column names, and issue an informative message when these are not provided.* 
@@ -441,5 +393,56 @@ NULL
 #'   underlying dbscan / scan-statistic implementations.
 #' @srrstatsNA {SP6.6} rmorie implements no spatial machine-learning
 #'   software, so its tests do not apply.
+#'
+#' @srrstatsNA {EA2.0} rmorie's exploratory layer summarises and tests
+#'   data; it does not implement extensive table filter/join operations
+#'   requiring an index-column system.
+#' @srrstatsNA {EA2.1} (no index-column system; see EA2.0)
+#' @srrstatsNA {EA2.2} (see EA2.0)
+#' @srrstatsNA {EA2.2a} (see EA2.0)
+#' @srrstatsNA {EA2.2b} (see EA2.0)
+#' @srrstatsNA {EA2.3} No table joins are performed on assumed column
+#'   names; there is no join layer.
+#' @srrstatsNA {EA2.4} No multi-table `DM`-style class system is used.
+#' @srrstatsNA {EA2.5} (no index-column tables; see EA2.0)
+#' @srrstatsNA {EA2.6} Vector inputs are validated by the shared
+#'   `.morie_check_*` helpers; there is no attribute-bearing table layer
+#'   that this standard targets.
+#' @srrstatsNA {EA3.0} rmorie does not automate meta-level extraction
+#'   (e.g. automated variable/model selection reporting).
+#' @srrstatsNA {EA3.1} rmorie provides no standardised cross-tool
+#'   input/model/output comparison layer.
+#' @srrstatsNA {EA4.1} No explicit numeric-precision control parameter is
+#'   exposed; results are reported at full double precision and formatted
+#'   for display only.
+#' @srrstatsNA {EA5.0} Graphical accessibility standards target the
+#'   package's own default plotting layer; rmorie's figures are produced
+#'   by the separate exporters using ggplot2 defaults.
+#' @srrstatsNA {EA5.0a} (see EA5.0)
+#' @srrstatsNA {EA5.0b} (see EA5.0)
+#' @srrstatsNA {EA5.1} rmorie does not override typeface specifications
+#'   from the underlying graphics packages.
+#' @srrstatsNA {EA5.3} Column summaries report values, not per-column
+#'   storage.mode annotations, as they operate on validated numeric data.
+#' @srrstatsNA {EA5.4} Visual rounding is left to the ggplot2 scales used
+#'   by the figure exporters.
+#' @srrstatsNA {EA5.5} Axis units are the caller's own; no unit metadata
+#'   is carried to annotate axes automatically.
+#' @srrstatsNA {EA5.6} rmorie bundles no dynamic-visualisation library.
+#' @srrstatsNA {EA6.1} Graphical output is not tested via `vdiffr`; the
+#'   figure exporters are smoke-tested for successful file creation, not
+#'   pixel-level appearance.
+#'
+#' @srrstatsNA {PD2.0} Distributions are fitted and summarised directly
+#'   rather than represented through a general distribution-object
+#'   package (e.g. `distributional`).
+#' @srrstatsNA {PD3.0} The heavy-tailed fits are numeric (Hill MLE); no
+#'   analytic distribution algebra is performed.
+#' @srrstatsNA {PD3.1} Operations are specific to the fitted models and
+#'   are not organised as generic functions taking a distribution name.
+#' @srrstatsNA {PD3.4} rmorie implements no probability-distribution
+#'   integration routines.
+#' @srrstatsNA {PD3.5} No integral is approximated by discrete summation.
+#' @srrstatsNA {PD3.5a} (no discrete-summation integration; see PD3.5)
 #' @noRd
 NULL

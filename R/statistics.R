@@ -1,4 +1,41 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
+#' srr exploratory-data-analysis (EA) standards
+#'
+#' rmorie's exploratory/descriptive layer (this file's hypothesis-test
+#' and correlation suite, plus the OTIS/TPS descriptive summaries) is a
+#' summary-and-inference layer, not table-exploration software built on
+#' an index-column/join system. The applicable EA standards are addressed
+#' here; the index-column, meta-extraction, and graphical-accessibility
+#' families are declared NA (with reasons) in `srr-stats-standards.R`.
+#'
+#' @srrstats {EA1.0} The target audience (criminologists, quantitative
+#'   social scientists, accountability researchers) is documented in the
+#'   package-level "Statement of need".
+#' @srrstats {EA1.1} The kinds of data analysed (survey PUMFs, oversight
+#'   report corpora, administrative tabular data) are documented.
+#' @srrstats {EA1.2} The kinds of questions the software explores
+#'   (intervention effects, spatial/temporal concentration, oversight
+#'   outcomes) are documented.
+#' @srrstats {EA1.3} The input each function accepts is documented on its
+#'   `@param` entries.
+#' @srrstats {EA4.0} Return types are consistent with input types
+#'   (numeric-vector inputs yield numeric summaries; the result objects
+#'   have a stable structure).
+#' @srrstats {EA4.2} Primary routines return `morie_rich_result` objects
+#'   with sensible default `print` output.
+#' @srrstats {EA5.2} Screen output formats numeric values explicitly via
+#'   `sprintf` / `round` rather than relying on default print formatting.
+#' @srrstats {EA6.0} Return values are tested, including:
+#' @srrstats {EA6.0a} object classes and types;
+#' @srrstats {EA6.0b} dimensions of tabular results;
+#' @srrstats {EA6.0c} column names of tabular results;
+#' @srrstats {EA6.0d} column classes/types within data.frame results;
+#' @srrstats {EA6.0e} values of single-valued numeric results, using
+#'   `expect_equal(tolerance=)` (see `test-statistics.R`).
+#' @noRd
+NULL
+
 #' Comprehensive hypothesis testing suite for epidemiological research
 #'
 #' R port of the Python module \code{morie.statistics}. Every function
