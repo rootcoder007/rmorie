@@ -96,54 +96,54 @@ Tracks every rOpenSci statistical-software standard claimed for the whole-packag
 
 | ID | Status | Standard |
 |---|---|---|
-| RE1.0 | TODO | Regression Software should enable models to be specified via a formula interface, unless reasons for not doing so are explicitly documented. |
-| RE1.1 | TODO | Regression Software should document how formula interfaces are converted to matrix representations of input data. |
-| RE1.2 | TODO | Regression Software should document expected format (types or classes) for inputting predictor variables, including descriptions of types or classes which ar... |
-| RE1.3 | TODO | Regression Software which passes or otherwise transforms aspects of input data onto output structures should ensure that those output structures retain all r... |
-| RE1.3a | TODO | Where otherwise relevant information is not transferred, this should be explicitly documented. |
-| RE1.4 | TODO | Regression Software should document any assumptions made with regard to input data; for example distributional assumptions, or assumptions that predictor dat... |
-| RE2.0 | TODO | Regression Software should document any transformations applied to input data, for example conversion of label-values to `factor`, and should provide ways to... |
-| RE2.1 | TODO | Regression Software should implement explicit parameters controlling the processing of missing values, ideally distinguishing `NA` or `NaN` values from `Inf`... |
-| RE2.2 | TODO | Regression Software should provide different options for processing missing values in predictor and response data. For example, it should be possible to fit ... |
-| RE2.3 | TODO | Where applicable, Regression Software should enable data to be centred (for example, through converting to zero-mean equivalent values; or to z-scores) or of... |
-| RE2.4 | TODO | Regression Software should implement pre-processing routines to identify whether aspects of input data are perfectly collinear, notably including: |
-| RE2.4a | TODO | Perfect collinearity among predictor variables |
-| RE2.4b | TODO | Perfect collinearity between independent and dependent variables |
-| RE3.0 | TODO | Issue appropriate warnings or other diagnostic messages for models which fail to converge. |
-| RE3.1 | TODO | Enable such messages to be optionally suppressed, yet should ensure that the resultant model object nevertheless includes sufficient data to identify lack of... |
-| RE3.2 | TODO | Ensure that convergence thresholds have sensible default values, demonstrated through explicit documentation. |
-| RE3.3 | TODO | Allow explicit setting of convergence thresholds, unless reasons against doing so are explicitly documented. |
-| RE4.0 | TODO | Regression Software should return some form of "model" object, generally through using or modifying existing class structures for model objects (such as `lm`... |
-| RE4.1 | TODO | Regression Software may enable an ability to generate a model object without actually fitting values. This may be useful for controlling batch processing of ... |
-| RE4.2 | TODO | Model coefficients (via `coef()` / `coefficients()`) |
-| RE4.3 | TODO | Confidence intervals on those coefficients (via `confint()`) |
-| RE4.4 | TODO | The specification of the model, generally as a formula (via `formula()`) |
-| RE4.5 | TODO | Numbers of observations submitted to model (via `nobs()`) |
-| RE4.6 | TODO | The variance-covariance matrix of the model parameters (via `vcov()`) |
-| RE4.7 | TODO | Where appropriate, convergence statistics |
-| RE4.8 | TODO | Response variables, and associated "metadata" where applicable. |
-| RE4.9 | TODO | Modelled values of response variables. |
-| RE4.10 | TODO | Model Residuals, including sufficient documentation to enable interpretation of residuals, and to enable users to submit residuals to their own tests. |
-| RE4.11 | TODO | Goodness-of-fit and other statistics associated such as effect sizes with model coefficients. |
-| RE4.12 | TODO | Where appropriate, functions used to transform input data, and associated inverse transform functions. |
-| RE4.13 | TODO | Predictor variables, and associated "metadata" where applicable. |
-| RE4.14 | TODO | Where possible, values should also be provided for extrapolation or forecast *errors*. |
-| RE4.15 | TODO | Sufficient documentation and/or testing should be provided to demonstrate that forecast errors, confidence intervals, or equivalent values increase with fore... |
-| RE4.16 | TODO | Regression Software which models distinct responses for different categorical groups should include the ability to submit new groups to `predict()` methods. |
-| RE4.17 | TODO | Model objects returned by Regression Software should implement or appropriately extend a default `print` method which provides an on-screen summary of model ... |
-| RE4.18 | TODO | Regression Software may also implement `summary` methods for model objects, and in particular should implement distinct `summary` methods for any cases in wh... |
-| RE5.0 | TODO | Scaling relationships between sizes of input data (numbers of observations, with potential extension to numbers of variables/columns) and speed of algorithm. |
-| RE6.0 | TODO | Model objects returned by Regression Software (see* **RE4***) should have default `plot` methods, either through explicit implementation, extension of method... |
-| RE6.1 | TODO | Where the default `plot` method is **NOT** a generic `plot` method dispatched on the class of return objects (that is, through an S3-type `plot.<myclass>` fu... |
-| RE6.2 | TODO | The default `plot` method should produce a plot of the `fitted` values of the model, with optional visualisation of confidence intervals or equivalent. |
-| RE6.3 | TODO | Where a model object is used to generate a forecast (for example, through a `predict()` method), the default `plot` method should provide clear visual distin... |
-| RE7.0 | TODO | Tests with noiseless, exact relationships between predictor (independent) data. |
-| RE7.0a | TODO | In particular, these tests should confirm ability to reject perfectly noiseless input data. |
-| RE7.1 | TODO | Tests with noiseless, exact relationships between predictor (independent) and response (dependent) data. |
-| RE7.1a | TODO | In particular, these tests should confirm that model fitting is at least as fast or (preferably) faster than testing with equivalent noisy data (see RE2.4b). |
-| RE7.2 | TODO | Demonstrate that output objects retain aspects of input data such as row or case names (see **RE1.3**). |
-| RE7.3 | TODO | Demonstrate and test expected behaviour when objects returned from regression software are submitted to the accessor methods of **RE4.2**--**RE4.7**. |
-| RE7.4 | TODO | Extending directly from **RE4.15**, where appropriate, tests should demonstrate and confirm that forecast errors, confidence intervals, or equivalent values ... |
+| RE1.0 | done | Regression Software should enable models to be specified via a formula interface, unless reasons for not doing so are explicitly documented. |
+| RE1.1 | done | Regression Software should document how formula interfaces are converted to matrix representations of input data. |
+| RE1.2 | done | Regression Software should document expected format (types or classes) for inputting predictor variables, including descriptions of types or classes which ar... |
+| RE1.3 | done | Regression Software which passes or otherwise transforms aspects of input data onto output structures should ensure that those output structures retain all r... |
+| RE1.3a | done | Where otherwise relevant information is not transferred, this should be explicitly documented. |
+| RE1.4 | done | Regression Software should document any assumptions made with regard to input data; for example distributional assumptions, or assumptions that predictor dat... |
+| RE2.0 | done | Regression Software should document any transformations applied to input data, for example conversion of label-values to `factor`, and should provide ways to... |
+| RE2.1 | done | Regression Software should implement explicit parameters controlling the processing of missing values, ideally distinguishing `NA` or `NaN` values from `Inf`... |
+| RE2.2 | NA | Regression Software should provide different options for processing missing values in predictor and response data. For example, it should be possible to fit ... |
+| RE2.3 | NA | Where applicable, Regression Software should enable data to be centred (for example, through converting to zero-mean equivalent values; or to z-scores) or of... |
+| RE2.4 | done | Regression Software should implement pre-processing routines to identify whether aspects of input data are perfectly collinear, notably including: |
+| RE2.4a | done | Perfect collinearity among predictor variables |
+| RE2.4b | NA | Perfect collinearity between independent and dependent variables |
+| RE3.0 | done | Issue appropriate warnings or other diagnostic messages for models which fail to converge. |
+| RE3.1 | done | Enable such messages to be optionally suppressed, yet should ensure that the resultant model object nevertheless includes sufficient data to identify lack of... |
+| RE3.2 | done | Ensure that convergence thresholds have sensible default values, demonstrated through explicit documentation. |
+| RE3.3 | done | Allow explicit setting of convergence thresholds, unless reasons against doing so are explicitly documented. |
+| RE4.0 | done | Regression Software should return some form of "model" object, generally through using or modifying existing class structures for model objects (such as `lm`... |
+| RE4.1 | NA | Regression Software may enable an ability to generate a model object without actually fitting values. This may be useful for controlling batch processing of ... |
+| RE4.2 | done | Model coefficients (via `coef()` / `coefficients()`) |
+| RE4.3 | done | Confidence intervals on those coefficients (via `confint()`) |
+| RE4.4 | done | The specification of the model, generally as a formula (via `formula()`) |
+| RE4.5 | done | Numbers of observations submitted to model (via `nobs()`) |
+| RE4.6 | done | The variance-covariance matrix of the model parameters (via `vcov()`) |
+| RE4.7 | NA | Where appropriate, convergence statistics |
+| RE4.8 | NA | Response variables, and associated "metadata" where applicable. |
+| RE4.9 | NA | Modelled values of response variables. |
+| RE4.10 | done | Model Residuals, including sufficient documentation to enable interpretation of residuals, and to enable users to submit residuals to their own tests. |
+| RE4.11 | done | Goodness-of-fit and other statistics associated such as effect sizes with model coefficients. |
+| RE4.12 | done | Where appropriate, functions used to transform input data, and associated inverse transform functions. |
+| RE4.13 | NA | Predictor variables, and associated "metadata" where applicable. |
+| RE4.14 | NA | Where possible, values should also be provided for extrapolation or forecast *errors*. |
+| RE4.15 | NA | Sufficient documentation and/or testing should be provided to demonstrate that forecast errors, confidence intervals, or equivalent values increase with fore... |
+| RE4.16 | NA | Regression Software which models distinct responses for different categorical groups should include the ability to submit new groups to `predict()` methods. |
+| RE4.17 | done | Model objects returned by Regression Software should implement or appropriately extend a default `print` method which provides an on-screen summary of model ... |
+| RE4.18 | NA | Regression Software may also implement `summary` methods for model objects, and in particular should implement distinct `summary` methods for any cases in wh... |
+| RE5.0 | NA | Scaling relationships between sizes of input data (numbers of observations, with potential extension to numbers of variables/columns) and speed of algorithm. |
+| RE6.0 | NA | Model objects returned by Regression Software (see* **RE4***) should have default `plot` methods, either through explicit implementation, extension of method... |
+| RE6.1 | NA | Where the default `plot` method is **NOT** a generic `plot` method dispatched on the class of return objects (that is, through an S3-type `plot.<myclass>` fu... |
+| RE6.2 | NA | The default `plot` method should produce a plot of the `fitted` values of the model, with optional visualisation of confidence intervals or equivalent. |
+| RE6.3 | NA | Where a model object is used to generate a forecast (for example, through a `predict()` method), the default `plot` method should provide clear visual distin... |
+| RE7.0 | done | Tests with noiseless, exact relationships between predictor (independent) data. |
+| RE7.0a | done | In particular, these tests should confirm ability to reject perfectly noiseless input data. |
+| RE7.1 | done | Tests with noiseless, exact relationships between predictor (independent) and response (dependent) data. |
+| RE7.1a | NA | In particular, these tests should confirm that model fitting is at least as fast or (preferably) faster than testing with equivalent noisy data (see RE2.4b). |
+| RE7.2 | NA | Demonstrate that output objects retain aspects of input data such as row or case names (see **RE1.3**). |
+| RE7.3 | done | Demonstrate and test expected behaviour when objects returned from regression software are submitted to the accessor methods of **RE4.2**--**RE4.7**. |
+| RE7.4 | NA | Extending directly from **RE4.15**, where appropriate, tests should demonstrate and confirm that forecast errors, confidence intervals, or equivalent values ... |
 
 ## Time Series (TS) — 55 standards
 
