@@ -592,6 +592,10 @@ d_to_r <- function(d, n1 = NULL, n2 = NULL) {
 #' Convert Pearson r to Cohen's d
 #' @param r Pearson r.
 #' @return Numeric d.
+#' @srrstats {G3.0} Floating-point values are never compared for exact
+#'   equality: boundary tests use tolerance comparisons (e.g.
+#'   \code{abs(r) < 1} here) and convergence/agreement checks use
+#'   \code{all.equal()} or explicit \code{tol=} across the estimators.
 #' @export
 r_to_d <- function(r) {
   if (abs(r) < 1) 2 * r / sqrt(1 - r^2) else sign(r) * Inf

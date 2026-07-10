@@ -29,8 +29,8 @@ Tracks every rOpenSci statistical-software standard claimed for the whole-packag
 | G1.3 | done | All statistical terminology should be clarified and unambiguously defined. |
 | G1.4 | done | Software should use [`roxygen2`](https://roxygen2.r-lib.org/) to document all functions. |
 | G1.4a | TODO | All internal (non-exported) functions should also be documented in standard [`roxygen2`](https://roxygen2.r-lib.org/) format, along with a final `@noRd` tag ... |
-| G1.5 | TODO | Software should include all code necessary to reproduce results which form the basis of performance claims made in associated publications. |
-| G1.6 | TODO | Software should include code necessary to compare performance claims with alternative implementations in other R packages. |
+| G1.5 | NA | Software should include all code necessary to reproduce results which form the basis of performance claims made in associated publications. |
+| G1.6 | NA | Software should include code necessary to compare performance claims with alternative implementations in other R packages. |
 | G2.0 | done | Implement assertions on lengths of inputs, particularly through asserting that inputs expected to be single- or multi-valued are indeed so. |
 | G2.0a | done | Provide explicit secondary documentation of any expectations on lengths of inputs |
 | G2.1 | done | Implement assertions on types of inputs (see the initial point on nomenclature above). |
@@ -60,37 +60,37 @@ Tracks every rOpenSci statistical-software standard claimed for the whole-packag
 | G2.14c | done | replace missing data with appropriately imputed values |
 | G2.15 | done | Functions should never assume non-missingness, and should never pass data with potential missing values to any base routines with default `na.rm = FALSE`-typ... |
 | G2.16 | done | All functions should also provide options to handle undefined values (e.g., `NaN`, `Inf` and `-Inf`), including potentially ignoring or removing such values. |
-| G3.0 | TODO | Statistical software should never compare floating point numbers for equality. All numeric equality comparisons should either ensure that they are made betwe... |
-| G3.1 | TODO | Statistical software which relies on covariance calculations should enable users to choose between different algorithms for calculating covariances, and shou... |
-| G3.1a | TODO | The ability to use arbitrarily specified covariance methods should be documented (typically in examples or vignettes). |
-| G4.0 | TODO | Statistical Software which enables outputs to be written to local files should parse parameters specifying file names to ensure appropriate file suffixes are... |
-| G5.0 | TODO | Where applicable or practicable, tests should use standard data sets with known properties (for example, the [NIST Standard Reference Datasets](https://www.i... |
-| G5.1 | TODO | Data sets created within, and used to test, a package should be exported (or otherwise made generally available) so that users can confirm tests and run exam... |
-| G5.2 | TODO | Appropriate error and warning behaviour of all functions should be explicitly demonstrated through tests. In particular, |
-| G5.2a | TODO | Every message produced within R code by `stop()`, `warning()`, `message()`, or equivalent should be unique |
-| G5.2b | TODO | Explicit tests should demonstrate conditions which trigger every one of those messages, and should compare the result with expected values. |
-| G5.3 | TODO | For functions which are expected to return objects containing no missing (`NA`) or undefined (`NaN`, `Inf`) values, the absence of any such values in return ... |
-| G5.4 | TODO | Correctness tests** *to test that statistical algorithms produce expected results to some fixed test data sets (potentially through comparisons using binding... |
-| G5.4a | TODO | For new methods, it can be difficult to separate out correctness of the method from the correctness of the implementation, as there may not be reference for ... |
-| G5.4b | TODO | For new implementations of existing methods, correctness tests should include tests against previous implementations. Such testing may explicitly call those ... |
-| G5.4c | TODO | Where applicable, stored values may be drawn from published paper outputs when applicable and where code from original implementations is not available |
-| G5.5 | TODO | Correctness tests should be run with a fixed random seed |
-| G5.6 | TODO | Parameter recovery tests** *to test that the implementation produce expected results given data with known properties. For instance, a linear regression algo... |
-| G5.6a | TODO | Parameter recovery tests should generally be expected to succeed within a defined tolerance rather than recovering exact values. |
-| G5.6b | TODO | Parameter recovery tests should be run with multiple random seeds when either data simulation or the algorithm contains a random component. (When long-runnin... |
-| G5.7 | TODO | Algorithm performance tests** *to test that implementation performs as expected as properties of data change. For instance, a test may show that parameters a... |
-| G5.8 | TODO | Edge condition tests** *to test that these conditions produce expected behaviour such as clear warnings or errors when confronted with data with extreme prop... |
-| G5.8a | TODO | Zero-length data |
-| G5.8b | TODO | Data of unsupported types (e.g., character or complex numbers in for functions designed only for numeric data) |
-| G5.8c | TODO | Data with all-`NA` fields or columns or all identical fields or columns |
-| G5.8d | TODO | Data outside the scope of the algorithm (for example, data with more fields (columns) than observations (rows) for some regression algorithms) |
-| G5.9 | TODO | Noise susceptibility tests** *Packages should test for expected stochastic behaviour, such as through the following conditions: |
-| G5.9a | TODO | Adding trivial noise (for example, at the scale of `.Machine$double.eps`) to data does not meaningfully change results |
-| G5.9b | TODO | Running under different random seeds or initial conditions does not meaningfully change results |
-| G5.10 | TODO | Extended tests should included and run under a common framework with other tests but be switched on by flags such as as a `<MYPKG>_EXTENDED_TESTS="true"` env... |
-| G5.11 | TODO | Where extended tests require large data sets or other assets, these should be provided for downloading and fetched as part of the testing workflow. |
-| G5.11a | TODO | When any downloads of additional data necessary for extended tests fail, the tests themselves should not fail, rather be skipped and implicitly succeed with ... |
-| G5.12 | TODO | Any conditions necessary to run extended tests such as platform requirements, memory, expected runtime, and artefacts produced that may need manual inspectio... |
+| G3.0 | done | Statistical software should never compare floating point numbers for equality. All numeric equality comparisons should either ensure that they are made betwe... |
+| G3.1 | done | Statistical software which relies on covariance calculations should enable users to choose between different algorithms for calculating covariances, and shou... |
+| G3.1a | done | The ability to use arbitrarily specified covariance methods should be documented (typically in examples or vignettes). |
+| G4.0 | done | Statistical Software which enables outputs to be written to local files should parse parameters specifying file names to ensure appropriate file suffixes are... |
+| G5.0 | done | Where applicable or practicable, tests should use standard data sets with known properties (for example, the [NIST Standard Reference Datasets](https://www.i... |
+| G5.1 | done | Data sets created within, and used to test, a package should be exported (or otherwise made generally available) so that users can confirm tests and run exam... |
+| G5.2 | done | Appropriate error and warning behaviour of all functions should be explicitly demonstrated through tests. In particular, |
+| G5.2a | done | Every message produced within R code by `stop()`, `warning()`, `message()`, or equivalent should be unique |
+| G5.2b | done | Explicit tests should demonstrate conditions which trigger every one of those messages, and should compare the result with expected values. |
+| G5.3 | done | For functions which are expected to return objects containing no missing (`NA`) or undefined (`NaN`, `Inf`) values, the absence of any such values in return ... |
+| G5.4 | done | Correctness tests** *to test that statistical algorithms produce expected results to some fixed test data sets (potentially through comparisons using binding... |
+| G5.4a | done | For new methods, it can be difficult to separate out correctness of the method from the correctness of the implementation, as there may not be reference for ... |
+| G5.4b | done | For new implementations of existing methods, correctness tests should include tests against previous implementations. Such testing may explicitly call those ... |
+| G5.4c | NA | Where applicable, stored values may be drawn from published paper outputs when applicable and where code from original implementations is not available |
+| G5.5 | done | Correctness tests should be run with a fixed random seed |
+| G5.6 | done | Parameter recovery tests** *to test that the implementation produce expected results given data with known properties. For instance, a linear regression algo... |
+| G5.6a | done | Parameter recovery tests should generally be expected to succeed within a defined tolerance rather than recovering exact values. |
+| G5.6b | done | Parameter recovery tests should be run with multiple random seeds when either data simulation or the algorithm contains a random component. (When long-runnin... |
+| G5.7 | NA | Algorithm performance tests** *to test that implementation performs as expected as properties of data change. For instance, a test may show that parameters a... |
+| G5.8 | done | Edge condition tests** *to test that these conditions produce expected behaviour such as clear warnings or errors when confronted with data with extreme prop... |
+| G5.8a | done | Zero-length data |
+| G5.8b | done | Data of unsupported types (e.g., character or complex numbers in for functions designed only for numeric data) |
+| G5.8c | done | Data with all-`NA` fields or columns or all identical fields or columns |
+| G5.8d | done | Data outside the scope of the algorithm (for example, data with more fields (columns) than observations (rows) for some regression algorithms) |
+| G5.9 | done | Noise susceptibility tests** *Packages should test for expected stochastic behaviour, such as through the following conditions: |
+| G5.9a | done | Adding trivial noise (for example, at the scale of `.Machine$double.eps`) to data does not meaningfully change results |
+| G5.9b | done | Running under different random seeds or initial conditions does not meaningfully change results |
+| G5.10 | NA | Extended tests should included and run under a common framework with other tests but be switched on by flags such as as a `<MYPKG>_EXTENDED_TESTS="true"` env... |
+| G5.11 | NA | Where extended tests require large data sets or other assets, these should be provided for downloading and fetched as part of the testing workflow. |
+| G5.11a | NA | When any downloads of additional data necessary for extended tests fail, the tests themselves should not fail, rather be skipped and implicitly succeed with ... |
+| G5.12 | NA | Any conditions necessary to run extended tests such as platform requirements, memory, expected runtime, and artefacts produced that may need manual inspectio... |
 
 ## Regression & Supervised Learning (RE) — 48 standards
 
