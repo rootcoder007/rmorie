@@ -132,18 +132,6 @@ NULL
 #'   figure exporters are smoke-tested for successful file creation, not
 #'   pixel-level appearance.
 #'
-#' @srrstatsNA {PD2.0} Distributions are fitted and summarised directly
-#'   rather than represented through a general distribution-object
-#'   package (e.g. `distributional`).
-#' @srrstatsNA {PD3.0} The heavy-tailed fits are numeric (Hill MLE); no
-#'   analytic distribution algebra is performed.
-#' @srrstatsNA {PD3.1} Operations are specific to the fitted models and
-#'   are not organised as generic functions taking a distribution name.
-#' @srrstatsNA {PD3.4} rmorie implements no probability-distribution
-#'   integration routines.
-#' @srrstatsNA {PD3.5} No integral is approximated by discrete summation.
-#' @srrstatsNA {PD3.5a} (no discrete-summation integration; see PD3.5)
-#'
 #' @srrstatsNA {UL1.2} The methods operate on numeric coordinate matrices
 #'   that need not carry row/column names, so non-default-name assertion
 #'   does not apply.

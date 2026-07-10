@@ -299,14 +299,14 @@ Tracks every rOpenSci statistical-software standard claimed for the whole-packag
 | ID | Status | Standard |
 |---|---|---|
 | PD1.0 | done | Software should provide references justifying choice and usage of particular probability distributions. |
-| PD2.0 | NA | Where possible, software should represent probability distributions using a package for general representation. |
-| PD3.0 | NA | Manipulation of probability distributions should very generally be analytic, with numeric manipulations only implemented with clear justification (ideally in... |
-| PD3.1 | NA | Operations on probability distributions should generally be contained within separate functions which themselves accept the names of the distributions as one... |
+| PD2.0 | done | Where possible, software should represent probability distributions using a package for general representation. |
+| PD3.0 | done | Manipulation of probability distributions should very generally be analytic, with numeric manipulations only implemented with clear justification (ideally in... |
+| PD3.1 | done | Operations on probability distributions should generally be contained within separate functions which themselves accept the names of the distributions as one... |
 | PD3.2 | done | Use of optimisation routines to estimate parameters from probability distributions should explicitly specify and explain values of all parameters, including ... |
 | PD3.3 | done | Return objects which include values generated from optimisation algorithms should include information on optimisation algorithm and performance, minimally in... |
-| PD3.4 | NA | Use of routines to integrate probability distributions should explicitly document conditions under which integrals are expected to remain stable, and ideally... |
-| PD3.5 | NA | Integration routines should only rely on discrete summation where such use can be justified (for example, through providing a literature reference), in which... |
-| PD3.5a | NA | Use of discrete summation to approximate integrals must demonstrate that the Reimann sum has a finite limit (or, equivalently, must explicitly describe the c... |
+| PD3.4 | done | Use of routines to integrate probability distributions should explicitly document conditions under which integrals are expected to remain stable, and ideally... |
+| PD3.5 | done | Integration routines should only rely on discrete summation where such use can be justified (for example, through providing a literature reference), in which... |
+| PD3.5a | done | Use of discrete summation to approximate integrals must demonstrate that the Reimann sum has a finite limit (or, equivalently, must explicitly describe the c... |
 | PD4.0 | done | The numeric outputs of probability distribution functions should be tested, not just output structures. These tests should generally be tests for numeric equ... |
 | PD4.1 | done | Tests for numeric equality should compare the output of of probability distribution functions with the output of code which explicitly demonstrates how such ... |
 | PD4.2 | done | All functions constructed in accordance with **PD2.1** - that is, which use a fixed distribution, and which name that distribution as an input parameter - sh... |
