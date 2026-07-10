@@ -141,7 +141,10 @@ morie_datasets_load_by_key <- function(dataset_key,
       morie_datasets_tps_arcgis_hub_by_id(id, max_features = max_features)
     },
     "ontario_ckan" = {
-      morie_datasets_ontario_ckan_by_key(id,
+      # The Ontario CKAN wrapper keys on the SHORT dataset_key (it owns the
+      # key->package mapping); `id` here is the CKAN package GUID, which it
+      # rejects as unknown.
+      morie_datasets_ontario_ckan_by_key(dataset_key,
                                            offline = offline)
     },
     "montreal_opendata" = {
