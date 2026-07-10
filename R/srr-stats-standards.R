@@ -12,61 +12,6 @@
 #' @srrstatsVerbose TRUE
 #'
 #' @srrstatsTODO {G1.4a} *All internal (non-exported) functions should also be documented in standard [`roxygen2`](https://roxygen2.r-lib.org/) format, along with a final `@noRd` tag to suppress automatic generation of `.Rd` files or [`@keywords internal`](https://roxygen2.r-lib.org/reference/tags-index-crossref.html?q=keywords%20internal#null) if documentation is still desired.* 
-#' @srrstatsTODO {TS1.0} *Time Series Software should use and rely on explicit class systems developed for representing time series data, and should not permit generic, non-time-series input* 
-#' @srrstatsTODO {TS1.1} *Time Series Software should explicitly document the types and classes of input data able to be passed to each function.* 
-#' @srrstatsTODO {TS1.2} *Time Series Software should implement validation routines to confirm that inputs are of acceptable classes (or represented in otherwise appropriate ways for software which does not use class systems).*
-#' @srrstatsTODO {TS1.3} *Time Series Software should implement a single pre-processing routine to validate input data, and to appropriately transform it to a single uniform type to be passed to all subsequent data-processing functions (the [`tsbox` package](https://www.tsbox.help/) provides one convenient approach for this).*
-#' @srrstatsTODO {TS1.4} *The pre-processing function described above should maintain all time- or date-based components or attributes of input data.* 
-#' @srrstatsTODO {TS1.5} *The software should ensure strict ordering of the time, frequency, or equivalent ordering index variable.*
-#' @srrstatsTODO {TS1.6} *Any violations of ordering should be caught in the pre-processing stages of all functions.* 
-#' @srrstatsTODO {TS1.7} *Accept inputs defined via the [`units` package](https://github.com/r-quantities/units/) for attributing SI units to R vectors.*
-#' @srrstatsTODO {TS1.8} *Where time intervals or periods may be days or months, be explicit about the system used to represent such, particularly regarding whether a calendar system is used, or whether a year is presumed to have 365 days, 365.2422 days, or some other value.* 
-#' @srrstatsTODO {TS2.0} *Time Series Software which presumes or requires regular data should only allow **explicit** missing values, and should issue appropriate diagnostic messages, potentially including errors, in response to any **implicit** missing values.*
-#' @srrstatsTODO {TS2.1} *Where possible, all functions should provide options for users to specify how to handle missing data, with options minimally including:*
-#' @srrstatsTODO {TS2.1a} *error on missing data; or.
-#' @srrstatsTODO {TS2.1b} *warn or ignore missing data, and proceed to analyse irregular data, ensuring that results from function calls with regular yet missing data return identical values to submitting equivalent irregular data with no missing values; or*
-#' @srrstatsTODO {TS2.1c} *replace missing data with appropriately imputed values.* 
-#' @srrstatsTODO {TS2.2} *Consider stationarity of all relevant moments - typically first (mean) and second (variance) order, or otherwise document why such consideration may be restricted to lower orders only.*
-#' @srrstatsTODO {TS2.3} *Explicitly document all assumptions and/or requirements of stationarity*
-#' @srrstatsTODO {TS2.4} *Implement appropriate checks for all relevant forms of stationarity, and either:*
-#' @srrstatsTODO {TS2.4a} *issue diagnostic messages or warnings; or*
-#' @srrstatsTODO {TS2.4b} *enable or advise on appropriate transformations to ensure stationarity.* 
-#' @srrstatsTODO {TS2.5} *Incorporate a system to ensure that both row and column orders follow the same ordering as the underlying time series data. This may, for example, be done by including the `index` attribute of the time series data as an attribute of the auto-covariance matrix.*
-#' @srrstatsTODO {TS2.6} *Where applicable, auto-covariance matrices should also include specification of appropriate units.* 
-#' @srrstatsTODO {TS3.0} *Provide tests to demonstrate at least one case in which errors widen appropriately with forecast horizon.*
-#' @srrstatsTODO {TS3.1} *If possible, provide at least one test which violates TS3.0*
-#' @srrstatsTODO {TS3.2} *Document the general drivers of forecast errors or horizons, as demonstrated via the particular cases of TS3.0 and TS3.1*
-#' @srrstatsTODO {TS3.3} *Either:*
-#' @srrstatsTODO {TS3.3a} *Document, preferable via an example, how to trim forecast values based on a specified error margin or equivalent; or*
-#' @srrstatsTODO {TS3.3b} *Provide an explicit mechanism to trim forecast values to a specified error margin, either via an explicit post-processing function, or via an input parameter to a primary analytic function.* 
-#' @srrstatsTODO {TS4.0} *Return values should either:*
-#' @srrstatsTODO {TS4.0a} *Be in same class as input data, for example by using the [`tsbox` package](https://www.tsbox.help/) to re-convert from standard internal format (see 1.4, above); or*
-#' @srrstatsTODO {TS4.0b} *Be in a unique, preferably class-defined, format.*
-#' @srrstatsTODO {TS4.1} *Any units included as attributes of input data should also be included within return values.*
-#' @srrstatsTODO {TS4.2} *The type and class of all return values should be explicitly documented.* 
-#' @srrstatsTODO {TS4.3} *Return values should explicitly include all appropriate units and/or time scales* 
-#' @srrstatsTODO {TS4.4} *Document the effect of any such transformations on forecast data, including potential effects on both first- and second-order estimates.*
-#' @srrstatsTODO {TS4.5} *In decreasing order of preference, either:*
-#' @srrstatsTODO {TS4.5a} *Provide explicit routines or options to back-transform data commensurate with original, non-stationary input data*
-#' @srrstatsTODO {TS4.5b} *Demonstrate how data may be back-transformed to a form commensurate with original, non-stationary input data.*
-#' @srrstatsTODO {TS4.5c} *Document associated limitations on forecast values* 
-#' @srrstatsTODO {TS4.6} *Time Series Software which implements or otherwise enables forecasting should return either:*
-#' @srrstatsTODO {TS4.6a} *A distribution object, for example via one of the many packages described in the CRAN Task View on [Probability Distributions](https://cran.r-project.org/web/views/Distributions.html) (or the new [`distributional` package](https://pkg.mitchelloharawild.com/distributional/) as used in the [`fable` package](https://fable.tidyverts.org) for time-series forecasting).*
-#' @srrstatsTODO {TS4.6b} *For each variable to be forecast, predicted values equivalent to first- and second-order moments (for example, mean and standard error values).*
-#' @srrstatsTODO {TS4.6c} *Some more general indication of error associated with forecast estimates.* 
-#' @srrstatsTODO {TS4.7} *Ensure that forecast (modelled) values are clearly distinguished from observed (model or input) values, either (in this case in no order of preference) by*
-#' @srrstatsTODO {TS4.7a} *Returning forecast values alone*
-#' @srrstatsTODO {TS4.7b} *Returning distinct list items for model and forecast values*
-#' @srrstatsTODO {TS4.7c} *Combining model and forecast values into a single return object with an appropriate additional column clearly distinguishing the two kinds of data.* 
-#' @srrstatsTODO {TS5.0} *Implement default `plot` methods for any implemented class system.*
-#' @srrstatsTODO {TS5.1} *When representing results in temporal domain(s), ensure that one axis is clearly labelled "time" (or equivalent), with continuous units.*
-#' @srrstatsTODO {TS5.2} *Default to placing the "time" (or equivalent) variable on the horizontal axis.*
-#' @srrstatsTODO {TS5.3} *Ensure that units of the time, frequency, or index variable are printed by default on the axis.*
-#' @srrstatsTODO {TS5.4} *For frequency visualization, abscissa spanning $[-\pi, \pi]$ should be avoided in favour of positive units of $[0, 2\pi]$ or $[0, 0.5]$, in all cases with appropriate additional explanation of units.*
-#' @srrstatsTODO {TS5.5} *Provide options to determine whether plots of data with missing values should generate continuous or broken lines.* 
-#' @srrstatsTODO {TS5.6} *By default indicate distributional limits of forecast on plot*
-#' @srrstatsTODO {TS5.7} *By default include model (input) values in plot, as well as forecast (output) values*
-#' @srrstatsTODO {TS5.8} *By default provide clear visual distinction between model (input) values and forecast (output) values.*
 #' @srrstatsTODO {SP1.0} *Spatial software should explicitly indicate its domain of applicability, and in particular distinguish whether the software may be applied in Cartesian/rectilinear/geometric domains, curvilinear/geographic domains, or both.* 
 #' @srrstatsTODO {SP1.1} *Spatial software should explicitly indicate its dimensional domain of applicability, in particular through identifying whether it is applicable to two or three dimensions only, or whether there are any other restrictions on dimensionality.* 
 #' @srrstatsTODO {SP2.0} *Spatial software should only accept input data of one or more classes explicitly developed to represent such data.*
@@ -423,5 +368,69 @@ NULL
 #' @srrstatsNA {RE7.1a} Relative fitting speed on noiseless versus noisy
 #'   data is a performance property that is not part of the test suite;
 #'   correctness (exact recovery) is what is tested.
+#'
+#' @srrstatsNA {TS1.3} There is no single tsbox-style pre-processing
+#'   routine; the heterogeneous point-process / volatility / survival
+#'   models each validate their own domain-native input.
+#' @srrstatsNA {TS1.4} No ts-class attributes are used, so there are none
+#'   to preserve through pre-processing.
+#' @srrstatsNA {TS1.7} `units`-package inputs are not supported (as with
+#'   the general G2.11 position).
+#' @srrstatsNA {TS2.0} The point-process models operate on irregular
+#'   event times by construction; the regular-data / implicit-missing
+#'   distinction does not apply.
+#' @srrstatsNA {TS2.1} Missing-value handling options for regular series
+#'   do not apply: the models require complete event-time / return series.
+#' @srrstatsNA {TS2.1a} (see TS2.1)
+#' @srrstatsNA {TS2.1b} (see TS2.1)
+#' @srrstatsNA {TS2.1c} (see TS2.1)
+#' @srrstatsNA {TS2.4} Stationarity is a documented model assumption; the
+#'   software does not implement automatic stationarity checks or
+#'   stationarity-inducing transforms.
+#' @srrstatsNA {TS2.4a} (see TS2.4 — no automatic stationarity diagnostics)
+#' @srrstatsNA {TS2.4b} (see TS2.4 — no automatic transforms)
+#' @srrstatsNA {TS2.5} No auto-covariance matrix is returned, so there is
+#'   no row/column ordering to tie to a time index.
+#' @srrstatsNA {TS2.6} As above, no auto-covariance matrix and therefore
+#'   no units to attach to one.
+#' @srrstatsNA {TS3.0} The models estimate intensity / volatility /
+#'   hazard; they do not produce multi-step-ahead forecasts, so
+#'   forecast-error-versus-horizon behaviour does not apply.
+#' @srrstatsNA {TS3.1} (no forecasting; see TS3.0)
+#' @srrstatsNA {TS3.2} (no forecasting; see TS3.0)
+#' @srrstatsNA {TS3.3} (no forecasting; see TS3.0)
+#' @srrstatsNA {TS3.3a} (no forecasting; see TS3.0)
+#' @srrstatsNA {TS3.3b} (no forecasting; see TS3.0)
+#' @srrstatsNA {TS4.0a} No tsbox round-trip, as no ts-class is used.
+#' @srrstatsNA {TS4.1} No units are carried on inputs, so none are
+#'   returned.
+#' @srrstatsNA {TS4.3} Return values carry no formal unit / time-scale
+#'   attributes beyond the caller's own scale.
+#' @srrstatsNA {TS4.4} No forecasting, so there are no transformation
+#'   effects on forecasts to document.
+#' @srrstatsNA {TS4.5} No forecasting / non-stationary back-transform path.
+#' @srrstatsNA {TS4.5a} (see TS4.5)
+#' @srrstatsNA {TS4.5b} (see TS4.5)
+#' @srrstatsNA {TS4.5c} (see TS4.5)
+#' @srrstatsNA {TS4.6} The models do not forecast, so no forecast
+#'   distribution / moment object is returned.
+#' @srrstatsNA {TS4.6a} (see TS4.6)
+#' @srrstatsNA {TS4.6b} (see TS4.6)
+#' @srrstatsNA {TS4.6c} (see TS4.6)
+#' @srrstatsNA {TS4.7} No forecast values are produced, so there is
+#'   nothing to distinguish from observed values.
+#' @srrstatsNA {TS4.7a} (see TS4.7)
+#' @srrstatsNA {TS4.7b} (see TS4.7)
+#' @srrstatsNA {TS4.7c} (see TS4.7)
+#' @srrstatsNA {TS5.0} The result objects carry no default temporal
+#'   `plot` method; visualisation is via the separate figure exporters.
+#' @srrstatsNA {TS5.1} (no default temporal plot method; see TS5.0)
+#' @srrstatsNA {TS5.2} (see TS5.0)
+#' @srrstatsNA {TS5.3} (see TS5.0)
+#' @srrstatsNA {TS5.4} (see TS5.0)
+#' @srrstatsNA {TS5.5} (see TS5.0)
+#' @srrstatsNA {TS5.6} (see TS5.0)
+#' @srrstatsNA {TS5.7} (see TS5.0)
+#' @srrstatsNA {TS5.8} (see TS5.0)
 #' @noRd
 NULL
