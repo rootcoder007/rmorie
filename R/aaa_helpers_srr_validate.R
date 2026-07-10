@@ -64,6 +64,11 @@
 #'   `na.rm = FALSE` on data that may contain NA.
 #' @srrstats {G2.16} `.morie_check_numvec(finite = TRUE)` rejects
 #'   `NaN`/`Inf`/`-Inf` where undefined values are not meaningful.
+#' @srrstats {G2.5} `.morie_check_factor(ordered=)` asserts whether a
+#'   factor input must be ordered or unordered, erroring otherwise.
+#' @srrstats {G2.11} `.morie_coerce_units()` accepts columns with a
+#'   non-standard class but numeric storage (such as `units`-package
+#'   columns), coercing them to plain numeric rather than erroring.
 #' @noRd
 NULL
 
@@ -137,4 +142,50 @@ NULL
          call. = FALSE)
   }
   x
+}
+
+# Assert a factor input's ordered-ness (G2.5). `ordered = TRUE`/`FALSE`
+# requires an ordered / unordered factor respectively; NA accepts either.
+#' Internal helper: Morie Check Factor
+#' @noRd
+.morie_check_factor <- function(x, ordered = NA, arg = "x") {
+  if (!is.factor(x)) {
+    stop(sprintf("`%s` must be a factor.", arg), call. = FALSE)
+  }
+  if (!is.na(ordered)) {
+    if (isTRUE(ordered) && !is.ordered(x)) {
+      stop(sprintf("`%s` must be an *ordered* factor.", arg), call. = FALSE)
+    }
+    if (isFALSE(ordered) && is.ordered(x)) {
+      stop(sprintf("`%s` must be an *unordered* factor.", arg), call. = FALSE)
+    }
+  }
+  x
+}
+
+# Coerce a column that carries a non-standard class but is atomically
+# numeric (e.g. a `units`-package column) to a plain numeric vector
+# (G2.11), preserving the numeric values. Errors on a genuinely
+# non-coercible column.
+#' Internal helper: Morie Coerce Units
+#' @noRd
+.morie_coerce_units <- function(x, arg = "x") {
+  if (is.numeric(x) && is.null(attr(x, "class"))) return(as.numeric(x))
+  v <- tryCatch(as.numeric(x), warning = function(w) NULL,
+                error = function(e) NULL)
+  if (is.null(v) || all(is.na(v)) && !all(is.na(x))) {
+    stop(sprintf("`%s` has a non-standard class that is not numeric-coercible.",
+                 arg), call. = FALSE)
+  }
+  v
+}
+
+# Extended-test gate (G5.10-G5.12): TRUE only when the environment
+# variable MORIE_EXTENDED_TESTS is set to a truthy value. Slow or
+# data-dependent tests are wrapped in `if (.morie_extended_tests())`.
+#' Internal helper: Morie Extended Tests
+#' @noRd
+.morie_extended_tests <- function() {
+  v <- tolower(Sys.getenv("MORIE_EXTENDED_TESTS", ""))
+  v %in% c("1", "true", "yes", "on")
 }

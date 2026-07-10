@@ -29,8 +29,8 @@ Tracks every rOpenSci statistical-software standard claimed for the whole-packag
 | G1.3 | done | All statistical terminology should be clarified and unambiguously defined. |
 | G1.4 | done | Software should use [`roxygen2`](https://roxygen2.r-lib.org/) to document all functions. |
 | G1.4a | done | All internal (non-exported) functions should also be documented in standard [`roxygen2`](https://roxygen2.r-lib.org/) format, along with a final `@noRd` tag ... |
-| G1.5 | NA | Software should include all code necessary to reproduce results which form the basis of performance claims made in associated publications. |
-| G1.6 | NA | Software should include code necessary to compare performance claims with alternative implementations in other R packages. |
+| G1.5 | done | Software should include all code necessary to reproduce results which form the basis of performance claims made in associated publications. |
+| G1.6 | done | Software should include code necessary to compare performance claims with alternative implementations in other R packages. |
 | G2.0 | done | Implement assertions on lengths of inputs, particularly through asserting that inputs expected to be single- or multi-valued are indeed so. |
 | G2.0a | done | Provide explicit secondary documentation of any expectations on lengths of inputs |
 | G2.1 | done | Implement assertions on types of inputs (see the initial point on nomenclature above). |
@@ -45,13 +45,13 @@ Tracks every rOpenSci statistical-software standard claimed for the whole-packag
 | G2.4c | done | explicit conversion to character via `as.character()` (and not `paste` or `paste0`) |
 | G2.4d | done | explicit conversion to factor via `as.factor()` |
 | G2.4e | done | explicit conversion from factor via `as...()` functions |
-| G2.5 | NA | Where inputs are expected to be of `factor` type, secondary documentation should explicitly state whether these should be `ordered` or not, and those inputs ... |
+| G2.5 | done | Where inputs are expected to be of `factor` type, secondary documentation should explicitly state whether these should be `ordered` or not, and those inputs ... |
 | G2.6 | done | Software which accepts one-dimensional input should ensure values are appropriately pre-processed regardless of class structures. |
 | G2.7 | done | Software should accept as input as many of the above standard tabular forms as possible, including extension to domain-specific forms. |
 | G2.8 | done | Software should provide appropriate conversion or dispatch routines as part of initial pre-processing to ensure that all other sub-functions of a package rec... |
 | G2.9 | done | Software should issue diagnostic messages for type conversion in which information is lost (such as conversion of variables from factor to character; standar... |
 | G2.10 | done | Software should ensure that extraction or filtering of single columns from tabular inputs should not presume any particular default behaviour, and should ens... |
-| G2.11 | NA | Software should ensure that `data.frame`-like tabular objects which have columns which do not themselves have standard class attributes (typically, `vector`)... |
+| G2.11 | done | Software should ensure that `data.frame`-like tabular objects which have columns which do not themselves have standard class attributes (typically, `vector`)... |
 | G2.12 | done | Software should ensure that `data.frame`-like tabular objects which have list columns should ensure that those columns are appropriately pre-processed either... |
 | G2.13 | done | Statistical Software should implement appropriate checks for missing data as part of initial pre-processing prior to passing data to analytic algorithms. |
 | G2.14 | done | Where possible, all functions should provide options for users to specify how to handle missing (`NA`) data, with options minimally including: |
@@ -73,12 +73,12 @@ Tracks every rOpenSci statistical-software standard claimed for the whole-packag
 | G5.4 | done | Correctness tests** *to test that statistical algorithms produce expected results to some fixed test data sets (potentially through comparisons using binding... |
 | G5.4a | done | For new methods, it can be difficult to separate out correctness of the method from the correctness of the implementation, as there may not be reference for ... |
 | G5.4b | done | For new implementations of existing methods, correctness tests should include tests against previous implementations. Such testing may explicitly call those ... |
-| G5.4c | NA | Where applicable, stored values may be drawn from published paper outputs when applicable and where code from original implementations is not available |
+| G5.4c | done | Where applicable, stored values may be drawn from published paper outputs when applicable and where code from original implementations is not available |
 | G5.5 | done | Correctness tests should be run with a fixed random seed |
 | G5.6 | done | Parameter recovery tests** *to test that the implementation produce expected results given data with known properties. For instance, a linear regression algo... |
 | G5.6a | done | Parameter recovery tests should generally be expected to succeed within a defined tolerance rather than recovering exact values. |
 | G5.6b | done | Parameter recovery tests should be run with multiple random seeds when either data simulation or the algorithm contains a random component. (When long-runnin... |
-| G5.7 | NA | Algorithm performance tests** *to test that implementation performs as expected as properties of data change. For instance, a test may show that parameters a... |
+| G5.7 | done | Algorithm performance tests** *to test that implementation performs as expected as properties of data change. For instance, a test may show that parameters a... |
 | G5.8 | done | Edge condition tests** *to test that these conditions produce expected behaviour such as clear warnings or errors when confronted with data with extreme prop... |
 | G5.8a | done | Zero-length data |
 | G5.8b | done | Data of unsupported types (e.g., character or complex numbers in for functions designed only for numeric data) |
@@ -87,10 +87,10 @@ Tracks every rOpenSci statistical-software standard claimed for the whole-packag
 | G5.9 | done | Noise susceptibility tests** *Packages should test for expected stochastic behaviour, such as through the following conditions: |
 | G5.9a | done | Adding trivial noise (for example, at the scale of `.Machine$double.eps`) to data does not meaningfully change results |
 | G5.9b | done | Running under different random seeds or initial conditions does not meaningfully change results |
-| G5.10 | NA | Extended tests should included and run under a common framework with other tests but be switched on by flags such as as a `<MYPKG>_EXTENDED_TESTS="true"` env... |
-| G5.11 | NA | Where extended tests require large data sets or other assets, these should be provided for downloading and fetched as part of the testing workflow. |
-| G5.11a | NA | When any downloads of additional data necessary for extended tests fail, the tests themselves should not fail, rather be skipped and implicitly succeed with ... |
-| G5.12 | NA | Any conditions necessary to run extended tests such as platform requirements, memory, expected runtime, and artefacts produced that may need manual inspectio... |
+| G5.10 | done | Extended tests should included and run under a common framework with other tests but be switched on by flags such as as a `<MYPKG>_EXTENDED_TESTS="true"` env... |
+| G5.11 | done | Where extended tests require large data sets or other assets, these should be provided for downloading and fetched as part of the testing workflow. |
+| G5.11a | done | When any downloads of additional data necessary for extended tests fail, the tests themselves should not fail, rather be skipped and implicitly succeed with ... |
+| G5.12 | done | Any conditions necessary to run extended tests such as platform requirements, memory, expected runtime, and artefacts produced that may need manual inspectio... |
 
 ## Regression & Supervised Learning (RE) — 48 standards
 
