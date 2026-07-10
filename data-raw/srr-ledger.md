@@ -355,62 +355,62 @@ Tracks every rOpenSci statistical-software standard claimed for the whole-packag
 
 | ID | Status | Standard |
 |---|---|---|
-| BS1.0 | TODO | Bayesian software which uses the term "hyperparameter" should explicitly clarify the meaning of that term in the context of that software. |
-| BS1.1 | TODO | Descriptions of how to enter data, both in textual form and via code examples. Both of these should consider the simplest cases of single objects representin... |
-| BS1.2 | TODO | Description of how to specify prior distributions, both in textual form describing the general principles of specifying prior distributions, along with more ... |
-| BS1.2a | TODO | The main package `README`, either as textual description or example code |
-| BS1.2b | TODO | At least one package vignette, both as general and applied textual descriptions, and example code |
-| BS1.2c | TODO | Function-level documentation, preferably with code included in examples |
-| BS1.3 | TODO | Description of all parameters which control the computational process (typically those determining aspects such as numbers and lengths of sampling processes,... |
-| BS1.3a | TODO | Bayesian Software should document, both in text and examples, how to use the output of previous simulations as starting points of subsequent simulations. |
-| BS1.3b | TODO | Where applicable, Bayesian software should document, both in text and examples, how to use different sampling algorithms for a given model. |
-| BS1.4 | TODO | For Bayesian Software which implements or otherwise enables convergence checkers, documentation should explicitly describe and provide examples of use with a... |
-| BS1.5 | TODO | For Bayesian Software which implements or otherwise enables multiple convergence checkers, differences between these should be explicitly tested. |
-| BS2.1 | TODO | Bayesian Software should implement pre-processing routines to ensure all input data is dimensionally commensurate, for example by ensuring commensurate lengt... |
-| BS2.1a | TODO | The effects of such routines should be tested. |
-| BS2.2 | TODO | Ensure that all appropriate validation and pre-processing of distributional parameters are implemented as distinct pre-processing steps prior to submitting t... |
-| BS2.3 | TODO | Ensure that lengths of vectors of distributional parameters are checked, with no excess values silently discarded (unless such output is explicitly suppresse... |
-| BS2.4 | TODO | Ensure that lengths of vectors of distributional parameters are commensurate with expected model input (see example immediately below) |
-| BS2.5 | TODO | Where possible, implement pre-processing checks to validate appropriateness of numeric values submitted for distributional parameters; for example, by ensuri... |
-| BS2.6 | TODO | Check that values for computational parameters lie within plausible ranges. |
-| BS2.7 | TODO | Enable starting values to be explicitly controlled via one or more input parameters, including multiple values for software which implements or enables multi... |
-| BS2.8 | TODO | Enable results of previous runs to be used as starting points for subsequent runs. |
-| BS2.9 | TODO | Ensure each chain is started with a different seed by default. |
-| BS2.10 | TODO | Issue diagnostic messages when identical seeds are passed to distinct computational chains. |
-| BS2.11 | TODO | Software which accepts starting values as a vector should provide the parameter with a plural name: for example, "starting_values" and not "starting_value". |
-| BS2.12 | TODO | Bayesian Software should implement at least one parameter controlling the verbosity of output, defaulting to verbose output of all appropriate messages, warn... |
-| BS2.13 | TODO | Bayesian Software should enable suppression of messages and progress indicators, while retaining verbosity of warnings and errors. This should be tested. |
-| BS2.14 | TODO | Bayesian Software should enable suppression of warnings where appropriate. This should be tested. |
-| BS2.15 | TODO | Bayesian Software should explicitly enable errors to be caught, and appropriately processed either through conversion to warnings, or otherwise captured in r... |
-| BS3.0 | TODO | Explicitly document assumptions made in regard to missing values; for example that data is assumed to contain no missing (`NA`, `Inf`) values, and that such ... |
-| BS3.1 | TODO | Implement pre-processing routines to diagnose perfect collinearity, and provide appropriate diagnostic messages or warnings |
-| BS3.2 | TODO | Provide distinct routines for processing perfectly collinear data, potentially bypassing sampling algorithms |
-| BS4.0 | TODO | Packages should document sampling algorithms (generally via literary citation, or reference to other software) |
-| BS4.1 | TODO | Packages should provide explicit comparisons with external samplers which demonstrate intended advantage of implementation (generally via tests, vignettes, o... |
-| BS4.2 | TODO | Implement at least one means to validate posterior estimates. |
-| BS4.3 | TODO | Implement or otherwise offer at least one type of convergence checker, and provide a documented reference for that implementation. |
-| BS4.4 | TODO | Enable computations to be stopped on convergence (although not necessarily by default). |
-| BS4.5 | TODO | Ensure that appropriate mechanisms are provided for models which do not converge. |
-| BS4.6 | TODO | Implement tests to confirm that results with convergence checker are statistically equivalent to results from equivalent fixed number of samples without conv... |
-| BS4.7 | TODO | Where convergence checkers are themselves parametrised, the effects of such parameters should also be tested. For threshold parameters, for example, lower va... |
-| BS5.0 | TODO | Return values should include starting value(s) or seed(s), including values for each sequence where multiple sequences are included |
-| BS5.1 | TODO | Return values should include appropriate metadata on types (or classes) and dimensions of input data |
-| BS5.2 | TODO | Bayesian Software should either return the input function or prior distributional specification in the return object; or enable direct access to such via add... |
-| BS5.3 | TODO | Bayesian Software should return convergence statistics or equivalent |
-| BS5.4 | TODO | Where multiple checkers are enabled, Bayesian Software should return details of convergence checker used |
-| BS5.5 | TODO | Appropriate diagnostic statistics to indicate absence of convergence should either be returned or immediately able to be accessed. |
-| BS6.0 | TODO | Software should implement a default `print` method for return objects |
-| BS6.1 | TODO | Software should implement a default `plot` method for return objects |
-| BS6.2 | TODO | Software should provide and document straightforward abilities to plot sequences of posterior samples, with burn-in periods clearly distinguished |
-| BS6.3 | TODO | Software should provide and document straightforward abilities to plot posterior distributional estimates |
-| BS6.4 | TODO | Software may provide `summary` methods for return objects |
-| BS6.5 | TODO | Software may provide abilities to plot both sequences of posterior samples and distributional estimates together in single graphic |
-| BS7.0 | TODO | Software should demonstrate and confirm recovery of parametric estimates of a prior distribution |
-| BS7.1 | TODO | Software should demonstrate and confirm recovery of a prior distribution in the absence of any additional data or information |
-| BS7.2 | TODO | Software should demonstrate and confirm recovery of a expected posterior distribution given a specified prior and some input data |
-| BS7.3 | TODO | Bayesian software should include tests which demonstrate and confirm the scaling of algorithmic efficiency with sizes of input data. |
-| BS7.4 | TODO | Bayesian software should implement tests which confirm that predicted or fitted values are on (approximately) the same scale as input values. |
-| BS7.4a | TODO | The implications of any assumptions on scales on input objects should be explicitly tested in this context; for example that the scales of inputs which do no... |
+| BS1.0 | done | Bayesian software which uses the term "hyperparameter" should explicitly clarify the meaning of that term in the context of that software. |
+| BS1.1 | done | Descriptions of how to enter data, both in textual form and via code examples. Both of these should consider the simplest cases of single objects representin... |
+| BS1.2 | done | Description of how to specify prior distributions, both in textual form describing the general principles of specifying prior distributions, along with more ... |
+| BS1.2a | NA | The main package `README`, either as textual description or example code |
+| BS1.2b | NA | At least one package vignette, both as general and applied textual descriptions, and example code |
+| BS1.2c | done | Function-level documentation, preferably with code included in examples |
+| BS1.3 | done | Description of all parameters which control the computational process (typically those determining aspects such as numbers and lengths of sampling processes,... |
+| BS1.3a | NA | Bayesian Software should document, both in text and examples, how to use the output of previous simulations as starting points of subsequent simulations. |
+| BS1.3b | done | Where applicable, Bayesian software should document, both in text and examples, how to use different sampling algorithms for a given model. |
+| BS1.4 | NA | For Bayesian Software which implements or otherwise enables convergence checkers, documentation should explicitly describe and provide examples of use with a... |
+| BS1.5 | NA | For Bayesian Software which implements or otherwise enables multiple convergence checkers, differences between these should be explicitly tested. |
+| BS2.1 | done | Bayesian Software should implement pre-processing routines to ensure all input data is dimensionally commensurate, for example by ensuring commensurate lengt... |
+| BS2.1a | NA | The effects of such routines should be tested. |
+| BS2.2 | done | Ensure that all appropriate validation and pre-processing of distributional parameters are implemented as distinct pre-processing steps prior to submitting t... |
+| BS2.3 | NA | Ensure that lengths of vectors of distributional parameters are checked, with no excess values silently discarded (unless such output is explicitly suppresse... |
+| BS2.4 | NA | Ensure that lengths of vectors of distributional parameters are commensurate with expected model input (see example immediately below) |
+| BS2.5 | done | Where possible, implement pre-processing checks to validate appropriateness of numeric values submitted for distributional parameters; for example, by ensuri... |
+| BS2.6 | done | Check that values for computational parameters lie within plausible ranges. |
+| BS2.7 | done | Enable starting values to be explicitly controlled via one or more input parameters, including multiple values for software which implements or enables multi... |
+| BS2.8 | NA | Enable results of previous runs to be used as starting points for subsequent runs. |
+| BS2.9 | done | Ensure each chain is started with a different seed by default. |
+| BS2.10 | NA | Issue diagnostic messages when identical seeds are passed to distinct computational chains. |
+| BS2.11 | NA | Software which accepts starting values as a vector should provide the parameter with a plural name: for example, "starting_values" and not "starting_value". |
+| BS2.12 | done | Bayesian Software should implement at least one parameter controlling the verbosity of output, defaulting to verbose output of all appropriate messages, warn... |
+| BS2.13 | done | Bayesian Software should enable suppression of messages and progress indicators, while retaining verbosity of warnings and errors. This should be tested. |
+| BS2.14 | NA | Bayesian Software should enable suppression of warnings where appropriate. This should be tested. |
+| BS2.15 | NA | Bayesian Software should explicitly enable errors to be caught, and appropriately processed either through conversion to warnings, or otherwise captured in r... |
+| BS3.0 | done | Explicitly document assumptions made in regard to missing values; for example that data is assumed to contain no missing (`NA`, `Inf`) values, and that such ... |
+| BS3.1 | done | Implement pre-processing routines to diagnose perfect collinearity, and provide appropriate diagnostic messages or warnings |
+| BS3.2 | NA | Provide distinct routines for processing perfectly collinear data, potentially bypassing sampling algorithms |
+| BS4.0 | done | Packages should document sampling algorithms (generally via literary citation, or reference to other software) |
+| BS4.1 | NA | Packages should provide explicit comparisons with external samplers which demonstrate intended advantage of implementation (generally via tests, vignettes, o... |
+| BS4.2 | done | Implement at least one means to validate posterior estimates. |
+| BS4.3 | done | Implement or otherwise offer at least one type of convergence checker, and provide a documented reference for that implementation. |
+| BS4.4 | NA | Enable computations to be stopped on convergence (although not necessarily by default). |
+| BS4.5 | NA | Ensure that appropriate mechanisms are provided for models which do not converge. |
+| BS4.6 | NA | Implement tests to confirm that results with convergence checker are statistically equivalent to results from equivalent fixed number of samples without conv... |
+| BS4.7 | NA | Where convergence checkers are themselves parametrised, the effects of such parameters should also be tested. For threshold parameters, for example, lower va... |
+| BS5.0 | done | Return values should include starting value(s) or seed(s), including values for each sequence where multiple sequences are included |
+| BS5.1 | done | Return values should include appropriate metadata on types (or classes) and dimensions of input data |
+| BS5.2 | done | Bayesian Software should either return the input function or prior distributional specification in the return object; or enable direct access to such via add... |
+| BS5.3 | done | Bayesian Software should return convergence statistics or equivalent |
+| BS5.4 | NA | Where multiple checkers are enabled, Bayesian Software should return details of convergence checker used |
+| BS5.5 | NA | Appropriate diagnostic statistics to indicate absence of convergence should either be returned or immediately able to be accessed. |
+| BS6.0 | NA | Software should implement a default `print` method for return objects |
+| BS6.1 | NA | Software should implement a default `plot` method for return objects |
+| BS6.2 | NA | Software should provide and document straightforward abilities to plot sequences of posterior samples, with burn-in periods clearly distinguished |
+| BS6.3 | NA | Software should provide and document straightforward abilities to plot posterior distributional estimates |
+| BS6.4 | NA | Software may provide `summary` methods for return objects |
+| BS6.5 | NA | Software may provide abilities to plot both sequences of posterior samples and distributional estimates together in single graphic |
+| BS7.0 | NA | Software should demonstrate and confirm recovery of parametric estimates of a prior distribution |
+| BS7.1 | NA | Software should demonstrate and confirm recovery of a prior distribution in the absence of any additional data or information |
+| BS7.2 | NA | Software should demonstrate and confirm recovery of a expected posterior distribution given a specified prior and some input data |
+| BS7.3 | NA | Bayesian software should include tests which demonstrate and confirm the scaling of algorithmic efficiency with sizes of input data. |
+| BS7.4 | NA | Bayesian software should implement tests which confirm that predicted or fitted values are on (approximately) the same scale as input values. |
+| BS7.4a | NA | The implications of any assumptions on scales on input objects should be explicitly tested in this context; for example that the scales of inputs which do no... |
 
 ## Machine Learning (ML) — 90 standards
 

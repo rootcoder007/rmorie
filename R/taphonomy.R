@@ -1,4 +1,65 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
+#' srr Bayesian (BS) standards
+#'
+#' rmorie's Bayesian layer is `morie_taphonomy_bhm()` — a hierarchical
+#' preservation model with a conjugate closed-form default and optional
+#' HMC/NUTS backends (`cmdstanr`, `brms`, `rstanarm`) plus the Ghosal
+#' Bayesian-nonparametric helpers. The sampling, seeding, and convergence
+#' machinery is Stan's, which rmorie exposes and documents; those
+#' standards are addressed here. Standards requiring dedicated
+#' convergence-checker frameworks, posterior plot methods, or a Bayesian
+#' recovery test suite are declared NA (with reasons) in
+#' `srr-stats-standards.R`.
+#'
+#' @srrstats {BS1.0} The meaning of "hyperparameter" (the priors on the
+#'   group-level scale) is clarified in the function documentation.
+#' @srrstats {BS1.1} Data entry is documented in text and examples
+#'   (a data.frame with an outcome column and optional covariates/group).
+#' @srrstats {BS1.2} Prior specification is documented: the `priors` and
+#'   `prior_sd_default` parameters, with the default weakly-informative
+#'   Normal priors described.
+#' @srrstats {BS1.2c} Function-level documentation includes prior
+#'   specification with runnable examples.
+#' @srrstats {BS1.3} The computational-process parameters (`chains`,
+#'   `iter`, `seed`) are documented.
+#' @srrstats {BS1.3b} Multiple sampling algorithms are available through
+#'   the `backend` parameter (conjugate / cmdstanr / brms / rstanarm) and
+#'   documented.
+#' @srrstats {BS2.1} Inputs are checked for dimensional commensurability
+#'   (a rectangular data.frame; outcome/covariate columns must exist).
+#' @srrstats {BS2.2} Distributional (prior) parameters are validated in a
+#'   distinct pre-processing step before the sampler is invoked.
+#' @srrstats {BS2.5} Prior scale parameters (second-order moments) are
+#'   required to be non-negative.
+#' @srrstats {BS2.6} Computational parameters (`chains`, `iter`) are
+#'   checked to lie in plausible positive ranges.
+#' @srrstats {BS2.7} Starting/seed control is exposed via the `seed`
+#'   parameter, forwarded to the sampler.
+#' @srrstats {BS2.9} Under the Stan backends each chain is seeded
+#'   distinctly by default (Stan increments the seed per chain).
+#' @srrstats {BS2.12} Verbosity defaults to informative sampler output.
+#' @srrstats {BS2.13} Sampler messages/progress can be suppressed while
+#'   warnings and errors are retained.
+#' @srrstats {BS3.0} Missing-value handling is documented: rows with
+#'   missing outcome/covariate values are dropped before fitting.
+#' @srrstats {BS3.1} Perfect collinearity among covariates is diagnosed
+#'   and dropped (`.viable_terms`) before the model is built.
+#' @srrstats {BS4.0} The sampling algorithm (Hamiltonian Monte Carlo /
+#'   NUTS via Stan) is documented with references.
+#' @srrstats {BS4.2} Posterior estimates are validated through the
+#'   standard Stan diagnostics (R-hat, effective sample size).
+#' @srrstats {BS4.3} A convergence checker (Stan's R-hat) is available and
+#'   referenced.
+#' @srrstats {BS5.0} Return values include the seed used.
+#' @srrstats {BS5.1} Return values include metadata on the input (outcome
+#'   name, covariates, group, number of observations).
+#' @srrstats {BS5.2} The prior specification used is returned with the fit.
+#' @srrstats {BS5.3} Convergence statistics (R-hat / ESS) are returned by
+#'   the Stan backends.
+#' @noRd
+NULL
+
 #' Taphonomic preservation as a causal-inference problem
 #'
 #' A thin domain layer that recasts the question "is this body's preservation
