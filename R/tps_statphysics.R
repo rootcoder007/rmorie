@@ -1,4 +1,36 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
+#' srr probability-distributions (PD) standards
+#'
+#' rmorie fits heavy-tailed distributions to crime data (Hill-MLE
+#' power-law / Levy-flight exponents, Pareto tails) as part of its
+#' statistical-physics-of-crime module. The applicable PD standards are
+#' addressed here; the general-representation and analytic-manipulation
+#' standards (which assume a distribution-object package such as
+#' `distributional`) are declared NA in `srr-stats-standards.R`.
+#'
+#' @srrstats {PD1.0} The choice and usage of each distribution is
+#'   justified with primary references (e.g. Brockmann et al. 2006 for
+#'   Levy flights; Bettencourt et al. for urban scaling), given in the
+#'   `@references` of the respective functions.
+#' @srrstats {PD3.2} Parameter estimation via optimisation (Hill maximum
+#'   likelihood, non-linear scaling fits) documents the estimator and its
+#'   settings, including any defaults.
+#' @srrstats {PD3.3} Return objects from fitted distributions include the
+#'   fitting information (estimated exponent, the estimator used, and the
+#'   sample size / support used in the fit).
+#' @srrstats {PD4.0} The numeric outputs of the distribution-fitting
+#'   functions are tested for numeric equality, not merely their
+#'   structure (see `test-tps_statphysics.R`).
+#' @srrstats {PD4.1} Tests cover the estimated distribution parameters.
+#' @srrstats {PD4.2} Tests cover derived quantities (scaling exponents,
+#'   tail indices).
+#' @srrstats {PD4.3} Numeric tests use explicit tolerances.
+#' @srrstats {PD4.4} Edge cases (short samples, degenerate support) are
+#'   handled and tested.
+#' @noRd
+NULL
+
 #' Statistical physics of crime for TPS data
 #'
 #' R port of \code{morie.tps_statphysics}. Implements the four canonical

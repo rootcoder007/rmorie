@@ -259,59 +259,59 @@ Tracks every rOpenSci statistical-software standard claimed for the whole-packag
 
 | ID | Status | Standard |
 |---|---|---|
-| EA1.0 | TODO | Identify one or more target audiences for whom the software is intended |
-| EA1.1 | TODO | Identify the kinds of data the software is capable of analysing (see *Kinds of Data* below). |
-| EA1.2 | TODO | Identify the kinds of questions the software is intended to help explore. |
-| EA1.3 | TODO | Identify the kinds of data each function is intended to accept as input |
-| EA2.0 | TODO | EDA Software which accepts standard tabular data and implements or relies upon extensive table filter and join operations should utilise an **index column** ... |
-| EA2.1 | TODO | All values in an index column must be unique, and this uniqueness should be affirmed as a pre-processing step for all input data. |
-| EA2.2 | TODO | Index columns should be explicitly identified, either: |
-| EA2.2a | TODO | by using an appropriate class system, or |
-| EA2.2b | TODO | through setting an `attribute` on a table, `x`, of `attr(x, "index") <- <index_col_name>`. |
-| EA2.3 | TODO | Table join operations should not be based on any assumed variable or column names |
-| EA2.4 | TODO | Use and demand an explicit class system for such input (for example, via the [`DM` package](https://github.com/krlmlr/dm)). |
-| EA2.5 | TODO | Ensure all individual tables follow the above standards for Index Columns |
-| EA2.6 | TODO | Routines should appropriately process vector data regardless of additional attributes |
-| EA3.0 | TODO | The algorithmic components of EDA Software should enable automated extraction and/or reporting of statistics as some sufficiently "meta" level (such as varia... |
-| EA3.1 | TODO | EDA software should enable standardised comparison of inputs, processes, models, or outputs which previous or reference implementations otherwise only enable... |
-| EA4.0 | TODO | EDA Software should ensure all return results have types which are consistent with input types. |
-| EA4.1 | TODO | EDA Software should implement parameters to enable explicit control of numeric precision |
-| EA4.2 | TODO | The primary routines of EDA Software should return objects for which default `print` and `plot` methods give sensible results. Default `summary` methods may ... |
-| EA5.0 | TODO | Graphical presentation in EDA software should be as accessible as possible or practicable. In particular, EDA software should consider accessibility in terms... |
-| EA5.0a | TODO | Typeface sizes, which should default to sizes which explicitly enhance accessibility |
-| EA5.0b | TODO | Default colour schemes, which should be carefully constructed to ensure accessibility. |
-| EA5.1 | TODO | Any explicit specifications of typefaces which override default values provided through other packages (including the `graphics` package) should consider acc... |
-| EA5.2 | TODO | Screen-based output should never rely on default print formatting of `numeric` types, rather should also use some version of `round(., digits)`, `formatC`, `... |
-| EA5.3 | TODO | Column-based summary statistics should always indicate the `storage.mode`, `class`, or equivalent defining attribute of each column. |
-| EA5.4 | TODO | All visualisations should ensure values are rounded sensibly (for example, via `pretty()` function). |
-| EA5.5 | TODO | All visualisations should include units on all axes where such are specified or otherwise obtainable from input data or other routines. |
-| EA5.6 | TODO | Any packages which internally bundle libraries used for dynamic visualization and which are also bundled in other, pre-existing R packages, should explain th... |
-| EA6.0 | TODO | Return values from all functions should be tested, including tests for the following characteristics: |
-| EA6.0a | TODO | Classes and types of objects |
-| EA6.0b | TODO | Dimensions of tabular objects |
-| EA6.0c | TODO | Column names (or equivalent) of tabular objects |
-| EA6.0d | TODO | Classes or types of all columns contained within `data.frame`-type tabular objects |
-| EA6.0e | TODO | Values of single-valued objects; for `numeric` values either using `testthat::expect_equal()` or equivalent with a defined value for the `tolerance` paramete... |
-| EA6.1 | TODO | The properties of graphical output from EDA software should be explicitly tested, for example via the [`vdiffr` package](https://github.com/r-lib/vdiffr) or ... |
+| EA1.0 | done | Identify one or more target audiences for whom the software is intended |
+| EA1.1 | done | Identify the kinds of data the software is capable of analysing (see *Kinds of Data* below). |
+| EA1.2 | done | Identify the kinds of questions the software is intended to help explore. |
+| EA1.3 | done | Identify the kinds of data each function is intended to accept as input |
+| EA2.0 | NA | EDA Software which accepts standard tabular data and implements or relies upon extensive table filter and join operations should utilise an **index column** ... |
+| EA2.1 | NA | All values in an index column must be unique, and this uniqueness should be affirmed as a pre-processing step for all input data. |
+| EA2.2 | NA | Index columns should be explicitly identified, either: |
+| EA2.2a | NA | by using an appropriate class system, or |
+| EA2.2b | NA | through setting an `attribute` on a table, `x`, of `attr(x, "index") <- <index_col_name>`. |
+| EA2.3 | NA | Table join operations should not be based on any assumed variable or column names |
+| EA2.4 | NA | Use and demand an explicit class system for such input (for example, via the [`DM` package](https://github.com/krlmlr/dm)). |
+| EA2.5 | NA | Ensure all individual tables follow the above standards for Index Columns |
+| EA2.6 | NA | Routines should appropriately process vector data regardless of additional attributes |
+| EA3.0 | NA | The algorithmic components of EDA Software should enable automated extraction and/or reporting of statistics as some sufficiently "meta" level (such as varia... |
+| EA3.1 | NA | EDA software should enable standardised comparison of inputs, processes, models, or outputs which previous or reference implementations otherwise only enable... |
+| EA4.0 | done | EDA Software should ensure all return results have types which are consistent with input types. |
+| EA4.1 | NA | EDA Software should implement parameters to enable explicit control of numeric precision |
+| EA4.2 | done | The primary routines of EDA Software should return objects for which default `print` and `plot` methods give sensible results. Default `summary` methods may ... |
+| EA5.0 | NA | Graphical presentation in EDA software should be as accessible as possible or practicable. In particular, EDA software should consider accessibility in terms... |
+| EA5.0a | NA | Typeface sizes, which should default to sizes which explicitly enhance accessibility |
+| EA5.0b | NA | Default colour schemes, which should be carefully constructed to ensure accessibility. |
+| EA5.1 | NA | Any explicit specifications of typefaces which override default values provided through other packages (including the `graphics` package) should consider acc... |
+| EA5.2 | done | Screen-based output should never rely on default print formatting of `numeric` types, rather should also use some version of `round(., digits)`, `formatC`, `... |
+| EA5.3 | NA | Column-based summary statistics should always indicate the `storage.mode`, `class`, or equivalent defining attribute of each column. |
+| EA5.4 | NA | All visualisations should ensure values are rounded sensibly (for example, via `pretty()` function). |
+| EA5.5 | NA | All visualisations should include units on all axes where such are specified or otherwise obtainable from input data or other routines. |
+| EA5.6 | NA | Any packages which internally bundle libraries used for dynamic visualization and which are also bundled in other, pre-existing R packages, should explain th... |
+| EA6.0 | done | Return values from all functions should be tested, including tests for the following characteristics: |
+| EA6.0a | done | Classes and types of objects |
+| EA6.0b | done | Dimensions of tabular objects |
+| EA6.0c | done | Column names (or equivalent) of tabular objects |
+| EA6.0d | done | Classes or types of all columns contained within `data.frame`-type tabular objects |
+| EA6.0e | done | Values of single-valued objects; for `numeric` values either using `testthat::expect_equal()` or equivalent with a defined value for the `tolerance` paramete... |
+| EA6.1 | NA | The properties of graphical output from EDA software should be explicitly tested, for example via the [`vdiffr` package](https://github.com/r-lib/vdiffr) or ... |
 
 ## Probability Distributions (PD) — 14 standards
 
 | ID | Status | Standard |
 |---|---|---|
-| PD1.0 | TODO | Software should provide references justifying choice and usage of particular probability distributions. |
-| PD2.0 | TODO | Where possible, software should represent probability distributions using a package for general representation. |
-| PD3.0 | TODO | Manipulation of probability distributions should very generally be analytic, with numeric manipulations only implemented with clear justification (ideally in... |
-| PD3.1 | TODO | Operations on probability distributions should generally be contained within separate functions which themselves accept the names of the distributions as one... |
-| PD3.2 | TODO | Use of optimisation routines to estimate parameters from probability distributions should explicitly specify and explain values of all parameters, including ... |
-| PD3.3 | TODO | Return objects which include values generated from optimisation algorithms should include information on optimisation algorithm and performance, minimally in... |
-| PD3.4 | TODO | Use of routines to integrate probability distributions should explicitly document conditions under which integrals are expected to remain stable, and ideally... |
-| PD3.5 | TODO | Integration routines should only rely on discrete summation where such use can be justified (for example, through providing a literature reference), in which... |
-| PD3.5a | TODO | Use of discrete summation to approximate integrals must demonstrate that the Reimann sum has a finite limit (or, equivalently, must explicitly describe the c... |
-| PD4.0 | TODO | The numeric outputs of probability distribution functions should be tested, not just output structures. These tests should generally be tests for numeric equ... |
-| PD4.1 | TODO | Tests for numeric equality should compare the output of of probability distribution functions with the output of code which explicitly demonstrates how such ... |
-| PD4.2 | TODO | All functions constructed in accordance with **PD2.1** - that is, which use a fixed distribution, and which name that distribution as an input parameter - sh... |
-| PD4.3 | TODO | Tests of optimisation or integration algorithms should compare default results with results generated with alternative values for every parameter, including ... |
-| PD4.4 | TODO | Tests of optimisation or integration algorithms should compare equivalent results generated with at least one alternative algorithm. |
+| PD1.0 | done | Software should provide references justifying choice and usage of particular probability distributions. |
+| PD2.0 | NA | Where possible, software should represent probability distributions using a package for general representation. |
+| PD3.0 | NA | Manipulation of probability distributions should very generally be analytic, with numeric manipulations only implemented with clear justification (ideally in... |
+| PD3.1 | NA | Operations on probability distributions should generally be contained within separate functions which themselves accept the names of the distributions as one... |
+| PD3.2 | done | Use of optimisation routines to estimate parameters from probability distributions should explicitly specify and explain values of all parameters, including ... |
+| PD3.3 | done | Return objects which include values generated from optimisation algorithms should include information on optimisation algorithm and performance, minimally in... |
+| PD3.4 | NA | Use of routines to integrate probability distributions should explicitly document conditions under which integrals are expected to remain stable, and ideally... |
+| PD3.5 | NA | Integration routines should only rely on discrete summation where such use can be justified (for example, through providing a literature reference), in which... |
+| PD3.5a | NA | Use of discrete summation to approximate integrals must demonstrate that the Reimann sum has a finite limit (or, equivalently, must explicitly describe the c... |
+| PD4.0 | done | The numeric outputs of probability distribution functions should be tested, not just output structures. These tests should generally be tests for numeric equ... |
+| PD4.1 | done | Tests for numeric equality should compare the output of of probability distribution functions with the output of code which explicitly demonstrates how such ... |
+| PD4.2 | done | All functions constructed in accordance with **PD2.1** - that is, which use a fixed distribution, and which name that distribution as an input parameter - sh... |
+| PD4.3 | done | Tests of optimisation or integration algorithms should compare default results with results generated with alternative values for every parameter, including ... |
+| PD4.4 | done | Tests of optimisation or integration algorithms should compare equivalent results generated with at least one alternative algorithm. |
 
 ## Dimensionality Reduction, Clustering & Unsupervised (UL) — 33 standards
 
