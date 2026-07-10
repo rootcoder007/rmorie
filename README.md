@@ -282,3 +282,20 @@ for the machine-readable metadata GitHub's "Cite this repository" button uses.
 
 R-MORIE is licensed under **AGPL-3.0-or-later**. See `LICENSE` for the
 full text and `LICENSING.md` for the per-component breakdown.
+
+## Bayesian priors
+
+rmorie's Bayesian regression (`morie_bayes_lm`) places zero-mean Normal
+priors on the regression coefficients; the `prior_sd` argument is the
+prior standard deviation (the scale of plausible coefficient values).
+Larger `prior_sd` is weakly informative; smaller values pull estimates
+toward zero (regularisation). Example:
+
+```r
+d <- data.frame(x = rnorm(100)); d$y <- 1 + 2 * d$x + rnorm(100)
+# weakly-informative prior (sd = 10) vs a tight regularising prior (sd = 0.5)
+fit_weak  <- morie_bayes_lm(y ~ x, d, prior_sd = 10)
+fit_tight <- morie_bayes_lm(y ~ x, d, prior_sd = 0.5)
+```
+
+See the **bayesian-priors** vignette for applied guidance.
