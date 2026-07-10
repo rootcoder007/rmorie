@@ -65,42 +65,21 @@ NULL
 #'   underlying dbscan / scan-statistic implementations.
 #'   software, so its tests do not apply.
 #'
-#' @srrstatsNA {EA2.0} rmorie's exploratory layer summarises and tests
 #'   data; it does not implement extensive table filter/join operations
 #'   requiring an index-column system.
-#' @srrstatsNA {EA2.1} (no index-column system; see EA2.0)
-#' @srrstatsNA {EA2.2} (see EA2.0)
-#' @srrstatsNA {EA2.2a} (see EA2.0)
-#' @srrstatsNA {EA2.2b} (see EA2.0)
-#' @srrstatsNA {EA2.3} No table joins are performed on assumed column
 #'   names; there is no join layer.
-#' @srrstatsNA {EA2.4} No multi-table `DM`-style class system is used.
-#' @srrstatsNA {EA2.5} (no index-column tables; see EA2.0)
-#' @srrstatsNA {EA2.6} Vector inputs are validated by the shared
 #'   `.morie_check_*` helpers; there is no attribute-bearing table layer
 #'   that this standard targets.
-#' @srrstatsNA {EA3.0} rmorie does not automate meta-level extraction
 #'   (e.g. automated variable/model selection reporting).
-#' @srrstatsNA {EA3.1} rmorie provides no standardised cross-tool
 #'   input/model/output comparison layer.
-#' @srrstatsNA {EA4.1} No explicit numeric-precision control parameter is
 #'   exposed; results are reported at full double precision and formatted
 #'   for display only.
-#' @srrstatsNA {EA5.0} Graphical accessibility standards target the
 #'   package's own default plotting layer; rmorie's figures are produced
 #'   by the separate exporters using ggplot2 defaults.
-#' @srrstatsNA {EA5.0a} (see EA5.0)
-#' @srrstatsNA {EA5.0b} (see EA5.0)
-#' @srrstatsNA {EA5.1} rmorie does not override typeface specifications
 #'   from the underlying graphics packages.
-#' @srrstatsNA {EA5.3} Column summaries report values, not per-column
 #'   storage.mode annotations, as they operate on validated numeric data.
-#' @srrstatsNA {EA5.4} Visual rounding is left to the ggplot2 scales used
 #'   by the figure exporters.
-#' @srrstatsNA {EA5.5} Axis units are the caller's own; no unit metadata
 #'   is carried to annotate axes automatically.
-#' @srrstatsNA {EA5.6} rmorie bundles no dynamic-visualisation library.
-#' @srrstatsNA {EA6.1} Graphical output is not tested via `vdiffr`; the
 #'   figure exporters are smoke-tested for successful file creation, not
 #'   pixel-level appearance.
 #'
