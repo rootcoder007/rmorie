@@ -417,92 +417,92 @@ Tracks every rOpenSci statistical-software standard claimed for the whole-packag
 | ID | Status | Standard |
 |---|---|---|
 | ML1.0 | done | Documentation should make a clear conceptual distinction between training and test data (even where such may ultimately be confounded as described above.) |
-| ML1.0a | NA | Where these terms are ultimately eschewed, these should nevertheless be used in initial documentation, along with clear explanation of, and justification for... |
-| ML1.1 | NA | Absent clear justification for alternative design decisions, input data should be expected to be labelled "test", "training", and, where applicable, "validat... |
-| ML1.1a | NA | The presence and use of these labels should be explicitly confirmed via pre-processing steps (and tested in accordance with **ML7.0**, below). |
-| ML1.1b | NA | Matches to expected labels should be case-insensitive and based on partial matching such that, for example, "Test", "test", or "testing" should all suffice. |
-| ML1.2 | NA | Training and test data sets for ML software should be able to be input as a single, generally tabular, data object, with the training and test data distingui... |
-| ML1.3 | NA | Input data should be clearly partitioned between training and test data (for example, through having each passed as a distinct `list` item), or should enable... |
-| ML1.4 | NA | Training and test data sets, along with other necessary components such as validation data sets, should be stored in their own distinctly labelled sub-direct... |
-| ML1.5 | NA | ML software should implement a single function which summarises the contents of test and training (and other) data sets, minimally including counts of number... |
-| ML1.6 | NA | ML software which does not admit missing values, and which expects no missing values, should implement explicit pre-processing routines to identify whether d... |
-| ML1.6a | NA | Explain why missing values are not admitted. |
-| ML1.6b | NA | Provide explicit examples (in function documentation, vignettes, or both) for how missing values may be imputed, rather than simply discarded. |
-| ML1.7 | NA | ML software which admits missing values should clearly document how such values are processed. |
-| ML1.7a | NA | Where missing values are imputed, software should offer multiple user-defined ways to impute missing data. |
-| ML1.7b | NA | Where missing values are imputed, the precise imputation steps should also be explicitly documented, either in tests (see **ML7.2** below), function document... |
-| ML1.8 | NA | ML software should enable equal treatment of missing values for both training and test data, with optional user ability to control application to either one ... |
-| ML2.0 | NA | A dedicated function should enable pre-processing steps to be defined and parametrized. |
-| ML2.0a | NA | That function should return an object which can be directly submitted to a specified model (see section 3, below). |
-| ML2.0b | NA | Absent explicit justification otherwise, that return object should have a defined class minimally intended to implement a default `print` method which summar... |
-| ML2.1 | NA | ML software which uses broadcasting to reconcile dimensionally incommensurate input data should offer an ability to at least optionally record transformation... |
-| ML2.2 | NA | ML software which requires or relies upon numeric transformations of input data (such as change in mean values or variances) should allow optimal explicit sp... |
-| ML2.2a | NA | Where the parameters have default values, reasons for those particular defaults should be explicitly described. |
-| ML2.2b | NA | Any extended documentation (such as vignettes) which demonstrates the use of explicit values for numeric transformations should explicitly describe why parti... |
-| ML2.3 | NA | The values associated with all transformations should be recorded in the object returned by the function described in the preceding standard (**ML2.0**). |
-| ML2.4 | NA | Default values of all transformations should be explicitly documented, both in documentation of parameters where appropriate (such as for numeric transformat... |
-| ML2.5 | NA | ML software should provide options to bypass or otherwise switch off all default transformations. |
-| ML2.6 | NA | Where transformations are implemented via distinct functions, these should be exported to a package's namespace so they can be applied in other contexts. |
-| ML2.7 | NA | Where possible, documentation should be provided for how transformations may be reversed. For example, documentation may demonstrate how the values retained ... |
-| ML3.0 | NA | Model specification should be implemented as a distinct stage subsequent to specification of pre-processing routines (see Section 2, above) and prior to actu... |
-| ML3.0a | NA | A dedicated function should enable models to be specified without actually fitting or training them, or if this (**ML3**) and the following (**ML4**) stages ... |
-| ML3.0b | NA | That function should accept as input the objects produced by the previous Input Data Specification stage, and defined according to **ML2.0**, above. |
-| ML3.0c | NA | The function described above (**ML3.0a**) should return an object which can be directly trained as described in the following sub-section (**ML4**). |
-| ML3.0d | NA | That return object should have a defined class minimally intended to implement a default `print` method which summarises the model specification, including v... |
-| ML3.1 | NA | ML software should allow the use of both untrained models, specified through model parameters only, as well as pre-trained models. Use of the latter commonly... |
-| ML3.2 | NA | ML software should enable different models to be applied to the object specifying data inputs and transformations (see sub-sections 1--2, above) without need... |
-| ML3.3 | NA | Where ML software implements its own distinct classes of model objects, the properties and behaviours of those specific classes of objects should be explicit... |
-| ML3.4 | NA | Where training rates are used, ML software should provide explicit documentation both in all functions which use training rates, and in extended form such as... |
-| ML3.4a | NA | Unless explicitly justified otherwise, ML software should offer abilities to automatically determine appropriate or optimal training rates, either as distinc... |
-| ML3.4b | NA | ML software which provides default values for training rates should clearly document anticipated restrictions of validity of those default values; for exampl... |
-| ML3.5 | NA | Parameters controlling optimization algorithms should minimally include: |
-| ML3.5a | NA | Specification of the type of algorithm used to explore the search space (commonly, for example, some kind of gradient descent algorithm) |
-| ML3.5b | NA | The kind of loss function used to assess distance between model estimates and desired output. |
-| ML3.6 | NA | Unless explicitly justified otherwise (for example because ML software under consideration is an implementation of one specific algorithm), ML software should: |
-| ML3.6a | NA | Implement or otherwise permit usage of multiple ways of exploring search space |
-| ML3.6b | NA | Implement or otherwise permit usage of multiple loss functions. |
-| ML3.7 | NA | For ML software in which algorithms are coded in C++, user-controlled use of either CPUs or GPUs (on NVIDIA processors at least) should be implemented throug... |
-| ML4.0 | NA | ML software should generally implement a unified single-function interface to model training, able to receive as input a model specified according to all pre... |
-| ML4.1 | NA | ML software should at least optionally retain explicit information on paths taken as an optimizer advances towards minimal loss. Such information should mini... |
-| ML4.1a | NA | Specification of all model-internal parameters, or equivalent hashed representation. |
-| ML4.1b | NA | The value of the loss function at each point |
-| ML4.1c | NA | Information used to advance to next point, for example quantification of local gradient. |
-| ML4.2 | NA | The subsequent extraction of information retained according to the preceding standard should be explicitly documented, including through example code. |
-| ML4.3 | NA | All parameters controlling batch processing and associated terminology should be explicitly documented, and it should not, for example, be presumed that user... |
-| ML4.4 | NA | Explicit guidance should be provided on selection of appropriate values for parameter controlling batch processing, for example, on trade-offs between batch ... |
-| ML4.5 | NA | ML software may optionally include a function to estimate likely time to train a specified model, through estimating initial timings from a small sample of t... |
-| ML4.6 | NA | ML software should by default provide explicit information on the progress of batch jobs (even where those jobs may be implemented in parallel on GPUs). That... |
-| ML4.7 | NA | ML software should provide an ability to combine results from multiple re-sampling iterations using a single parameter specifying numbers of iterations. |
-| ML4.8 | NA | Absent any additional specification, re-sampling algorithms should by default partition data according to proportions of original test and training data. |
-| ML4.8a | NA | Re-sampling routines of ML software should nevertheless offer an ability to explicitly control or override such default proportions of test and training data. |
-| ML5.0 | NA | The result of applying the training processes described above should be contained within a single model object returned by the function defined according to ... |
-| ML5.0a | NA | That object should either have its own class, or extend some previously-defined class. |
-| ML5.0b | NA | That class should have a defined `print` method which summarises important aspects of the model object, including but not limited to summaries of input data ... |
-| ML5.1 | NA | As for the untrained model objects produced according to the above standards, and in particular as a direct extension of **ML3.3**, the properties and behavi... |
-| ML5.2 | NA | The structure and functionality of objects representing trained ML models should be thoroughly documented. In particular, |
-| ML5.2a | NA | Either all functionality extending from the class of model object should be explicitly documented, or a method for listing or otherwise accessing all associa... |
-| ML5.2b | NA | Documentation should include examples of how to save and re-load trained model objects for their re-use in accordance with **ML3.1**, above. |
-| ML5.2c | NA | Where general functions for saving or serializing objects, such as [`saveRDS`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/readRDS.html) are not ... |
+| ML1.0a | done | Where these terms are ultimately eschewed, these should nevertheless be used in initial documentation, along with clear explanation of, and justification for... |
+| ML1.1 | done | Absent clear justification for alternative design decisions, input data should be expected to be labelled "test", "training", and, where applicable, "validat... |
+| ML1.1a | done | The presence and use of these labels should be explicitly confirmed via pre-processing steps (and tested in accordance with **ML7.0**, below). |
+| ML1.1b | done | Matches to expected labels should be case-insensitive and based on partial matching such that, for example, "Test", "test", or "testing" should all suffice. |
+| ML1.2 | done | Training and test data sets for ML software should be able to be input as a single, generally tabular, data object, with the training and test data distingui... |
+| ML1.3 | done | Input data should be clearly partitioned between training and test data (for example, through having each passed as a distinct `list` item), or should enable... |
+| ML1.4 | done | Training and test data sets, along with other necessary components such as validation data sets, should be stored in their own distinctly labelled sub-direct... |
+| ML1.5 | done | ML software should implement a single function which summarises the contents of test and training (and other) data sets, minimally including counts of number... |
+| ML1.6 | done | ML software which does not admit missing values, and which expects no missing values, should implement explicit pre-processing routines to identify whether d... |
+| ML1.6a | done | Explain why missing values are not admitted. |
+| ML1.6b | done | Provide explicit examples (in function documentation, vignettes, or both) for how missing values may be imputed, rather than simply discarded. |
+| ML1.7 | done | ML software which admits missing values should clearly document how such values are processed. |
+| ML1.7a | done | Where missing values are imputed, software should offer multiple user-defined ways to impute missing data. |
+| ML1.7b | done | Where missing values are imputed, the precise imputation steps should also be explicitly documented, either in tests (see **ML7.2** below), function document... |
+| ML1.8 | done | ML software should enable equal treatment of missing values for both training and test data, with optional user ability to control application to either one ... |
+| ML2.0 | done | A dedicated function should enable pre-processing steps to be defined and parametrized. |
+| ML2.0a | done | That function should return an object which can be directly submitted to a specified model (see section 3, below). |
+| ML2.0b | done | Absent explicit justification otherwise, that return object should have a defined class minimally intended to implement a default `print` method which summar... |
+| ML2.1 | done | ML software which uses broadcasting to reconcile dimensionally incommensurate input data should offer an ability to at least optionally record transformation... |
+| ML2.2 | done | ML software which requires or relies upon numeric transformations of input data (such as change in mean values or variances) should allow optimal explicit sp... |
+| ML2.2a | done | Where the parameters have default values, reasons for those particular defaults should be explicitly described. |
+| ML2.2b | done | Any extended documentation (such as vignettes) which demonstrates the use of explicit values for numeric transformations should explicitly describe why parti... |
+| ML2.3 | done | The values associated with all transformations should be recorded in the object returned by the function described in the preceding standard (**ML2.0**). |
+| ML2.4 | done | Default values of all transformations should be explicitly documented, both in documentation of parameters where appropriate (such as for numeric transformat... |
+| ML2.5 | done | ML software should provide options to bypass or otherwise switch off all default transformations. |
+| ML2.6 | done | Where transformations are implemented via distinct functions, these should be exported to a package's namespace so they can be applied in other contexts. |
+| ML2.7 | done | Where possible, documentation should be provided for how transformations may be reversed. For example, documentation may demonstrate how the values retained ... |
+| ML3.0 | done | Model specification should be implemented as a distinct stage subsequent to specification of pre-processing routines (see Section 2, above) and prior to actu... |
+| ML3.0a | done | A dedicated function should enable models to be specified without actually fitting or training them, or if this (**ML3**) and the following (**ML4**) stages ... |
+| ML3.0b | done | That function should accept as input the objects produced by the previous Input Data Specification stage, and defined according to **ML2.0**, above. |
+| ML3.0c | done | The function described above (**ML3.0a**) should return an object which can be directly trained as described in the following sub-section (**ML4**). |
+| ML3.0d | done | That return object should have a defined class minimally intended to implement a default `print` method which summarises the model specification, including v... |
+| ML3.1 | done | ML software should allow the use of both untrained models, specified through model parameters only, as well as pre-trained models. Use of the latter commonly... |
+| ML3.2 | done | ML software should enable different models to be applied to the object specifying data inputs and transformations (see sub-sections 1--2, above) without need... |
+| ML3.3 | done | Where ML software implements its own distinct classes of model objects, the properties and behaviours of those specific classes of objects should be explicit... |
+| ML3.4 | done | Where training rates are used, ML software should provide explicit documentation both in all functions which use training rates, and in extended form such as... |
+| ML3.4a | done | Unless explicitly justified otherwise, ML software should offer abilities to automatically determine appropriate or optimal training rates, either as distinc... |
+| ML3.4b | done | ML software which provides default values for training rates should clearly document anticipated restrictions of validity of those default values; for exampl... |
+| ML3.5 | done | Parameters controlling optimization algorithms should minimally include: |
+| ML3.5a | done | Specification of the type of algorithm used to explore the search space (commonly, for example, some kind of gradient descent algorithm) |
+| ML3.5b | done | The kind of loss function used to assess distance between model estimates and desired output. |
+| ML3.6 | done | Unless explicitly justified otherwise (for example because ML software under consideration is an implementation of one specific algorithm), ML software should: |
+| ML3.6a | done | Implement or otherwise permit usage of multiple ways of exploring search space |
+| ML3.6b | done | Implement or otherwise permit usage of multiple loss functions. |
+| ML3.7 | done | For ML software in which algorithms are coded in C++, user-controlled use of either CPUs or GPUs (on NVIDIA processors at least) should be implemented throug... |
+| ML4.0 | done | ML software should generally implement a unified single-function interface to model training, able to receive as input a model specified according to all pre... |
+| ML4.1 | done | ML software should at least optionally retain explicit information on paths taken as an optimizer advances towards minimal loss. Such information should mini... |
+| ML4.1a | done | Specification of all model-internal parameters, or equivalent hashed representation. |
+| ML4.1b | done | The value of the loss function at each point |
+| ML4.1c | done | Information used to advance to next point, for example quantification of local gradient. |
+| ML4.2 | done | The subsequent extraction of information retained according to the preceding standard should be explicitly documented, including through example code. |
+| ML4.3 | done | All parameters controlling batch processing and associated terminology should be explicitly documented, and it should not, for example, be presumed that user... |
+| ML4.4 | done | Explicit guidance should be provided on selection of appropriate values for parameter controlling batch processing, for example, on trade-offs between batch ... |
+| ML4.5 | done | ML software may optionally include a function to estimate likely time to train a specified model, through estimating initial timings from a small sample of t... |
+| ML4.6 | done | ML software should by default provide explicit information on the progress of batch jobs (even where those jobs may be implemented in parallel on GPUs). That... |
+| ML4.7 | done | ML software should provide an ability to combine results from multiple re-sampling iterations using a single parameter specifying numbers of iterations. |
+| ML4.8 | done | Absent any additional specification, re-sampling algorithms should by default partition data according to proportions of original test and training data. |
+| ML4.8a | done | Re-sampling routines of ML software should nevertheless offer an ability to explicitly control or override such default proportions of test and training data. |
+| ML5.0 | done | The result of applying the training processes described above should be contained within a single model object returned by the function defined according to ... |
+| ML5.0a | done | That object should either have its own class, or extend some previously-defined class. |
+| ML5.0b | done | That class should have a defined `print` method which summarises important aspects of the model object, including but not limited to summaries of input data ... |
+| ML5.1 | done | As for the untrained model objects produced according to the above standards, and in particular as a direct extension of **ML3.3**, the properties and behavi... |
+| ML5.2 | done | The structure and functionality of objects representing trained ML models should be thoroughly documented. In particular, |
+| ML5.2a | done | Either all functionality extending from the class of model object should be explicitly documented, or a method for listing or otherwise accessing all associa... |
+| ML5.2b | done | Documentation should include examples of how to save and re-load trained model objects for their re-use in accordance with **ML3.1**, above. |
+| ML5.2c | done | Where general functions for saving or serializing objects, such as [`saveRDS`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/readRDS.html) are not ... |
 | ML5.3 | done | Assessment of model performance should be implemented as one or more functions distinct from model training. |
 | ML5.4 | done | Model performance should be able to be assessed according to a variety of metrics. |
 | ML5.4a | done | All model performance metrics represented by functions internal to a package must be clearly and distinctly documented. |
-| ML5.4b | NA | It should be possible to submit custom metrics to a model assessment function, and the ability to do so should be clearly documented including through exampl... |
+| ML5.4b | done | It should be possible to submit custom metrics to a model assessment function, and the ability to do so should be clearly documented including through exampl... |
 | ML6.0 | done | Descriptions of ML software should make explicit reference to a workflow which separates training and testing stages, and which clearly indicates a need for ... |
 | ML6.1 | done | ML software intentionally designed to address only a restricted subset of the workflow described here should clearly document how it can be embedded within a... |
 | ML6.1a | done | Such demonstrations should include and contrast embedding within a full workflow using at least two other packages to implement that workflow. |
-| ML7.0 | NA | Test should explicitly confirm partial and case-insensitive matching of "test", "train", and, where applicable, "validation" data. |
-| ML7.1 | NA | Tests should demonstrate effects of different numeric scaling of input data (see **ML2.2**). |
-| ML7.2 | NA | For software which imputes missing data, tests should compare internal imputation with explicit code which directly implements imputation steps (even where s... |
-| ML7.3 | NA | Where model objects are implemented as distinct classes, tests should explicitly compare the functionality of these classes with functionality of equivalent ... |
-| ML7.3a | NA | These tests should explicitly identify restrictions on the functionality of model objects in comparison with those of other packages. |
-| ML7.3b | NA | These tests should explicitly identify functional advantages and unique abilities of the model objects in comparison with those of other packages. |
-| ML7.4 | NA | ML software should explicit document the effects of different training rates, and in particular should demonstrate divergence from optima with inappropriate ... |
-| ML7.5 | NA | ML software which implements routines to determine optimal training rates (see **ML3.4**, above) should implement tests to confirm the optimality of resultan... |
-| ML7.6 | NA | ML software which implement independent training "epochs" should demonstrate in tests the effects of lesser versus greater numbers of epochs. |
-| ML7.7 | NA | ML software should explicitly test different optimization algorithms, even where software is intended to implement one specific algorithm. |
-| ML7.8 | NA | ML software should explicitly test different loss functions, even where software is intended to implement one specific measure of loss. |
-| ML7.9 | NA | Tests should explicitly compare all possible combinations in categorical differences in model architecture, such as different model architectures with same o... |
-| ML7.9a | NA | Such combinations will generally be formed from multiple categorical factors, for which explicit use of functions such as [`expand.grid()`](https://stat.ethz... |
-| ML7.10 | NA | The successful extraction of information on paths taken by optimizers (see **ML5.1**, above), should be tested, including testing the general properties, but... |
-| ML7.11 | NA | All performance metrics available for a given class of trained model should be thoroughly tested and compared. |
-| ML7.11a | NA | Tests which compare metrics should do so over a range of inputs (generally implying differently trained models) to demonstrate relative advantages and disadv... |
+| ML7.0 | done | Test should explicitly confirm partial and case-insensitive matching of "test", "train", and, where applicable, "validation" data. |
+| ML7.1 | done | Tests should demonstrate effects of different numeric scaling of input data (see **ML2.2**). |
+| ML7.2 | done | For software which imputes missing data, tests should compare internal imputation with explicit code which directly implements imputation steps (even where s... |
+| ML7.3 | done | Where model objects are implemented as distinct classes, tests should explicitly compare the functionality of these classes with functionality of equivalent ... |
+| ML7.3a | done | These tests should explicitly identify restrictions on the functionality of model objects in comparison with those of other packages. |
+| ML7.3b | done | These tests should explicitly identify functional advantages and unique abilities of the model objects in comparison with those of other packages. |
+| ML7.4 | done | ML software should explicit document the effects of different training rates, and in particular should demonstrate divergence from optima with inappropriate ... |
+| ML7.5 | done | ML software which implements routines to determine optimal training rates (see **ML3.4**, above) should implement tests to confirm the optimality of resultan... |
+| ML7.6 | done | ML software which implement independent training "epochs" should demonstrate in tests the effects of lesser versus greater numbers of epochs. |
+| ML7.7 | done | ML software should explicitly test different optimization algorithms, even where software is intended to implement one specific algorithm. |
+| ML7.8 | done | ML software should explicitly test different loss functions, even where software is intended to implement one specific measure of loss. |
+| ML7.9 | done | Tests should explicitly compare all possible combinations in categorical differences in model architecture, such as different model architectures with same o... |
+| ML7.9a | done | Such combinations will generally be formed from multiple categorical factors, for which explicit use of functions such as [`expand.grid()`](https://stat.ethz... |
+| ML7.10 | done | The successful extraction of information on paths taken by optimizers (see **ML5.1**, above), should be tested, including testing the general properties, but... |
+| ML7.11 | done | All performance metrics available for a given class of trained model should be thoroughly tested and compared. |
+| ML7.11a | done | Tests which compare metrics should do so over a range of inputs (generally implying differently trained models) to demonstrate relative advantages and disadv... |

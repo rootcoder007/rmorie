@@ -1,41 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' srr machine-learning (ML) standards
-#'
-#' rmorie is not a machine-learning training package: it implements no
-#' gradient-descent training loop, optimizers, loss-function paths,
-#' epochs, or trained-model serialization. What it does provide (this
-#' file) is the *model-assessment* subset of the ML workflow — model-
-#' agnostic cross-validation, calibration, discrimination, decision-curve
-#' analysis and overfitting detection that accept user-supplied
-#' `fit_fn` / `predict_fn`. The ML standards addressed here are exactly
-#' that restricted-subset case (ML6.1); the training-pipeline standards
-#' (data labelling, pre-processing/model-specification stages, training,
-#' trained-model objects, and their tests) are declared NA (with reasons)
-#' in `srr-stats-standards.R`. rmorie's unsupervised methods are covered
-#' under the UL standards.
-#'
-#' @srrstats {ML1.0} The cross-validation documentation makes an explicit
-#'   conceptual distinction between training and test (held-out) data.
-#' @srrstats {ML5.3} Model-performance assessment is implemented as
-#'   distinct functions (`cross_validate`, `nested_cross_validate`,
-#'   `bootstrap_validate`, `assess_calibration`, `assess_discrimination`,
-#'   `decision_curve_analysis`).
-#' @srrstats {ML5.4} Performance can be assessed by a variety of metrics
-#'   (ROC-AUC, accuracy, Brier score).
-#' @srrstats {ML5.4a} The metrics are computed consistently through a
-#'   single internal scoring dispatcher (`.val_score`).
-#' @srrstats {ML6.0} The documentation makes explicit reference to a
-#'   workflow separating model training (the user's `fit_fn`) from
-#'   assessment (these functions).
-#' @srrstats {ML6.1} rmorie intentionally addresses only the model-
-#'   assessment subset of the ML workflow, and documents that scope.
-#' @srrstats {ML6.1a} Examples demonstrate embedding within a full
-#'   workflow by supplying a `fit_fn` / `predict_fn` (e.g. glm) and
-#'   assessing it.
-#' @noRd
-NULL
-
 #' Data and model validation framework
 #'
 #' R port of the Python module \code{morie.validation}: schema validation,
