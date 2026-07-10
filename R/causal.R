@@ -1332,6 +1332,13 @@ morie_causal_weighting <- function(data, treatment, covariates,
 #' @return Named list with elements \code{vcov} (variance matrix),
 #'   \code{se} (named numeric vector of robust SEs), \code{type},
 #'   and \code{n_coef}.
+#' @srrstats {G3.1} The variance/covariance estimator is user-selectable
+#'   via \code{type} (HC0-HC5 heteroskedasticity-consistent, HAC, or CL
+#'   clustered), so covariance is never computed solely by
+#'   \code{stats::cov}; the same choice is exposed by the did/dml
+#'   cluster-robust paths.
+#' @srrstats {G3.1a} The available covariance methods are documented on
+#'   the \code{type} parameter above and demonstrated in the examples.
 #' @export
 #' @references
 #'   Zeileis A, Koll S, Graham N (2020). Various Versatile Variances:

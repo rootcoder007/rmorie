@@ -25,6 +25,11 @@
 #' \donttest{
 #' try(morie_otis_figures(file.path(tempdir(), "otis-figs")))
 #' }
+#' @srrstats {G4.0} The caller supplies only an output directory; the
+#'   exporter generates each output file name itself with an explicit
+#'   \code{.png} suffix (e.g. \code{"otis_powerlaw_days.png"}), so
+#'   appropriate suffixes are always present without the caller having
+#'   to provide them.
 #' @export
 morie_otis_figures <- function(out_dir,
                                df = morie_sample("otis_b01"),
