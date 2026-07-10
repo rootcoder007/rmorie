@@ -41,6 +41,8 @@ NULL
 # Internal helpers
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Gini Int
+#' @noRd
 .gini_int <- function(x) {
   x <- sort(as.numeric(x))
   n <- length(x)
@@ -50,6 +52,8 @@ NULL
   (2 * sum(seq_len(n) * x) - (n + 1) * sum(x)) / (n * sum(x))
 }
 
+#' Internal helper: Hill Mle
+#' @noRd
 .hill_mle <- function(x, x_min) {
   # Clauset-Shalizi-Newman discrete MLE: alpha = 1 + n / sum(log(x / (x_min - 0.5)))
   # The -0.5 continuity correction matters when x_min is small.
@@ -65,6 +69,8 @@ NULL
   1 + n / sum(log(x / denom))
 }
 
+#' Internal helper: Cramer V
+#' @noRd
 .cramer_v <- function(tbl) {
   if (any(dim(tbl) < 2L)) {
     return(NA_real_)

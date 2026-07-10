@@ -40,6 +40,8 @@ NULL
 # Internal helpers (NOT exported)
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Uof Gini
+#' @noRd
 .uof_gini <- function(x) {
   x <- sort(as.numeric(x))
   n <- length(x)
@@ -50,6 +52,8 @@ NULL
   (2 * sum(seq_len(n) * x) - (n + 1L) * s) / (n * s)
 }
 
+#' Internal helper: Uof Hill Alpha
+#' @noRd
 .uof_hill_alpha <- function(x, x_min = 1.0) {
   x <- as.numeric(x)
   x <- x[!is.na(x) & x >= x_min]
@@ -63,6 +67,8 @@ NULL
   1.0 + length(x) / denom
 }
 
+#' Internal helper: Uof Topk Share
+#' @noRd
 .uof_topk_share <- function(x, k) {
   x <- as.numeric(x)
   s <- sum(x, na.rm = TRUE)
@@ -73,6 +79,8 @@ NULL
   sum(sort(x, decreasing = TRUE)[seq_len(k)]) / s
 }
 
+#' Internal helper: Uof Wilson Ci
+#' @noRd
 .uof_wilson_ci <- function(k, n, z = 1.959963984540054) {
   if (n == 0L) {
     return(c(NA_real_, NA_real_))
@@ -89,6 +97,8 @@ NULL
   c(max(0.0, centre - margin), min(1.0, centre + margin))
 }
 
+#' Internal helper: Uof Cramers V
+#' @noRd
 .uof_cramers_v <- function(chi2, n, r, c) {
   k <- min(r - 1L, c - 1L)
   if (k <= 0L || n == 0L) {
@@ -97,6 +107,8 @@ NULL
   sqrt(chi2 / (n * k))
 }
 
+#' Internal helper: Uof Fmt Pct
+#' @noRd
 .uof_fmt_pct <- function(p) {
   if (!is.finite(p)) {
     return("n/a")
@@ -104,6 +116,8 @@ NULL
   sprintf("%.2f%%", 100 * p)
 }
 
+#' Internal helper: Uof Result
+#' @noRd
 .uof_result <- function(title, call, summary_lines = list(),
                          warnings = character(0),
                          interpretation = "",

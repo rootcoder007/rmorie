@@ -54,6 +54,8 @@ NULL
 # gamma. Parameter vector theta is (a0, eta, <shape/scale ...>): a0 is
 # the log baseline (nu = exp(a0)), eta the branching ratio in (0, 1).
 
+#' Internal helper: Hawkes Param Names
+#' @noRd
 .hawkes_param_names <- function(kernel) {
   switch(kernel,
     exponential = c("a0", "eta", "beta"),
@@ -67,6 +69,8 @@ NULL
 # Optimisation runs in an unconstrained space phi to avoid the hard
 # feasibility cliffs: a0 is free, eta = plogis(phi) in (0, 1), and the
 # shape/scale parameters are exp(phi) > 0.
+#' Internal helper: Hawkes To Theta
+#' @noRd
 .hawkes_to_theta <- function(phi) {
   theta <- phi
   theta[2] <- stats::plogis(phi[2])
@@ -74,6 +78,8 @@ NULL
   theta
 }
 
+#' Internal helper: Hawkes To Phi
+#' @noRd
 .hawkes_to_phi <- function(theta) {
   phi <- theta
   phi[2] <- stats::qlogis(theta[2])
@@ -81,6 +87,8 @@ NULL
   phi
 }
 
+#' Internal helper: Hawkes Nll Cpp
+#' @noRd
 .hawkes_nll_cpp <- function(theta, times, end_time, kernel) {
   switch(kernel,
     exponential = morie_hawkes_ll_exp_const_cpp(
@@ -100,6 +108,8 @@ NULL
 
 # Triggering kernel g(u) and its integral G(u) = integral_0^u g, for the
 # pure-R fallback. Returns NULL for an infeasible parameter vector.
+#' Internal helper: Hawkes Kernel Funs
+#' @noRd
 .hawkes_kernel_funs <- function(kernel, theta) {
   if (kernel == "exponential") {
     beta <- theta[3]
@@ -146,6 +156,8 @@ NULL
   }
 }
 
+#' Internal helper: Hawkes Nll PureR
+#' @noRd
 .hawkes_nll_pureR <- function(theta, times, end_time, kernel) {
   nu <- exp(theta[1])
   eta <- theta[2]
@@ -175,6 +187,8 @@ NULL
   -(log_sum - integral)
 }
 
+#' Internal helper: Hawkes Start
+#' @noRd
 .hawkes_start <- function(kernel, times, end_time) {
   n <- length(times)
   dt_bar <- end_time / n # mean inter-arrival
@@ -192,6 +206,8 @@ NULL
 # (eta = 0): its MLE baseline is nu_hat = n / end_time, giving
 # logLik = n*log(n/T) - n. The Hawkes family nests this, so the Hawkes
 # MLE log-likelihood can never fall below it.
+#' Internal helper: Hawkes Loglik Poisson
+#' @noRd
 .hawkes_loglik_poisson <- function(n, end_time) {
   n * log(n / end_time) - n
 }
@@ -201,6 +217,8 @@ NULL
 # perturbations span lower / higher eta and shifted baseline / shape;
 # the lower-eta start in particular lets the optimiser reach the
 # Poisson submodel when the data carries no self-excitation.
+#' Internal helper: Hawkes Restarts
+#' @noRd
 .hawkes_restarts <- function(phi0) {
   offsets <- list(
     c(0, 0, 0, 0),

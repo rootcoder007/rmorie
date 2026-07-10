@@ -36,6 +36,8 @@
 # 3YY: collapsed .morie_ckan_build_req + _call into a single
 # function that routes through .morie_dataset_http_text (libcurl
 # with httr2 fallback) + jsonlite::fromJSON(simplifyVector=FALSE).
+#' Internal helper: Morie Ckan Call
+#' @noRd
 .morie_ckan_call <- function(portal,
                              action,
                              params = NULL,
@@ -81,6 +83,8 @@
 }
 
 # Internal: sniff a resource format from URL extension when unset.
+#' Internal helper: Morie Ckan Sniff Format
+#' @noRd
 .morie_ckan_sniff_format <- function(url, as_format = NULL) {
   if (!is.null(as_format) && nzchar(as_format)) {
     return(tolower(as_format))
@@ -93,6 +97,8 @@
 }
 
 # Internal: read a downloaded resource path into a data.frame by format.
+#' Internal helper: Morie Ckan Read Path
+#' @noRd
 .morie_ckan_read_path <- function(path, fmt) {
   fmt <- tolower(fmt)
   if (fmt %in% c("csv")) {

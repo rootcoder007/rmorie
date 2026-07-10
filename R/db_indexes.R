@@ -176,6 +176,8 @@
 
 # TPS crime-table family shares a common base schema; one spec
 # applied via prefix dispatch.
+#' Internal helper: Morie Db Indexes Tps Crime
+#' @noRd
 .morie_db_indexes_tps_crime <- function() {
   list(
     list(name_suffix = "_objectid",   cols = "OBJECTID",        unique = TRUE),
@@ -187,6 +189,8 @@
   )
 }
 
+#' Internal helper: Morie Db Indexes For
+#' @noRd
 .morie_db_indexes_for <- function(table_name) {
   reg <- .morie_db_index_registry()
   if (table_name %in% names(reg)) {

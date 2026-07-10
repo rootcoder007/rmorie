@@ -121,13 +121,29 @@ NULL
 # Internal helpers
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Morie Did Have Fixest
+#' @noRd
 .morie_did_have_fixest         <- function() requireNamespace("fixest",         quietly = TRUE)
+#' Internal helper: Morie Did Have Did
+#' @noRd
 .morie_did_have_did            <- function() requireNamespace("did",            quietly = TRUE)
+#' Internal helper: Morie Did Have Bacondecomp
+#' @noRd
 .morie_did_have_bacondecomp    <- function() requireNamespace("bacondecomp",    quietly = TRUE)
+#' Internal helper: Morie Did Have Coresynth
+#' @noRd
 .morie_did_have_coresynth      <- function() requireNamespace("coresynth",      quietly = TRUE)
+#' Internal helper: Morie Did Have Sandwich
+#' @noRd
 .morie_did_have_sandwich       <- function() requireNamespace("sandwich",       quietly = TRUE)
+#' Internal helper: Morie Did Have Drdid
+#' @noRd
 .morie_did_have_drdid          <- function() requireNamespace("DRDID",          quietly = TRUE)
+#' Internal helper: Morie Did Have Honestdid
+#' @noRd
 .morie_did_have_honestdid      <- function() requireNamespace("HonestDiD",      quietly = TRUE)
+#' Internal helper: Morie Did Have Didmultiplegt
+#' @noRd
 .morie_did_have_didmultiplegt  <- function() requireNamespace("DIDmultiplegt",  quietly = TRUE)
 
 #' @keywords internal

@@ -74,6 +74,8 @@
 NULL
 
 
+#' Internal helper: Has Survey Pkg
+#' @noRd
 .has_survey_pkg <- function() requireNamespace("survey", quietly = TRUE)
 
 # ---------------------------------------------------------------------------

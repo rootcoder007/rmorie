@@ -4,6 +4,8 @@
 # Extracted from the sarre() optimiser closure so the singular-GLS,
 # non-positive-variance and non-positive-determinant guards are all
 # directly unit-testable.
+#' Internal helper: Sarre Negll
+#' @noRd
 .sarre_negll <- function(lam, I, W, X, y, n) {
   A <- I - lam * W
   AX <- A %*% X

@@ -45,6 +45,8 @@ NULL
 
 # Internal: turn a dataset_dictionary-style DatasetSchema (a named
 # list with $columns) into a list of taxonomies.
+#' Internal helper: Classify Schema R
+#' @noRd
 .classify_schema_R <- function(schema, dataset_name) {
   out <- vector("list", length(schema$columns))
   for (i in seq_along(schema$columns)) {
@@ -61,6 +63,8 @@ NULL
 
 
 # Internal: compute counts + flag lists from a flat taxonomy list
+#' Internal helper: Summarise Taxonomies
+#' @noRd
 .summarise_taxonomies <- function(taxonomies, analyzed_set, domain) {
   n_total <- length(taxonomies)
   n_analyzed <- sum(vapply(taxonomies,

@@ -65,9 +65,13 @@ NULL
 # Internal helpers
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Morie Iv Have Ivreg
+#' @noRd
 .morie_iv_have_ivreg <- function() {
   requireNamespace("ivreg", quietly = TRUE)
 }
+#' Internal helper: Morie Iv Have AER
+#' @noRd
 .morie_iv_have_AER <- function() {
   requireNamespace("AER", quietly = TRUE)
 }

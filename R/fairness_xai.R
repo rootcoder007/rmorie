@@ -20,6 +20,8 @@
 NULL
 
 
+#' Internal helper: Xai Result
+#' @noRd
 .xai_result <- function(title, call, summary_lines = list(),
                         warnings = character(0),
                         interpretation = "", ...) {
@@ -31,6 +33,8 @@ NULL
   out
 }
 
+#' Internal helper: Xai As 2d
+#' @noRd
 .xai_as_2d <- function(X) {
   m <- as.matrix(X)
   if (!is.numeric(m)) storage.mode(m) <- "double"
@@ -39,6 +43,8 @@ NULL
   m
 }
 
+#' Internal helper: Xai Names
+#' @noRd
 .xai_names <- function(feature_names, d) {
   if (is.null(feature_names)) return(sprintf("x%d", seq_len(d) - 1L))
   nm <- as.character(feature_names)
@@ -49,6 +55,8 @@ NULL
   nm
 }
 
+#' Internal helper: Xai Resolve
+#' @noRd
 .xai_resolve <- function(feature, names) {
   if (is.character(feature)) {
     if (!(feature %in% names)) {
@@ -63,6 +71,8 @@ NULL
   idx
 }
 
+#' Internal helper: Xai Predict
+#' @noRd
 .xai_predict <- function(predict_fn, X) {
   out <- as.numeric(predict_fn(X))
   if (length(out) != nrow(X)) {
@@ -71,6 +81,8 @@ NULL
   out
 }
 
+#' Internal helper: Xai Have Iml
+#' @noRd
 .xai_have_iml <- function() {
   requireNamespace("iml", quietly = TRUE)
 }

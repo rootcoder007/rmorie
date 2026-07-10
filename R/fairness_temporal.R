@@ -16,6 +16,8 @@
 NULL
 
 
+#' Internal helper: Morie Fairness Mean Finite
+#' @noRd
 .morie_fairness_mean_finite <- function(xs) {
   finite <- xs[is.finite(xs)]
   if (length(finite) == 0L) NA_real_ else mean(finite)

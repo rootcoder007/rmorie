@@ -5,6 +5,8 @@
 # optimiser closure so the parameter-domain and non-positive-determinant
 # guards are directly unit-testable. `Q_bar` is the unconditional
 # correlation, `n` the sample size, `Z` the standardised residuals.
+#' Internal helper: Dccmd Negll
+#' @noRd
 .dccmd_negll <- function(p, Q_bar, n, Z) {
   a <- p[1]
   b <- p[2]

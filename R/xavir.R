@@ -47,6 +47,8 @@ morie_xavir_xavier_init <- function(fan_in, fan_out, seed = 42L, uniform = TRUE)
   )
 }
 
+#' Internal helper: Random.seed Safe
+#' @noRd
 .Random.seed_safe <- function() {
   if (exists(".Random.seed", envir = globalenv())) {
     get(".Random.seed", envir = globalenv())
@@ -55,6 +57,8 @@ morie_xavir_xavier_init <- function(fan_in, fan_out, seed = 42L, uniform = TRUE)
   }
 }
 
+#' Internal helper: Random.seed Restore
+#' @noRd
 .Random.seed_restore <- function(old) {
   if (is.null(old)) {
     if (exists(".Random.seed", envir = globalenv())) {

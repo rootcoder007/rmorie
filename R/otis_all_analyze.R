@@ -29,6 +29,8 @@ NULL
 # Internal helpers (mirror _summary_lines, _crosstab, _year_trend, _to_int)
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Otis Year Col
+#' @noRd
 .otis_year_col <- function(df) {
   for (c in c("EndFiscalYear", "Year")) {
     if (c %in% names(df)) return(c)
@@ -36,17 +38,23 @@ NULL
   NULL
 }
 
+#' Internal helper: Otis To Int
+#' @noRd
 .otis_to_int <- function(x) {
   v <- suppressWarnings(as.integer(x))
   if (length(v) == 0L || is.na(v)) 0L else v
 }
 
+#' Internal helper: Otis Is Truthy
+#' @noRd
 .otis_is_truthy <- function(x) {
   if (is.logical(x)) return(as.integer(x))
   if (is.numeric(x)) return(as.integer(x == 1))
   as.integer(tolower(trimws(as.character(x))) %in% c("yes", "true", "1"))
 }
 
+#' Internal helper: Otis Summary Lines
+#' @noRd
 .otis_summary_lines <- function(df, ds_id, description = NULL,
                                   series = NULL, primary_metric = NULL) {
   yc <- .otis_year_col(df)
@@ -73,6 +81,8 @@ NULL
   out
 }
 
+#' Internal helper: Otis Crosstab
+#' @noRd
 .otis_crosstab <- function(df, row, col, value,
                             aggfunc = c("sum", "max"),
                             top_rows = 20L) {
@@ -101,6 +111,8 @@ NULL
   )
 }
 
+#' Internal helper: Otis Year Trend
+#' @noRd
 .otis_year_trend <- function(df, value, year_col = NULL) {
   yc <- year_col %||% .otis_year_col(df)
   if (is.null(yc) || !(value %in% names(df))) return(NULL)
@@ -121,6 +133,8 @@ NULL
 `%||%` <- function(a, b) if (is.null(a)) b else a
 
 
+#' Internal helper: Otis Wrap
+#' @noRd
 .otis_wrap <- function(title, summary_lines, tables = list(),
                         interpretation = NULL, warnings = character(0),
                         payload = NULL) {
@@ -140,22 +154,32 @@ NULL
 
 
 # Indicator helpers (parallel to Python _female_indicator etc.)
+#' Internal helper: Otis Female Indicator
+#' @noRd
 .otis_female_indicator <- function(x) {
   as.integer(tolower(as.character(x)) == "female")
 }
 
+#' Internal helper: Otis Toronto Indicator
+#' @noRd
 .otis_toronto_indicator <- function(x) {
   as.integer(tolower(as.character(x)) == "toronto")
 }
 
+#' Internal helper: Otis Age 50plus Indicator
+#' @noRd
 .otis_age_50plus_indicator <- function(x) {
   as.integer(grepl("50", as.character(x)))
 }
 
+#' Internal helper: Otis Indigenous Indicator
+#' @noRd
 .otis_indigenous_indicator <- function(x) {
   as.integer(tolower(as.character(x)) == "indigenous")
 }
 
+#' Internal helper: Otis Minority Religion Indicator
+#' @noRd
 .otis_minority_religion_indicator <- function(x) {
   excluded <- c("christian", "no religion", "unknown or not reported")
   as.integer(!(tolower(trimws(as.character(x))) %in% excluded))
@@ -485,6 +509,8 @@ morie_otis_analyze_c03 <- function(data) {
   )
 }
 
+#' Internal helper: Otis C Simple
+#' @noRd
 .otis_c_simple <- function(ds_id, description, row_col,
                             col_col = "Region_MostRecentPlacement",
                             value_col = "NumberIndividuals_RestrictiveConfinement") {
@@ -633,6 +659,8 @@ morie_otis_analyze_d01 <- function(data) {
   )
 }
 
+#' Internal helper: Otis D Simple
+#' @noRd
 .otis_d_simple <- function(ds_id, description, by) {
   function(data) {
     s <- .otis_summary_lines(data, ds_id, description = description)
@@ -804,12 +832,16 @@ print.morie_otis_analysis_result <- function(x, ...) {
 # falls back to stop("not yet ported -- requires morie causal helpers").
 # This mirrors the agent-prompt directive: never ship wrong math.
 
+#' Internal helper: Otis Causal Available
+#' @noRd
 .otis_causal_available <- function() {
   exists("morie_otis_irm_dml", mode = "function") &&
     exists("morie_otis_make_pair_alert_to_volatility_ruhela",
            mode = "function")
 }
 
+#' Internal helper: Otis Not Yet Ported
+#' @noRd
 .otis_not_yet_ported <- function(fn_name, reason = "") {
   msg <- sprintf("%s: not yet ported to R (%s)", fn_name,
                  if (nzchar(reason)) reason else
@@ -1043,6 +1075,8 @@ morie_otis_analyze_b01_ruhela_per_year <- function(data = NULL,
 # GEE clustering uses geepack::geeglm when available; otherwise the GEE
 # rows are reported as "n/a (geepack not installed)".
 
+#' Internal helper: Otis Aggregate Glm
+#' @noRd
 .otis_aggregate_glm <- function(work, treatment, outcome,
                                   covariates = character(0),
                                   year_col = "EndFiscalYear",
@@ -2265,6 +2299,8 @@ morie_otis_analyze_b01_ruhela_subgroup_male <- function(data = NULL,
   "Greater than 30 days"
 )
 
+#' Internal helper: Otis Classify Bin
+#' @noRd
 .otis_classify_bin <- function(x) {
   s <- as.character(x)
   out <- rep("Unknown", length(s))
@@ -2561,6 +2597,8 @@ morie_otis_analyze_otis_mandela_provincial_vs_federal <- function(
 #
 # Faithfully ported via stats::chisq.test (+ Cramer's V).
 
+#' Internal helper: Otis Chi2 Cramer
+#' @noRd
 .otis_chi2_cramer <- function(tbl) {
   if (length(tbl) == 0L || sum(tbl) == 0L)
     return(list(chi2 = NA_real_, dof = 0L, pvalue = NA_real_,
@@ -2589,6 +2627,8 @@ morie_otis_analyze_otis_mandela_provincial_vs_federal <- function(
        min_expected = min_exp)
 }
 
+#' Internal helper: Otis Contingency Chi2
+#' @noRd
 .otis_contingency_chi2 <- function(df, row, col, value) {
   if (!all(c(row, col, value) %in% names(df)))
     return(list(table = NULL,

@@ -460,6 +460,8 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
 # Helpers
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Morie Portal Fixture Rows
+#' @noRd
 .morie_portal_fixture_rows <- function(fname) {
   if (is.null(fname) || is.na(fname) || !nzchar(fname))
     return(NA_integer_)

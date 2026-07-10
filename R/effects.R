@@ -617,6 +617,8 @@ e_value <- function(ate, se, null = 0, sd_y = 1) {
 # Marginal-effects extenders (Phase 1.j additions)
 # ---------------------------------------------------------------------
 
+#' Internal helper: Morie Effects Require
+#' @noRd
 .morie_effects_require <- function(pkg, fn) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
     stop(

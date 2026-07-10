@@ -46,6 +46,8 @@ fzcvm <- function(x, cdf = "norm", args = NULL, h = NULL) {
   )
 }
 
+#' Internal helper: Morie Cvm Pvalue
+#' @noRd
 .morie_cvm_pvalue <- function(w2) {
   if (w2 <= 0) {
     return(1.0)

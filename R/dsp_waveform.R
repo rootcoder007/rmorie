@@ -540,6 +540,8 @@ morie_dsp_baseline_correlation <- function(x, y) {
 # ---- internal helpers -------------------------------------------------
 
 # numpy.unwrap port: shift phase jumps > pi by 2*pi.
+#' Internal helper: Unwrap
+#' @noRd
 .unwrap <- function(p, tol = pi) {
   d <- diff(p)
   adj <- ifelse(d >  tol, d - 2 * pi,

@@ -76,6 +76,8 @@ stat_bridge_help <- function() {
 
 
 # Bridge log class used to capture handler output.
+#' Internal helper: Bridge Log
+#' @noRd
 .bridge_log <- function() {
   parts <- character(0)
   list(

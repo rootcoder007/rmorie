@@ -124,6 +124,8 @@ morie_datasets_chicago_socrata_by_id <- function(soda_id,
   df
 }
 
+#' Internal helper: Morie Bulk Fixture
+#' @noRd
 .morie_bulk_fixture <- function(fname, offline) {
   if (!isTRUE(offline)) {
     stop(sprintf(paste0(

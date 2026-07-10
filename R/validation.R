@@ -59,6 +59,8 @@ NULL
 # Internal helpers
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Val Result
+#' @noRd
 .val_result <- function(class_name = NULL, ...) {
   out <- list(...)
   class(out) <- c(class_name,
@@ -66,6 +68,8 @@ NULL
   out
 }
 
+#' Internal helper: Val Auc
+#' @noRd
 .val_auc <- function(y_true, y_pred) {
   # Mann-Whitney-based AUC; ties contribute 0.5
   y_true <- as.integer(y_true)
@@ -77,10 +81,14 @@ NULL
     (length(pos) * length(neg))
 }
 
+#' Internal helper: Val Brier
+#' @noRd
 .val_brier <- function(y_true, y_pred) {
   mean((y_pred - as.numeric(y_true))^2)
 }
 
+#' Internal helper: Val Score
+#' @noRd
 .val_score <- function(scoring, y_true, y_pred) {
   switch(scoring,
     "roc_auc"  = .val_auc(y_true, y_pred),
@@ -346,6 +354,8 @@ score_data_quality <- function(data, date_cols = NULL, freshness_days = 365L,
 # Cross-validation
 # ===========================================================================
 
+#' Internal helper: Val Cv Indices
+#' @noRd
 .val_cv_indices <- function(n, n_folds, method, y = NULL,
                              groups = NULL, n_repeats = 10L,
                              random_state = 42L) {

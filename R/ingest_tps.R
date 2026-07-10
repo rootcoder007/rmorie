@@ -83,6 +83,8 @@ morie_ingest_tps_layers <- function() {
 }
 
 # Internal: a single ArcGIS FeatureServer /query call.
+#' Internal helper: Morie Tps Arcgis Query
+#' @noRd
 .morie_tps_arcgis_query <- function(layer_url,
                                     where = "1=1",
                                     out_fields = "*",
@@ -134,6 +136,8 @@ morie_ingest_tps_layers <- function() {
 
 # Internal: bind one ArcGIS feature payload's attribute rows into a
 # data.frame, optionally splicing in geom_x / geom_y.
+#' Internal helper: Morie Tps Features To Rows
+#' @noRd
 .morie_tps_features_to_rows <- function(features, return_geometry) {
   if (length(features) == 0L) {
     return(list())

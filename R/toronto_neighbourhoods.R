@@ -53,6 +53,8 @@
 NULL
 
 # Map a "version" string to the included fixture filename.
+#' Internal helper: Morie To Fixture Name
+#' @noRd
 .morie_to_fixture_name <- function(version) {
   switch(version,
     "158" = "to_neighbourhoods_158.csv",
@@ -62,6 +64,8 @@ NULL
 }
 
 # Read a included neighbourhood fixture from inst/extdata.
+#' Internal helper: Morie To Neighbourhoods Fixture
+#' @noRd
 .morie_to_neighbourhoods_fixture <- function(version) {
   fname <- .morie_to_fixture_name(version)
   path <- system.file("extdata", fname, package = "rmorie")
@@ -79,6 +83,8 @@ NULL
 
 # Internal: live CKAN datastore_search fetcher. Mockable via
 # testthat::local_mocked_bindings(.morie_to_ckan_dump_csv = ...).
+#' Internal helper: Morie To Ckan Dump Csv
+#' @noRd
 .morie_to_ckan_dump_csv <- function(resource_id, limit = 100000L) {
   if (!requireNamespace("httr2", quietly = TRUE) ||
       !requireNamespace("jsonlite", quietly = TRUE)) {
@@ -304,6 +310,8 @@ morie_to_hood_crosswalk <- function() {
 # Backwards-compatibility: the original equivalency joiners (added in
 # the same phase) read `area_overlap_pct`; remap to the new
 # `pct_140_in_158` so they keep working.
+#' Internal helper: Morie To Legacy Overlap Col
+#' @noRd
 .morie_to_legacy_overlap_col <- function(cw) {
   if (!"area_overlap_pct" %in% names(cw)) {
     cw$area_overlap_pct <- cw$pct_140_in_158
@@ -313,6 +321,8 @@ morie_to_hood_crosswalk <- function() {
 
 # Normalise a hood-code value to the 3-char zero-padded canonical form
 # the crosswalk uses ("82" -> "082"; "0082" -> "082"; "Niagara" -> NA).
+#' Internal helper: Morie To Normalise Hood Code
+#' @noRd
 .morie_to_normalise_hood_code <- function(x) {
   s <- trimws(as.character(x))
   i <- suppressWarnings(as.integer(s))

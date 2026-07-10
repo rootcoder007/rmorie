@@ -27,6 +27,8 @@
 # open + own + close). The default path is the per-user cache.
 #
 # Returns: list(con = DBIConnection, close = logical).
+#' Internal helper: Morie Db Handle
+#' @noRd
 .morie_db_handle <- function(con = NULL, db_path = NULL) {
   if (!is.null(con)) {
     if (!inherits(con, "DBIConnection")) {
@@ -74,11 +76,15 @@
 # morie_cache_* work on a fresh install with no DuckDB/RSQLite. For SQL /
 # out-of-core queries, install duckdb (see morie_db_connect); for the multi-user
 # server tier, pass a PostgreSQL `con=`.
+#' Internal helper: Morie Cache Fs Dir
+#' @noRd
 .morie_cache_fs_dir <- function() {
   d <- file.path(tempdir(), "morie", "fscache")
   dir.create(d, recursive = TRUE, showWarnings = FALSE)
   d
 }
+#' Internal helper: Morie Cache Fs Path
+#' @noRd
 .morie_cache_fs_path <- function(dir, table_name, ext) {
   if (!is.character(table_name) || length(table_name) != 1L ||
     grepl("[/\\\\]|\\.\\.", table_name)) {
@@ -88,6 +94,8 @@
 }
 # Crash-safe write: serialise to a temp file, then atomic rename over target,
 # so a crash mid-write cannot corrupt an existing cached table.
+#' Internal helper: Morie Atomic Write
+#' @noRd
 .morie_atomic_write <- function(path, writer) {
   tmp <- paste0(path, ".tmp", Sys.getpid())
   writer(tmp)
@@ -661,6 +669,8 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
 # Unified load interface
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Fuzzy Match Key
+#' @noRd
 .fuzzy_match_key <- function(key) {
   catalog <- morie_dataset_catalog()
   key_lower <- tolower(gsub("-", "_", key))

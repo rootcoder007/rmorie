@@ -62,6 +62,8 @@ morie_tps_list_categories <- function() {
 
 # Internal: one ArcGIS REST /query GET. Returns the parsed GeoJSON
 # list (raises on HTTP / JSON failure).
+#' Internal helper: Morie Tps Fetch Arcgis Query
+#' @noRd
 .morie_tps_fetch_arcgis_query <- function(base_url, where, offset,
                                     max_records = 2000L,
                                     timeout = 120) {

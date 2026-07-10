@@ -42,6 +42,8 @@ NULL
 # Internal helpers
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Morie Fairness As 1d
+#' @noRd
 .morie_fairness_as_1d <- function(x, name) {
   arr <- as.vector(x)
   if (length(arr) == 0L) {
@@ -50,6 +52,8 @@ NULL
   arr
 }
 
+#' Internal helper: Morie Fairness Check Aligned
+#' @noRd
 .morie_fairness_check_aligned <- function(...) {
   pairs <- list(...)  # list of c(name, length)
   n <- pairs[[1L]]$len
@@ -63,11 +67,15 @@ NULL
   }
 }
 
+#' Internal helper: Morie Fairness Ordered Unique
+#' @noRd
 .morie_fairness_ordered_unique <- function(arr) {
   # Python's "first-seen" order; unique() in R is already first-seen.
   unique(arr)
 }
 
+#' Internal helper: Morie Fairness Favorable Rates
+#' @noRd
 .morie_fairness_favorable_rates <- function(outcome, group, favorable) {
   groups <- .morie_fairness_ordered_unique(group)
   rates <- vector("list", length(groups))
@@ -82,6 +90,8 @@ NULL
   rates
 }
 
+#' Internal helper: Morie Fairness Resolve Privileged
+#' @noRd
 .morie_fairness_resolve_privileged <- function(privileged, rates, warnings_env) {
   group_keys <- vapply(rates, function(r) as.character(r$g), character(1))
   if (!is.null(privileged)) {
@@ -102,6 +112,8 @@ NULL
   inferred
 }
 
+#' Internal helper: Morie Fairness Rates From Labels
+#' @noRd
 .morie_fairness_rates_from_labels <- function(y_true, y_pred, group, favorable) {
   groups <- .morie_fairness_ordered_unique(group)
   out <- vector("list", length(groups))
@@ -121,6 +133,8 @@ NULL
   out
 }
 
+#' Internal helper: Morie Fairness Gini Core
+#' @noRd
 .morie_fairness_gini_core <- function(x) {
   # Sorted-rank formula. Returns 0.0 for an all-zero or single-element
   # input (no inequality defined), matching the Python helper.
@@ -134,6 +148,8 @@ NULL
   (2.0 * sum(idx * x)) / (n * total) - (n + 1.0) / n
 }
 
+#' Internal helper: Morie Fairness Result
+#' @noRd
 .morie_fairness_result <- function(title, summary_lines = list(),
                                    tables = list(), sections = list(),
                                    warnings = character(0),
