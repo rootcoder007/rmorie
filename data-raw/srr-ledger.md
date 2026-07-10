@@ -23,11 +23,11 @@ Tracks every rOpenSci statistical-software standard claimed for the whole-packag
 
 | ID | Status | Standard |
 |---|---|---|
-| G1.0 | TODO | Statistical Software should list at least one primary reference from published academic literature. |
-| G1.1 | TODO | Statistical Software should document whether the algorithm(s) it implements are:* - *The first implementation of a novel algorithm*; or - *The first implemen... |
-| G1.2 | TODO | Statistical Software should include a* Life Cycle Statement *describing current and anticipated future states of development. |
-| G1.3 | TODO | All statistical terminology should be clarified and unambiguously defined. |
-| G1.4 | TODO | Software should use [`roxygen2`](https://roxygen2.r-lib.org/) to document all functions. |
+| G1.0 | done | Statistical Software should list at least one primary reference from published academic literature. |
+| G1.1 | done | Statistical Software should document whether the algorithm(s) it implements are:* - *The first implementation of a novel algorithm*; or - *The first implemen... |
+| G1.2 | done | Statistical Software should include a* Life Cycle Statement *describing current and anticipated future states of development. |
+| G1.3 | done | All statistical terminology should be clarified and unambiguously defined. |
+| G1.4 | done | Software should use [`roxygen2`](https://roxygen2.r-lib.org/) to document all functions. |
 | G1.4a | TODO | All internal (non-exported) functions should also be documented in standard [`roxygen2`](https://roxygen2.r-lib.org/) format, along with a final `@noRd` tag ... |
 | G1.5 | TODO | Software should include all code necessary to reproduce results which form the basis of performance claims made in associated publications. |
 | G1.6 | TODO | Software should include code necessary to compare performance claims with alternative implementations in other R packages. |

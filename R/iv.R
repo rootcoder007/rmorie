@@ -16,9 +16,7 @@
 #
 # Public R names mirror the Python module under the `morie_iv_*` prefix.
 
-#' @importFrom stats lm glm coef vcov pnorm pt pf pchisq qnorm qt qchisq
-#'   model.matrix model.frame fitted residuals binomial as.formula sigma
-#'   complete.cases quantile predict
+#' @importFrom stats lm glm coef vcov pnorm pt pf pchisq qnorm qt qchisq model.matrix model.frame fitted residuals binomial as.formula sigma complete.cases quantile predict
 #' @importFrom utils head
 NULL
 

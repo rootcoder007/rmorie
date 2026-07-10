@@ -9,6 +9,24 @@ R package for causal inference, sampling, psychometrics, point-process
 modeling, and criminological accountability analysis, with no Python
 dependencies.
 
+## Statement of need
+
+Applied observational research on Canadian carceral, policing, and
+oversight data usually means stitching together a dozen single-purpose
+packages — one for difference-in-differences, one for propensity-score
+matching, one for spatial scan statistics, one for self-exciting point
+processes — each with its own data contract, and none aware of the
+survey-weighting, provenance, and privacy constraints these data carry.
+rmorie is for criminologists, quantitative social scientists, and
+accountability researchers who need those estimators in one consistent,
+provenance-preserving toolkit, with the MRM (Multilevel Reconciliation
+Methodology) framework as its motivating application. Every public
+function is prefixed `morie_*` so it composes safely alongside the
+specialist packages it wraps, and results carry the labeling that keeps
+synthetic development runs from being mistaken for inferential findings.
+Primary methodological references for each estimator family are listed
+in the package-level help (`?rmorie`).
+
 ## Documentation
 
 - **Reference manual** (all `morie_*` functions, one searchable doc):
