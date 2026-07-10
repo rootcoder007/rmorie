@@ -12,39 +12,6 @@
 #' @srrstatsVerbose TRUE
 #'
 #' @srrstatsTODO {G1.4a} *All internal (non-exported) functions should also be documented in standard [`roxygen2`](https://roxygen2.r-lib.org/) format, along with a final `@noRd` tag to suppress automatic generation of `.Rd` files or [`@keywords internal`](https://roxygen2.r-lib.org/reference/tags-index-crossref.html?q=keywords%20internal#null) if documentation is still desired.* 
-#' @srrstatsTODO {UL1.0} *Unsupervised Learning Software should explicitly document expected format (types or classes) for input data, including descriptions of types or classes which are not accepted; for example, specification that software accepts only numeric inputs in `vector` or `matrix` form, or that all inputs must be in `data.frame` form with both column and row names.*
-#' @srrstatsTODO {UL1.1} *Unsupervised Learning Software should provide distinct sub-routines to assert that all input data is of the expected form, and issue informative error messages when incompatible data are submitted.* 
-#' @srrstatsTODO {UL1.2} *Unsupervised learning which uses row or column names to label output objects should assert that input data have non-default row or column names, and issue an informative message when these are not provided.* 
-#' @srrstatsTODO {UL1.3} *Unsupervised Learning Software should transfer all relevant aspects of input data, notably including row and column names, and potentially information from other `attributes()`, to corresponding aspects of return objects.*
-#' @srrstatsTODO {UL1.3a} *Where otherwise relevant information is not transferred, this should be explicitly documented.* 
-#' @srrstatsTODO {UL1.4} *Unsupervised Learning Software should document any assumptions made with regard to input data; for example assumptions about distributional forms or locations (such as that data are centred or on approximately equivalent distributional scales). Implications of violations of these assumptions should be both documented and tested, in particular:*
-#' @srrstatsTODO {UL1.4a} *Software which responds qualitatively differently to input data which has components on markedly different scales should explicitly document such differences, and implications of submitting such data.*
-#' @srrstatsTODO {UL1.4b} *Examples or other documentation should not use `scale()` or equivalent transformations without explaining why scale is applied, and explicitly illustrating and contrasting the consequences of not applying such transformations.* 
-#' @srrstatsTODO {UL2.0} *Routines likely to give unreliable or irreproducible results in response to violations of assumptions regarding input data (see UL1.4) should implement pre-processing steps to diagnose potential violations, and issue appropriately informative messages, and/or include parameters to enable suitable transformations to be applied.* 
-#' @srrstatsTODO {UL2.1} *Unsupervised Learning Software should document any transformations applied to input data, for example conversion of label-values to `factor`, and should provide ways to explicitly avoid any default transformations (with error or warning conditions where appropriate).*
-#' @srrstatsTODO {UL2.2} *Unsupervised Learning Software which accepts missing values in input data should implement explicit parameters controlling the processing of missing values, ideally distinguishing `NA` or `NaN` values from `Inf` values.* 
-#' @srrstatsTODO {UL2.3} *Unsupervised Learning Software should implement pre-processing routines to identify whether aspects of input data are perfectly collinear.* 
-#' @srrstatsTODO {UL3.0} *Algorithms which apply sequential labels to input data (such as clustering or partitioning algorithms) should ensure that the sequence follows decreasing group sizes (so labels of "1", "a", or "A" describe the largest group, "2", "b", or "B" the second largest, and so on.)* 
-#' @srrstatsTODO {UL3.1} *Dimensionality reduction or equivalent algorithms which label dimensions should ensure that that sequences of labels follows decreasing "importance" (for example, eigenvalues or variance contributions).* 
-#' @srrstatsTODO {UL3.2} *Unsupervised Learning Software for which input data does not generally include labels (such as `array`-like data with no row names) should provide an additional parameter to enable cases to be labelled.* 
-#' @srrstatsTODO {UL3.3} *Where applicable, Unsupervised Learning Software should implement routines to predict the properties (such as numerical ordinates, or cluster memberships) of additional new data without re-running the entire algorithm.* 
-#' @srrstatsTODO {UL3.4} *Objects returned from Unsupervised Learning Software which labels, categorise, or partitions data into discrete groups should include, or provide immediate access to, quantitative information on intra-group variances or equivalent, as well as on inter-group relationships where applicable.* 
-#' @srrstatsTODO {UL4.0} *Unsupervised Learning Software should return some form of "model" object, generally through using or modifying existing class structures for model objects, or creating a new class of model objects.*
-#' @srrstatsTODO {UL4.1} *Unsupervised Learning Software may enable an ability to generate a model object without actually fitting values. This may be useful for controlling batch processing of computationally intensive fitting algorithms.*
-#' @srrstatsTODO {UL4.2} *The return object from Unsupervised Learning Software should include, or otherwise enable immediate extraction of, all parameters used to control the algorithm used.* 
-#' @srrstatsTODO {UL4.3} *Model objects returned by Unsupervised Learning Software should implement or appropriately extend a default `print` method which provides an on-screen summary of model (input) parameters and methods used to generate results. The `print` method may also summarise statistical aspects of the output data or results.*
-#' @srrstatsTODO {UL4.3a} *The default `print` method should always ensure only a restricted number of rows of any result matrices or equivalent are printed to the screen.* 
-#' @srrstatsTODO {UL4.4} *Unsupervised Learning Software should also implement `summary` methods for model objects which should summarise the primary statistics used in generating the model (such as numbers of observations, parameters of methods applied). The `summary` method may also provide summary statistics from the resultant model.* 
-#' @srrstatsTODO {UL6.0} *Objects returned by Unsupervised Learning Software should have default `plot` methods, either through explicit implementation, extension of methods for existing model objects, through ensuring default methods work appropriately, or through explicit reference to helper packages such as [`factoextra`](https://github.com/kassambara/factoextra) and associated functions.*
-#' @srrstatsTODO {UL6.1} *Where the default `plot` method is **NOT** a generic `plot` method dispatched on the class of return objects (that is, through an S3-type `plot.<myclass>` function or equivalent), that method dispatch (or equivalent) should nevertheless exist in order to explicitly direct users to the appropriate function.*
-#' @srrstatsTODO {UL6.2} *Where default plot methods include labelling components of return objects (such as cluster labels), routines should ensure that labels are automatically placed to ensure readability, and/or that appropriate diagnostic messages are issued where readability is likely to be compromised (for example, through attempting to place too many labels).* 
-#' @srrstatsTODO {UL7.0} *Inappropriate types of input data are rejected with expected error messages.* 
-#' @srrstatsTODO {UL7.1} *Tests should demonstrate that violations of assumed input properties yield unreliable or invalid outputs, and should clarify how such unreliability or invalidity is manifest through the properties of returned objects.* 
-#' @srrstatsTODO {UL7.2} *Demonstrate that labels placed on output data follow decreasing group sizes (**UL3.0**)*
-#' @srrstatsTODO {UL7.3} *Demonstrate that labels on input data are propagated to, or may be recovered from, output data. 
-#' @srrstatsTODO {UL7.4} *Demonstrate that submission of new data to a previously fitted model can generate results more efficiently than initial model fitting.* 
-#' @srrstatsTODO {UL7.5} *Batch processing routines should be explicitly tested, commonly via extended tests (see **G4.10**--**G4.12**).*
-#' @srrstatsTODO {UL7.5a} *Tests of batch processing routines should demonstrate that equivalent results are obtained from direct (non-batch) processing.*
 #' @srrstatsTODO {BS1.0} *Bayesian software which uses the term "hyperparameter" should explicitly clarify the meaning of that term in the context of that software.* 
 #' @srrstatsTODO {BS1.1} *Descriptions of how to enter data, both in textual form and via code examples. Both of these should consider the simplest cases of single objects representing independent and dependent data, and potentially more complicated cases of multiple independent data inputs.*
 #' @srrstatsTODO {BS1.2} *Description of how to specify prior distributions, both in textual form describing the general principles of specifying prior distributions, along with more applied descriptions and examples, within:*
@@ -444,5 +411,49 @@ NULL
 #'   integration routines.
 #' @srrstatsNA {PD3.5} No integral is approximated by discrete summation.
 #' @srrstatsNA {PD3.5a} (no discrete-summation integration; see PD3.5)
+#'
+#' @srrstatsNA {UL1.2} The methods operate on numeric coordinate matrices
+#'   that need not carry row/column names, so non-default-name assertion
+#'   does not apply.
+#' @srrstatsNA {UL1.3} Row/column names are not required and are not
+#'   propagated onto the compact numeric result.
+#' @srrstatsNA {UL1.4b} Examples do not use `scale()` implicitly; scaling,
+#'   where relevant, is discussed rather than silently applied.
+#' @srrstatsNA {UL2.0} No automatic assumption-violation diagnostics or
+#'   auto-transformation step is implemented; scaling is the caller's
+#'   decision, documented per method.
+#' @srrstatsNA {UL2.2} The unsupervised methods require complete numeric
+#'   input; there is no missing-value handling parameter.
+#' @srrstatsNA {UL3.0} Cluster labels are the underlying algorithm's
+#'   (k-means / dbscan) native labels; they are not re-ordered by
+#'   decreasing group size.
+#' @srrstatsNA {UL3.2} Case labelling of unlabelled array input is not
+#'   provided; results are indexed positionally.
+#' @srrstatsNA {UL3.3} There is no predict-on-new-data method; results are
+#'   computed for the submitted data set.
+#' @srrstatsNA {UL4.1} The methods always fit; there is no
+#'   generate-object-without-fitting mode.
+#' @srrstatsNA {UL4.3a} The `print` method summarises parameters rather
+#'   than printing large result matrices, so row-count restriction does
+#'   not arise.
+#' @srrstatsNA {UL4.4} A dedicated `summary` method beyond the rich
+#'   `print` output is not implemented.
+#' @srrstatsNA {UL6.0} The result objects carry no default `plot` method;
+#'   visualisation is via the separate figure exporters.
+#' @srrstatsNA {UL6.1} (no default clustering/ordination plot dispatch;
+#'   see UL6.0)
+#' @srrstatsNA {UL6.2} (no default plot method, so no automatic label
+#'   placement; see UL6.0)
+#' @srrstatsNA {UL7.1} Deliberate demonstrations that assumption
+#'   violations yield invalid output are not part of the suite; input
+#'   validation prevents the ill-posed cases instead.
+#' @srrstatsNA {UL7.2} As cluster labels are not re-ordered by size
+#'   (UL3.0), there is no size-ordering to test.
+#' @srrstatsNA {UL7.3} Input labels are not propagated (UL1.3), so there
+#'   is no label recovery to test.
+#' @srrstatsNA {UL7.4} There is no new-data prediction method, so its
+#'   relative efficiency cannot be tested.
+#' @srrstatsNA {UL7.5} No batch-processing routines are implemented.
+#' @srrstatsNA {UL7.5a} (no batch processing; see UL7.5)
 #' @noRd
 NULL

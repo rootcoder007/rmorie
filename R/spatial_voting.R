@@ -2,6 +2,49 @@
 #
 # morie - Multi-domain Open Research and Inferential Estimation
 # Copyright (C) 2026 Vansh Singh Ruhela and morie contributors
+
+#' srr unsupervised-learning (UL) standards
+#'
+#' rmorie's unsupervised methods are dimension reduction (classical /
+#' non-metric MDS, kernel PCA, ideal-point scaling) and clustering
+#' (k-means, DBSCAN, spectral). The applicable UL standards are addressed
+#' here; the label-propagation, new-data-prediction, batch-processing,
+#' and default-plot-method families are declared NA (with reasons) in
+#' `srr-stats-standards.R`.
+#'
+#' @srrstats {UL1.0} Expected input formats (numeric matrix / data.frame
+#'   of coordinates or a distance object) are documented per function,
+#'   including forms that are not accepted.
+#' @srrstats {UL1.1} Input is validated by shared assertion helpers
+#'   (`.morie_check_data` / `.morie_check_numvec`) which issue informative
+#'   errors on incompatible data.
+#' @srrstats {UL1.3a} Where row/column labels are not carried onto the
+#'   compact result object (the methods operate on numeric coordinates),
+#'   that is documented here.
+#' @srrstats {UL1.4} Distributional/scaling assumptions are documented
+#'   (MDS and PCA are scale-sensitive; ideal-point models assume a
+#'   low-dimensional latent space).
+#' @srrstats {UL1.4a} Functions that respond qualitatively differently to
+#'   inputs on markedly different scales (PCA, MDS) document that
+#'   sensitivity and the role of pre-scaling.
+#' @srrstats {UL2.1} Any transformations applied (double-centring,
+#'   distance construction) are documented.
+#' @srrstats {UL2.3} Perfectly collinear / zero-variance columns are
+#'   identified and dropped before fitting (`.viable_terms`).
+#' @srrstats {UL3.1} Dimension-reduction outputs order dimensions by
+#'   decreasing importance (PCA components by variance; MDS axes by
+#'   eigenvalue).
+#' @srrstats {UL3.4} Clustering results expose intra-group dispersion
+#'   (k-means within-cluster sum of squares) and inter-group structure.
+#' @srrstats {UL4.0} A structured model/result object is returned.
+#' @srrstats {UL4.2} The control parameters used (k, number of
+#'   dimensions, kernel, eps/minPts) are carried on the result object.
+#' @srrstats {UL4.3} Result objects implement a default `print` method
+#'   (`morie_rich_result`).
+#' @srrstats {UL7.0} Inappropriate input types are rejected with expected
+#'   error messages (tested via the shared validators).
+#' @noRd
+NULL
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
