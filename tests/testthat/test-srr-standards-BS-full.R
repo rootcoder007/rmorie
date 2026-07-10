@@ -11,13 +11,18 @@
 }
 
 test_that("BS1.2a README documents prior specification with example", {
+  # The README lives in the package source, not the installed/check tree;
+  # this documentation check runs from a source checkout and skips otherwise.
+  skip_if_not(file.exists("../../README.md"), "README not in test tree")
   rd <- readLines("../../README.md", warn = FALSE)
   expect_true(any(grepl("Bayesian priors", rd)))
   expect_true(any(grepl("prior_sd", rd)))
 })
 
 test_that("BS1.2b a vignette gives prior guidance with example code", {
-  vg <- readLines("../../vignettes/bayesian-priors.Rmd", warn = FALSE)
+  vg_path <- "../../vignettes/bayesian-priors.Rmd"
+  skip_if_not(file.exists(vg_path), "vignette source not in test tree")
+  vg <- readLines(vg_path, warn = FALSE)
   expect_true(any(grepl("prior", vg, ignore.case = TRUE)))
   expect_true(any(grepl("morie_bayes_lm", vg)))
 })
