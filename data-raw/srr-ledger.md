@@ -211,49 +211,49 @@ Tracks every rOpenSci statistical-software standard claimed for the whole-packag
 |---|---|---|
 | SP1.0 | done | Spatial software should explicitly indicate its domain of applicability, and in particular distinguish whether the software may be applied in Cartesian/recti... |
 | SP1.1 | done | Spatial software should explicitly indicate its dimensional domain of applicability, in particular through identifying whether it is applicable to two or thr... |
-| SP2.0 | NA | Spatial software should only accept input data of one or more classes explicitly developed to represent such data. |
-| SP2.0a | NA | Where new classes are implemented, conversion to other common classes for spatial data in R should be documented. |
+| SP2.0 | done | Spatial software should only accept input data of one or more classes explicitly developed to represent such data. |
+| SP2.0a | done | Where new classes are implemented, conversion to other common classes for spatial data in R should be documented. |
 | SP2.0b | done | Class systems should ensure that functions error appropriately, rather than merely warning, in response to data from inappropriate spatial domains. |
 | SP2.1 | done | Spatial Software should not use the [`sp` package](https://cran.r-project.org/package=sp), rather should use [`sf`](https://cran.r-project.org/package=sf). |
 | SP2.2 | done | Geographical Spatial Software should ensure maximal compatibility with established packages and workflows, minimally through: |
 | SP2.2a | done | Clear and extensive documentation demonstrating how routines from that software may be embedded within, or otherwise adapted to, workflows which rely on thes... |
-| SP2.2b | NA | Tests which clearly demonstrate that routines from that software may be successfully translated into forms and workflows which rely on these established pack... |
-| SP2.3 | NA | Software which accepts spatial input data in any standard format established in other R packages (such as any of the formats able to be read by [`GDAL`](http... |
-| SP2.4 | NA | Geographical Spatial Software should be compliant with version 6 or larger of* [`PROJ`](https://proj.org/), *and with* `WKT2` *representations. The primary i... |
-| SP2.4a | NA | Software should not permit coordinate reference systems to be represented merely by so-called "PROJ4-strings", but should use at least WKT2. |
-| SP2.5 | NA | Class systems for input data must contain meta data on associated coordinate reference systems. |
-| SP2.5a | NA | Software which implements new classes to input spatial data (or the spatial components of more general data) should provide an ability to convert such input ... |
+| SP2.2b | done | Tests which clearly demonstrate that routines from that software may be successfully translated into forms and workflows which rely on these established pack... |
+| SP2.3 | done | Software which accepts spatial input data in any standard format established in other R packages (such as any of the formats able to be read by [`GDAL`](http... |
+| SP2.4 | done | Geographical Spatial Software should be compliant with version 6 or larger of* [`PROJ`](https://proj.org/), *and with* `WKT2` *representations. The primary i... |
+| SP2.4a | done | Software should not permit coordinate reference systems to be represented merely by so-called "PROJ4-strings", but should use at least WKT2. |
+| SP2.5 | done | Class systems for input data must contain meta data on associated coordinate reference systems. |
+| SP2.5a | done | Software which implements new classes to input spatial data (or the spatial components of more general data) should provide an ability to convert such input ... |
 | SP2.6 | done | Spatial Software should explicitly document the types and classes of input data able to be passed to each function. |
 | SP2.7 | done | Spatial Software should implement validation routines to confirm that inputs are of acceptable classes (or represented in otherwise appropriate ways for soft... |
-| SP2.8 | NA | Spatial Software should implement a single pre-processing routine to validate input data, and to appropriately transform it to a single uniform type to be pa... |
-| SP2.9 | NA | The pre-processing function described above should maintain those metadata attributes of input data which are relevant or important to core algorithms or ret... |
+| SP2.8 | done | Spatial Software should implement a single pre-processing routine to validate input data, and to appropriately transform it to a single uniform type to be pa... |
+| SP2.9 | done | The pre-processing function described above should maintain those metadata attributes of input data which are relevant or important to core algorithms or ret... |
 | SP3.0 | done | Spatial software which considers spatial neighbours should enable user control over neighbourhood forms and sizes. In particular: |
 | SP3.0a | done | Neighbours (able to be expressed) on regular grids should be able to be considered in both rectangular only, or rectangular and diagonal (respectively "rook"... |
 | SP3.0b | done | Neighbourhoods in irregular spaces should be minimally able to be controlled via an integer number of neighbours, an area (or equivalent distance defining an... |
 | SP3.1 | done | Spatial software which considers spatial neighbours should wherever possible enable neighbour contributions to be weighted by distance (or other continuous w... |
-| SP3.2 | NA | Spatial software which relies on sampling from input data (even if only of spatial coordinates) should enable sampling procedures to be based on local spatia... |
+| SP3.2 | done | Spatial software which relies on sampling from input data (even if only of spatial coordinates) should enable sampling procedures to be based on local spatia... |
 | SP3.3 | done | Spatial regression software should explicitly quantify and distinguish autocovariant or autoregressive processes from those covariant or regressive processes... |
 | SP3.4 | done | Where possible, spatial clustering software should avoid using standard non-spatial clustering algorithms in which spatial proximity is merely represented by... |
-| SP3.5 | NA | Spatial machine learning software should ensure that broadcasting procedures for reconciling inputs of different dimensions are **not** applied*. |
-| SP3.6 | NA | Spatial machine learning software should document (and, where possible, test) the potential effects of different sampling procedures |
+| SP3.5 | done | Spatial machine learning software should ensure that broadcasting procedures for reconciling inputs of different dimensions are **not** applied*. |
+| SP3.6 | done | Spatial machine learning software should document (and, where possible, test) the potential effects of different sampling procedures |
 | SP4.0 | done | Return values should either: |
-| SP4.0a | NA | Be in same class as input data, or |
+| SP4.0a | done | Be in same class as input data, or |
 | SP4.0b | done | Be in a unique, preferably class-defined, format. |
-| SP4.1 | NA | Any aspects of input data which are included in output data (either directly, or in some transformed form) and which contain units should ensure those same u... |
+| SP4.1 | done | Any aspects of input data which are included in output data (either directly, or in some transformed form) and which contain units should ensure those same u... |
 | SP4.2 | done | The type and class of all return values should be explicitly documented. |
-| SP5.0 | NA | Implement default `plot` methods for any implemented class system. |
-| SP5.1 | NA | Implement appropriate placement of variables along x- and y-axes. |
-| SP5.2 | NA | Ensure that axis labels include appropriate units. |
-| SP5.3 | NA | Offer an ability to generate interactive (generally `html`-based) visualisations of results. |
-| SP6.0 | NA | Software which implements routines for transforming coordinates of input data should include tests which demonstrate ability to recover the original coordina... |
-| SP6.1 | NA | All functions which can be applied to both Cartesian and curvilinear data should be tested through application to both. |
-| SP6.1a | NA | Functions which may yield inaccurate results when applied to data in one or the other forms (such as the preceding examples of centroids and buffers from ell... |
-| SP6.1b | NA | Functions which yield accurate results regardless of whether input data are rectilinear or curvilinear should demonstrate equivalent accuracy in both cases, ... |
-| SP6.2 | NA | Geographical Software should include tests with extreme geographical coordinates, minimally including extension to polar extremes of +/-90 degrees. |
-| SP6.3 | NA | Spatial Software which considers spatial neighbours should explicitly test all possible ways of defining them, and should explicitly compare quantitative eff... |
-| SP6.4 | NA | Spatial Software which considers spatial neighbours should explicitly test effects of different schemes to weight neighbours by spatial proximity. |
-| SP6.5 | NA | Spatial Unsupervised Learning Software which uses clustering algorithms should implement tests which explicitly compare results with equivalent results obtai... |
-| SP6.6 | NA | Spatial Machine Learning Software should implement tests which explicitly demonstrate the detrimental consequences of sampling test and training data from th... |
+| SP5.0 | done | Implement default `plot` methods for any implemented class system. |
+| SP5.1 | done | Implement appropriate placement of variables along x- and y-axes. |
+| SP5.2 | done | Ensure that axis labels include appropriate units. |
+| SP5.3 | done | Offer an ability to generate interactive (generally `html`-based) visualisations of results. |
+| SP6.0 | done | Software which implements routines for transforming coordinates of input data should include tests which demonstrate ability to recover the original coordina... |
+| SP6.1 | done | All functions which can be applied to both Cartesian and curvilinear data should be tested through application to both. |
+| SP6.1a | done | Functions which may yield inaccurate results when applied to data in one or the other forms (such as the preceding examples of centroids and buffers from ell... |
+| SP6.1b | done | Functions which yield accurate results regardless of whether input data are rectilinear or curvilinear should demonstrate equivalent accuracy in both cases, ... |
+| SP6.2 | done | Geographical Software should include tests with extreme geographical coordinates, minimally including extension to polar extremes of +/-90 degrees. |
+| SP6.3 | done | Spatial Software which considers spatial neighbours should explicitly test all possible ways of defining them, and should explicitly compare quantitative eff... |
+| SP6.4 | done | Spatial Software which considers spatial neighbours should explicitly test effects of different schemes to weight neighbours by spatial proximity. |
+| SP6.5 | done | Spatial Unsupervised Learning Software which uses clustering algorithms should implement tests which explicitly compare results with equivalent results obtai... |
+| SP6.6 | done | Spatial Machine Learning Software should implement tests which explicitly demonstrate the detrimental consequences of sampling test and training data from th... |
 
 ## Exploratory Data Analysis (EA) — 34 standards
 
