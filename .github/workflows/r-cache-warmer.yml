@@ -1,0 +1,36 @@
+# Keeps the main-branch dependency caches warm. GitHub evicts caches unused
+# for 7 days (and LRU past 10GB); a cold main cache is what turned pkgdown
+# runs into 80-140 minute serial rebuilds. A daily restore marks every dep
+# cache as used, so main runs stay in the ~2-minute restore path.
+name: r-cache-warmer
+
+on:
+  schedule:
+    - cron: "17 09 * * *" # daily, off-peak
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  warm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120 # first run after an eviction legitimately rebuilds
+    env:
+      MAKEFLAGS: "-j1" # ECOSolveR SuiteSparse Makefile races under parallel make
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: r-lib/actions/setup-r@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
+        with:
+          r-version: 'release'
+          use-public-rspm: true
+          extra-repositories: |
+            https://rootcoder007.r-universe.dev
+            https://stan-dev.r-universe.dev
+      - uses: r-lib/actions/setup-r-dependencies@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          cache-version: 2
+          extra-packages: any::rcmdcheck any::rgenoud any::pkgdown github::rootcoder007/rmorie-bricklayer github::rootcoder007/rmoriedata github::stan-dev/cmdstanr
+          needs: check, website
