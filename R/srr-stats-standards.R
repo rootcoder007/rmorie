@@ -176,71 +176,38 @@ NULL
 #' @srrstatsNA {UL7.5} No batch-processing routines are implemented.
 #' @srrstatsNA {UL7.5a} (no batch processing; see UL7.5)
 #'
-#' @srrstatsNA {BS1.2a} The README does not carry a Bayesian prior-example
 #'   section; prior specification is documented at the function level.
-#' @srrstatsNA {BS1.2b} There is no dedicated Bayesian vignette; prior
 #'   guidance lives in the function documentation.
-#' @srrstatsNA {BS1.3a} Using the output of a previous run as starting
 #'   values is not exposed; the Stan backends are run afresh.
-#' @srrstatsNA {BS1.4} There is a single convergence diagnostic (Stan
 #'   R-hat); there is no with/without-convergence-checker toggle.
-#' @srrstatsNA {BS1.5} Only one convergence checker is used, so multiple
 #'   checkers cannot be compared.
-#' @srrstatsNA {BS2.1a} The dimensional pre-processing is the standard
 #'   data.frame validation; its effects are not separately unit-tested
 #'   for the Bayesian path.
-#' @srrstatsNA {BS2.3} Prior vectors are consumed by name; there is no
 #'   silent truncation of over-length distributional-parameter vectors.
-#' @srrstatsNA {BS2.4} (prior parameters are matched to model terms by
 #'   name rather than by positional vector length; see BS2.3)
-#' @srrstatsNA {BS2.8} Results of previous runs cannot be supplied as
 #'   starting points.
-#' @srrstatsNA {BS2.10} No diagnostic is issued for identical per-chain
 #'   seeds; chain seeding is delegated to Stan.
-#' @srrstatsNA {BS2.11} Starting values are not supplied as a
 #'   user-facing vector parameter, so the plural-naming rule does not
 #'   apply.
-#' @srrstatsNA {BS2.14} Warning suppression for the Bayesian path is not
 #'   separately tested.
-#' @srrstatsNA {BS2.15} Error-to-warning conversion is not separately
 #'   implemented/tested for the Bayesian path.
-#' @srrstatsNA {BS3.2} No distinct sampling-bypass routine for perfectly
 #'   collinear data is implemented; such terms are dropped upstream.
-#' @srrstatsNA {BS4.1} No explicit comparison against external samplers is
 #'   provided; the backends are the reference samplers (Stan).
-#' @srrstatsNA {BS4.4} Sampling runs for a fixed number of iterations;
 #'   there is no stop-on-convergence mode.
-#' @srrstatsNA {BS4.5} Non-convergence is surfaced through Stan's R-hat
 #'   warnings rather than a bespoke mechanism.
-#' @srrstatsNA {BS4.6} No convergence-checker-versus-fixed-samples
 #'   equivalence test is implemented (single fixed-iteration path).
-#' @srrstatsNA {BS4.7} The convergence checker is not parametrised by
 #'   rmorie, so its parameters are not separately tested.
-#' @srrstatsNA {BS5.4} Only one convergence checker is used, so there are
 #'   no multiple-checker details to return.
-#' @srrstatsNA {BS5.5} Non-convergence diagnostics are those of the Stan
 #'   fit object rather than a separately returned rmorie summary.
-#' @srrstatsNA {BS6.0} rmorie implements no default posterior `plot`
 #'   method; the returned Stan fit object can be plotted with the Stan
 #'   ecosystem's own tools.
-#' @srrstatsNA {BS6.1} (no default posterior plot method; see BS6.0)
-#' @srrstatsNA {BS6.2} (posterior-sequence plotting via the Stan object;
 #'   not reimplemented here)
-#' @srrstatsNA {BS6.3} (posterior-distribution plotting via the Stan
 #'   object; not reimplemented here)
-#' @srrstatsNA {BS6.4} (optional posterior plots not implemented)
-#' @srrstatsNA {BS6.5} (combined sample/estimate plots not implemented)
-#' @srrstatsNA {BS7.0} A dedicated prior-parameter-recovery test is not
 #'   part of the suite; correctness relies on the referenced Stan
 #'   implementations.
-#' @srrstatsNA {BS7.1} No prior-in-absence-of-data recovery test is
 #'   implemented.
-#' @srrstatsNA {BS7.2} No specified-prior-to-expected-posterior recovery
 #'   test is implemented.
-#' @srrstatsNA {BS7.3} Algorithmic-efficiency scaling is not tested.
-#' @srrstatsNA {BS7.4} Fitted-value scale-equivalence is not separately
 #'   tested for the Bayesian path.
-#' @srrstatsNA {BS7.4a} (no scale-assumption test; see BS7.4)
 #'
 #' @noRd
 NULL
