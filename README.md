@@ -27,7 +27,10 @@ dependencies.
   prefixed to avoid name collisions with other CRAN packages
   (`morie_chi_square_test`, `morie_kmeans_clustering`,
   `morie_decision_tree_split`, etc.). The companion `morie.fn` Python
-  library mirrors these for cross-language parity.
+  library mirrors these for cross-language parity. Two deliberate
+  exceptions keep their unprefixed names to match the MRM papers and
+  the Python implementation exactly: `mrm_otis_mandela_spectrum()` and
+  `mrm_classify_mandela()`.
 - **SIU subsystem** — a full pipeline for the Ontario Special
   Investigations Unit director's-report corpus (English + French,
   2005-present). See *SIU pipeline* below.
