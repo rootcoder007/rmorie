@@ -36,6 +36,6 @@ jobs:
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         with:
-          extra-packages: any::lintr github::rootcoder007/rmorie-bricklayer/bricklayer github::rootcoder007/rmoriedata github::stan-dev/cmdstanr
+          extra-packages: any::lintr github::rootcoder007/rmorie-bricklayer github::rootcoder007/rmoriedata github::stan-dev/cmdstanr
       - name: Run lintr
         run: Rscript -e 'lintr::lint_package()'
