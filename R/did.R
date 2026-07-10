@@ -41,10 +41,7 @@
 # `morie_did_diagnostics`) are kept verbatim -- their output shapes
 # are part of the rmorie API.
 
-#' @importFrom stats lm glm coef vcov pnorm pt pf pchisq qnorm qt qchisq
-#'   model.matrix model.frame fitted residuals binomial as.formula sigma
-#'   complete.cases quantile predict ave sd var aggregate na.omit
-#'   reshape lsfit setNames
+#' @importFrom stats lm glm coef vcov pnorm pt pf pchisq qnorm qt qchisq model.matrix model.frame fitted residuals binomial as.formula sigma complete.cases quantile predict ave sd var aggregate na.omit reshape lsfit setNames
 #' @importFrom utils combn head
 NULL
 

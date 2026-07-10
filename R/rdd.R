@@ -19,8 +19,7 @@
 #
 # Public R names mirror the Python module under the `morie_rdd_*` prefix.
 
-#' @importFrom stats lm coef vcov pnorm pt pf pchisq qnorm qt sd var
-#'   model.matrix predict quantile complete.cases approx
+#' @importFrom stats lm coef vcov pnorm pt pf pchisq qnorm qt sd var model.matrix predict quantile complete.cases approx
 NULL
 
 

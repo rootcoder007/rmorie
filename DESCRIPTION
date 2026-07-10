@@ -32,7 +32,7 @@ Description: Multi-domain scientific computing toolkit for observational
 License: AGPL (>= 3)
 LazyData: true
 Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
+Roxygen: list(markdown = TRUE, roclets = c("namespace", "rd", "srr::srr_stats_roclet"))
 RoxygenNote: 7.3.3
 Depends:
   R (>= 4.3.0)
