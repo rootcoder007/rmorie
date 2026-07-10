@@ -28,6 +28,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Cold-cache dep builds (every main push: PR caches are branch-scoped)
+    # historically hung the runner past 2h; fail fast instead.
+    timeout-minutes: 120
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
       MAKEFLAGS: "-j4"
@@ -48,6 +51,12 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+          # ECOSolveR (via HonestDiD) vendors a SuiteSparse/AMD Makefile that
+          # races under parallel make whenever the dep cache misses — on main
+          # that is EVERY run (PR caches are branch-scoped). Killed two main
+          # runs (2026-07-09) as silent 80-140min runner hangs. Build the dep
+          # tree serially, same as r-cmd-check.yml / r-coverage.yml.
+          MAKEFLAGS: "-j1"
         with:
           cache-version: 2
           extra-packages: any::pkgdown, local::. github::rootcoder007/rmorie-bricklayer/bricklayer github::rootcoder007/rmoriedata github::stan-dev/cmdstanr
