@@ -1,3 +1,16 @@
+# rmorie 1.1.0
+
+## CI hardening (docs-site build) + version re-lock with morie
+
+* pkgdown and goodpractice dependency builds now run serial make
+  (`MAKEFLAGS=-j1`), matching r-cmd-check/r-coverage: the ECOSolveR
+  SuiteSparse/AMD vendored Makefile races under parallel make on every
+  cache miss, which killed two consecutive main-branch pkgdown runs as
+  silent 80-140 minute runner hangs (2026-07-09).
+* pkgdown build job gained `timeout-minutes: 120` so a wedged runner
+  fails fast instead of holding the run open for hours.
+* No R code changes since 1.0.5; version locked with morie 1.1.0.
+
 # rmorie 1.0.5
 
 ## Figures actually write now
