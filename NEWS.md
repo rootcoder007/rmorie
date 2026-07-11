@@ -1,6 +1,16 @@
-# rmorie 1.1.1
+# rmorie 1.1.2
 
-## Security hardening (parity with morie 1.1.1)
+## CLI analysis entry point + NYPD/CPD backends
+
+* `cli_main()` — single R-side dispatcher for the rmorie-cli `analyze
+  <subject>` verb (otis/siu/nypd/cpd run real analyses; tps returns a guided
+  note). Forwards CLI flags as JSON with formal-intersection.
+* `morie_cpd_all_analyses()` and `morie_nypd_all_analyses()` — new
+  single-call analysis suites for the Chicago/NYC policing subjects (crimes
+  by type, predpol area concentration, temporal, and race disparate-impact),
+  mirroring `morie_otis_all_analyses`. Offline on bundled fixtures.
+
+## Security hardening (parity with the morie ecosystem)
 
 Non-breaking trust-boundary guards on the process-execution and
 deserialization sinks. Defaults are unchanged; these add a kill-switch
