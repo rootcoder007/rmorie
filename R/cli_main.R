@@ -16,10 +16,14 @@
 #'     the \code{year} flag is forwarded.
 #'   \item \code{"siu"} -- Special Investigations Unit; runs
 #'     \code{\link{morie_siu_all_analyses}}.
+#'   \item \code{"nypd"} -- New York Police Department; runs
+#'     \code{\link{morie_nypd_all_analyses}} (bundled samples offline).
+#'   \item \code{"cpd"} -- Chicago Police Department; runs
+#'     \code{\link{morie_cpd_all_analyses}} (bundled samples offline).
 #' }
-#' The \code{"tps"}, \code{"nypd"}, and \code{"cpd"} subjects are recognised
-#' by the CLI but have no single-call R analysis entry point yet; they return
-#' a structured, non-crashing message pointing at the R API.
+#' The \code{"tps"} subject is recognised by the CLI but needs an explicit
+#' dataset selection, so it returns a structured, non-crashing message
+#' pointing at the R API.
 #'
 #' @param subject Character scalar naming the analysis subject.
 #' @param json Character scalar: a JSON object of options forwarded from the
@@ -66,14 +70,16 @@ cli_main <- function(subject, json = "{}") {
       siu = {
         do.call(morie_siu_all_analyses, keep(morie_siu_all_analyses, opts))
       },
+      nypd = {
+        do.call(morie_nypd_all_analyses, keep(morie_nypd_all_analyses, opts))
+      },
+      cpd = {
+        do.call(morie_cpd_all_analyses, keep(morie_cpd_all_analyses, opts))
+      },
       tps = not_wired(
         "tps",
         paste0("`analyze tps` requires selecting TPS datasets first; use the ",
                "R API: morie_tps_load(<name>) then morie_tps_analyze_all(dfs).")),
-      nypd = not_wired(
-        "nypd", "No NYPD analysis backend is implemented in rmorie yet."),
-      cpd = not_wired(
-        "cpd", "No Chicago PD analysis backend is implemented in rmorie yet."),
       stop(sprintf("unknown analysis subject: '%s' (expected one of otis, siu, tps, nypd, cpd)",
                    subject), call. = FALSE)
     ),
