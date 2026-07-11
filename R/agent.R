@@ -37,6 +37,7 @@ agent <- function(task, model = NULL, backend = "auto", dry_run = FALSE) {
   if (!is.null(model)) args <- c(args, "-m", model)
   if (isTRUE(dry_run)) args <- c(args, "--dry-run")
   args <- c(args, task)
+  .morie_ensure_exec_allowed("rmorie agent execution")
   out <- suppressWarnings(
     system2(bin, args = args, stdout = TRUE, stderr = TRUE))
   paste(out, collapse = "\n")
