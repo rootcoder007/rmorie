@@ -32,10 +32,14 @@ OTIS fixture (offline) and runs \code{\link{morie_otis_all_analyses}};
 the \code{year} flag is forwarded.
 \item \code{"siu"} -- Special Investigations Unit; runs
 \code{\link{morie_siu_all_analyses}}.
+\item \code{"nypd"} -- New York Police Department; runs
+\code{\link{morie_nypd_all_analyses}} (bundled samples offline).
+\item \code{"cpd"} -- Chicago Police Department; runs
+\code{\link{morie_cpd_all_analyses}} (bundled samples offline).
 }
-The \code{"tps"}, \code{"nypd"}, and \code{"cpd"} subjects are recognised
-by the CLI but have no single-call R analysis entry point yet; they return
-a structured, non-crashing message pointing at the R API.
+The \code{"tps"} subject is recognised by the CLI but needs an explicit
+dataset selection, so it returns a structured, non-crashing message
+pointing at the R API.
 }
 \examples{
 \donttest{
