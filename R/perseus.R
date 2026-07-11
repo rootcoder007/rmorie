@@ -44,6 +44,7 @@ morie_ask_percy <- function(question, context = NULL, python_bin = Sys.getenv("M
     sep = "; "
   )
 
+  .morie_ensure_exec_allowed("perseus (Python) execution")
   out <- system2(
     python_bin,
     c("-c", shQuote(code), shQuote(prompt)),

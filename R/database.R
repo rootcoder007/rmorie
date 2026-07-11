@@ -487,7 +487,7 @@ morie_cache_list <- function(db_path = NULL, con = NULL) {
 morie_cache_file <- function(path, table_name, db_path = NULL, con = NULL) {
   ext <- tolower(tools::file_ext(path))
   data <- if (ext == "rds") {
-    readRDS(path)
+    .morie_safe_readRDS(path, "importing an .rds cache file")
   } else if (ext == "csv") {
     utils::read.csv(path, stringsAsFactors = FALSE)
   } else {

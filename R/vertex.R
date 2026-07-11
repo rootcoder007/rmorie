@@ -62,6 +62,7 @@ morie_vertex_access_token <- function(cfg = NULL) {
   if (!is.null(cached) && now < .morie_vertex_token_cache$expires_at) {
     return(cached)
   }
+  .morie_ensure_exec_allowed("gcloud token retrieval")
   out <- tryCatch(
     system2(cfg$gcloud_path, c("auth", "print-access-token"),
             stdout = TRUE, stderr = TRUE),

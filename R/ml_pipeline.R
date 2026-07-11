@@ -655,7 +655,7 @@ morie_ml_save <- function(fit, path) {
 #' @export
 morie_ml_load <- function(path) {
   if (!grepl("\\.rds$", path, ignore.case = TRUE)) path <- paste0(path, ".rds")
-  obj <- readRDS(path)
+  obj <- .morie_safe_readRDS(path, "loading a saved morie_ml model")
   if (!inherits(obj, "morie_ml_fit")) stop("file is not a morie_ml_fit",
                                            call. = FALSE)
   obj
