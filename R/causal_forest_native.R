@@ -23,6 +23,9 @@
                                         subsample = 0.5,
                                         n_folds = 5L,
                                         random_state = 42L) {
+  if (length(unique(w)) < 2L || nrow(X) < 2L * n_folds)
+    stop("morie_estimate_dr_forest: needs both treatment arms and at ",
+         "least ", 2L * n_folds, " rows", call. = FALSE)
   ml_y <- .morie_dml_xfit_ridge_gcv(X, y, n_folds, random_state)
   ps <- .morie_dml_xfit_logit(X, w, n_folds, random_state + 1L)
   u <- y - ml_y
