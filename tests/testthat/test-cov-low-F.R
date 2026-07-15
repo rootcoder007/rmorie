@@ -23,6 +23,11 @@ test_that("cokrg errors on dim mismatches", {
 })
 
 test_that("morie_gradient_boosting_ensemble runs regression on small data", {
+  testthat::skip_if(
+    !requireNamespace("gbm", quietly = TRUE) &&
+      !requireNamespace("xgboost", quietly = TRUE),
+    "needs gbm or xgboost"
+  )
   set.seed(1)
   out <- morie_gradient_boosting_ensemble(
     x = matrix(rnorm(60), 30, 2), y = rnorm(30),
@@ -33,6 +38,7 @@ test_that("morie_gradient_boosting_ensemble runs regression on small data", {
 })
 
 test_that("morie_grid_search_cv regression returns scores", {
+  testthat::skip_if_not_installed("caret")
   set.seed(1)
   out <- morie_grid_search_cv(
     x = matrix(rnorm(150), 50, 3), y = rnorm(50),

@@ -106,6 +106,7 @@ test_that("morie_cache_dir respects MORIE_CACHE_DIR", {
 })
 
 test_that("morie_db_connect opens a SQLite handle on .db extension", {
+  testthat::skip_if_not_installed("RSQLite")
   skip_if_not_installed("DBI")
   tmp <- tempfile(fileext = ".db")
   withr::defer({

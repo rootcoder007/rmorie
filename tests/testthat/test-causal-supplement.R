@@ -71,6 +71,7 @@ test_that("morie_estimate_double_ml fallback path is named clearly", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_estimate_irm returns expected fields", {
+  testthat::skip_if_not_installed("ranger")
   skip_on_ci()  # DoubleML/mlr3 fit runs via future workers that segfault flakily on CI
   df <- make_dml_df()
   res <- morie_estimate_irm(df, treatment = "d", outcome = "y",
@@ -85,6 +86,7 @@ test_that("morie_estimate_irm returns expected fields", {
 })
 
 test_that("morie_estimate_irm recovers true ATE on simple DGP", {
+  testthat::skip_if_not_installed("ranger")
   skip_on_cran()  # slow (mlr3 cv_glmnet) + platform-sensitive numerics on Windows
   df <- make_dml_df(n = 1000, tau = 0.5, seed = 3)
   res <- morie_estimate_irm(df, "d", "y", c("x1", "x2", "x3"),
@@ -93,6 +95,7 @@ test_that("morie_estimate_irm recovers true ATE on simple DGP", {
 })
 
 test_that("morie_estimate_irm CI covers true effect with high probability", {
+  testthat::skip_if_not_installed("ranger")
   skip_on_cran()  # slow (mlr3 cv_glmnet) + platform-sensitive numerics on Windows
   df <- make_dml_df(n = 800, tau = 0.5, seed = 4)
   res <- morie_estimate_irm(df, "d", "y", c("x1", "x2", "x3"),
@@ -102,6 +105,7 @@ test_that("morie_estimate_irm CI covers true effect with high probability", {
 })
 
 test_that("morie_estimate_irm uses DoubleML when available", {
+  testthat::skip_if_not_installed("ranger")
   skip_on_ci()  # DoubleML/mlr3 fit runs via future workers that segfault flakily on CI
   df <- make_dml_df(n = 300)
   res <- morie_estimate_irm(df, "d", "y", c("x1", "x2", "x3"),
@@ -110,6 +114,7 @@ test_that("morie_estimate_irm uses DoubleML when available", {
 })
 
 test_that("morie_estimate_irm fallback method string mentions IRM", {
+  testthat::skip_if_not_installed("ranger")
   skip_on_ci()  # DoubleML/mlr3 fit runs via future workers that segfault flakily on CI
   df <- make_dml_df(n = 200)
   res <- morie_estimate_irm(df, "d", "y", c("x1", "x2"),

@@ -310,6 +310,7 @@ test_that("morie_transformer_genomic accepts a deterministic seed", {
 })
 
 test_that("morie_tsne_reduction wraps Rtsne and returns an embedding", {
+  testthat::skip_if_not_installed("Rtsne")
   set.seed(31)
   x <- matrix(rnorm(120), nrow = 30, ncol = 4)
   res <- morie_tsne_reduction(x,

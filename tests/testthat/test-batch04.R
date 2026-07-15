@@ -130,6 +130,7 @@ test_that("morie_suggest_analysis_plan errors on bad profile input", {
 })
 
 test_that("morie_dbscan_clustering returns expected structure", {
+  testthat::skip_if_not_installed("dbscan")
   set.seed(10)
   x <- rbind(
     matrix(rnorm(80, 0, 0.2), ncol = 2),
@@ -150,6 +151,7 @@ test_that("morie_dbscan_clustering returns expected structure", {
 })
 
 test_that("morie_dbscan_clustering handles a vector input", {
+  testthat::skip_if_not_installed("dbscan")
   set.seed(11)
   v <- c(rnorm(40, 0, 0.2), rnorm(40, 10, 0.2))
   res <- morie_dbscan_clustering(v, eps = 0.7, min_samples = 3L)
@@ -478,6 +480,7 @@ test_that("morie_builtin_db returns a path string", {
 })
 
 test_that("morie cache round-trip works against a temp database", {
+  testthat::skip_if_not_installed("RSQLite")
   skip_if_not_installed("DBI")
   tmp <- tempfile(fileext = ".db")
   on.exit(unlink(tmp), add = TRUE)
@@ -503,6 +506,8 @@ test_that("morie cache round-trip works against a temp database", {
 })
 
 test_that("morie_cache_file ingests a CSV into the cache", {
+  testthat::skip_if_not_installed("RSQLite")
+  testthat::skip_if_not_installed("duckdb")
   tmp <- tempfile(fileext = ".db")
   csv <- tempfile(fileext = ".csv")
   on.exit(unlink(c(tmp, csv)), add = TRUE)

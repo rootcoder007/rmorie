@@ -25,6 +25,8 @@ test_that("morie_estimate_att/atc/aipw accept a supplied propensity column", {
 })
 
 test_that("morie_estimate_late runs the covariate-adjusted 2SLS path", {
+  testthat::skip_if_not_installed("AER")
+  testthat::skip_if_not_installed("ivreg")
   set.seed(12)
   n <- 400L
   z <- rbinom(n, 1, 0.5)
@@ -120,6 +122,8 @@ test_that("morie_userguide accepts a name argument", {
 })
 
 test_that("morie_load_cpads reaches the CKAN branch when local+cache miss", {
+  testthat::skip_if_not_installed("RSQLite")
+  testthat::skip_if_not_installed("duckdb")
   testthat::local_mocked_bindings(
     morie_fetch_ckan = function(...) data.frame(seqid = 1:5),
     .package = "rmorie"
