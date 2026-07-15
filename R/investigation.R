@@ -1,9 +1,9 @@
 #' Run a weighted logistic-regression analysis
 #'
 #' Mirrors the Python `morie.run_weighted_logistic_analysis()`. Fits a
-#' binary-outcome model using survey weights via `survey::svyglm()` if the
-#' suggested `survey` package is available, otherwise falls back to base
-#' `glm()` with case weights.
+#' binary-outcome model with design-based (Binder-linearized) standard
+#' errors via rmorie's native weighted GLM — numerically identical to
+#' `survey::svyglm(ids = ~1)` but with no survey dependency.
 #'
 #' @param data A `data.frame` containing outcome, predictors, and (optionally)
 #'   a weights column.
@@ -30,33 +30,27 @@ morie_run_weighted_logistic_analysis <- function(data, outcome, predictors,
   fml <- stats::as.formula(
     paste(outcome, "~", paste(predictors, collapse = " + "))
   )
-  use_survey <- !is.null(weights_col) &&
-    requireNamespace("survey", quietly = TRUE)
-
-  if (use_survey) {
-    design <- survey::svydesign(
-      ids = ~1, data = data, weights = stats::as.formula(paste0("~", weights_col))
-    )
-    fit <- survey::svyglm(fml,
-      design = design,
-      family = stats::quasibinomial()
-    )
-    method <- "svyglm"
-  } else {
-    w <- if (!is.null(weights_col)) data[[weights_col]] else NULL
-    fit <- stats::glm(fml,
-      data = data, family = stats::binomial(),
-      weights = w
-    )
-    method <- if (is.null(w)) "glm-unweighted" else "glm-weighted"
+  if (!is.null(weights_col)) {
+    out <- .morie_svyglm_native(fml, data = data,
+                                weights = data[[weights_col]],
+                                family = stats::quasibinomial())
+    coef_summary <- out$coefficients
+    return(list(
+      coefficients = coef_summary[, "Estimate"],
+      std_errors   = coef_summary[, "Std. Error"],
+      p_values     = coef_summary[, ncol(coef_summary)],
+      n            = stats::nobs(out$fit),
+      method       = "svyglm"
+    ))
   }
+  fit <- stats::glm(fml, data = data, family = stats::binomial())
   coef_summary <- stats::coef(summary(fit))
   list(
     coefficients = coef_summary[, "Estimate"],
     std_errors   = coef_summary[, "Std. Error"],
     p_values     = coef_summary[, ncol(coef_summary)],
     n            = stats::nobs(fit),
-    method       = method
+    method       = "glm-unweighted"
   )
 }
 
