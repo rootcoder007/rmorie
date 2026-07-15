@@ -19,5 +19,7 @@ cached (logical), rows (integer or NA).
 List all datasets with cache status
 }
 \examples{
+\dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 morie_list_datasets()
+\dontshow{\}) # examplesIf}
 }

@@ -46,19 +46,14 @@ test_that("morie_estimate_double_ml recovers true ATE on simple DGP", {
   expect_equal(res$ate, 0.5, tolerance = 0.15)
 })
 
-test_that("morie_estimate_double_ml uses DoubleML when available", {
-  skip_on_ci()  # DoubleML/mlr3 fit runs via future workers that segfault flakily on CI
-  skip_if_not_installed("ranger")
+test_that("morie_estimate_double_ml runs natively (no DoubleML)", {
   df <- make_dml_df(n = 300)
   res <- morie_estimate_double_ml(df, "y", "d", c("x1", "x2", "x3"),
                                   n_folds = 3L)
-  expect_match(res$method, "DoubleML", fixed = TRUE)
+  expect_identical(res$method, "PLR (rmorie native)")
 })
 
-test_that("morie_estimate_double_ml fallback path is named clearly", {
-  skip_on_ci()  # DoubleML/mlr3 fit runs via future workers that segfault flakily on CI
-  # Force the fallback by running with a very small n_folds and assume
-  # DoubleML isn't always installed; either way method string is set.
+test_that("morie_estimate_double_ml method string is set", {
   df <- make_dml_df(n = 200)
   res <- morie_estimate_double_ml(df, "y", "d", c("x1", "x2"),
                                   n_folds = 3L)

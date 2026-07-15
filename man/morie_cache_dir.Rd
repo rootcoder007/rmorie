@@ -51,10 +51,12 @@ HTML is ~80-100 MB at full sweep, so clearing it occasionally is
 usually unnecessary, but it is supported.
 }
 \examples{
+\dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Persistent cache root (does not write anything to disk):
 morie_cache_dir()
 # Per-subsystem persistent path:
 morie_cache_dir("siu")
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link{morie_cache_clear}}

@@ -26,8 +26,8 @@ columns.}
 
 \item{n_folds}{Number of cross-fitting folds (default 5).}
 
-\item{n_rep}{Number of repeated cross-fitting repetitions
-(DoubleML only; ignored by the ridge fallback). Default 1.}
+\item{n_rep}{Number of repeated cross-fitting repetitions,
+aggregated by the median rule. Default 1.}
 
 \item{random_state}{Integer seed for cross-fit folds and learners
 (default 42).}
@@ -37,14 +37,14 @@ Named list with elements \code{ate}, \code{se},
 \code{ci_lower}, \code{ci_upper}, \code{n}, \code{method}.
 }
 \description{
-Implements Chernozhukov et al. (2018) double/debiased machine
-learning for the partially linear regression model. When the
-\pkg{DoubleML} R package is installed, delegates to
-\code{DoubleML::DoubleMLPLR} with random-forest nuisance learners.
-Otherwise falls back to a hand-rolled cross-fit ridge
-implementation: residualise \eqn{Y} and \eqn{D} on \eqn{X} via
-K-fold ridge, then regress the outcome residual on the treatment
-residual.
+Native rmorie implementation of Chernozhukov et al. (2018)
+double/debiased machine learning for the partially linear model:
+\eqn{Y} and \eqn{D} are residualised on \eqn{X} via K-fold
+cross-fit GCV-tuned ridge regressions, the target parameter comes
+from the Neyman-orthogonal score, and \code{n_rep} repetitions are
+aggregated by DoubleML's median rule. Deterministic given
+\code{random_state}; no DoubleML/mlr3/ranger at runtime
+(cross-validated against DoubleML in the package's cross tests).
 }
 \examples{
 set.seed(1)

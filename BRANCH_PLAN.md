@@ -23,7 +23,7 @@ and the `morie_match_result` / result-object shapes do not change.
 | 7 | morie_matching_cardinality (native) | designmatch | DONE (already native: caliper sweep over module-1 engine; balance-guarantee tests added) |
 | 8 | IPW family (ipw.R + investigation.R survey-free) | survey::svyglm | DONE (svyglm reproduced to 1e-6; 2-5x faster) |
 | 9 | morie_matching_doubly_robust / morie_estimate_aipw | survey | DONE (verified already native: base stats lm/glm + bootstrap/IF SEs; no survey at runtime) |
-| 10 | morie_dml (native cross-fit) | DoubleML/mlr3 | planned |
+| 10 | morie_estimate_double_ml / morie_estimate_irm (native) | DoubleML/mlr3/ranger | DONE (native-only; 40-60x faster; CI-overlap agreement with DoubleML) |
 | 11 | morie_causal_forest | grf | planned |
 | 12 | meta-learners T/S/X/DR | — (new) | planned |
 | 13 | morie_dag / identify / estimate / refute | — (new) | planned |
@@ -299,3 +299,34 @@ survey at runtime. Runtime survey usage on the branch is now confined
 to `R/survey.R` (public wrappers whose documented return value IS a
 survey object — API-sacred, kept) and the `survey::calibrate` deferral
 in `R/weights.R` (which already has a base-R raking fallback).
+
+## Module 10 — native double machine learning (PLR + IRM)
+
+**Replaces.** The DoubleML/mlr3/ranger delegation inside
+`morie_estimate_double_ml()` and `morie_estimate_irm()`; both are now
+native-only. Also fixed a latent bug: `morie_estimate_irm` was defined
+TWICE (R/causal.R and R/irm.R) with collate order silently picking the
+DoubleML one — single definition now lives in R/irm.R.
+
+**Reference algorithm.** Chernozhukov et al. (2018): Neyman-orthogonal
+scores + K-fold cross-fitting. PLR: residualise Y and D via cross-fit
+GCV-tuned ridge (SVD path, lambda over 10^[-3,3]); theta from the
+orthogonal score with IF-based SE; `n_rep` aggregated by DoubleML's
+median rule (se^2 = median(se_r^2 + (theta_r - theta_med)^2)). IRM:
+cross-fit logistic propensity clipped to [0.01, 0.99] + per-arm ridge
+outcome regressions, AIPW score. Both-arms validation errors early.
+
+**Validation.** Structural (theta recovery within 3 SE, exact
+determinism given seed, n_rep stability, method labels); cross vs
+DoubleML+ranger (tests/cross/test-morie_vs_doubleml.R): PLR and IRM
+estimates agree within the joint 95 percent margin and both cover the
+simulated truth. Regression suites test-batch11 / causal-supplement /
+causal-internals updated + green. 108+7+22+9+112 on L14, 0 skips.
+
+**Benchmark** (L14, 2026-07-15, 5-fold): 1k 0.13s vs 5.4s (40x);
+10k 0.52s vs 12.5s (24x); 100k 2.65s vs 161s (61x faster).
+
+**What makes ours special.** DoubleML drags in mlr3 + ranger + future
+(whose worker segfaults forced skip_on_ci guards in our own suite —
+now deleted); the native path is deterministic, dependency-free, and
+the GCV-SVD ridge makes every nuisance fit a single decomposition.

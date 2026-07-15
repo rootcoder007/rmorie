@@ -152,7 +152,7 @@ morie_datasets_vpd_legal_disclaimer <- function() {
 #' @return A `data.frame` with 10 columns.
 #' @references VPD GeoDASH Open Data,
 #'   \url{https://geodash.vpd.ca/opendata/}.
-#' @examples
+#' @examplesIf nzchar(system.file("extdata", "vpd_crime_sample.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_vpd_crime(offline = TRUE)
 #' nrow(df)              # 550
 #' table(df$TYPE)

@@ -1,8 +1,10 @@
 #' Estimate the ATE via the Interactive Regression Model (IRM)
 #'
-#' Thin R wrapper that dispatches to the CRAN `DoubleML` package's
-#' \code{DoubleML::DoubleMLIRM} \link[R6]{R6Class}, mirroring the Python sibling
-#' `morie.estimate_irm()` (which dispatches to the Python `DoubleML` package).
+#' Native rmorie implementation of the interactive regression model
+#' (cross-fit logistic propensity + GCV-ridge outcome regressions,
+#' AIPW orthogonal score), mirroring the Python sibling
+#' `morie.estimate_irm()`. Cross-validated against `DoubleML` in the
+#' package's cross tests; no DoubleML at runtime.
 #'
 #' Following the DoubleML R package's own conventions, this uses
 #' the `mlr3` ecosystem for the nuisance learners (\code{ml_g} for
@@ -25,11 +27,10 @@
 #' @param random_state Random seed (default 42).
 #'
 #' @return A list with components: `ate`, `se`, `ci_lower`, `ci_upper`,
-#'   `n`, `method` (`"IRM (DoubleML)"`).
+#'   `n`, `method` (`"IRM (rmorie native)"`).
 #'
 #' @section CRAN \code{Suggests}:
-#' Requires the suggested packages `DoubleML`, `mlr3`, and `mlr3learners`.
-#' Install with `install.packages(c("DoubleML", "mlr3", "mlr3learners"))`.
+#' Runs on base R alone — no suggested packages required.
 #' If any are unavailable, the function raises an informative error.
 #'
 #' @references
@@ -44,65 +45,29 @@
 #'
 #' @export
 #' @examples
-#' \donttest{
-#' if (requireNamespace("DoubleML", quietly = TRUE) &&
-#'   requireNamespace("mlr3", quietly = TRUE) &&
-#'   requireNamespace("mlr3learners", quietly = TRUE)) {
-#'   set.seed(1)
-#'   n <- 200
-#'   X <- matrix(rnorm(n * 5), n, 5)
-#'   ps <- plogis(X[, 1] - X[, 2])
-#'   T <- rbinom(n, 1, ps)
-#'   Y <- 0.5 * T + X[, 1] + rnorm(n)
-#'   df <- data.frame(Y = Y, T = T, X)
-#'   morie_estimate_irm(df,
-#'     treatment = "T", outcome = "Y",
-#'     covariates = paste0("X", 1:5)
-#'   )
-#' }
-#' }
+#' set.seed(1)
+#' n <- 200
+#' X <- matrix(rnorm(n * 5), n, 5)
+#' ps <- plogis(X[, 1] - X[, 2])
+#' T <- rbinom(n, 1, ps)
+#' Y <- 0.5 * T + X[, 1] + rnorm(n)
+#' df <- data.frame(Y = Y, T = T, X)
+#' morie_estimate_irm(df,
+#'   treatment = "T", outcome = "Y",
+#'   covariates = paste0("X", 1:5)
+#' )
 morie_estimate_irm <- function(data, treatment, outcome, covariates,
-                         n_folds = 5, random_state = 42) {
-  morie_ensure_extras(c("DoubleML", "mlr3", "mlr3learners", "ranger", "data.table"))
-
-  cols <- c(treatment, outcome, covariates)
-  frame <- stats::na.omit(data[, cols, drop = FALSE])
-
-  for (col in covariates) {
-    if (!is.numeric(frame[[col]])) {
-      frame[[col]] <- as.numeric(as.factor(frame[[col]]))
-    }
-  }
-
-  set.seed(random_state)
-
-  dml_data <- DoubleML::DoubleMLData$new(
-    data = data.table::as.data.table(frame),
-    y_col = outcome,
-    d_cols = treatment,
-    x_cols = covariates
-  )
-
-  ml_g <- mlr3::lrn("regr.lm")
-  ml_m <- mlr3::lrn("classif.log_reg")
-
-  dml_irm <- DoubleML::DoubleMLIRM$new(dml_data, ml_g, ml_m, n_folds = n_folds)
-  # Sequential in-process cross-fit + future diagnostics silenced;
-  # see R/dml_guard.R. Restored on exit.
-  .gst <- .morie_dml_guard_begin()
-  on.exit(.morie_dml_guard_end(.gst), add = TRUE)
-  dml_irm$fit()
-
-  ate <- as.numeric(dml_irm$coef)[[1L]]
-  se <- as.numeric(dml_irm$se)[[1L]]
+                               n_folds = 5L, random_state = 42L) {
+  prep <- .dml_prepare_xy(data, treatment, outcome, covariates)
+  n <- nrow(prep$frame)
   z <- 1.959964
-
+  out <- .morie_dml_irm_native(prep$X, prep$y, prep$d,
+                               n_folds = n_folds,
+                               random_state = random_state)
   list(
-    ate      = ate,
-    se       = se,
-    ci_lower = ate - z * se,
-    ci_upper = ate + z * se,
-    n        = nrow(frame),
-    method   = "IRM (DoubleML)"
+    ate = out$theta, se = out$se,
+    ci_lower = out$theta - z * out$se,
+    ci_upper = out$theta + z * out$se,
+    n = n, method = "IRM (rmorie native)"
   )
 }
