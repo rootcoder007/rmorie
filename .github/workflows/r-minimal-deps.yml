@@ -24,6 +24,8 @@ jobs:
       - uses: r-lib/actions/setup-r@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
         with:
           use-public-rspm: true
+          extra-repositories: |
+            https://rootcoder007.r-universe.dev
       - uses: r-lib/actions/setup-r-dependencies@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
         with:
           # hard = Depends/Imports/LinkingTo only; NO Suggests.
@@ -31,6 +33,7 @@ jobs:
           extra-packages: |
             any::testthat
             any::pkgload
+            any::rmoriebricklayer
       - name: Run tests without any Suggests packages
         run: |
           pkgload::load_all(quiet = TRUE)
