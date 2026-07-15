@@ -79,11 +79,14 @@ For datasets where the catalog only knows a key + portal
 raises a clear error pointing at the right live-mode dispatcher.
 }
 \examples{
-# All three calls below resolve to included offline fixtures (no
-# network). The first call warms the cross-portal catalog cache
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+# All three calls below resolve to offline fixtures from the
+# rmoriedata companion package (no network). The first call warms
+# the cross-portal catalog cache
 # (~2.8s); subsequent calls reuse it (<0.1s each).
 df1 <- morie_datasets_load_by_key("vpd_crime")           # 550 rows
 df2 <- morie_datasets_load_by_key("nypd_arrests_ytd")    # 5 rows
 df3 <- morie_datasets_load_by_key("assault")             # 5 rows
 c(vpd = nrow(df1), nypd = nrow(df2), tps_assault = nrow(df3))
+\dontshow{\}) # examplesIf}
 }

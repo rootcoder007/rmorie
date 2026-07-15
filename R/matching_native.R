@@ -63,6 +63,12 @@
   tr <- df[[treatment]] == 1
   idx_t <- which(tr)
   idx_c <- which(!tr)
+  if (length(idx_c) < length(idx_t)) {
+    # same wording the MatchIt-backed path used: the cardinality sweep
+    # and the doubly-robust bootstrap collapse these into one summary
+    warning("Fewer control units than treated units; not all treated ",
+            "units will get a match.", call. = FALSE)
+  }
   caliper_width <- if (is.null(caliper)) Inf else caliper * stats::sd(lp)
   mm <- .morie_match_greedy_1d(
     lp[idx_t], lp[idx_c],

@@ -1,5 +1,9 @@
 # The shared numeric core (morie_core.h) uses C++17 features.
 CXX_STD = CXX17
+# The R-learner forest kernel (morie_rlearner_forest.cpp) parallelises
+# its tree loop with OpenMP when available; results are seed-exact
+# regardless (per-tree RNGs + ordered reduction).
+PKG_CXXFLAGS = $(SHLIB_OPENMP_CXXFLAGS)
 # The SIU parser (siu_parser.cpp) links libcurl; the flags below are
 # filled in by ./configure (via curl-config) at install time, so the
 # committed Makefile carries no non-portable shell-call extension.
@@ -14,4 +18,4 @@ PKG_CPPFLAGS = @cflags@
 # header-only inline calls slip past that check and the symbols stay
 # unresolved). Restore --as-needed after for the Fortran runtime so we
 # don't carry libgfortran as a hard dep if it's not actually used.
-PKG_LIBS = @libs@ @as_needed_open@ $(LAPACK_LIBS) $(BLAS_LIBS) @as_needed_close@ $(FLIBS)
+PKG_LIBS = @libs@ @as_needed_open@ $(LAPACK_LIBS) $(BLAS_LIBS) @as_needed_close@ $(FLIBS) $(SHLIB_OPENMP_CXXFLAGS)

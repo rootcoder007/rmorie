@@ -420,3 +420,46 @@ test_that("native IRM recovers theta with the AIPW score", {
   expect_identical(r$method, "IRM (rmorie native)")
   expect_lt(abs(r$ate - 0.7), 3 * r$se)
 })
+
+# ---- module 11: native causal forest (R-learner) --------------------------
+
+test_that("native dr_forest recovers a constant effect", {
+  set.seed(111)
+  n <- 1500L
+  X <- matrix(rnorm(n * 3), n, 3)
+  w <- rbinom(n, 1, plogis(0.5 * X[, 1]))
+  y <- 1.2 * w + X[, 1] + 0.5 * X[, 2] + rnorm(n)
+  df <- data.frame(t = w, y = y, x1 = X[, 1], x2 = X[, 2], x3 = X[, 3])
+  r <- morie_estimate_dr_forest(df, "t", "y", c("x1", "x2", "x3"))
+  expect_named(r, c("ate", "se", "ci_lower", "ci_upper", "n"))
+  expect_lt(abs(r$ate - 1.2), 4 * r$se)
+  expect_equal(r$n, n)
+})
+
+test_that("native causal forest tau(x) tracks true heterogeneity", {
+  set.seed(112)
+  n <- 3000L
+  X <- matrix(rnorm(n * 3), n, 3)
+  w <- rbinom(n, 1, plogis(0.4 * X[, 1]))
+  tau_true <- 1 + X[, 2]           # effect rises in x2
+  y <- tau_true * w + X[, 1] + rnorm(n)
+  nf <- rmorie:::.morie_causal_forest_native(X, y, w, n_trees = 300L)
+  expect_gt(stats::cor(nf$tau, tau_true), 0.5)
+  # group contrast: high-x2 units must show larger tau than low-x2
+  hi <- X[, 2] > 1; lo <- X[, 2] < -1
+  expect_gt(mean(nf$tau[hi]), mean(nf$tau[lo]))
+})
+
+test_that("native dr_forest target_sample options all return finite results", {
+  set.seed(113)
+  n <- 800L
+  X <- matrix(rnorm(n * 2), n, 2)
+  w <- rbinom(n, 1, plogis(0.4 * X[, 1]))
+  y <- 0.8 * w + X[, 1] + rnorm(n)
+  df <- data.frame(t = w, y = y, x1 = X[, 1], x2 = X[, 2])
+  for (ts in c("all", "treated", "control", "overlap")) {
+    r <- morie_estimate_dr_forest(df, "t", "y", c("x1", "x2"),
+                                  target_sample = ts)
+    expect_true(is.finite(r$ate) && is.finite(r$se))
+  }
+})
