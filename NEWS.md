@@ -1,3 +1,15 @@
+# rmorie 1.1.3 - 2026-07-15
+
+* Test suite runs clean on a minimal (hard-deps-only) install: every
+  optional-package test declares its requirement with
+  `skip_if_not_installed()`; live SIU network tests are opt-in
+  (`RMORIE_NETWORK_TESTS=1`) and skipped on CRAN.
+* New `r-minimal-deps` CI job permanently guards the Suggests-less
+  install path.
+* All eight df-taking sampling/weighting functions give a clear error
+  for non-data.frame input.
+* Version locked in step with morie 1.1.3.
+
 # rmorie 1.1.2
 
 ## CLI analysis entry point + NYPD/CPD backends
