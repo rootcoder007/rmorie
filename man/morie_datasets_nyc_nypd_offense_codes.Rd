@@ -51,6 +51,8 @@ Refreshing the fixture:
 }\if{html}{\out{</div>}}
 }
 \examples{
+\dontshow{if (nzchar(system.file("extdata", "nyc_nypd_offense_codes.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 codes <- morie_datasets_nyc_nypd_offense_codes()
 subset(codes, ky_cd == "104")  # all RAPE subcategories
+\dontshow{\}) # examplesIf}
 }

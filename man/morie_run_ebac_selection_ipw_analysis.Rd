@@ -30,7 +30,7 @@ Mirrors the core outputs of the old \verb{07_ebac_ipw.R} workflow.
 \examples{
 # Run on a synthetic CPADS-shaped frame (the CKAN-fetched PUMF works
 # identically -- see morie_load_cpads_data() for the real frame):
-if (requireNamespace("survey", quietly = TRUE)) {
+if (TRUE) {
   set.seed(1)
   n <- 200
   cpads <- data.frame(

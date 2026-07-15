@@ -376,3 +376,47 @@ test_that("ebac selection IPW runs without the survey package loaded", {
   expect_true(out$ebac_final_ipw_or$or_lower95 <
                 out$ebac_final_ipw_or$or_upper95)
 })
+
+# ---- module 10: native DML (PLR + IRM) -----------------------------------
+
+test_that("native PLR recovers theta on a linear DGP and is deterministic", {
+  set.seed(101)
+  n <- 1500L
+  X <- matrix(rnorm(n * 4), n, 4)
+  d <- rbinom(n, 1, plogis(0.6 * X[, 1]))
+  y <- 0.8 * d + X[, 1] + 0.5 * X[, 2] + rnorm(n)
+  df <- data.frame(y = y, d = d, X)
+  names(df)[3:6] <- paste0("x", 1:4)
+  r1 <- morie_estimate_double_ml(df, "y", "d", paste0("x", 1:4))
+  r2 <- morie_estimate_double_ml(df, "y", "d", paste0("x", 1:4))
+  expect_identical(r1, r2)
+  expect_identical(r1$method, "PLR (rmorie native)")
+  expect_lt(abs(r1$ate - 0.8), 3 * r1$se)
+  expect_true(r1$ci_lower < r1$ate && r1$ate < r1$ci_upper)
+})
+
+test_that("native PLR n_rep median aggregation is finite and stable", {
+  set.seed(102)
+  n <- 600L
+  X <- matrix(rnorm(n * 3), n, 3)
+  d <- rbinom(n, 1, plogis(0.5 * X[, 1]))
+  y <- 0.5 * d + X[, 1] + rnorm(n)
+  df <- data.frame(y = y, d = d, X)
+  names(df)[3:5] <- paste0("x", 1:3)
+  r <- morie_estimate_double_ml(df, "y", "d", paste0("x", 1:3), n_rep = 3L)
+  expect_true(is.finite(r$ate) && is.finite(r$se))
+})
+
+test_that("native IRM recovers theta with the AIPW score", {
+  set.seed(103)
+  n <- 2000L
+  X <- matrix(rnorm(n * 3), n, 3)
+  d <- rbinom(n, 1, plogis(0.5 * X[, 1] - 0.3 * X[, 2]))
+  y <- 0.7 * d + X[, 1] - 0.4 * X[, 2] + rnorm(n)
+  df <- data.frame(y = y, d = d, X)
+  names(df)[3:5] <- paste0("x", 1:3)
+  r <- morie_estimate_irm(df, treatment = "d", outcome = "y",
+                          covariates = paste0("x", 1:3))
+  expect_identical(r$method, "IRM (rmorie native)")
+  expect_lt(abs(r$ate - 0.7), 3 * r$se)
+})

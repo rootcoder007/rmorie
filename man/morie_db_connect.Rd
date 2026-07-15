@@ -41,6 +41,7 @@ morie_load_dataset("ocp21", con = con)
 }
 }
 \examples{
+\dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 # DuckDB (default when 'duckdb' is installed); pass a '.db' path for SQLite.
 if (requireNamespace("duckdb", quietly = TRUE) &&
@@ -52,4 +53,5 @@ if (requireNamespace("duckdb", quietly = TRUE) &&
   file.remove(tmp)
 }
 }
+\dontshow{\}) # examplesIf}
 }

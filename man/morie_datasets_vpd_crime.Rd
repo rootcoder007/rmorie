@@ -124,10 +124,12 @@ decision made from this data. morie surfaces it as-is.
 }
 
 \examples{
+\dontshow{if (nzchar(system.file("extdata", "vpd_crime_sample.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_vpd_crime(offline = TRUE)
 nrow(df)              # 550
 table(df$TYPE)
 table(df$NEIGHBOURHOOD)
+\dontshow{\}) # examplesIf}
 }
 \references{
 VPD GeoDASH Open Data,

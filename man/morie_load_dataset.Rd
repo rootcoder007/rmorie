@@ -30,6 +30,7 @@ error. Supports fuzzy matching: \code{morie_load_dataset("cpads_2021")}
 resolves to \code{ocp21}.
 }
 \examples{
+\dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \dontrun{
 df <- morie_load_dataset("ocp21") # CPADS 2021-2022 (default DuckDB cache)
 df <- morie_load_dataset("ocp21", refresh = TRUE) # force re-fetch
@@ -39,6 +40,7 @@ df <- morie_load_dataset("ocp21", refresh = TRUE) # force re-fetch
 #   host = "localhost", dbname = "morie", user = "...")
 # df <- morie_load_dataset("ocp21", con = con)
 }
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link{morie_fetch}}, \code{\link{morie_ckan_search}}

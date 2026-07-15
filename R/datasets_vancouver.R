@@ -39,7 +39,7 @@
 #'   `records_count`.
 #' @references Opendatasoft Explore API v2.1,
 #'   \url{https://opendata.vancouver.ca/api-console/explore/v2.1/}.
-#' @examples
+#' @examplesIf nzchar(system.file("extdata", "vancouver_opendata_catalog.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' cat_df <- morie_datasets_vancouver_opendata_layers(offline = TRUE)
 #' nrow(cat_df)  # 190
 #' head(cat_df$title)

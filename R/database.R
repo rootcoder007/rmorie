@@ -146,7 +146,7 @@
 #'   root itself is returned.
 #' @return A file path string. The directory is \emph{not} created;
 #'   callers create it lazily only when they actually persist to disk.
-#' @examples
+#' @examplesIf requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)
 #' # Persistent cache root (does not write anything to disk):
 #' morie_cache_dir()
 #' # Per-subsystem persistent path:
@@ -181,7 +181,7 @@ morie_cache_dir <- function(subdir = NULL) {
 #'   prompts the user before deleting. Set \code{FALSE} in scripts /
 #'   batch use to skip the prompt.
 #' @return Invisibly, the number of files removed.
-#' @examples
+#' @examplesIf requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)
 #' \donttest{
 #' # Non-interactive: skip the confirmation prompt.
 #' morie_cache_clear("siu", confirm = FALSE)
@@ -213,7 +213,7 @@ morie_cache_clear <- function(subdir = NULL, confirm = interactive()) {
 #' SQLite tables.
 #'
 #' @return File path string.
-#' @examples
+#' @examplesIf requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)
 #' morie_builtin_db()
 #' @export
 morie_builtin_db <- function() {
@@ -255,7 +255,7 @@ morie_builtin_db <- function() {
 #'   else \code{morie.duckdb} / \code{morie.db} in the per-user cache
 #'   directory.
 #' @return A DBI connection object.
-#' @examples
+#' @examplesIf requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)
 #' \donttest{
 #' # DuckDB (default when 'duckdb' is installed); pass a '.db' path for SQLite.
 #' if (requireNamespace("duckdb", quietly = TRUE) &&
@@ -335,7 +335,7 @@ morie_db_connect <- function(db_path = NULL) {
 #'   table is written through `con` and `db_path` is ignored. Use this
 #'   for non-SQLite backends (PostgreSQL, DuckDB, MariaDB).
 #' @return Number of rows written (invisible).
-#' @examples
+#' @examplesIf requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)
 #' \donttest{
 #' db <- tempfile(fileext = ".db")
 #' morie_cache_store(
@@ -376,7 +376,7 @@ morie_cache_store <- function(data, table_name, db_path = NULL, con = NULL) {
 #' @param db_path Optional path to a SQLite file (default backend).
 #' @param con Optional pre-opened DBI connection (overrides `db_path`).
 #' @return A data.frame, or \code{NULL} if the table does not exist.
-#' @examples
+#' @examplesIf requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)
 #' \donttest{
 #' db <- tempfile(fileext = ".db")
 #' morie_cache_store(
@@ -474,7 +474,7 @@ morie_cache_list <- function(db_path = NULL, con = NULL) {
 #' @param db_path Optional path to a SQLite file (default backend).
 #' @param con Optional pre-opened DBI connection (overrides `db_path`).
 #' @return Number of rows cached (invisible).
-#' @examples
+#' @examplesIf requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)
 #' # The SQLite backend needs the optional 'RSQLite' package.
 #' if (requireNamespace("RSQLite", quietly = TRUE)) {
 #'   tdir <- tempfile("morie-cache-")
@@ -720,7 +720,7 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
 #'   (overrides `db_path`). The built-in DB read is always SQLite-based
 #'   and is unaffected by `con`.
 #' @return A data.frame.
-#' @examples
+#' @examplesIf requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)
 #' \dontrun{
 #' df <- morie_load_dataset("ocp21") # CPADS 2021-2022 (default DuckDB cache)
 #' df <- morie_load_dataset("ocp21", refresh = TRUE) # force re-fetch
@@ -856,7 +856,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
 #' @param con Optional pre-opened DBI connection (overrides `db_path`).
 #' @return A data.frame with columns: key, name, source, survey, year, type,
 #'   cached (logical), rows (integer or NA).
-#' @examples
+#' @examplesIf requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)
 #' morie_list_datasets()
 #' @export
 morie_list_datasets <- function(db_path = NULL, con = NULL) {

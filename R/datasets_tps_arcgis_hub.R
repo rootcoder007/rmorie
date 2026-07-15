@@ -79,7 +79,7 @@
 #'   `feature_server_url`, `owner`, `tags`, `snippet`.
 #' @references TPS Public Safety Data Portal,
 #'   \url{https://data.tps.ca/search?collection=dataset}.
-#' @examples
+#' @examplesIf nzchar(system.file("extdata", "tps_arcgis_hub_catalog.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' cat <- morie_datasets_tps_arcgis_hub_layers()
 #' nrow(cat)        # 71
 #' head(cat$title)
