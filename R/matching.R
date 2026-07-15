@@ -256,9 +256,11 @@ morie_matching_common_support <- function(data, treatment,
 
 #' Nearest-neighbour propensity-score matching
 #'
-#' Thin wrapper around \code{MatchIt::matchit(method = "nearest")} that
-#' returns a \code{morie_match_result} list for compatibility with the
-#' rmorie balance / treatment-effect helpers.
+#' Native greedy nearest-neighbour matching on the logit propensity
+#' score (Rosenbaum & Rubin 1985; caliper per Cochran & Rubin 1973).
+#' The propensity model is base \code{stats::glm}; no MatchIt at
+#' runtime. Returns the same \code{morie_match_result} shape as
+#' always; cross-validated against MatchIt in \code{tests/cross/}.
 #'
 #' @param data Data frame.
 #' @param treatment Binary treatment column (0/1).
@@ -284,27 +286,12 @@ morie_matching_nearest_neighbor <- function(data, treatment, covariates,
                                             replace = FALSE,
                                             ps = NULL,
                                             alpha = 0.05) {
-  .morie_matching_need_matchit("morie_matching_nearest_neighbor")
-  df <- .morie_matching_drop_na(data, c(treatment, covariates))
-  f <- stats::as.formula(paste(treatment, "~",
-                               paste(covariates, collapse = " + ")))
-  mi <- MatchIt::matchit(
-    f, data = df,
-    method   = "nearest",
-    distance = "glm",
-    ratio    = n_neighbors,
-    caliper  = caliper,
-    replace  = replace
-  )
-  .morie_matching_matchit_to_result(
-    mi, df, treatment,
-    method_label = "nearest_neighbor (MatchIt)",
-    details = list(
-      caliper     = caliper,
-      replace     = replace,
-      n_neighbors = n_neighbors,
-      alpha       = alpha
-    )
+  .morie_match_nearest_native(
+    data, treatment, covariates,
+    n_neighbors = n_neighbors,
+    caliper = caliper,
+    replace = replace,
+    alpha = alpha
   )
 }
 
