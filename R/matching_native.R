@@ -46,6 +46,12 @@
 # Native replacement for the MatchIt-backed nearest-neighbour wrapper.
 # Same arguments, same morie_match_result shape.
 #' Internal helper: native nearest-neighbour matching engine
+#' @srrstats {G1.0} Primary references: Rosenbaum & Rubin (1985, Am.
+#'   Stat. 39(1)) for greedy propensity matching; Cochran & Rubin
+#'   (1973) for the caliper in SD-of-logit units.
+#' @srrstats {G3.0} No exact floating-point equality: fitted
+#'   propensities are clamped to [eps, 1-eps] before qlogis, and
+#'   caliper admissibility uses explicit widths, never ==.
 #' @noRd
 .morie_match_nearest_native <- function(data, treatment, covariates,
                                         n_neighbors = 1L,

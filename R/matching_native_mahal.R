@@ -21,6 +21,13 @@
 }
 
 #' Internal helper: native Mahalanobis matching engine
+#' @srrstats {G1.0} Primary reference: Rubin (1980, Biometrics 36(2)),
+#'   Mahalanobis-metric matching with covariance estimated on the
+#'   control pool.
+#' @srrstats {G3.1} The covariance estimator (control-pool `stats::cov`
+#'   with a documented proportional diagonal ridge for near-singular
+#'   pools) is stated in the docs and BRANCH_PLAN entry; whitening via
+#'   Cholesky makes the metric explicit.
 #' @noRd
 .morie_match_mahalanobis_native <- function(data, treatment, covariates,
                                             n_neighbors = 1L,
