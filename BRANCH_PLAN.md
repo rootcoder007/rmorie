@@ -18,7 +18,7 @@ and the `morie_match_result` / result-object shapes do not change.
 | 2 | morie_matching_mahalanobis (native) | MatchIt (mahalanobis distance) | DONE (60/60 suite; whitened-kd C++ kernel, exact strata, caliper) |
 | 3 | morie_matching_cem (native) | MatchIt (cem) | DONE (structural+cross+property green; 1.3x of MatchIt at 100k) |
 | 4 | morie_matching_exact (native) | MatchIt (exact) | DONE (parity-to-faster vs MatchIt at all sizes) |
-| 5 | morie_matching_optimal (new) | MatchIt/optmatch | planned |
+| 5 | morie_matching_optimal_pair (native) | MatchIt/optmatch | DONE (exact optimum; 7-14x faster; completes 100k where optmatch OOMs) |
 | 6 | morie_matching_genetic (native) | Matching::GenMatch | planned |
 | 7 | morie_matching_cardinality (native) | designmatch | planned |
 | 8 | morie_ipw_ate / att / trimmed (native) | survey::svyglm | planned |
@@ -160,3 +160,38 @@ passes — no cem-package dependency chain (MatchIt's cem path drags in
 \pkg{cem} + lattice/randomForest transitively), deterministic across
 versions, and the L1 diagnostic comes for free from the same tables.
 Low-cardinality guard makes binary covariates safe by construction.
+
+## Module 5 — native optimal pair matching
+
+**Replaces.** `morie_matching_optimal_pair()` (was
+`MatchIt::matchit(method = "optimal")` -> \pkg{optmatch}). Signature +
+result shape unchanged; both `distance = "propensity"` and
+`"mahalanobis"` modes native.
+
+**Reference algorithm.** Rosenbaum (1989, JASA 84(408)): optimal
+matching as a minimum-cost assignment; Hansen & Klopfer (2006) for the
+reference implementation. Propensity mode exploits the non-crossing
+property of 1-D optimal matching: sorted treated match to a monotone
+subsequence of sorted controls, so the assignment collapses to a
+dynamic program over the two sorted score vectors — O(nt*nc) time,
+uint8 backtrack, no distance matrix. Mahalanobis mode: exact shortest
+augmenting-path assignment (Jonker-Volgenant duals) on Cholesky-
+whitened covariates, float cost matrix, guarded at nt*nc <= 5e7.
+
+**Validation.** Structural (shape, every treated matched, no reuse,
+optimal <= greedy total, balance SMD < 0.1); cross vs MatchIt/optmatch:
+identical matched-set sizes, both recover the simulated true effect,
+and — fed optmatch's own probability-scale distances — our DP total is
+**never worse and strictly better** than optmatch's (0.4884 vs 0.4968
+on the test DGP; optmatch solves on a rounded integer-cost grid, ours
+is exact). Property invariants over 3 seeds. 77+20+94 green on L14, 0
+skips (cem + optmatch installed).
+
+**Benchmark** (L14, R 4.6.1, 2026-07-15): 1k 0.045s vs 0.62s (13.8x
+faster); 10k 1.66s vs 12.3s (7.4x); 100k ours 182s, optmatch
+OOM-killed (~12 GB dense distance matrix). Well inside the bar.
+
+**What makes ours special.** The 1-D DP needs no distance matrix at
+all — optimal matching's memory wall disappears, so exact optimal
+matching becomes feasible at 100k rows where the reference cannot run.
+Exactness beats the reference's rounded-grid optimum, deterministically.

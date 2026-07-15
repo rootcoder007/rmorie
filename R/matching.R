@@ -380,8 +380,12 @@ morie_matching_mahalanobis <- function(data, treatment, covariates,
 
 #' Optimal pair matching
 #'
-#' Thin wrapper around \code{MatchIt::matchit(method = "optimal")}, which
-#' calls \pkg{optmatch}.
+#' Native rmorie implementation of optimal 1:1 pair matching: globally
+#' minimizes the total matched distance (Rosenbaum 1989), unlike greedy
+#' nearest-neighbour. Propensity distance uses an exact non-crossing
+#' dynamic program on the logit score; Mahalanobis distance uses an
+#' exact shortest-augmenting-path assignment on whitened covariates.
+#' No MatchIt/optmatch at runtime.
 #'
 #' @param data Data frame.
 #' @param treatment Binary treatment column name.
@@ -398,23 +402,8 @@ morie_matching_mahalanobis <- function(data, treatment, covariates,
 morie_matching_optimal_pair <- function(data, treatment, covariates,
                                         distance = "propensity",
                                         ps = NULL) {
-  .morie_matching_need_matchit("morie_matching_optimal_pair")
-  if (!.morie_matching_have("optmatch")) {
-    stop("`morie_matching_optimal_pair()` requires the 'optmatch' ",
-         "package. Install it with install.packages(\"optmatch\").",
-         call. = FALSE)
-  }
-  df <- .morie_matching_drop_na(data, c(treatment, covariates))
-  f <- stats::as.formula(paste(treatment, "~",
-                               paste(covariates, collapse = " + ")))
-  dist_arg <- if (distance == "mahalanobis") "mahalanobis" else "glm"
-  mi <- MatchIt::matchit(f, data = df, method = "optimal",
-                         distance = dist_arg)
-  .morie_matching_matchit_to_result(
-    mi, df, treatment,
-    method_label = "optimal_pair (MatchIt + optmatch)",
-    details = list(distance = distance)
-  )
+  .morie_match_optimal_native(data, treatment, covariates,
+                              distance = distance, ps = ps)
 }
 
 #' Full matching via subclassification

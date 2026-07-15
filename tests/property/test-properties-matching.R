@@ -61,3 +61,23 @@ test_that("property: exact/CEM invariants hold across random seeds", {
     expect_gte(cm$details$n_strata, 1L)
   }
 })
+
+test_that("property: optimal matching invariants across seeds", {
+  for (seed in c(5L, 19L, 53L)) {
+    set.seed(seed)
+    n <- 300L
+    x1 <- rnorm(n); x2 <- rnorm(n)
+    d <- rbinom(n, 1, plogis(-1.4 + 0.5 * x1))
+    if (sum(d) < 2 || sum(d) > sum(1 - d)) next
+    df <- data.frame(x1, x2, d)
+    r <- morie_matching_optimal_pair(df, "d", c("x1", "x2"))
+    # every treated matched exactly once, no control reused
+    expect_equal(nrow(r$match_pairs), sum(d))
+    expect_false(any(duplicated(r$match_pairs$control_idx)))
+    expect_false(any(duplicated(r$match_pairs$treated_idx)))
+    # pairs reference real rows of opposite arms
+    expect_true(all(df[r$match_pairs$treated_idx, "d"] == 1))
+    expect_true(all(df[r$match_pairs$control_idx, "d"] == 0))
+    expect_true(all(is.finite(r$match_pairs$distance)))
+  }
+})
