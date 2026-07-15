@@ -428,7 +428,7 @@ morie_datasets_tps_police_divisions <- function(offline = TRUE,
 #'   Default joins all five.
 #' @return A wide `data.frame`: PSDP columns first, then prefixed
 #'   resolver columns.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_tps_psdp_resolved("assault", offline = TRUE)
 #' names(df)
 #' @export
