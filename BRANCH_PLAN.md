@@ -21,8 +21,8 @@ and the `morie_match_result` / result-object shapes do not change.
 | 5 | morie_matching_optimal_pair (native) | MatchIt/optmatch | DONE (exact optimum; 7-14x faster; completes 100k where optmatch OOMs) |
 | 6 | morie_matching_genetic (native) | Matching::GenMatch | DONE (same GA budget: 0.7-1.75x of GenMatch, within 2x bar) |
 | 7 | morie_matching_cardinality (native) | designmatch | DONE (already native: caliper sweep over module-1 engine; balance-guarantee tests added) |
-| 8 | IPW family (R/ipw.R survey-free) | survey::svyglm | DONE (svyglm reproduced to 1e-6; 2-5x faster) |
-| 9 | morie_doubly_robust (native) | survey | planned |
+| 8 | IPW family (ipw.R + investigation.R survey-free) | survey::svyglm | DONE (svyglm reproduced to 1e-6; 2-5x faster) |
+| 9 | morie_matching_doubly_robust / morie_estimate_aipw | survey | DONE (verified already native: base stats lm/glm + bootstrap/IF SEs; no survey at runtime) |
 | 10 | morie_dml (native cross-fit) | DoubleML/mlr3 | planned |
 | 11 | morie_causal_forest | grf | planned |
 | 12 | meta-learners T/S/X/DR | — (new) | planned |
@@ -289,3 +289,13 @@ pipeline runs with no survey package involved. 101+22+7+112 green.
 for the ids=~1 case morie actually uses; the linearization collapses
 to one crossprod + one Cholesky, which is why the SEs agree to 1e-6
 at 5x the speed with zero dependencies.
+
+## Module 9 — doubly robust / AIPW (verification)
+
+`morie_matching_doubly_robust()` (regression-adjusted matched ATT with
+bootstrap SEs) and `morie_estimate_aipw()` (influence-function SEs)
+were audited and are already pure base-stats implementations — no
+survey at runtime. Runtime survey usage on the branch is now confined
+to `R/survey.R` (public wrappers whose documented return value IS a
+survey object — API-sacred, kept) and the `survey::calibrate` deferral
+in `R/weights.R` (which already has a base-R raking fallback).

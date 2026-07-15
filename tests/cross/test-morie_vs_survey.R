@@ -70,3 +70,23 @@ test_that("cross: ebac selection IPW pipeline matches the survey-based run", {
   expect_equal(out$ebac_final_ipw_or$se, unname(ref_row[2]),
                tolerance = 1e-6)
 })
+
+test_that("cross: weighted logistic analysis matches svyglm directly", {
+  skip_if_not_installed("survey")
+  set.seed(83)
+  df <- data.frame(
+    y = rbinom(300, 1, 0.4),
+    x1 = rnorm(300), x2 = rnorm(300),
+    w = runif(300, 0.5, 1.5)
+  )
+  ours <- morie_run_weighted_logistic_analysis(
+    df, outcome = "y", predictors = c("x1", "x2"), weights_col = "w")
+  des <- survey::svydesign(ids = ~1, weights = ~w, data = df)
+  ref <- survey::svyglm(y ~ x1 + x2, design = des,
+                        family = stats::quasibinomial())
+  expect_equal(unname(ours$coefficients), unname(coef(ref)),
+               tolerance = 1e-8)
+  expect_equal(unname(ours$std_errors),
+               unname(summary(ref)$coefficients[, "Std. Error"]),
+               tolerance = 1e-6)
+})
