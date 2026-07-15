@@ -10,7 +10,7 @@
 #' @param metric Distance metric (passed to dbscan).
 #' @return Named list: estimate, labels, n_clusters, n_noise,
 #'   core_sample_indices, eps, min_samples, n, method.
-#' @examples
+#' @examplesIf requireNamespace("dbscan", quietly = TRUE)
 #' morie_dbscan_clustering(x = rnorm(50))
 #' @export
 morie_dbscan_clustering <- function(x, eps = 0.5, min_samples = 5L,

@@ -64,6 +64,8 @@ Mirrors the Chicago \code{morie_datasets_chicago_crime_resolved()}
 patterns.
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_tps_psdp_resolved("assault", offline = TRUE)
 names(df)
+\dontshow{\}) # examplesIf}
 }

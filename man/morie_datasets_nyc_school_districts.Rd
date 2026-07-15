@@ -20,6 +20,8 @@ Phase 3CCC2. Included snapshot of NYC OpenData
 \verb{8ugf-3d8u} (33 districts).
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_nyc_school_districts(offline = TRUE)
 nrow(df)  # 33
+\dontshow{\}) # examplesIf}
 }

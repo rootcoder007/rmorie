@@ -23,5 +23,7 @@ core_sample_indices, eps, min_samples, n, method.
 Wraps \code{dbscan::dbscan}.
 }
 \examples{
+\dontshow{if (requireNamespace("dbscan", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 morie_dbscan_clustering(x = rnorm(50))
+\dontshow{\}) # examplesIf}
 }

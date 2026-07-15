@@ -80,6 +80,14 @@ jobs:
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
+      # The 2026-07-15 oldrel-1 failure was ENOSPC: a dep-cache miss (any
+      # DESCRIPTION change reshuffles the lockfile hash) forces from-source
+      # rebuilds whose /tmp intermediates fill the ~21 GB free on stock
+      # runners. Dropping the unused preinstalled toolchains frees ~30 GB.
+      - name: Free runner disk space (Linux)
+        if: runner.os == 'Linux'
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL || true
+
       - uses: r-lib/actions/setup-pandoc@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
 
       - uses: r-lib/actions/setup-r@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
@@ -193,3 +201,58 @@ jobs:
       # checks now live as separate jobs in r-coverage-and-lint.yml
       # (lintr + covr parallel on every push; goodpractice + pkgcheck
       # workflow_dispatch only).
+
+  # Debian R CMD check leg. The five matrix cells above never touch
+  # Debian, and CRAN's own farm runs it; true Debian bookworm.
+  # Hard-deps flavour (Suggests absent -> their tests/examples skip,
+  # _R_CHECK_FORCE_SUGGESTS_=false; vignettes need Suggests, ignored).
+  R-CMD-check-debian:
+    name: debian-bookworm (r-base 4.5.1, Debian)
+    runs-on: ubuntu-latest
+    container: r-base:4.5.1
+    timeout-minutes: 120
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      _R_CHECK_FORCE_SUGGESTS_: false
+      R_KEEP_PKG_SOURCE: yes
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Debian toolchain
+        run: |
+          export DEBIAN_FRONTEND=noninteractive
+          apt-get update -qq
+          apt-get install -y -qq build-essential libcurl4-openssl-dev libssl-dev libxml2-dev
+      - name: Install hard dependencies + rcmdcheck
+        run: |
+          options(HTTPUserAgent = sprintf(
+            "R/%s R (%s)", getRversion(),
+            paste(getRversion(), R.version["platform"],
+                  R.version["arch"], R.version["os"])))
+          repos <- c(
+            runiverse = "https://rootcoder007.r-universe.dev",
+            P3M = "https://packagemanager.posit.co/cran/__linux__/bookworm/latest",
+            CRAN = "https://cloud.r-project.org")
+          pkgs <- c("here", "Rcpp", "RcppArmadillo",
+                    "rmoriebricklayer", "testthat", "rcmdcheck")
+          install.packages(pkgs, repos = repos, Ncpus = 2)
+          missing <- setdiff(pkgs, rownames(installed.packages()))
+          if (length(missing) > 0) stop("failed to install: ",
+                                        paste(missing, collapse = ", "))
+        shell: Rscript {0}
+      - name: R CMD check (as-cran, no vignettes) on Debian
+        run: |
+          res <- rcmdcheck::rcmdcheck(
+            args = c("--no-manual", "--as-cran", "--ignore-vignettes"),
+            build_args = c("--no-build-vignettes", "--no-manual"),
+            error_on = "error")
+          print(res)
+        shell: Rscript {0}
+      - name: Upload check logs on failure
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: debian-check-logs
+          path: |
+            check/*.Rcheck/00check.log
+            check/*.Rcheck/tests/
+          if-no-files-found: ignore

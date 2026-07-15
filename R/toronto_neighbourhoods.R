@@ -135,7 +135,7 @@ NULL
 #'   "Neighbourhood Improvement Areas"
 #'   (\url{https://open.toronto.ca/dataset/neighbourhood-improvement-areas/});
 #'   licensed under the Open Government Licence -- Toronto.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_to_neighbourhoods("158", offline = TRUE)
 #' head(df[, c("AREA_SHORT_CODE", "AREA_NAME")])
 #' @export
@@ -352,7 +352,7 @@ morie_to_hood_crosswalk <- function() {
 #' @param crosswalk Optional pre-loaded crosswalk; defaults to
 #'   `morie_to_hood_crosswalk()`.
 #' @return `df` with the equivalent-code column appended.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- data.frame(EVENT_ID = 1:3, HOOD_140 = c("082", "001", "075"))
 #' morie_tps_add_hood_158_from_140(df)
 #' @export
@@ -437,7 +437,7 @@ morie_tps_add_hood_140_from_158 <- function(df, col_in = NULL,
 #' @return A `data.frame` with columns `hood_158`, `name_158`,
 #'   `hood_140`, all chosen `count_cols` (now per-158 fractional
 #'   counts), and `pct_140_in_158` (the cake-cut weight applied).
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- data.frame(HOOD_140 = c("075", "001"),
 #'                  incidents = c(100, 42))
 #' morie_tps_disaggregate_140_to_158(df)
@@ -499,7 +499,7 @@ morie_tps_disaggregate_140_to_158 <- function(df,
 #' @param crosswalk Optional pre-loaded crosswalk.
 #' @return A `data.frame` with one row per 140-hood, columns
 #'   `hood_140`, `name_140`, and the summed `count_cols`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- data.frame(HOOD_158 = c("167", "168", "001"),
 #'                  incidents = c(40, 60, 42))
 #' morie_tps_aggregate_158_to_140(df)

@@ -41,5 +41,7 @@ Wraps \code{randomForest::randomForest}.  Auto-detects task from y
 (factor / integer-like -> classification, otherwise regression).
 }
 \examples{
+\dontshow{if (requireNamespace("randomForest", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 morie_random_forest_ensemble(x = rnorm(50), y = rnorm(50))
+\dontshow{\}) # examplesIf}
 }
