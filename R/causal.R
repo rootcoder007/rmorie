@@ -545,7 +545,12 @@ morie_estimate_gate <- function(data, treatment, outcome, covariates,
 #' (richer heterogeneity, honest sample splitting).
 #'
 #' @inheritParams morie_estimate_aipw
-#' @param meta_learner `"t_learner"` (default) or `"s_learner"`.
+#' @param meta_learner One of `"t_learner"` (default), `"s_learner"`,
+#'   `"x_learner"` (Kuenzel et al. 2019 — two-stage with
+#'   propensity-weighted combination; strong under arm imbalance), or
+#'   `"dr_learner"` (Kennedy 2023 — cross-fit AIPW pseudo-outcome
+#'   regressed with the native forest; doubly robust). All four are
+#'   native; `outcome_model` applies to the T/S-learners only.
 #' @return Numeric vector of per-unit CATE estimates.
 #' @examples
 #' morie_estimate_cate(
@@ -560,9 +565,20 @@ morie_estimate_gate <- function(data, treatment, outcome, covariates,
 morie_estimate_cate <- function(data, treatment, outcome, covariates,
                                 propensity_col = NULL,
                                 outcome_model = c("linear", "logistic"),
-                                meta_learner = c("t_learner", "s_learner")) {
+                                meta_learner = c("t_learner", "s_learner",
+                                                 "x_learner", "dr_learner")) {
   outcome_model <- match.arg(outcome_model)
   meta_learner <- match.arg(meta_learner)
+  if (meta_learner %in% c("x_learner", "dr_learner")) {
+    df <- data[stats::complete.cases(
+      data[, c(treatment, outcome, covariates)]), , drop = FALSE]
+    X <- as.matrix(df[, covariates, drop = FALSE])
+    y <- as.numeric(df[[outcome]])
+    d <- as.numeric(df[[treatment]])
+    return(if (meta_learner == "x_learner")
+      .morie_cate_x_learner(X, y, d)
+    else .morie_cate_dr_learner(X, y, d))
+  }
   fam <- if (outcome_model == "logistic") {
     stats::binomial()
   } else {

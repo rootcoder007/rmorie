@@ -138,3 +138,24 @@ test_that("property: causal forest invariants across seeds", {
     expect_identical(nf$tau, nf2$tau)
   }
 })
+
+test_that("property: meta-learner invariants across seeds", {
+  for (seed in c(9L, 31L)) {
+    set.seed(seed)
+    n <- 900L
+    x1 <- rnorm(n); x2 <- rnorm(n)
+    d <- rbinom(n, 1, plogis(0.4 * x1))
+    if (length(unique(d)) < 2) next
+    y <- (1 + 0.5 * x2) * d + x1 + rnorm(n)
+    df <- data.frame(y = y, d = d, x1 = x1, x2 = x2)
+    for (ml in c("x_learner", "dr_learner")) {
+      tau <- morie_estimate_cate(df, "d", "y", c("x1", "x2"),
+                                 meta_learner = ml)
+      expect_true(all(is.finite(tau)))
+      # determinism
+      tau2 <- morie_estimate_cate(df, "d", "y", c("x1", "x2"),
+                                  meta_learner = ml)
+      expect_identical(tau, tau2)
+    }
+  }
+})

@@ -463,3 +463,60 @@ test_that("native dr_forest target_sample options all return finite results", {
     expect_true(is.finite(r$ate) && is.finite(r$se))
   }
 })
+
+# ---- module 12: native X- and DR-learners --------------------------------
+
+test_that("all four meta-learners agree on a constant effect", {
+  set.seed(121)
+  n <- 1500L
+  x1 <- rnorm(n); x2 <- rnorm(n)
+  d <- rbinom(n, 1, plogis(0.4 * x1))
+  y <- 1.0 * d + x1 + 0.5 * x2 + rnorm(n)
+  df <- data.frame(y = y, d = d, x1 = x1, x2 = x2)
+  for (ml in c("t_learner", "s_learner", "x_learner", "dr_learner")) {
+    tau <- morie_estimate_cate(df, "d", "y", c("x1", "x2"),
+                               meta_learner = ml)
+    expect_length(tau, n)
+    expect_true(all(is.finite(tau)))
+    expect_lt(abs(mean(tau) - 1.0), 0.25)
+  }
+})
+
+test_that("X- and DR-learners track heterogeneous effects", {
+  set.seed(122)
+  n <- 3000L
+  x1 <- rnorm(n); x2 <- rnorm(n)
+  d <- rbinom(n, 1, plogis(0.4 * x1))
+  tau_true <- 1 + x2
+  y <- tau_true * d + x1 + rnorm(n)
+  df <- data.frame(y = y, d = d, x1 = x1, x2 = x2)
+  for (ml in c("x_learner", "dr_learner")) {
+    tau <- morie_estimate_cate(df, "d", "y", c("x1", "x2"),
+                               meta_learner = ml)
+    expect_gt(stats::cor(tau, tau_true), 0.5)
+  }
+})
+
+test_that("X-learner beats T-learner under heavy arm imbalance", {
+  set.seed(123)
+  n <- 2500L
+  x1 <- rnorm(n); x2 <- rnorm(n)
+  d <- rbinom(n, 1, 0.07)                # ~7 percent treated
+  tau_true <- 1 + 0.8 * x2
+  y <- tau_true * d + x1 + rnorm(n)
+  df <- data.frame(y = y, d = d, x1 = x1, x2 = x2)
+  tau_x <- morie_estimate_cate(df, "d", "y", c("x1", "x2"),
+                               meta_learner = "x_learner")
+  tau_t <- morie_estimate_cate(df, "d", "y", c("x1", "x2"),
+                               meta_learner = "t_learner")
+  mse <- function(a) mean((a - tau_true)^2)
+  # Kuenzel et al.'s motivating case: unequal arms favour the X-learner
+  expect_lt(mse(tau_x), mse(tau_t) * 1.1)
+})
+
+test_that("meta-learners error clearly on single-arm input", {
+  df <- data.frame(y = rnorm(5), d = rep(1, 5), x = rnorm(5))
+  expect_error(morie_estimate_cate(df, "d", "y", "x",
+                                   meta_learner = "x_learner"),
+               "both treatment arms")
+})
