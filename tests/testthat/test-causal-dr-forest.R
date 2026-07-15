@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 test_that("morie_estimate_dr_forest returns a doubly-robust ATE near the truth", {
-  skip_if_not_installed("grf")
+  # native R-learner forest: no grf needed
   set.seed(42)
   n <- 400
   x1 <- stats::rnorm(n)
@@ -19,10 +19,10 @@ test_that("morie_estimate_dr_forest returns a doubly-robust ATE near the truth",
   expect_true(res$ate > 0.3 && res$ate < 1.7)      # near the true ATE of 1.0
 })
 
-test_that("morie_estimate_dr_forest errors clearly when grf is absent", {
-  skip_if(requireNamespace("grf", quietly = TRUE), "grf is installed")
+test_that("morie_estimate_dr_forest validates degenerate input", {
+  # native engine runs without grf; a one-row single-arm frame must
+  # still error clearly rather than crash inside the nuisance fits
   expect_error(
-    morie_estimate_dr_forest(data.frame(y = 1, w = 0, x = 1), "w", "y", "x"),
-    "grf"
+    morie_estimate_dr_forest(data.frame(y = 1, w = 0, x = 1), "w", "y", "x")
   )
 })
