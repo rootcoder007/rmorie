@@ -77,3 +77,59 @@ jobs:
             testthat.Rout*
             *.Rout
           if-no-files-found: ignore
+
+  # Debian portability leg. The ubuntu cells do NOT prove Debian: different
+  # glibc/toolchain snapshots and different P3M binary streams. rocker/r-ver
+  # is Debian bookworm with R pinned; P3M ships bookworm binaries, so this
+  # stays fast. Same bare-install contract as the ubuntu minimal job.
+  debian:
+    runs-on: ubuntu-latest
+    container: rocker/r-ver:4.5.1
+    timeout-minutes: 90
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: System libraries + toolchain
+        run: apt-get update -qq && apt-get install -y --no-install-recommends build-essential libcurl4-openssl-dev
+      - name: Install hard dependencies + test tooling (no Suggests)
+        run: |
+          options(HTTPUserAgent = sprintf(
+            "R/%s R (%s)", getRversion(),
+            paste(getRversion(), R.version["platform"],
+                  R.version["arch"], R.version["os"])))
+          repos <- c(
+            runiverse = "https://rootcoder007.r-universe.dev",
+            P3M = "https://packagemanager.posit.co/cran/__linux__/bookworm/latest",
+            CRAN = "https://cloud.r-project.org")
+          pkgs <- c("here", "Rcpp", "RcppArmadillo",
+                    "rmoriebricklayer", "testthat", "pkgload")
+          install.packages(pkgs, repos = repos, Ncpus = 2)
+          missing <- setdiff(pkgs, rownames(installed.packages()))
+          if (length(missing) > 0) stop("failed to install: ",
+                                        paste(missing, collapse = ", "))
+        shell: Rscript {0}
+      - name: Run tests on Debian without any Suggests packages
+        run: |
+          pkgload::load_all(quiet = TRUE)
+          res <- testthat::test_dir("tests/testthat",
+                                    stop_on_failure = FALSE,
+                                    reporter = "summary")
+          d <- as.data.frame(res)
+          cat(sprintf("\nfailed: %d errors: %d passed: %d skipped: %d\n",
+                      sum(d$failed), sum(d$error),
+                      sum(d$passed), sum(d$skipped)))
+          if (sum(d$failed) + sum(d$error) > 0) {
+            stop("Tests must SKIP, not fail, when Suggests are absent.")
+          }
+        shell: Rscript {0}
+      - name: Upload test log on failure
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: minimal-deps-debian-test-log
+          path: |
+            testthat.Rout*
+            *.Rout
+          if-no-files-found: ignore
