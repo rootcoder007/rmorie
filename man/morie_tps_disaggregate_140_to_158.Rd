@@ -47,7 +47,9 @@ points (via \code{sf::st_join} against
 uniform-density approximation.
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- data.frame(HOOD_140 = c("075", "001"),
                  incidents = c(100, 42))
 morie_tps_disaggregate_140_to_158(df)
+\dontshow{\}) # examplesIf}
 }

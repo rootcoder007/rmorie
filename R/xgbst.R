@@ -23,7 +23,7 @@
 #'   n_estimators, learning_rate, max_depth, reg_lambda, reg_alpha, task,
 #'   n, method.
 #' @importFrom stats predict
-#' @examples
+#' @examplesIf requireNamespace("xgboost", quietly = TRUE) || requireNamespace("gbm", quietly = TRUE)
 #' morie_xgboost_objective(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_xgboost_objective <- function(x, y, n_estimators = 100L, learning_rate = 0.1,

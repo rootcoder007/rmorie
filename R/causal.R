@@ -1094,7 +1094,7 @@ morie_estimate_double_ml <- function(data, outcome, treatment, covariates,
 #' @param random_state Integer seed (default 42).
 #' @return Named list with \code{ate}, \code{se}, \code{ci_lower},
 #'   \code{ci_upper}, \code{n}, \code{method}.
-#' @examples
+#' @examplesIf requireNamespace("DoubleML", quietly = TRUE) && requireNamespace("mlr3", quietly = TRUE) && requireNamespace("mlr3learners", quietly = TRUE) && requireNamespace("ranger", quietly = TRUE)
 #' set.seed(1)
 #' n <- 200
 #' X <- matrix(rnorm(n * 3), n, 3)

@@ -77,6 +77,7 @@ If any are unavailable, the function raises an informative error.
 }
 
 \examples{
+\dontshow{if (requireNamespace("DoubleML", quietly = TRUE) && requireNamespace("mlr3", quietly = TRUE) && requireNamespace("mlr3learners", quietly = TRUE) && requireNamespace("ranger", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 set.seed(1)
 n <- 200
 X <- matrix(rnorm(n * 3), n, 3)
@@ -85,6 +86,7 @@ y <- 0.5 * d + X[, 1] + rnorm(n)
 df <- data.frame(y = y, d = d, x1 = X[, 1], x2 = X[, 2], x3 = X[, 3])
 morie_estimate_irm(df, treatment = "d", outcome = "y",
                    covariates = c("x1", "x2", "x3"))
+\dontshow{\}) # examplesIf}
 \donttest{
 if (requireNamespace("DoubleML", quietly = TRUE) &&
   requireNamespace("mlr3", quietly = TRUE) &&

@@ -40,7 +40,7 @@ NULL
 #'   `"tps_assault"`.
 #' @return A data.frame.
 #' @export
-#' @examples
+#' @examplesIf nzchar(system.file("extdata", package = "rmorie")) && length(list.files(system.file("extdata", package = "rmorie"))) > 0 || requireNamespace("rmoriedata", quietly = TRUE)
 #' b01 <- morie_sample("otis_b01")
 #' head(b01)
 morie_sample <- function(name = c("otis_b01", "otis_b09", "otis_c11", "tps_assault")) {

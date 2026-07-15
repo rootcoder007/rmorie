@@ -44,5 +44,7 @@ Wraps \code{gbm::gbm} when available, otherwise falls back to
 \code{xgboost} as a portable boosted-trees backend.
 }
 \examples{
+\dontshow{if (requireNamespace("gbm", quietly = TRUE) || requireNamespace("xgboost", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 morie_gradient_boosting_ensemble(x = rnorm(50), y = rnorm(50))
+\dontshow{\}) # examplesIf}
 }
