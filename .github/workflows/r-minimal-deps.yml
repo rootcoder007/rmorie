@@ -79,20 +79,23 @@ jobs:
           if-no-files-found: ignore
 
   # Debian portability leg. The ubuntu cells do NOT prove Debian: different
-  # glibc/toolchain snapshots and different P3M binary streams. rocker/r-ver
-  # is Debian bookworm with R pinned; P3M ships bookworm binaries, so this
-  # stays fast. Same bare-install contract as the ubuntu minimal job.
+  # glibc/toolchain snapshots and different P3M binary streams. rocker/r-ver turned out to be
+  # UBUNTU-based (found 2026-07-15) — this job now runs true Debian
+  # bookworm with R from CRAN's apt repo; P3M bookworm binaries match. Same bare-install contract as the ubuntu minimal job.
   debian:
     runs-on: ubuntu-latest
-    container: rocker/r-ver:4.5.1
+    container: r-base:4.5.1
     timeout-minutes: 90
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
-      - name: System libraries + toolchain
-        run: apt-get update -qq && apt-get install -y --no-install-recommends build-essential libcurl4-openssl-dev
+      - name: Debian toolchain
+        run: |
+          export DEBIAN_FRONTEND=noninteractive
+          apt-get update -qq
+          apt-get install -y -qq build-essential libcurl4-openssl-dev libssl-dev libxml2-dev
       - name: Install hard dependencies + test tooling (no Suggests)
         run: |
           options(HTTPUserAgent = sprintf(

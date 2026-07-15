@@ -693,7 +693,7 @@ morie_datasets_nyc_nypd_boro_crosswalk <- function() {
 #'   `FALSE`, fetches via SODA2.
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `schooldist`, `shape_leng`, `shape_area`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_nyc_school_districts(offline = TRUE)
 #' nrow(df)  # 33
 #' @export
@@ -1058,7 +1058,7 @@ morie_parse_nypd_law_code <- function(law_code) {
 #'   join. Default joins both.
 #' @return A wide `data.frame`: NYPD columns first, then prefixed
 #'   resolver columns.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_nyc_nypd_resolved("nypd_arrests_ytd",
 #'                                          offline = TRUE)
 #' names(df)

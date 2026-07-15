@@ -79,7 +79,9 @@ Resolver columns prefixed \verb{boro_*} + \verb{precinct_*} to avoid
 collisions. Left-join semantics (row count preserved).
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_nyc_nypd_resolved("nypd_arrests_ytd",
                                          offline = TRUE)
 names(df)
+\dontshow{\}) # examplesIf}
 }
