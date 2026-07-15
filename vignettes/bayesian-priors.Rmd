@@ -1,0 +1,40 @@
+---
+title: "Specifying priors for Bayesian regression"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Specifying priors for Bayesian regression}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE)
+```
+
+## General principle
+
+`morie_bayes_lm()` fits a Bayesian linear regression by MCMC. Each
+regression coefficient is given an independent zero-mean Normal prior
+whose standard deviation is the `prior_sd` hyperparameter. The prior
+encodes how large the coefficients are expected to be *before* seeing
+the data: a large `prior_sd` is weakly informative, a small one shrinks
+estimates toward zero.
+
+## Applied example
+
+```{r}
+library(rmorie)
+d <- data.frame(x = rnorm(100))
+d$y <- 1 + 2 * d$x + rnorm(100)
+
+# weakly informative
+fit <- morie_bayes_lm(y ~ x, d, prior_sd = 10, chains = 2, iter = 1000)
+print(fit)
+
+# a per-coefficient prior vector is also accepted
+fit2 <- morie_bayes_lm(y ~ x, d, prior_sd = c(5, 1))
+```
+
+Tighter priors (small `prior_sd`) regularise the fit; inspect
+convergence with `morie_bayes_diagnostics(fit)` and the posterior with
+`morie_bayes_plot(fit)`.

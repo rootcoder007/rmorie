@@ -165,6 +165,8 @@ NULL
 # Shared factory
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Morie Nyc Nypd Dispatch
+#' @noRd
 .morie_nyc_nypd_dispatch <- function(dataset_key, year, max_features,
                                        offline, resource_id,
                                        mode = c("soda2", "soda3"),
@@ -662,6 +664,8 @@ morie_datasets_nyc_nypd_boro_crosswalk <- function() {
 # NYC multi-boundary loaders (3CCC2)
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Morie Nyc Boundary Fixture
+#' @noRd
 .morie_nyc_boundary_fixture <- function(fname, expected_rows = NULL) {
   path <- system.file("extdata", fname, package = "rmorie")
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
@@ -784,6 +788,8 @@ morie_datasets_nyc_ntas_2020 <- function(offline = TRUE,
   df
 }
 
+#' Internal helper: Morie Nyc Zcta Fixture
+#' @noRd
 .morie_nyc_zcta_fixture <- function(fname, expected_rows = 221L) {
   path <- system.file("extdata", fname, package = "rmorie")
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {

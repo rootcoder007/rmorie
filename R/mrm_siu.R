@@ -29,6 +29,8 @@
 NULL
 
 
+#' Internal helper: Parse Iso
+#' @noRd
 .parse_iso <- function(x) suppressWarnings(as.Date(x, format = "%Y-%m-%d"))
 
 

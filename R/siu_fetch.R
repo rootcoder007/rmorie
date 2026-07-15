@@ -74,6 +74,8 @@ morie_siu_cache_path <- function(cache_dir = file.path(tempdir(), "morie", "siu"
 
 # Internal: polite HTTP GET via httr2. Gated on the httr2 namespace so
 # the package's base footprint stays light.
+#' Internal helper: Siu Fetch Http Get
+#' @noRd
 .siu_fetch_http_get <- function(url, timeout_s = 60L) {
   if (!requireNamespace("httr2", quietly = TRUE)) {
     stop(
@@ -99,6 +101,8 @@ morie_siu_cache_path <- function(cache_dir = file.path(tempdir(), "morie", "siu"
 # using a tag-aware xml2/rvest pass when available, falling back to a
 # regex sweep that matches the Python implementation. Returns a
 # character matrix with columns "case_number" and "url".
+#' Internal helper: Siu Fetch Extract Links
+#' @noRd
 .siu_fetch_extract_links <- function(index_html, base_url) {
   # The SIU index is a table of <tr class="dr-item" id="DRID"> rows; each
   # row carries the case number in a <nobr> (e.g. "26-OCI-168") and a
@@ -156,6 +160,8 @@ morie_siu_cache_path <- function(cache_dir = file.path(tempdir(), "morie", "siu"
 
 
 # Internal: resolve a relative URL against the SIU index base.
+#' Internal helper: Siu Fetch Resolve Url
+#' @noRd
 .siu_fetch_resolve_url <- function(rel, base_url) {
   vapply(rel, function(r) {
     if (grepl("^https?://", r, ignore.case = TRUE)) return(r)
@@ -170,6 +176,8 @@ morie_siu_cache_path <- function(cache_dir = file.path(tempdir(), "morie", "siu"
 
 # Internal: convert a "Month D, YYYY" string into ISO YYYY-MM-DD.
 # Returns "" on any failure.
+#' Internal helper: Siu Fetch To Iso
+#' @noRd
 .siu_fetch_to_iso <- function(date_str) {
   if (!nzchar(date_str)) return("")
   parsed <- suppressWarnings(
@@ -188,6 +196,8 @@ morie_siu_cache_path <- function(cache_dir = file.path(tempdir(), "morie", "siu"
 # implemented here -- it belongs in the C++ parser
 # (`morie_fetch_siu`). Users who need the 64-column schema should
 # call the compiled harvester instead.
+#' Internal helper: Siu Fetch Parse Case Page
+#' @noRd
 .siu_fetch_parse_case_page <- function(html, case_number, url) {
   rec <- list(
     case_number = case_number,

@@ -4,6 +4,8 @@
 # Extracted from the sglm() optimiser closure so the non-positive-
 # -definite-covariance guard is directly unit-testable. `D` is the
 # distance matrix, `n` the sample size, `X`/`y` the design and response.
+#' Internal helper: Sglm Negll
+#' @noRd
 .sglm_negll <- function(log_phi, D, n, X, y) {
   phi <- exp(log_phi)
   R <- exp(-D / phi) + 1e-8 * diag(n)

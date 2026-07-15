@@ -42,6 +42,8 @@ NULL
 # Helpers
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Lan Gp Result
+#' @noRd
 .lan_gp_result <- function(year, n_tracts, rho, moran_i_ols,
                             decompositions, gent_distribution,
                             sensitivity_thresholds = list(),
@@ -84,6 +86,8 @@ NULL
 `%||%` <- function(a, b) if (is.null(a)) b else a
 
 
+#' Internal helper: Lan Gp Placeholder W
+#' @noRd
 .lan_gp_placeholder_W <- function(crime_arr, k = 4L) {
   n <- length(crime_arr)
   if (n < 2L) return(matrix(0, n, n))
@@ -101,6 +105,8 @@ NULL
 }
 
 
+#' Internal helper: Lan Gp Morans I
+#' @noRd
 .lan_gp_morans_i <- function(resid, W) {
   n <- length(resid)
   if (n < 2L || !all(dim(W) == n)) return(NA_real_)
@@ -115,6 +121,8 @@ NULL
 # Gentrification panel — baseline-conditional 3-level factor
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Lan Gent Panel
+#' @noRd
 .lan_gent_panel <- function(baseline_frame, baseline_income_col,
                              baseline_rent_col, growth_college_col,
                              growth_rent_col,
@@ -163,6 +171,8 @@ NULL
 #   indirect = mean(rowSums(M) - diag(M))
 #   total    = mean(rowSums(M))
 
+#' Internal helper: Lan Sdm Decompose
+#' @noRd
 .lan_sdm_decompose <- function(rho, beta_direct, beta_spatial, W,
                                 coefficient_names) {
   if (exists("morie_spatial_spillover_decomposition",

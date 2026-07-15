@@ -2,6 +2,8 @@
 
 # Internal: smoothed maximum-score loss. Extracted from the hrzb2()
 # optimiser closure so the zero-norm guard is directly unit-testable.
+#' Internal helper: Hrzb2 Loss
+#' @noRd
 .hrzb2_loss <- function(b, X, ys, h) {
   nb <- sqrt(sum(b^2))
   if (nb < 1e-12) {

@@ -9,6 +9,8 @@
 # to a session-scoped tempdir() location; users who want persistent
 # keys set MORIE_KEYSTORE_PATH (or pass path = ... explicitly to the
 # keystore_create / load / store / wipe functions).
+#' Internal helper: Morie Keystore Default Path
+#' @noRd
 .morie_keystore_default_path <- function() {
   override <- Sys.getenv("MORIE_KEYSTORE_PATH", "")
   if (nzchar(override)) {
@@ -23,6 +25,8 @@
 .MORIE_SCRYPT_DK <- 32L
 .MORIE_SODIUM_NONCE_LEN <- 24L
 
+#' Internal helper: Morie Keystore Require
+#' @noRd
 .morie_keystore_require <- function() {
   if (!requireNamespace("sodium", quietly = TRUE)) {
     stop("morie_crypto requires sodium; install.packages('sodium')",
@@ -34,10 +38,14 @@
   }
 }
 
+#' Internal helper: Morie Resolve Path
+#' @noRd
 .morie_resolve_path <- function(path) {
   normalizePath(path.expand(path), mustWork = FALSE)
 }
 
+#' Internal helper: Morie Derive Key
+#' @noRd
 .morie_derive_key <- function(password, salt) {
   .morie_keystore_require()
   if (!is.raw(salt)) stop("salt must be a raw vector", call. = FALSE)
@@ -58,6 +66,8 @@
   )
 }
 
+#' Internal helper: Morie Hex To Raw
+#' @noRd
 .morie_hex_to_raw <- function(h) {
   if (!is.character(h) || length(h) != 1L) {
     stop("expected single hex string", call. = FALSE)
@@ -70,11 +80,15 @@
   as.raw(strtoi(pairs, 16L))
 }
 
+#' Internal helper: Morie Raw To Hex
+#' @noRd
 .morie_raw_to_hex <- function(r) {
   if (!is.raw(r)) stop("expected raw vector", call. = FALSE)
   paste(format(r), collapse = "")
 }
 
+#' Internal helper: Morie Read Store
+#' @noRd
 .morie_read_store <- function(path) {
   .morie_keystore_require()
   p <- .morie_resolve_path(path)
@@ -84,6 +98,8 @@
   jsonlite::fromJSON(p, simplifyVector = FALSE)
 }
 
+#' Internal helper: Morie Write Store
+#' @noRd
 .morie_write_store <- function(data, path) {
   .morie_keystore_require()
   p <- .morie_resolve_path(path)

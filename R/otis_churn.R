@@ -50,6 +50,8 @@ NULL
 # Result constructor shared with otis.R (.otis_result lives there but
 # we define a thin alias here to avoid load-order coupling). We name it
 # `.churn_result` so it can co-exist if file load order changes.
+#' Internal helper: Churn Result
+#' @noRd
 .churn_result <- function(title,
                            summary_lines = list(),
                            tables = list(),
@@ -74,6 +76,8 @@ NULL
 #   "2 placements"         -> 2
 #   "6 to 10 placements"   -> 8 (midpoint)
 #   "Greater than 40"      -> 50 (boundary + 10)
+#' Internal helper: Churn Parse Placement Bin
+#' @noRd
 .churn_parse_placement_bin <- function(label) {
   s <- tolower(trimws(as.character(label)))
   if (grepl("greater than", s)) {
@@ -91,6 +95,8 @@ NULL
 
 
 # Yes/No/T/F/1/0 -> integer 0/1
+#' Internal helper: Churn Yn
+#' @noRd
 .churn_yn <- function(s) {
   if (is.logical(s)) return(as.integer(s))
   if (is.numeric(s)) {
@@ -104,6 +110,8 @@ NULL
 
 # chi-square + Cramer's V on a 2x2-or-larger crosstab. Returns list
 # (chi2, p, v) with NA entries when the table is too sparse.
+#' Internal helper: Churn Chi2 V
+#' @noRd
 .churn_chi2_v <- function(tbl, min_cell = 5L) {
   if (any(dim(tbl) < 2L)) {
     return(list(chi2 = NA_real_, p = NA_real_, v = NA_real_))

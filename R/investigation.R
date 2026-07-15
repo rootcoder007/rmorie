@@ -198,6 +198,8 @@ morie_run_treatment_effects_analysis <- function(data, treatment, outcome,
 }
 
 # Internal: fit a logistic propensity model and clip to [0.01, 0.99].
+#' Internal helper: Morie Fit Propensity
+#' @noRd
 .morie_fit_propensity <- function(data, treatment, covariates) {
   fml <- stats::as.formula(paste(treatment, "~",
                                   paste(covariates, collapse = " + ")))

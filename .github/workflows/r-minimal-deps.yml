@@ -1,0 +1,50 @@
+# Runs the test suite with ONLY hard dependencies (Depends/Imports/
+# LinkingTo) installed — the exact environment of a user who ran
+# install.packages("rmorie") and nothing else. Every optional-package
+# test must skip, not error; this job makes that a permanent guarantee
+# instead of a one-time audit fix.
+name: r-minimal-deps
+
+on:
+  workflow_call: {}
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  minimal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: r-lib/actions/setup-r@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
+        with:
+          use-public-rspm: true
+          extra-repositories: |
+            https://rootcoder007.r-universe.dev
+      - uses: r-lib/actions/setup-r-dependencies@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
+        with:
+          # hard = Depends/Imports/LinkingTo only; NO Suggests.
+          dependencies: '"hard"'
+          extra-packages: |
+            any::testthat
+            any::pkgload
+            any::rmoriebricklayer
+      - name: Run tests without any Suggests packages
+        run: |
+          pkgload::load_all(quiet = TRUE)
+          res <- testthat::test_dir("tests/testthat",
+                                    stop_on_failure = FALSE,
+                                    reporter = "summary")
+          d <- as.data.frame(res)
+          cat(sprintf("\nfailed: %d errors: %d passed: %d skipped: %d\n",
+                      sum(d$failed), sum(d$error),
+                      sum(d$passed), sum(d$skipped)))
+          if (sum(d$failed) + sum(d$error) > 0) {
+            stop("Tests must SKIP, not fail, when Suggests are absent.")
+          }
+        shell: Rscript {0}

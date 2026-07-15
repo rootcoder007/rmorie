@@ -57,6 +57,8 @@
 NULL
 
 
+#' Internal helper: Req Survey
+#' @noRd
 .req_survey <- function() {
   morie_ensure_extras("survey")
 }

@@ -28,6 +28,8 @@
 NULL
 
 
+#' Internal helper: Haversine Km Lisa
+#' @noRd
 .haversine_km_lisa <- function(lat1, lon1, lat2, lon2) {
   R <- 6371
   rad <- pi / 180
@@ -38,6 +40,8 @@ NULL
 }
 
 
+#' Internal helper: Knn Weights Lisa
+#' @noRd
 .knn_weights_lisa <- function(lat, lon, k) {
   n <- length(lat)
   W <- matrix(0, n, n)

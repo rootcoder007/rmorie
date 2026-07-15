@@ -166,6 +166,9 @@ test_that(".siu_curl_version reports a libcurl build string", {
 })
 
 test_that(".siu_http_get / .siu_http_get_many fetch over the network", {
+  testthat::skip_on_cran()
+  testthat::skip_if(!nzchar(Sys.getenv("RMORIE_NETWORK_TESTS")),
+                    "live SIU tests are opt-in: set RMORIE_NETWORK_TESTS=1")
   testthat::skip_if_offline("www.siu.on.ca")
   one <- tryCatch(
     rmorie:::.siu_http_get(
@@ -199,6 +202,9 @@ test_that(".siu_http_get / .siu_http_get_many fetch over the network", {
 })
 
 test_that("morie_fetch_siu runs end-to-end, one row per case (network)", {
+  testthat::skip_on_cran()
+  testthat::skip_if(!nzchar(Sys.getenv("RMORIE_NETWORK_TESTS")),
+                    "live SIU tests are opt-in: set RMORIE_NETWORK_TESTS=1")
   testthat::skip_if_offline("www.siu.on.ca")
   out <- tryCatch(
     morie_fetch_siu(
@@ -227,6 +233,9 @@ test_that(".siu_http_get_many_with_status returns parallel slots", {
 })
 
 test_that(".siu_http_get_many rate-limit gate spaces requests (network)", {
+  testthat::skip_on_cran()
+  testthat::skip_if(!nzchar(Sys.getenv("RMORIE_NETWORK_TESTS")),
+                    "live SIU tests are opt-in: set RMORIE_NETWORK_TESTS=1")
   testthat::skip_if_offline("www.siu.on.ca")
   # Wall-clock timing assertion below is flaky on CI runners (coarse clock
   # resolution on Windows + variable network latency); skip on CI/CRAN. The

@@ -16,10 +16,14 @@ morie_validate_cpads_data <- function(data, strict = TRUE) {
   missing
 }
 
+#' Internal helper: Weighted Prop
+#' @noRd
 .weighted_prop <- function(x, w) {
   sum(x * w, na.rm = TRUE) / sum(w, na.rm = TRUE)
 }
 
+#' Internal helper: Ess
+#' @noRd
 .ess <- function(w) {
   (sum(w)^2) / sum(w^2)
 }

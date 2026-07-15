@@ -50,6 +50,8 @@ NULL
 # ---------------------------------------------------------------------------
 # .siu_p_has_rvest -- gate rvest/xml2 use (suggested, not required).
 # ---------------------------------------------------------------------------
+#' Internal helper: Siu P Has Rvest
+#' @noRd
 .siu_p_has_rvest <- function() {
   requireNamespace("rvest", quietly = TRUE) &&
     requireNamespace("xml2", quietly = TRUE)
@@ -61,6 +63,8 @@ NULL
 # Python BLANK_ROW; extra keys appearing only here are populated by
 # this parser specifically.
 # ---------------------------------------------------------------------------
+#' Internal helper: Siu P Blank Row
+#' @noRd
 .siu_p_blank_row <- function() {
   list(
     parser_version                       = .SIU_R_PARSER_VERSION,
@@ -105,6 +109,8 @@ NULL
 # ---------------------------------------------------------------------------
 # Stripped-text + body-slice primitives.
 # ---------------------------------------------------------------------------
+#' Internal helper: Siu P Stripped Text
+#' @noRd
 .siu_p_stripped_text <- function(html) {
   if (.siu_p_has_rvest()) {
     doc <- tryCatch(xml2::read_html(html), error = function(e) NULL)
@@ -140,6 +146,8 @@ NULL
 }
 
 
+#' Internal helper: Siu P Trim To Body
+#' @noRd
 .siu_p_trim_to_body <- function(text) {
   if (!is.character(text) || length(text) == 0L || !nzchar(text)) return(text)
   m <- tryCatch(gregexpr("(?:^|\\
@@ -168,6 +176,8 @@ NULL
 # ---------------------------------------------------------------------------
 # Label / value primitives.
 # ---------------------------------------------------------------------------
+#' Internal helper: Siu P Label Value
+#' @noRd
 .siu_p_label_value <- function(text, label) {
   pat <- paste0(.siu_p_re_escape(label),
                 "\\s*[:\\-]?\\s*(.{1,200}?)(?=\\
@@ -183,6 +193,8 @@ NULL
   if (!nzchar(val)) NULL else val
 }
 
+#' Internal helper: Siu P Label Int
+#' @noRd
 .siu_p_label_int <- function(text, label) {
   raw <- .siu_p_label_value(text, label)
   if (is.null(raw)) return(NA_integer_)
@@ -190,6 +202,8 @@ NULL
   if (length(m) == 0L) NA_integer_ else as.integer(m)
 }
 
+#' Internal helper: Siu P Re Escape
+#' @noRd
 .siu_p_re_escape <- function(s) {
   gsub("([\\\\.^$|()\\[\\]{}*+?])", "\\\\\\1", s, perl = TRUE)
 }
@@ -199,6 +213,8 @@ NULL
 # Section slicer -- pulls text between `header` and the first
 # end-marker. Pure-R equivalent of _section_text.
 # ---------------------------------------------------------------------------
+#' Internal helper: Siu P Section Text
+#' @noRd
 .siu_p_section_text <- function(text, header, end_markers = character()) {
   pat <- paste0("(?:^|\\
 )\\s*",
@@ -297,6 +313,8 @@ NULL
 )
 
 
+#' Internal helper: Siu P Detect Police Service
+#' @noRd
 .siu_p_detect_police_service <- function(text) {
   if (!is.character(text) || length(text) == 0L ||
       is.na(text[1L]) || !nzchar(text)) return(NA_character_)
@@ -367,6 +385,8 @@ NULL
   "Analysis and Director's Decision"
 )
 
+#' Internal helper: Siu P Detect Language
+#' @noRd
 .siu_p_detect_language <- function(text) {
   # Crude ASCII fold for matching FR markers without accents
   norm <- iconv(text, to = "ASCII//TRANSLIT")
@@ -386,6 +406,8 @@ NULL
 # ---------------------------------------------------------------------------
 # URL helpers (drid / nrid extractors).
 # ---------------------------------------------------------------------------
+#' Internal helper: Siu P Parse Drid From Url
+#' @noRd
 .siu_p_parse_drid_from_url <- function(url) {
   if (is.null(url) || !nzchar(url)) return(NA_integer_)
   m <- regmatches(url, regexpr("drid=(\\d+)", url, perl = TRUE))
@@ -393,6 +415,8 @@ NULL
   as.integer(sub("drid=", "", m))
 }
 
+#' Internal helper: Siu P Parse Nrid From Url
+#' @noRd
 .siu_p_parse_nrid_from_url <- function(url) {
   if (is.null(url) || !nzchar(url)) return(NA_integer_)
   m <- regmatches(url, regexpr("nrid=(\\d+)", url, perl = TRUE))
@@ -404,6 +428,8 @@ NULL
 # ---------------------------------------------------------------------------
 # Normalisation helpers (mirror morie.siu._normalize).
 # ---------------------------------------------------------------------------
+#' Internal helper: Siu P Normalise Sex
+#' @noRd
 .siu_p_normalise_sex <- function(s) {
   if (is.null(s) || is.na(s) || !nzchar(s)) return(NA_character_)
   low <- tolower(trimws(s))
@@ -413,6 +439,8 @@ NULL
   s
 }
 
+#' Internal helper: Siu P Normalise Yes No
+#' @noRd
 .siu_p_normalise_yes_no <- function(v) {
   if (is.null(v) || is.na(v) || !nzchar(v)) return(NA)
   low <- tolower(trimws(v))
@@ -421,6 +449,8 @@ NULL
   NA
 }
 
+#' Internal helper: Siu P Parse Date
+#' @noRd
 .siu_p_parse_date <- function(raw) {
   if (is.null(raw) || is.na(raw) || !nzchar(raw)) {
     return(list(iso = NA_character_, raw = NA_character_))
@@ -435,6 +465,8 @@ NULL
        raw = raw)
 }
 
+#' Internal helper: Siu P Find Case Number
+#' @noRd
 .siu_p_find_case_number <- function(text) {
   # SIU case numbers: 2 digits, optional hyphen, 3-4 letters, hyphen,
   # 3 digits.
@@ -458,6 +490,8 @@ NULL
 )
 
 
+#' Internal helper: Siu P Extract Narrative Full
+#' @noRd
 .siu_p_extract_narrative_full <- function(html, text) {
   if (.siu_p_has_rvest()) {
     doc <- tryCatch(xml2::read_html(html), error = function(e) NULL)
@@ -491,6 +525,8 @@ NULL
 }
 
 
+#' Internal helper: Siu P Extract Summary
+#' @noRd
 .siu_p_extract_summary <- function(text) {
   paras <- strsplit(text, "\
 \
@@ -512,6 +548,8 @@ NULL
 )
 
 
+#' Internal helper: Siu P Scan Mh Race
+#' @noRd
 .siu_p_scan_mh_race <- function(narrative) {
   if (is.null(narrative) || is.na(narrative) ||
       !nzchar(narrative)) return("")
@@ -526,6 +564,8 @@ NULL
 }
 
 
+#' Internal helper: Siu P Find News Release Link
+#' @noRd
 .siu_p_find_news_release_link <- function(html, source_url) {
   if (.siu_p_has_rvest()) {
     doc <- tryCatch(xml2::read_html(html), error = function(e) NULL)

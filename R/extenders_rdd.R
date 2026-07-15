@@ -46,6 +46,8 @@ NULL
 # Internal helper
 # ---------------------------------------------------------------------
 
+#' Internal helper: Morie Rdd Need
+#' @noRd
 .morie_rdd_need <- function(pkg, fn) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
     stop(

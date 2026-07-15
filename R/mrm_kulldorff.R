@@ -28,6 +28,8 @@
 NULL
 
 
+#' Internal helper: Haversine Km Mat
+#' @noRd
 .haversine_km_mat <- function(lat1, lon1, lat2, lon2) {
   R <- 6371
   rad <- pi / 180
@@ -38,6 +40,8 @@ NULL
 }
 
 
+#' Internal helper: Poisson Lrt
+#' @noRd
 .poisson_lrt <- function(n_obs, n_in, n_exp, n_tot) {
   if (n_in == 0 || n_obs == 0 || n_obs <= n_exp) {
     return(0.0)

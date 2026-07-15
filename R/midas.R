@@ -4,6 +4,8 @@
 # morie_midas_regression() optimiser closure so the theta-domain guard and the
 # non-finite-SSE guard are directly unit-testable. `X` is the lag-matrix,
 # `Y` the target, `K` the number of high-frequency lags.
+#' Internal helper: Midas Sse
+#' @noRd
 .midas_sse <- function(p, X, Y, K) {
   b0 <- p[1]
   b1 <- p[2]

@@ -19,8 +19,7 @@
 #
 # Public R names mirror the Python module under the `morie_rdd_*` prefix.
 
-#' @importFrom stats lm coef vcov pnorm pt pf pchisq qnorm qt sd var
-#'   model.matrix predict quantile complete.cases approx
+#' @importFrom stats lm coef vcov pnorm pt pf pchisq qnorm qt sd var model.matrix predict quantile complete.cases approx
 NULL
 
 
@@ -142,6 +141,8 @@ morie_rdd_kernel_gaussian <- function(u) stats::dnorm(u)
   gaussian     = morie_rdd_kernel_gaussian
 )
 
+#' Internal helper: Morie Rdd Get Kernel
+#' @noRd
 .morie_rdd_get_kernel <- function(name) {
   fn <- .morie_rdd_kernels[[name]]
   if (is.null(fn))
@@ -150,7 +151,11 @@ morie_rdd_kernel_gaussian <- function(u) stats::dnorm(u)
   fn
 }
 
+#' Internal helper: Morie Rdd Have Rdrobust
+#' @noRd
 .morie_rdd_have_rdrobust  <- function() requireNamespace("rdrobust",  quietly = TRUE)
+#' Internal helper: Morie Rdd Have Rddensity
+#' @noRd
 .morie_rdd_have_rddensity <- function() requireNamespace("rddensity", quietly = TRUE)
 
 
@@ -211,6 +216,8 @@ morie_rdd_local_polynomial <- function(x, y, eval_points, h, p = 1,
 # Bandwidth selectors
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Morie Rdd Bw Result
+#' @noRd
 .morie_rdd_bw_result <- function(h, method, details = list())
   list(bandwidth = as.numeric(h), method = method, details = details)
 
@@ -267,6 +274,8 @@ morie_rdd_bandwidth_cct <- function(x, y, cutoff = 0,
 # Sharp / fuzzy / bias-corrected RDD
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Morie Rdd Result
+#' @noRd
 .morie_rdd_result <- function(estimate, se, n, method, alpha = 0.05,
                               details = list()) {
   t   <- estimate / se

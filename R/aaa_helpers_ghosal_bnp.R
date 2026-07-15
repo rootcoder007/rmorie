@@ -6,12 +6,18 @@
 #' @name ghosal_bnp_helpers
 NULL
 
+#' Internal helper: Gh Have
+#' @noRd
 .gh_have <- function(pkg) requireNamespace(pkg, quietly = TRUE)
 
+#' Internal helper: Gh Pairwise Sq
+#' @noRd
 .gh_pairwise_sq <- function(a, b = a) {
   outer(rowSums(a^2), rowSums(b^2), "+") - 2 * a %*% t(b)
 }
 
+#' Internal helper: Gh Bernstein
+#' @noRd
 .gh_bernstein <- function(u, K) {
   u <- pmin(pmax(u, 1e-12), 1 - 1e-12)
   B <- matrix(0, nrow = length(u), ncol = K)
@@ -21,6 +27,8 @@ NULL
   B
 }
 
+#' Internal helper: Gh Surv Post
+#' @noRd
 .gh_surv_post <- function(t, ev, c, lam0) {
   t <- as.numeric(t)
   n <- length(t)
@@ -38,6 +46,8 @@ NULL
   list(times = uniq, S = S, H = cumsum(dHp), dH = dHp, lam0 = lam0)
 }
 
+#' Internal helper: Gh Haar Dwt
+#' @noRd
 .gh_haar_dwt <- function(y) {
   L <- 1L
   while (L < length(y)) L <- 2L * L

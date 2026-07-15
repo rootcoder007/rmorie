@@ -24,6 +24,11 @@ NULL
 #' df <- data.frame(x = 1:100)
 #' srs_sample <- morie_simple_random_sample(df, 20)
 morie_simple_random_sample <- function(df, n, replace = FALSE, seed = 42L) {
+  if (!is.data.frame(df)) {
+    stop("`df` must be a data.frame -- got a ", class(df)[1],
+         ". Wrap a vector with data.frame(x = your_vector) first.",
+         call. = FALSE)
+  }
   set.seed(seed)
   N <- nrow(df)
   if (n > N && !replace) stop("n exceeds population size for SRS WOR.")
@@ -55,6 +60,11 @@ morie_simple_random_sample <- function(df, n, replace = FALSE, seed = 42L) {
 #' morie_stratified_sample(df, "g", n_per_stratum = 10)
 morie_stratified_sample <- function(df, strata_col, n_per_stratum,
                                     proportional = FALSE, seed = 42L) {
+  if (!is.data.frame(df)) {
+    stop("`df` must be a data.frame -- got a ", class(df)[1],
+         ". Wrap a vector with data.frame(x = your_vector) first.",
+         call. = FALSE)
+  }
   set.seed(seed)
   strata <- split(seq_len(nrow(df)), df[[strata_col]])
   strata_sizes <- lengths(strata)
@@ -111,6 +121,11 @@ morie_stratified_sample <- function(df, strata_col, n_per_stratum,
 #' #   vignette(package = "rmorie")
 #' @export
 morie_cluster_sample <- function(df, cluster_col, n_clusters, seed = 42L) {
+  if (!is.data.frame(df)) {
+    stop("`df` must be a data.frame -- got a ", class(df)[1],
+         ". Wrap a vector with data.frame(x = your_vector) first.",
+         call. = FALSE)
+  }
   set.seed(seed)
   all_clusters <- unique(df[[cluster_col]])
   N_clusters <- length(all_clusters)
@@ -140,6 +155,11 @@ morie_cluster_sample <- function(df, cluster_col, n_clusters, seed = 42L) {
 #' @export
 morie_pps_sample <- function(df, size_col, n, seed = 42L,
                               replace = FALSE) {
+  if (!is.data.frame(df)) {
+    stop("`df` must be a data.frame -- got a ", class(df)[1],
+         ". Wrap a vector with data.frame(x = your_vector) first.",
+         call. = FALSE)
+  }
   # Python sampling.py:pps_sample uses replace=False (PPS-WoR via
   # Madow systematic-like). Default switched to FALSE 2026-05-22 to
   # match. Pass replace=TRUE for legacy Hansen-Hurwitz with-replacement.
@@ -176,6 +196,11 @@ morie_pps_sample <- function(df, size_col, n, seed = 42L,
 #' df <- data.frame(x = rnorm(100))
 #' morie_bootstrap_sample(df, statistic = function(d) mean(d$x))
 morie_bootstrap_sample <- function(df, statistic, n_bootstrap = 1000L, seed = 42L) {
+  if (!is.data.frame(df)) {
+    stop("`df` must be a data.frame -- got a ", class(df)[1],
+         ". Wrap a vector with data.frame(x = your_vector) first.",
+         call. = FALSE)
+  }
   set.seed(seed)
   n <- nrow(df)
   boot_stats <- vapply(seq_len(n_bootstrap), function(i) {
@@ -209,6 +234,11 @@ morie_bootstrap_sample <- function(df, statistic, n_bootstrap = 1000L, seed = 42
 #' #   vignette(package = "rmorie")
 #' @export
 morie_jackknife_estimate <- function(df, statistic) {
+  if (!is.data.frame(df)) {
+    stop("`df` must be a data.frame -- got a ", class(df)[1],
+         ". Wrap a vector with data.frame(x = your_vector) first.",
+         call. = FALSE)
+  }
   n <- nrow(df)
   theta_full <- statistic(df)
   theta_minus_i <- vapply(seq_len(n), function(i) {
@@ -257,6 +287,11 @@ morie_design_effect <- function(weights) {
 #' #   vignette(package = "rmorie")
 #' @export
 morie_compute_design_weights <- function(df, strata_col, population_sizes) {
+  if (!is.data.frame(df)) {
+    stop("`df` must be a data.frame -- got a ", class(df)[1],
+         ". Wrap a vector with data.frame(x = your_vector) first.",
+         call. = FALSE)
+  }
   strata <- df[[strata_col]]
   sample_sizes <- table(strata)
   pop_sizes <- population_sizes[names(sample_sizes)]
@@ -297,6 +332,11 @@ morie_compute_design_weights <- function(df, strata_col, population_sizes) {
 morie_calibration_weights <- function(df, aux_vars, population_totals,
                                 initial_weights = NULL,
                                 max_iter = 50L, tol = 1e-6) {
+  if (!is.data.frame(df)) {
+    stop("`df` must be a data.frame -- got a ", class(df)[1],
+         ". Wrap a vector with data.frame(x = your_vector) first.",
+         call. = FALSE)
+  }
   n <- nrow(df)
   w <- if (!is.null(initial_weights)) initial_weights else rep(1, n)
 

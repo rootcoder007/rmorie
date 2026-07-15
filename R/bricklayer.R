@@ -108,6 +108,7 @@ morie_bricklayer <- function(yes = FALSE, check = FALSE) {
   }
 
   cat("-> installing Python morie ...\n")
+  .morie_ensure_exec_allowed("pip install of Python morie")
   rc <- system2(py, c("-m", "pip", "install", "--upgrade", "morie"))
   if (rc != 0L) {
     cat("Python morie install failed (see output above).\n")

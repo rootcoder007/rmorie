@@ -41,6 +41,8 @@ NULL
 # Internal helpers
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Otis Tps Toronto Seg By Year
+#' @noRd
 .otis_tps_toronto_seg_by_year <- function(df_b01) {
   stopifnot(is.data.frame(df_b01))
   if (!("EndFiscalYear" %in% names(df_b01))) {
@@ -61,6 +63,8 @@ NULL
   out
 }
 
+#' Internal helper: Otis Tps Incidents By Year
+#' @noRd
 .otis_tps_incidents_by_year <- function(df_tps) {
   stopifnot(is.data.frame(df_tps))
   yc <- if ("OCC_YEAR" %in% names(df_tps)) "OCC_YEAR" else
@@ -79,6 +83,8 @@ NULL
 # Wrap a list as a morie_otis_analysis_result (lazy reference to the
 # constructor defined in otis_all_analyze.R -- both files ship in the
 # same R/ collation order, so this resolves at package-load time).
+#' Internal helper: Otis Overlay Wrap
+#' @noRd
 .otis_overlay_wrap <- function(title, summary_lines,
                                 tables = list(),
                                 interpretation = "",

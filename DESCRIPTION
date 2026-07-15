@@ -1,7 +1,7 @@
 Package: rmorie
 Type: Package
 Title: Multi-Domain Open Research and Inferential Estimation
-Version: 1.1.0
+Version: 1.1.2
 Authors@R: c(
   person(
     given = "Vansh Singh",
@@ -32,8 +32,8 @@ Description: Multi-domain scientific computing toolkit for observational
 License: AGPL (>= 3)
 LazyData: true
 Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
+Roxygen: list(markdown = TRUE, roclets = c("namespace", "rd", "srr::srr_stats_roclet"))
+RoxygenNote: 8.0.0
 Depends:
   R (>= 4.3.0)
 Note: Tested on R 4.3.0, 4.4.x, 4.5.2, 4.5.3 (CRAN). Use CRAN R on Apple
@@ -161,6 +161,7 @@ Suggests:
   Rtsne,
   rugarch,
   rvest,
+  rstan,
   rstanarm,
   sandwich,
   seewave,
@@ -172,7 +173,9 @@ Suggests:
   smacof,
   smotefamily,
   sodium,
+  sp,
   spdep,
+  srr,
   stdReg,
   survey,
   survival,

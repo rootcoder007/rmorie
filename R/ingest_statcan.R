@@ -19,6 +19,8 @@
 # STATCAN_API_KEY env var when present.
 
 # Internal: read a CSV member out of a zip into a base data.frame.
+#' Internal helper: Morie Statcan Csv From Zip
+#' @noRd
 .morie_statcan_csv_from_zip <- function(zip_path,
                                         member = NULL,
                                         ...) {

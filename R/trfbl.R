@@ -53,12 +53,16 @@ morie_trfbl_transformer_block <- function(x, num_heads = 2L, d_ff = NULL,
   )
 }
 
+#' Internal helper: Trfbl Layer Norm
+#' @noRd
 .trfbl_layer_norm <- function(x, eps = 1e-5) {
   mu <- rowMeans(x)
   var <- apply(x, 1L, function(v) mean((v - mean(v))^2))
   sweep(sweep(x, 1L, mu, "-"), 1L, sqrt(var + eps), "/")
 }
 
+#' Internal helper: Trfbl Gelu
+#' @noRd
 .trfbl_gelu <- function(z) {
   0.5 * z * (1 + tanh(sqrt(2 / pi) * (z + 0.044715 * z^3)))
 }

@@ -54,6 +54,8 @@ NULL
 # Internal: result wrapper
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Arsau Wrap
+#' @noRd
 .arsau_wrap <- function(title, call, sub_results, data, sidecar,
                          year_or_range, kind, language, is_valid,
                          extra_interpretation = "") {

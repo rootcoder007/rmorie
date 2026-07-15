@@ -51,6 +51,8 @@ NULL
 # Internal helper
 # ---------------------------------------------------------------------
 
+#' Internal helper: Morie Nonparam Need
+#' @noRd
 .morie_nonparam_need <- function(pkg, fn) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
     stop(

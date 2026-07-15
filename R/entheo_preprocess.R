@@ -130,6 +130,8 @@ preprocess_fmri <- function(record,
 # Internal filter helpers
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Entheo Bandpass
+#' @noRd
 .entheo_bandpass <- function(x, sfreq, low, high, order = 4L) {
   if (requireNamespace("signal", quietly = TRUE)) {
     ny <- sfreq / 2
@@ -150,6 +152,8 @@ preprocess_fmri <- function(record,
   out
 }
 
+#' Internal helper: Entheo Notch
+#' @noRd
 .entheo_notch <- function(x, sfreq, freq, q = 30) {
   if (requireNamespace("signal", quietly = TRUE)) {
     bw <- freq / q
@@ -175,6 +179,8 @@ preprocess_fmri <- function(record,
   out
 }
 
+#' Internal helper: Entheo Asr Trim
+#' @noRd
 .entheo_asr_trim <- function(x, threshold) {
   mu <- rowMeans(x)
   sd <- apply(x, 1, stats::sd) + 1e-9

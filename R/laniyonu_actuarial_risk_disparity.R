@@ -62,6 +62,8 @@ NULL
 # Internal helpers
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Lan Ard Result
+#' @noRd
 .lan_ard_result <- function(title, call, interpretation = "",
                              warnings_ = character(0), ...) {
   out <- list(
@@ -76,6 +78,8 @@ NULL
 }
 
 
+#' Internal helper: Lan Threshold Logit
+#' @noRd
 .lan_threshold_logit <- function(yk, X) {
   # Binary logit at a single ordinal threshold (P(Y > k)).
   # Returns coefficients (with intercept), SEs, log-lik.
@@ -109,6 +113,8 @@ NULL
 }
 
 
+#' Internal helper: Lan Ord Levels To Int
+#' @noRd
 .lan_ord_levels_to_int <- function(y, levels_) {
   m <- match(as.character(y), levels_)
   if (any(is.na(m))) {
@@ -124,6 +130,8 @@ NULL
 # Stage 1 — threshold-specific ordinal logit
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Lan Run Ordinal
+#' @noRd
 .lan_run_ordinal <- function(df, outcome_col, race_cols, gender_col,
                               control_cols, ordinal_levels,
                               split_by_gender) {
@@ -308,6 +316,8 @@ NULL
 # Stage 2 — score-net-residual logit
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Lan Score Net Residual
+#' @noRd
 .lan_score_net_residual <- function(sub, score_col, outcome_col,
                                      race_cols, control_cols,
                                      bootstrap_replicates,
@@ -365,6 +375,8 @@ NULL
 }
 
 
+#' Internal helper: Lan Run Residual
+#' @noRd
 .lan_run_residual <- function(df, outcome, outcome_col, score_col,
                                race_cols, gender_col, control_cols,
                                split_by_gender, bootstrap_replicates,

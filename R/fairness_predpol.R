@@ -18,6 +18,8 @@
 NULL
 
 
+#' Internal helper: Predpol Result
+#' @noRd
 .predpol_result <- function(title, call, summary_lines = list(),
                              warnings = character(0),
                              interpretation = "", ...) {
@@ -29,11 +31,15 @@ NULL
   out
 }
 
+#' Internal helper: Predpol Ordered Unique
+#' @noRd
 .predpol_ordered_unique <- function(x) {
   x <- as.character(x)
   x[!duplicated(x)]
 }
 
+#' Internal helper: Predpol Mode
+#' @noRd
 .predpol_mode <- function(x) {
   tab <- table(x)
   names(tab)[which.max(tab)]

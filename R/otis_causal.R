@@ -62,6 +62,8 @@ NULL
 
 # Binarise a column: "Yes"/"No" character (case-insensitive) -> 1/0;
 # numeric NAs -> 0; integer -> as-integer. Mirrors python _binarise.
+#' Internal helper: Otis Binarise
+#' @noRd
 .otis_binarise <- function(s) {
   if (is.character(s) || is.factor(s)) {
     v <- tolower(trimws(as.character(s)))
@@ -75,6 +77,8 @@ NULL
 # Build a numeric design matrix (intercept + drop-first dummies) from a
 # data frame and a vector of covariate names. Mirrors python
 # _design_matrix.
+#' Internal helper: Otis Design Matrix
+#' @noRd
 .otis_design_matrix <- function(data, covariates) {
   sub <- data[, covariates, drop = FALSE]
   # Convert character/factor columns to factors with drop-first dummies
@@ -98,6 +102,8 @@ NULL
 }
 
 # Newton-Raphson logistic with ridge penalty.
+#' Internal helper: Otis Logit Fit
+#' @noRd
 .otis_logit_fit <- function(X, d, ridge = 1e-3, max_iter = 50L, tol = 1e-6) {
   n <- nrow(X)
   p <- ncol(X)
@@ -119,17 +125,23 @@ NULL
 }
 
 # Clip propensity away from 0/1.
+#' Internal helper: Otis Clip Ps
+#' @noRd
 .otis_clip_ps <- function(e, eps = 0.02) {
   pmin(pmax(e, eps), 1 - eps)
 }
 
 # Predict propensity from fitted beta on a (possibly new) X.
+#' Internal helper: Otis Predict Ps
+#' @noRd
 .otis_predict_ps <- function(X, beta, eps = 0.02) {
   eta <- pmin(pmax(as.numeric(X %*% beta), -30), 30)
   .otis_clip_ps(1 / (1 + exp(-eta)), eps = eps)
 }
 
 # Brier + log-loss + observed/predicted prevalence.
+#' Internal helper: Otis Propensity Diagnostics
+#' @noRd
 .otis_propensity_diagnostics <- function(p, d) {
   brier <- mean((p - d)^2)
   pc <- pmin(pmax(p, 1e-12), 1 - 1e-12)
@@ -141,6 +153,8 @@ NULL
 }
 
 # Liang-Zeger one-way cluster-robust SE for mean of a score vector.
+#' Internal helper: Otis Cluster Se
+#' @noRd
 .otis_cluster_se <- function(scores, cluster) {
   scores <- as.numeric(scores)
   n <- length(scores)
@@ -154,6 +168,8 @@ NULL
 }
 
 # Cameron-Gelbach-Miller multi-way cluster-robust SE (up to 2-way).
+#' Internal helper: Otis Multiway Cluster Se
+#' @noRd
 .otis_multiway_cluster_se <- function(scores, clusters) {
   if (length(clusters) == 1L) {
     return(.otis_cluster_se(scores, clusters[[1]]))
@@ -174,6 +190,8 @@ NULL
 }
 
 # CausalEstimate constructor (R analogue of the python dataclass).
+#' Internal helper: Otis Causal Estimate
+#' @noRd
 .otis_causal_estimate <- function(estimator, ate, ate_se, ate_pval,
                                   n, n_treated, p_treat, notes = list()) {
   z <- if (ate_se > 0) ate / ate_se else 0
@@ -705,6 +723,8 @@ morie_otis_classify_mandela_combo <- function(mh, sr, sw,
 
 # Aggregate per-(id, year) the count of distinct alert-combos and the
 # sum of within-row + across-row region-change indicators.
+#' Internal helper: Otis Alert Volatility Frame
+#' @noRd
 .otis_alert_volatility_frame <- function(df) {
   needed <- c("UniqueIndividual_ID", "EndFiscalYear", "Gender",
               "Age_Category", "Region_AtTimeOfPlacement",

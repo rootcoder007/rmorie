@@ -79,6 +79,7 @@ test_that("morie_ghosal_np_classification runs on binary y", {
 })
 
 test_that("morie_random_forest_ensemble regression path runs", {
+  testthat::skip_if_not_installed("randomForest")
   set.seed(1)
   x <- matrix(rnorm(200), 50, 4)
   y <- as.numeric(x %*% c(1, -1, 0.5, 0) + 0.3 * rnorm(50))
