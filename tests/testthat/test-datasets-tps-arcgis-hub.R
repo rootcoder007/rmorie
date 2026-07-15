@@ -7,6 +7,7 @@
 # ================================================== discovery helper
 
 test_that("morie_datasets_tps_arcgis_hub_layers(offline=TRUE) reads the bundled 71-row catalog", {
+  testthat::skip_if_not_installed("rmoriedata")
   cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
   expect_s3_class(cat, "data.frame")
   expect_equal(nrow(cat), 71L)
@@ -71,6 +72,7 @@ test_that("morie_datasets_tps_arcgis_hub_layers(offline=FALSE) hits the TPS Hub 
 # =================================================== hub-id resolver
 
 test_that(".morie_dataset_tps_hub_resolve(offline=TRUE) finds the FeatureServer URL in the catalog", {
+  testthat::skip_if_not_installed("rmoriedata")
   cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
   pic_id <- cat$hub_id[cat$title == "Persons in Crisis Calls for Service Attended Open Data"]
   resolved <- rmorie:::.morie_dataset_tps_hub_resolve(pic_id, offline = TRUE)
@@ -110,6 +112,7 @@ test_that(".morie_dataset_tps_hub_resolve(offline=FALSE) hits the ArcGIS Online 
 # =================================================== by-id loader: format = "json"
 
 test_that("morie_datasets_tps_arcgis_hub_by_id(format='json') hits FeatureServer /0/query?f=json + parses attributes", {
+  testthat::skip_if_not_installed("rmoriedata")
   testthat::local_mocked_bindings(
     .morie_dataset_http_json = function(url, query = NULL) {
       expect_match(url,
@@ -137,6 +140,7 @@ test_that("morie_datasets_tps_arcgis_hub_by_id(format='json') hits FeatureServer
 })
 
 test_that("morie_datasets_tps_arcgis_hub_by_id(format='json') returns empty frame on no features", {
+  testthat::skip_if_not_installed("rmoriedata")
   testthat::local_mocked_bindings(
     .morie_dataset_http_json = function(url, query = NULL) {
       list(features = list())
@@ -152,6 +156,7 @@ test_that("morie_datasets_tps_arcgis_hub_by_id(format='json') returns empty fram
 # =================================================== by-id loader: format = "geojson"
 
 test_that("morie_datasets_tps_arcgis_hub_by_id(format='geojson') hits FeatureServer with f=geojson + returns the raw list", {
+  testthat::skip_if_not_installed("rmoriedata")
   testthat::local_mocked_bindings(
     .morie_dataset_http_json = function(url, query = NULL) {
       expect_match(url, "/FeatureServer/0/query$")
@@ -172,6 +177,7 @@ test_that("morie_datasets_tps_arcgis_hub_by_id(format='geojson') hits FeatureSer
 # =================================================== by-id loader: format = "csv"
 
 test_that("morie_datasets_tps_arcgis_hub_by_id(format='csv') hits hub.arcgis.com downloads + parses CSV", {
+  testthat::skip_if_not_installed("rmoriedata")
   testthat::local_mocked_bindings(
     .morie_dataset_http_text = function(url, query = NULL) {
       expect_match(url,
@@ -218,6 +224,7 @@ test_that("morie_datasets_tps_arcgis_hub_download builds the correct format-spec
 # =================================================== dedupe with 3FF / 3EE
 
 test_that("Catalog covers known 3EE + 3FF-overlap datasets (verification: dedupe-by-title)", {
+  testthat::skip_if_not_installed("rmoriedata")
   cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
   # 3EE wrapped Mental Health Act Apprehensions (via FeatureServer URL):
   expect_true("Mental Health Act Apprehensions Open Data" %in% cat$title)

@@ -33,6 +33,7 @@ test_that("keyword filter matches dataset_key + id + loader", {
 })
 
 test_that("api_mode filter restricts to a protocol substring", {
+  testthat::skip_if_not_installed("rmoriedata")
   d <- morie_datasets_browse(api_mode = "soda3")
   # All matched rows must mention soda3.
   expect_true(all(grepl("soda3", d$api_modes)))
@@ -44,6 +45,7 @@ test_that("api_mode filter restricts to a protocol substring", {
 })
 
 test_that("api_mode filter accepts multi-protocol vector", {
+  testthat::skip_if_not_installed("rmoriedata")
   d <- morie_datasets_browse(api_mode = c("ckan", "statcan_wds"))
   # ckan matches ontario_ckan + montreal_opendata + toronto_opendata;
   # statcan_wds matches statcan_ccjs. (Calgary + Edmonton are soda*,
@@ -78,6 +80,7 @@ test_that("invalid sort_by raises", {
 })
 
 test_that("morie_datasets_summary() returns one row per portal", {
+  testthat::skip_if_not_installed("rmoriedata")
   s <- morie_datasets_summary()
   expect_s3_class(s, "data.frame")
   expect_setequal(names(s),

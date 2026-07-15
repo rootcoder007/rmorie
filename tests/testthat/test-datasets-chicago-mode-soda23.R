@@ -174,6 +174,7 @@ test_that("chicago_arrests(year=N) emits date_extract_y filter in BOTH modes", {
 # ====================================== offline mode unchanged
 
 test_that("offline=TRUE is unaffected by mode arg (mode is live-only)", {
+  testthat::skip_if_not_installed("rmoriedata")
   for (w in .chicago_wrappers) {
     df_s2 <- suppressWarnings(eval(w$fn)(offline = TRUE, mode = "soda2"))
     df_s3 <- suppressWarnings(eval(w$fn)(offline = TRUE, mode = "soda3"))

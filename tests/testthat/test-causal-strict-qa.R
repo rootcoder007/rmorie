@@ -242,6 +242,7 @@ test_that("morie_otis_irm_dml recovers tau (n=1500, 3-fold)", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_matching_nearest_neighbor returns pairs that recover tau", {
+  testthat::skip_if_not_installed("MatchIt")
   d <- make_ipw_dgp(n = 1000L, tau = 2.5, seed = 61L)
   res <- morie_matching_nearest_neighbor(d, "d", c("x1", "x2", "x3"))
   expect_true(is.list(res))
@@ -253,6 +254,7 @@ test_that("morie_matching_nearest_neighbor returns pairs that recover tau", {
 })
 
 test_that("morie_matching_mahalanobis recovers tau", {
+  testthat::skip_if_not_installed("MatchIt")
   d <- make_ipw_dgp(n = 1000L, tau = 2.5, seed = 62L)
   res <- morie_matching_mahalanobis(d, "d", c("x1", "x2", "x3"))
   expect_true(is.list(res))
@@ -263,6 +265,7 @@ test_that("morie_matching_mahalanobis recovers tau", {
 })
 
 test_that("morie_matching_cem produces strata and recovers ATE", {
+  testthat::skip_if_not_installed("MatchIt")
   d <- make_ipw_dgp(n = 1500L, tau = 2.5, seed = 63L)
   res <- morie_matching_cem(d, "d", c("x1", "x2", "x3"), n_bins = 4L)
   expect_true(is.list(res))
@@ -280,6 +283,7 @@ test_that("morie_matching_ate_matched recovers ATE without weights", {
 })
 
 test_that("morie_matching_abadie_imbens_se returns non-negative scalar", {
+  testthat::skip_if_not_installed("MatchIt")
   d <- make_ipw_dgp(n = 800L, tau = 2.5, seed = 65L)
   res <- morie_matching_nearest_neighbor(d, "d", c("x1", "x2", "x3"))
   se <- morie_matching_abadie_imbens_se(d, "y", "d", res$match_pairs)

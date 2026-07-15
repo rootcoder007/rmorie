@@ -169,7 +169,7 @@ test_that(".siu_http_get / .siu_http_get_many fetch over the network", {
   testthat::skip_on_cran()
   testthat::skip_if(!nzchar(Sys.getenv("RMORIE_NETWORK_TESTS")),
                     "live SIU tests are opt-in: set RMORIE_NETWORK_TESTS=1")
-  testthat::skip_if_offline("www.siu.on.ca")
+  skip_if_no_network("www.siu.on.ca")
   one <- tryCatch(
     rmorie:::.siu_http_get(
       "https://www.siu.on.ca/en/directors_report_details.php?drid=5080"
@@ -205,7 +205,7 @@ test_that("morie_fetch_siu runs end-to-end, one row per case (network)", {
   testthat::skip_on_cran()
   testthat::skip_if(!nzchar(Sys.getenv("RMORIE_NETWORK_TESTS")),
                     "live SIU tests are opt-in: set RMORIE_NETWORK_TESTS=1")
-  testthat::skip_if_offline("www.siu.on.ca")
+  skip_if_no_network("www.siu.on.ca")
   out <- tryCatch(
     morie_fetch_siu(
       cache_dir = tempfile("siu-"), overwrite = TRUE,
@@ -236,7 +236,7 @@ test_that(".siu_http_get_many rate-limit gate spaces requests (network)", {
   testthat::skip_on_cran()
   testthat::skip_if(!nzchar(Sys.getenv("RMORIE_NETWORK_TESTS")),
                     "live SIU tests are opt-in: set RMORIE_NETWORK_TESTS=1")
-  testthat::skip_if_offline("www.siu.on.ca")
+  skip_if_no_network("www.siu.on.ca")
   # Wall-clock timing assertion below is flaky on CI runners (coarse clock
   # resolution on Windows + variable network latency); skip on CI/CRAN. The
   # rate-limiter logic itself is covered by the deterministic unit tests.
@@ -419,6 +419,7 @@ test_that("morie_siu_anomaly_check returns per-field verdicts", {
 })
 
 test_that(".siu_llm_call fails fast when no env vars are set", {
+  testthat::skip_if_not_installed("httr2")
   withr::with_envvar(
     c(
       GOOGLE_API_KEY = "", ANTHROPIC_API_KEY = "",

@@ -16,6 +16,7 @@
 # while still exercising the routing logic and the data-shape contract.
 
 test_that("morie_datasets_load_by_key('vpd_crime') reads bundled VPD sample with no network", {
+  testthat::skip_if_not_installed("rmoriedata")
   # VPD has no live API (manual T&C download); this is fully offline
   # via the bundled inst/extdata fixture. Confirms the load_by_key
   # dispatcher reaches the VPD route without any HTTP call.
@@ -159,7 +160,7 @@ test_that("morie_datasets_load_by_key with mocked HTTP routes through Socrata la
 
 test_that("LIVE: morie_datasets_nyc_nypd_arrests_ytd(offline=FALSE) returns rows from real Socrata", {
   skip_on_cran()
-  skip_if_offline("data.cityofnewyork.us")
+  skip_if_no_network("data.cityofnewyork.us")
   df <- tryCatch(
     morie_datasets_nyc_nypd_arrests_ytd(offline = FALSE,
                                         max_features = 5L),
@@ -177,6 +178,7 @@ test_that("LIVE: morie_datasets_nyc_nypd_arrests_ytd(offline=FALSE) returns rows
 })
 
 test_that("LIVE: morie_dataset_portal_catalog() lookup hits cached, no network needed", {
+  testthat::skip_if_not_installed("rmoriedata")
   # Catalog itself never touches network -- it's pure registry walk.
   # This test is fast online OR offline and confirms the catalog is
   # network-free by design.
@@ -189,6 +191,7 @@ test_that("LIVE: morie_dataset_portal_catalog() lookup hits cached, no network n
 })
 
 test_that("LIVE: morie_datasets_load_by_key('vpd_crime') is fully offline (bundled fixture)", {
+  testthat::skip_if_not_installed("rmoriedata")
   # VPD load is offline-only by design; confirm the dispatch reaches
   # the VPD route and the bundled fixture loads correctly. Runs in
   # all scenarios.

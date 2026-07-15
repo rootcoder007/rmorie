@@ -169,6 +169,7 @@ test_that("morie_datasets_external_socrata_layers Chicago entry points at the ca
 # ========================================================== integration
 
 test_that("offline-mode is the default for all three wrappers (no accidental network)", {
+  testthat::skip_if_not_installed("rmoriedata")
   # Offline default means a bare call returns the fixture, not an
   # httr2 error. This is the safer default established post-3EE.
   expect_s3_class(suppressWarnings(morie_datasets_chicago_crime()),
@@ -182,6 +183,7 @@ test_that("offline-mode is the default for all three wrappers (no accidental net
 # ========================================================== Chicago Neighborhoods (3MM)
 
 test_that("morie_datasets_chicago_neighborhoods(offline=TRUE) reads the bundled 98-row attribute layer", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_chicago_neighborhoods(offline = TRUE)
   expect_s3_class(df, "data.frame")
   expect_equal(nrow(df), 98L)
@@ -197,6 +199,7 @@ test_that("morie_datasets_chicago_neighborhoods(offline=TRUE) reads the bundled 
 })
 
 test_that("morie_datasets_chicago_neighborhoods(offline=TRUE) honours max_features", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_chicago_neighborhoods(offline = TRUE,
                                                max_features = 5L)
   expect_equal(nrow(df), 5L)

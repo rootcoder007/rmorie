@@ -3,6 +3,7 @@
 # Phase 3CCC4: Cross-portal dataset catalog.
 
 test_that("morie_dataset_portal_catalog() returns unified schema", {
+  testthat::skip_if_not_installed("rmoriedata")
   d <- morie_dataset_portal_catalog()
   expect_s3_class(d, "data.frame")
   expect_setequal(names(d),
@@ -18,6 +19,7 @@ test_that("morie_dataset_portal_catalog() returns unified schema", {
 })
 
 test_that("catalog covers all 14 expected portals", {
+  testthat::skip_if_not_installed("rmoriedata")
   d <- morie_dataset_portal_catalog()
   expect_setequal(unique(d$source),
                   c("chicago", "nyc_nypd", "nyc_opendata",
@@ -30,6 +32,7 @@ test_that("catalog covers all 14 expected portals", {
 })
 
 test_that("per-source row counts match expected (post-3GGG bulk)", {
+  testthat::skip_if_not_installed("rmoriedata")
   d <- morie_dataset_portal_catalog()
   src_n <- table(d$source)
   expect_equal(as.integer(src_n["nyc_nypd"]), 8L)
@@ -110,6 +113,7 @@ test_that("at least one NYPD dataset surfaces its dict_url", {
 })
 
 test_that("morie_datasets_vancouver_opendata_layers reads 190-row catalog", {
+  testthat::skip_if_not_installed("rmoriedata")
   v <- morie_datasets_vancouver_opendata_layers(offline = TRUE)
   expect_s3_class(v, "data.frame")
   expect_equal(nrow(v), 190L)

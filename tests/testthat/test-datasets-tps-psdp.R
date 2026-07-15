@@ -216,6 +216,7 @@ test_that(".morie_tps_psdp_dispatch errors on unknown layer_key", {
 # ================================================== HOOD equivalency interop
 
 test_that("TPS PSDP layers integrate with morie_tps_add_hood_140_from_158", {
+  testthat::skip_if_not_installed("rmoriedata")
   # Use the assault fixture which has the canonical HOOD_158 column.
   df <- morie_datasets_tps_assault(offline = TRUE)
   out <- morie_tps_add_hood_140_from_158(df, col_in = "HOOD_158")

@@ -89,6 +89,7 @@ test_that("morie_datasets_chicago_crime rejects unknown mode", {
 # =================================================== resolved-joins analyzer
 
 test_that("morie_datasets_chicago_crime_resolved(offline=TRUE) joins all 5 resolvers by default", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- suppressWarnings(morie_datasets_chicago_crime_resolved(
     offline = TRUE))
   expect_s3_class(df, "data.frame")
@@ -106,6 +107,7 @@ test_that("morie_datasets_chicago_crime_resolved(offline=TRUE) joins all 5 resol
 })
 
 test_that("morie_datasets_chicago_crime_resolved(resolvers='iucr') only joins iucr", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- suppressWarnings(morie_datasets_chicago_crime_resolved(
     offline = TRUE, resolvers = "iucr"))
   expect_true("iucr_primary_description" %in% names(df))
@@ -117,6 +119,7 @@ test_that("morie_datasets_chicago_crime_resolved(resolvers='iucr') only joins iu
 })
 
 test_that("morie_datasets_chicago_crime_resolved(resolvers=c('ward','iucr')) joins those two only", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- suppressWarnings(morie_datasets_chicago_crime_resolved(
     offline = TRUE, resolvers = c("ward", "iucr")))
   expect_true("ward_shape_leng" %in% names(df))
@@ -126,6 +129,7 @@ test_that("morie_datasets_chicago_crime_resolved(resolvers=c('ward','iucr')) joi
 })
 
 test_that("morie_datasets_chicago_crime_resolved correctly resolves IUCR codes against the dictionary", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- suppressWarnings(morie_datasets_chicago_crime_resolved(
     offline = TRUE, resolvers = "iucr"))
   # The synthetic chicago_crime fixture has 5 known IUCR codes;
@@ -152,6 +156,7 @@ test_that("morie_datasets_chicago_crime_resolved beat-join drops the within-sect
 })
 
 test_that("morie_datasets_chicago_crime_resolved row count is preserved (left-join semantics)", {
+  testthat::skip_if_not_installed("rmoriedata")
   base <- suppressWarnings(morie_datasets_chicago_crime(
     offline = TRUE))
   resolved <- suppressWarnings(morie_datasets_chicago_crime_resolved(
@@ -160,6 +165,7 @@ test_that("morie_datasets_chicago_crime_resolved row count is preserved (left-jo
 })
 
 test_that("morie_datasets_chicago_crime_resolved forwards mode + paginate + app_token to chicago_crime", {
+  testthat::skip_if_not_installed("rmoriedata")
   seen <- list()
   testthat::local_mocked_bindings(
     morie_datasets_chicago_crime = function(year = NULL,
@@ -198,6 +204,7 @@ test_that("morie_datasets_chicago_crime_resolved rejects unknown resolver names"
 })
 
 test_that("morie_datasets_chicago_crime_resolved iucr join resolves the SYNTHETIC 0820 / 0498 / 2024 codes correctly", {
+  testthat::skip_if_not_installed("rmoriedata")
   # Specific spot-check: the synthetic chicago_crime fixture's row 1
   # has iucr="0820" (theft). Verify the join lifts the canonical
   # primary_description.

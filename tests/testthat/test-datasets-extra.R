@@ -59,7 +59,7 @@ test_that("morie_datasets_siu_report_fields parses a minimal SIU text blob", {
 # ---------------------------------------------- network-gated loaders, smokey
 
 test_that("morie_datasets_chicago_crime is invokable", {
-  testthat::skip_if_offline("data.cityofchicago.org")
+  skip_if_no_network("data.cityofchicago.org")
   out <- tryCatch(
     morie_datasets_chicago_crime(year = 2023L, max_features = 5L),
     error = function(e) e
@@ -71,7 +71,7 @@ test_that("morie_datasets_chicago_crime is invokable", {
 })
 
 test_that("morie_datasets_nyc_stop_and_frisk is invokable", {
-  testthat::skip_if_offline("opendata.cityofnewyork.us")
+  skip_if_no_network("opendata.cityofnewyork.us")
   out <- tryCatch(
     morie_datasets_nyc_stop_and_frisk(year = 2023L, max_features = 5L),
     error = function(e) e

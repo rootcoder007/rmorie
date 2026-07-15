@@ -177,6 +177,7 @@ test_that("morie_tps_psdp_layers gained the hub_id column in 3TT+", {
 # =================================== alignment with the TPS Hub catalog
 
 test_that("every migrated wrapper's hub_id appears in the bundled TPS Hub catalog", {
+  testthat::skip_if_not_installed("rmoriedata")
   cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
   for (entry in .tt_plus_mapping) {
     expect_true(entry$hub_id %in% cat$hub_id,

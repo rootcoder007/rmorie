@@ -3,6 +3,7 @@
 # Phase 3FFF3: Calgary + Edmonton + Ottawa loaders.
 
 test_that("morie_datasets_calgary_open_crime_adjacent_layers reads 157 catalog", {
+  testthat::skip_if_not_installed("rmoriedata")
   d <- morie_datasets_calgary_open_crime_adjacent_layers(offline = TRUE)
   expect_s3_class(d, "data.frame")
   expect_true(nrow(d) >= 100L)
@@ -12,6 +13,7 @@ test_that("morie_datasets_calgary_open_crime_adjacent_layers reads 157 catalog",
 })
 
 test_that("morie_datasets_edmonton_open_crime_adjacent_layers reads 195 catalog", {
+  testthat::skip_if_not_installed("rmoriedata")
   d <- morie_datasets_edmonton_open_crime_adjacent_layers(offline = TRUE)
   expect_s3_class(d, "data.frame")
   expect_true(nrow(d) >= 100L)
@@ -19,6 +21,7 @@ test_that("morie_datasets_edmonton_open_crime_adjacent_layers reads 195 catalog"
 })
 
 test_that("morie_datasets_ottawa_open_crime_adjacent_layers reads Hub catalog", {
+  testthat::skip_if_not_installed("rmoriedata")
   d <- morie_datasets_ottawa_open_crime_adjacent_layers(offline = TRUE)
   expect_s3_class(d, "data.frame")
   expect_true(nrow(d) >= 50L)
@@ -27,6 +30,7 @@ test_that("morie_datasets_ottawa_open_crime_adjacent_layers reads Hub catalog", 
 })
 
 test_that("morie_datasets_calgary_community_crime_stats reads 200 sample", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_calgary_community_crime_stats(offline = TRUE)
   expect_equal(nrow(df), 200L)
   expect_setequal(names(df),
@@ -35,12 +39,14 @@ test_that("morie_datasets_calgary_community_crime_stats reads 200 sample", {
 })
 
 test_that("morie_datasets_calgary_fire_response_calls reads 200 sample", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_calgary_fire_response_calls(offline = TRUE)
   expect_equal(nrow(df), 200L)
   expect_true("major_incident_type" %in% names(df))
 })
 
 test_that("morie_datasets_calgary_fire_stations reads 43 stations", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_calgary_fire_stations(offline = TRUE)
   expect_equal(nrow(df), 43L)
   expect_true("stn_num" %in% names(df))
@@ -60,6 +66,7 @@ test_that("morie_datasets_edmonton_fire_stations reads 31 stations", {
 })
 
 test_that("max_features cap honoured on bundled wrappers", {
+  testthat::skip_if_not_installed("rmoriedata")
   for (fn in list(morie_datasets_calgary_community_crime_stats,
                    morie_datasets_calgary_fire_response_calls,
                    morie_datasets_calgary_fire_stations,

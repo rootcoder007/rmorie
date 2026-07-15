@@ -23,6 +23,7 @@ test_that("3TT adds exactly 60 new TPS-named exports (catalog has 71, minus 11 c
 })
 
 test_that("each of the 60 emitted wrappers exists and is a function", {
+  testthat::skip_if_not_installed("rmoriedata")
   cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
   # Approximate the dedupe rules from the generator: skip wrappers
   # whose snake-case-slugged name collides with an existing

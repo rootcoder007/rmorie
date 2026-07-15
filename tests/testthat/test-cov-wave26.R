@@ -36,20 +36,11 @@ test_that("optional-package guards stop() when the package is absent", {
   expect_error(morie_xgboost_objective(x, y))
 })
 
-test_that(".morie_sha256_hex falls back to openssl, then stops", {
-  testthat::local_mocked_bindings(
-    requireNamespace = function(package, ...) {
-      if (identical(package, "digest")) FALSE else TRUE
-    },
-    .package = "base"
+test_that(".morie_sha256_hex uses digest (Imports) — FIPS 180-2 vector", {
+  expect_identical(
+    rmorie:::.morie_sha256_hex("abc"),
+    "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
   )
-  expect_type(rmorie:::.morie_sha256_hex("abc"), "character") # openssl path
-  testthat::local_mocked_bindings(
-    requireNamespace = function(package, ...) {
-      !(package %in% c("digest", "openssl"))
-    }, .package = "base"
-  )
-  expect_error(rmorie:::.morie_sha256_hex("abc"), "digest")
 })
 
 test_that("jsonlite-dependent entrypoints stop without jsonlite", {

@@ -7,6 +7,7 @@
 # ====================================== morie_datasets_arsau_uof_individual_records
 
 test_that("morie_datasets_arsau_uof_individual_records(offline=TRUE) reads 112-col schema", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_arsau_uof_individual_records(offline = TRUE)
   expect_s3_class(df, "data.frame")
   expect_equal(nrow(df), 5L)
@@ -87,6 +88,7 @@ test_that("morie_datasets_arsau_aggregate_summary(offline=TRUE) reads 6-col 5-ye
 # ====================================== morie_datasets_arsau_detailed_dataset
 
 test_that("morie_datasets_arsau_detailed_dataset(offline=TRUE) reads 167-col 5-year schema", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_arsau_detailed_dataset(offline = TRUE)
   expect_s3_class(df, "data.frame")
   expect_equal(ncol(df), 167L)

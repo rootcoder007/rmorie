@@ -3,6 +3,7 @@
 # Phase 3EEE2: Toronto Open Data CKAN loaders beyond TPS Hub.
 
 test_that("morie_datasets_toronto_open_crime_adjacent_layers reads 208-row catalog", {
+  testthat::skip_if_not_installed("rmoriedata")
   d <- morie_datasets_toronto_open_crime_adjacent_layers(offline = TRUE)
   expect_s3_class(d, "data.frame")
   expect_true(nrow(d) >= 100L)
@@ -15,6 +16,7 @@ test_that("morie_datasets_toronto_open_crime_adjacent_layers reads 208-row catal
 })
 
 test_that("morie_datasets_toronto_ambulance_stations reads 46-row fixture", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_toronto_ambulance_stations(offline = TRUE)
   expect_s3_class(df, "data.frame")
   expect_equal(nrow(df), 46L)
@@ -34,6 +36,7 @@ test_that("morie_datasets_toronto_asr_miscellaneous reads 40-row fixture", {
 })
 
 test_that("max_features cap honoured on TO loaders", {
+  testthat::skip_if_not_installed("rmoriedata")
   expect_equal(
     nrow(morie_datasets_toronto_ambulance_stations(offline = TRUE,
                                                       max_features = 5L)),
