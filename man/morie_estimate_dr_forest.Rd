@@ -29,17 +29,17 @@ A list with \code{ate}, \code{se}, \code{ci_lower},
 \code{ci_upper}, \code{n}.
 }
 \description{
-Thin wrapper over \pkg{grf}: fits \code{grf::causal_forest()} and returns
-the augmented-IPW (doubly-robust) average treatment effect from
-\code{grf::average_treatment_effect(method = "AIPW")}. Uses honest
-random-forest nuisance estimates -- a machine-learning alternative to the
-GLM-based \code{morie_estimate_aipw()} and the cross-fit
-\code{morie_estimate_irm()}. Requires \pkg{grf} (Suggests).
+Native rmorie causal forest: the R-learner decomposition (Nie &
+Wager 2021) with cross-fit nuisances and a weighted subsampled
+regression forest for tau(x), combined through the AIPW orthogonal
+score — the same estimand grf's
+\code{average_treatment_effect(method = "AIPW")} targets
+(cross-validated against grf in the package's cross tests). A
+machine-learning alternative to the GLM-based
+\code{morie_estimate_aipw()}. No grf at runtime.
 }
 \examples{
-if (requireNamespace("grf", quietly = TRUE)) {
-  set.seed(1)
-  df <- data.frame(t = rbinom(200, 1, 0.4), y = rnorm(200), x = rnorm(200))
-  morie_estimate_dr_forest(df, "t", "y", "x")
-}
+set.seed(1)
+df <- data.frame(t = rbinom(200, 1, 0.4), y = rnorm(200), x = rnorm(200))
+morie_estimate_dr_forest(df, "t", "y", "x")
 }
