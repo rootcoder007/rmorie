@@ -34,8 +34,17 @@ jobs:
       # install it directly with explicit repositories.
       - name: Install hard dependencies + test tooling (no Suggests)
         run: |
-          repos <- c(runiverse = "https://rootcoder007.r-universe.dev",
-                     CRAN = "https://cloud.r-project.org")
+          # P3M serves prebuilt Linux binaries for CRAN packages: no
+          # source compiles (the fs package has a parallel-make race
+          # when built from source) and installs finish in ~2 minutes.
+          options(HTTPUserAgent = sprintf(
+            "R/%s R (%s)", getRversion(),
+            paste(getRversion(), R.version["platform"],
+                  R.version["arch"], R.version["os"])))
+          repos <- c(
+            runiverse = "https://rootcoder007.r-universe.dev",
+            P3M = "https://packagemanager.posit.co/cran/__linux__/noble/latest",
+            CRAN = "https://cloud.r-project.org")
           install.packages(c("here", "Rcpp", "RcppArmadillo",
                              "rmoriebricklayer", "testthat", "pkgload"),
                            repos = repos, Ncpus = 2)
