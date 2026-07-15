@@ -302,3 +302,37 @@ test_that("native genetic matching honours n_neighbors", {
   expect_true(all(per_treated <= 2L))
   expect_gt(sum(per_treated == 2L), 0L)
 })
+
+# ---- module 7: cardinality matching (native caliper sweep) ---------------
+
+test_that("cardinality matching achieves the balance threshold when feasible", {
+  d <- .dgp_confounded(n = 3000L, seed = 71L)
+  r <- morie_matching_cardinality(d, "d", c("x1", "x2", "x3"),
+                                  balance_threshold = 0.1)
+  expect_s3_class(r, "morie_match_result")
+  expect_identical(r$method, "cardinality")
+  expect_null(r$details$warning)
+  bal <- morie_matching_balance(r$matched_data, "d", c("x1", "x2", "x3"))
+  expect_lte(bal$max_smd, 0.1)
+})
+
+test_that("cardinality matching flags an unachievable threshold honestly", {
+  set.seed(72)
+  n <- 200L
+  x1 <- rnorm(n)
+  d <- rbinom(n, 1, plogis(-0.5 + 3 * x1))  # extreme separation
+  df <- data.frame(x1 = x1, d = d)
+  r <- morie_matching_cardinality(df, "d", "x1",
+                                  balance_threshold = 0.001)
+  expect_identical(r$details$warning, "Balance threshold not achieved.")
+})
+
+test_that("cardinality keeps the largest passing sample across calipers", {
+  d <- .dgp_confounded(n = 2000L, seed = 73L)
+  r10 <- morie_matching_cardinality(d, "d", c("x1", "x2"),
+                                    balance_threshold = 0.1)
+  r25 <- morie_matching_cardinality(d, "d", c("x1", "x2"),
+                                    balance_threshold = 0.25)
+  # looser threshold can only admit an equal-or-larger sample
+  expect_gte(nrow(r25$matched_data), nrow(r10$matched_data))
+})

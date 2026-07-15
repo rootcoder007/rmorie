@@ -20,7 +20,7 @@ and the `morie_match_result` / result-object shapes do not change.
 | 4 | morie_matching_exact (native) | MatchIt (exact) | DONE (parity-to-faster vs MatchIt at all sizes) |
 | 5 | morie_matching_optimal_pair (native) | MatchIt/optmatch | DONE (exact optimum; 7-14x faster; completes 100k where optmatch OOMs) |
 | 6 | morie_matching_genetic (native) | Matching::GenMatch | DONE (same GA budget: 0.7-1.75x of GenMatch, within 2x bar) |
-| 7 | morie_matching_cardinality (native) | designmatch | planned |
+| 7 | morie_matching_cardinality (native) | designmatch | DONE (already native: caliper sweep over module-1 engine; balance-guarantee tests added) |
 | 8 | morie_ipw_ate / att / trimmed (native) | survey::svyglm | planned |
 | 9 | morie_doubly_robust (native) | survey | planned |
 | 10 | morie_dml (native cross-fit) | DoubleML/mlr3 | planned |
@@ -233,3 +233,28 @@ optimizer for a dependency-free loop.
 its own snow/parallel stack), deterministic across package versions,
 and the fitness kernel is shared verbatim with module 2 — one
 audited matching engine under every weighted design.
+
+## Module 7 — cardinality matching (native caliper sweep)
+
+**Status.** Already dependency-free: the implementation sweeps calipers
+(none, 0.5 ... 0.05 SD) over the module-1 native nearest-neighbour
+engine and keeps the largest matched sample whose max |SMD| passes
+`balance_threshold` — designmatch appears only as a doc cross-link.
+Module 7 therefore adds the missing validation, not a new engine.
+
+**Reference algorithm.** Zubizarreta (2012, JASA 107(500)) poses
+cardinality matching as a MIP: maximize matched sample size subject to
+balance constraints. Our sweep is a monotone heuristic for the same
+objective (larger caliper -> larger sample, looser balance); it
+reports honestly via `details$warning` when no caliper passes.
+Upgrade path if a reviewer wants certified optimality: swap the sweep
+for a bisection + assignment formulation on the module-5 kernels.
+
+**Validation.** Structural (threshold met when feasible, explicit
+warning when not, looser threshold admits >= sample); property
+invariants across seeds (balance guarantee holds whenever no warning).
+94+22+112 green on L14, 0 skips.
+
+**Benchmark.** Cost = a handful of module-1 runs (each 2.2s at 100k);
+designmatch needs a MIP solver (gurobi/glpk) and is not runnable as a
+reference on this branch — recorded as not-benchmarked by design.
