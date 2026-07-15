@@ -24,7 +24,7 @@ and the `morie_match_result` / result-object shapes do not change.
 | 8 | IPW family (ipw.R + investigation.R survey-free) | survey::svyglm | DONE (svyglm reproduced to 1e-6; 2-5x faster) |
 | 9 | morie_matching_doubly_robust / morie_estimate_aipw | survey | DONE (verified already native: base stats lm/glm + bootstrap/IF SEs; no survey at runtime) |
 | 10 | morie_estimate_double_ml / morie_estimate_irm (native) | DoubleML/mlr3/ranger | DONE (native-only; 40-60x faster; CI-overlap agreement with DoubleML) |
-| 11 | morie_causal_forest | grf | planned |
+| 11 | morie_estimate_dr_forest (native R-learner forest) | grf | DONE (OpenMP kernel: 1.5-2.9x FASTER than grf incl. 100k) |
 | 12 | meta-learners T/S/X/DR | — (new) | planned |
 | 13 | morie_dag / identify / estimate / refute | — (new) | planned |
 | 14 | morie_did (+ staggered CS2021) / event study | did/DIDmultiplegt | planned |
@@ -330,3 +330,38 @@ causal-internals updated + green. 108+7+22+9+112 on L14, 0 skips.
 (whose worker segfaults forced skip_on_ci guards in our own suite —
 now deleted); the native path is deterministic, dependency-free, and
 the GCV-SVD ridge makes every nuisance fit a single decomposition.
+
+## Module 11 — native causal forest (R-learner)
+
+**Replaces.** The grf delegation inside `morie_estimate_dr_forest()`;
+all four `target_sample` modes native.
+
+**Reference algorithm.** Nie & Wager (2021, Biometrika 108(2)): the
+R-learner — cross-fit m(x), e(x) nuisances, then minimize the
+orthogonalized loss; tau(x) fit as a weighted regression of the
+pseudo-outcome (Y-m)/(W-e) with weights (W-e)^2. Athey, Tibshirani &
+Wager (2019) defines the causal-forest estimand; grf is the reference
+implementation. ATE via the AIPW score with forest-based mu1/mu0.
+
+**Implementation.** New C++ kernel `src/morie_rlearner_forest.cpp`: a
+weighted subsampled regression forest (greedy CART, mtry = ceil(sqrt(p)),
+weighted-mean leaves, half-sample spread as a tree-noise gauge),
+OpenMP-parallel over trees with per-tree RNGs + ordered reduction, so
+results are seed-exact serial or parallel. Nuisances reuse the
+module-10 cross-fit engines.
+
+**Validation.** Structural (constant-effect recovery, tau(x) tracks
+true heterogeneity cor > 0.5, all target_sample modes finite,
+determinism); cross vs grf (ATE within joint 95 percent CI; tau(x)
+correlation > 0.6 against grf predictions); property invariants.
+117+3(grf cross)+112 green on L14.
+
+**Benchmark** (L14, 2026-07-15, 500 trees vs grf defaults): 1k 0.33s vs
+0.48s; 10k 4.5s vs 11.3s (2.5x faster); 100k **84.8s vs 245.6s (2.9x
+faster)**. Pre-OpenMP the kernel was 3.9x slower — the tree loop
+parallelization is what closes it, with determinism preserved.
+
+**What makes ours special.** grf is a large compiled dependency with
+its own ABI churn; the native forest is ~200 lines of audited C++
+sharing the DML nuisance stack, seed-exact across thread counts, and
+faster at every benchmarked size.

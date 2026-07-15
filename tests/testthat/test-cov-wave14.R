@@ -60,22 +60,14 @@ test_that("fzmrl computes kernel MRL across its branches", {
     is.numeric(edge$estimate))
 })
 
-test_that("morie_estimate_irm errors when DoubleML is unavailable", {
-  testthat::local_mocked_bindings(
-    requireNamespace = function(package, ...) {
-      if (package %in% c("DoubleML", "mlr3", "mlr3learners")) {
-        FALSE
-      } else {
-        TRUE
-      }
-    },
-    .package = "base"
-  )
+test_that("morie_estimate_irm validates degenerate input (native, no DoubleML)", {
+  # native engine: DoubleML absence is irrelevant; degenerate one-arm
+  # input must still error clearly
   expect_error(
     morie_estimate_irm(data.frame(Y = 1, T = 1, X1 = 1),
       treatment = "T", outcome = "Y", covariates = "X1"
     ),
-    "morie requires"
+    "both arms"
   )
 })
 
@@ -99,5 +91,5 @@ test_that("morie_estimate_irm runs the DoubleML IRM when packages are present", 
     error = function(e) e
   )
   expect_true(is.list(res) || inherits(res, "error"))
-  if (is.list(res)) expect_equal(res$method, "IRM (DoubleML)")
+  if (is.list(res)) expect_equal(res$method, "IRM (rmorie native)")
 })

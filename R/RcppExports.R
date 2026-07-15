@@ -248,6 +248,10 @@ morie_matching_abadie_imbens_kernel_cpp <- function(y, t, treated_pos, control_p
     .Call(`_rmorie_morie_match_optimal_assign_cpp`, treated, control)
 }
 
+.morie_rlearner_forest_cpp <- function(X, pseudo, weight, Xpred, n_trees, max_depth, min_node, subsample, seed) {
+    .Call(`_rmorie_morie_rlearner_forest_cpp`, X, pseudo, weight, Xpred, n_trees, max_depth, min_node, subsample, seed)
+}
+
 morie_spatial_nominate_iterate_cpp <- function(votes, X, w, nv, mid, beta, max_iter) {
     .Call(`_rmorie_morie_spatial_nominate_iterate_cpp`, votes, X, w, nv, mid, beta, max_iter)
 }

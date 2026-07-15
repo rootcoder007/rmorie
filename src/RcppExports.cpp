@@ -612,6 +612,25 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// morie_rlearner_forest_cpp
+Rcpp::NumericMatrix morie_rlearner_forest_cpp(Rcpp::NumericMatrix X, Rcpp::NumericVector pseudo, Rcpp::NumericVector weight, Rcpp::NumericMatrix Xpred, int n_trees, int max_depth, int min_node, double subsample, int seed);
+RcppExport SEXP _rmorie_morie_rlearner_forest_cpp(SEXP XSEXP, SEXP pseudoSEXP, SEXP weightSEXP, SEXP XpredSEXP, SEXP n_treesSEXP, SEXP max_depthSEXP, SEXP min_nodeSEXP, SEXP subsampleSEXP, SEXP seedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type X(XSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type pseudo(pseudoSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type weight(weightSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type Xpred(XpredSEXP);
+    Rcpp::traits::input_parameter< int >::type n_trees(n_treesSEXP);
+    Rcpp::traits::input_parameter< int >::type max_depth(max_depthSEXP);
+    Rcpp::traits::input_parameter< int >::type min_node(min_nodeSEXP);
+    Rcpp::traits::input_parameter< double >::type subsample(subsampleSEXP);
+    Rcpp::traits::input_parameter< int >::type seed(seedSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_rlearner_forest_cpp(X, pseudo, weight, Xpred, n_trees, max_depth, min_node, subsample, seed));
+    return rcpp_result_gen;
+END_RCPP
+}
 // morie_spatial_nominate_iterate_cpp
 Rcpp::List morie_spatial_nominate_iterate_cpp(arma::mat votes, arma::mat X, arma::vec w, arma::mat nv, arma::mat mid, double beta, int max_iter);
 RcppExport SEXP _rmorie_morie_spatial_nominate_iterate_cpp(SEXP votesSEXP, SEXP XSEXP, SEXP wSEXP, SEXP nvSEXP, SEXP midSEXP, SEXP betaSEXP, SEXP max_iterSEXP) {
@@ -809,6 +828,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_match_greedy_1d_cpp", (DL_FUNC) &_rmorie_morie_match_greedy_1d_cpp, 5},
     {"_rmorie_morie_match_optimal_1d_cpp", (DL_FUNC) &_rmorie_morie_match_optimal_1d_cpp, 2},
     {"_rmorie_morie_match_optimal_assign_cpp", (DL_FUNC) &_rmorie_morie_match_optimal_assign_cpp, 2},
+    {"_rmorie_morie_rlearner_forest_cpp", (DL_FUNC) &_rmorie_morie_rlearner_forest_cpp, 9},
     {"_rmorie_morie_spatial_nominate_iterate_cpp", (DL_FUNC) &_rmorie_morie_spatial_nominate_iterate_cpp, 7},
     {"_rmorie_morie_spatial_emirt_theta_update_cpp", (DL_FUNC) &_rmorie_morie_spatial_emirt_theta_update_cpp, 4},
     {"_rmorie_morie_spatial_smacof_step_cpp", (DL_FUNC) &_rmorie_morie_spatial_smacof_step_cpp, 3},

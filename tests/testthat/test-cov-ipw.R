@@ -42,17 +42,18 @@ test_that("morie_run_propensity_ipw_analysis returns IPW tables, writes CSVs", {
   expect_true(file.exists(file.path(od, "ipw_diagnostics.csv")))
 })
 
-test_that("morie_run_ebac_selection_ipw_analysis errors without the survey pkg", {
+test_that("morie_run_ebac_selection_ipw_analysis runs WITHOUT the survey pkg", {
+  # native design-based GLM: the survey package is no longer needed
   testthat::local_mocked_bindings(
     requireNamespace = function(package, ...) {
       if (identical(package, "survey")) FALSE else TRUE
     },
     .package = "base"
   )
-  expect_error(
-    morie_run_ebac_selection_ipw_analysis(make_canonical_cpads(n = 200L)),
-    "survey"
-  )
+  # n = 200 leaves ~120 observed rows over 6 predictors -> occasional
+  # quasi-separation makes the OR blow up; 600 keeps the fit stable
+  out <- morie_run_ebac_selection_ipw_analysis(make_canonical_cpads(n = 600L))
+  expect_true(is.finite(out$ebac_final_ipw_or$log_odds))
 })
 
 test_that("morie_run_ebac_selection_ipw_analysis runs the selection-adjusted IPW", {

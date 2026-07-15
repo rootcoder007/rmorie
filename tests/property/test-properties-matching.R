@@ -119,3 +119,22 @@ test_that("property: cardinality invariants across seeds", {
     }
   }
 })
+
+test_that("property: causal forest invariants across seeds", {
+  for (seed in c(13L, 41L)) {
+    set.seed(seed)
+    n <- 700L
+    X <- matrix(rnorm(n * 2), n, 2)
+    w <- rbinom(n, 1, plogis(0.4 * X[, 1]))
+    if (length(unique(w)) < 2) next
+    y <- 0.6 * w + X[, 1] + rnorm(n)
+    nf <- rmorie:::.morie_causal_forest_native(X, y, w, n_trees = 100L,
+                                               random_state = seed)
+    expect_true(all(is.finite(nf$tau)))
+    expect_true(all(nf$ps > 0 & nf$ps < 1))
+    # determinism given seed
+    nf2 <- rmorie:::.morie_causal_forest_native(X, y, w, n_trees = 100L,
+                                                random_state = seed)
+    expect_identical(nf$tau, nf2$tau)
+  }
+})
