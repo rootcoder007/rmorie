@@ -15,7 +15,7 @@ and the `morie_match_result` / result-object shapes do not change.
 | # | module | replaces | status |
 |---|--------|----------|--------|
 | 1 | morie_matching_nearest_neighbor (native) | MatchIt::matchit(method="nearest") | DONE (49/49 tests; 1.4x of MatchIt at 100k — within the 2x bar) |
-| 2 | morie_matching_mahalanobis (native) | MatchIt (mahalanobis distance) | planned |
+| 2 | morie_matching_mahalanobis (native) | MatchIt (mahalanobis distance) | DONE (60/60 suite; whitened-kd C++ kernel, exact strata, caliper) |
 | 3 | morie_matching_cem (native) | MatchIt (cem) | planned |
 | 4 | morie_matching_exact (native) | MatchIt (exact) | planned |
 | 5 | morie_matching_optimal (new) | MatchIt/optmatch | planned |
@@ -88,3 +88,36 @@ morie's matcher is specialized, deterministic across versions (the
 result can never change under us because we own every line), and
 returns influence-ready matched data that chains directly into the
 Phase-3 native estimators.
+
+## Module 2 — native Mahalanobis matching
+
+**Replaces.** `morie_matching_mahalanobis()` (was
+`MatchIt::matchit(method = "nearest", distance = "mahalanobis")`).
+Signature and `morie_match_result` shape unchanged, including `exact`
+strata support.
+
+**Reference algorithm.** Rubin (1980), "Bias Reduction Using
+Mahalanobis-Metric Matching", *Biometrics* 36(2). Covariance estimated
+on the control pool; caliper in Mahalanobis-distance units.
+
+**Implementation.** Cholesky whitening (Mahalanobis distance in the
+original space == Euclidean distance in whitened space) + a streaming
+greedy k-d scan kernel in C++ (`src/morie_matching_mahal.cpp`):
+O(nt·nc·k) compute with early-exit, O(n) memory — no distance matrix,
+which is the reference paths' memory wall. Exact strata are matched
+independently per stratum. Near-singular pools get a proportional
+ridge on the covariance diagonal.
+
+**Validation.** Structural (shape, no-reuse, balance SMD < 0.1 on weak
+confounding, strata never cross, caliper bound); cross vs MatchIt
+(identical matched-set sizes and ATE agreement on a generous-pool DGP
+where greedy order is irrelevant); property invariants shared with
+module 1. 60/60 on L14.
+
+**What makes ours special.** Whitening turns every pairwise
+Mahalanobis evaluation into a plain squared-Euclidean loop — one
+Cholesky for the whole problem instead of a solve per pair — and the
+streaming kernel never materializes the O(n²) distance matrix that
+makes the reference implementation infeasible at scale. Exact-strata
+support runs the kernel per stratum, so mixed exact+distance designs
+are first-class rather than an afterthought.

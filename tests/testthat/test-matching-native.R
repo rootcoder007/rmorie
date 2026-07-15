@@ -72,3 +72,38 @@ test_that("with replacement controls may repeat and every treated matches", {
   expect_equal(r$n_treated, sum(stats::complete.cases(
     d[, c("d", "x1", "x2", "x3")]) & d$d == 1))
 })
+
+# --- Module 2: native Mahalanobis matching ---
+
+test_that("native mahalanobis matching returns the result shape", {
+  d <- .dgp_confounded(n = 500L, seed = 21L)
+  r <- morie_matching_mahalanobis(d, "d", c("x1", "x2", "x3"))
+  expect_s3_class(r, "morie_match_result")
+  expect_identical(r$method, "mahalanobis (morie native)")
+  expect_false(any(duplicated(r$match_pairs$control_idx)))
+  expect_true(all(r$match_pairs$distance >= 0))
+})
+
+test_that("mahalanobis matching improves balance on weak confounding", {
+  d <- .dgp_confounded(n = 4000L, seed = 22L)
+  r <- morie_matching_mahalanobis(d, "d", c("x1", "x2", "x3"))
+  md <- r$matched_data
+  for (v in c("x1", "x2", "x3")) {
+    expect_lt(abs(.smd(md, "d", v)), 0.1)
+  }
+})
+
+test_that("mahalanobis exact strata never cross", {
+  d <- .dgp_confounded(n = 800L, seed = 23L)
+  d$g <- sample(c("a", "b"), nrow(d), replace = TRUE)
+  r <- morie_matching_mahalanobis(d, "d", c("x1", "x2"), exact = "g")
+  p <- r$match_pairs
+  expect_true(all(d[p$treated_idx, "g"] == d[p$control_idx, "g"]))
+})
+
+test_that("mahalanobis caliper bounds pair distances", {
+  d <- .dgp_confounded(n = 800L, seed = 24L)
+  r <- morie_matching_mahalanobis(d, "d", c("x1", "x2", "x3"),
+                                  caliper = 0.3)
+  expect_true(all(r$match_pairs$distance <= 0.3 + 1e-12))
+})

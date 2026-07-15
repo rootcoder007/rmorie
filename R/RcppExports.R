@@ -232,6 +232,10 @@ morie_matching_abadie_imbens_kernel_cpp <- function(y, t, treated_pos, control_p
     .Call(`_rmorie_morie_matching_abadie_imbens_kernel_cpp`, y, t, treated_pos, control_pos)
 }
 
+.morie_match_greedy_kd_cpp <- function(treated, control, ratio, caliper_dist, replace) {
+    .Call(`_rmorie_morie_match_greedy_kd_cpp`, treated, control, ratio, caliper_dist, replace)
+}
+
 .morie_match_greedy_1d_cpp <- function(treated_val, control_val, ratio, caliper_width, replace) {
     .Call(`_rmorie_morie_match_greedy_1d_cpp`, treated_val, control_val, ratio, caliper_width, replace)
 }
