@@ -83,9 +83,11 @@ Both \code{mode = "soda2"} and \code{mode = "soda3"} are honoured for the
 crime fetch, matching the dual-API design from 3VV+.
 }
 \examples{
+\dontshow{if (nzchar(system.file("extdata", "chicago_iucr_codes.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_chicago_crime_resolved(
   offline = TRUE,
   max_features = 5L,
   resolvers = c("ward", "iucr"))
 names(df)
+\dontshow{\}) # examplesIf}
 }

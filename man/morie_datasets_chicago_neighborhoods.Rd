@@ -64,8 +64,10 @@ To get the polygons, pass \code{geometry = TRUE} in live mode, which
 includes the SODA2 \code{the_geom} column.
 }
 \examples{
+\dontshow{if (nzchar(system.file("extdata", "chicago_neighborhoods.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_chicago_neighborhoods(offline = TRUE)
 head(df[, c("pri_neigh", "sec_neigh")])
+\dontshow{\}) # examplesIf}
 }
 \references{
 City of Chicago Data Portal, "Boundaries -

@@ -133,3 +133,58 @@ jobs:
             testthat.Rout*
             *.Rout
           if-no-files-found: ignore
+
+  # Fedora / RHEL-family leg (dnf + different glibc/toolchain stream from
+  # the Debian-family jobs above). P3M ships rhel9 binaries that work on
+  # Fedora; the same bare-install contract applies.
+  fedora:
+    runs-on: ubuntu-latest
+    container: fedora:42
+    timeout-minutes: 90
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: System R + toolchain
+        run: dnf install -y --setopt=install_weak_deps=False R-core-devel gcc-c++ libcurl-devel openssl-devel && dnf clean all
+      - name: Install hard dependencies + test tooling (no Suggests)
+        run: |
+          options(HTTPUserAgent = sprintf(
+            "R/%s R (%s)", getRversion(),
+            paste(getRversion(), R.version["platform"],
+                  R.version["arch"], R.version["os"])))
+          repos <- c(
+            runiverse = "https://rootcoder007.r-universe.dev",
+            P3M = "https://packagemanager.posit.co/cran/__linux__/rhel9/latest",
+            CRAN = "https://cloud.r-project.org")
+          pkgs <- c("here", "Rcpp", "RcppArmadillo",
+                    "rmoriebricklayer", "testthat", "pkgload")
+          install.packages(pkgs, repos = repos, Ncpus = 2)
+          missing <- setdiff(pkgs, rownames(installed.packages()))
+          if (length(missing) > 0) stop("failed to install: ",
+                                        paste(missing, collapse = ", "))
+        shell: Rscript {0}
+      - name: Run tests on Fedora without any Suggests packages
+        run: |
+          pkgload::load_all(quiet = TRUE)
+          res <- testthat::test_dir("tests/testthat",
+                                    stop_on_failure = FALSE,
+                                    reporter = "summary")
+          d <- as.data.frame(res)
+          cat(sprintf("\nfailed: %d errors: %d passed: %d skipped: %d\n",
+                      sum(d$failed), sum(d$error),
+                      sum(d$passed), sum(d$skipped)))
+          if (sum(d$failed) + sum(d$error) > 0) {
+            stop("Tests must SKIP, not fail, when Suggests are absent.")
+          }
+        shell: Rscript {0}
+      - name: Upload test log on failure
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: minimal-deps-fedora-test-log
+          path: |
+            testthat.Rout*
+            *.Rout
+          if-no-files-found: ignore
