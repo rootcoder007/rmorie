@@ -99,6 +99,14 @@ install.packages(
   repos = c(rootcoder007 = "https://rootcoder007.r-universe.dev",
             CRAN         = "https://cloud.r-project.org")
 )
+
+# want every optional package too, in one shot? add dependencies = TRUE
+# (large: compiles many specialist packages — see "Optional packages" below)
+install.packages(
+  "rmorie", dependencies = TRUE,
+  repos = c(rootcoder007 = "https://rootcoder007.r-universe.dev",
+            CRAN         = "https://cloud.r-project.org")
+)
 ```
 
 The assistant bridge supports a local fallback through the Python
