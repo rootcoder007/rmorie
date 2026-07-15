@@ -21,7 +21,7 @@ and the `morie_match_result` / result-object shapes do not change.
 | 5 | morie_matching_optimal_pair (native) | MatchIt/optmatch | DONE (exact optimum; 7-14x faster; completes 100k where optmatch OOMs) |
 | 6 | morie_matching_genetic (native) | Matching::GenMatch | DONE (same GA budget: 0.7-1.75x of GenMatch, within 2x bar) |
 | 7 | morie_matching_cardinality (native) | designmatch | DONE (already native: caliper sweep over module-1 engine; balance-guarantee tests added) |
-| 8 | morie_ipw_ate / att / trimmed (native) | survey::svyglm | planned |
+| 8 | IPW family (R/ipw.R survey-free) | survey::svyglm | DONE (svyglm reproduced to 1e-6; 2-5x faster) |
 | 9 | morie_doubly_robust (native) | survey | planned |
 | 10 | morie_dml (native cross-fit) | DoubleML/mlr3 | planned |
 | 11 | morie_causal_forest | grf | planned |
@@ -258,3 +258,34 @@ invariants across seeds (balance guarantee holds whenever no warning).
 **Benchmark.** Cost = a handful of module-1 runs (each 2.2s at 100k);
 designmatch needs a MIP solver (gurobi/glpk) and is not runnable as a
 reference on this branch — recorded as not-benchmarked by design.
+
+## Module 8 — native design-based weighted GLM (IPW family)
+
+**Replaces.** `survey::svydesign(ids = ~1)` + `survey::svyglm` inside
+`morie_run_ebac_selection_ipw_analysis()`; `R/ipw.R` is now
+survey-free (the propensity-IPW path was already base-R). Public
+outputs unchanged (same OR/linear/comparison tables).
+
+**Reference algorithm.** Binder (1983, Int. Stat. Rev. 51):
+design-based variance for GLM estimates by Taylor linearization —
+sandwich over centred weighted score contributions with the n/(n-1)
+factor, bread = inverse expected information of the weighted IRLS
+fit. Lumley (2004, JSS) is the reference implementation.
+
+**Implementation.** `.morie_svyglm_native()` in `R/ipw_native.R`:
+coefficients from weighted `stats::glm`; variance assembled from the
+model matrix + IRLS quantities. ~40 lines, no new dependencies.
+
+**Validation.** Cross vs survey (`tests/cross/test-morie_vs_survey.R`):
+coefficients to 1e-8 and standard errors to **1e-6** for both
+quasibinomial and gaussian designs; the full eBAC pipeline row matches
+a direct svyglm rerun on the same frame. Structural tests prove the
+pipeline runs with no survey package involved. 101+22+7+112 green.
+
+**Benchmark** (L14, 2026-07-15): 1k 0.022s vs 0.049s; 10k 0.108s vs
+0.622s (5.8x faster); 100k 0.58s vs 2.92s (5x faster).
+
+**What makes ours special.** svyglm pays the full svydesign machinery
+for the ids=~1 case morie actually uses; the linearization collapses
+to one crossprod + one Cholesky, which is why the SEs agree to 1e-6
+at 5x the speed with zero dependencies.
