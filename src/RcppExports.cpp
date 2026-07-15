@@ -588,6 +588,30 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// morie_match_optimal_1d_cpp
+Rcpp::IntegerVector morie_match_optimal_1d_cpp(Rcpp::NumericVector treated_val, Rcpp::NumericVector control_val);
+RcppExport SEXP _rmorie_morie_match_optimal_1d_cpp(SEXP treated_valSEXP, SEXP control_valSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type treated_val(treated_valSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type control_val(control_valSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_match_optimal_1d_cpp(treated_val, control_val));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_match_optimal_assign_cpp
+Rcpp::IntegerVector morie_match_optimal_assign_cpp(Rcpp::NumericMatrix treated, Rcpp::NumericMatrix control);
+RcppExport SEXP _rmorie_morie_match_optimal_assign_cpp(SEXP treatedSEXP, SEXP controlSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type treated(treatedSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type control(controlSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_match_optimal_assign_cpp(treated, control));
+    return rcpp_result_gen;
+END_RCPP
+}
 // morie_spatial_nominate_iterate_cpp
 Rcpp::List morie_spatial_nominate_iterate_cpp(arma::mat votes, arma::mat X, arma::vec w, arma::mat nv, arma::mat mid, double beta, int max_iter);
 RcppExport SEXP _rmorie_morie_spatial_nominate_iterate_cpp(SEXP votesSEXP, SEXP XSEXP, SEXP wSEXP, SEXP nvSEXP, SEXP midSEXP, SEXP betaSEXP, SEXP max_iterSEXP) {
@@ -783,6 +807,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_matching_abadie_imbens_kernel_cpp", (DL_FUNC) &_rmorie_morie_matching_abadie_imbens_kernel_cpp, 4},
     {"_rmorie_morie_match_greedy_kd_cpp", (DL_FUNC) &_rmorie_morie_match_greedy_kd_cpp, 5},
     {"_rmorie_morie_match_greedy_1d_cpp", (DL_FUNC) &_rmorie_morie_match_greedy_1d_cpp, 5},
+    {"_rmorie_morie_match_optimal_1d_cpp", (DL_FUNC) &_rmorie_morie_match_optimal_1d_cpp, 2},
+    {"_rmorie_morie_match_optimal_assign_cpp", (DL_FUNC) &_rmorie_morie_match_optimal_assign_cpp, 2},
     {"_rmorie_morie_spatial_nominate_iterate_cpp", (DL_FUNC) &_rmorie_morie_spatial_nominate_iterate_cpp, 7},
     {"_rmorie_morie_spatial_emirt_theta_update_cpp", (DL_FUNC) &_rmorie_morie_spatial_emirt_theta_update_cpp, 4},
     {"_rmorie_morie_spatial_smacof_step_cpp", (DL_FUNC) &_rmorie_morie_spatial_smacof_step_cpp, 3},

@@ -19,7 +19,7 @@ and the `morie_match_result` / result-object shapes do not change.
 | 3 | morie_matching_cem (native) | MatchIt (cem) | DONE (structural+cross+property green; 1.3x of MatchIt at 100k) |
 | 4 | morie_matching_exact (native) | MatchIt (exact) | DONE (parity-to-faster vs MatchIt at all sizes) |
 | 5 | morie_matching_optimal_pair (native) | MatchIt/optmatch | DONE (exact optimum; 7-14x faster; completes 100k where optmatch OOMs) |
-| 6 | morie_matching_genetic (native) | Matching::GenMatch | planned |
+| 6 | morie_matching_genetic (native) | Matching::GenMatch | DONE (same GA budget: 0.7-1.75x of GenMatch, within 2x bar) |
 | 7 | morie_matching_cardinality (native) | designmatch | planned |
 | 8 | morie_ipw_ate / att / trimmed (native) | survey::svyglm | planned |
 | 9 | morie_doubly_robust (native) | survey | planned |
@@ -195,3 +195,41 @@ OOM-killed (~12 GB dense distance matrix). Well inside the bar.
 all — optimal matching's memory wall disappears, so exact optimal
 matching becomes feasible at 100k rows where the reference cannot run.
 Exactness beats the reference's rounded-grid optimum, deterministically.
+
+## Module 6 — native genetic matching
+
+**Replaces.** `morie_matching_genetic()` (was `Matching::GenMatch` +
+`Matching::Match`, dragging in rgenoud). Signature + result shape
+unchanged; `details$best_weights` still carries the selected diagonal
+weights (now named by covariate).
+
+**Reference algorithm.** Diamond & Sekhon (2013, REStat 95(3)):
+genetic search over the diagonal Mahalanobis weight matrix maximizing
+worst-case covariate balance. Fitness = min across covariates of the
+paired-t p-value on matched differences (GenMatch's default loss
+family). Real-coded GA on log10-weights in [-2, 2]: elitism (top 20
+percent), blend crossover, Gaussian mutation; the equal-weight
+candidate is seeded into generation 0, so the search can never do
+worse than plain Mahalanobis (module 2). Deterministic given `seed`.
+
+**Implementation.** Pure R GA loop; every fitness evaluation is one
+run of the module-2 streaming kd C++ kernel on weight-scaled whitened
+covariates, so no Matching/rgenoud and no distance matrices. Final
+match honours `n_neighbors`.
+
+**Validation.** Structural (shape, named positive weights, seed
+determinism, GA-beats-plain-Mahalanobis with slack, n_neighbors
+bound); cross vs GenMatch at the same GA budget (identical matched-set
+sizes; our worst-covariate SMD within 0.05 absolute of GenMatch's);
+property invariants across seeds. 88+22+104 green on L14, 0 skips.
+
+**Benchmark** (L14, R 4.6.1, 2026-07-15, pop 20 x 8 generations):
+n=500 0.96s vs 0.73s (1.3x); n=2k 11.5s vs 14.5s (0.8x — faster);
+n=10k 279s vs 159s (1.75x) — within the <=2x bar. GA cost is
+fitness-evaluation-bound on both sides; ours trades rgenoud's C
+optimizer for a dependency-free loop.
+
+**What makes ours special.** Zero heavy deps (GenMatch pulls rgenoud +
+its own snow/parallel stack), deterministic across package versions,
+and the fitness kernel is shared verbatim with module 2 — one
+audited matching engine under every weighted design.

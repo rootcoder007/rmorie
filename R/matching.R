@@ -555,10 +555,13 @@ morie_matching_entropy_balance <- function(data, treatment, covariates,
 
 #' Genetic matching (Diamond & Sekhon, 2013)
 #'
-#' Thin wrapper around \code{Matching::GenMatch} + \code{Matching::Match}
-#' that returns a \code{morie_match_result}.  Uses a genetic algorithm
-#' to find covariate weights for Mahalanobis distance matching that
-#' maximise covariate balance.
+#' Native rmorie implementation of genetic matching (Diamond & Sekhon
+#' 2013): a real-coded genetic algorithm searches the diagonal
+#' Mahalanobis weight matrix maximizing worst-case covariate balance
+#' (paired-t p-value of the worst covariate). Deterministic given
+#' \code{seed}. No Matching/rgenoud at runtime; returns a
+#' \code{morie_match_result} with the selected weights in
+#' \code{details$best_weights}.
 #'
 #' @param data Data frame.
 #' @param treatment Binary treatment column name.
@@ -583,50 +586,11 @@ morie_matching_genetic <- function(data, treatment, covariates,
                                    pop_size = 50L,
                                    n_generations = 20L,
                                    seed = 42L) {
-  if (!.morie_matching_have("Matching")) {
-    stop("`morie_matching_genetic()` requires the 'Matching' package. ",
-         "Install it with install.packages(\"Matching\").", call. = FALSE)
-  }
-  df <- .morie_matching_drop_na(data, c(treatment, covariates))
-  Tr <- as.integer(df[[treatment]])
-  X <- as.matrix(df[, covariates, drop = FALSE])
-  set.seed(seed)
-  gen <- Matching::GenMatch(Tr = Tr, X = X, pop.size = pop_size,
-                            max.generations = n_generations,
-                            M = n_neighbors, print.level = 0,
-                            replace = FALSE, ties = FALSE)
-  m <- Matching::Match(Tr = Tr, X = X, Weight.matrix = gen,
-                       M = n_neighbors, replace = FALSE, ties = FALSE)
-  if (is.null(m) || is.null(m$index.treated)) {
-    return(.morie_matching_result(
-      matched_data       = df[0L, , drop = FALSE],
-      n_treated          = 0L,
-      n_matched_control  = 0L,
-      match_pairs        = .morie_matching_empty_pairs(),
-      method             = "genetic (Matching::GenMatch)",
-      details            = list(best_weights = diag(gen),
-                                pop_size = pop_size,
-                                n_generations = n_generations)
-    ))
-  }
-  recs <- data.frame(
-    treated_idx = rownames(df)[m$index.treated],
-    control_idx = rownames(df)[m$index.control],
-    distance    = NA_real_,
-    stringsAsFactors = FALSE
-  )
-  all_ids <- unique(c(recs$treated_idx, recs$control_idx))
-  matched_data <- df[rownames(df) %in% all_ids, , drop = FALSE]
-  .morie_matching_result(
-    matched_data       = matched_data,
-    n_treated          = length(unique(recs$treated_idx)),
-    n_matched_control  = length(unique(recs$control_idx)),
-    match_pairs        = recs,
-    method             = "genetic (Matching::GenMatch)",
-    details            = list(best_weights = diag(gen),
+  .morie_match_genetic_native(data, treatment, covariates,
+                              n_neighbors = n_neighbors,
                               pop_size = pop_size,
-                              n_generations = n_generations)
-  )
+                              n_generations = n_generations,
+                              seed = seed)
 }
 
 #' Variable-ratio matching on propensity score

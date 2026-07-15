@@ -256,3 +256,49 @@ test_that("native optimal improves balance on a confounded DGP", {
     expect_lt(abs(.smd(md, "d", v)), 0.1)
   }
 })
+
+# ---- module 6: native genetic matching -----------------------------------
+
+test_that("native genetic matching returns the result shape", {
+  d <- .dgp_confounded(n = 400L, seed = 51L)
+  r <- morie_matching_genetic(d, "d", c("x1", "x2", "x3"),
+                              pop_size = 12L, n_generations = 4L)
+  expect_s3_class(r, "morie_match_result")
+  expect_identical(r$method, "genetic (rmorie native)")
+  expect_named(r$details$best_weights, c("x1", "x2", "x3"))
+  expect_true(all(r$details$best_weights > 0))
+  expect_false(any(duplicated(r$match_pairs$control_idx)))
+})
+
+test_that("native genetic matching is deterministic given a seed", {
+  d <- .dgp_confounded(n = 300L, seed = 52L)
+  r1 <- morie_matching_genetic(d, "d", c("x1", "x2"),
+                               pop_size = 10L, n_generations = 3L, seed = 7L)
+  r2 <- morie_matching_genetic(d, "d", c("x1", "x2"),
+                               pop_size = 10L, n_generations = 3L, seed = 7L)
+  expect_identical(r1$match_pairs, r2$match_pairs)
+  expect_identical(r1$details$best_weights, r2$details$best_weights)
+})
+
+test_that("genetic balance is at least as good as plain mahalanobis", {
+  d <- .dgp_confounded(n = 1500L, seed = 53L)
+  gen <- morie_matching_genetic(d, "d", c("x1", "x2", "x3"),
+                                pop_size = 16L, n_generations = 6L)
+  mah <- morie_matching_mahalanobis(d, "d", c("x1", "x2", "x3"))
+  worst <- function(md) max(vapply(c("x1", "x2", "x3"), function(v)
+    abs(.smd(md, "d", v)), numeric(1)))
+  # equal-weight candidate is seeded into the GA population, so the
+  # selected weights can only improve the fitness; allow tiny slack
+  # because fitness is min-p, not max-SMD
+  expect_lt(worst(gen$matched_data), worst(mah$matched_data) + 0.05)
+  expect_lt(worst(gen$matched_data), 0.1)
+})
+
+test_that("native genetic matching honours n_neighbors", {
+  d <- .dgp_confounded(n = 600L, seed = 54L)
+  r <- morie_matching_genetic(d, "d", c("x1", "x2"), n_neighbors = 2L,
+                              pop_size = 8L, n_generations = 2L)
+  per_treated <- table(r$match_pairs$treated_idx)
+  expect_true(all(per_treated <= 2L))
+  expect_gt(sum(per_treated == 2L), 0L)
+})

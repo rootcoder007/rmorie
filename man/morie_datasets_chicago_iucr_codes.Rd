@@ -65,8 +65,10 @@ Offline mode reads a included 410-row complete fixture
 (\code{inst/extdata/chicago_iucr_codes.csv}).
 }
 \examples{
+\dontshow{if (nzchar(system.file("extdata", "chicago_iucr_codes.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_chicago_iucr_codes(offline = TRUE)
 subset(df, primary_description == "HOMICIDE")
+\dontshow{\}) # examplesIf}
 }
 \references{
 City of Chicago Data Portal, "Chicago Police

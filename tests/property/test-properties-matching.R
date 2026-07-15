@@ -81,3 +81,22 @@ test_that("property: optimal matching invariants across seeds", {
     expect_true(all(is.finite(r$match_pairs$distance)))
   }
 })
+
+test_that("property: genetic matching invariants across seeds", {
+  for (seed in c(7L, 23L)) {
+    set.seed(seed)
+    n <- 300L
+    x1 <- rnorm(n); x2 <- rnorm(n)
+    d <- rbinom(n, 1, plogis(-1.4 + 0.5 * x1))
+    if (sum(d) < 5 || sum(d) > sum(1 - d)) next
+    df <- data.frame(x1, x2, d)
+    r <- morie_matching_genetic(df, "d", c("x1", "x2"),
+                                pop_size = 8L, n_generations = 2L,
+                                seed = seed)
+    expect_true(all(r$details$best_weights > 0))
+    expect_true(all(is.finite(r$match_pairs$distance)))
+    expect_false(any(duplicated(r$match_pairs$control_idx)))
+    expect_true(all(df[r$match_pairs$treated_idx, "d"] == 1))
+    expect_true(all(df[r$match_pairs$control_idx, "d"] == 0))
+  }
+})

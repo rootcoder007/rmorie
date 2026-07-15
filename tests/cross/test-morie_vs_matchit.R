@@ -204,3 +204,37 @@ test_that("cross: DP solver reaches optmatch's exact global minimum", {
   expect_lte(ours_total, mi_total + 1e-12)
   expect_equal(ours_total, mi_total, tolerance = 0.02)
 })
+
+# ---- module 6: genetic vs Matching::GenMatch -----------------------------
+
+test_that("cross: native genetic balance comparable to GenMatch", {
+  skip_if_not_installed("Matching")
+  skip_if_not_installed("rgenoud")
+  set.seed(61)
+  n <- 500L
+  x1 <- rnorm(n); x2 <- rnorm(n)
+  d <- rbinom(n, 1, plogis(-1.3 + 0.6 * x1 - 0.3 * x2))
+  df <- data.frame(x1, x2, d)
+
+  ours <- morie_matching_genetic(df, "d", c("x1", "x2"),
+                                 pop_size = 20L, n_generations = 8L)
+  Tr <- df$d; X <- as.matrix(df[, c("x1", "x2")])
+  invisible(utils::capture.output(gen <- Matching::GenMatch(
+    Tr = Tr, X = X, pop.size = 20, max.generations = 8,
+    M = 1, print.level = 0, replace = FALSE, ties = FALSE)))
+  m <- Matching::Match(Tr = Tr, X = X, Weight.matrix = gen,
+                       M = 1, replace = FALSE, ties = FALSE)
+  smd_pairs <- function(xt, xc) abs(mean(xt - xc) /
+                                      sqrt((var(xt) + var(xc)) / 2))
+  ours_worst <- max(vapply(c("x1", "x2"), function(v) {
+    xt <- df[ours$match_pairs$treated_idx, v]
+    xc <- df[ours$match_pairs$control_idx, v]
+    smd_pairs(xt, xc)
+  }, numeric(1)))
+  ref_worst <- max(vapply(1:2, function(j)
+    smd_pairs(X[m$index.treated, j], X[m$index.control, j]), numeric(1)))
+  # same matched-set size, and our worst-covariate SMD within 0.05
+  # absolute of the reference's (different GA searches, same objective)
+  expect_identical(nrow(ours$match_pairs), length(m$index.treated))
+  expect_lt(ours_worst, ref_worst + 0.05)
+})

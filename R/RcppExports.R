@@ -240,6 +240,14 @@ morie_matching_abadie_imbens_kernel_cpp <- function(y, t, treated_pos, control_p
     .Call(`_rmorie_morie_match_greedy_1d_cpp`, treated_val, control_val, ratio, caliper_width, replace)
 }
 
+.morie_match_optimal_1d_cpp <- function(treated_val, control_val) {
+    .Call(`_rmorie_morie_match_optimal_1d_cpp`, treated_val, control_val)
+}
+
+.morie_match_optimal_assign_cpp <- function(treated, control) {
+    .Call(`_rmorie_morie_match_optimal_assign_cpp`, treated, control)
+}
+
 morie_spatial_nominate_iterate_cpp <- function(votes, X, w, nv, mid, beta, max_iter) {
     .Call(`_rmorie_morie_spatial_nominate_iterate_cpp`, votes, X, w, nv, mid, beta, max_iter)
 }

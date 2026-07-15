@@ -28,8 +28,12 @@ for back-compat).}
 A list of class \code{morie_match_result}.
 }
 \description{
-Thin wrapper around \code{MatchIt::matchit(method = "optimal")}, which
-calls \pkg{optmatch}.
+Native rmorie implementation of optimal 1:1 pair matching: globally
+minimizes the total matched distance (Rosenbaum 1989), unlike greedy
+nearest-neighbour. Propensity distance uses an exact non-crossing
+dynamic program on the logit score; Mahalanobis distance uses an
+exact shortest-augmenting-path assignment on whitened covariates.
+No MatchIt/optmatch at runtime.
 }
 \examples{
 \dontrun{
