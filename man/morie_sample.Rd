@@ -19,7 +19,7 @@ running examples and tests of the \verb{mrm_*()} callables without any
 network or external data dependency.
 }
 \examples{
-\dontshow{if (nzchar(system.file("extdata", package = "rmorie")) && length(list.files(system.file("extdata", package = "rmorie"))) > 0 || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 b01 <- morie_sample("otis_b01")
 head(b01)
 \dontshow{\}) # examplesIf}
