@@ -17,7 +17,9 @@ canonical French descriptions (from the dataset's own
 \code{type-interventions-descriptions20161122.csv} sidecar).
 }
 \examples{
+\dontshow{if (nzchar(system.file("extdata", "montreal_sim_intervention_types.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 d <- morie_datasets_montreal_sim_intervention_types()
 nrow(d)
 head(d)
+\dontshow{\}) # examplesIf}
 }

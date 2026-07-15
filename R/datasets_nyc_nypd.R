@@ -850,7 +850,7 @@ morie_datasets_nyc_zctas <- function(offline = TRUE,
 #' lightweight).
 #'
 #' @return A `data.frame` with one row per boundary fixture.
-#' @examples
+#' @examplesIf nzchar(system.file("extdata", "nyc_boundaries_catalog.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' morie_datasets_nyc_boundaries_catalog()
 #' @export
 morie_datasets_nyc_boundaries_catalog <- function() {
@@ -924,7 +924,7 @@ morie_datasets_nyc_boundaries_catalog <- function() {
 #'
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with 246 rows x 5 cols.
-#' @examples
+#' @examplesIf nzchar(system.file("extdata", "nyc_nypd_offense_codes.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' codes <- morie_datasets_nyc_nypd_offense_codes()
 #' subset(codes, ky_cd == "104")  # all RAPE subcategories
 #' @export
