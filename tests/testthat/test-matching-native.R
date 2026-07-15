@@ -336,3 +336,43 @@ test_that("cardinality keeps the largest passing sample across calipers", {
   # looser threshold can only admit an equal-or-larger sample
   expect_gte(nrow(r25$matched_data), nrow(r10$matched_data))
 })
+
+# ---- module 8: native design-based weighted GLM --------------------------
+
+test_that("native svyglm-equivalent returns a full coefficient table", {
+  set.seed(81)
+  n <- 300L
+  x <- rnorm(n); w <- runif(n, 0.5, 2)
+  y <- rbinom(n, 1, plogis(-0.3 + 0.7 * x))
+  df <- data.frame(x = x, y = y)
+  out <- rmorie:::.morie_svyglm_native(y ~ x, data = df, weights = w,
+                                       family = stats::quasibinomial())
+  expect_identical(colnames(out$coefficients),
+                   c("Estimate", "Std. Error", "t value", "Pr(>|t|)"))
+  expect_true(all(is.finite(out$coefficients)))
+  expect_true(all(out$confint[, 1] < out$confint[, 2]))
+  expect_identical(dim(out$vcov), c(2L, 2L))
+})
+
+test_that("ebac selection IPW runs without the survey package loaded", {
+  set.seed(82)
+  n <- 300L
+  cpads <- data.frame(
+    weight = runif(n, 0.5, 2),
+    alcohol_past12m = rbinom(n, 1, 0.85),
+    heavy_drinking_30d = rbinom(n, 1, 0.3),
+    ebac_tot = ifelse(rbinom(n, 1, 0.7) == 1, abs(rnorm(n, 0.05, 0.03)), NA),
+    ebac_legal = rbinom(n, 1, 0.7),
+    cannabis_any_use = rbinom(n, 1, 0.3),
+    age_group = sample(1:6, n, TRUE),
+    gender = sample(1:2, n, TRUE),
+    province_region = sample(1:5, n, TRUE),
+    mental_health = sample(1:5, n, TRUE),
+    physical_health = sample(1:5, n, TRUE)
+  )
+  out <- morie_run_ebac_selection_ipw_analysis(cpads)
+  expect_true(is.finite(out$ebac_final_ipw_or$or))
+  expect_true(is.finite(out$ebac_final_ipw_linear$estimate))
+  expect_true(out$ebac_final_ipw_or$or_lower95 <
+                out$ebac_final_ipw_or$or_upper95)
+})
