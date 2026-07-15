@@ -17,13 +17,13 @@ dependencies.
   <https://rootcoder007.github.io/rmorie/>
 - **r-universe project page**: <https://rootcoder007.r-universe.dev/rmorie>
 
-> With 1,859 exported functions, the full reference is large — use the
+> With over 1,900 exported functions, the full reference is large — use the
 > manual or the package site above rather than scrolling the function
 > index. This README covers install + the most common workflows only.
 
 ## What's in v1.0.0
 
-- **1,859 exported `morie_*` R functions** — every public callable is now
+- **Over 1,900 exported `morie_*` R functions** (1,963 at the time of writing) — every public callable is now
   prefixed to avoid name collisions with other CRAN packages
   (`morie_chi_square_test`, `morie_kmeans_clustering`,
   `morie_decision_tree_split`, etc.). The companion `morie.fn` Python
