@@ -43,7 +43,9 @@ in the included OT data); the function handles it via the
 \code{pct_158_in_140} weights regardless.
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- data.frame(HOOD_158 = c("167", "168", "001"),
                  incidents = c(40, 60, 42))
 morie_tps_aggregate_158_to_140(df)
+\dontshow{\}) # examplesIf}
 }

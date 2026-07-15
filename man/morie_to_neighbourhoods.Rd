@@ -33,8 +33,10 @@ schema (\verb{_id}, \code{AREA_ID}, \code{AREA_ATTR_ID}, \code{PARENT_AREA_ID},
 for the requested version.
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_to_neighbourhoods("158", offline = TRUE)
 head(df[, c("AREA_SHORT_CODE", "AREA_NAME")])
+\dontshow{\}) # examplesIf}
 }
 \references{
 City of Toronto Open Data, "Neighbourhoods" dataset

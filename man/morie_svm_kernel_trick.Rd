@@ -37,5 +37,7 @@ gamma, degree, n, method.
 Wraps \code{e1071::svm}.
 }
 \examples{
+\dontshow{if (requireNamespace("e1071", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 morie_svm_kernel_trick(x = rnorm(50), y = rnorm(50))
+\dontshow{\}) # examplesIf}
 }

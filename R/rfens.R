@@ -18,7 +18,7 @@
 #' @return Named list: estimate, train_score, oob_score, feature_importances,
 #'   n_estimators, task, n, method.
 #' @importFrom stats predict
-#' @examples
+#' @examplesIf requireNamespace("randomForest", quietly = TRUE)
 #' morie_random_forest_ensemble(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_random_forest_ensemble <- function(x, y, n_estimators = 100L,

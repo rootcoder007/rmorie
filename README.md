@@ -39,7 +39,7 @@ in the package-level help (`?rmorie`).
 > manual or the package site above rather than scrolling the function
 > index. This README covers install + the most common workflows only.
 
-## What's in v1.0.0
+## What's in v1.1.3
 
 - **Over 1,900 exported `morie_*` R functions** (1,963 at the time of writing) — every public callable is now
   prefixed to avoid name collisions with other CRAN packages
