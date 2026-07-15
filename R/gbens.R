@@ -19,7 +19,7 @@
 #' @return Named list: estimate, train_score, feature_importances,
 #'   n_estimators, learning_rate, max_depth, task, n, method.
 #' @importFrom stats predict
-#' @examples
+#' @examplesIf requireNamespace("gbm", quietly = TRUE) || requireNamespace("xgboost", quietly = TRUE)
 #' morie_gradient_boosting_ensemble(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_gradient_boosting_ensemble <- function(x, y, n_estimators = 100L,

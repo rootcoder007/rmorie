@@ -38,9 +38,11 @@ Wraps \code{caret::train} with method = "glm" (classification) or
 "lm" (regression) by default; users can pass any caret \code{method}.
 }
 \examples{
+\dontshow{if (requireNamespace("caret", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 morie_grid_search_cv(
   x = matrix(rnorm(150), 50, 3), y = rnorm(50),
   method = "lm", tune_grid = data.frame(intercept = c(TRUE, FALSE)),
   cv = 3L, task = "regression", seed = 1L
 )
+\dontshow{\}) # examplesIf}
 }

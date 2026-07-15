@@ -14,7 +14,7 @@
 #' @return Named list: estimate, train_accuracy, n_support, kernel, C,
 #'   gamma, degree, n, method.
 #' @importFrom stats predict
-#' @examples
+#' @examplesIf requireNamespace("e1071", quietly = TRUE)
 #' morie_svm_kernel_trick(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_svm_kernel_trick <- function(x, y, kernel = "rbf", C = 1.0,
