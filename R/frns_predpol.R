@@ -30,6 +30,8 @@
 NULL
 
 
+#' Internal helper: Frns Worst Abs Named
+#' @noRd
 .frns_worst_abs_named <- function(x) {
   # name of the element with the largest absolute value.
   x <- x[is.finite(x)]

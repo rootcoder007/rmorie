@@ -5,6 +5,7 @@
 # ---------------------------------------------------------------- Butterworth
 
 test_that("buttlp lowpass returns filtered vector of the same length", {
+  testthat::skip_if_not_installed("signal")
   x <- make_synthetic_sine(n = 500L, fs = 500L, freq_hz = 60, seed = 1L) +
     make_synthetic_sine(n = 500L, fs = 500L, freq_hz = 5, seed = 2L)
   y <- buttlp(x, fs = 500, cutoff = 20)
@@ -17,6 +18,7 @@ test_that("buttlp lowpass returns filtered vector of the same length", {
 })
 
 test_that("butthp highpass strips DC drift", {
+  testthat::skip_if_not_installed("signal")
   x <- seq(0, 1, length.out = 500L)         # pure linear drift
   y <- butthp(x, fs = 500, cutoff = 1)
   expect_equal(y$name, "butter_highpass")
@@ -25,6 +27,7 @@ test_that("butthp highpass strips DC drift", {
 })
 
 test_that("buttbp bandpass keeps in-band, suppresses out-of-band", {
+  testthat::skip_if_not_installed("signal")
   x <- make_synthetic_sine(n = 1000L, fs = 1000L, freq_hz = 10, seed = 3L) +
     make_synthetic_sine(n = 1000L, fs = 1000L, freq_hz = 100, seed = 4L)
   y <- buttbp(x, fs = 1000, low = 5, high = 20)
@@ -34,6 +37,7 @@ test_that("buttbp bandpass keeps in-band, suppresses out-of-band", {
 })
 
 test_that("buttbs bandstop removes the targeted band (60 Hz mains)", {
+  testthat::skip_if_not_installed("signal")
   x <- make_synthetic_sine(n = 1000L, fs = 1000L, freq_hz = 10, seed = 5L) +
     0.5 * make_synthetic_sine(n = 1000L, fs = 1000L, freq_hz = 60, seed = 6L)
   y <- buttbs(x, fs = 1000)        # defaults: 59-61 Hz notch
@@ -44,6 +48,7 @@ test_that("buttbs bandstop removes the targeted band (60 Hz mains)", {
 # -------------------------------------------------------------------- Smoothing
 
 test_that("morie_sgolay_smooth preserves length and reduces noise", {
+  testthat::skip_if_not_installed("signal")
   x <- make_synthetic_sine(n = 200L, fs = 200L, freq_hz = 3, noise_sd = 0.4,
                            seed = 7L)
   y <- morie_sgolay_smooth(x, window_length = 11L, polyorder = 3L)
@@ -54,6 +59,7 @@ test_that("morie_sgolay_smooth preserves length and reduces noise", {
 })
 
 test_that("sgolay short alias delegates + forces odd window", {
+  testthat::skip_if_not_installed("signal")
   x <- make_synthetic_sine(n = 200L, fs = 200L, freq_hz = 3, seed = 8L)
   y <- sgolay(x, window = 12L, polyorder = 3L)   # even -> bumped to 13
   expect_equal(y$name, "savgol_smooth")
@@ -64,6 +70,7 @@ test_that("sgolay short alias delegates + forces odd window", {
 # ---------------------------------------------------------------------- Fractal
 
 test_that("morie_hurst_r returns H near 0.5 for Brownian motion", {
+  testthat::skip_if_not_installed("pracma")
   x <- make_synthetic_brownian(n = 2048L, seed = 11L)
   res <- morie_hurst_r(x)
   expect_named(res, c("H", "interpretation"))
@@ -305,6 +312,7 @@ test_that("pcgmur returns a murmur score in [0, 1]", {
 })
 
 test_that("morie_pcg_filter wraps buttbp with PCG-band defaults", {
+  testthat::skip_if_not_installed("signal")
   pcg <- make_synthetic_pcg(duration_s = 1, fs = 2000L, seed = 64L)
   res <- morie_pcg_filter(pcg)
   expect_equal(res$name, "butter_bandpass")

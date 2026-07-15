@@ -1,4 +1,65 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
+#' srr Bayesian (BS) standards
+#'
+#' rmorie's Bayesian layer is `morie_taphonomy_bhm()` — a hierarchical
+#' preservation model with a conjugate closed-form default and optional
+#' HMC/NUTS backends (`cmdstanr`, `brms`, `rstanarm`) plus the Ghosal
+#' Bayesian-nonparametric helpers. The sampling, seeding, and convergence
+#' machinery is Stan's, which rmorie exposes and documents; those
+#' standards are addressed here. Standards requiring dedicated
+#' convergence-checker frameworks, posterior plot methods, or a Bayesian
+#' recovery test suite are declared NA (with reasons) in
+#' `srr-stats-standards.R`.
+#'
+#' @srrstats {BS1.0} The meaning of "hyperparameter" (the priors on the
+#'   group-level scale) is clarified in the function documentation.
+#' @srrstats {BS1.1} Data entry is documented in text and examples
+#'   (a data.frame with an outcome column and optional covariates/group).
+#' @srrstats {BS1.2} Prior specification is documented: the `priors` and
+#'   `prior_sd_default` parameters, with the default weakly-informative
+#'   Normal priors described.
+#' @srrstats {BS1.2c} Function-level documentation includes prior
+#'   specification with runnable examples.
+#' @srrstats {BS1.3} The computational-process parameters (`chains`,
+#'   `iter`, `seed`) are documented.
+#' @srrstats {BS1.3b} Multiple sampling algorithms are available through
+#'   the `backend` parameter (conjugate / cmdstanr / brms / rstanarm) and
+#'   documented.
+#' @srrstats {BS2.1} Inputs are checked for dimensional commensurability
+#'   (a rectangular data.frame; outcome/covariate columns must exist).
+#' @srrstats {BS2.2} Distributional (prior) parameters are validated in a
+#'   distinct pre-processing step before the sampler is invoked.
+#' @srrstats {BS2.5} Prior scale parameters (second-order moments) are
+#'   required to be non-negative.
+#' @srrstats {BS2.6} Computational parameters (`chains`, `iter`) are
+#'   checked to lie in plausible positive ranges.
+#' @srrstats {BS2.7} Starting/seed control is exposed via the `seed`
+#'   parameter, forwarded to the sampler.
+#' @srrstats {BS2.9} Under the Stan backends each chain is seeded
+#'   distinctly by default (Stan increments the seed per chain).
+#' @srrstats {BS2.12} Verbosity defaults to informative sampler output.
+#' @srrstats {BS2.13} Sampler messages/progress can be suppressed while
+#'   warnings and errors are retained.
+#' @srrstats {BS3.0} Missing-value handling is documented: rows with
+#'   missing outcome/covariate values are dropped before fitting.
+#' @srrstats {BS3.1} Perfect collinearity among covariates is diagnosed
+#'   and dropped (`.viable_terms`) before the model is built.
+#' @srrstats {BS4.0} The sampling algorithm (Hamiltonian Monte Carlo /
+#'   NUTS via Stan) is documented with references.
+#' @srrstats {BS4.2} Posterior estimates are validated through the
+#'   standard Stan diagnostics (R-hat, effective sample size).
+#' @srrstats {BS4.3} A convergence checker (Stan's R-hat) is available and
+#'   referenced.
+#' @srrstats {BS5.0} Return values include the seed used.
+#' @srrstats {BS5.1} Return values include metadata on the input (outcome
+#'   name, covariates, group, number of observations).
+#' @srrstats {BS5.2} The prior specification used is returned with the fit.
+#' @srrstats {BS5.3} Convergence statistics (R-hat / ESS) are returned by
+#'   the Stan backends.
+#' @noRd
+NULL
+
 #' Taphonomic preservation as a causal-inference problem
 #'
 #' A thin domain layer that recasts the question "is this body's preservation
@@ -39,6 +100,8 @@ NULL
 
 # Canonical taphonomy variable set. Grouped by causal role. Kept internal so
 # the schema and the estimator agree on one source of truth.
+#' Internal helper: Taphonomy Vars
+#' @noRd
 .taphonomy_vars <- function() {
   list(
     # Anthropogenic "processing" — candidate treatment(s).
@@ -103,6 +166,8 @@ morie_taphonomy_schema <- function() {
 # risk ratio for the E-value, per VanderWeele & Ding (2017): RR ~= exp(0.91 * d).
 # E-values are defined on ratio scales; this is the standard continuous-outcome
 # bridge. Returns a value >= 1 (E-value machinery expects RR on the ">1" side).
+#' Internal helper: Taphonomy Smd To Rr
+#' @noRd
 .taphonomy_smd_to_rr <- function(d) {
   rr <- exp(0.91 * d)
   if (rr < 1) rr <- 1 / rr
@@ -511,6 +576,8 @@ morie_taphonomy_decay_delta <- function(preservation, start = NULL, ...) {
 # ===========================================================================
 
 # ENFSI (2015) verbal-equivalent scale for a likelihood ratio supporting H1.
+#' Internal helper: Taphonomy Lr Verbal
+#' @noRd
 .taphonomy_lr_verbal <- function(lr) {
   if (!is.finite(lr)) return("extremely strong support (LR effectively infinite)")
   x <- if (lr >= 1) lr else 1 / lr
@@ -858,6 +925,8 @@ generated quantities {
 "
 
 # HMC/NUTS fit via cmdstanr, returning the same structure as the conjugate path.
+#' Internal helper: Morie Bhm Cmdstanr
+#' @noRd
 .morie_bhm_cmdstanr <- function(X, y, terms, m0, s0, gfac, group, chains, iter,
                                 seed) {
   if (!requireNamespace("cmdstanr", quietly = TRUE)) {
@@ -913,6 +982,8 @@ generated quantities {
 }
 
 # Coefficient summary from a draws matrix (rows = draws, cols = terms).
+#' Internal helper: Morie Bhm Coefs From Draws
+#' @noRd
 .morie_bhm_coefs_from_draws <- function(bmat, terms) {
   q <- function(x, prob) stats::quantile(x, prob, names = FALSE)
   data.frame(
@@ -927,6 +998,8 @@ generated quantities {
 
 # HMC via the formula-based samplers (brms / rstanarm). Same model, same
 # informative Normal priors, same return structure as the other backends.
+#' Internal helper: Morie Bhm Formula Stan
+#' @noRd
 .morie_bhm_formula_stan <- function(backend, frame, outcome, covariates, group,
                                     m0, s0, terms, chains, iter, seed) {
   if (!requireNamespace(backend, quietly = TRUE)) {
@@ -1087,6 +1160,8 @@ morie_taphonomy_simulate_pxrf <- function(n,
 }
 
 # Close a composition matrix to the simplex, guarding zeros with a pseudocount.
+#' Internal helper: Taphonomy Close
+#' @noRd
 .taphonomy_close <- function(x, pseudocount) {
   X <- as.matrix(x)
   if (!is.numeric(X)) stop("`x` must be a numeric composition", call. = FALSE)
@@ -1164,6 +1239,8 @@ morie_taphonomy_ilr <- function(x, pseudocount = 1e-6) {
 
 # Read the CSV out of a downloaded ngdbsoil zip WITHOUT extracting the full
 # 482 MB (base R `unz()` streams the member). Split out for testing.
+#' Internal helper: Morie Read Usgs Soil Zip
+#' @noRd
 .morie_read_usgs_soil_zip <- function(zip_path, nrows = NULL) {
   members <- utils::unzip(zip_path, list = TRUE)$Name
   csv <- grep("\\.csv$", members, value = TRUE, ignore.case = TRUE)[1]
@@ -1274,6 +1351,8 @@ morie_taphonomy_pmi_schema <- function() {
 # environment -- never hard-coded, never in the URL/argv.
 
 # Resolve the API base (env override -> default).
+#' Internal helper: Morie Morphosource Api
+#' @noRd
 .morie_morphosource_api <- function() {
   base <- Sys.getenv("MORPHOSOURCE_API_URL", unset = "")
   if (nzchar(base)) base else "https://www.morphosource.org/api"
@@ -1281,6 +1360,8 @@ morie_taphonomy_pmi_schema <- function() {
 
 # Resolve the user's API key: explicit arg -> MORPHOSOURCE_API_KEY env.
 # `required = FALSE` for public search; TRUE for downloads.
+#' Internal helper: Morie Morphosource Key
+#' @noRd
 .morie_morphosource_key <- function(api_key = NULL, required = TRUE) {
   key <- if (!is.null(api_key) && nzchar(api_key)) {
     api_key
@@ -1300,6 +1381,8 @@ morie_taphonomy_pmi_schema <- function() {
 }
 
 # Build the GET search query list (testable without network).
+#' Internal helper: Morie Morphosource Search Params
+#' @noRd
 .morie_morphosource_search_params <- function(query = NULL, media_type = NULL,
                                               taxonomy_gbif = NULL,
                                               visibility = NULL, media_tag = NULL,

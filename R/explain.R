@@ -29,6 +29,8 @@
 # Adding a new module's output files means appending an entry to
 # `.morie_explanations()`.
 
+#' Internal helper: Morie Explanations
+#' @noRd
 .morie_explanations <- function() {
   list(
     # --- power-design outputs ----------------------------------------

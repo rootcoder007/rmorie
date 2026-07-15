@@ -76,6 +76,8 @@ NULL
                      source = "override"))
 )
 
+#' Internal helper: Override For
+#' @noRd
 .override_for <- function(dataset_name, col_name) {
   ds_lc <- tolower(dataset_name)
   col_lc <- tolower(trimws(col_name))
@@ -104,6 +106,8 @@ NULL
                        c("0", "1"), c("1", "0"))
 
 
+#' Internal helper: Is Boolean Value Set
+#' @noRd
 .is_boolean_value_set <- function(vv) {
   if (is.null(vv) || length(vv) == 0L) return(FALSE)
   lc <- tolower(trimws(as.character(vv)))
@@ -113,6 +117,8 @@ NULL
   FALSE
 }
 
+#' Internal helper: Cardinality From Vv
+#' @noRd
 .cardinality_from_vv <- function(vv) {
   if (is.null(vv) || length(vv) == 0L) return("unknown")
   n <- length(vv)
@@ -122,6 +128,8 @@ NULL
   "discrete_high"
 }
 
+#' Internal helper: Level From Spec
+#' @noRd
 .level_from_spec <- function(col_name, dtype, valid_values, dataset_name) {
   dtype <- tolower(dtype %||% "string")
   if (grepl(.RE_IDENTIFIER, col_name, ignore.case = TRUE)) return("identifier")
@@ -144,6 +152,8 @@ NULL
   "nominal"
 }
 
+#' Internal helper: Role From Name
+#' @noRd
 .role_from_name <- function(col_name) {
   if (grepl(.RE_IDENTIFIER, col_name, ignore.case = TRUE)) return("identifier")
   if (grepl(.RE_OUTCOME,    col_name, ignore.case = TRUE)) return("outcome")

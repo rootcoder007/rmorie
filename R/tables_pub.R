@@ -32,6 +32,8 @@ NULL
 # Formatting helpers
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Tbl Fmt Num
+#' @noRd
 .tbl_fmt_num <- function(x, digits = 2L, apa = FALSE) {
   if (!is.finite(x)) return("")
   s <- formatC(x, format = "f", digits = digits)
@@ -42,6 +44,8 @@ NULL
   s
 }
 
+#' Internal helper: Tbl Fmt Pval
+#' @noRd
 .tbl_fmt_pval <- function(p, digits = 3L, apa = FALSE) {
   if (!is.finite(p)) return("")
   if (p < 10^(-digits))
@@ -53,6 +57,8 @@ NULL
   s
 }
 
+#' Internal helper: Tbl Stars
+#' @noRd
 .tbl_stars <- function(p) {
   if (!is.finite(p)) return("")
   if (p < 0.001) return("***")
@@ -61,6 +67,8 @@ NULL
   ""
 }
 
+#' Internal helper: Tbl Smd
+#' @noRd
 .tbl_smd <- function(m1, m2, sd1, sd2) {
   ps <- sqrt((sd1^2 + sd2^2) / 2)
   if (ps < 1e-12) return(0)
@@ -72,17 +80,23 @@ NULL
 # Footnote registry
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Tbl Footnotes New
+#' @noRd
 .tbl_footnotes_new <- function() {
   e <- new.env(parent = emptyenv())
   e$notes <- character(0)
   e
 }
 
+#' Internal helper: Tbl Footnotes Add
+#' @noRd
 .tbl_footnotes_add <- function(reg, text) {
   if (!(text %in% reg$notes)) reg$notes <- c(reg$notes, text)
   letters[match(text, reg$notes) %% 26L + 1L]
 }
 
+#' Internal helper: Tbl Footnotes Render
+#' @noRd
 .tbl_footnotes_render <- function(reg, fmt = "text") {
   if (length(reg$notes) == 0L) return("")
   out <- character(0)
@@ -102,6 +116,8 @@ NULL
 # Format conversion
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Tbl To Format
+#' @noRd
 .tbl_to_format <- function(df, fmt = c("dataframe", "latex", "html",
                                         "markdown", "text", "csv"),
                             title = "", footnotes = "") {
@@ -324,6 +340,8 @@ table1 <- function(data, group_col = NULL,
 # Regression table
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Tbl Extract Model
+#' @noRd
 .tbl_extract_model <- function(m) {
   b <- stats::coef(m)
   se <- sqrt(diag(stats::vcov(m)))

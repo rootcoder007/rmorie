@@ -1,4 +1,41 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
+#' srr exploratory-data-analysis (EA) standards
+#'
+#' rmorie's exploratory/descriptive layer (this file's hypothesis-test
+#' and correlation suite, plus the OTIS/TPS descriptive summaries) is a
+#' summary-and-inference layer, not table-exploration software built on
+#' an index-column/join system. The applicable EA standards are addressed
+#' here; the index-column, meta-extraction, and graphical-accessibility
+#' families are declared NA (with reasons) in `srr-stats-standards.R`.
+#'
+#' @srrstats {EA1.0} The target audience (criminologists, quantitative
+#'   social scientists, accountability researchers) is documented in the
+#'   package-level "Statement of need".
+#' @srrstats {EA1.1} The kinds of data analysed (survey PUMFs, oversight
+#'   report corpora, administrative tabular data) are documented.
+#' @srrstats {EA1.2} The kinds of questions the software explores
+#'   (intervention effects, spatial/temporal concentration, oversight
+#'   outcomes) are documented.
+#' @srrstats {EA1.3} The input each function accepts is documented on its
+#'   `@param` entries.
+#' @srrstats {EA4.0} Return types are consistent with input types
+#'   (numeric-vector inputs yield numeric summaries; the result objects
+#'   have a stable structure).
+#' @srrstats {EA4.2} Primary routines return `morie_rich_result` objects
+#'   with sensible default `print` output.
+#' @srrstats {EA5.2} Screen output formats numeric values explicitly via
+#'   `sprintf` / `round` rather than relying on default print formatting.
+#' @srrstats {EA6.0} Return values are tested, including:
+#' @srrstats {EA6.0a} object classes and types;
+#' @srrstats {EA6.0b} dimensions of tabular results;
+#' @srrstats {EA6.0c} column names of tabular results;
+#' @srrstats {EA6.0d} column classes/types within data.frame results;
+#' @srrstats {EA6.0e} values of single-valued numeric results, using
+#'   `expect_equal(tolerance=)` (see `test-statistics.R`).
+#' @noRd
+NULL
+
 #' Comprehensive hypothesis testing suite for epidemiological research
 #'
 #' R port of the Python module \code{morie.statistics}. Every function
@@ -46,11 +83,15 @@ NULL
 # Internal helpers
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Stat Validate
+#' @noRd
 .stat_validate <- function(x, name = "x") {
   x <- suppressWarnings(as.numeric(x))
   x[is.finite(x)]
 }
 
+#' Internal helper: Stat Result
+#' @noRd
 .stat_result <- function(method, test_statistic, p_value,
                          df = NA_real_, ci_lower = NA_real_,
                          ci_upper = NA_real_, effect_size = NA_real_,
@@ -97,6 +138,8 @@ print.morie_test_result <- function(x, ...) {
   invisible(x)
 }
 
+#' Internal helper: Cohens D Ind
+#' @noRd
 .cohens_d_ind <- function(x, y) {
   nx <- length(x)
   ny <- length(y)
@@ -105,18 +148,24 @@ print.morie_test_result <- function(x, ...) {
   (mean(x) - mean(y)) / sp
 }
 
+#' Internal helper: Cohens D One
+#' @noRd
 .cohens_d_one <- function(x, mu0) {
   s <- sd(x)
   if (s == 0) return(0)
   (mean(x) - mu0) / s
 }
 
+#' Internal helper: Cohens D Paired
+#' @noRd
 .cohens_d_paired <- function(d) {
   s <- sd(d)
   if (s == 0) return(0)
   mean(d) / s
 }
 
+#' Internal helper: Mean Ci
+#' @noRd
 .mean_ci <- function(x, confidence = 0.95) {
   n <- length(x)
   se <- sd(x) / sqrt(n)
@@ -124,6 +173,8 @@ print.morie_test_result <- function(x, ...) {
   c(mean(x) - tcrit * se, mean(x) + tcrit * se)
 }
 
+#' Internal helper: Diff Ci
+#' @noRd
 .diff_ci <- function(x, y, confidence = 0.95, equal_var = TRUE) {
   nx <- length(x)
   ny <- length(y)
@@ -471,6 +522,8 @@ cochrans_q <- function(...) {
 # CORRELATION
 # ===================================================================
 
+#' Internal helper: Fisher Z Ci
+#' @noRd
 .fisher_z_ci <- function(r, n, confidence) {
   z <- atanh(r)
   se <- if (n > 3) 1 / sqrt(n - 3) else Inf

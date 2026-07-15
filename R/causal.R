@@ -49,47 +49,73 @@ NULL
 # Internal helpers
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Causal Have Weightit
+#' @noRd
 .causal_have_weightit     <- function() {
   requireNamespace("WeightIt",     quietly = TRUE)
 }
+#' Internal helper: Causal Have Aipw
+#' @noRd
 .causal_have_aipw         <- function() {
   requireNamespace("AIPW",         quietly = TRUE)
 }
+#' Internal helper: Causal Have Stdreg
+#' @noRd
 .causal_have_stdreg       <- function() {
   requireNamespace("stdReg",       quietly = TRUE)
 }
+#' Internal helper: Causal Have Doubleml
+#' @noRd
 .causal_have_doubleml     <- function() {
   requireNamespace("DoubleML",     quietly = TRUE) &&
     requireNamespace("mlr3",         quietly = TRUE) &&
     requireNamespace("mlr3learners", quietly = TRUE) &&
     requireNamespace("ranger",       quietly = TRUE)
 }
+#' Internal helper: Causal Have Evalue
+#' @noRd
 .causal_have_evalue       <- function() {
   requireNamespace("EValue",       quietly = TRUE)
 }
+#' Internal helper: Causal Have Rbounds
+#' @noRd
 .causal_have_rbounds      <- function() {
   requireNamespace("rbounds",      quietly = TRUE)
 }
+#' Internal helper: Causal Have Sensitivitymv
+#' @noRd
 .causal_have_sensitivitymv <- function() {
   requireNamespace("sensitivitymv", quietly = TRUE)
 }
+#' Internal helper: Causal Have Causalimpact
+#' @noRd
 .causal_have_causalimpact <- function() {
   requireNamespace("CausalImpact", quietly = TRUE)
 }
+#' Internal helper: Causal Have Sandwich
+#' @noRd
 .causal_have_sandwich     <- function() {
   requireNamespace("sandwich",     quietly = TRUE)
 }
+#' Internal helper: Causal Have Aer
+#' @noRd
 .causal_have_aer          <- function() {
   requireNamespace("AER",          quietly = TRUE)
 }
+#' Internal helper: Causal Have Grf
+#' @noRd
 .causal_have_grf          <- function() {
   requireNamespace("grf",          quietly = TRUE)
 }
+#' Internal helper: Causal Have Ivreg
+#' @noRd
 .causal_have_ivreg        <- function() {
   requireNamespace("ivreg",        quietly = TRUE) ||
     requireNamespace("AER",          quietly = TRUE)
 }
 
+#' Internal helper: Fit Propensity
+#' @noRd
 .fit_propensity <- function(data, treatment, covariates) {
   formula <- stats::as.formula(
     paste(treatment, "~", paste(covariates, collapse = " + "))
@@ -98,6 +124,8 @@ NULL
   stats::fitted(fit)
 }
 
+#' Internal helper: Fit Propensity Weightit
+#' @noRd
 .fit_propensity_weightit <- function(data, treatment, covariates) {
   formula <- stats::as.formula(
     paste(treatment, "~", paste(covariates, collapse = " + "))
@@ -113,14 +141,20 @@ NULL
   ps
 }
 
+#' Internal helper: Clip Ps
+#' @noRd
 .clip_ps <- function(ps, eps = 1e-6) {
   pmin(pmax(ps, eps), 1 - eps)
 }
 
+#' Internal helper: Hajek Diff
+#' @noRd
 .hajek_diff <- function(y1, w1, y0, w0) {
   sum(y1 * w1) / sum(w1) - sum(y0 * w0) / sum(w0)
 }
 
+#' Internal helper: Influence Score Aipw
+#' @noRd
 .influence_score_aipw <- function(y, t, ps, mu1, mu0) {
   (mu1 - mu0) +
     t * (y - mu1) / ps -
@@ -901,6 +935,8 @@ morie_estimate_g_computation <- function(data, treatment, outcome,
 # unavailable. Implements a partially linear regression (PLR) cross-fit on
 # residualised outcome and treatment using ridge regression with a fixed
 # lambda (lightweight; not for high-precision inference).
+#' Internal helper: Dml Xfit Ridge
+#' @noRd
 .dml_xfit_ridge <- function(X, y, n_folds = 5L, lambda = 1.0,
                             random_state = 42L) {
   n <- nrow(X)
@@ -927,6 +963,8 @@ morie_estimate_g_computation <- function(data, treatment, outcome,
   pred
 }
 
+#' Internal helper: Dml Prepare Xy
+#' @noRd
 .dml_prepare_xy <- function(data, treatment, outcome, covariates) {
   frame <- data[, c(treatment, outcome, covariates), drop = FALSE]
   frame <- frame[stats::complete.cases(frame), , drop = FALSE]
@@ -1155,6 +1193,8 @@ morie_estimate_irm <- function(data, treatment, outcome, covariates,
 }
 
 # Helper: closed-form ridge fit on (X_tr, y_tr) and predict at X_te.
+#' Internal helper: Dml Xfit Ridge Predict
+#' @noRd
 .dml_xfit_ridge_predict <- function(X_tr, y_tr, X_te, lambda = 1.0) {
   p <- ncol(X_tr)
   ctr <- colMeans(X_tr)
@@ -1332,6 +1372,13 @@ morie_causal_weighting <- function(data, treatment, covariates,
 #' @return Named list with elements \code{vcov} (variance matrix),
 #'   \code{se} (named numeric vector of robust SEs), \code{type},
 #'   and \code{n_coef}.
+#' @srrstats {G3.1} The variance/covariance estimator is user-selectable
+#'   via \code{type} (HC0-HC5 heteroskedasticity-consistent, HAC, or CL
+#'   clustered), so covariance is never computed solely by
+#'   \code{stats::cov}; the same choice is exposed by the did/dml
+#'   cluster-robust paths.
+#' @srrstats {G3.1a} The available covariance methods are documented on
+#'   the \code{type} parameter above and demonstrated in the examples.
 #' @export
 #' @references
 #'   Zeileis A, Koll S, Graham N (2020). Various Versatile Variances:

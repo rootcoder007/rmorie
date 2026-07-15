@@ -65,6 +65,8 @@ NULL
 # Internal: path resolver
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Morie Env
+#' @noRd
 .morie_env <- function(name) {
   v <- Sys.getenv(name, unset = NA_character_)
   if (is.na(v) || !nzchar(trimws(v))) {
@@ -159,6 +161,8 @@ NULL
 # Registry
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Arsau Make Entry
+#' @noRd
 .arsau_make_entry <- function(year_or_range, kind, csv_filename, sidecar_filename,
                                 expected_rows, expected_cols, is_valid,
                                 description_en, description_fr) {
@@ -317,6 +321,8 @@ morie_arsau_read_sidecar <- function(path) {
 # Internal: shared loader
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Arsau Lookup
+#' @noRd
 .arsau_lookup <- function(year_or_range, kind) {
   key <- paste(as.character(year_or_range), kind, sep = "|")
   if (!(key %in% names(.ARSAU_REGISTRY_LIST))) {
@@ -325,6 +331,8 @@ morie_arsau_read_sidecar <- function(path) {
   .ARSAU_REGISTRY_LIST[[key]]
 }
 
+#' Internal helper: Arsau Coerce Year Key
+#' @noRd
 .arsau_coerce_year_key <- function(year, range_ok = FALSE) {
   s <- trimws(as.character(year))
   yrs <- ARSAU_YEARS()
@@ -341,6 +349,8 @@ morie_arsau_read_sidecar <- function(path) {
 }
 
 
+#' Internal helper: Arsau Load One
+#' @noRd
 .arsau_load_one <- function(entry, data_dir = NULL, language = "en", allow_invalid = FALSE) {
   if (!entry$is_valid && !allow_invalid) {
     stop(sprintf(

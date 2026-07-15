@@ -113,6 +113,8 @@ MORIE_TPS_REGISTRY <- list(
   REPORTED_YEAR    = "REPORT_YEAR"
 )
 
+#' Internal helper: Morie Tps Canonical
+#' @noRd
 .morie_tps_canonical <- function(name) {
   stopifnot(is.character(name), length(name) == 1L)
   keys <- names(MORIE_TPS_REGISTRY)

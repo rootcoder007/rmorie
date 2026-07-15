@@ -1,4 +1,36 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
+#' srr probability-distributions (PD) standards
+#'
+#' rmorie fits heavy-tailed distributions to crime data (Hill-MLE
+#' power-law / Levy-flight exponents, Pareto tails) as part of its
+#' statistical-physics-of-crime module. The applicable PD standards are
+#' addressed here; the general-representation and analytic-manipulation
+#' standards (which assume a distribution-object package such as
+#' `distributional`) are declared NA in `srr-stats-standards.R`.
+#'
+#' @srrstats {PD1.0} The choice and usage of each distribution is
+#'   justified with primary references (e.g. Brockmann et al. 2006 for
+#'   Levy flights; Bettencourt et al. for urban scaling), given in the
+#'   `@references` of the respective functions.
+#' @srrstats {PD3.2} Parameter estimation via optimisation (Hill maximum
+#'   likelihood, non-linear scaling fits) documents the estimator and its
+#'   settings, including any defaults.
+#' @srrstats {PD3.3} Return objects from fitted distributions include the
+#'   fitting information (estimated exponent, the estimator used, and the
+#'   sample size / support used in the fit).
+#' @srrstats {PD4.0} The numeric outputs of the distribution-fitting
+#'   functions are tested for numeric equality, not merely their
+#'   structure (see `test-tps_statphysics.R`).
+#' @srrstats {PD4.1} Tests cover the estimated distribution parameters.
+#' @srrstats {PD4.2} Tests cover derived quantities (scaling exponents,
+#'   tail indices).
+#' @srrstats {PD4.3} Numeric tests use explicit tolerances.
+#' @srrstats {PD4.4} Edge cases (short samples, degenerate support) are
+#'   handled and tested.
+#' @noRd
+NULL
+
 #' Statistical physics of crime for TPS data
 #'
 #' R port of \code{morie.tps_statphysics}. Implements the four canonical
@@ -71,6 +103,8 @@ NULL
 # Internal helpers (NOT exported)
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Tps Sp Result
+#' @noRd
 .tps_sp_result <- function(title, summary_lines = list(),
                             warnings = character(0),
                             interpretation = "",
@@ -87,6 +121,8 @@ NULL
   out
 }
 
+#' Internal helper: Tps Sp Round
+#' @noRd
 .tps_sp_round <- function(x, k = 3L) {
   if (!is.finite(x)) return(NA_real_)
   round(x, k)
@@ -96,6 +132,8 @@ NULL
 # port delegates to morie.tps_render.project_xy; in R we approximate
 # with a midpoint cos-lat factor so this module does not hard-depend on
 # the renderer port.
+#' Internal helper: Tps Sp Project Xy
+#' @noRd
 .tps_sp_project_xy <- function(lat, lon,
                                  lat_ref = (43.55 + 43.90) / 2,
                                  lon_ref = (-79.65 + -79.10) / 2) {
@@ -107,6 +145,8 @@ NULL
   )
 }
 
+#' Internal helper: Tps Sp Toronto Grid
+#' @noRd
 .tps_sp_toronto_grid <- function(nx = 90L, ny = 60L) {
   prj <- .tps_sp_project_xy(c(43.55, 43.90), c(-79.65, -79.10))
   gx <- seq(min(prj$x) - 1, max(prj$x) + 1, length.out = nx)
@@ -115,6 +155,8 @@ NULL
 }
 
 # Periodic-shift roll equivalent to NumPy np.roll along one axis.
+#' Internal helper: Tps Sp Roll
+#' @noRd
 .tps_sp_roll <- function(M, shift, axis) {
   d <- dim(M)
   if (axis == 1L) {
@@ -127,6 +169,8 @@ NULL
 }
 
 # Periodic 5-point Laplacian.
+#' Internal helper: Tps Sp Lap
+#' @noRd
 .tps_sp_lap <- function(F_, dx, dy) {
   (.tps_sp_roll(F_,  1L, 1L) + .tps_sp_roll(F_, -1L, 1L) +
    .tps_sp_roll(F_,  1L, 2L) + .tps_sp_roll(F_, -1L, 2L) -
@@ -134,6 +178,8 @@ NULL
 }
 
 # Central-difference gradient with periodic wrap (gx, gy).
+#' Internal helper: Tps Sp Grad
+#' @noRd
 .tps_sp_grad <- function(F_, dx, dy) {
   list(
     gx = (.tps_sp_roll(F_, -1L, 2L) - .tps_sp_roll(F_, 1L, 2L)) / (2 * dx),
@@ -142,6 +188,8 @@ NULL
 }
 
 # Pointwise 3x3 local-maximum filter.
+#' Internal helper: Tps Sp Local Max3x3
+#' @noRd
 .tps_sp_local_max3x3 <- function(F_) {
   out <- F_
   for (di in c(-1L, 0L, 1L)) {
@@ -154,6 +202,8 @@ NULL
 }
 
 # 2-D histogram on prescribed bin edges (rows = y, cols = x).
+#' Internal helper: Tps Sp Hist2d
+#' @noRd
 .tps_sp_hist2d <- function(x, y, gx, gy) {
   ix <- findInterval(x, gx, rightmost.closed = TRUE)
   iy <- findInterval(y, gy, rightmost.closed = TRUE)
@@ -175,6 +225,8 @@ NULL
 # Write one PNG under the caller-supplied fig_dir and return its path
 # for the result's Figure line; with fig_dir = NULL nothing is written
 # and the returned note says exactly that (no silent claims).
+#' Internal helper: Tps Sp Fig
+#' @noRd
 .tps_sp_fig <- function(fig_dir, name, draw, save_fig = TRUE,
                         width = 1140, height = 620) {
   if (!isTRUE(save_fig)) return("(skipped)")

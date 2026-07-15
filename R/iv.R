@@ -16,9 +16,7 @@
 #
 # Public R names mirror the Python module under the `morie_iv_*` prefix.
 
-#' @importFrom stats lm glm coef vcov pnorm pt pf pchisq qnorm qt qchisq
-#'   model.matrix model.frame fitted residuals binomial as.formula sigma
-#'   complete.cases quantile predict
+#' @importFrom stats lm glm coef vcov pnorm pt pf pchisq qnorm qt qchisq model.matrix model.frame fitted residuals binomial as.formula sigma complete.cases quantile predict
 #' @importFrom utils head
 NULL
 
@@ -67,9 +65,13 @@ NULL
 # Internal helpers
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Morie Iv Have Ivreg
+#' @noRd
 .morie_iv_have_ivreg <- function() {
   requireNamespace("ivreg", quietly = TRUE)
 }
+#' Internal helper: Morie Iv Have AER
+#' @noRd
 .morie_iv_have_AER <- function() {
   requireNamespace("AER", quietly = TRUE)
 }

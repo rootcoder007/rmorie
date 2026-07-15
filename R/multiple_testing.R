@@ -68,12 +68,24 @@ NULL
 # Internal helpers (NOT exported)
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Mt Have Poolr
+#' @noRd
 .mt_have_poolr        <- function() requireNamespace("poolr",        quietly = TRUE)
+#' Internal helper: Mt Have Qvalue
+#' @noRd
 .mt_have_qvalue       <- function() requireNamespace("qvalue",       quietly = TRUE)
+#' Internal helper: Mt Have Harmonicmeanp
+#' @noRd
 .mt_have_harmonicmeanp <- function() requireNamespace("harmonicmeanp", quietly = TRUE)
+#' Internal helper: Mt Have Gmcp
+#' @noRd
 .mt_have_gmcp         <- function() requireNamespace("gMCP",         quietly = TRUE)
+#' Internal helper: Mt Have Mutoss
+#' @noRd
 .mt_have_mutoss       <- function() requireNamespace("mutoss",       quietly = TRUE)
 
+#' Internal helper: Mt Result
+#' @noRd
 .mt_result <- function(title, call, summary_lines = list(),
                        warnings = character(0),
                        interpretation = "",
@@ -90,6 +102,8 @@ NULL
   out
 }
 
+#' Internal helper: Mt Adjusted
+#' @noRd
 .mt_adjusted <- function(method, p, alpha, adjusted, labels = NULL,
                          note = NULL) {
   p <- as.numeric(p)
@@ -131,6 +145,8 @@ NULL
   )
 }
 
+#' Internal helper: Mt Check P
+#' @noRd
 .mt_check_p <- function(p) {
   p <- as.numeric(p)
   if (length(p) == 0L) {
@@ -350,6 +366,8 @@ storey_q <- function(p_values, alpha = 0.05, lambda_param = 0.5,
 # Combining p-values
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Mt Combine Result
+#' @noRd
 .mt_combine_result <- function(method, stat, p_comb, interp,
                                extra = list()) {
   out <- list(

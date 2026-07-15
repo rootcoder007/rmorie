@@ -146,6 +146,8 @@ morie_tps_psdp_layers <- function() {
 # escape hatch for callers who want a non-canonical FeatureServer URL).
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Morie Tps Psdp Dispatch
+#' @noRd
 .morie_tps_psdp_dispatch <- function(layer_key, year, max_features,
                                       offline, layer_url) {
   if (!(layer_key %in% names(.MORIE_TPS_PSDP_REGISTRY))) {

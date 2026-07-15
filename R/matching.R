@@ -24,9 +24,7 @@
 # shapes (`morie_match_result`, `morie_te_result`,
 # `morie_balance_result`) that downstream MRM code depends on.
 
-#' @importFrom stats glm binomial predict quantile sd var cov lm
-#'   complete.cases as.formula model.matrix qnorm pnorm ks.test
-#'   weighted.mean setNames
+#' @importFrom stats glm binomial predict quantile sd var cov lm complete.cases as.formula model.matrix qnorm pnorm ks.test weighted.mean setNames
 #' @importFrom utils head tail
 NULL
 
@@ -35,10 +33,14 @@ NULL
 # Internal helpers
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Morie Matching Have
+#' @noRd
 .morie_matching_have <- function(pkg) {
   requireNamespace(pkg, quietly = TRUE)
 }
 
+#' Internal helper: Morie Matching Require
+#' @noRd
 .morie_matching_require <- function(pkg, fn) {
   morie_ensure_extras(pkg)
   invisible(TRUE)

@@ -46,6 +46,8 @@ NULL
 # Internal helper
 # ---------------------------------------------------------------------
 
+#' Internal helper: Morie Spatial Need
+#' @noRd
 .morie_spatial_need <- function(pkg, fn) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
     stop(

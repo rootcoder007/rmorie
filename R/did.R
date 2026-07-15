@@ -2,6 +2,77 @@
 #
 # Difference-in-Differences (DiD) estimators for rmorie.
 #
+
+#' srr regression (RE) standards
+#'
+#' The RE standards for rmorie's regression estimators (did / causal /
+#' ipw / matching / dml / sensitivity / tox calibration / survival) are
+#' recorded here in one reviewable place, with pointers to the code that
+#' addresses each.
+#'
+#' @srrstats {RE1.0} Regression is specified either by a formula (the
+#'   survival and glm-based wrappers) or, for the MRM estimators, by
+#'   named `outcome` / `treatment` / column arguments; the column-name
+#'   interface is a documented design choice for the panel/DiD estimators.
+#' @srrstats {RE1.1} The conversion of the model specification to a
+#'   design matrix is documented in each estimator (e.g. did builds
+#'   `cbind(d, p, interaction, covariates)` then `model.matrix`).
+#' @srrstats {RE1.2} Expected predictor formats/types are documented on
+#'   each `@param`; `.morie_check_data()` also enforces them.
+#' @srrstats {RE1.3} Coefficient names are retained on the returned
+#'   coefficient/SE vectors.
+#' @srrstats {RE1.3a} Per-observation input attributes not needed for
+#'   inference (row names, arbitrary column `attributes()`) are not
+#'   carried onto the compact result object; this is documented here.
+#' @srrstats {RE1.4} Modelling assumptions are documented (e.g. parallel
+#'   trends for DiD) and testable (`morie_did_test_parallel_trends`).
+#' @srrstats {RE2.0} Input transformations (factor handling, intercept
+#'   addition) are documented; `.viable_terms()` reports dropped terms.
+#' @srrstats {RE2.1} Missing values are handled explicitly via
+#'   complete-case selection (`.morie_did_drop_na` / `stats::complete.cases`)
+#'   and the finite-value check in `.morie_check_numvec` distinguishes
+#'   NA/NaN from Inf.
+#' @srrstats {RE2.4} Perfectly collinear / zero-variance terms are
+#'   identified and dropped before fitting.
+#' @srrstats {RE2.4a} `.viable_terms()` detects predictor terms with a
+#'   single observed level (perfect collinearity among predictors).
+#' @srrstats {RE3.0} Iterative fitters (glm, Hawkes MLE, HMC backends)
+#'   surface non-convergence via their upstream warnings.
+#' @srrstats {RE3.1} Those warnings can be suppressed by the caller while
+#'   the returned object still records fit status.
+#' @srrstats {RE3.2} Convergence thresholds default to the well-tested
+#'   upstream defaults (documented per wrapper).
+#' @srrstats {RE3.3} Convergence thresholds can be set explicitly through
+#'   the `...` pass-through to the upstream fitter.
+#' @srrstats {RE4.0} Estimators return a structured result object
+#'   (class `morie_rich_result`) modelling the fit.
+#' @srrstats {RE4.2} Coefficients are returned (`details$all_coefficients`).
+#' @srrstats {RE4.3} Confidence intervals on the estimate are returned
+#'   (`ci_lower` / `ci_upper`).
+#' @srrstats {RE4.4} The model specification/method is returned (`method`).
+#' @srrstats {RE4.5} The number of observations is returned
+#'   (`n_treated` / `n_control` / `details$n_obs`).
+#' @srrstats {RE4.6} The variance-covariance matrix is available via
+#'   `morie_causal_robust_se()`.
+#' @srrstats {RE4.10} Residuals are provided for the survival models
+#'   (Schoenfeld / martingale / deviance / Cox-Snell in `survival.R`).
+#' @srrstats {RE4.11} Goodness-of-fit and effect-size statistics are
+#'   provided (`effect_sizes.R`, R-squared helpers).
+#' @srrstats {RE4.12} Forward-and-inverse transforms are provided where
+#'   relevant (tox calibration curve + inverse prediction).
+#' @srrstats {RE4.17} Result objects implement a default `print` method
+#'   (via the `morie_rich_result` class).
+#' @srrstats {RE7.0} Tests use noiseless exact predictor relationships.
+#' @srrstats {RE7.0a} Tests confirm rejection of perfectly noiseless
+#'   (zero-variance / collinear) predictors.
+#' @srrstats {RE7.1} Tests use noiseless exact predictor-response
+#'   relationships and confirm exact recovery.
+#' @srrstats {RE7.3} Tests confirm the documented accessor fields of the
+#'   returned model object (see `test-srr-standards-RE.R`).
+#' @noRd
+NULL
+
+#
 # Phase 1.e refactor (2026-05-25): hand-written base-R DiD implementations
 # have been replaced with thin wrappers over canonical CRAN packages.
 # Every method-style entry point now delegates to the reference
@@ -41,10 +112,7 @@
 # `morie_did_diagnostics`) are kept verbatim -- their output shapes
 # are part of the rmorie API.
 
-#' @importFrom stats lm glm coef vcov pnorm pt pf pchisq qnorm qt qchisq
-#'   model.matrix model.frame fitted residuals binomial as.formula sigma
-#'   complete.cases quantile predict ave sd var aggregate na.omit
-#'   reshape lsfit setNames
+#' @importFrom stats lm glm coef vcov pnorm pt pf pchisq qnorm qt qchisq model.matrix model.frame fitted residuals binomial as.formula sigma complete.cases quantile predict ave sd var aggregate na.omit reshape lsfit setNames
 #' @importFrom utils combn head
 NULL
 
@@ -53,13 +121,29 @@ NULL
 # Internal helpers
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Morie Did Have Fixest
+#' @noRd
 .morie_did_have_fixest         <- function() requireNamespace("fixest",         quietly = TRUE)
+#' Internal helper: Morie Did Have Did
+#' @noRd
 .morie_did_have_did            <- function() requireNamespace("did",            quietly = TRUE)
+#' Internal helper: Morie Did Have Bacondecomp
+#' @noRd
 .morie_did_have_bacondecomp    <- function() requireNamespace("bacondecomp",    quietly = TRUE)
+#' Internal helper: Morie Did Have Coresynth
+#' @noRd
 .morie_did_have_coresynth      <- function() requireNamespace("coresynth",      quietly = TRUE)
+#' Internal helper: Morie Did Have Sandwich
+#' @noRd
 .morie_did_have_sandwich       <- function() requireNamespace("sandwich",       quietly = TRUE)
+#' Internal helper: Morie Did Have Drdid
+#' @noRd
 .morie_did_have_drdid          <- function() requireNamespace("DRDID",          quietly = TRUE)
+#' Internal helper: Morie Did Have Honestdid
+#' @noRd
 .morie_did_have_honestdid      <- function() requireNamespace("HonestDiD",      quietly = TRUE)
+#' Internal helper: Morie Did Have Didmultiplegt
+#' @noRd
 .morie_did_have_didmultiplegt  <- function() requireNamespace("DIDmultiplegt",  quietly = TRUE)
 
 #' @keywords internal
@@ -123,6 +207,11 @@ NULL
 
 #' @keywords internal
 .morie_did_drop_na <- function(data, cols) {
+  # Every did estimator routes through here, so validate once at the
+  # shared entry: assert a data.frame with the required columns, then
+  # drop incomplete rows (G2.14b ignore-with-message).
+  data <- .morie_check_data(data, required = cols, arg = "data",
+                            check_na = TRUE)
   data[stats::complete.cases(data[, cols, drop = FALSE]), , drop = FALSE]
 }
 

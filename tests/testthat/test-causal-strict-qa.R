@@ -167,6 +167,7 @@ test_that("morie_estimate_double_ml (PLR) recovers tau (n=2500, 5-fold)", {
 })
 
 test_that("morie_estimate_irm recovers tau (n=2500, 5-fold)", {
+  testthat::skip_if_not_installed("ranger")
   skip_on_cran()  # slow (mlr3 cv_glmnet) + platform-sensitive numerics on Windows
   d <- make_dml_dgp(n = 2500L, tau = 2.5, seed = 124L)
   res <- morie_estimate_irm(d, treatment = "d", outcome = "y",

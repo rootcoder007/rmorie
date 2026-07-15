@@ -39,6 +39,8 @@ NULL
 # mrm_primitives_gentrification.R and are reused (not redefined) here.
 
 
+#' Internal helper: Tso Logit Ll
+#' @noRd
 .tso_logit_ll <- function(eta, y) {
   # log-likelihood of a single binary logit with linear predictor `eta`
   # (intercept already folded in).  Uses log1p(exp(-|eta|)) for stability.
@@ -46,6 +48,8 @@ NULL
 }
 
 
+#' Internal helper: Tso Fit Po Stacked
+#' @noRd
 .tso_fit_po_stacked <- function(X, y, K, max_iter, tol) {
   # Fallback proportional-odds fit (no MASS): stack the K-1 cutpoint
   # binary problems and constrain beta to be shared while letting

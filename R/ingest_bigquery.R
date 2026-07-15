@@ -24,6 +24,8 @@
 
 # Internal: backtick-quote a BigQuery identifier; refuse anything that
 # isn't a legal project / dataset / table name.
+#' Internal helper: Morie Bq Quote Ident
+#' @noRd
 .morie_bq_quote_ident <- function(name) {
   if (!is.character(name) || length(name) != 1L || !nzchar(name)) {
     stop("Illegal BigQuery identifier: ",
@@ -38,6 +40,8 @@
 }
 
 # Internal: resolve the billing project.
+#' Internal helper: Morie Bq Billing Project
+#' @noRd
 .morie_bq_billing_project <- function(billing_project = NULL) {
   if (!is.null(billing_project) && nzchar(billing_project)) {
     return(billing_project)
@@ -51,6 +55,8 @@
 
 # Internal: hard-fail with the canonical install hint if bigrquery is
 # missing.
+#' Internal helper: Morie Bq Require
+#' @noRd
 .morie_bq_require <- function() {
   if (!requireNamespace("bigrquery", quietly = TRUE)) {
     stop(

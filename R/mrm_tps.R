@@ -32,6 +32,8 @@ NULL
 # Internal: pairwise lat/long distance in kilometres (haversine)
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Haversine Km
+#' @noRd
 .haversine_km <- function(lat1, lon1, lat2, lon2) {
   R <- 6371
   rad <- pi / 180

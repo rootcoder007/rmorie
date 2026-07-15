@@ -1,3 +1,38 @@
+# rmorie 1.1.2
+
+## CLI analysis entry point + NYPD/CPD backends
+
+* `cli_main()` — single R-side dispatcher for the rmorie-cli `analyze
+  <subject>` verb (otis/siu/nypd/cpd run real analyses; tps returns a guided
+  note). Forwards CLI flags as JSON with formal-intersection.
+* `morie_cpd_all_analyses()` and `morie_nypd_all_analyses()` — new
+  single-call analysis suites for the Chicago/NYC policing subjects (crimes
+  by type, predpol area concentration, temporal, and race disparate-impact),
+  mirroring `morie_otis_all_analyses`. Offline on bundled fixtures.
+
+## Security hardening (parity with the morie ecosystem)
+
+Non-breaking trust-boundary guards on the process-execution and
+deserialization sinks. Defaults are unchanged; these add a kill-switch
+and a single choke point (see the new internal `R/aaa_exec_guard.R`).
+
+* **`MORIE_NO_EXEC=1` kill-switch** — now honoured by every sink that
+  spawns an external process: `morie_agent()`, `morie_ask_percy()`
+  (Python), `morie_vertex_access_token()` (gcloud), the `morie_bricklayer()`
+  pip install, and the DMT_Imaging `git clone`. Set it on shared/CI/locked
+  machines to disable all process execution.
+* **Deserialization choke point** — the three `readRDS()` sites that take a
+  user-supplied path (`morie_cache_file()`, `morie_inspect_output()`,
+  `morie_ml_load()`) now route through `.morie_safe_readRDS()`, which also
+  honours `MORIE_NO_EXEC` (an `.rds` file can execute code while loading).
+  First-party cache/bundled loads are unchanged.
+* **git-ref validation** — `morie_entheo_clone_dmt_imaging()` now rejects
+  branch names outside `^[A-Za-z0-9][A-Za-z0-9._/-]*$`, closing an
+  option-injection vector (e.g. `--upload-pack=...`) into `git clone`.
+
+All `system2()` sinks continue to use argv lists (no shell-string
+interpolation); that invariant is now documented in the guard file.
+
 # rmorie 1.1.0
 
 ## CI hardening (docs-site build) + version re-lock with morie

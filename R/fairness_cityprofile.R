@@ -44,6 +44,8 @@ MORIE_FAIRNESS_CANONICAL_FIELDS <- c(
 .morie_fairness_registry <- new.env(parent = emptyenv())
 
 
+#' Internal helper: Morie Fairness Init Registry
+#' @noRd
 .morie_fairness_init_registry <- function() {
   if (!exists("generic", envir = .morie_fairness_registry, inherits = FALSE)) {
     assign("generic",

@@ -32,6 +32,8 @@
 NULL
 
 
+#' Internal helper: Morie Logistic Propensity
+#' @noRd
 .morie_logistic_propensity <- function(D, X) {
   d <- data.frame(D = D, X)
   fit <- suppressWarnings(stats::glm(D ~ ., data = d, family = stats::binomial()))

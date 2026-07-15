@@ -617,8 +617,15 @@ morie_entheo_clone_dmt_imaging <- function(root = NULL,
          call. = FALSE)
   }
   args <- c("clone", "--depth", "1")
-  if (!is.null(branch)) args <- c(args, "--branch", as.character(branch))
+  if (!is.null(branch)) {
+    if (!.morie_valid_git_ref(as.character(branch))) {
+      stop("invalid branch name: ", branch,
+           " (must match ^[A-Za-z0-9][A-Za-z0-9._/-]*$)", call. = FALSE)
+    }
+    args <- c(args, "--branch", as.character(branch))
+  }
   args <- c(args, "https://github.com/timmer500/DMT_Imaging.git", root)
+  .morie_ensure_exec_allowed("git clone of DMT_Imaging")
   status <- system2("git", args, stdout = TRUE, stderr = TRUE)
   if (!dir.exists(root)) {
     stop("git clone failed: ", paste(status, collapse = "\n"),

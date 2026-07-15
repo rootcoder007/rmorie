@@ -23,6 +23,8 @@
 #'   83(401), 9--27. \doi{10.1080/01621459.1988.10478560}
 NULL
 
+#' Internal helper: Hst Check Params
+#' @noRd
 .hst_check_params <- function(p) {
   need <- c("mu", "alpha", "beta", "sigma")
   if (!all(need %in% names(p))) {
@@ -35,6 +37,8 @@ NULL
 }
 
 # Gaussian spatial density evaluated at squared distances.
+#' Internal helper: Hst Spatial
+#' @noRd
 .hst_spatial <- function(d2, sigma) {
   exp(-d2 / (2 * sigma^2)) / (2 * pi * sigma^2)
 }

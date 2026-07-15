@@ -32,6 +32,8 @@ NULL
 # Internal helpers (NOT exported)
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Tps Temporal Result
+#' @noRd
 .tps_temporal_result <- function(title, call, summary_lines = list(),
                                   warnings = character(0),
                                   interpretation = "",
@@ -48,6 +50,8 @@ NULL
   out
 }
 
+#' Internal helper: Tps Temporal Fmt Round
+#' @noRd
 .tps_temporal_fmt_round <- function(x, k) {
   if (!is.finite(x)) return(NA_real_)
   round(x, k)
@@ -55,6 +59,8 @@ NULL
 
 # Build monthly counts from an arbitrary date column. Returns a list
 # with $dates (POSIXct, first-of-month) and $counts (integer).
+#' Internal helper: Tps Temporal Monthly
+#' @noRd
 .tps_temporal_monthly <- function(df) {
   dt <- NULL
   if (all(c("OCC_YEAR", "OCC_MONTH", "OCC_DAY") %in% names(df))) {

@@ -27,6 +27,8 @@
 
 # ---- Result containers ----------------------------------------------------
 
+#' Internal helper: New Residual Diag
+#' @noRd
 .new_residual_diag <- function(raw, std, student, deviance, pearson,
                                fitted, normality, hetero, autoc,
                                outlier_indices) {
@@ -46,6 +48,8 @@
   )
 }
 
+#' Internal helper: New Influence Diag
+#' @noRd
 .new_influence_diag <- function(h, cooks, dffits, dfbetas, covratio,
                                 influential, high_lev, high_cook) {
   structure(
@@ -59,6 +63,8 @@
   )
 }
 
+#' Internal helper: New Collin Diag
+#' @noRd
 .new_collin_diag <- function(vif, cond_num, cond_idx, var_decomp,
                              eigvals, n_collin, pairs) {
   structure(
@@ -71,6 +77,8 @@
   )
 }
 
+#' Internal helper: New Spec Test
+#' @noRd
 .new_spec_test <- function(name, statistic, p_value, df, conclusion) {
   structure(
     list(name = name, statistic = statistic, p_value = p_value,
@@ -79,6 +87,8 @@
   )
 }
 
+#' Internal helper: New Gof
+#' @noRd
 .new_gof <- function(r_squared, adj_r_squared, pseudo_r_squared,
                     aic, bic, log_likelihood, deviance, pearson_chi2,
                     df_model, df_residual, f_statistic, f_pvalue, n_obs) {
@@ -94,6 +104,8 @@
   )
 }
 
+#' Internal helper: New Diag Report
+#' @noRd
 .new_diag_report <- function(residuals, influence, collinearity,
                              gof, spec_tests, assessment) {
   structure(
@@ -106,6 +118,8 @@
 }
 
 # Solve / pseudo-inverse helper.
+#' Internal helper: Safe Solve
+#' @noRd
 .safe_solve <- function(A) {
   res <- try(solve(A), silent = TRUE)
   if (inherits(res, "try-error")) MASS::ginv(A) else res

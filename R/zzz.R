@@ -29,6 +29,8 @@ utils::globalVariables(c(
   ".gee_cluster_id_int_"
 ))
 
+#' Internal helper: OnLoad
+#' @noRd
 .onLoad <- function(libname, pkgname) {
   # The fast-stat kernels in src/morie_fast.cpp resolve rmbl_* routines
   # that rmoriebricklayer registers via R_RegisterCCallable (LinkingTo).

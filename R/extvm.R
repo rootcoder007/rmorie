@@ -4,6 +4,8 @@
 # Lifted from the extvm() optimiser closure so the xi ~ 0 (Gumbel) and
 # out-of-support branches are directly unit-testable; the BFGS search in
 # extvm() is not guaranteed to probe xi within 1e-8 of zero.
+#' Internal helper: Extvm Log Gev
+#' @noRd
 .extvm_log_gev <- function(par, x) {
   mu <- par[1]
   sigma <- exp(par[2])

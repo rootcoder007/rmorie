@@ -49,6 +49,8 @@ morie_ingest_chicago_resources <- function() {
 }
 
 # Internal: a single Socrata SoQL GET against `resource_url`.
+#' Internal helper: Morie Chicago Socrata Get
+#' @noRd
 .morie_chicago_socrata_get <- function(resource_url,
                                        where = NULL,
                                        select = NULL,
@@ -117,6 +119,8 @@ morie_ingest_chicago_resources <- function() {
 
 # Internal: bind a list-of-row-lists to a data.frame, tolerating
 # heterogeneous JSON shapes (missing columns become NA).
+#' Internal helper: Morie Chicago Rows To Df
+#' @noRd
 .morie_chicago_rows_to_df <- function(rows) {
   if (length(rows) == 0L) {
     return(data.frame())

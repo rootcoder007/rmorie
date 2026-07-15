@@ -43,6 +43,8 @@ NULL
 # Internal helper
 # ---------------------------------------------------------------------
 
+#' Internal helper: Morie Stats Need
+#' @noRd
 .morie_stats_need <- function(pkg, fn) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
     stop(

@@ -209,6 +209,8 @@ morie_datasets_vpd_crime <- function(offline = TRUE,
 
 .MORIE_VPD_TERMS_WARNED <- new.env(parent = emptyenv())
 
+#' Internal helper: Morie Vpd Terms Warning
+#' @noRd
 .morie_vpd_terms_warning <- function(accept_terms) {
   if (isTRUE(accept_terms)) return(invisible())
   if (isTRUE(.MORIE_VPD_TERMS_WARNED$warned)) return(invisible())

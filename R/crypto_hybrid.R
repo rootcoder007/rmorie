@@ -15,6 +15,8 @@
 # WARNING: Research/educational implementation.  NOT constant-time.
 # For production use, prefer audited hybrid KEM libraries (e.g. liboqs).
 
+#' Internal helper: Morie Require Sodium
+#' @noRd
 .morie_require_sodium <- function() {
   if (!requireNamespace("sodium", quietly = TRUE)) {
     stop(
@@ -24,6 +26,8 @@
   }
 }
 
+#' Internal helper: Morie Require Openssl
+#' @noRd
 .morie_require_openssl <- function() {
   if (!requireNamespace("openssl", quietly = TRUE)) {
     stop(
@@ -33,6 +37,8 @@
   }
 }
 
+#' Internal helper: Morie Hkdf Sha256
+#' @noRd
 .morie_hkdf_sha256 <- function(ikm, len = 32L, salt = NULL,
                                info = raw(0)) {
   # 'len' not 'length' — base length() must not be shadowed
@@ -56,6 +62,8 @@
   okm[seq_len(len)]
 }
 
+#' Internal helper: Morie Wrapping Key
+#' @noRd
 .morie_wrapping_key <- function(kem_ct, pk) {
   .morie_require_openssl()
   salt <- as.raw(openssl::sha256(charToRaw("morie-hybrid-wrap-v1")))

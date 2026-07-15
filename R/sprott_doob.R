@@ -46,6 +46,8 @@ NULL
 # the structure of morie.fn._richresult.RichResult so that downstream
 # `describe()` / `morie_print_rich()` consumers can render the same
 # multi-section paragraph layout from R.
+#' Internal helper: Morie Siu Rich
+#' @noRd
 .morie_siu_rich <- function(title, summary_lines = list(), tables = list(),
                             interpretation = "", warnings = character(),
                             payload = list()) {

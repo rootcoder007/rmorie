@@ -31,6 +31,8 @@ MORIE_TPS_SUPPORTED_FORMATS <- c(
 )
 
 
+#' Internal helper: Morie Tps Io Category Dir
+#' @noRd
 .morie_tps_io_category_dir <- function(name, fmt_subdir) {
   canonical <- .morie_tps_canonical(name)
   base <- morie_tps_data_dir()
@@ -38,6 +40,8 @@ MORIE_TPS_SUPPORTED_FORMATS <- c(
 }
 
 
+#' Internal helper: Morie Tps Io Pick One
+#' @noRd
 .morie_tps_io_pick_one <- function(d, exts) {
   if (!dir.exists(d)) {
     stop(sprintf("no matching file in %s (exts: %s)",
@@ -59,6 +63,8 @@ MORIE_TPS_SUPPORTED_FORMATS <- c(
 }
 
 
+#' Internal helper: Morie Tps Apply Nrows
+#' @noRd
 .morie_tps_apply_nrows <- function(df, nrows) {
   if (is.null(nrows)) return(df)
   n <- min(nrow(df), as.integer(nrows))
@@ -69,6 +75,8 @@ MORIE_TPS_SUPPORTED_FORMATS <- c(
 # ── CSV / Excel ───────────────────────────────────────────────────
 
 
+#' Internal helper: Morie Tps Read Csv
+#' @noRd
 .morie_tps_read_csv <- function(name, nrows) {
   p <- .morie_tps_io_pick_one(
     .morie_tps_io_category_dir(name, "CSV"), "csv")
@@ -79,6 +87,8 @@ MORIE_TPS_SUPPORTED_FORMATS <- c(
 }
 
 
+#' Internal helper: Morie Tps Read Excel
+#' @noRd
 .morie_tps_read_excel <- function(name, nrows) {
   if (!requireNamespace("readxl", quietly = TRUE)) {
     stop(
@@ -104,6 +114,8 @@ MORIE_TPS_SUPPORTED_FORMATS <- c(
 # ── GeoJSON / FeatureCollection ───────────────────────────────────
 
 
+#' Internal helper: Morie Tps Read Geojson
+#' @noRd
 .morie_tps_read_geojson <- function(name, nrows) {
   if (!requireNamespace("sf", quietly = TRUE)) {
     stop(
@@ -123,6 +135,8 @@ MORIE_TPS_SUPPORTED_FORMATS <- c(
 }
 
 
+#' Internal helper: Morie Tps Read Featurecollection
+#' @noRd
 .morie_tps_read_featurecollection <- function(name, nrows) {
   # ESRI FeatureCollection exports are .txt with JSON inside;
   # the sf GeoJSON driver handles them when given the right path.
@@ -153,6 +167,8 @@ MORIE_TPS_SUPPORTED_FORMATS <- c(
 # ── KML / KMZ ─────────────────────────────────────────────────────
 
 
+#' Internal helper: Morie Tps Read Kml
+#' @noRd
 .morie_tps_read_kml <- function(name, nrows) {
   if (!requireNamespace("sf", quietly = TRUE)) {
     stop(
@@ -198,6 +214,8 @@ MORIE_TPS_SUPPORTED_FORMATS <- c(
 # ── GeoPackage / SQLiteGeodatabase ────────────────────────────────
 
 
+#' Internal helper: Morie Tps Read Sf Path
+#' @noRd
 .morie_tps_read_sf_path <- function(p, nrows) {
   if (!requireNamespace("sf", quietly = TRUE)) {
     stop(
@@ -214,6 +232,8 @@ MORIE_TPS_SUPPORTED_FORMATS <- c(
 }
 
 
+#' Internal helper: Morie Tps Read Geopackage
+#' @noRd
 .morie_tps_read_geopackage <- function(name, nrows) {
   p <- .morie_tps_io_pick_one(
     .morie_tps_io_category_dir(name, "GeoPackage"), "gpkg")
@@ -221,6 +241,8 @@ MORIE_TPS_SUPPORTED_FORMATS <- c(
 }
 
 
+#' Internal helper: Morie Tps Read Sqlite Geodatabase
+#' @noRd
 .morie_tps_read_sqlite_geodatabase <- function(name, nrows) {
   p <- .morie_tps_io_pick_one(
     .morie_tps_io_category_dir(name, "SQLiteGeodatabase"),
@@ -232,6 +254,8 @@ MORIE_TPS_SUPPORTED_FORMATS <- c(
 # ── Shapefile / FileGeoDatabase ───────────────────────────────────
 
 
+#' Internal helper: Morie Tps Read Shapefile
+#' @noRd
 .morie_tps_read_shapefile <- function(name, nrows) {
   if (!requireNamespace("sf", quietly = TRUE)) {
     stop(
@@ -266,6 +290,8 @@ MORIE_TPS_SUPPORTED_FORMATS <- c(
 }
 
 
+#' Internal helper: Morie Tps Read Filegeodatabase
+#' @noRd
 .morie_tps_read_filegeodatabase <- function(name, nrows) {
   # GDAL OpenFileGDB driver via sf::st_read works on the directory.
   if (!requireNamespace("sf", quietly = TRUE)) {

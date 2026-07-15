@@ -96,6 +96,8 @@ san_score <- function(eeg, fmri = NULL) {
 # Internal: theoretical-framework helpers (parity with _theory.py)
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Entheo Extract Pair
+#' @noRd
 .entheo_extract_pair <- function(record_or_eeg, fmri) {
   if (is.list(record_or_eeg) && !is.null(record_or_eeg$fmri)) {
     rec <- record_or_eeg
@@ -107,6 +109,8 @@ san_score <- function(eeg, fmri = NULL) {
   list(e_dmt = record_or_eeg, f_dmt = fmri, e_pcb = NULL, f_pcb = NULL)
 }
 
+#' Internal helper: Entheo Envelope
+#' @noRd
 .entheo_envelope <- function(x) {
   kern <- rep(1 / 5, 5)
   abs_x <- abs(x)
@@ -117,6 +121,8 @@ san_score <- function(eeg, fmri = NULL) {
   }
 }
 
+#' Internal helper: Entheo Align
+#' @noRd
 .entheo_align <- function(e, f) {
   e_tc <- if (is.matrix(e)) colMeans(e) else e
   f_tc <- if (is.matrix(f)) colMeans(f) else f
@@ -138,6 +144,8 @@ san_score <- function(eeg, fmri = NULL) {
   list(e = .bin(e_tc), f = .bin(f_tc))
 }
 
+#' Internal helper: Entheo Binding Per Frame
+#' @noRd
 .entheo_binding_per_frame <- function(eeg, fmri) {
   env <- .entheo_envelope(eeg)
   al <- .entheo_align(env, fmri)
@@ -166,6 +174,8 @@ san_score <- function(eeg, fmri = NULL) {
   out / sd_o
 }
 
+#' Internal helper: Entheo San Per Frame
+#' @noRd
 .entheo_san_per_frame <- function(eeg, fmri) {
   al <- .entheo_align(eeg, fmri)
   e_tc <- al$e

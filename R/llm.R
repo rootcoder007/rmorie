@@ -28,21 +28,35 @@ GEMINI_BASE_URL <- "https://generativelanguage.googleapis.com/v1beta/openai"
 
 `%||%` <- function(a, b) if (is.null(a)) b else a
 
+#' Internal helper: Morie Llm Env
+#' @noRd
 .morie_llm_env <- function(name, default = "") {
   v <- trimws(Sys.getenv(name, unset = ""))
   if (nzchar(v)) v else default
 }
+#' Internal helper: Morie Llm Ollama Base
+#' @noRd
 .morie_llm_ollama_base <- function() {
   sub("/+$", "", .morie_llm_env("OLLAMA_BASE_URL", DEFAULT_OLLAMA_BASE_URL))
 }
+#' Internal helper: Morie Llm Gemini Key
+#' @noRd
 .morie_llm_gemini_key  <- function() { v <- .morie_llm_env("GEMINI_API_KEY")
 if (nzchar(v)) v else NULL }
+#' Internal helper: Morie Llm Openai Key
+#' @noRd
 .morie_llm_openai_key  <- function() { v <- .morie_llm_env("OPENAI_API_KEY")
 if (nzchar(v)) v else NULL }
+#' Internal helper: Morie Llm Api Base
+#' @noRd
 .morie_llm_api_base    <- function() { v <- .morie_llm_env("LLM_API_BASE_URL")
 if (nzchar(v)) sub("/+$", "", v) else NULL }
+#' Internal helper: Morie Llm Api Key
+#' @noRd
 .morie_llm_api_key     <- function() { v <- .morie_llm_env("LLM_API_KEY")
 if (nzchar(v)) v else NULL }
+#' Internal helper: Morie Llm Gemini Model
+#' @noRd
 .morie_llm_gemini_model <- function() .morie_llm_env("GEMINI_MODEL", DEFAULT_GEMINI_MODEL)
 
 #' Probe a local Ollama instance
@@ -75,6 +89,8 @@ morie_llm_detect_provider <- function() {
   "local"
 }
 
+#' Internal helper: Morie Llm System Prompt
+#' @noRd
 .morie_llm_system_prompt <- function(context_block = "") {
   paste0(
     "You are the MORIE agent for methods for observational inference and ",
@@ -89,6 +105,8 @@ morie_llm_detect_provider <- function() {
   )
 }
 
+#' Internal helper: Morie Llm Messages
+#' @noRd
 .morie_llm_messages <- function(prompt, context = NULL, system_prompt = NULL) {
   if (is.null(system_prompt)) {
     ctx_block <- if (is.null(context)) "" else paste(
@@ -138,6 +156,8 @@ morie_llm_request_completion <- function(base_url, model, messages,
   jsonlite::fromJSON(httr2::resp_body_string(resp), simplifyVector = FALSE)
 }
 
+#' Internal helper: Morie Llm Extract Text
+#' @noRd
 .morie_llm_extract_text <- function(data) {
   choices <- data$choices
   if (length(choices) == 0L) return("")
@@ -145,6 +165,8 @@ morie_llm_request_completion <- function(base_url, model, messages,
   if (is.null(msg)) "" else (msg$content %||% "")
 }
 
+#' Internal helper: Morie Llm Local Fallback
+#' @noRd
 .morie_llm_local_fallback <- function(prompt) {
   paste0(
     "MORIE is running in local-only mode (no LLM provider detected).\
@@ -238,6 +260,8 @@ morie_llm_agent_available <- function() {
 DEFAULT_FREEAPI_MODEL <- "mistral-nemo:custom"
 FREEAPI_BASE_URL      <- "https://ollamafreeapi.duckdns.org"  # community-hosted
 
+#' Internal helper: Morie Llm Freeapi Model
+#' @noRd
 .morie_llm_freeapi_model <- function() {
   v <- trimws(Sys.getenv("moriefam", unset = ""))
   if (nzchar(v)) v else DEFAULT_FREEAPI_MODEL
@@ -354,6 +378,8 @@ morie_llm_detect_provider <- function() {
   "local"
 }
 
+#' Internal helper: Morie Llm Messages To Prompt
+#' @noRd
 .morie_llm_messages_to_prompt <- function(messages) {
   parts <- vapply(messages, function(m) {
     role <- m$role %||% "user"
@@ -367,6 +393,8 @@ morie_llm_detect_provider <- function() {
 ")
 }
 
+#' Internal helper: Morie Llm Strip Think
+#' @noRd
 .morie_llm_strip_think <- function(text) {
   trimws(gsub("(?s)<think>.*?</think>\\s*", "", text, perl = TRUE))
 }
@@ -374,6 +402,8 @@ morie_llm_detect_provider <- function() {
 # Non-streaming FreeAPI completion via the same OpenAI-compatible endpoint
 # that ollama exposes.  R has no native ``ollamafreeapi`` SDK, so we POST
 # /v1/chat/completions to FREEAPI_BASE_URL.  Returns "" on failure.
+#' Internal helper: Morie Llm Freeapi Completion
+#' @noRd
 .morie_llm_freeapi_completion <- function(messages, model = NULL, timeout = 180) {
   if (!requireNamespace("httr2", quietly = TRUE) ||
       !requireNamespace("jsonlite", quietly = TRUE)) return("")

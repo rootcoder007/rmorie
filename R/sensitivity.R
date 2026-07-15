@@ -57,6 +57,8 @@ NULL
 
 # -- Result containers ------------------------------------------------
 
+#' Internal helper: Evalue Result
+#' @noRd
 .evalue_result <- function(point_estimate, e_value_point, e_value_ci,
                             rr, ci_lower, ci_upper, interpretation) {
   structure(
@@ -71,6 +73,8 @@ NULL
   )
 }
 
+#' Internal helper: Rosenbaum Result
+#' @noRd
 .rosenbaum_result <- function(gamma_values, p_upper, p_lower,
                                 critical_gamma, method, interpretation) {
   structure(
@@ -84,6 +88,8 @@ NULL
   )
 }
 
+#' Internal helper: Tipping Point Result
+#' @noRd
 .tipping_point_result <- function(delta_values, adjusted_estimates,
                                      adjusted_p_values, tipping_point,
                                      original_estimate, interpretation) {
@@ -98,6 +104,8 @@ NULL
   )
 }
 
+#' Internal helper: Ovb Result
+#' @noRd
 .ovb_result <- function(estimate, se, rv_q, rv_qa, partial_r2_treatment,
                           benchmark_bounds, interpretation) {
   structure(
@@ -112,6 +120,8 @@ NULL
   )
 }
 
+#' Internal helper: Spec Curve Result
+#' @noRd
 .spec_curve_result <- function(estimates, ses, p_values, specifications,
                                  median_estimate, iqr_lower, iqr_upper,
                                  pct_significant, pct_same_sign) {
@@ -134,6 +144,8 @@ NULL
 # E-value (VanderWeele & Ding 2017)
 # =====================================================================
 
+#' Internal helper: Rr To Evalue
+#' @noRd
 .rr_to_evalue <- function(rr) {
   if (rr < 1) rr <- 1 / rr
   rr + sqrt(rr * (rr - 1))
@@ -782,6 +794,8 @@ sensitivity_summary <- function(estimate, se, rr = NULL,
 # Phase 1.g wrapper-as-extender entry points
 # =====================================================================
 
+#' Internal helper: Morie Sens Need
+#' @noRd
 .morie_sens_need <- function(pkg, fn) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
     stop(sprintf(

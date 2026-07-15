@@ -194,6 +194,7 @@ test_that("hcepst returns a real-valued vector with documented shape", {
 # ---------------------------------------------------------------------------
 
 test_that("sgolay returns a smoothed signal of the input length", {
+  testthat::skip_if_not_installed("signal")
   set.seed(1)
   x <- sin(seq(0, 2 * pi, length.out = 200L)) + 0.1 * stats::rnorm(200L)
   res <- sgolay(x, window = 11L, polyorder = 3L)

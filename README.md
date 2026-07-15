@@ -9,6 +9,24 @@ R package for causal inference, sampling, psychometrics, point-process
 modeling, and criminological accountability analysis, with no Python
 dependencies.
 
+## Statement of need
+
+Applied observational research on Canadian carceral, policing, and
+oversight data usually means stitching together a dozen single-purpose
+packages — one for difference-in-differences, one for propensity-score
+matching, one for spatial scan statistics, one for self-exciting point
+processes — each with its own data contract, and none aware of the
+survey-weighting, provenance, and privacy constraints these data carry.
+rmorie is for criminologists, quantitative social scientists, and
+accountability researchers who need those estimators in one consistent,
+provenance-preserving toolkit, with the MRM (Multilevel Reconciliation
+Methodology) framework as its motivating application. Every public
+function is prefixed `morie_*` so it composes safely alongside the
+specialist packages it wraps, and results carry the labeling that keeps
+synthetic development runs from being mistaken for inferential findings.
+Primary methodological references for each estimator family are listed
+in the package-level help (`?rmorie`).
+
 ## Documentation
 
 - **Reference manual** (all `morie_*` functions, one searchable doc):
@@ -17,13 +35,13 @@ dependencies.
   <https://rootcoder007.github.io/rmorie/>
 - **r-universe project page**: <https://rootcoder007.r-universe.dev/rmorie>
 
-> With 1,859 exported functions, the full reference is large — use the
+> With over 1,900 exported functions, the full reference is large — use the
 > manual or the package site above rather than scrolling the function
 > index. This README covers install + the most common workflows only.
 
 ## What's in v1.0.0
 
-- **1,859 exported `morie_*` R functions** — every public callable is now
+- **Over 1,900 exported `morie_*` R functions** (1,963 at the time of writing) — every public callable is now
   prefixed to avoid name collisions with other CRAN packages
   (`morie_chi_square_test`, `morie_kmeans_clustering`,
   `morie_decision_tree_split`, etc.). The companion `morie.fn` Python
@@ -85,6 +103,31 @@ install.packages(
 
 The assistant bridge supports a local fallback through the Python
 package when no live OpenAI / Anthropic credentials are configured.
+
+### Optional packages (the R equivalent of `pip install pkg[extra]`)
+
+The base install stays deliberately light: rmorie wraps many
+specialist CRAN packages and declares them in `Suggests`, so nothing
+heavy compiles until you need it. Every function that uses one tells
+you exactly what to install when it's missing, and the test suite
+skips (never fails) without them. To provision up front instead:
+
+```r
+# install every optional package rmorie can use (one-time, ~15 min)
+morie_install_extras(which = "all", ask = FALSE)
+
+# or just what's missing, interactively
+morie_install_extras()
+
+# or a specific family, e.g. machine learning
+morie_install_extras(which = c("randomForest", "glmnet", "xgboost",
+                               "ranger", "caret", "pROC"))
+```
+
+Common families: ML (`randomForest`, `glmnet`, `xgboost`/`gbm`,
+`ranger`, `caret`, `pROC`, `Rtsne`, `e1071`, `dbscan`), DSP
+(`signal`, `pracma`, `wavelets`), causal (`DoubleML`, `mlr3`,
+`mlr3learners`, `ivreg`, `fixest`), storage (`RSQLite`, `duckdb`).
 
 ## Outputs-manifest example
 
@@ -264,3 +307,20 @@ for the machine-readable metadata GitHub's "Cite this repository" button uses.
 
 R-MORIE is licensed under **AGPL-3.0-or-later**. See `LICENSE` for the
 full text and `LICENSING.md` for the per-component breakdown.
+
+## Bayesian priors
+
+rmorie's Bayesian regression (`morie_bayes_lm`) places zero-mean Normal
+priors on the regression coefficients; the `prior_sd` argument is the
+prior standard deviation (the scale of plausible coefficient values).
+Larger `prior_sd` is weakly informative; smaller values pull estimates
+toward zero (regularisation). Example:
+
+```r
+d <- data.frame(x = rnorm(100)); d$y <- 1 + 2 * d$x + rnorm(100)
+# weakly-informative prior (sd = 10) vs a tight regularising prior (sd = 0.5)
+fit_weak  <- morie_bayes_lm(y ~ x, d, prior_sd = 10)
+fit_tight <- morie_bayes_lm(y ~ x, d, prior_sd = 0.5)
+```
+
+See the **bayesian-priors** vignette for applied guidance.

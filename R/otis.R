@@ -62,6 +62,8 @@ NULL
 # Internal result constructor
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Otis Result
+#' @noRd
 .otis_result <- function(title,
                           summary_lines = list(),
                           tables = list(),
@@ -82,6 +84,8 @@ NULL
 
 
 # Tolerant Yes/No/1/0/TRUE -> integer 0/1
+#' Internal helper: Otis Binarise
+#' @noRd
 .otis_binarise <- function(s) {
   if (is.logical(s)) {
     return(as.integer(s))

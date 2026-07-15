@@ -57,11 +57,15 @@ effect_size_result <- function(measure, estimate,
 
 # -- Helpers ----------------------------------------------------------
 
+#' Internal helper: Arr
+#' @noRd
 .arr <- function(x) {
   v <- as.numeric(x)
   v[is.finite(v)]
 }
 
+#' Internal helper: Bootstrap Ci
+#' @noRd
 .bootstrap_ci <- function(func, args, n_boot = 2000L,
                             confidence = 0.95, seed = 42L) {
   set.seed(seed)
@@ -592,6 +596,10 @@ d_to_r <- function(d, n1 = NULL, n2 = NULL) {
 #' Convert Pearson r to Cohen's d
 #' @param r Pearson r.
 #' @return Numeric d.
+#' @srrstats {G3.0} Floating-point values are never compared for exact
+#'   equality: boundary tests use tolerance comparisons (e.g.
+#'   \code{abs(r) < 1} here) and convergence/agreement checks use
+#'   \code{all.equal()} or explicit \code{tol=} across the estimators.
 #' @export
 r_to_d <- function(r) {
   if (abs(r) < 1) 2 * r / sqrt(1 - r^2) else sign(r) * Inf

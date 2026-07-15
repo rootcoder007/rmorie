@@ -34,6 +34,7 @@ test_that("morie_dsp_wiener_filter returns a same-length de-noised signal", {
 })
 
 test_that("morie_dsp_notch removes a targeted 60 Hz tone", {
+  testthat::skip_if_not_installed("signal")
   fs <- 1000
   x <- make_synthetic_sine(n = fs, fs = fs, freq_hz = 10, seed = 4L) +
     0.5 * make_synthetic_sine(n = fs, fs = fs, freq_hz = 60, seed = 5L)
@@ -42,6 +43,7 @@ test_that("morie_dsp_notch removes a targeted 60 Hz tone", {
 })
 
 test_that("morie_dsp_comb removes the fundamental + harmonics", {
+  testthat::skip_if_not_installed("signal")
   fs <- 1000
   x <- make_synthetic_sine(n = fs, fs = fs, freq_hz = 50, seed = 6L) +
     0.5 * make_synthetic_sine(n = fs, fs = fs, freq_hz = 100, seed = 7L)

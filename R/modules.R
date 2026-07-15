@@ -56,6 +56,8 @@ morie_list_morie_modules <- function() {
   )
 }
 
+#' Internal helper: Cpads Default Csv
+#' @noRd
 .cpads_default_csv <- function() {
   # Primary: built-in SQLite DB. Fallback: raw CSV in datasets/.
   candidates <- c(
@@ -70,6 +72,8 @@ morie_list_morie_modules <- function() {
   candidates[1L]
 }
 
+#' Internal helper: Resolve Cpads Csv
+#' @noRd
 .resolve_cpads_csv <- function(cpads_csv) {
   if (file.exists(cpads_csv)) {
     return(normalizePath(cpads_csv, mustWork = TRUE))
@@ -155,6 +159,8 @@ morie_load_cpads_data <- function(cpads_csv = .cpads_default_csv()) {
   morie_canonicalize_cpads_data(utils::read.csv(cpads_csv, stringsAsFactors = FALSE))
 }
 
+#' Internal helper: Write Module Outputs
+#' @noRd
 .write_module_outputs <- function(outputs, output_dir = NULL) {
   if (is.null(output_dir)) {
     return(outputs)
