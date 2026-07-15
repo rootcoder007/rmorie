@@ -16,8 +16,8 @@ and the `morie_match_result` / result-object shapes do not change.
 |---|--------|----------|--------|
 | 1 | morie_matching_nearest_neighbor (native) | MatchIt::matchit(method="nearest") | DONE (49/49 tests; 1.4x of MatchIt at 100k — within the 2x bar) |
 | 2 | morie_matching_mahalanobis (native) | MatchIt (mahalanobis distance) | DONE (60/60 suite; whitened-kd C++ kernel, exact strata, caliper) |
-| 3 | morie_matching_cem (native) | MatchIt (cem) | planned |
-| 4 | morie_matching_exact (native) | MatchIt (exact) | planned |
+| 3 | morie_matching_cem (native) | MatchIt (cem) | DONE (structural+cross+property green; 1.3x of MatchIt at 100k) |
+| 4 | morie_matching_exact (native) | MatchIt (exact) | DONE (parity-to-faster vs MatchIt at all sizes) |
 | 5 | morie_matching_optimal (new) | MatchIt/optmatch | planned |
 | 6 | morie_matching_genetic (native) | Matching::GenMatch | planned |
 | 7 | morie_matching_cardinality (native) | designmatch | planned |
@@ -121,3 +121,42 @@ streaming kernel never materializes the O(n²) distance matrix that
 makes the reference implementation infeasible at scale. Exact-strata
 support runs the kernel per stratum, so mixed exact+distance designs
 are first-class rather than an afterthought.
+
+## Module 3/4 — native CEM + exact matching
+
+**Replaces.** `morie_matching_cem()` (was `MatchIt::matchit(method =
+"cem")`, which shells to the \pkg{cem} package) and
+`morie_matching_exact()` (was `method = "exact"`). Signatures and the
+`morie_match_result` shape unchanged; matched data now carries
+`weights` + `subclass` columns (the CEM/exact estimand is
+weighting-based — `match_pairs` is empty by design, as with MatchIt).
+
+**Reference algorithm.** Iacus, King & Porro (2012), "Causal Inference
+without Balance Checking: Coarsened Exact Matching", *Political
+Analysis* 20(1). Exact matching is the degenerate no-coarsening case.
+Control weights: (m_t_s / m_c_s) * (M_c / M_t) per stratum; multivariate
+L1 imbalance reported in `details$l1_before`.
+
+**Implementation.** Pure base R: stratum keys via `paste(sep = "\r")`,
+two `table()` passes, one subset. Coarsening = quantile cutpoints per
+covariate (`n_bins` integer or per-variable list; Sturges' rule on NA);
+low-cardinality numerics (binary/ordinal codes) pass through as
+discrete — quantile breaks on a 0/1 column collapse to a single bin and
+silently uncontrol the variable (caught by the balance test).
+
+**Validation.** Structural (two-arm strata only, CEM weight convention,
+exact weighted balance to 1e-8, SMD < 0.1 on the weak-confounding DGP,
+per-variable bins, coarser-bins-retain-more); cross vs MatchIt (exact:
+identical retained units + weighted ATT to 1e-6; CEM: ATT within 5e-2
+across binning conventions, both near the true effect); property
+invariants over 4 seeds. 64+10+76 green on L14.
+
+**Benchmark** (L14, R 4.6.1, 2026-07-15): exact 0.36s vs MatchIt 0.37s
+at 100k (faster at 1k/10k); CEM 0.52s vs 0.40s at 100k (1.3x — within
+the <=2x bar).
+
+**What makes ours special.** The whole CEM estimator is two hash-table
+passes — no cem-package dependency chain (MatchIt's cem path drags in
+\pkg{cem} + lattice/randomForest transitively), deterministic across
+versions, and the L1 diagnostic comes for free from the same tables.
+Low-cardinality guard makes binary covariates safe by construction.

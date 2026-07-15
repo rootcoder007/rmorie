@@ -77,7 +77,7 @@
     n_treated         = length(unique(ti_all)),
     n_matched_control = length(unique(ci_all)),
     match_pairs       = pairs_df,
-    method            = "mahalanobis (morie native)",
+    method            = "mahalanobis (rmorie native)",
     details           = list(
       engine      = "native-greedy-kd-whitened",
       caliper     = caliper,

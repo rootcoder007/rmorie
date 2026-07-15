@@ -24,7 +24,7 @@ test_that("native nearest matching returns the morie_match_result shape", {
   expect_s3_class(r, "morie_match_result")
   expect_true(all(c("matched_data", "n_treated", "n_matched_control",
                     "match_pairs", "method", "details") %in% names(r)))
-  expect_identical(r$method, "nearest_neighbor (morie native)")
+  expect_identical(r$method, "nearest_neighbor (rmorie native)")
   expect_true(all(c("treated_idx", "control_idx", "distance") %in%
                     names(r$match_pairs)))
   expect_true(all(r$match_pairs$distance >= 0))
@@ -79,7 +79,7 @@ test_that("native mahalanobis matching returns the result shape", {
   d <- .dgp_confounded(n = 500L, seed = 21L)
   r <- morie_matching_mahalanobis(d, "d", c("x1", "x2", "x3"))
   expect_s3_class(r, "morie_match_result")
-  expect_identical(r$method, "mahalanobis (morie native)")
+  expect_identical(r$method, "mahalanobis (rmorie native)")
   expect_false(any(duplicated(r$match_pairs$control_idx)))
   expect_true(all(r$match_pairs$distance >= 0))
 })
@@ -106,4 +106,96 @@ test_that("mahalanobis caliper bounds pair distances", {
   r <- morie_matching_mahalanobis(d, "d", c("x1", "x2", "x3"),
                                   caliper = 0.3)
   expect_true(all(r$match_pairs$distance <= 0.3 + 1e-12))
+})
+
+# ---- module 3: native exact matching ------------------------------------
+
+.dgp_discrete <- function(n = 600L, seed = 7L) {
+  set.seed(seed)
+  region <- sample(c("N", "S", "E", "W"), n, replace = TRUE)
+  year <- sample(2019:2021, n, replace = TRUE)
+  ps <- plogis(-1 + 0.5 * (region == "N") + 0.3 * (year == 2020))
+  d <- rbinom(n, 1, ps)
+  y <- 1.5 * d + (region == "N") + 0.5 * (year == 2020) + rnorm(n)
+  data.frame(region = region, year = year, d = d, y = y,
+             stringsAsFactors = FALSE)
+}
+
+test_that("native exact matching keeps only two-arm strata", {
+  df <- .dgp_discrete()
+  res <- morie_matching_exact(df, "d", c("region", "year"))
+  expect_s3_class(res$matched_data, "data.frame")
+  expect_identical(res$method, "exact (rmorie native)")
+  md <- res$matched_data
+  key <- paste(md$region, md$year)
+  for (k in unique(key)) {
+    expect_setequal(unique(md$d[key == k]), c(0, 1))
+  }
+})
+
+test_that("native exact matching weights follow the CEM convention", {
+  df <- .dgp_discrete()
+  res <- morie_matching_exact(df, "d", c("region", "year"))
+  md <- res$matched_data
+  expect_true(all(md$weights[md$d == 1] == 1))
+  expect_equal(sum(md$weights[md$d == 0]), sum(md$d == 0), tolerance = 1e-8)
+  expect_true(all(md$weights > 0))
+  expect_s3_class(md$subclass, "factor")
+})
+
+test_that("native exact matching balances discrete covariates exactly (weighted)", {
+  df <- .dgp_discrete(n = 2000L)
+  res <- morie_matching_exact(df, "d", c("region", "year"))
+  md <- res$matched_data
+  ct <- md[md$d == 1, ]
+  cc <- md[md$d == 0, ]
+  for (lev in unique(md$region)) {
+    pt <- mean(ct$region == lev)
+    pc <- sum((cc$region == lev) * cc$weights) / sum(cc$weights)
+    expect_equal(pt, pc, tolerance = 1e-8)
+  }
+})
+
+# ---- module 4: native CEM ------------------------------------------------
+
+test_that("native CEM returns the contract shape with L1 diagnostic", {
+  df <- .dgp_confounded(n = 800L)
+  res <- morie_matching_cem(df, "d", c("x1", "x2", "x3"), n_bins = 4L)
+  expect_identical(res$method, "cem (rmorie native)")
+  expect_true(res$n_treated > 0)
+  expect_true(res$n_matched_control > 0)
+  expect_true(is.numeric(res$details$l1_before))
+  expect_gte(res$details$l1_before, 0)
+  expect_lte(res$details$l1_before, 1)
+  expect_true(all(c("weights", "subclass") %in% names(res$matched_data)))
+})
+
+test_that("native CEM reduces covariate imbalance (weighted SMD < 0.1)", {
+  df <- .dgp_confounded(n = 4000L)
+  res <- morie_matching_cem(df, "d", c("x1", "x2", "x3"), n_bins = 5L)
+  md <- res$matched_data
+  wmean <- function(x, w) sum(x * w) / sum(w)
+  for (v in c("x1", "x2", "x3")) {
+    smd_pre <- abs(.smd(df, "d", v))
+    t_mean <- mean(md[[v]][md$d == 1])
+    c_mean <- wmean(md[[v]][md$d == 0], md$weights[md$d == 0])
+    s <- stats::sd(df[[v]][df$d == 1])
+    smd_post <- abs((t_mean - c_mean) / s)
+    expect_lt(smd_post, smd_pre + 1e-12)
+    expect_lt(smd_post, 0.1)
+  }
+})
+
+test_that("native CEM honours per-variable n_bins list with Sturges fallback", {
+  df <- .dgp_confounded(n = 600L)
+  res <- morie_matching_cem(df, "d", c("x1", "x2"), n_bins = list(x1 = 3L))
+  expect_identical(res$method, "cem (rmorie native)")
+  expect_true(res$n_treated > 0)
+})
+
+test_that("native CEM with coarser bins retains more units", {
+  df <- .dgp_confounded(n = 1000L)
+  fine <- morie_matching_cem(df, "d", c("x1", "x2", "x3"), n_bins = 8L)
+  coarse <- morie_matching_cem(df, "d", c("x1", "x2", "x3"), n_bins = 2L)
+  expect_gte(nrow(coarse$matched_data), nrow(fine$matched_data))
 })
