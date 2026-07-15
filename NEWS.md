@@ -1,3 +1,13 @@
+# rmorie 1.1.4 (development, feat/native-specializations)
+
+* Native reimplementation marathon: every specialization gains a
+  zero-Suggests native engine, cross-validated against its reference
+  package and benchmarked (<=2x at 100k rows release bar).
+* Modules 1-4 landed: nearest-neighbour (C++ sorted-logit kernel),
+  Mahalanobis (Cholesky whitening + streaming C++ kernel), exact and
+  CEM (Iacus-King-Porro stratum weights, L1 imbalance diagnostic).
+* Version locked in step with morie 1.1.4.
+
 # rmorie 1.1.3 - 2026-07-15
 
 * Test suite runs clean on a minimal (hard-deps-only) install: every
