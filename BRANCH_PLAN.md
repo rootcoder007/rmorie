@@ -26,7 +26,7 @@ and the `morie_match_result` / result-object shapes do not change.
 | 10 | morie_estimate_double_ml / morie_estimate_irm (native) | DoubleML/mlr3/ranger | DONE (native-only; 40-60x faster; CI-overlap agreement with DoubleML) |
 | 11 | morie_estimate_dr_forest (native R-learner forest) | grf | DONE (OpenMP kernel: 1.5-2.9x FASTER than grf incl. 100k) |
 | 12 | meta-learners T/S/X/DR (morie_estimate_cate) | — (EconML is Python-only) | DONE (all four native; DR validated against grf CATE) |
-| 13 | morie_dag / identify / estimate / refute | — (new) | planned |
+| 13 | morie_dag / identify / estimate / refute + morie_mrm_dags | DoWhy (Python) | DONE (Bayes-Ball d-sep; adjustment sets dagitty-validated) |
 | 14 | morie_did (+ staggered CS2021) / event study | did/DIDmultiplegt | planned |
 | 15 | morie_synth_control | Synth | planned |
 | 16 | morie_rdd (IK bandwidth) | rdrobust/rdd | planned |
@@ -395,3 +395,33 @@ numbers already recorded.
 (T/S/X/DR + the R-learner forest) now runs on ONE audited nuisance
 stack with zero Suggests — EconML needs a Python runtime for the same
 menu.
+
+## Module 13 — native causal DAG toolkit
+
+**New surface** (DoWhy has no R runtime; dagitty needs V8):
+`morie_dag()` (edge-list constructor, Kahn acyclicity check, print
+method), `morie_dag_identify()` (canonical adjustment set of van der
+Zander-Liskiewicz-Textor 2014, verified by Shachter's Bayes-Ball
+d-separation on the backdoor graph — complete: if the canonical set
+fails, no backdoor set exists), `morie_dag_estimate()` (routes the
+identified set into the native linear/AIPW/DML estimators),
+`morie_dag_refute()` (DoWhy-style placebo-treatment /
+random-common-cause / data-subset checks with a pass heuristic), and
+`morie_mrm_dags()` (bundled placement + use-of-force structures from
+the MRM docs as editable starting points).
+
+**Validation.** Structural (cycles rejected, confounder found,
+mediator excluded, latent confounder -> unidentified, all three
+estimators recover 0.8 within 0.2, placebo kills / subsets keep the
+effect, MRM DAGs identify); cross vs dagitty
+(`tests/cross/test-morie_vs_dagitty.R`): every adjustment set we emit
+passes `dagitty::isAdjustmentSet` on three canonical graphs.
+159+48+126 green on L14, 0 skips.
+
+**Benchmark.** Graph algorithms are microseconds at analysis-DAG
+sizes; estimation cost = the module-8/10 engines already benchmarked.
+
+**What makes ours special.** The full DoWhy loop — model, identify,
+estimate, refute — in ~250 lines of base R wired straight into the
+native estimator stack: no Python, no V8, and the refutation step
+reuses the same estimators it audits.

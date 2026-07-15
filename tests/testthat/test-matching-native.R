@@ -520,3 +520,72 @@ test_that("meta-learners error clearly on single-arm input", {
                                    meta_learner = "x_learner"),
                "both treatment arms")
 })
+
+# ---- module 13: native DAG toolkit ---------------------------------------
+
+test_that("morie_dag validates structure and rejects cycles", {
+  g <- morie_dag(c("z -> x", "z -> y", "x -> y"), "x", "y")
+  expect_s3_class(g, "morie_dag")
+  expect_setequal(g$nodes, c("z", "x", "y"))
+  expect_error(morie_dag(c("a -> b", "b -> a"), "a", "b"), "cycle")
+  expect_error(morie_dag("a - b", "a", "b"), "edge must look like")
+  expect_error(morie_dag("a -> b", "q", "b"), "exposure not in graph")
+})
+
+test_that("backdoor identification finds the confounder set", {
+  g <- morie_dag(c("z -> x", "z -> y", "x -> y"), "x", "y")
+  id <- morie_dag_identify(g)
+  expect_true(id$identified)
+  expect_identical(id$adjustment_set, "z")
+  # mediator must NOT be adjusted for
+  g2 <- morie_dag(c("x -> m", "m -> y", "z -> x", "z -> y"), "x", "y")
+  id2 <- morie_dag_identify(g2)
+  expect_true(id2$identified)
+  expect_false("m" %in% id2$adjustment_set)
+  # latent confounder -> unidentified
+  g3 <- morie_dag(c("u -> x", "u -> y", "x -> y"), "x", "y",
+                  latent = "u")
+  expect_false(morie_dag_identify(g3)$identified)
+})
+
+test_that("dag estimation recovers the effect through all methods", {
+  set.seed(131)
+  n <- 1200L
+  z <- rnorm(n); x <- rbinom(n, 1, plogis(z))
+  y <- 0.8 * x + z + rnorm(n)
+  df <- data.frame(z = z, x = x, y = y)
+  g <- morie_dag(c("z -> x", "z -> y", "x -> y"), "x", "y")
+  for (m in c("backdoor.linear", "backdoor.aipw", "backdoor.dml")) {
+    r <- morie_dag_estimate(g, df, method = m)
+    expect_lt(abs(r$ate - 0.8), 0.2)
+    expect_identical(r$adjustment_set, "z")
+  }
+  g3 <- morie_dag(c("u -> x", "u -> y", "x -> y"), "x", "y", latent = "u")
+  expect_error(morie_dag_estimate(g3, df), "not identified")
+})
+
+test_that("refutation: placebo kills the effect, subsets keep it", {
+  set.seed(132)
+  n <- 900L
+  z <- rnorm(n); x <- rbinom(n, 1, plogis(z))
+  y <- 0.8 * x + z + rnorm(n)
+  df <- data.frame(z = z, x = x, y = y)
+  g <- morie_dag(c("z -> x", "z -> y", "x -> y"), "x", "y")
+  pl <- morie_dag_refute(g, df, "placebo_treatment", n_reps = 10L)
+  expect_true(pl$passed)
+  expect_lt(abs(pl$refuted), abs(pl$original))
+  su <- morie_dag_refute(g, df, "data_subset", n_reps = 10L)
+  expect_true(su$passed)
+  rc <- morie_dag_refute(g, df, "random_common_cause", n_reps = 10L)
+  expect_true(rc$passed)
+})
+
+test_that("bundled MRM DAGs identify cleanly", {
+  dags <- morie_mrm_dags()
+  expect_named(dags, c("placement", "use_of_force"))
+  for (g in dags) {
+    id <- morie_dag_identify(g)
+    expect_true(id$identified)
+    expect_gt(length(id$adjustment_set), 0)
+  }
+})
