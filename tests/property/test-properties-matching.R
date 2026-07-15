@@ -100,3 +100,22 @@ test_that("property: genetic matching invariants across seeds", {
     expect_true(all(df[r$match_pairs$control_idx, "d"] == 0))
   }
 })
+
+test_that("property: cardinality invariants across seeds", {
+  for (seed in c(11L, 37L)) {
+    set.seed(seed)
+    n <- 1200L
+    x1 <- rnorm(n); x2 <- rnorm(n); x3 <- rbinom(n, 1, 0.4)
+    dd <- rbinom(n, 1, plogis(-1.7 + 0.4 * x1 - 0.35 * x2 + 0.4 * x3))
+    d <- data.frame(y = rnorm(n), d = dd, x1 = x1, x2 = x2, x3 = x3)
+    r <- morie_matching_cardinality(d, "d", c("x1", "x2", "x3"))
+    expect_identical(r$method, "cardinality")
+    expect_true(nrow(r$matched_data) > 0)
+    expect_false(any(duplicated(r$match_pairs$control_idx)))
+    if (is.null(r$details$warning)) {
+      bal <- morie_matching_balance(r$matched_data, "d",
+                                    c("x1", "x2", "x3"))
+      expect_lte(bal$max_smd, r$details$balance_threshold)
+    }
+  }
+})
