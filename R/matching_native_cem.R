@@ -90,6 +90,9 @@
 }
 
 #' Internal helper: native CEM engine
+#' @srrstats {G1.0} Primary reference: Iacus, King & Porro (2012,
+#'   Political Analysis 20(1)); stratum weights and the multivariate
+#'   L1 imbalance statistic follow that paper.
 #' @noRd
 .morie_match_cem_native <- function(data, treatment, covariates,
                                     n_bins = 5L) {

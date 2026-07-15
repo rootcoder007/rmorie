@@ -1,6 +1,21 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-# Module 1 structural tests: native nearest-neighbour matching.
+# Structural tests for the native matching engines (modules 1-4).
 # No MatchIt anywhere in here — this is the zero-Suggests path.
+
+#' @srrstats {G5.4} Correctness of every native matching engine is
+#'   additionally tested against MatchIt as the reference
+#'   implementation in tests/cross/test-morie_vs_matchit.R (identical
+#'   matched-set sizes; ATT/ATE agreement within stated tolerances;
+#'   pair-for-pair identity on tie-free data for module 1).
+#' @srrstats {G5.5} Correctness tests here run with fixed seeds via
+#'   the .dgp_confounded()/.dgp_discrete() generators.
+#' @srrstats {G5.6} Implementation recovers the known simulated
+#'   treatment effect (cross tests assert proximity to the true
+#'   effect) and known balance properties (weighted SMD bounds below).
+#' @srrstats {G5.9b} Property invariants are re-run across multiple
+#'   random seeds in tests/property/test-properties-matching.R.
+#' @noRd
+NULL
 
 .dgp_confounded <- function(n = 400L, seed = 42L) {
   set.seed(seed)
