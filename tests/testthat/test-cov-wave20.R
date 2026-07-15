@@ -7,6 +7,7 @@
 }
 
 test_that("morie_load_dataset reads from the built-in database tier", {
+  testthat::skip_if_not_installed("RSQLite")
   skip_if_not_installed("DBI")
   .cw20_db()
   bdb <- tempfile(fileext = ".db")
@@ -26,6 +27,8 @@ test_that("morie_load_dataset reads from the built-in database tier", {
 })
 
 test_that("morie_load_dataset ingests csv and rds local files", {
+  testthat::skip_if_not_installed("RSQLite")
+  testthat::skip_if_not_installed("duckdb")
   .cw20_db()
   # an empty built-in DB so the local-file tier is reached
   testthat::local_mocked_bindings(
@@ -51,6 +54,8 @@ test_that("morie_load_dataset ingests csv and rds local files", {
 })
 
 test_that("morie_load_cpads resolves local file then the SQLite cache", {
+  testthat::skip_if_not_installed("RSQLite")
+  testthat::skip_if_not_installed("duckdb")
   .cw20_db()
   wd <- tempfile("cp-")
   dir.create(wd)

@@ -66,6 +66,7 @@ test_that("morie_rangayyan_stft alias is identical to rgstf", {
 })
 
 test_that("rgwav returns documented structure", {
+  testthat::skip_if_not_installed("wavelets")
   set.seed(0)
   x <- sin(2 * pi * 3 * seq(0, 1, length.out = 256)) + 0.3 * rnorm(256)
   r <- suppressWarnings(rgwav(x, level = 3))
@@ -76,6 +77,7 @@ test_that("rgwav returns documented structure", {
 })
 
 test_that("rgwav wavelet path returns positive threshold and sigma", {
+  testthat::skip_if_not_installed("wavelets")
   set.seed(1)
   x <- sin(2 * pi * 3 * seq(0, 1, length.out = 256)) + 0.3 * rnorm(256)
   r <- rgwav(x, level = 3, mode = "hard")
@@ -130,6 +132,7 @@ test_that("morie_rangayyan_zero_crossing alias is identical to rgzcr", {
 })
 
 test_that("morie_regularization_path runs ridge with glmnet", {
+  testthat::skip_if_not_installed("glmnet")
   set.seed(0)
   n <- 40
   p <- 3
@@ -149,6 +152,7 @@ test_that("morie_regularization_path runs ridge with glmnet", {
 })
 
 test_that("morie_regularization_path supports lasso and elasticnet", {
+  testthat::skip_if_not_installed("glmnet")
   set.seed(1)
   x <- matrix(rnorm(60), 30, 2)
   y <- as.numeric(x %*% c(0.8, -0.3) + rnorm(30))
@@ -160,6 +164,7 @@ test_that("morie_regularization_path supports lasso and elasticnet", {
 })
 
 test_that("morie_regularization_path accepts a two-column design", {
+  testthat::skip_if_not_installed("glmnet")
   set.seed(2)
   x <- matrix(rnorm(60), 30, 2)
   y <- as.numeric(x %*% c(2, -1) + rnorm(30))
@@ -298,6 +303,7 @@ test_that("morie_random_search_cv runs a small regression search", {
 })
 
 test_that("morie_random_search_cv auto-detects classification task", {
+  testthat::skip_if_not_installed("caret")
   set.seed(1)
   n <- 40
   p <- 3
@@ -398,6 +404,7 @@ test_that("morie_rnn_genomic accepts a deterministic_seed", {
 })
 
 test_that("morie_roc_auc_score returns documented structure", {
+  testthat::skip_if_not_installed("pROC")
   set.seed(0)
   y_true <- rep(c(0, 1), each = 20)
   y_score <- c(rnorm(20, 0), rnorm(20, 1.5))
@@ -416,6 +423,7 @@ test_that("morie_roc_auc_score returns documented structure", {
 })
 
 test_that("morie_roc_auc_score errors on non-binary y_true", {
+  testthat::skip_if_not_installed("pROC")
   expect_error(
     morie_roc_auc_score(c(0, 1, 2, 1), c(0.1, 0.2, 0.3, 0.4)),
     "binary"
