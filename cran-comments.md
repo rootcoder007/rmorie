@@ -1,4 +1,4 @@
-# cran-comments.md — rmorie 1.0.3
+# cran-comments.md — rmorie 1.1.3
 
 ## Submission
 
