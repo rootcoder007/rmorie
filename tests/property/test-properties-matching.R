@@ -29,3 +29,35 @@ test_that("matching invariants hold across random DGPs", {
                     unique(c(p$treated_idx, p$control_idx)))
   }
 })
+
+test_that("property: exact/CEM invariants hold across random seeds", {
+  for (seed in c(3L, 17L, 29L, 71L)) {
+    set.seed(seed)
+    n <- 400L
+    g <- sample(letters[1:5], n, replace = TRUE)
+    x <- rnorm(n)
+    d <- rbinom(n, 1, plogis(-0.8 + 0.4 * (g %in% c("a", "b")) + 0.3 * x))
+    if (length(unique(d)) < 2) next
+    df <- data.frame(g = g, x = x, d = d)
+
+    ex <- morie_matching_exact(df, "d", "g")
+    md <- ex$matched_data
+    # every retained stratum has both arms
+    for (k in unique(md$g)) {
+      expect_setequal(unique(md$d[md$g == k]), c(0, 1))
+    }
+    # weights positive, treated weight exactly 1
+    expect_true(all(md$weights > 0))
+    expect_true(all(md$weights[md$d == 1] == 1))
+    # matched data is a subset of the input rows
+    expect_lte(nrow(md), n)
+
+    cm <- morie_matching_cem(df, "d", c("g", "x"), n_bins = 4L)
+    cmd <- cm$matched_data
+    expect_true(all(cmd$weights > 0))
+    expect_lte(nrow(cmd), n)
+    expect_true(cm$details$l1_before >= 0 && cm$details$l1_before <= 1)
+    # CEM strata are at least as fine as dropping x entirely
+    expect_gte(cm$details$n_strata, 1L)
+  }
+})

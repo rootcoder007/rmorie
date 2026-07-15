@@ -88,3 +88,57 @@ test_that("native mahalanobis agrees with MatchIt on set size and ATE", {
   # exact pair identity is not guaranteed; the estimate must agree.
   expect_equal(ate(r_m$matched_data), ate(md_ref), tolerance = 2e-2)
 })
+
+# ---- module 3/4: exact + CEM vs MatchIt ----------------------------------
+
+test_that("cross: native exact matches MatchIt exact (units + weighted ATT)", {
+  skip_if_not_installed("MatchIt")
+  set.seed(11)
+  n <- 1200L
+  region <- sample(c("N", "S", "E", "W"), n, replace = TRUE)
+  year <- sample(2019:2021, n, replace = TRUE)
+  d <- rbinom(n, 1, plogis(-1 + 0.5 * (region == "N")))
+  y <- 1.5 * d + (region == "N") + rnorm(n)
+  df <- data.frame(region, year, d, y, stringsAsFactors = FALSE)
+
+  ours <- morie_matching_exact(df, "d", c("region", "year"))
+  mi <- MatchIt::matchit(d ~ region + year, data = df, method = "exact")
+  md_mi <- MatchIt::match.data(mi)
+
+  expect_identical(nrow(ours$matched_data), nrow(md_mi))
+  expect_identical(ours$n_treated, sum(md_mi$d == 1))
+  expect_identical(ours$n_matched_control, sum(md_mi$d == 0))
+
+  watt <- function(md) {
+    w <- md$weights
+    sum(md$y * w * (md$d == 1)) / sum(w * (md$d == 1)) -
+      sum(md$y * w * (md$d == 0)) / sum(w * (md$d == 0))
+  }
+  expect_equal(watt(ours$matched_data), watt(md_mi), tolerance = 1e-6)
+})
+
+test_that("cross: native CEM tracks MatchIt cem on weighted ATT", {
+  skip_if_not_installed("MatchIt")
+  skip_if_not_installed("cem")
+  set.seed(12)
+  n <- 1500L
+  x1 <- rnorm(n); x2 <- rnorm(n)
+  d <- rbinom(n, 1, plogis(-1.2 + 0.5 * x1 - 0.4 * x2))
+  y <- 2 * d + x1 + 0.5 * x2 + rnorm(n)
+  df <- data.frame(x1, x2, d, y)
+
+  ours <- morie_matching_cem(df, "d", c("x1", "x2"), n_bins = 5L)
+  mi <- MatchIt::matchit(d ~ x1 + x2, data = df, method = "cem",
+                         cutpoints = list(x1 = 5L, x2 = 5L))
+  md_mi <- MatchIt::match.data(mi)
+
+  watt <- function(md) {
+    w <- md$weights
+    sum(md$y * w * (md$d == 1)) / sum(w * (md$d == 1)) -
+      sum(md$y * w * (md$d == 0)) / sum(w * (md$d == 0))
+  }
+  # Different (both valid) binning conventions -> same estimand, loose bar.
+  expect_equal(watt(ours$matched_data), watt(md_mi), tolerance = 5e-2)
+  # Both must land near the true effect of 2.
+  expect_lt(abs(watt(ours$matched_data) - 2), 0.15)
+})

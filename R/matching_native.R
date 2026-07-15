@@ -87,7 +87,7 @@
     n_treated         = length(unique(matched_t)),
     n_matched_control = length(unique(matched_c)),
     match_pairs       = pairs_df,
-    method            = "nearest_neighbor (morie native)",
+    method            = "nearest_neighbor (rmorie native)",
     details           = list(
       engine      = "native-greedy-1d",
       caliper     = caliper,

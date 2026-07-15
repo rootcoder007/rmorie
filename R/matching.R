@@ -297,7 +297,11 @@ morie_matching_nearest_neighbor <- function(data, treatment, covariates,
 
 #' Exact matching on discrete covariates
 #'
-#' Thin wrapper around \code{MatchIt::matchit(method = "exact")}.
+#' Native rmorie implementation: units are stratified on the exact
+#' combination of \code{exact_vars}; strata containing both arms are
+#' retained and controls receive CEM-style stratum weights
+#' (\code{weights} and \code{subclass} columns on the matched data).
+#' No MatchIt at runtime.
 #'
 #' @param data Data frame.
 #' @param treatment Binary treatment column name.
@@ -309,29 +313,26 @@ morie_matching_nearest_neighbor <- function(data, treatment, covariates,
 #' }
 #' @export
 morie_matching_exact <- function(data, treatment, exact_vars) {
-  .morie_matching_need_matchit("morie_matching_exact")
-  df <- .morie_matching_drop_na(data, c(treatment, exact_vars))
-  f <- stats::as.formula(paste(treatment, "~",
-                               paste(exact_vars, collapse = " + ")))
-  mi <- MatchIt::matchit(f, data = df, method = "exact")
-  .morie_matching_matchit_to_result(
-    mi, df, treatment,
-    method_label = "exact (MatchIt)",
-    details = list(exact_vars = exact_vars)
-  )
+  .morie_match_exact_native(data, treatment, exact_vars)
 }
 
 #' Coarsened Exact Matching (CEM)
 #'
-#' Thin wrapper around \code{MatchIt::matchit(method = "cem")}, which in
-#' turn calls the \pkg{cem} package.
+#' Native rmorie implementation of Coarsened Exact Matching (Iacus, King
+#' & Porro 2012): numeric covariates are coarsened into bins (quantile
+#' cutpoints; Sturges' rule when \code{n_bins} is \code{NA} for a
+#' variable), units are exact-matched on the coarsened strata, and
+#' controls receive CEM stratum weights (\code{weights} and
+#' \code{subclass} columns on the matched data). The multivariate L1
+#' imbalance of the stratification is reported in
+#' \code{details$l1_before}. No MatchIt/cem at runtime.
 #'
 #' @param data Data frame.
 #' @param treatment Binary treatment column name.
 #' @param covariates Character vector of covariates.
 #' @param n_bins Either a single integer (applied to every covariate) or a
-#'   named list mapping covariate name to the number of bins
-#'   (forwarded as \code{cutpoints}).
+#'   named list mapping covariate name to the number of bins; list
+#'   entries left \code{NULL}/\code{NA} fall back to Sturges' rule.
 #' @return A list of class \code{morie_match_result}.
 #' @references Iacus, S. M., King, G., & Porro, G. (2012). Causal inference
 #'   without balance checking: Coarsened exact matching.
@@ -342,18 +343,7 @@ morie_matching_exact <- function(data, treatment, exact_vars) {
 #' }
 #' @export
 morie_matching_cem <- function(data, treatment, covariates, n_bins = 5L) {
-  .morie_matching_need_matchit("morie_matching_cem")
-  df <- .morie_matching_drop_na(data, c(treatment, covariates))
-  f <- stats::as.formula(paste(treatment, "~",
-                               paste(covariates, collapse = " + ")))
-  cuts_arg <- if (is.list(n_bins)) n_bins else as.integer(n_bins)
-  mi <- MatchIt::matchit(f, data = df, method = "cem",
-                         cutpoints = cuts_arg)
-  .morie_matching_matchit_to_result(
-    mi, df, treatment,
-    method_label = "cem (MatchIt)",
-    details = list(n_bins = n_bins)
-  )
+  .morie_match_cem_native(data, treatment, covariates, n_bins = n_bins)
 }
 
 #' Mahalanobis distance matching
