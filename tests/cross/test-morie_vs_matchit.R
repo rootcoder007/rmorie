@@ -66,3 +66,25 @@ test_that("large-n ATE agreement within 1e-2", {
   ate <- function(m) mean(m$y[m$d == 1]) - mean(m$y[m$d == 0])
   expect_equal(ate(r_m$matched_data), ate(md_ref), tolerance = 1e-2)
 })
+
+test_that("native mahalanobis agrees with MatchIt on set size and ATE", {
+  skip_if_not_installed("MatchIt")
+  set.seed(404)
+  # generous control pool (rare treatment): greedy processing order
+  # then has negligible effect, so both matchers find near-identical
+  # sets and the estimate comparison is sharp
+  n <- 1500L
+  x1 <- rnorm(n); x2 <- rnorm(n)
+  d <- rbinom(n, 1, plogis(-2.2 + 0.5 * x1 - 0.4 * x2))
+  y <- 0.6 * d + 0.8 * x1 + rnorm(n)
+  df <- data.frame(y = y, d = d, x1 = x1, x2 = x2)
+  r_m <- morie_matching_mahalanobis(df, "d", c("x1", "x2"))
+  mi <- MatchIt::matchit(d ~ x1 + x2, data = df, method = "nearest",
+                         distance = "mahalanobis")
+  md_ref <- MatchIt::match.data(mi)
+  expect_equal(nrow(r_m$matched_data), nrow(md_ref))
+  ate <- function(m) mean(m$y[m$d == 1]) - mean(m$y[m$d == 0])
+  # greedy processing order differs (MatchIt data-order vs ours), so
+  # exact pair identity is not guaranteed; the estimate must agree.
+  expect_equal(ate(r_m$matched_data), ate(md_ref), tolerance = 2e-2)
+})

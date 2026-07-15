@@ -558,6 +558,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// morie_match_greedy_kd_cpp
+IntegerMatrix morie_match_greedy_kd_cpp(NumericMatrix treated, NumericMatrix control, int ratio, double caliper_dist, bool replace);
+RcppExport SEXP _rmorie_morie_match_greedy_kd_cpp(SEXP treatedSEXP, SEXP controlSEXP, SEXP ratioSEXP, SEXP caliper_distSEXP, SEXP replaceSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type treated(treatedSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type control(controlSEXP);
+    Rcpp::traits::input_parameter< int >::type ratio(ratioSEXP);
+    Rcpp::traits::input_parameter< double >::type caliper_dist(caliper_distSEXP);
+    Rcpp::traits::input_parameter< bool >::type replace(replaceSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_match_greedy_kd_cpp(treated, control, ratio, caliper_dist, replace));
+    return rcpp_result_gen;
+END_RCPP
+}
 // morie_match_greedy_1d_cpp
 IntegerMatrix morie_match_greedy_1d_cpp(NumericVector treated_val, NumericVector control_val, int ratio, double caliper_width, bool replace);
 RcppExport SEXP _rmorie_morie_match_greedy_1d_cpp(SEXP treated_valSEXP, SEXP control_valSEXP, SEXP ratioSEXP, SEXP caliper_widthSEXP, SEXP replaceSEXP) {
@@ -766,6 +781,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_matching_nn_select_cpp", (DL_FUNC) &_rmorie_morie_matching_nn_select_cpp, 4},
     {"_rmorie_morie_matching_cem_strata_cpp", (DL_FUNC) &_rmorie_morie_matching_cem_strata_cpp, 1},
     {"_rmorie_morie_matching_abadie_imbens_kernel_cpp", (DL_FUNC) &_rmorie_morie_matching_abadie_imbens_kernel_cpp, 4},
+    {"_rmorie_morie_match_greedy_kd_cpp", (DL_FUNC) &_rmorie_morie_match_greedy_kd_cpp, 5},
     {"_rmorie_morie_match_greedy_1d_cpp", (DL_FUNC) &_rmorie_morie_match_greedy_1d_cpp, 5},
     {"_rmorie_morie_spatial_nominate_iterate_cpp", (DL_FUNC) &_rmorie_morie_spatial_nominate_iterate_cpp, 7},
     {"_rmorie_morie_spatial_emirt_theta_update_cpp", (DL_FUNC) &_rmorie_morie_spatial_emirt_theta_update_cpp, 4},

@@ -379,24 +379,12 @@ morie_matching_mahalanobis <- function(data, treatment, covariates,
                                        caliper = NULL,
                                        replace = FALSE,
                                        exact = NULL) {
-  .morie_matching_need_matchit("morie_matching_mahalanobis")
-  df <- .morie_matching_drop_na(data, c(treatment, covariates))
-  f <- stats::as.formula(paste(treatment, "~",
-                               paste(covariates, collapse = " + ")))
-  mi <- MatchIt::matchit(
-    f, data = df,
-    method   = "nearest",
-    distance = "mahalanobis",
-    ratio    = n_neighbors,
-    caliper  = caliper,
-    replace  = replace,
-    exact    = exact
-  )
-  .morie_matching_matchit_to_result(
-    mi, df, treatment,
-    method_label = "mahalanobis (MatchIt)",
-    details = list(caliper = caliper, replace = replace,
-                   exact_vars = exact)
+  .morie_match_mahalanobis_native(
+    data, treatment, covariates,
+    n_neighbors = n_neighbors,
+    caliper = caliper,
+    replace = replace,
+    exact = exact
   )
 }
 
