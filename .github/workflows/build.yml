@@ -109,6 +109,13 @@ jobs:
     uses: ./.github/workflows/r-cmd-check.yml
     secrets: inherit
 
+  # Hard-deps-only test run: the environment of a user who installed
+  # rmorie and none of the Suggests. Tests must skip, never fail, there.
+  r-minimal-deps:
+    needs: setup
+    uses: ./.github/workflows/r-minimal-deps.yml
+    secrets: inherit
+
   # covr + lint run in parallel with r-cmd-check (small jobs, ~5-15 min
   # each). Previously folded into r-cmd-check post-check steps (3MMM.62)
   # which serialized them after the check; reverted 3MMM.72 because the

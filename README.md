@@ -104,6 +104,31 @@ install.packages(
 The assistant bridge supports a local fallback through the Python
 package when no live OpenAI / Anthropic credentials are configured.
 
+### Optional packages (the R equivalent of `pip install pkg[extra]`)
+
+The base install stays deliberately light: rmorie wraps many
+specialist CRAN packages and declares them in `Suggests`, so nothing
+heavy compiles until you need it. Every function that uses one tells
+you exactly what to install when it's missing, and the test suite
+skips (never fails) without them. To provision up front instead:
+
+```r
+# install every optional package rmorie can use (one-time, ~15 min)
+morie_install_extras(which = "all", ask = FALSE)
+
+# or just what's missing, interactively
+morie_install_extras()
+
+# or a specific family, e.g. machine learning
+morie_install_extras(which = c("randomForest", "glmnet", "xgboost",
+                               "ranger", "caret", "pROC"))
+```
+
+Common families: ML (`randomForest`, `glmnet`, `xgboost`/`gbm`,
+`ranger`, `caret`, `pROC`, `Rtsne`, `e1071`, `dbscan`), DSP
+(`signal`, `pracma`, `wavelets`), causal (`DoubleML`, `mlr3`,
+`mlr3learners`, `ivreg`, `fixest`), storage (`RSQLite`, `duckdb`).
+
 ## Outputs-manifest example
 
 ```r
