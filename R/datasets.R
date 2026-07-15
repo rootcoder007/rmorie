@@ -1979,7 +1979,7 @@ morie_datasets_chicago_police_districts <- function(offline = TRUE,
 #'   specific joins (e.g. `"iucr"` only).
 #' @return A wide `data.frame`: crime columns first, then the
 #'   joined resolver columns with their canonical prefixes.
-#' @examples
+#' @examplesIf nzchar(system.file("extdata", "chicago_iucr_codes.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_chicago_crime_resolved(
 #'   offline = TRUE,
 #'   max_features = 5L,
@@ -2290,7 +2290,7 @@ morie_datasets_chicago_community_areas <- function(offline = TRUE,
 #' @references City of Chicago Data Portal, "Chicago Police
 #'   Department - Illinois Uniform Crime Reporting (IUCR) Codes"
 #'   (`c7ck-438e`).
-#' @examples
+#' @examplesIf nzchar(system.file("extdata", "chicago_iucr_codes.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_chicago_iucr_codes(offline = TRUE)
 #' subset(df, primary_description == "HOMICIDE")
 #' @export

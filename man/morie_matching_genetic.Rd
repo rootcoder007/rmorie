@@ -34,10 +34,13 @@ morie_matching_genetic(
 A list of class \code{morie_match_result}.
 }
 \description{
-Thin wrapper around \code{Matching::GenMatch} + \code{Matching::Match}
-that returns a \code{morie_match_result}.  Uses a genetic algorithm
-to find covariate weights for Mahalanobis distance matching that
-maximise covariate balance.
+Native rmorie implementation of genetic matching (Diamond & Sekhon
+2013): a real-coded genetic algorithm searches the diagonal
+Mahalanobis weight matrix maximizing worst-case covariate balance
+(paired-t p-value of the worst covariate). Deterministic given
+\code{seed}. No Matching/rgenoud at runtime; returns a
+\code{morie_match_result} with the selected weights in
+\code{details$best_weights}.
 }
 \examples{
 \dontrun{

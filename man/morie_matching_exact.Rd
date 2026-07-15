@@ -17,7 +17,11 @@ morie_matching_exact(data, treatment, exact_vars)
 A list of class \code{morie_match_result}.
 }
 \description{
-Thin wrapper around \code{MatchIt::matchit(method = "exact")}.
+Native rmorie implementation: units are stratified on the exact
+combination of \code{exact_vars}; strata containing both arms are
+retained and controls receive CEM-style stratum weights
+(\code{weights} and \code{subclass} columns on the matched data).
+No MatchIt at runtime.
 }
 \examples{
 \dontrun{

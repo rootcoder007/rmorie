@@ -39,9 +39,11 @@ expressed in SD units of the logit (or \code{NULL} for no caliper).}
 A list of class \code{morie_match_result}.
 }
 \description{
-Thin wrapper around \code{MatchIt::matchit(method = "nearest")} that
-returns a \code{morie_match_result} list for compatibility with the
-rmorie balance / treatment-effect helpers.
+Native greedy nearest-neighbour matching on the logit propensity
+score (Rosenbaum & Rubin 1985; caliper per Cochran & Rubin 1973).
+The propensity model is base \code{stats::glm}; no MatchIt at
+runtime. Returns the same \code{morie_match_result} shape as
+always; cross-validated against MatchIt in \code{tests/cross/}.
 }
 \examples{
 \dontrun{
