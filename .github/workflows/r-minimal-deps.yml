@@ -26,20 +26,25 @@ jobs:
           use-public-rspm: true
           extra-repositories: |
             https://rootcoder007.r-universe.dev
-      # pak's solver runs in a subprocess that does not see setup-r's
-      # repo profile, so it cannot resolve r-universe-only packages.
-      # Pre-installing with explicit repos (same pattern r-cmd-check.yml
-      # uses) makes pak accept the installed copy.
-      - name: Pre-install rmoriebricklayer (r-universe; not yet on CRAN)
-        run: install.packages("rmoriebricklayer", repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))
+      - name: System libraries (libcurl for the C++ backend)
+        run: sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev
+      # No pak: its solver ignores the runner's repo profile, so the
+      # r-universe-only hard dep cannot resolve (and its "hard" filter
+      # proved unreliable here). The hard-dependency set is tiny --
+      # install it directly with explicit repositories.
+      - name: Install hard dependencies + test tooling (no Suggests)
+        run: |
+          repos <- c(runiverse = "https://rootcoder007.r-universe.dev",
+                     CRAN = "https://cloud.r-project.org")
+          install.packages(c("here", "Rcpp", "RcppArmadillo",
+                             "rmoriebricklayer", "testthat", "pkgload"),
+                           repos = repos, Ncpus = 2)
+          missing <- setdiff(c("here", "Rcpp", "RcppArmadillo",
+                               "rmoriebricklayer", "testthat", "pkgload"),
+                             rownames(installed.packages()))
+          if (length(missing) > 0) stop("failed to install: ",
+                                        paste(missing, collapse = ", "))
         shell: Rscript {0}
-      - uses: r-lib/actions/setup-r-dependencies@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
-        with:
-          # hard = Depends/Imports/LinkingTo only; NO Suggests.
-          dependencies: '"hard"'
-          extra-packages: |
-            any::testthat
-            any::pkgload
       - name: Run tests without any Suggests packages
         run: |
           pkgload::load_all(quiet = TRUE)
