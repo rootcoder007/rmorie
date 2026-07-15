@@ -13,6 +13,8 @@
 
 # ---- 1. SQLite (the default fallback; always available) ------------------
 test_that("DBI/SQLite cache round-trip via db_path", {
+  testthat::skip_if_not_installed("RSQLite")
+  testthat::skip_if_not_installed("duckdb")
 
   tmp_db <- tempfile(fileext = ".db")
   withr::defer(if (file.exists(tmp_db)) unlink(tmp_db))
@@ -89,6 +91,7 @@ test_that("morie_db_connect() default opens DuckDB when available", {
 })
 
 test_that("morie_db_connect() falls back to SQLite when duckdb absent", {
+  testthat::skip_if_not_installed("RSQLite")
   skip_if_not_installed("DBI")
 
   tmp_dir <- tempfile("morie-test-")

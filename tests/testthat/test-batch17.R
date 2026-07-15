@@ -230,6 +230,7 @@ test_that("morie_rangayyan_envelope alias is identical to rgenv", {
 })
 
 test_that("rgfir filters a signal when 'signal' is available", {
+  testthat::skip_if_not_installed("signal")
   set.seed(17)
   tt <- seq(0, 1, length.out = 400)
   x <- sin(2 * pi * 5 * tt) + 0.5 * sin(2 * pi * 60 * tt)
@@ -242,6 +243,7 @@ test_that("rgfir filters a signal when 'signal' is available", {
 })
 
 test_that("rgfir coerces even order to odd and clamps small orders", {
+  testthat::skip_if_not_installed("signal")
   set.seed(18)
   x <- sin(2 * pi * 5 * seq(0, 1, length.out = 300))
   r <- rgfir(x, cutoff = 10, order = 50L, fs = 200)
@@ -251,6 +253,7 @@ test_that("rgfir coerces even order to odd and clamps small orders", {
 })
 
 test_that("rgfir supports alternative windows and short-signal path", {
+  testthat::skip_if_not_installed("signal")
   set.seed(19)
   x <- sin(2 * pi * 3 * seq(0, 1, length.out = 90))
   for (w in c("hann", "blackman", "rectangular", "unknown")) {
@@ -319,6 +322,7 @@ test_that("morie_rangayyan_hrv alias is identical to rghrv", {
 })
 
 test_that("rgiir lowpass filters a signal when 'signal' is available", {
+  testthat::skip_if_not_installed("signal")
   set.seed(23)
   tt <- seq(0, 1, length.out = 500)
   x <- sin(2 * pi * 5 * tt) + 0.5 * sin(2 * pi * 40 * tt)
@@ -331,6 +335,7 @@ test_that("rgiir lowpass filters a signal when 'signal' is available", {
 })
 
 test_that("rgiir supports highpass and bandpass btypes", {
+  testthat::skip_if_not_installed("signal")
   set.seed(24)
   tt <- seq(0, 1, length.out = 500)
   x <- sin(2 * pi * 5 * tt) + 0.5 * sin(2 * pi * 40 * tt)
@@ -407,6 +412,7 @@ test_that("morie_rangayyan_psd alias is identical to rgpsd", {
 })
 
 test_that("rgqrs detects R-peaks on a synthetic ECG", {
+  testthat::skip_if_not_installed("signal")
   set.seed(29)
   fs <- 360
   tt <- seq(0, 5, length.out = 5 * fs)
@@ -427,6 +433,7 @@ test_that("rgqrs detects R-peaks on a synthetic ECG", {
 })
 
 test_that("rgqrs default fs argument path runs", {
+  testthat::skip_if_not_installed("signal")
   set.seed(30)
   tt <- seq(0, 3, length.out = 3 * 360)
   ecg <- rowSums(vapply(

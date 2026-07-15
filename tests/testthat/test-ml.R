@@ -13,6 +13,7 @@ make_ml_split <- function(n = 80, seed = 1) {
 }
 
 test_that("morie_ml_eval_robustness returns classification report", {
+  testthat::skip_if_not_installed("randomForest")
   s <- make_ml_split()
   r <- morie_ml_eval_robustness(s$X, s$y, s$test_X, s$test_y,
                                 n_estimators = 20L)

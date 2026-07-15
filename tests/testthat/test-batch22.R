@@ -470,6 +470,7 @@ test_that("morie_xavier_initialization alias is identical to morie_xavir_xavier_
 })
 
 test_that("morie_xgboost_objective fits a regression model", {
+  testthat::skip_if_not_installed("xgboost")
   set.seed(13)
   x <- matrix(rnorm(80), ncol = 4)
   y <- x[, 1] + rnorm(20, sd = 0.1)
@@ -489,6 +490,7 @@ test_that("morie_xgboost_objective fits a regression model", {
 })
 
 test_that("morie_xgboost_objective fits a classification model", {
+  testthat::skip_if_not_installed("xgboost")
   set.seed(14)
   x <- matrix(rnorm(80), ncol = 4)
   y <- as.integer(x[, 1] > 0)
@@ -501,6 +503,7 @@ test_that("morie_xgboost_objective fits a classification model", {
 })
 
 test_that("morie_xgboost_objective auto-detects the task and coerces a vector x", {
+  testthat::skip_if_not_installed("xgboost")
   set.seed(15)
   x <- rnorm(30)
   y <- x + rnorm(30, sd = 0.1)

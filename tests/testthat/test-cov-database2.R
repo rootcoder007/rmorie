@@ -42,6 +42,8 @@ test_that("morie_list_datasets reports per-dataset cache status", {
 })
 
 test_that("morie_load_dataset resolves the direct-download tier", {
+  testthat::skip_if_not_installed("RSQLite")
+  testthat::skip_if_not_installed("duckdb")
   .cdb2_have_db()
   testthat::local_mocked_bindings(
     morie_fetch = function(url, ...) data.frame(a = 1:4),
@@ -56,6 +58,8 @@ test_that("morie_load_dataset resolves the direct-download tier", {
 })
 
 test_that("morie_load_dataset resolves the ArcGIS tier", {
+  testthat::skip_if_not_installed("RSQLite")
+  testthat::skip_if_not_installed("duckdb")
   .cdb2_have_db()
   testthat::local_mocked_bindings(
     morie_fetch_arcgis = function(layer_url, ...) data.frame(b = 1:7),
