@@ -1,0 +1,75 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+#
+# Branch gate for feat/native-specializations: every push must pass
+# R CMD check --as-cran in the hard-deps flavour (the whole point of
+# the branch is zero-Suggests engines) plus the three native test
+# tiers. Debian bookworm container: P3M binaries keep it fast.
+name: native-specializations
+
+on:
+  push:
+    branches: [feat/native-specializations]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  as-cran-hard-deps:
+    runs-on: ubuntu-latest
+    container: rocker/r-ver:4.5.1
+    timeout-minutes: 120
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      _R_CHECK_FORCE_SUGGESTS_: false
+      R_KEEP_PKG_SOURCE: yes
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: System libraries + toolchain
+        run: apt-get update -qq && apt-get install -y --no-install-recommends build-essential libcurl4-openssl-dev libssl-dev libxml2-dev
+      - name: Install hard dependencies + tooling
+        run: |
+          options(HTTPUserAgent = sprintf(
+            "R/%s R (%s)", getRversion(),
+            paste(getRversion(), R.version["platform"],
+                  R.version["arch"], R.version["os"])))
+          repos <- c(
+            runiverse = "https://rootcoder007.r-universe.dev",
+            P3M = "https://packagemanager.posit.co/cran/__linux__/bookworm/latest",
+            CRAN = "https://cloud.r-project.org")
+          pkgs <- c("here", "Rcpp", "RcppArmadillo", "rmoriebricklayer",
+                    "testthat", "pkgload", "rcmdcheck")
+          install.packages(pkgs, repos = repos, Ncpus = 2)
+          missing <- setdiff(pkgs, rownames(installed.packages()))
+          if (length(missing) > 0) stop("failed to install: ",
+                                        paste(missing, collapse = ", "))
+        shell: Rscript {0}
+      - name: Native test tiers (structural + cross + property)
+        run: |
+          pkgload::load_all(quiet = TRUE)
+          bad <- 0L
+          for (f in c(Sys.glob("tests/testthat/test-matching-native.R"),
+                      Sys.glob("tests/cross/*.R"),
+                      Sys.glob("tests/property/*.R"))) {
+            d <- as.data.frame(testthat::test_file(f, reporter = "summary"))
+            bad <- bad + sum(d$failed) + sum(d$error)
+          }
+          if (bad > 0) stop(bad, " native-tier failures")
+        shell: Rscript {0}
+      - name: R CMD check (as-cran, no vignettes)
+        run: |
+          res <- rcmdcheck::rcmdcheck(
+            args = c("--no-manual", "--as-cran", "--ignore-vignettes"),
+            build_args = c("--no-build-vignettes", "--no-manual"),
+            error_on = "error")
+          print(res)
+        shell: Rscript {0}
+      - name: Upload check logs on failure
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: native-spec-check-logs
+          path: |
+            check/*.Rcheck/00check.log
+            check/*.Rcheck/tests/
+          if-no-files-found: ignore
