@@ -214,3 +214,45 @@ test_that("native CEM with coarser bins retains more units", {
   coarse <- morie_matching_cem(df, "d", c("x1", "x2", "x3"), n_bins = 2L)
   expect_gte(nrow(coarse$matched_data), nrow(fine$matched_data))
 })
+
+# ---- module 5: native optimal pair matching ------------------------------
+
+test_that("native optimal matching returns the result shape (propensity)", {
+  d <- .dgp_confounded(n = 500L, seed = 31L)
+  r <- morie_matching_optimal_pair(d, "d", c("x1", "x2", "x3"))
+  expect_s3_class(r, "morie_match_result")
+  expect_identical(r$method, "optimal_pair (rmorie native)")
+  expect_equal(r$n_treated, sum(stats::complete.cases(
+    d[, c("d", "x1", "x2", "x3")]) & d$d == 1))
+  expect_false(any(duplicated(r$match_pairs$control_idx)))
+  expect_true(all(r$match_pairs$distance >= 0))
+  expect_true(is.numeric(r$details$total_distance))
+})
+
+test_that("optimal total distance <= greedy total distance", {
+  d <- .dgp_confounded(n = 800L, seed = 32L)
+  opt <- morie_matching_optimal_pair(d, "d", c("x1", "x2", "x3"))
+  grd <- morie_matching_nearest_neighbor(d, "d", c("x1", "x2", "x3"))
+  # same estimand only when greedy matched every treated unit
+  skip_if(nrow(grd$match_pairs) != nrow(opt$match_pairs))
+  expect_lte(sum(opt$match_pairs$distance),
+             sum(grd$match_pairs$distance) + 1e-9)
+})
+
+test_that("native optimal mahalanobis mode matches every treated unit", {
+  d <- .dgp_confounded(n = 400L, seed = 33L)
+  r <- morie_matching_optimal_pair(d, "d", c("x1", "x2", "x3"),
+                                   distance = "mahalanobis")
+  expect_identical(r$details$engine, "native-optimal-assignment")
+  expect_equal(r$n_treated, nrow(r$match_pairs))
+  expect_false(any(duplicated(r$match_pairs$control_idx)))
+})
+
+test_that("native optimal improves balance on a confounded DGP", {
+  d <- .dgp_confounded(n = 3000L, seed = 34L)
+  r <- morie_matching_optimal_pair(d, "d", c("x1", "x2", "x3"))
+  md <- r$matched_data
+  for (v in c("x1", "x2", "x3")) {
+    expect_lt(abs(.smd(md, "d", v)), 0.1)
+  }
+})

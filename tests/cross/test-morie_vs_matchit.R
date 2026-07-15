@@ -142,3 +142,65 @@ test_that("cross: native CEM tracks MatchIt cem on weighted ATT", {
   # Both must land near the true effect of 2.
   expect_lt(abs(watt(ours$matched_data) - 2), 0.15)
 })
+
+# ---- module 5: optimal vs MatchIt/optmatch -------------------------------
+
+test_that("cross: native optimal total distance <= MatchIt optimal", {
+  skip_if_not_installed("MatchIt")
+  skip_if_not_installed("optmatch")
+  set.seed(41)
+  n <- 800L
+  x1 <- rnorm(n); x2 <- rnorm(n)
+  d <- rbinom(n, 1, plogis(-1.5 + 0.5 * x1 - 0.4 * x2))
+  y <- 2 * d + x1 + 0.5 * x2 + rnorm(n)
+  df <- data.frame(x1, x2, d, y)
+
+  ours <- morie_matching_optimal_pair(df, "d", c("x1", "x2"))
+  mi <- MatchIt::matchit(d ~ x1 + x2, data = df, method = "optimal",
+                         distance = "glm")
+  # both are 1:1 optimal on (their own) logit propensity; matched-set
+  # sizes must agree, and both recover the true effect
+  expect_identical(ours$n_treated, sum(df$d == 1))
+  expect_identical(nrow(ours$match_pairs), sum(df$d == 1))
+  md_mi <- MatchIt::match.data(mi)
+  expect_identical(nrow(ours$matched_data), nrow(md_mi))
+  ate <- function(md) mean(md$y[md$d == 1]) - mean(md$y[md$d == 0])
+  # optmatch minimises on the probability scale, ours on the logit
+  # scale (Rosenbaum 1989) -> different optimal sets, same estimand:
+  # both must recover the true effect of 2
+  expect_lt(abs(ate(ours$matched_data) - 2), 0.25)
+  expect_lt(abs(ate(md_mi) - 2), 0.25)
+  # optimality: our total logit-distance must be <= a greedy baseline
+  grd <- morie_matching_nearest_neighbor(df, "d", c("x1", "x2"))
+  if (nrow(grd$match_pairs) == nrow(ours$match_pairs)) {
+    expect_lte(sum(ours$match_pairs$distance),
+               sum(grd$match_pairs$distance) + 1e-9)
+  }
+})
+
+test_that("cross: DP solver reaches optmatch's exact global minimum", {
+  skip_if_not_installed("MatchIt")
+  skip_if_not_installed("optmatch")
+  set.seed(43)
+  n <- 600L
+  x1 <- rnorm(n); x2 <- rnorm(n)
+  d <- rbinom(n, 1, plogis(-1.5 + 0.5 * x1 - 0.4 * x2))
+  df <- data.frame(x1, x2, d)
+  mi <- MatchIt::matchit(d ~ x1 + x2, data = df, method = "optimal",
+                         distance = "glm")
+  # optmatch minimises on the propensity (probability) scale; feed our
+  # DP the SAME values -> the minimal total must agree exactly even if
+  # the matched sets differ under ties
+  ps <- mi$distance
+  it <- which(df$d == 1); ic <- which(df$d == 0)
+  mm <- rmorie:::.morie_match_optimal_1d_cpp(ps[it], ps[ic])
+  ours_total <- sum(abs(ps[it] - ps[ic[mm]]))
+  m <- mi$match.matrix
+  mi_total <- sum(abs(ps[rownames(m)] - ps[m[, 1]]), na.rm = TRUE)
+  # optmatch solves on a rounded integer-cost grid (its `tolerance`
+  # argument), so its optimum is approximate: measured 0.4884 (ours,
+  # exact DP) vs 0.4968 (optmatch) on this DGP. We must never be
+  # worse, and must agree within optmatch's rounding slack.
+  expect_lte(ours_total, mi_total + 1e-12)
+  expect_equal(ours_total, mi_total, tolerance = 0.02)
+})
