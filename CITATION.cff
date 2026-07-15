@@ -5,6 +5,7 @@ authors:
   - family-names: "Ruhela"
     given-names: "Vansh Singh"
     orcid: "https://orcid.org/0009-0004-1750-3592"
+    affiliation: "Centre for Criminology and Sociolegal Studies, University of Toronto"
     name-particle: "Singh"
     # IPA: /ʋənʃ sɪŋ ɾʊˈɦeːlɑː/
 version: "1.1.2"
@@ -19,6 +20,7 @@ preferred-citation:
     - family-names: "Ruhela"
       given-names: "Vansh Singh"
       orcid: "https://orcid.org/0009-0004-1750-3592"
+      affiliation: "Centre for Criminology and Sociolegal Studies, University of Toronto"
   year: "2026"
   url: "https://github.com/rootcoder007/rmorie"
 references:
