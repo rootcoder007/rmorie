@@ -26,6 +26,13 @@ jobs:
           use-public-rspm: true
           extra-repositories: |
             https://rootcoder007.r-universe.dev
+      # pak's solver runs in a subprocess that does not see setup-r's
+      # repo profile, so it cannot resolve r-universe-only packages.
+      # Pre-installing with explicit repos (same pattern r-cmd-check.yml
+      # uses) makes pak accept the installed copy.
+      - name: Pre-install rmoriebricklayer (r-universe; not yet on CRAN)
+        run: install.packages("rmoriebricklayer", repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))
+        shell: Rscript {0}
       - uses: r-lib/actions/setup-r-dependencies@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
         with:
           # hard = Depends/Imports/LinkingTo only; NO Suggests.
@@ -33,7 +40,6 @@ jobs:
           extra-packages: |
             any::testthat
             any::pkgload
-            any::rmoriebricklayer
       - name: Run tests without any Suggests packages
         run: |
           pkgload::load_all(quiet = TRUE)
