@@ -33,3 +33,7 @@
 ^LICENSE$
 ^NOTICE$
 ^CITATION\.cff$
+^test-output-.*\.txt$
+^check-output-.*\.txt$
+^check-after-.*\.txt$
+^.*\.Rcheck$

@@ -42,6 +42,7 @@ test_that("to_format dataframe pass-through + csv", {
 })
 
 test_that("to_format markdown/latex/html via knitr", {
+  testthat::skip_if_not_installed("knitr")
   set.seed(1)
   df <- data.frame(a = 1:2, b = 3:4)
   expect_type(rmorie:::.tbl_to_format(df, "markdown"), "character")
@@ -160,6 +161,7 @@ test_that("table1 returns a data.frame for a simple grouped dataset", {
 })
 
 test_that("regression_table latex output is a character vector", {
+  testthat::skip_if_not_installed("knitr")
   set.seed(1)
   df <- data.frame(x = rnorm(20)); df$y <- df$x + rnorm(20)
   m <- lm(y ~ x, data = df)

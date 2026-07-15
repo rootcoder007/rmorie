@@ -3,6 +3,7 @@
 # Phase 3DDD1: Vancouver Open Data crime-adjacent civic loaders.
 
 test_that("morie_datasets_vancouver_graffiti returns 100-row sample", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_vancouver_graffiti(offline = TRUE)
   expect_s3_class(df, "data.frame")
   expect_equal(nrow(df), 100L)
@@ -45,6 +46,7 @@ test_that("morie_datasets_vancouver_fire_halls returns 20 halls", {
 })
 
 test_that("max_features cap honoured on all 5 wrappers", {
+  testthat::skip_if_not_installed("rmoriedata")
   for (fn in list(morie_datasets_vancouver_graffiti,
                    morie_datasets_vancouver_noise_control_areas,
                    morie_datasets_vancouver_homeless_shelters,
@@ -65,6 +67,7 @@ test_that("morie_datasets_vancouver_community_centres reads 27-row fixture", {
 })
 
 test_that("morie_datasets_vancouver_community_food_markets reads 91-row fixture", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_vancouver_community_food_markets(offline = TRUE)
   expect_s3_class(df, "data.frame")
   expect_equal(nrow(df), 91L)
@@ -72,6 +75,7 @@ test_that("morie_datasets_vancouver_community_food_markets reads 91-row fixture"
 })
 
 test_that("morie_datasets_vancouver_disability_parking reads 100-row fixture", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_vancouver_disability_parking(offline = TRUE)
   expect_s3_class(df, "data.frame")
   expect_equal(nrow(df), 100L)
@@ -81,6 +85,7 @@ test_that("morie_datasets_vancouver_disability_parking reads 100-row fixture", {
 })
 
 test_that("morie_datasets_vancouver_public_art reads 100-row sample", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_vancouver_public_art(offline = TRUE)
   expect_s3_class(df, "data.frame")
   expect_equal(nrow(df), 100L)
@@ -91,6 +96,7 @@ test_that("morie_datasets_vancouver_public_art reads 100-row sample", {
 })
 
 test_that("max_features cap honoured on all 4 new Vancouver wrappers", {
+  testthat::skip_if_not_installed("rmoriedata")
   for (fn in list(morie_datasets_vancouver_community_centres,
                    morie_datasets_vancouver_community_food_markets,
                    morie_datasets_vancouver_disability_parking,

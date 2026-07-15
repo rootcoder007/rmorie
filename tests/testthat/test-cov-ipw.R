@@ -56,6 +56,7 @@ test_that("morie_run_ebac_selection_ipw_analysis errors without the survey pkg",
 })
 
 test_that("morie_run_ebac_selection_ipw_analysis runs the selection-adjusted IPW", {
+  testthat::skip_if_not_installed("survey")
   d <- make_canonical_cpads(n = 1600L, seed = 404L)
   od <- tempfile("ebac-")
   res <- suppressWarnings(

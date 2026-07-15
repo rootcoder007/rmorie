@@ -152,6 +152,7 @@ test_that("morie_datasets_nyc_nypd_boro_crosswalk returns the 5-row 4-col map", 
 # =================================================== resolved-joins analyzer
 
 test_that("morie_datasets_nyc_nypd_resolved(offline=TRUE) joins boro + precinct for arrests_ytd", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_nyc_nypd_resolved("nypd_arrests_ytd",
                                             offline = TRUE)
   expect_s3_class(df, "data.frame")
@@ -205,6 +206,7 @@ test_that("morie_datasets_nyc_nypd_resolved correctly maps arrest_boro 1-letter 
 })
 
 test_that("morie_datasets_nyc_nypd_resolved row count is preserved", {
+  testthat::skip_if_not_installed("rmoriedata")
   base <- morie_datasets_nyc_nypd_by_key("nypd_arrests_ytd",
                                             offline = TRUE)
   resolved <- morie_datasets_nyc_nypd_resolved("nypd_arrests_ytd",
@@ -250,6 +252,7 @@ test_that("morie_datasets_nyc_nypd_resolved rejects unknown resolver names", {
 # =================================================== offense codes wrapper
 
 test_that("morie_datasets_nyc_nypd_offense_codes returns 246-row 5-col dict", {
+  testthat::skip_if_not_installed("rmoriedata")
   od <- morie_datasets_nyc_nypd_offense_codes()
   expect_s3_class(od, "data.frame")
   expect_equal(nrow(od), 246L)
@@ -268,6 +271,7 @@ test_that("morie_datasets_nyc_nypd_offense_codes returns 246-row 5-col dict", {
 })
 
 test_that("morie_datasets_nyc_nypd_offense_codes hits known (ky_cd, pd_cd) pairs", {
+  testthat::skip_if_not_installed("rmoriedata")
   od <- morie_datasets_nyc_nypd_offense_codes()
   # (105, 397) -> ROBBERY OPEN AREA UNCLASSIFIED, felony.
   hit <- subset(od, ky_cd == "105" & pd_cd == "397")
@@ -279,6 +283,7 @@ test_that("morie_datasets_nyc_nypd_offense_codes hits known (ky_cd, pd_cd) pairs
 # =================================================== offense resolver
 
 test_that("morie_datasets_nyc_nypd_resolved(resolvers='offense') joins on (ky_cd, pd_cd)", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_nyc_nypd_resolved("nypd_arrests_ytd",
                                             offline = TRUE,
                                             resolvers = "offense")
@@ -297,6 +302,7 @@ test_that("morie_datasets_nyc_nypd_resolved(resolvers='offense') joins on (ky_cd
 })
 
 test_that("morie_datasets_nyc_nypd_resolved offense join also fires for default 3-resolver call", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_nyc_nypd_resolved("nypd_arrests_ytd",
                                             offline = TRUE)
   for (col in c("offense_ofns_desc", "offense_pd_desc",
@@ -318,6 +324,7 @@ test_that("morie_datasets_nyc_nypd_resolved offense join no-ops for datasets wit
 })
 
 test_that("morie_datasets_nyc_nypd_resolved offense resolver name is accepted", {
+  testthat::skip_if_not_installed("rmoriedata")
   expect_error(
     morie_datasets_nyc_nypd_resolved("nypd_arrests_ytd",
                                         offline = TRUE,
@@ -366,6 +373,7 @@ test_that("law_code resolver adds 4 cols + joins book name", {
 })
 
 test_that("default 4-resolver call adds all law_code cols", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_nyc_nypd_resolved("nypd_arrests_ytd",
                                             offline = TRUE)
   for (col in c("law_book", "law_section",

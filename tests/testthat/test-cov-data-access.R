@@ -5,6 +5,7 @@
 # internal .morie_read_text() helper so no network is touched.
 
 test_that("morie_fetch reads tsv, xml and html over file://", {
+  testthat::skip_if_not_installed("xml2")
   tsv <- tempfile(fileext = ".tsv")
   writeLines(c("a\tb", "1\tx", "2\ty"), tsv)
   on.exit(unlink(tsv), add = TRUE)

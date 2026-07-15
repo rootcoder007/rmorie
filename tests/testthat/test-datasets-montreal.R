@@ -17,6 +17,7 @@ test_that("morie_datasets_montreal_justice_safety_layers returns 23-row catalog"
 })
 
 test_that("morie_datasets_montreal_sim_interventions returns 349-row sample", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_montreal_sim_interventions(offline = TRUE)
   expect_s3_class(df, "data.frame")
   expect_equal(nrow(df), 349L)
@@ -37,6 +38,7 @@ test_that("morie_datasets_montreal_sim_interventions returns 349-row sample", {
 })
 
 test_that("max_features cap honoured on SIM loader", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_montreal_sim_interventions(offline = TRUE,
                                                      max_features = 10L)
   expect_equal(nrow(df), 10L)
@@ -58,6 +60,7 @@ test_that("user csv_path mode reads external CSV", {
 })
 
 test_that("morie_datasets_montreal_sim_intervention_types returns 170-row dict", {
+  testthat::skip_if_not_installed("rmoriedata")
   d <- morie_datasets_montreal_sim_intervention_types()
   expect_s3_class(d, "data.frame")
   expect_equal(nrow(d), 170L)

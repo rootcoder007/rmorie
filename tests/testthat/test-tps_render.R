@@ -61,6 +61,7 @@ test_that("morie_tps_project_xy is approximately origin-centred", {
 })
 
 test_that("morie_tps_render_choropleth runs without writing", {
+  testthat::skip_if_not_installed("ggplot2")
   polys <- .mk_polys_df()
   p <- morie_tps_render_choropleth(polys, rate_col = "ASSAULT_RATE_2024",
                                     show_ids = FALSE)
@@ -73,6 +74,7 @@ test_that("morie_tps_render_choropleth errors when rate_col absent", {
 })
 
 test_that("morie_tps_render_points runs with synthetic incidents", {
+  testthat::skip_if_not_installed("ggplot2")
   set.seed(1L)
   df <- data.frame(
     LAT_WGS84  = 43.65 + rnorm(60, 0, 0.01),
@@ -88,6 +90,8 @@ test_that("morie_tps_render_points errors when no in-bbox rows", {
 })
 
 test_that("morie_tps_render_points with dbscan colours points", {
+  testthat::skip_if_not_installed("ggplot2")
+  testthat::skip_if_not_installed("dbscan")
   set.seed(1L)
   df <- data.frame(
     LAT_WGS84  = 43.65 + rnorm(80, 0, 0.01),
@@ -117,6 +121,7 @@ test_that("morie_tps_render_yearly_grid errors on missing prefix", {
 })
 
 test_that("morie_tps_render_dbscan returns a ggplot when available", {
+  testthat::skip_if_not_installed("ggplot2")
   set.seed(1L)
   pts <- data.frame(
     lat = 43.65 + rnorm(60, 0, 0.01),
@@ -131,6 +136,7 @@ test_that("morie_tps_render_dbscan errors on missing coords", {
 })
 
 test_that("morie_tps_render_district_proportional returns a ggplot", {
+  testthat::skip_if_not_installed("ggplot2")
   polys <- data.frame(
     centroid_lat = 43.65 + (0:3) * 0.02,
     centroid_lon = -79.40 + (0:3) * 0.02,
@@ -153,6 +159,7 @@ test_that("morie_tps_render_satscan_panel stubs when llr absent", {
 })
 
 test_that("morie_tps_render_satscan_panel runs when llr supplied", {
+  testthat::skip_if_not_installed("ggplot2")
   clusters <- data.frame(lat = c(43.7, 43.65),
                           lon = c(-79.4, -79.45),
                           radius_km = c(1, 2),

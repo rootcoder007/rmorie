@@ -1290,7 +1290,11 @@ morie_taphonomy_fetch_usgs_soil <- function(dest = tempdir(),
   if (!dir.exists(dest)) dir.create(dest, recursive = TRUE)
   zip_path <- file.path(dest, basename(url))
   if (refresh || !file.exists(zip_path)) {
-    utils::download.file(url, zip_path, mode = "wb", quiet = TRUE)
+    # Route through the shared transport wrapper (mockable, Wayback
+    # fallback) instead of a raw download.file call.
+    got <- .morie_download(url, ext = tools::file_ext(url))
+    file.copy(got, zip_path, overwrite = TRUE)
+    unlink(got)
   }
   df <- .morie_read_usgs_soil_zip(zip_path, nrows)
   attr(df, "source") <- url

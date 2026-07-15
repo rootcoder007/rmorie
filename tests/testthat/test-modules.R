@@ -7,7 +7,7 @@ test_that("morie_fetch_ckan pulls CPADS PUMF from the open.canada.ca datastore",
   # CPADS 2021-2022 PUMF is a public open-data release queried through
   # the CKAN datastore_search API. Network-dependent, so skipped on CRAN
   # and offline machines per policy; runs wherever the API is reachable.
-  testthat::skip_if_offline("open.canada.ca")
+  skip_if_no_network("open.canada.ca")
   dat <- tryCatch(
     morie_fetch_ckan(dataset_key = "cpads", limit = 1000L),
     error = function(e) NULL

@@ -32,6 +32,7 @@ test_that("max_features cap is honoured on divisions loader", {
 # =================================================== resolved-joins analyzer
 
 test_that("morie_datasets_tps_psdp_resolved('assault', offline=TRUE) adds all resolver cols", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_tps_psdp_resolved("assault", offline = TRUE)
   expect_s3_class(df, "data.frame")
   # Division
@@ -51,6 +52,7 @@ test_that("morie_datasets_tps_psdp_resolved('assault', offline=TRUE) adds all re
 })
 
 test_that("morie_datasets_tps_psdp_resolved row count is preserved", {
+  testthat::skip_if_not_installed("rmoriedata")
   base <- morie_datasets_tps_assault(offline = TRUE)
   resolved <- morie_datasets_tps_psdp_resolved("assault",
                                                   offline = TRUE)
@@ -58,6 +60,7 @@ test_that("morie_datasets_tps_psdp_resolved row count is preserved", {
 })
 
 test_that("morie_datasets_tps_psdp_resolved single-resolver mode skips others", {
+  testthat::skip_if_not_installed("rmoriedata")
   d <- morie_datasets_tps_psdp_resolved("assault",
                                            offline = TRUE,
                                            resolvers = "division")

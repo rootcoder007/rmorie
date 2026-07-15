@@ -11,6 +11,7 @@
 # ============================================================== matching.R
 
 test_that("morie_matching_rosenbaum_bounds returns multiple Gamma rows", {
+  testthat::skip_if_not_installed("MatchIt")
   # rosenbaum_bounds takes match_pairs (a data.frame with treated_idx /
   # control_idx), NOT raw covariates. Build the pairs first via
   # nearest-neighbour matching (PSM equivalent in morie's API), then

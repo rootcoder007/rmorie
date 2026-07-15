@@ -36,6 +36,7 @@ test_that("morie_datasets_nyc_community_districts(offline=TRUE) reads 71-row fix
 })
 
 test_that("morie_datasets_nyc_ntas_2020(offline=TRUE) reads 262-row fixture", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_nyc_ntas_2020(offline = TRUE)
   expect_s3_class(df, "data.frame")
   expect_equal(nrow(df), 262L)
@@ -53,6 +54,7 @@ test_that("morie_datasets_nyc_ntas_2020(offline=TRUE) reads 262-row fixture", {
 })
 
 test_that("morie_datasets_nyc_zctas(offline=TRUE) reads 221-row ZCTA fixture", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_nyc_zctas(offline = TRUE)
   expect_s3_class(df, "data.frame")
   expect_equal(nrow(df), 221L)
@@ -70,6 +72,7 @@ test_that("morie_datasets_nyc_zctas(offline=TRUE) reads 221-row ZCTA fixture", {
 })
 
 test_that("max_features cap is honoured on all 5 loaders", {
+  testthat::skip_if_not_installed("rmoriedata")
   for (fn in list(morie_datasets_nyc_school_districts,
                    morie_datasets_nyc_council_districts,
                    morie_datasets_nyc_community_districts,
@@ -98,6 +101,7 @@ test_that("morie_datasets_nyc_boundaries_catalog lists 7 boundary types", {
 })
 
 test_that("catalog row counts match each loader's actual row count", {
+  testthat::skip_if_not_installed("rmoriedata")
   cat_df <- morie_datasets_nyc_boundaries_catalog()
   for (i in seq_len(nrow(cat_df))) {
     fn <- get(cat_df$loader[i], envir = asNamespace("rmorie"))

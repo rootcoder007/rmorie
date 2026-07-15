@@ -86,6 +86,7 @@ test_that("morie_psymet_omega(nf=4) delegates when psych is installed", {
 })
 
 test_that("morie_psymet_omega(nf=1) warns omega_h is not meaningful", {
+  testthat::skip_if_not_installed("psych")
   # Single-factor case: warning IS the signal users need to interpret
   # the result correctly. Assert it fires.
   X <- .make_items(n = 60, k = 5, rho = 0.55)

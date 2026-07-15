@@ -11,6 +11,7 @@
 # ===================================================== morie_to_neighbourhoods()
 
 test_that("morie_to_neighbourhoods('158', offline=TRUE) returns the full 158-row canonical layer", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_to_neighbourhoods("158", offline = TRUE)
   expect_s3_class(df, "data.frame")
   expect_equal(nrow(df), 158L)
@@ -29,6 +30,7 @@ test_that("morie_to_neighbourhoods('158', offline=TRUE) returns the full 158-row
 })
 
 test_that("morie_to_neighbourhoods('140', offline=TRUE) returns the full 140-row historical layer", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_to_neighbourhoods("140", offline = TRUE)
   expect_s3_class(df, "data.frame")
   expect_equal(nrow(df), 140L)
@@ -39,6 +41,7 @@ test_that("morie_to_neighbourhoods('140', offline=TRUE) returns the full 140-row
 })
 
 test_that("morie_to_neighbourhoods('nia', offline=TRUE) returns NIA schema with DATE_EFFECTIVE", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_to_neighbourhoods("nia", offline = TRUE)
   expect_s3_class(df, "data.frame")
   expect_true(nrow(df) > 0L)
@@ -157,6 +160,7 @@ test_that("morie_tps_year_to_hood_version returns NA on non-numeric input", {
 # ============================================= morie_to_hood_crosswalk() (REAL)
 
 test_that("morie_to_hood_crosswalk returns the bundled REAL 158<->140 mapping", {
+  testthat::skip_if_not_installed("rmoriedata")
   cw <- morie_to_hood_crosswalk()
   expect_s3_class(cw, "data.frame")
   for (col in c("hood_140", "name_140", "hood_158", "name_158",
@@ -170,6 +174,7 @@ test_that("morie_to_hood_crosswalk returns the bundled REAL 158<->140 mapping", 
 })
 
 test_that("morie_to_hood_crosswalk hood codes are 3-char zero-padded strings", {
+  testthat::skip_if_not_installed("rmoriedata")
   cw <- morie_to_hood_crosswalk()
   expect_type(cw$hood_140, "character")
   expect_type(cw$hood_158, "character")
@@ -178,6 +183,7 @@ test_that("morie_to_hood_crosswalk hood codes are 3-char zero-padded strings", {
 })
 
 test_that("morie_to_hood_crosswalk has bidirectional percent columns", {
+  testthat::skip_if_not_installed("rmoriedata")
   cw <- morie_to_hood_crosswalk()
   expect_true("pct_140_in_158" %in% names(cw))
   expect_true("pct_158_in_140" %in% names(cw))
@@ -190,6 +196,7 @@ test_that("morie_to_hood_crosswalk has bidirectional percent columns", {
 })
 
 test_that("morie_to_hood_crosswalk split children have pct_158_in_140 == 100 (clean cake-cut)", {
+  testthat::skip_if_not_installed("rmoriedata")
   cw <- morie_to_hood_crosswalk()
   splits <- cw[cw$relation == "split", ]
   # All 34 split rows are clean cake-cuts (each 158 child fully
@@ -199,6 +206,7 @@ test_that("morie_to_hood_crosswalk split children have pct_158_in_140 == 100 (cl
 })
 
 test_that("morie_to_hood_crosswalk relation distribution matches the OT data", {
+  testthat::skip_if_not_installed("rmoriedata")
   cw <- morie_to_hood_crosswalk()
   rel <- table(cw$relation)
   expect_equal(unname(rel["1:1"]),         123L)
@@ -208,6 +216,7 @@ test_that("morie_to_hood_crosswalk relation distribution matches the OT data", {
 })
 
 test_that("morie_to_hood_crosswalk: 140-75 Church-Yonge Corridor splits into 158-167 + 158-168", {
+  testthat::skip_if_not_installed("rmoriedata")
   cw <- morie_to_hood_crosswalk()
   row75 <- cw[cw$hood_140 == "075", ]
   expect_true(nrow(row75) >= 2L)
@@ -216,6 +225,7 @@ test_that("morie_to_hood_crosswalk: 140-75 Church-Yonge Corridor splits into 158
 })
 
 test_that("morie_to_hood_crosswalk: 140-82 Niagara splits into Fort York-Liberty Village + West Queen West", {
+  testthat::skip_if_not_installed("rmoriedata")
   cw <- morie_to_hood_crosswalk()
   row82 <- cw[cw$hood_140 == "082", ]
   expect_equal(nrow(row82), 2L)
@@ -226,6 +236,7 @@ test_that("morie_to_hood_crosswalk: 140-82 Niagara splits into Fort York-Liberty
 # ====================================== morie_tps_add_hood_158_from_140() / 140-from-158
 
 test_that("morie_tps_add_hood_158_from_140 maps a 1:1 hood unchanged", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- data.frame(EVENT_ID = 1:2, HOOD_140 = c("001", "095"))
   out <- morie_tps_add_hood_158_from_140(df)
   expect_true("HOOD_158_equiv" %in% names(out))
@@ -234,6 +245,7 @@ test_that("morie_tps_add_hood_158_from_140 maps a 1:1 hood unchanged", {
 })
 
 test_that("morie_tps_add_hood_158_from_140 maps split hoods to PRIMARY-overlap 158", {
+  testthat::skip_if_not_installed("rmoriedata")
   # 140-75 (Church-Yonge Corridor) splits into 158-167 (40.76%)
   # + 158-168 (59.24%); primary is 158-168 (Downtown Yonge East).
   df <- data.frame(HOOD_140 = "075")
@@ -242,6 +254,7 @@ test_that("morie_tps_add_hood_158_from_140 maps split hoods to PRIMARY-overlap 1
 })
 
 test_that("morie_tps_add_hood_158_from_140 normalises unpadded hood codes", {
+  testthat::skip_if_not_installed("rmoriedata")
   # TPS feeds publish HOOD_140 as integer-string "82" (no padding);
   # the crosswalk keys are "082". The normaliser should bridge.
   df <- data.frame(HOOD_140 = c("82", 1L, "1"))
@@ -258,6 +271,7 @@ test_that("morie_tps_add_hood_158_from_140 errors when no HOOD_140 column presen
 })
 
 test_that("morie_tps_add_hood_140_from_158 maps a 1:1 hood unchanged", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- data.frame(EVENT_ID = 1:2, HOOD_158 = c("001", "095"))
   out <- morie_tps_add_hood_140_from_158(df)
   expect_true("HOOD_140_equiv" %in% names(out))
@@ -265,6 +279,7 @@ test_that("morie_tps_add_hood_140_from_158 maps a 1:1 hood unchanged", {
 })
 
 test_that("morie_tps_add_hood_140_from_158 maps a child-of-split back to its historical parent", {
+  testthat::skip_if_not_installed("rmoriedata")
   # 158-168 (Downtown Yonge East) is a child of 140-75 (Church-Yonge
   # Corridor) -- the only 140 it overlaps. So 168 -> 075.
   df <- data.frame(HOOD_158 = c("168", "163"))
@@ -274,6 +289,7 @@ test_that("morie_tps_add_hood_140_from_158 maps a child-of-split back to its his
 })
 
 test_that("morie_tps_add_hood_140_from_158 honours col_in + col_out overrides", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- data.frame(my_hood = c("001", "095"))
   out <- morie_tps_add_hood_140_from_158(df, col_in = "my_hood",
                                            col_out = "old_hood")
@@ -284,6 +300,7 @@ test_that("morie_tps_add_hood_140_from_158 honours col_in + col_out overrides", 
 # ===================== morie_tps_disaggregate_140_to_158() (cake-cut forward)
 
 test_that("morie_tps_disaggregate_140_to_158 passes 1:1 hoods through unchanged", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- data.frame(HOOD_140 = c("001", "095"),
                    incidents = c(100, 50))
   out <- morie_tps_disaggregate_140_to_158(df)
@@ -298,6 +315,7 @@ test_that("morie_tps_disaggregate_140_to_158 passes 1:1 hoods through unchanged"
 })
 
 test_that("morie_tps_disaggregate_140_to_158 splits 140-75 into 158-167 + 158-168 by cake-cut weight", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- data.frame(HOOD_140 = "075", incidents = 100)
   out <- morie_tps_disaggregate_140_to_158(df)
   expect_equal(nrow(out), 2L)
@@ -313,6 +331,7 @@ test_that("morie_tps_disaggregate_140_to_158 splits 140-75 into 158-167 + 158-16
 })
 
 test_that("morie_tps_disaggregate_140_to_158 handles multiple count cols + multiple rows", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- data.frame(HOOD_140 = c("001", "075", "082"),
                    assault = c(10, 20, 30),
                    robbery = c(1, 2, 3))
@@ -330,6 +349,7 @@ test_that("morie_tps_disaggregate_140_to_158 handles multiple count cols + multi
 })
 
 test_that("morie_tps_disaggregate_140_to_158 errors when no numeric count col present", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- data.frame(HOOD_140 = "001", label = "x",
                    stringsAsFactors = FALSE)
   expect_error(morie_tps_disaggregate_140_to_158(df),
@@ -339,6 +359,7 @@ test_that("morie_tps_disaggregate_140_to_158 errors when no numeric count col pr
 # ===================== morie_tps_aggregate_158_to_140() (cake-cut reverse, EXACT)
 
 test_that("morie_tps_aggregate_158_to_140 sums 158-children back to 140-parent EXACTLY for clean cake-cuts", {
+  testthat::skip_if_not_installed("rmoriedata")
   # 140-75 Church-Yonge Corridor split into 158-167 + 158-168.
   # Suppose post-split 158 counts are 40 + 60. Aggregation should
   # recover 100 in 140-75 exactly (no uniform-density assumption).
@@ -350,6 +371,7 @@ test_that("morie_tps_aggregate_158_to_140 sums 158-children back to 140-parent E
 })
 
 test_that("morie_tps_aggregate_158_to_140 passes 1:1 hoods through unchanged", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- data.frame(HOOD_158 = c("001", "095"),
                    incidents = c(42, 17))
   out <- morie_tps_aggregate_158_to_140(df)
@@ -359,6 +381,7 @@ test_that("morie_tps_aggregate_158_to_140 passes 1:1 hoods through unchanged", {
 })
 
 test_that("morie_tps_aggregate_158_to_140 handles multiple count cols", {
+  testthat::skip_if_not_installed("rmoriedata")
   # 140-82 Niagara split into 158-162 + 158-163.
   df <- data.frame(HOOD_158 = c("162", "163"),
                    assault = c(7, 13),
@@ -370,6 +393,7 @@ test_that("morie_tps_aggregate_158_to_140 handles multiple count cols", {
 })
 
 test_that("morie_tps_aggregate_158_to_140 + disaggregate_140_to_158 round-trip on 1:1 cohort", {
+  testthat::skip_if_not_installed("rmoriedata")
   # For a 1:1 hood the forward+reverse cake-cut is identity.
   df <- data.frame(HOOD_140 = c("001", "002", "095"),
                    incidents = c(10, 20, 30))
@@ -383,6 +407,7 @@ test_that("morie_tps_aggregate_158_to_140 + disaggregate_140_to_158 round-trip o
 })
 
 test_that("morie_tps_aggregate_158_to_140 + disaggregate_140_to_158 round-trip on the 140-75 split", {
+  testthat::skip_if_not_installed("rmoriedata")
   # Disaggregate 100 from 140-75; re-aggregate back to 140-75 = 100.
   df <- data.frame(HOOD_140 = "075", incidents = 100)
   forward <- morie_tps_disaggregate_140_to_158(df)

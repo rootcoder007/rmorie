@@ -59,6 +59,7 @@ test_that("arcgis_query fails clean off-network", {
 })
 
 test_that("ingest_tps_feature_layer routes through TPS helper (mocked)", {
+  testthat::skip_if_not_installed("httr2")
   set.seed(1)
   testthat::local_mocked_bindings(
     .morie_dataset_tps_fetch = function(...) {
@@ -73,6 +74,7 @@ test_that("ingest_tps_feature_layer routes through TPS helper (mocked)", {
 })
 
 test_that("ingest_tps_fetch routes through TPS helper (mocked)", {
+  testthat::skip_if_not_installed("httr2")
   set.seed(1)
   testthat::local_mocked_bindings(
     .morie_dataset_tps_fetch = function(...) {

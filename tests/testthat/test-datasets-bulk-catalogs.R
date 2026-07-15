@@ -3,6 +3,7 @@
 # Phase 3GGG1-5: bulk catalog snapshots from 6 portals.
 
 test_that("NYC OpenData bulk catalog reads 2851 entities", {
+  testthat::skip_if_not_installed("rmoriedata")
   d <- morie_datasets_nyc_opendata_bulk_layers(offline = TRUE)
   expect_s3_class(d, "data.frame")
   expect_equal(nrow(d), 2851L)
@@ -13,11 +14,13 @@ test_that("NYC OpenData bulk catalog reads 2851 entities", {
 })
 
 test_that("NYC bulk includes the 294 maps Vee called out", {
+  testthat::skip_if_not_installed("rmoriedata")
   d <- morie_datasets_nyc_opendata_bulk_layers(offline = TRUE)
   expect_true(sum(d$type == "map") >= 290L)
 })
 
 test_that("Chicago Open Data bulk catalog reads 1856 entities", {
+  testthat::skip_if_not_installed("rmoriedata")
   d <- morie_datasets_chicago_opendata_bulk_layers(offline = TRUE)
   expect_equal(nrow(d), 1856L)
   expect_true("soda_id" %in% names(d))
@@ -25,6 +28,7 @@ test_that("Chicago Open Data bulk catalog reads 1856 entities", {
 })
 
 test_that("Toronto Open Data bulk catalog reads 540 packages", {
+  testthat::skip_if_not_installed("rmoriedata")
   d <- morie_datasets_toronto_opendata_bulk_layers(offline = TRUE)
   expect_equal(nrow(d), 540L)
   expect_true("package_name" %in% names(d))
@@ -32,18 +36,21 @@ test_that("Toronto Open Data bulk catalog reads 540 packages", {
 })
 
 test_that("Calgary Open Data bulk catalog reads 933 entities", {
+  testthat::skip_if_not_installed("rmoriedata")
   d <- morie_datasets_calgary_opendata_bulk_layers(offline = TRUE)
   expect_equal(nrow(d), 933L)
   expect_true("78gh-n26t" %in% d$soda_id)  # Community Crime Statistics
 })
 
 test_that("Edmonton Open Data bulk catalog reads 2027 entities", {
+  testthat::skip_if_not_installed("rmoriedata")
   d <- morie_datasets_edmonton_opendata_bulk_layers(offline = TRUE)
   expect_equal(nrow(d), 2027L)
   expect_true("e7aq-scxv" %in% d$soda_id)  # Police Stations
 })
 
 test_that("Ottawa Open Data Hub bulk catalog reads 287 datasets", {
+  testthat::skip_if_not_installed("rmoriedata")
   d <- morie_datasets_ottawa_opendata_bulk_layers(offline = TRUE)
   expect_equal(nrow(d), 287L)
   expect_true("hub_id" %in% names(d))
@@ -66,6 +73,7 @@ test_that("live mode errors on all eight bulk loaders", {
 # ========================================== 3HHH1-2
 
 test_that("Montreal Open Data BULK reads 401 packages", {
+  testthat::skip_if_not_installed("rmoriedata")
   d <- morie_datasets_montreal_opendata_bulk_layers(offline = TRUE)
   expect_s3_class(d, "data.frame")
   expect_equal(nrow(d), 401L)
@@ -75,6 +83,7 @@ test_that("Montreal Open Data BULK reads 401 packages", {
 })
 
 test_that("Vancouver Open Data BULK reads 190 datasets (full Opendatasoft)", {
+  testthat::skip_if_not_installed("rmoriedata")
   d <- morie_datasets_vancouver_opendata_bulk_layers(offline = TRUE)
   expect_s3_class(d, "data.frame")
   expect_equal(nrow(d), 190L)
@@ -84,6 +93,7 @@ test_that("Vancouver Open Data BULK reads 190 datasets (full Opendatasoft)", {
 })
 
 test_that("Catalog totals reflect bulk fixtures (>= 8800 rows)", {
+  testthat::skip_if_not_installed("rmoriedata")
   d <- morie_dataset_portal_catalog()
   expect_true(nrow(d) >= 8800L)
 })

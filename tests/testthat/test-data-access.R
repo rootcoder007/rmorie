@@ -84,7 +84,7 @@ test_that("TPS catalog entries carry verified ArcGIS layer URLs", {
 })
 
 test_that("morie_ckan_search returns resource rows (network)", {
-  testthat::skip_if_offline("open.canada.ca")
+  skip_if_no_network("open.canada.ca")
   hits <- tryCatch(morie_ckan_search("cannabis", rows = 3),
     error = function(e) NULL
   )
@@ -95,7 +95,7 @@ test_that("morie_ckan_search returns resource rows (network)", {
 })
 
 test_that("morie_fetch_arcgis paginates a FeatureServer layer (network)", {
-  testthat::skip_if_offline("services.arcgis.com")
+  skip_if_no_network("services.arcgis.com")
   layer <- paste0(
     "https://services.arcgis.com/S9th0jAJ7bqgIRjw/arcgis/",
     "rest/services/Homicides_Open_Data_ASR_RC_TBL_002/",

@@ -20,6 +20,7 @@
 # ---------------------------------------------------------------------------
 
 test_that("morie_survey_design with survey installed returns survey.design", {
+  testthat::skip_if_not_installed("survey")
   df <- .make_survey_df()
   d <- morie_survey_design(df, weights_col = "w")
   expect_true(inherits(d, "survey.design") ||
@@ -33,6 +34,7 @@ test_that("morie_survey_design errors on missing weights column", {
 })
 
 test_that("morie_survey_design with stratum + cluster builds object", {
+  testthat::skip_if_not_installed("survey")
   df <- .make_survey_df()
   d <- morie_survey_design(df, weights_col = "w",
                            strata_col = "s", cluster_col = "cl",
@@ -213,6 +215,7 @@ test_that("morie_survey_subpop errors when domain empty", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_survey_complex_glm fits a gaussian svyglm", {
+  testthat::skip_if_not_installed("survey")
   df <- .make_survey_df(80)
   fit <- morie_survey_complex_glm(df, y ~ x, weight_col = "w",
                                   family = "gaussian")

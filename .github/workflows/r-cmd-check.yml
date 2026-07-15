@@ -115,6 +115,30 @@ jobs:
         run: install.packages("rmoriebricklayer", repos = "https://rootcoder007.r-universe.dev")
         shell: Rscript {0}
 
+      # Belt-and-suspenders: pak resolves Suggests, but anything its solver
+      # skipped (platform quirks, new entries) is installed here so the full
+      # test suite genuinely runs on this leaf.
+      - name: Install any missing Suggests
+        shell: Rscript {0}
+        run: |
+          options(repos = c(runiverse = "https://rootcoder007.r-universe.dev",
+                            CRAN = "https://cloud.r-project.org"))
+          desc <- read.dcf("DESCRIPTION")
+          sug <- desc[1, "Suggests"]
+          pkgs <- character(0)
+          if (!is.na(sug) && nzchar(sug)) {
+            sug <- gsub("\\s*\\([^)]*\\)", "", sug)
+            pkgs <- trimws(strsplit(sug, ",")[[1]])
+            pkgs <- pkgs[nzchar(pkgs)]
+          }
+          missing <- pkgs[!pkgs %in% rownames(installed.packages())]
+          # cmdstanr lives on stan-dev r-universe / github, handled above.
+          missing <- setdiff(missing, "cmdstanr")
+          if (length(missing)) {
+            message("Installing Suggests: ", paste(missing, collapse = ", "))
+            install.packages(missing)
+          }
+
       # Exercise the true cmdstanr backend (github.com/stan-dev/cmdstan) on
       # ONE leaf only -- a full CmdStan toolchain build is ~10 min uncached,
       # so the other leaves cover the brms rstan-fallback path instead.

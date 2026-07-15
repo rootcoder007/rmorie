@@ -51,16 +51,9 @@ morie_det_rng <- function(name, seed) {
 #' @keywords internal
 #' @noRd
 .morie_sha256_hex <- function(s) {
-  if (requireNamespace("digest", quietly = TRUE)) {
-    return(digest::digest(s, algo = "sha256", serialize = FALSE))
-  }
-  if (requireNamespace("openssl", quietly = TRUE)) {
-    return(as.character(openssl::sha256(charToRaw(s))))
-  }
-  stop(
-    "morie_det_rng() requires either the 'digest' or 'openssl' package ",
-    "for SHA-256.  Install one of them: install.packages('digest')."
-  )
+  # digest is an Imports dependency (pure R + tiny C, no system libs):
+  # deterministic RNG seeding must never depend on optional packages.
+  digest::digest(s, algo = "sha256", serialize = FALSE)
 }
 
 #' SHA-256 hex digest of "name:seed" (for Py<->R cross-check)

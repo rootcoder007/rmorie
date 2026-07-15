@@ -50,6 +50,7 @@
 NULL
 
 test_that("G5.0/G5.1 bundled datasets are available to tests + examples", {
+  testthat::skip_if_not_installed("rmoriedata")
   d <- morie_sample("otis_b01")
   expect_s3_class(d, "data.frame")
   expect_gt(nrow(d), 0L)

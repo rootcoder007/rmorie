@@ -121,7 +121,7 @@ test_that("morie_datasets_statcan_full_csv_url respects language=fr", {
 test_that("live: cube_metadata reaches the real WDS for 35100002", {
   skip_on_cran()
   skip_on_ci()
-  skip_if_offline("www150.statcan.gc.ca")
+  skip_if_no_network("www150.statcan.gc.ca")
   m <- tryCatch(
     morie_datasets_statcan_cube_metadata(35100002L),
     error = function(e) skip(paste0("StatCan WDS unavailable: ",
@@ -134,7 +134,7 @@ test_that("live: cube_metadata reaches the real WDS for 35100002", {
 test_that("live: full_csv_url reaches the real WDS for 35100002", {
   skip_on_cran()
   skip_on_ci()
-  skip_if_offline("www150.statcan.gc.ca")
+  skip_if_no_network("www150.statcan.gc.ca")
   u <- tryCatch(
     morie_datasets_statcan_full_csv_url(35100002L),
     error = function(e) skip(paste0("StatCan WDS unavailable: ",

@@ -55,6 +55,7 @@ test_that("morie_matching_cardinality runs on balanced synthetic data", {
 })
 
 test_that("morie_matching_cardinality emits a single summary warning on skewed data", {
+  testthat::skip_if_not_installed("MatchIt")
   # Skewed treatment so MatchIt fires "Fewer control" on every
   # caliper pass; verify morie collapses into one summary.
   df <- make_match_df_skewed(n = 200L, tau = 0.4, seed = 14L)

@@ -5,6 +5,7 @@
 # acceptance so morie cannot auto-fetch.
 
 test_that("morie_datasets_vpd_crime(offline=TRUE) reads bundled 550-row sample", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_vpd_crime(offline = TRUE)
   expect_s3_class(df, "data.frame")
   expect_equal(nrow(df), 550L)
@@ -18,6 +19,7 @@ test_that("morie_datasets_vpd_crime(offline=TRUE) reads bundled 550-row sample",
 })
 
 test_that("VPD sample covers all 25 VPD neighbourhoods", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_vpd_crime(offline = TRUE)
   expect_true(length(unique(df$NEIGHBOURHOOD)) >= 20L)
   # Spot-check known VPD neighbourhood labels.
@@ -25,6 +27,7 @@ test_that("VPD sample covers all 25 VPD neighbourhoods", {
 })
 
 test_that("VPD sample TYPE includes the 11 canonical categories", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_vpd_crime(offline = TRUE)
   expect_setequal(unique(df$TYPE),
                   c("Break and Enter Commercial",
@@ -41,6 +44,7 @@ test_that("VPD sample TYPE includes the 11 canonical categories", {
 })
 
 test_that("VPD sample YEAR range spans 2003-2026", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_vpd_crime(offline = TRUE)
   yr <- range(df$YEAR)
   expect_true(yr[1] <= 2010L)
@@ -48,6 +52,7 @@ test_that("VPD sample YEAR range spans 2003-2026", {
 })
 
 test_that("max_features cap honoured", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_vpd_crime(offline = TRUE, max_features = 10L)
   expect_equal(nrow(df), 10L)
 })

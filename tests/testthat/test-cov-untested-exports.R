@@ -43,7 +43,7 @@ test_that("morie_siu_index returns a data.frame with at least one row", {
 })
 
 test_that("morie_siu_refresh_manifest accepts canonical args (skip on CRAN/offline)", {
-  testthat::skip_if_offline()
+  skip_if_no_network()
   # Tiny range so this stays cheap even when run. The point is to
   # exercise the dispatch + arg-parsing + (if the SIU host is up) one
   # rate-limited probe; the assertion is "function returns without

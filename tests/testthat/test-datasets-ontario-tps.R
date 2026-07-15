@@ -189,6 +189,7 @@ test_that("morie_datasets_tps_mha_apprehensions(offline=FALSE) honours explicit 
 # =============================================== TPS MHA + HOOD equivalency interop
 
 test_that("morie_datasets_tps_mha_apprehensions integrates with morie_tps_add_hood_140_from_158", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_tps_mha_apprehensions(offline = TRUE)
   out <- morie_tps_add_hood_140_from_158(df, col_in = "HOOD_158")
   expect_true("HOOD_140_equiv" %in% names(out))

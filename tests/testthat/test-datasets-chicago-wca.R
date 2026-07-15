@@ -136,6 +136,7 @@ test_that("morie_datasets_chicago_community_areas(offline=FALSE, geometry=TRUE) 
 # =================================================== IUCR codes (c7ck-438e)
 
 test_that("morie_datasets_chicago_iucr_codes(offline=TRUE) reads bundled 410-row dictionary", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_chicago_iucr_codes(offline = TRUE)
   expect_s3_class(df, "data.frame")
   expect_equal(nrow(df), 410L)
@@ -156,6 +157,7 @@ test_that("morie_datasets_chicago_iucr_codes(offline=TRUE) reads bundled 410-row
 })
 
 test_that("morie_datasets_chicago_iucr_codes(offline=TRUE) honours max_features", {
+  testthat::skip_if_not_installed("rmoriedata")
   df <- morie_datasets_chicago_iucr_codes(offline = TRUE,
                                             max_features = 25L)
   expect_equal(nrow(df), 25L)
@@ -216,6 +218,7 @@ test_that("morie_datasets_external_socrata_layers registry grew to 11 in 3UU (3 
 # =================================================== default offline behaviour
 
 test_that("all 3 3UU loaders default to offline = TRUE", {
+  testthat::skip_if_not_installed("rmoriedata")
   expect_s3_class(morie_datasets_chicago_wards(),
                   "data.frame")
   expect_s3_class(morie_datasets_chicago_community_areas(),
@@ -227,6 +230,7 @@ test_that("all 3 3UU loaders default to offline = TRUE", {
 # =================================================== chicago_crime cross-ref alignment
 
 test_that("chicago_crime's cross-ref block in @details was updated -- the 3UU wrappers are reachable", {
+  testthat::skip_if_not_installed("rmoriedata")
   # The chicago_crime docstring's @describe block names these 3
   # wrappers explicitly. Verify they exist + are callable.
   for (fn in list(morie_datasets_chicago_wards,
