@@ -25,7 +25,7 @@ and the `morie_match_result` / result-object shapes do not change.
 | 9 | morie_matching_doubly_robust / morie_estimate_aipw | survey | DONE (verified already native: base stats lm/glm + bootstrap/IF SEs; no survey at runtime) |
 | 10 | morie_estimate_double_ml / morie_estimate_irm (native) | DoubleML/mlr3/ranger | DONE (native-only; 40-60x faster; CI-overlap agreement with DoubleML) |
 | 11 | morie_estimate_dr_forest (native R-learner forest) | grf | DONE (OpenMP kernel: 1.5-2.9x FASTER than grf incl. 100k) |
-| 12 | meta-learners T/S/X/DR | — (new) | planned |
+| 12 | meta-learners T/S/X/DR (morie_estimate_cate) | — (EconML is Python-only) | DONE (all four native; DR validated against grf CATE) |
 | 13 | morie_dag / identify / estimate / refute | — (new) | planned |
 | 14 | morie_did (+ staggered CS2021) / event study | did/DIDmultiplegt | planned |
 | 15 | morie_synth_control | Synth | planned |
@@ -365,3 +365,33 @@ parallelization is what closes it, with determinism preserved.
 its own ABI churn; the native forest is ~200 lines of audited C++
 sharing the DML nuisance stack, seed-exact across thread counts, and
 faster at every benchmarked size.
+
+## Module 12 — native X- and DR-learners
+
+**Extends.** `morie_estimate_cate()` — T/S-learners were already
+native (base glm); `meta_learner` now also accepts `"x_learner"` and
+`"dr_learner"`. Additive signature change only.
+
+**Reference algorithms.** X-learner: Kuenzel, Sekhon, Bickel & Yu
+(2019, PNAS 116(10)) — arm-wise outcome models, imputed individual
+effects regressed per arm, propensity-weighted combination. DR-learner:
+Kennedy (2023, EJS 17(2)) — cross-fit AIPW pseudo-outcome regressed on
+covariates; the second stage is the module-11 forest kernel, the
+nuisances are the module-10 engines.
+
+**Reference implementation.** None on CRAN (EconML is Python), so
+validation is against ground truth and the module-11 forest: constant
+effect recovered by all four learners within 0.25; heterogeneous
+tau(x) tracked with cor > 0.5; the Kuenzel motivating case reproduced
+(X-learner not worse than T-learner under 7 percent treatment);
+DR-learner CATE correlates > 0.6 with grf::causal_forest predictions
+on the same data. Deterministic given seed. 133+42+126 green on L14.
+
+**Benchmark.** No R-runtime reference to race; cost is one cross-fit
+nuisance pass + (DR) one forest fit — bounded by module 10 + 11
+numbers already recorded.
+
+**What makes ours special.** The whole heterogeneous-effects family
+(T/S/X/DR + the R-learner forest) now runs on ONE audited nuisance
+stack with zero Suggests — EconML needs a Python runtime for the same
+menu.

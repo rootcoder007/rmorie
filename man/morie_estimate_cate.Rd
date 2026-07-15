@@ -11,7 +11,7 @@ morie_estimate_cate(
   covariates,
   propensity_col = NULL,
   outcome_model = c("linear", "logistic"),
-  meta_learner = c("t_learner", "s_learner")
+  meta_learner = c("t_learner", "s_learner", "x_learner", "dr_learner")
 )
 }
 \arguments{
@@ -29,7 +29,12 @@ score column.}
 \item{outcome_model}{Family for the outcome model: \code{"linear"} or
 \code{"logistic"}.}
 
-\item{meta_learner}{\code{"t_learner"} (default) or \code{"s_learner"}.}
+\item{meta_learner}{One of \code{"t_learner"} (default), \code{"s_learner"},
+\code{"x_learner"} (Kuenzel et al. 2019 — two-stage with
+propensity-weighted combination; strong under arm imbalance), or
+\code{"dr_learner"} (Kennedy 2023 — cross-fit AIPW pseudo-outcome
+regressed with the native forest; doubly robust). All four are
+native; \code{outcome_model} applies to the T/S-learners only.}
 }
 \value{
 Numeric vector of per-unit CATE estimates.

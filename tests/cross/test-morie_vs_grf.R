@@ -36,3 +36,19 @@ test_that("cross: native tau(x) correlates with grf predictions", {
 
   expect_gt(stats::cor(nf$tau, tau_grf), 0.6)
 })
+
+test_that("cross: DR-learner CATE agrees with grf's causal forest", {
+  skip_if_not_installed("grf")
+  set.seed(124)
+  n <- 3000L
+  X <- matrix(rnorm(n * 3), n, 3)
+  w <- rbinom(n, 1, plogis(0.4 * X[, 1]))
+  y <- (1 + X[, 2]) * w + X[, 1] + rnorm(n)
+  df <- data.frame(y = y, d = w, X)
+  names(df)[3:5] <- paste0("x", 1:3)
+  tau_dr <- morie_estimate_cate(df, "d", "y", paste0("x", 1:3),
+                                meta_learner = "dr_learner")
+  cf <- grf::causal_forest(X, y, w, seed = 124)
+  tau_grf <- as.numeric(stats::predict(cf)$predictions)
+  expect_gt(stats::cor(tau_dr, tau_grf), 0.6)
+})
