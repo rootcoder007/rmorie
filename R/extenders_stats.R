@@ -335,29 +335,27 @@ morie_ppcor_semipartial <- function(x, y = NULL, z = NULL,
 
 #' General independence test via \pkg{coin}
 #'
-#' Thin extender over \code{coin::independence_test} for
-#' conditional / permutation tests of independence between
-#' arbitrary response and covariate combinations.
+#' Native conditional permutation test of independence
+#' (\code{\link{morie_indep_test}}) between a response and covariate.
 #'
 #' @param formula A model formula, e.g. \code{y ~ x | block}.
 #' @param data A data frame.
 #' @param ... Further arguments forwarded to
 #'   \code{coin::independence_test} (e.g. \code{distribution},
 #'   \code{teststat}, \code{ytrafo}, \code{xtrafo}).
-#' @return A list with \code{$method =
-#'   "coin::independence_test"} and \code{$raw} (an \code{IndependenceTest}
-#'   object).
+#' @return A list with \code{$method}, \code{$statistic},
+#'   \code{$p.value} and \code{$raw} (the native test result).
 #' @export
 morie_coin_independence <- function(formula, data, ...) {
-  .morie_stats_need("coin", "morie_coin_independence")
-  raw <- coin::independence_test(formula, data = data, ...)
-  list(method = "coin::independence_test", raw = raw)
+  raw <- morie_indep_test(formula, data = data, ...)
+  list(method = "morie independence permutation test", raw = raw,
+       statistic = raw$statistic, p.value = raw$p.value)
 }
 
 #' Permutation Wilcoxon test via \pkg{coin}
 #'
-#' Thin extender over \code{coin::wilcox_test} for two-sample
-#' permutation Wilcoxon (Mann-Whitney) tests.
+#' Native two-sample Wilcoxon rank-sum permutation test
+#' (\code{\link{morie_wilcox_test}}).
 #'
 #' @param formula A two-sided formula \code{y ~ group}, where
 #'   \code{group} is a two-level factor.
@@ -365,19 +363,19 @@ morie_coin_independence <- function(formula, data, ...) {
 #' @param ... Further arguments forwarded to
 #'   \code{coin::wilcox_test} (e.g. \code{distribution},
 #'   \code{alternative}).
-#' @return A list with \code{$method = "coin::wilcox_test"} and
-#'   \code{$raw} (an \code{IndependenceTest} object).
+#' @return A list with \code{$method}, \code{$statistic},
+#'   \code{$p.value} and \code{$raw}.
 #' @export
 morie_coin_wilcoxon <- function(formula, data, ...) {
-  .morie_stats_need("coin", "morie_coin_wilcoxon")
-  raw <- coin::wilcox_test(formula, data = data, ...)
-  list(method = "coin::wilcox_test", raw = raw)
+  raw <- morie_wilcox_test(formula, data = data, ...)
+  list(method = "morie Wilcoxon permutation test", raw = raw,
+       statistic = raw$statistic, p.value = raw$p.value)
 }
 
 #' Permutation one-way ANOVA via \pkg{coin}
 #'
-#' Thin extender over \code{coin::oneway_test} for the
-#' permutation analogue of the classical one-way ANOVA.
+#' Native one-way (Fisher-Pitman) permutation test
+#' (\code{\link{morie_oneway_test}}), the permutation ANOVA.
 #'
 #' @param formula A formula \code{y ~ group}, where \code{group} is
 #'   a (multi-level) factor.
@@ -385,13 +383,13 @@ morie_coin_wilcoxon <- function(formula, data, ...) {
 #' @param ... Further arguments forwarded to
 #'   \code{coin::oneway_test} (e.g. \code{distribution},
 #'   \code{teststat}).
-#' @return A list with \code{$method = "coin::oneway_test"} and
-#'   \code{$raw} (an \code{IndependenceTest} object).
+#' @return A list with \code{$method}, \code{$statistic},
+#'   \code{$p.value} and \code{$raw}.
 #' @export
 morie_coin_oneway <- function(formula, data, ...) {
-  .morie_stats_need("coin", "morie_coin_oneway")
-  raw <- coin::oneway_test(formula, data = data, ...)
-  list(method = "coin::oneway_test", raw = raw)
+  raw <- morie_oneway_test(formula, data = data, ...)
+  list(method = "morie one-way permutation test", raw = raw,
+       statistic = raw$statistic, p.value = raw$p.value)
 }
 
 
