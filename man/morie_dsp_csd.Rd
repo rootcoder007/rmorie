@@ -19,9 +19,8 @@ morie_dsp_csd(x, y, fs = 1, nperseg = 256L)
 List with \code{freqs} (Hz) and \code{csd} (complex).
 }
 \description{
-Hamming-windowed averaged CSD. Delegates to \code{signal::cpsd} if
-present; otherwise computed from the same FFT loop as the coherence
-fallback.
+Hamming-windowed averaged CSD (rmorie native FFT loop,
+module 20).
 }
 \references{
 Rangayyan & Krishnan (2015), Ch. 4 & Ch. 6.

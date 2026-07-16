@@ -21,12 +21,9 @@
 #' }
 #' }
 buttlp <- function(x, fs, cutoff, order = 4L) {
-  if (requireNamespace("signal", quietly = TRUE)) {
-    bf <- signal::butter(order, cutoff / (fs / 2), type = "low")
-    y <- signal::filtfilt(bf, x)
-    return(list(filtered = y, fs = fs, order = order, name = "butter_lowpass"))
-  }
-  stop("rmorie::buttlp requires the 'signal' package; install.packages('signal')")
+  bf <- .morie_dsp_butter(order, cutoff / (fs / 2), type = "low")
+  y <- .morie_dsp_filtfilt(bf$b, bf$a, x)
+  list(filtered = y, fs = fs, order = order, name = "butter_lowpass")
 }
 
 #' Butterworth highpass filter
@@ -52,12 +49,9 @@ buttlp <- function(x, fs, cutoff, order = 4L) {
 #' }
 #' }
 butthp <- function(x, fs, cutoff, order = 4L) {
-  if (requireNamespace("signal", quietly = TRUE)) {
-    bf <- signal::butter(order, cutoff / (fs / 2), type = "high")
-    y <- signal::filtfilt(bf, x)
-    return(list(filtered = y, fs = fs, order = order, name = "butter_highpass"))
-  }
-  stop("rmorie::butthp requires the 'signal' package; install.packages('signal')")
+  bf <- .morie_dsp_butter(order, cutoff / (fs / 2), type = "high")
+  y <- .morie_dsp_filtfilt(bf$b, bf$a, x)
+  list(filtered = y, fs = fs, order = order, name = "butter_highpass")
 }
 
 #' Butterworth bandpass filter
@@ -85,12 +79,9 @@ butthp <- function(x, fs, cutoff, order = 4L) {
 #' }
 #' }
 buttbp <- function(x, fs, low, high, order = 4L) {
-  if (requireNamespace("signal", quietly = TRUE)) {
-    bf <- signal::butter(order, c(low, high) / (fs / 2), type = "pass")
-    y <- signal::filtfilt(bf, x)
-    return(list(filtered = y, fs = fs, order = order, name = "butter_bandpass"))
-  }
-  stop("rmorie::buttbp requires the 'signal' package; install.packages('signal')")
+  bf <- .morie_dsp_butter(order, c(low, high) / (fs / 2), type = "pass")
+  y <- .morie_dsp_filtfilt(bf$b, bf$a, x)
+  list(filtered = y, fs = fs, order = order, name = "butter_bandpass")
 }
 
 #' Butterworth bandstop (notch) filter
@@ -116,12 +107,9 @@ buttbp <- function(x, fs, low, high, order = 4L) {
 #' }
 #' }
 buttbs <- function(x, fs, low = 59, high = 61, order = 4L) {
-  if (requireNamespace("signal", quietly = TRUE)) {
-    bf <- signal::butter(order, c(low, high) / (fs / 2), type = "stop")
-    y <- signal::filtfilt(bf, x)
-    return(list(filtered = y, fs = fs, order = order, name = "butter_bandstop"))
-  }
-  stop("rmorie::buttbs requires the 'signal' package; install.packages('signal')")
+  bf <- .morie_dsp_butter(order, c(low, high) / (fs / 2), type = "stop")
+  y <- .morie_dsp_filtfilt(bf$b, bf$a, x)
+  list(filtered = y, fs = fs, order = order, name = "butter_bandstop")
 }
 
 #' Savitzky-Golay smoothing filter
@@ -146,12 +134,9 @@ buttbs <- function(x, fs, low = 59, high = 61, order = 4L) {
 #' }
 #' }
 morie_sgolay_smooth <- function(x, window_length = 11L, polyorder = 3L) {
-  if (requireNamespace("signal", quietly = TRUE)) {
-    sg <- signal::sgolay(p = polyorder, n = window_length)
-    y <- signal::filter(sg, x)
-    return(list(filtered = as.numeric(y), name = "savitzky_golay"))
-  }
-  stop("rmorie::morie_sgolay_smooth requires the 'signal' package; install.packages('signal')")
+  y <- .morie_dsp_sgolay(x, polyorder = polyorder,
+                         window_length = window_length)
+  list(filtered = as.numeric(y), name = "savitzky_golay")
 }
 
 #' Hurst exponent via rescaled-range (R/S) analysis
@@ -498,13 +483,8 @@ dfa <- function(x, scales = NULL) {
 ecgdet <- function(ecg, fs) {
   ecg <- as.numeric(ecg)
   n <- length(ecg)
-  if (requireNamespace("signal", quietly = TRUE)) {
-    bf <- signal::butter(2, c(5, 15) / (fs / 2), type = "pass")
-    filt <- signal::filtfilt(bf, ecg)
-  } else {
-    # Minimal fallback: drift-removed signal (mean subtract); not band-limited
-    filt <- ecg - mean(ecg)
-  }
+  bf <- .morie_dsp_butter(2, c(5, 15) / (fs / 2), type = "pass")
+  filt <- .morie_dsp_filtfilt(bf$b, bf$a, ecg)
   d <- c(diff(filt), 0)
   sq <- d^2
   win_len <- max(1L, as.integer(0.15 * fs))
@@ -1028,12 +1008,8 @@ pcgseg <- function(envelope, fs = 2000, min_gap_ms = 100) {
 #' }
 pcgmur <- function(pcg, fs) {
   pcg <- as.numeric(pcg)
-  if (requireNamespace("signal", quietly = TRUE)) {
-    bf <- signal::butter(4, c(100, 400) / (fs / 2), type = "pass")
-    hf_band <- signal::filtfilt(bf, pcg)
-  } else {
-    hf_band <- pcg - mean(pcg)
-  }
+  bf <- .morie_dsp_butter(4, c(100, 400) / (fs / 2), type = "pass")
+  hf_band <- .morie_dsp_filtfilt(bf$b, bf$a, pcg)
   hf_energy <- mean(hf_band^2)
   total_energy <- mean(pcg^2) + 1e-12
   hf_ratio <- hf_energy / total_energy

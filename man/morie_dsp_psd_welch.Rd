@@ -2,7 +2,7 @@
 % Please edit documentation in R/dsp_spectral.R
 \name{morie_dsp_psd_welch}
 \alias{morie_dsp_psd_welch}
-\title{Welch PSD estimate (delegated to signal::pwelch / specgram)}
+\title{Welch PSD estimate (rmorie native)}
 \usage{
 morie_dsp_psd_welch(x, fs = 1, nperseg = 256L, noverlap = NULL)
 }
@@ -19,9 +19,7 @@ morie_dsp_psd_welch(x, fs = 1, nperseg = 256L, noverlap = NULL)
 List with \code{freqs} and \code{psd}.
 }
 \description{
-Thin wrapper that prefers the \code{signal} package's \code{pwelch}-style
-routine for the production estimator; falls back to a pure-R
-Hamming-windowed averaged periodogram when \code{signal} is unavailable.
+Native Hamming-windowed averaged periodogram (Welch 1967).
 }
 \references{
 Rangayyan & Krishnan (2015), Ch. 6, sec. 6.4;

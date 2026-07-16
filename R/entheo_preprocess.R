@@ -133,13 +133,11 @@ preprocess_fmri <- function(record,
 #' Internal helper: Entheo Bandpass
 #' @noRd
 .entheo_bandpass <- function(x, sfreq, low, high, order = 4L) {
-  if (requireNamespace("signal", quietly = TRUE)) {
-    ny <- sfreq / 2
-    bf <- signal::butter(order, c(low / ny, high / ny), type = "pass")
-    out <- t(apply(x, 1, function(row) signal::filtfilt(bf, row)))
-    return(out)
-  }
-  # FFT-mask fallback.
+  ny <- sfreq / 2
+  bf <- .morie_dsp_butter(order, c(low / ny, high / ny), type = "pass")
+  return(t(apply(x, 1, function(row)
+    .morie_dsp_filtfilt(bf$b, bf$a, row))))
+  # (FFT-mask variant retained below for reference paths.)
   n <- ncol(x)
   freqs <- seq(0, sfreq / 2, length.out = n %/% 2 + 1)
   mask <- (freqs >= low) & (freqs <= high)
@@ -155,17 +153,15 @@ preprocess_fmri <- function(record,
 #' Internal helper: Entheo Notch
 #' @noRd
 .entheo_notch <- function(x, sfreq, freq, q = 30) {
-  if (requireNamespace("signal", quietly = TRUE)) {
-    bw <- freq / q
-    bf <- signal::butter(2, c(
-      (freq - bw / 2) / (sfreq / 2),
-      (freq + bw / 2) / (sfreq / 2)
-    ),
-    type = "stop"
-    )
-    out <- t(apply(x, 1, function(row) signal::filtfilt(bf, row)))
-    return(out)
-  }
+  bw <- freq / q
+  bf <- .morie_dsp_butter(2, c(
+    (freq - bw / 2) / (sfreq / 2),
+    (freq + bw / 2) / (sfreq / 2)
+  ),
+  type = "stop"
+  )
+  return(t(apply(x, 1, function(row)
+    .morie_dsp_filtfilt(bf$b, bf$a, row))))
   n <- ncol(x)
   freqs <- seq(0, sfreq / 2, length.out = n %/% 2 + 1)
   bw <- freq / q

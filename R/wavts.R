@@ -17,19 +17,22 @@ morie_wavelet_time_series <- function(x, wavelet = "haar", level = NULL) {
   max_lv <- floor(log2(n))
   if (is.null(level)) level <- min(max(max_lv, 1), 6)
   level <- min(level, max_lv)
-  if (requireNamespace("wavelets", quietly = TRUE)) {
-    fit <- wavelets::dwt(y, filter = wavelet, n.levels = level)
-    cA <- as.numeric(fit@V[[level]])
-    cDs <- lapply(rev(fit@W), as.numeric)
+  if (wavelet %in% c("haar", "d4", "la8") && n >= 2^level) {
+    # Module 20: native pyramid DWT (periodic boundary).
+    N <- 2^ceiling(log2(n))
+    fit <- .morie_dsp_dwt(c(y, rep(0, N - n)), filter = wavelet,
+                          n_levels = level)
+    cA <- as.numeric(fit$V)
+    cDs <- lapply(rev(fit$W), as.numeric)
     energies <- c(sum(cA^2), vapply(cDs, function(c) sum(c^2), numeric(1)))
     return(list(
       approximation = cA,
       details = cDs,
       energies = energies,
-      level = level, n = n, wavelet = wavelet,
+      level = fit$n_levels, n = n, wavelet = wavelet,
       method = sprintf(
-        "DWT via wavelets (wavelet=%s, level=%d)",
-        wavelet, level
+        "DWT (rmorie native, wavelet=%s, level=%d)",
+        wavelet, fit$n_levels
       )
     ))
   }

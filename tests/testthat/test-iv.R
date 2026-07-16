@@ -53,19 +53,19 @@ test_that("morie_iv_tsls with exogenous covariates runs", {
   expect_true("x1" %in% names(res$coefficients))
 })
 
-test_that("morie_iv_liml runs (ivreg fallback OK)", {
+test_that("morie_iv_liml runs (native k-class)", {
   df <- make_iv_data(n = 400)
   res <- morie_iv_liml(df, "y", "d", "z")
   expect_true("d" %in% names(res$coefficients))
 })
 
-test_that("morie_iv_gmm runs (fallback or gmm pkg)", {
+test_that("morie_iv_gmm runs (native two-step)", {
   df <- make_iv_data(n = 400)
   res <- morie_iv_gmm(df, "y", "d", "z")
   expect_true(any(grepl("d", names(res$coefficients))))
 })
 
-test_that("morie_iv_cue_gmm runs (fallback path acceptable)", {
+test_that("morie_iv_cue_gmm runs (native CUE)", {
   df <- make_iv_data(n = 400)
   res <- morie_iv_cue_gmm(df, "y", "d", "z")
   expect_true(is.list(res))
@@ -179,7 +179,7 @@ test_that("morie_iv_sargan returns finite p when overidentified", {
   expect_true(is.finite(out$p_value) || is.na(out$p_value))
 })
 
-test_that("morie_iv_hansen_j runs (gmm or sargan fallback)", {
+test_that("morie_iv_hansen_j runs (native J)", {
   df <- make_overid_data(n = 400)
   out <- morie_iv_hansen_j(df, "y", "d", c("z1", "z2"))
   expect_true(!is.null(out$name))
@@ -238,7 +238,7 @@ test_that("morie_iv_probit requires one endogenous and binary y", {
 # Panel + dashboards
 # ---------------------------------------------------------------------------
 
-test_that("morie_iv_panel runs via fallback or plm", {
+test_that("morie_iv_panel runs (native within + 2sls)", {
   set.seed(1)
   n_unit <- 30; n_time <- 5; n <- n_unit * n_time
   df <- data.frame(

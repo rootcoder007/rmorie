@@ -38,5 +38,5 @@ standard errors, t-statistics, p-values, confidence interval bounds,
 variable names, sample size, method label, and a \code{details} list.
 }
 \description{
-Estimates a linear IV model via 2SLS, preferring \code{ivreg::ivreg}.
+Estimates a linear IV model via 2SLS (rmorie native k-class engine).
 }

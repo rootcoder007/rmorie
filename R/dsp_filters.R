@@ -257,7 +257,7 @@ morie_dsp_rls <- function(x, d, order = 16L, lam = 0.99, delta = 100) {
 
 #' IIR notch filter (single frequency)
 #'
-#' Wraps `signal::butter` style IIR notch via the `signal` package's
+#' Native IIR notch (module 20); previously wrapped the signal package's
 #' `iirnotch` / `filtfilt`. Falls back to a stop with `NotYetPorted` if
 #' `signal` is unavailable.
 #'
@@ -269,21 +269,14 @@ morie_dsp_rls <- function(x, d, order = 16L, lam = 0.99, delta = 100) {
 #' @references Rangayyan & Krishnan (2015), Ch. 3, sec. 3.7.
 #' @export
 morie_dsp_notch <- function(x, freq, fs, q = 30) {
-  if (!requireNamespace("signal", quietly = TRUE)) {
-    stop("morie_dsp_notch requires the 'signal' package")
-  }
-  if (!exists("iirnotch", where = asNamespace("signal"))) {
-    # signal lacks iirnotch on some CRAN builds; construct by hand.
-    w0 <- freq / (fs / 2)
-    bw <- w0 / q
-    r <- 1 - 3 * bw
-    cosw0 <- cos(pi * w0)
-    b <- c(1, -2 * cosw0, 1) * (1 + r^2) / 2
-    a <- c(1, -2 * r * cosw0, r^2)
-    return(as.numeric(signal::filtfilt(b, a, x)))
-  }
-  ba <- get("iirnotch", envir = asNamespace("signal"))(freq / (fs / 2), q)
-  as.numeric(signal::filtfilt(ba$b, ba$a, x))
+  # Module 20: hand-constructed biquad notch, zero-phase applied.
+  w0 <- freq / (fs / 2)
+  bw <- w0 / q
+  r <- 1 - 3 * bw
+  cosw0 <- cos(pi * w0)
+  b <- c(1, -2 * cosw0, 1) * (1 + r^2) / 2
+  a <- c(1, -2 * r * cosw0, r^2)
+  as.numeric(.morie_dsp_filtfilt(b, a, x))
 }
 
 #' Comb filter built from cascaded notches

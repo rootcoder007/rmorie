@@ -458,16 +458,13 @@ morie_dsp_parzen_pdf <- function(x, bandwidth = NULL, n_points = 100L) {
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.8.
 #' @export
 morie_dsp_complex_demodulation <- function(x, fc, fs = 1) {
-  if (!requireNamespace("signal", quietly = TRUE)) {
-    stop("morie_dsp_complex_demodulation requires the 'signal' package")
-  }
   t <- (seq_along(x) - 1L) / fs
   analytic <- x * exp(-1i * 2 * pi * fc * t)
   nyq <- fs / 2
   cutoff <- min(fc * 0.5, nyq * 0.9) / nyq
   if (cutoff <= 0 || cutoff >= 1) cutoff <- 0.1
-  ba <- signal::butter(4, cutoff, type = "low")
-  envelope <- as.numeric(signal::filtfilt(ba$b, ba$a, Mod(analytic)))
+  ba <- .morie_dsp_butter(4, cutoff, type = "low")
+  envelope <- as.numeric(.morie_dsp_filtfilt(ba$b, ba$a, Mod(analytic)))
   phase <- .unwrap(Arg(analytic))
   list(envelope = envelope, phase = phase)
 }

@@ -97,9 +97,7 @@ test_that("morie_did_repeated_cross_section works with weights", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_did_panel_fe recovers tau on panel DGP", {
-  # Phase 1.e: morie_did_panel_fe now hard-errors when fixest is not
-  # installed (the base-R two-way within fallback was removed).
-  skip_if_not_installed("fixest")
+  # Module 14: native TWFE engine.
   df <- make_did_panel(n_units = 40, n_periods = 6, tau = 0.7, seed = 3)
   res <- morie_did_panel_fe(df, "y", "d", "unit", "time")
   expect_true(is.finite(res$estimate))
@@ -113,8 +111,7 @@ test_that("morie_did_panel_fe recovers tau on panel DGP", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_did_event_study returns coefficients with reference period", {
-  # Phase 1.e: now a fixest::feols + fixest::i() wrapper.
-  skip_if_not_installed("fixest")
+  # Module 14: native event-study engine.
   df <- make_did_panel()
   res <- morie_did_event_study(df, "y", "unit", "time", "treat_time",
                                leads = 2L, lags = 2L)
@@ -163,8 +160,7 @@ test_that("morie_did_parallel_trends_data returns group-by-time means", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_did_group_time_att returns a data frame with att", {
-  # Phase 1.e: now a did::att_gt wrapper.
-  skip_if_not_installed("did")
+  # Module 14: native Callaway-Sant'Anna engine.
   df <- make_did_panel(n_units = 50, n_periods = 6, tau = 0.6, seed = 4)
   out <- tryCatch(
     morie_did_group_time_att(df, "y", "unit", "time", "treat_time",
@@ -203,9 +199,7 @@ test_that("morie_did_aggregate_gt_att event_time aggregation splits by rel time"
 # ---------------------------------------------------------------------------
 
 test_that("morie_did_doubly_robust returns finite ATT", {
-  # Phase 1.e: now a DRDID::drdid_rc wrapper. Method label changed
-  # to include the backend (was "did_doubly_robust").
-  skip_if_not_installed("DRDID")
+  # Module 14: native Sant'Anna-Zhao engine.
   df <- make_did_2x2(n = 300)
   res <- morie_did_doubly_robust(df, "y", "d", "post",
                                  covariates = "x",
@@ -237,12 +231,11 @@ test_that("morie_did_triple_difference returns finite estimate", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_did_bacon_decomposition returns components and overall", {
-  # Phase 1.e: now a bacondecomp::bacon wrapper.
+  # Module 14: native Goodman-Bacon engine.
   # bacondecomp::bacon requires (a) weakly-increasing treatment per
   # unit and (b) genuine staggered timing (>=2 treatment cohorts) to
   # produce 2x2 comparisons. make_did_panel only ever treats at t=4,
   # so we build a staggered panel inline here.
-  skip_if_not_installed("bacondecomp")
   set.seed(11)
   n_units <- 40L
   n_periods <- 8L
@@ -378,8 +371,7 @@ test_that("morie_did_heterogeneous returns one row per stratum", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_did_chaisemartin_dhaultfoeuille returns a finite estimate", {
-  # Phase 1.e: now a DIDmultiplegt::did_multiplegt wrapper.
-  skip_if_not_installed("DIDmultiplegt")
+  # Module 14: native DID-M engine.
   df <- make_did_panel(n_units = 30, n_periods = 5, tau = 0.5, seed = 9)
   res <- morie_did_chaisemartin_dhaultfoeuille(
     df, "y", "d", "unit", "time",

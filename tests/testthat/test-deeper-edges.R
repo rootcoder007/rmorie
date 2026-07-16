@@ -87,7 +87,6 @@ test_that("morie_did_2x2 with cluster arg returns clustered SE", {
 })
 
 test_that("morie_did_panel_fe with covariates + cluster runs without erroring", {
-  testthat::skip_if_not_installed("fixest")
   # morie_did_panel_fe does not take a weights= arg (R/did.R:256-258).
   # Exercise the covariate + custom-cluster branch instead, which IS
   # in the signature and was previously uncovered.

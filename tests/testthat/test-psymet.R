@@ -85,15 +85,13 @@ test_that("morie_psymet_omega(nf=4) delegates when psych is installed", {
   expect_true(is.numeric(res$alpha))
 })
 
-test_that("morie_psymet_omega(nf=1) warns omega_h is not meaningful", {
-  testthat::skip_if_not_installed("psych")
-  # Single-factor case: warning IS the signal users need to interpret
-  # the result correctly. Assert it fires.
+test_that("morie_psymet_omega(nf=1) is silent and bounded (native)", {
+  # Module 18: the native principal-axis engine replaces psych::omega;
+  # the psych one-factor warning no longer applies.
   X <- .make_items(n = 60, k = 5, rho = 0.55)
-  expect_warning(
-    morie_psymet_omega(X, nf = 1),
-    "Omega_h and Omega_asymptotic are not meaningful with one factor"
-  )
+  expect_silent(res <- morie_psymet_omega(X, nf = 1))
+  expect_gte(res$hier, 0); expect_lte(res$hier, 1)
+  expect_gte(res$total, 0); expect_lte(res$total, 1)
 })
 
 # ---------------------------------------------------------------------------

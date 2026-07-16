@@ -28,9 +28,8 @@ morie_tps_morans_i_neighbourhood(
 \item{lat_col, lon_col}{WGS84 column names (default
 \code{"LAT_WGS84"} / \code{"LONG_WGS84"}).}
 
-\item{use_spdep}{If \code{TRUE} and \pkg{spdep} is installed,
-delegate the test to \code{spdep::moran.test} (with a row-
-standardised listw). Default \code{FALSE}.}
+\item{use_spdep}{Retained for back-compat; ignored (the native
+Cliff-Ord computation is always used). Default \code{FALSE}.}
 }
 \value{
 A named list with classes \code{morie_tps_spatial_result},

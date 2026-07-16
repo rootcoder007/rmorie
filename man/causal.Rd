@@ -23,8 +23,8 @@ the inline doubly-robust estimator.
 doubly-robust (AIPW) averaging; honest random-forest nuisances.
 \item \code{morie_estimate_g_computation()} -> \pkg{stdReg}
 (\code{stdReg::stdGlm}) when installed, else inline G-formula.
-\item \code{morie_estimate_late()} -> \pkg{AER} / \pkg{ivreg}
-(\code{ivreg::ivreg}) when installed, else inline Wald / 2SLS.
+\item \code{morie_estimate_late()} -> native Wald / 2SLS k-class
+engine (module 17).
 \item \code{morie_estimate_double_ml() / morie_estimate_irm()} ->
 \pkg{DoubleML} when installed, else inline cross-fit ridge
 (unchanged from prior release).

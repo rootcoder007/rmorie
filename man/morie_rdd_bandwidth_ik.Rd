@@ -23,6 +23,8 @@ bandwidth selectors + density tests that don't take a
 A named list with elements \code{bandwidth}, \code{method}, \code{details}.
 }
 \description{
-Dispatches to \code{rdrobust::rdbwselect(bwselect = "mserd")} which
-implements the modern IK-equivalent CCT MSE-optimal rule.
+Native implementation of the Imbens & Kalyanaraman (2012) three-step
+plug-in rule: pilot density and conditional variance at the cutoff,
+one-sided curvature estimates, and the regularized MSE-optimal
+bandwidth with the kernel constant.
 }

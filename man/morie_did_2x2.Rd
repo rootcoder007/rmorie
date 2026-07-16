@@ -46,9 +46,8 @@ and reports \eqn{\hat\tau}{hattau}.
 \details{
 For multi-period staggered designs prefer
 \code{\link{morie_did_group_time_att}} (Callaway-Sant'Anna via
-\pkg{did}). \code{\link{morie_did_doubly_robust}} (via \pkg{DRDID})
-is the recommended option when pre-treatment covariates are
-available.
+native). \code{\link{morie_did_doubly_robust}} is the recommended
+option when pre-treatment covariates are available.
 }
 \examples{
 \dontrun{

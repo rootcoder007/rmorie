@@ -22,10 +22,12 @@ A list with \code{components} (data frame) and
 \code{overall_estimate}.
 }
 \description{
-Thin wrapper around \code{bacondecomp::bacon}. Decomposes a
-two-way fixed-effects DiD estimate into a weighted average of all
-possible 2x2 DiD comparisons. Hard-errors if \pkg{bacondecomp} is
-not installed.
+Native Goodman-Bacon (2021) decomposition: the two-way
+fixed-effects DiD estimate is decomposed into a weighted average of
+all 2x2 timing comparisons, with each pair's weight derived from
+the Frisch-Waugh-Lovell identity (subsample size squared times the
+variance of the demeaned treatment). Reproduces
+\code{bacondecomp::bacon} exactly (see \code{tests/cross/}).
 }
 \references{
 Goodman-Bacon, A. (2021). Difference-in-differences with

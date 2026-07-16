@@ -7,9 +7,10 @@
 #   * SHA-256 hex matches the Python side bit-for-bit on a pinned input.
 
 skip_if_no_hash <- function() {
-  ok <- requireNamespace("digest", quietly = TRUE) ||
-    requireNamespace("openssl", quietly = TRUE)
-  testthat::skip_if_not(ok, "neither 'digest' nor 'openssl' available")
+  # Module 22: hashing is native C++ (src/morie_crypto_hash.cpp); no
+  # external hash package is needed. Retained as a no-op so the
+  # test bodies read unchanged.
+  invisible(TRUE)
 }
 
 test_that("morie_det_rng is reproducible — same call, same draws", {

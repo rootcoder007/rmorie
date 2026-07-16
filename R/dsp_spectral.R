@@ -59,11 +59,9 @@ morie_dsp_psd_bartlett <- function(x, fs = 1, n_segments = 8L) {
   list(freqs = freqs, psd = psd_sum / n_segments)
 }
 
-#' Welch PSD estimate (delegated to signal::pwelch / specgram)
+#' Welch PSD estimate (rmorie native)
 #'
-#' Thin wrapper that prefers the `signal` package's `pwelch`-style
-#' routine for the production estimator; falls back to a pure-R
-#' Hamming-windowed averaged periodogram when `signal` is unavailable.
+#' Native Hamming-windowed averaged periodogram (Welch 1967).
 #'
 #' @param x Numeric vector.
 #' @param fs Sampling frequency (Hz). Default 1.
@@ -78,14 +76,8 @@ morie_dsp_psd_welch <- function(x, fs = 1, nperseg = 256L,
   x <- as.numeric(x)
   nperseg <- as.integer(min(nperseg, length(x)))
   if (is.null(noverlap)) noverlap <- nperseg %/% 2L
-  if (requireNamespace("signal", quietly = TRUE) &&
-      exists("pwelch", where = asNamespace("signal"))) {
-    out <- get("pwelch", envir = asNamespace("signal"))(x, window = nperseg, overlap = noverlap,
-                          fs = fs, plot = FALSE)
-    return(list(freqs = as.numeric(out$freq),
-                psd = as.numeric(out$spec)))
-  }
-  # Pure-R fallback: Hamming-windowed averaged periodograms.
+  # Module 20: native Hamming-windowed averaged periodograms
+  # (previously preferred signal::pwelch when installed).
   step <- nperseg - noverlap
   starts <- seq.int(1L, length(x) - nperseg + 1L, by = step)
   if (length(starts) == 0L) starts <- 1L
@@ -317,8 +309,8 @@ morie_dsp_fractal_dim_psd <- function(psd, freqs) {
 
 #' Coherence-squared spectrum
 #'
-#' Delegates to `signal::coherence` when present; otherwise builds a
-#' Welch-style estimator from `morie_dsp_psd_welch` and a parallel CSD.
+#' Native Welch-style estimator built from windowed segment FFTs
+#' (module 20).
 #'
 #' @param x Numeric vector.
 #' @param y Numeric vector.
@@ -328,13 +320,7 @@ morie_dsp_fractal_dim_psd <- function(psd, freqs) {
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.9.
 #' @export
 morie_dsp_coherence <- function(x, y, fs = 1, nperseg = 256L) {
-  if (requireNamespace("signal", quietly = TRUE) &&
-      exists("coherence", where = asNamespace("signal"))) {
-    out <- get("coherence", envir = asNamespace("signal"))(x, y, fs = fs, nperseg = nperseg)
-    return(list(freqs = as.numeric(out$freq),
-                coh = as.numeric(out$coh)))
-  }
-  # Pure-R Welch coherence fallback.
+  # Module 20: native Welch coherence.
   nperseg <- as.integer(min(nperseg, length(x)))
   noverlap <- nperseg %/% 2L
   step <- nperseg - noverlap

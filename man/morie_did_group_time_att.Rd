@@ -15,7 +15,8 @@ morie_did_group_time_att(
   control_group = "never_treated",
   n_bootstrap = 200L,
   seed = 42L,
-  alpha = 0.05
+  alpha = 0.05,
+  se_convention = "reference"
 )
 }
 \arguments{
@@ -38,12 +39,18 @@ or \code{"outcome_regression"}.}
 \item{control_group}{\code{"never_treated"} or
 \code{"not_yet_treated"}.}
 
-\item{n_bootstrap}{Number of bootstrap replications for inference
-(forwarded as \code{biters}).}
+\item{n_bootstrap}{Number of multiplier-bootstrap replications for
+inference (0 = analytic influence-function standard errors).}
 
-\item{seed}{RNG seed (unused; retained for back-compat).}
+\item{seed}{RNG seed for the multiplier bootstrap.}
 
 \item{alpha}{Significance level.}
+
+\item{se_convention}{For analytic (non-bootstrap) standard errors:
+\code{"reference"} (default) uses the \pkg{did}/\pkg{DRDID}
+population-sd convention so results reproduce the reference
+packages exactly; \code{"bessel"} keeps Bessel's correction
+(\code{sd(IF)/sqrt(n)}). Asymptotically equivalent.}
 }
 \value{
 A data frame with columns \code{cohort}, \code{time},
@@ -51,10 +58,16 @@ A data frame with columns \code{cohort}, \code{time},
 \code{p_value}.
 }
 \description{
-Thin wrapper around \code{did::att_gt}. For each cohort \eqn{g} and
-each post-treatment calendar period \code{t}, estimates
-\eqn{\mathrm{ATT}(g, t)}{ATT(g, t)}. Hard-errors if \pkg{did} is
-not installed.
+Native Callaway-Sant'Anna (2021) estimator. For each cohort
+\eqn{g} and each period \code{t}, estimates
+\eqn{\mathrm{ATT}(g, t)}{ATT(g, t)} with the Sant'Anna-Zhao (2020)
+panel estimators (doubly robust, IPW, or outcome regression) on the
+two-period comparison against the last pre-treatment base period
+("varying" base period, matching \code{did::att_gt}'s default).
+Inference uses the analytic influence functions with a Mammen
+multiplier bootstrap. Point estimates and influence-function
+standard errors reproduce \code{did::att_gt} to machine precision
+(see \code{tests/cross/}).
 }
 \references{
 Callaway, B., & Sant'Anna, P. H. C. (2021).

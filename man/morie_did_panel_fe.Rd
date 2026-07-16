@@ -37,9 +37,11 @@ any covariate columns.}
 A result list; see \code{\link{morie_did_2x2}}.
 }
 \description{
-Thin wrapper around \code{fixest::feols} estimating
+Native two-way fixed-effects estimator of
 \eqn{Y_{it} = \alpha_i + \lambda_t + \tau D_{it} + X'\delta
 + \varepsilon_{it}}{Y_it = alpha_i + lambda_t + tau D_it + X'delta + varepsilon_it}
-with cluster-robust standard errors. Hard-errors if \pkg{fixest} is
-not installed.
+via alternating-projection demeaning (Frisch-Waugh-Lovell) with
+CR1 cluster-robust standard errors using the same small-sample
+correction as \code{fixest::feols}'s default (reproduced to
+machine precision in \code{tests/cross/}).
 }

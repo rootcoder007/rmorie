@@ -16,7 +16,7 @@ Integer vector of notch indices.
 }
 \description{
 Finds prominent minima in the second derivative outside the
-systolic onset window. Requires \code{signal::findpeaks}.
+systolic onset window (native peak detector, module 20).
 }
 \references{
 Rangayyan & Krishnan (2015), Ch. 4, sec. 4.8.

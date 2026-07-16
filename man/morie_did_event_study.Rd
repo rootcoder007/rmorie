@@ -51,12 +51,10 @@ A list with \code{coefficients} (data frame),
 \code{pre_trend_p_value}, and \code{details}.
 }
 \description{
-Thin wrapper around \code{fixest::feols} with \code{fixest::i()}
-relative-time dummies, plus unit and time fixed effects. The
-\code{reference_period} is dropped as the baseline. Hard-errors if
-\pkg{fixest} is not installed.
-}
-\details{
-For sun-Abraham interaction-weighted estimation prefer
-\code{fixest::sunab()} directly.
+Native event-study estimator: relative-time dummies (with
+\code{reference_period} dropped as the baseline) on unit and time
+fixed effects, fitted by the same native TWFE engine as
+\code{\link{morie_did_panel_fe}}. Reproduces
+\code{fixest::feols} + \code{fixest::i()} to machine precision
+(see \code{tests/cross/}).
 }
