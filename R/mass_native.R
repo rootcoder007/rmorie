@@ -326,6 +326,7 @@ summary.morie_rlm <- function(object, ...) {
 morie_polr <- function(formula, data, weights, method = "logistic") {
   pfun <- switch(method, logistic = stats::plogis, probit = stats::pnorm,
                  stop("morie_polr supports method 'logistic' or 'probit'"))
+  dfun <- switch(method, logistic = stats::dlogis, probit = stats::dnorm)
   mf <- stats::model.frame(formula, data)
   x <- stats::model.matrix(attr(mf, "terms"), mf)
   xint <- match("(Intercept)", colnames(x), nomatch = 0L)
@@ -350,6 +351,12 @@ morie_polr <- function(formula, data, weights, method = "logistic") {
   if (method != "logistic") spacing <- spacing / 1.7
   gammas <- -coefs[1L] + spacing - spacing[q1]
   start <- c(coefs[-1L], gammas)
+  # optim works in the (cut_1, log-increments) space, so the cutpoints
+  # stay ordered; transform the start into it (as MASS::polr.fit does).
+  s0 <- if (pc) c(start[seq_len(pc + 1L)], log(diff(start[-seq_len(pc)])))
+        else c(start[1L], log(diff(start)))
+  Y1 <- col(matrix(0, n, q)) == y
+  Y2 <- col(matrix(0, n, q)) == (y - 1L)
   fmin <- function(beta) {
     theta <- beta[pc + ind_q]
     gamm <- c(-Inf, cumsum(c(theta[1L], exp(theta[-1L]))), Inf)
@@ -357,8 +364,22 @@ morie_polr <- function(formula, data, weights, method = "logistic") {
     pr <- pfun(pmin(100, gamm[y + 1L] - eta)) - pfun(pmax(-100, gamm[y] - eta))
     if (all(pr > 0)) -sum(wt * log(pr)) else Inf
   }
-  res <- stats::optim(start, fmin, method = "BFGS",
-                      control = list(reltol = 1e-11))
+  # analytic gradient (chain rule through the cut-increment jacobian)
+  gmin <- function(beta) {
+    theta <- beta[pc + ind_q]
+    etheta <- exp(theta[-1L])
+    gamm <- c(-Inf, cumsum(c(theta[1L], etheta)), Inf)
+    eta <- offset + if (pc) drop(x %*% beta[ind_pc]) else 0
+    z1 <- pmin(100, gamm[y + 1L] - eta); z2 <- pmax(-100, gamm[y] - eta)
+    pr <- pfun(z1) - pfun(z2); p1 <- dfun(z1); p2 <- dfun(z2)
+    g1 <- if (pc) drop(t(x) %*% (wt * (p1 - p2) / pr)) else numeric()
+    g2 <- -drop(t(Y1 * p1 - Y2 * p2) %*% (wt / pr))
+    jac <- matrix(0, q, q); jac[, 1L] <- 1
+    for (i in seq_len(q)[-1L]) jac[i:q, i] <- etheta[i - 1L]
+    g2 <- drop(g2 %*% jac)
+    if (all(pr > 0)) c(g1, g2) else rep(NA_real_, pc + q)
+  }
+  res <- stats::optim(s0, fmin, gmin, method = "BFGS")
   beta <- res$par
   theta <- beta[pc + ind_q]
   zeta <- cumsum(c(theta[1L], exp(theta[-1L])))
