@@ -28,14 +28,14 @@
 #' @noRd
 .morie_twfe_demean <- function(M, f1, f2, tol = 1e-11, max_iter = 500L) {
   M <- as.matrix(M)
-  f1 <- as.factor(f1); f2 <- as.factor(f2)
-  n1 <- tabulate(f1); n2 <- tabulate(f2)
+  # Integer group codes are loop-invariant: coerce once, not per sweep.
+  i1 <- as.integer(as.factor(f1)); i2 <- as.integer(as.factor(f2))
+  n1 <- tabulate(i1); n2 <- tabulate(i2)
   for (it in seq_len(max_iter)) {
-    delta <- 0
-    g1 <- rowsum(M, f1, reorder = TRUE) / n1
-    M1 <- M - g1[as.integer(f1), , drop = FALSE]
-    g2 <- rowsum(M1, f2, reorder = TRUE) / n2
-    M2 <- M1 - g2[as.integer(f2), , drop = FALSE]
+    g1 <- rowsum(M, i1, reorder = TRUE) / n1
+    M1 <- M - g1[i1, , drop = FALSE]
+    g2 <- rowsum(M1, i2, reorder = TRUE) / n2
+    M2 <- M1 - g2[i2, , drop = FALSE]
     delta <- max(abs(M2 - M))
     M <- M2
     if (delta < tol) break
@@ -76,10 +76,12 @@
   # K: slopes + FE coefficients not nested in the cluster. Unit FEs are
   # nested when clustering on unit (the default); time FEs never are.
   n_unit <- length(unique(unit)); n_time <- length(unique(time))
-  unit_nested <- all(vapply(split(as.character(cluster_ids),
-                                  as.character(unit)),
-                            function(z) length(unique(z)) == 1L,
-                            logical(1)))
+  # A cluster is nested in unit iff every unit maps to a single cluster.
+  # The default clusters on unit, where nesting is identically true --
+  # short-circuit it; otherwise test by (unit, cluster) pair counts,
+  # which is O(n) instead of a per-group character split.
+  unit_nested <- identical(cluster_ids, unit) ||
+    length(unique(paste(unit, cluster_ids, sep = "\r"))) == n_unit
   fe_K <- if (unit_nested) n_time else n_unit + n_time - 1L
   K <- length(keep) + fe_K
   adj <- (n - 1) / (n - K) * G / (G - 1)
