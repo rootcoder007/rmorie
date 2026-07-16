@@ -281,7 +281,6 @@ morie_performance_check_outliers <- function(x, ...) {
 #' @export
 morie_ppcor_partial <- function(x, y = NULL, z = NULL,
                                 method = "pearson", ...) {
-  .morie_stats_need("ppcor", "morie_ppcor_partial")
   if (is.null(y) || is.null(z)) {
     raw <- morie_partial_cor(x, method = method)
     list(method = "partial_cor (rmorie native)", raw = raw)
@@ -310,7 +309,6 @@ morie_ppcor_partial <- function(x, y = NULL, z = NULL,
 #' @export
 morie_ppcor_semipartial <- function(x, y = NULL, z = NULL,
                                     method = "pearson", ...) {
-  .morie_stats_need("ppcor", "morie_ppcor_semipartial")
   if (is.null(y) || is.null(z)) {
     raw <- morie_semipartial_cor(x, method = method)
     list(method = "semipartial_cor (rmorie native)", raw = raw)
@@ -410,7 +408,6 @@ morie_coin_oneway <- function(formula, data, ...) {
 #'   and \code{$raw} (an \code{htest} object).
 #' @export
 morie_randtests_runs <- function(x, ...) {
-  .morie_stats_need("randtests", "morie_randtests_runs")
   raw <- morie_runs_test(x, ...)
   list(method = "runs_test (rmorie native)", raw = raw)
 }
@@ -430,7 +427,6 @@ morie_randtests_runs <- function(x, ...) {
 #'   \code{htest} object).
 #' @export
 morie_randtests_turning_point <- function(x, ...) {
-  .morie_stats_need("randtests", "morie_randtests_turning_point")
   raw <- morie_turning_point_test(x)
   list(method = "turning_point_test (rmorie native)", raw = raw)
 }
@@ -450,7 +446,6 @@ morie_randtests_turning_point <- function(x, ...) {
 #'   \code{htest} object).
 #' @export
 morie_randtests_bartels <- function(x, ...) {
-  .morie_stats_need("randtests", "morie_randtests_bartels")
   raw <- morie_bartels_rank_test(x, ...)
   list(method = "bartels_rank_test (rmorie native)", raw = raw)
 }
