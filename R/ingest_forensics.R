@@ -28,7 +28,7 @@
 #   themselves (CSAFE, NSRL, ...) are multi-gigabyte and must be
 #   downloaded out-of-band; this client returns the catalog records.
 #
-# HTTP: routes via .morie_dataset_http_text_with_status + .morie_dataset_http_post_json_with_status (3ZZ -> libcurl C++ backend with httr2 fallback). JSON: jsonlite::fromJSON(simplifyVector=FALSE). HTTP status codes inspected for NamUs 401/403 + 4xx custom error formatting.
+# HTTP: routes via .morie_dataset_http_text_with_status + .morie_dataset_http_post_json_with_status (3ZZ -> libcurl C++ backend with httr2 fallback). JSON: .morie_from_json(simplifyVector=FALSE). HTTP status codes inspected for NamUs 401/403 + 4xx custom error formatting.
 
 .MORIE_FORENSICS_DEFAULT_UA <- "morie/r (+https://github.com/rootcoder007/rmorie)"
 .MORIE_FORENSICS_DEFAULT_TIMEOUT <- 60
@@ -115,7 +115,7 @@
           collapse = ";"
         )
       } else {
-        out[[k]] <- jsonlite::toJSON(vv, auto_unbox = TRUE, null = "null")
+        out[[k]] <- .morie_to_json(vv, auto_unbox = TRUE, null = "null")
       }
     } else {
       out[[k]] <- if (is.null(v)) NA else v
@@ -171,7 +171,7 @@
       call. = FALSE
     )
   }
-  jsonlite::fromJSON(resp$body, simplifyVector = FALSE)
+  .morie_from_json(resp$body, simplifyVector = FALSE)
 }
 
 # Internal: rbind a list of named-list rows into a data.frame,
@@ -443,7 +443,7 @@ morie_ingest_forensics_namus_missing <- function(
         call. = FALSE
       )
     }
-    payload <- jsonlite::fromJSON(resp$body, simplifyVector = FALSE)
+    payload <- .morie_from_json(resp$body, simplifyVector = FALSE)
     batch <- payload$results
     if (is.null(batch)) batch <- payload$data
     if (is.null(batch) && is.list(payload) && is.null(names(payload))) {
@@ -496,7 +496,7 @@ morie_ingest_forensics_namus_missing <- function(
   if (is.null(license_)) license_ <- rec$rights
   if (is.list(license_)) {
     if (requireNamespace("jsonlite", quietly = TRUE)) {
-      license_ <- jsonlite::toJSON(license_, auto_unbox = TRUE)
+      license_ <- .morie_to_json(license_, auto_unbox = TRUE)
     } else {
       license_ <- paste(unlist(license_, use.names = FALSE),
         collapse = ";"

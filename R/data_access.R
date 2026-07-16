@@ -188,18 +188,22 @@
     if (!requireNamespace("jsonlite", quietly = TRUE)) {
       stop("Package 'jsonlite' is required to read JSON data.", call. = FALSE)
     }
-    return(jsonlite::fromJSON(path, simplifyVector = simplify))
+    return(.morie_from_json(path, simplifyVector = simplify))
   }
   if (format == "xml") {
-    if (!requireNamespace("xml2", quietly = TRUE)) {
-      stop("Package 'xml2' is required to read XML data.", call. = FALSE)
+    if (requireNamespace("xml2", quietly = TRUE)) {
+      doc <- xml2::read_xml(path)
+      return(if (simplify) xml2::as_list(doc) else doc)
     }
-    doc <- xml2::read_xml(path)
-    return(if (simplify) xml2::as_list(doc) else doc)
+    # Module 23: native SAX-built tree fallback.
+    return(morie_fetch_xml(paste(readLines(path, warn = FALSE),
+                                 collapse = "\n")))
   }
   if (format == "html") {
     if (!requireNamespace("xml2", quietly = TRUE)) {
-      stop("Package 'xml2' is required to read HTML data.", call. = FALSE)
+      # Module 23: native tolerant HTML tree fallback.
+      return(morie_fetch_html(paste(readLines(path, warn = FALSE),
+                                    collapse = "\n")))
     }
     doc <- xml2::read_html(path)
     if (simplify && requireNamespace("rvest", quietly = TRUE)) {
@@ -351,7 +355,7 @@ morie_ckan_search <- function(query, portal = "open.canada.ca",
   url <- .morie_url_with_params(
     api, c(list(q = query, rows = as.integer(rows)), list(...))
   )
-  payload <- jsonlite::fromJSON(.morie_read_text(url), simplifyVector = FALSE)
+  payload <- .morie_from_json(.morie_read_text(url), simplifyVector = FALSE)
   if (!isTRUE(payload$success)) {
     stop("CKAN package_search failed on portal ", base, call. = FALSE)
   }
@@ -446,7 +450,7 @@ morie_fetch_arcgis <- function(layer_url, where = "1=1", out_fields = "*",
       resultOffset = offset,
       resultRecordCount = as.integer(this_page)
     ), params)
-    payload <- jsonlite::fromJSON(
+    payload <- .morie_from_json(
       .morie_read_text(.morie_url_with_params(query_url, p)),
       simplifyVector = TRUE
     )

@@ -41,7 +41,7 @@ cli_main <- function(subject, json = "{}") {
 
   opts <- tryCatch(
     if (nzchar(json) && !identical(json, "{}")) {
-      as.list(jsonlite::fromJSON(json))
+      as.list(.morie_from_json(json))
     } else {
       list()
     },
@@ -87,7 +87,7 @@ cli_main <- function(subject, json = "{}") {
                              message = conditionMessage(e))
   )
 
-  cat(jsonlite::toJSON(result, auto_unbox = TRUE, force = TRUE,
+  cat(.morie_to_json(result, auto_unbox = TRUE, force = TRUE,
                        null = "null", na = "null", digits = 6))
   cat("\n")
   invisible(result)

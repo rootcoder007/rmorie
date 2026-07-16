@@ -191,7 +191,7 @@ morie_datasets_montreal_ckan_resource <- function(resource_id,
   qs <- list(resource_id = resource_id,
               limit = as.integer(limit))
   if (!is.null(filters))
-    qs$filters <- jsonlite::toJSON(filters, auto_unbox = TRUE)
+    qs$filters <- .morie_to_json(filters, auto_unbox = TRUE)
   url <- paste0(.MORIE_MONTREAL_CKAN_BASE, "/action/datastore_search")
   r <- .morie_dataset_http_json(url, query = qs)
   if (!isTRUE(r$success))

@@ -370,22 +370,28 @@ morie_dataset_load <- function(path, encoding = "UTF-8", ...) {
     return(as.data.frame(readxl::read_excel(path, ...)))
   }
   if (suffix %in% c("parquet", "pq")) {
-    if (!requireNamespace("arrow", quietly = TRUE)) {
-      stop("morie_dataset_load: install 'arrow' to read Parquet files.")
-    }
-    return(as.data.frame(arrow::read_parquet(path, ...)))
+    # Module 23: arrow fast path, native minimal reader fallback.
+    return(.morie_read_parquet(path, ...))
   }
   if (suffix == "json") {
-    if (!requireNamespace("jsonlite", quietly = TRUE)) {
-      stop("morie_dataset_load: install 'jsonlite' to read JSON files.")
-    }
-    return(jsonlite::fromJSON(path, simplifyDataFrame = TRUE, ...))
+    # Module 23: jsonlite fast path with native fallback (shim).
+    txt <- paste(readLines(path, warn = FALSE), collapse = "\n")
+    return(.morie_from_json(txt, simplifyDataFrame = TRUE, ...))
   }
   if (suffix == "jsonl") {
-    if (!requireNamespace("jsonlite", quietly = TRUE)) {
-      stop("morie_dataset_load: install 'jsonlite' to read JSON-lines files.")
+    if (requireNamespace("jsonlite", quietly = TRUE)) {
+      return(jsonlite::stream_in(file(path), verbose = FALSE, ...))
     }
-    return(jsonlite::stream_in(file(path), verbose = FALSE, ...))
+    # Module 23: native fallback — parse each line, bind rows.
+    lines <- readLines(path, warn = FALSE)
+    lines <- lines[nzchar(trimws(lines))]
+    rows <- lapply(lines, function(l) {
+      as.data.frame(lapply(morie_fetch_json(l, simplify = FALSE),
+                           function(v) if (is.null(v)) NA else v),
+                    stringsAsFactors = FALSE)
+    })
+    out <- do.call(rbind, c(rows, list(make.row.names = FALSE)))
+    return(out)
   }
   stop(sprintf(
     "Unsupported file extension: '%s'. Supported: .csv, .tsv, .xlsx, .xls, .parquet, .pq, .json, .jsonl",

@@ -140,7 +140,7 @@ morie_nypd_all_analyses <- function(arrests_df = NULL, complaint_df = NULL,
     })
     if (!is.null(out_dir)) {
       tryCatch(
-        writeLines(jsonlite::toJSON(results[[nm]]$payload, auto_unbox = TRUE,
+        writeLines(.morie_to_json(results[[nm]]$payload, auto_unbox = TRUE,
                                     null = "null", force = TRUE),
                    file.path(out_dir, sprintf("nypd_%s.json", nm))),
         error = function(e) NULL)

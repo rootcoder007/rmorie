@@ -100,7 +100,7 @@ NULL
   req <- httr2::request(url)
   req <- httr2::req_timeout(req, 60)
   resp <- httr2::req_perform(req)
-  body <- jsonlite::fromJSON(httr2::resp_body_string(resp),
+  body <- .morie_from_json(httr2::resp_body_string(resp),
                               simplifyVector = TRUE)
   recs <- body$result$records
   if (is.null(recs)) data.frame() else as.data.frame(recs)

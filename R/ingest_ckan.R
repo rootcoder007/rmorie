@@ -35,7 +35,7 @@
 # Internal: perform a CKAN Action-API call and unwrap `result`.
 # 3YY: collapsed .morie_ckan_build_req + _call into a single
 # function that routes through .morie_dataset_http_text (libcurl
-# with httr2 fallback) + jsonlite::fromJSON(simplifyVector=FALSE).
+# with httr2 fallback) + .morie_from_json(simplifyVector=FALSE).
 #' Internal helper: Morie Ckan Call
 #' @noRd
 .morie_ckan_call <- function(portal,
@@ -65,7 +65,7 @@
     }
   )
   payload <- tryCatch(
-    jsonlite::fromJSON(body, simplifyVector = FALSE),
+    .morie_from_json(body, simplifyVector = FALSE),
     error = function(e) {
       stop("morie CKAN ", action, ": response was not JSON: ",
         conditionMessage(e),
@@ -131,16 +131,11 @@
         call. = FALSE
       )
     }
-    return(as.data.frame(jsonlite::fromJSON(path, flatten = TRUE)))
+    return(as.data.frame(.morie_from_json(path, flatten = TRUE)))
   }
   if (fmt %in% c("parquet")) {
-    if (!requireNamespace("arrow", quietly = TRUE)) {
-      stop("Reading CKAN Parquet resources requires the 'arrow' package. ",
-        "install.packages('arrow')",
-        call. = FALSE
-      )
-    }
-    return(as.data.frame(arrow::read_parquet(path)))
+    # Module 23: arrow fast path, native minimal reader fallback.
+    return(.morie_read_parquet(path))
   }
   # Unknown extension: most open-data resources are CSV with bad MIME
   # types, so try CSV as a last resort (matches Python behaviour).

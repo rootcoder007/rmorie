@@ -1569,7 +1569,7 @@ morie_siu_llm_extract <- function(case_number, model = c("ollama", "gemini"),
   )
   # Some models wrap JSON in ```json ... ```; strip if present.
   text <- gsub("^```(?:json)?\\s*|\\s*```$", "", text, perl = TRUE)
-  parsed <- jsonlite::fromJSON(text, simplifyVector = TRUE)
+  parsed <- .morie_from_json(text, simplifyVector = TRUE)
   # Coerce to a row of `fields` exact length + order, blanks where missing.
   vals <- vapply(fields, function(f) {
     v <- parsed[[f]]
@@ -1680,7 +1680,7 @@ morie_siu_anomaly_check <- function(case_number, model = c("ollama", "gemini"),
     mock_response_text = mock_response_text
   )
   text <- gsub("^```(?:json)?\\s*|\\s*```$", "", text, perl = TRUE)
-  rows <- jsonlite::fromJSON(text, simplifyVector = TRUE)
+  rows <- .morie_from_json(text, simplifyVector = TRUE)
   if (is.null(rows) || (is.data.frame(rows) && !nrow(rows))) {
     return(data.frame(
       field = character(0), parser_value = character(0),
@@ -2082,7 +2082,7 @@ morie_siu_translate_fr_to_en <- function(
     )
     if (is.null(text)) next
     text <- gsub("^```(?:json)?\\s*|\\s*```$", "", text, perl = TRUE)
-    parsed <- tryCatch(jsonlite::fromJSON(text, simplifyVector = TRUE),
+    parsed <- tryCatch(.morie_from_json(text, simplifyVector = TRUE),
       error = function(e) NULL
     )
     if (is.null(parsed)) next

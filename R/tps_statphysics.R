@@ -336,7 +336,7 @@ morie_tps_load_tps <- function(name, format = "geojson",
                           "returnGeometry=false&f=json&",
                           "resultRecordCount=2000&resultOffset=%d"),
                    hub[[name]], offset)
-    page <- tryCatch(jsonlite::fromJSON(url, simplifyVector = FALSE),
+    page <- tryCatch(.morie_from_json(url, simplifyVector = FALSE),
                      error = function(e) NULL)
     if (is.null(page)) {
       stop("morie_tps_load_tps(): ArcGIS request failed at offset ",

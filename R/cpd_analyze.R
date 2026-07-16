@@ -153,7 +153,7 @@ morie_cpd_all_analyses <- function(crime_df = NULL, arrests_df = NULL,
     })
     if (!is.null(out_dir)) {
       tryCatch(
-        writeLines(jsonlite::toJSON(results[[nm]]$payload, auto_unbox = TRUE,
+        writeLines(.morie_to_json(results[[nm]]$payload, auto_unbox = TRUE,
                                     null = "null", force = TRUE),
                    file.path(out_dir, sprintf("cpd_%s.json", nm))),
         error = function(e) NULL)

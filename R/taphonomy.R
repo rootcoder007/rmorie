@@ -1453,7 +1453,7 @@ morie_taphonomy_morphosource_search <- function(query = NULL,
     stop("MorphoSource search failed (HTTP ", resp$status_code, ")",
          call. = FALSE)
   }
-  parsed <- jsonlite::fromJSON(resp$body, simplifyVector = FALSE)$response
+  parsed <- .morie_from_json(resp$body, simplifyVector = FALSE)$response
   items_name <- if (type == "media") "media" else "physical_objects"
   items <- parsed[[items_name]]
   if (is.null(items)) items <- list()
@@ -1518,7 +1518,7 @@ morie_taphonomy_morphosource_fetch <- function(media_id, use_statement,
     stop("MorphoSource download request failed (HTTP ", resp$status_code, ")",
          call. = FALSE)
   }
-  dl_url <- jsonlite::fromJSON(resp$body,
+  dl_url <- .morie_from_json(resp$body,
                                simplifyVector = FALSE)$response$media$download_url
   if (is.null(dl_url) || !nzchar(dl_url)) {
     stop("MorphoSource returned no download_url", call. = FALSE)

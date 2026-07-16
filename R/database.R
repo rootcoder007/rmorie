@@ -606,7 +606,7 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
       stop("Unknown dataset / no CKAN resource id: ", dataset_key, call. = FALSE)
     }
     meta_raw <- readLines(url(meta_url), warn = FALSE)
-    meta <- jsonlite::fromJSON(paste(meta_raw, collapse = ""))
+    meta <- .morie_from_json(paste(meta_raw, collapse = ""))
     resources <- meta$result$resources
     csv_idx <- which(toupper(resources$format) == "CSV")
     rid <- if (length(csv_idx) > 0) resources$id[csv_idx[1]] else resources$id[1]
@@ -626,7 +626,7 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
       ckan_base, rid, page, fetched
     )
     raw <- readLines(url(api_url), warn = FALSE)
-    payload <- jsonlite::fromJSON(paste(raw, collapse = ""))
+    payload <- .morie_from_json(paste(raw, collapse = ""))
     recs <- payload$result$records
     if (is.null(recs) || NROW(recs) == 0L) break
     pages[[length(pages) + 1L]] <- recs

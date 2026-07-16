@@ -149,11 +149,11 @@ morie_llm_request_completion <- function(base_url, model, messages,
     req <- httr2::req_headers(req, Authorization = paste("Bearer", api_key))
   }
   req <- httr2::req_body_raw(req,
-    jsonlite::toJSON(payload, auto_unbox = TRUE),
+    .morie_to_json(payload, auto_unbox = TRUE),
     type = "application/json")
   req <- httr2::req_timeout(req, timeout)
   resp <- httr2::req_perform(req)
-  jsonlite::fromJSON(httr2::resp_body_string(resp), simplifyVector = FALSE)
+  .morie_from_json(httr2::resp_body_string(resp), simplifyVector = FALSE)
 }
 
 #' Internal helper: Morie Llm Extract Text
@@ -316,7 +316,7 @@ morie_llm_list_freeapi_models <- function() {
       requireNamespace("jsonlite", quietly = TRUE)) {
     for (jf in sort(list.files(json_dir, pattern = "\\\\.json$",
                                full.names = TRUE))) {
-      data <- tryCatch(jsonlite::fromJSON(jf, simplifyVector = FALSE),
+      data <- tryCatch(.morie_from_json(jf, simplifyVector = FALSE),
                        error = function(e) NULL)
       models <- tryCatch(data$props$pageProps$models, error = function(e) NULL)
       if (is.null(models)) next
@@ -412,11 +412,11 @@ morie_llm_detect_provider <- function() {
   out <- tryCatch({
     req <- httr2::request(paste0(FREEAPI_BASE_URL, "/v1/chat/completions"))
     req <- httr2::req_headers(req, `Content-Type` = "application/json")
-    req <- httr2::req_body_raw(req, jsonlite::toJSON(body, auto_unbox = TRUE),
+    req <- httr2::req_body_raw(req, .morie_to_json(body, auto_unbox = TRUE),
                                type = "application/json")
     req <- httr2::req_timeout(req, timeout)
     resp <- httr2::req_perform(req)
-    parsed <- jsonlite::fromJSON(httr2::resp_body_string(resp),
+    parsed <- .morie_from_json(httr2::resp_body_string(resp),
                                  simplifyVector = FALSE)
     .morie_llm_extract_text(parsed)
   }, error = function(e) "")

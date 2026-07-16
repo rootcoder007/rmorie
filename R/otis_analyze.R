@@ -150,7 +150,7 @@ morie_otis_all_analyses <- function(df, year,
                    con = file.path(out_dir,
                                    sprintf("otis_analysis_%s.txt", nm)))
         if (requireNamespace("jsonlite", quietly = TRUE)) {
-          writeLines(jsonlite::toJSON(r$payload, pretty = TRUE,
+          writeLines(.morie_to_json(r$payload, pretty = TRUE,
                                        auto_unbox = TRUE, null = "null",
                                        force = TRUE),
                      con = file.path(out_dir,
