@@ -73,27 +73,16 @@ NULL
 #' @param outcome     Name of the outcome column.
 #' @param treatment   Name of the binary treatment column.
 #' @param weights_col Name of the weights column (e.g. IPTW).
-#' @return Named list with `ate` and `se` (HC3-robust when available).
+#' @return Named list with `ate` and `se` (native HC3-robust).
 #' @export
 estimate_ate <- function(data, outcome, treatment, weights_col) {
   fml <- stats::as.formula(paste(outcome, "~", treatment))
   w   <- data[[weights_col]]
   fit <- stats::lm(fml, data = data, weights = w)
-  if (requireNamespace("sandwich", quietly = TRUE) &&
-        requireNamespace("lmtest", quietly = TRUE)) {
-    vc <- sandwich::vcovHC(fit, type = "HC3")
-    ct <- lmtest::coeftest(fit, vcov. = vc)
-    return(list(
-      ate = as.numeric(ct[treatment, "Estimate"]),
-      se  = as.numeric(ct[treatment, "Std. Error"])
-    ))
-  }
-  warning("sandwich/lmtest not installed; SE will be naive model SE.",
-          call. = FALSE)
-  cf <- summary(fit)$coefficients
+  vc  <- morie_vcov_hc(fit, type = "HC3")
   list(
-    ate = as.numeric(cf[treatment, "Estimate"]),
-    se  = as.numeric(cf[treatment, "Std. Error"])
+    ate = as.numeric(stats::coef(fit)[treatment]),
+    se  = as.numeric(sqrt(diag(vc))[treatment])
   )
 }
 

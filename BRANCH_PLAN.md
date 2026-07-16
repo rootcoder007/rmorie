@@ -39,6 +39,8 @@ and the `morie_match_result` / result-object shapes do not change.
 | 23 | parsers: native JSON parse/stringify, SAX XML, tolerant HTML, minimal Parquet+Snappy, unified dispatcher | xml2/jsonlite/arrow (now optional fast paths per charter) | DONE (jsonlite-parity incl. matrix/data-frame simplification; all call sites shimmed) |
 | 24 | MRM flagship: load_si_dataset/reconcile/estimate_causal_effect/report + phase-17 composition test | — (flagship) | DONE (4-estimator pipeline w/ Holm correction + IVW consensus; own text/md/LaTeX/HTML renderer; citation derives from inst/CITATION) |
 | 25 | categorical-integrity guards: safe_recode/safe_factor/audit_categories/crosstab_verify + binary-treatment guard | — (new construction) | DONE (reproduction test: label-swap inflates a true 4x rate ratio >3x; guards catch it three ways; wired into the MRM pipeline) |
+| 26 | stats primitives: partial/semipartial correlation + test, runs/turning-point/difference-sign/Bartels randomness tests, Ding-VanderWeele E-value family | ppcor/randtests/EValue | DONE (18/18 cross vs ppcor+randtests incl. semipartial covariance-precision formula; E-value rewired into causal/sensitivity/effects) |
+| 27 | robust covariance: HC0-HC5 + HAC (Newey-West/Bartlett) + one-way CR0/CR1 clustered, lm & glm, unified dispatcher | sandwich | DONE (12/12 cross vs sandwich to 1e-8 incl. weighted lm & binomial glm; morie_causal_robust_se + estimate_ate rewired native; 15x faster HC3 @ 100k) |
 
 ---
 

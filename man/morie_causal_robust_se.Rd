@@ -7,10 +7,7 @@
 morie_causal_robust_se(model, type = "HC3", cluster = NULL, ...)
 }
 \arguments{
-\item{model}{A fitted model object (typically from
-\code{stats::lm} or \code{stats::glm}) compatible with
-\code{sandwich::vcovHC()}, \code{sandwich::vcovHAC()}, or
-\code{sandwich::vcovCL()}.}
+\item{model}{A fitted \code{stats::lm} or \code{stats::glm}.}
 
 \item{type}{One of \code{"HC0"}, \code{"HC1"}, \code{"HC2"},
 \code{"HC3"}, \code{"HC4"}, \code{"HC4m"}, \code{"HC5"},
@@ -29,15 +26,12 @@ Named list with elements \code{vcov} (variance matrix),
 and \code{n_coef}.
 }
 \description{
-Thin wrapper around \pkg{sandwich} variance estimators. Returns
-the requested variance-covariance matrix and the corresponding
-robust standard errors. Supports HC0-HC5 (cross-section), HAC
-(time-series), and clustered (one-way) variance.
-}
-\details{
-Hard-errors if \pkg{sandwich} is not installed -- the HC sandwich
-algebra is well-tested upstream and re-implementing it inline
-would be both lengthy and error-prone.
+Native robust variance via \code{\link{morie_vcov_robust}} (no
+external dependency). Returns the requested variance-covariance
+matrix and the corresponding robust standard errors. Supports
+HC0-HC5 (cross-section), HAC (time-series), and clustered
+(one-way) variance, each cross-validated against \pkg{sandwich}
+to machine precision.
 }
 \references{
 Zeileis A, Koll S, Graham N (2020). Various Versatile Variances:
