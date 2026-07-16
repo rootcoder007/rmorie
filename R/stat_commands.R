@@ -370,11 +370,10 @@ clear_stat_commands <- function() {
   invisible(length(seeds))
 }
 
-# Run seed registration on package load. Wrapped in try() so a downstream
-# missing dependency does not abort attachment.
-local({
-  try(.morie_seed_stat_commands(), silent = TRUE)
-})
+# Seed registration runs at load time from the single package `.onLoad`
+# in zzz.R, NOT here at namespace-build time. (A previous top-level
+# `local({...})` populated the registry during build; that is
+# unnecessary and couples the built lazy-load DB to handler closures.)
 
 
 # ---------------------------------------------------------------------------
@@ -462,7 +461,7 @@ print.morie_stat_command <- function(x, ...) {
 
 #' Auto-register every exported ``morie_*`` function as a stat_command
 #'
-#' Walks ``getNamespaceExports("morie")``, filters to the ``^morie_`` family,
+#' Walks ``getNamespaceExports("rmorie")``, filters to the ``^morie_`` family,
 #' and registers each as a \code{morie_stat_command} unless one already
 #' exists under that name.  The category is inferred from the function's
 #' source filename prefix via \code{.MORIE_CATEGORY_PREFIX_MAP}.  Safe to
@@ -472,14 +471,14 @@ print.morie_stat_command <- function(x, ...) {
 #' @keywords internal
 #' @export
 .morie_auto_register_stat_commands <- function() {
-  exports <- tryCatch(getNamespaceExports("morie"),
+  exports <- tryCatch(getNamespaceExports("rmorie"),
                       error = function(e) character(0))
   if (length(exports) == 0L) return(invisible(0L))
   candidates <- grep("^morie_", exports, value = TRUE)
   n_added <- 0L
   for (nm in candidates) {
     if (!is.null(resolve_stat_command(nm))) next
-    fn <- tryCatch(getExportedValue("morie", nm), error = function(e) NULL)
+    fn <- tryCatch(getExportedValue("rmorie", nm), error = function(e) NULL)
     if (!is.function(fn)) next
     cat <- .morie_infer_category(nm)
     desc <- sprintf("Auto-registered from package namespace (%s).", nm)
@@ -501,12 +500,8 @@ print.morie_stat_command <- function(x, ...) {
 
 
 # --- Package-load hook -------------------------------------------------------
-# Fires once when the package namespace is loaded.  Wrapped in try() so a
-# downstream failure (e.g. missing optional dep used by a handler) never
-# aborts the load.
-#' Internal helper: OnLoad
-#' @noRd
-.onLoad <- function(libname, pkgname) {
-  try(.morie_auto_register_stat_commands(), silent = TRUE)
-  invisible(NULL)
-}
+# NB: the package has a SINGLE `.onLoad`, defined in zzz.R (which sorts
+# last in the default collation and would otherwise silently shadow a
+# second definition here). zzz.R's `.onLoad` seeds the stat-command
+# registry; `.morie_auto_register_stat_commands()` remains available to
+# call explicitly but is not run automatically.

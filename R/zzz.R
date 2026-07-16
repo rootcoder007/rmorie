@@ -38,4 +38,8 @@ utils::globalVariables(c(
   # a DESCRIPTION Imports: alone does not load it -- so load its namespace
   # (which triggers its useDynLib + registration) before any C call.
   requireNamespace("rmoriebricklayer", quietly = TRUE)
+  # Seed the stat-command registry at load time (single source of the
+  # seeds; see R/stat_commands.R). try() so a downstream optional-dep
+  # failure never aborts package load.
+  try(.morie_seed_stat_commands(), silent = TRUE)
 }

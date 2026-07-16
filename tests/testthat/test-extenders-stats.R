@@ -127,8 +127,7 @@ test_that("morie_performance_check_outliers wraps the outlier check", {
 # ppcor
 # ---------------------------------------------------------------------------
 
-test_that("morie_ppcor_partial wraps ppcor::pcor / pcor.test", {
-  skip_if_not_installed("ppcor")
+test_that("morie_ppcor_partial runs the native partial correlation", {
   set.seed(7L)
   df <- data.frame(
     a = rnorm(50L),
@@ -136,16 +135,15 @@ test_that("morie_ppcor_partial wraps ppcor::pcor / pcor.test", {
     c = rnorm(50L)
   )
   out_mat <- morie_ppcor_partial(df)
-  expect_identical(out_mat$method, "ppcor::pcor")
+  expect_identical(out_mat$method, "partial_cor (rmorie native)")
   expect_false(is.null(out_mat$raw))
 
   out_one <- morie_ppcor_partial(df$a, df$b, df$c)
-  expect_identical(out_one$method, "ppcor::pcor.test")
+  expect_identical(out_one$method, "partial_cor_test (rmorie native)")
   expect_false(is.null(out_one$raw))
 })
 
-test_that("morie_ppcor_semipartial wraps ppcor::spcor / spcor.test", {
-  skip_if_not_installed("ppcor")
+test_that("morie_ppcor_semipartial runs the native semipartial correlation", {
   set.seed(8L)
   df <- data.frame(
     a = rnorm(50L),
@@ -153,11 +151,11 @@ test_that("morie_ppcor_semipartial wraps ppcor::spcor / spcor.test", {
     c = rnorm(50L)
   )
   out_mat <- morie_ppcor_semipartial(df)
-  expect_identical(out_mat$method, "ppcor::spcor")
+  expect_identical(out_mat$method, "semipartial_cor (rmorie native)")
   expect_false(is.null(out_mat$raw))
 
   out_one <- morie_ppcor_semipartial(df$a, df$b, df$c)
-  expect_identical(out_one$method, "ppcor::spcor.test")
+  expect_identical(out_one$method, "semipartial_cor_test (rmorie native)")
   expect_false(is.null(out_one$raw))
 })
 
@@ -166,40 +164,40 @@ test_that("morie_ppcor_semipartial wraps ppcor::spcor / spcor.test", {
 # coin
 # ---------------------------------------------------------------------------
 
-test_that("morie_coin_independence wraps coin::independence_test", {
-  skip_if_not_installed("coin")
+test_that("morie_coin_independence runs the native independence test", {
   set.seed(9L)
   df <- data.frame(
     y = rnorm(40L),
-    g = factor(rep(c("A", "B"), each = 20L))
+    x = rnorm(40L)
   )
-  out <- morie_coin_independence(y ~ g, data = df)
-  expect_identical(out$method, "coin::independence_test")
-  expect_false(is.null(out$raw))
+  out <- morie_coin_independence(y ~ x, data = df)
+  expect_identical(out$method, "morie independence permutation test")
+  expect_true(is.finite(out$statistic))
+  expect_true(out$p.value >= 0 && out$p.value <= 1)
 })
 
-test_that("morie_coin_wilcoxon wraps coin::wilcox_test", {
-  skip_if_not_installed("coin")
+test_that("morie_coin_wilcoxon runs the native Wilcoxon permutation test", {
   set.seed(10L)
   df <- data.frame(
     y = rnorm(40L),
     g = factor(rep(c("A", "B"), each = 20L))
   )
   out <- morie_coin_wilcoxon(y ~ g, data = df)
-  expect_identical(out$method, "coin::wilcox_test")
-  expect_false(is.null(out$raw))
+  expect_identical(out$method, "morie Wilcoxon permutation test")
+  expect_true(is.finite(out$statistic))
+  expect_true(out$p.value >= 0 && out$p.value <= 1)
 })
 
-test_that("morie_coin_oneway wraps coin::oneway_test", {
-  skip_if_not_installed("coin")
+test_that("morie_coin_oneway runs the native one-way permutation test", {
   set.seed(11L)
   df <- data.frame(
     y = rnorm(60L),
     g = factor(rep(c("A", "B", "C"), each = 20L))
   )
   out <- morie_coin_oneway(y ~ g, data = df)
-  expect_identical(out$method, "coin::oneway_test")
-  expect_false(is.null(out$raw))
+  expect_identical(out$method, "morie one-way permutation test")
+  expect_true(is.finite(out$statistic))
+  expect_true(out$p.value >= 0 && out$p.value <= 1)
 })
 
 
@@ -207,26 +205,23 @@ test_that("morie_coin_oneway wraps coin::oneway_test", {
 # randtests
 # ---------------------------------------------------------------------------
 
-test_that("morie_randtests_runs wraps randtests::runs.test", {
-  skip_if_not_installed("randtests")
+test_that("morie_randtests_runs runs the native runs test", {
   set.seed(12L)
   out <- morie_randtests_runs(rnorm(40L))
-  expect_identical(out$method, "randtests::runs.test")
-  expect_s3_class(out$raw, "htest")
+  expect_identical(out$method, "runs_test (rmorie native)")
+  expect_true(is.finite(out$raw$p.value))
 })
 
-test_that("morie_randtests_turning_point wraps the turning-point test", {
-  skip_if_not_installed("randtests")
+test_that("morie_randtests_turning_point runs the native turning-point test", {
   set.seed(13L)
   out <- morie_randtests_turning_point(rnorm(40L))
-  expect_identical(out$method, "randtests::turning.point.test")
-  expect_s3_class(out$raw, "htest")
+  expect_identical(out$method, "turning_point_test (rmorie native)")
+  expect_true(is.finite(out$raw$p.value))
 })
 
-test_that("morie_randtests_bartels wraps randtests::bartels.rank.test", {
-  skip_if_not_installed("randtests")
+test_that("morie_randtests_bartels runs the native Bartels rank test", {
   set.seed(14L)
   out <- morie_randtests_bartels(rnorm(40L))
-  expect_identical(out$method, "randtests::bartels.rank.test")
-  expect_s3_class(out$raw, "htest")
+  expect_identical(out$method, "bartels_rank_test (rmorie native)")
+  expect_true(is.finite(out$raw$p.value))
 })
