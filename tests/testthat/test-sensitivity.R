@@ -277,14 +277,11 @@ test_that("morie_sensitivity_evalue dispatches OLS via EValue", {
   expect_equal(out$type, "OLS")
 })
 
-test_that("morie_sensitivity_evalue errors when EValue missing", {
-  if (requireNamespace("EValue", quietly = TRUE)) skip(
-    "EValue is installed; cannot test missing-package error path."
-  )
-  expect_error(
-    morie_sensitivity_evalue(estimate = 0.5, se = 0.1, sd = 1),
-    regexp = "EValue"
-  )
+test_that("morie_sensitivity_evalue computes natively (no EValue needed)", {
+  out <- morie_sensitivity_evalue(estimate = 0.5, se = 0.1, sd = 1)
+  expect_s3_class(out, "morie_sensitivity_evalue")
+  expect_true(is.finite(as.numeric(out$e_value_point)))
+  expect_true(as.numeric(out$e_value_point) >= 1)
 })
 
 test_that("morie_sensitivity_tipping_point dispatches tipr::tip", {

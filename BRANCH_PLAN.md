@@ -41,6 +41,7 @@ and the `morie_match_result` / result-object shapes do not change.
 | 25 | categorical-integrity guards: safe_recode/safe_factor/audit_categories/crosstab_verify + binary-treatment guard | — (new construction) | DONE (reproduction test: label-swap inflates a true 4x rate ratio >3x; guards catch it three ways; wired into the MRM pipeline) |
 | 26 | stats primitives: partial/semipartial correlation + test, runs/turning-point/difference-sign/Bartels randomness tests, Ding-VanderWeele E-value family | ppcor/randtests/EValue | DONE (18/18 cross vs ppcor+randtests incl. semipartial covariance-precision formula; E-value rewired into causal/sensitivity/effects) |
 | 27 | robust covariance: HC0-HC5 + HAC (Newey-West/Bartlett) + one-way CR0/CR1 clustered, lm & glm, unified dispatcher | sandwich | DONE (12/12 cross vs sandwich to 1e-8 incl. weighted lm & binomial glm; morie_causal_robust_se + estimate_ate rewired native; 15x faster HC3 @ 100k) |
+| 28 | bootstrap: ordinary + stratified resampling, block (moving/stationary), two-sample; norm/basic/perc/BCa CIs (regression empinf) | boot/simpleboot | DONE (13/13 cross vs boot+simpleboot; RNG-matched replicate streams + BCa influence to 1e-8; adaptive/block bootstrap + 3 bridges rewired native, full suite 77/0/0) |
 
 ---
 

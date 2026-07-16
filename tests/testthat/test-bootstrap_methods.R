@@ -230,10 +230,9 @@ test_that("bootstrap_methods internal cross_validate / repeated_cv / leave_one_o
 # Phase 1.i new extender interfaces
 # ---------------------------------------------------------------------------
 
-test_that("morie_boot_run + morie_boot_basic_ci round-trip via boot::boot", {
-  skip_if_not_installed("boot")
+test_that("morie_boot_run + morie_boot_basic_ci round-trip (native)", {
   bo <- morie_boot_run(x_vec, mean, R = 100L)
-  expect_s3_class(bo, "boot")
+  expect_s3_class(bo, "morie_boot")
   cis <- morie_boot_basic_ci(bo, type = c("perc", "basic", "norm"),
                              conf = 0.95)
   expect_named(cis, c("perc", "basic", "norm"))
@@ -244,10 +243,9 @@ test_that("morie_boot_run + morie_boot_basic_ci round-trip via boot::boot", {
 })
 
 test_that("morie_boot_run respects strata argument", {
-  skip_if_not_installed("boot")
   strata <- rep(c("a", "b"), each = 20)
   bo <- morie_boot_run(x_vec, mean, R = 60L, strata = strata)
-  expect_s3_class(bo, "boot")
+  expect_s3_class(bo, "morie_boot")
   expect_equal(nrow(bo$t), 60L)
 })
 
@@ -260,13 +258,12 @@ test_that("morie_rsample_bootstraps returns an rset", {
 })
 
 test_that("morie_simpleboot_two computes two-sample bootstrap", {
-  skip_if_not_installed("simpleboot")
   bo <- morie_simpleboot_two(x_vec[1:20], x_vec[21:40],
                              statistic = mean, R = 50L)
-  # Recent simpleboot returns class "simpleboot" only (older versions
-  # also carried "boot"). Accept the canonical primary class.
-  expect_s3_class(bo, "simpleboot")
-  expect_equal(length(bo$t), 50L)
+  # Native two-sample bootstrap returns a morie_boot object whose t is
+  # an R x 1 replicate matrix.
+  expect_s3_class(bo, "morie_boot")
+  expect_equal(nrow(bo$t), 50L)
 })
 
 test_that("extender functions error informatively when pkg missing", {

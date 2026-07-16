@@ -6,7 +6,7 @@
 \usage{
 morie_boot_basic_ci(
   boot_obj,
-  type = c("perc", "bca", "basic", "norm", "stud"),
+  type = c("perc", "bca", "basic", "norm"),
   conf = 0.95
 )
 }

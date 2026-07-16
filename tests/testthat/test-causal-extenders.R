@@ -41,15 +41,13 @@ test_that("morie_causal_weighting hard-errors when WeightIt is missing", {
   )
 })
 
-test_that("morie_causal_robust_se hard-errors when sandwich is missing", {
-  with_mocked_bindings(
-    .causal_have_sandwich = function() FALSE,
-    .package = "rmorie",
-    code = expect_error(
-      morie_causal_robust_se(stats::lm(rnorm(20) ~ rnorm(20))),
-      regexp = "sandwich"
-    )
-  )
+test_that("morie_causal_robust_se computes natively (no sandwich needed)", {
+  set.seed(1)
+  m <- stats::lm(rnorm(30) ~ rnorm(30))
+  out <- morie_causal_robust_se(m, type = "HC3")
+  expect_true(is.matrix(out$vcov))
+  expect_equal(dim(out$vcov), c(2L, 2L))
+  expect_true(all(is.finite(out$se)) && all(out$se > 0))
 })
 
 # ---------------------------------------------------------------------------
