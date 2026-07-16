@@ -27,20 +27,14 @@
 #'   comparison of floating-point values.
 #' @noRd
 .morie_twfe_demean <- function(M, f1, f2, tol = 1e-11, max_iter = 500L) {
-  M <- as.matrix(M)
-  # Integer group codes are loop-invariant: coerce once, not per sweep.
+  M <- as.matrix(M); storage.mode(M) <- "double"
   i1 <- as.integer(as.factor(f1)); i2 <- as.integer(as.factor(f2))
-  n1 <- tabulate(i1); n2 <- tabulate(i2)
-  for (it in seq_len(max_iter)) {
-    g1 <- rowsum(M, i1, reorder = TRUE) / n1
-    M1 <- M - g1[i1, , drop = FALSE]
-    g2 <- rowsum(M1, i2, reorder = TRUE) / n2
-    M2 <- M1 - g2[i2, , drop = FALSE]
-    delta <- max(abs(M2 - M))
-    M <- M2
-    if (delta < tol) break
-  }
-  M
+  # Fused Armadillo alternating-projection sweep (0-based codes). Same
+  # unique within-projection as the R rowsum path, to `tol`.
+  out <- .morie_twfe_demean_cpp(M, i1 - 1L, i2 - 1L,
+                                max(i1), max(i2), tol, max_iter)
+  dimnames(out) <- dimnames(M)
+  out
 }
 
 #' Internal helper: TWFE OLS with fixest-style CR1 cluster vcov
