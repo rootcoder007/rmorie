@@ -64,14 +64,13 @@ test_that("morie_did_synthdid_estimate returns synthdid result shape", {
   expect_true(grepl("rmorie native", out$method))
 })
 
-test_that("morie_did_synthdid_estimate errors when coresynth missing", {
-  if (requireNamespace("coresynth", quietly = TRUE)) skip(
-    "coresynth is installed; cannot test the missing-package error path."
-  )
-  df <- make_did_panel(n_units = 10L, n_periods = 4L, seed = 14L)
-  expect_error(
-    morie_did_synthdid_estimate(df, unit = "unit", time = "time",
-                                treatment = "d", outcome = "y"),
-    regexp = "coresynth"
-  )
+test_that("morie_did_synthdid_estimate is native (no coresynth needed)", {
+  # Module 15: the SDID engine is native; the estimator must run on a
+  # bare install.
+  df <- make_did_panel(n_units = 12L, n_periods = 6L, seed = 14L)
+  df$w01 <- as.integer(df$d)
+  out <- morie_did_synthdid_estimate(df, unit = "unit", time = "time",
+                                     treatment = "w01", outcome = "y")
+  expect_true(is.finite(out$att))
+  expect_identical(out$method, "sdid (rmorie native)")
 })

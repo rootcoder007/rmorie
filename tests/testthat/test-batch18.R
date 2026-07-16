@@ -87,6 +87,8 @@ test_that("rgwav wavelet path returns positive threshold and sigma", {
 })
 
 test_that("rgwav MA fallback warns when wavelets unavailable", {
+  # Module 20: rgwav runs the native DWT engine — no wavelets
+  # package, no fallback, no warning.
   testthat::local_mocked_bindings(
     requireNamespace = function(package, ...) {
       if (identical(package, "wavelets")) FALSE else TRUE
@@ -95,9 +97,9 @@ test_that("rgwav MA fallback warns when wavelets unavailable", {
   )
   set.seed(2)
   x <- rnorm(64)
-  expect_warning(r <- rgwav(x), "fallback")
+  expect_silent(r <- rgwav(x))
   expect_length(r$signal, length(x))
-  expect_identical(r$mode, "MA-fallback")
+  expect_false(identical(r$mode, "MA-fallback"))
 })
 
 test_that("morie_rangayyan_wavelet_denoise alias is identical to rgwav", {

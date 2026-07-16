@@ -106,7 +106,7 @@ morie_crypto_hqc_decaps <- function(sk, ct) {
 #'   (2 x 256 list matrix of raw secrets).
 #' @references Lamport, L. (1979). Constructing digital signatures
 #'   from a one-way function. SRI CSL-98.
-#' @examples
+#' @examplesIf isTRUE(tryCatch(morie_crypto_sodium_available(), error = function(e) FALSE))
 #' kp <- morie_crypto_lamport_keygen()
 #' sig <- morie_crypto_lamport_sign(kp, "hello")
 #' morie_crypto_lamport_verify(kp$pk, "hello", sig)
