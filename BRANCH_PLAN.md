@@ -582,3 +582,21 @@ treatment coercion with the level-index explanation) wired into
 morie_mrm_estimate_causal_effect. test-categorical-guard.R includes a
 full reproduction: true 4x rate ratio, positional label slip against
 a label-keyed benchmark, >3x inflation, three independent catches.
+
+
+## Benchmark summary (modules 12-24, L14, 2026-07-16)
+
+Full CSVs in inst/benchmarks/results/. Native FASTER than the
+reference: 2SLS 25x vs ivreg, DAG identification 16x vs dagitty,
+McCrary 7x vs rddensity, Bacon 33x vs bacondecomp (reference capped
+at n=1e3 where its runtime explodes; native completes 1e5 in 8.6s),
+kriging ~2x vs gstat, filtfilt 2x vs signal, SHA-256 1.3x vs digest,
+TWFE 2x vs fixest at n=1e3. Within the 2x bar: drdid_rc 1.2-1.9x,
+CS att(g,t) 1.1x at 1e3 / 2.9x at 1e4, DWT ~1.1x vs wavelets, sharp
+RDD 1.5x vs rdrobust (after vectorizing the NN variance). Honest
+exceptions, all sub-second-to-seconds absolute: TWFE demeaning is R
+vs fixest compiled C (0.16s at 80k rows, 3.0s at 800k — estimates
+are identical to 1e-10); the Hawkes exponential loglik call is 62x a
+trivial C reference at 0.06s absolute; the pure-R JSON (63x) and XML
+(5.5x) parsers are documented FALLBACKS — jsonlite/xml2 remain the
+declared fast paths and every call site prefers them when installed.

@@ -77,7 +77,10 @@ for (n in c(1e3, 1e4, 1e5)) {
   add("drdid_rc", n, t_nat, t_ref, "DRDID")
 
   t_nat <- tm(morie_did_bacon_decomposition(pan, "y", "d", "id", "tt"))
-  t_ref <- if (requireNamespace("bacondecomp", quietly = TRUE)) {
+  # bacondecomp's own runtime explodes past ~1e3 units (2.7s at 1e3,
+  # unbounded beyond); reference capped there, native timed at all n.
+  t_ref <- if (n <= 1e3 &&
+               requireNamespace("bacondecomp", quietly = TRUE)) {
     tm(bacondecomp::bacon(y ~ d, data = pan, id_var = "id",
                           time_var = "tt", quietly = TRUE))
   } else NA_real_
