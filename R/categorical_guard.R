@@ -114,7 +114,7 @@ morie_safe_factor <- function(x, levels, reference = NULL) {
 #'   shouts the hazards.
 #' @examples
 #' df <- data.frame(race = factor(c("1", "2", "2", "3")),
-#'                  city = c("Toronto", "toronto", "Ottawa"))
+#'                  city = c("Toronto", "toronto", "Ottawa", "Ottawa"))
 #' morie_audit_categories(df)
 #' @export
 morie_audit_categories <- function(data, cols = NULL) {

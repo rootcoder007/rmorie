@@ -47,9 +47,22 @@ test_that(".morie_parse_file errors when a reader package is absent", {
     .package = "base"
   )
   expect_error(rmorie:::.morie_parse_file(p, "xlsx", TRUE), "readxl")
-  expect_error(rmorie:::.morie_parse_file(p, "json", TRUE), "jsonlite")
-  expect_error(rmorie:::.morie_parse_file(p, "xml", TRUE), "xml2")
-  expect_error(rmorie:::.morie_parse_file(p, "html", TRUE), "xml2")
+  # Module 23: json/xml/html now fall back to the NATIVE parsers when
+  # the accelerator packages are absent — they parse, not stop.
+  pj <- tempfile(fileext = ".json")
+  writeLines('{"a": 1}', pj)
+  on.exit(unlink(pj), add = TRUE)
+  expect_silent(out_j <- rmorie:::.morie_parse_file(pj, "json", TRUE))
+  px <- tempfile(fileext = ".xml")
+  writeLines("<r><a>1</a></r>", px)
+  on.exit(unlink(px), add = TRUE)
+  out_x <- rmorie:::.morie_parse_file(px, "xml", TRUE)
+  expect_true(is.list(out_x))
+  ph <- tempfile(fileext = ".html")
+  writeLines("<html><body><p>hi</p></body></html>", ph)
+  on.exit(unlink(ph), add = TRUE)
+  out_h <- rmorie:::.morie_parse_file(ph, "html", TRUE)
+  expect_true(is.list(out_h))
 })
 
 test_that(".morie_parse_file html returns multiple tables / the document", {
