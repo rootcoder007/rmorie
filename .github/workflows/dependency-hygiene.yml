@@ -1,7 +1,8 @@
 # Structural enforcement of the self-sufficiency claim (phase 27):
 # no forbidden statistical package may appear in Depends/Imports.
-# Suggests is allowed ONLY for tests/cross/ cross-validation and the
-# documented optional parser/ML accelerators.
+# Suggests is allowed ONLY for tests/cross/ cross-validation, the
+# documented optional parser/ML accelerators, and the documented
+# extenders (R/extenders_*.R).
 name: dependency-hygiene
 
 on:
@@ -20,39 +21,44 @@ jobs:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - name: Forbidden-dependency check
         run: |
-          Rscript - <<'RS'
-          d <- read.dcf("DESCRIPTION")
-          fields <- c("Depends", "Imports", "LinkingTo")
-          have <- unlist(lapply(fields, function(f)
-            if (f %in% colnames(d))
-              trimws(sub("\\(.*\\)", "",
-                strsplit(d[1, f], ",")[[1]])) else character()))
-          forbidden <- c("MatchIt", "optmatch", "Matching",
-                         "designmatch", "survey", "DoubleML", "mlr3",
-                         "ranger", "grf", "dagitty", "rdrobust", "did",
-                         "fixest", "DRDID", "bacondecomp",
-                         "DIDmultiplegt", "TwoWayFEWeights",
-                         "HonestDiD", "coresynth", "AER", "ivreg",
-                         "gmm", "plm", "psych", "mirt", "gstat",
-                         "spdep", "signal", "wavelets", "hawkes",
-                         "emhawkes", "bsts", "xml2", "jsonlite",
-                         "arrow", "httr", "httr2", "digest",
-                         "openssl")
-          hit <- intersect(forbidden, have)
-          if (length(hit)) stop("FORBIDDEN DEPS PRESENT: ",
-                                paste(hit, collapse = ", "))
-          cat("Dependency check: PASS\n")
-          cat("Depends/Imports/LinkingTo:", paste(have, collapse=", "),
-              "\n")
-          RS
+          python3 - <<'PY'
+          import re, sys
+          txt = open("DESCRIPTION").read()
+          # DCF: capture a field's folded value
+          def field(name):
+              m = re.search(rf"^{name}:(.*?)(?=^\S|\Z)", txt,
+                            re.M | re.S)
+              if not m:
+                  return []
+              raw = m.group(1)
+              return [re.sub(r"\(.*?\)", "", e).strip()
+                      for e in raw.split(",") if e.strip()]
+          have = field("Depends") + field("Imports") + field("LinkingTo")
+          forbidden = {"MatchIt","optmatch","Matching","designmatch",
+              "survey","DoubleML","mlr3","ranger","grf","dagitty",
+              "rdrobust","did","fixest","DRDID","bacondecomp",
+              "DIDmultiplegt","TwoWayFEWeights","HonestDiD","coresynth",
+              "AER","ivreg","gmm","plm","psych","mirt","gstat","spdep",
+              "signal","wavelets","hawkes","emhawkes","bsts","xml2",
+              "jsonlite","arrow","httr","httr2","digest","openssl"}
+          hit = sorted(forbidden & set(have))
+          if hit:
+              sys.exit("FORBIDDEN DEPS PRESENT: " + ", ".join(hit))
+          print("Dependency check: PASS")
+          print("Depends/Imports/LinkingTo:", ", ".join(have))
+          PY
       - name: Production code must not call forbidden packages
         run: |
           # tests/cross/ is the only place reference packages may be
-          # called; production R/ may reference them only inside
+          # exercised; production R/ may reference them only inside the
           # requireNamespace-guarded accelerator shims (jsonlite, xml2,
-          # arrow) or the pinned .morie_*_have_* probes.
+          # arrow), the documented extenders (R/extenders_*.R), or the
+          # pinned .morie_*_have_* probes (which never use pkg::).
           set -e
-          bad=$(grep -rnE "(MatchIt|survey|DoubleML|grf|dagitty|rdrobust|fixest|DRDID|bacondecomp|DIDmultiplegt|TwoWayFEWeights|HonestDiD|coresynth|ivreg|gmm|plm|psych|gstat|spdep|signal|wavelets|emhawkes|digest|openssl)::" R/ --include="*.R" | grep -v "^R/RcppExports.R" || true)
+          bad=$(grep -rnE "(MatchIt|survey|DoubleML|grf|dagitty|rdrobust|fixest|DRDID|bacondecomp|DIDmultiplegt|TwoWayFEWeights|HonestDiD|coresynth|ivreg|gmm|plm|psych|gstat|spdep|signal|wavelets|emhawkes|digest|openssl)::" R/ --include="*.R" \
+            | grep -v "^R/RcppExports.R" \
+            | grep -v "^R/extenders_" \
+            | grep -vE "^R/[a-z_0-9]+\.R:[0-9]+:\s*#" || true)
           if [ -n "$bad" ]; then
             echo "Forbidden package calls in production R/:"
             echo "$bad"
