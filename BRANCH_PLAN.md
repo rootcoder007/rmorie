@@ -38,6 +38,7 @@ and the `morie_match_result` / result-object shapes do not change.
 | 22 | crypto: standalone C++ SHA-256/HMAC/PBKDF2 (+ PQC lattice KEM/DSA already native via liboqs) | digest/openssl | DONE (NIST/RFC vectors; digest dropped from Imports; SHA-512 deferred YAGNI) |
 | 23 | parsers: native JSON parse/stringify, SAX XML, tolerant HTML, minimal Parquet+Snappy, unified dispatcher | xml2/jsonlite/arrow (now optional fast paths per charter) | DONE (jsonlite-parity incl. matrix/data-frame simplification; all call sites shimmed) |
 | 24 | MRM flagship: load_si_dataset/reconcile/estimate_causal_effect/report + phase-17 composition test | — (flagship) | DONE (4-estimator pipeline w/ Holm correction + IVW consensus; own text/md/LaTeX/HTML renderer; citation derives from inst/CITATION) |
+| 25 | categorical-integrity guards: safe_recode/safe_factor/audit_categories/crosstab_verify + binary-treatment guard | — (new construction) | DONE (reproduction test: label-swap inflates a true 4x rate ratio >3x; guards catch it three ways; wired into the MRM pipeline) |
 
 ---
 
@@ -555,3 +556,29 @@ text/markdown/LaTeX/HTML, no stargazer/gt). Plus the phase-17
 composition test: one DAG -> identification -> matching -> DML
 estimate -> three refutations -> MRM report, every step a module of
 this branch.
+
+
+## Module 25 — categorical-integrity guards (2026-07-16)
+
+Motivated by a documented real-world failure class: categoricals
+imported as numeric codes (SPSS/Stata) whose labels are lost or
+positionally re-attached silently relabel whole demographic groups —
+`as.numeric(factor)` returns level indices, `factor()` re-orders
+references alphabetically, and a label-keyed population benchmark
+joined to swapped labels multiplies a reported disparity severalfold.
+A published use-of-force analysis carried exactly this error for
+years before correction (the substantive disparity finding survived
+the correction; the guard exists so the CODING step can never
+manufacture or destroy one).
+
+R/categorical_guard.R: morie_safe_recode (name-to-name only, ERROR on
+unmapped), morie_safe_factor (explicit level set + reference
+assertion), morie_audit_categories (flags numeric-looking labels,
+haven_labelled leftovers, case-variant duplicates, unused levels),
+morie_crosstab_verify (before/after cross-tab must equal the DECLARED
+mapping — the check that catches a swap the day it happens), and the
+internal .morie_guard_binary_treatment (refuses factor-to-numeric
+treatment coercion with the level-index explanation) wired into
+morie_mrm_estimate_causal_effect. test-categorical-guard.R includes a
+full reproduction: true 4x rate ratio, positional label slip against
+a label-keyed benchmark, >3x inflation, three independent catches.

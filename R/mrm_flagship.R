@@ -191,6 +191,20 @@ morie_mrm_estimate_causal_effect <- function(data, treatment, outcome,
                             required = c(treatment, outcome,
                                          covariates),
                             arg = "data")
+  # Module 25 guard: a categorical treatment must never be silently
+  # coerced (factor level indices are not data), and covariate coding
+  # hazards are surfaced before any estimator runs.
+  .morie_guard_binary_treatment(data[[treatment]], treatment)
+  audit <- morie_audit_categories(data,
+                                  cols = intersect(covariates,
+                                                   names(data)))
+  if (nrow(audit) && !isTRUE(attr(audit, "clean"))) {
+    bad <- audit[nzchar(audit$hazards), , drop = FALSE]
+    warning("categorical coding hazards in covariates [",
+            paste(bad$column, collapse = ", "),
+            "] - run morie_audit_categories(data) and fix before ",
+            "trusting these estimates.", call. = FALSE)
+  }
   rows <- list()
   diagnostics <- list()
   run <- function(fn) tryCatch(fn(), error = function(e) e)
