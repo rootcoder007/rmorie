@@ -13,6 +13,6 @@ morie_psymet_kmo(data)
 list with \code{msa} (overall) and named numeric vector \code{items}.
 }
 \description{
-Delegates to \code{psych::KMO()} when available; otherwise computes from the
-partial-correlation anti-image matrix using base R.
+Native Kaiser-Meyer-Olkin sampling adequacy from the
+partial-correlation anti-image matrix.
 }

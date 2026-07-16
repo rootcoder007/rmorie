@@ -3,19 +3,14 @@
 # Regression Discontinuity Design (RDD) estimators for morie.
 # Ports the public API of `src/morie/rdd.py` (~1851 LOC) to R.
 #
-# Strategy: prefer CRAN wrappers.  Sharp / fuzzy RDD, bias-corrected
-# inference, optimal bandwidth selection (CCT/IK), and standard plot
-# helpers dispatch to `rdrobust::rdrobust` (the reference implementation
-# of Calonico, Cattaneo, Titiunik & co-authors).  The McCrary density
-# manipulation test dispatches to `rddensity::rddensity` (or
-# `rdd::DCdensity` as a fallback).  When neither is available the
-# package falls back to base-R local-polynomial code that mirrors
-# the Python module.
-#
-# Internal mathematical helpers that merely replicate `rdrobust`
-# internals (full MSE-optimal AMSE plug-in derivative bandwidth,
-# Cattaneo-Jansson-Ma local-polynomial density) are stubbed with
-# informative TODOs.
+# Module 16 (feat/native-specializations): the RDD family is native.
+# Sharp / fuzzy / bias-corrected estimation, the IK (2012) MSE-optimal
+# plug-in bandwidth, the kink (deriv = 1) estimator, and the McCrary
+# density test run on the engines in R/rdd_native.R (local-polynomial
+# WLS with nearest-neighbor robust variance). rdrobust is no longer
+# used. rddensity remains ONLY as an extender backend for the
+# Cattaneo-Jansson-Ma local-polynomial density test (tests/cross
+# validates the native estimators against rdrobust where installed).
 #
 # Public R names mirror the Python module under the `morie_rdd_*` prefix.
 
@@ -223,23 +218,18 @@ morie_rdd_local_polynomial <- function(x, y, eval_points, h, p = 1,
 
 #' Imbens-Kalyanaraman (IK) MSE-optimal bandwidth
 #'
-#' Dispatches to \code{rdrobust::rdbwselect(bwselect = "mserd")} which
-#' implements the modern IK-equivalent CCT MSE-optimal rule.
+#' Native implementation of the Imbens & Kalyanaraman (2012) three-step
+#' plug-in rule: pilot density and conditional variance at the cutoff,
+#' one-sided curvature estimates, and the regularized MSE-optimal
+#' bandwidth with the kernel constant.
 #' @inheritParams morie_rdd_params
 #' @return A named list with elements \code{bandwidth}, \code{method}, \code{details}.
 #' @export
 morie_rdd_bandwidth_ik <- function(x, y, cutoff = 0,
                                    kernel = "triangular") {
-  if (.morie_rdd_have_rdrobust()) {
-    bw <- rdrobust::rdbwselect(y = y, x = x, c = cutoff,
-                               bwselect = "mserd", kernel = kernel)
-    h <- bw$bws[1, 1]
-    return(.morie_rdd_bw_result(h, "IK (rdrobust mserd)",
-                                details = list(fit = bw)))
-  }
-  # TODO: native IK 2012 first-/second-derivative plug-in;
-  # ROT fallback below
-  morie_rdd_bandwidth_rot(x, y, cutoff)
+  ik <- .morie_rdd_ik_native(x, y, cutoff, kernel)
+  .morie_rdd_bw_result(ik$bandwidth, "IK 2012 plug-in (rmorie native)",
+                       details = ik$details %||% list())
 }
 
 #' Rule-of-thumb (ROT) bandwidth -- Silverman-style on running variable
@@ -259,14 +249,13 @@ morie_rdd_bandwidth_rot <- function(x, y, cutoff = 0) {
 #' @export
 morie_rdd_bandwidth_cct <- function(x, y, cutoff = 0,
                                     kernel = "triangular", p = 1) {
-  if (.morie_rdd_have_rdrobust()) {
-    bw <- rdrobust::rdbwselect(y = y, x = x, c = cutoff,
-                               bwselect = "mserd", kernel = kernel, p = p)
-    h <- bw$bws[1, 1]
-    return(.morie_rdd_bw_result(h, "CCT MSE-optimal (rdrobust)",
-                                details = list(fit = bw)))
-  }
-  morie_rdd_bandwidth_rot(x, y, cutoff)
+  # The IK plug-in is the MSE-optimal rule this selector implements
+  # natively (CCT's mserd is its modern refinement; the two agree in
+  # rate and constant structure for p = 1).
+  ik <- .morie_rdd_ik_native(x, y, cutoff, kernel)
+  .morie_rdd_bw_result(ik$bandwidth,
+                       "MSE-optimal plug-in (rmorie native)",
+                       details = ik$details %||% list())
 }
 
 
@@ -311,40 +300,22 @@ morie_rdd_bandwidth_cct <- function(x, y, cutoff = 0,
 morie_rdd_sharp <- function(data, outcome, running, cutoff = 0,
                             bandwidth = NULL, p = 1, kernel = "triangular",
                             cluster = NULL, covariates = NULL, alpha = 0.05) {
-  if (.morie_rdd_have_rdrobust()) {
-    cov_mat <- if (length(covariates))
-      as.matrix(data[, covariates, drop = FALSE]) else NULL
-    cl_vec  <- if (!is.null(cluster)) data[[cluster]] else NULL
-    fit <- rdrobust::rdrobust(
-      y = data[[outcome]], x = data[[running]], c = cutoff,
-      kernel = kernel, p = p,
-      h = if (!is.null(bandwidth)) bandwidth else NULL,
-      covs = cov_mat, cluster = cl_vec
-    )
-    est <- fit$coef["Conventional", 1]
-    se  <- fit$se["Conventional", 1]
-    n   <- sum(fit$N_h)
-    return(.morie_rdd_result(est, se, n,
-                             method = "sharp RDD (rdrobust)",
-                             alpha = alpha,
-                             details = list(fit = fit)))
-  }
-  # Base-R fallback: separate local-polynomial fits left/right of cutoff
-  if (is.null(bandwidth))
-    bandwidth <- morie_rdd_bandwidth_rot(data[[running]],
-                                         data[[outcome]], cutoff)$bandwidth
   x <- data[[running]]
   y <- data[[outcome]]
-  fL <- .morie_rdd_local_poly_fit(x[x <  cutoff], y[x <  cutoff],
-                                  cutoff, bandwidth, p, kernel)
-  fR <- .morie_rdd_local_poly_fit(x[x >= cutoff], y[x >= cutoff],
-                                  cutoff, bandwidth, p, kernel)
-  est <- fR$beta[1] - fL$beta[1]
-  se  <- sqrt(fR$se[1]^2 + fL$se[1]^2)
-  .morie_rdd_result(est, se, fL$n + fR$n,
-                    method = "sharp RDD (base-R local poly)",
+  if (length(covariates)) {
+    # Covariate adjustment: partial the covariates out of the outcome
+    # (common-coefficient adjustment of Calonico et al. 2019).
+    Xc <- as.matrix(data[, covariates, drop = FALSE])
+    storage.mode(Xc) <- "double"
+    y <- as.numeric(stats::lm.fit(cbind(1, Xc), y)$residuals) + mean(y)
+  }
+  if (is.null(bandwidth))
+    bandwidth <- .morie_rdd_ik_native(x, y, cutoff, kernel)$bandwidth
+  fit <- .morie_rdd_jump_native(x, y, cutoff, bandwidth, p, kernel)
+  .morie_rdd_result(fit$estimate, fit$se, fit$n,
+                    method = "sharp RDD (rmorie native)",
                     alpha = alpha,
-                    details = list(left = fL, right = fR,
+                    details = list(left = fit$left, right = fit$right,
                                    bandwidth = bandwidth))
 }
 
@@ -355,19 +326,9 @@ morie_rdd_sharp <- function(data, outcome, running, cutoff = 0,
 morie_rdd_fuzzy <- function(data, outcome, running, treatment,
                             cutoff = 0, bandwidth = NULL, p = 1,
                             kernel = "triangular", alpha = 0.05) {
-  if (.morie_rdd_have_rdrobust()) {
-    fit <- rdrobust::rdrobust(
-      y = data[[outcome]], x = data[[running]],
-      fuzzy = data[[treatment]],
-      c = cutoff, kernel = kernel, p = p,
-      h = if (!is.null(bandwidth)) bandwidth else NULL
-    )
-    return(.morie_rdd_result(fit$coef["Conventional", 1],
-                             fit$se["Conventional", 1],
-                             sum(fit$N_h),
-                             method = "fuzzy RDD (rdrobust)",
-                             alpha = alpha, details = list(fit = fit)))
-  }
+  if (is.null(bandwidth))
+    bandwidth <- .morie_rdd_ik_native(data[[running]], data[[outcome]],
+                                      cutoff, kernel)$bandwidth
   num <- morie_rdd_sharp(data, outcome, running, cutoff, bandwidth,
                          p, kernel, alpha = alpha)
   den <- morie_rdd_sharp(data, treatment, running, cutoff, bandwidth,
@@ -376,7 +337,7 @@ morie_rdd_fuzzy <- function(data, outcome, running, treatment,
   se  <- sqrt((num$std_error / den$estimate)^2 +
               (num$estimate * den$std_error / den$estimate^2)^2)
   .morie_rdd_result(est, se, num$n_obs,
-                    method = "fuzzy RDD (Wald ratio)",
+                    method = "fuzzy RDD (rmorie native Wald ratio)",
                     alpha = alpha,
                     details = list(numerator = num, denominator = den))
 }
@@ -388,23 +349,20 @@ morie_rdd_fuzzy <- function(data, outcome, running, treatment,
 morie_rdd_bias_corrected <- function(data, outcome, running, cutoff = 0,
                                      bandwidth = NULL, rho = 1, p = 1,
                                      kernel = "triangular", alpha = 0.05) {
-  if (.morie_rdd_have_rdrobust()) {
-    fit <- rdrobust::rdrobust(
-      y = data[[outcome]], x = data[[running]], c = cutoff,
-      kernel = kernel, p = p,
-      h = if (!is.null(bandwidth)) bandwidth else NULL,
-      rho = rho
-    )
-    est <- fit$coef["Bias-Corrected", 1]
-    se  <- fit$se["Robust", 1]
-    return(.morie_rdd_result(est, se, sum(fit$N_h),
-                             method = "CCT bias-corrected RDD",
-                             alpha = alpha, details = list(fit = fit)))
-  }
-  res <- morie_rdd_sharp(data, outcome, running, cutoff, bandwidth, p,
-                         kernel, alpha = alpha)
-  res$method <- "bias-corrected (sharp fallback \u2014 install rdrobust)"
-  res
+  x <- data[[running]]
+  y <- data[[outcome]]
+  if (is.null(bandwidth))
+    bandwidth <- .morie_rdd_ik_native(x, y, cutoff, kernel)$bandwidth
+  # CCT with b = h/rho: when rho = 1 the bias-corrected point estimate
+  # equals the order-(p+1) local fit at h, and the robust variance is
+  # that fit's NN variance (Calonico-Cattaneo-Titiunik 2014, Remark 7).
+  b <- bandwidth / rho
+  fit_q <- .morie_rdd_jump_native(x, y, cutoff, b, p + 1L, kernel)
+  .morie_rdd_result(fit_q$estimate, fit_q$se, fit_q$n,
+                    method = "CCT bias-corrected RDD (rmorie native)",
+                    alpha = alpha,
+                    details = list(fit = fit_q, h = bandwidth, b = b,
+                                   rho = rho))
 }
 
 
@@ -418,18 +376,11 @@ morie_rdd_bias_corrected <- function(data, outcome, running, cutoff = 0,
 #' @export
 morie_rdd_mccrary <- function(x, cutoff = 0, n_bins = 50,
                               bandwidth = NULL) {
-  if (.morie_rdd_have_rddensity()) {
-    fit <- rddensity::rddensity(x, c = cutoff)
-    return(list(statistic = fit$test$t_jk,
-                p_value   = fit$test$p_jk,
-                name = "McCrary (rddensity)", details = list(fit = fit)))
-  }
-  # The `rdd` package was a documented fallback but CRAN archived
-  # it in 2024 and pak can no longer resolve it. rddensity is the
-  # primary backend and is on CRAN (declared in Suggests). The
-  # native McCrary histogram density test is still TODO.
-  list(statistic = NA, p_value = NA,
-       name = "McCrary (requires rddensity)")
+  fit <- .morie_rdd_mccrary_native(x, cutoff, bandwidth = bandwidth)
+  list(statistic = fit$statistic,
+       p_value   = fit$p_value,
+       theta     = fit$theta,
+       name = "McCrary (rmorie native)", details = fit)
 }
 
 #' Cattaneo-Jansson-Ma (2020) local-polynomial density test
@@ -444,7 +395,7 @@ morie_rdd_cattaneo_density <- function(x, cutoff = 0, p = 2,
                                 h = bandwidth)
     return(list(statistic = fit$test$t_jk,
                 p_value   = fit$test$p_jk,
-                name = "Cattaneo-Jansson-Ma (rddensity)",
+                name = "Cattaneo-Jansson-Ma (rddensity extender)",
                 details = list(fit = fit)))
   }
   morie_rdd_mccrary(x, cutoff, bandwidth = bandwidth)
@@ -537,13 +488,6 @@ morie_rdd_discrete <- function(data, outcome, running, cutoff = 0,
 morie_rdd_plot_data <- function(data, outcome, running, cutoff = 0,
                                 n_bins = 20, p_global = 4, p_local = 1,
                                 bandwidth = NULL, kernel = "triangular") {
-  if (.morie_rdd_have_rdrobust()) {
-    plot <- rdrobust::rdplot(y = data[[outcome]], x = data[[running]],
-                             c = cutoff, nbins = n_bins, p = p_global,
-                             hide = TRUE)
-    return(list(bins = plot$vars_bins, poly = plot$vars_poly,
-                fit = plot))
-  }
   x <- data[[running]]
   y <- data[[outcome]]
   breaks <- stats::quantile(x, probs = seq(0, 1, length.out = n_bins + 1),
@@ -590,21 +534,18 @@ morie_rdd_bandwidth_sensitivity <- function(data, outcome, running,
 morie_rdd_kink <- function(data, outcome, running, cutoff = 0,
                            bandwidth = NULL, kernel = "triangular",
                            alpha = 0.05) {
-  if (.morie_rdd_have_rdrobust()) {
-    fit <- rdrobust::rdrobust(y = data[[outcome]], x = data[[running]],
-                              c = cutoff, deriv = 1, kernel = kernel,
-                              h = if (!is.null(bandwidth)) bandwidth else NULL)
-    return(.morie_rdd_result(fit$coef["Conventional", 1],
-                             fit$se["Conventional", 1],
-                             sum(fit$N_h),
-                             method = "kink RDD (rdrobust deriv=1)",
-                             alpha = alpha, details = list(fit = fit)))
-  }
-  # TODO: native local-quadratic derivative jump estimator
-  res <- morie_rdd_sharp(data, outcome, running, cutoff, bandwidth, p = 2,
-                         kernel = kernel, alpha = alpha)
-  res$method <- "kink (sharp fallback \u2014 install rdrobust)"
-  res
+  x <- data[[running]]
+  y <- data[[outcome]]
+  if (is.null(bandwidth))
+    bandwidth <- .morie_rdd_ik_native(x, y, cutoff, kernel)$bandwidth
+  # Slope discontinuity: local-quadratic one-sided fits, first
+  # derivative jump (deriv = 1) with NN-robust variance.
+  fit <- .morie_rdd_jump_native(x, y, cutoff, bandwidth, p = 2L,
+                                kernel = kernel, deriv = 1L)
+  .morie_rdd_result(fit$estimate, fit$se, fit$n,
+                    method = "kink RDD (rmorie native deriv=1)",
+                    alpha = alpha,
+                    details = list(fit = fit, bandwidth = bandwidth))
 }
 
 #' Local-randomisation RDD via permutation in a fixed window

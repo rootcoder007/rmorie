@@ -51,9 +51,9 @@ morie_det_rng <- function(name, seed) {
 #' @keywords internal
 #' @noRd
 .morie_sha256_hex <- function(s) {
-  # digest is an Imports dependency (pure R + tiny C, no system libs):
-  # deterministic RNG seeding must never depend on optional packages.
-  digest::digest(s, algo = "sha256", serialize = FALSE)
+  # Module 22: native C++ SHA-256 (src/morie_crypto_hash.cpp) --
+  # deterministic RNG seeding depends on nothing outside the package.
+  .rmorie_sha256_hex_impl(s)
 }
 
 #' SHA-256 hex digest of "name:seed" (for Py<->R cross-check)

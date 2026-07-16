@@ -39,7 +39,3 @@ Regresses the outcome on group-by-time interactions in the pre-period
 and reports both per-period coefficients and a joint Wald (chi-square)
 test that they are all zero.
 }
-\details{
-For the Callaway-Sant'Anna pre-test on the group-time ATTs prefer
-\code{did::conditional_did_pretest}.
-}

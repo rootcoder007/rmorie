@@ -23,12 +23,9 @@
 #' }
 #' }
 rgqrs <- function(x, fs = 360.0) {
-  if (!requireNamespace("signal", quietly = TRUE)) {
-    stop("Package 'signal' is required for rgqrs().")
-  }
   nyq <- 0.5 * fs
-  bf <- signal::butter(3L, c(5, min(15, nyq * 0.95)) / nyq, type = "pass")
-  bp <- as.numeric(signal::filtfilt(bf, x))
+  bf <- .morie_dsp_butter(3L, c(5, min(15, nyq * 0.95)) / nyq, type = "pass")
+  bp <- as.numeric(.morie_dsp_filtfilt(bf$b, bf$a, x))
   der <- numeric(length(bp))
   for (n in 5:length(bp)) {
     der[n] <- (1 / 8) * (2 * bp[n] + bp[n - 1] - bp[n - 3] - 2 * bp[n - 4])

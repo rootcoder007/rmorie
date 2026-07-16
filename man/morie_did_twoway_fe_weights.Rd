@@ -24,40 +24,33 @@ morie_did_twoway_fe_weights(
 
 \item{treatment}{Name of the binary or continuous treatment column.}
 
-\item{outcome}{Optional outcome column.  When supplied,
-\pkg{TwoWayFEWeights} computes the weights AND the implied TWFE
-coefficient; when \code{NULL}, only the weights are returned
-(faster, dimension-free).}
+\item{outcome}{Optional outcome column; the feTR weights do not
+depend on the outcome values, so it may be \code{NULL}.}
 
-\item{type}{Weight type passed through to
-\code{TwoWayFEWeights::twowayfeweights}: \code{"feTR"} (default,
-feasible \code{TR} weights), \code{"feS"}, \code{"fdTR"}, or
-\code{"fdS"}.  See the \pkg{TwoWayFEWeights} documentation.}
+\item{type}{Weight type; only \code{"feTR"} (feasible TR weights,
+the default and the canonical diagnostic) is supported natively.}
 
-\item{...}{Additional arguments forwarded to
-\code{TwoWayFEWeights::twowayfeweights}.}
+\item{...}{Ignored; retained for back-compat.}
 }
 \value{
 An S3 list of class \code{morie_did_twfe_diagnostics} with
 elements \code{n_negative_weights}, \code{sum_weights},
 \code{sum_negative_weights}, \code{share_negative_weights},
-\code{method}, and \code{raw} (the full
-\code{twowayfeweights} object).
+\code{method}, and \code{raw} (a data frame with one row per
+(group, time) cell and its weight).
 }
 \description{
-Thin interface to \code{TwoWayFEWeights::twowayfeweights}: returns the
-decomposition of the two-way fixed-effects DiD estimand into the
-weighted average of the \eqn{N \times T}{N x T} unit-time ATEs.  Use
+Native feTR weight diagnostic: the decomposition of the two-way
+fixed-effects DiD estimand into the weighted average of the
+\eqn{N \times T}{N x T} unit-time ATEs. Each treated cell's weight
+is proportional to its residual from regressing the treatment on
+unit and time fixed effects, normalized over treated cells.  Use
 this to quantify how many of the implicit comparisons receive
 negative weight, which is the canonical diagnostic for whether a
 TWFE specification can be interpreted as a convex combination of
-treatment effects.
-}
-\details{
-Wrapper-as-extender: \code{morie_did_panel_fe} already estimates the
-TWFE coefficient; this function exposes the diagnostic side of the
-same backend so that downstream MRM analyses can flag heterogeneous-
-treatment-effects bias without leaving the rmorie API.
+treatment effects. Reproduces
+\code{TwoWayFEWeights::twowayfeweights(type = "feTR")} weights to
+machine precision (see \code{tests/cross/}).
 }
 \references{
 de Chaisemartin, C., & D'Haultfoeuille, X. (2020).

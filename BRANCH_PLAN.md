@@ -27,15 +27,15 @@ and the `morie_match_result` / result-object shapes do not change.
 | 11 | morie_estimate_dr_forest (native R-learner forest) | grf | DONE (OpenMP kernel: 1.5-2.9x FASTER than grf incl. 100k) |
 | 12 | meta-learners T/S/X/DR (morie_estimate_cate) | — (EconML is Python-only) | DONE (all four native; DR validated against grf CATE) |
 | 13 | morie_dag / identify / estimate / refute + morie_mrm_dags | DoWhy (Python) | DONE (Bayes-Ball d-sep; adjustment sets dagitty-validated) |
-| 14 | morie_did (+ staggered CS2021) / event study | did/DIDmultiplegt | planned |
-| 15 | morie_synth_control | Synth | planned |
-| 16 | morie_rdd (IK bandwidth) | rdrobust/rdd | planned |
-| 17 | morie_its / morie_iv_2sls | AER/ivreg | planned |
-| 18 | psych: 2PL EM, GRM, alpha, omega, EAP | psych/lavaan | planned |
-| 19 | spatial: variogram MLE, kriging, GWR | gstat/spdep | planned |
-| 20 | signal: PSD/coherence, Butterworth+filtfilt, MODWT | signal/wavelets | planned |
-| 21 | Hawkes uni/multivariate MLE | hawkes/emhawkes | planned |
-| 22 | crypto: sha256/512, hmac, pbkdf2, csprng | digest/openssl | planned |
+| 14 | DiD family: TWFE/event-study/CS2021/DR/Bacon/DID-M/feTR (+ morie_did_honest_sensitivity) | fixest/did/DRDID/bacondecomp/DIDmultiplegt/TwoWayFEWeights/HonestDiD | DONE (all engines machine-precision vs references; se_convention knob) |
+| 15 | morie_synth_control + native SDID | Synth/coresynth | DONE (simplex-QP SCM w/ V-optimization + placebo inference; Arkhangelsky SDID w/ placebo/jackknife/bootstrap) |
+| 16 | morie_rdd family (native IK 2012, NN(3) local poly, CCT bc, kink, McCrary) | rdrobust/rdd | DONE (point estimates match rdrobust to 1e-8 at fixed h; rddensity kept as CJM extender only) |
+| 17 | IV family (k-class 2SLS/LIML, two-step+CUE GMM, Hansen J) + NEW morie_its | AER/ivreg/gmm/plm | DONE (2SLS==ivreg+sandwich HC1 to 1e-8; ITS w/ native Newey-West) |
+| 18 | IRT: morie_irt_2pl/grm/eap + native omega/KMO/parallel | psych | DONE (KMO==psych to 1e-8; 2PL vs mirt within 0.1; alpha was already native) |
+| 19 | geostat: morie_spatial_variogram/_fit(ML)/krige; Moran fully native | gstat/spdep | DONE (kriging==gstat to 1e-6; Cliff-Ord variance ROOT FIX now ==spdep; GWR already native) |
+| 20 | DSP: butter/filtfilt/fir1/sgolay/hilbert/peaks/Welch PSD-CSD-coherence/DWT | signal/wavelets | DONE (butter coefs==signal to 1e-8; DWT perfect reconstruction, haar/d4/la8) |
+| 21 | Hawkes MLE (all kernels/baselines) | hawkes/emhawkes | DONE (native path was complete; external exp fast path removed; loglik==hawkes pkg) |
+| 22 | crypto: standalone C++ SHA-256/HMAC/PBKDF2 (+ PQC lattice KEM/DSA already native via liboqs) | digest/openssl | DONE (NIST/RFC vectors; digest dropped from Imports; SHA-512 deferred YAGNI) |
 | 23 | parsers: XML(SAX)/HTML/JSON/parquet-min | xml2/jsonlite/arrow | planned |
 | 24 | MRM: load/reconcile/estimate/report | — (flagship) | planned |
 
@@ -425,3 +425,101 @@ sizes; estimation cost = the module-8/10 engines already benchmarked.
 estimate, refute — in ~250 lines of base R wired straight into the
 native estimator stack: no Python, no V8, and the refutation step
 reuses the same estimators it audits.
+
+
+## Modules 14-22 — the quasi-experimental / psychometrics / spatial / signal / crypto batch (2026-07-15/16)
+
+Written and validated as ONE batch per Vee's directive ("write all of the
+modules together and test it together in one go").
+
+**Module 14 — DiD family (R/did_native.R).** TWFE core = alternating-
+projection demeaning + CR1 cluster vcov with fixest's exact default
+small-sample correction (fixef.K = "nested"); coef AND se reproduce
+fixest::feols to 1e-10 (incl. covariates + non-unit clusters). Event
+study = same engine on relative-time dummies (== feols + i()).
+Callaway-Sant'Anna ATT(g,t): Sant'Anna-Zhao dr/reg/ipw panel engines
+with influence functions matching DRDID element-wise to 1e-8 (verbatim
+IF structure incl. the locally efficient drdid_rc), analytic SEs equal
+did::att_gt, Mammen multiplier bootstrap mirrors did::mboot.
+Goodman-Bacon via the FWL variance-weight identity (exact equality with
+bacondecomp AND the decomposition identity sum(w*est) == TWFE coef).
+DID-M native (upstream DIDmultiplegt mode="old" returns NaN on standard
+designs — pinned by hand-computed estimands instead). feTR weights
+equal TwoWayFEWeights per cell to 1e-10. NEW morie_did_honest_sensitivity
+(conservative Rambachan-Roth relative magnitudes on event-study output).
+se_convention = "reference"/"bessel" knob per Vee. Fixed latent bug:
+event-study wrapper treated g=0 as a finite onset. 7 Suggests dropped.
+
+**Module 15 — synthetic control (R/synth_native.R).** morie_synth_control:
+Abadie-Diamond-Hainmueller SCM; donor weights by FISTA on the simplex
+(exact Held-Wolfe-Crowder projection), nested V optimization, in-space
+placebo RMSPE-ratio inference; print method. Native SDID (Arkhangelsky
+2021 Algorithm 1: zeta-regularized unit weights, simplex time weights)
+with placebo/jackknife/bootstrap variance; both did.R SDID wrappers
+rewired. coresynth dropped.
+
+**Module 16 — RDD (R/rdd_native.R).** IK (2012) three-step plug-in
+bandwidth (note: on symmetric-curvature DGPs IK's m2+−m2− bias term
+makes its h legitimately much larger than CCT mserd). Local-polynomial
+estimator with NN(3) heteroskedastic variance == rdrobust conventional
+point estimates to 1e-8 at fixed h; CCT bias correction via the
+order-(p+1) refit (exact at rho = 1); native kink (deriv = 1); native
+McCrary log-density test. rdrobust dropped; rddensity retained ONLY for
+the Cattaneo-Jansson-Ma extender.
+
+**Module 17 — IV + ITS (R/iv_native.R).** k-class engine (2SLS kappa=1,
+LIML by the eigenvalue kappa) with HC1 projected-score sandwich ==
+ivreg + sandwich::vcovHC to 1e-8; two-step efficient GMM + CUE (BFGS)
++ Hansen J; Sargan/Hausman/panel-IV fallbacks promoted to primary;
+morie_estimate_late covariate path rewired. NEW morie_its: segmented
+regression with native Newey-West (Bartlett) HAC, level+slope changes,
+counterfactual path. AER/ivreg/gmm/plm dropped.
+
+**Module 18 — IRT + psychometrics (R/irt_native.R).** morie_irt_2pl
+(Bock-Aitkin MML EM, quadrature E-step + per-item Newton M-step),
+morie_irt_grm (Samejima, order-preserving optim M-step),
+morie_irt_eap. psymet omega/KMO/parallel now native-primary (KMO ==
+psych to 1e-8). psych dropped.
+
+**Module 19 — geostatistics (R/geostat_native.R).** Matheron empirical
+variogram (bin-identical to gstat), Gaussian-ML covariance fit
+(exponential/spherical/gaussian), ordinary kriging == gstat::krige to
+1e-6 (pred + var). ROOT FIX: .tps_cliff_ord_variance used a wrong
+combining formula (variance off by ~n); now the Cliff-Ord normality
+variance, equal to spdep::moran.test(randomisation = FALSE). GWR was
+already native (gwreg.R). gstat/sp/spdep dropped (gstat only via the
+two documented extenders).
+
+**Module 20 — DSP (R/dsp_native.R).** Butterworth low/high/band/stop by
+bilinear transform (coefficients == signal::butter to 1e-8), DF2T
+filter, odd-extension filtfilt, windowed-sinc fir1 + hamming/hann/
+blackman, Savitzky-Golay (exact on cubics incl. edges), FFT hilbert,
+min-distance peak finder, Welch PSD/CSD/coherence, and a periodic
+pyramid DWT/iDWT (haar/d4/la8; perfect reconstruction + Parseval).
+Nine files rewired; signal/wavelets dropped.
+
+**Module 21 — Hawkes.** The base-R + C++ path (morie_hawkes.cpp pair
+excitation kernel) was already the complete estimator for every
+kernel/baseline pair; removed the redundant hawkes/emhawkes exponential
+fast path. Native negative log-likelihood == hawkes::likelihoodHawkes
+on the exponential/constant case. hawkes/emhawkes dropped.
+
+**Module 22 — crypto hashes (src/morie_crypto_hash.cpp).** Standalone
+FIPS 180-4 SHA-256, RFC 2104 HMAC, RFC 8018 PBKDF2 — no libsodium
+gate, pinned by NIST/RFC 4231/RFC 7914 vectors. Deterministic-RNG
+seeding, the reproducibility manifest, and the hybrid-encryption HKDF
+now use them; digest REMOVED FROM IMPORTS, openssl from Suggests. The
+post-quantum lattice layer (ML-KEM-768 / ML-DSA-65 via liboqs) was
+already native in morie_crypto_pqc.cpp. SHA-512 deferred (no caller).
+
+**Module 22 addendum — full three-family PQC coverage (Vee, after the
+Red Hat PQC series).** New src/morie_crypto_pqc_extra.cpp +
+R/crypto_pqc_extra.R: hash-based SLH-DSA-SHA2-128s (FIPS 205,
+liboqs-gated with old/new algorithm-name fallbacks) and code-based
+HQC-128 (NIST 2025 round-4 KEM selection), joining the existing
+lattice ML-KEM-768/ML-DSA-65. Plus a dependency-free native Lamport
+one-time signature on the module-22 SHA-256 core (hard one-time
+enforcement; SLH-DSA pointed to for many-time use) and
+morie_crypto_pqc_inventory() reporting family/standard/availability.
+The hybrid recommendation (PQC + classical) is realized by
+crypto_hybrid.R: ML-KEM encapsulation feeding native HKDF-SHA256.

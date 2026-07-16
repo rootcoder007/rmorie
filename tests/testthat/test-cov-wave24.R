@@ -25,8 +25,7 @@ test_that("morie_estimate_att/atc/aipw accept a supplied propensity column", {
 })
 
 test_that("morie_estimate_late runs the covariate-adjusted 2SLS path", {
-  testthat::skip_if_not_installed("AER")
-  testthat::skip_if_not_installed("ivreg")
+  # Module 17: the covariate path is the native k-class 2SLS engine.
   set.seed(12)
   n <- 400L
   z <- rbinom(n, 1, 0.5)
@@ -36,15 +35,7 @@ test_that("morie_estimate_late runs the covariate-adjusted 2SLS path", {
   df <- data.frame(t = t, y = y, z = z, x = x)
   iv <- morie_estimate_late(df, "t", "y", "z", covariates = "x")
   expect_true(is.finite(iv$late))
-  # force the manual 2SLS fallback by hiding ivreg
-  testthat::local_mocked_bindings(
-    requireNamespace = function(package, ...) {
-      if (identical(package, "ivreg")) FALSE else TRUE
-    },
-    .package = "base"
-  )
-  man <- morie_estimate_late(df, "t", "y", "z", covariates = "x")
-  expect_true(is.finite(man$late))
+  expect_equal(iv$late, 0.8, tolerance = 0.35)
 })
 
 # ---- study_core.R ---------------------------------------------------------

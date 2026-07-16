@@ -197,18 +197,14 @@ morie_dsp_teager_energy <- function(x) {
 #' Hilbert envelope
 #'
 #' Analytic-signal magnitude via the Hilbert transform. Delegates to
-#' `signal::hilbert` when available.
+#' the native FFT construction (module 20).
 #'
 #' @param x Numeric vector.
 #' @return Numeric vector, length(x).
 #' @references Rangayyan & Krishnan (2015), Ch. 4, sec. 4.6.
 #' @export
 morie_dsp_hilbert_envelope <- function(x) {
-  if (requireNamespace("signal", quietly = TRUE) &&
-      exists("hilbert", where = asNamespace("signal"))) {
-    return(Mod(get("hilbert", envir = asNamespace("signal"))(x)))
-  }
-  # Pure-R fallback: build analytic signal in the FFT domain.
+  # Module 20: native analytic signal in the FFT domain.
   n <- length(x)
   X <- stats::fft(x)
   h <- numeric(n)
@@ -237,14 +233,11 @@ morie_dsp_hilbert_envelope <- function(x) {
 #'   Pan & Tompkins (1985).
 #' @export
 morie_dsp_pan_tompkins <- function(ecg, fs = 360) {
-  if (!requireNamespace("signal", quietly = TRUE)) {
-    stop("morie_dsp_pan_tompkins requires the 'signal' package")
-  }
   nyq <- fs / 2
   low <- 5 / nyq
   high <- min(15 / nyq, 0.99)
-  ba <- signal::butter(1, c(low, high), type = "pass")
-  filtered <- as.numeric(signal::filtfilt(ba$b, ba$a, ecg))
+  ba <- .morie_dsp_butter(1, c(low, high), type = "pass")
+  filtered <- as.numeric(.morie_dsp_filtfilt(ba$b, ba$a, ecg))
   diffs <- diff(filtered)
   squared <- diffs^2
   win <- max(1L, as.integer(0.15 * fs))
@@ -264,7 +257,7 @@ morie_dsp_pan_tompkins <- function(ecg, fs = 360) {
 #' Dicrotic-notch detection in pulse waves
 #'
 #' Finds prominent minima in the second derivative outside the
-#' systolic onset window. Requires `signal::findpeaks`.
+#' systolic onset window (native peak detector, module 20).
 #'
 #' @param pulse Numeric pulse vector.
 #' @param fs Sampling frequency (Hz). Default 125.
@@ -272,15 +265,11 @@ morie_dsp_pan_tompkins <- function(ecg, fs = 360) {
 #' @references Rangayyan & Krishnan (2015), Ch. 4, sec. 4.8.
 #' @export
 morie_dsp_dicrotic_notch <- function(pulse, fs = 125) {
-  if (!requireNamespace("signal", quietly = TRUE) ||
-      !exists("findpeaks", where = asNamespace("signal"))) {
-    stop("morie_dsp_dicrotic_notch requires signal::findpeaks")
-  }
+  # Module 20: native local-maxima detector with minimum spacing.
   d2 <- diff(pulse, differences = 2L)
-  pk <- get("findpeaks", envir = asNamespace("signal"))(-d2, MinPeakDistance = as.integer(0.1 * fs))
-  if (is.null(pk) || length(pk) == 0L) return(integer(0))
-  # signal::findpeaks returns a matrix with peak positions in column 2.
-  positions <- if (is.matrix(pk)) pk[, 2L] else pk
+  positions <- .morie_dsp_findpeaks(-d2,
+                                    min_distance = as.integer(0.1 * fs))
+  if (!length(positions)) return(integer(0))
   systolic_end <- as.integer(0.3 * fs)
   positions[positions > systolic_end]
 }
@@ -387,9 +376,8 @@ morie_dsp_coherence_spectrum <- function(x, y, fs = 1, nperseg = 256L) {
 
 #' Cross-spectral density (Welch)
 #'
-#' Hamming-windowed averaged CSD. Delegates to `signal::cpsd` if
-#' present; otherwise computed from the same FFT loop as the coherence
-#' fallback.
+#' Hamming-windowed averaged CSD (rmorie native FFT loop,
+#' module 20).
 #'
 #' @param x Numeric vector.
 #' @param y Numeric vector.

@@ -33,6 +33,6 @@ morie_iv_liml(
 A named list with elements \code{coefficients}, \code{std_errors}, \code{t_stats}, \code{p_values}, \code{ci_lower}, \code{ci_upper}, \code{variable_names}, \code{n_obs}, \code{method}, \code{details}.
 }
 \description{
-Solves the LIML eigenvalue problem; falls back to \code{ivreg::ivreg(...,
-method = "M")} if available.
+Solves the LIML eigenvalue problem natively (k-class with the
+minimum-eigenvalue kappa).
 }

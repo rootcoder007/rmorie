@@ -20,8 +20,8 @@ morie_did_chaisemartin_dhaultfoeuille(
 
 \item{outcome, treatment, unit, time}{Column names.}
 
-\item{n_bootstrap}{Bootstrap replications (forwarded as
-\code{brep}).}
+\item{n_bootstrap}{Cluster-bootstrap replications for the standard
+error (0 = point estimate only, SE is \code{NA}).}
 
 \item{seed}{RNG seed.}
 
@@ -31,10 +31,12 @@ morie_did_chaisemartin_dhaultfoeuille(
 A result list; see \code{\link{morie_did_2x2}}.
 }
 \description{
-Thin wrapper around \code{DIDmultiplegt::did_multiplegt}. Computes
-the instantaneous treatment effect for switchers using
-appropriate comparisons. Hard-errors if \pkg{DIDmultiplegt} is
-not installed.
+Native DID-M estimator: the instantaneous treatment effect for
+switchers. For each pair of consecutive periods, joiners (0 to 1)
+are compared with groups stable at 0 and leavers (1 to 0) with
+groups stable at 1, and the per-period DiDs are averaged with
+switcher-count weights. Standard errors come from a cluster (group)
+bootstrap.
 }
 \references{
 de Chaisemartin, C., & D'Haultfoeuille, X. (2020). Two-way

@@ -15,6 +15,6 @@ morie_psymet_omega(data, nf = 1)
 list with \code{total}, \code{hier}, \code{alpha}, \code{nf}, \code{expvar}.
 }
 \description{
-Delegates to \code{psych::omega()} when available; otherwise uses a single-factor
-principal-axis approximation.
+Native principal-axis approximation of McDonald's omega
+(total + hierarchical).
 }

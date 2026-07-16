@@ -20,8 +20,8 @@ it is used for the KNN graph. The 2-D kernel density estimator
 prefers \pkg{MASS}\code{::kde2d} when available, otherwise falls
 back to a Gaussian density evaluated at the observation points.
 If \pkg{spdep} is installed, callers can delegate the global
-Moran's I test to \code{spdep::moran.test} via the
-\code{use_spdep = TRUE} switch.
+Moran's I test natively (Cliff-Ord normal approximation,
+validated against spdep in tests/cross/).
 \subsection{Functions}{
 
 \itemize{

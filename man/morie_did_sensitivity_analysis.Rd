@@ -45,10 +45,10 @@ set under the bound
 (Rambachan & Roth, 2023, conservative version).
 }
 \details{
-For the full Rambachan-Roth fixed-length-confidence-interval (FLCI)
-procedure with event-time pre-trends prefer
-\code{HonestDiD::createSensitivityResults_relativeMagnitudes} on
-an event-study coefficient vector.
+For a relative-magnitudes bound anchored on observed event-study
+pre-trends (Rambachan & Roth's \eqn{\bar M}{M-bar}
+parameterization, conservative version) see
+\code{\link{morie_did_honest_sensitivity}}.
 }
 \references{
 Rambachan, A., & Roth, J. (2023). A more credible approach

@@ -24,8 +24,8 @@ morie_did_synthetic(
 
 \item{treated_units}{Optional explicit list of treated unit IDs.}
 
-\item{zeta}{Retained for back-compat; ignored (coresynth auto-selects
-the SDID regularisation).}
+\item{zeta}{Retained for back-compat; ignored (the engine derives
+the SDID regularisation from the data).}
 
 \item{n_bootstrap}{Bootstrap replications for the SE / CI.}
 
@@ -37,10 +37,12 @@ the SDID regularisation).}
 A result list; see \code{\link{morie_did_2x2}}.
 }
 \description{
-Wraps the \pkg{coresynth} SDID estimator via its unified Formula
-interface (\code{coresynth::scm_fit(method = "sdid")}) with bootstrap
-inference (\code{coresynth::sdid_inference}). \pkg{coresynth} is on
-CRAN (it replaces the earlier GitHub-only \pkg{synthdid} backend).
+Native synthetic difference-in-differences estimator (the
+Arkhangelsky et al. 2021 algorithm: ridge-regularized unit weights,
+simplex time weights, weighted DiD) with bootstrap inference. The
+engine lives in \code{R/synth_native.R}; see also
+\code{\link{morie_synth_control}} for the classic Abadie synthetic
+control with placebo inference.
 }
 \references{
 Arkhangelsky, D., et al. (2021). Synthetic

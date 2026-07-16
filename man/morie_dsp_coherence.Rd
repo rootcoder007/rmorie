@@ -19,8 +19,8 @@ morie_dsp_coherence(x, y, fs = 1, nperseg = 256L)
 List with \code{freqs} and \code{coh} (magnitude squared coherence).
 }
 \description{
-Delegates to \code{signal::coherence} when present; otherwise builds a
-Welch-style estimator from \code{morie_dsp_psd_welch} and a parallel CSD.
+Native Welch-style estimator built from windowed segment FFTs
+(module 20).
 }
 \references{
 Rangayyan & Krishnan (2015), Ch. 6, sec. 6.9.

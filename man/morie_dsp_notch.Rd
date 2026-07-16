@@ -19,7 +19,7 @@ morie_dsp_notch(x, freq, fs, q = 30)
 Filtered vector, length(x).
 }
 \description{
-Wraps \code{signal::butter} style IIR notch via the \code{signal} package's
+Native IIR notch (module 20); previously wrapped the signal package's
 \code{iirnotch} / \code{filtfilt}. Falls back to a stop with \code{NotYetPorted} if
 \code{signal} is unavailable.
 }

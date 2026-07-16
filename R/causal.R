@@ -18,8 +18,8 @@
 #'   doubly-robust (AIPW) averaging; honest random-forest nuisances.
 #' * \code{morie_estimate_g_computation()} -> \pkg{stdReg}
 #'   (\code{stdReg::stdGlm}) when installed, else inline G-formula.
-#' * \code{morie_estimate_late()} -> \pkg{AER} / \pkg{ivreg}
-#'   (\code{ivreg::ivreg}) when installed, else inline Wald / 2SLS.
+#' * \code{morie_estimate_late()} -> native Wald / 2SLS k-class
+#'   engine (module 17).
 #' * \code{morie_estimate_double_ml() / morie_estimate_irm()} ->
 #'   \pkg{DoubleML} when installed, else inline cross-fit ridge
 #'   (unchanged from prior release).
@@ -623,9 +623,8 @@ morie_estimate_cate <- function(data, treatment, outcome, covariates,
 #' (Imbens & Angrist, 1994):
 #' \deqn{LATE = \frac{Cov(Y, Z)}{Cov(T, Z)}}{LATE = (Cov(Y, Z))/(Cov(T, Z))}
 #'
-#' With covariates, the routine delegates to \code{ivreg::ivreg()}
-#' (\pkg{ivreg}) or \code{AER::ivreg()} when either package is
-#' installed; otherwise it falls back to a manual two-stage OLS.
+#' With covariates, the native 2SLS k-class engine is used
+#' (module 17; validated against ivreg in \code{tests/cross/}).
 #' Without covariates the closed-form Wald estimator and its
 #' delta-method SE are used.
 #'
@@ -679,43 +678,14 @@ morie_estimate_late <- function(data, treatment, outcome, instrument,
     var_num <- stats::var(z * (y - late * t)) / n
     se <- sqrt(var_num) / abs(den)
   } else {
-    # 2SLS via ivreg / AER if available
-    cov_str <- paste(covariates, collapse = " + ")
-    iv_formula_str <- sprintf(
-      "%s ~ %s + %s | %s + %s",
-      outcome, treatment, cov_str, instrument, cov_str
-    )
-    if (requireNamespace("ivreg", quietly = TRUE)) {
-      fit_iv <- ivreg::ivreg(
-        stats::as.formula(iv_formula_str),
-        data = data
-      )
-      late <- stats::coef(fit_iv)[treatment]
-      se <- sqrt(stats::vcov(fit_iv)[treatment, treatment])
-    } else if (requireNamespace("AER", quietly = TRUE)) {
-      fit_iv <- AER::ivreg(
-        stats::as.formula(iv_formula_str),
-        data = data
-      )
-      late <- stats::coef(fit_iv)[treatment]
-      se <- sqrt(stats::vcov(fit_iv)[treatment, treatment])
-    } else {
-      # Fallback: manual 2SLS
-      t_hat <- stats::fitted(fs_fit)
-      data2 <- data
-      data2[[paste0(treatment, "_hat")]] <- t_hat
-      rhs2 <- paste(c(paste0(treatment, "_hat"), covariates),
-                    collapse = " + ")
-      ss_fit <- stats::lm(
-        stats::as.formula(paste(outcome, "~", rhs2)),
-        data = data2
-      )
-      late <- stats::coef(ss_fit)[paste0(treatment, "_hat")]
-      se <- sqrt(stats::vcov(ss_fit)[
-        paste0(treatment, "_hat"),
-        paste0(treatment, "_hat")
-      ])
-    }
+    # Native 2SLS (k-class engine, module 17), homoskedastic SE to
+    # match the ivreg default this wrapper historically reported.
+    d <- .morie_iv_design(data, outcome, treatment, instrument,
+                          covariates)
+    fit_iv <- .morie_iv_kclass_native(d$y, d$X, d$Z, kappa = 1,
+                                      robust = FALSE)
+    late <- fit_iv$beta[[treatment]]
+    se <- fit_iv$se[[treatment]]
   }
 
   ci <- .wald_ci(late, se)

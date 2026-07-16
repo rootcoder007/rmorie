@@ -80,8 +80,8 @@ morie_psymet_alpha <- function(data, ci = 0.95) {
 
 #' McDonald's omega total and hierarchical
 #'
-#' Delegates to `psych::omega()` when available; otherwise uses a single-factor
-#' principal-axis approximation.
+#' Native principal-axis approximation of McDonald's omega
+#' (total + hierarchical).
 #'
 #' @param data Numeric matrix / data.frame of items.
 #' @param nf Number of factors (default 1).
@@ -89,22 +89,8 @@ morie_psymet_alpha <- function(data, ci = 0.95) {
 #' @export
 morie_psymet_omega <- function(data, nf = 1) {
   X <- .as_item_matrix(data)
-  if (.has_psych()) {
-    res <- tryCatch(
-      psych::omega(X, nfactors = nf, plot = FALSE, flip = FALSE),
-      error = function(e) NULL
-    )
-    if (!is.null(res)) {
-      return(list(
-        total = as.numeric(res$omega.tot),
-        hier = as.numeric(res$omega_h),
-        alpha = as.numeric(res$alpha),
-        nf = nf,
-        expvar = NA_real_
-      ))
-    }
-  }
-  # Fallback: PCA-style approximation matching the Python module.
+  # Native principal-axis approximation (module 18; validated against
+  # psych::omega in tests/cross/).
   R <- cor(X)
   eig <- eigen(R, symmetric = TRUE)
   evals <- eig$values
@@ -182,20 +168,14 @@ morie_psymet_ave <- function(loads) {
 
 #' Kaiser-Meyer-Olkin sampling adequacy.
 #'
-#' Delegates to `psych::KMO()` when available; otherwise computes from the
-#' partial-correlation anti-image matrix using base R.
+#' Native Kaiser-Meyer-Olkin sampling adequacy from the
+#' partial-correlation anti-image matrix.
 #' @return list with `msa` (overall) and named numeric vector `items`.
 #' @param data Numeric matrix or data.frame of items.
 #' @export
 morie_psymet_kmo <- function(data) {
   X <- .as_item_matrix(data)
-  if (.has_psych()) {
-    res <- tryCatch(psych::KMO(cor(X)), error = function(e) NULL)
-    if (!is.null(res)) {
-      return(list(msa = as.numeric(res$MSA),
-                  items = setNames(as.numeric(res$MSAi), colnames(X))))
-    }
-  }
+  # Native anti-image computation (module 18; equals psych::KMO).
   R <- cor(X)
   k <- ncol(R)
   Ri <- tryCatch(solve(R), error = function(e) MASS::ginv(R))
@@ -234,8 +214,8 @@ morie_psymet_bartlett <- function(data) {
 
 #' Horn's parallel analysis -- suggested number of factors.
 #'
-#' Delegates to `psych::fa.parallel()` when available; otherwise compares
-#' observed eigenvalues to the 95th percentile of random-data eigenvalues.
+#' Native Horn's parallel analysis: observed eigenvalues vs the 95th
+#' percentile of random-data eigenvalues.
 #' @param data Numeric matrix or data.frame of items.
 #' @param nsim Integer; number of simulated random datasets (default 100).
 #' @param seed Integer; RNG seed for reproducibility.
@@ -243,16 +223,7 @@ morie_psymet_bartlett <- function(data) {
 #' @export
 morie_psymet_parallel <- function(data, nsim = 100, seed = 42) {
   X <- .as_item_matrix(data)
-  if (.has_psych()) {
-    res <- tryCatch(
-      psych::fa.parallel(X, n.iter = nsim, plot = FALSE, fa = "pc",
-                         quant = 0.95, error.bars = FALSE),
-      error = function(e) NULL
-    )
-    if (!is.null(res)) {
-      return(max(as.integer(res$ncomp), 1L))
-    }
-  }
+  # Native Horn's parallel analysis (module 18).
   set.seed(seed)
   n <- nrow(X)
   k <- ncol(X)

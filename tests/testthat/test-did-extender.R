@@ -10,7 +10,6 @@
 # ---------------------------------------------------------------------------
 
 test_that("morie_did_twoway_fe_weights returns TWFE diagnostics shape", {
-  skip_if_not_installed("TwoWayFEWeights")
   df <- make_did_panel(n_units = 30L, n_periods = 6L, tau = 0.5,
                        seed = 11L)
   out <- tryCatch(
@@ -25,19 +24,16 @@ test_that("morie_did_twoway_fe_weights returns TWFE diagnostics shape", {
   expect_true(all(c("n_negative_weights", "sum_weights",
                     "sum_negative_weights", "share_negative_weights",
                     "method", "raw") %in% names(out)))
-  expect_true(grepl("TwoWayFEWeights", out$method))
+  expect_true(grepl("rmorie native", out$method))
 })
 
-test_that("morie_did_twoway_fe_weights errors when TwoWayFEWeights missing", {
-  # Only meaningful when the package is NOT installed; skip otherwise.
-  if (requireNamespace("TwoWayFEWeights", quietly = TRUE)) skip(
-    "TwoWayFEWeights is installed; cannot test the missing-package error path."
-  )
+test_that("morie_did_twoway_fe_weights rejects unsupported weight types", {
+  # Module 14: native feTR engine; other weight types are not offered.
   df <- make_did_panel(n_units = 10L, n_periods = 4L, seed = 12L)
   expect_error(
     morie_did_twoway_fe_weights(df, group = "unit", time = "time",
-                                treatment = "d", outcome = "y"),
-    regexp = "TwoWayFEWeights"
+                                treatment = "d", type = "fdTR"),
+    regexp = "feTR"
   )
 })
 
@@ -65,7 +61,7 @@ test_that("morie_did_synthdid_estimate returns synthdid result shape", {
                     "n_control", "n_pre", "n_post", "method", "raw")
                   %in% names(out)))
   expect_true(is.finite(out$att))
-  expect_true(grepl("coresynth", out$method))
+  expect_true(grepl("rmorie native", out$method))
 })
 
 test_that("morie_did_synthdid_estimate errors when coresynth missing", {

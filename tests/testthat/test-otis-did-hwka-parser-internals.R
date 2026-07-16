@@ -269,17 +269,9 @@ test_that(".tps_hwka_baseline_integral constant = exp(alpha[1]) * T", {
   expect_equal(out, 0.5 * 100, tolerance = 1e-10)
 })
 
-test_that(".tps_hwka_neg_loglik_external_exp returns numeric when hawkes is present", {
-  skip_if_not_installed("hawkes")
-  if (!requireNamespace("hawkes", quietly = TRUE)) {
-    skip("hawkes package not installed")
-  }
-  set.seed(7L)
-  t <- sort(stats::runif(30L, 0, 100))
-  # hawkes::likelihoodHawkes infers the horizon from max(history);
-  # pass T_ = max(t) so the delegation path is exercised.
-  out <- rmorie:::.tps_hwka_neg_loglik_external_exp(
-    theta = c(log(0.5), 0.3, 1.0),
-    t = t, T_ = max(t))
-  expect_true(is.numeric(out) && is.finite(out))
-})
+# Module 21: .tps_hwka_neg_loglik_external_exp was removed — the
+# native base-R/C++ path is the estimator for every kernel/baseline
+# combination (cross-validated against hawkes::likelihoodHawkes in
+# tests/cross/test-morie_vs_hawkes.R).
+
+

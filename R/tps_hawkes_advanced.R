@@ -229,20 +229,11 @@ NULL
 .tps_hwka_neg_loglik_general <- function(theta, t, T_,
                                           kernel_kind,
                                           baseline_kind) {
-  # Fast path: delegate to the hawkes / emhawkes R package only when
-  # the requested combination is (exponential, constant) and the
-  # package is available; otherwise fall back to base R. The branch
-  # below mirrors the Python tps_hawkes_jit fast-path predicate.
-  if (identical(kernel_kind, "exponential") &&
-      identical(baseline_kind, "constant") &&
-      (requireNamespace("hawkes", quietly = TRUE) ||
-       requireNamespace("emhawkes", quietly = TRUE))) {
-    val <- try(.tps_hwka_neg_loglik_external_exp(theta, t, T_),
-               silent = TRUE)
-    if (!inherits(val, "try-error") && is.finite(val)) return(val)
-    # Silent fallthrough to base R on any external-package failure.
-  }
-
+  # Module 21: the native base-R/C++ path below IS the estimator for
+  # every kernel/baseline combination (the former hawkes/emhawkes
+  # exponential fast path was removed; tests/cross validates the
+  # exponential-kernel log-likelihood against hawkes::likelihoodHawkes
+  # where installed).
   nb <- .tps_hwka_n_baseline_params(baseline_kind)
   nk <- .tps_hwka_n_kernel_params(kernel_kind)
   a   <- theta[seq_len(nb)]
@@ -282,43 +273,6 @@ NULL
   integral <- .tps_hwka_baseline_integral(T_, baseline_kind, a) +
               eta * sum(.tps_hwka_kernel_cdf(T_ - t, kernel_kind, psi))
   -(log_sum - integral)
-}
-
-# External-package fast path for the Markovian special case. Both
-# CRAN packages 'hawkes' (Carstensen) and 'emhawkes' (Lee & Seo)
-# expose a univariate log-likelihood under the exponential-kernel
-# constant-baseline parameterisation; both are gated via
-# requireNamespace and stubbed when neither is installed.
-#' Internal helper: Tps Hwka Neg Loglik External Exp
-#' @noRd
-.tps_hwka_neg_loglik_external_exp <- function(theta, t, T_) {
-  if (requireNamespace("hawkes", quietly = TRUE)) {
-    a0   <- theta[1]
-    eta  <- theta[2]
-    beta <- theta[3]
-    mu   <- exp(a0)
-    alpha <- eta * beta
-    # hawkes::likelihoodHawkes returns -log-likelihood by convention.
-    # Signature is (lambda0, alpha, beta, history) -- no `end` argument
-    # in the CRAN release; the horizon is implicitly max(history).
-    # Caller is responsible for ensuring T_ == max(t) when delegating;
-    # otherwise the in-tree base-R path (.tps_hwka_neg_loglik_general)
-    # should be used to honour an arbitrary T_.
-    val <- try(hawkes::likelihoodHawkes(lambda0 = mu,
-                                         alpha   = alpha,
-                                         beta    = beta,
-                                         history = t),
-               silent = TRUE)
-    if (!inherits(val, "try-error")) return(as.numeric(val))
-  }
-  if (requireNamespace("emhawkes", quietly = TRUE)) {
-    # emhawkes has a multivariate API; for the 1-D Markovian case the
-    # closed-form base-R implementation is faster than constructing
-    # the emhawkes specifications. Defer to the stub.
-    stop("NotYetPorted: emhawkes 1-D wrapper not implemented; ",
-         "base-R path is used instead.")
-  }
-  stop("NotYetPorted: no external Hawkes backend available")
 }
 
 

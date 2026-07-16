@@ -28,9 +28,8 @@ Uses a binary instrument \eqn{Z} to identify the LATE
 \deqn{LATE = \frac{Cov(Y, Z)}{Cov(T, Z)}}{LATE = (Cov(Y, Z))/(Cov(T, Z))}
 }
 \details{
-With covariates, the routine delegates to \code{ivreg::ivreg()}
-(\pkg{ivreg}) or \code{AER::ivreg()} when either package is
-installed; otherwise it falls back to a manual two-stage OLS.
+With covariates, the native 2SLS k-class engine is used
+(module 17; validated against ivreg in \code{tests/cross/}).
 Without covariates the closed-form Wald estimator and its
 delta-method SE are used.
 }

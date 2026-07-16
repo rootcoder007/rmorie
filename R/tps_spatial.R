@@ -65,8 +65,8 @@ NULL
 #' prefers \pkg{MASS}\code{::kde2d} when available, otherwise falls
 #' back to a Gaussian density evaluated at the observation points.
 #' If \pkg{spdep} is installed, callers can delegate the global
-#' Moran's I test to \code{spdep::moran.test} via the
-#' \code{use_spdep = TRUE} switch.
+#' Moran's I test natively (Cliff-Ord normal approximation,
+#' validated against spdep in tests/cross/).
 #'
 #' Functions
 #' ---------
@@ -151,13 +151,21 @@ NULL
 
 
 #' Internal helper: Tps Cliff Ord Variance
+#'
+#' Variance of Moran's I under normality (Cliff & Ord 1981):
+#' \deqn{Var(I) = \frac{n^2 S_1 - n S_2 + 3 S_0^2}{S_0^2 (n^2 - 1)}
+#'   - \frac{1}{(n-1)^2}.}
+#' Module 19 fix: the previous combining formula was off by a factor
+#' of order n; this form reproduces
+#' \code{spdep::moran.test(randomisation = FALSE)} exactly
+#' (tests/cross/test-morie_vs_spatial.R).
 #' @noRd
 .tps_cliff_ord_variance <- function(W, n, S0) {
   W_sym <- (W + t(W)) / 2
   S1 <- 2 * sum(W_sym^2)
   S2 <- sum((colSums(W) + rowSums(W))^2)
-  denom <- (n - 1) * (n + 1) * (n - 2) * S0^2 + 1e-300
-  (n * (n - 2) * S1 - 2 * n * S2 + 6 * S0^2) / denom
+  (n^2 * S1 - n * S2 + 3 * S0^2) / (S0^2 * (n^2 - 1) + 1e-300) -
+    1 / (n - 1)^2
 }
 
 
@@ -180,9 +188,8 @@ NULL
 #'   (default 5).
 #' @param lat_col,lon_col WGS84 column names (default
 #'   \code{"LAT_WGS84"} / \code{"LONG_WGS84"}).
-#' @param use_spdep If \code{TRUE} and \pkg{spdep} is installed,
-#'   delegate the test to \code{spdep::moran.test} (with a row-
-#'   standardised listw). Default \code{FALSE}.
+#' @param use_spdep Retained for back-compat; ignored (the native
+#'   Cliff-Ord computation is always used). Default \code{FALSE}.
 #' @return A named list with classes \code{morie_tps_spatial_result},
 #'   \code{morie_rich_result}, \code{list}. Numeric outputs include
 #'   \code{moran_I}, \code{expected_I}, \code{var_I}, \code{z_score},
@@ -259,25 +266,10 @@ morie_tps_morans_i_neighbourhood <- function(df,
   x <- as.numeric(counts)
   z <- x - mean(x)
 
-  if (use_spdep && requireNamespace("spdep", quietly = TRUE)) {
-    # delegate to spdep
-    lw <- spdep::mat2listw(W, style = "W", zero.policy = TRUE)
-    mt <- tryCatch(
-      spdep::moran.test(x, lw, zero.policy = TRUE),
-      error = function(e) NULL
-    )
-    if (!is.null(mt)) {
-      I_val <- as.numeric(mt$estimate["Moran I statistic"])
-      expected_I <- as.numeric(mt$estimate["Expectation"])
-      var_I <- as.numeric(mt$estimate["Variance"])
-      z_I <- as.numeric(mt$statistic)
-      p <- 2 * stats::pnorm(-abs(z_I))
-      backend <- "spdep::moran.test"
-    } else {
-      use_spdep <- FALSE
-    }
-  }
-  if (!isTRUE(use_spdep) || !requireNamespace("spdep", quietly = TRUE)) {
+  # Module 19: the Cliff-Ord normal approximation below IS the
+  # estimator (validated against spdep::moran.test in tests/cross/);
+  # use_spdep is retained in the signature for back-compat and ignored.
+  if (TRUE) {
     S0 <- sum(W)
     if (S0 == 0) {
       return(.tps_spatial_result(

@@ -14,7 +14,7 @@ Numeric vector, length(x).
 }
 \description{
 Analytic-signal magnitude via the Hilbert transform. Delegates to
-\code{signal::hilbert} when available.
+the native FFT construction (module 20).
 }
 \references{
 Rangayyan & Krishnan (2015), Ch. 4, sec. 4.6.

@@ -28,17 +28,8 @@
 #' }
 rgwav <- function(x, wavelet = "d8", level = NULL, mode = c("soft", "hard")) {
   mode <- match.arg(mode)
-  if (!requireNamespace("wavelets", quietly = TRUE)) {
-    warning("'wavelets' not available; using 5-tap MA fallback.")
-    k <- rep(1 / 5, 5)
-    y <- as.numeric(stats::filter(x, k, sides = 2))
-    y[is.na(y)] <- x[is.na(y)]
-    return(list(
-      signal = y, threshold = NA_real_, sigma = NA_real_,
-      wavelet = wavelet, level = 0L, mode = "MA-fallback"
-    ))
-  }
-  # Pad to next power of two (wavelets::dwt requires it)
+  # Module 20: native DWT engine (R/dsp_native.R).
+  # Pad to next power of two (the pyramid halves cleanly)
   N0 <- length(x)
   N <- 2^ceiling(log2(N0))
   xp <- c(x, rep(0, N - N0))
@@ -46,9 +37,9 @@ rgwav <- function(x, wavelet = "d8", level = NULL, mode = c("soft", "hard")) {
     level <- min(4L, as.integer(log2(N)) - 1L)
   }
   level <- as.integer(level)
-  fit <- wavelets::dwt(xp, filter = wavelet, n.levels = level)
+  fit <- .morie_dsp_dwt(xp, filter = wavelet, n_levels = level)
   # MAD on the finest detail coefficients (W[[1]])
-  d1 <- as.numeric(fit@W[[1]])
+  d1 <- as.numeric(fit$W[[1]])
   sigma <- stats::median(abs(d1)) / 0.6745
   thr <- sigma * sqrt(2 * log(N))
   thresh <- function(d, thr, mode) {
@@ -58,10 +49,10 @@ rgwav <- function(x, wavelet = "d8", level = NULL, mode = c("soft", "hard")) {
       d * (abs(d) > thr)
     }
   }
-  for (i in seq_along(fit@W)) {
-    fit@W[[i]][, 1] <- thresh(as.numeric(fit@W[[i]]), thr, mode)
+  for (i in seq_along(fit$W)) {
+    fit$W[[i]] <- thresh(as.numeric(fit$W[[i]]), thr, mode)
   }
-  y <- as.numeric(wavelets::idwt(fit))[seq_len(N0)]
+  y <- as.numeric(.morie_dsp_idwt(fit))[seq_len(N0)]
   list(
     signal = y, threshold = thr, sigma = sigma,
     wavelet = wavelet, level = level, mode = mode

@@ -15,7 +15,8 @@ morie_did_doubly_robust(
   cluster = NULL,
   n_bootstrap = 200L,
   seed = 42L,
-  alpha = 0.05
+  alpha = 0.05,
+  se_convention = "reference"
 )
 }
 \arguments{
@@ -30,34 +31,36 @@ any covariate columns.}
 
 \item{covariates}{Optional character vector of covariate column names.}
 
-\item{ps_model}{Unused; retained for back-compat. \pkg{DRDID} fits
-a logistic propensity-score model internally.}
+\item{ps_model}{Unused; retained for back-compat. A logistic
+propensity-score model is fitted internally.}
 
-\item{or_model}{Unused; retained for back-compat. \pkg{DRDID} fits
-a linear outcome model internally.}
+\item{or_model}{Unused; retained for back-compat. Linear outcome
+models are fitted internally.}
 
 \item{cluster}{Optional cluster ID column for CR1 standard errors.}
 
-\item{n_bootstrap}{Number of bootstrap replications (forwarded as
-\code{nboot}).}
+\item{n_bootstrap}{Number of multiplier-bootstrap replications for
+the standard error (0 = analytic influence-function SE).}
 
-\item{seed}{RNG seed (set before the call).}
+\item{seed}{RNG seed for the multiplier bootstrap.}
 
 \item{alpha}{Significance level for confidence intervals (default 0.05).}
+
+\item{se_convention}{For the analytic SE: \code{"reference"}
+(default) matches \code{DRDID::drdid_rc}'s population-sd
+convention exactly; \code{"bessel"} keeps Bessel's correction
+(\code{sd(IF)/sqrt(n)}). Asymptotically equivalent.}
 }
 \value{
 A result list; see \code{\link{morie_did_2x2}}.
 }
 \description{
-Thin wrapper around \code{DRDID::drdid_rc} for the 2x2
-repeated-cross-section setting. Combines an outcome regression
-model with an inverse-probability weighting model and is
-consistent if either model is correctly specified. Hard-errors if
-\pkg{DRDID} is not installed.
-}
-\details{
-For panel data (same units observed in both periods) prefer
-\code{DRDID::drdid_panel} directly.
+Native locally efficient doubly robust DiD estimator for the 2x2
+repeated-cross-section setting (the estimand of
+\code{DRDID::drdid_rc}, reproduced to machine precision incl. the
+influence function; see \code{tests/cross/}). Combines a logistic
+propensity-score model with linear outcome regressions and is
+consistent if either model is correctly specified.
 }
 \references{
 Sant'Anna, P. H. C., & Zhao, J. (2020). Doubly robust

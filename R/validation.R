@@ -881,8 +881,9 @@ create_reproducibility_manifest <- function(data, parameters = NULL,
   buf <- paste(utils::capture.output(utils::write.csv(data, row.names = FALSE)),
                collapse = "\
 ")
-  checksum <- if (requireNamespace("digest", quietly = TRUE))
-    digest::digest(buf, algo = "sha256") else NA_character_
+  # Module 22: native SHA-256 of the CSV text (previously digest's
+  # serialized-object hash; the manifest checksum is self-consistent).
+  checksum <- .rmorie_sha256_hex_impl(buf)
   pkgs <- c("base", "stats", "knitr", "Matrix", "MASS")
   versions <- vapply(pkgs, function(p) {
     tryCatch(as.character(utils::packageVersion(p)),

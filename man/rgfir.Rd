@@ -26,7 +26,7 @@ Named list \code{signal}, \code{taps}, \code{order}, \code{cutoff}, \code{fs}, \
 }
 \description{
 Designs a linear-phase windowed-sinc FIR lowpass filter and applies it
-zero-phase via \code{\link[signal:filtfilt]{signal::filtfilt()}} (or single-pass \code{\link[signal:filter]{signal::filter()}}
+zero-phase via the native filtfilt (or single-pass native filter
 when the signal is too short to allow forward-backward padding).
 }
 \details{
