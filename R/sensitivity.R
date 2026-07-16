@@ -545,11 +545,9 @@ specification_curve <- function(data, outcome, treatment,
           if (model_type == "ols")       stats::lm(fml,  data = sub)
           else if (model_type == "logistic")
             stats::glm(fml, data = sub, family = stats::binomial())
-          else if (model_type == "robust") {
-            if (requireNamespace("MASS", quietly = TRUE))
-              MASS::rlm(fml, data = sub)
-            else NULL
-          } else NULL
+          else if (model_type == "robust")
+            morie_rlm(fml, data = sub)
+          else NULL
         }, error = function(e) NULL)
         if (is.null(fit)) next
         cf <- tryCatch(summary(fit)$coefficients,

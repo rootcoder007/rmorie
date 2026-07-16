@@ -27,9 +27,9 @@
 #'
 #' Paper headlines: RR PwSMI = 11.6x (tract); 10.2x (precinct).
 #'
-#' This R port is a frequentist MLE approximation (via
-#' \code{stats::glm.nb} in MASS, falling back to a hand-rolled NB MLE
-#' on \code{stats::optim} if MASS is unavailable).  For paper-grade
+#' This R port is a frequentist MLE approximation (via the native
+#' \code{morie_glm_nb}, falling back to a hand-rolled NB MLE on
+#' \code{stats::optim} on error).  For paper-grade
 #' Bayesian credible intervals, fit in \pkg{brms} / \pkg{rstanarm}
 #' using the design matrix returned with \code{return_design=TRUE}.
 #'
@@ -150,8 +150,8 @@ NULL
 #' Internal helper: Lan Smi Fit Nb
 #' @noRd
 .lan_smi_fit_nb <- function(X, y, offset_vec, max_iter, tol) {
-  # Prefer MASS::glm.nb when available; fall back to optim-based MLE.
-  if (requireNamespace("MASS", quietly = TRUE)) {
+  # Native NB GLM (morie_glm_nb); fall back to optim-based MLE on error.
+  {
     df_fit <- data.frame(.y = y, X, check.names = FALSE)
     fm <- as.formula(paste0(".y ~ -1 + ",
                             paste0("`", colnames(X), "`",
@@ -159,7 +159,7 @@ NULL
                             " + offset(.off)"))
     df_fit$.off <- offset_vec
     fit <- tryCatch(
-      suppressWarnings(MASS::glm.nb(fm, data = df_fit,
+      suppressWarnings(morie_glm_nb(fm, data = df_fit,
                                        control = stats::glm.control(
                                          maxit = max_iter, epsilon = tol))),
       error = function(e) NULL
@@ -408,7 +408,7 @@ morie_laniyonu_smi_force_disparity <- function(
   }
 
   note <- paste(
-    "Frequentist MLE (MASS::glm.nb or optim fall-back) approximation",
+    "Frequentist MLE (native NB GLM or optim fall-back) approximation",
     "to the paper's Bayesian hierarchical NB.  Area random intercept",
     "implemented as area dummies; SDs reported are empirical.",
     "Pass return_design=TRUE to hand off to brms / rstanarm for",

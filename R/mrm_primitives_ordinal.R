@@ -198,7 +198,7 @@ mrm_threshold_specific_ordinal <- function(
   if (isTRUE(fit_proportional_odds_first)) {
     ll_po <- NA_real_
     used_polr <- FALSE
-    if (requireNamespace("MASS", quietly = TRUE)) {
+    {
       ord_y <- factor(ordinal_levels[y + 1L],
                       levels = ordinal_levels, ordered = TRUE)
       dd <- cbind(data.frame(.y = ord_y),
@@ -206,8 +206,8 @@ mrm_threshold_specific_ordinal <- function(
       f  <- stats::as.formula(
         paste(".y ~", paste(covariate_cols, collapse = " + "))
       )
-      po_fit <- try(MASS::polr(f, data = dd, method = "logistic",
-                               Hess = FALSE), silent = TRUE)
+      po_fit <- try(morie_polr(f, data = dd, method = "logistic"),
+                    silent = TRUE)
       if (!inherits(po_fit, "try-error")) {
         ll_po       <- as.numeric(stats::logLik(po_fit))
         used_polr   <- TRUE

@@ -71,3 +71,309 @@ morie_mvrnorm <- function(n = 1, mu, Sigma, tol = 1e-6,
   dimnames(X) <- list(nm, NULL)
   if (n == 1) drop(X) else t(X)
 }
+
+# --- Module 31: negative-binomial GLM + 2-D KDE (native MASS) ---------
+
+# Normal-reference bandwidth (reproduces MASS::bandwidth.nrd).
+.morie_bandwidth_nrd <- function(x) {
+  r <- stats::quantile(x, c(0.25, 0.75))
+  h <- (r[2L] - r[1L]) / 1.34
+  4 * 1.06 * min(sqrt(stats::var(x)), h) * length(x)^(-1 / 5)
+}
+
+#' Native 2-D kernel density estimate (reproduces MASS::kde2d)
+#'
+#' Gaussian-kernel 2-D density on a regular grid, matching
+#' \code{MASS::kde2d} (same normal-reference bandwidth and the h/4
+#' scaling MASS applies).
+#'
+#' @param x,y Numeric coordinate vectors of equal length.
+#' @param h Bandwidth vector (default normal-reference per coordinate).
+#' @param n Grid size (scalar or length-2).
+#' @param lims Grid limits \code{c(xlo, xhi, ylo, yhi)}.
+#' @return A list \code{list(x, y, z)} (grid axes and the n1 x n2
+#'   density matrix).
+#' @export
+morie_kde2d <- function(x, y, h, n = 25, lims = c(range(x), range(y))) {
+  nx <- length(x)
+  if (length(y) != nx) stop("data vectors must be the same length")
+  n <- rep(n, length.out = 2L)
+  gx <- seq.int(lims[1L], lims[2L], length.out = n[1L])
+  gy <- seq.int(lims[3L], lims[4L], length.out = n[2L])
+  h <- if (missing(h)) {
+    c(.morie_bandwidth_nrd(x), .morie_bandwidth_nrd(y))
+  } else rep(h, length.out = 2L)
+  if (any(h <= 0)) stop("bandwidths must be strictly positive")
+  h <- h / 4
+  ax <- outer(gx, x, "-") / h[1L]
+  ay <- outer(gy, y, "-") / h[2L]
+  z <- tcrossprod(matrix(stats::dnorm(ax), , nx),
+                  matrix(stats::dnorm(ay), , nx)) / (nx * h[1L] * h[2L])
+  list(x = gx, y = gy, z = z)
+}
+
+# Negative-binomial family with fixed theta (reproduces
+# MASS::negative.binomial for the log link path used by glm.nb).
+.morie_negbin_family <- function(theta, link = "log") {
+  lk <- stats::make.link(link)
+  variance <- function(mu) mu + mu^2 / theta
+  validmu  <- function(mu) all(mu > 0)
+  dev.resids <- function(y, mu, wt) {
+    2 * wt * (y * log(pmax(1, y) / mu) -
+                (y + theta) * log((y + theta) / (mu + theta)))
+  }
+  aic <- function(y, n, mu, wt, dev) {
+    term <- (y + theta) * log(mu + theta) - y * log(mu) +
+      lgamma(y + 1) - theta * log(theta) + lgamma(theta) -
+      lgamma(theta + y)
+    2 * sum(term * wt)
+  }
+  initialize <- expression({
+    if (any(y < 0)) stop("negative values not allowed for the negative binomial family")
+    n <- rep(1, nobs)
+    mustart <- y + (y == 0) / 6
+  })
+  structure(list(family = paste0("Negative Binomial(",
+                                 format(round(theta, 4)), ")"),
+                 link = link, linkfun = lk$linkfun, linkinv = lk$linkinv,
+                 variance = variance, dev.resids = dev.resids, aic = aic,
+                 mu.eta = lk$mu.eta, initialize = initialize,
+                 validmu = validmu, valideta = lk$valideta),
+            class = "family")
+}
+
+# Theta MLE by Fisher scoring (reproduces MASS::theta.ml).
+.morie_theta_ml <- function(y, mu, n = sum(weights), weights,
+                            limit = 10, eps = .Machine$double.eps^0.25) {
+  if (missing(weights)) weights <- rep(1, length(y))
+  score <- function(th) sum(weights * (digamma(th + y) - digamma(th) +
+    log(th) + 1 - log(th + mu) - (y + th) / (mu + th)))
+  info <- function(th) sum(weights * (-trigamma(th + y) + trigamma(th) -
+    1 / th + 2 / (mu + th) - (y + th) / (mu + th)^2))
+  t0 <- n / sum(weights * (y / mu - 1)^2)
+  it <- 0L; del <- 1
+  while ((it <- it + 1L) < limit && abs(del) > eps) {
+    t0 <- abs(t0)
+    del <- score(t0) / info(t0)
+    t0 <- t0 + del
+  }
+  if (t0 < 0) t0 <- 0
+  as.numeric(t0)
+}
+
+#' Native negative-binomial GLM (reproduces MASS::glm.nb)
+#'
+#' Fits a negative-binomial GLM by the same alternating scheme as
+#' \code{MASS::glm.nb}: an initial Poisson fit, then iterate between a
+#' \code{glm.fit} with the current \code{negative.binomial(theta)}
+#' family and a \code{theta} MLE update until the log-likelihood and
+#' \code{theta} converge. Coefficients and \code{theta} match
+#' \code{MASS::glm.nb} to convergence tolerance.
+#'
+#' @param formula,data Model formula and data.
+#' @param weights Optional prior weights.
+#' @param init.theta Optional starting \code{theta}.
+#' @param link Link (default \code{"log"}).
+#' @param control A \code{stats::glm.control} object.
+#' @param ... Passed to \code{glm.control}.
+#' @return A \code{glm}/\code{negbin} object with \code{$theta}.
+#' @references Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
+#'   Applied Statistics with S}. Springer.
+#' @export
+morie_glm_nb <- function(formula, data, weights, init.theta = NULL,
+                         link = "log", control = stats::glm.control(...),
+                         ...) {
+  loglik <- function(th, mu, y, w) sum(w * (lgamma(th + y) -
+    lgamma(th) - lgamma(y + 1) + th * log(th) +
+    y * log(mu + (y == 0)) - (th + y) * log(th + mu)))
+  mf <- stats::model.frame(formula, data)
+  Terms <- attr(mf, "terms")
+  Y <- stats::model.response(mf, "numeric")
+  X <- stats::model.matrix(Terms, mf)
+  w <- if (missing(weights) || is.null(weights)) rep(1, length(Y)) else weights
+  n <- length(Y)
+  icpt <- attr(Terms, "intercept") > 0
+  fam0 <- if (is.null(init.theta)) stats::poisson(link) else
+    .morie_negbin_family(init.theta, link)
+  fit <- stats::glm.fit(x = X, y = Y, weights = w, family = fam0,
+                        control = control, intercept = icpt)
+  class(fit) <- c("negbin", "glm", "lm")
+  mu <- fit$fitted.values
+  th <- .morie_theta_ml(Y, mu, sum(w), w, limit = control$maxit)
+  fam <- .morie_negbin_family(th, link)
+  iter <- 0L
+  d1 <- sqrt(2 * max(1, fit$df.residual)); d2 <- del <- 1
+  g <- fam$linkfun; Lm <- loglik(th, mu, Y, w); Lm0 <- Lm + 2 * d1
+  while ((iter <- iter + 1L) <= control$maxit &&
+         (abs(Lm0 - Lm) / d1 + abs(del) / d2) > control$epsilon) {
+    eta <- g(mu)
+    fit <- stats::glm.fit(x = X, y = Y, weights = w, etastart = eta,
+                          family = fam, control = control, intercept = icpt)
+    t0 <- th
+    th <- .morie_theta_ml(Y, mu, sum(w), w, limit = control$maxit)
+    fam <- .morie_negbin_family(th, link)
+    mu <- fit$fitted.values
+    del <- t0 - th; Lm0 <- Lm; Lm <- loglik(th, mu, Y, w)
+  }
+  fit$theta <- as.numeric(th)
+  fit$terms <- Terms
+  fit$formula <- stats::as.formula(formula)
+  fit$call <- match.call()
+  fit$twologlik <- as.numeric(2 * Lm)
+  fit$aic <- as.numeric(-fit$twologlik + 2 * fit$rank + 2)
+  class(fit) <- c("negbin", "glm", "lm")
+  fit
+}
+
+#' @exportS3Method stats::summary negbin
+summary.negbin <- function(object, dispersion = 1, ...) {
+  s <- stats::summary.glm(object, dispersion = dispersion, ...)
+  s$theta <- object$theta
+  s$SE.theta <- attr(object$theta, "SE")
+  s
+}
+
+#' @exportS3Method stats::logLik negbin
+logLik.negbin <- function(object, ...) {
+  val <- object$twologlik / 2
+  attr(val, "df") <- object$rank + 1L
+  attr(val, "nobs") <- length(object$residuals)
+  class(val) <- "logLik"
+  val
+}
+
+# --- Module 31 (cont.): robust regression + ordered logit (native MASS) --
+
+#' Native robust (Huber M-estimator) regression (reproduces MASS::rlm)
+#'
+#' IRLS with Huber weights and MAD scale, matching \code{MASS::rlm}'s
+#' default \code{method = "M"}, \code{psi = psi.huber} (k = 1.345),
+#' \code{scale.est = "MAD"} path. \code{summary()} reproduces
+#' \code{MASS:::summary.rlm}'s XtX standard errors.
+#'
+#' @param formula,data Model formula and data.
+#' @param k Huber tuning constant (default 1.345).
+#' @param maxit Max IRLS iterations.
+#' @param acc Convergence tolerance on the residual change.
+#' @return A \code{morie_rlm} object.
+#' @references Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
+#'   Applied Statistics with S}. Springer.
+#' @export
+morie_rlm <- function(formula, data, k = 1.345, maxit = 20L, acc = 1e-4) {
+  mf <- stats::model.frame(formula, data)
+  y <- stats::model.response(mf, "numeric")
+  x <- stats::model.matrix(attr(mf, "terms"), mf)
+  n <- nrow(x); p <- ncol(x)
+  psi <- function(u, deriv = 0) if (!deriv) pmin(1, k / abs(u)) else abs(u) <= k
+  fit0 <- stats::lm.fit(x, y)
+  coef <- fit0$coefficients; resid <- fit0$residuals
+  conv <- FALSE
+  for (it in seq_len(maxit)) {
+    testpv <- resid
+    scale <- stats::median(abs(resid)) / 0.6745
+    if (scale == 0) { conv <- TRUE; break }
+    w <- psi(resid / scale)
+    temp <- stats::lm.wfit(x, y, w)
+    coef <- temp$coefficients; resid <- temp$residuals
+    d <- sqrt(sum((testpv - resid)^2) / max(1e-20, sum(testpv^2)))
+    if (d <= acc) { conv <- TRUE; break }
+  }
+  fitted <- drop(x %*% coef)
+  structure(list(coefficients = coef, residuals = y - fitted,
+                 wresid = resid, fitted.values = fitted, s = scale,
+                 psi = psi, x = x, weights = numeric(0),
+                 converged = conv, k2 = k),
+            class = "morie_rlm")
+}
+
+#' @exportS3Method stats::summary morie_rlm
+summary.morie_rlm <- function(object, ...) {
+  s <- object$s; coef <- object$coefficients; wresid <- object$wresid
+  n <- length(wresid); p <- length(coef); cn <- names(coef)
+  w <- object$psi(wresid / s)
+  S <- sum((wresid * w)^2) / (n - p)
+  psiprime <- object$psi(wresid / s, deriv = 1)
+  mn <- mean(psiprime)
+  kappa <- 1 + p * stats::var(psiprime) / (n * mn^2)
+  stddev <- sqrt(S) * (kappa / mn)
+  R <- qr(object$x)$qr
+  R <- R[seq_len(p), seq_len(p), drop = FALSE]
+  R[lower.tri(R)] <- 0
+  rinv <- solve(R, diag(p))
+  rowlen <- sqrt(rowSums(rinv^2))
+  se <- rowlen * stddev
+  tab <- cbind(Value = coef, "Std. Error" = se, "t value" = coef / se)
+  rownames(tab) <- cn
+  list(coefficients = tab, s = s, stddev = stddev)
+}
+
+#' Native ordered logistic/probit regression (reproduces MASS::polr)
+#'
+#' Proportional-odds ordinal regression by direct maximum likelihood on
+#' the cumulative-link parametrisation used by \code{MASS::polr} (same
+#' cutpoint transform \code{cumsum(c(theta_1, exp(theta_2..q)))} and the
+#' same glm-based start), so the fitted log-likelihood matches
+#' \code{MASS::polr} to optimiser tolerance.
+#'
+#' @param formula,data Model formula and data (response an ordered factor).
+#' @param weights Optional prior weights.
+#' @param method \code{"logistic"} (default) or \code{"probit"}.
+#' @return A \code{morie_polr} object (with \code{$deviance},
+#'   \code{$coefficients}, \code{$zeta}).
+#' @references Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
+#'   Applied Statistics with S}. Springer.
+#' @export
+morie_polr <- function(formula, data, weights, method = "logistic") {
+  pfun <- switch(method, logistic = stats::plogis, probit = stats::pnorm,
+                 stop("morie_polr supports method 'logistic' or 'probit'"))
+  mf <- stats::model.frame(formula, data)
+  x <- stats::model.matrix(attr(mf, "terms"), mf)
+  xint <- match("(Intercept)", colnames(x), nomatch = 0L)
+  if (xint > 0L) x <- x[, -xint, drop = FALSE]
+  n <- nrow(x); pc <- ncol(x)
+  wt <- if (missing(weights) || is.null(weights)) rep(1, n) else weights
+  offset <- rep(0, n)
+  y <- stats::model.response(mf)
+  if (!is.factor(y)) stop("response must be a factor")
+  lev <- levels(y); llev <- length(lev)
+  if (llev <= 2L) stop("response must have 3 or more levels")
+  y <- unclass(y); q <- llev - 1L
+  ind_pc <- seq_len(pc); ind_q <- seq_len(q)
+  # starting values (MASS::polr glm-based scheme)
+  q1 <- llev %/% 2L
+  X <- cbind(Intercept = rep(1, n), x)
+  fam <- if (method == "probit") stats::binomial("probit") else stats::binomial()
+  fit <- stats::glm.fit(X, as.numeric(y > q1), wt, family = fam, offset = offset)
+  coefs <- fit$coefficients
+  logit <- function(p) log(p / (1 - p))
+  spacing <- logit((seq_len(q)) / (q + 1L))
+  if (method != "logistic") spacing <- spacing / 1.7
+  gammas <- -coefs[1L] + spacing - spacing[q1]
+  start <- c(coefs[-1L], gammas)
+  fmin <- function(beta) {
+    theta <- beta[pc + ind_q]
+    gamm <- c(-Inf, cumsum(c(theta[1L], exp(theta[-1L]))), Inf)
+    eta <- offset + if (pc) drop(x %*% beta[ind_pc]) else 0
+    pr <- pfun(pmin(100, gamm[y + 1L] - eta)) - pfun(pmax(-100, gamm[y] - eta))
+    if (all(pr > 0)) -sum(wt * log(pr)) else Inf
+  }
+  res <- stats::optim(start, fmin, method = "BFGS",
+                      control = list(reltol = 1e-11))
+  beta <- res$par
+  theta <- beta[pc + ind_q]
+  zeta <- cumsum(c(theta[1L], exp(theta[-1L])))
+  cf <- beta[ind_pc]; names(cf) <- colnames(x)
+  structure(list(coefficients = cf, zeta = zeta, deviance = 2 * res$value,
+                 method = method, lev = lev, n = n, edf = pc + q,
+                 nobs = sum(wt), convergence = res$convergence),
+            class = "morie_polr")
+}
+
+#' @exportS3Method stats::logLik morie_polr
+logLik.morie_polr <- function(object, ...) {
+  val <- -object$deviance / 2
+  attr(val, "df") <- object$edf
+  attr(val, "nobs") <- object$nobs
+  class(val) <- "logLik"
+  val
+}

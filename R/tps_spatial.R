@@ -493,8 +493,7 @@ morie_tps_local_morans_i <- function(df,
 #'
 #' @param df Incident-level data.frame.
 #' @param bandwidth Bandwidth multiplier passed to the 2-D KDE; see
-#'   \code{MASS::kde2d}'s \code{h} argument when MASS is available.
-#'   In the base-R fallback this is the Gaussian sigma (in degrees).
+#'   the \code{h} argument of the native \code{morie_kde2d}.
 #' @param ds_name Tag for the result title.
 #' @param lat_col,lon_col WGS84 column names.
 #' @return A named list with summary stats including max/mean/median
@@ -544,28 +543,17 @@ morie_tps_kde_density <- function(df,
   lat <- coords[[lat_col]]
   lon <- coords[[lon_col]]
 
-  if (requireNamespace("MASS", quietly = TRUE)) {
+  {
     h <- c(bandwidth * diff(range(lon)) * 4,
            bandwidth * diff(range(lat)) * 4)
     h[h <= 0] <- bandwidth
     gn <- 64L
-    z <- MASS::kde2d(lon, lat, h = h, n = gn)
+    z <- morie_kde2d(lon, lat, h = h, n = gn)
     # bilinear lookup at each observation
     ix <- pmin(pmax(findInterval(lon, z$x), 1L), gn)
     iy <- pmin(pmax(findInterval(lat, z$y), 1L), gn)
     densities <- z$z[cbind(ix, iy)]
-    backend <- "MASS::kde2d"
-  } else {
-    # Base-R fallback: Gaussian density at each observation
-    sig <- bandwidth
-    densities <- numeric(n)
-    for (i in seq_len(n)) {
-      dx <- (lon - lon[i]) / sig
-      dy <- (lat - lat[i]) / sig
-      densities[i] <- sum(exp(-0.5 * (dx * dx + dy * dy))) /
-        (n * 2 * pi * sig * sig)
-    }
-    backend <- "base-R Gaussian KDE"
+    backend <- "morie_kde2d"
   }
 
   i_max <- which.max(densities)
