@@ -48,15 +48,6 @@ Imports:
   rmoriebricklayer (>= 0.2.1)
 LinkingTo: Rcpp, RcppArmadillo, rmoriebricklayer
 SystemRequirements: libcurl: libcurl-devel (rpm) or libcurl4-openssl-dev (deb)
-# Former runtime Suggests, replaced by native engines on the
-# feat/native-specializations branch (modules 1-25); the packages that
-# remain below are used ONLY by tests/cross/ cross-validation and as
-# optional parser/ML accelerators with native fallbacks:
-#   MatchIt, optmatch, Matching, designmatch, survey, DoubleML, mlr3,
-#   mlr3learners, ranger, grf, dagitty, fixest, did, DRDID,
-#   bacondecomp, DIDmultiplegt, TwoWayFEWeights, HonestDiD, coresynth,
-#   rdrobust, AER, ivreg, gmm, plm, psych, spdep, signal, wavelets,
-#   hawkes, emhawkes, digest (was Imports), openssl
 Suggests:
   AIPW,
   anominate,
