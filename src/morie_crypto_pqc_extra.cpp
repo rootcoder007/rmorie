@@ -20,7 +20,8 @@ namespace {
 
 OQS_SIG* new_slhdsa128s() {
   static const char* names[] = {
-    "SLH-DSA-SHA2-128s",            // liboqs >= 0.13 (FIPS 205 final)
+    "SLH_DSA_PURE_SHA2_128S",       // liboqs >= 0.15 (FIPS 205 final)
+    "SLH-DSA-SHA2-128s",            // liboqs 0.13 - 0.14
     "SPHINCS+-SHA2-128s-simple",    // liboqs 0.8 - 0.12
     "SPHINCS+-SHA256-128s-simple"}; // very old spelling
   for (const char* n : names) {
@@ -31,7 +32,10 @@ OQS_SIG* new_slhdsa128s() {
 }
 
 OQS_KEM* new_hqc128() {
-  static const char* names[] = {"HQC-128", "HQC-RMRS-128"};
+  static const char* names[] = {
+    "HQC-1",           // liboqs >= 0.15 (level-1 = 128-bit)
+    "HQC-128",         // liboqs 0.9 - 0.14
+    "HQC-RMRS-128"};   // very old spelling
   for (const char* n : names) {
     OQS_KEM* k = OQS_KEM_new(n);
     if (k != nullptr) return k;
