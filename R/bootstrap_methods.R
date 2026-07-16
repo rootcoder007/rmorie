@@ -252,10 +252,10 @@ bootstrap <- function(data, statistic, n_boot = 2000L, ci_level = 0.95,
   # (boot::boot's `strata=` covers stratification, but its API does not
   # natively support cluster-of-clusters resampling for arbitrary
   # statistic(data) signatures, so the inline cluster arm is retained).
-  if (.boot_have_boot() && is.null(cluster) && ci_method != "studentized") {
+  if (is.null(cluster) && ci_method != "studentized") {
     bf <- .boot_statistic_adapter(statistic)
-    strata_arg <- if (is.null(stratify)) rep(1L, n) else as.integer(factor(stratify))
-    bo <- boot::boot(data = data, statistic = bf, R = n_boot,
+    strata_arg <- if (is.null(stratify)) NULL else as.integer(factor(stratify))
+    bo <- morie_boot(data = data, statistic = bf, R = n_boot,
                      strata = strata_arg)
     boot_stats <- as.numeric(bo$t[, 1L])
     se <- stats::sd(boot_stats)
@@ -266,20 +266,12 @@ bootstrap <- function(data, statistic, n_boot = 2000L, ci_level = 0.95,
                        "normal"     = "norm",
                        "basic"      = "basic",
                        "bca"        = "bca")
-    bci <- tryCatch(
-      boot::boot.ci(bo, conf = ci_level, type = type_key),
-      error = function(e) NULL
+    ci_pair <- tryCatch(
+      morie_boot_ci(bo, conf = ci_level, type = type_key)[[type_key]],
+      error = function(e) c(NA_real_, NA_real_)
     )
-    if (!is.null(bci)) {
-      ci_pair <- .boot_ci_extract(bci, ci_method)
-      if (ci_method == "bca" && !is.null(bci$bca)) {
-        acc <- 0
-      }
-    } else {
-      ci_pair <- c(NA_real_, NA_real_)
-    }
     if (anyNA(ci_pair)) {
-      # Fallback for tiny n_boot where boot.ci refuses to compute BCa.
+      # Fallback for tiny n_boot where BCa influence is undefined.
       alpha <- 1 - ci_level
       ci_pair <- c(.pct(boot_stats, 100 * alpha / 2),
                    .pct(boot_stats, 100 * (1 - alpha / 2)))
@@ -637,12 +629,11 @@ block_bootstrap <- function(data, statistic, block_size,
   n <- .nrow_like(data)
   original <- as.numeric(statistic(data))
 
-  # Delegate moving / stationary to boot::tsboot for univariate input.
-  if (.boot_have_boot() && method != "circular" &&
-      is.null(dim(data))) {
+  # Native moving / stationary block bootstrap for univariate input.
+  if (method != "circular" && is.null(dim(data))) {
     sim_arg <- if (method == "moving") "fixed" else "geom"
     bf <- function(d) as.numeric(statistic(d))
-    bo <- boot::tsboot(tseries = as.numeric(data),
+    bo <- morie_tsboot(tseries = as.numeric(data),
                        statistic = bf,
                        R = n_boot,
                        l = as.integer(block_size),
@@ -1269,20 +1260,14 @@ leave_one_out_cv <- function(X, y, model_fn, score_fn) {
 #' @param R Number of bootstrap replicates.
 #' @param strata Optional integer stratification vector.
 #' @param ... Forwarded to \code{boot::boot}.
-#' @return A \code{boot} object as returned by \code{boot::boot}.
-#' @seealso \code{boot::boot}, [morie_boot_basic_ci()].
+#' @return A \code{morie_boot} object (native; consumable by
+#'   [morie_boot_basic_ci()]).
+#' @seealso [morie_boot()], [morie_boot_basic_ci()].
 #' @export
 morie_boot_run <- function(data, statistic, R = 2000L, strata = NULL, ...) {
-  if (!.boot_have_boot()) {
-    stop("morie_boot_run() requires the 'boot' package; install it.")
-  }
   bf <- .boot_statistic_adapter(statistic)
-  if (is.null(strata)) {
-    boot::boot(data = data, statistic = bf, R = R, ...)
-  } else {
-    boot::boot(data = data, statistic = bf, R = R,
-               strata = as.integer(factor(strata)), ...)
-  }
+  strata_arg <- if (is.null(strata)) NULL else as.integer(factor(strata))
+  morie_boot(data = data, statistic = bf, R = R, strata = strata_arg)
 }
 
 #' Direct bridge to \code{boot::boot.ci}
@@ -1301,25 +1286,10 @@ morie_boot_run <- function(data, statistic, R = 2000L, strata = NULL, ...) {
 #' @seealso \code{boot::boot.ci}.
 #' @export
 morie_boot_basic_ci <- function(boot_obj,
-                                type = c("perc", "bca", "basic", "norm",
-                                         "stud"),
+                                type = c("perc", "bca", "basic", "norm"),
                                 conf = 0.95) {
-  if (!.boot_have_boot()) {
-    stop("morie_boot_basic_ci() requires the 'boot' package; install it.")
-  }
   type <- match.arg(type, several.ok = TRUE)
-  bci <- boot::boot.ci(boot_obj, conf = conf, type = type)
-  out <- lapply(type, function(tk) {
-    method_label <- switch(tk,
-                           "perc"  = "percentile",
-                           "norm"  = "normal",
-                           "basic" = "basic",
-                           "bca"   = "bca",
-                           "stud"  = "studentized")
-    .boot_ci_extract(bci, method_label)
-  })
-  names(out) <- type
-  out
+  morie_boot_ci(boot_obj, conf = conf, type = type)
 }
 
 #' Direct bridge to \code{rsample::bootstraps}
@@ -1354,18 +1324,12 @@ morie_rsample_bootstraps <- function(data, times = 25L, ...) {
 #' @param statistic A scalar function applied to one sample at a
 #'   time (e.g. \code{mean}, \code{median}); two.boot's contract.
 #' @param R Number of bootstrap replicates (default 1000).
-#' @param ... Forwarded to \code{simpleboot::two.boot}.
-#' @return A \code{boot} object.
+#' @param ... Forwarded to the per-sample statistic.
+#' @return A \code{morie_boot} object for the difference statistic.
 #' @seealso \code{simpleboot::two.boot}, \code{simpleboot::one.boot},
 #'   \code{simpleboot::lm.boot}.
 #' @export
 morie_simpleboot_two <- function(x, y, statistic = mean, R = 1000L, ...) {
-  if (!.boot_have_simpleboot()) {
-    stop("morie_simpleboot_two() requires the 'simpleboot' package; ",
-         "install it.")
-  }
-  simpleboot::two.boot(sample1 = as.numeric(x),
-                       sample2 = as.numeric(y),
-                       FUN = statistic,
-                       R = as.integer(R), ...)
+  morie_two_boot(x = as.numeric(x), y = as.numeric(y),
+                 statistic = statistic, R = as.integer(R), ...)
 }
