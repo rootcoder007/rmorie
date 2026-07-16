@@ -163,16 +163,11 @@ NULL
 #' @return A `morie_evalue` named-list.
 #' @export
 e_value_rr <- function(rr, ci_lower = NULL, ci_upper = NULL) {
-  if (requireNamespace("EValue", quietly = TRUE)) {
-    ev <- tryCatch(
-      EValue::evalue(EValue::RR(rr), lo = ci_lower, hi = ci_upper),
-      error = function(e) NULL
-    )
+  if (TRUE) {
+    ev <- morie_evalue(rr, "RR", lo = ci_lower, hi = ci_upper)
     if (!is.null(ev)) {
-      e_point <- as.numeric(ev["E-values", "point"])
-      e_ci    <- suppressWarnings(as.numeric(ev["E-values", "lower"]))
-      if (is.na(e_ci))
-        e_ci  <- suppressWarnings(as.numeric(ev["E-values", "upper"]))
+      e_point <- ev$point
+      e_ci    <- ev$ci
       interpretation <- sprintf(
         paste0("An unmeasured confounder would need RR >= %.2f with ",
                 "both treatment and outcome to explain away the point ",
@@ -848,33 +843,22 @@ morie_sensitivity_evalue <- function(estimate, se = NULL, sd = NULL,
                                      rare = TRUE, true = NULL,
                                      ci_lower = NULL, ci_upper = NULL,
                                      ...) {
-  .morie_sens_need("EValue", "morie_sensitivity_evalue")
+  # Module 26: native E-value family (Ding-VanderWeele closed forms);
+  # MD/OLS use a se-derived CI, ratio scales use the supplied CI.
   type <- match.arg(type)
   if (is.null(true)) true <- if (type %in% c("RR", "OR", "HR")) 1 else 0
-  fn <- switch(
-    type,
-    OLS = function() EValue::evalues.OLS(est = estimate, se = se, sd = sd,
-                                         delta = 1, true = true, ...),
-    RR  = function() EValue::evalues.RR(est = estimate,
-                                        lo = ci_lower, hi = ci_upper,
-                                        true = true, ...),
-    OR  = function() EValue::evalues.OR(est = estimate,
-                                        lo = ci_lower, hi = ci_upper,
-                                        rare = rare, true = true, ...),
-    HR  = function() EValue::evalues.HR(est = estimate,
-                                        lo = ci_lower, hi = ci_upper,
-                                        rare = rare, true = true, ...),
-    MD  = function() EValue::evalues.MD(est = estimate, se = se,
-                                        true = true, ...)
-  )
-  raw <- fn()
-  e_point <- tryCatch(as.numeric(raw["E-values", "point"]),
-                      error = function(e) NA_real_)
-  e_lo <- tryCatch(as.numeric(raw["E-values", "lower"]),
-                   error = function(e) NA_real_)
-  e_hi <- tryCatch(as.numeric(raw["E-values", "upper"]),
-                   error = function(e) NA_real_)
-  e_ci <- if (!is.na(e_lo)) e_lo else e_hi
+  if (type %in% c("MD", "OLS")) {
+    d_est <- if (identical(type, "OLS")) estimate / sd else estimate
+    d_se  <- if (identical(type, "OLS")) se / sd else se
+    ev <- morie_evalue(d_est, "MD",
+                       lo = d_est - 1.96 * d_se,
+                       hi = d_est + 1.96 * d_se, true = 0)
+  } else {
+    ev <- morie_evalue(estimate, type, lo = ci_lower, hi = ci_upper,
+                       rare = rare, true = true)
+  }
+  e_point <- ev$point
+  e_ci <- ev$ci
   structure(
     list(estimate      = estimate,
          e_value_point = e_point,

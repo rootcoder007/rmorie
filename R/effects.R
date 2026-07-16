@@ -25,8 +25,7 @@
 #'     wrapper over \code{rbounds::psens()} when installed; otherwise
 #'     normal-approximation Wilcoxon signed-rank bounds.
 #'   \item \code{e_value()} -- VanderWeele-Ding E-value. Thin wrapper
-#'     over \code{EValue::evalues.OLS()} when installed; otherwise the
-#'     closed-form continuous-scale RR proxy.
+#'     native VanderWeele-Ding continuous-scale E-value (module 26).
 #' }
 #'
 #' \strong{Marginal-effects extenders} (Phase 1.j additions; thin
@@ -593,20 +592,10 @@ e_value <- function(ate, se, null = 0, sd_y = 1) {
   z <- abs(ate - null) / se
   if (z == 0) return(1)
 
-  if (!isTRUE(all.equal(sd_y, 1)) &&
-        requireNamespace("EValue", quietly = TRUE)) {
-    res <- tryCatch(
-      EValue::evalues.OLS(est = ate - null, se = se, sd = sd_y),
-      error = function(e) NULL
-    )
-    if (!is.null(res)) {
-      ev <- as.numeric(res["E-values", "point"])
-      if (is.finite(ev) && ev >= 1) {
-        return(ev)
-      }
-    }
-  }
-
+  # Module 26: native VanderWeele-Ding continuous-scale E-value.
+  d <- (ate - null) / sd_y
+  ev <- morie_evalue(d, "MD", true = 0)$point
+  if (is.finite(ev) && ev >= 1) return(ev)
   rr <- exp(z)
   if (rr <= 1) return(1)
   rr + sqrt(rr * (rr - 1))

@@ -21,8 +21,7 @@ back to inline bootstrap standardisation otherwise.
 wrapper over \code{rbounds::psens()} when installed; otherwise
 normal-approximation Wilcoxon signed-rank bounds.
 \item \code{e_value()} -- VanderWeele-Ding E-value. Thin wrapper
-over \code{EValue::evalues.OLS()} when installed; otherwise the
-closed-form continuous-scale RR proxy.
+native VanderWeele-Ding continuous-scale E-value (module 26).
 }
 
 \strong{Marginal-effects extenders} (Phase 1.j additions; thin
