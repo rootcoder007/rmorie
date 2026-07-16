@@ -39,9 +39,72 @@ in the package-level help (`?rmorie`).
 > manual or the package site above rather than scrolling the function
 > index. This README covers install + the most common workflows only.
 
-## What's in v1.1.3
+## Why rmorie?
 
-- **Over 1,900 exported `morie_*` R functions** (1,963 at the time of writing) — every public callable is now
+rmorie is a **self-contained** research toolkit: every statistical
+algorithm in the package — matching (nearest-neighbour, Mahalanobis,
+exact, CEM, optimal, genetic, cardinality), design-based IPW and
+doubly-robust estimation, double machine learning, causal forests and
+meta-learners, causal DAGs with identification and refutation, the
+full quasi-experimental family (DiD incl. Callaway-Sant'Anna, event
+studies, synthetic control and synthetic DiD, RDD, interrupted time
+series, IV), item-response theory, geostatistics, digital signal
+processing, Hawkes processes, cryptographic hashing with
+post-quantum primitives, and the data-access parsers — is implemented
+natively in this package's R and C++. rmorie does not call MatchIt,
+survey, DoubleML, grf, dagitty, did, fixest, rdrobust, ivreg, psych,
+gstat, spdep, signal, wavelets, digest, or openssl at runtime. This
+means:
+
+- **No upstream breakage.** A major release of any of those packages
+  cannot change rmorie's results. A paper run in 2026 reproduces
+  identically in 2030.
+- **Validated, not just reimplemented.** Every native engine is
+  cross-validated in `tests/cross/` against its reference package —
+  to machine precision where the estimand is deterministic (see the
+  table below) — and benchmarked in `inst/benchmarks/`.
+- **Composable workflows.** Matchers, ATE/CATE/DiD estimators, and
+  the DAG pipeline share one class system with common `print()`,
+  `summary()`, and reporting methods; the phase-17 composition test
+  runs DAG -> identification -> matching -> DML -> refutation ->
+  publication table end to end in one suite.
+- **Category-integrity guards.** `morie_safe_recode()`,
+  `morie_safe_factor()`, `morie_audit_categories()`, and
+  `morie_crosstab_verify()` make the silent category-mapping errors
+  that have corrupted published disparity analyses structurally
+  impossible in an rmorie workflow.
+
+The remaining `Suggests` entries exist ONLY for the cross-validation
+tests under `tests/cross/` and as optional accelerators for the
+parsers (jsonlite/xml2/arrow fast paths with pure-R fallbacks); no
+production statistics path requires any of them.
+
+### Cross-validation at a glance
+
+| Family | Replaces | Validation |
+|---|---|---|
+| Matching (7 methods) | MatchIt, optmatch, Matching, designmatch | pair-identical or provably better optimum |
+| IPW / design-based GLM | survey | svyglm coefficients + SEs to 1e-6 |
+| DML (PLR + IRM) | DoubleML/mlr3 | CI-overlap agreement; 40-60x faster |
+| Causal forest / meta-learners | grf | CATE agreement; 1.5-2.9x faster |
+| DAG identify/estimate/refute | dagitty, DoWhy | adjustment sets == dagitty on every graph tested |
+| DiD family (TWFE/event/CS/DR/Bacon/DID-M/feTR) | fixest, did, DRDID, bacondecomp, DIDmultiplegt, TwoWayFEWeights | coefficients, SEs, and influence functions to 1e-8-1e-10 |
+| Synth control + SDID | Synth/coresynth | recovers simulated truths; placebo inference built in |
+| RDD (IK bw, sharp/fuzzy/kink, McCrary) | rdrobust, rdd | point estimates == rdrobust at fixed h to 1e-8 |
+| IV (2SLS/LIML/GMM) + ITS | AER, ivreg, gmm | 2SLS == ivreg + sandwich HC1 to 1e-8 |
+| IRT (2PL/GRM/EAP) + psychometrics | psych, mirt | KMO == psych to 1e-8; 2PL vs mirt within 0.1 |
+| Geostatistics (variogram/kriging) | gstat, spdep | kriging == gstat to 1e-6; Moran variance == spdep |
+| DSP (Butterworth/FIR/Welch/DWT) | signal, wavelets | butter coefficients == signal to 1e-8; DWT perfect reconstruction |
+| Hawkes MLE | hawkes | exponential-kernel loglik == hawkes |
+| SHA-256/HMAC/PBKDF2 + PQC | digest, openssl | NIST FIPS + RFC vectors bit-for-bit; ML-KEM/ML-DSA/SLH-DSA/HQC via liboqs |
+| Parsers (JSON/XML/HTML/Parquet) | jsonlite, xml2, arrow | jsonlite-parity outputs; accelerators optional |
+
+## What's in v1.1.4
+
+- **All 25 native-specialization modules complete** — see *Why
+  rmorie?* above; the package's statistics run with zero runtime
+  dependencies on other statistical packages.
+- **Over 1,900 exported `morie_*` R functions** — every public callable is now
   prefixed to avoid name collisions with other CRAN packages
   (`morie_chi_square_test`, `morie_kmeans_clustering`,
   `morie_decision_tree_split`, etc.). The companion `morie.fn` Python
@@ -114,11 +177,14 @@ package when no live OpenAI / Anthropic credentials are configured.
 
 ### Optional packages (the R equivalent of `pip install pkg[extra]`)
 
-The base install stays deliberately light: rmorie wraps many
-specialist CRAN packages and declares them in `Suggests`, so nothing
-heavy compiles until you need it. Every function that uses one tells
-you exactly what to install when it's missing, and the test suite
-skips (never fails) without them. To provision up front instead:
+The base install is complete for every statistical workflow — the
+native engines need nothing beyond the hard dependencies. `Suggests`
+entries are (a) reference packages used only by the cross-validation
+tests in `tests/cross/`, and (b) optional accelerators (e.g.
+jsonlite/xml2/arrow fast paths for the parsers, ML backends). Every
+optional-path function tells you what to install when it's missing,
+and the test suite skips (never fails) without them. To provision the
+extras up front:
 
 ```r
 # install every optional package rmorie can use (one-time, ~15 min)

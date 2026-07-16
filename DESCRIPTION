@@ -13,11 +13,13 @@ Authors@R: c(
  )
 Author: Vansh Singh Ruhela [aut, cre] (<https://orcid.org/0009-0004-1750-3592>)
 Maintainer: Vansh Singh Ruhela <vsruhela@proton.me>
-Description: Multi-domain scientific computing toolkit for observational
-  inference and intervention analysis across scientific-experimentation
-  contexts, hosting the MRM (Multilevel Reconciliation Methodology)
-  framework for Canadian carceral, police, and oversight data as its
-  primary application.
+Description: Self-contained multi-domain scientific computing toolkit for
+  observational inference and intervention analysis, hosting the MRM
+  (Multilevel Reconciliation Methodology) framework for Canadian
+  carceral, police, and oversight data as its primary application.
+  Every statistical algorithm is implemented natively (R and C++) and
+  cross-validated against its reference implementation; no other
+  statistical package is called at runtime.
   Provides general-purpose causal estimators (ATE, ATT, ATC, GATE, CATE,
   LATE, AIPW, G-computation), survey sampling methods (stratified, cluster,
   PPS, bootstrap, calibration weights), propensity-score and doubly-robust
@@ -46,6 +48,15 @@ Imports:
   rmoriebricklayer (>= 0.2.1)
 LinkingTo: Rcpp, RcppArmadillo, rmoriebricklayer
 SystemRequirements: libcurl: libcurl-devel (rpm) or libcurl4-openssl-dev (deb)
+# Former runtime Suggests, replaced by native engines on the
+# feat/native-specializations branch (modules 1-25); the packages that
+# remain below are used ONLY by tests/cross/ cross-validation and as
+# optional parser/ML accelerators with native fallbacks:
+#   MatchIt, optmatch, Matching, designmatch, survey, DoubleML, mlr3,
+#   mlr3learners, ranger, grf, dagitty, fixest, did, DRDID,
+#   bacondecomp, DIDmultiplegt, TwoWayFEWeights, HonestDiD, coresynth,
+#   rdrobust, AER, ivreg, gmm, plm, psych, spdep, signal, wavelets,
+#   hawkes, emhawkes, digest (was Imports), openssl
 Suggests:
   AIPW,
   anominate,
