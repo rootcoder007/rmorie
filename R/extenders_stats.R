@@ -283,11 +283,11 @@ morie_ppcor_partial <- function(x, y = NULL, z = NULL,
                                 method = "pearson", ...) {
   .morie_stats_need("ppcor", "morie_ppcor_partial")
   if (is.null(y) || is.null(z)) {
-    raw <- ppcor::pcor(x, method = method, ...)
-    list(method = "ppcor::pcor", raw = raw)
+    raw <- morie_partial_cor(x, method = method)
+    list(method = "partial_cor (rmorie native)", raw = raw)
   } else {
-    raw <- ppcor::pcor.test(x, y, z, method = method, ...)
-    list(method = "ppcor::pcor.test", raw = raw)
+    raw <- morie_partial_cor_test(x, y, z, method = method)
+    list(method = "partial_cor_test (rmorie native)", raw = raw)
   }
 }
 
@@ -312,11 +312,19 @@ morie_ppcor_semipartial <- function(x, y = NULL, z = NULL,
                                     method = "pearson", ...) {
   .morie_stats_need("ppcor", "morie_ppcor_semipartial")
   if (is.null(y) || is.null(z)) {
-    raw <- ppcor::spcor(x, method = method, ...)
-    list(method = "ppcor::spcor", raw = raw)
+    raw <- morie_semipartial_cor(x, method = method)
+    list(method = "semipartial_cor (rmorie native)", raw = raw)
   } else {
-    raw <- ppcor::spcor.test(x, y, z, method = method, ...)
-    list(method = "ppcor::spcor.test", raw = raw)
+    zz <- as.matrix(z)
+    sp <- morie_semipartial_cor(cbind(x = as.numeric(x),
+                                      y = as.numeric(y), zz),
+                                method = method)
+    raw <- data.frame(estimate = sp$estimate["x", "y"],
+                      p.value = sp$p.value["x", "y"],
+                      statistic = sp$statistic["x", "y"],
+                      n = sp$n, gp = ncol(zz), Method = method,
+                      stringsAsFactors = FALSE)
+    list(method = "semipartial_cor_test (rmorie native)", raw = raw)
   }
 }
 
@@ -405,8 +413,8 @@ morie_coin_oneway <- function(formula, data, ...) {
 #' @export
 morie_randtests_runs <- function(x, ...) {
   .morie_stats_need("randtests", "morie_randtests_runs")
-  raw <- randtests::runs.test(x, ...)
-  list(method = "randtests::runs.test", raw = raw)
+  raw <- morie_runs_test(x, ...)
+  list(method = "runs_test (rmorie native)", raw = raw)
 }
 
 #' Turning-point test via \pkg{randtests}
@@ -425,8 +433,8 @@ morie_randtests_runs <- function(x, ...) {
 #' @export
 morie_randtests_turning_point <- function(x, ...) {
   .morie_stats_need("randtests", "morie_randtests_turning_point")
-  raw <- randtests::turning.point.test(x, ...)
-  list(method = "randtests::turning.point.test", raw = raw)
+  raw <- morie_turning_point_test(x)
+  list(method = "turning_point_test (rmorie native)", raw = raw)
 }
 
 #' Bartels rank test via \pkg{randtests}
@@ -445,6 +453,6 @@ morie_randtests_turning_point <- function(x, ...) {
 #' @export
 morie_randtests_bartels <- function(x, ...) {
   .morie_stats_need("randtests", "morie_randtests_bartels")
-  raw <- randtests::bartels.rank.test(x, ...)
-  list(method = "randtests::bartels.rank.test", raw = raw)
+  raw <- morie_bartels_rank_test(x, ...)
+  list(method = "bartels_rank_test (rmorie native)", raw = raw)
 }
