@@ -1,0 +1,139 @@
+---
+title: "The native engines: DAG to publication table without leaving rmorie"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{The native engines: DAG to publication table without leaving rmorie}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+set.seed(2026)
+```
+
+rmorie implements every statistical algorithm it exposes natively —
+this vignette walks the whole pipeline on one simulated study using
+only `library(rmorie)`. No MatchIt, no survey, no DoubleML, no
+dagitty, no fixest: each step below runs on an engine that lives in
+this package and is cross-validated against the reference
+implementation in `tests/cross/`.
+
+```{r}
+library(rmorie)
+```
+
+## The data
+
+A simulated observational study: three confounders drive both a
+binary treatment and a continuous outcome, with a true effect of 0.9.
+
+```{r}
+n <- 600
+age  <- rnorm(n); educ <- rnorm(n); re74 <- rnorm(n)
+treat <- rbinom(n, 1, plogis(0.4 * age + 0.3 * educ + 0.3 * re74))
+re78  <- 1 + 0.9 * treat + 0.5 * age + 0.4 * educ + 0.6 * re74 +
+  rnorm(n)
+d <- data.frame(age, educ, re74, treat, re78)
+```
+
+## 0. Guard the categories first (module 25)
+
+Before any model: audit the categorical columns. Silent
+category-mapping errors — numeric codes imported without their
+labels, positional recodes, alphabetical releveling — have corrupted
+published disparity analyses for years at a time. rmorie makes them
+structurally impossible:
+
+```{r}
+grp_codes <- sample(c("1", "2"), n, replace = TRUE)   # an import hazard
+morie_audit_categories(data.frame(group = factor(grp_codes)))
+
+grp <- morie_safe_recode(grp_codes, c("1" = "Control", "2" = "Program"))
+morie_crosstab_verify(grp_codes, grp,
+                      c("1" = "Control", "2" = "Program"))
+```
+
+## 1. The DAG (module 13)
+
+```{r}
+dag <- morie_dag(
+  edges = c("re74 -> treat", "re74 -> re78",
+            "age -> treat",  "age -> re78",
+            "educ -> treat", "educ -> re78",
+            "treat -> re78"),
+  exposure = "treat", outcome = "re78")
+dag
+```
+
+## 2. Identification
+
+Backdoor identification runs Bayes-Ball d-separation with the
+canonical adjustment set (validated against dagitty in
+`tests/cross/`):
+
+```{r}
+id <- morie_dag_identify(dag)
+id$identified
+id$adjustment_set
+```
+
+## 3. Matching on the identified set (module 1)
+
+```{r}
+m <- morie_matching_nearest_neighbor(d, "treat", id$adjustment_set)
+nrow(m$match_pairs)
+morie_matching_balance(m$matched_data, "treat",
+                       id$adjustment_set)$max_smd
+```
+
+## 4. Estimation through the DAG (modules 10 + 13)
+
+`morie_dag_estimate()` routes the identified set into the native
+estimators — here double machine learning (cross-fit ridge + logit
+nuisances, Neyman-orthogonal score):
+
+```{r}
+ate <- morie_dag_estimate(dag, d, method = "backdoor.dml")
+est <- if (!is.null(ate$estimate)) ate$estimate else ate$ate
+c(estimate = est)
+```
+
+## 5. Refutation (module 13)
+
+DoWhy-style robustness checks, all native — a placebo treatment
+should erase the effect; subsets and a random common cause should
+leave it stable:
+
+```{r}
+for (mth in c("placebo_treatment", "random_common_cause",
+              "data_subset")) {
+  rf <- morie_dag_refute(dag, d, mth, n_reps = 10L)
+  cat(sprintf("%-22s passed: %s\n", mth, rf$passed))
+}
+```
+
+## 6. The MRM pipeline and a publication table (module 24)
+
+The MRM flagship composes several native estimators on the same
+specification, applies a multiple-testing correction across them,
+pools an inverse-variance consensus, and renders the table with
+rmorie's own renderer (text, markdown, LaTeX, or HTML):
+
+```{r}
+eff <- morie_mrm_estimate_causal_effect(
+  d, "treat", "re78", id$adjustment_set,
+  methods = c("matching", "ate", "dml"))
+cat(morie_mrm_report(eff, format = "markdown"), sep = "\n")
+```
+
+## Where to look next
+
+* Every engine's cross-validation lives in `tests/cross/` (one file
+  per reference package) and its speed in `inst/benchmarks/`.
+* The quasi-experimental family (DiD, event studies, synthetic
+  control, RDD, ITS, IV) follows the same pattern — see
+  `?morie_did_group_time_att`, `?morie_synth_control`,
+  `?morie_rdd_sharp`, `?morie_its`, `?morie_iv_tsls`.
+* `morie_crypto_pqc_inventory()` reports the post-quantum coverage of
+  your build.

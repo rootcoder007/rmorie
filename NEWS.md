@@ -1,11 +1,73 @@
 # rmorie 1.1.4 (development, feat/native-specializations)
 
-* Native reimplementation marathon: every specialization gains a
-  zero-Suggests native engine, cross-validated against its reference
-  package and benchmarked (<=2x at 100k rows release bar).
-* Modules 1-4 landed: nearest-neighbour (C++ sorted-logit kernel),
-  Mahalanobis (Cholesky whitening + streaming C++ kernel), exact and
-  CEM (Iacus-King-Porro stratum weights, L1 imbalance diagnostic).
+## Major changes
+
+* **All 25 native-specialization modules are complete.** Every
+  statistical algorithm now runs on rmorie's own R/C++ engines, each
+  cross-validated in `tests/cross/` against its reference package and
+  benchmarked in `inst/benchmarks/`:
+  matching (7 methods; modules 1-7), design-based IPW/svyglm to 1e-6
+  (8-9), double machine learning 40-60x faster than DoubleML (10),
+  R-learner causal forest 1.5-2.9x faster than grf (11), all four
+  meta-learners (12), the causal DAG toolkit with Bayes-Ball
+  identification and DoWhy-style refutation (13), the complete DiD
+  family — TWFE and event studies reproducing fixest to 1e-10,
+  Callaway-Sant'Anna with DRDID-identical influence functions,
+  Goodman-Bacon, DID-M, feTR weights, honest (Rambachan-Roth style)
+  sensitivity (14), Abadie synthetic control + synthetic DiD (15),
+  RDD with a native Imbens-Kalyanaraman bandwidth and McCrary test
+  (16), k-class IV (2SLS/LIML), two-step/CUE GMM, and NEW
+  `morie_its()` interrupted time series with native Newey-West (17),
+  NEW IRT: `morie_irt_2pl()`, `morie_irt_grm()`, `morie_irt_eap()`
+  (18), geostatistics: variogram ML + ordinary kriging equal to gstat
+  to 1e-6 (19), DSP: Butterworth/filtfilt/FIR/Savitzky-Golay/Welch/
+  DWT (20), Hawkes MLE (21), standalone SHA-256/HMAC/PBKDF2 pinned by
+  NIST/RFC vectors (22), native JSON/XML/HTML/Parquet parsers with
+  optional accelerators (23), and the MRM flagship:
+  `morie_mrm_load_si_dataset()`, `morie_mrm_reconcile()`,
+  `morie_mrm_estimate_causal_effect()`, `morie_mrm_report()` (24).
+* **Full three-family post-quantum coverage**: lattice (ML-KEM-768,
+  ML-DSA-65), hash-based (SLH-DSA via liboqs + an always-available
+  native Lamport one-time signature), and code-based (HQC-128), with
+  `morie_crypto_pqc_inventory()`.
+* **NEW module 25 — categorical-integrity guards**:
+  `morie_safe_recode()`, `morie_safe_factor()`,
+  `morie_audit_categories()`, `morie_crosstab_verify()`, and a
+  binary-treatment guard wired into the MRM pipeline, making the
+  silent category-mapping corruption class (numeric codes imported
+  without labels, positional recodes, reference releveling)
+  structurally impossible.
+* **Composition test** (phase 17): DAG -> identification -> matching
+  -> DML estimate -> refutation suite -> MRM report, one test, all
+  native.
+
+## Breaking changes
+
+* None intended. Public signatures and result shapes are preserved;
+  method labels now read "(rmorie native)". `morie_did_group_time_att`
+  and `morie_did_doubly_robust` gain an `se_convention` argument
+  ("reference" reproduces did/DRDID exactly; "bessel" keeps Bessel's
+  correction). `morie_did_twoway_fe_weights` supports type = "feTR"
+  only (the canonical diagnostic).
+
+## Bug fixes
+
+* Cliff-Ord Moran's I variance used a wrong combining formula (off by
+  ~n); it now matches `spdep::moran.test(randomisation = FALSE)`.
+* The event-study wrapper treated a 0-coded never-treated group as a
+  finite onset.
+* The MRM citation string now derives from `inst/CITATION` at runtime.
+
+## Dependencies
+
+* Removed from Imports: digest (native C++ SHA-256).
+* Removed from Suggests (now native): fixest, did, DRDID, bacondecomp,
+  DIDmultiplegt, TwoWayFEWeights, HonestDiD, coresynth, rdrobust, AER,
+  ivreg, gmm, plm, psych, spdep, signal, wavelets, hawkes, emhawkes,
+  openssl.
+* jsonlite/xml2/arrow remain in Suggests as OPTIONAL parser
+  accelerators with pure-R fallbacks; reference packages remain only
+  for `tests/cross/`.
 * Version locked in step with morie 1.1.4.
 
 # rmorie 1.1.3 - 2026-07-15

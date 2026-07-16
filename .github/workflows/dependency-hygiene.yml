@@ -1,0 +1,61 @@
+# Structural enforcement of the self-sufficiency claim (phase 27):
+# no forbidden statistical package may appear in Depends/Imports.
+# Suggests is allowed ONLY for tests/cross/ cross-validation and the
+# documented optional parser/ML accelerators.
+name: dependency-hygiene
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, feat/native-specializations]
+
+permissions:
+  contents: read
+
+jobs:
+  dependency-hygiene:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Forbidden-dependency check
+        run: |
+          Rscript - <<'RS'
+          d <- read.dcf("DESCRIPTION")
+          fields <- c("Depends", "Imports", "LinkingTo")
+          have <- unlist(lapply(fields, function(f)
+            if (f %in% colnames(d))
+              trimws(sub("\\(.*\\)", "",
+                strsplit(d[1, f], ",")[[1]])) else character()))
+          forbidden <- c("MatchIt", "optmatch", "Matching",
+                         "designmatch", "survey", "DoubleML", "mlr3",
+                         "ranger", "grf", "dagitty", "rdrobust", "did",
+                         "fixest", "DRDID", "bacondecomp",
+                         "DIDmultiplegt", "TwoWayFEWeights",
+                         "HonestDiD", "coresynth", "AER", "ivreg",
+                         "gmm", "plm", "psych", "mirt", "gstat",
+                         "spdep", "signal", "wavelets", "hawkes",
+                         "emhawkes", "bsts", "xml2", "jsonlite",
+                         "arrow", "httr", "httr2", "digest",
+                         "openssl")
+          hit <- intersect(forbidden, have)
+          if (length(hit)) stop("FORBIDDEN DEPS PRESENT: ",
+                                paste(hit, collapse = ", "))
+          cat("Dependency check: PASS\n")
+          cat("Depends/Imports/LinkingTo:", paste(have, collapse=", "),
+              "\n")
+          RS
+      - name: Production code must not call forbidden packages
+        run: |
+          # tests/cross/ is the only place reference packages may be
+          # called; production R/ may reference them only inside
+          # requireNamespace-guarded accelerator shims (jsonlite, xml2,
+          # arrow) or the pinned .morie_*_have_* probes.
+          set -e
+          bad=$(grep -rnE "(MatchIt|survey|DoubleML|grf|dagitty|rdrobust|fixest|DRDID|bacondecomp|DIDmultiplegt|TwoWayFEWeights|HonestDiD|coresynth|ivreg|gmm|plm|psych|gstat|spdep|signal|wavelets|emhawkes|digest|openssl)::" R/ --include="*.R" | grep -v "^R/RcppExports.R" || true)
+          if [ -n "$bad" ]; then
+            echo "Forbidden package calls in production R/:"
+            echo "$bad"
+            exit 1
+          fi
+          echo "Production-call check: PASS"
