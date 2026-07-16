@@ -28,10 +28,17 @@
   ok <- !is.na(mm)
   if (!any(ok)) return(-Inf)
   pmin_val <- Inf
+  mc <- mm[ok]
+  nok <- length(mc)
   for (j in seq_len(ncol(Xt))) {
-    dlt <- Xt[ok, j] - Xc[mm[ok], j]
-    if (stats::sd(dlt) < 1e-12) next
-    p <- stats::t.test(dlt)$p.value
+    dlt <- Xt[ok, j] - Xc[mc, j]
+    s <- stats::sd(dlt)
+    if (s < 1e-12) next
+    # One-sample paired-t p-value in closed form -- identical to
+    # stats::t.test(dlt)$p.value but without building the htest object,
+    # which dominates the GA inner loop (pop_size x n_gen x n_cov calls).
+    tstat <- mean(dlt) / (s / sqrt(nok))
+    p <- 2 * stats::pt(-abs(tstat), nok - 1L)
     if (p < pmin_val) pmin_val <- p
   }
   if (is.infinite(pmin_val)) 1 else pmin_val
