@@ -971,10 +971,10 @@ morie_otis_irr_glmm_vm <- function(df) {
     out_rows[[length(out_rows) + 1L]] <- list("Poisson", "fit failed",
                                                 "--", "--", "--")
   }
-  # Negative Binomial (optional)
-  if (requireNamespace("MASS", quietly = TRUE)) {
+  # Negative Binomial (native)
+  {
     nb_fit <- suppressWarnings(tryCatch(
-      MASS::glm.nb(formula_obj, data = py,
+      morie_glm_nb(formula_obj, data = py,
                     control = stats::glm.control(maxit = 200L)),
       error = function(e) NULL))
     if (!is.null(nb_fit)) {
@@ -983,10 +983,6 @@ morie_otis_irr_glmm_vm <- function(df) {
       out_rows[[length(out_rows) + 1L]] <- list("NegBin2", "fit failed",
                                                   "--", "--", "--")
     }
-  } else {
-    out_rows[[length(out_rows) + 1L]] <- list(
-      "NegBin2", "MASS not installed", "--", "--", "--"
-    )
   }
   .churn_result(
     title = "IRR Poisson/NB GLM -- vm ~ T_high_ac + demog",

@@ -305,12 +305,7 @@ morie_survey_glm <- function(design, formula,
                   binomial = stats::binomial(),
                   poisson  = stats::poisson(),
                   gamma    = stats::Gamma(),
-                  negativebinomial = {
-                    if (!requireNamespace("MASS", quietly = TRUE))
-                      stop("Package 'MASS' is required for negative binomial.",
-                           call. = FALSE)
-                    MASS::negative.binomial(1)
-                  })
+                  negativebinomial = .morie_negbin_family(1))
   } else {
     fam <- family
   }

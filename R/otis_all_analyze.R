@@ -1163,9 +1163,9 @@ morie_otis_analyze_b01_ruhela_per_year <- function(data = NULL,
                                      res_p$msg, "--", "--", "--")
   }
 
-  if (requireNamespace("MASS", quietly = TRUE)) {
+  {
     res_nb <- fit_one("NB", function()
-      MASS::glm.nb(fml, data = work,
+      morie_glm_nb(fml, data = work,
                     control = stats::glm.control(maxit = 200L)))
     if (!res_nb$fail) {
       rows[[length(rows) + 1L]] <- c(res_nb$label, res_nb$t_key,
@@ -1181,10 +1181,6 @@ morie_otis_analyze_b01_ruhela_per_year <- function(data = NULL,
       rows[[length(rows) + 1L]] <- c("NB", treatment, "fit failed",
                                        res_nb$msg, "--", "--", "--")
     }
-  } else {
-    rows[[length(rows) + 1L]] <- c("NB", treatment,
-                                     "MASS not installed",
-                                     "--", "--", "--", "--")
   }
 
   # GEE clustered fits

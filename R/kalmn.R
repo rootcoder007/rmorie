@@ -49,13 +49,7 @@ morie_kalman_filter <- function(x, transition = NULL, H = NULL, Q = NULL, R = NU
     Pp <- transition %*% Pc %*% t(transition) + Q
     v <- Y[t, ] - H %*% xp
     S <- H %*% Pp %*% t(H) + R
-    Sinv <- tryCatch(solve(S), error = function(e) {
-      if (requireNamespace("MASS", quietly = TRUE)) {
-        .morie_ginv(S)
-      } else {
-        solve(S + diag(1e-8, nrow(S)))
-      }
-    })
+    Sinv <- tryCatch(solve(S), error = function(e) .morie_ginv(S))
     K <- Pp %*% t(H) %*% Sinv
     xc <- as.numeric(xp + K %*% v)
     Pc <- (diag(p) - K %*% H) %*% Pp
