@@ -600,3 +600,13 @@ are identical to 1e-10); the Hawkes exponential loglik call is 62x a
 trivial C reference at 0.06s absolute; the pure-R JSON (63x) and XML
 (5.5x) parsers are documented FALLBACKS — jsonlite/xml2 remain the
 declared fast paths and every call site prefers them when installed.
+
+
+## Merge policy (Vee 2026-07-16): merge is the LAST step, not a middle one
+
+Full CI runs on the native branches themselves — no merge to main is
+required for any testing or validation. Phase 26 (merge --no-ff + tag)
+happens ONLY after everything on both branches is green and Vee gives
+an explicit go. No main merge, no tag, no PyPI publish until then.
+Both rmorie and morie stay on feat/native-specializations; the branch
+gates are the verification of record.
