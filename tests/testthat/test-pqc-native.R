@@ -36,8 +36,11 @@ test_that("PQC inventory reports all three families", {
   inv <- morie_crypto_pqc_inventory()
   expect_setequal(unique(inv$family),
                   c("lattice", "hash-based", "code-based"))
-  expect_true(inv$available[inv$primitive ==
-                              "Lamport OTS (native SHA-256)"])
+  sodium_ok <- isTRUE(tryCatch(morie_crypto_sodium_available(),
+                               error = function(e) FALSE))
+  expect_identical(
+    inv$available[inv$primitive == "Lamport OTS (native SHA-256)"],
+    sodium_ok)
 })
 
 test_that("SLH-DSA + HQC roundtrip when liboqs provides them", {

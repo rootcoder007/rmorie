@@ -29,9 +29,11 @@ test_that("optional-package guards stop() when the package is absent", {
   expect_error(morie_svm_hinge_primal(x, y))
   expect_error(morie_svm_kernel_trick(x, y))
   expect_error(morie_tsne_reduction(x))
-  expect_error(rgfir(rnorm(64), cutoff = 0.2))
-  expect_error(rgiir(rnorm(64), cutoff = 0.2))
-  expect_error(rgqrs(rnorm(360)))
+  # Module 20: rgfir/rgiir/rgqrs are native — they RUN without the
+  # signal package instead of stopping.
+  expect_silent(rgfir(rnorm(64), cutoff = 0.2))
+  expect_silent(rgiir(rnorm(64), cutoff = 0.2))
+  expect_true(is.list(rgqrs(rnorm(360))))
   expect_error(morie_gradient_boosting_ensemble(x, y))
   expect_error(morie_xgboost_objective(x, y))
 })

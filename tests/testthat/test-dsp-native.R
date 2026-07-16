@@ -75,7 +75,7 @@ test_that("native Welch PSD localizes a pure tone; coherence detects link", {
 
 test_that("native DWT: perfect reconstruction + Parseval energy", {
   set.seed(83)
-  for (flt in c("haar", "d4", "la8")) {
+  for (flt in c("haar", "d4", "d6", "d8", "la8")) {
     x <- rnorm(128)
     dw <- rmorie:::.morie_dsp_dwt(x, filter = flt, n_levels = 4)
     xr <- rmorie:::.morie_dsp_idwt(dw)
