@@ -30,7 +30,7 @@ hrzq1 <- function(x, y, tau = 0.5) {
   h <- max(h, 1e-3)
   f0 <- mean(abs(r) < h) / (2 * h)
   if (f0 < 1e-6) f0 <- 1e-6
-  cov_m <- (tau * (1 - tau) / f0^2) * MASS::ginv(t(Xp) %*% Xp)
+  cov_m <- (tau * (1 - tau) / f0^2) * .morie_ginv(t(Xp) %*% Xp)
   se_all <- sqrt(pmax(diag(cov_m), 0))
   if (!has_int) {
     beta_out <- if (ncol(Xp) > 1) beta[-1] else beta

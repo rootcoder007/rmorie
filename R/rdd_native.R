@@ -37,7 +37,7 @@
   xs <- x[use]; ys <- y[use]; ws <- w[use]
   X <- outer(xs - cutoff, 0:p, "^")
   XtWX <- crossprod(X, ws * X)
-  XtWX_inv <- tryCatch(solve(XtWX), error = function(e) MASS::ginv(XtWX))
+  XtWX_inv <- tryCatch(solve(XtWX), error = function(e) .morie_ginv(XtWX))
   beta <- as.numeric(XtWX_inv %*% crossprod(X, ws * ys))
   # Nearest-neighbor residual variance sigma2_i = J/(J+1) (y_i - nnmean)^2
   # On the sorted running variable the J nearest neighbours live in a

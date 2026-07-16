@@ -116,7 +116,7 @@ NULL
     H <- crossprod(X, X * w) + ridge * diag(p)
     g <- crossprod(X, d - mu) - ridge * beta
     step <- tryCatch(solve(H, g),
-                     error = function(e) MASS::ginv(H) %*% g)
+                     error = function(e) .morie_ginv(H) %*% g)
     beta_new <- beta + as.numeric(step)
     if (max(abs(step)) < tol) return(beta_new)
     beta <- beta_new
@@ -362,7 +362,7 @@ morie_otis_aipw_ate <- function(df, treatment, outcome, covariates,
       Xm <- X[mask, , drop = FALSE]
       beta_y <- tryCatch(
         as.numeric(solve(crossprod(Xm), crossprod(Xm, y[mask]))),
-        error = function(e) as.numeric(MASS::ginv(crossprod(Xm)) %*%
+        error = function(e) as.numeric(.morie_ginv(crossprod(Xm)) %*%
                                           crossprod(Xm, y[mask]))
       )
       pred <- as.numeric(X[test, , drop = FALSE] %*% beta_y)
@@ -569,7 +569,7 @@ morie_otis_irm_dml <- function(df, treatment, outcome, covariates,
       Xm <- X[mask, , drop = FALSE]
       beta_y <- tryCatch(
         as.numeric(solve(crossprod(Xm), crossprod(Xm, y[mask]))),
-        error = function(e) as.numeric(MASS::ginv(crossprod(Xm)) %*%
+        error = function(e) as.numeric(.morie_ginv(crossprod(Xm)) %*%
                                           crossprod(Xm, y[mask]))
       )
       pred <- as.numeric(X[test, , drop = FALSE] %*% beta_y)

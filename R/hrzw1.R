@@ -21,14 +21,14 @@ hrzw1 <- function(x, y, residuals = NULL, B = 500, seed = 0) {
       method = "wild-bootstrap (insufficient data)"
     ))
   }
-  beta0 <- as.numeric(MASS::ginv(t(X) %*% X) %*% (t(X) %*% y))
+  beta0 <- as.numeric(.morie_ginv(t(X) %*% X) %*% (t(X) %*% y))
   res <- if (is.null(residuals)) {
     y - as.numeric(X %*% beta0)
   } else {
     as.numeric(residuals)
   }
   set.seed(seed)
-  XtX_inv <- MASS::ginv(t(X) %*% X)
+  XtX_inv <- .morie_ginv(t(X) %*% X)
   boot <- matrix(0, B, p)
   for (b in 1:B) {
     v <- sample(c(-1, 1), n, replace = TRUE)

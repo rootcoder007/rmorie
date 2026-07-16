@@ -28,7 +28,7 @@ tpspn <- function(x, y, lam = 0) {
     cbind(t(Tmat), matrix(0, d + 1, d + 1))
   )
   rhs <- c(y, rep(0, d + 1))
-  sol <- as.numeric(MASS::ginv(A) %*% rhs)
+  sol <- as.numeric(.morie_ginv(A) %*% rhs)
   a <- sol[seq_len(n)]
   beta <- sol[(n + 1):length(sol)]
   fitted <- as.numeric(K %*% a + Tmat %*% beta)

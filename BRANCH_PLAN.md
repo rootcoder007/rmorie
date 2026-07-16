@@ -43,6 +43,7 @@ and the `morie_match_result` / result-object shapes do not change.
 | 27 | robust covariance: HC0-HC5 + HAC (Newey-West/Bartlett) + one-way CR0/CR1 clustered, lm & glm, unified dispatcher | sandwich | DONE (12/12 cross vs sandwich to 1e-8 incl. weighted lm & binomial glm; morie_causal_robust_se + estimate_ate rewired native; 15x faster HC3 @ 100k) |
 | 28 | bootstrap: ordinary + stratified resampling, block (moving/stationary), two-sample; norm/basic/perc/BCa CIs (regression empinf) | boot/simpleboot | DONE (13/13 cross vs boot+simpleboot; RNG-matched replicate streams + BCa influence to 1e-8; adaptive/block bootstrap + 3 bridges rewired native, full suite 77/0/0) |
 | 29 | permutation tests: independence / Wilcoxon rank-sum / one-way (Fisher-Pitman) via Strasser-Weber linear-statistic framework; asymptotic normal/chi-square + exact two-sample | coin | DONE (statistic+p match coin to 1e-8 for independence, wilcoxon asymptotic 3-alt + exact-with-ties, oneway k>2 quadratic + k=2 scalar; 3 extenders rewired native; structural + cross tiers) |
+| 30 | MASS utilities: ginv (Moore-Penrose SVD pseudo-inverse, 54 call sites) + mvrnorm (multivariate normal sampling) | MASS | DONE (ginv==MASS::ginv to 1e-12 incl rank-deficient; mvrnorm bit-for-bit under common seed via eigen; 54+2 sites rewired native; glm.nb/rlm/polr remain, module 31) |
 
 ---
 

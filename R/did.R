@@ -176,7 +176,7 @@ NULL
   n <- nrow(X)
   k <- ncol(X)
   XtX_inv <- tryCatch(solve(crossprod(X)),
-                      error = function(e) MASS::ginv(crossprod(X)))
+                      error = function(e) .morie_ginv(crossprod(X)))
   beta <- as.numeric(XtX_inv %*% crossprod(X, y))
   resid <- as.numeric(y - X %*% beta)
   if (!is.null(cluster_ids)) {

@@ -51,7 +51,7 @@ morie_kalman_filter <- function(x, transition = NULL, H = NULL, Q = NULL, R = NU
     S <- H %*% Pp %*% t(H) + R
     Sinv <- tryCatch(solve(S), error = function(e) {
       if (requireNamespace("MASS", quietly = TRUE)) {
-        MASS::ginv(S)
+        .morie_ginv(S)
       } else {
         solve(S + diag(1e-8, nrow(S)))
       }

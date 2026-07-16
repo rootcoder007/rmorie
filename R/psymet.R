@@ -178,7 +178,7 @@ morie_psymet_kmo <- function(data) {
   # Native anti-image computation (module 18; equals psych::KMO).
   R <- cor(X)
   k <- ncol(R)
-  Ri <- tryCatch(solve(R), error = function(e) MASS::ginv(R))
+  Ri <- tryCatch(solve(R), error = function(e) .morie_ginv(R))
   D <- diag(1 / sqrt(diag(Ri)))
   Q <- -D %*% Ri %*% D
   diag(Q) <- 1

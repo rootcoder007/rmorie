@@ -30,7 +30,7 @@ vines <- function(x) {
         cond <- (i + 1):(i + jj - 1)
         idx <- c(i, i + jj, cond)
         sub <- R[idx, idx]
-        inv <- MASS::ginv(sub)
+        inv <- .morie_ginv(sub)
         pc <- -inv[1, 2] / sqrt(inv[1, 1] * inv[2, 2])
         P[i, i + jj] <- pc
       }
@@ -40,7 +40,7 @@ vines <- function(x) {
   ld <- determinant(R, logarithm = TRUE)
   if (ld$sign > 0) {
     S <- crossprod(z) / n
-    R_inv <- tryCatch(solve(R), error = function(e) MASS::ginv(R))
+    R_inv <- tryCatch(solve(R), error = function(e) .morie_ginv(R))
     loglik <- -0.5 * n * (as.numeric(ld$modulus) + sum(diag(R_inv %*% S)))
   } else {
     loglik <- NA_real_
@@ -55,7 +55,7 @@ vines <- function(x) {
 
 # CANONICAL TEST
 # set.seed(0); Sigma <- matrix(c(1, 0.5, 0.3, 0.5, 1, 0.4, 0.3, 0.4, 1), 3)
-# z <- MASS::mvrnorm(500, c(0,0,0), Sigma)
+# z <- morie_mvrnorm(500, c(0,0,0), Sigma)
 # r <- vines(z)
 # stopifnot(r$d == 3L, is.finite(r$loglik))
 

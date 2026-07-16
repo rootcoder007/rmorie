@@ -22,8 +22,8 @@ hrzn1 <- function(x, y, z, J = 5, alpha = 1e-3, grid = NULL,
     # 2SLS fallback
     Xc <- cbind(1, x)
     Zc <- cbind(1, z)
-    Pz <- Zc %*% MASS::ginv(t(Zc) %*% Zc) %*% t(Zc)
-    beta <- MASS::ginv(t(Xc) %*% Pz %*% Xc) %*% (t(Xc) %*% Pz %*% y)
+    Pz <- Zc %*% .morie_ginv(t(Zc) %*% Zc) %*% t(Zc)
+    beta <- .morie_ginv(t(Xc) %*% Pz %*% Xc) %*% (t(Xc) %*% Pz %*% y)
     return(list(
       estimate = as.numeric(beta[2]), se = NA_real_, n = n,
       method = "NPIV fallback: linear 2SLS"
@@ -36,7 +36,7 @@ hrzn1 <- function(x, y, z, J = 5, alpha = 1e-3, grid = NULL,
   M <- (t(Bz) %*% Bx) / n
   BzY <- as.numeric((t(Bz) %*% y) / n)
   BzBz <- (t(Bz) %*% Bz) / n
-  inv_BzBz <- MASS::ginv(BzBz + alpha * diag(J))
+  inv_BzBz <- .morie_ginv(BzBz + alpha * diag(J))
   A <- t(M) %*% inv_BzBz %*% M + alpha * diag(J)
   rhs <- t(M) %*% inv_BzBz %*% BzY
   coef <- solve(A, rhs)

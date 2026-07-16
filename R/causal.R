@@ -918,7 +918,7 @@ morie_estimate_g_computation <- function(data, treatment, outcome,
     yc <- mean(yt)
     A <- crossprod(Xt) + lambda * diag(p)
     b <- crossprod(Xt, yt - yc)
-    beta <- tryCatch(solve(A, b), error = function(e) MASS::ginv(A) %*% b)
+    beta <- tryCatch(solve(A, b), error = function(e) .morie_ginv(A) %*% b)
     pred[te] <- as.numeric(Xs[te, , drop = FALSE] %*% beta) + yc
   }
   pred
@@ -1014,7 +1014,7 @@ morie_estimate_double_ml <- function(data, outcome, treatment, covariates,
   A <- crossprod(Xs_tr) + lambda * diag(p)
   b <- crossprod(Xs_tr, y_tr - yc)
   beta <- tryCatch(solve(A, b),
-                   error = function(e) MASS::ginv(A) %*% b)
+                   error = function(e) .morie_ginv(A) %*% b)
   as.numeric(Xs_te %*% beta) + yc
 }
 

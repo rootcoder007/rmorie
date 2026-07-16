@@ -48,7 +48,7 @@ hrzc1 <- function(x, y, censor = 0.0) {
     h <- max(1.06 * stats::sd(ra) * length(ra)^(-1 / 5), 1e-4)
     f0 <- mean(exp(-0.5 * (ra / h)^2) / (h * sqrt(2 * pi)))
     A <- t(Xa) %*% Xa * f0
-    cov_m <- tryCatch(0.25 * MASS::ginv(A) %*% (t(Xa) %*% Xa) %*% MASS::ginv(A),
+    cov_m <- tryCatch(0.25 * .morie_ginv(A) %*% (t(Xa) %*% Xa) %*% .morie_ginv(A),
       error = function(e) matrix(NA, p, p)
     )
     se <- sqrt(pmax(diag(cov_m), 0))

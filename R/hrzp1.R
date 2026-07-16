@@ -31,11 +31,11 @@ hrzp1 <- function(x, y, z, bandwidth = NULL) {
   if (is.null(dim(mX))) mX <- matrix(mX, ncol = ncol(X))
   rY <- y - mY
   rX <- X - mX
-  beta <- tryCatch(MASS::ginv(t(rX) %*% rX) %*% (t(rX) %*% rY),
+  beta <- tryCatch(.morie_ginv(t(rX) %*% rX) %*% (t(rX) %*% rY),
     error = function(e) rep(NA_real_, ncol(X))
   )
   resid <- rY - rX %*% beta
-  bread <- MASS::ginv(t(rX) %*% rX)
+  bread <- .morie_ginv(t(rX) %*% rX)
   meat <- t(rX) %*% (rX * as.numeric(resid)^2)
   cov_m <- bread %*% meat %*% bread
   se <- sqrt(pmax(diag(cov_m), 0))
