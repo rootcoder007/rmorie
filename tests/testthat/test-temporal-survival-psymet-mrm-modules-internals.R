@@ -251,16 +251,6 @@ test_that(".morie_require_sodium silent / errors based on availability", {
   }
 })
 
-test_that(".morie_require_openssl silent / errors based on availability", {
-  skip_if_not_installed("openssl")
-  if (requireNamespace("openssl", quietly = TRUE)) {
-    expect_silent(rmorie:::.morie_require_openssl())
-  } else {
-    expect_error(rmorie:::.morie_require_openssl(),
-                 regexp = "openssl")
-  }
-})
-
 test_that(".morie_wrapping_key returns 32-byte raw via HKDF when openssl present", {
   skip_if_not_installed("openssl")
   if (!requireNamespace("openssl", quietly = TRUE)) {

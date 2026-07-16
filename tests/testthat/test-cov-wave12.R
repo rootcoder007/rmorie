@@ -83,23 +83,22 @@ test_that("fast.R kernels work on the C++ and the base-R fallback path", {
   expect_equal(rmorie:::morie_normal_pdf(0, 0, 1), stats::dnorm(0))
 })
 
-test_that("rgwav denoises via wavelets and via the MA fallback", {
-  skip_if_not_installed("wavelets")
+test_that("rgwav denoises via the native DWT engine (no wavelets dep)", {
   set.seed(3)
   x <- sin(2 * pi * 3 * seq(0, 1, length.out = 256)) +
     0.3 * stats::rnorm(256)
-  if (requireNamespace("wavelets", quietly = TRUE)) {
-    r <- rgwav(x, level = 3)
-    expect_length(r$signal, 256L)
-    expect_equal(rgwav(x, level = 3, mode = "hard")$mode, "hard")
-  }
+  r <- rgwav(x, level = 3)
+  expect_length(r$signal, 256L)
+  expect_equal(rgwav(x, level = 3, mode = "hard")$mode, "hard")
+  # module 20 replaced the wavelets-package path with a native DWT, so
+  # denoising still works when 'wavelets' is unavailable (no MA fallback).
   testthat::local_mocked_bindings(
     requireNamespace = function(package, ...) {
       if (identical(package, "wavelets")) FALSE else TRUE
     },
     .package = "base"
   )
-  fb <- suppressWarnings(rgwav(x))
-  expect_equal(fb$mode, "MA-fallback")
+  fb <- rgwav(x)
   expect_length(fb$signal, 256L)
+  expect_true(fb$mode %in% c("soft", "hard"))
 })
