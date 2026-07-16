@@ -11,6 +11,11 @@ bench_one <- function(n) {
   x1 <- rnorm(n); x2 <- rnorm(n)
   d <- rbinom(n, 1, plogis(-1.2 + 0.5 * x1 + 0.3 * (g %in% c("a", "b"))))
   df <- data.frame(g, x1, x2, d)
+  # Warm up: the first native call pays one-off JIT + namespace loads
+  # (grDevices/stats), which otherwise inflates the small-n timing by
+  # ~0.1s and misreads as the estimator being slow. Time the warm call.
+  invisible(morie_matching_exact(df, "d", "g"))
+  invisible(morie_matching_cem(df, "d", c("x1", "x2"), n_bins = 5L))
   t_ex_o <- system.time(morie_matching_exact(df, "d", "g"))[["elapsed"]]
   t_ex_m <- system.time(MatchIt::matchit(d ~ g, data = df,
                                          method = "exact"))[["elapsed"]]
