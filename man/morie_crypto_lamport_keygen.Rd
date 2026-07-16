@@ -22,9 +22,11 @@ key it has already used in this session. For many-time hash-based
 signatures use \code{\link{morie_crypto_slhdsa_keygen}} (SLH-DSA).
 }
 \examples{
+\dontshow{if (isTRUE(tryCatch(morie_crypto_sodium_available(), error = function(e) FALSE))) withAutoprint(\{ # examplesIf}
 kp <- morie_crypto_lamport_keygen()
 sig <- morie_crypto_lamport_sign(kp, "hello")
 morie_crypto_lamport_verify(kp$pk, "hello", sig)
+\dontshow{\}) # examplesIf}
 }
 \references{
 Lamport, L. (1979). Constructing digital signatures
