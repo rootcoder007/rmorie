@@ -43,7 +43,8 @@ test_that("morie_causal_weighting hard-errors when WeightIt is missing", {
 
 test_that("morie_causal_robust_se computes natively (no sandwich needed)", {
   set.seed(1)
-  m <- stats::lm(rnorm(30) ~ rnorm(30))
+  d <- data.frame(x = rnorm(30), y = rnorm(30))
+  m <- stats::lm(y ~ x, data = d)
   out <- morie_causal_robust_se(m, type = "HC3")
   expect_true(is.matrix(out$vcov))
   expect_equal(dim(out$vcov), c(2L, 2L))
