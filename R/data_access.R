@@ -185,9 +185,7 @@
     ))
   }
   if (format == "json") {
-    if (!requireNamespace("jsonlite", quietly = TRUE)) {
-      stop("Package 'jsonlite' is required to read JSON data.", call. = FALSE)
-    }
+    # Module 23: jsonlite fast path, native parser fallback (shim).
     return(.morie_from_json(path, simplifyVector = simplify))
   }
   if (format == "xml") {
