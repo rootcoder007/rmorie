@@ -1090,7 +1090,7 @@ morie_otis_churn_analyze_all <- function(b01 = NULL, b02 = NULL,
                    con = file.path(out_dir,
                                    sprintf("churn_%s.txt", nm)))
         if (requireNamespace("jsonlite", quietly = TRUE)) {
-          writeLines(jsonlite::toJSON(r$payload, pretty = TRUE,
+          writeLines(.morie_to_json(r$payload, pretty = TRUE,
                                        auto_unbox = TRUE, null = "null",
                                        force = TRUE),
                      con = file.path(out_dir,

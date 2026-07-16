@@ -436,7 +436,7 @@ morie_arsau_fetch_sidecar <- function(kind, year, limit = 5000L,
   # original arsau-specific string for upstream-portal analytics
   # purposes. timeout_sec preserved verbatim.
   body <- .morie_dataset_http_text(url, timeout_s = as.integer(timeout_sec))
-  payload <- jsonlite::fromJSON(body, simplifyVector = FALSE)
+  payload <- .morie_from_json(body, simplifyVector = FALSE)
   # CKAN wraps the useful content under $result.
   if (!is.null(payload$result) && is.list(payload$result)) {
     return(list(

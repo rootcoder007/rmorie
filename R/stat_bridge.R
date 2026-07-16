@@ -44,7 +44,7 @@ stat_bridge_registry_json <- function() {
   })
   # Stable ordering by name.
   entries <- entries[order(names(entries))]
-  jsonlite::toJSON(unname(entries), auto_unbox = TRUE, null = "null")
+  .morie_to_json(unname(entries), auto_unbox = TRUE, null = "null")
 }
 
 

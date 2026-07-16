@@ -96,20 +96,16 @@
     y <- stats::convolve(x, rev(b), type = "open")[seq_along(x)]
     return(as.numeric(y))
   }
-  n <- length(x)
-  nb <- length(b); na_ <- length(a)
-  y <- numeric(n)
-  z <- numeric(max(nb, na_) - 1L)
-  bp <- c(b, rep(0, length(z) + 1L - nb))
-  ap <- c(a, rep(0, length(z) + 1L - na_))
-  for (i in seq_len(n)) {
-    y[i] <- bp[1] * x[i] + z[1]
-    for (j in seq_along(z)) {
-      z[j] <- bp[j + 1] * x[i] +
-        (if (j < length(z)) z[j + 1] else 0) - ap[j + 1] * y[i]
-    }
-  }
-  y
+  # a(L) y = b(L) x  ==  y = AR-recursive(MA-convolved x): both passes
+  # run in C via stats::filter. The convolution's leading NAs are the
+  # partial sums with zero-padded history.
+  u <- as.numeric(stats::filter(x, b, method = "convolution",
+                                sides = 1))
+  lead <- which(is.na(u))
+  u[lead] <- vapply(lead, function(i)
+    sum(b[seq_len(i)] * x[i:1]), numeric(1))
+  y <- stats::filter(u, -a[-1L], method = "recursive")
+  as.numeric(y)
 }
 
 #' Internal helper: zero-phase forward-backward filtering
@@ -288,10 +284,11 @@
   L <- length(g)
   half <- N %/% 2
   W <- numeric(half); V <- numeric(half)
-  for (t in seq_len(half)) {
-    idx <- (2 * t - 1 - (seq_len(L) - 1)) %% N + 1
-    W[t] <- sum(h * v[idx])
-    V[t] <- sum(g * v[idx])
+  tt <- seq_len(half)
+  for (l in seq_len(L)) {
+    idx <- (2L * tt - l) %% N + 1L
+    W <- W + h[l] * v[idx]
+    V <- V + g[l] * v[idx]
   }
   list(W = W, V = V)
 }
@@ -306,11 +303,10 @@
   N <- 2L * half
   L <- length(g)
   v <- numeric(N)
-  for (t in seq_len(half)) {
-    for (l in seq_len(L)) {
-      j <- (2L * t - l) %% N + 1L
-      v[j] <- v[j] + h[l] * W[t] + g[l] * V[t]
-    }
+  tt <- seq_len(half)
+  for (l in seq_len(L)) {
+    j <- (2L * tt - l) %% N + 1L   # distinct j per t at fixed l
+    v[j] <- v[j] + h[l] * W + g[l] * V
   }
   v
 }

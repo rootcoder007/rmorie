@@ -93,7 +93,7 @@ morie_tps_list_categories <- function() {
   )
   req <- httr2::req_timeout(req, timeout)
   resp <- httr2::req_perform(req)
-  jsonlite::fromJSON(
+  .morie_from_json(
     httr2::resp_body_string(resp),
     simplifyVector = FALSE
   )

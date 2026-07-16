@@ -322,7 +322,7 @@ mrm_tps_load_hawkes_refit <- function(manifest_path) {
   if (!requireNamespace("jsonlite", quietly = TRUE)) {
     stop("jsonlite is required for mrm_tps_load_hawkes_refit().")
   }
-  d <- jsonlite::fromJSON(manifest_path, simplifyVector = FALSE)
+  d <- .morie_from_json(manifest_path, simplifyVector = FALSE)
   cats <- names(d)
   rows <- lapply(cats, function(c) {
     e <- d[[c]]

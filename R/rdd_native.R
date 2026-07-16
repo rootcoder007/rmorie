@@ -40,16 +40,35 @@
   XtWX_inv <- tryCatch(solve(XtWX), error = function(e) MASS::ginv(XtWX))
   beta <- as.numeric(XtWX_inv %*% crossprod(X, ws * ys))
   # Nearest-neighbor residual variance sigma2_i = J/(J+1) (y_i - nnmean)^2
+  # On the sorted running variable the J nearest neighbours live in a
+  # +/- J window, so this is O(n J) instead of O(n^2).
   n_use <- length(use)
   J <- min(nn_J, n_use - 1L)
-  sig2 <- numeric(n_use)
   ord <- order(xs)
   xo <- xs[ord]; yo <- ys[ord]
-  for (i in seq_len(n_use)) {
-    d <- abs(xo - xo[i]); d[i] <- Inf
-    nn <- order(d)[seq_len(J)]
-    sig2[ord[i]] <- (J / (J + 1)) * (yo[i] - mean(yo[nn]))^2
+  # Vectorized +/-J window: distance and value matrices built from
+  # shifted copies (Inf pads the ends), then the J nearest picked by
+  # a running arg-min sweep — no per-observation allocation.
+  offs <- c(-(J:1), 1:J)
+  Dm <- matrix(Inf, n_use, length(offs))
+  Ym <- matrix(0, n_use, length(offs))
+  for (k in seq_along(offs)) {
+    o <- offs[k]
+    idx <- seq_len(n_use) + o
+    okk <- idx >= 1L & idx <= n_use
+    Dm[okk, k] <- abs(xo[idx[okk]] - xo[okk])
+    Ym[okk, k] <- yo[idx[okk]]
   }
+  nn_sum <- numeric(n_use)
+  for (j in seq_len(J)) {
+    pick <- max.col(-Dm, ties.method = "first")
+    sel <- cbind(seq_len(n_use), pick)
+    nn_sum <- nn_sum + Ym[sel]
+    Dm[sel] <- Inf
+  }
+  sig2o <- (J / (J + 1)) * (yo - nn_sum / J)^2
+  sig2 <- numeric(n_use)
+  sig2[ord] <- sig2o
   meat <- crossprod(X, (ws^2 * sig2) * X)
   V <- XtWX_inv %*% meat %*% XtWX_inv
   list(beta = beta, vcov = V, n = n_use)

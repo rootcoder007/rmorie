@@ -175,7 +175,7 @@
                                                          timeout_s = 60L,
                                                          auto_unbox = TRUE) {
   full_url <- .morie_dataset_build_url(url, query)
-  body_str <- jsonlite::toJSON(body, auto_unbox = auto_unbox,
+  body_str <- .morie_to_json(body, auto_unbox = auto_unbox,
                                  null = "null")
   if (exists(".morie_http_post_with_status",
               where = asNamespace("rmorie"),
@@ -218,7 +218,7 @@
                                             timeout_s = 60L,
                                             auto_unbox = TRUE) {
   full_url <- .morie_dataset_build_url(url, query)
-  body_str <- jsonlite::toJSON(body, auto_unbox = auto_unbox,
+  body_str <- .morie_to_json(body, auto_unbox = auto_unbox,
                                  null = "null")
   if (exists(".morie_http_post",
               where = asNamespace("rmorie"),
@@ -232,7 +232,7 @@
       stop(sprintf("morie HTTP POST failed (libcurl returned empty body): %s",
                    full_url), call. = FALSE)
     }
-    return(jsonlite::fromJSON(resp, simplifyVector = FALSE))
+    return(.morie_from_json(resp, simplifyVector = FALSE))
   }
   if (!requireNamespace("httr2", quietly = TRUE)) {
     stop("morie datasets POST needs either the libcurl-backed C++ ",
@@ -317,7 +317,7 @@
         "morie HTTP fetch returned non-JSON body (likely an upstream proxy error): %s\nFirst 200 chars: %s",
         full_url, substr(body, 1L, 200L)), call. = FALSE)
     }
-    return(jsonlite::fromJSON(body, simplifyVector = TRUE))
+    return(.morie_from_json(body, simplifyVector = TRUE))
   }
   if (!requireNamespace("httr2", quietly = TRUE)) {
     stop("morie datasets HTTP fetch needs either the libcurl-backed ",

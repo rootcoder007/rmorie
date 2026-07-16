@@ -37,7 +37,7 @@ morie_inspect_output <- function(path) {
           result$status <- "jsonlite-unavailable"
           return(result)
         }
-        obj <- jsonlite::fromJSON(path)
+        obj <- .morie_from_json(path)
         if (is.list(obj)) names(obj) else utils::head(obj)
       } else if (ext == "csv") {
         df <- utils::read.csv(path, nrows = 5L)
@@ -102,7 +102,7 @@ morie_verify_statistical_output <- function(path) {
     )
   }
 
-  obj <- tryCatch(jsonlite::fromJSON(path), error = function(e) NULL)
+  obj <- tryCatch(.morie_from_json(path), error = function(e) NULL)
   if (is.null(obj)) {
     out$checks$json_parses <- FALSE
     return(out)

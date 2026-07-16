@@ -36,8 +36,8 @@ and the `morie_match_result` / result-object shapes do not change.
 | 20 | DSP: butter/filtfilt/fir1/sgolay/hilbert/peaks/Welch PSD-CSD-coherence/DWT | signal/wavelets | DONE (butter coefs==signal to 1e-8; DWT perfect reconstruction, haar/d4/la8) |
 | 21 | Hawkes MLE (all kernels/baselines) | hawkes/emhawkes | DONE (native path was complete; external exp fast path removed; loglik==hawkes pkg) |
 | 22 | crypto: standalone C++ SHA-256/HMAC/PBKDF2 (+ PQC lattice KEM/DSA already native via liboqs) | digest/openssl | DONE (NIST/RFC vectors; digest dropped from Imports; SHA-512 deferred YAGNI) |
-| 23 | parsers: XML(SAX)/HTML/JSON/parquet-min | xml2/jsonlite/arrow | planned |
-| 24 | MRM: load/reconcile/estimate/report | — (flagship) | planned |
+| 23 | parsers: native JSON parse/stringify, SAX XML, tolerant HTML, minimal Parquet+Snappy, unified dispatcher | xml2/jsonlite/arrow (now optional fast paths per charter) | DONE (jsonlite-parity incl. matrix/data-frame simplification; all call sites shimmed) |
+| 24 | MRM flagship: load_si_dataset/reconcile/estimate_causal_effect/report + phase-17 composition test | — (flagship) | DONE (4-estimator pipeline w/ Holm correction + IVW consensus; own text/md/LaTeX/HTML renderer; citation derives from inst/CITATION) |
 
 ---
 
@@ -523,3 +523,35 @@ enforcement; SLH-DSA pointed to for many-time use) and
 morie_crypto_pqc_inventory() reporting family/standard/availability.
 The hybrid recommendation (PQC + classical) is realized by
 crypto_hybrid.R: ML-KEM encapsulation feeding native HKDF-SHA256.
+
+
+## Modules 23-24 — parsers + the MRM flagship (2026-07-16)
+
+**Module 23 — native parsers (R/fetch_native.R).** Pure-R
+recursive-descent JSON parser with jsonlite-parity simplification
+(scalar arrays -> vectors, arrays of arrays -> matrices, arrays of
+objects -> data frames; \u escapes, CDATA-safe) + native stringifier;
+SAX-style XML scanner (events) with a list-tree builder; tolerant HTML
+parser (void elements, implicit closes, stray end tags); CSV/TSV via
+base utils; a minimal Parquet reader — thrift-compact footer/page
+headers, PLAIN encoding, INT32/INT64/DOUBLE/BYTE_ARRAY, uncompressed or
+Snappy (pure-R Snappy decompressor) — that fails LOUDLY naming arrow
+for anything richer; and morie_fetch_unified() returning a
+morie_dataset. Per the module charter jsonlite/xml2/arrow stay in
+Suggests as fast paths: 29 files' jsonlite calls now route through
+.morie_from_json/.morie_to_json shims, data_access/dataset/ingest_ckan
+XML/HTML/jsonl/parquet paths gained native fallbacks, so a bare
+install parses everything. HTTP was already native (libcurl C++).
+
+**Module 24 — the MRM flagship (R/mrm_flagship.R).**
+morie_mrm_load_si_dataset (bundled samples + provenance envelope with
+native SHA-256 checksum), morie_mrm_reconcile (explicit matching
+schema: keys, compared fields, numeric tolerance; match rate, orphans,
+field-level conflicts), morie_mrm_estimate_causal_effect (composes the
+branch's native matching/ATE/AIPW/DML on one specification, Holm
+correction across methods, inverse-variance consensus, citation drawn
+from inst/CITATION at runtime), morie_mrm_report (own renderer:
+text/markdown/LaTeX/HTML, no stargazer/gt). Plus the phase-17
+composition test: one DAG -> identification -> matching -> DML
+estimate -> three refutations -> MRM report, every step a module of
+this branch.

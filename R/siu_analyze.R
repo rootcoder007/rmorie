@@ -643,7 +643,7 @@ morie_siu_all_analyses <- function(data = NULL, out_dir = NULL) {
                                paste0("siu_analysis_", nm, ".json"))
         tryCatch(
           writeLines(
-            jsonlite::toJSON(r$payload, auto_unbox = TRUE,
+            .morie_to_json(r$payload, auto_unbox = TRUE,
                              pretty = TRUE, null = "null"),
             json_path
           ),

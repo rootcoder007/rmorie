@@ -131,7 +131,7 @@ morie_vertex_ask_gemini <- function(prompt, model = NULL, system = NULL,
     Authorization = paste("Bearer", token),
     `Content-Type` = "application/json")
   req <- httr2::req_body_raw(req,
-    jsonlite::toJSON(payload, auto_unbox = TRUE, null = "null"),
+    .morie_to_json(payload, auto_unbox = TRUE, null = "null"),
     type = "application/json")
   req <- httr2::req_timeout(req, timeout_s)
   req <- httr2::req_error(req, is_error = function(resp) FALSE)
@@ -142,7 +142,7 @@ morie_vertex_ask_gemini <- function(prompt, model = NULL, system = NULL,
     stop(sprintf("Vertex API returned %d: %s",
                  status, substr(body, 1L, 400L)))
   }
-  data <- jsonlite::fromJSON(body, simplifyVector = FALSE)
+  data <- .morie_from_json(body, simplifyVector = FALSE)
   parts <- tryCatch(data$candidates[[1]]$content$parts,
                     error = function(e) NULL)
   if (is.null(parts)) {

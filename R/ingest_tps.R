@@ -13,7 +13,7 @@
 #   * `morie_ingest_tps_layers()`        - registry as data.frame
 #   * `morie_ingest_tps_feature_layer()` - paged query -> data.frame
 #
-# HTTP: routes via .morie_dataset_http_text (3YY -> libcurl C++ backend with httr2 fallback). JSON: jsonlite::fromJSON(simplifyVector=FALSE).
+# HTTP: routes via .morie_dataset_http_text (3YY -> libcurl C++ backend with httr2 fallback). JSON: .morie_from_json(simplifyVector=FALSE).
 # Geometry: the source layers are stored in WGS-1984 Web Mercator
 # (auxiliary sphere); we force `outSR=4326` so `geom_x`/`geom_y`
 # come back as longitude/latitude, not metres.
@@ -124,7 +124,7 @@ morie_ingest_tps_layers <- function() {
       )
     }
   )
-  payload <- jsonlite::fromJSON(body, simplifyVector = FALSE)
+  payload <- .morie_from_json(body, simplifyVector = FALSE)
   if (!is.null(payload$error)) {
     stop("morie TPS layer query error: ",
       paste(utils::capture.output(str(payload$error)), collapse = " "),

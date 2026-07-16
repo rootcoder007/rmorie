@@ -165,7 +165,7 @@ morie_fetch_tps <- function(
       "%s/query?where=%s&outFields=*&returnGeometry=true&f=geojson&resultRecordCount=%d&resultOffset=%d",
       base, utils::URLencode(where, reserved = TRUE), max_per_page, offset
     )
-    page <- tryCatch(jsonlite::fromJSON(url, simplifyVector = FALSE),
+    page <- tryCatch(.morie_from_json(url, simplifyVector = FALSE),
       error = function(e) NULL
     )
     if (is.null(page)) {

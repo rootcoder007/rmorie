@@ -14,7 +14,7 @@
 # wrapper targets the documented Chicago "Crimes - 2001 to Present"
 # feed (resource id `ijzp-q8t2`, verified 2026-05-13).
 #
-# HTTP: routes via .morie_dataset_http_text (3YY -> libcurl C++ backend with httr2 fallback). JSON: jsonlite::fromJSON(simplifyVector=FALSE).
+# HTTP: routes via .morie_dataset_http_text (3YY -> libcurl C++ backend with httr2 fallback). JSON: .morie_from_json(simplifyVector=FALSE).
 # Optional BigQuery mirror: `bigquery-public-data.chicago_crime` via
 # `morie_ingest_bigquery_table()` for analysts who prefer SQL on the
 # full historical mirror; see ingest_bigquery.R.
@@ -100,7 +100,7 @@ morie_ingest_chicago_resources <- function() {
       )
     }
   )
-  payload <- jsonlite::fromJSON(body, simplifyVector = FALSE)
+  payload <- .morie_from_json(body, simplifyVector = FALSE)
   if (is.list(payload) && !is.null(payload$error)) {
     stop("morie Chicago socrata error: ",
       paste(utils::capture.output(str(payload)), collapse = " "),

@@ -298,7 +298,7 @@ morie_arsau_read_sidecar <- function(path) {
   if (!requireNamespace("jsonlite", quietly = TRUE)) {
     stop("morie_arsau_read_sidecar requires the 'jsonlite' package.")
   }
-  payload <- jsonlite::fromJSON(path, simplifyVector = FALSE)
+  payload <- .morie_from_json(path, simplifyVector = FALSE)
   if (!is.null(payload$fields) || !is.null(payload$records)) {
     return(list(
       fields = payload$fields %||% list(),
