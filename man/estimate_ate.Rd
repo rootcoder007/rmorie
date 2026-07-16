@@ -16,7 +16,7 @@ estimate_ate(data, outcome, treatment, weights_col)
 \item{weights_col}{Name of the weights column (e.g. IPTW).}
 }
 \value{
-Named list with \code{ate} and \code{se} (HC3-robust when available).
+Named list with \code{ate} and \code{se} (native HC3-robust).
 }
 \description{
 Thin wrapper over a weighted \code{stats::lm()} plus HC3 robust SEs

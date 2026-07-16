@@ -92,11 +92,6 @@ NULL
 .causal_have_causalimpact <- function() {
   requireNamespace("CausalImpact", quietly = TRUE)
 }
-#' Internal helper: Causal Have Sandwich
-#' @noRd
-.causal_have_sandwich     <- function() {
-  requireNamespace("sandwich",     quietly = TRUE)
-}
 #' Internal helper: Causal Have Aer
 #' @noRd
 .causal_have_aer          <- function() {
@@ -1161,19 +1156,14 @@ morie_causal_weighting <- function(data, treatment, covariates,
 
 #' Robust / heteroskedasticity-consistent variance for a fitted model
 #'
-#' Thin wrapper around \pkg{sandwich} variance estimators. Returns
-#' the requested variance-covariance matrix and the corresponding
-#' robust standard errors. Supports HC0-HC5 (cross-section), HAC
-#' (time-series), and clustered (one-way) variance.
+#' Native robust variance via \code{\link{morie_vcov_robust}} (no
+#' external dependency). Returns the requested variance-covariance
+#' matrix and the corresponding robust standard errors. Supports
+#' HC0-HC5 (cross-section), HAC (time-series), and clustered
+#' (one-way) variance, each cross-validated against \pkg{sandwich}
+#' to machine precision.
 #'
-#' Hard-errors if \pkg{sandwich} is not installed -- the HC sandwich
-#' algebra is well-tested upstream and re-implementing it inline
-#' would be both lengthy and error-prone.
-#'
-#' @param model A fitted model object (typically from
-#'   \code{stats::lm} or \code{stats::glm}) compatible with
-#'   \code{sandwich::vcovHC()}, \code{sandwich::vcovHAC()}, or
-#'   \code{sandwich::vcovCL()}.
+#' @param model A fitted \code{stats::lm} or \code{stats::glm}.
 #' @param type One of \code{"HC0"}, \code{"HC1"}, \code{"HC2"},
 #'   \code{"HC3"}, \code{"HC4"}, \code{"HC4m"}, \code{"HC5"},
 #'   \code{"HAC"}, or \code{"CL"} (clustered). Default
@@ -1201,24 +1191,7 @@ morie_causal_robust_se <- function(model,
                                    type = "HC3",
                                    cluster = NULL,
                                    ...) {
-  if (!.causal_have_sandwich()) {
-    stop(
-      "morie_causal_robust_se requires the 'sandwich' package. ",
-      "Install with install.packages('sandwich').",
-      call. = FALSE
-    )
-  }
-  v <- if (identical(type, "HAC")) {
-    sandwich::vcovHAC(model, ...)
-  } else if (identical(type, "CL")) {
-    if (is.null(cluster)) {
-      stop("type = 'CL' requires a non-NULL cluster argument.",
-           call. = FALSE)
-    }
-    sandwich::vcovCL(model, cluster = cluster, ...)
-  } else {
-    sandwich::vcovHC(model, type = type, ...)
-  }
+  v <- morie_vcov_robust(model, type = type, cluster = cluster, ...)
   se <- sqrt(diag(v))
   list(
     vcov = v,
