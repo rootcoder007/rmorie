@@ -42,15 +42,20 @@ test_that("native filtfilt matches signal::filtfilt away from edges", {
   expect_equal(mine[core], ref[core], tolerance = 1e-6)
 })
 
-test_that("native hilbert matches signal::hilbert", {
-  skip_if_not_installed("signal")
+test_that("native hilbert matches seewave::hilbert analytic signal", {
+  # signal 1.8.x has no hilbert(); seewave::hilbert is the analytic
+  # signal Hilbert transform and is the reference here.
+  skip_if_not_installed("seewave")
   set.seed(181)
   x <- rnorm(256)
-  has_h <- exists("hilbert", where = asNamespace("signal"))
-  skip_if(!has_h, "signal::hilbert unavailable")
-  ref <- get("hilbert", envir = asNamespace("signal"))(x)
+  ref <- seewave::hilbert(x, f = 1)          # complex analytic signal
   mine <- rmorie:::.morie_dsp_hilbert(x)
-  expect_equal(Mod(mine), Mod(ref), tolerance = 1e-8)
+  # both are the analytic signal x + i*H{x}; envelopes must agree
+  expect_equal(Mod(mine), as.numeric(Mod(ref)), tolerance = 1e-6)
+  # instantaneous phase agrees up to endpoint edge effects
+  core <- 20:236
+  expect_equal(Arg(mine)[core], as.numeric(Arg(ref))[core],
+               tolerance = 1e-4)
 })
 
 test_that("native DWT coefficients match wavelets::dwt", {
