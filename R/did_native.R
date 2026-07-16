@@ -126,11 +126,17 @@
 #' Internal helper: OLS fit + asymptotic linear rep on a subsample
 #' @noRd
 .morie_did_or_fit <- function(y, X, subset_w) {
-  # Weighted least squares of y on X with 0/1 (or general) weights.
-  wX <- X * subset_w
-  XpX <- crossprod(wX, X) / length(y)
+  # Weighted least squares of y on X with 0/1 (or general) weights. The
+  # normal equations only see rows with non-zero weight, so form the
+  # cross-products on that subsample (drdid weights zero out 50-75% of
+  # rows) -- identical XpX/Xpy, far less crossprod work. fitted and the
+  # influence-function linear rep stay full-length.
+  n <- length(y)
+  sel <- subset_w != 0
+  Xs <- X[sel, , drop = FALSE]; wXs <- Xs * subset_w[sel]
+  XpX <- crossprod(wXs, Xs) / n
   XpX_inv <- tryCatch(solve(XpX), error = function(e) .morie_ginv(XpX))
-  beta <- as.numeric(XpX_inv %*% (crossprod(wX, y) / length(y)))
+  beta <- as.numeric(XpX_inv %*% (crossprod(wXs, y[sel]) / n))
   fitted <- as.numeric(X %*% beta)
   lin_rep <- (subset_w * (y - fitted) * X) %*% XpX_inv
   list(fitted = fitted, beta = beta, lin_rep = lin_rep)
