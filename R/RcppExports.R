@@ -97,6 +97,10 @@ morie_crypto_chacha20poly1305_decrypt <- function(key_sxp, nonce_sxp, ct_with_ta
     .Call(`_rmorie_morie_crypto_random_bytes`, n)
 }
 
+.morie_twfe_demean_cpp <- function(M, g1, g2, K1, K2, tol = 1e-11, max_iter = 500L) {
+    .Call(`_rmorie_morie_twfe_demean_cpp`, M, g1, g2, K1, K2, tol, max_iter)
+}
+
 morie_dsp_lms_cpp <- function(x, d, order, mu) {
     .Call(`_rmorie_morie_dsp_lms_cpp`, x, d, order, mu)
 }

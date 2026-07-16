@@ -288,6 +288,23 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// morie_twfe_demean_cpp
+arma::mat morie_twfe_demean_cpp(arma::mat M, const arma::ivec& g1, const arma::ivec& g2, int K1, int K2, double tol, int max_iter);
+RcppExport SEXP _rmorie_morie_twfe_demean_cpp(SEXP MSEXP, SEXP g1SEXP, SEXP g2SEXP, SEXP K1SEXP, SEXP K2SEXP, SEXP tolSEXP, SEXP max_iterSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type M(MSEXP);
+    Rcpp::traits::input_parameter< const arma::ivec& >::type g1(g1SEXP);
+    Rcpp::traits::input_parameter< const arma::ivec& >::type g2(g2SEXP);
+    Rcpp::traits::input_parameter< int >::type K1(K1SEXP);
+    Rcpp::traits::input_parameter< int >::type K2(K2SEXP);
+    Rcpp::traits::input_parameter< double >::type tol(tolSEXP);
+    Rcpp::traits::input_parameter< int >::type max_iter(max_iterSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_twfe_demean_cpp(M, g1, g2, K1, K2, tol, max_iter));
+    return rcpp_result_gen;
+END_RCPP
+}
 // morie_dsp_lms_cpp
 List morie_dsp_lms_cpp(NumericVector x, NumericVector d, int order, double mu);
 RcppExport SEXP _rmorie_morie_dsp_lms_cpp(SEXP xSEXP, SEXP dSEXP, SEXP orderSEXP, SEXP muSEXP) {
@@ -922,6 +939,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_crypto_chacha20poly1305_decrypt", (DL_FUNC) &_rmorie_morie_crypto_chacha20poly1305_decrypt, 4},
     {"_rmorie_morie_crypto_hkdf_sha256", (DL_FUNC) &_rmorie_morie_crypto_hkdf_sha256, 4},
     {"_rmorie_morie_crypto_random_bytes", (DL_FUNC) &_rmorie_morie_crypto_random_bytes, 1},
+    {"_rmorie_morie_twfe_demean_cpp", (DL_FUNC) &_rmorie_morie_twfe_demean_cpp, 7},
     {"_rmorie_morie_dsp_lms_cpp", (DL_FUNC) &_rmorie_morie_dsp_lms_cpp, 4},
     {"_rmorie_morie_dsp_nlms_cpp", (DL_FUNC) &_rmorie_morie_dsp_nlms_cpp, 5},
     {"_rmorie_morie_dsp_rls_cpp", (DL_FUNC) &_rmorie_morie_dsp_rls_cpp, 5},
