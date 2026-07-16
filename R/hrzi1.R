@@ -82,7 +82,7 @@ hrzi1 <- function(x, y, bandwidth = NULL) {
     }
   }
   H <- 0.5 * (H + t(H))
-  cov_m <- tryCatch(MASS::ginv(H) / n, error = function(e) matrix(NA, p, p))
+  cov_m <- tryCatch(.morie_ginv(H) / n, error = function(e) matrix(NA, p, p))
   se <- sqrt(pmax(diag(cov_m), 0))
   list(
     estimate = bh, se = se, bandwidth = h0, n = n, loss = res$value,

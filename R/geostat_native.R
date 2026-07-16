@@ -124,7 +124,7 @@ morie_spatial_krige <- function(coords, values, new_coords,
   G <- .morie_vgm_gamma(as.matrix(stats::dist(coords)),
                         vgm$model, vgm$nugget, vgm$psill, vgm$range)
   A <- rbind(cbind(G, 1), c(rep(1, n), 0))
-  A_inv <- tryCatch(solve(A), error = function(e) MASS::ginv(A))
+  A_inv <- tryCatch(solve(A), error = function(e) .morie_ginv(A))
   # cross-distances obs x new
   cross2 <- outer(rowSums(coords^2), rowSums(new_coords^2), "+") -
     2 * coords %*% t(new_coords)

@@ -122,7 +122,7 @@
 #' @noRd
 .safe_solve <- function(A) {
   res <- try(solve(A), silent = TRUE)
-  if (inherits(res, "try-error")) MASS::ginv(A) else res
+  if (inherits(res, "try-error")) .morie_ginv(A) else res
 }
 
 #' Compute residual diagnostics
@@ -685,7 +685,7 @@ wald_test <- function(estimates, vcov, R = NULL, r = NULL) {
   meat <- R %*% V %*% t(R)
   w_stat <- tryCatch(as.numeric(crossprod(diffv, solve(meat, diffv))),
                      error = function(e) {
-                       as.numeric(crossprod(diffv, MASS::ginv(meat) %*% diffv))
+                       as.numeric(crossprod(diffv, .morie_ginv(meat) %*% diffv))
                      })
   p_value <- 1 - stats::pchisq(w_stat, q)
   conclusion <- if (p_value < 0.05)
@@ -710,7 +710,7 @@ score_test <- function(score_vector, information_matrix) {
   q <- length(U)
   s_stat <- tryCatch(as.numeric(crossprod(U, solve(I_mat, U))),
                      error = function(e)
-                       as.numeric(crossprod(U, MASS::ginv(I_mat) %*% U)))
+                       as.numeric(crossprod(U, .morie_ginv(I_mat) %*% U)))
   p_value <- 1 - stats::pchisq(s_stat, q)
   conclusion <- if (p_value < 0.05) "Reject H0." else "Cannot reject H0."
   .new_spec_test(name = "score", statistic = s_stat,

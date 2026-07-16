@@ -162,7 +162,7 @@ print.morie_dml_clustered <- function(x, ...) {
   Xm <- X[idx, , drop = FALSE]
   beta <- tryCatch(
     as.numeric(solve(crossprod(Xm), crossprod(Xm, y[idx]))),
-    error = function(e) as.numeric(MASS::ginv(crossprod(Xm)) %*%
+    error = function(e) as.numeric(.morie_ginv(crossprod(Xm)) %*%
                                      crossprod(Xm, y[idx]))
   )
   as.numeric(X[te, , drop = FALSE] %*% beta)

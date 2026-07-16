@@ -42,7 +42,7 @@ copul <- function(x, y, family = c("gaussian", "clayton", "gumbel")) {
 
 # CANONICAL TEST
 # set.seed(0); Sigma <- matrix(c(1, 0.7, 0.7, 1), 2)
-# z <- MASS::mvrnorm(500, c(0,0), Sigma)
+# z <- morie_mvrnorm(500, c(0,0), Sigma)
 # r <- copul(z[,1], z[,2], family = "gaussian")
 # stopifnot(abs(r$estimate - 0.7) < 0.1)
 

@@ -123,7 +123,7 @@
   ps <- pmin(ps, 1 - 1e-16)
   score <- (D - ps) * X
   hess <- crossprod(X * (ps * (1 - ps)), X) / length(D)
-  hinv <- tryCatch(solve(hess), error = function(e) MASS::ginv(hess))
+  hinv <- tryCatch(solve(hess), error = function(e) .morie_ginv(hess))
   list(ps = ps, lin_rep = score %*% hinv)
 }
 
@@ -133,7 +133,7 @@
   # Weighted least squares of y on X with 0/1 (or general) weights.
   wX <- X * subset_w
   XpX <- crossprod(wX, X) / length(y)
-  XpX_inv <- tryCatch(solve(XpX), error = function(e) MASS::ginv(XpX))
+  XpX_inv <- tryCatch(solve(XpX), error = function(e) .morie_ginv(XpX))
   beta <- as.numeric(XpX_inv %*% (crossprod(wX, y) / length(y)))
   fitted <- as.numeric(X %*% beta)
   lin_rep <- (subset_w * (y - fitted) * X) %*% XpX_inv

@@ -54,7 +54,7 @@ hrzb2 <- function(x, y, bandwidth = NULL) {
   phi <- stats::dnorm(z)
   score_i <- -as.numeric(ys * phi) * X / h
   info <- t(score_i) %*% score_i / n
-  cov_m <- tryCatch(MASS::ginv(info) / n,
+  cov_m <- tryCatch(.morie_ginv(info) / n,
     error = function(e) matrix(NA, p, p)
   )
   se <- sqrt(pmax(diag(cov_m), 0))

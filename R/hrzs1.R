@@ -35,12 +35,12 @@ hrzs1 <- function(x, y, z, d) {
   }
   M <- cbind(Xc[sel, , drop = FALSE], mills[sel])
   yy <- y[sel]
-  coef <- as.numeric(MASS::ginv(t(M) %*% M) %*% (t(M) %*% yy))
+  coef <- as.numeric(.morie_ginv(t(M) %*% M) %*% (t(M) %*% yy))
   beta <- coef[seq_len(ncol(Xc))]
   rho_sigma <- coef[length(coef)]
   resid <- yy - as.numeric(M %*% coef)
   sigma2 <- mean(resid^2)
-  cov_m <- sigma2 * MASS::ginv(t(M) %*% M)
+  cov_m <- sigma2 * .morie_ginv(t(M) %*% M)
   se_all <- sqrt(pmax(diag(cov_m), 0))
   list(
     estimate = as.numeric(beta),

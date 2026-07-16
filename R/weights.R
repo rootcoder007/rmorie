@@ -205,7 +205,7 @@ morie_weights_greg <- function(weights, X, population_totals,
                          warning("Singular XtWX; using pseudo-inverse.")
                          if (!requireNamespace("MASS", quietly = TRUE))
                            stop("Need 'MASS' for ginv fallback.", call. = FALSE)
-                         MASS::ginv(XtWX)
+                         .morie_ginv(XtWX)
                        })
   lambda <- XtWX_inv %*% (T_x - T_hat)
   g <- 1 + Xm %*% lambda

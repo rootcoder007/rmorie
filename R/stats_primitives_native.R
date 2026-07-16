@@ -36,7 +36,7 @@ morie_partial_cor <- function(data, method = "pearson") {
   storage.mode(X) <- "double"
   n <- nrow(X); gp <- ncol(X) - 2L
   R <- stats::cor(X, method = method)
-  P <- tryCatch(solve(R), error = function(e) MASS::ginv(R))
+  P <- tryCatch(solve(R), error = function(e) .morie_ginv(R))
   d <- sqrt(diag(P))
   est <- -P / outer(d, d)
   diag(est) <- 1
@@ -93,7 +93,7 @@ morie_semipartial_cor <- function(data, method = "pearson") {
   n <- nrow(X); gp <- ncol(X) - 2L
   # Ding-VanderWeele/Kim semi-partial: from the COVARIANCE precision.
   cvx <- stats::cov(X, method = method)
-  icvx <- tryCatch(solve(cvx), error = function(e) MASS::ginv(cvx))
+  icvx <- tryCatch(solve(cvx), error = function(e) .morie_ginv(cvx))
   est <- -stats::cov2cor(icvx) / sqrt(diag(cvx)) /
     sqrt(abs(diag(icvx) - t(t(icvx^2) / diag(icvx))))
   diag(est) <- 1

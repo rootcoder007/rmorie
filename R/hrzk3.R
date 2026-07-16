@@ -36,7 +36,7 @@ hrzk3 <- function(x, y, bandwidth = NULL, grid = NULL) {
     WX <- X * w
     XtWX <- t(X) %*% WX
     beta <- tryCatch(solve(XtWX, t(WX) %*% y),
-      error = function(e) MASS::ginv(XtWX) %*% (t(WX) %*% y)
+      error = function(e) .morie_ginv(XtWX) %*% (t(WX) %*% y)
     )
     m_hat[i] <- beta[1]
     r <- y - X %*% beta

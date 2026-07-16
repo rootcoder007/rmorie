@@ -50,12 +50,12 @@ hrzd1 <- function(t, x, event) {
     info <- matrix(0, p, p)
     for (i in 1:p) for (j in 1:p) info[i, j] <- sum(ev * var_X[, i, j])
     step <- tryCatch(solve(info + 1e-8 * diag(p), score),
-      error = function(e) MASS::ginv(info) %*% score
+      error = function(e) .morie_ginv(info) %*% score
     )
     beta <- beta + as.numeric(step)
     if (max(abs(step)) < 1e-6) break
   }
-  cov_m <- tryCatch(MASS::ginv(info), error = function(e) matrix(NA, p, p))
+  cov_m <- tryCatch(.morie_ginv(info), error = function(e) matrix(NA, p, p))
   se <- sqrt(pmax(diag(cov_m), 0))
   list(
     estimate = if (p == 1) as.numeric(beta) else as.numeric(beta),

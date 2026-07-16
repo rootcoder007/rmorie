@@ -524,7 +524,7 @@ morie_iv_hausman <- function(data, outcome, endogenous, instruments,
   v_ols    <- stats::vcov(ols)
   v_diff   <- v_iv - v_ols
   v_diff   <- 0.5 * (v_diff + t(v_diff))
-  stat     <- as.numeric(t(diff) %*% MASS::ginv(v_diff) %*% diff)
+  stat     <- as.numeric(t(diff) %*% .morie_ginv(v_diff) %*% diff)
   list(statistic = stat,
        p_value   = stats::pchisq(stat, df = length(diff),
                                  lower.tail = FALSE),

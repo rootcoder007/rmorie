@@ -22,13 +22,13 @@
   n <- length(y)
   k <- ncol(X)
   ZtZ_inv <- tryCatch(solve(crossprod(Z)),
-                      error = function(e) MASS::ginv(crossprod(Z)))
+                      error = function(e) .morie_ginv(crossprod(Z)))
   PzX <- Z %*% (ZtZ_inv %*% crossprod(Z, X))
   Pzy <- Z %*% (ZtZ_inv %*% crossprod(Z, y))
   # X'(I - kappa M_Z) X = (1-kappa) X'X + kappa X'PzX
   A <- (1 - kappa) * crossprod(X) + kappa * crossprod(X, PzX)
   b <- (1 - kappa) * crossprod(X, y) + kappa * crossprod(X, Pzy)
-  A_inv <- tryCatch(solve(A), error = function(e) MASS::ginv(A))
+  A_inv <- tryCatch(solve(A), error = function(e) .morie_ginv(A))
   beta <- as.numeric(A_inv %*% b)
   names(beta) <- colnames(X)
   resid <- as.numeric(y - X %*% beta)
@@ -73,7 +73,7 @@
   M <- function(A, B) {
     # residual maker of B applied to A
     A - B %*% (tryCatch(solve(crossprod(B)),
-                        error = function(e) MASS::ginv(crossprod(B))) %*%
+                        error = function(e) .morie_ginv(crossprod(B))) %*%
                  crossprod(B, A))
   }
   W1 <- M(W, X_exo)
@@ -98,19 +98,19 @@
   first <- .morie_iv_kclass_native(y, X, Z, kappa = 1)
   e1 <- first$residuals
   S <- crossprod(Z, e1^2 * Z) / n
-  S_inv <- tryCatch(solve(S), error = function(e) MASS::ginv(S))
+  S_inv <- tryCatch(solve(S), error = function(e) .morie_ginv(S))
   XtZ <- crossprod(X, Z)
   Zty <- crossprod(Z, y)
   A <- XtZ %*% S_inv %*% t(XtZ)
-  A_inv <- tryCatch(solve(A), error = function(e) MASS::ginv(A))
+  A_inv <- tryCatch(solve(A), error = function(e) .morie_ginv(A))
   beta <- as.numeric(A_inv %*% (XtZ %*% S_inv %*% Zty))
   names(beta) <- colnames(X)
   resid <- as.numeric(y - X %*% beta)
   # Efficient-GMM variance: n * (X'Z S2^{-1} Z'X)^{-1} with S2 at beta2
   S2 <- crossprod(Z, resid^2 * Z) / n
-  S2_inv <- tryCatch(solve(S2), error = function(e) MASS::ginv(S2))
+  S2_inv <- tryCatch(solve(S2), error = function(e) .morie_ginv(S2))
   A2 <- XtZ %*% S2_inv %*% t(XtZ)
-  V <- n * tryCatch(solve(A2), error = function(e) MASS::ginv(A2))
+  V <- n * tryCatch(solve(A2), error = function(e) .morie_ginv(A2))
   se <- sqrt(pmax(diag(V), 0)) / sqrt(n) * sqrt(n)  # V already scaled
   se <- sqrt(pmax(diag(V), 0)) / sqrt(n)
   names(se) <- colnames(X)
@@ -137,7 +137,7 @@
     e <- as.numeric(y - X %*% beta)
     g <- as.numeric(crossprod(Z, e)) / n
     S <- crossprod(Z, e^2 * Z) / n
-    S_inv <- tryCatch(solve(S), error = function(err) MASS::ginv(S))
+    S_inv <- tryCatch(solve(S), error = function(err) .morie_ginv(S))
     n * as.numeric(t(g) %*% S_inv %*% g)
   }
   opt <- stats::optim(two$beta, obj, method = "BFGS",
@@ -146,10 +146,10 @@
   names(beta) <- colnames(X)
   e <- as.numeric(y - X %*% beta)
   S <- crossprod(Z, e^2 * Z) / n
-  S_inv <- tryCatch(solve(S), error = function(err) MASS::ginv(S))
+  S_inv <- tryCatch(solve(S), error = function(err) .morie_ginv(S))
   XtZ <- crossprod(X, Z)
   A <- XtZ %*% S_inv %*% t(XtZ)
-  V <- tryCatch(solve(A), error = function(err) MASS::ginv(A))
+  V <- tryCatch(solve(A), error = function(err) .morie_ginv(A))
   se <- sqrt(pmax(diag(V), 0))
   names(se) <- colnames(X)
   list(beta = beta, se = se, vcov = V, residuals = e,
@@ -170,7 +170,7 @@
   k <- ncol(X)
   if (is.null(lag)) lag <- floor(4 * (n / 100)^(2 / 9))
   XtX_inv <- tryCatch(solve(crossprod(X)),
-                      error = function(e) MASS::ginv(crossprod(X)))
+                      error = function(e) .morie_ginv(crossprod(X)))
   U <- X * resid
   omega <- crossprod(U)
   if (lag > 0) {
