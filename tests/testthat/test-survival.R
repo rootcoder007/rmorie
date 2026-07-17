@@ -17,6 +17,7 @@
 # ---------------------------------------------------------------------------
 
 test_that("morie_survival_km returns a tidy list", {
+  skip_if_not_installed("survival")
   d <- .make_surv()
   res <- morie_survival_km(d$time, d$event)
   expect_type(res, "list")
@@ -28,6 +29,7 @@ test_that("morie_survival_km returns a tidy list", {
 })
 
 test_that("morie_survival_km log-log CI method works", {
+  skip_if_not_installed("survival")
   d <- .make_surv(50)
   res <- morie_survival_km(d$time, d$event, ci_method = "log-log")
   expect_match(res$method, "log-log")
@@ -37,6 +39,7 @@ test_that("morie_survival_km log-log CI method works", {
 })
 
 test_that("morie_survival_km accepts NA / negative times by dropping them", {
+  skip_if_not_installed("survival")
   t <- c(1, 2, NA, 3, -1, 4)
   e <- c(1, 0, 1, 1, 0, 1)
   res <- morie_survival_km(t, e)
@@ -48,6 +51,7 @@ test_that("morie_survival_km accepts NA / negative times by dropping them", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_survival_nelsonaalen returns monotone-increasing cumhaz", {
+  skip_if_not_installed("survival")
   d <- .make_surv()
   res <- morie_survival_nelsonaalen(d$time, d$event)
   expect_true(all(res$cumhaz >= 0))
@@ -60,6 +64,7 @@ test_that("morie_survival_nelsonaalen returns monotone-increasing cumhaz", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_survival_logrank: groups with different hazards reject", {
+  skip_if_not_installed("survival")
   set.seed(1)
   n <- 80
   t1 <- rexp(n, rate = 1.0); t2 <- rexp(n, rate = 0.3)
@@ -74,6 +79,7 @@ test_that("morie_survival_logrank: groups with different hazards reject", {
 })
 
 test_that("morie_survival_logrank weight variants run", {
+  skip_if_not_installed("survival")
   d <- .make_surv()
   group <- rep(c("a", "b"), length.out = nrow(d))
   for (w in c("logrank", "peto", "gehan", "tarone")) {
@@ -87,6 +93,7 @@ test_that("morie_survival_logrank weight variants run", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_survival_cox recovers a known coefficient sign", {
+  skip_if_not_installed("survival")
   d <- .make_surv(150)
   res <- morie_survival_cox(d, "time", "event", "x")
   expect_named(res$coefficients, "x")
@@ -97,12 +104,14 @@ test_that("morie_survival_cox recovers a known coefficient sign", {
 })
 
 test_that("morie_survival_cox breslow ties option works", {
+  skip_if_not_installed("survival")
   d <- .make_surv(100)
   res <- morie_survival_cox(d, "time", "event", "x", ties = "breslow")
   expect_match(res$method, "breslow")
 })
 
 test_that("morie_survival_schoenfeld returns zph table", {
+  skip_if_not_installed("survival")
   d <- .make_surv(80)
   cox <- morie_survival_cox(d, "time", "event", "x")
   sch <- morie_survival_schoenfeld(cox)
@@ -111,6 +120,7 @@ test_that("morie_survival_schoenfeld returns zph table", {
 })
 
 test_that("morie_survival_martingale / deviance / coxsnell run", {
+  skip_if_not_installed("survival")
   d <- .make_surv(80)
   cox <- morie_survival_cox(d, "time", "event", "x")
   m <- morie_survival_martingale(cox)
@@ -122,6 +132,7 @@ test_that("morie_survival_martingale / deviance / coxsnell run", {
 })
 
 test_that("morie_survival_schoenfeld errors on non-morie input", {
+  skip_if_not_installed("survival")
   expect_error(morie_survival_schoenfeld(list(coefficients = 1)),
                regexp = "morie_survival_cox")
 })
@@ -131,6 +142,7 @@ test_that("morie_survival_schoenfeld errors on non-morie input", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_survival_aft fits weibull and returns AIC", {
+  skip_if_not_installed("survival")
   d <- .make_surv(150)
   res <- morie_survival_aft(d, "time", "event", "x", dist = "weibull")
   expect_match(res$distribution, "weibull")
@@ -139,6 +151,7 @@ test_that("morie_survival_aft fits weibull and returns AIC", {
 })
 
 test_that("morie_survival_parametric returns the chosen dist", {
+  skip_if_not_installed("survival")
   d <- .make_surv(100)
   for (dist in c("exponential", "weibull", "lognormal")) {
     r <- morie_survival_parametric(d$time, d$event, dist = dist)
@@ -148,6 +161,7 @@ test_that("morie_survival_parametric returns the chosen dist", {
 })
 
 test_that("morie_survival_compare_parametric ranks by AIC", {
+  skip_if_not_installed("survival")
   d <- .make_surv(120)
   cmp <- morie_survival_compare_parametric(d$time, d$event)
   expect_s3_class(cmp, "data.frame")
@@ -159,6 +173,7 @@ test_that("morie_survival_compare_parametric ranks by AIC", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_survival_concordance: higher risk -> earlier event", {
+  skip_if_not_installed("survival")
   set.seed(1)
   n <- 100
   x <- rnorm(n)
@@ -169,6 +184,7 @@ test_that("morie_survival_concordance: higher risk -> earlier event", {
 })
 
 test_that("morie_survival_concordance ~0.5 for random risk", {
+  skip_if_not_installed("survival")
   set.seed(1)
   d <- .make_surv(100)
   c <- morie_survival_concordance(d$time, d$event, rnorm(nrow(d)))
@@ -180,6 +196,7 @@ test_that("morie_survival_concordance ~0.5 for random risk", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_survival_rmst returns rmst <= tau", {
+  skip_if_not_installed("survival")
   d <- .make_surv(80)
   res <- morie_survival_rmst(d$time, d$event, tau = max(d$time))
   expect_true(res$rmst > 0)
@@ -188,6 +205,7 @@ test_that("morie_survival_rmst returns rmst <= tau", {
 })
 
 test_that("morie_survival_rmst_diff is positive when group1 has longer survival", {
+  skip_if_not_installed("survival")
   set.seed(1)
   t1 <- rexp(80, rate = 0.3); e1 <- rep(1L, 80)
   t2 <- rexp(80, rate = 1.0); e2 <- rep(1L, 80)
@@ -201,6 +219,7 @@ test_that("morie_survival_rmst_diff is positive when group1 has longer survival"
 # ---------------------------------------------------------------------------
 
 test_that("morie_survival_cif returns monotone non-decreasing CIF", {
+  skip_if_not_installed("survival")
   set.seed(1)
   n <- 80
   time <- rexp(n, rate = 0.5)
@@ -215,6 +234,7 @@ test_that("morie_survival_cif returns monotone non-decreasing CIF", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_survival_finegray runs when cmprsk available", {
+  skip_if_not_installed("survival")
   skip_if_not_installed("cmprsk")
   set.seed(1)
   n <- 80
@@ -233,6 +253,7 @@ test_that("morie_survival_finegray runs when cmprsk available", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_survival_hr requires exactly two groups", {
+  skip_if_not_installed("survival")
   set.seed(1)
   t <- rexp(60); e <- rep(1L, 60)
   expect_error(morie_survival_hr(t, e, sample(0:2, 60, replace = TRUE)),
@@ -240,6 +261,7 @@ test_that("morie_survival_hr requires exactly two groups", {
 })
 
 test_that("morie_survival_hr returns hr/ci/log_hr/se for 2-group data", {
+  skip_if_not_installed("survival")
   set.seed(1)
   t <- c(rexp(40, 1.0), rexp(40, 0.3))
   e <- rep(1L, 80)
@@ -251,6 +273,7 @@ test_that("morie_survival_hr returns hr/ci/log_hr/se for 2-group data", {
 })
 
 test_that("morie_survival_landmark drops < landmark and shifts time", {
+  skip_if_not_installed("survival")
   d <- data.frame(time = c(1, 3, 5, 7), event = c(1, 0, 1, 1))
   out <- morie_survival_landmark(d, "time", "event", landmark_time = 3)
   expect_equal(out$time, c(0, 2, 4))
@@ -258,6 +281,7 @@ test_that("morie_survival_landmark drops < landmark and shifts time", {
 })
 
 test_that("morie_survival_left_truncated_km returns step survival", {
+  skip_if_not_installed("survival")
   set.seed(1)
   n <- 60
   entry <- runif(n, 0, 1)
@@ -272,6 +296,7 @@ test_that("morie_survival_left_truncated_km returns step survival", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_survival_turnbull returns NPMLE list", {
+  skip_if_not_installed("survival")
   set.seed(1)
   L <- runif(40, 0, 2)
   R <- L + runif(40, 0.5, 3)

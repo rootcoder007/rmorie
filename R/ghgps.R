@@ -38,7 +38,15 @@ morie_ghosal_gp_squared_exponential <- function(x, y, length_scale = NULL,
   K <- kernel(x, x) + noise^2 * diag(n)
   K_s <- kernel(x_star, x)
   K_ss_diag <- rep(sigma_f^2, nrow(x_star))
-  L <- chol(K + 1e-8 * diag(n))
+  # Escalating jitter: fixed 1e-8 is below what older LAPACK builds
+  # need to accept a numerically borderline SE kernel as PD.
+  jit <- 1e-8
+  L <- NULL
+  while (is.null(L) && jit < 1e-2) {
+    L <- tryCatch(chol(K + jit * diag(n)), error = function(e) NULL)
+    jit <- jit * 100
+  }
+  if (is.null(L)) stop("kernel matrix is numerically singular")
   alpha_ <- backsolve(L, forwardsolve(t(L), y))
   mu <- as.numeric(K_s %*% alpha_)
   v <- forwardsolve(t(L), t(K_s))

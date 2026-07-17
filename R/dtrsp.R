@@ -15,7 +15,12 @@
 #'   root_impurity, n_leaves, feature_importances, criterion, n, method.
 #' @importFrom stats predict
 #' @examples
-#' morie_decision_tree_split(x = rnorm(50), y = rnorm(50))
+#' if (requireNamespace("rpart", quietly = TRUE)) {
+#'   set.seed(1)
+#'   x <- matrix(rnorm(120), 60, 2)
+#'   y <- factor(ifelse(x[, 1] > 0, "pos", "neg"))
+#'   morie_decision_tree_split(x, y)
+#' }
 #' @export
 morie_decision_tree_split <- function(x, y, criterion = "gini", max_depth = 30L,
                                 seed = 0L) {

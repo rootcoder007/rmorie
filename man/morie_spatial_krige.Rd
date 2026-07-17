@@ -2,26 +2,42 @@
 % Please edit documentation in R/geostat_native.R
 \name{morie_spatial_krige}
 \alias{morie_spatial_krige}
-\title{Ordinary kriging prediction}
+\title{Ordinary kriging predictions at new locations}
 \usage{
 morie_spatial_krige(coords, values, new_coords, vgm = NULL)
 }
 \arguments{
-\item{coords, values}{Observed locations and values.}
+\item{coords}{Matrix (or coercible) of observation coordinates,
+one row per observation.}
+
+\item{values}{Numeric observations at \code{coords}.}
 
 \item{new_coords}{Matrix of prediction locations.}
 
-\item{vgm}{A fit from \code{\link{morie_spatial_variogram_fit}}, or
-\code{NULL} to fit an exponential model first.}
+\item{vgm}{Optional fitted variogram list with elements
+\code{model}, \code{nugget}, \code{psill}, \code{range}
+(as returned by \code{morie_spatial_variogram_fit}). Default
+NULL fits by WLS.}
 }
 \value{
-A data frame with \code{pred} and \code{var}.
+A \code{data.frame} with one row per prediction location:
+\code{pred} (kriging mean) and \code{var} (kriging variance,
+truncated at zero).
 }
 \description{
-Solves the ordinary-kriging system with the supplied (or ML-fitted)
-variogram model and predicts at new locations, returning kriging
-variances.
+Native ordinary kriging: solves the standard kriging system built
+from a fitted variogram and returns the BLUP surface with kriging
+variances. When no variogram is supplied, a fast weighted
+least-squares fit with Cressie weights is used; pass
+\code{vgm = morie_spatial_variogram_fit(...)} for the slower full
+Gaussian-likelihood MLE.
+}
+\examples{
+set.seed(1)
+xy <- cbind(runif(60), runif(60))
+z <- sin(3 * xy[, 1]) + rnorm(60, sd = 0.1)
+morie_spatial_krige(xy, z, cbind(0.5, 0.5))
 }
 \references{
-Cressie, N. (1993). \emph{Statistics for Spatial Data}.
+Cressie (1993) Statistics for Spatial Data.
 }

@@ -9,7 +9,14 @@
   xy <- cbind(runif(n), runif(n))
   D <- as.matrix(dist(xy))
   C <- psill * exp(-D / range_) + diag(nugget, n)
-  L <- chol(C)
+  # Escalating jitter: older LAPACK builds (oldrel CI) reject this
+  # matrix as non-PD at machine precision even though it is PD.
+  jit <- 1e-10
+  L <- NULL
+  while (is.null(L) && jit < 1e-2) {
+    L <- tryCatch(chol(C + jit * diag(n)), error = function(e) NULL)
+    jit <- jit * 100
+  }
   list(xy = xy, y = as.numeric(t(L) %*% rnorm(n)) + 5)
 }
 

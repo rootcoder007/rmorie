@@ -109,7 +109,7 @@ test_that("morie_vecm errors on too-short series or bad rank", {
 test_that("vines computes partial-correlation matrix and loglik", {
   set.seed(0)
   Sigma <- matrix(c(1, 0.5, 0.3, 0.5, 1, 0.4, 0.3, 0.4, 1), 3)
-  z <- MASS::mvrnorm(200, c(0, 0, 0), Sigma)
+  z <- matrix(rnorm(600), 200, 3) %*% chol(Sigma)
   r <- rmorie:::vines(z)
   expect_type(r, "list")
   expect_true(all(c(

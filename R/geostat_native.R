@@ -139,6 +139,34 @@ morie_spatial_variogram_fit <- function(coords, values,
        method = "WLS (Cressie weights)")
 }
 
+#' Ordinary kriging predictions at new locations
+#'
+#' Native ordinary kriging: solves the standard kriging system built
+#' from a fitted variogram and returns the BLUP surface with kriging
+#' variances. When no variogram is supplied, a fast weighted
+#' least-squares fit with Cressie weights is used; pass
+#' \code{vgm = morie_spatial_variogram_fit(...)} for the slower full
+#' Gaussian-likelihood MLE.
+#'
+#' @srrstats {G2.1} Inputs coerced/validated below.
+#' @param coords Matrix (or coercible) of observation coordinates,
+#'   one row per observation.
+#' @param values Numeric observations at \code{coords}.
+#' @param new_coords Matrix of prediction locations.
+#' @param vgm Optional fitted variogram list with elements
+#'   \code{model}, \code{nugget}, \code{psill}, \code{range}
+#'   (as returned by \code{morie_spatial_variogram_fit}). Default
+#'   NULL fits by WLS.
+#' @return A \code{data.frame} with one row per prediction location:
+#'   \code{pred} (kriging mean) and \code{var} (kriging variance,
+#'   truncated at zero).
+#' @references Cressie (1993) Statistics for Spatial Data.
+#' @examples
+#' set.seed(1)
+#' xy <- cbind(runif(60), runif(60))
+#' z <- sin(3 * xy[, 1]) + rnorm(60, sd = 0.1)
+#' morie_spatial_krige(xy, z, cbind(0.5, 0.5))
+#' @export
 morie_spatial_krige <- function(coords, values, new_coords,
                                 vgm = NULL) {
   coords <- as.matrix(coords)
