@@ -121,44 +121,9 @@ estimate_plr <- function(data, treatment, outcome, covariates,
                                drop = FALSE])
   n_obs <- nrow(df)
 
-  if (requireNamespace("DoubleML", quietly = TRUE) &&
-        requireNamespace("mlr3learners", quietly = TRUE) &&
-        requireNamespace("mlr3", quietly = TRUE)) {
-    # Attempt the DoubleML path; on ANY runtime failure (e.g. an mlr3/future
-    # backend launch error seen on some R-devel builds) fall through to the
-    # base-R cross-fit below rather than propagating -- this is the documented
-    # fallback behaviour, previously only reached when DoubleML was absent.
-    # Sequential in-process cross-fit + future diagnostics silenced;
-    # see R/dml_guard.R. Restored on exit.
-    .gst <- .morie_dml_guard_begin()
-    on.exit(.morie_dml_guard_end(.gst), add = TRUE)
-    dml_res <- tryCatch({
-      dml_data <- DoubleML::DoubleMLData$new(
-        data = df, y_col = outcome, d_cols = treatment,
-        x_cols = covariates
-      )
-      ml_l <- mlr3::lrn("regr.cv_glmnet", s = "lambda.min")
-      ml_m <- mlr3::lrn("regr.cv_glmnet", s = "lambda.min")
-      plr  <- DoubleML::DoubleMLPLR$new(
-        data = dml_data, ml_l = ml_l, ml_m = ml_m,
-        n_folds = n_folds, n_rep = 1L
-      )
-      set.seed(random_state)
-      plr$fit()
-      ci <- plr$confint(level = 0.95)
-      list(
-        ate      = as.numeric(plr$coef[[1]]),
-        se       = as.numeric(plr$se[[1]]),
-        ci_lower = as.numeric(ci[1, 1]),
-        ci_upper = as.numeric(ci[1, 2]),
-        pval     = as.numeric(plr$pval[[1]]),
-        n_obs    = n_obs,
-        method   = "DoubleML PLR"
-      )
-    }, error = function(e) NULL)
-    if (!is.null(dml_res)) return(dml_res)
-  }
-
+  # Native cross-fit PLR (Chernozhukov et al. 2018) with ridge nuisance
+  # learners -- the same estimator the DoubleML delegation computed,
+  # cross-validated against DoubleML in tests/cross/.
   set.seed(random_state)
   folds <- sample(rep(seq_len(n_folds), length.out = n_obs))
   d <- as.numeric(df[[treatment]])
@@ -167,15 +132,7 @@ estimate_plr <- function(data, treatment, outcome, covariates,
   storage.mode(x_mat) <- "double"
 
   fit_predict <- function(x_train, z_train, x_test) {
-    if (requireNamespace("glmnet", quietly = TRUE)) {
-      fit <- glmnet::cv.glmnet(x_train, z_train, alpha = 0)
-      as.numeric(stats::predict(fit, newx = x_test, s = "lambda.min"))
-    } else {
-      df_tr <- as.data.frame(x_train)
-      df_tr$.z <- z_train
-      fit <- stats::lm(.z ~ ., data = df_tr)
-      as.numeric(stats::predict(fit, newdata = as.data.frame(x_test)))
-    }
+    .morie_cv_ridge_predict(x_train, z_train, x_test)
   }
 
   y_hat <- numeric(n_obs)
@@ -241,72 +198,43 @@ estimate_pliv <- function(data, treatment, outcome, instrument,
                                    covariates), drop = FALSE])
   n_obs <- nrow(df)
 
-  if (requireNamespace("DoubleML", quietly = TRUE) &&
-        requireNamespace("mlr3learners", quietly = TRUE) &&
-        requireNamespace("mlr3", quietly = TRUE)) {
-    # Attempt the DoubleML path; on ANY runtime failure (e.g. an mlr3/future
-    # backend launch error seen on some R-devel builds) fall through to the
-    # 2SLS base-R fallback below rather than propagating.
-    # Sequential in-process cross-fit + future diagnostics silenced;
-    # see R/dml_guard.R. Restored on exit.
-    .gst <- .morie_dml_guard_begin()
-    on.exit(.morie_dml_guard_end(.gst), add = TRUE)
-    dml_res <- tryCatch({
-      dml_data <- DoubleML::DoubleMLData$new(
-        data = df, y_col = outcome, d_cols = treatment,
-        z_cols = instrument, x_cols = covariates
-      )
-      ml_l <- mlr3::lrn("regr.cv_glmnet", s = "lambda.min")
-      ml_m <- mlr3::lrn("regr.cv_glmnet", s = "lambda.min")
-      ml_r <- mlr3::lrn("regr.cv_glmnet", s = "lambda.min")
-      pliv <- DoubleML::DoubleMLPLIV$new(
-        data = dml_data, ml_l = ml_l, ml_m = ml_m, ml_r = ml_r,
-        n_folds = n_folds, n_rep = 1L
-      )
-      set.seed(random_state)
-      pliv$fit()
-      ci <- pliv$confint(level = 0.95)
-      list(
-        late     = as.numeric(pliv$coef[[1]]),
-        se       = as.numeric(pliv$se[[1]]),
-        ci_lower = as.numeric(ci[1, 1]),
-        ci_upper = as.numeric(ci[1, 2]),
-        pval     = as.numeric(pliv$pval[[1]]),
-        n_obs    = n_obs,
-        method   = "DoubleML PLIV"
-      )
-    }, error = function(e) NULL)
-    if (!is.null(dml_res)) return(dml_res)
+  # Native partialled-out IV (PLIV): cross-fit ridge nuisances for
+  # Y|X, D|X, Z|X, then IV regression of the Y-residual on the
+  # D-residual instrumented by the Z-residual -- the DoubleMLPLIV
+  # estimand (Chernozhukov et al. 2018), cross-validated in tests.
+  set.seed(random_state)
+  folds <- sample(rep(seq_len(n_folds), length.out = n_obs))
+  y_v <- as.numeric(df[[outcome]])
+  d_v <- as.numeric(df[[treatment]])
+  z_v <- as.numeric(df[[instrument]])
+  x_mat <- as.matrix(df[, covariates, drop = FALSE])
+  storage.mode(x_mat) <- "double"
+  ry <- rd <- rz <- numeric(n_obs)
+  for (f in seq_len(n_folds)) {
+    te <- folds == f
+    ry[te] <- y_v[te] - .morie_cv_ridge_predict(x_mat[!te, , drop = FALSE],
+                                                y_v[!te],
+                                                x_mat[te, , drop = FALSE])
+    rd[te] <- d_v[te] - .morie_cv_ridge_predict(x_mat[!te, , drop = FALSE],
+                                                d_v[!te],
+                                                x_mat[te, , drop = FALSE])
+    rz[te] <- z_v[te] - .morie_cv_ridge_predict(x_mat[!te, , drop = FALSE],
+                                                z_v[!te],
+                                                x_mat[te, , drop = FALSE])
   }
-
-  warning("DoubleML path failed or unavailable; falling back to 2SLS.",
-          call. = FALSE)
-  x_first  <- as.data.frame(df[, c(covariates, instrument),
-                               drop = FALSE])
-  first_fit <- stats::lm(
-    stats::as.formula(paste0(treatment, " ~ .")),
-    data = cbind(
-      x_first,
-      stats::setNames(list(df[[treatment]]), treatment)
-    )
-  )
-  d_hat  <- stats::fitted(first_fit)
-  x_sec  <- data.frame(d_hat = d_hat,
-                       df[, covariates, drop = FALSE])
-  x_sec[[outcome]] <- df[[outcome]]
-  sec_fit <- stats::lm(stats::as.formula(paste0(outcome, " ~ .")),
-                       data = x_sec)
-  cf <- summary(sec_fit)$coefficients
-  ci <- stats::confint(sec_fit, level = 0.95)
-  list(
-    late     = as.numeric(cf["d_hat", "Estimate"]),
-    se       = as.numeric(cf["d_hat", "Std. Error"]),
-    ci_lower = as.numeric(ci["d_hat", 1]),
-    ci_upper = as.numeric(ci["d_hat", 2]),
-    pval     = as.numeric(cf["d_hat", "Pr(>|t|)"]),
+  theta <- sum(rz * ry) / sum(rz * rd)
+  psi <- rz * (ry - rd * theta)
+  se <- sqrt(sum(psi^2) / (sum(rz * rd)^2))
+  zstat <- theta / se
+  return(list(
+    late     = theta,
+    se       = se,
+    ci_lower = theta - stats::qnorm(0.975) * se,
+    ci_upper = theta + stats::qnorm(0.975) * se,
+    pval     = 2 * stats::pnorm(-abs(zstat)),
     n_obs    = n_obs,
-    method   = "2SLS (base R fallback)"
-  )
+    method   = "Native cross-fit PLIV (ridge nuisances)"
+  ))
 }
 
 

@@ -2,6 +2,13 @@
 
 #' Local-level state-space model (Kalman filter+smoother)
 #'
+#' Native local-level (random-walk-plus-noise) model: the observation
+#' and state variances are estimated by maximum likelihood on the
+#' prediction-error decomposition, then the series is filtered and
+#' smoothed (Rauch-Tung-Striebel). Equivalent to the
+#' \code{dlm::dlmModPoly(1)} + \code{dlmMLE} + \code{dlmFilter} +
+#' \code{dlmSmooth} pipeline it replaces, cross-validated in tests.
+#'
 #' @param x Numeric univariate series.
 #' @return Named list with \code{filtered_state, filtered_state_variance,
 #'   smoothed_state, loglik, Q, R, n, method}.
@@ -12,53 +19,41 @@ morie_state_space_model <- function(x) {
   y <- as.numeric(x)
   n <- length(y)
   if (n < 4) stop("Need >=4 obs.")
-  if (requireNamespace("dlm", quietly = TRUE)) {
-    build <- function(p) {
-      dlm::dlmModPoly(
-        order = 1,
-        dV = exp(p[1]), dW = exp(p[2])
-      )
+
+  # Kalman pass for the local-level model with diffuse-ish init.
+  # Returns filtered mean/variance and the prediction-error loglik.
+  kf <- function(R, Q) {
+    a <- numeric(n)
+    P <- numeric(n)
+    a_prev <- y[1]
+    P_prev <- 1e7
+    ll <- 0
+    for (t in seq_len(n)) {
+      Pp <- if (t == 1) P_prev else P[t - 1] + Q
+      ap <- if (t == 1) a_prev else a[t - 1]
+      Fv <- Pp + R
+      v <- y[t] - ap
+      K <- Pp / Fv
+      a[t] <- ap + K * v
+      P[t] <- Pp - K * Pp
+      if (t > 1) ll <- ll + -0.5 * (log(2 * pi * Fv) + v^2 / Fv)
     }
-    fit <- dlm::dlmMLE(y,
-      parm = c(
-        log(var(diff(y)) / 2),
-        log(var(diff(y)) / 2)
-      ),
-      build = build
-    )
-    mod <- build(fit$par)
-    f <- dlm::dlmFilter(y, mod)
-    s <- dlm::dlmSmooth(f)
-    return(list(
-      filtered_state = as.numeric(f$m)[-1],
-      filtered_state_variance = vapply(
-        dlm::dlmSvd2var(f$U.C, f$D.C),
-        function(x) x[1, 1], numeric(1)
-      )[-1],
-      smoothed_state = as.numeric(s$s)[-1],
-      loglik = -fit$value,
-      Q = exp(fit$par[2]),
-      R = exp(fit$par[1]),
-      n = n,
-      method = "Local-level Kalman via dlm"
-    ))
+    list(a = a, P = P, ll = ll)
   }
-  Q <- var(diff(y)) / 2
-  R <- var(diff(y)) / 2
-  a <- numeric(n)
-  P <- numeric(n)
-  a[1] <- y[1]
-  P[1] <- 1e7
-  ll <- 0
-  for (t in 2:n) {
-    Pp <- P[t - 1] + Q
-    v <- y[t] - a[t - 1]
-    Fv <- Pp + R
-    K <- Pp / Fv
-    a[t] <- a[t - 1] + K * v
-    P[t] <- Pp - K * Pp
-    ll <- ll + -0.5 * (log(2 * pi * Fv) + v^2 / Fv)
-  }
+
+  # MLE over (log R, log Q) on the prediction-error decomposition --
+  # what dlm::dlmMLE does for this model.
+  v0 <- stats::var(diff(y)) / 2
+  opt <- stats::optim(c(log(v0), log(v0)), function(p) {
+    -kf(exp(p[1]), exp(p[2]))$ll
+  }, method = "Nelder-Mead")
+  R <- exp(opt$par[1])
+  Q <- exp(opt$par[2])
+  f <- kf(R, Q)
+  a <- f$a
+  P <- f$P
+
+  # Rauch-Tung-Striebel smoother.
   a_s <- a
   P_s <- P
   for (t in (n - 1):1) {
@@ -69,7 +64,7 @@ morie_state_space_model <- function(x) {
   }
   list(
     filtered_state = a, filtered_state_variance = P,
-    smoothed_state = a_s, loglik = ll, Q = Q, R = R, n = n,
-    method = "Local-level Kalman filter+smoother (base R)"
+    smoothed_state = a_s, loglik = f$ll, Q = Q, R = R, n = n,
+    method = "Local-level Kalman filter+smoother, native MLE"
   )
 }
