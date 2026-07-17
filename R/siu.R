@@ -1348,6 +1348,71 @@ morie_siu_compare <- function(case_number, external,
         }
         x
       }
+    ),
+    openai = list(
+      # ChatGPT / OpenAI API. Model overridable via OPENAI_MODEL.
+      env_required = "OPENAI_API_KEY",
+      build = function(env, prompt) {
+        list(
+          url = "https://api.openai.com/v1/chat/completions",
+          headers = list(
+            "authorization" = paste("Bearer", env[["OPENAI_API_KEY"]]),
+            "content-type" = "application/json"
+          ),
+          body = list(
+            model = if (nzchar(Sys.getenv("OPENAI_MODEL", ""))) {
+              Sys.getenv("OPENAI_MODEL")
+            } else {
+              "gpt-4o-mini"
+            },
+            temperature = 0,
+            response_format = list(type = "json_object"),
+            messages = list(list(role = "user", content = prompt))
+          )
+        )
+      },
+      extract = function(resp) {
+        x <- resp$choices[[1L]]$message$content
+        if (is.null(x)) stop("OpenAI returned empty text", call. = FALSE)
+        x
+      }
+    ),
+    openai_compatible = list(
+      # ANY OpenAI-compatible endpoint: Groq, Together, Mistral,
+      # DeepSeek, xAI, LM Studio, vLLM, llama.cpp server, ...
+      # Point MORIE_LLM_BASE_URL at the API base (the part before
+      # /chat/completions), set MORIE_LLM_MODEL, and (only if the
+      # server wants one) MORIE_LLM_API_KEY.
+      env_required = "MORIE_LLM_BASE_URL",
+      build = function(env, prompt) {
+        base <- sub("/+$", "", env[["MORIE_LLM_BASE_URL"]])
+        headers <- list("content-type" = "application/json")
+        key <- Sys.getenv("MORIE_LLM_API_KEY", unset = "")
+        if (nzchar(key)) {
+          headers[["authorization"]] <- paste("Bearer", key)
+        }
+        list(
+          url = paste0(base, "/chat/completions"),
+          headers = headers,
+          body = list(
+            model = if (nzchar(Sys.getenv("MORIE_LLM_MODEL", ""))) {
+              Sys.getenv("MORIE_LLM_MODEL")
+            } else {
+              "default"
+            },
+            temperature = 0,
+            messages = list(list(role = "user", content = prompt))
+          )
+        )
+      },
+      extract = function(resp) {
+        x <- resp$choices[[1L]]$message$content
+        if (is.null(x)) {
+          stop("OpenAI-compatible endpoint returned empty text",
+               call. = FALSE)
+        }
+        x
+      }
     )
   )
 }
@@ -1371,6 +1436,10 @@ morie_siu_compare <- function(case_number, external,
   }
   if (!requireNamespace("jsonlite", quietly = TRUE)) {
     stop("LLM helpers require the 'jsonlite' package", call. = FALSE)
+  }
+  if (identical(model, "freeapi")) {
+    # Keyless path through the morie_llm free-provider stack.
+    return(morie_llm_ask(prompt))
   }
   providers <- .siu_llm_providers()
   if (!model %in% names(providers)) {
@@ -1619,7 +1688,12 @@ morie_siu_llm_extract <- function(case_number, model = c("ollama", "gemini"),
 #' subset(a, verdict == "disagree")
 #' }
 #' @export
-morie_siu_anomaly_check <- function(case_number, model = c("ollama", "gemini"),
+morie_siu_anomaly_check <- function(case_number,
+                                    model = c("ollama",
+                                              "openai_compatible",
+                                              "claude", "openai",
+                                              "gemini", "vertex",
+                                              "freeapi"),
                                     cache_dir = file.path(tempdir(), "morie", "siu"),
                                     max_html_chars = 80000L,
                                     mock_response_text = NULL) {
@@ -1676,9 +1750,31 @@ morie_siu_anomaly_check <- function(case_number, model = c("ollama", "gemini"),
     "REPORT HTML:\n", html
   )
 
-  text <- .siu_llm_call(model, prompt,
-    mock_response_text = mock_response_text
+  text <- tryCatch(
+    .siu_llm_call(model, prompt, mock_response_text = mock_response_text),
+    error = function(e) NULL
   )
+  if (is.null(text)) {
+    # Deterministic keyless fallback: no LLM reachable (no local
+    # ollama, free API down, no Gemini key). Verdict by verbatim
+    # containment of the parsed value in the report text -- weaker
+    # than an LLM audit but it always works, offline, for everyone.
+    plain <- tolower(gsub("\\s+", " ", gsub("<[^>]+>", " ", html)))
+    out <- do.call(rbind, lapply(populated, function(p) {
+      v <- tolower(gsub("\\s+", " ", p$value))
+      hit <- nzchar(v) && grepl(v, plain, fixed = TRUE)
+      data.frame(
+        field = p$field, parser_value = p$value,
+        verdict = if (hit) "agree" else "unclear",
+        reason = if (hit) {
+          "value found verbatim in report text (deterministic mode)"
+        } else {
+          "not found verbatim; no LLM provider reachable (deterministic mode)"
+        },
+        stringsAsFactors = FALSE)
+    }))
+    return(out)
+  }
   text <- gsub("^```(?:json)?\\s*|\\s*```$", "", text, perl = TRUE)
   rows <- .morie_from_json(text, simplifyVector = TRUE)
   if (is.null(rows) || (is.data.frame(rows) && !nrow(rows))) {
