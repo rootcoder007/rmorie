@@ -17,3 +17,6 @@ Formats whose sibling directory or file is not present on disk
 are omitted from the returned named character vector. Use this
 to discover which formats a given category actually exports.
 }
+\examples{
+res <- try(morie_tps_list_formats(morie_tps_list_categories()[1]))
+}

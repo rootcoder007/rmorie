@@ -18,3 +18,7 @@ Convenience helper: given a data.frame just-loaded by
 \code{list(name, dtype, valid_values)} structure expected by the
 audit functions.
 }
+\examples{
+df <- data.frame(age = c(21, 34, NA), city = c("a", "b", "b"))
+str(morie_specs_from_df(df), max.level = 1)
+}

@@ -44,3 +44,6 @@ session cache; see \code{\link{morie_cache_dir}} and
 \code{\link{morie_cache_clear}} (no implicit writes to \code{~/.cache}).
 }
 
+\examples{
+morie_siu_index_url()
+}

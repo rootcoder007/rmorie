@@ -19,3 +19,9 @@ Thin wrapper over \code{\link[=morie_tps_fetch_category]{morie_tps_fetch_categor
 then reads it back. Mirrors the Python \code{fetch_tps_dataframe}
 convenience used as a \code{DATASET_CATALOG} fetcher.
 }
+\examples{
+\donttest{
+df <- try(morie_tps_fetch_dataframe(morie_tps_list_categories()[1]))
+if (!inherits(df, "try-error")) head(df)
+}
+}

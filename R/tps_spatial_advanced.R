@@ -983,6 +983,17 @@ morie_tps_moran_sweep_heatmap <- function(polygons,
 # ---------------------------------------------------------------------------
 
 #' @return \code{x}, invisibly.
+#' @examples
+#' \donttest{
+#' if (requireNamespace("dbscan", quietly = TRUE)) {
+#'   set.seed(2026)
+#'   df <- data.frame(
+#'     LAT_WGS84 = c(rnorm(60, 43.65, 0.005), rnorm(60, 43.70, 0.005)),
+#'     LONG_WGS84 = c(rnorm(60, -79.40, 0.005), rnorm(60, -79.38, 0.005))
+#'   )
+#' obj <- morie_tps_dbscan_clusters(df, eps_km = 0.5, min_samples = 5L)
+#' print(obj)
+#' }
 #' @export
 print.morie_tps_spatial_advanced_result <- function(x, ...) {
   cat(x$title, "\

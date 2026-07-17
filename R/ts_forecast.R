@@ -337,6 +337,11 @@ morie_ts_arima <- function(x, order = c(0L, 0L, 0L),
 #' @param x A `morie_ts_model`.
 #' @param ... Unused.
 #' @return `x`, invisibly.
+#' @examples
+#' \donttest{
+#' obj <- morie_ts_arima(cumsum(rnorm(60)), order = c(1, 1, 0))
+#' print(obj)
+#' }
 #' @export
 print.morie_ts_model <- function(x, ...) {
   cat("<morie_ts_model>\n")
@@ -413,6 +418,12 @@ morie_ts_trim_forecast <- function(forecast, max_width) {
 #' @param x A `morie_ts_forecast`.
 #' @param ... Unused.
 #' @return `x`, invisibly.
+#' @examples
+#' \donttest{
+#' m <- morie_ts_arima(cumsum(rnorm(80)), order = c(1, 1, 0))
+#' fc <- morie_ts_forecast(m, h = 12)
+#' print(fc)
+#' }
 #' @export
 print.morie_ts_forecast <- function(x, ...) {
   cat("<morie_ts_forecast>\n")
@@ -433,6 +444,12 @@ print.morie_ts_forecast <- function(x, ...) {
 #'   horizontal axis (labelled with the series units where known); the
 #'   forecast is drawn in a distinct colour with its distributional
 #'   limits shaded, and the observed values are always included.
+#' @examples
+#' \donttest{
+#' m <- morie_ts_arima(cumsum(rnorm(80)), order = c(1, 1, 0))
+#' fc <- morie_ts_forecast(m, h = 12)
+#' plot(fc)
+#' }
 #' @export
 plot.morie_ts_forecast <- function(x, broken = FALSE, ...) {
   n <- length(x$observed)

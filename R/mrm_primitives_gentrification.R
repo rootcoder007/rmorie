@@ -278,6 +278,21 @@ mrm_gentrification_panel <- function(df,
 # ---------------------------------------------------------------------------
 
 #' @return \code{x}, invisibly.
+#' @examples
+#' \donttest{
+#' if (FALSE) {
+#'   df <- data.frame(
+#'     y = sample(c("low", "med", "high"), 200, replace = TRUE),
+#'     race = rbinom(200, 1, 0.4),
+#'     age  = rnorm(200)
+#'   )
+#' obj <- mrm_threshold_specific_ordinal(df,
+#'     outcome_col = "y",
+#'     covariate_cols = c("race", "age"),
+#'     ordinal_levels = c("low", "med", "high")
+#'   )
+#' print(obj)
+#' }
 #' @export
 print.morie_mrm_result <- function(x, ...) {
   cat(x$title, "\

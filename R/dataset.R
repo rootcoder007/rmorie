@@ -155,6 +155,9 @@ morie_dataset_detect_role <- function(x, name) {
 #' @param level Inferred measurement level (one of nominal/ordinal/
 #'   interval/ratio).
 #' @return Named list of summary statistics.
+#' @examples
+#' res <- try(morie_dataset_summarize_column(rnorm(50), "value"))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 morie_dataset_summarize_column <- function(x, level) {
   non_null <- x[!is.na(x)]

@@ -17,3 +17,11 @@
 \description{
 Print method for taxonomy entries.
 }
+\examples{
+\donttest{
+t <- morie_classify_variable("RecordID", "string", NULL, "any")
+t$level
+t$role
+print(t)
+}
+}

@@ -159,6 +159,10 @@
 #'   \code{"less"}.
 #' @param distribution \code{"asymptotic"} (only; kept for parity).
 #' @return A list with \code{statistic} (standardized) and \code{p.value}.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(40), g = factor(rep(c("a", "b"), 20)))
+#' str(morie_indep_test(y ~ g, df), max.level = 1)
 #' @export
 morie_indep_test <- function(formula, data,
                              alternative = "two.sided",
@@ -185,6 +189,10 @@ morie_indep_test <- function(formula, data,
 #' @param alternative \code{"two.sided"} / \code{"greater"} / \code{"less"}.
 #' @param distribution \code{"asymptotic"} (default) or \code{"exact"}.
 #' @return A list with \code{statistic} (standardized Z) and \code{p.value}.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(40), g = factor(rep(c("a", "b"), 20)))
+#' str(morie_wilcox_test(y ~ g, df), max.level = 1)
 #' @export
 morie_wilcox_test <- function(formula, data,
                              alternative = "two.sided",
@@ -227,6 +235,10 @@ morie_wilcox_test <- function(formula, data,
 #' @return A list with \code{statistic} (chi-square), \code{df} and
 #'   \code{p.value}. For a two-level group the standardized scalar
 #'   statistic and its normal p-value are returned instead, matching coin.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(40), g = factor(rep(c("a", "b"), 20)))
+#' str(morie_oneway_test(y ~ g, df), max.level = 1)
 #' @export
 morie_oneway_test <- function(formula, data, distribution = "asymptotic") {
   pd <- .morie_coin_parse(formula, data)

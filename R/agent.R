@@ -46,5 +46,7 @@ agent <- function(task, model = NULL, backend = "auto", dry_run = FALSE) {
 #' Is the rmorie CLI agent available?
 #'
 #' @return Logical scalar; \code{TRUE} if the \code{rmorie} binary is on PATH.
+#' @examples
+#' agent_available()
 #' @export
 agent_available <- function() nzchar(Sys.which("rmorie"))

@@ -23,6 +23,11 @@ Computes the kernel-weighted local mean estimator
 m-hat(x) = sum K_h(x - X_i) Y_i divided by sum K_h(x - X_i),
 with a Gaussian kernel.
 }
+\examples{
+set.seed(1)
+x <- runif(80); y <- sin(2 * pi * x) + rnorm(80, 0, 0.2)
+head(nw_regression(x, y, x_eval = seq(0, 1, 0.25), bandwidth = 0.1))
+}
 \references{
 Nadaraya, E. A. (1964). On Estimating Regression.
 \emph{Theory of Probability and Its Applications}, 9(1), 141-142.

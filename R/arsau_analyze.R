@@ -771,6 +771,15 @@ morie_arsau_analyze_detailed_dataset <- function(year_range = "2020-2022",
 
 
 #' @return Invisibly returns \code{x} unchanged.
+#' @examples
+#' \donttest{
+#' res <- try(morie_arsau_analyze_main_records(year = "2024"))
+#' if (!inherits(res, "try-error")) print(res)
+#' \references{
+#' Ontario Ministry of the Solicitor General, ARSAU 2023
+#' and 2024 main_records technical release notes.
+#' print(res)
+#' }
 #' @export
 print.morie_arsau_analysis_result <- function(x, ...) {
   cat(x$title, "\n", strrep("=", nchar(x$title)), "\n", sep = "")

@@ -20,6 +20,10 @@ List with \code{grid} and \code{density}.
 Gaussian-kernel KDE on a uniform grid. Bandwidth defaults to
 Silverman's \code{1.06 * sd(x) * n^{-1/5}}.
 }
+\examples{
+set.seed(1)
+str(morie_dsp_parzen_pdf(rnorm(200)), max.level = 1)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 5, sec. 5.6;
 Parzen (1962); Silverman (1986).

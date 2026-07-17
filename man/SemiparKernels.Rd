@@ -16,3 +16,6 @@ methods \code{nw_regression}, \code{local_linear}, \code{kde},
 Returns a list of closures bound to the same backend (always pure R
 in this port; the Python module additionally supports a C backend).
 }
+\examples{
+str(SemiparKernels(), max.level = 1)
+}

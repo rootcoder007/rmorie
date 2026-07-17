@@ -19,7 +19,7 @@
 #'   Neurosci Biobehav Rev.
 #' @keywords internal
 #' @examples
-#' res <- morie:::beautiful_loop_metric(eeg = NULL, fmri = NULL)
+#' res <- rmorie:::beautiful_loop_metric(eeg = NULL, fmri = NULL)
 #' res$score_dmt
 beautiful_loop_metric <- function(eeg, fmri = NULL) {
   pair <- .entheo_extract_pair(eeg, fmri)

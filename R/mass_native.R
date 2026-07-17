@@ -236,6 +236,18 @@ morie_glm_nb <- function(formula, data, weights, init.theta = NULL,
   fit
 }
 
+#' @examples
+#' \donttest{
+#' set.seed(1); n <- 300
+#' x <- rnorm(n)
+#' y <- rnbinom(n, mu = exp(0.3 + 0.9 * x), size = 3)
+#' fit <- suppressWarnings(morie_glm_nb(y ~ x, data = data.frame(y, x)))
+#' coef(fit)
+#' \references{
+#' Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
+#' Applied Statistics with S}. Springer.
+#' summary(fit)
+#' }
 #' @exportS3Method stats::summary negbin
 summary.negbin <- function(object, dispersion = 1, ...) {
   s <- stats::summary.glm(object, dispersion = dispersion, ...)
@@ -244,6 +256,18 @@ summary.negbin <- function(object, dispersion = 1, ...) {
   s
 }
 
+#' @examples
+#' \donttest{
+#' set.seed(1); n <- 300
+#' x <- rnorm(n)
+#' y <- rnbinom(n, mu = exp(0.3 + 0.9 * x), size = 3)
+#' fit <- suppressWarnings(morie_glm_nb(y ~ x, data = data.frame(y, x)))
+#' coef(fit)
+#' \references{
+#' Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
+#' Applied Statistics with S}. Springer.
+#' logLik(fit)
+#' }
 #' @exportS3Method stats::logLik negbin
 logLik.negbin <- function(object, ...) {
   val <- object$twologlik / 2
@@ -293,6 +317,19 @@ morie_rlm <- function(formula, data, k = 1.345, maxit = 20L, acc = 1e-4) {
             class = "morie_rlm")
 }
 
+#' @examples
+#' \donttest{
+#' set.seed(3)
+#' n <- 100; x <- rnorm(n)
+#' y <- 2 * x + rnorm(n)
+#' y[1:3] <- y[1:3] + 40
+#' rob <- morie_rlm(y ~ x, data = data.frame(y, x))
+#' rob$coefficients
+#' \references{
+#' Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
+#' Applied Statistics with S}. Springer.
+#' summary(rob)
+#' }
 #' @exportS3Method stats::summary morie_rlm
 summary.morie_rlm <- function(object, ...) {
   s <- object$s; coef <- object$coefficients; wresid <- object$wresid
@@ -404,6 +441,19 @@ morie_polr <- function(formula, data, weights, method = "logistic") {
             class = "morie_polr")
 }
 
+#' @examples
+#' \donttest{
+#' set.seed(4)
+#' n <- 250; x <- rnorm(n)
+#' yc <- 1 + (runif(n) > plogis(-0.5 - x)) + (runif(n) > plogis(1 - x))
+#' yf <- factor(pmin(yc, 3), levels = 1:3, ordered = TRUE)
+#' fit <- morie_polr(yf ~ x, data = data.frame(yf, x))
+#' fit$zeta
+#' \references{
+#' Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
+#' Applied Statistics with S}. Springer.
+#' logLik(fit)
+#' }
 #' @exportS3Method stats::logLik morie_polr
 logLik.morie_polr <- function(object, ...) {
   val <- -object$deviance / 2

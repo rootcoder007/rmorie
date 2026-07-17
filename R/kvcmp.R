@@ -13,7 +13,7 @@
 #' set.seed(1)
 #' k <- matrix(rnorm(6), nrow = 2)
 #' v <- matrix(rnorm(6), nrow = 2)
-#' r <- morie:::kv_cache_management(NULL, NULL, k, v)
+#' r <- rmorie:::kv_cache_management(NULL, NULL, k, v)
 #' r$T
 kv_cache_management <- function(K_cache, V_cache, k_new, v_new,
                                 max_len = NULL) {

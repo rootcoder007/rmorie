@@ -22,6 +22,6 @@ Numerically identical; faster on hot paths because the per-call
 R-S4-dispatch overhead is bypassed.
 }
 \examples{
-morie:::morie_normal_pdf(0, 0, 1)
+rmorie:::morie_normal_pdf(0, 0, 1)
 }
 \keyword{internal}

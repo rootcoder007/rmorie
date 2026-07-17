@@ -19,6 +19,9 @@ if (!exists("%||%", mode = "function")) {
 
 #' Resolve Vertex AI configuration from environment variables
 #' @return Named list: project / location / model / token_ttl_s / gcloud_path.
+#' @examples
+#' cfg <- try(morie_vertex_resolve_config())
+#' class(cfg)
 #' @export
 morie_vertex_resolve_config <- function() {
   project <- Sys.getenv("GOOGLE_CLOUD_PROJECT", unset = "")
@@ -54,6 +57,11 @@ morie_vertex_resolve_config <- function() {
 #' Fetch and cache a Google Cloud access token via gcloud
 #' @param cfg Config list, or NULL to resolve.
 #' @return Character bearer token.
+#' @examples
+#' \dontrun{
+#' # Requires VERTEX_ACCESS_TOKEN or a gcloud credential:
+#' tok <- morie_vertex_access_token()
+#' }
 #' @export
 morie_vertex_access_token <- function(cfg = NULL) {
   if (is.null(cfg)) cfg <- morie_vertex_resolve_config()
@@ -96,6 +104,11 @@ morie_vertex_access_token <- function(cfg = NULL) {
 #' @param timeout_s Numeric HTTP timeout. Default 120.
 #' @param cfg Pre-resolved config list, or NULL to auto-resolve.
 #' @return Character scalar -- trimmed generated text.
+#' @examples
+#' \dontrun{
+#' # Requires Vertex AI credentials (GCP_PROJECT + access token):
+#' morie_vertex_ask_gemini("Summarize the MRM framework in one line.")
+#' }
 #' @export
 morie_vertex_ask_gemini <- function(prompt, model = NULL, system = NULL,
                                     temperature = 0.1,
@@ -156,6 +169,11 @@ morie_vertex_ask_gemini <- function(prompt, model = NULL, system = NULL,
 
 #' Tiny smoke test for the Vertex AI client
 #' @return Named list (ok / error / model / project / location / reply).
+#' @examples
+#' \dontrun{
+#' # Requires Vertex AI credentials:
+#' morie_vertex_health_check()
+#' }
 #' @export
 morie_vertex_health_check <- function() {
   out <- list(ok = FALSE, error = NULL, model = NULL)

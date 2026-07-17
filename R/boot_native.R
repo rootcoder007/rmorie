@@ -159,6 +159,10 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 #' @return Named list; each element is \code{c(lower, upper)}.
 #' @references DiCiccio, T. J., & Efron, B. (1996). Bootstrap
 #'   confidence intervals. \emph{Statistical Science}, 11(3), 189-228.
+#' @examples
+#' set.seed(1)
+#' b <- morie_boot_run(rnorm(50), statistic = mean, R = 200L)
+#' morie_boot_ci(b)
 #' @export
 morie_boot_ci <- function(boot_obj, conf = 0.95,
                           type = c("perc", "norm", "basic", "bca"),
@@ -220,6 +224,11 @@ morie_boot_ci <- function(boot_obj, conf = 0.95,
 #' @return A \code{morie_boot} object (\code{t0}, \code{t}, \code{R}).
 #' @references Politis, D. N., & Romano, J. P. (1994). The stationary
 #'   bootstrap. \emph{JASA}, 89(428), 1303-1313.
+#' @examples
+#' set.seed(1)
+#' b <- morie_tsboot(stats::as.ts(rnorm(60)), statistic = mean,
+#'                   R = 100L, l = 5)
+#' str(b, max.level = 1)
 #' @export
 morie_tsboot <- function(tseries, statistic, R, l, sim = "fixed",
                          endcorr = TRUE, n.sim = NROW(tseries), ...) {
@@ -257,6 +266,10 @@ morie_tsboot <- function(tseries, statistic, R, l, sim = "fixed",
 #' @param ... Passed on to \code{statistic}.
 #' @return A \code{morie_boot} object for the difference statistic.
 #' @seealso \code{\link{morie_boot_ci}}.
+#' @examples
+#' set.seed(1)
+#' b <- morie_two_boot(rnorm(25), rnorm(25, 0.5), statistic = mean, R = 100L)
+#' str(b, max.level = 1)
 #' @export
 morie_two_boot <- function(x, y, statistic = mean, R = 1000L, ...) {
   x <- as.numeric(x); y <- as.numeric(y)

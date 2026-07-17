@@ -203,6 +203,12 @@ morie_ml_split <- function(data,
 #' @param x A `morie_ml_split`.
 #' @param ... Unused.
 #' @return `x`, invisibly (ML1.5 dataset summary).
+#' @examples
+#' \donttest{
+#' sp <- morie_ml_split(mtcars, c(train = 0.6, test = 0.4), seed = 1)
+#' nrow(sp$train) + nrow(sp$test)
+#' print(sp)
+#' }
 #' @export
 print.morie_ml_split <- function(x, ...) {
   cat("<morie_ml_split>\n")
@@ -376,6 +382,13 @@ morie_ml_bake <- function(recipe, newdata, reverse = FALSE) {
 #' @param x A `morie_ml_recipe`.
 #' @param ... Unused.
 #' @return `x`, invisibly.
+#' @examples
+#' \donttest{
+#' rec <- morie_ml_recipe("mpg", c("hp", "wt"))
+#' rec <- morie_ml_prep(rec, mtcars)
+#' head(morie_ml_bake(rec, mtcars))
+#' print(rec)
+#' }
 #' @export
 print.morie_ml_recipe <- function(x, ...) {
   cat("<morie_ml_recipe>\n")
@@ -464,6 +477,11 @@ morie_ml_model <- function(type = c("logistic", "linear"),
 #' @param x A `morie_ml_model`.
 #' @param ... Unused.
 #' @return `x`, invisibly.
+#' @examples
+#' \donttest{
+#' obj <- morie_ml_model("logistic", optimizer = "adam", epochs = 50)
+#' print(obj)
+#' }
 #' @export
 print.morie_ml_model <- function(x, ...) {
   cat("<morie_ml_model>\n")
@@ -601,6 +619,12 @@ predict.morie_ml_fit <- function(object, newdata, type = c("response", "class"),
 #' @param x A `morie_ml_fit`.
 #' @param ... Unused.
 #' @return `x`, invisibly.
+#' @examples
+#' \donttest{
+#' m <- morie_ml_model("linear", optimizer = "gd", epochs = 100)
+#' fit <- morie_ml_train(m, mtcars[c("hp", "wt")], mtcars$mpg)
+#' print(fit)
+#' }
 #' @export
 print.morie_ml_fit <- function(x, ...) {
   cat("<morie_ml_fit>\n")
@@ -614,6 +638,12 @@ print.morie_ml_fit <- function(x, ...) {
 #' @param object A `morie_ml_fit`.
 #' @param ... Unused.
 #' @return A one-row data.frame summarising the fit.
+#' @examples
+#' \donttest{
+#' m <- morie_ml_model("linear", optimizer = "gd", epochs = 100)
+#' fit <- morie_ml_train(m, mtcars[c("hp", "wt")], mtcars$mpg)
+#' summary(fit)
+#' }
 #' @export
 summary.morie_ml_fit <- function(object, ...) {
   data.frame(type = object$type, loss = object$loss,

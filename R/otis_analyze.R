@@ -171,6 +171,12 @@ morie_otis_all_analyses <- function(df, year,
 # ---------------------------------------------------------------------------
 
 #' @return A character string.
+#' @examples
+#' \donttest{
+#'   df <- morie_otis_load()
+#'   res <- morie_otis_all_analyses(df, year = 2024)
+#' cat(format(res))
+#' }
 #' @export
 format.morie_otis_result <- function(x, ...) {
   lines <- character(0)
@@ -206,6 +212,12 @@ format.morie_otis_result <- function(x, ...) {
 }
 
 #' @return \code{x}, invisibly.
+#' @examples
+#' \donttest{
+#'   df <- morie_otis_load()
+#'   res <- morie_otis_all_analyses(df, year = 2024)
+#' print(res)
+#' }
 #' @export
 print.morie_otis_result <- function(x, ...) {
   cat(format(x, ...), "\

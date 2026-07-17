@@ -12,3 +12,6 @@ Character vector of category names, sorted.
 \description{
 List TPS categories known to the fetcher.
 }
+\examples{
+morie_tps_list_categories()
+}

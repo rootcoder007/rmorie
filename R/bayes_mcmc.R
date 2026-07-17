@@ -323,6 +323,12 @@ morie_bayes_compare <- function(fit) {
 #' @param object A `morie_bayes_fit`.
 #' @param ... Unused.
 #' @return Numeric fitted values.
+#' @examples
+#' \donttest{
+#' d <- data.frame(x = rnorm(50)); d$y <- 1 + 2 * d$x + rnorm(50)
+#' fit <- morie_bayes_lm(y ~ x, d, chains = 2, iter = 500, warmup = 200)
+#' head(fitted(fit))
+#' }
 #' @export
 fitted.morie_bayes_fit <- function(object, ...) {
   as.numeric(object$X %*% object$coefficients)
@@ -333,6 +339,12 @@ fitted.morie_bayes_fit <- function(object, ...) {
 #' @param x A `morie_bayes_fit`.
 #' @param ... Unused.
 #' @return `x`, invisibly.
+#' @examples
+#' \donttest{
+#' d <- data.frame(x = rnorm(50)); d$y <- 1 + 2 * d$x + rnorm(50)
+#' fit <- morie_bayes_lm(y ~ x, d, chains = 2, iter = 500, warmup = 200)
+#' print(fit)
+#' }
 #' @export
 print.morie_bayes_fit <- function(x, ...) {
   if (!is.null(x$error)) { cat("<morie_bayes_fit: ERROR>", x$error, "\n"); return(invisible(x)) }
@@ -350,6 +362,11 @@ print.morie_bayes_fit <- function(x, ...) {
 #' @param param Which parameter (index or name); default the first.
 #' @param ... Passed to [plot()].
 #' @return `NULL`, invisibly.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(40), x = rnorm(40))
+#' fit <- morie_bayes_lm(y ~ x, data = df, iter = 500L, warmup = 250L)
+#' morie_bayes_plot(fit, type = "trace")
 #' @export
 morie_bayes_plot <- function(x, type = c("trace", "density", "both"),
                              param = 1L, ...) {
@@ -375,6 +392,12 @@ morie_bayes_plot <- function(x, type = c("trace", "density", "both"),
 #' @param x A `morie_bayes_fit`.
 #' @param ... Passed to [morie_bayes_plot()].
 #' @return `NULL`, invisibly (default trace plot).
+#' @examples
+#' \donttest{
+#' d <- data.frame(x = rnorm(50)); d$y <- 1 + 2 * d$x + rnorm(50)
+#' fit <- morie_bayes_lm(y ~ x, d, chains = 2, iter = 500, warmup = 200)
+#' plot(fit)
+#' }
 #' @export
 plot.morie_bayes_fit <- function(x, ...) morie_bayes_plot(x, ...)
 

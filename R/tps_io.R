@@ -358,6 +358,11 @@ MORIE_TPS_SUPPORTED_FORMATS <- c(
 #' @return A `data.frame` (spatial readers return the dropped-sf
 #'   data frame; geometry column is preserved as an `sfc`).
 #'
+#' @examples
+#' \dontrun{
+#' # Reads from the local TPS cache dir (populate via morie_tps_fetch_category):
+#' df <- morie_tps_load("Assault", format = "csv", nrows = 100L)
+#' }
 #' @export
 morie_tps_load <- function(name, format = "csv", nrows = NULL) {
   fmt <- tolower(format)
@@ -386,6 +391,8 @@ morie_tps_load <- function(name, format = "csv", nrows = NULL) {
 #'
 #' @return Named character vector (`format` -> file path).
 #'
+#' @examples
+#' res <- try(morie_tps_list_formats(morie_tps_list_categories()[1]))
 #' @export
 morie_tps_list_formats <- function(name) {
   canonical <- tryCatch(
@@ -434,6 +441,8 @@ morie_tps_list_formats <- function(name) {
 #'
 #' @return Character vector of available format names, sorted.
 #'
+#' @examples
+#' morie_tps_available_formats()
 #' @export
 morie_tps_available_formats <- function() {
   out <- c("csv")

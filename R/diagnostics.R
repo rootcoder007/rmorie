@@ -423,6 +423,10 @@ collinearity_diagnostics <- function(X, column_names = NULL) {
 #' @param powers Integer vector of powers of fitted values to add
 #'   to the auxiliary regression (default \code{c(2, 3)}).
 #' @return A \code{morie_specification_test}.
+#' @examples
+#' set.seed(1)
+#' X <- cbind(1, rnorm(60)); y <- drop(X %*% c(1, 2)) + rnorm(60)
+#' str(ramsey_reset_test(y, X), max.level = 1)
 #' @export
 ramsey_reset_test <- function(y, X, powers = c(2, 3)) {
   y <- as.numeric(y)
@@ -650,6 +654,11 @@ compute_goodness_of_fit <- function(y, y_hat, X,
 #' @param covariate_names Optional names.
 #' @return A list of \code{morie_specification_test} objects, one per
 #'   covariate.
+#' @examples
+#' set.seed(1)
+#' res <- try(ph_assumption_test(rexp(60), rbinom(60, 1, 0.7),
+#'                               matrix(rnorm(120), ncol = 2)))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 ph_assumption_test <- function(survival_times, event_indicator,
                                covariates, covariate_names = NULL) {
@@ -724,6 +733,9 @@ likelihood_ratio_test <- function(ll_restricted, ll_full, df_diff) {
 #' @param R Optional restriction matrix (default identity).
 #' @param r Optional restriction vector (default zeros).
 #' @return A \code{morie_specification_test}.
+#' @examples
+#' set.seed(1)
+#' str(wald_test(c(0.8, 0.1), diag(c(0.04, 0.01))), max.level = 1)
 #' @export
 wald_test <- function(estimates, vcov, R = NULL, r = NULL) {
   beta <- as.numeric(estimates)
@@ -754,6 +766,9 @@ wald_test <- function(estimates, vcov, R = NULL, r = NULL) {
 #' @param score_vector Score vector evaluated under H0.
 #' @param information_matrix Information matrix under H0.
 #' @return A \code{morie_specification_test}.
+#' @examples
+#' set.seed(1)
+#' str(score_test(c(0.5, -0.2), diag(2) * 10), max.level = 1)
 #' @export
 score_test <- function(score_vector, information_matrix) {
   U <- as.numeric(score_vector)

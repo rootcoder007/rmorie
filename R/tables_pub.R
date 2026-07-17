@@ -167,6 +167,13 @@ NULL
 #'   "text", "csv".
 #' @param title Table title.
 #' @return A vector of the computed values.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(g = rep(c("a", "b"), 25), age = rnorm(50, 40, 10),
+#'                  sex = sample(c("m", "f"), 50, TRUE))
+#' res <- try(table1(df, group_col = "g", continuous_vars = "age",
+#'                   categorical_vars = "sex"))
+#' if (!inherits(res, "try-error")) head(res)
 #' @export
 table1 <- function(data, group_col = NULL,
                     continuous_vars = NULL, categorical_vars = NULL,
@@ -376,6 +383,10 @@ table1 <- function(data, group_col = NULL,
 #' @param output_format Output target.
 #' @param title Title.
 #' @return A character string.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(60), x = rnorm(60))
+#' regression_table(list(ols = stats::lm(y ~ x, data = df)))
 #' @export
 regression_table <- function(models, exponentiate = FALSE,
                               show_ci = TRUE, show_stars = TRUE,
@@ -482,6 +493,11 @@ regression_table <- function(models, exponentiate = FALSE,
 #' @param output_format Output target.
 #' @param title Title.
 #' @return A character string.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(y = rbinom(80, 1, 0.4), x = rnorm(80))
+#' fit <- stats::glm(y ~ x, family = binomial(), data = df)
+#' odds_ratio_table(fit)
 #' @export
 odds_ratio_table <- function(model, confidence = 0.95, digits = 3L,
                               apa = FALSE, output_format = "dataframe",
@@ -836,6 +852,10 @@ format_dataframe <- function(df, numeric_fmt = "%.2f",
 #' @param output_format Output target.
 #' @param title Title.
 #' @return A character string.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(age = rnorm(50, 40, 10), score = rnorm(50))
+#' summary_statistics_table(df)
 #' @export
 summary_statistics_table <- function(data, variables = NULL,
                                         stats = c("n", "mean", "sd",
@@ -904,6 +924,10 @@ summary_statistics_table <- function(data, variables = NULL,
 #' @param output_format Output target.
 #' @param title Title.
 #' @return A character string.
+#' @examples
+#' res <- try(treatment_effect_table(list(
+#'   ols = list(estimate = 0.5, se = 0.1, p_value = 0.01))))
+#' if (!inherits(res, "try-error")) head(res)
 #' @export
 treatment_effect_table <- function(estimators, digits = 3L,
                                       output_format = "dataframe",

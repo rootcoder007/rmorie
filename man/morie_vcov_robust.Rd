@@ -24,3 +24,10 @@ A single entry point over the native HC / HAC / CL estimators,
 mirroring the \code{type} vocabulary used by
 \code{morie_causal_robust_se()}.
 }
+\examples{
+set.seed(1)
+df <- data.frame(y = rnorm(60), x = rnorm(60),
+                 cl = rep(1:6, each = 10))
+fit <- stats::lm(y ~ x, data = df)
+morie_vcov_robust(fit)
+}

@@ -8,7 +8,7 @@
 #' @return Named list with tensor, value, lr_target, warmup_steps, step, method.
 #' @keywords internal
 #' @examples
-#' res <- morie:::lr_warmup(c(0, 500, 1000, 2000),
+#' res <- rmorie:::lr_warmup(c(0, 500, 1000, 2000),
 #'                          lr_target = 1e-3, warmup_steps = 1000L)
 #' res$tensor
 lr_warmup <- function(x, lr_target = 1e-3, warmup_steps = 1000L) {

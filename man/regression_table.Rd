@@ -45,3 +45,8 @@ A character string.
 \description{
 Side-by-side regression table for multiple model fits
 }
+\examples{
+set.seed(1)
+df <- data.frame(y = rnorm(60), x = rnorm(60))
+regression_table(list(ols = stats::lm(y ~ x, data = df)))
+}

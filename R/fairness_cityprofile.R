@@ -259,6 +259,15 @@ morie_fairness_apply_profile <- function(df, profile) {
 # ---------------------------------------------------------------------------
 
 #' @return \code{x}, invisibly.
+#' @examples
+#' \donttest{
+#' p <- morie_fairness_city_profile(
+#'   "chicago", area_col = "community_area",
+#'   risk_col = "rti", group_col = "majority_race"
+#' )
+#' p$name
+#' print(p)
+#' }
 #' @export
 print.morie_city_profile <- function(x, ...) {
   cat("morie_city_profile:", x$name, "\

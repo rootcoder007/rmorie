@@ -53,3 +53,10 @@ When \code{rebase_to_year} is supplied, an additional
 \code{csi_index} column is added, anchored so that that year's value
 equals \code{rebase_to_value}.
 }
+\examples{
+counts <- data.frame(OCC_YEAR = rep(2020:2023, 2),
+                     category = rep(c("Assault", "Robbery"), each = 4),
+                     n = rpois(8, 50))
+res <- try(morie_tps_csi_per_year(counts))
+if (!inherits(res, "try-error")) str(res, max.level = 1)
+}

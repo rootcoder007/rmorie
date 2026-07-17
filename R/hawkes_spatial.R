@@ -257,6 +257,14 @@ morie_hawkes_st_fit <- function(events, end_time = NULL, area = 1,
 }
 
 #' @return \code{x}, invisibly.
+#' @examples
+#' \donttest{
+#' ev <- morie_hawkes_st_simulate(
+#'   list(mu = 0.2, alpha = 0.5, beta = 1, sigma = 0.4),
+#'   end_time = 40, region = c(0, 10, 0, 10), seed = 7)
+#' obj <- morie_hawkes_st_fit(ev, end_time = 40, area = 100)$params
+#' print(obj)
+#' }
 #' @export
 print.morie_hawkes_st_fit <- function(x, ...) {
   p <- x$params

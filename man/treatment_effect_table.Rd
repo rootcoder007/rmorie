@@ -28,3 +28,8 @@ A character string.
 \description{
 Summary table of causal effect estimates from multiple estimators
 }
+\examples{
+res <- try(treatment_effect_table(list(
+  ols = list(estimate = 0.5, se = 0.1, p_value = 0.01))))
+if (!inherits(res, "try-error")) head(res)
+}

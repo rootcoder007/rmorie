@@ -184,6 +184,10 @@ kernel_eval <- function(u, kernel_type = KERNEL_GAUSSIAN) {
 #' @return Numeric vector of fitted values at \code{x_eval}.
 #' @references Nadaraya, E. A. (1964). On Estimating Regression.
 #'   \emph{Theory of Probability and Its Applications}, 9(1), 141-142.
+#' @examples
+#' set.seed(1)
+#' x <- runif(80); y <- sin(2 * pi * x) + rnorm(80, 0, 0.2)
+#' head(nw_regression(x, y, x_eval = seq(0, 1, 0.25), bandwidth = 0.1))
 #' @export
 nw_regression <- function(x, y, x_eval, bandwidth) {
   x <- as.numeric(x)
@@ -317,6 +321,9 @@ kde <- function(x, x_eval, bandwidth, kernel_type = KERNEL_GAUSSIAN) {
 #' @param x Numeric data vector.
 #' @return Bandwidth (numeric scalar).
 #' @references Silverman, B. W. (1986), p. 48.
+#' @examples
+#' set.seed(1)
+#' silverman_bandwidth(rnorm(100))
 #' @export
 silverman_bandwidth <- function(x) {
   x <- as.numeric(x)
@@ -507,6 +514,8 @@ gam_smoother <- function(x, y, x_eval = NULL, k = 10, family = stats::gaussian()
 #'   methods \code{nw_regression}, \code{local_linear}, \code{kde},
 #'   \code{silverman_bandwidth}, \code{loocv_bandwidth},
 #'   \code{kernel_cond_moments}, plus a \code{backend} string.
+#' @examples
+#' str(SemiparKernels(), max.level = 1)
 #' @export
 SemiparKernels <- function() {
   obj <- list(
@@ -536,6 +545,11 @@ SemiparKernels <- function() {
 
 
 #' @return \code{x}, invisibly.
+#' @examples
+#' \donttest{
+#' obj <- str(SemiparKernels(), max.level = 1)
+#' print(obj)
+#' }
 #' @export
 print.morie_semipar_kernels <- function(x, ...) {
   cat("morie SemiparKernels\

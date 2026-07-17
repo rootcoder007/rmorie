@@ -116,6 +116,15 @@ NULL
 #' @return A \code{morie_rich_result} list with \code{slope},
 #'   \code{intercept}, \code{r2}, \code{direction}, \code{years},
 #'   \code{counts}, \code{fitted}.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(OCC_YEAR = rep(2014:2023, each = 30),
+#'                  OCC_MONTH = sample(month.name, 300, TRUE),
+#'                  HOOD_158 = sample(sprintf("%03d", 1:20), 300, TRUE),
+#'                  LAT_WGS84 = runif(300, 43.6, 43.8),
+#'                  LONG_WGS84 = runif(300, -79.5, -79.2))
+#' res <- try(morie_tps_year_over_year_trend(df, ds_name = "synthetic"))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 morie_tps_year_over_year_trend <- function(df,
                                             year_col = "OCC_YEAR",
@@ -222,6 +231,15 @@ morie_tps_year_over_year_trend <- function(df,
 #' @param ds_name Character label.
 #' @return A \code{morie_rich_result} list with per-cycle counts and
 #'   chi-square p-values.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(OCC_YEAR = rep(2014:2023, each = 30),
+#'                  OCC_MONTH = sample(month.name, 300, TRUE),
+#'                  HOOD_158 = sample(sprintf("%03d", 1:20), 300, TRUE),
+#'                  LAT_WGS84 = runif(300, 43.6, 43.8),
+#'                  LONG_WGS84 = runif(300, -79.5, -79.2))
+#' res <- try(morie_tps_seasonal_pattern(df, ds_name = "synthetic"))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 morie_tps_seasonal_pattern <- function(df, ds_name = "?") {
   stopifnot(is.data.frame(df))
@@ -306,6 +324,15 @@ morie_tps_seasonal_pattern <- function(df, ds_name = "?") {
 #' @return A \code{morie_rich_result} list with
 #'   \code{changepoint_year}, \code{K_statistic}, \code{p_value},
 #'   \code{pre_mean}, \code{post_mean}.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(OCC_YEAR = rep(2014:2023, each = 30),
+#'                  OCC_MONTH = sample(month.name, 300, TRUE),
+#'                  HOOD_158 = sample(sprintf("%03d", 1:20), 300, TRUE),
+#'                  LAT_WGS84 = runif(300, 43.6, 43.8),
+#'                  LONG_WGS84 = runif(300, -79.5, -79.2))
+#' res <- try(morie_tps_changepoint_detection(df, ds_name = "synthetic"))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 morie_tps_changepoint_detection <- function(df,
                                              year_col = "OCC_YEAR",
@@ -420,6 +447,15 @@ morie_tps_changepoint_detection <- function(df,
 #' @param ds_name Character label.
 #' @return A \code{morie_rich_result} list with \code{forecast},
 #'   \code{aic}, \code{bic}, \code{n_train}.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(OCC_YEAR = rep(2014:2023, each = 30),
+#'                  OCC_MONTH = sample(month.name, 300, TRUE),
+#'                  HOOD_158 = sample(sprintf("%03d", 1:20), 300, TRUE),
+#'                  LAT_WGS84 = runif(300, 43.6, 43.8),
+#'                  LONG_WGS84 = runif(300, -79.5, -79.2))
+#' res <- try(morie_tps_arima_forecast(df, h = 4L, ds_name = "synthetic"))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 morie_tps_arima_forecast <- function(df, h = 12L, ds_name = "?") {
   stopifnot(is.data.frame(df))
@@ -508,6 +544,18 @@ morie_tps_arima_forecast <- function(df, h = 12L, ds_name = "?") {
 # ---------------------------------------------------------------------------
 
 #' @return \code{x}, invisibly.
+#' @examples
+#' \donttest{
+#' set.seed(1)
+#' df <- data.frame(OCC_YEAR = rep(2014:2023, each = 30),
+#'                  OCC_MONTH = sample(month.name, 300, TRUE),
+#'                  HOOD_158 = sample(sprintf("%03d", 1:20), 300, TRUE),
+#'                  LAT_WGS84 = runif(300, 43.6, 43.8),
+#'                  LONG_WGS84 = runif(300, -79.5, -79.2))
+#' res <- try(morie_tps_seasonal_pattern(df, ds_name = "synthetic"))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
+#' print(res)
+#' }
 #' @export
 print.morie_tps_temporal_result <- function(x, ...) {
   cat(x$title, "\

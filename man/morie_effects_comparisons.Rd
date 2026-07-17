@@ -24,3 +24,11 @@ Thin extender over \code{marginaleffects::comparisons()} for unit-
 level treatment-effect contrasts (counterfactual differences,
 ratios, etc.).
 }
+\examples{
+if (requireNamespace("marginaleffects", quietly = TRUE)) {
+  set.seed(1)
+  df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
+  fit <- stats::lm(y ~ x + g, data = df)
+  head(morie_effects_comparisons(fit, variables = "g"))
+}
+}

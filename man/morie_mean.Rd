@@ -13,6 +13,6 @@ A numeric scalar: the mean of \code{x}.
 Single-pass C++ kernel.  Equivalent to \code{mean(x)}.
 }
 \examples{
-morie:::morie_mean(1:10)
+rmorie:::morie_mean(1:10)
 }
 \keyword{internal}

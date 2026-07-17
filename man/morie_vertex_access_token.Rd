@@ -15,3 +15,9 @@ Character bearer token.
 \description{
 Fetch and cache a Google Cloud access token via gcloud
 }
+\examples{
+\dontrun{
+# Requires VERTEX_ACCESS_TOKEN or a gcloud credential:
+tok <- morie_vertex_access_token()
+}
+}

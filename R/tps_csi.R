@@ -135,6 +135,8 @@ MORIE_TPS_CSI_CATEGORIES <- function() names(.TOTAL_CSI_WEIGHTS)
 #' @param weights Optional named numeric vector overriding the built-in
 #'   tables.  When supplied, takes precedence over \code{variant}.
 #' @return Numeric scalar (0 if unknown).
+#' @examples
+#' morie_tps_csi_weight("Assault")
 #' @export
 morie_tps_csi_weight <- function(category, variant = c("total", "violent"),
                                    weights = NULL) {
@@ -231,6 +233,12 @@ morie_tps_csi_weight <- function(category, variant = c("total", "violent"),
 #' @param rebase_to_year Optional anchor year for the index.
 #' @param rebase_to_value Index value at the anchor year (default 100).
 #' @return A data.frame with one row per year.
+#' @examples
+#' counts <- data.frame(OCC_YEAR = rep(2020:2023, 2),
+#'                      category = rep(c("Assault", "Robbery"), each = 4),
+#'                      n = rpois(8, 50))
+#' res <- try(morie_tps_csi_per_year(counts))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 morie_tps_csi_per_year <- function(counts_per_year,
                                      variant = c("total", "violent"),
@@ -298,6 +306,12 @@ morie_tps_csi_per_year <- function(counts_per_year,
 #' @param variant One of "total" or "violent".
 #' @param weights Optional override vector of weights.
 #' @return A data.frame with one row per neighbourhood.
+#' @examples
+#' counts <- data.frame(HOOD_158 = rep(sprintf("%03d", 1:4), 2),
+#'                      category = rep(c("Assault", "Robbery"), each = 4),
+#'                      n = rpois(8, 50))
+#' res <- try(morie_tps_csi_per_neighbourhood(counts))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 morie_tps_csi_per_neighbourhood <- function(counts_per_hood,
                                               variant = c("total", "violent"),
@@ -338,6 +352,15 @@ morie_tps_csi_per_neighbourhood <- function(counts_per_hood,
 #' @param variant One of "total" or "violent" (default "total").
 #' @return A \code{morie_tps_result} named list carrying \code{by_year}
 #'   and \code{by_hood} data.frames in \code{payload}.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(OCC_YEAR = rep(2014:2023, each = 30),
+#'                  OCC_MONTH = sample(month.name, 300, TRUE),
+#'                  HOOD_158 = sample(sprintf("%03d", 1:20), 300, TRUE),
+#'                  LAT_WGS84 = runif(300, 43.6, 43.8),
+#'                  LONG_WGS84 = runif(300, -79.5, -79.2))
+#' res <- try(morie_tps_analyze_csi_from_dataframes(list(Assault = df)))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 morie_tps_analyze_csi_from_dataframes <- function(dfs,
                                                      year_col = "OCC_YEAR",

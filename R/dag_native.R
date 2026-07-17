@@ -53,6 +53,14 @@ morie_dag <- function(edges, exposure, outcome, latent = character()) {
             class = "morie_dag")
 }
 
+#' @examples
+#' \donttest{
+#' g <- morie_dag(c("race -> placement", "race -> outcome",
+#'                  "placement -> outcome"),
+#'                exposure = "placement", outcome = "outcome")
+#' morie_dag_identify(g)
+#' print(g)
+#' }
 #' @export
 print.morie_dag <- function(x, ...) {
   cat("morie causal DAG:", length(x$nodes), "nodes,",

@@ -222,6 +222,9 @@ morie_audit_all_variables <- function(otis_specs = NULL,
 #'
 #' @param df Loaded data.frame.
 #' @return List of column specs.
+#' @examples
+#' df <- data.frame(age = c(21, 34, NA), city = c("a", "b", "b"))
+#' str(morie_specs_from_df(df), max.level = 1)
 #' @export
 morie_specs_from_df <- function(df) {
   lapply(names(df), function(nm) {
@@ -243,6 +246,10 @@ morie_specs_from_df <- function(df) {
 #' @param out_path Path to write to.
 #' @param audit_result A \code{morie_audit_result} or list of them.
 #' @return The path written.
+#' @examples
+#' df <- data.frame(age = c(21, 34, NA), city = c("a", "b", "b"))
+#' res <- try(morie_write_audit_markdown(tempfile(fileext = ".md"),
+#'                                       morie_specs_from_df(df)))
 #' @export
 morie_write_audit_markdown <- function(out_path, audit_result) {
   if (!inherits(audit_result, "morie_audit_result") &&
@@ -301,6 +308,15 @@ morie_write_audit_markdown <- function(out_path, audit_result) {
 #' @param x A \code{morie_audit_result}.
 #' @param ... Unused.
 #' @return \code{x}, invisibly.
+#' @examples
+#' \donttest{
+#' spec <- function(nm, dt, vv = NULL) list(name = nm, dtype = dt, valid_values = vv)
+#' specs <- list(v1 = list(spec("UniqueIndividual_ID", "string"),
+#'                         spec("NumberConsecutiveDays_Segregation", "int")))
+#' res <- morie_audit_otis_variables(specs)
+#' res$domain
+#' print(res)
+#' }
 #' @export
 print.morie_audit_result <- function(x, ...) {
   cat(x$title, "\n", strrep("=", nchar(x$title)), "\n", sep = "")

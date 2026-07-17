@@ -447,6 +447,28 @@ morie_laniyonu_smi_force_disparity <- function(
 
 
 #' @return \code{x}, invisibly.
+#' @examples
+#' \donttest{
+#' set.seed(1)
+#' g <- expand.grid(tract_id = sprintf("T%02d", 1:30), year = 2020:2023,
+#'                  stringsAsFactors = FALSE)
+#' g$pop_18plus <- sample(500:5000, nrow(g), TRUE)
+#' g$poverty_rate <- runif(nrow(g), 0.05, 0.45)
+#' g$nonwhite_share <- runif(nrow(g), 0.1, 0.8)
+#' g$force_events <- rpois(nrow(g), 2)
+#' g$total_force_events <- g$force_events + rpois(nrow(g), 15)
+#' survey <- data.frame(smi = rbinom(500, 1, 0.08),
+#'                      poverty_rate = runif(500), nonwhite_share = runif(500))
+#' res <- suppressWarnings(morie_laniyonu_smi_force_disparity(
+#'   df = g, survey_df = survey, survey_trait_col = "smi",
+#'   survey_covariate_cols = c("poverty_rate", "nonwhite_share"), max_iter = 50L))
+#' res$alpha_v
+#' \references{
+#' Laniyonu, A., & Goff, P. A. (2021).  Measuring disparities in
+#' police use of force and injury among persons with serious mental
+#' illness.  BMC Psychiatry, 21(1), 500.
+#' print(res)
+#' }
 #' @export
 print.morie_laniyonu_smi_result <- function(x, ...) {
   cat(x$title, "\

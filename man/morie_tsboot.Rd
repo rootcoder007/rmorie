@@ -40,6 +40,12 @@ A \code{morie_boot} object (\code{t0}, \code{t}, \code{R}).
 Reproduces \code{boot::tsboot} for the \code{sim = "fixed"} (moving
 block) and \code{sim = "geom"} (stationary) resampling schemes.
 }
+\examples{
+set.seed(1)
+b <- morie_tsboot(stats::as.ts(rnorm(60)), statistic = mean,
+                  R = 100L, l = 5)
+str(b, max.level = 1)
+}
 \references{
 Politis, D. N., & Romano, J. P. (1994). The stationary
 bootstrap. \emph{JASA}, 89(428), 1303-1313.

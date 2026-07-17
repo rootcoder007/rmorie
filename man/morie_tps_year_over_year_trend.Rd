@@ -24,3 +24,13 @@ Aggregates incident counts by year, restricts to the 1990-2030
 window, fits an OLS line, and reports slope, intercept, and
 R-squared.
 }
+\examples{
+set.seed(1)
+df <- data.frame(OCC_YEAR = rep(2014:2023, each = 30),
+                 OCC_MONTH = sample(month.name, 300, TRUE),
+                 HOOD_158 = sample(sprintf("\%03d", 1:20), 300, TRUE),
+                 LAT_WGS84 = runif(300, 43.6, 43.8),
+                 LONG_WGS84 = runif(300, -79.5, -79.2))
+res <- try(morie_tps_year_over_year_trend(df, ds_name = "synthetic"))
+if (!inherits(res, "try-error")) str(res, max.level = 1)
+}

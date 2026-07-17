@@ -17,3 +17,11 @@
 \description{
 Default 2-D cluster plot
 }
+\examples{
+\donttest{
+# with vs without scaling changes which columns drive the clusters
+morie_cluster(iris[1:4], k = 3)
+obj <- morie_cluster(iris[1:4], k = 3, scale = TRUE)
+plot(obj)
+}
+}

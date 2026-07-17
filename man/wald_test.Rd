@@ -21,3 +21,7 @@ A \code{morie_specification_test}.
 \description{
 Tests H0: \code{R \%*\% beta = r}.
 }
+\examples{
+set.seed(1)
+str(wald_test(c(0.8, 0.1), diag(c(0.04, 0.01))), max.level = 1)
+}

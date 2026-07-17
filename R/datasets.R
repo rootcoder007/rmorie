@@ -1243,6 +1243,12 @@ morie_datasets_nyc_stop_and_frisk <- function(year = NULL,
 #' @param select Projection list; defaults to `"*"`.
 #' @param billing_project GCP project to bill; `NULL` uses ADC-discovered.
 #' @return A `data.frame`.
+#' @examples
+#' \dontrun{
+#' # Requires Google Cloud credentials (GOOGLE_APPLICATION_CREDENTIALS).
+#' df <- morie_datasets_bigquery("my-project", "my_dataset", "my_table",
+#'                               limit = 10L)
+#' }
 #' @export
 morie_datasets_bigquery <- function(project, dataset, table,
                                     where = NULL, limit = NULL,

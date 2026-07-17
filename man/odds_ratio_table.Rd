@@ -32,3 +32,9 @@ A character string.
 \description{
 Odds-ratio table from a fitted logistic GLM
 }
+\examples{
+set.seed(1)
+df <- data.frame(y = rbinom(80, 1, 0.4), x = rnorm(80))
+fit <- stats::glm(y ~ x, family = binomial(), data = df)
+odds_ratio_table(fit)
+}

@@ -35,3 +35,10 @@ A \code{data.frame}.
 \description{
 Requires the \code{bigrquery} package and Application Default Credentials.
 }
+\examples{
+\dontrun{
+# Requires Google Cloud credentials (GOOGLE_APPLICATION_CREDENTIALS).
+df <- morie_datasets_bigquery("my-project", "my_dataset", "my_table",
+                              limit = 10L)
+}
+}

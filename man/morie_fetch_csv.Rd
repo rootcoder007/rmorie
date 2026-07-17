@@ -17,3 +17,9 @@ A data frame.
 \description{
 Read CSV/TSV natively
 }
+\examples{
+tf <- tempfile(fileext = ".csv")
+utils::write.csv(data.frame(a = 1:3, b = c("x", "y", "z")), tf,
+                 row.names = FALSE)
+morie_fetch_csv(tf)
+}

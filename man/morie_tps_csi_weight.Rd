@@ -20,3 +20,6 @@ Numeric scalar (0 if unknown).
 \description{
 Return the CSI weight for a TPS open-data category.
 }
+\examples{
+morie_tps_csi_weight("Assault")
+}

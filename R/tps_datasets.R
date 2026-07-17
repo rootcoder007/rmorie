@@ -15,6 +15,8 @@
 #' argument of [morie_tps_load_dataset()].
 #'
 #' @return A logical scalar.
+#' @examples
+#' morie_tps_data_dir()
 #' @export
 morie_tps_data_dir <- function() {
   # Env override wins.

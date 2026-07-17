@@ -17,3 +17,13 @@
 \description{
 Print method for audit results.
 }
+\examples{
+\donttest{
+spec <- function(nm, dt, vv = NULL) list(name = nm, dtype = dt, valid_values = vv)
+specs <- list(v1 = list(spec("UniqueIndividual_ID", "string"),
+                        spec("NumberConsecutiveDays_Segregation", "int")))
+res <- morie_audit_otis_variables(specs)
+res$domain
+print(res)
+}
+}

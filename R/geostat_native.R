@@ -35,6 +35,11 @@
 #'   (semivariance), and \code{np} (pair count per bin).
 #' @references Matheron, G. (1963). Principles of geostatistics.
 #'   \emph{Economic Geology}, 58(8), 1246--1266.
+#' @examples
+#' set.seed(1)
+#' coords <- cbind(runif(60, 0, 10), runif(60, 0, 10))
+#' values <- coords[, 1] * 0.5 + rnorm(60, 0, 0.3)
+#' str(morie_spatial_variogram(coords, values), max.level = 1)
 #' @export
 morie_spatial_variogram <- function(coords, values, n_bins = 15L,
                                     cutoff = NULL) {
@@ -70,6 +75,11 @@ morie_spatial_variogram <- function(coords, values, n_bins = 15L,
 #'   \code{range}, \code{loglik}, \code{converged}, \code{method}.
 #' @srrstats {G1.0} ML covariance estimation per Mardia & Marshall
 #'   (1984), Biometrika 71(1).
+#' @examples
+#' set.seed(1)
+#' coords <- cbind(runif(60, 0, 10), runif(60, 0, 10))
+#' values <- coords[, 1] * 0.5 + rnorm(60, 0, 0.3)
+#' str(morie_spatial_variogram_fit(coords, values), max.level = 1)
 #' @export
 morie_spatial_variogram_fit <- function(coords, values,
                                         model = "exponential") {
@@ -98,20 +108,6 @@ morie_spatial_variogram_fit <- function(coords, values,
        loglik = -opt$value, converged = opt$convergence == 0,
        method = "variogram ML (rmorie native)")
 }
-
-#' Ordinary kriging prediction
-#'
-#' Solves the ordinary-kriging system with the supplied (or ML-fitted)
-#' variogram model and predicts at new locations, returning kriging
-#' variances.
-#'
-#' @param coords,values Observed locations and values.
-#' @param new_coords Matrix of prediction locations.
-#' @param vgm A fit from \code{\link{morie_spatial_variogram_fit}}, or
-#'   \code{NULL} to fit an exponential model first.
-#' @return A data frame with \code{pred} and \code{var}.
-#' @references Cressie, N. (1993). \emph{Statistics for Spatial Data}.
-#' @export
 
 # Fast WLS fit of a variogram model on the binned empirical variogram
 # (Cressie 1985 weights n_h / h^2) -- the gstat::fit.variogram

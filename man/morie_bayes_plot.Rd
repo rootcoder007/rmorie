@@ -21,3 +21,9 @@ morie_bayes_plot(x, type = c("trace", "density", "both"), param = 1L, ...)
 \description{
 Default MCMC plot (trace, density, or both)
 }
+\examples{
+set.seed(1)
+df <- data.frame(y = rnorm(40), x = rnorm(40))
+fit <- morie_bayes_lm(y ~ x, data = df, iter = 500L, warmup = 250L)
+morie_bayes_plot(fit, type = "trace")
+}

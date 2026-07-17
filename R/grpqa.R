@@ -14,7 +14,7 @@
 #' Q <- matrix(rnorm(8 * 4), 8, 4)
 #' K <- matrix(rnorm(8 * 4), 8, 4)
 #' V <- matrix(rnorm(8 * 4), 8, 4)
-#' out <- morie:::grouped_query_attention(Q, K, V)
+#' out <- rmorie:::grouped_query_attention(Q, K, V)
 #' str(out)
 grouped_query_attention <- function(Q, K = NULL, V = NULL,
                                     n_heads = 8L, n_kv_heads = 2L) {

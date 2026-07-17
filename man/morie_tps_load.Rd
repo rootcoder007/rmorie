@@ -25,3 +25,9 @@ work with base R / \code{readxl}; all spatial formats (\code{geojson},
 \code{requireNamespace("sf")} and surface a clean install message if
 the dependency is missing.
 }
+\examples{
+\dontrun{
+# Reads from the local TPS cache dir (populate via morie_tps_fetch_category):
+df <- morie_tps_load("Assault", format = "csv", nrows = 100L)
+}
+}

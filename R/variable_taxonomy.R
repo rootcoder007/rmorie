@@ -294,6 +294,13 @@ morie_recommended_pair_test <- function(tax_a, tax_b) {
 #' @param x A \code{morie_variable_taxonomy} object.
 #' @param ... Unused.
 #' @return \code{x}, invisibly.
+#' @examples
+#' \donttest{
+#' t <- morie_classify_variable("RecordID", "string", NULL, "any")
+#' t$level
+#' t$role
+#' print(t)
+#' }
 #' @export
 print.morie_variable_taxonomy <- function(x, ...) {
   cat(sprintf("Variable taxonomy: %s :: %s\n", x$dataset_name, x$column_name))

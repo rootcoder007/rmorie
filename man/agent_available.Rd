@@ -12,3 +12,6 @@ Logical scalar; \code{TRUE} if the \code{rmorie} binary is on PATH.
 \description{
 Is the rmorie CLI agent available?
 }
+\examples{
+agent_available()
+}

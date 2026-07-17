@@ -33,6 +33,12 @@ HC0-HC5 (cross-section), HAC (time-series), and clustered
 (one-way) variance, each cross-validated against \pkg{sandwich}
 to machine precision.
 }
+\examples{
+set.seed(1)
+df <- data.frame(y = rnorm(60), x = rnorm(60))
+fit <- stats::lm(y ~ x, data = df)
+str(morie_causal_robust_se(fit), max.level = 1)
+}
 \references{
 Zeileis A, Koll S, Graham N (2020). Various Versatile Variances:
 An Object-Oriented Implementation of Clustered Covariances in R.

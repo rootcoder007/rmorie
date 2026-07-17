@@ -117,15 +117,21 @@ NULL
 morie_rdd_kernel_triangular  <- function(u) pmax(1 - abs(u), 0)
 #' @rdname morie_rdd_kernels
 #' @return A \code{function} of one argument returning Epanechnikov kernel weights.
+#' @examples
+#' morie_rdd_kernel_epanechnikov(seq(-1, 1, by = 0.5))
 #' @export
 morie_rdd_kernel_epanechnikov <- function(u)
   ifelse(abs(u) <= 1, 0.75 * (1 - u^2), 0)
 #' @rdname morie_rdd_kernels
 #' @return A \code{function} of one argument returning uniform kernel weights.
+#' @examples
+#' morie_rdd_kernel_uniform(seq(-2, 2, by = 1))
 #' @export
 morie_rdd_kernel_uniform <- function(u) ifelse(abs(u) <= 1, 0.5, 0)
 #' @rdname morie_rdd_kernels
 #' @return A \code{function} of one argument returning Gaussian kernel weights.
+#' @examples
+#' morie_rdd_kernel_gaussian(seq(-1, 1, by = 0.5))
 #' @export
 morie_rdd_kernel_gaussian <- function(u) stats::dnorm(u)
 

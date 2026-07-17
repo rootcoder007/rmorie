@@ -213,6 +213,11 @@ morie_eda_plot <- function(x, xvar, yvar, group = NULL, units = NULL,
 #' @param x A `morie_eda_table`.
 #' @param ... Passed to the data.frame print method.
 #' @return `x`, invisibly.
+#' @examples
+#' \donttest{
+#' obj <- morie_eda_table(mtcars)
+#' print(obj)
+#' }
 #' @export
 print.morie_eda_table <- function(x, ...) {
   cat(sprintf("<morie_eda_table> %d x %d  index: %s\n",

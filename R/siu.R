@@ -2120,6 +2120,12 @@ morie_siu_translate <- function(
 #'   back-compat wrapper that calls \code{morie_siu_translate}
 #'   with \code{target_lang = "en", source_lang = "fr"}.
 #' @return The input, invisibly.
+#' @examples
+#' \dontrun{
+#' # Needs the SIU HTML cache plus a configured LLM provider (e.g. local
+#' # ollama); translates the French-only directors reports field-by-field.
+#' res <- morie_siu_translate_fr_to_en(case_numbers = "26-OCI-168")
+#' }
 #' @export
 morie_siu_translate_fr_to_en <- function(
   case_numbers = NULL, model = "ollama",
