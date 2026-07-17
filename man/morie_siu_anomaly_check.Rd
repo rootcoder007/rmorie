@@ -7,34 +7,11 @@
 morie_siu_anomaly_check(
   case_number,
   model = c("ollama", "openai_compatible", "claude", "openai", "gemini", "vertex",
-    "freeapi"),
+    "ollamafree", "freeapi"),
   cache_dir = file.path(tempdir(), "morie", "siu"),
   max_html_chars = 80000L,
   mock_response_text = NULL
 )
-}
-\arguments{
-\item{case_number}{An SIU case number (e.g. \code{"17-OVI-201"}).}
-
-\item{model}{One of \code{"ollama"} (default; free, runs locally,
-zero-config when an Ollama daemon is on \code{localhost:11434}),
-\code{"gemini"} (paid), or \code{"claude"} (paid). A character
-vector enables fail-over: the first model whose call succeeds
-wins. The default \code{c("ollama", "gemini")} tries the local
-free model first and only escalates to paid Gemini if Ollama
-isn't installed or fails -- so morie costs $0 to use as long
-as you have a free Gemma / Qwen / Llama running locally
-(e.g. \code{ollama pull gemma3:4b}).}
-
-\item{cache_dir}{Directory holding the harvester's SIU.csv and
-the optional \code{html/} subdirectory.}
-
-\item{max_html_chars}{Soft cap on the HTML payload sent to the
-model (default 80,000 -- larger than any real SIU report,
-small enough to stay under typical context budgets).}
-
-\item{mock_response_text}{For testing only: if non-NULL, skip the
-network call and use this string as the model's raw reply.}
 }
 \value{
 A data frame with one row per populated parser field:

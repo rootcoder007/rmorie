@@ -24,6 +24,8 @@ A \code{data.frame}.
 NamUs missing-persons case metadata.
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_namus_missing_persons(state = "CA", offline = TRUE)
 head(df)
+\dontshow{\}) # examplesIf}
 }

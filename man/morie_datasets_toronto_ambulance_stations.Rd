@@ -20,6 +20,8 @@ Phase 3EEE2. Included snapshot of \code{ambulance-station-locations}
 for crime + EMS dispatch analyses.
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_toronto_ambulance_stations(offline = TRUE)
 head(df[, c("EMS_NAME", "EMS_ADDRESS")])
+\dontshow{\}) # examplesIf}
 }

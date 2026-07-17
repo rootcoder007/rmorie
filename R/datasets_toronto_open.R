@@ -26,7 +26,7 @@
 #' @param offline If `TRUE` (default), reads the included CSV.
 #' @return A `data.frame` with `package_name`, `title`,
 #'   `num_resources`, `metadata_modified`, `search_keyword`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' d <- morie_datasets_toronto_open_crime_adjacent_layers(offline = TRUE)
 #' head(d[, c("package_name", "title")])
 #' @export
@@ -75,7 +75,7 @@ morie_datasets_toronto_open_crime_adjacent_layers <- function(offline = TRUE) {
 #' @param offline If `TRUE` (default), reads included CSV.
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with full station address + EMS metadata.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_toronto_ambulance_stations(offline = TRUE)
 #' head(df[, c("EMS_NAME", "EMS_ADDRESS")])
 #' @export

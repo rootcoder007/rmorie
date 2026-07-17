@@ -34,6 +34,7 @@ environment so repeated calls are O(1); call
 after editing a registry in an interactive session.
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Per-portal slice: registry lives in code, fastest path.
 nypd <- morie_dataset_portal_catalog(portal = "nyc_nypd")
 nrow(nypd)
@@ -44,6 +45,7 @@ head(nypd$dataset_key)
 # contribute zero rows with a one-time warning per portal.
 cat_df <- morie_dataset_portal_catalog()
 table(cat_df$source)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=morie_dataset_portal_catalog_clear_cache]{morie_dataset_portal_catalog_clear_cache()}},

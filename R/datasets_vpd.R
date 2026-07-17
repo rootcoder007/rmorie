@@ -37,7 +37,7 @@
 #' web UI is not the same as the script user.
 #'
 #' @return A character vector (one element per line).
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' d <- morie_datasets_vpd_legal_disclaimer()
 #' head(d)
 #' @export

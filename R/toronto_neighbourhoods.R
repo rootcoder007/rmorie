@@ -249,7 +249,7 @@ morie_tps_assert_hood_version <- function(df,
 #' @param year Integer year (or vector of years).
 #' @return Character vector of `"158"` / `"140"` recommendations,
 #'   parallel to `year`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' morie_tps_year_to_hood_version(2019)
 #' @export
 morie_tps_year_to_hood_version <- function(year) {
@@ -296,7 +296,7 @@ morie_tps_year_to_hood_version <- function(year) {
 #'
 #' @return A `data.frame` with the columns above. `hood_140` and
 #'   `hood_158` are character (zero-padded to 3 chars).
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' head(morie_to_hood_crosswalk())
 #' @export
 morie_to_hood_crosswalk <- function() {

@@ -16,6 +16,8 @@ programmatic workflows where the human reader of the GeoDASH
 web UI is not the same as the script user.
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 d <- morie_datasets_vpd_legal_disclaimer()
 head(d)
+\dontshow{\}) # examplesIf}
 }

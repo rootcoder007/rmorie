@@ -126,7 +126,7 @@ morie_dataset_portal_catalog_clear_cache <- function() {
 #'   warning when the companion is absent.
 #' @return A `data.frame` with columns `dataset_key`, `source`,
 #'   `id`, `api_modes`, `loader`, `dict_url`, `n_rows_bundled`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' # Per-portal slice: registry lives in code, fastest path.
 #' nypd <- morie_dataset_portal_catalog(portal = "nyc_nypd")
 #' nrow(nypd)

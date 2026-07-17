@@ -37,10 +37,16 @@ Phase 3FFF3. Included 200-row sample of Calgary fire response
 calls (Socrata id \code{bdez-pds9}).
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_calgary_community_crime_stats()
 head(df)
+\dontshow{\}) # examplesIf}
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_calgary_fire_response_calls()
 head(df)
+\dontshow{\}) # examplesIf}
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_calgary_fire_stations()
 head(df)
+\dontshow{\}) # examplesIf}
 }

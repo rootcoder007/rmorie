@@ -549,7 +549,7 @@ morie_datasets_tps_layers <- function() {
 #' @seealso [morie_cpads_contract()] for the canonical schema +
 #'   column map; [morie_datasets_load_by_key()] for catalog-wide
 #'   dispatch.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' \donttest{
 #' df <- try(suppressWarnings(morie_datasets_cpads()))
 #' if (!inherits(df, "try-error")) head(df)
@@ -1389,7 +1389,7 @@ morie_datasets_nibrs <- function(year = NULL, max_features = NULL,
 #' @param max_features Integer or `NULL`; cap on returned rows.
 #' @param offline Logical; if `TRUE`, return a included synthetic frame.
 #' @return A `data.frame`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_namus_missing_persons(state = "CA", offline = TRUE)
 #' head(df)
 #' @export
@@ -2656,7 +2656,7 @@ morie_datasets_cpd_public_arrests <- function(url = NULL,
 #'
 #' @return A `data.frame` with columns `dataset_key`, `label`,
 #'   `portal`, `resource_url`, `fixture`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' reg <- morie_datasets_external_socrata_layers()
 #' reg[, c("dataset_key", "resource_url")]
 #' @export

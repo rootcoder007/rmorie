@@ -814,7 +814,7 @@ morie_datasets_nyc_community_districts <- function(offline = TRUE,
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with 11 cols including `nta2020`, `ntaname`,
 #'   `borocode`, `boroname`, `countyfips`, `cdta2020`, `cdtaname`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_nyc_ntas_2020(offline = TRUE)
 #' head(df[, c("nta2020", "ntaname", "boroname")])
 #' @export
@@ -870,7 +870,7 @@ morie_datasets_nyc_ntas_2020 <- function(offline = TRUE,
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `zcta5`, `arealand`, `areawater`,
 #'   `centlat`, `centlon`, `intptlat`, `intptlon`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_nyc_zctas(offline = TRUE)
 #' head(df[, c("zcta5", "centlat", "centlon")])
 #' @export

@@ -49,5 +49,7 @@ Empirical distribution on the included OT data:
 }
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 head(morie_to_hood_crosswalk())
+\dontshow{\}) # examplesIf}
 }
