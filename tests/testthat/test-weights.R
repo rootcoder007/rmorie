@@ -413,10 +413,10 @@ test_that("morie_weights_multiframe hartley applies theta to overlap", {
   expect_equal(res$weights_b, c(2, 1, 1), tolerance = 1e-6)
 })
 
-test_that("morie_weights_multiframe optional method is stubbed", {
-  expect_error(
-    morie_weights_multiframe(c(1), c(1), c(TRUE), c(TRUE),
-                             method = "optimal"),
-    regexp = "NotYetPorted"
-  )
+test_that("morie_weights_multiframe optimal returns interior theta", {
+  res <- morie_weights_multiframe(c(1, 2), c(2, 1), c(TRUE, FALSE),
+                                  c(TRUE, FALSE), method = "optimal")
+  expect_gt(res$theta, 0)
+  expect_lt(res$theta, 1)
+  expect_length(res$weights_a, 2L)
 })

@@ -109,28 +109,41 @@ test_that("morie_otis_causal_grid runs on a passed b01 fixture (no disk loader n
   expect_true(is.list(out) || is.data.frame(out))
 })
 
-# ---------------------------------------------- NotYetPorted wrappers
+# ------------------------------------------ ported native wrappers
 
-test_that("morie_otis_aipw_superlearner errors with NotYetPorted message", {
-  expect_error(
-    morie_otis_aipw_superlearner(),
-    regexp = "NotYetPorted")
+# Ported 2026-07: these four wrappers now run native estimators; the
+# deep truth-recovery checks live in test-ported-stubs.R. Here we keep
+# fast smoke assertions on the public API surface.
+.pw_df <- function() {
+  set.seed(9)
+  n <- 200L
+  x1 <- rnorm(n)
+  d <- rbinom(n, 1, stats::plogis(0.6 * x1))
+  y <- 1 + 1.5 * d + x1 + rnorm(n)
+  data.frame(y, d, x1)
+}
+
+test_that("morie_otis_aipw_superlearner runs natively", {
+  r <- morie_otis_aipw_superlearner(.pw_df(), "d", "y", "x1",
+                                    n_folds = 3L)
+  expect_true(is.finite(r$ate))
+  expect_identical(r$estimator, "AIPW-SuperLearner")
 })
 
-test_that("morie_otis_plr errors with NotYetPorted + redirect to causal.R", {
-  expect_error(
-    morie_otis_plr(),
-    regexp = "NotYetPorted")
+test_that("morie_otis_plr runs natively", {
+  r <- morie_otis_plr(.pw_df(), "d", "y", "x1")
+  expect_true(is.finite(r$ate))
+  expect_identical(r$estimator, "PLR-DML")
 })
 
-test_that("morie_otis_psm errors with NotYetPorted + redirect to MatchIt", {
-  expect_error(
-    morie_otis_psm(),
-    regexp = "NotYetPorted")
+test_that("morie_otis_psm runs natively", {
+  r <- morie_otis_psm(.pw_df(), "d", "y", "x1")
+  expect_true(is.finite(r$ate))
+  expect_identical(r$estimator, "PSM-ATT")
 })
 
-test_that("morie_otis_psm_subclass errors with NotYetPorted", {
-  expect_error(
-    morie_otis_psm_subclass(),
-    regexp = "NotYetPorted")
+test_that("morie_otis_psm_subclass runs natively", {
+  r <- morie_otis_psm_subclass(.pw_df(), "d", "y", "x1")
+  expect_true(is.finite(r$ate))
+  expect_identical(r$estimator, "PS-subclass")
 })
