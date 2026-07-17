@@ -295,6 +295,130 @@ NULL
 }
 
 # ---------------------------------------------------------------------------
+# Sobol low-discrepancy sequence via gray-code construction with
+# Joe-Kuo direction numbers (dims 1-10) -- replaces randtoolbox::sobol
+# for the QMC helper. Unscrambled; matches randtoolbox's unscrambled
+# output (same standard direction numbers), cross-validated in tests.
+.morie_sobol <- function(n, d) {
+  n <- as.integer(n)
+  d <- as.integer(d)
+  if (d < 1L || d > 10L) {
+    stop("native Sobol supports 1 <= d <= 10 dimensions.", call. = FALSE)
+  }
+  nbits <- 31L
+  # Bratley-Fox (TOMS 659) parameters for dims 2..10 -- the same
+  # initialization table randtoolbox ships (src/LowDiscrepancy-
+  # sobol-orig1111.c: initmj/alla/mjshift), so the sequences are
+  # bit-identical. s = degree, a = coefficient, m = initial integers.
+  jk <- list(
+    list(s = 1L, a = 0L, m = c(1L)),
+    list(s = 2L, a = 1L, m = c(1L, 1L)),
+    list(s = 3L, a = 1L, m = c(1L, 3L, 7L)),
+    list(s = 3L, a = 2L, m = c(1L, 1L, 5L)),
+    list(s = 4L, a = 1L, m = c(1L, 3L, 1L, 1L)),
+    list(s = 4L, a = 4L, m = c(1L, 1L, 3L, 7L)),
+    list(s = 5L, a = 2L, m = c(1L, 3L, 3L, 9L, 9L)),
+    list(s = 5L, a = 13L, m = c(1L, 3L, 7L, 13L, 3L)),
+    list(s = 5L, a = 7L, m = c(1L, 1L, 5L, 11L, 27L))
+  )
+  out <- matrix(0, n, d)
+  for (j in seq_len(d)) {
+    v <- integer(nbits)
+    if (j == 1L) {
+      for (i in seq_len(nbits)) v[i] <- bitwShiftL(1L, nbits - i)
+    } else {
+      p <- jk[[j - 1L]]
+      s <- p$s
+      m <- p$m
+      for (i in seq_len(min(s, nbits))) v[i] <- bitwShiftL(m[i], nbits - i)
+      if (nbits > s) {
+        for (i in (s + 1L):nbits) {
+          v[i] <- bitwXor(v[i - s], bitwShiftR(v[i - s], s))
+          if (s > 1L) {
+            for (k in seq_len(s - 1L)) {
+              if (bitwAnd(bitwShiftR(p$a, s - 1L - k), 1L) == 1L) {
+                v[i] <- bitwXor(v[i], v[i - k])
+              }
+            }
+          }
+        }
+      }
+    }
+    # Gray-code recurrence, emitting AFTER each update (randtoolbox's
+    # convention: the all-zeros point is skipped, first point is 0.5).
+    x <- 0L
+    for (i in seq_len(n)) {
+      cbit <- 1L
+      ii <- i - 1L
+      while (bitwAnd(ii, 1L) == 1L) {
+        ii <- bitwShiftR(ii, 1L)
+        cbit <- cbit + 1L
+      }
+      x <- bitwXor(x, v[cbit])
+      out[i, j] <- x / 2^nbits
+    }
+  }
+  out
+}
+
+# ---------------------------------------------------------------------------
+# GEE with Poisson family and exchangeable working correlation
+# (Liang & Zeger 1986) -- the geepack::geeglm surface used by the OTIS
+# batch module. Fisher scoring on the working model, moment estimate
+# of the exchangeable alpha, robust (sandwich) covariance.
+.morie_gee_poisson_exch <- function(X, y, id, max_iter = 50L, tol = 1e-8) {
+  X <- as.matrix(X)
+  y <- as.numeric(y)
+  id <- as.integer(factor(id))
+  n <- length(y)
+  p <- ncol(X)
+  beta <- stats::glm.fit(X, y, family = stats::poisson())$coefficients
+  clusters <- split(seq_len(n), id)
+  alpha <- 0
+  for (it in seq_len(max_iter)) {
+    eta <- as.numeric(X %*% beta)
+    mu <- exp(eta)
+    r <- (y - mu) / sqrt(mu) # Pearson residuals (phi = 1 scale)
+    # Moment estimator of exchangeable correlation.
+    num <- 0; cnt <- 0
+    for (ix in clusters) {
+      ni <- length(ix)
+      if (ni < 2L) next
+      ri <- r[ix]
+      num <- num + (sum(ri)^2 - sum(ri^2)) / 2
+      cnt <- cnt + ni * (ni - 1) / 2
+    }
+    phi <- sum(r^2) / (n - p)
+    alpha <- if (cnt > 0) num / ((cnt - p / 2) * phi) else 0
+    alpha <- min(max(alpha, -0.99), 0.99)
+    # Fisher scoring step with working covariance.
+    M <- matrix(0, p, p); U <- numeric(p)
+    B <- matrix(0, p, p)
+    for (ix in clusters) {
+      ni <- length(ix)
+      Di <- X[ix, , drop = FALSE] * mu[ix] # d mu / d beta
+      Ai_half <- sqrt(mu[ix])
+      Ri <- matrix(alpha, ni, ni); diag(Ri) <- 1
+      Vi <- (Ai_half %o% Ai_half) * Ri * phi
+      Vinv <- solve(Vi)
+      DtV <- crossprod(Di, Vinv)
+      M <- M + DtV %*% Di
+      si <- y[ix] - mu[ix]
+      U <- U + as.numeric(DtV %*% si)
+      B <- B + DtV %*% (si %o% si) %*% t(DtV)
+    }
+    step <- solve(M, U)
+    beta <- beta + step
+    if (max(abs(step)) < tol) break
+  }
+  Minv <- solve(M)
+  vbeta <- Minv %*% B %*% Minv
+  list(coefficients = as.numeric(beta), vbeta = vbeta,
+       alpha = alpha, phi = phi, n_iter = it,
+       converged = max(abs(step)) < tol)
+}
+
+# ---------------------------------------------------------------------------
 # Asymptotically exact harmonic mean p-value (Wilson 2019, PNAS).
 # The statistic t = mean(1/p) is asymptotically Landau distributed with
 # location log(L) + 0.874367040387922 and scale pi/2; the combined

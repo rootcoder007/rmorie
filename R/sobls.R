@@ -1,8 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Sobol quasi-random sequence (Sobol 1967)
 #'
-#' Thin wrapper over \code{randtoolbox::sobol} (low-discrepancy in the unit cube of dimension d).
-#' Falls back to a pure-R Halton sequence if randtoolbox is unavailable.
+#' Native gray-code Sobol sequence with Joe-Kuo direction numbers
+#' (low-discrepancy in the unit cube, d <= 10); matches
+#' \code{randtoolbox::sobol}'s unscrambled output exactly.
 #'
 #' @param N integer; default 128.
 #' @param d integer; default 1.
@@ -14,36 +15,11 @@
 #' @keywords internal
 #' @export
 sobls <- function(N = 128L, d = 1L, f = NULL, scramble = TRUE, seed = 42L) {
-  sample <- NULL
-  if (requireNamespace("randtoolbox", quietly = TRUE)) {
-    sobol_fn <- getFromNamespace("sobol", "randtoolbox")
-    # randtoolbox's Owen scrambling is disabled upstream in current
-    # releases; requesting it (scrambling = 1) only emits a spurious
-    # "scrambling is currently disabled" warning while returning the
-    # unscrambled sequence anyway, so request 0 unconditionally.
-    sample <- sobol_fn(
-      n = as.integer(N), dim = as.integer(d),
-      scrambling = 0L, seed = seed
-    )
-    if (!is.matrix(sample)) sample <- matrix(sample, ncol = d)
-  } else {
-    # Halton sequence fallback (pure R)
-    primes <- c(2, 3, 5, 7, 11, 13, 17, 19, 23, 29)[seq_len(d)]
-    halton <- function(i, b) {
-      f <- 1
-      r <- 0
-      while (i > 0) {
-        f <- f / b
-        r <- r + f * (i %% b)
-        i <- floor(i / b)
-      }
-      r
-    }
-    sample <- matrix(0, N, d)
-    for (j in seq_len(d)) {
-      sample[, j] <- vapply(seq_len(N), halton, numeric(1), b = primes[j])
-    }
-  }
+  # Native gray-code Sobol with Joe-Kuo direction numbers (d <= 10);
+  # matches randtoolbox's unscrambled sequence (cross-validated in
+  # tests). randtoolbox's Owen scrambling is disabled upstream anyway,
+  # so the unscrambled sequence is what callers always received.
+  sample <- .morie_sobol(as.integer(N), as.integer(d))
   out <- list(
     sample = sample, N = as.integer(N), d = as.integer(d),
     method = "Sobol QMC (Sobol 1967)"
