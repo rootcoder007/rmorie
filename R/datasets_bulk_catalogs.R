@@ -19,7 +19,7 @@
 #' NYC OpenData bulk catalog (2851 entities)
 #' @param offline If `TRUE` (default), reads included CSV.
 #' @return Tabular catalog snapshot.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' d <- morie_datasets_nyc_opendata_bulk_layers(offline = TRUE)
 #' nrow(d)
 #' head(d[, c("soda_id", "type")])
@@ -31,7 +31,7 @@ morie_datasets_nyc_opendata_bulk_layers <- function(offline = TRUE) {
 #' Chicago Open Data bulk catalog (1856 entities)
 #' @rdname morie_datasets_nyc_opendata_bulk_layers
 #' @return A \code{data.frame}.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' cat_df <- morie_datasets_chicago_opendata_bulk_layers()
 #' head(cat_df)
 #' @export
@@ -42,7 +42,7 @@ morie_datasets_chicago_opendata_bulk_layers <- function(offline = TRUE) {
 #' Toronto Open Data bulk CKAN catalog (540 packages)
 #' @rdname morie_datasets_nyc_opendata_bulk_layers
 #' @return A \code{data.frame}.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' cat_df <- morie_datasets_toronto_opendata_bulk_layers()
 #' head(cat_df)
 #' @export
@@ -53,7 +53,7 @@ morie_datasets_toronto_opendata_bulk_layers <- function(offline = TRUE) {
 #' Calgary Open Data bulk catalog (933 entities)
 #' @rdname morie_datasets_nyc_opendata_bulk_layers
 #' @return A \code{data.frame}.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' cat_df <- morie_datasets_calgary_opendata_bulk_layers()
 #' head(cat_df)
 #' @export
@@ -64,7 +64,7 @@ morie_datasets_calgary_opendata_bulk_layers <- function(offline = TRUE) {
 #' Edmonton Open Data bulk catalog (2027 entities)
 #' @rdname morie_datasets_nyc_opendata_bulk_layers
 #' @return A \code{data.frame}.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' cat_df <- morie_datasets_edmonton_opendata_bulk_layers()
 #' head(cat_df)
 #' @export
@@ -75,7 +75,7 @@ morie_datasets_edmonton_opendata_bulk_layers <- function(offline = TRUE) {
 #' Ottawa Open Data bulk ArcGIS Hub catalog (287 datasets)
 #' @rdname morie_datasets_nyc_opendata_bulk_layers
 #' @return A \code{data.frame}.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' cat_df <- morie_datasets_ottawa_opendata_bulk_layers()
 #' head(cat_df)
 #' @export
@@ -91,7 +91,7 @@ morie_datasets_ottawa_opendata_bulk_layers <- function(offline = TRUE) {
 #'
 #' @rdname morie_datasets_nyc_opendata_bulk_layers
 #' @return A \code{data.frame}.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' cat_df <- morie_datasets_montreal_opendata_bulk_layers()
 #' head(cat_df)
 #' @export
@@ -107,7 +107,7 @@ morie_datasets_montreal_opendata_bulk_layers <- function(offline = TRUE) {
 #'
 #' @rdname morie_datasets_nyc_opendata_bulk_layers
 #' @return A \code{data.frame}.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' cat_df <- morie_datasets_vancouver_opendata_bulk_layers()
 #' head(cat_df)
 #' @export

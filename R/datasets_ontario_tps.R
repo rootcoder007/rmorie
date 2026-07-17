@@ -354,7 +354,7 @@ morie_datasets_tps_mha_apprehensions <- function(year = NULL,
 #' @param year Reporting year (`"2023"` or `"2024"`).
 #' @inheritParams morie_datasets_arsau_uof_main_records
 #' @return A `data.frame`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_arsau_uof_individual_records(offline = TRUE)
 #' df[, c("Indiv_Index", "Race", "AgeCategory", "Gender")]
 #' @export
@@ -424,7 +424,7 @@ morie_datasets_arsau_aggregate_summary <- function(offline = TRUE,
 #' Ontario Use-of-Force detailed dataset (5-year 2020-2022, pre-RBDS)
 #' @inheritParams morie_datasets_arsau_aggregate_summary
 #' @return A `data.frame`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_arsau_detailed_dataset(offline = TRUE)
 #' dim(df)
 #' @export

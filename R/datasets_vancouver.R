@@ -119,7 +119,7 @@ NULL
 #' @rdname vancouver_crime_adjacent
 #' @inheritParams morie_datasets_vancouver_opendata_layers
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_vancouver_graffiti()
 #' head(df)
 #' @export
@@ -257,7 +257,7 @@ morie_datasets_vancouver_community_centres <- function(offline = TRUE,
 #' @rdname vancouver_crime_adjacent
 #' @inheritParams morie_datasets_vancouver_opendata_layers
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_vancouver_community_food_markets()
 #' head(df)
 #' @export
@@ -280,7 +280,7 @@ morie_datasets_vancouver_community_food_markets <- function(offline = TRUE,
 #' @rdname vancouver_crime_adjacent
 #' @inheritParams morie_datasets_vancouver_opendata_layers
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_vancouver_disability_parking()
 #' head(df)
 #' @export
@@ -305,7 +305,7 @@ morie_datasets_vancouver_disability_parking <- function(offline = TRUE,
 #' @rdname vancouver_crime_adjacent
 #' @inheritParams morie_datasets_vancouver_opendata_layers
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_vancouver_public_art()
 #' head(df)
 #' @export

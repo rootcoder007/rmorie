@@ -22,5 +22,7 @@ same record via lat/lon re-geocoding, but the polygon boundaries
 do not match.
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 morie_tps_year_to_hood_version(2019)
+\dontshow{\}) # examplesIf}
 }

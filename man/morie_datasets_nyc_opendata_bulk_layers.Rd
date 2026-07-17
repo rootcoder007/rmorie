@@ -57,21 +57,37 @@ opendata.vancouver.ca with richer schema (publisher, theme,
 license, records_count).
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 d <- morie_datasets_nyc_opendata_bulk_layers(offline = TRUE)
 nrow(d)
 head(d[, c("soda_id", "type")])
+\dontshow{\}) # examplesIf}
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 cat_df <- morie_datasets_chicago_opendata_bulk_layers()
 head(cat_df)
+\dontshow{\}) # examplesIf}
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 cat_df <- morie_datasets_toronto_opendata_bulk_layers()
 head(cat_df)
+\dontshow{\}) # examplesIf}
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 cat_df <- morie_datasets_calgary_opendata_bulk_layers()
 head(cat_df)
+\dontshow{\}) # examplesIf}
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 cat_df <- morie_datasets_edmonton_opendata_bulk_layers()
 head(cat_df)
+\dontshow{\}) # examplesIf}
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 cat_df <- morie_datasets_ottawa_opendata_bulk_layers()
 head(cat_df)
+\dontshow{\}) # examplesIf}
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 cat_df <- morie_datasets_montreal_opendata_bulk_layers()
 head(cat_df)
+\dontshow{\}) # examplesIf}
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 cat_df <- morie_datasets_vancouver_opendata_bulk_layers()
 head(cat_df)
+\dontshow{\}) # examplesIf}
 }

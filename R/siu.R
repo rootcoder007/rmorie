@@ -1445,6 +1445,15 @@ morie_siu_compare <- function(case_number, external,
     # Keyless path through the morie_llm free-provider stack.
     return(morie_llm_ask(prompt))
   }
+  if (identical(model, "ollamafree")) {
+    # Keyless path through the OllamaFreeAPI public-server directory
+    # (github.com/mfoud444/ollamafreeapi): community-run Ollama
+    # servers speaking the standard /api/generate protocol. We fetch
+    # the published server list, then fail over server-by-server
+    # until one answers. Volunteer boxes come and go, so every step
+    # is best-effort with a short timeout.
+    return(.siu_llm_call_ollamafree(prompt, timeout_s = timeout_s))
+  }
   providers <- .siu_llm_providers()
   if (!model %in% names(providers)) {
     stop("Unknown LLM model: '", model, "'. Available: ",
@@ -1608,7 +1617,231 @@ morie_siu_compare <- function(case_number, external,
 #' )
 #' }
 #' @export
-morie_siu_llm_extract <- function(case_number, model = c("ollama", "gemini"),
+# Session-scoped mutable state for SIU helpers (server-list cache).
+.morie_siu_state <- new.env(parent = emptyenv())
+
+#' Fetch the OllamaFreeAPI public-server directory (cached per session).
+#'
+#' @keywords internal
+#' @noRd
+.siu_ollamafree_servers <- function() {
+  cached <- .morie_siu_state$ollamafree_servers
+  if (!is.null(cached)) return(cached)
+  root <- paste0("https://raw.githubusercontent.com/mfoud444/",
+                 "ollamafreeapi/main/ollamafreeapi/")
+  # Primary directory plus the larger _backup pool (deepseek, mistral,
+  # openchat + extra llama/gemma/qwen hosts).
+  sources <- c(
+    paste0(root, "ollama_json/", c("llama", "gemma", "qwen"), ".json"),
+    paste0(root, "ollama_json_backup/",
+           c("llama", "gemma", "qwen", "deepseek", "mistral", "others"),
+           ".json")
+  )
+  out <- list()
+  for (src in sources) {
+    txt <- tryCatch(.siu_fetch_http_get(src), error = function(e) "")
+    if (!nzchar(txt)) next
+    parsed <- tryCatch(.morie_from_json(txt, simplifyVector = FALSE),
+                       error = function(e) NULL)
+    models <- parsed$props$pageProps$models
+    if (is.null(models)) next
+    for (m in models) {
+      if (is.null(m$ip_port) || is.null(m$model)) next
+      u <- sub("/+$", "", m$ip_port)
+      if (!grepl("^https?://", u)) u <- paste0("http://", u)
+      out[[length(out) + 1L]] <- list(
+        url = u, model = m$model,
+        parameter_size = m$parameter_size %||% "",
+        perf = suppressWarnings(
+          as.numeric(m$perf_tokens_per_second %||% NA_real_)))
+    }
+  }
+  # Dedup identical (host, model) pairs across primary + backup lists.
+  keys <- vapply(out, function(s) paste(s$url, s$model), character(1))
+  out <- out[!duplicated(keys)]
+  .morie_siu_state$ollamafree_servers <- out
+  out
+}
+
+#' Parse a model's parameter count in billions from its metadata.
+#'
+#' Uses the directory's `parameter_size` field ("3.2B", "70B", "135M")
+#' when present, else the size suffix in the model tag
+#' ("llama3.2:3b", "gpt-oss:20b"). NA when neither is parseable.
+#'
+#' @keywords internal
+#' @noRd
+.siu_ollamafree_params_b <- function(entry) {
+  from <- function(s) {
+    m <- regmatches(s, regexec("([0-9]+\\.?[0-9]*)\\s*([BbMm])", s))[[1L]]
+    if (length(m) == 3L) {
+      v <- as.numeric(m[2L])
+      if (toupper(m[3L]) == "M") v / 1000 else v
+    } else NA_real_
+  }
+  v <- from(entry$parameter_size %||% "")
+  if (is.na(v)) v <- from(sub("^[^:]*:", "", entry$model))
+  v
+}
+
+#' Call one of the OllamaFreeAPI community servers, failing over.
+#'
+#' @keywords internal
+#' @noRd
+.siu_llm_call_ollamafree <- function(prompt, timeout_s = 120,
+                                     max_servers = 12L) {
+  servers <- .siu_ollamafree_servers()
+  # Try every published (server, model) pair, most capable model
+  # first: parameter count descending (70B before 20B before 3B),
+  # ties broken by measured throughput. Base/vision-only oddballs
+  # sink to the bottom via NA parameter counts.
+  pb <- vapply(servers, .siu_ollamafree_params_b, numeric(1))
+  pf <- vapply(servers, function(s) s$perf %||% NA_real_, numeric(1))
+  ord <- order(-ifelse(is.na(pb), -Inf, pb),
+               -ifelse(is.na(pf), 0, pf))
+  servers <- servers[ord]
+  # Volunteer boxes churn: cheap 5s /api/tags probe first -- it both
+  # confirms reachability AND returns the models the box ACTUALLY has
+  # right now (the published directory goes stale), so generation is
+  # only attempted with a model the server can serve.
+  live_models <- function(url) {
+    tryCatch({
+      req <- httr2::request(paste0(url, "/api/tags"))
+      req <- httr2::req_timeout(req, 6)
+      req <- httr2::req_options(req, connecttimeout = 5L)
+      parsed <- httr2::resp_body_json(httr2::req_perform(req))
+      vapply(parsed$models, function(m) m$name %||% "", character(1))
+    }, error = function(e) NULL)
+  }
+  host_alive <- new.env(parent = emptyenv())
+  errs <- character(0)
+  tried <- 0L
+  seen_pairs <- character(0)
+  for (s in servers) {
+    pair_key <- paste(s$url, s$model)
+    if (pair_key %in% seen_pairs) next
+    seen_pairs <- c(seen_pairs, pair_key)
+    ek <- gsub("[^A-Za-z0-9]", "_", s$url)
+    if (is.null(host_alive[[ek]])) {
+      host_alive[[ek]] <- list(models = live_models(s$url))
+    }
+    avail <- host_alive[[ek]]$models
+    if (is.null(avail)) {
+      if (!any(grepl(s$url, errs, fixed = TRUE))) {
+        errs <- c(errs, sprintf("[%s] unreachable", s$url))
+      }
+      next
+    }
+    use_model <- if (s$model %in% avail) {
+      s$model
+    } else {
+      # Stale directory entry: fall back to the LARGEST model the box
+      # actually serves right now.
+      lb <- vapply(avail, function(a) {
+        .siu_ollamafree_params_b(list(model = a, parameter_size = ""))
+      }, numeric(1))
+      cand <- avail[order(-ifelse(is.na(lb), -Inf, lb))]
+      if (length(cand)) cand[1L] else ""
+    }
+    if (!nzchar(use_model)) {
+      errs <- c(errs, sprintf("[%s] no models", s$url))
+      next
+    }
+    tried <- tried + 1L
+    if (tried > max_servers) break
+    res <- tryCatch({
+      req <- httr2::request(paste0(s$url, "/api/generate"))
+      req <- httr2::req_headers(req,
+                                "content-type" = "application/json")
+      req <- httr2::req_body_json(req, list(
+        model = use_model, prompt = prompt, format = "json",
+        stream = FALSE, options = list(temperature = 0)))
+      req <- httr2::req_timeout(req, min(timeout_s, 60))
+      # Dead volunteer boxes shouldn't cost the full timeout each --
+      # 5s to connect, then the normal budget for generation.
+      req <- httr2::req_options(req, connecttimeout = 5L)
+      parsed <- httr2::resp_body_json(httr2::req_perform(req))
+      x <- parsed$response
+      if (is.null(x) || !nzchar(x)) stop("empty response", call. = FALSE)
+      x
+    }, error = function(e) {
+      errs <<- c(errs, sprintf("[%s] %s", s$url, conditionMessage(e)))
+      NULL
+    })
+    if (!is.null(res)) return(res)
+  }
+  stop("All OllamaFreeAPI servers failed: ",
+       paste(errs, collapse = "; "), call. = FALSE)
+}
+
+#' Resolve an SIU case number to its report drid.
+#'
+#' Manifest first (fast, offline); when the case is newer than the
+#' bundled manifest (or fell into an over-probed placeholder drid), a
+#' polite live search of the directors-reports index resolves it, so
+#' self-serve callers work for ANY published case with no cache and no
+#' keys. Newest reports render first, so the live search usually hits
+#' within the first page.
+#'
+#' @keywords internal
+#' @noRd
+.siu_resolve_drid <- function(case_number) {
+  man <- tryCatch(.siu_load_manifest(), error = function(e) NULL)
+  if (!is.null(man)) {
+    lang_col <- intersect(c("X_language", "_language"), names(man))
+    lang <- if (length(lang_col)) man[[lang_col[1L]]] else "en"
+    hit <- man[man$case_number == case_number &
+                 lang %in% c("en", "unknown"), , drop = FALSE]
+    if (nrow(hit)) return(hit$drid[1L])
+  }
+  # Live fallback: page the index (newest first) until the case shows.
+  index_url <- morie_siu_index_url()
+  html <- tryCatch(.siu_fetch_http_get(index_url), error = function(e) "")
+  if (!nzchar(html)) return(NA_integer_)
+  find_in <- function(chunk) {
+    links <- tryCatch(
+      .siu_fetch_extract_links(chunk, base_url = index_url),
+      error = function(e) NULL)
+    if (is.null(links) || !nrow(links)) return(NA_integer_)
+    i <- match(case_number, links[, "case_number"])
+    if (is.na(i)) return(NA_integer_)
+    dm <- regmatches(links[i, "url"],
+                     regexec("drid=([0-9]+)", links[i, "url"]))[[1L]]
+    if (length(dm) == 2L) as.integer(dm[2L]) else NA_integer_
+  }
+  drid <- find_in(html)
+  if (is.finite(drid)) return(drid)
+  tm <- regmatches(html, regexec(
+    'id="total_drs"[^>]*value="([0-9]+)"', html))[[1L]]
+  total <- if (length(tm) == 2L) as.integer(tm[2L]) else NA_integer_
+  got <- {
+    links0 <- tryCatch(
+      .siu_fetch_extract_links(html, base_url = index_url),
+      error = function(e) NULL)
+    if (is.null(links0)) 0L else nrow(links0)
+  }
+  more_base <- sub("/en/directors_reports\\.php$",
+                   "/ssi/get_more_drs.php", index_url)
+  while (!is.na(total) && got < total) {
+    chunk <- tryCatch(.siu_fetch_http_get(
+      paste0(more_base, "?lang=en&lastCount=", got)),
+      error = function(e) "")
+    if (!nzchar(chunk)) break
+    drid <- find_in(chunk)
+    if (is.finite(drid)) return(drid)
+    links <- tryCatch(
+      .siu_fetch_extract_links(chunk, base_url = index_url),
+      error = function(e) NULL)
+    if (is.null(links) || !nrow(links)) break
+    got <- got + nrow(links)
+    Sys.sleep(.siu_fetch_rate_seconds)
+  }
+  NA_integer_
+}
+
+morie_siu_llm_extract <- function(case_number,
+                                  model = c("ollama", "gemini",
+                                            "ollamafree", "freeapi"),
                                   cache_dir = file.path(tempdir(), "morie", "siu"),
                                   max_html_chars = 80000L,
                                   mock_response_text = NULL) {
@@ -1624,14 +1857,7 @@ morie_siu_llm_extract <- function(case_number, model = c("ollama", "gemini"),
     # Self-serve path: no harvester cache present. Resolve the case's
     # drid through the bundled manifest and fetch the report page
     # directly -- anomaly_check then needs nothing but a case number.
-    man <- tryCatch(.siu_load_manifest(), error = function(e) NULL)
-    drid <- if (!is.null(man)) {
-      lang_col <- intersect(c("X_language", "_language"), names(man))
-      lang <- if (length(lang_col)) man[[lang_col[1L]]] else "en"
-      hit <- man[man$case_number == case_number &
-                   lang %in% c("en", "unknown"), , drop = FALSE]
-      if (nrow(hit)) hit$drid[1L] else NA_integer_
-    } else NA_integer_
+    drid <- .siu_resolve_drid(case_number)
     if (is.finite(drid)) {
       html <- tryCatch(.siu_fetch_http_get(paste0(
         "https://www.siu.on.ca/en/directors_report_details.php?drid=",
@@ -1729,6 +1955,7 @@ morie_siu_anomaly_check <- function(case_number,
                                               "openai_compatible",
                                               "claude", "openai",
                                               "gemini", "vertex",
+                                              "ollamafree",
                                               "freeapi"),
                                     cache_dir = file.path(tempdir(), "morie", "siu"),
                                     max_html_chars = 80000L,
@@ -1745,14 +1972,7 @@ morie_siu_anomaly_check <- function(case_number,
     # Self-serve path: no harvester cache present. Resolve the case's
     # drid through the bundled manifest and fetch the report page
     # directly -- anomaly_check then needs nothing but a case number.
-    man <- tryCatch(.siu_load_manifest(), error = function(e) NULL)
-    drid <- if (!is.null(man)) {
-      lang_col <- intersect(c("X_language", "_language"), names(man))
-      lang <- if (length(lang_col)) man[[lang_col[1L]]] else "en"
-      hit <- man[man$case_number == case_number &
-                   lang %in% c("en", "unknown"), , drop = FALSE]
-      if (nrow(hit)) hit$drid[1L] else NA_integer_
-    } else NA_integer_
+    drid <- .siu_resolve_drid(case_number)
     if (is.finite(drid)) {
       html <- tryCatch(.siu_fetch_http_get(paste0(
         "https://www.siu.on.ca/en/directors_report_details.php?drid=",
@@ -1822,13 +2042,15 @@ morie_siu_anomaly_check <- function(case_number,
     .siu_llm_call(model, prompt, mock_response_text = mock_response_text),
     error = function(e) NULL
   )
-  if (is.null(text)) {
-    # Deterministic keyless fallback: no LLM reachable (no local
-    # ollama, free API down, no Gemini key). Verdict by verbatim
-    # containment of the parsed value in the report text -- weaker
-    # than an LLM audit but it always works, offline, for everyone.
+  # Deterministic keyless fallback: no LLM reachable (no local ollama,
+  # free API down, no Gemini key), or a provider answered with
+  # something that is not the requested JSON (e.g. the free API's
+  # local-only notice). Verdict by verbatim containment of the parsed
+  # value in the report text -- weaker than an LLM audit but it always
+  # works, offline, for everyone.
+  deterministic <- function() {
     plain <- tolower(gsub("\\s+", " ", gsub("<[^>]+>", " ", html)))
-    out <- do.call(rbind, lapply(populated, function(p) {
+    do.call(rbind, lapply(populated, function(p) {
       v <- tolower(gsub("\\s+", " ", p$value))
       hit <- nzchar(v) && grepl(v, plain, fixed = TRUE)
       data.frame(
@@ -1841,10 +2063,16 @@ morie_siu_anomaly_check <- function(case_number,
         },
         stringsAsFactors = FALSE)
     }))
-    return(out)
+  }
+  if (is.null(text)) {
+    return(deterministic())
   }
   text <- gsub("^```(?:json)?\\s*|\\s*```$", "", text, perl = TRUE)
-  rows <- .morie_from_json(text, simplifyVector = TRUE)
+  rows <- tryCatch(.morie_from_json(text, simplifyVector = TRUE),
+                   error = function(e) NULL)
+  if (is.null(rows)) {
+    return(deterministic())
+  }
   if (is.null(rows) || (is.data.frame(rows) && !nrow(rows))) {
     return(data.frame(
       field = character(0), parser_value = character(0),

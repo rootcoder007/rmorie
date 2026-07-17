@@ -40,7 +40,7 @@
 #'   `FALSE`, hits `/action/package_search` live.
 #' @return A `data.frame` with `package_name`, `title`,
 #'   `num_resources`, `metadata_modified`, `language`, `license`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' cat_df <- morie_datasets_montreal_justice_safety_layers()
 #' nrow(cat_df)  # 23
 #' head(cat_df$title)

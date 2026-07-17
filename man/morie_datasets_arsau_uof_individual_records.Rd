@@ -27,6 +27,8 @@ Ontario Use-of-Force individual records (one row per
 individual-in-incident)
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_arsau_uof_individual_records(offline = TRUE)
 df[, c("Indiv_Index", "Race", "AgeCategory", "Gender")]
+\dontshow{\}) # examplesIf}
 }

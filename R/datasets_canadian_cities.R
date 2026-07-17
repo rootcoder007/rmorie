@@ -30,7 +30,7 @@
 #' @param offline If `TRUE` (default), reads the included CSV.
 #' @return A `data.frame` with `soda_id`, `title`, `type`,
 #'   `search_keyword`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' d <- morie_datasets_calgary_open_crime_adjacent_layers(offline = TRUE)
 #' head(d)
 #' @export
@@ -42,7 +42,7 @@ morie_datasets_calgary_open_crime_adjacent_layers <- function(offline = TRUE) {
 #' Edmonton Open Data crime-adjacent catalog
 #' @rdname morie_datasets_calgary_open_crime_adjacent_layers
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' cat_df <- morie_datasets_edmonton_open_crime_adjacent_layers()
 #' head(cat_df)
 #' @export
@@ -54,7 +54,7 @@ morie_datasets_edmonton_open_crime_adjacent_layers <- function(offline = TRUE) {
 #' Ottawa Open Data (ArcGIS Hub) crime-adjacent catalog
 #' @rdname morie_datasets_calgary_open_crime_adjacent_layers
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' cat_df <- morie_datasets_ottawa_open_crime_adjacent_layers()
 #' head(cat_df)
 #' @export
@@ -96,7 +96,7 @@ morie_datasets_ottawa_open_crime_adjacent_layers <- function(offline = TRUE) {
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `community`, `category`, `crime_count`,
 #'   `year`, `month`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_calgary_community_crime_stats()
 #' head(df)
 #' @export
@@ -117,7 +117,7 @@ morie_datasets_calgary_community_crime_stats <- function(offline = TRUE,
 #'
 #' @rdname morie_datasets_calgary_community_crime_stats
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_calgary_fire_response_calls()
 #' head(df)
 #' @export
@@ -134,7 +134,7 @@ morie_datasets_calgary_fire_response_calls <- function(offline = TRUE,
 #' Calgary Fire Stations
 #' @rdname morie_datasets_calgary_community_crime_stats
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_calgary_fire_stations()
 #' head(df)
 #' @export

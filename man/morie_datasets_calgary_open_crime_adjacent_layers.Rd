@@ -29,10 +29,16 @@ datasets matched on crime-adjacent keywords (crime, police,
 fire, ambulance, traffic, incident, collision, bylaw, 311).
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 d <- morie_datasets_calgary_open_crime_adjacent_layers(offline = TRUE)
 head(d)
+\dontshow{\}) # examplesIf}
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 cat_df <- morie_datasets_edmonton_open_crime_adjacent_layers()
 head(cat_df)
+\dontshow{\}) # examplesIf}
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 cat_df <- morie_datasets_ottawa_open_crime_adjacent_layers()
 head(cat_df)
+\dontshow{\}) # examplesIf}
 }

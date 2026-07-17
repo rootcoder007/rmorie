@@ -334,9 +334,10 @@ test_that("morie_siu_audit_case reads from cached HTML", {
   expect_false(grepl("<", a$report_text, fixed = TRUE)) # stripped
 })
 
-test_that("LLM providers table has the four documented backends", {
+test_that("LLM providers table has the six documented backends", {
   ps <- rmorie:::.siu_llm_providers()
-  expect_setequal(names(ps), c("gemini", "claude", "vertex", "ollama"))
+  expect_setequal(names(ps), c("gemini", "claude", "vertex", "ollama",
+                               "openai", "openai_compatible"))
   expect_equal(ps$gemini$env_required, "GOOGLE_API_KEY")
   expect_equal(ps$claude$env_required, "ANTHROPIC_API_KEY")
   expect_equal(ps$vertex$env_required, "VERTEX_ACCESS_TOKEN")
