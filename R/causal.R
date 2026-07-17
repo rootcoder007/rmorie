@@ -122,18 +122,10 @@ NULL
 #' Internal helper: Fit Propensity Weightit
 #' @noRd
 .fit_propensity_weightit <- function(data, treatment, covariates) {
-  formula <- stats::as.formula(
-    paste(treatment, "~", paste(covariates, collapse = " + "))
-  )
-  w <- WeightIt::weightit(formula, data = data, method = "glm",
-                          estimand = "ATE")
-  ps <- as.numeric(w$ps)
-  if (is.null(ps) || length(ps) != nrow(data)) {
-    # Some versions of WeightIt store the score as a matrix; fall back to
-    # base GLM to ensure a length-n numeric.
-    return(.fit_propensity(data, treatment, covariates))
-  }
-  ps
+  # WeightIt's method = "glm" IS a logistic propensity fit -- the
+  # native .fit_propensity computes the identical scores, so the
+  # delegation was pure overhead (module 15).
+  .fit_propensity(data, treatment, covariates)
 }
 
 #' Internal helper: Clip Ps
