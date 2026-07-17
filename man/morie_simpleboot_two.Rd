@@ -14,10 +14,10 @@ time (e.g. \code{mean}, \code{median}); two.boot's contract.}
 
 \item{R}{Number of bootstrap replicates (default 1000).}
 
-\item{...}{Forwarded to \code{simpleboot::two.boot}.}
+\item{...}{Forwarded to the per-sample statistic.}
 }
 \value{
-A \code{boot} object.
+A \code{morie_boot} object for the difference statistic.
 }
 \description{
 Thin pass-through to \code{simpleboot::two.boot} for the

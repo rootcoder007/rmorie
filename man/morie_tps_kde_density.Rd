@@ -16,8 +16,7 @@ morie_tps_kde_density(
 \item{df}{Incident-level data.frame.}
 
 \item{bandwidth}{Bandwidth multiplier passed to the 2-D KDE; see
-\code{MASS::kde2d}'s \code{h} argument when MASS is available.
-In the base-R fallback this is the Gaussian sigma (in degrees).}
+the \code{h} argument of the native \code{morie_kde2d}.}
 
 \item{ds_name}{Tag for the result title.}
 

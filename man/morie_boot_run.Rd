@@ -18,7 +18,8 @@ morie_boot_run(data, statistic, R = 2000L, strata = NULL, ...)
 \item{...}{Forwarded to \code{boot::boot}.}
 }
 \value{
-A \code{boot} object as returned by \code{boot::boot}.
+A \code{morie_boot} object (native; consumable by
+\code{\link[=morie_boot_basic_ci]{morie_boot_basic_ci()}}).
 }
 \description{
 Thin pass-through that adapts an rmorie-style
@@ -29,5 +30,5 @@ the raw \code{boot} object. Useful when the caller wants to use
 \code{boot::tilt.boot}, \code{boot::jack.after.boot}) directly.
 }
 \seealso{
-\code{boot::boot}, \code{\link[=morie_boot_basic_ci]{morie_boot_basic_ci()}}.
+\code{\link[=morie_boot]{morie_boot()}}, \code{\link[=morie_boot_basic_ci]{morie_boot_basic_ci()}}.
 }

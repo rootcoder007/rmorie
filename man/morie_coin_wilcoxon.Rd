@@ -17,10 +17,10 @@ morie_coin_wilcoxon(formula, data, ...)
 \code{alternative}).}
 }
 \value{
-A list with \code{$method = "coin::wilcox_test"} and
-\code{$raw} (an \code{IndependenceTest} object).
+A list with \code{$method}, \code{$statistic},
+\code{$p.value} and \code{$raw}.
 }
 \description{
-Thin extender over \code{coin::wilcox_test} for two-sample
-permutation Wilcoxon (Mann-Whitney) tests.
+Native two-sample Wilcoxon rank-sum permutation test
+(\code{\link{morie_wilcox_test}}).
 }

@@ -28,8 +28,7 @@ morie_penalized_regression(
 list(estimate, beta, intercept, se, alpha, lam, n_iter, n, p, method).
 }
 \description{
-Uses glmnet if available; otherwise the base-R coordinate-descent
-fallback. Both solve:
+Native elastic-net coordinate descent (shared core). Solves:
 }
 \details{
 min 1/(2n) ||y - X beta||^2 + lam (alpha ||beta||_1 + (1-alpha)/2 ||beta||_2^2).

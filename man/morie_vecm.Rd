@@ -14,11 +14,17 @@ morie_vecm(Y, k_ar = 1, coint_rank = 1)
 \item{coint_rank}{Cointegration rank. Default 1.}
 }
 \value{
-Named list with \code{alpha, beta, Gamma, Sigma, loglik, n, k,
-  rank, method}.
+Named list with \code{alpha, beta, Gamma, Sigma, eigenvalues,
+  loglik, n, k, rank, method}.
 }
 \description{
-Vector error-correction model (VECM)
+Native Johansen (1991) reduced-rank maximum-likelihood estimation:
+concentrate out the short-run dynamics, solve the generalized
+eigenvalue problem on the canonical-correlation matrices, and take
+the leading \code{coint_rank} eigenvectors as the cointegrating
+space. Replaces the \code{urca::ca.jo} + \code{vars::vec2var}
+delegation; the eigenvalues/vectors are cross-validated against
+urca in tests.
 }
 \examples{
 morie_vecm(Y = matrix(rnorm(100), 50, 2))

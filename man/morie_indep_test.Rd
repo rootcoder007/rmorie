@@ -4,8 +4,12 @@
 \alias{morie_indep_test}
 \title{Native general independence permutation test}
 \usage{
-morie_indep_test(formula, data, alternative = "two.sided",
-  distribution = "asymptotic")
+morie_indep_test(
+  formula,
+  data,
+  alternative = "two.sided",
+  distribution = "asymptotic"
+)
 }
 \arguments{
 \item{formula}{\code{y ~ x}.}

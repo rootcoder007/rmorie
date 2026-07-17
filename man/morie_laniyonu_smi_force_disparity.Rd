@@ -92,9 +92,9 @@ police use of force against PwSMI vs non-SMI.
 
 Paper headlines: RR PwSMI = 11.6x (tract); 10.2x (precinct).
 
-This R port is a frequentist MLE approximation (via
-\code{stats::glm.nb} in MASS, falling back to a hand-rolled NB MLE
-on \code{stats::optim} if MASS is unavailable).  For paper-grade
+This R port is a frequentist MLE approximation (via the native
+\code{morie_glm_nb}, falling back to a hand-rolled NB MLE on
+\code{stats::optim} on error).  For paper-grade
 Bayesian credible intervals, fit in \pkg{brms} / \pkg{rstanarm}
 using the design matrix returned with \code{return_design=TRUE}.
 
