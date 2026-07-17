@@ -135,8 +135,8 @@ NULL
   }
   k <- min(as.integer(k), n - 1L)
   W <- matrix(0, n, n)
-  if (requireNamespace("FNN", quietly = TRUE)) {
-    nn <- FNN::get.knn(coords, k = k)$nn.index
+  if (n <= 2000L) {
+    nn <- .morie_knn_index(coords, k)
     for (i in seq_len(n)) {
       W[i, nn[i, ]] <- 1.0
     }

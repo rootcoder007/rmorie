@@ -93,17 +93,20 @@ morie_ml_apply_smote <- function(X, y, random_state = 42L,
   method <- "smote"
   X_res <- X
   y_res <- y
-  smote_ok <- requireNamespace("smotefamily", quietly = TRUE) &&
-    minority_count > k_neighbors
+  smote_ok <- minority_count > k_neighbors
   if (smote_ok) {
+    # Native SMOTE (Chawla et al. 2002): interpolate towards random
+    # minority k-NN until classes balance. Cross-validated against
+    # smotefamily::SMOTE in tests.
+    set.seed(random_state)
     res <- try(
-      smotefamily::SMOTE(X = as.data.frame(X), target = y_chr,
-                         K = as.integer(k_neighbors)),
+      .morie_smote(as.matrix(as.data.frame(X)), y_chr,
+                   k = as.integer(k_neighbors)),
       silent = TRUE
     )
-    if (!inherits(res, "try-error") && !is.null(res$data)) {
-      tgt <- res$data$class
-      X_res <- res$data[, setdiff(names(res$data), "class"), drop = FALSE]
+    if (!inherits(res, "try-error") && nrow(res$X_new) > 0L) {
+      X_res <- rbind(as.data.frame(X), as.data.frame(res$X_new))
+      tgt <- c(y_chr, res$y_new)
       y_res <- if (is.factor(y)) factor(tgt, levels = levels(y)) else tgt
     } else {
       smote_ok <- FALSE

@@ -517,9 +517,10 @@ simes_combined <- function(p_values) {
 
 #' Harmonic mean p-value
 #'
-#' For tests that may be dependent. Delegates to
-#' \code{harmonicmeanp::p.hmp} when installed; otherwise returns the
-#' raw harmonic mean (Wilson 2019 asymptotic approximation).
+#' For tests that may be dependent. Native implementation of the
+#' asymptotically exact harmonic mean p-value (Wilson 2019): the
+#' statistic \eqn{mean(1/p)} is referred to its Landau asymptotic
+#' distribution. Cross-validated against \pkg{harmonicmeanp}.
 #'
 #' @inheritParams bonferroni
 #' @return A numeric value.
@@ -527,17 +528,7 @@ simes_combined <- function(p_values) {
 harmonic_mean_p <- function(p_values) {
   p <- .mt_check_p(p_values)
   p <- pmax(p, 1e-300)
-  m <- length(p)
-  if (.mt_have_harmonicmeanp()) {
-    out <- tryCatch(
-      harmonicmeanp::p.hmp(p, L = m),
-      error = function(e) NULL
-    )
-    if (!is.null(out)) {
-      return(as.numeric(out))
-    }
-  }
-  m / sum(1.0 / p)
+  as.numeric(.morie_hmp(p, L = length(p)))
 }
 
 #' Cauchy combination test (Liu and Xie 2020)
