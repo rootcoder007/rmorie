@@ -25,68 +25,18 @@ morie_penalized_regression <- function(x, y, alpha = 0.5, lam = 1.0,
   y <- as.numeric(y)
   n <- nrow(X)
   p <- ncol(X)
-  use_glmnet <- requireNamespace("glmnet", quietly = TRUE)
-  if (use_glmnet) {
-    fit <- glmnet::glmnet(X, y,
-      alpha = alpha, lambda = lam,
-      standardize = TRUE, intercept = TRUE
-    )
-    beta <- as.numeric(fit$beta[, 1])
-    intercept <- as.numeric(fit$a0)
-    y_hat <- as.numeric(X %*% beta) + intercept
-    resid <- y - y_hat
-    se <- sqrt(sum(resid^2) / max(n - p, 1))
-    return(list(
-      estimate = mean(abs(beta)), beta = beta, intercept = intercept,
-      y_hat = y_hat, se = se, alpha = alpha, lam = lam,
-      n_iter = NA_integer_, n = n, p = p,
-      method = "glmnet elastic-net"
-    ))
-  }
-  ym <- mean(y)
-  yc <- y - ym
-  xm <- colMeans(X)
-  xs <- apply(X, 2, stats::sd)
-  xs[xs == 0] <- 1
-  Xs <- sweep(sweep(X, 2, xm), 2, xs, "/")
-  beta <- rep(0, p)
-  xtx_diag <- colSums(Xs^2) / n
-  r <- yc - as.numeric(Xs %*% beta)
-  soft <- lam * alpha
-  ridge_t <- lam * (1 - alpha)
-  n_iter_done <- max_iter
-  for (it in seq_len(max_iter)) {
-    max_change <- 0
-    for (j in seq_len(p)) {
-      r_j <- r + Xs[, j] * beta[j]
-      z <- sum(Xs[, j] * r_j) / n
-      if (z > soft) {
-        new <- (z - soft) / (xtx_diag[j] + ridge_t)
-      } else if (z < -soft) {
-        new <- (z + soft) / (xtx_diag[j] + ridge_t)
-      } else {
-        new <- 0
-      }
-      change <- new - beta[j]
-      if (abs(change) > max_change) max_change <- abs(change)
-      beta[j] <- new
-      r <- r_j - Xs[, j] * new
-    }
-    if (max_change < tol) {
-      n_iter_done <- it
-      break
-    }
-  }
-  beta_orig <- beta / xs
-  intercept <- ym - sum(xm * beta_orig)
-  y_hat <- as.numeric(X %*% beta_orig) + intercept
+  # Native elastic-net coordinate descent (shared core in
+  # smallstats_native.R); cross-validated against glmnet in tests.
+  fit <- .morie_coord_descent(X, y, alpha = alpha, lambda = lam,
+                              max_iter = max_iter, tol = tol)
+  y_hat <- as.numeric(X %*% fit$beta) + fit$intercept
   resid <- y - y_hat
   se <- sqrt(sum(resid^2) / max(n - p, 1))
   list(
-    estimate = mean(abs(beta_orig)), beta = beta_orig,
-    intercept = intercept, y_hat = y_hat, se = se,
-    alpha = alpha, lam = lam, n_iter = n_iter_done,
-    n = n, p = p, method = "Elastic-net coord descent (base R)"
+    estimate = mean(abs(fit$beta)), beta = fit$beta,
+    intercept = fit$intercept, y_hat = y_hat, se = se,
+    alpha = alpha, lam = lam, n_iter = fit$n_iter,
+    n = n, p = p, method = "Elastic-net coordinate descent (native)"
   )
 }
 

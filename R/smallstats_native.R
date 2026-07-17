@@ -195,6 +195,106 @@ NULL
 }
 
 # ---------------------------------------------------------------------------
+# Elastic-net coordinate descent on standardized covariates -- the
+# shared core behind morie_penalized_regression() and
+# morie_regularization_path() (replacing their glmnet delegation).
+# Returns coefficients on the ORIGINAL scale plus intercept.
+# `warm` optionally seeds beta (standardized scale) for path fits.
+.morie_coord_descent <- function(X, y, alpha, lambda,
+                                 max_iter = 1000L, tol = 1e-6,
+                                 warm = NULL) {
+  X <- as.matrix(X)
+  n <- nrow(X)
+  p <- ncol(X)
+  ym <- mean(y)
+  yc <- y - ym
+  xm <- colMeans(X)
+  # Population (1/n) standard deviation -- glmnet's standardization
+  # convention; with it, colSums(Xs^2)/n == 1 exactly.
+  xs <- sqrt(colMeans(sweep(X, 2, xm)^2))
+  xs[xs == 0] <- 1
+  Xs <- sweep(sweep(X, 2, xm), 2, xs, "/")
+  beta <- if (is.null(warm)) rep(0, p) else warm
+  xtx_diag <- colSums(Xs^2) / n
+  r <- yc - as.numeric(Xs %*% beta)
+  soft <- lambda * alpha
+  ridge_t <- lambda * (1 - alpha)
+  n_iter_done <- max_iter
+  for (it in seq_len(max_iter)) {
+    max_change <- 0
+    for (j in seq_len(p)) {
+      r_j <- r + Xs[, j] * beta[j]
+      z <- sum(Xs[, j] * r_j) / n
+      new <- if (z > soft) {
+        (z - soft) / (xtx_diag[j] + ridge_t)
+      } else if (z < -soft) {
+        (z + soft) / (xtx_diag[j] + ridge_t)
+      } else {
+        0
+      }
+      change <- new - beta[j]
+      if (abs(change) > max_change) max_change <- abs(change)
+      beta[j] <- new
+      r <- r_j - Xs[, j] * new
+    }
+    if (max_change < tol) {
+      n_iter_done <- it
+      break
+    }
+  }
+  beta_orig <- beta / xs
+  intercept <- ym - sum(xm * beta_orig)
+  list(beta = beta_orig, beta_std = beta, intercept = intercept,
+       n_iter = n_iter_done)
+}
+
+# ---------------------------------------------------------------------------
+# Ridge regression with SVD path + k-fold CV lambda selection, then
+# prediction -- the cv.glmnet(alpha = 0, s = "lambda.min") surface the
+# DML cross-fit nuisance learners used. The SVD makes the whole lambda
+# path essentially free.
+.morie_cv_ridge_predict <- function(x_train, z_train, x_test,
+                                    n_folds = 5L, lambdas = NULL) {
+  x_train <- as.matrix(x_train)
+  x_test <- as.matrix(x_test)
+  n <- nrow(x_train)
+  if (is.null(lambdas)) lambdas <- 10^seq(-4, 4, length.out = 60)
+  xm <- colMeans(x_train)
+  zs <- mean(z_train)
+  Xc <- sweep(x_train, 2, xm)
+  zc <- z_train - zs
+  ridge_beta <- function(sv, lam) {
+    # beta = V diag(d/(d^2 + n*lam)) U' zc
+    d <- sv$d
+    sv$v %*% ((d / (d^2 + n * lam)) * crossprod(sv$u, zc))
+  }
+  folds <- sample(rep(seq_len(n_folds), length.out = n))
+  cv_err <- numeric(length(lambdas))
+  for (f in seq_len(n_folds)) {
+    tr <- folds != f
+    Xf <- Xc[tr, , drop = FALSE]
+    zf <- zc[tr]
+    xmf <- colMeans(Xf)
+    Xf <- sweep(Xf, 2, xmf)
+    zsf <- mean(zf)
+    zf <- zf - zsf
+    svf <- svd(Xf)
+    Xv <- sweep(Xc[!tr, , drop = FALSE], 2, xmf)
+    for (li in seq_along(lambdas)) {
+      d <- svf$d
+      b <- svf$v %*% ((d / (d^2 + sum(tr) * lambdas[li])) *
+                        crossprod(svf$u, zf))
+      pred <- as.numeric(Xv %*% b) + zsf
+      cv_err[li] <- cv_err[li] + sum((zc[!tr] - pred)^2)
+    }
+  }
+  lam <- lambdas[which.min(cv_err)]
+  sv <- svd(Xc)
+  b <- ridge_beta(sv, lam)
+  as.numeric(sweep(x_test, 2, xm) %*% b) + zs
+}
+
+# ---------------------------------------------------------------------------
 # Asymptotically exact harmonic mean p-value (Wilson 2019, PNAS).
 # The statistic t = mean(1/p) is asymptotically Landau distributed with
 # location log(L) + 0.874367040387922 and scale pi/2; the combined

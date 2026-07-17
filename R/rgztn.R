@@ -34,17 +34,23 @@ morie_regularization_path <- function(x, y, penalty = c("ridge", "lasso", "elast
     lasso = 1,
     elasticnet = l1_ratio
   )
-  fit <- glmnet::glmnet(x, y,
-    alpha = gn_alpha, lambda = sort(alphas, decreasing = TRUE),
-    standardize = FALSE, intercept = TRUE
-  )
-  # glmnet returns columns in decreasing-lambda order; re-order to match alphas
-  ord <- order(fit$lambda)
-  lam <- fit$lambda[ord]
-  beta <- as.matrix(fit$beta)[, ord, drop = FALSE]
-  a0 <- fit$a0[ord]
-  coef_path <- rbind(a0, beta)
-  coef_path <- t(coef_path)
+  # Native path: warm-start coordinate descent from the largest lambda
+  # down (glmnet's own pathwise strategy), then report in increasing-
+  # lambda order to match `alphas`.
+  lam_desc <- sort(alphas, decreasing = TRUE)
+  betas <- matrix(0, ncol(x), length(lam_desc))
+  a0s <- numeric(length(lam_desc))
+  warm <- NULL
+  for (li in seq_along(lam_desc)) {
+    fit <- .morie_coord_descent(x, y, alpha = gn_alpha,
+                                lambda = lam_desc[li], warm = warm)
+    betas[, li] <- fit$beta
+    a0s[li] <- fit$intercept
+    warm <- fit$beta_std
+  }
+  ord <- order(lam_desc)
+  lam <- lam_desc[ord]
+  coef_path <- t(rbind(a0s[ord], betas[, ord, drop = FALSE]))
   colnames(coef_path) <- c("(intercept)", colnames(x) %||% paste0("x", seq_len(p) - 1L))
   list(
     estimate   = as.numeric(coef_path[nrow(coef_path), ]),
