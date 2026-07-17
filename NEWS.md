@@ -1,5 +1,30 @@
 # rmorie 1.1.4 (development, feat/native-specializations)
 
+## Modules 14-17 (quasi-experimental front-ends, weighting, modern DiD, crim methods)
+
+* `morie_did()`, `morie_iv_2sls()`, `morie_rdd()` -- unified
+  quasi-experimental entry points routing to the native toolboxes:
+  auto-staggered CS dispatch with a Goodman-Bacon contamination
+  warning, a Staiger-Stock weak-instrument refusal gate with the
+  Anderson-Rubin set, and RDD with the manipulation test and placebo
+  cutoffs bundled.
+* `morie_weight_*` -- the full propensity-weighting family
+  (logistic/entropy/CBPS/overlap/stabilized/trimming/SuperLearner
+  stack/diagnostics) as a composable `morie_weight` class; weights
+  match WeightIt to 1e-8 and CBPS balance moments to < 1e-6.
+* `morie_did_sun_abraham()`, `morie_did_borusyak()`,
+  `morie_did_did2s()` -- the three modern staggered-DiD estimators on
+  the native TWFE machinery; within 0.02 of the did2s package.
+* `morie_crim_etas()`, `morie_crim_hawkes_multivariate()`,
+  `morie_crim_near_repeat()`, `morie_crim_risk_terrain()` -- the
+  criminology methods absent from the toolbox after the variant audit.
+* Canonical replication fixtures (LaLonde, Basque, Lee 2008,
+  CigarettesSW) bundled under `inst/extdata/quasiex/` with
+  literature-replication tests, plus the phase-17 composition test
+  (DAG -> identify -> match -> weight -> estimate -> refute ->
+  report on real data).
+
+
 ## Major changes
 
 * **All 25 native-specialization modules are complete.** Every

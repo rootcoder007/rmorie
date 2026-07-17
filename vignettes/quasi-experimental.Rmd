@@ -1,0 +1,102 @@
+---
+title: "Quasi-experimental methods: DiD, IV, RDD, and weighting"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Quasi-experimental methods: DiD, IV, RDD, and weighting}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+set.seed(1)
+```
+
+rmorie's quasi-experimental stack is fully native: no `did`,
+`fixest`, `did2s`, `didimputation`, `rdrobust`, `AER`, `WeightIt`, or
+`CBPS` at runtime. Each estimator is cross-validated against its
+reference package in `tests/` and the canonical replication suite
+(`tests/testthat/test-quasiex-replication.R`) reproduces the
+published estimates on the bundled real datasets (LaLonde, Basque
+Country, Lee 2008 incumbency, CigarettesSW).
+
+```{r setup}
+library(rmorie)
+```
+
+## Difference-in-differences with automatic staggered handling
+
+`morie_did()` inspects the treatment-timing structure: with a single
+adoption cohort it runs the native TWFE estimator; with staggered
+adoption it warns that a naive TWFE would be contaminated by
+forbidden comparisons (Goodman-Bacon 2021) and switches to the
+Callaway-Sant'Anna group-time estimator.
+
+```{r did}
+df <- expand.grid(id = 1:60, t = 1:8)
+df$g <- ifelse(df$id <= 20, 4L, ifelse(df$id <= 40, 6L, NA))
+df$y <- rnorm(nrow(df), sd = 0.5) +
+  ifelse(!is.na(df$g) & df$t >= df$g, 2, 0)
+fit <- suppressWarnings(morie_did(df, "y", "id", "t", "g",
+                                  n_bootstrap = 49L))
+fit
+```
+
+The modern estimators are available directly when you want a specific
+one: `morie_did_sun_abraham()` (interaction-weighted event study),
+`morie_did_borusyak()` (imputation), and `morie_did_did2s()`
+(Gardner two-stage).
+
+```{r sunab}
+es <- morie_did_sun_abraham(df, "y", "id", "t", "g",
+                            leads = 2L, lags = 2L)
+es
+```
+
+## Instrumental variables with a weak-instrument gate
+
+`morie_iv_2sls()` refuses to report a 2SLS point estimate when the
+first-stage F is below the Staiger-Stock threshold of 10 and returns
+the identification-robust Anderson-Rubin confidence set instead.
+
+```{r iv}
+n <- 300
+z <- rnorm(n); u <- rnorm(n)
+d <- 1.2 * z + 0.5 * u + rnorm(n)
+y <- 2 * d + u + rnorm(n)
+morie_iv_2sls(data.frame(y, d, z), "y", "d", "z")
+```
+
+## Regression discontinuity with bundled diagnostics
+
+`morie_rdd()` returns the bias-corrected estimate together with the
+McCrary manipulation check and placebo-cutoff estimates -- the
+robustness steps applied papers routinely forget.
+
+```{r rdd}
+x <- runif(600, -1, 1)
+y <- 1 + 2 * (x >= 0) + x + rnorm(600, sd = 0.5)
+morie_rdd(data.frame(y, x), "y", "x")
+```
+
+## Propensity-score weighting
+
+The `morie_weight_*` family produces a `morie_weight` object the rest
+of the package composes with: logistic scores, entropy balancing,
+CBPS, overlap weights, stabilization, trimming, a native
+SuperLearner stack, and balance diagnostics.
+
+```{r weights}
+dw <- data.frame(t = rbinom(300, 1, 0.4),
+                 x1 = rnorm(300), x2 = rnorm(300))
+w <- morie_weight_ps(dw, "t", c("x1", "x2"), estimand = "ATT")
+w
+head(morie_weight_diagnostic(w, dw, "t", c("x1", "x2")))
+```
+
+## One pipeline end to end
+
+The composition test (`tests/testthat/test-composition-pipeline.R`)
+chains DAG construction, backdoor identification, matching,
+weighting, estimation, refutation, and the MRM publication table on
+the bundled LaLonde data -- one class system across every module.

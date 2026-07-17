@@ -616,3 +616,54 @@ happens ONLY after everything on both branches is green and Vee gives
 an explicit go. No main merge, no tag, no PyPI publish until then.
 Both rmorie and morie stay on feat/native-specializations; the branch
 gates are the verification of record.
+
+## Modules 14-17 (2026-07-17): quasi-experimental front-ends, weighting, modern DiD, crim methods
+
+- **Module 14 — unified front-ends** (`quasiex_native.R`): morie_did
+  (auto-staggered CS dispatch + Goodman-Bacon warning; overall ATT on
+  post cells only — pre-cell dilution caught vs did::aggte),
+  morie_iv_2sls (Staiger-Stock gate + AR set; == AER::ivreg 1e-6),
+  morie_rdd (bias-corrected + IK + McCrary + placebos bundled). Pure
+  routers over the existing toolboxes; first draft re-implemented the
+  math and was rewritten after the duplication audit.
+- **Module 15 — weighting family** (`weight_native.R`): the WeightIt
+  replacement. ps/entropy/CBPS/OW/stabilized/trim/SuperLearner-NNLS/
+  diagnostics as one morie_weight class; weights == WeightIt 1e-8,
+  CBPS moments < 1e-6 (== CBPS::CBPS 0.02). Last WeightIt call site
+  in the IPW path rewired native.
+- **Module 16 — modern staggered DiD** (`did_modern_native.R`):
+  Sun-Abraham (full saturation; window-only dummies contaminate the
+  baseline — caught by the pre-trend gate), Borusyak imputation and
+  Gardner did2s on a shared alternating-projections FE solver;
+  == did2s package 0.02.
+- **Module 17 — crim methods** (`crim_native.R`): Ogata ETAS
+  (closed-form Omori integral, branching diagnostic), K-dim
+  exponential Hawkes MLE (recovers asymmetric cross-excitation),
+  Knox near-repeat permutation test, Caplan-Kennedy-Miller risk
+  terrain. Reaction-diffusion/Levy/urban-scaling/hotspots already
+  existed (tps_statphysics, mrm).
+- **Phase 9 fixtures**: real LaLonde/Basque/Lee-2008/CigarettesSW
+  bundled under inst/extdata/quasiex/ with literature-replication
+  tests; phase-17 composition test runs DAG -> identify -> match ->
+  weight -> estimate -> refute -> report on LaLonde.
+
+## Definition of done (phase 33) — status as of 2026-07-17
+
+- (a) R CMD check variants: as-cran-hard-deps green on branch CI
+  (411b2e1+); full-Suggests leg green; main-branch runs pending merge.
+- (b) Cross-validation on canonical datasets: tests/cross/ green +
+  the new replication suite (LaLonde/Basque/Lee-2008/CigarettesSW/
+  UKDriverDeaths) in tests/testthat/test-quasiex-replication.R.
+- (c) Composition test: tests/testthat/test-composition-pipeline.R
+  (DAG -> identify -> match -> weight -> estimate -> refute -> report
+  on LaLonde).
+- (d) BRANCH_PLAN complete through modules 1-17 incl. the WeightIt
+  replacement, four modern-DiD variants, and the criminology stack.
+- (e) README "What rmorie is NOT" names every forbidden runtime dep.
+- (f) Imports = here/stats/utils/Rcpp/rmoriebricklayer (digest is
+  NOT needed: SHA-2 is native C++ since module 22).
+- (g) dependency-hygiene CI extended with the phase-32 list.
+- (h) Phase-25 checks: run on the branch before the merge request.
+- (i) MERGE TO MAIN + tag + release notes: BLOCKED on maintainer's
+  explicit go (the marathon's final gate).
+- (j) NEWS.md current through modules 14-17.
