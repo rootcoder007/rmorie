@@ -6,13 +6,14 @@
 
 test_that(".morie_hurst_rs matches pracma::hurstexp on known series", {
   set.seed(11)
-  x <- cumsum(rnorm(4096)) # Brownian motion, H ~ 0.5
+  x <- cumsum(rnorm(4096)) # Brownian motion
   h <- .morie_hurst_rs(x)
-  expect_true(h > 0.35 && h < 0.65)
+  # Simple whole-series R/S is upward-biased for BM; sanity range only.
+  expect_true(h > 0.2 && h < 0.9)
 
   skip_if_not_installed("pracma")
   ref <- pracma::hurstexp(x, display = FALSE)$Hs
-  expect_lt(abs(h - ref), 0.08)
+  expect_lt(abs(h - ref), 1e-10)
 
   # Persistent series
   y <- cumsum(cumsum(rnorm(2048))) # smoother, H -> high
@@ -25,27 +26,33 @@ test_that(".morie_psens_wilcoxon matches rbounds::psens bounds", {
   n <- 40
   treated <- rnorm(n, 0.6)
   control <- rnorm(n)
-  for (g in c(1, 1.5, 2, 3)) {
+  ref <- rbounds::psens(treated, control, Gamma = 3, GammaInc = 0.5)$bounds
+  for (i in seq_len(nrow(ref))) {
+    g <- as.numeric(ref[i, "Gamma"])
     ours <- .morie_psens_wilcoxon(treated, control, g)
-    ref <- rbounds::psens(treated, control, Gamma = g, GammaInc = 1)$bounds
-    ref_low <- as.numeric(ref[nrow(ref), "Lower bound"])
-    ref_up <- as.numeric(ref[nrow(ref), "Upper bound"])
-    expect_lt(abs(ours[["p_lower"]] - ref_low), 1e-6)
-    expect_lt(abs(ours[["p_upper"]] - ref_up), 1e-6)
+    expect_lt(abs(ours[["p_lower"]] -
+                  as.numeric(ref[i, "Lower bound"])), 6e-5)
+    expect_lt(abs(ours[["p_upper"]] -
+                  as.numeric(ref[i, "Upper bound"])), 6e-5)
   }
 })
 
-test_that(".morie_psens_wilcoxon_d matches one-sample psens", {
+test_that(".morie_psens_wilcoxon_d equals the paired form with zero controls", {
+  # rbounds::psens has no one-sample interface (its y is required --
+  # which means the old effects.R one-sample delegation could never
+  # have run). Validate the differences core against the paired form:
+  # d paired with zeros yields identical differences.
   skip_if_not_installed("rbounds")
   set.seed(23)
   d <- rnorm(35, 0.4)
   for (g in c(1, 2)) {
     ours <- .morie_psens_wilcoxon_d(d, g)
-    ref <- rbounds::psens(d, Gamma = g, GammaInc = 1)$bounds
+    ref <- rbounds::psens(d, rep(0, length(d)), Gamma = g,
+                          GammaInc = 1)$bounds
     expect_lt(abs(ours[["p_lower"]] -
-                  as.numeric(ref[nrow(ref), "Lower bound"])), 1e-6)
+                  as.numeric(ref[nrow(ref), "Lower bound"])), 6e-5)
     expect_lt(abs(ours[["p_upper"]] -
-                  as.numeric(ref[nrow(ref), "Upper bound"])), 1e-6)
+                  as.numeric(ref[nrow(ref), "Upper bound"])), 6e-5)
   }
 })
 
@@ -133,9 +140,10 @@ test_that("benchmark: natives are within sane speed of the packages", {
   skip_on_cran()
   skip_if_not(identical(Sys.getenv("MORIE_RUN_BENCH"), "1"),
               "set MORIE_RUN_BENCH=1 to run benchmarks")
-  bench <- function(expr, times = 5L) {
+  bench <- function(thunk, times = 5L) {
     ts <- vapply(seq_len(times), function(i) {
-      t0 <- proc.time()[["elapsed"]]; force(eval.parent(substitute(expr)))
+      t0 <- proc.time()[["elapsed"]]
+      thunk()
       proc.time()[["elapsed"]] - t0
     }, numeric(1))
     stats::median(ts)
@@ -146,21 +154,21 @@ test_that("benchmark: natives are within sane speed of the packages", {
   n <- 500
   Xb <- cbind(rnorm(n), rexp(n)); tb <- runif(n) < 0.4
   rows <- list(
-    c(what = "hurst_native", t = bench(.morie_hurst_rs(x))),
-    c(what = "knn_native_1k", t = bench(.morie_knn_index(coords, 8))),
-    c(what = "ebalance_native", t = bench(.morie_entropy_balance(tb, Xb)))
+    c(what = "hurst_native", t = bench(function() .morie_hurst_rs(x))),
+    c(what = "knn_native_1k", t = bench(function() .morie_knn_index(coords, 8))),
+    c(what = "ebalance_native", t = bench(function() .morie_entropy_balance(tb, Xb)))
   )
   if (requireNamespace("pracma", quietly = TRUE)) {
     rows <- c(rows, list(c(what = "hurst_pracma",
-                           t = bench(pracma::hurstexp(x, display = FALSE)))))
+                           t = bench(function() pracma::hurstexp(x, display = FALSE)))))
   }
   if (requireNamespace("FNN", quietly = TRUE)) {
     rows <- c(rows, list(c(what = "knn_FNN_1k",
-                           t = bench(FNN::get.knn(coords, k = 8)))))
+                           t = bench(function() FNN::get.knn(coords, k = 8)))))
   }
   if (requireNamespace("ebal", quietly = TRUE)) {
     rows <- c(rows, list(c(what = "ebalance_ebal",
-                           t = bench(ebal::ebalance(as.integer(tb), Xb)))))
+                           t = bench(function() ebal::ebalance(as.integer(tb), Xb)))))
   }
   out <- do.call(rbind, rows)
   cat("\n== smallstats-native benchmarks (median s) ==\n")

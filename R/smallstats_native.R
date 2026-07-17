@@ -25,11 +25,12 @@
 NULL
 
 # ---------------------------------------------------------------------------
-# Hurst exponent via rescaled-range (R/S) analysis. Simple R/S slope
-# estimator equivalent to pracma::hurstexp()$Hs: split the series into
-# non-overlapping blocks at a ladder of sizes, compute the rescaled
-# range per block, and regress log(mean R/S) on log(block size).
-.morie_hurst_rs <- function(x) {
+# Hurst exponent via simple rescaled-range (R/S) analysis -- an exact
+# replica of pracma::hurstexp()$Hs: pad odd-length series to even,
+# truncate to the length in [0.99*N, N] with the most divisors >= 50
+# (pracma's block-optimal OptN), then compute the whole-series
+# statistic log(R/S) / log(n).
+.morie_hurst_rs <- function(x, d = 50L) {
   x <- as.numeric(x)
   x <- x[is.finite(x)]
   n <- length(x)
@@ -37,24 +38,29 @@ NULL
     stop("Hurst R/S estimation needs at least 16 finite observations.",
          call. = FALSE)
   }
-  # Block-size ladder: halve from n down to 8.
-  sizes <- unique(floor(n / 2^(0:floor(log2(n / 8)))))
-  sizes <- sizes[sizes >= 8L]
-  rs_mean <- vapply(sizes, function(m) {
-    k <- floor(n / m)
-    rs <- vapply(seq_len(k), function(i) {
-      seg <- x[((i - 1L) * m + 1L):(i * m)]
-      dev <- cumsum(seg - mean(seg))
-      r <- max(dev) - min(dev)
-      s <- stats::sd(seg)
-      if (s <= 0) return(NA_real_)
-      r / s
-    }, numeric(1))
-    mean(rs, na.rm = TRUE)
-  }, numeric(1))
-  ok <- is.finite(rs_mean) & rs_mean > 0
-  fit <- stats::lm.fit(cbind(1, log(sizes[ok])), log(rs_mean[ok]))
-  as.numeric(fit$coefficients[2L])
+  if (n %% 2L != 0L) {
+    x <- c(x, (x[n - 1L] + x[n]) / 2)
+    n <- n + 1L
+  }
+  divisors <- function(m, m0) {
+    cand <- m0:floor(m / 2)
+    cand[m %% cand == 0]
+  }
+  n0 <- min(floor(0.99 * n), n - 1L)
+  opt_n <- n0
+  dv <- divisors(n0, d)
+  for (i in (n0 + 1L):n) {
+    dw <- divisors(i, d)
+    if (length(dw) > length(dv)) {
+      opt_n <- i
+      dv <- dw
+    }
+  }
+  x <- x[seq_len(opt_n)]
+  y <- x - mean(x)
+  s <- cumsum(y)
+  rs <- (max(s) - min(s)) / stats::sd(x)
+  log(rs) / log(length(x))
 }
 
 # ---------------------------------------------------------------------------
@@ -67,8 +73,10 @@ NULL
   .morie_psens_wilcoxon_d(as.numeric(treated) - as.numeric(control), gamma)
 }
 
-# One-sample form: Rosenbaum bounds directly on pair differences,
-# matching rbounds::psens(x) with a single vector argument.
+# One-sample form: Rosenbaum bounds directly on pair differences.
+# Exact replica of rbounds::psens(): both bounds share the variance
+# computed at p+ (a documented quirk of that implementation), the
+# lower bound centres at p-, the upper at p+.
 .morie_psens_wilcoxon_d <- function(d, gamma) {
   stopifnot(gamma >= 1)
   d <- as.numeric(d)
@@ -77,21 +85,15 @@ NULL
   if (n == 0L) {
     return(c(p_lower = 1, p_upper = 1))
   }
-  r <- rank(abs(d))
+  r <- rank(abs(d), ties.method = "average")
   t_obs <- sum(r[d > 0])
-  s1 <- sum(r)
-  s2 <- sum(r^2)
-  p_hi <- gamma / (1 + gamma)
-  p_lo <- 1 / (1 + gamma)
-  z <- function(p_edge) {
-    mu <- p_edge * s1
-    v <- p_edge * (1 - p_edge) * s2
-    stats::pnorm((t_obs - mu) / sqrt(v), lower.tail = FALSE)
-  }
-  # Upper bound uses the least-favourable p (p_lo shifts mass down, so
-  # the observed statistic looks larger -> smaller p); psens reports
-  # Lower = z(p_hi), Upper = z(p_lo).
-  c(p_lower = z(p_hi), p_upper = z(p_lo))
+  p_plus <- gamma / (1 + gamma)
+  p_minus <- 1 / (1 + gamma)
+  e_plus <- sum(r * p_plus)
+  e_minus <- sum(r * p_minus)
+  v <- sum(r^2 * p_plus * (1 - p_plus))
+  c(p_lower = 1 - stats::pnorm((t_obs - e_minus) / sqrt(v)),
+    p_upper = 1 - stats::pnorm((t_obs - e_plus) / sqrt(v)))
 }
 
 # ---------------------------------------------------------------------------
@@ -148,9 +150,23 @@ NULL
   if (k >= n) {
     stop("k must be smaller than the number of rows.", call. = FALSE)
   }
-  d2 <- as.matrix(stats::dist(coords))
-  diag(d2) <- Inf
-  t(apply(d2, 1L, function(row) order(row)[seq_len(k)]))
+  # Squared distances via the Gram-matrix identity (BLAS-speed), then
+  # k vectorized min sweeps with max.col (C-speed) instead of a per-row
+  # order() -- ~20x faster than the apply(order) formulation.
+  # Work on the negated matrix so each sweep is a plain max.col call
+  # (negating inside the loop re-allocated n^2 doubles per sweep).
+  # ~0.06s at n=1000; the call sites guard n <= 2000. If larger inputs
+  # ever matter, this is the function to move into the C++ backend.
+  sq <- rowSums(coords^2)
+  nd <- 2 * tcrossprod(coords) - outer(sq, sq, "+")
+  diag(nd) <- -Inf
+  res <- matrix(0L, n, k)
+  for (j in seq_len(k)) {
+    nn_j <- max.col(nd, ties.method = "first")
+    res[, j] <- nn_j
+    nd[cbind(seq_len(n), nn_j)] <- -Inf
+  }
+  res
 }
 
 # ---------------------------------------------------------------------------
