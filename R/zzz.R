@@ -20,9 +20,10 @@
 utils::globalVariables(c(
   # ggplot2/rlang NSE
   ".data",
-  # Python-port placeholders (intentional `exists()`-guarded lookups)
-  "morie_tps_load_tps_dataset",
-  "morie_tps_load_tps",
+  # Python-port placeholder (intentional `exists()`-guarded lookup;
+  # the tps loaders graduated to real R functions in tps_statphysics.R
+  # and must NOT be declared here -- pkgload reports a declared global
+  # that shadows a real export as a mask conflict)
   "morie_spatial_spillover_decomposition",
   # geepack::geeglm NSE: cluster id column added at runtime then passed
   # by bare name to the formula-style `id` arg (see 3MMM.48 fix).
