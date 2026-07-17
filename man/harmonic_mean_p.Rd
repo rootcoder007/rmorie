@@ -13,7 +13,8 @@ harmonic_mean_p(p_values)
 A numeric value.
 }
 \description{
-For tests that may be dependent. Delegates to
-\code{harmonicmeanp::p.hmp} when installed; otherwise returns the
-raw harmonic mean (Wilson 2019 asymptotic approximation).
+For tests that may be dependent. Native implementation of the
+asymptotically exact harmonic mean p-value (Wilson 2019): the
+statistic \eqn{mean(1/p)} is referred to its Landau asymptotic
+distribution. Cross-validated against \pkg{harmonicmeanp}.
 }

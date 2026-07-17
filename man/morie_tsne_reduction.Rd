@@ -21,7 +21,8 @@ morie_tsne_reduction(
 
 \item{perplexity}{t-SNE perplexity.}
 
-\item{learning_rate}{Unused by Rtsne (kept for API parity).}
+\item{learning_rate}{Gradient-descent learning rate; \code{"auto"}
+selects \code{max(n/12, 50)}.}
 
 \item{n_iter}{Max iterations.}
 
@@ -37,7 +38,13 @@ Named list: estimate (shape), embedding, kl_divergence,
 perplexity, n_components, n, method.
 }
 \description{
-Wraps \code{Rtsne::Rtsne}.
+Native exact t-SNE (van der Maaten & Hinton 2008): perplexity-
+calibrated Gaussian affinities via per-point binary search, PCA
+preprocessing to 50 components, early exaggeration, and momentum
+gradient descent on the KL divergence. O(n^2) -- appropriate for
+the module-scale inputs this helper serves. Replaces the
+\pkg{Rtsne} delegation; embedding quality is cross-validated
+against Rtsne in tests (KL divergence + neighbourhood recall).
 }
 \examples{
 # See the package vignettes for usage examples:

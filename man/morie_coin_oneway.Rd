@@ -17,10 +17,10 @@ a (multi-level) factor.}
 \code{teststat}).}
 }
 \value{
-A list with \code{$method = "coin::oneway_test"} and
-\code{$raw} (an \code{IndependenceTest} object).
+A list with \code{$method}, \code{$statistic},
+\code{$p.value} and \code{$raw}.
 }
 \description{
-Thin extender over \code{coin::oneway_test} for the
-permutation analogue of the classical one-way ANOVA.
+Native one-way (Fisher-Pitman) permutation test
+(\code{\link{morie_oneway_test}}), the permutation ANOVA.
 }

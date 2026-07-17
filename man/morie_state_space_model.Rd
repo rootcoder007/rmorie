@@ -14,7 +14,12 @@ Named list with \code{filtered_state, filtered_state_variance,
   smoothed_state, loglik, Q, R, n, method}.
 }
 \description{
-Local-level state-space model (Kalman filter+smoother)
+Native local-level (random-walk-plus-noise) model: the observation
+and state variances are estimated by maximum likelihood on the
+prediction-error decomposition, then the series is filtered and
+smoothed (Rauch-Tung-Striebel). Equivalent to the
+\code{dlm::dlmModPoly(1)} + \code{dlmMLE} + \code{dlmFilter} +
+\code{dlmSmooth} pipeline it replaces, cross-validated in tests.
 }
 \examples{
 morie_state_space_model(x = rnorm(50))

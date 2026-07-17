@@ -24,7 +24,8 @@ morie_sobol_sequence(N = 128L, d = 1L, f = NULL, scramble = TRUE, seed = 42L)
 list: sample, estimate (if f given), se, N, d, method.
 }
 \description{
-Thin wrapper over \code{randtoolbox::sobol} (low-discrepancy in the unit cube of dimension d).
-Falls back to a pure-R Halton sequence if randtoolbox is unavailable.
+Native gray-code Sobol sequence with Joe-Kuo direction numbers
+(low-discrepancy in the unit cube, d <= 10); matches
+\code{randtoolbox::sobol}'s unscrambled output exactly.
 }
 \keyword{internal}

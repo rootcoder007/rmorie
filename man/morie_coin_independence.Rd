@@ -16,12 +16,10 @@ morie_coin_independence(formula, data, ...)
 \code{teststat}, \code{ytrafo}, \code{xtrafo}).}
 }
 \value{
-A list with \code{$method =
-  "coin::independence_test"} and \code{$raw} (an \code{IndependenceTest}
-object).
+A list with \code{$method}, \code{$statistic},
+\code{$p.value} and \code{$raw} (the native test result).
 }
 \description{
-Thin extender over \code{coin::independence_test} for
-conditional / permutation tests of independence between
-arbitrary response and covariate combinations.
+Native conditional permutation test of independence
+(\code{\link{morie_indep_test}}) between a response and covariate.
 }

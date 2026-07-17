@@ -52,7 +52,7 @@ print.morie_weight <- function(x, ...) {
 #' @param stabilize Multiply by the marginal treatment probability
 #'   (stabilized IPW). Default FALSE.
 #' @param trim Optional symmetric propensity trim, e.g. 0.01 clips
-#'   scores to [0.01, 0.99].
+#'   scores to the interval 0.01 to 0.99.
 #' @return A \code{morie_weight} object.
 #' @references Austin (2009); Robins, Hernan & Brumback (2000).
 #' @examples
@@ -115,6 +115,9 @@ morie_weight_entropy <- function(data, treatment, covariates) {
 #' checked after the fact.
 #'
 #' @inheritParams morie_weight_ps
+#' @param max_iter Maximum damped-Newton iterations. Default 100.
+#' @param tol Convergence tolerance on the balance-moment norm.
+#'   Default 1e-10.
 #' @return A \code{morie_weight} object.
 #' @references Imai & Ratkovic (2014) JRSS-B 76(1).
 #' @examples

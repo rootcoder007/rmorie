@@ -19,7 +19,8 @@ morie_mvrnorm(n = 1, mu, Sigma, tol = 1e-06, empirical = FALSE)
 \code{mu}/\code{Sigma} exactly (as in MASS).}
 }
 \value{
-A length-p vector when \code{n == 1}, else an \code{n x p} matrix.
+A length-p vector when \code{n == 1}, else an \code{n x p}
+matrix.
 }
 \description{
 Draws from \eqn{N(\mu, \Sigma)} using the symmetric eigen
@@ -27,11 +28,11 @@ decomposition, matching \code{MASS::mvrnorm} exactly -- including its
 RNG consumption (\code{rnorm(p * n)} in the same order), so under a
 common seed the draws are identical.
 }
-\references{
-Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
-Applied Statistics with S}. Springer.
-}
 \examples{
 set.seed(1)
 morie_mvrnorm(3, mu = c(0, 0), Sigma = diag(2))
+}
+\references{
+Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
+Applied Statistics with S}. Springer.
 }

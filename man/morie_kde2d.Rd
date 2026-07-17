@@ -16,7 +16,8 @@ morie_kde2d(x, y, h, n = 25, lims = c(range(x), range(y)))
 \item{lims}{Grid limits \code{c(xlo, xhi, ylo, yhi)}.}
 }
 \value{
-A list \code{list(x, y, z)} (grid axes and the n1 x n2 density matrix).
+A list \code{list(x, y, z)} (grid axes and the n1 x n2
+density matrix).
 }
 \description{
 Gaussian-kernel 2-D density on a regular grid, matching

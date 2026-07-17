@@ -14,8 +14,8 @@ morie_polr(formula, data, weights, method = "logistic")
 \item{method}{\code{"logistic"} (default) or \code{"probit"}.}
 }
 \value{
-A \code{morie_polr} object (with \code{$deviance}, \code{$coefficients},
-\code{$zeta}).
+A \code{morie_polr} object (with \code{$deviance},
+\code{$coefficients}, \code{$zeta}).
 }
 \description{
 Proportional-odds ordinal regression by direct maximum likelihood on

@@ -4,8 +4,12 @@
 \alias{morie_wilcox_test}
 \title{Native Wilcoxon rank-sum permutation test}
 \usage{
-morie_wilcox_test(formula, data, alternative = "two.sided",
-  distribution = "asymptotic")
+morie_wilcox_test(
+  formula,
+  data,
+  alternative = "two.sided",
+  distribution = "asymptotic"
+)
 }
 \arguments{
 \item{formula}{\code{y ~ group}, \code{group} a two-level factor.}

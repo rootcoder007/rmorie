@@ -28,8 +28,8 @@ Named list: estimate, coef_path, alphas, penalty, l1_ratio,
 n, method.
 }
 \description{
-Wraps \code{glmnet::glmnet}.  Returns the coefficient path across
-the supplied \code{alphas} (lambda grid in glmnet terminology).
+Native warm-started coordinate-descent path. Returns the coefficient path across
+the supplied \code{alphas} (lambda grid).
 }
 \examples{
 # See the package vignettes for usage examples:

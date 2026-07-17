@@ -116,7 +116,7 @@ Rcpp::IntegerVector morie_match_optimal_assign_cpp(Rcpp::NumericMatrix treated,
     p[0] = i;
     int j0 = 0;
     std::vector<double> minv(nc + 1, inf);
-    std::vector<char> used(nc + 1, 0);
+    std::vector<int> used(nc + 1, 0);
     do {
       used[j0] = 1;
       const int i0 = p[j0];
