@@ -238,9 +238,18 @@ morie_siu_cache_path <- function(cache_dir = file.path(tempdir(), "morie", "siu"
   if (!nzchar(rec$police_service)) {
     # 2026-07 layout: no labelled field, but the prose wraps every
     # force mention in <abbr title="Waterloo Regional Police Service">.
+    # A report can reference several forces (e.g. OPP assisting a
+    # municipal service); the subject service is the one mentioned
+    # most often, so take the modal abbr title.
     abbr_pat <- '<abbr title="([^"]*(?:Police|Provincial)[^"]*)"'
-    m <- regmatches(html, regexec(abbr_pat, html, perl = TRUE))[[1L]]
-    if (length(m) >= 2L) rec$police_service <- trimws(m[2L])
+    hits <- regmatches(html, gregexpr(abbr_pat, html, perl = TRUE))[[1L]]
+    if (length(hits)) {
+      names_all <- vapply(regmatches(hits,
+        regexec(abbr_pat, hits, perl = TRUE)),
+        function(g) trimws(g[2L]), character(1L))
+      tab <- sort(table(names_all), decreasing = TRUE)
+      rec$police_service <- names(tab)[1L]
+    }
   }
 
   dec_pat <- paste0(
