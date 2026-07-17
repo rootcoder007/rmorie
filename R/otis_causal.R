@@ -64,15 +64,9 @@ NULL
 # numeric NAs -> 0; integer -> as-integer. Mirrors python _binarise.
 #' Internal helper: Otis Binarise
 #' @noRd
-.otis_binarise <- function(s) {
-  if (is.character(s) || is.factor(s)) {
-    v <- tolower(trimws(as.character(s)))
-    return(as.integer(v == "yes"))
-  }
-  v <- as.numeric(s)
-  v[is.na(v)] <- 0
-  as.integer(v)
-}
+# .otis_binarise() is defined once in otis.R (the more robust version:
+# logical/numeric>0/rich string set with NA preservation); shared across
+# the OTIS modules.
 
 # Build a numeric design matrix (intercept + drop-first dummies) from a
 # data frame and a vector of covariate names. Mirrors python

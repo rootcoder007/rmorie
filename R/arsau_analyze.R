@@ -170,7 +170,10 @@ NULL
     payload[[nm]] <- sub_results[[nm]]
   }
 
-  class(payload) <- c("morie_arsau_result", "morie_rich_result", "list")
+  # Carry the legacy `morie_arsau_analysis_result` class too so callers that
+  # test for either binding (the prior mrm_arsau.R shape) keep working.
+  class(payload) <- c("morie_arsau_result", "morie_arsau_analysis_result",
+                      "morie_rich_result", "list")
   payload
 }
 
@@ -618,26 +621,27 @@ morie_arsau_analyze_aggregate_summary <- function(year_range = "2020-2022",
     } else {
       mask <- rep(TRUE, nrow(df))
     }
+    # Only compute the year-over-year headline when a REPORT_SCOPE row is
+    # actually present; with no matching row there is no headline series to
+    # difference, so the section is intentionally skipped.
     if (any(mask)) {
       headline <- df[which(mask)[1L], , drop = FALSE]
-    } else {
-      headline <- df[1L, , drop = FALSE]
-    }
 
-    dfs_by_year <- list()
-    for (y in years) {
-      col <- paste0(.MORIE_ARSAU_AGG_YEAR_PREFIX, y)
-      value <- if (col %in% names(headline)) headline[[col]] else 0
-      count <- suppressWarnings(as.integer(value))
-      if (is.na(count) || count < 0L) count <- 0L
-      dfs_by_year[[as.character(y)]] <-
-        if (count > 0L) data.frame(row = seq_len(count))
-        else data.frame()
-    }
+      dfs_by_year <- list()
+      for (y in years) {
+        col <- paste0(.MORIE_ARSAU_AGG_YEAR_PREFIX, y)
+        value <- if (col %in% names(headline)) headline[[col]] else 0
+        count <- suppressWarnings(as.integer(value))
+        if (is.na(count) || count < 0L) count <- 0L
+        dfs_by_year[[as.character(y)]] <-
+          if (count > 0L) data.frame(row = seq_len(count))
+          else data.frame()
+      }
 
-    sub_results$yoy_change_headline <- mrm_uof_yoy_change(
-      dfs_by_year = dfs_by_year
-    )
+      sub_results$yoy_change_headline <- mrm_uof_yoy_change(
+        dfs_by_year = dfs_by_year
+      )
+    }
   }
 
   sub_results$data_quality <- mrm_uof_data_quality_audit(
@@ -732,4 +736,25 @@ morie_arsau_analyze_detailed_dataset <- function(year_range = "2020-2022",
     language      = language,
     is_valid      = loaded$is_valid
   )
+}
+
+
+#' @return Invisibly returns \code{x} unchanged.
+#' @export
+print.morie_arsau_analysis_result <- function(x, ...) {
+  cat(x$title, "\n", strrep("=", nchar(x$title)), "\n", sep = "")
+  if (length(x$summary_lines) > 0L) {
+    nms <- names(x$summary_lines)
+    label_w <- max(nchar(nms))
+    for (i in seq_along(x$summary_lines)) {
+      cat(sprintf("  %-*s  %s\n", label_w, nms[i], format(x$summary_lines[[i]])))
+    }
+    cat("\n")
+  }
+  if (length(x$warnings) > 0L) {
+    for (w in x$warnings) cat("Warning:", w, "\n")
+    cat("\n")
+  }
+  cat(x$interpretation, "\n")
+  invisible(x)
 }
