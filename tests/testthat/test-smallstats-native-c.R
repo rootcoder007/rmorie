@@ -87,9 +87,54 @@ test_that(".morie_gee_poisson_exch matches geepack::geeglm", {
 })
 
 test_that("StatCan pid normalization is correct (offline)", {
-  # Exercise only the pure id-normalization logic; the network fetch
-  # is covered by the opt-in live test below.
   expect_error(.morie_statcan_wds_table("bad-id"), "8-digit")
+})
+
+test_that("StatCan WDS client parses a mocked full-table response", {
+  # Mock every network/filesystem touchpoint with the parser's expected
+  # shapes: the WDS metadata JSON, the zip download, and the archive
+  # listing. The CSV itself is a real file read through the real
+  # read.csv path -- only the wire is fake.
+  fixture_csv <- file.path(tempdir(), "35100026.csv")
+  writeLines(c(
+    "\"REF_DATE\",\"GEO\",\"DGUID\",\"COORDINATE\",\"VALUE\"",
+    "\"2020\",\"Canada\",\"2016A000011124\",\"1.1.1\",42.5",
+    "\"2021\",\"Canada\",\"2016A000011124\",\"1.1.1\",43.1"
+  ), fixture_csv)
+  meta_csv <- file.path(tempdir(), "35100026_MetaData.csv")
+  writeLines("\"meta\"", meta_csv)
+
+  testthat::local_mocked_bindings(
+    readLines = function(con, ...) {
+      # The metadata endpoint must have been called with the derived pid.
+      expect_match(con, "getFullTableDownloadCSV/35100026/en")
+      '{"status":"SUCCESS","object":"https://www150.statcan.gc.ca/n1/tbl/csv/35100026-eng.zip"}'
+    },
+    .package = "base"
+  )
+  testthat::local_mocked_bindings(
+    download.file = function(url, destfile, ...) {
+      expect_match(url, "35100026-eng\\.zip")
+      file.create(destfile)
+      0L
+    },
+    unzip = function(zipfile, exdir, ...) c(fixture_csv, meta_csv),
+    .package = "utils"
+  )
+  df <- .morie_statcan_wds_table("35-10-0026")
+  expect_true(is.data.frame(df))
+  expect_equal(nrow(df), 2L)
+  expect_true(all(c("REF_DATE", "GEO", "VALUE") %in% names(df)))
+  # The _MetaData.csv companion must be excluded from parsing.
+  expect_equal(as.numeric(df$VALUE), c(42.5, 43.1))
+})
+
+test_that("StatCan WDS client errors cleanly on a bad metadata payload", {
+  testthat::local_mocked_bindings(
+    readLines = function(con, ...) '{"status":"FAILED"}',
+    .package = "base"
+  )
+  expect_error(.morie_statcan_wds_table("35-10-0026"), "download URL")
 })
 
 test_that("StatCan WDS fetch returns the raw CSV schema (live, opt-in)", {
