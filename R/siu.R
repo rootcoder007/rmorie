@@ -835,7 +835,11 @@ morie_siu_refresh_manifest <- function(
 #' Internal helper: Siu Read Html Cache
 #' @noRd
 .siu_read_html_cache <- function(html_dir, name) {
-  p <- file.path(html_dir, name)
+  if (!length(html_dir) || !length(name) ||
+      !nzchar(html_dir[1L]) || !nzchar(name[1L])) {
+    return("")
+  }
+  p <- file.path(html_dir[1L], name[1L])
   if (!file.exists(p)) {
     return("")
   }
@@ -1608,13 +1612,45 @@ morie_siu_llm_extract <- function(case_number, model = c("ollama", "gemini"),
                                   cache_dir = file.path(tempdir(), "morie", "siu"),
                                   max_html_chars = 80000L,
                                   mock_response_text = NULL) {
-  audit <- morie_siu_audit_case(case_number,
-    cache_dir = cache_dir,
-    fetch_if_missing = is.null(mock_response_text)
+  audit <- tryCatch(
+    morie_siu_audit_case(case_number,
+      cache_dir = cache_dir,
+      fetch_if_missing = is.null(mock_response_text)
+    ),
+    error = function(e) NULL
   )
-  html <- audit$report_html
+  html <- if (!is.null(audit)) audit$report_html else ""
+  if (is.null(html) || !nzchar(html)) {
+    # Self-serve path: no harvester cache present. Resolve the case's
+    # drid through the bundled manifest and fetch the report page
+    # directly -- anomaly_check then needs nothing but a case number.
+    man <- tryCatch(.siu_load_manifest(), error = function(e) NULL)
+    drid <- if (!is.null(man)) {
+      lang_col <- intersect(c("X_language", "_language"), names(man))
+      lang <- if (length(lang_col)) man[[lang_col[1L]]] else "en"
+      hit <- man[man$case_number == case_number &
+                   lang %in% c("en", "unknown"), , drop = FALSE]
+      if (nrow(hit)) hit$drid[1L] else NA_integer_
+    } else NA_integer_
+    if (is.finite(drid)) {
+      html <- tryCatch(.siu_fetch_http_get(paste0(
+        "https://www.siu.on.ca/en/directors_report_details.php?drid=",
+        drid)), error = function(e) "")
+    }
+    if (is.null(audit)) {
+      # Minimal row from the lightweight scraper cache when present.
+      csv <- file.path(cache_dir, "SIU.csv")
+      row <- if (file.exists(csv)) {
+        d <- utils::read.csv(csv, stringsAsFactors = FALSE)
+        d[d$case_number == case_number, , drop = FALSE]
+      } else data.frame(case_number = case_number,
+                        stringsAsFactors = FALSE)
+      audit <- list(row = row, report_html = html)
+    }
+  }
   if (!nzchar(html)) {
-    stop("No HTML available for '", case_number, "'.",
+    stop("No HTML available for '", case_number, "': not in the ",
+      "bundled manifest and no cache under cache_dir.",
       call. = FALSE
     )
   }
@@ -1697,13 +1733,45 @@ morie_siu_anomaly_check <- function(case_number,
                                     cache_dir = file.path(tempdir(), "morie", "siu"),
                                     max_html_chars = 80000L,
                                     mock_response_text = NULL) {
-  audit <- morie_siu_audit_case(case_number,
-    cache_dir = cache_dir,
-    fetch_if_missing = is.null(mock_response_text)
+  audit <- tryCatch(
+    morie_siu_audit_case(case_number,
+      cache_dir = cache_dir,
+      fetch_if_missing = is.null(mock_response_text)
+    ),
+    error = function(e) NULL
   )
-  html <- audit$report_html
+  html <- if (!is.null(audit)) audit$report_html else ""
+  if (is.null(html) || !nzchar(html)) {
+    # Self-serve path: no harvester cache present. Resolve the case's
+    # drid through the bundled manifest and fetch the report page
+    # directly -- anomaly_check then needs nothing but a case number.
+    man <- tryCatch(.siu_load_manifest(), error = function(e) NULL)
+    drid <- if (!is.null(man)) {
+      lang_col <- intersect(c("X_language", "_language"), names(man))
+      lang <- if (length(lang_col)) man[[lang_col[1L]]] else "en"
+      hit <- man[man$case_number == case_number &
+                   lang %in% c("en", "unknown"), , drop = FALSE]
+      if (nrow(hit)) hit$drid[1L] else NA_integer_
+    } else NA_integer_
+    if (is.finite(drid)) {
+      html <- tryCatch(.siu_fetch_http_get(paste0(
+        "https://www.siu.on.ca/en/directors_report_details.php?drid=",
+        drid)), error = function(e) "")
+    }
+    if (is.null(audit)) {
+      # Minimal row from the lightweight scraper cache when present.
+      csv <- file.path(cache_dir, "SIU.csv")
+      row <- if (file.exists(csv)) {
+        d <- utils::read.csv(csv, stringsAsFactors = FALSE)
+        d[d$case_number == case_number, , drop = FALSE]
+      } else data.frame(case_number = case_number,
+                        stringsAsFactors = FALSE)
+      audit <- list(row = row, report_html = html)
+    }
+  }
   if (!nzchar(html)) {
-    stop("No HTML available for '", case_number, "'.",
+    stop("No HTML available for '", case_number, "': not in the ",
+      "bundled manifest and no cache under cache_dir.",
       call. = FALSE
     )
   }
