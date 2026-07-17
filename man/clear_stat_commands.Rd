@@ -15,8 +15,8 @@ Reset the registry (test / debugging helper)
 \examples{
 n_cleared <- clear_stat_commands()
 n_stat_commands()
-morie:::.morie_seed_stat_commands()
-morie:::.morie_auto_register_stat_commands()
+rmorie:::.morie_seed_stat_commands()
+rmorie:::.morie_auto_register_stat_commands()
 n_stat_commands()
 }
 \keyword{internal}

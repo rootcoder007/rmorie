@@ -48,3 +48,6 @@ Empirical distribution on the included OT data:
 \item 1 split+merge                               -- one sliver < 100
 }
 }
+\examples{
+head(morie_to_hood_crosswalk())
+}

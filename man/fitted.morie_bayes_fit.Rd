@@ -17,3 +17,10 @@ Numeric fitted values.
 \description{
 Posterior fitted values (on the response scale)
 }
+\examples{
+\donttest{
+d <- data.frame(x = rnorm(50)); d$y <- 1 + 2 * d$x + rnorm(50)
+fit <- morie_bayes_lm(y ~ x, d, chains = 2, iter = 500, warmup = 200)
+head(fitted(fit))
+}
+}

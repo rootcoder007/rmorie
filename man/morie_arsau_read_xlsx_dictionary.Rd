@@ -27,6 +27,12 @@ the CSV that holds the column-level data dictionary (variable name
 dependency.
 }
 }
+\examples{
+\dontrun{
+# Point at a downloaded ARSAU data-dictionary workbook:
+d <- try(morie_arsau_read_xlsx_dictionary("arsau_dictionary.xlsx"))
+}
+}
 \references{
 Ontario Ministry of the Solicitor General data
 dictionaries accompanying the ARSAU CSV releases.

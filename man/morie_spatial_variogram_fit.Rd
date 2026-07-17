@@ -22,3 +22,9 @@ Gaussian covariance model by maximizing the Gaussian log-likelihood
 of the (constant-mean) data, via \code{stats::optim} on a log
 parameterization.
 }
+\examples{
+set.seed(1)
+coords <- cbind(runif(60, 0, 10), runif(60, 0, 10))
+values <- coords[, 1] * 0.5 + rnorm(60, 0, 0.3)
+str(morie_spatial_variogram_fit(coords, values), max.level = 1)
+}

@@ -331,6 +331,11 @@ morie_json_stringify <- function(x, auto_unbox = TRUE) {
 #'   \code{on_start(tag, attrs)}, \code{on_text(text)},
 #'   \code{on_end(tag)}.
 #' @return Invisibly, the number of elements seen.
+#' @examples
+#' starts <- character(0)
+#' morie_xml_sax("<a><b>hi</b></a>",
+#'               on_start = function(tag, attrs) starts <<- c(starts, tag))
+#' starts
 #' @export
 morie_xml_sax <- function(txt, on_start = NULL, on_text = NULL,
                           on_end = NULL) {
@@ -530,6 +535,11 @@ morie_fetch_html <- function(txt) {
 #' @param path File path.
 #' @param sep Field separator ("," or "\\t").
 #' @return A data frame.
+#' @examples
+#' tf <- tempfile(fileext = ".csv")
+#' utils::write.csv(data.frame(a = 1:3, b = c("x", "y", "z")), tf,
+#'                  row.names = FALSE)
+#' morie_fetch_csv(tf)
 #' @export
 morie_fetch_csv <- function(path, sep = ",") {
   utils::read.table(path, header = TRUE, sep = sep,
@@ -561,6 +571,13 @@ morie_fetch_csv <- function(path, sep = ",") {
 #' @return A data frame.
 #' @references Apache Parquet format specification (thrift compact
 #'   protocol footer; PLAIN encoding; Snappy framing).
+#' @examples
+#' if (requireNamespace("arrow", quietly = TRUE)) {
+#'   tf <- tempfile(fileext = ".parquet")
+#'   arrow::write_parquet(data.frame(a = 1:3), tf, use_dictionary = FALSE,
+#'                        compression = "snappy")
+#'   morie_fetch_parquet(tf)
+#' }
 #' @export
 morie_fetch_parquet <- function(path) {
   con <- file(path, "rb")
@@ -592,10 +609,12 @@ morie_fetch_parquet <- function(path) {
     chunks <- rg[["1"]]
     for (ci in seq_along(chunks)) {
       cmeta <- chunks[[ci]][["3"]]
-      codec <- cmeta[["3"]]
+      # Thrift ColumnMetaData: 3 = path_in_schema, 4 = codec,
+      # 5 = num_values, 9 = data_page_offset, 11 = dictionary_page_offset.
+      codec <- cmeta[["4"]]
       n_vals <- cmeta[["5"]]
       offset <- cmeta[["9"]]
-      if (is.null(offset)) offset <- cmeta[["4"]]
+      if (is.null(offset)) offset <- cmeta[["11"]]
       vals <- .mpq_read_column(con, offset, codec, n_vals,
                                cols_meta[[ci]]$type)
       nm <- cols_meta[[ci]]$name

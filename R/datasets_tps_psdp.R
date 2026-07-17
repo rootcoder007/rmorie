@@ -125,6 +125,8 @@
 #' @return A `data.frame` with columns `layer_key`, `label`,
 #'   `arcgis_url`, `fixture`, `hub_id` (3TT+ canonical id matching
 #'   the TPS Hub catalog).
+#' @examples
+#' head(morie_tps_psdp_layers())
 #' @export
 morie_tps_psdp_layers <- function() {
   rows <- lapply(names(.MORIE_TPS_PSDP_REGISTRY), function(k) {
@@ -233,6 +235,11 @@ morie_datasets_tps_assault <- function(year = NULL,
 #' TPS PSDP -- Auto Theft
 #' @inheritParams morie_datasets_tps_mha_apprehensions
 #' @return A \code{data.frame}.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_autotheft(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_autotheft <- function(year = NULL,
                                            max_features = NULL,
@@ -260,6 +267,11 @@ morie_datasets_tps_bicycletheft <- function(year = NULL,
 #' TPS PSDP -- Break and Enter
 #' @inheritParams morie_datasets_tps_mha_apprehensions
 #' @return A \code{data.frame}.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_breakandenter(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_breakandenter <- function(year = NULL,
                                                max_features = NULL,
@@ -347,6 +359,11 @@ morie_datasets_tps_shooting_firearm_discharges <- function(
 #' TPS PSDP -- Theft From Motor Vehicle
 #' @inheritParams morie_datasets_tps_mha_apprehensions
 #' @return A \code{data.frame}.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_theft_from_motor_vehicle(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_theft_from_motor_vehicle <- function(
   year = NULL, max_features = NULL,
@@ -358,6 +375,11 @@ morie_datasets_tps_theft_from_motor_vehicle <- function(
 #' TPS PSDP -- Theft Over
 #' @inheritParams morie_datasets_tps_mha_apprehensions
 #' @return A \code{data.frame}.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_theft_over(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_theft_over <- function(year = NULL,
                                             max_features = NULL,

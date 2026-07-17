@@ -23,3 +23,11 @@ A \code{marginaleffects} data frame.
 Thin extender over \code{marginaleffects::predictions()} for unit-
 level or grid-level adjusted predictions.
 }
+\examples{
+if (requireNamespace("marginaleffects", quietly = TRUE)) {
+  set.seed(1)
+  df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
+  fit <- stats::lm(y ~ x + g, data = df)
+  head(morie_effects_predictions(fit))
+}
+}

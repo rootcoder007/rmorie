@@ -14,3 +14,6 @@ Always returns \code{csv}. \code{excel} requires \code{readxl}; spatial formats
 require \code{sf}. If a needed namespace isn't installed, that format
 is omitted from the returned vector.
 }
+\examples{
+morie_tps_available_formats()
+}

@@ -17,3 +17,7 @@ A \code{morie_specification_test}.
 \description{
 Score (Lagrange multiplier) test
 }
+\examples{
+set.seed(1)
+str(score_test(c(0.5, -0.2), diag(2) * 10), max.level = 1)
+}

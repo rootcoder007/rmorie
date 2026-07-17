@@ -74,6 +74,12 @@ NULL
 # ---------------------------------------------------------------------------
 
 #' @return Invisibly returns \code{x} unchanged.
+#' @examples
+#' \donttest{
+#' d <- morie_fairness_simulate_biased_crime_data(n = 100L, seed = 1L)
+#' head(d)
+#' print(d)
+#' }
 #' @export
 print.morie_fairness_result <- function(x, ...) {
   cat(x$title, "\

@@ -36,3 +36,14 @@ An object of class \code{"class_name"}.
 \description{
 Train on earlier data, test on later data
 }
+\examples{
+set.seed(1)
+X <- data.frame(x = rnorm(60), date = seq.Date(as.Date("2020-01-01"),
+                                              by = "day", length.out = 60))
+y <- X$x + rnorm(60)
+res <- try(temporal_validate(
+  fit_fn = function(Xt, yt) stats::lm(yt ~ x, data = cbind(Xt, yt = yt)),
+  predict_fn = function(m, Xt) stats::predict(m, Xt),
+  X = X, y = y, date_col = "date"))
+if (!inherits(res, "try-error")) str(res, max.level = 1)
+}

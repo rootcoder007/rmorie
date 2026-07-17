@@ -12,3 +12,7 @@ Named list: project / location / model / token_ttl_s / gcloud_path.
 \description{
 Resolve Vertex AI configuration from environment variables
 }
+\examples{
+cfg <- try(morie_vertex_resolve_config())
+class(cfg)
+}

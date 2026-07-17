@@ -433,6 +433,12 @@ estimate_ate_gcomputation <- function(data, treatment, outcome,
 #' @param gamma_range c(min, max) of Gamma. Default c(1, 3).
 #' @param n_gamma    Number of Gamma values. Default 20.
 #' @return Data frame with `Gamma`, `p_lower`, `p_upper`.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(d = rbinom(60, 1, 0.5), x1 = rnorm(60))
+#' df$y <- df$d * 0.5 + df$x1 + rnorm(60)
+#' res <- try(sensitivity_rosenbaum(df, "d", "y", "x1"))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 sensitivity_rosenbaum <- function(data, treatment, outcome,
                                   covariates,
@@ -583,6 +589,13 @@ e_value <- function(ate, se, null = 0, sd_y = 1) {
 #'   list, exactly as accepted by \code{emmeans::emmeans()}.
 #' @param ... Further arguments forwarded to \code{emmeans::emmeans()}.
 #' @return An \code{emmGrid} object.
+#' @examples
+#' if (requireNamespace("emmeans", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
+#'   fit <- stats::lm(y ~ x + g, data = df)
+#'   morie_effects_emmeans(fit, specs = "g")
+#' }
 #' @export
 morie_effects_emmeans <- function(model, specs, ...) {
   .morie_effects_require("emmeans", "morie_effects_emmeans")
@@ -601,6 +614,13 @@ morie_effects_emmeans <- function(model, specs, ...) {
 #' @param ...     Further arguments forwarded to
 #'   \code{marginaleffects::predictions()}.
 #' @return A `marginaleffects` data frame.
+#' @examples
+#' if (requireNamespace("marginaleffects", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
+#'   fit <- stats::lm(y ~ x + g, data = df)
+#'   head(morie_effects_predictions(fit))
+#' }
 #' @export
 morie_effects_predictions <- function(model, newdata = NULL, ...) {
   .morie_effects_require("marginaleffects",
@@ -625,6 +645,13 @@ morie_effects_predictions <- function(model, newdata = NULL, ...) {
 #' @param ...       Further arguments forwarded to
 #'   \code{marginaleffects::comparisons()}.
 #' @return A `marginaleffects` data frame.
+#' @examples
+#' if (requireNamespace("marginaleffects", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
+#'   fit <- stats::lm(y ~ x + g, data = df)
+#'   head(morie_effects_comparisons(fit, variables = "g"))
+#' }
 #' @export
 morie_effects_comparisons <- function(model, variables = NULL, ...) {
   .morie_effects_require("marginaleffects",
@@ -647,6 +674,13 @@ morie_effects_comparisons <- function(model, variables = NULL, ...) {
 #' @param ...       Further arguments forwarded to
 #'   \code{marginaleffects::slopes()}.
 #' @return A `marginaleffects` data frame.
+#' @examples
+#' if (requireNamespace("marginaleffects", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
+#'   fit <- stats::lm(y ~ x + g, data = df)
+#'   head(morie_effects_slopes(fit, variables = "x"))
+#' }
 #' @export
 morie_effects_slopes <- function(model, variables = NULL, ...) {
   .morie_effects_require("marginaleffects",
@@ -669,6 +703,13 @@ morie_effects_slopes <- function(model, variables = NULL, ...) {
 #' @param model A fitted model object.
 #' @param ...   Further arguments forwarded to \code{broom::tidy()}.
 #' @return A data frame with one row per model term.
+#' @examples
+#' if (requireNamespace("broom", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
+#'   fit <- stats::lm(y ~ x + g, data = df)
+#'   morie_effects_tidy(fit)
+#' }
 #' @export
 morie_effects_tidy <- function(model, ...) {
   if (requireNamespace("broom", quietly = TRUE)) {

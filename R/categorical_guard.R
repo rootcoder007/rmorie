@@ -181,6 +181,13 @@ morie_audit_categories <- function(data, cols = NULL) {
   out
 }
 
+#' @examples
+#' \donttest{
+#' df <- data.frame(race = factor(c("1", "2", "2", "3")),
+#'                  city = c("Toronto", "toronto", "Ottawa", "Ottawa"))
+#' obj <- morie_audit_categories(df)
+#' print(obj)
+#' }
 #' @export
 print.morie_category_audit <- function(x, ...) {
   cat("Categorical audit:", nrow(x), "column(s)\n")

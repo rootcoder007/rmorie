@@ -23,7 +23,7 @@ the cross-modal coupling between EEG-power envelope and fMRI
 gradient dispersion (Bayne, Carter, Laukkonen, Slagter).
 }
 \examples{
-res <- morie:::beautiful_loop_metric(eeg = NULL, fmri = NULL)
+res <- rmorie:::beautiful_loop_metric(eeg = NULL, fmri = NULL)
 res$score_dmt
 }
 \references{

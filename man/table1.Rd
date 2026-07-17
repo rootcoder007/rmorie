@@ -56,3 +56,11 @@ A vector of the computed values.
 \description{
 Table 1 (baseline characteristics) stratified by group
 }
+\examples{
+set.seed(1)
+df <- data.frame(g = rep(c("a", "b"), 25), age = rnorm(50, 40, 10),
+                 sex = sample(c("m", "f"), 50, TRUE))
+res <- try(table1(df, group_col = "g", continuous_vars = "age",
+                  categorical_vars = "sex"))
+if (!inherits(res, "try-error")) head(res)
+}

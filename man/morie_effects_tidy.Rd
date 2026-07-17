@@ -21,3 +21,11 @@ installed, falls back to building a tidy-style data frame from
 core \code{term / estimate / std.error / statistic / p.value} columns
 on the model classes (\code{lm} / \code{glm}) that rmorie ships.
 }
+\examples{
+if (requireNamespace("broom", quietly = TRUE)) {
+  set.seed(1)
+  df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
+  fit <- stats::lm(y ~ x + g, data = df)
+  morie_effects_tidy(fit)
+}
+}

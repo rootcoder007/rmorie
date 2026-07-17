@@ -32,3 +32,8 @@ A character string.
 \description{
 Descriptive statistics for a set of variables
 }
+\examples{
+set.seed(1)
+df <- data.frame(age = rnorm(50, 40, 10), score = rnorm(50))
+summary_statistics_table(df)
+}

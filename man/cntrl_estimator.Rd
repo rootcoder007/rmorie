@@ -31,7 +31,7 @@ estimator.
 set.seed(5)
 y <- rnorm(100, mean = 2)
 cc <- y + rnorm(100, sd = 0.5)
-res <- morie:::cntrl_estimator(y, cc, mean(cc))
+res <- rmorie:::cntrl_estimator(y, cc, mean(cc))
 res$estimate
 }
 \keyword{internal}

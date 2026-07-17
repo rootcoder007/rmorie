@@ -52,6 +52,14 @@ equivalent. The wrapper is documented as an extender so that
 downstream rmorie callers have a stable \code{morie_*} entry point
 to the package.
 }
+\examples{
+set.seed(1)
+x <- cumsum(rnorm(100))
+y <- 1.5 * x + rnorm(100); y[71:100] <- y[71:100] + 5
+df <- data.frame(y = y, x = x)
+res <- try(morie_causal_impact(df, c(1, 70), c(71, 100)))
+if (!inherits(res, "try-error")) str(res, max.level = 1)
+}
 \references{
 Brodersen KH, Gallusser F, Koehler J, Remy N, Scott SL (2015).
 Inferring causal impact using Bayesian structural time-series

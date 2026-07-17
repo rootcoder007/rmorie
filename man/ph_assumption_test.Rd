@@ -27,3 +27,9 @@ covariate.
 \description{
 Correlates each covariate with rank-transformed event times.
 }
+\examples{
+set.seed(1)
+res <- try(ph_assumption_test(rexp(60), rbinom(60, 1, 0.7),
+                              matrix(rnorm(120), ncol = 2)))
+if (!inherits(res, "try-error")) str(res, max.level = 1)
+}

@@ -24,6 +24,12 @@ A data frame with \code{dist} (bin centre), \code{gamma}
 Classical Matheron estimator: half the average squared difference
 of values within each distance bin.
 }
+\examples{
+set.seed(1)
+coords <- cbind(runif(60, 0, 10), runif(60, 0, 10))
+values <- coords[, 1] * 0.5 + rnorm(60, 0, 0.3)
+str(morie_spatial_variogram(coords, values), max.level = 1)
+}
 \references{
 Matheron, G. (1963). Principles of geostatistics.
 \emph{Economic Geology}, 58(8), 1246--1266.

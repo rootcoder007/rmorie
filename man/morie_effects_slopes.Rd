@@ -22,3 +22,11 @@ A \code{marginaleffects} data frame.
 Thin extender over \code{marginaleffects::slopes()} for continuous
 marginal effects (Stata-style \code{margins, dydx()}).
 }
+\examples{
+if (requireNamespace("marginaleffects", quietly = TRUE)) {
+  set.seed(1)
+  df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
+  fit <- stats::lm(y ~ x + g, data = df)
+  head(morie_effects_slopes(fit, variables = "x"))
+}
+}

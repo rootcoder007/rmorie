@@ -52,4 +52,10 @@ df <- data.frame(
 morie_run_treatment_effects_analysis(df,
   treatment = "t", outcome = "y", covariates = c("x1", "x2")
 )
+set.seed(1)
+df <- data.frame(d = rbinom(80, 1, 0.4), x1 = rnorm(80), x2 = rnorm(80))
+df$y <- df$d + df$x1 + rnorm(80)
+res <- try(morie_run_treatment_effects_analysis(df, "d", "y",
+                                                c("x1", "x2")))
+if (!inherits(res, "try-error")) str(res, max.level = 1)
 }

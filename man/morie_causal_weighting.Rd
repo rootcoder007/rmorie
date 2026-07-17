@@ -50,6 +50,13 @@ the underlying object so callers can pipe into
 Hard-errors if \pkg{WeightIt} is not installed -- the multi-method
 weighting machinery has no compact inline equivalent.
 }
+\examples{
+set.seed(1)
+df <- data.frame(d = rbinom(80, 1, 0.4), x1 = rnorm(80), x2 = rnorm(80))
+df$y <- df$d + df$x1 + rnorm(80)
+res <- try(morie_causal_weighting(df, "d", c("x1", "x2")))
+if (!inherits(res, "try-error")) str(res, max.level = 1)
+}
 \references{
 Greifer N (2024). WeightIt: Weighting for Covariate Balance in
 Observational Studies. R package version 1.4.0.

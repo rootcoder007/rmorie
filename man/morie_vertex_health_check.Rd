@@ -12,3 +12,9 @@ Named list (ok / error / model / project / location / reply).
 \description{
 Tiny smoke test for the Vertex AI client
 }
+\examples{
+\dontrun{
+# Requires Vertex AI credentials:
+morie_vertex_health_check()
+}
+}

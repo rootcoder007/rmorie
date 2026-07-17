@@ -262,6 +262,19 @@ mrm_threshold_specific_ordinal <- function(
 #' @param x A result from \code{\link{mrm_threshold_specific_ordinal}}.
 #' @param covariate Character, name of one covariate.
 #' @return A named numeric vector keyed by threshold label.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(
+#'   y = sample(c("low", "med", "high"), 200, replace = TRUE),
+#'   race = rbinom(200, 1, 0.4),
+#'   age  = rnorm(200)
+#' )
+#' fit <- mrm_threshold_specific_ordinal(df,
+#'   outcome_col = "y",
+#'   covariate_cols = c("race", "age"),
+#'   ordinal_levels = c("low", "med", "high")
+#' )
+#' str(mrm_threshold_coefficient(fit, "race"), max.level = 1)
 #' @export
 mrm_threshold_coefficient <- function(x, covariate) {
   stopifnot(inherits(x, "mrm_threshold_specific_ordinal"),

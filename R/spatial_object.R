@@ -310,6 +310,12 @@ morie_spatial_leaflet_spec <- function(x) {
 #' @param ... Passed to [plot()].
 #' @return `NULL`, invisibly. Longitude/easting on x, latitude/northing on
 #'   y, with units in the axis labels.
+#' @examples
+#' \donttest{
+#' d <- data.frame(lon = c(-79, -80), lat = c(43, 44), v = c(1, 2))
+#' obj <- morie_spatial(d, c("lon", "lat"))
+#' plot(obj)
+#' }
 #' @export
 plot.morie_spatial <- function(x, ...) {
   plot(x$coords[, 1], x$coords[, 2],
@@ -322,6 +328,12 @@ plot.morie_spatial <- function(x, ...) {
 #' @param x A `morie_spatial`.
 #' @param ... Unused.
 #' @return `x`, invisibly.
+#' @examples
+#' \donttest{
+#' d <- data.frame(lon = c(-79, -80), lat = c(43, 44), v = c(1, 2))
+#' obj <- morie_spatial(d, c("lon", "lat"))
+#' print(obj)
+#' }
 #' @export
 print.morie_spatial <- function(x, ...) {
   cat(sprintf("<morie_spatial> n=%d  EPSG:%s (%s)\n", x$n, x$crs, x$units))

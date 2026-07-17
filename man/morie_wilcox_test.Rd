@@ -29,3 +29,8 @@ rank-transformed (midranks) and the standardized sum of ranks in the
 second group is referred to the normal (asymptotic) or exact
 permutation distribution.
 }
+\examples{
+set.seed(1)
+df <- data.frame(y = rnorm(40), g = factor(rep(c("a", "b"), 20)))
+str(morie_wilcox_test(y ~ g, df), max.level = 1)
+}

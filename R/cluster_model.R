@@ -151,6 +151,13 @@ predict.morie_cluster <- function(object, newdata, ...) {
 #' @param max_rows Maximum assignment rows to print.
 #' @param ... Unused.
 #' @return `x`, invisibly.
+#' @examples
+#' \donttest{
+#' # with vs without scaling changes which columns drive the clusters
+#' morie_cluster(iris[1:4], k = 3)
+#' obj <- morie_cluster(iris[1:4], k = 3, scale = TRUE)
+#' print(obj)
+#' }
 #' @export
 print.morie_cluster <- function(x, max_rows = 10L, ...) {
   cat(sprintf("<morie_cluster> k=%d  n=%d\n", x$k, x$n_obs))
@@ -164,6 +171,13 @@ print.morie_cluster <- function(x, max_rows = 10L, ...) {
 #' @param object A `morie_cluster`.
 #' @param ... Unused.
 #' @return A data.frame with per-cluster size and within-cluster SS.
+#' @examples
+#' \donttest{
+#' # with vs without scaling changes which columns drive the clusters
+#' morie_cluster(iris[1:4], k = 3)
+#' obj <- morie_cluster(iris[1:4], k = 3, scale = TRUE)
+#' summary(obj)
+#' }
 #' @export
 summary.morie_cluster <- function(object, ...) {
   data.frame(cluster = seq_len(object$k), size = object$sizes,
@@ -174,6 +188,13 @@ summary.morie_cluster <- function(object, ...) {
 #' @param x A `morie_cluster`.
 #' @param ... Passed to [plot()].
 #' @return `NULL`, invisibly.
+#' @examples
+#' \donttest{
+#' # with vs without scaling changes which columns drive the clusters
+#' morie_cluster(iris[1:4], k = 3)
+#' obj <- morie_cluster(iris[1:4], k = 3, scale = TRUE)
+#' plot(obj)
+#' }
 #' @export
 plot.morie_cluster <- function(x, ...) {
   ctr <- x$centers
@@ -190,6 +211,13 @@ plot.morie_cluster <- function(x, ...) {
 #' @param x A `morie_cluster_spec`.
 #' @param ... Unused.
 #' @return `x`, invisibly.
+#' @examples
+#' \donttest{
+#' # with vs without scaling changes which columns drive the clusters
+#' morie_cluster(iris[1:4], k = 3)
+#' obj <- morie_cluster(iris[1:4], k = 3, scale = TRUE)
+#' print(obj)
+#' }
 #' @export
 print.morie_cluster_spec <- function(x, ...) {
   cat(sprintf("<morie_cluster_spec> (unfitted) k=%d scale=%s\n", x$k, x$scale))

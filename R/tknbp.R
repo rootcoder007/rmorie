@@ -7,7 +7,7 @@
 #' @return Named list with merges, vocab, corpus, n_merges, n_vocab, method.
 #' @keywords internal
 #' @examples
-#' res <- morie:::bpe_tokenizer("low lower lowest low", num_merges = 5L)
+#' res <- rmorie:::bpe_tokenizer("low lower lowest low", num_merges = 5L)
 #' res$n_merges
 #' head(res$vocab)
 bpe_tokenizer <- function(x, num_merges = 10L) {

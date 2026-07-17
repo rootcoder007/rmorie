@@ -202,6 +202,15 @@ NULL
 #' @return A \code{morie_rich_result} list with \code{mu},
 #'   \code{kappa}, \code{omega}, \code{branching}, \code{nll},
 #'   \code{aic}, \code{bic}.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(OCC_YEAR = rep(2014:2023, each = 30),
+#'                  OCC_MONTH = sample(month.name, 300, TRUE),
+#'                  HOOD_158 = sample(sprintf("%03d", 1:20), 300, TRUE),
+#'                  LAT_WGS84 = runif(300, 43.6, 43.8),
+#'                  LONG_WGS84 = runif(300, -79.5, -79.2))
+#' res <- try(morie_tps_hawkes_temporal_fit(df, ds_name = "synthetic"))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 morie_tps_hawkes_temporal_fit <- function(df, ds_name = "?",
                                            max_n = 5000L) {
@@ -329,6 +338,15 @@ morie_tps_hawkes_temporal_fit <- function(df, ds_name = "?",
 #' @return A \code{morie_rich_result} list with \code{aic},
 #'   \code{bic}, \code{mape_pct}, \code{rmse}, \code{forecast},
 #'   \code{actual}.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(OCC_YEAR = rep(2014:2023, each = 30),
+#'                  OCC_MONTH = sample(month.name, 300, TRUE),
+#'                  HOOD_158 = sample(sprintf("%03d", 1:20), 300, TRUE),
+#'                  LAT_WGS84 = runif(300, 43.6, 43.8),
+#'                  LONG_WGS84 = runif(300, -79.5, -79.2))
+#' res <- try(morie_tps_sarima_forecast(df, ds_name = "synthetic", h = 4L))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 morie_tps_sarima_forecast <- function(df, ds_name = "?", h = 12L,
                                        order = c(1L, 1L, 1L),
@@ -462,6 +480,15 @@ morie_tps_sarima_forecast <- function(df, ds_name = "?", h = 12L,
 #' @return A \code{morie_rich_result} list with \code{theta},
 #'   \code{mu}, \code{sigma}, \code{paths} (matrix of n_paths x
 #'   n_steps), and final-day quantiles.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(OCC_YEAR = rep(2014:2023, each = 30),
+#'                  OCC_MONTH = sample(month.name, 300, TRUE),
+#'                  HOOD_158 = sample(sprintf("%03d", 1:20), 300, TRUE),
+#'                  LAT_WGS84 = runif(300, 43.6, 43.8),
+#'                  LONG_WGS84 = runif(300, -79.5, -79.2))
+#' res <- try(morie_tps_langevin_simulate(df, ds_name = "synthetic", n_paths = 20L))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 morie_tps_langevin_simulate <- function(df, ds_name = "?",
                                          n_paths = 100L,
@@ -570,6 +597,15 @@ morie_tps_langevin_simulate <- function(df, ds_name = "?",
 #' @return A \code{morie_rich_result} list with \code{theta},
 #'   \code{mu}, \code{sigma}, \code{grid}, \code{density},
 #'   \code{stationary_peak}.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(OCC_YEAR = rep(2014:2023, each = 30),
+#'                  OCC_MONTH = sample(month.name, 300, TRUE),
+#'                  HOOD_158 = sample(sprintf("%03d", 1:20), 300, TRUE),
+#'                  LAT_WGS84 = runif(300, 43.6, 43.8),
+#'                  LONG_WGS84 = runif(300, -79.5, -79.2))
+#' res <- try(morie_tps_fokker_planck_grid(df, ds_name = "synthetic"))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 morie_tps_fokker_planck_grid <- function(df, ds_name = "?",
                                           n_grid = 64L,
@@ -677,6 +713,18 @@ morie_tps_fokker_planck_grid <- function(df, ds_name = "?",
 # ---------------------------------------------------------------------------
 
 #' @return \code{x}, invisibly.
+#' @examples
+#' \donttest{
+#' set.seed(1)
+#' df <- data.frame(OCC_YEAR = rep(2014:2023, each = 30),
+#'                  OCC_MONTH = sample(month.name, 300, TRUE),
+#'                  HOOD_158 = sample(sprintf("%03d", 1:20), 300, TRUE),
+#'                  LAT_WGS84 = runif(300, 43.6, 43.8),
+#'                  LONG_WGS84 = runif(300, -79.5, -79.2))
+#' res <- try(morie_tps_hawkes_temporal_fit(df, ds_name = "synthetic"))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
+#' print(res)
+#' }
 #' @export
 print.morie_tps_stochastic_result <- function(x, ...) {
   cat(x$title, "\

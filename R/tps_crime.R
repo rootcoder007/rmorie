@@ -90,6 +90,16 @@ NULL
 #'   of \code{dfs} are analysed; defaults to all of them.
 #' @return A \code{morie_tps_result} named list with a single
 #'   year-by-category table.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(OCC_YEAR = rep(2014:2023, each = 30),
+#'                  OCC_MONTH = sample(month.name, 300, TRUE),
+#'                  HOOD_158 = sample(sprintf("%03d", 1:20), 300, TRUE),
+#'                  LAT_WGS84 = runif(300, 43.6, 43.8),
+#'                  LONG_WGS84 = runif(300, -79.5, -79.2))
+#' dfs <- list(a = df, b = df)
+#' res <- try(morie_tps_yoy_panel(dfs))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 morie_tps_yoy_panel <- function(dfs, categories = NULL) {
   stopifnot(is.list(dfs))
@@ -176,6 +186,16 @@ morie_tps_yoy_panel <- function(dfs, categories = NULL) {
 #' @param top_n How many top/bottom neighbourhoods to surface in the
 #'   tables (default \code{25L}).
 #' @return A \code{morie_tps_result} named list.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(OCC_YEAR = rep(2014:2023, each = 30),
+#'                  OCC_MONTH = sample(month.name, 300, TRUE),
+#'                  HOOD_158 = sample(sprintf("%03d", 1:20), 300, TRUE),
+#'                  LAT_WGS84 = runif(300, 43.6, 43.8),
+#'                  LONG_WGS84 = runif(300, -79.5, -79.2))
+#' dfs <- list(a = df, b = df)
+#' res <- try(morie_tps_composite_index(dfs))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 morie_tps_composite_index <- function(dfs, categories = NULL,
                                         weights = NULL, top_n = 25L) {
@@ -298,6 +318,16 @@ morie_tps_composite_index <- function(dfs, categories = NULL,
 #' @param k_neighbours Number of nearest neighbours per row in W
 #'   (default \code{5L}).
 #' @return A \code{morie_tps_result} named list.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(OCC_YEAR = rep(2014:2023, each = 30),
+#'                  OCC_MONTH = sample(month.name, 300, TRUE),
+#'                  HOOD_158 = sample(sprintf("%03d", 1:20), 300, TRUE),
+#'                  LAT_WGS84 = runif(300, 43.6, 43.8),
+#'                  LONG_WGS84 = runif(300, -79.5, -79.2))
+#' dfs <- list(a = df, b = df)
+#' res <- try(morie_tps_bivariate_morans_i(dfs, "a", "b"))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 morie_tps_bivariate_morans_i <- function(dfs, cat_a, cat_b,
                                             k_neighbours = 5L) {
@@ -428,6 +458,16 @@ morie_tps_bivariate_morans_i <- function(dfs, cat_a, cat_b,
 #' @param dfs Named list of TPS data.frames keyed by category.
 #' @return A \code{morie_tps_result} named list with a single
 #'   correlation table.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(OCC_YEAR = rep(2014:2023, each = 30),
+#'                  OCC_MONTH = sample(month.name, 300, TRUE),
+#'                  HOOD_158 = sample(sprintf("%03d", 1:20), 300, TRUE),
+#'                  LAT_WGS84 = runif(300, 43.6, 43.8),
+#'                  LONG_WGS84 = runif(300, -79.5, -79.2))
+#' dfs <- list(a = df, b = df)
+#' res <- try(morie_tps_category_correlation_matrix(dfs))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 morie_tps_category_correlation_matrix <- function(dfs) {
   stopifnot(is.list(dfs))
@@ -493,6 +533,19 @@ morie_tps_category_correlation_matrix <- function(dfs) {
 #' @param x A \code{morie_tps_result} list.
 #' @param ... Ignored.
 #' @return \code{x}, invisibly.
+#' @examples
+#' \donttest{
+#' set.seed(1)
+#' df <- data.frame(OCC_YEAR = rep(2014:2023, each = 30),
+#'                  OCC_MONTH = sample(month.name, 300, TRUE),
+#'                  HOOD_158 = sample(sprintf("%03d", 1:20), 300, TRUE),
+#'                  LAT_WGS84 = runif(300, 43.6, 43.8),
+#'                  LONG_WGS84 = runif(300, -79.5, -79.2))
+#' dfs <- list(a = df, b = df)
+#' res <- try(morie_tps_composite_index(dfs))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
+#' print(res)
+#' }
 #' @export
 print.morie_tps_result <- function(x, ...) {
   cat(x$title, "\

@@ -302,6 +302,14 @@ morie_hawkes_fit <- function(times, end_time = NULL,
 }
 
 #' @return \code{x}, invisibly.
+#' @examples
+#' \donttest{
+#' set.seed(1)
+#' ev <- cumsum(rexp(200, rate = 2))
+#' fit <- morie_hawkes_fit(ev, kernel = "exponential")
+#' print(fit)
+#' print(fit)
+#' }
 #' @export
 print.morie_hawkes_fit <- function(x, ...) {
   cat(sprintf(

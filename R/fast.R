@@ -21,7 +21,7 @@
 #' @return numeric vector of densities
 #' @keywords internal
 #' @examples
-#' morie:::morie_normal_pdf(0, 0, 1)
+#' rmorie:::morie_normal_pdf(0, 0, 1)
 morie_normal_pdf <- function(x, mean = 0, sd = 1) {
   if (.cpp_available()) {
     morie_normal_pdf_cpp(as.numeric(x), as.numeric(mean), as.numeric(sd))
@@ -36,7 +36,7 @@ morie_normal_pdf <- function(x, mean = 0, sd = 1) {
 #' @keywords internal
 #' @return A numeric scalar: the mean of \code{x}.
 #' @examples
-#' morie:::morie_mean(1:10)
+#' rmorie:::morie_mean(1:10)
 morie_mean <- function(x) {
   if (.cpp_available()) {
     morie_mean_cpp(as.numeric(x))
@@ -71,7 +71,7 @@ morie_var <- function(x, ddof = 1) {
 #' @keywords internal
 #' @return A numeric scalar: the Pearson correlation between \code{x} and \code{y}.
 #' @examples
-#' morie:::morie_cor_pearson(1:10, 1:10)
+#' rmorie:::morie_cor_pearson(1:10, 1:10)
 morie_cor_pearson <- function(x, y) {
   if (.cpp_available()) {
     morie_cor_pearson_cpp(as.numeric(x), as.numeric(y))

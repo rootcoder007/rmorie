@@ -28,3 +28,8 @@ A list with \code{statistic} (standardized) and \code{p.value}.
 Reproduces \code{coin::independence_test} for a numeric response and
 covariate (scalar linear statistic, asymptotic normal reference).
 }
+\examples{
+set.seed(1)
+df <- data.frame(y = rnorm(40), g = factor(rep(c("a", "b"), 20)))
+str(morie_indep_test(y ~ g, df), max.level = 1)
+}

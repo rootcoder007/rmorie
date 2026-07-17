@@ -15,7 +15,7 @@
 #' set.seed(1)
 #' x <- rnorm(50)
 #' y <- x + rnorm(50)
-#' res <- morie:::copul(x, y)
+#' res <- rmorie:::copul(x, y)
 #' res$estimate
 #' @export
 copul <- function(x, y, family = c("gaussian", "clayton", "gumbel")) {

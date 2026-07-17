@@ -126,6 +126,24 @@ morie_dml_clustered <- function(data, treatment, outcome, covariates,
 }
 
 #' @return \code{x}, invisibly.
+#' @examples
+#' \donttest{
+#' set.seed(1)
+#' G <- 40L; ng <- 10L; n <- G * ng
+#' g <- rep(seq_len(G), each = ng)
+#' u <- stats::rnorm(G)[g]                       # cluster effect
+#' x <- stats::rnorm(n)
+#' d <- stats::rbinom(n, 1, stats::plogis(0.5 * x + u))
+#' y <- 2 * d + x + u + stats::rnorm(n)          # true ATE = 2
+#' df <- data.frame(y = y, d = d, x = x, corridor = g)
+#' obj <- morie_dml_clustered(df, "d", "y", "x", cluster = "corridor")$ate
+#' \references{
+#' Chernozhukov V, et al. (2018). Double/debiased machine learning.
+#' \emph{The Econometrics Journal} 21(1), C1--C68. \doi{10.1111/ectj.12097}
+#' Cameron AC, Gelbach JB, Miller DL (2011). Robust inference with multiway
+#' clustering. \emph{JBES} 29(2), 238--249. \doi{10.1198/jbes.2010.07136}
+#' print(obj)
+#' }
 #' @export
 print.morie_dml_clustered <- function(x, ...) {
   cat(sprintf("Cluster-robust DML (AIPW)\n  ATE = %.4g  SE = %.4g [%s]\n",

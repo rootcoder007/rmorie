@@ -17,6 +17,11 @@ Folds the real cepstrum to the causal half then re-exponentiates
 to produce a minimum-phase sequence with the same magnitude
 spectrum as \code{x} (approximate).
 }
+\examples{
+set.seed(1)
+x <- sin(2 * pi * 0.05 * (1:128)) + rnorm(128, 0, 0.1)
+str(morie_dsp_min_phase(x), max.level = 1)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 5;
 Oppenheim & Schafer (2010).

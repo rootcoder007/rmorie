@@ -1038,6 +1038,13 @@ morie_estimate_double_ml <- function(data, outcome, treatment, covariates,
 #'   \code{posterior_prob_causal}, and \code{summary} (the upstream
 #'   \code{CausalImpact} summary matrix), plus the original
 #'   \code{impact} object.
+#' @examples
+#' set.seed(1)
+#' x <- cumsum(rnorm(100))
+#' y <- 1.5 * x + rnorm(100); y[71:100] <- y[71:100] + 5
+#' df <- data.frame(y = y, x = x)
+#' res <- try(morie_causal_impact(df, c(1, 70), c(71, 100)))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 #' @references
 #'   Brodersen KH, Gallusser F, Koehler J, Remy N, Scott SL (2015).
@@ -1103,6 +1110,12 @@ morie_causal_impact <- function(data, pre_period, post_period,
 #'   \code{propensity_scores} (numeric vector or \code{NULL}),
 #'   \code{method}, \code{estimand}, \code{ess} (effective sample
 #'   size), and \code{weightit} (the original WeightIt object).
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(d = rbinom(80, 1, 0.4), x1 = rnorm(80), x2 = rnorm(80))
+#' df$y <- df$d + df$x1 + rnorm(80)
+#' res <- try(morie_causal_weighting(df, "d", c("x1", "x2")))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 #' @references
 #'   Greifer N (2024). WeightIt: Weighting for Covariate Balance in
@@ -1165,6 +1178,11 @@ morie_causal_weighting <- function(data, treatment, covariates,
 #'   cluster-robust paths.
 #' @srrstats {G3.1a} The available covariance methods are documented on
 #'   the \code{type} parameter above and demonstrated in the examples.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(60), x = rnorm(60))
+#' fit <- stats::lm(y ~ x, data = df)
+#' str(morie_causal_robust_se(fit), max.level = 1)
 #' @export
 #' @references
 #'   Zeileis A, Koll S, Graham N (2020). Various Versatile Variances:

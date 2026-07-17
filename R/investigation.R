@@ -224,6 +224,13 @@ morie_run_treatment_effects_analysis <- function(data, treatment, outcome,
 #' @param outcome Outcome column name.
 #' @param covariates Character vector of covariate column names.
 #' @return Named list as described above.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(d = rbinom(80, 1, 0.4), x1 = rnorm(80), x2 = rnorm(80))
+#' df$y <- df$d + df$x1 + rnorm(80)
+#' res <- try(morie_run_treatment_effects_analysis(df, "d", "y",
+#'                                                 c("x1", "x2")))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 morie_run_treatment_effects_analysis <- function(data, treatment, outcome,
                                                   covariates) {

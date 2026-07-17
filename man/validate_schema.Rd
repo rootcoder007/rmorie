@@ -19,3 +19,9 @@ An object of class \code{"class_name"}.
 \description{
 Validate a data frame against a list of column rules
 }
+\examples{
+df <- data.frame(age = c(20, 30, -1))
+rules <- list(age = list(type = "numeric", min = 0))
+res <- try(validate_schema(df, rules))
+if (!inherits(res, "try-error")) str(res, max.level = 1)
+}

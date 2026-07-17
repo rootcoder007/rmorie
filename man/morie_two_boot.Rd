@@ -24,6 +24,11 @@ Reproduces \code{simpleboot::two.boot}: bootstraps the difference
 \code{FUN(sample1) - FUN(sample2)} by stratified resampling of the
 pooled data (one stratum per sample), matching \code{boot}'s RNG.
 }
+\examples{
+set.seed(1)
+b <- morie_two_boot(rnorm(25), rnorm(25, 0.5), statistic = mean, R = 100L)
+str(b, max.level = 1)
+}
 \seealso{
 \code{\link{morie_boot_ci}}.
 }

@@ -11,7 +11,7 @@
 #' @examples
 #' set.seed(11)
 #' x <- matrix(rnorm(20 * 4), 20, 4)
-#' out <- morie:::mixture_of_experts(x)
+#' out <- rmorie:::mixture_of_experts(x)
 #' str(out)
 mixture_of_experts <- function(x, W_gate = NULL, experts = NULL,
                                top_k = 2L) {

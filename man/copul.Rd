@@ -27,7 +27,7 @@ Gumbel:   theta = 1 / (1 - tau)
 set.seed(1)
 x <- rnorm(50)
 y <- x + rnorm(50)
-res <- morie:::copul(x, y)
+res <- rmorie:::copul(x, y)
 res$estimate
 }
 \keyword{internal}

@@ -14,3 +14,6 @@ Resolves to \verb{<repo>/data/datasets/TPS/} when \code{morie} is loaded out
 of a source checkout. Users can override per-call via the \code{path}
 argument of \code{\link[=morie_tps_load_dataset]{morie_tps_load_dataset()}}.
 }
+\examples{
+morie_tps_data_dir()
+}

@@ -23,3 +23,8 @@ Reproduces \code{coin::oneway_test(y ~ group)}: the quadratic-form
 permutation analogue of one-way ANOVA, referred to the chi-square
 distribution (asymptotic).
 }
+\examples{
+set.seed(1)
+df <- data.frame(y = rnorm(40), g = factor(rep(c("a", "b"), 20)))
+str(morie_oneway_test(y ~ g, df), max.level = 1)
+}

@@ -37,6 +37,8 @@ NULL
 
 #' @rdname morie_siu_fetch
 #' @return A character string.
+#' @examples
+#' morie_siu_index_url()
 #' @export
 morie_siu_index_url <- function() {
   "https://www.siu.on.ca/en/directors_reports.php"

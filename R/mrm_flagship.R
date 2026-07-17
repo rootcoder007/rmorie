@@ -130,6 +130,15 @@ morie_mrm_reconcile <- function(primary, secondary, keys,
     class = c("morie_mrm_reconciliation", "list"))
 }
 
+#' @examples
+#' \donttest{
+#' a <- data.frame(id = 1:5, y = c(1, 2, 3, 4, 5))
+#' b <- data.frame(id = c(1:4, 9), y = c(1, 2, 3.5, 4, 9))
+#' r <- morie_mrm_reconcile(a, b, keys = "id", compare = "y")
+#' r$match_rate
+#' nrow(r$conflicts)
+#' print(r)
+#' }
 #' @export
 print.morie_mrm_reconciliation <- function(x, ...) {
   cat("MRM reconciliation\n")
@@ -286,6 +295,19 @@ morie_mrm_estimate_causal_effect <- function(data, treatment, outcome,
     class = c("morie_mrm_effect", "list"))
 }
 
+#' @examples
+#' \donttest{
+#' set.seed(1)
+#' n <- 400
+#' x <- rnorm(n)
+#' t <- rbinom(n, 1, plogis(0.5 * x))
+#' y <- 1 + 0.8 * t + 0.5 * x + rnorm(n)
+#' df <- data.frame(y = y, t = t, x = x)
+#' eff <- morie_mrm_estimate_causal_effect(df, "t", "y", "x",
+#'                                         methods = c("ate", "aipw"))
+#' eff$results$estimate
+#' print(eff)
+#' }
 #' @export
 print.morie_mrm_effect <- function(x, ...) {
   cat(morie_mrm_report(x, format = "text"), sep = "\n")

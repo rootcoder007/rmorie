@@ -88,6 +88,11 @@ morie_distribution <- function(name, ...) {
 #' @param x A `morie_distribution`.
 #' @param ... Unused.
 #' @return `x`, invisibly.
+#' @examples
+#' \donttest{
+#' obj <- morie_distribution("normal", mean = 0, sd = 1)
+#' print(obj)
+#' }
 #' @export
 print.morie_distribution <- function(x, ...) {
   cat(sprintf("<morie_distribution: %s(%s)>\n", x$name,

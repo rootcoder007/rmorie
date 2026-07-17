@@ -238,6 +238,20 @@ morie_synth_control <- function(data, outcome, unit, time,
   )
 }
 
+#' @examples
+#' \donttest{
+#' pan <- expand.grid(unit = letters[1:6], time = 1:10)
+#' pan$y <- rnorm(nrow(pan)) + as.integer(pan$time) * 0.2 +
+#'   ifelse(pan$unit == "a" & pan$time >= 7, 2, 0)
+#' fit <- morie_synth_control(pan, "y", "unit", "time",
+#'                            treated_unit = "a", treatment_time = 7)
+#' fit$att
+#' \references{
+#' Abadie, A., Diamond, A., & Hainmueller, J. (2010).
+#' Synthetic control methods for comparative case studies.
+#' \emph{JASA}, 105(490), 493--505.
+#' print(fit)
+#' }
 #' @export
 print.morie_synth <- function(x, ...) {
   cat("Synthetic control (rmorie native)\n")

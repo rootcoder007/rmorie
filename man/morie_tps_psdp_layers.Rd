@@ -14,3 +14,6 @@ the TPS Hub catalog).
 \description{
 List the TPS PSDP layers wrapped by morie
 }
+\examples{
+head(morie_tps_psdp_layers())
+}
