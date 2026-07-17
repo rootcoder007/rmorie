@@ -21,6 +21,13 @@ Compares SNR of (clean vs. clean-noisy) before filtering with SNR
 of (clean vs. clean-filtered) after; positive values mean the
 filter reduced noise relative to clean.
 }
+\examples{
+set.seed(1L)
+clean <- sin(2 * pi * seq(0, 1, length.out = 256))
+noisy <- clean + rnorm(256, sd = 0.3)
+filt <- morie_dsp_moving_average(noisy, window = 7L)
+morie_dsp_snr_improvement(noisy, clean, filt)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 3, sec. 3.2.
 }

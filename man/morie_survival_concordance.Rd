@@ -20,3 +20,9 @@ A numeric value (scalar).
 \description{
 Uses \code{survival::concordance()} (which handles ties + censoring correctly).
 }
+\examples{
+set.seed(1)
+time <- rexp(60); event <- rbinom(60, 1, 0.7)
+risk <- rnorm(60)
+morie_survival_concordance(time, event, risk)
+}

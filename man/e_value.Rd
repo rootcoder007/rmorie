@@ -28,3 +28,6 @@ installed and an outcome SD is supplied via the \code{sd_y} argument
 back to the closed-form continuous-scale RR proxy used by the
 Python port so both ports stay numerically aligned.
 }
+\examples{
+e_value(ate = 0.5, se = 0.1)
+}

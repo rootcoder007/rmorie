@@ -15,3 +15,6 @@ Numeric OR.
 \description{
 Convert Pearson r to OR via d
 }
+\examples{
+r_to_or(0.3)
+}

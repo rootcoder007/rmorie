@@ -28,6 +28,13 @@
 #' @param bandwidth Optional kernel bandwidth (Silverman default).
 #' @return Named list with estimate, se, bandwidth, n, loss, method.
 #' @keywords internal
+#' @examples
+#' set.seed(282)
+#' n <- 60
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' y <- as.numeric(-2 * X[, 1] + 0.3 * X[, 2] + rnorm(n))
+#' res <- hrzi1(X, y)
+#' res$estimate
 #' @export
 hrzi1 <- function(x, y, bandwidth = NULL) {
   y <- as.numeric(y)

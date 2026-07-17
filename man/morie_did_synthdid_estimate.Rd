@@ -46,6 +46,18 @@ unit / time weights. Use \code{morie_did_synthetic} when you want
 the rmorie result-list shape consumed by \code{morie_did_*}
 downstream code.
 }
+\examples{
+if (requireNamespace("coresynth", quietly = TRUE)) {
+  set.seed(13)
+  df <- expand.grid(unit = 1:30, time = 1:8)
+  df$treat_time <- ifelse(df$unit <= 5, 6, Inf)
+  df$d <- as.integer(df$time >= df$treat_time)
+  df$y <- 0.1 * df$time + 0.5 * df$d + rnorm(nrow(df), sd = 0.3)
+  out <- morie_did_synthdid_estimate(df, unit = "unit", time = "time",
+                                     treatment = "d", outcome = "y")
+  out$att
+}
+}
 \references{
 Arkhangelsky, D., Athey, S., Hirshberg, D. A., Imbens,
 G. W., & Wager, S. (2021). Synthetic difference-in-differences.

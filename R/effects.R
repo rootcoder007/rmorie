@@ -74,6 +74,13 @@ NULL
 #' @param treatment   Name of the binary treatment column.
 #' @param weights_col Name of the weights column (e.g. IPTW).
 #' @return Named list with `ate` and `se` (native HC3-robust).
+#' @examples
+#' set.seed(1)
+#' d <- data.frame(x = rnorm(60), tr = rbinom(60, 1, 0.5))
+#' d$y <- 1 + 0.5 * d$tr + 0.3 * d$x + rnorm(60)
+#' d$wt <- runif(60, 0.5, 1.5)
+#' res <- estimate_ate(d, outcome = "y", treatment = "tr", weights_col = "wt")
+#' res$ate
 #' @export
 estimate_ate <- function(data, outcome, treatment, weights_col) {
   fml <- stats::as.formula(paste(outcome, "~", treatment))
@@ -104,6 +111,18 @@ estimate_ate <- function(data, outcome, treatment, weights_col) {
 #' @param random_state RNG seed. Default 42.
 #' @return Named list with `ate`, `se`, `ci_lower`, `ci_upper`,
 #'   `pval`, `n_obs`, `method`.
+#' @examples
+#' \donttest{
+#' set.seed(1)
+#' n <- 200
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' tr <- rbinom(n, 1, plogis(X[, 1]))
+#' y <- 2 * tr + X[, 1] + rnorm(n)
+#' df <- data.frame(y = y, d = tr, x1 = X[, 1], x2 = X[, 2])
+#' res <- suppressWarnings(estimate_plr(df, treatment = "d", outcome = "y",
+#'                                      covariates = c("x1", "x2")))
+#' res$ate
+#' }
 #' @export
 estimate_plr <- function(data, treatment, outcome, covariates,
                          n_folds = 5L, random_state = 42L) {
@@ -183,6 +202,15 @@ estimate_plr <- function(data, treatment, outcome, covariates,
 #' @param random_state RNG seed. Default 42.
 #' @return Named list with `late`, `se`, `ci_lower`, `ci_upper`,
 #'   `pval`, `n_obs`, `method`.
+#' @examples
+#' set.seed(1)
+#' n <- 80
+#' x1 <- rnorm(n); x2 <- rnorm(n); z <- rbinom(n, 1, 0.5)
+#' d <- as.integer(plogis(0.3 + 0.8 * z + 0.4 * x1) > runif(n))
+#' y <- 1 + 0.5 * d + 0.3 * x1 + rnorm(n)
+#' df <- data.frame(y, d, z, x1, x2)
+#' res <- suppressWarnings(estimate_pliv(df, "d", "y", "z", c("x1", "x2")))
+#' res$late
 #' @export
 estimate_pliv <- function(data, treatment, outcome, instrument,
                           covariates, n_folds = 5L,
@@ -255,6 +283,16 @@ estimate_pliv <- function(data, treatment, outcome, instrument,
 #' @param outcome_model `"linear"` (OLS) or `"logistic"` (logit GLM).
 #' @return Named list with `ate`, `se`, `ci_lower`, `ci_upper`,
 #'   `n_obs`, `outcome_model`.
+#' @examples
+#' set.seed(1)
+#' n <- 300
+#' X <- matrix(rnorm(n * 3), n, 3)
+#' tr <- rbinom(n, 1, plogis(X[, 1]))
+#' y <- 2.5 * tr + drop(X %*% c(1, 0.5, -0.7)) + rnorm(n)
+#' d <- data.frame(y = y, d = tr, x1 = X[, 1], x2 = X[, 2], x3 = X[, 3])
+#' res <- estimate_ate_gcomputation(d, treatment = "d", outcome = "y",
+#'                                  covariates = c("x1", "x2", "x3"))
+#' res$ate
 #' @export
 estimate_ate_gcomputation <- function(data, treatment, outcome,
                                       covariates,
@@ -496,6 +534,8 @@ sensitivity_rosenbaum <- function(data, treatment, outcome,
 #'   closed-form proxy). Pass the empirical sd to route through
 #'   \code{EValue::evalues.OLS()} when installed.
 #' @return Scalar E-value (>= 1).
+#' @examples
+#' e_value(ate = 0.5, se = 0.1)
 #' @export
 e_value <- function(ate, se, null = 0, sd_y = 1) {
   if (se <= 0) stop("se must be > 0, got ", se)

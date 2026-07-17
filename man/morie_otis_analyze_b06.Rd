@@ -15,3 +15,8 @@ An object of class \code{"morie_otis_analysis_result"}.
 \description{
 Reasons for placement x institution x gender (b06)
 }
+\examples{
+otis_b06 <- morie_synth_otis("b06", n = 120L, seed = 1L)
+res <- morie_otis_analyze_b06(otis_b06)
+class(res)
+}

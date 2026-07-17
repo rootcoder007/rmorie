@@ -19,3 +19,6 @@ An object of class \code{"morie_test_result"}.
 \description{
 Two-sample z-test for the difference in proportions
 }
+\examples{
+two_proportion_ztest(45, 100, 30, 100)
+}

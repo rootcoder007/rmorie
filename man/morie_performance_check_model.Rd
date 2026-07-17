@@ -22,3 +22,12 @@ and \code{$raw} (the upstream \code{check_model} object).
 Thin extender over \code{performance::check_model} that returns
 the diagnostic-plot grob list for a fitted model.
 }
+\examples{
+if (requireNamespace("performance", quietly = TRUE) &&
+    requireNamespace("see", quietly = TRUE)) {
+  set.seed(1)
+  df <- data.frame(y = rnorm(50), x = rnorm(50))
+  res <- morie_performance_check_model(stats::lm(y ~ x, df))
+  class(res)
+}
+}

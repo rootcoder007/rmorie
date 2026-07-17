@@ -11,6 +11,10 @@
 #' @param seed integer.
 #' @return list: sample (N x d matrix), estimate (if f given), se, N, d, method.
 #' @keywords internal
+#' @examples
+#' set.seed(17)
+#' out <- latnh(N = 50, d = 2)
+#' str(out)
 #' @export
 latnh <- function(N = 100L, d = 1L, f = NULL, seed = 42L) {
   set.seed(seed)

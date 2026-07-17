@@ -18,3 +18,11 @@ A list with components \code{raw}, \code{std}, \code{avgr}, \code{k}, \code{n}, 
 Hand-rolled base-R implementation. When the \code{psych} package is installed,
 results agree with \code{psych::alpha()$total} to numerical precision.
 }
+\examples{
+set.seed(1)
+f <- rnorm(50)
+X <- sapply(1:5, function(j) sqrt(0.6) * f + sqrt(0.4) * rnorm(50))
+colnames(X) <- paste0("i", 1:5)
+res <- morie_psymet_alpha(X)
+res$raw
+}

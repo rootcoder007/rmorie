@@ -52,3 +52,9 @@ enforcement action and/or reported use of force.
 
 Tags: RBDC; race; race based data
 }
+\examples{
+\donttest{
+df <- try(morie_datasets_tps_use_of_force_time_of_day_trends(max_features = 5L))
+if (!inherits(df, "try-error")) head(df)
+}
+}

@@ -26,3 +26,7 @@ A \code{data.frame}.
 Ontario Use-of-Force probe-cycle records (one row per CEW cartridge
 probe per individual-in-incident)
 }
+\examples{
+df <- morie_datasets_arsau_uof_probe_cycle_records(offline = TRUE)
+head(df)
+}

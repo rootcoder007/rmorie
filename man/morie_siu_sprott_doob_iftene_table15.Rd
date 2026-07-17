@@ -12,3 +12,6 @@ A \code{morie_siu_result}.
 \description{
 Sprott-Doob-Iftene (May 2021) Table 15: long-stay no-IEDM cases
 }
+\examples{
+head(morie_siu_sprott_doob_iftene_table15())
+}

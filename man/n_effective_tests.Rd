@@ -20,3 +20,8 @@ Delegates to \code{poolr::meff} when installed (\code{poolr}
 implements Galwey, Li-Ji, and Nyholt). Otherwise computes the
 chosen estimator inline.
 }
+\examples{
+set.seed(1)
+X <- matrix(rnorm(200), ncol = 5)
+n_effective_tests(stats::cor(X))
+}

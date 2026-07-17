@@ -21,6 +21,13 @@ Classical scalar Wiener gain in the rFFT domain:
 \code{H(f) = Pxx(f) / (Pxx(f) + Pnn(f))}. With \code{noise_psd = NULL} the
 noise PSD is assumed flat at \code{noise_fraction * mean(Pxx)}.
 }
+\examples{
+set.seed(3L)
+t <- seq(0, 1, length.out = 300)
+x <- sin(2 * pi * 8 * t) + 0.4 * rnorm(300)
+y <- morie_dsp_wiener_filter(x)
+length(y)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 3, sec. 3.5.
 }

@@ -49,3 +49,7 @@ A \code{data.frame}.
 \description{
 NYPD Complaint Data Historic
 }
+\examples{
+df <- morie_datasets_nyc_nypd_complaint_historic(offline = TRUE)
+head(df[, c("cmplnt_num", "ofns_desc", "boro_nm")])
+}

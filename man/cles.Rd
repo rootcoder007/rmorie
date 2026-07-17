@@ -17,3 +17,10 @@ A \code{morie_effect_size}.
 \description{
 Estimates P(X > Y) for randomly drawn observations from each group.
 }
+\examples{
+set.seed(1)
+x <- rnorm(30)
+y <- rnorm(30, mean = 0.6)
+r <- cles(x, y)
+r$estimate
+}

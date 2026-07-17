@@ -31,3 +31,8 @@ Named list with \code{baseline}, \code{baseline_rate},
 \description{
 Demographic disparity in outcome rates with risk-ratio CIs
 }
+\examples{
+eth <- morie_datasets_corrections_uof_ethnic_origin()
+res <- mrm_uof_demographic_disparity(eth, names(eth)[2], names(eth)[3])
+res$title
+}

@@ -16,3 +16,6 @@ Character scalar (display label).
 \code{ASSAULT_RATE_2024} -> \code{"Assault rate * 2024"}.  Strips
 underscores and casing so plot titles look like prose.
 }
+\examples{
+morie_tps_pretty_label("ASSAULT_RATE_2024")
+}

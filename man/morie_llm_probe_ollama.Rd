@@ -15,3 +15,8 @@ Logical scalar -- TRUE when reachable.
 \description{
 Probe a local Ollama instance
 }
+\examples{
+options(morie.llm.ollama_cached = FALSE)
+morie_llm_probe_ollama()
+options(morie.llm.ollama_cached = NULL)
+}

@@ -24,3 +24,14 @@ Phase 3JJJ1. Inverse of \code{\link[=morie_crypto_chacha20_poly1305_encrypt]{mor
 Accepts the full ciphertext || tag buffer (concatenate as
 \code{c(ct, tag)}).
 }
+\examples{
+if (morie_crypto_sodium_available()) {
+  k <- morie_crypto_random_bytes(32)
+  n <- morie_crypto_random_bytes(12)
+  pt <- charToRaw("the quick brown fox")
+  aad <- charToRaw("hdr:v1")
+  enc <- morie_crypto_chacha20_poly1305_encrypt(k, n, pt, aad)
+  dec <- morie_crypto_chacha20_poly1305_decrypt(k, n, c(enc$ct, enc$tag), aad)
+  identical(dec, pt)
+}
+}

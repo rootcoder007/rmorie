@@ -18,6 +18,13 @@ Smoothed vector, length(x).
 Convolves \code{x} with a normalised Hann (raised-cosine) window of
 length \code{window}. Less ringing than the boxcar.
 }
+\examples{
+set.seed(1)
+t <- seq.int(0, 199) / 200
+x <- sin(2 * pi * 5 * t) + rnorm(200, sd = 0.4)
+y <- morie_dsp_hann_filter(x, window = 7L)
+sd(y) < sd(x)  # smoothing reduces variance
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 3.
 }

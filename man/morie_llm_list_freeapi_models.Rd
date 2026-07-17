@@ -17,3 +17,7 @@ catalogue directory is absent (R-only install), a single fallback row for
 the default model is returned so downstream callers always get a usable
 table.
 }
+\examples{
+models <- morie_llm_list_freeapi_models()
+head(models)
+}

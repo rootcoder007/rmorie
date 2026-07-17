@@ -17,3 +17,11 @@ An object of class \code{"morie_test_result"}.
 \description{
 Cohen's kappa for two raters
 }
+\examples{
+set.seed(1)
+r1 <- sample(1:3, 50, replace = TRUE)
+r2 <- r1
+r2[1:10] <- sample(1:3, 10, replace = TRUE)
+res <- cohens_kappa(r1, r2)
+res$test_statistic
+}

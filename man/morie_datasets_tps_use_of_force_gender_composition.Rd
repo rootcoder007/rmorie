@@ -52,3 +52,10 @@ may be associated with a reported use of force.
 
 Tags: race; race based data; rbdc
 }
+\examples{
+\donttest{
+df <- try(morie_datasets_tps_use_of_force_gender_composition(
+  max_features = 5L))
+if (!inherits(df, "try-error")) head(df)
+}
+}

@@ -18,6 +18,10 @@ Counts strict turning points and z-scores against the i.i.d.
 expectation \code{2(n-2)/3}. \verb{|z| < 1.96} is consistent with weak
 stationarity at the 5 percent level.
 }
+\examples{
+set.seed(1L)
+morie_dsp_turning_points(rnorm(500))
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 3, sec. 3.2.
 }

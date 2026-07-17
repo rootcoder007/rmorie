@@ -22,3 +22,8 @@ An object of class \code{"morie_multiple_testing_result"}.
 Wiens-Dmitrienko fallback; \pkg{gMCP} can express the same
 procedure as a graphical multiple-comparison transition.
 }
+\examples{
+res <- fallback_procedure(c(0.01, 0.04, 0.30, 0.02),
+                          weights = c(0.4, 0.3, 0.2, 0.1))
+res$rejected
+}

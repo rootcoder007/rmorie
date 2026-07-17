@@ -15,6 +15,12 @@ Numeric vector (autocorrelation).
 \description{
 Inverse-rFFT of the PSD recovers the (biased) autocorrelation.
 }
+\examples{
+freqs <- seq(0, 250, length.out = 128L)
+psd <- exp(-abs(freqs - 100) / 20)
+acf_est <- morie_dsp_acf_from_psd(psd)
+head(acf_est)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 6, sec. 6.3.
 }

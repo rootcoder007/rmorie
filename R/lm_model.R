@@ -144,24 +144,44 @@ morie_lm <- function(formula, data, family = c("gaussian", "binomial"),
 #' @param object A `morie_lm`.
 #' @param ... Unused.
 #' @return Named coefficient vector.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(30), x = rnorm(30))
+#' fit <- morie_lm(y ~ x, data = df)
+#' coef(fit)
 #' @export
 coef.morie_lm <- function(object, ...) object$coefficients
 
 #' @param object A `morie_lm`.
 #' @param ... Unused.
 #' @return Variance-covariance matrix of the coefficients.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(30), x = rnorm(30))
+#' fit <- morie_lm(y ~ x, data = df)
+#' vcov(fit)
 #' @export
 vcov.morie_lm <- function(object, ...) object$vcov
 
 #' @param object A `morie_lm`.
 #' @param ... Unused.
 #' @return Fitted (modelled) response values.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(30), x = rnorm(30))
+#' fit <- morie_lm(y ~ x, data = df)
+#' head(fitted(fit))
 #' @export
 fitted.morie_lm <- function(object, ...) object$fitted_values
 
 #' @param object A `morie_lm`.
 #' @param ... Unused.
 #' @return Model residuals.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(30), x = rnorm(30))
+#' fit <- morie_lm(y ~ x, data = df)
+#' head(residuals(fit))
 #' @export
 residuals.morie_lm <- function(object, ...) object$residuals
 
@@ -169,6 +189,11 @@ residuals.morie_lm <- function(object, ...) object$residuals
 #' @param ... Unused.
 #' @return Number of observations used in the fit.
 #' @importFrom stats nobs
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(30), x = rnorm(30))
+#' fit <- morie_lm(y ~ x, data = df)
+#' nobs(fit)
 #' @export
 nobs.morie_lm <- function(object, ...) object$n_obs
 
@@ -176,6 +201,11 @@ nobs.morie_lm <- function(object, ...) object$n_obs
 #' @param parm,level Standard [stats::confint()] arguments.
 #' @param ... Unused.
 #' @return Coefficient confidence intervals.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(30), x = rnorm(30))
+#' fit <- morie_lm(y ~ x, data = df)
+#' confint(fit)
 #' @export
 confint.morie_lm <- function(object, parm, level = 0.95, ...) {
   suppressMessages(stats::confint(object$fit, level = level))
@@ -226,6 +256,11 @@ predict.morie_lm <- function(object, newdata = NULL,
 #' @param x A `morie_lm`.
 #' @param ... Unused.
 #' @return `x`, invisibly.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(30), x = rnorm(30))
+#' fit <- morie_lm(y ~ x, data = df)
+#' print(fit)
 #' @export
 print.morie_lm <- function(x, ...) {
   cat("<morie_lm>\n")
@@ -239,6 +274,11 @@ print.morie_lm <- function(x, ...) {
 #' @param object A `morie_lm`.
 #' @param ... Unused.
 #' @return The underlying model summary (coefficients, SEs, tests).
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(30), x = rnorm(30))
+#' fit <- morie_lm(y ~ x, data = df)
+#' summary(fit)
 #' @export
 summary.morie_lm <- function(object, ...) summary(object$fit)
 
@@ -247,6 +287,11 @@ summary.morie_lm <- function(object, ...) summary(object$fit)
 #' @param ... Passed to [plot()].
 #' @return `NULL`, invisibly. Draws fitted-versus-residual diagnostics
 #'   with readable axis labels.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(30), x = rnorm(30))
+#' fit <- morie_lm(y ~ x, data = df)
+#' plot(fit)
 #' @export
 plot.morie_lm <- function(x, ...) {
   plot(x$fitted_values, x$residuals, xlab = "fitted values",
@@ -258,6 +303,11 @@ plot.morie_lm <- function(x, ...) {
 #' @param x A `morie_lm_spec`.
 #' @param ... Unused.
 #' @return `x`, invisibly.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(30), x = rnorm(30))
+#' fit <- morie_lm(y ~ x, data = df)
+#' print(fit$spec)
 #' @export
 print.morie_lm_spec <- function(x, ...) {
   cat("<morie_lm_spec> (unfitted)\n")

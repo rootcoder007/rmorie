@@ -16,6 +16,10 @@ Named list of features.
 Returns peak amplitude, duration (samples), absolute area
 (trapezoid), up/down slopes, and peak index for a single beat.
 }
+\examples{
+beat <- c(0, 0.2, 0.5, 1.0, 0.6, 0.1, 0)
+morie_dsp_qrs_features(beat)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 5, sec. 5.9.
 }

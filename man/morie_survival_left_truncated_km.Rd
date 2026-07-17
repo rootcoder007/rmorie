@@ -28,3 +28,9 @@ A named list with elements \code{times}, \code{survival}, \code{ci_lower}, \code
 \description{
 Left-truncated Kaplan-Meier with delayed entry.
 }
+\examples{
+set.seed(1)
+entry <- runif(60, 0, 0.3); exit <- entry + rexp(60)
+event <- rbinom(60, 1, 0.7)
+str(morie_survival_left_truncated_km(entry, exit, event), max.level = 1)
+}

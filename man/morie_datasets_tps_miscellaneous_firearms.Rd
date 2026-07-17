@@ -50,3 +50,9 @@ Toronto Police Service dataset.
 
 Tags: ASR; TPS; Toronto Police; Annual Statistical Report; Firearms
 }
+\examples{
+\donttest{
+df <- try(morie_datasets_tps_miscellaneous_firearms(max_features = 5L))
+if (!inherits(df, "try-error")) head(df)
+}
+}

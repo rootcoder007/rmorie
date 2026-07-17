@@ -21,6 +21,11 @@ Scalar ratio.
 \description{
 Returns \code{bandpower(psd, band1) / bandpower(psd, band2)}.
 }
+\examples{
+freqs <- seq(0, 250, length.out = 256L)
+psd <- rep(1, length(freqs))
+morie_dsp_spectral_ratio(psd, freqs, band1 = c(10, 30), band2 = c(50, 100))
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 6, sec. 6.6.
 }

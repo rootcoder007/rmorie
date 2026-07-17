@@ -49,3 +49,11 @@ A numeric value.
 \description{
 CCT bias-corrected, robust-SE RDD inference
 }
+\examples{
+set.seed(44)
+x <- runif(1000, -1, 1)
+y <- 0.5 + 0.8 * x - 0.4 * x^2 + 1.2 * (x >= 0) + rnorm(1000, 0, 0.4)
+d <- data.frame(x, y)
+bc <- morie_rdd_bias_corrected(d, "y", "x", bandwidth = 0.5, rho = 1)
+bc$estimate
+}

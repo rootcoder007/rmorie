@@ -21,3 +21,6 @@ An object of class \code{"morie_test_result"}.
 \description{
 One-sample z-test for a proportion
 }
+\examples{
+one_proportion_ztest(45, 100, value = 0.5)
+}

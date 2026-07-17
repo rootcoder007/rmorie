@@ -27,3 +27,7 @@ Encodes 3 binary alert flags into 8 combinations (a1..a8) and
 aggregates per (id, fiscal year), computing a complexity index
 \code{ac} = number of distinct combinations observed.
 }
+\examples{
+df <- morie_synth_otis("b01", n = 120L, seed = 6L)
+res <- try(morie_otis_astcmb(df))
+}

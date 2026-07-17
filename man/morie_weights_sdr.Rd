@@ -19,3 +19,8 @@ A numeric \code{matrix}.
 \description{
 Successive Difference Replication (SDR) weights.
 }
+\examples{
+set.seed(1)
+res <- morie_weights_sdr(runif(20, 0.5, 2), n_replicates = 16)
+str(res, max.level = 1)
+}

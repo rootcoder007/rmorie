@@ -24,3 +24,9 @@ A list with \code{$method = "DescTools::Winsorize"} and
 Thin extender over \code{DescTools::Winsorize} for symmetric
 winsorisation by quantile (default 5\\% each tail).
 }
+\examples{
+if (requireNamespace("DescTools", quietly = TRUE)) {
+  set.seed(1)
+  head(morie_desc_winsorize(c(rnorm(48), 10, -10)))
+}
+}

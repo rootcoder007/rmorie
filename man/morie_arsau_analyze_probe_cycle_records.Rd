@@ -23,6 +23,12 @@ Indiv_Index + a comma-separated cycle string).  This function
 computes the cycle-count distribution per incident and runs a
 data-quality audit.
 }
+\examples{
+\donttest{
+res <- try(morie_arsau_analyze_probe_cycle_records(year = "2024"))
+if (!inherits(res, "try-error")) print(res)
+}
+}
 \references{
 Ontario Ministry of the Solicitor General, ARSAU
 probe_cycle_records technical notes (2023 and 2024).

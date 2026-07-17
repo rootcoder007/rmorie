@@ -20,3 +20,9 @@ A \code{morie_rich_result} list (see
 \description{
 Thin wrapper over \code{stats::p.adjust(method = "bonferroni")}.
 }
+\examples{
+set.seed(1)
+p <- c(runif(50), runif(10, 0, 0.005))
+res <- bonferroni(p, alpha = 0.05)
+res$n_rejected
+}

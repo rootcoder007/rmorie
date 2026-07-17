@@ -18,3 +18,9 @@ Named numeric vector of VIFs.
 For each column j of X, regresses column j on the remaining
 columns (plus an intercept) and returns 1/(1 - R^2).
 }
+\examples{
+set.seed(5)
+X <- matrix(rnorm(300), 100, 3)
+colnames(X) <- c("a", "b", "c")
+compute_vif(X)
+}

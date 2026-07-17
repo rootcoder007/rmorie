@@ -18,3 +18,7 @@ A \code{data.frame} with \code{boro_cd}, \code{shape_leng}, \code{shape_area}.
 Phase 3CCC2. Included snapshot of NYC OpenData
 \verb{5crt-au7u} (71 districts).
 }
+\examples{
+df <- morie_datasets_nyc_community_districts(offline = TRUE)
+head(df)
+}

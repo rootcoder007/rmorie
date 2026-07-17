@@ -39,3 +39,10 @@ with overlap units down-weighted by \code{theta} and
 \description{
 Multi-frame (dual-frame) survey weights (Hartley compositing).
 }
+\examples{
+set.seed(1)
+res <- morie_weights_multiframe(runif(20, 1, 2), runif(15, 1, 2),
+                                rbinom(20, 1, 0.3) == 1,
+                                rbinom(15, 1, 0.4) == 1)
+str(res, max.level = 1)
+}

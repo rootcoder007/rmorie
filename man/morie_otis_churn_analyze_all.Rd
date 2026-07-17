@@ -30,3 +30,9 @@ disk.
 \details{
 CRAN-safe: with \code{out_dir = NULL} no files are written.
 }
+\examples{
+b01 <- morie_synth_otis("b01", n = 80L, seed = 21L)
+b02 <- morie_synth_otis("b01", n = 80L, seed = 22L)
+res <- try(morie_otis_churn_analyze_all(b01 = b01, b02 = b02))
+if (!inherits(res, "try-error")) names(res)
+}

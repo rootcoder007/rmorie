@@ -17,6 +17,10 @@ Geometric-to-arithmetic mean ratio of the positive PSD bins;
 values near 1 indicate a white spectrum, near 0 indicate tonal
 concentration.
 }
+\examples{
+uni <- rep(1, 64)
+morie_dsp_spectral_flatness(uni)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 6, sec. 6.7.
 }

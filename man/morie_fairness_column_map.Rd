@@ -16,3 +16,7 @@ A named character vector \code{c(source = canonical)}.
 Returns a named character vector mapping source column names
 (those defined on the profile) to canonical field names.
 }
+\examples{
+p <- morie_fairness_city_profile("x", area_col = "a", risk_col = "r")
+morie_fairness_column_map(p)
+}

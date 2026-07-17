@@ -23,4 +23,12 @@ Named list with tensor, attn, n_heads, n_kv_heads, group_size, method.
 \description{
 Grouped-query attention (Ainslie 2023)
 }
+\examples{
+set.seed(10)
+Q <- matrix(rnorm(8 * 4), 8, 4)
+K <- matrix(rnorm(8 * 4), 8, 4)
+V <- matrix(rnorm(8 * 4), 8, 4)
+out <- morie:::grouped_query_attention(Q, K, V)
+str(out)
+}
 \keyword{internal}

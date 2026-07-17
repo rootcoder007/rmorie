@@ -17,6 +17,11 @@ Scalar in \verb{[0, 1]}.
 \description{
 Fraction of samples with \verb{|x| > threshold} (defaults to \code{2 * sd(x)}).
 }
+\examples{
+set.seed(2L)
+x <- rnorm(50L)
+morie_dsp_myopulse_rate(x)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 5, sec. 5.4.
 }

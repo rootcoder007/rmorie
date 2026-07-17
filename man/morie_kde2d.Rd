@@ -24,3 +24,9 @@ Gaussian-kernel 2-D density on a regular grid, matching
 \code{MASS::kde2d} (same normal-reference bandwidth and the h/4
 scaling MASS applies).
 }
+\examples{
+set.seed(2)
+x <- rnorm(80); y <- rnorm(80)
+k <- morie_kde2d(x, y, n = 20)
+dim(k$z)
+}

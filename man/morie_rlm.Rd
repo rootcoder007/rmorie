@@ -24,6 +24,14 @@ default \code{method = "M"}, \code{psi = psi.huber} (k = 1.345),
 \code{scale.est = "MAD"} path. \code{summary()} reproduces
 \code{MASS:::summary.rlm}'s XtX standard errors.
 }
+\examples{
+set.seed(3)
+n <- 100; x <- rnorm(n)
+y <- 2 * x + rnorm(n)
+y[1:3] <- y[1:3] + 40
+rob <- morie_rlm(y ~ x, data = data.frame(y, x))
+rob$coefficients
+}
 \references{
 Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
 Applied Statistics with S}. Springer.

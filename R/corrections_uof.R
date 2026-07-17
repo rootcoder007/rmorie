@@ -94,6 +94,9 @@ morie_corrections_uof_resource_ids <- function() {
 #' @references
 #'   \url{https://data.ontario.ca/dataset/use-of-force-in-correctional-institutions};
 #'   Open Government Licence -- Ontario.
+#' @examples
+#' df <- morie_datasets_corrections_uof_incidents()
+#' head(df)
 #' @export
 morie_datasets_corrections_uof_incidents <- function(offline = TRUE,
                                                        resource_id = NULL,
@@ -104,6 +107,9 @@ morie_datasets_corrections_uof_incidents <- function(offline = TRUE,
 #' Inmate-to-incidents bridging table
 #' @inheritParams morie_datasets_corrections_uof_incidents
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_corrections_uof_inmate_incident()
+#' head(df)
 #' @export
 morie_datasets_corrections_uof_inmate_incident <- function(offline = TRUE,
                                                              resource_id = NULL,
@@ -114,6 +120,9 @@ morie_datasets_corrections_uof_inmate_incident <- function(offline = TRUE,
 #' Staff-to-incidents bridging table
 #' @inheritParams morie_datasets_corrections_uof_incidents
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_corrections_uof_staff_incident()
+#' head(df)
 #' @export
 morie_datasets_corrections_uof_staff_incident <- function(offline = TRUE,
                                                             resource_id = NULL,
@@ -124,6 +133,9 @@ morie_datasets_corrections_uof_staff_incident <- function(offline = TRUE,
 #' Incident-type lookup
 #' @inheritParams morie_datasets_corrections_uof_incidents
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_corrections_uof_incident_type()
+#' head(df)
 #' @export
 morie_datasets_corrections_uof_incident_type <- function(offline = TRUE,
                                                            resource_id = NULL,
@@ -134,6 +146,9 @@ morie_datasets_corrections_uof_incident_type <- function(offline = TRUE,
 #' Institution-level annual incident summary
 #' @inheritParams morie_datasets_corrections_uof_incidents
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_corrections_uof_institution_summary()
+#' head(df)
 #' @export
 morie_datasets_corrections_uof_institution_summary <- function(offline = TRUE,
                                                                  resource_id = NULL,
@@ -144,6 +159,9 @@ morie_datasets_corrections_uof_institution_summary <- function(offline = TRUE,
 #' Location-of-incident annual summary
 #' @inheritParams morie_datasets_corrections_uof_incidents
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_corrections_uof_location_summary()
+#' head(df)
 #' @export
 morie_datasets_corrections_uof_location_summary <- function(offline = TRUE,
                                                               resource_id = NULL,
@@ -154,6 +172,9 @@ morie_datasets_corrections_uof_location_summary <- function(offline = TRUE,
 #' Select-incident-type annual summary
 #' @inheritParams morie_datasets_corrections_uof_incidents
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_corrections_uof_select_incident_summary()
+#' head(df)
 #' @export
 morie_datasets_corrections_uof_select_incident_summary <- function(offline = TRUE,
                                                                      resource_id = NULL,
@@ -165,6 +186,9 @@ morie_datasets_corrections_uof_select_incident_summary <- function(offline = TRU
 #' Inmate-participant demographics (head)
 #' @inheritParams morie_datasets_corrections_uof_incidents
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_corrections_uof_inmate_participant()
+#' head(df)
 #' @export
 morie_datasets_corrections_uof_inmate_participant <- function(offline = TRUE,
                                                                 resource_id = NULL,
@@ -175,6 +199,9 @@ morie_datasets_corrections_uof_inmate_participant <- function(offline = TRUE,
 #' Inmate-participant Indigenous identity
 #' @inheritParams morie_datasets_corrections_uof_incidents
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_corrections_uof_indigenous()
+#' head(df)
 #' @export
 morie_datasets_corrections_uof_indigenous <- function(offline = TRUE,
                                                        resource_id = NULL,
@@ -185,6 +212,9 @@ morie_datasets_corrections_uof_indigenous <- function(offline = TRUE,
 #' Inmate-participant ethnic origin
 #' @inheritParams morie_datasets_corrections_uof_incidents
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_corrections_uof_ethnic_origin()
+#' head(df)
 #' @export
 morie_datasets_corrections_uof_ethnic_origin <- function(offline = TRUE,
                                                            resource_id = NULL,
@@ -195,6 +225,9 @@ morie_datasets_corrections_uof_ethnic_origin <- function(offline = TRUE,
 #' Inmate-participant race
 #' @inheritParams morie_datasets_corrections_uof_incidents
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_corrections_uof_race()
+#' head(df)
 #' @export
 morie_datasets_corrections_uof_race <- function(offline = TRUE,
                                                   resource_id = NULL,
@@ -205,6 +238,9 @@ morie_datasets_corrections_uof_race <- function(offline = TRUE,
 #' Inmate-participant religion
 #' @inheritParams morie_datasets_corrections_uof_incidents
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_corrections_uof_religion()
+#' head(df)
 #' @export
 morie_datasets_corrections_uof_religion <- function(offline = TRUE,
                                                      resource_id = NULL,

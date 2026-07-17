@@ -17,3 +17,8 @@ A logical scalar.
 \description{
 Compare parametric survival models by AIC/BIC.
 }
+\examples{
+set.seed(1)
+time <- rexp(60); event <- rbinom(60, 1, 0.7)
+str(morie_survival_compare_parametric(time, event), max.level = 1)
+}

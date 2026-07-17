@@ -17,3 +17,6 @@ A \code{morie_effect_size}.
 \description{
 Odds ratio for a 2x2 table \verb{[[a, b], [c, d]]}
 }
+\examples{
+odds_ratio(20, 80, 10, 90)
+}

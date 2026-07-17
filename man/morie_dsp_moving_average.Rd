@@ -18,6 +18,10 @@ Numeric vector, length(x).
 Length-\code{window} boxcar convolution in "same" mode (output length
 equals input length, edges biased by zero-padding).
 }
+\examples{
+x <- rep(2.0, 50)
+morie_dsp_moving_average(x, window = 5L)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 3, sec. 3.3.
 }

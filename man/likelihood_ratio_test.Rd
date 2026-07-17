@@ -19,3 +19,8 @@ A \code{morie_specification_test}.
 \description{
 Likelihood ratio test for nested models
 }
+\examples{
+r <- likelihood_ratio_test(ll_restricted = -120, ll_full = -100,
+                           df_diff = 2L)
+r$p_value
+}

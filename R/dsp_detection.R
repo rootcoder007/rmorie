@@ -18,6 +18,9 @@
 #' @param direction One of "above", "below", "either". Default "above".
 #' @return Integer vector of detected indices.
 #' @references Rangayyan & Krishnan (2015), Ch. 4, sec. 4.2.
+#' @examples
+#' x <- c(0, 1, 0, 2, 0, 3, 0)
+#' morie_dsp_threshold_detect(x, threshold = 0.5)
 #' @export
 morie_dsp_threshold_detect <- function(x, threshold, min_distance = 1L,
                                        direction = "above") {
@@ -48,6 +51,12 @@ morie_dsp_threshold_detect <- function(x, threshold, min_distance = 1L,
 #' @param threshold_factor Slope threshold fraction. Default 0.5.
 #' @return Integer vector of peak indices.
 #' @references Rangayyan & Krishnan (2015), Ch. 4, sec. 4.3.
+#' @examples
+#' set.seed(1)
+#' x <- rep(0, 300); x[c(60, 150, 240)] <- 5
+#' x <- stats::filter(x, rep(1 / 5, 5), sides = 2)
+#' x[is.na(x)] <- 0
+#' str(morie_dsp_derivative_detect(as.numeric(x), fs = 100), max.level = 1)
 #' @export
 morie_dsp_derivative_detect <- function(x, fs = 1,
                                         threshold_factor = 0.5) {
@@ -72,6 +81,10 @@ morie_dsp_derivative_detect <- function(x, fs = 1,
 #' @param frame_length Optional frame length.
 #' @return Scalar (whole signal) or numeric vector (per frame).
 #' @references Rangayyan & Krishnan (2015), Ch. 4, sec. 4.3.
+#' @examples
+#' N <- 1000L; t <- seq.int(0, N - 1L) / N
+#' x <- sin(2 * pi * 5 * t)
+#' morie_dsp_zero_crossing(x)
 #' @export
 morie_dsp_zero_crossing <- function(x, frame_length = NULL) {
   if (is.null(frame_length)) {
@@ -98,6 +111,12 @@ morie_dsp_zero_crossing <- function(x, frame_length = NULL) {
 #' @param threshold Minimum correlation. Default 0.7.
 #' @return List with `indices` (1-based) and `correlations`.
 #' @references Rangayyan & Krishnan (2015), Ch. 4, sec. 4.4.
+#' @examples
+#' set.seed(1L)
+#' tpl <- c(0, 1, 2, 1, 0)
+#' x <- c(rnorm(15, sd = 0.01), tpl, rnorm(15, sd = 0.01))
+#' out <- morie_dsp_template_match(x, tpl, threshold = 0.7)
+#' out$indices
 #' @export
 morie_dsp_template_match <- function(x, template, threshold = 0.7) {
   x <- as.numeric(x)
@@ -134,6 +153,10 @@ morie_dsp_template_match <- function(x, template, threshold = 0.7) {
 #' @param threshold_factor Multiplier on baseline median. Default 3.
 #' @return Integer vector of onset indices.
 #' @references Rangayyan & Krishnan (2015), Ch. 4, sec. 4.5.
+#' @examples
+#' set.seed(1L)
+#' x <- c(0.01 * rnorm(200), 5 + 0.01 * rnorm(200))
+#' morie_dsp_onset_detect(x, fs = 1000, energy_window_ms = 5, threshold_factor = 3)
 #' @export
 morie_dsp_onset_detect <- function(x, fs, energy_window_ms = 20,
                                    threshold_factor = 3) {
@@ -166,6 +189,10 @@ morie_dsp_onset_detect <- function(x, fs, energy_window_ms = 20,
 #' @return Numeric vector, length(x).
 #' @references Rangayyan & Krishnan (2015), Ch. 4, sec. 4.5;
 #'   Liang et al. (1997).
+#' @examples
+#' set.seed(1L)
+#' x <- rnorm(50)
+#' morie_dsp_shannon_energy(x)
 #' @export
 morie_dsp_shannon_energy <- function(x) {
   # Normalise to max amplitude so x_sq lies in [0, 1] and the entropy
@@ -185,6 +212,8 @@ morie_dsp_shannon_energy <- function(x) {
 #' @return Numeric vector, length(x); ends are zero.
 #' @references Rangayyan & Krishnan (2015), Ch. 4, sec. 4.5;
 #'   Kaiser (1990).
+#' @examples
+#' morie_dsp_teager_energy(c(1, 2, 3, 4, 5))
 #' @export
 morie_dsp_teager_energy <- function(x) {
   n <- length(x)
@@ -202,6 +231,12 @@ morie_dsp_teager_energy <- function(x) {
 #' @param x Numeric vector.
 #' @return Numeric vector, length(x).
 #' @references Rangayyan & Krishnan (2015), Ch. 4, sec. 4.6.
+#' @examples
+#' fs <- 1024
+#' t <- seq.int(0, 1023) / fs
+#' x <- 2 * sin(2 * pi * 64 * t)
+#' env <- morie_dsp_hilbert_envelope(x)
+#' mean(env[20:1004])  # ~2 (the amplitude)
 #' @export
 morie_dsp_hilbert_envelope <- function(x) {
   # Module 20: native analytic signal in the FFT domain.
@@ -231,6 +266,11 @@ morie_dsp_hilbert_envelope <- function(x) {
 #' @return Integer vector of QRS sample indices.
 #' @references Rangayyan & Krishnan (2015), Ch. 4, sec. 4.7;
 #'   Pan & Tompkins (1985).
+#' @examples
+#' set.seed(1)
+#' beat <- c(rep(0, 130), 0.1, 0.4, 1.2, -0.3, rep(0, 40), 0.25, rep(0, 185))
+#' ecg <- rep(beat, 5) + rnorm(1800, 0, 0.02)
+#' str(morie_dsp_pan_tompkins(ecg, fs = 360), max.level = 1)
 #' @export
 morie_dsp_pan_tompkins <- function(ecg, fs = 360) {
   nyq <- fs / 2
@@ -263,6 +303,10 @@ morie_dsp_pan_tompkins <- function(ecg, fs = 360) {
 #' @param fs Sampling frequency (Hz). Default 125.
 #' @return Integer vector of notch indices.
 #' @references Rangayyan & Krishnan (2015), Ch. 4, sec. 4.8.
+#' @examples
+#' t <- seq(0, 1, length.out = 125)
+#' pulse <- sin(pi * t)^2 + 0.15 * sin(3 * pi * t)^2
+#' str(morie_dsp_dicrotic_notch(pulse, fs = 125), max.level = 1)
 #' @export
 morie_dsp_dicrotic_notch <- function(pulse, fs = 125) {
   # Module 20: native local-maxima detector with minimum spacing.
@@ -285,6 +329,12 @@ morie_dsp_dicrotic_notch <- function(pulse, fs = 125) {
 #' @param fs Sampling frequency (Hz). Default 360.
 #' @return Integer vector of T-peak indices.
 #' @references Rangayyan & Krishnan (2015), Ch. 4, sec. 4.8.
+#' @examples
+#' set.seed(1)
+#' beat <- c(rep(0, 130), 0.1, 0.4, 1.2, -0.3, rep(0, 40), 0.25, rep(0, 185))
+#' ecg <- rep(beat, 5) + rnorm(1800, 0, 0.02)
+#' qrs <- which(ecg > 1)[c(TRUE, diff(which(ecg > 1)) > 100)]
+#' str(morie_dsp_t_wave(ecg, qrs_locs = qrs, fs = 360), max.level = 1)
 #' @export
 morie_dsp_t_wave <- function(ecg, qrs_locs, fs = 360) {
   search_start <- as.integer(0.2 * fs)
@@ -311,6 +361,10 @@ morie_dsp_t_wave <- function(ecg, qrs_locs, fs = 360) {
 #' @return Numeric vector, length(x).
 #' @references Rangayyan & Krishnan (2015), Ch. 4, sec. 4.9;
 #'   Oppenheim & Schafer (2010).
+#' @examples
+#' set.seed(1)
+#' x <- abs(sin(2 * pi * 0.02 * (1:400))) + rnorm(400, 0, 0.05)
+#' str(morie_dsp_homomorphic(x, cutoff = 0.1, fs = 100), max.level = 1)
 #' @export
 morie_dsp_homomorphic <- function(x, cutoff = 0.1, fs = 1) {
   log_x <- log(abs(x) + 1e-10)
@@ -339,6 +393,10 @@ morie_dsp_homomorphic <- function(x, cutoff = 0.1, fs = 1) {
 #' @return List with `cepstrum` and `quefrency`.
 #' @references Rangayyan & Krishnan (2015), Ch. 4, sec. 4.10;
 #'   Oppenheim & Schafer (2010).
+#' @examples
+#' set.seed(1)
+#' x <- sin(2 * pi * 0.05 * (1:256)) + rnorm(256, 0, 0.1)
+#' str(morie_dsp_complex_cepstrum(x), max.level = 1)
 #' @export
 morie_dsp_complex_cepstrum <- function(x) {
   X <- stats::fft(x)
@@ -354,6 +412,8 @@ morie_dsp_complex_cepstrum <- function(x) {
 #' @param rr_intervals Numeric vector (seconds).
 #' @return Numeric vector of BPM values.
 #' @references Rangayyan & Krishnan (2015), Ch. 4, sec. 4.8.
+#' @examples
+#' morie_dsp_hr_from_rr(c(1.0, 1.0, 1.0))  # 1s RR intervals -> 60 bpm
 #' @export
 morie_dsp_hr_from_rr <- function(rr_intervals) {
   rr <- as.numeric(rr_intervals)
@@ -369,6 +429,13 @@ morie_dsp_hr_from_rr <- function(rr_intervals) {
 #' @inheritParams morie_dsp_coherence
 #' @return Same as `morie_dsp_coherence`.
 #' @references Rangayyan & Krishnan (2015), Ch. 4 & Ch. 6.
+#' @examples
+#' set.seed(1)
+#' t <- seq(0, 4, by = 1 / 128)
+#' x <- sin(2 * pi * 5 * t) + rnorm(length(t), 0, 0.2)
+#' y <- sin(2 * pi * 5 * t + 0.5) + rnorm(length(t), 0, 0.2)
+#' str(morie_dsp_coherence_spectrum(x, y, fs = 128, nperseg = 128L),
+#'     max.level = 1)
 #' @export
 morie_dsp_coherence_spectrum <- function(x, y, fs = 1, nperseg = 256L) {
   morie_dsp_coherence(x, y, fs = fs, nperseg = nperseg)
@@ -385,6 +452,12 @@ morie_dsp_coherence_spectrum <- function(x, y, fs = 1, nperseg = 256L) {
 #' @param nperseg Segment length. Default 256.
 #' @return List with `freqs` (Hz) and `csd` (complex).
 #' @references Rangayyan & Krishnan (2015), Ch. 4 & Ch. 6.
+#' @examples
+#' set.seed(1)
+#' t <- seq(0, 4, by = 1 / 128)
+#' x <- sin(2 * pi * 5 * t) + rnorm(length(t), 0, 0.2)
+#' y <- sin(2 * pi * 5 * t + 0.5) + rnorm(length(t), 0, 0.2)
+#' str(morie_dsp_csd(x, y, fs = 128, nperseg = 128L), max.level = 1)
 #' @export
 morie_dsp_csd <- function(x, y, fs = 1, nperseg = 256L) {
   nperseg <- as.integer(min(nperseg, length(x)))

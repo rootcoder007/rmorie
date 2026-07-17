@@ -24,3 +24,10 @@ A list with \code{$method}, \code{$statistic},
 Native one-way (Fisher-Pitman) permutation test
 (\code{\link{morie_oneway_test}}), the permutation ANOVA.
 }
+\examples{
+if (requireNamespace("coin", quietly = TRUE)) {
+  set.seed(1)
+  df <- data.frame(y = rnorm(40), g = factor(rep(c("a", "b"), 20)))
+  morie_coin_oneway(y ~ g, data = df)
+}
+}

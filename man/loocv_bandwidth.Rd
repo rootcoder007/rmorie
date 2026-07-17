@@ -27,6 +27,13 @@ Minimises CV(h) equal to one over n times sum over i of
 (Y_i minus m-hat-h-minus-i of X_i) squared on a grid spanning
 \code{bw_min} to \code{bw_max}.
 }
+\examples{
+set.seed(1)
+x <- sort(runif(15, -2, 2))
+y <- sin(x) + 0.2 * rnorm(15)
+h <- loocv_bandwidth(x, y, n_grid = 5L)
+h
+}
 \references{
 Hardle, W. (1990). Applied Nonparametric Regression.
 Cambridge.

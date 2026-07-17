@@ -13,6 +13,8 @@
 #' @param x Numeric vector.
 #' @return Scalar RMS.
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.2.
+#' @examples
+#' morie_dsp_rms(rep(3, 10))
 #' @export
 morie_dsp_rms <- function(x) {
   sqrt(mean(x^2))
@@ -25,6 +27,11 @@ morie_dsp_rms <- function(x) {
 #' @param x Numeric vector.
 #' @return Scalar.
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.2.
+#' @examples
+#' t <- seq.int(0, 999) / 1000
+#' x <- sin(2 * pi * 5 * t)
+#' morie_dsp_form_factor(x)
+#' morie_dsp_form_factor(rep(0, 5))  # all-zero signal: 0
 #' @export
 morie_dsp_form_factor <- function(x) {
   m <- mean(abs(x))
@@ -39,6 +46,10 @@ morie_dsp_form_factor <- function(x) {
 #' @param x Numeric vector.
 #' @return Scalar.
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.2.
+#' @examples
+#' t <- seq.int(0, 9999) / 10000
+#' x <- sin(2 * pi * 5 * t)
+#' morie_dsp_crest_factor(x)  # ~sqrt(2) for a unit sine
 #' @export
 morie_dsp_crest_factor <- function(x) {
   r <- morie_dsp_rms(x)
@@ -53,6 +64,8 @@ morie_dsp_crest_factor <- function(x) {
 #' @param x Numeric vector.
 #' @return Scalar.
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.2.
+#' @examples
+#' morie_dsp_shape_factor(rep(0, 10L))
 #' @export
 morie_dsp_shape_factor <- function(x) {
   num <- mean(abs(x))
@@ -69,6 +82,8 @@ morie_dsp_shape_factor <- function(x) {
 #' @return Scalar.
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.3;
 #'   Hudgins et al. (1993).
+#' @examples
+#' morie_dsp_waveform_length(c(0, 1, 0, 1, 0))
 #' @export
 morie_dsp_waveform_length <- function(x) {
   sum(abs(diff(x)))
@@ -81,6 +96,8 @@ morie_dsp_waveform_length <- function(x) {
 #' @param x Numeric vector.
 #' @return Scalar.
 #' @references Rangayyan & Krishnan (2015), Ch. 5.
+#' @examples
+#' morie_dsp_waveform_length_norm(c(0, 1, 0, 1, 0))
 #' @export
 morie_dsp_waveform_length_norm <- function(x) {
   morie_dsp_waveform_length(x) / length(x)
@@ -97,6 +114,8 @@ morie_dsp_waveform_length_norm <- function(x) {
 #' @return Integer count.
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.4;
 #'   Willison (1964).
+#' @examples
+#' morie_dsp_turns_count(c(1, 2))
 #' @export
 morie_dsp_turns_count <- function(x, threshold = 0) {
   d <- diff(x)
@@ -115,6 +134,9 @@ morie_dsp_turns_count <- function(x, threshold = 0) {
 #' @param threshold Magnitude threshold. Default 0.
 #' @return Integer count.
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.4.
+#' @examples
+#' x <- c(0, 1, 0, 1, 0)
+#' morie_dsp_slope_sign_changes(x, threshold = 0)
 #' @export
 morie_dsp_slope_sign_changes <- function(x, threshold = 0) {
   d <- diff(x)
@@ -132,6 +154,10 @@ morie_dsp_slope_sign_changes <- function(x, threshold = 0) {
 #' @param threshold Optional threshold (default `sd(x)`).
 #' @return Integer count.
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.4.
+#' @examples
+#' set.seed(1L)
+#' x <- rnorm(50L)
+#' morie_dsp_willison_amplitude(x)
 #' @export
 morie_dsp_willison_amplitude <- function(x, threshold = NULL) {
   if (is.null(threshold)) threshold <- stats::sd(x)
@@ -146,6 +172,10 @@ morie_dsp_willison_amplitude <- function(x, threshold = NULL) {
 #' @param threshold Optional threshold.
 #' @return Scalar in `[0, 1]`.
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.4.
+#' @examples
+#' set.seed(2L)
+#' x <- rnorm(50L)
+#' morie_dsp_myopulse_rate(x)
 #' @export
 morie_dsp_myopulse_rate <- function(x, threshold = NULL) {
   if (is.null(threshold)) threshold <- 2 * stats::sd(x)
@@ -160,6 +190,10 @@ morie_dsp_myopulse_rate <- function(x, threshold = NULL) {
 #' @return Scalar.
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.5;
 #'   Hjorth (1970).
+#' @examples
+#' set.seed(3)
+#' x <- rnorm(100)
+#' morie_dsp_hjorth_activity(x)  # equals var(x)
 #' @export
 morie_dsp_hjorth_activity <- function(x) {
   stats::var(x)
@@ -172,6 +206,10 @@ morie_dsp_hjorth_activity <- function(x) {
 #' @param x Numeric vector.
 #' @return Scalar.
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.5.
+#' @examples
+#' set.seed(4)
+#' x <- rnorm(100)
+#' morie_dsp_hjorth_mobility(x)
 #' @export
 morie_dsp_hjorth_mobility <- function(x) {
   a <- stats::var(x)
@@ -187,6 +225,10 @@ morie_dsp_hjorth_mobility <- function(x) {
 #' @param x Numeric vector.
 #' @return Scalar.
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.5.
+#' @examples
+#' set.seed(5)
+#' x <- rnorm(100)
+#' morie_dsp_hjorth_complexity(x)
 #' @export
 morie_dsp_hjorth_complexity <- function(x) {
   m <- morie_dsp_hjorth_mobility(x)
@@ -200,6 +242,11 @@ morie_dsp_hjorth_complexity <- function(x) {
 #' @return Named list: `activity`, `mobility`, `complexity`.
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.5;
 #'   Hjorth (1970).
+#' @examples
+#' set.seed(1)
+#' x <- rnorm(500)
+#' out <- morie_dsp_hjorth(x)
+#' out$activity  # equals var(x)
 #' @export
 morie_dsp_hjorth <- function(x) {
   list(
@@ -214,6 +261,9 @@ morie_dsp_hjorth <- function(x) {
 #' @param x Numeric vector.
 #' @return Scalar.
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.3.
+#' @examples
+#' x <- c(-2, 3, -1, 4)
+#' morie_dsp_integrated_emg(x)  # sum(|x|) = 10
 #' @export
 morie_dsp_integrated_emg <- function(x) {
   sum(abs(x))
@@ -224,6 +274,8 @@ morie_dsp_integrated_emg <- function(x) {
 #' @param x Numeric vector.
 #' @return Scalar.
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.3.
+#' @examples
+#' morie_dsp_mean_abs(c(-2, 3, -1, 4))
 #' @export
 morie_dsp_mean_abs <- function(x) {
   mean(abs(x))
@@ -237,6 +289,8 @@ morie_dsp_mean_abs <- function(x) {
 #' @param y Numeric vector.
 #' @return Scalar.
 #' @references Rangayyan & Krishnan (2015), Ch. 5.
+#' @examples
+#' morie_dsp_variance_ratio(c(1, 2, 3), c(10, 20, 30))
 #' @export
 morie_dsp_variance_ratio <- function(x, y) {
   v <- stats::var(y)
@@ -252,6 +306,11 @@ morie_dsp_variance_ratio <- function(x, y) {
 #' @param x Numeric vector.
 #' @return Scalar.
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.3.
+#' @examples
+#' t <- seq(0, 1, length.out = 100)
+#' x <- sin(2 * pi * 5 * t)
+#' morie_dsp_arc_length(x)
+#' morie_dsp_arc_length(rep(0, 5))  # flat signal: n - 1
 #' @export
 morie_dsp_arc_length <- function(x) {
   sum(sqrt(1 + diff(x)^2))
@@ -265,6 +324,9 @@ morie_dsp_arc_length <- function(x) {
 #' @param fs Sampling frequency (Hz). Default 1.
 #' @return Scalar (seconds).
 #' @references Rangayyan & Krishnan (2015), Ch. 5.
+#' @examples
+#' x <- abs(sin(seq(0, 2 * pi, length.out = 200L)))
+#' morie_dsp_centroidal_time(x, fs = 1)
 #' @export
 morie_dsp_centroidal_time <- function(x, fs = 1) {
   t <- (seq_along(x) - 1L) / fs
@@ -283,6 +345,11 @@ morie_dsp_centroidal_time <- function(x, fs = 1) {
 #' @param n_bins Number of bins. Default 50.
 #' @return List with `counts`, `centers`, `probabilities`, `edges`.
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.6.
+#' @examples
+#' set.seed(1)
+#' x <- rnorm(200)
+#' h <- morie_dsp_amplitude_histogram(x, n_bins = 10L)
+#' h$counts
 #' @export
 morie_dsp_amplitude_histogram <- function(x, n_bins = 50L) {
   rng <- range(x)
@@ -304,6 +371,13 @@ morie_dsp_amplitude_histogram <- function(x, n_bins = 50L) {
 #' @inheritParams morie_dsp_amplitude_histogram
 #' @return Scalar (bits).
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.6.
+#' @examples
+#' set.seed(1)
+#' uni <- runif(2000, min = -1, max = 1)
+#' norm <- rnorm(2000)
+#' Hu <- morie_dsp_entropy_histogram(uni, n_bins = 20L)
+#' Hn <- morie_dsp_entropy_histogram(norm, n_bins = 20L)
+#' c(uniform = Hu, gaussian = Hn)  # uniform has higher entropy
 #' @export
 morie_dsp_entropy_histogram <- function(x, n_bins = 50L) {
   p <- morie_dsp_amplitude_histogram(x, n_bins)$probabilities
@@ -321,6 +395,10 @@ morie_dsp_entropy_histogram <- function(x, n_bins = 50L) {
 #' @return Scalar fractal dimension.
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.7;
 #'   Higuchi (1988).
+#' @examples
+#' t <- seq.int(0, 1023) / 1024
+#' x <- sin(2 * pi * 8 * t)
+#' morie_dsp_higuchi_fd(x, kmax = 6L)
 #' @export
 morie_dsp_higuchi_fd <- function(x, kmax = 10L) {
   x <- as.numeric(x)
@@ -359,6 +437,11 @@ morie_dsp_higuchi_fd <- function(x, kmax = 10L) {
 #' @return Scalar fractal dimension.
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.7;
 #'   Katz (1988).
+#' @examples
+#' t <- seq.int(0, 511) / 512
+#' x <- sin(2 * pi * 8 * t)
+#' morie_dsp_katz_fd(x)
+#' morie_dsp_katz_fd(rep(2, 50))  # flat signal: 0
 #' @export
 morie_dsp_katz_fd <- function(x, n_scales = 10L) {
   x_norm <- x - min(x)
@@ -395,6 +478,10 @@ morie_dsp_katz_fd <- function(x, n_scales = 10L) {
 #' @param n_rulers Number of ruler sizes. Default 10.
 #' @return Scalar fractal dimension.
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.7.
+#' @examples
+#' set.seed(1L)
+#' x <- cumsum(rnorm(512))
+#' morie_dsp_ruler_fd(x, n_rulers = 6L)
 #' @export
 morie_dsp_ruler_fd <- function(x, n_rulers = 10L) {
   n <- length(x)
@@ -502,6 +589,9 @@ morie_dsp_min_phase <- function(x) {
 #' @param beat Numeric vector covering one beat.
 #' @return Named list of features.
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.9.
+#' @examples
+#' beat <- c(0, 0.2, 0.5, 1.0, 0.6, 0.1, 0)
+#' morie_dsp_qrs_features(beat)
 #' @export
 morie_dsp_qrs_features <- function(beat) {
   peak <- which.max(abs(beat))
@@ -525,6 +615,10 @@ morie_dsp_qrs_features <- function(beat) {
 #' @param y Numeric vector.
 #' @return Scalar in `[-1, 1]`.
 #' @references Rangayyan & Krishnan (2015), Ch. 5.
+#' @examples
+#' set.seed(1)
+#' x <- rnorm(100)
+#' morie_dsp_baseline_correlation(x, x)  # identical inputs: 1
 #' @export
 morie_dsp_baseline_correlation <- function(x, y) {
   xc <- x - mean(x)

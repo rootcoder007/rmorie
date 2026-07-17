@@ -28,3 +28,7 @@ A \code{data.frame} of the requested dataset (a 0-row typed frame when the data 
 \description{
 OTIS b05 -- Segregation placements by consecutive-length bucket
 }
+\examples{
+df <- morie_datasets_otis_b05_seg_consecutive_lengths(offline = TRUE)
+head(df)
+}

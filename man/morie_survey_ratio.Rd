@@ -23,3 +23,9 @@ A named list with elements \code{ratio}, \code{total_estimate}, \code{se}, \code
 \description{
 Ratio estimator of a population total using known X_pop.
 }
+\examples{
+set.seed(1)
+x <- runif(30, 1, 3); y <- 2 * x + rnorm(30, 0, 0.2)
+str(morie_survey_ratio(y, x, rep(1, 30), X_population_total = 60),
+    max.level = 1)
+}

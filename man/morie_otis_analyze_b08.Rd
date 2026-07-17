@@ -15,3 +15,8 @@ An object of class \code{"morie_otis_analysis_result"}.
 \description{
 Durations by institution & gender (b08)
 }
+\examples{
+otis_b08 <- morie_synth_otis("b08", n = 120L, seed = 1L)
+res <- morie_otis_analyze_b08(otis_b08)
+class(res)
+}

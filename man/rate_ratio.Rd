@@ -19,3 +19,6 @@ A \code{morie_effect_size}.
 \description{
 Incidence rate ratio (IRR)
 }
+\examples{
+rate_ratio(30, 1000, 15, 1000)
+}

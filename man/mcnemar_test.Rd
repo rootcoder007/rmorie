@@ -17,3 +17,8 @@ An object of class \code{"morie_test_result"}.
 \description{
 McNemar's test (paired nominal data)
 }
+\examples{
+tab <- matrix(c(20, 5, 10, 15), nrow = 2)
+res <- mcnemar_test(tab)
+res
+}

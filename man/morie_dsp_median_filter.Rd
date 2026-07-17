@@ -17,6 +17,10 @@ Filtered vector, length(x).
 \description{
 Sliding-window median. Robust to impulsive (salt-and-pepper) noise.
 }
+\examples{
+x <- c(0, 0, 0, 0, 50, 0, 0, 0, 0)
+morie_dsp_median_filter(x, kernel_size = 3L)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 3, sec. 3.4.
 }

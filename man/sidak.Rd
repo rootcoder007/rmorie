@@ -22,3 +22,7 @@ Computes \eqn{1 - (1 - p)^m} directly (closed form); the
 \pkg{mutoss} package offers an equivalent step-down variant via
 \code{mutoss::SidakSD}.
 }
+\examples{
+p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
+sidak(p)
+}

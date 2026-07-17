@@ -19,3 +19,12 @@ A \code{morie_rich_result} list.
 Distribution (n, mean, median, min, max) of subject-officials,
 witness-officials, civilian-witnesses, and officers-involved.
 }
+\examples{
+df <- data.frame(
+  number_of_subject_officials = c(1L, 2L, 1L, 3L),
+  number_of_witness_officials = c(2L, 4L, 1L, 5L),
+  number_of_civilian_witnesses = c(0L, 3L, 1L, 2L),
+  number_of_officers_involved = c(3L, 6L, 2L, 8L))
+r <- morie_siu_case_counts(df)
+r$tables[[1]]$rows
+}

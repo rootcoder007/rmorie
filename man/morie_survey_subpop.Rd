@@ -28,3 +28,9 @@ A named list with elements \code{mean}, \code{se}, \code{ci_lower}, \code{ci_upp
 \description{
 Subpopulation (domain) mean with Woodruff linearised SE.
 }
+\examples{
+set.seed(1)
+df <- data.frame(y = rnorm(40), g = rep(c("a", "b"), 20),
+                 w = runif(40, 0.5, 2))
+str(morie_survey_subpop(df, "g", "a", "y", "w"), max.level = 1)
+}

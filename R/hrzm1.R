@@ -9,6 +9,11 @@
 #' @param seed Integer RNG seed (default 0).
 #' @return Named list with estimate (pi, mu, sigma), log_likelihood, n, k, iters, method.
 #' @keywords internal
+#' @examples
+#' set.seed(16)
+#' y <- c(rnorm(50, 0), rnorm(50, 3))
+#' res <- hrzm1(y, k = 2, maxit = 30)
+#' str(res)
 #' @export
 hrzm1 <- function(y, k = 2, maxit = 200, tol = 1e-6, seed = 0) {
   y <- as.numeric(y)

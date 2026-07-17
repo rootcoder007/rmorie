@@ -16,3 +16,10 @@ Named list with \code{fields} and \code{records}.
 Handles both bare \code{{fields, records}} and the
 \code{{result: {fields, records}}} wrapper shape.
 }
+\examples{
+tf <- tempfile(fileext = ".json")
+writeLines('{"fields": [{"id": "a", "type": "int"}]}', tf)
+res <- morie_arsau_read_sidecar(tf)
+res$fields
+unlink(tf)
+}

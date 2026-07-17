@@ -45,3 +45,14 @@ A named list with elements \code{estimate}, \code{std_error}, \code{t_stat}, \co
 \description{
 Geographic / boundary RDD on a signed distance
 }
+\examples{
+set.seed(1)
+n <- 400
+side <- rbinom(n, 1, 0.5)
+dist_to_boundary <- runif(n, 0, 1)
+signed <- ifelse(side == 1, dist_to_boundary, -dist_to_boundary)
+y <- 0.5 * (signed >= 0) + rnorm(n, sd = 0.3)
+d <- data.frame(y, dist_to_boundary, side)
+res <- morie_rdd_geographic(d, "y", "dist_to_boundary", "side")
+res$estimate
+}

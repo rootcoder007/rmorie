@@ -15,3 +15,8 @@ An object of class \code{"morie_otis_analysis_result"}.
 \description{
 Segregation placements by alert x institution (b03)
 }
+\examples{
+otis_b03 <- morie_synth_otis("b03", n = 120L, seed = 1L)
+res <- morie_otis_analyze_b03(otis_b03)
+class(res)
+}

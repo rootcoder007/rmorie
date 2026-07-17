@@ -34,6 +34,12 @@ audit.
 The 2023 file is the ministry-flagged-invalid release and requires
 \code{allow_invalid = TRUE}.
 }
+\examples{
+\donttest{
+res <- try(morie_arsau_analyze_weapon_records(year = "2024"))
+if (!inherits(res, "try-error")) print(res)
+}
+}
 \references{
 Ontario Ministry of the Solicitor General, ARSAU 2023
 and 2024 weapon_records technical notes -- the 2023 release

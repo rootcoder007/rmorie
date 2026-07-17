@@ -32,3 +32,10 @@ Runs DBSCAN on rotated-km coordinates and colours points by cluster
 label, with noise rendered grey.  Requires the suggested \pkg{dbscan}
 package; without it a base-graphics single-colour fallback is drawn.
 }
+\examples{
+set.seed(1)
+df <- data.frame(LAT_WGS84 = runif(60, 43.60, 43.85),
+                 LONG_WGS84 = runif(60, -79.60, -79.15))
+out <- morie_tps_render_dbscan(df, eps_km = 1, min_samples = 4L,
+                               outfile = tempfile(fileext = ".png"))
+}

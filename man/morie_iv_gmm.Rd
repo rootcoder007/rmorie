@@ -39,3 +39,13 @@ A named list with elements \code{coefficients}, \code{std_errors}, \code{t_stats
 \description{
 Two-step efficient GMM (rmorie native; HC0-weighted second step).
 }
+\examples{
+set.seed(1)
+n <- 400
+z <- rbinom(n, 1, 0.5); u <- rnorm(n)
+d <- rbinom(n, 1, plogis(0.8 * z + 0.3 * u))
+y <- 0.5 * d + 0.4 * u + rnorm(n, sd = 0.5)
+df <- data.frame(y, d, z)
+res <- morie_iv_gmm(df, "y", "d", "z")
+res$coefficients
+}

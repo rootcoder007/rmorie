@@ -18,3 +18,7 @@ Character scalar (the plain text).
 \description{
 Download an SIU director's-report PDF and return its plain text.
 }
+\examples{
+text <- morie_datasets_siu_report_text(offline = TRUE)
+substr(text, 1, 80)
+}

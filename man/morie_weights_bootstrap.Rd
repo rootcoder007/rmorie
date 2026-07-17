@@ -22,3 +22,8 @@ A numeric \code{matrix}.
 \description{
 Bootstrap replicate weights (Rao-Wu rescaling within strata).
 }
+\examples{
+set.seed(1)
+res <- morie_weights_bootstrap(runif(20, 0.5, 2), n_replicates = 20)
+str(res, max.level = 1)
+}

@@ -39,6 +39,8 @@
 #'
 #' @return A base R \code{data.frame} with columns \code{name},
 #'   \code{url}.
+#' @examples
+#' morie_ingest_chicago_resources()
 #' @export
 morie_ingest_chicago_resources <- function() {
   data.frame(
@@ -303,6 +305,8 @@ morie_ingest_chicago_crime <- function(year = NULL,
 #' @return A base R \code{data.frame}.
 #' @seealso \code{\link{morie_ingest_chicago_crime}},
 #'   \code{\link{morie_ingest_bigquery_table}}
+#' @examples
+#' \donttest{try(morie_ingest_chicago_crime_bigquery())}
 #' @export
 morie_ingest_chicago_crime_bigquery <- function(where = NULL,
                                                 year = NULL,

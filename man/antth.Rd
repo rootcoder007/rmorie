@@ -26,4 +26,10 @@ n_pairs, method.
 Crude vs antithetic Monte-Carlo estimator of E_U of f(U); reports the
 variance-reduction ratio var_AV / var_crude.
 }
+\examples{
+set.seed(1)
+x <- rnorm(30)
+res <- antth(x)
+str(res)
+}
 \keyword{internal}

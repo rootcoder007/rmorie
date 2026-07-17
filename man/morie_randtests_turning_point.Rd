@@ -23,3 +23,9 @@ Thin extender over \code{randtests::turning.point.test} for the
 classical turning-point test of randomness in a numeric
 sequence.
 }
+\examples{
+if (requireNamespace("randtests", quietly = TRUE)) {
+  set.seed(1)
+  morie_randtests_turning_point(rnorm(40))
+}
+}

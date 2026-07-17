@@ -41,3 +41,11 @@ A \code{data.frame} of covariate-balance statistics, one row per covariate.
 \description{
 Runs a sharp-RDD null test on each covariate.
 }
+\examples{
+set.seed(1)
+x <- runif(400, -1, 1)
+y <- 0.3 * x + 1.0 * (x >= 0) + rnorm(400, sd = 0.3)
+d <- data.frame(x, y, c1 = rnorm(400), c2 = rnorm(400))
+out <- morie_rdd_covariate_balance(d, "x", c("c1", "c2"))
+out
+}

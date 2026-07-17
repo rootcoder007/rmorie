@@ -15,3 +15,7 @@ one_way_anova(...)
 \description{
 One-way between-subjects ANOVA
 }
+\examples{
+set.seed(1)
+one_way_anova(rnorm(15), rnorm(15, 0.5), rnorm(15, 1))
+}

@@ -20,3 +20,11 @@ A data frame with \code{theta} (EAP) and \code{se}.
 \description{
 EAP ability scores for new respondents under a fitted 2PL model
 }
+\examples{
+set.seed(63)
+th <- rnorm(1000)
+a <- c(0.8, 1.2, 1.6, 1.0, 1.4); b <- c(-1, -0.5, 0, 0.5, 1)
+X <- vapply(seq_along(a), function(j) rbinom(1000, 1, plogis(a[j] * (th - b[j]))), numeric(1000))
+fit <- morie_irt_2pl(X)
+morie_irt_eap(fit, X)$theta[1:5]
+}

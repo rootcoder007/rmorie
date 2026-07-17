@@ -16,3 +16,8 @@ A numeric vector of design (inverse-probability) weights.
 \description{
 \eqn{w_i = 1 / \pi_i}{w_i = 1 / pi_i}.
 }
+\examples{
+set.seed(1)
+res <- morie_weights_design(runif(20, 0.05, 0.2))
+str(res, max.level = 1)
+}

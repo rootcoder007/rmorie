@@ -19,3 +19,8 @@ Named list of \code{morie_otis_analysis_result}s.
 \description{
 Counterpart to Python \code{analyze_all()}.
 }
+\examples{
+ds <- morie_synth_otis_all(n = 80L, seed = 2L)
+res <- try(morie_otis_analyze_all(ds))
+if (!inherits(res, "try-error")) names(res)
+}

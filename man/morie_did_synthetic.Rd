@@ -44,6 +44,16 @@ engine lives in \code{R/synth_native.R}; see also
 \code{\link{morie_synth_control}} for the classic Abadie synthetic
 control with placebo inference.
 }
+\examples{
+set.seed(3)
+df <- expand.grid(unit = 1:30, time = 1:8)
+df$treat_time <- ifelse(df$unit <= 5, 6, Inf)
+df$d <- as.integer(df$time >= df$treat_time)
+df$y <- 0.1 * df$time + 0.5 * df$d + rnorm(nrow(df), sd = 0.3)
+out <- morie_did_synthetic(df, "y", "unit", "time", "treat_time",
+                           n_bootstrap = 50L, seed = 3)
+str(out, max.level = 1)
+}
 \references{
 Arkhangelsky, D., et al. (2021). Synthetic
 difference-in-differences. \emph{American Economic Review},

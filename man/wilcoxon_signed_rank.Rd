@@ -19,3 +19,7 @@ An object of class \code{"morie_test_result"}.
 \description{
 Wilcoxon signed-rank test (one-sample or paired)
 }
+\examples{
+set.seed(1)
+wilcoxon_signed_rank(rnorm(20, 0.3))
+}

@@ -24,3 +24,11 @@ with normality, heteroskedasticity (Breusch-Pagan), and
 autocorrelation (Durbin-Watson) tests.  Optionally also returns
 deviance and Pearson residuals for logistic / Poisson GLMs.
 }
+\examples{
+set.seed(1)
+X <- cbind(1, matrix(rnorm(100 * 2), 100, 2))
+y <- drop(X \%*\% c(0.5, 1, -0.5) + rnorm(100, sd = 0.5))
+y_hat <- drop(X \%*\% solve(crossprod(X), crossprod(X, y)))
+r <- compute_residuals(y, y_hat, X)
+head(r$standardized_residuals)
+}

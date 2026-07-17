@@ -39,3 +39,7 @@ An integer scalar: the required sample size.
 \description{
 RDD sample-size determination
 }
+\examples{
+ss <- morie_rdd_sample_size(tau = 0.5, sigma = 1, power = 0.8)
+ss
+}

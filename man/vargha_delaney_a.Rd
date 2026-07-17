@@ -17,3 +17,7 @@ A \code{morie_effect_size}.
 \description{
 Vargha-Delaney A statistic
 }
+\examples{
+set.seed(1)
+vargha_delaney_a(rnorm(15), rnorm(15, 1))
+}

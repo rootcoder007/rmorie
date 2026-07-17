@@ -19,3 +19,12 @@ Accepts a named list of TPS data.frames (e.g.
 \code{OCC_YEAR} is present in every frame) a side-by-side
 year-by-year matrix.
 }
+\examples{
+\donttest{
+df <- try(morie_datasets_tps_assault(max_features = 200L))
+if (!inherits(df, "try-error")) {
+  res <- try(morie_tps_crime_compare(list(assault = df)))
+  if (!inherits(res, "try-error")) str(res, max.level = 1)
+}
+}
+}

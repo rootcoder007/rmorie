@@ -40,6 +40,11 @@ rather than from the empirical sample. Delegates to
 \code{boot::boot(sim = "parametric")} when \pkg{boot} is installed;
 otherwise uses an inline \code{rnorm/rpois/rbinom/rexp/rgamma} loop.
 }
+\examples{
+set.seed(1)
+str(parametric_bootstrap(rnorm(40), statistic = mean,
+                         n_boot = 200L), max.level = 1)
+}
 \seealso{
 \code{boot::boot}.
 }

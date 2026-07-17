@@ -18,3 +18,9 @@ with readable axis labels.
 \description{
 Default diagnostic plot for a morie_lm
 }
+\examples{
+set.seed(1)
+df <- data.frame(y = rnorm(30), x = rnorm(30))
+fit <- morie_lm(y ~ x, data = df)
+plot(fit)
+}

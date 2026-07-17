@@ -37,6 +37,9 @@
 #' web UI is not the same as the script user.
 #'
 #' @return A character vector (one element per line).
+#' @examples
+#' d <- morie_datasets_vpd_legal_disclaimer()
+#' head(d)
 #' @export
 morie_datasets_vpd_legal_disclaimer <- function() {
   path <- system.file("extdata", "vpd_legal_disclaimer.txt",

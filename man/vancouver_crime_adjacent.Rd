@@ -104,3 +104,23 @@ neighbourhood, primary material. Useful as a CPTED-style
 All loaders accept the same \code{offline = TRUE} (default) /
 \code{max_features} interface as the other morie dataset wrappers.
 }
+\examples{
+df <- morie_datasets_vancouver_graffiti()
+head(df)
+df <- morie_datasets_vancouver_noise_control_areas()
+head(df)
+df <- morie_datasets_vancouver_homeless_shelters()
+head(df)
+df <- morie_datasets_vancouver_property_use_inspection_districts()
+head(df)
+df <- morie_datasets_vancouver_fire_halls()
+head(df)
+df <- morie_datasets_vancouver_community_centres()
+head(df)
+df <- morie_datasets_vancouver_community_food_markets()
+head(df)
+df <- morie_datasets_vancouver_disability_parking()
+head(df)
+df <- morie_datasets_vancouver_public_art()
+head(df)
+}

@@ -16,3 +16,8 @@ morie_otis_path_complexity_gini(df)
 Per-(id, year, region) placement counts, with the Gini coefficient
 reported overall and split by fiscal year and region.
 }
+\examples{
+b02 <- morie_synth_otis("b02", n = 120L, seed = 1L)
+res <- morie_otis_path_complexity_gini(b02)
+res$title
+}

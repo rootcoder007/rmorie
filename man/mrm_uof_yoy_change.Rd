@@ -34,3 +34,7 @@ integer to a data.frame) or \code{df} + \code{year_col}.
 Change-point detection is the manual largest-absolute-difference
 heuristic (the R port does not require \pkg{changepoint}).
 }
+\examples{
+inc <- morie_datasets_corrections_uof_incidents()
+str(mrm_uof_yoy_change(df = inc, year_col = "year"), max.level = 1)
+}

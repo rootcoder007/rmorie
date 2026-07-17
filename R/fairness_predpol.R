@@ -62,6 +62,13 @@ NULL
 #'   area). When supplied, outcome rate is per 10,000 inhabitants.
 #' @return A list with \code{areas}, \code{mean_risk},
 #'   \code{outcome_rate}, \code{group}, \code{n_records}.
+#' @examples
+#' set.seed(1)
+#' area <- sample(sprintf("a%02d", 1:5), 200, replace = TRUE)
+#' risk <- runif(200)
+#' outcome <- rbinom(200, 1, plogis(risk - 0.5))
+#' group <- sample(c("X", "Y"), 200, replace = TRUE)
+#' morie_fairness_predpol_aggregate_areas(area, risk, outcome, group = group)
 #' @export
 morie_fairness_predpol_aggregate_areas <- function(area, risk, outcome,
                                                     group = NULL,
@@ -138,6 +145,13 @@ morie_fairness_predpol_aggregate_areas <- function(area, risk, outcome,
 #' @param group Majority/dominant group per area.
 #' @return \code{morie_fairness_result}; \code{$value} is the
 #'   largest-magnitude per-group mean rank gap (positive = over-policed).
+#' @examples
+#' set.seed(6)
+#' areas <- paste0("a", 1:8)
+#' mean_risk <- seq(0.1, 0.9, length.out = 8L)
+#' outcome_rate <- mean_risk + rnorm(8L, 0, 0.05)
+#' group <- rep(c("X", "Y"), each = 4L)
+#' morie_fairness_predpol_calibration_audit(areas, mean_risk, outcome_rate, group)
 #' @export
 morie_fairness_predpol_calibration_audit <- function(areas, mean_risk,
                                                       outcome_rate,
@@ -263,6 +277,11 @@ morie_fairness_predpol_calibration_audit <- function(areas, mean_risk,
 #' @param reference Optional reference group label (default: lowest-mean).
 #' @return \code{morie_fairness_result}; \code{$value} is the spread
 #'   (max - min) of per-group mean scores.
+#' @examples
+#' set.seed(7); n <- 80L
+#' group <- rep(c("X", "Y"), each = n / 2L)
+#' score <- ifelse(group == "X", rnorm(n, 0, 1), rnorm(n, 2, 1))
+#' morie_fairness_predpol_score_disparity(score, group)
 #' @export
 morie_fairness_predpol_score_disparity <- function(score, group,
                                                     reference = NULL) {

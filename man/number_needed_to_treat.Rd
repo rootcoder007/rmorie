@@ -17,3 +17,6 @@ A \code{morie_effect_size}.
 \description{
 Number needed to treat (NNT) = 1 / |RD|
 }
+\examples{
+number_needed_to_treat(10, 90, 20, 80)
+}

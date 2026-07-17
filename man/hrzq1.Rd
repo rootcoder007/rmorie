@@ -22,4 +22,12 @@ Named list with estimate, se, intercept, tau, n, method.
 \description{
 Koenker-Bassett linear quantile regression
 }
+\examples{
+set.seed(1)
+n <- 80
+x <- rnorm(n)
+y <- 0.5 * x + rnorm(n, sd = 0.3)
+res <- hrzq1(x, y, tau = 0.5)
+res$estimate
+}
 \keyword{internal}

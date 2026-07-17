@@ -32,3 +32,16 @@ values in the real published data; low-cardinality columns
 (\code{Gender}, \code{Yes}/\code{No} alerts, \code{Measure}) are intentionally skipped
 because the index overhead exceeds the lookup benefit.
 }
+\examples{
+if (requireNamespace("RSQLite", quietly = TRUE)) {
+  con <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
+  siu <- data.frame(drid = 1:5,
+                    case_number = sprintf("23-OFD-\%03d", 1:5),
+                    date_of_incident_iso = "2023-01-15",
+                    police_service = "Toronto")
+  DBI::dbWriteTable(con, "SIU", siu)
+  n <- morie_db_create_indexes(con, "SIU")
+  DBI::dbDisconnect(con)
+  n
+}
+}

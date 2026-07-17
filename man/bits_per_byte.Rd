@@ -17,4 +17,9 @@ Named list with value, nll_nats, n_tokens, n_bytes, method.
 \description{
 Bits per byte (Gao 2020)
 }
+\examples{
+r <- morie:::bits_per_byte(c(1, 2, 3))
+r$value
+morie:::bits_per_byte(c(1, 2), n_bytes = 10)$n_bytes
+}
 \keyword{internal}

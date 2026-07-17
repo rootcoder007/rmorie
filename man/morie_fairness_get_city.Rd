@@ -15,3 +15,8 @@ A \code{morie_city_profile}.
 \description{
 Look up a registered city profile by case-insensitive name
 }
+\examples{
+p <- morie_fairness_city_profile("demo_city", area_col = "a")
+morie_fairness_register_city(p)
+morie_fairness_get_city(p$name)$name
+}

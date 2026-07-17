@@ -17,6 +17,11 @@ Integer count.
 \description{
 Count of \verb{|diff(x)| > threshold} (defaults to \code{sd(x)}).
 }
+\examples{
+set.seed(1L)
+x <- rnorm(50L)
+morie_dsp_willison_amplitude(x)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 5, sec. 5.4.
 }

@@ -24,4 +24,11 @@ Named list with estimate, se, bandwidth, n, method.
 \description{
 Nadaraya-Watson kernel regression
 }
+\examples{
+set.seed(29)
+x <- rnorm(60)
+y <- 0.4 * x + rnorm(60, sd = 0.3)
+res <- hrzk2(x, y)
+str(res)
+}
 \keyword{internal}

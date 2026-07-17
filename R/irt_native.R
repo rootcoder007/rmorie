@@ -153,6 +153,15 @@ morie_irt_2pl <- function(responses, n_quad = 41L, max_iter = 200L,
 #' @references Samejima, F. (1969). Estimation of latent ability using
 #'   a response pattern of graded scores. \emph{Psychometrika
 #'   Monograph}, 17.
+#' @examples
+#' set.seed(64)
+#' n <- 1200; k <- 4; a_true <- c(1.2, 1.5, 1.0, 1.8); th <- rnorm(n)
+#' X <- vapply(seq_len(k), function(j) {
+#'   bj <- sort(runif(2, -1, 1))
+#'   u <- runif(n)
+#'   1L + (u < plogis(a_true[j] * (th - bj[1]))) + (u < plogis(a_true[j] * (th - bj[2])))
+#' }, integer(n))
+#' morie_irt_grm(X)
 #' @export
 morie_irt_grm <- function(responses, n_quad = 31L, max_iter = 100L,
                           tol = 1e-5) {
@@ -246,6 +255,13 @@ morie_irt_grm <- function(responses, n_quad = 31L, max_iter = 100L,
 #' @param responses 0/1 matrix of new response patterns.
 #' @param n_quad Quadrature points.
 #' @return A data frame with \code{theta} (EAP) and \code{se}.
+#' @examples
+#' set.seed(63)
+#' th <- rnorm(1000)
+#' a <- c(0.8, 1.2, 1.6, 1.0, 1.4); b <- c(-1, -0.5, 0, 0.5, 1)
+#' X <- vapply(seq_along(a), function(j) rbinom(1000, 1, plogis(a[j] * (th - b[j]))), numeric(1000))
+#' fit <- morie_irt_2pl(X)
+#' morie_irt_eap(fit, X)$theta[1:5]
 #' @export
 morie_irt_eap <- function(fit, responses, n_quad = 41L) {
   X <- as.matrix(responses)

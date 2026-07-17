@@ -28,3 +28,13 @@ A named \code{list} (see Details).
 \description{
 Hansen J test of overidentifying restrictions (robust)
 }
+\examples{
+set.seed(1)
+n <- 400
+z1 <- rbinom(n, 1, 0.5); z2 <- rnorm(n); u <- rnorm(n)
+d <- 0.5 * z1 + 0.4 * z2 + 0.3 * u + rnorm(n, sd = 0.3)
+y <- 0.5 * d + 0.4 * u + rnorm(n, sd = 0.5)
+df <- data.frame(y, d, z1, z2)
+out <- morie_iv_hansen_j(df, "y", "d", c("z1", "z2"))
+out$name
+}

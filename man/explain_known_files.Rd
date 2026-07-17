@@ -12,3 +12,7 @@ Character vector of filenames.
 \description{
 Names of all morie output CSVs with registered explanations
 }
+\examples{
+v <- explain_known_files()
+head(v)
+}

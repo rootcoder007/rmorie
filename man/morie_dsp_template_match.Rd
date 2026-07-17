@@ -21,6 +21,13 @@ Slides \code{template} across \code{x}, computing the centred Pearson-style
 correlation per offset. Returns indices and correlation values
 meeting \code{threshold}.
 }
+\examples{
+set.seed(1L)
+tpl <- c(0, 1, 2, 1, 0)
+x <- c(rnorm(15, sd = 0.01), tpl, rnorm(15, sd = 0.01))
+out <- morie_dsp_template_match(x, tpl, threshold = 0.7)
+out$indices
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 4, sec. 4.4.
 }

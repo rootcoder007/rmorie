@@ -14,3 +14,6 @@ Each entry is itself a named list with \code{year_or_range},
 \code{kind}, \code{csv_filename}, \code{sidecar_filename}, expected
 row / column counts, \code{is_valid}, and bilingual descriptions.
 }
+\examples{
+str(ARSAU_REGISTRY)
+}

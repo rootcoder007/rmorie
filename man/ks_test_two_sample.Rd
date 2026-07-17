@@ -15,3 +15,8 @@ An object of class \code{"morie_test_result"}.
 \description{
 Two-sample Kolmogorov-Smirnov test
 }
+\examples{
+set.seed(1)
+res <- ks_test_two_sample(rnorm(40), rnorm(40, mean = 0.5))
+res$test_statistic
+}

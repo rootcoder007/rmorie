@@ -9,6 +9,14 @@
 #' @param .bootstrap Logical; bootstrap SEs (default TRUE).
 #' @return Named list with estimate, se, att, atu, bandwidth, n, method.
 #' @keywords internal
+#' @examples
+#' set.seed(4)
+#' n <- 100
+#' x <- rnorm(n)
+#' treatment <- rbinom(n, 1, 0.5)
+#' y <- 0.5 * x + 0.4 * treatment + rnorm(n, sd = 0.3)
+#' res <- hrzt1(x, y, treatment, .bootstrap = FALSE)
+#' str(res)
 #' @export
 hrzt1 <- function(x, y, treatment, bandwidth = NULL, .bootstrap = TRUE) {
   y <- as.numeric(y)

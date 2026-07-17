@@ -15,6 +15,9 @@ Scalar.
 \description{
 Dimensionless waveshape descriptor: \verb{E|x| / (E sqrt|x|)^2}.
 }
+\examples{
+morie_dsp_shape_factor(rep(0, 10L))
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 5, sec. 5.2.
 }

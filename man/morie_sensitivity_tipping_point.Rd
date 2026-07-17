@@ -32,6 +32,11 @@ Pairs with \code{\link{tipping_point_analysis}}, which targets
 \emph{missing-data} sensitivity rather than unmeasured-confounder
 sensitivity.
 }
+\examples{
+if (requireNamespace("tipr", quietly = TRUE)) {
+  str(morie_sensitivity_tipping_point(0.5, smd = 0.3), max.level = 1)
+}
+}
 \references{
 D'Agostino McGowan, L. (2022). tipr: An R package for
 sensitivity analyses for unmeasured confounders.

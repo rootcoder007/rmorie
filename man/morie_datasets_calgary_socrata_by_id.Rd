@@ -23,3 +23,15 @@ A \code{data.frame} of the requested dataset (a 0-row typed frame when the data 
 Phase 3FFF3. Generic SODA2 fetch wrapper for arbitrary Calgary
 Socrata resources.
 }
+\examples{
+\donttest{
+cat_df <- morie_datasets_calgary_opendata_bulk_layers()
+df <- try(morie_datasets_calgary_socrata_by_id(cat_df$soda_id[1], limit = 5L))
+if (!inherits(df, "try-error")) head(df)
+}
+\donttest{
+cat_df <- morie_datasets_edmonton_opendata_bulk_layers()
+df <- try(morie_datasets_edmonton_socrata_by_id(cat_df$soda_id[1], limit = 5L))
+if (!inherits(df, "try-error")) head(df)
+}
+}

@@ -20,6 +20,11 @@ Numeric vector, length(x).
 Log -> rFFT high-pass at \code{cutoff} Hz -> exp. Reduces multiplicative
 baseline drift in non-negative envelopes.
 }
+\examples{
+set.seed(1)
+x <- abs(sin(2 * pi * 0.02 * (1:400))) + rnorm(400, 0, 0.05)
+str(morie_dsp_homomorphic(x, cutoff = 0.1, fs = 100), max.level = 1)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 4, sec. 4.9;
 Oppenheim & Schafer (2010).

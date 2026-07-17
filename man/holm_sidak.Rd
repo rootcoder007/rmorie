@@ -21,3 +21,8 @@ Step-down Holm with Sidak's closed-form adjustment per step;
 equivalent to \code{mutoss::SidakSD} when that package is
 installed.
 }
+\examples{
+set.seed(1)
+p <- c(runif(30), runif(5, 0, 0.005))
+holm_sidak(p)$adjusted
+}

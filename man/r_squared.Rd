@@ -15,3 +15,8 @@ A \code{morie_effect_size}.
 \description{
 Coefficient of determination R^2
 }
+\examples{
+set.seed(1)
+x <- rnorm(30); y <- x + rnorm(30)
+r_squared(x, y)
+}

@@ -33,3 +33,11 @@ A list with \code{areas}, \code{mean_risk},
 \description{
 Aggregate per-record predictive-policing data to per-area
 }
+\examples{
+set.seed(1)
+area <- sample(sprintf("a\%02d", 1:5), 200, replace = TRUE)
+risk <- runif(200)
+outcome <- rbinom(200, 1, plogis(risk - 0.5))
+group <- sample(c("X", "Y"), 200, replace = TRUE)
+morie_fairness_predpol_aggregate_areas(area, risk, outcome, group = group)
+}

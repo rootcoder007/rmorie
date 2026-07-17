@@ -20,3 +20,8 @@ Delegates to \code{qvalue::pi0est} (Bioconductor) when installed
 and \code{method = "storey"}. Otherwise computes the cutoff-based
 or bootstrap-based estimator inline.
 }
+\examples{
+set.seed(1)
+p <- c(runif(80), runif(20, 0, 0.005))
+estimate_pi0(p, method = "storey")
+}

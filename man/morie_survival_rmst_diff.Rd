@@ -33,3 +33,9 @@ A named list with elements \code{rmst_diff}, \code{se}, \code{z}, \code{p_value}
 \description{
 Difference in RMST between two groups.
 }
+\examples{
+set.seed(1)
+t1 <- rexp(40); e1 <- rbinom(40, 1, 0.7)
+t2 <- rexp(40, rate = 1.5); e2 <- rbinom(40, 1, 0.7)
+str(morie_survival_rmst_diff(t1, e1, t2, e2, tau = 2), max.level = 1)
+}

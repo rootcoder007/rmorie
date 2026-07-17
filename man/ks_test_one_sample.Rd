@@ -20,3 +20,8 @@ An object of class \code{"morie_test_result"}.
 \description{
 One-sample Kolmogorov-Smirnov test
 }
+\examples{
+set.seed(1)
+res <- ks_test_one_sample(rnorm(40), cdf = "norm")
+res
+}

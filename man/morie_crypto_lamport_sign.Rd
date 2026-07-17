@@ -18,3 +18,10 @@ revealed 32-byte secrets (list) plus the message digest.
 \description{
 Sign one message with a Lamport keypair (native)
 }
+\examples{
+if (morie_crypto_sodium_available()) {
+  kp <- morie_crypto_lamport_keygen()
+  sig <- morie_crypto_lamport_sign(kp, "the die is cast")
+  print(morie_crypto_lamport_verify(kp$pk, "the die is cast", sig))
+}
+}

@@ -40,3 +40,7 @@ Generates per-record data with \code{area}, \code{group},
 shifted up by \code{bias * 100} points for non-reference groups).
 The \code{bias} input is the ground truth the audits should recover.
 }
+\examples{
+d <- morie_fairness_simulate_biased_crime_data(n = 100L, seed = 1L)
+head(d)
+}

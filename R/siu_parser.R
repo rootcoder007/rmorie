@@ -608,6 +608,18 @@ NULL
 #'   and recorded as \code{source_url_report}.
 #' @return A list with every \code{SIU_COLUMNS} key (NAs for
 #'   unfound fields).
+#' @examples
+#' html <- paste0(
+#'   "<html><body><h1>Director's Report</h1>",
+#'   "<p>Case Number: 22-OCI-123</p>",
+#'   "<p>Police Service: Toronto Police Service</p>",
+#'   "<p>Date of Incident: March 5, 2022</p>",
+#'   "<p>The Investigation</p>",
+#'   "<p>A 35-year-old man was involved in an incident.</p>",
+#'   "</body></html>")
+#' r <- morie_siu_parse_html(html, drid = 1234L,
+#'                           source_url = "https://example/foo.php?drid=1234")
+#' r$case_number
 #' @export
 morie_siu_parse_html <- function(html, drid = NA_integer_,
                                  source_url = NULL) {
@@ -723,6 +735,16 @@ morie_siu_parse_html <- function(html, drid = NA_integer_,
 #'   \code{news_release_title}, \code{news_release_date_iso},
 #'   \code{news_release_date_raw}, \code{news_release_summary},
 #'   \code{case_number}, and \code{directors_name}.
+#' @examples
+#' html <- paste0(
+#'   "<html><body>News Release\n",
+#'   "SIU Concludes Investigation Into Downtown Incident\n",
+#'   "Toronto, ON (5 November, 2022) -- The SIU has concluded its ",
+#'   "investigation. Director Joseph Martino said no charges will be laid.\n",
+#'   "Director of the Special Investigations Unit, Joseph Martino",
+#'   "</body></html>")
+#' r <- morie_siu_parse_news_html(html, nrid = 4567L)
+#' r$news_release_title
 #' @export
 morie_siu_parse_news_html <- function(html, nrid = NA_integer_,
                                       source_url = NULL) {

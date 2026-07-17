@@ -22,3 +22,7 @@ callers fetch records via
 \code{\link[=morie_datasets_toronto_open_ckan_resource]{morie_datasets_toronto_open_ckan_resource()}} or visit the
 open.toronto.ca dataset page.
 }
+\examples{
+d <- morie_datasets_toronto_open_crime_adjacent_layers(offline = TRUE)
+head(d[, c("package_name", "title")])
+}

@@ -22,3 +22,11 @@ is preferred for fitted \code{lm}s; this function works straight
 from \code{X}, \code{y}, and a fitted \code{y_hat}), DFFITS,
 DFBETAS, and COVRATIO.
 }
+\examples{
+set.seed(4)
+X <- cbind(1, matrix(rnorm(40 * 2), 40, 2))
+y <- drop(X \%*\% c(0.5, 1, -0.5) + rnorm(40, sd = 0.5))
+r <- compute_influence(y, X)
+head(r$cooks_distance)
+r$influential_indices
+}

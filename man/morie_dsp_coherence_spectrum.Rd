@@ -22,6 +22,14 @@ Same as \code{morie_dsp_coherence}.
 Convenience pass-through so detection-side callers can stay within
 the \code{dsp_detection} namespace.
 }
+\examples{
+set.seed(1)
+t <- seq(0, 4, by = 1 / 128)
+x <- sin(2 * pi * 5 * t) + rnorm(length(t), 0, 0.2)
+y <- sin(2 * pi * 5 * t + 0.5) + rnorm(length(t), 0, 0.2)
+str(morie_dsp_coherence_spectrum(x, y, fs = 128, nperseg = 128L),
+    max.level = 1)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 4 & Ch. 6.
 }

@@ -8,6 +8,11 @@
 #' @param top_k Integer experts kept per token (default 2).
 #' @return Named list with tensor, gate, topk_idx, load, method.
 #' @keywords internal
+#' @examples
+#' set.seed(11)
+#' x <- matrix(rnorm(20 * 4), 20, 4)
+#' out <- morie:::mixture_of_experts(x)
+#' str(out)
 mixture_of_experts <- function(x, W_gate = NULL, experts = NULL,
                                top_k = 2L) {
   xm <- as.matrix(x)

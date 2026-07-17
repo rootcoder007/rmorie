@@ -19,3 +19,6 @@ Numeric c(lower, upper).
 \description{
 Prediction interval for a new study (random-effects meta)
 }
+\examples{
+prediction_interval(c(0.20, 0.35, 0.15), c(0.08, 0.10, 0.07))
+}

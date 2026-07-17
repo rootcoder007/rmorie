@@ -24,3 +24,14 @@ News-release pages live at \code{news_template.php?nrid=<N>} and
 have a different layout than the director's reports -- a single
 headline, short summary paragraph, signed-by-Director line.
 }
+\examples{
+html <- paste0(
+  "<html><body>News Release\n",
+  "SIU Concludes Investigation Into Downtown Incident\n",
+  "Toronto, ON (5 November, 2022) -- The SIU has concluded its ",
+  "investigation. Director Joseph Martino said no charges will be laid.\n",
+  "Director of the Special Investigations Unit, Joseph Martino",
+  "</body></html>")
+r <- morie_siu_parse_news_html(html, nrid = 4567L)
+r$news_release_title
+}

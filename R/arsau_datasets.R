@@ -71,6 +71,9 @@ NULL
 #'   \code{description}.
 #' @references Ontario Ministry of the Solicitor General, ARSAU
 #'   per-resource technical release notes (2020-2022 / 2023 / 2024).
+#' @examples
+#' reg <- morie_arsau_registry_df(language = "en")
+#' unique(reg$kind)
 #' @export
 morie_arsau_registry_df <- function(language = "en") {
   reg <- ARSAU_REGISTRY()
@@ -127,6 +130,13 @@ morie_arsau_registry_df <- function(language = "en") {
 #'   \code{type}, \code{notes}.
 #' @references CKAN \emph{datastore_search} response schema, as
 #'   served by \code{datastore_search} (\url{https://data.ontario.ca/}).
+#' @examples
+#' sc <- list(fields = list(
+#'   list(id = "PoliceService", type = "text",
+#'        info = list(notes = "Name of the service.")),
+#'   list(id = "IncidentYear", type = "int",
+#'        info = list(notes = "Reporting year."))))
+#' morie_arsau_sidecar_schema(sc)
 #' @export
 morie_arsau_sidecar_schema <- function(sidecar) {
   if (!is.list(sidecar)) {
@@ -174,6 +184,14 @@ morie_arsau_sidecar_schema <- function(sidecar) {
 #'   \code{morie_arsau_read_sidecar()}.
 #' @return A \code{data.frame} (zero rows if \code{records} is empty).
 #' @references CKAN \emph{datastore_search} response schema.
+#' @examples
+#' sc <- list(
+#'   fields = list(list(id = "PoliceService", type = "text"),
+#'                 list(id = "IncidentYear", type = "int")),
+#'   records = list(
+#'     list(PoliceService = "Toronto", IncidentYear = 2023L),
+#'     list(PoliceService = "OPP", IncidentYear = 2023L)))
+#' morie_arsau_sidecar_to_frame(sc)
 #' @export
 morie_arsau_sidecar_to_frame <- function(sidecar) {
   if (!is.list(sidecar)) {
@@ -320,6 +338,13 @@ morie_arsau_read_xlsx_dictionary <- function(path, sheet = 1L) {
 #'   table.
 #' @references Ontario Ministry of the Solicitor General data
 #'   dictionaries accompanying the ARSAU CSV releases.
+#' @examples
+#' path <- system.file("extdata", "OTIS_DATA_DICTIONARY.md",
+#'                     package = "morie")
+#' if (nzchar(path)) {
+#'   out <- morie_arsau_read_markdown_dictionary(path)
+#'   str(out)
+#' }
 #' @export
 morie_arsau_read_markdown_dictionary <- function(path) {
   if (!file.exists(path)) {
@@ -373,6 +398,10 @@ morie_arsau_read_markdown_dictionary <- function(path) {
 #' @return Character scalar URL, or \code{NA_character_}.
 #' @references Ontario Data Catalogue CKAN API:
 #'   \code{datastore_search} (\url{https://data.ontario.ca/}).
+#' @examples
+#' url <- morie_arsau_ckan_url(kind = "main_records", year = "2024",
+#'                             limit = 100L)
+#' url
 #' @export
 morie_arsau_ckan_url <- function(kind, year, limit = 5000L) {
   reg <- ARSAU_REGISTRY()

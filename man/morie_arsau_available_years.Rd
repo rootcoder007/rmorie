@@ -17,3 +17,8 @@ An object of class \code{"morie_arsau_result"}.
 \description{
 List ARSAU year / year-range buckets.
 }
+\examples{
+r <- morie_arsau_available_years(data_dir = tempdir())
+r$present
+r$missing
+}

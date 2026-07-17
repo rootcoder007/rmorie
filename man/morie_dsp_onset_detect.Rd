@@ -23,6 +23,11 @@ Smooths \code{x^2} with a \code{energy_window_ms} boxcar and flags samples
 where the smoothed energy crosses \code{threshold_factor * median(energy)}.
 Hysteresis: returns to "off" only when energy drops below baseline.
 }
+\examples{
+set.seed(1L)
+x <- c(0.01 * rnorm(200), 5 + 0.01 * rnorm(200))
+morie_dsp_onset_detect(x, fs = 1000, energy_window_ms = 5, threshold_factor = 3)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 4, sec. 4.5.
 }

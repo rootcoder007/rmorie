@@ -578,6 +578,12 @@ morie_fairness_equalized_odds <- function(y_true, y_pred, group,
 #' @inheritParams morie_fairness_equalized_odds
 #' @return A \code{morie_fairness_result}; headline value is the
 #'   largest absolute AOD across groups.
+#' @examples
+#' morie_fairness_average_odds_difference(
+#'   y_true = c(1, 1, 0, 0, 1, 1, 0, 0),
+#'   y_pred = c(1, 1, 0, 0, 0, 0, 1, 1),
+#'   group  = c(rep("A", 4), rep("B", 4))
+#' )
 #' @export
 morie_fairness_average_odds_difference <- function(y_true, y_pred, group,
                                                    privileged = NULL,
@@ -739,6 +745,12 @@ morie_fairness_gini <- function(values, group = NULL) {
 #'
 #' @inheritParams morie_fairness_disparate_impact
 #' @return A \code{morie_fairness_result}; headline value is BAS.
+#' @examples
+#' morie_fairness_bias_amplification(
+#'   c(1, 1, 1, 1, 0, 0, 0, 0),
+#'   c(rep("A", 4), rep("B", 4)),
+#'   privileged = "A"
+#' )
 #' @export
 morie_fairness_bias_amplification <- function(y_pred, group,
                                               privileged = NULL,

@@ -464,6 +464,10 @@ morie_fetch_xml <- function(txt) {
 #'
 #' @param txt HTML text.
 #' @return A nested list tree as in \code{\link{morie_fetch_xml}}.
+#' @examples
+#' html <- "<html><body><p>first<p>second<br><ul><li>a<li>b</ul></body></html>"
+#' root <- morie_fetch_html(html)
+#' root
 #' @export
 morie_fetch_html <- function(txt) {
   void <- c("area", "base", "br", "col", "embed", "hr", "img",
@@ -839,6 +843,12 @@ morie_fetch_parquet <- function(path) {
 #' @return An object of class \code{morie_dataset}: list with
 #'   \code{data}, \code{format}, \code{source}, \code{n_rows} (when
 #'   tabular).
+#' @examples
+#' d <- data.frame(a = 1:3, b = c("x", "y", "z"))
+#' fc <- tempfile(fileext = ".csv")
+#' write.csv(d, fc, row.names = FALSE)
+#' out <- morie_fetch_unified(fc)
+#' out$n_rows
 #' @export
 morie_fetch_unified <- function(path, format = NULL) {
   if (is.null(format)) {

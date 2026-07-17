@@ -23,3 +23,7 @@ A \code{data.frame}.
 \description{
 NamUs missing-persons case metadata.
 }
+\examples{
+df <- morie_datasets_namus_missing_persons(state = "CA", offline = TRUE)
+head(df)
+}

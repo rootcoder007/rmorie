@@ -43,6 +43,11 @@ implementation is retained because rmorie's API returns the
 resampled coefficient distribution (not just a vcov), which is
 what downstream MRM analyses consume.
 }
+\examples{
+set.seed(1)
+X <- cbind(1, rnorm(50)); y <- drop(X \%*\% c(1, 2)) + rnorm(50)
+str(wild_bootstrap(y, X, n_boot = 199L), max.level = 1)
+}
 \seealso{
 \code{sandwich::vcovBS}, \code{fwildclusterboot::boottest},
 \code{\link[=morie_did_wild_cluster_bootstrap]{morie_did_wild_cluster_bootstrap()}}.

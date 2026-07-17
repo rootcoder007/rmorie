@@ -25,3 +25,12 @@ live in \code{R/data_access.R} and \code{R/dataset_catalog.R}).  An
 optional \code{out_dir} writes per-dataset \code{tps_<name>.txt}
 transcripts.
 }
+\examples{
+\donttest{
+df <- try(morie_datasets_tps_assault(max_features = 200L))
+if (!inherits(df, "try-error")) {
+  res <- try(morie_tps_analyze_all(list(assault = df)))
+  if (!inherits(res, "try-error")) names(res)
+}
+}
+}

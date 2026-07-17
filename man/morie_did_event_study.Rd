@@ -58,3 +58,13 @@ fixed effects, fitted by the same native TWFE engine as
 \code{fixest::feols} + \code{fixest::i()} to machine precision
 (see \code{tests/cross/}).
 }
+\examples{
+set.seed(1)
+df <- expand.grid(unit = 1:30, time = 1:6)
+df$treat_time <- ifelse(df$unit <= 15, 4, Inf)
+df$d <- as.integer(df$time >= df$treat_time)
+df$y <- 0.1 * df$time + 0.7 * df$d + rnorm(nrow(df), sd = 0.4)
+res <- morie_did_event_study(df, "y", "unit", "time", "treat_time",
+                             leads = 2L, lags = 2L)
+res$coefficients
+}

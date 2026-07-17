@@ -34,6 +34,12 @@ is the canonical CRAN equivalent (cross-referenced); rmorie keeps
 the inline path because the rmorie API returns the full null
 distribution.
 }
+\examples{
+set.seed(1)
+x <- rnorm(25)
+str(paired_permutation_test(x, x + rnorm(25, 0.3),
+                            n_permutations = 499L), max.level = 1)
+}
 \seealso{
 \code{coin::symmetry_test}.
 }

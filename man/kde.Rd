@@ -22,6 +22,13 @@ Numeric vector of estimated densities.
 Computes f-hat(x) equal to one over n times h times the sum over i
 of K of (x minus X_i) divided by h.
 }
+\examples{
+set.seed(1)
+x <- sort(runif(40, -2, 2))
+x_eval <- seq(-1.5, 1.5, length.out = 20)
+d <- kde(x, x_eval, bandwidth = 0.4, kernel_type = "epanechnikov")
+d
+}
 \references{
 Silverman, B. W. (1986). Density Estimation for
 Statistics and Data Analysis. Chapman and Hall.

@@ -12,3 +12,6 @@ A numeric value (scalar).
 \description{
 Total number of registered commands (excluding aliases)
 }
+\examples{
+n_stat_commands()
+}

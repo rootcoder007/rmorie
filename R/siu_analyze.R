@@ -120,6 +120,13 @@ NULL
 #'   \code{file.path(tempdir(), "morie", "siu", "SIU_by_case.csv")}.
 #' @return A \code{morie_rich_result} list with summary lines,
 #'   one table, and a payload of raw counts.
+#' @examples
+#' df <- data.frame(
+#'   police_service = c("Toronto Police Service", "Toronto Police Service",
+#'                      "Ontario Provincial Police", "Peel Regional Police"),
+#'   charges_recommended = c(TRUE, FALSE, FALSE, TRUE))
+#' r <- morie_siu_by_police_service(df)
+#' r$title
 #' @export
 morie_siu_by_police_service <- function(data = NULL) {
   df <- .siu_an_load(data)
@@ -209,6 +216,13 @@ morie_siu_by_police_service <- function(data = NULL) {
 #'
 #' @inheritParams morie_siu_by_police_service
 #' @return A \code{morie_rich_result} list.
+#' @examples
+#' df <- data.frame(
+#'   date_of_incident_iso = c("2022-01-05", "2022-06-12", "2023-02-18",
+#'                            "2024-03-01", "2024-11-11"),
+#'   charges_recommended = c(TRUE, FALSE, FALSE, TRUE, NA))
+#' r <- morie_siu_by_year(df)
+#' r$payload$by_year
 #' @export
 morie_siu_by_year <- function(data = NULL) {
   df <- .siu_an_load(data)
@@ -273,6 +287,14 @@ morie_siu_by_year <- function(data = NULL) {
 #'
 #' @inheritParams morie_siu_by_police_service
 #' @return A \code{morie_rich_result} list.
+#' @examples
+#' df <- data.frame(
+#'   number_of_subject_officials = c(1L, 2L, 1L, 3L),
+#'   number_of_witness_officials = c(2L, 4L, 1L, 5L),
+#'   number_of_civilian_witnesses = c(0L, 3L, 1L, 2L),
+#'   number_of_officers_involved = c(3L, 6L, 2L, 8L))
+#' r <- morie_siu_case_counts(df)
+#' r$tables[[1]]$rows
 #' @export
 morie_siu_case_counts <- function(data = NULL) {
   df <- .siu_an_load(data)
@@ -325,6 +347,12 @@ morie_siu_case_counts <- function(data = NULL) {
 #'
 #' @inheritParams morie_siu_by_police_service
 #' @return A \code{morie_rich_result} list.
+#' @examples
+#' df <- data.frame(
+#'   sex_gender_affected = c("Male", "Female", "Male", "Male", NA),
+#'   age_affected = c("34", "27", "55", "19", "42"))
+#' r <- morie_siu_demographics(df)
+#' r$title
 #' @export
 morie_siu_demographics <- function(data = NULL) {
   df <- .siu_an_load(data)
@@ -385,6 +413,12 @@ morie_siu_demographics <- function(data = NULL) {
 #' @inheritParams morie_siu_by_police_service
 #' @return A \code{morie_rich_result} list, including a warning
 #'   noting that keyword-presence is a signal, not a verdict.
+#' @examples
+#' df <- data.frame(
+#'   mental_health_or_race_indications = c("mental health; Indigenous", "",
+#'                                         "racial", "mental health; Black"))
+#' r <- morie_siu_mental_health_race_indicators(df)
+#' r$tables[[1]]$rows
 #' @export
 morie_siu_mental_health_race_indicators <- function(data = NULL) {
   df <- .siu_an_load(data)
@@ -484,6 +518,13 @@ morie_siu_mental_health_race_indicators <- function(data = NULL) {
 #'
 #' @inheritParams morie_siu_by_police_service
 #' @return A \code{morie_rich_result} list.
+#' @examples
+#' df <- data.frame(
+#'   date_of_incident_iso = c("2022-01-05", "2023-02-18", "2024-03-01"),
+#'   date_siu_notified_iso = c("2022-01-06", "2023-02-19", "2024-03-02"),
+#'   date_of_director_decision_iso = c("2022-08-01", "2023-09-10", "2024-09-01"))
+#' r <- morie_siu_decision_timing(df)
+#' r$tables[[1]]$rows
 #' @export
 morie_siu_decision_timing <- function(data = NULL) {
   df <- .siu_an_load(data)
@@ -532,6 +573,12 @@ morie_siu_decision_timing <- function(data = NULL) {
 #' @inheritParams morie_siu_by_police_service
 #' @return A \code{morie_rich_result} list including the contingency
 #'   table, statistic, df, and p-value.
+#' @examples
+#' df <- data.frame(
+#'   date_of_incident_iso = rep(c("2022-01-01", "2023-01-01", "2024-01-01"), each = 4),
+#'   charges_recommended = rep(c(TRUE, FALSE, FALSE, TRUE), 3))
+#' r <- morie_siu_charges_by_year_chi2(df)
+#' r$title
 #' @export
 morie_siu_charges_by_year_chi2 <- function(data = NULL) {
   df <- .siu_an_load(data)
@@ -607,6 +654,18 @@ morie_siu_charges_by_year_chi2 <- function(data = NULL) {
 #' @param out_dir Optional directory; if non-\code{NULL}, each result
 #'   is written as \code{siu_analysis_<name>.txt}.
 #' @return A named list of \code{morie_rich_result} objects.
+#' @examples
+#' df <- data.frame(
+#'   police_service = rep(c("Toronto Police Service", "Ontario Provincial Police"), 4),
+#'   charges_recommended = rep(c(TRUE, FALSE), each = 4),
+#'   date_of_incident_iso = rep(c("2022-01-05", "2023-02-18", "2024-03-01", "2024-11-11"), 2),
+#'   date_siu_notified_iso = rep(c("2022-01-06", "2023-02-19", "2024-03-02", "2024-11-12"), 2),
+#'   date_of_director_decision_iso = rep(c("2022-08-01", "2023-09-10", "2024-09-01", "2025-02-14"), 2),
+#'   sex_gender_affected = rep(c("Male", "Female"), 4),
+#'   age_affected = c("34", "27", "55", "19", "42", "31", "48", "29"),
+#'   mental_health_or_race_indications = rep(c("mental health; Indigenous", ""), 4))
+#' res <- morie_siu_all_analyses(df)
+#' names(res)
 #' @export
 morie_siu_all_analyses <- function(data = NULL, out_dir = NULL) {
   surfaces <- list(

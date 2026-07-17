@@ -22,3 +22,16 @@ unfound fields).
 \description{
 Parse a SIU director's-report HTML page (pure-R)
 }
+\examples{
+html <- paste0(
+  "<html><body><h1>Director's Report</h1>",
+  "<p>Case Number: 22-OCI-123</p>",
+  "<p>Police Service: Toronto Police Service</p>",
+  "<p>Date of Incident: March 5, 2022</p>",
+  "<p>The Investigation</p>",
+  "<p>A 35-year-old man was involved in an incident.</p>",
+  "</body></html>")
+r <- morie_siu_parse_html(html, drid = 1234L,
+                          source_url = "https://example/foo.php?drid=1234")
+r$case_number
+}

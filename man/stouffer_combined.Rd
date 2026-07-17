@@ -18,3 +18,7 @@ An object of class \code{"morie_multiple_testing_result"}.
 Delegates to \code{poolr::stouffer} when installed and no weights
 are supplied; otherwise computes the weighted z-sum inline.
 }
+\examples{
+p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
+stouffer_combined(p)
+}

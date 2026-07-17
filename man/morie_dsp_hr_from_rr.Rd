@@ -15,6 +15,9 @@ Numeric vector of BPM values.
 \description{
 \code{60 / rr}, with zero-RR turned into \code{NA}.
 }
+\examples{
+morie_dsp_hr_from_rr(c(1.0, 1.0, 1.0))  # 1s RR intervals -> 60 bpm
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 4, sec. 4.8.
 }

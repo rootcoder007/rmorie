@@ -15,3 +15,6 @@ A \code{morie_effect_size}.
 \description{
 Phi coefficient for a 2x2 contingency table
 }
+\examples{
+phi_coefficient(matrix(c(20, 10, 15, 25), nrow = 2))
+}

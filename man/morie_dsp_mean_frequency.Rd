@@ -17,6 +17,11 @@ Scalar mean frequency (Hz).
 \description{
 \code{m1 / m0}; equals the first moment normalised by total power.
 }
+\examples{
+freqs <- seq.int(0, 64) / 64
+psd <- numeric(65); psd[20L] <- 1
+morie_dsp_mean_frequency(psd, freqs)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 6, sec. 6.6.
 }

@@ -48,3 +48,13 @@ An object of class \code{"class_name"}.
 \description{
 Cross-validate a model using a user-supplied fit/predict pair
 }
+\examples{
+set.seed(1)
+X <- matrix(rnorm(200 * 3), 200, 3)
+y <- as.integer(plogis(X[, 1] - 0.5 * X[, 2]) > runif(200))
+fit <- function(X, y) suppressWarnings(
+  glm(y ~ ., data = data.frame(y = y, X), family = binomial()))
+pred <- function(m, X) predict(m, newdata = data.frame(X), type = "response")
+res <- cross_validate(fit, pred, X, y, method = "kfold", n_folds = 5L)
+res$mean
+}

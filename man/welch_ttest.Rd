@@ -17,3 +17,7 @@ An object of class \code{"morie_test_result"}.
 \description{
 Welch's t-test (convenience wrapper)
 }
+\examples{
+set.seed(1)
+welch_ttest(rnorm(20), rnorm(20, 0.5, 2))
+}

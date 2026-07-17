@@ -15,3 +15,8 @@ An object of class \code{"morie_otis_analysis_result"}.
 \description{
 Distribution of placements by binned duration (b05)
 }
+\examples{
+otis_b05 <- morie_synth_otis("b05", n = 120L, seed = 1L)
+res <- morie_otis_analyze_b05(otis_b05)
+class(res)
+}

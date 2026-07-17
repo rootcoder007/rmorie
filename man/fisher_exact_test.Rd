@@ -17,3 +17,8 @@ An object of class \code{"morie_test_result"}.
 \description{
 Fisher's exact test for a 2x2 table
 }
+\examples{
+tab <- matrix(c(8, 2, 1, 5), 2, 2)
+res <- fisher_exact_test(tab)
+res$p_value
+}

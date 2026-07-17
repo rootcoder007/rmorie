@@ -19,6 +19,12 @@ Fits \code{log10(psd) ~ log10(f)} on positive bins; with slope \code{-beta},
 returns the 1/f fractal dimension \code{(5 - beta) / 2}. Falls back to
 1.5 (Brownian) when fewer than two valid bins exist.
 }
+\examples{
+set.seed(22)
+freqs <- seq(1, 250, length.out = 256L)
+psd <- freqs^(-1.5) * exp(rnorm(length(freqs), sd = 0.1))
+morie_dsp_fractal_dim_psd(psd, freqs)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 6, sec. 6.8;
 Eke et al. (2002).

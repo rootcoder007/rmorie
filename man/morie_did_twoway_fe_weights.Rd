@@ -52,6 +52,16 @@ treatment effects. Reproduces
 \code{TwoWayFEWeights::twowayfeweights(type = "feTR")} weights to
 machine precision (see \code{tests/cross/}).
 }
+\examples{
+set.seed(11)
+df <- expand.grid(unit = 1:60, time = 1:8)
+df$treat_time <- ifelse(df$unit <= 30, sample(c(3, 5), 1), Inf)
+df$treat_time <- ifelse(df$unit <= 15, 3, ifelse(df$unit <= 30, 5, Inf))
+df$d <- as.integer(df$time >= df$treat_time)
+df$y <- 0.5 * df$time + 1.5 * df$d + rnorm(nrow(df), sd = 0.5)
+out <- morie_did_twoway_fe_weights(df, "unit", "time", "d")
+c(out$sum_weights, out$n_negative_weights)
+}
 \references{
 de Chaisemartin, C., & D'Haultfoeuille, X. (2020).
 Two-way fixed effects estimators with heterogeneous treatment

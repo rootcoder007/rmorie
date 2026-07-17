@@ -344,5 +344,8 @@ cheatsheet <- function() {
 #' Names of all morie output CSVs with registered explanations
 #'
 #' @return Character vector of filenames.
+#' @examples
+#' v <- explain_known_files()
+#' head(v)
 #' @export
 explain_known_files <- function() sort(names(.morie_explanations()))

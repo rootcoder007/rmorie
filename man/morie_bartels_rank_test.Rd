@@ -21,6 +21,11 @@ The rank-based von Neumann ratio: the sum of squared successive
 rank differences over the rank variance. Reproduces
 \code{randtests::bartels.rank.test}.
 }
+\examples{
+set.seed(4)
+res <- morie_bartels_rank_test(rnorm(80))
+res$p.value
+}
 \references{
 Bartels, R. (1982). The rank version of von Neumann's
 ratio test for randomness. \emph{JASA}, 77(377), 40-46.

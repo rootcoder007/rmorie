@@ -32,3 +32,11 @@ An object of class \code{"class_name"}.
 \description{
 Discrimination assessment for binary classifier
 }
+\examples{
+set.seed(1)
+X <- matrix(rnorm(200 * 3), 200, 3)
+y <- as.integer(plogis(X[, 1]) > runif(200))
+p <- plogis(X \%*\% c(1, -0.5, 0))
+res <- assess_discrimination(y, p, n_bootstrap = 50L)
+res$auroc
+}

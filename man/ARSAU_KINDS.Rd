@@ -12,3 +12,6 @@ A character vector.
 \description{
 Known ARSAU dataset kinds.
 }
+\examples{
+ARSAU_KINDS
+}

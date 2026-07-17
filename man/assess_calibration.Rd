@@ -19,3 +19,10 @@ An object of class \code{"class_name"}.
 \description{
 Comprehensive calibration assessment for binary outcomes
 }
+\examples{
+set.seed(1)
+y <- rbinom(200, 1, 0.4)
+p <- plogis(rnorm(200, mean = -0.4))
+res <- assess_calibration(y, p, n_groups = 10L)
+res$brier_score
+}

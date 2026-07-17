@@ -29,3 +29,7 @@ A character string.
 \description{
 Apply uniform formatting to numeric columns
 }
+\examples{
+df <- data.frame(est = c(1.234, 2.456), p = c(0.001, 0.5))
+format_dataframe(df, pval_cols = "p")
+}

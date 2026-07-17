@@ -17,3 +17,8 @@ is not cross-year-safe.
 \description{
 Person-level segregation-placement analysis (b01)
 }
+\examples{
+otis_b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+res <- morie_otis_analyze_b01(otis_b01)
+class(res)
+}

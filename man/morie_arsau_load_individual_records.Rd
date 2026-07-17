@@ -19,3 +19,9 @@ An object of class \code{"morie_arsau_result"}.
 \description{
 Load ARSAU individual_records CSV.
 }
+\examples{
+\donttest{
+res <- try(morie_arsau_load_individual_records("2024"))
+if (!inherits(res, "try-error")) head(res$data)
+}
+}

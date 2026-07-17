@@ -30,3 +30,10 @@ predictions.}
 \description{
 First-order Accumulated Local Effects (Apley & Zhu)
 }
+\examples{
+set.seed(7)
+X <- matrix(rnorm(400), 100, 4); colnames(X) <- paste0("f", 1:4)
+predict_fn <- function(M) as.numeric(M \%*\% c(1.5, -0.7, 0, 0.3))
+morie_fairness_xai_ale(predict_fn, X, feature = "f2",
+  feature_names = colnames(X), n_bins = 5L)
+}

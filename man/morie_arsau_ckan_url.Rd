@@ -21,6 +21,11 @@ Character scalar URL, or \code{NA_character_}.
 Returns \code{NA_character_} for entries that do not publish a
 sidecar (e.g. the 2023 weapon_records release).
 }
+\examples{
+url <- morie_arsau_ckan_url(kind = "main_records", year = "2024",
+                            limit = 100L)
+url
+}
 \references{
 Ontario Data Catalogue CKAN API:
 \code{datastore_search} (\url{https://data.ontario.ca/}).

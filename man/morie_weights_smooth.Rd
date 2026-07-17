@@ -25,3 +25,8 @@ A numeric value.
 \description{
 Smooth survey weights via shrinkage toward the mean (or log-mean).
 }
+\examples{
+set.seed(1)
+res <- morie_weights_smooth(runif(30, 0.5, 5))
+str(res, max.level = 1)
+}

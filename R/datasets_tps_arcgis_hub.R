@@ -223,6 +223,16 @@ morie_datasets_tps_arcgis_hub_layers <- function(offline = TRUE) {
 #'   (`format %in% c("shapefile", "fgdb")`); defaults to `tempfile()`.
 #' @return A `data.frame` (json / csv), a parsed GeoJSON list, or a
 #'   file path (binary).
+#' @examples
+#' cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
+#' pic_id <- cat$hub_id[cat$title ==
+#'   "Persons in Crisis Calls for Service Attended Open Data"]
+#' \donttest{
+#' df <- try(morie_datasets_tps_arcgis_hub_by_id(
+#'   pic_id, format = "json", where = "OCC_YEAR=2024",
+#'   max_features = 25L, offline = TRUE))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_arcgis_hub_by_id <- function(hub_id,
                                                   format = "json",
@@ -298,6 +308,13 @@ morie_datasets_tps_arcgis_hub_by_id <- function(hub_id,
 #' @param layer_idx Integer layer index (default `0L`).
 #' @param dest Optional destination path; defaults to `tempfile()`.
 #' @return Path to the downloaded file.
+#' @examples
+#' cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
+#' \donttest{
+#' path <- try(morie_datasets_tps_arcgis_hub_download(
+#'   cat$hub_id[1], format = "csv"))
+#' if (!inherits(path, "try-error")) path
+#' }
 #' @export
 morie_datasets_tps_arcgis_hub_download <- function(hub_id,
                                                      format = "csv",
@@ -401,6 +418,12 @@ morie_datasets_arcgis_item_metadata <- function(item_id) {
 #' @param dest Optional destination path for binary downloads.
 #' @return A `data.frame` (json / csv), parsed GeoJSON list, or
 #'   file path (binary).
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_arcgis_item_by_id(
+#'   "af06159170914808983959df6163fc86", format = "json"))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_arcgis_item_by_id <- function(item_id,
                                                format = "json",

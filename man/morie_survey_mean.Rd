@@ -19,3 +19,9 @@ A named \code{list} (see Details).
 \description{
 Survey-weighted mean (delegates to \code{survey::svymean} when available).
 }
+\examples{
+set.seed(1)
+df <- data.frame(y = rnorm(40), w = runif(40, 0.5, 2))
+d <- morie_survey_design(df, "w")
+str(morie_survey_mean(d, "y"), max.level = 1)
+}

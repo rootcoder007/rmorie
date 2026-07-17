@@ -21,3 +21,11 @@ Per-police-service tabulation of case counts, charges-recommended
 counts, and the implied charge rate. Sorted by case count
 (descending), capped at the top 30 in the rendered table.
 }
+\examples{
+df <- data.frame(
+  police_service = c("Toronto Police Service", "Toronto Police Service",
+                     "Ontario Provincial Police", "Peel Regional Police"),
+  charges_recommended = c(TRUE, FALSE, FALSE, TRUE))
+r <- morie_siu_by_police_service(df)
+r$title
+}

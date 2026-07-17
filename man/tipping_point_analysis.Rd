@@ -37,3 +37,7 @@ Phase 1.g cross-references \pkg{tipr} for the unmeasured-confounder
 family of tipping-point calculations
 (see also \code{\link{morie_sensitivity_tipping_point}}).
 }
+\examples{
+str(tipping_point_analysis(0.5, 0.15, n_treated = 100, n_control = 100),
+    max.level = 1)
+}

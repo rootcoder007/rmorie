@@ -17,3 +17,9 @@ A \code{morie_effect_size}.
 \description{
 Cohen's w for chi-squared
 }
+\examples{
+r <- cohens_w(c(20, 30, 50))
+r$estimate
+r2 <- cohens_w(c(20, 30, 50), expected = c(33, 33, 34))
+r2$estimate
+}

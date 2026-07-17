@@ -16,4 +16,8 @@ Named list with tensor, n, method.
 \description{
 Causal autoregressive mask (Radford 2019)
 }
+\examples{
+res <- morie:::causal_attention_mask(5L)
+res$tensor
+}
 \keyword{internal}

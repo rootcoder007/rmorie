@@ -28,6 +28,10 @@ Returns sample indices (1-based) where \code{x} crosses \code{threshold} in
 the chosen direction. \code{min_distance} enforces a minimum gap (in
 samples) between successive events.
 }
+\examples{
+x <- c(0, 1, 0, 2, 0, 3, 0)
+morie_dsp_threshold_detect(x, threshold = 0.5)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 4, sec. 4.2.
 }

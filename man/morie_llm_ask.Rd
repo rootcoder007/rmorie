@@ -36,3 +36,11 @@ R port of \code{morie.llm.ask}. Tries each provider in priority order; on
 HTTP/timeout failure falls through to the next, and finally to a
 static local help string.
 }
+\examples{
+\donttest{
+options(morie.llm.ollama_cached = FALSE, morie.llm.freeapi_cached = FALSE)
+out <- try(morie_llm_ask("In one word, what is 2 + 2?"))
+print(out)
+options(morie.llm.ollama_cached = NULL, morie.llm.freeapi_cached = NULL)
+}
+}

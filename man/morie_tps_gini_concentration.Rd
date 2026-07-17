@@ -17,3 +17,7 @@ G=0 perfectly even, G=1 perfectly concentrated.  Used for the
 neighbourhood-concentration callable below; exposed because tests
 and downstream code may want it directly.
 }
+\examples{
+set.seed(1)
+morie_tps_gini_concentration(rpois(50, 4))
+}

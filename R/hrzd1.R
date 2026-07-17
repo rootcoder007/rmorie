@@ -7,6 +7,14 @@
 #' @param event Integer/logical vector (1 = event, 0 = censored).
 #' @return Named list with estimate, se, n, n_events, method.
 #' @keywords internal
+#' @examples
+#' set.seed(1)
+#' n <- 60
+#' x <- rnorm(n)
+#' t <- rexp(n, rate = exp(0.5 * x))
+#' event <- rbinom(n, 1, 0.8)
+#' res <- hrzd1(t, x, event)
+#' res$estimate
 #' @export
 hrzd1 <- function(t, x, event) {
   t <- as.numeric(t)

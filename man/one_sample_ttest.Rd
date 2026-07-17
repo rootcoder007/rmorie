@@ -19,3 +19,7 @@ A \code{morie_test_result}.
 \description{
 One-sample Student's t-test
 }
+\examples{
+set.seed(1)
+one_sample_ttest(rnorm(20, 0.3), mu0 = 0)
+}

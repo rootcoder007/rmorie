@@ -24,3 +24,10 @@ Phase 3JJJ1. Mirrors the Python
 byte-for-byte. Empty \code{salt} defaults to a 32-byte zero-filled
 salt per RFC 5869 §2.2 (matches Python).
 }
+\examples{
+if (morie_crypto_sodium_available()) {
+  out <- morie_crypto_hkdf_sha256("seed", len = 32L, salt = "salt",
+                                  info = "ctx")
+  length(out)
+}
+}

@@ -28,3 +28,7 @@ callers can left-join NYPD data against the
 which encoding their source uses. Used internally by
 \code{\link[=morie_datasets_nyc_nypd_resolved]{morie_datasets_nyc_nypd_resolved()}}.
 }
+\examples{
+cw <- morie_datasets_nyc_nypd_boro_crosswalk()
+cw
+}

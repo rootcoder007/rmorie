@@ -15,3 +15,11 @@ data.frame with \code{item}, \code{adel}.
 \description{
 Alpha if item deleted
 }
+\examples{
+set.seed(1)
+f <- rnorm(50)
+X <- sapply(1:5, function(j) sqrt(0.6) * f + sqrt(0.4) * rnorm(50))
+colnames(X) <- paste0("i", 1:5)
+out <- morie_psymet_alphadel(X)
+out
+}

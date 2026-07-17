@@ -20,3 +20,10 @@ An object of class \code{"class_name"}.
 \description{
 Decision curve analysis
 }
+\examples{
+set.seed(1)
+y <- rbinom(200, 1, 0.4)
+p <- plogis(rnorm(200))
+res <- decision_curve_analysis(y, p)
+head(res$net_benefit)
+}

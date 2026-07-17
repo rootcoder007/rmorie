@@ -18,3 +18,7 @@ A \code{data.frame}.
 \description{
 Ontario Use-of-Force detailed dataset (5-year 2020-2022, pre-RBDS)
 }
+\examples{
+df <- morie_datasets_arsau_detailed_dataset(offline = TRUE)
+dim(df)
+}

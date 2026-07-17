@@ -33,3 +33,10 @@ largest-magnitude SHAP value.
 \description{
 Shapley feature attributions for one instance (sampling estimator)
 }
+\examples{
+set.seed(11)
+X <- matrix(rnorm(120), 30, 4); colnames(X) <- paste0("f", 1:4)
+predict_fn <- function(M) as.numeric(M \%*\% c(1.5, -0.7, 0, 0.3))
+morie_fairness_xai_shap_values(predict_fn, X[1L, ], background = X,
+  feature_names = colnames(X), n_samples = 10L, seed = 1L)
+}

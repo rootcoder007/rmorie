@@ -19,3 +19,7 @@ A named list with elements \code{b01}, \code{b02},
 Mirrors \code{_ANALYSES} in
 \code{src/morie/otis_all_analyze.py}.
 }
+\examples{
+res <- morie_otis_analyzers()
+head(names(res))
+}

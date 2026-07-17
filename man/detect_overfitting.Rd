@@ -36,3 +36,14 @@ An object of class \code{"class_name"}.
 \description{
 Bootstrap optimism-corrected performance
 }
+\examples{
+set.seed(1)
+X <- matrix(rnorm(120 * 3), 120, 3)
+y <- as.integer(plogis(X[, 1] - 0.5 * X[, 2]) > runif(120))
+fit <- function(X, y) suppressWarnings(
+  glm(y ~ ., data = data.frame(y = y, X), family = binomial()))
+pred <- function(m, X) predict(m, newdata = data.frame(X), type = "response")
+res <- detect_overfitting(fit, pred, X, y, n_bootstrap = 20L,
+                          scoring = "accuracy")
+res$recommendation
+}

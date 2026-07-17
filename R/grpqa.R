@@ -9,6 +9,13 @@
 #' @param n_kv_heads Integer KV head groups (default 2; must divide n_heads).
 #' @return Named list with tensor, attn, n_heads, n_kv_heads, group_size, method.
 #' @keywords internal
+#' @examples
+#' set.seed(10)
+#' Q <- matrix(rnorm(8 * 4), 8, 4)
+#' K <- matrix(rnorm(8 * 4), 8, 4)
+#' V <- matrix(rnorm(8 * 4), 8, 4)
+#' out <- morie:::grouped_query_attention(Q, K, V)
+#' str(out)
 grouped_query_attention <- function(Q, K = NULL, V = NULL,
                                     n_heads = 8L, n_kv_heads = 2L) {
   if (is.null(K)) K <- Q

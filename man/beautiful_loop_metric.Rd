@@ -22,6 +22,10 @@ R parity of \code{morie.entheo.beautiful_loop_metric}.  Scores
 the cross-modal coupling between EEG-power envelope and fMRI
 gradient dispersion (Bayne, Carter, Laukkonen, Slagter).
 }
+\examples{
+res <- morie:::beautiful_loop_metric(eeg = NULL, fmri = NULL)
+res$score_dmt
+}
 \references{
 Bayne, T. & Carter, O. (2018). Dimensions of consciousness and the
 psychedelic state. Neuroscience of Consciousness.

@@ -49,3 +49,8 @@ A \code{data.frame}.
 \description{
 NYPD Hate Crimes
 }
+\examples{
+df <- morie_datasets_nyc_nypd_hate_crimes(offline = TRUE)
+head(df[, c("complaint_year_number", "bias_motive_description",
+            "offense_category")])
+}

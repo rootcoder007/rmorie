@@ -35,3 +35,10 @@ Holds every feature of \code{x} fixed except \code{feature}, sweeps
 it across the range observed in \code{X_ref}, and reports the
 resulting prediction profile.
 }
+\examples{
+set.seed(9)
+X <- matrix(rnorm(400), 100, 4); colnames(X) <- paste0("f", 1:4)
+predict_fn <- function(M) as.numeric(M \%*\% c(1.5, -0.7, 0, 0.3))
+morie_fairness_xai_ceteris_paribus(predict_fn, X[1L, ], feature = "f1",
+  X_ref = X, feature_names = colnames(X), grid_size = 8L)
+}

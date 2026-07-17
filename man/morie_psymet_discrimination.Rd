@@ -17,3 +17,11 @@ data.frame with \code{item}, \code{d}.
 \description{
 Upper/lower groups by total score (default 27\% per Kelley).
 }
+\examples{
+set.seed(1)
+f <- rnorm(50)
+X <- sapply(1:5, function(j) sqrt(0.6) * f + sqrt(0.4) * rnorm(50))
+colnames(X) <- paste0("i", 1:5)
+out <- morie_psymet_discrimination(X)
+out
+}

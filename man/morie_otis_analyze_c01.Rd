@@ -15,3 +15,8 @@ An object of class \code{"morie_otis_analysis_result"}.
 \description{
 Total individuals x custody/RC/seg x gender (c01)
 }
+\examples{
+otis_c01 <- morie_synth_otis("c01", n = 120L, seed = 1L)
+res <- morie_otis_analyze_c01(otis_c01)
+class(res)
+}

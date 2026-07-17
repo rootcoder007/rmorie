@@ -50,3 +50,9 @@ hub item_id \verb{9a5c8a4fdfa54e7f97236a769b196f16}.
 
 Tags: FIRS; Field Information Requests
 }
+\examples{
+\donttest{
+df <- try(morie_datasets_tps_2010_firs(max_features = 5L))
+if (!inherits(df, "try-error")) head(df)
+}
+}

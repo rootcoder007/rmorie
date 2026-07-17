@@ -28,3 +28,7 @@ A \code{data.frame} of the requested dataset (a 0-row typed frame when the data 
 \description{
 OTIS c07 -- Individuals: alerts + hold flags
 }
+\examples{
+df <- morie_datasets_otis_c07_individuals_alerts(offline = TRUE)
+head(df)
+}

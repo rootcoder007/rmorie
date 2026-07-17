@@ -17,6 +17,11 @@ Numeric vector, length(x).
 moderate-energy components, useful as a preprocessor for heart-sound
 segmentation.
 }
+\examples{
+set.seed(1L)
+x <- rnorm(50)
+morie_dsp_shannon_energy(x)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 4, sec. 4.5;
 Liang et al. (1997).

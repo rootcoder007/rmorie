@@ -354,6 +354,9 @@ morie_datasets_tps_mha_apprehensions <- function(year = NULL,
 #' @param year Reporting year (`"2023"` or `"2024"`).
 #' @inheritParams morie_datasets_arsau_uof_main_records
 #' @return A `data.frame`.
+#' @examples
+#' df <- morie_datasets_arsau_uof_individual_records(offline = TRUE)
+#' df[, c("Indiv_Index", "Race", "AgeCategory", "Gender")]
 #' @export
 morie_datasets_arsau_uof_individual_records <- function(year = "2024",
                                                           offline = TRUE,
@@ -367,6 +370,9 @@ morie_datasets_arsau_uof_individual_records <- function(year = "2024",
 #' probe per individual-in-incident)
 #' @inheritParams morie_datasets_arsau_uof_individual_records
 #' @return A `data.frame`.
+#' @examples
+#' df <- morie_datasets_arsau_uof_probe_cycle_records(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_arsau_uof_probe_cycle_records <- function(year = "2024",
                                                            offline = TRUE,
@@ -385,6 +391,9 @@ morie_datasets_arsau_uof_probe_cycle_records <- function(year = "2024",
 #'
 #' @inheritParams morie_datasets_arsau_uof_individual_records
 #' @return A `data.frame`.
+#' @examples
+#' df <- morie_datasets_arsau_uof_weapon_records(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_arsau_uof_weapon_records <- function(year = "2024",
                                                       offline = TRUE,
@@ -401,6 +410,9 @@ morie_datasets_arsau_uof_weapon_records <- function(year = "2024",
 #'   fixture. If `FALSE`, hit Ontario CKAN.
 #' @param resource_id Optional override.
 #' @return A `data.frame`.
+#' @examples
+#' df <- morie_datasets_arsau_aggregate_summary(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_arsau_aggregate_summary <- function(offline = TRUE,
                                                      resource_id = NULL) {
@@ -412,6 +424,9 @@ morie_datasets_arsau_aggregate_summary <- function(offline = TRUE,
 #' Ontario Use-of-Force detailed dataset (5-year 2020-2022, pre-RBDS)
 #' @inheritParams morie_datasets_arsau_aggregate_summary
 #' @return A `data.frame`.
+#' @examples
+#' df <- morie_datasets_arsau_detailed_dataset(offline = TRUE)
+#' dim(df)
 #' @export
 morie_datasets_arsau_detailed_dataset <- function(offline = TRUE,
                                                     resource_id = NULL) {
@@ -638,6 +653,9 @@ morie_datasets_arsau_detailed_dataset <- function(offline = TRUE,
 #'
 #' @return A `data.frame` with columns `dataset_key`, `label`,
 #'   `resource_id`, `family`, `year`, `fixture`.
+#' @examples
+#' reg <- morie_datasets_ontario_ckan_layers()
+#' reg[, c("dataset_key", "family", "year")]
 #' @export
 morie_datasets_ontario_ckan_layers <- function() {
   rows <- lapply(names(.MORIE_ONTARIO_CKAN_REGISTRY), function(k) {
@@ -732,6 +750,10 @@ morie_datasets_ontario_ckan_layers <- function() {
 #'   `Gender`, `Age_Category`, `MentalHealth_Alert`,
 #'   `SuicideRisk_Alert`, `SuicideWatch_Alert`,
 #'   `Number_Of_Placements`).
+#' @examples
+#' df <- morie_datasets_otis_a01_restrictive_confinement(offline = TRUE)
+#' head(df[, c("EndFiscalYear", "Gender", "Age_Category",
+#'             "Number_Of_Placements")])
 #' @export
 morie_datasets_otis_a01_restrictive_confinement <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -744,6 +766,9 @@ morie_datasets_otis_a01_restrictive_confinement <- function(
 #' OTIS d02 -- Deaths in custody by gender
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_d02_deaths_by_gender(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_otis_d02_deaths_by_gender <- function(offline = TRUE,
                                                        resource_id = NULL, source = NULL) {
@@ -756,6 +781,9 @@ morie_datasets_otis_d02_deaths_by_gender <- function(offline = TRUE,
 #' OTIS d03 -- Deaths in custody by race
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_d03_deaths_by_race(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_otis_d03_deaths_by_race <- function(offline = TRUE,
                                                      resource_id = NULL, source = NULL) {
@@ -768,6 +796,9 @@ morie_datasets_otis_d03_deaths_by_race <- function(offline = TRUE,
 #' OTIS d04 -- Deaths in custody by religion
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_d04_deaths_by_religion(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_otis_d04_deaths_by_religion <- function(offline = TRUE,
                                                          resource_id = NULL, source = NULL) {
@@ -780,6 +811,9 @@ morie_datasets_otis_d04_deaths_by_religion <- function(offline = TRUE,
 #' OTIS d05 -- Deaths in custody by age category
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_d05_deaths_by_age_category(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_otis_d05_deaths_by_age_category <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -792,6 +826,9 @@ morie_datasets_otis_d05_deaths_by_age_category <- function(
 #' OTIS d06 -- Deaths in custody by alert type x institution
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_d06_cause_by_alert(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_otis_d06_cause_by_alert <- function(offline = TRUE,
                                                      resource_id = NULL, source = NULL) {
@@ -804,6 +841,9 @@ morie_datasets_otis_d06_cause_by_alert <- function(offline = TRUE,
 #' OTIS d07 -- Deaths in custody alerts x housing unit
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_d07_alerts_by_housing_unit(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_otis_d07_alerts_by_housing_unit <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -820,6 +860,10 @@ morie_datasets_otis_d07_alerts_by_housing_unit <- function(
 #' OTIS b01 -- Segregation detailed (per-individual episodes)
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A `data.frame` with the canonical 18-col schema.
+#' @examples
+#' df <- morie_datasets_otis_b01_segregation_detailed(offline = TRUE)
+#' head(df[, c("EndFiscalYear", "Gender",
+#'             "NumberConsecutiveDays_Segregation")])
 #' @export
 morie_datasets_otis_b01_segregation_detailed <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -831,6 +875,9 @@ morie_datasets_otis_b01_segregation_detailed <- function(
 #' OTIS b02 -- Segregation total days per individual
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_b02_segregation_total_days(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_otis_b02_segregation_total_days <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -842,6 +889,9 @@ morie_datasets_otis_b02_segregation_total_days <- function(
 #' OTIS b03 -- Segregation placements: alerts + hold by institution
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_b03_seg_alerts_by_institution(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_otis_b03_seg_alerts_by_institution <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -853,6 +903,9 @@ morie_datasets_otis_b03_seg_alerts_by_institution <- function(
 #' OTIS b04 -- Segregation consecutive durations by region
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_b04_seg_consecutive_by_region(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_otis_b04_seg_consecutive_by_region <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -864,6 +917,9 @@ morie_datasets_otis_b04_seg_consecutive_by_region <- function(
 #' OTIS b05 -- Segregation placements by consecutive-length bucket
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_b05_seg_consecutive_lengths(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_otis_b05_seg_consecutive_lengths <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -875,6 +931,9 @@ morie_datasets_otis_b05_seg_consecutive_lengths <- function(
 #' OTIS b06 -- Segregation placements: reason for placement by institution
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_b06_seg_reason_by_institution(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_otis_b06_seg_reason_by_institution <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -886,6 +945,9 @@ morie_datasets_otis_b06_seg_reason_by_institution <- function(
 #' OTIS b07 -- Segregation placements: alerts + hold by gender
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_b07_seg_alerts_by_gender(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_otis_b07_seg_alerts_by_gender <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -897,6 +959,9 @@ morie_datasets_otis_b07_seg_alerts_by_gender <- function(
 #' OTIS b08 -- Segregation consecutive durations by institution
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_b08_seg_consecutive_by_institution(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_otis_b08_seg_consecutive_by_institution <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -909,6 +974,9 @@ morie_datasets_otis_b08_seg_consecutive_by_institution <- function(
 #' OTIS b09 -- Individuals in segregation by number of times placed
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_b09_seg_n_times(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_otis_b09_seg_n_times <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -924,6 +992,9 @@ morie_datasets_otis_b09_seg_n_times <- function(
 #' OTIS c01 -- Total individuals (in custody / restrictive confinement / segregation)
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_c01_individuals_total(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_otis_c01_individuals_total <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -935,6 +1006,9 @@ morie_datasets_otis_c01_individuals_total <- function(
 #' OTIS c02 -- Individuals by institution
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_c02_individuals_by_institution(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_otis_c02_individuals_by_institution <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -947,6 +1021,9 @@ morie_datasets_otis_c02_individuals_by_institution <- function(
 #' OTIS c03 -- Individuals by race x gender
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_c03_individuals_race_by_gender(offline = TRUE)
+#' head(df[, c("Race", "Gender")])
 #' @export
 morie_datasets_otis_c03_individuals_race_by_gender <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -958,6 +1035,9 @@ morie_datasets_otis_c03_individuals_race_by_gender <- function(
 #' OTIS c04 -- Individuals by race x region
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_c04_individuals_race_by_region(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_otis_c04_individuals_race_by_region <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -969,6 +1049,9 @@ morie_datasets_otis_c04_individuals_race_by_region <- function(
 #' OTIS c05 -- Individuals by religion x region
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_c05_individuals_religion_by_region(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_otis_c05_individuals_religion_by_region <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -981,6 +1064,9 @@ morie_datasets_otis_c05_individuals_religion_by_region <- function(
 #' OTIS c06 -- Individuals by age category x region
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_c06_individuals_age_by_region(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_otis_c06_individuals_age_by_region <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -992,6 +1078,9 @@ morie_datasets_otis_c06_individuals_age_by_region <- function(
 #' OTIS c07 -- Individuals: alerts + hold flags
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_c07_individuals_alerts(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_otis_c07_individuals_alerts <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -1003,6 +1092,9 @@ morie_datasets_otis_c07_individuals_alerts <- function(
 #' OTIS c08 -- Individuals by religion x gender
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_c08_individuals_religion_by_gender(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_otis_c08_individuals_religion_by_gender <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -1015,6 +1107,9 @@ morie_datasets_otis_c08_individuals_religion_by_gender <- function(
 #' OTIS c09 -- Individuals by age category x gender
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_c09_individuals_age_by_gender(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_otis_c09_individuals_age_by_gender <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -1026,6 +1121,9 @@ morie_datasets_otis_c09_individuals_age_by_gender <- function(
 #' OTIS c10 -- Aggregate durations by institution
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_c10_aggregate_durations_by_institution(offline = TRUE)
+#' names(df)
 #' @export
 morie_datasets_otis_c10_aggregate_durations_by_institution <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -1038,6 +1136,9 @@ morie_datasets_otis_c10_aggregate_durations_by_institution <- function(
 #' OTIS c11 -- Aggregate lengths
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_c11_aggregate_lengths(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_otis_c11_aggregate_lengths <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -1049,6 +1150,9 @@ morie_datasets_otis_c11_aggregate_lengths <- function(
 #' OTIS c12 -- Aggregate durations by region
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_otis_c12_aggregate_durations_by_region(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_otis_c12_aggregate_durations_by_region <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -1068,6 +1172,10 @@ morie_datasets_otis_c12_aggregate_durations_by_region <- function(
 #'   endpoint.
 #' @param resource_id Optional CKAN resource_id override.
 #' @return A `data.frame`.
+#' @examples
+#' df <- morie_datasets_ontario_ckan_by_key("arsau_uof_main_records_2024",
+#'                                          offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_ontario_ckan_by_key <- function(dataset_key,
                                                   offline = TRUE,

@@ -18,6 +18,11 @@ Optimal tap-weight vector.
 Returns \code{w = solve(Rxx, rxd)}. Used as the optimal-FIR Wiener
 solution; equivalent to \code{lm.fit} on Toeplitz inputs.
 }
+\examples{
+R <- diag(2)
+r <- c(0.7, -0.3)
+morie_dsp_wiener_hopf(R, r)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 3, sec. 3.5.
 }

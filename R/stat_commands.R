@@ -58,6 +58,12 @@ NULL
 #' @param is_compound Logical; flags compound workflows.
 #' @param is_r_bridge Logical; flags Python <-> R bridge calls.
 #' @return A list with class \code{morie_stat_command}.
+#' @examples
+#' cmd <- stat_command("demo_echo", "misc", "demo_echo",
+#'                     "Echo demo command",
+#'                     handler_repl = function(...) "ok")
+#' register_stat_command(cmd)
+#' cmd$name
 #' @export
 stat_command <- function(name, category, usage, description,
                           handler_repl,
@@ -116,6 +122,12 @@ stat_command <- function(name, category, usage, description,
 #'
 #' @param cmd A \code{morie_stat_command} constructed by \code{stat_command}.
 #' @return The command name, invisibly.
+#' @examples
+#' cmd <- stat_command("demo_echo", "misc", "demo_echo",
+#'                     "Echo demo command",
+#'                     handler_repl = function(...) "ok")
+#' register_stat_command(cmd)
+#' !is.null(resolve_stat_command("demo_echo"))
 #' @export
 register_stat_command <- function(cmd) {
   if (!inherits(cmd, "morie_stat_command")) {
@@ -142,6 +154,12 @@ register_stat_command <- function(cmd) {
 #'
 #' @param name Character scalar.
 #' @return A \code{morie_stat_command} or \code{NULL}.
+#' @examples
+#' cmd <- stat_command("demo_echo", "misc", "demo_echo",
+#'                     "Echo demo command",
+#'                     handler_repl = function(...) "ok")
+#' register_stat_command(cmd)
+#' resolve_stat_command("demo_echo")$usage
 #' @export
 resolve_stat_command <- function(name) {
   if (!is.character(name) || length(name) != 1L) {
@@ -161,6 +179,9 @@ resolve_stat_command <- function(name) {
 
 #' Sorted vector of all command names + aliases
 #' @return A vector of the computed values.
+#' @examples
+#' v <- all_stat_command_names()
+#' head(v)
 #' @export
 all_stat_command_names <- function() {
   sort(unique(c(names(.morie_stat_commands$registry),
@@ -170,6 +191,12 @@ all_stat_command_names <- function() {
 
 #' Commands grouped by category
 #' @return Named list of character vectors of command names.
+#' @examples
+#' cmd <- stat_command("demo_cmd", "Demo", "demo_cmd()", "Example command",
+#'                     handler_repl = function() 1)
+#' register_stat_command(cmd)
+#' groups <- commands_by_category()
+#' groups[["Demo"]]
 #' @export
 commands_by_category <- function() {
   cats <- .morie_stat_commands$categories
@@ -190,6 +217,12 @@ commands_by_category <- function() {
 #' @param ... Arguments forwarded to the REPL handler.
 #' @return Whatever the handler returns. Stops with an informative
 #'   error if the command is not registered.
+#' @examples
+#' cmd <- stat_command("demo_echo", "misc", "demo_echo",
+#'                     "Echo demo command",
+#'                     handler_repl = function(...) "ok")
+#' register_stat_command(cmd)
+#' run_stat_command("demo_echo")
 #' @export
 run_stat_command <- function(name, ...) {
   cmd <- resolve_stat_command(name)
@@ -202,6 +235,8 @@ run_stat_command <- function(name, ...) {
 
 #' Total number of registered commands (excluding aliases)
 #' @return A numeric value (scalar).
+#' @examples
+#' n_stat_commands()
 #' @export
 n_stat_commands <- function() {
   length(.morie_stat_commands$registry)
@@ -211,6 +246,12 @@ n_stat_commands <- function() {
 #' Reset the registry (test / debugging helper)
 #' @return The number of commands removed, invisibly.
 #' @keywords internal
+#' @examples
+#' n_cleared <- clear_stat_commands()
+#' n_stat_commands()
+#' morie:::.morie_seed_stat_commands()
+#' morie:::.morie_auto_register_stat_commands()
+#' n_stat_commands()
 #' @export
 clear_stat_commands <- function() {
   n <- length(.morie_stat_commands$registry)
@@ -381,6 +422,12 @@ clear_stat_commands <- function() {
 # ---------------------------------------------------------------------------
 
 #' @return \code{x}, invisibly.
+#' @examples
+#' cmd <- stat_command("demo_echo", "misc", "demo_echo",
+#'                     "Echo demo command",
+#'                     handler_repl = function(...) "ok")
+#' register_stat_command(cmd)
+#' print(cmd)
 #' @export
 print.morie_stat_command <- function(x, ...) {
   cat(sprintf("morie stat command: %s\

@@ -41,6 +41,22 @@ with different RNG seeds and pools the per-fold scores.
 \code{rsample::vfold_cv} both implement the same partitioning
 (cross-referenced).
 }
+\examples{
+set.seed(1)
+X <- matrix(rnorm(80), ncol = 2); y <- rnorm(40)
+predict.lm_lite3 <- function(object, newdata, ...) {
+  drop(cbind(1, newdata) \%*\% object$coef)
+}
+registerS3method("predict", "lm_lite3", predict.lm_lite3)
+res <- repeated_cv(X, y,
+  model_fn = function(Xt, yt) {
+    fit <- stats::lm.fit(cbind(1, Xt), yt)
+    structure(list(coef = fit$coefficients), class = "lm_lite3")
+  },
+  score_fn = function(yt, yp) mean((yt - yp)^2),
+  n_folds = 5L, n_repeats = 2L)
+str(res, max.level = 1)
+}
 \seealso{
 \code{caret::trainControl}, \code{rsample::vfold_cv}.
 }

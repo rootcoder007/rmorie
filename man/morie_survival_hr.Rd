@@ -23,3 +23,9 @@ A named list with elements \code{hr}, \code{ci_lower}, \code{ci_upper}, \code{p_
 \description{
 Hazard ratio between two groups via a simple Cox model.
 }
+\examples{
+set.seed(1)
+time <- rexp(60); event <- rbinom(60, 1, 0.7)
+group <- rep(c(0, 1), 30)
+str(morie_survival_hr(time, event, group), max.level = 1)
+}

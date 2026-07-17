@@ -25,3 +25,7 @@ alpha, top-10\\% share, and a Kolmogorov-Smirnov test against an
 exponential null. Reuses the \code{.gini_int} / \code{.hill_mle}
 helpers from \code{mrm_otis.R}.
 }
+\examples{
+df <- morie_synth_otis("b01", n = 150L, seed = 2L)
+res <- try(morie_otis_repeat_placement_concentration(df))
+}

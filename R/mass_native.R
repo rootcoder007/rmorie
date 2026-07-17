@@ -93,6 +93,11 @@ morie_mvrnorm <- function(n = 1, mu, Sigma, tol = 1e-6,
 #' @param lims Grid limits \code{c(xlo, xhi, ylo, yhi)}.
 #' @return A list \code{list(x, y, z)} (grid axes and the n1 x n2
 #'   density matrix).
+#' @examples
+#' set.seed(2)
+#' x <- rnorm(80); y <- rnorm(80)
+#' k <- morie_kde2d(x, y, n = 20)
+#' dim(k$z)
 #' @export
 morie_kde2d <- function(x, y, h, n = 25, lims = c(range(x), range(y))) {
   nx <- length(x)
@@ -179,6 +184,12 @@ morie_kde2d <- function(x, y, h, n = 25, lims = c(range(x), range(y))) {
 #' @return A \code{glm}/\code{negbin} object with \code{$theta}.
 #' @references Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
 #'   Applied Statistics with S}. Springer.
+#' @examples
+#' set.seed(1); n <- 300
+#' x <- rnorm(n)
+#' y <- rnbinom(n, mu = exp(0.3 + 0.9 * x), size = 3)
+#' fit <- suppressWarnings(morie_glm_nb(y ~ x, data = data.frame(y, x)))
+#' coef(fit)
 #' @export
 morie_glm_nb <- function(formula, data, weights, init.theta = NULL,
                          link = "log", control = stats::glm.control(...),
@@ -258,6 +269,13 @@ logLik.negbin <- function(object, ...) {
 #' @return A \code{morie_rlm} object.
 #' @references Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
 #'   Applied Statistics with S}. Springer.
+#' @examples
+#' set.seed(3)
+#' n <- 100; x <- rnorm(n)
+#' y <- 2 * x + rnorm(n)
+#' y[1:3] <- y[1:3] + 40
+#' rob <- morie_rlm(y ~ x, data = data.frame(y, x))
+#' rob$coefficients
 #' @export
 morie_rlm <- function(formula, data, k = 1.345, maxit = 20L, acc = 1e-4) {
   mf <- stats::model.frame(formula, data)
@@ -311,6 +329,13 @@ summary.morie_rlm <- function(object, ...) {
 #'   \code{$coefficients}, \code{$zeta}).
 #' @references Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
 #'   Applied Statistics with S}. Springer.
+#' @examples
+#' set.seed(4)
+#' n <- 250; x <- rnorm(n)
+#' yc <- 1 + (runif(n) > plogis(-0.5 - x)) + (runif(n) > plogis(1 - x))
+#' yf <- factor(pmin(yc, 3), levels = 1:3, ordered = TRUE)
+#' fit <- morie_polr(yf ~ x, data = data.frame(yf, x))
+#' fit$zeta
 #' @export
 morie_polr <- function(formula, data, weights, method = "logistic") {
   pfun <- switch(method, logistic = stats::plogis, probit = stats::pnorm,

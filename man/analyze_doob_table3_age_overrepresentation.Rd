@@ -13,3 +13,7 @@ A \code{morie_result} named-list.
 Renders Table 3 plus age-group IRRs for CSC custody and admissions
 vs Canadian adult population.
 }
+\examples{
+res <- analyze_doob_table3_age_overrepresentation()
+head(res$summary_lines)
+}

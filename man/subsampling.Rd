@@ -37,3 +37,8 @@ API; \pkg{np}'s \code{npsubsample} is closest but is kernel-specific.
 Kept as an in-house implementation and flagged
 novel/no-clean-CRAN-equivalent.
 }
+\examples{
+set.seed(1)
+str(subsampling(rnorm(60), statistic = mean,
+                n_subsamples = 200L), max.level = 1)
+}

@@ -15,3 +15,9 @@ Raw vector of length \code{n}.
 \description{
 Phase 3JJJ1. Wraps libsodium's \code{randombytes_buf}.
 }
+\examples{
+if (morie_crypto_sodium_available()) {
+  r <- morie_crypto_random_bytes(32L)
+  length(r)
+}
+}

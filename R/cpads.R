@@ -138,6 +138,11 @@ morie_cpads_validate_frame <- function(frame, strict = TRUE) {
 #' @param frame A `data.frame`.
 #' @return Logical scalar; `TRUE` if the frame contains the raw CPADS
 #'   PUMF schema, `FALSE` otherwise.
+#' @examples
+#' cols <- unname(unlist(morie_cpads_contract()$raw_column_map))
+#' df <- as.data.frame(stats::setNames(rep(list(1L), length(cols)), cols))
+#' morie_cpads_has_raw_columns(df)
+#' morie_cpads_has_raw_columns(data.frame(x = 1))
 #' @export
 morie_cpads_has_raw_columns <- function(frame) {
   if (!is.data.frame(frame)) {
@@ -187,6 +192,11 @@ morie_cpads_has_raw_columns <- function(frame) {
 #' @param frame A `data.frame` carrying raw CPADS PUMF columns (or the
 #'   already-canonical analysis columns).
 #' @return A `data.frame` with the canonical CPADS analysis columns.
+#' @examples
+#' vars <- morie_cpads_contract()$required_variables
+#' df <- as.data.frame(stats::setNames(rep(list(NA), length(vars)), vars))
+#' out <- morie_cpads_canonicalize_frame(df)
+#' colnames(out)
 #' @export
 morie_cpads_canonicalize_frame <- function(frame) {
   if (!is.data.frame(frame)) {

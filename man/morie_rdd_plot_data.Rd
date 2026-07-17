@@ -50,3 +50,11 @@ A named \code{list} (see Details).
 \description{
 Binned scatter + global-polynomial data for an RD plot
 }
+\examples{
+set.seed(1)
+x <- runif(300, -1, 1)
+y <- 0.3 * x + 1.0 * (x >= 0) + rnorm(300, sd = 0.3)
+d <- data.frame(x, y)
+out <- morie_rdd_plot_data(d, "y", "x", n_bins = 10L)
+head(out$bins)
+}

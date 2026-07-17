@@ -15,6 +15,12 @@ Scalar.
 \description{
 \verb{sd(x) / |mean(x)|}. \code{Inf} when the mean is zero.
 }
+\examples{
+set.seed(1)
+x <- rnorm(100, mean = 5)
+morie_dsp_cv(x)
+morie_dsp_cv(c(-1, 1))  # zero mean: Inf
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 3.
 }

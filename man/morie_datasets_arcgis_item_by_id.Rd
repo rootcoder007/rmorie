@@ -47,3 +47,10 @@ adding a named wrapper (e.g. the shipped
 wraps EsriCanadaEducation's \code{af06159170914808983959df6163fc86}
 with included fixtures for offline use).
 }
+\examples{
+\donttest{
+df <- try(morie_datasets_arcgis_item_by_id(
+  "af06159170914808983959df6163fc86", format = "json"))
+if (!inherits(df, "try-error")) head(df)
+}
+}

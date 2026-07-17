@@ -17,3 +17,10 @@ A \code{morie_effect_size}.
 \description{
 Cliff's delta
 }
+\examples{
+set.seed(1)
+x <- rnorm(30)
+y <- rnorm(30, mean = 0.6)
+r <- cliffs_delta(x, y)
+r$estimate
+}

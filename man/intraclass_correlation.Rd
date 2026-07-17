@@ -23,3 +23,12 @@ An object of class \code{"morie_test_result"}.
 \description{
 Intraclass correlation coefficient (Shrout & Fleiss 1979)
 }
+\examples{
+set.seed(1)
+d <- data.frame(
+  s = rep(1:20, each = 3),
+  r = rep(1:3, 20),
+  v = rep(rnorm(20), each = 3) + rnorm(60, sd = 0.4))
+res <- intraclass_correlation(d, "s", "r", "v", icc_type = "ICC2")
+res
+}

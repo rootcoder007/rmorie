@@ -17,3 +17,8 @@ Numeric I^2 percentage.
 \description{
 I^2 heterogeneity statistic (Higgins)
 }
+\examples{
+est <- c(0.4, 0.5, 0.6)
+se <- c(0.1, 0.1, 0.1)
+i_squared(est, se)
+}

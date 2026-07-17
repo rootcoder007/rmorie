@@ -19,3 +19,7 @@ A \code{morie_effect_size}.
 \description{
 Epsilon-squared (Kelley, 1935)
 }
+\examples{
+r <- epsilon_squared(20, 30, 1, 1)
+r$estimate
+}

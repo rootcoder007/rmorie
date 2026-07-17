@@ -26,3 +26,11 @@ A data frame of fitted values and standard errors.
 \description{
 Local polynomial regression at user-supplied evaluation points
 }
+\examples{
+set.seed(1)
+x <- runif(400, -1, 1)
+y <- 0.3 * x + 1.0 * (x >= 0) + rnorm(400, sd = 0.3)
+ep <- c(-0.5, 0, 0.5)
+out <- morie_rdd_local_polynomial(x, y, ep, h = 0.5)
+out
+}

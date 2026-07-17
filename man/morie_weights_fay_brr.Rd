@@ -30,3 +30,8 @@ A numeric \code{matrix}.
 \description{
 Fay's BRR weights with perturbation coefficient \code{fay_coefficient} in [0,1).
 }
+\examples{
+set.seed(1)
+res <- morie_weights_fay_brr(runif(16, 0.5, 2), rep(1:8, each = 2))
+str(res, max.level = 1)
+}

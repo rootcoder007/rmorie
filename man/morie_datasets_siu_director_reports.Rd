@@ -13,3 +13,9 @@ A \code{data.frame} with columns \code{case_number}, \code{url}, \code{posted_da
 The SIU re-launched their site in 2025 with a JS-rendered case list;
 this returns the legacy-pattern anchor frame which may be empty.
 }
+\examples{
+\donttest{
+reports <- try(morie_datasets_siu_director_reports())
+if (!inherits(reports, "try-error")) head(reports)
+}
+}

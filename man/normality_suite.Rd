@@ -18,3 +18,7 @@ the suite now calls \code{stats::shapiro.test} directly and computes
 the Jarque-Bera statistic inline. Users wanting a stand-alone
 Jarque-Bera test should call \code{tseries::jarque.bera.test}.
 }
+\examples{
+set.seed(1)
+str(normality_suite(rnorm(50)), max.level = 1)
+}

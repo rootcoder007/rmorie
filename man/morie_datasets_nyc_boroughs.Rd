@@ -55,3 +55,7 @@ Attribute schema: \code{borocode} (string, "1"-"5"), \code{boroname}
 (capitalised name), \code{shape_area}, \code{shape_leng}. Live mode also
 returns \code{the_geom} MultiPolygon when \code{geometry = TRUE}.
 }
+\examples{
+df <- morie_datasets_nyc_boroughs(offline = TRUE)
+df[, c("borocode", "boroname")]
+}

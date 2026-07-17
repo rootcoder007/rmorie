@@ -15,6 +15,11 @@
 #' @param fs Sampling frequency (Hz). Default 1.
 #' @return List with `freqs` and `psd`, both length `floor(N/2)+1`.
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.4.
+#' @examples
+#' fs <- 1024; t <- seq.int(0, 1023) / fs
+#' x <- cos(2 * pi * 50 * t)
+#' out <- morie_dsp_psd_periodogram(x, fs = fs)
+#' out$freqs[which.max(out$psd)]
 #' @export
 morie_dsp_psd_periodogram <- function(x, fs = 1) {
   x <- as.numeric(x)
@@ -40,6 +45,11 @@ morie_dsp_psd_periodogram <- function(x, fs = 1) {
 #' @return List with `freqs` and `psd`.
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.4;
 #'   Bartlett (1948).
+#' @examples
+#' fs <- 1024L
+#' t <- seq(0, (fs - 1) / fs, length.out = fs)
+#' x <- sin(2 * pi * 50 * t) + 0.1 * rnorm(fs)
+#' morie_dsp_psd_bartlett(x, fs = fs, n_segments = 4L)
 #' @export
 morie_dsp_psd_bartlett <- function(x, fs = 1, n_segments = 8L) {
   x <- as.numeric(x)
@@ -70,6 +80,11 @@ morie_dsp_psd_bartlett <- function(x, fs = 1, n_segments = 8L) {
 #' @return List with `freqs` and `psd`.
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.4;
 #'   Welch (1967).
+#' @examples
+#' fs <- 1024; t <- seq.int(0, 2047) / fs
+#' x <- cos(2 * pi * 50 * t)
+#' out <- morie_dsp_psd_welch(x, fs = fs, nperseg = 256L)
+#' out$freqs[which.max(out$psd)]
 #' @export
 morie_dsp_psd_welch <- function(x, fs = 1, nperseg = 256L,
                                 noverlap = NULL) {
@@ -106,6 +121,10 @@ morie_dsp_psd_welch <- function(x, fs = 1, nperseg = 256L,
 #' @param order Moment order. Default 0.
 #' @return Scalar moment.
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.6.
+#' @examples
+#' fs <- 1024; t <- seq.int(0, 1023) / fs
+#' out <- morie_dsp_psd_periodogram(cos(2 * pi * 50 * t), fs = fs)
+#' morie_dsp_spectral_moment(out$psd, out$freqs, order = 0L)
 #' @export
 morie_dsp_spectral_moment <- function(psd, freqs, order = 0L) {
   df <- if (length(freqs) > 1L) freqs[2] - freqs[1] else 1
@@ -119,6 +138,10 @@ morie_dsp_spectral_moment <- function(psd, freqs, order = 0L) {
 #' @inheritParams morie_dsp_spectral_moment
 #' @return Scalar mean frequency (Hz).
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.6.
+#' @examples
+#' freqs <- seq.int(0, 64) / 64
+#' psd <- numeric(65); psd[20L] <- 1
+#' morie_dsp_mean_frequency(psd, freqs)
 #' @export
 morie_dsp_mean_frequency <- function(psd, freqs) {
   m0 <- morie_dsp_spectral_moment(psd, freqs, 0L)
@@ -134,6 +157,10 @@ morie_dsp_mean_frequency <- function(psd, freqs) {
 #' @inheritParams morie_dsp_spectral_moment
 #' @return Scalar (Hz).
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.6.
+#' @examples
+#' freqs <- seq.int(0, 100) / 100
+#' psd <- rep(1, 101)
+#' morie_dsp_median_frequency(psd, freqs)
 #' @export
 morie_dsp_median_frequency <- function(psd, freqs) {
   df <- if (length(freqs) > 1L) freqs[2] - freqs[1] else 1
@@ -154,6 +181,10 @@ morie_dsp_median_frequency <- function(psd, freqs) {
 #' @param pct Cumulative fraction in (0, 1]. Default 0.95.
 #' @return Scalar (Hz).
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.6.
+#' @examples
+#' freqs <- seq.int(0, 100) / 100
+#' psd <- rep(1, 101)
+#' morie_dsp_spectral_edge(psd, freqs, pct = 0.95)
 #' @export
 morie_dsp_spectral_edge <- function(psd, freqs, pct = 0.95) {
   df <- if (length(freqs) > 1L) freqs[2] - freqs[1] else 1
@@ -175,6 +206,10 @@ morie_dsp_spectral_edge <- function(psd, freqs, pct = 0.95) {
 #' @param band2 Length-2 numeric (low, high) Hz.
 #' @return Scalar ratio.
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.6.
+#' @examples
+#' freqs <- seq(0, 250, length.out = 256L)
+#' psd <- rep(1, length(freqs))
+#' morie_dsp_spectral_ratio(psd, freqs, band1 = c(10, 30), band2 = c(50, 100))
 #' @export
 morie_dsp_spectral_ratio <- function(psd, freqs, band1, band2) {
   df <- if (length(freqs) > 1L) freqs[2] - freqs[1] else 1
@@ -193,6 +228,9 @@ morie_dsp_spectral_ratio <- function(psd, freqs, band1, band2) {
 #' @param psd PSD vector.
 #' @return Scalar in `[0, 1]`.
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.7.
+#' @examples
+#' uni <- rep(1, 64)
+#' morie_dsp_spectral_flatness(uni)
 #' @export
 morie_dsp_spectral_flatness <- function(psd) {
   p <- psd[psd > 0]
@@ -211,6 +249,10 @@ morie_dsp_spectral_flatness <- function(psd) {
 #' @return Scalar in `[0, log2(length(psd))]`.
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.7;
 #'   Inouye et al. (1991).
+#' @examples
+#' N <- 64L
+#' uni <- rep(1, N)
+#' morie_dsp_spectral_entropy(uni)
 #' @export
 morie_dsp_spectral_entropy <- function(psd) {
   total <- sum(psd)
@@ -228,6 +270,10 @@ morie_dsp_spectral_entropy <- function(psd) {
 #' @inheritParams morie_dsp_spectral_moment
 #' @return Scalar.
 #' @references Rangayyan & Krishnan (2015), Ch. 6.
+#' @examples
+#' fs <- 1024; t <- seq.int(0, 1023) / fs
+#' out <- morie_dsp_psd_periodogram(cos(2 * pi * 50 * t), fs = fs)
+#' morie_dsp_spectral_kurtosis(out$psd, out$freqs)
 #' @export
 morie_dsp_spectral_kurtosis <- function(psd, freqs) {
   total <- sum(psd)
@@ -247,6 +293,8 @@ morie_dsp_spectral_kurtosis <- function(psd, freqs) {
 #' @param psd PSD vector.
 #' @return PSD in dB.
 #' @references Rangayyan & Krishnan (2015), Ch. 6.
+#' @examples
+#' morie_dsp_psd_to_db(c(1, 0.1, 0.01))
 #' @export
 morie_dsp_psd_to_db <- function(psd) {
   10 * log10(pmax(psd, 1e-20))
@@ -259,6 +307,11 @@ morie_dsp_psd_to_db <- function(psd) {
 #' @param psd PSD vector (one-sided).
 #' @return Numeric vector (autocorrelation).
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.3.
+#' @examples
+#' freqs <- seq(0, 250, length.out = 128L)
+#' psd <- exp(-abs(freqs - 100) / 20)
+#' acf_est <- morie_dsp_acf_from_psd(psd)
+#' head(acf_est)
 #' @export
 morie_dsp_acf_from_psd <- function(psd) {
   half <- length(psd)
@@ -282,6 +335,10 @@ morie_dsp_acf_from_psd <- function(psd) {
 #' @param f_high Upper edge (Hz).
 #' @return Band power (units of PSD x Hz).
 #' @references Rangayyan & Krishnan (2015), Ch. 6.
+#' @examples
+#' freqs <- seq.int(0, 100) / 100
+#' psd <- rep(1, 101)
+#' morie_dsp_band_power(psd, freqs, 0.2, 0.5)  # ~0.3
 #' @export
 morie_dsp_band_power <- function(psd, freqs, f_low, f_high) {
   df <- if (length(freqs) > 1L) freqs[2] - freqs[1] else 1
@@ -298,6 +355,11 @@ morie_dsp_band_power <- function(psd, freqs, f_low, f_high) {
 #' @return Scalar fractal dimension.
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.8;
 #'   Eke et al. (2002).
+#' @examples
+#' set.seed(22)
+#' freqs <- seq(1, 250, length.out = 256L)
+#' psd <- freqs^(-1.5) * exp(rnorm(length(freqs), sd = 0.1))
+#' morie_dsp_fractal_dim_psd(psd, freqs)
 #' @export
 morie_dsp_fractal_dim_psd <- function(psd, freqs) {
   valid <- (freqs > 0) & (psd > 0)
@@ -318,6 +380,14 @@ morie_dsp_fractal_dim_psd <- function(psd, freqs) {
 #' @param nperseg Segment length. Default 256.
 #' @return List with `freqs` and `coh` (magnitude squared coherence).
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.9.
+#' @examples
+#' set.seed(23)
+#' fs <- 512L
+#' t <- seq.int(0, fs - 1L) / fs
+#' x <- sin(2 * pi * 50 * t) + rnorm(fs, sd = 0.2)
+#' y <- x + rnorm(fs, sd = 0.2)
+#' out <- morie_dsp_coherence(x, y, fs = fs, nperseg = 128L)
+#' str(out, max.level = 1)
 #' @export
 morie_dsp_coherence <- function(x, y, fs = 1, nperseg = 256L) {
   # Module 20: native Welch coherence.
@@ -355,6 +425,8 @@ morie_dsp_coherence <- function(x, y, fs = 1, nperseg = 256L) {
 #' @param wtype Type string. Default "hamming".
 #' @return Numeric vector of length `N`.
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.5.
+#' @examples
+#' morie_dsp_window(64L, "hamming")
 #' @export
 morie_dsp_window <- function(N, wtype = "hamming") {
   N <- as.integer(N)
@@ -387,6 +459,9 @@ morie_dsp_window <- function(N, wtype = "hamming") {
 #' @return Numeric vector, length `N`.
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.8;
 #'   Mandelbrot & Van Ness (1968).
+#' @examples
+#' path <- morie_dsp_fbm_synthesis(N = 256L, H = 0.7)
+#' length(path)
 #' @export
 morie_dsp_fbm_synthesis <- function(N, H = 0.5) {
   N <- as.integer(N)

@@ -156,6 +156,9 @@ KERNEL_BIWEIGHT <- 4L
 #'   \code{KERNEL_UNIFORM} (2), \code{KERNEL_TRIANGULAR} (3),
 #'   \code{KERNEL_BIWEIGHT} (4), or the matching string.
 #' @return Kernel density value K(u).
+#' @examples
+#' kernel_eval(0, "gaussian")
+#' kernel_eval(c(-1, 0, 1, 2), KERNEL_EPANECHNIKOV)
 #' @export
 kernel_eval <- function(u, kernel_type = KERNEL_GAUSSIAN) {
   k <- .resolve_kernel(kernel_type)
@@ -218,6 +221,13 @@ nw_regression <- function(x, y, x_eval, bandwidth) {
 #'   values; otherwise a list with \code{y_hat} and \code{beta_hat}.
 #' @references Fan, J. and Gijbels, I. (1996). Local Polynomial
 #'   Modelling and Its Applications. Chapman and Hall.
+#' @examples
+#' set.seed(1)
+#' x <- sort(runif(40, -2, 2))
+#' y <- sin(x) + 0.2 * rnorm(40)
+#' x_eval <- seq(-1.5, 1.5, length.out = 20)
+#' fit <- local_linear(x, y, x_eval, bandwidth = 0.5)
+#' fit
 #' @export
 local_linear <- function(x, y, x_eval, bandwidth, return_slope = FALSE) {
   x <- as.numeric(x)
@@ -270,6 +280,12 @@ local_linear <- function(x, y, x_eval, bandwidth, return_slope = FALSE) {
 #' @return Numeric vector of estimated densities.
 #' @references Silverman, B. W. (1986). Density Estimation for
 #'   Statistics and Data Analysis. Chapman and Hall.
+#' @examples
+#' set.seed(1)
+#' x <- sort(runif(40, -2, 2))
+#' x_eval <- seq(-1.5, 1.5, length.out = 20)
+#' d <- kde(x, x_eval, bandwidth = 0.4, kernel_type = "epanechnikov")
+#' d
 #' @export
 kde <- function(x, x_eval, bandwidth, kernel_type = KERNEL_GAUSSIAN) {
   x <- as.numeric(x)
@@ -331,6 +347,12 @@ silverman_bandwidth <- function(x) {
 #' @return Optimal bandwidth (numeric scalar).
 #' @references Hardle, W. (1990). Applied Nonparametric Regression.
 #'   Cambridge.
+#' @examples
+#' set.seed(1)
+#' x <- sort(runif(15, -2, 2))
+#' y <- sin(x) + 0.2 * rnorm(15)
+#' h <- loocv_bandwidth(x, y, n_grid = 5L)
+#' h
 #' @export
 loocv_bandwidth <- function(x, y, bw_min = NULL, bw_max = NULL,
                              n_grid = 30L) {
@@ -384,6 +406,14 @@ loocv_bandwidth <- function(x, y, bw_min = NULL, bw_max = NULL,
 #' @param return_variance Logical; if FALSE, only the mean is returned.
 #' @return Either a numeric vector (mean only) or a list with
 #'   \code{mean} and \code{variance}.
+#' @examples
+#' set.seed(1)
+#' x <- sort(runif(40, -2, 2))
+#' y <- sin(x) + 0.2 * rnorm(40)
+#' x_eval <- seq(-1.5, 1.5, length.out = 20)
+#' r <- kernel_cond_moments(x, y, x_eval, bandwidth = 0.5,
+#'                          return_variance = TRUE)
+#' r$mean
 #' @export
 kernel_cond_moments <- function(x, y, x_eval, bandwidth,
                                  return_variance = TRUE) {
@@ -435,6 +465,15 @@ kernel_cond_moments <- function(x, y, x_eval, bandwidth,
 #' @return A list with \code{fit} (the fitted gam object),
 #'   \code{x_eval}, \code{y_hat} (predictions), and \code{edf}
 #'   (effective degrees of freedom).
+#' @examples
+#' if (requireNamespace("mgcv", quietly = TRUE)) {
+#'   set.seed(1)
+#'   x <- sort(runif(40, -2, 2))
+#'   y <- sin(x) + 0.2 * rnorm(40)
+#'   xe <- seq(-1.5, 1.5, length.out = 20)
+#'   r <- gam_smoother(x, y, x_eval = xe, k = 5)
+#'   head(r$y_hat)
+#' }
 #' @export
 gam_smoother <- function(x, y, x_eval = NULL, k = 10, family = stats::gaussian()) {
   if (!requireNamespace("mgcv", quietly = TRUE)) {

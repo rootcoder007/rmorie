@@ -16,3 +16,7 @@ An object of class \code{"morie_multiple_testing_result"}.
 Delegates to \code{poolr::fisher} when installed; otherwise
 computes the chi-square statistic inline.
 }
+\examples{
+res <- fisher_combined(c(0.001, 0.6, 0.5))
+res$p_value
+}

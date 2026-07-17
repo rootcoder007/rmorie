@@ -21,6 +21,11 @@ Band power (units of PSD x Hz).
 \description{
 Trapezoid-equivalent rectangular integration of PSD over a band.
 }
+\examples{
+freqs <- seq.int(0, 100) / 100
+psd <- rep(1, 101)
+morie_dsp_band_power(psd, freqs, 0.2, 0.5)  # ~0.3
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 6.
 }

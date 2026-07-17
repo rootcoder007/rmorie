@@ -18,3 +18,6 @@ Multi-line summary string.
 \description{
 Search the registry for matching commands
 }
+\examples{
+stat_bridge_fn_search("ttest")
+}

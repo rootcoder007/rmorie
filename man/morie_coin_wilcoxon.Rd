@@ -24,3 +24,10 @@ A list with \code{$method}, \code{$statistic},
 Native two-sample Wilcoxon rank-sum permutation test
 (\code{\link{morie_wilcox_test}}).
 }
+\examples{
+if (requireNamespace("coin", quietly = TRUE)) {
+  set.seed(1)
+  df <- data.frame(y = rnorm(40), g = factor(rep(c("a", "b"), 20)))
+  morie_coin_wilcoxon(y ~ g, data = df)
+}
+}

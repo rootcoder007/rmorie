@@ -21,3 +21,9 @@ A numeric value (scalar).
 Within each cell, scales respondent weights up by total/responder ratio.
 Non-respondents end up with weight 0.
 }
+\examples{
+set.seed(1)
+res <- morie_weights_nonresponse(rep(1, 30), rbinom(30, 1, 0.7) == 1,
+                                 adjustment_cells = rep(c("a", "b"), 15))
+str(res, max.level = 1)
+}

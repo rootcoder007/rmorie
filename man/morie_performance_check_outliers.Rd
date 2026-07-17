@@ -23,3 +23,10 @@ outlier-check object).
 Thin extender over \code{performance::check_outliers} for
 composite outlier detection on a fitted model or numeric data.
 }
+\examples{
+if (requireNamespace("performance", quietly = TRUE)) {
+  set.seed(1)
+  df <- data.frame(y = c(rnorm(49), 8), x = rnorm(50))
+  morie_performance_check_outliers(stats::lm(y ~ x, df))
+}
+}

@@ -46,3 +46,14 @@ For the de Chaisemartin-D'Haultfoeuille estimator on panel data
 prefer \code{\link{morie_did_chaisemartin_dhaultfoeuille}} (rmorie
 native).
 }
+\examples{
+set.seed(1)
+n <- 400
+z <- rbinom(n, 1, 0.5)
+d <- as.integer(z & rbinom(n, 1, 0.8))
+p <- rbinom(n, 1, 0.5)
+y <- 0.5 * d * p + rnorm(n, sd = 0.5)
+df <- data.frame(y = y, z = z, d = d, post = p)
+res <- morie_did_fuzzy(df, "y", "z", "d", "post")
+c(res$estimate, res$details$first_stage_f)
+}

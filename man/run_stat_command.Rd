@@ -18,3 +18,10 @@ error if the command is not registered.
 \description{
 Run a command's REPL handler with positional/keyword arguments
 }
+\examples{
+cmd <- stat_command("demo_echo", "misc", "demo_echo",
+                    "Echo demo command",
+                    handler_repl = function(...) "ok")
+register_stat_command(cmd)
+run_stat_command("demo_echo")
+}

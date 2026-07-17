@@ -17,3 +17,8 @@ Markov transition matrix on \code{Region_AtTimeOfPlacement} within
 each person-year, with stationary distribution and off-diagonal
 Theil-T concentration.
 }
+\examples{
+b02 <- morie_synth_otis("b02", n = 120L, seed = 1L)
+res <- morie_otis_intra_year_transition_matrix(b02)
+res$title
+}

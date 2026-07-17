@@ -18,3 +18,11 @@ list with \code{total}, \code{hier}, \code{alpha}, \code{nf}, \code{expvar}.
 Native principal-axis approximation of McDonald's omega
 (total + hierarchical).
 }
+\examples{
+set.seed(1)
+f <- rnorm(120)
+X <- sapply(1:12, function(j) sqrt(0.5) * f + sqrt(0.5) * rnorm(120))
+colnames(X) <- paste0("i", 1:12)
+res <- morie_psymet_omega(X, nf = 4)
+c(res$total, res$hier)
+}

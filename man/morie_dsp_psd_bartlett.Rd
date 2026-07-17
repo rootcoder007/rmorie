@@ -21,6 +21,12 @@ Splits \code{x} into \code{n_segments} non-overlapping equal segments,
 periodograms each, and averages the result. Variance scales as
 \code{1 / n_segments} at the cost of frequency resolution.
 }
+\examples{
+fs <- 1024L
+t <- seq(0, (fs - 1) / fs, length.out = fs)
+x <- sin(2 * pi * 50 * t) + 0.1 * rnorm(fs)
+morie_dsp_psd_bartlett(x, fs = fs, n_segments = 4L)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 6, sec. 6.4;
 Bartlett (1948).

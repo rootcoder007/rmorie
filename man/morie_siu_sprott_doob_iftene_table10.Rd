@@ -12,3 +12,6 @@ A \code{morie_siu_result}.
 \description{
 Sprott-Doob-Iftene (May 2021) Table 10: per-IEDM decision variance
 }
+\examples{
+head(morie_siu_sprott_doob_iftene_table10())
+}

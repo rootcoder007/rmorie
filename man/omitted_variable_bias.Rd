@@ -43,3 +43,7 @@ base R.  For the full \pkg{sensemakr} treatment (benchmark plots,
 adjusted t-statistics, contour plots) on a fitted \code{lm}
 object, use \code{\link{morie_sensitivity_omitted_var_bias}}.
 }
+\examples{
+str(omitted_variable_bias(0.5, 0.15, dof = 150, r2_yd_x = 0.1,
+                          partial_r2_treatment = 0.05), max.level = 1)
+}

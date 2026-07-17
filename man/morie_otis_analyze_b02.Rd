@@ -15,3 +15,8 @@ An object of class \code{"morie_otis_analysis_result"}.
 \description{
 Aggregate segregation days per person per year (b02)
 }
+\examples{
+otis_b02 <- morie_synth_otis("b02", n = 120L, seed = 1L)
+res <- morie_otis_analyze_b02(otis_b02)
+class(res)
+}

@@ -21,4 +21,7 @@ Drop-in for \code{dnorm(x, mean, sd)} with a single-pass C++ kernel.
 Numerically identical; faster on hot paths because the per-call
 R-S4-dispatch overhead is bypassed.
 }
+\examples{
+morie:::morie_normal_pdf(0, 0, 1)
+}
 \keyword{internal}

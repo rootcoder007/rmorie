@@ -42,3 +42,8 @@ computes summary statistics, and resolves a best-guess treatment,
 outcome, and survey-weight column.  User-supplied hints override
 heuristic detection.
 }
+\examples{
+df <- data.frame(x = c(0, 1, 0, 1), y = c(1, 2, 3, 4))
+p <- morie_dataset_profile(df, hint_treatment = "x", hint_outcome = "y")
+p$n_rows
+}

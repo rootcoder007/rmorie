@@ -17,3 +17,12 @@ A named list with fields \code{report_id}, \code{incident_date},
 \description{
 Extract structured fields from an SIU director's-report text or URL.
 }
+\examples{
+text <- paste0(
+  "Report 24-OFD-001 incident dated January 5, 2024. ",
+  "Director's Decision: no charges. Issued: later."
+)
+out <- morie_datasets_siu_report_fields(text)
+out$report_id
+out$incident_date
+}

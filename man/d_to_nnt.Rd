@@ -17,3 +17,6 @@ Numeric NNT.
 \description{
 Uses the Kraemer & Kupfer (2006) approximation.
 }
+\examples{
+d_to_nnt(0.5)
+}

@@ -31,3 +31,13 @@ A \code{data.frame} of first-stage diagnostics, one row per endogenous regressor
 \description{
 First-stage F-statistics and partial R^2
 }
+\examples{
+set.seed(1)
+n <- 400
+z <- rbinom(n, 1, 0.5); u <- rnorm(n)
+d <- rbinom(n, 1, plogis(0.8 * z + 0.3 * u))
+y <- 0.5 * d + 0.4 * u + rnorm(n, sd = 0.5)
+df <- data.frame(y, d, z)
+out <- morie_iv_first_stage_diagnostics(df, "d", "z")
+out$F
+}

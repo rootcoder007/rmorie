@@ -15,3 +15,8 @@ morie_otis_within_year_region_diversity(df)
 \description{
 Distinct \code{Region_AtTimeOfPlacement} values per person-year.
 }
+\examples{
+b02 <- morie_synth_otis("b02", n = 120L, seed = 1L)
+res <- morie_otis_within_year_region_diversity(b02)
+res$title
+}

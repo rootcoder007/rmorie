@@ -12,3 +12,7 @@ A \code{morie_result} named-list.
 \description{
 Renders Table 2 plus year-over-year changes and 5-year averages.
 }
+\examples{
+res <- analyze_doob_table2_flow()
+head(res$summary_lines)
+}

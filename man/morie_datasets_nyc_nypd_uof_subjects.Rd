@@ -49,3 +49,7 @@ A \code{data.frame}.
 \description{
 NYPD Use of Force: Subjects
 }
+\examples{
+df <- morie_datasets_nyc_nypd_uof_subjects(offline = TRUE)
+head(df[, c("tri_incident_number", "subject_race", "subject_injury_level")])
+}

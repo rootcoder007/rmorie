@@ -17,3 +17,6 @@ A \code{morie_effect_size}.
 \description{
 Number needed to harm (NNH) — sign-reversed NNT
 }
+\examples{
+number_needed_to_harm(20, 80, 10, 90)
+}

@@ -17,3 +17,7 @@ An object of class \code{"morie_test_result"}.
 \description{
 Wald-Wolfowitz runs test for randomness
 }
+\examples{
+set.seed(1)
+runs_test(rbinom(30, 1, 0.5))
+}

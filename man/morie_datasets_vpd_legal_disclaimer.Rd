@@ -15,3 +15,7 @@ VPD's open crime data download. Useful in headless or
 programmatic workflows where the human reader of the GeoDASH
 web UI is not the same as the script user.
 }
+\examples{
+d <- morie_datasets_vpd_legal_disclaimer()
+head(d)
+}

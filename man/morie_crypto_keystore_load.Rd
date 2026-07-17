@@ -23,3 +23,15 @@ Named list with pk (raw) and sk (raw).
 \description{
 Load a key pair from the morie keystore
 }
+\examples{
+if (morie_crypto_sodium_available()) {
+  path <- tempfile(fileext = ".keystore")
+  morie_crypto_keystore_create("pw", path = path)
+  pk <- as.raw(sample(0:255, 32, replace = TRUE))
+  sk <- as.raw(sample(0:255, 64, replace = TRUE))
+  morie_crypto_keystore_store("alice", pk = pk, sk = sk, password = "pw", path = path)
+  out <- morie_crypto_keystore_load("alice", password = "pw", path = path)
+  print(identical(out$sk, sk))
+  unlink(path)
+}
+}

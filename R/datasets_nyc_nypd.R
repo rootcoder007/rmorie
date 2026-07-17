@@ -99,6 +99,9 @@
 #' welcome to fill them in when the asset UUIDs are looked up at
 #' the dataset's landing page.
 #'
+#' @examples
+#' reg <- morie_datasets_nyc_nypd_layers()
+#' reg[, c("dataset_key", "resource_id")]
 #' @export
 morie_datasets_nyc_nypd_layers <- function() {
   rows <- lapply(names(.MORIE_NYC_NYPD_REGISTRY), function(k) {
@@ -269,6 +272,9 @@ NULL
 #' @param app_token Optional Socrata API app token for higher rate
 #'   limits; passed as the `X-App-Token` header.
 #' @return A `data.frame`.
+#' @examples
+#' df <- morie_datasets_nyc_nypd_by_key("nypd_arrests_ytd", offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_nyc_nypd_by_key <- function(dataset_key,
                                              year = NULL,
@@ -301,6 +307,9 @@ morie_datasets_nyc_nypd_by_key <- function(dataset_key,
 #' NYPD Arrests Data (Historic)
 #' @inheritParams morie_datasets_nyc_nypd_by_key
 #' @return A \code{data.frame}.
+#' @examples
+#' df <- morie_datasets_nyc_nypd_arrests_historic(offline = TRUE)
+#' head(df[, c("arrest_key", "arrest_date", "ofns_desc", "arrest_boro")])
 #' @export
 morie_datasets_nyc_nypd_arrests_historic <- function(year = NULL,
                                                        max_features = NULL,
@@ -323,6 +332,9 @@ morie_datasets_nyc_nypd_arrests_historic <- function(year = NULL,
 #' NYPD Arrest Data (Year to Date)
 #' @inheritParams morie_datasets_nyc_nypd_by_key
 #' @return A \code{data.frame}.
+#' @examples
+#' df <- morie_datasets_nyc_nypd_arrests_ytd(offline = TRUE)
+#' head(df[, c("arrest_key", "arrest_date", "ofns_desc")])
 #' @export
 morie_datasets_nyc_nypd_arrests_ytd <- function(year = NULL,
                                                   max_features = NULL,
@@ -345,6 +357,9 @@ morie_datasets_nyc_nypd_arrests_ytd <- function(year = NULL,
 #' NYPD Complaint Data Historic
 #' @inheritParams morie_datasets_nyc_nypd_by_key
 #' @return A \code{data.frame}.
+#' @examples
+#' df <- morie_datasets_nyc_nypd_complaint_historic(offline = TRUE)
+#' head(df[, c("cmplnt_num", "ofns_desc", "boro_nm")])
 #' @export
 morie_datasets_nyc_nypd_complaint_historic <- function(year = NULL,
                                                          max_features = NULL,
@@ -367,6 +382,9 @@ morie_datasets_nyc_nypd_complaint_historic <- function(year = NULL,
 #' NYPD Complaint Data Current (Year To Date)
 #' @inheritParams morie_datasets_nyc_nypd_by_key
 #' @return A \code{data.frame}.
+#' @examples
+#' df <- morie_datasets_nyc_nypd_complaint_ytd(offline = TRUE)
+#' ncol(df)  # 36: adds geocoded_column over the historic schema
 #' @export
 morie_datasets_nyc_nypd_complaint_ytd <- function(year = NULL,
                                                     max_features = NULL,
@@ -389,6 +407,10 @@ morie_datasets_nyc_nypd_complaint_ytd <- function(year = NULL,
 #' NYPD Hate Crimes
 #' @inheritParams morie_datasets_nyc_nypd_by_key
 #' @return A \code{data.frame}.
+#' @examples
+#' df <- morie_datasets_nyc_nypd_hate_crimes(offline = TRUE)
+#' head(df[, c("complaint_year_number", "bias_motive_description",
+#'             "offense_category")])
 #' @export
 morie_datasets_nyc_nypd_hate_crimes <- function(year = NULL,
                                                   max_features = NULL,
@@ -411,6 +433,9 @@ morie_datasets_nyc_nypd_hate_crimes <- function(year = NULL,
 #' NYPD Use of Force Incidents
 #' @inheritParams morie_datasets_nyc_nypd_by_key
 #' @return A \code{data.frame}.
+#' @examples
+#' df <- morie_datasets_nyc_nypd_uof_incidents(offline = TRUE)
+#' head(df[, c("tri_incident_number", "forcetype", "basisforencounter")])
 #' @export
 morie_datasets_nyc_nypd_uof_incidents <- function(year = NULL,
                                                     max_features = NULL,
@@ -433,6 +458,9 @@ morie_datasets_nyc_nypd_uof_incidents <- function(year = NULL,
 #' NYPD Use of Force: Subjects
 #' @inheritParams morie_datasets_nyc_nypd_by_key
 #' @return A \code{data.frame}.
+#' @examples
+#' df <- morie_datasets_nyc_nypd_uof_subjects(offline = TRUE)
+#' head(df[, c("tri_incident_number", "subject_race", "subject_injury_level")])
 #' @export
 morie_datasets_nyc_nypd_uof_subjects <- function(year = NULL,
                                                    max_features = NULL,
@@ -455,6 +483,9 @@ morie_datasets_nyc_nypd_uof_subjects <- function(year = NULL,
 #' NYPD Vehicle Stop Reports
 #' @inheritParams morie_datasets_nyc_nypd_by_key
 #' @return A \code{data.frame}.
+#' @examples
+#' df <- morie_datasets_nyc_nypd_vehicle_stops(offline = TRUE)
+#' head(df[, c("evnt_key", "occur_dt", "arrest_made_flg", "race_desc")])
 #' @export
 morie_datasets_nyc_nypd_vehicle_stops <- function(year = NULL,
                                                     max_features = NULL,
@@ -494,6 +525,9 @@ morie_datasets_nyc_nypd_vehicle_stops <- function(year = NULL,
 #' @param mode One of `"soda2"` (default JSON resource endpoint) or
 #'   `"soda3"` (SoQL `query` endpoint). 3AAA dual-mode dispatch.
 #' @return A `data.frame`.
+#' @examples
+#' df <- morie_datasets_nyc_police_precincts(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_nyc_police_precincts <- function(offline = TRUE,
                                                   geometry = FALSE,
@@ -561,6 +595,9 @@ morie_datasets_nyc_police_precincts <- function(offline = TRUE,
 #'
 #' @inheritParams morie_datasets_nyc_police_precincts
 #' @return A `data.frame`.
+#' @examples
+#' df <- morie_datasets_nyc_boroughs(offline = TRUE)
+#' df[, c("borocode", "boroname")]
 #' @export
 morie_datasets_nyc_boroughs <- function(offline = TRUE,
                                           geometry = FALSE,
@@ -655,6 +692,9 @@ morie_datasets_nyc_boroughs <- function(offline = TRUE,
 #'
 #' @return A `data.frame` with 4 columns: `arrest_boro`, `boro_nm`,
 #'   `borocode`, `boroname`.
+#' @examples
+#' cw <- morie_datasets_nyc_nypd_boro_crosswalk()
+#' cw
 #' @export
 morie_datasets_nyc_nypd_boro_crosswalk <- function() {
   .MORIE_NYPD_BORO_MAP
@@ -719,6 +759,9 @@ morie_datasets_nyc_school_districts <- function(offline = TRUE,
 #' @param offline If `TRUE` (default), reads the included CSV.
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `coundist`, `shape_leng`, `shape_area`.
+#' @examples
+#' df <- morie_datasets_nyc_council_districts(offline = TRUE)
+#' range(as.integer(df$coundist))  # districts 1 through 51
 #' @export
 morie_datasets_nyc_council_districts <- function(offline = TRUE,
                                                    max_features = NULL) {
@@ -742,6 +785,9 @@ morie_datasets_nyc_council_districts <- function(offline = TRUE,
 #' @param offline If `TRUE` (default), reads the included CSV.
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `boro_cd`, `shape_leng`, `shape_area`.
+#' @examples
+#' df <- morie_datasets_nyc_community_districts(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_nyc_community_districts <- function(offline = TRUE,
                                                      max_features = NULL) {
@@ -768,6 +814,9 @@ morie_datasets_nyc_community_districts <- function(offline = TRUE,
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with 11 cols including `nta2020`, `ntaname`,
 #'   `borocode`, `boroname`, `countyfips`, `cdta2020`, `cdtaname`.
+#' @examples
+#' df <- morie_datasets_nyc_ntas_2020(offline = TRUE)
+#' head(df[, c("nta2020", "ntaname", "boroname")])
 #' @export
 morie_datasets_nyc_ntas_2020 <- function(offline = TRUE,
                                            max_features = NULL) {
@@ -821,6 +870,9 @@ morie_datasets_nyc_ntas_2020 <- function(offline = TRUE,
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `zcta5`, `arealand`, `areawater`,
 #'   `centlat`, `centlon`, `intptlat`, `intptlon`.
+#' @examples
+#' df <- morie_datasets_nyc_zctas(offline = TRUE)
+#' head(df[, c("zcta5", "centlat", "centlon")])
 #' @export
 morie_datasets_nyc_zctas <- function(offline = TRUE,
                                        max_features = NULL) {

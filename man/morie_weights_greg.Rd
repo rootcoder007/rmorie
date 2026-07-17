@@ -27,3 +27,9 @@ Closed-form linear calibration to match population totals on auxiliary X.
 When \code{survey} is installed, defers to \code{survey::calibrate()} for a fully
 design-aware result; otherwise computes the linear adjustment in base R.
 }
+\examples{
+set.seed(1)
+X <- cbind(intercept = 1, x = runif(30))
+res <- morie_weights_greg(rep(1, 30), X, c(intercept = 35, x = 18))
+str(res, max.level = 1)
+}

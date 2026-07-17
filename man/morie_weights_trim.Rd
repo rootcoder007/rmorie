@@ -28,3 +28,8 @@ A numeric vector of trimmed weights.
 \code{method = "percentile"} clips at the specified percentiles;
 \code{method = "winsorize"} replaces outliers with the boundary values.
 }
+\examples{
+set.seed(1)
+res <- morie_weights_trim(runif(30, 0.5, 5))
+str(res, max.level = 1)
+}

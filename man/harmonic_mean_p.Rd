@@ -18,3 +18,6 @@ asymptotically exact harmonic mean p-value (Wilson 2019): the
 statistic \eqn{mean(1/p)} is referred to its Landau asymptotic
 distribution. Cross-validated against \pkg{harmonicmeanp}.
 }
+\examples{
+harmonic_mean_p(c(0.001, 0.05, 0.5))
+}

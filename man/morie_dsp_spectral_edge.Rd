@@ -20,6 +20,11 @@ Scalar (Hz).
 Frequency below which \code{pct} fraction of total power lies. SEF95
 (\code{pct = 0.95}) is a classical EEG depth-of-anaesthesia marker.
 }
+\examples{
+freqs <- seq.int(0, 100) / 100
+psd <- rep(1, 101)
+morie_dsp_spectral_edge(psd, freqs, pct = 0.95)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 6, sec. 6.6.
 }

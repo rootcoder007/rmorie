@@ -236,6 +236,18 @@
 #'   `"uof_main_records"`, `"assault"`, `"homicide"`, etc.
 #' @return Invisibly returns the integer count of `CREATE INDEX`
 #'   statements executed.
+#' @examples
+#' if (requireNamespace("RSQLite", quietly = TRUE)) {
+#'   con <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
+#'   siu <- data.frame(drid = 1:5,
+#'                     case_number = sprintf("23-OFD-%03d", 1:5),
+#'                     date_of_incident_iso = "2023-01-15",
+#'                     police_service = "Toronto")
+#'   DBI::dbWriteTable(con, "SIU", siu)
+#'   n <- morie_db_create_indexes(con, "SIU")
+#'   DBI::dbDisconnect(con)
+#'   n
+#' }
 #' @export
 morie_db_create_indexes <- function(con, table_name) {
   specs <- .morie_db_indexes_for(table_name)

@@ -13,4 +13,7 @@ A numeric scalar: the Pearson correlation between \code{x} and \code{y}.
 Single-pass C++ kernel.  Equivalent to \code{cor(x, y)} when both
 vectors are equal-length and complete (no NA handling).
 }
+\examples{
+morie:::morie_cor_pearson(1:10, 1:10)
+}
 \keyword{internal}

@@ -12,3 +12,7 @@ A \code{data.frame} with columns \code{name} and \code{url}.
 \description{
 List the TPS open-data layers included with morie.
 }
+\examples{
+df <- morie_datasets_tps_layers()
+df$name
+}

@@ -15,3 +15,10 @@ A named list with elements \code{residuals}, \code{scaled}, \code{zph_table}.
 \description{
 Wraps \code{survival::cox.zph()} (scaled Schoenfeld residuals).
 }
+\examples{
+set.seed(1)
+df <- data.frame(t = rexp(60), e = rbinom(60, 1, 0.7),
+                 x1 = rnorm(60), x2 = rnorm(60))
+fit <- morie_survival_cox(df, "t", "e", c("x1", "x2"))
+str(morie_survival_schoenfeld(fit), max.level = 1)
+}

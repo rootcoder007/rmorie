@@ -15,3 +15,7 @@ A \code{morie_effect_size}.
 \description{
 Cohen's f from eta-squared
 }
+\examples{
+cohens_f(0.5)$estimate
+cohens_f(0.25)$estimate
+}

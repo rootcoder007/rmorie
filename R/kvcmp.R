@@ -9,6 +9,12 @@
 #' @param max_len Optional integer cap on sequence length.
 #' @return Named list with K, V, T, max_len, method.
 #' @keywords internal
+#' @examples
+#' set.seed(1)
+#' k <- matrix(rnorm(6), nrow = 2)
+#' v <- matrix(rnorm(6), nrow = 2)
+#' r <- morie:::kv_cache_management(NULL, NULL, k, v)
+#' r$T
 kv_cache_management <- function(K_cache, V_cache, k_new, v_new,
                                 max_len = NULL) {
   if (is.null(K_cache)) {

@@ -22,3 +22,11 @@ largest-magnitude per-group mean rank gap (positive = over-policed).
 \description{
 Predicted-vs-realised rank audit by demographic group
 }
+\examples{
+set.seed(6)
+areas <- paste0("a", 1:8)
+mean_risk <- seq(0.1, 0.9, length.out = 8L)
+outcome_rate <- mean_risk + rnorm(8L, 0, 0.05)
+group <- rep(c("X", "Y"), each = 4L)
+morie_fairness_predpol_calibration_audit(areas, mean_risk, outcome_rate, group)
+}

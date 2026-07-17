@@ -18,6 +18,11 @@ Scalar fractal dimension.
 Slope-based estimator from polygonal lengths at log-spaced ruler
 sizes. Equivalent up to sign convention to Higuchi.
 }
+\examples{
+set.seed(1L)
+x <- cumsum(rnorm(512))
+morie_dsp_ruler_fd(x, n_rulers = 6L)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 5, sec. 5.7.
 }

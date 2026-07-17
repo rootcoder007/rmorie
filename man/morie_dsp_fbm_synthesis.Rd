@@ -19,6 +19,10 @@ Generates a length-\code{N} fBm via spectral shaping of white noise
 with \verb{|f|^\{-(H + 0.5)\}}, then cumulative integration. \code{H = 0.5}
 recovers ordinary Brownian motion.
 }
+\examples{
+path <- morie_dsp_fbm_synthesis(N = 256L, H = 0.7)
+length(path)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 6, sec. 6.8;
 Mandelbrot & Van Ness (1968).

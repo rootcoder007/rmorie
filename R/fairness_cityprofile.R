@@ -126,6 +126,9 @@ morie_fairness_city_profile <- function(name,
 #'
 #' @param profile A \code{morie_city_profile}.
 #' @return A named character vector \code{c(source = canonical)}.
+#' @examples
+#' p <- morie_fairness_city_profile("x", area_col = "a", risk_col = "r")
+#' morie_fairness_column_map(p)
 #' @export
 morie_fairness_column_map <- function(profile) {
   stopifnot(inherits(profile, "morie_city_profile"))
@@ -153,6 +156,9 @@ morie_fairness_column_map <- function(profile) {
 #' @param overwrite If \code{FALSE} (default), registering an existing
 #'   name raises an error; pass \code{TRUE} to replace it.
 #' @return Invisibly returns the registered profile.
+#' @examples
+#' p <- morie_fairness_city_profile("demo_city2", area_col = "a")
+#' morie_fairness_register_city(p)
 #' @export
 morie_fairness_register_city <- function(profile, overwrite = FALSE) {
   stopifnot(inherits(profile, "morie_city_profile"))
@@ -174,6 +180,10 @@ morie_fairness_register_city <- function(profile, overwrite = FALSE) {
 #'
 #' @param name Character. The profile name (case-insensitive).
 #' @return A \code{morie_city_profile}.
+#' @examples
+#' p <- morie_fairness_city_profile("demo_city", area_col = "a")
+#' morie_fairness_register_city(p)
+#' morie_fairness_get_city(p$name)$name
 #' @export
 morie_fairness_get_city <- function(name) {
   stopifnot(is.character(name), length(name) == 1L)
@@ -193,6 +203,8 @@ morie_fairness_get_city <- function(name) {
 #' List registered city profile names
 #'
 #' @return Sorted character vector of registered profile names.
+#' @examples
+#' morie_fairness_list_cities()
 #' @export
 morie_fairness_list_cities <- function() {
   .morie_fairness_init_registry()

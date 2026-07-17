@@ -20,3 +20,11 @@ An integer scalar: the number of components to retain by parallel analysis.
 Native Horn's parallel analysis: observed eigenvalues vs the 95th
 percentile of random-data eigenvalues.
 }
+\examples{
+set.seed(1)
+f <- rnorm(60)
+X <- sapply(1:5, function(j) sqrt(0.6) * f + sqrt(0.4) * rnorm(60))
+colnames(X) <- paste0("i", 1:5)
+k <- morie_psymet_parallel(X, nsim = 20, seed = 1)
+k
+}

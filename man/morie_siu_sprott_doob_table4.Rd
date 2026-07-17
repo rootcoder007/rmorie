@@ -12,3 +12,6 @@ A \code{morie_siu_result}.
 \description{
 Sprott-Doob (Feb 2021) Table 4: length-of-stay distribution
 }
+\examples{
+head(morie_siu_sprott_doob_table4())
+}

@@ -19,3 +19,9 @@ A logical scalar.
 \description{
 Check referential integrity (child FK -> parent PK)
 }
+\examples{
+child <- data.frame(fk = c(1, 2, 3))
+parent <- data.frame(pk = c(1, 2, 3, 4))
+res <- check_referential_integrity(child, parent, "fk", "pk")
+res$passed
+}

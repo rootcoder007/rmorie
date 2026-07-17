@@ -38,3 +38,14 @@ A named list with elements \code{coefficients}, \code{std_errors}, \code{t_stats
 \description{
 Panel IV with unit (and optional time) fixed effects via within-transform
 }
+\examples{
+set.seed(1)
+n_unit <- 30; n_time <- 5; n <- n_unit * n_time
+df <- data.frame(
+  unit = rep(seq_len(n_unit), each = n_time),
+  z = rbinom(n, 1, 0.5))
+df$d <- 0.5 * df$z + rnorm(n, sd = 0.5)
+df$y <- 0.5 * df$d + rnorm(n, sd = 0.5)
+res <- morie_iv_panel(df, "y", "d", "z", unit = "unit")
+res$coefficients
+}

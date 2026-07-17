@@ -19,3 +19,9 @@ Robust to arbitrary correlation structure. No clean CRAN
 equivalent (the ACAT package is GitHub-only); kept as an in-house
 implementation.
 }
+\examples{
+res <- cauchy_combination(c(0.01, 0.3, 0.5))
+res$p_value
+resw <- cauchy_combination(c(0.01, 0.3, 0.5), weights = c(0.5, 0.25, 0.25))
+resw$p_value
+}

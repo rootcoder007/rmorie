@@ -35,6 +35,14 @@ morie_crypto_slhdsa_keygen <- function() {
 #' @param sk Secret key from \code{\link{morie_crypto_slhdsa_keygen}}.
 #' @param message Raw vector or single string.
 #' @return Raw signature (about 7856 B for the 128s parameter set).
+#' @examples
+#' if (morie_crypto_liboqs_available()) {
+#'   kp <- try(morie_crypto_slhdsa_keygen(), silent = TRUE)
+#'   if (!inherits(kp, "try-error")) {
+#'     sig <- morie_crypto_slhdsa_sign(kp$sk, "post-quantum")
+#'     print(morie_crypto_slhdsa_verify(kp$pk, "post-quantum", sig))
+#'   }
+#' }
 #' @export
 morie_crypto_slhdsa_sign <- function(sk, message) {
   stopifnot(is.raw(sk))
@@ -47,6 +55,15 @@ morie_crypto_slhdsa_sign <- function(sk, message) {
 #' @param message Raw vector or single string.
 #' @param signature Raw signature.
 #' @return TRUE if the signature verifies.
+#' @examples
+#' if (morie_crypto_liboqs_available()) {
+#'   kp <- try(morie_crypto_slhdsa_keygen(), silent = TRUE)
+#'   if (!inherits(kp, "try-error")) {
+#'     sig <- morie_crypto_slhdsa_sign(kp$sk, "post-quantum")
+#'     print(morie_crypto_slhdsa_verify(kp$pk, "post-quantum", sig))
+#'     print(morie_crypto_slhdsa_verify(kp$pk, "tampered", sig))
+#'   }
+#' }
 #' @export
 morie_crypto_slhdsa_verify <- function(pk, message, signature) {
   stopifnot(is.raw(pk), is.raw(signature))
@@ -62,6 +79,14 @@ morie_crypto_slhdsa_verify <- function(pk, message, signature) {
 #' break does not strand deployments. Requires liboqs with HQC.
 #'
 #' @return List with `pk` and `sk` raw vectors.
+#' @examples
+#' if (morie_crypto_liboqs_available()) {
+#'   kp <- try(morie_crypto_hqc_keygen(), silent = TRUE)
+#'   if (!inherits(kp, "try-error")) {
+#'     length(kp$pk)
+#'     length(kp$sk)
+#'   }
+#' }
 #' @export
 morie_crypto_hqc_keygen <- function() {
   .Call(`_rmorie_morie_crypto_hqc128_keygen`)
@@ -70,6 +95,14 @@ morie_crypto_hqc_keygen <- function() {
 #' HQC-128 encapsulation
 #' @param pk Recipient's HQC-128 public key.
 #' @return List with `ct` and `shared_secret` (raw, 64 B).
+#' @examples
+#' if (morie_crypto_liboqs_available()) {
+#'   kp <- try(morie_crypto_hqc_keygen(), silent = TRUE)
+#'   if (!inherits(kp, "try-error")) {
+#'     enc <- morie_crypto_hqc_encaps(kp$pk)
+#'     str(enc)
+#'   }
+#' }
 #' @export
 morie_crypto_hqc_encaps <- function(pk) {
   stopifnot(is.raw(pk))
@@ -80,6 +113,15 @@ morie_crypto_hqc_encaps <- function(pk) {
 #' @param sk Secret key.
 #' @param ct Ciphertext from \code{\link{morie_crypto_hqc_encaps}}.
 #' @return Raw shared secret.
+#' @examples
+#' if (morie_crypto_liboqs_available()) {
+#'   kp <- try(morie_crypto_hqc_keygen(), silent = TRUE)
+#'   if (!inherits(kp, "try-error")) {
+#'     enc <- morie_crypto_hqc_encaps(kp$pk)
+#'     ss <- morie_crypto_hqc_decaps(kp$sk, enc$ct)
+#'     print(identical(ss, enc$shared_secret))
+#'   }
+#' }
 #' @export
 morie_crypto_hqc_decaps <- function(sk, ct) {
   stopifnot(is.raw(sk), is.raw(ct))
@@ -131,6 +173,12 @@ morie_crypto_lamport_keygen <- function() {
 #' @param message Raw vector or single string.
 #' @return An object of class \code{morie_lamport_signature}: the 256
 #'   revealed 32-byte secrets (list) plus the message digest.
+#' @examples
+#' if (morie_crypto_sodium_available()) {
+#'   kp <- morie_crypto_lamport_keygen()
+#'   sig <- morie_crypto_lamport_sign(kp, "the die is cast")
+#'   print(morie_crypto_lamport_verify(kp$pk, "the die is cast", sig))
+#' }
 #' @export
 morie_crypto_lamport_sign <- function(keypair, message) {
   stopifnot(inherits(keypair, "morie_lamport_keypair"))
@@ -157,6 +205,13 @@ morie_crypto_lamport_sign <- function(keypair, message) {
 #' @param signature From \code{\link{morie_crypto_lamport_sign}}.
 #' @return TRUE if every revealed secret hashes to the committed
 #'   public value selected by the message digest bits.
+#' @examples
+#' if (morie_crypto_sodium_available()) {
+#'   kp <- morie_crypto_lamport_keygen()
+#'   sig <- morie_crypto_lamport_sign(kp, "the die is cast")
+#'   print(morie_crypto_lamport_verify(kp$pk, "the die is cast", sig))
+#'   print(morie_crypto_lamport_verify(kp$pk, "tampered message", sig))
+#' }
 #' @export
 morie_crypto_lamport_verify <- function(pk, message, signature) {
   stopifnot(inherits(signature, "morie_lamport_signature"))

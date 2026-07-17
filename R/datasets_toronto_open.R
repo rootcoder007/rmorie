@@ -26,6 +26,9 @@
 #' @param offline If `TRUE` (default), reads the included CSV.
 #' @return A `data.frame` with `package_name`, `title`,
 #'   `num_resources`, `metadata_modified`, `search_keyword`.
+#' @examples
+#' d <- morie_datasets_toronto_open_crime_adjacent_layers(offline = TRUE)
+#' head(d[, c("package_name", "title")])
 #' @export
 morie_datasets_toronto_open_crime_adjacent_layers <- function(offline = TRUE) {
   if (isTRUE(offline)) {
@@ -72,6 +75,9 @@ morie_datasets_toronto_open_crime_adjacent_layers <- function(offline = TRUE) {
 #' @param offline If `TRUE` (default), reads included CSV.
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with full station address + EMS metadata.
+#' @examples
+#' df <- morie_datasets_toronto_ambulance_stations(offline = TRUE)
+#' head(df[, c("EMS_NAME", "EMS_ADDRESS")])
 #' @export
 morie_datasets_toronto_ambulance_stations <- function(offline = TRUE,
                                                         max_features = NULL) {
@@ -107,6 +113,9 @@ morie_datasets_toronto_ambulance_stations <- function(offline = TRUE,
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `YEAR`, `SECTION`, `CATEGORY`,
 #'   `SUBTYPE`, `COUNT_`.
+#' @examples
+#' df <- morie_datasets_toronto_asr_miscellaneous(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_toronto_asr_miscellaneous <- function(offline = TRUE,
                                                        max_features = NULL) {

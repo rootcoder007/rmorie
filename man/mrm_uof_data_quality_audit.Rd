@@ -23,3 +23,7 @@ Named list with \code{per_column}, \code{missing_columns},
 \description{
 Schema, null, and suspect-value audit
 }
+\examples{
+inc <- morie_datasets_corrections_uof_incidents()
+str(mrm_uof_data_quality_audit(inc), max.level = 1)
+}

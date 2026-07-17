@@ -57,27 +57,38 @@ test_that("hkdf_sha256 defaults salt to zeros and runs", {
   expect_equal(length(out), 32L)
 })
 
-test_that("hybrid_keygen surfaces not-implemented", {
-  skip_if_not_installed("sodium")
-  skip_if_not(morie_crypto_sodium_available(), "no libsodium")
-  set.seed(1)
-  expect_error(morie_crypto_hybrid_keygen(), "not implemented")
+test_that("hybrid keygen/encrypt/decrypt round-trips", {
+  skip_if_not(morie_crypto_liboqs_available(), "no liboqs")
+  kp <- morie_crypto_hybrid_keygen()
+  expect_equal(length(kp$pk), 1184L)
+  expect_equal(length(kp$sk), 2400L)
+  pt <- charToRaw("the quick brown fox jumps over the lazy dog")
+  ct <- morie_crypto_hybrid_encrypt(pt, kp$pk)
+  expect_true(is.raw(ct))
+  # container: 4 + 1088 + 12 + 32 + 16 + 12 + len(pt) + 16
+  expect_equal(length(ct), 1180L + length(pt))
+  expect_identical(morie_crypto_hybrid_decrypt(ct, kp$sk), pt)
+  # string input accepted
+  ct2 <- morie_crypto_hybrid_encrypt("hi", kp$pk)
+  expect_identical(rawToChar(morie_crypto_hybrid_decrypt(ct2, kp$sk)), "hi")
 })
 
-test_that("hybrid_encrypt validates inputs then surfaces not-implemented", {
-  skip_if_not_installed("sodium")
-  skip_if_not(morie_crypto_sodium_available(), "no libsodium")
-  set.seed(1)
-  expect_error(morie_crypto_hybrid_encrypt("hi", "notraw"), "raw")
-  expect_error(morie_crypto_hybrid_encrypt("hi", as.raw(1:4)), "not implemented")
+test_that("hybrid decrypt rejects tampering and wrong keys", {
+  skip_if_not(morie_crypto_liboqs_available(), "no liboqs")
+  kp <- morie_crypto_hybrid_keygen()
+  ct <- morie_crypto_hybrid_encrypt(charToRaw("payload"), kp$pk)
+  bad <- ct
+  bad[length(bad) - 1L] <- xor(bad[length(bad) - 1L], as.raw(1L))
+  expect_error(morie_crypto_hybrid_decrypt(bad, kp$sk))
+  kp2 <- morie_crypto_hybrid_keygen()
+  expect_error(morie_crypto_hybrid_decrypt(ct, kp2$sk))
 })
 
-test_that("hybrid_decrypt validates inputs then surfaces not-implemented", {
-  skip_if_not_installed("sodium")
-  skip_if_not(morie_crypto_sodium_available(), "no libsodium")
-  set.seed(1)
+test_that("hybrid encrypt/decrypt validate inputs", {
+  expect_error(morie_crypto_hybrid_encrypt(list(), as.raw(1:4)), "raw")
   expect_error(morie_crypto_hybrid_decrypt("notraw", as.raw(1:4)), "raw")
-  expect_error(morie_crypto_hybrid_decrypt(as.raw(1:4), as.raw(1:4)), "not implemented")
+  expect_error(morie_crypto_hybrid_decrypt(as.raw(1:2), as.raw(1:4)), "short")
+  expect_error(morie_crypto_hybrid_decrypt(raw(2000), raw(100)), "short")
 })
 
 test_that(".morie_wrapping_key produces 32 bytes", {

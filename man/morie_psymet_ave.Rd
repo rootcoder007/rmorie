@@ -15,3 +15,7 @@ A numeric value (scalar).
 \description{
 Average variance extracted (AVE) from factor loadings. Mean(lambda^2).
 }
+\examples{
+lam <- c(0.7, 0.8, 0.6)
+morie_psymet_ave(lam)
+}

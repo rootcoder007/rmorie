@@ -19,3 +19,7 @@ An object of class \code{"morie_test_result"}.
 \description{
 Point-biserial correlation
 }
+\examples{
+set.seed(1)
+point_biserial_correlation(rbinom(30, 1, 0.5), rnorm(30))
+}

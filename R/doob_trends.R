@@ -108,6 +108,9 @@ CCRSO_TABLE3_AGE <- data.frame(
 #'
 #' @return A `morie_result` named-list with title, summary_lines,
 #'   tables, interpretation, and payload.
+#' @examples
+#' res <- analyze_doob_table1_releases()
+#' head(res$summary_lines)
 #' @export
 analyze_doob_table1_releases <- function() {
   tbl <- CCRSO_TABLE1_RELEASES
@@ -169,6 +172,9 @@ analyze_doob_table1_releases <- function() {
 #' Renders Table 2 plus year-over-year changes and 5-year averages.
 #'
 #' @return A `morie_result` named-list.
+#' @examples
+#' res <- analyze_doob_table2_flow()
+#' head(res$summary_lines)
 #' @export
 analyze_doob_table2_flow <- function() {
   tbl <- CCRSO_TABLE2_FLOW
@@ -237,6 +243,9 @@ analyze_doob_table2_flow <- function() {
 #' vs Canadian adult population.
 #'
 #' @return A `morie_result` named-list.
+#' @examples
+#' res <- analyze_doob_table3_age_overrepresentation()
+#' head(res$summary_lines)
 #' @export
 analyze_doob_table3_age_overrepresentation <- function() {
   tbl <- CCRSO_TABLE3_AGE
@@ -359,6 +368,12 @@ pettitt_changepoint <- function(series) {
 #'   imprisonment rates, same length as `crime_series`.
 #' @param years Optional integer vector of period labels.
 #' @return A `morie_result` named-list.
+#' @examples
+#' set.seed(1)
+#' crime <- rnorm(20)
+#' imp <- 0.5 * crime + rnorm(20, sd = 0.5)
+#' res <- decoupling_test(crime, imp, years = 2000:2019)
+#' res$payload$r_pearson
 #' @export
 decoupling_test <- function(crime_series, imprisonment_series,
                               years = NULL) {
@@ -441,6 +456,10 @@ decoupling_test <- function(crime_series, imprisonment_series,
 #' your own series to `decoupling_test()` once they are available.
 #'
 #' @return A `morie_result` named-list.
+#' @examples
+#' res <- analyze_doob_full_affidavit()
+#' res$title
+#' length(res$tables)
 #' @export
 analyze_doob_full_affidavit <- function() {
   t1 <- analyze_doob_table1_releases()

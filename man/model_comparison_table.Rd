@@ -31,3 +31,11 @@ A character string.
 Compare multiple model fits on AIC, BIC, log-likelihood and (optional)
 LR tests
 }
+\examples{
+set.seed(1)
+df <- data.frame(x = rnorm(30))
+df$y <- df$x + rnorm(30)
+m1 <- lm(y ~ 1, data = df)
+m2 <- lm(y ~ x, data = df)
+model_comparison_table(list(null = m1, fit = m2))
+}

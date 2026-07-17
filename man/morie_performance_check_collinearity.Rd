@@ -22,3 +22,10 @@ upstream VIF data frame).
 Thin extender over \code{performance::check_collinearity} for
 the variance-inflation-factor diagnostic.
 }
+\examples{
+if (requireNamespace("performance", quietly = TRUE)) {
+  set.seed(1)
+  df <- data.frame(y = rnorm(50), x1 = rnorm(50), x2 = rnorm(50))
+  morie_performance_check_collinearity(stats::lm(y ~ x1 + x2, df))
+}
+}

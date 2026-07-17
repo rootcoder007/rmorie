@@ -39,3 +39,10 @@ endogenous regressor is reused as the outcome -- works because
 \pkg{ivreg}'s weak-IV diagnostic comes from the first stage
 regardless of \code{y}.
 }
+\examples{
+set.seed(1); n <- 300
+z <- rbinom(n, 1, 0.5); u <- rnorm(n)
+d <- rbinom(n, 1, plogis(0.8 * z + 0.3 * u))
+df <- data.frame(d, z)
+morie_iv_cragg_donald(df, "d", "z")
+}

@@ -31,6 +31,13 @@ Chains demographic-disparity tests over Race, Gender, and
 AgeCategory against the \code{IndivInjuries_PhysicalInjuries}
 outcome column, plus a data-quality audit against the sidecar.
 }
+\examples{
+\donttest{
+res <- try(morie_arsau_analyze_individual_records(year = "2024",
+                                                  bootstrap_reps = 0L))
+if (!inherits(res, "try-error")) print(res)
+}
+}
 \references{
 Ontario Ministry of the Solicitor General, ARSAU 2023
 and 2024 individual_records technical release notes.

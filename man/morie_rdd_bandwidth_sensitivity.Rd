@@ -45,3 +45,11 @@ A \code{data.frame} of RDD estimates across bandwidths, one row per bandwidth.
 \description{
 Bandwidth sensitivity sweep
 }
+\examples{
+set.seed(1)
+x <- runif(400, -1, 1)
+y <- 0.3 * x + 1.0 * (x >= 0) + rnorm(400, sd = 0.3)
+d <- data.frame(x, y)
+out <- morie_rdd_bandwidth_sensitivity(d, "y", "x")
+out
+}

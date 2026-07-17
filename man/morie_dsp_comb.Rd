@@ -26,6 +26,13 @@ Successively notches the fundamental and its first \code{n_harmonics}
 harmonics. Each notch below Nyquist is applied; aliased harmonics
 are skipped.
 }
+\examples{
+fs <- 1000
+t <- seq.int(0, fs - 1L) / fs
+x <- sin(2 * pi * 50 * t) + 0.5 * sin(2 * pi * 100 * t)
+y <- morie_dsp_comb(x, fundamental = 50, fs = fs, n_harmonics = 2L)
+head(y)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 3, sec. 3.7.
 }

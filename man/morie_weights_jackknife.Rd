@@ -22,3 +22,8 @@ A numeric \code{matrix}.
 When the \code{survey} package is installed and \code{strata} is supplied, defers
 to \code{survey::as.svrepdesign(..., type = "JKn")} for variance compatibility.
 }
+\examples{
+set.seed(1)
+res <- morie_weights_jackknife(runif(10, 0.5, 2))
+str(res, max.level = 1)
+}

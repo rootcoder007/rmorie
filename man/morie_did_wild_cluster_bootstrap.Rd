@@ -54,3 +54,15 @@ CI dependency resolver unreliable. Callers who want
 \pkg{fwildclusterboot} should call it directly on a \code{feols} /
 \code{lm} fit.
 }
+\examples{
+set.seed(1)
+n <- 300
+d <- rbinom(n, 1, 0.5); p <- rbinom(n, 1, 0.5)
+y <- 1 + 0.3 * d + 0.4 * p + 0.5 * d * p + rnorm(n, sd = 0.5)
+df <- data.frame(y = y, d = d, post = p,
+                 clust = sample.int(20, n, replace = TRUE))
+res <- morie_did_wild_cluster_bootstrap(df, "y", "d", "post",
+                                        cluster = "clust",
+                                        n_bootstrap = 99L, seed = 7)
+c(res$estimate, res$p_value)
+}

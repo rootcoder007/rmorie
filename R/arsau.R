@@ -262,6 +262,8 @@ NULL
 #' row / column counts, \code{is_valid}, and bilingual descriptions.
 #'
 #' @return Named list-of-lists.
+#' @examples
+#' str(ARSAU_REGISTRY)
 #' @export
 ARSAU_REGISTRY <- function() {
   .ARSAU_REGISTRY_LIST
@@ -269,6 +271,8 @@ ARSAU_REGISTRY <- function() {
 
 #' Known ARSAU year/range keys.
 #' @return A character vector.
+#' @examples
+#' ARSAU_YEARS
 #' @export
 ARSAU_YEARS <- function() {
   sort(unique(vapply(.ARSAU_REGISTRY_LIST, function(e) e$year_or_range, character(1))))
@@ -276,6 +280,8 @@ ARSAU_YEARS <- function() {
 
 #' Known ARSAU dataset kinds.
 #' @return A character vector.
+#' @examples
+#' ARSAU_KINDS
 #' @export
 ARSAU_KINDS <- function() {
   sort(unique(vapply(.ARSAU_REGISTRY_LIST, function(e) e$kind, character(1))))
@@ -293,6 +299,12 @@ ARSAU_KINDS <- function() {
 #'
 #' @param path Path to the JSON file.
 #' @return Named list with \code{fields} and \code{records}.
+#' @examples
+#' tf <- tempfile(fileext = ".json")
+#' writeLines('{"fields": [{"id": "a", "type": "int"}]}', tf)
+#' res <- morie_arsau_read_sidecar(tf)
+#' res$fields
+#' unlink(tf)
 #' @export
 morie_arsau_read_sidecar <- function(path) {
   if (!requireNamespace("jsonlite", quietly = TRUE)) {
@@ -451,6 +463,11 @@ morie_arsau_read_sidecar <- function(path) {
 #' @param language "en" or "fr".
 #' @param data_dir Optional explicit ARSAU root.
 #' @return An object of class \code{"morie_arsau_result"}.
+#' @examples
+#' \donttest{
+#' res <- try(morie_arsau_load_main_records("2024"))
+#' if (!inherits(res, "try-error")) head(res$data)
+#' }
 #' @export
 morie_arsau_load_main_records <- function(year, language = "en", data_dir = NULL) {
   key <- .arsau_coerce_year_key(year)
@@ -465,6 +482,11 @@ morie_arsau_load_main_records <- function(year, language = "en", data_dir = NULL
 #' Load ARSAU individual_records CSV.
 #' @inheritParams morie_arsau_load_main_records
 #' @return An object of class \code{"morie_arsau_result"}.
+#' @examples
+#' \donttest{
+#' res <- try(morie_arsau_load_individual_records("2024"))
+#' if (!inherits(res, "try-error")) head(res$data)
+#' }
 #' @export
 morie_arsau_load_individual_records <- function(year, language = "en", data_dir = NULL) {
   key <- .arsau_coerce_year_key(year)
@@ -479,6 +501,11 @@ morie_arsau_load_individual_records <- function(year, language = "en", data_dir 
 #' Load ARSAU probe_cycle_records CSV (CEW telemetry).
 #' @inheritParams morie_arsau_load_main_records
 #' @return An object of class \code{"morie_arsau_result"}.
+#' @examples
+#' \donttest{
+#' res <- try(morie_arsau_load_probe_cycle_records("2024"))
+#' if (!inherits(res, "try-error")) head(res$data)
+#' }
 #' @export
 morie_arsau_load_probe_cycle_records <- function(year, language = "en", data_dir = NULL) {
   key <- .arsau_coerce_year_key(year)
@@ -496,6 +523,11 @@ morie_arsau_load_probe_cycle_records <- function(year, language = "en", data_dir
 #' @inheritParams morie_arsau_load_main_records
 #' @param allow_invalid Logical; required \code{TRUE} for 2023.
 #' @return An object of class \code{"morie_arsau_result"}.
+#' @examples
+#' \donttest{
+#' res <- try(morie_arsau_load_weapon_records("2024"))
+#' if (!inherits(res, "try-error")) head(res$data)
+#' }
 #' @export
 morie_arsau_load_weapon_records <- function(year, allow_invalid = FALSE,
                                               language = "en", data_dir = NULL) {
@@ -514,6 +546,11 @@ morie_arsau_load_weapon_records <- function(year, allow_invalid = FALSE,
 #' @param language "en" or "fr".
 #' @param data_dir Optional explicit ARSAU root.
 #' @return An object of class \code{"morie_arsau_result"}.
+#' @examples
+#' \donttest{
+#' res <- try(morie_arsau_load_aggregate_summary("2020-2022"))
+#' if (!inherits(res, "try-error")) head(res$data)
+#' }
 #' @export
 morie_arsau_load_aggregate_summary <- function(year_range = "2020-2022",
                                                  language = "en", data_dir = NULL) {
@@ -529,6 +566,11 @@ morie_arsau_load_aggregate_summary <- function(year_range = "2020-2022",
 #' Load ARSAU detailed-incident-level CSV (2020-2022 only).
 #' @inheritParams morie_arsau_load_aggregate_summary
 #' @return An object of class \code{"morie_arsau_result"}.
+#' @examples
+#' \donttest{
+#' res <- try(morie_arsau_load_detailed_dataset("2020-2022"))
+#' if (!inherits(res, "try-error")) head(res$data)
+#' }
 #' @export
 morie_arsau_load_detailed_dataset <- function(year_range = "2020-2022",
                                                 language = "en", data_dir = NULL) {
@@ -551,6 +593,10 @@ morie_arsau_load_detailed_dataset <- function(year_range = "2020-2022",
 #' @param data_dir Optional explicit ARSAU root.
 #' @param language "en" or "fr".
 #' @return An object of class \code{"morie_arsau_result"}.
+#' @examples
+#' r <- morie_arsau_available_years(data_dir = tempdir())
+#' r$present
+#' r$missing
 #' @export
 morie_arsau_available_years <- function(data_dir = NULL, language = "en") {
   years <- ARSAU_YEARS()
@@ -606,6 +652,9 @@ morie_arsau_available_years <- function(data_dir = NULL, language = "en") {
 #' @param language "en" or "fr".
 #' @param data_dir Optional explicit ARSAU root.
 #' @return An object of class \code{"morie_arsau_result"}.
+#' @examples
+#' r <- morie_arsau_available_datasets(year = "2023")
+#' r$n
 #' @export
 morie_arsau_available_datasets <- function(year = NULL, language = "en", data_dir = NULL) {
   if (is.null(year)) {
@@ -666,6 +715,9 @@ morie_arsau_available_datasets <- function(year = NULL, language = "en", data_di
 #' @param data_dir Optional explicit ARSAU root.
 #' @param n_preview_rows Number of rows from the CSV head to include.
 #' @return An object of class \code{"morie_arsau_result"}.
+#' @examples
+#' res <- morie_arsau_describe("main_records", "2024")
+#' res$summary_lines
 #' @export
 morie_arsau_describe <- function(kind, year, language = "en", data_dir = NULL,
                                    n_preview_rows = 3L) {

@@ -13,3 +13,10 @@ List with \code{pk} (raw, 1952 B) and \code{sk} (raw, 4032 B).
 Phase 3JJJ2. Generates a post-quantum signature keypair.
 Sizes: \code{pk} = 1952 bytes, \code{sk} = 4032 bytes.
 }
+\examples{
+if (morie_crypto_liboqs_available()) {
+  kp <- morie_crypto_mldsa65_keygen()
+  length(kp$pk)  # 1952 (FIPS 204)
+  length(kp$sk)  # 4032
+}
+}

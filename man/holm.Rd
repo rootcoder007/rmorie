@@ -20,3 +20,8 @@ An object of class \code{"morie_multiple_testing_result"}.
 Thin wrapper over \code{stats::p.adjust(method = "holm")};
 uniformly more powerful than Bonferroni.
 }
+\examples{
+set.seed(1)
+p <- c(runif(30), runif(5, 0, 0.005))
+holm(p)$adjusted
+}

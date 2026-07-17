@@ -36,3 +36,7 @@ A \code{data.frame}.  Schema is NOT normalised across years.
 \description{
 NYPD Stop, Question and Frisk (SQF) microdata via NYC OpenData.
 }
+\examples{
+df <- morie_datasets_nyc_stop_and_frisk(offline = TRUE)
+head(df[, c("STOP_FRISK_ID", "STOP_FRISK_DATE", "FRISKED_FLAG")])
+}

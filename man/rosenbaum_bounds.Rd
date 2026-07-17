@@ -32,3 +32,7 @@ originally shipped with rmorie.  The \code{mcnemar} path is always
 served by the inline binomial formula (rbounds does not expose a
 McNemar entry point on CRAN).
 }
+\examples{
+set.seed(1)
+str(rosenbaum_bounds(rnorm(30, 0.5), rnorm(30)), max.level = 1)
+}

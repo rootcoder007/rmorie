@@ -19,3 +19,13 @@ detected treatment/outcome/weight columns to recommend
 epidemiological analyses (descriptive profile, propensity scores,
 IPW-ATE, AIPW, ATT/ATC, double-ML, GATE, survey-weighted estimates).
 }
+\examples{
+df <- data.frame(
+  treat = c(0, 1, 0, 1, 0, 1),
+  outcome_y = c(1.1, 2.2, 1.4, 3.0, 0.9, 2.8),
+  age = c(20, 25, 30, 35, 40, 45)
+)
+p <- morie_dataset_profile(df, hint_treatment = "treat", hint_outcome = "outcome_y")
+plan <- morie_dataset_suggest_plan(p)
+vapply(plan, function(s) s$analysis, character(1))
+}

@@ -32,3 +32,6 @@ Calls the CKAN \code{package_show} verb.  The returned list
 contains \code{title}, \code{notes}, \code{resources}, etc. -
 resources are the individual downloadable files in the package.
 }
+\examples{
+\donttest{try(morie_ingest_ckan_package_show("https://open.canada.ca/data", "some-package-id"))}
+}

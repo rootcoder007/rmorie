@@ -16,6 +16,11 @@
 #' Efron, B. & Tibshirani, R. (1993). An Introduction to the Bootstrap.
 #' Efron, B. (1987). Better bootstrap confidence intervals. JASA, 82(397), 171-185.
 #' @keywords internal
+#' @examples
+#' set.seed(0)
+#' x <- rnorm(100)
+#' res <- btsrp(x, B = 200, seed = 0, method = "percentile")
+#' c(res$estimate, res$ci_lower, res$ci_upper)
 #' @export
 btsrp <- function(x, statistic = NULL, B = 2000L, alpha = 0.05,
                   method = c("percentile", "bca", "studentized"),

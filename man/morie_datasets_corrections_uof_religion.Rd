@@ -28,3 +28,7 @@ A \code{data.frame} of the requested dataset (a 0-row typed frame when the data 
 \description{
 Inmate-participant religion
 }
+\examples{
+df <- morie_datasets_corrections_uof_religion()
+head(df)
+}

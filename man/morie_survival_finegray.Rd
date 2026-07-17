@@ -37,3 +37,13 @@ A named list with elements \code{coefficients}, \code{standard_errors}, \code{ha
 \description{
 Requires the \code{cmprsk} package.
 }
+\examples{
+\donttest{
+if (requireNamespace("cmprsk", quietly = TRUE)) {
+  set.seed(1)
+  df <- data.frame(t = rexp(80), e = sample(0:2, 80, replace = TRUE),
+                   x1 = rnorm(80))
+  str(morie_survival_finegray(df, "t", "e", "x1"), max.level = 1)
+}
+}
+}

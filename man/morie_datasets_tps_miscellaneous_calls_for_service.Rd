@@ -51,3 +51,9 @@ Languages, Calls Received, and Alarm Calls
 
 Tags: ASR; TPS; Toronto Police; Annual Statistical Report; Calls for Service
 }
+\examples{
+\donttest{
+df <- try(morie_datasets_tps_miscellaneous_calls_for_service(max_features = 5L))
+if (!inherits(df, "try-error")) head(df)
+}
+}

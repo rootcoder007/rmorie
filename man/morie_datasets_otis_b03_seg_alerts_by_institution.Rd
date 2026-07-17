@@ -28,3 +28,7 @@ A \code{data.frame} of the requested dataset (a 0-row typed frame when the data 
 \description{
 OTIS b03 -- Segregation placements: alerts + hold by institution
 }
+\examples{
+df <- morie_datasets_otis_b03_seg_alerts_by_institution(offline = TRUE)
+head(df)
+}

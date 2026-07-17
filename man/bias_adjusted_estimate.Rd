@@ -25,3 +25,8 @@ Named list with \code{adjusted_estimate}, \code{bias},
 \description{
 Bias-adjusted treatment effect (Ding & VanderWeele 2016)
 }
+\examples{
+res <- bias_adjusted_estimate(0.5, 0.1, rr_ud = 2, rr_eu = 2)
+res$adjusted_estimate
+c(res$adjusted_ci_lower, res$adjusted_ci_upper)
+}

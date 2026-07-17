@@ -116,6 +116,13 @@
 #' @param password Character scalar: keystore password.
 #' @param path     File path.
 #' @return Invisibly, NULL.
+#' @examples
+#' if (morie_crypto_sodium_available()) {
+#'   path <- tempfile(fileext = ".keystore")
+#'   morie_crypto_keystore_create("open sesame", path = path)
+#'   print(file.exists(path))
+#'   unlink(path)
+#' }
 #' @export
 morie_crypto_keystore_create <- function(password,
                                          path = .morie_keystore_default_path()) {
@@ -138,6 +145,16 @@ morie_crypto_keystore_create <- function(password,
 #' @param password Character scalar.
 #' @param path     Keystore path.
 #' @return Invisibly, NULL.
+#' @examples
+#' if (morie_crypto_sodium_available()) {
+#'   path <- tempfile(fileext = ".keystore")
+#'   morie_crypto_keystore_create("pw", path = path)
+#'   pk <- as.raw(sample(0:255, 32, replace = TRUE))
+#'   sk <- as.raw(sample(0:255, 64, replace = TRUE))
+#'   morie_crypto_keystore_store("alice", pk = pk, sk = sk, password = "pw", path = path)
+#'   print(morie_crypto_keystore_list("pw", path = path))
+#'   unlink(path)
+#' }
 #' @export
 morie_crypto_keystore_store <- function(name, pk, sk, password,
                                         path = .morie_keystore_default_path()) {
@@ -168,6 +185,17 @@ morie_crypto_keystore_store <- function(name, pk, sk, password,
 #' @param password Character scalar.
 #' @param path     Keystore path.
 #' @return Named list with pk (raw) and sk (raw).
+#' @examples
+#' if (morie_crypto_sodium_available()) {
+#'   path <- tempfile(fileext = ".keystore")
+#'   morie_crypto_keystore_create("pw", path = path)
+#'   pk <- as.raw(sample(0:255, 32, replace = TRUE))
+#'   sk <- as.raw(sample(0:255, 64, replace = TRUE))
+#'   morie_crypto_keystore_store("alice", pk = pk, sk = sk, password = "pw", path = path)
+#'   out <- morie_crypto_keystore_load("alice", password = "pw", path = path)
+#'   print(identical(out$sk, sk))
+#'   unlink(path)
+#' }
 #' @export
 morie_crypto_keystore_load <- function(name, password,
                                        path = .morie_keystore_default_path()) {
@@ -199,6 +227,15 @@ morie_crypto_keystore_load <- function(name, password,
 #' @param password Character scalar.
 #' @param path     Keystore path.
 #' @return Character vector of identifiers.
+#' @examples
+#' if (morie_crypto_sodium_available()) {
+#'   path <- tempfile(fileext = ".keystore")
+#'   morie_crypto_keystore_create("pw", path = path)
+#'   morie_crypto_keystore_store("k1", as.raw(1:4), as.raw(5:8), "pw", path = path)
+#'   morie_crypto_keystore_store("k2", as.raw(1:4), as.raw(5:8), "pw", path = path)
+#'   print(morie_crypto_keystore_list("pw", path = path))
+#'   unlink(path)
+#' }
 #' @export
 morie_crypto_keystore_list <- function(password,
                                        path = .morie_keystore_default_path()) {

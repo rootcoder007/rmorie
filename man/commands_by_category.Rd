@@ -12,3 +12,10 @@ Named list of character vectors of command names.
 \description{
 Commands grouped by category
 }
+\examples{
+cmd <- stat_command("demo_cmd", "Demo", "demo_cmd()", "Example command",
+                    handler_repl = function() 1)
+register_stat_command(cmd)
+groups <- commands_by_category()
+groups[["Demo"]]
+}

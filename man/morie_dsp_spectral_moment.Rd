@@ -20,6 +20,11 @@ Scalar moment.
 \code{m_k = sum(freqs^k * psd) * df}. Used to derive mean, median, edge,
 and higher-order frequency descriptors.
 }
+\examples{
+fs <- 1024; t <- seq.int(0, 1023) / fs
+out <- morie_dsp_psd_periodogram(cos(2 * pi * 50 * t), fs = fs)
+morie_dsp_spectral_moment(out$psd, out$freqs, order = 0L)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 6, sec. 6.6.
 }

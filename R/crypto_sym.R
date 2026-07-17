@@ -36,6 +36,10 @@ morie_crypto_sodium_available <- function() {
 #' `"1.0.20"`); empty string if libsodium wasn't linked.
 #'
 #' @return Single character.
+#' @examples
+#' if (morie_crypto_sodium_available()) {
+#'   morie_crypto_sodium_version()
+#' }
 #' @export
 morie_crypto_sodium_version <- function() {
   .Call(`_rmorie_morie_crypto_sodium_version`)
@@ -91,6 +95,16 @@ morie_crypto_chacha20_poly1305_encrypt <- function(key, nonce, plaintext,
 #'   with the 16-byte tag.
 #' @param aad Optional raw vector of additional authenticated data.
 #' @return Decrypted plaintext as raw vector.
+#' @examples
+#' if (morie_crypto_sodium_available()) {
+#'   k <- morie_crypto_random_bytes(32)
+#'   n <- morie_crypto_random_bytes(12)
+#'   pt <- charToRaw("the quick brown fox")
+#'   aad <- charToRaw("hdr:v1")
+#'   enc <- morie_crypto_chacha20_poly1305_encrypt(k, n, pt, aad)
+#'   dec <- morie_crypto_chacha20_poly1305_decrypt(k, n, c(enc$ct, enc$tag), aad)
+#'   identical(dec, pt)
+#' }
 #' @export
 morie_crypto_chacha20_poly1305_decrypt <- function(key, nonce,
                                                       ct_with_tag,
@@ -112,6 +126,12 @@ morie_crypto_chacha20_poly1305_decrypt <- function(key, nonce,
 #' @param salt Optional salt raw vector. Empty -> zero-fill.
 #' @param info Optional context/application info raw vector.
 #' @return Derived key material as raw vector of length `length`.
+#' @examples
+#' if (morie_crypto_sodium_available()) {
+#'   out <- morie_crypto_hkdf_sha256("seed", len = 32L, salt = "salt",
+#'                                   info = "ctx")
+#'   length(out)
+#' }
 #' @export
 morie_crypto_hkdf_sha256 <- function(ikm, length = 32L,
                                        salt = raw(0), info = raw(0)) {
@@ -129,6 +149,11 @@ morie_crypto_hkdf_sha256 <- function(ikm, length = 32L,
 #'
 #' @param n Number of bytes to generate.
 #' @return Raw vector of length `n`.
+#' @examples
+#' if (morie_crypto_sodium_available()) {
+#'   r <- morie_crypto_random_bytes(32L)
+#'   length(r)
+#' }
 #' @export
 morie_crypto_random_bytes <- function(n) {
   .Call(`_rmorie_morie_crypto_random_bytes`, as.integer(n))

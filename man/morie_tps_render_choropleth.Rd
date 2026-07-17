@@ -60,3 +60,12 @@ When \pkg{ggplot2} is available the render uses
 \code{geom_polygon} + \code{scale_fill_distiller}; otherwise the
 base R \code{polygon()} primitive is used.
 }
+\examples{
+ring <- lapply(seq(0, 2 * pi, length.out = 8), function(a) {
+  list(-79.40 + 0.02 * cos(a), 43.70 + 0.01 * sin(a))
+})
+polys <- data.frame(HOOD_ID = 1, RATE = 5)
+polys$geometry <- list(ring)
+out <- morie_tps_render_choropleth(polys, rate_col = "RATE",
+                                   outfile = tempfile(fileext = ".png"))
+}

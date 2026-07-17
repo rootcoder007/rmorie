@@ -25,3 +25,9 @@ and Peto-Peto (rho=1). Gehan/Tarone-Ware are not supported by \code{survdiff}
 directly and currently fall back to rho=1 (Peto) as the closest analogue;
 use \code{survival::survdiff(..., rho=1)} plus FH weights for exact equivalents.
 }
+\examples{
+set.seed(1)
+time <- rexp(60); event <- rbinom(60, 1, 0.7)
+group <- rep(c(0, 1), 30)
+str(morie_survival_logrank(time, event, group), max.level = 1)
+}

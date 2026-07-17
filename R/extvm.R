@@ -32,6 +32,11 @@
 #' @param x numeric vector of block maxima.
 #' @return list: mu, sigma, xi, se_mu, se_sigma, se_xi, loglik, n, method.
 #' @keywords internal
+#' @examples
+#' set.seed(23)
+#' x <- abs(rnorm(40)) + 0.1
+#' res <- try(extvm(x))
+#' str(res)
 #' @export
 extvm <- function(x) {
   x <- as.numeric(x)

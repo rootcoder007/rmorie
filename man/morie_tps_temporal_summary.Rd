@@ -19,3 +19,12 @@ Year / month / day-of-week / hour-of-day rollups, plus a coverage
 line.  Robust to missing columns: only includes tables for the
 fields actually present.
 }
+\examples{
+\donttest{
+df <- try(morie_datasets_tps_assault(max_features = 200L))
+if (!inherits(df, "try-error")) {
+  res <- try(morie_tps_temporal_summary(df, ds_name = "assault"))
+  if (!inherits(res, "try-error")) str(res, max.level = 1)
+}
+}
+}

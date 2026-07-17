@@ -17,3 +17,8 @@ An object of class \code{"morie_test_result"}.
 \description{
 Spearman rank correlation
 }
+\examples{
+set.seed(1)
+x <- rnorm(30)
+spearman_correlation(x, x + rnorm(30))
+}

@@ -49,3 +49,7 @@ A \code{data.frame}.
 \description{
 NYPD Arrests Data (Historic)
 }
+\examples{
+df <- morie_datasets_nyc_nypd_arrests_historic(offline = TRUE)
+head(df[, c("arrest_key", "arrest_date", "ofns_desc", "arrest_boro")])
+}

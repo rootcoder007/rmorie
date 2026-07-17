@@ -35,6 +35,12 @@ one column with itself.  See
 \code{\link{morie_arsau_analyze_detailed_dataset}} for the
 2020-2022 layout that exposes more region columns.
 }
+\examples{
+\donttest{
+res <- try(morie_arsau_analyze_main_records(year = "2024"))
+if (!inherits(res, "try-error")) print(res)
+}
+}
 \references{
 Ontario Ministry of the Solicitor General, ARSAU 2023
 and 2024 main_records technical release notes.

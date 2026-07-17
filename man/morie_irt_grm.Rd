@@ -26,6 +26,16 @@ with ordered thresholds. The M-step maximizes each item's expected
 complete-data log-likelihood with \code{stats::optim} on an
 order-preserving parameterization.
 }
+\examples{
+set.seed(64)
+n <- 1200; k <- 4; a_true <- c(1.2, 1.5, 1.0, 1.8); th <- rnorm(n)
+X <- vapply(seq_len(k), function(j) {
+  bj <- sort(runif(2, -1, 1))
+  u <- runif(n)
+  1L + (u < plogis(a_true[j] * (th - bj[1]))) + (u < plogis(a_true[j] * (th - bj[2])))
+}, integer(n))
+morie_irt_grm(X)
+}
 \references{
 Samejima, F. (1969). Estimation of latent ability using
 a response pattern of graded scores. \emph{Psychometrika

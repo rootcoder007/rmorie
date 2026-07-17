@@ -17,6 +17,13 @@ Averages a \verb{(n_segments, n_samples)} matrix down its rows. Standard
 synchronous-averaging recipe for repeated stimulus responses (e.g.
 evoked potentials).
 }
+\examples{
+set.seed(1)
+t <- seq.int(0, 99) / 100
+segs <- t(replicate(8, sin(2 * pi * 5 * t) + rnorm(100, sd = 0.3)))
+y <- morie_dsp_ensemble_average(segs)
+sd(y) < sd(segs[1, ])  # averaging reduces noise
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 3, sec. 3.3.
 }

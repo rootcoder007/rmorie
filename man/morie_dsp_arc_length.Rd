@@ -16,6 +16,12 @@ Scalar.
 Polygonal length: \code{sum(sqrt(1 + diff(x)^2))}. Curve length under
 unit time-step.
 }
+\examples{
+t <- seq(0, 1, length.out = 100)
+x <- sin(2 * pi * 5 * t)
+morie_dsp_arc_length(x)
+morie_dsp_arc_length(rep(0, 5))  # flat signal: n - 1
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 5, sec. 5.3.
 }

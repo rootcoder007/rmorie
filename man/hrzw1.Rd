@@ -26,4 +26,13 @@ Named list with estimate, se, ci_lower, ci_upper, boot_mean, B, n, method.
 \description{
 Rademacher wild bootstrap for OLS coefficients
 }
+\examples{
+set.seed(18)
+n <- 60
+x <- rnorm(n)
+y <- 0.5 * x + rnorm(n, sd = 0.3)
+resid <- y - predict(lm(y ~ x))
+res <- hrzw1(x, y, residuals = resid, B = 20)
+str(res)
+}
 \keyword{internal}

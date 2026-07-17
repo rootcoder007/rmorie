@@ -15,6 +15,11 @@ Scalar.
 \description{
 \code{sqrt(2)} for a pure sine; large values indicate spiky waveforms.
 }
+\examples{
+t <- seq.int(0, 9999) / 10000
+x <- sin(2 * pi * 5 * t)
+morie_dsp_crest_factor(x)  # ~sqrt(2) for a unit sine
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 5, sec. 5.2.
 }

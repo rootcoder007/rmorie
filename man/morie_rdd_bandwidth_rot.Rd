@@ -22,3 +22,10 @@ A named list with elements \code{bandwidth}, \code{method}, \code{details}.
 \description{
 Rule-of-thumb (ROT) bandwidth -- Silverman-style on running variable
 }
+\examples{
+set.seed(1)
+x <- runif(400, -1, 1)
+y <- 0.3 * x + 1.0 * (x >= 0) + rnorm(400, sd = 0.3)
+bw <- morie_rdd_bandwidth_rot(x, y)
+bw$bandwidth
+}

@@ -21,3 +21,13 @@ An object of class \code{"morie_otis_analysis_result"}.
 Same body as \code{\link{morie_otis_tps_yoy_correlation}}; the alias
 preserves the Python entry-point name.
 }
+\examples{
+set.seed(2026)
+b01 <- data.frame(
+  EndFiscalYear = rep(2023:2025, each = 30),
+  Region_AtTimeOfPlacement = sample(c("Toronto", "Central", "Eastern"), 90, TRUE),
+  NumberConsecutiveDays_Segregation = sample(1:25, 90, TRUE))
+tps <- list(assault = data.frame(OCC_YEAR = rep(2020:2025, times = 200)))
+res <- morie_otis_tps_composite_overlay(b01, tps)
+res$title
+}

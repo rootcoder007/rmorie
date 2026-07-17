@@ -18,3 +18,8 @@ elements (\code{<br>}, \code{<img>}, ...) never push the stack,
 unclosed \code{<p>}/\code{<li>} close implicitly, and stray end
 tags are ignored rather than fatal.
 }
+\examples{
+html <- "<html><body><p>first<p>second<br><ul><li>a<li>b</ul></body></html>"
+root <- morie_fetch_html(html)
+root
+}

@@ -29,3 +29,8 @@ Named list with fields \code{name}, \code{dtype}, \code{level}, \code{n_unique},
 \description{
 Build a single-column profile record.
 }
+\examples{
+cp <- morie_dataset_column_profile(c(1, 2, 3, NA), "year_obs")
+cp$dtype
+cp$missing_pct
+}

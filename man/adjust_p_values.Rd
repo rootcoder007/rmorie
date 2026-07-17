@@ -27,3 +27,9 @@ Front-end over \code{stats::p.adjust} and the rmorie wrappers
 above. Preserves the rmorie API used by
 \code{stat_commands}.
 }
+\examples{
+set.seed(1)
+p <- c(runif(20), runif(5, 0, 0.005))
+res <- adjust_p_values(p, method = "bh")
+res$n_rejected
+}

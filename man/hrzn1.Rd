@@ -38,4 +38,13 @@ Named list with estimate, se, grid, J, alpha, n, method.
 \description{
 Series-Tikhonov nonparametric instrumental variables
 }
+\examples{
+set.seed(18)
+n <- 120
+z <- rnorm(n)
+x <- 0.5 * z + rnorm(n, sd = 0.3)
+y <- 0.5 * x + rnorm(n, sd = 0.3)
+res <- hrzn1(x, y, z, J = 4)
+str(res)
+}
 \keyword{internal}

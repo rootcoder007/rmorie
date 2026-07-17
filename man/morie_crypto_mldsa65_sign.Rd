@@ -18,3 +18,11 @@ Raw vector signature.
 Sign a message with an ML-DSA-65 secret key. Signature length is
 variable up to a 3309-byte ceiling (typical: ~3293 B).
 }
+\examples{
+if (morie_crypto_liboqs_available()) {
+  kp <- morie_crypto_mldsa65_keygen()
+  msg <- charToRaw("signed payload v1")
+  sig <- morie_crypto_mldsa65_sign(kp$sk, msg)
+  print(morie_crypto_mldsa65_verify(kp$pk, msg, sig))
+}
+}

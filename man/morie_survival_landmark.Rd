@@ -25,3 +25,9 @@ A \code{data.frame} of landmark survival estimates.
 \description{
 Landmark dataset constructor.
 }
+\examples{
+set.seed(1)
+df <- data.frame(t = rexp(60), e = rbinom(60, 1, 0.7),
+                 x1 = rnorm(60), x2 = rnorm(60))
+str(morie_survival_landmark(df, "t", "e", landmark_time = 0.5), max.level = 1)
+}

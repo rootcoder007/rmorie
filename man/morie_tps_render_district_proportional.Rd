@@ -30,3 +30,11 @@ Renders one centroid-anchored circle per polygon row, sized
 proportionally to \code{count_col}.  Useful for showing per-district
 incident counts without colour-coding the polygons themselves.
 }
+\examples{
+set.seed(1)
+polys <- data.frame(centroid_lat = runif(6, 43.62, 43.82),
+                    centroid_lon = runif(6, -79.55, -79.20),
+                    n = c(5, 12, 3, 8, 20, 9))
+out <- morie_tps_render_district_proportional(polys, "n",
+                                              outfile = tempfile(fileext = ".png"))
+}

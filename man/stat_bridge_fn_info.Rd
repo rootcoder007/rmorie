@@ -15,3 +15,6 @@ Multi-line description string or an explanatory error string.
 \description{
 Inspect a single command by name
 }
+\examples{
+cat(stat_bridge_fn_info("one_sample_ttest"))
+}

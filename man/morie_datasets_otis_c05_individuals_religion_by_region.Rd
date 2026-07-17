@@ -28,3 +28,7 @@ A \code{data.frame} of the requested dataset (a 0-row typed frame when the data 
 \description{
 OTIS c05 -- Individuals by religion x region
 }
+\examples{
+df <- morie_datasets_otis_c05_individuals_religion_by_region(offline = TRUE)
+head(df)
+}

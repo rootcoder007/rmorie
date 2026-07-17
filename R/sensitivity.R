@@ -161,6 +161,9 @@ NULL
 #' @param ci_lower  Lower 95% CI of the RR (optional).
 #' @param ci_upper  Upper 95% CI of the RR (optional).
 #' @return A `morie_evalue` named-list.
+#' @examples
+#' res <- e_value_rr(2.0)
+#' res$e_value_point
 #' @export
 e_value_rr <- function(rr, ci_lower = NULL, ci_upper = NULL) {
   if (TRUE) {
@@ -212,6 +215,9 @@ e_value_rr <- function(rr, ci_lower = NULL, ci_upper = NULL) {
 #' @param ci_lower,ci_upper Optional 95% CI.
 #' @param prevalence Outcome prevalence (optional).
 #' @return A `morie_evalue` named-list.
+#' @examples
+#' res <- e_value_or(2.0)
+#' res$e_value_point
 #' @export
 e_value_or <- function(odds_ratio, ci_lower = NULL, ci_upper = NULL,
                          prevalence = NULL) {
@@ -235,6 +241,9 @@ e_value_or <- function(odds_ratio, ci_lower = NULL, ci_upper = NULL,
 #' @param hr Hazard ratio.
 #' @param ci_lower,ci_upper Optional 95% CI of HR.
 #' @return A `morie_evalue` named-list.
+#' @examples
+#' res <- e_value_hr(2.0, ci_lower = 1.5, ci_upper = 2.5)
+#' res$e_value_point
 #' @export
 e_value_hr <- function(hr, ci_lower = NULL, ci_upper = NULL) {
   hr_to_rr <- function(x) {
@@ -257,6 +266,10 @@ e_value_hr <- function(hr, ci_lower = NULL, ci_upper = NULL) {
 #' @param se Standard error of d (optional).
 #' @param n  Sample size for SE approximation (optional).
 #' @return A `morie_evalue` named-list.
+#' @examples
+#' res <- e_value_d(0.5, se = 0.1)
+#' res$e_value_point
+#' e_value_d(0.5, n = 100)$e_value_point
 #' @export
 e_value_d <- function(d, se = NULL, n = NULL) {
   rr <- exp(0.91 * d)
@@ -292,6 +305,9 @@ e_value_d <- function(d, se = NULL, n = NULL) {
 #'   `seq(1, 5, by = 0.25)`).
 #' @param method One of `"wilcoxon"`, `"sign"`, `"mcnemar"`.
 #' @return A `morie_rosenbaum_bounds` named-list.
+#' @examples
+#' set.seed(1)
+#' str(rosenbaum_bounds(rnorm(30, 0.5), rnorm(30)), max.level = 1)
 #' @export
 rosenbaum_bounds <- function(treated_outcomes, control_outcomes,
                                 gamma_range = NULL,
@@ -381,6 +397,9 @@ rosenbaum_bounds <- function(treated_outcomes, control_outcomes,
 #'   `seq(-3|est|, 3|est|, length.out = 101)`).
 #' @param outcome_type `"continuous"` or `"binary"` (advisory only).
 #' @return A `morie_tipping_point` named-list.
+#' @examples
+#' str(tipping_point_analysis(0.5, 0.15, n_treated = 100, n_control = 100),
+#'     max.level = 1)
 #' @export
 tipping_point_analysis <- function(estimate, se, n_treated, n_control,
                                       delta_range = NULL,
@@ -440,6 +459,9 @@ tipping_point_analysis <- function(estimate, se, n_treated, n_control,
 #' @param benchmark_covariates  Named list mapping covariate name ->
 #'   partial R^2.
 #' @return A `morie_ovb` named-list.
+#' @examples
+#' str(omitted_variable_bias(0.5, 0.15, dof = 150, r2_yd_x = 0.1,
+#'                           partial_r2_treatment = 0.05), max.level = 1)
 #' @export
 omitted_variable_bias <- function(estimate, se, dof, r2_yd_x,
                                      partial_r2_treatment,
@@ -502,6 +524,14 @@ omitted_variable_bias <- function(estimate, se, dof, r2_yd_x,
 #'   `"ols"`, `"logistic"`, `"robust"`. Default `c("ols")`.
 #' @param alpha          Significance level. Default 0.05.
 #' @return A `morie_spec_curve` named-list.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(d = rnorm(80), x1 = rnorm(80), x2 = rnorm(80))
+#' df$y <- 0.4 * df$d + 0.3 * df$x1 + rnorm(80)
+#' res <- specification_curve(df, "y", "d",
+#'                            covariate_sets = list(character(0), "x1",
+#'                                                  c("x1", "x2")))
+#' str(res, max.level = 1)
 #' @export
 specification_curve <- function(data, outcome, treatment,
                                   covariate_sets,
@@ -608,6 +638,10 @@ specification_curve <- function(data, outcome, treatment,
 #' @param p_treated       Proportion treated.
 #' @param outcome_range   c(min, max) on the outcome. Default c(0, 1).
 #' @return Named list.
+#' @examples
+#' set.seed(1)
+#' res <- manski_bounds(runif(50), runif(50), p_treated = 0.5)
+#' c(res$lower_bound, res$upper_bound)
 #' @export
 manski_bounds <- function(outcome_treated, outcome_control,
                             p_treated, outcome_range = NULL) {
@@ -652,6 +686,10 @@ manski_bounds <- function(outcome_treated, outcome_control,
 #' @param prevalence_confounder Confounder prevalence. Default 0.5.
 #' @return Named list with `adjusted_estimate`, `bias`,
 #'   `adjusted_ci_lower`, `adjusted_ci_upper`, `original_estimate`.
+#' @examples
+#' res <- bias_adjusted_estimate(0.5, 0.1, rr_ud = 2, rr_eu = 2)
+#' res$adjusted_estimate
+#' c(res$adjusted_ci_lower, res$adjusted_ci_upper)
 #' @export
 bias_adjusted_estimate <- function(estimate, se, rr_ud, rr_eu,
                                       prevalence_confounder = 0.5) {
@@ -686,6 +724,10 @@ bias_adjusted_estimate <- function(estimate, se, rr_ud, rr_eu,
 #'   `rr_ud`, `rr_eu`, `prevalence`. Defaults supplied.
 #' @param seed          RNG seed. Default 42.
 #' @return Named list with bias-adjusted distribution summaries.
+#' @examples
+#' set.seed(1)
+#' str(probabilistic_bias_analysis(0.5, 0.15, n_simulations = 2000L),
+#'     max.level = 1)
 #' @export
 probabilistic_bias_analysis <- function(estimate, se,
                                            n_simulations = 10000L,
@@ -737,6 +779,9 @@ probabilistic_bias_analysis <- function(estimate, se,
 #' @param rr,odds_ratio,hazard_ratio Optional effect on each scale.
 #' @param prevalence   Outcome prevalence (for OR-to-RR).
 #' @return A data.frame with `metric, value`.
+#' @examples
+#' str(sensitivity_summary(0.5, 0.15, rr = 1.8, prevalence = 0.2),
+#'     max.level = 1)
 #' @export
 sensitivity_summary <- function(estimate, se, rr = NULL,
                                   odds_ratio = NULL,
@@ -834,6 +879,9 @@ sensitivity_summary <- function(estimate, se, rr = NULL,
 #' @references VanderWeele, T. J., & Ding, P. (2017). Sensitivity
 #'   analysis in observational research: introducing the E-value.
 #'   \emph{Annals of Internal Medicine}, 167(4), 268--274.
+#' @examples
+#' str(morie_sensitivity_evalue(1.8, type = "RR", ci_lower = 1.2,
+#'                              ci_upper = 2.7), max.level = 1)
 #' @export
 morie_sensitivity_evalue <- function(estimate, se = NULL, sd = NULL,
                                      type = c("OLS", "RR", "OR",
@@ -892,13 +940,33 @@ morie_sensitivity_evalue <- function(estimate, se = NULL, sd = NULL,
 #' @references D'Agostino McGowan, L. (2022). tipr: An R package for
 #'   sensitivity analyses for unmeasured confounders.
 #'   \emph{Journal of Open Source Software}, 7(77), 4495.
+#' @examples
+#' if (requireNamespace("tipr", quietly = TRUE)) {
+#'   str(morie_sensitivity_tipping_point(0.5, smd = 0.3), max.level = 1)
+#' }
 #' @export
 morie_sensitivity_tipping_point <- function(estimate, smd = NULL,
                                             r2 = NULL, ...) {
   .morie_sens_need("tipr", "morie_sensitivity_tipping_point")
   args <- list(effect_observed = estimate)
-  if (!is.null(smd)) args$smd <- smd
-  if (!is.null(r2))  args$r_squared <- r2
+  # tipr >= 1.0 renamed tip()'s arguments: smd ->
+  # exposure_confounder_effect; r_squared was retired (the continuous
+  # r2 pathway moved to tip_coef_with_r2()). Map both names so the
+  # wrapper works across tipr versions.
+  tip_formals <- names(formals(tipr::tip))
+  if (!is.null(smd)) {
+    args[[if ("exposure_confounder_effect" %in% tip_formals)
+            "exposure_confounder_effect" else "smd"]] <- smd
+  }
+  if (!is.null(r2)) {
+    if ("r_squared" %in% tip_formals) {
+      args$r_squared <- r2
+    } else {
+      warning("installed tipr::tip() has no r_squared argument; ",
+              "`r2` ignored (use tipr::tip_coef_with_r2() directly).",
+              call. = FALSE)
+    }
+  }
   args <- c(args, list(...))
   raw <- do.call(tipr::tip, args)
   tipped <- tryCatch(as.numeric(raw$effect_adjusted),
@@ -943,6 +1011,16 @@ morie_sensitivity_tipping_point <- function(estimate, smd = NULL,
 #' @references Cinelli, C., & Hazlett, C. (2020). Making sense of
 #'   sensitivity: extending omitted variable bias.  \emph{Journal of
 #'   the Royal Statistical Society B}, 82(1), 39--67.
+#' @examples
+#' if (requireNamespace("sensemakr", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(d = rnorm(100), x1 = rnorm(100))
+#'   df$y <- 0.5 * df$d + 0.3 * df$x1 + rnorm(100)
+#'   fit <- stats::lm(y ~ d + x1, data = df)
+#'   res <- morie_sensitivity_omitted_var_bias(fit, "d",
+#'                                             benchmark_covariates = "x1")
+#'   class(res)
+#' }
 #' @export
 morie_sensitivity_omitted_var_bias <- function(model, treatment,
                                                benchmark_covariates = NULL,
@@ -1001,6 +1079,8 @@ morie_sensitivity_omitted_var_bias <- function(model, treatment,
 #'   Kelcey, B. M. (2013). What would it take to change an
 #'   inference?  \emph{Educational Evaluation and Policy Analysis},
 #'   35(4), 437--460.
+#' @examples
+#' str(morie_sensitivity_konfound(0.5, 0.15, 200), max.level = 1)
 #' @export
 morie_sensitivity_konfound <- function(estimate, se, n,
                                        n_covariates = 0L,

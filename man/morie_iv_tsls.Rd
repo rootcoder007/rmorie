@@ -40,3 +40,13 @@ variable names, sample size, method label, and a \code{details} list.
 \description{
 Estimates a linear IV model via 2SLS (rmorie native k-class engine).
 }
+\examples{
+set.seed(2)
+n <- 1000
+z <- rbinom(n, 1, 0.5); u <- rnorm(n)
+d <- rbinom(n, 1, plogis(0.8 * z + 0.3 * u))
+y <- 0.5 * d + 0.4 * u + rnorm(n, sd = 0.5)
+df <- data.frame(y, d, z)
+res <- morie_iv_tsls(df, "y", "d", "z")
+res$coefficients["d"]
+}

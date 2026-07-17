@@ -8,6 +8,14 @@
 #' @param treatment Integer/logical treatment indicator.
 #' @return Named list with estimate, se, first_stage, reduced_form, n, method.
 #' @keywords internal
+#' @examples
+#' set.seed(121)
+#' n <- 200
+#' z <- rnorm(n)
+#' D <- as.numeric((z + rnorm(n)) > 0)
+#' y <- 1.5 * D + 0.5 * z + rnorm(n)
+#' res <- hrzt2(NULL, y, z, D)
+#' str(res)
 #' @export
 hrzt2 <- function(x, y, z, treatment) {
   y <- as.numeric(y)

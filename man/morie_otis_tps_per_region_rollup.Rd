@@ -18,3 +18,12 @@ count matrix.
 OTIS seg/RC totals per region x year (Toronto row flagged for
 TPS-overlay use)
 }
+\examples{
+set.seed(2026)
+b01 <- data.frame(
+  EndFiscalYear = rep(2023:2025, each = 30),
+  Region_AtTimeOfPlacement = sample(c("Toronto", "Central", "Eastern"), 90, TRUE),
+  NumberConsecutiveDays_Segregation = sample(1:25, 90, TRUE))
+res <- morie_otis_tps_per_region_rollup(b01)
+res$payload$by_region
+}

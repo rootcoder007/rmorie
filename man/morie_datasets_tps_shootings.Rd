@@ -18,3 +18,9 @@ A \code{data.frame}.
 \description{
 TPS Shootings and Firearm Discharges feed.
 }
+\examples{
+\donttest{
+res <- try(morie_datasets_tps_shootings(year = 2024, max_features = 5L))
+if (!inherits(res, "try-error")) head(res)
+}
+}

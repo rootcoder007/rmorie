@@ -114,6 +114,10 @@ NULL
 }
 
 #' @return \code{x}, invisibly.
+#' @examples
+#' set.seed(1)
+#' res <- one_sample_ttest(rnorm(20, 0.3))
+#' print(res)
 #' @export
 print.morie_test_result <- function(x, ...) {
   cat(x$method, "\
@@ -205,6 +209,9 @@ print.morie_test_result <- function(x, ...) {
 #' @param mu0 Hypothesised mean.
 #' @param confidence Confidence level (default 0.95).
 #' @return A \code{morie_test_result}.
+#' @examples
+#' set.seed(1)
+#' one_sample_ttest(rnorm(20, 0.3), mu0 = 0)
 #' @export
 one_sample_ttest <- function(x, mu0 = 0, confidence = 0.95) {
   x <- .stat_validate(x)
@@ -227,6 +234,9 @@ one_sample_ttest <- function(x, mu0 = 0, confidence = 0.95) {
 #' @param equal_var If FALSE, use Welch's correction.
 #' @param confidence Confidence level.
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' set.seed(1)
+#' two_sample_ttest(rnorm(20), rnorm(20, 0.5))
 #' @export
 two_sample_ttest <- function(x, y, equal_var = TRUE, confidence = 0.95) {
   x <- .stat_validate(x)
@@ -260,6 +270,9 @@ two_sample_ttest <- function(x, y, equal_var = TRUE, confidence = 0.95) {
 #' Welch's t-test (convenience wrapper)
 #' @inheritParams two_sample_ttest
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' set.seed(1)
+#' welch_ttest(rnorm(20), rnorm(20, 0.5, 2))
 #' @export
 welch_ttest <- function(x, y, confidence = 0.95) {
   two_sample_ttest(x, y, equal_var = FALSE, confidence = confidence)
@@ -269,6 +282,10 @@ welch_ttest <- function(x, y, confidence = 0.95) {
 #' @param x,y Equal-length numeric vectors.
 #' @param confidence Confidence level.
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' set.seed(1)
+#' x <- rnorm(20)
+#' paired_ttest(x, x + rnorm(20, 0.2))
 #' @export
 paired_ttest <- function(x, y, confidence = 0.95) {
   x <- .stat_validate(x)
@@ -296,6 +313,9 @@ paired_ttest <- function(x, y, confidence = 0.95) {
 #' One-way between-subjects ANOVA
 #' @param ... Two or more numeric vectors (groups).
 #' @return \code{morie_test_result} with eta-squared effect size.
+#' @examples
+#' set.seed(1)
+#' one_way_anova(rnorm(15), rnorm(15, 0.5), rnorm(15, 1))
 #' @export
 one_way_anova <- function(...) {
   groups <- list(...)
@@ -330,6 +350,11 @@ one_way_anova <- function(...) {
 #' @param outcome Name of dependent-variable column.
 #' @param factor_a,factor_b Names of factor columns.
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(40), a = rep(c("lo", "hi"), 20),
+#'                  b = rep(c("x", "z"), each = 20))
+#' two_way_anova(df, "y", "a", "b")
 #' @export
 two_way_anova <- function(data, outcome, factor_a, factor_b) {
   data <- stats::na.omit(data[, c(outcome, factor_a, factor_b)])
@@ -361,6 +386,11 @@ two_way_anova <- function(data, outcome, factor_a, factor_b) {
 #' @param data Long-format data frame.
 #' @param outcome,subject,within Column names.
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(30), id = rep(1:10, 3),
+#'                  cond = rep(c("t1", "t2", "t3"), each = 10))
+#' repeated_measures_anova(df, "y", "id", "cond")
 #' @export
 repeated_measures_anova <- function(data, outcome, subject, within) {
   df <- stats::na.omit(data[, c(outcome, subject, within)])
@@ -397,6 +427,13 @@ repeated_measures_anova <- function(data, outcome, subject, within) {
 #' Friedman test (repeated-measures rank ANOVA)
 #' @param ... Three or more equal-length numeric vectors.
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' set.seed(1)
+#' a <- rnorm(15)
+#' b <- rnorm(15, mean = 0.5)
+#' c <- rnorm(15, mean = 1)
+#' res <- friedman_test(a, b, c)
+#' res$p_value
 #' @export
 friedman_test <- function(...) {
   groups <- list(...)
@@ -427,6 +464,10 @@ friedman_test <- function(...) {
 #' @param observed Observed counts.
 #' @param expected Expected counts or NULL for uniform.
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' res <- chi2_goodness_of_fit(c(20, 30, 25, 25))
+#' res$p_value
+#' res$df
 #' @export
 chi2_goodness_of_fit <- function(observed, expected = NULL) {
   obs <- as.numeric(observed)
@@ -450,6 +491,11 @@ chi2_goodness_of_fit <- function(observed, expected = NULL) {
 #' @param contingency_table A matrix or table of counts.
 #' @param correction Yates's continuity correction (2x2).
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' tab <- matrix(c(30, 20, 10, 40), 2, 2)
+#' res <- chi2_independence(tab)
+#' res$p_value
+#' res$extra$cramers_v
 #' @export
 chi2_independence <- function(contingency_table, correction = TRUE) {
   tab <- as.matrix(contingency_table)
@@ -470,6 +516,10 @@ chi2_independence <- function(contingency_table, correction = TRUE) {
 #' @param contingency_table 2x2 table.
 #' @param exact Use exact binomial.
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' tab <- matrix(c(20, 5, 10, 15), nrow = 2)
+#' res <- mcnemar_test(tab)
+#' res
 #' @export
 mcnemar_test <- function(contingency_table, exact = FALSE) {
   tab <- as.matrix(contingency_table)
@@ -496,6 +546,13 @@ mcnemar_test <- function(contingency_table, exact = FALSE) {
 #' Cochran's Q test
 #' @param ... Three or more matched binary 0/1 vectors.
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' set.seed(1)
+#' v1 <- rbinom(30, 1, 0.4)
+#' v2 <- rbinom(30, 1, 0.5)
+#' v3 <- rbinom(30, 1, 0.6)
+#' res <- cochrans_q(v1, v2, v3)
+#' res$p_value
 #' @export
 cochrans_q <- function(...) {
   groups <- lapply(list(...), as.numeric)
@@ -535,6 +592,10 @@ cochrans_q <- function(...) {
 #' @param x,y Numeric vectors.
 #' @param confidence Confidence level.
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' set.seed(1)
+#' x <- rnorm(30)
+#' pearson_correlation(x, x + rnorm(30))
 #' @export
 pearson_correlation <- function(x, y, confidence = 0.95) {
   x <- .stat_validate(x)
@@ -556,6 +617,10 @@ pearson_correlation <- function(x, y, confidence = 0.95) {
 #' Spearman rank correlation
 #' @inheritParams pearson_correlation
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' set.seed(1)
+#' x <- rnorm(30)
+#' spearman_correlation(x, x + rnorm(30))
 #' @export
 spearman_correlation <- function(x, y, confidence = 0.95) {
   x <- .stat_validate(x)
@@ -577,6 +642,10 @@ spearman_correlation <- function(x, y, confidence = 0.95) {
 #' Kendall's tau-b correlation
 #' @inheritParams pearson_correlation
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' set.seed(1)
+#' res <- kendall_correlation(rnorm(40), rnorm(40))
+#' res
 #' @export
 kendall_correlation <- function(x, y) {
   x <- .stat_validate(x)
@@ -598,6 +667,9 @@ kendall_correlation <- function(x, y) {
 #' @param continuous Numeric vector.
 #' @param confidence Confidence level.
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' set.seed(1)
+#' point_biserial_correlation(rbinom(30, 1, 0.5), rnorm(30))
 #' @export
 point_biserial_correlation <- function(binary, continuous, confidence = 0.95) {
   b <- .stat_validate(binary)
@@ -623,6 +695,11 @@ point_biserial_correlation <- function(binary, continuous, confidence = 0.95) {
 #' @param covariates Matrix or data frame of covariates.
 #' @param confidence Confidence level.
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' set.seed(1)
+#' z <- matrix(rnorm(90), nrow = 30)
+#' x <- rnorm(30); y <- x + rnorm(30)
+#' partial_correlation(x, y, z)
 #' @export
 partial_correlation <- function(x, y, covariates, confidence = 0.95) {
   x <- .stat_validate(x)
@@ -653,6 +730,11 @@ partial_correlation <- function(x, y, covariates, confidence = 0.95) {
 #' Semi-partial (part) correlation
 #' @inheritParams partial_correlation
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' set.seed(1)
+#' z <- matrix(rnorm(90), nrow = 30)
+#' x <- rnorm(30); y <- x + rnorm(30)
+#' semi_partial_correlation(x, y, z)
 #' @export
 semi_partial_correlation <- function(x, y, covariates) {
   x <- .stat_validate(x)
@@ -682,6 +764,12 @@ semi_partial_correlation <- function(x, y, covariates) {
 #' @param x,y Numeric vectors.
 #' @param alternative One of "two.sided", "less", "greater".
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' set.seed(1)
+#' x <- rnorm(60, mean = 0)
+#' y <- rnorm(60, mean = 0.4)
+#' res <- mann_whitney_u(x, y)
+#' res$extra$rank_biserial
 #' @export
 mann_whitney_u <- function(x, y, alternative = "two.sided") {
   alternative <- sub("-", ".", alternative, fixed = TRUE)
@@ -705,6 +793,9 @@ mann_whitney_u <- function(x, y, alternative = "two.sided") {
 #' @param y Optional paired vector.
 #' @param alternative One of "two.sided", "less", "greater".
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' set.seed(1)
+#' wilcoxon_signed_rank(rnorm(20, 0.3))
 #' @export
 wilcoxon_signed_rank <- function(x, y = NULL, alternative = "two.sided") {
   alternative <- sub("-", ".", alternative, fixed = TRUE)
@@ -731,6 +822,10 @@ wilcoxon_signed_rank <- function(x, y = NULL, alternative = "two.sided") {
 #'   "pnorm". A bare distribution name like "norm" is auto-prefixed.
 #' @param args List of extra arguments to pass to \code{cdf}.
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' set.seed(1)
+#' res <- ks_test_one_sample(rnorm(40), cdf = "norm")
+#' res
 #' @export
 ks_test_one_sample <- function(x, cdf = "pnorm", args = list()) {
   x <- .stat_validate(x)
@@ -746,6 +841,10 @@ ks_test_one_sample <- function(x, cdf = "pnorm", args = list()) {
 #' Two-sample Kolmogorov-Smirnov test
 #' @inheritParams pearson_correlation
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' set.seed(1)
+#' res <- ks_test_two_sample(rnorm(40), rnorm(40, mean = 0.5))
+#' res$test_statistic
 #' @export
 ks_test_two_sample <- function(x, y) {
   x <- .stat_validate(x)
@@ -762,6 +861,10 @@ ks_test_two_sample <- function(x, y) {
 #' @param ... Two or more numeric vectors.
 #' @param center One of "median" (Brown-Forsythe), "mean", "trimmed".
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' set.seed(1)
+#' res <- levene_test(rnorm(40), rnorm(40, sd = 2), center = "median")
+#' res
 #' @export
 levene_test <- function(..., center = "median") {
   groups <- list(...)
@@ -789,6 +892,10 @@ levene_test <- function(..., center = "median") {
 #' Bartlett's test for equality of variances
 #' @param ... Two or more numeric vectors.
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' set.seed(1)
+#' res <- bartlett_test(rnorm(30), rnorm(30, sd = 2))
+#' res$p_value
 #' @export
 bartlett_test <- function(...) {
   groups <- list(...)
@@ -808,6 +915,9 @@ bartlett_test <- function(...) {
 #' @param x Numeric sequence.
 #' @param cutoff Cut-off (median by default).
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' set.seed(1)
+#' runs_test(rbinom(30, 1, 0.5))
 #' @export
 runs_test <- function(x, cutoff = NULL) {
   x <- .stat_validate(x)
@@ -843,6 +953,10 @@ runs_test <- function(x, cutoff = NULL) {
 #'
 #' @param x Numeric vector.
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' set.seed(1)
+#' res <- dagostino_pearson(rnorm(100))
+#' res$p_value
 #' @export
 dagostino_pearson <- function(x) {
   x <- .stat_validate(x)
@@ -885,6 +999,10 @@ dagostino_pearson <- function(x) {
 #'
 #' @param x Numeric vector.
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' set.seed(1)
+#' res <- lilliefors_test(rnorm(80))
+#' res
 #' @export
 lilliefors_test <- function(x) {
   x <- .stat_validate(x)
@@ -915,6 +1033,8 @@ lilliefors_test <- function(x) {
 #' @param value Hypothesised proportion.
 #' @param confidence Confidence level (Wilson CI).
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' one_proportion_ztest(45, 100, value = 0.5)
 #' @export
 one_proportion_ztest <- function(count, nobs, value = 0.5, confidence = 0.95) {
   p_hat <- if (nobs > 0) count / nobs else 0
@@ -939,6 +1059,8 @@ one_proportion_ztest <- function(count, nobs, value = 0.5, confidence = 0.95) {
 #' @param count2,nobs2 Second sample.
 #' @param confidence Confidence level.
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' two_proportion_ztest(45, 100, 30, 100)
 #' @export
 two_proportion_ztest <- function(count1, nobs1, count2, nobs2,
                                   confidence = 0.95) {
@@ -967,6 +1089,10 @@ two_proportion_ztest <- function(count1, nobs1, count2, nobs2,
 #' @param contingency_table 2x2 matrix.
 #' @param alternative One of "two.sided", "less", "greater".
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' tab <- matrix(c(8, 2, 1, 5), 2, 2)
+#' res <- fisher_exact_test(tab)
+#' res$p_value
 #' @export
 fisher_exact_test <- function(contingency_table, alternative = "two.sided") {
   alternative <- sub("-", ".", alternative, fixed = TRUE)
@@ -991,6 +1117,13 @@ fisher_exact_test <- function(contingency_table, alternative = "two.sided") {
 #' @param rater1,rater2 Equal-length categorical vectors.
 #' @param confidence Confidence level.
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' set.seed(1)
+#' r1 <- sample(1:3, 50, replace = TRUE)
+#' r2 <- r1
+#' r2[1:10] <- sample(1:3, 10, replace = TRUE)
+#' res <- cohens_kappa(r1, r2)
+#' res$test_statistic
 #' @export
 cohens_kappa <- function(rater1, rater2, confidence = 0.95) {
   r1 <- as.vector(rater1)
@@ -1029,6 +1162,14 @@ cohens_kappa <- function(rater1, rater2, confidence = 0.95) {
 #' @param ratings Numeric rating column.
 #' @param icc_type One of "ICC1", "ICC1k", "ICC2", "ICC2k", "ICC3", "ICC3k".
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' set.seed(1)
+#' d <- data.frame(
+#'   s = rep(1:20, each = 3),
+#'   r = rep(1:3, 20),
+#'   v = rep(rnorm(20), each = 3) + rnorm(60, sd = 0.4))
+#' res <- intraclass_correlation(d, "s", "r", "v", icc_type = "ICC2")
+#' res
 #' @export
 intraclass_correlation <- function(data, targets, raters, ratings,
                                     icc_type = "ICC3k") {
@@ -1089,6 +1230,9 @@ intraclass_correlation <- function(data, targets, raters, ratings,
 #'
 #' @param x Numeric vector.
 #' @return A list of \code{morie_test_result}.
+#' @examples
+#' set.seed(1)
+#' str(normality_suite(rnorm(50)), max.level = 1)
 #' @export
 normality_suite <- function(x) {
   x <- .stat_validate(x)
@@ -1125,6 +1269,9 @@ normality_suite <- function(x) {
 #' Run a suite of homogeneity-of-variance tests
 #' @param ... Two or more numeric vectors.
 #' @return A named list (see Description).
+#' @examples
+#' set.seed(1)
+#' str(variance_equality_suite(rnorm(20), rnorm(20, 0, 1.5)), max.level = 1)
 #' @export
 variance_equality_suite <- function(...) {
   list(levene_test(..., center = "median"),
@@ -1136,6 +1283,11 @@ variance_equality_suite <- function(...) {
 #' @param method One of "pearson", "spearman", "kendall".
 #' @return List with components \code{r} (correlations) and \code{p}
 #'   (p-values), both \code{data.frame} objects with matching dimensions.
+#' @examples
+#' set.seed(1)
+#' d <- data.frame(a = rnorm(40), b = rnorm(40), c = rnorm(40))
+#' cm <- correlation_matrix(d)
+#' cm$r
 #' @export
 correlation_matrix <- function(data, method = "pearson") {
   num <- data[, vapply(data, is.numeric, logical(1)), drop = FALSE]
@@ -1173,6 +1325,10 @@ correlation_matrix <- function(data, method = "pearson") {
 #' @param paired Whether samples are paired.
 #' @param confidence Confidence level.
 #' @return An object of class \code{"morie_test_result"}.
+#' @examples
+#' set.seed(1)
+#' res <- auto_test(rnorm(40))
+#' res$method
 #' @export
 auto_test <- function(x, y = NULL, paired = FALSE, confidence = 0.95) {
   x <- .stat_validate(x)

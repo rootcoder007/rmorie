@@ -15,6 +15,11 @@ Scalar.
 \description{
 First Hjorth parameter: signal variance.
 }
+\examples{
+set.seed(3)
+x <- rnorm(100)
+morie_dsp_hjorth_activity(x)  # equals var(x)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 5, sec. 5.5;
 Hjorth (1970).

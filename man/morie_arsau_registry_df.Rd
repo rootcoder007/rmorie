@@ -22,6 +22,10 @@ package's internal registry, with the same columns as the Python
 form.  The underlying list-of-lists is still available via
 \code{\link{ARSAU_REGISTRY}}.
 }
+\examples{
+reg <- morie_arsau_registry_df(language = "en")
+unique(reg$kind)
+}
 \references{
 Ontario Ministry of the Solicitor General, ARSAU
 per-resource technical release notes (2020-2022 / 2023 / 2024).

@@ -20,3 +20,13 @@ Named list of \code{morie_otis_analysis_result}s
 \description{
 Run all OTIS-TPS overlay analyses
 }
+\examples{
+set.seed(2026)
+b01 <- data.frame(
+  EndFiscalYear = rep(2023:2025, each = 30),
+  Region_AtTimeOfPlacement = sample(c("Toronto", "Central", "Eastern"), 90, TRUE),
+  NumberConsecutiveDays_Segregation = sample(1:25, 90, TRUE))
+tps <- list(assault = data.frame(OCC_YEAR = rep(2020:2025, times = 200)))
+res <- morie_otis_tps_analyze_all(b01, tps)
+names(res)
+}

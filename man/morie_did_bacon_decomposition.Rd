@@ -29,6 +29,15 @@ the Frisch-Waugh-Lovell identity (subsample size squared times the
 variance of the demeaned treatment). Reproduces
 \code{bacondecomp::bacon} exactly (see \code{tests/cross/}).
 }
+\examples{
+set.seed(1)
+df <- expand.grid(unit = 1:30, time = 1:6)
+df$treat_time <- ifelse(df$unit <= 15, 4, Inf)
+df$d <- as.integer(df$time >= df$treat_time)
+df$y <- 0.1 * df$time + 0.7 * df$d + rnorm(nrow(df), sd = 0.4)
+out <- morie_did_bacon_decomposition(df, "y", "d", "unit", "time")
+out$overall_estimate
+}
 \references{
 Goodman-Bacon, A. (2021). Difference-in-differences with
 variation in treatment timing. \emph{Journal of Econometrics},

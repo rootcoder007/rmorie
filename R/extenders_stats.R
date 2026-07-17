@@ -72,6 +72,12 @@ NULL
 #'   \code{DescTools::CramerV} (e.g. \code{conf.level}).
 #' @return A list with \code{$method = "DescTools::CramerV"} and
 #'   \code{$raw} (the upstream numeric or matrix).
+#' @examples
+#' if (requireNamespace("DescTools", quietly = TRUE)) {
+#'   set.seed(1)
+#'   x <- sample(c("a", "b"), 60, TRUE); y <- sample(c("u", "v"), 60, TRUE)
+#'   morie_desc_cramers_v(table(x, y))
+#' }
 #' @export
 morie_desc_cramers_v <- function(x, y = NULL, ...) {
   .morie_stats_need("DescTools", "morie_desc_cramers_v")
@@ -95,6 +101,13 @@ morie_desc_cramers_v <- function(x, y = NULL, ...) {
 #' @param ... Further arguments forwarded to the upstream function.
 #' @return A list with \code{$method} (qualified upstream name) and
 #'   \code{$raw} (the upstream return object).
+#' @examples
+#' if (requireNamespace("DescTools", quietly = TRUE)) {
+#'   set.seed(1)
+#'   r1 <- sample(1:3, 50, TRUE); r2 <- r1
+#'   r2[1:10] <- sample(1:3, 10, TRUE)
+#'   morie_desc_kappa(table(r1, r2))
+#' }
 #' @export
 morie_desc_kappa <- function(x, y = NULL, ...) {
   .morie_stats_need("DescTools", "morie_desc_kappa")
@@ -120,6 +133,11 @@ morie_desc_kappa <- function(x, y = NULL, ...) {
 #'   \code{na.rm}).
 #' @return A list with \code{$method = "DescTools::Winsorize"} and
 #'   \code{$raw} (the winsorised numeric vector).
+#' @examples
+#' if (requireNamespace("DescTools", quietly = TRUE)) {
+#'   set.seed(1)
+#'   head(morie_desc_winsorize(c(rnorm(48), 10, -10)))
+#' }
 #' @export
 morie_desc_winsorize <- function(x, probs = c(0.05, 0.95), ...) {
   .morie_stats_need("DescTools", "morie_desc_winsorize")
@@ -142,6 +160,11 @@ morie_desc_winsorize <- function(x, probs = c(0.05, 0.95), ...) {
 #'   \code{na.rm}).
 #' @return A list with \code{$method = "DescTools::Gini"} and
 #'   \code{$raw} (the Gini estimate, optionally with CI).
+#' @examples
+#' if (requireNamespace("DescTools", quietly = TRUE)) {
+#'   set.seed(1)
+#'   morie_desc_gini(rlnorm(50))
+#' }
 #' @export
 morie_desc_gini <- function(x, ...) {
   .morie_stats_need("DescTools", "morie_desc_gini")
@@ -161,6 +184,11 @@ morie_desc_gini <- function(x, ...) {
 #'   \code{DescTools::Atkinson} (e.g. \code{na.rm}).
 #' @return A list with \code{$method = "DescTools::Atkinson"} and
 #'   \code{$raw} (the Atkinson index).
+#' @examples
+#' if (requireNamespace("DescTools", quietly = TRUE)) {
+#'   set.seed(1)
+#'   morie_desc_atkinson(rlnorm(50))
+#' }
 #' @export
 morie_desc_atkinson <- function(x, parameter = 0.5, ...) {
   .morie_stats_need("DescTools", "morie_desc_atkinson")
@@ -185,6 +213,14 @@ morie_desc_atkinson <- function(x, parameter = 0.5, ...) {
 #'   \code{theme}).
 #' @return A list with \code{$method = "performance::check_model"}
 #'   and \code{$raw} (the upstream \code{check_model} object).
+#' @examples
+#' if (requireNamespace("performance", quietly = TRUE) &&
+#'     requireNamespace("see", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(y = rnorm(50), x = rnorm(50))
+#'   res <- morie_performance_check_model(stats::lm(y ~ x, df))
+#'   class(res)
+#' }
 #' @export
 morie_performance_check_model <- function(model, ...) {
   .morie_stats_need("performance", "morie_performance_check_model")
@@ -203,6 +239,12 @@ morie_performance_check_model <- function(model, ...) {
 #'   (e.g. \code{tolerance}, \code{ci}, \code{verbose}).
 #' @return A list with \code{$method = "performance::r2"} and
 #'   \code{$raw} (the upstream R-squared object).
+#' @examples
+#' if (requireNamespace("performance", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(y = rnorm(50), x = rnorm(50))
+#'   morie_performance_r2(stats::lm(y ~ x, df))
+#' }
 #' @export
 morie_performance_r2 <- function(model, ...) {
   .morie_stats_need("performance", "morie_performance_r2")
@@ -222,6 +264,12 @@ morie_performance_r2 <- function(model, ...) {
 #' @return A list with \code{$method =
 #'   "performance::check_collinearity"} and \code{$raw} (the
 #'   upstream VIF data frame).
+#' @examples
+#' if (requireNamespace("performance", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(y = rnorm(50), x1 = rnorm(50), x2 = rnorm(50))
+#'   morie_performance_check_collinearity(stats::lm(y ~ x1 + x2, df))
+#' }
 #' @export
 morie_performance_check_collinearity <- function(model, ...) {
   .morie_stats_need(
@@ -247,6 +295,12 @@ morie_performance_check_collinearity <- function(model, ...) {
 #' @return A list with \code{$method =
 #'   "performance::check_outliers"} and \code{$raw} (the upstream
 #'   outlier-check object).
+#' @examples
+#' if (requireNamespace("performance", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(y = c(rnorm(49), 8), x = rnorm(50))
+#'   morie_performance_check_outliers(stats::lm(y ~ x, df))
+#' }
 #' @export
 morie_performance_check_outliers <- function(x, ...) {
   .morie_stats_need(
@@ -278,6 +332,12 @@ morie_performance_check_outliers <- function(x, ...) {
 #' @param ... Further arguments forwarded to the upstream function.
 #' @return A list with \code{$method} (qualified upstream name) and
 #'   \code{$raw} (the upstream return object).
+#' @examples
+#' if (requireNamespace("ppcor", quietly = TRUE)) {
+#'   set.seed(1)
+#'   x <- rnorm(40); z <- rnorm(40); y <- x + z + rnorm(40)
+#'   morie_ppcor_partial(x, y, z)
+#' }
 #' @export
 morie_ppcor_partial <- function(x, y = NULL, z = NULL,
                                 method = "pearson", ...) {
@@ -306,6 +366,12 @@ morie_ppcor_partial <- function(x, y = NULL, z = NULL,
 #' @param ... Further arguments forwarded to the upstream function.
 #' @return A list with \code{$method} (qualified upstream name) and
 #'   \code{$raw} (the upstream return object).
+#' @examples
+#' if (requireNamespace("ppcor", quietly = TRUE)) {
+#'   set.seed(1)
+#'   x <- rnorm(40); z <- rnorm(40); y <- x + z + rnorm(40)
+#'   morie_ppcor_semipartial(x, y, z)
+#' }
 #' @export
 morie_ppcor_semipartial <- function(x, y = NULL, z = NULL,
                                     method = "pearson", ...) {
@@ -343,6 +409,12 @@ morie_ppcor_semipartial <- function(x, y = NULL, z = NULL,
 #'   \code{teststat}, \code{ytrafo}, \code{xtrafo}).
 #' @return A list with \code{$method}, \code{$statistic},
 #'   \code{$p.value} and \code{$raw} (the native test result).
+#' @examples
+#' if (requireNamespace("coin", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(y = rnorm(40), g = factor(rep(c("a", "b"), 20)))
+#'   morie_coin_independence(y ~ g, data = df)
+#' }
 #' @export
 morie_coin_independence <- function(formula, data, ...) {
   raw <- morie_indep_test(formula, data = data, ...)
@@ -363,6 +435,12 @@ morie_coin_independence <- function(formula, data, ...) {
 #'   \code{alternative}).
 #' @return A list with \code{$method}, \code{$statistic},
 #'   \code{$p.value} and \code{$raw}.
+#' @examples
+#' if (requireNamespace("coin", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(y = rnorm(40), g = factor(rep(c("a", "b"), 20)))
+#'   morie_coin_wilcoxon(y ~ g, data = df)
+#' }
 #' @export
 morie_coin_wilcoxon <- function(formula, data, ...) {
   raw <- morie_wilcox_test(formula, data = data, ...)
@@ -383,6 +461,12 @@ morie_coin_wilcoxon <- function(formula, data, ...) {
 #'   \code{teststat}).
 #' @return A list with \code{$method}, \code{$statistic},
 #'   \code{$p.value} and \code{$raw}.
+#' @examples
+#' if (requireNamespace("coin", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(y = rnorm(40), g = factor(rep(c("a", "b"), 20)))
+#'   morie_coin_oneway(y ~ g, data = df)
+#' }
 #' @export
 morie_coin_oneway <- function(formula, data, ...) {
   raw <- morie_oneway_test(formula, data = data, ...)
@@ -406,6 +490,11 @@ morie_coin_oneway <- function(formula, data, ...) {
 #'   \code{threshold}, \code{pvalue}, \code{plot}).
 #' @return A list with \code{$method = "randtests::runs.test"}
 #'   and \code{$raw} (an \code{htest} object).
+#' @examples
+#' if (requireNamespace("randtests", quietly = TRUE)) {
+#'   set.seed(1)
+#'   morie_randtests_runs(rnorm(40))
+#' }
 #' @export
 morie_randtests_runs <- function(x, ...) {
   raw <- morie_runs_test(x, ...)
@@ -425,6 +514,11 @@ morie_randtests_runs <- function(x, ...) {
 #' @return A list with \code{$method =
 #'   "randtests::turning.point.test"} and \code{$raw} (an
 #'   \code{htest} object).
+#' @examples
+#' if (requireNamespace("randtests", quietly = TRUE)) {
+#'   set.seed(1)
+#'   morie_randtests_turning_point(rnorm(40))
+#' }
 #' @export
 morie_randtests_turning_point <- function(x, ...) {
   raw <- morie_turning_point_test(x)
@@ -444,6 +538,11 @@ morie_randtests_turning_point <- function(x, ...) {
 #' @return A list with \code{$method =
 #'   "randtests::bartels.rank.test"} and \code{$raw} (an
 #'   \code{htest} object).
+#' @examples
+#' if (requireNamespace("randtests", quietly = TRUE)) {
+#'   set.seed(1)
+#'   morie_randtests_bartels(rnorm(40))
+#' }
 #' @export
 morie_randtests_bartels <- function(x, ...) {
   raw <- morie_bartels_rank_test(x, ...)

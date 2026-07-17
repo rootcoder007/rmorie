@@ -20,6 +20,12 @@ Numeric vector of length \code{2 * max_lag + 1}.
 Centres both inputs (subtracts the mean) and divides by the
 geometric mean of their L2 norms. Returns lags \verb{-max_lag .. +max_lag}.
 }
+\examples{
+set.seed(1)
+x <- rnorm(64)
+cc <- morie_dsp_cross_correlation(x, x, max_lag = 16L)
+which.max(cc)  # centre index = lag 0
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 3, sec. 3.4.
 }

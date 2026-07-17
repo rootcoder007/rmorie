@@ -110,6 +110,8 @@ NULL
 #' @param lon Numeric longitude (WGS84).
 #' @return A character scalar.  Defaults to \code{"Old Toronto"} when no
 #'   bbox matches.
+#' @examples
+#' morie_tps_district_for_centroid(43.76, -79.41)
 #' @export
 morie_tps_district_for_centroid <- function(lat, lon) {
   for (d in .MORIE_TPS_DISTRICTS) {
@@ -136,6 +138,8 @@ morie_tps_district_for_centroid <- function(lat, lon) {
 #'
 #' @param s Character scalar (column name).
 #' @return Character scalar (display label).
+#' @examples
+#' morie_tps_pretty_label("ASSAULT_RATE_2024")
 #' @export
 morie_tps_pretty_label <- function(s) {
   parts <- strsplit(s, "_", fixed = TRUE)[[1]]
@@ -177,6 +181,8 @@ morie_tps_pretty_label <- function(s) {
 #'   Toronto: 43.70 N, 79.40 W).
 #' @return A named list with numeric vectors \code{x} (km east of centre)
 #'   and \code{y} (km north of centre).
+#' @examples
+#' morie_tps_project_xy(c(43.70, 43.76), c(-79.40, -79.41))
 #' @export
 morie_tps_project_xy <- function(lat, lon,
                                   rot_deg_cw = .MORIE_TPS_ROT_DEG_CW,
@@ -276,6 +282,14 @@ morie_tps_project_xy <- function(lat, lon,
 #' @return A \code{ggplot} object (when ggplot2 is loaded) or
 #'   \code{invisible(NULL)} for the base-R fallback; the file path is
 #'   returned invisibly when \code{outfile} is supplied.
+#' @examples
+#' ring <- lapply(seq(0, 2 * pi, length.out = 8), function(a) {
+#'   list(-79.40 + 0.02 * cos(a), 43.70 + 0.01 * sin(a))
+#' })
+#' polys <- data.frame(HOOD_ID = 1, RATE = 5)
+#' polys$geometry <- list(ring)
+#' out <- morie_tps_render_choropleth(polys, rate_col = "RATE",
+#'                                    outfile = tempfile(fileext = ".png"))
 #' @export
 morie_tps_render_choropleth <- function(polys,
                                           rate_col = "ASSAULT_RATE_2024",
@@ -422,6 +436,12 @@ morie_tps_render_choropleth <- function(polys,
 #' @param fig_w,fig_h Figure size.
 #' @return A \code{ggplot} (when ggplot2 is available) or
 #'   \code{invisible(NULL)} for the base-R path.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(LAT_WGS84 = runif(60, 43.60, 43.85),
+#'                  LONG_WGS84 = runif(60, -79.60, -79.15))
+#' out <- morie_tps_render_points(df, min_samples = 5L,
+#'                                outfile = tempfile(fileext = ".png"))
 #' @export
 morie_tps_render_points <- function(df,
                                       category = "Assault",
@@ -536,6 +556,16 @@ morie_tps_render_points <- function(df,
 #' @param ncols Number of facet columns.
 #' @return A \code{ggplot} (when ggplot2 is loaded) or
 #'   \code{invisible(NULL)} for the base-R fallback.
+#' @examples
+#' ring <- lapply(seq(0, 2 * pi, length.out = 8), function(a) {
+#'   list(-79.40 + 0.02 * cos(a), 43.70 + 0.01 * sin(a))
+#' })
+#' polys <- data.frame(HOOD_ID = 1, RATE = 5)
+#' polys$geometry <- list(ring)
+#' polys$ASSAULT_RATE_2023 <- 4; polys$ASSAULT_RATE_2024 <- 5
+#' out <- morie_tps_render_yearly_grid(polys, prefix = "ASSAULT_RATE",
+#'                                     years = 2023:2024,
+#'                                     outfile = tempfile(fileext = ".png"))
 #' @export
 morie_tps_render_yearly_grid <- function(polys,
                                            prefix = "ASSAULT_RATE",
@@ -611,10 +641,9 @@ morie_tps_render_yearly_grid <- function(polys,
 # Additional TPS rendering primitives: 4-panel quad composite, DBSCAN
 # cluster figure, district proportional-symbol map, SaTScan-style panel,
 # plus two internal helpers (compass + scalebar).  All callables prefer
-# ggplot2 when available and fall back to base graphics; the SaTScan and
-# proportional-symbol panels stub a `stop("NotYetPorted")` body for the
-# detailed Kulldorff-likelihood overlays that depend on the Python
-# tps_satscan module.
+# ggplot2 when available and fall back to base graphics.  The SaTScan
+# panel accepts an optional `llr` column (compute natively via
+# morie_mrm_kulldorff()) and renders size-only without it.
 # ----------------------------------------------------------------------------
 
 # Internal: draw a north-arrow compass in plot coordinates.
@@ -682,6 +711,12 @@ morie_tps_render_yearly_grid <- function(polys,
 #'   returned (ggplot or invisible NULL for base).
 #' @param ... Forwarded to the underlying single-panel renderers.
 #' @return A patchwork-or-list object (ggplot2 path) or invisible NULL.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(LAT_WGS84 = runif(60, 43.60, 43.85),
+#'                  LONG_WGS84 = runif(60, -79.60, -79.15))
+#' out <- morie_tps_render_quad(list(points = df),
+#'                              outfile = tempfile(fileext = ".png"))
 #' @export
 morie_tps_render_quad <- function(data, outfile = NULL, ...) {
   stopifnot(is.list(data))
@@ -738,6 +773,12 @@ morie_tps_render_quad <- function(data, outfile = NULL, ...) {
 #' @param outfile Optional output path.
 #' @param ... Extra plotting args (size, alpha, palette).
 #' @return ggplot object or invisible NULL.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(LAT_WGS84 = runif(60, 43.60, 43.85),
+#'                  LONG_WGS84 = runif(60, -79.60, -79.15))
+#' out <- morie_tps_render_dbscan(df, eps_km = 1, min_samples = 4L,
+#'                                outfile = tempfile(fileext = ".png"))
 #' @export
 morie_tps_render_dbscan <- function(points_df, eps_km = 0.5,
                                     min_samples = 8L,
@@ -799,6 +840,13 @@ morie_tps_render_dbscan <- function(points_df, eps_km = 0.5,
 #' @param max_radius_km Largest symbol radius in km.
 #' @param outfile Optional output path.
 #' @return ggplot object or invisible NULL.
+#' @examples
+#' set.seed(1)
+#' polys <- data.frame(centroid_lat = runif(6, 43.62, 43.82),
+#'                     centroid_lon = runif(6, -79.55, -79.20),
+#'                     n = c(5, 12, 3, 8, 20, 9))
+#' out <- morie_tps_render_district_proportional(polys, "n",
+#'                                               outfile = tempfile(fileext = ".png"))
 #' @export
 morie_tps_render_district_proportional <- function(polys, count_col,
                                                    max_radius_km = 3,
@@ -853,35 +901,44 @@ morie_tps_render_district_proportional <- function(polys, count_col,
 #'   and optionally ``llr`` (log-likelihood ratio) for shading.
 #' @param outfile Optional output path.
 #' @return ggplot object or invisible NULL.
+#' @examples
+#' clusters <- data.frame(lat = c(43.70, 43.75), lon = c(-79.40, -79.30),
+#'                        radius_km = c(1.5, 2.2))
+#' out <- morie_tps_render_satscan_panel(clusters,
+#'                                       outfile = tempfile(fileext = ".png"))
 #' @export
 morie_tps_render_satscan_panel <- function(clusters, outfile = NULL) {
   if (!is.data.frame(clusters) ||
       !all(c("lat", "lon", "radius_km") %in% names(clusters))) {
     stop("clusters must be a data.frame with lat / lon / radius_km columns")
   }
-  if (!"llr" %in% names(clusters)) {
-    # Likelihood shading requires the Python SaTScan engine.
-    clusters$llr <- NA_real_
-  }
-  # The full Kulldorff windowing + Monte-Carlo replication pipeline isn't
-  # ported -- raise so callers don't silently get a degraded figure.
-  if (any(is.na(clusters$llr))) {
-    # Drop into a stub that documents the gap clearly.
-    stop("NotYetPorted")
-  }
+  # LLR shading is optional: compute cluster LLRs natively via
+  # morie_mrm_kulldorff() and pass them in the `llr` column; without
+  # them the panel renders size-only (no likelihood colour scale).
+  has_llr <- "llr" %in% names(clusters) && !any(is.na(clusters$llr))
+  if (!has_llr) clusters$llr <- 0
   pp <- morie_tps_project_xy(clusters$lat, clusters$lon)
   dfp <- data.frame(x = pp$x, y = pp$y,
                     radius = clusters$radius_km,
                     llr = clusters$llr)
   if (.tps_has_ggplot2()) {
-    p <- ggplot2::ggplot(dfp,
-                         ggplot2::aes(x = .data$x, y = .data$y,
-                                      size = .data$radius,
-                                      colour = .data$llr)) +
-      ggplot2::geom_point(alpha = 0.5) +
-      ggplot2::scale_size_area(name = "radius (km)") +
-      ggplot2::scale_colour_distiller(palette = "YlOrRd", direction = 1,
-                                       name = "LLR") +
+    p <- if (has_llr) {
+      ggplot2::ggplot(dfp,
+                      ggplot2::aes(x = .data$x, y = .data$y,
+                                   size = .data$radius,
+                                   colour = .data$llr)) +
+        ggplot2::geom_point(alpha = 0.5) +
+        ggplot2::scale_size_area(name = "radius (km)") +
+        ggplot2::scale_colour_distiller(palette = "YlOrRd", direction = 1,
+                                         name = "LLR")
+    } else {
+      ggplot2::ggplot(dfp,
+                      ggplot2::aes(x = .data$x, y = .data$y,
+                                   size = .data$radius)) +
+        ggplot2::geom_point(alpha = 0.5, colour = "#B03A2E") +
+        ggplot2::scale_size_area(name = "radius (km)")
+    }
+    p <- p +
       ggplot2::coord_equal() +
       ggplot2::labs(title = "SaTScan candidate clusters") +
       ggplot2::theme_minimal()

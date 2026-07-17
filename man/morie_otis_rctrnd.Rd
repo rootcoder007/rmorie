@@ -24,3 +24,7 @@ morie_otis_rctrnd(
 Per-(fiscal year, region) counts of unique individuals and total
 placements.
 }
+\examples{
+df <- morie_synth_otis("b01", n = 120L, seed = 10L)
+res <- try(morie_otis_rctrnd(df))
+}

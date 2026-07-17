@@ -18,3 +18,9 @@ List with components \code{r} (correlations) and \code{p}
 \description{
 Pairwise correlation matrix with p-values
 }
+\examples{
+set.seed(1)
+d <- data.frame(a = rnorm(40), b = rnorm(40), c = rnorm(40))
+cm <- correlation_matrix(d)
+cm$r
+}

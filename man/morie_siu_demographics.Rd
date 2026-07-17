@@ -18,3 +18,10 @@ A \code{morie_rich_result} list.
 \description{
 Sex/gender frequency table and age-distribution summary.
 }
+\examples{
+df <- data.frame(
+  sex_gender_affected = c("Male", "Female", "Male", "Male", NA),
+  age_affected = c("34", "27", "55", "19", "42"))
+r <- morie_siu_demographics(df)
+r$title
+}

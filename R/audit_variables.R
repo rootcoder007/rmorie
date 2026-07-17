@@ -134,6 +134,12 @@ NULL
 #'   \code{NULL}, the function uses a built-in minimal spec extracted
 #'   from the existing R-side OTIS metadata.
 #' @return A list with class \code{morie_audit_result}.
+#' @examples
+#' spec <- function(nm, dt, vv = NULL) list(name = nm, dtype = dt, valid_values = vv)
+#' specs <- list(v1 = list(spec("UniqueIndividual_ID", "string"),
+#'                         spec("NumberConsecutiveDays_Segregation", "int")))
+#' res <- morie_audit_otis_variables(specs)
+#' res$domain
 #' @export
 morie_audit_otis_variables <- function(dataset_specs = NULL) {
   if (is.null(dataset_specs)) {
@@ -161,6 +167,12 @@ morie_audit_otis_variables <- function(dataset_specs = NULL) {
 #'
 #' @param dataset_specs See \code{\link{morie_audit_otis_variables}}.
 #' @return A list with class \code{morie_audit_result}.
+#' @examples
+#' spec <- function(nm, dt, vv = NULL) list(name = nm, dtype = dt, valid_values = vv)
+#' specs <- list(v1 = list(spec("PoliceService", "string", c("OPP", "TPS")),
+#'                         spec("REPORTING_YEAR", "int")))
+#' res <- morie_audit_arsau_variables(specs)
+#' res$domain
 #' @export
 morie_audit_arsau_variables <- function(dataset_specs = NULL) {
   if (is.null(dataset_specs)) {
@@ -185,6 +197,12 @@ morie_audit_arsau_variables <- function(dataset_specs = NULL) {
 #'
 #' @param otis_specs,arsau_specs See per-domain functions.
 #' @return Named list with \code{$otis} and \code{$arsau} audit results.
+#' @examples
+#' spec <- function(nm, dt, vv = NULL) list(name = nm, dtype = dt, valid_values = vv)
+#' otis <- list(v1 = list(spec("UniqueIndividual_ID", "string")))
+#' arsau <- list(v1 = list(spec("PoliceService", "string", c("OPP", "TPS"))))
+#' res <- morie_audit_all_variables(otis, arsau)
+#' names(res)
 #' @export
 morie_audit_all_variables <- function(otis_specs = NULL,
                                         arsau_specs = NULL) {

@@ -29,6 +29,10 @@ CKAN resource id \code{5a0c5804-a055-4031-9743-73f556e43bb4}).
 Earlier morie versions wrongly claimed this data was FOI-only;
 that was incorrect and has been retracted as of 3MMM.
 }
+\examples{
+df <- morie_datasets_otis_a01(offline = TRUE)
+head(df)
+}
 \seealso{
 \code{\link[=morie_datasets_otis_a01_restrictive_confinement]{morie_datasets_otis_a01_restrictive_confinement()}},
 \code{\link[=morie_datasets_load_by_key]{morie_datasets_load_by_key()}}.

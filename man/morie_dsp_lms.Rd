@@ -23,6 +23,14 @@ Least-mean-squares adaptive transversal filter. Returns the filter
 output \code{y} and instantaneous error \code{e = d - y}. Coefficient update:
 \code{w <- w + 2 * mu * e[i] * x_seg}.
 }
+\examples{
+set.seed(1)
+n <- 1000
+x <- rnorm(n)
+d <- 0.5 * c(0, x[-n]) + 0.01 * rnorm(n)  # delayed, scaled target
+out <- morie_dsp_lms(x, d, order = 4L, mu = 0.05)
+mean(out$e[801:1000]^2)  # post-convergence error is small
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 3, sec. 3.6;
 Widrow & Stearns (1985).

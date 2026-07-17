@@ -20,3 +20,10 @@ A numeric value (scalar).
 \description{
 Propensity-score non-response weights (logistic).
 }
+\examples{
+set.seed(1)
+X <- cbind(1, runif(30))
+res <- morie_weights_propensity_nonresponse(rep(1, 30),
+                                            rbinom(30, 1, 0.7) == 1, X)
+str(res, max.level = 1)
+}

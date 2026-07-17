@@ -18,3 +18,7 @@ Invisibly returns the registered profile.
 \description{
 Register a city profile in the process-local registry
 }
+\examples{
+p <- morie_fairness_city_profile("demo_city2", area_col = "a")
+morie_fairness_register_city(p)
+}

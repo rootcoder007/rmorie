@@ -12,3 +12,6 @@ A \code{morie_siu_result}.
 \description{
 Sprott-Doob (Feb 2021) Table 22: Region x Mandela groups
 }
+\examples{
+head(morie_siu_sprott_doob_table22())
+}

@@ -8,6 +8,15 @@
 #' @param d Integer/logical selection indicator (1 = selected).
 #' @return Named list with estimate, se, selection_correction, n, n_selected, method.
 #' @keywords internal
+#' @examples
+#' set.seed(20)
+#' n <- 80
+#' x <- rnorm(n)
+#' y <- 0.5 * x + rnorm(n, sd = 0.3)
+#' z <- rnorm(n)
+#' d <- rbinom(n, 1, 0.5)
+#' res <- hrzs1(x, y, z, d)
+#' str(res)
 #' @export
 hrzs1 <- function(x, y, z, d) {
   y <- as.numeric(y)

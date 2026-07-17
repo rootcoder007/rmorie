@@ -8,6 +8,13 @@
 #' @param grid Optional evaluation grid (defaults to \code{x}).
 #' @return Named list with estimate, se, bandwidth, n, method.
 #' @keywords internal
+#' @examples
+#' set.seed(17)
+#' n <- 100
+#' x <- rnorm(n)
+#' y <- 0.4 * x + rnorm(n, sd = 0.3)
+#' res <- hrzk3(x, y)
+#' str(res)
 #' @export
 hrzk3 <- function(x, y, bandwidth = NULL, grid = NULL) {
   x <- as.numeric(x)

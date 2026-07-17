@@ -19,3 +19,9 @@ An object of class \code{"morie_test_result"}.
 \description{
 Uses base R \code{aov}, then \code{drop1} for Type-II sums of squares.
 }
+\examples{
+set.seed(1)
+df <- data.frame(y = rnorm(40), a = rep(c("lo", "hi"), 20),
+                 b = rep(c("x", "z"), each = 20))
+two_way_anova(df, "y", "a", "b")
+}

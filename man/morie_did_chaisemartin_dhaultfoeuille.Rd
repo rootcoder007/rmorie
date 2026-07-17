@@ -38,6 +38,16 @@ groups stable at 1, and the per-period DiDs are averaged with
 switcher-count weights. Standard errors come from a cluster (group)
 bootstrap.
 }
+\examples{
+set.seed(9)
+df <- expand.grid(unit = 1:60, time = 1:6)
+df$treat_time <- ifelse(df$unit <= 30, 4, Inf)
+df$d <- as.integer(df$time >= df$treat_time)
+df$y <- 0.5 * df$time + 1.5 * df$d + rnorm(nrow(df), sd = 0.5)
+res <- morie_did_chaisemartin_dhaultfoeuille(df, "y", "d", "unit", "time",
+                                             n_bootstrap = 50L, seed = 9)
+res$estimate
+}
 \references{
 de Chaisemartin, C., & D'Haultfoeuille, X. (2020). Two-way
 fixed effects estimators with heterogeneous treatment effects.

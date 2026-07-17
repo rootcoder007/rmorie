@@ -21,3 +21,9 @@ and \code{$raw} (an \code{htest} object).
 Thin extender over \code{randtests::runs.test} for a
 non-parametric test of randomness in a numeric sequence.
 }
+\examples{
+if (requireNamespace("randtests", quietly = TRUE)) {
+  set.seed(1)
+  morie_randtests_runs(rnorm(40))
+}
+}

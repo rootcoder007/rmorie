@@ -235,6 +235,11 @@
 #' @return A \code{morie_bootstrap_result} list.
 #' @seealso \code{boot::boot}, \code{boot::boot.ci},
 #'   [morie_boot_run()], [morie_boot_basic_ci()].
+#' @examples
+#' set.seed(1)
+#' x <- rnorm(40)
+#' res <- bootstrap(x, mean, n_boot = 50L, ci_method = "percentile")
+#' c(res$estimate, res$ci_lower, res$ci_upper)
 #' @export
 bootstrap <- function(data, statistic, n_boot = 2000L, ci_level = 0.95,
                       ci_method = "bca", seed = 42L,
@@ -420,6 +425,10 @@ bootstrap <- function(data, statistic, n_boot = 2000L, ci_level = 0.95,
 #'   scale, shape).
 #' @return A \code{morie_bootstrap_result}.
 #' @seealso \code{boot::boot}.
+#' @examples
+#' set.seed(1)
+#' str(parametric_bootstrap(rnorm(40), statistic = mean,
+#'                          n_boot = 200L), max.level = 1)
 #' @export
 parametric_bootstrap <- function(data, statistic, distribution = "normal",
                                  n_boot = 2000L, ci_level = 0.95,
@@ -531,6 +540,10 @@ parametric_bootstrap <- function(data, statistic, distribution = "normal",
 #' @return A \code{morie_bootstrap_result}.
 #' @seealso \code{sandwich::vcovBS}, \code{fwildclusterboot::boottest},
 #'   [morie_did_wild_cluster_bootstrap()].
+#' @examples
+#' set.seed(1)
+#' X <- cbind(1, rnorm(50)); y <- drop(X %*% c(1, 2)) + rnorm(50)
+#' str(wild_bootstrap(y, X, n_boot = 199L), max.level = 1)
 #' @export
 wild_bootstrap <- function(y, X, statistic_idx = 2L, n_boot = 999L,
                            ci_level = 0.95,
@@ -614,6 +627,12 @@ wild_bootstrap <- function(y, X, statistic_idx = 2L, n_boot = 999L,
 #' @param seed Random seed.
 #' @return A \code{morie_bootstrap_result}.
 #' @seealso \code{boot::tsboot}.
+#' @examples
+#' set.seed(1)
+#' ts_dat <- as.numeric(arima.sim(list(ar = 0.4), n = 50L))
+#' res <- block_bootstrap(ts_dat, mean, block_size = 5L, n_boot = 20L,
+#'                        method = "circular")
+#' res$estimate
 #' @export
 block_bootstrap <- function(data, statistic, block_size,
                             n_boot = 2000L, ci_level = 0.95,
@@ -710,6 +729,11 @@ block_bootstrap <- function(data, statistic, block_size,
 #' @param ci_level Confidence level.
 #' @return A \code{morie_jackknife_result}.
 #' @seealso \code{bootstrap::jackknife}, \code{resample::jackknife}.
+#' @examples
+#' set.seed(1)
+#' x <- rnorm(40)
+#' res <- jackknife(x, mean)
+#' res$se
 #' @export
 jackknife <- function(data, statistic, ci_level = 0.95) {
   n <- .nrow_like(data)
@@ -763,6 +787,11 @@ jackknife <- function(data, statistic, ci_level = 0.95) {
 #' @param seed Random seed.
 #' @return A \code{morie_jackknife_result}.
 #' @seealso \code{resample::jackknife}.
+#' @examples
+#' set.seed(1)
+#' x <- rnorm(8)
+#' r <- delete_d_jackknife(x, mean, d = 2L)
+#' r$estimate
 #' @export
 delete_d_jackknife <- function(data, statistic, d = 2L,
                                ci_level = 0.95, max_subsets = 5000L,
@@ -833,6 +862,10 @@ delete_d_jackknife <- function(data, statistic, d = 2L,
 #' @param seed Random seed.
 #' @return A \code{morie_permutation_test_result}.
 #' @seealso \code{coin::oneway_test}, \code{coin::independence_test}.
+#' @examples
+#' set.seed(1)
+#' str(permutation_test(rnorm(25), rnorm(25, 0.5),
+#'                      n_permutations = 499L), max.level = 1)
 #' @export
 permutation_test <- function(group1, group2, statistic = "mean_diff",
                              n_permutations = 9999L,
@@ -907,6 +940,11 @@ permutation_test <- function(group1, group2, statistic = "mean_diff",
 #' @param seed Random seed.
 #' @return A \code{morie_permutation_test_result}.
 #' @seealso \code{coin::symmetry_test}.
+#' @examples
+#' set.seed(1)
+#' x <- rnorm(25)
+#' str(paired_permutation_test(x, x + rnorm(25, 0.3),
+#'                             n_permutations = 499L), max.level = 1)
 #' @export
 paired_permutation_test <- function(x, y, statistic = "mean_diff",
                                     n_permutations = 9999L,
@@ -968,6 +1006,10 @@ paired_permutation_test <- function(x, y, statistic = "mean_diff",
 #' @param ci_level Confidence level.
 #' @param seed Random seed.
 #' @return A \code{morie_bootstrap_result}.
+#' @examples
+#' set.seed(1)
+#' str(subsampling(rnorm(60), statistic = mean,
+#'                 n_subsamples = 200L), max.level = 1)
 #' @export
 subsampling <- function(data, statistic, subsample_size = NULL,
                         n_subsamples = 1000L, ci_level = 0.95,
@@ -1030,6 +1072,17 @@ subsampling <- function(data, statistic, subsample_size = NULL,
 #' @return Named numeric list with apparent_error, bootstrap_error,
 #'   error_632, error_632plus.
 #' @seealso \code{ipred::errorest}.
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(25 * 2), ncol = 2)
+#' y <- rnorm(25)
+#' model_fn <- function(Xt, yt) structure(
+#'   list(coef = drop(solve(crossprod(Xt), crossprod(Xt, yt)))), class = "lm_lite")
+#' predict.lm_lite <- function(object, newdata, ...) drop(newdata %*% object$coef)
+#' registerS3method("predict", "lm_lite", predict.lm_lite)
+#' score_fn <- function(yt, yp) mean((yt - yp)^2)
+#' res <- bootstrap_632(X, y, model_fn, score_fn, n_boot = 10L)
+#' res$error_632
 #' @export
 bootstrap_632 <- function(X, y, model_fn, score_fn,
                           n_boot = 200L, seed = 42L) {
@@ -1166,7 +1219,9 @@ bootstrap_632 <- function(X, y, model_fn, score_fn,
     }
     return(fold_indices)
   }
-  if (.boot_have_rsample()) {
+  # rsample::vfold_cv rejects v == n (leave-one-out); the native split
+  # below handles that case exactly.
+  if (.boot_have_rsample() && n_folds < n) {
     df <- data.frame(.row = seq_len(n))
     splits <- rsample::vfold_cv(df, v = n_folds)
     return(lapply(splits$splits, function(s) {
@@ -1196,6 +1251,21 @@ bootstrap_632 <- function(X, y, model_fn, score_fn,
 #' @param seed Integer RNG seed for reproducibility.
 #' @return A \code{morie_cv_result} pooling scores across repeats.
 #' @seealso \code{caret::trainControl}, \code{rsample::vfold_cv}.
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(80), ncol = 2); y <- rnorm(40)
+#' predict.lm_lite3 <- function(object, newdata, ...) {
+#'   drop(cbind(1, newdata) %*% object$coef)
+#' }
+#' registerS3method("predict", "lm_lite3", predict.lm_lite3)
+#' res <- repeated_cv(X, y,
+#'   model_fn = function(Xt, yt) {
+#'     fit <- stats::lm.fit(cbind(1, Xt), yt)
+#'     structure(list(coef = fit$coefficients), class = "lm_lite3")
+#'   },
+#'   score_fn = function(yt, yp) mean((yt - yp)^2),
+#'   n_folds = 5L, n_repeats = 2L)
+#' str(res, max.level = 1)
 #' @export
 repeated_cv <- function(X, y, model_fn, score_fn,
                         n_folds = 10L, n_repeats = 10L, seed = 42L) {
@@ -1233,6 +1303,22 @@ repeated_cv <- function(X, y, model_fn, score_fn,
 #'   single performance metric.
 #' @return A \code{morie_cv_result}.
 #' @seealso \code{rsample::loo_cv}, \code{caret::trainControl}.
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(40), ncol = 2); y <- rnorm(20)
+#' model_fn <- function(Xt, yt) stats::lm.fit(cbind(1, Xt), yt)
+#' score_fn <- function(yt, yp) mean((yt - yp)^2)
+#' predict.lm_lite2 <- function(object, newdata, ...) {
+#'   drop(cbind(1, newdata) %*% object$coef)
+#' }
+#' registerS3method("predict", "lm_lite2", predict.lm_lite2)
+#' res <- leave_one_out_cv(X, y,
+#'   model_fn = function(Xt, yt) {
+#'     fit <- stats::lm.fit(cbind(1, Xt), yt)
+#'     structure(list(coef = fit$coefficients), class = "lm_lite2")
+#'   },
+#'   score_fn = score_fn)
+#' str(res, max.level = 1)
 #' @export
 leave_one_out_cv <- function(X, y, model_fn, score_fn) {
   .boot_cross_validate(X, y, model_fn, score_fn, n_folds = length(y))
@@ -1259,6 +1345,10 @@ leave_one_out_cv <- function(X, y, model_fn, score_fn) {
 #' @return A \code{morie_boot} object (native; consumable by
 #'   [morie_boot_basic_ci()]).
 #' @seealso [morie_boot()], [morie_boot_basic_ci()].
+#' @examples
+#' set.seed(1)
+#' b <- morie_boot_run(rnorm(50), statistic = mean, R = 200L)
+#' str(b, max.level = 1)
 #' @export
 morie_boot_run <- function(data, statistic, R = 2000L, strata = NULL, ...) {
   bf <- .boot_statistic_adapter(statistic)
@@ -1280,6 +1370,10 @@ morie_boot_run <- function(data, statistic, R = 2000L, strata = NULL, ...) {
 #' @return Named list of length \code{length(type)}; each element is
 #'   a numeric length-2 vector `c(ci_lower, ci_upper)`.
 #' @seealso \code{boot::boot.ci}.
+#' @examples
+#' set.seed(1)
+#' b <- morie_boot_run(rnorm(50), statistic = mean, R = 200L)
+#' morie_boot_basic_ci(b)
 #' @export
 morie_boot_basic_ci <- function(boot_obj,
                                 type = c("perc", "bca", "basic", "norm"),
@@ -1300,6 +1394,12 @@ morie_boot_basic_ci <- function(boot_obj,
 #'   (e.g. \code{strata}, \code{apparent}).
 #' @return An \code{rset} \pkg{rsample} object.
 #' @seealso \code{rsample::bootstraps}, \code{rsample::vfold_cv}.
+#' @examples
+#' if (requireNamespace("rsample", quietly = TRUE)) {
+#'   set.seed(1)
+#'   rs <- morie_rsample_bootstraps(data.frame(x = rnorm(30)), times = 5L)
+#'   class(rs)
+#' }
 #' @export
 morie_rsample_bootstraps <- function(data, times = 25L, ...) {
   if (!.boot_have_rsample()) {
@@ -1324,6 +1424,12 @@ morie_rsample_bootstraps <- function(data, times = 25L, ...) {
 #' @return A \code{morie_boot} object for the difference statistic.
 #' @seealso \code{simpleboot::two.boot}, \code{simpleboot::one.boot},
 #'   \code{simpleboot::lm.boot}.
+#' @examples
+#' if (requireNamespace("simpleboot", quietly = TRUE)) {
+#'   set.seed(1)
+#'   b <- morie_simpleboot_two(rnorm(25), rnorm(25, 0.5), R = 200L)
+#'   class(b)
+#' }
 #' @export
 morie_simpleboot_two <- function(x, y, statistic = mean, R = 1000L, ...) {
   morie_two_boot(x = as.numeric(x), y = as.numeric(y),

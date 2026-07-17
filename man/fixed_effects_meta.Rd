@@ -19,3 +19,10 @@ A \code{morie_effect_size} with Q + Q p-value in \code{extra}.
 \description{
 Fixed-effects (inverse-variance) meta-analytic pooling
 }
+\examples{
+est <- c(0.4, 0.5, 0.6)
+se <- c(0.1, 0.1, 0.1)
+fe <- fixed_effects_meta(est, se)
+fe$estimate
+fe$extra$Q
+}

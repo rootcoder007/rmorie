@@ -25,3 +25,7 @@ Counts the number of distinct regions an individual was placed in
 within one fiscal year (union of \code{region_at_time_of_placement}
 and \code{region_most_recent_placement}).
 }
+\examples{
+df <- morie_synth_otis("b01", n = 150L, seed = 8L)
+res <- try(morie_otis_volat(df))
+}

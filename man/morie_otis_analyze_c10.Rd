@@ -15,3 +15,8 @@ An object of class \code{"morie_otis_analysis_result"}.
 \description{
 RC/seg aggregate durations by institution (c10)
 }
+\examples{
+otis_c10 <- morie_synth_otis("c10", n = 120L, seed = 1L)
+res <- morie_otis_analyze_c10(otis_c10)
+class(res)
+}

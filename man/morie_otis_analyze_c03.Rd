@@ -15,3 +15,8 @@ An object of class \code{"morie_otis_analysis_result"}.
 \description{
 Individuals x race x gender (c03)
 }
+\examples{
+otis_c03 <- morie_synth_otis("c03", n = 120L, seed = 1L)
+res <- morie_otis_analyze_c03(otis_c03)
+class(res)
+}
