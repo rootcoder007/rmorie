@@ -160,13 +160,10 @@ morie_sgolay_smooth <- function(x, window_length = 11L, polyorder = 3L) {
 #' }
 #' }
 morie_hurst_r <- function(x) {
-  if (requireNamespace("pracma", quietly = TRUE)) {
-    result <- pracma::hurstexp(x, display = FALSE)
-    return(list(H = result$Hs, interpretation = ifelse(result$Hs > 0.55, "persistent",
-      ifelse(result$Hs < 0.45, "anti-persistent", "random")
-    )))
-  }
-  stop("rmorie::morie_hurst_r requires the 'pracma' package; install.packages('pracma')")
+  h <- .morie_hurst_rs(x)
+  list(H = h, interpretation = ifelse(h > 0.55, "persistent",
+    ifelse(h < 0.45, "anti-persistent", "random")
+  ))
 }
 
 #' Higuchi fractal dimension

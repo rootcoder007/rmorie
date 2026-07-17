@@ -769,26 +769,17 @@ morie_sensitivity_rosenbaum <- function(treated, control,
   n1 <- length(treated)
   n0 <- length(control)
 
-  use_rbounds <- .causal_have_rbounds() && n1 == n0
-  if (use_rbounds) {
-    res <- tryCatch({
-      tab <- lapply(gamma_range, function(gamma) {
-        ps <- rbounds::psens(treated, control, Gamma = gamma,
-                             GammaInc = 1)
-        # psens returns a list with $bounds: a 2-col matrix
-        # [Gamma; Lower bound; Upper bound]
-        b <- ps$bounds
-        data.frame(
-          gamma    = gamma,
-          p_lower  = as.numeric(b[1L, "Lower bound"]),
-          p_upper  = as.numeric(b[1L, "Upper bound"])
-        )
-      })
-      do.call(rbind, tab)
-    }, error = function(e) NULL)
-    if (!is.null(res)) {
-      return(res)
-    }
+  if (n1 == n0) {
+    # Native Rosenbaum bounds for the Wilcoxon signed-rank statistic
+    # on positionally-formed pairs -- the same quantity
+    # rbounds::psens() reports (cross-validated in tests).
+    tab <- lapply(gamma_range, function(gamma) {
+      b <- .morie_psens_wilcoxon(treated, control, gamma)
+      data.frame(gamma = gamma,
+                 p_lower = as.numeric(b[["p_lower"]]),
+                 p_upper = as.numeric(b[["p_upper"]]))
+    })
+    return(do.call(rbind, tab))
   }
 
   # Inline fallback: sign-score bounds (Rosenbaum 2002, Section 4.3).

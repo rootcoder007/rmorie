@@ -529,28 +529,25 @@ morie_matching_entropy_balance <- function(data, treatment, covariates,
                                            max_iter = 500L,
                                            tol = 1e-6) {
   df <- .morie_matching_drop_na(data, c(treatment, covariates))
-  if (.morie_matching_have("WeightIt")) {
-    f <- stats::as.formula(paste(treatment, "~",
-                                 paste(covariates, collapse = " + ")))
-    fit <- WeightIt::weightit(f, data = df, method = "ebal",
-                              estimand = "ATT", moments = max_moment)
-    w <- as.numeric(fit$weights)
-    names(w) <- rownames(df)
-    return(w)
+  t_mask <- df[[treatment]] == 1
+  X <- as.matrix(df[, covariates, drop = FALSE])
+  if (max_moment >= 2L) {
+    X <- cbind(X, X^2)
   }
-  if (.morie_matching_have("ebal")) {
-    t_mask <- df[[treatment]] == 1
-    X <- as.matrix(df[, covariates, drop = FALSE])
-    fit <- ebal::ebalance(Treatment = as.integer(t_mask), X = X,
-                          max.iterations = max_iter)
-    w <- rep(1.0, nrow(df))
-    w[!t_mask] <- as.numeric(fit$w)
-    names(w) <- rownames(df)
-    return(w)
+  # Native Hainmueller (2012) entropy balancing, ATT: reweight controls
+  # so their covariate moments match the treated moments. Weight scale
+  # follows ebal::ebalance (control weights sum to n_control);
+  # cross-validated against ebal + WeightIt in tests.
+  fit <- .morie_entropy_balance(t_mask, X, max_iter = max_iter)
+  if (!fit$converged) {
+    warning("entropy balancing did not fully converge; ",
+            "max moment imbalance = ",
+            format(fit$max_imbalance, digits = 3), call. = FALSE)
   }
-  stop("`morie_matching_entropy_balance()` requires either 'WeightIt' ",
-       "(method = \"ebal\") or 'ebal'. Install with ",
-       "install.packages(\"WeightIt\").", call. = FALSE)
+  w <- rep(1.0, nrow(df))
+  w[!t_mask] <- as.numeric(fit$w)
+  names(w) <- rownames(df)
+  w
 }
 
 #' Genetic matching (Diamond & Sekhon, 2013)

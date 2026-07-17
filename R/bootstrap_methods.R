@@ -439,16 +439,12 @@ parametric_bootstrap <- function(data, statistic, distribution = "normal",
   pars <- .param_boot_pars(distribution, data, dp)
   rg <- .param_boot_rangen(distribution, n)
 
-  if (.boot_have_boot()) {
-    boot_stat <- function(d, ...) as.numeric(statistic(d))
-    bo <- boot::boot(data = data, statistic = boot_stat, R = n_boot,
-                     sim = "parametric", ran.gen = rg, mle = pars)
-    boot_stats <- as.numeric(bo$t[, 1L])
-  } else {
-    boot_stats <- numeric(n_boot)
-    for (b in seq_len(n_boot)) {
-      boot_stats[b] <- as.numeric(statistic(rg(data, pars)))
-    }
+  # Native parametric bootstrap: draw from ran.gen, evaluate the
+  # statistic. Identical estimand to boot::boot(sim = "parametric")
+  # with the same ran.gen/mle -- the resampling loop IS the algorithm.
+  boot_stats <- numeric(n_boot)
+  for (b in seq_len(n_boot)) {
+    boot_stats[b] <- as.numeric(statistic(rg(data, pars)))
   }
 
   se <- stats::sd(boot_stats)

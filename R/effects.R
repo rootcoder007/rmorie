@@ -503,23 +503,16 @@ sensitivity_rosenbaum <- function(data, treatment, outcome,
   gammas         <- seq(gamma_range[1], gamma_range[2],
                         length.out = n_gamma)
 
-  if (requireNamespace("rbounds", quietly = TRUE) && min_n >= 5L) {
-    # psens() computes upper/lower p-bounds across a Gamma sequence.
-    res <- tryCatch(
-      rbounds::psens(differences, Gamma = max(gammas),
-                     GammaInc = (max(gammas) - 1) /
-                       max(1L, n_gamma - 1L)),
-      error = function(e) NULL
-    )
-    if (!is.null(res) && !is.null(res$bounds)) {
-      bnd <- as.data.frame(res$bounds)
-      out <- data.frame(
-        Gamma   = as.numeric(bnd[["Gamma"]]),
-        p_lower = as.numeric(bnd[["Lower bound"]]),
-        p_upper = as.numeric(bnd[["Upper bound"]])
-      )
-      return(out)
-    }
+  if (min_n >= 5L) {
+    # Native Rosenbaum signed-rank bounds across the Gamma sequence --
+    # the same table rbounds::psens() prints (cross-validated in tests).
+    out <- do.call(rbind, lapply(gammas, function(g) {
+      b <- .morie_psens_wilcoxon_d(differences, g)
+      data.frame(Gamma = g,
+                 p_lower = as.numeric(b[["p_lower"]]),
+                 p_upper = as.numeric(b[["p_upper"]]))
+    }))
+    return(out)
   }
 
   n_pairs  <- length(differences)

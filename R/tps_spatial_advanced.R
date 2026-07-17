@@ -87,8 +87,8 @@ NULL
 .tps_knn_idx <- function(coords, k) {
   n <- nrow(coords)
   k <- min(as.integer(k), n - 1L)
-  if (requireNamespace("FNN", quietly = TRUE)) {
-    return(FNN::get.knn(coords, k = k)$nn.index)
+  if (n <= 2000L) {
+    return(.morie_knn_index(coords, k))
   }
   idx <- matrix(0L, n, k)
   for (i in seq_len(n)) {

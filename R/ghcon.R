@@ -32,12 +32,10 @@ morie_ghosal_posterior_consistency <- function(x, ref_loc = NULL, ref_scale = NU
   }
   ks <- numeric(K)
   for (k in seq_len(K)) {
-    if (.gh_have("MCMCpack")) {
-      u <- as.numeric(MCMCpack::rdirichlet(1, rep(1, n)))
-    } else {
-      g <- stats::rgamma(n, shape = 1, rate = 1)
-      u <- g / sum(g)
-    }
+    # Flat Dirichlet draw via normalized Gamma(1,1) -- exactly what
+    # MCMCpack::rdirichlet(1, rep(1, n)) computes.
+    g <- stats::rgamma(n, shape = 1, rate = 1)
+    u <- g / sum(g)
     cdf <- cumsum(u) # already in sorted order since xs is sorted
     idx <- findInterval(grid, xs)
     F_draw <- ifelse(idx == 0, 0, cdf[pmin(pmax(idx, 1L), n)])
