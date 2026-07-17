@@ -23,12 +23,14 @@ test_that("optional-package guards stop() when the package is absent", {
   expect_error(morie_decision_tree_split(x, y))
   expect_error(morie_grid_search_cv(x, y))
   expect_error(morie_random_forest_ensemble(x, y))
-  expect_error(morie_regularization_path(x, y))
+  # Wave B/C natives: regularization path + t-SNE now RUN without
+  # glmnet/Rtsne instead of stopping.
+  expect_true(is.list(morie_regularization_path(x, y)))
   expect_error(morie_random_search_cv(x, y))
   expect_error(morie_roc_auc_score(y, runif(20)))
   expect_error(morie_svm_hinge_primal(x, y))
   expect_error(morie_svm_kernel_trick(x, y))
-  expect_error(morie_tsne_reduction(x))
+  expect_true(is.list(morie_tsne_reduction(x, n_iter = 50L)))
   # Module 20: rgfir/rgiir/rgqrs are native — they RUN without the
   # signal package instead of stopping.
   expect_silent(rgfir(rnorm(64), cutoff = 0.2))

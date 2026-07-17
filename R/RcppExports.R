@@ -300,6 +300,22 @@ morie_matching_abadie_imbens_kernel_cpp <- function(y, t, treated_pos, control_p
     .Call(`_rmorie_morie_rlm_cpp`, X, y, k, maxit, acc)
 }
 
+.morie_sobol_cpp <- function(n, d) {
+    .Call(`_rmorie_morie_sobol_cpp`, n, d)
+}
+
+.morie_knn_index_cpp <- function(coords, k) {
+    .Call(`_rmorie_morie_knn_index_cpp`, coords, k)
+}
+
+.morie_coord_descent_cpp <- function(Xs, yc, alpha, lambda, max_iter, tol, warm) {
+    .Call(`_rmorie_morie_coord_descent_cpp`, Xs, yc, alpha, lambda, max_iter, tol, warm)
+}
+
+.morie_tsne_descent_cpp <- function(P, Y, n_iter, eta) {
+    .Call(`_rmorie_morie_tsne_descent_cpp`, P, Y, n_iter, eta)
+}
+
 morie_spatial_nominate_iterate_cpp <- function(votes, X, w, nv, mid, beta, max_iter) {
     .Call(`_rmorie_morie_spatial_nominate_iterate_cpp`, votes, X, w, nv, mid, beta, max_iter)
 }

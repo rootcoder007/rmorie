@@ -71,18 +71,14 @@ test_that("filters fall back to the Python bridge without the signal pkg", {
   expect_equal(morie_sgolay_smooth(1:20), "bridge:sgolay")
 })
 
-test_that("morie_hurst_r falls back to the Python bridge without pracma", {
-  skip_if(!exists(".morie_py_call", envir = asNamespace("rmorie"), inherits = FALSE),
-          "rmorie slim build: no Python bridge")
+test_that("morie_hurst_r is native: runs without pracma or the bridge", {
+  # Wave A native: no pracma delegation, no Python-bridge fallback.
   testthat::local_mocked_bindings(
     requireNamespace = function(package, ...) {
       if (identical(package, "pracma")) FALSE else TRUE
     },
     .package = "base"
   )
-  testthat::local_mocked_bindings(
-    .morie_py_call = function(fn_name, ...) "bridge:hurst",
-    .package = "rmorie"
-  )
-  expect_equal(morie_hurst_r(cumsum(stats::rnorm(64))), "bridge:hurst")
+  r <- morie_hurst_r(cumsum(stats::rnorm(64)))
+  expect_true(is.numeric(r$H))
 })
