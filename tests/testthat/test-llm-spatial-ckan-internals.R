@@ -268,11 +268,11 @@ test_that(".doob_result builds a morie_result list", {
 
 # ================================================================ mrm_arsau.R
 
-test_that(".arsau_wrap aggregates sub-results into a wrapped list", {
+test_that(".morie_arsau_wrap aggregates sub-results into a wrapped list", {
   sub_results <- list(
     summary = list(warnings = character(0)),
     timing  = list(warnings = "minor cohort shrinkage"))
-  out <- rmorie:::.arsau_wrap(
+  out <- rmorie:::.morie_arsau_wrap(
     title = "Wrap",
     call = "demo",
     sub_results = sub_results,
