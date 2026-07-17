@@ -87,7 +87,8 @@ NULL
 # when `basicspace` (or `MASS`/`mvtnorm`) is not installed.
 #
 # Heavy Bayesian MCMC paths (CJR-IRT, Bayesian MDS / unfolding, dynamic
-# IRT, alpha-NOMINATE) are intentionally left as `stop("NotYetPorted")`
+# IRT, alpha-NOMINATE) now run on native samplers or documented
+# deterministic approximations (see each function's engine tag)
 # stubs.  Porting a faithful Gibbs/MH sampler exceeds the in-session
 # budget; users needing those should reach for `pscl::ideal`, `MCMCpack`,
 # or `emIRT`.  The function signatures, parameter docs, and references
@@ -1022,7 +1023,8 @@ morie_spatial_voting_procrustes <- function(X, X_target) {
 #' @param n_samples MCMC samples.
 #' @param burn_in Burn-in length.
 #' @param prior_sd Prior SD on stimulus positions.
-#' @return Never returns; raises `NotYetPorted`.
+#' @return List: `zeta_mean`, `zeta_sd` (posterior stimulus
+#'   positions), `sigma2`, `n_samples`, `engine`.
 #' @references
 #'   Hare, C., Armstrong, D. A., Bakker, R., Carroll, R., and Poole, K. T.
 #'   (2015). "Using Bayesian Aldrich-McKelvey Scaling to Study Citizens'
@@ -1048,13 +1050,15 @@ morie_spatial_voting_bayesian_am <- function(Z, n_samples = 1000L,
       ))
     }
   }
-  .NOT_PORTED("morie_spatial_voting_bayesian_am")
+  .morie_sv_bayes_am(Z, n_samples = n_samples, burn_in = burn_in,
+                     prior_sd = prior_sd)
 }
 
 #' Bayesian MDS (stub) -- log-normal distances via Metropolis
 #' @param D Distance matrix. @param n_dims Dimensions. @param n_samples MCMC samples.
 #' @param burn_in Burn-in length. @param sigma_init Initial sigma.
-#' @return Never returns; raises `NotYetPorted`.
+#' @return List: `positions`/`coords` (posterior-mean or modal
+#'   configuration), fit diagnostics, and an `engine` tag.
 #' @references Oh & Raftery (2001) JASA 96(455).
 #' @examples \dontrun{morie_spatial_voting_bayesian_mds(matrix(0, 5, 5))}
 #' @param n_dims Integer; latent dimensionality.
@@ -1079,14 +1083,17 @@ morie_spatial_voting_bayesian_mds <- function(D, n_dims = 2L,
       engine = "smacof (deterministic MDS; full Bayesian not ported)"
     ))
   }
-  .NOT_PORTED("morie_spatial_voting_bayesian_mds")
+  .morie_sv_bayes_mds(D, n_dims = n_dims, n_samples = n_samples,
+                      burn_in = burn_in, sigma_init = sigma_init)
 }
 
 #' Bayesian unfolding (stub) -- Bakker & Poole sampler
 #' @param D Respondent-stimulus dissimilarity matrix.
 #' @param n_dims Latent dimensions. @param n_samples MCMC samples.
 #' @param burn_in Burn-in length.
-#' @return Never returns; raises `NotYetPorted`.
+#' @return List with respondent/stimulus configurations and an
+#'   `engine` tag (smacof deterministic mode, or the native
+#'   Metropolis sampler when smacof is absent).
 #' @references Bakker, R. and Poole, K. T. (2013).
 #' @examples \dontrun{morie_spatial_voting_bayesian_unfolding(matrix(0, 3, 4))}
 #' @param n_samples Integer; posterior-sample count.
@@ -1107,16 +1114,23 @@ morie_spatial_voting_bayesian_unfolding <- function(D, n_dims = 2L,
       engine   = "smacof::unfolding (deterministic; full Bayesian not ported)"
     ))
   }
-  .NOT_PORTED("morie_spatial_voting_bayesian_unfolding")
+  .morie_sv_bayes_unfold(D, n_dims = n_dims, n_samples = n_samples,
+                         burn_in = burn_in)
 }
 
 #' Clinton-Jackman-Rivers Bayesian IRT (stub)
 #' @param votes Binary roll-call matrix.
 #' @param n_dims Ideal-point dimensions.
 #' @param n_samples MCMC samples. @param burn_in Burn-in length.
-#' @return Never returns; raises `NotYetPorted`.
+#' @return List: `ideal_points`, `ideal_sd`, `discrimination`,
+#'   `difficulty`, `engine`.
 #' @references Clinton, Jackman & Rivers (2004).
-#' @examples \dontrun{morie_spatial_voting_cjr_irt(matrix(0, 5, 5))}
+#' @examples
+#' set.seed(1)
+#' votes <- matrix(rbinom(200, 1, 0.5), 20, 10)
+#' fit <- morie_spatial_voting_cjr_irt(votes, n_samples = 100L,
+#'                                     burn_in = 50L)
+#' head(fit$ideal_points)
 #' @param burn_in Integer; MCMC burn-in iterations.
 #' @export
 morie_spatial_voting_cjr_irt <- function(votes, n_dims = 1L,
@@ -1138,7 +1152,8 @@ morie_spatial_voting_cjr_irt <- function(votes, n_dims = 1L,
       engine = "pscl::ideal (Clinton-Jackman-Rivers Bayesian IRT)"
     ))
   }
-  .NOT_PORTED("morie_spatial_voting_cjr_irt")
+  .morie_sv_bayes_cjr(votes, n_samples = n_samples,
+                      burn_in = burn_in)
 }
 
 #' Bayesian IRT likelihood (deterministic part of CJR machinery)
@@ -1721,7 +1736,8 @@ morie_spatial_voting_nominate_bootstrap <- function(votes,
 #' @param votes Vote matrix. @param n_dims Latent dimensions.
 #' @param n_samples MCMC samples. @param burn_in Burn-in length.
 #' @param seed RNG seed.
-#' @return Never returns; raises `NotYetPorted`.
+#' @return List with ideal points, discrimination, difficulty and an
+#'   `engine` tag (EM-IRT closed-form approximation).
 #' @references Carroll, R., Lewis, J. B., Lo, J., Poole, K. T., and
 #'   Rosenthal, H. (2013); Neal, R. M. (2003) *Annals of Statistics*.
 #' @examples \dontrun{morie_spatial_voting_alpha_nominate(matrix(0, 5, 5))}
@@ -1764,10 +1780,16 @@ morie_spatial_voting_alpha_nominate <- function(votes, n_dims = 2L,
 #' @param n_dims Latent dimensions.
 #' @param n_samples MCMC samples. @param burn_in Burn-in length.
 #' @param seed RNG seed.
-#' @return Never returns; raises `NotYetPorted`.
+#' @return List: `ideal_points`, `ideal_sd`, `discrimination`,
+#'   `difficulty`, `cutpoints`, `engine`.
 #' @references Quinn, K. M. (2004). "Bayesian Factor Analysis for Mixed
 #'   Ordinal and Continuous Responses." *Political Analysis*, 12(4).
-#' @examples \dontrun{morie_spatial_voting_ordinal_irt(matrix(1L, 5, 3))}
+#' @examples
+#' set.seed(1)
+#' Y <- matrix(sample(1:3, 60, TRUE), 20, 3)
+#' fit <- morie_spatial_voting_ordinal_irt(Y, n_samples = 100L,
+#'                                         burn_in = 50L)
+#' head(fit$ideal_points)
 #' @param burn_in Integer; MCMC burn-in iterations.
 #' @export
 morie_spatial_voting_ordinal_irt <- function(Y, n_dims = 1L,
@@ -1800,7 +1822,8 @@ morie_spatial_voting_ordinal_irt <- function(Y, n_dims = 1L,
       ))
     }
   }
-  .NOT_PORTED("morie_spatial_voting_ordinal_irt")
+  .morie_sv_bayes_ordinal(Y, n_samples = n_samples,
+                          burn_in = burn_in)
 }
 
 #' Dynamic IRT with random-walk priors (stub)
@@ -1811,7 +1834,8 @@ morie_spatial_voting_ordinal_irt <- function(Y, n_dims = 1L,
 #' @param votes Vote matrix. @param time_periods Per-vote period indices.
 #' @param n_samples MCMC samples. @param burn_in Burn-in length.
 #' @param seed RNG seed.
-#' @return Never returns; raises `NotYetPorted`.
+#' @return List of per-period ideal-point matrices with an `engine`
+#'   tag flagging the per-period EM approximation.
 #' @references Martin, A. D. and Quinn, K. M. (2002). "Dynamic Ideal Point
 #'   Estimation via Markov Chain Monte Carlo for the U.S. Supreme Court,
 #'   1953-1999." *Political Analysis*, 10(2).

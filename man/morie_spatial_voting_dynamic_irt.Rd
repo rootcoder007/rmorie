@@ -24,7 +24,8 @@ morie_spatial_voting_dynamic_irt(
 \item{seed}{RNG seed.}
 }
 \value{
-Never returns; raises \code{NotYetPorted}.
+List of per-period ideal-point matrices with an \code{engine}
+tag flagging the per-period EM approximation.
 }
 \description{
 Time-series IRT where ideal points evolve via a random walk:

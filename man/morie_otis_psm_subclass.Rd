@@ -2,24 +2,33 @@
 % Please edit documentation in R/otis_causal.R
 \name{morie_otis_psm_subclass}
 \alias{morie_otis_psm_subclass}
-\title{Propensity-score subclassification ATE (not yet ported).}
+\title{Propensity-score subclassification ATE on OTIS data (native)}
 \usage{
-morie_otis_psm_subclass(...)
+morie_otis_psm_subclass(df, treatment, outcome, covariates, n_strata = 5L)
 }
 \arguments{
-\item{...}{Arguments mirroring \code{morie_otis_ipw_ate()}.}
+\item{df}{Data frame.}
+
+\item{treatment, outcome, covariates}{Column names.}
+
+\item{n_strata}{Number of PS strata. Default 5.}
 }
 \value{
-Stops with a redirect to \pkg{MatchIt} subclassification.
+An OTIS causal-estimate list (ATE).
 }
 \description{
-Rosenbaum-Rubin (1983) PS-stratification (default n_strata = 5,
-Cochran 1968 convention). Use \code{MatchIt::matchit(method =
-"subclass")} for an R-side equivalent.
+Rosenbaum-Rubin (1983) propensity-score stratification with the
+Cochran (1968) five-stratum convention: PS quintile strata,
+within-stratum treated-control mean differences, aggregated with
+stratum-size weights; SE from the weighted within-stratum
+variances. Strata missing either arm are dropped (and reported).
 }
 \examples{
-\dontrun{
-  morie_otis_psm_subclass(df, treatment = "d", outcome = "y",
-                           covariates = "x")
-}
+set.seed(1)
+n <- 400
+x <- rnorm(n)
+d <- rbinom(n, 1, plogis(0.6 * x))
+y <- 1.5 * d + x + rnorm(n)
+morie_otis_psm_subclass(data.frame(y, d, x), treatment = "d",
+                        outcome = "y", covariates = "x")
 }

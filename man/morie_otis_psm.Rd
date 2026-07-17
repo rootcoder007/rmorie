@@ -2,27 +2,44 @@
 % Please edit documentation in R/otis_causal.R
 \name{morie_otis_psm}
 \alias{morie_otis_psm}
-\title{Propensity-score 1:k NN matching with caliper (not yet ported).}
+\title{Propensity-score 1:k NN matching with caliper on OTIS data (native)}
 \usage{
-morie_otis_psm(...)
+morie_otis_psm(
+  df,
+  treatment,
+  outcome,
+  covariates,
+  k = 1L,
+  caliper = 0.2,
+  seed = 123L
+)
 }
 \arguments{
-\item{...}{Arguments mirroring \code{morie_otis_aipw_ate()}.}
+\item{df}{Data frame.}
+
+\item{treatment, outcome, covariates}{Column names.}
+
+\item{k}{Controls matched per treated unit. Default 1.}
+
+\item{caliper}{Caliper in SD units of the logit-PS. Default 0.2.}
+
+\item{seed}{RNG seed (tie-breaking order). Default 123.}
 }
 \value{
-Stops with a redirect to \pkg{MatchIt}.
+An OTIS causal-estimate list (ATT).
 }
 \description{
-The python implementation provides a greedy 1:k NN matcher on
-logit-PS with an Austin (2011) 0.2-SD caliper. In R, prefer the
-canonical \pkg{MatchIt} implementation
-(\code{MatchIt::matchit(method = "nearest", caliper = 0.2,
-std.caliper = TRUE)}); the present stub holds the python-API
-surface so callers can detect the rename.
+Greedy 1:k nearest-neighbour matching on the logit propensity
+score with the Austin (2011) caliper (0.2 SD of the logit-PS by
+default), mirroring the python implementation. Returns the ATT
+from matched-set mean differences with the matched-pairs variance.
 }
 \examples{
-\dontrun{
-  morie_otis_psm(df, treatment = "d", outcome = "y",
-                 covariates = "x")
-}
+set.seed(1)
+n <- 300
+x <- rnorm(n)
+d <- rbinom(n, 1, plogis(0.8 * x))
+y <- 1.2 * d + x + rnorm(n)
+morie_otis_psm(data.frame(y, d, x), treatment = "d",
+               outcome = "y", covariates = "x")
 }

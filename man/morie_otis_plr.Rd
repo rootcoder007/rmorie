@@ -2,26 +2,45 @@
 % Please edit documentation in R/otis_causal.R
 \name{morie_otis_plr}
 \alias{morie_otis_plr}
-\title{Partially Linear Regression DML on OTIS (not yet ported).}
+\title{Partially Linear Regression DML on OTIS data (native)}
 \usage{
-morie_otis_plr(...)
+morie_otis_plr(
+  df,
+  treatment,
+  outcome,
+  covariates,
+  n_folds = 5L,
+  n_rep = 1L,
+  seed = 123L
+)
 }
 \arguments{
-\item{...}{Arguments mirroring \code{morie_otis_aipw_ate()}.}
+\item{df}{Data frame.}
+
+\item{treatment, outcome, covariates}{Column names.}
+
+\item{n_folds}{Cross-fit folds. Default 5.}
+
+\item{n_rep}{Repetition count for median aggregation. Default 1.}
+
+\item{seed}{RNG seed. Default 123.}
 }
 \value{
-Stops with a redirect to \code{morie_estimate_double_ml()}.
+An OTIS causal-estimate list (same shape as
+\code{morie_otis_aipw_ate}).
 }
 \description{
-The python version uses scikit-learn RF nuisance models for the
-Frisch-Waugh-Lovell partialling-out construction. For the R port,
-use the analogous \code{morie_estimate_double_ml()} from
-\code{causal.R}, which already wraps \pkg{DoubleML::DoubleMLPLR}
-(with mlr3 ranger learners) and a cross-fit ridge fallback.
+Frisch-Waugh-Lovell partialling-out double machine learning on the
+OTIS analysis frame, running on the same native cross-fit PLR
+engine as \code{morie_estimate_double_ml()} (Chernozhukov et al.
+2018 orthogonal score; median aggregation over repetitions).
 }
 \examples{
-\dontrun{
-  morie_otis_plr(df, treatment = "d", outcome = "y",
-                 covariates = "x")
-}
+set.seed(1)
+n <- 200
+x <- rnorm(n)
+d <- rbinom(n, 1, plogis(0.6 * x))
+y <- 1.5 * d + x + rnorm(n)
+morie_otis_plr(data.frame(y, d, x), treatment = "d",
+               outcome = "y", covariates = "x")
 }

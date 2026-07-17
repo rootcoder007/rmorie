@@ -2,27 +2,52 @@
 % Please edit documentation in R/otis_causal.R
 \name{morie_otis_aipw_superlearner}
 \alias{morie_otis_aipw_superlearner}
-\title{SuperLearner-stacked AIPW (not yet ported).}
+\title{SuperLearner-stacked AIPW on OTIS data (native)}
 \usage{
-morie_otis_aipw_superlearner(...)
+morie_otis_aipw_superlearner(
+  df,
+  treatment,
+  outcome,
+  covariates,
+  n_folds = 5L,
+  seed = 123L,
+  eps = 0.02
+)
 }
 \arguments{
-\item{...}{Arguments mirroring \code{morie_otis_aipw_ate()}.}
+\item{df}{Data frame.}
+
+\item{treatment, outcome, covariates}{Column names.}
+
+\item{n_folds}{Outer cross-fit folds. Default 5.}
+
+\item{seed}{RNG seed. Default 123.}
+
+\item{eps}{Propensity clipping bound. Default 0.02.}
 }
 \value{
-Stops with a \code{NotYetPorted} message; for the time
-being, call \code{morie_otis_aipw_ate()} with the default
-cross-fit OLS+logit stack.
+An OTIS causal-estimate list (same shape as
+\code{morie_otis_aipw_ate}).
 }
 \description{
-The python version stacks RF + ridge + OLS/logit + mean (and
-optionally xgboost) via cross-validated convex weights. The R port
-would require pulling in \pkg{SuperLearner} or hand-rolling the
-stacked-cross-fit construction.
+Cross-fit AIPW whose nuisances are NNLS-stacked ensembles of
+native learners (the same Lawson-Hanson convex stacking as
+\code{morie_weight_super}): propensity from
+\{ridge-logistic, quadratic logistic, base rate\} and per-arm
+outcome regressions from \{OLS, cross-validated ridge, mean\},
+with ranger random forests joining both stacks when installed.
+Stacking weights come from inner 3-fold cross-validated
+predictions inside every outer training fold, so no fold ever
+sees its own outcome.
 }
 \examples{
-\dontrun{
-  morie_otis_aipw_superlearner(df, treatment = "d", outcome = "y",
-                                covariates = "x")
-}
+set.seed(1)
+n <- 200
+x1 <- rnorm(n); x2 <- rnorm(n)
+d <- rbinom(n, 1, plogis(0.5 * x1))
+y <- 1 + 2 * d + x1 - 0.5 * x2 + rnorm(n)
+df <- data.frame(y, d, x1, x2)
+morie_otis_aipw_superlearner(df, treatment = "d", outcome = "y",
+                             covariates = c("x1", "x2"),
+                             n_folds = 3L)
 }

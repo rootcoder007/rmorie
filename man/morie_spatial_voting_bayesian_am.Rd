@@ -21,7 +21,8 @@ morie_spatial_voting_bayesian_am(
 \item{prior_sd}{Prior SD on stimulus positions.}
 }
 \value{
-Never returns; raises \code{NotYetPorted}.
+List: \code{zeta_mean}, \code{zeta_sd} (posterior stimulus
+positions), \code{sigma2}, \code{n_samples}, \code{engine}.
 }
 \description{
 Bayesian Aldrich-McKelvey scaling (stub)

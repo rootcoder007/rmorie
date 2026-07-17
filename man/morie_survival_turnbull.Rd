@@ -17,7 +17,8 @@ morie_survival_turnbull(left, right, max_iter = 200, tol = 1e-06)
 \item{tol}{Convergence tolerance for the Turnbull EM.}
 }
 \value{
-A named list with elements \code{times}, \code{survival}, \code{method}.
+A named list with the NPMLE \code{times}, the \code{survival}
+function estimates, and \code{method = "Turnbull NPMLE"}.
 }
 \description{
 Delegates to \code{survival::survfit()} with \code{Surv(left, right, type = "interval2")}.

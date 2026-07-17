@@ -24,7 +24,8 @@ morie_spatial_voting_bayesian_mds(
 \item{sigma_init}{Numeric; initial value for the latent-coordinate scale (default 1).}
 }
 \value{
-Never returns; raises \code{NotYetPorted}.
+List: \code{positions}/\code{coords} (posterior-mean or modal
+configuration), fit diagnostics, and an \code{engine} tag.
 }
 \description{
 Bayesian MDS (stub) -- log-normal distances via Metropolis
