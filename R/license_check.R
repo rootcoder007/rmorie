@@ -79,13 +79,10 @@ morie_license_metadata <- function() {
 #' @export
 #' @examples
 #' morie_check_plugin_license("MIT")
-#' \dontrun{
-#' # The next call demonstrates the error path; runs only on
-#' # explicit example() with run.dontrun = TRUE.
-#' morie_check_plugin_license("LicenseRef-Proprietary",
+#' # The error path, kept runnable via try():
+#' try(morie_check_plugin_license("LicenseRef-Proprietary",
 #'   raise_on_incompatible = TRUE
-#' )
-#' }
+#' ))
 morie_check_plugin_license <- function(plugin_spdx,
                                        raise_on_incompatible = FALSE) {
   if (is.null(plugin_spdx) || !nzchar(plugin_spdx)) {

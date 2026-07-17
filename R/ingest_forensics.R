@@ -414,12 +414,31 @@ morie_ingest_forensics_namus_missing <- function(
   page_size <- as.integer(page_size)
   body <- list(
     take = page_size, skip = 0L,
-    projections = list(),
+    # The Search endpoint returns ONLY projected fields (empty
+    # projections -> empty results even when count > 0). This
+    # projection set was validated against the live API 2026-07.
+    projections = list(
+      "namus2Number", "dateOfLastContact", "lastName", "firstName",
+      "cityOfLastContact", "stateDisplayNameOfLastContact",
+      "countyDisplayNameOfLastContact", "computedMissingMinAge",
+      "computedMissingMaxAge", "gender", "raceEthnicity",
+      "circumstancesOfDisappearance"
+    ),
     predicates = list()
   )
   if (!is.null(state) && nzchar(state)) {
+    # NamUs predicates filter MissingPersons on `stateOfLastContact`,
+    # operator `IsIn`, with FULL state names (verified against the
+    # live API 2026-07; the old field="state"/operator="Is"/2-letter
+    # form now returns HTTP 400 'Invalid field name "state"').
+    state_full <- if (toupper(state) %in% datasets::state.abb) {
+      datasets::state.name[match(toupper(state), datasets::state.abb)]
+    } else {
+      state # already a full name (or DC/territory)
+    }
     body$predicates <- list(
-      list(field = "state", value = toupper(state), operator = "Is")
+      list(field = "stateOfLastContact", operator = "IsIn",
+           values = list(state_full))
     )
   }
 
@@ -452,7 +471,12 @@ morie_ingest_forensics_namus_missing <- function(
     if (is.null(batch)) batch <- list()
     if (length(batch) == 0L) break
     for (rec in batch) {
-      rows[[length(rows) + 1L]] <- .morie_forensics_flatten_namus(rec)
+      rows[[length(rows) + 1L]] <-
+        if (!is.null(rec$namus2Number) || !is.null(rec$dateOfLastContact)) {
+          .morie_forensics_flatten_namus_search(rec)
+        } else {
+          .morie_forensics_flatten_namus(rec) # detail-shaped record
+        }
     }
     if (!is.null(max_features) && length(rows) >= max_features) {
       rows <- rows[seq_len(max_features)]
@@ -469,6 +493,29 @@ morie_ingest_forensics_namus_missing <- function(
     )
   }
   .morie_forensics_rows_to_df(rows, columns = .MORIE_NAMUS_MISSING_COLUMNS)
+}
+
+# Internal: flatten one flat Search-projection record (the shape the
+# NamUs Search endpoint actually returns; verified live 2026-07).
+# Height/weight are not projectable via Search -- NA by contract.
+.morie_forensics_flatten_namus_search <- function(rec) {
+  g <- function(k) if (is.null(rec[[k]])) NA else rec[[k]]
+  list(
+    case_number   = g("namus2Number"),
+    state         = g("stateDisplayNameOfLastContact"),
+    county        = g("countyDisplayNameOfLastContact"),
+    dlc_date      = g("dateOfLastContact"),
+    sex           = g("gender"),
+    race          = g("raceEthnicity"),
+    age_min       = g("computedMissingMinAge"),
+    age_max       = g("computedMissingMaxAge"),
+    height_cm_min = NA, height_cm_max = NA,
+    weight_kg_min = NA, weight_kg_max = NA,
+    first_name    = g("firstName"),
+    last_name     = g("lastName"),
+    city          = g("cityOfLastContact"),
+    circumstances = g("circumstancesOfDisappearance")
+  )
 }
 
 # Internal: pull morie's documented columns out of one NIST RDS record.

@@ -249,13 +249,16 @@
 #' @return A data.frame for tabular formats; a list or document object
 #'   for non-tabular \code{json}/\code{xml}/\code{html}.
 #' @examples
-#' \dontrun{
-#' # Examples use placeholder URLs (example.org). Replace with a
-#' # real CSV / JSON endpoint when running.
-#' df <- morie_fetch("https://example.org/data.csv")
-#' js <- morie_fetch("https://api.example.org/records",
-#'   format = "json", params = list(limit = 100)
-#' )
+#' \donttest{
+#' # Chicago open-data portal (Socrata), endpoints verified 2026-07.
+#' df <- try(morie_fetch(
+#'   "https://data.cityofchicago.org/resource/ijzp-q8t2.csv",
+#'   format = "csv", params = list(`$limit` = 5)
+#' ))
+#' js <- try(morie_fetch(
+#'   "https://data.cityofchicago.org/resource/ijzp-q8t2.json",
+#'   format = "json", params = list(`$limit` = 5)
+#' ))
 #' }
 #' @seealso \code{\link{morie_ckan_search}}, \code{\link{morie_fetch_arcgis}}
 #' @export
@@ -325,7 +328,7 @@ morie_fetch <- function(url,
 #' @param query Free-text search string.
 #' @param portal A known portal name (\code{"open.canada.ca"},
 #'   \code{"data.ontario.ca"}, \code{"open.toronto.ca"}) or a full
-#'   CKAN base URL (e.g. \code{"https://catalogue.example.org"}).
+#'   CKAN base URL (e.g. \code{"https://donnees.montreal.ca"}).
 #' @param rows Maximum number of datasets to return (default 25).
 #' @param ... Extra named CKAN \code{package_search} parameters
 #'   (e.g. \code{fq = "res_format:CSV"}, \code{sort = "metadata_modified desc"}).
@@ -335,9 +338,12 @@ morie_fetch <- function(url,
 #'   \code{url}. Feed \code{resource_id} into
 #'   \code{morie_fetch_ckan(resource_id = ...)}.
 #' @examples
-#' \dontrun{
-#' hits <- morie_ckan_search("cannabis survey", portal = "open.canada.ca")
-#' head(hits[, c("dataset_title", "resource_id", "format")])
+#' \donttest{
+#' hits <- try(morie_ckan_search("cannabis survey",
+#'                               portal = "open.canada.ca"))
+#' if (is.data.frame(hits)) {
+#'   head(hits[, c("dataset_title", "resource_id", "format")])
+#' }
 #' }
 #' @seealso \code{\link{morie_fetch_ckan}}, \code{\link{morie_fetch}}
 #' @export
@@ -417,12 +423,14 @@ morie_ckan_search <- function(query, portal = "open.canada.ca",
 #'   \code{Inf} -- fetch the whole layer).
 #' @return A data.frame of feature attributes (geometry is dropped).
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' # Toronto Police Service public hub layer (same layer the TPS
+#' # bridge in tps_statphysics.R pages from).
 #' layer <- paste0(
-#'   "https://services.arcgis.com/ORG/arcgis/rest/",
-#'   "services/Assault/FeatureServer/0"
+#'   "https://services.arcgis.com/S9th0jAJ7bqgIRjw/arcgis/rest/",
+#'   "services/Neighbourhood_Crime_Rates_Open_Data/FeatureServer/0"
 #' )
-#' df <- morie_fetch_arcgis(layer)
+#' df <- try(morie_fetch_arcgis(layer, max_records = 50))
 #' }
 #' @seealso \code{\link{morie_fetch}}
 #' @export

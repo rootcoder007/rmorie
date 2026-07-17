@@ -51,19 +51,27 @@ version), verify it first — `grep`, `gh api`, the file on disk.
 Hallucinated assertions about state are the most expensive class of
 mistake in this codebase.
 
-## Wrapper-as-extender pattern (Phase 1)
+## Native core + opt-in extenders
 
-rmorie's R API is built on a deliberate principle: **never duplicate
-a function that an established CRAN package already provides**.
-Instead, expose a thin `morie_<area>_<fn>` wrapper that delegates to
-the CRAN package. Examples:
+Since the native-specializations marathon (2026-07), rmorie's runtime
+is **fully native**: every statistical estimator in `R/` runs on
+rmorie's own R/C++ implementations, cross-validated against the
+reference CRAN packages in `tests/` (the reference packages appear in
+`Suggests` ONLY for those cross-validation tests). Do not add a
+runtime delegation to an external statistical package — implement
+natively and cross-validate instead. Example: 
+`morie_did_chaisemartin_dhaultfoeuille()` runs `.morie_didm_native()`
+(it delegated to `DIDmultiplegt` before the marathon).
 
-- `morie_did_chaisemartin_dhaultfoeuille()` → `DIDmultiplegt::did_multiplegt(mode = "old", ...)`
-- `morie_np_kernel_reg()` → `np::npregbw()` + `np::npreg()`
-- `morie_geostat_krige()` → `gstat::krige(locations = data, ...)`
-- `morie_rdd_density_test()` → `rddensity::rddensity()`
+The old **wrapper-as-extender** pattern survives only in the
+documented opt-in extender files (`R/extenders_*.R`), where a thin
+`morie_<area>_<fn>` wrapper intentionally delegates to a CRAN
+package the user installed on purpose (e.g. `morie_geostat_krige()` →
+`gstat::krige`, `morie_np_kernel_reg()` → `np::npreg`,
+`morie_rdd_density_test()` → `rddensity::rddensity`). The
+`dependency-hygiene` workflow enforces this boundary.
 
-When writing a new wrapper:
+When touching an extender wrapper:
 
 1. **Verify the upstream package is on CRAN, not archived.** Check
    `pkg %in% rownames(available.packages())` before adding to

@@ -44,11 +44,20 @@ returns fewer rows than \code{page_size} (the last page) or
 portal (Chicago, NYC, Seattle, etc.).
 }
 \examples{
-\dontrun{
-df <- morie_ingest_chicago_socrata(
-  "https://data.cityofnewyork.us/resource/uip8-fykc.json",
-  where = "arrest_year = 2023",
-  max_features = 5000L
-)
+\donttest{
+# Chicago crimes (schema verified 2026-07: `year` is a real column)
+df <- try(morie_ingest_chicago_socrata(
+  "https://data.cityofchicago.org/resource/ijzp-q8t2.json",
+  where = "year = 2023",
+  select = "id,date,primary_type",
+  max_features = 100L
+))
+# NYC arrests use `arrest_date`, not `arrest_year`:
+df2 <- try(morie_ingest_chicago_socrata(
+  "https://data.cityofnewyork.us/resource/8h9b-rp9u.json",
+  where = "date_extract_y(arrest_date) = 2023",
+  select = "arrest_key,arrest_date",
+  max_features = 100L
+))
 }
 }
