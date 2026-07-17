@@ -98,6 +98,34 @@ production statistics path requires any of them.
 | Hawkes MLE | hawkes | exponential-kernel loglik == hawkes |
 | SHA-256/HMAC/PBKDF2 + PQC | digest, openssl | NIST FIPS + RFC vectors bit-for-bit; ML-KEM/ML-DSA/SLH-DSA/HQC via liboqs |
 | Parsers (JSON/XML/HTML/Parquet) | jsonlite, xml2, arrow | jsonlite-parity outputs; accelerators optional |
+| Weighting family (ps/entropy/CBPS/OW/stabilized/SuperLearner) | WeightIt, CBPS | glm weights == WeightIt to 1e-8; CBPS moments < 1e-6 |
+| Modern staggered DiD (Sun-Abraham/Borusyak/did2s) | did2s, didimputation | point estimates within 0.02 of did2s |
+| Unified front-ends (morie_did/morie_iv_2sls/morie_rdd) | did, AER, rdrobust | CS overall == did::aggte to 0.1; 2SLS == ivreg to 1e-6 |
+| Crim methods (ETAS/multivariate Hawkes/Knox/RTM) | (papers) | recovers simulated truths; Knox permutation calibrated |
+
+## What rmorie is NOT
+
+rmorie is not a wrapper. At runtime it does not call:
+
+- **MatchIt / optmatch / Matching / designmatch** (matching) — replaced by `morie_matching_*`
+- **WeightIt / CBPS** (propensity weighting) — replaced by `morie_weight_*`
+- **survey** (design-based estimation) — replaced by the native svyglm engine behind `morie_ipw_*` / `morie_ebac_*`
+- **DoubleML / mlr3** (double machine learning) — replaced by the native PLR/IRM/PLIV cross-fit engines
+- **grf / EconML-style learners** (heterogeneous effects) — replaced by the native causal forest and T/S/X/DR meta-learners
+- **dagitty / DoWhy** (DAGs, identification, refutation) — replaced by `morie_dag_*`
+- **did / fixest / did2s / didimputation** (modern DiD) — replaced by `morie_did_*` with auto-dispatch to Callaway-Sant'Anna, Sun-Abraham, Borusyak, and Gardner two-stage
+- **rdrobust** (RDD) — replaced by `morie_rdd` (IK bandwidth + McCrary + placebo cutoffs bundled)
+- **Synth** (synthetic control) — replaced by `morie_synth_control` with built-in placebo inference
+- **AER / ivreg** (IV) — replaced by `morie_iv_2sls` with the Staiger-Stock refusal gate
+- **psych / mirt** (psychometrics) — replaced by `morie_psymet_*` and `morie_irt_*`
+- **gstat / spdep** (geostatistics) — replaced by the native variogram/kriging/GWR stack
+- **signal / wavelets** (DSP) — replaced by `rgfir`/`rgiir`/`rgwav` and `morie_dsp_*`
+- **hawkes** (point processes) — replaced by the native C++ Hawkes kernel family + `morie_crim_etas` / `morie_crim_hawkes_multivariate`
+- **digest / openssl** (hashing/KDF) — replaced by the native C++ SHA-2/HMAC/PBKDF2 + liboqs PQC
+- **jsonlite / xml2 / arrow as requirements** (parsing) — replaced by `morie_fetch_*` pure-R parsers (those packages remain optional fast paths only)
+
+Those packages appear in `Suggests` solely so `tests/cross/` can
+prove, on every CI run, that the native engines match them.
 
 ## What's in v1.1.4
 

@@ -112,6 +112,33 @@ morie_spatial_variogram_fit <- function(coords, values,
 #' @return A data frame with \code{pred} and \code{var}.
 #' @references Cressie, N. (1993). \emph{Statistics for Spatial Data}.
 #' @export
+
+# Fast WLS fit of a variogram model on the binned empirical variogram
+# (Cressie 1985 weights n_h / h^2) -- the gstat::fit.variogram
+# analogue. Milliseconds at any n; the full Gaussian-likelihood MLE
+# stays available via morie_spatial_variogram_fit().
+.morie_vgm_wls_fit <- function(coords, values, model = "exponential") {
+  emp <- morie_spatial_variogram(coords, values)
+  h <- emp$dist
+  g <- emp$gamma
+  w <- emp$np / pmax(h^2, 1e-12)
+  ok <- is.finite(h) & is.finite(g) & is.finite(w) & h > 0
+  h <- h[ok]; g <- g[ok]; w <- w[ok]
+  v0 <- max(g, na.rm = TRUE)
+  obj <- function(p) {
+    nug <- exp(p[1]); ps <- exp(p[2]); rg <- exp(p[3])
+    fit <- .morie_vgm_gamma(h, model, nug, ps, rg)
+    sum(w * (g - fit)^2)
+  }
+  opt <- stats::optim(log(c(v0 * 0.1 + 1e-8, v0 * 0.9 + 1e-8,
+                            max(h) / 3)), obj,
+                      method = "Nelder-Mead",
+                      control = list(maxit = 500L))
+  list(model = model, nugget = exp(opt$par[1]),
+       psill = exp(opt$par[2]), range = exp(opt$par[3]),
+       method = "WLS (Cressie weights)")
+}
+
 morie_spatial_krige <- function(coords, values, new_coords,
                                 vgm = NULL) {
   coords <- as.matrix(coords)
@@ -119,7 +146,10 @@ morie_spatial_krige <- function(coords, values, new_coords,
   y <- as.numeric(values)
   n <- length(y)
   if (is.null(vgm)) {
-    vgm <- morie_spatial_variogram_fit(coords, y)
+    # Default to the fast WLS fit; pass vgm =
+    # morie_spatial_variogram_fit(...) explicitly for the full
+    # Gaussian-likelihood MLE (slower, higher quality).
+    vgm <- .morie_vgm_wls_fit(coords, y)
   }
   G <- .morie_vgm_gamma(as.matrix(stats::dist(coords)),
                         vgm$model, vgm$nugget, vgm$psill, vgm$range)

@@ -40,7 +40,17 @@ jobs:
               "DIDmultiplegt","TwoWayFEWeights","HonestDiD","coresynth",
               "AER","ivreg","gmm","plm","psych","mirt","gstat","spdep",
               "signal","wavelets","hawkes","emhawkes","bsts","xml2",
-              "jsonlite","arrow","httr","httr2","digest","openssl"}
+              "jsonlite","arrow","httr","httr2","digest","openssl",
+              # phase-32 additions
+              "WeightIt","CBPS","ebal","cem","ATE","EValue","srvyr",
+              "Synth","tidysynth","CausalImpact","did2s","didimputation",
+              "rdd","rdpower","rdlocrand","ivmodel","weakiv","ggdag",
+              "lavaan","semTools","ltm","sf","sp","spgwr","GWmodel",
+              "SpatialEpi","raster","terra","stars","waveslim","wmtsa",
+              "rwt","ptproc","NHPoisson","curl","rvest","XML","RJSONIO",
+              "sodium","bcrypt","argon2","keyring","rpart",
+              "randomForest","xgboost","glmnet","e1071","kernlab",
+              "nnet","mlr","caret","tidymodels","recipes"}
           hit = sorted(forbidden & set(have))
           if hit:
               sys.exit("FORBIDDEN DEPS PRESENT: " + ", ".join(hit))
