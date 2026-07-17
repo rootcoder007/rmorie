@@ -40,27 +40,40 @@ morie_crim_etas <- function(times, magnitudes = NULL, m0 = NULL,
   if (is.null(t_max)) t_max <- max(t)
   dm <- m - m0
 
+  # Constant marks leave alpha unidentified (a flat likelihood
+  # direction no optimizer can converge along): fix alpha = 0 then.
+  alpha_free <- diff(range(dm)) > 1e-12
   negll <- function(par) {
-    mu <- exp(par[1]); K <- exp(par[2]); alpha <- par[3]
-    cc <- exp(par[4]); p <- 1 + exp(par[5]) # p > 1
+    # Bounded transforms keep every intermediate finite (optim
+    # aborts outright on a non-finite objective).
+    if (any(!is.finite(par))) return(1e10)
+    mu <- exp(min(par[1], 20)); K <- exp(min(par[2], 20))
+    alpha <- if (alpha_free) max(min(par[3], 10), -10) else 0
+    cc <- exp(min(par[4], 20)); p <- 1 + exp(min(par[5], 5)) # p > 1
+    prod_m <- exp(pmin(alpha * dm, 30))
     lam <- numeric(n)
     for (i in seq_len(n)) {
       if (i == 1L) { lam[i] <- mu; next }
       dt <- t[i] - t[seq_len(i - 1L)]
-      lam[i] <- mu + K * sum(exp(alpha * dm[seq_len(i - 1L)]) *
-                               (dt + cc)^(-p))
+      lam[i] <- mu + K * sum(prod_m[seq_len(i - 1L)] * (dt + cc)^(-p))
     }
     if (any(lam <= 0) || any(!is.finite(lam))) return(1e10)
     # Integral of the triggering kernel over [t_i, t_max]:
     # K e^{a dm_i} [c^{1-p} - (t_max - t_i + c)^{1-p}] / (p - 1)
-    integ <- mu * t_max + K * sum(exp(alpha * dm) *
+    integ <- mu * t_max + K * sum(prod_m *
       (cc^(1 - p) - (t_max - t + cc)^(1 - p)) / (p - 1))
-    -(sum(log(lam)) - integ)
+    v <- -(sum(log(lam)) - integ)
+    if (!is.finite(v)) 1e10 else v
   }
   init <- c(log(n / (2 * t_max)), log(0.2), 0.5, log(0.01), log(0.1))
-  opt <- stats::optim(init, negll, method = "L-BFGS-B",
-                      control = list(maxit = 500L))
-  mu <- exp(opt$par[1]); K <- exp(opt$par[2]); alpha <- opt$par[3]
+  # Nelder-Mead with one restart from the first optimum -- the
+  # standard remedy for premature simplex collapse in 5 parameters.
+  opt <- stats::optim(init, negll, method = "Nelder-Mead",
+                      control = list(maxit = 2000L))
+  opt <- stats::optim(opt$par, negll, method = "Nelder-Mead",
+                      control = list(maxit = 2000L))
+  mu <- exp(opt$par[1]); K <- exp(opt$par[2])
+  alpha <- if (alpha_free) opt$par[3] else 0
   cc <- exp(opt$par[4]); p <- 1 + exp(opt$par[5])
   # Branching ratio: E[offspring] = K E[e^{a dm}] c^{1-p} / (p-1).
   br <- K * mean(exp(alpha * dm)) * cc^(1 - p) / (p - 1)
