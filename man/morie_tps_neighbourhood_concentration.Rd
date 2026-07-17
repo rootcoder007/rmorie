@@ -20,3 +20,12 @@ Uses HOOD_158 (the 158-neighbourhood scheme) and reports a Gini
 coefficient plus the cumulative share of incidents in the top-10
 and top-20 neighbourhoods.
 }
+\examples{
+\donttest{
+df <- try(morie_datasets_tps_assault(max_features = 200L))
+if (!inherits(df, "try-error")) {
+  res <- try(morie_tps_neighbourhood_concentration(df, ds_name = "assault"))
+  if (!inherits(res, "try-error")) str(res, max.level = 1)
+}
+}
+}

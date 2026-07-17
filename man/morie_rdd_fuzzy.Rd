@@ -49,3 +49,14 @@ A named list with elements \code{estimate}, \code{std_error}, \code{t_stat}, \co
 \description{
 Fuzzy RDD treatment effect via instrumented Wald ratio
 }
+\examples{
+set.seed(34)
+n <- 1000
+x <- runif(n, -1, 1)
+tr <- as.integer(xor(x >= 0, rbinom(n, 1, 0.1) == 1))
+y <- 0.3 * x + 1.5 * tr + rnorm(n, sd = 0.5)
+d <- data.frame(y, x, tr)
+res <- morie_rdd_fuzzy(d, outcome = "y", running = "x",
+                       treatment = "tr", cutoff = 0)
+res$estimate
+}

@@ -15,3 +15,7 @@ A \code{morie_effect_size}.
 \description{
 Coefficient of variation
 }
+\examples{
+r <- coefficient_of_variation(c(1, 2, 3, 4, 5))
+r$estimate
+}

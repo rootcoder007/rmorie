@@ -12,3 +12,8 @@ Single character (e.g. \code{"0.15.0"}); empty if liboqs absent.
 \description{
 liboqs runtime version string
 }
+\examples{
+if (morie_crypto_liboqs_available()) {
+  morie_crypto_liboqs_version()
+}
+}

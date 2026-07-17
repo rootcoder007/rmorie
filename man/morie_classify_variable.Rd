@@ -29,3 +29,8 @@ A named list with classes \code{morie_variable_taxonomy} /
 \description{
 Classify one variable.
 }
+\examples{
+t <- morie_classify_variable("RecordID", "string", NULL, "any")
+t$level
+t$role
+}

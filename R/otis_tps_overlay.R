@@ -214,6 +214,14 @@ morie_otis_tps_yoy_correlation <- function(otis_b01, tps_datasets) {
 #' @param otis_b01 OTIS b01 data.frame.
 #' @return A \code{morie_otis_analysis_result} with a year x region
 #'   count matrix.
+#' @examples
+#' set.seed(2026)
+#' b01 <- data.frame(
+#'   EndFiscalYear = rep(2023:2025, each = 30),
+#'   Region_AtTimeOfPlacement = sample(c("Toronto", "Central", "Eastern"), 90, TRUE),
+#'   NumberConsecutiveDays_Segregation = sample(1:25, 90, TRUE))
+#' res <- morie_otis_tps_per_region_rollup(b01)
+#' res$payload$by_region
 #' @export
 morie_otis_tps_per_region_rollup <- function(otis_b01) {
   stopifnot(is.data.frame(otis_b01))
@@ -276,6 +284,15 @@ morie_otis_tps_per_region_rollup <- function(otis_b01) {
 #'
 #' @inheritParams morie_otis_tps_yoy_correlation
 #' @return An object of class \code{"morie_otis_analysis_result"}.
+#' @examples
+#' set.seed(2026)
+#' b01 <- data.frame(
+#'   EndFiscalYear = rep(2023:2025, each = 30),
+#'   Region_AtTimeOfPlacement = sample(c("Toronto", "Central", "Eastern"), 90, TRUE),
+#'   NumberConsecutiveDays_Segregation = sample(1:25, 90, TRUE))
+#' tps <- list(assault = data.frame(OCC_YEAR = rep(2020:2025, times = 200)))
+#' res <- morie_otis_tps_composite_overlay(b01, tps)
+#' res$title
 #' @export
 morie_otis_tps_composite_overlay <- function(otis_b01, tps_datasets) {
   morie_otis_tps_yoy_correlation(otis_b01, tps_datasets)
@@ -293,6 +310,15 @@ morie_otis_tps_composite_overlay <- function(otis_b01, tps_datasets) {
 #' @param out_dir Optional output directory for \code{overlay_<name>.rds}.
 #' @return Named list of \code{morie_otis_analysis_result}s
 #'   (\code{region_rollup}, \code{yoy_correlation}).
+#' @examples
+#' set.seed(2026)
+#' b01 <- data.frame(
+#'   EndFiscalYear = rep(2023:2025, each = 30),
+#'   Region_AtTimeOfPlacement = sample(c("Toronto", "Central", "Eastern"), 90, TRUE),
+#'   NumberConsecutiveDays_Segregation = sample(1:25, 90, TRUE))
+#' tps <- list(assault = data.frame(OCC_YEAR = rep(2020:2025, times = 200)))
+#' res <- morie_otis_tps_analyze_all(b01, tps)
+#' names(res)
 #' @export
 morie_otis_tps_analyze_all <- function(otis_b01, tps_datasets,
                                          out_dir = NULL) {

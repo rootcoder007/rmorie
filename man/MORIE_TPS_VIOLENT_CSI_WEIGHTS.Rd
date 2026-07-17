@@ -12,3 +12,6 @@ Named numeric vector.
 \description{
 Violent-CSI weights for the 9 TPS open-data categories.
 }
+\examples{
+MORIE_TPS_VIOLENT_CSI_WEIGHTS
+}

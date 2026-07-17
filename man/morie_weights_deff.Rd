@@ -15,3 +15,7 @@ A numeric value.
 \description{
 Kish design effect (n / ESS).
 }
+\examples{
+set.seed(1)
+morie_weights_deff(runif(30, 0.5, 2))
+}

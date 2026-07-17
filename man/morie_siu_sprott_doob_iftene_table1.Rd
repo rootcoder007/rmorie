@@ -12,3 +12,6 @@ A \code{morie_siu_result}.
 \description{
 Sprott-Doob-Iftene (May 2021) Table 1: IEDM-reviewed population
 }
+\examples{
+head(morie_siu_sprott_doob_iftene_table1())
+}

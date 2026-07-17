@@ -41,3 +41,11 @@ A named list with elements \code{estimate}, \code{std_error}, \code{t_stat}, \co
 \description{
 RDD with discrete running variable
 }
+\examples{
+set.seed(1)
+x <- runif(400, -1, 1)
+y <- 0.3 * x + 1.0 * (x >= 0) + rnorm(400, sd = 0.3)
+d <- data.frame(x, y)
+res <- morie_rdd_discrete(d, "y", "x")
+res$method
+}

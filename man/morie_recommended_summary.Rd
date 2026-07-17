@@ -15,3 +15,10 @@ Character scalar — plain-language hint at which summary suits.
 \description{
 Recommended summary statistic for a single variable.
 }
+\examples{
+tax <- structure(
+  list(dataset_name = "X", column_name = "score", level = "ordinal",
+       cardinality = "unknown", role = "covariate", cross_year_safe = TRUE),
+  class = c("morie_variable_taxonomy", "list"))
+morie_recommended_summary(tax)
+}

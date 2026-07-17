@@ -196,6 +196,10 @@ NULL
 #' @return A \code{morie_otis_analysis_result} list with reason / alert /
 #'   year-trend tables. Within-year only -- \code{UniqueIndividual_ID}
 #'   is not cross-year-safe.
+#' @examples
+#' otis_b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+#' res <- morie_otis_analyze_b01(otis_b01)
+#' class(res)
 #' @export
 morie_otis_analyze_b01 <- function(data) {
   stopifnot(is.data.frame(data))
@@ -261,6 +265,10 @@ morie_otis_analyze_b01 <- function(data) {
 #' Aggregate segregation days per person per year (b02)
 #' @param data b02 data.frame.
 #' @return An object of class \code{"morie_otis_analysis_result"}.
+#' @examples
+#' otis_b02 <- morie_synth_otis("b02", n = 120L, seed = 1L)
+#' res <- morie_otis_analyze_b02(otis_b02)
+#' class(res)
 #' @export
 morie_otis_analyze_b02 <- function(data) {
   s <- .otis_summary_lines(data, "b02",
@@ -286,6 +294,10 @@ morie_otis_analyze_b02 <- function(data) {
 #' Segregation placements by alert x institution (b03)
 #' @param data b03 data.frame.
 #' @return An object of class \code{"morie_otis_analysis_result"}.
+#' @examples
+#' otis_b03 <- morie_synth_otis("b03", n = 120L, seed = 1L)
+#' res <- morie_otis_analyze_b03(otis_b03)
+#' class(res)
 #' @export
 morie_otis_analyze_b03 <- function(data) {
   s <- .otis_summary_lines(data, "b03",
@@ -305,6 +317,10 @@ morie_otis_analyze_b03 <- function(data) {
 #' Placement durations by region & gender (b04)
 #' @param data b04 data.frame.
 #' @return An object of class \code{"morie_otis_analysis_result"}.
+#' @examples
+#' otis_b04 <- morie_synth_otis("b04", n = 120L, seed = 1L)
+#' res <- morie_otis_analyze_b04(otis_b04)
+#' class(res)
 #' @export
 morie_otis_analyze_b04 <- function(data) {
   s <- .otis_summary_lines(data, "b04",
@@ -321,6 +337,10 @@ morie_otis_analyze_b04 <- function(data) {
 #' Distribution of placements by binned duration (b05)
 #' @param data b05 data.frame.
 #' @return An object of class \code{"morie_otis_analysis_result"}.
+#' @examples
+#' otis_b05 <- morie_synth_otis("b05", n = 120L, seed = 1L)
+#' res <- morie_otis_analyze_b05(otis_b05)
+#' class(res)
 #' @export
 morie_otis_analyze_b05 <- function(data) {
   s <- .otis_summary_lines(data, "b05",
@@ -336,6 +356,10 @@ morie_otis_analyze_b05 <- function(data) {
 #' Reasons for placement x institution x gender (b06)
 #' @param data b06 data.frame.
 #' @return An object of class \code{"morie_otis_analysis_result"}.
+#' @examples
+#' otis_b06 <- morie_synth_otis("b06", n = 120L, seed = 1L)
+#' res <- morie_otis_analyze_b06(otis_b06)
+#' class(res)
 #' @export
 morie_otis_analyze_b06 <- function(data) {
   s <- .otis_summary_lines(data, "b06",
@@ -355,6 +379,10 @@ morie_otis_analyze_b06 <- function(data) {
 #' Alerts x gender (b07)
 #' @param data b07 data.frame.
 #' @return An object of class \code{"morie_otis_analysis_result"}.
+#' @examples
+#' otis_b07 <- morie_synth_otis("b07", n = 120L, seed = 1L)
+#' res <- morie_otis_analyze_b07(otis_b07)
+#' class(res)
 #' @export
 morie_otis_analyze_b07 <- function(data) {
   s <- .otis_summary_lines(data, "b07",
@@ -389,6 +417,10 @@ morie_otis_analyze_b07 <- function(data) {
 #' Durations by institution & gender (b08)
 #' @param data b08 data.frame.
 #' @return An object of class \code{"morie_otis_analysis_result"}.
+#' @examples
+#' otis_b08 <- morie_synth_otis("b08", n = 120L, seed = 1L)
+#' res <- morie_otis_analyze_b08(otis_b08)
+#' class(res)
 #' @export
 morie_otis_analyze_b08 <- function(data) {
   s <- .otis_summary_lines(data, "b08",
@@ -405,6 +437,10 @@ morie_otis_analyze_b08 <- function(data) {
 #' Individuals by number of placements x gender (b09)
 #' @param data b09 data.frame.
 #' @return An object of class \code{"morie_otis_analysis_result"}.
+#' @examples
+#' otis_b09 <- morie_synth_otis("b09", n = 120L, seed = 1L)
+#' res <- morie_otis_analyze_b09(otis_b09)
+#' class(res)
 #' @export
 morie_otis_analyze_b09 <- function(data) {
   s <- .otis_summary_lines(data, "b09",
@@ -425,6 +461,10 @@ morie_otis_analyze_b09 <- function(data) {
 #' Total individuals x custody/RC/seg x gender (c01)
 #' @param data c01 data.frame.
 #' @return An object of class \code{"morie_otis_analysis_result"}.
+#' @examples
+#' otis_c01 <- morie_synth_otis("c01", n = 120L, seed = 1L)
+#' res <- morie_otis_analyze_c01(otis_c01)
+#' class(res)
 #' @export
 morie_otis_analyze_c01 <- function(data) {
   s <- .otis_summary_lines(data, "c01",
@@ -452,6 +492,10 @@ morie_otis_analyze_c01 <- function(data) {
 #' Individuals in RC/seg by institution (c02)
 #' @param data c02 data.frame.
 #' @return An object of class \code{"morie_otis_analysis_result"}.
+#' @examples
+#' otis_c02 <- morie_synth_otis("c02", n = 120L, seed = 1L)
+#' res <- morie_otis_analyze_c02(otis_c02)
+#' class(res)
 #' @export
 morie_otis_analyze_c02 <- function(data) {
   s <- .otis_summary_lines(data, "c02",
@@ -469,6 +513,10 @@ morie_otis_analyze_c02 <- function(data) {
 #' Individuals x race x gender (c03)
 #' @param data c03 data.frame.
 #' @return An object of class \code{"morie_otis_analysis_result"}.
+#' @examples
+#' otis_c03 <- morie_synth_otis("c03", n = 120L, seed = 1L)
+#' res <- morie_otis_analyze_c03(otis_c03)
+#' class(res)
 #' @export
 morie_otis_analyze_c03 <- function(data) {
   s <- .otis_summary_lines(data, "c03",
@@ -546,6 +594,10 @@ morie_otis_analyze_c06 <- .otis_c_simple(
 #' Individuals x alerts x gender (c07)
 #' @param data c07 data.frame.
 #' @return An object of class \code{"morie_otis_analysis_result"}.
+#' @examples
+#' otis_c07 <- morie_synth_otis("c07", n = 120L, seed = 1L)
+#' res <- morie_otis_analyze_c07(otis_c07)
+#' class(res)
 #' @export
 morie_otis_analyze_c07 <- function(data) {
   s <- .otis_summary_lines(data, "c07",
@@ -578,6 +630,10 @@ morie_otis_analyze_c09 <- .otis_c_simple(
 #' RC/seg aggregate durations by institution (c10)
 #' @param data c10 data.frame.
 #' @return An object of class \code{"morie_otis_analysis_result"}.
+#' @examples
+#' otis_c10 <- morie_synth_otis("c10", n = 120L, seed = 1L)
+#' res <- morie_otis_analyze_c10(otis_c10)
+#' class(res)
 #' @export
 morie_otis_analyze_c10 <- function(data) {
   s <- .otis_summary_lines(data, "c10",
@@ -594,6 +650,10 @@ morie_otis_analyze_c10 <- function(data) {
 #' Individuals by aggregate-duration bin (c11)
 #' @param data c11 data.frame.
 #' @return An object of class \code{"morie_otis_analysis_result"}.
+#' @examples
+#' otis_c11 <- morie_synth_otis("c11", n = 120L, seed = 1L)
+#' res <- morie_otis_analyze_c11(otis_c11)
+#' class(res)
 #' @export
 morie_otis_analyze_c11 <- function(data) {
   s <- .otis_summary_lines(data, "c11",
@@ -609,6 +669,10 @@ morie_otis_analyze_c11 <- function(data) {
 #' RC/seg aggregate durations by region & gender (c12)
 #' @param data c12 data.frame.
 #' @return An object of class \code{"morie_otis_analysis_result"}.
+#' @examples
+#' otis_c12 <- morie_synth_otis("c12", n = 120L, seed = 1L)
+#' res <- morie_otis_analyze_c12(otis_c12)
+#' class(res)
 #' @export
 morie_otis_analyze_c12 <- function(data) {
   s <- .otis_summary_lines(data, "c12",
@@ -630,6 +694,10 @@ morie_otis_analyze_c12 <- function(data) {
 #' Person-level custodial deaths (d01)
 #' @param data d01 data.frame.
 #' @return A logical scalar.
+#' @examples
+#' otis_d01 <- morie_synth_otis("d01", n = 120L, seed = 1L)
+#' res <- morie_otis_analyze_d01(otis_d01)
+#' class(res)
 #' @export
 morie_otis_analyze_d01 <- function(data) {
   s <- .otis_summary_lines(data, "d01",
@@ -701,6 +769,10 @@ morie_otis_analyze_d05 <- .otis_d_simple(
 #' Custodial deaths by alert x medical cause (d06)
 #' @param data d06 data.frame from OTIS.
 #' @return RichResult with summary + medical-cause-by-alert crosstab.
+#' @examples
+#' otis_d06 <- morie_synth_otis("d06", n = 120L, seed = 1L)
+#' res <- morie_otis_analyze_d06(otis_d06)
+#' class(res)
 #' @export
 morie_otis_analyze_d06 <- function(data) {
   s <- .otis_summary_lines(data, "d06",
@@ -715,6 +787,10 @@ morie_otis_analyze_d06 <- function(data) {
 #' Custodial deaths by alert x housing unit (d07)
 #' @param data d07 data.frame from OTIS.
 #' @return RichResult with summary + housing-unit-by-alert crosstab.
+#' @examples
+#' otis_d07 <- morie_synth_otis("d07", n = 120L, seed = 1L)
+#' res <- morie_otis_analyze_d07(otis_d07)
+#' class(res)
 #' @export
 morie_otis_analyze_d07 <- function(data) {
   s <- .otis_summary_lines(data, "d07",
@@ -742,6 +818,9 @@ morie_otis_analyze_d07 <- function(data) {
 #'   \code{c09}, \code{c10}, \code{c11}, \code{c12}, \code{d01},
 #'   \code{d02}, \code{d03}, \code{d04}, \code{d05}, \code{d06},
 #'   \code{d07}.
+#' @examples
+#' res <- morie_otis_analyzers()
+#' head(names(res))
 #' @export
 morie_otis_analyzers <- function() {
   list(
@@ -772,6 +851,10 @@ morie_otis_analyzers <- function() {
 #' @param out_dir Optional directory to write per-dataset
 #'   \code{overlay_<id>.rds} files. \code{NULL} means in-memory only.
 #' @return Named list of \code{morie_otis_analysis_result}s.
+#' @examples
+#' ds <- morie_synth_otis_all(n = 80L, seed = 2L)
+#' res <- try(morie_otis_analyze_all(ds))
+#' if (!inherits(res, "try-error")) names(res)
 #' @export
 morie_otis_analyze_all <- function(datasets, out_dir = NULL) {
   stopifnot(is.list(datasets))
@@ -797,6 +880,9 @@ morie_otis_analyze_all <- function(datasets, out_dir = NULL) {
 }
 
 #' @return \code{x}, invisibly.
+#' @examples
+#' otis_b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+#' print(morie_otis_analyze_b01(otis_b01))
 #' @export
 print.morie_otis_analysis_result <- function(x, ...) {
   cat(x$title, "\

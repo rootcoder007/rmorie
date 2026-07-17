@@ -26,3 +26,7 @@ A \code{data.frame}.
 Ontario Use-of-Force individual records (one row per
 individual-in-incident)
 }
+\examples{
+df <- morie_datasets_arsau_uof_individual_records(offline = TRUE)
+df[, c("Indiv_Index", "Race", "AgeCategory", "Gender")]
+}

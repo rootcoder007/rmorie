@@ -28,3 +28,7 @@ A \code{data.frame} of the requested dataset (a 0-row typed frame when the data 
 \description{
 OTIS c10 -- Aggregate durations by institution
 }
+\examples{
+df <- morie_datasets_otis_c10_aggregate_durations_by_institution(offline = TRUE)
+names(df)
+}

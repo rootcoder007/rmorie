@@ -32,3 +32,7 @@ A \code{data.frame}.
 \description{
 Requires an API key (\verb{api_key=} or \code{FBI_CDE_API_KEY} env var).
 }
+\examples{
+df <- morie_datasets_nibrs(year = 2023L, offline = TRUE)
+head(df)
+}

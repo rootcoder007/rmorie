@@ -39,3 +39,7 @@ A named list with elements \code{power}, \code{std_error}, \code{effective_n}, \
 \description{
 RDD power calculation
 }
+\examples{
+res <- morie_rdd_power(n = 500, tau = 0.5, sigma = 1, kernel = "triangular")
+res$power
+}

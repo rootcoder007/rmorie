@@ -16,3 +16,6 @@ Captured handler output as a single string.
 \description{
 Execute a single command and return the resulting text
 }
+\examples{
+cat(stat_bridge_exec("help"))
+}

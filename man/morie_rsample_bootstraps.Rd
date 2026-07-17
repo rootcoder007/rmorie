@@ -22,6 +22,13 @@ Thin pass-through that builds a tidymodels-style
 \code{rset} of bootstrap resamples via
 \code{rsample::bootstraps} and returns it untouched.
 }
+\examples{
+if (requireNamespace("rsample", quietly = TRUE)) {
+  set.seed(1)
+  rs <- morie_rsample_bootstraps(data.frame(x = rnorm(30)), times = 5L)
+  class(rs)
+}
+}
 \seealso{
 \code{rsample::bootstraps}, \code{rsample::vfold_cv}.
 }

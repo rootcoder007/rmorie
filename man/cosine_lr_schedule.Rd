@@ -30,4 +30,8 @@ total_steps, warmup_steps, method.
 \description{
 Cosine LR schedule with warmup (Loshchilov 2017)
 }
+\examples{
+morie:::cosine_lr_schedule(50L, lr_max = 1e-3, lr_min = 0,
+                           total_steps = 100L)
+}
 \keyword{internal}

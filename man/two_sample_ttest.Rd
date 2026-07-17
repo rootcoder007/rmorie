@@ -19,3 +19,7 @@ An object of class \code{"morie_test_result"}.
 \description{
 Independent two-sample t-test (equal or unequal variance)
 }
+\examples{
+set.seed(1)
+two_sample_ttest(rnorm(20), rnorm(20, 0.5))
+}

@@ -17,3 +17,7 @@ A numeric scalar: the composite reliability.
 Composite reliability from standardized factor loadings.
 CR = (sum lambda)^2 / ((sum lambda)^2 + sum(1 - lambda^2))
 }
+\examples{
+lam <- c(0.7, 0.8, 0.6)
+morie_psymet_cr(lam)
+}

@@ -12,3 +12,7 @@ A vector of the computed values.
 \description{
 Sorted vector of all command names + aliases
 }
+\examples{
+v <- all_stat_command_names()
+head(v)
+}

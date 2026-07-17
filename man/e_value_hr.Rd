@@ -17,3 +17,7 @@ A \code{morie_evalue} named-list.
 \description{
 Uses the HR-to-RR approximation from VanderWeele (2017).
 }
+\examples{
+res <- e_value_hr(2.0, ci_lower = 1.5, ci_upper = 2.5)
+res$e_value_point
+}

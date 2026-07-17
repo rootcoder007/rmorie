@@ -51,3 +51,11 @@ A vector of the computed values.
 Grid-based Anderson-Rubin confidence interval for a single endogenous
 variable.
 }
+\examples{
+set.seed(1); n <- 400
+z <- rbinom(n, 1, 0.5); u <- rnorm(n)
+d <- rbinom(n, 1, plogis(0.8 * z + 0.3 * u))
+y <- 0.5 * d + 0.4 * u + rnorm(n, sd = 0.5)
+df <- data.frame(y, d, z)
+morie_iv_anderson_rubin_ci(df, "y", "d", "z", grid_min = -2, grid_max = 2, grid_n = 50)
+}

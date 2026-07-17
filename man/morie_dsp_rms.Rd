@@ -15,6 +15,9 @@ Scalar RMS.
 \description{
 \code{sqrt(mean(x^2))}.
 }
+\examples{
+morie_dsp_rms(rep(3, 10))
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 5, sec. 5.2.
 }

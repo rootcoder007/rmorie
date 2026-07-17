@@ -33,3 +33,9 @@ A numeric vector of calibration weights.
 For multi-variable marginals use \code{morie_weights_rake()}; this helper is the
 single-variable convenience.
 }
+\examples{
+set.seed(1)
+df <- data.frame(x1 = runif(30, 1, 3))
+res <- morie_survey_calibrate(df, "x1", c(x1 = 60))
+str(res, max.level = 1)
+}

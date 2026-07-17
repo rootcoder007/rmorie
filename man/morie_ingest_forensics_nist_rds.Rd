@@ -39,3 +39,6 @@ library, ...) are multi-gigabyte and shipped on dedicated download
 servers; this function returns only the catalog records so the
 caller can pick what to download separately.
 }
+\examples{
+\donttest{try(morie_ingest_forensics_nist_rds(max_features = 1L))}
+}

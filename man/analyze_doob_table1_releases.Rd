@@ -13,3 +13,7 @@ tables, interpretation, and payload.
 \description{
 Renders Table 1 and computes overall success / revocation rates.
 }
+\examples{
+res <- analyze_doob_table1_releases()
+head(res$summary_lines)
+}

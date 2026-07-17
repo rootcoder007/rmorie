@@ -52,3 +52,9 @@ neighbourhood.
 
 Tags: ASR; TPS; Toronto Police; Annual Statistical Report; Tickets
 }
+\examples{
+\donttest{
+df <- try(morie_datasets_tps_tickets_issued(max_features = 5L))
+if (!inherits(df, "try-error")) head(df)
+}
+}

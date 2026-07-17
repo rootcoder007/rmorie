@@ -28,3 +28,7 @@ A \code{data.frame} of the requested dataset (a 0-row typed frame when the data 
 \description{
 Institution-level annual incident summary
 }
+\examples{
+df <- morie_datasets_corrections_uof_institution_summary()
+head(df)
+}

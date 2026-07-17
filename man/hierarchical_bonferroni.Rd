@@ -28,3 +28,7 @@ subsequent families are blocked from testing. rmorie-specific
 stage-list return shape; no drop-in CRAN equivalent (\pkg{gMCP}
 covers the concept but with a different graphical API).
 }
+\examples{
+res <- hierarchical_bonferroni(list(c(0.4, 0.5), c(0.001, 0.002)))
+str(res)
+}

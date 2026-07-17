@@ -11,6 +11,14 @@
 #' @param .bootstrap Logical; whether to bootstrap SEs (default TRUE).
 #' @return Named list with estimate, se, grid, J, alpha, n, method.
 #' @keywords internal
+#' @examples
+#' set.seed(18)
+#' n <- 120
+#' z <- rnorm(n)
+#' x <- 0.5 * z + rnorm(n, sd = 0.3)
+#' y <- 0.5 * x + rnorm(n, sd = 0.3)
+#' res <- hrzn1(x, y, z, J = 4)
+#' str(res)
 #' @export
 hrzn1 <- function(x, y, z, J = 5, alpha = 1e-3, grid = NULL,
                   .bootstrap = TRUE) {

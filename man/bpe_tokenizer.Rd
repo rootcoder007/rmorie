@@ -17,4 +17,9 @@ Named list with merges, vocab, corpus, n_merges, n_vocab, method.
 \description{
 Byte-pair encoding tokenizer (Sennrich 2016)
 }
+\examples{
+res <- morie:::bpe_tokenizer("low lower lowest low", num_merges = 5L)
+res$n_merges
+head(res$vocab)
+}
 \keyword{internal}

@@ -21,6 +21,14 @@ list with \code{fields} and \code{records} entries) and returns a
 tidy \code{data.frame} of column metadata.  Entries that lack an
 \code{id} are dropped.
 }
+\examples{
+sc <- list(fields = list(
+  list(id = "PoliceService", type = "text",
+       info = list(notes = "Name of the service.")),
+  list(id = "IncidentYear", type = "int",
+       info = list(notes = "Reporting year."))))
+morie_arsau_sidecar_schema(sc)
+}
 \references{
 CKAN \emph{datastore_search} response schema, as
 served by \code{datastore_search} (\url{https://data.ontario.ca/}).

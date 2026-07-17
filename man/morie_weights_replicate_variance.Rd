@@ -32,3 +32,9 @@ A named \code{list} (see Details).
 \description{
 \code{method} selects the rescaling: "JK1", "JKn", "BRR", "Fay", "bootstrap", "SDR".
 }
+\examples{
+set.seed(1)
+reps <- rnorm(50, 1.2, 0.05)
+res <- morie_weights_replicate_variance(1.2, reps, method = "bootstrap")
+str(res, max.level = 1)
+}

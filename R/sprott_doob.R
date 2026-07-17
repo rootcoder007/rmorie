@@ -483,6 +483,8 @@ morie_siu_sprott_doob_table23 <- function() {
 #' Sprott-Doob (Feb 2021) Table 4: length-of-stay distribution
 #'
 #' @return A \code{morie_siu_result}.
+#' @examples
+#' head(morie_siu_sprott_doob_table4())
 #' @export
 morie_siu_sprott_doob_table4 <- function() {
   t <- .SD_TABLE4_LENGTH_OF_STAY
@@ -514,6 +516,8 @@ morie_siu_sprott_doob_table4 <- function() {
 #' Sprott-Doob (Feb 2021) Table 11: Region x stay length
 #'
 #' @return A \code{morie_siu_result}.
+#' @examples
+#' head(morie_siu_sprott_doob_table11())
 #' @export
 morie_siu_sprott_doob_table11 <- function() {
   .morie_siu_rich(
@@ -544,6 +548,8 @@ morie_siu_sprott_doob_table11 <- function() {
 #' Sprott-Doob (Feb 2021) Table 12: regional over-/under-representation
 #'
 #' @return A \code{morie_siu_result}.
+#' @examples
+#' head(morie_siu_sprott_doob_table12())
 #' @export
 morie_siu_sprott_doob_table12 <- function() {
   t <- .SD_TABLE12_REGIONAL_OVERREP
@@ -576,6 +582,8 @@ morie_siu_sprott_doob_table12 <- function() {
 #' Sprott-Doob (Feb 2021) Table 15: Region x MH-flag
 #'
 #' @return A \code{morie_siu_result}.
+#' @examples
+#' head(morie_siu_sprott_doob_table15())
 #' @export
 morie_siu_sprott_doob_table15 <- function() {
   .morie_siu_rich(
@@ -605,6 +613,8 @@ morie_siu_sprott_doob_table15 <- function() {
 #' Sprott-Doob (Feb 2021) Table 22: Region x Mandela groups
 #'
 #' @return A \code{morie_siu_result}.
+#' @examples
+#' head(morie_siu_sprott_doob_table22())
 #' @export
 morie_siu_sprott_doob_table22 <- function() {
   .morie_siu_rich(
@@ -638,6 +648,8 @@ morie_siu_sprott_doob_table22 <- function() {
 #' Sprott-Doob-Iftene (May 2021) Table 1: IEDM-reviewed population
 #'
 #' @return A \code{morie_siu_result}.
+#' @examples
+#' head(morie_siu_sprott_doob_iftene_table1())
 #' @export
 morie_siu_sprott_doob_iftene_table1 <- function() {
   sections <- list(
@@ -684,6 +696,8 @@ morie_siu_sprott_doob_iftene_table1 <- function() {
 #' Sprott-Doob-Iftene (May 2021) Table 9: IEDM review outcomes
 #'
 #' @return A \code{morie_siu_result}.
+#' @examples
+#' head(morie_siu_sprott_doob_iftene_table9())
 #' @export
 morie_siu_sprott_doob_iftene_table9 <- function() {
   t <- .SD_TABLE9_MAY2021_IEDM_DECISIONS
@@ -723,6 +737,8 @@ morie_siu_sprott_doob_iftene_table9 <- function() {
 #' Sprott-Doob-Iftene (May 2021) Table 10: per-IEDM decision variance
 #'
 #' @return A \code{morie_siu_result}.
+#' @examples
+#' head(morie_siu_sprott_doob_iftene_table10())
 #' @export
 morie_siu_sprott_doob_iftene_table10 <- function() {
   pcts <- .SD_TABLE10_MAY2021_PER_IEDM$remain_pct
@@ -760,6 +776,8 @@ morie_siu_sprott_doob_iftene_table10 <- function() {
 #' Sprott-Doob-Iftene (May 2021) Table 15: long-stay no-IEDM cases
 #'
 #' @return A \code{morie_siu_result}.
+#' @examples
+#' head(morie_siu_sprott_doob_iftene_table15())
 #' @export
 morie_siu_sprott_doob_iftene_table15 <- function() {
   .morie_siu_rich(

@@ -24,6 +24,14 @@ Parses a simple pipe-table Markdown sidecar of the form
 as published by some ARSAU releases.  No external dependencies are
 required: the parser is pure base R.
 }
+\examples{
+path <- system.file("extdata", "OTIS_DATA_DICTIONARY.md",
+                    package = "morie")
+if (nzchar(path)) {
+  out <- morie_arsau_read_markdown_dictionary(path)
+  str(out)
+}
+}
 \references{
 Ontario Ministry of the Solicitor General data
 dictionaries accompanying the ARSAU CSV releases.

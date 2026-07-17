@@ -15,3 +15,11 @@ An object of class \code{"morie_test_result"}.
 \description{
 Cochran's Q test
 }
+\examples{
+set.seed(1)
+v1 <- rbinom(30, 1, 0.4)
+v2 <- rbinom(30, 1, 0.5)
+v3 <- rbinom(30, 1, 0.6)
+res <- cochrans_q(v1, v2, v3)
+res$p_value
+}

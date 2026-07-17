@@ -17,3 +17,11 @@ A numeric scalar: the Spearman-Brown split-half reliability.
 \description{
 Spearman-Brown split-half reliability.
 }
+\examples{
+set.seed(1)
+f <- rnorm(80)
+X <- sapply(1:6, function(j) sqrt(0.6) * f + sqrt(0.4) * rnorm(80))
+colnames(X) <- paste0("i", 1:6)
+v <- morie_psymet_splithalf(X, method = "first_last")
+v
+}

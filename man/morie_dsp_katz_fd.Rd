@@ -19,6 +19,12 @@ Coarse box-counting on the amplitude-normalised signal across
 \code{n_scales} log-spaced box widths; returns the slope of
 \verb{log N(s)} vs. \code{log(1/s)}.
 }
+\examples{
+t <- seq.int(0, 511) / 512
+x <- sin(2 * pi * 8 * t)
+morie_dsp_katz_fd(x)
+morie_dsp_katz_fd(rep(2, 50))  # flat signal: 0
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 5, sec. 5.7;
 Katz (1988).

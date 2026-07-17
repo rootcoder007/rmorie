@@ -50,3 +50,9 @@ Motorcyclist-related KSI collisions (2006 - 2023).
 
 Tags: Killed or Seriously Injured; KSI; Motorcyclist; Traffic; Collision; Traffic Collision
 }
+\examples{
+\donttest{
+df <- try(morie_datasets_tps_motorcylist_ksi(max_features = 5L))
+if (!inherits(df, "try-error")) head(df)
+}
+}

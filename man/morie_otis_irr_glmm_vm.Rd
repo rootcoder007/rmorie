@@ -25,3 +25,8 @@ reported.
 No random effect / cluster-robust SE -- for paper-grade inference,
 use the dedicated OTIS DML pipeline.
 }
+\examples{
+b02 <- morie_synth_otis("b02", n = 120L, seed = 1L)
+res <- morie_otis_irr_glmm_vm(b02)
+res$title
+}

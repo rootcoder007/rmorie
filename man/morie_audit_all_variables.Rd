@@ -15,3 +15,10 @@ Named list with \code{$otis} and \code{$arsau} audit results.
 \description{
 Audit both OTIS and ARSAU.
 }
+\examples{
+spec <- function(nm, dt, vv = NULL) list(name = nm, dtype = dt, valid_values = vv)
+otis <- list(v1 = list(spec("UniqueIndividual_ID", "string")))
+arsau <- list(v1 = list(spec("PoliceService", "string", c("OPP", "TPS"))))
+res <- morie_audit_all_variables(otis, arsau)
+names(res)
+}

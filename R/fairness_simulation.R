@@ -37,6 +37,12 @@ NULL
 #'   sampled per crime and returned in \code{$detected}.
 #' @return \code{morie_fairness_result} with \code{$probabilities},
 #'   \code{$officers_in_range}, optional \code{$detected}.
+#' @examples
+#' set.seed(1)
+#' crimes <- matrix(runif(20), ncol = 2L)
+#' officers <- matrix(runif(10), ncol = 2L)
+#' r <- morie_fairness_noisy_or_detection(crimes, officers, radius = 0.5, p_detect = 0.7)
+#' r$probabilities
 #' @export
 morie_fairness_noisy_or_detection <- function(crime_xy, officer_xy,
                                                radius, p_detect = 0.85,
@@ -114,6 +120,9 @@ morie_fairness_noisy_or_detection <- function(crime_xy, officer_xy,
 #' @param seed Reproducibility seed.
 #' @return A data.frame with columns area, group, true_outcome,
 #'   detected, risk_score.
+#' @examples
+#' d <- morie_fairness_simulate_biased_crime_data(n = 100L, seed = 1L)
+#' head(d)
 #' @export
 morie_fairness_simulate_biased_crime_data <- function(n = 2000L,
                                                        groups = c("A", "B"),

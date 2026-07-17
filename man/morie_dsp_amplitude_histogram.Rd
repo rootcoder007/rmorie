@@ -18,6 +18,12 @@ List with \code{counts}, \code{centers}, \code{probabilities}, \code{edges}.
 Equal-width histogram of \code{x} with \code{n_bins} bins. Returns counts,
 bin centres, probabilities, and edges (parallel to numpy.histogram).
 }
+\examples{
+set.seed(1)
+x <- rnorm(200)
+h <- morie_dsp_amplitude_histogram(x, n_bins = 10L)
+h$counts
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 5, sec. 5.6.
 }

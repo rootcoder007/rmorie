@@ -291,6 +291,12 @@ mrm_uof_force_concentration <- function(df, force_col, count_col = NULL) {
 #' @return A named list with \code{chi2}, \code{pvalue}, \code{df},
 #'   \code{cramers_v}, \code{top_residuals} (list-of-lists), and an
 #'   \code{interpretation} paragraph.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(weapon = sample(c("OC", "baton", "none"), 40, TRUE),
+#'                  force = sample(c("low", "high"), 40, TRUE))
+#' res <- mrm_uof_weapon_diversity(df, "weapon", "force")
+#' res$title
 #' @export
 mrm_uof_weapon_diversity <- function(df, weapon_col, force_col) {
   stopifnot(is.data.frame(df), is.character(weapon_col), is.character(force_col))
@@ -422,6 +428,9 @@ mrm_uof_weapon_diversity <- function(df, weapon_col, force_col) {
 #'   counted otherwise).
 #' @return Named list with \code{years}, \code{counts}, \code{yoy_pct},
 #'   \code{change_point_year}, \code{mean_abs_yoy_pct}.
+#' @examples
+#' inc <- morie_datasets_corrections_uof_incidents()
+#' str(mrm_uof_yoy_change(df = inc, year_col = "year"), max.level = 1)
 #' @export
 mrm_uof_yoy_change <- function(dfs_by_year = NULL, df = NULL,
                                 year_col = NULL, count_col = NULL) {
@@ -568,6 +577,12 @@ mrm_uof_yoy_change <- function(dfs_by_year = NULL, df = NULL,
 #' @param region_now_col Most-recent region.
 #' @return Named list with \code{diagonal_share}, \code{chi2},
 #'   \code{pvalue}, \code{df}, \code{cramers_v}.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(region_at = sample(c("ON", "QC"), 40, TRUE),
+#'                  region_now = sample(c("ON", "QC"), 40, TRUE))
+#' res <- mrm_uof_region_locality(df, "region_at", "region_now")
+#' res$title
 #' @export
 mrm_uof_region_locality <- function(df, region_at_col, region_now_col) {
   stopifnot(is.data.frame(df))
@@ -690,6 +705,10 @@ mrm_uof_region_locality <- function(df, region_at_col, region_now_col) {
 #'   CI. Set to 0 (default) to skip.
 #' @return Named list with \code{baseline}, \code{baseline_rate},
 #'   \code{per_category} (list of lists), \code{risk_ratios}.
+#' @examples
+#' eth <- morie_datasets_corrections_uof_ethnic_origin()
+#' res <- mrm_uof_demographic_disparity(eth, names(eth)[2], names(eth)[3])
+#' res$title
 #' @export
 mrm_uof_demographic_disparity <- function(df, demo_col, outcome_col,
                                            baseline = NULL,
@@ -883,6 +902,9 @@ mrm_uof_demographic_disparity <- function(df, demo_col, outcome_col,
 #'   carrying named entries with \code{name} and \code{dtype}.
 #' @return Named list with \code{per_column}, \code{missing_columns},
 #'   \code{extra_columns}, \code{dtype_mismatches}, \code{suspect_flags}.
+#' @examples
+#' inc <- morie_datasets_corrections_uof_incidents()
+#' str(mrm_uof_data_quality_audit(inc), max.level = 1)
 #' @export
 mrm_uof_data_quality_audit <- function(df, sidecar = NULL, expected_schema = NULL) {
   stopifnot(is.data.frame(df))
@@ -1026,6 +1048,9 @@ mrm_uof_data_quality_audit <- function(df, sidecar = NULL, expected_schema = NUL
 # ---------------------------------------------------------------------------
 
 #' @return \code{x}, invisibly.
+#' @examples
+#' inc <- morie_datasets_corrections_uof_incidents()
+#' print(mrm_uof_data_quality_audit(inc))
 #' @export
 print.morie_mrm_uof_result <- function(x, ...) {
   cat(x$title, "\n", strrep("=", nchar(x$title)), "\n", sep = "")

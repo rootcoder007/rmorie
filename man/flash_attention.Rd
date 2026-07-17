@@ -23,4 +23,10 @@ Named list with tensor, block_size, method.
 \description{
 FlashAttention (Dao 2022) IO-aware tiled softmax
 }
+\examples{
+set.seed(40)
+Q <- matrix(rnorm(10 * 4), 10, 4)
+res <- morie:::flash_attention(Q)
+dim(res$tensor)
+}
 \keyword{internal}

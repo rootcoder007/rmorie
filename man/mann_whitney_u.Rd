@@ -17,3 +17,10 @@ An object of class \code{"morie_test_result"}.
 \description{
 Mann-Whitney U / Wilcoxon rank-sum test
 }
+\examples{
+set.seed(1)
+x <- rnorm(60, mean = 0)
+y <- rnorm(60, mean = 0.4)
+res <- mann_whitney_u(x, y)
+res$extra$rank_biserial
+}

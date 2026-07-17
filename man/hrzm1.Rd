@@ -26,4 +26,10 @@ Named list with estimate (pi, mu, sigma), log_likelihood, n, k, iters, method.
 \description{
 k-component Gaussian mixture EM
 }
+\examples{
+set.seed(16)
+y <- c(rnorm(50, 0), rnorm(50, 3))
+res <- hrzm1(y, k = 2, maxit = 30)
+str(res)
+}
 \keyword{internal}

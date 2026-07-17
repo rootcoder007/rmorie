@@ -89,6 +89,14 @@ NULL
 #' @param df A TPS crime data.frame.
 #' @param ds_name Optional dataset label used in the result title.
 #' @return A \code{morie_tps_result} named list.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_assault(max_features = 200L))
+#' if (!inherits(df, "try-error")) {
+#'   res <- try(morie_tps_temporal_summary(df, ds_name = "assault"))
+#'   if (!inherits(res, "try-error")) str(res, max.level = 1)
+#' }
+#' }
 #' @export
 morie_tps_temporal_summary <- function(df, ds_name = "?") {
   stopifnot(is.data.frame(df))
@@ -156,6 +164,14 @@ morie_tps_temporal_summary <- function(df, ds_name = "?") {
 #'
 #' @inheritParams morie_tps_temporal_summary
 #' @return A \code{morie_tps_result} named list.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_assault(max_features = 200L))
+#' if (!inherits(df, "try-error")) {
+#'   res <- try(morie_tps_spatial_summary(df, ds_name = "assault"))
+#'   if (!inherits(res, "try-error")) str(res, max.level = 1)
+#' }
+#' }
 #' @export
 morie_tps_spatial_summary <- function(df, ds_name = "?") {
   stopifnot(is.data.frame(df))
@@ -221,6 +237,14 @@ morie_tps_spatial_summary <- function(df, ds_name = "?") {
 #'
 #' @inheritParams morie_tps_temporal_summary
 #' @return A \code{morie_tps_result} named list.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_assault(max_features = 200L))
+#' if (!inherits(df, "try-error")) {
+#'   res <- try(morie_tps_offence_summary(df, ds_name = "assault"))
+#'   if (!inherits(res, "try-error")) str(res, max.level = 1)
+#' }
+#' }
 #' @export
 morie_tps_offence_summary <- function(df, ds_name = "?") {
   stopifnot(is.data.frame(df))
@@ -263,6 +287,9 @@ morie_tps_offence_summary <- function(df, ds_name = "?") {
 #'
 #' @param x Numeric vector (e.g. per-spatial-unit incident counts).
 #' @return A scalar Gini coefficient in `[0, 1]` (or NA when input is empty).
+#' @examples
+#' set.seed(1)
+#' morie_tps_gini_concentration(rpois(50, 4))
 #' @export
 morie_tps_gini_concentration <- function(x) {
   x <- as.numeric(x)
@@ -285,6 +312,14 @@ morie_tps_gini_concentration <- function(x) {
 #' @inheritParams morie_tps_temporal_summary
 #' @return A \code{morie_tps_result} list with \code{payload$gini},
 #'   \code{payload$n_hoods}, \code{payload$p_top10}, \code{payload$p_top20}.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_assault(max_features = 200L))
+#' if (!inherits(df, "try-error")) {
+#'   res <- try(morie_tps_neighbourhood_concentration(df, ds_name = "assault"))
+#'   if (!inherits(res, "try-error")) str(res, max.level = 1)
+#' }
+#' }
 #' @export
 morie_tps_neighbourhood_concentration <- function(df, ds_name = "?") {
   stopifnot(is.data.frame(df))
@@ -356,6 +391,14 @@ morie_tps_neighbourhood_concentration <- function(df, ds_name = "?") {
 #'
 #' @param dfs Named \code{list} of TPS data.frames.
 #' @return A \code{morie_tps_result} list.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_assault(max_features = 200L))
+#' if (!inherits(df, "try-error")) {
+#'   res <- try(morie_tps_crime_compare(list(assault = df)))
+#'   if (!inherits(res, "try-error")) str(res, max.level = 1)
+#' }
+#' }
 #' @export
 morie_tps_crime_compare <- function(dfs) {
   stopifnot(is.list(dfs), length(dfs) > 0L,
@@ -432,6 +475,14 @@ morie_tps_crime_compare <- function(dfs) {
 #' @param name The canonical TPS dataset name (used in titles).
 #' @return A \code{morie_tps_result} with named sub-results under
 #'   \code{temporal}, \code{spatial}, \code{offences}, \code{concentration}.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_assault(max_features = 200L))
+#' if (!inherits(df, "try-error")) {
+#'   res <- try(morie_tps_analyze_one(df, name = "assault"))
+#'   if (!inherits(res, "try-error")) names(res)
+#' }
+#' }
 #' @export
 morie_tps_analyze_one <- function(df, name = "?") {
   stopifnot(is.data.frame(df))
@@ -556,6 +607,14 @@ morie_tps_analyze_theftover <- .tps_alias_factory("TheftOver")
 #' @return A named \code{list} of \code{morie_tps_result} values, plus
 #'   a \code{`__cross_compare__`} entry from
 #'   \code{\link{morie_tps_crime_compare}}.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_assault(max_features = 200L))
+#' if (!inherits(df, "try-error")) {
+#'   res <- try(morie_tps_analyze_all(list(assault = df)))
+#'   if (!inherits(res, "try-error")) names(res)
+#' }
+#' }
 #' @export
 morie_tps_analyze_all <- function(dfs, out_dir = NULL) {
   stopifnot(is.list(dfs), length(dfs) > 0L,

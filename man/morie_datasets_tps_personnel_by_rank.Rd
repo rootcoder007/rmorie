@@ -51,3 +51,9 @@ classification for Uniform, Civilian, and Other Staff.
 
 Tags: ASR; TPS; Toronto Police; Annual Statistical Report; Personnel
 }
+\examples{
+\donttest{
+df <- try(morie_datasets_tps_personnel_by_rank(max_features = 5L))
+if (!inherits(df, "try-error")) head(df)
+}
+}

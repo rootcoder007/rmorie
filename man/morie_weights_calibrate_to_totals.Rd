@@ -32,3 +32,10 @@ A named list with elements \code{weights}, \code{converged}, \code{iterations}, 
 \description{
 Dispatch helper -- calibrate to totals via "raking" or "greg".
 }
+\examples{
+set.seed(1)
+df <- data.frame(g = rep(c("m", "f"), 15))
+res <- morie_weights_calibrate_to_totals(rep(1, 30), df,
+                                         list(g = c(m = 50, f = 50)))
+str(res, max.level = 1)
+}

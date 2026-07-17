@@ -17,3 +17,9 @@ An object of class \code{"morie_test_result"}.
 \description{
 Chi-squared test of independence
 }
+\examples{
+tab <- matrix(c(30, 20, 10, 40), 2, 2)
+res <- chi2_independence(tab)
+res$p_value
+res$extra$cramers_v
+}

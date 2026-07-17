@@ -15,3 +15,7 @@ An object of class \code{"morie_multiple_testing_result"}.
 \description{
 Simes test for the global null
 }
+\examples{
+p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
+simes_combined(p)
+}

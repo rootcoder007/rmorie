@@ -35,3 +35,10 @@ cross-group inequality.
 \details{
 Reimplemented from Barman & Barman, arXiv:2603.18987.
 }
+\examples{
+morie_fairness_bias_amplification(
+  c(1, 1, 1, 1, 0, 0, 0, 0),
+  c(rep("A", 4), rep("B", 4)),
+  privileged = "A"
+)
+}

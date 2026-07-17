@@ -56,3 +56,22 @@ Phase 3HHH2. Included snapshot of every dataset on
 opendata.vancouver.ca with richer schema (publisher, theme,
 license, records_count).
 }
+\examples{
+d <- morie_datasets_nyc_opendata_bulk_layers(offline = TRUE)
+nrow(d)
+head(d[, c("soda_id", "type")])
+cat_df <- morie_datasets_chicago_opendata_bulk_layers()
+head(cat_df)
+cat_df <- morie_datasets_toronto_opendata_bulk_layers()
+head(cat_df)
+cat_df <- morie_datasets_calgary_opendata_bulk_layers()
+head(cat_df)
+cat_df <- morie_datasets_edmonton_opendata_bulk_layers()
+head(cat_df)
+cat_df <- morie_datasets_ottawa_opendata_bulk_layers()
+head(cat_df)
+cat_df <- morie_datasets_montreal_opendata_bulk_layers()
+head(cat_df)
+cat_df <- morie_datasets_vancouver_opendata_bulk_layers()
+head(cat_df)
+}

@@ -19,3 +19,7 @@ A named \code{list} of Stock-Yogo weak-instrument critical values.
 \description{
 Stock-Yogo critical values
 }
+\examples{
+out <- morie_iv_stock_yogo(n_endogenous = 1, n_instruments = 1)
+out
+}

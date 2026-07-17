@@ -27,3 +27,13 @@ A list with \code{fit} (the fitted gam object),
 A penalised-spline alternative to the kernel methods above. Fits
 \code{y ~ s(x, k = k)} and returns fitted values at \code{x_eval}.
 }
+\examples{
+if (requireNamespace("mgcv", quietly = TRUE)) {
+  set.seed(1)
+  x <- sort(runif(40, -2, 2))
+  y <- sin(x) + 0.2 * rnorm(40)
+  xe <- seq(-1.5, 1.5, length.out = 20)
+  r <- gam_smoother(x, y, x_eval = xe, k = 5)
+  head(r$y_hat)
+}
+}

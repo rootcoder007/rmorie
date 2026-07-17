@@ -42,3 +42,10 @@ Wraps \code{survival::coxph()} with Efron (default) or Breslow tie handling
 and returns a tidy list including hazard ratios, CIs, p-values, and the
 Breslow baseline cumulative hazard.
 }
+\examples{
+set.seed(1)
+df <- data.frame(t = rexp(60), e = rbinom(60, 1, 0.7),
+                 x1 = rnorm(60), x2 = rnorm(60))
+fit <- morie_survival_cox(df, "t", "e", c("x1", "x2"))
+fit$hazard_ratios
+}

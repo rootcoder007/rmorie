@@ -19,3 +19,7 @@ Phase 3EEE2. Included snapshot of \code{ambulance-station-locations}
 (46 EMS stations across Toronto). Useful as a control overlay
 for crime + EMS dispatch analyses.
 }
+\examples{
+df <- morie_datasets_toronto_ambulance_stations(offline = TRUE)
+head(df[, c("EMS_NAME", "EMS_ADDRESS")])
+}

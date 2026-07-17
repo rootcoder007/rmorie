@@ -91,6 +91,10 @@
 #' a registry in an interactive session.
 #'
 #' @return Invisibly `NULL`.
+#' @examples
+#' morie_dataset_portal_catalog_clear_cache()
+#' catalog <- morie_dataset_portal_catalog()
+#' nrow(catalog)
 #' @export
 morie_dataset_portal_catalog_clear_cache <- function() {
   rm(list = ls(.morie_portal_catalog_env),

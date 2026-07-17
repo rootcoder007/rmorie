@@ -22,4 +22,13 @@ Named list with estimate, se, n, n_events, method.
 \description{
 Cox partial-likelihood proportional-hazards estimator
 }
+\examples{
+set.seed(1)
+n <- 60
+x <- rnorm(n)
+t <- rexp(n, rate = exp(0.5 * x))
+event <- rbinom(n, 1, 0.8)
+res <- hrzd1(t, x, event)
+res$estimate
+}
 \keyword{internal}

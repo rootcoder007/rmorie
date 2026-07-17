@@ -96,3 +96,7 @@ that other Chicago datasets resolve:
 \code{\link[=morie_datasets_chicago_iucr_codes]{morie_datasets_chicago_iucr_codes()}} (\verb{c7ck-438e}, 3UU).}
 }
 }
+\examples{
+df <- morie_datasets_chicago_crime(offline = TRUE)
+df[1:5, c("case_number", "date", "primary_type", "arrest")]
+}

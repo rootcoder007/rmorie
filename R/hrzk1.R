@@ -7,6 +7,11 @@
 #' @param sample Optional numeric sample to estimate from.
 #' @return Named list with estimate, se, bandwidth, n, kernel, method.
 #' @keywords internal
+#' @examples
+#' set.seed(16)
+#' x <- rnorm(120)
+#' res <- hrzk1(x)
+#' str(res)
 #' @export
 hrzk1 <- function(x, bandwidth = NULL, sample = NULL) {
   if (is.null(sample)) {

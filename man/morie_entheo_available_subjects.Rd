@@ -15,6 +15,9 @@ R parity of \code{morie.entheo_dmt.available_subjects}. Scans the
 \code{fMRI/} directory of the on-disk DMT_Imaging mirror for
 \code{LongS\{NN\}\{DMT,PCB\}.mat} filenames and returns the integer IDs.
 }
+\examples{
+morie_entheo_available_subjects()
+}
 \references{
 Timmermann, C. et al. (2023). Human brain effects of DMT assessed
 via EEG-fMRI. PNAS 120(13): e2218949120.

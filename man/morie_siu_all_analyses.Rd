@@ -24,3 +24,16 @@ optionally writes a \code{.txt} dump (and \code{.json} payload if
 \pkg{jsonlite} is available) per result. Failures are captured
 per-analysis: one bad surface does not stop the rest.
 }
+\examples{
+df <- data.frame(
+  police_service = rep(c("Toronto Police Service", "Ontario Provincial Police"), 4),
+  charges_recommended = rep(c(TRUE, FALSE), each = 4),
+  date_of_incident_iso = rep(c("2022-01-05", "2023-02-18", "2024-03-01", "2024-11-11"), 2),
+  date_siu_notified_iso = rep(c("2022-01-06", "2023-02-19", "2024-03-02", "2024-11-12"), 2),
+  date_of_director_decision_iso = rep(c("2022-08-01", "2023-09-10", "2024-09-01", "2025-02-14"), 2),
+  sex_gender_affected = rep(c("Male", "Female"), 4),
+  age_affected = c("34", "27", "55", "19", "42", "31", "48", "29"),
+  mental_health_or_race_indications = rep(c("mental health; Indigenous", ""), 4))
+res <- morie_siu_all_analyses(df)
+names(res)
+}

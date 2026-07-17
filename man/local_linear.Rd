@@ -25,6 +25,14 @@ values; otherwise a list with \code{y_hat} and \code{beta_hat}.
 Avoids the boundary bias of Nadaraya-Watson by fitting a local
 linear model at each evaluation point.
 }
+\examples{
+set.seed(1)
+x <- sort(runif(40, -2, 2))
+y <- sin(x) + 0.2 * rnorm(40)
+x_eval <- seq(-1.5, 1.5, length.out = 20)
+fit <- local_linear(x, y, x_eval, bandwidth = 0.5)
+fit
+}
 \references{
 Fan, J. and Gijbels, I. (1996). Local Polynomial
 Modelling and Its Applications. Chapman and Hall.

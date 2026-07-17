@@ -15,3 +15,8 @@ An object of class \code{"morie_otis_analysis_result"}.
 \description{
 Placement durations by region & gender (b04)
 }
+\examples{
+otis_b04 <- morie_synth_otis("b04", n = 120L, seed = 1L)
+res <- morie_otis_analyze_b04(otis_b04)
+class(res)
+}

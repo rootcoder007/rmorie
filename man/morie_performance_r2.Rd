@@ -21,3 +21,10 @@ Thin extender over \code{performance::r2} returning the
 appropriate R-squared (Nakagawa, McFadden, Tjur, ...) for a
 supported fitted model.
 }
+\examples{
+if (requireNamespace("performance", quietly = TRUE)) {
+  set.seed(1)
+  df <- data.frame(y = rnorm(50), x = rnorm(50))
+  morie_performance_r2(stats::lm(y ~ x, df))
+}
+}

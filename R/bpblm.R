@@ -6,6 +6,10 @@
 #' @param n_bytes Optional integer byte count; defaults to length(x).
 #' @return Named list with value, nll_nats, n_tokens, n_bytes, method.
 #' @keywords internal
+#' @examples
+#' r <- morie:::bits_per_byte(c(1, 2, 3))
+#' r$value
+#' morie:::bits_per_byte(c(1, 2), n_bytes = 10)$n_bytes
 bits_per_byte <- function(x, n_bytes = NULL) {
   nll <- as.numeric(x)
   if (!length(nll)) stop("Need at least one token NLL")

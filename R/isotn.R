@@ -10,6 +10,11 @@
 #' @param increasing logical (default TRUE).
 #' @return list: x_sorted, fitted, residuals, sse, r2, n, method.
 #' @keywords internal
+#' @examples
+#' x <- 0:9
+#' y <- c(1, 3, 2, 5, 4, 6, 7, 8, 7, 10)
+#' res <- isotn(x, y)
+#' res$fitted
 #' @export
 isotn <- function(x, y, weights = NULL, increasing = TRUE) {
   x <- as.numeric(x)

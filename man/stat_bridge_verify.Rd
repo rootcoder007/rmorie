@@ -14,3 +14,6 @@ Calls every registered handler with no arguments inside
 \code{tryCatch}, reporting which entries can be invoked safely.
 Intended to be called from CI smoke tests.
 }
+\examples{
+str(stat_bridge_verify(), max.level = 1)
+}

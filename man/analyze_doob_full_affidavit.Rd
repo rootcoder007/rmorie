@@ -14,3 +14,8 @@ Renders Tables 1, 2 and 3 in a single roll-up \code{morie_result}.
 Figures 1-4 (time-series CANSIM data) are out-of-scope here; pass
 your own series to \code{decoupling_test()} once they are available.
 }
+\examples{
+res <- analyze_doob_full_affidavit()
+res$title
+length(res$tables)
+}

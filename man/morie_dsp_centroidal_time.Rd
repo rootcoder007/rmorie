@@ -17,6 +17,10 @@ Scalar (seconds).
 \description{
 Time-domain centre of energy: \code{sum(t * x^2) / sum(x^2)}.
 }
+\examples{
+x <- abs(sin(seq(0, 2 * pi, length.out = 200L)))
+morie_dsp_centroidal_time(x, fs = 1)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 5.
 }

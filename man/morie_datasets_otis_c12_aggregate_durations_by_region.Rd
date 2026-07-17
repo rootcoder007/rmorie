@@ -28,3 +28,7 @@ A \code{data.frame} of the requested dataset (a 0-row typed frame when the data 
 \description{
 OTIS c12 -- Aggregate durations by region
 }
+\examples{
+df <- morie_datasets_otis_c12_aggregate_durations_by_region(offline = TRUE)
+head(df)
+}

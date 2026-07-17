@@ -34,3 +34,9 @@ A named list with elements \code{distribution}, \code{coefficients}, \code{scale
 Wraps \code{survival::survreg()}. Supported \code{dist}: "weibull", "lognormal",
 "loglogistic", "exponential", "gaussian".
 }
+\examples{
+set.seed(1)
+df <- data.frame(t = rexp(60), e = rbinom(60, 1, 0.7),
+                 x1 = rnorm(60), x2 = rnorm(60))
+str(morie_survival_aft(df, "t", "e", c("x1", "x2")), max.level = 1)
+}

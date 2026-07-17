@@ -35,3 +35,14 @@ A \code{ggplot} (when ggplot2 is loaded) or
 Walks \code{polys} once and renders one ggplot facet per year for
 columns named \code{<prefix>_<year>}.
 }
+\examples{
+ring <- lapply(seq(0, 2 * pi, length.out = 8), function(a) {
+  list(-79.40 + 0.02 * cos(a), 43.70 + 0.01 * sin(a))
+})
+polys <- data.frame(HOOD_ID = 1, RATE = 5)
+polys$geometry <- list(ring)
+polys$ASSAULT_RATE_2023 <- 4; polys$ASSAULT_RATE_2024 <- 5
+out <- morie_tps_render_yearly_grid(polys, prefix = "ASSAULT_RATE",
+                                    years = 2023:2024,
+                                    outfile = tempfile(fileext = ".png"))
+}

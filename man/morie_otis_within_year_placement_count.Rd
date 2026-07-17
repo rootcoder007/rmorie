@@ -18,3 +18,7 @@ year) cell. Because OTIS IDs are year-locked
 (\code{YYYY-XXXXX-AA}), each cell is one anonymous person-year;
 cross-year readmission is not measurable.
 }
+\examples{
+df <- morie_synth_otis("b01", n = 80L, seed = 1L)
+res <- try(morie_otis_within_year_placement_count(df))
+}

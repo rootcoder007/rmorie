@@ -24,3 +24,8 @@ A logical scalar.
 \description{
 Normalise weights so they sum to n (sample) or N (population).
 }
+\examples{
+set.seed(1)
+res <- morie_weights_normalize(runif(30, 0.5, 2))
+str(res, max.level = 1)
+}

@@ -19,3 +19,11 @@ A \code{morie_specification_test}.
 \description{
 Pregibon link test
 }
+\examples{
+set.seed(1)
+n <- 100
+X <- cbind(intercept = 1, x1 = rnorm(n), x2 = rnorm(n))
+y <- drop(X \%*\% c(0.5, 1.0, -0.5) + rnorm(n, sd = 0.5))
+r <- link_test(y, X)
+r$name
+}

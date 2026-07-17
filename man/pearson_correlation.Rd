@@ -17,3 +17,8 @@ An object of class \code{"morie_test_result"}.
 \description{
 Pearson product-moment correlation
 }
+\examples{
+set.seed(1)
+x <- rnorm(30)
+pearson_correlation(x, x + rnorm(30))
+}

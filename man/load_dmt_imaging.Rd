@@ -31,6 +31,11 @@ back to a reproducible synthetic record when the dataset is absent
 or when \pkg{R.matlab} is not installed, so downstream code keeps
 running in CI.
 }
+\examples{
+res <- load_dmt_imaging(subject_id = 7, root = tempfile("no-dmt-"))
+res$synthetic
+res$subject_ids
+}
 \references{
 Timmermann, C. et al. (2023). Neural correlates of the DMT
 experience assessed with multivariate EEG. Scientific Reports.

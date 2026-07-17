@@ -51,3 +51,9 @@ complaints by disposition of the complaint submitted.
 
 Tags: ASR; TPS; Toronto Police; Open Data; Annual Statistical Report; Complaints
 }
+\examples{
+\donttest{
+df <- try(morie_datasets_tps_complaint_dispositions(max_features = 5L))
+if (!inherits(df, "try-error")) head(df)
+}
+}

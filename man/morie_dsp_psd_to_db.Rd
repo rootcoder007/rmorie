@@ -15,6 +15,9 @@ PSD in dB.
 \description{
 \code{10 * log10(max(psd, 1e-20))}.
 }
+\examples{
+morie_dsp_psd_to_db(c(1, 0.1, 0.01))
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 6.
 }

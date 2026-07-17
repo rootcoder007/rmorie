@@ -39,3 +39,14 @@ A data frame, one row per placebo time.
 For each candidate fake time in \code{placebo_times}, redefines the
 post indicator and estimates a 2x2 DiD on pre-true-treatment data.
 }
+\examples{
+set.seed(1)
+df <- data.frame(
+  y = rnorm(500), d = rbinom(500, 1, 0.5),
+  time = sample(1:8, 500, replace = TRUE)
+)
+out <- morie_did_placebo_test_time(df, "y", "d", "time",
+                                   true_treatment_time = 7,
+                                   placebo_times = c(3, 4, 5))
+out
+}

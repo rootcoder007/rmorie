@@ -22,6 +22,15 @@ List with \code{freqs} and \code{coh} (magnitude squared coherence).
 Native Welch-style estimator built from windowed segment FFTs
 (module 20).
 }
+\examples{
+set.seed(23)
+fs <- 512L
+t <- seq.int(0, fs - 1L) / fs
+x <- sin(2 * pi * 50 * t) + rnorm(fs, sd = 0.2)
+y <- x + rnorm(fs, sd = 0.2)
+out <- morie_dsp_coherence(x, y, fs = fs, nperseg = 128L)
+str(out, max.level = 1)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 6, sec. 6.9.
 }

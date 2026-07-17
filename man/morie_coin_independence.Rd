@@ -23,3 +23,10 @@ A list with \code{$method}, \code{$statistic},
 Native conditional permutation test of independence
 (\code{\link{morie_indep_test}}) between a response and covariate.
 }
+\examples{
+if (requireNamespace("coin", quietly = TRUE)) {
+  set.seed(1)
+  df <- data.frame(y = rnorm(40), g = factor(rep(c("a", "b"), 20)))
+  morie_coin_independence(y ~ g, data = df)
+}
+}

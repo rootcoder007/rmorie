@@ -34,3 +34,14 @@ installed. Without \pkg{stdReg}, falls back to an inline outcome-
 regression + bootstrap implementation (500 resamples, seed 42)
 that mirrors the legacy rmorie behaviour.
 }
+\examples{
+set.seed(1)
+n <- 300
+X <- matrix(rnorm(n * 3), n, 3)
+tr <- rbinom(n, 1, plogis(X[, 1]))
+y <- 2.5 * tr + drop(X \%*\% c(1, 0.5, -0.7)) + rnorm(n)
+d <- data.frame(y = y, d = tr, x1 = X[, 1], x2 = X[, 2], x3 = X[, 3])
+res <- estimate_ate_gcomputation(d, treatment = "d", outcome = "y",
+                                 covariates = c("x1", "x2", "x3"))
+res$ate
+}

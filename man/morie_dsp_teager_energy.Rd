@@ -16,6 +16,9 @@ Numeric vector, length(x); ends are zero.
 \code{psi[n] = x[n]^2 - x[n-1] * x[n+1]}; sensitive to instantaneous
 amplitude AND frequency.
 }
+\examples{
+morie_dsp_teager_energy(c(1, 2, 3, 4, 5))
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 4, sec. 4.5;
 Kaiser (1990).

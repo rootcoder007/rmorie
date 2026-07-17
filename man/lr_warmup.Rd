@@ -19,4 +19,9 @@ Named list with tensor, value, lr_target, warmup_steps, step, method.
 \description{
 Linear LR warmup (Vaswani 2017)
 }
+\examples{
+res <- morie:::lr_warmup(c(0, 500, 1000, 2000),
+                         lr_target = 1e-3, warmup_steps = 1000L)
+res$tensor
+}
 \keyword{internal}

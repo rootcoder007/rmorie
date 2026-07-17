@@ -75,6 +75,9 @@
 #'   column to be considered ordinal (default 10).
 #' @return Character scalar; one of `"nominal"`, `"ordinal"`, `"interval"`,
 #'   `"ratio"`.
+#' @examples
+#' morie_dataset_infer_level(c("a", "b", "c"))          # "nominal"
+#' morie_dataset_infer_level(c(1.5, 2.3, 4.1))
 #' @export
 morie_dataset_infer_level <- function(x, name = NULL, ordinal_threshold = 10L) {
   nm <- as.character(name %||% "")
@@ -118,6 +121,11 @@ morie_dataset_infer_level <- function(x, name = NULL, ordinal_threshold = 10L) {
 #' @param name Column name (drives the heuristic patterns).
 #' @return One of `"id"`, `"weight"`, `"stratum"`, `"cluster"`,
 #'   `"treatment"`, `"outcome"`, `"covariate"`.
+#' @examples
+#' morie_dataset_detect_role(1:5, "case_id")           # "id"
+#' morie_dataset_detect_role(c(0, 1), "treatment_arm") # "treatment"
+#' morie_dataset_detect_role(c(0, 1, 0), "outcome_event") # "outcome"
+#' morie_dataset_detect_role(c(1, 2, 3), "foo")        # "covariate"
 #' @export
 morie_dataset_detect_role <- function(x, name) {
   nm <- as.character(name %||% "")
@@ -183,6 +191,10 @@ morie_dataset_summarize_column <- function(x, level) {
 #' @return Named list with fields `name`, `dtype`, `level`, `n_unique`,
 #'   `missing_pct`, `is_binary`, `is_constant`, `suggested_role`,
 #'   `summary_stats`.
+#' @examples
+#' cp <- morie_dataset_column_profile(c(1, 2, 3, NA), "year_obs")
+#' cp$dtype
+#' cp$missing_pct
 #' @export
 morie_dataset_column_profile <- function(series, name,
                                          ordinal_threshold = 10L,
@@ -227,6 +239,10 @@ morie_dataset_column_profile <- function(series, name,
 #' @return A named list (the dataset profile) with fields `n_rows`,
 #'   `n_cols`, `columns` (named list of column profiles),
 #'   `suggested_treatment`, `suggested_outcome`, `suggested_weights`.
+#' @examples
+#' df <- data.frame(x = c(0, 1, 0, 1), y = c(1, 2, 3, 4))
+#' p <- morie_dataset_profile(df, hint_treatment = "x", hint_outcome = "y")
+#' p$n_rows
 #' @export
 morie_dataset_profile <- function(df,
                                   hint_treatment = NULL,
@@ -297,6 +313,11 @@ morie_dataset_profile <- function(df,
 #' @param profile A `morie_dataset_profile` (output of
 #'   `morie_dataset_profile()`).
 #' @return Nested named list.
+#' @examples
+#' df <- data.frame(x = c(0, 1, 0, 1), y = c(1, 2, 3, 4))
+#' p <- morie_dataset_profile(df, hint_treatment = "x", hint_outcome = "y")
+#' out <- morie_dataset_profile_to_list(p)
+#' names(out)
 #' @export
 morie_dataset_profile_to_list <- function(profile) {
   list(
@@ -315,6 +336,10 @@ morie_dataset_profile_to_list <- function(profile) {
 #'
 #' @param profile A `morie_dataset_profile`.
 #' @return Character scalar with embedded newlines.
+#' @examples
+#' df <- data.frame(x = c(0, 1, 0, 1), y = c(1, 2, 3, 4))
+#' p <- morie_dataset_profile(df, hint_treatment = "x", hint_outcome = "y")
+#' cat(morie_dataset_profile_summary_table(p))
 #' @export
 morie_dataset_profile_summary_table <- function(profile) {
   header <- sprintf("Dataset Profile  (%d rows x %d cols)",
@@ -351,6 +376,12 @@ morie_dataset_profile_summary_table <- function(profile) {
 #' @param ... Forwarded to the underlying reader
 #'   (`utils::read.csv`, `readxl::read_excel`, etc.).
 #' @return A `data.frame`.
+#' @examples
+#' tmp <- tempfile(fileext = ".csv")
+#' write.csv(data.frame(a = 1:3, b = c("x", "y", "z")), tmp, row.names = FALSE)
+#' df <- morie_dataset_load(tmp)
+#' head(df)
+#' unlink(tmp)
 #' @export
 morie_dataset_load <- function(path, encoding = "UTF-8", ...) {
   if (!file.exists(path)) {
@@ -413,6 +444,15 @@ morie_dataset_load <- function(path, encoding = "UTF-8", ...) {
 #' @param profile A `morie_dataset_profile`.
 #' @return A list of suggestion lists; each has `analysis`, `rationale`,
 #'   and `required_vars`.
+#' @examples
+#' df <- data.frame(
+#'   treat = c(0, 1, 0, 1, 0, 1),
+#'   outcome_y = c(1.1, 2.2, 1.4, 3.0, 0.9, 2.8),
+#'   age = c(20, 25, 30, 35, 40, 45)
+#' )
+#' p <- morie_dataset_profile(df, hint_treatment = "treat", hint_outcome = "outcome_y")
+#' plan <- morie_dataset_suggest_plan(p)
+#' vapply(plan, function(s) s$analysis, character(1))
 #' @export
 morie_dataset_suggest_plan <- function(profile) {
   suggestions <- list()

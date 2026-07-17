@@ -16,3 +16,7 @@ An object of class \code{"morie_multiple_testing_result"}.
 Delegates to \code{poolr::tippett} when installed; otherwise
 computes the closed form inline.
 }
+\examples{
+p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
+tippett_combined(p)
+}

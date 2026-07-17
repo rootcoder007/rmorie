@@ -19,3 +19,7 @@ A \code{morie_evalue} named-list.
 \description{
 Uses Zhang & Yu (1998) OR-to-RR correction when \code{prevalence >= 0.15}.
 }
+\examples{
+res <- e_value_or(2.0)
+res$e_value_point
+}

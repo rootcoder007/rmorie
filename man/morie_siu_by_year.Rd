@@ -19,3 +19,11 @@ A \code{morie_rich_result} list.
 Year-over-year case volume plus charges-rate, parsed from the
 first four characters of \code{date_of_incident_iso}.
 }
+\examples{
+df <- data.frame(
+  date_of_incident_iso = c("2022-01-05", "2022-06-12", "2023-02-18",
+                           "2024-03-01", "2024-11-11"),
+  charges_recommended = c(TRUE, FALSE, FALSE, TRUE, NA))
+r <- morie_siu_by_year(df)
+r$payload$by_year
+}

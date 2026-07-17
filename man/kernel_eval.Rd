@@ -20,3 +20,7 @@ Kernel density value K(u).
 \description{
 Evaluate a kernel function at point u
 }
+\examples{
+kernel_eval(0, "gaussian")
+kernel_eval(c(-1, 0, 1, 2), KERNEL_EPANECHNIKOV)
+}

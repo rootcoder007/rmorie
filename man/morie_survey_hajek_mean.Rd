@@ -17,3 +17,7 @@ A named list with elements \code{mean}, \code{se}, \code{ci_lower}, \code{ci_upp
 \description{
 Hajek (ratio) estimator of a population mean.
 }
+\examples{
+set.seed(1)
+morie_survey_hajek_mean(rnorm(30, 5), runif(30, 0.5, 2))
+}

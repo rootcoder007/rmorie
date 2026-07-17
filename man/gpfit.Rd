@@ -21,4 +21,10 @@ se_sigma, se_xi, loglik, method.
 \description{
 Fits F(x) = 1 - (1 + xi x/sigma)^(-1/xi) to threshold exceedances.
 }
+\examples{
+set.seed(23)
+x <- abs(rnorm(100)) + 0.1
+res <- gpfit(x)
+res$estimate
+}
 \keyword{internal}

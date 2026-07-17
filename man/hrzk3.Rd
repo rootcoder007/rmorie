@@ -24,4 +24,12 @@ Named list with estimate, se, bandwidth, n, method.
 \description{
 Local-linear regression estimator
 }
+\examples{
+set.seed(17)
+n <- 100
+x <- rnorm(n)
+y <- 0.4 * x + rnorm(n, sd = 0.3)
+res <- hrzk3(x, y)
+str(res)
+}
 \keyword{internal}

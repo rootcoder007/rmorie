@@ -32,4 +32,10 @@ Named list with estimate, grid, bandwidth, sigma_u, noise, n, method.
 \description{
 Stefanski-Carroll Fourier-deconvolution density estimator
 }
+\examples{
+set.seed(17)
+y <- rnorm(80)
+res <- hrzn2(y, sigma_u = 0.3)
+str(res)
+}
 \keyword{internal}

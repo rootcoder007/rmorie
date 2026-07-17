@@ -16,3 +16,10 @@ Character scalar — recommended test name.
 Looks up the (level_a, level_b) combination and returns the right
 default test (Stevens-1946 hierarchy).
 }
+\examples{
+tax <- structure(
+  list(dataset_name = "X", column_name = "colour", level = "nominal",
+       cardinality = "unknown", role = "covariate", cross_year_safe = TRUE),
+  class = c("morie_variable_taxonomy", "list"))
+morie_recommended_pair_test(tax, tax)
+}

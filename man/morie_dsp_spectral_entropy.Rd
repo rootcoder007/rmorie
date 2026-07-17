@@ -16,6 +16,11 @@ Scalar in \verb{[0, log2(length(psd))]}.
 Normalises PSD to a probability mass function and returns its
 Shannon entropy in bits.
 }
+\examples{
+N <- 64L
+uni <- rep(1, N)
+morie_dsp_spectral_entropy(uni)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 6, sec. 6.7;
 Inouye et al. (1991).

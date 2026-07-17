@@ -53,3 +53,7 @@ A \code{data.frame}.
 \description{
 Generic NYC NYPD dataset loader by registry key
 }
+\examples{
+df <- morie_datasets_nyc_nypd_by_key("nypd_arrests_ytd", offline = TRUE)
+head(df)
+}

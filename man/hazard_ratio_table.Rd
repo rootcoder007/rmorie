@@ -38,3 +38,9 @@ A character string.
 \description{
 Hazard-ratio table from Cox model components
 }
+\examples{
+params <- c(treat = 0.5, age = 0.02)
+se <- c(treat = 0.1, age = 0.005)
+pv <- c(treat = 0.001, age = 0.0001)
+hazard_ratio_table(params, se, pv)
+}

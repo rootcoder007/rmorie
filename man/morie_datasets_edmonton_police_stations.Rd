@@ -24,3 +24,9 @@ A \code{data.frame} of the requested dataset (a 0-row typed frame when the data 
 Phase 3FFF3. Included 10-row fixture of Edmonton Police Service
 station locations (Socrata id \code{e7aq-scxv}).
 }
+\examples{
+df <- morie_datasets_edmonton_police_stations(offline = TRUE)
+df[, c("name", "latitude", "longitude")]
+df <- morie_datasets_edmonton_fire_stations()
+head(df)
+}

@@ -15,6 +15,13 @@
 #' @param y Numeric binary response (0/1).
 #' @return Named list with estimate, se, score, n, method.
 #' @keywords internal
+#' @examples
+#' set.seed(282)
+#' n <- 60
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' y <- rbinom(n, 1, plogis(-2 * X[, 1]))
+#' res <- hrzb1(X, y)
+#' str(res)
 #' @export
 hrzb1 <- function(x, y) {
   y <- as.numeric(y)

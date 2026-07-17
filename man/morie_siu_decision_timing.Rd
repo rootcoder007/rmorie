@@ -26,3 +26,11 @@ Day-delta distributions for the three SIU process intervals:
 \item{Incident -> decision (total)}{The end-to-end interval.}
 }
 }
+\examples{
+df <- data.frame(
+  date_of_incident_iso = c("2022-01-05", "2023-02-18", "2024-03-01"),
+  date_siu_notified_iso = c("2022-01-06", "2023-02-19", "2024-03-02"),
+  date_of_director_decision_iso = c("2022-08-01", "2023-09-10", "2024-09-01"))
+r <- morie_siu_decision_timing(df)
+r$tables[[1]]$rows
+}

@@ -18,6 +18,11 @@ SNR in dB.
 \code{10 * log10(mean(signal^2) / mean(noise^2))}. Returns \code{Inf} when
 noise power is zero.
 }
+\examples{
+sig <- rep(10, 100)
+noi <- rep(1, 100)
+morie_dsp_snr(sig, noi)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 3, sec. 3.2.
 }

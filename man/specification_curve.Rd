@@ -45,3 +45,12 @@ sample filters x model families.  Cross-references \pkg{specr}
 built-in plotting; use \pkg{specr} directly when you want the
 published specification-curve plot.
 }
+\examples{
+set.seed(1)
+df <- data.frame(d = rnorm(80), x1 = rnorm(80), x2 = rnorm(80))
+df$y <- 0.4 * df$d + 0.3 * df$x1 + rnorm(80)
+res <- specification_curve(df, "y", "d",
+                           covariate_sets = list(character(0), "x1",
+                                                 c("x1", "x2")))
+str(res, max.level = 1)
+}

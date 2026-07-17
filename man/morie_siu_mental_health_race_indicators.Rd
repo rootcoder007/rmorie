@@ -23,3 +23,10 @@ parser scans narratives against a closed vocabulary
 (see \code{morie.siu._parser._MH_RACE_KEYWORDS}); this analysis
 tallies those tags across the case corpus.
 }
+\examples{
+df <- data.frame(
+  mental_health_or_race_indications = c("mental health; Indigenous", "",
+                                        "racial", "mental health; Black"))
+r <- morie_siu_mental_health_race_indicators(df)
+r$tables[[1]]$rows
+}

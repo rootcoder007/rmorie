@@ -35,3 +35,9 @@ A \code{morie_effect_size} named-list.
 \description{
 Returns a named-list with class \code{c("morie_effect_size", "list")}.
 }
+\examples{
+r <- effect_size_result("demo", 0.5, ci_lower = 0.1, ci_upper = 0.9,
+                        se = 0.2, n = 50L, extra = list(foo = 1))
+r$estimate
+r$extra$foo
+}

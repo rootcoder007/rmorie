@@ -19,3 +19,12 @@ A \code{morie_specification_test}.
 \description{
 Hosmer-Lemeshow goodness-of-fit test for logistic regression
 }
+\examples{
+set.seed(10)
+n <- 200
+X <- cbind(1, rnorm(n))
+y_prob <- plogis(drop(X \%*\% c(0, 1)))
+y <- rbinom(n, 1, y_prob)
+r <- hosmer_lemeshow_test(y, y_prob, n_groups = 5L)
+r$statistic
+}

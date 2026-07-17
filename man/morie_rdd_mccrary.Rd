@@ -26,3 +26,9 @@ A named \code{list} (see Details).
 \description{
 McCrary (2008) density manipulation test
 }
+\examples{
+set.seed(35)
+x <- runif(2000, -1, 1)
+out <- morie_rdd_mccrary(x, cutoff = 0)
+out$p_value
+}

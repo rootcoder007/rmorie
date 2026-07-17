@@ -25,3 +25,10 @@ zero charge-decided cases are dropped. Complements
 tests specific published 2x2 tables; this is a generic "did the
 charge rate move?" probe over the harvested SIU corpus.
 }
+\examples{
+df <- data.frame(
+  date_of_incident_iso = rep(c("2022-01-01", "2023-01-01", "2024-01-01"), each = 4),
+  charges_recommended = rep(c(TRUE, FALSE, FALSE, TRUE), 3))
+r <- morie_siu_charges_by_year_chi2(df)
+r$title
+}

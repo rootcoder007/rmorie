@@ -45,3 +45,8 @@ A \code{column_rule} list.
 \description{
 Construct a column rule
 }
+\examples{
+r <- column_rule("x", dtype = "numeric", min_val = 0, max_val = 10)
+r$min_val
+r$max_val
+}

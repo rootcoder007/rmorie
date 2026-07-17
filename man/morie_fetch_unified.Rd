@@ -22,3 +22,10 @@ Inspects the extension / content and dispatches to the native
 JSON, XML, HTML, CSV/TSV, or Parquet parser, returning a
 consistent \code{morie_dataset} object.
 }
+\examples{
+d <- data.frame(a = 1:3, b = c("x", "y", "z"))
+fc <- tempfile(fileext = ".csv")
+write.csv(d, fc, row.names = FALSE)
+out <- morie_fetch_unified(fc)
+out$n_rows
+}

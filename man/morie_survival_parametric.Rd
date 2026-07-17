@@ -25,3 +25,8 @@ A named list with elements \code{distribution}, \code{coefficients}, \code{scale
 For "exponential", "weibull", "lognormal", "loglogistic", "gaussian".
 Use \code{morie_survival_aft()} for covariate-adjusted parametric models.
 }
+\examples{
+set.seed(1)
+time <- rexp(60); event <- rbinom(60, 1, 0.7)
+str(morie_survival_parametric(time, event), max.level = 1)
+}

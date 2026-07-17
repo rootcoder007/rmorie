@@ -17,6 +17,11 @@ Scalar in \verb{[-1, 1]}.
 \description{
 \code{cor(x - mean(x), y - mean(y))} with explicit zero-norm guard.
 }
+\examples{
+set.seed(1)
+x <- rnorm(100)
+morie_dsp_baseline_correlation(x, x)  # identical inputs: 1
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 5.
 }

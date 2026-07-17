@@ -97,21 +97,29 @@ NULL
 
 #' Total-CSI weights for the 9 TPS open-data categories.
 #' @return Named numeric vector.
+#' @examples
+#' MORIE_TPS_TOTAL_CSI_WEIGHTS
 #' @export
 MORIE_TPS_TOTAL_CSI_WEIGHTS <- function() .TOTAL_CSI_WEIGHTS
 
 #' Violent-CSI weights for the 9 TPS open-data categories.
 #' @return Named numeric vector.
+#' @examples
+#' MORIE_TPS_VIOLENT_CSI_WEIGHTS
 #' @export
 MORIE_TPS_VIOLENT_CSI_WEIGHTS <- function() .VIOLENT_CSI_WEIGHTS
 
 #' Toronto reference population by fiscal year (StatsCan 17-10-0009-01).
 #' @return Named integer vector (year-as-string -> population).
+#' @examples
+#' MORIE_TPS_TORONTO_POPULATION_BY_YEAR
 #' @export
 MORIE_TPS_TORONTO_POPULATION_BY_YEAR <- function() .TORONTO_POPULATION_BY_YEAR
 
 #' Canonical CSI category names (the 9 TPS open-data feeds).
 #' @return Character vector.
+#' @examples
+#' MORIE_TPS_CSI_CATEGORIES
 #' @export
 MORIE_TPS_CSI_CATEGORIES <- function() names(.TOTAL_CSI_WEIGHTS)
 

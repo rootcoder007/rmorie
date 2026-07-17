@@ -36,3 +36,13 @@ A named list with elements \code{coefficients}, \code{std_errors}, \code{t_stats
 Solves the LIML eigenvalue problem natively (k-class with the
 minimum-eigenvalue kappa).
 }
+\examples{
+set.seed(8)
+n <- 1000
+z <- rbinom(n, 1, 0.5); u <- rnorm(n)
+d <- 0.2 + 0.6 * z + 0.4 * u + 0.3 * rnorm(n)
+y <- 0.5 + 1.5 * d + u + rnorm(n)
+df <- data.frame(y, d, z)
+res <- morie_iv_liml(df, outcome = "y", endogenous = "d", instruments = "z")
+res$coefficients["d"]
+}

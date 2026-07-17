@@ -32,3 +32,13 @@ A named list with elements \code{coefficients}, \code{std_errors}, \code{t_stats
 \description{
 Jackknife IV (JIVE; Angrist, Imbens & Krueger 1999)
 }
+\examples{
+set.seed(5)
+n <- 600
+z1 <- rbinom(n, 1, 0.5); z2 <- rnorm(n); u <- rnorm(n)
+d <- 0.5 * z1 + 0.4 * z2 + 0.3 * u + rnorm(n, sd = 0.3)
+y <- 0.5 * d + 0.4 * u + rnorm(n, sd = 0.5)
+df <- data.frame(y, d, z1, z2)
+res <- morie_iv_jive(df, "y", "d", c("z1", "z2"))
+res$coefficients["d"]
+}

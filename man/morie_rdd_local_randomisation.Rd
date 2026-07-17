@@ -44,3 +44,12 @@ A named list with elements \code{estimate}, \code{std_error}, \code{p_value}, \c
 \description{
 Local-randomisation RDD via permutation in a fixed window
 }
+\examples{
+set.seed(1)
+x <- runif(400, -1, 1)
+y <- 0.3 * x + 1.0 * (x >= 0) + rnorm(400, sd = 0.3)
+d <- data.frame(x, y)
+res <- morie_rdd_local_randomisation(d, "y", "x", window = 0.3,
+                                     n_permutations = 200L, seed = 1)
+res$p_value
+}

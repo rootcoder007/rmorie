@@ -21,6 +21,11 @@ DMT-vs-PCB contrast on LZ complexity is one of Timmermann 2023's
 headline findings: LZ rises under DMT, indicating increased
 neural-signal diversity.
 }
+\examples{
+sig <- c(rep(0, 20), rep(1, 20), rep(0, 20))
+res <- morie_entheo_lz_complexity(sig)
+res$payload$lz_normalised
+}
 \references{
 Lempel, A. & Ziv, J. (1976). On the complexity of finite sequences.
 IEEE Trans. Inf. Theory 22(1): 75-81.

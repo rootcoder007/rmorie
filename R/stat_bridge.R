@@ -25,6 +25,8 @@ NULL
 #' JSON enumeration of all registered commands
 #'
 #' @return A length-1 character vector containing JSON text.
+#' @examples
+#' substr(stat_bridge_registry_json(), 1, 200)
 #' @export
 stat_bridge_registry_json <- function() {
   if (!requireNamespace("jsonlite", quietly = TRUE)) {
@@ -51,6 +53,8 @@ stat_bridge_registry_json <- function() {
 #' Formatted text dump of the command registry
 #'
 #' @return A length-1 character string.
+#' @examples
+#' cat(stat_bridge_help())
 #' @export
 stat_bridge_help <- function() {
   reg <- .morie_stat_commands$registry
@@ -98,6 +102,8 @@ stat_bridge_help <- function() {
 #' @param cmd_str A whitespace-delimited command line, e.g.
 #'   \code{"bonferroni 0.01 0.04 0.05"}.
 #' @return Captured handler output as a single string.
+#' @examples
+#' cat(stat_bridge_exec("help"))
 #' @export
 stat_bridge_exec <- function(cmd_str) {
   parts <- strsplit(trimws(cmd_str), "\\s+")[[1]]
@@ -133,6 +139,8 @@ stat_bridge_exec <- function(cmd_str) {
 #'
 #' @param name Command name or alias.
 #' @return Multi-line description string or an explanatory error string.
+#' @examples
+#' cat(stat_bridge_fn_info("one_sample_ttest"))
 #' @export
 stat_bridge_fn_info <- function(name) {
   cmd <- resolve_stat_command(name)
@@ -160,6 +168,8 @@ stat_bridge_fn_info <- function(name) {
 #'   descriptions, and aliases.
 #' @param max_results Cap on the number of matches returned.
 #' @return Multi-line summary string.
+#' @examples
+#' stat_bridge_fn_search("ttest")
 #' @export
 stat_bridge_fn_search <- function(query, max_results = 20L) {
   q <- tolower(as.character(query))
@@ -196,6 +206,8 @@ stat_bridge_fn_search <- function(query, max_results = 20L) {
 #' Intended to be called from CI smoke tests.
 #'
 #' @return A data.frame with columns \code{name}, \code{ok}, \code{message}.
+#' @examples
+#' str(stat_bridge_verify(), max.level = 1)
 #' @export
 stat_bridge_verify <- function() {
   reg <- .morie_stat_commands$registry
@@ -226,6 +238,8 @@ stat_bridge_verify <- function() {
 #'   When \code{NULL}, defaults to \code{commandArgs(trailingOnly = TRUE)}.
 #' @return Invisibly returns the printed text; primarily called for
 #'   side effects (printing to stdout).
+#' @examples
+#' res <- try(stat_bridge_main(args = "help"))
 #' @export
 stat_bridge_main <- function(args = NULL) {
   if (is.null(args)) {

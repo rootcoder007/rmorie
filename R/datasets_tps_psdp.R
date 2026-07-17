@@ -218,6 +218,9 @@ morie_tps_psdp_layers <- function() {
 #' TPS PSDP -- Assault
 #' @inheritParams morie_datasets_tps_mha_apprehensions
 #' @return A \code{data.frame}.
+#' @examples
+#' df <- morie_datasets_tps_assault(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_tps_assault <- function(year = NULL,
                                          max_features = NULL,
@@ -242,6 +245,9 @@ morie_datasets_tps_autotheft <- function(year = NULL,
 #' TPS PSDP -- Bicycle Theft
 #' @inheritParams morie_datasets_tps_mha_apprehensions
 #' @return A \code{data.frame}.
+#' @examples
+#' df <- morie_datasets_tps_bicycletheft(offline = TRUE)
+#' head(df[, c("PRIMARY_OFFENCE", "BIKE_MAKE", "BIKE_TYPE", "STATUS")])
 #' @export
 morie_datasets_tps_bicycletheft <- function(year = NULL,
                                               max_features = NULL,
@@ -266,6 +272,10 @@ morie_datasets_tps_breakandenter <- function(year = NULL,
 #' TPS PSDP -- Hate Crimes
 #' @inheritParams morie_datasets_tps_mha_apprehensions
 #' @return A \code{data.frame}.
+#' @examples
+#' df <- morie_datasets_tps_hatecrimes(offline = TRUE)
+#' head(df[, c("OCCURRENCE_YEAR", "PRIMARY_OFFENCE", "RACE_BIAS",
+#'             "ARREST_MADE")])
 #' @export
 morie_datasets_tps_hatecrimes <- function(year = NULL,
                                             max_features = NULL,
@@ -278,6 +288,9 @@ morie_datasets_tps_hatecrimes <- function(year = NULL,
 #' TPS PSDP -- Homicides
 #' @inheritParams morie_datasets_tps_mha_apprehensions
 #' @return A \code{data.frame}.
+#' @examples
+#' df <- morie_datasets_tps_homicides(offline = TRUE)
+#' table(df$HOMICIDE_TYPE)
 #' @export
 morie_datasets_tps_homicides <- function(year = NULL,
                                            max_features = NULL,
@@ -290,6 +303,10 @@ morie_datasets_tps_homicides <- function(year = NULL,
 #' TPS PSDP -- Intimate Partner and Family Violence
 #' @inheritParams morie_datasets_tps_mha_apprehensions
 #' @return A \code{data.frame}.
+#' @examples
+#' df <- morie_datasets_tps_intimate_partner_family_violence(offline = TRUE)
+#' head(df[, c("INDEX", "FAMILY_VIOLENCE_FLAG",
+#'             "FAMILY_VIOLENCE_RELATION", "COUNT")])
 #' @export
 morie_datasets_tps_intimate_partner_family_violence <- function(
   year = NULL, max_features = NULL,
@@ -301,6 +318,9 @@ morie_datasets_tps_intimate_partner_family_violence <- function(
 #' TPS PSDP -- Robbery
 #' @inheritParams morie_datasets_tps_mha_apprehensions
 #' @return A \code{data.frame}.
+#' @examples
+#' df <- morie_datasets_tps_robbery(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_tps_robbery <- function(year = NULL,
                                          max_features = NULL,
@@ -313,6 +333,9 @@ morie_datasets_tps_robbery <- function(year = NULL,
 #' TPS PSDP -- Shooting and Firearm Discharges
 #' @inheritParams morie_datasets_tps_mha_apprehensions
 #' @return A \code{data.frame}.
+#' @examples
+#' df <- morie_datasets_tps_shooting_firearm_discharges(offline = TRUE)
+#' head(df[, c("EVENT_TYPE", "DEATH", "INJURIES", "OCC_TIME_RANGE")])
 #' @export
 morie_datasets_tps_shooting_firearm_discharges <- function(
   year = NULL, max_features = NULL,

@@ -23,3 +23,8 @@ A named list with elements \code{times}, \code{cif}, \code{ci_lower}, \code{ci_u
 \description{
 Wraps \code{survival::survfit()} with multi-state \code{Surv()}.
 }
+\examples{
+set.seed(1)
+time <- rexp(60); event <- sample(0:2, 60, replace = TRUE)
+str(morie_survival_cif(time, event, event_of_interest = 1L), max.level = 1)
+}

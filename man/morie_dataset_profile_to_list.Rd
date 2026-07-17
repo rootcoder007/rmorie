@@ -16,3 +16,9 @@ Nested named list.
 \description{
 Suitable for JSON / RDS round-trips.
 }
+\examples{
+df <- data.frame(x = c(0, 1, 0, 1), y = c(1, 2, 3, 4))
+p <- morie_dataset_profile(df, hint_treatment = "x", hint_outcome = "y")
+out <- morie_dataset_profile_to_list(p)
+names(out)
+}

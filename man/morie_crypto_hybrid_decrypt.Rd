@@ -9,11 +9,23 @@ morie_crypto_hybrid_decrypt(ciphertext, recipient_sk)
 \arguments{
 \item{ciphertext}{Raw vector container.}
 
-\item{recipient_sk}{Raw vector: recipient's ML-KEM-768 secret key.}
+\item{recipient_sk}{Raw vector: recipient's ML-KEM-768 secret key
+(2400 bytes).}
 }
 \value{
 Raw vector of decrypted plaintext.
 }
 \description{
-Hybrid decrypt: ML-KEM-768 + ChaCha20-Poly1305
+Inverse of \code{\link[=morie_crypto_hybrid_encrypt]{morie_crypto_hybrid_encrypt()}}. The wrapping key is
+re-derived from \code{HKDF(kem_ct || pk)} using the public key embedded
+in the ML-KEM-768 secret key (bytes 1153..2336), matching the
+Python \code{morie.crypto.hybrid_decrypt} exactly, so no decapsulation
+round-trip is required.
+}
+\examples{
+if (morie_crypto_liboqs_available()) {
+  kp <- morie_crypto_hybrid_keygen()
+  ct <- morie_crypto_hybrid_encrypt(charToRaw("secret"), kp$pk)
+  rawToChar(morie_crypto_hybrid_decrypt(ct, kp$sk))
+}
 }

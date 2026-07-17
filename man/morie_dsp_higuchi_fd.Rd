@@ -18,6 +18,11 @@ Scalar fractal dimension.
 Slope of \code{log(L(k))} vs. \code{log(1/k)} over \verb{k = 1..kmax} curve-length
 scales. Returns a value in approximately \verb{[1, 2]} for real signals.
 }
+\examples{
+t <- seq.int(0, 1023) / 1024
+x <- sin(2 * pi * 8 * t)
+morie_dsp_higuchi_fd(x, kmax = 6L)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 5, sec. 5.7;
 Higuchi (1988).

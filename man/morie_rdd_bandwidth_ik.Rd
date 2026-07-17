@@ -28,3 +28,10 @@ plug-in rule: pilot density and conditional variance at the cutoff,
 one-sided curvature estimates, and the regularized MSE-optimal
 bandwidth with the kernel constant.
 }
+\examples{
+set.seed(40)
+x <- runif(1000, -1, 1)
+y <- 0.5 + 0.8 * x - 0.4 * x^2 + 1.2 * (x >= 0) + rnorm(1000, 0, 0.4)
+bw <- morie_rdd_bandwidth_ik(x, y)
+bw$bandwidth
+}

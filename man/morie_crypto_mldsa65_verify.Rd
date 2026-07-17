@@ -20,3 +20,11 @@ Single logical: \code{TRUE} if signature is valid.
 \description{
 ML-DSA-65 signature verification
 }
+\examples{
+if (morie_crypto_liboqs_available()) {
+  kp <- morie_crypto_mldsa65_keygen()
+  msg <- charToRaw("signed payload v1")
+  sig <- morie_crypto_mldsa65_sign(kp$sk, msg)
+  print(morie_crypto_mldsa65_verify(kp$pk, msg, sig))
+}
+}

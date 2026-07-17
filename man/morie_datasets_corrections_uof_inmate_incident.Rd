@@ -28,3 +28,7 @@ A \code{data.frame} of the requested dataset (a 0-row typed frame when the data 
 \description{
 Inmate-to-incidents bridging table
 }
+\examples{
+df <- morie_datasets_corrections_uof_inmate_incident()
+head(df)
+}

@@ -21,3 +21,7 @@ Phase 3CCC2. Included snapshot of NYC OpenData
 Carries boro + county FIPS + parent CDTA so it can be aggregated
 upward without spatial intersection.
 }
+\examples{
+df <- morie_datasets_nyc_ntas_2020(offline = TRUE)
+head(df[, c("nta2020", "ntaname", "boroname")])
+}

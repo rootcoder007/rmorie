@@ -19,3 +19,10 @@ A \code{morie_effect_size}.
 \description{
 Glass's delta — control-group SD denominator
 }
+\examples{
+set.seed(83)
+x <- rnorm(200, mean = 1.0, sd = 0.5)
+y <- rnorm(200, mean = 0.0, sd = 2.0)
+res <- glass_delta(x, y, control = "y")
+res$estimate
+}

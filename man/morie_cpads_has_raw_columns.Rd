@@ -18,3 +18,9 @@ Accepts either \code{wtpumf} (PUMF release) or \code{wtdf} (full dataset) as
 the weight column; otherwise all documented raw PUMF columns must be
 present.
 }
+\examples{
+cols <- unname(unlist(morie_cpads_contract()$raw_column_map))
+df <- as.data.frame(stats::setNames(rep(list(1L), length(cols)), cols))
+morie_cpads_has_raw_columns(df)
+morie_cpads_has_raw_columns(data.frame(x = 1))
+}

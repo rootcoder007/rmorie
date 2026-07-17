@@ -28,3 +28,7 @@ A \code{data.frame} of the requested dataset (a 0-row typed frame when the data 
 \description{
 OTIS b04 -- Segregation consecutive durations by region
 }
+\examples{
+df <- morie_datasets_otis_b04_seg_consecutive_by_region(offline = TRUE)
+head(df)
+}

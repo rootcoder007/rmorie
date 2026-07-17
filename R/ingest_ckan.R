@@ -204,6 +204,8 @@ morie_ingest_ckan_package_search <- function(portal,
 #' @param user_agent User-Agent header sent with the request.
 #' @param timeout HTTP timeout in seconds.
 #' @return The package metadata list.
+#' @examples
+#' \donttest{try(morie_ingest_ckan_package_show("https://open.canada.ca/data", "some-package-id"))}
 #' @export
 morie_ingest_ckan_package_show <- function(portal,
                                            package_id,
@@ -234,6 +236,8 @@ morie_ingest_ckan_package_show <- function(portal,
 #' @param user_agent User-Agent header sent with the request.
 #' @param timeout HTTP timeout in seconds.
 #' @return The resource metadata list.
+#' @examples
+#' \donttest{try(morie_ingest_ckan_resource_show("https://open.canada.ca/data", "some-resource-id"))}
 #' @export
 morie_ingest_ckan_resource_show <- function(portal,
                                             resource_id,
@@ -277,6 +281,8 @@ morie_ingest_ckan_resource_show <- function(portal,
 #' @param user_agent User-Agent header sent with the request.
 #' @param timeout HTTP timeout in seconds.
 #' @return A base R \code{data.frame}.
+#' @examples
+#' \donttest{try(morie_ingest_ckan_read_resource("https://open.canada.ca/data", "some-resource-id"))}
 #' @export
 morie_ingest_ckan_read_resource <- function(portal,
                                             url_or_id,
@@ -371,6 +377,8 @@ morie_ingest_ckan_read_resource <- function(portal,
 #' @param user_agent User-Agent header sent with the request.
 #' @param timeout HTTP timeout in seconds.
 #' @return A named list of data.frames.
+#' @examples
+#' \donttest{try(morie_ingest_ckan_fetch_package_csvs("https://open.canada.ca/data", "some-package-id"))}
 #' @export
 morie_ingest_ckan_fetch_package_csvs <- function(
     portal,
@@ -431,6 +439,8 @@ morie_ingest_ckan_fetch_package_csvs <- function(
 #' @param user_agent User-Agent header sent with the request.
 #' @param timeout HTTP timeout in seconds.
 #' @return A base R \code{data.frame}.
+#' @examples
+#' \donttest{try(morie_ingest_ckan_search_packages("https://open.canada.ca/data", query = "crime", rows = 1L))}
 #' @export
 morie_ingest_ckan_search_packages <- function(portal,
                                               query,

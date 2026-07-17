@@ -15,3 +15,7 @@ A logical scalar.
 \description{
 Kish effective sample size: \eqn{(\sum w_i)^2 / \sum w_i^2}{(sum w_i)^2 / sum w_i^2}.
 }
+\examples{
+set.seed(1)
+morie_weights_ess(runif(30, 0.5, 2))
+}

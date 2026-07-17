@@ -25,6 +25,13 @@ Normalised LMS: divides the step by the instantaneous input power
 \verb{x_seg' x_seg + eps}, giving robust convergence over a wider range
 of input scales.
 }
+\examples{
+set.seed(1L)
+x <- rnorm(4000)
+d <- x + 0.01 * rnorm(4000)
+out <- morie_dsp_nlms(x, d, order = 8L, mu = 1.0)
+mean(out$e[3001:4000]^2)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 3, sec. 3.6.
 }

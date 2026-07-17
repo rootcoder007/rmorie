@@ -26,4 +26,12 @@ Named list with estimate (h_star), h_silverman, mise_curve, h_grid, n, B, method
 \description{
 Wild-bootstrap MISE bandwidth selection for NW regression
 }
+\examples{
+set.seed(19)
+n <- 50
+x <- rnorm(n)
+y <- 0.5 * x + rnorm(n, sd = 0.3)
+res <- hrzw2(x, y, B = 5, n_h = 5)
+str(res)
+}
 \keyword{internal}

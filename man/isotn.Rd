@@ -25,4 +25,10 @@ list: x_sorted, fitted, residuals, sse, r2, n, method.
 Returns the non-decreasing (or non-increasing) least-squares fit using
 the pool-adjacent-violators algorithm via stats::isoreg.
 }
+\examples{
+x <- 0:9
+y <- c(1, 3, 2, 5, 4, 6, 7, 8, 7, 10)
+res <- isotn(x, y)
+res$fitted
+}
 \keyword{internal}

@@ -17,3 +17,8 @@ An object of class \code{"morie_test_result"}.
 \description{
 Paired-sample t-test
 }
+\examples{
+set.seed(1)
+x <- rnorm(20)
+paired_ttest(x, x + rnorm(20, 0.2))
+}

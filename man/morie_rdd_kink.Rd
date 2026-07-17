@@ -41,3 +41,12 @@ A named list with elements \code{estimate}, \code{std_error}, \code{t_stat}, \co
 \description{
 Regression kink design -- slope discontinuity at the cutoff
 }
+\examples{
+set.seed(45)
+n <- 2000
+x <- runif(n, -1, 1)
+y <- 1 + 0.5 * x + 1.5 * pmax(x, 0) + rnorm(n, 0, 0.2)
+df <- data.frame(x, y)
+res <- morie_rdd_kink(df, "y", "x", bandwidth = 0.6)
+res$estimate
+}

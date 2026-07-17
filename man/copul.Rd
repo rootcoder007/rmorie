@@ -23,4 +23,11 @@ Gaussian: rho   = sin(pi tau / 2)
 Clayton:  theta = 2 tau / (1 - tau)
 Gumbel:   theta = 1 / (1 - tau)
 }
+\examples{
+set.seed(1)
+x <- rnorm(50)
+y <- x + rnorm(50)
+res <- morie:::copul(x, y)
+res$estimate
+}
 \keyword{internal}

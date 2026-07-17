@@ -17,3 +17,10 @@ A \code{morie_collinearity_diagnostics} list.
 \description{
 Comprehensive multicollinearity diagnostics
 }
+\examples{
+set.seed(7)
+X <- matrix(rnorm(200), 50, 4)
+r <- collinearity_diagnostics(X)
+r$vif
+r$condition_number
+}

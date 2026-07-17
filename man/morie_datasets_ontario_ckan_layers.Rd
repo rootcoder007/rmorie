@@ -28,3 +28,7 @@ Coverage as of this release:
 resource_ids not yet wired in (PRs welcome).
 }
 }
+\examples{
+reg <- morie_datasets_ontario_ckan_layers()
+reg[, c("dataset_key", "family", "year")]
+}

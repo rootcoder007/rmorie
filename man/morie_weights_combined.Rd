@@ -37,3 +37,8 @@ A numeric vector of combined weights.
 \description{
 Combined design x nonresponse x post-strat (x trim) pipeline.
 }
+\examples{
+set.seed(1)
+res <- morie_weights_combined(runif(30, 0.05, 0.2), rbinom(30, 1, 0.7) == 1)
+str(res, max.level = 1)
+}

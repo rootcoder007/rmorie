@@ -17,3 +17,8 @@ Fits lognormal, Pareto, and exponential distributions to
 \code{TotalAggregatedDays_Segregation} by AIC and reports which
 family wins.
 }
+\examples{
+b02 <- morie_synth_otis("b02", n = 120L, seed = 1L)
+res <- morie_otis_embedding_distribution(b02)
+res$title
+}

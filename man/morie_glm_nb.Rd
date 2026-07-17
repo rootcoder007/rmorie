@@ -38,6 +38,13 @@ family and a \code{theta} MLE update until the log-likelihood and
 \code{theta} converge. Coefficients and \code{theta} match
 \code{MASS::glm.nb} to convergence tolerance.
 }
+\examples{
+set.seed(1); n <- 300
+x <- rnorm(n)
+y <- rnbinom(n, mu = exp(0.3 + 0.9 * x), size = 3)
+fit <- suppressWarnings(morie_glm_nb(y ~ x, data = data.frame(y, x)))
+coef(fit)
+}
 \references{
 Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
 Applied Statistics with S}. Springer.

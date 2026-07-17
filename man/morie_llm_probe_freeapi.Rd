@@ -18,3 +18,8 @@ least one free remote model is reachable.  The result is cached in
 \code{options(morie.llm.freeapi_cached)} for the process lifetime.  A single
 one-second retry is performed because community servers can be slow.
 }
+\examples{
+options(morie.llm.freeapi_cached = FALSE)
+morie_llm_probe_freeapi()
+options(morie.llm.freeapi_cached = NULL)
+}

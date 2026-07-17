@@ -27,3 +27,10 @@ classifier when dtype/valid_values are unknown).
 For a richer audit that consults the bilingual XLSX dictionary,
 use the Python module \code{morie.audit_variables}.
 }
+\examples{
+spec <- function(nm, dt, vv = NULL) list(name = nm, dtype = dt, valid_values = vv)
+specs <- list(v1 = list(spec("UniqueIndividual_ID", "string"),
+                        spec("NumberConsecutiveDays_Segregation", "int")))
+res <- morie_audit_otis_variables(specs)
+res$domain
+}

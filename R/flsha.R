@@ -9,6 +9,11 @@
 #' @param mask Optional additive attention mask.
 #' @return Named list with tensor, block_size, method.
 #' @keywords internal
+#' @examples
+#' set.seed(40)
+#' Q <- matrix(rnorm(10 * 4), 10, 4)
+#' res <- morie:::flash_attention(Q)
+#' dim(res$tensor)
 flash_attention <- function(Q, K = NULL, V = NULL, block_size = 32L,
                             mask = NULL) {
   if (is.null(K)) K <- Q

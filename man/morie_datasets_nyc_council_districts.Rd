@@ -18,3 +18,7 @@ A \code{data.frame} with \code{coundist}, \code{shape_leng}, \code{shape_area}.
 Phase 3CCC2. Included snapshot of NYC OpenData
 \verb{872g-cjhh} (51 districts).
 }
+\examples{
+df <- morie_datasets_nyc_council_districts(offline = TRUE)
+range(as.integer(df$coundist))  # districts 1 through 51
+}

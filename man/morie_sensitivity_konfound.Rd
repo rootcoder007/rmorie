@@ -42,6 +42,9 @@ the inference?  Pairs with
 Cinelli-Hazlett partial-R-squared framing instead of the
 Frank et al. percent-bias-to-invalidate framing).
 }
+\examples{
+str(morie_sensitivity_konfound(0.5, 0.15, 200), max.level = 1)
+}
 \references{
 Frank, K. A., Maroulis, S. J., Duong, M. Q., &
 Kelcey, B. M. (2013). What would it take to change an

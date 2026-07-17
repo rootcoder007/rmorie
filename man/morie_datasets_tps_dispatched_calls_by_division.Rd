@@ -53,3 +53,9 @@ reporting.
 
 Tags: ASR; TPS; Annual Statistical Report; Toronto Police; Dispatched Calls
 }
+\examples{
+\donttest{
+df <- try(morie_datasets_tps_dispatched_calls_by_division(max_features = 5L))
+if (!inherits(df, "try-error")) head(df)
+}
+}

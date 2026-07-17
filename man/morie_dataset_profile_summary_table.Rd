@@ -15,3 +15,8 @@ Character scalar with embedded newlines.
 \description{
 Plain text only; no \code{rich} dependency.
 }
+\examples{
+df <- data.frame(x = c(0, 1, 0, 1), y = c(1, 2, 3, 4))
+p <- morie_dataset_profile(df, hint_treatment = "x", hint_outcome = "y")
+cat(morie_dataset_profile_summary_table(p))
+}

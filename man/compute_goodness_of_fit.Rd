@@ -31,3 +31,11 @@ R^2 and adjusted R^2 for linear models; McFadden pseudo-R^2,
 deviance and Pearson chi-squared for logistic / Poisson; AIC,
 BIC, log-likelihood, and the omnibus F-test for linear models.
 }
+\examples{
+set.seed(11)
+X <- cbind(1, matrix(rnorm(100 * 2), 100, 2))
+y <- drop(X \%*\% c(0.5, 1, -0.5) + rnorm(100, sd = 0.5))
+y_hat <- drop(X \%*\% solve(crossprod(X), crossprod(X, y)))
+g <- compute_goodness_of_fit(y, y_hat, X)
+g$r_squared
+}

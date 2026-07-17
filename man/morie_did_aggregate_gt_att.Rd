@@ -31,3 +31,11 @@ by-calendar-time, by-event-time) and produces a tidy
 \code{data.frame} consumed by the rmorie / MRM downstream
 pipelines.
 }
+\examples{
+gt <- data.frame(cohort = c(2, 2, 3, 3),
+                 time   = c(2, 3, 3, 4),
+                 att    = c(1.0, 1.5, 2.0, 2.5),
+                 std_error = c(0.4, 0.4, 0.3, 0.3))
+out <- morie_did_aggregate_gt_att(gt, aggregation = "overall")
+out$estimate
+}

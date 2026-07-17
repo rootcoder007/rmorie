@@ -23,3 +23,10 @@ A list with \code{$method = "DescTools::CramerV"} and
 Thin extender over \code{DescTools::CramerV} for the symmetric
 association statistic between two categorical variables.
 }
+\examples{
+if (requireNamespace("DescTools", quietly = TRUE)) {
+  set.seed(1)
+  x <- sample(c("a", "b"), 60, TRUE); y <- sample(c("u", "v"), 60, TRUE)
+  morie_desc_cramers_v(table(x, y))
+}
+}

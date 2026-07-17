@@ -42,3 +42,7 @@ human-readable alias (\verb{/resource/<alias>.json}, e.g.
 \verb{/resource/arrests.json} or \verb{/resource/crimes.json}). morie's
 wrappers default to the UUID for stability; pass \code{resource_id = "<alias>"} to exercise the alias path.
 }
+\examples{
+reg <- morie_datasets_external_socrata_layers()
+reg[, c("dataset_key", "resource_url")]
+}

@@ -17,3 +17,7 @@ A \code{morie_effect_size}.
 \description{
 Variance ratio (F-test for equality of variances)
 }
+\examples{
+set.seed(1)
+variance_ratio(rnorm(20), rnorm(20, 0, 2))
+}

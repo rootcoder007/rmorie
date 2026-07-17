@@ -26,4 +26,9 @@ Stratified random sample on the unit cube of dimension d: each dimension is spli
 equal-probability strata, one sample per stratum, then strata are
 permuted independently across dimensions.
 }
+\examples{
+set.seed(17)
+out <- latnh(N = 50, d = 2)
+str(out)
+}
 \keyword{internal}

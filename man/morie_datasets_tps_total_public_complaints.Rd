@@ -53,3 +53,9 @@ investigated.
 
 Tags: ASR; TPS; Toronto Police; Annual Statistical Report; Complaints
 }
+\examples{
+\donttest{
+df <- try(morie_datasets_tps_total_public_complaints(max_features = 5L))
+if (!inherits(df, "try-error")) head(df)
+}
+}

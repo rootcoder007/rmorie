@@ -75,6 +75,12 @@ NULL
 #' @param fpc_col Optional finite-population-correction column.
 #' @param nest If TRUE, treat cluster IDs as nested within strata.
 #' @return An object of class \code{"morie_survey_design_fallback"}.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(40), w = runif(40, 0.5, 2),
+#'                  s = rep(c("a", "b"), 20))
+#' d <- morie_survey_design(df, "w", strata_col = "s")
+#' class(d)
 #' @export
 morie_survey_design <- function(data, weights_col, strata_col = NULL,
                                 cluster_col = NULL, fpc_col = NULL,
@@ -102,6 +108,9 @@ morie_survey_design <- function(data, weights_col, strata_col = NULL,
 #' Horvitz-Thompson estimator of a population total.
 #' @return list with `total`, `se`, `ci_lower`, `ci_upper`.
 #' @inheritParams morie_survey_params
+#' @examples
+#' set.seed(1)
+#' str(morie_survey_ht_total(rnorm(30, 5), runif(30, 0.05, 0.2)), max.level = 1)
 #' @export
 morie_survey_ht_total <- function(y, inclusion_probs) {
   y <- as.numeric(y)
@@ -122,6 +131,9 @@ morie_survey_ht_total <- function(y, inclusion_probs) {
 #' Hajek (ratio) estimator of a population mean.
 #' @inheritParams morie_survey_params
 #' @return A named list with elements \code{mean}, \code{se}, \code{ci_lower}, \code{ci_upper}.
+#' @examples
+#' set.seed(1)
+#' morie_survey_hajek_mean(rnorm(30, 5), runif(30, 0.5, 2))
 #' @export
 morie_survey_hajek_mean <- function(y, weights) {
   y <- as.numeric(y)
@@ -143,6 +155,11 @@ morie_survey_hajek_mean <- function(y, weights) {
 #' Survey-weighted mean (delegates to `survey::svymean` when available).
 #' @inheritParams morie_survey_params
 #' @return A named \code{list} (see Details).
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(40), w = runif(40, 0.5, 2))
+#' d <- morie_survey_design(df, "w")
+#' str(morie_survey_mean(d, "y"), max.level = 1)
 #' @export
 morie_survey_mean <- function(design, variable) {
   if (inherits(design, "survey.design") ||
@@ -160,6 +177,11 @@ morie_survey_mean <- function(design, variable) {
 #' Ratio estimator of a population total using known X_pop.
 #' @inheritParams morie_survey_params
 #' @return A named list with elements \code{ratio}, \code{total_estimate}, \code{se}, \code{ci_lower}, \code{ci_upper}.
+#' @examples
+#' set.seed(1)
+#' x <- runif(30, 1, 3); y <- 2 * x + rnorm(30, 0, 0.2)
+#' str(morie_survey_ratio(y, x, rep(1, 30), X_population_total = 60),
+#'     max.level = 1)
 #' @export
 morie_survey_ratio <- function(y, x, weights, X_population_total) {
   y <- as.numeric(y)
@@ -189,6 +211,10 @@ morie_survey_ratio <- function(y, x, weights, X_population_total) {
 #' computes raw post-stratification factors in base R.
 #' @inheritParams morie_survey_params
 #' @return A numeric vector of post-stratification weights.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(g = rep(c("a", "b"), 15))
+#' str(morie_survey_poststratify(df, "g", c(a = 60, b = 40)), max.level = 1)
 #' @export
 morie_survey_poststratify <- function(df, strata_col, population_counts) {
   if (!strata_col %in% names(df))
@@ -220,6 +246,11 @@ morie_survey_poststratify <- function(df, strata_col, population_counts) {
 #' single-variable convenience.
 #' @inheritParams morie_survey_params
 #' @return A numeric vector of calibration weights.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(x1 = runif(30, 1, 3))
+#' res <- morie_survey_calibrate(df, "x1", c(x1 = 60))
+#' str(res, max.level = 1)
 #' @export
 morie_survey_calibrate <- function(df, aux_vars, population_totals,
                                    max_iter = 50, tol = 1e-6) {
@@ -262,6 +293,11 @@ morie_survey_calibrate <- function(df, aux_vars, population_totals,
 #' Subpopulation (domain) mean with Woodruff linearised SE.
 #' @inheritParams morie_survey_params
 #' @return A named list with elements \code{mean}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{n_domain}.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(40), g = rep(c("a", "b"), 20),
+#'                  w = runif(40, 0.5, 2))
+#' str(morie_survey_subpop(df, "g", "a", "y", "w"), max.level = 1)
 #' @export
 morie_survey_subpop <- function(df, domain_col, domain_value,
                                 outcome_col, weight_col) {
@@ -293,6 +329,11 @@ morie_survey_subpop <- function(df, domain_col, domain_value,
 #' or any R `family` object.
 #' @inheritParams morie_survey_params
 #' @return A \code{svyglm} object (survey-weighted GLM fit).
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(40), x = rnorm(40), w = runif(40, 0.5, 2))
+#' d <- morie_survey_design(df, "w")
+#' str(morie_survey_glm(d, y ~ x), max.level = 1)
 #' @export
 morie_survey_glm <- function(design, formula,
                              family = c("gaussian", "binomial", "poisson",
@@ -318,6 +359,10 @@ morie_survey_glm <- function(design, formula,
 #' and fits a `svyglm` in one call). Cluster-robust SEs via the design.
 #' @inheritParams morie_survey_params
 #' @return A \code{svyglm} object (survey-weighted GLM fit).
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(40), x = rnorm(40), w = runif(40, 0.5, 2))
+#' str(morie_survey_complex_glm(df, y ~ x, "w"), max.level = 1)
 #' @export
 morie_survey_complex_glm <- function(df, formula, weight_col,
                                      family = "gaussian",

@@ -22,3 +22,7 @@ Bureau's geographic approximation of USPS ZIP code service areas
 -- pair with NYPD address-bearing data via ZIP code lookups for
 a coarser-than-precinct, finer-than-borough geography.
 }
+\examples{
+df <- morie_datasets_nyc_zctas(offline = TRUE)
+head(df[, c("zcta5", "centlat", "centlon")])
+}

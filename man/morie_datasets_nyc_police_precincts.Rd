@@ -55,3 +55,7 @@ Attribute schema: \code{precinct} (string, "1"-"123"), \code{shape_leng},
 \code{shape_area}. Live mode also returns \code{the_geom} MultiPolygon
 when \code{geometry = TRUE}.
 }
+\examples{
+df <- morie_datasets_nyc_police_precincts(offline = TRUE)
+head(df)
+}

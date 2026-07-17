@@ -22,6 +22,17 @@
 #' @return Named list keyed by class label and `accuracy` with
 #'   precision / recall / f1-score / support per class, mirroring
 #'   sklearn's `classification_report(output_dict=True)`.
+#' @examples
+#' set.seed(1)
+#' n <- 80
+#' X <- data.frame(x1 = rnorm(n), x2 = rnorm(n))
+#' y <- factor(ifelse(X$x1 + X$x2 + rnorm(n, 0, 0.3) > 0, "yes", "no"))
+#' idx <- sample.int(n, floor(n * 0.7))
+#' if (requireNamespace("randomForest", quietly = TRUE)) {
+#'   r <- morie_ml_eval_robustness(X[idx, ], y[idx], X[-idx, ], y[-idx],
+#'                                 n_estimators = 20L)
+#'   r$accuracy
+#' }
 #' @export
 morie_ml_eval_robustness <- function(X, y, test_X, test_y,
                                      n_estimators = 100L,
@@ -77,6 +88,12 @@ morie_ml_eval_robustness <- function(X, y, test_X, test_y,
 #'   keys (`method`, `minority_before`, `majority_before`,
 #'   `imbalance_ratio_before`, `total_before`, `total_after`, plus
 #'   `class_<label>_before` / `class_<label>_after`).
+#' @examples
+#' set.seed(2)
+#' X <- data.frame(x1 = rnorm(50), x2 = rnorm(50))
+#' y <- c(rep("a", 40), rep("b", 10))
+#' out <- morie_ml_apply_smote(X, y, random_state = 1L, k_neighbors = 1L)
+#' out$status$method
 #' @export
 morie_ml_apply_smote <- function(X, y, random_state = 42L,
                                  k_neighbors = NULL) {

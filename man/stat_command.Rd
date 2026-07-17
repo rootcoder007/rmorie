@@ -46,3 +46,10 @@ A list with class \code{morie_stat_command}.
 \description{
 Construct a stat_command entry
 }
+\examples{
+cmd <- stat_command("demo_echo", "misc", "demo_echo",
+                    "Echo demo command",
+                    handler_repl = function(...) "ok")
+register_stat_command(cmd)
+cmd$name
+}

@@ -51,3 +51,9 @@ date aggregated by division.
 
 Tags: ASR; TPS; Toronto Police; Annual Statistical Report; Reported Crimes
 }
+\examples{
+\donttest{
+df <- try(morie_datasets_tps_reported_crimes(max_features = 5L))
+if (!inherits(df, "try-error")) head(df)
+}
+}

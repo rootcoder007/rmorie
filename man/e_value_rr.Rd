@@ -20,3 +20,7 @@ A \code{morie_evalue} named-list.
 Wraps \pkg{EValue} when available; otherwise applies the
 VanderWeele-Ding closed-form formula directly.
 }
+\examples{
+res <- e_value_rr(2.0)
+res$e_value_point
+}

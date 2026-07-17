@@ -27,3 +27,8 @@ A \code{data.frame}.
 \description{
 Generic Ontario CKAN dataset loader (by registry key)
 }
+\examples{
+df <- morie_datasets_ontario_ckan_by_key("arsau_uof_main_records_2024",
+                                         offline = TRUE)
+head(df)
+}

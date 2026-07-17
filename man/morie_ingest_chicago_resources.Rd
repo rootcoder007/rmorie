@@ -15,3 +15,6 @@ Returns the canonical Chicago open-data Socrata endpoints morie
 ships with as a flat data.frame.  Useful for discovery and for the
 CLI \code{--list} surface.
 }
+\examples{
+morie_ingest_chicago_resources()
+}

@@ -50,3 +50,9 @@ Community Safety Indicators (CSI) occurrences by reported date.
 
 Tags: Community Safety Indicators; CSI; Crime; Toronto; TPS; Toronto Police
 }
+\examples{
+\donttest{
+df <- try(morie_datasets_tps_community_safety_indicators(max_features = 5L))
+if (!inherits(df, "try-error")) head(df)
+}
+}

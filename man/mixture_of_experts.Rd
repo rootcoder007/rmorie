@@ -21,4 +21,10 @@ Named list with tensor, gate, topk_idx, load, method.
 \description{
 Sparsely-gated MoE (Shazeer 2017)
 }
+\examples{
+set.seed(11)
+x <- matrix(rnorm(20 * 4), 20, 4)
+out <- morie:::mixture_of_experts(x)
+str(out)
+}
 \keyword{internal}

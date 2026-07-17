@@ -11,6 +11,12 @@
 #' @return list: estimate, morie_kendall_tau, se_tau, u, v, family, n, method.
 #' @importFrom stats cor.test
 #' @keywords internal
+#' @examples
+#' set.seed(1)
+#' x <- rnorm(50)
+#' y <- x + rnorm(50)
+#' res <- morie:::copul(x, y)
+#' res$estimate
 #' @export
 copul <- function(x, y, family = c("gaussian", "clayton", "gumbel")) {
   family <- match.arg(family)

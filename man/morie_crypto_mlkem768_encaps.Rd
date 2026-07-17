@@ -17,3 +17,11 @@ Encapsulate a shared secret under a recipient's ML-KEM-768 public
 key. Returns the ciphertext (1088 B) the sender transmits, plus
 the 32-byte shared secret the sender holds locally.
 }
+\examples{
+if (morie_crypto_liboqs_available()) {
+  kp <- morie_crypto_mlkem768_keygen()
+  e <- morie_crypto_mlkem768_encaps(kp$pk)
+  length(e$ct)             # 1088
+  length(e$shared_secret)  # 32
+}
+}

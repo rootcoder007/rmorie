@@ -40,6 +40,10 @@ weighting approximation; for the production-grade DML use
 \details{
 Categorical covariates are dummy-coded with \code{model.matrix}.
 }
+\examples{
+df <- morie_synth_otis("b01", n = 200L, seed = 14L)
+res <- try(morie_otis_otdml(df))
+}
 \references{
 Chernozhukov, V. et al. (2018). Double/debiased machine learning
 for treatment and structural parameters. \emph{Econometrics

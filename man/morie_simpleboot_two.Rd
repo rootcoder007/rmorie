@@ -25,6 +25,13 @@ common two-sample bootstrap-of-a-statistic case (e.g. difference
 of means, ratio of medians). Returns a \code{boot} object the
 user can hand to \code{boot::boot.ci} or \code{\link[=morie_boot_basic_ci]{morie_boot_basic_ci()}}.
 }
+\examples{
+if (requireNamespace("simpleboot", quietly = TRUE)) {
+  set.seed(1)
+  b <- morie_simpleboot_two(rnorm(25), rnorm(25, 0.5), R = 200L)
+  class(b)
+}
+}
 \seealso{
 \code{simpleboot::two.boot}, \code{simpleboot::one.boot},
 \code{simpleboot::lm.boot}.

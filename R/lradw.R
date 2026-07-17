@@ -7,6 +7,10 @@
 #' @param warmup_steps Integer warmup steps (default 1000).
 #' @return Named list with tensor, value, lr_target, warmup_steps, step, method.
 #' @keywords internal
+#' @examples
+#' res <- morie:::lr_warmup(c(0, 500, 1000, 2000),
+#'                          lr_target = 1e-3, warmup_steps = 1000L)
+#' res$tensor
 lr_warmup <- function(x, lr_target = 1e-3, warmup_steps = 1000L) {
   if (warmup_steps <= 0) stop("warmup_steps must be > 0")
   t <- as.numeric(x)

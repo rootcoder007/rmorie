@@ -214,6 +214,9 @@ morie_otis_rplace <- function(df, year,
 #'   the lower-case Python schema.
 #' @param id_col,year_col Column names.
 #' @return \code{morie_otis_result}.
+#' @examples
+#' df <- morie_synth_otis("b01", n = 120L, seed = 6L)
+#' res <- try(morie_otis_astcmb(df))
 #' @export
 morie_otis_astcmb <- function(df,
                                alert_cols = c("mental_health_alert",
@@ -295,6 +298,9 @@ morie_otis_astcmb <- function(df,
 #' @param df data.frame.
 #' @param id_col,year_col,regA_col,regB_col Column names.
 #' @return \code{morie_otis_result}.
+#' @examples
+#' df <- morie_synth_otis("b01", n = 150L, seed = 8L)
+#' res <- try(morie_otis_volat(df))
 #' @export
 morie_otis_volat <- function(df,
                               id_col = "unique_individual_id",
@@ -369,6 +375,9 @@ morie_otis_volat <- function(df,
 #' @param id_col,year_col,region_col Column names.
 #' @return \code{morie_otis_result} (the trends table is in
 #'   \code{payload$trends}).
+#' @examples
+#' df <- morie_synth_otis("b01", n = 120L, seed = 10L)
+#' res <- try(morie_otis_rctrnd(df))
 #' @export
 morie_otis_rctrnd <- function(df,
                                id_col = "unique_individual_id",
@@ -431,6 +440,9 @@ morie_otis_rctrnd <- function(df,
 #' @param df data.frame.
 #' @param id_col,year_col Column names.
 #' @return \code{morie_otis_result}.
+#' @examples
+#' df <- morie_synth_otis("b01", n = 120L, seed = 12L)
+#' res <- try(morie_otis_otdesc(df))
 #' @export
 morie_otis_otdesc <- function(df,
                                id_col = "unique_individual_id",
@@ -514,6 +526,9 @@ morie_otis_otdesc <- function(df,
 #'  Chernozhukov, V. et al. (2018). Double/debiased machine learning
 #'  for treatment and structural parameters. \emph{Econometrics
 #'  Journal}, 21(1), C1-C68.
+#' @examples
+#' df <- morie_synth_otis("b01", n = 200L, seed = 14L)
+#' res <- try(morie_otis_otdml(df))
 #' @export
 morie_otis_otdml <- function(df,
                               outcome = "Y", treatment = "D",
@@ -637,30 +652,66 @@ morie_otis_otdml <- function(df,
 
 #' @rdname morie_otis_primitives
 #' @return An object of class \code{"morie_otis_result"}.
+#' @examples
+#' \donttest{
+#' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+#' res <- try(morie_otis_regional_placement(b01))
+#' class(res)
+#' }
 #' @export
 morie_otis_regional_placement <- function(...) morie_otis_rplace(...)
 
 #' @rdname morie_otis_primitives
 #' @return An object of class \code{"morie_otis_result"}.
+#' @examples
+#' \donttest{
+#' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+#' res <- try(morie_otis_alert_state_combo(b01))
+#' class(res)
+#' }
 #' @export
 morie_otis_alert_state_combo <- function(...) morie_otis_astcmb(...)
 
 #' @rdname morie_otis_primitives
 #' @return An object of class \code{"morie_otis_result"}.
+#' @examples
+#' \donttest{
+#' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+#' res <- try(morie_otis_volatility(b01))
+#' class(res)
+#' }
 #' @export
 morie_otis_volatility <- function(...) morie_otis_volat(...)
 
 #' @rdname morie_otis_primitives
 #' @return An object of class \code{"morie_otis_result"}.
+#' @examples
+#' \donttest{
+#' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+#' res <- try(morie_otis_rc_trends(b01))
+#' class(res)
+#' }
 #' @export
 morie_otis_rc_trends <- function(...) morie_otis_rctrnd(...)
 
 #' @rdname morie_otis_primitives
 #' @return An object of class \code{"morie_otis_result"}.
+#' @examples
+#' \donttest{
+#' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+#' res <- try(morie_otis_descriptives(b01))
+#' class(res)
+#' }
 #' @export
 morie_otis_descriptives <- function(...) morie_otis_otdesc(...)
 
 #' @rdname morie_otis_primitives
 #' @return An object of class \code{"morie_otis_result"}.
+#' @examples
+#' \donttest{
+#' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+#' res <- try(morie_otis_dml(b01))
+#' class(res)
+#' }
 #' @export
 morie_otis_dml <- function(...) morie_otis_otdml(...)

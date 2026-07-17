@@ -24,3 +24,7 @@ the dataset's landing page.
 \description{
 List the NYPD criminal-justice Socrata datasets wrapped by morie
 }
+\examples{
+reg <- morie_datasets_nyc_nypd_layers()
+reg[, c("dataset_key", "resource_id")]
+}

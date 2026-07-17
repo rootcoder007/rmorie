@@ -17,6 +17,9 @@
 #' @param window Positive integer kernel length. Default 5.
 #' @return Numeric vector, length(x).
 #' @references Rangayyan & Krishnan (2015), Ch. 3, sec. 3.3.
+#' @examples
+#' x <- rep(2.0, 50)
+#' morie_dsp_moving_average(x, window = 5L)
 #' @export
 morie_dsp_moving_average <- function(x, window = 5L) {
   x <- as.numeric(x)
@@ -35,6 +38,12 @@ morie_dsp_moving_average <- function(x, window = 5L) {
 #' @param window Window length. Default 5.
 #' @return Smoothed vector, length(x).
 #' @references Rangayyan & Krishnan (2015), Ch. 3.
+#' @examples
+#' set.seed(1)
+#' t <- seq.int(0, 199) / 200
+#' x <- sin(2 * pi * 5 * t) + rnorm(200, sd = 0.4)
+#' y <- morie_dsp_hann_filter(x, window = 7L)
+#' sd(y) < sd(x)  # smoothing reduces variance
 #' @export
 morie_dsp_hann_filter <- function(x, window = 5L) {
   x <- as.numeric(x)
@@ -59,6 +68,13 @@ morie_dsp_hann_filter <- function(x, window = 5L) {
 #' @param alpha Trim fraction (0 <= alpha < 0.5). Default 0.2.
 #' @return Filtered vector, length(x).
 #' @references Rangayyan & Krishnan (2015), Ch. 3, sec. 3.4.
+#' @examples
+#' set.seed(2)
+#' t <- seq(0, 199) / 200
+#' x <- sin(2 * pi * 4 * t) + rnorm(200, sd = 0.3)
+#' x[seq(20, 200, by = 20)] <- 10  # impulse contamination
+#' y <- morie_dsp_alpha_trimmed_mean(x, window = 9L, alpha = 0.3)
+#' head(y)
 #' @export
 morie_dsp_alpha_trimmed_mean <- function(x, window = 5L, alpha = 0.2) {
   x <- as.numeric(x)
@@ -95,6 +111,9 @@ morie_dsp_alpha_trimmed_mean <- function(x, window = 5L, alpha = 0.2) {
 #' @param kernel_size Odd positive integer kernel length. Default 5.
 #' @return Filtered vector, length(x).
 #' @references Rangayyan & Krishnan (2015), Ch. 3, sec. 3.4.
+#' @examples
+#' x <- c(0, 0, 0, 0, 50, 0, 0, 0, 0)
+#' morie_dsp_median_filter(x, kernel_size = 3L)
 #' @export
 morie_dsp_median_filter <- function(x, kernel_size = 5L) {
   x <- as.numeric(x)
@@ -124,6 +143,12 @@ morie_dsp_median_filter <- function(x, kernel_size = 5L) {
 #' @param noise_fraction Fallback flat-noise scale. Default 0.1.
 #' @return Filtered vector, length(x).
 #' @references Rangayyan & Krishnan (2015), Ch. 3, sec. 3.5.
+#' @examples
+#' set.seed(3L)
+#' t <- seq(0, 1, length.out = 300)
+#' x <- sin(2 * pi * 8 * t) + 0.4 * rnorm(300)
+#' y <- morie_dsp_wiener_filter(x)
+#' length(y)
 #' @export
 morie_dsp_wiener_filter <- function(x, noise_psd = NULL,
                                     noise_fraction = 0.1) {
@@ -160,6 +185,13 @@ morie_dsp_wiener_filter <- function(x, noise_psd = NULL,
 #' @return List with elements `y` and `e`, both length(x).
 #' @references Rangayyan & Krishnan (2015), Ch. 3, sec. 3.6;
 #'   Widrow & Stearns (1985).
+#' @examples
+#' set.seed(1)
+#' n <- 1000
+#' x <- rnorm(n)
+#' d <- 0.5 * c(0, x[-n]) + 0.01 * rnorm(n)  # delayed, scaled target
+#' out <- morie_dsp_lms(x, d, order = 4L, mu = 0.05)
+#' mean(out$e[801:1000]^2)  # post-convergence error is small
 #' @export
 morie_dsp_lms <- function(x, d, order = 16L, mu = 0.01) {
   x <- as.numeric(x)
@@ -193,6 +225,12 @@ morie_dsp_lms <- function(x, d, order = 16L, mu = 0.01) {
 #' @param eps Power-floor for division. Default 1e-8.
 #' @return List with `y`, `e`.
 #' @references Rangayyan & Krishnan (2015), Ch. 3, sec. 3.6.
+#' @examples
+#' set.seed(1L)
+#' x <- rnorm(4000)
+#' d <- x + 0.01 * rnorm(4000)
+#' out <- morie_dsp_nlms(x, d, order = 8L, mu = 1.0)
+#' mean(out$e[3001:4000]^2)
 #' @export
 morie_dsp_nlms <- function(x, d, order = 16L, mu = 0.5, eps = 1e-8) {
   x <- as.numeric(x)
@@ -228,6 +266,12 @@ morie_dsp_nlms <- function(x, d, order = 16L, mu = 0.5, eps = 1e-8) {
 #' @return List with `y`, `e`.
 #' @references Rangayyan & Krishnan (2015), Ch. 3, sec. 3.6;
 #'   Haykin (2002).
+#' @examples
+#' set.seed(1L)
+#' x <- rnorm(1000)
+#' d <- x + 0.01 * rnorm(1000)
+#' out <- morie_dsp_rls(x, d, order = 8L, lam = 0.99)
+#' mean(out$e[200:400]^2)
 #' @export
 morie_dsp_rls <- function(x, d, order = 16L, lam = 0.99, delta = 100) {
   x <- as.numeric(x)
@@ -267,6 +311,12 @@ morie_dsp_rls <- function(x, d, order = 16L, lam = 0.99, delta = 100) {
 #' @param q Quality factor. Default 30.
 #' @return Filtered vector, length(x).
 #' @references Rangayyan & Krishnan (2015), Ch. 3, sec. 3.7.
+#' @examples
+#' fs <- 1000
+#' t <- seq(0, (fs - 1) / fs, length.out = fs)
+#' x <- sin(2 * pi * 10 * t) + 0.5 * sin(2 * pi * 60 * t)
+#' y <- morie_dsp_notch(x, freq = 60, fs = fs)
+#' length(y)
 #' @export
 morie_dsp_notch <- function(x, freq, fs, q = 30) {
   # Module 20: hand-constructed biquad notch, zero-phase applied.
@@ -293,6 +343,12 @@ morie_dsp_notch <- function(x, freq, fs, q = 30) {
 #' @param q Quality factor per notch. Default 30.
 #' @return Filtered vector, length(x).
 #' @references Rangayyan & Krishnan (2015), Ch. 3, sec. 3.7.
+#' @examples
+#' fs <- 1000
+#' t <- seq.int(0, fs - 1L) / fs
+#' x <- sin(2 * pi * 50 * t) + 0.5 * sin(2 * pi * 100 * t)
+#' y <- morie_dsp_comb(x, fundamental = 50, fs = fs, n_harmonics = 2L)
+#' head(y)
 #' @export
 morie_dsp_comb <- function(x, fundamental, fs, n_harmonics = 5L, q = 30) {
   y <- as.numeric(x)
@@ -312,6 +368,12 @@ morie_dsp_comb <- function(x, fundamental, fs, n_harmonics = 5L, q = 30) {
 #' @param template Reference waveform.
 #' @return Matched-filter output, length(x).
 #' @references Rangayyan & Krishnan (2015), Ch. 3, sec. 3.5.
+#' @examples
+#' set.seed(1L)
+#' tpl <- c(1, 2, 3, 2, 1)
+#' x <- c(rnorm(20, sd = 0.01), tpl, rnorm(20, sd = 0.01))
+#' y <- morie_dsp_matched(x, tpl)
+#' which.max(y)
 #' @export
 morie_dsp_matched <- function(x, template) {
   x <- as.numeric(x)
@@ -331,6 +393,12 @@ morie_dsp_matched <- function(x, template) {
 #' @param segments Numeric matrix (rows = trials, cols = samples).
 #' @return Row mean as a length-`ncol` vector.
 #' @references Rangayyan & Krishnan (2015), Ch. 3, sec. 3.3.
+#' @examples
+#' set.seed(1)
+#' t <- seq.int(0, 99) / 100
+#' segs <- t(replicate(8, sin(2 * pi * 5 * t) + rnorm(100, sd = 0.3)))
+#' y <- morie_dsp_ensemble_average(segs)
+#' sd(y) < sd(segs[1, ])  # averaging reduces noise
 #' @export
 morie_dsp_ensemble_average <- function(segments) {
   segments <- as.matrix(segments)
@@ -347,6 +415,12 @@ morie_dsp_ensemble_average <- function(segments) {
 #' @param window Epoch length (centred). Default 100.
 #' @return Mean epoch, length `window`.
 #' @references Rangayyan & Krishnan (2015), Ch. 3, sec. 3.3.
+#' @examples
+#' set.seed(11L)
+#' fs <- 200L; t <- seq(0, (2000 - 1) / fs, length.out = 2000)
+#' x <- sin(2 * pi * 5 * t)
+#' triggers <- seq(60L, length(x) - 100L, by = 100L)
+#' morie_dsp_synchronized_average(x, trigger_indices = triggers, window = 80L)
 #' @export
 morie_dsp_synchronized_average <- function(x, trigger_indices,
                                            window = 100L) {
@@ -374,6 +448,10 @@ morie_dsp_synchronized_average <- function(x, trigger_indices,
 #' @param noise Numeric vector.
 #' @return SNR in dB.
 #' @references Rangayyan & Krishnan (2015), Ch. 3, sec. 3.2.
+#' @examples
+#' sig <- rep(10, 100)
+#' noi <- rep(1, 100)
+#' morie_dsp_snr(sig, noi)
 #' @export
 morie_dsp_snr <- function(signal, noise) {
   ps <- mean(signal^2)
@@ -393,6 +471,12 @@ morie_dsp_snr <- function(signal, noise) {
 #' @param x_filtered Filter output.
 #' @return Delta SNR in dB.
 #' @references Rangayyan & Krishnan (2015), Ch. 3, sec. 3.2.
+#' @examples
+#' set.seed(1L)
+#' clean <- sin(2 * pi * seq(0, 1, length.out = 256))
+#' noisy <- clean + rnorm(256, sd = 0.3)
+#' filt <- morie_dsp_moving_average(noisy, window = 7L)
+#' morie_dsp_snr_improvement(noisy, clean, filt)
 #' @export
 morie_dsp_snr_improvement <- function(x_noisy, x_clean, x_filtered) {
   morie_dsp_snr(x_clean, x_filtered - x_clean) -
@@ -409,6 +493,9 @@ morie_dsp_snr_improvement <- function(x_noisy, x_clean, x_filtered) {
 #' @return List with `turning_points`, `expected`, `z_statistic`,
 #'   `stationary`.
 #' @references Rangayyan & Krishnan (2015), Ch. 3, sec. 3.2.
+#' @examples
+#' set.seed(1L)
+#' morie_dsp_turning_points(rnorm(500))
 #' @export
 morie_dsp_turning_points <- function(x) {
   x <- as.numeric(x)
@@ -429,6 +516,11 @@ morie_dsp_turning_points <- function(x) {
 #' @param x Numeric vector.
 #' @return Scalar.
 #' @references Rangayyan & Krishnan (2015), Ch. 3.
+#' @examples
+#' set.seed(1)
+#' x <- rnorm(100, mean = 5)
+#' morie_dsp_cv(x)
+#' morie_dsp_cv(c(-1, 1))  # zero mean: Inf
 #' @export
 morie_dsp_cv <- function(x) {
   m <- mean(x)
@@ -445,6 +537,10 @@ morie_dsp_cv <- function(x) {
 #' @param rxd Cross-correlation vector (length order).
 #' @return Optimal tap-weight vector.
 #' @references Rangayyan & Krishnan (2015), Ch. 3, sec. 3.5.
+#' @examples
+#' R <- diag(2)
+#' r <- c(0.7, -0.3)
+#' morie_dsp_wiener_hopf(R, r)
 #' @export
 morie_dsp_wiener_hopf <- function(Rxx, rxd) {
   solve(Rxx, rxd)
@@ -460,6 +556,11 @@ morie_dsp_wiener_hopf <- function(Rxx, rxd) {
 #' @param max_lag Maximum lag (defaults to `length(x) - 1`).
 #' @return Numeric vector of length `2 * max_lag + 1`.
 #' @references Rangayyan & Krishnan (2015), Ch. 3, sec. 3.4.
+#' @examples
+#' set.seed(1)
+#' x <- rnorm(64)
+#' cc <- morie_dsp_cross_correlation(x, x, max_lag = 16L)
+#' which.max(cc)  # centre index = lag 0
 #' @export
 morie_dsp_cross_correlation <- function(x, y, max_lag = NULL) {
   x <- as.numeric(x)
@@ -499,6 +600,10 @@ morie_dsp_cross_correlation <- function(x, y, max_lag = NULL) {
 #' @param x Numeric vector.
 #' @return List with `even` and `odd`.
 #' @references Rangayyan & Krishnan (2015), Ch. 3.
+#' @examples
+#' x <- c(1, 2, 3, 4, 5)
+#' d <- morie_dsp_even_odd(x)
+#' d$even + d$odd  # reconstructs x
 #' @export
 morie_dsp_even_odd <- function(x) {
   x <- as.numeric(x)

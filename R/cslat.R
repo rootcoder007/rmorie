@@ -6,6 +6,9 @@
 #'   dim is the sequence length.
 #' @return Named list with tensor, n, method.
 #' @keywords internal
+#' @examples
+#' res <- morie:::causal_attention_mask(5L)
+#' res$tensor
 causal_attention_mask <- function(x) {
   n <- if (length(x) == 1L && is.numeric(x)) {
     as.integer(x)

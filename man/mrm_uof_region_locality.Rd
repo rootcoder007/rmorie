@@ -20,3 +20,10 @@ Named list with \code{diagonal_share}, \code{chi2},
 \description{
 Region-at-time vs region-now locality contingency
 }
+\examples{
+set.seed(1)
+df <- data.frame(region_at = sample(c("ON", "QC"), 40, TRUE),
+                 region_now = sample(c("ON", "QC"), 40, TRUE))
+res <- mrm_uof_region_locality(df, "region_at", "region_now")
+res$title
+}

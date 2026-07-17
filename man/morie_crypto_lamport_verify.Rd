@@ -20,3 +20,11 @@ public value selected by the message digest bits.
 \description{
 Verify a Lamport one-time signature (native)
 }
+\examples{
+if (morie_crypto_sodium_available()) {
+  kp <- morie_crypto_lamport_keygen()
+  sig <- morie_crypto_lamport_sign(kp, "the die is cast")
+  print(morie_crypto_lamport_verify(kp$pk, "the die is cast", sig))
+  print(morie_crypto_lamport_verify(kp$pk, "tampered message", sig))
+}
+}

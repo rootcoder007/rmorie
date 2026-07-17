@@ -19,6 +19,9 @@ Counts adjacent sign changes in \code{diff(x)} whose absolute slope
 difference exceeds \code{threshold}. Used as a fatigue/load proxy in
 sEMG analysis.
 }
+\examples{
+morie_dsp_turns_count(c(1, 2))
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 5, sec. 5.4;
 Willison (1964).

@@ -6,6 +6,10 @@
 #' @param num_merges Integer number of BPE merges (default 10).
 #' @return Named list with merges, vocab, corpus, n_merges, n_vocab, method.
 #' @keywords internal
+#' @examples
+#' res <- morie:::bpe_tokenizer("low lower lowest low", num_merges = 5L)
+#' res$n_merges
+#' head(res$vocab)
 bpe_tokenizer <- function(x, num_merges = 10L) {
   if (length(x) == 1L && is.character(x) && grepl("\\s", x)) {
     words <- strsplit(x, "\\s+")[[1L]]

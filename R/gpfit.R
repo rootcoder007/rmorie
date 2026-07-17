@@ -29,6 +29,11 @@
 #' @return list: scale (sigma), shape (xi), threshold, n_exceedances,
 #'   se_sigma, se_xi, loglik, method.
 #' @keywords internal
+#' @examples
+#' set.seed(23)
+#' x <- abs(rnorm(100)) + 0.1
+#' res <- gpfit(x)
+#' res$estimate
 #' @export
 gpfit <- function(x, threshold = NULL) {
   x <- as.numeric(x)

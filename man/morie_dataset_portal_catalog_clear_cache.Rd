@@ -14,3 +14,8 @@ Forces the next \code{\link[=morie_dataset_portal_catalog]{morie_dataset_portal_
 from the per-portal registries. Useful after editing or extending
 a registry in an interactive session.
 }
+\examples{
+morie_dataset_portal_catalog_clear_cache()
+catalog <- morie_dataset_portal_catalog()
+nrow(catalog)
+}

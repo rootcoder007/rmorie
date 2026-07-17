@@ -54,3 +54,9 @@ location.
 
 Tags: ASR; TPS; Toronto Police; Annual Statistical Report; Victims
 }
+\examples{
+\donttest{
+df <- try(morie_datasets_tps_victims_of_crime(max_features = 5L))
+if (!inherits(df, "try-error")) head(df)
+}
+}

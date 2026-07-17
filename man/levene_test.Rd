@@ -17,3 +17,8 @@ An object of class \code{"morie_test_result"}.
 \description{
 Levene's test for equality of variances
 }
+\examples{
+set.seed(1)
+res <- levene_test(rnorm(40), rnorm(40, sd = 2), center = "median")
+res
+}

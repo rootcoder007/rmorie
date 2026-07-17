@@ -15,6 +15,9 @@ Scalar.
 \description{
 Mean absolute value
 }
+\examples{
+morie_dsp_mean_abs(c(-2, 3, -1, 4))
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 5, sec. 5.3.
 }

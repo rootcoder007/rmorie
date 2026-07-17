@@ -37,3 +37,13 @@ A result list; see \code{\link{morie_did_2x2}}.
 Estimates the marginal effect of a one-unit increase in treatment
 intensity in the post period.
 }
+\examples{
+set.seed(1)
+n <- 300
+dose <- runif(n, 0, 3)
+p <- rbinom(n, 1, 0.5)
+y <- 0.4 * dose * p + rnorm(n, sd = 0.5)
+df <- data.frame(y = y, dose = dose, post = p)
+res <- morie_did_continuous_treatment(df, "y", "dose", "post")
+res$estimate
+}

@@ -19,3 +19,8 @@ An object of class \code{"morie_multiple_testing_result"}.
 \description{
 Thin wrapper over \code{stats::p.adjust(method = "hommel")}.
 }
+\examples{
+set.seed(1)
+p <- c(runif(30), runif(5, 0, 0.005))
+hommel(p)$adjusted
+}

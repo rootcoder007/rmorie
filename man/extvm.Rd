@@ -20,4 +20,10 @@ Fits F(x) = exp(-(1 + xi (x - mu)/sigma)^(-1/xi)) by maximum
 likelihood, with numerical observed-information SEs.  Uses the
 \code{evd} package when available; otherwise pure-R optim.
 }
+\examples{
+set.seed(23)
+x <- abs(rnorm(40)) + 0.1
+res <- try(extvm(x))
+str(res)
+}
 \keyword{internal}

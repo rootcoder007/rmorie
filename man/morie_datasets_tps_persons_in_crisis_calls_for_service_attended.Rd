@@ -50,3 +50,9 @@ Persons in crisis calls for service attended.
 
 Tags: Persons in Crisis; PIC; Crisis; Apprehensions; MHA; Calls; Calls for Service; Toronto; TPS; Toronto Police
 }
+\examples{
+\donttest{
+df <- try(morie_datasets_tps_persons_in_crisis_calls_for_service_attended(max_features = 5L))
+if (!inherits(df, "try-error")) head(df)
+}
+}

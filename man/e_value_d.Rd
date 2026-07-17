@@ -20,3 +20,8 @@ A \code{morie_evalue} named-list.
 Converts d to an RR scale via the VanderWeele-Ding approximation
 RR ~ exp(0.91 * d), then applies \code{e_value_rr()}.
 }
+\examples{
+res <- e_value_d(0.5, se = 0.1)
+res$e_value_point
+e_value_d(0.5, n = 100)$e_value_point
+}

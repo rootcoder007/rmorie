@@ -175,6 +175,10 @@ NULL
 #'   \code{"b01"} for OTIS, \code{"uof_main_records"} for ARSAU).
 #' @return A named list with classes \code{morie_variable_taxonomy} /
 #'   \code{list}.
+#' @examples
+#' t <- morie_classify_variable("RecordID", "string", NULL, "any")
+#' t$level
+#' t$role
 #' @export
 morie_classify_variable <- function(col_name, dtype = "string",
                                      valid_values = NULL,
@@ -217,6 +221,12 @@ morie_classify_variable <- function(col_name, dtype = "string",
 #'
 #' @param tax A \code{morie_variable_taxonomy}.
 #' @return Character scalar — plain-language hint at which summary suits.
+#' @examples
+#' tax <- structure(
+#'   list(dataset_name = "X", column_name = "score", level = "ordinal",
+#'        cardinality = "unknown", role = "covariate", cross_year_safe = TRUE),
+#'   class = c("morie_variable_taxonomy", "list"))
+#' morie_recommended_summary(tax)
 #' @export
 morie_recommended_summary <- function(tax) {
   if (tax$role == "identifier" || tax$level == "identifier") {
@@ -243,6 +253,12 @@ morie_recommended_summary <- function(tax) {
 #'
 #' @param tax_a,tax_b Two \code{morie_variable_taxonomy} objects.
 #' @return Character scalar — recommended test name.
+#' @examples
+#' tax <- structure(
+#'   list(dataset_name = "X", column_name = "colour", level = "nominal",
+#'        cardinality = "unknown", role = "covariate", cross_year_safe = TRUE),
+#'   class = c("morie_variable_taxonomy", "list"))
+#' morie_recommended_pair_test(tax, tax)
 #' @export
 morie_recommended_pair_test <- function(tax_a, tax_b) {
   a <- tax_a$level

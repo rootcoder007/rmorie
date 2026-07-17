@@ -26,3 +26,7 @@ tightens the BH thresholds by that factor. Delegates to
 falls back to an inline Storey-style cutoff so the wrapper keeps
 working on CRAN-only installs.
 }
+\examples{
+p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
+str(storey_q(p), max.level = 1)
+}

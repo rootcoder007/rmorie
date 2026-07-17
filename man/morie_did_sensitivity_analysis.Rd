@@ -50,6 +50,15 @@ pre-trends (Rambachan & Roth's \eqn{\bar M}{M-bar}
 parameterization, conservative version) see
 \code{\link{morie_did_honest_sensitivity}}.
 }
+\examples{
+set.seed(7)
+n <- 300
+d <- rbinom(n, 1, 0.5); p <- rbinom(n, 1, 0.5)
+y <- 1 + 0.3 * d + 0.4 * p + 0.5 * d * p + rnorm(n, sd = 0.5)
+df <- data.frame(y = y, d = d, post = p)
+out <- morie_did_sensitivity_analysis(df, "y", "d", "post")
+str(out, max.level = 1)
+}
 \references{
 Rambachan, A., & Roth, J. (2023). A more credible approach
 to parallel trends. \emph{Review of Economic Studies}, 90(5),

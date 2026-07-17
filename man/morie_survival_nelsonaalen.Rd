@@ -20,3 +20,8 @@ list with \code{times}, \code{cumhaz}, \code{ci_lower}, \code{ci_upper},
 \description{
 Nelson-Aalen cumulative-hazard estimator.
 }
+\examples{
+set.seed(1)
+time <- rexp(60); event <- rbinom(60, 1, 0.7)
+str(morie_survival_nelsonaalen(time, event), max.level = 1)
+}

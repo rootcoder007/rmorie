@@ -17,3 +17,8 @@ A \code{morie_effect_size}.
 \description{
 Pearson r as an effect size with Fisher-z CI
 }
+\examples{
+set.seed(1)
+x <- rnorm(30); y <- x + rnorm(30)
+r_effect_size(x, y)
+}

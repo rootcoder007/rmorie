@@ -32,6 +32,12 @@ Chains:
 \item \code{\link{mrm_uof_data_quality_audit}}
 }
 }
+\examples{
+\donttest{
+res <- try(morie_arsau_analyze_detailed_dataset(year_range = "2020-2022"))
+if (!inherits(res, "try-error")) print(res)
+}
+}
 \references{
 Ontario Ministry of the Solicitor General, ARSAU
 2020-2022 detailed_dataset technical notes.

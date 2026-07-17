@@ -21,3 +21,6 @@ against the Open Quantum Safe library at install time. If
 (or build from source: \url{https://github.com/open-quantum-safe/liboqs})
 }
 }
+\examples{
+morie_crypto_liboqs_available()
+}

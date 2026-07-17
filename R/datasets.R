@@ -18,6 +18,10 @@
 #' @noRd
 .morie_dataset_pkg_csv <- function(name) {
   path <- system.file("extdata", paste0(name, ".csv"), package = "rmorie")
+  if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+    path <- system.file("extdata", paste0(name, ".csv"),
+                        package = "rmoriedata")
+  }
   if (!nzchar(path)) {
     return(NA_character_)
   }
@@ -417,6 +421,9 @@
 #' @param offline Logical; return the included synthetic frame instead
 #'   of hitting the live ArcGIS endpoint.
 #' @return A `data.frame` with the documented TPS schema.
+#' @examples
+#' res <- morie_datasets_tps_major_crime(offline = TRUE, max_features = 5L)
+#' head(res)
 #' @export
 morie_datasets_tps_major_crime <- function(year = NULL,
                                            max_features = NULL,
@@ -445,6 +452,11 @@ morie_datasets_tps_major_crime <- function(year = NULL,
 #'
 #' @inheritParams morie_datasets_tps_major_crime
 #' @return A `data.frame`.
+#' @examples
+#' \donttest{
+#' res <- try(morie_datasets_tps_shootings(year = 2024, max_features = 5L))
+#' if (!inherits(res, "try-error")) head(res)
+#' }
 #' @export
 morie_datasets_tps_shootings <- function(year = NULL, max_features = NULL) {
   .morie_dataset_tps_fetch(
@@ -458,6 +470,11 @@ morie_datasets_tps_shootings <- function(year = NULL, max_features = NULL) {
 #'
 #' @inheritParams morie_datasets_tps_major_crime
 #' @return A `data.frame`.
+#' @examples
+#' \donttest{
+#' res <- try(morie_datasets_tps_homicide(year = 2024, max_features = 5L))
+#' if (!inherits(res, "try-error")) head(res)
+#' }
 #' @export
 morie_datasets_tps_homicide <- function(year = NULL, max_features = NULL) {
   .morie_dataset_tps_fetch(
@@ -470,6 +487,9 @@ morie_datasets_tps_homicide <- function(year = NULL, max_features = NULL) {
 #' List the TPS open-data layers included with morie.
 #'
 #' @return A `data.frame` with columns `name` and `url`.
+#' @examples
+#' df <- morie_datasets_tps_layers()
+#' df$name
 #' @export
 morie_datasets_tps_layers <- function() {
   data.frame(
@@ -529,6 +549,11 @@ morie_datasets_tps_layers <- function() {
 #' @seealso [morie_cpads_contract()] for the canonical schema +
 #'   column map; [morie_datasets_load_by_key()] for catalog-wide
 #'   dispatch.
+#' @examples
+#' \donttest{
+#' df <- try(suppressWarnings(morie_datasets_cpads()))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_cpads <- function(offline = TRUE,
                                  mode = c("datastore_search", "csv"),
@@ -590,6 +615,9 @@ morie_datasets_cpads <- function(offline = TRUE,
 #' @return A `data.frame`.
 #' @seealso [morie_datasets_otis_a01_restrictive_confinement()],
 #'   [morie_datasets_load_by_key()].
+#' @examples
+#' df <- morie_datasets_otis_a01(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_otis_a01 <- function(offline = TRUE, ...) {
   morie_datasets_otis_a01_restrictive_confinement(offline = offline, ...)
@@ -605,6 +633,11 @@ morie_datasets_otis_a01 <- function(offline = TRUE, ...) {
 #' this returns the legacy-pattern anchor frame which may be empty.
 #'
 #' @return A `data.frame` with columns `case_number`, `url`, `posted_date`.
+#' @examples
+#' \donttest{
+#' reports <- try(morie_datasets_siu_director_reports())
+#' if (!inherits(reports, "try-error")) head(reports)
+#' }
 #' @export
 morie_datasets_siu_director_reports <- function() {
   if (!requireNamespace("rvest", quietly = TRUE) ||
@@ -639,6 +672,9 @@ morie_datasets_siu_director_reports <- function() {
 #' @param offline Logical; if `TRUE`, return the included synthetic
 #'   `24-OFD-001` report text instead of hitting the SIU site.
 #' @return Character scalar (the plain text).
+#' @examples
+#' text <- morie_datasets_siu_report_text(offline = TRUE)
+#' substr(text, 1, 80)
 #' @export
 morie_datasets_siu_report_text <- function(url = NULL, offline = FALSE) {
   if (isTRUE(offline)) {
@@ -675,6 +711,14 @@ morie_datasets_siu_report_text <- function(url = NULL, offline = FALSE) {
 #'   or a PDF URL (fetched and parsed first).
 #' @return A named list with fields `report_id`, `incident_date`,
 #'   `conclusion`, `sections`.
+#' @examples
+#' text <- paste0(
+#'   "Report 24-OFD-001 incident dated January 5, 2024. ",
+#'   "Director's Decision: no charges. Issued: later."
+#' )
+#' out <- morie_datasets_siu_report_fields(text)
+#' out$report_id
+#' out$incident_date
 #' @export
 morie_datasets_siu_report_fields <- function(text_or_url) {
   text <- text_or_url
@@ -1072,6 +1116,9 @@ morie_datasets_siu_report_fields <- function(text_or_url) {
 #' @param app_token Optional Socrata app token (SODA3 only -- sent
 #'   as the `X-App-Token` header; ignored under `mode = "soda2"`).
 #' @return A `data.frame` with the documented Socrata schema.
+#' @examples
+#' df <- morie_datasets_chicago_crime(offline = TRUE)
+#' df[1:5, c("case_number", "date", "primary_type", "arrest")]
 #' @export
 morie_datasets_chicago_crime <- function(year = NULL,
                                          max_features = NULL,
@@ -1143,6 +1190,9 @@ morie_datasets_chicago_crime <- function(year = NULL,
 #'   (default 1,000, the unauthenticated SODA2 ceiling).
 #' @param max_pages Integer; safety net on paginated walks (default 200).
 #' @return A `data.frame`.  Schema is NOT normalised across years.
+#' @examples
+#' df <- morie_datasets_nyc_stop_and_frisk(offline = TRUE)
+#' head(df[, c("STOP_FRISK_ID", "STOP_FRISK_DATE", "FRISKED_FLAG")])
 #' @export
 morie_datasets_nyc_stop_and_frisk <- function(year = NULL,
                                               max_features = NULL,
@@ -1220,6 +1270,13 @@ morie_datasets_bigquery <- function(project, dataset, table,
 #' @param query Character; free-text search.
 #' @param rows Integer; max packages to return (default 50).
 #' @return A `data.frame` of package metadata.
+#' @examples
+#' \donttest{
+#' out <- try(morie_datasets_ckan_search(
+#'   portal = "https://open.canada.ca/data",
+#'   query = "policing", rows = 3L))
+#' if (!inherits(out, "try-error")) head(out)
+#' }
 #' @export
 morie_datasets_ckan_search <- function(portal, query, rows = 50L) {
   url <- paste0(sub("/$", "", portal), "/api/3/action/package_search")
@@ -1239,6 +1296,12 @@ morie_datasets_ckan_search <- function(portal, query, rows = 50L) {
 #' @param portal Character; CKAN portal base URL.
 #' @param package_id Character; CKAN package id or slug.
 #' @return Named list mapping `resource_name -> data.frame`.
+#' @examples
+#' \donttest{
+#' res <- try(morie_datasets_ckan_package("https://open.canada.ca/data",
+#'                                        "public-safety-canada-grants-and-contributions"))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
+#' }
 #' @export
 morie_datasets_ckan_package <- function(portal, package_id) {
   url <- paste0(sub("/$", "", portal), "/api/3/action/package_show")
@@ -1279,6 +1342,9 @@ morie_datasets_ckan_package <- function(portal, package_id) {
 #' @param api_key Character; FBI CDE API key (or `NULL` -> env var).
 #' @param offline Logical; if `TRUE`, return a included synthetic frame.
 #' @return A `data.frame`.
+#' @examples
+#' df <- morie_datasets_nibrs(year = 2023L, offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_nibrs <- function(year = NULL, max_features = NULL,
                                  state = NULL, offense = NULL,
@@ -1317,6 +1383,9 @@ morie_datasets_nibrs <- function(year = NULL, max_features = NULL,
 #' @param max_features Integer or `NULL`; cap on returned rows.
 #' @param offline Logical; if `TRUE`, return a included synthetic frame.
 #' @return A `data.frame`.
+#' @examples
+#' df <- morie_datasets_namus_missing_persons(state = "CA", offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_namus_missing_persons <- function(state = NULL,
                                                  max_features = NULL,
@@ -1352,6 +1421,9 @@ morie_datasets_namus_missing_persons <- function(state = NULL,
 #' @param max_features Integer or `NULL`; cap on returned rows.
 #' @param offline Logical; if `TRUE`, return a included synthetic frame.
 #' @return A `data.frame` with the NIST RDS catalog schema.
+#' @examplesIf nzchar(system.file("extdata", "nist_rds_synthetic.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
+#' df <- morie_datasets_nist_rds(offline = TRUE)
+#' head(df)
 #' @export
 morie_datasets_nist_rds <- function(dataset_id = NULL, query = NULL,
                                     max_features = NULL, offline = FALSE) {
@@ -2578,6 +2650,9 @@ morie_datasets_cpd_public_arrests <- function(url = NULL,
 #'
 #' @return A `data.frame` with columns `dataset_key`, `label`,
 #'   `portal`, `resource_url`, `fixture`.
+#' @examples
+#' reg <- morie_datasets_external_socrata_layers()
+#' reg[, c("dataset_key", "resource_url")]
 #' @export
 morie_datasets_external_socrata_layers <- function() {
   rows <- list(

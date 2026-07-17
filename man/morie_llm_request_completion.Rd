@@ -29,3 +29,9 @@ Parsed JSON list (the response body).
 \description{
 POST a chat-completion request to an OpenAI-compatible endpoint
 }
+\examples{
+\donttest{
+msgs <- list(list(role = "user", content = "Say hello"))
+res <- try(morie_llm_request_completion("http://localhost:11434", "llama3.2", msgs))
+}
+}

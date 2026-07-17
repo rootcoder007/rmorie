@@ -15,3 +15,11 @@ list with \code{chisq}, \code{df}, \code{pval}.
 \description{
 Bartlett's test of sphericity.
 }
+\examples{
+set.seed(1)
+f <- rnorm(100)
+X <- sapply(1:5, function(j) sqrt(0.5) * f + sqrt(0.5) * rnorm(100))
+colnames(X) <- paste0("i", 1:5)
+res <- morie_psymet_bartlett(X)
+res$pval
+}

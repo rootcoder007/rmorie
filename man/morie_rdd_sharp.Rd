@@ -44,3 +44,12 @@ A named list with elements \code{estimate}, \code{std_error}, \code{t_stat}, \co
 \description{
 Sharp RDD treatment effect at the cutoff
 }
+\examples{
+set.seed(33)
+n <- 1500
+x <- runif(n, -1, 1)
+y <- 0.5 * x + 0.3 * x^2 + 1.5 * (x >= 0) + rnorm(n, sd = 0.5)
+d <- data.frame(y, x)
+res <- morie_rdd_sharp(d, outcome = "y", running = "x", cutoff = 0)
+res$estimate
+}

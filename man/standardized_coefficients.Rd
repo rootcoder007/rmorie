@@ -18,3 +18,9 @@ A data.frame with columns \verb{variable, beta, se, t, p_value}.
 Standardises X and y to zero mean and unit variance before OLS via
 \code{stats::lm}.
 }
+\examples{
+set.seed(1)
+X <- matrix(rnorm(60), nrow = 20)
+y <- X \%*\% c(0.5, -0.3, 0.2) + rnorm(20)
+standardized_coefficients(X, drop(y))
+}

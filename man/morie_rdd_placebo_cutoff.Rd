@@ -48,3 +48,12 @@ A logical scalar.
 \description{
 Placebo cutoff falsification test
 }
+\examples{
+set.seed(1)
+x <- runif(600, -1, 1)
+y <- 0.3 * x + 1.0 * (x >= 0) + rnorm(600, sd = 0.3)
+d <- data.frame(x, y)
+out <- morie_rdd_placebo_cutoff(d, "y", "x", true_cutoff = 0,
+                                placebo_cutoffs = c(-0.5, 0, 0.5))
+out
+}

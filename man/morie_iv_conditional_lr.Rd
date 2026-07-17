@@ -38,3 +38,11 @@ A named list with elements \code{statistic}, \code{F_statistic}, \code{p_value},
 \description{
 Conditional likelihood-ratio (CLR) test of Moreira (2003)
 }
+\examples{
+set.seed(1); n <- 300
+z <- rbinom(n, 1, 0.5); u <- rnorm(n)
+d <- rbinom(n, 1, plogis(0.8 * z + 0.3 * u))
+y <- 0.5 * d + 0.4 * u + rnorm(n, sd = 0.5)
+df <- data.frame(y, d, z)
+morie_iv_conditional_lr(df, "y", "d", "z")
+}

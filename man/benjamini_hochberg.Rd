@@ -22,3 +22,9 @@ An object of class \code{"morie_multiple_testing_result"}.
 \description{
 Thin wrapper over \code{stats::p.adjust(method = "BH")}.
 }
+\examples{
+set.seed(1)
+p <- c(runif(80), runif(20, 0, 0.005))
+res <- benjamini_hochberg(p)
+head(res$adjusted)
+}

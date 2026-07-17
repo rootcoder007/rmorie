@@ -24,6 +24,12 @@ canonical CRAN reference; it is invoked when installed and the
 rmorie-shape result is reconstructed around it. Falls back to an
 inline loop otherwise.
 }
+\examples{
+set.seed(1)
+x <- rnorm(40)
+res <- jackknife(x, mean)
+res$se
+}
 \seealso{
 \code{bootstrap::jackknife}, \code{resample::jackknife}.
 }

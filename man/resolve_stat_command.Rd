@@ -15,3 +15,10 @@ A \code{morie_stat_command} or \code{NULL}.
 \description{
 Resolve a command by canonical name or alias
 }
+\examples{
+cmd <- stat_command("demo_echo", "misc", "demo_echo",
+                    "Echo demo command",
+                    handler_repl = function(...) "ok")
+register_stat_command(cmd)
+resolve_stat_command("demo_echo")$usage
+}

@@ -50,6 +50,17 @@ which is the closed-form version that takes \code{estimate} +
 \code{se} + degrees of freedom directly (useful when you don't
 have an \code{lm} object handy).
 }
+\examples{
+if (requireNamespace("sensemakr", quietly = TRUE)) {
+  set.seed(1)
+  df <- data.frame(d = rnorm(100), x1 = rnorm(100))
+  df$y <- 0.5 * df$d + 0.3 * df$x1 + rnorm(100)
+  fit <- stats::lm(y ~ d + x1, data = df)
+  res <- morie_sensitivity_omitted_var_bias(fit, "d",
+                                            benchmark_covariates = "x1")
+  class(res)
+}
+}
 \references{
 Cinelli, C., & Hazlett, C. (2020). Making sense of
 sensitivity: extending omitted variable bias.  \emph{Journal of

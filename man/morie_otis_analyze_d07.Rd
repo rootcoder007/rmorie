@@ -15,3 +15,8 @@ RichResult with summary + housing-unit-by-alert crosstab.
 \description{
 Custodial deaths by alert x housing unit (d07)
 }
+\examples{
+otis_d07 <- morie_synth_otis("d07", n = 120L, seed = 1L)
+res <- morie_otis_analyze_d07(otis_d07)
+class(res)
+}

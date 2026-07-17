@@ -24,3 +24,14 @@ A named list with elements \code{coefficients}, \code{std_errors}, \code{t_stats
 \eqn{\hat\beta = (\bar y_{z=1} - \bar y_{z=0}) /
                 (\bar d_{z=1} - \bar d_{z=0})}{hatbeta = (bar y_z=1 - bar y_z=0) / (bar d_z=1 - bar d_z=0)}.
 }
+\examples{
+set.seed(11)
+n <- 2000
+z <- rbinom(n, 1, 0.5)
+type <- sample(c("at", "nt", "co"), n, replace = TRUE, prob = c(0.1, 0.1, 0.8))
+d <- ifelse(type == "at", 1L, ifelse(type == "nt", 0L, z))
+y <- 0.5 + 2 * d + rnorm(n)
+df <- data.frame(y, d, z)
+res <- morie_iv_wald(df, outcome = "y", treatment = "d", instrument = "z")
+res$coefficients["LATE"]
+}

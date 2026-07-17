@@ -16,6 +16,11 @@ Scalar.
 \code{mobility(diff(x)) / mobility(x)}; bandwidth-like descriptor (1
 for a pure sinusoid).
 }
+\examples{
+set.seed(5)
+x <- rnorm(100)
+morie_dsp_hjorth_complexity(x)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 5, sec. 5.5.
 }

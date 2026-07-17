@@ -22,4 +22,10 @@ Named list with estimate, se, bandwidth, n, kernel, method.
 \description{
 Kernel density estimator (Rosenblatt-Parzen)
 }
+\examples{
+set.seed(16)
+x <- rnorm(120)
+res <- hrzk1(x)
+str(res)
+}
 \keyword{internal}

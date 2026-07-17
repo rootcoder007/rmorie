@@ -27,3 +27,7 @@ Year 2023 weapon_records is marked INVALID by the Ontario ministry's
 technical report and has no published CKAN resource; passing
 \code{year = "2023"} with \code{offline = FALSE} raises.
 }
+\examples{
+df <- morie_datasets_arsau_uof_weapon_records(offline = TRUE)
+head(df)
+}

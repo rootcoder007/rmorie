@@ -35,3 +35,8 @@ multi-bias version with separate selection-bias and
 misclassification-bias models; use \pkg{episensr} directly when
 you need those.
 }
+\examples{
+set.seed(1)
+str(probabilistic_bias_analysis(0.5, 0.15, n_simulations = 2000L),
+    max.level = 1)
+}

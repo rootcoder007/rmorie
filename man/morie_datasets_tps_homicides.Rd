@@ -31,3 +31,7 @@ A \code{data.frame}.
 \description{
 TPS PSDP -- Homicides
 }
+\examples{
+df <- morie_datasets_tps_homicides(offline = TRUE)
+table(df$HOMICIDE_TYPE)
+}

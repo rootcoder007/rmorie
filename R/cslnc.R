@@ -10,6 +10,9 @@
 #' @return Named list with value, tensor, step, lr_max, lr_min,
 #'   total_steps, warmup_steps, method.
 #' @keywords internal
+#' @examples
+#' morie:::cosine_lr_schedule(50L, lr_max = 1e-3, lr_min = 0,
+#'                            total_steps = 100L)
 cosine_lr_schedule <- function(x, lr_max = 1e-3, lr_min = 0,
                                total_steps = 1000L, warmup_steps = 0L) {
   if (total_steps <= warmup_steps) {

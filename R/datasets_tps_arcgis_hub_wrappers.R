@@ -27,6 +27,11 @@
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_2008_firs(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_2008_firs <- function(format = "json",
                                              where = "1=1",
@@ -56,6 +61,11 @@ morie_datasets_tps_2008_firs <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_2009_firs(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_2009_firs <- function(format = "json",
                                              where = "1=1",
@@ -85,6 +95,11 @@ morie_datasets_tps_2009_firs <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_2010_firs(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_2010_firs <- function(format = "json",
                                              where = "1=1",
@@ -114,6 +129,11 @@ morie_datasets_tps_2010_firs <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_2011_firs(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_2011_firs <- function(format = "json",
                                              where = "1=1",
@@ -143,6 +163,11 @@ morie_datasets_tps_2011_firs <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_2012_firs(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_2012_firs <- function(format = "json",
                                              where = "1=1",
@@ -172,6 +197,11 @@ morie_datasets_tps_2012_firs <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_2013_firs(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_2013_firs <- function(format = "json",
                                              where = "1=1",
@@ -203,6 +233,11 @@ morie_datasets_tps_2013_firs <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_administrative(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_administrative <- function(format = "json",
                                                   where = "1=1",
@@ -234,6 +269,11 @@ morie_datasets_tps_administrative <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_arrested_and_charged_persons(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_arrested_and_charged_persons <- function(format = "json",
                                                                 where = "1=1",
@@ -264,6 +304,11 @@ morie_datasets_tps_arrested_and_charged_persons <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_arrests_and_strip_searches(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_arrests_and_strip_searches <- function(format = "json",
                                                               where = "1=1",
@@ -293,6 +338,11 @@ morie_datasets_tps_arrests_and_strip_searches <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_automobile_ksi(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_automobile_ksi <- function(format = "json",
                                                   where = "1=1",
@@ -322,6 +372,11 @@ morie_datasets_tps_automobile_ksi <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_bicycle_thefts(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_bicycle_thefts <- function(format = "json",
                                                   where = "1=1",
@@ -351,6 +406,11 @@ morie_datasets_tps_bicycle_thefts <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_budget_2020(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_budget_2020 <- function(format = "json",
                                                where = "1=1",
@@ -380,6 +440,11 @@ morie_datasets_tps_budget_2020 <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_budget_2021(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_budget_2021 <- function(format = "json",
                                                where = "1=1",
@@ -409,6 +474,11 @@ morie_datasets_tps_budget_2021 <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_budget_2022(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_budget_2022 <- function(format = "json",
                                                where = "1=1",
@@ -438,6 +508,11 @@ morie_datasets_tps_budget_2022 <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_budget_2023(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_budget_2023 <- function(format = "json",
                                                where = "1=1",
@@ -467,6 +542,11 @@ morie_datasets_tps_budget_2023 <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_budget_2024(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_budget_2024 <- function(format = "json",
                                                where = "1=1",
@@ -496,6 +576,11 @@ morie_datasets_tps_budget_2024 <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_budget_2025(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_budget_2025 <- function(format = "json",
                                                where = "1=1",
@@ -525,6 +610,11 @@ morie_datasets_tps_budget_2025 <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_budget_2026(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_budget_2026 <- function(format = "json",
                                                where = "1=1",
@@ -554,6 +644,11 @@ morie_datasets_tps_budget_2026 <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_budget_by_command(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_budget_by_command <- function(format = "json",
                                                      where = "1=1",
@@ -584,6 +679,11 @@ morie_datasets_tps_budget_by_command <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_calls_for_service_attended(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_calls_for_service_attended <- function(format = "json",
                                                               where = "1=1",
@@ -613,6 +713,11 @@ morie_datasets_tps_calls_for_service_attended <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_community_safety_indicators(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_community_safety_indicators <- function(format = "json",
                                                                where = "1=1",
@@ -643,6 +748,11 @@ morie_datasets_tps_community_safety_indicators <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_complaint_dispositions(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_complaint_dispositions <- function(format = "json",
                                                           where = "1=1",
@@ -672,6 +782,11 @@ morie_datasets_tps_complaint_dispositions <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_cyclist_ksi(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_cyclist_ksi <- function(format = "json",
                                                where = "1=1",
@@ -704,6 +819,11 @@ morie_datasets_tps_cyclist_ksi <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_dispatched_calls_by_division(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_dispatched_calls_by_division <- function(format = "json",
                                                                 where = "1=1",
@@ -733,6 +853,11 @@ morie_datasets_tps_dispatched_calls_by_division <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_facilities(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_facilities <- function(format = "json",
                                               where = "1=1",
@@ -762,6 +887,11 @@ morie_datasets_tps_facilities <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_fatals_ksi(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_fatals_ksi <- function(format = "json",
                                               where = "1=1",
@@ -793,6 +923,11 @@ morie_datasets_tps_fatals_ksi <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_firearms_top_calibres(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_firearms_top_calibres <- function(format = "json",
                                                          where = "1=1",
@@ -824,6 +959,11 @@ morie_datasets_tps_firearms_top_calibres <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_gross_expenditures_by_division(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_gross_expenditures_by_division <- function(format = "json",
                                                                   where = "1=1",
@@ -854,6 +994,11 @@ morie_datasets_tps_gross_expenditures_by_division <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_gross_operating_budget(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_gross_operating_budget <- function(format = "json",
                                                           where = "1=1",
@@ -884,6 +1029,11 @@ morie_datasets_tps_gross_operating_budget <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_investigated_alleged_misconduct(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_investigated_alleged_misconduct <- function(format = "json",
                                                                    where = "1=1",
@@ -914,6 +1064,11 @@ morie_datasets_tps_investigated_alleged_misconduct <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_killed_and_seriously_injured(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_killed_and_seriously_injured <- function(format = "json",
                                                                 where = "1=1",
@@ -944,6 +1099,11 @@ morie_datasets_tps_killed_and_seriously_injured <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_miscellaneous_calls_for_service(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_miscellaneous_calls_for_service <- function(format = "json",
                                                                    where = "1=1",
@@ -974,6 +1134,11 @@ morie_datasets_tps_miscellaneous_calls_for_service <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_miscellaneous_data(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_miscellaneous_data <- function(format = "json",
                                                       where = "1=1",
@@ -1003,6 +1168,11 @@ morie_datasets_tps_miscellaneous_data <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_miscellaneous_firearms(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_miscellaneous_firearms <- function(format = "json",
                                                           where = "1=1",
@@ -1032,6 +1202,11 @@ morie_datasets_tps_miscellaneous_firearms <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_motorcylist_ksi(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_motorcylist_ksi <- function(format = "json",
                                                    where = "1=1",
@@ -1061,6 +1236,11 @@ morie_datasets_tps_motorcylist_ksi <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_neighbourhood_crime_rates(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_neighbourhood_crime_rates <- function(format = "json",
                                                              where = "1=1",
@@ -1090,6 +1270,11 @@ morie_datasets_tps_neighbourhood_crime_rates <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_passenger_ksi(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_passenger_ksi <- function(format = "json",
                                                  where = "1=1",
@@ -1119,6 +1304,11 @@ morie_datasets_tps_passenger_ksi <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_patrol_zone(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_patrol_zone <- function(format = "json",
                                                where = "1=1",
@@ -1148,6 +1338,11 @@ morie_datasets_tps_patrol_zone <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_pedestrian_ksi(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_pedestrian_ksi <- function(format = "json",
                                                   where = "1=1",
@@ -1178,6 +1373,11 @@ morie_datasets_tps_pedestrian_ksi <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_personnel_by_command(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_personnel_by_command <- function(format = "json",
                                                         where = "1=1",
@@ -1208,6 +1408,11 @@ morie_datasets_tps_personnel_by_command <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_personnel_by_rank(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_personnel_by_rank <- function(format = "json",
                                                      where = "1=1",
@@ -1239,6 +1444,11 @@ morie_datasets_tps_personnel_by_rank <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_personnel_by_rank_by_division(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_personnel_by_rank_by_division <- function(format = "json",
                                                                  where = "1=1",
@@ -1268,6 +1478,11 @@ morie_datasets_tps_personnel_by_rank_by_division <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_persons_in_crisis_calls_for_service_attended(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_persons_in_crisis_calls_for_service_attended <- function(format = "json",
                                                                                 where = "1=1",
@@ -1302,6 +1517,11 @@ morie_datasets_tps_persons_in_crisis_calls_for_service_attended <- function(form
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_regulated_interactions(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_regulated_interactions <- function(format = "json",
                                                           where = "1=1",
@@ -1332,6 +1552,11 @@ morie_datasets_tps_regulated_interactions <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_reported_crimes(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_reported_crimes <- function(format = "json",
                                                    where = "1=1",
@@ -1362,6 +1587,11 @@ morie_datasets_tps_reported_crimes <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_search_of_persons(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_search_of_persons <- function(format = "json",
                                                      where = "1=1",
@@ -1391,6 +1621,11 @@ morie_datasets_tps_search_of_persons <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_staffing_by_command(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_staffing_by_command <- function(format = "json",
                                                        where = "1=1",
@@ -1422,6 +1657,11 @@ morie_datasets_tps_staffing_by_command <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_tickets_issued(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_tickets_issued <- function(format = "json",
                                                   where = "1=1",
@@ -1452,6 +1692,11 @@ morie_datasets_tps_tickets_issued <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_top_20_offences_of_firearm_seizures(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_top_20_offences_of_firearm_seizures <- function(format = "json",
                                                                        where = "1=1",
@@ -1484,6 +1729,11 @@ morie_datasets_tps_top_20_offences_of_firearm_seizures <- function(format = "jso
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_total_public_complaints(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_total_public_complaints <- function(format = "json",
                                                            where = "1=1",
@@ -1513,6 +1763,11 @@ morie_datasets_tps_total_public_complaints <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_traffic_collisions(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_traffic_collisions <- function(format = "json",
                                                       where = "1=1",
@@ -1544,6 +1799,11 @@ morie_datasets_tps_traffic_collisions <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_use_of_force_call_for_service_types(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_use_of_force_call_for_service_types <- function(format = "json",
                                                                        where = "1=1",
@@ -1575,6 +1835,11 @@ morie_datasets_tps_use_of_force_call_for_service_types <- function(format = "jso
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_use_of_force_call_sources_by_month(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_use_of_force_call_sources_by_month <- function(format = "json",
                                                                       where = "1=1",
@@ -1606,6 +1871,12 @@ morie_datasets_tps_use_of_force_call_sources_by_month <- function(format = "json
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_use_of_force_gender_composition(
+#'   max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_use_of_force_gender_composition <- function(format = "json",
                                                                    where = "1=1",
@@ -1636,6 +1907,11 @@ morie_datasets_tps_use_of_force_gender_composition <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_use_of_force_location_of_occurrences(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_use_of_force_location_of_occurrences <- function(format = "json",
                                                                         where = "1=1",
@@ -1667,6 +1943,11 @@ morie_datasets_tps_use_of_force_location_of_occurrences <- function(format = "js
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_use_of_force_occurrence_category(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_use_of_force_occurrence_category <- function(format = "json",
                                                                     where = "1=1",
@@ -1698,6 +1979,11 @@ morie_datasets_tps_use_of_force_occurrence_category <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_use_of_force_time_of_day_trends(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_use_of_force_time_of_day_trends <- function(format = "json",
                                                                    where = "1=1",
@@ -1729,6 +2015,11 @@ morie_datasets_tps_use_of_force_time_of_day_trends <- function(format = "json",
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_use_of_force_use_of_force_types_and_perceived_weapons(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_use_of_force_use_of_force_types_and_perceived_weapons <- function(format = "json",
                                                                                          where = "1=1",
@@ -1762,6 +2053,11 @@ morie_datasets_tps_use_of_force_use_of_force_types_and_perceived_weapons <- func
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_victims_of_crime(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_victims_of_crime <- function(format = "json",
                                                     where = "1=1",

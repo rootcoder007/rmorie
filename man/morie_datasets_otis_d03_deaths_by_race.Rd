@@ -28,3 +28,7 @@ A \code{data.frame} of the requested dataset (a 0-row typed frame when the data 
 \description{
 OTIS d03 -- Deaths in custody by race
 }
+\examples{
+df <- morie_datasets_otis_d03_deaths_by_race(offline = TRUE)
+head(df)
+}

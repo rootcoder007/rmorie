@@ -17,3 +17,10 @@ A numeric vector of martingale residuals.
 \description{
 Martingale residuals.
 }
+\examples{
+set.seed(1)
+df <- data.frame(t = rexp(60), e = rbinom(60, 1, 0.7),
+                 x1 = rnorm(60), x2 = rnorm(60))
+fit <- morie_survival_cox(df, "t", "e", c("x1", "x2"))
+str(morie_survival_martingale(fit), max.level = 1)
+}

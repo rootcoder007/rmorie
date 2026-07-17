@@ -30,3 +30,8 @@ Student's or Welch's t depending on Levene's test; otherwise
 Mann-Whitney U.
 }
 }
+\examples{
+set.seed(1)
+res <- auto_test(rnorm(40))
+res$method
+}

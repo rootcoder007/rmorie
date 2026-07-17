@@ -19,3 +19,9 @@ An object of class \code{"morie_test_result"}.
 \description{
 Partial Pearson correlation controlling for covariates
 }
+\examples{
+set.seed(1)
+z <- matrix(rnorm(90), nrow = 30)
+x <- rnorm(30); y <- x + rnorm(30)
+partial_correlation(x, y, z)
+}

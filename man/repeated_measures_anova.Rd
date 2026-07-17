@@ -19,3 +19,9 @@ Sphericity assumption is left to the user; this routine computes the
 uncorrected F. Pair with \code{ez::ezANOVA} for GG/HF correction if
 needed.
 }
+\examples{
+set.seed(1)
+df <- data.frame(y = rnorm(30), id = rep(1:10, 3),
+                 cond = rep(c("t1", "t2", "t3"), each = 10))
+repeated_measures_anova(df, "y", "id", "cond")
+}

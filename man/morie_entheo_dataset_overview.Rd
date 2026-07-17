@@ -14,3 +14,6 @@ named list with \code{title}, \code{summary_lines},
 R parity of \code{morie.entheo_dmt.dataset_overview}. Returns a
 RichResult-style summary of the on-disk DMT_Imaging mirror.
 }
+\examples{
+\donttest{try(morie_entheo_dataset_overview())}
+}

@@ -15,3 +15,8 @@ A logical scalar.
 \description{
 Person-level custodial deaths (d01)
 }
+\examples{
+otis_d01 <- morie_synth_otis("d01", n = 120L, seed = 1L)
+res <- morie_otis_analyze_d01(otis_d01)
+class(res)
+}

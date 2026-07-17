@@ -18,3 +18,12 @@ A \code{morie_tps_result} named list.
 Top-20 OFFENCE / UCR_CODE / CSI_CATEGORY tables (whichever are
 present).
 }
+\examples{
+\donttest{
+df <- try(morie_datasets_tps_assault(max_features = 200L))
+if (!inherits(df, "try-error")) {
+  res <- try(morie_tps_offence_summary(df, ds_name = "assault"))
+  if (!inherits(res, "try-error")) str(res, max.level = 1)
+}
+}
+}

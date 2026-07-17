@@ -28,3 +28,7 @@ A \code{data.frame} of the requested dataset (a 0-row typed frame when the data 
 \description{
 OTIS c01 -- Total individuals (in custody / restrictive confinement / segregation)
 }
+\examples{
+df <- morie_datasets_otis_c01_individuals_total(offline = TRUE)
+head(df)
+}

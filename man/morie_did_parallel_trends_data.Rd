@@ -20,3 +20,12 @@ A data frame with columns \code{time}, \code{group},
 \description{
 Group-by-time outcome means for parallel-trends visualisation
 }
+\examples{
+set.seed(1)
+df <- expand.grid(unit = 1:30, time = 1:6)
+df$treat <- as.integer(df$unit <= 15)
+df$d <- as.integer(df$treat == 1L & df$time >= 4)
+df$y <- 0.1 * df$time + 0.7 * df$d + rnorm(nrow(df), sd = 0.4)
+out <- morie_did_parallel_trends_data(df, "y", "treat", "time")
+head(out)
+}

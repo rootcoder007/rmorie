@@ -31,3 +31,7 @@ A \code{data.frame}.
 \description{
 TPS PSDP -- Assault
 }
+\examples{
+df <- morie_datasets_tps_assault(offline = TRUE)
+head(df)
+}

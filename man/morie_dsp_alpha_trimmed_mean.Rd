@@ -22,6 +22,14 @@ each tail of the sorted window. Robust to both Gaussian and impulsive
 noise; reduces to the mean filter when \code{alpha = 0} and to the median
 filter as \code{alpha -> 0.5}.
 }
+\examples{
+set.seed(2)
+t <- seq(0, 199) / 200
+x <- sin(2 * pi * 4 * t) + rnorm(200, sd = 0.3)
+x[seq(20, 200, by = 20)] <- 10  # impulse contamination
+y <- morie_dsp_alpha_trimmed_mean(x, window = 9L, alpha = 0.3)
+head(y)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 3, sec. 3.4.
 }

@@ -23,3 +23,7 @@ Returns unique-individual counts overall and by fiscal year, region,
 age category, and gender, plus the per-individual placement-count
 five-number summary.
 }
+\examples{
+df <- morie_synth_otis("b01", n = 120L, seed = 12L)
+res <- try(morie_otis_otdesc(df))
+}

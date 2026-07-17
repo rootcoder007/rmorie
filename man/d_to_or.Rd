@@ -15,3 +15,6 @@ Numeric OR.
 \description{
 Convert Cohen's d to odds ratio
 }
+\examples{
+d_to_or(0.5)
+}

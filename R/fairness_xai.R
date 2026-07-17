@@ -104,6 +104,12 @@ NULL
 #' @param seed Reproducibility seed.
 #' @return \code{morie_fairness_result}; \code{$value} is the largest
 #'   importance.
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(400), 100, 4); colnames(X) <- paste0("f", 1:4)
+#' predict_fn <- function(M) as.numeric(M %*% c(1.5, -0.7, 0, 0.3))
+#' morie_fairness_xai_permutation_importance(predict_fn, X,
+#'   feature_names = colnames(X), n_repeats = 3L, seed = 1L)
 #' @export
 morie_fairness_xai_permutation_importance <- function(predict_fn, X,
                                                        feature_names = NULL,
@@ -187,6 +193,12 @@ morie_fairness_xai_permutation_importance <- function(predict_fn, X,
 #' @param feature Index or name of the feature to sweep.
 #' @param grid_size Number of grid points.
 #' @return \code{morie_fairness_result}; \code{$value} is the PD range.
+#' @examples
+#' set.seed(4)
+#' X <- matrix(rnorm(400), 100, 4); colnames(X) <- paste0("f", 1:4)
+#' predict_fn <- function(M) as.numeric(M %*% c(1.5, -0.7, 0, 0.3))
+#' morie_fairness_xai_partial_dependence(predict_fn, X, feature = "f1",
+#'   feature_names = colnames(X), grid_size = 10L)
 #' @export
 morie_fairness_xai_partial_dependence <- function(predict_fn, X, feature,
                                                    feature_names = NULL,
@@ -235,6 +247,12 @@ morie_fairness_xai_partial_dependence <- function(predict_fn, X, feature,
 #' @inheritParams morie_fairness_xai_partial_dependence
 #' @param n_bins Number of quantile bins.
 #' @return \code{morie_fairness_result}; \code{$value} is the ALE range.
+#' @examples
+#' set.seed(7)
+#' X <- matrix(rnorm(400), 100, 4); colnames(X) <- paste0("f", 1:4)
+#' predict_fn <- function(M) as.numeric(M %*% c(1.5, -0.7, 0, 0.3))
+#' morie_fairness_xai_ale(predict_fn, X, feature = "f2",
+#'   feature_names = colnames(X), n_bins = 5L)
 #' @export
 morie_fairness_xai_ale <- function(predict_fn, X, feature,
                                     feature_names = NULL,
@@ -310,6 +328,12 @@ morie_fairness_xai_ale <- function(predict_fn, X, feature,
 #' @param grid_size Number of grid points.
 #' @return \code{morie_fairness_result}; \code{$value} is the
 #'   profile's swing (max - min).
+#' @examples
+#' set.seed(9)
+#' X <- matrix(rnorm(400), 100, 4); colnames(X) <- paste0("f", 1:4)
+#' predict_fn <- function(M) as.numeric(M %*% c(1.5, -0.7, 0, 0.3))
+#' morie_fairness_xai_ceteris_paribus(predict_fn, X[1L, ], feature = "f1",
+#'   X_ref = X, feature_names = colnames(X), grid_size = 8L)
 #' @export
 morie_fairness_xai_ceteris_paribus <- function(predict_fn, x, feature,
                                                 X_ref,
@@ -370,6 +394,12 @@ morie_fairness_xai_ceteris_paribus <- function(predict_fn, x, feature,
 #' @param seed Reproducibility seed.
 #' @return \code{morie_fairness_result}; \code{$value} is the
 #'   largest-magnitude SHAP value.
+#' @examples
+#' set.seed(11)
+#' X <- matrix(rnorm(120), 30, 4); colnames(X) <- paste0("f", 1:4)
+#' predict_fn <- function(M) as.numeric(M %*% c(1.5, -0.7, 0, 0.3))
+#' morie_fairness_xai_shap_values(predict_fn, X[1L, ], background = X,
+#'   feature_names = colnames(X), n_samples = 10L, seed = 1L)
 #' @export
 morie_fairness_xai_shap_values <- function(predict_fn, x, background,
                                             feature_names = NULL,

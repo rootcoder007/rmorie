@@ -28,3 +28,7 @@ A \code{data.frame} with the documented TPS schema.
 \description{
 TPS Major Crime Indicators feed.
 }
+\examples{
+res <- morie_datasets_tps_major_crime(offline = TRUE, max_features = 5L)
+head(res)
+}

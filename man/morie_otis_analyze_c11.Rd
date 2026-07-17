@@ -15,3 +15,8 @@ An object of class \code{"morie_otis_analysis_result"}.
 \description{
 Individuals by aggregate-duration bin (c11)
 }
+\examples{
+otis_c11 <- morie_synth_otis("c11", n = 120L, seed = 1L)
+res <- morie_otis_analyze_c11(otis_c11)
+class(res)
+}

@@ -30,3 +30,10 @@ Thin extender over \code{ppcor::pcor} (matrix-wise) or
 supplied) for partial correlations controlling for one or more
 variables.
 }
+\examples{
+if (requireNamespace("ppcor", quietly = TRUE)) {
+  set.seed(1)
+  x <- rnorm(40); z <- rnorm(40); y <- x + z + rnorm(40)
+  morie_ppcor_partial(x, y, z)
+}
+}

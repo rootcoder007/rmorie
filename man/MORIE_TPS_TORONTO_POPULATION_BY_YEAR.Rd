@@ -12,3 +12,6 @@ Named integer vector (year-as-string -> population).
 \description{
 Toronto reference population by fiscal year (StatsCan 17-10-0009-01).
 }
+\examples{
+MORIE_TPS_TORONTO_POPULATION_BY_YEAR
+}

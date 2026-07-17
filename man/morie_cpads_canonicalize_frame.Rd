@@ -20,3 +20,9 @@ returned unchanged (after validation).  Otherwise raw PUMF columns
 are remapped using \code{.MORIE_CPADS_RAW_COLUMN_MAP} and missing/DKNR
 codes (98, 99) are converted to \code{NA}.
 }
+\examples{
+vars <- morie_cpads_contract()$required_variables
+df <- as.data.frame(stats::setNames(rep(list(NA), length(vars)), vars))
+out <- morie_cpads_canonicalize_frame(df)
+colnames(out)
+}

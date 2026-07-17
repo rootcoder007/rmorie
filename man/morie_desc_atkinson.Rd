@@ -23,3 +23,9 @@ A list with \code{$method = "DescTools::Atkinson"} and
 Thin extender over \code{DescTools::Atkinson} for the
 inequality-aversion-parameter family of inequality indices.
 }
+\examples{
+if (requireNamespace("DescTools", quietly = TRUE)) {
+  set.seed(1)
+  morie_desc_atkinson(rlnorm(50))
+}
+}

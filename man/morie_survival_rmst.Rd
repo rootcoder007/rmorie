@@ -24,3 +24,8 @@ Integrates the Kaplan-Meier estimator from 0 to \code{tau} using trapezoidal
 integration on the step-function. SE follows the Klein-Moeschberger
 formula (approximation matches the Python module).
 }
+\examples{
+set.seed(1)
+time <- rexp(60); event <- rbinom(60, 1, 0.7)
+str(morie_survival_rmst(time, event, tau = 2), max.level = 1)
+}

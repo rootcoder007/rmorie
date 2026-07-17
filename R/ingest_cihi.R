@@ -30,6 +30,8 @@
 #' @param user_agent User-Agent string.
 #' @param ... forwarded to readxl::read_excel.
 #' @return base R data.frame.
+#' @examples
+#' \donttest{try(morie_ingest_cihi_xlsx(url = "https://example.org/data.xlsx"))}
 #' @export
 morie_ingest_cihi_xlsx <- function(url, sheet = NULL, timeout = 120,
                                    user_agent = "morie/r (+https://github.com/rootcoder007/rmorie)", ...) {

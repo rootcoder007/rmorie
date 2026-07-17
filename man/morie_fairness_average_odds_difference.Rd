@@ -36,3 +36,10 @@ Zero means parity of errors; values away from zero mean the
 combined error profile favours one group over another. Used in
 IBM AIF360 and in the COMPAS \emph{XAI Stories} audit.
 }
+\examples{
+morie_fairness_average_odds_difference(
+  y_true = c(1, 1, 0, 0, 1, 1, 0, 0),
+  y_pred = c(1, 1, 0, 0, 0, 0, 1, 1),
+  group  = c(rep("A", 4), rep("B", 4))
+)
+}

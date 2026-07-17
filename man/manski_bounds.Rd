@@ -28,3 +28,8 @@ Under no assumptions about selection, the ATE is only partially
 identified. Returns a named list with \code{lower_bound}, \code{upper_bound},
 \code{point_estimate}, \code{width}.
 }
+\examples{
+set.seed(1)
+res <- manski_bounds(runif(50), runif(50), p_treated = 0.5)
+c(res$lower_bound, res$upper_bound)
+}

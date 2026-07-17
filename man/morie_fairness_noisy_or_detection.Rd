@@ -32,3 +32,10 @@ sampled per crime and returned in \code{$detected}.}
 For each crime location, computes \code{1 - (1 - p_detect)^k} where
 \code{k} is the number of officers within \code{radius}.
 }
+\examples{
+set.seed(1)
+crimes <- matrix(runif(20), ncol = 2L)
+officers <- matrix(runif(10), ncol = 2L)
+r <- morie_fairness_noisy_or_detection(crimes, officers, radius = 0.5, p_detect = 0.7)
+r$probabilities
+}

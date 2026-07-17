@@ -28,3 +28,7 @@ A \code{data.frame} of the requested dataset (a 0-row typed frame when the data 
 \description{
 OTIS b02 -- Segregation total days per individual
 }
+\examples{
+df <- morie_datasets_otis_b02_segregation_total_days(offline = TRUE)
+head(df)
+}

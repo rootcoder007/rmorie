@@ -35,3 +35,11 @@ A named list with elements \code{coefficients}, \code{std_errors}, \code{t_stats
 \description{
 Control-function (residual augmentation) IV
 }
+\examples{
+set.seed(1); n <- 200
+z <- rbinom(n, 1, 0.5); u <- rnorm(n)
+d <- rbinom(n, 1, plogis(0.8 * z + 0.3 * u))
+y <- 0.5 * d + 0.4 * u + rnorm(n, sd = 0.5)
+df <- data.frame(y, d, z)
+morie_iv_control_function(df, "y", "d", "z")
+}

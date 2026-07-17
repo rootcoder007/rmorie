@@ -18,6 +18,11 @@ Scalar (Hz).
 Frequency at which the cumulative spectrum reaches half the total
 power. Robust to high-frequency outliers vs. the mean frequency.
 }
+\examples{
+freqs <- seq.int(0, 100) / 100
+psd <- rep(1, 101)
+morie_dsp_median_frequency(psd, freqs)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 6, sec. 6.6.
 }

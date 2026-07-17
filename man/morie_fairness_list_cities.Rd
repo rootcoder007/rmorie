@@ -12,3 +12,6 @@ Sorted character vector of registered profile names.
 \description{
 List registered city profile names
 }
+\examples{
+morie_fairness_list_cities()
+}

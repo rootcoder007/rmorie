@@ -51,3 +51,9 @@ strip searches.
 
 Tags: RBDC; race; race based data
 }
+\examples{
+\donttest{
+df <- try(morie_datasets_tps_arrests_and_strip_searches(max_features = 5L))
+if (!inherits(df, "try-error")) head(df)
+}
+}

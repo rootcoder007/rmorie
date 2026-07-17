@@ -195,6 +195,13 @@ morie_rdd_kernel_gaussian <- function(u) stats::dnorm(u)
 #' @param kernel One of \code{"triangular"} (default), \code{"epanechnikov"},
 #'   \code{"uniform"}, or \code{"gaussian"}.
 #' @return A data frame of fitted values and standard errors.
+#' @examples
+#' set.seed(1)
+#' x <- runif(400, -1, 1)
+#' y <- 0.3 * x + 1.0 * (x >= 0) + rnorm(400, sd = 0.3)
+#' ep <- c(-0.5, 0, 0.5)
+#' out <- morie_rdd_local_polynomial(x, y, ep, h = 0.5)
+#' out
 #' @export
 morie_rdd_local_polynomial <- function(x, y, eval_points, h, p = 1,
                                        kernel = "triangular") {
@@ -224,6 +231,12 @@ morie_rdd_local_polynomial <- function(x, y, eval_points, h, p = 1,
 #' bandwidth with the kernel constant.
 #' @inheritParams morie_rdd_params
 #' @return A named list with elements \code{bandwidth}, \code{method}, \code{details}.
+#' @examples
+#' set.seed(40)
+#' x <- runif(1000, -1, 1)
+#' y <- 0.5 + 0.8 * x - 0.4 * x^2 + 1.2 * (x >= 0) + rnorm(1000, 0, 0.4)
+#' bw <- morie_rdd_bandwidth_ik(x, y)
+#' bw$bandwidth
 #' @export
 morie_rdd_bandwidth_ik <- function(x, y, cutoff = 0,
                                    kernel = "triangular") {
@@ -235,6 +248,12 @@ morie_rdd_bandwidth_ik <- function(x, y, cutoff = 0,
 #' Rule-of-thumb (ROT) bandwidth -- Silverman-style on running variable
 #' @inheritParams morie_rdd_params
 #' @return A named list with elements \code{bandwidth}, \code{method}, \code{details}.
+#' @examples
+#' set.seed(1)
+#' x <- runif(400, -1, 1)
+#' y <- 0.3 * x + 1.0 * (x >= 0) + rnorm(400, sd = 0.3)
+#' bw <- morie_rdd_bandwidth_rot(x, y)
+#' bw$bandwidth
 #' @export
 morie_rdd_bandwidth_rot <- function(x, y, cutoff = 0) {
   sd_x  <- stats::sd(x)
@@ -246,6 +265,12 @@ morie_rdd_bandwidth_rot <- function(x, y, cutoff = 0) {
 #' Calonico-Cattaneo-Titiunik (CCT) MSE-optimal bandwidth
 #' @inheritParams morie_rdd_params
 #' @return A named list with elements \code{bandwidth}, \code{method}, \code{details}.
+#' @examples
+#' set.seed(1)
+#' x <- runif(400, -1, 1)
+#' y <- 0.3 * x + 1.0 * (x >= 0) + rnorm(400, sd = 0.3)
+#' bw <- morie_rdd_bandwidth_cct(x, y)
+#' bw$bandwidth
 #' @export
 morie_rdd_bandwidth_cct <- function(x, y, cutoff = 0,
                                     kernel = "triangular", p = 1) {
@@ -296,6 +321,14 @@ morie_rdd_bandwidth_cct <- function(x, y, cutoff = 0,
 #' @param covariates Optional character vector of covariate names.
 #' @param alpha Significance level.
 #' @return A named list with elements \code{estimate}, \code{std_error}, \code{t_stat}, \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{n_obs}, \code{method}, \code{details}.
+#' @examples
+#' set.seed(33)
+#' n <- 1500
+#' x <- runif(n, -1, 1)
+#' y <- 0.5 * x + 0.3 * x^2 + 1.5 * (x >= 0) + rnorm(n, sd = 0.5)
+#' d <- data.frame(y, x)
+#' res <- morie_rdd_sharp(d, outcome = "y", running = "x", cutoff = 0)
+#' res$estimate
 #' @export
 morie_rdd_sharp <- function(data, outcome, running, cutoff = 0,
                             bandwidth = NULL, p = 1, kernel = "triangular",
@@ -322,6 +355,16 @@ morie_rdd_sharp <- function(data, outcome, running, cutoff = 0,
 #' Fuzzy RDD treatment effect via instrumented Wald ratio
 #' @inheritParams morie_rdd_params
 #' @return A named list with elements \code{estimate}, \code{std_error}, \code{t_stat}, \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{n_obs}, \code{method}, \code{details}.
+#' @examples
+#' set.seed(34)
+#' n <- 1000
+#' x <- runif(n, -1, 1)
+#' tr <- as.integer(xor(x >= 0, rbinom(n, 1, 0.1) == 1))
+#' y <- 0.3 * x + 1.5 * tr + rnorm(n, sd = 0.5)
+#' d <- data.frame(y, x, tr)
+#' res <- morie_rdd_fuzzy(d, outcome = "y", running = "x",
+#'                        treatment = "tr", cutoff = 0)
+#' res$estimate
 #' @export
 morie_rdd_fuzzy <- function(data, outcome, running, treatment,
                             cutoff = 0, bandwidth = NULL, p = 1,
@@ -345,6 +388,13 @@ morie_rdd_fuzzy <- function(data, outcome, running, treatment,
 #' CCT bias-corrected, robust-SE RDD inference
 #' @inheritParams morie_rdd_params
 #' @return A numeric value.
+#' @examples
+#' set.seed(44)
+#' x <- runif(1000, -1, 1)
+#' y <- 0.5 + 0.8 * x - 0.4 * x^2 + 1.2 * (x >= 0) + rnorm(1000, 0, 0.4)
+#' d <- data.frame(x, y)
+#' bc <- morie_rdd_bias_corrected(d, "y", "x", bandwidth = 0.5, rho = 1)
+#' bc$estimate
 #' @export
 morie_rdd_bias_corrected <- function(data, outcome, running, cutoff = 0,
                                      bandwidth = NULL, rho = 1, p = 1,
@@ -373,6 +423,11 @@ morie_rdd_bias_corrected <- function(data, outcome, running, cutoff = 0,
 #' McCrary (2008) density manipulation test
 #' @inheritParams morie_rdd_params
 #' @return A named \code{list} (see Details).
+#' @examples
+#' set.seed(35)
+#' x <- runif(2000, -1, 1)
+#' out <- morie_rdd_mccrary(x, cutoff = 0)
+#' out$p_value
 #' @export
 morie_rdd_mccrary <- function(x, cutoff = 0, n_bins = 50,
                               bandwidth = NULL) {
@@ -386,6 +441,11 @@ morie_rdd_mccrary <- function(x, cutoff = 0, n_bins = 50,
 #' Cattaneo-Jansson-Ma (2020) local-polynomial density test
 #' @inheritParams morie_rdd_params
 #' @return A named \code{list} (see Details).
+#' @examples
+#' set.seed(1)
+#' x <- runif(300, -1, 1)
+#' res <- morie_rdd_cattaneo_density(x)
+#' res$name
 #' @export
 morie_rdd_cattaneo_density <- function(x, cutoff = 0, p = 2,
                                        kernel = "triangular",
@@ -411,6 +471,13 @@ morie_rdd_cattaneo_density <- function(x, cutoff = 0, p = 2,
 #' Runs a sharp-RDD null test on each covariate.
 #' @inheritParams morie_rdd_params
 #' @return A \code{data.frame} of covariate-balance statistics, one row per covariate.
+#' @examples
+#' set.seed(1)
+#' x <- runif(400, -1, 1)
+#' y <- 0.3 * x + 1.0 * (x >= 0) + rnorm(400, sd = 0.3)
+#' d <- data.frame(x, y, c1 = rnorm(400), c2 = rnorm(400))
+#' out <- morie_rdd_covariate_balance(d, "x", c("c1", "c2"))
+#' out
 #' @export
 morie_rdd_covariate_balance <- function(data, running, covariates,
                                         cutoff = 0, bandwidth = NULL,
@@ -428,6 +495,14 @@ morie_rdd_covariate_balance <- function(data, running, covariates,
 #' Placebo cutoff falsification test
 #' @inheritParams morie_rdd_params
 #' @return A logical scalar.
+#' @examples
+#' set.seed(1)
+#' x <- runif(600, -1, 1)
+#' y <- 0.3 * x + 1.0 * (x >= 0) + rnorm(600, sd = 0.3)
+#' d <- data.frame(x, y)
+#' out <- morie_rdd_placebo_cutoff(d, "y", "x", true_cutoff = 0,
+#'                                 placebo_cutoffs = c(-0.5, 0, 0.5))
+#' out
 #' @export
 morie_rdd_placebo_cutoff <- function(data, outcome, running, true_cutoff,
                                      placebo_cutoffs, bandwidth = NULL,
@@ -451,6 +526,13 @@ morie_rdd_placebo_cutoff <- function(data, outcome, running, true_cutoff,
 #' Donut-hole RDD
 #' @inheritParams morie_rdd_params
 #' @return A named list with elements \code{estimate}, \code{std_error}, \code{t_stat}, \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{n_obs}, \code{method}, \code{details}.
+#' @examples
+#' set.seed(1)
+#' x <- runif(800, -1, 1)
+#' y <- 0.3 * x + 1.0 * (x >= 0) + rnorm(800, sd = 0.3)
+#' d <- data.frame(x, y)
+#' res <- morie_rdd_donut(d, "y", "x", donut = 0.05)
+#' res$estimate
 #' @export
 morie_rdd_donut <- function(data, outcome, running, cutoff = 0, donut = 0,
                             bandwidth = NULL, p = 1, kernel = "triangular",
@@ -467,6 +549,13 @@ morie_rdd_donut <- function(data, outcome, running, cutoff = 0, donut = 0,
 #' RDD with discrete running variable
 #' @inheritParams morie_rdd_params
 #' @return A named list with elements \code{estimate}, \code{std_error}, \code{t_stat}, \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{n_obs}, \code{method}, \code{details}.
+#' @examples
+#' set.seed(1)
+#' x <- runif(400, -1, 1)
+#' y <- 0.3 * x + 1.0 * (x >= 0) + rnorm(400, sd = 0.3)
+#' d <- data.frame(x, y)
+#' res <- morie_rdd_discrete(d, "y", "x")
+#' res$method
 #' @export
 morie_rdd_discrete <- function(data, outcome, running, cutoff = 0,
                                bandwidth = NULL, p = 0, alpha = 0.05) {
@@ -484,6 +573,13 @@ morie_rdd_discrete <- function(data, outcome, running, cutoff = 0,
 #' Binned scatter + global-polynomial data for an RD plot
 #' @inheritParams morie_rdd_params
 #' @return A named \code{list} (see Details).
+#' @examples
+#' set.seed(1)
+#' x <- runif(300, -1, 1)
+#' y <- 0.3 * x + 1.0 * (x >= 0) + rnorm(300, sd = 0.3)
+#' d <- data.frame(x, y)
+#' out <- morie_rdd_plot_data(d, "y", "x", n_bins = 10L)
+#' head(out$bins)
 #' @export
 morie_rdd_plot_data <- function(data, outcome, running, cutoff = 0,
                                 n_bins = 20, p_global = 4, p_local = 1,
@@ -504,6 +600,13 @@ morie_rdd_plot_data <- function(data, outcome, running, cutoff = 0,
 #' Bandwidth sensitivity sweep
 #' @inheritParams morie_rdd_params
 #' @return A \code{data.frame} of RDD estimates across bandwidths, one row per bandwidth.
+#' @examples
+#' set.seed(1)
+#' x <- runif(400, -1, 1)
+#' y <- 0.3 * x + 1.0 * (x >= 0) + rnorm(400, sd = 0.3)
+#' d <- data.frame(x, y)
+#' out <- morie_rdd_bandwidth_sensitivity(d, "y", "x")
+#' out
 #' @export
 morie_rdd_bandwidth_sensitivity <- function(data, outcome, running,
                                             cutoff = 0,
@@ -530,6 +633,14 @@ morie_rdd_bandwidth_sensitivity <- function(data, outcome, running,
 #' Regression kink design -- slope discontinuity at the cutoff
 #' @inheritParams morie_rdd_params
 #' @return A named list with elements \code{estimate}, \code{std_error}, \code{t_stat}, \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{n_obs}, \code{method}, \code{details}.
+#' @examples
+#' set.seed(45)
+#' n <- 2000
+#' x <- runif(n, -1, 1)
+#' y <- 1 + 0.5 * x + 1.5 * pmax(x, 0) + rnorm(n, 0, 0.2)
+#' df <- data.frame(x, y)
+#' res <- morie_rdd_kink(df, "y", "x", bandwidth = 0.6)
+#' res$estimate
 #' @export
 morie_rdd_kink <- function(data, outcome, running, cutoff = 0,
                            bandwidth = NULL, kernel = "triangular",
@@ -551,6 +662,14 @@ morie_rdd_kink <- function(data, outcome, running, cutoff = 0,
 #' Local-randomisation RDD via permutation in a fixed window
 #' @inheritParams morie_rdd_params
 #' @return A named list with elements \code{estimate}, \code{std_error}, \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{n_obs}, \code{method}, \code{details}.
+#' @examples
+#' set.seed(1)
+#' x <- runif(400, -1, 1)
+#' y <- 0.3 * x + 1.0 * (x >= 0) + rnorm(400, sd = 0.3)
+#' d <- data.frame(x, y)
+#' res <- morie_rdd_local_randomisation(d, "y", "x", window = 0.3,
+#'                                      n_permutations = 200L, seed = 1)
+#' res$p_value
 #' @export
 morie_rdd_local_randomisation <- function(data, outcome, running, cutoff = 0,
                                           window = 1, n_permutations = 1000,
@@ -579,6 +698,16 @@ morie_rdd_local_randomisation <- function(data, outcome, running, cutoff = 0,
 #' Geographic / boundary RDD on a signed distance
 #' @inheritParams morie_rdd_params
 #' @return A named list with elements \code{estimate}, \code{std_error}, \code{t_stat}, \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{n_obs}, \code{method}, \code{details}.
+#' @examples
+#' set.seed(1)
+#' n <- 400
+#' side <- rbinom(n, 1, 0.5)
+#' dist_to_boundary <- runif(n, 0, 1)
+#' signed <- ifelse(side == 1, dist_to_boundary, -dist_to_boundary)
+#' y <- 0.5 * (signed >= 0) + rnorm(n, sd = 0.3)
+#' d <- data.frame(y, dist_to_boundary, side)
+#' res <- morie_rdd_geographic(d, "y", "dist_to_boundary", "side")
+#' res$estimate
 #' @export
 morie_rdd_geographic <- function(data, outcome, distance_to_boundary, side,
                                  bandwidth = NULL, p = 1,
@@ -600,6 +729,9 @@ morie_rdd_geographic <- function(data, outcome, distance_to_boundary, side,
 #' RDD power calculation
 #' @inheritParams morie_rdd_params
 #' @return A named list with elements \code{power}, \code{std_error}, \code{effective_n}, \code{tau}, \code{sigma}, \code{alpha}.
+#' @examples
+#' res <- morie_rdd_power(n = 500, tau = 0.5, sigma = 1, kernel = "triangular")
+#' res$power
 #' @export
 morie_rdd_power <- function(n, tau, sigma, cutoff_density = 1,
                             bandwidth = NULL, kernel = "triangular",
@@ -619,6 +751,9 @@ morie_rdd_power <- function(n, tau, sigma, cutoff_density = 1,
 #' RDD sample-size determination
 #' @inheritParams morie_rdd_params
 #' @return An integer scalar: the required sample size.
+#' @examples
+#' ss <- morie_rdd_sample_size(tau = 0.5, sigma = 1, power = 0.8)
+#' ss
 #' @export
 morie_rdd_sample_size <- function(tau, sigma, cutoff_density = 1,
                                   bandwidth = 1, power = 0.8,

@@ -15,3 +15,7 @@ A named list (see Description).
 \description{
 Run a suite of homogeneity-of-variance tests
 }
+\examples{
+set.seed(1)
+str(variance_equality_suite(rnorm(20), rnorm(20, 0, 1.5)), max.level = 1)
+}

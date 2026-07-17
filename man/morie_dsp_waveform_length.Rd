@@ -15,6 +15,9 @@ Scalar.
 \description{
 Sum of absolute first differences. Standard sEMG descriptor.
 }
+\examples{
+morie_dsp_waveform_length(c(0, 1, 0, 1, 0))
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 5, sec. 5.3;
 Hudgins et al. (1993).

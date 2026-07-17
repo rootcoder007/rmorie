@@ -29,6 +29,11 @@ the raw \code{boot} object. Useful when the caller wants to use
 \code{boot}'s downstream helpers (\code{boot::boot.ci},
 \code{boot::tilt.boot}, \code{boot::jack.after.boot}) directly.
 }
+\examples{
+set.seed(1)
+b <- morie_boot_run(rnorm(50), statistic = mean, R = 200L)
+str(b, max.level = 1)
+}
 \seealso{
 \code{\link[=morie_boot]{morie_boot()}}, \code{\link[=morie_boot_basic_ci]{morie_boot_basic_ci()}}.
 }

@@ -18,6 +18,13 @@ Matched-filter output, length(x).
 Optimal linear filter against white Gaussian noise: convolves \code{x}
 with the time-reversed template, normalised by \verb{||template||}.
 }
+\examples{
+set.seed(1L)
+tpl <- c(1, 2, 3, 2, 1)
+x <- c(rnorm(20, sd = 0.01), tpl, rnorm(20, sd = 0.01))
+y <- morie_dsp_matched(x, tpl)
+which.max(y)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 3, sec. 3.5.
 }

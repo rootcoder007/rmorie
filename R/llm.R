@@ -62,6 +62,10 @@ if (nzchar(v)) v else NULL }
 #' Probe a local Ollama instance
 #' @param timeout Probe timeout in seconds.
 #' @return Logical scalar -- TRUE when reachable.
+#' @examples
+#' options(morie.llm.ollama_cached = FALSE)
+#' morie_llm_probe_ollama()
+#' options(morie.llm.ollama_cached = NULL)
 #' @export
 morie_llm_probe_ollama <- function(timeout = 2) {
   if (!requireNamespace("httr2", quietly = TRUE)) return(FALSE)
@@ -79,6 +83,10 @@ morie_llm_probe_ollama <- function(timeout = 2) {
 
 #' Detect the active LLM provider
 #' @return Character scalar provider key: ollama / gemini / api / openai / local.
+#' @examples
+#' options(morie.llm.ollama_cached = FALSE, morie.llm.freeapi_cached = FALSE)
+#' morie_llm_detect_provider()
+#' options(morie.llm.ollama_cached = NULL, morie.llm.freeapi_cached = NULL)
 #' @export
 morie_llm_detect_provider <- function() {
   if (morie_llm_probe_ollama())                                 return("ollama")
@@ -130,6 +138,11 @@ morie_llm_detect_provider <- function() {
 #' @param api_key Optional bearer token (NULL for local Ollama).
 #' @param timeout Seconds. Default 120.
 #' @return Parsed JSON list (the response body).
+#' @examples
+#' \donttest{
+#' msgs <- list(list(role = "user", content = "Say hello"))
+#' res <- try(morie_llm_request_completion("http://localhost:11434", "llama3.2", msgs))
+#' }
 #' @export
 morie_llm_request_completion <- function(base_url, model, messages,
                                          api_key = NULL, timeout = 120) {
@@ -202,6 +215,13 @@ morie_llm_request_completion <- function(base_url, model, messages,
 #' @param timeout HTTP timeout in seconds. Default 120.
 #' @return Character scalar response text, or local-fallback text when all
 #'   providers fail.
+#' @examples
+#' \donttest{
+#' options(morie.llm.ollama_cached = FALSE, morie.llm.freeapi_cached = FALSE)
+#' out <- try(morie_llm_ask("In one word, what is 2 + 2?"))
+#' print(out)
+#' options(morie.llm.ollama_cached = NULL, morie.llm.freeapi_cached = NULL)
+#' }
 #' @export
 morie_llm_ask <- function(prompt, context = NULL, model = NULL,
                           provider = NULL, system_prompt = NULL,
@@ -244,6 +264,10 @@ morie_llm_ask <- function(prompt, context = NULL, model = NULL,
 
 #' Return TRUE when at least one live LLM provider is available
 #' @return Logical scalar.
+#' @examples
+#' options(morie.llm.ollama_cached = FALSE, morie.llm.freeapi_cached = FALSE)
+#' morie_llm_agent_available()
+#' options(morie.llm.ollama_cached = NULL, morie.llm.freeapi_cached = NULL)
 #' @export
 morie_llm_agent_available <- function() {
   morie_llm_detect_provider() != "local"
@@ -276,6 +300,10 @@ FREEAPI_BASE_URL      <- "https://ollamafreeapi.duckdns.org"  # community-hosted
 #'
 #' @param timeout Probe timeout in seconds.  Default 4.
 #' @return Logical scalar.
+#' @examples
+#' options(morie.llm.freeapi_cached = FALSE)
+#' morie_llm_probe_freeapi()
+#' options(morie.llm.freeapi_cached = NULL)
 #' @export
 morie_llm_probe_freeapi <- function(timeout = 4) {
   if (!requireNamespace("httr2", quietly = TRUE)) return(FALSE)
@@ -307,6 +335,9 @@ morie_llm_probe_freeapi <- function(timeout = 4) {
 #' table.
 #'
 #' @return data.frame with columns model / family / size / label / alias.
+#' @examples
+#' models <- morie_llm_list_freeapi_models()
+#' head(models)
 #' @export
 morie_llm_list_freeapi_models <- function() {
   json_dir <- system.file("ollama_json", package = "rmorie")
@@ -440,6 +471,14 @@ morie_llm_detect_provider <- function() {
 #' @param model Optional model identifier.
 #' @param timeout HTTP timeout in seconds.
 #' @return Character scalar response text.
+#' @examples
+#' \donttest{
+#' options(morie.llm.ollama_cached = FALSE, morie.llm.freeapi_cached = FALSE)
+#' msgs <- list(list(role = "user", content = "hello"))
+#' out <- try(morie_llm_ask_multi(msgs))
+#' print(out)
+#' options(morie.llm.ollama_cached = NULL, morie.llm.freeapi_cached = NULL)
+#' }
 #' @export
 morie_llm_ask_multi <- function(messages, providers = NULL,
                                 model = NULL, timeout = 120) {

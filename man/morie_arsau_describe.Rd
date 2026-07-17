@@ -29,3 +29,7 @@ An object of class \code{"morie_arsau_result"}.
 \description{
 Describe a single ARSAU dataset entry.
 }
+\examples{
+res <- morie_arsau_describe("main_records", "2024")
+res$summary_lines
+}

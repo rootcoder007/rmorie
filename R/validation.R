@@ -80,6 +80,10 @@ NULL
 #' @param regex Regex pattern for string columns (or NULL).
 #' @param custom Optional function \code{(column) -> logical(1)}.
 #' @return A \code{column_rule} list.
+#' @examples
+#' r <- column_rule("x", dtype = "numeric", min_val = 0, max_val = 10)
+#' r$min_val
+#' r$max_val
 #' @export
 column_rule <- function(name, dtype = NULL, required = TRUE,
                          nullable = TRUE, null_threshold = 1.0,
@@ -227,6 +231,11 @@ validate_schema <- function(data, rules, raise_on_error = FALSE) {
 #' @param parent Data frame with primary key.
 #' @param child_key,parent_key Column names.
 #' @return A logical scalar.
+#' @examples
+#' child <- data.frame(fk = c(1, 2, 3))
+#' parent <- data.frame(pk = c(1, 2, 3, 4))
+#' res <- check_referential_integrity(child, parent, "fk", "pk")
+#' res$passed
 #' @export
 check_referential_integrity <- function(child, parent, child_key, parent_key) {
   pv <- unique(parent[[parent_key]])
@@ -378,6 +387,15 @@ score_data_quality <- function(data, date_cols = NULL, freshness_days = 365L,
 #' @param confidence Confidence level for the score CI.
 #' @param random_state Seed.
 #' @return An object of class \code{"class_name"}.
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(200 * 3), 200, 3)
+#' y <- as.integer(plogis(X[, 1] - 0.5 * X[, 2]) > runif(200))
+#' fit <- function(X, y) suppressWarnings(
+#'   glm(y ~ ., data = data.frame(y = y, X), family = binomial()))
+#' pred <- function(m, X) predict(m, newdata = data.frame(X), type = "response")
+#' res <- cross_validate(fit, pred, X, y, method = "kfold", n_folds = 5L)
+#' res$mean
 #' @export
 cross_validate <- function(fit_fn, predict_fn, X, y,
                             method = "stratified_kfold",
@@ -565,6 +583,16 @@ nested_cross_validate <- function(fit_fn = NULL, predict_fn = NULL,
 #' @param n_bootstraps Number of bootstrap replicates.
 #' @param method "632" or "632plus".
 #' @return An object of class \code{"class_name"}.
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(120 * 3), 120, 3)
+#' y <- as.integer(plogis(X[, 1] - 0.5 * X[, 2]) > runif(120))
+#' fit <- function(X, y) suppressWarnings(
+#'   glm(y ~ ., data = data.frame(y = y, X), family = binomial()))
+#' pred <- function(m, X) predict(m, newdata = data.frame(X), type = "response")
+#' res <- bootstrap_validate(fit, pred, X, y, n_bootstraps = 20L,
+#'                           method = "632", scoring = "accuracy")
+#' res$mean
 #' @export
 bootstrap_validate <- function(fit_fn, predict_fn, X, y,
                                 n_bootstraps = 200L,
@@ -618,6 +646,12 @@ bootstrap_validate <- function(fit_fn, predict_fn, X, y,
 #' @param y_pred Predicted probabilities.
 #' @param n_groups Hosmer-Lemeshow groups.
 #' @return An object of class \code{"class_name"}.
+#' @examples
+#' set.seed(1)
+#' y <- rbinom(200, 1, 0.4)
+#' p <- plogis(rnorm(200, mean = -0.4))
+#' res <- assess_calibration(y, p, n_groups = 10L)
+#' res$brier_score
 #' @export
 assess_calibration <- function(y_true, y_pred, n_groups = 10L) {
   y_true <- as.integer(y_true)
@@ -664,6 +698,13 @@ assess_calibration <- function(y_true, y_pred, n_groups = 10L) {
 #' @param confidence Confidence level.
 #' @param random_state Seed.
 #' @return An object of class \code{"class_name"}.
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(200 * 3), 200, 3)
+#' y <- as.integer(plogis(X[, 1]) > runif(200))
+#' p <- plogis(X %*% c(1, -0.5, 0))
+#' res <- assess_discrimination(y, p, n_bootstrap = 50L)
+#' res$auroc
 #' @export
 assess_discrimination <- function(y_true, y_pred, y_pred_ref = NULL,
                                    n_bootstrap = 1000L,
@@ -717,6 +758,12 @@ assess_discrimination <- function(y_true, y_pred, y_pred_ref = NULL,
 #' @param thresholds Numeric vector of thresholds (defaults to
 #'   \code{seq(0.01, 0.99, 0.01)}).
 #' @return An object of class \code{"class_name"}.
+#' @examples
+#' set.seed(1)
+#' y <- rbinom(200, 1, 0.4)
+#' p <- plogis(rnorm(200))
+#' res <- decision_curve_analysis(y, p)
+#' head(res$net_benefit)
 #' @export
 decision_curve_analysis <- function(y_true, y_pred, thresholds = NULL) {
   y_true <- as.integer(y_true)
@@ -750,6 +797,16 @@ decision_curve_analysis <- function(y_true, y_pred, thresholds = NULL) {
 #' @param n_bootstrap Integer; number of bootstrap resamples used to
 #'   estimate the optimism correction (default 200).
 #' @return An object of class \code{"class_name"}.
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(120 * 3), 120, 3)
+#' y <- as.integer(plogis(X[, 1] - 0.5 * X[, 2]) > runif(120))
+#' fit <- function(X, y) suppressWarnings(
+#'   glm(y ~ ., data = data.frame(y = y, X), family = binomial()))
+#' pred <- function(m, X) predict(m, newdata = data.frame(X), type = "response")
+#' res <- detect_overfitting(fit, pred, X, y, n_bootstrap = 20L,
+#'                           scoring = "accuracy")
+#' res$recommendation
 #' @export
 detect_overfitting <- function(fit_fn, predict_fn, X, y,
                                 scoring = "roc_auc",
@@ -844,6 +901,16 @@ temporal_validate <- function(fit_fn, predict_fn, X, y, date_col,
 #' @param X_development Optional development-data features for KS-based
 #'   domain-shift diagnostics.
 #' @return An object of class \code{"class_name"}.
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(200 * 3), 200, 3)
+#' y <- as.integer(plogis(X[, 1] - 0.5 * X[, 2]) > runif(200))
+#' mdl <- suppressWarnings(
+#'   glm(y ~ ., data = data.frame(y = y, X), family = binomial()))
+#' predict_fn <- function(X) predict(mdl, newdata = data.frame(X),
+#'                                   type = "response")
+#' res <- external_validate(predict_fn, X, y)
+#' res$discrimination$auroc
 #' @export
 external_validate <- function(predict_fn, X_external, y_external,
                                X_development = NULL) {
@@ -875,6 +942,11 @@ external_validate <- function(predict_fn, X_external, y_external,
 #' @param parameters Optional list of analysis parameters.
 #' @param seeds Optional named list of random seeds.
 #' @return An object of class \code{"class_name"}.
+#' @examples
+#' d <- data.frame(x = 1:5)
+#' mf <- create_reproducibility_manifest(d, parameters = list(seed = 1),
+#'                                       seeds = list(global = 1L))
+#' mf$r_version
 #' @export
 create_reproducibility_manifest <- function(data, parameters = NULL,
                                              seeds = NULL) {

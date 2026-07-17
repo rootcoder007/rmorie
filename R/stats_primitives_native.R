@@ -179,6 +179,11 @@ morie_turning_point_test <- function(x) {
 #' @param x Numeric vector.
 #' @return A list with \code{statistic}, \code{p.value}, \code{ds}
 #'   (count of positive differences), \code{method}.
+#' @examples
+#' set.seed(4)
+#' x <- rnorm(80)
+#' res <- morie_difference_sign_test(x)
+#' res$p.value
 #' @export
 morie_difference_sign_test <- function(x) {
   d <- diff(x)
@@ -204,6 +209,10 @@ morie_difference_sign_test <- function(x) {
 #'   (the ratio), \code{p.value}, \code{method}.
 #' @references Bartels, R. (1982). The rank version of von Neumann's
 #'   ratio test for randomness. \emph{JASA}, 77(377), 40-46.
+#' @examples
+#' set.seed(4)
+#' res <- morie_bartels_rank_test(rnorm(80))
+#' res$p.value
 #' @export
 morie_bartels_rank_test <- function(x, alternative = "two.sided") {
   n <- length(x)

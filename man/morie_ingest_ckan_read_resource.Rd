@@ -46,3 +46,6 @@ Excel / JSON / Parquet readers require optional dependencies
 (\pkg{readxl} / \pkg{jsonlite} / \pkg{arrow}) and error with an
 install hint if missing.
 }
+\examples{
+\donttest{try(morie_ingest_ckan_read_resource("https://open.canada.ca/data", "some-resource-id"))}
+}

@@ -22,3 +22,7 @@ of year x section x category x subtype aggregates covering hate
 crime counts, IMPACT calls, and other Toronto Police aggregates
 that aren't in the per-incident ArcGIS Hub layers.
 }
+\examples{
+df <- morie_datasets_toronto_asr_miscellaneous(offline = TRUE)
+head(df)
+}

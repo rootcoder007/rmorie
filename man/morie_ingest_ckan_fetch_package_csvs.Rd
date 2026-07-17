@@ -36,3 +36,6 @@ captured as a single-row error data.frame keyed
 \code{_failed_<name>} so the overall fetch still returns the
 successful ones.
 }
+\examples{
+\donttest{try(morie_ingest_ckan_fetch_package_csvs("https://open.canada.ca/data", "some-package-id"))}
+}

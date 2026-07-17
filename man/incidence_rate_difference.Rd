@@ -25,3 +25,7 @@ A \code{morie_effect_size}.
 \description{
 Incidence rate difference (IRD)
 }
+\examples{
+res <- incidence_rate_difference(10, 100, 5, 100)
+res$estimate
+}

@@ -9,6 +9,14 @@
 #' @param seed Integer RNG seed (default 0).
 #' @return Named list with estimate, se, ci_lower, ci_upper, boot_mean, B, n, method.
 #' @keywords internal
+#' @examples
+#' set.seed(18)
+#' n <- 60
+#' x <- rnorm(n)
+#' y <- 0.5 * x + rnorm(n, sd = 0.3)
+#' resid <- y - predict(lm(y ~ x))
+#' res <- hrzw1(x, y, residuals = resid, B = 20)
+#' str(res)
 #' @export
 hrzw1 <- function(x, y, residuals = NULL, B = 500, seed = 0) {
   y <- as.numeric(y)

@@ -15,6 +15,9 @@ Scalar.
 \description{
 \code{morie_dsp_waveform_length(x) / length(x)}.
 }
+\examples{
+morie_dsp_waveform_length_norm(c(0, 1, 0, 1, 0))
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 5.
 }

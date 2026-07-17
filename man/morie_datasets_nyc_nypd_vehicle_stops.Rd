@@ -49,3 +49,7 @@ A \code{data.frame}.
 \description{
 NYPD Vehicle Stop Reports
 }
+\examples{
+df <- morie_datasets_nyc_nypd_vehicle_stops(offline = TRUE)
+head(df[, c("evnt_key", "occur_dt", "arrest_made_flg", "race_desc")])
+}

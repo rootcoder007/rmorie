@@ -15,3 +15,8 @@ An object of class \code{"morie_otis_analysis_result"}.
 \description{
 Alerts x gender (b07)
 }
+\examples{
+otis_b07 <- morie_synth_otis("b07", n = 120L, seed = 1L)
+res <- morie_otis_analyze_b07(otis_b07)
+class(res)
+}

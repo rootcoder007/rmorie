@@ -18,6 +18,10 @@ Integer count.
 Sign changes in \code{diff(x)} where the absolute next slope exceeds
 \code{threshold}. Hudgins TD feature.
 }
+\examples{
+x <- c(0, 1, 0, 1, 0)
+morie_dsp_slope_sign_changes(x, threshold = 0)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 5, sec. 5.4.
 }

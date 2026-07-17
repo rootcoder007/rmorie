@@ -17,3 +17,6 @@ A \code{morie_effect_size}.
 \description{
 Partial eta-squared
 }
+\examples{
+partial_eta_squared(40, 60)
+}

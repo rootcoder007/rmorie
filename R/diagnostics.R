@@ -137,6 +137,13 @@
 #' @param X Design matrix.
 #' @param model_type \code{"linear"}, \code{"logistic"}, or \code{"poisson"}.
 #' @return A \code{morie_residual_diagnostics} list.
+#' @examples
+#' set.seed(1)
+#' X <- cbind(1, matrix(rnorm(100 * 2), 100, 2))
+#' y <- drop(X %*% c(0.5, 1, -0.5) + rnorm(100, sd = 0.5))
+#' y_hat <- drop(X %*% solve(crossprod(X), crossprod(X, y)))
+#' r <- compute_residuals(y, y_hat, X)
+#' head(r$standardized_residuals)
 #' @export
 compute_residuals <- function(y, y_hat, X, model_type = "linear") {
   y <- as.numeric(y)
@@ -234,6 +241,13 @@ compute_residuals <- function(y, y_hat, X, model_type = "linear") {
 #' @param X Design matrix.
 #' @param y_hat Optional fitted values (OLS is used if NULL).
 #' @return A \code{morie_influence_diagnostics} list.
+#' @examples
+#' set.seed(4)
+#' X <- cbind(1, matrix(rnorm(40 * 2), 40, 2))
+#' y <- drop(X %*% c(0.5, 1, -0.5) + rnorm(40, sd = 0.5))
+#' r <- compute_influence(y, X)
+#' head(r$cooks_distance)
+#' r$influential_indices
 #' @export
 compute_influence <- function(y, X, y_hat = NULL) {
   y <- as.numeric(y)
@@ -299,6 +313,11 @@ compute_influence <- function(y, X, y_hat = NULL) {
 #' @param X Design matrix (without intercept).
 #' @param column_names Optional character vector of names.
 #' @return Named numeric vector of VIFs.
+#' @examples
+#' set.seed(5)
+#' X <- matrix(rnorm(300), 100, 3)
+#' colnames(X) <- c("a", "b", "c")
+#' compute_vif(X)
 #' @export
 compute_vif <- function(X, column_names = NULL) {
   X <- as.matrix(X)
@@ -330,6 +349,12 @@ compute_vif <- function(X, column_names = NULL) {
 #' @param X Design matrix.
 #' @param column_names Optional column names.
 #' @return A \code{morie_collinearity_diagnostics} list.
+#' @examples
+#' set.seed(7)
+#' X <- matrix(rnorm(200), 50, 4)
+#' r <- collinearity_diagnostics(X)
+#' r$vif
+#' r$condition_number
 #' @export
 collinearity_diagnostics <- function(X, column_names = NULL) {
   X <- as.matrix(X)
@@ -437,6 +462,13 @@ ramsey_reset_test <- function(y, X, powers = c(2, 3)) {
 #' @param X Design matrix.
 #' @param model_type \code{"linear"} or \code{"logistic"}.
 #' @return A \code{morie_specification_test}.
+#' @examples
+#' set.seed(1)
+#' n <- 100
+#' X <- cbind(intercept = 1, x1 = rnorm(n), x2 = rnorm(n))
+#' y <- drop(X %*% c(0.5, 1.0, -0.5) + rnorm(n, sd = 0.5))
+#' r <- link_test(y, X)
+#' r$name
 #' @export
 link_test <- function(y, X, model_type = "linear") {
   y <- as.numeric(y)
@@ -476,6 +508,14 @@ link_test <- function(y, X, model_type = "linear") {
 #' @param y_prob Predicted probabilities.
 #' @param n_groups Number of decile groups (default 10).
 #' @return A \code{morie_specification_test}.
+#' @examples
+#' set.seed(10)
+#' n <- 200
+#' X <- cbind(1, rnorm(n))
+#' y_prob <- plogis(drop(X %*% c(0, 1)))
+#' y <- rbinom(n, 1, y_prob)
+#' r <- hosmer_lemeshow_test(y, y_prob, n_groups = 5L)
+#' r$statistic
 #' @export
 hosmer_lemeshow_test <- function(y, y_prob, n_groups = 10L) {
   y <- as.numeric(y)
@@ -524,6 +564,13 @@ hosmer_lemeshow_test <- function(y, y_prob, n_groups = 10L) {
 #' @param model_type \code{"linear"}, \code{"logistic"}, \code{"poisson"}.
 #' @param log_likelihood Optional precomputed log-likelihood.
 #' @return A \code{morie_goodness_of_fit} list.
+#' @examples
+#' set.seed(11)
+#' X <- cbind(1, matrix(rnorm(100 * 2), 100, 2))
+#' y <- drop(X %*% c(0.5, 1, -0.5) + rnorm(100, sd = 0.5))
+#' y_hat <- drop(X %*% solve(crossprod(X), crossprod(X, y)))
+#' g <- compute_goodness_of_fit(y, y_hat, X)
+#' g$r_squared
 #' @export
 compute_goodness_of_fit <- function(y, y_hat, X,
                                     model_type = "linear",
@@ -650,6 +697,10 @@ ph_assumption_test <- function(survival_times, event_indicator,
 #' @param ll_full Log-likelihood of the full model.
 #' @param df_diff Difference in degrees of freedom.
 #' @return A \code{morie_specification_test}.
+#' @examples
+#' r <- likelihood_ratio_test(ll_restricted = -120, ll_full = -100,
+#'                            df_diff = 2L)
+#' r$p_value
 #' @export
 likelihood_ratio_test <- function(ll_restricted, ll_full, df_diff) {
   lr_stat <- -2 * (ll_restricted - ll_full)
@@ -729,6 +780,12 @@ score_test <- function(score_vector, information_matrix) {
 #' @param model_type \code{"linear"}, \code{"logistic"}, \code{"poisson"}.
 #' @param column_names Optional column names for X.
 #' @return A \code{morie_diagnostic_report}.
+#' @examples
+#' set.seed(15)
+#' X <- cbind(1, matrix(rnorm(100 * 2), 100, 2))
+#' y <- drop(X %*% c(0.5, 1, -0.5) + rnorm(100, sd = 0.5))
+#' r <- full_diagnostics(y, X)
+#' r$overall_assessment
 #' @export
 full_diagnostics <- function(y, X, y_hat = NULL,
                              model_type = "linear",

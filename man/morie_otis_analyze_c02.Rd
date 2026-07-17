@@ -15,3 +15,8 @@ An object of class \code{"morie_otis_analysis_result"}.
 \description{
 Individuals in RC/seg by institution (c02)
 }
+\examples{
+otis_c02 <- morie_synth_otis("c02", n = 120L, seed = 1L)
+res <- morie_otis_analyze_c02(otis_c02)
+class(res)
+}

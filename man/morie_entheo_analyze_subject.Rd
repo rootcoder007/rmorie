@@ -30,3 +30,7 @@ Layer-2 BOLD analyses (global-signal LZ complexity and dynamic
 functional connectivity) on one subject under each condition and
 returns a RichResult-style comparison summary.
 }
+\examples{
+res <- morie_entheo_analyze_subject(subject_id = 1L, conditions = c("DMT", "PCB"))
+length(res$payload$rows)
+}

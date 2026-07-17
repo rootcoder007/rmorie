@@ -15,3 +15,6 @@ Numeric d.
 \description{
 Convert Pearson r to Cohen's d
 }
+\examples{
+r_to_d(0.3)
+}

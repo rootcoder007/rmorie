@@ -22,3 +22,10 @@ Tests Doob's central thesis that imprisonment is decoupled from
 crime by computing the Pearson correlation between the two time
 series and (optionally) running Pettitt change-point on each.
 }
+\examples{
+set.seed(1)
+crime <- rnorm(20)
+imp <- 0.5 * crime + rnorm(20, sd = 0.5)
+res <- decoupling_test(crime, imp, years = 2000:2019)
+res$payload$r_pearson
+}

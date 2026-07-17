@@ -49,3 +49,11 @@ A named list with elements \code{estimate}, \code{std_error}, \code{t_stat}, \co
 \description{
 Donut-hole RDD
 }
+\examples{
+set.seed(1)
+x <- runif(800, -1, 1)
+y <- 0.3 * x + 1.0 * (x >= 0) + rnorm(800, sd = 0.3)
+d <- data.frame(x, y)
+res <- morie_rdd_donut(d, "y", "x", donut = 0.05)
+res$estimate
+}

@@ -9,6 +9,13 @@
 #' @param seed Integer RNG seed (default 0).
 #' @return Named list with estimate (h_star), h_silverman, mise_curve, h_grid, n, B, method.
 #' @keywords internal
+#' @examples
+#' set.seed(19)
+#' n <- 50
+#' x <- rnorm(n)
+#' y <- 0.5 * x + rnorm(n, sd = 0.3)
+#' res <- hrzw2(x, y, B = 5, n_h = 5)
+#' str(res)
 #' @export
 hrzw2 <- function(x, y, B = 50, n_h = 15, seed = 0) {
   x <- as.numeric(x)

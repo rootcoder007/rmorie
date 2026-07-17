@@ -16,3 +16,7 @@ A named \code{list} (see Details).
 Returns a named list with summary statistics, Kish ESS, design effect,
 weight-range ratio, and percentile vector.
 }
+\examples{
+set.seed(1)
+morie_weights_diagnostics(runif(30, 0.5, 2))
+}

@@ -28,3 +28,8 @@ A \code{data.frame} with the canonical 18-col schema.
 \description{
 OTIS b01 -- Segregation detailed (per-individual episodes)
 }
+\examples{
+df <- morie_datasets_otis_b01_segregation_detailed(offline = TRUE)
+head(df[, c("EndFiscalYear", "Gender",
+            "NumberConsecutiveDays_Segregation")])
+}

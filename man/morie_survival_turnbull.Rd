@@ -24,3 +24,8 @@ function estimates, and \code{method = "Turnbull NPMLE"}.
 Delegates to \code{survival::survfit()} with \code{Surv(left, right, type = "interval2")}.
 Hand-rolled EM is left as a stub for environments without \code{survival}.
 }
+\examples{
+set.seed(1)
+left <- rexp(40); right <- left + runif(40, 0.1, 1)
+str(morie_survival_turnbull(left, right), max.level = 1)
+}

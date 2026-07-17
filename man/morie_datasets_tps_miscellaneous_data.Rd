@@ -51,3 +51,9 @@ violence, hate crimes and budget.
 
 Tags: ASR; TPS; Toronto Police; Annual Statistical Report; Hate Crime; Budget; IPV
 }
+\examples{
+\donttest{
+df <- try(morie_datasets_tps_miscellaneous_data(max_features = 5L))
+if (!inherits(df, "try-error")) head(df)
+}
+}

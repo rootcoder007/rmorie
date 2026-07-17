@@ -19,3 +19,9 @@ An object of class \code{"class_name"}.
 \description{
 Create a manifest of the environment for reproducibility
 }
+\examples{
+d <- data.frame(x = 1:5)
+mf <- create_reproducibility_manifest(d, parameters = list(seed = 1),
+                                      seeds = list(global = 1L))
+mf$r_version
+}

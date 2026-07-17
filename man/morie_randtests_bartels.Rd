@@ -23,3 +23,9 @@ Thin extender over \code{randtests::bartels.rank.test} for the
 Bartels rank von-Neumann test of randomness in a numeric
 sequence.
 }
+\examples{
+if (requireNamespace("randtests", quietly = TRUE)) {
+  set.seed(1)
+  morie_randtests_bartels(rnorm(40))
+}
+}

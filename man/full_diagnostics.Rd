@@ -30,3 +30,10 @@ A \code{morie_diagnostic_report}.
 Runs residual, influence, collinearity, goodness-of-fit, and
 specification tests, then summarises the overall assessment.
 }
+\examples{
+set.seed(15)
+X <- cbind(1, matrix(rnorm(100 * 2), 100, 2))
+y <- drop(X \%*\% c(0.5, 1, -0.5) + rnorm(100, sd = 0.5))
+r <- full_diagnostics(y, X)
+r$overall_assessment
+}

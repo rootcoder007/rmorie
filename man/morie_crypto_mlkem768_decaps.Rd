@@ -18,3 +18,11 @@ Raw vector (32 B), the shared secret.
 Recover the shared secret from an encapsulation ciphertext using
 the recipient's secret key.
 }
+\examples{
+if (morie_crypto_liboqs_available()) {
+  kp <- morie_crypto_mlkem768_keygen()
+  e <- morie_crypto_mlkem768_encaps(kp$pk)
+  ss <- morie_crypto_mlkem768_decaps(kp$sk, e$ct)
+  print(identical(ss, e$shared_secret))
+}
+}

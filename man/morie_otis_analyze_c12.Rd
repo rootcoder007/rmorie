@@ -15,3 +15,8 @@ An object of class \code{"morie_otis_analysis_result"}.
 \description{
 RC/seg aggregate durations by region & gender (c12)
 }
+\examples{
+otis_c12 <- morie_synth_otis("c12", n = 120L, seed = 1L)
+res <- morie_otis_analyze_c12(otis_c12)
+class(res)
+}

@@ -29,6 +29,12 @@ rebuilds the implied time series, runs year-on-year change against
 the \code{REPORT_SCOPE} rows (the headline volume series), and
 surfaces a data-quality audit.
 }
+\examples{
+\donttest{
+res <- try(morie_arsau_analyze_aggregate_summary(year_range = "2020-2022"))
+if (!inherits(res, "try-error")) print(res)
+}
+}
 \references{
 Ontario Ministry of the Solicitor General, ARSAU
 2020-2022 aggregate-summary-by-year technical notes.

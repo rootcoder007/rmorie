@@ -17,6 +17,9 @@ Scalar.
 \description{
 \code{var(x) / var(y)}; \code{Inf} if \code{var(y) == 0}.
 }
+\examples{
+morie_dsp_variance_ratio(c(1, 2, 3), c(10, 20, 30))
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 5.
 }

@@ -15,6 +15,11 @@ Scalar.
 \description{
 \code{sqrt(var(diff(x)) / var(x))}; proportional to mean frequency.
 }
+\examples{
+set.seed(4)
+x <- rnorm(100)
+morie_dsp_hjorth_mobility(x)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 5, sec. 5.5.
 }

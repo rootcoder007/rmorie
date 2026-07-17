@@ -16,6 +16,11 @@ List with \code{cepstrum} and \code{quefrency}.
 \code{IFFT(log|X| + j * unwrap(angle(X)))}. Returns cepstrum and
 quefrency indices.
 }
+\examples{
+set.seed(1)
+x <- sin(2 * pi * 0.05 * (1:256)) + rnorm(256, 0, 0.1)
+str(morie_dsp_complex_cepstrum(x), max.level = 1)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 4, sec. 4.10;
 Oppenheim & Schafer (2010).

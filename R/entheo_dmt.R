@@ -100,6 +100,8 @@
 #'
 #' @return integer vector of subject IDs sorted ascending. Empty if the
 #'   dataset root is missing or the \code{fMRI/} folder is absent.
+#' @examples
+#' morie_entheo_available_subjects()
 #' @export
 #' @references
 #' Timmermann, C. et al. (2023). Human brain effects of DMT assessed
@@ -123,6 +125,8 @@ morie_entheo_available_subjects <- function() {
 #' @param subject_id integer subject ID (e.g. 1, 2, 14).
 #' @param condition character: "DMT" (default) or "PCB".
 #' @return numeric matrix of shape (112, 840).
+#' @examples
+#' \donttest{try(morie_entheo_load_fmri_subject(1L, "DMT"))}
 #' @export
 morie_entheo_load_fmri_subject <- function(subject_id, condition = "DMT") {
   condition <- match.arg(condition, c("DMT", "PCB"))
@@ -157,6 +161,8 @@ morie_entheo_load_fmri_subject <- function(subject_id, condition = "DMT") {
 #' @return named list with elements \code{regDMT}, \code{regPCB},
 #'   \code{regdiff}; each is a 3-D array of shape
 #'   (14 subj, 840 TRs, 5 bands).
+#' @examples
+#' \donttest{try(morie_entheo_load_eeg_region("Frontal"))}
 #' @export
 morie_entheo_load_eeg_region <- function(region) {
   region <- match.arg(region, .MORIE_ENTHEO_EEG_REGIONS)
@@ -186,6 +192,8 @@ morie_entheo_load_eeg_region <- function(region) {
 #'
 #' @return named list with \code{title}, \code{summary_lines},
 #'   \code{interpretation}, \code{payload}.
+#' @examples
+#' \donttest{try(morie_entheo_dataset_overview())}
 #' @export
 morie_entheo_dataset_overview <- function() {
   root <- .morie_entheo_require_root()
@@ -249,6 +257,12 @@ morie_entheo_dataset_overview <- function() {
 #'   spectra. IEEE Trans. Audio Electroacoust. 15(2): 70-73.
 #' Rangayyan, R. M. & Krishnan, S. (2024). Biomedical Signal Analysis,
 #'   3rd ed., Ch. 5.
+#' @examples
+#' fs <- 200
+#' t <- seq_len(4 * fs) / fs
+#' sig <- sin(2 * pi * 10 * t) + 0.1 * rnorm(length(t))
+#' res <- morie_entheo_spectral_band_power(sig, fs = fs)
+#' res$payload$rows[[1]]
 #' @export
 morie_entheo_spectral_band_power <- function(signal,
                                               fs = 200,
@@ -330,6 +344,10 @@ morie_entheo_spectral_band_power <- function(signal,
 #' @references
 #' Allen, E. A. et al. (2014). Tracking whole-brain connectivity
 #'   dynamics in the resting state. Cereb. Cortex 24(3): 663-676.
+#' @examples
+#' bold <- matrix(rnorm(20 * 200), nrow = 20)
+#' res <- morie_entheo_dynamic_functional_connectivity(bold, window = 30L, step = 10L)
+#' res$payload$n_windows
 #' @export
 morie_entheo_dynamic_functional_connectivity <- function(bold,
                                                           window = 30L,
@@ -443,6 +461,10 @@ morie_entheo_dynamic_functional_connectivity <- function(bold,
 #' Schartner, M. et al. (2015). Complexity of multi-dimensional
 #'   spontaneous EEG decreases during propofol-induced general
 #'   anaesthesia. PLOS ONE 10(8): e0133532.
+#' @examples
+#' sig <- c(rep(0, 20), rep(1, 20), rep(0, 20))
+#' res <- morie_entheo_lz_complexity(sig)
+#' res$payload$lz_normalised
 #' @export
 morie_entheo_lz_complexity <- function(signal, threshold = NULL) {
   sig <- as.numeric(signal)
@@ -493,6 +515,9 @@ morie_entheo_lz_complexity <- function(signal, threshold = NULL) {
 #' @param step integer dFC stride (TRs).
 #' @return RichResult-style named list with \code{payload$rows} as a
 #'   per-condition list of result rows.
+#' @examples
+#' res <- morie_entheo_analyze_subject(subject_id = 1L, conditions = c("DMT", "PCB"))
+#' length(res$payload$rows)
 #' @export
 morie_entheo_analyze_subject <- function(subject_id,
                                           conditions = c("DMT", "PCB"),

@@ -25,6 +25,11 @@ sliding window of \code{window} TRs advanced by \code{step} TRs.
 Mirrors the \file{dRSFC.m} Matlab script in
 \file{DMT_Imaging/Scripts/}.
 }
+\examples{
+bold <- matrix(rnorm(20 * 200), nrow = 20)
+res <- morie_entheo_dynamic_functional_connectivity(bold, window = 30L, step = 10L)
+res$payload$n_windows
+}
 \references{
 Allen, E. A. et al. (2014). Tracking whole-brain connectivity
 dynamics in the resting state. Cereb. Cortex 24(3): 663-676.

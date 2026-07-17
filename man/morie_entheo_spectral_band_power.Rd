@@ -33,6 +33,13 @@ R parity of \code{morie.entheo_dmt.spectral_band_power}. Wraps
 \code{welch}) and integrates the PSD over each canonical band by
 the trapezoidal rule.
 }
+\examples{
+fs <- 200
+t <- seq_len(4 * fs) / fs
+sig <- sin(2 * pi * 10 * t) + 0.1 * rnorm(length(t))
+res <- morie_entheo_spectral_band_power(sig, fs = fs)
+res$payload$rows[[1]]
+}
 \references{
 Welch, P. (1967). The use of FFT for the estimation of power
 spectra. IEEE Trans. Audio Electroacoust. 15(2): 70-73.

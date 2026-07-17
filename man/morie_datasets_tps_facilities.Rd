@@ -50,3 +50,9 @@ Police stations and other TPS facilities.
 
 Tags: Police Facilities; TPS Facilities; Facilities
 }
+\examples{
+\donttest{
+df <- try(morie_datasets_tps_facilities(max_features = 5L))
+if (!inherits(df, "try-error")) head(df)
+}
+}

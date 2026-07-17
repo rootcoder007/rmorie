@@ -24,4 +24,14 @@ Named list with estimate, se, selection_correction, n, n_selected, method.
 \description{
 Heckman-Powell-Newey-Vella semiparametric sample-selection
 }
+\examples{
+set.seed(20)
+n <- 80
+x <- rnorm(n)
+y <- 0.5 * x + rnorm(n, sd = 0.3)
+z <- rnorm(n)
+d <- rbinom(n, 1, 0.5)
+res <- hrzs1(x, y, z, d)
+str(res)
+}
 \keyword{internal}

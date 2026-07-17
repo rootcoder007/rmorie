@@ -34,3 +34,13 @@ A named list with elements \code{statistic}, \code{p_value}, \code{name}.
 \description{
 Durbin-Wu-Hausman test of endogeneity
 }
+\examples{
+set.seed(1)
+n <- 500
+z <- rbinom(n, 1, 0.5); u <- rnorm(n)
+d <- rbinom(n, 1, plogis(0.8 * z + 0.3 * u))
+y <- 0.5 * d + 0.4 * u + rnorm(n, sd = 0.5)
+df <- data.frame(y, d, z)
+out <- morie_iv_durbin_wu_hausman(df, "y", "d", "z")
+out$name
+}

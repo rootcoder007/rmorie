@@ -20,3 +20,7 @@ A \code{data.frame}.
 Ontario Use-of-Force aggregate summary (5-year 2020-2022, pre-RBDS
 rollup)
 }
+\examples{
+df <- morie_datasets_arsau_aggregate_summary(offline = TRUE)
+head(df)
+}

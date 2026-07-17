@@ -28,3 +28,8 @@ list with \code{times}, \code{survival}, \code{ci_lower}, \code{ci_upper},
 Thin wrapper around \code{survival::survfit()} returning a tidy list with
 Greenwood or complementary-log-log confidence bands.
 }
+\examples{
+set.seed(1)
+time <- rexp(60); event <- rbinom(60, 1, 0.7)
+str(morie_survival_km(time, event), max.level = 1)
+}

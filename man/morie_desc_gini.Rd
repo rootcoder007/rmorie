@@ -21,3 +21,9 @@ A list with \code{$method = "DescTools::Gini"} and
 Thin extender over \code{DescTools::Gini} for the Gini index of
 (in)equality on a non-negative numeric vector.
 }
+\examples{
+if (requireNamespace("DescTools", quietly = TRUE)) {
+  set.seed(1)
+  morie_desc_gini(rlnorm(50))
+}
+}

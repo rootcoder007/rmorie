@@ -30,6 +30,9 @@
 #' @param offline If `TRUE` (default), reads the included CSV.
 #' @return A `data.frame` with `soda_id`, `title`, `type`,
 #'   `search_keyword`.
+#' @examples
+#' d <- morie_datasets_calgary_open_crime_adjacent_layers(offline = TRUE)
+#' head(d)
 #' @export
 morie_datasets_calgary_open_crime_adjacent_layers <- function(offline = TRUE) {
   .morie_canadian_cat_fixture("calgary_opendata_crime_adjacent_catalog.csv",
@@ -39,6 +42,9 @@ morie_datasets_calgary_open_crime_adjacent_layers <- function(offline = TRUE) {
 #' Edmonton Open Data crime-adjacent catalog
 #' @rdname morie_datasets_calgary_open_crime_adjacent_layers
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' cat_df <- morie_datasets_edmonton_open_crime_adjacent_layers()
+#' head(cat_df)
 #' @export
 morie_datasets_edmonton_open_crime_adjacent_layers <- function(offline = TRUE) {
   .morie_canadian_cat_fixture("edmonton_opendata_crime_adjacent_catalog.csv",
@@ -48,6 +54,9 @@ morie_datasets_edmonton_open_crime_adjacent_layers <- function(offline = TRUE) {
 #' Ottawa Open Data (ArcGIS Hub) crime-adjacent catalog
 #' @rdname morie_datasets_calgary_open_crime_adjacent_layers
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' cat_df <- morie_datasets_ottawa_open_crime_adjacent_layers()
+#' head(cat_df)
 #' @export
 morie_datasets_ottawa_open_crime_adjacent_layers <- function(offline = TRUE) {
   .morie_canadian_cat_fixture("ottawa_opendata_crime_adjacent_catalog.csv",
@@ -87,6 +96,9 @@ morie_datasets_ottawa_open_crime_adjacent_layers <- function(offline = TRUE) {
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `community`, `category`, `crime_count`,
 #'   `year`, `month`.
+#' @examples
+#' df <- morie_datasets_calgary_community_crime_stats()
+#' head(df)
 #' @export
 morie_datasets_calgary_community_crime_stats <- function(offline = TRUE,
                                                             max_features = NULL) {
@@ -105,6 +117,9 @@ morie_datasets_calgary_community_crime_stats <- function(offline = TRUE,
 #'
 #' @rdname morie_datasets_calgary_community_crime_stats
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_calgary_fire_response_calls()
+#' head(df)
 #' @export
 morie_datasets_calgary_fire_response_calls <- function(offline = TRUE,
                                                          max_features = NULL) {
@@ -119,6 +134,9 @@ morie_datasets_calgary_fire_response_calls <- function(offline = TRUE,
 #' Calgary Fire Stations
 #' @rdname morie_datasets_calgary_community_crime_stats
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_calgary_fire_stations()
+#' head(df)
 #' @export
 morie_datasets_calgary_fire_stations <- function(offline = TRUE,
                                                    max_features = NULL) {
@@ -138,6 +156,12 @@ morie_datasets_calgary_fire_stations <- function(offline = TRUE,
 #' @param soda_id 4-4 Socrata resource ID (e.g. `"78gh-n26t"`).
 #' @param limit Page size (default 1000).
 #' @return A `data.frame` of records.
+#' @examples
+#' \donttest{
+#' cat_df <- morie_datasets_calgary_opendata_bulk_layers()
+#' df <- try(morie_datasets_calgary_socrata_by_id(cat_df$soda_id[1], limit = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_calgary_socrata_by_id <- function(soda_id,
                                                    limit = 1000L) {
@@ -162,6 +186,9 @@ morie_datasets_calgary_socrata_by_id <- function(soda_id,
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `name`, `address`, `latitude`,
 #'   `longitude`.
+#' @examples
+#' df <- morie_datasets_edmonton_police_stations(offline = TRUE)
+#' df[, c("name", "latitude", "longitude")]
 #' @export
 morie_datasets_edmonton_police_stations <- function(offline = TRUE,
                                                       max_features = NULL) {
@@ -176,6 +203,9 @@ morie_datasets_edmonton_police_stations <- function(offline = TRUE,
 #' Edmonton Fire Station locations
 #' @rdname morie_datasets_edmonton_police_stations
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_edmonton_fire_stations()
+#' head(df)
 #' @export
 morie_datasets_edmonton_fire_stations <- function(offline = TRUE,
                                                     max_features = NULL) {
@@ -192,6 +222,12 @@ morie_datasets_edmonton_fire_stations <- function(offline = TRUE,
 #' @param soda_id 4-4 Socrata resource ID.
 #' @param limit Page size (default 1000).
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' \donttest{
+#' cat_df <- morie_datasets_edmonton_opendata_bulk_layers()
+#' df <- try(morie_datasets_edmonton_socrata_by_id(cat_df$soda_id[1], limit = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_edmonton_socrata_by_id <- function(soda_id,
                                                     limit = 1000L) {

@@ -23,6 +23,13 @@ Native IIR notch (module 20); previously wrapped the signal package's
 \code{iirnotch} / \code{filtfilt}. Falls back to a stop with \code{NotYetPorted} if
 \code{signal} is unavailable.
 }
+\examples{
+fs <- 1000
+t <- seq(0, (fs - 1) / fs, length.out = fs)
+x <- sin(2 * pi * 10 * t) + 0.5 * sin(2 * pi * 60 * t)
+y <- morie_dsp_notch(x, freq = 60, fs = fs)
+length(y)
+}
 \references{
 Rangayyan & Krishnan (2015), Ch. 3, sec. 3.7.
 }
