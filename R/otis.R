@@ -95,7 +95,9 @@ NULL
     return(as.integer(s > 0))
   }
   v <- tolower(trimws(as.character(s)))
-  as.integer(v %in% c("yes", "y", "true", "t", "1"))
+  out <- as.integer(v %in% c("yes", "y", "true", "t", "1"))
+  out[is.na(s)] <- NA_integer_  # preserve missing labels rather than coding 0
+  out
 }
 
 

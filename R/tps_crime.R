@@ -38,25 +38,6 @@ NULL
 # Internal helpers
 # ---------------------------------------------------------------------------
 
-#' Counts per neighbourhood, dropping 'NSA' / unknowns.
-#' @keywords internal
-#' @noRd
-.tps_hood_counts <- function(df, col = "HOOD_158") {
-  if (!is.data.frame(df) || !(col %in% names(df))) {
-    return(integer(0))
-  }
-  s <- df[[col]]
-  s <- s[!is.na(s)]
-  s <- s[toupper(as.character(s)) != "NSA"]
-  if (length(s) == 0L) {
-    return(integer(0))
-  }
-  tab <- table(as.character(s))
-  out <- as.integer(tab)
-  names(out) <- names(tab)
-  out
-}
-
 #' Build a rich-result named list with the morie_tps_result class.
 #' @keywords internal
 #' @noRd

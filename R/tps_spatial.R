@@ -112,9 +112,15 @@ NULL
 #' Internal helper: Tps Hood Counts
 #' @noRd
 .tps_hood_counts <- function(df, hood_col = "HOOD_158") {
+  if (!is.data.frame(df) || !(hood_col %in% names(df))) {
+    return(integer(0))
+  }
   s <- df[[hood_col]]
   s <- s[!is.na(s)]
   s <- s[toupper(as.character(s)) != "NSA"]
+  if (length(s) == 0L) {
+    return(integer(0))
+  }
   tab <- table(s)
   sort(tab, decreasing = TRUE)
 }

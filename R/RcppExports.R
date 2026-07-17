@@ -81,11 +81,11 @@
     .Call(`_rmorie_morie_crypto_sodium_version`)
 }
 
-morie_crypto_chacha20poly1305_encrypt <- function(key_sxp, nonce_sxp, plaintext_sxp, aad_sxp) {
+.rmorie_chacha20poly1305_encrypt_impl <- function(key_sxp, nonce_sxp, plaintext_sxp, aad_sxp) {
     .Call(`_rmorie_morie_crypto_chacha20poly1305_encrypt`, key_sxp, nonce_sxp, plaintext_sxp, aad_sxp)
 }
 
-morie_crypto_chacha20poly1305_decrypt <- function(key_sxp, nonce_sxp, ct_with_tag_sxp, aad_sxp) {
+.rmorie_chacha20poly1305_decrypt_impl <- function(key_sxp, nonce_sxp, ct_with_tag_sxp, aad_sxp) {
     .Call(`_rmorie_morie_crypto_chacha20poly1305_decrypt`, key_sxp, nonce_sxp, ct_with_tag_sxp, aad_sxp)
 }
 

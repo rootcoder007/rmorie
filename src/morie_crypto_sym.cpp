@@ -59,7 +59,7 @@ std::string morie_crypto_sodium_version() {
 // ChaCha20-Poly1305 IETF (RFC 8439) -- AEAD encrypt.
 // Returns a raw vector: ciphertext || 16-byte tag (libsodium convention).
 // The Python morie API splits these; the R wrapper handles the split.
-// [[Rcpp::export]]
+// [[Rcpp::export(.rmorie_chacha20poly1305_encrypt_impl)]]
 SEXP morie_crypto_chacha20poly1305_encrypt(
     SEXP key_sxp, SEXP nonce_sxp, SEXP plaintext_sxp, SEXP aad_sxp) {
 #ifdef MORIE_HAVE_SODIUM
@@ -100,7 +100,7 @@ SEXP morie_crypto_chacha20poly1305_encrypt(
 #endif
 }
 
-// [[Rcpp::export]]
+// [[Rcpp::export(.rmorie_chacha20poly1305_decrypt_impl)]]
 SEXP morie_crypto_chacha20poly1305_decrypt(
     SEXP key_sxp, SEXP nonce_sxp, SEXP ct_with_tag_sxp, SEXP aad_sxp) {
 #ifdef MORIE_HAVE_SODIUM

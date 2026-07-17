@@ -1284,34 +1284,9 @@ morie_datasets_tps_persons_in_crisis_calls_for_service_attended <- function(form
                                        dest = dest)
 }
 
-#' Police Divisions
-#'
-#' Toronto PS ArcGIS Hub dataset wrapper. Thin dispatch to
-#' [morie_datasets_tps_arcgis_hub_by_id()] with the canonical
-#' hub item_id `fda21b25213c4c07b08c5162cba5081f`.
-#'
-#'   Police divisions (post D54/D55 amalgamation).
-#'
-#' Tags: City of Toronto; Toronto; Open Data; Feature Class; Update; Data Load; Divisions; Police Divisions
-#'
-#' @inheritParams morie_datasets_tps_arcgis_hub_by_id
-#' @return A data.frame / GeoJSON list / file path; see
-#'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
-#' @export
-morie_datasets_tps_police_divisions <- function(format = "json",
-                                                    where = "1=1",
-                                                    max_features = NULL,
-                                                    layer_idx = 0L,
-                                                    offline = TRUE,
-                                                    dest = NULL) {
-  morie_datasets_tps_arcgis_hub_by_id("fda21b25213c4c07b08c5162cba5081f",
-                                       format = format,
-                                       where = where,
-                                       max_features = max_features,
-                                       layer_idx = layer_idx,
-                                       offline = offline,
-                                       dest = dest)
-}
+# morie_datasets_tps_police_divisions() is defined in datasets_tps_psdp.R
+# (offline-first bundled-CSV fallback); the thin ArcGIS passthrough here was
+# removed to avoid a duplicate definition.
 
 #' Regulated Interactions (ASR-RI-TBL-001)
 #'
