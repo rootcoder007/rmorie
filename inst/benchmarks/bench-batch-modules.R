@@ -13,10 +13,11 @@ tm <- function(expr) {
   gc(FALSE)
   as.numeric(system.time(expr)["elapsed"])
 }
-rows <- list()
+bench_env <- environment()
+bench_env$rows <- list()
 add <- function(module, task, native_s, ref_s = NA_real_,
                 ref_pkg = "") {
-  rows[[length(rows) + 1L]] <<- data.frame(
+  bench_env$rows[[length(bench_env$rows) + 1L]] <- data.frame(
     module = module, task = task, native_s = native_s, ref_s = ref_s,
     ref_pkg = ref_pkg,
     ratio = if (is.finite(ref_s)) native_s / ref_s else NA_real_)
@@ -56,7 +57,8 @@ add(13, "dag identify 20 confounders", t13,
 
 ## ---- module 15: synthetic control ----------------------------------------
 set.seed(3)
-n_d <- 30; n_t <- 40
+n_d <- 30
+n_t <- 40
 don <- matrix(rnorm(n_d * n_t), n_d)
 w0 <- rep(1 / 5, 5)
 tr <- as.numeric(t(don[1:5, ]) %*% w0) + c(rep(0, 30), rep(2, 10))
@@ -88,7 +90,10 @@ add(16, "mccrary 20k",
 ## ---- module 17: IV ---------------------------------------------------------
 set.seed(5)
 n <- 50000
-x17 <- rnorm(n); z1 <- rnorm(n); z2 <- rnorm(n); u <- rnorm(n)
+x17 <- rnorm(n)
+z1 <- rnorm(n)
+z2 <- rnorm(n)
+u <- rnorm(n)
 d17 <- 0.5 * z1 + 0.4 * z2 + u + rnorm(n)
 y17 <- 0.8 * d17 + 0.5 * x17 + 0.8 * u + rnorm(n)
 df17 <- data.frame(y = y17, d = d17, x = x17, z1 = z1, z2 = z2)
@@ -106,9 +111,11 @@ add(17, "its 5k", tm({
 
 ## ---- module 18: IRT --------------------------------------------------------
 set.seed(6)
-n <- 2000; k <- 10
+n <- 2000
+k <- 10
 th <- rnorm(n)
-a_t <- runif(k, 0.8, 1.8); b_t <- runif(k, -1.5, 1.5)
+a_t <- runif(k, 0.8, 1.8)
+b_t <- runif(k, -1.5, 1.5)
 R18 <- vapply(seq_len(k), function(j)
   rbinom(n, 1, plogis(a_t[j] * (th - b_t[j]))), numeric(n))
 add(18, "2pl 2000x10",
@@ -183,8 +190,8 @@ add(22, "pbkdf2 50k iters",
     tm(rmorie:::.rmorie_pbkdf2_sha256_impl("pw", "salt", 50000L, 32L)))
 
 ## ---- module 23: parsers -----------------------------------------------------
-recs <- paste0('{"id": ', 1:2000, ', "name": "row', 1:2000,
-               '", "v": ', round(runif(2000), 4), '}')
+recs <- paste0("{\"id\": ", 1:2000, ", \"name\": \"row", 1:2000,
+               "\", \"v\": ", round(runif(2000), 4), "}")
 json23 <- paste0("[", paste(recs, collapse = ","), "]")
 add(23, "json parse 2k records",
     tm(morie_fetch_json(json23)),
@@ -201,7 +208,8 @@ add(23, "xml parse 2k records",
 ## ---- module 24: MRM ---------------------------------------------------------
 set.seed(10)
 n <- 3000
-x1 <- rnorm(n); x2 <- runif(n)
+x1 <- rnorm(n)
+x2 <- runif(n)
 t24 <- rbinom(n, 1, plogis(0.6 * x1))
 y24 <- 1 + 0.8 * t24 + 0.5 * x1 + 0.3 * x2 + rnorm(n)
 df24 <- data.frame(y = y24, t = t24, x1 = x1, x2 = x2)
@@ -213,7 +221,7 @@ b24 <- data.frame(id = sample(1:25000, 20000), v = rnorm(20000))
 add(24, "mrm reconcile 20k x 20k",
     tm(morie_mrm_reconcile(a24, b24, keys = "id", compare = "v")))
 
-out <- do.call(rbind, rows)
+out <- do.call(rbind, bench_env$rows)
 dir.create("inst/benchmarks/results", showWarnings = FALSE,
            recursive = TRUE)
 utils::write.csv(out, "inst/benchmarks/results/bench-batch-modules.csv",

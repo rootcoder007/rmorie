@@ -235,6 +235,13 @@ morie_siu_cache_path <- function(cache_dir = file.path(tempdir(), "morie", "siu"
   m <- regmatches(html, regexec(svc_pat, html, perl = TRUE,
     ignore.case = TRUE))[[1L]]
   if (length(m) >= 2L) rec$police_service <- trimws(m[2L])
+  if (!nzchar(rec$police_service)) {
+    # 2026-07 layout: no labelled field, but the prose wraps every
+    # force mention in <abbr title="Waterloo Regional Police Service">.
+    abbr_pat <- '<abbr title="([^"]*(?:Police|Provincial)[^"]*)"'
+    m <- regmatches(html, regexec(abbr_pat, html, perl = TRUE))[[1L]]
+    if (length(m) >= 2L) rec$police_service <- trimws(m[2L])
+  }
 
   dec_pat <- paste0(
     "(?:no reasonable grounds|reasonable grounds|charge\\(s\\)? was|",
@@ -307,22 +314,48 @@ morie_siu_fetch_cases <- function(
   }
 
   index_url <- morie_siu_index_url()
-  year_list <- if (is.null(years)) list(NULL) else as.list(years)
 
+  # 2026-07 layout: the index renders ~29 <tr class="dr-item"> rows and
+  # infinite-scrolls the rest through GET
+  #   /ssi/get_more_drs.php?lang=en&lastCount=<rows so far>
+  # (the ?year= query parameter is ignored server-side, so year
+  # filtering happens below on the case-number prefix instead).
+  if (progress) message("[siu] index: ", index_url)
+  html <- tryCatch(.siu_fetch_http_get(index_url), error = function(e) {
+    if (progress) message("[siu] index fetch failed: ", conditionMessage(e))
+    ""
+  })
   case_links <- list()
-  for (y in year_list) {
-    url <- if (is.null(y)) index_url else paste0(index_url, "?year=", y)
-    if (progress) message("[siu] index: ", url)
-    html <- tryCatch(.siu_fetch_http_get(url), error = function(e) {
-      if (progress) message("[siu] index fetch failed: ", conditionMessage(e))
-      ""
-    })
-    if (!nzchar(html)) next
-    case_links[[length(case_links) + 1L]] <-
-      .siu_fetch_extract_links(html, base_url = index_url)
-    Sys.sleep(.siu_fetch_rate_seconds)
+  total <- NA_integer_
+  if (nzchar(html)) {
+    tm <- regmatches(html, regexec(
+      'id="total_drs"[^>]*value="([0-9]+)"', html))[[1L]]
+    if (length(tm) == 2L) total <- as.integer(tm[2L])
+    case_links[[1L]] <- .siu_fetch_extract_links(html, base_url = index_url)
+    more_base <- sub("/en/directors_reports\\.php$",
+                     "/ssi/get_more_drs.php", index_url)
+    got <- if (length(case_links)) nrow(case_links[[1L]]) else 0L
+    while (!is.na(total) && got < total) {
+      page_url <- paste0(more_base, "?lang=en&lastCount=", got)
+      if (progress) message("[siu] index page: lastCount=", got,
+                            " of ", total)
+      chunk <- tryCatch(.siu_fetch_http_get(page_url),
+                        error = function(e) "")
+      if (!nzchar(chunk)) break
+      links <- .siu_fetch_extract_links(chunk, base_url = index_url)
+      if (!nrow(links)) break
+      case_links[[length(case_links) + 1L]] <- links
+      got <- got + nrow(links)
+      Sys.sleep(.siu_fetch_rate_seconds)
+    }
   }
   case_links <- do.call(rbind, case_links)
+  # Year filter via the case-number prefix ("26-OCI-168" -> 2026).
+  if (!is.null(years) && !is.null(case_links) && nrow(case_links)) {
+    yy <- sprintf("%02d", years %% 100L)
+    pref <- substr(case_links[, "case_number"], 1L, 2L)
+    case_links <- case_links[pref %in% yy, , drop = FALSE]
+  }
   if (is.null(case_links) || !nrow(case_links)) {
     stop(
       "Scraped 0 SIU index entries. Site layout may have changed; ",

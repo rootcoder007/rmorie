@@ -8,7 +8,10 @@ bench_one <- function(n) {
   x <- rnorm(n)
   stat_i <- function(d, i) mean(d[i])
   R <- 1000L
-  t_m <- system.time({ set.seed(2); morie_boot(x, stat_i, R = R) })[["elapsed"]]
+  t_m <- system.time({
+    set.seed(2)
+    morie_boot(x, stat_i, R = R)
+  })[["elapsed"]]
   t_b <- system.time({ set.seed(2); boot::boot(x, stat_i, R = R) })[["elapsed"]]
   data.frame(n = n, R = R, boot_rmorie = t_m, boot_boot = t_b)
 }
