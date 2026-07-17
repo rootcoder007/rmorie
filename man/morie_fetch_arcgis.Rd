@@ -37,12 +37,14 @@ the server transfer limit automatically (ArcGIS caps a single query
 at \code{maxRecordCount} features, typically 1000-2000).
 }
 \examples{
-\dontrun{
+\donttest{
+# Toronto Police Service public hub layer (same layer the TPS
+# bridge in tps_statphysics.R pages from).
 layer <- paste0(
-  "https://services.arcgis.com/ORG/arcgis/rest/",
-  "services/Assault/FeatureServer/0"
+  "https://services.arcgis.com/S9th0jAJ7bqgIRjw/arcgis/rest/",
+  "services/Neighbourhood_Crime_Rates_Open_Data/FeatureServer/0"
 )
-df <- morie_fetch_arcgis(layer)
+df <- try(morie_fetch_arcgis(layer, max_records = 50))
 }
 }
 \seealso{

@@ -51,13 +51,16 @@ Supported formats: \code{csv}, \code{tsv}, \code{json}, \code{xml},
 \code{arcgis} (delegates to \code{\link{morie_fetch_arcgis}}).
 }
 \examples{
-\dontrun{
-# Examples use placeholder URLs (example.org). Replace with a
-# real CSV / JSON endpoint when running.
-df <- morie_fetch("https://example.org/data.csv")
-js <- morie_fetch("https://api.example.org/records",
-  format = "json", params = list(limit = 100)
-)
+\donttest{
+# Chicago open-data portal (Socrata), endpoints verified 2026-07.
+df <- try(morie_fetch(
+  "https://data.cityofchicago.org/resource/ijzp-q8t2.csv",
+  format = "csv", params = list(`$limit` = 5)
+))
+js <- try(morie_fetch(
+  "https://data.cityofchicago.org/resource/ijzp-q8t2.json",
+  format = "json", params = list(`$limit` = 5)
+))
 }
 }
 \seealso{

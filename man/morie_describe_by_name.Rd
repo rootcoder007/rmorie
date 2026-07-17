@@ -20,9 +20,7 @@ Use this when you want to pass a name as a string and avoid the
 unquoted-symbol capture behaviour of \code{morie_describe}.
 }
 \examples{
-\dontrun{
 morie_describe_by_name("aalen")
 morie_describe_by_name("morie_aalen")
-}
 
 }

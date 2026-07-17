@@ -111,9 +111,10 @@ morie_cpads_missing_variables <- function(columns) {
 #'   (invisibly when strict and complete).
 #' @export
 #' @examples
-#' \dontrun{
-#' morie_cpads_validate_frame(df, strict = TRUE)
-#' }
+#' vars <- morie_cpads_contract()$required_variables
+#' df <- as.data.frame(setNames(as.list(rep(NA_real_, length(vars))), vars))
+#' morie_cpads_validate_frame(df, strict = TRUE)   # complete frame passes
+#' morie_cpads_validate_frame(df[, -1], strict = FALSE)  # reports "weight"
 morie_cpads_validate_frame <- function(frame, strict = TRUE) {
   if (!is.data.frame(frame)) {
     stop("morie_cpads_validate_frame: `frame` must be a data.frame.")

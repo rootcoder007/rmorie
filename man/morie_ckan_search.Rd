@@ -11,7 +11,7 @@ morie_ckan_search(query, portal = "open.canada.ca", rows = 25L, ...)
 
 \item{portal}{A known portal name (\code{"open.canada.ca"},
 \code{"data.ontario.ca"}, \code{"open.toronto.ca"}) or a full
-CKAN base URL (e.g. \code{"https://catalogue.example.org"}).}
+CKAN base URL (e.g. \code{"https://donnees.montreal.ca"}).}
 
 \item{rows}{Maximum number of datasets to return (default 25).}
 
@@ -31,9 +31,12 @@ datasets that are not in the built-in MORIE catalog and fetch them
 through \code{\link{morie_fetch_ckan}} or \code{\link{morie_fetch}}.
 }
 \examples{
-\dontrun{
-hits <- morie_ckan_search("cannabis survey", portal = "open.canada.ca")
-head(hits[, c("dataset_title", "resource_id", "format")])
+\donttest{
+hits <- try(morie_ckan_search("cannabis survey",
+                              portal = "open.canada.ca"))
+if (is.data.frame(hits)) {
+  head(hits[, c("dataset_title", "resource_id", "format")])
+}
 }
 }
 \seealso{

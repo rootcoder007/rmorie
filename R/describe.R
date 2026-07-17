@@ -81,11 +81,12 @@
 #'   and prints a helpful diagnostic.
 #'
 #' @examples
-#' \dontrun{
 #' morie_describe("aalen")
 #' morie_describe("morie_aalen")  # leading prefix stripped
-#' morie_describe(morie_aalen)    # function-object form
-#' }
+#' # Function-object form: pass any morie callable unquoted
+#' # (btsrp is the bootstrap primitive; its narrative ships in
+#' # the bundled describe corpus).
+#' morie_describe(btsrp)
 #'
 #' @seealso \code{\link{morie_describe_by_name}} for the
 #'   string-only variant that does not capture symbol names.
@@ -120,10 +121,8 @@ morie_describe <- function(callable) {
 #'   and prints a helpful diagnostic.
 #'
 #' @examples
-#' \dontrun{
 #' morie_describe_by_name("aalen")
 #' morie_describe_by_name("morie_aalen")
-#' }
 #'
 #' @export
 morie_describe_by_name <- function(name) {

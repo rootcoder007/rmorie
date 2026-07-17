@@ -26,10 +26,11 @@ endpoint for a given \code{resource_id}. Useful for any MTL package
 beyond the included SIM sample.
 }
 \examples{
-\dontrun{
-# Hypothetical SPVM station boundaries:
-df <- morie_datasets_montreal_ckan_resource(
-  resource_id = "abc-def-...",
-  limit = 50)
+\donttest{
+# Mobility-squad interventions (resource verified live 2026-07 via
+# /api/3/action/datastore_search on donnees.montreal.ca):
+df <- try(morie_datasets_montreal_ckan_resource(
+  resource_id = "ff81ecc4-d3b0-4661-806f-a27870e63a4e",
+  limit = 50))
 }
 }
