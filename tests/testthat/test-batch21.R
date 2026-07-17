@@ -329,13 +329,15 @@ test_that("morie_tsne_reduction wraps Rtsne and returns an embedding", {
   expect_true(is.finite(res$kl_divergence))
 })
 
-test_that("morie_tsne_reduction errors when Rtsne is unavailable", {
-  skip_if_not_installed("Rtsne")
-  if (!requireNamespace("Rtsne", quietly = TRUE)) {
-    expect_error(morie_tsne_reduction(matrix(rnorm(40), 10, 4)), "Rtsne")
-  } else {
-    expect_true(TRUE)
-  }
+test_that("morie_tsne_reduction is native: runs without Rtsne", {
+  testthat::local_mocked_bindings(
+    requireNamespace = function(package, ...) {
+      if (identical(package, "Rtsne")) FALSE else TRUE
+    },
+    .package = "base"
+  )
+  res <- morie_tsne_reduction(matrix(rnorm(40), 10, 4), n_iter = 50L)
+  expect_equal(nrow(res$embedding), 10L)
 })
 
 test_that("morie_unobserved_components decomposes a seasonal series", {

@@ -779,6 +779,61 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// morie_sobol_cpp
+NumericMatrix morie_sobol_cpp(const int n, const int d);
+RcppExport SEXP _rmorie_morie_sobol_cpp(SEXP nSEXP, SEXP dSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const int >::type d(dSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_sobol_cpp(n, d));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_knn_index_cpp
+IntegerMatrix morie_knn_index_cpp(const arma::mat& coords, const int k);
+RcppExport SEXP _rmorie_morie_knn_index_cpp(SEXP coordsSEXP, SEXP kSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type coords(coordsSEXP);
+    Rcpp::traits::input_parameter< const int >::type k(kSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_knn_index_cpp(coords, k));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_coord_descent_cpp
+List morie_coord_descent_cpp(const arma::mat& Xs, const arma::vec& yc, const double alpha, const double lambda, const int max_iter, const double tol, const arma::vec& warm);
+RcppExport SEXP _rmorie_morie_coord_descent_cpp(SEXP XsSEXP, SEXP ycSEXP, SEXP alphaSEXP, SEXP lambdaSEXP, SEXP max_iterSEXP, SEXP tolSEXP, SEXP warmSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type Xs(XsSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type yc(ycSEXP);
+    Rcpp::traits::input_parameter< const double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< const double >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< const int >::type max_iter(max_iterSEXP);
+    Rcpp::traits::input_parameter< const double >::type tol(tolSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type warm(warmSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_coord_descent_cpp(Xs, yc, alpha, lambda, max_iter, tol, warm));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_tsne_descent_cpp
+List morie_tsne_descent_cpp(const arma::mat& P, arma::mat Y, const int n_iter, const double eta);
+RcppExport SEXP _rmorie_morie_tsne_descent_cpp(SEXP PSEXP, SEXP YSEXP, SEXP n_iterSEXP, SEXP etaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type P(PSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type Y(YSEXP);
+    Rcpp::traits::input_parameter< const int >::type n_iter(n_iterSEXP);
+    Rcpp::traits::input_parameter< const double >::type eta(etaSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_tsne_descent_cpp(P, Y, n_iter, eta));
+    return rcpp_result_gen;
+END_RCPP
+}
 // morie_spatial_nominate_iterate_cpp
 Rcpp::List morie_spatial_nominate_iterate_cpp(arma::mat votes, arma::mat X, arma::vec w, arma::mat nv, arma::mat mid, double beta, int max_iter);
 RcppExport SEXP _rmorie_morie_spatial_nominate_iterate_cpp(SEXP votesSEXP, SEXP XSEXP, SEXP wSEXP, SEXP nvSEXP, SEXP midSEXP, SEXP betaSEXP, SEXP max_iterSEXP) {
@@ -989,6 +1044,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_match_optimal_assign_cpp", (DL_FUNC) &_rmorie_morie_match_optimal_assign_cpp, 2},
     {"_rmorie_morie_rlearner_forest_cpp", (DL_FUNC) &_rmorie_morie_rlearner_forest_cpp, 9},
     {"_rmorie_morie_rlm_cpp", (DL_FUNC) &_rmorie_morie_rlm_cpp, 5},
+    {"_rmorie_morie_sobol_cpp", (DL_FUNC) &_rmorie_morie_sobol_cpp, 2},
+    {"_rmorie_morie_knn_index_cpp", (DL_FUNC) &_rmorie_morie_knn_index_cpp, 2},
+    {"_rmorie_morie_coord_descent_cpp", (DL_FUNC) &_rmorie_morie_coord_descent_cpp, 7},
+    {"_rmorie_morie_tsne_descent_cpp", (DL_FUNC) &_rmorie_morie_tsne_descent_cpp, 4},
     {"_rmorie_morie_spatial_nominate_iterate_cpp", (DL_FUNC) &_rmorie_morie_spatial_nominate_iterate_cpp, 7},
     {"_rmorie_morie_spatial_emirt_theta_update_cpp", (DL_FUNC) &_rmorie_morie_spatial_emirt_theta_update_cpp, 4},
     {"_rmorie_morie_spatial_smacof_step_cpp", (DL_FUNC) &_rmorie_morie_spatial_smacof_step_cpp, 3},

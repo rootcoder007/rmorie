@@ -69,7 +69,7 @@ test_that("morie_eg_coint base-R ADF-style fallback executes", {
   ))
 })
 
-test_that("morie_vecm base-R SVD-of-OLS-Pi fallback executes", {
+test_that("morie_vecm native Johansen runs without urca", {
   .mock_fail("urca")
   set.seed(6)
   trend <- cumsum(rnorm(120))
@@ -117,7 +117,7 @@ test_that("morie_random_forest_genomic base-R bagged-tree fallback executes", {
   .cov_fb(morie_random_forest_genomic(rep(0, 40), y, M, n_trees = 20, seed = 13))
 })
 
-test_that("morie_penalized_regression base-R coordinate-descent fallback executes", {
+test_that("morie_penalized_regression native coordinate descent runs without glmnet", {
   .mock_fail("glmnet")
   set.seed(10)
   X <- matrix(rnorm(120), 30, 4)

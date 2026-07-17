@@ -150,23 +150,8 @@ NULL
   if (k >= n) {
     stop("k must be smaller than the number of rows.", call. = FALSE)
   }
-  # Squared distances via the Gram-matrix identity (BLAS-speed), then
-  # k vectorized min sweeps with max.col (C-speed) instead of a per-row
-  # order() -- ~20x faster than the apply(order) formulation.
-  # Work on the negated matrix so each sweep is a plain max.col call
-  # (negating inside the loop re-allocated n^2 doubles per sweep).
-  # ~0.06s at n=1000; the call sites guard n <= 2000. If larger inputs
-  # ever matter, this is the function to move into the C++ backend.
-  sq <- rowSums(coords^2)
-  nd <- 2 * tcrossprod(coords) - outer(sq, sq, "+")
-  diag(nd) <- -Inf
-  res <- matrix(0L, n, k)
-  for (j in seq_len(k)) {
-    nn_j <- max.col(nd, ties.method = "first")
-    res[, j] <- nn_j
-    nd[cbind(seq_len(n), nn_j)] <- -Inf
-  }
-  res
+  # C++ kernel (src/morie_smallstats.cpp): partial-sort per row.
+  .morie_knn_index_cpp(coords, k)
 }
 
 # ---------------------------------------------------------------------------
@@ -214,34 +199,11 @@ NULL
   xs <- sqrt(colMeans(sweep(X, 2, xm)^2))
   xs[xs == 0] <- 1
   Xs <- sweep(sweep(X, 2, xm), 2, xs, "/")
-  beta <- if (is.null(warm)) rep(0, p) else warm
-  xtx_diag <- colSums(Xs^2) / n
-  r <- yc - as.numeric(Xs %*% beta)
-  soft <- lambda * alpha
-  ridge_t <- lambda * (1 - alpha)
-  n_iter_done <- max_iter
-  for (it in seq_len(max_iter)) {
-    max_change <- 0
-    for (j in seq_len(p)) {
-      r_j <- r + Xs[, j] * beta[j]
-      z <- sum(Xs[, j] * r_j) / n
-      new <- if (z > soft) {
-        (z - soft) / (xtx_diag[j] + ridge_t)
-      } else if (z < -soft) {
-        (z + soft) / (xtx_diag[j] + ridge_t)
-      } else {
-        0
-      }
-      change <- new - beta[j]
-      if (abs(change) > max_change) max_change <- abs(change)
-      beta[j] <- new
-      r <- r_j - Xs[, j] * new
-    }
-    if (max_change < tol) {
-      n_iter_done <- it
-      break
-    }
-  }
+  warm_v <- if (is.null(warm)) rep(0, p) else warm
+  fit <- .morie_coord_descent_cpp(Xs, yc, alpha, lambda,
+                                  as.integer(max_iter), tol, warm_v)
+  beta <- as.numeric(fit$beta_std)
+  n_iter_done <- fit$n_iter
   beta_orig <- beta / xs
   intercept <- ym - sum(xm * beta_orig)
   list(beta = beta_orig, beta_std = beta, intercept = intercept,
@@ -305,60 +267,7 @@ NULL
   if (d < 1L || d > 10L) {
     stop("native Sobol supports 1 <= d <= 10 dimensions.", call. = FALSE)
   }
-  nbits <- 31L
-  # Bratley-Fox (TOMS 659) parameters for dims 2..10 -- the same
-  # initialization table randtoolbox ships (src/LowDiscrepancy-
-  # sobol-orig1111.c: initmj/alla/mjshift), so the sequences are
-  # bit-identical. s = degree, a = coefficient, m = initial integers.
-  jk <- list(
-    list(s = 1L, a = 0L, m = c(1L)),
-    list(s = 2L, a = 1L, m = c(1L, 1L)),
-    list(s = 3L, a = 1L, m = c(1L, 3L, 7L)),
-    list(s = 3L, a = 2L, m = c(1L, 1L, 5L)),
-    list(s = 4L, a = 1L, m = c(1L, 3L, 1L, 1L)),
-    list(s = 4L, a = 4L, m = c(1L, 1L, 3L, 7L)),
-    list(s = 5L, a = 2L, m = c(1L, 3L, 3L, 9L, 9L)),
-    list(s = 5L, a = 13L, m = c(1L, 3L, 7L, 13L, 3L)),
-    list(s = 5L, a = 7L, m = c(1L, 1L, 5L, 11L, 27L))
-  )
-  out <- matrix(0, n, d)
-  for (j in seq_len(d)) {
-    v <- integer(nbits)
-    if (j == 1L) {
-      for (i in seq_len(nbits)) v[i] <- bitwShiftL(1L, nbits - i)
-    } else {
-      p <- jk[[j - 1L]]
-      s <- p$s
-      m <- p$m
-      for (i in seq_len(min(s, nbits))) v[i] <- bitwShiftL(m[i], nbits - i)
-      if (nbits > s) {
-        for (i in (s + 1L):nbits) {
-          v[i] <- bitwXor(v[i - s], bitwShiftR(v[i - s], s))
-          if (s > 1L) {
-            for (k in seq_len(s - 1L)) {
-              if (bitwAnd(bitwShiftR(p$a, s - 1L - k), 1L) == 1L) {
-                v[i] <- bitwXor(v[i], v[i - k])
-              }
-            }
-          }
-        }
-      }
-    }
-    # Gray-code recurrence, emitting AFTER each update (randtoolbox's
-    # convention: the all-zeros point is skipped, first point is 0.5).
-    x <- 0L
-    for (i in seq_len(n)) {
-      cbit <- 1L
-      ii <- i - 1L
-      while (bitwAnd(ii, 1L) == 1L) {
-        ii <- bitwShiftR(ii, 1L)
-        cbit <- cbit + 1L
-      }
-      x <- bitwXor(x, v[cbit])
-      out[i, j] <- x / 2^nbits
-    }
-  }
-  out
+  .morie_sobol_cpp(n, d)
 }
 
 # ---------------------------------------------------------------------------

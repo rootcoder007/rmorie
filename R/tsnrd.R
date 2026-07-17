@@ -102,32 +102,9 @@ morie_tsne_reduction <- function(x, n_components = 2L, perplexity = 30,
   P <- (P + t(P)) / (2 * n)
   P[P < 1e-12] <- 1e-12
 
-  # Gradient descent with early exaggeration + momentum schedule.
+  # Gradient descent (early exaggeration + momentum/gains) runs in the
+  # C++ kernel; see src/morie_smallstats.cpp.
   Y <- matrix(stats::rnorm(n * dims, sd = 1e-4), n, dims)
-  dY <- matrix(0, n, dims)
-  gains <- matrix(1, n, dims)
-  exag_iters <- min(250L, n_iter)
-  P_run <- P * 12
-  momentum <- 0.5
-  kl <- NA_real_
-  for (iter in seq_len(n_iter)) {
-    if (iter == exag_iters + 1L) P_run <- P
-    if (iter == 251L) momentum <- 0.8
-    sqy <- rowSums(Y^2)
-    num <- 1 / (1 + outer(sqy, sqy, "+") - 2 * tcrossprod(Y))
-    diag(num) <- 0
-    Q <- num / sum(num)
-    Q[Q < 1e-12] <- 1e-12
-    PQ <- (P_run - Q) * num
-    grad <- 4 * (diag(rowSums(PQ)) - PQ) %*% Y
-    gains <- ifelse(sign(grad) != sign(dY), gains + 0.2, gains * 0.8)
-    gains[gains < 0.01] <- 0.01
-    dY <- momentum * dY - eta * gains * grad
-    Y <- Y + dY
-    Y <- sweep(Y, 2, colMeans(Y))
-    if (iter == n_iter) {
-      kl <- sum(P * log(P / Q))
-    }
-  }
-  list(Y = Y, kl = kl)
+  fit <- .morie_tsne_descent_cpp(P, Y, as.integer(n_iter), eta)
+  list(Y = fit$Y, kl = fit$kl)
 }
