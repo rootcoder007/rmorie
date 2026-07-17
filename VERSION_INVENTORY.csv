@@ -152,7 +152,7 @@ File,Line,Status,Version,Context
 ./R/thfdt.R,4,STALE_OR_DEP,8.3.1,"#' (Gibbons Ch 8.3.1)"
 ./R/tps_hawkes_advanced.R,146,STALE_OR_DEP,0.9.5.6,"# v0.9.5.6+: scipy.stats.lomax convention."
 ./R/tps_hawkes_advanced.R,168,STALE_OR_DEP,0.9.5.6,"lomax = 1 - (psi[2] / (u + psi[2])) ^ psi[1];  # v0.9.5.6+: scipy"
-./R/tps_statphysics.R,617,STALE_OR_DEP,0.9.5.6,"# the denominator but still increment n). v0.9.5.6+ uses strict `>`"
+./R/tps_statphysics.R,610,STALE_OR_DEP,0.9.5.6,"# the denominator but still increment n). v0.9.5.6+ uses strict `>`"
 ./R/vdwrd.R,4,STALE_OR_DEP,8.3.2,"#' (Gibbons Ch 8.3.2)"
 ./R/wsrpw.R,4,STALE_OR_DEP,5.7.3,"#' (Gibbons Ch 5.7.3)"
 ./README.md,130,CURRENT,1.1.4,"## What's in v1.1.4"

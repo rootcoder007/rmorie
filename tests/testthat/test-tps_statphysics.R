@@ -149,7 +149,7 @@ test_that("Lotka-Volterra small-amplitude period equals 2 pi / sqrt(alpha gamma)
 # ---------------------------------------------------------------------------
 # 5. Data-seeded analyzer happy-paths (Phase 2C)
 #
-# helper-tps.R installs morie_tps_load_tps_dataset() into globalenv()
+# helper-tps.R sets the morie.tps_loader_dataset option override
 # from dictionary-driven synthetic Toronto data. The exists() check
 # inside each analyzer succeeds, so the real analysis code runs against
 # the synthetic frame and the rich-result is exercised end-to-end.

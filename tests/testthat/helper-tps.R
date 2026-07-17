@@ -698,30 +698,24 @@ make_synthetic_tps <- function(category, n = 1000L, seed = 1L) {
 
 # ---- loader stubs ----------------------------------------------------
 #
-# tps_statphysics.R and tps_hawkes_advanced.R call exists("morie_tps_-
-# load_tps_dataset", mode = "function") to decide whether to dispatch
-# the data-seeded path or stop with "NotYetPorted". Assigning the
-# loader into globalenv() satisfies the exists() check and lets the
-# analyzers exercise their core algorithms during testing.
+# The tps loaders honour the morie.tps_loader(_dataset) options as an
+# offline-override contract. Setting them here keeps every analyzer on
+# synthetic frames during testing (no network), without globalenv()
+# assignments that pkgload would report as mask conflicts.
 
-if (!exists("morie_tps_load_tps_dataset", envir = globalenv(),
-            mode = "function", inherits = FALSE)) {
-  assign("morie_tps_load_tps_dataset",
-         function(category, nrows = NULL) {
-           n <- if (is.null(nrows)) 1000L else as.integer(nrows)
-           make_synthetic_tps(category, n = n, seed = 1L)
-         },
-         envir = globalenv())
+if (!is.function(getOption("morie.tps_loader_dataset"))) {
+  options(morie.tps_loader_dataset = function(category, nrows = NULL) {
+    n <- if (is.null(nrows)) 1000L else as.integer(nrows)
+    make_synthetic_tps(category, n = n, seed = 1L)
+  })
 }
 
-if (!exists("morie_tps_load_tps", envir = globalenv(),
-            mode = "function", inherits = FALSE)) {
-  assign("morie_tps_load_tps",
-         function(category, nrows = NULL, format = "csv", ...) {
-           # `format` accepted but ignored — synthetic frames carry the
-           # canonical columns regardless of physical export format.
-           n <- if (is.null(nrows)) 1000L else as.integer(nrows)
-           make_synthetic_tps(category, n = n, seed = 1L)
-         },
-         envir = globalenv())
+if (!is.function(getOption("morie.tps_loader"))) {
+  options(morie.tps_loader = function(category, nrows = NULL,
+                                      format = "csv", ...) {
+    # `format` accepted but ignored — synthetic frames carry the
+    # canonical columns regardless of physical export format.
+    n <- if (is.null(nrows)) 1000L else as.integer(nrows)
+    make_synthetic_tps(category, n = n, seed = 1L)
+  })
 }
