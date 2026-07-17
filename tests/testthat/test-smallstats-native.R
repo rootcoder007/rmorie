@@ -4,6 +4,16 @@
 # Suggests-only: every comparison is skip_if_not_installed-guarded, so
 # a bare install still runs the internal-consistency tests.
 
+# Resolve package internals up front so the file works identically
+# under pkgload::load_all, R CMD check's test_check, and plain
+# testthat against an installed namespace (the CI R-tests harness).
+.ss_ns <- environment(morie_hurst_r)
+for (.nm in c(".morie_hurst_rs", ".morie_psens_wilcoxon", ".morie_psens_wilcoxon_d",
+           ".morie_entropy_balance", ".morie_knn_index", ".morie_smote", ".morie_hmp")) {
+  assign(.nm, get(.nm, envir = .ss_ns))
+}
+
+
 test_that(".morie_hurst_rs matches pracma::hurstexp on known series", {
   set.seed(11)
   x <- cumsum(rnorm(4096)) # Brownian motion

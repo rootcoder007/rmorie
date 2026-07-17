@@ -2,8 +2,8 @@
 
 #' Ridge / LASSO / ElasticNet regularization path (R parity)
 #'
-#' Wraps \code{glmnet::glmnet}.  Returns the coefficient path across
-#' the supplied \code{alphas} (lambda grid in glmnet terminology).
+#' Native warm-started coordinate-descent path. Returns the coefficient path across
+#' the supplied \code{alphas} (lambda grid).
 #'
 #' @param x Numeric matrix of predictors.
 #' @param y Numeric response.
@@ -19,9 +19,6 @@
 morie_regularization_path <- function(x, y, penalty = c("ridge", "lasso", "elasticnet"),
                                 alphas = NULL, l1_ratio = 0.5) {
   x <- .morie_ensure_design_matrix(x)
-  if (!requireNamespace("glmnet", quietly = TRUE)) {
-    stop("Function 'morie_regularization_path' requires package 'glmnet'. Install with install.packages('glmnet').")
-  }
   penalty <- match.arg(penalty)
   if (is.null(dim(x))) x <- matrix(x, ncol = 1)
   x <- as.matrix(x)

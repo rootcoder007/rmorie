@@ -208,11 +208,8 @@ morie_ingest_statcan_cansim <- function(table_id,
 
   tryCatch(
     {
-      df <- cansim::get_cansim(table_id,
-        language = language,
-        refresh = isTRUE(refresh), ...
-      )
-      as.data.frame(df)
+      as.data.frame(.morie_statcan_wds_table(table_id,
+                                             language = language))
     },
     error = function(e) {
       stop(
@@ -223,4 +220,50 @@ morie_ingest_statcan_cansim <- function(table_id,
       )
     }
   )
+}
+
+# Native StatCan Web Data Service client -- fetches the full-table
+# CSV for a table id ("NN-MM-XXXX" or "NN-MM-XXXX-NN" cansim style, or
+# a bare 8-digit PID) via the getFullTableDownloadCSV endpoint. Base R
+# only (download.file + unzip + read.csv); replaces cansim::get_cansim.
+# Column set is StatCan's raw CSV schema (REF_DATE, GEO, VALUE, ...),
+# which is the subset of get_cansim() output the callers use.
+.morie_statcan_wds_table <- function(table_id, language = "en") {
+  pid <- gsub("[^0-9]", "", table_id)
+  if (nchar(pid) >= 10L) pid <- substr(pid, 1, 8L)
+  if (nchar(pid) == 6L) pid <- paste0(pid, "01")
+  if (nchar(pid) != 8L) {
+    stop("cannot derive an 8-digit StatCan product id from '",
+         table_id, "'", call. = FALSE)
+  }
+  lang <- if (startsWith(tolower(language), "fr")) "fr" else "en"
+  meta_url <- paste0(
+    "https://www150.statcan.gc.ca/t1/wds/rest/getFullTableDownloadCSV/",
+    pid, "/", lang
+  )
+  meta_raw <- tryCatch(
+    suppressWarnings(readLines(meta_url, warn = FALSE)),
+    error = function(e) stop("WDS metadata request failed: ",
+                             conditionMessage(e), call. = FALSE)
+  )
+  meta <- paste(meta_raw, collapse = "")
+  zip_url <- regmatches(meta, regexpr("https://[^\"]+\\.zip", meta))
+  if (length(zip_url) != 1L || !nzchar(zip_url)) {
+    stop("WDS did not return a download URL for pid ", pid, call. = FALSE)
+  }
+  tmp_zip <- tempfile(fileext = ".zip")
+  on.exit(unlink(tmp_zip), add = TRUE)
+  utils::download.file(zip_url, tmp_zip, mode = "wb", quiet = TRUE)
+  exdir <- tempfile("statcan_wds_")
+  on.exit(unlink(exdir, recursive = TRUE), add = TRUE)
+  files <- utils::unzip(tmp_zip, exdir = exdir)
+  csvs <- files[grepl("\\.csv$", files, ignore.case = TRUE)]
+  # The data file is <pid>.csv; the _MetaData.csv companion is skipped.
+  data_csv <- csvs[!grepl("MetaData", csvs, ignore.case = TRUE)]
+  if (length(data_csv) == 0L) {
+    stop("WDS archive for pid ", pid, " contained no data CSV.",
+         call. = FALSE)
+  }
+  utils::read.csv(data_csv[1L], check.names = FALSE,
+                  stringsAsFactors = FALSE)
 }

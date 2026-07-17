@@ -3,6 +3,15 @@
 # urca), elastic-net coordinate descent (vs glmnet), and the native
 # cross-fit PLR/PLIV estimators on known-truth DGPs.
 
+# Resolve package internals up front so the file works identically
+# under pkgload::load_all, R CMD check's test_check, and plain
+# testthat against an installed namespace (the CI R-tests harness).
+.ss_ns <- environment(morie_hurst_r)
+for (.nm in c(".morie_coord_descent")) {
+  assign(.nm, get(.nm, envir = .ss_ns))
+}
+
+
 test_that("morie_state_space_model matches the dlm pipeline", {
   set.seed(101)
   y <- cumsum(rnorm(120, sd = 0.5)) + rnorm(120, sd = 1)
