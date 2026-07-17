@@ -24,13 +24,18 @@ morie_spatial_voting_ordinal_irt(
 \item{seed}{RNG seed.}
 }
 \value{
-Never returns; raises \code{NotYetPorted}.
+List: \code{ideal_points}, \code{ideal_sd}, \code{discrimination},
+\code{difficulty}, \code{cutpoints}, \code{engine}.
 }
 \description{
 Ordinal IRT / Quinn factor model (stub)
 }
 \examples{
-\dontrun{morie_spatial_voting_ordinal_irt(matrix(1L, 5, 3))}
+set.seed(1)
+Y <- matrix(sample(1:3, 60, TRUE), 20, 3)
+fit <- morie_spatial_voting_ordinal_irt(Y, n_samples = 100L,
+                                        burn_in = 50L)
+head(fit$ideal_points)
 }
 \references{
 Quinn, K. M. (2004). "Bayesian Factor Analysis for Mixed

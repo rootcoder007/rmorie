@@ -573,15 +573,56 @@ morie_survival_compare_parametric <- function(time, event) {
 #' Delegates to `survival::survfit()` with `Surv(left, right, type = "interval2")`.
 #' Hand-rolled EM is left as a stub for environments without `survival`.
 #' @inheritParams morie_survival_params
-#' @return A named list with elements \code{times}, \code{survival}, \code{method}.
+#' @return A named list with the NPMLE \code{times}, the \code{survival}
+#'   function estimates, and \code{method = "Turnbull NPMLE"}.
 #' @export
 morie_survival_turnbull <- function(left, right, max_iter = 200, tol = 1e-6) {
-  if (!requireNamespace("survival", quietly = TRUE)) {
-    stop("NotYetPorted: hand-rolled Turnbull EM not implemented; install 'survival'.",
-         call. = FALSE)
-  }
   L <- as.numeric(left)
   R <- as.numeric(right)
-  fit <- survival::survfit(survival::Surv(L, R, type = "interval2") ~ 1)
-  list(times = fit$time, survival = fit$surv, method = "Turnbull NPMLE")
+  if (requireNamespace("survival", quietly = TRUE)) {
+    fit <- survival::survfit(survival::Surv(L, R, type = "interval2") ~ 1)
+    return(list(times = fit$time, survival = fit$surv,
+                method = "Turnbull NPMLE"))
+  }
+  # Native Turnbull (1976) EM fallback. Right-censored observations
+  # carry R = NA or Inf; exact events have L == R.
+  R[is.na(R)] <- Inf
+  if (any(!is.finite(L)) || any(R < L)) {
+    stop("morie_survival_turnbull: left must be finite and <= right.",
+         call. = FALSE)
+  }
+  # Turnbull innermost intervals: a left endpoint immediately followed
+  # (in the pooled sorted endpoint sequence) by a right endpoint.
+  ep <- sort(unique(c(L, R[is.finite(R)])))
+  starts <- c(); ends <- c()
+  for (p in ep) {
+    q_cand <- R[is.finite(R) & R >= p]
+    q_cand <- q_cand[vapply(q_cand, function(q)
+      !any(L > p & L <= q) && !any(R[is.finite(R)] >= p & R[is.finite(R)] < q),
+      logical(1))]
+    if (length(q_cand) && any(L == p)) {
+      starts <- c(starts, p); ends <- c(ends, min(q_cand))
+    }
+  }
+  if (any(!is.finite(R))) { # right-censored mass beyond the last endpoint
+    starts <- c(starts, max(ep)); ends <- c(ends, Inf)
+  }
+  keep <- !duplicated(paste(starts, ends))
+  starts <- starts[keep]; ends <- ends[keep]
+  m <- length(starts); n <- length(L)
+  A <- outer(seq_len(n), seq_len(m), function(i, j)
+    as.numeric(starts[j] >= L[i] & ends[j] <= R[i]))
+  p_j <- rep(1 / m, m)
+  for (it in seq_len(max_iter)) {
+    denom <- as.numeric(A %*% p_j)
+    denom[denom <= 0] <- .Machine$double.eps
+    mu <- A * rep(p_j, each = n) / denom
+    p_new <- colMeans(mu)
+    if (max(abs(p_new - p_j)) < tol) { p_j <- p_new; break }
+    p_j <- p_new
+  }
+  surv <- 1 - cumsum(p_j)
+  fin <- is.finite(ends)
+  list(times = ends[fin], survival = pmax(surv[fin], 0),
+       method = "Turnbull NPMLE (native EM)")
 }

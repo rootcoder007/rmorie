@@ -31,7 +31,10 @@ Allowed values depend on the caller.}
 (Hartley-style overlap composition).}
 }
 \value{
-A named list with elements \code{weights_a}, \code{weights_b}.
+A named list with elements \code{weights_a} and
+\code{weights_b}: numeric vectors of frame-A and frame-B weights
+with overlap units down-weighted by \code{theta} and
+\code{1 - theta} respectively.
 }
 \description{
 Multi-frame (dual-frame) survey weights (Hartley compositing).

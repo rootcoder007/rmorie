@@ -24,7 +24,8 @@ morie_spatial_voting_alpha_nominate(
 \item{seed}{RNG seed.}
 }
 \value{
-Never returns; raises \code{NotYetPorted}.
+List with ideal points, discrimination, difficulty and an
+\code{engine} tag (EM-IRT closed-form approximation).
 }
 \description{
 Carroll et al. (2013) mixture model between Gaussian and quadratic

@@ -1123,95 +1123,334 @@ morie_otis_causal_grid <- function(df = NULL, seed = 123L) {
 # Stubs for the high-ML estimators (mirror python public API surface)
 # ---------------------------------------------------------------------------
 
-#' SuperLearner-stacked AIPW (not yet ported).
+#' SuperLearner-stacked AIPW on OTIS data (native)
 #'
-#' The python version stacks RF + ridge + OLS/logit + mean (and
-#' optionally xgboost) via cross-validated convex weights. The R port
-#' would require pulling in \pkg{SuperLearner} or hand-rolling the
-#' stacked-cross-fit construction.
+#' Cross-fit AIPW whose nuisances are NNLS-stacked ensembles of
+#' native learners (the same Lawson-Hanson convex stacking as
+#' \code{morie_weight_super}): propensity from
+#' \{ridge-logistic, quadratic logistic, base rate\} and per-arm
+#' outcome regressions from \{OLS, cross-validated ridge, mean\},
+#' with ranger random forests joining both stacks when installed.
+#' Stacking weights come from inner 3-fold cross-validated
+#' predictions inside every outer training fold, so no fold ever
+#' sees its own outcome.
 #'
-#' @param ... Arguments mirroring \code{morie_otis_aipw_ate()}.
-#' @return Stops with a \code{NotYetPorted} message; for the time
-#'   being, call \code{morie_otis_aipw_ate()} with the default
-#'   cross-fit OLS+logit stack.
+#' @param df Data frame.
+#' @param treatment,outcome,covariates Column names.
+#' @param n_folds Outer cross-fit folds. Default 5.
+#' @param seed RNG seed. Default 123.
+#' @param eps Propensity clipping bound. Default 0.02.
+#' @return An OTIS causal-estimate list (same shape as
+#'   \code{morie_otis_aipw_ate}).
 #' @export
 #' @examples
-#' \dontrun{
-#'   morie_otis_aipw_superlearner(df, treatment = "d", outcome = "y",
-#'                                 covariates = "x")
-#' }
-morie_otis_aipw_superlearner <- function(...) {
-  stop("NotYetPorted: SuperLearner-stacked AIPW requires a stacked-",
-       "cross-fit ensemble (RF + ridge + logit + mean). Use ",
-       "`morie_otis_aipw_ate()` for the OLS+logit cross-fit, or call ",
-       "the python implementation in `src/morie/otis_causal.py`.")
+#' set.seed(1)
+#' n <- 200
+#' x1 <- rnorm(n); x2 <- rnorm(n)
+#' d <- rbinom(n, 1, plogis(0.5 * x1))
+#' y <- 1 + 2 * d + x1 - 0.5 * x2 + rnorm(n)
+#' df <- data.frame(y, d, x1, x2)
+#' morie_otis_aipw_superlearner(df, treatment = "d", outcome = "y",
+#'                              covariates = c("x1", "x2"),
+#'                              n_folds = 3L)
+morie_otis_aipw_superlearner <- function(df, treatment, outcome,
+                                         covariates, n_folds = 5L,
+                                         seed = 123L, eps = 0.02) {
+  cols <- unique(c(treatment, outcome, covariates))
+  data <- df[stats::complete.cases(df[, cols, drop = FALSE]), cols,
+             drop = FALSE]
+  d <- .otis_binarise(data[[treatment]])
+  y <- as.numeric(data[[outcome]])
+  X <- .otis_design_matrix(data, covariates)
+  n <- length(y)
+  n_treated <- sum(d)
+  p_treat <- mean(d)
+  have_ranger <- requireNamespace("ranger", quietly = TRUE)
+
+  ps_learners <- list(
+    ridge_logit = function(tr, te)
+      .otis_predict_ps(X[te, , drop = FALSE],
+                       .otis_logit_fit(X[tr, , drop = FALSE], d[tr]),
+                       eps = 1e-4),
+    logit_sq = function(tr, te) {
+      XX <- cbind(X, X^2)
+      f <- stats::glm.fit(cbind(1, XX[tr, , drop = FALSE]), d[tr],
+                          family = stats::binomial())
+      1 / (1 + exp(-as.numeric(cbind(1, XX[te, , drop = FALSE]) %*%
+                                 f$coefficients)))
+    },
+    base_rate = function(tr, te) rep(mean(d[tr]), length(te))
+  )
+  reg_learners <- list(
+    ols = function(yy, tr, te) {
+      Xt <- X[tr, , drop = FALSE]
+      b <- tryCatch(as.numeric(solve(crossprod(Xt), crossprod(Xt, yy[tr]))),
+                    error = function(e)
+                      as.numeric(.morie_ginv(crossprod(Xt)) %*%
+                                   crossprod(Xt, yy[tr])))
+      as.numeric(X[te, , drop = FALSE] %*% b)
+    },
+    ridge = function(yy, tr, te)
+      .morie_cv_ridge_predict(X[tr, , drop = FALSE], yy[tr],
+                              X[te, , drop = FALSE], n_folds = 3L),
+    mean = function(yy, tr, te) rep(mean(yy[tr]), length(te))
+  )
+  if (have_ranger) {
+    ps_learners$forest <- function(tr, te) {
+      fit <- ranger::ranger(t ~ .,
+        data = data.frame(t = factor(d[tr]), X[tr, , drop = FALSE]),
+        probability = TRUE, num.trees = 200L)
+      stats::predict(fit,
+        data = data.frame(X[te, , drop = FALSE]))$predictions[, "1"]
+    }
+    reg_learners$forest <- function(yy, tr, te) {
+      fit <- ranger::ranger(y ~ .,
+        data = data.frame(y = yy[tr], X[tr, , drop = FALSE]),
+        num.trees = 200L)
+      stats::predict(fit,
+        data = data.frame(X[te, , drop = FALSE]))$predictions
+    }
+  }
+
+  # Inner-CV NNLS stacking within a training index set, then predict
+  # the held-out outer test set with the refit weighted ensemble.
+  stack_ps <- function(train, test) {
+    inner <- sample(rep(1:3, length.out = length(train)))
+    Z <- matrix(NA_real_, length(train), length(ps_learners))
+    for (f in 1:3) {
+      itr <- train[inner != f]; ite <- train[inner == f]
+      for (li in seq_along(ps_learners)) {
+        Z[inner == f, li] <- tryCatch(ps_learners[[li]](itr, ite),
+          error = function(e) rep(mean(d[itr]), length(ite)))
+      }
+    }
+    Z[!is.finite(Z)] <- mean(d[train])
+    a <- .morie_nnls(pmin(pmax(Z, 1e-6), 1 - 1e-6), d[train])
+    if (sum(a) <= 0) a <- rep(1, length(a))
+    a <- a / sum(a)
+    P <- vapply(seq_along(ps_learners), function(li)
+      tryCatch(ps_learners[[li]](train, test),
+               error = function(e) rep(mean(d[train]), length(test))),
+      numeric(length(test)))
+    P[!is.finite(P)] <- mean(d[train])
+    pmin(pmax(as.numeric(P %*% a), eps), 1 - eps)
+  }
+  stack_reg <- function(yy, train, test) {
+    if (length(train) < 8L) return(rep(mean(yy[train]), length(test)))
+    inner <- sample(rep(1:3, length.out = length(train)))
+    Z <- matrix(NA_real_, length(train), length(reg_learners))
+    for (f in 1:3) {
+      itr <- train[inner != f]; ite <- train[inner == f]
+      for (li in seq_along(reg_learners)) {
+        Z[inner == f, li] <- tryCatch(reg_learners[[li]](yy, itr, ite),
+          error = function(e) rep(mean(yy[itr]), length(ite)))
+      }
+    }
+    Z[!is.finite(Z)] <- mean(yy[train])
+    a <- .morie_nnls(Z, yy[train])
+    if (sum(a) <= 0) a <- rep(1, length(a))
+    a <- a / sum(a)
+    P <- vapply(seq_along(reg_learners), function(li)
+      tryCatch(reg_learners[[li]](yy, train, test),
+               error = function(e) rep(mean(yy[train]), length(test))),
+      numeric(length(test)))
+    P[!is.finite(P)] <- mean(yy[train])
+    as.numeric(P %*% a)
+  }
+
+  set.seed(seed)
+  folds <- sample(rep(seq_len(n_folds), length.out = n))
+  e_hat <- numeric(n); mu1_hat <- numeric(n); mu0_hat <- numeric(n)
+  for (k in seq_len(n_folds)) {
+    test <- which(folds == k)
+    train <- setdiff(seq_len(n), test)
+    e_hat[test] <- stack_ps(train, test)
+    mu1_hat[test] <- stack_reg(y, train[d[train] == 1L], test)
+    mu0_hat[test] <- stack_reg(y, train[d[train] == 0L], test)
+  }
+
+  psi <- (mu1_hat - mu0_hat) +
+    d * (y - mu1_hat) / e_hat -
+    (1 - d) * (y - mu0_hat) / (1 - e_hat)
+  ate <- mean(psi)
+  se <- stats::sd(psi) / sqrt(n)
+  z <- if (se > 0) ate / se else 0
+  pval <- 2 * stats::pnorm(-abs(z))
+  notes <- list(
+    sprintf("cross-fit folds=%d", n_folds),
+    sprintf("stack: ps={%s} reg={%s}",
+            paste(names(ps_learners), collapse = ","),
+            paste(names(reg_learners), collapse = ",")),
+    sprintf("Brier=%.3f", .otis_propensity_diagnostics(e_hat, d)$brier))
+  .otis_causal_estimate("AIPW-SuperLearner", ate, se, pval, n,
+                        n_treated, p_treat, notes)
 }
 
-#' Partially Linear Regression DML on OTIS (not yet ported).
+#' Partially Linear Regression DML on OTIS data (native)
 #'
-#' The python version uses scikit-learn RF nuisance models for the
-#' Frisch-Waugh-Lovell partialling-out construction. For the R port,
-#' use the analogous \code{morie_estimate_double_ml()} from
-#' \code{causal.R}, which already wraps \pkg{DoubleML::DoubleMLPLR}
-#' (with mlr3 ranger learners) and a cross-fit ridge fallback.
+#' Frisch-Waugh-Lovell partialling-out double machine learning on the
+#' OTIS analysis frame, running on the same native cross-fit PLR
+#' engine as \code{morie_estimate_double_ml()} (Chernozhukov et al.
+#' 2018 orthogonal score; median aggregation over repetitions).
 #'
-#' @param ... Arguments mirroring \code{morie_otis_aipw_ate()}.
-#' @return Stops with a redirect to \code{morie_estimate_double_ml()}.
+#' @param df Data frame.
+#' @param treatment,outcome,covariates Column names.
+#' @param n_folds Cross-fit folds. Default 5.
+#' @param n_rep Repetition count for median aggregation. Default 1.
+#' @param seed RNG seed. Default 123.
+#' @return An OTIS causal-estimate list (same shape as
+#'   \code{morie_otis_aipw_ate}).
 #' @export
 #' @examples
-#' \dontrun{
-#'   morie_otis_plr(df, treatment = "d", outcome = "y",
-#'                  covariates = "x")
-#' }
-morie_otis_plr <- function(...) {
-  stop("NotYetPorted: PLR-DML with random-forest nuisances. Call ",
-       "`morie_estimate_double_ml(data, outcome, treatment, ",
-       "covariates)` from `causal.R` instead -- it already wraps ",
-       "DoubleML::DoubleMLPLR (ranger learners) when available and ",
-       "falls back to cross-fit ridge otherwise.")
+#' set.seed(1)
+#' n <- 200
+#' x <- rnorm(n)
+#' d <- rbinom(n, 1, plogis(0.6 * x))
+#' y <- 1.5 * d + x + rnorm(n)
+#' morie_otis_plr(data.frame(y, d, x), treatment = "d",
+#'                outcome = "y", covariates = "x")
+morie_otis_plr <- function(df, treatment, outcome, covariates,
+                           n_folds = 5L, n_rep = 1L, seed = 123L) {
+  cols <- unique(c(treatment, outcome, covariates))
+  data <- df[stats::complete.cases(df[, cols, drop = FALSE]), cols,
+             drop = FALSE]
+  d <- .otis_binarise(data[[treatment]])
+  y <- as.numeric(data[[outcome]])
+  X <- .otis_design_matrix(data, covariates)
+  fit <- .morie_dml_plr_native(X, y, d, n_folds = n_folds,
+                               n_rep = n_rep, random_state = seed)
+  z <- if (fit$se > 0) fit$theta / fit$se else 0
+  pval <- 2 * stats::pnorm(-abs(z))
+  .otis_causal_estimate("PLR-DML", fit$theta, fit$se, pval,
+                        length(y), sum(d), mean(d),
+                        list(sprintf("cross-fit folds=%d reps=%d",
+                                     n_folds, n_rep)))
 }
 
-#' Propensity-score 1:k NN matching with caliper (not yet ported).
+#' Propensity-score 1:k NN matching with caliper on OTIS data (native)
 #'
-#' The python implementation provides a greedy 1:k NN matcher on
-#' logit-PS with an Austin (2011) 0.2-SD caliper. In R, prefer the
-#' canonical \pkg{MatchIt} implementation
-#' (\code{MatchIt::matchit(method = "nearest", caliper = 0.2,
-#' std.caliper = TRUE)}); the present stub holds the python-API
-#' surface so callers can detect the rename.
+#' Greedy 1:k nearest-neighbour matching on the logit propensity
+#' score with the Austin (2011) caliper (0.2 SD of the logit-PS by
+#' default), mirroring the python implementation. Returns the ATT
+#' from matched-set mean differences with the matched-pairs variance.
 #'
-#' @param ... Arguments mirroring \code{morie_otis_aipw_ate()}.
-#' @return Stops with a redirect to \pkg{MatchIt}.
+#' @param df Data frame.
+#' @param treatment,outcome,covariates Column names.
+#' @param k Controls matched per treated unit. Default 1.
+#' @param caliper Caliper in SD units of the logit-PS. Default 0.2.
+#' @param seed RNG seed (tie-breaking order). Default 123.
+#' @return An OTIS causal-estimate list (ATT).
 #' @export
 #' @examples
-#' \dontrun{
-#'   morie_otis_psm(df, treatment = "d", outcome = "y",
-#'                  covariates = "x")
-#' }
-morie_otis_psm <- function(...) {
-  stop("NotYetPorted: 1:k NN PSM with caliper. Use ",
-       "`MatchIt::matchit(t ~ ., data = df, method = 'nearest', ",
-       "caliper = 0.2, std.caliper = TRUE)` then run ",
-       "`morie_otis_aipw_ate()` on `MatchIt::match.data(m)`.")
+#' set.seed(1)
+#' n <- 300
+#' x <- rnorm(n)
+#' d <- rbinom(n, 1, plogis(0.8 * x))
+#' y <- 1.2 * d + x + rnorm(n)
+#' morie_otis_psm(data.frame(y, d, x), treatment = "d",
+#'                outcome = "y", covariates = "x")
+morie_otis_psm <- function(df, treatment, outcome, covariates,
+                           k = 1L, caliper = 0.2, seed = 123L) {
+  cols <- unique(c(treatment, outcome, covariates))
+  data <- df[stats::complete.cases(df[, cols, drop = FALSE]), cols,
+             drop = FALSE]
+  d <- .otis_binarise(data[[treatment]])
+  y <- as.numeric(data[[outcome]])
+  X <- .otis_design_matrix(data, covariates)
+  ps <- .otis_predict_ps(X, .otis_logit_fit(X, d), eps = 1e-4)
+  lps <- stats::qlogis(ps)
+  cal <- caliper * stats::sd(lps)
+  t_idx <- which(d == 1L)
+  c_idx <- which(d == 0L)
+  set.seed(seed)
+  t_idx <- t_idx[order(stats::runif(length(t_idx)))]
+  used <- logical(length(c_idx))
+  diffs <- numeric(0)
+  n_matched <- 0L
+  for (i in t_idx) {
+    dist <- abs(lps[c_idx] - lps[i])
+    ok <- which(!used & dist <= cal)
+    if (!length(ok)) next
+    pick <- ok[order(dist[ok])][seq_len(min(k, length(ok)))]
+    used[pick] <- TRUE
+    diffs <- c(diffs, y[i] - mean(y[c_idx[pick]]))
+    n_matched <- n_matched + 1L
+  }
+  if (n_matched < 2L) {
+    stop("morie_otis_psm: fewer than two treated units matched ",
+         "within the caliper; widen `caliper` or check overlap.",
+         call. = FALSE)
+  }
+  att <- mean(diffs)
+  se <- stats::sd(diffs) / sqrt(n_matched)
+  z <- if (se > 0) att / se else 0
+  pval <- 2 * stats::pnorm(-abs(z))
+  .otis_causal_estimate(
+    "PSM-ATT", att, se, pval, length(y), sum(d), mean(d),
+    list(sprintf("1:%d NN, caliper=%.2f SD(logit-PS)", k, caliper),
+         sprintf("%d/%d treated matched", n_matched, sum(d))))
 }
 
-#' Propensity-score subclassification ATE (not yet ported).
+#' Propensity-score subclassification ATE on OTIS data (native)
 #'
-#' Rosenbaum-Rubin (1983) PS-stratification (default n_strata = 5,
-#' Cochran 1968 convention). Use \code{MatchIt::matchit(method =
-#' "subclass")} for an R-side equivalent.
+#' Rosenbaum-Rubin (1983) propensity-score stratification with the
+#' Cochran (1968) five-stratum convention: PS quintile strata,
+#' within-stratum treated-control mean differences, aggregated with
+#' stratum-size weights; SE from the weighted within-stratum
+#' variances. Strata missing either arm are dropped (and reported).
 #'
-#' @param ... Arguments mirroring \code{morie_otis_ipw_ate()}.
-#' @return Stops with a redirect to \pkg{MatchIt} subclassification.
+#' @param df Data frame.
+#' @param treatment,outcome,covariates Column names.
+#' @param n_strata Number of PS strata. Default 5.
+#' @return An OTIS causal-estimate list (ATE).
 #' @export
 #' @examples
-#' \dontrun{
-#'   morie_otis_psm_subclass(df, treatment = "d", outcome = "y",
-#'                            covariates = "x")
-#' }
-morie_otis_psm_subclass <- function(...) {
-  stop("NotYetPorted: PS-subclass ATE. Use ",
-       "`MatchIt::matchit(t ~ ., data = df, method = 'subclass', ",
-       "subclass = 5)` then aggregate within-stratum mean differences ",
-       "weighted by stratum size.")
+#' set.seed(1)
+#' n <- 400
+#' x <- rnorm(n)
+#' d <- rbinom(n, 1, plogis(0.6 * x))
+#' y <- 1.5 * d + x + rnorm(n)
+#' morie_otis_psm_subclass(data.frame(y, d, x), treatment = "d",
+#'                         outcome = "y", covariates = "x")
+morie_otis_psm_subclass <- function(df, treatment, outcome,
+                                    covariates, n_strata = 5L) {
+  cols <- unique(c(treatment, outcome, covariates))
+  data <- df[stats::complete.cases(df[, cols, drop = FALSE]), cols,
+             drop = FALSE]
+  d <- .otis_binarise(data[[treatment]])
+  y <- as.numeric(data[[outcome]])
+  X <- .otis_design_matrix(data, covariates)
+  ps <- .otis_predict_ps(X, .otis_logit_fit(X, d), eps = 1e-4)
+  qs <- unique(stats::quantile(ps, probs = seq(0, 1,
+                                               length.out = n_strata + 1L)))
+  strata <- cut(ps, breaks = qs, include.lowest = TRUE, labels = FALSE)
+  n <- length(y)
+  est <- 0; var_acc <- 0; used_n <- 0L; dropped <- 0L
+  per <- list()
+  for (s in sort(unique(strata))) {
+    idx <- which(strata == s)
+    y1 <- y[idx][d[idx] == 1L]; y0 <- y[idx][d[idx] == 0L]
+    if (length(y1) < 2L || length(y0) < 2L) { dropped <- dropped + 1L; next }
+    w <- length(idx)
+    est <- est + w * (mean(y1) - mean(y0))
+    var_acc <- var_acc +
+      w^2 * (stats::var(y1) / length(y1) + stats::var(y0) / length(y0))
+    used_n <- used_n + w
+    per[[length(per) + 1L]] <- c(stratum = s, n = w,
+                                 diff = mean(y1) - mean(y0))
+  }
+  if (used_n == 0L) {
+    stop("morie_otis_psm_subclass: no stratum contains both arms; ",
+         "reduce `n_strata` or check overlap.", call. = FALSE)
+  }
+  ate <- est / used_n
+  se <- sqrt(var_acc) / used_n
+  z <- if (se > 0) ate / se else 0
+  pval <- 2 * stats::pnorm(-abs(z))
+  notes <- list(sprintf("strata=%d (dropped %d without both arms)",
+                        n_strata, dropped))
+  out <- .otis_causal_estimate("PS-subclass", ate, se, pval, n,
+                               sum(d), mean(d), notes)
+  out$strata <- do.call(rbind, per)
+  out
 }

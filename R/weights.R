@@ -716,22 +716,37 @@ morie_weights_replicate_variance <- function(full_estimate, replicate_estimates,
 
 #' Multi-frame (dual-frame) survey weights (Hartley compositing).
 #' @inheritParams morie_weights_params
-#' @return A named list with elements \code{weights_a}, \code{weights_b}.
+#' @return A named list with elements \code{weights_a} and
+#'   \code{weights_b}: numeric vectors of frame-A and frame-B weights
+#'   with overlap units down-weighted by \code{theta} and
+#'   \code{1 - theta} respectively.
 #' @export
 morie_weights_multiframe <- function(weights_a, weights_b,
                                      overlap_a, overlap_b,
                                      method = c("hartley", "optimal"),
                                      theta = 0.5) {
   method <- match.arg(method)
-  if (method == "optimal")
-    stop("NotYetPorted: optimal variance-minimizing multiframe weights ",
-         "require auxiliary variance estimates and are not yet implemented.",
-         call. = FALSE)
   wa <- as.numeric(weights_a)
   wb <- as.numeric(weights_b)
   oa <- as.logical(overlap_a)
   ob <- as.logical(overlap_b)
+  if (method == "optimal") {
+    # Hartley (1962) optimum theta* = V_B / (V_A + V_B) for the
+    # overlap-domain estimator. With no auxiliary outcome, each
+    # frame's variance is proxied by its Horvitz-Thompson variance
+    # under unit response, sum of squared overlap weights -- the
+    # standard design-based default.
+    va <- sum(wa[oa]^2)
+    vb <- sum(wb[ob]^2)
+    if (va + vb <= 0) {
+      stop("morie_weights_multiframe: no overlap units in either ",
+           "frame; cannot compute the optimal theta.", call. = FALSE)
+    }
+    theta <- vb / (va + vb)
+  }
   wa_adj <- ifelse(oa, theta * wa, wa)
   wb_adj <- ifelse(ob, (1 - theta) * wb, wb)
-  list(weights_a = wa_adj, weights_b = wb_adj)
+  out <- list(weights_a = wa_adj, weights_b = wb_adj)
+  if (method == "optimal") out$theta <- theta
+  out
 }
