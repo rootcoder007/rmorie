@@ -346,6 +346,7 @@ test_that("morie_drpfw_dropout_forward rejects out-of-range p; alias works", {
 })
 
 test_that("morie_decision_tree_split returns expected structure", {
+  skip_if_not_installed("rpart")
   set.seed(50)
   x <- matrix(rnorm(80 * 3), ncol = 3)
   y <- factor(ifelse(x[, 1] + rnorm(80, 0, 0.1) > 0, "pos", "neg"))
@@ -366,6 +367,7 @@ test_that("morie_decision_tree_split returns expected structure", {
 })
 
 test_that("morie_decision_tree_split supports entropy criterion and vector x", {
+  skip_if_not_installed("rpart")
   set.seed(51)
   v <- rnorm(60)
   y <- factor(ifelse(v > 0, "a", "b"))

@@ -4,6 +4,7 @@
 set.seed(1)
 
 test_that("hkdf_sha256 returns the requested length raw vector", {
+  skip_if_not_installed("sodium")
   skip_if_not(morie_crypto_sodium_available(), "no libsodium")
   set.seed(1)
   out <- morie_crypto_hkdf_sha256("seed", len = 32L, salt = "salt", info = "ctx")
@@ -12,6 +13,7 @@ test_that("hkdf_sha256 returns the requested length raw vector", {
 })
 
 test_that("hkdf_sha256 is deterministic on identical inputs", {
+  skip_if_not_installed("sodium")
   skip_if_not(morie_crypto_sodium_available(), "no libsodium")
   set.seed(1)
   a <- morie_crypto_hkdf_sha256("ikm", len = 16L, salt = "salt", info = "ctx")
@@ -20,6 +22,7 @@ test_that("hkdf_sha256 is deterministic on identical inputs", {
 })
 
 test_that("hkdf_sha256 changes with different info or salt", {
+  skip_if_not_installed("sodium")
   skip_if_not(morie_crypto_sodium_available(), "no libsodium")
   set.seed(1)
   base <- morie_crypto_hkdf_sha256("ikm", len = 16L, salt = "salt", info = "ctx")
@@ -30,6 +33,7 @@ test_that("hkdf_sha256 changes with different info or salt", {
 })
 
 test_that("hkdf_sha256 supports raw inputs", {
+  skip_if_not_installed("sodium")
   skip_if_not(morie_crypto_sodium_available(), "no libsodium")
   set.seed(1)
   out <- morie_crypto_hkdf_sha256(charToRaw("hi"), len = 8L,
@@ -38,6 +42,7 @@ test_that("hkdf_sha256 supports raw inputs", {
 })
 
 test_that("hkdf_sha256 rejects bad lengths", {
+  skip_if_not_installed("sodium")
   skip_if_not(morie_crypto_sodium_available(), "no libsodium")
   set.seed(1)
   expect_error(morie_crypto_hkdf_sha256("x", len = 0L), "length")
@@ -45,6 +50,7 @@ test_that("hkdf_sha256 rejects bad lengths", {
 })
 
 test_that("hkdf_sha256 defaults salt to zeros and runs", {
+  skip_if_not_installed("sodium")
   skip_if_not(morie_crypto_sodium_available(), "no libsodium")
   set.seed(1)
   out <- morie_crypto_hkdf_sha256("x")
@@ -52,12 +58,14 @@ test_that("hkdf_sha256 defaults salt to zeros and runs", {
 })
 
 test_that("hybrid_keygen surfaces not-implemented", {
+  skip_if_not_installed("sodium")
   skip_if_not(morie_crypto_sodium_available(), "no libsodium")
   set.seed(1)
   expect_error(morie_crypto_hybrid_keygen(), "not implemented")
 })
 
 test_that("hybrid_encrypt validates inputs then surfaces not-implemented", {
+  skip_if_not_installed("sodium")
   skip_if_not(morie_crypto_sodium_available(), "no libsodium")
   set.seed(1)
   expect_error(morie_crypto_hybrid_encrypt("hi", "notraw"), "raw")
@@ -65,6 +73,7 @@ test_that("hybrid_encrypt validates inputs then surfaces not-implemented", {
 })
 
 test_that("hybrid_decrypt validates inputs then surfaces not-implemented", {
+  skip_if_not_installed("sodium")
   skip_if_not(morie_crypto_sodium_available(), "no libsodium")
   set.seed(1)
   expect_error(morie_crypto_hybrid_decrypt("notraw", as.raw(1:4)), "raw")
@@ -72,6 +81,7 @@ test_that("hybrid_decrypt validates inputs then surfaces not-implemented", {
 })
 
 test_that(".morie_wrapping_key produces 32 bytes", {
+  skip_if_not_installed("sodium")
   skip_if_not(morie_crypto_sodium_available(), "no libsodium")
   set.seed(1)
   out <- rmorie:::.morie_wrapping_key(as.raw(1:8), as.raw(9:16))

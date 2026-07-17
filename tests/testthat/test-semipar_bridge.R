@@ -140,6 +140,7 @@ test_that("kernel_cond_moments far-eval zero-weight branch", {
 })
 
 test_that("gam_smoother fits and predicts", {
+  skip_if_not_installed("mgcv")
   r <- gam_smoother(x_sp, y_sp, x_eval = xe_sp, k = 5)
   expect_named(r, c("fit", "x_eval", "y_hat", "edf", "k"))
   expect_length(r$y_hat, length(xe_sp))
@@ -147,10 +148,12 @@ test_that("gam_smoother fits and predicts", {
 })
 
 test_that("gam_smoother error path on bad lengths", {
+  skip_if_not_installed("mgcv")
   expect_error(gam_smoother(1:5, 1:6), "equal length")
 })
 
 test_that("gam_smoother default x_eval = x", {
+  skip_if_not_installed("mgcv")
   r <- gam_smoother(x_sp, y_sp, k = 5)
   expect_length(r$y_hat, length(x_sp))
 })

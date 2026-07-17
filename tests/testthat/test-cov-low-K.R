@@ -39,6 +39,7 @@ test_that("morie_estimate_gate returns NA row for tiny / single-treatment subgro
 
 # ==== dtrsp.R ====
 test_that("morie_decision_tree_split entropy criterion runs on small data", {
+  skip_if_not_installed("rpart")
   set.seed(1)
   x <- matrix(rnorm(80), 40, 2)
   y <- as.factor(rbinom(40, 1, 0.5))

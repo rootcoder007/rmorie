@@ -2,7 +2,7 @@
 # Module 16: Sun-Abraham, Borusyak imputation, Gardner did2s --
 # known-truth recovery + cross-validation vs did2s/didimputation.
 
-.dm_panel <- function(n_id = 60L, n_t = 10L, tau = 2, seed = 42) {
+.dm_panel <- function(n_id = 120L, n_t = 10L, tau = 2, seed = 42) {
   set.seed(seed)
   df <- expand.grid(id = seq_len(n_id), t = seq_len(n_t))
   df$g <- ifelse(df$id <= n_id / 3, 5L,

@@ -15,7 +15,7 @@ File,Line,Status,Version,Context
 ./DESCRIPTION,41,STALE_OR_DEP,4.3.0,"Note: Tested on R 4.3.0; 4.4.x; 4.5.2; 4.5.3 (CRAN). Use CRAN R on Apple"
 ./DESCRIPTION,41,STALE_OR_DEP,4.3.0,"Note: Tested on R 4.3.0; 4.4.x; 4.5.2; 4.5.3 (CRAN). Use CRAN R on Apple"
 ./DESCRIPTION,48,STALE_OR_DEP,0.2.1,"rmoriebricklayer (>= 0.2.1)"
-./DESCRIPTION,177,STALE_OR_DEP,3.0.0,"testthat (>= 3.0.0);"
+./DESCRIPTION,180,STALE_OR_DEP,3.0.0,"testthat (>= 3.0.0);"
 ./Dockerfile,19,STALE_OR_DEP,4.6.1,"FROM rocker/r-ver:4.6.1 AS builder"
 ./Dockerfile,82,STALE_OR_DEP,4.6.1,"FROM rocker/r-ver:4.6.1 AS runtime"
 ./NEWS.md,1,CURRENT,1.1.4,"# rmorie 1.1.4 (development; feat/native-specializations)"

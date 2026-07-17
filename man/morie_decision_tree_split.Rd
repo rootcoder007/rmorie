@@ -27,5 +27,10 @@ CART tree via \code{rpart::rpart}, returning the root split structure
 and feature importances.
 }
 \examples{
-morie_decision_tree_split(x = rnorm(50), y = rnorm(50))
+if (requireNamespace("rpart", quietly = TRUE)) {
+  set.seed(1)
+  x <- matrix(rnorm(120), 60, 2)
+  y <- factor(ifelse(x[, 1] > 0, "pos", "neg"))
+  morie_decision_tree_split(x, y)
+}
 }

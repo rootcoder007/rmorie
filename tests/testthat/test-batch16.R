@@ -342,7 +342,7 @@ test_that("morie_roll_call_analysis alias matches rcall", {
 
 test_that("morie_regime_switching fits a 2-regime model via base-R EM", {
   set.seed(15)
-  x <- c(rnorm(30, 0, 0.5), rnorm(30, 0, 2))
+  x <- c(rnorm(100, 0, 0.5), rnorm(100, 0, 2))
   r <- morie_regime_switching(x, k_regimes = 2)
   expect_type(r, "list")
   expect_named(r, c(
@@ -352,7 +352,7 @@ test_that("morie_regime_switching fits a 2-regime model via base-R EM", {
   expect_length(r$mu, 2L)
   expect_length(r$sigma, 2L)
   expect_identical(dim(r$transition), c(2L, 2L))
-  expect_identical(r$n, 60L)
+  expect_identical(r$n, 200L)
   expect_identical(r$k_regimes, 2)
   expect_true(all(is.finite(r$mu)))
 })
