@@ -37,5 +37,5 @@ registry short-name (e.g. \code{"major-crime"},
 \code{"shooting-firearms"}) instead of a raw FeatureServer URL.
 }
 \examples{
-\donttest{try(morie_ingest_tps_fetch("major-crime", max_features = 1L))}
+\dontrun{try(morie_ingest_tps_fetch("major-crime", max_features = 1L))}
 }

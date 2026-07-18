@@ -30,7 +30,7 @@ the \code{REPORT_SCOPE} rows (the headline volume series), and
 surfaces a data-quality audit.
 }
 \examples{
-\donttest{
+\dontrun{
 res <- try(morie_arsau_analyze_aggregate_summary(year_range = "2020-2022"))
 if (!inherits(res, "try-error")) print(res)
 }

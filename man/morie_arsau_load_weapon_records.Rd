@@ -27,7 +27,7 @@ An object of class \code{"morie_arsau_result"}.
 2023 requires \code{allow_invalid = TRUE} (ministry-flagged invalid).
 }
 \examples{
-\donttest{
+\dontrun{
 res <- try(morie_arsau_load_weapon_records("2024"))
 if (!inherits(res, "try-error")) head(res$data)
 }

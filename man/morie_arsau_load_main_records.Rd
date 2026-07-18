@@ -20,7 +20,7 @@ An object of class \code{"morie_arsau_result"}.
 Load ARSAU main_records CSV for the given year.
 }
 \examples{
-\donttest{
+\dontrun{
 res <- try(morie_arsau_load_main_records("2024"))
 if (!inherits(res, "try-error")) head(res$data)
 }

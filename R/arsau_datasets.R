@@ -514,7 +514,7 @@ morie_arsau_fetch_sidecar <- function(kind, year, limit = 5000L,
 #' @return Invisibly, a list with \code{downloaded} (paths),
 #'   \code{skipped} (registry keys), and \code{target_dir}.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' res <- try(morie_arsau_download(tempdir(), kinds = ARSAU_KINDS()[1],
 #'                                 years = ARSAU_YEARS()[1], quiet = TRUE))
 #' if (!inherits(res, "try-error")) length(res$downloaded)
