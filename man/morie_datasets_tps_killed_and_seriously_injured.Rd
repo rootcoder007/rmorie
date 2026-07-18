@@ -52,7 +52,7 @@ Killed or Seriously Injured (KSI) - related collisions (2006 -
 Tags: Killed or Seriously Injured; KSI; MVC; Traffic; Collision; Traffic Collision
 }
 \examples{
-\donttest{
+\dontrun{
 df <- try(morie_datasets_tps_killed_and_seriously_injured(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

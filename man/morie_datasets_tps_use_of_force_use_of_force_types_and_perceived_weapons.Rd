@@ -53,7 +53,7 @@ officers perceived weapons were carried by people involved.
 Tags: race; race based data; rbdc
 }
 \examples{
-\donttest{
+\dontrun{
 df <- try(morie_datasets_tps_use_of_force_use_of_force_types_and_perceived_weapons(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

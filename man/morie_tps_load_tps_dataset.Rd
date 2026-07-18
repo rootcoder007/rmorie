@@ -29,7 +29,7 @@ via \code{\link[=morie_fetch_tps]{morie_fetch_tps()}} (cached under \code{cache_
 infrastructure is involved, so results reproduce on any machine.
 }
 \examples{
-\donttest{
+\dontrun{
 try(head(morie_tps_load_tps_dataset("Homicides", nrows = 100)))
 }
 }

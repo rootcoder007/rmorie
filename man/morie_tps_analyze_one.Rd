@@ -21,7 +21,7 @@ nested result.  This is the function the 13 convenience aliases
 (\code{morie_tps_analyze_assault()}, etc.) wrap.
 }
 \examples{
-\donttest{
+\dontrun{
 df <- try(morie_datasets_tps_assault(max_features = 200L))
 if (!inherits(df, "try-error")) {
   res <- try(morie_tps_analyze_one(df, name = "assault"))

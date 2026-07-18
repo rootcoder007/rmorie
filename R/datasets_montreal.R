@@ -178,7 +178,7 @@ morie_datasets_montreal_sim_intervention_types <- function() {
 #' @param filters Optional named list of `{column: value}` filters.
 #' @return A `data.frame` of records.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Mobility-squad interventions (resource verified live 2026-07 via
 #' # /api/3/action/datastore_search on donnees.montreal.ca):
 #' df <- try(morie_datasets_montreal_ckan_resource(
