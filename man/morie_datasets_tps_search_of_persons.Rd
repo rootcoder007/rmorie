@@ -52,7 +52,7 @@ conducted.
 Tags: ASR; TPS; Toronto Police; Annual Statistical Report; Search of Person
 }
 \examples{
-\donttest{
+\dontrun{
 df <- try(morie_datasets_tps_search_of_persons(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

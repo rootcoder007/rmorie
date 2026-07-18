@@ -48,7 +48,7 @@ datasets are billed to the caller's project, not the dataset
 owner's.
 }
 \examples{
-\donttest{try(morie_ingest_chicago_crime_bigquery())}
+\dontrun{try(morie_ingest_chicago_crime_bigquery())}
 }
 \seealso{
 \code{\link{morie_ingest_chicago_crime}},

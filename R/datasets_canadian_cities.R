@@ -157,7 +157,7 @@ morie_datasets_calgary_fire_stations <- function(offline = TRUE,
 #' @param limit Page size (default 1000).
 #' @return A `data.frame` of records.
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' cat_df <- morie_datasets_calgary_opendata_bulk_layers()
 #' df <- try(morie_datasets_calgary_socrata_by_id(cat_df$soda_id[1], limit = 5L))
 #' if (!inherits(df, "try-error")) head(df)
@@ -223,7 +223,7 @@ morie_datasets_edmonton_fire_stations <- function(offline = TRUE,
 #' @param limit Page size (default 1000).
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' cat_df <- morie_datasets_edmonton_opendata_bulk_layers()
 #' df <- try(morie_datasets_edmonton_socrata_by_id(cat_df$soda_id[1], limit = 5L))
 #' if (!inherits(df, "try-error")) head(df)

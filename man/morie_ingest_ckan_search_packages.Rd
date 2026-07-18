@@ -38,5 +38,5 @@ most-useful columns into a single data.frame: \code{id},
 canonical \code{<portal>/dataset/<name>} URL).
 }
 \examples{
-\donttest{try(morie_ingest_ckan_search_packages("https://open.canada.ca/data", query = "crime", rows = 1L))}
+\dontrun{try(morie_ingest_ckan_search_packages("https://open.canada.ca/data", query = "crime", rows = 1L))}
 }

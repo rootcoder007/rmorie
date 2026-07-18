@@ -21,7 +21,7 @@ Examples: \code{"https://open.canada.ca/data"}, \code{"https://data.ontario.ca"}
 \code{"https://data.gov.uk"}, \code{"https://data.europa.eu"}.
 }
 \examples{
-\donttest{
+\dontrun{
 out <- try(morie_datasets_ckan_search(
   portal = "https://open.canada.ca/data",
   query = "policing", rows = 3L))

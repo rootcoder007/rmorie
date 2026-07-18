@@ -25,7 +25,7 @@
 #'   session temporary directory.
 #' @return Invisibly, a character vector of the PNG paths written.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Live fetch from the public TPS portal; writes only under tempdir().
 #' try(morie_tps_figures(file.path(tempdir(), "tps-figs"),
 #'                       categories = "Homicides", which = "hawkes"))

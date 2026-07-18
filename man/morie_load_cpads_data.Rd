@@ -17,7 +17,7 @@ Load the real CPADS CSV from this repository
 }
 \examples{
 \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-\donttest{
+\dontrun{
 # Reads and canonicalises the CPADS PUMF CSV. The default CSV lives in
 # a morie project tree; the CKAN-fetched PUMF works identically (see
 # morie_load_dataset("ocp21")). The tryCatch guard lets the example

@@ -19,7 +19,7 @@ A \code{data.frame}.
 TPS Homicides feed.
 }
 \examples{
-\donttest{
+\dontrun{
 res <- try(morie_datasets_tps_homicide(year = 2024, max_features = 5L))
 if (!inherits(res, "try-error")) head(res)
 }

@@ -53,7 +53,7 @@ seized by the Toronto Police Service.
 Tags: ASR; TPS; Toronto Police; Annual Statistical Report; Firearms
 }
 \examples{
-\donttest{
+\dontrun{
 df <- try(morie_datasets_tps_firearms_top_calibres(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

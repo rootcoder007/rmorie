@@ -37,5 +37,5 @@ captured as a single-row error data.frame keyed
 successful ones.
 }
 \examples{
-\donttest{try(morie_ingest_ckan_fetch_package_csvs("https://open.canada.ca/data", "some-package-id"))}
+\dontrun{try(morie_ingest_ckan_fetch_package_csvs("https://open.canada.ca/data", "some-package-id"))}
 }

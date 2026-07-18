@@ -125,7 +125,7 @@ morie_datasets_vancouver_opendata_bulk_layers <- function(offline = TRUE) {
 #' @param limit Page size.
 #' @return A `data.frame` of records.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # NYPD arrests dataset (SODA id verified live 2026-07)
 #' df <- try(morie_datasets_nyc_socrata_by_id("8h9b-rp9u", limit = 5L))
 #' if (!inherits(df, "try-error")) head(df)
@@ -145,7 +145,7 @@ morie_datasets_nyc_socrata_by_id <- function(soda_id,
 #' @rdname morie_datasets_nyc_socrata_by_id
 #' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Chicago crimes dataset (SODA id verified live 2026-07)
 #' df <- try(morie_datasets_chicago_socrata_by_id("ijzp-q8t2", limit = 5L))
 #' if (!inherits(df, "try-error")) head(df)

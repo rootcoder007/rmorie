@@ -253,7 +253,7 @@ NULL
 #'   session temporary directory.
 #' @return A `data.frame` of incidents.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' try(head(morie_tps_load_tps_dataset("Homicides", nrows = 100)))
 #' }
 #' @export
@@ -292,7 +292,7 @@ morie_tps_load_tps_dataset <- function(category, nrows = NULL,
 #'   directory.
 #' @return A `data.frame` of layer attributes.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' try(nrow(morie_tps_load_tps("NeighbourhoodCrimeRates")))
 #' }
 #' @export

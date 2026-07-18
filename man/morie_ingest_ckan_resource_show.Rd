@@ -31,5 +31,5 @@ Calls the CKAN \code{resource_show} verb to resolve a resource id
 into its download URL plus metadata.
 }
 \examples{
-\donttest{try(morie_ingest_ckan_resource_show("https://open.canada.ca/data", "some-resource-id"))}
+\dontrun{try(morie_ingest_ckan_resource_show("https://open.canada.ca/data", "some-resource-id"))}
 }
