@@ -34,9 +34,11 @@ rather than for PUMF \code{_CSV.zip} downloads --- those go
 through \code{\link{morie_ingest_statcan_csv}}.
 }
 \details{
-If the \code{STATCAN_API_KEY} environment variable is set, it is
-passed to \code{cansim::set_cansim_api_key()} so authenticated
-rate limits apply.
+No credentials are required: the StatCan Web Data Service is public.
+Setting the optional \code{STATCAN_API_KEY} environment variable only
+raises your WDS rate limits; without it the fetch still works (it is
+forwarded to \pkg{cansim} via the \code{CANSIM_API_KEY} name the
+package reads internally).
 }
 \examples{
 \dontrun{
