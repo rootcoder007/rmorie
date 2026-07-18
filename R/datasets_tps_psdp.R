@@ -405,7 +405,7 @@ morie_datasets_tps_theft_over <- function(year = NULL,
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `DIV`, `UNIT_NAME`, `ADDRESS`,
 #'   `CITY`, `AREA_SQKM`, plus shape area / perimeter fields.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_tps_police_divisions(offline = TRUE)
 #' nrow(df)  # 16
 #' @export

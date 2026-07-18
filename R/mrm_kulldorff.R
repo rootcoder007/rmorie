@@ -19,7 +19,7 @@
 #'   the most likely cluster, its Poisson log-likelihood-ratio statistic,
 #'   the Monte-Carlo permutation p-value, and a plain-language
 #'   \code{interpretation}.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' if (FALSE) {
 #'   tps <- morie_sample("tps_assault")
 #'   mrm_tps_kulldorff_scan(tps, n_permutations = 49)
@@ -77,7 +77,7 @@ NULL
 #'   \code{t_start}, \code{t_end}, \code{n_observed}, \code{n_expected},
 #'   \code{relative_risk}, \code{log_lrt}, \code{p_value}.
 #' @export
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' if (FALSE) {
 #'   tps <- morie_sample("tps_assault")
 #'   mrm_tps_kulldorff_scan(tps, n_permutations = 49)

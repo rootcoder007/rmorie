@@ -81,8 +81,10 @@ Offline mode reads a included 5-row 39-col fixture
 (\code{inst/extdata/chicago_crime_map_ahwe_kpsy_sample.csv}).
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_chicago_crime_map(offline = TRUE)
 df$primary_type
+\dontshow{\}) # examplesIf}
 }
 \references{
 City of Chicago Data Portal, "Crimes - 2001 to

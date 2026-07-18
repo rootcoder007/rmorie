@@ -18,6 +18,8 @@ complement to morie's provincial loaders (Ontario OTIS, BC VPD,
 etc.).
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 cubes <- morie_datasets_statcan_ccjs_cubes()
 subset(cubes, grepl("homicide", cube_title_en, ignore.case = TRUE))
+\dontshow{\}) # examplesIf}
 }

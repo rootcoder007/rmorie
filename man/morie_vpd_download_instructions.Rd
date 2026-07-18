@@ -25,7 +25,9 @@ the user needs to follow to get a full-fidelity crime CSV that
 \code{\link{morie_datasets_vpd_crime}} can consume.
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 morie_vpd_download_instructions()
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=morie_datasets_vpd_crime]{morie_datasets_vpd_crime()}} for the loader that

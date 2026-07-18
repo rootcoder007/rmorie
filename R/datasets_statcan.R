@@ -33,7 +33,7 @@
 #'
 #' @return A `data.frame` with `product_id`, `cube_title_en`,
 #'   `dimensions`, `frequency`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' cubes <- morie_datasets_statcan_ccjs_cubes()
 #' subset(cubes, grepl("homicide", cube_title_en, ignore.case = TRUE))
 #' @export

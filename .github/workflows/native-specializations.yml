@@ -37,7 +37,7 @@ jobs:
             runiverse = "https://rootcoder007.r-universe.dev",
             P3M = "https://packagemanager.posit.co/cran/__linux__/bookworm/latest",
             CRAN = "https://cloud.r-project.org")
-          pkgs <- c("here", "Rcpp", "RcppArmadillo", "rmoriebricklayer",
+          pkgs <- c("here", "Rcpp", "RcppArmadillo", "rmoriebricklayer", "rmoriedata",
                     "testthat", "pkgload", "rcmdcheck")
           install.packages(pkgs, repos = repos, Ncpus = 2)
           missing <- setdiff(pkgs, rownames(installed.packages()))

@@ -56,6 +56,8 @@ Attribute schema: \code{borocode} (string, "1"-"5"), \code{boroname}
 returns \code{the_geom} MultiPolygon when \code{geometry = TRUE}.
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_nyc_boroughs(offline = TRUE)
 df[, c("borocode", "boroname")]
+\dontshow{\}) # examplesIf}
 }

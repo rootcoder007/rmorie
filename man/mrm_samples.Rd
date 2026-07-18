@@ -30,8 +30,10 @@ not clearly licensed).
 }
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 if (FALSE) {
   b01 <- morie_load_dataset("otisb01")
   head(b01)
 }
+\dontshow{\}) # examplesIf}
 }

@@ -21,6 +21,8 @@ Ontario Use-of-Force aggregate summary (5-year 2020-2022, pre-RBDS
 rollup)
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_arsau_aggregate_summary(offline = TRUE)
 head(df)
+\dontshow{\}) # examplesIf}
 }

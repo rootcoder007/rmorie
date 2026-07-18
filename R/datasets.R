@@ -487,7 +487,7 @@ morie_datasets_tps_homicide <- function(year = NULL, max_features = NULL) {
 #' List the TPS open-data layers included with morie.
 #'
 #' @return A `data.frame` with columns `name` and `url`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_tps_layers()
 #' df$name
 #' @export
@@ -1348,7 +1348,7 @@ morie_datasets_ckan_package <- function(portal, package_id) {
 #' @param api_key Character; FBI CDE API key (or `NULL` -> env var).
 #' @param offline Logical; if `TRUE`, return a included synthetic frame.
 #' @return A `data.frame`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_nibrs(year = 2023L, offline = TRUE)
 #' head(df)
 #' @export
@@ -1695,7 +1695,7 @@ morie_datasets_chicago_crime_odata <- function(filter = NULL,
 #' @return A `data.frame` with the 39-col schema.
 #' @references City of Chicago Data Portal, "Crimes - 2001 to
 #'   Present - Map" (`ahwe-kpsy`), derived from `ijzp-q8t2`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_chicago_crime_map(offline = TRUE)
 #' df$primary_type
 #' @export
@@ -1856,7 +1856,7 @@ morie_datasets_chicago_crime_soql <- function(where = NULL,
 #'   including `the_geom` (live, `geometry = TRUE`).
 #' @references City of Chicago Data Portal, "Boundaries - Police
 #'   Beats (current)" (`n9it-hstw`).
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_chicago_police_beats(offline = TRUE)
 #' head(df)
 #' @export
@@ -2212,7 +2212,7 @@ morie_datasets_chicago_crime_resolved <- function(
 #'   including `the_geom` (live, `geometry = TRUE`).
 #' @references City of Chicago Data Portal, "Boundaries - Wards
 #'   (2023-)" (`sp34-6z76`).
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_chicago_wards(offline = TRUE)
 #' head(df)
 #' @export
@@ -2464,7 +2464,7 @@ morie_datasets_chicago_iucr_codes <- function(offline = TRUE,
 #'   limits; passed as the `X-App-Token` header.
 #' @return A `data.frame` with the documented 24-col Socrata schema.
 #' @references City of Chicago Data Portal, "Arrests" (`dpt3-jri9`).
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_chicago_arrests(offline = TRUE)
 #' df$arrest_date
 #' @export
@@ -2575,7 +2575,7 @@ morie_datasets_chicago_arrests <- function(year = NULL,
 #' @references Chicago Police Department, "Public Arrest Data";
 #'   landing page at chicagopolice.org/statistics-data/public-
 #'   arrest-data/.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_cpd_public_arrests(offline = TRUE)
 #' df$STAT_DESCR
 #' @export

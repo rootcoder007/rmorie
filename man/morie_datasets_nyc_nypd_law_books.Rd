@@ -18,6 +18,8 @@ NYS / NYC codes that appear in complaint, summons, and historical
 arrest data.
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 books <- morie_datasets_nyc_nypd_law_books()
 subset(books, book == "PL")
+\dontshow{\}) # examplesIf}
 }
