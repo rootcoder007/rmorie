@@ -230,6 +230,45 @@ morie_siu_cache_path <- function(cache_dir = file.path(tempdir(), "morie", "siu"
     m <- regmatches(html, regexec(date_pats[[k]], html, perl = TRUE))[[1L]]
     if (length(m) >= 2L) rec[[k]] <- .siu_fetch_to_iso(m[2L])
   }
+  # 2026-07 layout: the labelled Incident/Notification/Decision date
+  # fields are gone -- the dates now live only in the report prose.
+  # Narrative fallbacks (only fill fields the labels missed):
+  plain <- gsub("\\s+", " ", gsub("<[^>]+>", " ", html))
+  # "10:00 a.m." would break sentence-bounded [^.] matching -- drop
+  # the abbreviation periods before scanning.
+  plain <- gsub("([ap])\\.m\\.", "\\1m", plain)
+  date_re <- "([A-Z][a-z]+ \\d{1,2}, \\d{4})"
+  if (!nzchar(rec$decision_iso)) {
+    # Approval footer: "Date: June 12, 2026 Electronically approved by
+    # <name> Director".
+    m <- regmatches(plain, regexec(paste0(
+      "Date:\\s*", date_re,
+      "(?=.{0,140}Director)"), plain, perl = TRUE))[[1L]]
+    if (length(m) >= 2L) rec$decision_iso <- .siu_fetch_to_iso(m[2L])
+  }
+  if (!nzchar(rec$notification_iso)) {
+    # "On <date>, ... contacted/notified the SIU" (or "the SIU was
+    # notified"), i.e. the date in the same sentence as the SIU
+    # notification wording.
+    m <- regmatches(plain, regexec(paste0(
+      "On\\s+", date_re, "[^.]{0,200}?",
+      "(?:contacted|notified)[^.]{0,80}?SIU"), plain, perl = TRUE))[[1L]]
+    if (length(m) < 2L) {
+      m <- regmatches(plain, regexec(paste0(
+        "SIU was notified[^.]{0,80}?on\\s+", date_re),
+        plain, perl = TRUE))[[1L]]
+    }
+    if (length(m) >= 2L) rec$notification_iso <- .siu_fetch_to_iso(m[2L])
+  }
+  if (!nzchar(rec$incident_iso)) {
+    # The incident is the EARLIEST calendar date mentioned in the
+    # report body (narratives open with the event, later dates are
+    # follow-ups, notification and approval).
+    all_d <- regmatches(plain, gregexpr(date_re, plain, perl = TRUE))[[1L]]
+    iso <- vapply(all_d, .siu_fetch_to_iso, character(1L))
+    iso <- iso[nzchar(iso)]
+    if (length(iso)) rec$incident_iso <- min(iso)
+  }
   svc_pat <- paste0(
     "(?:Police Service|Notifying Service)\\s*[:\\-]?\\s*",
     "([A-Z][A-Za-z' \\-]+(?:Police|Service))"
@@ -258,7 +297,14 @@ morie_siu_cache_path <- function(cache_dir = file.path(tempdir(), "morie", "siu"
     "(?:no reasonable grounds|reasonable grounds|charge\\(s\\)? was|",
     "withdrawn|charges? were laid)"
   )
-  m <- regmatches(html, regexpr(dec_pat, html, perl = TRUE,
+  # The mandate boilerplate near the top also says "reasonable
+  # grounds"; the verdict lives in the Analysis and Director's
+  # Decision section, so scan from the LAST such heading when present.
+  scan <- plain
+  hi <- regexpr("Analysis and Director.{1,3}s Decision(?!.*Analysis and Director)",
+                plain, perl = TRUE)
+  if (hi > 0L) scan <- substr(plain, hi, nchar(plain))
+  m <- regmatches(scan, regexpr(dec_pat, scan, perl = TRUE,
     ignore.case = TRUE))
   if (length(m) >= 1L && nzchar(m[1L])) {
     rec$director_decision_text <- trimws(m[1L])
