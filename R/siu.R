@@ -1500,7 +1500,8 @@ morie_siu_compare <- function(case_number, external,
 #' @noRd
 .siu_llm_call <- function(model, prompt,
                           timeout_s = .siu_llm_default_timeout(),
-                          mock_response_text = NULL) {
+                          mock_response_text = NULL,
+                          expect_json = FALSE) {
   if (!is.null(mock_response_text)) {
     return(mock_response_text)
   }
@@ -1515,6 +1516,20 @@ morie_siu_compare <- function(case_number, external,
       .siu_llm_call_one(m, prompt, timeout_s = timeout_s),
       error = function(e) structure(conditionMessage(e), class = "err")
     )
+    if (!inherits(res, "err") && isTRUE(expect_json)) {
+      # A provider that answers with prose (e.g. a service notice)
+      # instead of the requested JSON is a failure -- keep going down
+      # the chain rather than handing garbage to the parser.
+      probe <- gsub("^```(?:json)?\\s*|\\s*```$", "", res, perl = TRUE)
+      ok <- tryCatch({
+        .morie_from_json(probe, simplifyVector = TRUE)
+        TRUE
+      }, error = function(e) FALSE)
+      if (!ok) {
+        res <- structure("provider returned non-JSON output",
+                         class = "err")
+      }
+    }
     if (!inherits(res, "err")) {
       return(res)
     }
@@ -1722,8 +1737,16 @@ morie_siu_compare <- function(case_number, external,
     if (pair_key %in% seen_pairs) next
     seen_pairs <- c(seen_pairs, pair_key)
     ek <- gsub("[^A-Za-z0-9]", "_", s$url)
+    # Fail fast once too many hosts prove dead -- don't spend 5s on
+    # each of 60 volunteer boxes before falling through the chain.
+    dead <- .morie_siu_state$ollamafree_dead %||% 0L
+    if (dead >= 8L) break
     if (is.null(host_alive[[ek]])) {
-      host_alive[[ek]] <- list(models = live_models(s$url))
+      probed <- live_models(s$url)
+      host_alive[[ek]] <- list(models = probed)
+      if (is.null(probed)) {
+        .morie_siu_state$ollamafree_dead <- dead + 1L
+      }
     }
     avail <- host_alive[[ek]]$models
     if (is.null(avail)) {
@@ -1794,32 +1817,51 @@ morie_siu_compare <- function(case_number, external,
                  lang %in% c("en", "unknown"), , drop = FALSE]
     if (nrow(hit)) return(hit$drid[1L])
   }
-  # Live fallback: page the index (newest first) until the case shows.
+  # Live fallback: consult the session-cached case->drid table built
+  # from the online index (newest first). New reports sit in the first
+  # page or two, so we page lazily: check the cache, extend it only as
+  # far as needed, and remember everything fetched so an exhaustive
+  # miss is paid at most once per session.
+  lookup <- function() {
+    tab <- .morie_siu_state$live_index
+    if (!is.null(tab)) tab[[case_number]] else NULL
+  }
+  hit <- lookup()
+  if (!is.null(hit)) return(hit)
+  if (isTRUE(.morie_siu_state$live_index_complete)) return(NA_integer_)
+  if (is.null(.morie_siu_state$live_index)) {
+    .morie_siu_state$live_index <- new.env(parent = emptyenv())
+  }
+  tab <- .morie_siu_state$live_index
   index_url <- morie_siu_index_url()
-  html <- tryCatch(.siu_fetch_http_get(index_url), error = function(e) "")
-  if (!nzchar(html)) return(NA_integer_)
-  find_in <- function(chunk) {
+  absorb <- function(chunk) {
     links <- tryCatch(
       .siu_fetch_extract_links(chunk, base_url = index_url),
       error = function(e) NULL)
-    if (is.null(links) || !nrow(links)) return(NA_integer_)
-    i <- match(case_number, links[, "case_number"])
-    if (is.na(i)) return(NA_integer_)
-    dm <- regmatches(links[i, "url"],
-                     regexec("drid=([0-9]+)", links[i, "url"]))[[1L]]
-    if (length(dm) == 2L) as.integer(dm[2L]) else NA_integer_
+    if (is.null(links) || !nrow(links)) return(0L)
+    for (i in seq_len(nrow(links))) {
+      dm <- regmatches(links[i, "url"],
+                       regexec("drid=([0-9]+)", links[i, "url"]))[[1L]]
+      if (length(dm) == 2L) {
+        tab[[links[i, "case_number"]]] <- as.integer(dm[2L])
+      }
+    }
+    nrow(links)
   }
-  drid <- find_in(html)
-  if (is.finite(drid)) return(drid)
-  tm <- regmatches(html, regexec(
-    'id="total_drs"[^>]*value="([0-9]+)"', html))[[1L]]
-  total <- if (length(tm) == 2L) as.integer(tm[2L]) else NA_integer_
-  got <- {
-    links0 <- tryCatch(
-      .siu_fetch_extract_links(html, base_url = index_url),
-      error = function(e) NULL)
-    if (is.null(links0)) 0L else nrow(links0)
+  got <- .morie_siu_state$live_index_count %||% 0L
+  if (got == 0L) {
+    html <- tryCatch(.siu_fetch_http_get(index_url), error = function(e) "")
+    if (!nzchar(html)) return(NA_integer_)
+    tm <- regmatches(html, regexec(
+      'id="total_drs"[^>]*value="([0-9]+)"', html))[[1L]]
+    .morie_siu_state$live_index_total <-
+      if (length(tm) == 2L) as.integer(tm[2L]) else NA_integer_
+    got <- absorb(html)
+    .morie_siu_state$live_index_count <- got
+    hit <- lookup()
+    if (!is.null(hit)) return(hit)
   }
+  total <- .morie_siu_state$live_index_total
   more_base <- sub("/en/directors_reports\\.php$",
                    "/ssi/get_more_drs.php", index_url)
   while (!is.na(total) && got < total) {
@@ -1827,14 +1869,16 @@ morie_siu_compare <- function(case_number, external,
       paste0(more_base, "?lang=en&lastCount=", got)),
       error = function(e) "")
     if (!nzchar(chunk)) break
-    drid <- find_in(chunk)
-    if (is.finite(drid)) return(drid)
-    links <- tryCatch(
-      .siu_fetch_extract_links(chunk, base_url = index_url),
-      error = function(e) NULL)
-    if (is.null(links) || !nrow(links)) break
-    got <- got + nrow(links)
+    n <- absorb(chunk)
+    if (n == 0L) break
+    got <- got + n
+    .morie_siu_state$live_index_count <- got
+    hit <- lookup()
+    if (!is.null(hit)) return(hit)
     Sys.sleep(.siu_fetch_rate_seconds)
+  }
+  if (!is.na(total) && got >= total) {
+    .morie_siu_state$live_index_complete <- TRUE
   }
   NA_integer_
 }
@@ -1880,7 +1924,13 @@ morie_siu_llm_extract <- function(case_number,
       call. = FALSE
     )
   }
-  if (nchar(html) > max_html_chars) html <- substr(html, 1L, max_html_chars)
+  # Strip markup before prompting: the models only need the report
+  # prose, and plain text is ~5x smaller than the raw page -- faster
+  # and less confusing for small community-hosted models.
+  report_text <- gsub("\\s+", " ", gsub("<[^>]+>", " ", html))
+  if (nchar(report_text) > max_html_chars) {
+    report_text <- substr(report_text, 1L, max_html_chars)
+  }
 
   fields <- .siu_field_list()
   prompt <- paste(
@@ -1892,11 +1942,12 @@ morie_siu_llm_extract <- function(case_number,
     "the matching *_raw field. For boolean fields, return \"true\" or",
     "\"false\". Do not invent any values.\n\n",
     "Keys:\n", paste(fields, collapse = ", "), "\n\n",
-    "Report HTML:\n", html
+    "Report text:\n", report_text
   )
 
   text <- .siu_llm_call(model, prompt,
-    mock_response_text = mock_response_text
+    mock_response_text = mock_response_text,
+    expect_json = TRUE
   )
   # Some models wrap JSON in ```json ... ```; strip if present.
   text <- gsub("^```(?:json)?\\s*|\\s*```$", "", text, perl = TRUE)
@@ -2039,7 +2090,8 @@ morie_siu_anomaly_check <- function(case_number,
   )
 
   text <- tryCatch(
-    .siu_llm_call(model, prompt, mock_response_text = mock_response_text),
+    .siu_llm_call(model, prompt, mock_response_text = mock_response_text,
+                  expect_json = TRUE),
     error = function(e) NULL
   )
   # Deterministic keyless fallback: no LLM reachable (no local ollama,
