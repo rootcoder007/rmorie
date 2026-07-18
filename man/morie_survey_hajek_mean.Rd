@@ -18,6 +18,8 @@ A named list with elements \code{mean}, \code{se}, \code{ci_lower}, \code{ci_upp
 Hajek (ratio) estimator of a population mean.
 }
 \examples{
+\dontshow{if (requireNamespace("survey", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 set.seed(1)
 morie_survey_hajek_mean(rnorm(30, 5), runif(30, 0.5, 2))
+\dontshow{\}) # examplesIf}
 }
