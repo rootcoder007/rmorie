@@ -628,7 +628,7 @@ std::string to_iso(const std::string& raw) {
   std::smatch m;
   std::string mon, day, year;
   if (std::regex_search(raw, m,
-        std::regex("([A-Za-z]+)\\s+(\\d{1,2}),?\\s+(\\d{4})"))) {
+        std::regex("([A-Za-z]+)\\s+(\\d{1,2})(?:st|nd|rd|th)?,?\\s+(\\d{4})"))) {
     mon = m[1].str(); day = m[2].str(); year = m[3].str();
   } else if (std::regex_search(raw, m,
         std::regex("(\\d{1,2})\\s+([A-Za-z]+),?\\s+(\\d{4})"))) {
@@ -648,14 +648,14 @@ std::string to_iso(const std::string& raw) {
 
 // First "Month D, YYYY" date appearing in `text`.
 std::string first_date(const std::string& text) {
-  return rx1(text, "([A-Za-z]+\\s+\\d{1,2},?\\s+\\d{4})");
+  return rx1(text, "([A-Za-z]+\\s+\\d{1,2}(?:st|nd|rd|th)?,?\\s+\\d{4})");
 }
 
 // Every "Month D, YYYY" date in `text`, in order of appearance.
 std::vector<std::string> all_dates(const std::string& text) {
   std::vector<std::string> v;
   try {
-    const std::regex re("[A-Za-z]+\\s+\\d{1,2},?\\s+\\d{4}");
+    const std::regex re("[A-Za-z]+\\s+\\d{1,2}(?:st|nd|rd|th)?,?\\s+\\d{4}");
     for (auto it = std::sregex_iterator(text.begin(), text.end(), re);
          it != std::sregex_iterator(); ++it)
       v.push_back(it->str());
