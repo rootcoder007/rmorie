@@ -502,6 +502,20 @@ std::string html_to_text(std::string h) {
 // apostrophes (U+2019 'Director's report') and curly quotes; without
 // this normalisation, a keyword like "director's report" with an
 // ASCII apostrophe would silently fail to match. Cheap, no allocs.
+// Map an English number word (or a bare digit string) to its integer
+// as a string. Returns the input unchanged when not a known word.
+std::string word_to_num(const std::string& w) {
+  static const std::pair<const char*, const char*> tbl[] = {
+    {"one", "1"}, {"two", "2"}, {"three", "3"}, {"four", "4"},
+    {"five", "5"}, {"six", "6"}, {"seven", "7"}, {"eight", "8"},
+    {"nine", "9"}, {"ten", "10"}};
+  std::string lw;
+  for (char c : w) lw += static_cast<char>(std::tolower(
+    static_cast<unsigned char>(c)));
+  for (const auto& kv : tbl) if (lw == kv.first) return kv.second;
+  return w;
+}
+
 std::string lower_ascii(std::string s) {
   // U+2019 = E2 80 99, U+2018 = E2 80 98, U+201C = E2 80 9C,
   // U+201D = E2 80 9D, U+2013 = E2 80 93 (en-dash),
@@ -895,9 +909,16 @@ Rcpp::CharacterVector siu_parse_report(std::string html, int drid,
     f["date_of_incident_iso"] = to_iso(inc_date);
   }
 
-  // Director's decision date + name from the signature block.
-  const std::string dec_date = rx1(
-    full, "Date:\\s*([A-Za-z]+\\s+\\d{1,2},?\\s+\\d{4})");
+  // Director's decision date: the "Date: <d>" immediately before the
+  // "signed by / approved by ... Director" signature. Anchoring on the
+  // signature avoids picking up an earlier "Date:" (e.g. a team-
+  // dispatched timestamp) on pre-2017 pages.
+  std::string dec_date = rx1(
+    full, "Date:\\s*([A-Za-z]+\\s+\\d{1,2},?\\s+\\d{4})[^0-9]{0,120}?"
+          "(?:signed|approved) by");
+  if (dec_date.empty())
+    dec_date = rx1(
+      full, "Date:\\s*([A-Za-z]+\\s+\\d{1,2},?\\s+\\d{4})");
   if (!dec_date.empty()) {
     f["date_of_director_decision_raw"] = dec_date;
     f["date_of_director_decision_iso"] = to_iso(dec_date);
@@ -937,6 +958,47 @@ Rcpp::CharacterVector siu_parse_report(std::string html, int drid,
       compound = wo + " WO";
     }
     f["number_of_officers_involved"] = compound;
+  }
+
+  // SIU investigator counts from "The Team" subsection ("Number of
+  // SIU Investigators assigned: 4" / "Number of SIU Forensic
+  // Investigators assigned: 0"). The <abbr>SIU</abbr> markup means the
+  // label can carry stray tags, so match on the digit after the label
+  // words with tolerant whitespace/markup between them.
+  {
+    const std::string inv = rx1(roster,
+      "Number of\\s+(?:<[^>]+>\\s*)?SIU(?:\\s*</[^>]+>)?\\s+"
+      "Investigators\\s+assigned[^0-9]{0,20}(\\d+)");
+    if (!inv.empty()) f["siu_investigators"] = inv;
+    const std::string fin = rx1(roster,
+      "Number of\\s+(?:<[^>]+>\\s*)?SIU(?:\\s*</[^>]+>)?\\s+"
+      "Forensic\\s+Investigators\\s+assigned[^0-9]{0,20}(\\d+)");
+    if (!fin.empty()) f["siu_forensics_investigators"] = fin;
+    // Pre-2017 prose form: "four SIU investigators and two ... FIT".
+    if (f["siu_investigators"].empty()) {
+      const std::string w = rx1(roster,
+        "\\b(one|two|three|four|five|six|seven|eight|nine|ten|\\d+)\\s+"
+        "(?:<[^>]+>\\s*)?SIU(?:\\s*</[^>]+>)?\\s+investigators");
+      if (!w.empty()) f["siu_investigators"] = word_to_num(w);
+    }
+  }
+
+  // Specific injuries from the narrative -- reject the statutory
+  // "serious injury" definition boilerplate from Mandate Engaged.
+  {
+    const std::string inj_scope = investigation + " " + evidence + " " +
+                                  narrative + " " + analysis;
+    const std::string inj = rx1(inj_scope,
+      "\\b((?:fractured?|broken|lacerat[a-z]+|gunshot|stab[a-z]+|burns?|"
+      "concussion|dislocat[a-z]+|avuls[a-z]+|contusion)[^.\\n]{1,180}?"
+      "(?:rib|leg|arm|skull|wrist|ankle|jaw|nose|tooth|teeth|finger|"
+      "spine|vertebra[e]?|foot|feet|hip|orbital|pelvis|shoulder|hand|"
+      "lip|eye|face|facial|head|nasal|collarbone|clavicle)[^.\\n]{0,80})");
+    const std::string inj_l = lower_ascii(inj);
+    const bool boiler =
+      inj_l.find("fracture to the skull, or to a limb") != std::string::npos ||
+      inj_l.find("fracture to a limb, rib or vertebrae") != std::string::npos;
+    if (!inj.empty() && !boiler) f["specific_injuries"] = squeeze(inj);
   }
 
   // Affected-person attributes from the narrative.
@@ -979,20 +1041,46 @@ Rcpp::CharacterVector siu_parse_report(std::string html, int drid,
   // next clause ("...Burlington, regarding...").
   {
     const std::string loc_scope = investigation + " " + narrative;
+    // Most-specific first. "in the area of X, City" and numbered
+    // addresses are unambiguous; the bare "on <Street>" pattern is
+    // tried only after, since it can mis-anchor on a later road word.
     std::string loc = rx1(loc_scope,
-      "in the area of ([^.,;]{5,110},\\s*[A-Z][a-z]+(?:\\s+[A-Z][a-z]+)?)");
+      "in the (?:area|vicinity) of ([^.,;\\n]{5,110},?\\s*"
+      "[A-Z][a-z]+(?:\\s+[A-Z][a-z]+)?)");
     if (loc.empty()) {
       loc = rx1(loc_scope,
-        "at ([0-9]+[^.,;]{5,100},\\s*[A-Z][a-z]+(?:\\s+[A-Z][a-z]+)?)");
+        "at ([0-9]+[^.,;\\n]{5,100},\\s*[A-Z][a-z]+(?:\\s+[A-Z][a-z]+)?)");
     }
     if (loc.empty()) {
       loc = rx1(loc_scope,
-        "on ([A-Z][A-Za-z. -]{2,50} (?:Street|Road|Avenue|Drive|Boulevard|"
-        "Lane|Place|Way|Highway))");
+        "(?:called|dispatched|responded|attended) to (?:an? )?[a-z][^.\\n]"
+        "{0,70}?(?:call|residence|home|address|location|scene|apartment|"
+        "building|hospital|complex|property|premises) (?:in|at|near|on) "
+        "(?:the )?([A-Z][^.,;\\n]{3,80})");
     }
     if (loc.empty()) {
+      // Bare street: require the road name to begin right after "on".
       loc = rx1(loc_scope,
-        "in the City of ([A-Z][a-zA-Z. -]{2,40})");
+        "\\bon ([A-Z][A-Za-z.'-]+(?: [A-Z][A-Za-z.'-]+){0,4} "
+        "(?:Street|St\\.?|Road|Rd\\.?|Avenue|Ave\\.?|Boulevard|Blvd\\.?|"
+        "Drive|Dr\\.?|Lane|Place|Way|Highway|Hwy\\.?|Crescent|Court|"
+        "Ct\\.?|Trail|Parkway|Line)"
+        "[^.\\n]{0,60}?(?:,?\\s+in\\s+[A-Z][A-Za-z '-]+)?)");
+    }
+    if (loc.empty()) {
+      loc = rx1(loc_scope, "in ([A-Z][a-z]+(?:\\s+[A-Z][a-z]+){0,2}) "
+                           "(?:in relation|regarding|following|for)");
+    }
+    if (loc.empty()) {
+      loc = rx1(loc_scope, "in the City of ([A-Z][a-zA-Z. -]{2,40})");
+    }
+    // Trim trailing action clauses ("..., and drew a CEW").
+    static const char* cuts[] = {", and ", " to arrest", " to apprehend",
+      " in relation", " regarding", " following", " where ", " when ",
+      " after "};
+    for (const char* c : cuts) {
+      const std::string::size_type p = loc.find(c);
+      if (p != std::string::npos) loc.erase(p);
     }
     f["location_of_call"] = squeeze(loc);
   }

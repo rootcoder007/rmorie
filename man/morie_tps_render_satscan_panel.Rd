@@ -22,8 +22,10 @@ likelihood-ratio overlay and significance ranking depend on the Python
 \code{morie.tps_satscan} module and are stubbed.
 }
 \examples{
+\dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 clusters <- data.frame(lat = c(43.70, 43.75), lon = c(-79.40, -79.30),
                        radius_km = c(1.5, 2.2))
 out <- morie_tps_render_satscan_panel(clusters,
                                       outfile = tempfile(fileext = ".png"))
+\dontshow{\}) # examplesIf}
 }

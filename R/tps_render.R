@@ -282,7 +282,7 @@ morie_tps_project_xy <- function(lat, lon,
 #' @return A \code{ggplot} object (when ggplot2 is loaded) or
 #'   \code{invisible(NULL)} for the base-R fallback; the file path is
 #'   returned invisibly when \code{outfile} is supplied.
-#' @examples
+#' @examplesIf requireNamespace("ggplot2", quietly = TRUE)
 #' ring <- lapply(seq(0, 2 * pi, length.out = 8), function(a) {
 #'   list(-79.40 + 0.02 * cos(a), 43.70 + 0.01 * sin(a))
 #' })
@@ -436,7 +436,7 @@ morie_tps_render_choropleth <- function(polys,
 #' @param fig_w,fig_h Figure size.
 #' @return A \code{ggplot} (when ggplot2 is available) or
 #'   \code{invisible(NULL)} for the base-R path.
-#' @examples
+#' @examplesIf requireNamespace("ggplot2", quietly = TRUE)
 #' set.seed(1)
 #' df <- data.frame(LAT_WGS84 = runif(60, 43.60, 43.85),
 #'                  LONG_WGS84 = runif(60, -79.60, -79.15))
@@ -556,7 +556,7 @@ morie_tps_render_points <- function(df,
 #' @param ncols Number of facet columns.
 #' @return A \code{ggplot} (when ggplot2 is loaded) or
 #'   \code{invisible(NULL)} for the base-R fallback.
-#' @examples
+#' @examplesIf requireNamespace("ggplot2", quietly = TRUE)
 #' ring <- lapply(seq(0, 2 * pi, length.out = 8), function(a) {
 #'   list(-79.40 + 0.02 * cos(a), 43.70 + 0.01 * sin(a))
 #' })
@@ -711,7 +711,7 @@ morie_tps_render_yearly_grid <- function(polys,
 #'   returned (ggplot or invisible NULL for base).
 #' @param ... Forwarded to the underlying single-panel renderers.
 #' @return A patchwork-or-list object (ggplot2 path) or invisible NULL.
-#' @examples
+#' @examplesIf requireNamespace("ggplot2", quietly = TRUE)
 #' set.seed(1)
 #' df <- data.frame(LAT_WGS84 = runif(60, 43.60, 43.85),
 #'                  LONG_WGS84 = runif(60, -79.60, -79.15))
@@ -773,7 +773,7 @@ morie_tps_render_quad <- function(data, outfile = NULL, ...) {
 #' @param outfile Optional output path.
 #' @param ... Extra plotting args (size, alpha, palette).
 #' @return ggplot object or invisible NULL.
-#' @examples
+#' @examplesIf requireNamespace("ggplot2", quietly = TRUE)
 #' set.seed(1)
 #' df <- data.frame(LAT_WGS84 = runif(60, 43.60, 43.85),
 #'                  LONG_WGS84 = runif(60, -79.60, -79.15))
@@ -840,7 +840,7 @@ morie_tps_render_dbscan <- function(points_df, eps_km = 0.5,
 #' @param max_radius_km Largest symbol radius in km.
 #' @param outfile Optional output path.
 #' @return ggplot object or invisible NULL.
-#' @examples
+#' @examplesIf requireNamespace("ggplot2", quietly = TRUE)
 #' set.seed(1)
 #' polys <- data.frame(centroid_lat = runif(6, 43.62, 43.82),
 #'                     centroid_lon = runif(6, -79.55, -79.20),
@@ -901,7 +901,7 @@ morie_tps_render_district_proportional <- function(polys, count_col,
 #'   and optionally ``llr`` (log-likelihood ratio) for shading.
 #' @param outfile Optional output path.
 #' @return ggplot object or invisible NULL.
-#' @examples
+#' @examplesIf requireNamespace("ggplot2", quietly = TRUE)
 #' clusters <- data.frame(lat = c(43.70, 43.75), lon = c(-79.40, -79.30),
 #'                        radius_km = c(1.5, 2.2))
 #' out <- morie_tps_render_satscan_panel(clusters,

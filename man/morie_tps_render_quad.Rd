@@ -25,9 +25,11 @@ summary, and (when available) a DBSCAN cluster panel.  Falls back to
 base graphics with \code{par(mfrow = c(2, 2))} when ggplot2 is absent.
 }
 \examples{
+\dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 set.seed(1)
 df <- data.frame(LAT_WGS84 = runif(60, 43.60, 43.85),
                  LONG_WGS84 = runif(60, -79.60, -79.15))
 out <- morie_tps_render_quad(list(points = df),
                              outfile = tempfile(fileext = ".png"))
+\dontshow{\}) # examplesIf}
 }

@@ -36,6 +36,7 @@ Walks \code{polys} once and renders one ggplot facet per year for
 columns named \code{<prefix>_<year>}.
 }
 \examples{
+\dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 ring <- lapply(seq(0, 2 * pi, length.out = 8), function(a) {
   list(-79.40 + 0.02 * cos(a), 43.70 + 0.01 * sin(a))
 })
@@ -45,4 +46,5 @@ polys$ASSAULT_RATE_2023 <- 4; polys$ASSAULT_RATE_2024 <- 5
 out <- morie_tps_render_yearly_grid(polys, prefix = "ASSAULT_RATE",
                                     years = 2023:2024,
                                     outfile = tempfile(fileext = ".png"))
+\dontshow{\}) # examplesIf}
 }
