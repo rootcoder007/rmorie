@@ -41,7 +41,9 @@ Complex-survey GLM constructor (single-shot wrapper that builds a design
 and fits a \code{svyglm} in one call). Cluster-robust SEs via the design.
 }
 \examples{
+\dontshow{if (requireNamespace("survey", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 set.seed(1)
 df <- data.frame(y = rnorm(40), x = rnorm(40), w = runif(40, 0.5, 2))
 str(morie_survey_complex_glm(df, y ~ x, "w"), max.level = 1)
+\dontshow{\}) # examplesIf}
 }

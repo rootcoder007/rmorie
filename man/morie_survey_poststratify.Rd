@@ -24,7 +24,9 @@ Delegates to \code{survey::postStratify()} when given a design; otherwise
 computes raw post-stratification factors in base R.
 }
 \examples{
+\dontshow{if (requireNamespace("survey", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 set.seed(1)
 df <- data.frame(g = rep(c("a", "b"), 15))
 str(morie_survey_poststratify(df, "g", c(a = 60, b = 40)), max.level = 1)
+\dontshow{\}) # examplesIf}
 }

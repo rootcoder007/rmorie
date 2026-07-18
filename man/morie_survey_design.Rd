@@ -34,9 +34,11 @@ Returns a \code{survey::svydesign} object when \code{survey} is available; other
 returns a lightweight list with the same fields the morie helpers consume.
 }
 \examples{
+\dontshow{if (requireNamespace("survey", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 set.seed(1)
 df <- data.frame(y = rnorm(40), w = runif(40, 0.5, 2),
                  s = rep(c("a", "b"), 20))
 d <- morie_survey_design(df, "w", strata_col = "s")
 class(d)
+\dontshow{\}) # examplesIf}
 }

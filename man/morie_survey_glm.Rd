@@ -29,8 +29,10 @@ Python module ("gaussian", "binomial", "poisson", "gamma", "negativebinomial")
 or any R \code{family} object.
 }
 \examples{
+\dontshow{if (requireNamespace("survey", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 set.seed(1)
 df <- data.frame(y = rnorm(40), x = rnorm(40), w = runif(40, 0.5, 2))
 d <- morie_survey_design(df, "w")
 str(morie_survey_glm(d, y ~ x), max.level = 1)
+\dontshow{\}) # examplesIf}
 }
