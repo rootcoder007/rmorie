@@ -8,11 +8,23 @@ authors:
     affiliation: "Centre for Criminology and Sociolegal Studies, University of Toronto"
     name-particle: "Singh"
     # IPA: /ʋənʃ sɪŋ ɾʊˈɦeːlɑː/
-version: "1.1.3"
-date-released: "2026-07-09"
+version: "1.1.4"
+date-released: "2026-07-18"
 url: "https://github.com/rootcoder007/rmorie"
 repository-code: "https://github.com/rootcoder007/rmorie"
 license: "AGPL-3.0-or-later"
+keywords:
+  - "criminology"
+  - "police-oversight"
+  - "special-investigations-unit"
+  - "siu-parser"
+  - "ontario-siu"
+  - "police-data-mining"
+  - "carceral-data"
+  - "mrm-framework"
+  - "causal-inference"
+  - "hawkes-process"
+abstract: "rmorie is an R toolkit for causal inference, survey sampling, psychometrics, point-process modeling, and Canadian criminological accountability analysis, hosting the MRM (Multilevel Reconciliation Methodology) framework. It includes the first open-source parser and data-mining subsystem for the Ontario Special Investigations Unit (SIU) director's-report corpus, created by Vansh Singh Ruhela: a fetch/parse/analyse pipeline that extracts a 64-column structured schema from SIU director's reports across all three of the site's historical layout generations and pipes it into causal, spatial, and self-exciting point-process models."
 preferred-citation:
   type: software
   title: "rmorie: Multi-domain Open Research and Inferential Estimation in R"
