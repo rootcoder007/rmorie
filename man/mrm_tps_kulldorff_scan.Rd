@@ -52,8 +52,10 @@ columns \code{center_lat}, \code{center_lon}, \code{radius_km},
 Run a 3-d (lat, lon, time) Kulldorff scan with MC inference
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 if (FALSE) {
   tps <- morie_sample("tps_assault")
   mrm_tps_kulldorff_scan(tps, n_permutations = 49)
 }
+\dontshow{\}) # examplesIf}
 }

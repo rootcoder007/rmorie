@@ -31,10 +31,12 @@ serves them (including any column-name and projection differences
 that on-the-fly exports introduce vs the FeatureServer source).
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
 \donttest{
 path <- try(morie_datasets_tps_arcgis_hub_download(
   cat$hub_id[1], format = "csv"))
 if (!inherits(path, "try-error")) path
 }
+\dontshow{\}) # examplesIf}
 }

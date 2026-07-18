@@ -69,8 +69,10 @@ via \code{.morie_dataset_socrata_fetch()} and honours the 3OO opt-in
 pagination (\code{paginate = TRUE}).
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_chicago_arrests(offline = TRUE)
 df$arrest_date
+\dontshow{\}) # examplesIf}
 }
 \references{
 City of Chicago Data Portal, "Arrests" (\code{dpt3-jri9}).

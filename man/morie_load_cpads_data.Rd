@@ -16,6 +16,7 @@ Canonicalized CPADS data frame.
 Load the real CPADS CSV from this repository
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 # Reads and canonicalises the CPADS PUMF CSV. The default CSV lives in
 # a morie project tree; the CKAN-fetched PUMF works identically (see
@@ -23,4 +24,5 @@ Load the real CPADS CSV from this repository
 # render cleanly on machines without the CSV checked out locally.
 tryCatch(morie_load_cpads_data(), error = function(e) message(conditionMessage(e)))
 }
+\dontshow{\}) # examplesIf}
 }

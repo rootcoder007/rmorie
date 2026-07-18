@@ -23,6 +23,8 @@ D31, D32, D33, D41, D42, D43, D51, D52, D53, D55) with unit name,
 address, and area_sqkm.
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_tps_police_divisions(offline = TRUE)
 nrow(df)  # 16
+\dontshow{\}) # examplesIf}
 }

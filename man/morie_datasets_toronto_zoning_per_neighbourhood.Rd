@@ -61,8 +61,10 @@ the FeatureServer via the 3SS+ generic
 \code{\link[=morie_datasets_arcgis_item_by_id]{morie_datasets_arcgis_item_by_id()}} resolver.
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_toronto_zoning_per_neighbourhood(offline = TRUE)
 head(df[, c("Neighbourhood", "Total_Population", "Seniors65andover")])
+\dontshow{\}) # examplesIf}
 }
 \references{
 Esri Canada Education -- ArcGIS Online item

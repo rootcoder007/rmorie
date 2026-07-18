@@ -66,8 +66,10 @@ Live mode hits the SODA2 JSON endpoint via
 to include \code{the_geom}. Threads through the 3OO pagination args.
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_chicago_police_beats(offline = TRUE)
 head(df)
+\dontshow{\}) # examplesIf}
 }
 \references{
 City of Chicago Data Portal, "Boundaries - Police

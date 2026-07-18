@@ -25,7 +25,7 @@
 #'   line per element).
 #' @seealso [morie_datasets_vpd_crime()] for the loader that
 #'   accepts the downloaded file.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' morie_vpd_download_instructions()
 #' @export
 morie_vpd_download_instructions <- function(to = NULL) {

@@ -13,6 +13,8 @@ A \code{data.frame} with columns \code{name} and \code{url}.
 List the TPS open-data layers included with morie.
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_tps_layers()
 df$name
+\dontshow{\}) # examplesIf}
 }

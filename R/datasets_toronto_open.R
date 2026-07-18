@@ -113,7 +113,7 @@ morie_datasets_toronto_ambulance_stations <- function(offline = TRUE,
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `YEAR`, `SECTION`, `CATEGORY`,
 #'   `SUBTYPE`, `COUNT_`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_toronto_asr_miscellaneous(offline = TRUE)
 #' head(df)
 #' @export
@@ -147,7 +147,7 @@ morie_datasets_toronto_asr_miscellaneous <- function(offline = TRUE,
 #' @param resource_id CKAN resource UUID (from `package_show`).
 #' @param limit Page size (max 32000 per CKAN; sane default 100).
 #' @return A `data.frame` of records.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' \donttest{
 #' cat_df <- morie_datasets_toronto_opendata_bulk_layers()
 #' df <- try(morie_datasets_toronto_open_ckan_resource(cat_df$resource_id[1],

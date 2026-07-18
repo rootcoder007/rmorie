@@ -156,7 +156,7 @@ morie_datasets_calgary_fire_stations <- function(offline = TRUE,
 #' @param soda_id 4-4 Socrata resource ID (e.g. `"78gh-n26t"`).
 #' @param limit Page size (default 1000).
 #' @return A `data.frame` of records.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' \donttest{
 #' cat_df <- morie_datasets_calgary_opendata_bulk_layers()
 #' df <- try(morie_datasets_calgary_socrata_by_id(cat_df$soda_id[1], limit = 5L))

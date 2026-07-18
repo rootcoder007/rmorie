@@ -56,6 +56,8 @@ Attribute schema: \code{precinct} (string, "1"-"123"), \code{shape_leng},
 when \code{geometry = TRUE}.
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_nyc_police_precincts(offline = TRUE)
 head(df)
+\dontshow{\}) # examplesIf}
 }

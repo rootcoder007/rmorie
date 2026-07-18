@@ -223,7 +223,7 @@ morie_datasets_tps_arcgis_hub_layers <- function(offline = TRUE) {
 #'   (`format %in% c("shapefile", "fgdb")`); defaults to `tempfile()`.
 #' @return A `data.frame` (json / csv), a parsed GeoJSON list, or a
 #'   file path (binary).
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
 #' pic_id <- cat$hub_id[cat$title ==
 #'   "Persons in Crisis Calls for Service Attended Open Data"]
@@ -308,7 +308,7 @@ morie_datasets_tps_arcgis_hub_by_id <- function(hub_id,
 #' @param layer_idx Integer layer index (default `0L`).
 #' @param dest Optional destination path; defaults to `tempfile()`.
 #' @return Path to the downloaded file.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
 #' \donttest{
 #' path <- try(morie_datasets_tps_arcgis_hub_download(
@@ -528,7 +528,7 @@ morie_datasets_arcgis_item_by_id <- function(item_id,
 #'   list, or file path (binary).
 #' @references Esri Canada Education -- ArcGIS Online item
 #'   `af06159170914808983959df6163fc86`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_toronto_zoning_per_neighbourhood(offline = TRUE)
 #' head(df[, c("Neighbourhood", "Total_Population", "Seniors65andover")])
 #' @export

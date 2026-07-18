@@ -130,7 +130,7 @@
 #' @references Ontario Open Data Catalogue, "Police Use of Force"
 #'   (\url{https://data.ontario.ca/dataset/police-use-of-force-race-based-data});
 #'   Open Government Licence -- Ontario.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_arsau_uof_main_records(offline = TRUE)
 #' head(df[, c("IncidentYear", "PoliceService", "IncidentType")])
 #' @export
@@ -241,7 +241,7 @@ morie_datasets_otis_d01_deaths_in_custody <- function(offline = TRUE,
 #' @references TPS Public Safety Data Portal, "Mental Health Act
 #'   Apprehensions Open Data"
 #'   (\url{https://data.tps.ca/datasets/333c4e1c96314741a83425045b6a7642_0/explore}).
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_tps_mha_apprehensions(offline = TRUE)
 #' table(df$APPREHENSION_TYPE)
 #' @export
@@ -410,7 +410,7 @@ morie_datasets_arsau_uof_weapon_records <- function(year = "2024",
 #'   fixture. If `FALSE`, hit Ontario CKAN.
 #' @param resource_id Optional override.
 #' @return A `data.frame`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_arsau_aggregate_summary(offline = TRUE)
 #' head(df)
 #' @export
@@ -1172,7 +1172,7 @@ morie_datasets_otis_c12_aggregate_durations_by_region <- function(
 #'   endpoint.
 #' @param resource_id Optional CKAN resource_id override.
 #' @return A `data.frame`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_ontario_ckan_by_key("arsau_uof_main_records_2024",
 #'                                          offline = TRUE)
 #' head(df)

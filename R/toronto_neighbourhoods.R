@@ -209,7 +209,7 @@ morie_tps_resolve_hood_col <- function(df, prefer = c("158", "140"),
 #' @param df A TPS crime `data.frame`.
 #' @param expected Either `"158"` or `"140"`.
 #' @return Invisibly `TRUE` on success.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' cw <- morie_to_hood_crosswalk()
 #' df <- data.frame(HOOD_158 = utils::head(cw$HOOD_158, 5))
 #' res <- try(morie_tps_assert_hood_version(df, expected = "158"))
@@ -395,7 +395,7 @@ morie_tps_add_hood_158_from_140 <- function(df, col_in = NULL,
 #' @param col_in Name of the input HOOD_158 column.
 #' @param col_out Name of the new column. Default `"HOOD_140_equiv"`.
 #' @return `df` with the equivalent-code column appended.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' cw <- morie_to_hood_crosswalk()
 #' df <- data.frame(HOOD_158 = utils::head(cw$HOOD_158, 5))
 #' res <- try(morie_tps_add_hood_140_from_158(df))

@@ -23,6 +23,8 @@ crime counts, IMPACT calls, and other Toronto Police aggregates
 that aren't in the per-incident ArcGIS Hub layers.
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_toronto_asr_miscellaneous(offline = TRUE)
 head(df)
+\dontshow{\}) # examplesIf}
 }

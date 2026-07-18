@@ -20,7 +20,9 @@ BOTH schemas are present (downstream code MAY accidentally use the
 wrong one).
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 cw <- morie_to_hood_crosswalk()
 df <- data.frame(HOOD_158 = utils::head(cw$HOOD_158, 5))
 res <- try(morie_tps_assert_hood_version(df, expected = "158"))
+\dontshow{\}) # examplesIf}
 }

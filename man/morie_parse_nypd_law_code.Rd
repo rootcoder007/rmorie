@@ -31,5 +31,7 @@ ASCII letters; the section is everything after the prefix with
 leading whitespace stripped. NA / empty inputs return NA fields.
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 morie_parse_nypd_law_code(c("PL 1601005", "AC 0019190", "ABC0064A00"))
+\dontshow{\}) # examplesIf}
 }

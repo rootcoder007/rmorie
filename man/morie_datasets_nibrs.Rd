@@ -33,6 +33,8 @@ A \code{data.frame}.
 Requires an API key (\verb{api_key=} or \code{FBI_CDE_API_KEY} env var).
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_nibrs(year = 2023L, offline = TRUE)
 head(df)
+\dontshow{\}) # examplesIf}
 }
