@@ -31,7 +31,7 @@
 #' @return Invisibly, the analysis result (a list). As a side effect, prints
 #'   that result to \code{stdout} as JSON.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' cli_main("otis", "{}")
 #' }
 #' @export

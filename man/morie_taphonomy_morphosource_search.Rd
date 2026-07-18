@@ -45,7 +45,7 @@ records) is read from \code{api_key} or the \code{MORPHOSOURCE_API_KEY}
 environment variable, sent in an \code{Authorization} header (never the URL).
 }
 \examples{
-\donttest{
+\dontrun{
 # res <- morie_taphonomy_morphosource_search("Homo sapiens cranium")
 }
 }

@@ -41,7 +41,7 @@ comes from \code{api_key} or \code{MORPHOSOURCE_API_KEY} and travels only in
 the \code{Authorization} header.
 }
 \examples{
-\donttest{
+\dontrun{
 # morie_taphonomy_morphosource_fetch(
 #   media_id = 000000, use_statement = "Non-commercial taphonomy research")
 }

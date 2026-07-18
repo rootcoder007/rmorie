@@ -36,7 +36,7 @@ one column with itself.  See
 2020-2022 layout that exposes more region columns.
 }
 \examples{
-\donttest{
+\dontrun{
 res <- try(morie_arsau_analyze_main_records(year = "2024"))
 if (!inherits(res, "try-error")) print(res)
 }

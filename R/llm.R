@@ -139,7 +139,7 @@ morie_llm_detect_provider <- function() {
 #' @param timeout Seconds. Default 120.
 #' @return Parsed JSON list (the response body).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' msgs <- list(list(role = "user", content = "Say hello"))
 #' res <- try(morie_llm_request_completion("http://localhost:11434", "llama3.2", msgs))
 #' }
@@ -216,7 +216,7 @@ morie_llm_request_completion <- function(base_url, model, messages,
 #' @return Character scalar response text, or local-fallback text when all
 #'   providers fail.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' options(morie.llm.ollama_cached = FALSE, morie.llm.freeapi_cached = FALSE)
 #' out <- try(morie_llm_ask("In one word, what is 2 + 2?"))
 #' print(out)
@@ -472,7 +472,7 @@ morie_llm_detect_provider <- function() {
 #' @param timeout HTTP timeout in seconds.
 #' @return Character scalar response text.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' options(morie.llm.ollama_cached = FALSE, morie.llm.freeapi_cached = FALSE)
 #' msgs <- list(list(role = "user", content = "hello"))
 #' out <- try(morie_llm_ask_multi(msgs))

@@ -42,7 +42,7 @@ dataset selection, so it returns a structured, non-crashing message
 pointing at the R API.
 }
 \examples{
-\donttest{
+\dontrun{
 cli_main("otis", "{}")
 }
 }

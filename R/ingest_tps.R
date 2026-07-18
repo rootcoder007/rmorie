@@ -264,7 +264,7 @@ morie_ingest_tps_feature_layer <- function(
 #' @param ... Forwarded to \code{\link{morie_ingest_tps_feature_layer}}.
 #' @return A base R \code{data.frame}.
 #' @examples
-#' \donttest{try(morie_ingest_tps_fetch("major-crime", max_features = 1L))}
+#' \dontrun{try(morie_ingest_tps_fetch("major-crime", max_features = 1L))}
 #' @export
 morie_ingest_tps_fetch <- function(layer,
                                    year = NULL,

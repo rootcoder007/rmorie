@@ -35,7 +35,7 @@ The 2023 file is the ministry-flagged-invalid release and requires
 \code{allow_invalid = TRUE}.
 }
 \examples{
-\donttest{
+\dontrun{
 res <- try(morie_arsau_analyze_weapon_records(year = "2024"))
 if (!inherits(res, "try-error")) print(res)
 }

@@ -31,7 +31,7 @@ Provider fall-through order mirrors :func:\code{morie_llm_detect_provider}:
 ollama -> freeapi -> gemini -> api -> openai -> local.
 }
 \examples{
-\donttest{
+\dontrun{
 options(morie.llm.ollama_cached = FALSE, morie.llm.freeapi_cached = FALSE)
 msgs <- list(list(role = "user", content = "hello"))
 out <- try(morie_llm_ask_multi(msgs))

@@ -32,7 +32,7 @@ AgeCategory against the \code{IndivInjuries_PhysicalInjuries}
 outcome column, plus a data-quality audit against the sidecar.
 }
 \examples{
-\donttest{
+\dontrun{
 res <- try(morie_arsau_analyze_individual_records(year = "2024",
                                                   bootstrap_reps = 0L))
 if (!inherits(res, "try-error")) print(res)

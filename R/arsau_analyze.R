@@ -208,7 +208,7 @@ NULL
 #' @references Ontario Ministry of the Solicitor General, ARSAU 2023
 #'   and 2024 main_records technical release notes.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' res <- try(morie_arsau_analyze_main_records(year = "2024"))
 #' if (!inherits(res, "try-error")) print(res)
 #' }
@@ -273,7 +273,7 @@ morie_arsau_analyze_main_records <- function(year, language = "en", data_dir = N
 #' @references Ontario Ministry of the Solicitor General, ARSAU 2023
 #'   and 2024 individual_records technical release notes.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' res <- try(morie_arsau_analyze_individual_records(year = "2024",
 #'                                                   bootstrap_reps = 0L))
 #' if (!inherits(res, "try-error")) print(res)
@@ -384,7 +384,7 @@ morie_arsau_analyze_individual_records <- function(year, language = "en",
 #' @references Ontario Ministry of the Solicitor General, ARSAU
 #'   probe_cycle_records technical notes (2023 and 2024).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' res <- try(morie_arsau_analyze_probe_cycle_records(year = "2024"))
 #' if (!inherits(res, "try-error")) print(res)
 #' }
@@ -487,7 +487,7 @@ morie_arsau_analyze_probe_cycle_records <- function(year, language = "en",
 #'   and 2024 weapon_records technical notes -- the 2023 release
 #'   accompanies an explicit invalidity flag.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' res <- try(morie_arsau_analyze_weapon_records(year = "2024"))
 #' if (!inherits(res, "try-error")) print(res)
 #' }
@@ -620,7 +620,7 @@ morie_arsau_analyze_weapon_records <- function(year, allow_invalid = FALSE,
 #' @references Ontario Ministry of the Solicitor General, ARSAU
 #'   2020-2022 aggregate-summary-by-year technical notes.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' res <- try(morie_arsau_analyze_aggregate_summary(year_range = "2020-2022"))
 #' if (!inherits(res, "try-error")) print(res)
 #' }
@@ -718,7 +718,7 @@ morie_arsau_analyze_aggregate_summary <- function(year_range = "2020-2022",
 #' @references Ontario Ministry of the Solicitor General, ARSAU
 #'   2020-2022 detailed_dataset technical notes.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' res <- try(morie_arsau_analyze_detailed_dataset(year_range = "2020-2022"))
 #' if (!inherits(res, "try-error")) print(res)
 #' }
@@ -772,7 +772,7 @@ morie_arsau_analyze_detailed_dataset <- function(year_range = "2020-2022",
 
 #' @return Invisibly returns \code{x} unchanged.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' res <- try(morie_arsau_analyze_main_records(year = "2024"))
 #' if (!inherits(res, "try-error")) print(res)
 #' \references{

@@ -464,7 +464,7 @@ morie_arsau_read_sidecar <- function(path) {
 #' @param data_dir Optional explicit ARSAU root.
 #' @return An object of class \code{"morie_arsau_result"}.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' res <- try(morie_arsau_load_main_records("2024"))
 #' if (!inherits(res, "try-error")) head(res$data)
 #' }
@@ -483,7 +483,7 @@ morie_arsau_load_main_records <- function(year, language = "en", data_dir = NULL
 #' @inheritParams morie_arsau_load_main_records
 #' @return An object of class \code{"morie_arsau_result"}.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' res <- try(morie_arsau_load_individual_records("2024"))
 #' if (!inherits(res, "try-error")) head(res$data)
 #' }
@@ -502,7 +502,7 @@ morie_arsau_load_individual_records <- function(year, language = "en", data_dir 
 #' @inheritParams morie_arsau_load_main_records
 #' @return An object of class \code{"morie_arsau_result"}.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' res <- try(morie_arsau_load_probe_cycle_records("2024"))
 #' if (!inherits(res, "try-error")) head(res$data)
 #' }
@@ -524,7 +524,7 @@ morie_arsau_load_probe_cycle_records <- function(year, language = "en", data_dir
 #' @param allow_invalid Logical; required \code{TRUE} for 2023.
 #' @return An object of class \code{"morie_arsau_result"}.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' res <- try(morie_arsau_load_weapon_records("2024"))
 #' if (!inherits(res, "try-error")) head(res$data)
 #' }
@@ -547,7 +547,7 @@ morie_arsau_load_weapon_records <- function(year, allow_invalid = FALSE,
 #' @param data_dir Optional explicit ARSAU root.
 #' @return An object of class \code{"morie_arsau_result"}.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' res <- try(morie_arsau_load_aggregate_summary("2020-2022"))
 #' if (!inherits(res, "try-error")) head(res$data)
 #' }
@@ -567,7 +567,7 @@ morie_arsau_load_aggregate_summary <- function(year_range = "2020-2022",
 #' @inheritParams morie_arsau_load_aggregate_summary
 #' @return An object of class \code{"morie_arsau_result"}.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' res <- try(morie_arsau_load_detailed_dataset("2020-2022"))
 #' if (!inherits(res, "try-error")) head(res$data)
 #' }
@@ -796,7 +796,7 @@ morie_arsau_describe <- function(kind, year, language = "en", data_dir = NULL,
 
 #' @return \code{x}, invisibly.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' res <- try(morie_arsau_analyze_probe_cycle_records(year = "2024"))
 #' if (!inherits(res, "try-error")) print(res)
 #' \references{
