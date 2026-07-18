@@ -31,9 +31,11 @@ Uses \code{stats::anova} for sequential (Type-I) tests, or
 \code{car::Anova} for Type-II/III if \pkg{car} is installed.
 }
 \examples{
+\dontshow{if (requireNamespace("car", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 set.seed(1)
 df <- data.frame(x = rnorm(30))
 df$y <- df$x + rnorm(30)
 m <- lm(y ~ x, data = df)
 anova_table(m, typ = 1L)
+\dontshow{\}) # examplesIf}
 }

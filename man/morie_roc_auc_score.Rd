@@ -19,6 +19,8 @@ n_positive, n_negative, method.
 Wraps \code{pROC::roc}.
 }
 \examples{
+\dontshow{if (requireNamespace("pROC", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # See the package vignettes for usage examples:
 #   vignette(package = "rmorie")
+\dontshow{\}) # examplesIf}
 }

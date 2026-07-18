@@ -43,7 +43,9 @@ Cinelli-Hazlett partial-R-squared framing instead of the
 Frank et al. percent-bias-to-invalidate framing).
 }
 \examples{
+\dontshow{if (requireNamespace("konfound", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 str(morie_sensitivity_konfound(0.5, 0.15, 200), max.level = 1)
+\dontshow{\}) # examplesIf}
 }
 \references{
 Frank, K. A., Maroulis, S. J., Duong, M. Q., &

@@ -379,7 +379,7 @@ morie_dataset_profile_summary_table <- function(profile) {
 #' @param ... Forwarded to the underlying reader
 #'   (`utils::read.csv`, `readxl::read_excel`, etc.).
 #' @return A `data.frame`.
-#' @examples
+#' @examplesIf requireNamespace("readxl", quietly = TRUE)
 #' tmp <- tempfile(fileext = ".csv")
 #' write.csv(data.frame(a = 1:3, b = c("x", "y", "z")), tmp, row.names = FALSE)
 #' df <- morie_dataset_load(tmp)

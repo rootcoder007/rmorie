@@ -23,6 +23,8 @@ classes, n, method.
 Wraps \code{e1071::svm} with a linear kernel.
 }
 \examples{
+\dontshow{if (requireNamespace("e1071", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # See the package vignettes for usage examples:
 #   vignette(package = "rmorie")
+\dontshow{\}) # examplesIf}
 }

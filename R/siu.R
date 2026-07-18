@@ -1715,20 +1715,33 @@ morie_siu_compare <- function(case_number, external,
   ord <- order(-ifelse(is.na(pb), -Inf, pb),
                -ifelse(is.na(pf), 0, pf))
   servers <- servers[ord]
-  # Volunteer boxes churn: cheap 5s /api/tags probe first -- it both
-  # confirms reachability AND returns the models the box ACTUALLY has
-  # right now (the published directory goes stale), so generation is
-  # only attempted with a model the server can serve.
-  live_models <- function(url) {
-    tryCatch({
-      req <- httr2::request(paste0(url, "/api/tags"))
+  # Volunteer boxes churn: probe EVERY unique host's /api/tags once,
+  # in parallel (~5s wall total), before spending any generation
+  # budget. The probe both confirms reachability and returns the
+  # models each box ACTUALLY serves right now (the published
+  # directory goes stale).
+  host_alive <- .morie_siu_state$ollamafree_tags
+  if (is.null(host_alive)) {
+    host_alive <- new.env(parent = emptyenv())
+    hosts <- unique(vapply(servers, `[[`, "", "url"))
+    reqs <- lapply(hosts, function(u) {
+      req <- httr2::request(paste0(u, "/api/tags"))
       req <- httr2::req_timeout(req, 6)
-      req <- httr2::req_options(req, connecttimeout = 5L)
-      parsed <- httr2::resp_body_json(httr2::req_perform(req))
-      vapply(parsed$models, function(m) m$name %||% "", character(1))
-    }, error = function(e) NULL)
+      httr2::req_options(req, connecttimeout = 5L)
+    })
+    resps <- tryCatch(
+      httr2::req_perform_parallel(reqs, on_error = "continue",
+                                  progress = FALSE),
+      error = function(e) vector("list", length(hosts)))
+    for (i in seq_along(hosts)) {
+      ek <- gsub("[^A-Za-z0-9]", "_", hosts[i])
+      host_alive[[ek]] <- list(models = tryCatch({
+        parsed <- httr2::resp_body_json(resps[[i]])
+        vapply(parsed$models, function(m) m$name %||% "", character(1))
+      }, error = function(e) NULL))
+    }
+    .morie_siu_state$ollamafree_tags <- host_alive
   }
-  host_alive <- new.env(parent = emptyenv())
   errs <- character(0)
   tried <- 0L
   seen_pairs <- character(0)
@@ -1737,17 +1750,6 @@ morie_siu_compare <- function(case_number, external,
     if (pair_key %in% seen_pairs) next
     seen_pairs <- c(seen_pairs, pair_key)
     ek <- gsub("[^A-Za-z0-9]", "_", s$url)
-    # Fail fast once too many hosts prove dead -- don't spend 5s on
-    # each of 60 volunteer boxes before falling through the chain.
-    dead <- .morie_siu_state$ollamafree_dead %||% 0L
-    if (dead >= 8L) break
-    if (is.null(host_alive[[ek]])) {
-      probed <- live_models(s$url)
-      host_alive[[ek]] <- list(models = probed)
-      if (is.null(probed)) {
-        .morie_siu_state$ollamafree_dead <- dead + 1L
-      }
-    }
     avail <- host_alive[[ek]]$models
     if (is.null(avail)) {
       if (!any(grepl(s$url, errs, fixed = TRUE))) {

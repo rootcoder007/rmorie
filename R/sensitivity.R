@@ -1079,7 +1079,7 @@ morie_sensitivity_omitted_var_bias <- function(model, treatment,
 #'   Kelcey, B. M. (2013). What would it take to change an
 #'   inference?  \emph{Educational Evaluation and Policy Analysis},
 #'   35(4), 437--460.
-#' @examples
+#' @examplesIf requireNamespace("konfound", quietly = TRUE)
 #' str(morie_sensitivity_konfound(0.5, 0.15, 200), max.level = 1)
 #' @export
 morie_sensitivity_konfound <- function(estimate, se, n,
