@@ -20,7 +20,7 @@ then reads it back. Mirrors the Python \code{fetch_tps_dataframe}
 convenience used as a \code{DATASET_CATALOG} fetcher.
 }
 \examples{
-\donttest{
+\dontrun{
 df <- try(morie_tps_fetch_dataframe(morie_tps_list_categories()[1]))
 if (!inherits(df, "try-error")) head(df)
 }

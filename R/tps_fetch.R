@@ -120,7 +120,7 @@ morie_tps_list_categories <- function() {
 #' @return Path to the written CSV file.
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' res <- try(morie_tps_fetch_category(morie_tps_list_categories()[1],
 #'                                     cache_dir = tempdir()))
 #' }
@@ -212,7 +212,7 @@ morie_tps_fetch_category <- function(category,
 #' @return A `data.frame`.
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' df <- try(morie_tps_fetch_dataframe(morie_tps_list_categories()[1]))
 #' if (!inherits(df, "try-error")) head(df)
 #' }
