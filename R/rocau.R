@@ -8,7 +8,7 @@
 #' @param y_score Predicted scores for the positive class.
 #' @return Named list: estimate, auc, fpr, tpr, thresholds, n,
 #'   n_positive, n_negative, method.
-#' @examples
+#' @examplesIf requireNamespace("pROC", quietly = TRUE)
 #' # See the package vignettes for usage examples:
 #' #   vignette(package = "rmorie")
 #' @export

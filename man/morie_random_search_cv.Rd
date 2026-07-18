@@ -43,6 +43,8 @@ sampled_scores, n_iter, task, n, method.
 Uses \code{caret::train} with \code{search = "random"}.
 }
 \examples{
+\dontshow{if (requireNamespace("caret", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # See the package vignettes for usage examples:
 #   vignette(package = "rmorie")
+\dontshow{\}) # examplesIf}
 }

@@ -672,7 +672,7 @@ morie_datasets_siu_director_reports <- function() {
 #' @param offline Logical; if `TRUE`, return the included synthetic
 #'   `24-OFD-001` report text instead of hitting the SIU site.
 #' @return Character scalar (the plain text).
-#' @examples
+#' @examplesIf requireNamespace("pdftools", quietly = TRUE)
 #' text <- morie_datasets_siu_report_text(offline = TRUE)
 #' substr(text, 1, 80)
 #' @export

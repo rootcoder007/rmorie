@@ -17,7 +17,7 @@
 #'   is unchanged: `seed` drives `set.seed()` directly.
 #' @return Named list: estimate, best_params, best_score, sampled_params,
 #'   sampled_scores, n_iter, task, n, method.
-#' @examples
+#' @examplesIf requireNamespace("caret", quietly = TRUE)
 #' # See the package vignettes for usage examples:
 #' #   vignette(package = "rmorie")
 #' @export

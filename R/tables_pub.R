@@ -736,7 +736,7 @@ model_comparison_table <- function(models, nested = FALSE, digits = 3L,
 #' @param output_format Output target.
 #' @param title Title.
 #' @return A character string.
-#' @examples
+#' @examplesIf requireNamespace("car", quietly = TRUE)
 #' set.seed(1)
 #' df <- data.frame(x = rnorm(30))
 #' df$y <- df$x + rnorm(30)
