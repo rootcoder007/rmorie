@@ -273,10 +273,34 @@ dat <- morie_generate_synthetic_data(
 
 ## SIU pipeline
 
+rmorie ships the **first open-source parser and data-mining subsystem
+for the Ontario Special Investigations Unit (SIU) director's-report
+corpus** — created by Vansh Singh Ruhela as part of the MORIE / R-MORIE
+ecosystem and the MRM (Multilevel Reconciliation Methodology)
+framework. To our knowledge no prior public, open-source SIU
+director's-report parser or automated SIU data-mining engine existed
+in Canada; the SIU publishes the reports, but there was no
+programmatic pipeline to fetch, parse, and analyse them at corpus
+scale until this one.
+
 A first-class subsystem for the Ontario Special Investigations Unit
 director's-report corpus. The fetcher handles both English and French
-templates from 2005 onward; the parser is hand-rolled C++ for
-correctness under SIU's heterogeneous markup.
+templates from 2005 onward across all three of the site's historical
+layout generations (pre-2017 Attorney-General releases, the 2017-2019
+transitional format, and the post-2019 SIU Act template); the parser
+extracts a 64-column schema (police service, incident/notification/
+decision dates, investigator and witness/subject-official counts,
+affected-person demographics, injuries, legislation, charges verdict,
+and director's decision) and is hand-rolled for correctness under
+SIU's heterogeneous markup.
+
+The subsystem powers downstream MRM analyses — Hawkes self-exciting
+point processes, causal estimators, fairness audits, and the physics-
+of-crime modules — on Canadian police-oversight data.
+
+Key entry points: `morie_fetch_siu()`, `morie_siu_index_url()`,
+`morie_siu_refresh_manifest()`, `morie_siu_audit_case()`,
+`morie_siu_sanity_check()`, `morie_siu_all_analyses()`.
 
 ### Fetch and parse the full corpus
 
