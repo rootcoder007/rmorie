@@ -50,59 +50,6 @@ test_that(".morie_llm_local_fallback returns the canonical fallback text", {
   expect_match(out, "morie")
 })
 
-test_that(".morie_llm_freeapi_model honours moriefam env override", {
-  old <- Sys.getenv("moriefam", unset = NA)
-  Sys.setenv(moriefam = "custom-model-xyz")
-  on.exit({
-    if (!is.na(old)) Sys.setenv(moriefam = old)
-    else Sys.unsetenv("moriefam")
-  }, add = TRUE)
-  expect_equal(rmorie:::.morie_llm_freeapi_model(),
-               "custom-model-xyz")
-})
-
-test_that(".morie_llm_freeapi_model falls back to DEFAULT_FREEAPI_MODEL", {
-  old <- Sys.getenv("moriefam", unset = NA)
-  Sys.unsetenv("moriefam")
-  on.exit(if (!is.na(old)) Sys.setenv(moriefam = old), add = TRUE)
-  out <- rmorie:::.morie_llm_freeapi_model()
-  expect_true(is.character(out) && nzchar(out))
-})
-
-test_that(".morie_llm_messages_to_prompt assembles roles into one string", {
-  msgs <- list(
-    list(role = "system",    content = "SYS-X"),
-    list(role = "user",      content = "U1"),
-    list(role = "assistant", content = "A1"))
-  out <- rmorie:::.morie_llm_messages_to_prompt(msgs)
-  expect_type(out, "character")
-  expect_match(out, "\\[System: SYS-X\\]")
-  expect_match(out, "U1")
-  expect_match(out, "Assistant: A1")
-})
-
-test_that(".morie_llm_strip_think removes <think>...</think> + trims", {
-  out <- rmorie:::.morie_llm_strip_think(
-    "  <think>chain-of-thought</think>final answer  ")
-  expect_equal(out, "final answer")
-})
-
-test_that(".morie_llm_strip_think trims surrounding whitespace", {
-  expect_equal(rmorie:::.morie_llm_strip_think("  final answer  "),
-               "final answer")
-})
-
-test_that(".morie_llm_strip_think strips multi-line <think> block", {
-  out <- rmorie:::.morie_llm_strip_think(
-    "<think>line1\nline2</think>\n\nfinal")
-  expect_equal(out, "final")
-})
-
-test_that(".morie_llm_strip_think no-op on plain text", {
-  expect_equal(rmorie:::.morie_llm_strip_think("plain answer"),
-               "plain answer")
-})
-
 # ============================================================ spatial_voting.R
 
 test_that(".sv_as_matrix returns NULL on NULL input", {

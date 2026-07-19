@@ -1166,9 +1166,9 @@ morie_siu_compare <- function(case_number, external,
 #   ollama  -- open-weight models   env: OLLAMA_HOST (e.g.
 #              over a local or self-       "http://localhost:11434"
 #              hosted REST endpoint;       or any hosted Ollama-
-#              free/OllamaFreeAPI-         compatible base URL),
+#              OpenAI-API-                 compatible base URL),
 #              compatible.                 optional OLLAMA_MODEL
-#                                          (default "llama3.2:3b")
+#                                          (else first served model)
 # Internal: default LLM HTTP timeout in seconds. 600s (10 min)
 # accommodates slow CPU-only local inference on a Raspberry Pi.
 # Override globally via MORIE_LLM_TIMEOUT_S env var.
@@ -1299,24 +1299,24 @@ morie_siu_compare <- function(case_number, external,
       }
     ),
     ollama = list(
-      # OLLAMA_HOST is the documented env var, but if unset we silently
-      # try a local daemon at http://localhost:11434 -- that's the
-      # zero-config path for a user who's just installed `ollama` and
-      # pulled `gemma3:4b` (or any Gemma / Functiongemma variant). No
-      # API key, no paid subscription, no signup needed.
+      # OLLAMA_HOST is the documented env var -- point it at a local
+      # daemon (http://localhost:11434), a box on your network, or a
+      # remote / Cloudflare-tunnelled server. If unset we try localhost.
+      # No API key, no paid subscription, no signup needed; you bring
+      # your own model.
       #
-      # On CPU-only hardware (e.g. Raspberry Pi 5) the default
-      # gemma3:4b model is slow (~3 tok/sec); set OLLAMA_MODEL to
-      # gemma3:270m (~290 MB, ~50 tok/sec) for a 10x speedup with
-      # only modest quality loss. OLLAMA_KEEP_ALIVE keeps the loaded
-      # model resident across requests so we don't pay the 10s
+      # No model is bundled or assumed: OLLAMA_MODEL names the model, and
+      # if it's unset we use whatever the server actually serves (its first
+      # /api/tags entry). On slow CPU-only hardware prefer a smaller model
+      # (fewer B params) for higher tok/sec. OLLAMA_KEEP_ALIVE keeps the
+      # loaded model resident across requests so we don't pay the ~10s
       # cold-start tax per case.
       env_required = "OLLAMA_HOST_OR_DEFAULT",
       build = function(env, prompt) {
         host <- sub("/+$", "", env[["OLLAMA_HOST_OR_DEFAULT"]])
         headers <- list("content-type" = "application/json")
         # Optional bearer token, for hosted Ollama-compatible APIs
-        # (e.g. OllamaFreeAPI gateways) that require auth. Local
+        # (e.g. hosted inference gateways) that require auth. Local
         # Ollama at localhost:11434 doesn't need it.
         api_key <- Sys.getenv("OLLAMA_API_KEY", unset = "")
         if (nzchar(api_key)) {
@@ -1326,10 +1326,17 @@ morie_siu_compare <- function(case_number, external,
           url = paste0(host, "/api/generate"),
           headers = headers,
           body = list(
-            model = if (nzchar(Sys.getenv("OLLAMA_MODEL", ""))) {
-              Sys.getenv("OLLAMA_MODEL")
-            } else {
-              "gemma3:4b"
+            # No hardcoded model: use OLLAMA_MODEL, else the first model the
+            # server actually serves. Errors clearly when neither is available
+            # (retired tags like gemma3/llama3.2 make an assumed default fail).
+            model = {
+              m <- .morie_llm_ollama_default_model(host)
+              if (is.na(m)) {
+                stop("No usable Ollama model. Set OLLAMA_MODEL to a model your ",
+                     "server serves, or pull one (`ollama pull <model>`). Host: ",
+                     host, call. = FALSE)
+              }
+              m
             },
             prompt = prompt,
             format = "json",
@@ -1441,19 +1448,6 @@ morie_siu_compare <- function(case_number, external,
   if (!requireNamespace("jsonlite", quietly = TRUE)) {
     stop("LLM helpers require the 'jsonlite' package", call. = FALSE)
   }
-  if (identical(model, "freeapi")) {
-    # Keyless path through the morie_llm free-provider stack.
-    return(morie_llm_ask(prompt))
-  }
-  if (identical(model, "ollamafree")) {
-    # Keyless path through the OllamaFreeAPI public-server directory
-    # (github.com/mfoud444/ollamafreeapi): community-run Ollama
-    # servers speaking the standard /api/generate protocol. We fetch
-    # the published server list, then fail over server-by-server
-    # until one answers. Volunteer boxes come and go, so every step
-    # is best-effort with a short timeout.
-    return(.siu_llm_call_ollamafree(prompt, timeout_s = timeout_s))
-  }
   providers <- .siu_llm_providers()
   if (!model %in% names(providers)) {
     stop("Unknown LLM model: '", model, "'. Available: ",
@@ -1463,7 +1457,7 @@ morie_siu_compare <- function(case_number, external,
   }
   p <- providers[[model]]
   # Ollama gets a localhost:11434 default if OLLAMA_HOST is unset --
-  # that's the zero-config "install ollama, pull gemma3:4b, done"
+  # that's the zero-config "install ollama, pull a model, done"
   # path. All other providers still hard-require their API key env.
   if (p$env_required == "OLLAMA_HOST_OR_DEFAULT") {
     env_val <- Sys.getenv("OLLAMA_HOST", unset = "")
@@ -1579,170 +1573,6 @@ morie_siu_compare <- function(case_number, external,
 # Session-scoped mutable state for SIU helpers (server-list cache).
 .morie_siu_state <- new.env(parent = emptyenv())
 
-#' Fetch the OllamaFreeAPI public-server directory (cached per session).
-#'
-#' @keywords internal
-#' @noRd
-.siu_ollamafree_servers <- function() {
-  cached <- .morie_siu_state$ollamafree_servers
-  if (!is.null(cached)) return(cached)
-  root <- paste0("https://raw.githubusercontent.com/mfoud444/",
-                 "ollamafreeapi/main/ollamafreeapi/")
-  # Primary directory plus the larger _backup pool (deepseek, mistral,
-  # openchat + extra llama/gemma/qwen hosts).
-  sources <- c(
-    paste0(root, "ollama_json/", c("llama", "gemma", "qwen"), ".json"),
-    paste0(root, "ollama_json_backup/",
-           c("llama", "gemma", "qwen", "deepseek", "mistral", "others"),
-           ".json")
-  )
-  out <- list()
-  for (src in sources) {
-    txt <- tryCatch(.siu_fetch_http_get(src), error = function(e) "")
-    if (!nzchar(txt)) next
-    parsed <- tryCatch(.morie_from_json(txt, simplifyVector = FALSE),
-                       error = function(e) NULL)
-    models <- parsed$props$pageProps$models
-    if (is.null(models)) next
-    for (m in models) {
-      if (is.null(m$ip_port) || is.null(m$model)) next
-      u <- sub("/+$", "", m$ip_port)
-      if (!grepl("^https?://", u)) u <- paste0("http://", u)
-      out[[length(out) + 1L]] <- list(
-        url = u, model = m$model,
-        parameter_size = m$parameter_size %||% "",
-        perf = suppressWarnings(
-          as.numeric(m$perf_tokens_per_second %||% NA_real_)))
-    }
-  }
-  # Dedup identical (host, model) pairs across primary + backup lists.
-  keys <- vapply(out, function(s) paste(s$url, s$model), character(1))
-  out <- out[!duplicated(keys)]
-  .morie_siu_state$ollamafree_servers <- out
-  out
-}
-
-#' Parse a model's parameter count in billions from its metadata.
-#'
-#' Uses the directory's `parameter_size` field ("3.2B", "70B", "135M")
-#' when present, else the size suffix in the model tag
-#' ("llama3.2:3b", "gpt-oss:20b"). NA when neither is parseable.
-#'
-#' @keywords internal
-#' @noRd
-.siu_ollamafree_params_b <- function(entry) {
-  from <- function(s) {
-    m <- regmatches(s, regexec("([0-9]+\\.?[0-9]*)\\s*([BbMm])", s))[[1L]]
-    if (length(m) == 3L) {
-      v <- as.numeric(m[2L])
-      if (toupper(m[3L]) == "M") v / 1000 else v
-    } else NA_real_
-  }
-  v <- from(entry$parameter_size %||% "")
-  if (is.na(v)) v <- from(sub("^[^:]*:", "", entry$model))
-  v
-}
-
-#' Call one of the OllamaFreeAPI community servers, failing over.
-#'
-#' @keywords internal
-#' @noRd
-.siu_llm_call_ollamafree <- function(prompt, timeout_s = 120,
-                                     max_servers = 12L) {
-  servers <- .siu_ollamafree_servers()
-  # Try every published (server, model) pair, most capable model
-  # first: parameter count descending (70B before 20B before 3B),
-  # ties broken by measured throughput. Base/vision-only oddballs
-  # sink to the bottom via NA parameter counts.
-  pb <- vapply(servers, .siu_ollamafree_params_b, numeric(1))
-  pf <- vapply(servers, function(s) s$perf %||% NA_real_, numeric(1))
-  ord <- order(-ifelse(is.na(pb), -Inf, pb),
-               -ifelse(is.na(pf), 0, pf))
-  servers <- servers[ord]
-  # Volunteer boxes churn: probe EVERY unique host's /api/tags once,
-  # in parallel (~5s wall total), before spending any generation
-  # budget. The probe both confirms reachability and returns the
-  # models each box ACTUALLY serves right now (the published
-  # directory goes stale).
-  host_alive <- .morie_siu_state$ollamafree_tags
-  if (is.null(host_alive)) {
-    host_alive <- new.env(parent = emptyenv())
-    hosts <- unique(vapply(servers, `[[`, "", "url"))
-    reqs <- lapply(hosts, function(u) {
-      req <- httr2::request(paste0(u, "/api/tags"))
-      req <- httr2::req_timeout(req, 6)
-      httr2::req_options(req, connecttimeout = 5L)
-    })
-    resps <- tryCatch(
-      httr2::req_perform_parallel(reqs, on_error = "continue",
-                                  progress = FALSE),
-      error = function(e) vector("list", length(hosts)))
-    for (i in seq_along(hosts)) {
-      ek <- gsub("[^A-Za-z0-9]", "_", hosts[i])
-      host_alive[[ek]] <- list(models = tryCatch({
-        parsed <- httr2::resp_body_json(resps[[i]])
-        vapply(parsed$models, function(m) m$name %||% "", character(1))
-      }, error = function(e) NULL))
-    }
-    .morie_siu_state$ollamafree_tags <- host_alive
-  }
-  errs <- character(0)
-  tried <- 0L
-  seen_pairs <- character(0)
-  for (s in servers) {
-    pair_key <- paste(s$url, s$model)
-    if (pair_key %in% seen_pairs) next
-    seen_pairs <- c(seen_pairs, pair_key)
-    ek <- gsub("[^A-Za-z0-9]", "_", s$url)
-    avail <- host_alive[[ek]]$models
-    if (is.null(avail)) {
-      if (!any(grepl(s$url, errs, fixed = TRUE))) {
-        errs <- c(errs, sprintf("[%s] unreachable", s$url))
-      }
-      next
-    }
-    use_model <- if (s$model %in% avail) {
-      s$model
-    } else {
-      # Stale directory entry: fall back to the LARGEST model the box
-      # actually serves right now.
-      lb <- vapply(avail, function(a) {
-        .siu_ollamafree_params_b(list(model = a, parameter_size = ""))
-      }, numeric(1))
-      cand <- avail[order(-ifelse(is.na(lb), -Inf, lb))]
-      if (length(cand)) cand[1L] else ""
-    }
-    if (!nzchar(use_model)) {
-      errs <- c(errs, sprintf("[%s] no models", s$url))
-      next
-    }
-    tried <- tried + 1L
-    if (tried > max_servers) break
-    res <- tryCatch({
-      req <- httr2::request(paste0(s$url, "/api/generate"))
-      req <- httr2::req_headers(req,
-                                "content-type" = "application/json")
-      req <- httr2::req_body_json(req, list(
-        model = use_model, prompt = prompt, format = "json",
-        stream = FALSE, options = list(temperature = 0)))
-      req <- httr2::req_timeout(req, min(timeout_s, 60))
-      # Dead volunteer boxes shouldn't cost the full timeout each --
-      # 5s to connect, then the normal budget for generation.
-      req <- httr2::req_options(req, connecttimeout = 5L)
-      parsed <- httr2::resp_body_json(httr2::req_perform(req))
-      x <- parsed$response
-      if (is.null(x) || !nzchar(x)) stop("empty response", call. = FALSE)
-      x
-    }, error = function(e) {
-      errs <<- c(errs, sprintf("[%s] %s", s$url, conditionMessage(e)))
-      NULL
-    })
-    if (!is.null(res)) return(res)
-  }
-  stop("All OllamaFreeAPI servers failed: ",
-       paste(errs, collapse = "; "), call. = FALSE)
-}
-
 #' Resolve an SIU case number to its report drid.
 #'
 #' Manifest first (fast, offline); when the case is newer than the
@@ -1849,8 +1679,8 @@ morie_siu_compare <- function(case_number, external,
 #' not leak into call traces, logs, or scripts. Set
 #' \code{GOOGLE_API_KEY} for Gemini, \code{ANTHROPIC_API_KEY} for
 #' Claude, or \code{OLLAMA_HOST} (e.g.
-#' \code{"http://localhost:11434"} or an OllamaFreeAPI base URL) plus
-#' optionally \code{OLLAMA_MODEL} (default \code{"llama3.2:3b"}) for
+#' \code{"http://localhost:11434"} or an OpenAI-compatible base URL) plus
+#' optionally \code{OLLAMA_MODEL} (else the first model the server serves) for
 #' Ollama-compatible open-weight endpoints.
 #'
 #' @param case_number An SIU case number (e.g. \code{"17-OVI-201"}).
@@ -1862,7 +1692,7 @@ morie_siu_compare <- function(case_number, external,
 #'   free model first and only escalates to paid Gemini if Ollama
 #'   isn't installed or fails -- so morie costs $0 to use as long
 #'   as you have a free Gemma / Qwen / Llama running locally
-#'   (e.g. \code{ollama pull gemma3:4b}).
+#'   (e.g. \code{ollama pull <model>}).
 #' @param cache_dir Directory holding the harvester's SIU.csv and
 #'   the optional \code{html/} subdirectory.
 #' @param max_html_chars Soft cap on the HTML payload sent to the
@@ -1887,8 +1717,7 @@ morie_siu_compare <- function(case_number, external,
 #' }
 #' @export
 morie_siu_llm_extract <- function(case_number,
-                                  model = c("ollama", "gemini",
-                                            "ollamafree", "freeapi"),
+                                  model = c("ollama", "gemini"),
                                   cache_dir = file.path(tempdir(), "morie", "siu"),
                                   max_html_chars = 80000L,
                                   mock_response_text = NULL) {
@@ -2008,9 +1837,7 @@ morie_siu_anomaly_check <- function(case_number,
                                     model = c("ollama",
                                               "openai_compatible",
                                               "claude", "openai",
-                                              "gemini", "vertex",
-                                              "ollamafree",
-                                              "freeapi"),
+                                              "gemini", "vertex"),
                                     cache_dir = file.path(tempdir(), "morie", "siu"),
                                     max_html_chars = 80000L,
                                     mock_response_text = NULL) {
@@ -2616,7 +2443,7 @@ morie_siu_translate_fr_to_en <- function(
 #' \dontrun{
 #' Sys.setenv(
 #'   OLLAMA_HOST = "http://localhost:11434",
-#'   OLLAMA_MODEL = "gemma3:4b"
+#'   OLLAMA_MODEL = "<your-model>"
 #' )
 #' csv <- morie_fetch_siu(cache_html = TRUE)
 #' df <- utils::read.csv(csv, colClasses = "character")

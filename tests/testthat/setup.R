@@ -32,12 +32,9 @@ if (!nzchar(Sys.getenv("R_TESTS"))) {
   Sys.setenv(NOT_CRAN = "true")
 }
 
-# Deterministic freeapi probing across the whole suite.
-#
-# morie_llm_probe_freeapi() now probes the live OllamaFreeAPI community
-# registry over the network, and morie_llm_detect_provider() calls it. Under
-# covr (which sets NOT_CRAN above) a live server would make detection return
-# "freeapi", breaking the provider-detection tests non-deterministically.
-# Force the cached result FALSE for the entire suite so no test ever hits the
-# network for freeapi; tests that specifically exercise freeapi set it locally.
-options(morie.llm.freeapi_cached = FALSE)
+# Deterministic ollama probing across the whole suite: force the cached
+# result FALSE so no provider-detection test ever hits the network.
+# (The OllamaFreeAPI provider was removed 2026-07 -- the community registry
+# was chronically down, 1/59 hosts live, and its parallel probe hung R CMD
+# check examples on CI runners.)
+options(morie.llm.ollama_cached = FALSE)
