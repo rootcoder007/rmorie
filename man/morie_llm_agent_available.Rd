@@ -13,7 +13,7 @@ Logical scalar.
 Return TRUE when at least one live LLM provider is available
 }
 \examples{
-options(morie.llm.ollama_cached = FALSE, morie.llm.freeapi_cached = FALSE)
+options(morie.llm.ollama_cached = FALSE)
 morie_llm_agent_available()
-options(morie.llm.ollama_cached = NULL, morie.llm.freeapi_cached = NULL)
+options(morie.llm.ollama_cached = NULL)
 }

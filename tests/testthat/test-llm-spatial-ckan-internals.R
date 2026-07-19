@@ -50,25 +50,6 @@ test_that(".morie_llm_local_fallback returns the canonical fallback text", {
   expect_match(out, "morie")
 })
 
-test_that(".morie_llm_freeapi_model honours moriefam env override", {
-  old <- Sys.getenv("moriefam", unset = NA)
-  Sys.setenv(moriefam = "custom-model-xyz")
-  on.exit({
-    if (!is.na(old)) Sys.setenv(moriefam = old)
-    else Sys.unsetenv("moriefam")
-  }, add = TRUE)
-  expect_equal(rmorie:::.morie_llm_freeapi_model(),
-               "custom-model-xyz")
-})
-
-test_that(".morie_llm_freeapi_model falls back to DEFAULT_FREEAPI_MODEL", {
-  old <- Sys.getenv("moriefam", unset = NA)
-  Sys.unsetenv("moriefam")
-  on.exit(if (!is.na(old)) Sys.setenv(moriefam = old), add = TRUE)
-  out <- rmorie:::.morie_llm_freeapi_model()
-  expect_true(is.character(out) && nzchar(out))
-})
-
 test_that(".morie_llm_messages_to_prompt assembles roles into one string", {
   msgs <- list(
     list(role = "system",    content = "SYS-X"),
