@@ -6,7 +6,8 @@
 \usage{
 morie_siu_anomaly_check(
   case_number,
-  model = c("ollama", "openai_compatible", "claude", "openai", "gemini", "vertex"),
+  model = c("ollama", "openai_compatible", "claude", "openai", "gemini", "vertex",
+    "ollamafree", "freeapi"),
   cache_dir = file.path(tempdir(), "morie", "siu"),
   max_html_chars = 80000L,
   mock_response_text = NULL
