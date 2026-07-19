@@ -19,5 +19,16 @@ statistic \eqn{mean(1/p)} is referred to its Landau asymptotic
 distribution. Cross-validated against \pkg{harmonicmeanp}.
 }
 \examples{
+# Combined p-value robust to dependence between tests.
 harmonic_mean_p(c(0.001, 0.05, 0.5))
+
+# Dominated by the smallest p-values (a few strong signals carry it).
+harmonic_mean_p(c(0.0001, 0.9, 0.9, 0.9))
+
+# All-null inputs stay large.
+harmonic_mean_p(c(0.4, 0.5, 0.6))
+
+# Unlike Fisher/Stouffer, valid even under arbitrary dependence.
+set.seed(1)
+harmonic_mean_p(c(runif(5, 0, 0.01), runif(5)))
 }

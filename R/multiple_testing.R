@@ -440,8 +440,20 @@ by_fdr <- benjamini_yekutieli
 #'   estimator.
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
-#' p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
-#' str(storey_q(p), max.level = 1)
+#' set.seed(1)
+#' p <- c(runif(80), runif(20, 0, 0.005))
+#'
+#' res <- storey_q(p)
+#' res$pi0                     # estimated proportion of true nulls
+#' head(res$adjusted)          # q-values
+#' res$n_rejected
+#'
+#' # `lambda_param` tunes the pi0 estimator; different lambda, different pi0.
+#' storey_q(p, lambda_param = 0.5)$pi0
+#' storey_q(p, lambda_param = 0.8)$pi0
+#'
+#' # Adaptive FDR rejects at least as many as BH (pi0 <= 1 tightens BH):
+#' c(storey = storey_q(p)$n_rejected, BH = benjamini_hochberg(p)$n_rejected)
 #' @export
 storey_q <- function(p_values, alpha = 0.05, lambda_param = 0.5,
                      labels = NULL) {
@@ -527,8 +539,17 @@ storey_q <- function(p_values, alpha = 0.05, lambda_param = 0.5,
 #' @inheritParams bonferroni
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
+#' # Combine several independent tests into one global p-value.
 #' res <- fisher_combined(c(0.001, 0.6, 0.5))
-#' res$p_value
+#' res                          # rich print: statistic, df, combined p
+#' res$p_value                  # the combined p-value
+#' res$statistic                # chi-square = -2 * sum(log p)
+#'
+#' # One small p can drive the combination significant.
+#' fisher_combined(c(0.0001, 0.9, 0.8, 0.7))$p_value
+#'
+#' # All-null inputs stay non-significant.
+#' fisher_combined(c(0.4, 0.5, 0.6))$p_value
 #' @export
 fisher_combined <- function(p_values) {
   p <- .mt_check_p(p_values)
@@ -567,7 +588,18 @@ fisher_combined <- function(p_values) {
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
 #' p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
-#' stouffer_combined(p)
+#'
+#' res <- stouffer_combined(p)
+#' res$statistic                # combined Z
+#' res$p_value
+#'
+#' # `weights` up-weights more trustworthy / larger studies.
+#' w <- c(10, 8, 5, 5, 2, 1)
+#' stouffer_combined(p, weights = w)$p_value
+#'
+#' # Compare Fisher (log-based) vs Stouffer (z-based) on the same inputs.
+#' c(stouffer = stouffer_combined(p)$p_value,
+#'   fisher   = fisher_combined(p)$p_value)
 #' @export
 stouffer_combined <- function(p_values, weights = NULL) {
   p <- .mt_check_p(p_values)
@@ -608,7 +640,15 @@ stouffer_combined <- function(p_values, weights = NULL) {
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
 #' p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
-#' tippett_combined(p)
+#'
+#' res <- tippett_combined(p)
+#' res$statistic                # the minimum p-value
+#' res$p_value                  # 1 - (1 - min p)^m
+#'
+#' # Tippett is powerful when a single strong signal is enough (min-p);
+#' # contrast with Fisher, which aggregates evidence across all tests.
+#' c(tippett = tippett_combined(p)$p_value,
+#'   fisher  = fisher_combined(p)$p_value)
 #' @export
 tippett_combined <- function(p_values) {
   p <- .mt_check_p(p_values)
@@ -640,7 +680,16 @@ tippett_combined <- function(p_values) {
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
 #' p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
-#' simes_combined(p)
+#'
+#' res <- simes_combined(p)
+#' res$p_value                  # Simes global-null p (min of sorted p * m/i)
+#'
+#' # Simes is a less conservative global-null test than Bonferroni's min:
+#' c(simes = simes_combined(p)$p_value,
+#'   bonferroni_min = min(bonferroni(p)$adjusted))
+#'
+#' # A single very small p makes the global null significant.
+#' simes_combined(c(0.0005, 0.4, 0.6, 0.8))$p_value
 #' @export
 simes_combined <- function(p_values) {
   p <- .mt_check_p(p_values)
@@ -665,7 +714,18 @@ simes_combined <- function(p_values) {
 #' @inheritParams bonferroni
 #' @return A numeric value.
 #' @examples
+#' # Combined p-value robust to dependence between tests.
 #' harmonic_mean_p(c(0.001, 0.05, 0.5))
+#'
+#' # Dominated by the smallest p-values (a few strong signals carry it).
+#' harmonic_mean_p(c(0.0001, 0.9, 0.9, 0.9))
+#'
+#' # All-null inputs stay large.
+#' harmonic_mean_p(c(0.4, 0.5, 0.6))
+#'
+#' # Unlike Fisher/Stouffer, valid even under arbitrary dependence.
+#' set.seed(1)
+#' harmonic_mean_p(c(runif(5, 0, 0.01), runif(5)))
 #' @export
 harmonic_mean_p <- function(p_values) {
   p <- .mt_check_p(p_values)
