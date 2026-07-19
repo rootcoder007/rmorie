@@ -265,11 +265,22 @@ epsilon_squared <- function(ss_effect, ss_total, df_effect, ms_error) {
 
 #' Odds ratio for a 2x2 table `[[a, b], [c, d]]`
 #'
-#' @param a,b,c,d Cell counts.
+#' @param a,b,c,d Cell counts of the 2x2 table: a = exposed with outcome,
+#'   b = exposed without, c = unexposed with outcome, d = unexposed without.
 #' @param confidence Confidence level. Default 0.95.
 #' @return A `morie_effect_size`.
 #' @examples
-#' odds_ratio(20, 80, 10, 90)
+#' # Cohort: 20/100 exposed and 10/100 unexposed develop the outcome.
+#' res <- odds_ratio(20, 80, 10, 90)
+#' res                          # rich print: estimate + CI
+#' res$estimate                 # (a*d)/(b*c) = 2.25
+#' c(lower = res$ci_lower, upper = res$ci_upper)
+#'
+#' # OR = 1 means no association; a CI excluding 1 is "significant".
+#' odds_ratio(50, 50, 50, 50)$estimate      # 1
+#'
+#' # `confidence` widens/narrows the interval.
+#' odds_ratio(20, 80, 10, 90, confidence = 0.99)$ci_upper
 #' @export
 odds_ratio <- function(a, b, c, d, confidence = 0.95) {
   or_val  <- if (b * c > 0) (a * d) / (b * c) else Inf
@@ -290,7 +301,16 @@ odds_ratio <- function(a, b, c, d, confidence = 0.95) {
 #' @inheritParams odds_ratio
 #' @return A `morie_effect_size`.
 #' @examples
-#' risk_ratio(20, 80, 10, 90)
+#' # Relative risk: risk in exposed / risk in unexposed.
+#' res <- risk_ratio(20, 80, 10, 90)
+#' res$estimate                 # (20/100) / (10/100) = 2
+#' c(lower = res$ci_lower, upper = res$ci_upper)
+#'
+#' # RR and OR agree for rare outcomes, diverge for common ones:
+#' c(RR = risk_ratio(20, 80, 10, 90)$estimate,
+#'   OR = odds_ratio(20, 80, 10, 90)$estimate)
+#'
+#' risk_ratio(20, 80, 10, 90, confidence = 0.90)$ci_upper
 #' @export
 risk_ratio <- function(a, b, c, d, confidence = 0.95) {
   p1 <- if ((a + b) > 0) a / (a + b) else 0
@@ -312,7 +332,13 @@ risk_ratio <- function(a, b, c, d, confidence = 0.95) {
 #' @inheritParams odds_ratio
 #' @return A `morie_effect_size`.
 #' @examples
-#' risk_difference(20, 80, 10, 90)
+#' # Absolute difference in risk between exposed and unexposed.
+#' res <- risk_difference(20, 80, 10, 90)
+#' res$estimate                 # 0.20 - 0.10 = 0.10
+#' c(lower = res$ci_lower, upper = res$ci_upper)
+#'
+#' # RD = 0 means equal risk; sign shows direction.
+#' risk_difference(10, 90, 20, 80)$estimate     # -0.10 (exposed lower)
 #' @export
 risk_difference <- function(a, b, c, d, confidence = 0.95) {
   n1 <- a + b
@@ -333,7 +359,12 @@ risk_difference <- function(a, b, c, d, confidence = 0.95) {
 #' @inheritParams odds_ratio
 #' @return A `morie_effect_size`.
 #' @examples
-#' number_needed_to_treat(10, 90, 20, 80)
+#' # Treatment lowers the bad outcome from 20% to 10% -> NNT = 1/0.10 = 10.
+#' res <- number_needed_to_treat(10, 90, 20, 80)
+#' res$estimate                 # patients to treat to prevent one event
+#'
+#' # NNT is the reciprocal of the (absolute) risk difference.
+#' 1 / abs(risk_difference(10, 90, 20, 80)$estimate)
 #' @export
 number_needed_to_treat <- function(a, b, c, d, confidence = 0.95) {
   rd_res <- risk_difference(a, b, c, d, confidence)
@@ -353,7 +384,13 @@ number_needed_to_treat <- function(a, b, c, d, confidence = 0.95) {
 #' @inheritParams odds_ratio
 #' @return A `morie_effect_size`.
 #' @examples
-#' number_needed_to_harm(20, 80, 10, 90)
+#' # Exposure raises the bad outcome from 10% to 20% -> NNH = 1/0.10 = 10.
+#' res <- number_needed_to_harm(20, 80, 10, 90)
+#' res$estimate                 # people exposed to cause one extra harm
+#'
+#' # NNH is the reciprocal of the (absolute) risk difference, like NNT but
+#' # for a harmful exposure.
+#' 1 / abs(risk_difference(20, 80, 10, 90)$estimate)
 #' @export
 number_needed_to_harm <- function(a, b, c, d, confidence = 0.95) {
   result <- number_needed_to_treat(a, b, c, d, confidence)
