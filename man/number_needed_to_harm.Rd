@@ -7,7 +7,8 @@
 number_needed_to_harm(a, b, c, d, confidence = 0.95)
 }
 \arguments{
-\item{a, b, c, d}{Cell counts.}
+\item{a, b, c, d}{Cell counts of the 2x2 table: a = exposed with outcome,
+b = exposed without, c = unexposed with outcome, d = unexposed without.}
 
 \item{confidence}{Confidence level. Default 0.95.}
 }
@@ -18,5 +19,11 @@ A \code{morie_effect_size}.
 Number needed to harm (NNH) — sign-reversed NNT
 }
 \examples{
-number_needed_to_harm(20, 80, 10, 90)
+# Exposure raises the bad outcome from 10\% to 20\% -> NNH = 1/0.10 = 10.
+res <- number_needed_to_harm(20, 80, 10, 90)
+res$estimate                 # people exposed to cause one extra harm
+
+# NNH is the reciprocal of the (absolute) risk difference, like NNT but
+# for a harmful exposure.
+1 / abs(risk_difference(20, 80, 10, 90)$estimate)
 }

@@ -7,7 +7,8 @@
 odds_ratio(a, b, c, d, confidence = 0.95)
 }
 \arguments{
-\item{a, b, c, d}{Cell counts.}
+\item{a, b, c, d}{Cell counts of the 2x2 table: a = exposed with outcome,
+b = exposed without, c = unexposed with outcome, d = unexposed without.}
 
 \item{confidence}{Confidence level. Default 0.95.}
 }
@@ -18,5 +19,15 @@ A \code{morie_effect_size}.
 Odds ratio for a 2x2 table \verb{[[a, b], [c, d]]}
 }
 \examples{
-odds_ratio(20, 80, 10, 90)
+# Cohort: 20/100 exposed and 10/100 unexposed develop the outcome.
+res <- odds_ratio(20, 80, 10, 90)
+res                          # rich print: estimate + CI
+res$estimate                 # (a*d)/(b*c) = 2.25
+c(lower = res$ci_lower, upper = res$ci_upper)
+
+# OR = 1 means no association; a CI excluding 1 is "significant".
+odds_ratio(50, 50, 50, 50)$estimate      # 1
+
+# `confidence` widens/narrows the interval.
+odds_ratio(20, 80, 10, 90, confidence = 0.99)$ci_upper
 }

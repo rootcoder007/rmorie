@@ -7,7 +7,8 @@
 number_needed_to_treat(a, b, c, d, confidence = 0.95)
 }
 \arguments{
-\item{a, b, c, d}{Cell counts.}
+\item{a, b, c, d}{Cell counts of the 2x2 table: a = exposed with outcome,
+b = exposed without, c = unexposed with outcome, d = unexposed without.}
 
 \item{confidence}{Confidence level. Default 0.95.}
 }
@@ -18,5 +19,10 @@ A \code{morie_effect_size}.
 Number needed to treat (NNT) = 1 / |RD|
 }
 \examples{
-number_needed_to_treat(10, 90, 20, 80)
+# Treatment lowers the bad outcome from 20\% to 10\% -> NNT = 1/0.10 = 10.
+res <- number_needed_to_treat(10, 90, 20, 80)
+res$estimate                 # patients to treat to prevent one event
+
+# NNT is the reciprocal of the (absolute) risk difference.
+1 / abs(risk_difference(10, 90, 20, 80)$estimate)
 }
