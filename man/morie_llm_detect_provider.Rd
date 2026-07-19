@@ -13,7 +13,7 @@ Character scalar provider key: ollama / gemini / api / openai / local.
 Detect the active LLM provider
 }
 \examples{
-options(morie.llm.ollama_cached = FALSE)
+options(morie.llm.ollama_cached = FALSE, morie.llm.freeapi_cached = FALSE)
 morie_llm_detect_provider()
-options(morie.llm.ollama_cached = NULL)
+options(morie.llm.ollama_cached = NULL, morie.llm.freeapi_cached = NULL)
 }
