@@ -67,8 +67,18 @@ if (nzchar(v)) v else NULL }
 #' morie_llm_probe_ollama()
 #' options(morie.llm.ollama_cached = NULL)
 #' @export
+# TRUE when live-network probes must be suppressed: under R CMD check /
+# examples / covr the result must be deterministic and must never hang on a
+# dead-but-open host. A caller (or a test) can force a real probe with
+# options(morie.llm.allow_net_probe = TRUE).
+.morie_llm_no_net <- function() {
+  nzchar(Sys.getenv("_R_CHECK_PACKAGE_NAME_")) &&
+    !isTRUE(getOption("morie.llm.allow_net_probe"))
+}
+
 morie_llm_probe_ollama <- function(timeout = 2) {
   if (!requireNamespace("httr2", quietly = TRUE)) return(FALSE)
+  if (.morie_llm_no_net()) return(FALSE)
   cache <- .morie_llm_cache$ollama_cached
   if (!is.null(cache)) return(cache)
   out <- tryCatch({
@@ -307,6 +317,7 @@ DEFAULT_FREEAPI_MODEL <- "mistral-nemo:custom"
 #' @export
 morie_llm_probe_freeapi <- function(timeout = 4) {
   if (!requireNamespace("httr2", quietly = TRUE)) return(FALSE)
+  if (.morie_llm_no_net()) return(FALSE)
   # An explicit options(morie.llm.freeapi_cached=) override wins over any live
   # probe, so provider detection is deterministic when a caller (or a test)
   # wants it -- no network hit. Without it we fall through to the real probe.
