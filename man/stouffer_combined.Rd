@@ -20,5 +20,16 @@ are supplied; otherwise computes the weighted z-sum inline.
 }
 \examples{
 p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
-stouffer_combined(p)
+
+res <- stouffer_combined(p)
+res$statistic                # combined Z
+res$p_value
+
+# `weights` up-weights more trustworthy / larger studies.
+w <- c(10, 8, 5, 5, 2, 1)
+stouffer_combined(p, weights = w)$p_value
+
+# Compare Fisher (log-based) vs Stouffer (z-based) on the same inputs.
+c(stouffer = stouffer_combined(p)$p_value,
+  fisher   = fisher_combined(p)$p_value)
 }

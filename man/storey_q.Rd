@@ -27,6 +27,18 @@ falls back to an inline Storey-style cutoff so the wrapper keeps
 working on CRAN-only installs.
 }
 \examples{
-p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
-str(storey_q(p), max.level = 1)
+set.seed(1)
+p <- c(runif(80), runif(20, 0, 0.005))
+
+res <- storey_q(p)
+res$pi0                     # estimated proportion of true nulls
+head(res$adjusted)          # q-values
+res$n_rejected
+
+# `lambda_param` tunes the pi0 estimator; different lambda, different pi0.
+storey_q(p, lambda_param = 0.5)$pi0
+storey_q(p, lambda_param = 0.8)$pi0
+
+# Adaptive FDR rejects at least as many as BH (pi0 <= 1 tightens BH):
+c(storey = storey_q(p)$n_rejected, BH = benjamini_hochberg(p)$n_rejected)
 }
