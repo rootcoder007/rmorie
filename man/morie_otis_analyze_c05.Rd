@@ -15,3 +15,7 @@ RichResult with summary + religion-by-region crosstab.
 \description{
 Individuals in RC/seg by religion x region (c05)
 }
+\examples{
+res <- morie_otis_analyze_c05(morie_synth_otis("c05", n = 120L, seed = 1L))
+class(res)
+}

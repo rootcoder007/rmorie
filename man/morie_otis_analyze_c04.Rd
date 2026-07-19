@@ -15,3 +15,7 @@ RichResult with summary + race-by-region crosstab.
 \description{
 Individuals in RC/seg by race x region (c04)
 }
+\examples{
+res <- morie_otis_analyze_c04(morie_synth_otis("c04", n = 120L, seed = 1L))
+class(res)
+}

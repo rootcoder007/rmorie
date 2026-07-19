@@ -15,3 +15,7 @@ RichResult with summary + deaths-by-age crosstab.
 \description{
 Custodial deaths by age category (d05)
 }
+\examples{
+res <- morie_otis_analyze_d05(morie_synth_otis("d05", n = 120L, seed = 1L))
+class(res)
+}

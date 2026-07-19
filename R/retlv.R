@@ -9,6 +9,9 @@
 #' @param x numeric vector of block maxima.
 #' @param return_period numeric T (default 100).
 #' @return list: z, se, return_period, mu, sigma, xi, n, method.
+#' @examples
+#' set.seed(1)
+#' morie_return_level(rexp(200), return_period = 100)
 #' @keywords internal
 #' @export
 retlv <- function(x, return_period = 100) {

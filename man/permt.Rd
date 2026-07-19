@@ -42,4 +42,8 @@ Tests H0: F_x = F_y by Monte-Carlo permutation of pooled samples.
 p-value uses (1 + count of permutation statistics at least T_obs)
 divided by (B+1), per Phipson and Smyth 2010.
 }
+\examples{
+set.seed(1)
+morie_permutation_test_general(rnorm(30), rnorm(30, mean = 0.6), B = 500L)
+}
 \keyword{internal}

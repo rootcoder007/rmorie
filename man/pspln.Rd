@@ -27,4 +27,9 @@ list: coef, fitted, residuals, sse, r2, edf, lambda, n, method.
 min_b ||y - Bb||^2 + lambda b' D' D b, with cubic B-spline basis and
 second-order difference penalty.
 }
+\examples{
+set.seed(1)
+x <- sort(runif(100)); y <- sin(2 * pi * x) + rnorm(100, 0, 0.1)
+morie_penalized_spline(x, y)
+}
 \keyword{internal}

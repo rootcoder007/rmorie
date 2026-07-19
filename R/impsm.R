@@ -7,6 +7,9 @@
 #' @param x numeric draws from q.
 #' @param h,p,q functions; default h(x)=x, p=q=dnorm (sanity-check identity).
 #' @return list: estimate, estimate_sn, se, ess, n, method.
+#' @examples
+#' set.seed(1)
+#' morie_importance_sampling(rnorm(1000))
 #' @keywords internal
 #' @export
 impsm <- function(x, h = NULL, p = NULL, q = NULL) {

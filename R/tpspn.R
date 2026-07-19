@@ -9,6 +9,10 @@
 #' @param y numeric outcome.
 #' @param lam smoothing penalty; 0 = interpolation.
 #' @return list: a, beta, fitted, residuals, sse, r2, lambda, n, d, method.
+#' @examples
+#' set.seed(1)
+#' x <- matrix(runif(60), ncol = 2); y <- rnorm(30)
+#' morie_thin_plate_spline(x, y)
 #' @keywords internal
 #' @export
 tpspn <- function(x, y, lam = 0) {

@@ -15,3 +15,7 @@ RichResult with summary + age-by-gender crosstab.
 \description{
 Individuals by age category x gender (c09)
 }
+\examples{
+res <- morie_otis_analyze_c09(morie_synth_otis("c09", n = 120L, seed = 1L))
+class(res)
+}

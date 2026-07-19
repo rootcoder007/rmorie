@@ -9,6 +9,10 @@
 #' @param sigma kernel bandwidth (default: median heuristic).
 #' @param lam ridge penalty (default 1e-3).
 #' @return list: alpha, fitted, residuals, sigma, lambda, sse, r2, n, method.
+#' @examples
+#' set.seed(1)
+#' x <- sort(runif(80)); y <- sin(2 * pi * x) + rnorm(80, 0, 0.1)
+#' morie_rkhs_kernel_regression(x, y)
 #' @keywords internal
 #' @export
 rkhsc <- function(x, y, sigma = NULL, lam = 1e-3) {

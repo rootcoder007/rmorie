@@ -44,7 +44,7 @@ fix becomes permanent for that cache_dir. Maintainers can submit
 corrections upstream by sharing the resulting CSV file.
 }
 \examples{
-\donttest{
+\dontrun{
 # Writes the correction to a temp cache so the example never
 # touches the per-user cache directory.
 tmp <- tempfile("morie_siu_"); dir.create(tmp, recursive = TRUE)

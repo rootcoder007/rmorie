@@ -15,3 +15,7 @@ RichResult with summary + deaths-by-religion crosstab.
 \description{
 Custodial deaths by religion (d04)
 }
+\examples{
+res <- morie_otis_analyze_d04(morie_synth_otis("d04", n = 120L, seed = 1L))
+class(res)
+}

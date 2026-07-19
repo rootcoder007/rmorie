@@ -15,3 +15,7 @@ RichResult with summary + deaths-by-race crosstab.
 \description{
 Custodial deaths by race (d03)
 }
+\examples{
+res <- morie_otis_analyze_d03(morie_synth_otis("d03", n = 120L, seed = 1L))
+class(res)
+}
