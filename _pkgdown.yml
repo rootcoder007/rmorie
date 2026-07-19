@@ -39,11 +39,97 @@ reference:
   - title: Package overview
     contents:
       - rmorie-package
-  - title: All exported functions
+  - title: Datasets & catalog
+    desc: Discover and load the bundled + fetched public-data catalogue.
     contents:
-      # matches(".") catches every exported topic regardless of keyword.
-      # Topics tagged `@keywords internal` are auto-excluded by pkgdown.
-      # has_keyword("") only matched explicitly-empty-keyword topics, so
-      # 1512 exports without any \keyword line failed the index-coverage
-      # check that pkgdown::build_reference_index() runs.
+      - starts_with("morie_datasets")
+      - starts_with("morie_dataset_")
+      - starts_with("morie_cpads")
+      - starts_with("morie_cache")
+  - title: Data ingestion & fetching
+    desc: Pull tables from open-data portals (CKAN, Socrata, StatCan, CIHI).
+    contents:
+      - starts_with("morie_ingest")
+      - starts_with("morie_fetch")
+  - title: "Causal inference: difference-in-differences"
+    desc: Staggered DiD, event studies, and modern heterogeneity-robust estimators.
+    contents:
+      - starts_with("morie_did")
+  - title: "Causal inference: IV & regression discontinuity"
+    contents:
+      - starts_with("morie_iv")
+      - starts_with("morie_rdd")
+  - title: Matching & weighting
+    desc: Propensity, Mahalanobis, optimal/genetic matching and IPW families.
+    contents:
+      - starts_with("morie_matching")
+      - starts_with("morie_weight")
+  - title: Sensitivity analysis & fairness
+    contents:
+      - starts_with("morie_sensitivity")
+      - starts_with("morie_fairness")
+  - title: Spatial analysis
+    desc: Geostatistics, kriging, autocorrelation, and scan statistics.
+    contents:
+      - starts_with("morie_spatial")
+  - title: Time series
+    contents:
+      - starts_with("morie_ts")
+  - title: Signal processing
+    desc: Spectral analysis, filters, and biomedical-signal routines.
+    contents:
+      - starts_with("morie_dsp")
+      - starts_with("morie_rangayyan")
+  - title: Survival analysis
+    contents:
+      - starts_with("morie_survival")
+      - starts_with("morie_kosorok")
+  - title: Bayesian methods & distributions
+    contents:
+      - starts_with("morie_bayes")
+      - starts_with("morie_ghosal")
+      - starts_with("morie_dist")
+  - title: Machine learning
+    contents:
+      - starts_with("morie_ml")
+  - title: Survey methods
+    contents:
+      - starts_with("morie_survey")
+  - title: Causal DAGs
+    desc: DAG construction, backdoor identification, estimation, and refutation.
+    contents:
+      - starts_with("morie_dag")
+  - title: "Applied study: OTIS (Ontario carceral data)"
+    contents:
+      - starts_with("morie_otis")
+  - title: "Applied study: TPS (Toronto Police Service)"
+    contents:
+      - starts_with("morie_tps")
+  - title: "Applied study: SIU (Special Investigations Unit audit)"
+    contents:
+      - starts_with("morie_siu")
+  - title: "Applied study: ARSAU"
+    contents:
+      - starts_with("morie_arsau")
+  - title: Specialized & method-family routines
+    contents:
+      - starts_with("morie_taphonomy")
+      - starts_with("morie_entheo")
+      - starts_with("morie_tox")
+      - starts_with("morie_fauzi")
+      - starts_with("morie_horowitz")
+      - starts_with("morie_psymet")
+  - title: Cryptography
+    desc: Post-quantum KEM/DEM, hashing, and symmetric primitives.
+    contents:
+      - starts_with("morie_crypto")
+  - title: LLM agent & CLI
+    contents:
+      - starts_with("morie_llm")
+      - starts_with("morie_run")
+  - title: All exported functions (A–Z)
+    desc: >
+      The complete index. Every exported function also appears in a themed
+      section above; this A–Z listing is the exhaustive reference.
+    contents:
       - matches(".")
