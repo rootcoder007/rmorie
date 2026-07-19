@@ -9,7 +9,6 @@ set.seed(1)
     Sys.unsetenv(v)
   }
   options(morie.llm.ollama_cached = NULL)
-  options(morie.llm.freeapi_cached = NULL)
 }
 
 test_that("env helper returns trimmed value or default", {
@@ -48,8 +47,7 @@ test_that("detect_provider returns 'local' with no providers configured", {
   set.seed(1)
   .clean_llm_env()
   options(morie.llm.ollama_cached = FALSE)
-  options(morie.llm.freeapi_cached = FALSE)
-  on.exit({ options(morie.llm.ollama_cached = NULL); options(morie.llm.freeapi_cached = NULL) })
+  on.exit({ options(morie.llm.ollama_cached = NULL) })
   expect_equal(morie_llm_detect_provider(), "local")
 })
 
@@ -57,10 +55,9 @@ test_that("detect_provider picks gemini when key set", {
   set.seed(1)
   .clean_llm_env()
   options(morie.llm.ollama_cached = FALSE)
-  options(morie.llm.freeapi_cached = FALSE)
   Sys.setenv(GEMINI_API_KEY = "k")
   on.exit({
-    options(morie.llm.ollama_cached = NULL); options(morie.llm.freeapi_cached = NULL)
+    options(morie.llm.ollama_cached = NULL)
     Sys.unsetenv("GEMINI_API_KEY")
   })
   expect_equal(morie_llm_detect_provider(), "gemini")
@@ -95,8 +92,7 @@ test_that("ask returns local-fallback when provider=local", {
   set.seed(1)
   .clean_llm_env()
   options(morie.llm.ollama_cached = FALSE)
-  options(morie.llm.freeapi_cached = FALSE)
-  on.exit({ options(morie.llm.ollama_cached = NULL); options(morie.llm.freeapi_cached = NULL) })
+  on.exit({ options(morie.llm.ollama_cached = NULL) })
   out <- morie_llm_ask("question?")
   expect_type(out, "character")
   expect_match(out, "local")
@@ -106,8 +102,7 @@ test_that("agent_available reflects detect_provider", {
   set.seed(1)
   .clean_llm_env()
   options(morie.llm.ollama_cached = FALSE)
-  options(morie.llm.freeapi_cached = FALSE)
-  on.exit({ options(morie.llm.ollama_cached = NULL); options(morie.llm.freeapi_cached = NULL) })
+  on.exit({ options(morie.llm.ollama_cached = NULL) })
   expect_false(morie_llm_agent_available())
 })
 
@@ -127,22 +122,6 @@ test_that("strip_think removes <think> blocks", {
   set.seed(1)
   out <- rmorie:::.morie_llm_strip_think("hi  <think>secret</think>  bye")
   expect_type(out, "character")
-})
-
-test_that("freeapi_model honours moriefam env", {
-  set.seed(1)
-  .clean_llm_env()
-  Sys.setenv(moriefam = "myfree:model")
-  on.exit(Sys.unsetenv("moriefam"))
-  expect_equal(rmorie:::.morie_llm_freeapi_model(), "myfree:model")
-})
-
-test_that("probe_freeapi cached FALSE returns FALSE", {
-  set.seed(1)
-  .clean_llm_env()
-  options(morie.llm.freeapi_cached = FALSE)
-  on.exit(options(morie.llm.freeapi_cached = NULL))
-  expect_false(morie_llm_probe_freeapi())
 })
 
 test_that("request_completion errors without httr2/jsonlite", {
@@ -175,24 +154,11 @@ test_that("ask_multi falls back to local with no providers", {
   set.seed(1)
   .clean_llm_env()
   options(morie.llm.ollama_cached = FALSE)
-  options(morie.llm.freeapi_cached = FALSE)
-  on.exit({ options(morie.llm.ollama_cached = NULL); options(morie.llm.freeapi_cached = NULL) })
+  on.exit({ options(morie.llm.ollama_cached = NULL) })
   msgs <- list(list(role = "user", content = "hello"))
   out <- morie_llm_ask_multi(msgs)
   expect_type(out, "character")
   expect_match(out, "local")
-})
-
-test_that("list_freeapi_models routes through http helper (mocked)", {
-  set.seed(1)
-  testthat::local_mocked_bindings(
-    .morie_dataset_http_json = function(...) {
-      list(data = list(list(id = "mock-model")))
-    },
-    .package = "rmorie"
-  )
-  res <- tryCatch(morie_llm_list_freeapi_models(), error = function(e) e)
-  expect_true(is.data.frame(res) || is.list(res) || inherits(res, "error"))
 })
 
 test_that("ask_multi rejects non-list messages", {
