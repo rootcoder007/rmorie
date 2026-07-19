@@ -111,40 +111,6 @@ test_that("agent_available reflects detect_provider", {
   expect_false(morie_llm_agent_available())
 })
 
-test_that("messages_to_prompt concatenates role labels", {
-  set.seed(1)
-  msgs <- list(
-    list(role = "system", content = "rules"),
-    list(role = "user", content = "q"),
-    list(role = "assistant", content = "a")
-  )
-  out <- rmorie:::.morie_llm_messages_to_prompt(msgs)
-  expect_match(out, "System")
-  expect_match(out, "Assistant")
-})
-
-test_that("strip_think removes <think> blocks", {
-  set.seed(1)
-  out <- rmorie:::.morie_llm_strip_think("hi  <think>secret</think>  bye")
-  expect_type(out, "character")
-})
-
-test_that("freeapi_model honours moriefam env", {
-  set.seed(1)
-  .clean_llm_env()
-  Sys.setenv(moriefam = "myfree:model")
-  on.exit(Sys.unsetenv("moriefam"))
-  expect_equal(rmorie:::.morie_llm_freeapi_model(), "myfree:model")
-})
-
-test_that("probe_freeapi cached FALSE returns FALSE", {
-  set.seed(1)
-  .clean_llm_env()
-  options(morie.llm.freeapi_cached = FALSE)
-  on.exit(options(morie.llm.freeapi_cached = NULL))
-  expect_false(morie_llm_probe_freeapi())
-})
-
 test_that("request_completion errors without httr2/jsonlite", {
   testthat::local_mocked_bindings(
     requireNamespace = function(package, ...) {
@@ -183,19 +149,27 @@ test_that("ask_multi falls back to local with no providers", {
   expect_match(out, "local")
 })
 
-test_that("list_freeapi_models routes through http helper (mocked)", {
-  set.seed(1)
-  testthat::local_mocked_bindings(
-    .morie_dataset_http_json = function(...) {
-      list(data = list(list(id = "mock-model")))
-    },
-    .package = "rmorie"
-  )
-  res <- tryCatch(morie_llm_list_freeapi_models(), error = function(e) e)
-  expect_true(is.data.frame(res) || is.list(res) || inherits(res, "error"))
-})
-
 test_that("ask_multi rejects non-list messages", {
   set.seed(1)
   expect_error(morie_llm_ask_multi("notalist"))
+})
+test_that("ollama default model honours OLLAMA_MODEL", {
+  old <- Sys.getenv("OLLAMA_MODEL", unset = NA)
+  Sys.setenv(OLLAMA_MODEL = "my-model:7b")
+  on.exit(if (is.na(old)) Sys.unsetenv("OLLAMA_MODEL") else
+            Sys.setenv(OLLAMA_MODEL = old))
+  expect_equal(rmorie:::.morie_llm_ollama_default_model(), "my-model:7b")
+})
+
+test_that("ollama_models returns a typed empty data.frame when unreachable", {
+  # Connectivity test that never errors: an unroutable port yields 0 rows,
+  # so callers can probe a server without try()/tryCatch scaffolding.
+  old <- Sys.getenv("OLLAMA_MODEL", unset = NA)
+  Sys.unsetenv("OLLAMA_MODEL")
+  on.exit(if (!is.na(old)) Sys.setenv(OLLAMA_MODEL = old))
+  res <- morie_llm_ollama_models(base = "http://127.0.0.1:1", timeout = 1)
+  expect_s3_class(res, "data.frame")
+  expect_identical(names(res),
+                   c("name", "size_gb", "family", "parameter_size", "quantization"))
+  expect_equal(nrow(res), 0L)
 })

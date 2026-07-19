@@ -9,8 +9,11 @@
 #   4. Official OpenAI API
 #   5. Local fallback help text (no network)
 #
-# OllamaFreeAPI (Python SDK) is intentionally NOT ported -- R has no
-# equivalent client. HTTP providers use `httr2` + `jsonlite`. All
+# OllamaFreeAPI is intentionally NOT supported -- the community server
+# registry it depended on was chronically down (1/59 hosts live, default
+# model served nowhere) and its parallel network probe hung R CMD check
+# examples on CI runners, so the whole provider was removed 2026-07.
+# HTTP providers use `httr2` + `jsonlite`. All
 # public functions are prefixed `morie_llm_*` and exported. Streaming
 # is not supported in this R port (always returns the full string).
 
@@ -35,9 +38,95 @@ GEMINI_BASE_URL <- "https://generativelanguage.googleapis.com/v1beta/openai"
   if (nzchar(v)) v else default
 }
 #' Internal helper: Morie Llm Ollama Base
+#'
+#' The Ollama endpoint. Point \code{OLLAMA_HOST} (or \code{OLLAMA_BASE_URL})
+#' at ANY reachable Ollama-compatible server: a local daemon
+#' (\code{http://localhost:11434}), a box on your network, or a remote /
+#' Cloudflare-tunnelled gateway (e.g. a shared team server). No model is
+#' bundled or assumed -- you bring your own.
 #' @noRd
 .morie_llm_ollama_base <- function() {
+  host <- .morie_llm_env("OLLAMA_HOST")
+  if (nzchar(host)) {
+    if (!grepl("^https?://", host)) host <- paste0("http://", host)
+    return(sub("/+$", "", host))
+  }
   sub("/+$", "", .morie_llm_env("OLLAMA_BASE_URL", DEFAULT_OLLAMA_BASE_URL))
+}
+
+#' List the models an Ollama server is serving
+#'
+#' Connects to an Ollama server over its REST API (\code{GET /api/tags}) and
+#' returns the models it has available. Use it to confirm rmorie can reach
+#' your Ollama instance and to see the exact model names you can pass as the
+#' \code{model} argument or via the \code{OLLAMA_MODEL} environment variable
+#' -- rmorie bundles no model and assumes none, so you bring your own.
+#'
+#' Point \code{OLLAMA_HOST} (or \code{OLLAMA_BASE_URL}) at ANY reachable
+#' Ollama-compatible server: a local daemon (\code{http://localhost:11434},
+#' the default), a machine on your network, or a remote / Cloudflare-tunnelled
+#' gateway. A local daemon needs no key; set \code{OLLAMA_API_KEY} for gateways
+#' that require a bearer token.
+#'
+#' @param base Ollama base URL. Defaults to \code{OLLAMA_HOST} /
+#'   \code{OLLAMA_BASE_URL}, else \code{http://localhost:11434}.
+#' @param timeout Request timeout in seconds. Default 5.
+#' @return A \code{data.frame}, one row per model, with columns \code{name},
+#'   \code{size_gb}, \code{family}, \code{parameter_size} and
+#'   \code{quantization}. Zero rows when the server is unreachable or serves
+#'   no models (never errors), so it doubles as a connectivity test.
+#' @examples
+#' \dontrun{
+#' # Point at your own Ollama server, then see what it serves:
+#' Sys.setenv(OLLAMA_HOST = "http://localhost:11434")
+#' models <- morie_llm_ollama_models()
+#' models$name
+#' }
+#' @export
+morie_llm_ollama_models <- function(base = .morie_llm_ollama_base(),
+                                    timeout = 5) {
+  empty <- data.frame(name = character(), size_gb = numeric(),
+                      family = character(), parameter_size = character(),
+                      quantization = character(), stringsAsFactors = FALSE)
+  if (!requireNamespace("httr2", quietly = TRUE)) return(empty)
+  models <- tryCatch({
+    req <- httr2::req_timeout(httr2::request(paste0(base, "/api/tags")), timeout)
+    key <- .morie_llm_env("OLLAMA_API_KEY")
+    if (nzchar(key)) req <- httr2::req_headers(req,
+                                               Authorization = paste("Bearer", key))
+    body <- .morie_from_json(httr2::resp_body_string(httr2::req_perform(req)),
+                             simplifyVector = FALSE)
+    body$models %||% list()
+  }, error = function(e) list())
+  if (!length(models)) return(empty)
+  det <- function(m, k) as.character((m$details %||% list())[[k]] %||% NA)
+  data.frame(
+    name           = vapply(models, function(m)
+      as.character(m$name %||% m$model %||% NA), ""),
+    size_gb        = vapply(models, function(m)
+      round(as.numeric(m$size %||% NA_real_) / 1e9, 2), numeric(1)),
+    family         = vapply(models, det, "", k = "family"),
+    parameter_size = vapply(models, det, "", k = "parameter_size"),
+    quantization   = vapply(models, det, "", k = "quantization_level"),
+    stringsAsFactors = FALSE)
+}
+
+#' Internal helper: resolve the Ollama model to use.
+#'
+#' No hardcoded model name -- models are pulled per-machine and upstream tags
+#' get retired (llama3.2, gemma3), so an assumed default errors on most
+#' servers. Resolution order: (1) \code{OLLAMA_MODEL} if the user named one;
+#' (2) otherwise ask the server what it actually serves and use the first
+#' model. Returns \code{NA_character_} when neither is available so callers
+#' can raise a clear "pull a model or set OLLAMA_MODEL" error.
+#' @noRd
+.morie_llm_ollama_default_model <- function(base = .morie_llm_ollama_base()) {
+  env <- .morie_llm_env("OLLAMA_MODEL")
+  if (nzchar(env)) return(env)
+  if (.morie_llm_no_net()) return(NA_character_)
+  m <- morie_llm_ollama_models(base)
+  if (nrow(m) && !is.na(m$name[1L]) && nzchar(m$name[1L])) m$name[1L]
+  else NA_character_
 }
 #' Internal helper: Morie Llm Gemini Key
 #' @noRd
@@ -59,6 +148,16 @@ if (nzchar(v)) v else NULL }
 #' @noRd
 .morie_llm_gemini_model <- function() .morie_llm_env("GEMINI_MODEL", DEFAULT_GEMINI_MODEL)
 
+# TRUE when live-network probes must be suppressed: under R CMD check /
+# examples / covr the result must be deterministic and must never hang on a
+# dead-but-open host. A caller (or a test) can force a real probe with
+# options(morie.llm.allow_net_probe = TRUE).
+#' @noRd
+.morie_llm_no_net <- function() {
+  nzchar(Sys.getenv("_R_CHECK_PACKAGE_NAME_")) &&
+    !isTRUE(getOption("morie.llm.allow_net_probe"))
+}
+
 #' Probe a local Ollama instance
 #' @param timeout Probe timeout in seconds.
 #' @return Logical scalar -- TRUE when reachable.
@@ -67,15 +166,6 @@ if (nzchar(v)) v else NULL }
 #' morie_llm_probe_ollama()
 #' options(morie.llm.ollama_cached = NULL)
 #' @export
-# TRUE when live-network probes must be suppressed: under R CMD check /
-# examples / covr the result must be deterministic and must never hang on a
-# dead-but-open host. A caller (or a test) can force a real probe with
-# options(morie.llm.allow_net_probe = TRUE).
-.morie_llm_no_net <- function() {
-  nzchar(Sys.getenv("_R_CHECK_PACKAGE_NAME_")) &&
-    !isTRUE(getOption("morie.llm.allow_net_probe"))
-}
-
 morie_llm_probe_ollama <- function(timeout = 2) {
   if (!requireNamespace("httr2", quietly = TRUE)) return(FALSE)
   if (.morie_llm_no_net()) return(FALSE)
@@ -94,9 +184,9 @@ morie_llm_probe_ollama <- function(timeout = 2) {
 #' Detect the active LLM provider
 #' @return Character scalar provider key: ollama / gemini / api / openai / local.
 #' @examples
-#' options(morie.llm.ollama_cached = FALSE, morie.llm.freeapi_cached = FALSE)
+#' options(morie.llm.ollama_cached = FALSE)
 #' morie_llm_detect_provider()
-#' options(morie.llm.ollama_cached = NULL, morie.llm.freeapi_cached = NULL)
+#' options(morie.llm.ollama_cached = NULL)
 #' @export
 morie_llm_detect_provider <- function() {
   if (morie_llm_probe_ollama())                                 return("ollama")
@@ -151,7 +241,8 @@ morie_llm_detect_provider <- function() {
 #' @examples
 #' \dontrun{
 #' msgs <- list(list(role = "user", content = "Say hello"))
-#' res <- try(morie_llm_request_completion("http://localhost:11434", "llama3.2", msgs))
+#' # Second arg is whatever model your Ollama server serves (see `ollama list`).
+#' res <- try(morie_llm_request_completion("http://localhost:11434", "your-model", msgs))
 #' }
 #' @export
 morie_llm_request_completion <- function(base_url, model, messages,
@@ -227,10 +318,10 @@ morie_llm_request_completion <- function(base_url, model, messages,
 #'   providers fail.
 #' @examples
 #' \dontrun{
-#' options(morie.llm.ollama_cached = FALSE, morie.llm.freeapi_cached = FALSE)
+#' options(morie.llm.ollama_cached = FALSE)
 #' out <- try(morie_llm_ask("In one word, what is 2 + 2?"))
 #' print(out)
-#' options(morie.llm.ollama_cached = NULL, morie.llm.freeapi_cached = NULL)
+#' options(morie.llm.ollama_cached = NULL)
 #' }
 #' @export
 morie_llm_ask <- function(prompt, context = NULL, model = NULL,
@@ -245,7 +336,7 @@ morie_llm_ask <- function(prompt, context = NULL, model = NULL,
   add <- function(base, mdl, key) attempts[[length(attempts) + 1L]] <<-
     list(base = base, model = mdl, key = key)
   if (provider == "ollama") {
-    add(.morie_llm_ollama_base(), model %||% "llama3", NULL)
+    add(.morie_llm_ollama_base(), model %||% .morie_llm_ollama_default_model(), NULL)
   }
   if (provider %in% c("ollama", "gemini") && !is.null(.morie_llm_gemini_key())) {
     add(GEMINI_BASE_URL, model %||% .morie_llm_gemini_model(),
@@ -275,199 +366,15 @@ morie_llm_ask <- function(prompt, context = NULL, model = NULL,
 #' Return TRUE when at least one live LLM provider is available
 #' @return Logical scalar.
 #' @examples
-#' options(morie.llm.ollama_cached = FALSE, morie.llm.freeapi_cached = FALSE)
+#' options(morie.llm.ollama_cached = FALSE)
 #' morie_llm_agent_available()
-#' options(morie.llm.ollama_cached = NULL, morie.llm.freeapi_cached = NULL)
+#' options(morie.llm.ollama_cached = NULL)
 #' @export
 morie_llm_agent_available <- function() {
   morie_llm_detect_provider() != "local"
 }
 
 
-# --- APPENDED 2026-05-22 -----------------------------------------------------
-# FreeAPI / multi-provider additions.  Mirrors src/morie/llm.py
-# Adds _probe_freeapi / list_freeapi_models / ask_multi to the R surface and
-# inserts FreeAPI in position 2 of the provider chain (between ollama and
-# gemini), matching the Python provider priority.
-# ----------------------------------------------------------------------------
-
-DEFAULT_FREEAPI_MODEL <- "mistral-nemo:custom"
-
-#' Internal helper: Morie Llm Freeapi Model
-#' @noRd
-.morie_llm_freeapi_model <- function() {
-  v <- trimws(Sys.getenv("moriefam", unset = ""))
-  if (nzchar(v)) v else DEFAULT_FREEAPI_MODEL
-}
-
-#' Probe an OllamaFreeAPI community server
-#'
-#' R port of the Python ``_probe_freeapi`` helper.  Returns ``TRUE`` when at
-#' least one free remote model is reachable.  The result is cached in
-#' ``options(morie.llm.freeapi_cached)`` for the process lifetime.  A single
-#' one-second retry is performed because community servers can be slow.
-#'
-#' @param timeout Probe timeout in seconds.  Default 4.
-#' @return Logical scalar.
-#' @examples
-#' \dontrun{
-#' # Probes the community-server directory over the network.
-#' morie_llm_probe_freeapi()
-#' }
-#' @export
-morie_llm_probe_freeapi <- function(timeout = 4) {
-  if (!requireNamespace("httr2", quietly = TRUE)) return(FALSE)
-  if (.morie_llm_no_net()) return(FALSE)
-  # An explicit options(morie.llm.freeapi_cached=) override wins over any live
-  # probe, so provider detection is deterministic when a caller (or a test)
-  # wants it -- no network hit. Without it we fall through to the real probe.
-  opt <- getOption("morie.llm.freeapi_cached", NULL)
-  if (!is.null(opt)) return(isTRUE(opt))
-  cache <- .morie_llm_cache$freeapi_cached
-  if (!is.null(cache)) return(cache)
-  # The old single hard-coded endpoint (ollamafreeapi.duckdns.org) is defunct.
-  # Probe the community-server *directory* instead (same source siu.R uses):
-  # parallel /api/tags across every published host; alive if any responds.
-  out <- tryCatch({
-    servers <- .siu_ollamafree_servers()
-    hosts <- unique(vapply(servers, `[[`, "", "url"))
-    if (!length(hosts)) return(FALSE)
-    reqs <- lapply(hosts, function(u) {
-      r <- httr2::request(paste0(u, "/api/tags"))
-      r <- httr2::req_timeout(r, timeout)
-      httr2::req_options(r, connecttimeout = timeout)
-    })
-    resps <- tryCatch(
-      httr2::req_perform_parallel(reqs, on_error = "continue", progress = FALSE),
-      error = function(e) list())
-    any(vapply(resps, function(rp) {
-      tryCatch(!is.null(rp) && httr2::resp_status(rp) < 400,
-               error = function(e) FALSE)
-    }, logical(1)))
-  }, error = function(e) FALSE)
-  out <- isTRUE(out)
-  .morie_llm_cache$freeapi_cached <- out
-  out
-}
-
-#' List vendored OllamaFreeAPI model catalogue
-#'
-#' R port of ``list_freeapi_models``.  Walks any JSON files in
-#' ``inst/ollama_json/`` (mirroring the Python ``morie/ollama_json/``
-#' vendoring) and emits a data.frame with one row per unique model.  When the
-#' catalogue directory is absent (R-only install), a single fallback row for
-#' the default model is returned so downstream callers always get a usable
-#' table.
-#'
-#' @return data.frame with columns model / family / size / label / alias.
-#' @examples
-#' models <- morie_llm_list_freeapi_models()
-#' head(models)
-#' @export
-morie_llm_list_freeapi_models <- function() {
-  json_dir <- system.file("ollama_json", package = "rmorie")
-  rows <- list()
-  seen <- character(0)
-  if (nzchar(json_dir) && dir.exists(json_dir) &&
-      requireNamespace("jsonlite", quietly = TRUE)) {
-    for (jf in sort(list.files(json_dir, pattern = "\\\\.json$",
-                               full.names = TRUE))) {
-      data <- tryCatch(.morie_from_json(jf, simplifyVector = FALSE),
-                       error = function(e) NULL)
-      models <- tryCatch(data$props$pageProps$models, error = function(e) NULL)
-      if (is.null(models)) next
-      for (m in models) {
-        name <- if (!is.null(m$model_name)) m$model_name else m$model
-        if (is.null(name) || !nzchar(name) || name %in% seen) next
-        seen <- c(seen, name)
-        family <- as.character(m$family %||% "")
-        size   <- as.character(m$parameter_size %||% "")
-        label  <- if (nzchar(family) && nzchar(size)) {
-          paste0(toupper(substr(family, 1, 1)), substring(family, 2),
-                 ":", tolower(size))
-        } else name
-        rows[[length(rows) + 1L]] <-
-          data.frame(model = name, family = family, size = size,
-                     label = label, alias = "", stringsAsFactors = FALSE)
-      }
-    }
-  }
-  if (length(rows) == 0L) {
-    return(data.frame(model = DEFAULT_FREEAPI_MODEL,
-                      family = "mistral", size = "nemo",
-                      label = "Mistral:nemo", alias = "mn",
-                      stringsAsFactors = FALSE))
-  }
-  df <- do.call(rbind, rows)
-  # Two-letter alias assignment (mirrors the Python alias loop).
-  used <- character(0)
-  alias <- character(nrow(df))
-  for (i in seq_len(nrow(df))) {
-    base <- sub(".*/", "", sub(":.*", "", df$model[i]))
-    fam  <- if (nzchar(df$family[i])) df$family[i] else base
-    cand <- tolower(paste0(substr(base, 1, 1), substr(fam, 1, 1)))
-    if (cand %in% used) cand <- tolower(substr(base, 1, 2))
-    if (cand %in% used) {
-      digit <- gsub("[^0-9]", "", df$size[i])
-      digit <- if (nzchar(digit)) substr(digit, 1, 1) else "x"
-      cand <- tolower(paste0(substr(base, 1, 1), digit))
-    }
-    if (cand %in% used) cand <- tolower(substr(base, 1, 3))
-    used <- c(used, cand)
-    alias[i] <- cand
-  }
-  df$alias <- alias
-  df
-}
-
-# --- Provider chain: re-define detect_provider to inject FreeAPI in slot 2 ---
-# We deliberately overwrite the earlier morie_llm_detect_provider() so the
-# ordering matches Python: ollama -> freeapi -> gemini -> api -> openai -> local.
-
-morie_llm_detect_provider <- function() {
-  if (morie_llm_probe_ollama())                  return("ollama")
-  if (morie_llm_probe_freeapi())                 return("freeapi")
-  if (!is.null(.morie_llm_gemini_key()))         return("gemini")
-  if (!is.null(.morie_llm_api_base()) &&
-      !is.null(.morie_llm_api_key()))            return("api")
-  if (!is.null(.morie_llm_openai_key()))         return("openai")
-  "local"
-}
-
-#' Internal helper: Morie Llm Messages To Prompt
-#' @noRd
-.morie_llm_messages_to_prompt <- function(messages) {
-  parts <- vapply(messages, function(m) {
-    role <- m$role %||% "user"
-    content <- m$content %||% ""
-    if (identical(role, "system"))    paste0("[System: ", content, "]")
-    else if (identical(role, "assistant")) paste0("Assistant: ", content)
-    else                              content
-  }, character(1))
-  paste(parts, collapse = "\
-\
-")
-}
-
-#' Internal helper: Morie Llm Strip Think
-#' @noRd
-.morie_llm_strip_think <- function(text) {
-  trimws(gsub("(?s)<think>.*?</think>\\s*", "", text, perl = TRUE))
-}
-
-# Non-streaming FreeAPI completion. The old duckdns single-endpoint is
-# defunct, so we delegate to the community-server *directory* + per-server
-# failover implemented in siu.R (fetches the published server list, probes
-# /api/tags, generates on the first live box, retrying down the list).
-#' Internal helper: Morie Llm Freeapi Completion
-#' @noRd
-.morie_llm_freeapi_completion <- function(messages, model = NULL, timeout = 180) {
-  prompt <- .morie_llm_messages_to_prompt(messages)
-  out <- tryCatch(
-    .siu_llm_call_ollamafree(prompt, timeout_s = timeout),
-    error = function(e) "")
-  .morie_llm_strip_think(out %||% "")
-}
 
 #' Ask the best available LLM provider, accepting a multi-turn messages list
 #'
@@ -477,7 +384,7 @@ morie_llm_detect_provider <- function() {
 #' port -- this always returns a single character scalar.
 #'
 #' Provider fall-through order mirrors :func:`morie_llm_detect_provider`:
-#' ollama -> freeapi -> gemini -> api -> openai -> local.
+#' ollama -> gemini -> api -> openai -> local.
 #'
 #' @param messages list of role/content lists.
 #' @param providers Optional character vector forcing a specific provider
@@ -488,11 +395,11 @@ morie_llm_detect_provider <- function() {
 #' @return Character scalar response text.
 #' @examples
 #' \dontrun{
-#' options(morie.llm.ollama_cached = FALSE, morie.llm.freeapi_cached = FALSE)
+#' options(morie.llm.ollama_cached = FALSE)
 #' msgs <- list(list(role = "user", content = "hello"))
 #' out <- try(morie_llm_ask_multi(msgs))
 #' print(out)
-#' options(morie.llm.ollama_cached = NULL, morie.llm.freeapi_cached = NULL)
+#' options(morie.llm.ollama_cached = NULL)
 #' }
 #' @export
 morie_llm_ask_multi <- function(messages, providers = NULL,
@@ -502,7 +409,7 @@ morie_llm_ask_multi <- function(messages, providers = NULL,
   if (is.null(providers)) {
     detected <- morie_llm_detect_provider()
     providers <- unique(c(detected,
-                          "ollama", "freeapi", "gemini",
+                          "ollama", "gemini",
                           "api", "openai", "local"))
   }
 
@@ -515,15 +422,10 @@ morie_llm_ask_multi <- function(messages, providers = NULL,
     if (identical(prov, "local")) {
       return(.morie_llm_local_fallback(fallback_prompt()))
     }
-    if (identical(prov, "freeapi")) {
-      out <- .morie_llm_freeapi_completion(messages, model = model,
-                                           timeout = timeout)
-      if (nzchar(out)) return(out)
-      next
-    }
     # HTTP-OpenAI-compatible providers
     cfg <- switch(prov,
-      ollama = list(base = .morie_llm_ollama_base(), mdl = model %||% "llama3",
+      ollama = list(base = .morie_llm_ollama_base(),
+                    mdl = model %||% .morie_llm_ollama_default_model(),
                     key = NULL),
       gemini = if (!is.null(.morie_llm_gemini_key()))
                  list(base = GEMINI_BASE_URL,

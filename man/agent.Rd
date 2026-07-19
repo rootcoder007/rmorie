@@ -10,8 +10,8 @@ agent(task, model = NULL, backend = "auto", dry_run = FALSE)
 \item{task}{Character scalar. The task/prompt for the agent.}
 
 \item{model}{Optional model id, e.g. \code{"claude-sonnet-5"},
-\code{"gpt-4o"}, \code{"gemini-2.5-flash"}, or an Ollama tag such as
-\code{"llama3.2"}. Defaults to the CLI's default model.}
+\code{"gpt-4o"}, \code{"gemini-2.5-flash"}, or any tag your Ollama
+server serves. Defaults to the CLI's default model.}
 
 \item{backend}{Optional backend: \code{"auto"} (route on the model id),
 \code{"anthropic"}, \code{"openai"}, \code{"gemini"}, or \code{"ollama"}.}

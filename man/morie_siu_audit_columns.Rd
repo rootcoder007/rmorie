@@ -24,7 +24,7 @@ wins. The default \code{c("ollama", "gemini")} tries the local
 free model first and only escalates to paid Gemini if Ollama
 isn't installed or fails -- so morie costs $0 to use as long
 as you have a free Gemma / Qwen / Llama running locally
-(e.g. \code{ollama pull gemma3:4b}).}
+(e.g. \code{ollama pull <model>}).}
 
 \item{cache_dir}{Directory holding the harvester's SIU.csv and
 the optional \code{html/} subdirectory.}
@@ -73,7 +73,7 @@ model on quota / network errors.
 \dontrun{
 Sys.setenv(
   OLLAMA_HOST = "http://localhost:11434",
-  OLLAMA_MODEL = "gemma3:4b"
+  OLLAMA_MODEL = "<your-model>"
 )
 csv <- morie_fetch_siu(cache_html = TRUE)
 df <- utils::read.csv(csv, colClasses = "character")
