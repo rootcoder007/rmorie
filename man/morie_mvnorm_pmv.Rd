@@ -33,7 +33,7 @@ multivariate normal CDF over a hyper-rectangle
 \eqn{[lower, upper]}.
 }
 \examples{
-\dontrun{
+\donttest{
   if (requireNamespace("mvtnorm", quietly = TRUE)) {
     set.seed(1)
     S <- matrix(c(1, 0.4, 0.4, 1), 2, 2)

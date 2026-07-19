@@ -317,7 +317,7 @@ morie_llm_request_completion <- function(base_url, model, messages,
 #' @return Character scalar response text, or local-fallback text when all
 #'   providers fail.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' options(morie.llm.ollama_cached = FALSE)
 #' out <- try(morie_llm_ask("In one word, what is 2 + 2?"))
 #' print(out)
@@ -394,7 +394,7 @@ morie_llm_agent_available <- function() {
 #' @param timeout HTTP timeout in seconds.
 #' @return Character scalar response text.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' options(morie.llm.ollama_cached = FALSE)
 #' msgs <- list(list(role = "user", content = "hello"))
 #' out <- try(morie_llm_ask_multi(msgs))

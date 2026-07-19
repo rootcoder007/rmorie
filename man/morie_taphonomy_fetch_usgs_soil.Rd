@@ -44,7 +44,7 @@ reused unless \code{refresh = TRUE}. Network + size mean this never runs in
 examples/tests.
 }
 \examples{
-\dontrun{
+\donttest{
 # ~54 MB download:
 # soil <- morie_taphonomy_fetch_usgs_soil(nrows = 500)
 }

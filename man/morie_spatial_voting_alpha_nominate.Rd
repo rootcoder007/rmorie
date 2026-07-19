@@ -33,7 +33,7 @@ utility, sampled via slice sampling (Neal 2003).  Porting the slice
 sampler is beyond this session's budget.
 }
 \examples{
-\dontrun{morie_spatial_voting_alpha_nominate(matrix(0, 5, 5))}
+\donttest{morie_spatial_voting_alpha_nominate(matrix(0, 5, 5))}
 }
 \references{
 Carroll, R., Lewis, J. B., Lo, J., Poole, K. T., and

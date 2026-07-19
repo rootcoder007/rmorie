@@ -249,7 +249,7 @@ morie_install_extras <- function(which = "missing",
 #'   otherwise.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   # Interactive (RStudio / R console): prompts to install if needed
 #'   morie_ensure_extras(c("DoubleML", "ranger"))
 #'

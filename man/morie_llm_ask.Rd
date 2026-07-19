@@ -37,7 +37,7 @@ HTTP/timeout failure falls through to the next, and finally to a
 static local help string.
 }
 \examples{
-\dontrun{
+\donttest{
 options(morie.llm.ollama_cached = FALSE)
 out <- try(morie_llm_ask("In one word, what is 2 + 2?"))
 print(out)

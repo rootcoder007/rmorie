@@ -1278,7 +1278,7 @@ morie_taphonomy_ilr <- function(x, pseudocount = 1e-6) {
 #' @source \url{https://mrdata.usgs.gov/ngdb/soil/}
 #' @seealso \code{\link{morie_taphonomy_clr}}, \code{\link{morie_taphonomy_ilr}}
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # ~54 MB download:
 #' # soil <- morie_taphonomy_fetch_usgs_soil(nrows = 500)
 #' }
@@ -1427,7 +1427,7 @@ morie_taphonomy_pmi_schema <- function() {
 #'   \url{https://github.com/Imageomics/pyMorphoSource}.
 #' @seealso \code{\link{morie_taphonomy_morphosource_fetch}}
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # res <- morie_taphonomy_morphosource_search("Homo sapiens cranium")
 #' }
 #' @export
@@ -1486,7 +1486,7 @@ morie_taphonomy_morphosource_search <- function(query = NULL,
 #' @source \url{https://www.morphosource.org}
 #' @seealso \code{\link{morie_taphonomy_morphosource_search}}
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # morie_taphonomy_morphosource_fetch(
 #' #   media_id = 000000, use_statement = "Non-commercial taphonomy research")
 #' }

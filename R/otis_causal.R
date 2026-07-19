@@ -829,7 +829,7 @@ morie_otis_make_pair_alert_to_volatility_ruhela <- function(df) {
 #'   c("Gender", "Age_Category", "EndFiscalYear").
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   df <- morie_otis_load()
 #'   morie_otis_make_pair_alert_to_volatility_naive(df)
 #' }
@@ -908,7 +908,7 @@ morie_otis_make_pair_alert_to_volatility_all <- function(df) {
 #'   \code{morie_otis_make_pair_alert_to_volatility_ruhela()}.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   morie_otis_make_pair_alert_to_volatility_a01()
 #' }
 morie_otis_make_pair_alert_to_volatility_a01 <- function(df = NULL) {

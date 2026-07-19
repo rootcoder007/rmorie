@@ -22,7 +22,7 @@ canonical file the published OTIS-RC \code{res_pool} /
 \code{res_by_year} / \code{res_all} are computed on.
 }
 \examples{
-\dontrun{
+\donttest{
   morie_otis_make_pair_alert_to_volatility_a01()
 }
 }
