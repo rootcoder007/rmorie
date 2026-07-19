@@ -392,7 +392,7 @@ morie_mvnorm_sample <- function(n, mean = rep(0, ncol(sigma)), sigma, ...) {
 #'   and Monte-Carlo error attributes attached).
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   if (requireNamespace("mvtnorm", quietly = TRUE)) {
 #'     set.seed(1)
 #'     S <- matrix(c(1, 0.4, 0.4, 1), 2, 2)

@@ -30,7 +30,7 @@ Fetch a Chicago Open Data Socrata dataset by ID
 df <- try(morie_datasets_nyc_socrata_by_id("8h9b-rp9u", limit = 5L))
 if (!inherits(df, "try-error")) head(df)
 }
-\dontrun{
+\donttest{
 # Chicago crimes dataset (SODA id verified live 2026-07)
 df <- try(morie_datasets_chicago_socrata_by_id("ijzp-q8t2", limit = 5L))
 if (!inherits(df, "try-error")) head(df)

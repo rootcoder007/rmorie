@@ -32,7 +32,7 @@ Time-series IRT where ideal points evolve via a random walk:
 \eqn{\phi_{i,t} \sim N(\phi_{i,t-1}, \tau^2)}{phi_i,t ~ N(phi_i,t-1, tau^2)}.
 }
 \examples{
-\dontrun{morie_spatial_voting_dynamic_irt(matrix(0, 4, 4), 1:4)}
+\donttest{morie_spatial_voting_dynamic_irt(matrix(0, 4, 4), 1:4)}
 }
 \references{
 Martin, A. D. and Quinn, K. M. (2002). "Dynamic Ideal Point

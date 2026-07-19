@@ -1740,7 +1740,7 @@ morie_spatial_voting_nominate_bootstrap <- function(votes,
 #'   `engine` tag (EM-IRT closed-form approximation).
 #' @references Carroll, R., Lewis, J. B., Lo, J., Poole, K. T., and
 #'   Rosenthal, H. (2013); Neal, R. M. (2003) *Annals of Statistics*.
-#' @examples \dontrun{morie_spatial_voting_alpha_nominate(matrix(0, 5, 5))}
+#' @examples \donttest{morie_spatial_voting_alpha_nominate(matrix(0, 5, 5))}
 #' @param n_dims Integer; latent ideal-point dimensionality (default 2).
 #' @param burn_in Integer; MCMC burn-in iterations to discard before summarising the posterior.
 #' @export
@@ -1839,7 +1839,7 @@ morie_spatial_voting_ordinal_irt <- function(Y, n_dims = 1L,
 #' @references Martin, A. D. and Quinn, K. M. (2002). "Dynamic Ideal Point
 #'   Estimation via Markov Chain Monte Carlo for the U.S. Supreme Court,
 #'   1953-1999." *Political Analysis*, 10(2).
-#' @examples \dontrun{morie_spatial_voting_dynamic_irt(matrix(0, 4, 4), 1:4)}
+#' @examples \donttest{morie_spatial_voting_dynamic_irt(matrix(0, 4, 4), 1:4)}
 #' @param time_periods Integer vector of period indices (one per roll call) for the dynamic-IRT random-walk prior on ideal points.
 #' @param burn_in Integer; MCMC burn-in iterations.
 #' @export

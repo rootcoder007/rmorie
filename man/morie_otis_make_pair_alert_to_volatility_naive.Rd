@@ -24,7 +24,7 @@ encoding) and a binary rather than count outcome. Used side-by-side
 as the Naive arm of an RDF (Ruhela Dual Formulation).
 }
 \examples{
-\dontrun{
+\donttest{
   df <- morie_otis_load()
   morie_otis_make_pair_alert_to_volatility_naive(df)
 }
