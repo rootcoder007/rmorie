@@ -131,15 +131,22 @@ test_that("morie_llm_detect_provider returns 'local' when nothing is configured"
     LLM_API_BASE_URL = Sys.getenv("LLM_API_BASE_URL", unset = NA),
     LLM_API_KEY      = Sys.getenv("LLM_API_KEY",      unset = NA))
   for (k in names(saved)) Sys.unsetenv(k)
-  # Reset cached ollama probe flag so we re-probe.
-  old_opt <- getOption("morie.llm.ollama_cached", default = NULL)
+  # Reset cached ollama probe flag so we re-probe. Also pin the freeapi
+  # probe OFF: without it, detect_provider() probes the live OllamaFreeAPI
+  # registry over the network (deterministic only under our suite-wide
+  # setup.R default, which a prior test's on.exit may have reset to NULL),
+  # and a single live server would make this return "freeapi".
+  old_opt  <- getOption("morie.llm.ollama_cached",  default = NULL)
+  old_free <- getOption("morie.llm.freeapi_cached", default = NULL)
   options(morie.llm.ollama_cached = FALSE)
+  options(morie.llm.freeapi_cached = FALSE)
   on.exit({
     for (k in names(saved)) {
       v <- saved[[k]]
       if (!is.na(v)) Sys.setenv(.list = stats::setNames(list(v), k))
     }
     options(morie.llm.ollama_cached = old_opt)
+    options(morie.llm.freeapi_cached = old_free)
   }, add = TRUE)
   expect_equal(morie_llm_detect_provider(), "local")
 })
@@ -148,12 +155,17 @@ test_that("morie_llm_detect_provider returns 'gemini' when GEMINI_API_KEY set + 
   saved <- list(
     GEMINI_API_KEY  = Sys.getenv("GEMINI_API_KEY", unset = NA))
   Sys.setenv(GEMINI_API_KEY = "fake-test-key")
-  old_opt <- getOption("morie.llm.ollama_cached", default = NULL)
+  old_opt  <- getOption("morie.llm.ollama_cached",  default = NULL)
+  old_free <- getOption("morie.llm.freeapi_cached", default = NULL)
   options(morie.llm.ollama_cached = FALSE)
+  # Pin freeapi OFF so provider order resolves to gemini, not a live
+  # freeapi probe (see the 'local' test above for the full rationale).
+  options(morie.llm.freeapi_cached = FALSE)
   on.exit({
     if (is.na(saved$GEMINI_API_KEY)) Sys.unsetenv("GEMINI_API_KEY")
     else Sys.setenv(GEMINI_API_KEY = saved$GEMINI_API_KEY)
     options(morie.llm.ollama_cached = old_opt)
+    options(morie.llm.freeapi_cached = old_free)
   }, add = TRUE)
   expect_equal(morie_llm_detect_provider(), "gemini")
 })
