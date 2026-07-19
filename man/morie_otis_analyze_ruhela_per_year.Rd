@@ -40,7 +40,7 @@ Runs the complete 10-estimator DLRM separately on each fiscal year.
 This is a heavy operation (~7x the single-year runtime).
 }
 \examples{
-\dontrun{
+\donttest{
 morie_otis_analyze_ruhela_per_year(df, ds_id = "a01",
   treatment = "T", outcome = "Y", covariates = c("Gender"))
 }

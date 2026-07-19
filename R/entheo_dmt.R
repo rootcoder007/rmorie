@@ -616,7 +616,7 @@ morie_entheo_analyze_subject <- function(subject_id,
 #'   clone. `NULL` uses the default upstream branch.
 #' @return Invisibly returns the destination path.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Clones the DMT_Imaging repository (network + disk):
 #' morie_entheo_clone_dmt_imaging(root = tempdir())
 #' }

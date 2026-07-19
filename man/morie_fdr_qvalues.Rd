@@ -30,7 +30,7 @@ false-discovery rates, q-values, and the underlying
 null-distribution scale parameter.
 }
 \examples{
-\dontrun{
+\donttest{
   if (requireNamespace("fdrtool", quietly = TRUE)) {
     set.seed(1)
     x <- c(stats::rnorm(900), stats::rnorm(100, mean = 3))

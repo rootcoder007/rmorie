@@ -53,7 +53,7 @@ Toronto Police Service.
 Tags: ASR; TPS; Toronto Police; Annual Statistical Report; Administrative
 }
 \examples{
-\dontrun{
+\donttest{
 df <- try(morie_datasets_tps_administrative(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

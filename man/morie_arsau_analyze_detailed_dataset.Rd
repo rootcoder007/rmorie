@@ -33,7 +33,7 @@ Chains:
 }
 }
 \examples{
-\dontrun{
+\donttest{
 res <- try(morie_arsau_analyze_detailed_dataset(year_range = "2020-2022"))
 if (!inherits(res, "try-error")) print(res)
 }

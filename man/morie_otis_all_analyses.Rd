@@ -33,7 +33,7 @@ returns a named list of \code{morie_otis_result} objects. If
 CRAN-safe: with \code{out_dir = NULL} (default) no files are written.
 }
 \examples{
-\dontrun{
+\donttest{
   df <- morie_otis_load()
   res <- morie_otis_all_analyses(df, year = 2024)
 }

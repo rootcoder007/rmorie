@@ -31,7 +31,7 @@ moderated) random- or fixed-effects meta-analytic model to
 per-study effect sizes and their sampling variances.
 }
 \examples{
-\dontrun{
+\donttest{
   if (requireNamespace("metafor", quietly = TRUE)) {
     set.seed(1)
     k <- 12

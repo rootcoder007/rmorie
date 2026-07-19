@@ -22,7 +22,7 @@
 #'   passed through R). If the binary is absent a clear message is returned
 #'   instead of an error.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' agent("use R to compute the mean of 1:10")
 #' agent("summarize mtcars", model = "gemini-2.5-flash", backend = "gemini")
 #' }

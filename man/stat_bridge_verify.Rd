@@ -15,7 +15,7 @@ Calls every registered handler with no arguments inside
 Intended to be called from CI smoke tests.
 }
 \examples{
-\dontrun{
+\donttest{
 # Invokes EVERY registered command handler -- some fetch live data over the
 # network -- so this is a smoke test, not a quick example.
 str(stat_bridge_verify(), max.level = 1)

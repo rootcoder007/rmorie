@@ -31,7 +31,7 @@ kernels or fail to build from source, so this also checks the toolchain
 and whether the compiled backend actually loaded.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_bricklayer(check = TRUE)
 morie_bricklayer()
 }

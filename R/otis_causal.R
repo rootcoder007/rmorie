@@ -774,7 +774,7 @@ morie_otis_classify_mandela_combo <- function(mh, sr, sw,
 #'   \code{covariates} = c("Gender", "Age_Category", "EndFiscalYear").
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   df <- morie_otis_load()
 #'   pair <- morie_otis_make_pair_alert_to_volatility_ruhela(df)
 #'   morie_otis_irm_dml(pair$data, treatment = pair$T,
@@ -884,7 +884,7 @@ morie_otis_make_pair_alert_to_volatility_naive <- function(df) {
 #'   each element is the output of the corresponding make-pair builder.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   morie_otis_make_pair_alert_to_volatility_all(morie_otis_load())
 #' }
 morie_otis_make_pair_alert_to_volatility_all <- function(df) {
@@ -937,7 +937,7 @@ morie_otis_make_pair_alert_to_volatility_a01 <- function(df = NULL) {
 #' @return Named list \code{list(data, T = "T_a", Y = "Y_a", covariates)}.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   morie_otis_make_pair_a(morie_otis_load())
 #' }
 morie_otis_make_pair_a <- function(df) {
@@ -968,7 +968,7 @@ morie_otis_make_pair_a <- function(df) {
 #' @return Named list \code{list(data, T = "T_b", Y = "Y_b", covariates)}.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   morie_otis_make_pair_b(morie_otis_load())
 #' }
 morie_otis_make_pair_b <- function(df) {

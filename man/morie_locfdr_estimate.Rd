@@ -27,7 +27,7 @@ empirical-Bayes local false-discovery-rate estimation from a
 vector of z-scores (Efron, 2004; Efron, 2010).
 }
 \examples{
-\dontrun{
+\donttest{
   if (requireNamespace("locfdr", quietly = TRUE)) {
     set.seed(1)
     zz <- c(stats::rnorm(900), stats::rnorm(100, mean = 3))

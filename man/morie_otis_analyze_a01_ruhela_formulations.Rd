@@ -27,7 +27,7 @@ SuperLearner) on the canonical alert-complexity -> regional-
 volatility formulation.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_otis_analyze_a01_ruhela_formulations(otis_a01)
 }
 }

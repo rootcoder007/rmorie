@@ -36,7 +36,7 @@ from the public TPS ArcGIS portal, so results reproduce anywhere
 without access to any private mirror.
 }
 \examples{
-\dontrun{
+\donttest{
 # Live fetch from the public TPS portal; writes only under tempdir().
 try(morie_tps_figures(file.path(tempdir(), "tps-figs"),
                       categories = "Homicides", which = "hawkes"))

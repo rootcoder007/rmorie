@@ -32,7 +32,7 @@ bandwidth-selection routine first and then fits the regression
 using the chosen bandwidths.
 }
 \examples{
-\dontrun{
+\donttest{
   if (requireNamespace("np", quietly = TRUE)) {
     set.seed(1)
     n  <- 50

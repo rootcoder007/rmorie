@@ -45,7 +45,7 @@ unstable and the system self-organises into a near-hexagonal
 lattice of localised spikes.
 }
 \examples{
-\dontrun{
+\donttest{
   rr <- morie_tps_sdb_turing_demo(n = 32L, n_steps = 300L,
                                     save_fig = FALSE)
   print(rr$summary_lines$SteadySpikes)

@@ -21,5 +21,5 @@ morie_otis_analyze_a01_mrm_subgroup_male(data = NULL, out_dir = NULL)
 a01 subgroup Ruhela: Male-only cell frame.
 }
 \examples{
-\dontrun{ morie_otis_analyze_a01_ruhela_subgroup_male() }
+\donttest{ morie_otis_analyze_a01_ruhela_subgroup_male() }
 }

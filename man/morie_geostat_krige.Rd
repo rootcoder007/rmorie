@@ -34,7 +34,7 @@ Thin extender over \code{gstat::krige} for simple, ordinary or
 universal kriging given a fitted variogram model.
 }
 \examples{
-\dontrun{
+\donttest{
   if (requireNamespace("gstat", quietly = TRUE) &&
       requireNamespace("sp", quietly = TRUE)) {
     data(meuse, package = "sp")

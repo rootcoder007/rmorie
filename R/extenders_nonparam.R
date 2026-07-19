@@ -87,7 +87,7 @@ NULL
 #'   Fdrright summaries).
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   if (requireNamespace("locfdr", quietly = TRUE)) {
 #'     set.seed(1)
 #'     zz <- c(stats::rnorm(900), stats::rnorm(100, mean = 3))
@@ -126,7 +126,7 @@ morie_locfdr_estimate <- function(zz, ...) {
 #'   \code{qval}, \code{lfdr}, and \code{param}).
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   if (requireNamespace("fdrtool", quietly = TRUE)) {
 #'     set.seed(1)
 #'     x <- c(stats::rnorm(900), stats::rnorm(100, mean = 3))
@@ -166,7 +166,7 @@ morie_fdr_qvalues <- function(x, statistic = "normal", ...) {
 #'   coefficients at each \code{tau}).
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   if (requireNamespace("quantreg", quietly = TRUE)) {
 #'     set.seed(1)
 #'     n  <- 100
@@ -209,7 +209,7 @@ morie_quantile_reg <- function(formula, tau = 0.5, data, ...) {
 #'   object from \code{np::npreg}).
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   if (requireNamespace("np", quietly = TRUE)) {
 #'     set.seed(1)
 #'     n  <- 50
@@ -269,7 +269,7 @@ morie_np_kernel_reg <- function(formula, data, ...) {
 #'   cluster parameters, and concentration-parameter trace).
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   if (requireNamespace("dirichletprocess", quietly = TRUE)) {
 #'     set.seed(1)
 #'     y <- c(stats::rnorm(50, -2), stats::rnorm(50, 2))

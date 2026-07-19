@@ -26,7 +26,7 @@ Thin extender over \code{copula::rCopula} that generates
 \eqn{n} draws on \eqn{[0, 1]^d} from a specified copula.
 }
 \examples{
-\dontrun{
+\donttest{
   if (requireNamespace("copula", quietly = TRUE)) {
     set.seed(1)
     morie_copula_sample(100, copula::claytonCopula(2, dim = 3))

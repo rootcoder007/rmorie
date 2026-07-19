@@ -25,7 +25,7 @@ Optional helper.  Requires \pkg{httr2} (and \pkg{jsonlite} via the
 existing \code{\link{morie_arsau_read_sidecar}} contract).
 }
 \examples{
-\dontrun{
+\donttest{
 res <- try(morie_arsau_fetch_sidecar(ARSAU_KINDS[1], ARSAU_YEARS[1],
                                      limit = 50L))
 if (!inherits(res, "try-error")) str(res, max.level = 1)

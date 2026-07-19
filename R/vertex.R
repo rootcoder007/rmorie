@@ -170,7 +170,7 @@ morie_vertex_ask_gemini <- function(prompt, model = NULL, system = NULL,
 #' Tiny smoke test for the Vertex AI client
 #' @return Named list (ok / error / model / project / location / reply).
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Requires Vertex AI credentials:
 #' morie_vertex_health_check()
 #' }

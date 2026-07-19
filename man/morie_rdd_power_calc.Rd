@@ -35,7 +35,7 @@ than a data frame; this wrapper preserves that function and offers the
 full \pkg{rdpower} simulation-based surface alongside it.
 }
 \examples{
-\dontrun{
+\donttest{
   if (requireNamespace("rdpower", quietly = TRUE)) {
     set.seed(1)
     R <- runif(500, -1, 1)

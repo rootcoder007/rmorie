@@ -42,7 +42,7 @@ Related upstream resources Vee surfaced 2026-05-25:
 }
 }
 \examples{
-\dontrun{
+\donttest{
 # Clones the DMT_Imaging repository (network + disk):
 morie_entheo_clone_dmt_imaging(root = tempdir())
 }

@@ -31,7 +31,7 @@ requires the morie causal pipeline and TPS-CSI helpers to be loaded;
 otherwise returns a "not yet ported" stub.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_otis_analyze_a01_with_csi_context(otis_a01)
 }
 }

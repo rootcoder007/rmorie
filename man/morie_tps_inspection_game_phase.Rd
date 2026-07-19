@@ -36,7 +36,7 @@ share as a "crime rate" proxy. Reproduces the qualitative phase
 diagram from D'Orsogna & Perc (2015) sec. 5 / Fig. 8.
 }
 \examples{
-\dontrun{
+\donttest{
   rr <- morie_tps_inspection_game_phase(
     n_temptations = 8L, n_costs = 8L, n_steps = 120L,
     save_fig = FALSE)

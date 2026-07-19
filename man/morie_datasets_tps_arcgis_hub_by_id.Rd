@@ -77,7 +77,7 @@ tables, budgets) \code{format = "json"} is sufficient and lightest.
 cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
 pic_id <- cat$hub_id[cat$title ==
   "Persons in Crisis Calls for Service Attended Open Data"]
-\dontrun{
+\donttest{
 df <- try(morie_datasets_tps_arcgis_hub_by_id(
   pic_id, format = "json", where = "OCC_YEAR=2024",
   max_features = 25L, offline = TRUE))

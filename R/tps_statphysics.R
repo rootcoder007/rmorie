@@ -257,7 +257,7 @@ NULL
 #'   session temporary directory.
 #' @return A `data.frame` of incidents.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' try(head(morie_tps_load_tps_dataset("Homicides", nrows = 100)))
 #' }
 #' @export
@@ -296,7 +296,7 @@ morie_tps_load_tps_dataset <- function(category, nrows = NULL,
 #'   directory.
 #' @return A `data.frame` of layer attributes.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' try(nrow(morie_tps_load_tps("NeighbourhoodCrimeRates")))
 #' }
 #' @export
@@ -946,7 +946,7 @@ morie_tps_lotka_volterra_police_crime <- function(category = "Assault",
 #'   (2008). M3AS 18(supp01): 1249-1267.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   rr <- morie_tps_sdb_turing_demo(n = 32L, n_steps = 300L,
 #'                                     save_fig = FALSE)
 #'   print(rr$summary_lines$SteadySpikes)
@@ -1050,7 +1050,7 @@ morie_tps_sdb_turing_demo <- function(eta = 0.20, omega = 0.033,
 #'   but not too hard. \emph{New Journal of Physics} 12: 083005.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   rr <- morie_tps_inspection_game_phase(
 #'     n_temptations = 8L, n_costs = 8L, n_steps = 120L,
 #'     save_fig = FALSE)

@@ -67,7 +67,7 @@
 #'   detected system libraries).
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   # Interactive: install whichever Suggests are missing
 #'   morie_install_extras()
 #'

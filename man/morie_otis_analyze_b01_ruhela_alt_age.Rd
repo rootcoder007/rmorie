@@ -21,5 +21,5 @@ morie_otis_analyze_b01_mrm_alt_age(data = NULL, out_dir = NULL)
 b01 alt-T Ruhela: Age 50+ -> vm count.
 }
 \examples{
-\dontrun{ morie_otis_analyze_b01_ruhela_alt_age() }
+\donttest{ morie_otis_analyze_b01_ruhela_alt_age() }
 }

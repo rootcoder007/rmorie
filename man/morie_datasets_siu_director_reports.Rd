@@ -14,7 +14,7 @@ The SIU re-launched their site in 2025 with a JS-rendered case list;
 this returns the legacy-pattern anchor frame which may be empty.
 }
 \examples{
-\dontrun{
+\donttest{
 reports <- try(morie_datasets_siu_director_reports())
 if (!inherits(reports, "try-error")) head(reports)
 }

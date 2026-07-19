@@ -29,7 +29,7 @@ Thin extender over \code{copula::fitCopula} that estimates
 copula parameters from pseudo-observations on \eqn{[0, 1]^d}.
 }
 \examples{
-\dontrun{
+\donttest{
   if (requireNamespace("copula", quietly = TRUE)) {
     set.seed(1)
     cop <- copula::normalCopula(0.5, dim = 2)

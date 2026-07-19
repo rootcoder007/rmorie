@@ -32,7 +32,7 @@ quantile regression at one or more conditional quantiles
 (Koenker & Bassett, 1978; Koenker, 2005).
 }
 \examples{
-\dontrun{
+\donttest{
   if (requireNamespace("quantreg", quietly = TRUE)) {
     set.seed(1)
     n  <- 100

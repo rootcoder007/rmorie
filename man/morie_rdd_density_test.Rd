@@ -28,7 +28,7 @@ manipulation / discontinuity-in-density test of Cattaneo, Jansson
 (2008) test.
 }
 \examples{
-\dontrun{
+\donttest{
   if (requireNamespace("rddensity", quietly = TRUE)) {
     set.seed(1)
     x <- c(rnorm(500, -0.2), rnorm(500, 0.2))

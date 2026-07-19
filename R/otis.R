@@ -118,7 +118,7 @@ NULL
 #' @param id_col,age_col,region_col,year_col,gender_col Column names.
 #' @return \code{morie_otis_result} list.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   df <- morie_otis_load()
 #'   morie_otis_rplace(df, year = 2024)
 #' }

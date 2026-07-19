@@ -38,7 +38,7 @@ are reported in \code{$skipped}.  Filter with \code{kinds} /
 large).
 }
 \examples{
-\dontrun{
+\donttest{
 res <- try(morie_arsau_download(tempdir(), kinds = ARSAU_KINDS()[1],
                                 years = ARSAU_YEARS()[1], quiet = TRUE))
 if (!inherits(res, "try-error")) length(res$downloaded)

@@ -84,7 +84,7 @@ NULL
 #'   binned distances and semivariance estimates).
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   if (requireNamespace("gstat", quietly = TRUE) &&
 #'       requireNamespace("sp", quietly = TRUE)) {
 #'     data(meuse, package = "sp")
@@ -122,7 +122,7 @@ morie_geostat_variogram <- function(formula, data, ...) {
 #'   variances).
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   if (requireNamespace("gstat", quietly = TRUE) &&
 #'       requireNamespace("sp", quietly = TRUE)) {
 #'     data(meuse, package = "sp")
@@ -178,7 +178,7 @@ morie_geostat_krige <- function(formula, data, newdata, model, ...) {
 #'   parameters, log-likelihood and variance estimates).
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   if (requireNamespace("copula", quietly = TRUE)) {
 #'     set.seed(1)
 #'     cop <- copula::normalCopula(0.5, dim = 2)
@@ -210,7 +210,7 @@ morie_copula_fit <- function(copula, data, ...) {
 #'   with values in \eqn{[0, 1]}).
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   if (requireNamespace("copula", quietly = TRUE)) {
 #'     set.seed(1)
 #'     morie_copula_sample(100, copula::claytonCopula(2, dim = 3))
@@ -243,7 +243,7 @@ morie_copula_sample <- function(n, copula, ...) {
 #'   eigenvectors and the projected rotated data).
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   if (requireNamespace("kernlab", quietly = TRUE)) {
 #'     set.seed(1)
 #'     x <- matrix(stats::rnorm(200), ncol = 4)
@@ -274,7 +274,7 @@ morie_kernel_pca <- function(x, ...) {
 #'   assignments, centres and within-cluster sums of squares).
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   if (requireNamespace("kernlab", quietly = TRUE)) {
 #'     set.seed(1)
 #'     x <- rbind(
@@ -316,7 +316,7 @@ morie_spectral_cluster <- function(x, centers, ...) {
 #'   estimate, heterogeneity statistics and moderator effects).
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   if (requireNamespace("metafor", quietly = TRUE)) {
 #'     set.seed(1)
 #'     k <- 12
@@ -356,7 +356,7 @@ morie_meta_rma <- function(yi, vi, data = NULL, ...) {
 #'   \eqn{n \times \mathrm{ncol}(\Sigma)}).
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   if (requireNamespace("mvtnorm", quietly = TRUE)) {
 #'     set.seed(1)
 #'     S <- matrix(c(1, 0.4, 0.4, 1), 2, 2)

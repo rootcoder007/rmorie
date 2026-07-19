@@ -13,7 +13,7 @@ Named list (ok / error / model / project / location / reply).
 Tiny smoke test for the Vertex AI client
 }
 \examples{
-\dontrun{
+\donttest{
 # Requires Vertex AI credentials:
 morie_vertex_health_check()
 }

@@ -125,7 +125,7 @@ morie_datasets_vancouver_opendata_bulk_layers <- function(offline = TRUE) {
 #' @param limit Page size.
 #' @return A `data.frame` of records.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # NYPD arrests dataset (SODA id verified live 2026-07)
 #' df <- try(morie_datasets_nyc_socrata_by_id("8h9b-rp9u", limit = 5L))
 #' if (!inherits(df, "try-error")) head(df)
