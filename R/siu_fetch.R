@@ -370,6 +370,22 @@ morie_siu_fetch_cases <- function(
     }
   }
 
+  # Never fetch the LIVE corpus (2000+ paginated pages, one HTTP call per case)
+  # under R CMD check / examples -- it would hang the example phase. Return the
+  # cache if present, else a typed-empty placeholder, so self-tests, examples
+  # and offline callers stay fast. Argument validation above still runs. A
+  # mocked test (or a deliberate live run) sets options(morie.siu.allow_fetch =
+  # TRUE) to bypass this and exercise the real fetch/parse pipeline.
+  if (nzchar(Sys.getenv("_R_CHECK_PACKAGE_NAME_")) &&
+      !isTRUE(getOption("morie.siu.allow_fetch"))) {
+    if (file.exists(out_path)) {
+      return(out_path)
+    }
+    dir.create(dirname(out_path), recursive = TRUE, showWarnings = FALSE)
+    writeLines("case_number", out_path)  # 0-row corpus placeholder
+    return(out_path)
+  }
+
   index_url <- morie_siu_index_url()
 
   # 2026-07 layout: the index renders ~29 <tr class="dr-item"> rows and
