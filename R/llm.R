@@ -307,6 +307,11 @@ DEFAULT_FREEAPI_MODEL <- "mistral-nemo:custom"
 #' @export
 morie_llm_probe_freeapi <- function(timeout = 4) {
   if (!requireNamespace("httr2", quietly = TRUE)) return(FALSE)
+  # An explicit options(morie.llm.freeapi_cached=) override wins over any live
+  # probe, so provider detection is deterministic when a caller (or a test)
+  # wants it -- no network hit. Without it we fall through to the real probe.
+  opt <- getOption("morie.llm.freeapi_cached", NULL)
+  if (!is.null(opt)) return(isTRUE(opt))
   cache <- .morie_llm_cache$freeapi_cached
   if (!is.null(cache)) return(cache)
   # The old single hard-coded endpoint (ollamafreeapi.duckdns.org) is defunct.
