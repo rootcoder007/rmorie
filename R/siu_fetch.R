@@ -672,3 +672,45 @@ morie_siu_reports <- function(update = FALSE, max_new = 25L, quiet = FALSE) {
   }
   out
 }
+
+#' Resolve a subject-official count: verified corpus first, rules second
+#'
+#' The correct order for the ecosystem: a report already in the
+#' panel-reviewed corpus (\pkg{rmoriedata}) returns its VERIFIED count --
+#' nothing re-derives an established answer. Only a report outside the
+#' corpus falls through to the deterministic rule set compiled in
+#' \pkg{rmoriebricklayer} (the foundation layer), whose rules were proven
+#' zero-wrong against all 2,182 reviewed reports; where even the rules
+#' cannot answer, the reading panel ([morie_siu_panel()]) decides.
+#'
+#' @param text Plain report text (needed only for unreviewed reports).
+#' @param drid Report id; supply whenever known.
+#' @return A list with `count` (integer, `NA` only when both corpus and
+#'   rules are silent -- run the panel) and `reason`.
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' morie_siu_resolve_so(drid = 5038)
+#' @export
+morie_siu_resolve_so <- function(text = NULL, drid = NULL) {
+  if (!is.null(drid) && requireNamespace("rmoriedata", quietly = TRUE)) {
+    corpus <- tryCatch(rmoriedata::load_siu_reports(),
+                       error = function(e) NULL)
+    if (!is.null(corpus)) {
+      hit <- corpus[corpus$drid == as.character(drid), , drop = FALSE]
+      if (nrow(hit) == 1L) {
+        n <- suppressWarnings(as.integer(hit$number_of_subject_officials))
+        if (!is.na(n)) {
+          return(list(count = n,
+                      reason = "panel-reviewed corpus (verified)"))
+        }
+      }
+    }
+  }
+  if (is.null(text)) {
+    stop("report not in the reviewed corpus; supply `text` for the ",
+         "rule-based resolution (rmoriebricklayer)")
+  }
+  if (!requireNamespace("rmoriebricklayer", quietly = TRUE)) {
+    stop("rule-based resolution needs rmoriebricklayer")
+  }
+  rmoriebricklayer::bricklayer_siu_resolve_so(text)
+}
