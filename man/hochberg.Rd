@@ -22,5 +22,14 @@ Thin wrapper over \code{stats::p.adjust(method = "hochberg")}.
 \examples{
 set.seed(1)
 p <- c(runif(30), runif(5, 0, 0.005))
-hochberg(p)$adjusted
+
+res <- hochberg(p)
+res$n_rejected
+head(res$adjusted)
+
+# Hochberg is a step-up procedure: at least as powerful as Holm under
+# independence / positive dependence.
+c(hochberg = hochberg(p)$n_rejected, holm = holm(p)$n_rejected)
+
+hochberg(c(0.001, 0.01, 0.04), labels = c("A", "B", "C"))$rejected
 }

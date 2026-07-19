@@ -23,5 +23,16 @@ uniformly more powerful than Bonferroni.
 \examples{
 set.seed(1)
 p <- c(runif(30), runif(5, 0, 0.005))
-holm(p)$adjusted
+
+res <- holm(p)
+res$n_rejected
+head(res$adjusted)
+
+# Holm is uniformly more powerful than Bonferroni (rejects at least as
+# many), while still controlling the family-wise error rate:
+c(holm = holm(p)$n_rejected, bonferroni = bonferroni(p)$n_rejected)
+
+# alpha + labels as usual.
+holm(c(0.001, 0.01, 0.04), alpha = 0.05,
+     labels = c("A", "B", "C"))$rejected
 }

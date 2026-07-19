@@ -22,5 +22,14 @@ Thin wrapper over \code{stats::p.adjust(method = "hommel")}.
 \examples{
 set.seed(1)
 p <- c(runif(30), runif(5, 0, 0.005))
-hommel(p)$adjusted
+
+res <- hommel(p)
+res$n_rejected
+head(res$adjusted)
+
+# Hommel is the most powerful of the stats::p.adjust FWER methods
+# (>= Hochberg), at higher computational cost.
+c(hommel = hommel(p)$n_rejected, hochberg = hochberg(p)$n_rejected)
+
+hommel(c(0.001, 0.01, 0.04), labels = c("A", "B", "C"))$rejected
 }
