@@ -11,26 +11,29 @@ Authors@R: c(
     comment = c(ORCID = "0009-0004-1750-3592")
   )
  )
-Author: Vansh Singh Ruhela [aut, cre] (<https://orcid.org/0009-0004-1750-3592>)
-Maintainer: Vansh Singh Ruhela <vsruhela@proton.me>
 Description: Self-contained multi-domain scientific computing toolkit for
-  observational inference and intervention analysis, hosting the MRM
-  (Multilevel Reconciliation Methodology) framework for Canadian
+  observational inference and intervention analysis, hosting the
+  Multilevel Reconciliation Methodology ('MRM') framework for Canadian
   carceral, police, and oversight data as its primary application.
-  Every statistical algorithm is implemented natively (R and C++) and
+  Every statistical algorithm is implemented natively (R and 'C++') and
   cross-validated against its reference implementation; no other
   statistical package is called at runtime.
-  Provides general-purpose causal estimators (ATE, ATT, ATC, GATE, CATE,
-  LATE, AIPW, G-computation), survey sampling methods (stratified, cluster,
-  PPS, bootstrap, calibration weights), propensity-score and doubly-robust
-  estimators, and sensitivity analyses (E-value, Rosenbaum bounds).
+  Provides general-purpose causal estimators -- average treatment
+  effects on the full, treated, and control populations ('ATE', 'ATT',
+  'ATC'), group, conditional, and local average treatment effects
+  ('GATE', 'CATE', 'LATE'), augmented inverse-probability weighting
+  ('AIPW'), and G-computation -- survey sampling methods (stratified,
+  cluster, probability-proportional-to-size, bootstrap, calibration
+  weights), propensity-score and doubly-robust estimators, and
+  sensitivity analyses (E-value, Rosenbaum bounds).
   Companion modules support signal processing and spectral analysis,
   cryptographic primitives, spatial statistics, statistical physics of
   crime (Hawkes self-exciting processes, reaction-diffusion, Levy flight,
   urban scaling), and classical-test-theory and item-response-theory
   psychometrics, alongside ingestion utilities for officially published
-  Ontario Special Investigations Unit (police-oversight) and federal
-  Structured Intervention Unit reports.
+  reports of the Ontario Special Investigations Unit ('SIU',
+  <https://www.siu.on.ca/>, police oversight) and of federal Structured
+  Intervention Units.
 License: AGPL (>= 3)
 LazyData: true
 Encoding: UTF-8

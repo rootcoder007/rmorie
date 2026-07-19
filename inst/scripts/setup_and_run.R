@@ -152,7 +152,8 @@ script_dir <- (function() {
   fp <- sub("^--file=", "", fa[grep("^--file=", fa)])
   if (length(fp) > 0L) normalizePath(dirname(fp[1])) else getwd()
 })()
-setwd(script_dir)
+## No setwd(): the user's working directory is never changed; every path
+## below is anchored on script_dir explicitly (CRAN code policy).
 
 args <- commandArgs(trailingOnly = TRUE)
 QUICK_MODE <- any(args %in% c("-q", "--quick"))
@@ -164,7 +165,9 @@ if (any(args == "--rdata")) {
 }
 
 if (HELP_MODE) {
-  cat(readLines("setup_and_run.R")[grep("^## USAGE", readLines("setup_and_run.R"))[1] + 0:10], sep = "\n")
+  self <- file.path(script_dir, "setup_and_run.R")
+  self_lines <- readLines(self)
+  cat(self_lines[grep("^## USAGE", self_lines)[1] + 0:10], sep = "\n")
   quit(status = 0)
 }
 
@@ -237,35 +240,26 @@ if (!file.exists(R_SCRIPT)) {
   quit(status = 2)
 }
 
-## --------- 4. Auto-install R packages ---------
+## --------- 4. Check required R packages (this script never installs) ---------
 
 REQ_PKGS <- c("data.table", "MatchIt", "glmmTMB", "lme4",
               "DHARMa", "Hmisc", "jsonlite", "digest")
 
 say("Step 1/5: Checking R packages...")
-installed <- rownames(installed.packages())
-missing_pkgs <- setdiff(REQ_PKGS, installed)
+## CRAN code policy: scripts must not call install.packages() or the slow
+## installed.packages(). Probe per package with requireNamespace() and print
+## the exact install command for the user to run themselves.
+missing_pkgs <- REQ_PKGS[!vapply(REQ_PKGS, requireNamespace,
+                                 logical(1), quietly = TRUE)]
 if (length(missing_pkgs) > 0L) {
   say("  Missing: ", paste(missing_pkgs, collapse = ", "))
-  do_install <- ask_yn("  Install missing packages now?", "Y", QUICK_MODE)
-  if (do_install) {
-    say("  Installing (this can take 2-5 minutes on first run)...")
-    install.packages(missing_pkgs,
-                     repos = "https://cloud.r-project.org",
-                     quiet = TRUE)
-    still_missing <- setdiff(REQ_PKGS, rownames(installed.packages()))
-    if (length(still_missing) > 0L) {
-      say("ERROR: failed to install: ", paste(still_missing, collapse = ", "))
-      say("  Try installing them manually in R, then re-run.")
-      quit(status = 3)
-    }
-    say("  ✓ All packages installed.")
-  } else {
-    say("  Skipping — analysis will fail if anything is missing.")
-  }
-} else {
-  say("  ✓ All required packages present.")
+  say("  This script does not install packages itself. Install them in R,")
+  say("  then re-run this script:")
+  say("    install.packages(c(",
+      paste0('"', missing_pkgs, '"', collapse = ", "), "))")
+  quit(status = 3)
 }
+say("  \u2713 All required packages present.")
 hr()
 
 ## --------- 5. Locate the OTIS data file ---------

@@ -373,7 +373,11 @@ morie_bayes_plot <- function(x, type = c("trace", "density", "both"),
   type <- match.arg(type)
   stopifnot(inherits(x, "morie_bayes_fit"))
   j <- if (is.character(param)) match(param, x$par_names) else param
-  if (type == "both") graphics::par(mfrow = c(1, 2))
+  if (type == "both") {
+    # CRAN: never change the user's par() without restoring it.
+    oldpar <- graphics::par(mfrow = c(1, 2))
+    on.exit(graphics::par(oldpar), add = TRUE)
+  }
   if (type %in% c("trace", "both")) {
     for (ci in seq_along(x$chains)) {
       v <- x$chains[[ci]][, j]
