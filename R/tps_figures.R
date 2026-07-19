@@ -56,7 +56,8 @@ morie_tps_figures <- function(out_dir,
       if (is.finite(fit$mu %||% NA_real_)) {
         p <- file.path(out_dir, sprintf("hawkes_%s.png", cat_name))
         grDevices::png(p, width = 1140, height = 820, res = 110)
-        graphics::par(mfrow = c(2, 1), mar = c(3.5, 4, 2.5, 1))
+        # CRAN: restore par() before this private device is closed.
+        oldpar <- graphics::par(mfrow = c(2, 1), mar = c(3.5, 4, 2.5, 1))
         mo <- table(format(dt, "%Y-%m"))
         mo_x <- as.Date(paste0(names(mo), "-01"))
         graphics::plot(mo_x, as.integer(mo), type = "l",
@@ -77,6 +78,7 @@ morie_tps_figures <- function(out_dir,
                        main = sprintf(
                          "residual interarrivals -- KS p = %.3f",
                          ks$p.value))
+        graphics::par(oldpar)
         grDevices::dev.off()
         written <- c(written, p)
       }

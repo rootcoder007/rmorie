@@ -235,6 +235,10 @@ NULL
   path <- file.path(fig_dir, name)
   grDevices::png(path, width = width, height = height, res = 110)
   on.exit(grDevices::dev.off(), add = TRUE)
+  # CRAN: restore par() before the device closes (draw callbacks set mfrow).
+  # after = FALSE prepends, so the restore runs BEFORE the dev.off above.
+  oldpar <- graphics::par(no.readonly = TRUE)
+  on.exit(graphics::par(oldpar), add = TRUE, after = FALSE)
   draw()
   path
 }
