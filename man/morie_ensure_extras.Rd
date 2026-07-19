@@ -54,7 +54,10 @@ morie_estimate_irm <- function(...) {
 }
 }
 \examples{
-\donttest{
+# \dontrun (not \donttest) deliberately: this is an interactive installer
+# prompt -- it errors by design wherever the packages are absent and
+# ask = TRUE cannot prompt (CI, R CMD check), so it is env-dependent.
+\dontrun{
   # Interactive (RStudio / R console): prompts to install if needed
   morie_ensure_extras(c("DoubleML", "ranger"))
 
