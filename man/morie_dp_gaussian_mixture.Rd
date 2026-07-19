@@ -34,7 +34,7 @@ MacEachern, 1994).  Constructs the DP object on \code{y} and
 then runs the Gibbs sampler for \code{iterations} sweeps.
 }
 \examples{
-\dontrun{
+\donttest{
   if (requireNamespace("dirichletprocess", quietly = TRUE)) {
     set.seed(1)
     y <- c(stats::rnorm(50, -2), stats::rnorm(50, 2))

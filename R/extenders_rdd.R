@@ -82,7 +82,7 @@ NULL
 #'   estimates and the manipulation test statistic).
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   if (requireNamespace("rddensity", quietly = TRUE)) {
 #'     set.seed(1)
 #'     x <- c(rnorm(500, -0.2), rnorm(500, 0.2))
@@ -120,7 +120,7 @@ morie_rdd_density_test <- function(X, cutoff = 0, ...) {
 #'   randomisation-inference p-values and the observed statistic).
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   if (requireNamespace("rdlocrand", quietly = TRUE)) {
 #'     set.seed(1)
 #'     R <- runif(200, -1, 1)
@@ -164,7 +164,7 @@ morie_rdd_local_randinf <- function(Y, R, wl, wr, ...) {
 #'   power and effective sample sizes).
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   if (requireNamespace("rdpower", quietly = TRUE)) {
 #'     set.seed(1)
 #'     R <- runif(500, -1, 1)

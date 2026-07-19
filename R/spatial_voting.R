@@ -1030,7 +1030,7 @@ morie_spatial_voting_procrustes <- function(X, X_target) {
 #'   (2015). "Using Bayesian Aldrich-McKelvey Scaling to Study Citizens'
 #'   Ideological Preferences and Perceptions." *AJPS*, 59(3).
 #' @examples
-#' \dontrun{morie_spatial_voting_bayesian_am(matrix(rnorm(50), 10, 5))}
+#' \donttest{morie_spatial_voting_bayesian_am(matrix(rnorm(50), 10, 5))}
 #' @export
 morie_spatial_voting_bayesian_am <- function(Z, n_samples = 1000L,
                                              burn_in = 200L,

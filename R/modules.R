@@ -186,7 +186,7 @@ morie_load_cpads_data <- function(cpads_csv = .cpads_default_csv()) {
 #' @param output_dir Optional directory for CSV outputs.
 #' @return Named list of data-frame outputs.
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
-#' \dontrun{
+#' \donttest{
 #' # Dispatch one MORIE module against the canonical CPADS CSV. The CSV
 #' # ships with a morie project tree, or is fetched via the CKAN endpoint
 #' # (morie_load_dataset("ocp21")). Wrapped in tryCatch so the example

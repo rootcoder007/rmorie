@@ -630,7 +630,7 @@ morie_siu_index <- function(lang = c("all", "en", "fr", "valid"),
 #' @param cache_dir Directory holding the harvester's SIU.csv.
 #' @return Invisibly, the path to the updated overrides CSV.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Writes the correction to a temp cache so the example never
 #' # touches the per-user cache directory.
 #' tmp <- tempfile("morie_siu_"); dir.create(tmp, recursive = TRUE)

@@ -52,7 +52,7 @@ complaints by type of complaint submitted.
 Tags: ASR; TPS; Toronto Police; Annual Statistical Report; Misconduct
 }
 \examples{
-\dontrun{
+\donttest{
 df <- try(morie_datasets_tps_investigated_alleged_misconduct(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

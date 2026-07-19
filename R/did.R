@@ -309,7 +309,7 @@ NULL
 #' @references Angrist, J. D., & Pischke, J.-S. (2009).
 #'   \emph{Mostly Harmless Econometrics}. Princeton University Press.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' df <- data.frame(
 #'   y    = rnorm(200),
 #'   d    = rep(c(0, 1), each = 100),

@@ -32,7 +32,7 @@ A \code{data.frame}.
 TPS PSDP -- Auto Theft
 }
 \examples{
-\dontrun{
+\donttest{
 df <- try(morie_datasets_tps_autotheft(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

@@ -37,7 +37,7 @@ the server transfer limit automatically (ArcGIS caps a single query
 at \code{maxRecordCount} features, typically 1000-2000).
 }
 \examples{
-\dontrun{
+\donttest{
 # Toronto Police Service public hub layer (same layer the TPS
 # bridge in tps_statphysics.R pages from).
 layer <- paste0(

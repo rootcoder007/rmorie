@@ -596,7 +596,7 @@ morie_ingest_forensics_namus_missing <- function(
 #' @param timeout HTTP timeout in seconds.
 #' @return A base R \code{data.frame}.
 #' @examples
-#' \dontrun{try(morie_ingest_forensics_nist_rds(max_features = 1L))}
+#' \donttest{try(morie_ingest_forensics_nist_rds(max_features = 1L))}
 #' @export
 morie_ingest_forensics_nist_rds <- function(
     dataset_id = NULL,

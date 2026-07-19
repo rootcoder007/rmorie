@@ -24,7 +24,7 @@ Thin extender over \code{kernlab::kpca} that performs PCA in a
 feature space induced by a reproducing-kernel.
 }
 \examples{
-\dontrun{
+\donttest{
   if (requireNamespace("kernlab", quietly = TRUE)) {
     set.seed(1)
     x <- matrix(stats::rnorm(200), ncol = 4)

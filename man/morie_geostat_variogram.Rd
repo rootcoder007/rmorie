@@ -30,7 +30,7 @@ sample (semi-)variogram of a spatially-indexed response for use
 in kriging and other geostatistical workflows.
 }
 \examples{
-\dontrun{
+\donttest{
   if (requireNamespace("gstat", quietly = TRUE) &&
       requireNamespace("sp", quietly = TRUE)) {
     data(meuse, package = "sp")

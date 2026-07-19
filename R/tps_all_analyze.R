@@ -90,7 +90,7 @@ NULL
 #' @param ds_name Optional dataset label used in the result title.
 #' @return A \code{morie_tps_result} named list.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' df <- try(morie_datasets_tps_assault(max_features = 200L))
 #' if (!inherits(df, "try-error")) {
 #'   res <- try(morie_tps_temporal_summary(df, ds_name = "assault"))

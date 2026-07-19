@@ -30,7 +30,7 @@ observations from the multivariate normal distribution with a
 given mean vector and covariance matrix.
 }
 \examples{
-\dontrun{
+\donttest{
   if (requireNamespace("mvtnorm", quietly = TRUE)) {
     set.seed(1)
     S <- matrix(c(1, 0.4, 0.4, 1), 2, 2)

@@ -31,7 +31,7 @@ randomisation-inference around the cutoff window
 2016).
 }
 \examples{
-\dontrun{
+\donttest{
   if (requireNamespace("rdlocrand", quietly = TRUE)) {
     set.seed(1)
     R <- runif(200, -1, 1)

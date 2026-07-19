@@ -30,7 +30,7 @@ Parsed JSON list (the response body).
 POST a chat-completion request to an OpenAI-compatible endpoint
 }
 \examples{
-\dontrun{
+\donttest{
 msgs <- list(list(role = "user", content = "Say hello"))
 # Second arg is whatever model your Ollama server serves (see `ollama list`).
 res <- try(morie_llm_request_completion("http://localhost:11434", "your-model", msgs))

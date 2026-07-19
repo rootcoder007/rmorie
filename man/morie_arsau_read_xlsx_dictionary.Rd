@@ -28,7 +28,7 @@ dependency.
 }
 }
 \examples{
-\dontrun{
+\donttest{
 # Point at a downloaded ARSAU data-dictionary workbook:
 d <- try(morie_arsau_read_xlsx_dictionary("arsau_dictionary.xlsx"))
 }

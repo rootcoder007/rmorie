@@ -57,7 +57,7 @@ NULL
 #' @return data.frame.
 #' @seealso \code{\link{morie_cache_dir}}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   df <- morie_otis_load()
 #' }
 #' @export
@@ -115,7 +115,7 @@ morie_otis_load <- function(csv_path = NULL, use_readr = FALSE) {
 #'   directory is created if missing.
 #' @return Named list of \code{morie_otis_result}s.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   df <- morie_otis_load()
 #'   res <- morie_otis_all_analyses(df, year = 2024)
 #' }

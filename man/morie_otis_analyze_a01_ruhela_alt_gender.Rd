@@ -21,5 +21,5 @@ morie_otis_analyze_a01_mrm_alt_gender(data = NULL, out_dir = NULL)
 a01 alt-T Ruhela: Female -> vm count.
 }
 \examples{
-\dontrun{ morie_otis_analyze_a01_ruhela_alt_gender() }
+\donttest{ morie_otis_analyze_a01_ruhela_alt_gender() }
 }

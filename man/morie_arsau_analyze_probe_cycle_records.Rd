@@ -24,7 +24,7 @@ computes the cycle-count distribution per incident and runs a
 data-quality audit.
 }
 \examples{
-\dontrun{
+\donttest{
 res <- try(morie_arsau_analyze_probe_cycle_records(year = "2024"))
 if (!inherits(res, "try-error")) print(res)
 }

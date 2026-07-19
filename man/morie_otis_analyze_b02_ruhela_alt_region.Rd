@@ -21,5 +21,5 @@ morie_otis_analyze_b02_mrm_alt_region(data = NULL, out_dir = NULL)
 b02 alt-T Ruhela: Toronto region -> total seg days.
 }
 \examples{
-\dontrun{ morie_otis_analyze_b02_ruhela_alt_region() }
+\donttest{ morie_otis_analyze_b02_ruhela_alt_region() }
 }

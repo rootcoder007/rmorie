@@ -52,7 +52,7 @@ division level.
 Tags: RBDC; race; race based data
 }
 \examples{
-\dontrun{
+\donttest{
 df <- try(morie_datasets_tps_use_of_force_location_of_occurrences(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

@@ -26,7 +26,7 @@ Thin extender over \code{kernlab::specc} that performs Ng / Jordan
 / Weiss spectral clustering on a feature matrix.
 }
 \examples{
-\dontrun{
+\donttest{
   if (requireNamespace("kernlab", quietly = TRUE)) {
     set.seed(1)
     x <- rbind(

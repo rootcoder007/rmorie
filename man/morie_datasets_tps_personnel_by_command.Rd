@@ -52,7 +52,7 @@ command level.
 Tags: ASR; TPS; Toronto Police; Annual Statistical Report; Personnel
 }
 \examples{
-\dontrun{
+\donttest{
 df <- try(morie_datasets_tps_personnel_by_command(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

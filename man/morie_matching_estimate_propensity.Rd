@@ -35,7 +35,7 @@ Estimates the probability of treatment via logistic regression or
 gradient boosting on a set of covariates.
 }
 \examples{
-\dontrun{
+\donttest{
 df <- data.frame(d = rbinom(200, 1, 0.4),
                  x1 = rnorm(200), x2 = rnorm(200))
 ps <- morie_matching_estimate_propensity(df, "d", c("x1", "x2"))

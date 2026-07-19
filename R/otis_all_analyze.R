@@ -1055,7 +1055,7 @@ morie_otis_analyze_a01 <- function(data = NULL, out_dir = NULL) {
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_otis_analyze_a01_ruhela_formulations(otis_a01)
 #' }
 morie_otis_analyze_a01_ruhela_formulations <- function(data = NULL,
@@ -1072,7 +1072,7 @@ morie_otis_analyze_a01_ruhela_formulations <- function(data = NULL,
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_otis_analyze_b01_ruhela_formulations(otis_b01)
 #' }
 morie_otis_analyze_b01_ruhela_formulations <- function(data = NULL,
@@ -1089,7 +1089,7 @@ morie_otis_analyze_b01_ruhela_formulations <- function(data = NULL,
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_otis_analyze_b02_ruhela_formulations(otis_b02)
 #' }
 morie_otis_analyze_b02_ruhela_formulations <- function(data = NULL,
@@ -1136,7 +1136,7 @@ morie_otis_analyze_b02_dlrm <- morie_otis_analyze_b02_ruhela_formulations
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_otis_analyze_ruhela_per_year(df, ds_id = "a01",
 #'   treatment = "T", outcome = "Y", covariates = c("Gender"))
 #' }
@@ -1158,7 +1158,7 @@ morie_otis_analyze_ruhela_per_year <- function(data, ds_id,
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_a01_ruhela_per_year() }
+#' \donttest{ morie_otis_analyze_a01_ruhela_per_year() }
 morie_otis_analyze_a01_ruhela_per_year <- function(data = NULL,
                                                      out_dir = NULL) {
   .otis_not_yet_ported("morie_otis_analyze_a01_ruhela_per_year",
@@ -1172,7 +1172,7 @@ morie_otis_analyze_a01_ruhela_per_year <- function(data = NULL,
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_b01_ruhela_per_year() }
+#' \donttest{ morie_otis_analyze_b01_ruhela_per_year() }
 morie_otis_analyze_b01_ruhela_per_year <- function(data = NULL,
                                                      out_dir = NULL) {
   .otis_not_yet_ported("morie_otis_analyze_b01_ruhela_per_year",
@@ -2225,7 +2225,7 @@ morie_otis_analyze_d05_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_a01_ruhela_alt_gender() }
+#' \donttest{ morie_otis_analyze_a01_ruhela_alt_gender() }
 morie_otis_analyze_a01_ruhela_alt_gender <- function(data = NULL,
                                                        out_dir = NULL) {
   .otis_not_yet_ported("morie_otis_analyze_a01_ruhela_alt_gender",
@@ -2238,7 +2238,7 @@ morie_otis_analyze_a01_ruhela_alt_gender <- function(data = NULL,
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_a01_ruhela_alt_age() }
+#' \donttest{ morie_otis_analyze_a01_ruhela_alt_age() }
 morie_otis_analyze_a01_ruhela_alt_age <- function(data = NULL,
                                                     out_dir = NULL) {
   .otis_not_yet_ported("morie_otis_analyze_a01_ruhela_alt_age",
@@ -2251,7 +2251,7 @@ morie_otis_analyze_a01_ruhela_alt_age <- function(data = NULL,
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_a01_ruhela_alt_toronto() }
+#' \donttest{ morie_otis_analyze_a01_ruhela_alt_toronto() }
 morie_otis_analyze_a01_ruhela_alt_toronto <- function(data = NULL,
                                                         out_dir = NULL) {
   .otis_not_yet_ported("morie_otis_analyze_a01_ruhela_alt_toronto",
@@ -2264,7 +2264,7 @@ morie_otis_analyze_a01_ruhela_alt_toronto <- function(data = NULL,
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_b01_ruhela_alt_gender() }
+#' \donttest{ morie_otis_analyze_b01_ruhela_alt_gender() }
 morie_otis_analyze_b01_ruhela_alt_gender <- function(data = NULL,
                                                        out_dir = NULL) {
   .otis_not_yet_ported("morie_otis_analyze_b01_ruhela_alt_gender",
@@ -2277,7 +2277,7 @@ morie_otis_analyze_b01_ruhela_alt_gender <- function(data = NULL,
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_b01_ruhela_alt_age() }
+#' \donttest{ morie_otis_analyze_b01_ruhela_alt_age() }
 morie_otis_analyze_b01_ruhela_alt_age <- function(data = NULL,
                                                     out_dir = NULL) {
   .otis_not_yet_ported("morie_otis_analyze_b01_ruhela_alt_age",
@@ -2290,7 +2290,7 @@ morie_otis_analyze_b01_ruhela_alt_age <- function(data = NULL,
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_b01_ruhela_alt_toronto() }
+#' \donttest{ morie_otis_analyze_b01_ruhela_alt_toronto() }
 morie_otis_analyze_b01_ruhela_alt_toronto <- function(data = NULL,
                                                         out_dir = NULL) {
   .otis_not_yet_ported("morie_otis_analyze_b01_ruhela_alt_toronto",
@@ -2303,7 +2303,7 @@ morie_otis_analyze_b01_ruhela_alt_toronto <- function(data = NULL,
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_b02_ruhela_alt_region() }
+#' \donttest{ morie_otis_analyze_b02_ruhela_alt_region() }
 morie_otis_analyze_b02_ruhela_alt_region <- function(data = NULL,
                                                        out_dir = NULL) {
   .otis_not_yet_ported("morie_otis_analyze_b02_ruhela_alt_region",
@@ -2316,7 +2316,7 @@ morie_otis_analyze_b02_ruhela_alt_region <- function(data = NULL,
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_b02_ruhela_alt_age() }
+#' \donttest{ morie_otis_analyze_b02_ruhela_alt_age() }
 morie_otis_analyze_b02_ruhela_alt_age <- function(data = NULL,
                                                     out_dir = NULL) {
   .otis_not_yet_ported("morie_otis_analyze_b02_ruhela_alt_age",
@@ -2334,7 +2334,7 @@ morie_otis_analyze_b02_ruhela_alt_age <- function(data = NULL,
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_a01_ruhela_subgroup_female() }
+#' \donttest{ morie_otis_analyze_a01_ruhela_subgroup_female() }
 morie_otis_analyze_a01_ruhela_subgroup_female <- function(data = NULL,
                                                             out_dir = NULL) {
   .otis_not_yet_ported(
@@ -2348,7 +2348,7 @@ morie_otis_analyze_a01_ruhela_subgroup_female <- function(data = NULL,
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_a01_ruhela_subgroup_male() }
+#' \donttest{ morie_otis_analyze_a01_ruhela_subgroup_male() }
 morie_otis_analyze_a01_ruhela_subgroup_male <- function(data = NULL,
                                                           out_dir = NULL) {
   .otis_not_yet_ported(
@@ -2362,7 +2362,7 @@ morie_otis_analyze_a01_ruhela_subgroup_male <- function(data = NULL,
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_b01_ruhela_subgroup_female() }
+#' \donttest{ morie_otis_analyze_b01_ruhela_subgroup_female() }
 morie_otis_analyze_b01_ruhela_subgroup_female <- function(data = NULL,
                                                             out_dir = NULL) {
   .otis_not_yet_ported(
@@ -2376,7 +2376,7 @@ morie_otis_analyze_b01_ruhela_subgroup_female <- function(data = NULL,
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_b01_ruhela_subgroup_male() }
+#' \donttest{ morie_otis_analyze_b01_ruhela_subgroup_male() }
 morie_otis_analyze_b01_ruhela_subgroup_male <- function(data = NULL,
                                                           out_dir = NULL) {
   .otis_not_yet_ported(
@@ -3280,7 +3280,7 @@ morie_otis_analyze_ruhela_master <- function(datasets,
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_otis_analyze_a01_with_csi_context(otis_a01)
 #' }
 morie_otis_analyze_a01_with_csi_context <- function(data = NULL,

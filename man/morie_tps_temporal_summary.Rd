@@ -20,7 +20,7 @@ line.  Robust to missing columns: only includes tables for the
 fields actually present.
 }
 \examples{
-\dontrun{
+\donttest{
 df <- try(morie_datasets_tps_assault(max_features = 200L))
 if (!inherits(df, "try-error")) {
   res <- try(morie_tps_temporal_summary(df, ds_name = "assault"))

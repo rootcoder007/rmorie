@@ -50,7 +50,7 @@ native). \code{\link{morie_did_doubly_robust}} is the recommended
 option when pre-treatment covariates are available.
 }
 \examples{
-\dontrun{
+\donttest{
 df <- data.frame(
   y    = rnorm(200),
   d    = rep(c(0, 1), each = 100),

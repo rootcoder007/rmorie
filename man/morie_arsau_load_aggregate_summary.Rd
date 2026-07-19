@@ -24,7 +24,7 @@ An object of class \code{"morie_arsau_result"}.
 Load ARSAU aggregate-summary-by-year CSV (2020-2022 only).
 }
 \examples{
-\dontrun{
+\donttest{
 res <- try(morie_arsau_load_aggregate_summary("2020-2022"))
 if (!inherits(res, "try-error")) head(res$data)
 }
