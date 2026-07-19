@@ -208,6 +208,10 @@ test_that("fetch_cases returns a CSV path with the mocked SIU HTTP layer", {
     .package = "rmorie"
   )
   set.seed(1)
+  # Bypass the "no live fetch under R CMD check" gate so the MOCKED HTTP layer
+  # actually drives the fetch/parse pipeline (the network primitive is mocked
+  # above, so nothing real is contacted -- this verifies the parser in CI).
+  withr::local_options(morie.siu.allow_fetch = TRUE)
   d <- tempfile("siu_mock_")
   res <- morie_siu_fetch_cases(years = 2023L, cache_dir = d,
                                 overwrite = TRUE, progress = FALSE)
