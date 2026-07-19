@@ -22,7 +22,26 @@ Thin wrapper over \code{stats::p.adjust(method = "bonferroni")}.
 }
 \examples{
 set.seed(1)
+# 60 tests: 50 null (uniform p) + 10 strong signals near zero.
 p <- c(runif(50), runif(10, 0, 0.005))
+
 res <- bonferroni(p, alpha = 0.05)
-res$n_rejected
+res                       # rich print: method, alpha, tests, rejected
+
+# The result carries the full adjusted-p and rejection vectors.
+head(res$adjusted)        # each raw p multiplied by n (capped at 1)
+res$n_rejected            # how many survive alpha after correction
+which(res$rejected)       # indices declared significant
+
+# `alpha` sets the rejection threshold; stricter alpha rejects fewer.
+bonferroni(p, alpha = 0.01)$n_rejected
+
+# `labels` names each test so the output is self-documenting.
+bonferroni(c(0.001, 0.02, 0.3),
+           labels = c("geneA", "geneB", "geneC"))$labels
+
+# Bonferroni is the most conservative FWER method -- compare to Holm/BH.
+c(bonferroni = bonferroni(p)$n_rejected,
+  holm       = holm(p)$n_rejected,
+  BH         = benjamini_hochberg(p)$n_rejected)
 }

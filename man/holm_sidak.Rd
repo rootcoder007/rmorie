@@ -24,5 +24,14 @@ installed.
 \examples{
 set.seed(1)
 p <- c(runif(30), runif(5, 0, 0.005))
-holm_sidak(p)$adjusted
+
+res <- holm_sidak(p)
+res$n_rejected
+head(res$adjusted)          # monotone (step-down enforced)
+
+# Step-down Holm with a Sidak (rather than Bonferroni) per-step bound;
+# marginally more powerful than plain Holm under independence.
+c(holm_sidak = holm_sidak(p)$n_rejected, holm = holm(p)$n_rejected)
+
+holm_sidak(c(0.001, 0.01, 0.04), labels = c("A", "B", "C"))$rejected
 }

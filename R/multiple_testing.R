@@ -177,9 +177,28 @@ NULL
 #'   \code{morie_multiple_testing}).
 #' @examples
 #' set.seed(1)
+#' # 60 tests: 50 null (uniform p) + 10 strong signals near zero.
 #' p <- c(runif(50), runif(10, 0, 0.005))
+#'
 #' res <- bonferroni(p, alpha = 0.05)
-#' res$n_rejected
+#' res                       # rich print: method, alpha, tests, rejected
+#'
+#' # The result carries the full adjusted-p and rejection vectors.
+#' head(res$adjusted)        # each raw p multiplied by n (capped at 1)
+#' res$n_rejected            # how many survive alpha after correction
+#' which(res$rejected)       # indices declared significant
+#'
+#' # `alpha` sets the rejection threshold; stricter alpha rejects fewer.
+#' bonferroni(p, alpha = 0.01)$n_rejected
+#'
+#' # `labels` names each test so the output is self-documenting.
+#' bonferroni(c(0.001, 0.02, 0.3),
+#'            labels = c("geneA", "geneB", "geneC"))$labels
+#'
+#' # Bonferroni is the most conservative FWER method -- compare to Holm/BH.
+#' c(bonferroni = bonferroni(p)$n_rejected,
+#'   holm       = holm(p)$n_rejected,
+#'   BH         = benjamini_hochberg(p)$n_rejected)
 #' @export
 bonferroni <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -198,7 +217,17 @@ bonferroni <- function(p_values, alpha = 0.05, labels = NULL) {
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
 #' p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
-#' sidak(p)
+#'
+#' res <- sidak(p)
+#' res$adjusted              # 1 - (1 - p)^m, slightly below Bonferroni
+#' res$n_rejected
+#'
+#' # Less conservative than Bonferroni under independence:
+#' rbind(sidak      = sidak(p)$adjusted,
+#'       bonferroni = bonferroni(p)$adjusted)
+#'
+#' # alpha + labels behave as in bonferroni().
+#' sidak(p, alpha = 0.01, labels = paste0("H", seq_along(p)))$rejected
 #' @export
 sidak <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -217,7 +246,18 @@ sidak <- function(p_values, alpha = 0.05, labels = NULL) {
 #' @examples
 #' set.seed(1)
 #' p <- c(runif(30), runif(5, 0, 0.005))
-#' holm(p)$adjusted
+#'
+#' res <- holm(p)
+#' res$n_rejected
+#' head(res$adjusted)
+#'
+#' # Holm is uniformly more powerful than Bonferroni (rejects at least as
+#' # many), while still controlling the family-wise error rate:
+#' c(holm = holm(p)$n_rejected, bonferroni = bonferroni(p)$n_rejected)
+#'
+#' # alpha + labels as usual.
+#' holm(c(0.001, 0.01, 0.04), alpha = 0.05,
+#'      labels = c("A", "B", "C"))$rejected
 #' @export
 holm <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -234,7 +274,16 @@ holm <- function(p_values, alpha = 0.05, labels = NULL) {
 #' @examples
 #' set.seed(1)
 #' p <- c(runif(30), runif(5, 0, 0.005))
-#' hochberg(p)$adjusted
+#'
+#' res <- hochberg(p)
+#' res$n_rejected
+#' head(res$adjusted)
+#'
+#' # Hochberg is a step-up procedure: at least as powerful as Holm under
+#' # independence / positive dependence.
+#' c(hochberg = hochberg(p)$n_rejected, holm = holm(p)$n_rejected)
+#'
+#' hochberg(c(0.001, 0.01, 0.04), labels = c("A", "B", "C"))$rejected
 #' @export
 hochberg <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -251,7 +300,16 @@ hochberg <- function(p_values, alpha = 0.05, labels = NULL) {
 #' @examples
 #' set.seed(1)
 #' p <- c(runif(30), runif(5, 0, 0.005))
-#' hommel(p)$adjusted
+#'
+#' res <- hommel(p)
+#' res$n_rejected
+#' head(res$adjusted)
+#'
+#' # Hommel is the most powerful of the stats::p.adjust FWER methods
+#' # (>= Hochberg), at higher computational cost.
+#' c(hommel = hommel(p)$n_rejected, hochberg = hochberg(p)$n_rejected)
+#'
+#' hommel(c(0.001, 0.01, 0.04), labels = c("A", "B", "C"))$rejected
 #' @export
 hommel <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -270,7 +328,16 @@ hommel <- function(p_values, alpha = 0.05, labels = NULL) {
 #' @examples
 #' set.seed(1)
 #' p <- c(runif(30), runif(5, 0, 0.005))
-#' holm_sidak(p)$adjusted
+#'
+#' res <- holm_sidak(p)
+#' res$n_rejected
+#' head(res$adjusted)          # monotone (step-down enforced)
+#'
+#' # Step-down Holm with a Sidak (rather than Bonferroni) per-step bound;
+#' # marginally more powerful than plain Holm under independence.
+#' c(holm_sidak = holm_sidak(p)$n_rejected, holm = holm(p)$n_rejected)
+#'
+#' holm_sidak(c(0.001, 0.01, 0.04), labels = c("A", "B", "C"))$rejected
 #' @export
 holm_sidak <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -300,9 +367,23 @@ holm_sidak <- function(p_values, alpha = 0.05, labels = NULL) {
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
 #' set.seed(1)
+#' # 100 tests, 20 true effects: FDR control keeps more power than FWER.
 #' p <- c(runif(80), runif(20, 0, 0.005))
+#'
 #' res <- benjamini_hochberg(p)
-#' head(res$adjusted)
+#' res$n_rejected
+#' head(res$adjusted)          # BH-adjusted q-values
+#' sum(res$rejected)           # discoveries at the default alpha = 0.05
+#'
+#' # BH controls the false discovery rate, so it rejects far more than the
+#' # FWER methods on the same data:
+#' c(BH = benjamini_hochberg(p)$n_rejected,
+#'   holm = holm(p)$n_rejected,
+#'   bonferroni = bonferroni(p)$n_rejected)
+#'
+#' # `bh()` is a shorthand alias; `alpha` sets the FDR level.
+#' identical(bh(p)$adjusted, benjamini_hochberg(p)$adjusted)
+#' benjamini_hochberg(p, alpha = 0.10)$n_rejected
 #' @export
 benjamini_hochberg <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -323,8 +404,18 @@ bh <- benjamini_hochberg
 #' @examples
 #' set.seed(1)
 #' p <- c(runif(80), runif(20, 0, 0.005))
+#'
 #' res <- benjamini_yekutieli(p)
+#' res$n_rejected
 #' head(res$adjusted)
+#'
+#' # BY controls FDR under ARBITRARY dependence, so it is more conservative
+#' # than BH (which assumes independence / positive dependence):
+#' c(BY = benjamini_yekutieli(p)$n_rejected,
+#'   BH = benjamini_hochberg(p)$n_rejected)
+#'
+#' benjamini_yekutieli(p, alpha = 0.10,
+#'                     labels = paste0("t", seq_along(p)))$n_rejected
 #' @export
 benjamini_yekutieli <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)

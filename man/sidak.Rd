@@ -24,5 +24,15 @@ Computes \eqn{1 - (1 - p)^m} directly (closed form); the
 }
 \examples{
 p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
-sidak(p)
+
+res <- sidak(p)
+res$adjusted              # 1 - (1 - p)^m, slightly below Bonferroni
+res$n_rejected
+
+# Less conservative than Bonferroni under independence:
+rbind(sidak      = sidak(p)$adjusted,
+      bonferroni = bonferroni(p)$adjusted)
+
+# alpha + labels behave as in bonferroni().
+sidak(p, alpha = 0.01, labels = paste0("H", seq_along(p)))$rejected
 }
