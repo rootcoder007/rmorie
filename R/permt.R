@@ -11,6 +11,9 @@
 #' @param alternative "two-sided", "less", or "greater".
 #' @param seed integer.
 #' @return Named list: statistic, p_value, n_x, n_y, B, alternative, method.
+#' @examples
+#' set.seed(1)
+#' morie_permutation_test_general(rnorm(30), rnorm(30, mean = 0.6), B = 500L)
 #' @keywords internal
 #' @export
 permt <- function(x, y, statistic = NULL, B = 5000L,

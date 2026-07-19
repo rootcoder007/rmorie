@@ -11,6 +11,10 @@
 #' @param lam penalty (default 1).
 #' @return list: coef, fitted, residuals, sse, r2, edf, lambda, n, method.
 #' @importFrom splines bs
+#' @examples
+#' set.seed(1)
+#' x <- sort(runif(100)); y <- sin(2 * pi * x) + rnorm(100, 0, 0.1)
+#' morie_penalized_spline(x, y)
 #' @keywords internal
 #' @export
 pspln <- function(x, y, n_knots = 20L, degree = 3L, lam = 1) {

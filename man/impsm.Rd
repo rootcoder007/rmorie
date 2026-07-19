@@ -21,4 +21,8 @@ list: estimate, estimate_sn, se, ess, n, method.
 Given samples x ~ q, estimate E_p of h(X) with weights w = p(x)/q(x).
 Returns both unnormalised and self-normalised estimators plus ESS.
 }
+\examples{
+set.seed(1)
+morie_importance_sampling(rnorm(1000))
+}
 \keyword{internal}

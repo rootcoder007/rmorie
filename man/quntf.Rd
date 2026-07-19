@@ -22,4 +22,8 @@ Q(tau) = inf over x of F_n(x) at least tau; asymptotic SE
 se(Q(tau)) ~~ sqrt(tau(1-tau) / (n f(Q(tau))^2)),
 with f estimated by a Gaussian kernel (Silverman's rule bandwidth).
 }
+\examples{
+set.seed(1)
+morie_quantile_function(rnorm(100))
+}
 \keyword{internal}

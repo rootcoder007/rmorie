@@ -15,3 +15,7 @@ RichResult with summary + religion-by-gender crosstab.
 \description{
 Individuals by religion x gender (c08)
 }
+\examples{
+res <- morie_otis_analyze_c08(morie_synth_otis("c08", n = 120L, seed = 1L))
+class(res)
+}

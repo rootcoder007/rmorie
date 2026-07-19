@@ -15,3 +15,7 @@ RichResult with summary + age-by-region crosstab.
 \description{
 Individuals in RC/seg by age category x region (c06)
 }
+\examples{
+res <- morie_otis_analyze_c06(morie_synth_otis("c06", n = 120L, seed = 1L))
+class(res)
+}

@@ -23,4 +23,8 @@ is z_T = mu - (sigma/xi) (1 - (-log(1 - 1/T))^(-xi))  if xi != 0,
 else z_T = mu - sigma log(-log(1 - 1/T)).  Delta-method SE uses the
 diagonal of the observed information returned by \code{extvm}.
 }
+\examples{
+set.seed(1)
+morie_return_level(rexp(200), return_period = 100)
+}
 \keyword{internal}

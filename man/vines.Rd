@@ -21,4 +21,8 @@ Computes the partial-correlation matrix of a multivariate sample
 (the parameters of a Gaussian D-vine with pair-copulas indexed by
 partial correlations) and the joint Gaussian copula log-likelihood.
 }
+\examples{
+set.seed(1)
+morie_vine_copula(matrix(rnorm(300), ncol = 3))
+}
 \keyword{internal}

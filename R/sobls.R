@@ -12,6 +12,8 @@
 #' @param seed integer.
 #' @return list: sample, estimate (if f given), se, N, d, method.
 #' @importFrom utils getFromNamespace
+#' @examples
+#' morie_sobol_sequence(N = 128L, d = 2L)
 #' @keywords internal
 #' @export
 sobls <- function(N = 128L, d = 1L, f = NULL, scramble = TRUE, seed = 42L) {

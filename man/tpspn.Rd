@@ -24,4 +24,9 @@ Fits f(x) = sum a_i phi(||x - x_i||) + beta_0 + beta' x with radial
 basis phi(r) = r^2 log(r).  Solves the augmented saddle-point system.
 For larger problems, prefer \code{mgcv::gam(y ~ s(x, bs="tp"))}.
 }
+\examples{
+set.seed(1)
+x <- matrix(runif(60), ncol = 2); y <- rnorm(30)
+morie_thin_plate_spline(x, y)
+}
 \keyword{internal}

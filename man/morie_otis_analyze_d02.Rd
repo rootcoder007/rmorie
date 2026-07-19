@@ -15,3 +15,7 @@ RichResult with summary + deaths-by-gender crosstab.
 \description{
 Custodial deaths by gender (d02)
 }
+\examples{
+res <- morie_otis_analyze_d02(morie_synth_otis("d02", n = 120L, seed = 1L))
+class(res)
+}

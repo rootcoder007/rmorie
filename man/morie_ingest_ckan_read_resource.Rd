@@ -47,5 +47,5 @@ Excel / JSON / Parquet readers require optional dependencies
 install hint if missing.
 }
 \examples{
-\dontrun{try(morie_ingest_ckan_read_resource("https://open.canada.ca/data", "some-resource-id"))}
+\dontrun{try(morie_ingest_ckan_read_resource("https://data.ontario.ca", "ea9dc29c-b4f1-4426-b1f2-974ce995aca1"))}
 }

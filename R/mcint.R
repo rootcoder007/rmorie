@@ -11,6 +11,8 @@
 #' @param N integer; sample size (default 1000).
 #' @param seed integer.
 #' @return Named list: estimate, se, N, method.
+#' @examples
+#' morie_monte_carlo_integration(function(x) x^2, 0, 1, N = 1000L)
 #' @keywords internal
 #' @export
 mcint_crude <- function(f, a = 0, b = 1, N = 1000L, seed = 42L) {

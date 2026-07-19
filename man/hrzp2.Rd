@@ -22,4 +22,9 @@ Named list with estimate (h), n, sigma, c, method.
 \description{
 Silverman bandwidth selector for PLR
 }
+\examples{
+set.seed(1)
+x <- rnorm(100); y <- x + rnorm(100)
+morie_horowitz_plr_bandwidth(x, y)
+}
 \keyword{internal}

@@ -29,4 +29,9 @@ weights W_h, with stratified-sampling variance
 var(y_bar_st) = sum_h W_h^2 s_h^2 / n_h.
 Python parity: \code{morie.fn.strat.stratified_mean}.
 }
+\examples{
+set.seed(1)
+df <- data.frame(y = rnorm(100), stratum = rep(c("a", "b"), each = 50))
+morie_stratified_sampling(df, y = "y", strata = "stratum")
+}
 \keyword{internal}

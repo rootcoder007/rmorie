@@ -575,18 +575,27 @@ morie_otis_analyze_c03 <- function(data) {
 #' Individuals in RC/seg by race x region (c04)
 #' @param data c04 data.frame from OTIS.
 #' @return RichResult with summary + race-by-region crosstab.
+#' @examples
+#' res <- morie_otis_analyze_c04(morie_synth_otis("c04", n = 120L, seed = 1L))
+#' class(res)
 #' @export
 morie_otis_analyze_c04 <- .otis_c_simple(
   "c04", "Individuals in RC/seg x race x region", "Race")
 #' Individuals in RC/seg by religion x region (c05)
 #' @param data c05 data.frame from OTIS.
 #' @return RichResult with summary + religion-by-region crosstab.
+#' @examples
+#' res <- morie_otis_analyze_c05(morie_synth_otis("c05", n = 120L, seed = 1L))
+#' class(res)
 #' @export
 morie_otis_analyze_c05 <- .otis_c_simple(
   "c05", "Individuals in RC/seg x religion x region", "Religion")
 #' Individuals in RC/seg by age category x region (c06)
 #' @param data c06 data.frame from OTIS.
 #' @return RichResult with summary + age-by-region crosstab.
+#' @examples
+#' res <- morie_otis_analyze_c06(morie_synth_otis("c06", n = 120L, seed = 1L))
+#' class(res)
 #' @export
 morie_otis_analyze_c06 <- .otis_c_simple(
   "c06", "Individuals in RC/seg x age category x region", "Age_Category")
@@ -617,12 +626,18 @@ morie_otis_analyze_c07 <- function(data) {
 #' Individuals by religion x gender (c08)
 #' @param data c08 data.frame from OTIS.
 #' @return RichResult with summary + religion-by-gender crosstab.
+#' @examples
+#' res <- morie_otis_analyze_c08(morie_synth_otis("c08", n = 120L, seed = 1L))
+#' class(res)
 #' @export
 morie_otis_analyze_c08 <- .otis_c_simple(
   "c08", "Individuals x religion x gender", "Religion", "Gender")
 #' Individuals by age category x gender (c09)
 #' @param data c09 data.frame from OTIS.
 #' @return RichResult with summary + age-by-gender crosstab.
+#' @examples
+#' res <- morie_otis_analyze_c09(morie_synth_otis("c09", n = 120L, seed = 1L))
+#' class(res)
 #' @export
 morie_otis_analyze_c09 <- .otis_c_simple(
   "c09", "Individuals x age category x gender", "Age_Category", "Gender")
@@ -744,24 +759,36 @@ morie_otis_analyze_d01 <- function(data) {
 #' Custodial deaths by gender (d02)
 #' @param data d02 data.frame from OTIS.
 #' @return RichResult with summary + deaths-by-gender crosstab.
+#' @examples
+#' res <- morie_otis_analyze_d02(morie_synth_otis("d02", n = 120L, seed = 1L))
+#' class(res)
 #' @export
 morie_otis_analyze_d02 <- .otis_d_simple(
   "d02", "Custodial deaths x gender", "Gender")
 #' Custodial deaths by race (d03)
 #' @param data d03 data.frame from OTIS.
 #' @return RichResult with summary + deaths-by-race crosstab.
+#' @examples
+#' res <- morie_otis_analyze_d03(morie_synth_otis("d03", n = 120L, seed = 1L))
+#' class(res)
 #' @export
 morie_otis_analyze_d03 <- .otis_d_simple(
   "d03", "Custodial deaths x race", "Race")
 #' Custodial deaths by religion (d04)
 #' @param data d04 data.frame from OTIS.
 #' @return RichResult with summary + deaths-by-religion crosstab.
+#' @examples
+#' res <- morie_otis_analyze_d04(morie_synth_otis("d04", n = 120L, seed = 1L))
+#' class(res)
 #' @export
 morie_otis_analyze_d04 <- .otis_d_simple(
   "d04", "Custodial deaths x religion", "Religion")
 #' Custodial deaths by age category (d05)
 #' @param data d05 data.frame from OTIS.
 #' @return RichResult with summary + deaths-by-age crosstab.
+#' @examples
+#' res <- morie_otis_analyze_d05(morie_synth_otis("d05", n = 120L, seed = 1L))
+#' class(res)
 #' @export
 morie_otis_analyze_d05 <- .otis_d_simple(
   "d05", "Custodial deaths x age category", "Age_Category")

@@ -8,6 +8,9 @@
 #' @param x numeric vector.
 #' @param taus probability levels in (0, 1).  Default c(0.1, 0.25, 0.5, 0.75, 0.9).
 #' @return list: taus, quantiles, se, bandwidth, n, method.
+#' @examples
+#' set.seed(1)
+#' morie_quantile_function(rnorm(100))
 #' @keywords internal
 #' @export
 quntf <- function(x, taus = NULL) {
