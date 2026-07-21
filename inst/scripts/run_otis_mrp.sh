@@ -221,14 +221,17 @@ if ask_yn "Check for missing packages and install them now?" Y; then
   say "  Running package check (this may take a few minutes the first time)..."
   "${RSCRIPT}" -e '
     pkgs <- c("data.table", "MatchIt", "glmmTMB", "lme4", "DHARMa", "Hmisc", "jsonlite")
-    installed <- rownames(installed.packages())
-    missing <- setdiff(pkgs, installed)
+    # requireNamespace per package -- installed.packages() reads every
+    # installed package from disk and CRAN forbids it for this purpose.
+    missing <- pkgs[!vapply(pkgs, requireNamespace, logical(1),
+                            quietly = TRUE)]
     if (length(missing) == 0L) {
       cat("  All required packages already installed.\n")
     } else {
       cat("  Installing:", paste(missing, collapse = ", "), "\n")
       install.packages(missing, repos = "https://cloud.r-project.org")
-      still_missing <- setdiff(missing, rownames(installed.packages()))
+      still_missing <- missing[!vapply(missing, requireNamespace,
+                                       logical(1), quietly = TRUE)]
       if (length(still_missing) > 0L) {
         cat("  WARNING: failed to install:", paste(still_missing, collapse = ", "), "\n")
         quit(status = 1)

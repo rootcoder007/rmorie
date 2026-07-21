@@ -32,10 +32,10 @@ ollama -> gemini -> api -> openai -> local.
 }
 \examples{
 \donttest{
-options(morie.llm.ollama_cached = FALSE)
+old <- options(morie.llm.ollama_cached = FALSE)
 msgs <- list(list(role = "user", content = "hello"))
 out <- try(morie_llm_ask_multi(msgs))
 print(out)
-options(morie.llm.ollama_cached = NULL)
+options(old)
 }
 }

@@ -125,7 +125,7 @@ File,Line,Status,Version,Context
 ./R/entheo_analysis.R,51,STALE_OR_DEP,0.4.0,"method = Bayne-Laukkonen Beautiful Loop (v0.4.0-alpha toy);"
 ./R/entheo_analysis.R,92,STALE_OR_DEP,0.4.0,"method = Pirez Self-Aware Networks (v0.4.0-alpha toy);"
 ./R/hawkes_fit.R,3,STALE_OR_DEP,0.9.1,"# --- R-side Hawkes-process fitter (v0.9.1; task #74) ----------------------"
-./R/install_extras.R,193,STALE_OR_DEP,3.0.0,"# Strip version constraints like testthat (>= 3.0.0) -> testthat"
+./R/install_extras.R,197,STALE_OR_DEP,3.0.0,"# Strip version constraints like testthat (>= 3.0.0) -> testthat"
 ./R/ksr02.R,7,STALE_OR_DEP,2.5.4,"#' (Kosorok Ex 2.5.4); with bracketing number bounded by 2 / epsilon^2."
 ./R/ksr02.R,11,STALE_OR_DEP,2.5.2,"#' @references Kosorok (2008); Ch 2 (Theorem 2.5.2)."
 ./R/ksr05.R,19,STALE_OR_DEP,2.5.4,"method   = bracketing number for one-sided threshold class (Kosorok 2.5.4)"
