@@ -57,6 +57,14 @@ jobs:
           if (bad > 0) stop(bad, " native-tier failures")
         shell: Rscript {0}
       - name: R CMD check (as-cran, no vignettes)
+        # donttest examples are NOT executed here: --as-cran turns them on
+        # and the network-fetch examples crawl on GitHub runners (cold
+        # caches, throttled services) until the job hits its own
+        # timeout-minutes — every "cancelled" gate run was exactly that.
+        # donttest execution is gated on the L14 self-hosted environment
+        # instead (blackholed + live runs).
+        env:
+          _R_CHECK_DONTTEST_EXAMPLES_: false
         run: |
           res <- rcmdcheck::rcmdcheck(
             args = c("--no-manual", "--as-cran", "--ignore-vignettes"),
