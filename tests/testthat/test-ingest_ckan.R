@@ -74,9 +74,13 @@ test_that("read_path JSON roundtrip with jsonlite installed", {
 
 test_that("package_search routes through http helper (mocked)", {
   set.seed(1)
+  # Mock the seam the implementation actually uses: .morie_ckan_call goes
+  # through .morie_dataset_http_text (raw body) then .morie_from_json. The
+  # old .morie_dataset_http_json mock no longer intercepted anything, so
+  # this test was silently doing a LIVE network call on every run.
   testthat::local_mocked_bindings(
-    .morie_dataset_http_json = function(url, ...) {
-      list(result = list(results = list(list(id = "mock-pkg-1"))))
+    .morie_dataset_http_text = function(url, ...) {
+      '{"success": true, "result": {"count": 1, "results": [{"id": "mock-pkg-1"}]}}'
     },
     .package = "rmorie"
   )
