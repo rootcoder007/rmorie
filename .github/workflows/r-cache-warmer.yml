@@ -27,6 +27,13 @@ jobs:
           extra-repositories: |
             https://rootcoder007.r-universe.dev
             https://stan-dev.r-universe.dev
+      # rmoriebricklayer ships a compiled libcurl fetch core and is pulled from
+      # GitHub source here, so the headers must exist before it builds.
+      - name: System libraries for the bricklayer C++ core
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libcurl4-openssl-dev libssl-dev libxml2-dev
+
       - uses: r-lib/actions/setup-r-dependencies@b7484da46de19a964f8831f505d2fcf84d1663ec # v2
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
