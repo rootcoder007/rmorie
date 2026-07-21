@@ -116,6 +116,14 @@ jobs:
         run: install.packages("rmoriebricklayer", repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))
         shell: Rscript {0}
 
+      # rmoriebricklayer ships a compiled libcurl fetch core; on a cold
+      # cache (or an R version r-universe has no binary for yet) it builds
+      # from source, which needs the libcurl headers.
+      - name: System libraries for the bricklayer C++ core (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev libssl-dev
       - uses: r-lib/actions/setup-r-dependencies@b7484da46de19a964f8831f505d2fcf84d1663ec # v2
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
