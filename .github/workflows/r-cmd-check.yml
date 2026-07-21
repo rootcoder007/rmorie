@@ -88,9 +88,9 @@ jobs:
         if: runner.os == 'Linux'
         run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL || true
 
-      - uses: r-lib/actions/setup-pandoc@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
+      - uses: r-lib/actions/setup-pandoc@b7484da46de19a964f8831f505d2fcf84d1663ec # v2
 
-      - uses: r-lib/actions/setup-r@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
+      - uses: r-lib/actions/setup-r@b7484da46de19a964f8831f505d2fcf84d1663ec # v2
         with:
           r-version: ${{ matrix.config.r }}
           use-public-rspm: true
@@ -102,7 +102,7 @@ jobs:
         run: install.packages("rmoriebricklayer", repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))
         shell: Rscript {0}
 
-      - uses: r-lib/actions/setup-r-dependencies@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
+      - uses: r-lib/actions/setup-r-dependencies@b7484da46de19a964f8831f505d2fcf84d1663ec # v2
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
           # ECOSolveR (via HonestDiD) vendors a SuiteSparse/AMD Makefile that
@@ -188,7 +188,7 @@ jobs:
           fi
         shell: bash
 
-      - uses: r-lib/actions/check-r-package@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
+      - uses: r-lib/actions/check-r-package@b7484da46de19a964f8831f505d2fcf84d1663ec # v2
         with:
           upload-snapshots: true
           args: ${{ steps.check_args.outputs.args }}
@@ -249,7 +249,7 @@ jobs:
         shell: Rscript {0}
       - name: Upload check logs on failure
         if: failure()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: debian-check-logs
           path: |
