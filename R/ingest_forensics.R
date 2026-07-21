@@ -232,13 +232,17 @@
 #' @param page_size CDE page size; server-side cap varies by endpoint.
 #' @param timeout HTTP timeout in seconds.
 #' @return A base R \code{data.frame}, one row per offence-event.
+#' Without a key the function falls back to the bundled synthetic
+#' NIBRS sample (documented schema, toy values) so the open path
+#' always works; with a key it queries the live CDE endpoint.
+#'
 #' @examples
 #' \donttest{
-#' df <- morie_ingest_forensics_nibrs(
+#' # No API key needed: falls back to the bundled synthetic sample.
+#' df <- suppressWarnings(morie_ingest_forensics_nibrs(
 #'   year = 2023, offense = "aggravated-assault", state = "GA",
-#'   api_key = Sys.getenv("FBI_CDE_API_KEY"),
-#'   max_features = 5000L
-#' )
+#'   max_features = 10L
+#' ))
 #' head(df)
 #' }
 #' @export
@@ -259,7 +263,18 @@ morie_ingest_forensics_nibrs <- function(year,
   if (is.na(yr)) {
     stop("`year` must be coercible to integer.", call. = FALSE)
   }
-  key <- .morie_forensics_require_fbi_key(api_key)
+  key <- tryCatch(.morie_forensics_require_fbi_key(api_key),
+                  error = function(e) NULL)
+  if (is.null(key)) {
+    message(
+      "morie_ingest_forensics_nibrs: no FBI CDE API key ",
+      "(api_key=/", .MORIE_FBI_CDE_API_KEY_ENV, "); returning the ",
+      "bundled synthetic NIBRS sample. Sign up free at ",
+      .MORIE_FBI_CDE_SIGNUP_URL, " for live data."
+    )
+    return(morie_datasets_nibrs(offline = TRUE,
+                                max_features = max_features))
+  }
   state_part <- if (!is.null(state) && nzchar(state)) {
     toupper(state)
   } else {

@@ -588,8 +588,14 @@ morie_tps_hawkes_advanced_fit <- function(df,
 #'
 #' @examples
 #' \donttest{
-#'   df <- morie_tps_load_tps_dataset("Assault", nrows = 3000)
-#'   rr <- morie_tps_compare_hawkes_kernels(df, ds_name = "Assault")
+#'   df <- morie_tps_load_tps_dataset("Assault", nrows = 500)
+#'   # A bounded grid (300 events, constant baseline, one kernel pair)
+#'   # keeps the example fast; the defaults sweep the full
+#'   # baseline x kernel grid over up to 4000 events.
+#'   rr <- morie_tps_compare_hawkes_kernels(
+#'     df, ds_name = "Assault", max_n = 300L,
+#'     baselines = "constant", kernels = c("exponential", "gamma")
+#'   )
 #' }
 #'
 #' @export

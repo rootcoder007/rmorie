@@ -34,6 +34,9 @@ reference group via the chosen binary matching method.
 }
 \examples{
 \donttest{
+set.seed(1)
+df <- data.frame(treat3 = sample(0:2, 200, TRUE),
+                 x1 = rnorm(200), x2 = rnorm(200))
 morie_matching_multi_treatment(df, "treat3", c("x1", "x2"))
 }
 }

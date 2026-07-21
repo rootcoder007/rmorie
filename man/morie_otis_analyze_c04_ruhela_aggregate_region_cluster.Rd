@@ -22,6 +22,7 @@ c04 region-cluster variant.
 }
 \examples{
 \donttest{
+otis_c04 <- morie_synth_otis("c04", n = 120L, seed = 1L)
 morie_otis_analyze_c04_ruhela_aggregate_region_cluster(otis_c04)
 }
 }

@@ -70,18 +70,16 @@ uses paid Gemini first and silently falls back to the local
 model on quota / network errors.
 }
 \examples{
-\donttest{
-Sys.setenv(
-  OLLAMA_HOST = "http://localhost:11434",
-  OLLAMA_MODEL = "<your-model>"
-)
-csv <- morie_fetch_siu(cache_html = TRUE)
+\dontshow{if (morie_llm_probe_ollama()) withAutoprint(\{ # examplesIf}
+# Uses the local Ollama server (OLLAMA_HOST / OLLAMA_MODEL).
+csv <- morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
 df <- utils::read.csv(csv, colClasses = "character")
-sample <- sample(df$case_number[nzchar(df$case_number)], 50L)
+# 4 cases keeps the audit example fast; scale up for a real audit.
+sample <- utils::head(df$case_number[nzchar(df$case_number)], 4L)
 audit <- morie_siu_audit_columns(sample, model = "ollama")
 # Worst 8 fields, ripe for parser fixes:
 head(audit, 8)
 # See concrete disagreements for the worst field:
 attr(audit, "examples")[[audit$field[1L]]]
-}
+\dontshow{\}) # examplesIf}
 }

@@ -377,7 +377,13 @@ morie_tps_load <- function(name, format = "csv", nrows = NULL) {
   fn <- get(fn_name, mode = "function",
             envir = asNamespace("rmorie"),
             inherits = FALSE)
-  fn(name, nrows)
+  tryCatch(fn(name, nrows), error = function(e) {
+    if (identical(fmt, "csv")) {
+      fb <- .morie_tps_sample_fallback(.morie_tps_canonical(name), nrows)
+      if (!is.null(fb)) return(fb)
+    }
+    stop(e)
+  })
 }
 
 

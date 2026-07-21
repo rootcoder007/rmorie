@@ -392,6 +392,31 @@ morie_siu_fetch_cases <- function(
     }
   }
 
+  # Corpus-first (same contract as morie_fetch_siu): when the
+  # panel-reviewed corpus from rmoriedata is installed and no live run
+  # was requested, materialize it instead of sweeping 2000+ pages.
+  if (!isTRUE(getOption("morie.siu.allow_fetch")) &&
+      requireNamespace("rmoriedata", quietly = TRUE)) {
+    corpus <- tryCatch(rmoriedata::load_siu_reports(),
+                       error = function(e) NULL)
+    if (!is.null(corpus) && nrow(corpus)) {
+      if (!is.null(years) && "case_number" %in% names(corpus)) {
+        yy <- sprintf("%02d", years %% 100L)
+        pref <- substr(corpus$case_number, 1L, 2L)
+        corpus <- corpus[pref %in% yy, , drop = FALSE]
+      }
+      dir.create(dirname(out_path), recursive = TRUE, showWarnings = FALSE)
+      utils::write.csv(corpus, out_path, row.names = FALSE, na = "")
+      if (progress) {
+        message("SIU: wrote the panel-reviewed corpus from rmoriedata (",
+                nrow(corpus), " rows) to ", out_path,
+                ". For a live re-fetch set ",
+                "options(morie.siu.allow_fetch = TRUE).")
+      }
+      return(out_path)
+    }
+  }
+
   # Never fetch the LIVE corpus (2000+ paginated pages, one HTTP call per case)
   # under R CMD check / examples -- it would hang the example phase. Return the
   # cache if present, else a typed-empty placeholder, so self-tests, examples

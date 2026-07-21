@@ -22,6 +22,7 @@ c01 region-cluster variant (year-clustered GEE).
 }
 \examples{
 \donttest{
+otis_c01 <- morie_synth_otis("c01", n = 120L, seed = 1L)
 morie_otis_analyze_c01_ruhela_aggregate_region_cluster(otis_c01)
 }
 }

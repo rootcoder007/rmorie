@@ -38,8 +38,9 @@ endpoint \verb{:generateContent} and returns the concatenated text from
 the first candidate.
 }
 \examples{
-\donttest{
-# Requires Vertex AI credentials (GCP_PROJECT + access token):
+\dontshow{if (nzchar(Sys.getenv("GOOGLE_CLOUD_PROJECT")) || nzchar(Sys.getenv("MORIE_EE_PROJECT"))) withAutoprint(\{ # examplesIf}
+# Runs only when a Google Cloud project is configured; Vertex is an
+# OPTIONAL fallback -- the default LLM path is local Ollama.
 morie_vertex_ask_gemini("Summarize the MRM framework in one line.")
-}
+\dontshow{\}) # examplesIf}
 }

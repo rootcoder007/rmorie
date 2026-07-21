@@ -1,0 +1,13 @@
+ori,state_abbr,offense_code,offense_name,data_year,incident_count
+SYN0000001,GA,13A,aggravated-assault,2023,42
+SYN0000002,GA,220,burglary,2023,17
+SYN0000003,GA,23F,theft-from-motor-vehicle,2023,29
+SYN0000004,CA,13A,aggravated-assault,2023,88
+SYN0000005,CA,220,burglary,2023,54
+SYN0000006,CA,240,motor-vehicle-theft,2023,61
+SYN0000007,NY,13A,aggravated-assault,2022,73
+SYN0000008,NY,220,burglary,2022,38
+SYN0000009,TX,13A,aggravated-assault,2022,95
+SYN0000010,TX,240,motor-vehicle-theft,2022,44
+SYN0000011,IL,13A,aggravated-assault,2023,67
+SYN0000012,IL,23F,theft-from-motor-vehicle,2023,31

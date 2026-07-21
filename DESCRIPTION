@@ -34,6 +34,16 @@ Description: Self-contained multi-domain scientific computing toolkit for
   reports of the Ontario Special Investigations Unit ('SIU',
   <https://www.siu.on.ca/>, police oversight) and of federal Structured
   Intervention Units.
+  Additional open-data connectors cover the 'CKAN' (Comprehensive
+  Knowledge Archive Network, <https://ckan.org/>) portal family
+  including Canada's federal portal (<https://open.canada.ca/>),
+  Statistics Canada (<https://www.statcan.gc.ca/>), the municipal
+  'Socrata' portals of Chicago (<https://data.cityofchicago.org/>),
+  New York City (<https://opendata.cityofnewyork.us/>), and Calgary
+  (<https://data.calgary.ca/>), and the Toronto Police Service
+  public-safety data portal (<https://data.torontopolice.on.ca/>);
+  none of these require an account or API (application programming
+  interface) key.
 License: AGPL (>= 3)
 LazyData: true
 Encoding: UTF-8

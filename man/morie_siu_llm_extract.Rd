@@ -65,9 +65,10 @@ optionally \code{OLLAMA_MODEL} (else the first model the server serves) for
 Ollama-compatible open-weight endpoints.
 }
 \examples{
-\donttest{
-Sys.setenv(GOOGLE_API_KEY = "your-gemini-key")
-r <- morie_siu_llm_extract("17-OVI-201", model = "gemini")
+\dontshow{if (morie_llm_probe_ollama()) withAutoprint(\{ # examplesIf}
+# Local Ollama is the default provider (free, no key); Gemini and
+# other cloud providers are optional fallbacks via model=.
+r <- morie_siu_llm_extract("17-OVI-201", model = "ollama")
 # Diff parser vs LLM against the HTML:
 morie_siu_compare(
   "17-OVI-201",
@@ -75,5 +76,5 @@ morie_siu_compare(
   field_map = setNames(as.list(names(r)), names(r)),
   external_case_col = "case_number"
 )
-}
+\dontshow{\}) # examplesIf}
 }

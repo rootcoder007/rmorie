@@ -28,5 +28,8 @@ aggregate Ruhela analysis on its own. Returns a structured
 loops over the b03..b09 family stay green.
 }
 \examples{
-\donttest{ morie_otis_analyze_b05_ruhela_aggregate(otis_b05) }
+\donttest{
+otis_b05 <- morie_synth_otis("b05", n = 120L, seed = 1L)
+morie_otis_analyze_b05_ruhela_aggregate(otis_b05)
+}
 }

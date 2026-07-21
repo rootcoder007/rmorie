@@ -29,8 +29,8 @@ data (Carroll, Lewis, Lo, Poole & Rosenthal, 2013).
 \donttest{
   if (requireNamespace("anominate", quietly = TRUE) &&
       requireNamespace("pscl", quietly = TRUE)) {
-    data("sen90", package = "anominate")
-    morie_anominate_ideal_points(sen90, dims = 1, nsamp = 200, burnin = 100)
+    data("sen111", package = "anominate")  # the rollcall anominate ships
+    morie_anominate_ideal_points(sen111, dims = 1, nsamp = 200, burnin = 100)
   }
 }
 }

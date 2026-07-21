@@ -35,6 +35,10 @@ signed-rank approach.  For exact bounds, see
 }
 \examples{
 \donttest{
+set.seed(1)
+df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+                 x1 = rnorm(200), x2 = rnorm(200))
+res <- morie_matching_nearest_neighbor(df, "d", c("x1", "x2"))
 morie_matching_rosenbaum_bounds(df, "y", "d", res$match_pairs)
 }
 }

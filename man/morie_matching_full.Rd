@@ -27,6 +27,9 @@ calls \pkg{optmatch}.
 }
 \examples{
 \donttest{
+set.seed(1)
+df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+                 x1 = rnorm(200), x2 = rnorm(200))
 morie_matching_full(df, "d", c("x1", "x2"))
 }
 }

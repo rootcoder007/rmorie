@@ -1005,7 +1005,11 @@ morie_otis_make_pair_b <- function(df) {
 #' @export
 #' @examples
 #' \donttest{
-#'   morie_otis_make_pair_c(morie_otis_load())
+#' # b01 (Segregation - Detailed Dataset) carries the full placement-level
+#' # schema, including NumberConsecutiveDays_Segregation (see the bundled
+#' # OTIS data dictionary).
+#' df <- morie_datasets_otis_b01_segregation_detailed(offline = TRUE)
+#' morie_otis_make_pair_c(df)
 #' }
 morie_otis_make_pair_c <- function(df) {
   needed <- c("UniqueIndividual_ID", "EndFiscalYear", "Gender",
@@ -1050,7 +1054,24 @@ morie_otis_make_pair_c <- function(df) {
 #' @export
 #' @examples
 #' \donttest{
-#'   morie_otis_causal_grid()
+#' # Simulated placement-level rows using the b01 dictionary schema
+#' # (regions, age categories, alerts); large enough for cross-fitting.
+#' set.seed(1)
+#' regions <- c("Central", "Eastern", "Northern", "Toronto", "Western")
+#' df <- data.frame(
+#'   UniqueIndividual_ID = 1:300,
+#'   EndFiscalYear = sample(2018:2021, 300, TRUE),
+#'   Gender = sample(c("Male", "Female"), 300, TRUE),
+#'   Age_Category = sample(c("18 to 24", "25 to 49", "50+"), 300, TRUE),
+#'   Region_AtTimeOfPlacement = sample(regions, 300, TRUE),
+#'   Region_MostRecentPlacement = sample(regions, 300, TRUE),
+#'   MentalHealth_Alert = sample(0:1, 300, TRUE),
+#'   SuicideRisk_Alert = sample(0:1, 300, TRUE),
+#'   SuicideWatch_Alert = sample(0:1, 300, TRUE),
+#'   Number_Of_Placements = sample(1:4, 300, TRUE),
+#'   NumberConsecutiveDays_Segregation = rpois(300, 5)
+#' )
+#' morie_otis_causal_grid(df)
 #' }
 morie_otis_causal_grid <- function(df = NULL, seed = 123L) {
   if (is.null(df)) {

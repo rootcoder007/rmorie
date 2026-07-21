@@ -33,6 +33,10 @@ after matching.  For a publication-ready plot, pass the same
 }
 \examples{
 \donttest{
+set.seed(1)
+df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+                 x1 = rnorm(200), x2 = rnorm(200))
+res <- morie_matching_nearest_neighbor(df, "d", c("x1", "x2"))
 morie_matching_love_plot_data(df, res$matched_data,
                               "d", c("x1", "x2"))
 }

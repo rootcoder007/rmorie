@@ -29,6 +29,8 @@ in Canadian corrections research.
 }
 \examples{
 \donttest{
+otis_c03 <- morie_synth_otis("c03", n = 120L, seed = 1L)
+otis_c04 <- morie_synth_otis("c04", n = 120L, seed = 1L)
 morie_otis_analyze_c_chi2(list(c03 = otis_c03, c04 = otis_c04))
 }
 }

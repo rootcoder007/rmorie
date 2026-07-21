@@ -21,5 +21,8 @@ morie_otis_analyze_c04_mrm_aggregate(data, out_dir = NULL)
 c04 aggregate Ruhela: Indigenous -> RC (by region).
 }
 \examples{
-\donttest{ morie_otis_analyze_c04_ruhela_aggregate(otis_c04) }
+\donttest{
+otis_c04 <- morie_synth_otis("c04", n = 120L, seed = 1L)
+morie_otis_analyze_c04_ruhela_aggregate(otis_c04)
+}
 }

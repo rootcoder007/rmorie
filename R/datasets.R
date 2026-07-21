@@ -1243,12 +1243,12 @@ morie_datasets_nyc_stop_and_frisk <- function(year = NULL,
 #' @param select Projection list; defaults to `"*"`.
 #' @param billing_project GCP project to bill; `NULL` uses ADC-discovered.
 #' @return A `data.frame`.
-#' @examples
-#' \donttest{
-#' # Requires Google Cloud credentials (GOOGLE_APPLICATION_CREDENTIALS).
-#' df <- morie_datasets_bigquery("my-project", "my_dataset", "my_table",
-#'                               limit = 10L)
-#' }
+#' @examplesIf nzchar(Sys.getenv("GCP_PROJECT")) && requireNamespace("bigrquery", quietly = TRUE)
+#' # Runs when the caller has bigrquery + a GCP_PROJECT billing project.
+#' # Keyless alternatives: the bundled samples in 'rmoriedata' and the
+#' # morie_datasets_*() open-data fetchers (Socrata / CKAN, no account).
+#' df <- morie_datasets_bigquery("bigquery-public-data", "chicago_crime",
+#'                               "crime", limit = 10L)
 #' @export
 morie_datasets_bigquery <- function(project, dataset, table,
                                     where = NULL, limit = NULL,

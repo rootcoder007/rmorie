@@ -21,5 +21,8 @@ morie_otis_analyze_b08_mrm_aggregate(data, out_dir = NULL)
 b08 aggregate Ruhela: Female -> median seg duration (institution-clustered).
 }
 \examples{
-\donttest{ morie_otis_analyze_b08_ruhela_aggregate(otis_b08) }
+\donttest{
+otis_b08 <- morie_synth_otis("b08", n = 120L, seed = 1L)
+morie_otis_analyze_b08_ruhela_aggregate(otis_b08)
+}
 }

@@ -42,7 +42,12 @@ covariate values.
 }
 \examples{
 \donttest{
-morie_matching_longitudinal(panel, "d", c("x1"), unit = "id",
+set.seed(1)
+panel <- data.frame(id = rep(1:40, each = 3), t = rep(1:3, 40),
+                    x1 = rnorm(120),
+                    d = rep(rbinom(40, 1, 0.5), each = 3))
+panel$t0 <- ifelse(panel$d == 1, 3, NA)
+morie_matching_longitudinal(panel, "d", "x1", unit = "id",
                             time = "t", treatment_time = "t0")
 }
 }

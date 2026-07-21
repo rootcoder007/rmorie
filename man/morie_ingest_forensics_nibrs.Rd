@@ -36,6 +36,9 @@ year scope.}
 }
 \value{
 A base R \code{data.frame}, one row per offence-event.
+Without a key the function falls back to the bundled synthetic
+NIBRS sample (documented schema, toy values) so the open path
+always works; with a key it queries the live CDE endpoint.
 }
 \description{
 Queries the FBI Crime Data Explorer NIBRS endpoint
@@ -48,11 +51,11 @@ sub-objects flattened using dotted keys
 }
 \examples{
 \donttest{
-df <- morie_ingest_forensics_nibrs(
+# No API key needed: falls back to the bundled synthetic sample.
+df <- suppressWarnings(morie_ingest_forensics_nibrs(
   year = 2023, offense = "aggravated-assault", state = "GA",
-  api_key = Sys.getenv("FBI_CDE_API_KEY"),
-  max_features = 5000L
-)
+  max_features = 10L
+))
 head(df)
 }
 }
