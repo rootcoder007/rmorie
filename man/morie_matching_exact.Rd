@@ -24,7 +24,7 @@ retained and controls receive CEM-style stratum weights
 No MatchIt at runtime.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_matching_exact(df, "d", c("region", "year"))
 }
 }

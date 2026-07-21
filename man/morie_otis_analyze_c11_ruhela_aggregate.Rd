@@ -21,5 +21,5 @@ morie_otis_analyze_c11_mrm_aggregate(data, out_dir = NULL)
 c11 aggregate Ruhela: long-duration bin (>=16 days) -> RC.
 }
 \examples{
-\dontrun{ morie_otis_analyze_c11_ruhela_aggregate(otis_c11) }
+\donttest{ morie_otis_analyze_c11_ruhela_aggregate(otis_c11) }
 }

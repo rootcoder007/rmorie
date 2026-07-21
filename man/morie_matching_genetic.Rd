@@ -43,7 +43,7 @@ Mahalanobis weight matrix maximizing worst-case covariate balance
 \code{details$best_weights}.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_matching_genetic(df, "d", c("x1", "x2"),
                        pop_size = 50, n_generations = 20)
 }

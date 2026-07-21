@@ -37,7 +37,7 @@ and Love-plot rendering), see
 \code{\link[cobalt:love.plot]{cobalt::love.plot}}.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_matching_balance(df, "d", c("x1", "x2"))
 }
 }

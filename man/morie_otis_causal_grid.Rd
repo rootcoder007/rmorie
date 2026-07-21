@@ -26,7 +26,7 @@ evidence of an identified causal effect under conditional
 exchangeability.
 }
 \examples{
-\dontrun{
+\donttest{
   morie_otis_causal_grid()
 }
 }

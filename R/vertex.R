@@ -58,7 +58,7 @@ morie_vertex_resolve_config <- function() {
 #' @param cfg Config list, or NULL to resolve.
 #' @return Character bearer token.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Requires VERTEX_ACCESS_TOKEN or a gcloud credential:
 #' tok <- morie_vertex_access_token()
 #' }
@@ -105,7 +105,7 @@ morie_vertex_access_token <- function(cfg = NULL) {
 #' @param cfg Pre-resolved config list, or NULL to auto-resolve.
 #' @return Character scalar -- trimmed generated text.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Requires Vertex AI credentials (GCP_PROJECT + access token):
 #' morie_vertex_ask_gemini("Summarize the MRM framework in one line.")
 #' }

@@ -20,7 +20,7 @@ Yearly trend (d01 Poisson CIs) + Alert x Cause / Housing
 contingency chi^2 + Cramer's V on d06 / d07.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_otis_analyze_d_chi2(list(d01 = otis_d01,
                                  d06 = otis_d06, d07 = otis_d07))
 }

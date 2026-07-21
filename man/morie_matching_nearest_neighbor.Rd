@@ -46,7 +46,7 @@ runtime. Returns the same \code{morie_match_result} shape as
 always; cross-validated against MatchIt in \code{tests/cross/}.
 }
 \examples{
-\dontrun{
+\donttest{
 res <- morie_matching_nearest_neighbor(df, "d", c("x1", "x2"),
                                        caliper = 0.2)
 }

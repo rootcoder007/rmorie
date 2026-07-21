@@ -21,5 +21,5 @@ morie_otis_analyze_b07_mrm_aggregate(data, out_dir = NULL)
 b07 aggregate Ruhela (pivot to long): With-alert -> seg placements.
 }
 \examples{
-\dontrun{ morie_otis_analyze_b07_ruhela_aggregate(otis_b07) }
+\donttest{ morie_otis_analyze_b07_ruhela_aggregate(otis_b07) }
 }

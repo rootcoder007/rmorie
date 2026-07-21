@@ -21,5 +21,5 @@ morie_otis_analyze_c05_mrm_aggregate(data, out_dir = NULL)
 c05 aggregate Ruhela: non-majority religion -> RC.
 }
 \examples{
-\dontrun{ morie_otis_analyze_c05_ruhela_aggregate(otis_c05) }
+\donttest{ morie_otis_analyze_c05_ruhela_aggregate(otis_c05) }
 }

@@ -35,7 +35,7 @@ value MATCHES THE EXPECTED FORMAT for its field. A clean sanity
 check is necessary but not sufficient for correctness.
 }
 \examples{
-\dontrun{
+\donttest{
 csv <- morie_fetch_siu(cache_dir = tempdir(), cache_html = TRUE)
 sanity <- morie_siu_sanity_check(csv)
 head(sanity, 10) # worst 10 rows -- inspect against HTML

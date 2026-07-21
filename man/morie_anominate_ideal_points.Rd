@@ -26,7 +26,7 @@ alpha-NOMINATE ideal-point estimation on roll-call legislative
 data (Carroll, Lewis, Lo, Poole & Rosenthal, 2013).
 }
 \examples{
-\dontrun{
+\donttest{
   if (requireNamespace("anominate", quietly = TRUE) &&
       requireNamespace("pscl", quietly = TRUE)) {
     data("sen90", package = "anominate")

@@ -41,7 +41,7 @@ column names preserved): \code{id}, \code{case_number},
 \code{latitude}, \code{longitude}.
 }
 \examples{
-\dontrun{
+\donttest{
 df <- morie_ingest_chicago_crime(year = 2024, max_features = 10000L)
 head(df)
 }

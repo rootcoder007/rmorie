@@ -21,5 +21,5 @@ morie_otis_analyze_c01_mrm_aggregate(data, out_dir = NULL)
 c01 aggregate Ruhela: Female -> RC count.
 }
 \examples{
-\dontrun{ morie_otis_analyze_c01_ruhela_aggregate(otis_c01) }
+\donttest{ morie_otis_analyze_c01_ruhela_aggregate(otis_c01) }
 }

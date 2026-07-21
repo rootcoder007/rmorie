@@ -21,7 +21,7 @@ morie_otis_analyze_c04_mrm_aggregate_region_cluster(data, out_dir = NULL)
 c04 region-cluster variant.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_otis_analyze_c04_ruhela_aggregate_region_cluster(otis_c04)
 }
 }

@@ -26,7 +26,7 @@ encoding -> MatchIt 1:1 NN PSM -> IRM-DML with RF nuisances ->
 multi-way clustered SE.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_otis_analyze_a01(otis_a01)
 }
 }

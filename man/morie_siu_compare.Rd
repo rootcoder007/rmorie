@@ -60,7 +60,7 @@ layout (\code{Q1 = case_number}, \code{Q3 = police_service},
 \code{field_map} for any other external schema.
 }
 \examples{
-\dontrun{
+\donttest{
 # Caller supplies their own external table; nothing about the
 # mapping or the file format is canonical to morie.
 external <- data.frame(case_id = "17-OVI-201", officers = 1L)

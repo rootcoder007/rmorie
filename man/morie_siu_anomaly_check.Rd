@@ -53,7 +53,7 @@ One API call is made per case (all fields batched into a single
 prompt with structured-JSON output).
 }
 \examples{
-\dontrun{
+\donttest{
 Sys.setenv(GOOGLE_API_KEY = "your-gemini-key")
 a <- morie_siu_anomaly_check("17-OVI-201", model = "gemini")
 subset(a, verdict == "disagree")

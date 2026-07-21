@@ -39,7 +39,7 @@ Combinations that fail to converge are recorded with an error
 message rather than aborting the whole comparison.
 }
 \examples{
-\dontrun{
+\donttest{
   df <- morie_tps_load_tps_dataset("Assault", nrows = 3000)
   rr <- morie_tps_compare_hawkes_kernels(df, ds_name = "Assault")
 }

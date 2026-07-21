@@ -70,7 +70,7 @@ uses paid Gemini first and silently falls back to the local
 model on quota / network errors.
 }
 \examples{
-\dontrun{
+\donttest{
 Sys.setenv(
   OLLAMA_HOST = "http://localhost:11434",
   OLLAMA_MODEL = "<your-model>"

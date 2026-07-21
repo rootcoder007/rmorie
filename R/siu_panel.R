@@ -49,7 +49,7 @@
 #'   values), `readers` (each reader's raw answers), `audit_chain` (each
 #'   auditor's verdicts), `models` (who served).
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Needs a live Ollama server with at least one model.
 #' res <- morie_siu_panel(5161, mode = 2)
 #' res$fields["number_of_subject_officers"]

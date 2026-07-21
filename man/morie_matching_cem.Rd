@@ -31,7 +31,7 @@ imbalance of the stratification is reported in
 \code{details$l1_before}. No MatchIt/cem at runtime.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_matching_cem(df, "d", c("x1", "x2"), n_bins = 5)
 }
 }

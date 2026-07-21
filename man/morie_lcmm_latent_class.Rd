@@ -40,7 +40,7 @@ Proust-Lima et al. (2017) latent-class linear mixed model on
 longitudinal / repeated-measures data.
 }
 \examples{
-\dontrun{
+\donttest{
   if (requireNamespace("lcmm", quietly = TRUE)) {
     data("data_hlme", package = "lcmm")
     morie_lcmm_latent_class(

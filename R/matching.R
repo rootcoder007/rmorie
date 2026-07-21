@@ -223,7 +223,7 @@ morie_matching_trim_propensity <- function(ps, lower = 0.01, upper = 0.99) {
 #'   \code{"trim"} (drop the extreme 5 percent of each tail).
 #' @return A subset of \code{data} on common support.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' df$propensity_score <- morie_matching_estimate_propensity(df, "d",
 #'                                                           c("x1", "x2"))
 #' morie_matching_common_support(df, "d")
@@ -275,7 +275,7 @@ morie_matching_common_support <- function(data, treatment,
 #' @param alpha Significance level (carried through to \code{details}).
 #' @return A list of class \code{morie_match_result}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' res <- morie_matching_nearest_neighbor(df, "d", c("x1", "x2"),
 #'                                        caliper = 0.2)
 #' }
@@ -308,7 +308,7 @@ morie_matching_nearest_neighbor <- function(data, treatment, covariates,
 #' @param exact_vars Character vector of discrete variables for exact matching.
 #' @return A list of class \code{morie_match_result}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_matching_exact(df, "d", c("region", "year"))
 #' }
 #' @export
@@ -338,7 +338,7 @@ morie_matching_exact <- function(data, treatment, exact_vars) {
 #'   without balance checking: Coarsened exact matching.
 #'   \emph{Political Analysis}, 20(1), 1--24.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_matching_cem(df, "d", c("x1", "x2"), n_bins = 5)
 #' }
 #' @export
@@ -360,7 +360,7 @@ morie_matching_cem <- function(data, treatment, covariates, n_bins = 5L) {
 #'   prior to distance matching.
 #' @return A list of class \code{morie_match_result}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_matching_mahalanobis(df, "d", c("x1", "x2"), n_neighbors = 1)
 #' }
 #' @export
@@ -395,7 +395,7 @@ morie_matching_mahalanobis <- function(data, treatment, covariates,
 #'   for back-compat).
 #' @return A list of class \code{morie_match_result}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_matching_optimal_pair(df, "d", c("x1", "x2"))
 #' }
 #' @export
@@ -421,7 +421,7 @@ morie_matching_optimal_pair <- function(data, treatment, covariates,
 #' @references Hansen, B. B. (2004). Full matching in an observational
 #'   study of coaching for the SAT. \emph{JASA}, 99(467), 609--618.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_matching_full(df, "d", c("x1", "x2"))
 #' }
 #' @export
@@ -460,7 +460,7 @@ morie_matching_full <- function(data, treatment, covariates,
 #'   data augmented with \code{._stratum} and \code{._ps} columns) and
 #'   \code{stratum_effects} (per-stratum sample sizes and PS ranges).
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_matching_subclassify(df, "d", c("x1", "x2"), n_strata = 5)
 #' }
 #' @export
@@ -520,7 +520,7 @@ morie_matching_subclassify <- function(data, treatment, covariates,
 #' @references Hainmueller, J. (2012). Entropy balancing for causal effects.
 #'   \emph{Political Analysis}, 20(1), 25--46.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' w <- morie_matching_entropy_balance(df, "d", c("x1", "x2"))
 #' }
 #' @export
@@ -573,7 +573,7 @@ morie_matching_entropy_balance <- function(data, treatment, covariates,
 #'   estimating causal effects.  \emph{Review of Economics and
 #'   Statistics}, 95(3), 932--945.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_matching_genetic(df, "d", c("x1", "x2"),
 #'                        pop_size = 50, n_generations = 20)
 #' }
@@ -605,7 +605,7 @@ morie_matching_genetic <- function(data, treatment, covariates,
 #'   for back-compat).
 #' @return A list of class \code{morie_match_result}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_matching_variable_ratio(df, "d", c("x1", "x2"),
 #'                               min_ratio = 1, max_ratio = 3)
 #' }
@@ -661,7 +661,7 @@ morie_matching_variable_ratio <- function(data, treatment, covariates,
 #'   matching in an observational study of kidney failure after surgery.
 #'   \emph{JASA}, 107(500), 1360--1371.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_matching_cardinality(df, "d", c("x1", "x2"),
 #'                            balance_threshold = 0.1)
 #' }
@@ -738,7 +738,7 @@ morie_matching_cardinality <- function(data, treatment, covariates,
 #'   \code{balance_table} (a data frame) and scalar summaries
 #'   \code{overall_balance}, \code{max_smd}, \code{balanced}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_matching_balance(df, "d", c("x1", "x2"))
 #' }
 #' @export
@@ -816,7 +816,7 @@ morie_matching_balance <- function(data, treatment, covariates,
 #' @return A data frame with columns \code{covariate}, \code{smd_before},
 #'   \code{smd_after}, \code{abs_smd_before}, \code{abs_smd_after}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_matching_love_plot_data(df, res$matched_data,
 #'                               "d", c("x1", "x2"))
 #' }
@@ -849,7 +849,7 @@ morie_matching_love_plot_data <- function(unmatched_data, matched_data,
 #' @inheritParams morie_matching_balance
 #' @return A data frame.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_matching_balance_table(df, "d", c("x1", "x2"))
 #' }
 #' @export
@@ -916,7 +916,7 @@ morie_matching_balance_table <- function(data, treatment, covariates,
 #' @param alpha Significance level for confidence intervals.
 #' @return A list of class \code{morie_te_result}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' res <- morie_matching_nearest_neighbor(df, "d", c("x1", "x2"))
 #' morie_matching_att_matched(df, "y", "d", res$match_pairs)
 #' }
@@ -955,7 +955,7 @@ morie_matching_att_matched <- function(data, outcome, treatment,
 #' @param alpha Significance level for confidence intervals.
 #' @return A list of class \code{morie_te_result}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_matching_ate_matched(df, "y", "d", c("x1", "x2"),
 #'                            weights = "._cem_weight")
 #' }
@@ -996,7 +996,7 @@ morie_matching_ate_matched <- function(data, outcome, treatment, covariates,
 #' @inheritParams morie_matching_att_matched
 #' @return A list of class \code{morie_te_result}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_matching_atc_matched(df, "y", "d", res$match_pairs)
 #' }
 #' @export
@@ -1037,7 +1037,7 @@ morie_matching_atc_matched <- function(data, outcome, treatment,
 #'   of matching estimators for average treatment effects.
 #'   \emph{Econometrica}, 74(1), 235--267.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_matching_abadie_imbens_se(df, "y", "d", res$match_pairs)
 #' }
 #' @export
@@ -1110,7 +1110,7 @@ morie_matching_abadie_imbens_se <- function(data, outcome, treatment,
 #' @references Rosenbaum, P. R. (2002). \emph{Observational Studies}
 #'   (2nd ed.).  Springer.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_matching_rosenbaum_bounds(df, "y", "d", res$match_pairs)
 #' }
 #' @export
@@ -1199,7 +1199,7 @@ morie_matching_rosenbaum_bounds <- function(data, outcome, treatment,
 #' @return A list of class \code{morie_te_result} with estimand
 #'   \code{"ATT_DR"}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_matching_doubly_robust(df, "y", "d", c("x1", "x2"),
 #'                              n_bootstrap = 200)
 #' }
@@ -1291,7 +1291,7 @@ morie_matching_doubly_robust <- function(data, outcome, treatment, covariates,
 #' @return A named list whose keys are treatment levels and whose values
 #'   are \code{morie_match_result} objects.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_matching_multi_treatment(df, "treat3", c("x1", "x2"))
 #' }
 #' @export
@@ -1346,7 +1346,7 @@ morie_matching_multi_treatment <- function(data, treatment, covariates,
 #' @param method One of \code{"nearest_neighbor"} or \code{"mahalanobis"}.
 #' @return A list of class \code{morie_match_result}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_matching_longitudinal(panel, "d", c("x1"), unit = "id",
 #'                             time = "t", treatment_time = "t0")
 #' }
@@ -1410,7 +1410,7 @@ morie_matching_longitudinal <- function(data, treatment, covariates, unit,
 #'   \code{pct_balanced_before}, \code{pct_balanced_after},
 #'   \code{n_obs_before}, \code{n_obs_after}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_matching_quality(df, res$matched_data, "d", c("x1", "x2"))
 #' }
 #' @export
@@ -1467,7 +1467,7 @@ morie_matching_quality <- function(unmatched_data, matched_data,
 #'   \code{overlap_region}, \code{n_off_support}, \code{pct_off_support},
 #'   and \code{effective_sample_size}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_matching_overlap(df, "d", c("x1", "x2"))
 #' }
 #' @export

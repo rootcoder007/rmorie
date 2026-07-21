@@ -36,7 +36,7 @@ pages through the results.  Returns morie's documented schema -
 \code{last_name}, \code{city}, \code{circumstances}.
 }
 \examples{
-\dontrun{
+\donttest{
 df <- morie_ingest_forensics_namus_missing(state = "CA",
                                            max_features = 1000L)
 head(df)

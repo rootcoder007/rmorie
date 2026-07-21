@@ -26,7 +26,7 @@ the number / percentage of units off support, and the IPW effective
 sample size.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_matching_overlap(df, "d", c("x1", "x2"))
 }
 }

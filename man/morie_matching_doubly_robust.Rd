@@ -40,7 +40,7 @@ regression adjustment within the matched sample.  Standard errors come
 from a non-parametric bootstrap.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_matching_doubly_robust(df, "y", "d", c("x1", "x2"),
                              n_bootstrap = 200)
 }

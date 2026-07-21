@@ -45,7 +45,7 @@ pages through transparently using \code{resultOffset} and the
 \code{exceededTransferLimit} flag, emitting one data.frame.
 }
 \examples{
-\dontrun{
+\donttest{
 df <- morie_ingest_tps_feature_layer(
   morie_ingest_tps_layers()$url[
     morie_ingest_tps_layers()$name == "major-crime"

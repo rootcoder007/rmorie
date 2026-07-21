@@ -21,5 +21,5 @@ morie_otis_analyze_d05_mrm_aggregate(data, out_dir = NULL)
 d05 aggregate Ruhela: Age 50+ -> custodial deaths.
 }
 \examples{
-\dontrun{ morie_otis_analyze_d05_ruhela_aggregate(otis_d05) }
+\donttest{ morie_otis_analyze_d05_ruhela_aggregate(otis_d05) }
 }

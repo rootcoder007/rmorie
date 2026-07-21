@@ -32,7 +32,7 @@ after matching.  For a publication-ready plot, pass the same
 \code{matchit} object to \code{\link[cobalt:love.plot]{cobalt::love.plot}}.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_matching_love_plot_data(df, res$matched_data,
                               "d", c("x1", "x2"))
 }

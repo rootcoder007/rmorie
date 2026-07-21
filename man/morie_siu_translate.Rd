@@ -97,7 +97,7 @@ fine-tuned for translation. Falls back to whatever model
 \code{OLLAMA_MODEL} points at.
 }
 \examples{
-\dontrun{
+\donttest{
 Sys.setenv(
   OLLAMA_HOST = "http://localhost:11434",
   OLLAMA_MODEL = "translategemma:latest"
@@ -110,7 +110,7 @@ morie_siu_translate(target_lang = "hi")
 # Re-fetch picks up the new overrides automatically:
 csv <- morie_fetch_siu(overwrite = TRUE)
 }
-\dontrun{
+\donttest{
 # Needs the SIU HTML cache plus a configured LLM provider (e.g. local
 # ollama); translates the French-only directors reports field-by-field.
 res <- morie_siu_translate_fr_to_en(case_numbers = "26-OCI-168")

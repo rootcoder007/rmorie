@@ -20,5 +20,5 @@ of INDIVIDUALS by binned aggregate duration). Reports both
 restrictive-confinement and segregation-only views.
 }
 \examples{
-\dontrun{ morie_otis_analyze_c11_mandela_classification(otis_c11) }
+\donttest{ morie_otis_analyze_c11_mandela_classification(otis_c11) }
 }

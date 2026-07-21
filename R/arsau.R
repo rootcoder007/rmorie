@@ -796,7 +796,7 @@ morie_arsau_describe <- function(kind, year, language = "en", data_dir = NULL,
 
 #' @return \code{x}, invisibly.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' res <- try(morie_arsau_analyze_probe_cycle_records(year = "2024"))
 #' if (!inherits(res, "try-error")) print(res)
 #' \references{

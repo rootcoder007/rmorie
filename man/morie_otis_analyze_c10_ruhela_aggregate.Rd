@@ -21,5 +21,5 @@ morie_otis_analyze_c10_mrm_aggregate(data, out_dir = NULL)
 c10 aggregate Ruhela: Female -> median RC days (institution GEE).
 }
 \examples{
-\dontrun{ morie_otis_analyze_c10_ruhela_aggregate(otis_c10) }
+\donttest{ morie_otis_analyze_c10_ruhela_aggregate(otis_c10) }
 }

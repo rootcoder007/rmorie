@@ -34,7 +34,7 @@ signed-rank approach.  For exact bounds, see
 \pkg{rbounds} package.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_matching_rosenbaum_bounds(df, "y", "d", res$match_pairs)
 }
 }

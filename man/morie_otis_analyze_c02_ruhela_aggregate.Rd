@@ -21,5 +21,5 @@ morie_otis_analyze_c02_mrm_aggregate(data, out_dir = NULL)
 c02 aggregate Ruhela: Female -> RC (institution GEE).
 }
 \examples{
-\dontrun{ morie_otis_analyze_c02_ruhela_aggregate(otis_c02) }
+\donttest{ morie_otis_analyze_c02_ruhela_aggregate(otis_c02) }
 }

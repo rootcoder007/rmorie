@@ -26,7 +26,7 @@ Thin wrapper around \code{MatchIt::matchit(method = "full")}, which
 calls \pkg{optmatch}.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_matching_full(df, "d", c("x1", "x2"))
 }
 }

@@ -153,7 +153,7 @@ MORIE_TPS_REGISTRY <- list(
 #'   OCCURRENCE_* / REPORTED_* column renaming applied.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' df <- morie_tps_load_dataset("Assault", nrows = 1000L)
 #' }
 #'

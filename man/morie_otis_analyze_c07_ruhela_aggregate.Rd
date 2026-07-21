@@ -21,5 +21,5 @@ morie_otis_analyze_c07_mrm_aggregate(data, out_dir = NULL)
 c07 aggregate Ruhela: Alert presence x Gender -> RC.
 }
 \examples{
-\dontrun{ morie_otis_analyze_c07_ruhela_aggregate(otis_c07) }
+\donttest{ morie_otis_analyze_c07_ruhela_aggregate(otis_c07) }
 }

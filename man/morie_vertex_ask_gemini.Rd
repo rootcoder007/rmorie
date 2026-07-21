@@ -38,7 +38,7 @@ endpoint \verb{:generateContent} and returns the concatenated text from
 the first candidate.
 }
 \examples{
-\dontrun{
+\donttest{
 # Requires Vertex AI credentials (GCP_PROJECT + access token):
 morie_vertex_ask_gemini("Summarize the MRM framework in one line.")
 }

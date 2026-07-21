@@ -43,7 +43,7 @@ none of those yields a project the call errors out with a clear
 message before contacting BigQuery.
 }
 \examples{
-\dontrun{
+\donttest{
 # Requires the 'bigrquery' package, ADC, and a billing project.
 Sys.setenv(GCP_PROJECT = "my-billing-project")
 df <- morie_ingest_bigquery_query(

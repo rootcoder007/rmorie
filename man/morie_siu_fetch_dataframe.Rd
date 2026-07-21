@@ -18,7 +18,7 @@ data frame instead of the CSV path. Mirrors the Python
 \code{fetch_siu_dataframe()} adapter used by the dataset catalog.
 }
 \examples{
-\dontrun{
+\donttest{
 df <- morie_siu_fetch_dataframe(cache_dir = tempfile("siu_"))
 utils::head(df)
 }

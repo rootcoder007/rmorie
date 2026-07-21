@@ -28,7 +28,7 @@ the c-series datasets. Honour to Prof. Doob's chi-square tradition
 in Canadian corrections research.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_otis_analyze_c_chi2(list(c03 = otis_c03, c04 = otis_c04))
 }
 }

@@ -21,7 +21,7 @@ bulk CSV ZIP. Caller is responsible for downloading the ZIP
 (typically large -- often hundreds of MB).
 }
 \examples{
-\dontrun{
+\donttest{
 url <- morie_datasets_statcan_full_csv_url(35100177)
 # download.file(url, "ccjs_177.zip")
 }

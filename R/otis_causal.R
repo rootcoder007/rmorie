@@ -1004,7 +1004,7 @@ morie_otis_make_pair_b <- function(df) {
 #' @return Named list \code{list(data, T = "T_c", Y = "Y_c", covariates)}.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   morie_otis_make_pair_c(morie_otis_load())
 #' }
 morie_otis_make_pair_c <- function(df) {
@@ -1049,7 +1049,7 @@ morie_otis_make_pair_c <- function(df) {
 #'   \code{ate_pval}, \code{ci95_lo}, \code{ci95_hi}, \code{notes}.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   morie_otis_causal_grid()
 #' }
 morie_otis_causal_grid <- function(df = NULL, seed = 123L) {

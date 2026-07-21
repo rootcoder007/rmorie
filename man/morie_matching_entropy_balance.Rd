@@ -38,7 +38,7 @@ weights for the control group so that the weighted moments of the
 covariates match those of the treated group.
 }
 \examples{
-\dontrun{
+\donttest{
 w <- morie_matching_entropy_balance(df, "d", c("x1", "x2"))
 }
 }

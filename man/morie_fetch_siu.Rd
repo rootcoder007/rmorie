@@ -88,7 +88,7 @@ parsed corpus is not shipped with the package; each user runs the
 parser themselves, which is fair use of public oversight reports.
 }
 \examples{
-\dontrun{
+\donttest{
 # Network: parses the full Ontario SIU corpus (~15-25 min at the
 # default polite rate of 4 RPS).
 csv <- morie_fetch_siu(cache_dir = tempdir())

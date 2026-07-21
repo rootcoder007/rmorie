@@ -21,5 +21,5 @@ morie_otis_analyze_b09_mrm_aggregate(data, out_dir = NULL)
 b09 aggregate Ruhela: Female -> individuals in segregation.
 }
 \examples{
-\dontrun{ morie_otis_analyze_b09_ruhela_aggregate(otis_b09) }
+\donttest{ morie_otis_analyze_b09_ruhela_aggregate(otis_b09) }
 }

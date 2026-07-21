@@ -21,5 +21,5 @@ morie_otis_analyze_b06_mrm_aggregate(data, out_dir = NULL)
 b06 aggregate Ruhela: Disciplinary reason -> seg placements.
 }
 \examples{
-\dontrun{ morie_otis_analyze_b06_ruhela_aggregate(otis_b06) }
+\donttest{ morie_otis_analyze_b06_ruhela_aggregate(otis_b06) }
 }

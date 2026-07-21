@@ -1060,7 +1060,7 @@ morie_spatial_voting_bayesian_am <- function(Z, n_samples = 1000L,
 #' @return List: `positions`/`coords` (posterior-mean or modal
 #'   configuration), fit diagnostics, and an `engine` tag.
 #' @references Oh & Raftery (2001) JASA 96(455).
-#' @examples \dontrun{morie_spatial_voting_bayesian_mds(matrix(0, 5, 5))}
+#' @examples \donttest{morie_spatial_voting_bayesian_mds(matrix(0, 5, 5))}
 #' @param n_dims Integer; latent dimensionality.
 #' @param n_samples Integer; posterior-sample count.
 #' @param sigma_init Numeric; initial value for the latent-coordinate scale (default 1).
@@ -1095,7 +1095,7 @@ morie_spatial_voting_bayesian_mds <- function(D, n_dims = 2L,
 #'   `engine` tag (smacof deterministic mode, or the native
 #'   Metropolis sampler when smacof is absent).
 #' @references Bakker, R. and Poole, K. T. (2013).
-#' @examples \dontrun{morie_spatial_voting_bayesian_unfolding(matrix(0, 3, 4))}
+#' @examples \donttest{morie_spatial_voting_bayesian_unfolding(matrix(0, 3, 4))}
 #' @param n_samples Integer; posterior-sample count.
 #' @export
 morie_spatial_voting_bayesian_unfolding <- function(D, n_dims = 2L,

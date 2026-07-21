@@ -36,7 +36,7 @@ exact shortest-augmenting-path assignment on whitened covariates.
 No MatchIt/optmatch at runtime.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_matching_optimal_pair(df, "d", c("x1", "x2"))
 }
 }

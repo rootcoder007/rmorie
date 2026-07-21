@@ -35,7 +35,7 @@ between treated and control outcomes.  Uses the explicit
 \code{morie_estimate_ate} in \code{causal.R}.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_matching_ate_matched(df, "y", "d", c("x1", "x2"),
                            weights = "._cem_weight")
 }

@@ -21,5 +21,5 @@ morie_otis_analyze_c03_mrm_aggregate(data, out_dir = NULL)
 c03 aggregate Ruhela: Indigenous -> RC.
 }
 \examples{
-\dontrun{ morie_otis_analyze_c03_ruhela_aggregate(otis_c03) }
+\donttest{ morie_otis_analyze_c03_ruhela_aggregate(otis_c03) }
 }

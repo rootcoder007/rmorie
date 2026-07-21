@@ -33,7 +33,7 @@ For each non-reference treatment level, matches treated units to the
 reference group via the chosen binary matching method.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_matching_multi_treatment(df, "treat3", c("x1", "x2"))
 }
 }

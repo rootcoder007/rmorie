@@ -37,7 +37,7 @@ A list of class \code{morie_match_result}.
 Thin wrapper around \code{MatchIt::matchit(distance = "mahalanobis")}.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_matching_mahalanobis(df, "d", c("x1", "x2"), n_neighbors = 1)
 }
 }

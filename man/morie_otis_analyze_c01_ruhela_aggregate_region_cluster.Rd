@@ -21,7 +21,7 @@ morie_otis_analyze_c01_mrm_aggregate_region_cluster(data, out_dir = NULL)
 c01 region-cluster variant (year-clustered GEE).
 }
 \examples{
-\dontrun{
+\donttest{
 morie_otis_analyze_c01_ruhela_aggregate_region_cluster(otis_c01)
 }
 }

@@ -32,7 +32,7 @@ Compares balance before and after matching and reports percent bias
 reduction, count of balanced covariates, and overlap statistics.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_matching_quality(df, res$matched_data, "d", c("x1", "x2"))
 }
 }

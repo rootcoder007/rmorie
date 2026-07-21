@@ -48,7 +48,7 @@ backtick-quoted \code{SELECT} against a fully-qualified table and
 downloads the result.
 }
 \examples{
-\dontrun{
+\donttest{
 # Requires the 'bigrquery' package, ADC, and a billing project.
 df <- morie_ingest_bigquery_table(
   project = "bigquery-public-data",

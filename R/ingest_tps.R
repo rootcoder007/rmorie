@@ -174,7 +174,7 @@ morie_ingest_tps_layers <- function() {
 #' @param user_agent,timeout Standard request knobs.
 #' @return A base R \code{data.frame}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' df <- morie_ingest_tps_feature_layer(
 #'   morie_ingest_tps_layers()$url[
 #'     morie_ingest_tps_layers()$name == "major-crime"

@@ -21,5 +21,5 @@ morie_otis_analyze_b04_mrm_aggregate(data, out_dir = NULL)
 b04 aggregate Ruhela: Female -> median seg duration.
 }
 \examples{
-\dontrun{ morie_otis_analyze_b04_ruhela_aggregate(otis_b04) }
+\donttest{ morie_otis_analyze_b04_ruhela_aggregate(otis_b04) }
 }

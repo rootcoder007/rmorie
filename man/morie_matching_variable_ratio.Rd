@@ -37,7 +37,7 @@ ratio = max_ratio, min.controls = min_ratio)} which supports
 variable-ratio nearest-neighbour matching natively.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_matching_variable_ratio(df, "d", c("x1", "x2"),
                               min_ratio = 1, max_ratio = 3)
 }

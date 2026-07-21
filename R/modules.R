@@ -146,7 +146,7 @@ morie_canonicalize_cpads_data <- function(data) {
 #' @param cpads_csv Path to the CPADS CSV.
 #' @return Canonicalized CPADS data frame.
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
-#' \dontrun{
+#' \donttest{
 #' # Reads and canonicalises the CPADS PUMF CSV. The default CSV lives in
 #' # a morie project tree; the CKAN-fetched PUMF works identically (see
 #' # morie_load_dataset("ocp21")). The tryCatch guard lets the example

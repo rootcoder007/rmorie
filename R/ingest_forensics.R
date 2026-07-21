@@ -233,7 +233,7 @@
 #' @param timeout HTTP timeout in seconds.
 #' @return A base R \code{data.frame}, one row per offence-event.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' df <- morie_ingest_forensics_nibrs(
 #'   year = 2023, offense = "aggravated-assault", state = "GA",
 #'   api_key = Sys.getenv("FBI_CDE_API_KEY"),
@@ -385,7 +385,7 @@ morie_ingest_forensics_nibrs <- function(year,
 #' @param user_agent,timeout Standard request knobs.
 #' @return A base R \code{data.frame}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' df <- morie_ingest_forensics_namus_missing(state = "CA",
 #'                                            max_features = 1000L)
 #' head(df)
