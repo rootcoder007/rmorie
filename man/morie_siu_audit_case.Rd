@@ -42,7 +42,7 @@ by \code{morie_fetch_siu(cache_html = TRUE)}) when available, and
 falls back to a polite live fetch when the cache is missing.
 }
 \examples{
-\dontrun{
+\donttest{
 a <- morie_siu_audit_case(
   "17-OVI-201",
   cache_dir = file.path(tempdir(), "morie", "siu")

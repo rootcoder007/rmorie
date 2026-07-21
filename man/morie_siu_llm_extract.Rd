@@ -65,7 +65,7 @@ optionally \code{OLLAMA_MODEL} (else the first model the server serves) for
 Ollama-compatible open-weight endpoints.
 }
 \examples{
-\dontrun{
+\donttest{
 Sys.setenv(GOOGLE_API_KEY = "your-gemini-key")
 r <- morie_siu_llm_extract("17-OVI-201", model = "gemini")
 # Diff parser vs LLM against the HTML:

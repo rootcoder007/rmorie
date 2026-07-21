@@ -319,7 +319,7 @@ morie_dp_gaussian_mixture <- function(y, iterations = 1000, ...) {
 #'   diagnostics).
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   if (requireNamespace("lcmm", quietly = TRUE)) {
 #'     data("data_hlme", package = "lcmm")
 #'     morie_lcmm_latent_class(

@@ -34,7 +34,7 @@ exact mixed-integer-programming alternative see
 \code{\link[designmatch:cardmatch]{designmatch::cardmatch}}.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_matching_cardinality(df, "d", c("x1", "x2"),
                            balance_threshold = 0.1)
 }

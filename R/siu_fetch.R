@@ -359,7 +359,7 @@ morie_siu_cache_path <- function(cache_dir = file.path(tempdir(), "morie", "siu"
 #'   fetch when \code{TRUE} (default).
 #' @return Path to the written \code{SIU.csv}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Network: scrapes the SIU index (~5-15 min at the polite rate).
 #' csv <- morie_siu_fetch_cases(cache_dir = tempfile("siu_"))
 #' utils::head(utils::read.csv(csv))
@@ -508,7 +508,7 @@ morie_siu_fetch_cases <- function(
 #' @param ... Forwarded to \code{morie_siu_fetch_cases}.
 #' @return A data frame with the six-column SIU header schema.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' df <- morie_siu_fetch_dataframe(cache_dir = tempfile("siu_"))
 #' utils::head(df)
 #' }

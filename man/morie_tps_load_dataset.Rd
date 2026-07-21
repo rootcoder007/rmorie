@@ -32,7 +32,7 @@ For non-CSV sibling formats (Excel, GeoJSON, KML, GeoPackage,
 Shapefile, etc.), use \code{\link[=morie_tps_load]{morie_tps_load()}} from \code{tps_io.R} instead.
 }
 \examples{
-\dontrun{
+\donttest{
 df <- morie_tps_load_dataset("Assault", nrows = 1000L)
 }
 

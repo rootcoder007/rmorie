@@ -31,7 +31,7 @@ resolves to \code{ocp21}.
 }
 \examples{
 \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-\dontrun{
+\donttest{
 df <- morie_load_dataset("ocp21") # CPADS 2021-2022 (default DuckDB cache)
 df <- morie_load_dataset("ocp21", refresh = TRUE) # force re-fetch
 

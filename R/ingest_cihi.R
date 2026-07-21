@@ -80,7 +80,7 @@ morie_datasets_cihi_data_tables <- function() {
 #' @param ... forwarded to readxl::read_excel.
 #' @return base R data.frame.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Any table from the catalogue, e.g. the injury/trauma ED table:
 #' u <- morie_datasets_cihi_data_tables()$url[1]
 #' df <- morie_ingest_cihi_xlsx(u)

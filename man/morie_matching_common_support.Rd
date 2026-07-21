@@ -30,7 +30,7 @@ Drops units whose propensity score falls outside the overlap region
 of treated and control units.
 }
 \examples{
-\dontrun{
+\donttest{
 df$propensity_score <- morie_matching_estimate_propensity(df, "d",
                                                           c("x1", "x2"))
 morie_matching_common_support(df, "d")

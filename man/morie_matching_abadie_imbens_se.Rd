@@ -29,7 +29,7 @@ Computes the conditional-variance Abadie-Imbens SE accounting for the
 fact that matching introduces correlation across matched observations.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_matching_abadie_imbens_se(df, "y", "d", res$match_pairs)
 }
 }

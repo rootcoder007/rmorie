@@ -208,7 +208,7 @@ morie_rdd_power_calc <- function(data, cutoff = 0, ...) {
 #'   \code{$raw} (an \code{anominate} posterior-sample object).
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   if (requireNamespace("anominate", quietly = TRUE) &&
 #'       requireNamespace("pscl", quietly = TRUE)) {
 #'     data("sen90", package = "anominate")

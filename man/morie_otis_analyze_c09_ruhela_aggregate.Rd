@@ -21,5 +21,5 @@ morie_otis_analyze_c09_mrm_aggregate(data, out_dir = NULL)
 c09 aggregate Ruhela: Age 50+ x gender -> RC.
 }
 \examples{
-\dontrun{ morie_otis_analyze_c09_ruhela_aggregate(otis_c09) }
+\donttest{ morie_otis_analyze_c09_ruhela_aggregate(otis_c09) }
 }

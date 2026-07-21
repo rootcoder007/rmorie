@@ -39,7 +39,7 @@ Hufnagel & Geisel (2006). For a power-law tail \eqn{p(\ell) \propto
 Standard error is obtained by 200 nonparametric bootstrap resamples.
 }
 \examples{
-\dontrun{
+\donttest{
   rr <- morie_tps_levy_flight_alpha("Assault", save_fig = FALSE)
   print(rr$summary_lines$alpha)
 }

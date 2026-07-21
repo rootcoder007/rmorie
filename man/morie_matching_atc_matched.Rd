@@ -27,7 +27,7 @@ explicit \code{_matched} suffix to distinguish it from the IPW estimator
 \code{morie_estimate_atc} in \code{causal.R}.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_matching_atc_matched(df, "y", "d", res$match_pairs)
 }
 }

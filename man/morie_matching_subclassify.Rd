@@ -35,7 +35,7 @@ reports within-stratum sample sizes and PS ranges, preserving the
 rmorie return shape (\code{data_with_strata} + \code{stratum_effects}).
 }
 \examples{
-\dontrun{
+\donttest{
 morie_matching_subclassify(df, "d", c("x1", "x2"), n_strata = 5)
 }
 }

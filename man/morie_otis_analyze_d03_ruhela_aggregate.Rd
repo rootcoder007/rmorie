@@ -21,5 +21,5 @@ morie_otis_analyze_d03_mrm_aggregate(data, out_dir = NULL)
 d03 aggregate Ruhela: Indigenous -> custodial deaths.
 }
 \examples{
-\dontrun{ morie_otis_analyze_d03_ruhela_aggregate(otis_d03) }
+\donttest{ morie_otis_analyze_d03_ruhela_aggregate(otis_d03) }
 }

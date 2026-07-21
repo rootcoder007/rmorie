@@ -21,5 +21,5 @@ morie_otis_analyze_d02_mrm_aggregate(data, out_dir = NULL)
 d02 aggregate Ruhela: Female -> custodial deaths.
 }
 \examples{
-\dontrun{ morie_otis_analyze_d02_ruhela_aggregate(otis_d02) }
+\donttest{ morie_otis_analyze_d02_ruhela_aggregate(otis_d02) }
 }

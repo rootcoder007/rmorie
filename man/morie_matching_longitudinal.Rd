@@ -41,7 +41,7 @@ Matches treated and control units on the basis of their pre-treatment
 covariate values.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_matching_longitudinal(panel, "d", c("x1"), unit = "id",
                             time = "t", treatment_time = "t0")
 }

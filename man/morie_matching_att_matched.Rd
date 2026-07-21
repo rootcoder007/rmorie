@@ -37,7 +37,7 @@ suffix to distinguish it from the IPW estimator
 \code{morie_estimate_att} in \code{causal.R}.
 }
 \examples{
-\dontrun{
+\donttest{
 res <- morie_matching_nearest_neighbor(df, "d", c("x1", "x2"))
 morie_matching_att_matched(df, "y", "d", res$match_pairs)
 }

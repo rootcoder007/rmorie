@@ -42,7 +42,7 @@ This is the lightweight R-only path. For the full 64-column corpus
 use \code{\link{morie_fetch_siu}} (compiled C++ harvester).
 }
 \examples{
-\dontrun{
+\donttest{
 # Network: scrapes the SIU index (~5-15 min at the polite rate).
 csv <- morie_siu_fetch_cases(cache_dir = tempfile("siu_"))
 utils::head(utils::read.csv(csv))

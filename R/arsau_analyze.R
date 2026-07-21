@@ -772,7 +772,7 @@ morie_arsau_analyze_detailed_dataset <- function(year_range = "2020-2022",
 
 #' @return Invisibly returns \code{x} unchanged.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' res <- try(morie_arsau_analyze_main_records(year = "2024"))
 #' if (!inherits(res, "try-error")) print(res)
 #' \references{

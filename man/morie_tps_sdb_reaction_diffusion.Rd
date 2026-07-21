@@ -61,7 +61,7 @@ on the raw incidents (delegated to \code{morie_tps_dbscan_clusters}
 when available).
 }
 \examples{
-\dontrun{
+\donttest{
   rr <- morie_tps_sdb_reaction_diffusion(
     "Assault", sample_rows = 5000, n_steps = 200, save_fig = FALSE
   )

@@ -35,7 +35,7 @@ A data.frame.
 Fetch data from the CKAN API and cache it
 }
 \examples{
-\dontrun{
+\donttest{
 # Requires network access. Fetches the first 5000 rows of the
 # Canadian Postsecondary Alcohol and Drug Use Survey from the
 # Government of Canada CKAN datastore:

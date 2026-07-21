@@ -36,7 +36,7 @@ from \code{y}; the interaction rates \eqn{\beta, \delta}{beta, delta} follow by
 the equilibrium relations.
 }
 \examples{
-\dontrun{
+\donttest{
   rr <- morie_tps_lotka_volterra_police_crime("Assault",
                                                 save_fig = FALSE)
   print(rr$summary_lines)

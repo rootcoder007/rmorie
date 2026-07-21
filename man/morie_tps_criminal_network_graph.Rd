@@ -37,7 +37,7 @@ a premise-by-premise edge-weighted graph. Edge weight is the count
 of neighbourhoods in which both premise types appear.
 }
 \examples{
-\dontrun{
+\donttest{
   rr <- morie_tps_criminal_network_graph("Assault",
                                            top_n_premises = 10L,
                                            save_fig = FALSE)

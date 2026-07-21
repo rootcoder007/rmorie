@@ -993,7 +993,7 @@ print.morie_otis_analysis_result <- function(x, ...) {
 #'   helpers aren't loaded, returns a "not yet ported" stub.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_otis_analyze_a01(otis_a01)
 #' }
 morie_otis_analyze_a01 <- function(data = NULL, out_dir = NULL) {
@@ -1424,7 +1424,7 @@ IRR > 1 ==> treatment increases the count rate; IRR < 1 ",
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_b03_ruhela_aggregate(otis_b03) }
+#' \donttest{ morie_otis_analyze_b03_ruhela_aggregate(otis_b03) }
 morie_otis_analyze_b03_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("Alert_Presence", "Number_SegregationPlacements")
   if (!all(need %in% names(data)))
@@ -1457,7 +1457,7 @@ morie_otis_analyze_b03_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_b04_ruhela_aggregate(otis_b04) }
+#' \donttest{ morie_otis_analyze_b04_ruhela_aggregate(otis_b04) }
 morie_otis_analyze_b04_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Region_AtTimeOfPlacement", "Gender",
             "Measure", "NumberConsecutiveDays_Segregation")
@@ -1505,7 +1505,7 @@ morie_otis_analyze_b04_ruhela_aggregate <- function(data, out_dir = NULL) {
 #'   applicable" note in \code{warnings}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_b05_ruhela_aggregate(otis_b05) }
+#' \donttest{ morie_otis_analyze_b05_ruhela_aggregate(otis_b05) }
 morie_otis_analyze_b05_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Consecutive_Duration",
             "Number_SegregationPlacements")
@@ -1534,7 +1534,7 @@ morie_otis_analyze_b05_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_b06_ruhela_aggregate(otis_b06) }
+#' \donttest{ morie_otis_analyze_b06_ruhela_aggregate(otis_b06) }
 morie_otis_analyze_b06_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Reason", "Gender",
             "Region_AtTimeOfPlacement",
@@ -1568,7 +1568,7 @@ morie_otis_analyze_b06_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_b07_ruhela_aggregate(otis_b07) }
+#' \donttest{ morie_otis_analyze_b07_ruhela_aggregate(otis_b07) }
 morie_otis_analyze_b07_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Alert_Type", "Gender",
             "Number_Segregation_Placements_With_Alert",
@@ -1616,7 +1616,7 @@ morie_otis_analyze_b07_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_b08_ruhela_aggregate(otis_b08) }
+#' \donttest{ morie_otis_analyze_b08_ruhela_aggregate(otis_b08) }
 morie_otis_analyze_b08_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Region_AtTimeOfPlacement",
             "Institution_AtTimeOfPlacement", "Gender",
@@ -1653,7 +1653,7 @@ morie_otis_analyze_b08_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_b09_ruhela_aggregate(otis_b09) }
+#' \donttest{ morie_otis_analyze_b09_ruhela_aggregate(otis_b09) }
 morie_otis_analyze_b09_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "NumberPlacements_Segregation", "Gender",
             "NumberIndividuals_Segregation")
@@ -1683,7 +1683,7 @@ morie_otis_analyze_b09_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_c01_ruhela_aggregate(otis_c01) }
+#' \donttest{ morie_otis_analyze_c01_ruhela_aggregate(otis_c01) }
 morie_otis_analyze_c01_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Gender",
             "NumberIndividuals_RestrictiveConfinement")
@@ -1709,7 +1709,7 @@ morie_otis_analyze_c01_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_otis_analyze_c01_ruhela_aggregate_region_cluster(otis_c01)
 #' }
 morie_otis_analyze_c01_ruhela_aggregate_region_cluster <- function(data,
@@ -1742,7 +1742,7 @@ morie_otis_analyze_c01_ruhela_aggregate_region_cluster <- function(data,
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_c02_ruhela_aggregate(otis_c02) }
+#' \donttest{ morie_otis_analyze_c02_ruhela_aggregate(otis_c02) }
 morie_otis_analyze_c02_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Region_MostRecentPlacement",
             "Institution_MostRecentPlacement", "Gender",
@@ -1774,7 +1774,7 @@ morie_otis_analyze_c02_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_c03_ruhela_aggregate(otis_c03) }
+#' \donttest{ morie_otis_analyze_c03_ruhela_aggregate(otis_c03) }
 morie_otis_analyze_c03_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Race", "Gender",
             "NumberIndividuals_RestrictiveConfinement")
@@ -1804,7 +1804,7 @@ morie_otis_analyze_c03_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_c04_ruhela_aggregate(otis_c04) }
+#' \donttest{ morie_otis_analyze_c04_ruhela_aggregate(otis_c04) }
 morie_otis_analyze_c04_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Race", "Region_MostRecentPlacement",
             "NumberIndividuals_RestrictiveConfinement")
@@ -1834,7 +1834,7 @@ morie_otis_analyze_c04_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_otis_analyze_c04_ruhela_aggregate_region_cluster(otis_c04)
 #' }
 morie_otis_analyze_c04_ruhela_aggregate_region_cluster <- function(data,
@@ -1863,7 +1863,7 @@ morie_otis_analyze_c04_ruhela_aggregate_region_cluster <- function(data,
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_c05_ruhela_aggregate(otis_c05) }
+#' \donttest{ morie_otis_analyze_c05_ruhela_aggregate(otis_c05) }
 morie_otis_analyze_c05_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Religion", "Region_MostRecentPlacement",
             "NumberIndividuals_RestrictiveConfinement")
@@ -1894,7 +1894,7 @@ morie_otis_analyze_c05_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_c06_ruhela_aggregate(otis_c06) }
+#' \donttest{ morie_otis_analyze_c06_ruhela_aggregate(otis_c06) }
 morie_otis_analyze_c06_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Age_Category", "Region_MostRecentPlacement",
             "NumberIndividuals_RestrictiveConfinement")
@@ -1921,7 +1921,7 @@ morie_otis_analyze_c06_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_c07_ruhela_aggregate(otis_c07) }
+#' \donttest{ morie_otis_analyze_c07_ruhela_aggregate(otis_c07) }
 morie_otis_analyze_c07_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Alert_Type", "Gender",
             "NumberIndividuals_RestrictiveConfinement")
@@ -1960,7 +1960,7 @@ morie_otis_analyze_c07_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_c08_ruhela_aggregate(otis_c08) }
+#' \donttest{ morie_otis_analyze_c08_ruhela_aggregate(otis_c08) }
 morie_otis_analyze_c08_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Religion", "Gender",
             "NumberIndividuals_RestrictiveConfinement")
@@ -1988,7 +1988,7 @@ morie_otis_analyze_c08_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_c09_ruhela_aggregate(otis_c09) }
+#' \donttest{ morie_otis_analyze_c09_ruhela_aggregate(otis_c09) }
 morie_otis_analyze_c09_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Age_Category", "Gender",
             "NumberIndividuals_RestrictiveConfinement")
@@ -2015,7 +2015,7 @@ morie_otis_analyze_c09_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_c10_ruhela_aggregate(otis_c10) }
+#' \donttest{ morie_otis_analyze_c10_ruhela_aggregate(otis_c10) }
 morie_otis_analyze_c10_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Region_MostRecentPlacement",
             "Institution_MostRecentPlacement", "Gender", "Measure",
@@ -2049,7 +2049,7 @@ morie_otis_analyze_c10_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_c11_ruhela_aggregate(otis_c11) }
+#' \donttest{ morie_otis_analyze_c11_ruhela_aggregate(otis_c11) }
 morie_otis_analyze_c11_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Aggregate_Duration",
             "NumberIndividuals_RestrictiveConfinement")
@@ -2081,7 +2081,7 @@ morie_otis_analyze_c11_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_c12_ruhela_aggregate(otis_c12) }
+#' \donttest{ morie_otis_analyze_c12_ruhela_aggregate(otis_c12) }
 morie_otis_analyze_c12_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Region_MostRecentPlacement", "Gender",
             "Measure", "TotalAggregatedDays_RestrictiveConfinement")
@@ -2113,7 +2113,7 @@ morie_otis_analyze_c12_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_d02_ruhela_aggregate(otis_d02) }
+#' \donttest{ morie_otis_analyze_d02_ruhela_aggregate(otis_d02) }
 morie_otis_analyze_d02_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("Year", "Gender", "Number_CustodialDeaths")
   if (!all(need %in% names(data)))
@@ -2140,7 +2140,7 @@ morie_otis_analyze_d02_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_d03_ruhela_aggregate(otis_d03) }
+#' \donttest{ morie_otis_analyze_d03_ruhela_aggregate(otis_d03) }
 morie_otis_analyze_d03_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("Year", "Race", "Number_CustodialDeaths")
   if (!all(need %in% names(data)))
@@ -2167,7 +2167,7 @@ morie_otis_analyze_d03_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_d04_ruhela_aggregate(otis_d04) }
+#' \donttest{ morie_otis_analyze_d04_ruhela_aggregate(otis_d04) }
 morie_otis_analyze_d04_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("Year", "Religion", "Number_CustodialDeaths")
   if (!all(need %in% names(data)))
@@ -2192,7 +2192,7 @@ morie_otis_analyze_d04_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_d05_ruhela_aggregate(otis_d05) }
+#' \donttest{ morie_otis_analyze_d05_ruhela_aggregate(otis_d05) }
 morie_otis_analyze_d05_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("Year", "Age_Category", "Number_CustodialDeaths")
   if (!all(need %in% names(data)))
@@ -2421,7 +2421,7 @@ morie_otis_analyze_b01_ruhela_subgroup_male <- function(data = NULL,
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_b05_mandela_classification(otis_b05) }
+#' \donttest{ morie_otis_analyze_b05_mandela_classification(otis_b05) }
 morie_otis_analyze_b05_mandela_classification <- function(data,
                                                             out_dir = NULL) {
   need <- c("EndFiscalYear", "Consecutive_Duration",
@@ -2517,7 +2517,7 @@ morie_otis_analyze_b05_mandela_classification <- function(data,
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_c11_mandela_classification(otis_c11) }
+#' \donttest{ morie_otis_analyze_c11_mandela_classification(otis_c11) }
 morie_otis_analyze_c11_mandela_classification <- function(data,
                                                             out_dir = NULL) {
   need <- c("EndFiscalYear", "Aggregate_Duration",
@@ -2605,7 +2605,7 @@ morie_otis_analyze_c11_mandela_classification <- function(data,
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{ morie_otis_analyze_otis_mandela_provincial_vs_federal(otis_c11) }
+#' \donttest{ morie_otis_analyze_otis_mandela_provincial_vs_federal(otis_c11) }
 morie_otis_analyze_otis_mandela_provincial_vs_federal <- function(
         data, out_dir = NULL) {
   c11_r <- morie_otis_analyze_c11_mandela_classification(data, out_dir)
@@ -2765,7 +2765,7 @@ morie_otis_analyze_otis_mandela_provincial_vs_federal <- function(
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_otis_analyze_c_chi2(list(c03 = otis_c03, c04 = otis_c04))
 #' }
 morie_otis_analyze_c_chi2 <- function(datasets,
@@ -2847,7 +2847,7 @@ morie_otis_analyze_c_chi2 <- function(datasets,
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_otis_analyze_d_chi2(list(d01 = otis_d01,
 #'                                  d06 = otis_d06, d07 = otis_d07))
 #' }
@@ -2986,7 +2986,7 @@ morie_otis_analyze_d_chi2 <- function(datasets, out_dir = NULL) {
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_otis_analyze_ruhela_grid(list(b03 = otis_b03, c01 = otis_c01))
 #' }
 morie_otis_analyze_ruhela_grid <- function(datasets,
@@ -3136,7 +3136,7 @@ morie_otis_analyze_ruhela_grid <- function(datasets,
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' morie_otis_analyze_ruhela_master(datasets_list)
 #' }
 morie_otis_analyze_ruhela_master <- function(datasets,

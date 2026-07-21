@@ -32,7 +32,7 @@ the supplied list. Returns a nested list keyed first by category
 and then by method.
 }
 \examples{
-\dontrun{
+\donttest{
   res <- morie_tps_statphysics_analyze_all(c("Assault", "Robbery"),
                                              save_fig = FALSE)
 }

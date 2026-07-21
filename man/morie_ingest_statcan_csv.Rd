@@ -47,7 +47,7 @@ actual data is linked from the \emph{product} page
 the real \code{..._CSV.zip}.
 }
 \examples{
-\dontrun{
+\donttest{
 # Requires network access.
 url <- paste0(
   "https://www150.statcan.gc.ca/n1/pub/82m0013x/",

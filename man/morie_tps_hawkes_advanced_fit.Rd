@@ -51,7 +51,7 @@ Goodness-of-fit is reported via time-rescaling residuals (Brown
 Uniform(0, 1).
 }
 \examples{
-\dontrun{
+\donttest{
   df <- morie_tps_load_tps_dataset("Assault", nrows = 4000)
   rr <- morie_tps_hawkes_advanced_fit(df, kernel = "gamma",
                                         baseline = "sinusoidal",

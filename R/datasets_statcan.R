@@ -59,7 +59,7 @@ morie_datasets_statcan_ccjs_cubes <- function() {
 #' @return A list with `status` and `object` (dimensions, members,
 #'   release info, etc.). Errors if `status != "SUCCESS"`.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' meta <- morie_datasets_statcan_cube_metadata(35100177)
 #' meta$object$cubeTitleEn
 #' length(meta$object$dimension)
@@ -95,7 +95,7 @@ morie_datasets_statcan_cube_metadata <- function(product_id,
 #'   observation: `vector_id`, `coordinate`, `ref_period`, `value`,
 #'   `decimals`, `status`, `symbol`, `scalar_factor`.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' df <- morie_datasets_statcan_vectors(c(109502878L, 109502879L),
 #'                                         n_periods = 3)
 #' nrow(df)  # ~6
@@ -148,7 +148,7 @@ morie_datasets_statcan_vectors <- function(vector_ids,
 #' @param language One of `"en"` or `"fr"`.
 #' @return Character URL string.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' url <- morie_datasets_statcan_full_csv_url(35100177)
 #' # download.file(url, "ccjs_177.zip")
 #' }

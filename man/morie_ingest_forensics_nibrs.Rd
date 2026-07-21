@@ -47,7 +47,7 @@ sub-objects flattened using dotted keys
 (\code{offense.code}, \code{victim.age}, ...).
 }
 \examples{
-\dontrun{
+\donttest{
 df <- morie_ingest_forensics_nibrs(
   year = 2023, offense = "aggravated-assault", state = "GA",
   api_key = Sys.getenv("FBI_CDE_API_KEY"),

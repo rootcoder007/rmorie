@@ -24,7 +24,7 @@ data-frame component.  See \code{\link[cobalt:bal.tab]{cobalt::bal.tab}}
 for an alternative with categorical-variable support.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_matching_balance_table(df, "d", c("x1", "x2"))
 }
 }

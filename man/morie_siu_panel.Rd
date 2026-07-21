@@ -69,7 +69,7 @@ re-reads the whole report for each -- slower, but it stops a model
 skimming once and hallucinating 60 answers.
 }
 \examples{
-\dontrun{
+\donttest{
 # Needs a live Ollama server with at least one model.
 res <- morie_siu_panel(5161, mode = 2)
 res$fields["number_of_subject_officers"]

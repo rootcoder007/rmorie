@@ -31,7 +31,7 @@ configuration), fit diagnostics, and an \code{engine} tag.
 Bayesian MDS (stub) -- log-normal distances via Metropolis
 }
 \examples{
-\dontrun{morie_spatial_voting_bayesian_mds(matrix(0, 5, 5))}
+\donttest{morie_spatial_voting_bayesian_mds(matrix(0, 5, 5))}
 }
 \references{
 Oh & Raftery (2001) JASA 96(455).

@@ -164,7 +164,7 @@
 #' @param timeout HTTP timeout in seconds.
 #' @return A named list as returned by the CKAN Action API.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' res <- morie_ingest_ckan_package_search(
 #'   "https://open.canada.ca/data",
 #'   query = "corrections"

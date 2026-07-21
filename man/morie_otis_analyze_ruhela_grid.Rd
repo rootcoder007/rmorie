@@ -20,7 +20,7 @@ supplied named datasets list and presents a single primary-IRR
 comparison table (GEE cluster-robust > NB GLM > Poisson GLM).
 }
 \examples{
-\dontrun{
+\donttest{
 morie_otis_analyze_ruhela_grid(list(b03 = otis_b03, c01 = otis_c01))
 }
 }

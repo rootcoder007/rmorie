@@ -43,7 +43,7 @@ base URL and returns the raw result list (\code{count},
 \code{\link{morie_ingest_ckan_search_packages}}.
 }
 \examples{
-\dontrun{
+\donttest{
 res <- morie_ingest_ckan_package_search(
   "https://open.canada.ca/data",
   query = "corrections"

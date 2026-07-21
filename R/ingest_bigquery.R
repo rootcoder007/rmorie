@@ -143,7 +143,7 @@ LIMIT ", format(lim, scientific = FALSE))
 #' @param quiet Suppress \pkg{bigrquery} progress output.
 #' @return A base R \code{data.frame}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Requires the 'bigrquery' package, ADC, and a billing project.
 #' Sys.setenv(GCP_PROJECT = "my-billing-project")
 #' df <- morie_ingest_bigquery_query(
@@ -225,7 +225,7 @@ morie_ingest_bigquery_query <- function(sql,
 #' @param quiet Suppress \pkg{bigrquery} progress output.
 #' @return A base R \code{data.frame}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Requires the 'bigrquery' package, ADC, and a billing project.
 #' df <- morie_ingest_bigquery_table(
 #'   project = "bigquery-public-data",

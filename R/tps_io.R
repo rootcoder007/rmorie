@@ -359,7 +359,7 @@ MORIE_TPS_SUPPORTED_FORMATS <- c(
 #'   data frame; geometry column is preserved as an `sfc`).
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Reads from the local TPS cache dir (populate via morie_tps_fetch_category):
 #' df <- morie_tps_load("Assault", format = "csv", nrows = 100L)
 #' }

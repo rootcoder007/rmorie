@@ -18,7 +18,7 @@ Outcome Y_c = NumberConsecutiveDays_Segregation winsorised at the
 99th percentile.
 }
 \examples{
-\dontrun{
+\donttest{
   morie_otis_make_pair_c(morie_otis_load())
 }
 }

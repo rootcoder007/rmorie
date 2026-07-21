@@ -47,7 +47,7 @@ is a snapshot. Users who want the latest can call this function;
 it is also how morie maintainers regenerate the snapshot.
 }
 \examples{
-\dontrun{
+\donttest{
 # Network: refreshes the manifest by probing the SIU site
 # (~25-40 min at the default polite rate of 4 RPS for ~6000 ids).
 df <- morie_siu_refresh_manifest(out_path = tempfile(fileext = ".csv.gz"))

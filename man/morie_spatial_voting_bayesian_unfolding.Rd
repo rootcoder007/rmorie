@@ -29,7 +29,7 @@ Metropolis sampler when smacof is absent).
 Bayesian unfolding (stub) -- Bakker & Poole sampler
 }
 \examples{
-\dontrun{morie_spatial_voting_bayesian_unfolding(matrix(0, 3, 4))}
+\donttest{morie_spatial_voting_bayesian_unfolding(matrix(0, 3, 4))}
 }
 \references{
 Bakker, R. and Poole, K. T. (2013).

@@ -41,7 +41,7 @@ still works (it is forwarded to \pkg{cansim} via the
 \code{CANSIM_API_KEY} name the package reads internally).
 }
 \examples{
-\dontrun{
+\donttest{
 # Requires the 'cansim' package and network access.
 df <- morie_ingest_statcan_cansim("35-10-0177")
 head(df)

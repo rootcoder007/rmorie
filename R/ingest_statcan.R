@@ -85,7 +85,7 @@
 #'   \code{\link[utils]{read.csv}} if \pkg{readr} is unavailable).
 #' @return A base R \code{data.frame}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Requires network access.
 #' url <- paste0(
 #'   "https://www150.statcan.gc.ca/n1/pub/82m0013x/",
@@ -172,7 +172,7 @@ morie_ingest_statcan_csv <- function(url,
 #'   \code{\link[cansim]{get_cansim}}.
 #' @return A base R \code{data.frame}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Requires the 'cansim' package and network access.
 #' df <- morie_ingest_statcan_cansim("35-10-0177")
 #' head(df)
@@ -245,7 +245,7 @@ morie_ingest_statcan_cansim <- function(table_id,
 #'   \code{vector}, \code{ref_date}, \code{value}, \code{decimals},
 #'   \code{scalar_factor}, \code{symbol_code}, \code{release_time}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Two CPI series, last 3 periods each -- no API key needed.
 #' morie_ingest_statcan_vectors(c("v41690973", "v41691045"), periods = 3)
 #' }

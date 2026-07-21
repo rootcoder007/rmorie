@@ -31,7 +31,7 @@ Sections:
 }
 }
 \examples{
-\dontrun{
+\donttest{
 morie_otis_analyze_ruhela_master(datasets_list)
 }
 }

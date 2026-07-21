@@ -21,5 +21,5 @@ morie_otis_analyze_c06_mrm_aggregate(data, out_dir = NULL)
 c06 aggregate Ruhela: Age 50+ -> RC.
 }
 \examples{
-\dontrun{ morie_otis_analyze_c06_ruhela_aggregate(otis_c06) }
+\donttest{ morie_otis_analyze_c06_ruhela_aggregate(otis_c06) }
 }

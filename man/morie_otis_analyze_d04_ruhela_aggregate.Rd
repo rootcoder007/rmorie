@@ -21,5 +21,5 @@ morie_otis_analyze_d04_mrm_aggregate(data, out_dir = NULL)
 d04 aggregate Ruhela: non-majority religion -> custodial deaths.
 }
 \examples{
-\dontrun{ morie_otis_analyze_d04_ruhela_aggregate(otis_d04) }
+\donttest{ morie_otis_analyze_d04_ruhela_aggregate(otis_d04) }
 }
