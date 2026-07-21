@@ -1259,8 +1259,16 @@ morie_datasets_bigquery <- function(project, dataset, table,
   sql <- sprintf("SELECT %s FROM `%s.%s.%s`", select, project, dataset, table)
   if (!is.null(where)) sql <- paste(sql, "WHERE", where)
   if (!is.null(limit)) sql <- paste(sql, "LIMIT", as.integer(limit))
-  bill <- if (is.null(billing_project)) project else billing_project
-  bigrquery::bq_table_download(bigrquery::bq_project_query(bill, sql))
+  # Billing resolves caller-side: explicit arg, then GCP_PROJECT. Public
+  # datasets (e.g. bigquery-public-data) cannot be billed to themselves,
+  # so falling back to `project` only makes sense for tables the caller
+  # owns.
+  bill <- billing_project
+  if (is.null(bill) || !nzchar(bill)) bill <- Sys.getenv("GCP_PROJECT", "")
+  if (!nzchar(bill)) bill <- project
+  as.data.frame(
+    bigrquery::bq_table_download(bigrquery::bq_project_query(bill, sql))
+  )
 }
 
 # ---------------------------------------------------------------------------
