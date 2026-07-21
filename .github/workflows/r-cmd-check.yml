@@ -98,6 +98,23 @@ jobs:
             https://rootcoder007.r-universe.dev
             https://stan-dev.r-universe.dev
 
+      # setup-r exports RSPM but pak still resolved CRAN to cran.rstudio.com
+      # (R's "@CRAN@" default), so the P3M binary mirror was never used and
+      # 118 packages -- Stan included -- compiled from source, pushing this
+      # job past 45 min. Pin CRAN to the binary mirror and print the result
+      # so any regression is visible in the log. RSPM is only set on Linux,
+      # so the macOS/Windows legs fall through unchanged.
+      - name: Pin CRAN to the P3M binary mirror
+        shell: bash
+        run: |
+          if [ -n "${RSPM:-}" ]; then
+            printf 'options(repos = c(CRAN = "%s"%s))\n' \
+              "${RSPM}" \
+              ', rootcoder = "https://rootcoder007.r-universe.dev", stan = "https://stan-dev.r-universe.dev"' \
+              >> ~/.Rprofile
+          fi
+          Rscript -e 'print(getOption("repos"))'
+
       - name: Pre-install rmoriebricklayer (r-universe; not yet on CRAN)
         run: install.packages("rmoriebricklayer", repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))
         shell: Rscript {0}
