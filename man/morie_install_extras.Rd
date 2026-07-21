@@ -78,7 +78,11 @@ them up.
 }
 
 \examples{
-\donttest{
+# \dontrun (not \donttest) deliberately: this installs packages into the
+# user library -- never proper to execute under R CMD check or pkgdown,
+# which runs \donttest examples (a run of this one compiled rstan from
+# source for 50 minutes and timed out the whole site build, 2026-07-21).
+\dontrun{
   # Interactive: install whichever Suggests are missing
   morie_install_extras()
 
