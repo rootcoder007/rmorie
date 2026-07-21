@@ -98,22 +98,19 @@ jobs:
             https://rootcoder007.r-universe.dev
             https://stan-dev.r-universe.dev
 
-      # setup-r exports RSPM but pak still resolved CRAN to cran.rstudio.com
-      # (R's "@CRAN@" default), so the P3M binary mirror was never used and
-      # 118 packages -- Stan included -- compiled from source, pushing this
-      # job past 45 min. Pin CRAN to the binary mirror and print the result
-      # so any regression is visible in the log. RSPM is only set on Linux,
-      # so the macOS/Windows legs fall through unchanged.
-      - name: Pin CRAN to the P3M binary mirror
+      # pak's worker processes run vanilla R and never read any Rprofile, so
+      # repos set there (including use-public-rspm's) are invisible to it --
+      # it fell back to cran.rstudio.com SOURCE and compiled 118 deps until
+      # the job timed out. PKG_CRAN_MIRROR is pak's own env knob and env
+      # survives vanilla subprocesses. RSPM is Linux-only, so other legs
+      # are untouched.
+      - name: Point pak at the P3M binary mirror
         shell: bash
         run: |
           if [ -n "${RSPM:-}" ]; then
-            printf 'options(repos = c(CRAN = "%s"%s))\n' \
-              "${RSPM}" \
-              ', rootcoder = "https://rootcoder007.r-universe.dev", stan = "https://stan-dev.r-universe.dev"' \
-              >> ~/.Rprofile
+            echo "PKG_CRAN_MIRROR=${RSPM}" >> "$GITHUB_ENV"
+            echo "pak CRAN mirror -> ${RSPM}"
           fi
-          Rscript -e 'print(getOption("repos"))'
 
       - name: Pre-install rmoriebricklayer (r-universe; not yet on CRAN)
         run: install.packages("rmoriebricklayer", repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))
