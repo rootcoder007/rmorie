@@ -132,6 +132,10 @@ test_that("morie_fetch_siu assembles one row per case (offline, mocked)", {
     },
     .package = "rmorie"
   )
+  # Corpus-first would short-circuit to the rmoriedata corpus; this
+  # test exercises the LIVE fetch pipeline against mocks, so opt in.
+  op <- options(morie.siu.allow_fetch = TRUE)
+  on.exit(options(op), add = TRUE)
   out <- morie_fetch_siu(
     cache_dir = tempfile("siu-"), overwrite = TRUE,
     max_drid = 3L, use_manifest = FALSE, progress = FALSE
