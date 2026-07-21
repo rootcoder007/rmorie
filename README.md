@@ -288,17 +288,32 @@ director's-report corpus. The fetcher handles both English and French
 templates from 2005 onward across all three of the site's historical
 layout generations (pre-2017 Attorney-General releases, the 2017-2019
 transitional format, and the post-2019 SIU Act template); the parser
-extracts a 64-column schema (police service, incident/notification/
+extracts the report fields (police service, incident/notification/
 decision dates, investigator and witness/subject-official counts,
 affected-person demographics, injuries, legislation, charges verdict,
 and director's decision) and is hand-rolled for correctness under
 SIU's heterogeneous markup.
 
+Since 1.1.4 the subsystem is layered on the compiled SIU core in
+'rmoriebricklayer' and the **verified corpus** shipped by
+'rmoriedata': a 65-column table of 5,157 reports whose 2,182 English
+entries were read and cross-audited by a multi-agent review panel
+(every subject-official count verified; the mechanical resolver
+scores zero wrong against it). `morie_siu_reports()` returns that
+corpus verbatim and only ever fetches/parses reports newer than it;
+`morie_siu_resolve_so()` answers from the verified corpus first and
+falls back to the compiled rule engine; `morie_siu_panel()` runs the
+same Mixture-of-Agents reading panel on new reports through any
+Ollama-compatible endpoint you point it at (your models, your host —
+no hardcoded default).
+
 The subsystem powers downstream MRM analyses — Hawkes self-exciting
 point processes, causal estimators, fairness audits, and the physics-
 of-crime modules — on Canadian police-oversight data.
 
-Key entry points: `morie_fetch_siu()`, `morie_siu_index_url()`,
+Key entry points: `morie_siu_reports()`, `morie_siu_resolve_so()`,
+`morie_siu_panel()`, `morie_siu_parse_report()`, plus the legacy
+fetch path `morie_fetch_siu()`, `morie_siu_index_url()`,
 `morie_siu_refresh_manifest()`, `morie_siu_audit_case()`,
 `morie_siu_sanity_check()`, `morie_siu_all_analyses()`.
 
@@ -307,16 +322,12 @@ Key entry points: `morie_fetch_siu()`, `morie_siu_index_url()`,
 ```r
 library(rmorie)
 
-# Use the shipped language-aware DRID manifest; English-only,
-# cache pages so re-runs are fast.
-df <- morie_fetch_siu(
-  lang       = "en",         # skip French drids automatically
-  cache_html = TRUE,         # persist every fetched page locally
-  rate_limit = 4             # requests per second (polite default)
-)
+# Prefer the panel-verified corpus (5,157 reports x 65 columns,
+# 2,182 English entries human+multi-agent reviewed) — no re-fetching:
+df <- morie_siu_reports(update = FALSE)
 
-# 2,218 unique cases x 64 columns; 100% format-clean on the
-# shipping corpus per morie_siu_sanity_check().
+# The legacy live fetch remains available:
+# df <- morie_fetch_siu(lang = "en", cache_html = TRUE, rate_limit = 4)
 nrow(df)
 ```
 
