@@ -21,5 +21,8 @@ morie_otis_analyze_c12_mrm_aggregate(data, out_dir = NULL)
 c12 aggregate Ruhela: Female -> median RC days (by region).
 }
 \examples{
-\donttest{ morie_otis_analyze_c12_ruhela_aggregate(otis_c12) }
+\donttest{
+otis_c12 <- morie_synth_otis("c12", n = 120L, seed = 1L)
+morie_otis_analyze_c12_ruhela_aggregate(otis_c12)
+}
 }

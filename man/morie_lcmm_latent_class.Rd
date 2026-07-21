@@ -43,13 +43,23 @@ longitudinal / repeated-measures data.
 \donttest{
   if (requireNamespace("lcmm", quietly = TRUE)) {
     data("data_hlme", package = "lcmm")
+    # lcmm needs initial values when ng > 1: fit the one-class
+    # model first and seed the two-class fit from it (B = ...).
+    m1 <- morie_lcmm_latent_class(
+      fixed   = Y ~ Time,
+      random  = ~ Time,
+      subject = "ID",
+      data    = data_hlme,
+      ng      = 1
+    )
     morie_lcmm_latent_class(
       fixed   = Y ~ Time,
       random  = ~ Time,
       subject = "ID",
       data    = data_hlme,
       ng      = 2,
-      mixture = ~ Time
+      mixture = ~ Time,
+      B       = m1$raw
     )
   }
 }

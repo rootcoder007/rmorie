@@ -21,5 +21,8 @@ morie_otis_analyze_b04_mrm_aggregate(data, out_dir = NULL)
 b04 aggregate Ruhela: Female -> median seg duration.
 }
 \examples{
-\donttest{ morie_otis_analyze_b04_ruhela_aggregate(otis_b04) }
+\donttest{
+otis_b04 <- morie_synth_otis("b04", n = 120L, seed = 1L)
+morie_otis_analyze_b04_ruhela_aggregate(otis_b04)
+}
 }

@@ -16,8 +16,10 @@ Character bearer token.
 Fetch and cache a Google Cloud access token via gcloud
 }
 \examples{
-\donttest{
-# Requires VERTEX_ACCESS_TOKEN or a gcloud credential:
+\dontshow{if (nzchar(Sys.getenv("GOOGLE_CLOUD_PROJECT")) || nzchar(Sys.getenv("MORIE_EE_PROJECT"))) withAutoprint(\{ # examplesIf}
+# Runs only when a Google Cloud project is configured; Vertex is an
+# OPTIONAL fallback -- the default LLM path is local Ollama (see
+# morie_siu_panel / morie_llm_* helpers).
 tok <- morie_vertex_access_token()
-}
+\dontshow{\}) # examplesIf}
 }

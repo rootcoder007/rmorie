@@ -21,6 +21,9 @@ contingency chi^2 + Cramer's V on d06 / d07.
 }
 \examples{
 \donttest{
+otis_d01 <- morie_synth_otis("d01", n = 120L, seed = 1L)
+otis_d06 <- morie_synth_otis("d06", n = 120L, seed = 1L)
+otis_d07 <- morie_synth_otis("d07", n = 120L, seed = 1L)
 morie_otis_analyze_d_chi2(list(d01 = otis_d01,
                                  d06 = otis_d06, d07 = otis_d07))
 }

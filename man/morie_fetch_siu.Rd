@@ -89,9 +89,11 @@ parser themselves, which is fair use of public oversight reports.
 }
 \examples{
 \donttest{
-# Network: parses the full Ontario SIU corpus (~15-25 min at the
-# default polite rate of 4 RPS).
-csv <- morie_fetch_siu(cache_dir = tempdir())
+# Corpus-first: with rmoriedata installed this materializes the
+# panel-reviewed corpus in seconds; a live sweep of the SIU site
+# requires an explicit opt-in via
+# options(morie.siu.allow_fetch = TRUE).
+csv <- morie_fetch_siu(cache_dir = file.path(tempdir(), "siu_demo"))
 siu <- utils::read.csv(csv)
 nrow(siu)
 }

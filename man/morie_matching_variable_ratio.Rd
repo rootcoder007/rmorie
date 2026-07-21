@@ -38,6 +38,9 @@ variable-ratio nearest-neighbour matching natively.
 }
 \examples{
 \donttest{
+set.seed(1)
+df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+                 x1 = rnorm(200), x2 = rnorm(200))
 morie_matching_variable_ratio(df, "d", c("x1", "x2"),
                               min_ratio = 1, max_ratio = 3)
 }

@@ -117,6 +117,35 @@ MORIE_TPS_REGISTRY <- list(
 
 #' Internal helper: Morie Tps Canonical
 #' @noRd
+# Internal: bundled-sample fallback for a fresh box with no local TPS
+# cache. Looks for tps_<category>_sample.csv in rmorie, then in the
+# rmoriedata companion package (the canonical data holder).
+#' Internal helper: Morie Tps Sample Fallback
+#' @noRd
+.morie_tps_sample_fallback <- function(canonical, nrows = NULL) {
+  key <- tolower(canonical)
+  fnames <- c(sprintf("tps_%s_sample.csv", key),
+              sprintf("tps_psdp_%s_sample.csv", key))
+  smp <- ""
+  for (fname in fnames) {
+    smp <- system.file("extdata", fname, package = "rmorie")
+    if (nzchar(smp)) break
+    if (requireNamespace("rmoriedata", quietly = TRUE)) {
+      smp <- system.file("extdata", fname, package = "rmoriedata")
+      if (nzchar(smp)) break
+    }
+  }
+  if (!nzchar(smp)) return(NULL)
+  message(
+    "morie_tps: no local TPS cache for '", canonical, "'; using the ",
+    "bundled sample from ",
+    if (grepl("rmoriedata", smp, fixed = TRUE)) "rmoriedata" else "rmorie",
+    ". Fetch the full export with morie_tps_fetch_category()."
+  )
+  df <- utils::read.csv(smp, stringsAsFactors = FALSE, check.names = FALSE)
+  .morie_tps_apply_nrows(df, nrows)
+}
+
 .morie_tps_canonical <- function(name) {
   stopifnot(is.character(name), length(name) == 1L)
   keys <- names(MORIE_TPS_REGISTRY)
@@ -179,6 +208,8 @@ morie_tps_load_dataset <- function(name,
     } else {
       cands <- list.files(base, pattern = "\\.csv$", full.names = TRUE)
       if (!length(cands)) {
+        fb <- .morie_tps_sample_fallback(canonical, nrows)
+        if (!is.null(fb)) return(fb)
         stop(sprintf(
           paste("TPS %s CSV not found under %s.",
                 "Verify data/datasets/TPS/<Category>/CSV/",

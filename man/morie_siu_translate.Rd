@@ -97,19 +97,15 @@ fine-tuned for translation. Falls back to whatever model
 \code{OLLAMA_MODEL} points at.
 }
 \examples{
-\donttest{
-Sys.setenv(
-  OLLAMA_HOST = "http://localhost:11434",
-  OLLAMA_MODEL = "translategemma:latest"
-)
-csv <- morie_fetch_siu(cache_html = TRUE)
+\dontshow{if (morie_llm_probe_ollama()) withAutoprint(\{ # examplesIf}
+# Uses the local Ollama server (OLLAMA_HOST, default
+# http://localhost:11434; model via OLLAMA_MODEL, e.g.
+# translategemma:latest). Corpus cache first:
+csv <- morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
 # Translate every non-English row to English:
-morie_siu_translate(target_lang = "en")
-# Or translate everything to Hindi for a Hindi-first reader:
-morie_siu_translate(target_lang = "hi")
-# Re-fetch picks up the new overrides automatically:
-csv <- morie_fetch_siu(overwrite = TRUE)
-}
+morie_siu_translate(target_lang = "en",
+                    cache_dir = file.path(tempdir(), "morie", "siu"))
+\dontshow{\}) # examplesIf}
 \donttest{
 # Needs the SIU HTML cache plus a configured LLM provider (e.g. local
 # ollama); translates the French-only directors reports field-by-field.

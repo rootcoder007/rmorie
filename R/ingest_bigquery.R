@@ -142,10 +142,10 @@ LIMIT ", format(lim, scientific = FALSE))
 #'   \code{Inf}, i.e. all rows).
 #' @param quiet Suppress \pkg{bigrquery} progress output.
 #' @return A base R \code{data.frame}.
-#' @examples
-#' \donttest{
-#' # Requires the 'bigrquery' package, ADC, and a billing project.
-#' Sys.setenv(GCP_PROJECT = "my-billing-project")
+#' @examplesIf nzchar(Sys.getenv("GCP_PROJECT")) && requireNamespace("bigrquery", quietly = TRUE)
+#' # Runs when the caller has bigrquery + a GCP_PROJECT billing project.
+#' # Keyless alternative for the same data: morie_ingest_chicago_crime()
+#' # (Socrata, no account) or the bundled samples in 'rmoriedata'.
 #' df <- morie_ingest_bigquery_query(
 #'   "SELECT year, COUNT(*) AS n
 #'      FROM `bigquery-public-data.chicago_crime.crime`
@@ -153,7 +153,6 @@ LIMIT ", format(lim, scientific = FALSE))
 #'     ORDER BY year"
 #' )
 #' head(df)
-#' }
 #' @seealso \code{\link{morie_ingest_bigquery_table}},
 #'   \code{\link{morie_ingest_bigquery_build_sql}}
 #' @export
@@ -224,19 +223,18 @@ morie_ingest_bigquery_query <- function(sql,
 #' @param max_rows Optional cap on rows downloaded.
 #' @param quiet Suppress \pkg{bigrquery} progress output.
 #' @return A base R \code{data.frame}.
-#' @examples
-#' \donttest{
-#' # Requires the 'bigrquery' package, ADC, and a billing project.
+#' @examplesIf nzchar(Sys.getenv("GCP_PROJECT")) && requireNamespace("bigrquery", quietly = TRUE)
+#' # Runs when the caller has bigrquery + a GCP_PROJECT billing project.
+#' # Keyless alternative for the same data: morie_ingest_chicago_crime()
+#' # (Socrata, no account) or the bundled samples in 'rmoriedata'.
 #' df <- morie_ingest_bigquery_table(
 #'   project = "bigquery-public-data",
 #'   dataset = "chicago_crime",
 #'   table   = "crime",
 #'   where   = "year = 2024",
-#'   limit   = 10000L,
-#'   billing_project = "my-billing-project"
+#'   limit   = 10000L
 #' )
 #' head(df)
-#' }
 #' @seealso \code{\link{morie_ingest_bigquery_query}}
 #' @export
 morie_ingest_bigquery_table <- function(project, dataset, table,

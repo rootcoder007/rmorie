@@ -97,9 +97,11 @@
 #' @return Path to the written \code{SIU.csv}.
 #' @examples
 #' \donttest{
-#' # Network: parses the full Ontario SIU corpus (~15-25 min at the
-#' # default polite rate of 4 RPS).
-#' csv <- morie_fetch_siu(cache_dir = tempdir())
+#' # Corpus-first: with rmoriedata installed this materializes the
+#' # panel-reviewed corpus in seconds; a live sweep of the SIU site
+#' # requires an explicit opt-in via
+#' # options(morie.siu.allow_fetch = TRUE).
+#' csv <- morie_fetch_siu(cache_dir = file.path(tempdir(), "siu_demo"))
 #' siu <- utils::read.csv(csv)
 #' nrow(siu)
 #' }
@@ -123,6 +125,39 @@ morie_fetch_siu <- function(cache_dir = file.path(tempdir(), "morie", "siu"),
   }
   out_path <- file.path(cache_dir, "SIU.csv")
   if (file.exists(out_path) && !overwrite) {
+    return(out_path)
+  }
+
+  # Corpus-first (the README contract): when the panel-reviewed corpus
+  # from rmoriedata is installed and the caller has not opted into a
+  # live sweep, materialize the verified corpus instead of re-fetching
+  # ~5,000 pages. A deliberate live run sets
+  # options(morie.siu.allow_fetch = TRUE) (and/or max_drid=).
+  if (!isTRUE(getOption("morie.siu.allow_fetch")) &&
+      requireNamespace("rmoriedata", quietly = TRUE)) {
+    corpus <- tryCatch(rmoriedata::load_siu_reports(),
+                       error = function(e) NULL)
+    if (!is.null(corpus) && nrow(corpus)) {
+      if (lang != "all" && "_language" %in% names(corpus)) {
+        corpus <- corpus[corpus[["_language"]] %in% c(lang, "unknown"), ,
+                         drop = FALSE]
+      }
+      utils::write.csv(corpus, out_path, row.names = FALSE, na = "")
+      if (progress) {
+        message("SIU: wrote the panel-reviewed corpus from rmoriedata (",
+                nrow(corpus), " rows) to ", out_path,
+                ". For a live re-fetch set ",
+                "options(morie.siu.allow_fetch = TRUE).")
+      }
+      return(out_path)
+    }
+  }
+
+  # Under R CMD check without the corpus package, never start a live
+  # multi-thousand-page sweep (same guard as morie_siu_fetch_cases).
+  if (nzchar(Sys.getenv("_R_CHECK_PACKAGE_NAME_")) &&
+      !isTRUE(getOption("morie.siu.allow_fetch"))) {
+    writeLines("case_number", out_path)  # 0-row placeholder
     return(out_path)
   }
 
@@ -744,9 +779,12 @@ morie_siu_record_correction <- function(case_number, field,
 #'   including misses), parallel to what was written to \code{out_path}.
 #' @examples
 #' \donttest{
-#' # Network: refreshes the manifest by probing the SIU site
-#' # (~25-40 min at the default polite rate of 4 RPS for ~6000 ids).
-#' df <- morie_siu_refresh_manifest(out_path = tempfile(fileext = ".csv.gz"))
+#' # Bounded probe of 11 report ids (seconds at the polite default
+#' # rate); a full refresh omits min_drid/max_drid and takes ~25-40 min.
+#' df <- morie_siu_refresh_manifest(
+#'   out_path = tempfile(fileext = ".csv.gz"),
+#'   min_drid = 5150, max_drid = 5160
+#' )
 #' table(df$http_code)
 #' }
 #' @export
@@ -876,6 +914,8 @@ morie_siu_refresh_manifest <- function(
 #'   (HTML-stripped plain text of the report) and \code{news_text}.
 #' @examples
 #' \donttest{
+#' # Materialize the corpus cache first (fast via rmoriedata):
+#' morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
 #' a <- morie_siu_audit_case(
 #'   "17-OVI-201",
 #'   cache_dir = file.path(tempdir(), "morie", "siu")
@@ -1025,6 +1065,8 @@ morie_siu_audit_case <- function(case_number,
 #'   tie-breaker.
 #' @examples
 #' \donttest{
+#' # Materialize the corpus cache first (fast via rmoriedata):
+#' morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
 #' # Caller supplies their own external table; nothing about the
 #' # mapping or the file format is canonical to morie.
 #' external <- data.frame(case_id = "17-OVI-201", officers = 1L)
@@ -1703,10 +1745,10 @@ morie_siu_compare <- function(case_number, external,
 #' @return A one-row data frame with the 64 morie SIU columns. Any
 #'   field the model could not extract is the empty string
 #'   (matching the C++ parser's convention).
-#' @examples
-#' \donttest{
-#' Sys.setenv(GOOGLE_API_KEY = "your-gemini-key")
-#' r <- morie_siu_llm_extract("17-OVI-201", model = "gemini")
+#' @examplesIf morie_llm_probe_ollama()
+#' # Local Ollama is the default provider (free, no key); Gemini and
+#' # other cloud providers are optional fallbacks via model=.
+#' r <- morie_siu_llm_extract("17-OVI-201", model = "ollama")
 #' # Diff parser vs LLM against the HTML:
 #' morie_siu_compare(
 #'   "17-OVI-201",
@@ -1714,7 +1756,6 @@ morie_siu_compare <- function(case_number, external,
 #'   field_map = setNames(as.list(names(r)), names(r)),
 #'   external_case_col = "case_number"
 #' )
-#' }
 #' @export
 morie_siu_llm_extract <- function(case_number,
                                   model = c("ollama", "gemini"),
@@ -2002,8 +2043,10 @@ morie_siu_anomaly_check <- function(case_number,
 #'   \code{issues_count}.
 #' @examples
 #' \donttest{
-#' csv <- morie_fetch_siu(cache_dir = tempdir(), cache_html = TRUE)
-#' sanity <- morie_siu_sanity_check(csv)
+#' # Corpus-first fetch is fast when rmoriedata is installed.
+#' csv <- morie_fetch_siu(cache_dir = file.path(tempdir(), "siu_sanity"))
+#' df <- utils::read.csv(csv, colClasses = "character")
+#' sanity <- morie_siu_sanity_check(utils::head(df, 50))
 #' head(sanity, 10) # worst 10 rows -- inspect against HTML
 #' table(sanity$issues_count)
 #' }
@@ -2180,20 +2223,14 @@ morie_siu_sanity_check <- function(df) {
 #' @param progress Print per-case progress.
 #' @return Invisibly, a data frame of newly-recorded
 #'   (case_number, field, verified_value) translations.
-#' @examples
-#' \donttest{
-#' Sys.setenv(
-#'   OLLAMA_HOST = "http://localhost:11434",
-#'   OLLAMA_MODEL = "translategemma:latest"
-#' )
-#' csv <- morie_fetch_siu(cache_html = TRUE)
+#' @examplesIf morie_llm_probe_ollama()
+#' # Uses the local Ollama server (OLLAMA_HOST, default
+#' # http://localhost:11434; model via OLLAMA_MODEL, e.g.
+#' # translategemma:latest). Corpus cache first:
+#' csv <- morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
 #' # Translate every non-English row to English:
-#' morie_siu_translate(target_lang = "en")
-#' # Or translate everything to Hindi for a Hindi-first reader:
-#' morie_siu_translate(target_lang = "hi")
-#' # Re-fetch picks up the new overrides automatically:
-#' csv <- morie_fetch_siu(overwrite = TRUE)
-#' }
+#' morie_siu_translate(target_lang = "en",
+#'                     cache_dir = file.path(tempdir(), "morie", "siu"))
 #' @export
 morie_siu_translate <- function(
   target_lang = NULL, source_lang = NULL,
@@ -2439,21 +2476,17 @@ morie_siu_translate_fr_to_en <- function(
 #'   \code{agree_rate}. Sorted ascending by \code{agree_rate} so the
 #'   most-broken fields land at the top. The \code{"examples"}
 #'   attribute holds nested data frames of flagged cases per field.
-#' @examples
-#' \donttest{
-#' Sys.setenv(
-#'   OLLAMA_HOST = "http://localhost:11434",
-#'   OLLAMA_MODEL = "<your-model>"
-#' )
-#' csv <- morie_fetch_siu(cache_html = TRUE)
+#' @examplesIf morie_llm_probe_ollama()
+#' # Uses the local Ollama server (OLLAMA_HOST / OLLAMA_MODEL).
+#' csv <- morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
 #' df <- utils::read.csv(csv, colClasses = "character")
-#' sample <- sample(df$case_number[nzchar(df$case_number)], 50L)
+#' # 4 cases keeps the audit example fast; scale up for a real audit.
+#' sample <- utils::head(df$case_number[nzchar(df$case_number)], 4L)
 #' audit <- morie_siu_audit_columns(sample, model = "ollama")
 #' # Worst 8 fields, ripe for parser fixes:
 #' head(audit, 8)
 #' # See concrete disagreements for the worst field:
 #' attr(audit, "examples")[[audit$field[1L]]]
-#' }
 #' @export
 morie_siu_audit_columns <- function(case_numbers, model = c("ollama", "gemini"),
                                     cache_dir = file.path(tempdir(), "morie", "siu"),

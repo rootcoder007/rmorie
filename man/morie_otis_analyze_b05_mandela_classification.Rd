@@ -20,5 +20,8 @@ Applies the Sprott-Doob 15-day Mandela threshold to OTIS b05
 duration).
 }
 \examples{
-\donttest{ morie_otis_analyze_b05_mandela_classification(otis_b05) }
+\donttest{
+otis_b05 <- morie_synth_otis("b05", n = 120L, seed = 1L)
+morie_otis_analyze_b05_mandela_classification(otis_b05)
+}
 }

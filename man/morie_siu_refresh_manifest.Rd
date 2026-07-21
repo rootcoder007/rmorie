@@ -48,9 +48,12 @@ it is also how morie maintainers regenerate the snapshot.
 }
 \examples{
 \donttest{
-# Network: refreshes the manifest by probing the SIU site
-# (~25-40 min at the default polite rate of 4 RPS for ~6000 ids).
-df <- morie_siu_refresh_manifest(out_path = tempfile(fileext = ".csv.gz"))
+# Bounded probe of 11 report ids (seconds at the polite default
+# rate); a full refresh omits min_drid/max_drid and takes ~25-40 min.
+df <- morie_siu_refresh_manifest(
+  out_path = tempfile(fileext = ".csv.gz"),
+  min_drid = 5150, max_drid = 5160
+)
 table(df$http_code)
 }
 }

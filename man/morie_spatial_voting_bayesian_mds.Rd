@@ -31,7 +31,13 @@ configuration), fit diagnostics, and an \code{engine} tag.
 Bayesian MDS (stub) -- log-normal distances via Metropolis
 }
 \examples{
-\donttest{morie_spatial_voting_bayesian_mds(matrix(0, 5, 5))}
+\donttest{
+# A real dissimilarity matrix (the all-zero matrix is degenerate
+# and makes the stress majorizer divide by zero).
+set.seed(1)
+X <- matrix(rnorm(30), 10, 3)
+morie_spatial_voting_bayesian_mds(as.matrix(dist(X)))
+}
 }
 \references{
 Oh & Raftery (2001) JASA 96(455).

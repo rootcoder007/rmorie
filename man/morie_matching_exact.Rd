@@ -25,6 +25,10 @@ No MatchIt at runtime.
 }
 \examples{
 \donttest{
+set.seed(1)
+df <- data.frame(d = rbinom(200, 1, 0.4),
+                 region = sample(c("N", "S", "E", "W"), 200, TRUE),
+                 year = sample(2019:2021, 200, TRUE))
 morie_matching_exact(df, "d", c("region", "year"))
 }
 }

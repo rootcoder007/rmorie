@@ -159,6 +159,7 @@ NULL
 #'   \emph{Biometrika}, 70(1), 41--55.
 #' @examples
 #' \donttest{
+#' set.seed(1)
 #' df <- data.frame(d = rbinom(200, 1, 0.4),
 #'                  x1 = rnorm(200), x2 = rnorm(200))
 #' ps <- morie_matching_estimate_propensity(df, "d", c("x1", "x2"))
@@ -224,6 +225,9 @@ morie_matching_trim_propensity <- function(ps, lower = 0.01, upper = 0.99) {
 #' @return A subset of \code{data} on common support.
 #' @examples
 #' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' df$propensity_score <- morie_matching_estimate_propensity(df, "d",
 #'                                                           c("x1", "x2"))
 #' morie_matching_common_support(df, "d")
@@ -276,6 +280,9 @@ morie_matching_common_support <- function(data, treatment,
 #' @return A list of class \code{morie_match_result}.
 #' @examples
 #' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' res <- morie_matching_nearest_neighbor(df, "d", c("x1", "x2"),
 #'                                        caliper = 0.2)
 #' }
@@ -309,6 +316,10 @@ morie_matching_nearest_neighbor <- function(data, treatment, covariates,
 #' @return A list of class \code{morie_match_result}.
 #' @examples
 #' \donttest{
+#' set.seed(1)
+#' df <- data.frame(d = rbinom(200, 1, 0.4),
+#'                  region = sample(c("N", "S", "E", "W"), 200, TRUE),
+#'                  year = sample(2019:2021, 200, TRUE))
 #' morie_matching_exact(df, "d", c("region", "year"))
 #' }
 #' @export
@@ -339,6 +350,9 @@ morie_matching_exact <- function(data, treatment, exact_vars) {
 #'   \emph{Political Analysis}, 20(1), 1--24.
 #' @examples
 #' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_cem(df, "d", c("x1", "x2"), n_bins = 5)
 #' }
 #' @export
@@ -361,6 +375,9 @@ morie_matching_cem <- function(data, treatment, covariates, n_bins = 5L) {
 #' @return A list of class \code{morie_match_result}.
 #' @examples
 #' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_mahalanobis(df, "d", c("x1", "x2"), n_neighbors = 1)
 #' }
 #' @export
@@ -396,6 +413,9 @@ morie_matching_mahalanobis <- function(data, treatment, covariates,
 #' @return A list of class \code{morie_match_result}.
 #' @examples
 #' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_optimal_pair(df, "d", c("x1", "x2"))
 #' }
 #' @export
@@ -422,6 +442,9 @@ morie_matching_optimal_pair <- function(data, treatment, covariates,
 #'   study of coaching for the SAT. \emph{JASA}, 99(467), 609--618.
 #' @examples
 #' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_full(df, "d", c("x1", "x2"))
 #' }
 #' @export
@@ -461,6 +484,9 @@ morie_matching_full <- function(data, treatment, covariates,
 #'   \code{stratum_effects} (per-stratum sample sizes and PS ranges).
 #' @examples
 #' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_subclassify(df, "d", c("x1", "x2"), n_strata = 5)
 #' }
 #' @export
@@ -521,6 +547,9 @@ morie_matching_subclassify <- function(data, treatment, covariates,
 #'   \emph{Political Analysis}, 20(1), 25--46.
 #' @examples
 #' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' w <- morie_matching_entropy_balance(df, "d", c("x1", "x2"))
 #' }
 #' @export
@@ -574,6 +603,9 @@ morie_matching_entropy_balance <- function(data, treatment, covariates,
 #'   Statistics}, 95(3), 932--945.
 #' @examples
 #' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_genetic(df, "d", c("x1", "x2"),
 #'                        pop_size = 50, n_generations = 20)
 #' }
@@ -606,6 +638,9 @@ morie_matching_genetic <- function(data, treatment, covariates,
 #' @return A list of class \code{morie_match_result}.
 #' @examples
 #' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_variable_ratio(df, "d", c("x1", "x2"),
 #'                               min_ratio = 1, max_ratio = 3)
 #' }
@@ -619,16 +654,36 @@ morie_matching_variable_ratio <- function(data, treatment, covariates,
   df <- .morie_matching_drop_na(data, c(treatment, covariates))
   f <- stats::as.formula(paste(treatment, "~",
                                paste(covariates, collapse = " + ")))
-  mi <- MatchIt::matchit(
-    f, data = df,
-    method       = "nearest",
-    distance     = "glm",
-    ratio        = as.integer(max_ratio),
-    min.controls = as.integer(min_ratio),
-    max.controls = as.integer(max_ratio),
-    caliper      = caliper,
-    replace      = FALSE
-  )
+  min_ratio <- as.integer(min_ratio)
+  max_ratio <- as.integer(max_ratio)
+  if (max_ratio > min_ratio) {
+    # MatchIt requires min.controls <= ratio < max.controls for
+    # variable-ratio matching: `ratio` is the target AVERAGE number of
+    # controls, not the maximum.
+    target <- min(max_ratio - 1L,
+                  as.integer(ceiling((min_ratio + max_ratio) / 2)))
+    target <- max(target, min_ratio)
+    mi <- MatchIt::matchit(
+      f, data = df,
+      method       = "nearest",
+      distance     = "glm",
+      ratio        = target,
+      min.controls = min_ratio,
+      max.controls = max_ratio,
+      caliper      = caliper,
+      replace      = FALSE
+    )
+  } else {
+    # Degenerate bounds (min == max): plain fixed-ratio matching.
+    mi <- MatchIt::matchit(
+      f, data = df,
+      method   = "nearest",
+      distance = "glm",
+      ratio    = max_ratio,
+      caliper  = caliper,
+      replace  = FALSE
+    )
+  }
   .morie_matching_matchit_to_result(
     mi, df, treatment,
     method_label = "variable_ratio (MatchIt)",
@@ -662,6 +717,9 @@ morie_matching_variable_ratio <- function(data, treatment, covariates,
 #'   \emph{JASA}, 107(500), 1360--1371.
 #' @examples
 #' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_cardinality(df, "d", c("x1", "x2"),
 #'                            balance_threshold = 0.1)
 #' }
@@ -739,6 +797,9 @@ morie_matching_cardinality <- function(data, treatment, covariates,
 #'   \code{overall_balance}, \code{max_smd}, \code{balanced}.
 #' @examples
 #' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_balance(df, "d", c("x1", "x2"))
 #' }
 #' @export
@@ -817,6 +878,10 @@ morie_matching_balance <- function(data, treatment, covariates,
 #'   \code{smd_after}, \code{abs_smd_before}, \code{abs_smd_after}.
 #' @examples
 #' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
+#' res <- morie_matching_nearest_neighbor(df, "d", c("x1", "x2"))
 #' morie_matching_love_plot_data(df, res$matched_data,
 #'                               "d", c("x1", "x2"))
 #' }
@@ -850,6 +915,9 @@ morie_matching_love_plot_data <- function(unmatched_data, matched_data,
 #' @return A data frame.
 #' @examples
 #' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_balance_table(df, "d", c("x1", "x2"))
 #' }
 #' @export
@@ -917,6 +985,9 @@ morie_matching_balance_table <- function(data, treatment, covariates,
 #' @return A list of class \code{morie_te_result}.
 #' @examples
 #' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' res <- morie_matching_nearest_neighbor(df, "d", c("x1", "x2"))
 #' morie_matching_att_matched(df, "y", "d", res$match_pairs)
 #' }
@@ -956,8 +1027,12 @@ morie_matching_att_matched <- function(data, outcome, treatment,
 #' @return A list of class \code{morie_te_result}.
 #' @examples
 #' \donttest{
-#' morie_matching_ate_matched(df, "y", "d", c("x1", "x2"),
-#'                            weights = "._cem_weight")
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
+#' m <- morie_matching_cem(df, "d", c("x1", "x2"), n_bins = 5)
+#' morie_matching_ate_matched(m$matched_data, "y", "d", c("x1", "x2"),
+#'                            weights = "weights")
 #' }
 #' @export
 morie_matching_ate_matched <- function(data, outcome, treatment, covariates,
@@ -997,6 +1072,10 @@ morie_matching_ate_matched <- function(data, outcome, treatment, covariates,
 #' @return A list of class \code{morie_te_result}.
 #' @examples
 #' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
+#' res <- morie_matching_nearest_neighbor(df, "d", c("x1", "x2"))
 #' morie_matching_atc_matched(df, "y", "d", res$match_pairs)
 #' }
 #' @export
@@ -1038,6 +1117,10 @@ morie_matching_atc_matched <- function(data, outcome, treatment,
 #'   \emph{Econometrica}, 74(1), 235--267.
 #' @examples
 #' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
+#' res <- morie_matching_nearest_neighbor(df, "d", c("x1", "x2"))
 #' morie_matching_abadie_imbens_se(df, "y", "d", res$match_pairs)
 #' }
 #' @export
@@ -1111,6 +1194,10 @@ morie_matching_abadie_imbens_se <- function(data, outcome, treatment,
 #'   (2nd ed.).  Springer.
 #' @examples
 #' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
+#' res <- morie_matching_nearest_neighbor(df, "d", c("x1", "x2"))
 #' morie_matching_rosenbaum_bounds(df, "y", "d", res$match_pairs)
 #' }
 #' @export
@@ -1200,8 +1287,11 @@ morie_matching_rosenbaum_bounds <- function(data, outcome, treatment,
 #'   \code{"ATT_DR"}.
 #' @examples
 #' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_doubly_robust(df, "y", "d", c("x1", "x2"),
-#'                              n_bootstrap = 200)
+#'                              n_bootstrap = 50)  # 50 keeps the example fast
 #' }
 #' @export
 morie_matching_doubly_robust <- function(data, outcome, treatment, covariates,
@@ -1292,6 +1382,9 @@ morie_matching_doubly_robust <- function(data, outcome, treatment, covariates,
 #'   are \code{morie_match_result} objects.
 #' @examples
 #' \donttest{
+#' set.seed(1)
+#' df <- data.frame(treat3 = sample(0:2, 200, TRUE),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_multi_treatment(df, "treat3", c("x1", "x2"))
 #' }
 #' @export
@@ -1347,7 +1440,12 @@ morie_matching_multi_treatment <- function(data, treatment, covariates,
 #' @return A list of class \code{morie_match_result}.
 #' @examples
 #' \donttest{
-#' morie_matching_longitudinal(panel, "d", c("x1"), unit = "id",
+#' set.seed(1)
+#' panel <- data.frame(id = rep(1:40, each = 3), t = rep(1:3, 40),
+#'                     x1 = rnorm(120),
+#'                     d = rep(rbinom(40, 1, 0.5), each = 3))
+#' panel$t0 <- ifelse(panel$d == 1, 3, NA)
+#' morie_matching_longitudinal(panel, "d", "x1", unit = "id",
 #'                             time = "t", treatment_time = "t0")
 #' }
 #' @export
@@ -1411,6 +1509,10 @@ morie_matching_longitudinal <- function(data, treatment, covariates, unit,
 #'   \code{n_obs_before}, \code{n_obs_after}.
 #' @examples
 #' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
+#' res <- morie_matching_nearest_neighbor(df, "d", c("x1", "x2"))
 #' morie_matching_quality(df, res$matched_data, "d", c("x1", "x2"))
 #' }
 #' @export
@@ -1468,6 +1570,9 @@ morie_matching_quality <- function(unmatched_data, matched_data,
 #'   and \code{effective_sample_size}.
 #' @examples
 #' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_overlap(df, "d", c("x1", "x2"))
 #' }
 #' @export

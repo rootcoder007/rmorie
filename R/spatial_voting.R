@@ -1060,7 +1060,14 @@ morie_spatial_voting_bayesian_am <- function(Z, n_samples = 1000L,
 #' @return List: `positions`/`coords` (posterior-mean or modal
 #'   configuration), fit diagnostics, and an `engine` tag.
 #' @references Oh & Raftery (2001) JASA 96(455).
-#' @examples \donttest{morie_spatial_voting_bayesian_mds(matrix(0, 5, 5))}
+#' @examples
+#' \donttest{
+#' # A real dissimilarity matrix (the all-zero matrix is degenerate
+#' # and makes the stress majorizer divide by zero).
+#' set.seed(1)
+#' X <- matrix(rnorm(30), 10, 3)
+#' morie_spatial_voting_bayesian_mds(as.matrix(dist(X)))
+#' }
 #' @param n_dims Integer; latent dimensionality.
 #' @param n_samples Integer; posterior-sample count.
 #' @param sigma_init Numeric; initial value for the latent-coordinate scale (default 1).
@@ -1095,7 +1102,13 @@ morie_spatial_voting_bayesian_mds <- function(D, n_dims = 2L,
 #'   `engine` tag (smacof deterministic mode, or the native
 #'   Metropolis sampler when smacof is absent).
 #' @references Bakker, R. and Poole, K. T. (2013).
-#' @examples \donttest{morie_spatial_voting_bayesian_unfolding(matrix(0, 3, 4))}
+#' @examples
+#' \donttest{
+#' # Random positive respondent-stimulus dissimilarities; an all-zero
+#' # matrix is degenerate for the unfolding transform.
+#' set.seed(1)
+#' morie_spatial_voting_bayesian_unfolding(matrix(runif(12, 0.5, 2), 3, 4))
+#' }
 #' @param n_samples Integer; posterior-sample count.
 #' @export
 morie_spatial_voting_bayesian_unfolding <- function(D, n_dims = 2L,

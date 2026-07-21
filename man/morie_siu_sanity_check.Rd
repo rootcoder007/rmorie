@@ -36,8 +36,10 @@ check is necessary but not sufficient for correctness.
 }
 \examples{
 \donttest{
-csv <- morie_fetch_siu(cache_dir = tempdir(), cache_html = TRUE)
-sanity <- morie_siu_sanity_check(csv)
+# Corpus-first fetch is fast when rmoriedata is installed.
+csv <- morie_fetch_siu(cache_dir = file.path(tempdir(), "siu_sanity"))
+df <- utils::read.csv(csv, colClasses = "character")
+sanity <- morie_siu_sanity_check(utils::head(df, 50))
 head(sanity, 10) # worst 10 rows -- inspect against HTML
 table(sanity$issues_count)
 }

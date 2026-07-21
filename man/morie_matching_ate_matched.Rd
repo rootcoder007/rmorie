@@ -36,7 +36,11 @@ between treated and control outcomes.  Uses the explicit
 }
 \examples{
 \donttest{
-morie_matching_ate_matched(df, "y", "d", c("x1", "x2"),
-                           weights = "._cem_weight")
+set.seed(1)
+df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+                 x1 = rnorm(200), x2 = rnorm(200))
+m <- morie_matching_cem(df, "d", c("x1", "x2"), n_bins = 5)
+morie_matching_ate_matched(m$matched_data, "y", "d", c("x1", "x2"),
+                           weights = "weights")
 }
 }

@@ -765,6 +765,9 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
   if (!refresh) {
     # 1. Built-in database (ships with package).
     builtin_path <- tryCatch(morie_builtin_db(), error = function(e) NULL)
+    if (!is.null(builtin_path) && !file.exists(builtin_path)) {
+      builtin_path <- NULL  # dev fallback path may not exist; skip tier 1
+    }
     if (!is.null(builtin_path) && requireNamespace("DBI", quietly = TRUE) &&
       requireNamespace("RSQLite", quietly = TRUE)) {
       bcon <- DBI::dbConnect(RSQLite::SQLite(), dbname = builtin_path)

@@ -32,6 +32,8 @@ Sections:
 }
 \examples{
 \donttest{
+datasets_list <- list(b03 = morie_synth_otis("b03", n = 120L, seed = 1L),
+                      c01 = morie_synth_otis("c01", n = 120L, seed = 1L))
 morie_otis_analyze_ruhela_master(datasets_list)
 }
 }
