@@ -55,13 +55,19 @@ test_that("nibrs entry point requires year", {
   expect_error(morie_ingest_forensics_nibrs(), "year")
 })
 
-test_that("nibrs entry point fails clean without key + network", {
+test_that("nibrs entry point falls back to the bundled sample without a key", {
   set.seed(1)
   old <- Sys.getenv("FBI_CDE_API_KEY", unset = "")
   Sys.unsetenv("FBI_CDE_API_KEY")
   on.exit(if (nzchar(old)) Sys.setenv(FBI_CDE_API_KEY = old))
-  res <- tryCatch(morie_ingest_forensics_nibrs(year = 2023), error = function(e) NULL)
-  expect_null(res)
+  # Contract since the open-path sweep: no key means the bundled
+  # synthetic sample (documented schema), not an error.
+  res <- suppressWarnings(suppressMessages(
+    morie_ingest_forensics_nibrs(year = 2023, max_features = 3L)
+  ))
+  expect_s3_class(res, "data.frame")
+  expect_true("ori" %in% names(res))
+  expect_lte(nrow(res), 3L)
 })
 
 test_that("namus_missing routes through http helper (mocked)", {

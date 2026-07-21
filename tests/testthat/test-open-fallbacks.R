@@ -4,7 +4,10 @@
 # functionality-without-paywall contract).
 
 test_that("nibrs ingest falls back to the bundled synthetic sample without a key", {
-  withr::local_envvar(FBI_CDE_API_KEY = "")
+  old <- Sys.getenv("FBI_CDE_API_KEY", unset = NA)
+  Sys.setenv(FBI_CDE_API_KEY = "")
+  on.exit(if (is.na(old)) Sys.unsetenv("FBI_CDE_API_KEY") else
+            Sys.setenv(FBI_CDE_API_KEY = old), add = TRUE)
   df <- suppressWarnings(suppressMessages(
     morie_ingest_forensics_nibrs(year = 2023, max_features = 5L)
   ))
@@ -33,7 +36,10 @@ test_that("tps sample fallback resolves the bundled psdp assault sample", {
 })
 
 test_that("tps loaders reach the sample fallback when the cache dir is empty", {
-  withr::local_envvar(MORIE_TPS_DATA_DIR = tempfile("no-tps-cache-"))
+  old <- Sys.getenv("MORIE_TPS_DATA_DIR", unset = NA)
+  Sys.setenv(MORIE_TPS_DATA_DIR = tempfile("no-tps-cache-"))
+  on.exit(if (is.na(old)) Sys.unsetenv("MORIE_TPS_DATA_DIR") else
+            Sys.setenv(MORIE_TPS_DATA_DIR = old), add = TRUE)
   df <- tryCatch(
     suppressMessages(morie_tps_load_dataset("Assault", nrows = 2L)),
     error = function(e) e
@@ -61,13 +67,19 @@ test_that("morie_load_dataset skips a missing built-in DB instead of erroring", 
 })
 
 test_that("datasette connector demands a configured instance", {
-  withr::local_envvar(MORIE_DATASETTE_URL = "")
+  old <- Sys.getenv("MORIE_DATASETTE_URL", unset = NA)
+  Sys.setenv(MORIE_DATASETTE_URL = "")
+  on.exit(if (is.na(old)) Sys.unsetenv("MORIE_DATASETTE_URL") else
+            Sys.setenv(MORIE_DATASETTE_URL = old), add = TRUE)
   expect_error(morie_datasette_databases(), "MORIE_DATASETTE_URL")
   expect_error(morie_datasette_read("db", "tbl"), "MORIE_DATASETTE_URL")
 })
 
 test_that("datasette read validates its arguments", {
-  withr::local_envvar(MORIE_DATASETTE_URL = "https://example.invalid/data")
+  old <- Sys.getenv("MORIE_DATASETTE_URL", unset = NA)
+  Sys.setenv(MORIE_DATASETTE_URL = "https://example.invalid/data")
+  on.exit(if (is.na(old)) Sys.unsetenv("MORIE_DATASETTE_URL") else
+            Sys.setenv(MORIE_DATASETTE_URL = old), add = TRUE)
   expect_error(morie_datasette_read(""), "`db`")
   expect_error(morie_datasette_read("db"), "table")
   expect_error(morie_datasette_read("db", "tbl", limit = 0), "positive")
