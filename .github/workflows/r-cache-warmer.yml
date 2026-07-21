@@ -27,7 +27,7 @@ jobs:
           extra-repositories: |
             https://rootcoder007.r-universe.dev
             https://stan-dev.r-universe.dev
-      - uses: r-lib/actions/setup-r-dependencies@2e3959d284a9ed60162f28a0f9891d1150f47f72 # v2
+      - uses: r-lib/actions/setup-r-dependencies@b7484da46de19a964f8831f505d2fcf84d1663ec # v2
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         with:
