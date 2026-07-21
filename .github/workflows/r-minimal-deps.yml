@@ -26,6 +26,24 @@ jobs:
           use-public-rspm: true
           extra-repositories: |
             https://rootcoder007.r-universe.dev
+
+      # setup-r exports RSPM but pak still resolved CRAN to cran.rstudio.com
+      # (R's "@CRAN@" default), so the P3M binary mirror was never used and
+      # 118 packages -- Stan included -- compiled from source, pushing this
+      # job past 45 min. Pin CRAN to the binary mirror and print the result
+      # so any regression is visible in the log. RSPM is only set on Linux,
+      # so the macOS/Windows legs fall through unchanged.
+      - name: Pin CRAN to the P3M binary mirror
+        shell: bash
+        run: |
+          if [ -n "${RSPM:-}" ]; then
+            printf 'options(repos = c(CRAN = "%s"%s))\n' \
+              "${RSPM}" \
+              ', rootcoder = "https://rootcoder007.r-universe.dev", stan = "https://stan-dev.r-universe.dev"' \
+              >> ~/.Rprofile
+          fi
+          Rscript -e 'print(getOption("repos"))'
+
       - name: System libraries (libcurl for the C++ backend)
         run: sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev
       # No pak: its solver ignores the runner's repo profile, so the
