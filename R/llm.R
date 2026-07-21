@@ -162,9 +162,9 @@ if (nzchar(v)) v else NULL }
 #' @param timeout Probe timeout in seconds.
 #' @return Logical scalar -- TRUE when reachable.
 #' @examples
-#' options(morie.llm.ollama_cached = FALSE)
+#' old <- options(morie.llm.ollama_cached = FALSE)
 #' morie_llm_probe_ollama()
-#' options(morie.llm.ollama_cached = NULL)
+#' options(old)
 #' @export
 morie_llm_probe_ollama <- function(timeout = 2) {
   if (!requireNamespace("httr2", quietly = TRUE)) return(FALSE)
@@ -184,9 +184,9 @@ morie_llm_probe_ollama <- function(timeout = 2) {
 #' Detect the active LLM provider
 #' @return Character scalar provider key: ollama / gemini / api / openai / local.
 #' @examples
-#' options(morie.llm.ollama_cached = FALSE)
+#' old <- options(morie.llm.ollama_cached = FALSE)
 #' morie_llm_detect_provider()
-#' options(morie.llm.ollama_cached = NULL)
+#' options(old)
 #' @export
 morie_llm_detect_provider <- function() {
   if (morie_llm_probe_ollama())                                 return("ollama")
@@ -318,10 +318,10 @@ morie_llm_request_completion <- function(base_url, model, messages,
 #'   providers fail.
 #' @examples
 #' \donttest{
-#' options(morie.llm.ollama_cached = FALSE)
+#' old <- options(morie.llm.ollama_cached = FALSE)
 #' out <- try(morie_llm_ask("In one word, what is 2 + 2?"))
 #' print(out)
-#' options(morie.llm.ollama_cached = NULL)
+#' options(old)
 #' }
 #' @export
 morie_llm_ask <- function(prompt, context = NULL, model = NULL,
@@ -366,9 +366,9 @@ morie_llm_ask <- function(prompt, context = NULL, model = NULL,
 #' Return TRUE when at least one live LLM provider is available
 #' @return Logical scalar.
 #' @examples
-#' options(morie.llm.ollama_cached = FALSE)
+#' old <- options(morie.llm.ollama_cached = FALSE)
 #' morie_llm_agent_available()
-#' options(morie.llm.ollama_cached = NULL)
+#' options(old)
 #' @export
 morie_llm_agent_available <- function() {
   morie_llm_detect_provider() != "local"
@@ -395,11 +395,11 @@ morie_llm_agent_available <- function() {
 #' @return Character scalar response text.
 #' @examples
 #' \donttest{
-#' options(morie.llm.ollama_cached = FALSE)
+#' old <- options(morie.llm.ollama_cached = FALSE)
 #' msgs <- list(list(role = "user", content = "hello"))
 #' out <- try(morie_llm_ask_multi(msgs))
 #' print(out)
-#' options(morie.llm.ollama_cached = NULL)
+#' options(old)
 #' }
 #' @export
 morie_llm_ask_multi <- function(messages, providers = NULL,

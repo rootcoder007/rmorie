@@ -16,7 +16,7 @@ Logical scalar -- TRUE when reachable.
 Probe a local Ollama instance
 }
 \examples{
-options(morie.llm.ollama_cached = FALSE)
+old <- options(morie.llm.ollama_cached = FALSE)
 morie_llm_probe_ollama()
-options(morie.llm.ollama_cached = NULL)
+options(old)
 }

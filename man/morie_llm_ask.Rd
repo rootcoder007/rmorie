@@ -38,9 +38,9 @@ static local help string.
 }
 \examples{
 \donttest{
-options(morie.llm.ollama_cached = FALSE)
+old <- options(morie.llm.ollama_cached = FALSE)
 out <- try(morie_llm_ask("In one word, what is 2 + 2?"))
 print(out)
-options(morie.llm.ollama_cached = NULL)
+options(old)
 }
 }
