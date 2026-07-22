@@ -175,13 +175,16 @@ test_that("morie_siu_audit_case reads from a staged SIU.csv + finds case", {
   expect_true(is.list(out) || inherits(out, "error"))
 })
 
-test_that("morie_siu_translate errors when no SIU.csv staged", {
-  expect_error(
+test_that("morie_siu_translate self-materializes the cache when none is staged", {
+  d <- tempfile("siu_xlate_")
+  # Contract since the open-path sweep: a missing cache is built via
+  # morie_fetch_siu (corpus-first) instead of erroring.
+  expect_no_error(
     morie_siu_translate(target_lang = "fr",
                          case_numbers = "24-OFD-001",
-                         cache_dir = tempfile("siu_xlate_")),
-    regexp = "(SIU|csv|fetch)"
+                         cache_dir = d)
   )
+  expect_true(file.exists(file.path(d, "SIU.csv")))
 })
 
 test_that("morie_siu_index canonical_only result is a subset of unfiltered", {
