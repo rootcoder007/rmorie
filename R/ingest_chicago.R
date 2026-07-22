@@ -324,6 +324,25 @@ morie_ingest_chicago_crime_bigquery <- function(where = NULL,
     }
     clause <- sprintf("year = %d", yr)
   }
+  # Open-path fallback: with no billing project anywhere, the BigQuery
+  # call cannot succeed -- route the same request through the keyless
+  # Socrata portal instead of erroring.
+  bill <- billing_project
+  if (is.null(bill) || !nzchar(bill)) bill <- Sys.getenv("GCP_PROJECT", "")
+  if (!nzchar(bill)) {
+    message(
+      "morie_ingest_chicago_crime_bigquery: no billing project ",
+      "(billing_project=/GCP_PROJECT); fetching the same data from the ",
+      "keyless Chicago Socrata portal instead."
+    )
+    lim <- if (is.null(limit)) {
+      if (is.finite(max_rows)) as.integer(max_rows) else 1000L
+    } else {
+      as.integer(limit)
+    }
+    return(morie_ingest_chicago_crime(year = year, where = where,
+                                      max_features = lim))
+  }
   morie_ingest_bigquery_table(
     project = "bigquery-public-data",
     dataset = "chicago_crime",
