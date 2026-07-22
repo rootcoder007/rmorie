@@ -929,6 +929,11 @@ morie_siu_audit_case <- function(case_number,
   cache_dir <- path.expand(cache_dir)
   html_dir <- file.path(cache_dir, "html")
   csv_path <- file.path(cache_dir, "SIU.csv")
+  if (!file.exists(csv_path) && isTRUE(fetch_if_missing)) {
+    # Corpus-first: materialize the cache (the rmoriedata panel-reviewed
+    # corpus when installed) instead of demanding a manual fetch.
+    morie_fetch_siu(cache_dir = cache_dir, progress = FALSE)
+  }
   if (!file.exists(csv_path)) {
     stop("No SIU.csv at '", csv_path, "'; run morie_fetch_siu() first.",
       call. = FALSE
@@ -2158,12 +2163,14 @@ morie_siu_sanity_check <- function(df) {
   )
   out <- data.frame(
     case_number = df$case_number,
-    drid = df$drid,
+    drid = if (!is.null(df$drid)) df$drid else rep(NA_character_, nrow(df)),
     issues_count = issues_count,
     issues = collapsed,
     stringsAsFactors = FALSE
   )
-  out <- out[order(-out$issues_count, out$drid), , drop = FALSE]
+  if (nrow(out)) {
+    out <- out[order(-out$issues_count, out$drid), , drop = FALSE]
+  }
   rownames(out) <- NULL
   out
 }
@@ -2297,6 +2304,11 @@ morie_siu_translate_fr_to_en <- function(
 ) {
   cache_dir <- path.expand(cache_dir)
   csv_path <- file.path(cache_dir, "SIU.csv")
+  if (!file.exists(csv_path)) {
+    # Corpus-first: materialize the cache (the rmoriedata panel-reviewed
+    # corpus when installed) instead of demanding a manual fetch.
+    morie_fetch_siu(cache_dir = cache_dir, progress = FALSE)
+  }
   if (!file.exists(csv_path)) {
     stop("No SIU.csv at '", csv_path, "'; run morie_fetch_siu() first.",
       call. = FALSE
