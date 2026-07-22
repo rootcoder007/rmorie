@@ -26,8 +26,8 @@ POST endpoint. A "vector" is StatCan's atomic time series ID
 }
 \examples{
 \donttest{
-df <- morie_datasets_statcan_vectors(c(109502878L, 109502879L),
-                                        n_periods = 3)
-nrow(df)  # ~6
+df <- try(morie_datasets_statcan_vectors(c(109502878L, 109502879L),
+                                            n_periods = 3))
+if (!inherits(df, "try-error")) nrow(df)  # ~6
 }
 }

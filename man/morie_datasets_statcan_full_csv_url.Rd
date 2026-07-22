@@ -22,7 +22,7 @@ bulk CSV ZIP. Caller is responsible for downloading the ZIP
 }
 \examples{
 \donttest{
-url <- morie_datasets_statcan_full_csv_url(35100177)
-# download.file(url, "ccjs_177.zip")
+url <- try(morie_datasets_statcan_full_csv_url(35100177))
+# if (!inherits(url, "try-error")) download.file(url, "ccjs_177.zip")
 }
 }
