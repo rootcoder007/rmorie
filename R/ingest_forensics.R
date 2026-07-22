@@ -624,12 +624,16 @@ morie_ingest_forensics_nist_rds <- function(
   rows <- list()
   offset <- 0L
   repeat {
-    params <- list(size = page_size, from = offset)
+    # NIST RMM rejects requests unless the search term is the FIRST
+    # query parameter ("searchphrase must be the first parameter").
+    params <- list()
     if (!is.null(dataset_id) && nzchar(dataset_id)) {
       params[["@id"]] <- dataset_id
     } else if (!is.null(query) && nzchar(query)) {
       params$searchphrase <- query
     }
+    params$size <- page_size
+    params$from <- offset
     payload <- .morie_forensics_get_json(
       url = .MORIE_NIST_RDS_BASE,
       params = params,
