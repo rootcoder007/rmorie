@@ -104,7 +104,15 @@ morie_datasets_statcan_cube_metadata <- function(product_id,
 morie_datasets_statcan_vectors <- function(vector_ids,
                                              n_periods = 5L,
                                              timeout_s = 60L) {
-  body <- lapply(as.integer(vector_ids), function(v) {
+  # Accept both notations: bare ids and Statistics Canada's standard
+  # "v"-prefixed vector ids (e.g. "v41690973").
+  ids <- suppressWarnings(as.integer(sub("^[vV]", "", as.character(vector_ids))))
+  if (anyNA(ids)) {
+    stop("morie_datasets_statcan_vectors: vector_ids must be numeric ",
+         "or 'v'-prefixed StatCan vector ids (e.g. 'v41690973').",
+         call. = FALSE)
+  }
+  body <- lapply(ids, function(v) {
     list(vectorId = v, latestN = as.integer(n_periods))
   })
   r <- .morie_dataset_http_post_json(
@@ -113,6 +121,7 @@ morie_datasets_statcan_vectors <- function(vector_ids,
     body = body, timeout_s = timeout_s)
   rows <- list()
   for (e in r) {
+    if (!is.list(e)) next
     if (is.null(e$status) || e$status != "SUCCESS") next
     o <- e$object
     if (is.null(o$vectorDataPoint)) next
