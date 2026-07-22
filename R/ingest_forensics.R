@@ -236,7 +236,7 @@
 #' NIBRS sample (documented schema, toy values) so the open path
 #' always works; with a key it queries the live CDE endpoint.
 #'
-#' @examples
+#' @examplesIf requireNamespace("httr2", quietly = TRUE)
 #' \donttest{
 #' # No API key needed: falls back to the bundled synthetic sample.
 #' df <- suppressWarnings(morie_ingest_forensics_nibrs(
@@ -399,7 +399,7 @@ morie_ingest_forensics_nibrs <- function(year,
 #' @param page_size Records per request (default 200).
 #' @param user_agent,timeout Standard request knobs.
 #' @return A base R \code{data.frame}.
-#' @examples
+#' @examplesIf requireNamespace("httr2", quietly = TRUE)
 #' \donttest{
 #' df <- morie_ingest_forensics_namus_missing(state = "CA",
 #'                                            max_features = 1000L)
@@ -610,7 +610,7 @@ morie_ingest_forensics_namus_missing <- function(
 #'   instead of morie's flattened schema.
 #' @param timeout HTTP timeout in seconds.
 #' @return A base R \code{data.frame}.
-#' @examples
+#' @examplesIf requireNamespace("httr2", quietly = TRUE)
 #' \donttest{try(morie_ingest_forensics_nist_rds(max_features = 1L))}
 #' @export
 morie_ingest_forensics_nist_rds <- function(
