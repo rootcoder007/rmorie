@@ -1872,11 +1872,12 @@ morie_siu_llm_extract <- function(case_number,
 #'   \code{field}, \code{parser_value}, \code{verdict} (one of
 #'   \code{"agree"} / \code{"disagree"} / \code{"unclear"}), and
 #'   \code{reason} (a short sentence pointing to the report passage).
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examplesIf morie_llm_probe_ollama() && requireNamespace("rmoriedata", quietly = TRUE)
 #' \donttest{
-#' Sys.setenv(GOOGLE_API_KEY = "your-gemini-key")
-#' a <- morie_siu_anomaly_check("17-OVI-201", model = "gemini")
-#' subset(a, verdict == "disagree")
+#' # Local Ollama is the default provider (free, no key); the report
+#' # HTML is fetched live, so try() keeps offline checks graceful.
+#' a <- try(morie_siu_anomaly_check("17-OVI-201", model = "ollama"))
+#' if (!inherits(a, "try-error")) subset(a, verdict == "disagree")
 #' }
 #' @export
 morie_siu_anomaly_check <- function(case_number,
