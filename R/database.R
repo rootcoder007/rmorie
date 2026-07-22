@@ -510,7 +510,7 @@ morie_cache_file <- function(path, table_name, db_path = NULL, con = NULL) {
 #'   attempt to fetch from the CKAN API.
 #' @param con Optional pre-opened DBI connection (overrides `db_path`).
 #' @return A data.frame with canonical CPADS columns.
-#' @examples
+#' @examplesIf requireNamespace("httr2", quietly = TRUE) && requireNamespace("jsonlite", quietly = TRUE)
 #' \donttest{
 #' # Needs the CPADS PUMF (local file, cache, or a live CKAN fetch).
 #' cpads <- morie_load_cpads(use_ckan = TRUE)

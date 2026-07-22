@@ -440,7 +440,7 @@ morie_matching_optimal_pair <- function(data, treatment, covariates,
 #' @return A list of class \code{morie_match_result}.
 #' @references Hansen, B. B. (2004). Full matching in an observational
 #'   study of coaching for the SAT. \emph{JASA}, 99(467), 609--618.
-#' @examples
+#' @examplesIf requireNamespace("MatchIt", quietly = TRUE)
 #' \donttest{
 #' set.seed(1)
 #' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
@@ -482,7 +482,7 @@ morie_matching_full <- function(data, treatment, covariates,
 #' @return A list with components \code{data_with_strata} (the matched
 #'   data augmented with \code{._stratum} and \code{._ps} columns) and
 #'   \code{stratum_effects} (per-stratum sample sizes and PS ranges).
-#' @examples
+#' @examplesIf requireNamespace("MatchIt", quietly = TRUE)
 #' \donttest{
 #' set.seed(1)
 #' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
@@ -636,7 +636,7 @@ morie_matching_genetic <- function(data, treatment, covariates,
 #' @param ps Optional pre-computed propensity scores (ignored; retained
 #'   for back-compat).
 #' @return A list of class \code{morie_match_result}.
-#' @examples
+#' @examplesIf requireNamespace("MatchIt", quietly = TRUE)
 #' \donttest{
 #' set.seed(1)
 #' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),

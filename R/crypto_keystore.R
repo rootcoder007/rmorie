@@ -116,7 +116,7 @@
 #' @param password Character scalar: keystore password.
 #' @param path     File path.
 #' @return Invisibly, NULL.
-#' @examples
+#' @examplesIf requireNamespace("sodium", quietly = TRUE)
 #' if (morie_crypto_sodium_available()) {
 #'   path <- tempfile(fileext = ".keystore")
 #'   morie_crypto_keystore_create("open sesame", path = path)
@@ -145,7 +145,7 @@ morie_crypto_keystore_create <- function(password,
 #' @param password Character scalar.
 #' @param path     Keystore path.
 #' @return Invisibly, NULL.
-#' @examples
+#' @examplesIf requireNamespace("sodium", quietly = TRUE)
 #' if (morie_crypto_sodium_available()) {
 #'   path <- tempfile(fileext = ".keystore")
 #'   morie_crypto_keystore_create("pw", path = path)
@@ -185,7 +185,7 @@ morie_crypto_keystore_store <- function(name, pk, sk, password,
 #' @param password Character scalar.
 #' @param path     Keystore path.
 #' @return Named list with pk (raw) and sk (raw).
-#' @examples
+#' @examplesIf requireNamespace("sodium", quietly = TRUE)
 #' if (morie_crypto_sodium_available()) {
 #'   path <- tempfile(fileext = ".keystore")
 #'   morie_crypto_keystore_create("pw", path = path)
@@ -227,7 +227,7 @@ morie_crypto_keystore_load <- function(name, password,
 #' @param password Character scalar.
 #' @param path     Keystore path.
 #' @return Character vector of identifiers.
-#' @examples
+#' @examplesIf requireNamespace("sodium", quietly = TRUE)
 #' if (morie_crypto_sodium_available()) {
 #'   path <- tempfile(fileext = ".keystore")
 #'   morie_crypto_keystore_create("pw", path = path)
