@@ -299,8 +299,11 @@ test_that("html_to_text handles pathological input without segfault", {
 test_that("morie_siu_audit_case errors cleanly without a SIU.csv", {
   d <- tempfile("siu-")
   dir.create(d)
+  # fetch_if_missing = FALSE keeps the manual mode: with the default
+  # TRUE the cache self-materializes from the rmoriedata corpus.
   expect_error(
-    morie_siu_audit_case("17-OVI-201", cache_dir = d),
+    morie_siu_audit_case("17-OVI-201", cache_dir = d,
+                         fetch_if_missing = FALSE),
     "No SIU.csv"
   )
 })
