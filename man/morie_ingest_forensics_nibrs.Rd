@@ -50,6 +50,7 @@ sub-objects flattened using dotted keys
 (\code{offense.code}, \code{victim.age}, ...).
 }
 \examples{
+\dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 # No API key needed: falls back to the bundled synthetic sample.
 df <- suppressWarnings(morie_ingest_forensics_nibrs(
@@ -58,4 +59,5 @@ df <- suppressWarnings(morie_ingest_forensics_nibrs(
 ))
 head(df)
 }
+\dontshow{\}) # examplesIf}
 }

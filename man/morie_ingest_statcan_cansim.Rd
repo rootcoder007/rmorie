@@ -41,11 +41,13 @@ still works (it is forwarded to \pkg{cansim} via the
 \code{CANSIM_API_KEY} name the package reads internally).
 }
 \examples{
+\dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 # Requires the 'cansim' package and network access.
 df <- morie_ingest_statcan_cansim("35-10-0177")
 head(df)
 }
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link{morie_ingest_statcan_csv}}
