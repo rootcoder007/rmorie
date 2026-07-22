@@ -420,7 +420,7 @@ NULL
   if (is.na(date_col)) {
     stop("NotYetPorted: no OCC_DATE or REPORT_DATE column found")
   }
-  dt <- as.POSIXct(df[[date_col]], tz = "UTC")
+  dt <- .morie_tps_parse_datetime(df[[date_col]])
   dt <- dt[!is.na(dt)]
   if (length(dt) > max_n) {
     set.seed(42L)
