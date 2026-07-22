@@ -694,7 +694,7 @@ morie_tps_levy_flight_alpha <- function(category = "Assault",
 #'   (2007). Growth, innovation, scaling, and the pace of life in
 #'   cities. \emph{PNAS} 104: 7301-7306.
 #'
-#' @examples
+#' @examplesIf requireNamespace("jsonlite", quietly = TRUE)
 #' \donttest{
 #'   rr <- morie_tps_urban_scaling_beta("Assault", year = 2024,
 #'                                       save_fig = FALSE)
@@ -1280,7 +1280,7 @@ morie_tps_criminal_network_graph <- function(category = "Assault",
 #' @references D'Orsogna MR, Perc M (2015). \emph{Physics of Life
 #'   Reviews} 12: 1-21.
 #'
-#' @examples
+#' @examplesIf requireNamespace("jsonlite", quietly = TRUE)
 #' \donttest{
 #'   res <- morie_tps_statphysics_analyze_all(c("Assault", "Robbery"),
 #'                                              save_fig = FALSE)

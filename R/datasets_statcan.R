@@ -58,7 +58,7 @@ morie_datasets_statcan_ccjs_cubes <- function() {
 #' @param timeout_s HTTP timeout in seconds.
 #' @return A list with `status` and `object` (dimensions, members,
 #'   release info, etc.). Errors if `status != "SUCCESS"`.
-#' @examples
+#' @examplesIf requireNamespace("jsonlite", quietly = TRUE)
 #' \donttest{
 #' meta <- morie_datasets_statcan_cube_metadata(35100177)
 #' meta$object$cubeTitleEn

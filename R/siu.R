@@ -1867,7 +1867,7 @@ morie_siu_llm_extract <- function(case_number,
 #'   \code{field}, \code{parser_value}, \code{verdict} (one of
 #'   \code{"agree"} / \code{"disagree"} / \code{"unclear"}), and
 #'   \code{reason} (a short sentence pointing to the report passage).
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' \donttest{
 #' Sys.setenv(GOOGLE_API_KEY = "your-gemini-key")
 #' a <- morie_siu_anomaly_check("17-OVI-201", model = "gemini")
@@ -2223,7 +2223,7 @@ morie_siu_sanity_check <- function(df) {
 #' @param progress Print per-case progress.
 #' @return Invisibly, a data frame of newly-recorded
 #'   (case_number, field, verified_value) translations.
-#' @examplesIf morie_llm_probe_ollama()
+#' @examplesIf morie_llm_probe_ollama() && requireNamespace("rmoriedata", quietly = TRUE)
 #' # Uses the local Ollama server (OLLAMA_HOST, default
 #' # http://localhost:11434; model via OLLAMA_MODEL, e.g.
 #' # translategemma:latest). Corpus cache first:

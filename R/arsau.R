@@ -299,7 +299,7 @@ ARSAU_KINDS <- function() {
 #'
 #' @param path Path to the JSON file.
 #' @return Named list with \code{fields} and \code{records}.
-#' @examples
+#' @examplesIf requireNamespace("jsonlite", quietly = TRUE)
 #' tf <- tempfile(fileext = ".json")
 #' writeLines('{"fields": [{"id": "a", "type": "int"}]}', tf)
 #' res <- morie_arsau_read_sidecar(tf)

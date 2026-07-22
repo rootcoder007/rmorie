@@ -25,7 +25,7 @@ NULL
 #' JSON enumeration of all registered commands
 #'
 #' @return A length-1 character vector containing JSON text.
-#' @examples
+#' @examplesIf requireNamespace("jsonlite", quietly = TRUE)
 #' substr(stat_bridge_registry_json(), 1, 200)
 #' @export
 stat_bridge_registry_json <- function() {
