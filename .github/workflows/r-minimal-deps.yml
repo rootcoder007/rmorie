@@ -61,7 +61,7 @@ jobs:
             P3M = "https://packagemanager.posit.co/cran/__linux__/noble/latest",
             CRAN = "https://cloud.r-project.org")
           install.packages(c("here", "Rcpp", "RcppArmadillo",
-                             "rmoriebricklayer", "testthat", "pkgload"),
+                             "rmoriebricklayer", "rmoriedata", "testthat", "pkgload"),
                            repos = repos, Ncpus = 2)
           missing <- setdiff(c("here", "Rcpp", "RcppArmadillo",
                                "rmoriebricklayer", "testthat", "pkgload"),
