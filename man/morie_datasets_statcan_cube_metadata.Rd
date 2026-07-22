@@ -19,9 +19,11 @@ release info, etc.). Errors if \code{status != "SUCCESS"}.
 Phase 3DDD3. Wraps the \code{getCubeMetadata} POST endpoint.
 }
 \examples{
+\dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 meta <- morie_datasets_statcan_cube_metadata(35100177)
 meta$object$cubeTitleEn
 length(meta$object$dimension)
 }
+\dontshow{\}) # examplesIf}
 }

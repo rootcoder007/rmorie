@@ -53,9 +53,11 @@ One API call is made per case (all fields batched into a single
 prompt with structured-JSON output).
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 Sys.setenv(GOOGLE_API_KEY = "your-gemini-key")
 a <- morie_siu_anomaly_check("17-OVI-201", model = "gemini")
 subset(a, verdict == "disagree")
 }
+\dontshow{\}) # examplesIf}
 }

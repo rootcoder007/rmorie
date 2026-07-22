@@ -32,11 +32,12 @@ the supplied list. Returns a nested list keyed first by category
 and then by method.
 }
 \examples{
+\dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
   res <- morie_tps_statphysics_analyze_all(c("Assault", "Robbery"),
                                              save_fig = FALSE)
 }
-
+\dontshow{\}) # examplesIf}
 }
 \references{
 D'Orsogna MR, Perc M (2015). \emph{Physics of Life
