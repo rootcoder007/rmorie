@@ -60,9 +60,10 @@ morie_datasets_statcan_ccjs_cubes <- function() {
 #'   release info, etc.). Errors if `status != "SUCCESS"`.
 #' @examplesIf requireNamespace("jsonlite", quietly = TRUE)
 #' \donttest{
-#' meta <- morie_datasets_statcan_cube_metadata(35100177)
-#' meta$object$cubeTitleEn
-#' length(meta$object$dimension)
+#' # Live WDS call; try() keeps checks graceful where StatCan rejects
+#' # cloud IPs.
+#' meta <- try(morie_datasets_statcan_cube_metadata(35100177))
+#' if (!inherits(meta, "try-error")) meta$object$cubeTitleEn
 #' }
 #' @export
 morie_datasets_statcan_cube_metadata <- function(product_id,
@@ -71,8 +72,9 @@ morie_datasets_statcan_cube_metadata <- function(product_id,
   r <- .morie_dataset_http_post_json(
     sprintf("%s/getCubeMetadata", .MORIE_STATCAN_WDS_BASE),
     body = body, timeout_s = timeout_s)
-  if (length(r) == 0L || is.null(r[[1]]$status))
-    stop("StatCan WDS returned empty or malformed response", call. = FALSE)
+  if (length(r) == 0L || !is.list(r[[1]]) || is.null(r[[1]]$status))
+    stop("StatCan WDS returned empty or malformed response ",
+         "(the service intermittently rejects cloud IPs)", call. = FALSE)
   if (r[[1]]$status != "SUCCESS")
     stop(sprintf("StatCan WDS status=%s: %s",
                   r[[1]]$status,
@@ -96,9 +98,9 @@ morie_datasets_statcan_cube_metadata <- function(product_id,
 #'   `decimals`, `status`, `symbol`, `scalar_factor`.
 #' @examples
 #' \donttest{
-#' df <- morie_datasets_statcan_vectors(c(109502878L, 109502879L),
-#'                                         n_periods = 3)
-#' nrow(df)  # ~6
+#' df <- try(morie_datasets_statcan_vectors(c(109502878L, 109502879L),
+#'                                             n_periods = 3))
+#' if (!inherits(df, "try-error")) nrow(df)  # ~6
 #' }
 #' @export
 morie_datasets_statcan_vectors <- function(vector_ids,
@@ -158,8 +160,8 @@ morie_datasets_statcan_vectors <- function(vector_ids,
 #' @return Character URL string.
 #' @examples
 #' \donttest{
-#' url <- morie_datasets_statcan_full_csv_url(35100177)
-#' # download.file(url, "ccjs_177.zip")
+#' url <- try(morie_datasets_statcan_full_csv_url(35100177))
+#' # if (!inherits(url, "try-error")) download.file(url, "ccjs_177.zip")
 #' }
 #' @export
 morie_datasets_statcan_full_csv_url <- function(product_id,
@@ -169,7 +171,7 @@ morie_datasets_statcan_full_csv_url <- function(product_id,
                   .MORIE_STATCAN_WDS_BASE,
                   as.integer(product_id), language)
   r <- .morie_dataset_http_json(url)
-  if (is.null(r$status) || r$status != "SUCCESS")
+  if (!is.list(r) || is.null(r$status) || r$status != "SUCCESS")
     stop(sprintf("StatCan WDS getFullTableDownloadCSV status=%s",
                   r$status %||% "NULL"),
           call. = FALSE)
