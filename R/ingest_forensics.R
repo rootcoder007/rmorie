@@ -624,8 +624,10 @@ morie_ingest_forensics_nist_rds <- function(
   rows <- list()
   offset <- 0L
   repeat {
-    # NIST RMM rejects requests unless the search term is the FIRST
-    # query parameter ("searchphrase must be the first parameter").
+    # NIST RMM quirks (verified live 2026-07-21): the search term must
+    # be the FIRST query parameter ("searchphrase must be the first
+    # parameter", HTTP 400), and combining `from=` with a search
+    # silently returns zero results -- paginate with `page=` instead.
     params <- list()
     if (!is.null(dataset_id) && nzchar(dataset_id)) {
       params[["@id"]] <- dataset_id
@@ -633,7 +635,7 @@ morie_ingest_forensics_nist_rds <- function(
       params$searchphrase <- query
     }
     params$size <- page_size
-    params$from <- offset
+    params$page <- offset %/% page_size + 1L
     payload <- .morie_forensics_get_json(
       url = .MORIE_NIST_RDS_BASE,
       params = params,
