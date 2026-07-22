@@ -589,7 +589,7 @@ morie_tps_levy_flight_alpha <- function(category = "Assault",
   df <- df[df$LAT_WGS84 >= 43.55 & df$LAT_WGS84 <= 43.90 &
            df$LONG_WGS84 >= -79.65 & df$LONG_WGS84 <= -79.10, ,
            drop = FALSE]
-  dt <- as.POSIXct(df$OCC_DATE, tz = "UTC")
+  dt <- .morie_tps_parse_datetime(df$OCC_DATE)
   df <- df[order(dt), , drop = FALSE]
   if (nrow(df) < 200L) {
     return(.tps_sp_result(

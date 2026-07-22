@@ -236,7 +236,14 @@
       stop(sprintf("morie HTTP POST failed (libcurl returned empty body): %s",
                    full_url), call. = FALSE)
     }
-    return(.morie_from_json(resp, simplifyVector = FALSE))
+    parsed <- tryCatch(.morie_from_json(resp, simplifyVector = FALSE),
+                       error = function(e) {
+      snippet <- substr(gsub("\\s+", " ", resp), 1L, 120L)
+      stop(sprintf(paste0("morie HTTP POST returned non-JSON (service ",
+                          "error page?) from %s: %s"),
+                   full_url, snippet), call. = FALSE)
+    })
+    return(parsed)
   }
   if (!requireNamespace("httr2", quietly = TRUE)) {
     stop("morie datasets POST needs either the libcurl-backed C++ ",

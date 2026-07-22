@@ -463,3 +463,29 @@ morie_tps_available_formats <- function() {
   }
   sort(out)
 }
+
+
+#' Internal helper: parse TPS datetime strings (ISO or US m/d/Y AM/PM)
+#'
+#' Live PSDP ArcGIS exports use ISO 8601 (\code{2017-05-20T19:05:58.000Z});
+#' the bundled sample CSVs use US-style \code{4/15/2014 4:00:00 AM}. CRAN
+#' checks run against the samples, so both must parse.
+#' @noRd
+.morie_tps_parse_datetime <- function(x) {
+  if (inherits(x, "POSIXct")) return(x)
+  x <- as.character(x)
+  dt <- tryCatch(suppressWarnings(as.POSIXct(x, tz = "UTC")),
+                 error = function(e) as.POSIXct(rep(NA_real_, length(x)),
+                                                origin = "1970-01-01",
+                                                tz = "UTC"))
+  us <- is.na(dt) & grepl("^\\d{1,2}/\\d{1,2}/\\d{4}", x)
+  if (any(us)) {
+    dt[us] <- suppressWarnings(as.POSIXct(x[us], tz = "UTC",
+                                          format = "%m/%d/%Y %I:%M:%S %p"))
+    still <- is.na(dt) & us
+    if (any(still))
+      dt[still] <- suppressWarnings(as.POSIXct(x[still], tz = "UTC",
+                                               format = "%m/%d/%Y"))
+  }
+  dt
+}
