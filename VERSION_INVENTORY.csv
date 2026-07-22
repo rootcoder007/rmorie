@@ -226,7 +226,7 @@ File,Line,Status,Version,Context
 ./tests/testthat/test-siu-bricklayer.R,9,STALE_OR_DEP,0.3.5,"rmoriebricklayer too old (< 0.3.5; no compiled SIU parser))"
 ./tests/testthat/test-siu-bricklayer.R,30,STALE_OR_DEP,0.3.5,"rmoriebricklayer too old (< 0.3.5))"
 ./tests/testthat/test-siu-deeper.R,24,STALE_OR_DEP,0.1.0,"parser_version = 0.1.0;"
-./tests/testthat/test-siu.R,707,STALE_OR_DEP,127.0.0.1,"OLLAMA_HOST = http://127.0.0.1:1"
+./tests/testthat/test-siu.R,710,STALE_OR_DEP,127.0.0.1,"OLLAMA_HOST = http://127.0.0.1:1"
 ./tests/testthat/test-siu_fetch.R,255,STALE_OR_DEP,192.0.2.0,"# 192.0.2.0/24 is TEST-NET-1 -- reserved for documentation; will not"
 ./tests/testthat/test-siu_fetch.R,259,STALE_OR_DEP,192.0.2.123,"http://192.0.2.123/never-routes; timeout_s = 2L);"
 ./tests/testthat/test-smallstats-native-c.R,101,STALE_OR_DEP,1.1.1,"\2020\;\Canada\;\2016A000011124\;\1.1.1\;42.5;"

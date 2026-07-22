@@ -53,11 +53,12 @@ One API call is made per case (all fields batched into a single
 prompt with structured-JSON output).
 }
 \examples{
-\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (morie_llm_probe_ollama() && requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
-Sys.setenv(GOOGLE_API_KEY = "your-gemini-key")
-a <- morie_siu_anomaly_check("17-OVI-201", model = "gemini")
-subset(a, verdict == "disagree")
+# Local Ollama is the default provider (free, no key); the report
+# HTML is fetched live, so try() keeps offline checks graceful.
+a <- try(morie_siu_anomaly_check("17-OVI-201", model = "ollama"))
+if (!inherits(a, "try-error")) subset(a, verdict == "disagree")
 }
 \dontshow{\}) # examplesIf}
 }
