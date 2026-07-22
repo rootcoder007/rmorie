@@ -58,7 +58,8 @@ Imports:
   stats,
   utils,
   Rcpp,
-  rmoriebricklayer (>= 0.2.1)
+  rmoriebricklayer (>= 0.2.1),
+  rmoriedata
 LinkingTo: Rcpp, RcppArmadillo, rmoriebricklayer
 SystemRequirements: libcurl: libcurl-devel (rpm) or libcurl4-openssl-dev (deb)
 Suggests:
@@ -173,7 +174,6 @@ Suggests:
   rgenoud,
   rmarkdown,
   rmgarch,
-  rmoriedata,
   rpart,
   RPostgres,
   rsample,
