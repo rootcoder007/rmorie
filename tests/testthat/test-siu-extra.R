@@ -141,12 +141,12 @@ test_that("morie_siu_sanity_check errors without case_number column", {
 
 # -------------------------------------------- siu_translate error paths
 
-test_that("morie_siu_translate_fr_to_en errors when no SIU.csv exists", {
+test_that("morie_siu_translate_fr_to_en self-materializes the cache", {
   cache_dir <- tempfile("siu_xlate_")
-  expect_error(
+  expect_no_error(
     morie_siu_translate_fr_to_en(
       case_numbers = "24-OFD-001",
-      cache_dir = cache_dir),
-    regexp = "SIU"
+      cache_dir = cache_dir)
   )
+  expect_true(file.exists(file.path(cache_dir, "SIU.csv")))
 })
