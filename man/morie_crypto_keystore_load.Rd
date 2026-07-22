@@ -24,6 +24,7 @@ Named list with pk (raw) and sk (raw).
 Load a key pair from the morie keystore
 }
 \examples{
+\dontshow{if (requireNamespace("sodium", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 if (morie_crypto_sodium_available()) {
   path <- tempfile(fileext = ".keystore")
   morie_crypto_keystore_create("pw", path = path)
@@ -34,4 +35,5 @@ if (morie_crypto_sodium_available()) {
   print(identical(out$sk, sk))
   unlink(path)
 }
+\dontshow{\}) # examplesIf}
 }

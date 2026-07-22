@@ -35,10 +35,12 @@ reports within-stratum sample sizes and PS ranges, preserving the
 rmorie return shape (\code{data_with_strata} + \code{stratum_effects}).
 }
 \examples{
+\dontshow{if (requireNamespace("MatchIt", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 set.seed(1)
 df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
                  x1 = rnorm(200), x2 = rnorm(200))
 morie_matching_subclassify(df, "d", c("x1", "x2"), n_strata = 5)
 }
+\dontshow{\}) # examplesIf}
 }

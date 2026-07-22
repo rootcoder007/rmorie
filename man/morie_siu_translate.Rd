@@ -97,7 +97,7 @@ fine-tuned for translation. Falls back to whatever model
 \code{OLLAMA_MODEL} points at.
 }
 \examples{
-\dontshow{if (morie_llm_probe_ollama()) withAutoprint(\{ # examplesIf}
+\dontshow{if (morie_llm_probe_ollama() && requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Uses the local Ollama server (OLLAMA_HOST, default
 # http://localhost:11434; model via OLLAMA_MODEL, e.g.
 # translategemma:latest). Corpus cache first:

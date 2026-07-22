@@ -17,9 +17,11 @@ Handles both bare \code{{fields, records}} and the
 \code{{result: {fields, records}}} wrapper shape.
 }
 \examples{
+\dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 tf <- tempfile(fileext = ".json")
 writeLines('{"fields": [{"id": "a", "type": "int"}]}', tf)
 res <- morie_arsau_read_sidecar(tf)
 res$fields
 unlink(tf)
+\dontshow{\}) # examplesIf}
 }

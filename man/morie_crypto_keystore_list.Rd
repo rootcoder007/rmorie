@@ -18,6 +18,7 @@ Character vector of identifiers.
 List key names in the morie keystore
 }
 \examples{
+\dontshow{if (requireNamespace("sodium", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 if (morie_crypto_sodium_available()) {
   path <- tempfile(fileext = ".keystore")
   morie_crypto_keystore_create("pw", path = path)
@@ -26,4 +27,5 @@ if (morie_crypto_sodium_available()) {
   print(morie_crypto_keystore_list("pw", path = path))
   unlink(path)
 }
+\dontshow{\}) # examplesIf}
 }
