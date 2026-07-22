@@ -64,7 +64,7 @@ jobs:
                              "rmoriebricklayer", "rmoriedata", "testthat", "pkgload"),
                            repos = repos, Ncpus = 2)
           missing <- setdiff(c("here", "Rcpp", "RcppArmadillo",
-                               "rmoriebricklayer", "testthat", "pkgload"),
+                               "rmoriebricklayer", "rmoriedata", "testthat", "pkgload"),
                              rownames(installed.packages()))
           if (length(missing) > 0) stop("failed to install: ",
                                         paste(missing, collapse = ", "))
@@ -122,7 +122,7 @@ jobs:
             P3M = "https://packagemanager.posit.co/cran/__linux__/bookworm/latest",
             CRAN = "https://cloud.r-project.org")
           pkgs <- c("here", "Rcpp", "RcppArmadillo",
-                    "rmoriebricklayer", "testthat", "pkgload")
+                    "rmoriebricklayer", "rmoriedata", "testthat", "pkgload")
           install.packages(pkgs, repos = repos, Ncpus = 2)
           missing <- setdiff(pkgs, rownames(installed.packages()))
           if (length(missing) > 0) stop("failed to install: ",
@@ -177,7 +177,7 @@ jobs:
             P3M = "https://packagemanager.posit.co/cran/__linux__/rhel9/latest",
             CRAN = "https://cloud.r-project.org")
           pkgs <- c("here", "Rcpp", "RcppArmadillo",
-                    "rmoriebricklayer", "testthat", "pkgload")
+                    "rmoriebricklayer", "rmoriedata", "testthat", "pkgload")
           install.packages(pkgs, repos = repos, Ncpus = 2)
           missing <- setdiff(pkgs, rownames(installed.packages()))
           if (length(missing) > 0) stop("failed to install: ",
