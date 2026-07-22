@@ -60,6 +60,7 @@ layout (\code{Q1 = case_number}, \code{Q3 = police_service},
 \code{field_map} for any other external schema.
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 # Materialize the corpus cache first (fast via rmoriedata):
 morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
@@ -74,4 +75,5 @@ cmp <- morie_siu_compare(
 )
 subset(cmp, !agree)
 }
+\dontshow{\}) # examplesIf}
 }

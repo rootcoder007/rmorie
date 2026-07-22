@@ -40,5 +40,7 @@ servers; this function returns only the catalog records so the
 caller can pick what to download separately.
 }
 \examples{
+\dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{try(morie_ingest_forensics_nist_rds(max_features = 1L))}
+\dontshow{\}) # examplesIf}
 }

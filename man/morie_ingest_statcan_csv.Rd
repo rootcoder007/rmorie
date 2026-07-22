@@ -47,6 +47,7 @@ actual data is linked from the \emph{product} page
 the real \code{..._CSV.zip}.
 }
 \examples{
+\dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 # Requires network access.
 url <- paste0(
@@ -56,6 +57,7 @@ url <- paste0(
 df <- morie_ingest_statcan_csv(url)
 head(df)
 }
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link{morie_ingest_statcan_cansim}},

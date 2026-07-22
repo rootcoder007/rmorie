@@ -44,6 +44,7 @@ returns fewer rows than \code{page_size} (the last page) or
 portal (Chicago, NYC, Seattle, etc.).
 }
 \examples{
+\dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 # Chicago crimes (schema verified 2026-07: `year` is a real column)
 df <- try(morie_ingest_chicago_socrata(
@@ -60,4 +61,5 @@ df2 <- try(morie_ingest_chicago_socrata(
   max_features = 100L
 ))
 }
+\dontshow{\}) # examplesIf}
 }
