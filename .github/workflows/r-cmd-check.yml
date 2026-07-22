@@ -118,7 +118,7 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev libssl-dev
       - name: Pre-install rmoriebricklayer (r-universe; not yet on CRAN)
-        run: install.packages("rmoriebricklayer", repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))
+        run: install.packages(c("rmoriebricklayer", "rmoriedata"), repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))
         shell: Rscript {0}
 
       # rmoriebricklayer ships a compiled libcurl fetch core; on a cold
@@ -142,7 +142,7 @@ jobs:
           needs: check
 
       - name: Reinstall rmoriebricklayer (overwrite any cache-restored 0.2.0)
-        run: install.packages("rmoriebricklayer", repos = "https://rootcoder007.r-universe.dev")
+        run: install.packages(c("rmoriebricklayer", "rmoriedata"), repos = "https://rootcoder007.r-universe.dev")
         shell: Rscript {0}
 
       # Belt-and-suspenders: pak resolves Suggests, but anything its solver
@@ -255,7 +255,7 @@ jobs:
             P3M = "https://packagemanager.posit.co/cran/__linux__/bookworm/latest",
             CRAN = "https://cloud.r-project.org")
           pkgs <- c("here", "Rcpp", "RcppArmadillo",
-                    "rmoriebricklayer", "testthat", "rcmdcheck")
+                    "rmoriebricklayer", "rmoriedata", "testthat", "rcmdcheck")
           install.packages(pkgs, repos = repos, Ncpus = 2)
           missing <- setdiff(pkgs, rownames(installed.packages()))
           if (length(missing) > 0) stop("failed to install: ",
