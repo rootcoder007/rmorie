@@ -912,7 +912,7 @@ morie_siu_refresh_manifest <- function(
 #'   frame for this case), \code{drid}, \code{nrid},
 #'   \code{report_html}, \code{news_html}, \code{report_text}
 #'   (HTML-stripped plain text of the report) and \code{news_text}.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' \donttest{
 #' # Materialize the corpus cache first (fast via rmoriedata):
 #' morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
@@ -1063,7 +1063,7 @@ morie_siu_audit_case <- function(case_number,
 #'   occurrence of either value in the cleaned report text). When
 #'   parser and external disagree, the \code{html_excerpt} is the
 #'   tie-breaker.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' \donttest{
 #' # Materialize the corpus cache first (fast via rmoriedata):
 #' morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
