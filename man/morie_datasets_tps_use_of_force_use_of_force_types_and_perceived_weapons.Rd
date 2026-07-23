@@ -54,7 +54,8 @@ Tags: race; race based data; rbdc
 }
 \examples{
 \donttest{
-df <- try(morie_datasets_tps_use_of_force_use_of_force_types_and_perceived_weapons(max_features = 5L))
+f <- morie_datasets_tps_use_of_force_use_of_force_types_and_perceived_weapons
+df <- try(f(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }
 }

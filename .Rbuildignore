@@ -37,3 +37,13 @@
 ^check-output-.*\.txt$
 ^check-after-.*\.txt$
 ^.*\.Rcheck$
+^AGENTS\.md$
+^BRANCH_PLAN\.md$
+^CLAUDE\.md$
+^DEP_REDUCTION_LOG\.md$
+^GEMINI\.md$
+^REPLACE_INVENTORY\.md$
+^Rplots\.pdf$
+^VERSION_INVENTORY\.csv$
+^figures$
+^pkgdown$

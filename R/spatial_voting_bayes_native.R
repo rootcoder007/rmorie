@@ -66,7 +66,7 @@
     stop("morie_spatial_voting_bayesian_mds: D must contain positive ",
          "distances.", call. = FALSE)
   }
-  X <- cmdscale(D, k = n_dims)
+  X <- stats::cmdscale(D, k = n_dims)
   if (!is.matrix(X)) X <- matrix(X, ncol = n_dims)
   sigma <- sigma_init
   step <- 0.05 * stats::sd(X)

@@ -440,7 +440,7 @@ morie_matching_optimal_pair <- function(data, treatment, covariates,
 #' @return A list of class \code{morie_match_result}.
 #' @references Hansen, B. B. (2004). Full matching in an observational
 #'   study of coaching for the SAT. \emph{JASA}, 99(467), 609--618.
-#' @examplesIf requireNamespace("MatchIt", quietly = TRUE)
+#' @examplesIf requireNamespace("MatchIt", quietly = TRUE) && requireNamespace("optmatch", quietly = TRUE)
 #' \donttest{
 #' set.seed(1)
 #' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),

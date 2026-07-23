@@ -602,10 +602,10 @@ morie_entheo_analyze_subject <- function(subject_id,
 #' reproducible; pass `branch = NULL` to track main.
 #'
 #' Related upstream resources Vee surfaced 2026-05-25:
-#' - <https://github.com/timmer500/DMT_Imaging.git>  (the actual EEG+fMRI dataset)
-#' - <https://github.com/pnk314/psychedelics.git>     (analysis pipeline)
-#' - <https://github.com/lisagirard/Psychedelics.git> (review repository)
-#' - <https://github.com/kianenigma/awesome-psychedelics.git> (curated index)
+#' - <https://github.com/timmer500/DMT_Imaging>  (the actual EEG+fMRI dataset)
+#' - <https://github.com/pnk314/psychedelics>     (analysis pipeline)
+#' - <https://github.com/lisagirard/Psychedelics> (review repository)
+#' - <https://github.com/kianenigma/awesome-psychedelics> (curated index)
 #'
 #' @param root Optional destination directory. Defaults to
 #'   `$MORIE_DMT_IMAGING_ROOT`, else `file.path(morie_cache_dir(),
