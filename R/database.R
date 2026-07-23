@@ -722,8 +722,10 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
 #' @return A data.frame.
 #' @examplesIf requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)
 #' \donttest{
-#' df <- morie_load_dataset("ocp21") # CPADS 2021-2022 (default DuckDB cache)
-#' df <- morie_load_dataset("ocp21", refresh = TRUE) # force re-fetch
+#' # CPADS 2021-2022 (default DuckDB cache); try() so a transient
+#' # upstream outage does not fail the check
+#' df <- try(morie_load_dataset("ocp21"))
+#' df <- try(morie_load_dataset("ocp21", refresh = TRUE)) # force re-fetch
 #'
 #' # PostgreSQL cache (run a server first):
 #' # con <- DBI::dbConnect(RPostgres::Postgres(),

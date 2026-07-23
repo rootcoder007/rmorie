@@ -41,7 +41,7 @@ Description: Self-contained multi-domain scientific computing toolkit for
   'Socrata' portals of Chicago (<https://data.cityofchicago.org/>),
   New York City (<https://opendata.cityofnewyork.us/>), and Calgary
   (<https://data.calgary.ca/>), and the Toronto Police Service
-  public-safety data portal (<https://data.torontopolice.on.ca/>);
+  public-safety data portal (<https://data.tps.ca/>);
   none of these require an account or API (application programming
   interface) key.
 License: AGPL (>= 3)
@@ -145,6 +145,7 @@ Suggests:
   nortest,
   np,
   openssl,
+  optmatch,
   patchwork,
   pdftools,
   performance,

@@ -26,7 +26,7 @@ Thin wrapper around \code{MatchIt::matchit(method = "full")}, which
 calls \pkg{optmatch}.
 }
 \examples{
-\dontshow{if (requireNamespace("MatchIt", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("MatchIt", quietly = TRUE) && requireNamespace("optmatch", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 set.seed(1)
 df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),

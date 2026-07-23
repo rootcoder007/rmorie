@@ -35,10 +35,10 @@ reproducible; pass \code{branch = NULL} to track main.
 
 Related upstream resources Vee surfaced 2026-05-25:
 \itemize{
-\item \url{https://github.com/timmer500/DMT_Imaging.git}  (the actual EEG+fMRI dataset)
-\item \url{https://github.com/pnk314/psychedelics.git}     (analysis pipeline)
-\item \url{https://github.com/lisagirard/Psychedelics.git} (review repository)
-\item \url{https://github.com/kianenigma/awesome-psychedelics.git} (curated index)
+\item \url{https://github.com/timmer500/DMT_Imaging}  (the actual EEG+fMRI dataset)
+\item \url{https://github.com/pnk314/psychedelics}     (analysis pipeline)
+\item \url{https://github.com/lisagirard/Psychedelics} (review repository)
+\item \url{https://github.com/kianenigma/awesome-psychedelics} (curated index)
 }
 }
 \examples{

@@ -1205,6 +1205,8 @@ morie_tps_criminal_network_graph <- function(category = "Assault",
   diag(co) <- 0L
   n_edges <- sum(co > 0) %/% 2L
   max_w <- max(co)
+  sizes <- as.numeric(top[match(nodes, names(top))])
+  sizes[is.na(sizes) | sizes <= 0] <- 1
 
   fig_note <- .tps_sp_fig(fig_dir, sprintf("network_%s.png", category),
     save_fig = save_fig, width = 900, height = 900, draw = function() {

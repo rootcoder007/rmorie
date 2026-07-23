@@ -474,18 +474,25 @@ morie_tps_available_formats <- function() {
 .morie_tps_parse_datetime <- function(x) {
   if (inherits(x, "POSIXct")) return(x)
   x <- as.character(x)
-  dt <- tryCatch(suppressWarnings(as.POSIXct(x, tz = "UTC")),
-                 error = function(e) as.POSIXct(rep(NA_real_, length(x)),
-                                                origin = "1970-01-01",
-                                                tz = "UTC"))
-  us <- is.na(dt) & grepl("^\\d{1,2}/\\d{1,2}/\\d{4}", x)
-  if (any(us)) {
-    dt[us] <- suppressWarnings(as.POSIXct(x[us], tz = "UTC",
-                                          format = "%m/%d/%Y %I:%M:%S %p"))
-    still <- is.na(dt) & us
-    if (any(still))
-      dt[still] <- suppressWarnings(as.POSIXct(x[still], tz = "UTC",
-                                               format = "%m/%d/%Y"))
+  # Explicit per-format passes: as.POSIXct with no format throws when ANY
+  # element fails to parse (R >= 4.3), so a mixed ISO/US vector would lose
+  # every ISO entry. strptime ignores trailing unmatched text, so the "Z"
+  # suffix on live ArcGIS exports is harmless.
+  dt <- as.POSIXct(rep(NA_real_, length(x)), origin = "1970-01-01",
+                   tz = "UTC")
+  fill <- function(dt, mask, fmt) {
+    idx <- is.na(dt) & mask
+    if (any(idx))
+      dt[idx] <- suppressWarnings(as.POSIXct(x[idx], tz = "UTC",
+                                             format = fmt))
+    dt
   }
+  iso <- grepl("^\\d{4}-\\d{2}-\\d{2}", x)
+  dt <- fill(dt, iso, "%Y-%m-%dT%H:%M:%OS")
+  dt <- fill(dt, iso, "%Y-%m-%d %H:%M:%OS")
+  dt <- fill(dt, iso, "%Y-%m-%d")
+  us <- grepl("^\\d{1,2}/\\d{1,2}/\\d{4}", x)
+  dt <- fill(dt, us, "%m/%d/%Y %I:%M:%S %p")
+  dt <- fill(dt, us, "%m/%d/%Y")
   dt
 }

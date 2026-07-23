@@ -48,6 +48,10 @@ install hint if missing.
 }
 \examples{
 \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-\donttest{try(morie_ingest_ckan_read_resource("https://data.ontario.ca", "ea9dc29c-b4f1-4426-b1f2-974ce995aca1"))}
+\donttest{
+try(morie_ingest_ckan_read_resource(
+  "https://data.ontario.ca",
+  "ea9dc29c-b4f1-4426-b1f2-974ce995aca1"))
+}
 \dontshow{\}) # examplesIf}
 }

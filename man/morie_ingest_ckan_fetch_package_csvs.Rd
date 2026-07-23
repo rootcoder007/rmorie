@@ -38,6 +38,10 @@ successful ones.
 }
 \examples{
 \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-\donttest{try(morie_ingest_ckan_fetch_package_csvs("https://data.ontario.ca", "324ff147-816c-4143-a414-d1e973dca140"))}
+\donttest{
+try(morie_ingest_ckan_fetch_package_csvs(
+  "https://data.ontario.ca",
+  "324ff147-816c-4143-a414-d1e973dca140"))
+}
 \dontshow{\}) # examplesIf}
 }

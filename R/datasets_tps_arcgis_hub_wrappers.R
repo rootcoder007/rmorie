@@ -2017,7 +2017,8 @@ morie_datasets_tps_use_of_force_time_of_day_trends <- function(format = "json",
 #'   [morie_datasets_tps_arcgis_hub_by_id()] for per-format semantics.
 #' @examples
 #' \donttest{
-#' df <- try(morie_datasets_tps_use_of_force_use_of_force_types_and_perceived_weapons(max_features = 5L))
+#' f <- morie_datasets_tps_use_of_force_use_of_force_types_and_perceived_weapons
+#' df <- try(f(max_features = 5L))
 #' if (!inherits(df, "try-error")) head(df)
 #' }
 #' @export

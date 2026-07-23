@@ -173,9 +173,9 @@ morie_datasets_statcan_full_csv_url <- function(product_id,
                   .MORIE_STATCAN_WDS_BASE,
                   as.integer(product_id), language)
   r <- .morie_dataset_http_json(url)
+  status <- if (is.list(r)) r$status %||% "NULL" else "NULL"
   if (!is.list(r) || is.null(r$status) || r$status != "SUCCESS")
-    stop(sprintf("StatCan WDS getFullTableDownloadCSV status=%s",
-                  r$status %||% "NULL"),
+    stop(sprintf("StatCan WDS getFullTableDownloadCSV status=%s", status),
           call. = FALSE)
   r$object
 }
