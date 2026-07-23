@@ -1,3 +1,24 @@
+# rmorie 1.1.6 - 2026-07-22
+
+## Patch release: 07-22 hardening + CRAN prep (lockstep with morie 1.1.6)
+
+* StatCan WDS loaders: guard malformed/HTML responses, surface embargo
+  messages, accept `v`-prefixed vector IDs with a clean error for
+  non-numeric input; `morie_datasets_statcan_full_csv_url()` reports
+  `status=NULL` on HTML outage pages instead of crashing.
+* Shared TPS datetime parser `.morie_tps_parse_datetime()`: explicit
+  per-format passes (ISO 8601 incl. `T`/millis/`Z`, US `m/d/Y` with and
+  without `AM/PM`). Fixes mixed-format vectors losing ISO entries
+  (`as.POSIXct` with no format throws when any element fails, R >= 4.3)
+  and the sample-CSV crash on Debian.
+* `.morie_dataset_http_post_json()`: non-JSON service error pages raise
+  a clear error with a response snippet.
+* CRAN prep: `optmatch` added to Suggests (used via `@examplesIf` in the
+  full-matching example), network examples wrapped in `try()`, long
+  example lines wrapped, non-standard top-level files `.Rbuildignore`d.
+* New tests cover every hardening branch plus the Bayesian MDS
+  initialiser and criminal-network node sizing.
+
 # rmorie 1.1.4 (development, feat/native-specializations)
 
 ## Modules 14-17 (quasi-experimental front-ends, weighting, modern DiD, crim methods)
