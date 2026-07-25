@@ -35,7 +35,7 @@ in the package-level help (`?rmorie`).
   <https://rootcoder007.github.io/rmorie/>
 - **r-universe project page**: <https://rootcoder007.r-universe.dev/rmorie>
 
-> With over 1,900 exported functions, the full reference is large — use the
+> With over 2,000 exported functions, the full reference is large — use the
 > manual or the package site above rather than scrolling the function
 > index. This README covers install + the most common workflows only.
 
@@ -132,7 +132,7 @@ prove, on every CI run, that the native engines match them.
 - **All 25 native-specialization modules complete** — see *Why
   rmorie?* above; the package's statistics run with zero runtime
   dependencies on other statistical packages.
-- **Over 1,900 exported `morie_*` R functions** — every public callable is now
+- **Over 2,000 exported `morie_*` R functions** — every public callable is now
   prefixed to avoid name collisions with other CRAN packages
   (`morie_chi_square_test`, `morie_kmeans_clustering`,
   `morie_decision_tree_split`, etc.). The companion `morie.fn` Python
