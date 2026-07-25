@@ -102,12 +102,32 @@ jobs:
       # repos set there (including use-public-rspm's) are invisible to it --
       # it fell back to cran.rstudio.com SOURCE and compiled 118 deps until
       # the job timed out. PKG_CRAN_MIRROR is pak's own env knob and env
-      # survives vanilla subprocesses. RSPM is Linux-only, so other legs
-      # are untouched.
-      - name: Point pak at the P3M binary mirror
+      # survives vanilla subprocesses.
+      #
+      # The mirror has to differ by platform, because P3M's binary coverage
+      # does:
+      #
+      #   Linux   -- P3M ($RSPM) serves the distro binaries we want. Keep it.
+      #   Windows -- P3M has NO Windows binaries for the Stan stack. Asking
+      #              it for rstanarm yields only src/contrib, so pak downloads
+      #              the tarball and compiles Stan for ~13 min, then fails to
+      #              load the freshly built DLL out of pak's temp verification
+      #              library:
+      #                unable to load shared object '.../rstanarm/libs/x64/rstanarm.dll'
+      #              CRAN itself ships rstanarm_2.32.2.zip for R 4.5/4.6/4.7,
+      #              so point Windows at CRAN and the binary is used directly:
+      #              no compile, no DLL load failure, full Stan coverage kept.
+      #              Verified 2026-07-25:
+      #                P3M   /bin/windows/contrib/4.5/rstanarm_2.32.2.zip -> 404
+      #                CRAN  /bin/windows/contrib/4.5/rstanarm_2.32.2.zip -> 200
+      #   macOS   -- left on pak's default, which already resolves binaries.
+      - name: Point pak at a mirror that has binaries for this platform
         shell: bash
         run: |
-          if [ -n "${RSPM:-}" ]; then
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            echo "PKG_CRAN_MIRROR=https://cloud.r-project.org" >> "$GITHUB_ENV"
+            echo "pak CRAN mirror -> https://cloud.r-project.org (Windows binaries)"
+          elif [ -n "${RSPM:-}" ]; then
             echo "PKG_CRAN_MIRROR=${RSPM}" >> "$GITHUB_ENV"
             echo "pak CRAN mirror -> ${RSPM}"
           fi
@@ -120,38 +140,6 @@ jobs:
       - name: Pre-install rmoriebricklayer (r-universe; not yet on CRAN)
         run: install.packages(c("rmoriebricklayer", "rmoriedata"), repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))
         shell: Rscript {0}
-
-      # Drop the Stan stack from Suggests (Windows only).
-      #
-      # rstanarm's Windows DLL compiles cleanly but cannot be loaded out of
-      # pak's temporary verification library -- it fails to resolve rstan's
-      # DLLs from that temp path:
-      #
-      #   unable to load shared object '.../Temp/Rtmp*/pkg-lib*/rstanarm/libs/x64/rstanarm.dll'
-      #
-      # This is an upstream binary problem, not a defect in rmorie: the leg
-      # was green on 2026-07-23 and broke on 2026-07-25 with no related
-      # change on our side. rstanarm/rstan/brms are Suggests-only and every
-      # call site is guarded by skip_if_not_installed(), so the code paths
-      # stay covered on Linux and macOS.
-      #
-      # cmdstanr is deliberately kept -- it is a separate backend and loads
-      # fine on Windows.
-      #
-      # COVERAGE REDUCTION: revisit once the upstream Windows binary is
-      # fixed. Verify by deleting this step and re-running the Windows leg.
-      - name: Drop the Stan stack from Suggests (Windows only)
-        if: runner.os == 'Windows'
-        shell: Rscript {0}
-        run: |
-          d <- read.dcf("DESCRIPTION")
-          sug <- trimws(strsplit(d[, "Suggests"], ",")[[1]])
-          drop <- c("rstanarm", "rstan", "brms")
-          keep <- sug[!(sub("[[:space:]]*\\(.*", "", sug) %in% drop)]
-          cat("Suggests:", length(sug), "->", length(keep), "\n")
-          d[, "Suggests"] <- paste(keep, collapse = ",\n    ")
-          write.dcf(d, "DESCRIPTION")
-          stopifnot(!any(drop %in% trimws(strsplit(read.dcf("DESCRIPTION")[, "Suggests"], ",")[[1]])))
 
       # rmoriebricklayer ships a compiled libcurl fetch core; on a cold
       # cache (or an R version r-universe has no binary for yet) it builds
