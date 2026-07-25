@@ -127,7 +127,7 @@ rmorie is not a wrapper. At runtime it does not call:
 Those packages appear in `Suggests` solely so `tests/cross/` can
 prove, on every CI run, that the native engines match them.
 
-## What's in v1.1.6
+## What's in v1.1.4
 
 - **All 25 native-specialization modules complete** — see *Why
   rmorie?* above; the package's statistics run with zero runtime
@@ -294,7 +294,7 @@ affected-person demographics, injuries, legislation, charges verdict,
 and director's decision) and is hand-rolled for correctness under
 SIU's heterogeneous markup.
 
-Since 1.1.6 the subsystem is layered on the compiled SIU core in
+Since 1.1.4 the subsystem is layered on the compiled SIU core in
 'rmoriebricklayer' and the **verified corpus** shipped by
 'rmoriedata': a 65-column table of 5,157 reports whose 2,182 English
 entries were read and cross-audited by a multi-agent review panel
