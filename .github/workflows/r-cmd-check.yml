@@ -124,29 +124,6 @@ jobs:
       # rmoriebricklayer ships a compiled libcurl fetch core; on a cold
       # cache (or an R version r-universe has no binary for yet) it builds
       # from source, which needs the libcurl headers.
-      # rstanarm's Windows binary cannot resolve rstan's DLLs from the TEMPORARY
-      # library pak installs into before its verification load:
-      #   LoadLibrary failure: The specified module could not be found.
-      # That aborts pak::lockfile_install and takes the whole leg down. The Stan
-      # stack is Suggests-only and every test touching it is guarded with
-      # skip_if_not_installed(), so dropping it from DESCRIPTION on this leg
-      # makes those tests skip cleanly instead. Stan paths stay fully covered on
-      # the Linux and macOS legs. DESCRIPTION is only edited in the runner's
-      # workspace -- nothing is committed.
-      - name: Drop the Stan stack from Suggests (Windows only)
-        if: runner.os == 'Windows'
-        shell: Rscript {0}
-        run: |
-          drop <- c("rstanarm", "rstan", "brms")
-          d <- read.dcf("DESCRIPTION")
-          sug <- d[1, "Suggests"]
-          pkgs <- trimws(strsplit(gsub("\\s*\\([^)]*\\)", "", sug), ",")[[1]])
-          pkgs <- pkgs[nzchar(pkgs)]
-          removed <- intersect(pkgs, drop)
-          d[1, "Suggests"] <- paste(setdiff(pkgs, drop), collapse = ",\n    ")
-          write.dcf(d, "DESCRIPTION")
-          message("Windows leg: dropped ", paste(removed, collapse = ", "))
-
       - uses: r-lib/actions/setup-r-dependencies@b7484da46de19a964f8831f505d2fcf84d1663ec # v2
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
