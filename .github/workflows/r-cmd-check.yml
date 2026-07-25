@@ -38,6 +38,11 @@ env:
   # on all OS cells: rgl is a CI-only transitive dep, no graphics tests
   # run here.
   RGL_USE_NULL: "TRUE"
+  # pak queries 5 Bioconductor repos by default; rmorie needs none of
+  # them, and when bioconductor.org is slow the resolver logs "unable to
+  # access index for repository .../bioc" on every leg. Documented pak
+  # knob (pak NEWS: use_bioconductor / PKG_USE_BIOCONDUCTOR).
+  PKG_USE_BIOCONDUCTOR: "false"
 
 on:
   workflow_call:
