@@ -121,6 +121,38 @@ jobs:
         run: install.packages(c("rmoriebricklayer", "rmoriedata"), repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))
         shell: Rscript {0}
 
+      # Drop the Stan stack from Suggests (Windows only).
+      #
+      # rstanarm's Windows DLL compiles cleanly but cannot be loaded out of
+      # pak's temporary verification library -- it fails to resolve rstan's
+      # DLLs from that temp path:
+      #
+      #   unable to load shared object '.../Temp/Rtmp*/pkg-lib*/rstanarm/libs/x64/rstanarm.dll'
+      #
+      # This is an upstream binary problem, not a defect in rmorie: the leg
+      # was green on 2026-07-23 and broke on 2026-07-25 with no related
+      # change on our side. rstanarm/rstan/brms are Suggests-only and every
+      # call site is guarded by skip_if_not_installed(), so the code paths
+      # stay covered on Linux and macOS.
+      #
+      # cmdstanr is deliberately kept -- it is a separate backend and loads
+      # fine on Windows.
+      #
+      # COVERAGE REDUCTION: revisit once the upstream Windows binary is
+      # fixed. Verify by deleting this step and re-running the Windows leg.
+      - name: Drop the Stan stack from Suggests (Windows only)
+        if: runner.os == 'Windows'
+        shell: Rscript {0}
+        run: |
+          d <- read.dcf("DESCRIPTION")
+          sug <- trimws(strsplit(d[, "Suggests"], ",")[[1]])
+          drop <- c("rstanarm", "rstan", "brms")
+          keep <- sug[!(sub("[[:space:]]*\\(.*", "", sug) %in% drop)]
+          cat("Suggests:", length(sug), "->", length(keep), "\n")
+          d[, "Suggests"] <- paste(keep, collapse = ",\n    ")
+          write.dcf(d, "DESCRIPTION")
+          stopifnot(!any(drop %in% trimws(strsplit(read.dcf("DESCRIPTION")[, "Suggests"], ",")[[1]])))
+
       # rmoriebricklayer ships a compiled libcurl fetch core; on a cold
       # cache (or an R version r-universe has no binary for yet) it builds
       # from source, which needs the libcurl headers.
