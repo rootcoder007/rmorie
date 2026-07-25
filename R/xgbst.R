@@ -34,7 +34,10 @@ morie_xgboost_objective <- function(x, y, n_estimators = 100L, learning_rate = 0
   if (is.null(dim(x))) x <- matrix(x, ncol = 1)
   x <- as.matrix(x)
   if (identical(task, "auto")) {
-    task <- if (is.factor(y) || all(y %in% c(0L, 1L)) || is.integer(y)) {
+    # A 0/1 vector (integer or double) is caught by the `%in%` test; do NOT
+    # treat every integer as classification — count outcomes are integers too
+    # and must resolve to regression (N4).
+    task <- if (is.factor(y) || all(y %in% c(0L, 1L))) {
       "classification"
     } else {
       "regression"
@@ -79,7 +82,9 @@ morie_xgboost_objective <- function(x, y, n_estimators = 100L, learning_rate = 0
     if (!requireNamespace("gbm", quietly = TRUE)) {
       stop("install 'xgboost' (preferred) or 'gbm' for morie_xgboost_objective")
     }
-    yv <- if (task == "classification") factor(y) else as.numeric(y)
+    # gbm's bernoulli requires numeric {0,1}, NOT a factor (N3). Use the same
+    # coercion as the xgboost branch above so the fallback actually fits.
+    yv <- if (task == "classification") as.numeric(as.factor(y)) - 1 else as.numeric(y)
     df <- as.data.frame(x)
     df$.y <- yv
     distribution <- if (task == "classification") "bernoulli" else "gaussian"
