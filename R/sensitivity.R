@@ -154,8 +154,7 @@ NULL
 
 #' E-value for a risk ratio
 #'
-#' Wraps \pkg{EValue} when available; otherwise applies the
-#' VanderWeele-Ding closed-form formula directly.
+#' Applies the VanderWeele-Ding closed-form formula directly in base R.
 #'
 #' @param rr        Observed risk ratio.
 #' @param ci_lower  Lower 95% CI of the RR (optional).
