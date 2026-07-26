@@ -98,9 +98,9 @@ estimate_ate <- function(data, outcome, treatment, weights_col) {
 
 #' Partially Linear Regression (PLR) ATE
 #'
-#' Wraps \pkg{DoubleML} (+ \pkg{mlr3} / \pkg{mlr3learners}) when
-#' available. Without DoubleML, falls back to a hand-rolled
-#' cross-fitting estimator using ridge regression (\pkg{glmnet}) or,
+#' Native cross-fitting estimator using ridge regression, following
+#' Chernozhukov et al. (2018). Cross-validated against \pkg{DoubleML}
+#' in the package's cross tests but not calling it at runtime; or,
 #' last-ditch, OLS partialling out.
 #'
 #' @param data        Data frame with all required columns.
@@ -190,8 +190,9 @@ estimate_plr <- function(data, treatment, outcome, covariates,
 
 #' Partially Linear IV (PLIV) / Local Average Treatment Effect
 #'
-#' Wraps \pkg{DoubleML} when available. Otherwise falls back to 2SLS:
-#' first stage `D ~ Z + X`, second stage `Y ~ D_hat + X`, base R OLS.
+#' Native 2SLS in base R: first stage `D ~ Z + X`, second stage
+#' `Y ~ D_hat + X`. Cross-validated against \pkg{DoubleML} in the
+#' package's cross tests but not calling it at runtime.
 #'
 #' @param data        Data frame with all required columns.
 #' @param treatment   Endogenous treatment column name.
@@ -420,10 +421,9 @@ estimate_ate_gcomputation <- function(data, treatment, outcome,
 
 #' Rosenbaum bounds sensitivity analysis (data-frame interface)
 #'
-#' Thin wrapper over \code{rbounds::psens()} when \pkg{rbounds} is
-#' installed (rank-matched-pair signed-rank bounds across a Gamma
-#' grid). Without \pkg{rbounds}, falls back to a base R normal-
-#' approximation Wilcoxon signed-rank computation.
+#' Native base R rank-matched-pair signed-rank bounds across a Gamma
+#' grid, via the normal approximation to the Wilcoxon signed-rank
+#' statistic.
 #'
 #' @param data       Data frame with treatment + outcome columns.
 #' @param treatment  Binary treatment column (0/1).
@@ -526,10 +526,9 @@ sensitivity_rosenbaum <- function(data, treatment, outcome,
 
 #' E-value for unmeasured confounding (continuous-ATE scale)
 #'
-#' Thin wrapper over \code{EValue::evalues.OLS()} when \pkg{EValue} is
-#' installed and an outcome SD is supplied via the `sd_y` argument
-#' (recommended workflow per VanderWeele & Ding 2017). Without
-#' \pkg{EValue}, or when `sd_y` is left at its default of 1, falls
+#' Native implementation of the VanderWeele & Ding (2017) OLS E-value.
+#' Supply an outcome SD via `sd_y` for the recommended standardised
+#' workflow; when `sd_y` is left at its default of 1, it
 #' back to the closed-form continuous-scale RR proxy used by the
 #' Python port so both ports stay numerically aligned.
 #'
