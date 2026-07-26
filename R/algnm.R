@@ -1,6 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Rice party cohesion index (Rice 1928; Armstrong Ch 8)
+#' Rice party cohesion index (Rice 1928)
+#' @details Rice, S. A. (1928), Quantitative Methods in Politics. NOT Armstrong:
+#'   that book never defines the Rice index -- its only "cohesion" mention (p.172)
+#'   is an aside about the French National Assembly, and its "Rice" hit is the word
+#'   "price". Checked page by page in the PDF.
 #'
 #' Rice_p = |%yea_p - %nay_p| over a series of roll calls; with a
 #' `party` indicator, averages per-roll-call Rice over each party.
