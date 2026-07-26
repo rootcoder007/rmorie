@@ -61,8 +61,8 @@ NULL
 #'   \item Non-parametric: \code{mann_whitney_u},
 #'     \code{wilcoxon_signed_rank}, \code{ks_test_one_sample},
 #'     \code{ks_test_two_sample}, \code{levene_test},
-#'     \code{bartlett_test}, \code{runs_test}
-#'     (\code{nortest::ad.test} for Anderson-Darling)
+#'     \code{bartlett_test}, \code{runs_test},
+#'     \code{anderson_darling}
 #'   \item Normality: \code{dagostino_pearson}, \code{lilliefors_test}
 #'     (\code{stats::shapiro.test} for Shapiro-Wilk,
 #'     \code{tseries::jarque.bera.test} for Jarque-Bera)
@@ -992,33 +992,245 @@ dagostino_pearson <- function(x) {
   )
 }
 
-#' Lilliefors test for normality
+# ---------------------------------------------------------------------
+# Native EDF goodness-of-fit machinery (no CRAN dependency)
+#
+# Critical values are transcribed from Gibbons, J.D. & Chakraborti, S.
+# (2010), Nonparametric Statistical Inference, 5th edn, CRC Press:
+#   Table O  (p. 589)  Lilliefors's test, normal distribution
+#   Table T  (p. 598)  Lilliefors's test, exponential distribution
+#   Table 4.7.1 (p. 139) Anderson-Darling modifications + upper tail points
+# Tables O and T are adapted there from Edgeman & Scott (1987); Table
+# 4.7.1 from Stephens (1986) in D'Agostino & Stephens, Goodness-of-Fit
+# Techniques. Entries are reproduced verbatim, including the single
+# non-monotonicity in Table T (N = 18 and N = 20 at alpha = 0.001 are
+# .328 and .329); smoothing it would misreport the published table.
+# ---------------------------------------------------------------------
+
+# Sample sizes indexing Tables O and T.
+.GOF_LILLIE_N <- c(4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 18, 20,
+                   25, 30, 40, 50, 60, 75, 100)
+
+# Right-tail probabilities heading both tables.
+.GOF_LILLIE_ALPHA <- c(0.100, 0.050, 0.010, 0.001)
+
+# Table O -- normal distribution, mean and variance unknown.
+.GOF_LILLIE_NORM <- matrix(c(
+  .344, .375, .414, .432,   .320, .344, .398, .427,
+  .298, .323, .369, .421,   .281, .305, .351, .399,
+  .266, .289, .334, .383,   .252, .273, .316, .366,
+  .240, .261, .305, .350,   .231, .251, .291, .331,
+  .223, .242, .281, .327,   .208, .226, .262, .302,
+  .195, .213, .249, .291,   .185, .201, .234, .272,
+  .176, .192, .223, .266,   .159, .173, .202, .236,
+  .146, .159, .186, .219,   .127, .139, .161, .190,
+  .114, .125, .145, .173,   .105, .114, .133, .159,
+  .094, .102, .119, .138,   .082, .089, .104, .121
+), ncol = 4, byrow = TRUE)
+
+# Table T -- exponential distribution, mean unknown.
+.GOF_LILLIE_EXP <- matrix(c(
+  .444, .483, .556, .626,   .405, .443, .514, .585,
+  .374, .410, .477, .551,   .347, .381, .444, .509,
+  .327, .359, .421, .502,   .310, .339, .399, .460,
+  .296, .325, .379, .444,   .284, .312, .366, .433,
+  .271, .299, .350, .412,   .252, .277, .325, .388,
+  .237, .261, .311, .366,   .224, .247, .293, .328,
+  .213, .234, .279, .329,   .192, .211, .251, .296,
+  .176, .193, .229, .270,   .153, .168, .201, .241,
+  .137, .150, .179, .214,   .125, .138, .164, .193,
+  .113, .124, .146, .173,   .098, .108, .127, .150
+), ncol = 4, byrow = TRUE)
+
+# "Over 100" rows: critical value is the coefficient over sqrt(N).
+.GOF_LILLIE_ASYMP <- list(
+  norm  = c(.816, .888, 1.038, 1.212),
+  expon = c(.980, 1.077, 1.274, 1.501)
+)
+
+#' Internal helper: Lilliefors critical values at sample size n
+#' @noRd
+.gof_lillie_crit <- function(n, dist) {
+  asy <- .GOF_LILLIE_ASYMP[[dist]]
+  if (n > 100) {
+    return(asy / sqrt(n))
+  }
+  tab <- if (identical(dist, "norm")) .GOF_LILLIE_NORM else .GOF_LILLIE_EXP
+  if (n <= .GOF_LILLIE_N[1]) {
+    return(tab[1, ])
+  }
+  # Interpolate each tabulated significance level linearly in N.
+  vapply(seq_along(.GOF_LILLIE_ALPHA), function(j) {
+    stats::approx(.GOF_LILLIE_N, tab[, j], xout = n)$y
+  }, numeric(1))
+}
+
+#' Internal helper: p-value from a critical-value row
 #'
-#' Uses \pkg{nortest::lillie.test} when available; otherwise falls back
-#' to a plain KS test with estimated parameters (p-value approximate).
+#' Interpolates linearly in log(alpha) between the bracketing critical
+#' values. Outside the tabulated range the p-value is reported at the
+#' nearest tabulated bound; `bounded` records which side was clamped so
+#' callers can tell an exact 0.001 from "at most 0.001".
+#' @noRd
+.gof_p_from_crit <- function(stat, crit, alpha) {
+  ord <- order(crit)
+  crit <- crit[ord]
+  alpha <- alpha[ord]
+  if (stat <= crit[1]) {
+    return(list(p = max(alpha), bounded = "upper"))
+  }
+  k <- length(crit)
+  if (stat >= crit[k]) {
+    return(list(p = min(alpha), bounded = "lower"))
+  }
+  p <- exp(stats::approx(crit, log(alpha), xout = stat)$y)
+  list(p = p, bounded = NA_character_)
+}
+
+# Upper tail percentage points heading Table 4.7.1.
+.GOF_AD_ALPHA <- c(0.01, 0.025, 0.05, 0.10, 0.15)
+
+# Table 4.7.1 rows actually used here: the two composite-hypothesis cases.
+# Normal, case 3 (mean and variance unknown): A* = W2n(1 + 0.75/n + 2.25/n^2)
+# Exponential, mean unknown:                  A* = W2n(1 + 0.3/n)
+.GOF_AD_CRIT <- list(
+  norm  = c(1.035, 0.873, 0.752, 0.631, 0.561),
+  expon = c(1.959, 1.591, 1.321, 1.062, 0.916)
+)
+
+#' Anderson-Darling goodness-of-fit test
+#'
+#' Native implementation for the two composite null hypotheses that have
+#' published percentage points: the normal distribution with unknown mean
+#' and variance, and the exponential distribution with unknown mean. The
+#' statistic is
+#' \deqn{A^2 = -n - n^{-1}\sum (2i-1)[\ln F(z_i) + \ln(1 - F(z_{n+1-i}))]}
+#' and is then modified for the estimated parameters before being compared
+#' with the tabulated points (see \code{.gof_lillie_crit} for the table
+#' provenance).
+#'
+#' Because the fitted parameters are estimated from the same sample, the
+#' unmodified \eqn{A^2} is not referred to its own null distribution;
+#' \eqn{A^* = A^2(1 + 0.75/n + 2.25/n^2)} in the normal case and
+#' \eqn{A^* = A^2(1 + 0.3/n)} in the exponential case.
 #'
 #' @param x Numeric vector.
-#' @return An object of class \code{"morie_test_result"}.
+#' @param dist Either \code{"norm"} (default) or \code{"expon"}.
+#' @return A \code{morie_test_result} (subclass of \code{morie_rich_result})
+#'   with the modified statistic \eqn{A^*} as \code{test_statistic}, the
+#'   p-value, and sample size n. \code{extra} carries the unmodified
+#'   \code{a_squared} and, when the statistic falls outside the tabulated
+#'   range, \code{p_bounded} set to \code{"upper"} or \code{"lower"} --
+#'   the p-value is then the nearest tabulated bound, not an exact value.
+#' @references
+#' Gibbons, J. D. & Chakraborti, S. (2010). \emph{Nonparametric Statistical
+#' Inference}, 5th edn. CRC Press. Section 4.7 and Table 4.7.1.
+#'
+#' Stephens, M. A. (1986). Tests based on EDF statistics. In R. B.
+#' D'Agostino & M. A. Stephens (eds), \emph{Goodness-of-Fit Techniques}.
+#' Marcel Dekker.
+#' @examples
+#' set.seed(1)
+#' res <- anderson_darling(rnorm(60))
+#' res$test_statistic
+#' anderson_darling(rexp(60), dist = "expon")$p_value
+#' @export
+anderson_darling <- function(x, dist = c("norm", "expon")) {
+  x <- .stat_validate(x)
+  dist <- match.arg(dist)
+  n <- length(x)
+  xs <- sort(x)
+  if (identical(dist, "norm")) {
+    s <- stats::sd(xs)
+    if (!is.finite(s) || s <= 0) {
+      stop("anderson_darling: 'x' has zero variance; the normal fit is degenerate.")
+    }
+    z <- (xs - mean(xs)) / s
+    lf <- stats::pnorm(z, log.p = TRUE)
+    lsf <- stats::pnorm(rev(z), lower.tail = FALSE, log.p = TRUE)
+    mult <- 1 + 0.75 / n + 2.25 / n^2
+  } else {
+    mu <- mean(xs)
+    if (!is.finite(mu) || mu <= 0 || xs[1] < 0) {
+      stop("anderson_darling: dist = \"expon\" needs non-negative 'x' with a positive mean.")
+    }
+    z <- xs / mu
+    lf <- stats::pexp(z, log.p = TRUE)
+    lsf <- stats::pexp(rev(z), lower.tail = FALSE, log.p = TRUE)
+    mult <- 1 + 0.3 / n
+  }
+  i <- seq_len(n)
+  a2 <- -n - mean((2 * i - 1) * (lf + lsf))
+  astar <- a2 * mult
+  pr <- .gof_p_from_crit(astar, .GOF_AD_CRIT[[dist]], .GOF_AD_ALPHA)
+  .stat_result(
+    method = sprintf("Anderson-Darling test (%s)", dist),
+    test_statistic = astar, p_value = pr$p, n = n,
+    extra = list(a_squared = a2, p_bounded = pr$bounded)
+  )
+}
+
+#' Lilliefors goodness-of-fit test
+#'
+#' Kolmogorov-Smirnov statistic referred to Lilliefors's null distribution
+#' rather than Kolmogorov's. When the parameters are estimated from the
+#' same sample the ordinary K-S critical values are badly conservative,
+#' which is what Lilliefors (1967) established; the correct points come
+#' from separate simulations, tabulated for the normal case and for the
+#' exponential case.
+#'
+#' @param x Numeric vector.
+#' @param dist Either \code{"norm"} (default, mean and variance unknown)
+#'   or \code{"expon"} (mean unknown).
+#' @return A \code{morie_test_result} (subclass of \code{morie_rich_result})
+#'   with the Lilliefors D statistic, p-value, and sample size n.
+#'   \code{extra$p_bounded} is \code{"upper"} or \code{"lower"} when D
+#'   falls outside the tabulated range, in which case the p-value is the
+#'   nearest tabulated bound (0.10 or 0.001) rather than an exact value.
+#' @references
+#' Lilliefors, H. W. (1967). On the Kolmogorov-Smirnov test for normality
+#' with mean and variance unknown. \emph{Journal of the American
+#' Statistical Association}, 62(318), 399-402.
+#'
+#' Lilliefors, H. W. (1969). On the Kolmogorov-Smirnov test for the
+#' exponential distribution with mean unknown. \emph{Journal of the
+#' American Statistical Association}, 64(325), 387-389.
+#'
+#' Gibbons, J. D. & Chakraborti, S. (2010). \emph{Nonparametric Statistical
+#' Inference}, 5th edn. CRC Press. Sections 4.5-4.6, Tables O and T.
 #' @examples
 #' set.seed(1)
 #' res <- lilliefors_test(rnorm(80))
 #' res
+#' lilliefors_test(rexp(80), dist = "expon")$p_value
 #' @export
-lilliefors_test <- function(x) {
+lilliefors_test <- function(x, dist = c("norm", "expon")) {
   x <- .stat_validate(x)
-  if (requireNamespace("nortest", quietly = TRUE)) {
-    res <- nortest::lillie.test(x)
-    stat <- unname(res$statistic)
-    p <- res$p.value
+  dist <- match.arg(dist)
+  n <- length(x)
+  xs <- sort(x)
+  if (identical(dist, "norm")) {
+    s <- stats::sd(xs)
+    if (!is.finite(s) || s <= 0) {
+      stop("lilliefors_test: 'x' has zero variance; the normal fit is degenerate.")
+    }
+    f <- stats::pnorm((xs - mean(xs)) / s)
   } else {
-    kt <- suppressWarnings(stats::ks.test(x, "pnorm", mean(x), sd(x)))
-    stat <- unname(kt$statistic)
-    p <- kt$p.value
-    warning("nortest not available; Lilliefors p-value approximate (plain KS).")
+    mu <- mean(xs)
+    if (!is.finite(mu) || mu <= 0 || xs[1] < 0) {
+      stop("lilliefors_test: dist = \"expon\" needs non-negative 'x' with a positive mean.")
+    }
+    f <- stats::pexp(xs / mu)
   }
+  i <- seq_len(n)
+  # Both one-sided gaps: the EDF jumps at each order statistic, so the
+  # supremum is attained just before or just at an observation.
+  d <- max(pmax(i / n - f, f - (i - 1) / n))
+  pr <- .gof_p_from_crit(d, .gof_lillie_crit(n, dist), .GOF_LILLIE_ALPHA)
   .stat_result(
-    method = "Lilliefors test",
-    test_statistic = stat, p_value = p, n = length(x)
+    method = sprintf("Lilliefors test (%s)", dist),
+    test_statistic = d, p_value = pr$p, n = n,
+    extra = list(p_bounded = pr$bounded)
   )
 }
 
