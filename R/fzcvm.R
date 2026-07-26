@@ -39,7 +39,13 @@ fzcvm <- function(x, cdf = "norm", args = NULL, h = NULL) {
     numeric(1)
   )
   w2 <- n * mean((F_hat - F_ref)^2)
-  p <- .morie_cvm_pvalue(w2 / n)
+  # The critical values in .morie_cvm_pvalue are for the n-SCALED statistic
+  # W^2 = n * integral (F_hat - F)^2 dF, which is what w2 already is. This
+  # used to pass w2 / n, which undid the scaling: the argument then sat below
+  # the smallest tabulated value (0.347) for every realistic input, so the
+  # helper took its first branch and returned 0.5 always. Mirrors the same
+  # fix in the Python morie.fn.fzcvm.
+  p <- .morie_cvm_pvalue(w2)
   list(
     statistic = w2, p_value = p, h = h, n = n,
     method = "Fauzi kernel-smoothed Cramer-von Mises (Ch 5)"

@@ -1,6 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Dimensionality test via Kaiser scree (Armstrong Ch 7)
+#' Dimensionality test via the Kaiser rule (Kaiser 1960; Cattell 1966)
+#' @details NOT Armstrong: that book has six chapters and no Ch 7. The lambda > 1
+#'   retention rule is Kaiser (1960), Educ. Psychol. Meas. 20(1):141-151; the scree
+#'   gap is Cattell (1966), Multivar. Behav. Res. 1(2):245-276.
 #'
 #' Counts eigenvalues exceeding `threshold` on the symmetric matrix
 #' formed from x (input matrix is used directly if symmetric; else
