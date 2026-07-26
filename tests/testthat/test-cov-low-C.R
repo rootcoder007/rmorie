@@ -103,7 +103,7 @@ test_that("mrm_siu_outcome_classifier returns counts and shares", {
 test_that("rglyp returns lyapunov + divergence_curve for a Gaussian series", {
   set.seed(1)
   out <- rglyp(rnorm(300), m = 3L, tau = 1L, max_t = 20L)
-  expect_named(out, c("lyapunov", "divergence_curve", "t"))
+  expect_named(out, c("lyapunov", "divergence_curve", "t", "dt"))
   expect_length(out$divergence_curve, 20L)
   expect_length(out$t, 20L)
   expect_true(is.numeric(out$lyapunov))
