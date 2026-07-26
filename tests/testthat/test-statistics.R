@@ -405,3 +405,69 @@ test_that("print.morie_test_result emits the method header", {
   res <- one_sample_ttest(rnorm(30))
   expect_output(print(res), res$method, fixed = TRUE)
 })
+# ---------------------------------------------------------------------------
+# Anderson-Darling / Lilliefors -- book-as-spec
+#
+# Gibbons & Chakraborti (2010), Nonparametric Statistical Inference, 5th edn,
+# Examples 4.6.1 and 4.7.1 use this exact 10-point sample and publish the
+# resulting statistics. These are the reference values the native
+# implementations must reproduce; a smoke test that only checks finiteness
+# would pass on a wrong formula.
+# ---------------------------------------------------------------------------
+
+gibbons_expon_sample <- c(1.5, 2.3, 4.2, 7.1, 10.4, 8.4, 9.3, 6.5, 2.5, 4.6)
+
+test_that("Lilliefors D reproduces Gibbons Example 4.6.1", {
+  res <- lilliefors_test(gibbons_expon_sample, dist = "expon")
+  expect_equal(res$test_statistic, 0.233, tolerance = 5e-4)
+  # Book: "the approximate P value is greater than 0.10" -- D is below the
+  # smallest tabulated critical value, so the p-value is reported at the
+  # 0.10 bound and flagged as such.
+  expect_equal(res$p_value, 0.10)
+  expect_identical(res$extra$p_bounded, "upper")
+})
+
+test_that("Anderson-Darling reproduces Gibbons Example 4.7.1", {
+  res <- anderson_darling(gibbons_expon_sample, dist = "expon")
+  expect_equal(res$extra$a_squared, 0.9455, tolerance = 5e-5)
+  expect_equal(res$test_statistic, 0.9738, tolerance = 5e-5)
+  # A* = 0.9738 sits between the alpha = 0.15 point (0.916) and the
+  # alpha = 0.10 point (1.062) of Table 4.7.1.
+  expect_gt(res$p_value, 0.10)
+  expect_lt(res$p_value, 0.15)
+})
+
+test_that("Anderson-Darling applies the case-3 normal modification", {
+  set.seed(11)
+  x <- rnorm(50)
+  res <- anderson_darling(x, dist = "norm")
+  n <- length(x)
+  expect_equal(res$test_statistic,
+               res$extra$a_squared * (1 + 0.75 / n + 2.25 / n^2),
+               tolerance = 1e-12)
+})
+
+test_that("goodness-of-fit tests reject a badly misfit sample", {
+  set.seed(4)
+  heavy <- rexp(200)                      # not normal
+  # Both statistics land beyond the largest tabulated critical value, so the
+  # p-value is clamped at the table floor (0.001 for Lilliefors, 0.01 for
+  # Anderson-Darling) and flagged. Asserting a strictly smaller p-value would
+  # be asserting something the tables cannot express.
+  li <- lilliefors_test(heavy, dist = "norm")
+  expect_equal(li$p_value, 0.001)
+  expect_identical(li$extra$p_bounded, "lower")
+  ad <- anderson_darling(heavy, dist = "norm")
+  expect_equal(ad$p_value, 0.01)
+  expect_identical(ad$extra$p_bounded, "lower")
+  # ...and do not reject when the fit is right.
+  set.seed(5)
+  expect_gt(lilliefors_test(rnorm(200), dist = "norm")$p_value, 0.05)
+  expect_gt(anderson_darling(rnorm(200), dist = "norm")$p_value, 0.05)
+})
+
+test_that("degenerate and invalid inputs error rather than return nonsense", {
+  expect_error(anderson_darling(rep(1, 20), dist = "norm"), "zero variance")
+  expect_error(lilliefors_test(rep(1, 20), dist = "norm"), "zero variance")
+  expect_error(anderson_darling(c(-1, 2, 3), dist = "expon"), "non-negative")
+})

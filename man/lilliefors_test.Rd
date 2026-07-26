@@ -2,22 +2,46 @@
 % Please edit documentation in R/statistics.R
 \name{lilliefors_test}
 \alias{lilliefors_test}
-\title{Lilliefors test for normality}
+\title{Lilliefors goodness-of-fit test}
 \usage{
-lilliefors_test(x)
+lilliefors_test(x, dist = c("norm", "expon"))
 }
 \arguments{
 \item{x}{Numeric vector.}
+
+\item{dist}{Either \code{"norm"} (default, mean and variance unknown)
+or \code{"expon"} (mean unknown).}
 }
 \value{
-An object of class \code{"morie_test_result"}.
+A \code{morie_test_result} (subclass of \code{morie_rich_result})
+with the Lilliefors D statistic, p-value, and sample size n.
+\code{extra$p_bounded} is \code{"upper"} or \code{"lower"} when D
+falls outside the tabulated range, in which case the p-value is the
+nearest tabulated bound (0.10 or 0.001) rather than an exact value.
 }
 \description{
-Uses \pkg{nortest::lillie.test} when available; otherwise falls back
-to a plain KS test with estimated parameters (p-value approximate).
+Kolmogorov-Smirnov statistic referred to Lilliefors's null distribution
+rather than Kolmogorov's. When the parameters are estimated from the
+same sample the ordinary K-S critical values are badly conservative,
+which is what Lilliefors (1967) established; the correct points come
+from separate simulations, tabulated for the normal case and for the
+exponential case.
 }
 \examples{
 set.seed(1)
 res <- lilliefors_test(rnorm(80))
 res
+lilliefors_test(rexp(80), dist = "expon")$p_value
+}
+\references{
+Lilliefors, H. W. (1967). On the Kolmogorov-Smirnov test for normality
+with mean and variance unknown. \emph{Journal of the American
+Statistical Association}, 62(318), 399-402.
+
+Lilliefors, H. W. (1969). On the Kolmogorov-Smirnov test for the
+exponential distribution with mean unknown. \emph{Journal of the
+American Statistical Association}, 64(325), 387-389.
+
+Gibbons, J. D. & Chakraborti, S. (2010). \emph{Nonparametric Statistical
+Inference}, 5th edn. CRC Press. Sections 4.5-4.6, Tables O and T.
 }
