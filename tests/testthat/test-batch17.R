@@ -358,7 +358,7 @@ test_that("rglyp returns lyapunov exponent and divergence curve", {
   set.seed(25)
   r <- rglyp(rnorm(200), m = 3L, tau = 1L, max_t = 20L)
   expect_type(r, "list")
-  expect_named(r, c("lyapunov", "divergence_curve", "t"))
+  expect_named(r, c("lyapunov", "divergence_curve", "t", "dt"))
   expect_length(r$t, 20L)
   expect_length(r$divergence_curve, 20L)
   expect_true(is.na(r$lyapunov) || is.finite(r$lyapunov))
