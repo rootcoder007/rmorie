@@ -1,0 +1,65 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+#
+# Internal helpers shared by the causal-forest and TMLE tiers
+# (R/causal_forest_native.R and R/tmle_native.R). Kept in their own
+# file so neither tier depends on the other's load order.
+
+# Moore-Penrose pseudo-inverse via SVD, for singular Hessians.
+.morie_ginv <- function(M) {
+  s <- svd(M)
+  pos <- s$d > max(s$d) * 1e-12
+  s$v[, pos, drop = FALSE] %*% ((1 / s$d[pos]) * t(s$u[, pos, drop = FALSE]))
+}
+
+# Newton-Raphson logistic regression; returns fitted probabilities.
+.morie_logit_fit <- function(X, y, max_iter = 100L, tol = 1e-9) {
+  D <- cbind(1, X)
+  beta <- rep(0, ncol(D))
+  for (i in seq_len(max_iter)) {
+    eta <- pmin(pmax(D %*% beta, -35), 35)
+    p <- as.vector(1 / (1 + exp(-eta)))
+    W <- pmax(p * (1 - p), 1e-10)
+    grad <- crossprod(D, y - p)
+    H <- crossprod(D * W, D)
+    step <- tryCatch(solve(H, grad),
+                     error = function(e) .morie_ginv(H) %*% grad)
+    beta <- beta + step
+    if (max(abs(step)) < tol) break
+  }
+  as.vector(1 / (1 + exp(-pmin(pmax(D %*% beta, -35), 35))))
+}
+
+# Ridge coefficients with an unpenalised intercept.
+.morie_ridge_fit <- function(X, y, lam = 1e-3) {
+  D <- cbind(1, X)
+  A <- crossprod(D) + lam * diag(ncol(D))
+  A[1, 1] <- A[1, 1] - lam
+  solve(A, crossprod(D, y))
+}
+
+# Inverse-probability-of-censoring-weighted RMST pseudo outcome, whose
+# expectation is E[min(T, horizon)] under independent censoring.
+.morie_cf_rmst_pseudo <- function(time, event, horizon) {
+  n <- length(time)
+  o <- order(time)
+  ts <- time[o]
+  cs <- 1 - event[o]
+  G <- 1
+  at_risk <- n
+  grid <- 0
+  vals <- 1
+  for (i in seq_len(n)) {
+    if (cs[i] == 1) {
+      G <- G * (1 - 1 / max(at_risk, 1))
+      grid <- c(grid, ts[i])
+      vals <- c(vals, G)
+    }
+    at_risk <- at_risk - 1
+  }
+  vals <- pmax(vals, 1e-3)
+  Ghat <- function(t) vals[findInterval(t, grid)]
+  ifelse(
+    event == 1 & time <= horizon, time / Ghat(pmax(time - 1e-12, 0)),
+    ifelse(time > horizon, horizon / Ghat(horizon), 0)
+  )
+}
