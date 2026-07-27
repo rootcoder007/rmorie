@@ -14,7 +14,23 @@ test_that("morie_mediation_sensitivity recovers the indirect path", {
   r <- morie_mediation_sensitivity(f$y, f$tr, f$md)
   expect_equal(r$beta2, 0.8, tolerance = 0.2)
   expect_equal(r$gamma, 0.5, tolerance = 0.15)
-  expect_equal(r$estimate, 0.4, tolerance = 0.15)
+  # Theorem 2: the ACME is the product of the two fitted coefficients.
+  # That identity is exact, and is what this line pins down.
+  expect_equal(r$estimate, r$beta2 * r$gamma, tolerance = 1e-12)
+  # The true product is 0.8 * 0.5 = 0.4, but at n = 400 the product has
+  # a standard error near 0.065, so a single draw sits well away from it
+  # -- this seed gives 0.31. testthat tolerance is relative, so 0.5 is
+  # roughly a 3 SE band, not 50%.
+  expect_equal(r$estimate, 0.4, tolerance = 0.5)
+})
+
+test_that("the ACME estimate is centred on the truth across seeds", {
+  # One draw cannot separate a biased estimator from sampling noise.
+  est <- vapply(1:8, function(s) {
+    f <- .sensmi_fixture(seed = s)
+    morie_mediation_sensitivity(f$y, f$tr, f$md)$estimate
+  }, numeric(1))
+  expect_equal(mean(est), 0.4, tolerance = 0.25)
 })
 
 test_that("Theorem 4 reduces to Theorem 2 at rho = 0", {
