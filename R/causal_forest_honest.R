@@ -3,6 +3,12 @@
 # R mirror of the morie.fn causal-forest tier (crfath, crfboot, crfhte,
 # csfgrf, survcfg, csurv2, qbcfgr, htgcrf, drlnr, ipsiMed) and its
 # shared honest-forest core (_cforest.py).
+#
+# Distinct from R/causal_forest_native.R, which holds the R-learner
+# causal forest with the OpenMP kernel. This file is the honest-split
+# (Athey-Imbens) construction the Python tier uses.
+#
+# Shared helpers live in R/causal_shared_native.R.
 
 .morie_cf_tau <- function(y, d) {
   tr <- d == 1
