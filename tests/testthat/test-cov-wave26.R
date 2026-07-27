@@ -22,7 +22,9 @@ test_that("optional-package guards stop() when the package is absent", {
   expect_error(morie_dbscan_clustering(x))
   expect_error(morie_decision_tree_split(x, y))
   expect_error(morie_grid_search_cv(x, y))
-  expect_error(morie_random_forest_ensemble(x, y))
+  # Tree ensembles are native now (ESL Alg. 15.1 / 10.3 + compiled
+  # kernel): they RUN without randomForest/gbm/xgboost instead of stopping.
+  expect_true(is.list(morie_random_forest_ensemble(x, y, n_estimators = 5L)))
   # Wave B/C natives: regularization path + t-SNE now RUN without
   # glmnet/Rtsne instead of stopping.
   expect_true(is.list(morie_regularization_path(x, y)))
@@ -36,8 +38,8 @@ test_that("optional-package guards stop() when the package is absent", {
   expect_silent(rgfir(rnorm(64), cutoff = 0.2))
   expect_silent(rgiir(rnorm(64), cutoff = 0.2))
   expect_true(is.list(rgqrs(rnorm(360))))
-  expect_error(morie_gradient_boosting_ensemble(x, y))
-  expect_error(morie_xgboost_objective(x, y))
+  expect_true(is.list(morie_gradient_boosting_ensemble(x, y, n_estimators = 5L)))
+  expect_true(is.list(morie_xgboost_objective(x, y, n_estimators = 5L)))
 })
 
 test_that(".morie_sha256_hex uses digest (Imports) — FIPS 180-2 vector", {
