@@ -30,8 +30,10 @@ test_that("optional-package guards stop() when the package is absent", {
   expect_true(is.list(morie_regularization_path(x, y)))
   expect_error(morie_random_search_cv(x, y))
   expect_error(morie_roc_auc_score(y, runif(20)))
-  expect_error(morie_svm_hinge_primal(x, y))
-  expect_error(morie_svm_kernel_trick(x, y))
+  # SVM is native now (LIBSVM's SMO decomposition, compiled kernel):
+  # these RUN without e1071 instead of stopping.
+  expect_true(is.list(morie_svm_hinge_primal(x, y)))
+  expect_true(is.list(morie_svm_kernel_trick(x, y)))
   expect_true(is.list(morie_tsne_reduction(x, n_iter = 50L)))
   # Module 20: rgfir/rgiir/rgqrs are native — they RUN without the
   # signal package instead of stopping.
