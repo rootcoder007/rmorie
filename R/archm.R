@@ -18,10 +18,16 @@
   eps <- numeric(n)
   eps[1] <- y[1] - mu - delta * sqrt(s2[1])
   for (t in 2:n) {
-    s2[t] <- max(omega + alpha * eps[t - 1]^2, 1e-12)
+    # Ceiling as well as floor: at corner parameter values the
+    # eps -> s2 -> eps recursion explodes and turns the objective into
+    # NaN, which stalls the optimiser (the Python arm's L-BFGS-B
+    # silently returned its starting values for exactly this reason).
+    s2[t] <- min(max(omega + alpha * eps[t - 1]^2, 1e-12), 1e30)
     eps[t] <- y[t] - mu - delta * sqrt(s2[t])
   }
-  0.5 * sum(log(2 * pi * s2) + eps^2 / s2)
+  ll <- 0.5 * sum(log(2 * pi * s2) + eps^2 / s2)
+  if (!is.finite(ll)) return(1e10)
+  ll
 }
 
 #' ARCH(1)-in-mean model
