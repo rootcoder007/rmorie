@@ -23,53 +23,32 @@ morie_svm_genomic <- function(x, y, markers, C = 1, epsilon = 0.1,
   } else {
     cbind(as.matrix(x), M)
   }
-  # A zero-variance predictor cannot be scaled and makes e1071::svm warn
-  # ("variable constant"); drop any constant columns first.
+  # A zero-variance predictor carries no signal; drop constant columns.
   if (ncol(feats) > 1L) {
     keep <- apply(feats, 2L, function(col) stats::var(col) > 0)
     if (any(keep) && !all(keep)) feats <- feats[, keep, drop = FALSE]
   }
-  use_e <- requireNamespace("e1071", quietly = TRUE)
-  method_used <- "Kernel-ridge RBF fallback (no e1071)"
-  if (use_e) {
-    method_used <- "e1071 eps-SVR (RBF)"
-    g_val <- if (identical(gamma, "scale")) {
-      v <- stats::var(as.numeric(M))
-      if (!is.finite(v) || v <= 0) v <- 1
-      1 / (ncol(M) * v)
-    } else {
-      as.numeric(gamma)
-    }
-    fit <- e1071::svm(feats, y,
-      type = "eps-regression", kernel = "radial",
-      cost = C, epsilon = epsilon, gamma = g_val
-    )
-    y_hat <- as.numeric(stats::predict(fit, feats))
-    alpha <- as.numeric(fit$coefs)
-    sv_idx <- as.integer(fit$index)
-    intercept <- as.numeric(-fit$rho)
+  g <- if (identical(gamma, "scale")) {
+    v <- stats::var(as.numeric(M))
+    if (!is.finite(v) || v <= 0) v <- 1
+    1 / (ncol(M) * v)
+  } else if (identical(gamma, "auto")) {
+    1 / ncol(feats)
   } else {
-    g_val <- if (identical(gamma, "scale")) {
-      v <- stats::var(as.numeric(M))
-      if (!is.finite(v) || v <= 0) v <- 1
-      1 / (ncol(M) * v)
-    } else {
-      as.numeric(gamma)
-    }
-    sq <- rowSums(feats^2)
-    D2 <- pmax(outer(sq, sq, "+") - 2 * tcrossprod(feats), 0)
-    K <- exp(-g_val * D2)
-    intercept <- mean(y)
-    yc <- y - intercept
-    alpha <- as.numeric(solve(K + (1 / max(C, 1e-8)) * diag(n), yc))
-    y_hat <- as.numeric(K %*% alpha) + intercept
-    sv_idx <- which(abs(alpha) > 1e-6)
+    as.numeric(gamma)
   }
+  fit <- morie_svr_train_cpp(feats, y, as.numeric(C), as.numeric(epsilon),
+                             2L, g, 0, 3, 1e-3, 1000000L)
+  sv_idx <- which(abs(fit$coef) > 1e-8)
+  y_hat <- morie_svm_decision_cpp(feats[sv_idx, , drop = FALSE],
+                                  fit$coef[sv_idx], fit$rho, feats,
+                                  2L, g, 0, 3)
   resid <- y - y_hat
   list(
-    estimate = mean(y_hat), y_hat = y_hat, alpha = alpha,
-    support_indices = sv_idx, intercept = intercept,
-    se = sqrt(mean(resid^2)), n = n, method = method_used
+    estimate = mean(y_hat), y_hat = y_hat, alpha = fit$coef,
+    support_indices = sv_idx, intercept = -fit$rho,
+    se = sqrt(mean(resid^2)), n = n,
+    method = "eps-SVR (native SMO, RBF)"
   )
 }
 
