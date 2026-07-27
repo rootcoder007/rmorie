@@ -20,11 +20,10 @@ Named list: estimate, intercept, weights, train_accuracy, C,
 classes, n, method.
 }
 \description{
-Wraps \code{e1071::svm} with a linear kernel.
+Native linear C-SVC via SMO. The primal weight vector is recovered in
+closed form from the dual solution, w = sum_i alpha_i y_i x_i.
 }
 \examples{
-\dontshow{if (requireNamespace("e1071", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # See the package vignettes for usage examples:
 #   vignette(package = "rmorie")
-\dontshow{\}) # examplesIf}
 }

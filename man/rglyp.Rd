@@ -5,9 +5,16 @@
 \alias{morie_rangayyan_lyapunov}
 \title{Largest Lyapunov exponent (Rosenstein) -- Rangayyan Ch 7}
 \usage{
-rglyp(x, m = 3L, tau = 1L, max_t = NULL, theiler = 10L)
+rglyp(x, m = 3L, tau = 1L, max_t = NULL, theiler = 10L, dt = 1)
 
-morie_rangayyan_lyapunov(x, m = 3L, tau = 1L, max_t = NULL, theiler = 10L)
+morie_rangayyan_lyapunov(
+  x,
+  m = 3L,
+  tau = 1L,
+  max_t = NULL,
+  theiler = 10L,
+  dt = 1
+)
 }
 \arguments{
 \item{x}{Numeric vector.}
@@ -19,6 +26,11 @@ morie_rangayyan_lyapunov(x, m = 3L, tau = 1L, max_t = NULL, theiler = 10L)
 \item{max_t}{Maximum forward step (default \code{min(M/4, 100)}).}
 
 \item{theiler}{Theiler-window exclusion (default 10).}
+
+\item{dt}{Sampling period, the \eqn{\Delta t} of Rosenstein eq (13). The
+returned exponent is per unit of \code{dt}: leave it at 1 for a map (Table 1
+uses \eqn{\Delta t = 1} for the logistic and Henon maps) and set it to
+\code{1/fs} for a sampled flow.}
 }
 \value{
 Named list \code{lyapunov}, \code{divergence_curve}, \code{t}.
