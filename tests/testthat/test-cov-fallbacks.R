@@ -34,19 +34,19 @@
   r
 }
 
-test_that("morie_garch_fit base-R Gaussian MLE fallback executes", {
+test_that("morie_garch_fit runs natively without rugarch", {
   .mock_fail("rugarch")
   set.seed(1)
   .cov_fb(morie_garch_fit(rnorm(300, sd = 0.02)))
 })
 
-test_that("morie_tgarch_model base-R GJR-GARCH fallback executes", {
+test_that("morie_tgarch_model runs natively without rugarch", {
   .mock_fail("rugarch")
   set.seed(2)
   .cov_fb(morie_tgarch_model(rnorm(200, sd = 0.02)))
 })
 
-test_that("morie_egarch_model base-R EGARCH fallback executes", {
+test_that("morie_egarch_model runs natively without rugarch", {
   .mock_fail("rugarch")
   set.seed(3)
   .cov_fb(morie_egarch_model(rnorm(200, sd = 0.02)))
@@ -77,7 +77,7 @@ test_that("morie_vecm native Johansen runs without urca", {
   .cov_fb(morie_vecm(Y, k_ar = 1, coint_rank = 1))
 })
 
-test_that("morie_gradient_boosting_genomic base-R stumps fallback executes", {
+test_that("morie_gradient_boosting_genomic runs natively without gbm", {
   .mock_fail("gbm")
   set.seed(14)
   M <- matrix(rnorm(120), 30, 4)
@@ -87,7 +87,7 @@ test_that("morie_gradient_boosting_genomic base-R stumps fallback executes", {
   ))
 })
 
-test_that("morie_gradient_boosting_ensemble xgboost fallback executes", {
+test_that("morie_gradient_boosting_ensemble runs natively without gbm", {
   .mock_fail("gbm")
   set.seed(7)
   x <- matrix(rnorm(60), 30, 2)
@@ -98,7 +98,7 @@ test_that("morie_gradient_boosting_ensemble xgboost fallback executes", {
   ))
 })
 
-test_that("morie_xgboost_objective gbm fallback executes", {
+test_that("morie_xgboost_objective runs natively without xgboost", {
   .mock_fail("xgboost")
   set.seed(8)
   x <- matrix(rnorm(60), 30, 2)
@@ -109,7 +109,7 @@ test_that("morie_xgboost_objective gbm fallback executes", {
   ))
 })
 
-test_that("morie_random_forest_genomic base-R bagged-tree fallback executes", {
+test_that("morie_random_forest_genomic runs natively without randomForest", {
   .mock_fail("randomForest")
   set.seed(13)
   M <- matrix(rnorm(200), 40, 5)
