@@ -336,6 +336,18 @@ morie_spatial_wordfish_omega_update_cpp <- function(dtm, psi, alpha, beta, omega
     .Call(`_rmorie_morie_spatial_wordfish_omega_update_cpp`, dtm, psi, alpha, beta, omega)
 }
 
+#' Grow one regression / second-order tree (compiled)
+#' @noRd
+morie_tree_fit_cpp <- function(X, g, h, max_depth, min_node, mtry, lambda, alpha, gamma_pen) {
+    .Call(`_rmorie_morie_tree_fit_cpp`, X, g, h, max_depth, min_node, mtry, lambda, alpha, gamma_pen)
+}
+
+#' Predict from a flattened tree (compiled)
+#' @noRd
+morie_tree_predict_cpp <- function(tree, X) {
+    .Call(`_rmorie_morie_tree_predict_cpp`, tree, X)
+}
+
 #' Fetch a single URL over HTTP(S) via libcurl
 #'
 #' Internal building block of the SIU parser. Returns the response

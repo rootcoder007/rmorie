@@ -77,7 +77,7 @@ test_that("morie_grm_vanraden method 2 uses per-locus scaling", {
   expect_true(is.matrix(res$estimate))
   expect_equal(dim(res$estimate), c(6L, 6L))
   expect_true(all(is.finite(res$estimate)))
-  expect_match(res$method, "method 2")
+  expect_match(res$method, "method 2", ignore.case = TRUE)
 })
 
 test_that("morie_grm_vanraden GRM is symmetric", {

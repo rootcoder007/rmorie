@@ -4,7 +4,7 @@
 #
 # R port of src/morie/ml.py. Wraps a small Random Forest robustness
 # evaluator and a SMOTE (or random-oversampling fallback) routine for
-# binary-outcome class balancing. Pure base R + `randomForest` /
+# binary-outcome class balancing. Pure base R +
 # `smotefamily` from Suggests; no Python interop required.
 
 #' Evaluate Random Forest robustness
@@ -28,25 +28,19 @@
 #' X <- data.frame(x1 = rnorm(n), x2 = rnorm(n))
 #' y <- factor(ifelse(X$x1 + X$x2 + rnorm(n, 0, 0.3) > 0, "yes", "no"))
 #' idx <- sample.int(n, floor(n * 0.7))
-#' if (requireNamespace("randomForest", quietly = TRUE)) {
-#'   r <- morie_ml_eval_robustness(X[idx, ], y[idx], X[-idx, ], y[-idx],
-#'                                 n_estimators = 20L)
-#'   r$accuracy
-#' }
+#' r <- morie_ml_eval_robustness(X[idx, ], y[idx], X[-idx, ], y[-idx],
+#'                               n_estimators = 20L)
+#' r$accuracy
 #' @export
 morie_ml_eval_robustness <- function(X, y, test_X, test_y,
                                      n_estimators = 100L,
                                      random_state = 42L) {
-  if (!requireNamespace("randomForest", quietly = TRUE)) {
-    stop("morie_ml_eval_robustness requires the 'randomForest' package.")
-  }
   y <- as.factor(y)
   test_y <- factor(as.character(test_y), levels = levels(y))
   set.seed(random_state)
-  fit <- randomForest::randomForest(
-    x = as.data.frame(X), y = y, ntree = as.integer(n_estimators)
-  )
-  preds <- stats::predict(fit, newdata = as.data.frame(test_X))
+  fit <- .morie_rf_fit(as.matrix(as.data.frame(X)), y, task = "classification",
+                       n_estimators = as.integer(n_estimators))
+  preds <- .morie_rf_predict(fit, as.matrix(as.data.frame(test_X)))
   preds <- factor(as.character(preds), levels = levels(y))
 
   classes <- levels(y)

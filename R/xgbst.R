@@ -35,7 +35,7 @@ morie_xgboost_objective <- function(x, y, n_estimators = 100L, learning_rate = 0
   x <- as.matrix(x)
   if (identical(task, "auto")) {
     # A 0/1 vector (integer or double) is caught by the `%in%` test; do NOT
-    # treat every integer as classification — count outcomes are integers too
+    # treat every integer as classification -- count outcomes are integers too
     # and must resolve to regression (N4).
     task <- if (is.factor(y) || all(y %in% c(0L, 1L))) {
       "classification"
@@ -48,67 +48,24 @@ morie_xgboost_objective <- function(x, y, n_estimators = 100L, learning_rate = 0
   } else {
     set.seed(seed)
   }
-  if (requireNamespace("xgboost", quietly = TRUE)) {
-    yv <- if (task == "classification") as.numeric(as.factor(y)) - 1 else as.numeric(y)
-    obj <- if (task == "classification") "binary:logistic" else "reg:squarederror"
-    # Use the low-level xgb.DMatrix + xgb.train API: stable across xgboost
-    # 1.x and 2.x.  The high-level xgboost() helper changed signature in
-    # 2.0 (data/label -> x/y) and rejects numeric y with binary:logistic,
-    # which is what the previous wrapper hit on macOS R CMD check.
-    dtrain <- xgboost::xgb.DMatrix(data = x, label = yv)
-    params <- list(
-      objective = obj, eta = learning_rate,
-      max_depth = max_depth, lambda = reg_lambda, alpha = reg_alpha
-    )
-    fit <- xgboost::xgb.train(
-      params = params, data = dtrain,
-      nrounds = n_estimators, verbose = 0L
-    )
-    p <- predict(fit, x)
-    if (task == "classification") {
-      preds <- as.integer(p > 0.5)
-      train_score <- mean(preds == yv)
-    } else {
-      train_score <- 1 - sum((p - yv)^2) / sum((yv - mean(yv))^2)
-    }
-    imp <- xgboost::xgb.importance(model = fit)
-    fi <- rep(0, ncol(x))
-    nms <- colnames(x) %||% paste0("V", seq_len(ncol(x)))
-    names(fi) <- nms
-    if (nrow(imp) > 0) fi[imp$Feature] <- imp$Gain
-    backend <- "xgboost"
+  fit <- .morie_gb_fit(
+    x, y, task = task, n_estimators = as.integer(n_estimators),
+    learning_rate = learning_rate, max_depth = as.integer(max_depth),
+    lambda = reg_lambda, alpha = reg_alpha
+  )
+  if (task == "classification") {
+    yv <- as.numeric(as.factor(y)) - 1
+    train_score <- mean(as.integer(fit$fitted > 0.5) == yv)
   } else {
-    # gbm fallback (same objective family, no L1)
-    if (!requireNamespace("gbm", quietly = TRUE)) {
-      stop("install 'xgboost' (preferred) or 'gbm' for morie_xgboost_objective")
-    }
-    # gbm's bernoulli requires numeric {0,1}, NOT a factor (N3). Use the same
-    # coercion as the xgboost branch above so the fallback actually fits.
-    yv <- if (task == "classification") as.numeric(as.factor(y)) - 1 else as.numeric(y)
-    df <- as.data.frame(x)
-    df$.y <- yv
-    distribution <- if (task == "classification") "bernoulli" else "gaussian"
-    fit <- gbm::gbm(.y ~ .,
-      data = df, distribution = distribution,
-      n.trees = n_estimators, interaction.depth = max_depth,
-      shrinkage = learning_rate, bag.fraction = 1.0,
-      verbose = FALSE
-    )
-    p <- gbm::predict.gbm(fit, df, n.trees = n_estimators, type = "response")
-    if (task == "classification") {
-      preds <- as.integer(p > 0.5)
-      train_score <- mean(preds == yv)
-    } else {
-      train_score <- 1 - sum((p - yv)^2) / sum((yv - mean(yv))^2)
-    }
-    fi <- rep(NA_real_, ncol(x))
-    backend <- "gbm"
+    yv <- as.numeric(y)
+    train_score <- 1 - sum((fit$fitted - yv)^2) /
+      max(sum((yv - mean(yv))^2), 1e-12)
   }
   list(
     estimate            = as.numeric(train_score),
     train_score         = as.numeric(train_score),
-    feature_importances = as.numeric(fi),
-    backend             = backend,
+    feature_importances = as.numeric(fit$importance),
+    backend             = "native",
     n_estimators        = as.integer(n_estimators),
     learning_rate       = as.numeric(learning_rate),
     max_depth           = as.integer(max_depth),
@@ -116,6 +73,6 @@ morie_xgboost_objective <- function(x, y, n_estimators = 100L, learning_rate = 0
     reg_alpha           = as.numeric(reg_alpha),
     task                = task,
     n                   = nrow(x),
-    method              = sprintf("XGBoost-style boosting (%s, %s)", backend, task)
+    method              = sprintf("XGBoost-style boosting (native, %s)", task)
   )
 }
