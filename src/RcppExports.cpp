@@ -905,6 +905,63 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// morie_svc_train_cpp
+List morie_svc_train_cpp(NumericMatrix X, NumericVector y, double C, int kernel_type, double gamma, double coef0, double degree, double tol, int max_iter);
+RcppExport SEXP _rmorie_morie_svc_train_cpp(SEXP XSEXP, SEXP ySEXP, SEXP CSEXP, SEXP kernel_typeSEXP, SEXP gammaSEXP, SEXP coef0SEXP, SEXP degreeSEXP, SEXP tolSEXP, SEXP max_iterSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< double >::type C(CSEXP);
+    Rcpp::traits::input_parameter< int >::type kernel_type(kernel_typeSEXP);
+    Rcpp::traits::input_parameter< double >::type gamma(gammaSEXP);
+    Rcpp::traits::input_parameter< double >::type coef0(coef0SEXP);
+    Rcpp::traits::input_parameter< double >::type degree(degreeSEXP);
+    Rcpp::traits::input_parameter< double >::type tol(tolSEXP);
+    Rcpp::traits::input_parameter< int >::type max_iter(max_iterSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_svc_train_cpp(X, y, C, kernel_type, gamma, coef0, degree, tol, max_iter));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_svr_train_cpp
+List morie_svr_train_cpp(NumericMatrix X, NumericVector z, double C, double epsilon, int kernel_type, double gamma, double coef0, double degree, double tol, int max_iter);
+RcppExport SEXP _rmorie_morie_svr_train_cpp(SEXP XSEXP, SEXP zSEXP, SEXP CSEXP, SEXP epsilonSEXP, SEXP kernel_typeSEXP, SEXP gammaSEXP, SEXP coef0SEXP, SEXP degreeSEXP, SEXP tolSEXP, SEXP max_iterSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type z(zSEXP);
+    Rcpp::traits::input_parameter< double >::type C(CSEXP);
+    Rcpp::traits::input_parameter< double >::type epsilon(epsilonSEXP);
+    Rcpp::traits::input_parameter< int >::type kernel_type(kernel_typeSEXP);
+    Rcpp::traits::input_parameter< double >::type gamma(gammaSEXP);
+    Rcpp::traits::input_parameter< double >::type coef0(coef0SEXP);
+    Rcpp::traits::input_parameter< double >::type degree(degreeSEXP);
+    Rcpp::traits::input_parameter< double >::type tol(tolSEXP);
+    Rcpp::traits::input_parameter< int >::type max_iter(max_iterSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_svr_train_cpp(X, z, C, epsilon, kernel_type, gamma, coef0, degree, tol, max_iter));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_svm_decision_cpp
+NumericVector morie_svm_decision_cpp(NumericMatrix SV, NumericVector coef, double rho, NumericMatrix Xnew, int kernel_type, double gamma, double coef0, double degree);
+RcppExport SEXP _rmorie_morie_svm_decision_cpp(SEXP SVSEXP, SEXP coefSEXP, SEXP rhoSEXP, SEXP XnewSEXP, SEXP kernel_typeSEXP, SEXP gammaSEXP, SEXP coef0SEXP, SEXP degreeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type SV(SVSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type coef(coefSEXP);
+    Rcpp::traits::input_parameter< double >::type rho(rhoSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type Xnew(XnewSEXP);
+    Rcpp::traits::input_parameter< int >::type kernel_type(kernel_typeSEXP);
+    Rcpp::traits::input_parameter< double >::type gamma(gammaSEXP);
+    Rcpp::traits::input_parameter< double >::type coef0(coef0SEXP);
+    Rcpp::traits::input_parameter< double >::type degree(degreeSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_svm_decision_cpp(SV, coef, rho, Xnew, kernel_type, gamma, coef0, degree));
+    return rcpp_result_gen;
+END_RCPP
+}
 // morie_tree_fit_cpp
 List morie_tree_fit_cpp(NumericMatrix X, NumericVector g, NumericVector h, int max_depth, int min_node, int mtry, double lambda, double alpha, double gamma_pen);
 RcppExport SEXP _rmorie_morie_tree_fit_cpp(SEXP XSEXP, SEXP gSEXP, SEXP hSEXP, SEXP max_depthSEXP, SEXP min_nodeSEXP, SEXP mtrySEXP, SEXP lambdaSEXP, SEXP alphaSEXP, SEXP gamma_penSEXP) {
@@ -1084,6 +1141,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_spatial_smacof_step_cpp", (DL_FUNC) &_rmorie_morie_spatial_smacof_step_cpp, 3},
     {"_rmorie_morie_spatial_classical_mds_cpp", (DL_FUNC) &_rmorie_morie_spatial_classical_mds_cpp, 2},
     {"_rmorie_morie_spatial_wordfish_omega_update_cpp", (DL_FUNC) &_rmorie_morie_spatial_wordfish_omega_update_cpp, 5},
+    {"_rmorie_morie_svc_train_cpp", (DL_FUNC) &_rmorie_morie_svc_train_cpp, 9},
+    {"_rmorie_morie_svr_train_cpp", (DL_FUNC) &_rmorie_morie_svr_train_cpp, 10},
+    {"_rmorie_morie_svm_decision_cpp", (DL_FUNC) &_rmorie_morie_svm_decision_cpp, 8},
     {"_rmorie_morie_tree_fit_cpp", (DL_FUNC) &_rmorie_morie_tree_fit_cpp, 9},
     {"_rmorie_morie_tree_predict_cpp", (DL_FUNC) &_rmorie_morie_tree_predict_cpp, 2},
     {"_rmorie_siu_http_get", (DL_FUNC) &_rmorie_siu_http_get, 2},

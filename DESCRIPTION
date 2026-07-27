@@ -100,7 +100,6 @@ Suggests:
   DoubleML,
   DRDID,
   duckdb,
-  e1071,
   ebal,
   emmeans,
   EValue,
