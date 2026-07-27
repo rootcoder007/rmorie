@@ -905,6 +905,37 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// morie_tree_fit_cpp
+List morie_tree_fit_cpp(NumericMatrix X, NumericVector g, NumericVector h, int max_depth, int min_node, int mtry, double lambda, double alpha, double gamma_pen);
+RcppExport SEXP _rmorie_morie_tree_fit_cpp(SEXP XSEXP, SEXP gSEXP, SEXP hSEXP, SEXP max_depthSEXP, SEXP min_nodeSEXP, SEXP mtrySEXP, SEXP lambdaSEXP, SEXP alphaSEXP, SEXP gamma_penSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type g(gSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type h(hSEXP);
+    Rcpp::traits::input_parameter< int >::type max_depth(max_depthSEXP);
+    Rcpp::traits::input_parameter< int >::type min_node(min_nodeSEXP);
+    Rcpp::traits::input_parameter< int >::type mtry(mtrySEXP);
+    Rcpp::traits::input_parameter< double >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< double >::type gamma_pen(gamma_penSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_tree_fit_cpp(X, g, h, max_depth, min_node, mtry, lambda, alpha, gamma_pen));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_tree_predict_cpp
+NumericVector morie_tree_predict_cpp(List tree, NumericMatrix X);
+RcppExport SEXP _rmorie_morie_tree_predict_cpp(SEXP treeSEXP, SEXP XSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type tree(treeSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_tree_predict_cpp(tree, X));
+    return rcpp_result_gen;
+END_RCPP
+}
 // siu_http_get
 std::string siu_http_get(std::string url, int timeout_s);
 RcppExport SEXP _rmorie_siu_http_get(SEXP urlSEXP, SEXP timeout_sSEXP) {
@@ -1053,6 +1084,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_spatial_smacof_step_cpp", (DL_FUNC) &_rmorie_morie_spatial_smacof_step_cpp, 3},
     {"_rmorie_morie_spatial_classical_mds_cpp", (DL_FUNC) &_rmorie_morie_spatial_classical_mds_cpp, 2},
     {"_rmorie_morie_spatial_wordfish_omega_update_cpp", (DL_FUNC) &_rmorie_morie_spatial_wordfish_omega_update_cpp, 5},
+    {"_rmorie_morie_tree_fit_cpp", (DL_FUNC) &_rmorie_morie_tree_fit_cpp, 9},
+    {"_rmorie_morie_tree_predict_cpp", (DL_FUNC) &_rmorie_morie_tree_predict_cpp, 2},
     {"_rmorie_siu_http_get", (DL_FUNC) &_rmorie_siu_http_get, 2},
     {"_rmorie_siu_curl_version", (DL_FUNC) &_rmorie_siu_curl_version, 0},
     {"_rmorie_siu_http_get_many", (DL_FUNC) &_rmorie_siu_http_get_many, 5},

@@ -24,7 +24,9 @@ test_that("morie_dcc_multivariate_garch runs the base-R DCC fallback", {
   )
   expect_true(is.list(res) || inherits(res, "error"))
   if (is.list(res)) {
-    expect_match(res$method, "base R")
+    # The DCC estimator is native throughout now; there is no longer a
+    # delegated path to fall back FROM, so the label no longer says so.
+    expect_match(res$method, "DCC\\(1,1\\) two-step")
     expect_equal(res$k, 2L)
   }
 })
