@@ -323,6 +323,15 @@ compute_vif <- function(X, column_names = NULL) {
   X <- as.matrix(X)
   n <- nrow(X)
   p <- ncol(X)
+  # A VIF states how far one column is explained by the others, so a
+  # single column has none. Without this guard the loop below regresses
+  # on an intercept alone and silently returns 1 for a quantity that is
+  # undefined. Matches the guards in morie.fn.vif (Python).
+  if (p < 2L)
+    stop("VIF needs at least 2 predictors, got ", p, ".", call. = FALSE)
+  if (n <= p)
+    stop("VIF needs more observations than predictors, got n=", n,
+         ", p=", p, ".", call. = FALSE)
   if (is.null(column_names))
     column_names <- if (!is.null(colnames(X))) colnames(X)
                     else paste0("X", seq_len(p) - 1L)

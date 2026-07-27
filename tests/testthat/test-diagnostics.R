@@ -231,3 +231,14 @@ test_that("full_diagnostics logistic runs and includes hosmer-lemeshow", {
                        function(x) x$name, character(1))
   expect_true(any(grepl("hosmer", names_spec)))
 })
+test_that("compute_vif rejects a single predictor", {
+  # A VIF is undefined for one column. Before the guard this returned 1,
+  # because the inner regression fell back to an intercept-only fit.
+  expect_error(compute_vif(matrix(rnorm(50), 50, 1)),
+               "at least 2 predictors")
+})
+
+test_that("compute_vif rejects fewer observations than predictors", {
+  expect_error(compute_vif(matrix(rnorm(12), 3, 4)),
+               "more observations than predictors")
+})
