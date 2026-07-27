@@ -5,8 +5,6 @@
 # optimiser closure so the parameter-domain and non-positive-determinant
 # guards are directly unit-testable. `Q_bar` is the unconditional
 # correlation, `n` the sample size, `Z` the standardised residuals.
-#' Internal helper: Dccmd Negll
-#' @noRd
 .dccmd_negll <- function(p, Q_bar, n, Z) {
   a <- p[1]
   b <- p[2]
@@ -49,45 +47,9 @@ morie_dcc_multivariate_garch <- function(x) {
   n <- nrow(X)
   k <- ncol(X)
   if (n < 30 || k < 2) stop("Need n>=30, k>=2.")
-  if (requireNamespace("rmgarch", quietly = TRUE) &&
-    requireNamespace("rugarch", quietly = TRUE)) {
-    # The rmgarch DCC path relies on S4 `coef`/`sigma` methods whose
-    # dispatch and slot layout vary across rmgarch versions.  Wrap it so
-    # that any API mismatch degrades gracefully to the base-R DCC below
-    # rather than hard-failing.
-    res <- tryCatch(
-      {
-        uspec <- rugarch::multispec(replicate(k, rugarch::ugarchspec(
-          variance.model = list(model = "sGARCH", garchOrder = c(1, 1)),
-          mean.model = list(armaOrder = c(0, 0), include.mean = FALSE)
-        ),
-        simplify = FALSE
-        ))
-        dccspec <- rmgarch::dccspec(
-          uspec = uspec, dccOrder = c(1, 1),
-          distribution = "mvnorm"
-        )
-        fit <- rmgarch::dccfit(dccspec, data = X)
-        p <- stats::coef(fit)
-        sig_mat <- as.matrix(stats::sigma(fit))
-        list(
-          a = unname(p["[Joint]dcca1"]),
-          b = unname(p["[Joint]dccb1"]),
-          unconditional_correlation = cor(X),
-          conditional_correlation = rmgarch::rcor(fit),
-          conditional_variance = sig_mat^2,
-          loglik = as.numeric(rugarch::likelihood(fit)),
-          n = n, k = k,
-          method = "DCC(1,1) via rmgarch"
-        )
-      },
-      error = function(e) NULL
-    )
-    if (!is.null(res)) {
-      return(res)
-    }
-  }
-  # Fallback: two-step EWMA-marginal + closed-form DCC update.
+  # Engle's two-step DCC: fit a univariate GARCH(1,1) to each series,
+  # standardise, then run the correlation recursion on the standardised
+  # residuals. Native throughout; no multivariate GARCH package is used.
   H <- matrix(NA_real_, n, k)
   Z <- matrix(NA_real_, n, k)
   for (j in seq_len(k)) {
@@ -118,6 +80,6 @@ morie_dcc_multivariate_garch <- function(x) {
     conditional_variance = H,
     loglik = -opt$objective,
     n = n, k = k,
-    method = "DCC(1,1) two-step Gaussian MLE (base R)"
+    method = "DCC(1,1) two-step Gaussian QMLE"
   )
 }

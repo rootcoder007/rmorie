@@ -3,8 +3,6 @@
 # Internal: GJR-GARCH(1,1) Gaussian negative log-likelihood for the
 # base-R fallback. Extracted from the morie_tgarch_model() optimiser closure
 # so the parameter-domain guard is directly unit-testable.
-#' Internal helper: Tgarch Negll
-#' @noRd
 .tgarch_negll <- function(p, r, n) {
   omega <- p[1]
   alpha <- p[2]
@@ -16,7 +14,7 @@
   s2 <- numeric(n)
   s2[1] <- var(r) + 1e-10
   for (t in 2:n) {
-    I <- if (r[t - 1] < 0) 1 else 0
+    I <- if (r[t - 1] <= 0) 1 else 0
     s2[t] <- max(
       omega + (alpha + gamma * I) * r[t - 1]^2 + beta * s2[t - 1],
       1e-12
@@ -27,7 +25,22 @@
 
 #' GJR-GARCH(1,1) threshold GARCH
 #'
+#' \deqn{\sigma_t^2 = \omega + (\alpha + \gamma I_{t-1})\epsilon_{t-1}^2
+#'   + \beta \sigma_{t-1}^2}
+#' where \eqn{I_{t-1} = 1} when \eqn{\epsilon_{t-1} \le 0} and 0
+#' otherwise, so \eqn{\gamma} is the leverage term. Persistence is
+#' \eqn{\alpha + \beta + \gamma\kappa} with \eqn{\kappa} the
+#' probability of a negative standardised residual -- 0.5 under the
+#' symmetric Gaussian likelihood used here.
+#'
+#' Native Gaussian quasi-maximum-likelihood fit; no GARCH package is
+#' loaded or called.
+#'
 #' @inheritParams morie_garch_fit
+#' @references
+#' Glosten, L. R., Jagannathan, R. & Runkle, D. E. (1993). On the relation
+#' between the expected value and the volatility of the nominal excess
+#' return on stocks. \emph{Journal of Finance}, 48(5), 1779-1801.
 #' @return Named list with \code{omega, alpha, gamma, beta, persistence,
 #'   loglik, conditional_variance, n, method}.
 #' @examples
@@ -37,25 +50,6 @@ morie_tgarch_model <- function(x) {
   r <- as.numeric(x) - mean(as.numeric(x))
   n <- length(r)
   if (n < 20) stop("Need >=20 obs.")
-  if (requireNamespace("rugarch", quietly = TRUE)) {
-    spec <- rugarch::ugarchspec(
-      variance.model = list(model = "gjrGARCH", garchOrder = c(1, 1)),
-      mean.model = list(armaOrder = c(0, 0), include.mean = FALSE)
-    )
-    fit <- rugarch::ugarchfit(spec, r, solver = "hybrid")
-    p <- rugarch::coef(fit)
-    return(list(
-      omega = unname(p["omega"]),
-      alpha = unname(p["alpha1"]),
-      gamma = unname(p["gamma1"]),
-      beta = unname(p["beta1"]),
-      persistence = unname(p["alpha1"] + 0.5 * p["gamma1"] + p["beta1"]),
-      loglik = as.numeric(rugarch::likelihood(fit)),
-      conditional_variance = as.numeric(rugarch::sigma(fit))^2,
-      n = n,
-      method = "GJR-GARCH(1,1) via rugarch"
-    ))
-  }
   neg_ll <- function(p) .tgarch_negll(p, r, n)
   var_r <- var(r)
   opt <- nlminb(c(var_r * 0.05, 0.05, 0.05, 0.85), neg_ll,
@@ -69,7 +63,7 @@ morie_tgarch_model <- function(x) {
   s2 <- numeric(n)
   s2[1] <- var_r
   for (t in 2:n) {
-    I <- if (r[t - 1] < 0) 1 else 0
+    I <- if (r[t - 1] <= 0) 1 else 0
     s2[t] <- omega + (alpha + gamma * I) * r[t - 1]^2 + beta * s2[t - 1]
   }
   list(
@@ -77,6 +71,6 @@ morie_tgarch_model <- function(x) {
     persistence = alpha + 0.5 * gamma + beta,
     loglik = -opt$objective,
     conditional_variance = s2, n = n,
-    method = "GJR-GARCH(1,1) Gaussian MLE (base R)"
+    method = "GJR-GARCH(1,1) Gaussian QMLE"
   )
 }
