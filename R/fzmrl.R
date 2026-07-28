@@ -23,7 +23,7 @@ fzmrl <- function(x, t = NULL, h = NULL) {
     ))
   }
   if (is.null(t)) t <- stats::median(x)
-  if (is.null(h)) h <- .morie_silverman_h(x)
+  if (is.null(h)) h <- .morie_kdfe_h(x)
   S_t <- mean(1 - stats::pnorm((t - x) / h))
   if (S_t <= 0) {
     return(list(

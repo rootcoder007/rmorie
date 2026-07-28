@@ -27,7 +27,7 @@ fzkdf <- function(x, t = NULL, h = NULL) {
     ))
   }
   if (is.null(t)) t <- stats::median(x)
-  if (is.null(h)) h <- .morie_silverman_h(x)
+  if (is.null(h)) h <- .morie_kdfe_h(x)
   mu2 <- 1.0
   rK <- 1 / (2 * sqrt(pi))
   z <- (t - x) / h
@@ -43,8 +43,12 @@ fzkdf <- function(x, t = NULL, h = NULL) {
   )
 }
 
-# `.morie_silverman_h` moved to R/_helpers_fauzi.R so every fz*.R caller can
-# rely on it being defined regardless of source order.
+# The bandwidth helpers live in R/aaa_helpers_fauzi.R so every fz*.R
+# caller can rely on them being defined regardless of source order.
+# This module smooths with the INTEGRATED kernel, so it takes
+# `.morie_kdfe_h` (4^(1/3) sigma n^(-1/3)) rather than
+# `.morie_silverman_h` (the n^(-1/5) density rule) -- see the
+# derivation from (2.3)-(2.4) in that file.
 
 # CANONICAL TEST
 # set.seed(0); x <- rnorm(500)

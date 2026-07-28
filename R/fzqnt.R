@@ -22,7 +22,13 @@ fzqnt <- function(x, p = 0.5, h = NULL) {
     ))
   }
   if (p <= 0 || p >= 1) stop("p must be in (0,1)")
-  if (is.null(h)) h <- .morie_silverman_h(x)
+  # two estimands, two rates: inverting a DISTRIBUTION function is
+  # an O(h/n)-variance problem and wants n^(-1/3), while the plug-in
+  # density in the standard error is an O(1/(nh)) problem and wants
+  # n^(-1/5). One bandwidth for both oversmooths whichever it is not
+  # chosen for.
+  if (is.null(h)) h <- .morie_kdfe_h(x)
+  h_dens <- .morie_silverman_h(x)
   Fhat <- function(t) mean(stats::pnorm((t - x) / h))
   lo <- min(x) - 5 * h - 1e-9
   hi <- max(x) + 5 * h + 1e-9
@@ -30,7 +36,7 @@ fzqnt <- function(x, p = 0.5, h = NULL) {
     stats::uniroot(function(t) Fhat(t) - p, c(lo, hi))$root,
     error = function(e) as.numeric(stats::quantile(x, p, names = FALSE))
   )
-  f_q <- mean(stats::dnorm((q_hat - x) / h) / h)
+  f_q <- mean(stats::dnorm((q_hat - x) / h_dens) / h_dens)
   se <- if (f_q > 0) sqrt(p * (1 - p) / n) / f_q else NA_real_
   list(
     estimate = q_hat, se = se, p = p, h = h,

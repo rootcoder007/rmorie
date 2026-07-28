@@ -22,7 +22,7 @@ fzcvm <- function(x, cdf = "norm", args = NULL, h = NULL) {
       method = "fzcvm - too few obs"
     ))
   }
-  if (is.null(h)) h <- .morie_silverman_h(x)
+  if (is.null(h)) h <- .morie_kdfe_h(x)
   if (is.function(cdf)) {
     t_grid <- seq(min(x), max(x), length.out = max(200L, n))
     F_ref <- vapply(t_grid, cdf, numeric(1))
