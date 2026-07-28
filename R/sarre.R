@@ -4,8 +4,6 @@
 # Extracted from the sarre() optimiser closure so the singular-GLS,
 # non-positive-variance and non-positive-determinant guards are all
 # directly unit-testable.
-#' Internal helper: Sarre Negll
-#' @noRd
 .sarre_negll <- function(lam, I, W, X, y, n) {
   A <- I - lam * W
   AX <- A %*% X
@@ -41,10 +39,10 @@
 #' @param y Response, length n.
 #' @param w Row-standardised n-by-n weights matrix.
 #' @return Named list: estimate, se, lambda, sigma2, n, method.
-#' @references Anselin (1988); Schabenberger & Gotway (2005), Ch 7.
+#' @references Anselin (1988); Schabenberger & Gotway (2005), Ch 6, Sec 6.2.2.1.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "rmorie")
+#' #   vignette(package = "morie")
 #' @export
 sarre <- function(x, y, w) {
   X <- as.matrix(x)

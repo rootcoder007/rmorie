@@ -29,6 +29,6 @@ transformed system A y = A X beta + eps, A = I - lambda W.
 #   vignette(package = "rmorie")
 }
 \references{
-Anselin (1988); Schabenberger & Gotway (2005), Ch 7.
+Anselin (1988); Schabenberger & Gotway (2005), Ch 6, Sec 6.2.2.1.
 }
 \keyword{internal}

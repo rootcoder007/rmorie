@@ -5,8 +5,6 @@
 # non-positive-variance guard is directly unit-testable. `e0`, `e1` are
 # the residual projections, `n` the sample size, `I`/`W` the identity
 # and spatial-weights matrices.
-#' Internal helper: Sarla Negll
-#' @noRd
 .sarla_negll <- function(rho, e0, e1, n, I, W) {
   e <- e0 - rho * e1
   sigma2 <- as.numeric(sum(e^2)) / n
@@ -31,10 +29,10 @@
 #' @param y Response, length n.
 #' @param w n-by-n weights matrix.
 #' @return Named list: estimate, se, rho, sigma2, n, method.
-#' @references Anselin (1988); Schabenberger & Gotway (2005), Ch 7.
+#' @references Anselin (1988); Schabenberger & Gotway (2005), Ch 6, Sec 6.2.2.1.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "rmorie")
+#' #   vignette(package = "morie")
 #' @export
 sarla <- function(x, y, w) {
   X <- as.matrix(x)
