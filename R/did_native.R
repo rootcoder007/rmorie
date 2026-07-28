@@ -435,6 +435,9 @@
       IF_full[su[is_pre]] <- fit$IF * (n_ids / length(dy))
       rows[[length(rows) + 1L]] <- data.frame(
         group = g, t = tt, att = fit$att,
+        # cohort size, carried through so the aggregation can weight by
+        # P(G = g) rather than treating every cell as equally important
+        n_treated = sum(D), n_control = sum(1 - D),
         se_analytic = if (identical(se_convention, "bessel"))
           stats::sd(IF_full) / sqrt(n_ids)
         else sqrt(mean(IF_full^2) / n_ids))

@@ -803,7 +803,9 @@ morie_did_group_time_att <- function(data, outcome, unit, time, treatment_time,
     std_error = r$se,
     ci_lower  = r$att - z * r$se,
     ci_upper  = r$att + z * r$se,
-    p_value   = 2 * stats::pnorm(-abs(r$att / r$se))
+    p_value   = 2 * stats::pnorm(-abs(r$att / r$se)),
+    n_treated = r$n_treated,
+    post      = r$t >= r$group
   )
   out <- out[out$cohort > 0, , drop = FALSE]
   attr(out, "fit") <- fit
@@ -844,29 +846,50 @@ morie_did_aggregate_gt_att <- function(gt_results,
                                        se_col = "std_error") {
   df <- gt_results
   df[["morie_rel_time"]] <- df[[time_col]] - df[[cohort_col]]
+  # Cells with t < g are PRE-treatment. They are the parallel-trends
+  # check, not effects, and averaging them into a summary drags it
+  # toward zero -- so every aggregation except the event study, whose
+  # whole point is to show the pre-periods separately, uses post cells
+  # only (Callaway & Sant'Anna 2021, section 3).
+  post <- df[["morie_rel_time"]] >= 0
+  # Weight by cohort size where the estimator recorded it, so the
+  # summary is the sample-weighted ATT rather than an unweighted mean
+  # over cells, which would let a cohort of one count as much as a
+  # cohort of a thousand.
+  wts <- if ("n_treated" %in% names(df)) as.numeric(df[["n_treated"]]) else
+    rep(1, nrow(df))
+  agg_one <- function(idx, label) {
+    if (!length(idx)) {
+      return(data.frame(group = label, estimate = NA_real_,
+                        std_error = NA_real_, ci_lower = NA_real_,
+                        ci_upper = NA_real_))
+    }
+    w <- wts[idx] / sum(wts[idx])
+    est <- sum(w * df[[att_col]][idx])
+    # SE of a weighted average of k estimates, treating them as
+    # independent: sqrt(sum(w_i^2 se_i^2)).
+    se <- sqrt(sum(w^2 * df[[se_col]][idx]^2))
+    ci <- .morie_did_make_ci(est, se)
+    data.frame(group = label, estimate = est, std_error = se,
+               ci_lower = ci[1], ci_upper = ci[2])
+  }
   if (identical(aggregation, "overall")) {
-    est <- mean(df[[att_col]], na.rm = TRUE)
-    se  <- sqrt(mean(df[[se_col]]^2, na.rm = TRUE) / nrow(df))
-    ci  <- .morie_did_make_ci(est, se)
-    return(data.frame(group = "overall", estimate = est,
-                      std_error = se, ci_lower = ci[1], ci_upper = ci[2]))
+    return(agg_one(which(post), "overall"))
   }
   group_col <- switch(aggregation,
                       cohort        = cohort_col,
                       calendar_time = time_col,
                       event_time    = "morie_rel_time",
                       stop("Unknown aggregation: ", aggregation))
-  rows <- lapply(split(df, df[[group_col]]), function(g) {
-    est <- mean(g[[att_col]], na.rm = TRUE)
-    # SE of a simple average of k independent estimates:
-    #   sqrt(sum(se_i^2)) / k  ==  sqrt(mean(se_i^2) / k)
-    k <- nrow(g)
-    se <- sqrt(mean(g[[se_col]]^2, na.rm = TRUE) / k)
-    ci  <- .morie_did_make_ci(est, se)
-    data.frame(group = g[[group_col]][1], estimate = est,
-               std_error = se, ci_lower = ci[1], ci_upper = ci[2])
+  # the event study reports every relative period, pre ones included
+  use <- if (identical(aggregation, "event_time")) rep(TRUE, nrow(df)) else post
+  keys <- sort(unique(df[[group_col]][use]))
+  rows <- lapply(keys, function(k) {
+    agg_one(which(use & df[[group_col]] == k), k)
   })
-  do.call(rbind, rows)
+  out <- do.call(rbind, rows)
+  rownames(out) <- NULL
+  out
 }
 
 
