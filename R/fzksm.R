@@ -24,7 +24,7 @@ fzksm <- function(x, cdf = "norm", args = NULL, h = NULL, n_grid = 512L) {
       method = "fzksm - too few obs"
     ))
   }
-  if (is.null(h)) h <- .morie_silverman_h(x)
+  if (is.null(h)) h <- .morie_kdfe_h(x)
   if (is.function(cdf)) {
     F0 <- cdf
   } else if (identical(cdf, "norm")) {

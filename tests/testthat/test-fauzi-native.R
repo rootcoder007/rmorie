@@ -98,15 +98,21 @@ test_that("morie_fauzi_kdfe matches Python and uses the n^{-1/3} rule", {
   x <- fz_fixture(200L)
   o <- morie_fauzi_kdfe(x, grid = c(0.25, 1, 2.5))
   expect_equal(o$F_hat,
-               c(0.20452027147264093, 0.6210325074704985,
-                 0.9223749966316391), tolerance = 1e-10)
-  expect_equal(o$bandwidth, 0.18660645798666559, tolerance = 1e-12)
+               c(0.20531381110699087, 0.620395722546654,
+                 0.9221087375289487), tolerance = 1e-10)
+  expect_equal(o$bandwidth, 0.19914236468776542, tolerance = 1e-12)
   # Sec. 5.3.2 of the book: Azzalini recommended c n^{-1/3} for
   # DISTRIBUTION-function estimation, and the book's own simulations
   # use it. Under the n^{-1/5} density rule this estimator
   # oversmooths enough to lose, in MSE, to the step function it
   # exists to improve on.
-  expect_equal(o$bandwidth, stats::sd(x) * 200^(-1 / 3), tolerance = 1e-12)
+  iq <- diff(stats::quantile(x, c(0.25, 0.75), names = FALSE)) / 1.349
+  expect_equal(o$bandwidth, 4^(1 / 3) * min(stats::sd(x), iq) * 200^(-1 / 3),
+               tolerance = 1e-12)
+  # and it is NOT the density rule -- the two differ by a factor that
+  # grows like n^{2/15}, so the mistake compounds with sample size
+  expect_false(isTRUE(all.equal(o$bandwidth,
+                                1.06 * min(stats::sd(x), iq) * 200^(-1 / 5))))
   expect_true(o$monotone)
   expect_true(all(o$F_hat >= 0 & o$F_hat <= 1))
   # it tracks the truth 1 - exp(-t)
@@ -140,13 +146,13 @@ test_that("the two cumulative survival estimators match Python", {
   tg <- c(0.4, 1.2)
   o1 <- morie_fauzi_cumulative_survival_1(x, tg)
   expect_equal(o1$S_cumulative,
-               c(0.9605038613590627, 0.5678410430196819), tolerance = 1e-9)
+               c(0.8076467213674751, 0.41027652375740714), tolerance = 1e-9)
   expect_equal(o1$S_survival,
-               c(0.6949935828677948, 0.3364406483098804), tolerance = 1e-10)
-  expect_equal(o1$bandwidth, 0.614334209910001, tolerance = 1e-12)
+               c(0.7273994646256096, 0.3157155354925268), tolerance = 1e-10)
+  expect_equal(o1$bandwidth, 0.3690701157259155, tolerance = 1e-12)
   o2 <- morie_fauzi_cumulative_survival_2(x, tg)
   expect_equal(o2$S_cumulative,
-               c(0.698460895513802, 0.34592641526891804), tolerance = 1e-9)
+               c(0.7159598936034358, 0.3359594417931646), tolerance = 1e-9)
   # the survival part is shared; only the cumulative construction
   # differs, and with it the bias coefficient
   expect_equal(o2$S_survival, o1$S_survival, tolerance = 1e-12)
@@ -202,9 +208,9 @@ test_that("the MRL estimators match Python and recover the exponential mean", {
   xs <- fz_fixture(60L)
   tg <- c(0.4, 1.2)
   expect_equal(morie_fauzi_mrl_boundary_free_2(xs, tg)$mrl,
-               c(1.0049889851237184, 1.028194473547384), tolerance = 1e-9)
+               c(0.9842733304346578, 1.06412071635644), tolerance = 1e-9)
   expect_equal(morie_fauzi_mrl_naive(fz_fixture(200L), tg)$mrl,
-               c(1.035925809425633, 1.0204061215185543), tolerance = 1e-9)
+               c(0.9910453057448795, 1.0184776119391745), tolerance = 1e-9)
   # memorylessness: E[X - t | X > t] = 1/rate at EVERY t, which is a
   # far stronger oracle than a single value
   x2 <- fz_fixture(200L, rate = 0.5)

@@ -24,7 +24,7 @@ fzbrd <- function(x, t = NULL, h = NULL, c = 2) {
     ))
   }
   if (is.null(t)) t <- stats::median(x)
-  if (is.null(h)) h <- .morie_silverman_h(x)
+  if (is.null(h)) h <- .morie_kdfe_h(x)
   if (c <= 1) stop("c must be > 1")
   F_h <- mean(stats::pnorm((t - x) / h))
   F_ch <- mean(stats::pnorm((t - x) / (c * h)))

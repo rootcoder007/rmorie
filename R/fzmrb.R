@@ -12,7 +12,7 @@
 #' @importFrom stats median pnorm
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "rmorie")
+#' #   vignette(package = "morie")
 #' @export
 fzmrb <- function(x, t = NULL, h = NULL) {
   x <- as.numeric(x)
@@ -27,7 +27,7 @@ fzmrb <- function(x, t = NULL, h = NULL) {
   if (is.null(t)) t <- stats::median(x)
   if (t <= 0) stop("t must be positive")
   y <- log(x)
-  if (is.null(h)) h <- .morie_silverman_h(y)
+  if (is.null(h)) h <- .morie_kdfe_h(y)
   s <- log(t)
   S_y <- mean(1 - stats::pnorm((s - y) / h))
   if (S_y <= 0) {

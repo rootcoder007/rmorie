@@ -36,7 +36,7 @@ fzwlc <- function(x, theta0 = 0, h = NULL, alternative = "two-sided") {
       method = "fzwlc - too few nonzero"
     ))
   }
-  if (is.null(h)) h <- .morie_silverman_h(ad)
+  if (is.null(h)) h <- .morie_kdfe_h(ad)
   D <- outer(ad, ad, function(a, b) (a - b) / h)
   R_smooth <- rowSums(stats::pnorm(D))
   W_n <- sum(sign(d) * R_smooth)

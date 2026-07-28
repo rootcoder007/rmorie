@@ -38,6 +38,25 @@
 
 .fz_seq <- function(from, to, n) seq(from, to, length.out = n)
 
+# Bandwidth for a DISTRIBUTION-function-type estimator:
+# 4^(1/3) sigma n^(-1/3). A cube root, not the fifth root of the
+# density rule. Equations (2.3)-(2.4) put the bandwidth in the
+# variance at O(h/n) with a NEGATIVE sign -- smoothing REDUCES
+# variance here -- rather than at O(1/(nh)), so minimising the MISE
+# gives h_opt = (2 r_1 / (n mu_2^2 R(f')))^(1/3), which for a
+# Gaussian kernel against a normal reference is 4^(1/3) sigma
+# n^(-1/3). Sec. 5.3.2 states the same conclusion in words, citing
+# Azzalini (1981). Identical to .morie_kdfe_h in
+# aaa_helpers_fauzi.R; kept local so this file stands alone.
+.fz_kdfe_h <- function(x) {
+  n <- length(x)
+  s <- stats::sd(x)
+  iq <- diff(stats::quantile(x, c(0.25, 0.75), names = FALSE)) / 1.349
+  sigma <- if (iq > 0) min(s, iq) else s
+  if (sigma <= 0) sigma <- 1
+  4^(1 / 3) * sigma * n^(-1 / 3)
+}
+
 # A bijection g from the whole line onto the support, with inverse
 # and first two derivatives. The derivatives are what appear in the
 # bias coefficients b_1, b_2, b_3 of (4.14), (4.15) and (4.21): the
@@ -254,7 +273,7 @@ morie_fauzi_gamma_kde <- function(x, grid = NULL, h = NULL,
 #'
 #' @param x numeric sample.
 #' @param grid evaluation points; data-driven if `NULL`.
-#' @param h bandwidth; `sd(x) * n^{-1/3}` if `NULL`.
+#' @param h bandwidth; `4^(1/3) sigma n^{-1/3}` if `NULL`.
 #' @return list: grid, F_hat, F_empirical, bandwidth, bandwidth_rate,
 #'   monotone, bias_term, uses_integrated_kernel, why_over_edf, n,
 #'   method.
@@ -268,8 +287,7 @@ morie_fauzi_gamma_kde <- function(x, grid = NULL, h = NULL,
 morie_fauzi_kdfe <- function(x, grid = NULL, h = NULL) {
   xv <- .fz_check_sample(x)
   n <- length(xv)
-  hh <- .fz_check_h(if (is.null(h)) stats::sd(xv) * n^(-1 / 3) else
-    as.numeric(h))
+  hh <- .fz_check_h(if (is.null(h)) .fz_kdfe_h(xv) else as.numeric(h))
   g <- if (is.null(grid)) {
     .fz_seq(min(xv) - 3 * hh, max(xv) + 3 * hh, 200L)
   } else as.numeric(grid)
@@ -361,8 +379,7 @@ morie_fauzi_boundary_free_kde <- function(x, grid = NULL, h = NULL,
     stop("t_grid must lie strictly inside the support.", call. = FALSE)
   }
   zx <- tr$g_inv(xv)
-  hh <- .fz_check_h(if (is.null(h)) stats::sd(zx) * length(xv)^(-0.2) else
-    as.numeric(h))
+  hh <- .fz_check_h(if (is.null(h)) .fz_kdfe_h(zx) else as.numeric(h))
   list(tr = tr, tg = tg, zx = zx, zt = tr$g_inv(tg), hh = hh, n = length(xv))
 }
 
@@ -586,7 +603,9 @@ morie_fauzi_b3_coefficient <- function(t, f_X, f_X_prime = NULL,
 #'
 #' @param x numeric sample.
 #' @param t_grid evaluation points.
-#' @param h bandwidth; `sd(x) * n^{-1/5}` if `NULL`.
+#' @param h bandwidth; `4^(1/3) sigma n^{-1/3}` if `NULL` -- the
+#'   mean residual life is distribution-function-type, not
+#'   density-type (its Theorem 4.3 variance is `O(1/n) - O(h/n)`).
 #' @return list: t_grid, mrl, bandwidth, interior_bias_order,
 #'   boundary_bias_order, boundary_safe (`FALSE`), n, method.
 #' @references Fauzi and Maesono (2023), Eq. (4.2).
@@ -597,7 +616,7 @@ morie_fauzi_mrl_naive <- function(x, t_grid, h = NULL) {
   xv <- .fz_check_sample(x)
   n <- length(xv)
   tg <- as.numeric(t_grid)
-  hh <- .fz_check_h(if (is.null(h)) stats::sd(xv) * n^(-0.2) else as.numeric(h))
+  hh <- .fz_check_h(if (is.null(h)) .fz_kdfe_h(xv) else as.numeric(h))
   upper <- max(xv) + 8 * hh
   mrl <- vapply(tg, function(t) {
     den <- sum(.fz_V((t - xv) / hh))
