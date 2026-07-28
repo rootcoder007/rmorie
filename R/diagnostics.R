@@ -443,14 +443,28 @@ ramsey_reset_test <- function(y, X, powers = c(2, 3)) {
   n <- nrow(X)
   p <- ncol(X)
 
-  beta_r <- drop(.safe_solve(crossprod(X)) %*% crossprod(X, y))
+  beta_r <- drop(qr.coef(qr(X), y))
+  beta_r[is.na(beta_r)] <- 0
   y_hat <- drop(X %*% beta_r)
   ssr_r <- sum((y - y_hat) ^ 2)
 
+  # Scale the fitted values to unit maximum before raising them to
+  # powers. This does not change the column span of the augmented
+  # design -- and so cannot change the F statistic in exact arithmetic
+  # -- but it decides whether the computed one is right. Cubing an
+  # unscaled y_hat makes the condition number of the augmented design
+  # grow with the SIXTH power of the response scale: on a quadratic
+  # design whose true F is 315.08, multiplying y by 100 returned
+  # 229.06 and by 1000 returned 125.59, and on another design the
+  # statistic came out NEGATIVE. Solving by QR rather than through the
+  # normal equations avoids squaring the condition number again.
+  scale <- max(abs(y_hat))
+  if (!is.finite(scale) || scale <= 0) scale <- 1
   X_u <- X
-  for (pw in powers) X_u <- cbind(X_u, y_hat ^ pw)
+  for (pw in powers) X_u <- cbind(X_u, (y_hat / scale) ^ pw)
   p_u <- ncol(X_u)
-  beta_u <- drop(.safe_solve(crossprod(X_u)) %*% crossprod(X_u, y))
+  beta_u <- drop(qr.coef(qr(X_u), y))
+  beta_u[is.na(beta_u)] <- 0
   y_hat_u <- drop(X_u %*% beta_u)
   ssr_u <- sum((y - y_hat_u) ^ 2)
 
