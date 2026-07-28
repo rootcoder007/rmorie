@@ -11,8 +11,10 @@
 # so the two languages stay on one bandwidth rule and one basis.
 #
 # Spec: Horowitz, J. L., Semiparametric and Nonparametric Methods in
-# Econometrics, Springer. Ch. 2 (average derivative), Ch. 5
-# (deconvolution), Ch. 6 (nonparametric IV).
+# Econometrics, Springer. Sec. 2.6 (average derivative), Sec. 5.1
+# (deconvolution), Sec. 5.3-5.5 (nonparametric IV). NPIV is in
+# CHAPTER 5, not chapter 6 -- chapter 6 is transformation models,
+# verified against the printed table of contents.
 
 # K'(u) for the Gaussian kernel; the sign lives in the derivative
 # itself, and adding a second leading minus flips the average
@@ -43,7 +45,7 @@
 #' @param h damping bandwidth; the criterion above when NULL.
 #' @param error "normal" or "laplace".
 #' @return list: grid, density, bandwidth, regime, rate_note, n, method.
-#' @references Horowitz, Ch. 5.
+#' @references Horowitz, Ch. 5, Sec. 5.1.
 #' @examples
 #' w <- rnorm(200) + rnorm(200) * 0.4
 #' morie_deconvolution(w, 0.4, grid = 0)$regime
@@ -106,7 +108,7 @@ morie_deconvolution <- function(W, sigma_eps, grid = NULL, h = NULL,
 #' @param r ordinary-smooth exponent.
 #' @return list: rate, regime, polynomial_rate, logarithmic_rate,
 #'   ratio, n, method.
-#' @references Horowitz, Ch. 5.
+#' @references Horowitz, Ch. 5, Sec. 5.1.1-5.1.2.
 #' @examples
 #' morie_deconv_rate(1e6)$ratio
 #' @export
@@ -144,7 +146,7 @@ morie_deconv_rate <- function(n, error = "normal", s = 2, r = 2) {
 #' @param bias asymptotic bias.
 #' @param sigma limiting standard deviation, positive.
 #' @return list: z, scaling, p_two_sided, bias_subtracted, method.
-#' @references Horowitz, Ch. 5.
+#' @references Horowitz, Ch. 5, Sec. 5.1.3.
 #' @examples
 #' morie_deconv_normality(0.41, 0.399, 1000, 0.2, 2)$z
 #' @export
@@ -184,7 +186,7 @@ morie_deconv_normality <- function(fn_u, f_u, n, h, b, bias = 0, sigma = 1) {
 #' @param weighted use the density-weighted form (kept for parity).
 #' @return list: delta, se, root_n, proportional_to_beta, bandwidth,
 #'   n, d, method.
-#' @references Horowitz, Ch. 2.
+#' @references Horowitz, Ch. 2, Sec. 2.6.1.
 #' @examples
 #' x <- rnorm(300)
 #' morie_average_derivative(x, 2 * x + rnorm(300, sd = 0.1))$delta
@@ -236,7 +238,7 @@ morie_average_derivative <- function(X, y, h = NULL, weighted = TRUE) {
 #' @param y numeric response.
 #' @param h bandwidth; an undersmoothed default when NULL.
 #' @return list: delta_hat, se, bandwidth, undersmoothed, n, method.
-#' @references Horowitz, Ch. 2.
+#' @references Horowitz, Ch. 2, Sec. 2.6.1-2.6.2.
 #' @examples
 #' x <- rnorm(300)
 #' morie_average_derivative_hat(x, 2 * x)$undersmoothed
@@ -273,7 +275,7 @@ morie_average_derivative_hat <- function(X, y, h = NULL) {
 #' @param alphas positive grid for the L-curve.
 #' @return list: g, alpha, residual_norm, solution_norm, l_curve,
 #'   condition_number, ill_posed, method.
-#' @references Horowitz, Ch. 6.
+#' @references Horowitz, Ch. 5, Sec. 5.3.1 and 5.4.1.
 #' @examples
 #' morie_tikhonov_iv(diag(3), c(1, 2, 3))$alpha
 #' @export
@@ -324,7 +326,7 @@ morie_tikhonov_iv <- function(T, Ey_w, alpha = NULL, alphas = NULL) {
 #' @param K sieve dimension; a conservative truncation when NULL.
 #' @return list: g (zero-padded beyond K), K, residual_norm,
 #'   condition_number_at_K, regularisation, method.
-#' @references Horowitz, Ch. 6.
+#' @references Horowitz, Ch. 5, Sec. 5.4.2.
 #' @examples
 #' morie_sieve_iv(diag(4), c(1, 2, 3, 4))$K
 #' @export
@@ -367,7 +369,7 @@ morie_sieve_iv <- function(T, Ey_w, K = NULL) {
 #' @param K sieve dimension for both bases.
 #' @param kind basis type, "poly" or "fourier".
 #' @return list: T, singular_values, decay_ratio, severity, K, n, method.
-#' @references Horowitz, Ch. 6.
+#' @references Horowitz, Ch. 5, Sec. 5.3.
 #' @examples
 #' z <- rnorm(200)
 #' morie_npiv_operator(z + rnorm(200), z)$severity
@@ -408,7 +410,7 @@ morie_npiv_operator <- function(X, W, K = 5L, kind = "poly") {
 #' @param K sieve truncation.
 #' @param tau quantile level in (0, 1), recorded.
 #' @return list: g, K, residual_norm, tau, nonlinear, method.
-#' @references Horowitz, Ch. 6.
+#' @references Horowitz, Ch. 5, Sec. 5.5.1.
 #' @examples
 #' morie_npiv_quantile(diag(4), rep(0.5, 4))$nonlinear
 #' @export
@@ -439,7 +441,7 @@ morie_npiv_quantile <- function(T, tau_target, K = NULL, tau = 0.5) {
 #' @param y response; residuals are formed by 2SLS when U is omitted.
 #' @return list: first_stage_r2, first_stage_F, relevant, corr_U_Z,
 #'   exogeneity_testable, n, n_instruments, method.
-#' @references Horowitz, Ch. 6.
+#' @references Horowitz, Ch. 5, Sec. 5.3.
 #' @examples
 #' z <- rnorm(200)
 #' morie_instrument_check(z + rnorm(200), z)$relevant
