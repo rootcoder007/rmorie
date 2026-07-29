@@ -49,7 +49,7 @@
 #' Semiparametric rank estimators of a single-index model
 #'
 #' Maximum rank correlation (Han 1987),
-#' \eqn{b_{MRC} = \arg\max_b [n(n-1)]^{-1}\sum_i\sum_{j\ne i}
+#' \eqn{b_{MRC} = \arg\max_b \[n(n-1)\]^{-1}\sum_i\sum_{j\ne i}
 #' 1\{Y_i > Y_j\}1\{X_i'b > X_j'b\}}, and the Cavanagh-Sherman
 #' variant, which replaces \eqn{1\{Y_i > Y_j\}} with an increasing
 #' \eqn{M(Y_i)}.
@@ -155,8 +155,8 @@ morie_rank_index <- function(x, y, variant = "mrc", M = NULL) {
 #' Efficient weight function for semiparametric weighted NLS
 #'
 #' \eqn{W(x) = 1/\sigma^2(x)} attains the single-index efficiency
-#' bound \eqn{\Omega_{SI} = \{E[1(X \in A_x)\sigma^{-2}(X)\,\partial
-#' G\,\partial G']\}^{-1}} (2.32).
+#' bound \eqn{\Omega_{SI} = \{E\[1(X \in A_x)\sigma^{-2}(X)\,\partial
+#' G\,\partial G'\]\}^{-1}} (2.32).
 #'
 #' \strong{Not knowing sigma^2 costs nothing.} It can be replaced by
 #' a consistent estimate and the bound is still attained, by the
@@ -263,8 +263,8 @@ morie_nls_weight_function <- function(x, y, bandwidth = NULL, weights = NULL,
 
 #' One Newton step from any root-n start to asymptotic efficiency
 #'
-#' \eqn{\tilde b_n = \tilde b_n^{*} - [\partial^2 S_n/\partial
-#' \tilde b\partial\tilde b']^{-1}\partial S_n/\partial\tilde b}
+#' \eqn{\tilde b_n = \tilde b_n^{*} - \[\partial^2 S_n/\partial
+#' \tilde b\partial\tilde b'\]^{-1}\partial S_n/\partial\tilde b}
 #' (2.52), where \eqn{S_n} is the weighted-NLS objective with
 #' \eqn{W = 1/s_n^2} and \eqn{\tilde b_n^{*}} is ANY root-n
 #' consistent estimator. The result attains \eqn{\Omega_{SI}}.
@@ -373,7 +373,7 @@ morie_one_step_efficient <- function(x, y, bandwidth = NULL,
 #' by stratum and combined by (2.46), a weighted average renormalised
 #' by its first component. \eqn{\alpha} then comes from a LINEAR
 #' system: under the weak monotonicity of Assumption G the truncated
-#' integral \eqn{J(z)} satisfies \eqn{J[z^{(i)}] - J[z^{(1)}] =
+#' integral \eqn{J(z)} satisfies \eqn{J\[z^{(i)}\] - J\[z^{(1)}\] =
 #' (c_1 - c_0)(z^{(i)} - z^{(1)})'\alpha} (2.47), solved by
 #' \eqn{\alpha = (c_1 - c_0)(W'W)^{-1}W'\Delta J} (2.48). A shift in
 #' the discrete covariate shows up as a horizontal SHIFT of G, and

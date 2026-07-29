@@ -6,7 +6,7 @@
 #'
 #' \deqn{W \sim \mathcal{N}\!\left(0, \tfrac{2}{n_{in} + n_{out}}\right)}{W ~ N(0, tfrac{2}{n_in + n_out})}
 #' (normal) or
-#' \eqn{W \sim U[-\sqrt{6/(n_{in}+n_{out})}, +\sqrt{6/(n_{in}+n_{out})}]}{W ~ U[-sqrt{6/(n_in+n_out)}, +sqrt{6/(n_in+n_out)}]}
+#' \eqn{W \sim U\[-\sqrt{6/(n_{in}+n_{out})}, +\sqrt{6/(n_{in}+n_{out})}\]}{W ~ U\[-sqrt{6/(n_in+n_out)}, +sqrt{6/(n_in+n_out)}\]}
 #' (uniform).
 #'
 #' @param fan_in Number of input units.
@@ -18,7 +18,7 @@
 #' @references Glorot & Bengio (2010), AISTATS.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "rmorie")
+#' #   vignette(package = "morie")
 #' @export
 morie_xavir_xavier_init <- function(fan_in, fan_out, seed = 42L, uniform = TRUE) {
   if (fan_in <= 0 || fan_out <= 0) {
@@ -47,8 +47,6 @@ morie_xavir_xavier_init <- function(fan_in, fan_out, seed = 42L, uniform = TRUE)
   )
 }
 
-#' Internal helper: Random.seed Safe
-#' @noRd
 .Random.seed_safe <- function() {
   if (exists(".Random.seed", envir = globalenv())) {
     get(".Random.seed", envir = globalenv())
@@ -57,8 +55,6 @@ morie_xavir_xavier_init <- function(fan_in, fan_out, seed = 42L, uniform = TRUE)
   }
 }
 
-#' Internal helper: Random.seed Restore
-#' @noRd
 .Random.seed_restore <- function(old) {
   if (is.null(old)) {
     if (exists(".Random.seed", envir = globalenv())) {

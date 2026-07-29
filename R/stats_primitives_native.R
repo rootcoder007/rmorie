@@ -29,7 +29,7 @@
 #'   \emph{Communications for Statistical Applications and Methods},
 #'   22(6), 665-674.
 #' @examples
-#' morie_partial_cor(mtcars[, c("mpg", "wt", "disp")])$estimate
+#' morie_partial_cor(mtcars\[, c("mpg", "wt", "disp")\])$estimate
 #' @export
 morie_partial_cor <- function(data, method = "pearson") {
   X <- as.matrix(data)
@@ -85,7 +85,7 @@ morie_partial_cor_test <- function(x, y, z, method = "pearson") {
 #' @return A list mirroring \code{\link{morie_partial_cor}} with the
 #'   semi-partial coefficients in \code{estimate}.
 #' @examples
-#' morie_semipartial_cor(mtcars[, c("mpg", "wt", "disp")])$estimate
+#' morie_semipartial_cor(mtcars\[, c("mpg", "wt", "disp")\])$estimate
 #' @export
 morie_semipartial_cor <- function(data, method = "pearson") {
   X <- as.matrix(data)
@@ -144,7 +144,7 @@ morie_runs_test <- function(x, threshold = stats::median(x),
     right.sided = stats::pnorm(z, lower.tail = FALSE),
     stop("bad alternative"))
   list(statistic = z, p.value = p, runs = runs, n1 = n1, n2 = n2,
-       method = "Runs Test (rmorie native)")
+       method = "Runs Test (morie native)")
 }
 
 #' Turning-point test (native)
@@ -168,7 +168,7 @@ morie_turning_point_test <- function(x) {
   v <- (16 * n - 29) / 90
   z <- (tp - mu) / sqrt(v)
   list(statistic = z, p.value = 2 * stats::pnorm(-abs(z)),
-       tp = tp, method = "Turning Point Test (rmorie native)")
+       tp = tp, method = "Turning Point Test (morie native)")
 }
 
 #' Difference-sign test (native)
@@ -193,7 +193,7 @@ morie_difference_sign_test <- function(x) {
   v <- (n + 1) / 12
   z <- (ds - mu) / sqrt(v)
   list(statistic = z, p.value = 2 * stats::pnorm(-abs(z)),
-       ds = ds, method = "Difference Sign Test (rmorie native)")
+       ds = ds, method = "Difference Sign Test (morie native)")
 }
 
 #' Bartels rank test of randomness (native)
@@ -229,7 +229,7 @@ morie_bartels_rank_test <- function(x, alternative = "two.sided") {
     right.sided = stats::pnorm(z, lower.tail = FALSE),
     stop("bad alternative"))
   list(statistic = z, rvn = rvn, p.value = p,
-       method = "Bartels Rank Test (rmorie native)")
+       method = "Bartels Rank Test (morie native)")
 }
 
 # ---------------------------------------------------------------------------

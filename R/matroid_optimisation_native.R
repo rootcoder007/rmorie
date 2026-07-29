@@ -511,7 +511,7 @@ morie_hall_condition <- function(left_n, right_n, edges) {
 #' matrix rather than assumed equal, so the theorem is a check rather
 #' than a restatement.
 #'
-#' @param capacity Square non-negative matrix; `capacity[i, j]` is the
+#' @param capacity Square non-negative matrix; `capacity\[i, j\]` is the
 #'   arc capacity from i to j.
 #' @param source,sink Node indices, numbered from 1.
 #' @return A list with `flow`, `cut_capacity`, `min_cut_source_side`,

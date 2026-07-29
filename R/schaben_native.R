@@ -152,7 +152,7 @@ morie_matheron_estimator <- function(coords, z, bins = NULL, cutoff = NULL,
 #' which differs from the generalised estimating equation (4.43) only by
 #' the factor \code{1/(8 gamma^2)}. That factor is not a tuning choice:
 #' under the Gaussian assumption \code{T3/(2 gamma)} is chi-square with
-#' one degree of freedom, so \code{Var[T3] = 8 gamma^2} exactly.
+#' one degree of freedom, so \code{Var\[T3\] = 8 gamma^2} exactly.
 #'
 #' The fit is to the semivariogram CLOUD, pair by pair, so no lag
 #' classes, tolerance or cutoff can move the answer.

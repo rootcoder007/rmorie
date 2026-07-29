@@ -23,8 +23,8 @@
 #' `.morie_silverman_h`, and the difference is not cosmetic.
 #' Equations (2.3)-(2.4) of Fauzi and Maesono (2023) give
 #'
-#'   Bias\[Fhat_h(x)\] = h^2 f'(x)/2 mu_2(K) + o(h^2)
-#'   Var \[Fhat_h(x)\] = F(1-F)/n - (2h/n) r_1 f(x) + o(h/n)
+#'   Bias\\[Fhat_h(x)\\] = h^2 f'(x)/2 mu_2(K) + o(h^2)
+#'   Var \\[Fhat_h(x)\\] = F(1-F)/n - (2h/n) r_1 f(x) + o(h/n)
 #'
 #' with `r_1 = int y K(y) W(y) dy`, so the bandwidth enters the
 #' variance at order `h/n` and with a NEGATIVE sign -- smoothing

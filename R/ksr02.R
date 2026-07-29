@@ -2,7 +2,7 @@
 
 #' Donsker-class verification via bracketing integral
 #'
-#' Computes J_[](1, F, L_2(P)) = int_0^1 sqrt(log N_brackets(e, F, L_2(P))) de
+#' Computes J_\[\](1, F, L_2(P)) = int_0^1 sqrt(log N_brackets(e, F, L_2(P))) de
 #' for the indicator class F of one-sided thresholds on X
 #' (Kosorok Ex 2.5.4), with bracketing number bounded by 2 / epsilon^2.
 #'

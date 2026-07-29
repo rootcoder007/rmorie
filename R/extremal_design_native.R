@@ -188,7 +188,7 @@ morie_erdos_ko_rado <- function(n, k) {
 #' the chain cover by a bipartite matching -- and the equality is then
 #' CHECKED rather than assumed, since equality is the content.
 #'
-#' @param leq Square logical matrix; `leq[i, j]` when \eqn{i \le j}.
+#' @param leq Square logical matrix; `leq\[i, j\]` when \eqn{i \le j}.
 #' @return A list with `antichain_size`, `chain_cover_size`,
 #'   `dilworth_holds`, `antichain`, `warnings`.
 #' @references Dilworth RP (1950) \emph{Annals of Mathematics}
@@ -399,7 +399,7 @@ morie_steiner_triple_system <- function(v, construct = TRUE) {
 
 #' A Latin square of order n
 #'
-#' The cyclic construction \eqn{L[i][j] = (i + j) \bmod n} works for
+#' The cyclic construction \eqn{L\[i\]\[j\] = (i + j) \bmod n} works for
 #' every \eqn{n}, so Latin squares exist unconditionally.
 #'
 #' @param n Order.

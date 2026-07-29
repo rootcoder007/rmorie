@@ -1,7 +1,7 @@
 #' SHA-keyed deterministic RNG for Py<->R parity
 #'
 #' Given a callable / fixture name and an integer seed, derive a stable
-#' R-side seed value via SHA-256, install it with [set.seed()], and
+#' R-side seed value via SHA-256, install it with \[set.seed()\], and
 #' return it invisibly.  The matched Python helper
 #' `morie._det_rng.from_seed(name, seed)` builds a `numpy.random.Generator`
 #' from the same SHA digest so bootstrap / MCMC draws on the two sides
@@ -9,15 +9,15 @@
 #' deterministic-pseudo-bootstrap mode is plumbed).
 #'
 #' Mechanism: `SHA-256(paste0(name, ":", seed))` is truncated to 32 bytes;
-#' bytes `[9:12]` (1-indexed, i.e. hex chars 17..24) form a 32-bit value
-#' reduced modulo `2^31 - 1` and passed to [set.seed()].  Bytes `[1:8]`
+#' bytes `\[9:12\]` (1-indexed, i.e. hex chars 17..24) form a 32-bit value
+#' reduced modulo `2^31 - 1` and passed to \[set.seed()\].  Bytes `\[1:8\]`
 #' are reserved for the Python Philox key.  See `inst/python-stub/det_rng.py`
 #' (or the parent `morie/_det_rng.py`) for the Python counterpart.
 #'
 #' @param name Character scalar; stable callable / fixture name.
 #'   Must be identical to the string the Python side passes.
 #' @param seed Integer; user-supplied seed.
-#' @return Integer seed installed via [set.seed()] (invisibly).
+#' @return Integer seed installed via \[set.seed()\] (invisibly).
 #' @details
 #' Requires either the `digest` or `openssl` package for SHA-256.  Both
 #' are widely available on CRAN; we try `digest` first, then `openssl`,
@@ -53,7 +53,7 @@ morie_det_rng <- function(name, seed) {
 .morie_sha256_hex <- function(s) {
   # Module 22: native C++ SHA-256 (src/morie_crypto_hash.cpp) --
   # deterministic RNG seeding depends on nothing outside the package.
-  .rmorie_sha256_hex_impl(s)
+  .morie_sha256_hex_impl(s)
 }
 
 #' SHA-256 hex digest of "name:seed" (for Py<->R cross-check)

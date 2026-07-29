@@ -21,7 +21,7 @@
 #' \eqn{V = S'b + U} with \eqn{U} independent of \eqn{(S,
 #' \varepsilon)} and construct
 #'
-#' \deqn{T = [Y - 1\{V \ge 0\}] / f(U).}
+#' \deqn{T = \[Y - 1\{V \ge 0\}\] / f(U).}
 #'
 #' Then \eqn{T = X'\beta + \tilde\varepsilon} with
 #' \eqn{E(Z\tilde\varepsilon) = 0}, so beta follows from a LINEAR

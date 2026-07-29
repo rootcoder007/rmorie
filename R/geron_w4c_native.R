@@ -422,7 +422,7 @@ morie_geron_novelty_detection <- function(model, X_new, reference = NULL) {
 
 # ============================================================ hmnsp
 
-#' Next sentence prediction: BERT-style input assembly plus a linear [CLS] head (Geron Ch 15, hmnsp)
+#' Next sentence prediction: BERT-style input assembly plus a linear \[CLS\] head (Geron Ch 15, hmnsp)
 #' @param sent_A,sent_B Tokenised sentences. @param encoder Optional `encoder(tokens, segments) -> h`.
 #' @param w,b Head weights/bias. @param label Optional 0/1 label for the loss.
 #' @export
@@ -465,7 +465,7 @@ morie_geron_next_sentence_prediction <- function(sent_A, sent_B, encoder = NULL,
 }
 
 #' One-class SVM (SMO) over an RBF kernel: boundary of the high-density region (Geron Ch 8, hmocsv)
-#' @param X Data (n, d). @param nu Outlier-fraction knob in (0, 1].
+#' @param X Data (n, d). @param nu Outlier-fraction knob in (0, 1\].
 #' @param gamma RBF width. @param max_iter,tol SMO controls.
 #' @export
 morie_geron_one_class_svm <- function(X, nu = 0.5, gamma = 1.0, max_iter = 2000, tol = 1e-9) {
@@ -1405,7 +1405,7 @@ morie_geron_prelu <- function(z, alpha = 0.25, upstream = NULL) {
 # ============================================================ hmpru
 
 #' Global magnitude weight pruning to an exact sparsity, cubic ramp schedule (Geron Ch 17, hmpru)
-#' @param model Numeric vector or named list. @param sparsity Target fraction of zeros in [0, 1).
+#' @param model Numeric vector or named list. @param sparsity Target fraction of zeros in \[0, 1).
 #' @param n_rounds Rounds in the returned schedule.
 #' @export
 morie_geron_weight_pruning_hm <- function(model, sparsity, n_rounds = 1) {
@@ -1439,7 +1439,7 @@ morie_geron_weight_pruning_hm <- function(model, sparsity, n_rounds = 1) {
 
 #' Static post-training quantization (PTQ) from calibration ranges (Geron App B, hmptq)
 #' @param model Weights. @param calibration_data Representative activations.
-#' @param bits Bit width, 2 to 16. @param percentile Range-clipping percentile in (0, 100].
+#' @param bits Bit width, 2 to 16. @param percentile Range-clipping percentile in (0, 100\].
 #' @export
 morie_geron_static_quantization_ptq <- function(model, calibration_data, bits = 8, percentile = 100.0) {
   b <- as.integer(bits); pct <- as.numeric(percentile)
@@ -2003,7 +2003,7 @@ morie_geron_random_patches <- function(X, y, base_estimator = NULL, n_estimators
 #' Randomized hyperparameter search, scored by K-fold CV (Geron Ch 2, hmrsc)
 #' @param param_dist Named list of distributions: an R `list(lo, hi)` of length 2 is a uniform
 #'   INTERVAL (Python's `(lo, hi)` tuple); a plain vector is a discrete CHOICE list (Python's
-#'   `[...]`), matching Python's own tuple-vs-list distinction. A function is `f(u)`.
+#'   `\[...\]`), matching Python's own tuple-vs-list distinction. A function is `f(u)`.
 #' @param n_iter,X,y,estimator,K,seed,score Controls; `estimator(params) -> list(fit=, predict=)`.
 #' @export
 morie_geron_randomized_search <- function(param_dist, n_iter, X, y, estimator = NULL, K = 3, seed = 0, score = NULL) {
@@ -2118,7 +2118,7 @@ morie_geron_revnet <- function(x, F, G) {
 
 #' Reward function R(s, a, s'): per-transition rewards and the backward discounted return (Geron Ch 19, hmrwd)
 #' @param s,a,s_next Transition or trajectory arrays. @param R Callable `R(s,a,s')` or a 2-D/3-D lookup table.
-#' @param gamma Discount in [0, 1].
+#' @param gamma Discount in \[0, 1\].
 #' @export
 morie_geron_reward_function <- function(s, a, s_next, R = NULL, gamma = 1.0) {
   .morie_gr_need(!is.null(R), "geron_reward_function: R is required")

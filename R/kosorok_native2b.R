@@ -57,7 +57,7 @@ morie_residual_edf <- function(y, z, beta, t = NULL) {
 
 #' Cox partial-likelihood score process
 #'
-#' \eqn{U_n(t,\beta) = n^{-1}\sum_i \int_0^t [Z_i - E_n(s,\beta)]
+#' \eqn{U_n(t,\beta) = n^{-1}\sum_i \int_0^t \[Z_i - E_n(s,\beta)\]
 #' dN_i(s)} with \eqn{E_n} the risk-set weighted average covariate
 #' (Eq. 1.4, p. 5). Indexed by t, so it is a stochastic PROCESS whose
 #' weak convergence -- not merely asymptotic normality of the
@@ -128,7 +128,7 @@ morie_cox_score_process <- function(beta, z, time, event, t_grid = NULL) {
 
 #' Kaplan-Meier Z-estimator map
 #'
-#' \eqn{\Psi(S)(t) = S_0(t)L(t) + \int_0^t [S_0(u)/S(u)]dG(u)S(t) -
+#' \eqn{\Psi(S)(t) = S_0(t)L(t) + \int_0^t \[S_0(u)/S(u)\]dG(u)S(t) -
 #' S(t)} (Eq. 2.11, p. 26), implemented exactly as printed.
 #'
 #' \eqn{S_0}, \eqn{L} and \eqn{G} are SUPPLIED rather than inferred.

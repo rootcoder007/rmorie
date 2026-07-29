@@ -44,7 +44,7 @@ morie_inspect_output <- function(path) {
         result$n_columns <- ncol(df)
         utils::head(df)
       } else if (ext == "rds") {
-        obj <- .morie_safe_readRDS(path, "inspecting an .rds output")
+        obj <- readRDS(path)
         result$class <- class(obj)
         if (is.data.frame(obj)) utils::head(obj) else utils::head(names(obj))
       } else {
@@ -72,7 +72,7 @@ morie_inspect_output <- function(path) {
 #' checks are `TRUE`.
 #'
 #' Checks: SE non-negative; CI lower < CI upper; estimate inside the CI;
-#' n positive; p-value (if present) in \[0, 1\]; estimate finite.
+#' n positive; p-value (if present) in \\[0, 1\\]; estimate finite.
 #'
 #' @param path Path to a JSON output file.
 #'

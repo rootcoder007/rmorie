@@ -154,7 +154,7 @@ morie_wsm_kde <- function(x, data, h = NULL, rule = "3.31") {
 #' Importance sampling
 #'
 #' MacKay Eqs. (29.21)-(29.22): weight draws from a sampler density
-#' `Q` by `w_r = P*(x_r)/Q*(x_r)` and estimate `E_P[phi]` by
+#' `Q` by `w_r = P*(x_r)/Q*(x_r)` and estimate `E_P\[phi\]` by
 #' `sum(w phi)/sum(w)`.
 #'
 #' (29.22) is SELF-NORMALISED, and that is the point: dividing by
@@ -284,7 +284,7 @@ morie_wsm_plug_in <- function(data, T, B = 1000, seed = 0, se = TRUE) {
 
 #' Bootstrap variance estimator
 #'
-#' ESL Eq. (7.53), `Var[S] = (1/(B-1)) sum_b (S(Z*b) - Sbar*)^2`.
+#' ESL Eq. (7.53), `Var\[S\] = (1/(B-1)) sum_b (S(Z*b) - Sbar*)^2`.
 #'
 #' The denominator is `B - 1`, not `B`, for the same reason a sample
 #' variance carries `n - 1`: the replicates are centred at their own
@@ -363,7 +363,7 @@ morie_wsm_bootstrap <- function(data, T, B = 1000, seed = 0, ddof = 1L) {
 #'   Sec. 2.2.6; Fisher (1922).
 #' @examples
 #' x <- stats::rnorm(200, 2, 1.5)
-#' morie_wsm_mle(x, function(d, t) stats::dnorm(d, t[1], abs(t[2])),
+#' morie_wsm_mle(x, function(d, t) stats::dnorm(d, t\[1\], abs(t\[2\])),
 #'               c(0, 1))$estimate
 #' @export
 morie_wsm_mle <- function(data, f, theta0, se = TRUE) {

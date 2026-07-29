@@ -42,8 +42,6 @@ NULL
 # ---------------------------------------------------------------------------
 # .siu_an_load -- accept a data frame, a path, or NULL (defaults).
 # ---------------------------------------------------------------------------
-#' Internal helper: Siu An Load
-#' @noRd
 .siu_an_load <- function(x = NULL) {
   if (is.data.frame(x)) {
     return(x)
@@ -67,8 +65,6 @@ NULL
 # .siu_an_rich -- thin RichResult constructor mirroring sprott_doob.R's
 # .morie_siu_rich; reproduced here to keep this file self-contained.
 # ---------------------------------------------------------------------------
-#' Internal helper: Siu An Rich
-#' @noRd
 .siu_an_rich <- function(title, summary_lines = list(),
                          tables = list(),
                          interpretation = "",
@@ -91,16 +87,12 @@ NULL
 # ---------------------------------------------------------------------------
 # Truthy / falsy counters tolerant of CSV-roundtripped booleans.
 # ---------------------------------------------------------------------------
-#' Internal helper: Siu An Truthy
-#' @noRd
 .siu_an_truthy <- function(v) {
   if (is.logical(v)) return(sum(v %in% TRUE, na.rm = TRUE))
   s <- tolower(trimws(as.character(v)))
   sum(s %in% c("true", "yes", "1", "t"), na.rm = TRUE)
 }
 
-#' Internal helper: Siu An Falsy
-#' @noRd
 .siu_an_falsy <- function(v) {
   if (is.logical(v)) return(sum(v %in% FALSE, na.rm = TRUE))
   s <- tolower(trimws(as.character(v)))
@@ -294,7 +286,7 @@ morie_siu_by_year <- function(data = NULL) {
 #'   number_of_civilian_witnesses = c(0L, 3L, 1L, 2L),
 #'   number_of_officers_involved = c(3L, 6L, 2L, 8L))
 #' r <- morie_siu_case_counts(df)
-#' r$tables[[1]]$rows
+#' r$tables\[\[1\]\]$rows
 #' @export
 morie_siu_case_counts <- function(data = NULL) {
   df <- .siu_an_load(data)
@@ -418,7 +410,7 @@ morie_siu_demographics <- function(data = NULL) {
 #'   mental_health_or_race_indications = c("mental health; Indigenous", "",
 #'                                         "racial", "mental health; Black"))
 #' r <- morie_siu_mental_health_race_indicators(df)
-#' r$tables[[1]]$rows
+#' r$tables\[\[1\]\]$rows
 #' @export
 morie_siu_mental_health_race_indicators <- function(data = NULL) {
   df <- .siu_an_load(data)
@@ -486,8 +478,6 @@ morie_siu_mental_health_race_indicators <- function(data = NULL) {
 # ---------------------------------------------------------------------------
 # .siu_an_interval -- day-delta summary helper used by decision_timing.
 # ---------------------------------------------------------------------------
-#' Internal helper: Siu An Interval
-#' @noRd
 .siu_an_interval <- function(label, a_iso, b_iso) {
   a <- suppressWarnings(as.Date(a_iso))
   b <- suppressWarnings(as.Date(b_iso))
@@ -524,7 +514,7 @@ morie_siu_mental_health_race_indicators <- function(data = NULL) {
 #'   date_siu_notified_iso = c("2022-01-06", "2023-02-19", "2024-03-02"),
 #'   date_of_director_decision_iso = c("2022-08-01", "2023-09-10", "2024-09-01"))
 #' r <- morie_siu_decision_timing(df)
-#' r$tables[[1]]$rows
+#' r$tables\[\[1\]\]$rows
 #' @export
 morie_siu_decision_timing <- function(data = NULL) {
   df <- .siu_an_load(data)

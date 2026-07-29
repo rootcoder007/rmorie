@@ -3,8 +3,6 @@
 # Internal: Ichimura single-index leave-one-out objective. Extracted
 # from the hrzi1() optimiser closure so the zero-norm guard is directly
 # unit-testable. `h0` is the kernel bandwidth.
-#' Internal helper: Hrzi1 Obj
-#' @noRd
 .hrzi1_obj <- function(b, X, y, h0) {
   nb <- sqrt(sum(b^2))
   if (nb < 1e-12) {
@@ -32,7 +30,7 @@
 #' set.seed(282)
 #' n <- 60
 #' X <- matrix(rnorm(n * 2), n, 2)
-#' y <- as.numeric(-2 * X[, 1] + 0.3 * X[, 2] + rnorm(n))
+#' y <- as.numeric(-2 * X\[, 1\] + 0.3 * X\[, 2\] + rnorm(n))
 #' res <- hrzi1(X, y)
 #' res$estimate
 #' @export

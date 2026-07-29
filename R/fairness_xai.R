@@ -20,8 +20,6 @@
 NULL
 
 
-#' Internal helper: Xai Result
-#' @noRd
 .xai_result <- function(title, call, summary_lines = list(),
                         warnings = character(0),
                         interpretation = "", ...) {
@@ -33,8 +31,6 @@ NULL
   out
 }
 
-#' Internal helper: Xai As 2d
-#' @noRd
 .xai_as_2d <- function(X) {
   m <- as.matrix(X)
   if (!is.numeric(m)) storage.mode(m) <- "double"
@@ -43,8 +39,6 @@ NULL
   m
 }
 
-#' Internal helper: Xai Names
-#' @noRd
 .xai_names <- function(feature_names, d) {
   if (is.null(feature_names)) return(sprintf("x%d", seq_len(d) - 1L))
   nm <- as.character(feature_names)
@@ -55,8 +49,6 @@ NULL
   nm
 }
 
-#' Internal helper: Xai Resolve
-#' @noRd
 .xai_resolve <- function(feature, names) {
   if (is.character(feature)) {
     if (!(feature %in% names)) {
@@ -71,8 +63,6 @@ NULL
   idx
 }
 
-#' Internal helper: Xai Predict
-#' @noRd
 .xai_predict <- function(predict_fn, X) {
   out <- as.numeric(predict_fn(X))
   if (length(out) != nrow(X)) {
@@ -81,8 +71,6 @@ NULL
   out
 }
 
-#' Internal helper: Xai Have Iml
-#' @noRd
 .xai_have_iml <- function() {
   requireNamespace("iml", quietly = TRUE)
 }
@@ -332,7 +320,7 @@ morie_fairness_xai_ale <- function(predict_fn, X, feature,
 #' set.seed(9)
 #' X <- matrix(rnorm(400), 100, 4); colnames(X) <- paste0("f", 1:4)
 #' predict_fn <- function(M) as.numeric(M %*% c(1.5, -0.7, 0, 0.3))
-#' morie_fairness_xai_ceteris_paribus(predict_fn, X[1L, ], feature = "f1",
+#' morie_fairness_xai_ceteris_paribus(predict_fn, X\[1L, \], feature = "f1",
 #'   X_ref = X, feature_names = colnames(X), grid_size = 8L)
 #' @export
 morie_fairness_xai_ceteris_paribus <- function(predict_fn, x, feature,
@@ -398,7 +386,7 @@ morie_fairness_xai_ceteris_paribus <- function(predict_fn, x, feature,
 #' set.seed(11)
 #' X <- matrix(rnorm(120), 30, 4); colnames(X) <- paste0("f", 1:4)
 #' predict_fn <- function(M) as.numeric(M %*% c(1.5, -0.7, 0, 0.3))
-#' morie_fairness_xai_shap_values(predict_fn, X[1L, ], background = X,
+#' morie_fairness_xai_shap_values(predict_fn, X\[1L, \], background = X,
 #'   feature_names = colnames(X), n_samples = 10L, seed = 1L)
 #' @export
 morie_fairness_xai_shap_values <- function(predict_fn, x, background,

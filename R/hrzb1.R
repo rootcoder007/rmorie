@@ -3,8 +3,6 @@
 # Internal: Manski maximum-score objective (negative average concordance
 # of the sign of the index with the +-1 response). Extracted from the
 # hrzb1() optimiser closures so it can be unit-tested directly.
-#' Internal helper: Hrzb1 Score
-#' @noRd
 .hrzb1_score <- function(b, ys, X) {
   -mean(ys * (X %*% b > 0))
 }
@@ -19,7 +17,7 @@
 #' set.seed(282)
 #' n <- 60
 #' X <- matrix(rnorm(n * 2), n, 2)
-#' y <- rbinom(n, 1, plogis(-2 * X[, 1]))
+#' y <- rbinom(n, 1, plogis(-2 * X\[, 1\]))
 #' res <- hrzb1(X, y)
 #' str(res)
 #' @export

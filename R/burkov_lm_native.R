@@ -143,7 +143,7 @@ morie_burkov_logistic <- function(w, x, b) {
 }
 
 #' Binary cross-entropy for one example (Burkov Eq 1.9)
-#' @param y_hat Predicted probabilities in \[0, 1\]. @param y Targets, 0 or 1.
+#' @param y_hat Predicted probabilities in \\[0, 1\\]. @param y Targets, 0 or 1.
 #' @export
 morie_burkov_binary_cross_entropy <- function(y_hat, y) {
   yh <- as.numeric(y_hat); y <- as.numeric(y)
@@ -312,7 +312,7 @@ morie_burkov_interpolation <- function(probs_by_order, lambdas) {
 
 #' N-gram backoff with per-level discount (Burkov Ch 2)
 #' @param counts_by_order List of `c(count_ngram, count_prefix)` pairs,
-#'   highest order first. @param alpha Per-level discount in (0, 1\].
+#'   highest order first. @param alpha Per-level discount in (0, 1\\].
 #' @export
 morie_burkov_backoff <- function(counts_by_order, alpha = 0.4) {
   a <- as.numeric(alpha)

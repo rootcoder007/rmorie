@@ -384,7 +384,7 @@ morie_alammar_vit_patch_embedding <- function(image, patch_size, E,
 
 #' Contrastive and ranking losses of the SBERT/CLIP family
 #' @param a,b Row-matched embedding matrices. @param y_true Cosine
-#'   targets in \[-1, 1\].
+#'   targets in \\[-1, 1\\].
 #' @export
 morie_alammar_cosine_similarity_loss <- function(a, b, y_true) {
   A <- as.matrix(a); B <- as.matrix(b); y <- as.numeric(y_true)

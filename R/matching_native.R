@@ -50,7 +50,7 @@
 #'   Stat. 39(1)) for greedy propensity matching; Cochran & Rubin
 #'   (1973) for the caliper in SD-of-logit units.
 #' @srrstats {G3.0} No exact floating-point equality: fitted
-#'   propensities are clamped to [eps, 1-eps] before qlogis, and
+#'   propensities are clamped to \[eps, 1-eps\] before qlogis, and
 #'   caliper admissibility uses explicit widths, never ==.
 #' @noRd
 .morie_match_nearest_native <- function(data, treatment, covariates,
@@ -99,7 +99,7 @@
     n_treated         = length(unique(matched_t)),
     n_matched_control = length(unique(matched_c)),
     match_pairs       = pairs_df,
-    method            = "nearest_neighbor (rmorie native)",
+    method            = "nearest_neighbor (morie native)",
     details           = list(
       engine      = "native-greedy-1d",
       caliper     = caliper,

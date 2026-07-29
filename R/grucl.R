@@ -3,7 +3,7 @@
 #' GRU cell forward pass
 #'
 #' R parity for \code{morie.fn.grucl.gru_cell}.  Gates stacked as
-#' \code{[W_z; W_r; W_n]}.
+#' \code{\[W_z; W_r; W_n\]}.
 #'
 #' \deqn{z, r = \sigma(\ldots); \quad n = \tanh(W_n x + r \odot U_n h); \quad
 #'       h = (1 - z) \odot n + z \odot h_\text{prev}}{z, r = sigma(...); n = tanh(W_n x + r odot U_n h); h = (1 - z) odot n + z odot h_prev}

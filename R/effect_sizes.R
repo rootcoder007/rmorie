@@ -62,15 +62,11 @@ effect_size_result <- function(measure, estimate,
 
 # -- Helpers ----------------------------------------------------------
 
-#' Internal helper: Arr
-#' @noRd
 .arr <- function(x) {
   v <- as.numeric(x)
   v[is.finite(v)]
 }
 
-#' Internal helper: Bootstrap Ci
-#' @noRd
 .bootstrap_ci <- function(func, args, n_boot = 2000L,
                             confidence = 0.95, seed = 42L) {
   set.seed(seed)
@@ -99,11 +95,66 @@ effect_size_result <- function(measure, estimate,
 # STANDARDISED MEAN DIFFERENCES
 # =====================================================================
 
-#' Glass's delta — control-group SD denominator
+#' Cohen's d for independent samples
 #'
 #' @param x,y Numeric vectors (NA dropped).
-#' @param control Which group is the control: `"x"` or `"y"` (default).
 #' @param confidence Confidence level for CI. Default 0.95.
+#' @return A `morie_effect_size`.
+#' @examples
+#' set.seed(1)
+#' x <- rnorm(30)
+#' y <- rnorm(30, mean = 0.6)
+#' r <- cohens_d(x, y)
+#' r$estimate
+#' @export
+cohens_d <- function(x, y, confidence = 0.95) {
+  x <- .arr(x)
+  y <- .arr(y)
+  nx <- length(x)
+  ny <- length(y)
+  if (nx < 2L || ny < 2L) {
+    stop("cohens_d: need at least 2 finite observations per group; ",
+         "got nx=", nx, ", ny=", ny, call. = FALSE)
+  }
+  sp <- sqrt(((nx - 1) * var(x) + (ny - 1) * var(y)) / (nx + ny - 2))
+  d  <- if (sp > 0) (mean(x) - mean(y)) / sp else 0
+  se <- sqrt((nx + ny) / (nx * ny) + d^2 / (2 * (nx + ny - 2)))
+  z  <- qnorm((1 + confidence) / 2)
+  effect_size_result("Cohen's d", d, d - z * se, d + z * se, se, nx + ny)
+}
+
+
+#' Hedges' g — bias-corrected Cohen's d
+#'
+#' Applies J = 1 - 3 / (4 * df - 1).
+#'
+#' @inheritParams cohens_d
+#' @return A `morie_effect_size`.
+#' @examples
+#' set.seed(1)
+#' x <- rnorm(30, mean = 0)
+#' y <- rnorm(30, mean = 0.6)
+#' r <- hedges_g(x, y)
+#' r$estimate
+#' @export
+hedges_g <- function(x, y, confidence = 0.95) {
+  x <- .arr(x)
+  y <- .arr(y)
+  d_res <- cohens_d(x, y, confidence)
+  df_val <- length(x) + length(y) - 2
+  J <- if (df_val > 1) 1 - 3 / (4 * df_val - 1) else 1
+  g  <- d_res$estimate * J
+  se <- if (!is.na(d_res$se)) d_res$se * J else 0
+  z  <- qnorm((1 + confidence) / 2)
+  effect_size_result("Hedges' g", g, g - z * se, g + z * se, se,
+                      d_res$n, extra = list(correction_factor = J))
+}
+
+
+#' Glass's delta — control-group SD denominator
+#'
+#' @inheritParams cohens_d
+#' @param control Which group is the control: `"x"` or `"y"` (default).
 #' @return A `morie_effect_size`.
 #' @examples
 #' set.seed(83)
@@ -134,8 +185,7 @@ glass_delta <- function(x, y, control = "y", confidence = 0.95) {
 #'
 #' Estimates P(X > Y) for randomly drawn observations from each group.
 #'
-#' @param x,y Numeric vectors (NA dropped).
-#' @param confidence Confidence level for CI. Default 0.95.
+#' @inheritParams cohens_d
 #' @return A `morie_effect_size`.
 #' @examples
 #' set.seed(1)
@@ -168,13 +218,8 @@ cles <- function(x, y, confidence = 0.95) {
 
 #' Pearson r as an effect size with Fisher-z CI
 #'
-#' @param x,y Numeric vectors (NA dropped).
-#' @param confidence Confidence level for CI. Default 0.95.
+#' @inheritParams cohens_d
 #' @return A `morie_effect_size`.
-#' @examples
-#' set.seed(1)
-#' x <- rnorm(30); y <- x + rnorm(30)
-#' r_effect_size(x, y)
 #' @export
 r_effect_size <- function(x, y, confidence = 0.95) {
   x <- .arr(x)
@@ -194,12 +239,8 @@ r_effect_size <- function(x, y, confidence = 0.95) {
 
 #' Coefficient of determination R^2
 #'
-#' @param x,y Numeric vectors (NA dropped).
+#' @inheritParams cohens_d
 #' @return A `morie_effect_size`.
-#' @examples
-#' set.seed(1)
-#' x <- rnorm(30); y <- x + rnorm(30)
-#' r_squared(x, y)
 #' @export
 r_squared <- function(x, y) {
   r_res <- r_effect_size(x, y)
@@ -212,13 +253,26 @@ r_squared <- function(x, y) {
 }
 
 
+#' Eta-squared from ANOVA sums of squares
+#'
+#' @param ss_effect Sum of squares for the effect.
+#' @param ss_total  Total sum of squares.
+#' @return A `morie_effect_size`.
+#' @examples
+#' r <- eta_squared(10, 20)
+#' r$estimate
+#' @export
+eta_squared <- function(ss_effect, ss_total) {
+  eta2 <- if (ss_total > 0) ss_effect / ss_total else 0
+  effect_size_result("Eta-squared", eta2)
+}
+
+
 #' Partial eta-squared
 #'
 #' @param ss_effect Sum of squares for the effect.
 #' @param ss_error  Error sum of squares.
 #' @return A `morie_effect_size`.
-#' @examples
-#' partial_eta_squared(40, 60)
 #' @export
 partial_eta_squared <- function(ss_effect, ss_error) {
   denom <- ss_effect + ss_error
@@ -233,8 +287,6 @@ partial_eta_squared <- function(ss_effect, ss_error) {
 #' @param df_effect Numerator d.f. of the effect.
 #' @param ms_error  Error mean square.
 #' @return A `morie_effect_size`.
-#' @examples
-#' omega_squared(40, 160, 2, 1.5)
 #' @export
 omega_squared <- function(ss_effect, ss_total, df_effect, ms_error) {
   num   <- ss_effect - df_effect * ms_error
@@ -263,24 +315,11 @@ epsilon_squared <- function(ss_effect, ss_total, df_effect, ms_error) {
 # CONTINGENCY TABLE EFFECT SIZES
 # =====================================================================
 
-#' Odds ratio for a 2x2 table `[[a, b], [c, d]]`
+#' Odds ratio for a 2x2 table `\[\[a, b\], \[c, d\]\]`
 #'
-#' @param a,b,c,d Cell counts of the 2x2 table: a = exposed with outcome,
-#'   b = exposed without, c = unexposed with outcome, d = unexposed without.
+#' @param a,b,c,d Cell counts.
 #' @param confidence Confidence level. Default 0.95.
 #' @return A `morie_effect_size`.
-#' @examples
-#' # Cohort: 20/100 exposed and 10/100 unexposed develop the outcome.
-#' res <- odds_ratio(20, 80, 10, 90)
-#' res                          # rich print: estimate + CI
-#' res$estimate                 # (a*d)/(b*c) = 2.25
-#' c(lower = res$ci_lower, upper = res$ci_upper)
-#'
-#' # OR = 1 means no association; a CI excluding 1 is "significant".
-#' odds_ratio(50, 50, 50, 50)$estimate      # 1
-#'
-#' # `confidence` widens/narrows the interval.
-#' odds_ratio(20, 80, 10, 90, confidence = 0.99)$ci_upper
 #' @export
 odds_ratio <- function(a, b, c, d, confidence = 0.95) {
   or_val  <- if (b * c > 0) (a * d) / (b * c) else Inf
@@ -300,17 +339,6 @@ odds_ratio <- function(a, b, c, d, confidence = 0.95) {
 #'
 #' @inheritParams odds_ratio
 #' @return A `morie_effect_size`.
-#' @examples
-#' # Relative risk: risk in exposed / risk in unexposed.
-#' res <- risk_ratio(20, 80, 10, 90)
-#' res$estimate                 # (20/100) / (10/100) = 2
-#' c(lower = res$ci_lower, upper = res$ci_upper)
-#'
-#' # RR and OR agree for rare outcomes, diverge for common ones:
-#' c(RR = risk_ratio(20, 80, 10, 90)$estimate,
-#'   OR = odds_ratio(20, 80, 10, 90)$estimate)
-#'
-#' risk_ratio(20, 80, 10, 90, confidence = 0.90)$ci_upper
 #' @export
 risk_ratio <- function(a, b, c, d, confidence = 0.95) {
   p1 <- if ((a + b) > 0) a / (a + b) else 0
@@ -331,14 +359,6 @@ risk_ratio <- function(a, b, c, d, confidence = 0.95) {
 #'
 #' @inheritParams odds_ratio
 #' @return A `morie_effect_size`.
-#' @examples
-#' # Absolute difference in risk between exposed and unexposed.
-#' res <- risk_difference(20, 80, 10, 90)
-#' res$estimate                 # 0.20 - 0.10 = 0.10
-#' c(lower = res$ci_lower, upper = res$ci_upper)
-#'
-#' # RD = 0 means equal risk; sign shows direction.
-#' risk_difference(10, 90, 20, 80)$estimate     # -0.10 (exposed lower)
 #' @export
 risk_difference <- function(a, b, c, d, confidence = 0.95) {
   n1 <- a + b
@@ -358,13 +378,6 @@ risk_difference <- function(a, b, c, d, confidence = 0.95) {
 #'
 #' @inheritParams odds_ratio
 #' @return A `morie_effect_size`.
-#' @examples
-#' # Treatment lowers the bad outcome from 20% to 10% -> NNT = 1/0.10 = 10.
-#' res <- number_needed_to_treat(10, 90, 20, 80)
-#' res$estimate                 # patients to treat to prevent one event
-#'
-#' # NNT is the reciprocal of the (absolute) risk difference.
-#' 1 / abs(risk_difference(10, 90, 20, 80)$estimate)
 #' @export
 number_needed_to_treat <- function(a, b, c, d, confidence = 0.95) {
   rd_res <- risk_difference(a, b, c, d, confidence)
@@ -383,14 +396,6 @@ number_needed_to_treat <- function(a, b, c, d, confidence = 0.95) {
 #'
 #' @inheritParams odds_ratio
 #' @return A `morie_effect_size`.
-#' @examples
-#' # Exposure raises the bad outcome from 10% to 20% -> NNH = 1/0.10 = 10.
-#' res <- number_needed_to_harm(20, 80, 10, 90)
-#' res$estimate                 # people exposed to cause one extra harm
-#'
-#' # NNH is the reciprocal of the (absolute) risk difference, like NNT but
-#' # for a harmful exposure.
-#' 1 / abs(risk_difference(20, 80, 10, 90)$estimate)
 #' @export
 number_needed_to_harm <- function(a, b, c, d, confidence = 0.95) {
   result <- number_needed_to_treat(a, b, c, d, confidence)
@@ -405,8 +410,6 @@ number_needed_to_harm <- function(a, b, c, d, confidence = 0.95) {
 #' @param events2,person_time2 Events and person-time in group 2.
 #' @param confidence Confidence level. Default 0.95.
 #' @return A `morie_effect_size`.
-#' @examples
-#' rate_ratio(30, 1000, 15, 1000)
 #' @export
 rate_ratio <- function(events1, person_time1, events2, person_time2,
                          confidence = 0.95) {
@@ -485,12 +488,36 @@ cohens_f <- function(eta2) {
 }
 
 
+#' Cramer's V for a contingency table
+#'
+#' @param contingency_table Numeric matrix or table.
+#' @param confidence Confidence level. Default 0.95.
+#' @return A `morie_effect_size`.
+#' @examples
+#' tbl <- matrix(c(20, 10, 5, 25), nrow = 2)
+#' r <- cramers_v(tbl)
+#' r$estimate
+#' @export
+cramers_v <- function(contingency_table, confidence = 0.95) {
+  tbl <- as.matrix(contingency_table)
+  storage.mode(tbl) <- "double"
+  cs   <- suppressWarnings(chisq.test(tbl, correct = FALSE))
+  chi2 <- as.numeric(cs$statistic)
+  n    <- sum(tbl)
+  k    <- min(dim(tbl)) - 1
+  v    <- if (n * k > 0) sqrt(chi2 / (n * k)) else 0
+  # Bias-corrected V (Bergsma 2013).
+  v_bc <- max(0, v^2 - k * (nrow(tbl) - 1) / (n - 1))
+  v_bc <- if (v_bc > 0) sqrt(v_bc) else 0
+  effect_size_result("Cramer's V", v, n = as.integer(n),
+                      extra = list(bias_corrected_v = v_bc))
+}
+
+
 #' Phi coefficient for a 2x2 contingency table
 #'
 #' @param contingency_table 2x2 numeric matrix.
 #' @return A `morie_effect_size`.
-#' @examples
-#' phi_coefficient(matrix(c(20, 10, 15, 25), nrow = 2))
 #' @export
 phi_coefficient <- function(contingency_table) {
   tbl <- as.matrix(contingency_table)
@@ -512,12 +539,8 @@ phi_coefficient <- function(contingency_table) {
 
 #' Rank-biserial correlation (matched rank version)
 #'
-#' @param x,y Numeric vectors (NA dropped).
-#' @param confidence Confidence level for CI. Default 0.95.
+#' @inheritParams cohens_d
 #' @return A `morie_effect_size`.
-#' @examples
-#' set.seed(1)
-#' rank_biserial_correlation(rnorm(15), rnorm(15, 1))
 #' @export
 rank_biserial_correlation <- function(x, y, confidence = 0.95) {
   x <- .arr(x)
@@ -543,8 +566,7 @@ rank_biserial_correlation <- function(x, y, confidence = 0.95) {
 
 #' Cliff's delta
 #'
-#' @param x,y Numeric vectors (NA dropped).
-#' @param confidence Confidence level for CI. Default 0.95.
+#' @inheritParams cohens_d
 #' @return A `morie_effect_size`.
 #' @examples
 #' set.seed(1)
@@ -574,12 +596,8 @@ cliffs_delta <- function(x, y, confidence = 0.95) {
 
 #' Vargha-Delaney A statistic
 #'
-#' @param x,y Numeric vectors (NA dropped).
-#' @param confidence Confidence level for CI. Default 0.95.
+#' @inheritParams cohens_d
 #' @return A `morie_effect_size`.
-#' @examples
-#' set.seed(1)
-#' vargha_delaney_a(rnorm(15), rnorm(15, 1))
 #' @export
 vargha_delaney_a <- function(x, y, confidence = 0.95) {
   x <- .arr(x)
@@ -613,11 +631,6 @@ vargha_delaney_a <- function(x, y, confidence = 0.95) {
 #' @param X Predictor matrix or data.frame (n x p).
 #' @param y Outcome vector.
 #' @return A data.frame with columns `variable, beta, se, t, p_value`.
-#' @examples
-#' set.seed(1)
-#' X <- matrix(rnorm(60), nrow = 20)
-#' y <- X %*% c(0.5, -0.3, 0.2) + rnorm(20)
-#' standardized_coefficients(X, drop(y))
 #' @export
 standardized_coefficients <- function(X, y) {
   if (is.data.frame(X)) {
@@ -669,12 +682,8 @@ coefficient_of_variation <- function(x) {
 
 #' Variance ratio (F-test for equality of variances)
 #'
-#' @param x,y Numeric vectors (NA dropped).
-#' @param confidence Confidence level for CI. Default 0.95.
+#' @inheritParams cohens_d
 #' @return A `morie_effect_size`.
-#' @examples
-#' set.seed(1)
-#' variance_ratio(rnorm(20), rnorm(20, 0, 2))
 #' @export
 variance_ratio <- function(x, y, confidence = 0.95) {
   x <- .arr(x)
@@ -716,12 +725,6 @@ d_to_r <- function(d, n1 = NULL, n2 = NULL) {
 #' Convert Pearson r to Cohen's d
 #' @param r Pearson r.
 #' @return Numeric d.
-#' @srrstats {G3.0} Floating-point values are never compared for exact
-#'   equality: boundary tests use tolerance comparisons (e.g.
-#'   \code{abs(r) < 1} here) and convergence/agreement checks use
-#'   \code{all.equal()} or explicit \code{tol=} across the estimators.
-#' @examples
-#' r_to_d(0.3)
 #' @export
 r_to_d <- function(r) {
   if (abs(r) < 1) 2 * r / sqrt(1 - r^2) else sign(r) * Inf
@@ -730,8 +733,6 @@ r_to_d <- function(r) {
 #' Convert odds ratio to Cohen's d (Hasselblad & Hedges, 1995)
 #' @param or_val Odds ratio.
 #' @return Numeric d.
-#' @examples
-#' or_to_d(2.5)
 #' @export
 or_to_d <- function(or_val) {
   if (or_val > 0) log(or_val) * sqrt(3) / pi else 0
@@ -748,16 +749,12 @@ d_to_or <- function(d) exp(d * pi / sqrt(3))
 #' Convert OR to Pearson r via d
 #' @param or_val Odds ratio.
 #' @return Numeric r.
-#' @examples
-#' or_to_r(2.5)
 #' @export
 or_to_r <- function(or_val) d_to_r(or_to_d(or_val))
 
 #' Convert Pearson r to OR via d
 #' @param r Pearson r.
 #' @return Numeric OR.
-#' @examples
-#' r_to_or(0.3)
 #' @export
 r_to_or <- function(r) d_to_or(r_to_d(r))
 
@@ -822,8 +819,6 @@ fixed_effects_meta <- function(estimates, standard_errors,
 #' @param method Tau^2 estimator. Only `"DL"` implemented.
 #' @return A `morie_effect_size` with tau^2, I^2, Q, prediction
 #'   interval in `extra`.
-#' @examples
-#' random_effects_meta(c(0.20, 0.35, 0.15), c(0.08, 0.10, 0.07))
 #' @export
 random_effects_meta <- function(estimates, standard_errors,
                                   confidence = 0.95, method = "DL") {
@@ -875,8 +870,6 @@ i_squared <- function(estimates, standard_errors) {
 #'
 #' @inheritParams random_effects_meta
 #' @return Numeric c(lower, upper).
-#' @examples
-#' prediction_interval(c(0.20, 0.35, 0.15), c(0.08, 0.10, 0.07))
 #' @export
 prediction_interval <- function(estimates, standard_errors,
                                   confidence = 0.95) {

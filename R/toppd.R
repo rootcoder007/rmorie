@@ -3,7 +3,7 @@
 #' Top-p nucleus sampling (Holtzman 2020)
 #'
 #' @param x Numeric vector of logits.
-#' @param p Numeric nucleus mass cutoff in (0, 1] (default 0.9).
+#' @param p Numeric nucleus mass cutoff in (0, 1\] (default 0.9).
 #' @param temperature Numeric softmax temperature (default 1).
 #' @return Named list with tensor, keep_mask, n_kept, p, method.
 #' @keywords internal

@@ -148,7 +148,7 @@ morie_dominant_singularity_growth <- function(denominator,
 
 #' The basic transfer theorem
 #'
-#' \eqn{[x^n](1-x)^{-\alpha} = \binom{n+\alpha-1}{n}} exactly;
+#' \eqn{\[x^n\](1-x)^{-\alpha} = \binom{n+\alpha-1}{n}} exactly;
 #' \eqn{n^{\alpha-1}/\Gamma(\alpha)} asymptotically
 #' (Flajolet-Sedgewick Theorem VI.1), with the first-order correction
 #' \eqn{1 + \alpha(\alpha-1)/(2n)}.

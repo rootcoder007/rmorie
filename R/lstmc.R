@@ -3,7 +3,7 @@
 #' LSTM cell forward pass
 #'
 #' R parity for \code{morie.fn.lstmc.lstm_cell}.  Gates stacked as
-#' \code{[W_i; W_f; W_g; W_o]}.
+#' \code{\[W_i; W_f; W_g; W_o\]}.
 #'
 #' \deqn{f, i, o = \sigma(\ldots); \quad g = \tanh(\ldots); \quad
 #'       c = f \odot c_\text{prev} + i \odot g; \quad

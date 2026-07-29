@@ -13,7 +13,7 @@
 #' Marginal integration for a nonparametric additive model
 #'
 #' For \eqn{E(Y|X = x) = \mu + m_1(x^1) + \dots + m_d(x^d)} (3.5) with
-#' the location normalisation \eqn{E[m_j(X^j)] = 0} (3.6), which makes
+#' the location normalisation \eqn{E\[m_j(X^j)\] = 0} (3.6), which makes
 #' \eqn{\mu = E(Y)} (3.7) and
 #' \eqn{m_1(x^1) = \int E(Y|X = x)p_{-1}(x^{-1})dx^{-1} - \mu} (3.8).
 #' Replacing the conditional mean by the kernel estimator (3.9) and
@@ -23,7 +23,7 @@
 #' Hold the component of interest fixed, average the fitted surface
 #' over the OTHERS at their observed values, subtract the mean. The
 #' normalisation is what makes that meaningful: without
-#' \eqn{E[m_j] = 0} each component could absorb a constant and
+#' \eqn{E\[m_j\] = 0} each component could absorb a constant and
 #' \eqn{\mu} shed one, so nothing would be identified.
 #'
 #' \strong{This estimator carries the curse of dimensionality}, which
@@ -46,7 +46,7 @@
 #'   Linton and Nielsen (1995), Linton and Hardle (1996).
 #' @examples
 #' x <- matrix(runif(400, -1, 1), ncol = 2)
-#' y <- 2 + sin(pi * x[, 1]) + x[, 2]^2 - 1 / 3 + rnorm(200) * 0.2
+#' y <- 2 + sin(pi * x\[, 1\]) + x\[, 2\]^2 - 1 / 3 + rnorm(200) * 0.2
 #' morie_marginal_integration(x, y, j = 1)$smoothness_required
 #' @export
 morie_marginal_integration <- function(x, y, bandwidth = NULL, j = 1L,
@@ -150,7 +150,7 @@ morie_marginal_integration <- function(x, y, bandwidth = NULL, j = 1L,
 #' @param kappa series terms per component; \code{ceiling(n^(1/5))}
 #'   when NULL, at least 2.
 #' @param local_linear use the local-linear second stage.
-#' @param grid evaluation points on the rescaled [-1, 1] support.
+#' @param grid evaluation points on the rescaled \[-1, 1\] support.
 #' @return list: grid, m_hat, mu_hat, theta, kappa, bandwidth,
 #'   oracle_efficient, iterative, rate_exponent,
 #'   max_smoothing_dimension, curse_of_dimensionality, n, d, method.
@@ -158,7 +158,7 @@ morie_marginal_integration <- function(x, y, bandwidth = NULL, j = 1L,
 #'   Horowitz and Mammen (2004).
 #' @examples
 #' x <- matrix(runif(800, -1, 1), ncol = 2)
-#' y <- 2 + sin(pi * x[, 1]) + x[, 2]^2 - 1 / 3 + rnorm(400) * 0.2
+#' y <- 2 + sin(pi * x\[, 1\]) + x\[, 2\]^2 - 1 / 3 + rnorm(400) * 0.2
 #' morie_two_step_additive(x, y)$oracle_efficient
 #' @export
 morie_two_step_additive <- function(x, y, bandwidth = NULL, kappa = NULL,

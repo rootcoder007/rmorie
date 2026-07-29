@@ -269,7 +269,7 @@ morie_garch_var_es <- function(mu, sigma, alpha = 0.05, dist = "normal", nu = 8)
 #'   one-step SSE when NULL.
 #' @param horizon forecast horizon.
 #' @param damped logical; damp the trend.
-#' @param phi damping parameter in (0, 1].
+#' @param phi damping parameter in (0, 1\].
 #' @return list: forecast, level, trend, fitted, residuals, sse,
 #'   alpha, beta, damped, n.
 #' @references Hyndman, R. J. & Athanasopoulos, G. (2021).
@@ -349,7 +349,7 @@ morie_holt_linear <- function(y, alpha = NULL, beta = NULL, horizon = 1L,
 #' @examples
 #' set.seed(1)
 #' y <- rep(c(3, 1, -2, -4, -1, 2, 5, 4, 1, -1, -3, -5), 4) + seq_len(48) * 0.5 + 10
-#' morie_holt_winters(y, m = 12, horizon = 12)$forecast[1]
+#' morie_holt_winters(y, m = 12, horizon = 12)$forecast\[1\]
 #' @export
 morie_holt_winters <- function(y, alpha = NULL, beta = NULL, gamma = NULL,
                                m = 12L, horizon = 1L, seasonal = "additive") {

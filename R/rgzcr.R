@@ -1,7 +1,7 @@
 #' Zero-crossing rate -- Rangayyan Ch 5
 #'
 #' \deqn{\mathrm{ZCR} = (N-1)^{-1} \sum_{n=1}^{N-1}
-#'        \tfrac{1}{2} |\mathrm{sgn}(x[n]) - \mathrm{sgn}(x[n-1])|}{ZCR = (N-1)^-1 sum_n=1^N-1 (1)/(2) |sgn(x[n]) - sgn(x[n-1])|}
+#'        \tfrac{1}{2} |\mathrm{sgn}(x\[n\]) - \mathrm{sgn}(x\[n-1\])|}{ZCR = (N-1)^-1 sum_n=1^N-1 (1)/(2) |sgn(x\[n\]) - sgn(x\[n-1\])|}
 #'
 #' @param x Numeric vector.
 #' @param fs Sampling frequency (Hz). When `fs > 1`, also returns

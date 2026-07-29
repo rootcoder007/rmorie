@@ -37,7 +37,7 @@
 #'
 #' @param family one of "independence", "gaussian", "t", "clayton",
 #'   "gumbel", "frank", "joe", "plackett".
-#' @param u,v numeric vectors in [0, 1].
+#' @param u,v numeric vectors in \[0, 1\].
 #' @param theta copula parameter (rho for gaussian/t).
 #' @param nu degrees of freedom, t copula only.
 #' @return numeric vector of CDF values.
@@ -308,7 +308,7 @@ morie_blomqvist_beta <- function(family, theta = NULL, nu = NULL) {
 #' Gini's gamma from a copula
 #'
 #' Contrasts the copula's two diagonals:
-#' \eqn{\gamma = 4[\int C(u, 1-u) du - \int (u - C(u,u)) du]}.
+#' \eqn{\gamma = 4\[\int C(u, 1-u) du - \int (u - C(u,u)) du\]}.
 #' Mirrors \code{morie.fn.ginicop}.
 #'
 #' @param family copula family.
@@ -473,7 +473,7 @@ morie_copula_survival <- function(time1, event1, time2, event2,
 #' @examples
 #' set.seed(1)
 #' X <- matrix(rnorm(90), ncol = 3)
-#' X[1, ] <- 9
+#' X\[1, \] <- 9
 #' which.max(morie_copod(X)$scores)
 #' @export
 morie_copod <- function(X, skew_correction = TRUE) {

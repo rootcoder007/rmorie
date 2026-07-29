@@ -72,7 +72,7 @@ morie_dsp_hann_filter <- function(x, window = 5L) {
 #' set.seed(2)
 #' t <- seq(0, 199) / 200
 #' x <- sin(2 * pi * 4 * t) + rnorm(200, sd = 0.3)
-#' x[seq(20, 200, by = 20)] <- 10  # impulse contamination
+#' x\[seq(20, 200, by = 20)\] <- 10  # impulse contamination
 #' y <- morie_dsp_alpha_trimmed_mean(x, window = 9L, alpha = 0.3)
 #' head(y)
 #' @export
@@ -100,7 +100,7 @@ morie_dsp_alpha_trimmed_mean <- function(x, window = 5L, alpha = 0.2) {
 
 #' @noRd
 .morie_dsp_cpp_ok <- function(name) {
-  exists(name, envir = asNamespace("rmorie"), inherits = FALSE)
+  exists(name, envir = asNamespace("morie"), inherits = FALSE)
 }
 
 #' Median filter
@@ -176,7 +176,7 @@ morie_dsp_wiener_filter <- function(x, noise_psd = NULL,
 #'
 #' Least-mean-squares adaptive transversal filter. Returns the filter
 #' output `y` and instantaneous error `e = d - y`. Coefficient update:
-#' `w <- w + 2 * mu * e[i] * x_seg`.
+#' `w <- w + 2 * mu * e\[i\] * x_seg`.
 #'
 #' @param x Input (reference) vector.
 #' @param d Desired vector, same length as `x`.
@@ -189,9 +189,9 @@ morie_dsp_wiener_filter <- function(x, noise_psd = NULL,
 #' set.seed(1)
 #' n <- 1000
 #' x <- rnorm(n)
-#' d <- 0.5 * c(0, x[-n]) + 0.01 * rnorm(n)  # delayed, scaled target
+#' d <- 0.5 * c(0, x\[-n\]) + 0.01 * rnorm(n)  # delayed, scaled target
 #' out <- morie_dsp_lms(x, d, order = 4L, mu = 0.05)
-#' mean(out$e[801:1000]^2)  # post-convergence error is small
+#' mean(out$e\[801:1000\]^2)  # post-convergence error is small
 #' @export
 morie_dsp_lms <- function(x, d, order = 16L, mu = 0.01) {
   x <- as.numeric(x)
@@ -230,7 +230,7 @@ morie_dsp_lms <- function(x, d, order = 16L, mu = 0.01) {
 #' x <- rnorm(4000)
 #' d <- x + 0.01 * rnorm(4000)
 #' out <- morie_dsp_nlms(x, d, order = 8L, mu = 1.0)
-#' mean(out$e[3001:4000]^2)
+#' mean(out$e\[3001:4000\]^2)
 #' @export
 morie_dsp_nlms <- function(x, d, order = 16L, mu = 0.5, eps = 1e-8) {
   x <- as.numeric(x)
@@ -261,7 +261,7 @@ morie_dsp_nlms <- function(x, d, order = 16L, mu = 0.5, eps = 1e-8) {
 #' at the cost of O(order^2) per sample.
 #'
 #' @inheritParams morie_dsp_lms
-#' @param lam Forgetting factor in (0, 1]. Default 0.99.
+#' @param lam Forgetting factor in (0, 1\]. Default 0.99.
 #' @param delta Initial P diagonal. Default 100.
 #' @return List with `y`, `e`.
 #' @references Rangayyan & Krishnan (2015), Ch. 3, sec. 3.6;
@@ -271,7 +271,7 @@ morie_dsp_nlms <- function(x, d, order = 16L, mu = 0.5, eps = 1e-8) {
 #' x <- rnorm(1000)
 #' d <- x + 0.01 * rnorm(1000)
 #' out <- morie_dsp_rls(x, d, order = 8L, lam = 0.99)
-#' mean(out$e[200:400]^2)
+#' mean(out$e\[200:400\]^2)
 #' @export
 morie_dsp_rls <- function(x, d, order = 16L, lam = 0.99, delta = 100) {
   x <- as.numeric(x)
@@ -398,7 +398,7 @@ morie_dsp_matched <- function(x, template) {
 #' t <- seq.int(0, 99) / 100
 #' segs <- t(replicate(8, sin(2 * pi * 5 * t) + rnorm(100, sd = 0.3)))
 #' y <- morie_dsp_ensemble_average(segs)
-#' sd(y) < sd(segs[1, ])  # averaging reduces noise
+#' sd(y) < sd(segs\[1, \])  # averaging reduces noise
 #' @export
 morie_dsp_ensemble_average <- function(segments) {
   segments <- as.matrix(segments)
@@ -614,8 +614,6 @@ morie_dsp_even_odd <- function(x) {
 # ---- internal helpers -------------------------------------------------
 
 # "same"-mode convolution matching numpy.convolve(x, k, "same").
-#' Internal helper: Same Convolve
-#' @noRd
 .same_convolve <- function(x, k) {
   n <- length(x)
   m <- length(k)
