@@ -16,7 +16,7 @@ test_that("hmsdp: scaled dot-product attention matches anchor", {
 test_that("hmsatt: self-attention row sums to 1", {
   X <- matrix(c(1, 0, 0, 1), 2, 2, byrow = TRUE)
   I2 <- diag(2)
-  r <- morie_geron_self_attention(X, I2, I2, I2)
+  r <- morie_geron_self_attention_modules(X, I2, I2, I2)
   expect_equal(rowSums(r$attention), A4d$hmsatt$attn_row_sums, tolerance = tol)
   expect_equal(r$estimate, A4d$hmsatt$estimate, tolerance = tol)
 })
@@ -32,7 +32,7 @@ test_that("hmsac: soft actor-critic converges to the paying arm", {
 
 test_that("hmsae: stacked autoencoder reconstructs a line exactly", {
   X <- matrix(c(0, 0, 0.5, 0.5, 1, 1, 1.5, 1.5, 2, 2), ncol = 2, byrow = TRUE)
-  r <- morie_geron_stacked_autoencoder(X, hidden_sizes = c(1), epochs = 400, lr = 0.3)
+  r <- morie_geron_stacked_autoencoder_modules(X, hidden_sizes = c(1), epochs = 400, lr = 0.3)
   expect_equal(r$recon_error, A4d$hmsae$recon_error, tolerance = 1e-4)
 })
 

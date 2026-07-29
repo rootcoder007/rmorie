@@ -1381,7 +1381,7 @@ test_that("regularised regression costs share the MSE core", {
   X <- matrix(c(1, 2, 1, 3, 1, 5, 1, 7), 4, byrow = TRUE)
   y <- c(2, 3, 6, 9); th <- c(0.5, 1.1)
   p <- PY$grmse
-  r <- morie_geron_linreg_mse_cost(X, y, th)
+  r <- morie_geron_linreg_mse_cost_grmse(X, y, th)
   eqn(r$cost, p$cost); eqn(r$rmse, p$rmse)
   eqn(r$residuals, p$res); eqn(r$predictions, p$pred)
 
@@ -1405,14 +1405,14 @@ test_that("regularised regression costs share the MSE core", {
   eqn(r$cost, p$cost); eqn(r$l2_penalty, p$l2_penalty)
 
   p <- PY$grridg
-  r <- morie_geron_ridge_cost(X, y, th, 0.5)
+  r <- morie_geron_ridge_cost_grridg(X, y, th, 0.5)
   eqn(r$cost, p$cost); eqn(r$mse, p$mse); eqn(r$penalty, p$pen)
   eqn(r$gradient, p$grad)
   # independent route: central differences reproduce the ridge gradient
   fd <- vapply(1:2, function(j) {
     tp <- th; tm <- th; tp[j] <- tp[j] + 1e-6; tm[j] <- tm[j] - 1e-6
-    (morie_geron_ridge_cost(X, y, tp, 0.5)$cost -
-       morie_geron_ridge_cost(X, y, tm, 0.5)$cost) / 2e-6
+    (morie_geron_ridge_cost_grridg(X, y, tp, 0.5)$cost -
+       morie_geron_ridge_cost_grridg(X, y, tm, 0.5)$cost) / 2e-6
   }, numeric(1))
   eqn(fd, PY$grridg_fd$fd, tol = 1e-5)
   eqn(fd, r$gradient, tol = 1e-5)
@@ -1428,9 +1428,9 @@ test_that("regularised regression costs share the MSE core", {
   eqn(r$condition_number, p$cond, tol = 1e-6)
 
   p <- PY$grnorm
-  r <- morie_geron_normal_equation(X, y)
+  r <- morie_geron_normal_equation_grnorm(X, y)
   eqn(r$theta, p$theta); eqn(r$rss, p$rss); eqn(r$fitted, p$fitted)
-  eqn(morie_geron_normal_equation(X[, 2, drop = FALSE], y,
+  eqn(morie_geron_normal_equation_grnorm(X[, 2, drop = FALSE], y,
                                   add_intercept = TRUE)$theta, p$theta_i)
 
   p <- PY$grn007
@@ -1438,8 +1438,8 @@ test_that("regularised regression costs share the MSE core", {
   eqn(r$gradient, p$grad); eqn(r$grad_norm, p$norm)
   fd <- vapply(1:2, function(j) {
     tp <- th; tm <- th; tp[j] <- tp[j] + 1e-6; tm[j] <- tm[j] - 1e-6
-    (morie_geron_linreg_mse_cost(X, y, tp)$cost -
-       morie_geron_linreg_mse_cost(X, y, tm)$cost) / 2e-6
+    (morie_geron_linreg_mse_cost_grmse(X, y, tp)$cost -
+       morie_geron_linreg_mse_cost_grmse(X, y, tm)$cost) / 2e-6
   }, numeric(1))
   eqn(fd, PY$grn007_fd$fd, tol = 1e-5)
   eqn(fd, r$gradient, tol = 1e-5)
@@ -1486,7 +1486,7 @@ test_that("linear and logistic prediction heads match Python", {
     4.85, 4.91e-05, c(1000, 50000))$life_satisfaction, p$vec)
 
   p <- PY$grsig
-  r <- morie_geron_sigmoid(c(-2, 0, 3))
+  r <- morie_geron_sigmoid_grsig(c(-2, 0, 3))
   eqn(r$sigma, p$sigma); eqn(r$derivative, p$deriv)
 
   p <- PY$grlogp
@@ -1539,7 +1539,7 @@ test_that("softmax chain matches Python end to end", {
   testthat::expect_equal(sum(r$probabilities), 1)
 
   p <- PY$grsmxs
-  r <- morie_geron_softmax_score(p$in_X, p$in_Th)
+  r <- morie_geron_softmax_score_grsmxs(p$in_X, p$in_Th)
   eqn(r$scores, p$scores); eqd(r$scores, p$scores); eqi(r$argmax, p$am)
 
   p <- PY$grsmxp
@@ -1678,7 +1678,7 @@ test_that("tree, forest and boosting routines match Python", {
   eqi(r$counts, p$counts); eqn(r$max_possible, p$max_possible)
 
   p <- PY$grgin
-  r <- morie_geron_gini_impurity(c(0, 0, 1, 1, 1, 2))
+  r <- morie_geron_gini_impurity_grgin(c(0, 0, 1, 1, 1, 2))
   eqn(r$gini, p$gini); eqn(r$proportions, p$proportions)
   eqn(r$max_possible, p$max_possible); eqi(r$majority_class, p$majority_class)
 
@@ -1746,19 +1746,19 @@ test_that("preprocessing and encoders match Python", {
   eqn(r$data_max, p$max); eqn(r$scale, p$scale)
 
   p <- PY$grstd
-  r <- morie_geron_standardization(PY$grmms$in_X)
+  r <- morie_geron_standardization_grstd(PY$grmms$in_X)
   eqn(r$scaled, p$Z); eqn(r$mean, p$mu); eqn(r$scale, p$sd)
-  r1 <- morie_geron_standardization(PY$grmms$in_X, ddof = 1)
+  r1 <- morie_geron_standardization_grstd(PY$grmms$in_X, ddof = 1)
   eqn(r1$scaled, p$Z1); eqn(r1$scale, p$sd1)
 
   p <- PY$grohe
-  r <- morie_geron_one_hot_encoding(c("b", "a", "c", "a"))
+  r <- morie_geron_one_hot_encoding_grohe(c("b", "a", "c", "a"))
   eqn(r$encoded, p$M); testthat::expect_identical(r$levels, p$levels)
-  r2 <- morie_geron_one_hot_encoding(c("b", "a", "c", "a"), drop_first = TRUE)
+  r2 <- morie_geron_one_hot_encoding_grohe(c("b", "a", "c", "a"), drop_first = TRUE)
   eqn(r2$encoded, p$M2); testthat::expect_identical(r2$columns, p$cols2)
 
   p <- PY$grord
-  r <- morie_geron_ordinal_encoding(c("b", "a", "c", "a"))
+  r <- morie_geron_ordinal_encoding_grord(c("b", "a", "c", "a"))
   eqi(r$encoded, p$enc); testthat::expect_identical(r$levels, p$levels)
 
   p <- PY$grpoly
@@ -1955,7 +1955,7 @@ test_that("neural layers, cells and blocks match Python", {
   eqn(r$batch_megabytes, p$batch_mb)
 
   p <- PY$grhbb
-  r <- morie_geron_hebb_rule(c(1, 2), c(1, 0), c(0, 1),
+  r <- morie_geron_hebb_rule_grhbb(c(1, 2), c(1, 0), c(0, 1),
                              matrix(c(0.5, 0.5, 1, -1), 2, byrow = TRUE), 0.1)
   eqn(r$w_new, p$w_new); eqn(r$delta_w, p$delta_w); eqn(r$error, p$error)
   testthat::expect_identical(r$converged, p$converged)
@@ -2192,7 +2192,7 @@ test_that("optimizers, schedules and initializers match Python", {
   testthat::expect_lt(abs(bign$achieved_variance - p$bt), 3 * se)
 
   p <- PY$grgcl
-  r <- morie_geron_gradient_clipping(p$in_g, 5)
+  r <- morie_geron_gradient_clipping_grgcl(p$in_g, 5)
   eqn(r$clipped, p$clipped); eqn(r$total_norm, p$total_norm)
   eqn(r$clipped_norm, p$clipped_norm); eqn(r$clip_coef, p$clip_coef)
   eqn(r$cosine_with_original, p$cos)
@@ -2200,7 +2200,7 @@ test_that("optimizers, schedules and initializers match Python", {
   # independent route: norm capped and direction untouched
   testthat::expect_lte(r$clipped_norm, 5 * (1 + 1e-9))
   eqn(r$cosine_with_original, 1)
-  r2 <- morie_geron_gradient_clipping(p$in_g, 500)
+  r2 <- morie_geron_gradient_clipping_grgcl(p$in_g, 500)
   eqn(r2$clipped_norm, p$noclip_norm)
   testthat::expect_false(r2$was_clipped)
 
@@ -2417,12 +2417,12 @@ test_that("detection, overfitting and misc routines match Python", {
   eqi(r$overfitting_epochs, p$oe)
 
   p <- PY$grmae
-  r <- morie_geron_mae(c(1, 2, 3, 4), c(1.5, 1, 3.5, 2))
+  r <- morie_geron_mae_grmae(c(1, 2, 3, 4), c(1.5, 1, 3.5, 2))
   eqn(r$mae, p$mae); eqn(r$rmse, p$rmse); eqn(r$max_error, p$max)
   eqn(r$median_absolute_error, p$med); eqn(r$residuals, p$res)
 
   p <- PY$grrmse
-  r <- morie_geron_rmse(c(1, 2, 3), c(1.5, 1, 3.5))
+  r <- morie_geron_rmse_grrmse(c(1, 2, 3), c(1.5, 1, 3.5))
   eqn(r$rmse, p$rmse); eqn(r$mse, p$mse); eqn(r$mae, p$mae)
   eqn(r$max_error, p$max)
 })

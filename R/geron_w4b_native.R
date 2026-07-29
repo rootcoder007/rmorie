@@ -95,7 +95,7 @@ morie_geron_gru <- function(x_t, h_prev, weights) {
 #' @param fan_in,fan_out Layer widths. @param seed Seed. @param distribution "normal" or "uniform".
 #' @return List with W, std_target, var_target, limit, empirical_std, estimate, n, method.
 #' @export
-morie_geron_he_init <- function(fan_in, seed = 0, fan_out = NULL, distribution = "normal") {
+morie_geron_he_init_hmhei <- function(fan_in, seed = 0, fan_out = NULL, distribution = "normal") {
   n_in <- as.integer(fan_in)
   .morie_gr_need(n_in >= 1L, "geron_he_init: fan_in must be a positive integer")
   n_out <- if (is.null(fan_out)) n_in else as.integer(fan_out)
@@ -496,7 +496,7 @@ morie_geron_hyperparameter_tuning <- function(param_grid, X, y, estimator = NULL
 #' @param query Query input. @param candidates Optional label set. @param template,separator Prompt assembly.
 #' @return List with prediction, prompt, log_probs, posterior, n_shot, candidates, estimate, n, method.
 #' @export
-morie_geron_in_context_learning <- function(model, examples, query, candidates = NULL,
+morie_geron_in_context_learning_hmicl <- function(model, examples, query, candidates = NULL,
                                              template = "{x} -> {y}", separator = "\n") {
   .morie_gr_need(is.function(model), "geron_in_context_learning: model must be callable")
   pairs <- examples
@@ -534,7 +534,7 @@ morie_geron_in_context_learning <- function(model, examples, query, candidates =
 #' @return List with information_gain, parent_entropy, child_entropy, weighted_child_entropy,
 #'   intrinsic_information, gain_ratio, estimate, n, method.
 #' @export
-morie_geron_information_gain <- function(y, split) {
+morie_geron_information_gain_hmigr <- function(y, split) {
   yy <- as.vector(y); ss <- as.vector(split)
   .morie_gr_need(length(yy) > 0L, "geron_information_gain: y is empty")
   .morie_gr_need(length(yy) == length(ss), "geron_information_gain: y/split length mismatch")
@@ -986,7 +986,7 @@ morie_geron_kernel_pca_from_gram <- function(K, n_components) {
 #' @param X Data. @param n_components Components. @param gamma Kernel width (default 1/n_features).
 #' @return List with X_projected, eigenvalues, alphas, K, explained_variance_ratio, gamma, estimate, n, method.
 #' @export
-morie_geron_kernel_pca_rbf <- function(X, n_components, gamma = NULL) {
+morie_geron_kernel_pca_rbf_hmkprbf <- function(X, n_components, gamma = NULL) {
   A <- as.matrix(X); storage.mode(A) <- "double"
   m <- nrow(A); n_feat <- ncol(A)
   g <- if (is.null(gamma)) 1 / n_feat else as.numeric(gamma)
@@ -1044,7 +1044,7 @@ morie_geron_kernel_pca_sigmoid <- function(X, n_components, gamma = NULL, coef0 
        gamma = g, coef0 = c0, estimate = core$eigenvalues[1], n = m, method = "Kernel PCA (sigmoid kernel)")
 }
 
-# ---------------------------------------------------------------- 23. hmkrn (delegates to morie_geron_he_init)
+# ---------------------------------------------------------------- 23. hmkrn (delegates to morie_geron_he_init_hmhei)
 
 #' Convolutional filter tensor, He-initialised (Geron Ch 12, morie.fn hmkrn)
 #' @param kh,kw Kernel height/width. @param c_in,c_out Channels. @param seed Seed. @param init "he" or "zeros".
@@ -1056,7 +1056,7 @@ morie_geron_filter_kernel <- function(kh, kw, c_in, c_out, seed = 0, init = "he"
   .morie_gr_need(init %in% c("he", "zeros"), "geron_filter_kernel: init must be 'he' or 'zeros'")
   fan_in <- h * w * ci
   if (init == "zeros") { Kt <- array(0, dim = c(h, w, ci, co)); std <- 0 } else {
-    flat <- morie_geron_he_init(fan_in, seed = as.integer(seed), fan_out = co)
+    flat <- morie_geron_he_init_hmhei(fan_in, seed = as.integer(seed), fan_out = co)
     std <- flat$std_target
     # row-major (numpy C-order) reshape of the (fan_in, co) weight stream into (h, w, ci, co):
     # fill the reversed-dim array column-major (co fastest), then permute axes back.
@@ -1169,7 +1169,7 @@ morie_geron_l2_regularization <- function(theta, alpha, skip_bias = FALSE, eta =
 #' @param X,y Data. @param theta Coefficients. @param alpha L1 strength. @param skip_bias Exclude theta[1].
 #' @return List with cost, mse, penalty, gradient, n_zero, estimate, n, method.
 #' @export
-morie_geron_lasso_cost <- function(X, y, theta, alpha, skip_bias = FALSE) {
+morie_geron_lasso_cost_hmlaso <- function(X, y, theta, alpha, skip_bias = FALSE) {
   A <- as.matrix(X); storage.mode(A) <- "double"
   yy <- as.numeric(y); t <- as.numeric(theta)
   .morie_gr_need(length(yy) == nrow(A), "geron_lasso_cost: X/y mismatch")
@@ -1194,7 +1194,7 @@ morie_geron_lasso_cost <- function(X, y, theta, alpha, skip_bias = FALSE) {
 #' @param fit,predict Optional callables (default OLS via lstsq). @param seed Split seed.
 #' @return List with train_sizes, rmse_train, rmse_val, final_gap, verdict, estimate, n, method.
 #' @export
-morie_geron_learning_curves <- function(X, y, n_splits = 10, val_fraction = 0.2, fit = NULL, predict = NULL, seed = 0) {
+morie_geron_learning_curves_hmlcv <- function(X, y, n_splits = 10, val_fraction = 0.2, fit = NULL, predict = NULL, seed = 0) {
   A <- as.matrix(X); storage.mode(A) <- "double"
   yy <- as.numeric(y)
   .morie_gr_need(nrow(A) == length(yy), "geron_learning_curves: X/y mismatch")
@@ -1384,7 +1384,7 @@ morie_geron_lenet5 <- function(n_classes = 10, input_size = 32, in_channels = 1)
 #' @param x Matrix (m,d) or vector. @param gamma,beta Per-feature scale/shift. @param eps Variance floor.
 #' @return List with y, x_hat, mu, var, estimate, n, method.
 #' @export
-morie_geron_layer_normalization <- function(x, gamma = 1.0, beta = 0.0, eps = 1e-5) {
+morie_geron_layer_normalization_hmlntr <- function(x, gamma = 1.0, beta = 0.0, eps = 1e-5) {
   X <- if (is.null(dim(x))) matrix(as.numeric(x), nrow = 1) else as.matrix(x)
   storage.mode(X) <- "double"
   .morie_gr_need(all(is.finite(X)), "geron_layer_normalization: x contains non-finite values")
@@ -1401,7 +1401,7 @@ morie_geron_layer_normalization <- function(x, gamma = 1.0, beta = 0.0, eps = 1e
        method = "Layer normalization (per-sample, across features)")
 }
 
-# ---------------------------------------------------------------- 31. hmlnr (delegates to morie_geron_layer_normalization)
+# ---------------------------------------------------------------- 31. hmlnr (delegates to morie_geron_layer_normalization_hmlntr)
 
 #' Layer normalization inside an RNN cell (Geron Ch 13, morie.fn hmlnr)
 #' @param x Pre-activations (T, n_units). @param gamma,beta Scale/shift. @param eps Variance floor. @param activation tanh/relu/none.
@@ -1409,7 +1409,7 @@ morie_geron_layer_normalization <- function(x, gamma = 1.0, beta = 0.0, eps = 1e
 #' @export
 morie_geron_layer_norm_rnn <- function(x, gamma = 1.0, beta = 0.0, eps = 1e-5, activation = "tanh") {
   .morie_gr_need(activation %in% c("tanh", "relu", "none"), "geron_layer_norm_rnn: bad activation")
-  inner <- morie_geron_layer_normalization(x, gamma = gamma, beta = beta, eps = eps)
+  inner <- morie_geron_layer_normalization_hmlntr(x, gamma = gamma, beta = beta, eps = eps)
   z <- inner$y
   h <- if (activation == "tanh") tanh(z) else if (activation == "relu") pmax(z, 0) else z
   list(h = h, normalized = inner$x_hat, pre_activation = z, mu = inner$mu, var = inner$var,
@@ -1422,7 +1422,7 @@ morie_geron_layer_norm_rnn <- function(x, gamma = 1.0, beta = 0.0, eps = 1e-5, a
 #' @param X Data. @param n_neighbors Neighbourhood size k. @param contamination Optional outlier fraction.
 #' @return List with lof, lrd, k_distance, neighbors, is_outlier, estimate, n, method.
 #' @export
-morie_geron_local_outlier_factor <- function(X, n_neighbors = 20, contamination = NULL) {
+morie_geron_local_outlier_factor_hmlof <- function(X, n_neighbors = 20, contamination = NULL) {
   A <- as.matrix(X); storage.mode(A) <- "double"
   m <- nrow(A); k <- as.integer(n_neighbors)
   .morie_gr_need(k >= 1L && k < m, "geron_local_outlier_factor: n_neighbors out of range")

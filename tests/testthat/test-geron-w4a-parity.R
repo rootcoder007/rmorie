@@ -138,10 +138,10 @@ test_that("hmgmm: EM Gaussian mixture recovers the two clusters, matches Python"
 })
 
 test_that("hmdrp: inverted dropout matches Python at p=0 and p=0.5", {
-  r <- morie_geron_dropout(c(1, 2, 3), p = 0.0)
+  r <- morie_geron_dropout_alt(c(1, 2, 3), p = 0.0)
   expect_equal(r$y, A4a$hmdrp$y_p0)
   expect_equal(r$n_dropped, A4a$hmdrp$n_dropped_p0)
-  r2 <- morie_geron_dropout(c(4, 4, 4, 4), p = 0.5, seed = 7)
+  r2 <- morie_geron_dropout_alt(c(4, 4, 4, 4), p = 0.5, seed = 7)
   expect_equal(r2$scale, A4a$hmdrp$scale_p5)
   expect_equal(r2$y, A4a$hmdrp$y_p5)
   # independent route: E[y] = x under inverted dropout (checked on the survivors).
@@ -232,7 +232,7 @@ test_that("hmdld: DataLoader batch plan and Fisher-Yates shuffle match Python", 
 })
 
 test_that("hmdldqn: Dueling DQN gradient split matches Python", {
-  r <- morie_geron_dueling_dqn(NULL, 0.0, matrix(c(0, 0), 1, 2), list(list(0, 0, 1.0, 0, TRUE)), epochs = 1, lr = 1.0)
+  r <- morie_geron_dueling_dqn_alt(NULL, 0.0, matrix(c(0, 0), 1, 2), list(list(0, 0, 1.0, 0, TRUE)), epochs = 1, lr = 1.0)
   expect_equal(round(r$V[1], 6), A4a$hmdldqn$V0)
   expect_equal(round(r$A[1, ], 6), A4a$hmdldqn$A0)
   expect_equal(round(r$Q[1, ], 6), A4a$hmdldqn$Q0)
@@ -253,13 +253,13 @@ test_that("hmdpo: DPO loss matches Python", {
 })
 
 test_that("hmdqnt: dynamic quantization matches Python", {
-  r <- morie_geron_dynamic_quantization(list(W = c(-1, 0, 1)))
+  r <- morie_geron_dynamic_quantization_alt(list(W = c(-1, 0, 1)))
   expect_equal(round(r$scales$W, 12), A4a$hmdqnt$scale_w)
   expect_equal(r$quantized$W, A4a$hmdqnt$quant_w)
   expect_equal(r$compression, A4a$hmdqnt$compression)
-  r2 <- morie_geron_dynamic_quantization(list(W = c(-0.3, 0, 0.9)))
+  r2 <- morie_geron_dynamic_quantization_alt(list(W = c(-0.3, 0, 0.9)))
   expect_equal(r2$zero_points$W, A4a$hmdqnt$zero_point)
-  r3 <- morie_geron_dynamic_quantization(list(W = 1.0), activations = c(0, 2))
+  r3 <- morie_geron_dynamic_quantization_alt(list(W = 1.0), activations = c(0, 2))
   expect_equal(round(r3$activation$scale, 12), A4a$hmdqnt$act_scale)
   # independent route: symmetric scale is amax/127.
   expect_equal(round(r$scales$W, 12), round(1 / 127, 12))
@@ -331,10 +331,10 @@ test_that("hmeaf: error analysis matches Python", {
 
 test_that("hmearl: early stopping keeps the best snapshot, matches Python", {
   Xt <- matrix(c(0, 1, 2, 3), 4, 1); yt <- c(0, 2, 4, 6)
-  r <- morie_geron_early_stopping(Xt, yt, matrix(c(4, 5), 2, 1), c(8, 10), n_iter = 200, eta = 0.05)
+  r <- morie_geron_early_stopping_alt(Xt, yt, matrix(c(4, 5), 2, 1), c(8, 10), n_iter = 200, eta = 0.05)
   expect_equal(r$best_iter == 200, A4a$hmearl$best_iter_eq_200)
   expect_equal(round(r$theta[2], 2), A4a$hmearl$theta1_round2)
-  r2 <- morie_geron_early_stopping(Xt, yt, matrix(c(0, 1), 2, 1), c(3, 3), n_iter = 200, eta = 0.05)
+  r2 <- morie_geron_early_stopping_alt(Xt, yt, matrix(c(0, 1), 2, 1), c(3, 3), n_iter = 200, eta = 0.05)
   expect_equal(r2$is_u_shaped, A4a$hmearl$u_shaped)
   expect_equal(r2$best_iter < 200, A4a$hmearl$best_lt_200)
   # independent route: the best snapshot's val RMSE can never exceed the final one.
@@ -342,7 +342,7 @@ test_that("hmearl: early stopping keeps the best snapshot, matches Python", {
 })
 
 test_that("hmeg: epsilon-greedy distribution matches Python", {
-  r <- morie_geron_epsilon_greedy(matrix(c(1, 5, 2), 1, 3), s = 0, epsilon = 0.3)
+  r <- morie_geron_epsilon_greedy_alt(matrix(c(1, 5, 2), 1, 3), s = 0, epsilon = 0.3)
   expect_equal(round(r$probabilities, 12), A4a$hmeg$probs)
   expect_equal(r$greedy_action, A4a$hmeg$greedy)
   # independent route: probabilities always sum to 1.
@@ -379,10 +379,10 @@ test_that("hmenet: elastic net cost matches Python", {
 })
 
 test_that("hmevr: explained variance ratio matches Python", {
-  r <- morie_geron_explained_variance_ratio(matrix(c(1, 1, 2, 2, 3, 3), 3, 2, byrow = TRUE))
+  r <- morie_geron_explained_variance_ratio_alt(matrix(c(1, 1, 2, 2, 3, 3), 3, 2, byrow = TRUE))
   expect_equal(round(r$explained_variance_ratio, 12), A4a$hmevr$evr1)
   Y <- matrix(c(-2, -1, 2, 1, -2, 1, 2, -1), 4, 2, byrow = TRUE)
-  r2 <- morie_geron_explained_variance_ratio(Y)
+  r2 <- morie_geron_explained_variance_ratio_alt(Y)
   expect_equal(round(r2$explained_variance_ratio, 12), A4a$hmevr$evr2)
   expect_equal(round(r2$explained_variance, 12), A4a$hmevr$var2)
   # independent route: ratios always sum to 1.
@@ -396,12 +396,12 @@ test_that("hmext: extra-trees ensemble matches Python", {
 })
 
 test_that("hmf1: F1 score matches Python", {
-  r <- morie_geron_f1_score(c(0, 0, 1, 1), c(0, 1, 1, 1))
+  r <- morie_geron_f1_score_alt(c(0, 0, 1, 1), c(0, 1, 1, 1))
   expect_equal(round(r$precision, 6), A4a$hmf1$precision)
   expect_equal(round(r$recall, 6), A4a$hmf1$recall)
   expect_equal(round(r$f1, 6), A4a$hmf1$f1)
   expect_equal(c(r$tp, r$fp, r$fn), c(A4a$hmf1$tp, A4a$hmf1$fp, A4a$hmf1$fn))
-  r2 <- morie_geron_f1_score(c(0, 0, 1, 1), c(0, 1, 1, 1), average = "macro")
+  r2 <- morie_geron_f1_score_alt(c(0, 0, 1, 1), c(0, 1, 1, 1), average = "macro")
   expect_equal(round(r2$f1, 6), A4a$hmf1$macro_f1)
   # independent route: F1 is the harmonic mean of precision and recall.
   expect_equal(r$f1, 2 * r$precision * r$recall / (r$precision + r$recall), tolerance = 1e-9)
