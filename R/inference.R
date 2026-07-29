@@ -20,7 +20,7 @@ NULL
 #' @param x2 Numeric vector (group 2).
 #' @param equal_var Assume equal variances? Default `FALSE` (Welch test).
 #' @param alternative `"two.sided"`, `"greater"`, or `"less"`.
-#' @return Named list: `t`, `df`, `p_value`, `ci_diff`, `morie_cohens_d`.
+#' @return Named list: `t`, `df`, `p_value`, `ci_diff`, `cohens_d`.
 #' @export
 #' @examples
 #' morie_two_sample_t_test(rnorm(50, 0.5), rnorm(50, 0))
@@ -32,13 +32,19 @@ morie_two_sample_t_test <- function(x1, x2,
     var.equal = equal_var,
     alternative = alternative
   )
-  d <- morie_cohens_d(x1, x2)
+  # Pooled Cohen's d, inlined (was morie_cohens_d).
+  n1 <- sum(!is.na(x1))
+  n2 <- sum(!is.na(x2))
+  s1 <- stats::sd(x1, na.rm = TRUE)
+  s2 <- stats::sd(x2, na.rm = TRUE)
+  sd_pool <- sqrt(((n1 - 1) * s1^2 + (n2 - 1) * s2^2) / (n1 + n2 - 2))
+  d <- (mean(x1, na.rm = TRUE) - mean(x2, na.rm = TRUE)) / sd_pool
   list(
     t = as.numeric(result$statistic),
     df = as.numeric(result$parameter),
     p_value = result$p.value,
     ci_diff = as.numeric(result$conf.int),
-    morie_cohens_d = d
+    cohens_d = d
   )
 }
 
@@ -71,7 +77,7 @@ morie_one_sample_t_test <- function(x, mu0 = 0,
 #' @return Named list: `t`, `df`, `p_value`, `ci_diff`, `mean_diff`.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_paired_t_test <- function(x1, x2,
                                 alternative = c("two.sided", "greater", "less")) {
@@ -90,15 +96,20 @@ morie_paired_t_test <- function(x1, x2,
 #'
 #' @param observed Observed counts (matrix for independence, vector for GOF).
 #' @param expected Expected counts for GOF (optional; uniform if NULL).
-#' @return Named list: `chi_sq`, `df`, `p_value`, `morie_cramers_v`.
+#' @return Named list: `chi_sq`, `df`, `p_value`, `cramers_v`.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_chi_square_test <- function(observed, expected = NULL) {
   if (is.matrix(observed) || is.data.frame(observed)) {
-    result <- stats::chisq.test(observed)
-    v <- morie_cramers_v(as.matrix(observed))
+    m <- as.matrix(observed)
+    result <- stats::chisq.test(m)
+    # Cramer's V, inlined (was morie_cramers_v).
+    chi2 <- as.numeric(result$statistic)
+    n_tot <- sum(m)
+    k <- min(nrow(m), ncol(m))
+    v <- sqrt(chi2 / (n_tot * (k - 1)))
   } else {
     result <- if (is.null(expected)) {
       stats::chisq.test(observed)
@@ -111,7 +122,7 @@ morie_chi_square_test <- function(observed, expected = NULL) {
     chi_sq = as.numeric(result$statistic),
     df = as.numeric(result$parameter),
     p_value = result$p.value,
-    morie_cramers_v = v
+    cramers_v = v
   )
 }
 
@@ -122,7 +133,7 @@ morie_chi_square_test <- function(observed, expected = NULL) {
 #' @return Named list: `odds_ratio`, `ci`, `p_value`.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_fisher_exact_test <- function(table_2x2,
                               alternative = c("two.sided", "greater", "less")) {
@@ -139,7 +150,7 @@ morie_fisher_exact_test <- function(table_2x2,
 #'
 #' @param ... Numeric vectors, one per group.
 #' @return Named list: `F`, `df_between`, `df_within`, `p_value`,
-#'   `morie_eta_squared`.
+#'   `eta_squared`.
 #' @export
 #' @examples
 #' morie_anova_one_way(rnorm(30, 0), rnorm(30, 0.5), rnorm(30, 1))
@@ -161,7 +172,7 @@ morie_anova_one_way <- function(...) {
     df_between = df_b,
     df_within = df_w,
     p_value = s["grp", "Pr(>F)"],
-    morie_eta_squared = ss_b / ss_t
+    eta_squared = ss_b / ss_t
   )
 }
 
@@ -171,7 +182,7 @@ morie_anova_one_way <- function(...) {
 #' @return Named list: `H`, `df`, `p_value`.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_kruskal_wallis_test <- function(...) {
   groups <- list(...)
@@ -194,7 +205,7 @@ morie_kruskal_wallis_test <- function(...) {
 #' @return Named list: `W`, `p_value`, `r` (effect size).
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_mann_whitney_test <- function(x1, x2,
                                     alternative = c("two.sided", "greater", "less")) {
@@ -217,7 +228,7 @@ morie_mann_whitney_test <- function(x1, x2,
 #' @return Named list: `V`, `p_value`.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_wilcoxon_signed_rank_test <- function(x1, x2,
                                       alternative = c("two.sided", "greater", "less")) {
@@ -252,7 +263,7 @@ morie_shapiro_wilk_test <- function(x, alpha = 0.05) {
 #' @return Named list: `F`, `p_value`.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_levene_test <- function(...) {
   groups <- list(...)
@@ -316,7 +327,7 @@ morie_proportion_ci <- function(successes, n, alpha = 0.05,
 #' @return Named list: `or`, `ci_lower`, `ci_upper`, `p_value`.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_odds_ratio_ci <- function(table_2x2, alpha = 0.05) {
   m <- as.matrix(table_2x2)
@@ -336,7 +347,7 @@ morie_odds_ratio_ci <- function(table_2x2, alpha = 0.05) {
 #' @return Named list: `rr`, `ci_lower`, `ci_upper`.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_risk_ratio_ci <- function(table_2x2, alpha = 0.05) {
   m <- as.matrix(table_2x2)
@@ -365,7 +376,7 @@ morie_risk_ratio_ci <- function(table_2x2, alpha = 0.05) {
 #' @return Named list: `rd`, `ci_lower`, `ci_upper`.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_risk_difference_ci <- function(table_2x2, alpha = 0.05) {
   # Newcombe (1998) hybrid score CI:
@@ -415,72 +426,11 @@ morie_risk_difference_ci <- function(table_2x2, alpha = 0.05) {
 # Effect sizes
 # ---------------------------------------------------------------------------
 
-#' Cohen's d effect size
-#'
-#' @param x1 Numeric vector (group 1).
-#' @param x2 Numeric vector (group 2).
-#' @param pooled Use pooled SD (default `TRUE`). If `FALSE`, uses `sd(x2)`.
-#' @return Numeric Cohen's d.
-#' @examples
-#' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
-#' @export
-morie_cohens_d <- function(x1, x2, pooled = TRUE) {
-  m1 <- mean(x1, na.rm = TRUE)
-  m2 <- mean(x2, na.rm = TRUE)
-  n1 <- sum(!is.na(x1))
-  n2 <- sum(!is.na(x2))
-  s1 <- stats::sd(x1, na.rm = TRUE)
-  s2 <- stats::sd(x2, na.rm = TRUE)
-  sd_denom <- if (pooled) {
-    sqrt(((n1 - 1) * s1^2 + (n2 - 1) * s2^2) / (n1 + n2 - 2))
-  } else {
-    s2
-  }
-  (m1 - m2) / sd_denom
-}
-
-#' Hedges' g (bias-corrected Cohen's d)
-#'
-#' @inheritParams morie_cohens_d
-#' @return Numeric Hedges' g.
-#' @examples
-#' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
-#' @export
-morie_hedges_g <- function(x1, x2) {
-  d <- morie_cohens_d(x1, x2, pooled = TRUE)
-  n1 <- sum(!is.na(x1))
-  n2 <- sum(!is.na(x2))
-  m <- n1 + n2 - 2  # degrees of freedom
-  if (m <= 0) return(d)
-  # Exact gamma-based small-sample correction (Hedges 1981):
-  # J(m) = Gamma(m/2) / (sqrt(m/2) * Gamma((m-1)/2))
-  # Matches Python inference.py:hedges_g; the older 1 - 3/(4m-1)
-  # approximation diverged from this at small m.
-  log_J <- lgamma(m / 2) - 0.5 * log(m / 2) - lgamma((m - 1) / 2)
-  d * exp(log_J)
-}
-
-#' Eta-squared from F-statistic
+#' Omega-squared (less biased than eta-squared)
 #'
 #' @param f_stat F statistic.
 #' @param df_between Degrees of freedom (numerator).
 #' @param df_within Degrees of freedom (denominator).
-#' @return Numeric eta-squared.
-#' @examples
-#' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
-#' @export
-morie_eta_squared <- function(f_stat, df_between, df_within) {
-  ss_between <- f_stat * df_between
-  ss_total <- ss_between + df_within
-  ss_between / ss_total
-}
-
-#' Omega-squared (less biased than eta-squared)
-#'
-#' @inheritParams morie_eta_squared
 #' @param n Total sample size.
 #' @return Numeric omega-squared.
 #' @export
@@ -488,23 +438,6 @@ morie_eta_squared <- function(f_stat, df_between, df_within) {
 #' morie_omega_squared(f_stat = 5.2, df_between = 2, df_within = 87, n = 90)
 morie_omega_squared <- function(f_stat, df_between, df_within, n) {
   (df_between * (f_stat - 1)) / (df_between * (f_stat - 1) + n)
-}
-
-#' Cramer's V for categorical association
-#'
-#' @param contingency_table A numeric matrix of observed counts.
-#' @return Numeric Cramer's V in the interval \\[0, 1\\].
-#' @examples
-#' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
-#' @export
-morie_cramers_v <- function(contingency_table) {
-  m <- as.matrix(contingency_table)
-  result <- stats::chisq.test(m, correct = FALSE)
-  chi2 <- as.numeric(result$statistic)
-  n <- sum(m)
-  k <- min(nrow(m), ncol(m))
-  sqrt(chi2 / (n * (k - 1)))
 }
 
 #' Spearman rank correlation
@@ -540,7 +473,7 @@ morie_kendall_tau <- function(x, y) {
 #' @return Named list: `r`, `p_value`.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_point_biserial_r <- function(binary_var, continuous_var) {
   result <- stats::cor.test(binary_var, continuous_var)
@@ -619,7 +552,7 @@ morie_power_prop_test <- function(n = NULL, p1 = NULL, p2 = NULL,
 #' @return Integer sample size.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 #' @references
 #'   Hsieh FY, Bloch DA, Larsen MD (1998). A simple method of sample size
@@ -633,4 +566,44 @@ morie_sample_size_logistic <- function(p0, or, alpha = 0.05, power = 0.80,
   p_bar <- (p0 + p1) / 2
   n <- as.integer(ceiling((z_a + z_b)^2 / (p_bar * (1 - p_bar) * (log(or))^2)))
   n
+}
+
+#' Cohen's d effect size
+#'
+#' @param x1 Numeric vector (group 1).
+#' @param x2 Numeric vector (group 2).
+#' @param pooled Use pooled SD (default `TRUE`). If `FALSE`, uses `sd(x2)`.
+#' @return Numeric Cohen's d.
+#' @examples
+#' morie_cohens_d(rnorm(50, mean = 1), rnorm(50, mean = 0))
+#' @export
+morie_cohens_d <- function(x1, x2, pooled = TRUE) {
+  m1 <- mean(x1, na.rm = TRUE)
+  m2 <- mean(x2, na.rm = TRUE)
+  n1 <- sum(!is.na(x1))
+  n2 <- sum(!is.na(x2))
+  s1 <- stats::sd(x1, na.rm = TRUE)
+  s2 <- stats::sd(x2, na.rm = TRUE)
+  sd_denom <- if (pooled) {
+    sqrt(((n1 - 1) * s1^2 + (n2 - 1) * s2^2) / (n1 + n2 - 2))
+  } else {
+    s2
+  }
+  (m1 - m2) / sd_denom
+}
+
+#' Cramer's V for categorical association
+#'
+#' @param contingency_table A numeric matrix of observed counts.
+#' @return Numeric Cramer's V in the interval \\[0, 1\\].
+#' @examples
+#' morie_cramers_v(matrix(c(10, 20, 30, 40), nrow = 2))
+#' @export
+morie_cramers_v <- function(contingency_table) {
+  m <- as.matrix(contingency_table)
+  result <- stats::chisq.test(m, correct = FALSE)
+  chi2 <- as.numeric(result$statistic)
+  n <- sum(m)
+  k <- min(nrow(m), ncol(m))
+  sqrt(chi2 / (n * (k - 1)))
 }

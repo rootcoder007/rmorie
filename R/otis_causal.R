@@ -62,12 +62,17 @@ NULL
 
 # Binarise a column: "Yes"/"No" character (case-insensitive) -> 1/0;
 # numeric NAs -> 0; integer -> as-integer. Mirrors python _binarise.
+#' Internal helper: Otis Binarise
+#' @noRd
 # .otis_binarise() is defined once in otis.R (the more robust version:
-# logical/numeric>0/rich string set); shared across the OTIS modules.
+# logical/numeric>0/rich string set with NA preservation); shared across
+# the OTIS modules.
 
 # Build a numeric design matrix (intercept + drop-first dummies) from a
 # data frame and a vector of covariate names. Mirrors python
 # _design_matrix.
+#' Internal helper: Otis Design Matrix
+#' @noRd
 .otis_design_matrix <- function(data, covariates) {
   sub <- data[, covariates, drop = FALSE]
   # Convert character/factor columns to factors with drop-first dummies
@@ -91,6 +96,8 @@ NULL
 }
 
 # Newton-Raphson logistic with ridge penalty.
+#' Internal helper: Otis Logit Fit
+#' @noRd
 .otis_logit_fit <- function(X, d, ridge = 1e-3, max_iter = 50L, tol = 1e-6) {
   n <- nrow(X)
   p <- ncol(X)
@@ -112,17 +119,23 @@ NULL
 }
 
 # Clip propensity away from 0/1.
+#' Internal helper: Otis Clip Ps
+#' @noRd
 .otis_clip_ps <- function(e, eps = 0.02) {
   pmin(pmax(e, eps), 1 - eps)
 }
 
 # Predict propensity from fitted beta on a (possibly new) X.
+#' Internal helper: Otis Predict Ps
+#' @noRd
 .otis_predict_ps <- function(X, beta, eps = 0.02) {
   eta <- pmin(pmax(as.numeric(X %*% beta), -30), 30)
   .otis_clip_ps(1 / (1 + exp(-eta)), eps = eps)
 }
 
 # Brier + log-loss + observed/predicted prevalence.
+#' Internal helper: Otis Propensity Diagnostics
+#' @noRd
 .otis_propensity_diagnostics <- function(p, d) {
   brier <- mean((p - d)^2)
   pc <- pmin(pmax(p, 1e-12), 1 - 1e-12)
@@ -134,15 +147,23 @@ NULL
 }
 
 # Liang-Zeger one-way cluster-robust SE for mean of a score vector.
+#' Internal helper: Otis Cluster Se
+#' @noRd
 .otis_cluster_se <- function(scores, cluster) {
   scores <- as.numeric(scores)
   n <- length(scores)
   grp <- tapply(scores, cluster, sum)
-  v <- sum(grp^2) / (n^2)
+  # na.rm: a factor `cluster` may carry levels with no rows in this subset
+  # (e.g. per-year analysis of an individual-clustered panel). tapply emits
+  # NA for those empty clusters; they contribute nothing to the variance, so
+  # drop them rather than poisoning the sum to NA (which produced an NA SE).
+  v <- sum(grp^2, na.rm = TRUE) / (n^2)
   sqrt(max(v, 0))
 }
 
 # Cameron-Gelbach-Miller multi-way cluster-robust SE (up to 2-way).
+#' Internal helper: Otis Multiway Cluster Se
+#' @noRd
 .otis_multiway_cluster_se <- function(scores, clusters) {
   if (length(clusters) == 1L) {
     return(.otis_cluster_se(scores, clusters[[1]]))
@@ -163,6 +184,8 @@ NULL
 }
 
 # CausalEstimate constructor (R analogue of the python dataclass).
+#' Internal helper: Otis Causal Estimate
+#' @noRd
 .otis_causal_estimate <- function(estimator, ate, ate_se, ate_pval,
                                   n, n_treated, p_treat, notes = list()) {
   z <- if (ate_se > 0) ate / ate_se else 0
@@ -694,6 +717,8 @@ morie_otis_classify_mandela_combo <- function(mh, sr, sw,
 
 # Aggregate per-(id, year) the count of distinct alert-combos and the
 # sum of within-row + across-row region-change indicators.
+#' Internal helper: Otis Alert Volatility Frame
+#' @noRd
 .otis_alert_volatility_frame <- function(df) {
   needed <- c("UniqueIndividual_ID", "EndFiscalYear", "Gender",
               "Age_Category", "Region_AtTimeOfPlacement",
@@ -749,7 +774,7 @@ morie_otis_classify_mandela_combo <- function(mh, sr, sw,
 #'   \code{covariates} = c("Gender", "Age_Category", "EndFiscalYear").
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   df <- morie_otis_load()
 #'   pair <- morie_otis_make_pair_alert_to_volatility_ruhela(df)
 #'   morie_otis_irm_dml(pair$data, treatment = pair$T,
@@ -804,7 +829,7 @@ morie_otis_make_pair_alert_to_volatility_ruhela <- function(df) {
 #'   c("Gender", "Age_Category", "EndFiscalYear").
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   df <- morie_otis_load()
 #'   morie_otis_make_pair_alert_to_volatility_naive(df)
 #' }
@@ -859,7 +884,7 @@ morie_otis_make_pair_alert_to_volatility_naive <- function(df) {
 #'   each element is the output of the corresponding make-pair builder.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   morie_otis_make_pair_alert_to_volatility_all(morie_otis_load())
 #' }
 morie_otis_make_pair_alert_to_volatility_all <- function(df) {
@@ -883,7 +908,7 @@ morie_otis_make_pair_alert_to_volatility_all <- function(df) {
 #'   \code{morie_otis_make_pair_alert_to_volatility_ruhela()}.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   morie_otis_make_pair_alert_to_volatility_a01()
 #' }
 morie_otis_make_pair_alert_to_volatility_a01 <- function(df = NULL) {
@@ -912,7 +937,7 @@ morie_otis_make_pair_alert_to_volatility_a01 <- function(df = NULL) {
 #' @return Named list \code{list(data, T = "T_a", Y = "Y_a", covariates)}.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   morie_otis_make_pair_a(morie_otis_load())
 #' }
 morie_otis_make_pair_a <- function(df) {
@@ -943,7 +968,7 @@ morie_otis_make_pair_a <- function(df) {
 #' @return Named list \code{list(data, T = "T_b", Y = "Y_b", covariates)}.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   morie_otis_make_pair_b(morie_otis_load())
 #' }
 morie_otis_make_pair_b <- function(df) {
@@ -979,9 +1004,13 @@ morie_otis_make_pair_b <- function(df) {
 #' @return Named list \code{list(data, T = "T_c", Y = "Y_c", covariates)}.
 #' @export
 #' @examples
-#' pair <- morie_otis_make_pair_c(morie_synth_otis("b01", n = 120L,
-#'                                                  seed = 1L))
-#' head(pair)
+#' \donttest{
+#' # b01 (Segregation - Detailed Dataset) carries the full placement-level
+#' # schema, including NumberConsecutiveDays_Segregation (see the bundled
+#' # OTIS data dictionary).
+#' df <- morie_datasets_otis_b01_segregation_detailed(offline = TRUE)
+#' morie_otis_make_pair_c(df)
+#' }
 morie_otis_make_pair_c <- function(df) {
   needed <- c("UniqueIndividual_ID", "EndFiscalYear", "Gender",
               "Age_Category", "Region_AtTimeOfPlacement",
@@ -1024,9 +1053,26 @@ morie_otis_make_pair_c <- function(df) {
 #'   \code{ate_pval}, \code{ci95_lo}, \code{ci95_hi}, \code{notes}.
 #' @export
 #' @examples
-#' df <- morie_synth_otis("b01", n = 200L, seed = 1L)
-#' grid <- morie_otis_causal_grid(df)
-#' names(grid)
+#' \donttest{
+#' # Simulated placement-level rows using the b01 dictionary schema
+#' # (regions, age categories, alerts); large enough for cross-fitting.
+#' set.seed(1)
+#' regions <- c("Central", "Eastern", "Northern", "Toronto", "Western")
+#' df <- data.frame(
+#'   UniqueIndividual_ID = 1:300,
+#'   EndFiscalYear = sample(2018:2021, 300, TRUE),
+#'   Gender = sample(c("Male", "Female"), 300, TRUE),
+#'   Age_Category = sample(c("18 to 24", "25 to 49", "50+"), 300, TRUE),
+#'   Region_AtTimeOfPlacement = sample(regions, 300, TRUE),
+#'   Region_MostRecentPlacement = sample(regions, 300, TRUE),
+#'   MentalHealth_Alert = sample(0:1, 300, TRUE),
+#'   SuicideRisk_Alert = sample(0:1, 300, TRUE),
+#'   SuicideWatch_Alert = sample(0:1, 300, TRUE),
+#'   Number_Of_Placements = sample(1:4, 300, TRUE),
+#'   NumberConsecutiveDays_Segregation = rpois(300, 5)
+#' )
+#' morie_otis_causal_grid(df)
+#' }
 morie_otis_causal_grid <- function(df = NULL, seed = 123L) {
   if (is.null(df)) {
     if (!exists("morie_otis_load", mode = "function")) {

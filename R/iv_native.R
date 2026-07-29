@@ -266,6 +266,6 @@ morie_its <- function(data, outcome, time, interruption_time,
     n_pre = sum(D == 0), n_post = sum(D == 1),
     hac_lag = if (is.null(lag)) floor(4 * (length(y) / 100)^(2 / 9))
               else lag,
-    method = "interrupted time series (morie native, Newey-West HAC)"
+    method = "interrupted time series (rmorie native, Newey-West HAC)"
   )
 }

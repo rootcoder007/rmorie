@@ -69,7 +69,7 @@ morie_dsp_psd_bartlett <- function(x, fs = 1, n_segments = 8L) {
   list(freqs = freqs, psd = psd_sum / n_segments)
 }
 
-#' Welch PSD estimate (morie native)
+#' Welch PSD estimate (rmorie native)
 #'
 #' Native Hamming-windowed averaged periodogram (Welch 1967).
 #'
@@ -486,6 +486,8 @@ morie_dsp_fbm_synthesis <- function(N, H = 0.5) {
 
 # Kaiser window with shape `beta` using the modified Bessel function
 # I0. Matches numpy.kaiser(N, beta).
+#' Internal helper: Kaiser Window
+#' @noRd
 .kaiser_window <- function(N, beta = 14) {
   if (N == 1L) return(1)
   n <- seq.int(0, N - 1L)
@@ -495,6 +497,8 @@ morie_dsp_fbm_synthesis <- function(N, H = 0.5) {
 }
 
 # Polynomial expansion of I0 valid for beta up to ~16.
+#' Internal helper: Bessel I0
+#' @noRd
 .bessel_i0 <- function(x) {
   ax <- abs(x)
   out <- numeric(length(ax))

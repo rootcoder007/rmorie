@@ -125,6 +125,25 @@ morie_dml_clustered <- function(data, treatment, outcome, covariates,
   out
 }
 
+#' @return \code{x}, invisibly.
+#' @examples
+#' \donttest{
+#' set.seed(1)
+#' G <- 40L; ng <- 10L; n <- G * ng
+#' g <- rep(seq_len(G), each = ng)
+#' u <- stats::rnorm(G)[g]                       # cluster effect
+#' x <- stats::rnorm(n)
+#' d <- stats::rbinom(n, 1, stats::plogis(0.5 * x + u))
+#' y <- 2 * d + x + u + stats::rnorm(n)          # true ATE = 2
+#' df <- data.frame(y = y, d = d, x = x, corridor = g)
+#' obj <- morie_dml_clustered(df, "d", "y", "x", cluster = "corridor")$ate
+#' \references{
+#' Chernozhukov V, et al. (2018). Double/debiased machine learning.
+#' \emph{The Econometrics Journal} 21(1), C1--C68. \doi{10.1111/ectj.12097}
+#' Cameron AC, Gelbach JB, Miller DL (2011). Robust inference with multiway
+#' clustering. \emph{JBES} 29(2), 238--249. \doi{10.1198/jbes.2010.07136}
+#' print(obj)
+#' }
 #' @export
 print.morie_dml_clustered <- function(x, ...) {
   cat(sprintf("Cluster-robust DML (AIPW)\n  ATE = %.4g  SE = %.4g [%s]\n",
@@ -138,6 +157,8 @@ print.morie_dml_clustered <- function(x, ...) {
 }
 
 # Ridge-logistic propensity (tiny ridge for separation), predicted + clipped.
+#' Internal helper: Dmlc Ps
+#' @noRd
 .dmlc_ps <- function(Xtr, dtr, Xte, eps) {
   fit <- tryCatch(
     stats::glm.fit(Xtr, dtr, family = stats::binomial()),
@@ -150,6 +171,8 @@ print.morie_dml_clustered <- function(x, ...) {
 }
 
 # Per-arm OLS outcome regression; robust to rank-deficiency and thin arms.
+#' Internal helper: Dmlc Ols
+#' @noRd
 .dmlc_ols <- function(X, idx, y, te, p) {
   if (length(idx) < p + 2L) {
     return(rep(if (length(idx)) mean(y[idx]) else mean(y), length(te)))
@@ -164,12 +187,16 @@ print.morie_dml_clustered <- function(x, ...) {
 }
 
 # Liang-Zeger one-way cluster-robust SE of a mean, from the influence function.
+#' Internal helper: Dmlc Cluster Se
+#' @noRd
 .dmlc_cluster_se <- function(infl, cluster, n) {
   grp <- tapply(infl, cluster, sum)
   sqrt(max(sum(grp^2, na.rm = TRUE) / (n^2), 0))
 }
 
 # Cameron-Gelbach-Miller up to two-way.
+#' Internal helper: Dmlc Multiway Se
+#' @noRd
 .dmlc_multiway_se <- function(infl, clusters, n) {
   if (length(clusters) == 1L) return(.dmlc_cluster_se(infl, clusters[[1]], n))
   a <- clusters[[1]]

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #
 # Phase 3GGG1-5: bulk catalog snapshots harvested live from each
-# portal's catalog API, then bundled as inst/extdata CSVs for
+# portal's catalog API, then included as inst/extdata CSVs for
 # offline-first cross-portal discovery.
 #
 # Sizes (approximate, as of 2026-05-24):
@@ -17,9 +17,9 @@
 # (CKAN/Hub variants drop columns that don't map cleanly.)
 
 #' NYC OpenData bulk catalog (2851 entities)
-#' @param offline If `TRUE` (default), reads bundled CSV.
+#' @param offline If `TRUE` (default), reads included CSV.
 #' @return Tabular catalog snapshot.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' d <- morie_datasets_nyc_opendata_bulk_layers(offline = TRUE)
 #' nrow(d)
 #' head(d[, c("soda_id", "type")])
@@ -30,11 +30,10 @@ morie_datasets_nyc_opendata_bulk_layers <- function(offline = TRUE) {
 
 #' Chicago Open Data bulk catalog (1856 entities)
 #' @rdname morie_datasets_nyc_opendata_bulk_layers
-#' @return A `data.frame` snapshot of the Chicago Open Data portal
-#'   catalog (1856 entities) loaded from
-#'   `inst/extdata/chicago_opendata_bulk_catalog.csv`. Columns: `id`,
-#'   `title`, `type`, `description`, `updated_at`,
-#'   `page_views_total`, `domain_category`.
+#' @return A \code{data.frame}.
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' cat_df <- morie_datasets_chicago_opendata_bulk_layers()
+#' head(cat_df)
 #' @export
 morie_datasets_chicago_opendata_bulk_layers <- function(offline = TRUE) {
   .morie_bulk_fixture("chicago_opendata_bulk_catalog.csv", offline)
@@ -42,11 +41,10 @@ morie_datasets_chicago_opendata_bulk_layers <- function(offline = TRUE) {
 
 #' Toronto Open Data bulk CKAN catalog (540 packages)
 #' @rdname morie_datasets_nyc_opendata_bulk_layers
-#' @return A `data.frame` snapshot of the Toronto Open Data CKAN
-#'   catalog (540 packages) loaded from
-#'   `inst/extdata/toronto_opendata_bulk_catalog.csv`. Columns
-#'   follow the shared 7-column bulk-catalog schema (CKAN variants
-#'   leave non-mapping columns blank).
+#' @return A \code{data.frame}.
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' cat_df <- morie_datasets_toronto_opendata_bulk_layers()
+#' head(cat_df)
 #' @export
 morie_datasets_toronto_opendata_bulk_layers <- function(offline = TRUE) {
   .morie_bulk_fixture("toronto_opendata_bulk_catalog.csv", offline)
@@ -54,11 +52,10 @@ morie_datasets_toronto_opendata_bulk_layers <- function(offline = TRUE) {
 
 #' Calgary Open Data bulk catalog (933 entities)
 #' @rdname morie_datasets_nyc_opendata_bulk_layers
-#' @return A `data.frame` snapshot of the Calgary Open Data Socrata
-#'   catalog (933 entities) loaded from
-#'   `inst/extdata/calgary_opendata_bulk_catalog.csv`. Columns: `id`,
-#'   `title`, `type`, `description`, `updated_at`,
-#'   `page_views_total`, `domain_category`.
+#' @return A \code{data.frame}.
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' cat_df <- morie_datasets_calgary_opendata_bulk_layers()
+#' head(cat_df)
 #' @export
 morie_datasets_calgary_opendata_bulk_layers <- function(offline = TRUE) {
   .morie_bulk_fixture("calgary_opendata_bulk_catalog.csv", offline)
@@ -66,11 +63,10 @@ morie_datasets_calgary_opendata_bulk_layers <- function(offline = TRUE) {
 
 #' Edmonton Open Data bulk catalog (2027 entities)
 #' @rdname morie_datasets_nyc_opendata_bulk_layers
-#' @return A `data.frame` snapshot of the Edmonton Open Data Socrata
-#'   catalog (2027 entities) loaded from
-#'   `inst/extdata/edmonton_opendata_bulk_catalog.csv`. Columns: `id`,
-#'   `title`, `type`, `description`, `updated_at`,
-#'   `page_views_total`, `domain_category`.
+#' @return A \code{data.frame}.
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' cat_df <- morie_datasets_edmonton_opendata_bulk_layers()
+#' head(cat_df)
 #' @export
 morie_datasets_edmonton_opendata_bulk_layers <- function(offline = TRUE) {
   .morie_bulk_fixture("edmonton_opendata_bulk_catalog.csv", offline)
@@ -78,11 +74,10 @@ morie_datasets_edmonton_opendata_bulk_layers <- function(offline = TRUE) {
 
 #' Ottawa Open Data bulk ArcGIS Hub catalog (287 datasets)
 #' @rdname morie_datasets_nyc_opendata_bulk_layers
-#' @return A `data.frame` snapshot of the Ottawa Open Data ArcGIS
-#'   Hub catalog (287 datasets) loaded from
-#'   `inst/extdata/ottawa_opendata_bulk_catalog.csv`. Columns follow
-#'   the shared 7-column bulk-catalog schema (Hub variants leave
-#'   non-mapping columns blank).
+#' @return A \code{data.frame}.
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' cat_df <- morie_datasets_ottawa_opendata_bulk_layers()
+#' head(cat_df)
 #' @export
 morie_datasets_ottawa_opendata_bulk_layers <- function(offline = TRUE) {
   .morie_bulk_fixture("ottawa_opendata_bulk_catalog.csv", offline)
@@ -90,15 +85,15 @@ morie_datasets_ottawa_opendata_bulk_layers <- function(offline = TRUE) {
 
 #' Montreal Open Data bulk CKAN catalog (401 packages, 3HHH1)
 #'
-#' Phase 3HHH1. Bundled snapshot of every CKAN package on
+#' Phase 3HHH1. Included snapshot of every CKAN package on
 #' donnees.montreal.ca -- substantially broader than the 23-row
 #' Loi/Justice/Securite subset from 3EEE1.
 #'
 #' @rdname morie_datasets_nyc_opendata_bulk_layers
-#' @return A `data.frame` snapshot of every CKAN package on
-#'   donnees.montreal.ca (401 packages) loaded from
-#'   `inst/extdata/montreal_opendata_bulk_catalog.csv`. Columns
-#'   follow the shared 7-column bulk-catalog schema.
+#' @return A \code{data.frame}.
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' cat_df <- morie_datasets_montreal_opendata_bulk_layers()
+#' head(cat_df)
 #' @export
 morie_datasets_montreal_opendata_bulk_layers <- function(offline = TRUE) {
   .morie_bulk_fixture("montreal_opendata_bulk_catalog.csv", offline)
@@ -106,17 +101,15 @@ morie_datasets_montreal_opendata_bulk_layers <- function(offline = TRUE) {
 
 #' Vancouver Open Data bulk Opendatasoft v2.1 catalog (190 datasets, 3HHH2)
 #'
-#' Phase 3HHH2. Bundled snapshot of every dataset on
+#' Phase 3HHH2. Included snapshot of every dataset on
 #' opendata.vancouver.ca with richer schema (publisher, theme,
 #' license, records_count).
 #'
 #' @rdname morie_datasets_nyc_opendata_bulk_layers
-#' @return A `data.frame` snapshot of every Opendatasoft v2.1
-#'   dataset on opendata.vancouver.ca (190 datasets) loaded from
-#'   `inst/extdata/vancouver_opendata_bulk_catalog.csv`, with the
-#'   richer Opendatasoft schema (`publisher`, `theme`, `license`,
-#'   `records_count`) projected onto the shared bulk-catalog
-#'   columns.
+#' @return A \code{data.frame}.
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' cat_df <- morie_datasets_vancouver_opendata_bulk_layers()
+#' head(cat_df)
 #' @export
 morie_datasets_vancouver_opendata_bulk_layers <- function(offline = TRUE) {
   .morie_bulk_fixture("vancouver_opendata_bulk_catalog.csv", offline)
@@ -131,6 +124,12 @@ morie_datasets_vancouver_opendata_bulk_layers <- function(offline = TRUE) {
 #' @param soda_id 4-4 Socrata resource ID.
 #' @param limit Page size.
 #' @return A `data.frame` of records.
+#' @examples
+#' \donttest{
+#' # NYPD arrests dataset (SODA id verified live 2026-07)
+#' df <- try(morie_datasets_nyc_socrata_by_id("8h9b-rp9u", limit = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_nyc_socrata_by_id <- function(soda_id,
                                                limit = 1000L) {
@@ -144,10 +143,13 @@ morie_datasets_nyc_socrata_by_id <- function(soda_id,
 
 #' Fetch a Chicago Open Data Socrata dataset by ID
 #' @rdname morie_datasets_nyc_socrata_by_id
-#' @return A `data.frame` of records pulled from
-#'   `https://data.cityofchicago.org/resource/<soda_id>.json`, with
-#'   nested list-columns dropped. Columns mirror the live Socrata
-#'   resource schema.
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' \donttest{
+#' # Chicago crimes dataset (SODA id verified live 2026-07)
+#' df <- try(morie_datasets_chicago_socrata_by_id("ijzp-q8t2", limit = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_chicago_socrata_by_id <- function(soda_id,
                                                    limit = 1000L) {
@@ -159,6 +161,8 @@ morie_datasets_chicago_socrata_by_id <- function(soda_id,
   df
 }
 
+#' Internal helper: Morie Bulk Fixture
+#' @noRd
 .morie_bulk_fixture <- function(fname, offline) {
   if (!isTRUE(offline)) {
     stop(sprintf(paste0(
@@ -168,9 +172,20 @@ morie_datasets_chicago_socrata_by_id <- function(soda_id,
       fname),
       call. = FALSE)
   }
-  path <- system.file("extdata", fname, package = "morie")
-  if (!nzchar(path))
-    stop(sprintf("bundled bulk catalog missing: %s", fname),
-          call. = FALSE)
+  # Look in rmorie first (tiny CSVs ship here), then rmoriedata
+  # (heavy bulk catalogs ship there). Return an empty data.frame on
+  # miss so downstream consumers can cleanly concat zero-row frames.
+  path <- system.file("extdata", fname, package = "rmorie")
+  if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
+    path <- system.file("extdata", fname, package = "rmoriedata")
+  }
+  if (!nzchar(path)) {
+    warning(sprintf(
+      "bulk catalog '%s' not bundled; returning empty data.frame. %s",
+      fname,
+      "Install the rmoriedata companion: remotes::install_github('rootcoder007/rmoriedata')"),
+      call. = FALSE)
+    return(data.frame())
+  }
   utils::read.csv(path, stringsAsFactors = FALSE, check.names = FALSE)
 }

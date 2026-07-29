@@ -53,7 +53,7 @@ morie_det_rng <- function(name, seed) {
 .morie_sha256_hex <- function(s) {
   # Module 22: native C++ SHA-256 (src/morie_crypto_hash.cpp) --
   # deterministic RNG seeding depends on nothing outside the package.
-  .morie_sha256_hex_impl(s)
+  .rmorie_sha256_hex_impl(s)
 }
 
 #' SHA-256 hex digest of "name:seed" (for Py<->R cross-check)

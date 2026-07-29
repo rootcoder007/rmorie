@@ -360,7 +360,7 @@ print.morie_bayes_fit <- function(x, ...) {
 #' @param x A `morie_bayes_fit`.
 #' @param type "trace", "density", or "both" (BS6.2/6.3/6.5).
 #' @param param Which parameter (index or name); default the first.
-#' @param ... Passed to [plot()].
+#' @param ... Passed to \[plot()\].
 #' @return `NULL`, invisibly.
 #' @examples
 #' set.seed(1)

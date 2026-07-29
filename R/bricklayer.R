@@ -131,7 +131,7 @@ morie_bricklayer <- function(yes = FALSE, check = FALSE) {
 #' unreachable -- instead of duplicating them.
 #'
 #' @param url A live URL to look up on the Wayback Machine.
-#' @param timestamp Optional \code{YYYYMMDD[hhmmss]} to request the snapshot
+#' @param timestamp Optional \code{YYYYMMDD\[hhmmss\]} to request the snapshot
 #'   closest to that time; \code{NULL} (default) returns the most recent.
 #' @return The snapshot URL (https), or \code{NULL} if unavailable.
 #' @seealso \code{\link{morie_bricklayer}}, \code{\link{morie_download}}

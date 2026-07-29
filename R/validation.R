@@ -105,6 +105,11 @@ column_rule <- function(name, dtype = NULL, required = TRUE,
 #' @param rules List of \code{column_rule} objects.
 #' @param raise_on_error If TRUE, throw on first error.
 #' @return An object of class \code{"class_name"}.
+#' @examples
+#' df <- data.frame(age = c(20, 30, -1))
+#' rules <- list(age = list(type = "numeric", min = 0))
+#' res <- try(validate_schema(df, rules))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 validate_schema <- function(data, rules, raise_on_error = FALSE) {
   errors <- character(0)
@@ -267,6 +272,9 @@ check_referential_integrity <- function(child, parent, child_key, parent_key) {
 #' @param key_cols Columns that should be unique together.
 #' @param consistency_rules List of functions \code{(df) -> logical(1)}.
 #' @return An object of class \code{"class_name"}.
+#' @examples
+#' df <- data.frame(id = 1:20, v = c(rnorm(18), NA, NA))
+#' str(score_data_quality(df, key_cols = "id"), max.level = 1)
 #' @export
 score_data_quality <- function(data, date_cols = NULL, freshness_days = 365L,
                                 key_cols = NULL, consistency_rules = NULL) {
@@ -858,6 +866,16 @@ detect_overfitting <- function(fit_fn, predict_fn, X, y,
 #' @param split_quantile Quantile of dates (if \code{split_date} is NULL).
 #' @param scoring Scoring metric.
 #' @return An object of class \code{"class_name"}.
+#' @examples
+#' set.seed(1)
+#' X <- data.frame(x = rnorm(60), date = seq.Date(as.Date("2020-01-01"),
+#'                                               by = "day", length.out = 60))
+#' y <- X$x + rnorm(60)
+#' res <- try(temporal_validate(
+#'   fit_fn = function(Xt, yt) stats::lm(yt ~ x, data = cbind(Xt, yt = yt)),
+#'   predict_fn = function(m, Xt) stats::predict(m, Xt),
+#'   X = X, y = y, date_col = "date"))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 temporal_validate <- function(fit_fn, predict_fn, X, y, date_col,
                                split_date = NULL,
@@ -955,7 +973,7 @@ create_reproducibility_manifest <- function(data, parameters = NULL,
 ")
   # Module 22: native SHA-256 of the CSV text (previously digest's
   # serialized-object hash; the manifest checksum is self-consistent).
-  checksum <- .morie_sha256_hex_impl(buf)
+  checksum <- .rmorie_sha256_hex_impl(buf)
   pkgs <- c("base", "stats", "knitr", "Matrix", "MASS")
   versions <- vapply(pkgs, function(p) {
     tryCatch(as.character(utils::packageVersion(p)),

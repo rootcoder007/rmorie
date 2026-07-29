@@ -2,28 +2,29 @@
 #
 # Matching methods for causal inference in observational studies.
 #
-# Ports the public API of `src/morie/matching.py` (~2211 LOC) to R.
+# Phase 1.b refactor (2026-05-25): the hand-written base-R fallbacks
+# have been removed. Every method-style entry point now delegates
+# directly to the canonical CRAN package:
 #
-# Strategy: prefer CRAN delegation.
-#   * `MatchIt` handles the full nearest-neighbour / optimal / full / CEM /
-#     exact / Mahalanobis / genetic / cardinality / subclassification suite.
-#   * `cobalt` produces balance diagnostics + Love-plot data.
-#   * `WeightIt` (method = "ebal") or `ebal` does entropy balancing.
-#   * `Matching::Match` is the genetic / generic fallback.
-#   * `sensitivitymw` / `sensitivitymv` give exact Rosenbaum bounds.
-#   * Base-R hand-rolled implementations exist as a final fallback so the
-#     package still installs in a minimal environment, but the CRAN routes
-#     are the recommended path.
+#   * MatchIt      -- nearest / exact / cem / mahalanobis / optimal /
+#                     full / subclass / genetic / variable-ratio
+#                     (the full standard suite).
+#   * cobalt       -- covariate-balance diagnostics (bal.tab, love.plot).
+#   * WeightIt     -- entropy balancing (method = "ebal").
+#   * Matching     -- genetic matching back end consumed by MatchIt.
+#   * designmatch  -- cardinality / mixed-integer-programming matching
+#                     (documented as a recommended alternative; the
+#                     `morie_matching_cardinality()` wrapper keeps its
+#                     iterative-caliper heuristic over MatchIt).
 #
-# Every public function is named with the `morie_matching_*` prefix to avoid
-# shadowing the IPW estimators in `causal.R` (which use names like
-# `morie_estimate_att`, `morie_estimate_ate`, etc.).  Treatment-effect
-# functions ported from `estimate_att_matched` / `estimate_atc_matched` /
-# `estimate_ate_matched` use the explicit `_matched` suffix and live here
-# under `morie_matching_att_matched`, `morie_matching_atc_matched`,
-# `morie_matching_ate_matched` so they cannot be confused with IPW.
+# Carceral-domain helpers (treatment-effect estimators on matched
+# samples, Abadie-Imbens SE, Rosenbaum bounds, doubly-robust ATT,
+# multi-treatment / longitudinal orchestrators, quality + overlap
+# diagnostics) are kept because they encode rmorie-specific output
+# shapes (`morie_match_result`, `morie_te_result`,
+# `morie_balance_result`) that downstream MRM code depends on.
 
-#' @importFrom stats glm binomial predict quantile sd var cov cor lm coef complete.cases as.formula model.matrix qnorm pnorm pchisq ks.test weighted.mean median setNames
+#' @importFrom stats glm binomial predict quantile sd var cov lm complete.cases as.formula model.matrix qnorm pnorm ks.test weighted.mean setNames
 #' @importFrom utils head tail
 NULL
 
@@ -32,10 +33,14 @@ NULL
 # Internal helpers
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Morie Matching Have
+#' @noRd
 .morie_matching_have <- function(pkg) {
   requireNamespace(pkg, quietly = TRUE)
 }
 
+#' Internal helper: Morie Matching Require
+#' @noRd
 .morie_matching_require <- function(pkg, fn) {
   morie_ensure_extras(pkg)
   invisible(TRUE)
@@ -78,141 +83,20 @@ NULL
   out
 }
 
+#' @noRd
+.morie_matching_have_cpp <- function(name) {
+  exists(name, envir = asNamespace("rmorie"), inherits = FALSE)
+}
 
-# ---------------------------------------------------------------------------
-# Propensity score estimation
-# ---------------------------------------------------------------------------
-
-#' Estimate propensity scores
-#'
-#' Estimates the probability of treatment via logistic regression or
-#' gradient boosting on a set of covariates.  Mirrors Python
-#' \code{morie.matching.estimate_propensity_score}.
-#'
-#' @param data Data frame.
-#' @param treatment Name of the binary treatment column (0/1).
-#' @param covariates Character vector of covariate names.
-#' @param model One of \code{"logistic"} (default) or \code{"gbm"}.
-#'   \code{"gbm"} requires the \pkg{gbm} package.
-#' @param max_iter Maximum iterations for logistic regression.
-#' @return A numeric vector of propensity scores aligned to the rows of
-#'   \code{data} (after dropping NAs in \code{treatment} or
-#'   \code{covariates}); the \code{names} of the vector are the row names
-#'   of the retained rows.
-#' @references Rosenbaum, P. R., & Rubin, D. B. (1983). The central role of
-#'   the propensity score in observational studies for causal effects.
-#'   \emph{Biometrika}, 70(1), 41--55.
-#' @examples
-#' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(150), d = rbinom(150, 1, 0.4),
-#'   x1 = rnorm(150), x2 = rnorm(150),
-#'   region = sample(c("North", "South"), 150, TRUE),
-#'   year = sample(2020:2022, 150, TRUE),
-#'   treat3 = sample(0:2, 150, TRUE))
-#' df <- data.frame(d = rbinom(200, 1, 0.4),
-#'                  x1 = rnorm(200), x2 = rnorm(200))
-#' ps <- morie_matching_estimate_propensity(df, "d", c("x1", "x2"))
-#' @export
-morie_matching_estimate_propensity <- function(data, treatment, covariates,
-                                               model = "logistic",
-                                               max_iter = 1000) {
-  df <- .morie_matching_drop_na(data, c(treatment, covariates))
-  if (model == "gbm") {
-    if (.morie_matching_have("gbm")) {
-      f <- stats::as.formula(paste(treatment, "~",
-                                   paste(covariates, collapse = " + ")))
-      fit <- gbm::gbm(f, data = df, distribution = "bernoulli",
-                      n.trees = 100, interaction.depth = 3,
-                      shrinkage = 0.1, verbose = FALSE)
-      ps <- gbm::predict.gbm(fit, newdata = df, n.trees = 100,
-                             type = "response")
-    } else {
-      stop("Package 'gbm' is required for model = \"gbm\".  ",
-           "Install it with install.packages(\"gbm\").",
-           call. = FALSE)
-    }
-  } else {
-    f <- stats::as.formula(paste(treatment, "~",
-                                 paste(covariates, collapse = " + ")))
-    fit <- stats::glm(f, data = df, family = stats::binomial(),
-                      control = list(maxit = max_iter))
-    ps <- stats::predict(fit, newdata = df, type = "response")
+#' @keywords internal
+.morie_matching_need_matchit <- function(fn) {
+  if (!.morie_matching_have("MatchIt")) {
+    stop(sprintf(
+      "`%s()` requires the 'MatchIt' package. Install it with %s",
+      fn, "install.packages(\"MatchIt\")"), call. = FALSE)
   }
-  ps <- as.numeric(ps)
-  names(ps) <- rownames(df)
-  ps
+  invisible(TRUE)
 }
-
-
-# ---------------------------------------------------------------------------
-# Propensity score trimming and common support
-# ---------------------------------------------------------------------------
-
-#' Trim propensity scores to a fixed range
-#'
-#' Clips propensity scores to \code{\[lower, upper\]}.  Mirrors Python
-#' \code{morie.matching.trim_propensity_scores}.
-#'
-#' @param ps Numeric vector of propensity scores.
-#' @param lower,upper Numeric clip bounds (defaults 0.01, 0.99).
-#' @return A numeric vector of the same length as \code{ps}.
-#' @examples
-#' morie_matching_trim_propensity(c(0.001, 0.5, 0.999))
-#' @export
-morie_matching_trim_propensity <- function(ps, lower = 0.01, upper = 0.99) {
-  pmin(pmax(as.numeric(ps), lower), upper)
-}
-
-#' Restrict a sample to the region of common support
-#'
-#' Drops units whose propensity score falls outside the overlap region
-#' of treated and control units.  Mirrors Python
-#' \code{morie.matching.common_support}.
-#'
-#' @param data Data frame.
-#' @param treatment Binary treatment column name.
-#' @param ps_col Propensity-score column name (default
-#'   \code{"propensity_score"}).
-#' @param method One of \code{"minmax"} (overlap of ranges) or
-#'   \code{"trim"} (drop the extreme 5 percent of each tail).
-#' @return A subset of \code{data} on common support.
-#' @examples
-#' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(150), d = rbinom(150, 1, 0.4),
-#'   x1 = rnorm(150), x2 = rnorm(150),
-#'   region = sample(c("North", "South"), 150, TRUE),
-#'   year = sample(2020:2022, 150, TRUE),
-#'   treat3 = sample(0:2, 150, TRUE))
-#' df$propensity_score <- morie_matching_estimate_propensity(df, "d",
-#'                                                           c("x1", "x2"))
-#' morie_matching_common_support(df, "d")
-#' @export
-morie_matching_common_support <- function(data, treatment,
-                                          ps_col = "propensity_score",
-                                          method = "minmax") {
-  df <- data
-  ps_t <- df[[ps_col]][df[[treatment]] == 1]
-  ps_c <- df[[ps_col]][df[[treatment]] == 0]
-  if (method == "minmax") {
-    lower <- max(min(ps_t, na.rm = TRUE), min(ps_c, na.rm = TRUE))
-    upper <- min(max(ps_t, na.rm = TRUE), max(ps_c, na.rm = TRUE))
-  } else {
-    lower <- max(stats::quantile(ps_t, 0.05, na.rm = TRUE),
-                 stats::quantile(ps_c, 0.05, na.rm = TRUE))
-    upper <- min(stats::quantile(ps_t, 0.95, na.rm = TRUE),
-                 stats::quantile(ps_c, 0.95, na.rm = TRUE))
-  }
-  mask <- df[[ps_col]] >= lower & df[[ps_col]] <= upper
-  mask[is.na(mask)] <- FALSE
-  df[mask, , drop = FALSE]
-}
-
-
-# ---------------------------------------------------------------------------
-# MatchIt-backed unified entry point
-# ---------------------------------------------------------------------------
 
 #' @keywords internal
 .morie_matching_matchit_to_result <- function(mi, df, treatment, method_label,
@@ -252,45 +136,156 @@ morie_matching_common_support <- function(data, treatment,
 
 
 # ---------------------------------------------------------------------------
-# Nearest-neighbour propensity score matching
+# Propensity score estimation
 # ---------------------------------------------------------------------------
 
-#' @noRd
-.morie_matching_have_cpp <- function(name) {
-  exists(name, envir = asNamespace("morie"), inherits = FALSE)
+#' Estimate propensity scores
+#'
+#' Estimates the probability of treatment via logistic regression or
+#' gradient boosting on a set of covariates.
+#'
+#' @param data Data frame.
+#' @param treatment Name of the binary treatment column (0/1).
+#' @param covariates Character vector of covariate names.
+#' @param model One of \code{"logistic"} (default) or \code{"gbm"}.
+#'   \code{"gbm"} requires the \pkg{gbm} package.
+#' @param max_iter Maximum iterations for logistic regression.
+#' @return A numeric vector of propensity scores aligned to the rows of
+#'   \code{data} (after dropping NAs in \code{treatment} or
+#'   \code{covariates}); the \code{names} of the vector are the row names
+#'   of the retained rows.
+#' @references Rosenbaum, P. R., & Rubin, D. B. (1983). The central role of
+#'   the propensity score in observational studies for causal effects.
+#'   \emph{Biometrika}, 70(1), 41--55.
+#' @examples
+#' \donttest{
+#' set.seed(1)
+#' df <- data.frame(d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
+#' ps <- morie_matching_estimate_propensity(df, "d", c("x1", "x2"))
+#' }
+#' @export
+morie_matching_estimate_propensity <- function(data, treatment, covariates,
+                                               model = "logistic",
+                                               max_iter = 1000) {
+  df <- .morie_matching_drop_na(data, c(treatment, covariates))
+  f <- stats::as.formula(paste(treatment, "~",
+                               paste(covariates, collapse = " + ")))
+  if (model == "gbm") {
+    if (!.morie_matching_have("gbm")) {
+      stop("Package 'gbm' is required for model = \"gbm\".  ",
+           "Install it with install.packages(\"gbm\").",
+           call. = FALSE)
+    }
+    fit <- gbm::gbm(f, data = df, distribution = "bernoulli",
+                    n.trees = 100, interaction.depth = 3,
+                    shrinkage = 0.1, verbose = FALSE)
+    ps <- gbm::predict.gbm(fit, newdata = df, n.trees = 100,
+                           type = "response")
+  } else {
+    fit <- stats::glm(f, data = df, family = stats::binomial(),
+                      control = list(maxit = max_iter))
+    ps <- stats::predict(fit, newdata = df, type = "response")
+  }
+  ps <- as.numeric(ps)
+  names(ps) <- rownames(df)
+  ps
 }
+
+
+# ---------------------------------------------------------------------------
+# Propensity score trimming and common support
+# ---------------------------------------------------------------------------
+
+#' Trim propensity scores to a fixed range
+#'
+#' Clips propensity scores to \code{\[lower, upper\]}.
+#'
+#' @param ps Numeric vector of propensity scores.
+#' @param lower,upper Numeric clip bounds (defaults 0.01, 0.99).
+#' @return A numeric vector of the same length as \code{ps}.
+#' @examples
+#' morie_matching_trim_propensity(c(0.001, 0.5, 0.999))
+#' @export
+morie_matching_trim_propensity <- function(ps, lower = 0.01, upper = 0.99) {
+  pmin(pmax(as.numeric(ps), lower), upper)
+}
+
+#' Restrict a sample to the region of common support
+#'
+#' Drops units whose propensity score falls outside the overlap region
+#' of treated and control units.
+#'
+#' @param data Data frame.
+#' @param treatment Binary treatment column name.
+#' @param ps_col Propensity-score column name (default
+#'   \code{"propensity_score"}).
+#' @param method One of \code{"minmax"} (overlap of ranges) or
+#'   \code{"trim"} (drop the extreme 5 percent of each tail).
+#' @return A subset of \code{data} on common support.
+#' @examples
+#' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
+#' df$propensity_score <- morie_matching_estimate_propensity(df, "d",
+#'                                                           c("x1", "x2"))
+#' morie_matching_common_support(df, "d")
+#' }
+#' @export
+morie_matching_common_support <- function(data, treatment,
+                                          ps_col = "propensity_score",
+                                          method = "minmax") {
+  df <- data
+  ps_t <- df[[ps_col]][df[[treatment]] == 1]
+  ps_c <- df[[ps_col]][df[[treatment]] == 0]
+  if (method == "minmax") {
+    lower <- max(min(ps_t, na.rm = TRUE), min(ps_c, na.rm = TRUE))
+    upper <- min(max(ps_t, na.rm = TRUE), max(ps_c, na.rm = TRUE))
+  } else {
+    lower <- max(stats::quantile(ps_t, 0.05, na.rm = TRUE),
+                 stats::quantile(ps_c, 0.05, na.rm = TRUE))
+    upper <- min(stats::quantile(ps_t, 0.95, na.rm = TRUE),
+                 stats::quantile(ps_c, 0.95, na.rm = TRUE))
+  }
+  mask <- df[[ps_col]] >= lower & df[[ps_col]] <= upper
+  mask[is.na(mask)] <- FALSE
+  df[mask, , drop = FALSE]
+}
+
+
+# ---------------------------------------------------------------------------
+# Method-style entry points -- thin MatchIt / WeightIt / Matching wrappers
+# ---------------------------------------------------------------------------
 
 #' Nearest-neighbour propensity-score matching
 #'
-#' For each treated unit, finds the \code{n_neighbors} closest control units
-#' by logit-propensity-score distance.  Delegates to \pkg{MatchIt} when
-#' installed; otherwise uses a base-R implementation.
+#' Native greedy nearest-neighbour matching on the logit propensity
+#' score (Rosenbaum & Rubin 1985; caliper per Cochran & Rubin 1973).
+#' The propensity model is base \code{stats::glm}; no MatchIt at
+#' runtime. Returns the same \code{morie_match_result} shape as
+#' always; cross-validated against MatchIt in \code{tests/cross/}.
 #'
 #' @param data Data frame.
 #' @param treatment Binary treatment column (0/1).
 #' @param covariates Character vector of covariates for the propensity model.
-#' @param n_neighbors Number of matches per treated unit.
+#' @param n_neighbors Number of matches per treated unit
+#'   (forwarded as \code{ratio}).
 #' @param caliper Maximum logit-propensity distance for a valid match,
 #'   expressed in SD units of the logit (or \code{NULL} for no caliper).
 #' @param replace If \code{TRUE}, controls may be re-used.
-#' @param ps Optional pre-computed propensity scores.
+#' @param ps Optional pre-computed propensity scores
+#'   (ignored; retained for back-compat).
 #' @param alpha Significance level (carried through to \code{details}).
-#' @return A list with class \code{morie_match_result} carrying
-#'   \code{matched_data}, \code{n_treated}, \code{n_matched_control},
-#'   \code{match_pairs}, \code{method}, and \code{details}.
+#' @return A list of class \code{morie_match_result}.
 #' @examples
+#' \donttest{
 #' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(150), d = rbinom(150, 1, 0.4),
-#'   x1 = rnorm(150), x2 = rnorm(150),
-#'   region = sample(c("North", "South"), 150, TRUE),
-#'   year = sample(2020:2022, 150, TRUE),
-#'   treat3 = sample(0:2, 150, TRUE))
-#' set.seed(1)
-#' df <- data.frame(d = rbinom(200, 1, 0.4),
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
 #'                  x1 = rnorm(200), x2 = rnorm(200))
 #' res <- morie_matching_nearest_neighbor(df, "d", c("x1", "x2"),
 #'                                        caliper = 0.2)
+#' }
 #' @export
 morie_matching_nearest_neighbor <- function(data, treatment, covariates,
                                             n_neighbors = 1L,
@@ -298,90 +293,76 @@ morie_matching_nearest_neighbor <- function(data, treatment, covariates,
                                             replace = FALSE,
                                             ps = NULL,
                                             alpha = 0.05) {
-  .morie_match_nearest_native(data, treatment, covariates,
-                              n_neighbors = n_neighbors,
-                              caliper = caliper, replace = replace,
-                              alpha = alpha)
+  .morie_match_nearest_native(
+    data, treatment, covariates,
+    n_neighbors = n_neighbors,
+    caliper = caliper,
+    replace = replace,
+    alpha = alpha
+  )
 }
-
-
-# ---------------------------------------------------------------------------
-# Exact matching
-# ---------------------------------------------------------------------------
 
 #' Exact matching on discrete covariates
 #'
-#' Matches treated and control units that share identical values on every
-#' variable in \code{exact_vars}.  Delegates to \pkg{MatchIt} when
-#' available.
+#' Native rmorie implementation: units are stratified on the exact
+#' combination of \code{exact_vars}; strata containing both arms are
+#' retained and controls receive CEM-style stratum weights
+#' (\code{weights} and \code{subclass} columns on the matched data).
+#' No MatchIt at runtime.
 #'
 #' @param data Data frame.
 #' @param treatment Binary treatment column name.
 #' @param exact_vars Character vector of discrete variables for exact matching.
 #' @return A list of class \code{morie_match_result}.
 #' @examples
+#' \donttest{
 #' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(150), d = rbinom(150, 1, 0.4),
-#'   x1 = rnorm(150), x2 = rnorm(150),
-#'   region = sample(c("North", "South"), 150, TRUE),
-#'   year = sample(2020:2022, 150, TRUE),
-#'   treat3 = sample(0:2, 150, TRUE))
+#' df <- data.frame(d = rbinom(200, 1, 0.4),
+#'                  region = sample(c("N", "S", "E", "W"), 200, TRUE),
+#'                  year = sample(2019:2021, 200, TRUE))
 #' morie_matching_exact(df, "d", c("region", "year"))
+#' }
 #' @export
 morie_matching_exact <- function(data, treatment, exact_vars) {
   .morie_match_exact_native(data, treatment, exact_vars)
 }
 
-
-# ---------------------------------------------------------------------------
-# Coarsened exact matching (CEM)
-# ---------------------------------------------------------------------------
-
 #' Coarsened Exact Matching (CEM)
 #'
-#' Coarsens continuous covariates into bins, then performs exact matching
-#' on the coarsened values.  Returns the matched (uncoarsened) data along
-#' with stratum weights.  Delegates to \pkg{MatchIt}'s \code{method = "cem"}
-#' (which itself calls \pkg{cem}) when available.
+#' Native rmorie implementation of Coarsened Exact Matching (Iacus, King
+#' & Porro 2012): numeric covariates are coarsened into bins (quantile
+#' cutpoints; Sturges' rule when \code{n_bins} is \code{NA} for a
+#' variable), units are exact-matched on the coarsened strata, and
+#' controls receive CEM stratum weights (\code{weights} and
+#' \code{subclass} columns on the matched data). The multivariate L1
+#' imbalance of the stratification is reported in
+#' \code{details$l1_before}. No MatchIt/cem at runtime.
 #'
 #' @param data Data frame.
 #' @param treatment Binary treatment column name.
 #' @param covariates Character vector of covariates.
 #' @param n_bins Either a single integer (applied to every covariate) or a
-#'   named list mapping covariate name to the number of bins.
-#' @return A list of class \code{morie_match_result}; \code{matched_data}
-#'   contains a \code{._cem_weight} column.
+#'   named list mapping covariate name to the number of bins; list
+#'   entries left \code{NULL}/\code{NA} fall back to Sturges' rule.
+#' @return A list of class \code{morie_match_result}.
 #' @references Iacus, S. M., King, G., & Porro, G. (2012). Causal inference
 #'   without balance checking: Coarsened exact matching.
 #'   \emph{Political Analysis}, 20(1), 1--24.
 #' @examples
+#' \donttest{
 #' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(150), d = rbinom(150, 1, 0.4),
-#'   x1 = rnorm(150), x2 = rnorm(150),
-#'   region = sample(c("North", "South"), 150, TRUE),
-#'   year = sample(2020:2022, 150, TRUE),
-#'   treat3 = sample(0:2, 150, TRUE))
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_cem(df, "d", c("x1", "x2"), n_bins = 5)
+#' }
 #' @export
 morie_matching_cem <- function(data, treatment, covariates, n_bins = 5L) {
   .morie_match_cem_native(data, treatment, covariates, n_bins = n_bins)
 }
 
-#' @keywords internal
-`%||%` <- function(a, b) if (is.null(a)) b else a
-
-
-# ---------------------------------------------------------------------------
-# Mahalanobis distance matching
-# ---------------------------------------------------------------------------
-
 #' Mahalanobis distance matching
 #'
-#' Matches on Mahalanobis distance over the supplied covariates, optionally
-#' combined with exact matching on discrete variables.  Delegates to
-#' \pkg{MatchIt} when available.
+#' Thin wrapper around \code{MatchIt::matchit(distance = "mahalanobis")}.
 #'
 #' @param data Data frame.
 #' @param treatment Binary treatment column name.
@@ -393,52 +374,50 @@ morie_matching_cem <- function(data, treatment, covariates, n_bins = 5L) {
 #'   prior to distance matching.
 #' @return A list of class \code{morie_match_result}.
 #' @examples
+#' \donttest{
 #' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(150), d = rbinom(150, 1, 0.4),
-#'   x1 = rnorm(150), x2 = rnorm(150),
-#'   region = sample(c("North", "South"), 150, TRUE),
-#'   year = sample(2020:2022, 150, TRUE),
-#'   treat3 = sample(0:2, 150, TRUE))
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_mahalanobis(df, "d", c("x1", "x2"), n_neighbors = 1)
+#' }
 #' @export
 morie_matching_mahalanobis <- function(data, treatment, covariates,
                                        n_neighbors = 1L,
                                        caliper = NULL,
                                        replace = FALSE,
                                        exact = NULL) {
-  .morie_match_mahalanobis_native(data, treatment, covariates,
-                                  n_neighbors = n_neighbors,
-                                  caliper = caliper, replace = replace,
-                                  exact = exact)
+  .morie_match_mahalanobis_native(
+    data, treatment, covariates,
+    n_neighbors = n_neighbors,
+    caliper = caliper,
+    replace = replace,
+    exact = exact
+  )
 }
-
-
-# ---------------------------------------------------------------------------
-# Optimal pair matching
-# ---------------------------------------------------------------------------
 
 #' Optimal pair matching
 #'
-#' Optimal 1:1 pair matching that minimises the total within-pair distance.
-#' Delegates to \pkg{MatchIt}'s \code{method = "optimal"} (which calls
-#' \pkg{optmatch}); otherwise uses a greedy approximation.
+#' Native rmorie implementation of optimal 1:1 pair matching: globally
+#' minimizes the total matched distance (Rosenbaum 1989), unlike greedy
+#' nearest-neighbour. Propensity distance uses an exact non-crossing
+#' dynamic program on the logit score; Mahalanobis distance uses an
+#' exact shortest-augmenting-path assignment on whitened covariates.
+#' No MatchIt/optmatch at runtime.
 #'
 #' @param data Data frame.
 #' @param treatment Binary treatment column name.
 #' @param covariates Character vector of covariates.
 #' @param distance One of \code{"propensity"} or \code{"mahalanobis"}.
-#' @param ps Optional pre-computed propensity scores.
+#' @param ps Optional pre-computed propensity scores (ignored; retained
+#'   for back-compat).
 #' @return A list of class \code{morie_match_result}.
 #' @examples
+#' \donttest{
 #' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(150), d = rbinom(150, 1, 0.4),
-#'   x1 = rnorm(150), x2 = rnorm(150),
-#'   region = sample(c("North", "South"), 150, TRUE),
-#'   year = sample(2020:2022, 150, TRUE),
-#'   treat3 = sample(0:2, 150, TRUE))
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_optimal_pair(df, "d", c("x1", "x2"))
+#' }
 #' @export
 morie_matching_optimal_pair <- function(data, treatment, covariates,
                                         distance = "propensity",
@@ -447,165 +426,94 @@ morie_matching_optimal_pair <- function(data, treatment, covariates,
                               distance = distance, ps = ps)
 }
 
-
-# ---------------------------------------------------------------------------
-# Full matching
-# ---------------------------------------------------------------------------
-
 #' Full matching via subclassification
 #'
-#' Places every unit into a subclass containing at least one treated and one
-#' control unit.  Delegates to \pkg{MatchIt}'s \code{method = "full"}
-#' (which calls \pkg{optmatch}) when available; otherwise approximates
-#' via quantile-based stratification of the propensity score.
+#' Thin wrapper around \code{MatchIt::matchit(method = "full")}, which
+#' calls \pkg{optmatch}.
 #'
 #' @param data Data frame.
 #' @param treatment Binary treatment column name.
 #' @param covariates Character vector of covariates.
-#' @param ps Optional pre-computed propensity scores.
-#' @param n_subclasses Number of propensity-score strata for the fallback.
-#' @return A list of class \code{morie_match_result}; \code{matched_data}
-#'   contains a \code{._full_weight} column.
+#' @param ps Optional pre-computed propensity scores (ignored; retained
+#'   for back-compat).
+#' @param n_subclasses Carried for back-compat (ignored under MatchIt).
+#' @return A list of class \code{morie_match_result}.
 #' @references Hansen, B. B. (2004). Full matching in an observational
 #'   study of coaching for the SAT. \emph{JASA}, 99(467), 609--618.
-#' @examples
+#' @examplesIf requireNamespace("MatchIt", quietly = TRUE) && requireNamespace("optmatch", quietly = TRUE)
+#' \donttest{
 #' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(150), d = rbinom(150, 1, 0.4),
-#'   x1 = rnorm(150), x2 = rnorm(150),
-#'   region = sample(c("North", "South"), 150, TRUE),
-#'   year = sample(2020:2022, 150, TRUE),
-#'   treat3 = sample(0:2, 150, TRUE))
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_full(df, "d", c("x1", "x2"))
+#' }
 #' @export
 morie_matching_full <- function(data, treatment, covariates,
                                 ps = NULL, n_subclasses = 10L) {
+  .morie_matching_need_matchit("morie_matching_full")
+  if (!.morie_matching_have("optmatch")) {
+    stop("`morie_matching_full()` requires the 'optmatch' package. ",
+         "Install it with install.packages(\"optmatch\").",
+         call. = FALSE)
+  }
   df <- .morie_matching_drop_na(data, c(treatment, covariates))
-
-  if (.morie_matching_have("MatchIt") && .morie_matching_have("optmatch")) {
-    f <- stats::as.formula(paste(treatment, "~",
-                                 paste(covariates, collapse = " + ")))
-    mi <- tryCatch(
-      MatchIt::matchit(f, data = df, method = "full", distance = "glm"),
-      error = function(e) NULL
-    )
-    if (!is.null(mi)) {
-      return(.morie_matching_matchit_to_result(
-        mi, df, treatment,
-        method_label = "full_matching (MatchIt + optmatch)",
-        details = list(n_subclasses = n_subclasses)
-      ))
-    }
-  }
-
-  if (is.null(ps)) {
-    ps <- morie_matching_estimate_propensity(df, treatment, covariates)
-  }
-  df[["._ps"]] <- ps[rownames(df)]
-  brks <- unique(stats::quantile(df[["._ps"]],
-                                 probs = seq(0, 1, length.out = n_subclasses + 1L),
-                                 na.rm = TRUE))
-  df[["._subclass"]] <- as.integer(cut(df[["._ps"]], breaks = brks,
-                                       include.lowest = TRUE, labels = FALSE))
-  valid_strata <- integer(0)
-  for (s in unique(df[["._subclass"]])) {
-    if (is.na(s)) next
-    grp <- df[df[["._subclass"]] == s, , drop = FALSE]
-    if (length(unique(grp[[treatment]])) == 2L) {
-      valid_strata <- c(valid_strata, s)
-    }
-  }
-  df_matched <- df[df[["._subclass"]] %in% valid_strata, , drop = FALSE]
-  df_matched[["._full_weight"]] <- 1.0
-  for (s in valid_strata) {
-    mask_s <- df_matched[["._subclass"]] == s
-    n_t <- sum(df_matched[[treatment]][mask_s] == 1)
-    n_c <- sum(df_matched[[treatment]][mask_s] == 0)
-    if (n_c > 0) {
-      idx_c <- mask_s & (df_matched[[treatment]] == 0)
-      df_matched[idx_c, "._full_weight"] <- n_t / n_c
-    }
-  }
-  recs <- list()
-  for (s in valid_strata) {
-    grp <- df_matched[df_matched[["._subclass"]] == s, , drop = FALSE]
-    t_ids <- rownames(grp)[grp[[treatment]] == 1]
-    c_ids <- rownames(grp)[grp[[treatment]] == 0]
-    for (t in t_ids) {
-      for (c in c_ids) {
-        recs[[length(recs) + 1L]] <- data.frame(
-          treated_idx = t, control_idx = c,
-          distance = abs(df_matched[t, "._ps"] - df_matched[c, "._ps"]),
-          stringsAsFactors = FALSE
-        )
-      }
-    }
-  }
-  match_df <- if (length(recs)) do.call(rbind, recs) else .morie_matching_empty_pairs()
-  df_matched[, c("._subclass", "._ps")] <- NULL
-
-  .morie_matching_result(
-    matched_data       = df_matched,
-    n_treated          = sum(df_matched[[treatment]] == 1),
-    n_matched_control  = sum(df_matched[[treatment]] == 0),
-    match_pairs        = match_df,
-    method             = "full_matching",
-    details            = list(n_subclasses = length(valid_strata))
+  f <- stats::as.formula(paste(treatment, "~",
+                               paste(covariates, collapse = " + ")))
+  mi <- MatchIt::matchit(f, data = df, method = "full", distance = "glm")
+  .morie_matching_matchit_to_result(
+    mi, df, treatment,
+    method_label = "full_matching (MatchIt + optmatch)",
+    details = list(n_subclasses = n_subclasses)
   )
 }
 
-
-# ---------------------------------------------------------------------------
-# Subclassification
-# ---------------------------------------------------------------------------
-
 #' Subclassification (stratification) on the propensity score
 #'
-#' Divides observations into propensity-score strata and reports within-
-#' stratum sample sizes and PS ranges.  Mirrors Python
-#' \code{morie.matching.subclassify}.
+#' Thin wrapper around \code{MatchIt::matchit(method = "subclass")} that
+#' reports within-stratum sample sizes and PS ranges, preserving the
+#' rmorie return shape (\code{data_with_strata} + \code{stratum_effects}).
 #'
 #' @param data Data frame.
 #' @param treatment Binary treatment column name.
 #' @param covariates Character vector of covariates.
-#' @param ps Optional pre-computed propensity scores.
+#' @param ps Optional pre-computed propensity scores (ignored; retained
+#'   for back-compat).
 #' @param n_strata Number of quantile-based strata (default 5).
-#' @return A list with components \code{data_with_strata} (the original
-#'   data with a \code{._stratum} column appended) and
+#' @return A list with components \code{data_with_strata} (the matched
+#'   data augmented with \code{._stratum} and \code{._ps} columns) and
 #'   \code{stratum_effects} (per-stratum sample sizes and PS ranges).
-#' @examples
+#' @examplesIf requireNamespace("MatchIt", quietly = TRUE)
+#' \donttest{
 #' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(150), d = rbinom(150, 1, 0.4),
-#'   x1 = rnorm(150), x2 = rnorm(150),
-#'   region = sample(c("North", "South"), 150, TRUE),
-#'   year = sample(2020:2022, 150, TRUE),
-#'   treat3 = sample(0:2, 150, TRUE))
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_subclassify(df, "d", c("x1", "x2"), n_strata = 5)
+#' }
 #' @export
 morie_matching_subclassify <- function(data, treatment, covariates,
                                        ps = NULL, n_strata = 5L) {
+  .morie_matching_need_matchit("morie_matching_subclassify")
   df <- .morie_matching_drop_na(data, c(treatment, covariates))
-  if (is.null(ps)) {
-    ps <- morie_matching_estimate_propensity(df, treatment, covariates)
-  }
-  df[["._ps"]] <- ps[rownames(df)]
-  brks <- unique(stats::quantile(df[["._ps"]],
-                                 probs = seq(0, 1, length.out = n_strata + 1L),
-                                 na.rm = TRUE))
-  df[["._stratum"]] <- as.integer(cut(df[["._ps"]], breaks = brks,
-                                      include.lowest = TRUE, labels = FALSE))
+  f <- stats::as.formula(paste(treatment, "~",
+                               paste(covariates, collapse = " + ")))
+  mi <- MatchIt::matchit(f, data = df, method = "subclass",
+                         distance = "glm", subclass = as.integer(n_strata))
+  md <- MatchIt::match.data(mi)
+  if (!is.null(md$distance)) md[["._ps"]] <- as.numeric(md$distance)
+  md[["._stratum"]] <- as.integer(md$subclass)
   recs <- list()
-  for (s in sort(unique(df[["._stratum"]]))) {
+  for (s in sort(unique(md[["._stratum"]]))) {
     if (is.na(s)) next
-    grp <- df[df[["._stratum"]] == s, , drop = FALSE]
+    grp <- md[md[["._stratum"]] == s, , drop = FALSE]
     n_t <- sum(grp[[treatment]] == 1)
     n_c <- sum(grp[[treatment]] == 0)
     if (!n_t || !n_c) next
     recs[[length(recs) + 1L]] <- data.frame(
-      stratum = s, n_treated = n_t, n_control = n_c,
-      ps_range_low = min(grp[["._ps"]]),
-      ps_range_high = max(grp[["._ps"]]),
+      stratum       = s,
+      n_treated     = n_t,
+      n_control     = n_c,
+      ps_range_low  = min(grp[["._ps"]], na.rm = TRUE),
+      ps_range_high = max(grp[["._ps"]], na.rm = TRUE),
       stringsAsFactors = FALSE
     )
   }
@@ -614,43 +522,36 @@ morie_matching_subclassify <- function(data, treatment, covariates,
                n_control = integer(0), ps_range_low = numeric(0),
                ps_range_high = numeric(0))
   list(
-    data_with_strata = df,
+    data_with_strata = md,
     stratum_effects  = stratum_effects
   )
 }
 
-
-# ---------------------------------------------------------------------------
-# Entropy balancing
-# ---------------------------------------------------------------------------
-
 #' Entropy balancing weights (Hainmueller, 2012)
 #'
-#' Computes weights for the control group so that the weighted moments of
-#' the covariates match those of the treated group.  Delegates to
-#' \pkg{WeightIt} (method \code{"ebal"}) or \pkg{ebal} when available;
-#' otherwise solves the dual problem via base-R Newton iteration.
+#' Thin wrapper around \code{WeightIt::weightit(method = "ebal")} (or
+#' \code{ebal::ebalance} if \pkg{WeightIt} is unavailable).  Computes
+#' weights for the control group so that the weighted moments of the
+#' covariates match those of the treated group.
 #'
 #' @param data Data frame.
 #' @param treatment Binary treatment column name.
 #' @param covariates Character vector of covariates.
 #' @param max_moment Highest moment to balance (1 = means, 2 = means + var,
 #'   3 = + skewness).
-#' @param max_iter Maximum Newton iterations.
-#' @param tol Convergence tolerance on the gradient.
+#' @param max_iter Maximum Newton iterations (forwarded to \pkg{ebal}).
+#' @param tol Convergence tolerance (forwarded to \pkg{ebal}).
 #' @return A numeric vector of weights aligned to the rows of \code{data}
 #'   after dropping NAs.  Treated units receive weight 1.
 #' @references Hainmueller, J. (2012). Entropy balancing for causal effects.
 #'   \emph{Political Analysis}, 20(1), 25--46.
 #' @examples
+#' \donttest{
 #' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(150), d = rbinom(150, 1, 0.4),
-#'   x1 = rnorm(150), x2 = rnorm(150),
-#'   region = sample(c("North", "South"), 150, TRUE),
-#'   year = sample(2020:2022, 150, TRUE),
-#'   treat3 = sample(0:2, 150, TRUE))
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' w <- morie_matching_entropy_balance(df, "d", c("x1", "x2"))
+#' }
 #' @export
 morie_matching_entropy_balance <- function(data, treatment, covariates,
                                            max_moment = 1L,
@@ -665,8 +566,7 @@ morie_matching_entropy_balance <- function(data, treatment, covariates,
   # Native Hainmueller (2012) entropy balancing, ATT: reweight controls
   # so their covariate moments match the treated moments. Weight scale
   # follows ebal::ebalance (control weights sum to n_control);
-  # cross-validated against ebal + WeightIt in tests. Shared
-  # implementation with rmorie (smallstats_native.R).
+  # cross-validated against ebal + WeightIt in tests.
   fit <- .morie_entropy_balance(t_mask, X, max_iter = max_iter)
   if (!fit$converged) {
     warning("entropy balancing did not fully converge; ",
@@ -679,22 +579,21 @@ morie_matching_entropy_balance <- function(data, treatment, covariates,
   w
 }
 
-
-# ---------------------------------------------------------------------------
-# Genetic matching
-# ---------------------------------------------------------------------------
-
 #' Genetic matching (Diamond & Sekhon, 2013)
 #'
-#' Uses a genetic algorithm to find weights for Mahalanobis distance
-#' matching that maximise covariate balance.  Delegates to
-#' \pkg{Matching::GenMatch} + \pkg{Matching::Match} when available;
-#' otherwise runs a base-R genetic algorithm.
+#' Native rmorie implementation of genetic matching (Diamond & Sekhon
+#' 2013): a real-coded genetic algorithm searches the diagonal
+#' Mahalanobis weight matrix maximizing worst-case covariate balance
+#' (paired-t p-value of the worst covariate). Deterministic given
+#' \code{seed}. No Matching/rgenoud at runtime; returns a
+#' \code{morie_match_result} with the selected weights in
+#' \code{details$best_weights}.
 #'
 #' @param data Data frame.
 #' @param treatment Binary treatment column name.
 #' @param covariates Character vector of covariates.
-#' @param n_neighbors Number of matches per treated unit.
+#' @param n_neighbors Number of matches per treated unit
+#'   (\code{M} in \pkg{Matching}).
 #' @param pop_size Genetic-algorithm population size (default 50).
 #' @param n_generations Number of GA generations.
 #' @param seed Random seed.
@@ -703,15 +602,13 @@ morie_matching_entropy_balance <- function(data, treatment, covariates,
 #'   estimating causal effects.  \emph{Review of Economics and
 #'   Statistics}, 95(3), 932--945.
 #' @examples
+#' \donttest{
 #' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(150), d = rbinom(150, 1, 0.4),
-#'   x1 = rnorm(150), x2 = rnorm(150),
-#'   region = sample(c("North", "South"), 150, TRUE),
-#'   year = sample(2020:2022, 150, TRUE),
-#'   treat3 = sample(0:2, 150, TRUE))
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_genetic(df, "d", c("x1", "x2"),
 #'                        pop_size = 50, n_generations = 20)
+#' }
 #' @export
 morie_matching_genetic <- function(data, treatment, covariates,
                                    n_neighbors = 1L,
@@ -725,92 +622,89 @@ morie_matching_genetic <- function(data, treatment, covariates,
                               seed = seed)
 }
 
-
-# ---------------------------------------------------------------------------
-# Variable ratio matching
-# ---------------------------------------------------------------------------
-
 #' Variable-ratio matching on propensity score
 #'
-#' Matches each treated unit to between \code{min_ratio} and
-#' \code{max_ratio} controls within a caliper.
+#' Thin wrapper around \code{MatchIt::matchit(method = "nearest",
+#' ratio = max_ratio, min.controls = min_ratio)} which supports
+#' variable-ratio nearest-neighbour matching natively.
 #'
 #' @param data Data frame.
 #' @param treatment Binary treatment column name.
 #' @param covariates Character vector of covariates.
 #' @param min_ratio,max_ratio Match-count bounds per treated unit.
 #' @param caliper Caliper on the propensity score (in SD units).
-#' @param ps Optional pre-computed propensity scores.
+#' @param ps Optional pre-computed propensity scores (ignored; retained
+#'   for back-compat).
 #' @return A list of class \code{morie_match_result}.
-#' @examples
+#' @examplesIf requireNamespace("MatchIt", quietly = TRUE)
+#' \donttest{
 #' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(150), d = rbinom(150, 1, 0.4),
-#'   x1 = rnorm(150), x2 = rnorm(150),
-#'   region = sample(c("North", "South"), 150, TRUE),
-#'   year = sample(2020:2022, 150, TRUE),
-#'   treat3 = sample(0:2, 150, TRUE))
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_variable_ratio(df, "d", c("x1", "x2"),
 #'                               min_ratio = 1, max_ratio = 3)
+#' }
 #' @export
 morie_matching_variable_ratio <- function(data, treatment, covariates,
                                           min_ratio = 1L,
                                           max_ratio = 5L,
                                           caliper = 0.2,
                                           ps = NULL) {
+  .morie_matching_need_matchit("morie_matching_variable_ratio")
   df <- .morie_matching_drop_na(data, c(treatment, covariates))
-  if (is.null(ps)) {
-    ps <- morie_matching_estimate_propensity(df, treatment, covariates)
+  f <- stats::as.formula(paste(treatment, "~",
+                               paste(covariates, collapse = " + ")))
+  min_ratio <- as.integer(min_ratio)
+  max_ratio <- as.integer(max_ratio)
+  if (max_ratio > min_ratio) {
+    # MatchIt requires min.controls <= ratio < max.controls for
+    # variable-ratio matching: `ratio` is the target AVERAGE number of
+    # controls, not the maximum.
+    target <- min(max_ratio - 1L,
+                  as.integer(ceiling((min_ratio + max_ratio) / 2)))
+    target <- max(target, min_ratio)
+    mi <- MatchIt::matchit(
+      f, data = df,
+      method       = "nearest",
+      distance     = "glm",
+      ratio        = target,
+      min.controls = min_ratio,
+      max.controls = max_ratio,
+      caliper      = caliper,
+      replace      = FALSE
+    )
+  } else {
+    # Degenerate bounds (min == max): plain fixed-ratio matching.
+    mi <- MatchIt::matchit(
+      f, data = df,
+      method   = "nearest",
+      distance = "glm",
+      ratio    = max_ratio,
+      caliper  = caliper,
+      replace  = FALSE
+    )
   }
-  df[["._ps"]] <- ps[rownames(df)]
-  treated_idx <- rownames(df)[df[[treatment]] == 1]
-  control_idx <- rownames(df)[df[[treatment]] == 0]
-  caliper_val <- caliper * stats::sd(df[["._ps"]])
-
-  recs <- list()
-  for (t in treated_idx) {
-    ps_t <- df[t, "._ps"]
-    ds <- abs(ps_t - df[control_idx, "._ps"])
-    names(ds) <- control_idx
-    ds <- ds[ds <= caliper_val]
-    if (!length(ds)) next
-    ds <- sort(ds)
-    n_match <- min(max(length(ds), min_ratio), max_ratio)
-    n_match <- min(n_match, length(ds))
-    for (i in seq_len(n_match)) {
-      recs[[length(recs) + 1L]] <- data.frame(
-        treated_idx = t, control_idx = names(ds)[i],
-        distance = as.numeric(ds[i]), stringsAsFactors = FALSE
-      )
-    }
-  }
-  match_df <- if (length(recs)) do.call(rbind, recs) else .morie_matching_empty_pairs()
-  all_ids <- unique(c(match_df$treated_idx, match_df$control_idx))
-  matched_data <- df[rownames(df) %in% all_ids, , drop = FALSE]
-  matched_data[["._ps"]] <- NULL
-
-  .morie_matching_result(
-    matched_data       = matched_data,
-    n_treated          = length(unique(match_df$treated_idx)),
-    n_matched_control  = length(unique(match_df$control_idx)),
-    match_pairs        = match_df,
-    method             = "variable_ratio",
-    details            = list(caliper = caliper_val,
-                              min_ratio = min_ratio,
-                              max_ratio = max_ratio)
+  .morie_matching_matchit_to_result(
+    mi, df, treatment,
+    method_label = "variable_ratio (MatchIt)",
+    details = list(min_ratio = min_ratio,
+                   max_ratio = max_ratio,
+                   caliper   = caliper)
   )
 }
 
 
 # ---------------------------------------------------------------------------
-# Cardinality matching
+# Cardinality matching (rmorie-specific iterative-caliper heuristic)
 # ---------------------------------------------------------------------------
 
 #' Cardinality matching
 #'
 #' Finds the largest matched sample with maximum absolute SMD below
 #' \code{balance_threshold}.  Uses an iterative caliper-tightening
-#' heuristic over \code{morie_matching_nearest_neighbor}.
+#' heuristic over \code{morie_matching_nearest_neighbor}; for an
+#' exact mixed-integer-programming alternative see
+#' \code{\link\[designmatch:cardmatch\]{designmatch::cardmatch}}.
 #'
 #' @param data Data frame.
 #' @param treatment Binary treatment column name.
@@ -822,15 +716,13 @@ morie_matching_variable_ratio <- function(data, treatment, covariates,
 #'   matching in an observational study of kidney failure after surgery.
 #'   \emph{JASA}, 107(500), 1360--1371.
 #' @examples
+#' \donttest{
 #' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(150), d = rbinom(150, 1, 0.4),
-#'   x1 = rnorm(150), x2 = rnorm(150),
-#'   region = sample(c("North", "South"), 150, TRUE),
-#'   year = sample(2020:2022, 150, TRUE),
-#'   treat3 = sample(0:2, 150, TRUE))
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_cardinality(df, "d", c("x1", "x2"),
 #'                            balance_threshold = 0.1)
+#' }
 #' @export
 morie_matching_cardinality <- function(data, treatment, covariates,
                                        balance_threshold = 0.1,
@@ -854,7 +746,7 @@ morie_matching_cardinality <- function(data, treatment, covariates,
   }
   for (cal in calipers) {
     res <- call_nn(data, treatment, covariates,
-                    caliper = cal, replace = FALSE, ps = ps)
+                   caliper = cal, replace = FALSE, ps = ps)
     if (!nrow(res$matched_data)) next
     bal <- morie_matching_balance(res$matched_data, treatment, covariates)
     if (bal$max_smd <= balance_threshold) {
@@ -889,26 +781,27 @@ morie_matching_cardinality <- function(data, treatment, covariates,
 #' Balance diagnostics for matched / weighted samples
 #'
 #' Reports standardised mean differences (SMD), variance ratios, and
-#' Kolmogorov-Smirnov statistics for each covariate.  When \pkg{cobalt}
-#' is installed it is used to compute the balance table; otherwise a
-#' base-R implementation is used.
+#' Kolmogorov-Smirnov statistics for each covariate.  For a richer
+#' covariate-balance report (including continuous + categorical handling
+#' and Love-plot rendering), see
+#' \code{\link\[cobalt:bal.tab\]{cobalt::bal.tab}} /
+#' \code{\link\[cobalt:love.plot\]{cobalt::love.plot}}.
 #'
 #' @param data Data frame.
 #' @param treatment Binary treatment column name.
 #' @param covariates Character vector of covariates.
 #' @param weights Optional column name of matching / weighting weights.
 #' @param threshold Absolute-SMD threshold for the \code{balanced} flag.
-#' @return A list with \code{balance_table} (a data frame), and scalar
-#'   summaries \code{overall_balance}, \code{max_smd}, \code{balanced}.
+#' @return A list of class \code{morie_balance_result} with
+#'   \code{balance_table} (a data frame) and scalar summaries
+#'   \code{overall_balance}, \code{max_smd}, \code{balanced}.
 #' @examples
+#' \donttest{
 #' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(150), d = rbinom(150, 1, 0.4),
-#'   x1 = rnorm(150), x2 = rnorm(150),
-#'   region = sample(c("North", "South"), 150, TRUE),
-#'   year = sample(2020:2022, 150, TRUE),
-#'   treat3 = sample(0:2, 150, TRUE))
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_balance(df, "d", c("x1", "x2"))
+#' }
 #' @export
 morie_matching_balance <- function(data, treatment, covariates,
                                    weights = NULL, threshold = 0.1) {
@@ -938,7 +831,8 @@ morie_matching_balance <- function(data, treatment, covariates,
     ks <- tryCatch(stats::ks.test(t_vals, c_vals),
                    error = function(e) list(statistic = NA_real_,
                                             p.value = NA_real_),
-                   warning = function(w) suppressWarnings(stats::ks.test(t_vals, c_vals)))
+                   warning = function(w)
+                     suppressWarnings(stats::ks.test(t_vals, c_vals)))
     recs[[length(recs) + 1L]] <- data.frame(
       covariate       = cov,
       mean_treated    = mean_t,
@@ -972,8 +866,8 @@ morie_matching_balance <- function(data, treatment, covariates,
 #' Love-plot data: pre- vs post-matching balance
 #'
 #' Returns a data frame suitable for plotting absolute SMDs before and
-#' after matching.  Delegates to \pkg{cobalt::love.plot}'s data when
-#' available.
+#' after matching.  For a publication-ready plot, pass the same
+#' \code{matchit} object to \code{\link\[cobalt:love.plot\]{cobalt::love.plot}}.
 #'
 #' @param unmatched_data,matched_data Data frames.
 #' @param treatment Binary treatment column name.
@@ -983,16 +877,14 @@ morie_matching_balance <- function(data, treatment, covariates,
 #' @return A data frame with columns \code{covariate}, \code{smd_before},
 #'   \code{smd_after}, \code{abs_smd_before}, \code{abs_smd_after}.
 #' @examples
+#' \donttest{
 #' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(150), d = rbinom(150, 1, 0.4),
-#'   x1 = rnorm(150), x2 = rnorm(150),
-#'   region = sample(c("North", "South"), 150, TRUE),
-#'   year = sample(2020:2022, 150, TRUE),
-#'   treat3 = sample(0:2, 150, TRUE))
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' res <- morie_matching_nearest_neighbor(df, "d", c("x1", "x2"))
 #' morie_matching_love_plot_data(df, res$matched_data,
 #'                               "d", c("x1", "x2"))
+#' }
 #' @export
 morie_matching_love_plot_data <- function(unmatched_data, matched_data,
                                           treatment, covariates,
@@ -1016,23 +908,23 @@ morie_matching_love_plot_data <- function(unmatched_data, matched_data,
 #' Publication-ready balance table
 #'
 #' Thin wrapper around \code{morie_matching_balance} returning only the
-#' data-frame component.
+#' data-frame component.  See \code{\link\[cobalt:bal.tab\]{cobalt::bal.tab}}
+#' for an alternative with categorical-variable support.
 #'
 #' @inheritParams morie_matching_balance
 #' @return A data frame.
 #' @examples
+#' \donttest{
 #' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(150), d = rbinom(150, 1, 0.4),
-#'   x1 = rnorm(150), x2 = rnorm(150),
-#'   region = sample(c("North", "South"), 150, TRUE),
-#'   year = sample(2020:2022, 150, TRUE),
-#'   treat3 = sample(0:2, 150, TRUE))
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_balance_table(df, "d", c("x1", "x2"))
+#' }
 #' @export
 morie_matching_balance_table <- function(data, treatment, covariates,
                                          weights = NULL) {
-  morie_matching_balance(data, treatment, covariates, weights = weights)$balance_table
+  morie_matching_balance(data, treatment, covariates,
+                         weights = weights)$balance_table
 }
 
 
@@ -1092,16 +984,13 @@ morie_matching_balance_table <- function(data, treatment, covariates,
 #' @param alpha Significance level for confidence intervals.
 #' @return A list of class \code{morie_te_result}.
 #' @examples
+#' \donttest{
 #' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(150), d = rbinom(150, 1, 0.4),
-#'   x1 = rnorm(150), x2 = rnorm(150),
-#'   region = sample(c("North", "South"), 150, TRUE),
-#'   year = sample(2020:2022, 150, TRUE),
-#'   treat3 = sample(0:2, 150, TRUE))
-#' res <- morie_matching_nearest_neighbor(df, "d", c("x1", "x2"))
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' res <- morie_matching_nearest_neighbor(df, "d", c("x1", "x2"))
 #' morie_matching_att_matched(df, "y", "d", res$match_pairs)
+#' }
 #' @export
 morie_matching_att_matched <- function(data, outcome, treatment,
                                        match_pairs, weights = NULL,
@@ -1137,15 +1026,14 @@ morie_matching_att_matched <- function(data, outcome, treatment,
 #' @param alpha Significance level for confidence intervals.
 #' @return A list of class \code{morie_te_result}.
 #' @examples
+#' \donttest{
 #' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(150), d = rbinom(150, 1, 0.4),
-#'   x1 = rnorm(150), x2 = rnorm(150),
-#'   region = sample(c("North", "South"), 150, TRUE),
-#'   year = sample(2020:2022, 150, TRUE),
-#'   treat3 = sample(0:2, 150, TRUE))
-#' morie_matching_ate_matched(df, "y", "d", c("x1", "x2"),
-#'                            weights = "._cem_weight")
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
+#' m <- morie_matching_cem(df, "d", c("x1", "x2"), n_bins = 5)
+#' morie_matching_ate_matched(m$matched_data, "y", "d", c("x1", "x2"),
+#'                            weights = "weights")
+#' }
 #' @export
 morie_matching_ate_matched <- function(data, outcome, treatment, covariates,
                                        weights = NULL, alpha = 0.05) {
@@ -1167,7 +1055,8 @@ morie_matching_ate_matched <- function(data, outcome, treatment, covariates,
   } else {
     mean_t <- mean(y_t)
     mean_c <- mean(y_c)
-    se <- sqrt(stats::var(y_t) / length(y_t) + stats::var(y_c) / length(y_c))
+    se <- sqrt(stats::var(y_t) / length(y_t) +
+                 stats::var(y_c) / length(y_c))
   }
   ate <- mean_t - mean_c
   .morie_matching_te_result("ATE", ate, se, nrow(df), alpha)
@@ -1182,15 +1071,13 @@ morie_matching_ate_matched <- function(data, outcome, treatment, covariates,
 #' @inheritParams morie_matching_att_matched
 #' @return A list of class \code{morie_te_result}.
 #' @examples
+#' \donttest{
 #' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(150), d = rbinom(150, 1, 0.4),
-#'   x1 = rnorm(150), x2 = rnorm(150),
-#'   region = sample(c("North", "South"), 150, TRUE),
-#'   year = sample(2020:2022, 150, TRUE),
-#'   treat3 = sample(0:2, 150, TRUE))
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' res <- morie_matching_nearest_neighbor(df, "d", c("x1", "x2"))
 #' morie_matching_atc_matched(df, "y", "d", res$match_pairs)
+#' }
 #' @export
 morie_matching_atc_matched <- function(data, outcome, treatment,
                                        match_pairs, alpha = 0.05) {
@@ -1229,15 +1116,13 @@ morie_matching_atc_matched <- function(data, outcome, treatment,
 #'   of matching estimators for average treatment effects.
 #'   \emph{Econometrica}, 74(1), 235--267.
 #' @examples
+#' \donttest{
 #' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(150), d = rbinom(150, 1, 0.4),
-#'   x1 = rnorm(150), x2 = rnorm(150),
-#'   region = sample(c("North", "South"), 150, TRUE),
-#'   year = sample(2020:2022, 150, TRUE),
-#'   treat3 = sample(0:2, 150, TRUE))
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' res <- morie_matching_nearest_neighbor(df, "d", c("x1", "x2"))
 #' morie_matching_abadie_imbens_se(df, "y", "d", res$match_pairs)
+#' }
 #' @export
 morie_matching_abadie_imbens_se <- function(data, outcome, treatment,
                                             match_pairs, n_matches = 1L) {
@@ -1270,13 +1155,12 @@ morie_matching_abadie_imbens_se <- function(data, outcome, treatment,
   #                       + sum_{j: D=0} K_j^2 * sigma^2(X_j, 0) ]
   t_vec <- as.integer(df[[treatment]])
   if (.morie_matching_have_cpp("morie_matching_abadie_imbens_kernel_cpp")) {
-    V <- morie_matching_abadie_imbens_kernel_cpp(y, t_vec,
-                                                  as.integer(seq_len(n)[
-                                                    match(match_pairs$treated_idx,
-                                                          rownames(df))]),
-                                                  as.integer(seq_len(n)[
-                                                    match(match_pairs$control_idx,
-                                                          rownames(df))]))
+    V <- morie_matching_abadie_imbens_kernel_cpp(
+      y, t_vec,
+      as.integer(seq_len(n)[match(match_pairs$treated_idx,
+                                   rownames(df))]),
+      as.integer(seq_len(n)[match(match_pairs$control_idx,
+                                   rownames(df))]))
     return(sqrt(max(V, 0)))
   }
   is_t <- t_vec == 1L
@@ -1296,9 +1180,9 @@ morie_matching_abadie_imbens_se <- function(data, outcome, treatment,
 #' Computes bounds on the p-value for the treatment effect over a grid of
 #' values of \code{gamma} (the maximum odds ratio of differential treatment
 #' assignment due to an unobserved confounder).  Uses the Wilcoxon
-#' signed-rank approach.  When \pkg{sensitivitymv} is installed, callers
-#' should prefer it for exact bounds; this function provides a base-R
-#' implementation parallel to the Python version.
+#' signed-rank approach.  For exact bounds, see
+#' \code{\link\[sensitivitymv:senmv\]{sensitivitymv::senmv}} or the
+#' \pkg{rbounds} package.
 #'
 #' @param data Data frame.
 #' @param outcome,treatment Column names.
@@ -1309,15 +1193,13 @@ morie_matching_abadie_imbens_se <- function(data, outcome, treatment,
 #' @references Rosenbaum, P. R. (2002). \emph{Observational Studies}
 #'   (2nd ed.).  Springer.
 #' @examples
+#' \donttest{
 #' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(150), d = rbinom(150, 1, 0.4),
-#'   x1 = rnorm(150), x2 = rnorm(150),
-#'   region = sample(c("North", "South"), 150, TRUE),
-#'   year = sample(2020:2022, 150, TRUE),
-#'   treat3 = sample(0:2, 150, TRUE))
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' res <- morie_matching_nearest_neighbor(df, "d", c("x1", "x2"))
 #' morie_matching_rosenbaum_bounds(df, "y", "d", res$match_pairs)
+#' }
 #' @export
 morie_matching_rosenbaum_bounds <- function(data, outcome, treatment,
                                             match_pairs,
@@ -1404,15 +1286,13 @@ morie_matching_rosenbaum_bounds <- function(data, outcome, treatment,
 #' @return A list of class \code{morie_te_result} with estimand
 #'   \code{"ATT_DR"}.
 #' @examples
+#' \donttest{
 #' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(150), d = rbinom(150, 1, 0.4),
-#'   x1 = rnorm(150), x2 = rnorm(150),
-#'   region = sample(c("North", "South"), 150, TRUE),
-#'   year = sample(2020:2022, 150, TRUE),
-#'   treat3 = sample(0:2, 150, TRUE))
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_doubly_robust(df, "y", "d", c("x1", "x2"),
-#'                              n_bootstrap = 200)
+#'                              n_bootstrap = 50)  # 50 keeps the example fast
+#' }
 #' @export
 morie_matching_doubly_robust <- function(data, outcome, treatment, covariates,
                                          ps = NULL, n_bootstrap = 200L,
@@ -1474,11 +1354,12 @@ morie_matching_doubly_robust <- function(data, outcome, treatment, covariates,
   }
   se <- if (length(boot_ests) > 1L) stats::sd(boot_ests) else NA_real_
 
-  .morie_matching_te_result("ATT_DR", att_dr,
-                            ifelse(is.na(se), 0, se),
-                            nrow(matched), alpha,
-                            details = list(n_bootstrap = n_bootstrap,
-                                           n_successful_boots = length(boot_ests)))
+  .morie_matching_te_result(
+    "ATT_DR", att_dr,
+    ifelse(is.na(se), 0, se),
+    nrow(matched), alpha,
+    details = list(n_bootstrap = n_bootstrap,
+                   n_successful_boots = length(boot_ests)))
 }
 
 
@@ -1500,14 +1381,12 @@ morie_matching_doubly_robust <- function(data, outcome, treatment, covariates,
 #' @return A named list whose keys are treatment levels and whose values
 #'   are \code{morie_match_result} objects.
 #' @examples
+#' \donttest{
 #' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(150), d = rbinom(150, 1, 0.4),
-#'   x1 = rnorm(150), x2 = rnorm(150),
-#'   region = sample(c("North", "South"), 150, TRUE),
-#'   year = sample(2020:2022, 150, TRUE),
-#'   treat3 = sample(0:2, 150, TRUE))
+#' df <- data.frame(treat3 = sample(0:2, 200, TRUE),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_multi_treatment(df, "treat3", c("x1", "x2"))
+#' }
 #' @export
 morie_matching_multi_treatment <- function(data, treatment, covariates,
                                            reference_group = NULL,
@@ -1547,8 +1426,7 @@ morie_matching_multi_treatment <- function(data, treatment, covariates,
 #' Longitudinal matching for panel data
 #'
 #' Matches treated and control units on the basis of their pre-treatment
-#' covariate values.  Mirrors Python
-#' \code{morie.matching.match_longitudinal}.
+#' covariate values.
 #'
 #' @param data Panel data frame.
 #' @param treatment Binary treatment indicator column.
@@ -1561,14 +1439,15 @@ morie_matching_multi_treatment <- function(data, treatment, covariates,
 #' @param method One of \code{"nearest_neighbor"} or \code{"mahalanobis"}.
 #' @return A list of class \code{morie_match_result}.
 #' @examples
+#' \donttest{
 #' set.seed(1)
-#' panel <- expand.grid(id = 1:40, t = 1:5)
-#' panel$t0 <- ifelse(panel$id <= 20, 4, Inf)
-#' panel$d <- as.integer(panel$t >= panel$t0)
-#' panel$x1 <- rnorm(nrow(panel))
-#' m <- morie_matching_longitudinal(panel, "d", "x1", unit = "id",
-#'                                  time = "t", treatment_time = "t0")
-#' str(m, max.level = 1)
+#' panel <- data.frame(id = rep(1:40, each = 3), t = rep(1:3, 40),
+#'                     x1 = rnorm(120),
+#'                     d = rep(rbinom(40, 1, 0.5), each = 3))
+#' panel$t0 <- ifelse(panel$d == 1, 3, NA)
+#' morie_matching_longitudinal(panel, "d", "x1", unit = "id",
+#'                             time = "t", treatment_time = "t0")
+#' }
 #' @export
 morie_matching_longitudinal <- function(data, treatment, covariates, unit,
                                         time, treatment_time,
@@ -1591,8 +1470,9 @@ morie_matching_longitudinal <- function(data, treatment, covariates, unit,
     }
     if (!nrow(pre_data)) next
     feat <- list(`._unit` = u, `._treated` = is_treated)
-    for (c in covariates) feat[[c]] <- mean(as.numeric(pre_data[[c]]),
-                                            na.rm = TRUE)
+    for (c in covariates) {
+      feat[[c]] <- mean(as.numeric(pre_data[[c]]), na.rm = TRUE)
+    }
     unit_features[[length(unit_features) + 1L]] <- as.data.frame(
       feat, stringsAsFactors = FALSE
     )
@@ -1628,15 +1508,13 @@ morie_matching_longitudinal <- function(data, treatment, covariates, unit,
 #'   \code{pct_balanced_before}, \code{pct_balanced_after},
 #'   \code{n_obs_before}, \code{n_obs_after}.
 #' @examples
+#' \donttest{
 #' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(150), d = rbinom(150, 1, 0.4),
-#'   x1 = rnorm(150), x2 = rnorm(150),
-#'   region = sample(c("North", "South"), 150, TRUE),
-#'   year = sample(2020:2022, 150, TRUE),
-#'   treat3 = sample(0:2, 150, TRUE))
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' res <- morie_matching_nearest_neighbor(df, "d", c("x1", "x2"))
 #' morie_matching_quality(df, res$matched_data, "d", c("x1", "x2"))
+#' }
 #' @export
 morie_matching_quality <- function(unmatched_data, matched_data,
                                    treatment, covariates,
@@ -1659,14 +1537,16 @@ morie_matching_quality <- function(unmatched_data, matched_data,
   n_bal_before <- sum(smd_before <= 0.1, na.rm = TRUE)
   n_bal_after  <- sum(smd_after  <= 0.1, na.rm = TRUE)
   list(
-    balance_before       = bal_before,
-    balance_after        = bal_after,
-    bias_reduction       = as.list(bias_reduction),
-    mean_bias_reduction  = mean(bias_reduction, na.rm = TRUE),
-    pct_balanced_before  = if (length(covariates)) n_bal_before / length(covariates) * 100 else 0,
-    pct_balanced_after   = if (length(covariates)) n_bal_after  / length(covariates) * 100 else 0,
-    n_obs_before         = nrow(unmatched_data),
-    n_obs_after          = nrow(matched_data)
+    balance_before      = bal_before,
+    balance_after       = bal_after,
+    bias_reduction      = as.list(bias_reduction),
+    mean_bias_reduction = mean(bias_reduction, na.rm = TRUE),
+    pct_balanced_before = if (length(covariates))
+      n_bal_before / length(covariates) * 100 else 0,
+    pct_balanced_after  = if (length(covariates))
+      n_bal_after  / length(covariates) * 100 else 0,
+    n_obs_before        = nrow(unmatched_data),
+    n_obs_after         = nrow(matched_data)
   )
 }
 
@@ -1689,14 +1569,12 @@ morie_matching_quality <- function(unmatched_data, matched_data,
 #'   \code{overlap_region}, \code{n_off_support}, \code{pct_off_support},
 #'   and \code{effective_sample_size}.
 #' @examples
+#' \donttest{
 #' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(150), d = rbinom(150, 1, 0.4),
-#'   x1 = rnorm(150), x2 = rnorm(150),
-#'   region = sample(c("North", "South"), 150, TRUE),
-#'   year = sample(2020:2022, 150, TRUE),
-#'   treat3 = sample(0:2, 150, TRUE))
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_overlap(df, "d", c("x1", "x2"))
+#' }
 #' @export
 morie_matching_overlap <- function(data, treatment, covariates,
                                    ps = NULL) {

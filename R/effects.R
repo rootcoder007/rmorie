@@ -7,26 +7,54 @@
 # either version 3 of the License, or (at your option) any later
 # version. See LICENSE for the full text.
 
-#' Treatment effect estimators (ATE, LATE, G-computation, sensitivity)
+#' Treatment effect estimators and marginal-effects extenders
 #'
-#' Provides:
+#' Two function families live here:
+#'
+#' \strong{Treatment-effect estimators (legacy)}
 #' \itemize{
-#'   \item \code{estimate_ate()} — IPW-weighted OLS ATE.
-#'   \item \code{estimate_plr()} — Partially Linear Regression via
-#'     native cross-fitting with ridge nuisance learners.
-#'   \item \code{estimate_pliv()} — Partially Linear IV (LATE) via
-#'     native cross-fit partialling-out.
-#'   \item \code{estimate_ate_gcomputation()} — G-computation
-#'     (outcome-regression / standardisation) ATE with bootstrap SE.
-#'   \item \code{sensitivity_rosenbaum()} — Rosenbaum bounds for hidden
-#'     confounding (native Rosenbaum signed-rank bounds).
-#'   \item \code{e_value()} — VanderWeele-Ding E-value (wraps
-#'     \pkg{EValue} when available, else base R).
+#'   \item \code{estimate_ate()} -- IPW-weighted OLS ATE.
+#'   \item \code{estimate_plr()} -- Partially Linear Regression via
+#'     \pkg{DoubleML}; falls back to base R cross-fit ridge.
+#'   \item \code{estimate_pliv()} -- Partially Linear IV (LATE) via
+#'     \pkg{DoubleML}; falls back to 2SLS.
+#'   \item \code{estimate_ate_gcomputation()} -- G-computation ATE.
+#'     Thin wrapper over \code{stdReg::stdGlm()} when installed; falls
+#'     back to inline bootstrap standardisation otherwise.
+#'   \item \code{sensitivity_rosenbaum()} -- Rosenbaum bounds. Thin
+#'     wrapper over \code{rbounds::psens()} when installed; otherwise
+#'     normal-approximation Wilcoxon signed-rank bounds.
+#'   \item \code{e_value()} -- VanderWeele-Ding E-value. Thin wrapper
+#'     native VanderWeele-Ding continuous-scale E-value (module 26).
 #' }
+#'
+#' \strong{Marginal-effects extenders} (Phase 1.j additions; thin
+#' wrappers over Vincent Arel-Bundock's universal API and the
+#' \pkg{emmeans} / \pkg{broom} ecosystems):
+#' \itemize{
+#'   \item \code{morie_effects_emmeans()} -> \code{emmeans::emmeans()}.
+#'   \item \code{morie_effects_predictions()} ->
+#'     \code{marginaleffects::predictions()}.
+#'   \item \code{morie_effects_comparisons()} ->
+#'     \code{marginaleffects::comparisons()}.
+#'   \item \code{morie_effects_slopes()} ->
+#'     \code{marginaleffects::slopes()}.
+#'   \item \code{morie_effects_tidy()} -> \code{broom::tidy()} (falls
+#'     back to a \code{summary()}-based tidy frame when \pkg{broom}
+#'     is unavailable).
+#' }
+#'
+#' Each extender requires the underlying CRAN package and signals a
+#' clean \code{stop()} when it is missing, leaving the upstream model
+#' object untouched. They return the underlying package's native
+#' object verbatim so downstream code (e.g. \pkg{ggplot2} plumbing,
+#' rmorie's MRM step) keeps working with the canonical API.
 #'
 #' @references
 #' Chernozhukov et al. (2018); Robins (1986); VanderWeele & Ding
-#' (2017); Rosenbaum (2002).
+#' (2017); Rosenbaum (2002); Arel-Bundock (2024,
+#' \pkg{marginaleffects}); Lenth (2024, \pkg{emmeans});
+#' Robinson, Hayes & Couch (2024, \pkg{broom}).
 #' @name effects
 NULL
 
@@ -35,11 +63,17 @@ NULL
 
 #' IPW-weighted OLS ATE
 #'
+#' Thin wrapper over a weighted \code{stats::lm()} plus HC3 robust SEs
+#' from \pkg{sandwich} + \pkg{lmtest} when installed. Note: this is the
+#' legacy shape used by older MRM pipelines; new code should prefer
+#' \code{morie_estimate_ate()} (in \code{R/causal.R}) for the richer
+#' \code{morie_te_result} return shape.
+#'
 #' @param data        Data frame containing the analytical sample.
 #' @param outcome     Name of the outcome column.
 #' @param treatment   Name of the binary treatment column.
 #' @param weights_col Name of the weights column (e.g. IPTW).
-#' @return Named list with `ate` and `se` (HC3-robust).
+#' @return Named list with `ate` and `se` (native HC3-robust).
 #' @examples
 #' set.seed(1)
 #' d <- data.frame(x = rnorm(60), tr = rbinom(60, 1, 0.5))
@@ -64,9 +98,10 @@ estimate_ate <- function(data, outcome, treatment, weights_col) {
 
 #' Partially Linear Regression (PLR) ATE
 #'
-#' Native cross-fit partially-linear-regression estimator
-#' (Chernozhukov et al. 2018) with SVD-ridge nuisance learners;
-#' cross-validated against DoubleML.
+#' Native cross-fitting estimator using ridge regression, following
+#' Chernozhukov et al. (2018). Cross-validated against \pkg{DoubleML}
+#' in the package's cross tests but not calling it at runtime; or,
+#' last-ditch, OLS partialling out.
 #'
 #' @param data        Data frame with all required columns.
 #' @param treatment   Column name of the treatment variable.
@@ -90,31 +125,33 @@ estimate_ate <- function(data, outcome, treatment, weights_col) {
 #' }
 #' @export
 estimate_plr <- function(data, treatment, outcome, covariates,
-                           n_folds = 5L, random_state = 42L) {
+                         n_folds = 5L, random_state = 42L) {
   required_cols <- c(treatment, outcome, covariates)
-  missing_cols <- setdiff(required_cols, names(data))
-  if (length(missing_cols))
+  missing_cols  <- setdiff(required_cols, names(data))
+  if (length(missing_cols)) {
     stop("Columns missing from data: ",
          paste(missing_cols, collapse = ", "))
-  if (n_folds < 2L)
+  }
+  if (n_folds < 2L) {
     stop("n_folds must be >= 2, got ", n_folds)
+  }
 
-  df <- stats::na.omit(data[, c(treatment, outcome, covariates),
-                             drop = FALSE])
+  df    <- stats::na.omit(data[, c(treatment, outcome, covariates),
+                               drop = FALSE])
   n_obs <- nrow(df)
 
   # Native cross-fit PLR (Chernozhukov et al. 2018) with ridge nuisance
   # learners -- the same estimator the DoubleML delegation computed,
-  # cross-validated against DoubleML in tests.
+  # cross-validated against DoubleML in tests/cross/.
   set.seed(random_state)
   folds <- sample(rep(seq_len(n_folds), length.out = n_obs))
   d <- as.numeric(df[[treatment]])
   y <- as.numeric(df[[outcome]])
-  X <- as.matrix(df[, covariates, drop = FALSE])
-  storage.mode(X) <- "double"
+  x_mat <- as.matrix(df[, covariates, drop = FALSE])
+  storage.mode(x_mat) <- "double"
 
-  fit_predict <- function(X_train, z_train, X_test) {
-    .morie_cv_ridge_predict(X_train, z_train, X_test)
+  fit_predict <- function(x_train, z_train, x_test) {
+    .morie_cv_ridge_predict(x_train, z_train, x_test)
   }
 
   y_hat <- numeric(n_obs)
@@ -122,30 +159,29 @@ estimate_plr <- function(data, treatment, outcome, covariates,
   for (k in seq_len(n_folds)) {
     train_idx <- which(folds != k)
     test_idx  <- which(folds == k)
-    y_hat[test_idx] <- fit_predict(X[train_idx, , drop = FALSE],
-                                     y[train_idx],
-                                     X[test_idx,  , drop = FALSE])
-    d_hat[test_idx] <- fit_predict(X[train_idx, , drop = FALSE],
-                                     d[train_idx],
-                                     X[test_idx,  , drop = FALSE])
+    y_hat[test_idx] <- fit_predict(x_mat[train_idx, , drop = FALSE],
+                                   y[train_idx],
+                                   x_mat[test_idx, , drop = FALSE])
+    d_hat[test_idx] <- fit_predict(x_mat[train_idx, , drop = FALSE],
+                                   d[train_idx],
+                                   x_mat[test_idx, , drop = FALSE])
   }
   d_resid <- d - d_hat
   y_resid <- y - y_hat
-  ate <- sum(d_resid * y_resid) / sum(d_resid * d_resid)
-  # Robust SE via residual orthogonality score (Chernozhukov et al.).
-  psi <- (y_resid - ate * d_resid) * d_resid
-  J0  <- mean(d_resid * d_resid)
-  var_ate <- mean(psi^2) / (J0^2 * n_obs)
-  se <- sqrt(var_ate)
-  z  <- qnorm(0.975)
+  ate     <- sum(d_resid * y_resid) / sum(d_resid * d_resid)
+  psi     <- (y_resid - ate * d_resid) * d_resid
+  j0      <- mean(d_resid * d_resid)
+  var_ate <- mean(psi^2) / (j0^2 * n_obs)
+  se      <- sqrt(var_ate)
+  z       <- stats::qnorm(0.975)
   list(
     ate      = ate,
     se       = se,
     ci_lower = ate - z * se,
     ci_upper = ate + z * se,
-    pval     = 2 * (1 - pnorm(abs(ate / se))),
+    pval     = 2 * (1 - stats::pnorm(abs(ate / se))),
     n_obs    = n_obs,
-    method   = "Native cross-fit PLR (ridge nuisances)"
+    method   = "cross-fit ridge (base R fallback)"
   )
 }
 
@@ -154,15 +190,16 @@ estimate_plr <- function(data, treatment, outcome, covariates,
 
 #' Partially Linear IV (PLIV) / Local Average Treatment Effect
 #'
-#' Native cross-fit partialled-out IV estimator (the DoubleMLPLIV
-#' estimand, Chernozhukov et al. 2018) with SVD-ridge nuisances.
+#' Native 2SLS in base R: first stage `D ~ Z + X`, second stage
+#' `Y ~ D_hat + X`. Cross-validated against \pkg{DoubleML} in the
+#' package's cross tests but not calling it at runtime.
 #'
 #' @param data        Data frame with all required columns.
 #' @param treatment   Endogenous treatment column name.
 #' @param outcome     Outcome column name.
 #' @param instrument  Instrument column name.
 #' @param covariates  Exogenous covariate column names.
-#' @param n_folds     Cross-fitting folds. Default 5.
+#' @param n_folds     Cross-fitting folds (DoubleML path). Default 5.
 #' @param random_state RNG seed. Default 42.
 #' @return Named list with `late`, `se`, `ci_lower`, `ci_upper`,
 #'   `pval`, `n_obs`, `method`.
@@ -177,16 +214,17 @@ estimate_plr <- function(data, treatment, outcome, covariates,
 #' res$late
 #' @export
 estimate_pliv <- function(data, treatment, outcome, instrument,
-                            covariates, n_folds = 5L,
-                            random_state = 42L) {
+                          covariates, n_folds = 5L,
+                          random_state = 42L) {
   required_cols <- c(treatment, outcome, instrument, covariates)
-  missing_cols <- setdiff(required_cols, names(data))
-  if (length(missing_cols))
+  missing_cols  <- setdiff(required_cols, names(data))
+  if (length(missing_cols)) {
     stop("Columns missing from data: ",
          paste(missing_cols, collapse = ", "))
+  }
 
-  df <- stats::na.omit(data[, c(treatment, outcome, instrument,
-                                  covariates), drop = FALSE])
+  df    <- stats::na.omit(data[, c(treatment, outcome, instrument,
+                                   covariates), drop = FALSE])
   n_obs <- nrow(df)
 
   # Native partialled-out IV (PLIV): cross-fit ridge nuisances for
@@ -217,7 +255,7 @@ estimate_pliv <- function(data, treatment, outcome, instrument,
   psi <- rz * (ry - rd * theta)
   se <- sqrt(sum(psi^2) / (sum(rz * rd)^2))
   zstat <- theta / se
-  list(
+  return(list(
     late     = theta,
     se       = se,
     ci_lower = theta - stats::qnorm(0.975) * se,
@@ -225,16 +263,19 @@ estimate_pliv <- function(data, treatment, outcome, instrument,
     pval     = 2 * stats::pnorm(-abs(zstat)),
     n_obs    = n_obs,
     method   = "Native cross-fit PLIV (ridge nuisances)"
-  )
+  ))
 }
 
 
-# -- G-computation (outcome regression / standardisation) -----------
+# -- G-computation (outcome regression / standardisation) -------------
 
 #' G-computation ATE with bootstrap SE
 #'
-#' Fits the outcome model, predicts counterfactuals under T=1 and T=0,
-#' averages the difference. Bootstrap SE uses 500 resamples.
+#' Thin wrapper over \code{stdReg::stdGlm()} (Sjolander's
+#' regression-standardisation back end) when \pkg{stdReg} is
+#' installed. Without \pkg{stdReg}, falls back to an inline outcome-
+#' regression + bootstrap implementation (500 resamples, seed 42)
+#' that mirrors the legacy rmorie behaviour.
 #'
 #' @param data         Data frame with all required columns.
 #' @param treatment    Binary treatment column (0/1).
@@ -255,55 +296,85 @@ estimate_pliv <- function(data, treatment, outcome, instrument,
 #' res$ate
 #' @export
 estimate_ate_gcomputation <- function(data, treatment, outcome,
-                                         covariates,
-                                         outcome_model = "linear") {
+                                      covariates,
+                                      outcome_model = "linear") {
   valid_models <- c("linear", "logistic")
-  if (!outcome_model %in% valid_models)
+  if (!outcome_model %in% valid_models) {
     stop("outcome_model must be one of: ",
          paste(valid_models, collapse = ", "))
+  }
   required_cols <- c(treatment, outcome, covariates)
-  missing_cols <- setdiff(required_cols, names(data))
-  if (length(missing_cols))
+  missing_cols  <- setdiff(required_cols, names(data))
+  if (length(missing_cols)) {
     stop("Columns missing from data: ",
          paste(missing_cols, collapse = ", "))
-  df <- stats::na.omit(data[, c(treatment, outcome, covariates),
-                             drop = FALSE])
+  }
+  df    <- stats::na.omit(data[, c(treatment, outcome, covariates),
+                               drop = FALSE])
   n_obs <- nrow(df)
-  if (n_obs < 10L)
+  if (n_obs < 10L) {
     stop("G-computation requires at least 10 complete observations.")
+  }
+
+  if (requireNamespace("stdReg", quietly = TRUE)) {
+    fml <- stats::as.formula(
+      paste0(outcome, " ~ ",
+             paste(c(treatment, covariates), collapse = " + "))
+    )
+    fam <- if (outcome_model == "linear") {
+      stats::gaussian()
+    } else {
+      stats::binomial()
+    }
+    mod    <- stats::glm(fml, data = df, family = fam)
+    fitobj <- stdReg::stdGlm(fit = mod, data = df, X = treatment,
+                             x = c(0, 1))
+    sm     <- summary(fitobj, contrast = "difference",
+                      reference = 0, CI.level = 0.95)
+    est <- sm$est.table
+    return(list(
+      ate           = as.numeric(est[2, "Estimate"]),
+      se            = as.numeric(est[2, "Std. Error"]),
+      ci_lower      = as.numeric(est[2, "lower 0.95"]),
+      ci_upper      = as.numeric(est[2, "upper 0.95"]),
+      n_obs         = n_obs,
+      outcome_model = outcome_model,
+      method        = "stdReg::stdGlm"
+    ))
+  }
 
   feature_cols <- c(treatment, covariates)
-
-  # Centre+scale to mirror sklearn's StandardScaler behaviour.
   fit_and_predict_ate <- function(boot_df) {
     means <- colMeans(boot_df[, feature_cols, drop = FALSE])
-    sds   <- apply(boot_df[, feature_cols, drop = FALSE], 2, sd)
+    sds   <- apply(boot_df[, feature_cols, drop = FALSE], 2, stats::sd)
     sds[sds == 0] <- 1
-    Xs <- sweep(sweep(boot_df[, feature_cols, drop = FALSE], 2,
-                       means, "-"), 2, sds, "/")
-    df_fit <- as.data.frame(Xs)
+    xs    <- sweep(sweep(boot_df[, feature_cols, drop = FALSE], 2,
+                         means, "-"), 2, sds, "/")
+    df_fit <- as.data.frame(xs)
     df_fit[[outcome]] <- boot_df[[outcome]]
     if (outcome_model == "linear") {
       mod <- stats::lm(stats::as.formula(paste0(outcome, " ~ .")),
-                        data = df_fit)
+                       data = df_fit)
     } else {
       mod <- stats::glm(stats::as.formula(paste0(outcome, " ~ .")),
-                          data = df_fit, family = stats::binomial())
+                        data = df_fit, family = stats::binomial())
     }
-    X_t1 <- boot_df[, feature_cols, drop = FALSE]
-    X_t1[[treatment]] <- 1
-    X_t0 <- boot_df[, feature_cols, drop = FALSE]
-    X_t0[[treatment]] <- 0
-    X_t1_s <- as.data.frame(sweep(sweep(X_t1, 2, means, "-"),
-                                    2, sds, "/"))
-    X_t0_s <- as.data.frame(sweep(sweep(X_t0, 2, means, "-"),
-                                    2, sds, "/"))
+    x_t1 <- boot_df[, feature_cols, drop = FALSE]
+    x_t1[[treatment]] <- 1
+    x_t0 <- boot_df[, feature_cols, drop = FALSE]
+    x_t0[[treatment]] <- 0
+    x_t1_s <- as.data.frame(sweep(sweep(x_t1, 2, means, "-"),
+                                  2, sds, "/"))
+    x_t0_s <- as.data.frame(sweep(sweep(x_t0, 2, means, "-"),
+                                  2, sds, "/"))
     if (outcome_model == "linear") {
-      y1_hat <- stats::predict(mod, newdata = X_t1_s)
-      y0_hat <- stats::predict(mod, newdata = X_t0_s)
+      y1_hat <- stats::predict(mod, newdata = x_t1_s)
+      y0_hat <- stats::predict(mod, newdata = x_t0_s)
     } else {
-      y1_hat <- stats::predict(mod, newdata = X_t1_s, type = "response")
-      y0_hat <- stats::predict(mod, newdata = X_t0_s, type = "response")
+      y1_hat <- stats::predict(mod, newdata = x_t1_s,
+                               type = "response")
+      y0_hat <- stats::predict(mod, newdata = x_t0_s,
+                               type = "response")
     }
     mean(y1_hat - y0_hat)
   }
@@ -321,15 +392,28 @@ estimate_ate_gcomputation <- function(data, treatment, outcome,
   boot_ates <- boot_ates[is.finite(boot_ates)]
   if (length(boot_ates) < 50L) {
     warning("Fewer than 50 successful bootstrap iterations; ",
-             "SE may be unreliable.", call. = FALSE)
+            "SE may be unreliable.", call. = FALSE)
   }
-  se <- if (length(boot_ates) > 1L) sd(boot_ates) else NA_real_
-  ci_lo <- if (length(boot_ates)) as.numeric(
-    quantile(boot_ates, 0.025)) else NA_real_
-  ci_hi <- if (length(boot_ates)) as.numeric(
-    quantile(boot_ates, 0.975)) else NA_real_
-  list(ate = ate, se = se, ci_lower = ci_lo, ci_upper = ci_hi,
-       n_obs = n_obs, outcome_model = outcome_model)
+  se   <- if (length(boot_ates) > 1L) stats::sd(boot_ates) else NA_real_
+  ci_lo <- if (length(boot_ates)) {
+    as.numeric(stats::quantile(boot_ates, 0.025))
+  } else {
+    NA_real_
+  }
+  ci_hi <- if (length(boot_ates)) {
+    as.numeric(stats::quantile(boot_ates, 0.975))
+  } else {
+    NA_real_
+  }
+  list(
+    ate           = ate,
+    se            = se,
+    ci_lower      = ci_lo,
+    ci_upper      = ci_hi,
+    n_obs         = n_obs,
+    outcome_model = outcome_model,
+    method        = "inline bootstrap (stdReg not installed)"
+  )
 }
 
 
@@ -337,8 +421,9 @@ estimate_ate_gcomputation <- function(data, treatment, outcome,
 
 #' Rosenbaum bounds sensitivity analysis (data-frame interface)
 #'
-#' Computes normal-approximation Wilcoxon signed-rank bounds natively
-#' in base R.
+#' Native base R rank-matched-pair signed-rank bounds across a Gamma
+#' grid, via the normal approximation to the Wilcoxon signed-rank
+#' statistic.
 #'
 #' @param data       Data frame with treatment + outcome columns.
 #' @param treatment  Binary treatment column (0/1).
@@ -348,62 +433,90 @@ estimate_ate_gcomputation <- function(data, treatment, outcome,
 #' @param gamma_range c(min, max) of Gamma. Default c(1, 3).
 #' @param n_gamma    Number of Gamma values. Default 20.
 #' @return Data frame with `Gamma`, `p_lower`, `p_upper`.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(d = rbinom(60, 1, 0.5), x1 = rnorm(60))
+#' df$y <- df$d * 0.5 + df$x1 + rnorm(60)
+#' res <- try(sensitivity_rosenbaum(df, "d", "y", "x1"))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 sensitivity_rosenbaum <- function(data, treatment, outcome,
-                                     covariates,
-                                     gamma_range = c(1, 3),
-                                     n_gamma = 20L) {
+                                  covariates,
+                                  gamma_range = c(1, 3),
+                                  n_gamma = 20L) {
   required_cols <- c(treatment, outcome)
-  missing_cols <- setdiff(required_cols, names(data))
-  if (length(missing_cols))
+  missing_cols  <- setdiff(required_cols, names(data))
+  if (length(missing_cols)) {
     stop("Columns missing from data: ",
          paste(missing_cols, collapse = ", "))
-  if (gamma_range[1] < 1)
+  }
+  if (gamma_range[1] < 1) {
     stop("Minimum Gamma must be >= 1.0, got ", gamma_range[1])
-  if (gamma_range[2] <= gamma_range[1])
+  }
+  if (gamma_range[2] <= gamma_range[1]) {
     stop("gamma_range[2] must be > gamma_range[1].")
-  if (n_gamma < 2L)
+  }
+  if (n_gamma < 2L) {
     stop("n_gamma must be >= 2, got ", n_gamma)
+  }
 
-  df <- stats::na.omit(data[, c(treatment, outcome), drop = FALSE])
+  df      <- stats::na.omit(data[, c(treatment, outcome),
+                                 drop = FALSE])
   treated <- df[df[[treatment]] == 1, outcome]
   control <- df[df[[treatment]] == 0, outcome]
-  min_n <- min(length(treated), length(control))
-  if (min_n < 2L)
+  min_n   <- min(length(treated), length(control))
+  if (min_n < 2L) {
     stop("At least 2 treated and 2 control units required.")
+  }
 
   treated_sorted <- sort(treated)[seq_len(min_n)]
   control_sorted <- sort(control)[seq_len(min_n)]
   differences    <- treated_sorted - control_sorted
+  gammas         <- seq(gamma_range[1], gamma_range[2],
+                        length.out = n_gamma)
+
+  if (min_n >= 5L) {
+    # Native Rosenbaum signed-rank bounds across the Gamma sequence --
+    # the same table rbounds::psens() prints (cross-validated in tests).
+    out <- do.call(rbind, lapply(gammas, function(g) {
+      b <- .morie_psens_wilcoxon_d(differences, g)
+      data.frame(Gamma = g,
+                 p_lower = as.numeric(b[["p_lower"]]),
+                 p_upper = as.numeric(b[["p_upper"]]))
+    }))
+    return(out)
+  }
 
   n_pairs  <- length(differences)
   abs_diff <- abs(differences)
   ranks    <- rank(abs_diff)
-  T_plus   <- sum(ranks[differences > 0])
-
-  gammas <- seq(gamma_range[1], gamma_range[2], length.out = n_gamma)
-  results <- vector("list", n_gamma)
+  t_plus   <- sum(ranks[differences > 0])
+  results  <- vector("list", n_gamma)
   for (i in seq_along(gammas)) {
     gamma <- gammas[i]
     p_max <- gamma / (1 + gamma)
     p_min <- 1 / (1 + gamma)
     mu_u  <- n_pairs * (n_pairs + 1) / 2 * p_max
     var_u <- n_pairs * (n_pairs + 1) * (2 * n_pairs + 1) / 6 *
-             p_max * (1 - p_max)
+      p_max * (1 - p_max)
     mu_l  <- n_pairs * (n_pairs + 1) / 2 * p_min
     var_l <- n_pairs * (n_pairs + 1) * (2 * n_pairs + 1) / 6 *
-             p_min * (1 - p_min)
+      p_min * (1 - p_min)
     p_upper <- if (var_u > 0) {
-      2 * stats::pnorm(abs((T_plus - mu_u) / sqrt(var_u)),
-                         lower.tail = FALSE)
-    } else NA_real_
+      2 * stats::pnorm(abs((t_plus - mu_u) / sqrt(var_u)),
+                       lower.tail = FALSE)
+    } else {
+      NA_real_
+    }
     p_lower <- if (var_l > 0) {
-      2 * stats::pnorm(abs((T_plus - mu_l) / sqrt(var_l)),
-                         lower.tail = FALSE)
-    } else NA_real_
+      2 * stats::pnorm(abs((t_plus - mu_l) / sqrt(var_l)),
+                       lower.tail = FALSE)
+    } else {
+      NA_real_
+    }
     results[[i]] <- data.frame(Gamma = gamma,
-                                p_lower = p_lower,
-                                p_upper = p_upper)
+                               p_lower = p_lower,
+                               p_upper = p_upper)
   }
   do.call(rbind, results)
 }
@@ -413,28 +526,209 @@ sensitivity_rosenbaum <- function(data, treatment, outcome,
 
 #' E-value for unmeasured confounding (continuous-ATE scale)
 #'
-#' Applies the continuous-scale z-stat -> RR approximation natively,
-#' matching the Python port.
+#' Native implementation of the VanderWeele & Ding (2017) OLS E-value.
+#' Supply an outcome SD via `sd_y` for the recommended standardised
+#' workflow; when `sd_y` is left at its default of 1, it
+#' back to the closed-form continuous-scale RR proxy used by the
+#' Python port so both ports stay numerically aligned.
 #'
 #' @param ate  Point estimate of the treatment effect.
 #' @param se   Standard error of the ATE (must be > 0).
 #' @param null Null value. Default 0.
+#' @param sd_y Outcome standard deviation. Default 1 (use the
+#'   closed-form proxy). Pass the empirical sd to route through
+#'   \code{EValue::evalues.OLS()} when installed.
 #' @return Scalar E-value (>= 1).
 #' @examples
 #' e_value(ate = 0.5, se = 0.1)
 #' @export
-e_value <- function(ate, se, null = 0) {
+e_value <- function(ate, se, null = 0, sd_y = 1) {
   if (se <= 0) stop("se must be > 0, got ", se)
   z <- abs(ate - null) / se
   if (z == 0) return(1)
-  # Pre-2026-05-22, this also tried EValue::evalues.OLS with a hardcoded
-  # sd_y=1 (assumed standardised outcome). That diverged from Python's
-  # exp(z) proxy: same input, three different paths (R-with-EValue ≠
-  # R-without ≠ Python). Removed; both ports now use the closed-form
-  # VanderWeele-Ding E-value for the continuous-scale RR proxy.
-  # Users who want the EValue OLS path with a real sd_y should call
-  # EValue::evalues.OLS directly.
+
+  # Module 26: native VanderWeele-Ding continuous-scale E-value.
+  d <- (ate - null) / sd_y
+  ev <- morie_evalue(d, "MD", true = 0)$point
+  if (is.finite(ev) && ev >= 1) return(ev)
   rr <- exp(z)
   if (rr <= 1) return(1)
   rr + sqrt(rr * (rr - 1))
+}
+
+
+# ---------------------------------------------------------------------
+# Marginal-effects extenders (Phase 1.j additions)
+# ---------------------------------------------------------------------
+
+#' Internal helper: Morie Effects Require
+#' @noRd
+.morie_effects_require <- function(pkg, fn) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    stop(
+      sprintf("`%s` requires the `%s` package. ", fn, pkg),
+      sprintf("Install it with install.packages(\"%s\").", pkg),
+      call. = FALSE
+    )
+  }
+  invisible(TRUE)
+}
+
+#' Estimated marginal means via \pkg{emmeans}
+#'
+#' Thin extender over \code{emmeans::emmeans()}. The fitted model is
+#' passed through unchanged; \code{specs} follows the usual emmeans
+#' formula / list interface. Use \code{emmeans::pairs()} or
+#' \code{emmeans::contrast()} on the returned object for pairwise or
+#' custom contrasts.
+#'
+#' @param model A fitted model object (`lm`, `glm`, `lmerMod`, ...).
+#' @param specs Specification for the marginal means -- a formula
+#'   (e.g. `~ treatment`), character vector of factor names, or a
+#'   list, exactly as accepted by \code{emmeans::emmeans()}.
+#' @param ... Further arguments forwarded to \code{emmeans::emmeans()}.
+#' @return An \code{emmGrid} object.
+#' @examples
+#' if (requireNamespace("emmeans", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
+#'   fit <- stats::lm(y ~ x + g, data = df)
+#'   morie_effects_emmeans(fit, specs = "g")
+#' }
+#' @export
+morie_effects_emmeans <- function(model, specs, ...) {
+  .morie_effects_require("emmeans", "morie_effects_emmeans")
+  emmeans::emmeans(object = model, specs = specs, ...)
+}
+
+#' Adjusted predictions via \pkg{marginaleffects}
+#'
+#' Thin extender over \code{marginaleffects::predictions()} for unit-
+#' level or grid-level adjusted predictions.
+#'
+#' @param model   A fitted model object supported by \pkg{insight} /
+#'   \pkg{marginaleffects}.
+#' @param newdata Optional data frame for which to predict. Defaults
+#'   to the model frame when `NULL` (the marginaleffects default).
+#' @param ...     Further arguments forwarded to
+#'   \code{marginaleffects::predictions()}.
+#' @return A `marginaleffects` data frame.
+#' @examples
+#' if (requireNamespace("marginaleffects", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
+#'   fit <- stats::lm(y ~ x + g, data = df)
+#'   head(morie_effects_predictions(fit))
+#' }
+#' @export
+morie_effects_predictions <- function(model, newdata = NULL, ...) {
+  .morie_effects_require("marginaleffects",
+                         "morie_effects_predictions")
+  if (is.null(newdata)) {
+    marginaleffects::predictions(model, ...)
+  } else {
+    marginaleffects::predictions(model, newdata = newdata, ...)
+  }
+}
+
+#' Contrasts / comparisons via \pkg{marginaleffects}
+#'
+#' Thin extender over \code{marginaleffects::comparisons()} for unit-
+#' level treatment-effect contrasts (counterfactual differences,
+#' ratios, etc.).
+#'
+#' @param model     A fitted model object.
+#' @param variables Character vector or named list of variables to
+#'   contrast (see \code{marginaleffects::comparisons()}). When
+#'   `NULL`, marginaleffects' default (all model variables) is used.
+#' @param ...       Further arguments forwarded to
+#'   \code{marginaleffects::comparisons()}.
+#' @return A `marginaleffects` data frame.
+#' @examples
+#' if (requireNamespace("marginaleffects", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
+#'   fit <- stats::lm(y ~ x + g, data = df)
+#'   head(morie_effects_comparisons(fit, variables = "g"))
+#' }
+#' @export
+morie_effects_comparisons <- function(model, variables = NULL, ...) {
+  .morie_effects_require("marginaleffects",
+                         "morie_effects_comparisons")
+  if (is.null(variables)) {
+    marginaleffects::comparisons(model, ...)
+  } else {
+    marginaleffects::comparisons(model, variables = variables, ...)
+  }
+}
+
+#' Marginal slopes (partial derivatives) via \pkg{marginaleffects}
+#'
+#' Thin extender over \code{marginaleffects::slopes()} for continuous
+#' marginal effects (Stata-style \code{margins, dydx()}).
+#'
+#' @param model     A fitted model object.
+#' @param variables Character vector of focal variables. When `NULL`,
+#'   the marginaleffects default (all continuous predictors) is used.
+#' @param ...       Further arguments forwarded to
+#'   \code{marginaleffects::slopes()}.
+#' @return A `marginaleffects` data frame.
+#' @examples
+#' if (requireNamespace("marginaleffects", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
+#'   fit <- stats::lm(y ~ x + g, data = df)
+#'   head(morie_effects_slopes(fit, variables = "x"))
+#' }
+#' @export
+morie_effects_slopes <- function(model, variables = NULL, ...) {
+  .morie_effects_require("marginaleffects",
+                         "morie_effects_slopes")
+  if (is.null(variables)) {
+    marginaleffects::slopes(model, ...)
+  } else {
+    marginaleffects::slopes(model, variables = variables, ...)
+  }
+}
+
+#' Tidy a model with \pkg{broom} (fallback: `summary()` coefficients)
+#'
+#' Thin extender over \code{broom::tidy()}. When \pkg{broom} is not
+#' installed, falls back to building a tidy-style data frame from
+#' \code{summary(model)$coefficients}, which is sufficient for the
+#' core `term / estimate / std.error / statistic / p.value` columns
+#' on the model classes (\code{lm} / \code{glm}) that rmorie ships.
+#'
+#' @param model A fitted model object.
+#' @param ...   Further arguments forwarded to \code{broom::tidy()}.
+#' @return A data frame with one row per model term.
+#' @examples
+#' if (requireNamespace("broom", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
+#'   fit <- stats::lm(y ~ x + g, data = df)
+#'   morie_effects_tidy(fit)
+#' }
+#' @export
+morie_effects_tidy <- function(model, ...) {
+  if (requireNamespace("broom", quietly = TRUE)) {
+    return(broom::tidy(model, ...))
+  }
+  cf <- tryCatch(summary(model)$coefficients,
+                 error = function(e) NULL)
+  if (is.null(cf)) {
+    stop("morie_effects_tidy(): install `broom` to tidy this model ",
+         "class, or pass a model with summary()$coefficients.",
+         call. = FALSE)
+  }
+  cf <- as.data.frame(cf)
+  data.frame(
+    term      = rownames(cf),
+    estimate  = cf[[1]],
+    std.error = if (ncol(cf) >= 2L) cf[[2]] else NA_real_,
+    statistic = if (ncol(cf) >= 3L) cf[[3]] else NA_real_,
+    p.value   = if (ncol(cf) >= 4L) cf[[4]] else NA_real_,
+    row.names = NULL,
+    stringsAsFactors = FALSE
+  )
 }

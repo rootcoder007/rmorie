@@ -186,7 +186,7 @@ summary.morie_cluster <- function(object, ...) {
 
 #' Default 2-D cluster plot
 #' @param x A `morie_cluster`.
-#' @param ... Passed to [plot()].
+#' @param ... Passed to \[plot()\].
 #' @return `NULL`, invisibly.
 #' @examples
 #' \donttest{

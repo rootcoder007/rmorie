@@ -97,7 +97,7 @@ NULL
 #' maintained uniformly.
 #'
 #' @param x A numeric vector (or an object coercible to one, including a
-#'   `units`-typed vector, which is coerced via [as.numeric()]), or an
+#'   `units`-typed vector, which is coerced via \[as.numeric()\]), or an
 #'   existing `ts`.
 #' @param frequency Number of observations per unit of time (e.g. 12 for
 #'   monthly-in-years). Default 1.
@@ -438,7 +438,7 @@ print.morie_ts_forecast <- function(x, ...) {
 #' @param broken If TRUE, draw the observed series as a broken (segmented)
 #'   line rather than a continuous one; controls line continuity for
 #'   series that may contain gaps (default FALSE).
-#' @param ... Passed to [plot()].
+#' @param ... Passed to \[plot()\].
 #' @return `NULL`, invisibly. Draws the observed (input) series and the
 #'   forecast (output) with its prediction band. Time is on the
 #'   horizontal axis (labelled with the series units where known); the

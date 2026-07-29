@@ -22,7 +22,7 @@
 #   * morie_tps_resolve_hood_col()      -- pick the right hood column
 #   * morie_tps_assert_hood_version()   -- error / warn on version drift
 #   * morie_tps_year_to_hood_version()  -- recommended schema per year
-#   * morie_to_hood_crosswalk()         -- bundled 140<->158 mapping
+#   * morie_to_hood_crosswalk()         -- included 140<->158 mapping
 #
 # Upstream sources
 # ----------------
@@ -34,7 +34,7 @@
 #     - https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/
 #         datastore_search?resource_id=<id>
 #
-# Bundled small synthetic fixtures live in inst/extdata/:
+# Included small synthetic fixtures live in inst/extdata/:
 #   to_neighbourhoods_158.csv
 #   to_neighbourhoods_140.csv
 #   to_neighbourhood_improvement_areas.csv
@@ -52,7 +52,9 @@
 #' @name morie_toronto_neighbourhoods
 NULL
 
-# Map a "version" string to the bundled fixture filename.
+# Map a "version" string to the included fixture filename.
+#' Internal helper: Morie To Fixture Name
+#' @noRd
 .morie_to_fixture_name <- function(version) {
   switch(version,
     "158" = "to_neighbourhoods_158.csv",
@@ -61,10 +63,12 @@ NULL
     stop("unknown version: ", version, call. = FALSE))
 }
 
-# Read a bundled neighbourhood fixture from inst/extdata.
+# Read a included neighbourhood fixture from inst/extdata.
+#' Internal helper: Morie To Neighbourhoods Fixture
+#' @noRd
 .morie_to_neighbourhoods_fixture <- function(version) {
   fname <- .morie_to_fixture_name(version)
-  path <- system.file("extdata", fname, package = "morie")
+  path <- system.file("extdata", fname, package = "rmorie")
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", fname, package = "rmoriedata")
   }
@@ -79,6 +83,8 @@ NULL
 
 # Internal: live CKAN datastore_search fetcher. Mockable via
 # testthat::local_mocked_bindings(.morie_to_ckan_dump_csv = ...).
+#' Internal helper: Morie To Ckan Dump Csv
+#' @noRd
 .morie_to_ckan_dump_csv <- function(resource_id, limit = 100000L) {
   if (!requireNamespace("httr2", quietly = TRUE) ||
       !requireNamespace("jsonlite", quietly = TRUE)) {
@@ -118,7 +124,7 @@ NULL
 #' @param version One of `"158"` (current City scheme), `"140"`
 #'   (historical 2014--2021 scheme), or `"nia"` (Neighbourhood
 #'   Improvement Areas).
-#' @param offline If `TRUE` (default), read the small bundled synthetic
+#' @param offline If `TRUE` (default), read the small included synthetic
 #'   fixture from `inst/extdata/`. If `FALSE`, hit the live City of
 #'   Toronto CKAN `datastore_search` endpoint via httr2.
 #' @param resource_id Optional CKAN resource id override. Used only
@@ -203,6 +209,10 @@ morie_tps_resolve_hood_col <- function(df, prefer = c("158", "140"),
 #' @param df A TPS crime `data.frame`.
 #' @param expected Either `"158"` or `"140"`.
 #' @return Invisibly `TRUE` on success.
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' cw <- morie_to_hood_crosswalk()
+#' df <- data.frame(HOOD_158 = utils::head(cw$HOOD_158, 5))
+#' res <- try(morie_tps_assert_hood_version(df, expected = "158"))
 #' @export
 morie_tps_assert_hood_version <- function(df,
                                             expected = c("158", "140")) {
@@ -239,15 +249,17 @@ morie_tps_assert_hood_version <- function(df,
 #' @param year Integer year (or vector of years).
 #' @return Character vector of `"158"` / `"140"` recommendations,
 #'   parallel to `year`.
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' morie_tps_year_to_hood_version(2019)
 #' @export
 morie_tps_year_to_hood_version <- function(year) {
   y <- suppressWarnings(as.integer(year))
   ifelse(is.na(y), NA_character_, ifelse(y >= 2022L, "158", "140"))
 }
 
-#' Load the bundled BIDIRECTIONAL 158 <-> 140 neighbourhood crosswalk
+#' Load the included BIDIRECTIONAL 158 <-> 140 neighbourhood crosswalk
 #'
-#' Returns the bundled `inst/extdata/to_hood_158_140_crosswalk.csv`,
+#' Returns the included `inst/extdata/to_hood_158_140_crosswalk.csv`,
 #' computed from polygon intersection of the two upstream Open Toronto
 #' GeoJSON layers (`Neighbourhoods - 4326.geojson` and
 #' `Neighbourhoods - historical 140 - 4326.geojson`) reprojected to
@@ -269,13 +281,13 @@ morie_tps_year_to_hood_version <- function(year) {
 #'     inside its parent 140), so
 #'     [morie_tps_aggregate_158_to_140()] is mathematically EXACT
 #'     (lossless sum) for the 1:1 + split cohort. Only the one
-#'     split+merge sliver in the bundled OT data has a non-100
+#'     split+merge sliver in the included OT data has a non-100
 #'     reverse percent.}
 #'   \item{relation}{"1:1" / "split" (one 140 -> N 158s) / "merge"
 #'     (multiple 140s -> one 158) / "split+merge"}
 #' }
 #'
-#' Empirical distribution on the bundled OT data:
+#' Empirical distribution on the included OT data:
 #'
 #'   * 123 1:1 rows (78\% of 140 hoods)            -- both percents == 100
 #'   * 34 split rows (16 historical hoods)         -- pct_158_in_140 == 100
@@ -284,10 +296,12 @@ morie_tps_year_to_hood_version <- function(year) {
 #'
 #' @return A `data.frame` with the columns above. `hood_140` and
 #'   `hood_158` are character (zero-padded to 3 chars).
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' head(morie_to_hood_crosswalk())
 #' @export
 morie_to_hood_crosswalk <- function() {
   path <- system.file("extdata", "to_hood_158_140_crosswalk.csv",
-                      package = "morie")
+                      package = "rmorie")
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", "to_hood_158_140_crosswalk.csv", package = "rmoriedata")
   }
@@ -304,6 +318,8 @@ morie_to_hood_crosswalk <- function() {
 # Backwards-compatibility: the original equivalency joiners (added in
 # the same phase) read `area_overlap_pct`; remap to the new
 # `pct_140_in_158` so they keep working.
+#' Internal helper: Morie To Legacy Overlap Col
+#' @noRd
 .morie_to_legacy_overlap_col <- function(cw) {
   if (!"area_overlap_pct" %in% names(cw)) {
     cw$area_overlap_pct <- cw$pct_140_in_158
@@ -313,6 +329,8 @@ morie_to_hood_crosswalk <- function() {
 
 # Normalise a hood-code value to the 3-char zero-padded canonical form
 # the crosswalk uses ("82" -> "082"; "0082" -> "082"; "Niagara" -> NA).
+#' Internal helper: Morie To Normalise Hood Code
+#' @noRd
 .morie_to_normalise_hood_code <- function(x) {
   s <- trimws(as.character(x))
   i <- suppressWarnings(as.integer(s))
@@ -323,7 +341,7 @@ morie_to_hood_crosswalk <- function() {
 #' Add an equivalent HOOD_158 column to a HOOD_140-keyed data.frame
 #'
 #' Looks up each row's `HOOD_140` (or `hood_140` / `NEIGHBOURHOOD_140`
-#' / `neighbourhood_140`) in the bundled crosswalk and writes the
+#' / `neighbourhood_140`) in the included crosswalk and writes the
 #' PRIMARY-overlap 158 hood code into a new column (default name
 #' `HOOD_158_equiv`).
 #'
@@ -377,6 +395,11 @@ morie_tps_add_hood_158_from_140 <- function(df, col_in = NULL,
 #' @param col_in Name of the input HOOD_158 column.
 #' @param col_out Name of the new column. Default `"HOOD_140_equiv"`.
 #' @return `df` with the equivalent-code column appended.
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' cw <- morie_to_hood_crosswalk()
+#' df <- data.frame(HOOD_158 = utils::head(cw$HOOD_158, 5))
+#' res <- try(morie_tps_add_hood_140_from_158(df))
+#' if (!inherits(res, "try-error")) head(res)
 #' @export
 morie_tps_add_hood_140_from_158 <- function(df, col_in = NULL,
                                               col_out = "HOOD_140_equiv",
@@ -478,7 +501,7 @@ morie_tps_disaggregate_140_to_158 <- function(df,
 #' uniform-density assumption when the source is a clean cake-cut --
 #' the partition is exhaustive and disjoint by construction. The only
 #' lossy case is the `split+merge` edge (one Willowdale East sliver
-#' in the bundled OT data); the function handles it via the
+#' in the included OT data); the function handles it via the
 #' `pct_158_in_140` weights regardless.
 #'
 #' @param df A `data.frame` keyed on a 158-hood column.

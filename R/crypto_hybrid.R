@@ -38,13 +38,13 @@
   if (is.character(info)) info <- charToRaw(info)
   if (is.character(salt)) salt <- charToRaw(salt)
   # Module 22: native HMAC-SHA256 (RFC 5869 extract step).
-  prk <- .morie_hmac_sha256_impl(salt, ikm)
+  prk <- .rmorie_hmac_sha256_impl(salt, ikm)
   n <- ceiling(len / 32L)
   t_prev <- raw(0)
   okm <- raw(0)
   for (i in seq_len(n)) {
     msg <- c(t_prev, info, as.raw(i))
-    t_prev <- .morie_hmac_sha256_impl(prk, msg)
+    t_prev <- .rmorie_hmac_sha256_impl(prk, msg)
     okm <- c(okm, t_prev)
   }
   okm[seq_len(len)]
@@ -53,7 +53,7 @@
 #' Internal helper: Morie Wrapping Key
 #' @noRd
 .morie_wrapping_key <- function(kem_ct, pk) {
-  salt <- .morie_sha256_impl(charToRaw("morie-hybrid-wrap-v1"))
+  salt <- .rmorie_sha256_impl(charToRaw("morie-hybrid-wrap-v1"))
   .morie_hkdf_sha256(
     ikm    = c(kem_ct, pk),
     len    = 32L,

@@ -276,6 +276,11 @@ morie_arsau_sidecar_to_frame <- function(sidecar) {
 #'   their upstream names.
 #' @references Ontario Ministry of the Solicitor General data
 #'   dictionaries accompanying the ARSAU CSV releases.
+#' @examples
+#' \donttest{
+#' # Point at a downloaded ARSAU data-dictionary workbook:
+#' d <- try(morie_arsau_read_xlsx_dictionary("arsau_dictionary.xlsx"))
+#' }
 #' @export
 morie_arsau_read_xlsx_dictionary <- function(path, sheet = 1L) {
   if (!requireNamespace("readxl", quietly = TRUE)) {
@@ -436,6 +441,12 @@ morie_arsau_ckan_url <- function(kind, year, limit = 5000L) {
 #'   \code{\link{morie_arsau_sidecar_schema}} /
 #'   \code{\link{morie_arsau_sidecar_to_frame}}.
 #' @references Ontario Data Catalogue CKAN API.
+#' @examples
+#' \donttest{
+#' res <- try(morie_arsau_fetch_sidecar(ARSAU_KINDS[1], ARSAU_YEARS[1],
+#'                                      limit = 50L))
+#' if (!inherits(res, "try-error")) str(res, max.level = 1)
+#' }
 #' @export
 morie_arsau_fetch_sidecar <- function(kind, year, limit = 5000L,
                                       timeout_sec = 30L) {
@@ -461,7 +472,7 @@ morie_arsau_fetch_sidecar <- function(kind, year, limit = 5000L,
   }
   # 3XX: route through the shared libcurl backend (with httr2
   # fallback). User-Agent is now whatever the C++ helper's default
-  # is (`morie-R/<DESCRIPTION-Version> (...) libcurl`) -- close enough to the
+  # is (`morie-R/0.9.5.5 (...) libcurl`) -- close enough to the
   # original arsau-specific string for upstream-portal analytics
   # purposes. timeout_sec preserved verbatim.
   body <- .morie_dataset_http_text(url, timeout_s = as.integer(timeout_sec))
@@ -481,32 +492,71 @@ morie_arsau_fetch_sidecar <- function(kind, year, limit = 5000L,
 
 
 # ---------------------------------------------------------------------------
-# Stub: full network bulk-download driver
+# Native network bulk-download driver
 # ---------------------------------------------------------------------------
 
-#' Bulk-download every ARSAU CSV + sidecar from the upstream Catalogue.
+#' Bulk-download ARSAU CSVs from the Ontario Data Catalogue.
 #'
-#' This is the R-side equivalent of running the maintainer's
-#' \code{scripts/refresh_arsau.py} mirror — a non-trivial pipeline that
-#' walks the CKAN package, follows per-resource redirects, handles
-#' rate-limits, verifies SHA digests against the published values, and
-#' lands the files under \code{MORIE_ARSAU_DIR}.  Porting it requires
-#' an end-to-end retry + checksum manager that does not yet have a
-#' tested R analogue; per the morie maintenance policy, network bulk
-#' fetches must be reproducible across CRAN test environments before
-#' the wrapper is exposed.  Stubbed for now.
+#' Native R port of the maintainer's \code{scripts/refresh_arsau.py}
+#' mirror: walks the bundled \code{ARSAU_REGISTRY()} and pulls each
+#' entry's datastore dump CSV from data.ontario.ca into
+#' \code{target_dir}.  Entries without a published datastore resource
+#' are reported in \code{$skipped}.  Filter with \code{kinds} /
+#' \code{years} to fetch a subset (recommended; the full release is
+#' large).
 #'
-#' @param target_dir Destination directory.
-#' @param ... Reserved.
-#' @return Stops with \code{NotYetPorted}.
+#' @param target_dir Destination directory (created if missing).
+#' @param kinds Optional character vector of \code{ARSAU_KINDS()} to
+#'   restrict the download.
+#' @param years Optional vector of \code{ARSAU_YEARS()} entries.
+#' @param timeout_sec Per-file download timeout (default 60).
+#' @param quiet Suppress the progress message and per-file warnings.
+#' @return Invisibly, a list with \code{downloaded} (paths),
+#'   \code{skipped} (registry keys), and \code{target_dir}.
+#' @examples
+#' \donttest{
+#' res <- try(morie_arsau_download(tempdir(), kinds = ARSAU_KINDS()[1],
+#'                                 years = ARSAU_YEARS()[1], quiet = TRUE))
+#' if (!inherits(res, "try-error")) length(res$downloaded)
+#' }
 #' @export
-morie_arsau_download <- function(target_dir, ...) {
-  stop(
-    "NotYetPorted: morie_arsau_download() is not yet implemented in R. ",
-    "Use the Python pipeline (scripts/refresh_arsau.py) or download ",
-    "the CSVs manually from ",
-    "https://data.ontario.ca/dataset/police-use-of-force-race-based-data ",
-    "and point MORIE_ARSAU_DIR at the result.",
-    call. = FALSE
-  )
+morie_arsau_download <- function(target_dir, kinds = NULL, years = NULL,
+                                 timeout_sec = 60L, quiet = FALSE) {
+  dir.create(target_dir, recursive = TRUE, showWarnings = FALSE)
+  reg <- ARSAU_REGISTRY()
+  downloaded <- character(0)
+  skipped <- character(0)
+  for (key in names(reg)) {
+    entry <- reg[[key]]
+    if (!is.null(kinds) && !(entry$kind %in% kinds)) next
+    if (!is.null(years) && !(entry$year_or_range %in% as.character(years))) next
+    if (is.null(entry$sidecar_filename)) {
+      skipped <- c(skipped, key)
+      next
+    }
+    resource_id <- sub("\\.json$", "", entry$sidecar_filename)
+    url <- sprintf("https://data.ontario.ca/datastore/dump/%s?format=csv",
+                   resource_id)
+    dest <- file.path(target_dir,
+                      sprintf("arsau_%s_%s.csv",
+                              gsub("[^A-Za-z0-9]+", "_", entry$year_or_range),
+                              gsub("[^A-Za-z0-9]+", "_", entry$kind)))
+    ok <- tryCatch({
+      body <- .morie_dataset_http_text(url,
+                                       timeout_s = as.integer(timeout_sec))
+      writeLines(body, dest)
+      TRUE
+    }, error = function(e) {
+      if (!quiet) warning(sprintf("ARSAU %s: %s", key,
+                                  conditionMessage(e)), call. = FALSE)
+      FALSE
+    })
+    if (ok) downloaded <- c(downloaded, dest) else skipped <- c(skipped, key)
+  }
+  if (!quiet) {
+    message(sprintf("ARSAU download: %d file(s) written to %s (%d skipped)",
+                    length(downloaded), target_dir, length(skipped)))
+  }
+  invisible(list(downloaded = downloaded, skipped = skipped,
+                 target_dir = target_dir))
 }

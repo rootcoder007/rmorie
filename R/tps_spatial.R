@@ -605,6 +605,16 @@ morie_tps_kde_density <- function(df,
 # ---------------------------------------------------------------------------
 
 #' @return \code{x}, invisibly.
+#' @examples
+#' \donttest{
+#' set.seed(2026)
+#' df <- data.frame(
+#'   LAT_WGS84 = 43.6 + rnorm(120, 0, 0.05),
+#'   LONG_WGS84 = -79.4 + rnorm(120, 0, 0.05)
+#' )
+#' obj <- morie_tps_kde_density(df, bandwidth = 0.01)
+#' print(obj)
+#' }
 #' @export
 print.morie_tps_spatial_result <- function(x, ...) {
   cat(x$title, "\

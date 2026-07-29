@@ -21,6 +21,12 @@
   out
 }
 
+#' @examples
+#' \donttest{
+#' d <- data.frame(t = rbinom(100, 1, 0.4), x = rnorm(100))
+#' obj <- morie_weight_trimming(morie_weight_ps(d, "t", "x"))
+#' print(obj)
+#' }
 #' @export
 print.morie_weight <- function(x, ...) {
   cat(sprintf("morie_weight: %s (estimand %s)\n", x$method, x$estimand))

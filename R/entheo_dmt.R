@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #
-# morie::entheo_dmt -- R parity of morie.entheo_dmt (Timmermann 2023
+# rmorie::entheo_dmt -- R parity of morie.entheo_dmt (Timmermann 2023
 # DMT_Imaging dataset loaders + Layer-2 analyses).
 #
 # Layer 1: available_subjects(), load_fmri_subject(), load_eeg_region(),
 #          dataset_overview().
-# Layer 2: spectral_band_power() (delegates to morie::rgpsd Welch PSD),
+# Layer 2: spectral_band_power() (delegates to rmorie::rgpsd Welch PSD),
 #          dynamic_functional_connectivity() (sliding-window Pearson FC),
 #          lz_complexity() (Lempel-Ziv 1976), analyze_subject() (joint).
 #
@@ -49,6 +49,7 @@
 #' \env{MORIE_DMT_IMAGING_ROOT}. Returns NULL if absent on disk.
 #' Parity with Python ``DATASET_ROOT`` / ``_require_root``.
 #' @keywords internal
+#' @return A character scalar: the resolved DMT-data root directory.
 .morie_entheo_dmt_root <- function() {
   cand <- Sys.getenv("MORIE_DMT_IMAGING_ROOT", "")
   if (!nzchar(cand)) {
@@ -59,6 +60,7 @@
 
 #' Require the dataset root or stop with a curated error.
 #' @keywords internal
+#' @return A character scalar: the DMT-data root directory (errors if it cannot be resolved).
 .morie_entheo_require_root <- function() {
   root <- .morie_entheo_dmt_root()
   if (is.null(root)) {
@@ -74,6 +76,7 @@
 
 #' Lightweight .mat loader (delegates to R.matlab).
 #' @keywords internal
+#' @return A named \code{list} of the variables loaded from the MATLAB \code{.mat} file at \code{path}.
 .morie_entheo_loadmat <- function(path) {
   if (!requireNamespace("R.matlab", quietly = TRUE)) {
     stop(
@@ -212,7 +215,7 @@ morie_entheo_dataset_overview <- function() {
     interpretation = paste(
       "Use morie_entheo_load_fmri_subject(id, condition) for BOLD AAL",
       "matrices and morie_entheo_load_eeg_region(region) for IRASA EEG",
-      "regressors. Layer-2 analyses delegate to morie::rgpsd for Welch",
+      "regressors. Layer-2 analyses delegate to rmorie::rgpsd for Welch",
       "PSD and to internal sliding-window FC / Lempel-Ziv routines."
     ),
     payload = list(
@@ -227,6 +230,7 @@ morie_entheo_dataset_overview <- function() {
 
 #' Trapezoidal integration on a 1-D grid.
 #' @keywords internal
+#' @return A numeric scalar: the trapezoidal integral of \code{y} over \code{x}.
 .morie_entheo_trapz <- function(y, x) {
   if (length(y) < 2L) return(NA_real_)
   sum(diff(x) * (y[-1] + y[-length(y)]) / 2)
@@ -275,7 +279,7 @@ morie_entheo_spectral_band_power <- function(signal,
   if (is.null(nperseg)) {
     nperseg <- min(length(sig), max(64L, as.integer(4 * fs)))
   }
-  # Delegate to morie::rgpsd (parity with Python morie.fn.psdwl.psdwl).
+  # Delegate to rmorie::rgpsd (parity with Python morie.fn.psdwl.psdwl).
   res <- rgpsd(sig, fs = fs, nperseg = nperseg)
   f <- as.numeric(res$extra$frequencies)
   psd <- as.numeric(res$extra$psd)
@@ -406,6 +410,7 @@ morie_entheo_dynamic_functional_connectivity <- function(bold,
 
 #' Lempel-Ziv (LZ76) complexity helper.
 #' @keywords internal
+#' @return A numeric scalar: the Lempel-Ziv (LZ76) complexity of the binary sequence \code{b}.
 .morie_entheo_lz76 <- function(b) {
   n <- length(b)
   if (n == 0L) return(0L)
@@ -597,10 +602,10 @@ morie_entheo_analyze_subject <- function(subject_id,
 #' reproducible; pass `branch = NULL` to track main.
 #'
 #' Related upstream resources Vee surfaced 2026-05-25:
-#' - <https://github.com/timmer500/DMT_Imaging.git>  (the actual EEG+fMRI dataset)
-#' - <https://github.com/pnk314/psychedelics.git>     (analysis pipeline)
-#' - <https://github.com/lisagirard/Psychedelics.git> (review repository)
-#' - <https://github.com/kianenigma/awesome-psychedelics.git> (curated index)
+#' - <https://github.com/timmer500/DMT_Imaging>  (the actual EEG+fMRI dataset)
+#' - <https://github.com/pnk314/psychedelics>     (analysis pipeline)
+#' - <https://github.com/lisagirard/Psychedelics> (review repository)
+#' - <https://github.com/kianenigma/awesome-psychedelics> (curated index)
 #'
 #' @param root Optional destination directory. Defaults to
 #'   `$MORIE_DMT_IMAGING_ROOT`, else `file.path(morie_cache_dir(),
@@ -610,6 +615,11 @@ morie_entheo_analyze_subject <- function(subject_id,
 #' @param branch Optional branch / tag / SHA to check out after
 #'   clone. `NULL` uses the default upstream branch.
 #' @return Invisibly returns the destination path.
+#' @examples
+#' \donttest{
+#' # Clones the DMT_Imaging repository (network + disk):
+#' morie_entheo_clone_dmt_imaging(root = tempdir())
+#' }
 #' @export
 morie_entheo_clone_dmt_imaging <- function(root = NULL,
                                             overwrite = FALSE,
@@ -637,8 +647,15 @@ morie_entheo_clone_dmt_imaging <- function(root = NULL,
          call. = FALSE)
   }
   args <- c("clone", "--depth", "1")
-  if (!is.null(branch)) args <- c(args, "--branch", as.character(branch))
+  if (!is.null(branch)) {
+    if (!.morie_valid_git_ref(as.character(branch))) {
+      stop("invalid branch name: ", branch,
+           " (must match ^[A-Za-z0-9][A-Za-z0-9._/-]*$)", call. = FALSE)
+    }
+    args <- c(args, "--branch", as.character(branch))
+  }
   args <- c(args, "https://github.com/timmer500/DMT_Imaging.git", root)
+  .morie_ensure_exec_allowed("git clone of DMT_Imaging")
   status <- system2("git", args, stdout = TRUE, stderr = TRUE)
   if (!dir.exists(root)) {
     stop("git clone failed: ", paste(status, collapse = "\n"),

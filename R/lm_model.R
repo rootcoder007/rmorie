@@ -284,7 +284,7 @@ summary.morie_lm <- function(object, ...) summary(object$fit)
 
 #' Default diagnostic plot for a morie_lm
 #' @param x A `morie_lm`.
-#' @param ... Passed to [plot()].
+#' @param ... Passed to \[plot()\].
 #' @return `NULL`, invisibly. Draws fitted-versus-residual diagnostics
 #'   with readable axis labels.
 #' @examples
