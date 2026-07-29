@@ -721,7 +721,7 @@ morie_geron_one_shot <- function(model, example, query, verbalizer = NULL) {
 #' @param X,y Data and class labels. @param base_estimator Optional `base_estimator(Xp, yp) -> predict`.
 #' @param X_new Optional rows to classify (default `X`).
 #' @export
-morie_geron_one_vs_one <- function(X, y, base_estimator = NULL, X_new = NULL) {
+morie_geron_one_vs_one_hm <- function(X, y, base_estimator = NULL, X_new = NULL) {
   A <- .morie_gr_mat(X, "X"); yv <- as.vector(y)
   classes <- sort(unique(yv)); K <- length(classes)
   .morie_gr_need(K >= 2L, "geron_one_vs_one: need >= 2 classes")
@@ -768,7 +768,7 @@ morie_geron_one_vs_one <- function(X, y, base_estimator = NULL, X_new = NULL) {
 #' @param X,y Data and class labels. @param base_estimator Optional `base_estimator(X, yb) -> score fn`.
 #' @param X_new Optional rows to classify.
 #' @export
-morie_geron_one_vs_rest <- function(X, y, base_estimator = NULL, X_new = NULL) {
+morie_geron_one_vs_rest_hm <- function(X, y, base_estimator = NULL, X_new = NULL) {
   A <- .morie_gr_mat(X, "X"); yv <- as.vector(y)
   classes <- sort(unique(yv)); K <- length(classes)
   .morie_gr_need(K >= 2L, "geron_one_vs_rest: need >= 2 classes")
@@ -1043,7 +1043,7 @@ morie_geron_peephole_lstm <- function(x_t, h_prev, c_prev, weights) {
 #' @param X Data (m, n) or (m,). @param degree Max total degree.
 #' @param include_bias,interaction_only Expansion flags.
 #' @export
-morie_geron_polynomial_features <- function(X, degree, include_bias = TRUE, interaction_only = FALSE) {
+morie_geron_polynomial_features_hm <- function(X, degree, include_bias = TRUE, interaction_only = FALSE) {
   A <- .morie_gr_mat(X, "X")
   n <- ncol(A); d <- as.integer(degree)
   combos <- list()
@@ -1252,7 +1252,7 @@ morie_geron_pipeline_parallelism <- function(model, n_stages, n_microbatches = 4
 #' Precision-recall curve: best-F1 point and recall at 90% precision (Geron Ch 3, hmprc)
 #' @param y_true Binary labels. @param scores Decision scores. @param pos_label Positive label.
 #' @export
-morie_geron_precision_recall_curve <- function(y_true, scores, pos_label = 1) {
+morie_geron_precision_recall_curve_hm <- function(y_true, scores, pos_label = 1) {
   yt <- as.vector(y_true); s <- as.numeric(scores)
   .morie_gr_need(length(yt) == length(s), "geron_precision_recall_curve: length mismatch")
   bin_y <- as.numeric(yt == pos_label)
@@ -1300,7 +1300,7 @@ morie_geron_perceiver <- function(x, latents, n_iter = 2, W_q = NULL, W_k = NULL
 #' Perceiver IO: adds a cross-attention output decoder (Geron Ch 16, hmprio)
 #' @param x,latents,queries Input, latents and output queries. @param n_iter,W_q,W_k,W_v Encoder controls.
 #' @export
-morie_geron_perceiver_io <- function(x, latents, queries, n_iter = 2, W_q = NULL, W_k = NULL, W_v = NULL) {
+morie_geron_perceiver_io_hm <- function(x, latents, queries, n_iter = 2, W_q = NULL, W_k = NULL, W_v = NULL) {
   enc <- morie_geron_perceiver(x, latents, n_iter = n_iter, W_q = W_q, W_k = W_k, W_v = W_v)
   Z <- enc$latents
   Q <- .morie_gr_mat(queries, "queries")
@@ -1367,7 +1367,7 @@ morie_geron_pvt <- function(image, stage_cfgs, seed = 0) {
 #' Precision = TP / (TP + FP) (Geron Ch 3, hmpre)
 #' @param y_true,y_pred Labels, same length. @param pos_label Positive label.
 #' @export
-morie_geron_precision <- function(y_true, y_pred, pos_label = 1) {
+morie_geron_precision_hm <- function(y_true, y_pred, pos_label = 1) {
   yt <- as.vector(y_true); yp <- as.vector(y_pred)
   .morie_gr_need(length(yt) == length(yp), "geron_precision: length mismatch")
   tp <- sum(yt == pos_label & yp == pos_label)
@@ -1408,7 +1408,7 @@ morie_geron_prelu <- function(z, alpha = 0.25, upstream = NULL) {
 #' @param model Numeric vector or named list. @param sparsity Target fraction of zeros in [0, 1).
 #' @param n_rounds Rounds in the returned schedule.
 #' @export
-morie_geron_weight_pruning <- function(model, sparsity, n_rounds = 1) {
+morie_geron_weight_pruning_hm <- function(model, sparsity, n_rounds = 1) {
   sp <- as.numeric(sparsity); Rr <- as.integer(n_rounds)
   is_map <- is.list(model)
   keys <- if (is_map) names(model) else NULL
@@ -1509,7 +1509,7 @@ morie_geron_pytorch_tensor <- function(x, device = "cpu", dtype = NULL) {
 #' Quantization-aware training with a straight-through estimator (Geron App B, hmqat)
 #' @param model Initial full-precision weights. @param X,y Data. @param epochs,lr,bits Controls.
 #' @export
-morie_geron_quantization_aware_training <- function(model, X, y, epochs = 200, lr = 0.1, bits = 8) {
+morie_geron_quantization_aware_training_hm <- function(model, X, y, epochs = 200, lr = 0.1, bits = 8) {
   w <- as.numeric(model)
   A <- .morie_gr_mat(X, "X"); yv <- as.numeric(y)
   E <- as.integer(epochs); eta <- as.numeric(lr); b <- as.integer(bits)
@@ -1622,7 +1622,7 @@ morie_geron_regression_tree <- function(X, y, max_depth = 3, min_samples_leaf = 
 #' Recall (true positive rate) = TP / (TP + FN) (Geron Ch 3, hmrec)
 #' @param y_true,y_pred Labels, same length. @param pos_label Positive label.
 #' @export
-morie_geron_recall <- function(y_true, y_pred, pos_label = 1) {
+morie_geron_recall_hm <- function(y_true, y_pred, pos_label = 1) {
   yt <- as.vector(y_true); yp <- as.vector(y_pred)
   .morie_gr_need(length(yt) == length(yp), "geron_recall: length mismatch")
   tp <- sum(yt == pos_label & yp == pos_label)
@@ -1900,7 +1900,7 @@ morie_geron_recurrent_neuron <- function(x_t, h_prev, Wx, Wh, b, activation = "t
 #' ROC curve: FPR vs TPR over thresholds, trapezoid area cross-check (Geron Ch 3, hmroc)
 #' @param y_true Binary labels. @param scores Decision scores. @param pos_label Positive label.
 #' @export
-morie_geron_roc_curve <- function(y_true, scores, pos_label = 1) {
+morie_geron_roc_curve_hm <- function(y_true, scores, pos_label = 1) {
   base <- morie_geron_auc_roc(y_true, scores, pos_label = pos_label)
   fpr <- base$fpr; tpr <- base$tpr
   auc_trap <- sum(diff(fpr) * (utils::head(tpr, -1) + utils::tail(tpr, -1)) / 2)

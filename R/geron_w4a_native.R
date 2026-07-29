@@ -739,7 +739,7 @@ morie_geron_gaussian_mixture <- function(X, n_components = 2, seed = 0, max_iter
 #' @param training If FALSE, pass through unchanged. @param seed LCG seed.
 #' @return List with `y`, `mask`, `scale`, `n_dropped`, `drop_fraction`.
 #' @export
-morie_geron_dropout <- function(x, p, training = TRUE, seed = 0) {
+morie_geron_dropout_alt <- function(x, p, training = TRUE, seed = 0) {
   a <- as.numeric(x); .w4a_need(length(a) > 0L, "x is empty.")
   pr <- as.numeric(p); .w4a_need(pr >= 0 && pr < 1, "p must lie in [0, 1).")
   if (!training) {
@@ -1171,7 +1171,7 @@ morie_geron_dpo <- function(pi, pi_ref, preferences = NULL, beta = 0.1) {
 #' @param activations Optional batch to quantize dynamically.
 #' @return List with `quantized`, `scales`, `zero_points`, `dequantized`, `max_abs_error`, `compression`.
 #' @export
-morie_geron_dynamic_quantization <- function(model, dtype = "int8", activations = NULL) {
+morie_geron_dynamic_quantization_alt <- function(model, dtype = "int8", activations = NULL) {
   ranges <- list(int8 = c(-128, 127, TRUE), uint8 = c(0, 255, FALSE), int16 = c(-32768, 32767, TRUE))
   .w4a_need(dtype %in% names(ranges), "dtype must be int8, uint8 or int16.")
   rg <- ranges[[dtype]]; qmin <- rg[1]; qmax <- rg[2]; symmetric <- as.logical(rg[3])
@@ -1468,7 +1468,7 @@ morie_geron_error_analysis <- function(y_true, y_pred, top_k = 5) {
 #' @param patience Optional online stopping patience.
 #' @return List with `theta`, `best_iter`, `best_val_rmse`, `stopped_iter`, `is_u_shaped`.
 #' @export
-morie_geron_early_stopping <- function(X_train, y_train, X_val, y_val, n_iter = 100, eta = 0.01,
+morie_geron_early_stopping_alt <- function(X_train, y_train, X_val, y_val, n_iter = 100, eta = 0.01,
                                        patience = NULL, fit_intercept = TRUE) {
   Xt <- .morie_gr_mat(X_train, "X_train"); yt <- as.numeric(y_train)
   Xv <- .morie_gr_mat(X_val, "X_val"); yv <- as.numeric(y_val)
@@ -1501,7 +1501,7 @@ morie_geron_early_stopping <- function(X_train, y_train, X_val, y_val, n_iter = 
 #' @param Q Table (S, A) or (A,). @param s State index (0-based). @param epsilon Rate in [0, 1]. @param seed LCG seed.
 #' @return List with `action`, `probabilities`, `greedy_action`, `greedy_actions`, `is_exploratory`.
 #' @export
-morie_geron_epsilon_greedy <- function(Q, s, epsilon, seed = 0) {
+morie_geron_epsilon_greedy_alt <- function(Q, s, epsilon, seed = 0) {
   Qa <- if (is.matrix(Q)) Q else matrix(as.numeric(Q), nrow = 1)
   si <- as.integer(s) + 1L
   eps <- as.numeric(epsilon)
@@ -1600,7 +1600,7 @@ morie_geron_elastic_net <- function(X, y, theta, alpha, r, fit_intercept = TRUE)
 #' @param X Data (m, n). @param n_components Truncate to leading k (default all). @param center Subtract column means.
 #' @return List with `explained_variance_ratio`, `explained_variance`, `singular_values`, `cumulative`, `n_for_95`.
 #' @export
-morie_geron_explained_variance_ratio <- function(X, n_components = NULL, center = TRUE) {
+morie_geron_explained_variance_ratio_alt <- function(X, n_components = NULL, center = TRUE) {
   A <- .morie_gr_mat(X, "X"); m <- nrow(A)
   Ac <- if (center) sweep(A, 2, colMeans(A), "-") else A
   sv <- svd(Ac)
@@ -1698,7 +1698,7 @@ morie_geron_extra_trees <- function(X, y, n_estimators = 10, max_features = NULL
 #' @param average "binary"/"macro"/"micro"/NULL.
 #' @return List with `f1`, `precision`, `recall`, `tp`, `fp`, `fn`, `per_class_f1`.
 #' @export
-morie_geron_f1_score <- function(y_true, y_pred, pos_label = 1, average = "binary") {
+morie_geron_f1_score_alt <- function(y_true, y_pred, pos_label = 1, average = "binary") {
   cm_res <- morie_geron_confusion_matrix(y_true, y_pred)
   cm <- cm_res$matrix
   labels <- seq_len(nrow(cm)) - 1L
@@ -2414,7 +2414,7 @@ morie_geron_grid_search <- function(param_grid, X, y, estimator = NULL, K = 3, s
 #' @param epochs,lr,gamma,target_sync Config.
 #' @return List with `Q`, `V`, `A`, `loss_history`, `advantage_mean`, `value_share`.
 #' @export
-morie_geron_dueling_dqn <- function(env, V, A, buffer, epochs = 10, lr = 0.1, gamma = 0.95, target_sync = 5) {
+morie_geron_dueling_dqn_alt <- function(env, V, A, buffer, epochs = 10, lr = 0.1, gamma = 0.95, target_sync = 5) {
   Vv <- as.numeric(V); Av <- .morie_gr_mat(A, "A")
   S <- nrow(Av); nA <- ncol(Av)
   buf <- morie_check_buffer(buffer, S, nA, "geron_dueling_dqn")

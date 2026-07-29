@@ -14,11 +14,11 @@ test_that("hmgru matches Python anchor", {
 })
 
 test_that("hmhei matches deterministic targets; draw is statistically sane", {
-  r <- morie_geron_he_init(8, seed = 0, fan_out = 4)
+  r <- morie_geron_he_init_hmhei(8, seed = 0, fan_out = 4)
   expect_equal(r$var_target, A4b$hmhei$var_target)
   expect_equal(r$std_target, A4b$hmhei$std_target)
   expect_equal(dim(r$W), A4b$hmhei$shape)
-  u <- morie_geron_he_init(6, seed = 1, fan_out = 3, distribution = "uniform")
+  u <- morie_geron_he_init_hmhei(6, seed = 1, fan_out = 3, distribution = "uniform")
   expect_equal(round(u$limit, 10), round(sqrt(6 / 6), 10))
   expect_true(all(abs(u$W) <= u$limit + 1e-12))
 })
@@ -67,13 +67,13 @@ test_that("hmhpt grid branch matches Python anchor exactly", {
 test_that("hmicl matches Python anchor", {
   scorer <- function(prompt, cand) as.numeric(lengths(regmatches(prompt, gregexpr(as.character(cand), prompt, fixed = TRUE))))
   ex <- list(list("a", "pos"), list("b", "pos"), list("c", "neg"))
-  r <- morie_geron_in_context_learning(scorer, ex, "d")
+  r <- morie_geron_in_context_learning_hmicl(scorer, ex, "d")
   expect_equal(r$prediction, A4b$hmicl$prediction)
   expect_equal(r$n_shot, A4b$hmicl$n_shot)
 })
 
 test_that("hmigr matches Python anchor", {
-  r <- morie_geron_information_gain(c(0, 0, 1, 1), c(FALSE, FALSE, TRUE, TRUE))
+  r <- morie_geron_information_gain_hmigr(c(0, 0, 1, 1), c(FALSE, FALSE, TRUE, TRUE))
   expect_equal(r$parent_entropy, A4b$hmigr$parent_entropy)
   expect_equal(r$information_gain, A4b$hmigr$information_gain)
 })
@@ -152,7 +152,7 @@ test_that("hmkppl matches Python anchor", {
 
 test_that("hmkprbf matches Python anchor", {
   X <- matrix(c(0, 1, 2, 5), ncol = 1)
-  r <- morie_geron_kernel_pca_rbf(X, n_components = 2, gamma = 0.5)
+  r <- morie_geron_kernel_pca_rbf_hmkprbf(X, n_components = 2, gamma = 0.5)
   expect_equal(sum(diag(r$K)), A4b$hmkprbf$trace_K)
 })
 
@@ -190,7 +190,7 @@ test_that("hml2r matches Python anchor", {
 })
 
 test_that("hmlaso matches Python anchor", {
-  r <- morie_geron_lasso_cost(matrix(c(1, 2), ncol = 1), c(2, 4), c(2), alpha = 0.5)
+  r <- morie_geron_lasso_cost_hmlaso(matrix(c(1, 2), ncol = 1), c(2, 4), c(2), alpha = 0.5)
   expect_equal(r$mse, A4b$hmlaso$mse)
   expect_equal(r$penalty, A4b$hmlaso$penalty)
   expect_equal(r$cost, A4b$hmlaso$cost)
@@ -199,7 +199,7 @@ test_that("hmlaso matches Python anchor", {
 test_that("hmlcv matches Python anchor", {
   X <- cbind(1, as.numeric(0:19))
   y <- 3 + 2 * (0:19)
-  r <- morie_geron_learning_curves(X, y, n_splits = 4, seed = 0)
+  r <- morie_geron_learning_curves_hmlcv(X, y, n_splits = 4, seed = 0)
   expect_equal(round(r$rmse_val[length(r$rmse_val)], 6), A4b$hmlcv$rmse_val_last)
   expect_equal(r$verdict, A4b$hmlcv$verdict)
   expect_equal(length(r$train_sizes), A4b$hmlcv$n_sizes)
@@ -226,7 +226,7 @@ test_that("hmlnr matches Python anchor", {
 })
 
 test_that("hmlntr matches Python anchor", {
-  r <- morie_geron_layer_normalization(matrix(c(1, 3), nrow = 1), eps = 0.0)
+  r <- morie_geron_layer_normalization_hmlntr(matrix(c(1, 3), nrow = 1), eps = 0.0)
   expect_equal(as.vector(r$x_hat), A4b$hmlntr$x_hat)
   expect_equal(r$mu[1], A4b$hmlntr$mu0)
   expect_equal(r$var[1], A4b$hmlntr$var0)
@@ -234,7 +234,7 @@ test_that("hmlntr matches Python anchor", {
 
 test_that("hmlof matches Python anchor", {
   X <- matrix(c(0, 0.1, 0.2, 0.3, 0.4, 10.0), ncol = 1)
-  r <- morie_geron_local_outlier_factor(X, n_neighbors = 2)
+  r <- morie_geron_local_outlier_factor_hmlof(X, n_neighbors = 2)
   expect_equal(r$lof[length(r$lof)] > 3, A4b$hmlof$lof_last_gt3)
   expect_equal(all(r$lof[1:5] < 2), A4b$hmlof$lof_head_lt2)
 })

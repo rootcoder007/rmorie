@@ -104,7 +104,7 @@ morie_geron_scaled_dot_product <- function(Q, K, V, d_k = NULL, mask = NULL) {
 #' @param mask Optional mask passed through to the kernel.
 #' @return list with Y, attention, Q, K, V, estimate, n, method.
 #' @export
-morie_geron_self_attention <- function(X, W_Q, W_K, W_V, mask = NULL) {
+morie_geron_self_attention_modules <- function(X, W_Q, W_K, W_V, mask = NULL) {
   Xa <- as.matrix(X)
   Q <- Xa %*% as.matrix(W_Q)
   K <- Xa %*% as.matrix(W_K)
@@ -281,7 +281,7 @@ morie_geron_sac <- function(env, policy = NULL, critic = NULL, epochs = 20, lr =
 #' @return list with codes, reconstruction, recon_error, layer_losses,
 #'   finetune_losses, weights, biases, decoder_biases, widths, estimate, n, method.
 #' @export
-morie_geron_stacked_autoencoder <- function(X, hidden_sizes = c(2), epochs = 200, lr = 0.5,
+morie_geron_stacked_autoencoder_modules <- function(X, hidden_sizes = c(2), epochs = 200, lr = 0.5,
                                              seed = 0, finetune = TRUE) {
   A <- as.matrix(X)
   sizes <- as.integer(hidden_sizes)

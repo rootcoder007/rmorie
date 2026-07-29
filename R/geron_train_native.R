@@ -1339,7 +1339,7 @@ morie_geron_gradient_boosting_residual <- function(X, y, F_prev, learner = NULL,
 #' @return List with `clipped`, `total_norm`, `clipped_norm`,
 #'   `clip_coef`, `was_clipped`, `cosine_with_original`.
 #' @export
-morie_geron_gradient_clipping <- function(gradients, c) {
+morie_geron_gradient_clipping_grgcl <- function(gradients, c) {
   c <- as.numeric(c)
   .morie_gr_need(is.finite(c) && c > 0, "c must be a positive finite threshold.")
   listed <- is.list(gradients)
@@ -1367,7 +1367,7 @@ morie_geron_gradient_clipping <- function(gradients, c) {
 #' @return List with `gini`, `proportions`, `classes`, `counts`,
 #'   `max_possible`, `majority_class`.
 #' @export
-morie_geron_gini_impurity <- function(y) {
+morie_geron_gini_impurity_grgin <- function(y) {
   y <- as.vector(y)
   .morie_gr_need(length(y) > 0L, "y is empty.")
   classes <- sort(unique(y))
@@ -1651,7 +1651,7 @@ morie_geron_grid_search_cv <- function(X, y, param_grid, K, fit_score,
 #' @return List with `w_new`, `delta_w`, `error`, `converged`,
 #'   `update_norm`.
 #' @export
-morie_geron_hebb_rule <- function(x, y_true, y_pred, w, eta) {
+morie_geron_hebb_rule_grhbb <- function(x, y_true, y_pred, w, eta) {
   x <- as.numeric(x); y_true <- as.numeric(y_true); y_pred <- as.numeric(y_pred)
   W <- .morie_gr_a2d(w)
   .morie_gr_need(length(y_true) == length(y_pred), "y_true and y_pred must match.")
@@ -1719,7 +1719,7 @@ morie_geron_heaviside_step <- function(z, threshold = 0) {
 #' Information gain of a split (Geron Ch 6, morie.fn grig)
 #'
 #' IG = H(parent) - (mL/m) H(L) - (mR/m) H(R), impurity via
-#' [morie_geron_shannon_entropy()] or [morie_geron_gini_impurity()].
+#' [morie_geron_shannon_entropy()] or [morie_geron_gini_impurity_grgin()].
 #'
 #' @param y Class labels.
 #' @param left_mask Logical (or 0/1) mask of the left child.
@@ -1742,7 +1742,7 @@ morie_geron_information_gain <- function(y, left_mask, criterion = "entropy") {
   mL <- sum(mask); mR <- sum(!mask)
   .morie_gr_need(mL > 0L && mR > 0L, "the split sends every instance to one side.")
   imp <- function(arr) if (criterion == "entropy")
-    morie_geron_shannon_entropy(arr)$entropy else morie_geron_gini_impurity(arr)$gini
+    morie_geron_shannon_entropy(arr)$entropy else morie_geron_gini_impurity_grgin(arr)$gini
   parent <- imp(y); left <- imp(y[mask]); right <- imp(y[!mask])
   m <- length(y)
   child <- mL / m * left + mR / m * right
@@ -2216,7 +2216,7 @@ morie_geron_local_outlier_factor <- function(X, k = 5) {
 #' @param t Numeric logits.
 #' @return List with `sigma` and `derivative`.
 #' @export
-morie_geron_sigmoid <- function(t) {
+morie_geron_sigmoid_grsig <- function(t) {
   .morie_gr_need(length(t) > 0L, "t is empty.")
   .morie_gr_fin(t, "t")
   out <- .morie_gr_sigmoid_vec(t)
@@ -2439,7 +2439,7 @@ morie_geron_lstm_cell <- function(x_t, h_prev, c_prev, Wf, Wi, Wg, Wo,
 #' @return List with `mae`, `rmse`, `max_error`,
 #'   `median_absolute_error`, `residuals`.
 #' @export
-morie_geron_mae <- function(y_true, y_pred) {
+morie_geron_mae_grmae <- function(y_true, y_pred) {
   yt <- as.numeric(y_true); yp <- as.numeric(y_pred)
   .morie_gr_need(length(yt) == length(yp), "y_true and y_pred must be equal length.")
   .morie_gr_need(length(yt) > 0L, "MAE over zero instances is undefined.")
@@ -2900,7 +2900,7 @@ morie_geron_max_pooling <- function(X, k = 2, stride = NULL) {
 #' @param X,y,theta Design, targets and parameters.
 #' @return List with `cost`, `rmse`, `residuals`, `predictions`.
 #' @export
-morie_geron_linreg_mse_cost <- function(X, y, theta) {
+morie_geron_linreg_mse_cost_grmse <- function(X, y, theta) {
   r <- .morie_gr_mse_core(X, y, theta)
   list(cost = r$cost, rmse = r$rmse, residuals = r$residuals,
        predictions = r$predictions, estimate = r$cost, n = r$n)
@@ -3063,7 +3063,7 @@ morie_geron_ch4_softmax_function <- function(s, k, K = NULL) {
 #' @param theta (n, K) parameters.
 #' @return List with `scores` and 0-based `argmax`.
 #' @export
-morie_geron_softmax_score <- function(X, theta) {
+morie_geron_softmax_score_grsmxs <- function(X, theta) {
   r <- .morie_gr_score_matrix(X, theta)
   list(scores = r$scores, argmax = max.col(r$scores, ties.method = "first") - 1L,
        estimate = r$scores, n = nrow(r$X))
@@ -3078,7 +3078,7 @@ morie_geron_softmax_score <- function(X, theta) {
 
 #' Softmax regression probabilities (morie.fn grsmxp)
 #'
-#' Composes [morie_geron_softmax_score()] with the grn021 softmax.
+#' Composes [morie_geron_softmax_score_grsmxs()] with the grn021 softmax.
 #'
 #' @param X,theta Design and (n, K) parameters.
 #' @return List with `probabilities`, 0-based `predictions`, `scores`.
@@ -3253,7 +3253,7 @@ morie_geron_nmf_objective <- function(X, W, H) {
 #' @return List with `theta`, `fitted`, `residuals`, `rss`,
 #'   `condition_number`.
 #' @export
-morie_geron_normal_equation <- function(X, y, add_intercept = FALSE,
+morie_geron_normal_equation_grnorm <- function(X, y, add_intercept = FALSE,
                                         rcond = 1e-12) {
   A <- .morie_gr_a2d(X); yv <- as.numeric(y)
   .morie_gr_need(length(A) > 0L, "X must be a non-empty (m, n) matrix.")
@@ -3373,7 +3373,7 @@ morie_geron_overfitting_gap <- function(train_scores, val_scores) {
 #' @param drop_first Drop the first indicator column (dummy coding).
 #' @return List with `encoded`, `levels`, `columns`, `n_columns`.
 #' @export
-morie_geron_one_hot_encoding <- function(categories, levels = NULL,
+morie_geron_one_hot_encoding_grohe <- function(categories, levels = NULL,
                                          drop_first = FALSE) {
   cats <- as.vector(categories)
   .morie_gr_need(length(cats) > 0L, "categories is empty.")
@@ -3401,7 +3401,7 @@ morie_geron_one_hot_encoding <- function(categories, levels = NULL,
 #' @param levels Optional level order; default `sort(unique(.))`.
 #' @return List with `encoded`, `levels`, `mapping`.
 #' @export
-morie_geron_ordinal_encoding <- function(categories, levels = NULL) {
+morie_geron_ordinal_encoding_grord <- function(categories, levels = NULL) {
   cats <- as.vector(categories)
   .morie_gr_need(length(cats) > 0L, "categories is empty.")
   lv <- if (is.null(levels)) sort(unique(cats)) else as.vector(levels)
@@ -4478,7 +4478,7 @@ morie_geron_discounted_return <- function(rewards, gamma) {
 #' @param intercept Treat theta[1] as an unpenalised bias.
 #' @return List with `cost`, `mse`, `penalty`, `gradient`.
 #' @export
-morie_geron_ridge_cost <- function(X, y, theta, alpha, intercept = TRUE) {
+morie_geron_ridge_cost_grridg <- function(X, y, theta, alpha, intercept = TRUE) {
   A <- .morie_gr_a2d(X); yv <- as.numeric(y); th <- as.numeric(theta)
   .morie_gr_need(length(A) > 0L, "X must be a non-empty (m, n) matrix.")
   .morie_gr_need(nrow(A) == length(yv), "X rows must equal length(y).")
@@ -4572,7 +4572,7 @@ morie_geron_rlhf_reward_kl_objective <- function(rewards, policy_logprobs,
 #' @param y_true,y_pred Equal-length numeric vectors.
 #' @return List with `rmse`, `mse`, `mae`, `max_error`, `residuals`.
 #' @export
-morie_geron_rmse <- function(y_true, y_pred) {
+morie_geron_rmse_grrmse <- function(y_true, y_pred) {
   yt <- as.numeric(y_true); yp <- as.numeric(y_pred)
   .morie_gr_need(length(yt) > 0L, "y_true is empty.")
   .morie_gr_need(length(yt) == length(yp), "y_true and y_pred must match.")
@@ -5247,7 +5247,7 @@ morie_geron_stacked_autoencoder <- function(x, layer_weights,
 #' @param ddof Denominator correction in [0, m-1].
 #' @return List with `scaled`, `mean`, `scale`.
 #' @export
-morie_geron_standardization <- function(X, ddof = 0) {
+morie_geron_standardization_grstd <- function(X, ddof = 0) {
   flat <- !is.matrix(X)
   A <- if (flat) matrix(as.numeric(X), ncol = 1L) else X
   storage.mode(A) <- "double"

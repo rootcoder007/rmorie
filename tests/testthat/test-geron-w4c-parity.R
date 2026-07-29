@@ -101,7 +101,7 @@ test_that("hmosf: one-shot prompt matches Python", {
 
 test_that("hmovo: one-vs-one voting matches Python", {
   X <- matrix(c(0, 1, 5, 6, 10, 11), ncol = 1)
-  r <- morie_geron_one_vs_one(X, c(0, 0, 1, 1, 2, 2))
+  r <- morie_geron_one_vs_one_hm(X, c(0, 0, 1, 1, 2, 2))
   expect_equal(r$n_classifiers, A4c$hmovo$n_classifiers)
   expect_equal(r$accuracy, A4c$hmovo$accuracy)
   expect_equal(as.integer(r$predict(matrix(c(0.5, 10.5), ncol = 1))), A4c$hmovo$predict_new)
@@ -109,7 +109,7 @@ test_that("hmovo: one-vs-one voting matches Python", {
 
 test_that("hmovr: one-vs-rest matches Python", {
   X <- matrix(c(0, 1, 5, 6, 10, 11), ncol = 1)
-  r <- morie_geron_one_vs_rest(X, c(0, 0, 1, 1, 2, 2))
+  r <- morie_geron_one_vs_rest_hm(X, c(0, 0, 1, 1, 2, 2))
   expect_equal(r$accuracy, A4c$hmovr$accuracy)
   expect_equal(round(r$positive_rate, 6), A4c$hmovr$positive_rate)
 })
@@ -170,7 +170,7 @@ test_that("hmphp: peephole LSTM matches Python", {
 })
 
 test_that("hmplf: polynomial features match Python", {
-  r <- morie_geron_polynomial_features(matrix(c(2.0, 3.0), ncol = 2), 2)
+  r <- morie_geron_polynomial_features_hm(matrix(c(2.0, 3.0), ncol = 2), 2)
   expect_equal(r$features[1, ], A4c$hmplf$features)
   expect_equal(r$names, A4c$hmplf$names)
 })
@@ -204,9 +204,9 @@ test_that("hmppp: pipeline schedule matches Python", {
 })
 
 test_that("hmprc: PR curve average precision matches Python", {
-  r <- morie_geron_precision_recall_curve(c(0, 1), c(0.1, 0.9))
+  r <- morie_geron_precision_recall_curve_hm(c(0, 1), c(0.1, 0.9))
   expect_equal(r$average_precision, A4c$hmprc$average_precision)
-  r2 <- morie_geron_precision_recall_curve(c(1, 0), c(0.1, 0.9))
+  r2 <- morie_geron_precision_recall_curve_hm(c(1, 0), c(0.1, 0.9))
   expect_equal(r2$average_precision, A4c$hmprc$ap_reversed)
   expect_equal(round(r2$best_f1, 6), A4c$hmprc$best_f1_reversed)
 })
@@ -219,7 +219,7 @@ test_that("hmprcv: perceiver cross-attention matches Python", {
 })
 
 test_that("hmpre: precision matches Python", {
-  r <- morie_geron_precision(c(1, 0, 1, 1, 0), c(1, 1, 1, 0, 0))
+  r <- morie_geron_precision_hm(c(1, 0, 1, 1, 0), c(1, 1, 1, 0, 0))
   expect_equal(round(r$precision, 6), A4c$hmpre$precision)
   expect_equal(r$tp, A4c$hmpre$tp)
   expect_equal(r$fp, A4c$hmpre$fp)
@@ -234,13 +234,13 @@ test_that("hmprel: PReLU matches Python", {
 
 test_that("hmprio: Perceiver IO matches Python", {
   x <- matrix(c(1, 0, 0, 1, 1, 1), ncol = 2, byrow = TRUE)
-  r <- morie_geron_perceiver_io(x, matrix(c(1, 0, 0, 1), ncol = 2, byrow = TRUE), matrix(c(1, 0, 0, 1, 1, 1), ncol = 2, byrow = TRUE))
+  r <- morie_geron_perceiver_io_hm(x, matrix(c(1, 0, 0, 1), ncol = 2, byrow = TRUE), matrix(c(1, 0, 0, 1, 1, 1), ncol = 2, byrow = TRUE))
   expect_equal(dim(r$outputs), A4c$hmprio$outputs_shape)
   expect_equal(round(rowSums(r$decoder_attention), 12), A4c$hmprio$attn_row_sums)
 })
 
 test_that("hmpru: weight pruning matches Python", {
-  r <- morie_geron_weight_pruning(c(1.0, -2.0, 3.0, -4.0), 0.5)
+  r <- morie_geron_weight_pruning_hm(c(1.0, -2.0, 3.0, -4.0), 0.5)
   expect_equal(r$pruned, A4c$hmpru$pruned)
   expect_equal(r$threshold, A4c$hmpru$threshold)
   expect_equal(r$n_pruned, A4c$hmpru$n_pruned)
@@ -269,7 +269,7 @@ test_that("hmpvt: PVT patch embedding matches Python", {
 })
 
 test_that("hmqat: QAT matches Python", {
-  r <- morie_geron_quantization_aware_training(0.0, matrix(c(1.0, 2.0, 3.0), ncol = 1), c(2.0, 4.0, 6.0), epochs = 300, lr = 0.05)
+  r <- morie_geron_quantization_aware_training_hm(0.0, matrix(c(1.0, 2.0, 3.0), ncol = 1), c(2.0, 4.0, 6.0), epochs = 300, lr = 0.05)
   expect_true(abs(r$quantized_weights[1] - 2.0) < 0.05)
   expect_true(r$loss < 1e-3)
 })
@@ -288,7 +288,7 @@ test_that("hmrdt: regression tree matches Python", {
 })
 
 test_that("hmrec: recall matches Python", {
-  r <- morie_geron_recall(c(1, 1, 0, 0), c(1, 0, 0, 0))
+  r <- morie_geron_recall_hm(c(1, 1, 0, 0), c(1, 0, 0, 0))
   expect_equal(r$tp, A4c$hmrec$tp)
   expect_equal(r$fn, A4c$hmrec$fn)
   expect_equal(r$recall, A4c$hmrec$recall)
@@ -349,7 +349,7 @@ test_that("hmrnn: recurrent neuron matches Python", {
 })
 
 test_that("hmroc: ROC curve matches Python", {
-  r <- morie_geron_roc_curve(c(0, 0, 1, 1), c(0.1, 0.4, 0.35, 0.8))
+  r <- morie_geron_roc_curve_hm(c(0, 0, 1, 1), c(0.1, 0.4, 0.35, 0.8))
   expect_equal(r$auc, A4c$hmroc$auc)
   expect_equal(round(r$auc_trapezoid, 12), A4c$hmroc$auc_trapezoid)
   expect_equal(r$tpr, A4c$hmroc$tpr)
