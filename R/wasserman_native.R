@@ -15,7 +15,7 @@
 
 .morie_wsm_need <- function(ok, msg) if (!isTRUE(ok)) stop(msg, call. = FALSE)
 
-#' Variance Var(X) = E[X^2] - E[X]^2 (Wasserman Ch 3, morie.fn wsmvar)
+#' Variance Var(X) = E\[X^2\] - E\[X\]^2 (Wasserman Ch 3, morie.fn wsmvar)
 #'
 #' @param x Numeric sample, at least one observation.
 #' @return List with `estimate` (population variance, divisor n),
@@ -70,7 +70,7 @@ morie_wasserman_empirical_cdf <- function(x, data) {
        method = "eCDF F_n(x) = (1/n) sum I(X_i <= x)")
 }
 
-#' Expectation E[X] = int x f(x) dx by trapezoid (Ch 3, wsmexp)
+#' Expectation E\[X\] = int x f(x) dx by trapezoid (Ch 3, wsmexp)
 #'
 #' @param x Strictly increasing support grid, at least 2 points.
 #' @param f Non-negative density values on the grid.
@@ -93,7 +93,7 @@ morie_wasserman_expectation <- function(x, f) {
        n = length(x), method = "E[X] = int x f(x) dx (trapezoid)")
 }
 
-#' Covariance Cov(X,Y) = E[XY] - E[X]E[Y] (Ch 4, wsmcov)
+#' Covariance Cov(X,Y) = E\[XY\] - E\[X\]E\[Y\] (Ch 4, wsmcov)
 #'
 #' @param x,y Paired numeric samples of equal length.
 #' @return List with `estimate` (population, divisor n),
@@ -118,9 +118,9 @@ morie_wasserman_covariance <- function(x, y) {
        method = "Cov(X,Y) = E[XY] - E[X]E[Y] (population divisor n)")
 }
 
-#' Markov bound P(X >= a) <= E[X]/a for X >= 0 (Ch 4, wsmmrk)
+#' Markov bound P(X >= a) <= E\[X\]/a for X >= 0 (Ch 4, wsmmrk)
 #'
-#' @param mean Non-negative expectation E[X].
+#' @param mean Non-negative expectation E\[X\].
 #' @param a Strictly positive threshold.
 #' @return List with `estimate` (capped at 1), `raw_bound`, `mean`, `a`, `method`.
 #' @examples
@@ -255,7 +255,7 @@ morie_wasserman_delta_method <- function(theta_hat, se, g_prime) {
 #' Empirical quantile, Hyndman-Fan type 1 (Ch 7, wsmqtl)
 #'
 #' @param data Numeric sample, non-empty.
-#' @param p Probability level(s) in (0, 1].
+#' @param p Probability level(s) in (0, 1\].
 #' @return List with `estimate`, `values`, `p`, `n`, `method`.
 #' @examples
 #' morie_wasserman_empirical_quantile(c(3, 1, 4, 2), 0.5)$estimate
@@ -521,10 +521,10 @@ morie_wasserman_cramer_rao <- function(theta, n, I) {
 
 #' Fisher information by numeric curvature (Ch 9, wsmfis)
 #'
-#' I(theta) = -E[d^2 log f / d theta^2], the second derivative taken as
+#' I(theta) = -E\[d^2 log f / d theta^2\], the second derivative taken as
 #' a central difference in theta and the expectation by trapezoid
 #' quadrature on `x_grid`. `f = NULL` selects the exponential model
-#' (exact information 1/theta^2) with a default grid over [0, 40 theta].
+#' (exact information 1/theta^2) with a default grid over \[0, 40 theta\].
 #'
 #' @param f Density f(x, theta) vectorised in x; NULL = exponential.
 #' @param theta Parameter value.
@@ -948,7 +948,7 @@ morie_wasserman_mutual_info <- function(x, y) {
 
 #' Odds ratio with Woolf interval (Ch 16, wsmodd)
 #'
-#' Table layout [[n11, n10], [n01, n00]]: row = exposure, column =
+#' Table layout \[\[n11, n10\], \[n01, n00\]\]: row = exposure, column =
 #' outcome. A zero cell is refused; a continuity correction is the
 #' caller's explicit decision, never a silent default.
 #'
@@ -975,7 +975,7 @@ morie_wasserman_odds_ratio <- function(table) {
 
 #' Relative risk with Katz interval (Ch 16, wsmrrr)
 #'
-#' @param table 2x2 matrix [[n11, n10], [n01, n00]] with positive rows
+#' @param table 2x2 matrix \[\[n11, n10\], \[n01, n00\]\] with positive rows
 #'   and event counts.
 #' @return List with `estimate` (RR), `risk_exposed`, `risk_unexposed`,
 #'   `log_rr`, `se`, `ci_lower`, `ci_upper`, `n`, `method`.
@@ -1809,7 +1809,7 @@ morie_wasserman_directed_graph <- function(dag, x) {
 #' @return List with `estimate` (Z), `probabilities`, `n_nodes`,
 #'   `n_cliques`, `method`.
 #' @examples
-#' agree <- function(t) if (t[1] == t[2]) 2 else 1
+#' agree <- function(t) if (t\[1\] == t\[2\]) 2 else 1
 #' morie_wasserman_undirected_graph(list(2, list(c(0, 1))), list(agree))$estimate
 #' @export
 morie_wasserman_undirected_graph <- function(graph, psi) {
@@ -1846,7 +1846,7 @@ morie_wasserman_undirected_graph <- function(graph, psi) {
 #' @return List with `estimate` (probability of the mode), `mode`
 #'   (bit vector), `partition_function`, `probabilities`, `n_nodes`, `method`.
 #' @examples
-#' agree <- function(t) if (t[1] == t[2]) 2 else 1
+#' agree <- function(t) if (t\[1\] == t\[2\]) 2 else 1
 #' morie_wasserman_graphical_model(list(2, list(c(0, 1))), list(agree))$mode
 #' @export
 morie_wasserman_graphical_model <- function(graph, psi) {
@@ -2016,7 +2016,7 @@ morie_wasserman_svm <- function(X, y, C = 1e6, max_iter = 1000L, tol = 1e-12) {
 #' Reports inf_T sup_F R alongside the maximin value; weak duality
 #' (maximin <= minimax) is checked, and equality flags a pure saddle.
 #'
-#' @param loss Risk matrix (m x k), R[i, j] = R(estimator_i, F_j).
+#' @param loss Risk matrix (m x k), R\[i, j\] = R(estimator_i, F_j).
 #' @param estimator Labels for the m rows.
 #' @param family Labels for the k columns.
 #' @return List with `estimate` (minimax risk), `minimax_estimator`,
