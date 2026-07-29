@@ -16,6 +16,16 @@ Named list with \code{omega, alpha, beta, persistence, loglik,
 \description{
 \deqn{\sigma_t^2 = \omega + \alpha \epsilon_{t-1}^2 + \beta \sigma_{t-1}^2.}{sigma_t^2 = omega + alpha epsilon_t-1^2 + beta sigma_t-1^2.}
 }
+\details{
+Native Gaussian quasi-maximum-likelihood fit; no GARCH package is
+loaded or called. Stationarity requires \eqn{\alpha + \beta < 1},
+which the likelihood enforces by returning a large penalty outside the
+admissible region.
+}
 \examples{
 morie_garch_fit(x = rnorm(50))
+}
+\references{
+Bollerslev, T. (1986). Generalized autoregressive conditional
+heteroskedasticity. \emph{Journal of Econometrics}, 31(3), 307-327.
 }

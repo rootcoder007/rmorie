@@ -18,8 +18,8 @@ morie_tmle_mediation(y, treatment, mediator, covariates = NULL, trunc = 0.01)
 \item{trunc}{Propensity truncation.}
 }
 \value{
-List with `nde`, `nie`, `total`, `se_total`, `prop_mediated`,
-  `n`.
+List with \code{nde}, \code{nie}, \code{total}, \code{se_total}, \code{prop_mediated},
+\code{n}.
 }
 \description{
 The total effect comes from TMLE; the direct effect fixes the mediator
@@ -27,10 +27,10 @@ distribution at its control-arm law by weighting the outcome
 regression with the mediator density ratio. The indirect effect is
 taken as the residual, which makes the decomposition add up exactly at
 the price of putting all the modelling error in that piece. Mirrors
-`morie.fn.tmlmed`.
+\code{morie.fn.tmlmed}.
 }
 \references{
 Zheng W, van der Laan MJ (2012). Targeted maximum
-  likelihood estimation of natural direct effects. \emph{The
-  International Journal of Biostatistics} 8(1), Article 3.
+likelihood estimation of natural direct effects. \emph{The
+International Journal of Biostatistics} 8(1), Article 3.
 }

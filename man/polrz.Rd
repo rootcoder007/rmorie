@@ -3,7 +3,7 @@
 \name{polrz}
 \alias{polrz}
 \alias{morie_polarization_index}
-\title{Polarization index (Cohen-d between two groups; Armstrong Ch 8)}
+\title{Polarization index: standardised mean difference (Cohen 1988)}
 \usage{
 polrz(x, group = NULL)
 
@@ -20,6 +20,14 @@ Named list with \code{estimate}, \code{mean_R}, \code{mean_D}, \code{sd_R},
 \code{sd_D}, \code{pooled_sd}, \code{n_R}, \code{n_D}, \code{method}.
 }
 \description{
+Polarization index: standardised mean difference (Cohen 1988)
+}
+\details{
+The quantity computed IS Cohen's d, so it cites Cohen, J. (1988),
+Statistical Power Analysis for the Behavioral Sciences, 2nd ed. NOT Armstrong:
+its only polarization mentions (p.129) are a passing citation to McCarty, Poole
+and Rosenthal.
+
 Two-group polarization P = |mean_R - mean_D| / pooled_sd. When both
 groups are constant, falls back to overall SD.
 }

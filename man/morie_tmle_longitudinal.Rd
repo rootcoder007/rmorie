@@ -7,21 +7,21 @@
 morie_tmle_longitudinal(y, a, l, trunc = 0.01)
 }
 \arguments{
-\item{y, a, l}{As in [morie_tmle_time_varying()].}
+\item{y, a, l}{As in \code{\link[=morie_tmle_time_varying]{morie_tmle_time_varying()}}.}
 
 \item{trunc}{Treatment-probability truncation.}
 }
 \value{
-List with `estimate`, `ey_always`, `ey_never`, `n_periods`,
-  `n`.
+List with \code{estimate}, \code{ey_always}, \code{ey_never}, \code{n_periods},
+\code{n}.
 }
 \description{
-Runs [morie_tmle_time_varying()] under the two static regimes and
+Runs \code{\link[=morie_tmle_time_varying]{morie_tmle_time_varying()}} under the two static regimes and
 differences them -- the longitudinal analogue of the g-formula
 contrast, but with a targeting step at every time point rather than
-plain substitution. Mirrors `morie.fn.tmllng`.
+plain substitution. Mirrors \code{morie.fn.tmllng}.
 }
 \references{
 van der Laan MJ, Gruber S (2012). \emph{The International
-  Journal of Biostatistics} 8(1), Article 9.
+Journal of Biostatistics} 8(1), Article 9.
 }

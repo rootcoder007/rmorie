@@ -4,8 +4,13 @@
 \alias{morie_portmanteau_hosking}
 \title{Hosking's multivariate portmanteau test for white noise}
 \usage{
-morie_portmanteau_hosking(x, lags = 10L, cdf = NULL, fitdf = 0L,
-  modified = TRUE)
+morie_portmanteau_hosking(
+  x,
+  lags = 10L,
+  cdf = NULL,
+  fitdf = 0L,
+  modified = TRUE
+)
 }
 \arguments{
 \item{x}{Numeric matrix (n x k) to test, usually residuals from a
@@ -29,12 +34,13 @@ weights every lag by \code{n}.}
 }
 \value{
 Named list with \code{statistic}, \code{p_value}, \code{df},
-  \code{lags}, \code{n}, \code{k}, \code{fitdf}, \code{method}.
+\code{lags}, \code{n}, \code{k}, \code{fitdf}, \code{method}.
 }
 \description{
 Hosking (1980) generalised the univariate portmanteau statistic to
 several series at once. His modified form is
-
+}
+\details{
 \deqn{\tilde Q_m = n^2 \sum_{\ell=1}^{m} (n-\ell)^{-1}
       \hat r_\ell' (\hat R_0^{-1} \otimes \hat R_0^{-1}) \hat r_\ell}
 
@@ -42,8 +48,7 @@ with \eqn{\hat r_\ell = vec(\hat R_\ell')},
 \eqn{\hat R_\ell = \hat L' \hat\Gamma_\ell \hat L},
 \eqn{\hat L \hat L' = \hat\Gamma_0^{-1}}, and
 \eqn{\hat\Gamma_\ell = n^{-1} \sum_{t=\ell+1}^{n} e_t e_{t-\ell}'}.
-}
-\details{
+
 The Kronecker form collapses. Because
 \eqn{\hat L \hat L' = \hat\Gamma_0^{-1}}, the standardised lag-zero
 matrix \eqn{\hat R_0 = \hat L' \hat\Gamma_0 \hat L} is the identity, so
@@ -68,9 +73,9 @@ morie_portmanteau_hosking(matrix(rnorm(600), 200, 3), lags = 5)$p_value
 }
 \references{
 Hosking JRM (1980). The multivariate portmanteau
-  statistic. \emph{Journal of the American Statistical Association},
-  75(371), 602-608.
+statistic. \emph{Journal of the American Statistical Association},
+75(371), 602-608.
 
-  Mahdi E (2020). portes: an R package for portmanteau tests in time
-  series models. arXiv:2005.00931, equation (9).
+Mahdi E (2020). portes: an R package for portmanteau tests in time
+series models. arXiv:2005.00931, equation (9).
 }

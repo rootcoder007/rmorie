@@ -25,5 +25,5 @@ closed form from the dual solution, w = sum_i alpha_i y_i x_i.
 }
 \examples{
 # See the package vignettes for usage examples:
-#   vignette(package = "rmorie")
+#   vignette(package = "morie")
 }

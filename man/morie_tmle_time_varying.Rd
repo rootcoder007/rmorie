@@ -18,19 +18,19 @@ morie_tmle_time_varying(y, a, l, regime = 1, trunc = 0.01)
 \item{trunc}{Treatment-probability truncation.}
 }
 \value{
-List with `estimate`, `epsilons`, `weights`, `regime`,
-  `n_periods`, `n`.
+List with \code{estimate}, \code{epsilons}, \code{weights}, \code{regime},
+\code{n_periods}, \code{n}.
 }
 \description{
 Runs the iterated conditional expectation backwards, fluctuating at
-*every* time point along the cumulative clever covariate rather than
+\emph{every} time point along the cumulative clever covariate rather than
 only at the last. That is what makes the longitudinal estimator solve
 the full efficient influence-function equation. Mirrors
-`morie.fn.tmltvc`.
+\code{morie.fn.tmltvc}.
 }
 \references{
 van der Laan MJ, Gruber S (2012). Targeted minimum
-  loss-based estimation of causal effects of multiple time point
-  interventions. \emph{The International Journal of Biostatistics}
-  8(1), Article 9.
+loss-based estimation of causal effects of multiple time point
+interventions. \emph{The International Journal of Biostatistics}
+8(1), Article 9.
 }

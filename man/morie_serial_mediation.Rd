@@ -14,14 +14,14 @@ morie_serial_mediation(x, m1, m2, y)
 \item{y}{Outcome.}
 }
 \value{
-List with `direct`, `via_m1`, `via_m2`, `serial`,
-  `indirect_total`, `total`, `n`.
+List with \code{direct}, \code{via_m1}, \code{via_m2}, \code{serial},
+\code{indirect_total}, \code{total}, \code{n}.
 }
 \description{
 Four-path decomposition: direct, through M1, through M2, and the
-serial path. Mirrors `morie.fn.medstg`.
+serial path. Mirrors \code{morie.fn.medstg}.
 }
 \references{
-Hayes AF (2022). *Introduction to Mediation,
-  Moderation, and Conditional Process Analysis*, 3rd ed., Ch. 5.
+Hayes AF (2022). \emph{Introduction to Mediation,
+Moderation, and Conditional Process Analysis}, 3rd ed., Ch. 5.
 }

@@ -14,12 +14,12 @@ morie_granger_test(x, y, p = 1L)
 \item{p}{Lag order.}
 }
 \value{
-List with `statistic`, `p_value`, `df`, `n`.
+List with \code{statistic}, \code{p_value}, \code{df}, \code{n}.
 }
 \description{
 F-test of the x-lag block in an AR model for y. Mirrors
-`morie.fn.ggrcst`.
+\code{morie.fn.ggrcst}.
 }
 \references{
-Granger CWJ (1969). *Econometrica* 37(3), 424-438.
+Granger CWJ (1969). \emph{Econometrica} 37(3), 424-438.
 }

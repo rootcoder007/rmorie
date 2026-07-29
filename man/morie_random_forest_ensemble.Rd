@@ -37,11 +37,9 @@ Named list: estimate, train_score, oob_score, feature_importances,
 n_estimators, task, n, method.
 }
 \description{
-Wraps \code{randomForest::randomForest}.  Auto-detects task from y
+Native random forest (ESL Algorithm 15.1).  Auto-detects task from y
 (factor / integer-like -> classification, otherwise regression).
 }
 \examples{
-\dontshow{if (requireNamespace("randomForest", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 morie_random_forest_ensemble(x = rnorm(50), y = rnorm(50))
-\dontshow{\}) # examplesIf}
 }

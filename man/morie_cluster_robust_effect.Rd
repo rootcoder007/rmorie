@@ -14,14 +14,14 @@ morie_cluster_robust_effect(y, d, cluster)
 \item{cluster}{Cluster identifier.}
 }
 \value{
-List with `estimate`, `se_cluster`, `se_naive`, `p_value`,
-  `n_clusters`, `n`.
+List with \code{estimate}, \code{se_cluster}, \code{se_naive}, \code{p_value},
+\code{n_clusters}, \code{n}.
 }
 \description{
-Sandwich variance summed over clusters with the `G/(G-1)`
-correction and a `t(G-1)` reference. Mirrors `morie.fn.clstcr`.
+Sandwich variance summed over clusters with the \code{G/(G-1)}
+correction and a \code{t(G-1)} reference. Mirrors \code{morie.fn.clstcr}.
 }
 \references{
-Cameron AC, Miller DL (2015). *Journal of Human
-  Resources* 50(2), 317-372.
+Cameron AC, Miller DL (2015). \emph{Journal of Human
+Resources} 50(2), 317-372.
 }

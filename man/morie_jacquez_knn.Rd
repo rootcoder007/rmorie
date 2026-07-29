@@ -17,22 +17,22 @@ morie_jacquez_knn(coords, time, k = 3L, B = 999L)
 }
 \value{
 Named list with \code{statistic}, \code{p_value},
-  \code{expected}, \code{k}, \code{n}, \code{B},
-  \code{null_statistics}, \code{method}.
+\code{expected}, \code{k}, \code{n}, \code{B},
+\code{null_statistics}, \code{method}.
 }
 \description{
 Counts the pairs near in space \emph{and} near in time,
 \eqn{J_k = \sum_i \sum_j a_{ij} b_{ij}}, where \eqn{a_{ij}} marks
 \eqn{j} among \eqn{i}'s \eqn{k} nearest neighbours in space and
-\eqn{b_{ij}} the same in time.
+\eqn{b_{ij}} the same in time. Neither indicator is symmetric, so the
+sum runs over ordered pairs.
 }
 \details{
-Neither indicator is symmetric, so the sum runs over ordered pairs.
-
 The statistic is a count, so it does not depend on the units of the
-coordinates or the clock and stays valid for irregular regions. That is
-also why the null is simulated: under no interaction the time labels are
-exchangeable.
+coordinates or the clock and stays valid for irregular regions. That
+is also why the null is simulated: under no interaction the time
+labels are exchangeable, so permuting them and ranking the observed
+count gives \eqn{p = (1 + \#\{J^{(b)} \ge J^{obs}\}) / (1 + B)}.
 
 Mirrors \code{morie.fn.jacqkn} on the Python side.
 }
@@ -42,6 +42,6 @@ morie_jacquez_knn(matrix(runif(60), 30, 2), runif(30), k = 3, B = 99)$p_value
 }
 \references{
 Jacquez GM (1996). A k nearest neighbour test for
-  space-time interaction. \emph{Statistics in Medicine}, 15(18),
-  1935-1949.
+space-time interaction. \emph{Statistics in Medicine}, 15(18),
+1935-1949.
 }

@@ -35,14 +35,15 @@ linear kernel.}
 }
 \value{
 Named list with \code{statistic}, \code{p_value},
-  \code{kernel}, \code{gamma}, \code{B}, \code{m}, \code{n},
-  \code{unbiased}, \code{null_statistics}, \code{method}.
+\code{kernel}, \code{gamma}, \code{B}, \code{m}, \code{n},
+\code{unbiased}, \code{null_statistics}, \code{method}.
 }
 \description{
 The maximum mean discrepancy is the largest difference in expectation
 over the unit ball of a reproducing-kernel Hilbert space. Its biased
 empirical estimate keeps the diagonal terms,
-
+}
+\details{
 \deqn{MMD_b^2 = \frac{1}{m^2}\sum_{i,j} k(x_i,x_j)
                + \frac{1}{n^2}\sum_{i,j} k(y_i,y_j)
                - \frac{2}{mn}\sum_{i,j} k(x_i,y_j)}
@@ -50,8 +51,7 @@ empirical estimate keeps the diagonal terms,
 while the unbiased estimate of Gretton et al.'s equation (3) drops
 them, dividing the within-sample sums by \eqn{m(m-1)} and
 \eqn{n(n-1)} over \eqn{i \ne j}.
-}
-\details{
+
 The null has no simple closed form, so the p-value comes from
 permuting the group labels. Any bias is shared by the observed and
 permuted statistics and cancels in the ranking, which is why the
@@ -66,6 +66,6 @@ morie_mmd_test(rnorm(30), rnorm(30, 2), B = 99)$p_value
 }
 \references{
 Gretton A, Borgwardt KM, Rasch MJ, Scholkopf B & Smola A
-  (2012). A kernel two-sample test. \emph{Journal of Machine Learning
-  Research}, 13, 723-773.
+(2012). A kernel two-sample test. \emph{Journal of Machine Learning
+Research}, 13, 723-773.
 }

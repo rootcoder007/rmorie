@@ -33,6 +33,10 @@ r <- rgadp(x, reference = n, mu = 0.01, order = 8)
 length(r$signal)
 }
 \references{
-Widrow & Stearns (1985); Rangayyan Ch 11.
+Widrow, B., & Stearns, S. D. (1985). Adaptive Signal
+Processing. Prentice-Hall. Rangayyan, R. M., & Krishnan, S. (2024).
+Biomedical Signal Analysis, 3rd ed. Wiley-IEEE Press. Sec 3.10.2 "The
+least-mean-squares adaptive filter", p.184. The previous reference said
+Ch 11.
 }
 \keyword{internal}

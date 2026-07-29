@@ -13,8 +13,8 @@ tested against the rest score of the others.}
 \item{group}{Binary group indicator; the level sorting first is the
 reference group.}
 
-\item{matching}{Optional matching score. Defaults to the per-item rest
-score.}
+\item{matching}{Optional matching score. Defaults to the per-item
+rest score.}
 
 \item{min_per_cell}{Strata with fewer than this many respondents in
 either group are dropped. Default 2.}
@@ -23,8 +23,8 @@ either group are dropped. Default 2.}
 }
 \value{
 Named list with \code{beta}, \code{statistic}, \code{p_value},
-  \code{se}, \code{n_strata}, \code{n_reference}, \code{n_focal},
-  \code{correct}, \code{method}.
+\code{se}, \code{n_strata}, \code{n_reference}, \code{n_focal},
+\code{correct}, \code{method}.
 }
 \description{
 Stratifies respondents on a matching score and compares the studied
@@ -41,11 +41,11 @@ stratum, biasing the comparison towards finding no DIF.
 The regression correction is on by default and is not optional in
 practice. Matching on an observed score leaves a residual ability
 difference inside each stratum whenever the groups differ in ability,
-and the uncorrected statistic reads that as bias. Measured on data with
-an ability gap and no DIF at all, the uncorrected form rejects 0.81 of
-items on a 6-item test and still 0.18 on 40 items against a nominal
-0.05; correcting brings that to 0.28, 0.10 and 0.075 at 6, 12 and 20
-items with power intact. Short tests remain the hard case.
+and the uncorrected statistic reads that as bias. Measured on data
+with an ability gap and no DIF at all, the uncorrected form rejects
+0.81 of items on a 6-item test and still 0.18 on 40 items against a
+nominal 0.05; correcting brings that to 0.28, 0.10 and 0.075 at 6, 12
+and 20 items with power intact. Short tests remain the hard case.
 
 Mirrors \code{morie.fn.difsbs} on the Python side.
 }
@@ -56,7 +56,7 @@ morie_sibtest(x, rbinom(200, 1, 0.5))$statistic
 }
 \references{
 Shealy R & Stout W (1993). A model-based standardization
-  approach that separates true bias/DIF from group ability differences
-  and detects test bias/DTF as well as item bias/DIF.
-  \emph{Psychometrika}, 58(2), 159-194.
+approach that separates true bias/DIF from group ability
+differences and detects test bias/DTF as well as item bias/DIF.
+\emph{Psychometrika}, 58(2), 159-194.
 }

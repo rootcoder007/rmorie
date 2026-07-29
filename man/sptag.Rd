@@ -3,7 +3,7 @@
 \name{sptag}
 \alias{sptag}
 \alias{morie_spatial_agreement}
-\title{Pairwise vote-agreement matrix (Armstrong Ch 8)}
+\title{Pairwise vote-agreement matrix (Armstrong sec. 3.2.2, p.88)}
 \usage{
 sptag(x)
 
@@ -17,6 +17,13 @@ Named list with \code{agreement} (n by n), \code{mean_agreement},
 \code{n}, \code{m}, \code{method}.
 }
 \description{
+Pairwise vote-agreement matrix (Armstrong sec. 3.2.2, p.88)
+}
+\details{
+Verified against the Armstrong PDF: section 3.2.2 "90th US Senate
+Agreement Scores", printed p.88. The former "Ch 8" citation was to a chapter
+that does not exist.
+
 A_ij = proportion of roll calls on which legislators i, j voted the
 same way (excluding mutually absent items).
 }

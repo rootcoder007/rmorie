@@ -13,14 +13,14 @@ morie_att_weights(treat, ps)
 controls.}
 }
 \value{
-List with `weights`, `ess_control`, `ess_treated`, `n`.
+List with \code{weights}, \code{ess_control}, \code{ess_treated}, \code{n}.
 }
 \description{
 Treated units keep weight 1; controls are reweighted by
-`e / (1 - e)` so the control arm matches the treated covariate
-distribution. Mirrors `morie.fn.causipsw`.
+\code{e / (1 - e)} so the control arm matches the treated covariate
+distribution. Mirrors \code{morie.fn.causipsw}.
 }
 \references{
-Hernan MA, Robins JM (2020). *Causal Inference: What
-  If*. Chapman & Hall/CRC, Ch. 15.
+Hernan MA, Robins JM (2020). \emph{Causal Inference: What
+If}. Chapman & Hall/CRC, Ch. 15.
 }

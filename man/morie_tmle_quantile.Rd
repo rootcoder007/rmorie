@@ -7,7 +7,7 @@
 morie_tmle_quantile(y, d, x, quantile = 0.5, n_grid = 60L, trunc = 0.01)
 }
 \arguments{
-\item{y, d, x}{As in [morie_tmle_propensity_only()].}
+\item{y, d, x}{As in \code{\link[=morie_tmle_propensity_only]{morie_tmle_propensity_only()}}.}
 
 \item{quantile}{Quantile level in (0, 1).}
 
@@ -16,17 +16,17 @@ morie_tmle_quantile(y, d, x, quantile = 0.5, n_grid = 60L, trunc = 0.01)
 \item{trunc}{Propensity truncation.}
 }
 \value{
-List with `qte`, `q1`, `q0`, `quantile`, `grid`, `f1`, `f0`,
-  `n`.
+List with \code{qte}, \code{q1}, \code{q0}, \code{quantile}, \code{grid}, \code{f1}, \code{f0},
+\code{n}.
 }
 \description{
 Each counterfactual CDF value is a mean of an indicator, so the TMLE
-machinery runs on `1{Y <= t}` over a grid of `t`. The two curves are
+machinery runs on \verb{1\{Y <= t\}} over a grid of \code{t}. The two curves are
 monotonised (pointwise TMLE curves need not be monotone) and inverted
-at the requested level. Mirrors `morie.fn.tmlqct`.
+at the requested level. Mirrors \code{morie.fn.tmlqct}.
 }
 \references{
 Diaz I (2017). Efficient estimation of quantiles in
-  missing data models. \emph{Journal of Statistical Planning and
-  Inference} 190, 39-51.
+missing data models. \emph{Journal of Statistical Planning and
+Inference} 190, 39-51.
 }

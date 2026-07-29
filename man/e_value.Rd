@@ -21,10 +21,9 @@ closed-form proxy). Pass the empirical sd to route through
 Scalar E-value (>= 1).
 }
 \description{
-Thin wrapper over \code{EValue::evalues.OLS()} when \pkg{EValue} is
-installed and an outcome SD is supplied via the \code{sd_y} argument
-(recommended workflow per VanderWeele & Ding 2017). Without
-\pkg{EValue}, or when \code{sd_y} is left at its default of 1, falls
+Native implementation of the VanderWeele & Ding (2017) OLS E-value.
+Supply an outcome SD via \code{sd_y} for the recommended standardised
+workflow; when \code{sd_y} is left at its default of 1, it
 back to the closed-form continuous-scale RR proxy used by the
 Python port so both ports stay numerically aligned.
 }

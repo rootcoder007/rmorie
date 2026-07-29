@@ -4,12 +4,17 @@
 \alias{morie_panel_cointegration}
 \title{Pedroni panel cointegration statistics}
 \usage{
-morie_panel_cointegration(x, groups, lags = 1L, case = "intercept",
-  bandwidth = NULL)
+morie_panel_cointegration(
+  x,
+  groups,
+  lags = 1L,
+  case = "intercept",
+  bandwidth = NULL
+)
 }
 \arguments{
-\item{x}{Numeric matrix; first column the dependent variable, the rest
-regressors.}
+\item{x}{Numeric matrix; first column the dependent variable, the
+rest regressors.}
 
 \item{groups}{Unit label per row. At least two units.}
 
@@ -21,31 +26,32 @@ regressors.}
 \code{4 (T/100)^(2/9)}.}
 }
 \value{
-Named list with \code{statistics}, \code{z} and \code{p_values}
-  (each a named list over panel_v, panel_rho, panel_t, group_rho,
-  group_t), plus \code{n_units}, \code{n_regressors}, \code{case},
-  \code{p_value}, \code{method} and \code{warnings}.
+Named list with \code{statistics} and \code{z} and
+\code{p_values} (each a named list over panel_v, panel_rho,
+panel_t, group_rho, group_t), plus \code{n_units},
+\code{n_regressors}, \code{case}, \code{p_value}, \code{method}
+and \code{warnings}.
 }
 \description{
-Computes all five of Pedroni's tabulated panel cointegration statistics
-and standardises each one, following his own five-step recipe: fit the
-cointegrating regression and keep the residuals; regress the differenced
-dependent on the differenced regressors and take the long-run variance
-of \emph{those} residuals as \eqn{\hat L_{11i}^2}; fit
+Computes all five of Pedroni's tabulated panel cointegration
+statistics and standardises each one, following his own five-step
+recipe: fit the cointegrating regression and keep the residuals;
+regress the differenced dependent on the differenced regressors and
+take the long-run variance of \emph{those} residuals as
+\eqn{\hat L_{11i}^2}; fit
 \eqn{\hat e_{i,t} = \hat\gamma_i \hat e_{i,t-1} + \hat u_{i,t}} and form
-\eqn{\hat\lambda_i = (\hat\sigma_i^2 - \hat s_i^2)/2}.
+\eqn{\hat\lambda_i = (\hat\sigma_i^2 - \hat s_i^2)/2}. Long-run
+variances use the Newey-West estimator.
 }
 \details{
-Long-run variances use the Newey-West estimator.
-
 Each statistic is read against a normal only after his equation (2),
 \eqn{Z = (\chi_{N,T} - \mu\sqrt{N})/\sqrt{v}}, with \eqn{\mu} and
 \eqn{v} from Table 2, transcribed here for all three deterministic
 cases and m = 2..7 regressors.
 
 The panel variance statistic diverges to \eqn{+\infty} under the
-alternative, so it alone is read from the right tail; the other four go
-negative under cointegration and are read from the left.
+alternative, so it alone is read from the right tail; the other four
+go negative under cointegration and are read from the left.
 
 Table 2 has no m = 1 row, so a bivariate cointegrating regression
 cannot be standardised from it and that case is refused rather than
@@ -63,6 +69,6 @@ morie_panel_cointegration(cbind(y, x1, x2), rep(seq_len(N), each = Tn))$p_value
 }
 \references{
 Pedroni P (1999). Critical values for cointegration tests
-  in heterogeneous panels with multiple regressors. \emph{Oxford
-  Bulletin of Economics and Statistics}, 61(S1), 653-670.
+in heterogeneous panels with multiple regressors. \emph{Oxford
+Bulletin of Economics and Statistics}, 61(S1), 653-670.
 }

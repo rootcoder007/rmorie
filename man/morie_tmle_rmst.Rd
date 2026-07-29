@@ -15,24 +15,24 @@ morie_tmle_rmst(time, event, a, w, horizon = NULL, trunc = 0.01)
 
 \item{w}{Covariates.}
 
-\item{horizon}{Restriction time; default the 90th percentile of `time`.}
+\item{horizon}{Restriction time; default the 90th percentile of \code{time}.}
 
 \item{trunc}{Propensity truncation.}
 }
 \value{
-List with `rmst_difference`, `se`, `ci`, `rmst1`, `rmst0`,
-  `horizon`, `n_events`, `n`.
+List with \code{rmst_difference}, \code{se}, \code{ci}, \code{rmst1}, \code{rmst0},
+\code{horizon}, \code{n_events}, \code{n}.
 }
 \description{
 Targets the treatment contrast on the inverse-probability-of-censoring
 weighted RMST pseudo outcome. The result is a difference in expected
 months-alive-within-horizon, which unlike a hazard ratio is
 collapsible and stays interpretable when proportional hazards fails.
-Mirrors `morie.fn.npstm`.
+Mirrors \code{morie.fn.npstm}.
 }
 \references{
 Moore KL, van der Laan MJ (2009). Increasing power in
-  randomized trials with right censored outcomes through covariate
-  adjustment. \emph{Journal of Biopharmaceutical Statistics} 19(6),
-  1099-1131.
+randomized trials with right censored outcomes through covariate
+adjustment. \emph{Journal of Biopharmaceutical Statistics} 19(6),
+1099-1131.
 }

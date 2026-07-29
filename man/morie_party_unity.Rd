@@ -15,17 +15,17 @@ missing), legislators in rows.}
 \item{unity_votes_only}{Restrict to party-unity votes.}
 }
 \value{
-List with `unity`, `by_party`, `n_votes_scored`, `n`.
+List with \code{unity}, \code{by_party}, \code{n_votes_scored}, \code{n}.
 }
 \description{
 Share of votes each legislator casts with their own party's
-majority. With `unity_votes_only = TRUE` only roll calls where the
+majority. With \code{unity_votes_only = TRUE} only roll calls where the
 two largest parties' majorities oppose each other count (the CQ
 convention). Ties within a party leave that roll call undefined for
-its members. Mirrors `morie.fn.agpar`.
+its members. Mirrors \code{morie.fn.agpar}.
 }
 \references{
 Poole KT, Rosenthal H (1997). \emph{Congress}. Oxford
-  University Press. Rice SA (1925). \emph{Political Science
-  Quarterly} 40(1), 60-72.
+University Press. Rice SA (1925). \emph{Political Science
+Quarterly} 40(1), 60-72.
 }
