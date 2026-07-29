@@ -179,7 +179,7 @@ NULL
 #' y <- 0.5 * d + 0.4 * u + rnorm(n, sd = 0.5)
 #' df <- data.frame(y, d, z)
 #' res <- morie_iv_tsls(df, "y", "d", "z")
-#' res$coefficients\["d"\]
+#' res$coefficients["d"]
 #' @export
 morie_iv_tsls <- function(data, outcome, endogenous, instruments,
                           exogenous = NULL, cluster = NULL,
@@ -209,7 +209,7 @@ morie_iv_tsls <- function(data, outcome, endogenous, instruments,
 #' y <- 0.5 + 1.5 * d + u + rnorm(n)
 #' df <- data.frame(y, d, z)
 #' res <- morie_iv_liml(df, outcome = "y", endogenous = "d", instruments = "z")
-#' res$coefficients\["d"\]
+#' res$coefficients["d"]
 #' @export
 morie_iv_liml <- function(data, outcome, endogenous, instruments,
                           exogenous = NULL, robust = TRUE, alpha = 0.05) {
@@ -309,7 +309,7 @@ morie_iv_cue_gmm <- function(data, outcome, endogenous, instruments,
 #' y <- 0.5 + 2 * d + rnorm(n)
 #' df <- data.frame(y, d, z)
 #' res <- morie_iv_wald(df, outcome = "y", treatment = "d", instrument = "z")
-#' res$coefficients\["LATE"\]
+#' res$coefficients["LATE"]
 #' @export
 morie_iv_wald <- function(data, outcome, treatment, instrument, alpha = 0.05) {
   y <- data[[outcome]]
@@ -689,7 +689,7 @@ morie_iv_durbin_wu_hausman <- function(data, outcome, endogenous, instruments,
 #' y <- 0.5 * d + 0.4 * u + rnorm(n, sd = 0.5)
 #' df <- data.frame(y, d, z1, z2)
 #' res <- morie_iv_jive(df, "y", "d", c("z1", "z2"))
-#' res$coefficients\["d"\]
+#' res$coefficients["d"]
 #' @export
 morie_iv_jive <- function(data, outcome, endogenous, instruments,
                           exogenous = NULL, alpha = 0.05) {

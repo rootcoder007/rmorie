@@ -262,7 +262,7 @@ morie_index_regression <- function(X, y, beta, h = NULL, grid = NULL) {
 #' @references Horowitz, Ch. 2 (Ichimura 1993).
 #' @examples
 #' X <- matrix(rnorm(200), ncol = 2)
-#' morie_ichimura(X, tanh(X %*% c(1, -0.6)))$beta\[1\]
+#' morie_ichimura(X, tanh(X %*% c(1, -0.6)))$beta[1]
 #' @export
 morie_ichimura <- function(X, y, h = NULL) {
   X <- as.matrix(X)
@@ -432,7 +432,7 @@ morie_partially_linear <- function(X, Z, y, h = NULL) {
 #' @references Horowitz, Ch. 2.
 #' @examples
 #' X <- matrix(runif(200), ncol = 2)
-#' morie_backfitting(X, X\[, 1\]^2 + sin(3 * X\[, 2\]))$converged
+#' morie_backfitting(X, X[, 1]^2 + sin(3 * X[, 2]))$converged
 #' @export
 morie_backfitting <- function(X, y, h = NULL, max_iter = 50L, tol = 1e-6) {
   X <- as.matrix(X)

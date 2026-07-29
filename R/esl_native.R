@@ -446,7 +446,7 @@ morie_esl_oob_632 <- function(err_train, err_loo_boot, gamma = NULL,
 #'   Algorithm 15.1 and Secs. 15.2-15.3; Breiman (2001).
 #' @examples
 #' X <- matrix(stats::rnorm(300), 100)
-#' morie_esl_random_forest(X, X\[, 1\] + stats::rnorm(100), B = 10)$mtry
+#' morie_esl_random_forest(X, X[, 1] + stats::rnorm(100), B = 10)$mtry
 #' @export
 morie_esl_random_forest <- function(X, y, B = 100, mtry = NULL,
                                     max_depth = 8L, min_node = 5L,

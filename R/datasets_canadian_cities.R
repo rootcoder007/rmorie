@@ -180,7 +180,7 @@ morie_datasets_calgary_socrata_by_id <- function(soda_id,
 #'   `longitude`.
 #' @examples
 #' df <- morie_datasets_edmonton_police_stations(offline = TRUE)
-#' df\[, c("name", "latitude", "longitude")\]
+#' df[, c("name", "latitude", "longitude")]
 #' @export
 morie_datasets_edmonton_police_stations <- function(offline = TRUE,
                                                       max_features = NULL) {

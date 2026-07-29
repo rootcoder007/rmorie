@@ -19,7 +19,7 @@
 #' fs <- 1024; t <- seq.int(0, 1023) / fs
 #' x <- cos(2 * pi * 50 * t)
 #' out <- morie_dsp_psd_periodogram(x, fs = fs)
-#' out$freqs\[which.max(out$psd)\]
+#' out$freqs[which.max(out$psd)]
 #' @export
 morie_dsp_psd_periodogram <- function(x, fs = 1) {
   x <- as.numeric(x)
@@ -84,7 +84,7 @@ morie_dsp_psd_bartlett <- function(x, fs = 1, n_segments = 8L) {
 #' fs <- 1024; t <- seq.int(0, 2047) / fs
 #' x <- cos(2 * pi * 50 * t)
 #' out <- morie_dsp_psd_welch(x, fs = fs, nperseg = 256L)
-#' out$freqs\[which.max(out$psd)\]
+#' out$freqs[which.max(out$psd)]
 #' @export
 morie_dsp_psd_welch <- function(x, fs = 1, nperseg = 256L,
                                 noverlap = NULL) {
@@ -140,7 +140,7 @@ morie_dsp_spectral_moment <- function(psd, freqs, order = 0L) {
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.6.
 #' @examples
 #' freqs <- seq.int(0, 64) / 64
-#' psd <- numeric(65); psd\[20L\] <- 1
+#' psd <- numeric(65); psd[20L] <- 1
 #' morie_dsp_mean_frequency(psd, freqs)
 #' @export
 morie_dsp_mean_frequency <- function(psd, freqs) {

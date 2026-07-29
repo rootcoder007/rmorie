@@ -258,7 +258,7 @@ morie_entheo_dataset_overview <- function() {
 #' t <- seq_len(4 * fs) / fs
 #' sig <- sin(2 * pi * 10 * t) + 0.1 * rnorm(length(t))
 #' res <- morie_entheo_spectral_band_power(sig, fs = fs)
-#' res$payload$rows\[\[1\]\]
+#' res$payload$rows[[1]]
 #' @export
 morie_entheo_spectral_band_power <- function(signal,
                                               fs = 200,

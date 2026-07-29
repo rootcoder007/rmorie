@@ -45,9 +45,9 @@
 #' set.seed(1)
 #' n <- 200
 #' X <- matrix(rnorm(n * 5), n, 5)
-#' ps <- plogis(X\[, 1\] - X\[, 2\])
+#' ps <- plogis(X[, 1] - X[, 2])
 #' T <- rbinom(n, 1, ps)
-#' Y <- 0.5 * T + X\[, 1\] + rnorm(n)
+#' Y <- 0.5 * T + X[, 1] + rnorm(n)
 #' df <- data.frame(Y = Y, T = T, X)
 #' morie_estimate_irm(df,
 #'   treatment = "T", outcome = "Y",

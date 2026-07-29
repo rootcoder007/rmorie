@@ -26,7 +26,7 @@
 #'   (default TRUE, mirroring \code{jsonlite::fromJSON}).
 #' @return The parsed R object.
 #' @examples
-#' morie_fetch_json('{"a": \[1, 2, 3\], "b": "x"}')
+#' morie_fetch_json('{"a": [1, 2, 3], "b": "x"}')
 #' @export
 morie_fetch_json <- function(txt, simplify = TRUE) {
   if (is.raw(txt)) txt <- rawToChar(txt)
@@ -414,7 +414,7 @@ morie_xml_sax <- function(txt, on_start = NULL, on_text = NULL,
 #' @return The root element as a nested list.
 #' @examples
 #' r <- morie_fetch_xml("<a x=\"1\"><b>hi</b></a>")
-#' r$children\[\[1\]\]$text
+#' r$children[[1]]$text
 #' @export
 morie_fetch_xml <- function(txt) {
   stack <- list(list(tag = ".root", attrs = list(),

@@ -533,8 +533,8 @@ morie_caus_aipw <- function(y, T, ps, m1, m0, trim = 0.01) {
 #'   Newey and Robins (2018), *Econometrics Journal* 21:C1-C68.
 #' @examples
 #' X <- matrix(stats::rnorm(600), 200)
-#' D <- X\[, 1\] + stats::rnorm(200)
-#' morie_caus_dml_partial_lin(1.5 * D + X\[, 1\], D, X, n_folds = 3)$theta
+#' D <- X[, 1] + stats::rnorm(200)
+#' morie_caus_dml_partial_lin(1.5 * D + X[, 1], D, X, n_folds = 3)$theta
 #' @export
 morie_caus_dml_partial_lin <- function(y, D, X, n_folds = 5, learner = NULL,
                                        seed = 0) {

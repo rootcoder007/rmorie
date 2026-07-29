@@ -245,7 +245,7 @@ morie_tps_ripley_k <- function(df,
 #' @examples
 #' set.seed(2026)
 #' df <- data.frame(
-#'   HOOD_158 = sample(letters\[1:20\], 400, replace = TRUE),
+#'   HOOD_158 = sample(letters[1:20], 400, replace = TRUE),
 #'   LAT_WGS84 = 43.6 + runif(400, 0, 0.2),
 #'   LONG_WGS84 = -79.4 + runif(400, 0, 0.2)
 #' )
@@ -542,7 +542,7 @@ morie_tps_dbscan_clusters <- function(df,
 #' @examples
 #' set.seed(2026)
 #' polys <- data.frame(
-#'   HOOD_ID = letters\[1:16\],
+#'   HOOD_ID = letters[1:16],
 #'   lat = rep(43.6 + (0:3) * 0.02, 4),
 #'   lon = rep(-79.4 + (0:3) * 0.02, each = 4),
 #'   ASSAULT_RATE_2024 = rpois(16, 30)
@@ -717,7 +717,7 @@ morie_tps_polygon_morans_i <- function(polygons,
 #' @examples
 #' set.seed(2026)
 #' polys <- data.frame(
-#'   HOOD_ID = letters\[1:16\],
+#'   HOOD_ID = letters[1:16],
 #'   lat = rep(43.6 + (0:3) * 0.02, 4),
 #'   lon = rep(-79.4 + (0:3) * 0.02, each = 4),
 #'   ASSAULT_RATE_2024 = rpois(16, 30),
@@ -871,7 +871,7 @@ morie_tps_bivariate_moran <- function(polygons,
 #' @examples
 #' set.seed(2026)
 #' polys <- data.frame(
-#'   HOOD_ID = letters\[1:16\],
+#'   HOOD_ID = letters[1:16],
 #'   lat = rep(43.6 + (0:3) * 0.02, 4),
 #'   lon = rep(-79.4 + (0:3) * 0.02, each = 4),
 #'   ASSAULT_RATE_2023 = rpois(16, 30),

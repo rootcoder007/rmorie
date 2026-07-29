@@ -1758,7 +1758,7 @@ morie_wasserman_mcmc_metropolis <- function(target, proposal, x0, n, seed = 13) 
 #' @return List with `estimate` (joint probability), `log_joint`,
 #'   `factors`, `n_nodes`, `method`.
 #' @examples
-#' dag <- list(list(parents = integer(0), cpt = list(`` = 0.3)),
+#' dag <- list(list(parents = integer(0), cpt = list(0.3)),
 #'             list(parents = 0L, cpt = list(`0` = 0.2, `1` = 0.9)))
 #' round(morie_wasserman_directed_graph(dag, c(1, 1))$estimate, 12)
 #' @export
@@ -1809,7 +1809,7 @@ morie_wasserman_directed_graph <- function(dag, x) {
 #' @return List with `estimate` (Z), `probabilities`, `n_nodes`,
 #'   `n_cliques`, `method`.
 #' @examples
-#' agree <- function(t) if (t\\[1\\] == t\\[2\\]) 2 else 1
+#' agree <- function(t) if (t[1] == t[2]) 2 else 1
 #' morie_wasserman_undirected_graph(list(2, list(c(0, 1))), list(agree))$estimate
 #' @export
 morie_wasserman_undirected_graph <- function(graph, psi) {
@@ -1846,7 +1846,7 @@ morie_wasserman_undirected_graph <- function(graph, psi) {
 #' @return List with `estimate` (probability of the mode), `mode`
 #'   (bit vector), `partition_function`, `probabilities`, `n_nodes`, `method`.
 #' @examples
-#' agree <- function(t) if (t\\[1\\] == t\\[2\\]) 2 else 1
+#' agree <- function(t) if (t[1] == t[2]) 2 else 1
 #' morie_wasserman_graphical_model(list(2, list(c(0, 1))), list(agree))$mode
 #' @export
 morie_wasserman_graphical_model <- function(graph, psi) {

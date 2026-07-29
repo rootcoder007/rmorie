@@ -1336,7 +1336,7 @@ fisher_exact_test <- function(contingency_table, alternative = "two.sided") {
 #' set.seed(1)
 #' r1 <- sample(1:3, 50, replace = TRUE)
 #' r2 <- r1
-#' r2\[1:10\] <- sample(1:3, 10, replace = TRUE)
+#' r2[1:10] <- sample(1:3, 10, replace = TRUE)
 #' res <- cohens_kappa(r1, r2)
 #' res$test_statistic
 #' @export
@@ -1382,7 +1382,7 @@ cohens_kappa <- function(rater1, rater2, confidence = 0.95) {
 #' mat <- matrix(0, nrow = 20, ncol = 3)
 #' for (i in seq_len(20)) {
 #'   pick <- sample.int(3, 5, replace = TRUE)
-#'   for (k in pick) mat\[i, k\] <- mat\[i, k\] + 1
+#'   for (k in pick) mat[i, k] <- mat[i, k] + 1
 #' }
 #' res <- fleiss_kappa(mat)
 #' res$test_statistic

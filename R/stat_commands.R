@@ -179,7 +179,7 @@ all_stat_command_names <- function() {
 #'                     handler_repl = function() 1)
 #' register_stat_command(cmd)
 #' groups <- commands_by_category()
-#' groups\[\["Demo"\]\]
+#' groups[["Demo"]]
 #' @export
 commands_by_category <- function() {
   cats <- .morie_stat_commands$categories

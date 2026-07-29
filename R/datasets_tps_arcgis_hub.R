@@ -225,8 +225,8 @@ morie_datasets_tps_arcgis_hub_layers <- function(offline = TRUE) {
 #'   file path (binary).
 #' @examples
 #' cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
-#' pic_id <- cat$hub_id\[cat$title ==
-#'   "Persons in Crisis Calls for Service Attended Open Data"\]
+#' pic_id <- cat$hub_id[cat$title ==
+#'   "Persons in Crisis Calls for Service Attended Open Data"]
 #' \donttest{
 #' df <- try(morie_datasets_tps_arcgis_hub_by_id(
 #'   pic_id, format = "json", where = "OCC_YEAR=2024",
@@ -312,7 +312,7 @@ morie_datasets_tps_arcgis_hub_by_id <- function(hub_id,
 #' cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
 #' \donttest{
 #' path <- try(morie_datasets_tps_arcgis_hub_download(
-#'   cat$hub_id\[1\], format = "csv"))
+#'   cat$hub_id[1], format = "csv"))
 #' if (!inherits(path, "try-error")) path
 #' }
 #' @export
@@ -530,7 +530,7 @@ morie_datasets_arcgis_item_by_id <- function(item_id,
 #'   `af06159170914808983959df6163fc86`.
 #' @examples
 #' df <- morie_datasets_toronto_zoning_per_neighbourhood(offline = TRUE)
-#' head(df\[, c("Neighbourhood", "Total_Population", "Seniors65andover")\])
+#' head(df[, c("Neighbourhood", "Total_Population", "Seniors65andover")])
 #' @export
 morie_datasets_toronto_zoning_per_neighbourhood <- function(
     layer = c("neighbourhoods", "zoning_stats"),

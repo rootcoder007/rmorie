@@ -128,7 +128,7 @@
 #'   Open Government Licence -- Ontario.
 #' @examples
 #' df <- morie_datasets_arsau_uof_main_records(offline = TRUE)
-#' head(df\[, c("IncidentYear", "PoliceService", "IncidentType")\])
+#' head(df[, c("IncidentYear", "PoliceService", "IncidentType")])
 #' @export
 morie_datasets_arsau_uof_main_records <- function(year = "2024",
                                                     offline = TRUE,
@@ -350,7 +350,7 @@ morie_datasets_tps_mha_apprehensions <- function(year = NULL,
 #' @return A `data.frame`.
 #' @examples
 #' df <- morie_datasets_arsau_uof_individual_records(offline = TRUE)
-#' df\[, c("Indiv_Index", "Race", "AgeCategory", "Gender")\]
+#' df[, c("Indiv_Index", "Race", "AgeCategory", "Gender")]
 #' @export
 morie_datasets_arsau_uof_individual_records <- function(year = "2024",
                                                           offline = TRUE,
@@ -649,7 +649,7 @@ morie_datasets_arsau_detailed_dataset <- function(offline = TRUE,
 #'   `resource_id`, `family`, `year`, `fixture`.
 #' @examples
 #' reg <- morie_datasets_ontario_ckan_layers()
-#' reg\[, c("dataset_key", "family", "year")\]
+#' reg[, c("dataset_key", "family", "year")]
 #' @export
 morie_datasets_ontario_ckan_layers <- function() {
   rows <- lapply(names(.MORIE_ONTARIO_CKAN_REGISTRY), function(k) {
@@ -744,8 +744,8 @@ morie_datasets_ontario_ckan_layers <- function() {
 #'   `Number_Of_Placements`).
 #' @examples
 #' df <- morie_datasets_otis_a01_restrictive_confinement(offline = TRUE)
-#' head(df\[, c("EndFiscalYear", "Gender", "Age_Category",
-#'             "Number_Of_Placements")\])
+#' head(df[, c("EndFiscalYear", "Gender", "Age_Category",
+#'             "Number_Of_Placements")])
 #' @export
 morie_datasets_otis_a01_restrictive_confinement <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -872,8 +872,8 @@ morie_datasets_otis_d07_alerts_by_housing_unit <- function(
 #' @return A `data.frame` with the canonical 18-col schema.
 #' @examples
 #' df <- morie_datasets_otis_b01_segregation_detailed(offline = TRUE)
-#' head(df\[, c("EndFiscalYear", "Gender",
-#'             "NumberConsecutiveDays_Segregation")\])
+#' head(df[, c("EndFiscalYear", "Gender",
+#'             "NumberConsecutiveDays_Segregation")])
 #' @export
 morie_datasets_otis_b01_segregation_detailed <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -1066,7 +1066,7 @@ morie_datasets_otis_c02_individuals_by_institution <- function(
 #'   `source`). Columns mirror the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_c03_individuals_race_by_gender(offline = TRUE)
-#' head(df\[, c("Race", "Gender")\])
+#' head(df[, c("Race", "Gender")])
 #' @export
 morie_datasets_otis_c03_individuals_race_by_gender <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {

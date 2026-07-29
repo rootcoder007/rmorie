@@ -320,7 +320,7 @@ morie_fairness_xai_ale <- function(predict_fn, X, feature,
 #' set.seed(9)
 #' X <- matrix(rnorm(400), 100, 4); colnames(X) <- paste0("f", 1:4)
 #' predict_fn <- function(M) as.numeric(M %*% c(1.5, -0.7, 0, 0.3))
-#' morie_fairness_xai_ceteris_paribus(predict_fn, X\[1L, \], feature = "f1",
+#' morie_fairness_xai_ceteris_paribus(predict_fn, X[1L, ], feature = "f1",
 #'   X_ref = X, feature_names = colnames(X), grid_size = 8L)
 #' @export
 morie_fairness_xai_ceteris_paribus <- function(predict_fn, x, feature,
@@ -386,7 +386,7 @@ morie_fairness_xai_ceteris_paribus <- function(predict_fn, x, feature,
 #' set.seed(11)
 #' X <- matrix(rnorm(120), 30, 4); colnames(X) <- paste0("f", 1:4)
 #' predict_fn <- function(M) as.numeric(M %*% c(1.5, -0.7, 0, 0.3))
-#' morie_fairness_xai_shap_values(predict_fn, X\[1L, \], background = X,
+#' morie_fairness_xai_shap_values(predict_fn, X[1L, ], background = X,
 #'   feature_names = colnames(X), n_samples = 10L, seed = 1L)
 #' @export
 morie_fairness_xai_shap_values <- function(predict_fn, x, background,

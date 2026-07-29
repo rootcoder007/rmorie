@@ -11,7 +11,7 @@
 #' set.seed(282)
 #' n <- 60
 #' X <- matrix(rnorm(n * 2), n, 2)
-#' t <- abs(-2 * X\[, 1\] + 0.3 * X\[, 2\] + rnorm(n)) + 0.1
+#' t <- abs(-2 * X[, 1] + 0.3 * X[, 2] + rnorm(n)) + 0.1
 #' res <- hrzc1(X, t, censor = 0)
 #' res$estimate
 #' @export

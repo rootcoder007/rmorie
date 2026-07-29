@@ -233,7 +233,7 @@ NULL
 #' df$stops <- rpois(nrow(df), 30); df$felony_count <- rpois(nrow(df), 10)
 #' df$calls_311_omp <- rpois(nrow(df), 40); df$pct_black <- runif(nrow(df), 0.05, 0.7)
 #' res <- suppressWarnings(morie_laniyonu_gentrification_policing(df = df, log_outcome = TRUE))
-#' res\[\[1\]\]$rho
+#' res[[1]]$rho
 #' @export
 morie_laniyonu_gentrification_policing <- function(
   df,

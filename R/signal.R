@@ -934,7 +934,7 @@ pcgenv <- function(pcg, fs) {
 #' \donttest{
 #' set.seed(1)
 #' env <- abs(sin(seq(0, 20, length.out = 4000))) + 0.05 * rnorm(4000)
-#' env\[env < 0\] <- 0
+#' env[env < 0] <- 0
 #' res <- pcgseg(env, fs = 2000)
 #' res$extra$n_cycles
 #' }

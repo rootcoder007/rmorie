@@ -150,7 +150,7 @@ morie_spatial_variogram_fit <- function(coords, values,
 #' @examples
 #' set.seed(1)
 #' xy <- cbind(runif(60), runif(60))
-#' z <- sin(3 * xy\[, 1\]) + rnorm(60, sd = 0.1)
+#' z <- sin(3 * xy[, 1]) + rnorm(60, sd = 0.1)
 #' morie_spatial_krige(xy, z, cbind(0.5, 0.5))
 #' @export
 morie_spatial_krige <- function(coords, values, new_coords,
