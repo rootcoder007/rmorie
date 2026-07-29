@@ -23,14 +23,14 @@
 
 #' Calgary Open Data crime-adjacent catalog
 #'
-#' Phase 3FFF3. Bundled snapshot of 157 City-of-Calgary Socrata
+#' Phase 3FFF3. Included snapshot of 157 City-of-Calgary Socrata
 #' datasets matched on crime-adjacent keywords (crime, police,
 #' fire, ambulance, traffic, incident, collision, bylaw, 311).
 #'
-#' @param offline If `TRUE` (default), reads the bundled CSV.
+#' @param offline If `TRUE` (default), reads the included CSV.
 #' @return A `data.frame` with `soda_id`, `title`, `type`,
 #'   `search_keyword`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' d <- morie_datasets_calgary_open_crime_adjacent_layers(offline = TRUE)
 #' head(d)
 #' @export
@@ -41,10 +41,10 @@ morie_datasets_calgary_open_crime_adjacent_layers <- function(offline = TRUE) {
 
 #' Edmonton Open Data crime-adjacent catalog
 #' @rdname morie_datasets_calgary_open_crime_adjacent_layers
-#' @return A `data.frame` of City-of-Edmonton Socrata datasets
-#'   matched on crime-adjacent keywords, loaded from
-#'   `inst/extdata/edmonton_opendata_crime_adjacent_catalog.csv`.
-#'   Columns: `soda_id`, `title`, `type`, `search_keyword`.
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' cat_df <- morie_datasets_edmonton_open_crime_adjacent_layers()
+#' head(cat_df)
 #' @export
 morie_datasets_edmonton_open_crime_adjacent_layers <- function(offline = TRUE) {
   .morie_canadian_cat_fixture("edmonton_opendata_crime_adjacent_catalog.csv",
@@ -53,16 +53,18 @@ morie_datasets_edmonton_open_crime_adjacent_layers <- function(offline = TRUE) {
 
 #' Ottawa Open Data (ArcGIS Hub) crime-adjacent catalog
 #' @rdname morie_datasets_calgary_open_crime_adjacent_layers
-#' @return A `data.frame` of City-of-Ottawa ArcGIS Hub datasets
-#'   matched on crime-adjacent keywords, loaded from
-#'   `inst/extdata/ottawa_opendata_crime_adjacent_catalog.csv`.
-#'   Columns: `soda_id`, `title`, `type`, `search_keyword`.
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' cat_df <- morie_datasets_ottawa_open_crime_adjacent_layers()
+#' head(cat_df)
 #' @export
 morie_datasets_ottawa_open_crime_adjacent_layers <- function(offline = TRUE) {
   .morie_canadian_cat_fixture("ottawa_opendata_crime_adjacent_catalog.csv",
                                 offline)
 }
 
+#' Internal helper: Morie Canadian Cat Fixture
+#' @noRd
 .morie_canadian_cat_fixture <- function(fname, offline) {
   if (!isTRUE(offline)) {
     stop(sprintf(paste0(
@@ -71,7 +73,7 @@ morie_datasets_ottawa_open_crime_adjacent_layers <- function(offline = TRUE) {
       "search API directly."), fname),
       call. = FALSE)
   }
-  path <- system.file("extdata", fname, package = "morie")
+  path <- system.file("extdata", fname, package = "rmorie")
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", fname, package = "rmoriedata")
   }
@@ -86,16 +88,16 @@ morie_datasets_ottawa_open_crime_adjacent_layers <- function(offline = TRUE) {
 
 #' Calgary Community Crime Statistics (sample)
 #'
-#' Phase 3FFF3. Bundled 200-row sample of Calgary's per-community
+#' Phase 3FFF3. Included 200-row sample of Calgary's per-community
 #' per-month crime counts (Socrata id `78gh-n26t`). Covers all 8
 #' canonical CPS categories.
 #'
-#' @param offline If `TRUE` (default), reads bundled CSV.
+#' @param offline If `TRUE` (default), reads included CSV.
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `community`, `category`, `crime_count`,
 #'   `year`, `month`.
-#' @examples
-#' df <- morie_datasets_calgary_community_crime_stats(offline = TRUE)
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' df <- morie_datasets_calgary_community_crime_stats()
 #' head(df)
 #' @export
 morie_datasets_calgary_community_crime_stats <- function(offline = TRUE,
@@ -110,14 +112,14 @@ morie_datasets_calgary_community_crime_stats <- function(offline = TRUE,
 
 #' Calgary Fire Response Calls (sample)
 #'
-#' Phase 3FFF3. Bundled 200-row sample of Calgary fire response
+#' Phase 3FFF3. Included 200-row sample of Calgary fire response
 #' calls (Socrata id `bdez-pds9`).
 #'
 #' @rdname morie_datasets_calgary_community_crime_stats
-#' @return A `data.frame` of Calgary fire response call records
-#'   (Socrata id `bdez-pds9`); the bundled 200-row sample under
-#'   `inst/extdata/` when `offline = TRUE`, otherwise the live
-#'   SODA2 pull. Columns mirror the upstream Socrata schema.
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' df <- morie_datasets_calgary_fire_response_calls()
+#' head(df)
 #' @export
 morie_datasets_calgary_fire_response_calls <- function(offline = TRUE,
                                                          max_features = NULL) {
@@ -131,10 +133,10 @@ morie_datasets_calgary_fire_response_calls <- function(offline = TRUE,
 
 #' Calgary Fire Stations
 #' @rdname morie_datasets_calgary_community_crime_stats
-#' @return A `data.frame` of Calgary fire-station locations
-#'   (Socrata id `cqsb-2hhg`); the bundled fixture when
-#'   `offline = TRUE`, otherwise the live SODA2 pull. Columns
-#'   mirror the upstream Socrata schema.
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' df <- morie_datasets_calgary_fire_stations()
+#' head(df)
 #' @export
 morie_datasets_calgary_fire_stations <- function(offline = TRUE,
                                                    max_features = NULL) {
@@ -154,6 +156,12 @@ morie_datasets_calgary_fire_stations <- function(offline = TRUE,
 #' @param soda_id 4-4 Socrata resource ID (e.g. `"78gh-n26t"`).
 #' @param limit Page size (default 1000).
 #' @return A `data.frame` of records.
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' \donttest{
+#' cat_df <- morie_datasets_calgary_opendata_bulk_layers()
+#' df <- try(morie_datasets_calgary_socrata_by_id(cat_df$soda_id[1], limit = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_calgary_socrata_by_id <- function(soda_id,
                                                    limit = 1000L) {
@@ -171,10 +179,10 @@ morie_datasets_calgary_socrata_by_id <- function(soda_id,
 
 #' Edmonton Police Station locations
 #'
-#' Phase 3FFF3. Bundled 10-row fixture of Edmonton Police Service
+#' Phase 3FFF3. Included 10-row fixture of Edmonton Police Service
 #' station locations (Socrata id `e7aq-scxv`).
 #'
-#' @param offline If `TRUE` (default), reads bundled CSV.
+#' @param offline If `TRUE` (default), reads included CSV.
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `name`, `address`, `latitude`,
 #'   `longitude`.
@@ -194,10 +202,10 @@ morie_datasets_edmonton_police_stations <- function(offline = TRUE,
 
 #' Edmonton Fire Station locations
 #' @rdname morie_datasets_edmonton_police_stations
-#' @return A `data.frame` of Edmonton fire-station locations
-#'   (Socrata id `b4y7-zhnz`); the bundled fixture when
-#'   `offline = TRUE`, otherwise the live SODA2 pull. Columns
-#'   include `name`, `address`, `latitude`, `longitude`.
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' df <- morie_datasets_edmonton_fire_stations()
+#' head(df)
 #' @export
 morie_datasets_edmonton_fire_stations <- function(offline = TRUE,
                                                     max_features = NULL) {
@@ -213,10 +221,13 @@ morie_datasets_edmonton_fire_stations <- function(offline = TRUE,
 #' @rdname morie_datasets_calgary_socrata_by_id
 #' @param soda_id 4-4 Socrata resource ID.
 #' @param limit Page size (default 1000).
-#' @return A `data.frame` of records pulled from
-#'   `https://data.edmonton.ca/resource/<soda_id>.json`, with nested
-#'   list-columns dropped. Columns mirror the live Socrata resource
-#'   schema.
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @examples
+#' \donttest{
+#' cat_df <- morie_datasets_edmonton_opendata_bulk_layers()
+#' df <- try(morie_datasets_edmonton_socrata_by_id(cat_df$soda_id[1], limit = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_edmonton_socrata_by_id <- function(soda_id,
                                                     limit = 1000L) {
@@ -232,8 +243,10 @@ morie_datasets_edmonton_socrata_by_id <- function(soda_id,
 # Helpers
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Morie Canadian Fixture
+#' @noRd
 .morie_canadian_fixture <- function(fname) {
-  path <- system.file("extdata", fname, package = "morie")
+  path <- system.file("extdata", fname, package = "rmorie")
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", fname, package = "rmoriedata")
   }

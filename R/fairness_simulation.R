@@ -10,6 +10,8 @@
 NULL
 
 
+#' Internal helper: Sim Result
+#' @noRd
 .sim_result <- function(title, call, summary_lines = list(),
                          warnings = character(0),
                          interpretation = "", ...) {

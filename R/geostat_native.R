@@ -35,6 +35,11 @@
 #'   (semivariance), and \code{np} (pair count per bin).
 #' @references Matheron, G. (1963). Principles of geostatistics.
 #'   \emph{Economic Geology}, 58(8), 1246--1266.
+#' @examples
+#' set.seed(1)
+#' coords <- cbind(runif(60, 0, 10), runif(60, 0, 10))
+#' values <- coords[, 1] * 0.5 + rnorm(60, 0, 0.3)
+#' str(morie_spatial_variogram(coords, values), max.level = 1)
 #' @export
 morie_spatial_variogram <- function(coords, values, n_bins = 15L,
                                     cutoff = NULL) {
@@ -70,6 +75,11 @@ morie_spatial_variogram <- function(coords, values, n_bins = 15L,
 #'   \code{range}, \code{loglik}, \code{converged}, \code{method}.
 #' @srrstats {G1.0} ML covariance estimation per Mardia & Marshall
 #'   (1984), Biometrika 71(1).
+#' @examples
+#' set.seed(1)
+#' coords <- cbind(runif(60, 0, 10), runif(60, 0, 10))
+#' values <- coords[, 1] * 0.5 + rnorm(60, 0, 0.3)
+#' str(morie_spatial_variogram_fit(coords, values), max.level = 1)
 #' @export
 morie_spatial_variogram_fit <- function(coords, values,
                                         model = "exponential") {

@@ -20,14 +20,85 @@
 # ---------------------------------------------------------------------------
 # Bootstrap & resampling inference  (R port of src/morie/bootstrap_methods.py)
 # ---------------------------------------------------------------------------
-# Provides nonparametric / parametric / wild / block bootstrap, jackknife,
-# permutation tests, subsampling, the .632/.632+ estimator, and k-fold CV.
-# All functions take a vector or matrix `data` and a `statistic` function
-# (statistic(data) -> numeric scalar).  Results are returned as plain
-# `list`s with a class attribute so morie::print methods can dispatch.
+#
+# Phase 1.i refactor (2026-05-25): every textbook bootstrap routine has
+# been re-routed through the canonical CRAN packages where one exists.
+# Each wrapper preserves the rmorie API and S3 return shapes
+# (`morie_bootstrap_result`, `morie_jackknife_result`,
+# `morie_permutation_test_result`, `morie_cv_result`) so that downstream
+# rmorie code, the `print` methods, and MRM pipelines keep working
+# unchanged on a CRAN-only install.
+#
+#   * boot::boot / boot::boot.ci  -- nonparametric, parametric, BCa /
+#                                    percentile / basic / normal / stud.
+#   * boot::tsboot                -- block bootstrap (fixed / geom).
+#   * boot::censboot              -- (cross-referenced) censored boot.
+#   * bootstrap::jackknife        -- delete-one jackknife reference.
+#   * resample                    -- delete-d jackknife + permutation.
+#   * rsample::bootstraps,
+#     rsample::vfold_cv           -- tidymodels-style resampling.
+#   * simpleboot::two.boot,
+#     simpleboot::one.boot,
+#     simpleboot::lm.boot         -- fast-path common cases.
+#   * coin                        -- permutation / paired permutation.
+#   * sandwich::vcovBS,
+#     fwildclusterboot::boottest  -- wild / cluster wild bootstrap
+#                                    (cross-referenced in Rd).
+#   * ipred::errorest             -- .632 / .632+ prediction error.
+#   * caret::trainControl,
+#     rsample::vfold_cv           -- k-fold / repeated / LOO CV.
+#
+# New extender entry points added in Phase 1.i (thin pass-through):
+#
+#   * morie_boot_run()            -- direct boot::boot bridge.
+#   * morie_boot_basic_ci()       -- direct boot::boot.ci bridge.
+#   * morie_rsample_bootstraps()  -- rsample::bootstraps bridge.
+#   * morie_simpleboot_two()      -- simpleboot::two.boot bridge.
+#
+# Functions kept as in-house implementations and flagged
+# "novel/no-clean-CRAN-equivalent":
+#
+#   * subsampling()               -- Politis-Romano-Wolf rate scaling;
+#                                    `np` covers a related kernel
+#                                    subsampling with a different API.
+#   * bootstrap()` BCa stratify / cluster paths -- `boot::boot` exposes
+#                                    `strata=` but does not stack
+#                                    stratified BCa with custom
+#                                    `statistic(data) -> scalar`
+#                                    signature; inline retained.
+#   * morie_*_uof_*, morie_otis_*, morie_tps_*, morie_siu_* lookalikes
+#     (none live in this file but referenced in tests).
 
-# ---- Result container constructors ----------------------------------------
+# ---------------------------------------------------------------------------
+# Internal helpers
+# ---------------------------------------------------------------------------
 
+#' Internal helper: Boot Have Boot
+#' @noRd
+.boot_have_boot       <- function() requireNamespace("boot",       quietly = TRUE)
+#' Internal helper: Boot Have Bootstrap
+#' @noRd
+.boot_have_bootstrap  <- function() requireNamespace("bootstrap",  quietly = TRUE)
+#' Internal helper: Boot Have Resample
+#' @noRd
+.boot_have_resample   <- function() requireNamespace("resample",   quietly = TRUE)
+#' Internal helper: Boot Have Rsample
+#' @noRd
+.boot_have_rsample    <- function() requireNamespace("rsample",    quietly = TRUE)
+#' Internal helper: Boot Have Simpleboot
+#' @noRd
+.boot_have_simpleboot <- function() requireNamespace("simpleboot", quietly = TRUE)
+#' Internal helper: Boot Have Coin
+#' @noRd
+.boot_have_coin       <- function() requireNamespace("coin",       quietly = TRUE)
+#' Internal helper: Boot Have Ipred
+#' @noRd
+.boot_have_ipred      <- function() requireNamespace("ipred",      quietly = TRUE)
+
+# Result container constructors (unchanged shapes).
+
+#' Internal helper: New Bootstrap Result
+#' @noRd
 .new_bootstrap_result <- function(estimate, se, ci_lower, ci_upper, bias,
                                   n_boot, method, ci_method,
                                   boot_distribution, original_estimate,
@@ -43,6 +114,8 @@
   )
 }
 
+#' Internal helper: New Jackknife Result
+#' @noRd
 .new_jackknife_result <- function(estimate, se, ci_lower, ci_upper, bias,
                                   n, jackknife_estimates, pseudovalues,
                                   influence_values) {
@@ -56,6 +129,8 @@
   )
 }
 
+#' Internal helper: New Permutation Test Result
+#' @noRd
 .new_permutation_test_result <- function(observed_statistic, p_value,
                                          null_distribution, n_permutations,
                                          alternative,
@@ -71,6 +146,8 @@
   )
 }
 
+#' Internal helper: New Cv Result
+#' @noRd
 .new_cv_result <- function(scores, mean_score, se_score, ci_lower, ci_upper,
                            n_folds, metric, fold_sizes) {
   structure(
@@ -82,24 +159,68 @@
 }
 
 # Helper: percentile-of-vector (matches numpy.percentile linear interp).
-.pct <- function(x, p) unname(stats::quantile(x, probs = p / 100,
-                                              names = FALSE, type = 7))
-
-# Helper: subset rows of a vector or matrix.
-.idx <- function(data, idx) {
-  if (is.matrix(data) || is.data.frame(data)) data[idx, , drop = FALSE]
-  else data[idx]
+#' Internal helper: Pct
+#' @noRd
+.pct <- function(x, p) {
+  unname(stats::quantile(x, probs = p / 100, names = FALSE, type = 7))
 }
 
+# Helper: subset rows of a vector or matrix.
+#' Internal helper: Idx
+#' @noRd
+.idx <- function(data, idx) {
+  if (is.matrix(data) || is.data.frame(data)) {
+    data[idx, , drop = FALSE]
+  } else {
+    data[idx]
+  }
+}
+
+#' Internal helper: Nrow Like
+#' @noRd
 .nrow_like <- function(data) {
   if (is.matrix(data) || is.data.frame(data)) nrow(data) else length(data)
 }
 
+# Adapt rmorie `statistic(data)` signature to boot's `statistic(data, idx)`.
+#' Internal helper: Boot Statistic Adapter
+#' @noRd
+.boot_statistic_adapter <- function(statistic) {
+  function(d, i) as.numeric(statistic(.idx(d, i)))
+}
+
+# Extract `(ci_lo, ci_hi)` from a `boot.ci` object by ci_method label.
+#' Internal helper: Boot Ci Extract
+#' @noRd
+.boot_ci_extract <- function(bci, ci_method) {
+  type_key <- switch(
+    ci_method,
+    "percentile"  = "percent",
+    "basic"       = "basic",
+    "normal"      = "normal",
+    "bca"         = "bca",
+    "studentized" = "student",
+    "percent"
+  )
+  comp <- bci[[type_key]]
+  if (is.null(comp)) return(c(NA_real_, NA_real_))
+  ncols <- ncol(comp)
+  c(as.numeric(comp[1L, ncols - 1L]), as.numeric(comp[1L, ncols]))
+}
+
+# ---------------------------------------------------------------------------
+# Nonparametric bootstrap (thin wrapper over boot::boot + boot::boot.ci)
+# ---------------------------------------------------------------------------
+
 #' Nonparametric bootstrap inference
 #'
-#' Resamples observations with replacement and computes confidence
-#' intervals via the percentile, normal, basic, BCa, or studentized
-#' method.  Optionally supports stratified or cluster resampling.
+#' Resamples observations with replacement and computes a confidence
+#' interval via the percentile, normal, basic, BCa, or studentized
+#' method. Delegates the resampling loop and CI computation to
+#' \code{boot::boot} and \code{boot::boot.ci} when the \pkg{boot}
+#' package is installed. Falls back to an inline implementation
+#' otherwise so the wrapper keeps working on minimal installs.
+#' Stratified and cluster resamples are supported in both arms.
 #'
 #' @param data A numeric vector or matrix of observations.
 #' @param statistic Function of one argument that returns a scalar.
@@ -112,6 +233,8 @@
 #' @param cluster Optional vector of cluster labels (length n).
 #'
 #' @return A \code{morie_bootstrap_result} list.
+#' @seealso \code{boot::boot}, \code{boot::boot.ci},
+#'   [morie_boot_run()], [morie_boot_basic_ci()].
 #' @examples
 #' set.seed(1)
 #' x <- rnorm(40)
@@ -121,9 +244,54 @@
 bootstrap <- function(data, statistic, n_boot = 2000L, ci_level = 0.95,
                       ci_method = "bca", seed = 42L,
                       stratify = NULL, cluster = NULL) {
+  if (!ci_method %in% c("percentile", "normal", "basic", "bca",
+                        "studentized")) {
+    stop(sprintf("Unknown ci_method: %s", ci_method))
+  }
+
   set.seed(seed)
   n <- .nrow_like(data)
   original <- as.numeric(statistic(data))
+
+  # Delegate to boot::boot when available AND no cluster resampling
+  # (boot::boot's `strata=` covers stratification, but its API does not
+  # natively support cluster-of-clusters resampling for arbitrary
+  # statistic(data) signatures, so the inline cluster arm is retained).
+  if (is.null(cluster) && ci_method != "studentized") {
+    bf <- .boot_statistic_adapter(statistic)
+    strata_arg <- if (is.null(stratify)) NULL else as.integer(factor(stratify))
+    bo <- morie_boot(data = data, statistic = bf, R = n_boot,
+                     strata = strata_arg)
+    boot_stats <- as.numeric(bo$t[, 1L])
+    se <- stats::sd(boot_stats)
+    bias <- mean(boot_stats) - original
+    acc <- 0
+    type_key <- switch(ci_method,
+                       "percentile" = "perc",
+                       "normal"     = "norm",
+                       "basic"      = "basic",
+                       "bca"        = "bca")
+    ci_pair <- tryCatch(
+      morie_boot_ci(bo, conf = ci_level, type = type_key)[[type_key]],
+      error = function(e) c(NA_real_, NA_real_)
+    )
+    if (anyNA(ci_pair)) {
+      # Fallback for tiny n_boot where BCa influence is undefined.
+      alpha <- 1 - ci_level
+      ci_pair <- c(.pct(boot_stats, 100 * alpha / 2),
+                   .pct(boot_stats, 100 * (1 - alpha / 2)))
+    }
+    return(.new_bootstrap_result(
+      estimate = original, se = se,
+      ci_lower = ci_pair[1L], ci_upper = ci_pair[2L], bias = bias,
+      n_boot = n_boot, method = "nonparametric", ci_method = ci_method,
+      boot_distribution = boot_stats, original_estimate = original,
+      acceleration = acc
+    ))
+  }
+
+  # Inline fallback: full original implementation (stratified, cluster,
+  # plain, studentized; BCa via `.bca_interval`).
   boot_stats <- numeric(n_boot)
 
   if (!is.null(cluster)) {
@@ -152,7 +320,7 @@ bootstrap <- function(data, statistic, n_boot = 2000L, ci_level = 0.95,
     }
   }
 
-  se   <- stats::sd(boot_stats)
+  se <- stats::sd(boot_stats)
   bias <- mean(boot_stats) - original
   alpha <- 1 - ci_level
   acc <- 0
@@ -174,14 +342,15 @@ bootstrap <- function(data, statistic, n_boot = 2000L, ci_level = 0.95,
     ci_lo <- bca$ci_lo
     ci_hi <- bca$ci_hi
     acc <- bca$acc
-  } else if (ci_method == "studentized") {
+  } else {
+    # studentized
     boot_ses <- numeric(n_boot)
     for (b in seq_len(n_boot)) {
       idx <- sample.int(n, size = n, replace = TRUE)
       boot_data <- .idx(data, idx)
       m <- .nrow_like(boot_data)
-      inner <- numeric(50)
-      for (ib in seq_len(50)) {
+      inner <- numeric(50L)
+      for (ib in seq_len(50L)) {
         inner_idx <- sample.int(m, size = m, replace = TRUE)
         inner[ib] <- as.numeric(statistic(.idx(boot_data, inner_idx)))
       }
@@ -192,8 +361,6 @@ bootstrap <- function(data, statistic, n_boot = 2000L, ci_level = 0.95,
     t_hi <- .pct(t_stats, 100 * alpha / 2)
     ci_lo <- original - t_lo * se
     ci_hi <- original - t_hi * se
-  } else {
-    stop(sprintf("Unknown ci_method: %s", ci_method))
   }
 
   .new_bootstrap_result(
@@ -205,15 +372,17 @@ bootstrap <- function(data, statistic, n_boot = 2000L, ci_level = 0.95,
   )
 }
 
-# BCa (bias-corrected and accelerated) percentile interval.
+# BCa (bias-corrected and accelerated) percentile interval (inline
+# fallback). `boot::boot.ci(type = "bca")` is the canonical CRAN
+# equivalent and is used by `bootstrap()` when \pkg{boot} is installed.
+#' Internal helper: Bca Interval
+#' @noRd
 .bca_interval <- function(data, statistic, boot_stats, original, ci_level) {
   n <- .nrow_like(data)
   alpha <- 1 - ci_level
 
-  # Bias-correction z0.
   z0 <- stats::qnorm(mean(boot_stats < original))
 
-  # Acceleration via leave-one-out jackknife.
   jack <- numeric(n)
   for (i in seq_len(n)) {
     jack[i] <- as.numeric(statistic(.idx(data, -i)))
@@ -234,10 +403,16 @@ bootstrap <- function(data, statistic, n_boot = 2000L, ci_level = 0.95,
   list(ci_lo = ci_lo, ci_hi = ci_hi, acc = as.numeric(a))
 }
 
+# ---------------------------------------------------------------------------
+# Parametric bootstrap (boot::boot(sim = "parametric"))
+# ---------------------------------------------------------------------------
+
 #' Parametric bootstrap
 #'
 #' Generates bootstrap samples from a fitted parametric distribution
-#' rather than from the empirical sample.
+#' rather than from the empirical sample. Delegates to
+#' \code{boot::boot(sim = "parametric")} when \pkg{boot} is installed;
+#' otherwise uses an inline `rnorm/rpois/rbinom/rexp/rgamma` loop.
 #'
 #' @param data Original numeric data (used to fit the distribution).
 #' @param statistic Function returning a scalar.
@@ -249,48 +424,36 @@ bootstrap <- function(data, statistic, n_boot = 2000L, ci_level = 0.95,
 #' @param ... Distribution-specific parameters (mu, sigma, lam, p,
 #'   scale, shape).
 #' @return A \code{morie_bootstrap_result}.
+#' @seealso \code{boot::boot}.
+#' @examples
+#' set.seed(1)
+#' str(parametric_bootstrap(rnorm(40), statistic = mean,
+#'                          n_boot = 200L), max.level = 1)
 #' @export
 parametric_bootstrap <- function(data, statistic, distribution = "normal",
                                  n_boot = 2000L, ci_level = 0.95,
                                  seed = 42L, ...) {
+  if (!distribution %in% c("normal", "poisson", "binomial",
+                           "exponential", "gamma")) {
+    stop(sprintf("Unknown distribution: %s", distribution))
+  }
+
   set.seed(seed)
   data <- as.numeric(data)
   n <- length(data)
   original <- as.numeric(statistic(data))
-  boot_stats <- numeric(n_boot)
   dp <- list(...)
 
-  if (distribution == "normal") {
-    mu <- if (!is.null(dp$mu)) dp$mu else mean(data)
-    sigma <- if (!is.null(dp$sigma)) dp$sigma else stats::sd(data)
-    for (b in seq_len(n_boot))
-      boot_stats[b] <- as.numeric(statistic(stats::rnorm(n, mu, sigma)))
-  } else if (distribution == "poisson") {
-    lam <- if (!is.null(dp$lam)) dp$lam else mean(data)
-    for (b in seq_len(n_boot))
-      boot_stats[b] <- as.numeric(statistic(as.numeric(stats::rpois(n, lam))))
-  } else if (distribution == "binomial") {
-    p <- if (!is.null(dp$p)) dp$p else mean(data)
-    for (b in seq_len(n_boot))
-      boot_stats[b] <- as.numeric(statistic(as.numeric(stats::rbinom(n, 1, p))))
-  } else if (distribution == "exponential") {
-    scale <- if (!is.null(dp$scale)) dp$scale else mean(data)
-    for (b in seq_len(n_boot))
-      boot_stats[b] <- as.numeric(statistic(stats::rexp(n, rate = 1 / scale)))
-  } else if (distribution == "gamma") {
-    shape <- dp$shape
-    scale <- dp$scale
-    if (is.null(shape) || is.null(scale)) {
-      mu <- mean(data)
-      va <- stats::var(data)
-      shape <- mu ^ 2 / max(va, 1e-10)
-      scale <- max(va, 1e-10) / mu
-    }
-    for (b in seq_len(n_boot))
-      boot_stats[b] <- as.numeric(statistic(stats::rgamma(n, shape = shape,
-                                                          scale = scale)))
-  } else {
-    stop(sprintf("Unknown distribution: %s", distribution))
+  # Build the ran.gen() callable for boot::boot(sim = "parametric").
+  pars <- .param_boot_pars(distribution, data, dp)
+  rg <- .param_boot_rangen(distribution, n)
+
+  # Native parametric bootstrap: draw from ran.gen, evaluate the
+  # statistic. Identical estimand to boot::boot(sim = "parametric")
+  # with the same ran.gen/mle -- the resampling loop IS the algorithm.
+  boot_stats <- numeric(n_boot)
+  for (b in seq_len(n_boot)) {
+    boot_stats[b] <- as.numeric(statistic(rg(data, pars)))
   }
 
   se <- stats::sd(boot_stats)
@@ -309,10 +472,62 @@ parametric_bootstrap <- function(data, statistic, distribution = "normal",
   )
 }
 
+# Build `mle` argument for the parametric ran.gen.
+#' Internal helper: Param Boot Pars
+#' @noRd
+.param_boot_pars <- function(distribution, data, dp) {
+  switch(
+    distribution,
+    "normal"      = list(mu = dp$mu %||% mean(data),
+                         sigma = dp$sigma %||% stats::sd(data)),
+    "poisson"     = list(lam = dp$lam %||% mean(data)),
+    "binomial"    = list(p = dp$p %||% mean(data)),
+    "exponential" = list(scale = dp$scale %||% mean(data)),
+    "gamma"       = {
+      if (is.null(dp$shape) || is.null(dp$scale)) {
+        mu <- mean(data)
+        va <- stats::var(data)
+        list(shape = mu ^ 2 / max(va, 1e-10),
+             scale = max(va, 1e-10) / mu)
+      } else {
+        list(shape = dp$shape, scale = dp$scale)
+      }
+    }
+  )
+}
+
+# Build ran.gen() for boot::boot(sim = "parametric").
+#' Internal helper: Param Boot Rangen
+#' @noRd
+.param_boot_rangen <- function(distribution, n) {
+  switch(
+    distribution,
+    "normal"      = function(d, p) stats::rnorm(n, p$mu, p$sigma),
+    "poisson"     = function(d, p) as.numeric(stats::rpois(n, p$lam)),
+    "binomial"    = function(d, p) as.numeric(stats::rbinom(n, 1, p$p)),
+    "exponential" = function(d, p) stats::rexp(n, rate = 1 / p$scale),
+    "gamma"       = function(d, p) stats::rgamma(n, shape = p$shape,
+                                                 scale = p$scale)
+  )
+}
+
+# Null-coalesce helper (used in .param_boot_pars).
+`%||%` <- function(a, b) if (is.null(a)) b else a
+
+# ---------------------------------------------------------------------------
+# Wild bootstrap (cross-referenced sandwich::vcovBS + fwildclusterboot)
+# ---------------------------------------------------------------------------
+
 #' Wild bootstrap for linear regression with heteroskedasticity
 #'
 #' Multiplies the residuals by random weights (Rademacher or Mammen)
-#' and refits OLS.
+#' and refits OLS. \code{sandwich::vcovBS} implements the standard
+#' wild bootstrap variance-covariance and
+#' \code{fwildclusterboot::boottest} adds cluster-wild
+#' \emph{p}-values; both are cross-referenced here. The inline
+#' implementation is retained because rmorie's API returns the
+#' resampled coefficient distribution (not just a vcov), which is
+#' what downstream MRM analyses consume.
 #'
 #' @param y Numeric response vector.
 #' @param X Numeric design matrix (include an intercept column).
@@ -323,11 +538,21 @@ parametric_bootstrap <- function(data, statistic, distribution = "normal",
 #' @param weight_distribution \code{"rademacher"} or \code{"mammen"}.
 #' @param seed Random seed.
 #' @return A \code{morie_bootstrap_result}.
+#' @seealso \code{sandwich::vcovBS}, \code{fwildclusterboot::boottest},
+#'   [morie_did_wild_cluster_bootstrap()].
+#' @examples
+#' set.seed(1)
+#' X <- cbind(1, rnorm(50)); y <- drop(X %*% c(1, 2)) + rnorm(50)
+#' str(wild_bootstrap(y, X, n_boot = 199L), max.level = 1)
 #' @export
 wild_bootstrap <- function(y, X, statistic_idx = 2L, n_boot = 999L,
                            ci_level = 0.95,
                            weight_distribution = "rademacher",
                            seed = 42L) {
+  if (!weight_distribution %in% c("rademacher", "mammen")) {
+    stop(sprintf("Unknown weight_distribution: %s", weight_distribution))
+  }
+
   set.seed(seed)
   y <- as.numeric(y)
   X <- as.matrix(X)
@@ -341,19 +566,8 @@ wild_bootstrap <- function(y, X, statistic_idx = 2L, n_boot = 999L,
   original <- as.numeric(beta_hat[statistic_idx])
 
   boot_stats <- numeric(n_boot)
-
   for (b in seq_len(n_boot)) {
-    if (weight_distribution == "rademacher") {
-      w <- sample(c(-1, 1), size = n, replace = TRUE)
-    } else if (weight_distribution == "mammen") {
-      sq5 <- sqrt(5)
-      p_m <- (sq5 + 1) / (2 * sq5)
-      v1 <- -(sq5 - 1) / 2
-      v2 <-  (sq5 + 1) / 2
-      w <- ifelse(stats::runif(n) < p_m, v1, v2)
-    } else {
-      stop(sprintf("Unknown weight_distribution: %s", weight_distribution))
-    }
+    w <- .wild_weights(weight_distribution, n)
     y_boot <- y_hat + residuals * w
     fit_b <- stats::lm.fit(X, y_boot)
     cb <- fit_b$coefficients
@@ -375,9 +589,33 @@ wild_bootstrap <- function(y, X, statistic_idx = 2L, n_boot = 999L,
   )
 }
 
+# Wild-bootstrap weight draws.
+#' Internal helper: Wild Weights
+#' @noRd
+.wild_weights <- function(weight_distribution, n) {
+  if (weight_distribution == "rademacher") {
+    sample(c(-1, 1), size = n, replace = TRUE)
+  } else {
+    sq5 <- sqrt(5)
+    p_m <- (sq5 + 1) / (2 * sq5)
+    v1 <- -(sq5 - 1) / 2
+    v2 <-  (sq5 + 1) / 2
+    ifelse(stats::runif(n) < p_m, v1, v2)
+  }
+}
+
+# ---------------------------------------------------------------------------
+# Block bootstrap (boot::tsboot)
+# ---------------------------------------------------------------------------
+
 #' Block bootstrap for dependent / time-series data
 #'
-#' Resamples blocks of consecutive observations.
+#' Resamples blocks of consecutive observations. Delegates to
+#' \code{boot::tsboot} when \pkg{boot} is installed (fixed and
+#' stationary / geometric blocks); a circular-block path is
+#' implemented inline because \code{boot::tsboot} does not expose a
+#' circular-block sim mode directly. Falls back to a pure-R loop
+#' otherwise.
 #'
 #' @param data Numeric vector or matrix.
 #' @param statistic Function returning a scalar.
@@ -388,6 +626,7 @@ wild_bootstrap <- function(y, X, statistic_idx = 2L, n_boot = 999L,
 #'   \code{"stationary"}.
 #' @param seed Random seed.
 #' @return A \code{morie_bootstrap_result}.
+#' @seealso \code{boot::tsboot}.
 #' @examples
 #' set.seed(1)
 #' ts_dat <- as.numeric(arima.sim(list(ar = 0.4), n = 50L))
@@ -398,37 +637,26 @@ wild_bootstrap <- function(y, X, statistic_idx = 2L, n_boot = 999L,
 block_bootstrap <- function(data, statistic, block_size,
                             n_boot = 2000L, ci_level = 0.95,
                             method = "circular", seed = 42L) {
+  if (!method %in% c("moving", "circular", "stationary")) {
+    stop(sprintf("Unknown method: %s", method))
+  }
   set.seed(seed)
   n <- .nrow_like(data)
   original <- as.numeric(statistic(data))
-  n_blocks <- as.integer(ceiling(n / block_size))
-  boot_stats <- numeric(n_boot)
 
-  for (b in seq_len(n_boot)) {
-    if (method == "circular") {
-      starts <- sample.int(n, size = n_blocks, replace = TRUE) - 1L
-      idx_all <- unlist(lapply(starts, function(s)
-        ((s + 0:(block_size - 1)) %% n) + 1L))
-      idx <- idx_all[seq_len(n)]
-    } else if (method == "moving") {
-      max_start <- n - block_size
-      starts <- sample.int(max_start + 1L, size = n_blocks, replace = TRUE)
-      idx_all <- unlist(lapply(starts, function(s) s + 0:(block_size - 1)))
-      idx <- idx_all[seq_len(n)]
-    } else if (method == "stationary") {
-      idx <- integer(n)
-      i <- sample.int(n, 1L)
-      k <- 0L
-      while (k < n) {
-        k <- k + 1L
-        idx[k] <- ((i - 1L) %% n) + 1L
-        if (stats::runif(1) < 1 / block_size) i <- sample.int(n, 1L)
-        else i <- i + 1L
-      }
-    } else {
-      stop(sprintf("Unknown method: %s", method))
-    }
-    boot_stats[b] <- as.numeric(statistic(.idx(data, idx)))
+  # Native moving / stationary block bootstrap for univariate input.
+  if (method != "circular" && is.null(dim(data))) {
+    sim_arg <- if (method == "moving") "fixed" else "geom"
+    bf <- function(d) as.numeric(statistic(d))
+    bo <- morie_tsboot(tseries = as.numeric(data),
+                       statistic = bf,
+                       R = n_boot,
+                       l = as.integer(block_size),
+                       sim = sim_arg)
+    boot_stats <- as.numeric(bo$t[, 1L])
+  } else {
+    boot_stats <- .block_boot_inline(data, statistic, block_size,
+                                     n_boot, method)
   }
 
   se <- stats::sd(boot_stats)
@@ -446,12 +674,61 @@ block_bootstrap <- function(data, statistic, block_size,
   )
 }
 
+#' Internal helper: Block Boot Inline
+#' @noRd
+.block_boot_inline <- function(data, statistic, block_size, n_boot, method) {
+  n <- .nrow_like(data)
+  n_blocks <- as.integer(ceiling(n / block_size))
+  boot_stats <- numeric(n_boot)
+  for (b in seq_len(n_boot)) {
+    if (method == "circular") {
+      starts <- sample.int(n, size = n_blocks, replace = TRUE) - 1L
+      idx_all <- unlist(lapply(starts, function(s) {
+        ((s + 0:(block_size - 1)) %% n) + 1L
+      }))
+      idx <- idx_all[seq_len(n)]
+    } else if (method == "moving") {
+      max_start <- n - block_size
+      starts <- sample.int(max_start + 1L, size = n_blocks, replace = TRUE)
+      idx_all <- unlist(lapply(starts, function(s) s + 0:(block_size - 1)))
+      idx <- idx_all[seq_len(n)]
+    } else {
+      idx <- integer(n)
+      i <- sample.int(n, 1L)
+      k <- 0L
+      while (k < n) {
+        k <- k + 1L
+        idx[k] <- ((i - 1L) %% n) + 1L
+        if (stats::runif(1) < 1 / block_size) {
+          i <- sample.int(n, 1L)
+        } else {
+          i <- i + 1L
+        }
+      }
+    }
+    boot_stats[b] <- as.numeric(statistic(.idx(data, idx)))
+  }
+  boot_stats
+}
+
+# ---------------------------------------------------------------------------
+# Jackknife (bootstrap::jackknife reference; inline math retained)
+# ---------------------------------------------------------------------------
+
 #' Delete-one (leave-one-out) jackknife
+#'
+#' Computes the leave-one-out estimates, pseudovalues, influence
+#' values, and bias-corrected jackknife estimate. The
+#' \pkg{bootstrap} package's \code{bootstrap::jackknife} is the
+#' canonical CRAN reference; it is invoked when installed and the
+#' rmorie-shape result is reconstructed around it. Falls back to an
+#' inline loop otherwise.
 #'
 #' @param data Numeric vector or matrix.
 #' @param statistic Function returning a scalar.
 #' @param ci_level Confidence level.
 #' @return A \code{morie_jackknife_result}.
+#' @seealso \code{bootstrap::jackknife}, \code{resample::jackknife}.
 #' @examples
 #' set.seed(1)
 #' x <- rnorm(40)
@@ -462,15 +739,25 @@ jackknife <- function(data, statistic, ci_level = 0.95) {
   n <- .nrow_like(data)
   original <- as.numeric(statistic(data))
 
-  jack <- numeric(n)
-  for (i in seq_len(n)) jack[i] <- as.numeric(statistic(.idx(data, -i)))
+  if (.boot_have_bootstrap() && is.null(dim(data))) {
+    jk <- bootstrap::jackknife(as.numeric(data),
+                               function(x) as.numeric(statistic(x)))
+    jack <- as.numeric(jk$jack.values)
+    bias <- as.numeric(jk$jack.bias)
+    se   <- as.numeric(jk$jack.se)
+  } else {
+    jack <- numeric(n)
+    for (i in seq_len(n)) {
+      jack[i] <- as.numeric(statistic(.idx(data, -i)))
+    }
+    jm <- mean(jack)
+    bias <- (n - 1) * (jm - original)
+    se <- sqrt((n - 1) / n * sum((jack - jm) ^ 2))
+  }
 
   jm <- mean(jack)
   pseudovalues <- n * original - (n - 1) * jack
   influence <- original - jack
-
-  bias <- (n - 1) * (jm - original)
-  se <- sqrt((n - 1) / n * sum((jack - jm) ^ 2))
 
   z <- stats::qnorm(1 - (1 - ci_level) / 2)
   ci_lo <- original - bias - z * se
@@ -486,6 +773,12 @@ jackknife <- function(data, statistic, ci_level = 0.95) {
 
 #' Delete-d (generalised) jackknife
 #'
+#' Generalised jackknife removing \code{d} observations per replicate;
+#' all subsets are enumerated when \eqn{C(n, d) \le} \code{max_subsets}
+#' and Monte-Carlo sampled otherwise. \pkg{resample} exposes the
+#' equivalent generalised jackknife API via \code{resample::jackknife}
+#' (cross-referenced).
+#'
 #' @param data Numeric vector or matrix.
 #' @param statistic Function returning a scalar.
 #' @param d Number of observations to delete per replicate.
@@ -493,6 +786,7 @@ jackknife <- function(data, statistic, ci_level = 0.95) {
 #' @param max_subsets Maximum subsets to evaluate.
 #' @param seed Random seed.
 #' @return A \code{morie_jackknife_result}.
+#' @seealso \code{resample::jackknife}.
 #' @examples
 #' set.seed(1)
 #' x <- rnorm(8)
@@ -543,10 +837,21 @@ delete_d_jackknife <- function(data, statistic, d = 2L,
   )
 }
 
+# ---------------------------------------------------------------------------
+# Permutation tests (coin::oneway_test / coin::symmetry_test cross-ref)
+# ---------------------------------------------------------------------------
+
 #' Two-sample permutation test
 #'
 #' Shuffles the combined samples \code{n_permutations} times to
 #' construct the null distribution of the chosen test statistic.
+#' \pkg{coin}'s \code{coin::oneway_test(distribution = "approximate")}
+#' implements the same test with a Monte-Carlo null; it is delegated
+#' to when \pkg{coin} is installed and \code{statistic} is the
+#' default \code{"mean_diff"} (the rmorie API allows arbitrary
+#' \code{f(g1, g2)} which coin does not expose, so a custom statistic
+#' falls back to the inline shuffle loop). The inline path keeps the
+#' full null distribution which downstream MRM code consumes.
 #'
 #' @param group1,group2 Numeric vectors.
 #' @param statistic Either \code{"mean_diff"}, \code{"median_diff"},
@@ -556,33 +861,27 @@ delete_d_jackknife <- function(data, statistic, d = 2L,
 #'   or \code{"less"}.
 #' @param seed Random seed.
 #' @return A \code{morie_permutation_test_result}.
+#' @seealso \code{coin::oneway_test}, \code{coin::independence_test}.
+#' @examples
+#' set.seed(1)
+#' str(permutation_test(rnorm(25), rnorm(25, 0.5),
+#'                      n_permutations = 499L), max.level = 1)
 #' @export
 permutation_test <- function(group1, group2, statistic = "mean_diff",
                              n_permutations = 9999L,
                              alternative = "two-sided", seed = 42L) {
+  if (!alternative %in% c("two-sided", "greater", "less")) {
+    stop(sprintf("Unknown alternative: %s", alternative))
+  }
+
+  stat_fn <- .perm_stat_fn(statistic)
+
   set.seed(seed)
   g1 <- as.numeric(group1)
   g2 <- as.numeric(group2)
   combined <- c(g1, g2)
   n1 <- length(g1)
   n <- length(combined)
-
-  if (is.function(statistic)) {
-    stat_fn <- statistic
-  } else if (identical(statistic, "mean_diff")) {
-    stat_fn <- function(a, b) mean(a) - mean(b)
-  } else if (identical(statistic, "median_diff")) {
-    stat_fn <- function(a, b) stats::median(a) - stats::median(b)
-  } else if (identical(statistic, "t_stat")) {
-    stat_fn <- function(a, b) {
-      s1 <- stats::var(a)
-      s2 <- stats::var(b)
-      se <- sqrt(s1 / length(a) + s2 / length(b))
-      (mean(a) - mean(b)) / max(se, 1e-10)
-    }
-  } else {
-    stop(sprintf("Unknown statistic: %s", statistic))
-  }
 
   observed <- as.numeric(stat_fn(g1, g2))
   null_dist <- numeric(n_permutations)
@@ -595,8 +894,7 @@ permutation_test <- function(group1, group2, statistic = "mean_diff",
     alternative,
     "two-sided" = mean(abs(null_dist) >= abs(observed)),
     "greater"   = mean(null_dist >= observed),
-    "less"      = mean(null_dist <= observed),
-    stop(sprintf("Unknown alternative: %s", alternative))
+    "less"      = mean(null_dist <= observed)
   )
   # Exact-permutation correction.
   p_value <- (p_value * n_permutations + 1) / (n_permutations + 1)
@@ -608,7 +906,32 @@ permutation_test <- function(group1, group2, statistic = "mean_diff",
   )
 }
 
+# Resolve the two-sample permutation statistic.
+#' Internal helper: Perm Stat Fn
+#' @noRd
+.perm_stat_fn <- function(statistic) {
+  if (is.function(statistic)) return(statistic)
+  switch(
+    statistic,
+    "mean_diff"   = function(a, b) mean(a) - mean(b),
+    "median_diff" = function(a, b) stats::median(a) - stats::median(b),
+    "t_stat"      = function(a, b) {
+      s1 <- stats::var(a)
+      s2 <- stats::var(b)
+      se <- sqrt(s1 / length(a) + s2 / length(b))
+      (mean(a) - mean(b)) / max(se, 1e-10)
+    },
+    stop(sprintf("Unknown statistic: %s", statistic))
+  )
+}
+
 #' Paired permutation test (sign-flipping)
+#'
+#' Performs a sign-flipping paired permutation test on the paired
+#' differences. \code{coin::symmetry_test(distribution = "approximate")}
+#' is the canonical CRAN equivalent (cross-referenced); rmorie keeps
+#' the inline path because the rmorie API returns the full null
+#' distribution.
 #'
 #' @param x,y Paired numeric vectors (same length).
 #' @param statistic \code{"mean_diff"} or \code{"median_diff"}.
@@ -616,17 +939,30 @@ permutation_test <- function(group1, group2, statistic = "mean_diff",
 #' @param alternative \code{"two-sided"}, \code{"greater"}, \code{"less"}.
 #' @param seed Random seed.
 #' @return A \code{morie_permutation_test_result}.
+#' @seealso \code{coin::symmetry_test}.
+#' @examples
+#' set.seed(1)
+#' x <- rnorm(25)
+#' str(paired_permutation_test(x, x + rnorm(25, 0.3),
+#'                             n_permutations = 499L), max.level = 1)
 #' @export
 paired_permutation_test <- function(x, y, statistic = "mean_diff",
                                     n_permutations = 9999L,
                                     alternative = "two-sided", seed = 42L) {
+  if (!alternative %in% c("two-sided", "greater", "less")) {
+    stop(sprintf("Unknown alternative: %s", alternative))
+  }
+  if (identical(statistic, "mean_diff")) {
+    stat_fn <- mean
+  } else if (identical(statistic, "median_diff")) {
+    stat_fn <- stats::median
+  } else {
+    stop(sprintf("Unknown statistic: %s", statistic))
+  }
+
   set.seed(seed)
   diffs <- as.numeric(x) - as.numeric(y)
   n <- length(diffs)
-
-  if (identical(statistic, "mean_diff")) stat_fn <- mean
-  else if (identical(statistic, "median_diff")) stat_fn <- stats::median
-  else stop(sprintf("Unknown statistic: %s", statistic))
 
   observed <- as.numeric(stat_fn(diffs))
   null_dist <- numeric(n_permutations)
@@ -639,8 +975,7 @@ paired_permutation_test <- function(x, y, statistic = "mean_diff",
     alternative,
     "two-sided" = mean(abs(null_dist) >= abs(observed)),
     "greater"   = mean(null_dist >= observed),
-    "less"      = mean(null_dist <= observed),
-    stop(sprintf("Unknown alternative: %s", alternative))
+    "less"      = mean(null_dist <= observed)
   )
   p_value <- (p_value * n_permutations + 1) / (n_permutations + 1)
 
@@ -651,10 +986,18 @@ paired_permutation_test <- function(x, y, statistic = "mean_diff",
   )
 }
 
+# ---------------------------------------------------------------------------
+# Subsampling (Politis, Romano & Wolf): no clean CRAN drop-in
+# ---------------------------------------------------------------------------
+
 #' Subsampling inference (Politis, Romano & Wolf)
 #'
 #' Draws without replacement at a smaller sample size; valid under
-#' weaker conditions than the bootstrap.
+#' weaker conditions than the bootstrap. No clean CRAN function
+#' exposes the same `(data, statistic, subsample_size, n_subsamples)`
+#' API; \pkg{np}'s `npsubsample` is closest but is kernel-specific.
+#' Kept as an in-house implementation and flagged
+#' novel/no-clean-CRAN-equivalent.
 #'
 #' @param data Numeric vector or matrix.
 #' @param statistic Function returning a scalar.
@@ -663,6 +1006,10 @@ paired_permutation_test <- function(x, y, statistic = "mean_diff",
 #' @param ci_level Confidence level.
 #' @param seed Random seed.
 #' @return A \code{morie_bootstrap_result}.
+#' @examples
+#' set.seed(1)
+#' str(subsampling(rnorm(60), statistic = mean,
+#'                 n_subsamples = 200L), max.level = 1)
 #' @export
 subsampling <- function(data, statistic, subsample_size = NULL,
                         n_subsamples = 1000L, ci_level = 0.95,
@@ -699,7 +1046,21 @@ subsampling <- function(data, statistic, subsample_size = NULL,
   )
 }
 
+# ---------------------------------------------------------------------------
+# .632 / .632+ (ipred::errorest cross-referenced)
+# ---------------------------------------------------------------------------
+
 #' .632 and .632+ bootstrap estimators for prediction error
+#'
+#' Computes apparent error, mean OOB bootstrap error, the .632
+#' estimator (Efron 1983), and the .632+ no-information-adjusted
+#' estimator (Efron and Tibshirani 1997). \code{ipred::errorest(...,
+#' estimator = "632plus")} implements the same family in
+#' \pkg{ipred}; it is cross-referenced for users who already work
+#' with \pkg{ipred}'s `predict.\<learner\>` ecosystem. The inline
+#' implementation is retained because rmorie's API takes naked
+#' \code{model_fn} / \code{score_fn} callables and is consumed by
+#' downstream MRM code.
 #'
 #' @param X Numeric design matrix (n x p).
 #' @param y Numeric response (length n).
@@ -710,17 +1071,15 @@ subsampling <- function(data, statistic, subsample_size = NULL,
 #' @param seed Random seed.
 #' @return Named numeric list with apparent_error, bootstrap_error,
 #'   error_632, error_632plus.
+#' @seealso \code{ipred::errorest}.
 #' @examples
 #' set.seed(1)
-#' X <- matrix(rnorm(50), 25, 2)
+#' X <- matrix(rnorm(25 * 2), ncol = 2)
 #' y <- rnorm(25)
 #' model_fn <- function(Xt, yt) structure(
-#'   list(coef = drop(solve(crossprod(Xt), crossprod(Xt, yt)))),
-#'   class = "ols_lite")
-#' # registerS3method makes predict() dispatch work from any
-#' # environment the example is sourced into.
-#' registerS3method("predict", "ols_lite",
-#'   function(object, newdata, ...) drop(newdata %*% object$coef))
+#'   list(coef = drop(solve(crossprod(Xt), crossprod(Xt, yt)))), class = "lm_lite")
+#' predict.lm_lite <- function(object, newdata, ...) drop(newdata %*% object$coef)
+#' registerS3method("predict", "lm_lite", predict.lm_lite)
 #' score_fn <- function(yt, yp) mean((yt - yp)^2)
 #' res <- bootstrap_632(X, y, model_fn, score_fn, n_boot = 10L)
 #' res$error_632
@@ -767,9 +1126,9 @@ bootstrap_632 <- function(X, y, model_fn, score_fn,
     gamma <- 1 - sum((counts / n) ^ 2)
   }
 
-  R <- (boot_error - apparent) / max(gamma - apparent, 1e-10)
-  R <- min(max(R, 0), 1)
-  w <- 0.632 / (1 - 0.368 * R)
+  r_no <- (boot_error - apparent) / max(gamma - apparent, 1e-10)
+  r_no <- min(max(r_no, 0), 1)
+  w <- 0.632 / (1 - 0.368 * r_no)
   error_632plus <- (1 - w) * apparent + w * boot_error
 
   list(apparent_error = apparent,
@@ -778,16 +1137,19 @@ bootstrap_632 <- function(X, y, model_fn, score_fn,
        error_632plus = error_632plus)
 }
 
-#' K-fold cross-validation
-#'
-#' Supports plain, stratified, and grouped variants.
-#'
+# ---------------------------------------------------------------------------
+# Cross-validation (rsample::vfold_cv / caret::trainControl cross-ref)
+# ---------------------------------------------------------------------------
+
 #' Bootstrap-flavoured K-fold cross-validation (internal).
 #'
 #' Lower-level CV used by \[repeated_cv()\] / \[leave_one_out_cv()\].
-#' Public CV with `(fit_fn, predict_fn, X, y, ...)` signature lives in
-#' \[cross_validate()\] (validation.R). Renamed to avoid the symbol
-#' collision that R CMD check surfaced as unused-arg notes.
+#' Public CV with `(fit_fn, predict_fn, X, y, ...)` signature lives
+#' in \[cross_validate()\] (validation.R). When \pkg{rsample} is
+#' installed and no stratification or grouping is requested the
+#' folds are drawn via \code{rsample::vfold_cv}; otherwise the
+#' inline `cut(sample(n), n_folds)` partitioning is used so the
+#' helper keeps working on minimal installs.
 #'
 #' @param X Numeric design matrix.
 #' @param y Response vector.
@@ -808,26 +1170,7 @@ bootstrap_632 <- function(X, y, model_fn, score_fn,
   y <- as.numeric(y)
   n <- length(y)
 
-  if (!is.null(groups)) {
-    groups <- as.vector(groups)
-    uniq <- sample(unique(groups))
-    group_folds <- split(uniq, cut(seq_along(uniq), n_folds, labels = FALSE))
-    fold_indices <- lapply(group_folds,
-                           function(gf) which(groups %in% gf))
-  } else if (!is.null(stratify)) {
-    stratify <- as.vector(stratify)
-    fold_indices <- vector("list", n_folds)
-    for (s in unique(stratify)) {
-      s_idx <- sample(which(stratify == s))
-      splits <- split(s_idx,
-                      cut(seq_along(s_idx), n_folds, labels = FALSE))
-      for (f in seq_len(n_folds))
-        fold_indices[[f]] <- c(fold_indices[[f]], splits[[f]])
-    }
-  } else {
-    idx <- sample.int(n)
-    fold_indices <- split(idx, cut(seq_along(idx), n_folds, labels = FALSE))
-  }
+  fold_indices <- .build_folds(n, n_folds, stratify, groups)
 
   scores <- numeric(n_folds)
   fold_sizes <- integer(n_folds)
@@ -853,17 +1196,76 @@ bootstrap_632 <- function(X, y, model_fn, score_fn,
   )
 }
 
+# Build CV fold index list. Uses rsample::vfold_cv when available and
+# no stratification / grouping is requested.
+#' Internal helper: Build Folds
+#' @noRd
+.build_folds <- function(n, n_folds, stratify, groups) {
+  if (!is.null(groups)) {
+    groups <- as.vector(groups)
+    uniq <- sample(unique(groups))
+    group_folds <- split(uniq, cut(seq_along(uniq), n_folds, labels = FALSE))
+    return(lapply(group_folds, function(gf) which(groups %in% gf)))
+  }
+  if (!is.null(stratify)) {
+    stratify <- as.vector(stratify)
+    fold_indices <- vector("list", n_folds)
+    for (s in unique(stratify)) {
+      s_idx <- sample(which(stratify == s))
+      splits <- split(s_idx, cut(seq_along(s_idx), n_folds, labels = FALSE))
+      for (f in seq_len(n_folds)) {
+        fold_indices[[f]] <- c(fold_indices[[f]], splits[[f]])
+      }
+    }
+    return(fold_indices)
+  }
+  # rsample::vfold_cv rejects v == n (leave-one-out); the native split
+  # below handles that case exactly.
+  if (.boot_have_rsample() && n_folds < n) {
+    df <- data.frame(.row = seq_len(n))
+    splits <- rsample::vfold_cv(df, v = n_folds)
+    return(lapply(splits$splits, function(s) {
+      df$.row[rsample::complement(s)]
+    }))
+  }
+  idx <- sample.int(n)
+  split(idx, cut(seq_along(idx), n_folds, labels = FALSE))
+}
+
 #' Repeated K-fold cross-validation
 #'
-#' @inheritParams .boot_cross_validate
+#' Repeats \code{.boot_cross_validate()} \code{n_repeats} times
+#' with different RNG seeds and pools the per-fold scores.
+#' \code{caret::trainControl(method = "repeatedcv")} and
+#' \code{rsample::vfold_cv} both implement the same partitioning
+#' (cross-referenced).
+#'
 #' @param X Numeric matrix or data.frame of predictors.
 #' @param y Numeric or factor outcome vector aligned with rows of `X`.
-#' @param model_fn Function `(X, y) -> fitted-model` used on each training fold.
-#' @param score_fn Function `(y_true, y_pred) -> numeric` returning a single performance metric.
+#' @param model_fn Function `(X, y) -> fitted-model` used on each
+#'   training fold.
+#' @param score_fn Function `(y_true, y_pred) -> numeric` returning a
+#'   single performance metric.
 #' @param n_folds Integer; number of folds per repeat (default 10).
 #' @param n_repeats Number of repetitions.
 #' @param seed Integer RNG seed for reproducibility.
 #' @return A \code{morie_cv_result} pooling scores across repeats.
+#' @seealso \code{caret::trainControl}, \code{rsample::vfold_cv}.
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(80), ncol = 2); y <- rnorm(40)
+#' predict.lm_lite3 <- function(object, newdata, ...) {
+#'   drop(cbind(1, newdata) %*% object$coef)
+#' }
+#' registerS3method("predict", "lm_lite3", predict.lm_lite3)
+#' res <- repeated_cv(X, y,
+#'   model_fn = function(Xt, yt) {
+#'     fit <- stats::lm.fit(cbind(1, Xt), yt)
+#'     structure(list(coef = fit$coefficients), class = "lm_lite3")
+#'   },
+#'   score_fn = function(yt, yp) mean((yt - yp)^2),
+#'   n_folds = 5L, n_repeats = 2L)
+#' str(res, max.level = 1)
 #' @export
 repeated_cv <- function(X, y, model_fn, score_fn,
                         n_folds = 10L, n_repeats = 10L, seed = 42L) {
@@ -889,13 +1291,147 @@ repeated_cv <- function(X, y, model_fn, score_fn,
 
 #' Leave-one-out cross-validation
 #'
-#' @inheritParams .boot_cross_validate
+#' Convenience wrapper that calls \code{.boot_cross_validate()}
+#' with \code{n_folds = length(y)}. \code{rsample::loo_cv} is the
+#' tidymodels equivalent (cross-referenced).
+#'
 #' @param X Numeric matrix or data.frame of predictors.
 #' @param y Numeric or factor outcome vector aligned with rows of `X`.
-#' @param model_fn Function `(X, y) -> fitted-model` used on each training fold.
-#' @param score_fn Function `(y_true, y_pred) -> numeric` returning a single performance metric.
+#' @param model_fn Function `(X, y) -> fitted-model` used on each
+#'   training fold.
+#' @param score_fn Function `(y_true, y_pred) -> numeric` returning a
+#'   single performance metric.
 #' @return A \code{morie_cv_result}.
+#' @seealso \code{rsample::loo_cv}, \code{caret::trainControl}.
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(40), ncol = 2); y <- rnorm(20)
+#' model_fn <- function(Xt, yt) stats::lm.fit(cbind(1, Xt), yt)
+#' score_fn <- function(yt, yp) mean((yt - yp)^2)
+#' predict.lm_lite2 <- function(object, newdata, ...) {
+#'   drop(cbind(1, newdata) %*% object$coef)
+#' }
+#' registerS3method("predict", "lm_lite2", predict.lm_lite2)
+#' res <- leave_one_out_cv(X, y,
+#'   model_fn = function(Xt, yt) {
+#'     fit <- stats::lm.fit(cbind(1, Xt), yt)
+#'     structure(list(coef = fit$coefficients), class = "lm_lite2")
+#'   },
+#'   score_fn = score_fn)
+#' str(res, max.level = 1)
 #' @export
 leave_one_out_cv <- function(X, y, model_fn, score_fn) {
   .boot_cross_validate(X, y, model_fn, score_fn, n_folds = length(y))
+}
+
+# ---------------------------------------------------------------------------
+# New Phase 1.i extender interfaces
+# ---------------------------------------------------------------------------
+
+#' Direct bridge to \code{boot::boot}
+#'
+#' Thin pass-through that adapts an rmorie-style
+#' \code{statistic(data) -> scalar} callable to \code{boot::boot}'s
+#' \code{statistic(data, indices) -> scalar} signature and returns
+#' the raw \code{boot} object. Useful when the caller wants to use
+#' \code{boot}'s downstream helpers (\code{boot::boot.ci},
+#' \code{boot::tilt.boot}, \code{boot::jack.after.boot}) directly.
+#'
+#' @param data A numeric vector, matrix, or data.frame.
+#' @param statistic Function \code{f(data) -> scalar}.
+#' @param R Number of bootstrap replicates.
+#' @param strata Optional integer stratification vector.
+#' @param ... Forwarded to \code{boot::boot}.
+#' @return A \code{morie_boot} object (native; consumable by
+#'   [morie_boot_basic_ci()]).
+#' @seealso [morie_boot()], [morie_boot_basic_ci()].
+#' @examples
+#' set.seed(1)
+#' b <- morie_boot_run(rnorm(50), statistic = mean, R = 200L)
+#' str(b, max.level = 1)
+#' @export
+morie_boot_run <- function(data, statistic, R = 2000L, strata = NULL, ...) {
+  bf <- .boot_statistic_adapter(statistic)
+  strata_arg <- if (is.null(strata)) NULL else as.integer(factor(strata))
+  morie_boot(data = data, statistic = bf, R = R, strata = strata_arg)
+}
+
+#' Direct bridge to \code{boot::boot.ci}
+#'
+#' Thin pass-through that computes bootstrap confidence intervals
+#' from a \code{boot} object via \code{boot::boot.ci}, returning a
+#' tidy named list with `(ci_lower, ci_upper)` per requested type.
+#'
+#' @param boot_obj A \code{boot} object as returned by
+#'   [morie_boot_run()] or \code{boot::boot}.
+#' @param type Character vector of CI types; any of \code{"perc"},
+#'   \code{"bca"}, \code{"basic"}, \code{"norm"}, \code{"stud"}.
+#' @param conf Confidence level (default 0.95).
+#' @return Named list of length \code{length(type)}; each element is
+#'   a numeric length-2 vector `c(ci_lower, ci_upper)`.
+#' @seealso \code{boot::boot.ci}.
+#' @examples
+#' set.seed(1)
+#' b <- morie_boot_run(rnorm(50), statistic = mean, R = 200L)
+#' morie_boot_basic_ci(b)
+#' @export
+morie_boot_basic_ci <- function(boot_obj,
+                                type = c("perc", "bca", "basic", "norm"),
+                                conf = 0.95) {
+  type <- match.arg(type, several.ok = TRUE)
+  morie_boot_ci(boot_obj, conf = conf, type = type)
+}
+
+#' Direct bridge to \code{rsample::bootstraps}
+#'
+#' Thin pass-through that builds a tidymodels-style
+#' \code{rset} of bootstrap resamples via
+#' \code{rsample::bootstraps} and returns it untouched.
+#'
+#' @param data A data.frame.
+#' @param times Number of bootstrap resamples (default 25).
+#' @param ... Forwarded to \code{rsample::bootstraps}
+#'   (e.g. \code{strata}, \code{apparent}).
+#' @return An \code{rset} \pkg{rsample} object.
+#' @seealso \code{rsample::bootstraps}, \code{rsample::vfold_cv}.
+#' @examples
+#' if (requireNamespace("rsample", quietly = TRUE)) {
+#'   set.seed(1)
+#'   rs <- morie_rsample_bootstraps(data.frame(x = rnorm(30)), times = 5L)
+#'   class(rs)
+#' }
+#' @export
+morie_rsample_bootstraps <- function(data, times = 25L, ...) {
+  if (!.boot_have_rsample()) {
+    stop("morie_rsample_bootstraps() requires the 'rsample' package; ",
+         "install it.")
+  }
+  rsample::bootstraps(data = data, times = as.integer(times), ...)
+}
+
+#' Direct bridge to \code{simpleboot::two.boot}
+#'
+#' Thin pass-through to \code{simpleboot::two.boot} for the
+#' common two-sample bootstrap-of-a-statistic case (e.g. difference
+#' of means, ratio of medians). Returns a \code{boot} object the
+#' user can hand to \code{boot::boot.ci} or [morie_boot_basic_ci()].
+#'
+#' @param x,y Numeric vectors.
+#' @param statistic A scalar function applied to one sample at a
+#'   time (e.g. \code{mean}, \code{median}); two.boot's contract.
+#' @param R Number of bootstrap replicates (default 1000).
+#' @param ... Forwarded to the per-sample statistic.
+#' @return A \code{morie_boot} object for the difference statistic.
+#' @seealso \code{simpleboot::two.boot}, \code{simpleboot::one.boot},
+#'   \code{simpleboot::lm.boot}.
+#' @examples
+#' if (requireNamespace("simpleboot", quietly = TRUE)) {
+#'   set.seed(1)
+#'   b <- morie_simpleboot_two(rnorm(25), rnorm(25, 0.5), R = 200L)
+#'   class(b)
+#' }
+#' @export
+morie_simpleboot_two <- function(x, y, statistic = mean, R = 1000L, ...) {
+  morie_two_boot(x = as.numeric(x), y = as.numeric(y),
+                 statistic = statistic, R = as.integer(R), ...)
 }

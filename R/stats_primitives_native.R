@@ -144,7 +144,7 @@ morie_runs_test <- function(x, threshold = stats::median(x),
     right.sided = stats::pnorm(z, lower.tail = FALSE),
     stop("bad alternative"))
   list(statistic = z, p.value = p, runs = runs, n1 = n1, n2 = n2,
-       method = "Runs Test (morie native)")
+       method = "Runs Test (rmorie native)")
 }
 
 #' Turning-point test (native)
@@ -168,7 +168,7 @@ morie_turning_point_test <- function(x) {
   v <- (16 * n - 29) / 90
   z <- (tp - mu) / sqrt(v)
   list(statistic = z, p.value = 2 * stats::pnorm(-abs(z)),
-       tp = tp, method = "Turning Point Test (morie native)")
+       tp = tp, method = "Turning Point Test (rmorie native)")
 }
 
 #' Difference-sign test (native)
@@ -193,7 +193,7 @@ morie_difference_sign_test <- function(x) {
   v <- (n + 1) / 12
   z <- (ds - mu) / sqrt(v)
   list(statistic = z, p.value = 2 * stats::pnorm(-abs(z)),
-       ds = ds, method = "Difference Sign Test (morie native)")
+       ds = ds, method = "Difference Sign Test (rmorie native)")
 }
 
 #' Bartels rank test of randomness (native)
@@ -229,7 +229,7 @@ morie_bartels_rank_test <- function(x, alternative = "two.sided") {
     right.sided = stats::pnorm(z, lower.tail = FALSE),
     stop("bad alternative"))
   list(statistic = z, rvn = rvn, p.value = p,
-       method = "Bartels Rank Test (morie native)")
+       method = "Bartels Rank Test (rmorie native)")
 }
 
 # ---------------------------------------------------------------------------

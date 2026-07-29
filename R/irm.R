@@ -1,14 +1,18 @@
 #' Estimate the ATE via the Interactive Regression Model (IRM)
 #'
-#' Native implementation of the Chernozhukov et al. (2018) interactive
-#' regression model: cross-fit logistic propensity scores and GCV-ridge
-#' outcome regressions, combined through the doubly-robust (AIPW) score.
-#' Mirrors the Python sibling `morie.estimate_irm()`.
+#' Native rmorie implementation of the interactive regression model
+#' (cross-fit logistic propensity + GCV-ridge outcome regressions,
+#' AIPW orthogonal score), mirroring the Python sibling
+#' `morie.estimate_irm()`. Cross-validated against `DoubleML` in the
+#' package's cross tests; no DoubleML at runtime.
 #'
-#' Nothing beyond `stats` is required at runtime. The estimator is
-#' cross-validated against \pkg{DoubleML} in the package's cross tests,
-#' but \pkg{DoubleML}, \pkg{mlr3}, and \pkg{mlr3learners} are not
-#' loaded or called.
+#' Following the DoubleML R package's own conventions, this uses
+#' the `mlr3` ecosystem for the nuisance learners (\code{ml_g} for
+#' \eqn{E\[Y|T,X\]} and \code{ml_m} for \eqn{P(T=1|X)}). Defaults are
+#' `lrn("regr.lm")` and `lrn("classif.log_reg")`, which require nothing
+#' beyond `stats`. For higher-capacity defaults, install `ranger` and pass
+#' `lrn("regr.ranger")` / `lrn("classif.ranger")` via the underlying
+#' `DoubleML::DoubleMLIRM$new()` directly.
 #'
 #' Following Chernozhukov et al. (2018), the IRM extends the partially linear
 #' model by allowing fully heterogeneous treatment effects:
@@ -23,11 +27,10 @@
 #' @param random_state Random seed (default 42).
 #'
 #' @return A list with components: `ate`, `se`, `ci_lower`, `ci_upper`,
-#'   `n`, `method` (`"IRM (DoubleML)"`).
+#'   `n`, `method` (`"IRM (rmorie native)"`).
 #'
 #' @section CRAN \code{Suggests}:
-#' Requires the suggested packages `DoubleML`, `mlr3`, and `mlr3learners`.
-#' Install with `install.packages(c("DoubleML", "mlr3", "mlr3learners"))`.
+#' Runs on base R alone — no suggested packages required.
 #' If any are unavailable, the function raises an informative error.
 #'
 #' @references
@@ -65,6 +68,6 @@ morie_estimate_irm <- function(data, treatment, outcome, covariates,
     ate = out$theta, se = out$se,
     ci_lower = out$theta - z * out$se,
     ci_upper = out$theta + z * out$se,
-    n = n, method = "IRM (morie native)"
+    n = n, method = "IRM (rmorie native)"
   )
 }

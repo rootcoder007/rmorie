@@ -130,7 +130,7 @@ morie_irt_2pl <- function(responses, n_quad = 41L, max_iter = 200L,
          loglik = ll_old, n_iter = n_iter, converged = converged,
          theta = eap, theta_se = sqrt(pmax(eap_var, 0)),
          n_persons = n, n_items = k,
-         method = "2PL Bock-Aitkin EM (morie native)"),
+         method = "2PL Bock-Aitkin EM (rmorie native)"),
     class = c("morie_irt_2pl", "list"))
 }
 
@@ -244,7 +244,7 @@ morie_irt_grm <- function(responses, n_quad = 31L, max_iter = 100L,
          loglik = ll_old, n_iter = n_iter, converged = converged,
          theta = eap, theta_se = sqrt(pmax(eap_var, 0)),
          n_persons = n, n_items = k,
-         method = "GRM Samejima EM (morie native)"),
+         method = "GRM Samejima EM (rmorie native)"),
     class = c("morie_irt_grm", "list"))
 }
 

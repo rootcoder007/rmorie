@@ -1130,17 +1130,3 @@ sgolay <- function(x, window = 11L, polyorder = 3L) {
     extra = list(window = window, polyorder = polyorder)
   )
 }
-
-.morie_py_call <- function(fn_name, ...) {
-  args <- list(...)
-  arg_str <- paste(vapply(args, function(a) {
-    if (is.numeric(a) && length(a) > 1) {
-      paste0("[", paste(a, collapse = ","), "]")
-    } else {
-      as.character(a)
-    }
-  }, character(1)), collapse = " ")
-  cmd <- paste(fn_name, arg_str)
-  out <- system2("python3", c("-m", "morie.stat_bridge", "exec", cmd), stdout = TRUE, stderr = TRUE)
-  paste(out, collapse = "\n")
-}

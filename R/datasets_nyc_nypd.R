@@ -8,7 +8,7 @@
 # during phase 3NN. Each loader follows the offline-default pattern
 # established in phase 3LL:
 #
-#   offline = TRUE  (default) -> read bundled inst/extdata/*.csv
+#   offline = TRUE  (default) -> read included inst/extdata/*.csv
 #   offline = FALSE            -> hit SODA2 endpoint via the mockable
 #                                  .morie_dataset_socrata_fetch helper
 #
@@ -91,7 +91,7 @@
 #'   `data_dictionary_url` (XLSX, when published as a dataset
 #'   attachment; `NA_character_` otherwise),
 #'   `footnotes_url` (PDF, when published; `NA_character_` otherwise),
-#'   `fixture` (bundled-fixture filename).
+#'   `fixture` (included-fixture filename).
 #'
 #' Currently only `nypd_arrests_ytd` carries the
 #' canonical NYC OpenData attachment URLs (XLSX dictionary + PDF
@@ -157,7 +157,7 @@ morie_datasets_nyc_nypd_layers <- function() {
 #'   offline = FALSE, paginate = TRUE, max_features = 5000L)
 #' ```
 #'
-#' The bundled fixtures (offline mode) are unaffected -- they ship 5
+#' The included fixtures (offline mode) are unaffected -- they ship 5
 #' rows each as deterministic sample data, and `max_features` simply
 #' truncates the fixture.
 #'
@@ -168,6 +168,8 @@ NULL
 # Shared factory
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Morie Nyc Nypd Dispatch
+#' @noRd
 .morie_nyc_nypd_dispatch <- function(dataset_key, year, max_features,
                                        offline, resource_id,
                                        mode = c("soda2", "soda3"),
@@ -185,7 +187,7 @@ NULL
   }
   entry <- .MORIE_NYC_NYPD_REGISTRY[[dataset_key]]
   if (isTRUE(offline)) {
-    path <- system.file("extdata", entry$fixture, package = "morie")
+    path <- system.file("extdata", entry$fixture, package = "rmorie")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", entry$fixture, package = "rmoriedata")
     }
@@ -255,7 +257,7 @@ NULL
 #' @param year Optional year filter (server-side SoQL).
 #' @param max_features Optional row cap. When `paginate = TRUE` this
 #'   is the total cap across walked pages.
-#' @param offline If `TRUE` (default), read the bundled fixture.
+#' @param offline If `TRUE` (default), read the included fixture.
 #' @param resource_id Optional Socrata resource id override.
 #' @param paginate Logical; if `TRUE` and `offline = FALSE`, walk
 #'   SODA2 `$offset` in `page_size` chunks until exhausted or
@@ -304,11 +306,7 @@ morie_datasets_nyc_nypd_by_key <- function(dataset_key,
 
 #' NYPD Arrests Data (Historic)
 #' @inheritParams morie_datasets_nyc_nypd_by_key
-#' @return A `data.frame` of NYPD historic arrest records, either
-#'   the bundled `nypd_arrests_historic_sample.csv` fixture when
-#'   `offline = TRUE` or the live Socrata pull (SODA2 / SODA3)
-#'   when `offline = FALSE`. Columns mirror the upstream NYC
-#'   OpenData resource `8h9b-rp9u`.
+#' @return A \code{data.frame}.
 #' @examples
 #' df <- morie_datasets_nyc_nypd_arrests_historic(offline = TRUE)
 #' head(df[, c("arrest_key", "arrest_date", "ofns_desc", "arrest_boro")])
@@ -333,12 +331,7 @@ morie_datasets_nyc_nypd_arrests_historic <- function(year = NULL,
 
 #' NYPD Arrest Data (Year to Date)
 #' @inheritParams morie_datasets_nyc_nypd_by_key
-#' @return A `data.frame` of NYPD year-to-date arrest records,
-#'   either the bundled `nypd_arrests_ytd_sample.csv` fixture when
-#'   `offline = TRUE` or the live Socrata pull (SODA2 / SODA3,
-#'   subject to the 1,000-row default cap; see `paginate`) when
-#'   `offline = FALSE`. Columns mirror NYC OpenData resource
-#'   `uip8-fykc`.
+#' @return A \code{data.frame}.
 #' @examples
 #' df <- morie_datasets_nyc_nypd_arrests_ytd(offline = TRUE)
 #' head(df[, c("arrest_key", "arrest_date", "ofns_desc")])
@@ -363,12 +356,7 @@ morie_datasets_nyc_nypd_arrests_ytd <- function(year = NULL,
 
 #' NYPD Complaint Data Historic
 #' @inheritParams morie_datasets_nyc_nypd_by_key
-#' @return A `data.frame` of NYPD historic complaint (felony /
-#'   misdemeanor / violation) records, either the bundled
-#'   `nypd_complaint_historic_sample.csv` fixture when
-#'   `offline = TRUE` or the live Socrata pull (SODA2 / SODA3)
-#'   when `offline = FALSE`. Columns mirror NYC OpenData resource
-#'   `qgea-i56i`.
+#' @return A \code{data.frame}.
 #' @examples
 #' df <- morie_datasets_nyc_nypd_complaint_historic(offline = TRUE)
 #' head(df[, c("cmplnt_num", "ofns_desc", "boro_nm")])
@@ -393,11 +381,7 @@ morie_datasets_nyc_nypd_complaint_historic <- function(year = NULL,
 
 #' NYPD Complaint Data Current (Year To Date)
 #' @inheritParams morie_datasets_nyc_nypd_by_key
-#' @return A `data.frame` of NYPD year-to-date complaint records,
-#'   either the bundled `nypd_complaint_ytd_sample.csv` fixture
-#'   when `offline = TRUE` or the live Socrata pull (SODA2 / SODA3)
-#'   when `offline = FALSE`. Columns mirror NYC OpenData resource
-#'   `5uac-w243`.
+#' @return A \code{data.frame}.
 #' @examples
 #' df <- morie_datasets_nyc_nypd_complaint_ytd(offline = TRUE)
 #' ncol(df)  # 36: adds geocoded_column over the historic schema
@@ -422,11 +406,7 @@ morie_datasets_nyc_nypd_complaint_ytd <- function(year = NULL,
 
 #' NYPD Hate Crimes
 #' @inheritParams morie_datasets_nyc_nypd_by_key
-#' @return A `data.frame` of NYPD hate-crime incident records,
-#'   either the bundled `nypd_hate_crimes_sample.csv` fixture
-#'   when `offline = TRUE` or the live Socrata pull (SODA2 / SODA3)
-#'   when `offline = FALSE`. Columns mirror NYC OpenData resource
-#'   `bqiq-cu78`.
+#' @return A \code{data.frame}.
 #' @examples
 #' df <- morie_datasets_nyc_nypd_hate_crimes(offline = TRUE)
 #' head(df[, c("complaint_year_number", "bias_motive_description",
@@ -452,11 +432,7 @@ morie_datasets_nyc_nypd_hate_crimes <- function(year = NULL,
 
 #' NYPD Use of Force Incidents
 #' @inheritParams morie_datasets_nyc_nypd_by_key
-#' @return A `data.frame` of NYPD Use-of-Force incident records,
-#'   either the bundled `nypd_uof_incidents_sample.csv` fixture
-#'   when `offline = TRUE` or the live Socrata pull (SODA2 / SODA3)
-#'   when `offline = FALSE`. Columns mirror NYC OpenData resource
-#'   `f4tj-796d`.
+#' @return A \code{data.frame}.
 #' @examples
 #' df <- morie_datasets_nyc_nypd_uof_incidents(offline = TRUE)
 #' head(df[, c("tri_incident_number", "forcetype", "basisforencounter")])
@@ -481,12 +457,7 @@ morie_datasets_nyc_nypd_uof_incidents <- function(year = NULL,
 
 #' NYPD Use of Force: Subjects
 #' @inheritParams morie_datasets_nyc_nypd_by_key
-#' @return A `data.frame` of NYPD Use-of-Force subject-level
-#'   records (one row per civilian subject), either the bundled
-#'   `nypd_uof_subjects_sample.csv` fixture when `offline = TRUE`
-#'   or the live Socrata pull (SODA2 / SODA3) when
-#'   `offline = FALSE`. Columns mirror NYC OpenData resource
-#'   `dufe-vxb7`.
+#' @return A \code{data.frame}.
 #' @examples
 #' df <- morie_datasets_nyc_nypd_uof_subjects(offline = TRUE)
 #' head(df[, c("tri_incident_number", "subject_race", "subject_injury_level")])
@@ -511,11 +482,7 @@ morie_datasets_nyc_nypd_uof_subjects <- function(year = NULL,
 
 #' NYPD Vehicle Stop Reports
 #' @inheritParams morie_datasets_nyc_nypd_by_key
-#' @return A `data.frame` of NYPD vehicle-stop report records,
-#'   either the bundled `nypd_vehicle_stops_sample.csv` fixture
-#'   when `offline = TRUE` or the live Socrata pull (SODA2 / SODA3)
-#'   when `offline = FALSE`. Columns mirror NYC OpenData resource
-#'   `hn9i-dwpr`.
+#' @return A \code{data.frame}.
 #' @examples
 #' df <- morie_datasets_nyc_nypd_vehicle_stops(offline = TRUE)
 #' head(df[, c("evnt_key", "occur_dt", "arrest_made_flg", "race_desc")])
@@ -558,7 +525,7 @@ morie_datasets_nyc_nypd_vehicle_stops <- function(year = NULL,
 #' @param mode One of `"soda2"` (default JSON resource endpoint) or
 #'   `"soda3"` (SoQL `query` endpoint). 3AAA dual-mode dispatch.
 #' @return A `data.frame`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_nyc_police_precincts(offline = TRUE)
 #' head(df)
 #' @export
@@ -574,7 +541,7 @@ morie_datasets_nyc_police_precincts <- function(offline = TRUE,
   mode <- match.arg(mode)
   if (isTRUE(offline)) {
     path <- system.file("extdata", "nyc_police_precincts.csv",
-                        package = "morie")
+                        package = "rmorie")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "nyc_police_precincts.csv", package = "rmoriedata")
     }
@@ -628,7 +595,7 @@ morie_datasets_nyc_police_precincts <- function(offline = TRUE,
 #'
 #' @inheritParams morie_datasets_nyc_police_precincts
 #' @return A `data.frame`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_nyc_boroughs(offline = TRUE)
 #' df[, c("borocode", "boroname")]
 #' @export
@@ -644,7 +611,7 @@ morie_datasets_nyc_boroughs <- function(offline = TRUE,
   mode <- match.arg(mode)
   if (isTRUE(offline)) {
     path <- system.file("extdata", "nyc_borough_boundaries.csv",
-                        package = "morie")
+                        package = "rmorie")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "nyc_borough_boundaries.csv", package = "rmoriedata")
     }
@@ -737,8 +704,10 @@ morie_datasets_nyc_nypd_boro_crosswalk <- function() {
 # NYC multi-boundary loaders (3CCC2)
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Morie Nyc Boundary Fixture
+#' @noRd
 .morie_nyc_boundary_fixture <- function(fname, expected_rows = NULL) {
-  path <- system.file("extdata", fname, package = "morie")
+  path <- system.file("extdata", fname, package = "rmorie")
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", fname, package = "rmoriedata")
   }
@@ -757,10 +726,10 @@ morie_datasets_nyc_nypd_boro_crosswalk <- function() {
 
 #' NYC public school district boundaries (NYS K-12)
 #'
-#' Phase 3CCC2. Bundled snapshot of NYC OpenData
+#' Phase 3CCC2. Included snapshot of NYC OpenData
 #' `8ugf-3d8u` (33 districts).
 #'
-#' @param offline If `TRUE` (default), reads the bundled CSV; if
+#' @param offline If `TRUE` (default), reads the included CSV; if
 #'   `FALSE`, fetches via SODA2.
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `schooldist`, `shape_leng`, `shape_area`.
@@ -784,10 +753,10 @@ morie_datasets_nyc_school_districts <- function(offline = TRUE,
 
 #' NYC City Council district boundaries
 #'
-#' Phase 3CCC2. Bundled snapshot of NYC OpenData
+#' Phase 3CCC2. Included snapshot of NYC OpenData
 #' `872g-cjhh` (51 districts).
 #'
-#' @param offline If `TRUE` (default), reads the bundled CSV.
+#' @param offline If `TRUE` (default), reads the included CSV.
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `coundist`, `shape_leng`, `shape_area`.
 #' @examples
@@ -810,13 +779,13 @@ morie_datasets_nyc_council_districts <- function(offline = TRUE,
 
 #' NYC community district boundaries
 #'
-#' Phase 3CCC2. Bundled snapshot of NYC OpenData
+#' Phase 3CCC2. Included snapshot of NYC OpenData
 #' `5crt-au7u` (71 districts).
 #'
-#' @param offline If `TRUE` (default), reads the bundled CSV.
+#' @param offline If `TRUE` (default), reads the included CSV.
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `boro_cd`, `shape_leng`, `shape_area`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_nyc_community_districts(offline = TRUE)
 #' head(df)
 #' @export
@@ -836,16 +805,16 @@ morie_datasets_nyc_community_districts <- function(offline = TRUE,
 
 #' NYC Neighborhood Tabulation Areas (2020)
 #'
-#' Phase 3CCC2. Bundled snapshot of NYC OpenData
+#' Phase 3CCC2. Included snapshot of NYC OpenData
 #' `9nt8-h7nd` (262 NTAs from the 2020 census revision).
 #' Carries boro + county FIPS + parent CDTA so it can be aggregated
 #' upward without spatial intersection.
 #'
-#' @param offline If `TRUE` (default), reads the bundled CSV.
+#' @param offline If `TRUE` (default), reads the included CSV.
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with 11 cols including `nta2020`, `ntaname`,
 #'   `borocode`, `boroname`, `countyfips`, `cdta2020`, `cdtaname`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_nyc_ntas_2020(offline = TRUE)
 #' head(df[, c("nta2020", "ntaname", "boroname")])
 #' @export
@@ -868,8 +837,10 @@ morie_datasets_nyc_ntas_2020 <- function(offline = TRUE,
   df
 }
 
+#' Internal helper: Morie Nyc Zcta Fixture
+#' @noRd
 .morie_nyc_zcta_fixture <- function(fname, expected_rows = 221L) {
-  path <- system.file("extdata", fname, package = "morie")
+  path <- system.file("extdata", fname, package = "rmorie")
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", fname, package = "rmoriedata")
   }
@@ -889,17 +860,17 @@ morie_datasets_nyc_ntas_2020 <- function(offline = TRUE,
 
 #' NYC ZIP Code Tabulation Areas (ZCTAs)
 #'
-#' Phase 3CCC2. Bundled snapshot of NYC OpenData
+#' Phase 3CCC2. Included snapshot of NYC OpenData
 #' `35j5-n34v` (221 ZCTAs intersecting NYC). ZCTAs are the Census
 #' Bureau's geographic approximation of USPS ZIP code service areas
 #' -- pair with NYPD address-bearing data via ZIP code lookups for
 #' a coarser-than-precinct, finer-than-borough geography.
 #'
-#' @param offline If `TRUE` (default), reads the bundled CSV.
+#' @param offline If `TRUE` (default), reads the included CSV.
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `zcta5`, `arealand`, `areawater`,
 #'   `centlat`, `centlon`, `intptlat`, `intptlon`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_nyc_zctas(offline = TRUE)
 #' head(df[, c("zcta5", "centlat", "centlon")])
 #' @export
@@ -927,11 +898,11 @@ morie_datasets_nyc_zctas <- function(offline = TRUE,
 #' row-key joinable to NYPD CJ data -- the CJ rows carry lat/long
 #' (or just precinct/borough), not a district ID. Use these loaders
 #' standalone for geographic context, or pair with a spatial join
-#' via the `sf` package on `the_geom` (not bundled to keep morie
+#' via the `sf` package on `the_geom` (not included to keep morie
 #' lightweight).
 #'
 #' @return A `data.frame` with one row per boundary fixture.
-#' @examples
+#' @examplesIf nzchar(system.file("extdata", "nyc_boundaries_catalog.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' morie_datasets_nyc_boundaries_catalog()
 #' @export
 morie_datasets_nyc_boundaries_catalog <- function() {
@@ -970,7 +941,7 @@ morie_datasets_nyc_boundaries_catalog <- function() {
 #' NYC OpenData does NOT publish a standalone NYPD-offense-code
 #' table; the canonical mapping is implicit in the
 #' (`ky_cd`, `ofns_desc`, `pd_cd`, `pd_desc`, `law_cat_cd`) tuples
-#' carried by every Arrests / Complaints record. This bundled
+#' carried by every Arrests / Complaints record. This included
 #' fixture was derived by running a `$group` query on the NYPD
 #' Arrests YTD feed (`uip8-fykc`) at fixture-creation time, giving
 #' the 246 distinct offense tuples currently in active use.
@@ -1005,13 +976,13 @@ morie_datasets_nyc_boundaries_catalog <- function() {
 #'
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with 246 rows x 5 cols.
-#' @examples
+#' @examplesIf nzchar(system.file("extdata", "nyc_nypd_offense_codes.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' codes <- morie_datasets_nyc_nypd_offense_codes()
 #' subset(codes, ky_cd == "104")  # all RAPE subcategories
 #' @export
 morie_datasets_nyc_nypd_offense_codes <- function(max_features = NULL) {
   path <- system.file("extdata", "nyc_nypd_offense_codes.csv",
-                      package = "morie")
+                      package = "rmorie")
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", "nyc_nypd_offense_codes.csv", package = "rmoriedata")
   }
@@ -1043,13 +1014,13 @@ morie_datasets_nyc_nypd_offense_codes <- function(max_features = NULL) {
 #' arrest data.
 #'
 #' @return A `data.frame` with columns `book`, `name`, `jurisdiction`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' books <- morie_datasets_nyc_nypd_law_books()
 #' subset(books, book == "PL")
 #' @export
 morie_datasets_nyc_nypd_law_books <- function() {
   path <- system.file("extdata", "nyc_nypd_law_books.csv",
-                      package = "morie")
+                      package = "rmorie")
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", "nyc_nypd_law_books.csv", package = "rmoriedata")
   }
@@ -1080,7 +1051,7 @@ morie_datasets_nyc_nypd_law_books <- function() {
 #' @param law_code Character vector of NYPD `law_code` strings.
 #' @return A `data.frame` with `book`, `section` columns aligned to
 #'   `law_code`. Length-preserving.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' morie_parse_nypd_law_code(c("PL 1601005", "AC 0019190", "ABC0064A00"))
 #' @export
 morie_parse_nypd_law_code <- function(law_code) {
@@ -1116,7 +1087,7 @@ morie_parse_nypd_law_code <- function(law_code) {
 #' Phase 3AAA. Pulls a slice of any
 #' [morie_datasets_nyc_nypd_by_key()]-resolvable dataset and
 #' left-joins its borough + precinct foreign keys against the
-#' bundled resolvers ([morie_datasets_nyc_boroughs()] +
+#' included resolvers ([morie_datasets_nyc_boroughs()] +
 #' [morie_datasets_nyc_police_precincts()]).
 #'
 #' Auto-detects the borough + precinct columns per dataset:
@@ -1258,7 +1229,7 @@ morie_datasets_nyc_nypd_resolved <- function(
 
   # Law code parse + book-name join (3CCC1). Splits each row's
   # `law_code` into `law_book` + `law_section`, then left-joins
-  # against the bundled statute book dictionary for `law_book_name`
+  # against the included statute book dictionary for `law_book_name`
   # + `law_jurisdiction`. Silently no-ops if law_code is absent.
   if ("law_code" %in% resolvers && "law_code" %in% names(out)) {
     parsed <- morie_parse_nypd_law_code(out$law_code)

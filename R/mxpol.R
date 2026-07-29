@@ -13,7 +13,7 @@
 #' @references Goodfellow et al. (2016), Deep Learning, Ch 9.3.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "morie")
+#' #   vignette(package = "rmorie")
 #' @export
 morie_mxpol_maxpool_forward <- function(x, kernel_size = 2L, stride = NULL) {
   x <- as.matrix(x)

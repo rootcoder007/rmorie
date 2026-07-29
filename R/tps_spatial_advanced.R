@@ -36,6 +36,8 @@ NULL
 # Internal helpers
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Tps Adv Result
+#' @noRd
 .tps_adv_result <- function(title, call,
                              summary_lines = list(),
                              warnings = character(0),
@@ -55,6 +57,8 @@ NULL
 }
 
 
+#' Internal helper: Tps Coords
+#' @noRd
 .tps_coords <- function(df, lat_col, lon_col) {
   if (!all(c(lat_col, lon_col) %in% names(df))) {
     return(matrix(numeric(0), 0L, 2L))
@@ -66,6 +70,8 @@ NULL
 }
 
 
+#' Internal helper: Tps Haversine Km
+#' @noRd
 .tps_haversine_km <- function(lat1, lon1, lat2, lon2) {
   Rk <- 6371
   rad <- pi / 180
@@ -76,6 +82,8 @@ NULL
 }
 
 
+#' Internal helper: Tps Knn Idx
+#' @noRd
 .tps_knn_idx <- function(coords, k) {
   n <- nrow(coords)
   k <- min(as.integer(k), n - 1L)
@@ -509,6 +517,8 @@ morie_tps_dbscan_clusters <- function(df,
 # 4. Polygon-based Moran's I
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Tps Polygon Centroids
+#' @noRd
 .tps_polygon_centroids <- function(polygons) {
   # `polygons` is an sf object with a geometry column. Use sf if available
   if (requireNamespace("sf", quietly = TRUE) && inherits(polygons, "sf")) {
@@ -972,10 +982,18 @@ morie_tps_moran_sweep_heatmap <- function(polygons,
 # Print method
 # ---------------------------------------------------------------------------
 
-#' Print method for advanced TPS spatial-analysis results
-#' @param x A \code{morie_tps_spatial_advanced_result}.
-#' @param ... Unused.
-#' @return Invisibly returns \code{x} unchanged.
+#' @return \code{x}, invisibly.
+#' @examples
+#' \donttest{
+#' if (requireNamespace("dbscan", quietly = TRUE)) {
+#'   set.seed(2026)
+#'   df <- data.frame(
+#'     LAT_WGS84 = c(rnorm(60, 43.65, 0.005), rnorm(60, 43.70, 0.005)),
+#'     LONG_WGS84 = c(rnorm(60, -79.40, 0.005), rnorm(60, -79.38, 0.005))
+#'   )
+#' obj <- morie_tps_dbscan_clusters(df, eps_km = 0.5, min_samples = 5L)
+#' print(obj)
+#' }
 #' @export
 print.morie_tps_spatial_advanced_result <- function(x, ...) {
   cat(x$title, "\

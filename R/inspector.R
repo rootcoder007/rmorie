@@ -44,7 +44,7 @@ morie_inspect_output <- function(path) {
         result$n_columns <- ncol(df)
         utils::head(df)
       } else if (ext == "rds") {
-        obj <- readRDS(path)
+        obj <- .morie_safe_readRDS(path, "inspecting an .rds output")
         result$class <- class(obj)
         if (is.data.frame(obj)) utils::head(obj) else utils::head(names(obj))
       } else {

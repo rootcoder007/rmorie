@@ -4,7 +4,7 @@
 # factory for the 11 open-data crime layers. Mirrors the canonical
 # TPS PSDP layer registry and wraps each layer with:
 #
-#   * offline = TRUE  -- read a small bundled synthetic fixture from
+#   * offline = TRUE  -- read a small included synthetic fixture from
 #                         inst/extdata/tps_psdp_<key>_sample.csv
 #   * offline = FALSE -- hit the registered ArcGIS FeatureServer layer
 #                         via .morie_tps_psdp_feature_query() (mockable)
@@ -27,7 +27,7 @@
 #   Cluster F: ShootingAndFirearmDischarges 22-col (OCC_TIME_RANGE +
 #     DEATH + INJURIES + EVENT_TYPE).
 #
-# All eleven carry BOTH HOOD_158 and HOOD_140 columns so the bundled
+# All eleven carry BOTH HOOD_158 and HOOD_140 columns so the included
 # 158<->140 crosswalk + the cake-cutting helpers (see
 # R/toronto_neighbourhoods.R) work end-to-end on any TPS PSDP layer.
 
@@ -43,7 +43,7 @@
 #   arcgis_url - direct FeatureServer layer URL (the pre-3TT+ live
 #                  path; still honoured when the caller passes
 #                  layer_url = ... as an override).
-#   fixture    - bundled offline sample CSV.
+#   fixture    - included offline sample CSV.
 #   label      - human-readable label for the discovery table.
 #   hub_id     - 32-char hex GUID matching the canonical TPS Hub
 #                  catalog entry; the new 3TT+ default live path
@@ -125,6 +125,8 @@
 #' @return A `data.frame` with columns `layer_key`, `label`,
 #'   `arcgis_url`, `fixture`, `hub_id` (3TT+ canonical id matching
 #'   the TPS Hub catalog).
+#' @examples
+#' head(morie_tps_psdp_layers())
 #' @export
 morie_tps_psdp_layers <- function() {
   rows <- lapply(names(.MORIE_TPS_PSDP_REGISTRY), function(k) {
@@ -146,6 +148,8 @@ morie_tps_psdp_layers <- function() {
 # escape hatch for callers who want a non-canonical FeatureServer URL).
 # ---------------------------------------------------------------------------
 
+#' Internal helper: Morie Tps Psdp Dispatch
+#' @noRd
 .morie_tps_psdp_dispatch <- function(layer_key, year, max_features,
                                       offline, layer_url) {
   if (!(layer_key %in% names(.MORIE_TPS_PSDP_REGISTRY))) {
@@ -157,7 +161,7 @@ morie_tps_psdp_layers <- function() {
   }
   entry <- .MORIE_TPS_PSDP_REGISTRY[[layer_key]]
   if (isTRUE(offline)) {
-    path <- system.file("extdata", entry$fixture, package = "morie")
+    path <- system.file("extdata", entry$fixture, package = "rmorie")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", entry$fixture, package = "rmoriedata")
     }
@@ -204,7 +208,7 @@ morie_tps_psdp_layers <- function() {
     max_features = max_features,
     layer_idx = 0L,
     offline = TRUE)  # offline=TRUE here means "resolve the
-                      # FeatureServer URL via the bundled catalog
+                      # FeatureServer URL via the included catalog
                       # (no network for the resolve step)"; the
                       # data query itself always hits the network.
 }
@@ -215,12 +219,7 @@ morie_tps_psdp_layers <- function() {
 
 #' TPS PSDP -- Assault
 #' @inheritParams morie_datasets_tps_mha_apprehensions
-#' @return A `data.frame` of TPS Public Safety Data Portal Assault
-#'   records, either the bundled `tps_psdp_assault_sample.csv`
-#'   fixture when `offline = TRUE` or a live TPS Hub /
-#'   FeatureServer query when `offline = FALSE`. Columns mirror the
-#'   upstream 31-column Cluster-A crime schema with HOOD_158 +
-#'   HOOD_140 attached.
+#' @return A \code{data.frame}.
 #' @examples
 #' df <- morie_datasets_tps_assault(offline = TRUE)
 #' head(df)
@@ -235,12 +234,12 @@ morie_datasets_tps_assault <- function(year = NULL,
 
 #' TPS PSDP -- Auto Theft
 #' @inheritParams morie_datasets_tps_mha_apprehensions
-#' @return A `data.frame` of TPS Public Safety Data Portal Auto
-#'   Theft records, either the bundled
-#'   `tps_psdp_autotheft_sample.csv` fixture when `offline = TRUE`
-#'   or a live TPS Hub / FeatureServer query when
-#'   `offline = FALSE`. Columns mirror the upstream 31-column
-#'   Cluster-A crime schema with HOOD_158 + HOOD_140 attached.
+#' @return A \code{data.frame}.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_autotheft(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_autotheft <- function(year = NULL,
                                            max_features = NULL,
@@ -252,13 +251,7 @@ morie_datasets_tps_autotheft <- function(year = NULL,
 
 #' TPS PSDP -- Bicycle Theft
 #' @inheritParams morie_datasets_tps_mha_apprehensions
-#' @return A `data.frame` of TPS Public Safety Data Portal Bicycle
-#'   Theft records, either the bundled
-#'   `tps_psdp_bicycletheft_sample.csv` fixture when
-#'   `offline = TRUE` or a live TPS Hub / FeatureServer query when
-#'   `offline = FALSE`. Columns mirror the upstream 35-column
-#'   Cluster-B schema (PRIMARY_OFFENCE + BIKE_*) with HOOD_158 +
-#'   HOOD_140 attached.
+#' @return A \code{data.frame}.
 #' @examples
 #' df <- morie_datasets_tps_bicycletheft(offline = TRUE)
 #' head(df[, c("PRIMARY_OFFENCE", "BIKE_MAKE", "BIKE_TYPE", "STATUS")])
@@ -273,12 +266,12 @@ morie_datasets_tps_bicycletheft <- function(year = NULL,
 
 #' TPS PSDP -- Break and Enter
 #' @inheritParams morie_datasets_tps_mha_apprehensions
-#' @return A `data.frame` of TPS Public Safety Data Portal Break
-#'   and Enter records, either the bundled
-#'   `tps_psdp_breakandenter_sample.csv` fixture when
-#'   `offline = TRUE` or a live TPS Hub / FeatureServer query when
-#'   `offline = FALSE`. Columns mirror the upstream 31-column
-#'   Cluster-A crime schema with HOOD_158 + HOOD_140 attached.
+#' @return A \code{data.frame}.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_breakandenter(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_breakandenter <- function(year = NULL,
                                                max_features = NULL,
@@ -290,13 +283,7 @@ morie_datasets_tps_breakandenter <- function(year = NULL,
 
 #' TPS PSDP -- Hate Crimes
 #' @inheritParams morie_datasets_tps_mha_apprehensions
-#' @return A `data.frame` of TPS Public Safety Data Portal Hate
-#'   Crime records, either the bundled
-#'   `tps_psdp_hatecrimes_sample.csv` fixture when
-#'   `offline = TRUE` or a live TPS Hub / FeatureServer query when
-#'   `offline = FALSE`. Columns mirror the upstream 25-column
-#'   Cluster-C bias-attribute schema with HOOD_158 + HOOD_140
-#'   attached.
+#' @return A \code{data.frame}.
 #' @examples
 #' df <- morie_datasets_tps_hatecrimes(offline = TRUE)
 #' head(df[, c("OCCURRENCE_YEAR", "PRIMARY_OFFENCE", "RACE_BIAS",
@@ -312,12 +299,7 @@ morie_datasets_tps_hatecrimes <- function(year = NULL,
 
 #' TPS PSDP -- Homicides
 #' @inheritParams morie_datasets_tps_mha_apprehensions
-#' @return A `data.frame` of TPS Public Safety Data Portal Homicide
-#'   records, either the bundled `tps_psdp_homicides_sample.csv`
-#'   fixture when `offline = TRUE` or a live TPS Hub /
-#'   FeatureServer query when `offline = FALSE`. Columns mirror the
-#'   upstream 18-column Cluster-D schema (HOMICIDE_TYPE + minimal
-#'   date triple) with HOOD_158 + HOOD_140 attached.
+#' @return A \code{data.frame}.
 #' @examples
 #' df <- morie_datasets_tps_homicides(offline = TRUE)
 #' table(df$HOMICIDE_TYPE)
@@ -332,13 +314,7 @@ morie_datasets_tps_homicides <- function(year = NULL,
 
 #' TPS PSDP -- Intimate Partner and Family Violence
 #' @inheritParams morie_datasets_tps_mha_apprehensions
-#' @return A `data.frame` of TPS Public Safety Data Portal Intimate
-#'   Partner and Family Violence records, either the bundled
-#'   `tps_psdp_intimate_partner_family_violence_sample.csv` fixture
-#'   when `offline = TRUE` or a live TPS Hub / FeatureServer query
-#'   when `offline = FALSE`. Columns mirror the upstream 15-column
-#'   Cluster-E schema (INDEX + HISTORICAL + FAMILY_VIOLENCE_FLAG +
-#'   RELATION + COUNT) with HOOD_158 + HOOD_140 attached.
+#' @return A \code{data.frame}.
 #' @examples
 #' df <- morie_datasets_tps_intimate_partner_family_violence(offline = TRUE)
 #' head(df[, c("INDEX", "FAMILY_VIOLENCE_FLAG",
@@ -353,12 +329,7 @@ morie_datasets_tps_intimate_partner_family_violence <- function(
 
 #' TPS PSDP -- Robbery
 #' @inheritParams morie_datasets_tps_mha_apprehensions
-#' @return A `data.frame` of TPS Public Safety Data Portal Robbery
-#'   records, either the bundled `tps_psdp_robbery_sample.csv`
-#'   fixture when `offline = TRUE` or a live TPS Hub /
-#'   FeatureServer query when `offline = FALSE`. Columns mirror the
-#'   upstream 31-column Cluster-A crime schema with HOOD_158 +
-#'   HOOD_140 attached.
+#' @return A \code{data.frame}.
 #' @examples
 #' df <- morie_datasets_tps_robbery(offline = TRUE)
 #' head(df)
@@ -373,13 +344,7 @@ morie_datasets_tps_robbery <- function(year = NULL,
 
 #' TPS PSDP -- Shooting and Firearm Discharges
 #' @inheritParams morie_datasets_tps_mha_apprehensions
-#' @return A `data.frame` of TPS Public Safety Data Portal
-#'   Shooting and Firearm Discharges records, either the bundled
-#'   `tps_psdp_shooting_firearm_discharges_sample.csv` fixture when
-#'   `offline = TRUE` or a live TPS Hub / FeatureServer query when
-#'   `offline = FALSE`. Columns mirror the upstream 22-column
-#'   Cluster-F schema (OCC_TIME_RANGE + DEATH + INJURIES +
-#'   EVENT_TYPE) with HOOD_158 + HOOD_140 attached.
+#' @return A \code{data.frame}.
 #' @examples
 #' df <- morie_datasets_tps_shooting_firearm_discharges(offline = TRUE)
 #' head(df[, c("EVENT_TYPE", "DEATH", "INJURIES", "OCC_TIME_RANGE")])
@@ -393,12 +358,12 @@ morie_datasets_tps_shooting_firearm_discharges <- function(
 
 #' TPS PSDP -- Theft From Motor Vehicle
 #' @inheritParams morie_datasets_tps_mha_apprehensions
-#' @return A `data.frame` of TPS Public Safety Data Portal Theft
-#'   From Motor Vehicle records, either the bundled
-#'   `tps_psdp_theft_from_motor_vehicle_sample.csv` fixture when
-#'   `offline = TRUE` or a live TPS Hub / FeatureServer query when
-#'   `offline = FALSE`. Columns mirror the upstream 31-column
-#'   Cluster-A crime schema with HOOD_158 + HOOD_140 attached.
+#' @return A \code{data.frame}.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_theft_from_motor_vehicle(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_theft_from_motor_vehicle <- function(
   year = NULL, max_features = NULL,
@@ -409,12 +374,12 @@ morie_datasets_tps_theft_from_motor_vehicle <- function(
 
 #' TPS PSDP -- Theft Over
 #' @inheritParams morie_datasets_tps_mha_apprehensions
-#' @return A `data.frame` of TPS Public Safety Data Portal Theft
-#'   Over records, either the bundled `tps_psdp_theft_over_sample.csv`
-#'   fixture when `offline = TRUE` or a live TPS Hub /
-#'   FeatureServer query when `offline = FALSE`. Columns mirror the
-#'   upstream 31-column Cluster-A crime schema with HOOD_158 +
-#'   HOOD_140 attached.
+#' @return A \code{data.frame}.
+#' @examples
+#' \donttest{
+#' df <- try(morie_datasets_tps_theft_over(max_features = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_tps_theft_over <- function(year = NULL,
                                             max_features = NULL,
@@ -430,17 +395,17 @@ morie_datasets_tps_theft_over <- function(year = NULL,
 
 #' Toronto Police Service police division boundaries
 #'
-#' Phase 3CCC3. Bundled snapshot of the TPS Hub
+#' Phase 3CCC3. Included snapshot of the TPS Hub
 #' `fda21b25213c4c07b08c5162cba5081f` (TPS_POLICE_DIVISIONS) -- the
 #' 16 post-amalgamation TPS divisions (D11, D12, D13, D14, D22, D23,
 #' D31, D32, D33, D41, D42, D43, D51, D52, D53, D55) with unit name,
 #' address, and area_sqkm.
 #'
-#' @param offline If `TRUE` (default), reads the bundled CSV.
+#' @param offline If `TRUE` (default), reads the included CSV.
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `DIV`, `UNIT_NAME`, `ADDRESS`,
 #'   `CITY`, `AREA_SQKM`, plus shape area / perimeter fields.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_tps_police_divisions(offline = TRUE)
 #' nrow(df)  # 16
 #' @export
@@ -448,7 +413,7 @@ morie_datasets_tps_police_divisions <- function(offline = TRUE,
                                                   max_features = NULL) {
   if (offline) {
     path <- system.file("extdata", "tps_police_divisions.csv",
-                        package = "morie")
+                        package = "rmorie")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "tps_police_divisions.csv", package = "rmoriedata")
     }
@@ -471,7 +436,7 @@ morie_datasets_tps_police_divisions <- function(offline = TRUE,
 #'
 #' Phase 3CCC3. Pulls a TPS PSDP crime dataset
 #' (`morie_datasets_tps_assault()` etc.) and left-joins its native
-#' DIVISION + HOOD_158 + HOOD_140 columns against the bundled
+#' DIVISION + HOOD_158 + HOOD_140 columns against the included
 #' boundary metadata loaders ([morie_datasets_tps_police_divisions()],
 #' [morie_to_neighbourhoods()] 158 + 140 + NIA flags) and the PSDP
 #' layer registry ([morie_tps_psdp_layers()]).
@@ -499,7 +464,7 @@ morie_datasets_tps_police_divisions <- function(offline = TRUE,
 #' @param year Optional year filter passed through to the underlying
 #'   loader.
 #' @param max_features Optional row cap.
-#' @param offline If `TRUE` (default), all data come from bundled
+#' @param offline If `TRUE` (default), all data come from included
 #'   fixtures.
 #' @param layer_url Backward-compat override for non-canonical
 #'   FeatureServer URL.

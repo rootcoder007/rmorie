@@ -517,6 +517,9 @@ morie_dsp_ruler_fd <- function(x, n_rulers = 10L) {
 #' @return List with `grid` and `density`.
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.6;
 #'   Parzen (1962); Silverman (1986).
+#' @examples
+#' set.seed(1)
+#' str(morie_dsp_parzen_pdf(rnorm(200)), max.level = 1)
 #' @export
 morie_dsp_parzen_pdf <- function(x, bandwidth = NULL, n_points = 100L) {
   if (is.null(bandwidth)) {
@@ -543,6 +546,11 @@ morie_dsp_parzen_pdf <- function(x, bandwidth = NULL, n_points = 100L) {
 #' @param fs Sampling frequency (Hz). Default 1.
 #' @return List with `envelope` and `phase`, both length(x).
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.8.
+#' @examples
+#' set.seed(1)
+#' t <- seq(0, 2, by = 1 / 200)
+#' x <- sin(2 * pi * 10 * t) * (1 + 0.5 * sin(2 * pi * 0.5 * t))
+#' str(morie_dsp_complex_demodulation(x, fc = 10, fs = 200), max.level = 1)
 #' @export
 morie_dsp_complex_demodulation <- function(x, fc, fs = 1) {
   t <- (seq_along(x) - 1L) / fs
@@ -566,6 +574,10 @@ morie_dsp_complex_demodulation <- function(x, fc, fs = 1) {
 #' @return Numeric vector, length(x).
 #' @references Rangayyan & Krishnan (2015), Ch. 5;
 #'   Oppenheim & Schafer (2010).
+#' @examples
+#' set.seed(1)
+#' x <- sin(2 * pi * 0.05 * (1:128)) + rnorm(128, 0, 0.1)
+#' str(morie_dsp_min_phase(x), max.level = 1)
 #' @export
 morie_dsp_min_phase <- function(x) {
   X <- stats::fft(x)
@@ -631,6 +643,8 @@ morie_dsp_baseline_correlation <- function(x, y) {
 # ---- internal helpers -------------------------------------------------
 
 # numpy.unwrap port: shift phase jumps > pi by 2*pi.
+#' Internal helper: Unwrap
+#' @noRd
 .unwrap <- function(p, tol = pi) {
   d <- diff(p)
   adj <- ifelse(d >  tol, d - 2 * pi,

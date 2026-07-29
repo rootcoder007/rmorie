@@ -161,13 +161,13 @@ morie_geostat_krige <- function(formula, data, newdata, model, ...) {
 #' Fit a copula by maximum-likelihood via \pkg{copula}
 #'
 #' Thin extender over \code{copula::fitCopula} that estimates
-#' copula parameters from pseudo-observations on \eqn{[0, 1]^d}.
+#' copula parameters from pseudo-observations on \eqn{\[0, 1\]^d}.
 #'
 #' @param copula A \code{copula} object specifying the parametric
 #'   family (e.g. \code{copula::normalCopula()},
 #'   \code{copula::claytonCopula()}).
 #' @param data Numeric matrix of pseudo-observations on
-#'   \eqn{[0, 1]^d}, with one column per margin (typically obtained
+#'   \eqn{\[0, 1\]^d}, with one column per margin (typically obtained
 #'   via \code{copula::pobs}).
 #' @param ... Further arguments forwarded to
 #'   \code{copula::fitCopula} (e.g. \code{method}, \code{start},
@@ -196,7 +196,7 @@ morie_copula_fit <- function(copula, data, ...) {
 #' Draw a random sample from a copula via \pkg{copula}
 #'
 #' Thin extender over \code{copula::rCopula} that generates
-#' \eqn{n} draws on \eqn{[0, 1]^d} from a specified copula.
+#' \eqn{n} draws on \eqn{\[0, 1\]^d} from a specified copula.
 #'
 #' @param n Integer; the number of multivariate observations to
 #'   draw.
@@ -207,7 +207,7 @@ morie_copula_fit <- function(copula, data, ...) {
 #'
 #' @return A list with \code{$method = "copula::rCopula"} and
 #'   \code{$raw} (a numeric matrix of dimension \eqn{n \times d}
-#'   with values in \eqn{[0, 1]}).
+#'   with values in \eqn{\[0, 1\]}).
 #' @export
 #' @examples
 #' \donttest{
@@ -374,7 +374,7 @@ morie_mvnorm_sample <- function(n, mean = rep(0, ncol(sigma)), sigma, ...) {
 #'
 #' Thin extender over \code{mvtnorm::pmvnorm} that evaluates the
 #' multivariate normal CDF over a hyper-rectangle
-#' \eqn{[lower, upper]}.
+#' \eqn{\[lower, upper\]}.
 #'
 #' @param lower Numeric vector of lower integration limits
 #'   (\code{-Inf} permitted).

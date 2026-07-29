@@ -42,6 +42,8 @@ NULL
 # ---------------------------------------------------------------------------
 # .siu_an_load -- accept a data frame, a path, or NULL (defaults).
 # ---------------------------------------------------------------------------
+#' Internal helper: Siu An Load
+#' @noRd
 .siu_an_load <- function(x = NULL) {
   if (is.data.frame(x)) {
     return(x)
@@ -65,6 +67,8 @@ NULL
 # .siu_an_rich -- thin RichResult constructor mirroring sprott_doob.R's
 # .morie_siu_rich; reproduced here to keep this file self-contained.
 # ---------------------------------------------------------------------------
+#' Internal helper: Siu An Rich
+#' @noRd
 .siu_an_rich <- function(title, summary_lines = list(),
                          tables = list(),
                          interpretation = "",
@@ -87,12 +91,16 @@ NULL
 # ---------------------------------------------------------------------------
 # Truthy / falsy counters tolerant of CSV-roundtripped booleans.
 # ---------------------------------------------------------------------------
+#' Internal helper: Siu An Truthy
+#' @noRd
 .siu_an_truthy <- function(v) {
   if (is.logical(v)) return(sum(v %in% TRUE, na.rm = TRUE))
   s <- tolower(trimws(as.character(v)))
   sum(s %in% c("true", "yes", "1", "t"), na.rm = TRUE)
 }
 
+#' Internal helper: Siu An Falsy
+#' @noRd
 .siu_an_falsy <- function(v) {
   if (is.logical(v)) return(sum(v %in% FALSE, na.rm = TRUE))
   s <- tolower(trimws(as.character(v)))
@@ -478,6 +486,8 @@ morie_siu_mental_health_race_indicators <- function(data = NULL) {
 # ---------------------------------------------------------------------------
 # .siu_an_interval -- day-delta summary helper used by decision_timing.
 # ---------------------------------------------------------------------------
+#' Internal helper: Siu An Interval
+#' @noRd
 .siu_an_interval <- function(label, a_iso, b_iso) {
   a <- suppressWarnings(as.Date(a_iso))
   b <- suppressWarnings(as.Date(b_iso))

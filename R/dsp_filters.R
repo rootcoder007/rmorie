@@ -100,7 +100,7 @@ morie_dsp_alpha_trimmed_mean <- function(x, window = 5L, alpha = 0.2) {
 
 #' @noRd
 .morie_dsp_cpp_ok <- function(name) {
-  exists(name, envir = asNamespace("morie"), inherits = FALSE)
+  exists(name, envir = asNamespace("rmorie"), inherits = FALSE)
 }
 
 #' Median filter
@@ -614,6 +614,8 @@ morie_dsp_even_odd <- function(x) {
 # ---- internal helpers -------------------------------------------------
 
 # "same"-mode convolution matching numpy.convolve(x, k, "same").
+#' Internal helper: Same Convolve
+#' @noRd
 .same_convolve <- function(x, k) {
   n <- length(x)
   m <- length(k)

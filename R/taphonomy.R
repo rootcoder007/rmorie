@@ -395,12 +395,12 @@ morie_taphonomy_preservation_delta <- function(data,
 #' (\code{preservation = 0}) chain against a treated one to quantify how much
 #' the burial practice changes the fate distribution.
 #'
-#' @param preservation Preservation factor in \code{[0, 1]}: 0 = ordinary
+#' @param preservation Preservation factor in \code{\[0, 1\]}: 0 = ordinary
 #'   decay, higher = stronger diversion toward mummification.
-#' @param decay_rate Base per-step progression probability in \code{(0, 1]}
+#' @param decay_rate Base per-step progression probability in \code{(0, 1\]}
 #'   (default 0.5).
 #' @param mummify_rate Base per-step diversion-to-mummified probability in
-#'   \code{[0, 1]} (default 0.5); scaled by \code{preservation}.
+#'   \code{\[0, 1\]} (default 0.5); scaled by \code{preservation}.
 #' @param states Character vector of transient decomposition stages (default
 #'   \code{c("fresh", "bloat", "active", "advanced")}).
 #' @return A named \code{list}: \code{P} (row-stochastic transition matrix,
@@ -536,7 +536,7 @@ morie_taphonomy_decay_simulate <- function(chain, start = chain$transient[1],
 #' baseline. A large positive delta means the burial practice -- not chance --
 #' drives the preserved outcome.
 #'
-#' @param preservation Preservation factor in \code{(0, 1]} for the treated
+#' @param preservation Preservation factor in \code{(0, 1\]} for the treated
 #'   chain.
 #' @param start Starting transient stage (default the first).
 #' @param ... Passed to \code{\link{morie_taphonomy_decay_chain}}

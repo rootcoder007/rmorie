@@ -15,7 +15,7 @@
 
 #' Toronto Open Data crime-adjacent CKAN catalog
 #'
-#' Phase 3EEE2. Bundled snapshot of 208 City-of-Toronto CKAN
+#' Phase 3EEE2. Included snapshot of 208 City-of-Toronto CKAN
 #' packages matched on crime-adjacent keywords (311, fire, police,
 #' ambulance, parking, traffic collision, by-law, emergency, crime,
 #' wellbeing). Each row identifies a package by its CKAN slug;
@@ -23,10 +23,10 @@
 #' [morie_datasets_toronto_open_ckan_resource()] or visit the
 #' open.toronto.ca dataset page.
 #'
-#' @param offline If `TRUE` (default), reads the bundled CSV.
+#' @param offline If `TRUE` (default), reads the included CSV.
 #' @return A `data.frame` with `package_name`, `title`,
 #'   `num_resources`, `metadata_modified`, `search_keyword`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' d <- morie_datasets_toronto_open_crime_adjacent_layers(offline = TRUE)
 #' head(d[, c("package_name", "title")])
 #' @export
@@ -34,7 +34,7 @@ morie_datasets_toronto_open_crime_adjacent_layers <- function(offline = TRUE) {
   if (isTRUE(offline)) {
     path <- system.file("extdata",
                          "toronto_opendata_crime_adjacent_catalog.csv",
-                         package = "morie")
+                         package = "rmorie")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "toronto_opendata_crime_adjacent_catalog.csv", package = "rmoriedata")
     }
@@ -68,14 +68,14 @@ morie_datasets_toronto_open_crime_adjacent_layers <- function(offline = TRUE) {
 
 #' Toronto Ambulance station locations
 #'
-#' Phase 3EEE2. Bundled snapshot of `ambulance-station-locations`
+#' Phase 3EEE2. Included snapshot of `ambulance-station-locations`
 #' (46 EMS stations across Toronto). Useful as a control overlay
 #' for crime + EMS dispatch analyses.
 #'
-#' @param offline If `TRUE` (default), reads bundled CSV.
+#' @param offline If `TRUE` (default), reads included CSV.
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with full station address + EMS metadata.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_toronto_ambulance_stations(offline = TRUE)
 #' head(df[, c("EMS_NAME", "EMS_ADDRESS")])
 #' @export
@@ -83,7 +83,7 @@ morie_datasets_toronto_ambulance_stations <- function(offline = TRUE,
                                                         max_features = NULL) {
   if (offline) {
     path <- system.file("extdata", "toronto_ambulance_stations.csv",
-                        package = "morie")
+                        package = "rmorie")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "toronto_ambulance_stations.csv", package = "rmoriedata")
     }
@@ -103,17 +103,17 @@ morie_datasets_toronto_ambulance_stations <- function(offline = TRUE,
 
 #' TPS Annual Statistical Report -- Miscellaneous data (aggregated)
 #'
-#' Phase 3EEE2. Bundled snapshot of
+#' Phase 3EEE2. Included snapshot of
 #' `police-annual-statistical-report-miscellaneous-data` -- 40 rows
 #' of year x section x category x subtype aggregates covering hate
 #' crime counts, IMPACT calls, and other Toronto Police aggregates
 #' that aren't in the per-incident ArcGIS Hub layers.
 #'
-#' @param offline If `TRUE` (default), reads bundled CSV.
+#' @param offline If `TRUE` (default), reads included CSV.
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `YEAR`, `SECTION`, `CATEGORY`,
 #'   `SUBTYPE`, `COUNT_`.
-#' @examples
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_toronto_asr_miscellaneous(offline = TRUE)
 #' head(df)
 #' @export
@@ -121,7 +121,7 @@ morie_datasets_toronto_asr_miscellaneous <- function(offline = TRUE,
                                                        max_features = NULL) {
   if (offline) {
     path <- system.file("extdata", "toronto_asr_miscellaneous.csv",
-                        package = "morie")
+                        package = "rmorie")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "toronto_asr_miscellaneous.csv", package = "rmoriedata")
     }
@@ -147,6 +147,13 @@ morie_datasets_toronto_asr_miscellaneous <- function(offline = TRUE,
 #' @param resource_id CKAN resource UUID (from `package_show`).
 #' @param limit Page size (max 32000 per CKAN; sane default 100).
 #' @return A `data.frame` of records.
+#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' \donttest{
+#' cat_df <- morie_datasets_toronto_opendata_bulk_layers()
+#' df <- try(morie_datasets_toronto_open_ckan_resource(cat_df$resource_id[1],
+#'                                                     limit = 5L))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
 #' @export
 morie_datasets_toronto_open_ckan_resource <- function(resource_id,
                                                         limit = 100L) {

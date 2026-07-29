@@ -56,7 +56,7 @@ morie_safe_recode <- function(x, mapping, keep = character()) {
                        unname(mapping[x]), x))
   attr(out, "morie_recode_audit") <- list(
     mapping = mapping, kept = keep,
-    checksum = .morie_sha256_hex_impl(
+    checksum = .rmorie_sha256_hex_impl(
       paste(names(mapping), mapping, sep = "=", collapse = ";")))
   out
 }
@@ -181,6 +181,13 @@ morie_audit_categories <- function(data, cols = NULL) {
   out
 }
 
+#' @examples
+#' \donttest{
+#' df <- data.frame(race = factor(c("1", "2", "2", "3")),
+#'                  city = c("Toronto", "toronto", "Ottawa", "Ottawa"))
+#' obj <- morie_audit_categories(df)
+#' print(obj)
+#' }
 #' @export
 print.morie_category_audit <- function(x, ...) {
   cat("Categorical audit:", nrow(x), "column(s)\n")
