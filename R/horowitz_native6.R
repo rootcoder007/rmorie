@@ -51,7 +51,7 @@
 #' dz dv} (6.60) and \eqn{F_n(u) = A_n(u)/B_n(u)} (6.66).
 #'
 #' The derivation is the point. Differentiating \eqn{G(y|z) =
-#' F[T(y) - z]} gives \eqn{T'(y) = -G_y(y|z)/G_z(y|z)}, so T is an
+#' F\[T(y) - z\]} gives \eqn{T'(y) = -G_y(y|z)/G_z(y|z)}, so T is an
 #' INTEGRAL of a ratio of kernel estimators. Each converges more
 #' slowly than \eqn{n^{-1/2}} and their ratio is not root-n
 #' consistent for anything -- but integrating over v and z averages
@@ -246,7 +246,7 @@ morie_transform_asymptotics <- function(x, y, bandwidth, n = NULL) {
 
 #' Chen's (2002) rank estimator of T
 #'
-#' \eqn{T_n(y) = \arg\max_{t}\ [n(n-1)]^{-1}\sum_i\sum_{j \ne i}
+#' \eqn{T_n(y) = \arg\max_{t}\ \[n(n-1)\]^{-1}\sum_i\sum_{j \ne i}
 #' (d_{iy} - d_{jy_0}) 1\{X_i'b_n - X_j'b_n \ge t\}} (6.67), with
 #' \eqn{d_{iy} = 1\{Y_i \ge y\}}.
 #'
@@ -424,7 +424,7 @@ morie_baseline_hazard <- function(t, x, event, beta_hat, bandwidth = NULL,
 
 #' Prediction from a fitted transformation model
 #'
-#' \eqn{P(Y \le y | X = x) = F[T(y) - x'\beta]}, and the
+#' \eqn{P(Y \le y | X = x) = F\[T(y) - x'\beta\]}, and the
 #' gamma-quantile predictor \eqn{y_{n\gamma}(x) = \inf\{y : T_n(y) >
 #' x'b_n + u_{n\gamma}\}} with
 #' \eqn{u_{n\gamma} = \inf\{u : F_n(u) \ge \gamma\}}.

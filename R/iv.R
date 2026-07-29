@@ -158,7 +158,7 @@ NULL
 
 #' Two-Stage Least Squares (2SLS)
 #'
-#' Estimates a linear IV model via 2SLS (rmorie native k-class engine).
+#' Estimates a linear IV model via 2SLS (morie native k-class engine).
 #'
 #' @param data Data frame.
 #' @param outcome Name of the outcome column.
@@ -179,7 +179,7 @@ NULL
 #' y <- 0.5 * d + 0.4 * u + rnorm(n, sd = 0.5)
 #' df <- data.frame(y, d, z)
 #' res <- morie_iv_tsls(df, "y", "d", "z")
-#' res$coefficients["d"]
+#' res$coefficients\["d"\]
 #' @export
 morie_iv_tsls <- function(data, outcome, endogenous, instruments,
                           exogenous = NULL, cluster = NULL,
@@ -188,7 +188,7 @@ morie_iv_tsls <- function(data, outcome, endogenous, instruments,
   fit <- .morie_iv_kclass_native(d$y, d$X, d$Z, kappa = 1,
                                  robust = robust)
   .morie_iv_result(fit$beta, fit$se, fit$n,
-                   method = "2sls (rmorie native)",
+                   method = "2sls (morie native)",
                    alpha = alpha, dof = fit$df,
                    details = list(residuals = fit$residuals,
                                   vcov = fit$vcov,
@@ -209,7 +209,7 @@ morie_iv_tsls <- function(data, outcome, endogenous, instruments,
 #' y <- 0.5 + 1.5 * d + u + rnorm(n)
 #' df <- data.frame(y, d, z)
 #' res <- morie_iv_liml(df, outcome = "y", endogenous = "d", instruments = "z")
-#' res$coefficients["d"]
+#' res$coefficients\["d"\]
 #' @export
 morie_iv_liml <- function(data, outcome, endogenous, instruments,
                           exogenous = NULL, robust = TRUE, alpha = 0.05) {
@@ -220,7 +220,7 @@ morie_iv_liml <- function(data, outcome, endogenous, instruments,
   fit <- .morie_iv_kclass_native(d$y, d$X, d$Z, kappa = kap,
                                  robust = robust)
   .morie_iv_result(fit$beta, fit$se, fit$n,
-                   method = "liml (rmorie native k-class)",
+                   method = "liml (morie native k-class)",
                    alpha = alpha, dof = fit$df,
                    details = list(kappa = kap,
                                   residuals = fit$residuals,
@@ -229,7 +229,7 @@ morie_iv_liml <- function(data, outcome, endogenous, instruments,
 
 #' Generalised Method of Moments (GMM) IV
 #'
-#' Two-step efficient GMM (rmorie native; HC0-weighted second step).
+#' Two-step efficient GMM (morie native; HC0-weighted second step).
 #' @inheritParams morie_iv_tsls
 #' @param weight_matrix One of \code{"optimal"} (default, two-step) or
 #'   \code{"identity"} (one-step / 2SLS-equivalent).
@@ -252,13 +252,13 @@ morie_iv_gmm <- function(data, outcome, endogenous, instruments,
     fit <- .morie_iv_kclass_native(d$y, d$X, d$Z, kappa = 1,
                                    robust = robust)
     return(.morie_iv_result(fit$beta, fit$se, fit$n,
-                            method = "gmm (identity = 2sls, rmorie native)",
+                            method = "gmm (identity = 2sls, morie native)",
                             alpha = alpha, dof = fit$df,
                             details = list(vcov = fit$vcov)))
   }
   fit <- .morie_iv_gmm2_native(d$y, d$X, d$Z)
   .morie_iv_result(fit$beta, fit$se, fit$n,
-                   method = "gmm (two-step efficient, rmorie native)",
+                   method = "gmm (two-step efficient, morie native)",
                    alpha = alpha, dof = NA,
                    details = list(vcov = fit$vcov, J = fit$J,
                                   J_p = fit$J_p))
@@ -284,7 +284,7 @@ morie_iv_cue_gmm <- function(data, outcome, endogenous, instruments,
   fit <- .morie_iv_cue_native(d$y, d$X, d$Z, max_iter = max_iter,
                               tol = tol)
   .morie_iv_result(fit$beta, fit$se, fit$n,
-                   method = "cue-gmm (rmorie native)",
+                   method = "cue-gmm (morie native)",
                    alpha = alpha, dof = NA,
                    details = list(vcov = fit$vcov, J = fit$J,
                                   converged = fit$converged))
@@ -309,7 +309,7 @@ morie_iv_cue_gmm <- function(data, outcome, endogenous, instruments,
 #' y <- 0.5 + 2 * d + rnorm(n)
 #' df <- data.frame(y, d, z)
 #' res <- morie_iv_wald(df, outcome = "y", treatment = "d", instrument = "z")
-#' res$coefficients["LATE"]
+#' res$coefficients\["LATE"\]
 #' @export
 morie_iv_wald <- function(data, outcome, treatment, instrument, alpha = 0.05) {
   y <- data[[outcome]]
@@ -392,7 +392,7 @@ morie_iv_first_stage_diagnostics <- function(data, endogenous, instruments,
 #' @param instruments Character vector of excluded-instrument names.
 #' @param exogenous Optional exogenous covariates.
 #' @param outcome Optional outcome column name. Default \code{NULL}
-#'   reuses \code{endogenous[1]}; the resulting F-statistic is
+#'   reuses \code{endogenous\[1\]}; the resulting F-statistic is
 #'   unaffected because Cragg-Donald only reads the first stage.
 #' @return Named list with \code{statistic}, \code{p_value},
 #'   \code{name}, \code{details}.
@@ -616,7 +616,7 @@ morie_iv_hansen_j <- function(data, outcome, endogenous, instruments,
   d <- .morie_iv_design(data, outcome, endogenous, instruments, exogenous)
   fit <- .morie_iv_gmm2_native(d$y, d$X, d$Z)
   list(statistic = fit$J, p_value = fit$J_p,
-       name = "Hansen J (rmorie native)", df = fit$J_df)
+       name = "Hansen J (morie native)", df = fit$J_df)
 }
 
 #' Hausman test: OLS vs 2SLS
@@ -689,7 +689,7 @@ morie_iv_durbin_wu_hausman <- function(data, outcome, endogenous, instruments,
 #' y <- 0.5 * d + 0.4 * u + rnorm(n, sd = 0.5)
 #' df <- data.frame(y, d, z1, z2)
 #' res <- morie_iv_jive(df, "y", "d", c("z1", "z2"))
-#' res$coefficients["d"]
+#' res$coefficients\["d"\]
 #' @export
 morie_iv_jive <- function(data, outcome, endogenous, instruments,
                           exogenous = NULL, alpha = 0.05) {
@@ -862,7 +862,7 @@ morie_iv_panel <- function(data, outcome, endogenous, instruments, unit,
   }
   res <- morie_iv_tsls(data, outcome, endogenous, instruments, exogenous,
                        alpha = alpha)
-  res$method <- "panel IV (rmorie native within + 2sls)"
+  res$method <- "panel IV (morie native within + 2sls)"
   res
 }
 

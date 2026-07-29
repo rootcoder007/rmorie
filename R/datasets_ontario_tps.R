@@ -36,7 +36,7 @@
 #        SQLite Geodatabase. We default to the ArcGIS REST
 #        FeatureServer JSON for the live-mode path.
 #
-# Each loader supports offline = TRUE (read a small included synthetic
+# Each loader supports offline = TRUE (read a small bundled synthetic
 # fixture from inst/extdata/) and offline = FALSE (hit the live
 # upstream via a mockable internal helper:
 #
@@ -55,8 +55,6 @@
 
 # Internal: GET the Ontario CKAN datastore_dump JSON endpoint for a
 # given resource_id; return a parsed data.frame. Mock this in tests.
-#' Internal helper: Morie Ontario Ckan Dump Csv
-#' @noRd
 .morie_ontario_ckan_dump_csv <- function(resource_id, limit = 200000L) {
   if (!requireNamespace("httr2", quietly = TRUE) ||
       !requireNamespace("jsonlite", quietly = TRUE)) {
@@ -84,15 +82,13 @@
 
 # Internal: GET a TPS PSDP ArcGIS FeatureServer layer; return a
 # data.frame of attributes. Mock this in tests.
-#' Internal helper: Morie Tps Psdp Feature Query
-#' @noRd
 .morie_tps_psdp_feature_query <- function(layer_url, where = "1=1",
                                             max_features = NULL,
                                             return_geometry = FALSE) {
   # Delegate to the existing TPS ingest helper so this stays a thin
   # wrapper that callers (and mocks) can target cleanly.
   if (exists(".morie_dataset_tps_fetch",
-             envir = asNamespace("rmorie"), inherits = FALSE)) {
+             envir = asNamespace("morie"), inherits = FALSE)) {
     return(.morie_dataset_tps_fetch(
       layer_url, where = where, max_features = max_features,
       return_geometry = return_geometry))
@@ -114,7 +110,7 @@
 #' Ontario Use-of-Force main records (one row per incident)
 #'
 #' Wraps the Ontario Police Use-of-Force Race-Based Data Strategy
-#' resource. Offline mode reads a small included synthetic fixture
+#' resource. Offline mode reads a small bundled synthetic fixture
 #' from `inst/extdata/arsau_uof_main_records_sample.csv` (5 rows in
 #' the canonical 23-column subset of the 65-column upstream schema,
 #' clearly stamped `SYNTHETIC-FIXTURE-XXX`). Live mode hits the
@@ -123,23 +119,23 @@
 #'
 #' @param year Reporting year (`"2023"` or `"2024"`). Honoured only
 #'   when `offline = FALSE`.
-#' @param offline If `TRUE` (default), read the included fixture. If
+#' @param offline If `TRUE` (default), read the bundled fixture. If
 #'   `FALSE`, hit the live CKAN endpoint via httr2.
 #' @param resource_id Optional CKAN resource id override.
 #' @return A `data.frame`.
 #' @references Ontario Open Data Catalogue, "Police Use of Force"
 #'   (\url{https://data.ontario.ca/dataset/police-use-of-force-race-based-data});
 #'   Open Government Licence -- Ontario.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
 #' df <- morie_datasets_arsau_uof_main_records(offline = TRUE)
-#' head(df[, c("IncidentYear", "PoliceService", "IncidentType")])
+#' head(df\[, c("IncidentYear", "PoliceService", "IncidentType")\])
 #' @export
 morie_datasets_arsau_uof_main_records <- function(year = "2024",
                                                     offline = TRUE,
                                                     resource_id = NULL) {
   if (isTRUE(offline)) {
     path <- system.file("extdata", "arsau_uof_main_records_sample.csv",
-                        package = "rmorie")
+                        package = "morie")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "arsau_uof_main_records_sample.csv", package = "rmoriedata")
     }
@@ -175,7 +171,7 @@ morie_datasets_arsau_uof_main_records <- function(year = "2024",
 #' Schema: `Year, UniqueIndividual_ID, Region_AtTimeOfDeath,
 #' HousingUnit_Type, MedicalCauseofDeath, MeansofDeath`.
 #'
-#' @param offline If `TRUE` (default), read the included synthetic
+#' @param offline If `TRUE` (default), read the bundled synthetic
 #'   fixture from `inst/extdata/otis_d01_deaths_in_custody_sample.csv`
 #'   (5 rows). If `FALSE`, hit the live CKAN datastore-dump JSON
 #'   endpoint for resource id `89e3b63f-5679-4fa4-b98a-fdd2dc486f29`.
@@ -232,7 +228,7 @@ morie_datasets_otis_d01_deaths_in_custody <- function(offline = TRUE,
 #'   `OCC_YEAR = <year>` WHERE clause when `offline = FALSE`).
 #' @param max_features Optional cap on returned rows
 #'   (`offline = FALSE` only).
-#' @param offline If `TRUE` (default), read the included synthetic
+#' @param offline If `TRUE` (default), read the bundled synthetic
 #'   fixture from `inst/extdata/tps_mha_apprehensions_sample.csv`
 #'   (5 rows in the canonical TPS PSDP 22-column schema). If
 #'   `FALSE`, hit the TPS PSDP ArcGIS FeatureServer.
@@ -241,7 +237,7 @@ morie_datasets_otis_d01_deaths_in_custody <- function(offline = TRUE,
 #' @references TPS Public Safety Data Portal, "Mental Health Act
 #'   Apprehensions Open Data"
 #'   (\url{https://data.tps.ca/datasets/333c4e1c96314741a83425045b6a7642_0/explore}).
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
 #' df <- morie_datasets_tps_mha_apprehensions(offline = TRUE)
 #' table(df$APPREHENSION_TYPE)
 #' @export
@@ -251,7 +247,7 @@ morie_datasets_tps_mha_apprehensions <- function(year = NULL,
                                                    layer_url = NULL) {
   if (isTRUE(offline)) {
     path <- system.file("extdata", "tps_mha_apprehensions_sample.csv",
-                        package = "rmorie")
+                        package = "morie")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "tps_mha_apprehensions_sample.csv", package = "rmoriedata")
     }
@@ -290,7 +286,7 @@ morie_datasets_tps_mha_apprehensions <- function(year = NULL,
     max_features = max_features,
     layer_idx = 0L,
     offline = TRUE)  # offline=TRUE only means "resolve URL from
-                      # the included catalog" -- the data query
+                      # the bundled catalog" -- the data query
                       # still hits the network.
 }
 
@@ -320,12 +316,10 @@ morie_datasets_tps_mha_apprehensions <- function(year = NULL,
     "2020-2022" = "2150ac23-4e55-474a-b61f-81baf6850851"))
 
 # Internal: shared offline+live dispatch for ARSAU UoF wrappers.
-#' Internal helper: Morie Arsau Uof Dispatch
-#' @noRd
 .morie_arsau_uof_dispatch <- function(kind, year, offline,
                                         resource_id, fixture_name) {
   if (isTRUE(offline)) {
-    path <- system.file("extdata", fixture_name, package = "rmorie")
+    path <- system.file("extdata", fixture_name, package = "morie")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", fixture_name, package = "rmoriedata")
     }
@@ -354,9 +348,9 @@ morie_datasets_tps_mha_apprehensions <- function(year = NULL,
 #' @param year Reporting year (`"2023"` or `"2024"`).
 #' @inheritParams morie_datasets_arsau_uof_main_records
 #' @return A `data.frame`.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
 #' df <- morie_datasets_arsau_uof_individual_records(offline = TRUE)
-#' df[, c("Indiv_Index", "Race", "AgeCategory", "Gender")]
+#' df\[, c("Indiv_Index", "Race", "AgeCategory", "Gender")\]
 #' @export
 morie_datasets_arsau_uof_individual_records <- function(year = "2024",
                                                           offline = TRUE,
@@ -406,11 +400,11 @@ morie_datasets_arsau_uof_weapon_records <- function(year = "2024",
 #' Ontario Use-of-Force aggregate summary (5-year 2020-2022, pre-RBDS
 #' rollup)
 #'
-#' @param offline If `TRUE` (default), read the included synthetic
+#' @param offline If `TRUE` (default), read the bundled synthetic
 #'   fixture. If `FALSE`, hit Ontario CKAN.
 #' @param resource_id Optional override.
 #' @return A `data.frame`.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
 #' df <- morie_datasets_arsau_aggregate_summary(offline = TRUE)
 #' head(df)
 #' @export
@@ -424,7 +418,7 @@ morie_datasets_arsau_aggregate_summary <- function(offline = TRUE,
 #' Ontario Use-of-Force detailed dataset (5-year 2020-2022, pre-RBDS)
 #' @inheritParams morie_datasets_arsau_aggregate_summary
 #' @return A `data.frame`.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
 #' df <- morie_datasets_arsau_detailed_dataset(offline = TRUE)
 #' dim(df)
 #' @export
@@ -492,7 +486,7 @@ morie_datasets_arsau_detailed_dataset <- function(offline = TRUE,
     family = "otis", year = "all"),
   # OTIS a01 + d02-d07 ship in the same dataset package but the CKAN
   # resource ids are not yet wired into this registry; offline mode
-  # works against included fixtures, live mode requires the user pass
+  # works against bundled fixtures, live mode requires the user pass
   # resource_id = ... explicitly. PRs welcome to fill these in.
   otis_a01_restrictive_confinement = list(
     resource_id = "5a0c5804-a055-4031-9743-73f556e43bb4",
@@ -655,7 +649,7 @@ morie_datasets_arsau_detailed_dataset <- function(offline = TRUE,
 #'   `resource_id`, `family`, `year`, `fixture`.
 #' @examples
 #' reg <- morie_datasets_ontario_ckan_layers()
-#' reg[, c("dataset_key", "family", "year")]
+#' reg\[, c("dataset_key", "family", "year")\]
 #' @export
 morie_datasets_ontario_ckan_layers <- function() {
   rows <- lapply(names(.MORIE_ONTARIO_CKAN_REGISTRY), function(k) {
@@ -677,7 +671,7 @@ morie_datasets_ontario_ckan_layers <- function() {
 # These seven OTIS datasets ship in the Ontario "Data on Inmates in
 # Ontario" CKAN package but the canonical resource_ids for d02-d07 +
 # a01 are not yet wired into the morie registry. Offline mode (default)
-# works against included synthetic fixtures; live mode (offline = FALSE)
+# works against bundled synthetic fixtures; live mode (offline = FALSE)
 # raises with a clear "lookup pending" message until the resource_id
 # is supplied via the registry or the resource_id= override.
 
@@ -685,14 +679,12 @@ morie_datasets_ontario_ckan_layers <- function() {
 # auto-resolved from .MORIE_ONTARIO_CKAN_REGISTRY[[registry_key]] when
 # the caller doesn't pass an explicit override; if the registry entry
 # is also missing or NA the function errors with a clear message.
-#' Internal helper: Morie Otis Lookup Pending Dispatch
-#' @noRd
 .morie_otis_lookup_pending_dispatch <- function(dataset_label, fixture,
                                                   offline, resource_id,
                                                   registry_key = NULL,
                                                   source = NULL) {
   # Derive `source` from the older `offline` arg for back-compat:
-  # offline = TRUE  -> source = "included" (existing behaviour: read the
+  # offline = TRUE  -> source = "bundled" (existing behaviour: read the
   #                    inst/extdata/*_sample.csv; error if missing)
   # offline = FALSE -> source = "live"    (existing behaviour: hit the
   #                    live Ontario CKAN endpoint; error on miss)
@@ -736,12 +728,12 @@ morie_datasets_ontario_ckan_layers <- function() {
 }
 
 #' OTIS a01 -- Restrictive Confinement (detailed per-individual)
-#' @param offline If `TRUE` (default), read the included synthetic
+#' @param offline If `TRUE` (default), read the bundled synthetic
 #'   fixture. If `FALSE`, hit Ontario CKAN (`resource_id` required).
 #' @param resource_id Optional CKAN resource id (required for live).
 #' @param source One of `NULL` (default, ships an empty 0-row frame
-#'   with the documented schema when no real CKAN row is included),
-#'   `"real"` (force the real CKAN sample included in `inst/extdata/`,
+#'   with the documented schema when no real CKAN row is bundled),
+#'   `"real"` (force the real CKAN sample bundled in `inst/extdata/`,
 #'   error if absent), or `"synth"` (return a deterministic
 #'   `set.seed()` synthetic for didactic examples).
 #' @return A `data.frame` with the canonical 10-col schema
@@ -752,8 +744,8 @@ morie_datasets_ontario_ckan_layers <- function() {
 #'   `Number_Of_Placements`).
 #' @examples
 #' df <- morie_datasets_otis_a01_restrictive_confinement(offline = TRUE)
-#' head(df[, c("EndFiscalYear", "Gender", "Age_Category",
-#'             "Number_Of_Placements")])
+#' head(df\[, c("EndFiscalYear", "Gender", "Age_Category",
+#'             "Number_Of_Placements")\])
 #' @export
 morie_datasets_otis_a01_restrictive_confinement <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -765,7 +757,10 @@ morie_datasets_otis_a01_restrictive_confinement <- function(
 
 #' OTIS d02 -- Deaths in custody by gender
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS d02 Deaths-in-Custody-by-gender
+#'   rows resolved through the shared OTIS dispatcher (bundled
+#'   sample, live Ontario CKAN, synthetic, or empty schema per
+#'   `source`). Columns mirror the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_d02_deaths_by_gender(offline = TRUE)
 #' head(df)
@@ -780,7 +775,10 @@ morie_datasets_otis_d02_deaths_by_gender <- function(offline = TRUE,
 
 #' OTIS d03 -- Deaths in custody by race
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS d03 Deaths-in-Custody-by-race
+#'   rows resolved through the shared OTIS dispatcher (bundled
+#'   sample, live Ontario CKAN, synthetic, or empty schema per
+#'   `source`). Columns mirror the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_d03_deaths_by_race(offline = TRUE)
 #' head(df)
@@ -795,7 +793,10 @@ morie_datasets_otis_d03_deaths_by_race <- function(offline = TRUE,
 
 #' OTIS d04 -- Deaths in custody by religion
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS d04 Deaths-in-Custody-by-religion
+#'   rows resolved through the shared OTIS dispatcher (bundled
+#'   sample, live Ontario CKAN, synthetic, or empty schema per
+#'   `source`). Columns mirror the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_d04_deaths_by_religion(offline = TRUE)
 #' head(df)
@@ -810,7 +811,10 @@ morie_datasets_otis_d04_deaths_by_religion <- function(offline = TRUE,
 
 #' OTIS d05 -- Deaths in custody by age category
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS d05 Deaths-in-Custody-by-age-category
+#'   rows resolved through the shared OTIS dispatcher (bundled
+#'   sample, live Ontario CKAN, synthetic, or empty schema per
+#'   `source`). Columns mirror the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_d05_deaths_by_age_category(offline = TRUE)
 #' head(df)
@@ -825,7 +829,10 @@ morie_datasets_otis_d05_deaths_by_age_category <- function(
 
 #' OTIS d06 -- Deaths in custody by alert type x institution
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS d06 Deaths-in-Custody cause-by-alert
+#'   rows resolved through the shared OTIS dispatcher (bundled
+#'   sample, live Ontario CKAN, synthetic, or empty schema per
+#'   `source`). Columns mirror the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_d06_cause_by_alert(offline = TRUE)
 #' head(df)
@@ -840,7 +847,10 @@ morie_datasets_otis_d06_cause_by_alert <- function(offline = TRUE,
 
 #' OTIS d07 -- Deaths in custody alerts x housing unit
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS d07 Deaths-in-Custody alerts-by-housing-unit
+#'   rows resolved through the shared OTIS dispatcher (bundled
+#'   sample, live Ontario CKAN, synthetic, or empty schema per
+#'   `source`). Columns mirror the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_d07_alerts_by_housing_unit(offline = TRUE)
 #' head(df)
@@ -862,8 +872,8 @@ morie_datasets_otis_d07_alerts_by_housing_unit <- function(
 #' @return A `data.frame` with the canonical 18-col schema.
 #' @examples
 #' df <- morie_datasets_otis_b01_segregation_detailed(offline = TRUE)
-#' head(df[, c("EndFiscalYear", "Gender",
-#'             "NumberConsecutiveDays_Segregation")])
+#' head(df\[, c("EndFiscalYear", "Gender",
+#'             "NumberConsecutiveDays_Segregation")\])
 #' @export
 morie_datasets_otis_b01_segregation_detailed <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -874,7 +884,10 @@ morie_datasets_otis_b01_segregation_detailed <- function(
 
 #' OTIS b02 -- Segregation total days per individual
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS b02 Segregation-total-days rows
+#'   resolved through the shared OTIS dispatcher (bundled sample,
+#'   live Ontario CKAN, synthetic, or empty schema per `source`).
+#'   Columns mirror the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_b02_segregation_total_days(offline = TRUE)
 #' head(df)
@@ -888,7 +901,10 @@ morie_datasets_otis_b02_segregation_total_days <- function(
 
 #' OTIS b03 -- Segregation placements: alerts + hold by institution
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS b03 Segregation-alerts-by-institution
+#'   rows resolved through the shared OTIS dispatcher (bundled
+#'   sample, live Ontario CKAN, synthetic, or empty schema per
+#'   `source`). Columns mirror the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_b03_seg_alerts_by_institution(offline = TRUE)
 #' head(df)
@@ -902,7 +918,10 @@ morie_datasets_otis_b03_seg_alerts_by_institution <- function(
 
 #' OTIS b04 -- Segregation consecutive durations by region
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS b04 Segregation-consecutive-durations-by-region
+#'   rows resolved through the shared OTIS dispatcher (bundled
+#'   sample, live Ontario CKAN, synthetic, or empty schema per
+#'   `source`). Columns mirror the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_b04_seg_consecutive_by_region(offline = TRUE)
 #' head(df)
@@ -916,7 +935,10 @@ morie_datasets_otis_b04_seg_consecutive_by_region <- function(
 
 #' OTIS b05 -- Segregation placements by consecutive-length bucket
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS b05 Segregation-consecutive-lengths
+#'   rows resolved through the shared OTIS dispatcher (bundled
+#'   sample, live Ontario CKAN, synthetic, or empty schema per
+#'   `source`). Columns mirror the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_b05_seg_consecutive_lengths(offline = TRUE)
 #' head(df)
@@ -930,7 +952,10 @@ morie_datasets_otis_b05_seg_consecutive_lengths <- function(
 
 #' OTIS b06 -- Segregation placements: reason for placement by institution
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS b06 Segregation-reason-by-institution
+#'   rows resolved through the shared OTIS dispatcher (bundled
+#'   sample, live Ontario CKAN, synthetic, or empty schema per
+#'   `source`). Columns mirror the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_b06_seg_reason_by_institution(offline = TRUE)
 #' head(df)
@@ -944,7 +969,10 @@ morie_datasets_otis_b06_seg_reason_by_institution <- function(
 
 #' OTIS b07 -- Segregation placements: alerts + hold by gender
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS b07 Segregation-alerts-by-gender
+#'   rows resolved through the shared OTIS dispatcher (bundled
+#'   sample, live Ontario CKAN, synthetic, or empty schema per
+#'   `source`). Columns mirror the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_b07_seg_alerts_by_gender(offline = TRUE)
 #' head(df)
@@ -958,7 +986,10 @@ morie_datasets_otis_b07_seg_alerts_by_gender <- function(
 
 #' OTIS b08 -- Segregation consecutive durations by institution
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS b08 Segregation-consecutive-durations-by-institution
+#'   rows resolved through the shared OTIS dispatcher (bundled
+#'   sample, live Ontario CKAN, synthetic, or empty schema per
+#'   `source`). Columns mirror the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_b08_seg_consecutive_by_institution(offline = TRUE)
 #' head(df)
@@ -973,7 +1004,10 @@ morie_datasets_otis_b08_seg_consecutive_by_institution <- function(
 
 #' OTIS b09 -- Individuals in segregation by number of times placed
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS b09 Individuals-by-N-times-in-segregation
+#'   rows resolved through the shared OTIS dispatcher (bundled
+#'   sample, live Ontario CKAN, synthetic, or empty schema per
+#'   `source`). Columns mirror the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_b09_seg_n_times(offline = TRUE)
 #' head(df)
@@ -991,7 +1025,10 @@ morie_datasets_otis_b09_seg_n_times <- function(
 
 #' OTIS c01 -- Total individuals (in custody / restrictive confinement / segregation)
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS c01 Individuals-total rows resolved
+#'   through the shared OTIS dispatcher (bundled sample, live Ontario
+#'   CKAN, synthetic, or empty schema per `source`). Columns mirror
+#'   the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_c01_individuals_total(offline = TRUE)
 #' head(df)
@@ -1005,7 +1042,10 @@ morie_datasets_otis_c01_individuals_total <- function(
 
 #' OTIS c02 -- Individuals by institution
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS c02 Individuals-by-institution rows
+#'   resolved through the shared OTIS dispatcher (bundled sample,
+#'   live Ontario CKAN, synthetic, or empty schema per `source`).
+#'   Columns mirror the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_c02_individuals_by_institution(offline = TRUE)
 #' head(df)
@@ -1020,10 +1060,13 @@ morie_datasets_otis_c02_individuals_by_institution <- function(
 
 #' OTIS c03 -- Individuals by race x gender
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS c03 Individuals-race-by-gender
+#'   rows resolved through the shared OTIS dispatcher (bundled
+#'   sample, live Ontario CKAN, synthetic, or empty schema per
+#'   `source`). Columns mirror the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_c03_individuals_race_by_gender(offline = TRUE)
-#' head(df[, c("Race", "Gender")])
+#' head(df\[, c("Race", "Gender")\])
 #' @export
 morie_datasets_otis_c03_individuals_race_by_gender <- function(
   offline = TRUE, resource_id = NULL, source = NULL) {
@@ -1034,7 +1077,10 @@ morie_datasets_otis_c03_individuals_race_by_gender <- function(
 
 #' OTIS c04 -- Individuals by race x region
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS c04 Individuals-race-by-region
+#'   rows resolved through the shared OTIS dispatcher (bundled
+#'   sample, live Ontario CKAN, synthetic, or empty schema per
+#'   `source`). Columns mirror the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_c04_individuals_race_by_region(offline = TRUE)
 #' head(df)
@@ -1048,7 +1094,10 @@ morie_datasets_otis_c04_individuals_race_by_region <- function(
 
 #' OTIS c05 -- Individuals by religion x region
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS c05 Individuals-religion-by-region
+#'   rows resolved through the shared OTIS dispatcher (bundled
+#'   sample, live Ontario CKAN, synthetic, or empty schema per
+#'   `source`). Columns mirror the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_c05_individuals_religion_by_region(offline = TRUE)
 #' head(df)
@@ -1063,7 +1112,10 @@ morie_datasets_otis_c05_individuals_religion_by_region <- function(
 
 #' OTIS c06 -- Individuals by age category x region
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS c06 Individuals-age-by-region
+#'   rows resolved through the shared OTIS dispatcher (bundled
+#'   sample, live Ontario CKAN, synthetic, or empty schema per
+#'   `source`). Columns mirror the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_c06_individuals_age_by_region(offline = TRUE)
 #' head(df)
@@ -1077,7 +1129,10 @@ morie_datasets_otis_c06_individuals_age_by_region <- function(
 
 #' OTIS c07 -- Individuals: alerts + hold flags
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS c07 Individuals-alerts rows resolved
+#'   through the shared OTIS dispatcher (bundled sample, live Ontario
+#'   CKAN, synthetic, or empty schema per `source`). Columns mirror
+#'   the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_c07_individuals_alerts(offline = TRUE)
 #' head(df)
@@ -1091,7 +1146,10 @@ morie_datasets_otis_c07_individuals_alerts <- function(
 
 #' OTIS c08 -- Individuals by religion x gender
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS c08 Individuals-religion-by-gender
+#'   rows resolved through the shared OTIS dispatcher (bundled
+#'   sample, live Ontario CKAN, synthetic, or empty schema per
+#'   `source`). Columns mirror the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_c08_individuals_religion_by_gender(offline = TRUE)
 #' head(df)
@@ -1106,7 +1164,10 @@ morie_datasets_otis_c08_individuals_religion_by_gender <- function(
 
 #' OTIS c09 -- Individuals by age category x gender
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS c09 Individuals-age-by-gender
+#'   rows resolved through the shared OTIS dispatcher (bundled
+#'   sample, live Ontario CKAN, synthetic, or empty schema per
+#'   `source`). Columns mirror the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_c09_individuals_age_by_gender(offline = TRUE)
 #' head(df)
@@ -1120,7 +1181,10 @@ morie_datasets_otis_c09_individuals_age_by_gender <- function(
 
 #' OTIS c10 -- Aggregate durations by institution
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS c10 Aggregate-durations-by-institution
+#'   rows resolved through the shared OTIS dispatcher (bundled
+#'   sample, live Ontario CKAN, synthetic, or empty schema per
+#'   `source`). Columns mirror the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_c10_aggregate_durations_by_institution(offline = TRUE)
 #' names(df)
@@ -1135,7 +1199,10 @@ morie_datasets_otis_c10_aggregate_durations_by_institution <- function(
 
 #' OTIS c11 -- Aggregate lengths
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS c11 Aggregate-lengths rows
+#'   resolved through the shared OTIS dispatcher (bundled sample,
+#'   live Ontario CKAN, synthetic, or empty schema per `source`).
+#'   Columns mirror the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_c11_aggregate_lengths(offline = TRUE)
 #' head(df)
@@ -1149,7 +1216,10 @@ morie_datasets_otis_c11_aggregate_lengths <- function(
 
 #' OTIS c12 -- Aggregate durations by region
 #' @inheritParams morie_datasets_otis_a01_restrictive_confinement
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A `data.frame` of OTIS c12 Aggregate-durations-by-region
+#'   rows resolved through the shared OTIS dispatcher (bundled
+#'   sample, live Ontario CKAN, synthetic, or empty schema per
+#'   `source`). Columns mirror the upstream resource.
 #' @examples
 #' df <- morie_datasets_otis_c12_aggregate_durations_by_region(offline = TRUE)
 #' head(df)
@@ -1167,12 +1237,12 @@ morie_datasets_otis_c12_aggregate_durations_by_region <- function(
 #' @param dataset_key One of the keys in
 #'   [morie_datasets_ontario_ckan_layers()] (e.g.
 #'   `"arsau_uof_main_records_2024"`).
-#' @param offline If `TRUE` (default), read the included synthetic
+#' @param offline If `TRUE` (default), read the bundled synthetic
 #'   fixture. If `FALSE`, hit the live Ontario CKAN datastore-dump
 #'   endpoint.
 #' @param resource_id Optional CKAN resource_id override.
 #' @return A `data.frame`.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
 #' df <- morie_datasets_ontario_ckan_by_key("arsau_uof_main_records_2024",
 #'                                          offline = TRUE)
 #' head(df)
@@ -1189,7 +1259,7 @@ morie_datasets_ontario_ckan_by_key <- function(dataset_key,
   }
   entry <- .MORIE_ONTARIO_CKAN_REGISTRY[[dataset_key]]
   if (isTRUE(offline)) {
-    path <- system.file("extdata", entry$fixture, package = "rmorie")
+    path <- system.file("extdata", entry$fixture, package = "morie")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", entry$fixture, package = "rmoriedata")
     }

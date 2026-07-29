@@ -4,7 +4,7 @@
 #'
 #' R parity for \code{morie.fn.cnn1d.conv1d_forward}.
 #'
-#' \deqn{y[i] = \sum_{k=0}^{K-1} w[k] x[i\,s + k] + b}{y[i] = sum_k=0^K-1 w[k] x[i s + k] + b}
+#' \deqn{y\[i\] = \sum_{k=0}^{K-1} w\[k\] x\[i\,s + k\] + b}{y\[i\] = sum_k=0^K-1 w\[k\] x\[i s + k\] + b}
 #'
 #' @param x Numeric vector.
 #' @param w Numeric kernel vector.

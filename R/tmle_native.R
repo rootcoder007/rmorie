@@ -19,7 +19,7 @@
 #'
 #' Three steps: fit the outcome regressions and the propensity; fluctuate
 #' the outcome fit along the clever covariate
-#' `H = A/g - (1 - A)/(1 - g)` on the outcome rescaled to \[0, 1\], so the
+#' `H = A/g - (1 - A)/(1 - g)` on the outcome rescaled to \\[0, 1\\], so the
 #' logistic fluctuation is valid for bounded continuous outcomes as well
 #' as binary ones; then substitute. The estimate solves the efficient
 #' influence-function equation, so the EIF supplies the standard error.
@@ -33,7 +33,7 @@
 #' @param w Covariate matrix (or vector).
 #' @param trunc Propensity truncation bound.
 #' @param g Pre-computed propensity scores; skips the internal fit.
-#' @param scale_outcome Rescale `y` to \[0, 1\] and map back.
+#' @param scale_outcome Rescale `y` to \\[0, 1\\] and map back.
 #' @param max_iter,tol Fluctuation Newton controls.
 #' @return List with `ate`, `se`, `ci`, `eif`, `epsilon`, `q1`, `q0`,
 #'   `g`, `ey1`, `ey0`, `n`.

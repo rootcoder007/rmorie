@@ -42,8 +42,6 @@ NULL
 # Helpers
 # ---------------------------------------------------------------------------
 
-#' Internal helper: Lan Gp Result
-#' @noRd
 .lan_gp_result <- function(year, n_tracts, rho, moran_i_ols,
                             decompositions, gent_distribution,
                             sensitivity_thresholds = list(),
@@ -86,8 +84,6 @@ NULL
 `%||%` <- function(a, b) if (is.null(a)) b else a
 
 
-#' Internal helper: Lan Gp Placeholder W
-#' @noRd
 .lan_gp_placeholder_W <- function(crime_arr, k = 4L) {
   n <- length(crime_arr)
   if (n < 2L) return(matrix(0, n, n))
@@ -105,8 +101,6 @@ NULL
 }
 
 
-#' Internal helper: Lan Gp Morans I
-#' @noRd
 .lan_gp_morans_i <- function(resid, W) {
   n <- length(resid)
   if (n < 2L || !all(dim(W) == n)) return(NA_real_)
@@ -121,8 +115,6 @@ NULL
 # Gentrification panel — baseline-conditional 3-level factor
 # ---------------------------------------------------------------------------
 
-#' Internal helper: Lan Gent Panel
-#' @noRd
 .lan_gent_panel <- function(baseline_frame, baseline_income_col,
                              baseline_rent_col, growth_college_col,
                              growth_rent_col,
@@ -171,12 +163,10 @@ NULL
 #   indirect = mean(rowSums(M) - diag(M))
 #   total    = mean(rowSums(M))
 
-#' Internal helper: Lan Sdm Decompose
-#' @noRd
 .lan_sdm_decompose <- function(rho, beta_direct, beta_spatial, W,
                                 coefficient_names) {
   if (exists("morie_spatial_spillover_decomposition",
-             envir = asNamespace("rmorie"), inherits = FALSE)) {
+             envir = asNamespace("morie"), inherits = FALSE)) {
     return(morie_spatial_spillover_decomposition(
       rho = rho, beta_direct = beta_direct, beta_spatial = beta_spatial,
       W = W, coefficient_names = coefficient_names
@@ -210,7 +200,7 @@ NULL
 #'
 #' @param df Tract-year panel.  One row per tract per year.
 #' @param year_col,tract_id_col,stops_col,population_col,crime_col,demand_col
-#'   Column names; defaults match the morie toy capsule schema.
+#'   Column names; defaults match the morie toy bundle schema.
 #' @param baseline_income_col,baseline_rent_col Baseline-period income
 #'   and rent (2000 in the paper).
 #' @param growth_college_col,growth_rent_col Growth columns.  If
@@ -243,7 +233,7 @@ NULL
 #' df$stops <- rpois(nrow(df), 30); df$felony_count <- rpois(nrow(df), 10)
 #' df$calls_311_omp <- rpois(nrow(df), 40); df$pct_black <- runif(nrow(df), 0.05, 0.7)
 #' res <- suppressWarnings(morie_laniyonu_gentrification_policing(df = df, log_outcome = TRUE))
-#' res[[1]]$rho
+#' res\[\[1\]\]$rho
 #' @export
 morie_laniyonu_gentrification_policing <- function(
   df,
@@ -387,31 +377,7 @@ morie_laniyonu_gentrification_policing <- function(
 }
 
 
-#' @return \code{x}, invisibly.
-#' @examples
-#' \donttest{
-#' set.seed(1)
-#' df <- expand.grid(tract_id = sprintf("T%02d", 1:40), year = 2010:2012,
-#'                   stringsAsFactors = FALSE)
-#' df$median_inc_2000 <- runif(nrow(df), 3e4, 7e4)
-#' df$median_inc_2014 <- df$median_inc_2000 * 1.2
-#' df$median_rent_2000 <- runif(nrow(df), 700, 1500)
-#' df$median_rent_2014 <- df$median_rent_2000 * 1.2
-#' df$pct_ba_2000 <- runif(nrow(df), 0.05, 0.45)
-#' df$pct_ba_2014 <- pmin(df$pct_ba_2000 * 1.3, 0.95)
-#' df$population <- sample(800:5000, nrow(df), TRUE)
-#' df$stops <- rpois(nrow(df), 30); df$felony_count <- rpois(nrow(df), 10)
-#' df$calls_311_omp <- rpois(nrow(df), 40); df$pct_black <- runif(nrow(df), 0.05, 0.7)
-#' res <- suppressWarnings(morie_laniyonu_gentrification_policing(df = df, log_outcome = TRUE))
-#' res[[1]]$rho
-#' \references{
-#' Laniyonu, A. (2018).  Coffee shops and street stops: Policing
-#' practices in gentrifying neighborhoods.  Urban Affairs Review,
-#' 54(5), 898-930.
-#' LeSage, J. P., & Pace, R. K. (2009).  Introduction to Spatial
-#' Econometrics.  CRC Press.
-#' print(res)
-#' }
+#' @return Invisibly returns \code{x} unchanged.
 #' @export
 print.morie_laniyonu_gp_result <- function(x, ...) {
   cat(x$title, "\

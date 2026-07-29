@@ -14,7 +14,7 @@
 #'
 #' \deqn{\hat S(t) = \prod_{t_i \le t}(1 - d_i / n_i)}
 #' with Greenwood's variance
-#' \deqn{\widehat{Var}[\hat S(t)] = \hat S(t)^2 \sum d_i / (n_i (n_i - d_i)).}
+#' \deqn{\widehat{Var}\[\hat S(t)\] = \hat S(t)^2 \sum d_i / (n_i (n_i - d_i)).}
 #'
 #' Censored observations leave the risk set without producing a drop,
 #' which is how partial information is used rather than discarded. The
@@ -23,7 +23,7 @@
 #' Informative censoring biases the curve and leaves no trace in the data.
 #'
 #' Intervals are on the log-log scale by default. A linear interval can
-#' leave \[0, 1\], and does so exactly in the tails, where the estimate is
+#' leave \\[0, 1\\], and does so exactly in the tails, where the estimate is
 #' least precise.
 #'
 #' @param time Observed follow-up times.
@@ -158,7 +158,7 @@ morie_mediation_product <- function(a, b, se_a = NULL, se_b = NULL,
 #'
 #' The \eqn{-\psi(k)} term is what makes this an estimator rather than a
 #' plug-in: the count in a fixed-radius ball is Poisson and
-#' \eqn{E[\log N] \ne \log E[N]}, so using \eqn{\log k} leaves a bias
+#' \eqn{E\[\log N\] \ne \log E\[N\]}, so using \eqn{\log k} leaves a bias
 #' that does not vanish with n.
 #'
 #' Differential entropy is not scale invariant -- rescaling by \eqn{a}

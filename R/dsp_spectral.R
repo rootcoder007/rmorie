@@ -19,7 +19,7 @@
 #' fs <- 1024; t <- seq.int(0, 1023) / fs
 #' x <- cos(2 * pi * 50 * t)
 #' out <- morie_dsp_psd_periodogram(x, fs = fs)
-#' out$freqs[which.max(out$psd)]
+#' out$freqs\[which.max(out$psd)\]
 #' @export
 morie_dsp_psd_periodogram <- function(x, fs = 1) {
   x <- as.numeric(x)
@@ -69,7 +69,7 @@ morie_dsp_psd_bartlett <- function(x, fs = 1, n_segments = 8L) {
   list(freqs = freqs, psd = psd_sum / n_segments)
 }
 
-#' Welch PSD estimate (rmorie native)
+#' Welch PSD estimate (morie native)
 #'
 #' Native Hamming-windowed averaged periodogram (Welch 1967).
 #'
@@ -84,7 +84,7 @@ morie_dsp_psd_bartlett <- function(x, fs = 1, n_segments = 8L) {
 #' fs <- 1024; t <- seq.int(0, 2047) / fs
 #' x <- cos(2 * pi * 50 * t)
 #' out <- morie_dsp_psd_welch(x, fs = fs, nperseg = 256L)
-#' out$freqs[which.max(out$psd)]
+#' out$freqs\[which.max(out$psd)\]
 #' @export
 morie_dsp_psd_welch <- function(x, fs = 1, nperseg = 256L,
                                 noverlap = NULL) {
@@ -140,7 +140,7 @@ morie_dsp_spectral_moment <- function(psd, freqs, order = 0L) {
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.6.
 #' @examples
 #' freqs <- seq.int(0, 64) / 64
-#' psd <- numeric(65); psd[20L] <- 1
+#' psd <- numeric(65); psd\[20L\] <- 1
 #' morie_dsp_mean_frequency(psd, freqs)
 #' @export
 morie_dsp_mean_frequency <- function(psd, freqs) {
@@ -178,7 +178,7 @@ morie_dsp_median_frequency <- function(psd, freqs) {
 #' (`pct = 0.95`) is a classical EEG depth-of-anaesthesia marker.
 #'
 #' @inheritParams morie_dsp_spectral_moment
-#' @param pct Cumulative fraction in (0, 1]. Default 0.95.
+#' @param pct Cumulative fraction in (0, 1\]. Default 0.95.
 #' @return Scalar (Hz).
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.6.
 #' @examples
@@ -226,7 +226,7 @@ morie_dsp_spectral_ratio <- function(psd, freqs, band1, band2) {
 #' concentration.
 #'
 #' @param psd PSD vector.
-#' @return Scalar in `[0, 1]`.
+#' @return Scalar in `\[0, 1\]`.
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.7.
 #' @examples
 #' uni <- rep(1, 64)
@@ -246,7 +246,7 @@ morie_dsp_spectral_flatness <- function(psd) {
 #' Shannon entropy in bits.
 #'
 #' @param psd PSD vector.
-#' @return Scalar in `[0, log2(length(psd))]`.
+#' @return Scalar in `\[0, log2(length(psd))\]`.
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.7;
 #'   Inouye et al. (1991).
 #' @examples
@@ -326,7 +326,7 @@ morie_dsp_acf_from_psd <- function(psd) {
   Re(stats::fft(full, inverse = TRUE) / N)
 }
 
-#' Bandpower over `[f_low, f_high]`
+#' Bandpower over `\[f_low, f_high\]`
 #'
 #' Trapezoid-equivalent rectangular integration of PSD over a band.
 #'
@@ -486,8 +486,6 @@ morie_dsp_fbm_synthesis <- function(N, H = 0.5) {
 
 # Kaiser window with shape `beta` using the modified Bessel function
 # I0. Matches numpy.kaiser(N, beta).
-#' Internal helper: Kaiser Window
-#' @noRd
 .kaiser_window <- function(N, beta = 14) {
   if (N == 1L) return(1)
   n <- seq.int(0, N - 1L)
@@ -497,8 +495,6 @@ morie_dsp_fbm_synthesis <- function(N, H = 0.5) {
 }
 
 # Polynomial expansion of I0 valid for beta up to ~16.
-#' Internal helper: Bessel I0
-#' @noRd
 .bessel_i0 <- function(x) {
   ax <- abs(x)
   out <- numeric(length(ax))

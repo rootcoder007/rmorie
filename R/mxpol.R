@@ -4,7 +4,7 @@
 #'
 #' R parity for \code{morie.fn.mxpol.maxpool_forward}.
 #'
-#' \deqn{y[i,j] = \max_{0 \le m,n < k} x[i s + m, j s + n]}{y[i,j] = max_0 <= m,n < k x[i s + m, j s + n]}
+#' \deqn{y\[i,j\] = \max_{0 \le m,n < k} x\[i s + m, j s + n\]}{y\[i,j\] = max_0 <= m,n < k x\[i s + m, j s + n\]}
 #'
 #' @param x Numeric matrix \code{(H, W)}.
 #' @param kernel_size Window size \code{k}.
@@ -13,7 +13,7 @@
 #' @references Goodfellow et al. (2016), Deep Learning, Ch 9.3.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "rmorie")
+#' #   vignette(package = "morie")
 #' @export
 morie_mxpol_maxpool_forward <- function(x, kernel_size = 2L, stride = NULL) {
   x <- as.matrix(x)

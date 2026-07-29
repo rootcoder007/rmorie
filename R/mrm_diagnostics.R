@@ -32,8 +32,6 @@
 NULL
 
 
-#' Internal helper: Morie Logistic Propensity
-#' @noRd
 .morie_logistic_propensity <- function(D, X) {
   d <- data.frame(D = D, X)
   fit <- suppressWarnings(stats::glm(D ~ ., data = d, family = stats::binomial()))
@@ -61,7 +59,7 @@ NULL
 #'   age = rnorm(n, 50, 10),
 #'   bmi = rnorm(n, 27, 4)
 #' )
-#' df$age[df$D == 1] <- df$age[df$D == 1] + 3 # deliberate imbalance
+#' df$age\[df$D == 1\] <- df$age\[df$D == 1\] + 3 # deliberate imbalance
 #' mrm_standardised_difference(df,
 #'   treatment_col = "D",
 #'   covariates = c("age", "bmi")
@@ -111,7 +109,7 @@ mrm_standardised_difference <- function(data, treatment_col, covariates) {
 #'   age = rnorm(n, 50, 10),
 #'   bmi = rnorm(n, 27, 4)
 #' )
-#' df$age[df$D == 1] <- df$age[df$D == 1] + 3 # imbalance on age
+#' df$age\[df$D == 1\] <- df$age\[df$D == 1\] + 3 # imbalance on age
 #' bal <- mrm_check_balancing(df,
 #'   treatment_col = "D",
 #'   covariates = c("age", "bmi")

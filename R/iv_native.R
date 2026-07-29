@@ -65,7 +65,7 @@
 #' Internal helper: LIML kappa via the eigenvalue problem
 #'
 #' kappa = smallest eigenvalue of (W' M_1 W)(W' M_Z W)^{-1} where
-#' W = [y, endogenous], M_1 annihilates the exogenous block (incl.
+#' W = \[y, endogenous\], M_1 annihilates the exogenous block (incl.
 #' intercept) and M_Z annihilates the full instrument set.
 #' @noRd
 .morie_iv_liml_kappa <- function(y, X_endo, Z_full, X_exo) {
@@ -266,6 +266,6 @@ morie_its <- function(data, outcome, time, interruption_time,
     n_pre = sum(D == 0), n_post = sum(D == 1),
     hac_lag = if (is.null(lag)) floor(4 * (length(y) / 100)^(2 / 9))
               else lag,
-    method = "interrupted time series (rmorie native, Newey-West HAC)"
+    method = "interrupted time series (morie native, Newey-West HAC)"
   )
 }

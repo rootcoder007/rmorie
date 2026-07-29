@@ -42,8 +42,8 @@
 #'   \item \code{morie_cache_dir("arsau")} (only if already populated by
 #'         a previous \code{morie_arsau_download()} call -- never
 #'         auto-created at read-time, per CRAN policy)
-#'   \item \code{system.file("extdata", "arsau", package = "rmorie")} --
-#'         the included tiny fixture for unit tests + tutorials
+#'   \item \code{system.file("extdata", "arsau", package = "morie")} --
+#'         the bundled tiny fixture for unit tests + tutorials
 #'   \item stop with a remediation paragraph
 #' }
 #'
@@ -65,8 +65,6 @@ NULL
 # Internal: path resolver
 # ---------------------------------------------------------------------------
 
-#' Internal helper: Morie Env
-#' @noRd
 .morie_env <- function(name) {
   v <- Sys.getenv(name, unset = NA_character_)
   if (is.na(v) || !nzchar(trimws(v))) {
@@ -116,15 +114,10 @@ NULL
     }
   }
 
-  # Included tiny fixture in the installed package.
-  fixture <- system.file("extdata", "arsau", package = "rmorie")
+  # Bundled tiny fixture in the installed package.
+  fixture <- system.file("extdata", "arsau", package = "morie")
   if (nzchar(fixture)) {
     candidates[["bundled fixture (inst/extdata/arsau)"]] <- fixture
-  } else if (requireNamespace("rmoriedata", quietly = TRUE)) {
-    fixture <- system.file("extdata", "arsau", package = "rmoriedata")
-    if (nzchar(fixture)) {
-      candidates[["bundled fixture (rmoriedata extdata/arsau)"]] <- fixture
-    }
   }
 
   if (!require_exists) {
@@ -161,8 +154,6 @@ NULL
 # Registry
 # ---------------------------------------------------------------------------
 
-#' Internal helper: Arsau Make Entry
-#' @noRd
 .arsau_make_entry <- function(year_or_range, kind, csv_filename, sidecar_filename,
                                 expected_rows, expected_cols, is_valid,
                                 description_en, description_fr) {
@@ -262,26 +253,24 @@ NULL
 #' row / column counts, \code{is_valid}, and bilingual descriptions.
 #'
 #' @return Named list-of-lists.
-#' @examples
-#' str(ARSAU_REGISTRY)
 #' @export
 ARSAU_REGISTRY <- function() {
   .ARSAU_REGISTRY_LIST
 }
 
 #' Known ARSAU year/range keys.
-#' @return A character vector.
-#' @examples
-#' ARSAU_YEARS
+#' @return Character vector of sorted unique year/range identifiers
+#'   (e.g. \code{"2023"}, \code{"2024"}, \code{"2020-2022"}) drawn from
+#'   the ARSAU registry.
 #' @export
 ARSAU_YEARS <- function() {
   sort(unique(vapply(.ARSAU_REGISTRY_LIST, function(e) e$year_or_range, character(1))))
 }
 
 #' Known ARSAU dataset kinds.
-#' @return A character vector.
-#' @examples
-#' ARSAU_KINDS
+#' @return Character vector of sorted unique dataset kinds (e.g.
+#'   \code{"main_records"}, \code{"individual_records"},
+#'   \code{"weapon_records"}) drawn from the ARSAU registry.
 #' @export
 ARSAU_KINDS <- function() {
   sort(unique(vapply(.ARSAU_REGISTRY_LIST, function(e) e$kind, character(1))))
@@ -299,9 +288,9 @@ ARSAU_KINDS <- function() {
 #'
 #' @param path Path to the JSON file.
 #' @return Named list with \code{fields} and \code{records}.
-#' @examplesIf requireNamespace("jsonlite", quietly = TRUE)
+#' @examples
 #' tf <- tempfile(fileext = ".json")
-#' writeLines('{"fields": [{"id": "a", "type": "int"}]}', tf)
+#' writeLines('{"fields": \[{"id": "a", "type": "int"}\]}', tf)
 #' res <- morie_arsau_read_sidecar(tf)
 #' res$fields
 #' unlink(tf)
@@ -333,8 +322,6 @@ morie_arsau_read_sidecar <- function(path) {
 # Internal: shared loader
 # ---------------------------------------------------------------------------
 
-#' Internal helper: Arsau Lookup
-#' @noRd
 .arsau_lookup <- function(year_or_range, kind) {
   key <- paste(as.character(year_or_range), kind, sep = "|")
   if (!(key %in% names(.ARSAU_REGISTRY_LIST))) {
@@ -343,8 +330,6 @@ morie_arsau_read_sidecar <- function(path) {
   .ARSAU_REGISTRY_LIST[[key]]
 }
 
-#' Internal helper: Arsau Coerce Year Key
-#' @noRd
 .arsau_coerce_year_key <- function(year, range_ok = FALSE) {
   s <- trimws(as.character(year))
   yrs <- ARSAU_YEARS()
@@ -361,8 +346,6 @@ morie_arsau_read_sidecar <- function(path) {
 }
 
 
-#' Internal helper: Arsau Load One
-#' @noRd
 .arsau_load_one <- function(entry, data_dir = NULL, language = "en", allow_invalid = FALSE) {
   if (!entry$is_valid && !allow_invalid) {
     stop(sprintf(
@@ -462,7 +445,13 @@ morie_arsau_read_sidecar <- function(path) {
 #' @param year 2023 or 2024.
 #' @param language "en" or "fr".
 #' @param data_dir Optional explicit ARSAU root.
-#' @return An object of class \code{"morie_arsau_result"}.
+#' @return A \code{morie_arsau_result} object (subclass of
+#'   \code{morie_rich_result}) containing the loaded main-records
+#'   \code{data} (data.frame), parsed CKAN \code{sidecar},
+#'   \code{schema} info, plus \code{title}, \code{summary_lines},
+#'   \code{warnings}, \code{interpretation}, \code{year}, \code{kind},
+#'   \code{language}, \code{is_valid}, \code{n_rows}, \code{n_cols},
+#'   and \code{csv_path}.
 #' @examples
 #' \donttest{
 #' res <- try(morie_arsau_load_main_records("2024"))
@@ -481,7 +470,11 @@ morie_arsau_load_main_records <- function(year, language = "en", data_dir = NULL
 
 #' Load ARSAU individual_records CSV.
 #' @inheritParams morie_arsau_load_main_records
-#' @return An object of class \code{"morie_arsau_result"}.
+#' @return A \code{morie_arsau_result} object (subclass of
+#'   \code{morie_rich_result}) carrying the per-civilian
+#'   individual_records data.frame plus sidecar, schema, and the
+#'   standard rich-result metadata fields described in
+#'   \code{\link{morie_arsau_load_main_records}}.
 #' @examples
 #' \donttest{
 #' res <- try(morie_arsau_load_individual_records("2024"))
@@ -500,7 +493,11 @@ morie_arsau_load_individual_records <- function(year, language = "en", data_dir 
 
 #' Load ARSAU probe_cycle_records CSV (CEW telemetry).
 #' @inheritParams morie_arsau_load_main_records
-#' @return An object of class \code{"morie_arsau_result"}.
+#' @return A \code{morie_arsau_result} object (subclass of
+#'   \code{morie_rich_result}) carrying the per-CEW-cycle
+#'   probe-cycle data.frame plus sidecar and the standard
+#'   rich-result metadata fields described in
+#'   \code{\link{morie_arsau_load_main_records}}.
 #' @examples
 #' \donttest{
 #' res <- try(morie_arsau_load_probe_cycle_records("2024"))
@@ -522,7 +519,12 @@ morie_arsau_load_probe_cycle_records <- function(year, language = "en", data_dir
 #' 2023 requires \code{allow_invalid = TRUE} (ministry-flagged invalid).
 #' @inheritParams morie_arsau_load_main_records
 #' @param allow_invalid Logical; required \code{TRUE} for 2023.
-#' @return An object of class \code{"morie_arsau_result"}.
+#' @return A \code{morie_arsau_result} object (subclass of
+#'   \code{morie_rich_result}) carrying the per-weapon weapon_records
+#'   data.frame plus sidecar and the standard rich-result metadata
+#'   fields. When \code{allow_invalid = TRUE} is used for the 2023
+#'   release the returned object has \code{is_valid = FALSE} and
+#'   \code{warnings} opens with the ministry-flagged-invalid caveat.
 #' @examples
 #' \donttest{
 #' res <- try(morie_arsau_load_weapon_records("2024"))
@@ -545,7 +547,11 @@ morie_arsau_load_weapon_records <- function(year, allow_invalid = FALSE,
 #' @param year_range "2020-2022".
 #' @param language "en" or "fr".
 #' @param data_dir Optional explicit ARSAU root.
-#' @return An object of class \code{"morie_arsau_result"}.
+#' @return A \code{morie_arsau_result} object (subclass of
+#'   \code{morie_rich_result}) carrying the aggregate-summary
+#'   data.frame (one row per service-year) plus sidecar and the
+#'   standard rich-result metadata fields described in
+#'   \code{\link{morie_arsau_load_main_records}}.
 #' @examples
 #' \donttest{
 #' res <- try(morie_arsau_load_aggregate_summary("2020-2022"))
@@ -565,7 +571,11 @@ morie_arsau_load_aggregate_summary <- function(year_range = "2020-2022",
 
 #' Load ARSAU detailed-incident-level CSV (2020-2022 only).
 #' @inheritParams morie_arsau_load_aggregate_summary
-#' @return An object of class \code{"morie_arsau_result"}.
+#' @return A \code{morie_arsau_result} object (subclass of
+#'   \code{morie_rich_result}) carrying the detailed incident-level
+#'   data.frame (167-column wide layout) plus sidecar and the standard
+#'   rich-result metadata fields described in
+#'   \code{\link{morie_arsau_load_main_records}}.
 #' @examples
 #' \donttest{
 #' res <- try(morie_arsau_load_detailed_dataset("2020-2022"))
@@ -592,7 +602,12 @@ morie_arsau_load_detailed_dataset <- function(year_range = "2020-2022",
 #'
 #' @param data_dir Optional explicit ARSAU root.
 #' @param language "en" or "fr".
-#' @return An object of class \code{"morie_arsau_result"}.
+#' @return A \code{morie_arsau_result} object (subclass of
+#'   \code{morie_rich_result}) with fields \code{years} (character
+#'   vector of all known year/range keys), \code{present} + \code{missing}
+#'   (which keys do/do not have a directory on disk), \code{n},
+#'   \code{data_root}, plus the standard \code{title},
+#'   \code{summary_lines}, \code{warnings}, and \code{interpretation}.
 #' @examples
 #' r <- morie_arsau_available_years(data_dir = tempdir())
 #' r$present
@@ -651,7 +666,13 @@ morie_arsau_available_years <- function(data_dir = NULL, language = "en") {
 #' @param year Optional year; \code{NULL} lists everything.
 #' @param language "en" or "fr".
 #' @param data_dir Optional explicit ARSAU root.
-#' @return An object of class \code{"morie_arsau_result"}.
+#' @return A \code{morie_arsau_result} object (subclass of
+#'   \code{morie_rich_result}) with \code{n} (number of registry
+#'   entries returned) and \code{entries} (a list of per-entry
+#'   summaries each carrying \code{year_or_range}, \code{kind},
+#'   \code{csv}, \code{valid}, \code{rows}, \code{cols}, and a
+#'   truncated \code{description}), plus the standard \code{title},
+#'   \code{summary_lines}, \code{warnings}, and \code{interpretation}.
 #' @examples
 #' r <- morie_arsau_available_datasets(year = "2023")
 #' r$n
@@ -714,7 +735,12 @@ morie_arsau_available_datasets <- function(year = NULL, language = "en", data_di
 #' @param language "en" or "fr".
 #' @param data_dir Optional explicit ARSAU root.
 #' @param n_preview_rows Number of rows from the CSV head to include.
-#' @return An object of class \code{"morie_arsau_result"}.
+#' @return A \code{morie_arsau_result} object (subclass of
+#'   \code{morie_rich_result}) with the matched registry \code{entry},
+#'   a logical \code{csv_present}, a small \code{preview} data.frame
+#'   (or \code{NULL}), the parsed \code{sidecar} (or \code{NULL}), plus
+#'   the standard \code{title}, \code{summary_lines}, \code{warnings},
+#'   and \code{interpretation}.
 #' @examples
 #' res <- morie_arsau_describe("main_records", "2024")
 #' res$summary_lines
@@ -794,16 +820,7 @@ morie_arsau_describe <- function(kind, year, language = "en", data_dir = NULL,
   out
 }
 
-#' @return \code{x}, invisibly.
-#' @examples
-#' \donttest{
-#' res <- try(morie_arsau_analyze_probe_cycle_records(year = "2024"))
-#' if (!inherits(res, "try-error")) print(res)
-#' \references{
-#' Ontario Ministry of the Solicitor General, ARSAU
-#' probe_cycle_records technical notes (2023 and 2024).
-#' print(res)
-#' }
+#' @return Invisibly returns \code{x} unchanged.
 #' @export
 print.morie_arsau_result <- function(x, ...) {
   cat(x$title, "\n", strrep("=", nchar(x$title)), "\n", sep = "")

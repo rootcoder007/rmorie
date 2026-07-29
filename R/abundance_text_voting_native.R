@@ -470,7 +470,7 @@ morie_face_smooth <- function(Y, argvals = NULL, n_basis = 12L, degree = 3L,
 #' reachability -- conditioning blocks chains and forks but OPENS
 #' colliders, and that asymmetry is the whole algorithm.
 #'
-#' @param adj Logical adjacency matrix; `adj[i, j]` means i -> j.
+#' @param adj Logical adjacency matrix; `adj\[i, j\]` means i -> j.
 #' @param treatment,outcome Node indices (1-based).
 #' @param Z Candidate adjustment set.
 #' @return TRUE or FALSE.
@@ -539,7 +539,7 @@ morie_backdoor_sets <- function(adj, treatment, outcome, max_size = NULL) {
 #' Both are flagged and the estimate still returned, so the damage is
 #' visible rather than merely warned about.
 #'
-#' @param dag Logical adjacency matrix; `dag[i, j]` means i -> j.
+#' @param dag Logical adjacency matrix; `dag\[i, j\]` means i -> j.
 #' @param data Observations, one column per node.
 #' @param treatment,outcome Column indices (1-based).
 #' @param adjustment Force a particular set instead of identifying one.

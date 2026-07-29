@@ -199,14 +199,14 @@ morie_fauzi_mise <- function(n, h = NULL, R_K = NULL, mu2_K = 1,
 
 #' Chen gamma-kernel density estimate
 #'
-#' The gamma kernel's support IS `[0, Inf)`, so no mass ever lands on
+#' The gamma kernel's support IS `\[0, Inf)`, so no mass ever lands on
 #' the negative half-line and the boundary bias simply does not
 #' arise: the estimator is consistent at zero, where a
 #' Gaussian-kernel estimate is not. `modified = TRUE` applies Fauzi's
 #' self-elimination correction, which cancels the leading bias term.
 #'
 #' @param x non-negative numeric sample.
-#' @param grid evaluation points in `[0, Inf)`; data-driven if `NULL`.
+#' @param grid evaluation points in `\[0, Inf)`; data-driven if `NULL`.
 #' @param h bandwidth; `sd(x) * n^{-2/5}` if `NULL`.
 #' @param modified apply the self-elimination correction.
 #' @param a the correction's second-bandwidth multiplier, not 1.
@@ -280,7 +280,7 @@ morie_fauzi_gamma_kde <- function(x, grid = NULL, h = NULL,
 #' @references Fauzi and Maesono (2023), Eq. (2.2) and Sec. 5.3.2;
 #'   Nadaraya (1964); Azzalini, A. (1981), "A note on the estimation
 #'   of a distribution function and quantiles by a kernel method",
-#'   Biometrika 68:326-328 (reference \[9\] of the book).
+#'   Biometrika 68:326-328 (reference \\[9\\] of the book).
 #' @examples
 #' morie_fauzi_kdfe(stats::rexp(200), grid = c(0.5, 1))$F_hat
 #' @export
@@ -639,7 +639,7 @@ morie_fauzi_mrl_naive <- function(x, t_grid, h = NULL) {
 #' `m~_{X,2}(t)` -- the ratio of the second cumulative survival
 #' estimator to the survival estimator. Bias is `O(h^2)` everywhere
 #' including the boundary, with the Theorem 4.3 constant
-#' `h^2/(2 S_X(t)) [b_3(t) + m_X(t) b_1(t)] int y^2 K(y) dy`.
+#' `h^2/(2 S_X(t)) \[b_3(t) + m_X(t) b_1(t)\] int y^2 K(y) dy`.
 #'
 #' Prefer the variant built on
 #' [morie_fauzi_cumulative_survival_1()] when the analytic relation
@@ -755,7 +755,7 @@ morie_fauzi_theorem_4_3 <- function(t, S_X, S_bar_X, m_X, b1,
 #' The standardised estimators are asymptotically `N(0, 1)`, and the
 #' statement holds AT the boundary as well as inside. The Lyapunov
 #' condition needs no extra assumption because `V` is bounded in
-#' `[0, 1]`, so every moment exists automatically.
+#' `\[0, 1\]`, so every moment exists automatically.
 #'
 #' @param mrl_hat estimated mean residual life.
 #' @param mrl_true the value under the null.
@@ -943,7 +943,7 @@ morie_fauzi_conditions_c1_c6 <- function(x = NULL, transform = "log",
 #' are exactly where that matters.
 #'
 #' The weight on the `i`-th order statistic is the kernel mass of
-#' `((i-1)/n, i/n]`, computed as an exact difference of the
+#' `((i-1)/n, i/n\]`, computed as an exact difference of the
 #' integrated kernel rather than by quadrature.
 #'
 #' Not to be confused with [morie_kernel_quantile()], which is

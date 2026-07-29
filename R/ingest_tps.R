@@ -18,7 +18,7 @@
 # (auxiliary sphere); we force `outSR=4326` so `geom_x`/`geom_y`
 # come back as longitude/latitude, not metres.
 
-.MORIE_TPS_DEFAULT_UA <- "morie/r (+https://github.com/rootcoder007/rmorie)"
+.MORIE_TPS_DEFAULT_UA <- "morie/r (+https://github.com/rootcoder007/morie)"
 .MORIE_TPS_DEFAULT_TIMEOUT <- 60
 
 # Canonical TPS open-data layer endpoints (verified 2026-05-13).
@@ -83,8 +83,6 @@ morie_ingest_tps_layers <- function() {
 }
 
 # Internal: a single ArcGIS FeatureServer /query call.
-#' Internal helper: Morie Tps Arcgis Query
-#' @noRd
 .morie_tps_arcgis_query <- function(layer_url,
                                     where = "1=1",
                                     out_fields = "*",
@@ -136,8 +134,6 @@ morie_ingest_tps_layers <- function() {
 
 # Internal: bind one ArcGIS feature payload's attribute rows into a
 # data.frame, optionally splicing in geom_x / geom_y.
-#' Internal helper: Morie Tps Features To Rows
-#' @noRd
 .morie_tps_features_to_rows <- function(features, return_geometry) {
   if (length(features) == 0L) {
     return(list())
@@ -173,12 +169,12 @@ morie_ingest_tps_layers <- function() {
 #' @param max_features Optional hard cap on total returned rows.
 #' @param user_agent,timeout Standard request knobs.
 #' @return A base R \code{data.frame}.
-#' @examplesIf requireNamespace("httr2", quietly = TRUE)
-#' \donttest{
+#' @examples
+#' \dontrun{
 #' df <- morie_ingest_tps_feature_layer(
-#'   morie_ingest_tps_layers()$url[
+#'   morie_ingest_tps_layers()$url\[
 #'     morie_ingest_tps_layers()$name == "major-crime"
-#'   ],
+#'   \],
 #'   where = "OCC_YEAR >= 2023",
 #'   max_features = 5000L
 #' )
@@ -263,7 +259,7 @@ morie_ingest_tps_feature_layer <- function(
 #' @param max_features Optional hard cap on rows.
 #' @param ... Forwarded to \code{\link{morie_ingest_tps_feature_layer}}.
 #' @return A base R \code{data.frame}.
-#' @examplesIf requireNamespace("httr2", quietly = TRUE)
+#' @examples
 #' \donttest{try(morie_ingest_tps_fetch("major-crime", max_features = 1L))}
 #' @export
 morie_ingest_tps_fetch <- function(layer,

@@ -75,7 +75,7 @@ morie_qte_firpo <- function(y, treat, ps, tau = 0.5) {
 
 #' Parametric g-formula standardised means
 #'
-#' `E[Y(a)] = E[E[Y | A = a, L]]`, with an OLS outcome model including
+#' `E\[Y(a)\] = E\[E\[Y | A = a, L\]\]`, with an OLS outcome model including
 #' treatment-covariate interactions. Mirrors `morie.fn.causmrop`.
 #'
 #' @param y Outcome.

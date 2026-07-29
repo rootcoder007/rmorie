@@ -146,8 +146,8 @@ morie_catalan_number <- function(n) {
 
 #' Integer partition counts by the pentagonal number theorem
 #'
-#' \deqn{p(n) = \sum_{k \ge 1} (-1)^{k+1}\left[
-#'   p(n - k(3k-1)/2) + p(n - k(3k+1)/2)\right],}
+#' \deqn{p(n) = \sum_{k \ge 1} (-1)^{k+1}\left\[
+#'   p(n - k(3k-1)/2) + p(n - k(3k+1)/2)\right\],}
 #' which needs \eqn{O(\sqrt n)} terms per value rather than \eqn{O(n)}.
 #'
 #' `distinct` counts partitions into distinct parts and `odd_only` into
@@ -359,7 +359,7 @@ morie_twelvefold_way <- function(n, k, balls = c("labelled", "unlabelled"),
 #' \eqn{\sum_{d | n} \mu(d)} is 1 at \eqn{n = 1} and 0 everywhere else.
 #' That is an identity, and the residual is returned rather than assumed.
 #'
-#' @param f_values `f_values[i]` is \eqn{f(i)}.
+#' @param f_values `f_values\[i\]` is \eqn{f(i)}.
 #' @return A list with `g`, `mobius`, `reconstruction_residual`,
 #'   `mobius_identity_residual`, `divisor_sums`.
 #' @references Stanley RP (2011) vol. 1, Sec 3.7.

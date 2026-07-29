@@ -1,6 +1,6 @@
 #' EMG sliding-window RMS envelope -- Rangayyan Ch 8
 #'
-#' \deqn{\mathrm{RMS}[n] = \sqrt{ (1/W) \sum_{k=n-W+1}^{n} x[k]^2 }}{RMS[n] = sqrt{ (1/W) sum_k=n-W+1^n x[k]^2 }}
+#' \deqn{\mathrm{RMS}\[n\] = \sqrt{ (1/W) \sum_{k=n-W+1}^{n} x\[k\]^2 }}{RMS\[n\] = sqrt{ (1/W) sum_k=n-W+1^n x\[k\]^2 }}
 #'
 #' @param x Numeric vector.
 #' @param window Window length in samples (default 64).

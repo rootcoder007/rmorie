@@ -38,13 +38,13 @@
   if (is.character(info)) info <- charToRaw(info)
   if (is.character(salt)) salt <- charToRaw(salt)
   # Module 22: native HMAC-SHA256 (RFC 5869 extract step).
-  prk <- .rmorie_hmac_sha256_impl(salt, ikm)
+  prk <- .morie_hmac_sha256_impl(salt, ikm)
   n <- ceiling(len / 32L)
   t_prev <- raw(0)
   okm <- raw(0)
   for (i in seq_len(n)) {
     msg <- c(t_prev, info, as.raw(i))
-    t_prev <- .rmorie_hmac_sha256_impl(prk, msg)
+    t_prev <- .morie_hmac_sha256_impl(prk, msg)
     okm <- c(okm, t_prev)
   }
   okm[seq_len(len)]
@@ -53,7 +53,7 @@
 #' Internal helper: Morie Wrapping Key
 #' @noRd
 .morie_wrapping_key <- function(kem_ct, pk) {
-  salt <- .rmorie_sha256_impl(charToRaw("morie-hybrid-wrap-v1"))
+  salt <- .morie_sha256_impl(charToRaw("morie-hybrid-wrap-v1"))
   .morie_hkdf_sha256(
     ikm    = c(kem_ct, pk),
     len    = 32L,
@@ -86,8 +86,8 @@ morie_crypto_hybrid_keygen <- function() {
 #' from `HKDF(kem_ct || pk)`, wraps a random 32-byte symmetric key with
 #' ChaCha20-Poly1305, then encrypts the payload under that symmetric
 #' key. Container format (big-endian lengths):
-#' `len(kem_ct)[4] || kem_ct || wrap_nonce[12] || wrapped_key[32] ||
-#' wrap_tag[16] || payload_nonce[12] || aead_ct || payload_tag[16]`.
+#' `len(kem_ct)\[4\] || kem_ct || wrap_nonce\[12\] || wrapped_key\[32\] ||
+#' wrap_tag\[16\] || payload_nonce\[12\] || aead_ct || payload_tag\[16\]`.
 #'
 #' @param plaintext   Raw vector or character string to encrypt.
 #' @param recipient_pk Raw vector: recipient's ML-KEM-768 public key

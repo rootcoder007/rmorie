@@ -81,11 +81,11 @@
 #' @param timeout HTTP timeout in seconds (default 600).
 #' @param user_agent User-Agent string sent with the request.
 #' @param ... Further arguments forwarded to
-#'   \code{\link[readr]{read_csv}} (or
-#'   \code{\link[utils]{read.csv}} if \pkg{readr} is unavailable).
+#'   \code{\link\[readr\]{read_csv}} (or
+#'   \code{\link\[utils\]{read.csv}} if \pkg{readr} is unavailable).
 #' @return A base R \code{data.frame}.
-#' @examplesIf requireNamespace("httr2", quietly = TRUE)
-#' \donttest{
+#' @examples
+#' \dontrun{
 #' # Requires network access.
 #' url <- paste0(
 #'   "https://www150.statcan.gc.ca/n1/pub/82m0013x/",
@@ -100,7 +100,7 @@
 morie_ingest_statcan_csv <- function(url,
                                      member = NULL,
                                      timeout = 600,
-                                     user_agent = "morie/r (+https://github.com/rootcoder007/rmorie)",
+                                     user_agent = "morie/r (+https://github.com/rootcoder007/morie)",
                                      ...) {
   if (!is.character(url) || length(url) != 1L || !nzchar(url)) {
     stop("`url` must be a single non-empty string.", call. = FALSE)
@@ -157,11 +157,9 @@ morie_ingest_statcan_csv <- function(url,
 #' rather than for PUMF \code{_CSV.zip} downloads --- those go
 #' through \code{\link{morie_ingest_statcan_csv}}.
 #'
-#' No credentials are required: the StatCan Web Data Service is
-#' public. Setting the optional \code{STATCAN_API_KEY} environment
-#' variable only raises your WDS rate limits; without it the fetch
-#' still works (it is forwarded to \pkg{cansim} via the
-#' \code{CANSIM_API_KEY} name the package reads internally).
+#' If the \code{STATCAN_API_KEY} environment variable is set, it is
+#' passed to \code{cansim::set_cansim_api_key()} so authenticated
+#' rate limits apply.
 #'
 #' @param table_id A StatCan / NDM table identifier, e.g.
 #'   \code{"35-10-0177"} or \code{"35-10-0177-01"}.
@@ -169,10 +167,10 @@ morie_ingest_statcan_csv <- function(url,
 #' @param refresh If \code{TRUE}, force \pkg{cansim} to re-download
 #'   rather than using its on-disk cache.
 #' @param ... Further arguments forwarded to
-#'   \code{\link[cansim]{get_cansim}}.
+#'   \code{\link\[cansim\]{get_cansim}}.
 #' @return A base R \code{data.frame}.
-#' @examplesIf requireNamespace("httr2", quietly = TRUE)
-#' \donttest{
+#' @examples
+#' \dontrun{
 #' # Requires the 'cansim' package and network access.
 #' df <- morie_ingest_statcan_cansim("35-10-0177")
 #' head(df)
@@ -222,91 +220,6 @@ morie_ingest_statcan_cansim <- function(table_id,
       )
     }
   )
-}
-
-#' Fetch StatCan series by vector ID (keyless WDS, latest-N periods)
-#'
-#' Retrieves specific data series by their StatCan vector identifiers
-#' through the public Web Data Service
-#' \code{getDataFromVectorsAndLatestNPeriods} endpoint. This is the
-#' small, targeted alternative to
-#' \code{\link{morie_ingest_statcan_cansim}}, which downloads a whole
-#' table (millions of rows). No credentials are required; the WDS is
-#' public. The POST runs through rmorie's native libcurl backend --- no
-#' extra package dependency.
-#'
-#' @param vectors Character or numeric StatCan vector IDs. A leading
-#'   \code{"v"} is accepted and stripped (e.g. \code{"v41690973"} or
-#'   \code{41690973}).
-#' @param periods Number of most-recent reference periods to return
-#'   per vector.
-#' @param timeout Per-request timeout, seconds.
-#' @return A base R \code{data.frame}, one row per (vector, period):
-#'   \code{vector}, \code{ref_date}, \code{value}, \code{decimals},
-#'   \code{scalar_factor}, \code{symbol_code}, \code{release_time}.
-#' @examplesIf requireNamespace("httr2", quietly = TRUE)
-#' \donttest{
-#' # Two CPI series, last 3 periods each -- no API key needed.
-#' morie_ingest_statcan_vectors(c("v41690973", "v41691045"), periods = 3)
-#' }
-#' @seealso \code{\link{morie_ingest_statcan_cansim}}
-#' @export
-morie_ingest_statcan_vectors <- function(vectors, periods = 12L,
-                                         timeout = 60L) {
-  if (length(vectors) == 0L) {
-    stop("`vectors` must be a non-empty vector of StatCan vector IDs.",
-         call. = FALSE)
-  }
-  ids <- suppressWarnings(
-    as.integer(gsub("[^0-9]", "", as.character(vectors)))
-  )
-  if (anyNA(ids)) {
-    stop("`vectors` must be StatCan vector IDs (numbers, optionally ",
-         "'v'-prefixed).", call. = FALSE)
-  }
-  periods <- as.integer(periods)
-  if (is.na(periods) || periods < 1L) {
-    stop("`periods` must be a positive integer.", call. = FALSE)
-  }
-  body <- jsonlite::toJSON(
-    data.frame(vectorId = ids, latestN = periods),
-    auto_unbox = TRUE
-  )
-  resp <- .morie_http_post_with_status(
-    "https://www150.statcan.gc.ca/t1/wds/rest/getDataFromVectorsAndLatestNPeriods",
-    body,
-    content_type = "application/json",
-    timeout_s = as.integer(timeout),
-    user_agent = "morie/r (+https://github.com/rootcoder007/rmorie)"
-  )
-  if (!identical(as.integer(resp$status_code), 200L)) {
-    stop("StatCan WDS vector request failed (HTTP ",
-         resp$status_code, ").", call. = FALSE)
-  }
-  parsed <- jsonlite::fromJSON(resp$body, simplifyVector = FALSE)
-  rows <- lapply(parsed, function(el) {
-    if (!identical(el$status, "SUCCESS")) return(NULL)
-    ob <- el$object
-    dp <- ob$vectorDataPoint
-    if (length(dp) == 0L) return(NULL)
-    do.call(rbind, lapply(dp, function(p) data.frame(
-      vector        = ob$vectorId,
-      ref_date      = p$refPer %||% NA_character_,
-      value         = p$value %||% NA_real_,
-      decimals      = p$decimals %||% NA_integer_,
-      scalar_factor = p$scalarFactorCode %||% NA_integer_,
-      symbol_code   = p$symbolCode %||% NA_integer_,
-      release_time  = p$releaseTime %||% NA_character_,
-      stringsAsFactors = FALSE
-    )))
-  })
-  out <- do.call(rbind, rows)
-  if (is.null(out) || nrow(out) == 0L) {
-    stop("StatCan WDS returned no data for the requested vector(s).",
-         call. = FALSE)
-  }
-  rownames(out) <- NULL
-  out
 }
 
 # Native StatCan Web Data Service client -- fetches the full-table

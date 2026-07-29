@@ -25,7 +25,7 @@
 #                              File Geodatabase exports at
 #                              `https://hub.arcgis.com/api/v3/datasets/<hub_id>_0/downloads/data?format=<fmt>`.
 #
-# 3SS capsules the full 71-row catalog as a CSV fixture so discovery
+# 3SS bundles the full 71-row catalog as a CSV fixture so discovery
 # works offline. By-id loading dispatches to FeatureServer (JSON /
 # GeoJSON) or the Hub downloads API (CSV / Shapefile / FGDB) based on
 # `format`.
@@ -72,14 +72,14 @@
 #'     Calls for Service Attended.}
 #' }
 #'
-#' @param offline If `TRUE` (default), read the included 71-row
+#' @param offline If `TRUE` (default), read the bundled 71-row
 #'   catalog fixture (`inst/extdata/tps_arcgis_hub_catalog.csv`).
 #'   Live mode hits the TPS Hub search API.
 #' @return A `data.frame` with columns `hub_id`, `title`, `type`,
 #'   `feature_server_url`, `owner`, `tags`, `snippet`.
 #' @references TPS Public Safety Data Portal,
 #'   \url{https://data.tps.ca/search?collection=dataset}.
-#' @examplesIf nzchar(system.file("extdata", "tps_arcgis_hub_catalog.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
 #' cat <- morie_datasets_tps_arcgis_hub_layers()
 #' nrow(cat)        # 71
 #' head(cat$title)
@@ -90,7 +90,7 @@ morie_datasets_tps_arcgis_hub_layers <- function(offline = TRUE) {
     # Return empty data.frame on miss so morie_dataset_portal_catalog()
     # and other downstream consumers can still build successfully.
     path <- system.file("extdata", "tps_arcgis_hub_catalog.csv",
-                        package = "rmorie")
+                        package = "morie")
     if (!nzchar(path) &&
         requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "tps_arcgis_hub_catalog.csv",
@@ -214,7 +214,7 @@ morie_datasets_tps_arcgis_hub_layers <- function(offline = TRUE) {
 #' @param layer_idx Integer index of the FeatureServer layer to pull
 #'   (default `0L`, the first layer).
 #' @param offline Logical; if `TRUE`, the hub_id is resolved via the
-#'   included catalog (no network needed for the resolution step).
+#'   bundled catalog (no network needed for the resolution step).
 #'   Default `TRUE` -- you can run this against the 71 catalog
 #'   entries without network. Live data fetches always hit the
 #'   network regardless of this argument; "offline" here only
@@ -223,10 +223,10 @@ morie_datasets_tps_arcgis_hub_layers <- function(offline = TRUE) {
 #'   (`format %in% c("shapefile", "fgdb")`); defaults to `tempfile()`.
 #' @return A `data.frame` (json / csv), a parsed GeoJSON list, or a
 #'   file path (binary).
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
 #' cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
-#' pic_id <- cat$hub_id[cat$title ==
-#'   "Persons in Crisis Calls for Service Attended Open Data"]
+#' pic_id <- cat$hub_id\[cat$title ==
+#'   "Persons in Crisis Calls for Service Attended Open Data"\]
 #' \donttest{
 #' df <- try(morie_datasets_tps_arcgis_hub_by_id(
 #'   pic_id, format = "json", where = "OCC_YEAR=2024",
@@ -287,7 +287,7 @@ morie_datasets_tps_arcgis_hub_by_id <- function(hub_id,
     dest <- tempfile(fileext = suffix)
   }
   # 3XX: routes through .morie_dataset_http_bytes (libcurl-backed
-  # via rmorie::http::get_bytes from 3VV, with httr2 fallback) so
+  # via morie::http::get_bytes from 3VV, with httr2 fallback) so
   # the binary payload survives without NUL truncation across the
   # whole chain.
   bytes <- .morie_dataset_http_bytes(bin_url)
@@ -308,11 +308,11 @@ morie_datasets_tps_arcgis_hub_by_id <- function(hub_id,
 #' @param layer_idx Integer layer index (default `0L`).
 #' @param dest Optional destination path; defaults to `tempfile()`.
 #' @return Path to the downloaded file.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
 #' cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
 #' \donttest{
 #' path <- try(morie_datasets_tps_arcgis_hub_download(
-#'   cat$hub_id[1], format = "csv"))
+#'   cat$hub_id\[1\], format = "csv"))
 #' if (!inherits(path, "try-error")) path
 #' }
 #' @export
@@ -362,7 +362,7 @@ morie_datasets_tps_arcgis_hub_download <- function(hub_id,
 #' returns a single-row data.frame with the same columns the TPS Hub
 #' catalog (\code{\link{morie_datasets_tps_arcgis_hub_layers}})
 #' returns: `hub_id`, `title`, `type`, `feature_server_url`, `owner`,
-#' `tags`, `snippet`. Use this when the item is NOT in the included
+#' `tags`, `snippet`. Use this when the item is NOT in the bundled
 #' TPS catalog (any non-TorontoPoliceService item).
 #'
 #' @param item_id 32-char hex GUID for an ArcGIS Online item.
@@ -401,12 +401,12 @@ morie_datasets_arcgis_item_metadata <- function(item_id) {
 #' format paths (json / geojson / csv / shapefile / fgdb).
 #'
 #' The hub_id is ALWAYS resolved live (via the items API) because
-#' there's no included catalog for non-TPS items. If you find
+#' there's no bundled catalog for non-TPS items. If you find
 #' yourself calling this against the same item repeatedly, consider
 #' adding a named wrapper (e.g. the shipped
 #' \code{\link{morie_datasets_toronto_zoning_per_neighbourhood}}
 #' wraps EsriCanadaEducation's `af06159170914808983959df6163fc86`
-#' with included fixtures for offline use).
+#' with bundled fixtures for offline use).
 #'
 #' @param item_id 32-char hex GUID.
 #' @param format One of `"json"` (default), `"geojson"`, `"csv"`,
@@ -509,7 +509,7 @@ morie_datasets_arcgis_item_by_id <- function(item_id,
 #'     Industrial, etc.).}
 #' }
 #'
-#' Offline mode reads included 5-row synthetic fixtures
+#' Offline mode reads bundled 5-row synthetic fixtures
 #' (`toronto_zoning_neighbourhoods_sample.csv` /
 #' `toronto_zoning_stats_sample.csv`) -- SYNTH-stamped, not
 #' attributable to actual Toronto neighbourhoods. Live mode hits
@@ -522,15 +522,15 @@ morie_datasets_arcgis_item_by_id <- function(item_id,
 #'   `"shapefile"`, `"fgdb"`. Only honoured when `offline = FALSE`.
 #' @param where Optional FeatureServer WHERE filter (live mode).
 #' @param max_features Optional row cap.
-#' @param offline Logical; if `TRUE` (default), read the included
+#' @param offline Logical; if `TRUE` (default), read the bundled
 #'   synthetic fixture.
 #' @return A `data.frame` (json / csv / offline), parsed GeoJSON
 #'   list, or file path (binary).
 #' @references Esri Canada Education -- ArcGIS Online item
 #'   `af06159170914808983959df6163fc86`.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
 #' df <- morie_datasets_toronto_zoning_per_neighbourhood(offline = TRUE)
-#' head(df[, c("Neighbourhood", "Total_Population", "Seniors65andover")])
+#' head(df\[, c("Neighbourhood", "Total_Population", "Seniors65andover")\])
 #' @export
 morie_datasets_toronto_zoning_per_neighbourhood <- function(
     layer = c("neighbourhoods", "zoning_stats"),
@@ -546,7 +546,7 @@ morie_datasets_toronto_zoning_per_neighbourhood <- function(
     } else {
       "toronto_zoning_stats_sample.csv"
     }
-    path <- system.file("extdata", fixture, package = "rmorie")
+    path <- system.file("extdata", fixture, package = "morie")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", fixture, package = "rmoriedata")
     }

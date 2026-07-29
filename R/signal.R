@@ -169,7 +169,7 @@ morie_hurst_r <- function(x) {
 #' Higuchi fractal dimension
 #'
 #' Estimates the Higuchi (1988) fractal dimension of a 1-D time series via
-#' length scaling across `k` time-lags. Values typically fall in \[1, 2\];
+#' length scaling across `k` time-lags. Values typically fall in \\[1, 2\\];
 #' higher values indicate greater signal complexity.
 #'
 #' Reference: Higuchi, T. (1988) "Approach to an irregular time series on
@@ -221,7 +221,7 @@ hfd <- function(x, kmax = 10L) {
 
 #' Phonocardiogram (PCG) bandpass filter
 #'
-#' Convenience preset wrapping [buttbp()] with the standard PCG band
+#' Convenience preset wrapping \[buttbp()\] with the standard PCG band
 #' (25--400 Hz at 2000 Hz sampling). Removes baseline drift below 25 Hz and
 #' anti-aliased high-frequency noise above 400 Hz.
 #'
@@ -229,7 +229,7 @@ hfd <- function(x, kmax = 10L) {
 #' @param fs Sampling frequency (Hz, default 2000).
 #' @param low Lower cutoff (Hz, default 25).
 #' @param high Upper cutoff (Hz, default 400).
-#' @return List with filtered signal (see [buttbp()]).
+#' @return List with filtered signal (see \[buttbp()\]).
 #' @export
 #' @examples
 #' \donttest{
@@ -252,7 +252,7 @@ morie_pcg_filter <- function(x, fs = 2000, low = 25, high = 400) {
 
 #' Real cepstrum
 #'
-#' Real cepstrum \eqn{c[n] = \mathrm{IFFT}(\log |\mathrm{FFT}(x)|)}{c[n] = IFFT(log |FFT(x)|)}. Useful
+#' Real cepstrum \eqn{c\[n\] = \mathrm{IFFT}(\log |\mathrm{FFT}(x)|)}{c\[n\] = IFFT(log |FFT(x)|)}. Useful
 #' for pitch-period estimation and any analysis where the multiplicative
 #' magnitude structure of the spectrum is best handled additively in the
 #' quefrency domain.
@@ -934,7 +934,7 @@ pcgenv <- function(pcg, fs) {
 #' \donttest{
 #' set.seed(1)
 #' env <- abs(sin(seq(0, 20, length.out = 4000))) + 0.05 * rnorm(4000)
-#' env[env < 0] <- 0
+#' env\[env < 0\] <- 0
 #' res <- pcgseg(env, fs = 2000)
 #' res$extra$n_cycles
 #' }
@@ -983,14 +983,14 @@ pcgseg <- function(envelope, fs = 2000, min_gap_ms = 100) {
 #'
 #' Combines a 100--400 Hz band-energy ratio, normalised spectral entropy,
 #' and the Higuchi fractal dimension of the PCG into a murmur-likelihood
-#' score in `[0, 1]`.
+#' score in `\[0, 1\]`.
 #'
 #' Reference: Rangayyan, R.M. (2015) *Biomedical Signal Analysis*, 2nd ed.,
 #' Wiley/IEEE Press, chapter on heart-sound analysis.
 #'
 #' @param pcg Numeric vector (1-D PCG signal).
 #' @param fs Sampling frequency in Hz.
-#' @return List with `value` (score in `[0, 1]`), `name`, and `extra`
+#' @return List with `value` (score in `\[0, 1\]`), `name`, and `extra`
 #'   (`fractal_dimension`, `hf_energy_ratio`, `spectral_entropy`,
 #'   `fd_score`, `hf_score`, `ent_score`).
 #' @export
@@ -1129,4 +1129,18 @@ sgolay <- function(x, window = 11L, polyorder = 3L) {
     n_samples = length(res$filtered),
     extra = list(window = window, polyorder = polyorder)
   )
+}
+
+.morie_py_call <- function(fn_name, ...) {
+  args <- list(...)
+  arg_str <- paste(vapply(args, function(a) {
+    if (is.numeric(a) && length(a) > 1) {
+      paste0("[", paste(a, collapse = ","), "]")
+    } else {
+      as.character(a)
+    }
+  }, character(1)), collapse = " ")
+  cmd <- paste(fn_name, arg_str)
+  out <- system2("python3", c("-m", "morie.stat_bridge", "exec", cmd), stdout = TRUE, stderr = TRUE)
+  paste(out, collapse = "\n")
 }

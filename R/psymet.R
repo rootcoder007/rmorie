@@ -10,12 +10,8 @@
 #   McDonald (1999). Test Theory: A Unified Treatment.
 #   Revelle (2024). psych R package.
 
-#' Internal helper: Has Psych
-#' @noRd
 .has_psych <- function() requireNamespace("psych", quietly = TRUE)
 
-#' Internal helper: Psych Or Stop
-#' @noRd
 .psych_or_stop <- function(fn) {
   if (!.has_psych()) {
     stop(sprintf(
@@ -25,8 +21,6 @@
   }
 }
 
-#' Internal helper: As Item Matrix
-#' @noRd
 .as_item_matrix <- function(data) {
   X <- as.matrix(data)
   storage.mode(X) <- "double"
@@ -177,7 +171,7 @@ morie_psymet_alphadel <- function(data) {
 #' Composite reliability from standardized factor loadings.
 #' CR = (sum lambda)^2 / ((sum lambda)^2 + sum(1 - lambda^2))
 #' @param loads Numeric vector of standardised factor loadings (lambda).
-#' @return A numeric scalar: the composite reliability.
+#' @return Single numeric scalar in `\[0, 1\]`: the composite reliability (CR).
 #' @examples
 #' lam <- c(0.7, 0.8, 0.6)
 #' morie_psymet_cr(lam)
@@ -191,7 +185,8 @@ morie_psymet_cr <- function(loads) {
 
 #' Average variance extracted (AVE) from factor loadings. Mean(lambda^2).
 #' @param loads Numeric vector of standardised factor loadings (lambda).
-#' @return A numeric value (scalar).
+#' @return Single numeric scalar: the average variance extracted (mean of
+#'   squared loadings).
 #' @examples
 #' lam <- c(0.7, 0.8, 0.6)
 #' morie_psymet_ave(lam)
@@ -267,7 +262,7 @@ morie_psymet_bartlett <- function(data) {
 #' @param data Numeric matrix or data.frame of items.
 #' @param nsim Integer; number of simulated random datasets (default 100).
 #' @param seed Integer; RNG seed for reproducibility.
-#' @return An integer scalar: the number of components to retain by parallel analysis.
+#' @return Single integer >= 1: the suggested number of factors / components.
 #' @examples
 #' set.seed(1)
 #' f <- rnorm(60)
@@ -297,7 +292,8 @@ morie_psymet_parallel <- function(data, nsim = 100, seed = 42) {
 #' Spearman-Brown split-half reliability.
 #' @param method "first_last" or "odd_even".
 #' @param data Numeric matrix or data.frame of items.
-#' @return A numeric scalar: the Spearman-Brown split-half reliability.
+#' @return Single numeric scalar: the Spearman-Brown corrected split-half
+#'   reliability coefficient.
 #' @examples
 #' set.seed(1)
 #' f <- rnorm(80)

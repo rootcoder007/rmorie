@@ -38,7 +38,7 @@
 #'
 #' Returns the pair of logical matrices that make XLNet's permutation
 #' objective computable in a single pass over an unpermuted sequence.
-#' `content[i, j]` is TRUE when position `i` may attend to position `j`.
+#' `content\[i, j\]` is TRUE when position `i` may attend to position `j`.
 #'
 #' The content stream sees \eqn{z_{\le t}} -- itself included -- and the
 #' query stream sees only \eqn{z_{<t}}. The single difference is the
@@ -48,7 +48,7 @@
 #' for later positions.
 #'
 #' @param permutation Integer permutation of `0:(T-1)`, where
-#'   `permutation[t]` is the sequence position generated `t`-th.
+#'   `permutation\[t\]` is the sequence position generated `t`-th.
 #' @return A list with `content`, `query` and `rank`.
 #' @references Yang Z, Dai Z, Yang Y, Carbonell J, Salakhutdinov R,
 #'   Le QV (2019) XLNet. arXiv:1906.08237, eq (3).
@@ -144,7 +144,7 @@ morie_permutation_lm_loss <- function(logits, targets, permutation,
 
 #' Differentially private mean of a bounded sample
 #'
-#' Clip to \eqn{[lower, lower + C]}, average, then perturb. Under
+#' Clip to \eqn{\[lower, lower + C\]}, average, then perturb. Under
 #' replace-one adjacency the sensitivity of the mean of \eqn{n} clipped
 #' values is \eqn{\Delta = C/n}; Laplace noise \eqn{Lap(\Delta/\epsilon)}
 #' gives \eqn{\epsilon}-differential privacy and Gaussian noise with
@@ -312,8 +312,8 @@ morie_minimax_regret_constant <- function(tol = 1e-14) {
 #' Semiparametric efficiency and minimax bounds for the ATE
 #'
 #' Hahn's bound under unconfoundedness is
-#' \deqn{V_{eff} = E\left[\frac{\sigma_1^2(X)}{e(X)} +
-#'   \frac{\sigma_0^2(X)}{1 - e(X)} + (\tau(X) - \tau)^2\right],}
+#' \deqn{V_{eff} = E\left\[\frac{\sigma_1^2(X)}{e(X)} +
+#'   \frac{\sigma_0^2(X)}{1 - e(X)} + (\tau(X) - \tau)^2\right\],}
 #' a floor on the asymptotic variance of every regular asymptotically
 #' linear estimator, and \eqn{c\sqrt{V_{eff}/n}} is a floor on the
 #' worst-case welfare regret of every treatment rule.
@@ -339,7 +339,7 @@ morie_minimax_regret_constant <- function(tol = 1e-14) {
 #' @param D Binary treatment indicator.
 #' @param X Covariate matrix; an intercept is added.
 #' @param family "gaussian" or "binomial" for the arm regressions.
-#' @param trim Propensities are confined to `[trim, 1 - trim]`.
+#' @param trim Propensities are confined to `\[trim, 1 - trim\]`.
 #' @param alpha Level for the interval on the ATE.
 #' @return A list with `efficiency_bound`, `se_bound`, `estimate` (the
 #'   AIPW ATE), `var_aipw`, `var_ipw`, `aipw_efficiency_ratio`,

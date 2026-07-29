@@ -161,7 +161,7 @@ morie_caus_iv_2sls <- function(y, X, Z, cluster = NULL) {
 #'
 #' The k-class estimator whose `k` is the Anderson-Rubin variance
 #' ratio: `kappa` is the smallest eigenvalue of
-#' `(Ybar' M_[W,Z] Ybar)^-1 (Ybar' M_W Ybar)`, with `Ybar` holding
+#' `(Ybar' M_\[W,Z\] Ybar)^-1 (Ybar' M_W Ybar)`, with `Ybar` holding
 #' `y` and the ENDOGENOUS regressors only.
 #'
 #' Two facts make this checkable. `kappa >= 1` always, and when the
@@ -280,7 +280,7 @@ morie_caus_iv_liml <- function(y, X, Z, fuller = NULL, endog = NULL) {
 
 #' Local average treatment effect
 #'
-#' `LATE = (E[Y|Z=1] - E[Y|Z=0]) / (E[D|Z=1] - E[D|Z=0])`.
+#' `LATE = (E\[Y|Z=1\] - E\[Y|Z=0\]) / (E\[D|Z=1\] - E\[D|Z=0\])`.
 #'
 #' Arithmetically the Wald ratio. What Imbens and Angrist established
 #' is what it ESTIMATES, and that is the content: under instrument
@@ -443,7 +443,7 @@ morie_caus_iv_dag <- function(y, D, Z, homogeneous = FALSE) {
 #' @param T binary treatment.
 #' @param ps estimated propensity score.
 #' @param m1,m0 estimated outcome regressions for every unit.
-#' @param trim propensities are clipped to `[trim, 1 - trim]`.
+#' @param trim propensities are clipped to `\[trim, 1 - trim\]`.
 #' @return list: ate, se, ci, influence, regression_component,
 #'   augmentation_component, n_trimmed, min_ps, max_ps,
 #'   effective_overlap, n, method.
@@ -533,8 +533,8 @@ morie_caus_aipw <- function(y, T, ps, m1, m0, trim = 0.01) {
 #'   Newey and Robins (2018), *Econometrics Journal* 21:C1-C68.
 #' @examples
 #' X <- matrix(stats::rnorm(600), 200)
-#' D <- X[, 1] + stats::rnorm(200)
-#' morie_caus_dml_partial_lin(1.5 * D + X[, 1], D, X, n_folds = 3)$theta
+#' D <- X\[, 1\] + stats::rnorm(200)
+#' morie_caus_dml_partial_lin(1.5 * D + X\[, 1\], D, X, n_folds = 3)$theta
 #' @export
 morie_caus_dml_partial_lin <- function(y, D, X, n_folds = 5, learner = NULL,
                                        seed = 0) {

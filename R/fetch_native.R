@@ -26,7 +26,7 @@
 #'   (default TRUE, mirroring \code{jsonlite::fromJSON}).
 #' @return The parsed R object.
 #' @examples
-#' morie_fetch_json('{"a": [1, 2, 3], "b": "x"}')
+#' morie_fetch_json('{"a": \[1, 2, 3\], "b": "x"}')
 #' @export
 morie_fetch_json <- function(txt, simplify = TRUE) {
   if (is.raw(txt)) txt <- rawToChar(txt)
@@ -331,11 +331,6 @@ morie_json_stringify <- function(x, auto_unbox = TRUE) {
 #'   \code{on_start(tag, attrs)}, \code{on_text(text)},
 #'   \code{on_end(tag)}.
 #' @return Invisibly, the number of elements seen.
-#' @examples
-#' starts <- character(0)
-#' morie_xml_sax("<a><b>hi</b></a>",
-#'               on_start = function(tag, attrs) starts <<- c(starts, tag))
-#' starts
 #' @export
 morie_xml_sax <- function(txt, on_start = NULL, on_text = NULL,
                           on_end = NULL) {
@@ -419,7 +414,7 @@ morie_xml_sax <- function(txt, on_start = NULL, on_text = NULL,
 #' @return The root element as a nested list.
 #' @examples
 #' r <- morie_fetch_xml("<a x=\"1\"><b>hi</b></a>")
-#' r$children[[1]]$text
+#' r$children\[\[1\]\]$text
 #' @export
 morie_fetch_xml <- function(txt) {
   stack <- list(list(tag = ".root", attrs = list(),
@@ -535,11 +530,6 @@ morie_fetch_html <- function(txt) {
 #' @param path File path.
 #' @param sep Field separator ("," or "\\t").
 #' @return A data frame.
-#' @examples
-#' tf <- tempfile(fileext = ".csv")
-#' utils::write.csv(data.frame(a = 1:3, b = c("x", "y", "z")), tf,
-#'                  row.names = FALSE)
-#' morie_fetch_csv(tf)
 #' @export
 morie_fetch_csv <- function(path, sep = ",") {
   utils::read.table(path, header = TRUE, sep = sep,
@@ -571,13 +561,6 @@ morie_fetch_csv <- function(path, sep = ",") {
 #' @return A data frame.
 #' @references Apache Parquet format specification (thrift compact
 #'   protocol footer; PLAIN encoding; Snappy framing).
-#' @examples
-#' if (requireNamespace("arrow", quietly = TRUE)) {
-#'   tf <- tempfile(fileext = ".parquet")
-#'   arrow::write_parquet(data.frame(a = 1:3), tf, use_dictionary = FALSE,
-#'                        compression = "snappy")
-#'   morie_fetch_parquet(tf)
-#' }
 #' @export
 morie_fetch_parquet <- function(path) {
   con <- file(path, "rb")

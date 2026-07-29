@@ -808,7 +808,7 @@ morie_sensitivity_rosenbaum <- function(treated, control,
 #' G-computation (outcome regression) ATE estimator
 #'
 #' Estimates the ATE by:
-#' \deqn{\widehat{ATE} = \frac{1}{n}\sum_i \bigl[\hat{\mu}_1(X_i) - \hat{\mu}_0(X_i)\bigr]}{ATE_hat = (1)/(n)sum_i bigl[mu_hat_1(X_i) - mu_hat_0(X_i)bigr]}
+#' \deqn{\widehat{ATE} = \frac{1}{n}\sum_i \bigl\[\hat{\mu}_1(X_i) - \hat{\mu}_0(X_i)\bigr\]}{ATE_hat = (1)/(n)sum_i bigl\[mu_hat_1(X_i) - mu_hat_0(X_i)bigr\]}
 #'
 #' Delegates the standardisation step to \code{stdReg::stdGlm()} when
 #' \pkg{stdReg} is installed; otherwise computes the contrast inline
@@ -953,9 +953,9 @@ morie_estimate_g_computation <- function(data, treatment, outcome,
 #' set.seed(1)
 #' n <- 200
 #' X <- matrix(rnorm(n * 3), n, 3)
-#' d <- rbinom(n, 1, plogis(X[, 1]))
-#' y <- 0.5 * d + X[, 1] + rnorm(n)
-#' df <- data.frame(y = y, d = d, x1 = X[, 1], x2 = X[, 2], x3 = X[, 3])
+#' d <- rbinom(n, 1, plogis(X\[, 1\]))
+#' y <- 0.5 * d + X\[, 1\] + rnorm(n)
+#' df <- data.frame(y = y, d = d, x1 = X\[, 1\], x2 = X\[, 2\], x3 = X\[, 3\])
 #' morie_estimate_double_ml(df, "y", "d", c("x1", "x2", "x3"))
 #' @references
 #' Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo, E.,
@@ -976,7 +976,7 @@ morie_estimate_double_ml <- function(data, outcome, treatment, covariates,
     ate = out$theta, se = out$se,
     ci_lower = out$theta - z * out$se,
     ci_upper = out$theta + z * out$se,
-    n = n, method = "PLR (rmorie native)"
+    n = n, method = "PLR (morie native)"
   )
 }
 
@@ -1038,13 +1038,6 @@ morie_estimate_double_ml <- function(data, outcome, treatment, covariates,
 #'   \code{posterior_prob_causal}, and \code{summary} (the upstream
 #'   \code{CausalImpact} summary matrix), plus the original
 #'   \code{impact} object.
-#' @examples
-#' set.seed(1)
-#' x <- cumsum(rnorm(100))
-#' y <- 1.5 * x + rnorm(100); y[71:100] <- y[71:100] + 5
-#' df <- data.frame(y = y, x = x)
-#' res <- try(morie_causal_impact(df, c(1, 70), c(71, 100)))
-#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 #' @references
 #'   Brodersen KH, Gallusser F, Koehler J, Remy N, Scott SL (2015).
@@ -1110,12 +1103,6 @@ morie_causal_impact <- function(data, pre_period, post_period,
 #'   \code{propensity_scores} (numeric vector or \code{NULL}),
 #'   \code{method}, \code{estimand}, \code{ess} (effective sample
 #'   size), and \code{weightit} (the original WeightIt object).
-#' @examples
-#' set.seed(1)
-#' df <- data.frame(d = rbinom(80, 1, 0.4), x1 = rnorm(80), x2 = rnorm(80))
-#' df$y <- df$d + df$x1 + rnorm(80)
-#' res <- try(morie_causal_weighting(df, "d", c("x1", "x2")))
-#' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 #' @references
 #'   Greifer N (2024). WeightIt: Weighting for Covariate Balance in
@@ -1152,14 +1139,19 @@ morie_causal_weighting <- function(data, treatment, covariates,
 
 #' Robust / heteroskedasticity-consistent variance for a fitted model
 #'
-#' Native robust variance via \code{\link{morie_vcov_robust}} (no
-#' external dependency). Returns the requested variance-covariance
-#' matrix and the corresponding robust standard errors. Supports
-#' HC0-HC5 (cross-section), HAC (time-series), and clustered
-#' (one-way) variance, each cross-validated against \pkg{sandwich}
-#' to machine precision.
+#' Thin wrapper around \pkg{sandwich} variance estimators. Returns
+#' the requested variance-covariance matrix and the corresponding
+#' robust standard errors. Supports HC0-HC5 (cross-section), HAC
+#' (time-series), and clustered (one-way) variance.
 #'
-#' @param model A fitted \code{stats::lm} or \code{stats::glm}.
+#' Hard-errors if \pkg{sandwich} is not installed -- the HC sandwich
+#' algebra is well-tested upstream and re-implementing it inline
+#' would be both lengthy and error-prone.
+#'
+#' @param model A fitted model object (typically from
+#'   \code{stats::lm} or \code{stats::glm}) compatible with
+#'   \code{sandwich::vcovHC()}, \code{sandwich::vcovHAC()}, or
+#'   \code{sandwich::vcovCL()}.
 #' @param type One of \code{"HC0"}, \code{"HC1"}, \code{"HC2"},
 #'   \code{"HC3"}, \code{"HC4"}, \code{"HC4m"}, \code{"HC5"},
 #'   \code{"HAC"}, or \code{"CL"} (clustered). Default
@@ -1178,11 +1170,6 @@ morie_causal_weighting <- function(data, treatment, covariates,
 #'   cluster-robust paths.
 #' @srrstats {G3.1a} The available covariance methods are documented on
 #'   the \code{type} parameter above and demonstrated in the examples.
-#' @examples
-#' set.seed(1)
-#' df <- data.frame(y = rnorm(60), x = rnorm(60))
-#' fit <- stats::lm(y ~ x, data = df)
-#' str(morie_causal_robust_se(fit), max.level = 1)
 #' @export
 #' @references
 #'   Zeileis A, Koll S, Graham N (2020). Various Versatile Variances:

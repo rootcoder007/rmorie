@@ -157,7 +157,7 @@ morie_ar_spectrum <- function(x, order = 8L, fs = 1, n_freqs = 512L) {
 
 #' Causal moving-average (boxcar) filter
 #'
-#' \eqn{y[n] = (1/M)\sum_{k=0}^{M-1} x[n-k]}. Sinc magnitude response
+#' \eqn{y\[n\] = (1/M)\sum_{k=0}^{M-1} x\[n-k\]}. Sinc magnitude response
 #' with zeros at multiples of fs/M, and group delay (M-1)/2 -- the
 #' output is NOT aligned with the input. Mirrors
 #' \code{morie.fn.rgmavg}.
@@ -250,7 +250,7 @@ morie_lms_error <- function(x, w, r) {
 #'
 #' @param r matrix of reference vectors.
 #' @param x optional primary input, for Theta and the weights.
-#' @param lam forgetting factor in (0, 1].
+#' @param lam forgetting factor in (0, 1\].
 #' @return list: Phi, Theta, weights, effective_memory.
 #' @references Rangayyan (2015), Ch. 3.
 #' @examples

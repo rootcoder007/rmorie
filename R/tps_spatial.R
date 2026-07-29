@@ -204,7 +204,7 @@ NULL
 #' set.seed(2026)
 #' n_inc <- 400
 #' df <- data.frame(
-#'   HOOD_158 = sample(letters[1:20], n_inc, replace = TRUE),
+#'   HOOD_158 = sample(letters\[1:20\], n_inc, replace = TRUE),
 #'   LAT_WGS84 = 43.6 + runif(n_inc, 0, 0.2),
 #'   LONG_WGS84 = -79.4 + runif(n_inc, 0, 0.2)
 #' )
@@ -363,7 +363,7 @@ morie_tps_morans_i_neighbourhood <- function(df,
 #' @examples
 #' set.seed(2026)
 #' df <- data.frame(
-#'   HOOD_158 = sample(letters[1:15], 300, replace = TRUE),
+#'   HOOD_158 = sample(letters\[1:15\], 300, replace = TRUE),
 #'   LAT_WGS84 = 43.6 + runif(300, 0, 0.2),
 #'   LONG_WGS84 = -79.4 + runif(300, 0, 0.2)
 #' )
@@ -605,16 +605,6 @@ morie_tps_kde_density <- function(df,
 # ---------------------------------------------------------------------------
 
 #' @return \code{x}, invisibly.
-#' @examples
-#' \donttest{
-#' set.seed(2026)
-#' df <- data.frame(
-#'   LAT_WGS84 = 43.6 + rnorm(120, 0, 0.05),
-#'   LONG_WGS84 = -79.4 + rnorm(120, 0, 0.05)
-#' )
-#' obj <- morie_tps_kde_density(df, bandwidth = 0.01)
-#' print(obj)
-#' }
 #' @export
 print.morie_tps_spatial_result <- function(x, ...) {
   cat(x$title, "\

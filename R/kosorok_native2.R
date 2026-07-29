@@ -22,11 +22,11 @@
 
 #' Brownian bridge covariance
 #'
-#' \eqn{cov[G(s), G(t)] = F(s \wedge t) - F(s)F(t)} (Kosorok Ch. 2).
+#' \eqn{cov\[G(s), G(t)\] = F(s \wedge t) - F(s)F(t)} (Kosorok Ch. 2).
 #' Mirrors \code{morie.fn.ksr030}.
 #'
 #' @param s,t numeric time points.
-#' @param F optional CDF; the uniform on [0, 1] when NULL.
+#' @param F optional CDF; the uniform on \[0, 1\] when NULL.
 #' @return list: covariance, variance_s.
 #' @references Kosorok, M. R. (2008). Introduction to Empirical
 #'   Processes and Semiparametric Inference. Springer. Ch. 2.
@@ -169,7 +169,7 @@ morie_u_process <- function(f, x, m = 2L) {
 
 #' Bracketing entropy integral and the Donsker conditions
 #'
-#' \eqn{J_{[]}(\delta) = \int_0^\delta \sqrt{\log N_{[]}(\epsilon)}
+#' \eqn{J_{\[\]}(\delta) = \int_0^\delta \sqrt{\log N_{\[\]}(\epsilon)}
 #' d\epsilon}. The square root is what makes polynomial bracketing
 #' growth integrable and exponential growth divergent -- that IS the
 #' Donsker boundary. Also reports the two envelope conditions, which
@@ -314,7 +314,7 @@ morie_km_hadamard <- function(S_0, L, G, h, t) {
 
 #' Differentiability in quadratic mean
 #'
-#' \eqn{\int[(\sqrt{dP_t}-\sqrt{dP})/t - \tfrac12 g\sqrt{dP}]^2 \to 0}.
+#' \eqn{\int\[(\sqrt{dP_t}-\sqrt{dP})/t - \tfrac12 g\sqrt{dP}\]^2 \to 0}.
 #' Stated on the SQUARE ROOT of the density, which is what lets kinked
 #' families such as the Laplace qualify. Mirrors
 #' \code{morie.fn.ksr061}.

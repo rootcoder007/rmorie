@@ -6,7 +6,7 @@
 #'
 #' The coefficient stays informative under class imbalance, where
 #' accuracy does not: it uses all four cells of the confusion matrix
-#' rather than only the diagonal. It ranges over [-1, 1], with 0 meaning
+#' rather than only the diagonal. It ranges over \[-1, 1\], with 0 meaning
 #' no better than chance and negative values meaning the predictions run
 #' opposite to the truth.
 #'
@@ -76,7 +76,7 @@ morie_mcc_counts <- function(tp, tn, fp, fn) {
 #' @param y_true Vector of observed labels.
 #' @param y_pred Vector of predicted labels, same length as
 #'   \code{y_true}.
-#' @return A single numeric in [-1, 1].
+#' @return A single numeric in \[-1, 1\].
 #' @references Matthews BW (1975). Comparison of the predicted and
 #'   observed secondary structure of T4 phage lysozyme.
 #'   \emph{Biochimica et Biophysica Acta}, 405(2), 442-451.

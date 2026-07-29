@@ -9,7 +9,7 @@
 #' cross-year-safety, and recommended methods per variable.
 #'
 #' Pure R; no C/C++ hot path needed (taxonomy is regex + lookup, not
-#' CPU-bound).  Per \code{[[feedback_r_cpp_first]]} we'd reach for
+#' CPU-bound).  Per \code{\[\[feedback_r_cpp_first\]\]} we'd reach for
 #' Rcpp only if profiling showed a real bottleneck.
 #'
 #' Public callables
@@ -45,8 +45,6 @@ NULL
 
 # Internal: turn a dataset_dictionary-style DatasetSchema (a named
 # list with $columns) into a list of taxonomies.
-#' Internal helper: Classify Schema R
-#' @noRd
 .classify_schema_R <- function(schema, dataset_name) {
   out <- vector("list", length(schema$columns))
   for (i in seq_along(schema$columns)) {
@@ -63,8 +61,6 @@ NULL
 
 
 # Internal: compute counts + flag lists from a flat taxonomy list
-#' Internal helper: Summarise Taxonomies
-#' @noRd
 .summarise_taxonomies <- function(taxonomies, analyzed_set, domain) {
   n_total <- length(taxonomies)
   n_analyzed <- sum(vapply(taxonomies,
@@ -222,9 +218,6 @@ morie_audit_all_variables <- function(otis_specs = NULL,
 #'
 #' @param df Loaded data.frame.
 #' @return List of column specs.
-#' @examples
-#' df <- data.frame(age = c(21, 34, NA), city = c("a", "b", "b"))
-#' str(morie_specs_from_df(df), max.level = 1)
 #' @export
 morie_specs_from_df <- function(df) {
   lapply(names(df), function(nm) {
@@ -246,10 +239,6 @@ morie_specs_from_df <- function(df) {
 #' @param out_path Path to write to.
 #' @param audit_result A \code{morie_audit_result} or list of them.
 #' @return The path written.
-#' @examples
-#' df <- data.frame(age = c(21, 34, NA), city = c("a", "b", "b"))
-#' res <- try(morie_write_audit_markdown(tempfile(fileext = ".md"),
-#'                                       morie_specs_from_df(df)))
 #' @export
 morie_write_audit_markdown <- function(out_path, audit_result) {
   if (!inherits(audit_result, "morie_audit_result") &&
@@ -307,16 +296,7 @@ morie_write_audit_markdown <- function(out_path, audit_result) {
 #' Print method for audit results.
 #' @param x A \code{morie_audit_result}.
 #' @param ... Unused.
-#' @return \code{x}, invisibly.
-#' @examples
-#' \donttest{
-#' spec <- function(nm, dt, vv = NULL) list(name = nm, dtype = dt, valid_values = vv)
-#' specs <- list(v1 = list(spec("UniqueIndividual_ID", "string"),
-#'                         spec("NumberConsecutiveDays_Segregation", "int")))
-#' res <- morie_audit_otis_variables(specs)
-#' res$domain
-#' print(res)
-#' }
+#' @return Invisibly returns \code{x} unchanged.
 #' @export
 print.morie_audit_result <- function(x, ...) {
   cat(x$title, "\n", strrep("=", nchar(x$title)), "\n", sep = "")

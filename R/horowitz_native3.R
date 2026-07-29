@@ -97,7 +97,7 @@ morie_deconvolution <- function(W, sigma_eps, grid = NULL, h = NULL,
 #' Convergence rates for deconvolution
 #'
 #' Ordinary-smooth error gives \eqn{O_p(n^{-r})}; supersmooth error
-#' gives \eqn{O_p[(\log n)^{-s}]}. The gap is the practical message of
+#' gives \eqn{O_p\[(\log n)^{-s}\]}. The gap is the practical message of
 #' the chapter: at \eqn{n = 10^6} a logarithmic rate has barely moved.
 #' Both are returned at the requested n so the difference is a number
 #' rather than a footnote. Mirrors \code{morie.fn.hrzdcrc}.
@@ -130,7 +130,7 @@ morie_deconv_rate <- function(n, error = "normal", s = 2, r = 2) {
 
 #' Asymptotic normality of the deconvolution estimator
 #'
-#' \eqn{[n h_n/b_n]^{1/2}(\hat f_U(u) - f_U(u) - \mathrm{bias}) \to_D
+#' \eqn{\[n h_n/b_n\]^{1/2}(\hat f_U(u) - f_U(u) - \mathrm{bias}) \to_D
 #' N(0, \sigma^2)}. The normalising factor carries \eqn{b_n}, a
 #' deconvolution-specific inflation absent from ordinary kernel
 #' estimation -- it encodes the price of dividing by a vanishing
@@ -170,9 +170,9 @@ morie_deconv_normality <- function(fn_u, f_u, n, h, b, bias = 0, sigma = 1) {
 
 #' Density-weighted average derivative
 #'
-#' \eqn{\delta = E[f_X(X)\,\partial E(Y|X)/\partial X] = -2E[f_X'(X)Y]}.
+#' \eqn{\delta = E\[f_X(X)\,\partial E(Y|X)/\partial X\] = -2E\[f_X'(X)Y\]}.
 #' This is the DENSITY-WEIGHTED average derivative, not the plain
-#' \eqn{E[\partial E(Y|X)/\partial X]}: for standard normal X with
+#' \eqn{E\[\partial E(Y|X)/\partial X\]}: for standard normal X with
 #' \eqn{E(Y|X) = 2X} the weighted estimand is \eqn{2\int\phi^2 = 0.564}
 #' while the unweighted one is 2. Integration by parts turns a
 #' derivative of an unknown regression into an expectation involving
@@ -260,8 +260,8 @@ morie_average_derivative_hat <- function(X, y, h = NULL) {
 
 #' Tikhonov regularisation for nonparametric IV
 #'
-#' \eqn{\hat g = \arg\min_g [\|\hat E(Y|W) - \hat Tg\|^2 +
-#' \alpha_n\|g\|^2]}. The operator T is compact, so its inverse is
+#' \eqn{\hat g = \arg\min_g \[\|\hat E(Y|W) - \hat Tg\|^2 +
+#' \alpha_n\|g\|^2\]}. The operator T is compact, so its inverse is
 #' UNBOUNDED and the problem is ill-posed: without the penalty,
 #' arbitrarily small perturbations in the estimated right-hand side
 #' produce arbitrarily large changes in g. The solution norm across a
@@ -357,7 +357,7 @@ morie_sieve_iv <- function(T, Ey_w, K = NULL) {
 #' Sieve estimate of the NPIV operator
 #'
 #' \eqn{(Tg)(w) = \int g(x)f_{X|W}(x|w)\,dx}, represented on a sieve
-#' basis as \eqn{\hat T_{jk} = \hat E[p_k(X)q_j(W)]}. The operator's
+#' basis as \eqn{\hat T_{jk} = \hat E\[p_k(X)q_j(W)\]}. The operator's
 #' singular values decay to zero -- that decay IS the ill-posedness,
 #' and how fast it decays determines whether the problem is mildly or
 #' severely ill-posed. The singular values are returned so that is
@@ -426,7 +426,7 @@ morie_npiv_quantile <- function(T, tau_target, K = NULL, tau = 0.5) {
 
 #' Instrument relevance and exogeneity diagnostics
 #'
-#' Identification needs \eqn{E[U|Z] = 0} (exogeneity) together with
+#' Identification needs \eqn{E\[U|Z\] = 0} (exogeneity) together with
 #' variation in X that Z explains (relevance). Both are reported and
 #' they fail in different ways: a weak but valid instrument gives
 #' large variance, while a strong but invalid one gives confident

@@ -21,12 +21,6 @@
   out
 }
 
-#' @examples
-#' \donttest{
-#' d <- data.frame(t = rbinom(100, 1, 0.4), x = rnorm(100))
-#' obj <- morie_weight_trimming(morie_weight_ps(d, "t", "x"))
-#' print(obj)
-#' }
 #' @export
 print.morie_weight <- function(x, ...) {
   cat(sprintf("morie_weight: %s (estimand %s)\n", x$method, x$estimand))
@@ -115,7 +109,7 @@ morie_weight_entropy <- function(data, treatment, covariates) {
 #' Covariate-balancing propensity score (Imai & Ratkovic 2014)
 #'
 #' Native just-identified CBPS: solves the covariate-balance moment
-#' conditions \eqn{E[(T - p(X)) X / (p(X)(1-p(X)))] = 0} directly
+#' conditions \eqn{E\[(T - p(X)) X / (p(X)(1-p(X)))\] = 0} directly
 #' (the exactly-identified estimator), via Newton iterations on the
 #' logistic index. Balance is thus built into the score rather than
 #' checked after the fact.

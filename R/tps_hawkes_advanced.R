@@ -12,7 +12,7 @@
 #' with kernel decomposition \eqn{g(u) = \eta \cdot \tilde g(u)}{g(u) = eta * tilde g(u)} where
 #' \eqn{\eta \in (0, 1)}{eta in (0, 1)} is the branching ratio (mean offspring per
 #' event) and \eqn{\tilde g}{tilde g} is a probability density on
-#' \eqn{[0, \infty)}{[0, inf)}. Stationarity requires \eqn{\eta < 1}{eta < 1}.
+#' \eqn{\[0, \infty)}{\[0, inf)}. Stationarity requires \eqn{\eta < 1}{eta < 1}.
 #'
 #' Supported kernels: exponential, gamma, Weibull, Lomax (Pareto-II).
 #' Supported baselines: constant and sinusoidal-with-trend
@@ -109,7 +109,7 @@ NULL
 #' @noRd
 .tps_hwka_cpp_ok <- function() {
   exists("morie_hawkes_pair_excitation_sum_cpp",
-         envir = asNamespace("rmorie"), inherits = FALSE)
+         envir = asNamespace("morie"), inherits = FALSE)
 }
 
 #' Internal helper: Tps Hwka Kernel Density
@@ -478,7 +478,7 @@ NULL
 #' non-stationary Hawkes processes. arXiv:2408.09710v1.
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #'   df <- morie_tps_load_tps_dataset("Assault", nrows = 4000)
 #'   rr <- morie_tps_hawkes_advanced_fit(df, kernel = "gamma",
 #'                                         baseline = "sinusoidal",
@@ -587,15 +587,9 @@ morie_tps_hawkes_advanced_fit <- function(df,
 #' @references Kwan TKJ, Chen F, Dunsmuir WTM (2024). arXiv:2408.09710.
 #'
 #' @examples
-#' \donttest{
-#'   df <- morie_tps_load_tps_dataset("Assault", nrows = 500)
-#'   # A bounded grid (300 events, constant baseline, one kernel pair)
-#'   # keeps the example fast; the defaults sweep the full
-#'   # baseline x kernel grid over up to 4000 events.
-#'   rr <- morie_tps_compare_hawkes_kernels(
-#'     df, ds_name = "Assault", max_n = 300L,
-#'     baselines = "constant", kernels = c("exponential", "gamma")
-#'   )
+#' \dontrun{
+#'   df <- morie_tps_load_tps_dataset("Assault", nrows = 3000)
+#'   rr <- morie_tps_compare_hawkes_kernels(df, ds_name = "Assault")
 #' }
 #'
 #' @export
@@ -700,7 +694,7 @@ morie_tps_compare_hawkes_kernels <- function(df,
 #' @references Kwan TKJ, Chen F, Dunsmuir WTM (2024). arXiv:2408.09710.
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #'   df <- morie_tps_load_tps_dataset("Assault", nrows = 2000)
 #'   rr <- morie_tps_hawkes_markovian_vs_nonmarkovian(df,
 #'                                                     ds_name = "Assault")

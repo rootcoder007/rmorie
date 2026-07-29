@@ -248,7 +248,7 @@ morie_azuma_bound <- function(n, c, t) {
 
 #' The second moment method
 #'
-#' By Chebyshev, \eqn{P(X = 0) \le \mathrm{Var}(X)/E[X]^2}. This is the
+#' By Chebyshev, \eqn{P(X = 0) \le \mathrm{Var}(X)/E\[X\]^2}. This is the
 #' companion to the first moment: together they make threshold results
 #' sharp, since the first shows a property vanishes below the threshold
 #' and the second shows it appears above. Neither alone establishes one.

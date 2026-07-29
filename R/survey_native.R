@@ -29,7 +29,7 @@
 #' directly. Mirrors \code{morie.fn.htest1}.
 #'
 #' @param y observed values for the sampled units.
-#' @param pi inclusion probabilities in (0, 1].
+#' @param pi inclusion probabilities in (0, 1\].
 #' @param N known population size, for comparison.
 #' @return list: total, mean, weight_sum, implied_N, N,
 #'   design_unbiased, uses_known_N, n, method.
@@ -66,7 +66,7 @@ morie_horvitz_thompson <- function(y, pi, N = NULL) {
 #' weights. Mirrors \code{morie.fn.hjkest}.
 #'
 #' @param y observed values.
-#' @param pi inclusion probabilities in (0, 1].
+#' @param pi inclusion probabilities in (0, 1\].
 #' @return list: mean, ht_mean_if_N_known, weight_sum,
 #'   design_unbiased, bias_order, n, method.
 #' @examples

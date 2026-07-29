@@ -18,7 +18,7 @@
 #' if (requireNamespace("rpart", quietly = TRUE)) {
 #'   set.seed(1)
 #'   x <- matrix(rnorm(120), 60, 2)
-#'   y <- factor(ifelse(x[, 1] > 0, "pos", "neg"))
+#'   y <- factor(ifelse(x\[, 1\] > 0, "pos", "neg"))
 #'   morie_decision_tree_split(x, y)
 #' }
 #' @export

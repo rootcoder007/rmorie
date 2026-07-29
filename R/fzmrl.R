@@ -2,7 +2,7 @@
 
 #' Fauzi: Kernel mean residual life asymptotics (Ch 4)
 #'
-#' Kernel-smoothed MRL \eqn{m(t)=E[X-t|X>t]} with Yang (1978)
+#' Kernel-smoothed MRL \eqn{m(t)=E\[X-t|X>t\]} with Yang (1978)
 #' asymptotic SE.
 #'
 #' @param x Numeric vector (lifetimes).

@@ -18,8 +18,8 @@
 #' Branch; maintained by the Ministry of the Solicitor General
 #' (maintainer branch: Business Intelligence and Insights Branch);
 #' source system: the Offender Tracking Information System (OTIS) --
-#' OTIS names the upstream system, not the download. The canonical
-#' table has 76,934 rows (FY 2022/23 -- 2024/25). See
+#' OTIS names the upstream system, not the download. The
+#' canonical table has 76,934 rows (FY 2022/23 -- 2024/25). See
 #' \code{\link{morie_otis_load}} in \code{otis_analyze.R} for the
 #' canonical loader.
 #'
@@ -42,10 +42,11 @@
 #'  Chernozhukov, V. et al. (2018). Double/debiased machine learning
 #'  for treatment and structural parameters. \emph{Econometrics
 #'  Journal}, 21(1), C1-C68.
-#' @param ... Arguments forwarded verbatim to the canonical short-named
-#'   OTIS primitive (e.g. `morie_otis_rplace`, `morie_otis_astcmb`,
-#'   `morie_otis_volat`, `morie_otis_rctrnd`, `morie_otis_otdesc`). See
-#'   those functions for full per-primitive argument lists.
+#' @param ... Arguments forwarded verbatim to the canonical
+#'   short-named OTIS primitive (e.g. `morie_otis_rplace`,
+#'   `morie_otis_astcmb`, `morie_otis_volat`, `morie_otis_rctrnd`,
+#'   `morie_otis_otdesc`). See those functions for full
+#'   per-primitive argument lists.
 #' @name morie_otis_primitives
 NULL
 
@@ -62,8 +63,6 @@ NULL
 # Internal result constructor
 # ---------------------------------------------------------------------------
 
-#' Internal helper: Otis Result
-#' @noRd
 .otis_result <- function(title,
                           summary_lines = list(),
                           tables = list(),
@@ -84,8 +83,6 @@ NULL
 
 
 # Tolerant Yes/No/1/0/TRUE -> integer 0/1
-#' Internal helper: Otis Binarise
-#' @noRd
 .otis_binarise <- function(s) {
   if (is.logical(s)) {
     return(as.integer(s))
@@ -118,7 +115,7 @@ NULL
 #' @param id_col,age_col,region_col,year_col,gender_col Column names.
 #' @return \code{morie_otis_result} list.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #'   df <- morie_otis_load()
 #'   morie_otis_rplace(df, year = 2024)
 #' }
@@ -507,7 +504,7 @@ morie_otis_otdesc <- function(df,
 #'
 #' Wraps a Frisch-Waugh-Lovell partialling-out estimator with
 #' \code{n_folds} cross-fitting on the OLS nuisance functions
-#' \eqn{E[Y|X]} and \eqn{E[D|X]}, then regresses outcome residuals on
+#' \eqn{E\[Y|X\]} and \eqn{E\[D|X\]}, then regresses outcome residuals on
 #' treatment residuals for the ATE; heteroskedasticity-robust standard
 #' errors. ATT is the ATE divided by the treated share (a simple
 #' weighting approximation; for the production-grade DML use
@@ -651,67 +648,31 @@ morie_otis_otdml <- function(df,
 # ---------------------------------------------------------------------------
 
 #' @rdname morie_otis_primitives
-#' @return An object of class \code{"morie_otis_result"}.
-#' @examples
-#' \donttest{
-#' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
-#' res <- try(morie_otis_regional_placement(b01))
-#' class(res)
-#' }
+#' @return A \code{morie_otis_result} object (see \code{morie_otis_rplace}).
 #' @export
 morie_otis_regional_placement <- function(...) morie_otis_rplace(...)
 
 #' @rdname morie_otis_primitives
-#' @return An object of class \code{"morie_otis_result"}.
-#' @examples
-#' \donttest{
-#' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
-#' res <- try(morie_otis_alert_state_combo(b01))
-#' class(res)
-#' }
+#' @return A \code{morie_otis_result} object (see \code{morie_otis_astcmb}).
 #' @export
 morie_otis_alert_state_combo <- function(...) morie_otis_astcmb(...)
 
 #' @rdname morie_otis_primitives
-#' @return An object of class \code{"morie_otis_result"}.
-#' @examples
-#' \donttest{
-#' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
-#' res <- try(morie_otis_volatility(b01))
-#' class(res)
-#' }
+#' @return A \code{morie_otis_result} object (see \code{morie_otis_volat}).
 #' @export
 morie_otis_volatility <- function(...) morie_otis_volat(...)
 
 #' @rdname morie_otis_primitives
-#' @return An object of class \code{"morie_otis_result"}.
-#' @examples
-#' \donttest{
-#' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
-#' res <- try(morie_otis_rc_trends(b01))
-#' class(res)
-#' }
+#' @return A \code{morie_otis_result} object (see \code{morie_otis_rctrnd}).
 #' @export
 morie_otis_rc_trends <- function(...) morie_otis_rctrnd(...)
 
 #' @rdname morie_otis_primitives
-#' @return An object of class \code{"morie_otis_result"}.
-#' @examples
-#' \donttest{
-#' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
-#' res <- try(morie_otis_descriptives(b01))
-#' class(res)
-#' }
+#' @return A \code{morie_otis_result} object (see \code{morie_otis_otdesc}).
 #' @export
 morie_otis_descriptives <- function(...) morie_otis_otdesc(...)
 
 #' @rdname morie_otis_primitives
-#' @return An object of class \code{"morie_otis_result"}.
-#' @examples
-#' \donttest{
-#' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
-#' res <- try(morie_otis_dml(b01))
-#' class(res)
-#' }
+#' @return A \code{morie_otis_result} object (see \code{morie_otis_otdml}).
 #' @export
 morie_otis_dml <- function(...) morie_otis_otdml(...)

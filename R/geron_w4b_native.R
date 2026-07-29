@@ -1136,7 +1136,7 @@ morie_geron_one_cycle <- function(t, T, lr_max, lr_min, mom_max = 0.95, mom_min 
 # ---------------------------------------------------------------- 26. hml2r
 
 #' L2 (ridge) regularization penalty (Geron Ch 11, morie.fn hml2r)
-#' @param theta Parameters. @param alpha Strength. @param skip_bias Exclude theta[1]. @param eta Optional learning rate.
+#' @param theta Parameters. @param alpha Strength. @param skip_bias Exclude theta\[1\]. @param eta Optional learning rate.
 #' @return List with penalty, gradient, l2_norm, shrink_factor, estimate, n, method.
 #' @export
 morie_geron_l2_regularization <- function(theta, alpha, skip_bias = FALSE, eta = NULL) {
@@ -1166,7 +1166,7 @@ morie_geron_l2_regularization <- function(theta, alpha, skip_bias = FALSE, eta =
 # ---------------------------------------------------------------- 27. hmlaso (delegates to EXISTING morie_geron_l1_regularization)
 
 #' Lasso cost = MSE + alpha * L1 penalty (Geron Ch 4, morie.fn hmlaso)
-#' @param X,y Data. @param theta Coefficients. @param alpha L1 strength. @param skip_bias Exclude theta[1].
+#' @param X,y Data. @param theta Coefficients. @param alpha L1 strength. @param skip_bias Exclude theta\[1\].
 #' @return List with cost, mse, penalty, gradient, n_zero, estimate, n, method.
 #' @export
 morie_geron_lasso_cost_hmlaso <- function(X, y, theta, alpha, skip_bias = FALSE) {
@@ -1793,7 +1793,7 @@ morie_geron_mode_collapse <- function(samples, reference = NULL, tol = NULL) {
 
 #' MDP validation plus value iteration (Geron Ch 19, morie.fn hmmdp)
 #' @param states,actions Label vectors. @param P Array (n_s,n_a,n_s). @param R Array (n_s,n_a,n_s) or (n_s,n_a).
-#' @param gamma Discount in [0,1). @param max_iter Sweep cap. @param tol Convergence threshold.
+#' @param gamma Discount in \[0,1). @param max_iter Sweep cap. @param tol Convergence threshold.
 #' @return List with V, Q, policy, policy_labels, n_iter, effective_horizon, estimate, n, method.
 #' @export
 morie_geron_mdp <- function(states, actions, P, R, gamma = 0.95, max_iter = 1000, tol = 1e-10) {

@@ -170,7 +170,7 @@ morie_panel_deconvolution <- function(y, x, beta, nu_U = NULL, nu_eps = NULL,
 #' Substituting the empirical characteristic functions straight into
 #' the inversion formula does NOT work -- the integral does not exist
 #' in general. \eqn{\psi_\zeta} is the regularisation: a
-#' characteristic function supported on \eqn{[-1, 1]}, so the
+#' characteristic function supported on \eqn{\[-1, 1\]}, so the
 #' integrand is identically zero past \eqn{1/\nu_{nU}} and the ratio
 #' is never formed where the denominator has died. It is the
 #' Fourier-transform analogue of kernel smoothing, and it is
@@ -262,8 +262,8 @@ morie_panel_densities <- function(y, x, beta, nu_U = NULL, nu_eps = NULL,
 #' First-passage-time probability in a panel model
 #'
 #' \eqn{P(\theta|y_1, y^*, x) = f_W(y_1 - \beta'x_1)^{-1}\int
-#' f_\varepsilon(y_1 - \beta'x_1 - u)[\prod_{k=2}^{\theta}
-#' F_\varepsilon(y^* - \beta'x_k - u)] f_U(u) du} (5.20).
+#' f_\varepsilon(y_1 - \beta'x_1 - u)\[\prod_{k=2}^{\theta}
+#' F_\varepsilon(y^* - \beta'x_k - u)\] f_U(u) du} (5.20).
 #'
 #' This is why Sec. 5.2 estimates \eqn{f_U} and \eqn{f_\varepsilon}
 #' at all: they are rarely interesting in themselves, but the

@@ -58,12 +58,6 @@ NULL
 #' @param is_compound Logical; flags compound workflows.
 #' @param is_r_bridge Logical; flags Python <-> R bridge calls.
 #' @return A list with class \code{morie_stat_command}.
-#' @examples
-#' cmd <- stat_command("demo_echo", "misc", "demo_echo",
-#'                     "Echo demo command",
-#'                     handler_repl = function(...) "ok")
-#' register_stat_command(cmd)
-#' cmd$name
 #' @export
 stat_command <- function(name, category, usage, description,
                           handler_repl,
@@ -122,12 +116,6 @@ stat_command <- function(name, category, usage, description,
 #'
 #' @param cmd A \code{morie_stat_command} constructed by \code{stat_command}.
 #' @return The command name, invisibly.
-#' @examples
-#' cmd <- stat_command("demo_echo", "misc", "demo_echo",
-#'                     "Echo demo command",
-#'                     handler_repl = function(...) "ok")
-#' register_stat_command(cmd)
-#' !is.null(resolve_stat_command("demo_echo"))
 #' @export
 register_stat_command <- function(cmd) {
   if (!inherits(cmd, "morie_stat_command")) {
@@ -154,12 +142,6 @@ register_stat_command <- function(cmd) {
 #'
 #' @param name Character scalar.
 #' @return A \code{morie_stat_command} or \code{NULL}.
-#' @examples
-#' cmd <- stat_command("demo_echo", "misc", "demo_echo",
-#'                     "Echo demo command",
-#'                     handler_repl = function(...) "ok")
-#' register_stat_command(cmd)
-#' resolve_stat_command("demo_echo")$usage
 #' @export
 resolve_stat_command <- function(name) {
   if (!is.character(name) || length(name) != 1L) {
@@ -178,7 +160,8 @@ resolve_stat_command <- function(name) {
 
 
 #' Sorted vector of all command names + aliases
-#' @return A vector of the computed values.
+#' @return A sorted character vector containing every registered stat
+#'   command name together with all registered aliases (deduplicated).
 #' @examples
 #' v <- all_stat_command_names()
 #' head(v)
@@ -196,7 +179,7 @@ all_stat_command_names <- function() {
 #'                     handler_repl = function() 1)
 #' register_stat_command(cmd)
 #' groups <- commands_by_category()
-#' groups[["Demo"]]
+#' groups\[\["Demo"\]\]
 #' @export
 commands_by_category <- function() {
   cats <- .morie_stat_commands$categories
@@ -217,12 +200,6 @@ commands_by_category <- function() {
 #' @param ... Arguments forwarded to the REPL handler.
 #' @return Whatever the handler returns. Stops with an informative
 #'   error if the command is not registered.
-#' @examples
-#' cmd <- stat_command("demo_echo", "misc", "demo_echo",
-#'                     "Echo demo command",
-#'                     handler_repl = function(...) "ok")
-#' register_stat_command(cmd)
-#' run_stat_command("demo_echo")
 #' @export
 run_stat_command <- function(name, ...) {
   cmd <- resolve_stat_command(name)
@@ -234,9 +211,8 @@ run_stat_command <- function(name, ...) {
 
 
 #' Total number of registered commands (excluding aliases)
-#' @return A numeric value (scalar).
-#' @examples
-#' n_stat_commands()
+#' @return A length-1 integer giving the number of commands currently in
+#'   the registry (aliases are not counted).
 #' @export
 n_stat_commands <- function() {
   length(.morie_stat_commands$registry)
@@ -249,8 +225,8 @@ n_stat_commands <- function() {
 #' @examples
 #' n_cleared <- clear_stat_commands()
 #' n_stat_commands()
-#' rmorie:::.morie_seed_stat_commands()
-#' rmorie:::.morie_auto_register_stat_commands()
+#' morie:::.morie_seed_stat_commands()
+#' morie:::.morie_auto_register_stat_commands()
 #' n_stat_commands()
 #' @export
 clear_stat_commands <- function() {
@@ -271,8 +247,6 @@ clear_stat_commands <- function() {
 # 620-command tree lives in Python; the R surface starts with the
 # multiple-testing and semiparametric callables ported alongside this
 # file.
-#' Internal helper: Morie Seed Stat Commands
-#' @noRd
 .morie_seed_stat_commands <- function() {
   seeds <- list(
     list(
@@ -411,23 +385,21 @@ clear_stat_commands <- function() {
   invisible(length(seeds))
 }
 
-# Seed registration runs at load time from the single package `.onLoad`
-# in zzz.R, NOT here at namespace-build time. (A previous top-level
-# `local({...})` populated the registry during build; that is
-# unnecessary and couples the built lazy-load DB to handler closures.)
+# Run seed registration on package load. Wrapped in try() so a downstream
+# missing dependency does not abort attachment.
+local({
+  try(.morie_seed_stat_commands(), silent = TRUE)
+})
 
 
 # ---------------------------------------------------------------------------
 # Print method
 # ---------------------------------------------------------------------------
 
-#' @return \code{x}, invisibly.
-#' @examples
-#' cmd <- stat_command("demo_echo", "misc", "demo_echo",
-#'                     "Echo demo command",
-#'                     handler_repl = function(...) "ok")
-#' register_stat_command(cmd)
-#' print(cmd)
+#' Print method for stat-command registry entries
+#' @param x A \code{morie_stat_command}.
+#' @param ... Unused.
+#' @return Invisibly returns \code{x} unchanged.
 #' @export
 print.morie_stat_command <- function(x, ...) {
   cat(sprintf("morie stat command: %s\
@@ -479,8 +451,6 @@ print.morie_stat_command <- function(x, ...) {
 # Infer a category for a function `fn_name` by searching the installed
 # R/ directory for files whose names begin with a known prefix.  Falls
 # back to scanning the function's source attributes when available.
-#' Internal helper: Morie Infer Category
-#' @noRd
 .morie_infer_category <- function(fn_name) {
   # Cheap path: prefix match against the static map.
   for (px in names(.MORIE_CATEGORY_PREFIX_MAP)) {
@@ -490,7 +460,7 @@ print.morie_stat_command <- function(x, ...) {
     }
   }
   # Try matching against installed R/ filenames.
-  r_dir <- system.file("R", package = "rmorie")
+  r_dir <- system.file("R", package = "morie")
   if (nzchar(r_dir) && dir.exists(r_dir)) {
     files <- list.files(r_dir, pattern = "\\\\.R$", full.names = FALSE)
     for (f in files) {
@@ -508,7 +478,7 @@ print.morie_stat_command <- function(x, ...) {
 
 #' Auto-register every exported ``morie_*`` function as a stat_command
 #'
-#' Walks ``getNamespaceExports("rmorie")``, filters to the ``^morie_`` family,
+#' Walks ``getNamespaceExports("morie")``, filters to the ``^morie_`` family,
 #' and registers each as a \code{morie_stat_command} unless one already
 #' exists under that name.  The category is inferred from the function's
 #' source filename prefix via \code{.MORIE_CATEGORY_PREFIX_MAP}.  Safe to
@@ -518,14 +488,14 @@ print.morie_stat_command <- function(x, ...) {
 #' @keywords internal
 #' @export
 .morie_auto_register_stat_commands <- function() {
-  exports <- tryCatch(getNamespaceExports("rmorie"),
+  exports <- tryCatch(getNamespaceExports("morie"),
                       error = function(e) character(0))
   if (length(exports) == 0L) return(invisible(0L))
   candidates <- grep("^morie_", exports, value = TRUE)
   n_added <- 0L
   for (nm in candidates) {
     if (!is.null(resolve_stat_command(nm))) next
-    fn <- tryCatch(getExportedValue("rmorie", nm), error = function(e) NULL)
+    fn <- tryCatch(getExportedValue("morie", nm), error = function(e) NULL)
     if (!is.function(fn)) next
     cat <- .morie_infer_category(nm)
     desc <- sprintf("Auto-registered from package namespace (%s).", nm)
@@ -547,8 +517,6 @@ print.morie_stat_command <- function(x, ...) {
 
 
 # --- Package-load hook -------------------------------------------------------
-# NB: the package has a SINGLE `.onLoad`, defined in zzz.R (which sorts
-# last in the default collation and would otherwise silently shadow a
-# second definition here). zzz.R's `.onLoad` seeds the stat-command
-# registry; `.morie_auto_register_stat_commands()` remains available to
-# call explicitly but is not run automatically.
+# Registration fires from the single package .onLoad() in zzz.R (wrapped in
+# try() there so a downstream failure never aborts the load). Keeping a second
+# .onLoad here would have been silently shadowed by zzz.R's at collation time.
