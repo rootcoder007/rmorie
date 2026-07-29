@@ -14,14 +14,14 @@ morie_transfer_entropy_gaussian(x, y, lag = 1L)
 \item{lag}{History length.}
 }
 \value{
-List with `mi`, `statistic`, `p_value`, `df`, `n`.
+List with \code{mi}, \code{statistic}, \code{p_value}, \code{df}, \code{n}.
 }
 \description{
-`I = 0.5 * log(RSS_restricted / RSS_unrestricted)`, which equals
+\code{I = 0.5 * log(RSS_restricted / RSS_unrestricted)}, which equals
 transfer entropy exactly for Gaussian processes. Mirrors
-`morie.fn.granci` and the Gaussian arm of `morie.fn.trnfen`.
+\code{morie.fn.granci} and the Gaussian arm of \code{morie.fn.trnfen}.
 }
 \references{
-Barnett L, Barrett AB, Seth AK (2009). *Physical Review
-  Letters* 103(23), 238701.
+Barnett L, Barrett AB, Seth AK (2009). \emph{Physical Review
+Letters} 103(23), 238701.
 }

@@ -34,8 +34,9 @@ Named list with \code{late}, \code{se}, \code{ci_lower}, \code{ci_upper},
 \code{pval}, \code{n_obs}, \code{method}.
 }
 \description{
-Wraps \pkg{DoubleML} when available. Otherwise falls back to 2SLS:
-first stage \code{D ~ Z + X}, second stage \code{Y ~ D_hat + X}, base R OLS.
+Native 2SLS in base R: first stage \code{D ~ Z + X}, second stage
+\code{Y ~ D_hat + X}. Cross-validated against \pkg{DoubleML} in the
+package's cross tests but not calling it at runtime.
 }
 \examples{
 set.seed(1)

@@ -19,24 +19,26 @@ to a quarter of the smallest window side.}
 }
 \value{
 Named list with \code{statistic}, \code{p_value},
-  \code{radii}, \code{k_observed}, \code{k_mean}, \code{k_lower},
-  \code{k_upper}, \code{n}, \code{nsim}, \code{area}, \code{method}.
+\code{radii}, \code{k_observed}, \code{k_mean}, \code{k_lower},
+\code{k_upper}, \code{n}, \code{nsim}, \code{area}, \code{method}.
 }
 \description{
 Compares the observed \eqn{\hat K(r)} with envelopes from patterns
-simulated under complete spatial randomness in the same window.
+simulated under complete spatial randomness in the same window. Under
+CSR in the plane \eqn{K(r) = \pi r^2}, but that holds only on the
+infinite plane; inside a bounded window the uncorrected estimator is
+biased downward, so the envelopes are the right reference.
 }
 \details{
-Under CSR in the plane \eqn{K(r) = \pi r^2}, but that holds only on
-the infinite plane; inside a bounded window the uncorrected estimator is
-biased downward, so the envelopes are the right reference.
-
-The p-value is one maximum deviation over the whole radius range.
-Reading significance off the radius where the curve leaves a pointwise
-envelope would be multiple testing.
+The p-value is one maximum deviation over the whole radius range,
+ranked among the simulations. Reading significance off the radius
+where the curve leaves a pointwise envelope would be multiple testing.
 
 This is the second-order counterpart of
-\code{\link{morie_csr_nn_test}}. Mirrors \code{morie.fn.mrkcsr}.
+\code{\link{morie_csr_nn_test}}, which tests the same null through
+first-order nearest-neighbour distances.
+
+Mirrors \code{morie.fn.mrkcsr} on the Python side.
 }
 \examples{
 set.seed(1)
@@ -44,6 +46,6 @@ morie_ripley_csr_test(matrix(runif(200), 100, 2), nsim = 49)$p_value
 }
 \references{
 Ripley BD (1977). Modelling spatial patterns.
-  \emph{Journal of the Royal Statistical Society, Series B}, 39(2),
-  172-212.
+\emph{Journal of the Royal Statistical Society, Series B}, 39(2),
+172-212.
 }

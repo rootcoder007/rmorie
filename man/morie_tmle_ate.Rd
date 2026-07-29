@@ -26,33 +26,33 @@ morie_tmle_ate(
 
 \item{g}{Pre-computed propensity scores; skips the internal fit.}
 
-\item{scale_outcome}{Rescale `y` to \[0, 1\] and map back.}
+\item{scale_outcome}{Rescale \code{y} to [0, 1] and map back.}
 
 \item{max_iter, tol}{Fluctuation Newton controls.}
 }
 \value{
-List with `ate`, `se`, `ci`, `eif`, `epsilon`, `q1`, `q0`,
-  `g`, `ey1`, `ey0`, `n`.
+List with \code{ate}, \code{se}, \code{ci}, \code{eif}, \code{epsilon}, \code{q1}, \code{q0},
+\code{g}, \code{ey1}, \code{ey0}, \code{n}.
 }
 \description{
 Three steps: fit the outcome regressions and the propensity; fluctuate
 the outcome fit along the clever covariate
-`H = A/g - (1 - A)/(1 - g)` on the outcome rescaled to \[0, 1\], so the
+\code{H = A/g - (1 - A)/(1 - g)} on the outcome rescaled to [0, 1], so the
 logistic fluctuation is valid for bounded continuous outcomes as well
 as binary ones; then substitute. The estimate solves the efficient
 influence-function equation, so the EIF supplies the standard error.
-TMLE is doubly robust *and* a substitution estimator, so unlike AIPW
+TMLE is doubly robust \emph{and} a substitution estimator, so unlike AIPW
 it can never leave the parameter space.
 }
 \details{
-Mirrors the shared `morie.fn._tmle.tmle_ate` core.
+Mirrors the shared \code{morie.fn._tmle.tmle_ate} core.
 }
 \references{
 van der Laan MJ, Rubin D (2006). Targeted maximum
-  likelihood learning. \emph{The International Journal of
-  Biostatistics} 2(1), Article 11.
+likelihood learning. \emph{The International Journal of
+Biostatistics} 2(1), Article 11.
 
-  Gruber S, van der Laan MJ (2010). A targeted maximum likelihood
-  estimator of a causal effect on a bounded continuous outcome.
-  \emph{The International Journal of Biostatistics} 6(1), Article 26.
+Gruber S, van der Laan MJ (2010). A targeted maximum likelihood
+estimator of a causal effect on a bounded continuous outcome.
+\emph{The International Journal of Biostatistics} 6(1), Article 26.
 }

@@ -27,8 +27,8 @@ Default 199. Ignored when \code{cdf} is given.}
 }
 \value{
 Named list with \code{statistic}, \code{p_value},
-  \code{nn_distances}, \code{mean_nn}, \code{n}, \code{nsim},
-  \code{method}.
+\code{nn_distances}, \code{mean_nn}, \code{n}, \code{nsim},
+\code{method}.
 }
 \description{
 Compares the empirical nearest-neighbour distance distribution
@@ -67,9 +67,9 @@ morie_csr_nn_test(matrix(runif(200), 100, 2), nsim = 49)$p_value
 }
 \references{
 Schabenberger O & Gotway CA (2005). \emph{Statistical
-  Methods for Spatial Data Analysis}. Chapman & Hall/CRC, sections
-  3.3-3.4.
+Methods for Spatial Data Analysis}. Chapman & Hall/CRC, sections
+3.3-3.4.
 
-  Diggle PJ (2003). \emph{Statistical Analysis of Spatial Point
-  Patterns}, 2nd edn. Arnold, London.
+Diggle PJ (2003). \emph{Statistical Analysis of Spatial Point
+Patterns}, 2nd edn. Arnold, London.
 }

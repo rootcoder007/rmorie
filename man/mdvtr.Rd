@@ -3,28 +3,45 @@
 \name{mdvtr}
 \alias{mdvtr}
 \alias{morie_median_voter}
-\title{Median voter theorem (Armstrong et al. Ch 2)}
+\title{Median voter theorem (Black 1948)}
 \usage{
-mdvtr(x)
+mdvtr(x, alpha = 0.05)
 
-morie_median_voter(x)
+morie_median_voter(x, alpha = 0.05)
 }
 \arguments{
 \item{x}{Numeric vector of voter ideal points.}
+
+\item{alpha}{Two-sided level for the intervals.}
 }
 \value{
-Named list with \code{estimate}, \code{se}, \code{ci_lower}, \code{ci_upper},
-\code{n}, \code{method}.
+Everything \code{\link[=morie_median_voter_ci]{morie_median_voter_ci()}} returns: \code{estimate},
+\code{se}, \code{se_normal}, \code{ci_lower}, \code{ci_upper}, the distribution-free
+\code{ci_exact_lower} / \code{ci_exact_upper}, \code{median_interval},
+\code{unique_winner}, \code{n}, \code{warnings}, \code{method}.
 }
 \description{
-Black (1948) median-voter theorem: with single-peaked preferences in
-1-D, the Condorcet winner equals the median ideal point. Laplace
-asymptotic SE 1.2533 * s/sqrt(n) for normal-like data.
+With single-peaked preferences on one dimension the Condorcet winner
+is the median ideal point.
+}
+\details{
+This is the compact front-end. It delegates to
+\code{\link[=morie_median_voter_ci]{morie_median_voter_ci()}} and therefore reports the general
+density-based standard error \eqn{1/(2 f(m)\sqrt{n})}, NOT the
+familiar \eqn{1.2533\,s/\sqrt{n}}, which is
+\eqn{\sqrt{\pi/2}\,\sigma/\sqrt{n}} and holds only under normality.
+The normal-theory value is still returned as \code{se_normal} so the two
+can be compared; for a heavy-tailed electorate it badly overstates
+the uncertainty, because it reads the tails as spread when the
+median responds only to the density at the centre. This front-end
+used to report the normal-theory value as \code{se} outright, which made
+its intervals wrong on every non-normal electorate without saying so.
 }
 \examples{
 mdvtr(x = rnorm(50))
 }
 \references{
-Armstrong et al. (2014), Ch 2.
+Black D (1948) \emph{Journal of Political Economy}
+56(1):23-34, \doi{10.1086/256633}.
 }
 \keyword{internal}

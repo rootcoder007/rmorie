@@ -3,18 +3,23 @@
 \name{unfdl}
 \alias{unfdl}
 \alias{morie_unfolding_analysis}
-\title{Metric unfolding for preference data (Schoenemann; Armstrong Ch 7)}
+\title{Metric unfolding for preference data (Schoenemann 1970; Armstrong Ch 4-5)}
 \usage{
-unfdl(x, k = 2L, n_iter = 100L, tol = 1e-06)
+unfdl(x, k = 2L, n_iter = 5000L, tol = 1e-06)
 
-morie_unfolding_analysis(x, k = 2L, n_iter = 100L, tol = 1e-06)
+morie_unfolding_analysis(x, k = 2L, n_iter = 5000L, tol = 1e-06)
 }
 \arguments{
 \item{x}{Preference dissimilarity matrix Delta (n_resp by n_stim).}
 
 \item{k}{Output dimensionality (default 2).}
 
-\item{n_iter}{Refinement iterations.}
+\item{n_iter}{Maximum refinement iterations; the loop exits early once the
+update falls below \code{tol}. Default raised from 100 to 5000: measured
+over 30 planted configurations, 24 of 30 were NOT converged at 100, worst
+case off by 1.25e-01 against 9.8e-06 when run to convergence. Because the
+tol break short-circuits the easy cases the higher cap costs them nothing.
+Mirrors the same change in the Python morie.fn.unfdl.}
 
 \item{tol}{Convergence tolerance.}
 }
@@ -23,6 +28,13 @@ Named list with \code{X}, \code{Y}, \code{stress}, \code{k}, \code{n_resp}, \cod
 \code{method}.
 }
 \description{
+Metric unfolding for preference data (Schoenemann 1970; Armstrong Ch 4-5)
+}
+\details{
+Schoenemann (1970), Psychometrika 35(3):349-366. Armstrong covers
+unfolding in Ch 4 (rating scale, p.107) and Ch 5 (binary choice, p.129); the
+former "Ch 7" citation was to a chapter that does not exist.
+
 Closed-form Schoenemann (1970) unfolding via SVD of the doubly
 centred squared-distance matrix, followed by SMACOF-lite refinement.
 }

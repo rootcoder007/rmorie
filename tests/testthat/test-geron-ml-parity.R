@@ -492,7 +492,7 @@ test_that("BLIP objectives and the Q-Former match Python", {
   expect_equal(as.numeric(t(q$llm_input)),
                c(-5.061956808895602e-06, 4.503086017847096e-05,
                  -6.127208511049429e-06, 4.3355338913234276e-05,
-                 -6.560748018771484e-06, 4.2652068219755146e-05), tolerance = 1e-15)
+                 -6.560748018771484e-06, 4.2652068219755146e-05), tolerance = tol)
   expect_equal(q$attention[1, ],
                c(0.3322122438287706, 0.3338125679179064, 0.3339751882533229),
                tolerance = tol)

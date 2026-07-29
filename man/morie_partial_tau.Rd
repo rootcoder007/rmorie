@@ -10,15 +10,15 @@ morie_partial_tau(x, y, z)
 \item{x, y, z}{Numeric vectors of equal length.}
 }
 \value{
-List with `partial_tau`, `tau_xy`, `tau_xz`, `tau_yz`, `n`.
+List with \code{partial_tau}, \code{tau_xy}, \code{tau_xz}, \code{tau_yz}, \code{n}.
 }
 \description{
-`tau_xy.z = (t_xy - t_xz * t_yz) / sqrt((1 - t_xz^2)(1 - t_yz^2))`.
+\code{tau_xy.z = (t_xy - t_xz * t_yz) / sqrt((1 - t_xz^2)(1 - t_yz^2))}.
 A shrinkage diagnostic, not a conditional-independence test: it does
 not reach zero under exact conditional independence. Mirrors
-`morie.fn.gb1251`.
+\code{morie.fn.gb1251}.
 }
 \references{
-Gibbons JD, Chakraborti S (2011). *Nonparametric
-  Statistical Inference*, 5th ed., Sec. 12.5.
+Gibbons JD, Chakraborti S (2011). \emph{Nonparametric
+Statistical Inference}, 5th ed., Sec. 12.5.
 }

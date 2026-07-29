@@ -14,12 +14,12 @@ morie_g_formula(y, a, l)
 \item{l}{Covariate matrix or vector.}
 }
 \value{
-List with `EY1`, `EY0`, `ate`, `n`.
+List with \code{EY1}, \code{EY0}, \code{ate}, \code{n}.
 }
 \description{
-`E[Y(a)] = E[E[Y | A = a, L]]`, with an OLS outcome model including
-treatment-covariate interactions. Mirrors `morie.fn.causmrop`.
+\verb{E[Y(a)] = E[E[Y | A = a, L]]}, with an OLS outcome model including
+treatment-covariate interactions. Mirrors \code{morie.fn.causmrop}.
 }
 \references{
-Robins JM (1986). *Mathematical Modelling* 7, 1393-1512.
+Robins JM (1986). \emph{Mathematical Modelling} 7, 1393-1512.
 }

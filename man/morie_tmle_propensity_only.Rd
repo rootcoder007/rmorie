@@ -16,16 +16,16 @@ morie_tmle_propensity_only(y, d, x, trunc = 0.01)
 \item{trunc}{Propensity truncation.}
 }
 \value{
-List with `ate`, `se`, `ci`, `ate_full`, `epsilon`, `n`.
+List with \code{ate}, \code{se}, \code{ci}, \code{ate_full}, \code{epsilon}, \code{n}.
 }
 \description{
 Sets the initial outcome fit to a constant so the targeting step
 carries all the information. The outcome model is as wrong as it can
 be, yet the estimate stays consistent provided the propensity model is
 right. The fully specified TMLE is returned alongside for comparison.
-Mirrors `morie.fn.tmlpoy`.
+Mirrors \code{morie.fn.tmlpoy}.
 }
 \references{
 van der Laan MJ, Rose S (2011). \emph{Targeted Learning}.
-  Springer, Ch. 4-5.
+Springer, Ch. 4-5.
 }

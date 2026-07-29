@@ -11,9 +11,9 @@ morie_ccc_multivariate_garch(x)
 }
 \value{
 Named list with \code{R} (constant correlation matrix),
-  \code{sigmas} (T x k conditional standard deviations),
-  \code{conditional_variance} (T x k), \code{loglik}, \code{n},
-  \code{k}, \code{method}.
+\code{sigmas} (T x k conditional standard deviations),
+\code{conditional_variance} (T x k), \code{loglik}, \code{n},
+\code{k}, \code{method}.
 }
 \description{
 Constant Conditional Correlation MGARCH on a panel of return series.
@@ -37,8 +37,8 @@ morie_ccc_multivariate_garch(x = matrix(rnorm(150), 50, 3))
 }
 \references{
 Bollerslev T (1990). Modelling the coherence in short-run
-  nominal exchange rates: a multivariate generalized ARCH model.
-  \emph{Review of Economics and Statistics}, 72(3), 498-505.
+nominal exchange rates: a multivariate generalized ARCH model.
+\emph{Review of Economics and Statistics}, 72(3), 498-505.
 }
 \seealso{
 \code{\link{morie_dcc_multivariate_garch}}

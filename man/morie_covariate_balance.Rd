@@ -17,19 +17,18 @@ morie_covariate_balance(x, treat, weights = NULL, threshold = 0.1)
 }
 \value{
 Named list with \code{smd}, \code{max_smd}, \code{imbalanced},
-  \code{n_imbalanced}, \code{balanced}, \code{threshold},
-  \code{n_treated}, \code{n_control}, \code{method}.
+\code{n_imbalanced}, \code{balanced}, \code{threshold},
+\code{n_treated}, \code{n_control}, \code{method}.
 }
 \description{
 For each column of \code{x} the standardised mean difference is
 \eqn{(\bar\mu_t - \bar\mu_c) / \sqrt{(s_t^2 + s_c^2)/2}}, the
 difference in group means in units of the pooled within-group spread.
-}
-\details{
 The pooling is a plain average of the two variances rather than the
 sample-size-weighted one, so the denominator does not move when
 weighting changes the effective group sizes.
-
+}
+\details{
 No p-value is reported. Austin's argument is that a hypothesis test of
 balance confounds imbalance with sample size, so the convention is to
 compare \eqn{|SMD|} against a fixed threshold, 0.1 by default.
@@ -42,7 +41,7 @@ morie_covariate_balance(matrix(rnorm(300), 100, 3), rbinom(100, 1, 0.5))$max_smd
 }
 \references{
 Austin PC (2009). Balance diagnostics for comparing the
-  distribution of baseline covariates between treatment groups in
-  propensity-score matched samples. \emph{Statistics in Medicine},
-  28(25), 3083-3107.
+distribution of baseline covariates between treatment groups in
+propensity-score matched samples. \emph{Statistics in Medicine},
+28(25), 3083-3107.
 }

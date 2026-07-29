@@ -7,28 +7,28 @@
 morie_tmle_sensitivity(y, d, x, gamma_grid = NULL, trunc = 0.01)
 }
 \arguments{
-\item{y, d, x}{As in [morie_tmle_propensity_only()].}
+\item{y, d, x}{As in \code{\link[=morie_tmle_propensity_only]{morie_tmle_propensity_only()}}.}
 
 \item{gamma_grid}{Odds-ratio bounds (all >= 1).}
 
 \item{trunc}{Propensity truncation.}
 }
 \value{
-List with `gamma`, `lower`, `upper`, `ate`, `gamma_critical`,
-  `n`.
+List with \code{gamma}, \code{lower}, \code{upper}, \code{ate}, \code{gamma_critical},
+\code{n}.
 }
 \description{
 An unmeasured confounder can shift the true propensity odds by at most
 a factor Gamma. Re-running TMLE at the two Gamma-tilted propensities
 gives an interval containing the estimate for every admissible
-confounder of that strength; `gamma_critical` is the smallest Gamma at
-which the interval first covers zero. Mirrors `morie.fn.tmlsen`.
+confounder of that strength; \code{gamma_critical} is the smallest Gamma at
+which the interval first covers zero. Mirrors \code{morie.fn.tmlsen}.
 }
 \references{
 Tan Z (2006). A distributional approach for causal
-  inference using propensity scores. \emph{JASA} 101(476), 1619-1637.
+inference using propensity scores. \emph{JASA} 101(476), 1619-1637.
 
-  Zhao Q, Small DS, Bhattacharya BB (2019). Sensitivity analysis for
-  inverse probability weighting estimators via the percentile
-  bootstrap. \emph{JRSS-B} 81(4), 735-761.
+Zhao Q, Small DS, Bhattacharya BB (2019). Sensitivity analysis for
+inverse probability weighting estimators via the percentile
+bootstrap. \emph{JRSS-B} 81(4), 735-761.
 }

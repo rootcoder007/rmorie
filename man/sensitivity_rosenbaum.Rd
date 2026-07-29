@@ -31,10 +31,9 @@ here a simple rank-match).}
 Data frame with \code{Gamma}, \code{p_lower}, \code{p_upper}.
 }
 \description{
-Thin wrapper over \code{rbounds::psens()} when \pkg{rbounds} is
-installed (rank-matched-pair signed-rank bounds across a Gamma
-grid). Without \pkg{rbounds}, falls back to a base R normal-
-approximation Wilcoxon signed-rank computation.
+Native base R rank-matched-pair signed-rank bounds across a Gamma
+grid, via the normal approximation to the Wilcoxon signed-rank
+statistic.
 }
 \examples{
 set.seed(1)

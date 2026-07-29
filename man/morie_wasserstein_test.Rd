@@ -8,7 +8,7 @@ morie_wasserstein_test(x, y, B = 999L, cdf = NULL)
 }
 \arguments{
 \item{x, y}{Numeric vectors, the two samples. Matrices are rejected
-rather than flattened: the closed form below holds only on the line.}
+rather than flattened: the closed form above holds only on the line.}
 
 \item{B}{Number of label permutations. Default 999.}
 
@@ -17,7 +17,7 @@ replacing the permutation null.}
 }
 \value{
 Named list with \code{statistic}, \code{p_value}, \code{B},
-  \code{m}, \code{n}, \code{null_statistics}, \code{method}.
+\code{m}, \code{n}, \code{null_statistics}, \code{method}.
 }
 \description{
 Uses \eqn{W_1} as the statistic, which on the line is
@@ -44,9 +44,9 @@ morie_wasserstein_test(rnorm(40), rnorm(40, 1), B = 99)$p_value
 }
 \references{
 Villani C (2009). \emph{Optimal Transport: Old and New}.
-  Springer, Berlin. Theorem 2.18 gives the one-dimensional form.
+Springer, Berlin. Theorem 2.18 gives the one-dimensional form.
 
-  Ramdas A, Garcia Trillos N & Cuturi M (2017). On Wasserstein
-  two-sample testing and related families of nonparametric tests.
-  \emph{Entropy}, 19(2), 47.
+Ramdas A, Garcia Trillos N & Cuturi M (2017). On Wasserstein
+two-sample testing and related families of nonparametric tests.
+\emph{Entropy}, 19(2), 47.
 }

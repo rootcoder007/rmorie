@@ -12,8 +12,8 @@ true negatives, false positives and false negatives.}
 }
 \value{
 Named list with \code{value}, \code{statistic} (the same
-  number), \code{accuracy}, \code{tp}, \code{tn}, \code{fp},
-  \code{fn}, \code{n}, \code{method}.
+number), \code{accuracy}, \code{tp}, \code{tn}, \code{fp},
+\code{fn}, \code{n}, \code{method}.
 }
 \description{
 \deqn{MCC = \frac{TP \cdot TN - FP \cdot FN}{\sqrt{(TP+FP)(TP+FN)(TN+FP)(TN+FN)}}}
@@ -21,7 +21,7 @@ Named list with \code{value}, \code{statistic} (the same
 \details{
 The coefficient stays informative under class imbalance, where
 accuracy does not: it uses all four cells of the confusion matrix
-rather than only the diagonal. It ranges over [-1, 1], with 0 meaning
+rather than only the diagonal. It ranges over \link{-1, 1}, with 0 meaning
 no better than chance and negative values meaning the predictions run
 opposite to the truth.
 
@@ -37,6 +37,6 @@ morie_mcc_counts(tp = 20, tn = 30, fp = 5, fn = 5)$value
 }
 \references{
 Matthews BW (1975). Comparison of the predicted and
-  observed secondary structure of T4 phage lysozyme.
-  \emph{Biochimica et Biophysica Acta}, 405(2), 442-451.
+observed secondary structure of T4 phage lysozyme.
+\emph{Biochimica et Biophysica Acta}, 405(2), 442-451.
 }

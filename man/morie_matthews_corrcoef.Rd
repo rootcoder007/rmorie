@@ -13,7 +13,7 @@ morie_matthews_corrcoef(y_true, y_pred)
 \code{y_true}.}
 }
 \value{
-A single numeric in [-1, 1].
+A single numeric in \link{-1, 1}.
 }
 \description{
 Label-vector form of \code{\link{morie_mcc_counts}}, matching the
@@ -35,8 +35,8 @@ morie_matthews_corrcoef(c(0, 0, 1, 1), c(1, 1, 0, 0))
 }
 \references{
 Matthews BW (1975). Comparison of the predicted and
-  observed secondary structure of T4 phage lysozyme.
-  \emph{Biochimica et Biophysica Acta}, 405(2), 442-451.
+observed secondary structure of T4 phage lysozyme.
+\emph{Biochimica et Biophysica Acta}, 405(2), 442-451.
 }
 \seealso{
 \code{\link{morie_mcc_counts}}

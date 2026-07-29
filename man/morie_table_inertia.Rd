@@ -19,8 +19,8 @@ original sample size is known.}
 }
 \value{
 Named list with \code{statistic}, \code{p_value}, \code{df},
-  \code{inertia}, \code{principal_inertias}, \code{singular_values},
-  \code{row_masses}, \code{col_masses}, \code{n}, \code{method}.
+\code{inertia}, \code{principal_inertias}, \code{singular_values},
+\code{row_masses}, \code{col_masses}, \code{n}, \code{method}.
 }
 \description{
 Follows the correspondence-analysis construction of Nenadic &
@@ -29,10 +29,10 @@ grand total to get the correspondence matrix \eqn{P = N/n}; let
 \eqn{r} and \eqn{c} be its row and column marginals, the row and
 column masses, and \eqn{D_r}, \eqn{D_c} their diagonal matrices. The
 standardised residuals are
-
-\deqn{S = D_r^{-1/2} (P - rc') D_c^{-1/2}}
 }
 \details{
+\deqn{S = D_r^{-1/2} (P - rc') D_c^{-1/2}}
+
 Total inertia is \eqn{\|S\|_F^2}, and the Pearson statistic is the
 grand total times that inertia,
 
@@ -61,9 +61,9 @@ morie_table_inertia(matrix(rpois(20, 40), 5, 4))$statistic
 }
 \references{
 Nenadic O & Greenacre M (2007). Correspondence analysis
-  in R, with two- and three-dimensional graphics: the ca package.
-  \emph{Journal of Statistical Software}, 20(3), 1-13.
+in R, with two- and three-dimensional graphics: the ca package.
+\emph{Journal of Statistical Software}, 20(3), 1-13.
 
-  Greenacre M (1984). \emph{Theory and Applications of Correspondence
-  Analysis}. Academic Press, London.
+Greenacre M (1984). \emph{Theory and Applications of Correspondence
+Analysis}. Academic Press, London.
 }

@@ -16,9 +16,9 @@ pair whose correlation is compared.}
 }
 \value{
 Named list with \code{rho_full}, \code{rho_sub}, \code{delta}
-  (\code{rho_sub - rho_full}), \code{tau_full}, \code{tau_sub},
-  \code{tau_delta}, \code{pair}, \code{idx}, \code{n}, \code{D},
-  \code{method}.
+(\code{rho_sub - rho_full}), \code{tau_full}, \code{tau_sub},
+\code{tau_delta}, \code{pair}, \code{idx}, \code{n}, \code{D},
+\code{method}.
 }
 \description{
 Pearson (1897) showed that correlations between ratios sharing a
@@ -55,11 +55,11 @@ morie_subcompositional_incoherence(x, idx = c(1, 2, 3))$delta
 }
 \references{
 Aitchison J (1986). \emph{The Statistical Analysis of
-  Compositional Data}. Monographs on Statistics and Applied
-  Probability. Chapman & Hall, London, 416 pp.
+Compositional Data}. Monographs on Statistics and Applied
+Probability. Chapman & Hall, London, 416 pp.
 
-  Pearson K (1897). Mathematical contributions to the theory of
-  evolution -- on a form of spurious correlation which may arise when
-  indices are used in the measurement of organs. \emph{Proceedings of
-  the Royal Society of London}, 60, 489-498.
+Pearson K (1897). Mathematical contributions to the theory of
+evolution -- on a form of spurious correlation which may arise when
+indices are used in the measurement of organs. \emph{Proceedings of
+the Royal Society of London}, 60, 489-498.
 }

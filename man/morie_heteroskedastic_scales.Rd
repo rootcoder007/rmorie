@@ -9,22 +9,22 @@ morie_heteroskedastic_scales(votes, ideal_points, alpha, beta)
 \arguments{
 \item{votes}{Binary vote matrix (NA = missing).}
 
-\item{ideal_points}{Fixed ideal points, one per row of `votes`.}
+\item{ideal_points}{Fixed ideal points, one per row of \code{votes}.}
 
 \item{alpha, beta}{Fixed item parameters (one per column).}
 }
 \value{
-List with `psi`, `loglik`, `n`, `q`.
+List with \code{psi}, \code{loglik}, \code{n}, \code{q}.
 }
 \description{
 Per-legislator noise scales for the probit ideal-point model
-`P(yea) = pnorm((beta_j x_i - alpha_j) / psi_i)`; a large `psi_i`
+\verb{P(yea) = pnorm((beta_j x_i - alpha_j) / psi_i)}; a large \code{psi_i}
 marks an unpredictable voter. Ideal points and item parameters are
-taken as given; each `psi_i` is fitted by one-dimensional ML and the
+taken as given; each \code{psi_i} is fitted by one-dimensional ML and the
 vector is normalised to geometric mean 1 for identification.
-Mirrors `morie.fn.hsirt` (with fixed items).
+Mirrors \code{morie.fn.hsirt} (with fixed items).
 }
 \references{
 Lauderdale BE (2010). Unpredictable voters in ideal
-  point estimation. \emph{Political Analysis} 18(2), 151-171.
+point estimation. \emph{Political Analysis} 18(2), 151-171.
 }

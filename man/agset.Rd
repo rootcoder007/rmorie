@@ -3,7 +3,7 @@
 \name{agset}
 \alias{agset}
 \alias{morie_agenda_setter_power}
-\title{Romer-Rosenthal agenda-setter outcome and power (Armstrong Ch 10)}
+\title{Romer-Rosenthal agenda-setter outcome and power (Romer & Rosenthal 1978)}
 \usage{
 agset(options, setter_ideal, reversion)
 
@@ -21,6 +21,14 @@ Named list with \code{chosen}, \code{power}, \code{setter_ideal},
 \code{reversion}, \code{win_set_size}, \code{win_set_bounds}, \code{method}.
 }
 \description{
+Romer-Rosenthal agenda-setter outcome and power (Romer & Rosenthal 1978)
+}
+\details{
+Romer, T. & Rosenthal, H. (1978), "Political resource allocation,
+controlled agendas, and the status quo", Public Choice 33(4):27-43. NOT
+Armstrong: zero occurrences of "agenda setter" in its 320 pages, and its single
+"Romer" hit is "G. Romer", a bibliography editor for an unrelated volume.
+
 Agenda setter offers a take-it-or-leave-it proposal from \code{options};
 legislature accepts iff the proposal beats the reversion at the
 median voter. Power = distance moved from the status quo.

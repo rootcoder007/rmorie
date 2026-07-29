@@ -12,24 +12,24 @@ morie_tmle_truncation_sweep(
 )
 }
 \arguments{
-\item{y, d, x}{As in [morie_tmle_propensity_only()].}
+\item{y, d, x}{As in \code{\link[=morie_tmle_propensity_only]{morie_tmle_propensity_only()}}.}
 
 \item{eps_grid}{Truncation levels, all strictly inside (0, 0.5).}
 }
 \value{
-List with `eps`, `ate`, `se`, `n_truncated`, `range`,
-  `stable`, `n`.
+List with \code{eps}, \code{ate}, \code{se}, \code{n_truncated}, \code{range},
+\code{stable}, \code{n}.
 }
 \description{
 Truncation bounds the clever covariate and hence the variance, at the
 cost of bias. A stable plateau means positivity is fine; an estimate
 that moves sharply with the truncation level is being driven by a few
 extreme weights and should not be reported as a point estimate.
-Mirrors `morie.fn.tmltrt`.
+Mirrors \code{morie.fn.tmltrt}.
 }
 \references{
 Petersen ML, Porter KE, Gruber S, Wang Y, van der Laan MJ
-  (2012). Diagnosing and responding to violations in the positivity
-  assumption. \emph{Statistical Methods in Medical Research} 21(1),
-  31-54.
+(2012). Diagnosing and responding to violations in the positivity
+assumption. \emph{Statistical Methods in Medical Research} 21(1),
+31-54.
 }

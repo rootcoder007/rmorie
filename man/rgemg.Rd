@@ -28,6 +28,9 @@ r <- rgemg(rnorm(500), window = 32)
 length(r$rms)
 }
 \references{
-Rangayyan Ch 8.
+Rangayyan, R. M., & Krishnan, S. (2024). Biomedical Signal
+Analysis, 3rd ed. Wiley-IEEE Press. Sec 5.6.1 "The RMS value",
+pp.283-284, eq (5.24) -- the running RMS, which is CAUSAL. The previous
+reference said Ch 8.
 }
 \keyword{internal}

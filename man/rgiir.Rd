@@ -3,7 +3,7 @@
 \name{rgiir}
 \alias{rgiir}
 \alias{morie_rangayyan_iir_filter}
-\title{Butterworth IIR filter -- Rangayyan Ch 3}
+\title{Butterworth IIR filter -- Rangayyan & Krishnan Sec 3.7.1 / 3.7.2}
 \usage{
 rgiir(x, cutoff, order = 4L, fs = 1, btype = c("low", "high", "pass", "stop"))
 
@@ -32,9 +32,21 @@ numeric vector \code{c(low, high)}.}
 Named list \code{signal}, \code{order}, \code{cutoff}, \code{fs}, \code{btype}.
 }
 \description{
-Zero-phase Butterworth IIR filter via the \code{signal} package (\code{butter} +
-\code{filtfilt}). Same transfer function as SciPy's \code{butter} so the Python
-and R outputs match to machine precision for identical inputs.
+Zero-phase Butterworth IIR filter (\code{butter} + \code{filtfilt}).
+}
+\details{
+KNOWN CROSS-LANGUAGE GAP, measured 2026-07-26. The transfer function
+matches SciPy's \code{butter}: on 500 Gaussian samples at fs = 100 Hz with a
+10 Hz lowpass, the interior (samples 50-449) agrees with the Python path
+to 1.8e-06. The EDGES do not. SciPy's \code{sosfiltfilt} pads with an odd
+extension of length 3*(2*n_sections) before filtering; this native
+\code{filtfilt} does not use the same padding, and the boundary samples differ
+by up to 1.0e-01 (worst at sample 497). Interior results are
+interchangeable; do not compare the first or last ~50 samples across
+languages. Aligning the padding is tracked separately because
+\code{.morie_dsp_filtfilt} is shared with rgqrs and rgfir.
+The previous text claimed the two paths simply agree, without qualifying
+the edges.
 }
 \examples{
 \donttest{
@@ -47,6 +59,8 @@ if (requireNamespace("signal", quietly = TRUE)) {
 }
 }
 \references{
-Rangayyan Ch 3.
+Rangayyan, R. M., & Krishnan, S. (2024). Biomedical Signal
+Analysis, 3rd ed. Wiley-IEEE Press. Sec 3.7.1 "Removal of high-frequency
+noise: Butterworth lowpass filters", p.154; Sec 3.7.2 (highpass), p.161.
 }
 \keyword{internal}

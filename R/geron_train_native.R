@@ -634,7 +634,7 @@ morie_geron_lasso_cost <- function(X, y, theta, alpha,
 #' Elastic net cost (Geron Eq 4-12, morie.fn grelas)
 #'
 #' J = MSE + r alpha L1 + ((1-r)/2) alpha L2, stacked on
-#' [morie_geron_lasso_cost()] at `r * alpha`.
+#' [morie_geron_lasso_cost()] at \code{r * alpha}.
 #'
 #' @param X,y,theta Design, targets and parameters.
 #' @param alpha Non-negative penalty weight.

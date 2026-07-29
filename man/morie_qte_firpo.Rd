@@ -16,13 +16,13 @@ morie_qte_firpo(y, treat, ps, tau = 0.5)
 \item{tau}{Quantile level(s) in (0, 1).}
 }
 \value{
-List with `qte`, `q1`, `q0`, `tau`, `n`.
+List with \code{qte}, \code{q1}, \code{q0}, \code{tau}, \code{n}.
 }
 \description{
-Weighted-quantile difference: treated quantiles weighted by `1/e`,
-control quantiles by `1/(1 - e)`. Mirrors `morie.fn.causqte`.
+Weighted-quantile difference: treated quantiles weighted by \code{1/e},
+control quantiles by \code{1/(1 - e)}. Mirrors \code{morie.fn.causqte}.
 }
 \references{
 Firpo S (2007). Efficient semiparametric estimation of
-  quantile treatment effects. *Econometrica* 75(1), 259-276.
+quantile treatment effects. \emph{Econometrica} 75(1), 259-276.
 }

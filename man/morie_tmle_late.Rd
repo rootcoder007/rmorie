@@ -18,7 +18,7 @@ morie_tmle_late(y, d, z, covariates = NULL, trunc = 0.01)
 \item{trunc}{Instrument-propensity truncation.}
 }
 \value{
-List with `late`, `se`, `ci`, `itt`, `compliance`, `n`.
+List with \code{late}, \code{se}, \code{ci}, \code{itt}, \code{compliance}, \code{n}.
 }
 \description{
 TMLE is applied twice -- once with the outcome and once with the
@@ -26,10 +26,10 @@ treatment, both treating the instrument as the exposure -- and the
 LATE is their ratio. The delta-method influence function combines the
 two EIFs, which is why dividing the point estimates alone is not
 enough: the denominator's uncertainty has to enter. Mirrors
-`morie.fn.tmlivc`.
+\code{morie.fn.tmlivc}.
 }
 \references{
 Imbens GW, Angrist JD (1994). Identification and
-  estimation of local average treatment effects. \emph{Econometrica}
-  62(2), 467-475.
+estimation of local average treatment effects. \emph{Econometrica}
+62(2), 467-475.
 }
