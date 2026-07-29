@@ -1,36 +1,35 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Median voter theorem (Armstrong et al. Ch 2)
+#' Median voter theorem (Black 1948)
 #'
-#' Black (1948) median-voter theorem: with single-peaked preferences in
-#' 1-D, the Condorcet winner equals the median ideal point. Laplace
-#' asymptotic SE 1.2533 * s/sqrt(n) for normal-like data.
+#' With single-peaked preferences on one dimension the Condorcet winner
+#' is the median ideal point.
+#'
+#' This is the compact front-end. It delegates to
+#' [morie_median_voter_ci()] and therefore reports the general
+#' density-based standard error \eqn{1/(2 f(m)\sqrt{n})}, NOT the
+#' familiar \eqn{1.2533\,s/\sqrt{n}}, which is
+#' \eqn{\sqrt{\pi/2}\,\sigma/\sqrt{n}} and holds only under normality.
+#' The normal-theory value is still returned as `se_normal` so the two
+#' can be compared; for a heavy-tailed electorate it badly overstates
+#' the uncertainty, because it reads the tails as spread when the
+#' median responds only to the density at the centre. This front-end
+#' used to report the normal-theory value as `se` outright, which made
+#' its intervals wrong on every non-normal electorate without saying so.
 #'
 #' @param x Numeric vector of voter ideal points.
-#' @return Named list with `estimate`, `se`, `ci_lower`, `ci_upper`,
-#'   `n`, `method`.
-#' @references Armstrong et al. (2014), Ch 2.
+#' @param alpha Two-sided level for the intervals.
+#' @return Everything [morie_median_voter_ci()] returns: `estimate`,
+#'   `se`, `se_normal`, `ci_lower`, `ci_upper`, the distribution-free
+#'   `ci_exact_lower` / `ci_exact_upper`, `median_interval`,
+#'   `unique_winner`, `n`, `warnings`, `method`.
+#' @references Black D (1948) \emph{Journal of Political Economy}
+#'   56(1):23-34, \doi{10.1086/256633}.
 #' @examples
 #' mdvtr(x = rnorm(50))
 #' @export
-mdvtr <- function(x) {
-  x <- as.numeric(x)
-  x <- x[is.finite(x)]
-  n <- length(x)
-  if (n == 0L) {
-    return(list(
-      estimate = NA_real_, se = NA_real_, ci_lower = NA_real_,
-      ci_upper = NA_real_, n = 0L, method = "morie_median_voter"
-    ))
-  }
-  est <- stats::median(x)
-  se <- if (n > 1L) 1.2533141373 * stats::sd(x) / sqrt(n) else NA_real_
-  ci_lo <- if (is.finite(se)) est - 1.96 * se else NA_real_
-  ci_hi <- if (is.finite(se)) est + 1.96 * se else NA_real_
-  list(
-    estimate = est, se = se, ci_lower = ci_lo, ci_upper = ci_hi,
-    n = n, method = "Median voter theorem"
-  )
+mdvtr <- function(x, alpha = 0.05) {
+  morie_median_voter_ci(x, alpha = alpha)
 }
 
 #' @keywords internal

@@ -3,12 +3,13 @@
 # Native counterparts for morie.fn.mdvtr, morie.fn.smplep and
 # morie.fn.ld50r.
 #
-# R/mdvtr.R already carries morie_median_voter, which returns the
-# normality-only standard error 1.2533 s/sqrt(n). That function is left
-# alone for back-compatibility; morie_median_voter_ci below is the
-# general one, returning the density-based error 1/(2 f(m) sqrt(n))
-# alongside it plus a distribution-free interval from the order
-# statistics. The two part company as soon as the electorate is not
+# morie_median_voter_ci below is the general median-voter routine,
+# returning the density-based standard error 1/(2 f(m) sqrt(n)) plus a
+# distribution-free interval from the order statistics, with the
+# normality-only 1.2533 s/sqrt(n) alongside for comparison. R/mdvtr.R
+# is a thin front-end over it; it used to report the normal-theory
+# value as `se` outright, which made its intervals wrong on every
+# non-normal electorate without saying so. The two part company as soon as the electorate is not
 # normal -- on a t(2) sample the normal formula runs over 1.3 times the
 # density-based one -- so the difference is not cosmetic.
 
