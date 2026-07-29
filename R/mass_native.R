@@ -272,7 +272,7 @@ logLik.negbin <- function(object, ...) {
 #' set.seed(3)
 #' n <- 100; x <- rnorm(n)
 #' y <- 2 * x + rnorm(n)
-#' y\[1:3\] <- y\[1:3\] + 40
+#' y[1:3] <- y[1:3] + 40
 #' rob <- morie_rlm(y ~ x, data = data.frame(y, x))
 #' rob$coefficients
 #' @export

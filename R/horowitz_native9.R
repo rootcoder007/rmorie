@@ -46,7 +46,7 @@
 #'   Linton and Nielsen (1995), Linton and Hardle (1996).
 #' @examples
 #' x <- matrix(runif(400, -1, 1), ncol = 2)
-#' y <- 2 + sin(pi * x\[, 1\]) + x\[, 2\]^2 - 1 / 3 + rnorm(200) * 0.2
+#' y <- 2 + sin(pi * x[, 1]) + x[, 2]^2 - 1 / 3 + rnorm(200) * 0.2
 #' morie_marginal_integration(x, y, j = 1)$smoothness_required
 #' @export
 morie_marginal_integration <- function(x, y, bandwidth = NULL, j = 1L,
@@ -158,7 +158,7 @@ morie_marginal_integration <- function(x, y, bandwidth = NULL, j = 1L,
 #'   Horowitz and Mammen (2004).
 #' @examples
 #' x <- matrix(runif(800, -1, 1), ncol = 2)
-#' y <- 2 + sin(pi * x\[, 1\]) + x\[, 2\]^2 - 1 / 3 + rnorm(400) * 0.2
+#' y <- 2 + sin(pi * x[, 1]) + x[, 2]^2 - 1 / 3 + rnorm(400) * 0.2
 #' morie_two_step_additive(x, y)$oracle_efficient
 #' @export
 morie_two_step_additive <- function(x, y, bandwidth = NULL, kappa = NULL,

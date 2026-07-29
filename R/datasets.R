@@ -1112,7 +1112,7 @@ morie_datasets_siu_report_fields <- function(text_or_url) {
 #' @return A `data.frame` with the documented Socrata schema.
 #' @examples
 #' df <- morie_datasets_chicago_crime(offline = TRUE)
-#' df\[1:5, c("case_number", "date", "primary_type", "arrest")\]
+#' df[1:5, c("case_number", "date", "primary_type", "arrest")]
 #' @export
 morie_datasets_chicago_crime <- function(year = NULL,
                                          max_features = NULL,
@@ -1186,7 +1186,7 @@ morie_datasets_chicago_crime <- function(year = NULL,
 #' @return A `data.frame`.  Schema is NOT normalised across years.
 #' @examples
 #' df <- morie_datasets_nyc_stop_and_frisk(offline = TRUE)
-#' head(df\[, c("STOP_FRISK_ID", "STOP_FRISK_DATE", "FRISKED_FLAG")\])
+#' head(df[, c("STOP_FRISK_ID", "STOP_FRISK_DATE", "FRISKED_FLAG")])
 #' @export
 morie_datasets_nyc_stop_and_frisk <- function(year = NULL,
                                               max_features = NULL,
@@ -1496,7 +1496,7 @@ morie_datasets_nist_rds <- function(dataset_id = NULL, query = NULL,
 #'   Neighborhoods"; based on Neighborhoods_2012b.
 #' @examples
 #' df <- morie_datasets_chicago_neighborhoods(offline = TRUE)
-#' head(df\[, c("pri_neigh", "sec_neigh")\])
+#' head(df[, c("pri_neigh", "sec_neigh")])
 #' @export
 morie_datasets_chicago_neighborhoods <- function(offline = TRUE,
                                                   geometry = FALSE,
@@ -2281,7 +2281,7 @@ morie_datasets_chicago_wards <- function(offline = TRUE,
 #'   Areas (current)" (`cauq-8yn6`).
 #' @examples
 #' df <- morie_datasets_chicago_community_areas(offline = TRUE)
-#' head(df\[, c("area_numbe", "community")\])
+#' head(df[, c("area_numbe", "community")])
 #' @export
 morie_datasets_chicago_community_areas <- function(offline = TRUE,
                                                      geometry = FALSE,
@@ -2658,7 +2658,7 @@ morie_datasets_cpd_public_arrests <- function(url = NULL,
 #'   `portal`, `resource_url`, `fixture`.
 #' @examples
 #' reg <- morie_datasets_external_socrata_layers()
-#' reg\[, c("dataset_key", "resource_url")\]
+#' reg[, c("dataset_key", "resource_url")]
 #' @export
 morie_datasets_external_socrata_layers <- function() {
   rows <- list(

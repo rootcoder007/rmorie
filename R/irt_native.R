@@ -38,7 +38,7 @@
 #' set.seed(1)
 #' th <- rnorm(300)
 #' a <- c(1, 1.5, 0.8); b <- c(-0.5, 0, 0.5)
-#' X <- sapply(1:3, function(j) rbinom(300, 1, plogis(a\[j\] * (th - b\[j\]))))
+#' X <- sapply(1:3, function(j) rbinom(300, 1, plogis(a[j] * (th - b[j]))))
 #' fit <- morie_irt_2pl(X)
 #' fit$difficulty
 #' @export
@@ -159,7 +159,7 @@ morie_irt_2pl <- function(responses, n_quad = 41L, max_iter = 200L,
 #' X <- vapply(seq_len(k), function(j) {
 #'   bj <- sort(runif(2, -1, 1))
 #'   u <- runif(n)
-#'   1L + (u < plogis(a_true\[j\] * (th - bj\[1\]))) + (u < plogis(a_true\[j\] * (th - bj\[2\])))
+#'   1L + (u < plogis(a_true[j] * (th - bj[1]))) + (u < plogis(a_true[j] * (th - bj[2])))
 #' }, integer(n))
 #' morie_irt_grm(X)
 #' @export
@@ -259,9 +259,9 @@ morie_irt_grm <- function(responses, n_quad = 31L, max_iter = 100L,
 #' set.seed(63)
 #' th <- rnorm(1000)
 #' a <- c(0.8, 1.2, 1.6, 1.0, 1.4); b <- c(-1, -0.5, 0, 0.5, 1)
-#' X <- vapply(seq_along(a), function(j) rbinom(1000, 1, plogis(a\[j\] * (th - b\[j\]))), numeric(1000))
+#' X <- vapply(seq_along(a), function(j) rbinom(1000, 1, plogis(a[j] * (th - b[j]))), numeric(1000))
 #' fit <- morie_irt_2pl(X)
-#' morie_irt_eap(fit, X)$theta\[1:5\]
+#' morie_irt_eap(fit, X)$theta[1:5]
 #' @export
 morie_irt_eap <- function(fit, responses, n_quad = 41L) {
   X <- as.matrix(responses)

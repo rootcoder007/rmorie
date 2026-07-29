@@ -473,7 +473,7 @@ morie_copula_survival <- function(time1, event1, time2, event2,
 #' @examples
 #' set.seed(1)
 #' X <- matrix(rnorm(90), ncol = 3)
-#' X\[1, \] <- 9
+#' X[1, ] <- 9
 #' which.max(morie_copod(X)$scores)
 #' @export
 morie_copod <- function(X, skew_correction = TRUE) {

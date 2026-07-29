@@ -204,7 +204,7 @@ NULL
 #' set.seed(2026)
 #' n_inc <- 400
 #' df <- data.frame(
-#'   HOOD_158 = sample(letters\[1:20\], n_inc, replace = TRUE),
+#'   HOOD_158 = sample(letters[1:20], n_inc, replace = TRUE),
 #'   LAT_WGS84 = 43.6 + runif(n_inc, 0, 0.2),
 #'   LONG_WGS84 = -79.4 + runif(n_inc, 0, 0.2)
 #' )
@@ -363,7 +363,7 @@ morie_tps_morans_i_neighbourhood <- function(df,
 #' @examples
 #' set.seed(2026)
 #' df <- data.frame(
-#'   HOOD_158 = sample(letters\[1:15\], 300, replace = TRUE),
+#'   HOOD_158 = sample(letters[1:15], 300, replace = TRUE),
 #'   LAT_WGS84 = 43.6 + runif(300, 0, 0.2),
 #'   LONG_WGS84 = -79.4 + runif(300, 0, 0.2)
 #' )

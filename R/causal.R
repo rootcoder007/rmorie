@@ -953,9 +953,9 @@ morie_estimate_g_computation <- function(data, treatment, outcome,
 #' set.seed(1)
 #' n <- 200
 #' X <- matrix(rnorm(n * 3), n, 3)
-#' d <- rbinom(n, 1, plogis(X\[, 1\]))
-#' y <- 0.5 * d + X\[, 1\] + rnorm(n)
-#' df <- data.frame(y = y, d = d, x1 = X\[, 1\], x2 = X\[, 2\], x3 = X\[, 3\])
+#' d <- rbinom(n, 1, plogis(X[, 1]))
+#' y <- 0.5 * d + X[, 1] + rnorm(n)
+#' df <- data.frame(y = y, d = d, x1 = X[, 1], x2 = X[, 2], x3 = X[, 3])
 #' morie_estimate_double_ml(df, "y", "d", c("x1", "x2", "x3"))
 #' @references
 #' Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo, E.,

@@ -290,7 +290,7 @@ ARSAU_KINDS <- function() {
 #' @return Named list with \code{fields} and \code{records}.
 #' @examples
 #' tf <- tempfile(fileext = ".json")
-#' writeLines('{"fields": \[{"id": "a", "type": "int"}\]}', tf)
+#' writeLines('{"fields": [{"id": "a", "type": "int"}]}', tf)
 #' res <- morie_arsau_read_sidecar(tf)
 #' res$fields
 #' unlink(tf)

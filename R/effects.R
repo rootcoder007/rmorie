@@ -81,9 +81,9 @@ estimate_ate <- function(data, outcome, treatment, weights_col) {
 #' set.seed(1)
 #' n <- 200
 #' X <- matrix(rnorm(n * 2), n, 2)
-#' tr <- rbinom(n, 1, plogis(X\[, 1\]))
-#' y <- 2 * tr + X\[, 1\] + rnorm(n)
-#' df <- data.frame(y = y, d = tr, x1 = X\[, 1\], x2 = X\[, 2\])
+#' tr <- rbinom(n, 1, plogis(X[, 1]))
+#' y <- 2 * tr + X[, 1] + rnorm(n)
+#' df <- data.frame(y = y, d = tr, x1 = X[, 1], x2 = X[, 2])
 #' res <- suppressWarnings(estimate_plr(df, treatment = "d", outcome = "y",
 #'                                      covariates = c("x1", "x2")))
 #' res$ate
@@ -247,9 +247,9 @@ estimate_pliv <- function(data, treatment, outcome, instrument,
 #' set.seed(1)
 #' n <- 300
 #' X <- matrix(rnorm(n * 3), n, 3)
-#' tr <- rbinom(n, 1, plogis(X\[, 1\]))
+#' tr <- rbinom(n, 1, plogis(X[, 1]))
 #' y <- 2.5 * tr + drop(X %*% c(1, 0.5, -0.7)) + rnorm(n)
-#' d <- data.frame(y = y, d = tr, x1 = X\[, 1\], x2 = X\[, 2\], x3 = X\[, 3\])
+#' d <- data.frame(y = y, d = tr, x1 = X[, 1], x2 = X[, 2], x3 = X[, 3])
 #' res <- estimate_ate_gcomputation(d, treatment = "d", outcome = "y",
 #'                                  covariates = c("x1", "x2", "x3"))
 #' res$ate

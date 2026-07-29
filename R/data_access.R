@@ -296,7 +296,7 @@ morie_fetch <- function(url,
 #' hits <- try(morie_ckan_search("cannabis survey",
 #'                               portal = "open.canada.ca"))
 #' if (is.data.frame(hits)) {
-#'   head(hits\[, c("dataset_title", "resource_id", "format")\])
+#'   head(hits[, c("dataset_title", "resource_id", "format")])
 #' }
 #' }
 #' @seealso \code{\link{morie_fetch_ckan}}, \code{\link{morie_fetch}}

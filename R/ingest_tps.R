@@ -172,9 +172,9 @@ morie_ingest_tps_layers <- function() {
 #' @examples
 #' \dontrun{
 #' df <- morie_ingest_tps_feature_layer(
-#'   morie_ingest_tps_layers()$url\[
+#'   morie_ingest_tps_layers()$url[
 #'     morie_ingest_tps_layers()$name == "major-crime"
-#'   \],
+#'   ],
 #'   where = "OCC_YEAR >= 2023",
 #'   max_features = 5000L
 #' )

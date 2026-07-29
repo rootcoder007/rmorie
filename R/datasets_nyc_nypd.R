@@ -101,7 +101,7 @@
 #'
 #' @examples
 #' reg <- morie_datasets_nyc_nypd_layers()
-#' reg\[, c("dataset_key", "resource_id")\]
+#' reg[, c("dataset_key", "resource_id")]
 #' @export
 morie_datasets_nyc_nypd_layers <- function() {
   rows <- lapply(names(.MORIE_NYC_NYPD_REGISTRY), function(k) {
@@ -311,7 +311,7 @@ morie_datasets_nyc_nypd_by_key <- function(dataset_key,
 #'   OpenData resource `8h9b-rp9u`.
 #' @examples
 #' df <- morie_datasets_nyc_nypd_arrests_historic(offline = TRUE)
-#' head(df\[, c("arrest_key", "arrest_date", "ofns_desc", "arrest_boro")\])
+#' head(df[, c("arrest_key", "arrest_date", "ofns_desc", "arrest_boro")])
 #' @export
 morie_datasets_nyc_nypd_arrests_historic <- function(year = NULL,
                                                        max_features = NULL,
@@ -341,7 +341,7 @@ morie_datasets_nyc_nypd_arrests_historic <- function(year = NULL,
 #'   `uip8-fykc`.
 #' @examples
 #' df <- morie_datasets_nyc_nypd_arrests_ytd(offline = TRUE)
-#' head(df\[, c("arrest_key", "arrest_date", "ofns_desc")\])
+#' head(df[, c("arrest_key", "arrest_date", "ofns_desc")])
 #' @export
 morie_datasets_nyc_nypd_arrests_ytd <- function(year = NULL,
                                                   max_features = NULL,
@@ -371,7 +371,7 @@ morie_datasets_nyc_nypd_arrests_ytd <- function(year = NULL,
 #'   `qgea-i56i`.
 #' @examples
 #' df <- morie_datasets_nyc_nypd_complaint_historic(offline = TRUE)
-#' head(df\[, c("cmplnt_num", "ofns_desc", "boro_nm")\])
+#' head(df[, c("cmplnt_num", "ofns_desc", "boro_nm")])
 #' @export
 morie_datasets_nyc_nypd_complaint_historic <- function(year = NULL,
                                                          max_features = NULL,
@@ -429,8 +429,8 @@ morie_datasets_nyc_nypd_complaint_ytd <- function(year = NULL,
 #'   `bqiq-cu78`.
 #' @examples
 #' df <- morie_datasets_nyc_nypd_hate_crimes(offline = TRUE)
-#' head(df\[, c("complaint_year_number", "bias_motive_description",
-#'             "offense_category")\])
+#' head(df[, c("complaint_year_number", "bias_motive_description",
+#'             "offense_category")])
 #' @export
 morie_datasets_nyc_nypd_hate_crimes <- function(year = NULL,
                                                   max_features = NULL,
@@ -459,7 +459,7 @@ morie_datasets_nyc_nypd_hate_crimes <- function(year = NULL,
 #'   `f4tj-796d`.
 #' @examples
 #' df <- morie_datasets_nyc_nypd_uof_incidents(offline = TRUE)
-#' head(df\[, c("tri_incident_number", "forcetype", "basisforencounter")\])
+#' head(df[, c("tri_incident_number", "forcetype", "basisforencounter")])
 #' @export
 morie_datasets_nyc_nypd_uof_incidents <- function(year = NULL,
                                                     max_features = NULL,
@@ -489,7 +489,7 @@ morie_datasets_nyc_nypd_uof_incidents <- function(year = NULL,
 #'   `dufe-vxb7`.
 #' @examples
 #' df <- morie_datasets_nyc_nypd_uof_subjects(offline = TRUE)
-#' head(df\[, c("tri_incident_number", "subject_race", "subject_injury_level")\])
+#' head(df[, c("tri_incident_number", "subject_race", "subject_injury_level")])
 #' @export
 morie_datasets_nyc_nypd_uof_subjects <- function(year = NULL,
                                                    max_features = NULL,
@@ -518,7 +518,7 @@ morie_datasets_nyc_nypd_uof_subjects <- function(year = NULL,
 #'   `hn9i-dwpr`.
 #' @examples
 #' df <- morie_datasets_nyc_nypd_vehicle_stops(offline = TRUE)
-#' head(df\[, c("evnt_key", "occur_dt", "arrest_made_flg", "race_desc")\])
+#' head(df[, c("evnt_key", "occur_dt", "arrest_made_flg", "race_desc")])
 #' @export
 morie_datasets_nyc_nypd_vehicle_stops <- function(year = NULL,
                                                     max_features = NULL,
@@ -630,7 +630,7 @@ morie_datasets_nyc_police_precincts <- function(offline = TRUE,
 #' @return A `data.frame`.
 #' @examples
 #' df <- morie_datasets_nyc_boroughs(offline = TRUE)
-#' df\[, c("borocode", "boroname")\]
+#' df[, c("borocode", "boroname")]
 #' @export
 morie_datasets_nyc_boroughs <- function(offline = TRUE,
                                           geometry = FALSE,
@@ -847,7 +847,7 @@ morie_datasets_nyc_community_districts <- function(offline = TRUE,
 #'   `borocode`, `boroname`, `countyfips`, `cdta2020`, `cdtaname`.
 #' @examples
 #' df <- morie_datasets_nyc_ntas_2020(offline = TRUE)
-#' head(df\[, c("nta2020", "ntaname", "boroname")\])
+#' head(df[, c("nta2020", "ntaname", "boroname")])
 #' @export
 morie_datasets_nyc_ntas_2020 <- function(offline = TRUE,
                                            max_features = NULL) {
@@ -901,7 +901,7 @@ morie_datasets_nyc_ntas_2020 <- function(offline = TRUE,
 #'   `centlat`, `centlon`, `intptlat`, `intptlon`.
 #' @examples
 #' df <- morie_datasets_nyc_zctas(offline = TRUE)
-#' head(df\[, c("zcta5", "centlat", "centlon")\])
+#' head(df[, c("zcta5", "centlat", "centlon")])
 #' @export
 morie_datasets_nyc_zctas <- function(offline = TRUE,
                                        max_features = NULL) {

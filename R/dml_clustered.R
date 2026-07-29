@@ -41,7 +41,7 @@
 #' set.seed(1)
 #' G <- 40L; ng <- 10L; n <- G * ng
 #' g <- rep(seq_len(G), each = ng)
-#' u <- stats::rnorm(G)\[g\]                       # cluster effect
+#' u <- stats::rnorm(G)[g]                       # cluster effect
 #' x <- stats::rnorm(n)
 #' d <- stats::rbinom(n, 1, stats::plogis(0.5 * x + u))
 #' y <- 2 * d + x + u + stats::rnorm(n)          # true ATE = 2

@@ -46,7 +46,7 @@
 #' @srrstats {G2.9} `.morie_check_data()` errors (rather than silently
 #'   converting) on unsupported list-columns, so no information is lost
 #'   without the caller being told.
-#' @srrstats {G2.10} Column extraction uses `\[\[` throughout, giving
+#' @srrstats {G2.10} Column extraction uses `[[` throughout, giving
 #'   consistent single-column behaviour across tabular classes.
 #' @srrstats {G2.12} `.morie_check_data()` rejects list-columns with an
 #'   informative error.

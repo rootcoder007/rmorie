@@ -390,7 +390,7 @@ score_data_quality <- function(data, date_cols = NULL, freshness_days = 365L,
 #' @examples
 #' set.seed(1)
 #' X <- matrix(rnorm(200 * 3), 200, 3)
-#' y <- as.integer(plogis(X\[, 1\] - 0.5 * X\[, 2\]) > runif(200))
+#' y <- as.integer(plogis(X[, 1] - 0.5 * X[, 2]) > runif(200))
 #' fit <- function(X, y) suppressWarnings(
 #'   glm(y ~ ., data = data.frame(y = y, X), family = binomial()))
 #' pred <- function(m, X) predict(m, newdata = data.frame(X), type = "response")
@@ -466,7 +466,7 @@ cross_validate <- function(fit_fn, predict_fn, X, y,
 #' set.seed(1)
 #' n <- 120
 #' X <- matrix(rnorm(n * 3), n, 3)
-#' y <- as.integer(plogis(X\[, 1\]) > runif(n))
+#' y <- as.integer(plogis(X[, 1]) > runif(n))
 #' fit_fn <- function(X, y, hp) {
 #'   df <- data.frame(y = y, X)
 #'   suppressWarnings(stats::glm(y ~ ., data = df, family = stats::binomial()))
@@ -586,7 +586,7 @@ nested_cross_validate <- function(fit_fn = NULL, predict_fn = NULL,
 #' @examples
 #' set.seed(1)
 #' X <- matrix(rnorm(120 * 3), 120, 3)
-#' y <- as.integer(plogis(X\[, 1\] - 0.5 * X\[, 2\]) > runif(120))
+#' y <- as.integer(plogis(X[, 1] - 0.5 * X[, 2]) > runif(120))
 #' fit <- function(X, y) suppressWarnings(
 #'   glm(y ~ ., data = data.frame(y = y, X), family = binomial()))
 #' pred <- function(m, X) predict(m, newdata = data.frame(X), type = "response")
@@ -701,7 +701,7 @@ assess_calibration <- function(y_true, y_pred, n_groups = 10L) {
 #' @examples
 #' set.seed(1)
 #' X <- matrix(rnorm(200 * 3), 200, 3)
-#' y <- as.integer(plogis(X\[, 1\]) > runif(200))
+#' y <- as.integer(plogis(X[, 1]) > runif(200))
 #' p <- plogis(X %*% c(1, -0.5, 0))
 #' res <- assess_discrimination(y, p, n_bootstrap = 50L)
 #' res$auroc
@@ -800,7 +800,7 @@ decision_curve_analysis <- function(y_true, y_pred, thresholds = NULL) {
 #' @examples
 #' set.seed(1)
 #' X <- matrix(rnorm(120 * 3), 120, 3)
-#' y <- as.integer(plogis(X\[, 1\] - 0.5 * X\[, 2\]) > runif(120))
+#' y <- as.integer(plogis(X[, 1] - 0.5 * X[, 2]) > runif(120))
 #' fit <- function(X, y) suppressWarnings(
 #'   glm(y ~ ., data = data.frame(y = y, X), family = binomial()))
 #' pred <- function(m, X) predict(m, newdata = data.frame(X), type = "response")
@@ -904,7 +904,7 @@ temporal_validate <- function(fit_fn, predict_fn, X, y, date_col,
 #' @examples
 #' set.seed(1)
 #' X <- matrix(rnorm(200 * 3), 200, 3)
-#' y <- as.integer(plogis(X\[, 1\] - 0.5 * X\[, 2\]) > runif(200))
+#' y <- as.integer(plogis(X[, 1] - 0.5 * X[, 2]) > runif(200))
 #' mdl <- suppressWarnings(
 #'   glm(y ~ ., data = data.frame(y = y, X), family = binomial()))
 #' predict_fn <- function(X) predict(mdl, newdata = data.frame(X),

@@ -30,7 +30,7 @@
 #' set.seed(282)
 #' n <- 60
 #' X <- matrix(rnorm(n * 2), n, 2)
-#' y <- as.numeric(-2 * X\[, 1\] + 0.3 * X\[, 2\] + rnorm(n))
+#' y <- as.numeric(-2 * X[, 1] + 0.3 * X[, 2] + rnorm(n))
 #' res <- hrzi1(X, y)
 #' res$estimate
 #' @export

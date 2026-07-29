@@ -29,7 +29,7 @@
 #'   \emph{Communications for Statistical Applications and Methods},
 #'   22(6), 665-674.
 #' @examples
-#' morie_partial_cor(mtcars\[, c("mpg", "wt", "disp")\])$estimate
+#' morie_partial_cor(mtcars[, c("mpg", "wt", "disp")])$estimate
 #' @export
 morie_partial_cor <- function(data, method = "pearson") {
   X <- as.matrix(data)
@@ -85,7 +85,7 @@ morie_partial_cor_test <- function(x, y, z, method = "pearson") {
 #' @return A list mirroring \code{\link{morie_partial_cor}} with the
 #'   semi-partial coefficients in \code{estimate}.
 #' @examples
-#' morie_semipartial_cor(mtcars\[, c("mpg", "wt", "disp")\])$estimate
+#' morie_semipartial_cor(mtcars[, c("mpg", "wt", "disp")])$estimate
 #' @export
 morie_semipartial_cor <- function(data, method = "pearson") {
   X <- as.matrix(data)
