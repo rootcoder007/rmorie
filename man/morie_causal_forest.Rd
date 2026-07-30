@@ -13,6 +13,7 @@ morie_causal_forest(
   max_depth = 6L,
   mtry = NULL,
   subsample = 0.5,
+  imbalance_penalty = 0,
   seed = 0L
 )
 }
@@ -32,6 +33,11 @@ morie_causal_forest(
 \item{mtry}{Features tried per split; default \code{ceiling(sqrt(p))}.}
 
 \item{subsample}{Fraction of rows drawn per tree.}
+
+\item{imbalance_penalty}{GRF's split-imbalance regularizer, subtracted
+as \code{penalty * (1/n_L + 1/n_R)}. Zero recovers the plain
+Athey-Imbens criterion. It carries the units of the criterion
+itself, so it is not scale-free.}
 
 \item{seed}{RNG seed.}
 }
