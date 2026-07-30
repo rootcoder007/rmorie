@@ -196,8 +196,9 @@ morie_competing_risks_fg <- function(time, event_type, X, cause = 1,
 #' @return list with \code{beta}, \code{se}, \code{times},
 #'   \code{baseline_cif}, \code{cumulative_incidence} (n x times),
 #'   \code{cumhazard}.
-#' @references Fine, J. P. and Gray, R. J. (1999). \emph{JASA}, 94(446),
-#'   496-509.
+#' @references Fine, J. P. and Gray, R. J. (1999). A proportional
+#'   hazards model for the subdistribution of a competing risk.
+#'   \emph{JASA}, 94(446), 496-509.
 #' @examples
 #' set.seed(3)
 #' X <- matrix(rnorm(200), ncol = 2)

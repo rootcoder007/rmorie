@@ -203,7 +203,7 @@ morie_aft_generalized_gamma <- function(time, event, X, ...) {
 #' @return list with \code{standardized}, \code{cox_snell},
 #'   \code{martingale}, \code{deviance}, \code{event}, \code{family}.
 #' @references Cox, D. R. and Snell, E. J. (1968). A general definition
-#'   of residuals. \emph{JRSS-B}, 30(2), 248-275.
+#'   of residuals. \emph{JRSS-B}, 30(2), 248-265.
 #' @examples
 #' set.seed(2)
 #' X <- matrix(rnorm(200), ncol = 2)
