@@ -465,8 +465,12 @@ morie_diffusion_score_matching <- function(x, score, sigma = 0.1,
 #' @return list with \code{temperature}, \code{global_mean},
 #'   \code{ice_fraction}, \code{albedo}, \code{latitude},
 #'   \code{snowball}.
-#' @references Budyko, M. I. (1969). \emph{Tellus}, 21(5), 611-619.
-#'   Sellers, W. D. (1969). \emph{Journal of Applied Meteorology}, 8(3),
+#' @references Budyko, M. I. (1969). The effect of solar radiation
+#'   variations on the climate of the Earth. \emph{Tellus}, 21(5),
+#'   611-619.
+#'   Sellers, W. D. (1969). A global climatic model based on the
+#'   energy balance of the earth-atmosphere system.
+#'   \emph{Journal of Applied Meteorology}, 8(3),
 #'   392-400.
 #' @examples
 #' morie_zonal_ebm(1, start = 20)$snowball
