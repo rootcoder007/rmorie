@@ -79,6 +79,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Static guard -- every morie_* call must be defined
+        run: Rscript scripts/audit/check_r_undefined.R .
 
       # The 2026-07-15 oldrel-1 failure was ENOSPC: a dep-cache miss (any
       # DESCRIPTION change reshuffles the lockfile hash) forces from-source
