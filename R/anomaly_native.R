@@ -97,7 +97,7 @@ morie_abod <- function(X, k = NULL) {
 #' @param X numeric matrix, one row per observation.
 #' @return list with \code{score}, \code{rank}, \code{tail_left},
 #'   \code{tail_right} and \code{skewness}.
-#' @references Li, Z. et al. (2022). ECOD: unsupervised outlier
+#' @references Li, Z. et al. (2023). ECOD: unsupervised outlier
 #'   detection using empirical cumulative distribution functions.
 #'   \emph{IEEE TKDE}, 35(12), 12181-12193.
 #' @examples

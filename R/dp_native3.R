@@ -98,7 +98,7 @@ morie_dp_sgd <- function(grads, C = 1, sigma = 1, lr = 0.1, theta = NULL,
 #'   \code{signal_to_noise}.
 #' @references Kingma, D. P. and Ba, J. (2015). Adam: a method for
 #'   stochastic optimization. \emph{ICLR}. Abadi, M. et al. (2016).
-#'   \emph{CCS}, 308-318.
+#'   Deep learning with differential privacy. \emph{CCS}, 308-318.
 #' @examples
 #' set.seed(1)
 #' morie_dp_adam(matrix(rnorm(80), ncol = 4), C = 1, sigma = 0.1)$t
