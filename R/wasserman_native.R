@@ -1553,7 +1553,7 @@ morie_wasserman_gmm_em <- function(X, k) {
 
 # --- HMMs, MCMC, graphical models, learners ---------------------------
 
-#' HMM forward algorithm with per-step scaling (Ch 23, wsmhmm)
+#' HMM forward algorithm with per-step scaling (Rabiner 1989; Wasserman Ch 23 covers the underlying Markov chains) (wsmhmm)
 #'
 #' Each step is normalised and the log of the scale factors accumulates
 #' the exact log-likelihood, so long sequences cannot underflow.

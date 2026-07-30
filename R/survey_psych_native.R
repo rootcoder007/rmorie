@@ -168,13 +168,16 @@ morie_brr_balanced <- function(strata, fay_k = 0) {
   if (fay_k < 0 || fay_k >= 1) {
     stop("fay_k must be in [0, 1)", call. = FALSE)
   }
-  R <- if (H %% 4L) as.integer(4 * ceiling(H / 4)) else H
-  R <- max(R, 4L)
-  size <- 1L
-  while (size < R) size <- size * 2L
+  # Full balance needs orthogonal COLUMNS of the R x H sign matrix.
+  # Truncating a Sylvester Hadamard to a non-power-of-two row count
+  # destroys that (off-diagonal inner products of 4 at H = 9..12), so
+  # R is the next power of two >= max(H, 4): a few extra replicates,
+  # exact balance.
+  R <- 4L
+  while (R < H) R <- R * 2L
   Hm <- matrix(1, 1L, 1L)
-  while (nrow(Hm) < size) Hm <- rbind(cbind(Hm, Hm), cbind(Hm, -Hm))
-  Hm <- Hm[seq_len(R), seq_len(H), drop = FALSE]
+  while (nrow(Hm) < R) Hm <- rbind(cbind(Hm, Hm), cbind(Hm, -Hm))
+  Hm <- Hm[, seq_len(H), drop = FALSE]
   n <- length(s)
   W <- matrix(0, R, n)
   for (r in seq_len(R)) {
