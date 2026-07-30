@@ -2,7 +2,7 @@
 % Please edit documentation in R/wasserman_native.R
 \name{morie_wasserman_variance}
 \alias{morie_wasserman_variance}
-\title{Variance Var(X) = E\link{X^2} - E\link[dlm:X]{X}^2 (Wasserman Ch 3, morie.fn wsmvar)}
+\title{Variance Var(X) = E\[X^2\] - E\[X\]^2 (Wasserman Ch 3, morie.fn wsmvar)}
 \usage{
 morie_wasserman_variance(x)
 }
@@ -15,7 +15,7 @@ List with \code{estimate} (population variance, divisor n),
 \code{n}, \code{method}.
 }
 \description{
-Variance Var(X) = E\link{X^2} - E\link[dlm:X]{X}^2 (Wasserman Ch 3, morie.fn wsmvar)
+Variance Var(X) = E\[X^2\] - E\[X\]^2 (Wasserman Ch 3, morie.fn wsmvar)
 }
 \examples{
 morie_wasserman_variance(c(1, 2, 3, 4))$estimate

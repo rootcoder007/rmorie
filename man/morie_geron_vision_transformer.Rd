@@ -24,7 +24,7 @@ list with logits, cls, tokens, patches, n_patches, seq_len, patch_dim,
 grid, encoder_params, total_params, predicted, estimate, n, method.
 }
 \description{
-Patchify image, linear-embed patches, prepend \link{CLS}, add sinusoidal
+Patchify image, linear-embed patches, prepend [CLS], add sinusoidal
 position encodings, run \code{morie_geron_transformer}, linear head
-on the \link{CLS} row.
+on the [CLS] row.
 }

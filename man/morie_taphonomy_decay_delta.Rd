@@ -7,7 +7,7 @@
 morie_taphonomy_decay_delta(preservation, start = NULL, ...)
 }
 \arguments{
-\item{preservation}{Preservation factor in \code{(0, 1]} for the treated
+\item{preservation}{Preservation factor in \code{(0, 1\]} for the treated
 chain.}
 
 \item{start}{Starting transient stage (default the first).}

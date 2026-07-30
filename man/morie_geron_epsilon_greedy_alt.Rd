@@ -7,7 +7,7 @@
 morie_geron_epsilon_greedy_alt(Q, s, epsilon, seed = 0)
 }
 \arguments{
-\item{Q}{Table (S, A) or (A,). @param s State index (0-based). @param epsilon Rate in \link{0, 1}. @param seed LCG seed.}
+\item{Q}{Table (S, A) or (A,). @param s State index (0-based). @param epsilon Rate in [0, 1]. @param seed LCG seed.}
 }
 \value{
 List with \code{action}, \code{probabilities}, \code{greedy_action}, \code{greedy_actions}, \code{is_exploratory}.

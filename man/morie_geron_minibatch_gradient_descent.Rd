@@ -11,7 +11,7 @@ morie_geron_minibatch_gradient_descent(X, y, theta, eta, b, n_iter, seed = 0)
 
 \item{eta}{Positive learning rate.}
 
-\item{b}{Batch size in \link{1, m}.}
+\item{b}{Batch size in [1, m].}
 
 \item{n_iter}{Number of steps.}
 

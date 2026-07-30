@@ -27,7 +27,7 @@ n_overid_restrictions, n, k, m, method.
 \description{
 The k-class estimator whose \code{k} is the Anderson-Rubin variance
 ratio: \code{kappa} is the smallest eigenvalue of
-\verb{(Ybar' M_[W,Z] Ybar)^-1 (Ybar' M_W Ybar)}, with \code{Ybar} holding
+\verb{(Ybar' M_\[W,Z\] Ybar)^-1 (Ybar' M_W Ybar)}, with \code{Ybar} holding
 \code{y} and the ENDOGENOUS regressors only.
 }
 \details{

@@ -9,7 +9,7 @@ morie_geron_discounted_return(rewards, gamma)
 \arguments{
 \item{rewards}{Reward sequence.}
 
-\item{gamma}{Discount in \link{0, 1}.}
+\item{gamma}{Discount in [0, 1].}
 }
 \value{
 List with \code{returns}, \code{G0}, \code{effective_horizon}.

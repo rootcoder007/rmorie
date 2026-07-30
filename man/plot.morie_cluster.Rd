@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{A \code{morie_cluster}.}
 
-\item{...}{Passed to \code{\link[=plot]{plot()}}.}
+\item{...}{Passed to [plot()].}
 }
 \value{
 \code{NULL}, invisibly.

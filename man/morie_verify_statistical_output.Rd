@@ -22,7 +22,7 @@ checks are \code{TRUE}.
 }
 \details{
 Checks: SE non-negative; CI lower < CI upper; estimate inside the CI;
-n positive; p-value (if present) in [0, 1]; estimate finite.
+n positive; p-value (if present) in \[0, 1\]; estimate finite.
 }
 \examples{
 tmp <- tempfile(fileext = ".json")

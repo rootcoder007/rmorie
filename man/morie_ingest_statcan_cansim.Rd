@@ -21,7 +21,7 @@ morie_ingest_statcan_cansim(
 rather than using its on-disk cache.}
 
 \item{...}{Further arguments forwarded to
-\code{\link[cansim]{get_cansim}}.}
+\code{\link\[cansim\]{get_cansim}}.}
 }
 \value{
 A base R \code{data.frame}.

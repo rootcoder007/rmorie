@@ -16,7 +16,7 @@ Scalar fractal dimension.
 }
 \description{
 Slope of \code{log(L(k))} vs. \code{log(1/k)} over \verb{k = 1..kmax} curve-length
-scales. Returns a value in approximately \verb{[1, 2]} for real signals.
+scales. Returns a value in approximately \verb{\[1, 2\]} for real signals.
 }
 \examples{
 t <- seq.int(0, 1023) / 1024

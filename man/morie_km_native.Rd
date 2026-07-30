@@ -22,7 +22,7 @@ A list with \code{times}, \code{survival}, \code{se}, \code{ci_lower}, \code{ci_
 \description{
 \deqn{\hat S(t) = \prod_{t_i \le t}(1 - d_i / n_i)}
 with Greenwood's variance
-\deqn{\widehat{Var}[\hat S(t)] = \hat S(t)^2 \sum d_i / (n_i (n_i - d_i)).}
+\deqn{\widehat{Var}\[\hat S(t)\] = \hat S(t)^2 \sum d_i / (n_i (n_i - d_i)).}
 }
 \details{
 Censored observations leave the risk set without producing a drop,
@@ -32,7 +32,7 @@ assumption that buys it is INDEPENDENT censoring: those censored at
 Informative censoring biases the curve and leaves no trace in the data.
 
 Intervals are on the log-log scale by default. A linear interval can
-leave [0, 1], and does so exactly in the tails, where the estimate is
+leave \[0, 1\], and does so exactly in the tails, where the estimate is
 least precise.
 }
 \references{

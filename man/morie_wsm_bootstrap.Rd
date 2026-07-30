@@ -22,7 +22,7 @@ list: value, se, variance_ddof1, variance_ddof0,
 mean_replicate, bias, replicates, B, n, ddof, method.
 }
 \description{
-ESL Eq. (7.53), \verb{Var[S] = (1/(B-1)) sum_b (S(Z*b) - Sbar*)^2}.
+ESL Eq. (7.53), \verb{Var\[S\] = (1/(B-1)) sum_b (S(Z*b) - Sbar*)^2}.
 }
 \details{
 The denominator is \code{B - 1}, not \code{B}, for the same reason a sample

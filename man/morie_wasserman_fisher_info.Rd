@@ -20,10 +20,10 @@ List with \code{estimate} (I), \code{se_one_obs}, \code{theta}, \code{h},
 \code{grid_points}, \code{method}.
 }
 \description{
-I(theta) = -E\link{d^2 log f / d theta^2}, the second derivative taken as
+I(theta) = -E\[d^2 log f / d theta^2\], the second derivative taken as
 a central difference in theta and the expectation by trapezoid
 quadrature on \code{x_grid}. \code{f = NULL} selects the exponential model
-(exact information 1/theta^2) with a default grid over \link{0, 40 theta}.
+(exact information 1/theta^2) with a default grid over \[0, 40 theta\].
 }
 \examples{
 round(morie_wasserman_fisher_info(NULL, 2)$estimate, 4)

@@ -15,7 +15,7 @@ morie_moving_average(x, M = 8L)
 list: y, group_delay, M, N.
 }
 \description{
-\eqn{y[n] = (1/M)\sum_{k=0}^{M-1} x[n-k]}. Sinc magnitude response
+\eqn{y\[n\] = (1/M)\sum_{k=0}^{M-1} x\[n-k\]}. Sinc magnitude response
 with zeros at multiples of fs/M, and group delay (M-1)/2 -- the
 output is NOT aligned with the input. Mirrors
 \code{morie.fn.rgmavg}.

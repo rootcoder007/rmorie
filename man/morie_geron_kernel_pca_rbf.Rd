@@ -11,7 +11,7 @@ morie_geron_kernel_pca_rbf(X, gamma = 1, d = 2)
 
 \item{gamma}{Positive RBF width parameter.}
 
-\item{d}{Components in \link{1, m}.}
+\item{d}{Components in [1, m].}
 }
 \value{
 List with \code{projected}, \code{eigenvalues}, \code{eigenvectors},

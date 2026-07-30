@@ -26,7 +26,7 @@ morie_tmle_ate(
 
 \item{g}{Pre-computed propensity scores; skips the internal fit.}
 
-\item{scale_outcome}{Rescale \code{y} to [0, 1] and map back.}
+\item{scale_outcome}{Rescale \code{y} to \[0, 1\] and map back.}
 
 \item{max_iter, tol}{Fluctuation Newton controls.}
 }
@@ -37,7 +37,7 @@ List with \code{ate}, \code{se}, \code{ci}, \code{eif}, \code{epsilon}, \code{q1
 \description{
 Three steps: fit the outcome regressions and the propensity; fluctuate
 the outcome fit along the clever covariate
-\code{H = A/g - (1 - A)/(1 - g)} on the outcome rescaled to [0, 1], so the
+\code{H = A/g - (1 - A)/(1 - g)} on the outcome rescaled to \[0, 1\], so the
 logistic fluctuation is valid for bounded continuous outcomes as well
 as binary ones; then substitute. The estimate solves the efficient
 influence-function equation, so the EIF supplies the standard error.

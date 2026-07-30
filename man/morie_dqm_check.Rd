@@ -19,7 +19,7 @@ morie_dqm_check(density, score, t_grid = c(0.1, 0.05, 0.02, 0.01), theta = 0)
 list: t_grid, dqm_integrals, shrinking, score_mean.
 }
 \description{
-\eqn{\int[(\sqrt{dP_t}-\sqrt{dP})/t - \tfrac12 g\sqrt{dP}]^2 \to 0}.
+\eqn{\int\[(\sqrt{dP_t}-\sqrt{dP})/t - \tfrac12 g\sqrt{dP}\]^2 \to 0}.
 Stated on the SQUARE ROOT of the density, which is what lets kinked
 families such as the Laplace qualify. Mirrors
 \code{morie.fn.ksr061}.

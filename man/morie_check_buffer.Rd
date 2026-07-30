@@ -2,7 +2,7 @@
 % Please edit documentation in R/geron_w4a_native.R
 \name{morie_check_buffer}
 \alias{morie_check_buffer}
-\title{Validate a DQN replay buffer of (s, a, r, s2\link{, done}) rows (hmdqn)}
+\title{Validate a DQN replay buffer of (s, a, r, s2[, done]) rows (hmdqn)}
 \usage{
 morie_check_buffer(buffer, n_states, n_actions, name)
 }
@@ -15,5 +15,5 @@ morie_check_buffer(buffer, n_states, n_actions, name)
 List with \code{s},\code{a},\code{r},\code{s2},\code{done} (0-based indices as given).
 }
 \description{
-Validate a DQN replay buffer of (s, a, r, s2\link{, done}) rows (hmdqn)
+Validate a DQN replay buffer of (s, a, r, s2[, done]) rows (hmdqn)
 }

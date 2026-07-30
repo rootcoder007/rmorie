@@ -7,7 +7,7 @@
 morie_geron_ch4_linear_regression_prediction(theta, x)
 }
 \arguments{
-\item{theta}{Length n+1 parameters, theta\link{1} the bias.}
+\item{theta}{Length n+1 parameters, theta[1] the bias.}
 
 \item{x}{Instance vector or (m, n) batch.}
 }

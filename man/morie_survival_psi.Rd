@@ -18,7 +18,7 @@ list: t_grid, psi, sup_norm, parameter_is, norm,
 components_supplied, n, method.
 }
 \description{
-\eqn{\Psi(S)(t) = S_0(t)L(t) + \int_0^t [S_0(u)/S(u)]dG(u)S(t) -
+\eqn{\Psi(S)(t) = S_0(t)L(t) + \int_0^t \[S_0(u)/S(u)\]dG(u)S(t) -
 S(t)} (Eq. 2.11, p. 26), implemented exactly as printed.
 }
 \details{

@@ -24,7 +24,7 @@ morie_geron_q_value_iteration(
 List with \code{Q}, \code{V}, \code{policy}, \code{residual}, \code{iterations}, \code{converged}.
 }
 \description{
-Q*(s,a) = sum_s' T(s,a,s')\link{R(s,a,s') + gamma max_a' Q*(s',a')}. Rows
+Q*(s,a) = sum_s' T(s,a,s')[R(s,a,s') + gamma max_a' Q*(s',a')]. Rows
 of \code{transitions} may sum to 1 (available) or 0 (unavailable).
 \code{policy} is 0-based.
 }

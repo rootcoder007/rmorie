@@ -27,6 +27,6 @@ morie_kamath_llava_visual_instruction(
 List with \code{visual_tokens}, \code{inputs}, optionally \code{loss}.
 }
 \description{
-\link{W ViT(image); text} soft tokens; with \code{lm_head} and \code{targets} the causal
+[W ViT(image); text] soft tokens; with \code{lm_head} and \code{targets} the causal
 cross entropy is added. \code{targets} are 0-BASED with -100 ignored.
 }

@@ -21,7 +21,7 @@ List with elements \code{y} and \code{e}, both length(x).
 \description{
 Least-mean-squares adaptive transversal filter. Returns the filter
 output \code{y} and instantaneous error \code{e = d - y}. Coefficient update:
-\code{w <- w + 2 * mu * e[i] * x_seg}.
+\verb{w <- w + 2 * mu * e\[i\] * x_seg}.
 }
 \examples{
 set.seed(1)

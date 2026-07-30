@@ -9,7 +9,7 @@ morie_geron_standardization_grstd(X, ddof = 0)
 \arguments{
 \item{X}{Vector or matrix.}
 
-\item{ddof}{Denominator correction in \link{0, m-1}.}
+\item{ddof}{Denominator correction in [0, m-1].}
 }
 \value{
 List with \code{scaled}, \code{mean}, \code{scale}.

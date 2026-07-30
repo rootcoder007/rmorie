@@ -11,7 +11,7 @@ morie_geron_q_learning(Q, s, a, r, s_next, alpha, gamma, done = FALSE)
 
 \item{r}{Reward. @param s_next 0-based next state.}
 
-\item{alpha}{In (0, 1]. @param gamma In \link{0, 1}. @param done Terminal.}
+\item{alpha}{In (0, 1]. @param gamma In [0, 1]. @param done Terminal.}
 }
 \value{
 List with \code{Q}, \code{td_error}, \code{target}, \code{old_value},

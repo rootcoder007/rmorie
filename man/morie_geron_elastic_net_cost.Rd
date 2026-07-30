@@ -11,9 +11,9 @@ morie_geron_elastic_net_cost(X, y, theta, alpha, r, penalize_intercept = FALSE)
 
 \item{alpha}{Non-negative penalty weight.}
 
-\item{r}{L1 mix ratio in \link{0, 1}.}
+\item{r}{L1 mix ratio in [0, 1].}
 
-\item{penalize_intercept}{Include theta\link{1} in both penalties.}
+\item{penalize_intercept}{Include theta[1] in both penalties.}
 }
 \value{
 List with \code{cost}, \code{mse}, \code{l1_penalty}, \code{l2_penalty},

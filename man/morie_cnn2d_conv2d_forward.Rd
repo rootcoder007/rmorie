@@ -27,7 +27,7 @@ Named list \code{(y, estimate, output_shape, method)}.
 R parity for \code{morie.fn.cnn2d.conv2d_forward}.
 }
 \details{
-\deqn{y[i,j] = \sum_{m,n} w[m,n] x[i s + m, j s + n] + b}{y[i,j] = sum_m,n w[m,n] x[i s + m, j s + n] + b}
+\deqn{y\[i,j\] = \sum_{m,n} w\[m,n\] x\[i s + m, j s + n\] + b}{y\[i,j\] = sum_m,n w\[m,n\] x\[i s + m, j s + n\] + b}
 }
 \examples{
 morie_cnn2d_conv2d_forward(x = rnorm(50), w = rnorm(3))

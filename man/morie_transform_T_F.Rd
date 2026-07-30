@@ -45,7 +45,7 @@ dz dv} (6.60) and \eqn{F_n(u) = A_n(u)/B_n(u)} (6.66).
 }
 \details{
 The derivation is the point. Differentiating \eqn{G(y|z) =
-F[T(y) - z]} gives \eqn{T'(y) = -G_y(y|z)/G_z(y|z)}, so T is an
+F\[T(y) - z\]} gives \eqn{T'(y) = -G_y(y|z)/G_z(y|z)}, so T is an
 INTEGRAL of a ratio of kernel estimators. Each converges more
 slowly than \eqn{n^{-1/2}} and their ratio is not root-n
 consistent for anything -- but integrating over v and z averages

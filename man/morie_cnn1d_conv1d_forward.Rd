@@ -27,7 +27,7 @@ Named list \code{(y, estimate, output_length, method)}.
 R parity for \code{morie.fn.cnn1d.conv1d_forward}.
 }
 \details{
-\deqn{y[i] = \sum_{k=0}^{K-1} w[k] x[i\,s + k] + b}{y[i] = sum_k=0^K-1 w[k] x[i s + k] + b}
+\deqn{y\[i\] = \sum_{k=0}^{K-1} w\[k\] x\[i\,s + k\] + b}{y\[i\] = sum_k=0^K-1 w\[k\] x\[i s + k\] + b}
 }
 \examples{
 morie_cnn1d_conv1d_forward(x = rnorm(50), w = rnorm(3))

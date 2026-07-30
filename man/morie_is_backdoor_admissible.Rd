@@ -7,7 +7,7 @@
 morie_is_backdoor_admissible(adj, treatment, outcome, Z)
 }
 \arguments{
-\item{adj}{Logical adjacency matrix; \code{adj[i, j]} means i -> j.}
+\item{adj}{Logical adjacency matrix; \verb{adj\[i, j\]} means i -> j.}
 
 \item{treatment, outcome}{Node indices (1-based).}
 

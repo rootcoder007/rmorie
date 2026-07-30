@@ -16,7 +16,7 @@ A list with \code{exact_coefficient}, \code{asymptotic}, \code{corrected},
 \code{ratio}, \code{corrected_ratio}.
 }
 \description{
-\eqn{[x^n](1-x)^{-\alpha} = \binom{n+\alpha-1}{n}} exactly;
+\eqn{\[x^n\](1-x)^{-\alpha} = \binom{n+\alpha-1}{n}} exactly;
 \eqn{n^{\alpha-1}/\Gamma(\alpha)} asymptotically
 (Flajolet-Sedgewick Theorem VI.1), with the first-order correction
 \eqn{1 + \alpha(\alpha-1)/(2n)}.

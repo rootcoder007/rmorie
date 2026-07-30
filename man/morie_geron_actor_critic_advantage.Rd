@@ -9,7 +9,7 @@ morie_geron_actor_critic_advantage(V, s, s_next, r, gamma, done = NULL)
 \arguments{
 \item{V}{Value table. @param s,s_next 0-based state indices.}
 
-\item{r}{Rewards. @param gamma Discount in \link{0, 1}.}
+\item{r}{Rewards. @param gamma Discount in [0, 1].}
 
 \item{done}{Optional terminal flags.}
 }

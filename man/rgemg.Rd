@@ -20,7 +20,7 @@ morie_rangayyan_emg_rms(x, window = 64L, fs = 1)
 Named list \code{rms}, \code{window}, \code{fs}, \code{mean_rms}.
 }
 \description{
-\deqn{\mathrm{RMS}[n] = \sqrt{ (1/W) \sum_{k=n-W+1}^{n} x[k]^2 }}{RMS[n] = sqrt{ (1/W) sum_k=n-W+1^n x[k]^2 }}
+\deqn{\mathrm{RMS}\[n\] = \sqrt{ (1/W) \sum_{k=n-W+1}^{n} x\[k\]^2 }}{RMS\[n\] = sqrt{ (1/W) sum_k=n-W+1^n x\[k\]^2 }}
 }
 \examples{
 set.seed(0)

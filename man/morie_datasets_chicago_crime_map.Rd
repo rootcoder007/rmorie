@@ -53,14 +53,14 @@ A \code{data.frame} with the 39-col schema.
 \description{
 Wraps the Socrata MAP VIEW derived from the main Crimes feed
 (parent_fxf = \code{ijzp-q8t2}). Verified live as
-\verb{type: map, parent_fxf: [ijzp-q8t2]} via the Socrata catalog API;
+\verb{type: map, parent_fxf: \[ijzp-q8t2\]} via the Socrata catalog API;
 landing page at
 \url{https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-Present-Map/ahwe-kpsy}.
 }
 \details{
 \strong{SODA3-only}. The SODA2 endpoint \verb{/resource/ahwe-kpsy.json} does
 technically return HTTP 200 but ships rows as empty objects
-(\verb{[\{\}]}) -- column resolution doesn't fire on map/filtered views.
+(\verb{\[\{\}\]}) -- column resolution doesn't fire on map/filtered views.
 This loader uses the SODA3 endpoint
 \verb{/api/v3/views/ahwe-kpsy/query.json?query=SELECT ... WHERE ...}
 via \code{.morie_dataset_soda3_query()}.

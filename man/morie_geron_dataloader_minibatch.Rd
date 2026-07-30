@@ -15,7 +15,7 @@ morie_geron_dataloader_minibatch(
 \arguments{
 \item{n}{Number of instances.}
 
-\item{b}{Batch size in \link{1, n}.}
+\item{b}{Batch size in [1, n].}
 
 \item{shuffle}{Logical; permute before slicing.}
 

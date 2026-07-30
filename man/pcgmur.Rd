@@ -12,14 +12,14 @@ pcgmur(pcg, fs)
 \item{fs}{Sampling frequency in Hz.}
 }
 \value{
-List with \code{value} (score in \verb{[0, 1]}), \code{name}, and \code{extra}
+List with \code{value} (score in \verb{\[0, 1\]}), \code{name}, and \code{extra}
 (\code{fractal_dimension}, \code{hf_energy_ratio}, \code{spectral_entropy},
 \code{fd_score}, \code{hf_score}, \code{ent_score}).
 }
 \description{
 Combines a 100--400 Hz band-energy ratio, normalised spectral entropy,
 and the Higuchi fractal dimension of the PCG into a murmur-likelihood
-score in \verb{[0, 1]}.
+score in \verb{\[0, 1\]}.
 }
 \details{
 Reference: Rangayyan, R.M. (2015) \emph{Biomedical Signal Analysis}, 2nd ed.,

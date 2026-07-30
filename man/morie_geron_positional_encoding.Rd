@@ -16,7 +16,7 @@ List with \code{pe}, \code{wavelengths}, \code{rotation_check}, \code{d_model},
 \code{estimate}, \code{n}.
 }
 \description{
-PE\link{p, 2i} = sin(p / base^(2i/d)), PE\link{p, 2i+1} = cos(...). The
+PE[p, 2i] = sin(p / base^(2i/d)), PE[p, 2i+1] = cos(...). The
 \code{rotation_check} field is the max error of expressing PE(p + 1) as
 a fixed rotation of PE(p) -- the property that lets the encoding
 extrapolate past the training length. It should be ~1e-16.

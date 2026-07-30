@@ -20,7 +20,7 @@ list: T, singular_values, decay_ratio, severity, K, n, method.
 }
 \description{
 \eqn{(Tg)(w) = \int g(x)f_{X|W}(x|w)\,dx}, represented on a sieve
-basis as \eqn{\hat T_{jk} = \hat E[p_k(X)q_j(W)]}. The operator's
+basis as \eqn{\hat T_{jk} = \hat E\[p_k(X)q_j(W)\]}. The operator's
 singular values decay to zero -- that decay IS the ill-posedness,
 and how fast it decays determines whether the problem is mildly or
 severely ill-posed. The singular values are returned so that is

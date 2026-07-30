@@ -16,7 +16,7 @@ morie_weights_smooth(
 \item{method}{Character; calibration / smoothing / variance method.
 Allowed values depend on the caller.}
 
-\item{shrinkage_factor}{Numeric in \verb{[0, 1]}; smoothing pull-toward-
+\item{shrinkage_factor}{Numeric in \verb{\[0, 1\]}; smoothing pull-toward-
 mean factor.}
 }
 \value{

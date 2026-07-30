@@ -16,10 +16,10 @@ morie_pcg_filter(x, fs = 2000, low = 25, high = 400)
 \item{high}{Upper cutoff (Hz, default 400).}
 }
 \value{
-List with filtered signal (see \code{\link[=buttbp]{buttbp()}}).
+List with filtered signal (see [buttbp()]).
 }
 \description{
-Convenience preset wrapping \code{\link[=buttbp]{buttbp()}} with the standard PCG band
+Convenience preset wrapping [buttbp()] with the standard PCG band
 (25--400 Hz at 2000 Hz sampling). Removes baseline drift below 25 Hz and
 anti-aliased high-frequency noise above 400 Hz.
 }

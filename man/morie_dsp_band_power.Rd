@@ -2,7 +2,7 @@
 % Please edit documentation in R/dsp_spectral.R
 \name{morie_dsp_band_power}
 \alias{morie_dsp_band_power}
-\title{Bandpower over \verb{[f_low, f_high]}}
+\title{Bandpower over \verb{\[f_low, f_high\]}}
 \usage{
 morie_dsp_band_power(psd, freqs, f_low, f_high)
 }

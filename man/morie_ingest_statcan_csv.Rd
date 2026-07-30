@@ -24,8 +24,8 @@ first \code{.csv} entry.}
 \item{user_agent}{User-Agent string sent with the request.}
 
 \item{...}{Further arguments forwarded to
-\code{\link[readr]{read_csv}} (or
-\code{\link[utils]{read.csv}} if \pkg{readr} is unavailable).}
+\code{\link\[readr\]{read_csv}} (or
+\code{\link\[utils\]{read.csv}} if \pkg{readr} is unavailable).}
 }
 \value{
 A base R \code{data.frame}.

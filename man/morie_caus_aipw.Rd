@@ -15,7 +15,7 @@ morie_caus_aipw(y, T, ps, m1, m0, trim = 0.01)
 
 \item{m1, m0}{estimated outcome regressions for every unit.}
 
-\item{trim}{propensities are clipped to \verb{[trim, 1 - trim]}.}
+\item{trim}{propensities are clipped to \verb{\[trim, 1 - trim\]}.}
 }
 \value{
 list: ate, se, ci, influence, regression_component,

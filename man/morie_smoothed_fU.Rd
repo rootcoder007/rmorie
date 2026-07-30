@@ -30,7 +30,7 @@ d\tau} (5.26).
 Substituting the empirical characteristic functions straight into
 the inversion formula does NOT work -- the integral does not exist
 in general. \eqn{\psi_\zeta} is the regularisation: a
-characteristic function supported on \eqn{[-1, 1]}, so the
+characteristic function supported on \eqn{\[-1, 1\]}, so the
 integrand is identically zero past \eqn{1/\nu_{nU}} and the ratio
 is never formed where the denominator has died. It is the
 Fourier-transform analogue of kernel smoothing, and it is

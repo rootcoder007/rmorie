@@ -20,7 +20,7 @@ morie_bnd_lp(
 
 \item{A_eq, b_eq}{equality restrictions (typically data moments).}
 
-\item{bounds}{list of \code{c(lo, hi)} per coordinate; \verb{[0, 1]} each
+\item{bounds}{list of \code{c(lo, hi)} per coordinate; \verb{\[0, 1\]} each
 when \code{NULL} -- the natural range for response probabilities.}
 }
 \value{
@@ -32,7 +32,7 @@ The computational engine of Mogstad, Santos and Torgovitsky
 (2018): when the object of interest is a linear functional \verb{c'x}
 and everything the data and assumptions say about \code{x} is linear,
 the identified set for the target is
-\verb{[min c'x, max c'x]} over the feasible polytope -- and both ends
+\verb{\[min c'x, max c'x\]} over the feasible polytope -- and both ends
 are linear programmes. SHARPNESS is the point: the feasible set is
 convex, so every value between the optima is attained, and the
 interval IS the identified set for the target.

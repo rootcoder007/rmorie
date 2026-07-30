@@ -31,8 +31,8 @@ bandwidth, n, d, method.
 }
 \description{
 \eqn{W(x) = 1/\sigma^2(x)} attains the single-index efficiency
-bound \eqn{\Omega_{SI} = \{E[1(X \in A_x)\sigma^{-2}(X)\,\partial
-G\,\partial G']\}^{-1}} (2.32).
+bound \eqn{\Omega_{SI} = \{E\[1(X \in A_x)\sigma^{-2}(X)\,\partial
+G\,\partial G'\]\}^{-1}} (2.32).
 }
 \details{
 \strong{Not knowing sigma^2 costs nothing.} It can be replaced by

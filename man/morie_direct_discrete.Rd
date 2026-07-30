@@ -48,7 +48,7 @@ The construction goes around it. \eqn{\beta} is estimated stratum
 by stratum and combined by (2.46), a weighted average renormalised
 by its first component. \eqn{\alpha} then comes from a LINEAR
 system: under the weak monotonicity of Assumption G the truncated
-integral \eqn{J(z)} satisfies \eqn{J[z^{(i)}] - J[z^{(1)}] =
+integral \eqn{J(z)} satisfies \eqn{J\[z^{(i)}\] - J\[z^{(1)}\] =
 (c_1 - c_0)(z^{(i)} - z^{(1)})'\alpha} (2.47), solved by
 \eqn{\alpha = (c_1 - c_0)(W'W)^{-1}W'\Delta J} (2.48). A shift in
 the discrete covariate shows up as a horizontal SHIFT of G, and

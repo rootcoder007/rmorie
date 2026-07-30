@@ -12,7 +12,7 @@ morie_geron_dqn_loss(Q, Q_target, batch, gamma = 0.99)
 \item{batch}{List of transitions c(s, a, r, s_next) or
 c(s, a, r, s_next, done); s / a / s_next are 0-based.}
 
-\item{gamma}{Discount in \link{0, 1}.}
+\item{gamma}{Discount in [0, 1].}
 }
 \value{
 List with \code{loss}, \code{targets}, \code{predictions}, \code{td_errors},

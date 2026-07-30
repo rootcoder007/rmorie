@@ -15,6 +15,6 @@ morie_geron_value_iteration(V, P, R, gamma, tol = 1e-10, max_iter = 10000)
 List with \code{V}, \code{policy}, \code{Q}, \code{iterations}, \code{residual}, \code{converged}.
 }
 \description{
-V*(s) = max_a \link{R(s,a) + gamma sum_s' P(s'|s,a) V*(s')}. \code{policy} is
+V*(s) = max_a [R(s,a) + gamma sum_s' P(s'|s,a) V*(s')]. \code{policy} is
 0-based.
 }

@@ -15,7 +15,7 @@ morie_arsau_sidecar_to_frame(sidecar)
 A \code{data.frame} (zero rows if \code{records} is empty).
 }
 \description{
-The \code{fields[].id} array supplies the column names; records
+The \code{fields\[\].id} array supplies the column names; records
 are array-of-array, so the column order in the JSON matches the
 column order in the resulting \code{data.frame}.
 }

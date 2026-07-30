@@ -22,7 +22,7 @@ list: t_grid, U, U_final, E_bar, is_process,
 root_defines_estimator, n_events, n, method.
 }
 \description{
-\eqn{U_n(t,\beta) = n^{-1}\sum_i \int_0^t [Z_i - E_n(s,\beta)]
+\eqn{U_n(t,\beta) = n^{-1}\sum_i \int_0^t \[Z_i - E_n(s,\beta)\]
 dN_i(s)} with \eqn{E_n} the risk-set weighted average covariate
 (Eq. 1.4, p. 5). Indexed by t, so it is a stochastic PROCESS whose
 weak convergence -- not merely asymptotic normality of the

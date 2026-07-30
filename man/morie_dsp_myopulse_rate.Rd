@@ -12,7 +12,7 @@ morie_dsp_myopulse_rate(x, threshold = NULL)
 \item{threshold}{Optional threshold.}
 }
 \value{
-Scalar in \verb{[0, 1]}.
+Scalar in \verb{\[0, 1\]}.
 }
 \description{
 Fraction of samples with \verb{|x| > threshold} (defaults to \code{2 * sd(x)}).

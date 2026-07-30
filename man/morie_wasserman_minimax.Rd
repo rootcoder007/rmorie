@@ -7,7 +7,7 @@
 morie_wasserman_minimax(loss, estimator, family)
 }
 \arguments{
-\item{loss}{Risk matrix (m x k), R\link{i, j} = R(estimator_i, F_j).}
+\item{loss}{Risk matrix (m x k), R\[i, j\] = R(estimator_i, F_j).}
 
 \item{estimator}{Labels for the m rows.}
 

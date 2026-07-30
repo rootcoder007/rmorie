@@ -16,7 +16,7 @@ morie_identify_estimate_refute(
 )
 }
 \arguments{
-\item{dag}{Logical adjacency matrix; \code{dag[i, j]} means i -> j.}
+\item{dag}{Logical adjacency matrix; \verb{dag\[i, j\]} means i -> j.}
 
 \item{data}{Observations, one column per node.}
 

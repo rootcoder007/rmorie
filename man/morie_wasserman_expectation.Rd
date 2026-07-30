@@ -2,7 +2,7 @@
 % Please edit documentation in R/wasserman_native.R
 \name{morie_wasserman_expectation}
 \alias{morie_wasserman_expectation}
-\title{Expectation E\link[dlm:X]{X} = int x f(x) dx by trapezoid (Ch 3, wsmexp)}
+\title{Expectation E\[X\] = int x f(x) dx by trapezoid (Ch 3, wsmexp)}
 \usage{
 morie_wasserman_expectation(x, f)
 }
@@ -15,7 +15,7 @@ morie_wasserman_expectation(x, f)
 List with \code{estimate}, \code{density_mass}, \code{n}, \code{method}.
 }
 \description{
-Expectation E\link[dlm:X]{X} = int x f(x) dx by trapezoid (Ch 3, wsmexp)
+Expectation E\[X\] = int x f(x) dx by trapezoid (Ch 3, wsmexp)
 }
 \examples{
 g <- seq(0, 1, length.out = 1001)

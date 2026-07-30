@@ -20,6 +20,6 @@ List with \code{log_likelihood}, \code{per_sample},
 \code{mean_log_likelihood}, \code{component_log_densities}, \code{n_components}.
 }
 \description{
-log L = sum_i logsumexp_k \link{log pi_k + log N(x_i | mu_k, Sigma_k)},
+log L = sum_i logsumexp_k [log pi_k + log N(x_i | mu_k, Sigma_k)],
 the component densities computed through a Cholesky solve.
 }

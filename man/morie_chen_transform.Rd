@@ -36,7 +36,7 @@ uses_kernel, rate_exponent, faster_than_horowitz, normalisation,
 n, d, method.
 }
 \description{
-\eqn{T_n(y) = \arg\max_{t}\ [n(n-1)]^{-1}\sum_i\sum_{j \ne i}
+\eqn{T_n(y) = \arg\max_{t}\ \[n(n-1)\]^{-1}\sum_i\sum_{j \ne i}
 (d_{iy} - d_{jy_0}) 1\{X_i'b_n - X_j'b_n \ge t\}} (6.67), with
 \eqn{d_{iy} = 1\{Y_i \ge y\}}.
 }

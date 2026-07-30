@@ -8,7 +8,7 @@ morie_permutation_attention_masks(permutation)
 }
 \arguments{
 \item{permutation}{Integer permutation of \code{0:(T-1)}, where
-\code{permutation[t]} is the sequence position generated \code{t}-th.}
+\verb{permutation\[t\]} is the sequence position generated \code{t}-th.}
 }
 \value{
 A list with \code{content}, \code{query} and \code{rank}.
@@ -16,7 +16,7 @@ A list with \code{content}, \code{query} and \code{rank}.
 \description{
 Returns the pair of logical matrices that make XLNet's permutation
 objective computable in a single pass over an unpermuted sequence.
-\code{content[i, j]} is TRUE when position \code{i} may attend to position \code{j}.
+\verb{content\[i, j\]} is TRUE when position \code{i} may attend to position \code{j}.
 }
 \details{
 The content stream sees \eqn{z_{\le t}} -- itself included -- and the

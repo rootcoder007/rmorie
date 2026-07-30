@@ -10,7 +10,7 @@ morie_tps_gini_concentration(x)
 \item{x}{Numeric vector (e.g. per-spatial-unit incident counts).}
 }
 \value{
-A scalar Gini coefficient in \verb{[0, 1]} (or NA when input is empty).
+A scalar Gini coefficient in \verb{\[0, 1\]} (or NA when input is empty).
 }
 \description{
 G=0 perfectly even, G=1 perfectly concentrated.  Used for the

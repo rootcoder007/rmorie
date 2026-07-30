@@ -9,7 +9,7 @@ morie_geron_quantize_symmetric(x, bits = 8)
 \arguments{
 \item{x}{Numeric object.}
 
-\item{bits}{Width in \link{2, 32}.}
+\item{bits}{Width in [2, 32].}
 }
 \value{
 List with \code{q}, \code{scale}, \code{dequantized}.

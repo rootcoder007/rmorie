@@ -27,7 +27,7 @@ are exactly where that matters.
 }
 \details{
 The weight on the \code{i}-th order statistic is the kernel mass of
-\verb{((i-1)/n, i/n]}, computed as an exact difference of the
+\verb{((i-1)/n, i/n\]}, computed as an exact difference of the
 integrated kernel rather than by quadrature.
 
 Not to be confused with \code{\link[=morie_kernel_quantile]{morie_kernel_quantile()}}, which is

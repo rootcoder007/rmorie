@@ -15,6 +15,6 @@ morie_latin_square(n, method = c("cyclic", "shifted"))
 A list with \code{square}, \code{order}, \code{valid}.
 }
 \description{
-The cyclic construction \eqn{L[i][j] = (i + j) \bmod n} works for
+The cyclic construction \eqn{L\[i\]\[j\] = (i + j) \bmod n} works for
 every \eqn{n}, so Latin squares exist unconditionally.
 }

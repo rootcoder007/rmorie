@@ -26,7 +26,7 @@ when NULL, at least 2.}
 
 \item{local_linear}{use the local-linear second stage.}
 
-\item{grid}{evaluation points on the rescaled \link{-1, 1} support.}
+\item{grid}{evaluation points on the rescaled [-1, 1] support.}
 }
 \value{
 list: grid, m_hat, mu_hat, theta, kappa, bandwidth,

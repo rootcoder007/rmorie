@@ -9,7 +9,7 @@ morie_geron_lr_cosine_annealing(eta_min, eta_max, t, T)
 \arguments{
 \item{eta_min, eta_max}{Non-negative rates with eta_min <= eta_max.}
 
-\item{t}{Step in \link{0, T}.}
+\item{t}{Step in [0, T].}
 
 \item{T}{Positive horizon.}
 }

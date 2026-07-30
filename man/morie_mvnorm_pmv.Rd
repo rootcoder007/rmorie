@@ -30,7 +30,7 @@ and Monte-Carlo error attributes attached).
 \description{
 Thin extender over \code{mvtnorm::pmvnorm} that evaluates the
 multivariate normal CDF over a hyper-rectangle
-\eqn{[lower, upper]}.
+\eqn{\[lower, upper\]}.
 }
 \examples{
 \donttest{

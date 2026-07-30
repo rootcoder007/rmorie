@@ -7,7 +7,7 @@
 morie_mobius_inversion(f_values)
 }
 \arguments{
-\item{f_values}{\code{f_values[i]} is \eqn{f(i)}.}
+\item{f_values}{\verb{f_values\[i\]} is \eqn{f(i)}.}
 }
 \value{
 A list with \code{g}, \code{mobius}, \code{reconstruction_residual},

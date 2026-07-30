@@ -22,7 +22,7 @@ method.
 }
 \description{
 Maximum rank correlation (Han 1987),
-\eqn{b_{MRC} = \arg\max_b [n(n-1)]^{-1}\sum_i\sum_{j\ne i}
+\eqn{b_{MRC} = \arg\max_b \[n(n-1)\]^{-1}\sum_i\sum_{j\ne i}
 1\{Y_i > Y_j\}1\{X_i'b > X_j'b\}}, and the Cavanagh-Sherman
 variant, which replaces \eqn{1\{Y_i > Y_j\}} with an increasing
 \eqn{M(Y_i)}.

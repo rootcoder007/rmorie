@@ -41,7 +41,7 @@ A list with \code{estimate}, \code{clipped_mean}, \code{clipping_bias},
 \code{ci_naive_lower}, \code{ci_naive_upper}, \code{n_clipped}, \code{warnings}.
 }
 \description{
-Clip to \eqn{[lower, lower + C]}, average, then perturb. Under
+Clip to \eqn{\[lower, lower + C\]}, average, then perturb. Under
 replace-one adjacency the sensitivity of the mean of \eqn{n} clipped
 values is \eqn{\Delta = C/n}; Laplace noise \eqn{Lap(\Delta/\epsilon)}
 gives \eqn{\epsilon}-differential privacy and Gaussian noise with

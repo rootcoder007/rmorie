@@ -13,7 +13,7 @@ morie_optimal_overlap_weight(var_a, var_b)
 The optimal weight.
 }
 \description{
-Hartley's estimator is unbiased for every \eqn{\theta} in [0, 1], so
+Hartley's estimator is unbiased for every \eqn{\theta} in \[0, 1\], so
 the choice is purely about efficiency. With independent samples the
 variance \eqn{\theta^2 V_A + (1-\theta)^2 V_B} is minimised at
 \eqn{\theta^* = V_B/(V_A + V_B)} -- weight goes to the frame that

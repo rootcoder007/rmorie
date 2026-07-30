@@ -10,7 +10,7 @@ morie_cramers_v(contingency_table)
 \item{contingency_table}{A numeric matrix of observed counts.}
 }
 \value{
-Numeric Cramer's V in the interval [0, 1].
+Numeric Cramer's V in the interval \[0, 1\].
 }
 \description{
 Cramer's V for categorical association

@@ -7,7 +7,7 @@
 morie_dilworth_decomposition(leq)
 }
 \arguments{
-\item{leq}{Square logical matrix; \code{leq[i, j]} when \eqn{i \le j}.}
+\item{leq}{Square logical matrix; \verb{leq\[i, j\]} when \eqn{i \le j}.}
 }
 \value{
 A list with \code{antichain_size}, \code{chain_cover_size},

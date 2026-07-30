@@ -43,7 +43,7 @@ entering additively, coefficient known to be 1 -- write
 \varepsilon)} and construct
 }
 \details{
-\deqn{T = [Y - 1\{V \ge 0\}] / f(U).}
+\deqn{T = \[Y - 1\{V \ge 0\}\] / f(U).}
 
 Then \eqn{T = X'\beta + \tilde\varepsilon} with
 \eqn{E(Z\tilde\varepsilon) = 0}, so beta follows from a LINEAR

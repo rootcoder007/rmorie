@@ -15,7 +15,7 @@ morie_mediation_sensitivity(y, treatment, mediator, r2_grid = NULL)
 
 \item{r2_grid}{Numeric vector of values of the product
 \eqn{R^{2*}_M R^{2*}_Y}, each in [0, 1). Defaults to 10 points on
-\link{0, 0.81}. The ACME is reported at both signs of \eqn{\rho},
+[0, 0.81]. The ACME is reported at both signs of \eqn{\rho},
 because its sign follows \eqn{sign(\lambda_2\lambda_3)}, which the
 data cannot reveal.}
 }
@@ -43,7 +43,7 @@ identifies the ACME for any given
 \eqn{\rho = Corr(\epsilon_{i2}, \epsilon_{i3})}:
 
 \deqn{\bar\delta(\rho) = \frac{\beta_2\sigma_1}{\sigma_2}
-  \left[\tilde\rho - \rho\sqrt{(1-\tilde\rho^2)/(1-\rho^2)}\right]}
+  \left\[\tilde\rho - \rho\sqrt{(1-\tilde\rho^2)/(1-\rho^2)}\right\]}
 
 with \eqn{\sigma_j^2 = Var(\epsilon_{ij})} and
 \eqn{\tilde\rho = Corr(\epsilon_{i1}, \epsilon_{i2})}. The ACME is

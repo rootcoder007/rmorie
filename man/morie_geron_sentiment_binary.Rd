@@ -24,13 +24,13 @@ morie_geron_sentiment_binary(
 
 \item{pooling}{"mean", "max" or "sum".}
 
-\item{threshold}{Label cut in \link{0, 1}.}
+\item{threshold}{Label cut in [0, 1].}
 }
 \value{
 List with \code{probability}, \code{label}, \code{logit}, \code{pooled},
 \code{token_contributions}.
 }
 \description{
-p = sigmoid(w . pool(E\link{ids}) + b); mean pooling loses order, max acts
+p = sigmoid(w . pool(E[ids]) + b); mean pooling loses order, max acts
 as a keyword detector. Token ids are 0-based.
 }

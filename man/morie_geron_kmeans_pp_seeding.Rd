@@ -9,7 +9,7 @@ morie_geron_kmeans_pp_seeding(X, k, seed = 0)
 \arguments{
 \item{X}{(m, n) data.}
 
-\item{k}{Centroids in \link{1, m}.}
+\item{k}{Centroids in [1, m].}
 
 \item{seed}{LCG seed.}
 }

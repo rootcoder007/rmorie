@@ -23,7 +23,7 @@ variance_vanishes_at_boundary, prefer_variant_1_when, n, method.
 \verb{m~_\{X,2\}(t)} -- the ratio of the second cumulative survival
 estimator to the survival estimator. Bias is \code{O(h^2)} everywhere
 including the boundary, with the Theorem 4.3 constant
-\verb{h^2/(2 S_X(t)) [b_3(t) + m_X(t) b_1(t)] int y^2 K(y) dy}.
+\verb{h^2/(2 S_X(t)) \[b_3(t) + m_X(t) b_1(t)\] int y^2 K(y) dy}.
 }
 \details{
 Prefer the variant built on

@@ -11,7 +11,7 @@ morie_geron_cart_split_cost(X, y, feature, threshold, criterion = "gini")
 
 \item{feature}{0-based column index, matching Python.}
 
-\item{threshold}{Split point; \code{X[, feature] <= threshold} goes left.}
+\item{threshold}{Split point; \verb{X\[, feature\] <= threshold} goes left.}
 
 \item{criterion}{One of "gini", "entropy", "mse".}
 }

@@ -12,7 +12,7 @@ family (e.g. \code{copula::normalCopula()},
 \code{copula::claytonCopula()}).}
 
 \item{data}{Numeric matrix of pseudo-observations on
-\eqn{[0, 1]^d}, with one column per margin (typically obtained
+\eqn{\[0, 1\]^d}, with one column per margin (typically obtained
 via \code{copula::pobs}).}
 
 \item{...}{Further arguments forwarded to
@@ -26,7 +26,7 @@ parameters, log-likelihood and variance estimates).
 }
 \description{
 Thin extender over \code{copula::fitCopula} that estimates
-copula parameters from pseudo-observations on \eqn{[0, 1]^d}.
+copula parameters from pseudo-observations on \eqn{\[0, 1\]^d}.
 }
 \examples{
 \donttest{

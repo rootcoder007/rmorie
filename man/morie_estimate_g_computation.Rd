@@ -29,7 +29,7 @@ Named list: \code{ate}, \code{se}, \code{ci_lower}, \code{ci_upper}.
 }
 \description{
 Estimates the ATE by:
-\deqn{\widehat{ATE} = \frac{1}{n}\sum_i \bigl[\hat{\mu}_1(X_i) - \hat{\mu}_0(X_i)\bigr]}{ATE_hat = (1)/(n)sum_i bigl[mu_hat_1(X_i) - mu_hat_0(X_i)bigr]}
+\deqn{\widehat{ATE} = \frac{1}{n}\sum_i \bigl\[\hat{\mu}_1(X_i) - \hat{\mu}_0(X_i)\bigr\]}{ATE_hat = (1)/(n)sum_i bigl\[mu_hat_1(X_i) - mu_hat_0(X_i)bigr\]}
 }
 \details{
 Delegates the standardisation step to \code{stdReg::stdGlm()} when

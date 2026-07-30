@@ -23,7 +23,7 @@ effective_sample_size, ess_fraction, max_weight_share, n, method.
 }
 \description{
 MacKay Eqs. (29.21)-(29.22): weight draws from a sampler density
-\code{Q} by \code{w_r = P*(x_r)/Q*(x_r)} and estimate \code{E_P[phi]} by
+\code{Q} by \code{w_r = P*(x_r)/Q*(x_r)} and estimate \verb{E_P\[phi\]} by
 \verb{sum(w phi)/sum(w)}.
 }
 \details{

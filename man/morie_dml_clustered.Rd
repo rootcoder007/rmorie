@@ -32,7 +32,7 @@ morie_dml_clustered(
 
 \item{seed}{Integer seed (default 123).}
 
-\item{eps}{Propensity clip bound in \code{[eps, 1-eps]} (default 0.02).}
+\item{eps}{Propensity clip bound in \code{\[eps, 1-eps\]} (default 0.02).}
 
 \item{ps}{Optional length-\code{nrow(data)} vector of externally supplied
 propensity scores (e.g. from a mixed-effects / cluster-level model); when

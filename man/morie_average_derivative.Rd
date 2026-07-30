@@ -20,9 +20,9 @@ list: delta, se, root_n, proportional_to_beta, bandwidth,
 n, d, method.
 }
 \description{
-\eqn{\delta = E[f_X(X)\,\partial E(Y|X)/\partial X] = -2E[f_X'(X)Y]}.
+\eqn{\delta = E\[f_X(X)\,\partial E(Y|X)/\partial X\] = -2E\[f_X'(X)Y\]}.
 This is the DENSITY-WEIGHTED average derivative, not the plain
-\eqn{E[\partial E(Y|X)/\partial X]}: for standard normal X with
+\eqn{E\[\partial E(Y|X)/\partial X\]}: for standard normal X with
 \eqn{E(Y|X) = 2X} the weighted estimand is \eqn{2\int\phi^2 = 0.564}
 while the unweighted one is 2. Integration by parts turns a
 derivative of an unknown regression into an expectation involving

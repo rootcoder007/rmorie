@@ -15,6 +15,6 @@ morie_kamath_ch3_top1_prompt_metric(R, t, P_LM)
 List with \code{estimate}, \code{n_correct}, \code{correct}.
 }
 \description{
-A(t) = mean over (x, y) of 1\link{y = argmax_y' P_LM(y'|x, t)}. A proportion,
+A(t) = mean over (x, y) of 1[y = argmax_y' P_LM(y'|x, t)]. A proportion,
 never a mean of the inputs.
 }

@@ -9,13 +9,13 @@ morie_bridge_covariance(s, t, F = NULL)
 \arguments{
 \item{s, t}{numeric time points.}
 
-\item{F}{optional CDF; the uniform on \link{0, 1} when NULL.}
+\item{F}{optional CDF; the uniform on [0, 1] when NULL.}
 }
 \value{
 list: covariance, variance_s.
 }
 \description{
-\eqn{cov[G(s), G(t)] = F(s \wedge t) - F(s)F(t)} (Kosorok Ch. 2).
+\eqn{cov\[G(s), G(t)\] = F(s \wedge t) - F(s)F(t)} (Kosorok Ch. 2).
 Mirrors \code{morie.fn.ksr030}.
 }
 \examples{

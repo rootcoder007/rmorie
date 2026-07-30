@@ -15,6 +15,6 @@ morie_kamath_prefix_tuning(prefix_K, prefix_V, K_input, V_input, Q = NULL)
 List with \code{K}, \code{V}, \code{prefix_len}, \code{n_trainable}.
 }
 \description{
-\link{P_K; K} and \link{P_V; V}; with \code{Q} the attention is run through
+[P_K; K] and [P_V; V]; with \code{Q} the attention is run through
 \code{morie_alammar_sdp_attention}.
 }

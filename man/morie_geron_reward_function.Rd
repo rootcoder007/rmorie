@@ -9,7 +9,7 @@ morie_geron_reward_function(s, a, s_next, R = NULL, gamma = 1)
 \arguments{
 \item{s, a, s_next}{Transition or trajectory arrays. @param R Callable \verb{R(s,a,s')} or a 2-D/3-D lookup table.}
 
-\item{gamma}{Discount in \link{0, 1}.}
+\item{gamma}{Discount in [0, 1].}
 }
 \description{
 Reward function R(s, a, s'): per-transition rewards and the backward discounted return (Geron Ch 19, hmrwd)
