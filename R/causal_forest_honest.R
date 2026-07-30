@@ -20,7 +20,7 @@
 # Grow one honest tree. `split_rows` chooses the splits; `est_rows`
 # (never seen by the splitter) fills the leaf values.
 .morie_cf_grow <- function(X, y, d, split_rows, est_rows, depth, max_depth,
-                           min_leaf, mtry) {
+                           min_leaf, mtry, imbalance_penalty = 0) {
   node <- list(feature = NA_integer_, threshold = NA_real_,
                left = NULL, right = NULL,
                tau = .morie_cf_tau(y[est_rows], d[est_rows]),
@@ -48,6 +48,12 @@
       if (is.na(tl) || is.na(tr_)) next
       # Athey-Imbens criterion: reward heterogeneity between children
       score <- length(lsp) * length(rsp) / length(split_rows) * (tl - tr_)^2
+      if (imbalance_penalty) {
+        # GRF's regularizer: the raw criterion is happiest carving off a
+        # tiny extreme leaf whose tau is mostly estimation noise, and the
+        # noise itself is what earns the split. This prices that in.
+        score <- score - imbalance_penalty * (1 / length(lsp) + 1 / length(rsp))
+      }
       if (score > best_score) {
         best_score <- score; best_f <- f; best_thr <- thr
       }
@@ -60,12 +66,12 @@
   node$left <- .morie_cf_grow(
     X, y, d, split_rows[X[split_rows, best_f] <= best_thr],
     est_rows[X[est_rows, best_f] <= best_thr],
-    depth + 1L, max_depth, min_leaf, mtry
+    depth + 1L, max_depth, min_leaf, mtry, imbalance_penalty
   )
   node$right <- .morie_cf_grow(
     X, y, d, split_rows[X[split_rows, best_f] > best_thr],
     est_rows[X[est_rows, best_f] > best_thr],
-    depth + 1L, max_depth, min_leaf, mtry
+    depth + 1L, max_depth, min_leaf, mtry, imbalance_penalty
   )
   node
 }
@@ -97,6 +103,10 @@
 #' @param max_depth Maximum tree depth.
 #' @param mtry Features tried per split; default `ceiling(sqrt(p))`.
 #' @param subsample Fraction of rows drawn per tree.
+#' @param imbalance_penalty GRF's split-imbalance regularizer, subtracted
+#'   as `penalty * (1/n_L + 1/n_R)`. Zero recovers the plain
+#'   Athey-Imbens criterion. It carries the units of the criterion
+#'   itself, so it is not scale-free.
 #' @param seed RNG seed.
 #' @return List with `cate`, `cate_oob`, `ate`, `cate_sd`, `n_trees`,
 #'   `n`, and `forest` (usable with [morie_causal_forest_predict()]).
@@ -109,7 +119,8 @@
 #' @export
 morie_causal_forest <- function(y, d, x, n_trees = 200L, min_leaf = 10L,
                                 max_depth = 6L, mtry = NULL,
-                                subsample = 0.5, seed = 0L) {
+                                subsample = 0.5, imbalance_penalty = 0,
+                                seed = 0L) {
   y <- as.numeric(y)
   d <- as.numeric(d)
   X <- as.matrix(x)
@@ -137,7 +148,8 @@ morie_causal_forest <- function(y, d, x, n_trees = 200L, min_leaf = 10L,
     half <- length(idx) %/% 2L
     trees[[b]] <- .morie_cf_grow(X, y, d, idx[seq_len(half)],
                                  idx[(half + 1L):length(idx)],
-                                 0L, max_depth, min_leaf, mtry)
+                                 0L, max_depth, min_leaf, mtry,
+                                 imbalance_penalty)
     in_bag[b, idx] <- TRUE
   }
 
