@@ -292,22 +292,49 @@ morie_dp_logistic <- function(X, y, epsilon = 1, method = c("objective",
   p <- ncol(Xc)
   old <- .morie_dp_seed(seed)
   on.exit(.morie_dp_unseed(old), add = TRUE)
-  b <- numeric(p)
-  if (identical(method, "objective")) {
-    scale <- 2 * C / (n * eps)
+  # Unit-norm rows so Chaudhuri et al. (2011)'s constants apply verbatim
+  # (the paper assumes ||x|| <= 1); coefficients mapped back at the end.
+  Xu <- Xc / C
+  draw_b <- function(scale) {
+    # Paper density (4): nu(b) ~ exp(-||b||/scale) -- random DIRECTION,
+    # Gamma(p, scale) NORM; not per-coordinate Laplace.
     direction <- stats::rnorm(p)
     direction <- direction / max(sqrt(sum(direction^2)), 1e-12)
-    b <- direction * stats::rgamma(1L, shape = p, scale = scale)
+    direction * stats::rgamma(1L, shape = p, scale = scale)
+  }
+  b <- numeric(p)
+  extra_reg <- 0
+  if (identical(method, "objective")) {
+    # Algorithm 2 exactly: c = 1/4 bounds |l''| for logistic loss; the
+    # budget first pays the slack log(1 + 2c/(n lam) + c^2/(n lam)^2);
+    # if nothing is left, raise the regulariser by Delta and halve eps.
+    # Noise scale is 2/eps' with NO 1/n -- the 1/n lives only in the
+    # objective term b'theta/n. The previous code had 1/n in both
+    # places, under-noising by a factor of n and voiding the stated
+    # epsilon.
+    c_s <- 0.25
+    slack <- log(1 + 2 * c_s / (n * lam) + c_s^2 / (n^2 * lam^2))
+    if (eps > slack) {
+      eps_p <- eps - slack
+    } else {
+      extra_reg <- max(c_s / (n * (exp(eps / 4) - 1)) - lam, 0)
+      eps_p <- eps / 2
+    }
+    b <- draw_b(2 / eps_p)
   }
   beta <- numeric(p)
   for (it in seq_len(as.integer(n_iter))) {
-    mu <- 1 / (1 + exp(-pmax(pmin(as.vector(Xc %*% beta), 500), -500)))
-    grad <- as.vector(crossprod(Xc, mu - y)) / n + lam * beta + b / n
+    mu <- 1 / (1 + exp(-pmax(pmin(as.vector(Xu %*% beta), 500), -500)))
+    grad <- as.vector(crossprod(Xu, mu - y)) / n + (lam + extra_reg) * beta +
+      b / n
     beta <- beta - lr * grad
   }
   if (identical(method, "output")) {
-    beta <- beta + .morie_dp_rlaplace(p, 2 * C / (n * lam * eps))
+    # Algorithm 1: sensitivity 2/(n lam) under unit-norm rows, noise from
+    # density (4) with beta = n lam eps / 2.
+    beta <- beta + draw_b(2 / (n * lam * eps))
   }
+  beta <- beta / C  # back to the clipped-feature scale
   prob <- 1 / (1 + exp(-pmax(pmin(as.vector(Xc %*% beta), 500), -500)))
   list(beta = beta, prob = prob, accuracy = mean((prob >= 0.5) == y),
        clipped_fraction = mean(norms > C), method_used = method,
