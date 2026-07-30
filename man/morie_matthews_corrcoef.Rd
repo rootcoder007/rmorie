@@ -13,7 +13,7 @@ morie_matthews_corrcoef(y_true, y_pred)
 \code{y_true}.}
 }
 \value{
-A single numeric in \link{-1, 1}.
+A single numeric in [-1, 1].
 }
 \description{
 Label-vector form of \code{\link{morie_mcc_counts}}, matching the

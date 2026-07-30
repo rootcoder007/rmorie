@@ -28,7 +28,7 @@ list: ci, c, z_one_sided, z_two_sided, delta, covers,
 stoye_caveat, n, method.
 }
 \description{
-\verb{[lower - c s_l/sqrt(n), upper + c s_u/sqrt(n)]} with \code{c} solving
+\verb{\[lower - c s_l/sqrt(n), upper + c s_u/sqrt(n)\]} with \code{c} solving
 \verb{pnorm(c + sqrt(n) delta / max(s_l, s_u)) - pnorm(-c) = 1 - alpha}.
 }
 \details{

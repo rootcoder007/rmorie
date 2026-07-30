@@ -9,7 +9,7 @@ morie_geron_binary_classification(X, theta, threshold = 0.5, y_true = NULL)
 \arguments{
 \item{X}{Design matrix (bring your own intercept column).}
 
-\item{theta}{Coefficients. @param threshold Cut in \link{0, 1}.}
+\item{theta}{Coefficients. @param threshold Cut in [0, 1].}
 
 \item{y_true}{Optional 0/1 labels for the confusion summary.}
 }
@@ -19,5 +19,5 @@ given, \code{tp}, \code{fp}, \code{fn}, \code{tn}, \code{accuracy}, \code{precis
 }
 \description{
 p_hat = sigmoid(X theta) computed branch-free (exp only on <= 0), then
-y_pred = 1\link{p_hat >= threshold}.
+y_pred = 1[p_hat >= threshold].
 }

@@ -15,7 +15,7 @@ morie_bandwidth_mise(x, f_second_deriv_l2 = NULL)
 list: h_opt, R_K, mu2_K, f2_l2, normal_reference_used.
 }
 \description{
-\eqn{h_{opt} = [R(K)/(\mu_2(K)^2 \int (f'')^2 n)]^{1/5}}. Depends on
+\eqn{h_{opt} = \[R(K)/(\mu_2(K)^2 \int (f'')^2 n)\]^{1/5}}. Depends on
 the UNKNOWN \eqn{\int (f'')^2}, which is why every practical rule
 approximates it; a normal reference is used when it is not
 supplied, and the result says so. Mirrors

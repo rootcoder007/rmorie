@@ -23,5 +23,5 @@ morie_kamath_in_context_learning_prob(
 List with \code{estimate}, \code{log_prob}, \code{prompt}, \code{K}.
 }
 \description{
-P(y | \link{ex_1..ex_K, x}) from a caller-supplied LM.
+P(y | [ex_1..ex_K, x]) from a caller-supplied LM.
 }

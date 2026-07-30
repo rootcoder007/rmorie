@@ -18,7 +18,7 @@ morie_geron_bert(
 \arguments{
 \item{X}{0-based token ids. @param n_layers,n_heads,d_model,d_ff Geometry.}
 
-\item{vocab_size}{Optional; one extra row is appended for \link{MASK}.}
+\item{vocab_size}{Optional; one extra row is appended for [MASK].}
 
 \item{mask_prob}{Masking fraction in (0, 1). @param seed LCG seed.}
 }

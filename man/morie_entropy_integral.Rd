@@ -24,7 +24,7 @@ morie_entropy_integral(
 list: J, finite, gc_conditions_met, donsker_conditions_met.
 }
 \description{
-\eqn{J_{[]}(\delta) = \int_0^\delta \sqrt{\log N_{[]}(\epsilon)}
+\eqn{J_{\[\]}(\delta) = \int_0^\delta \sqrt{\log N_{\[\]}(\epsilon)}
 d\epsilon}. The square root is what makes polynomial bracketing
 growth integrable and exponential growth divergent -- that IS the
 Donsker boundary. Also reports the two envelope conditions, which

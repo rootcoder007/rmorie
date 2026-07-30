@@ -36,7 +36,7 @@ mean_root_n_estimable, quantile_root_n_estimable, n_points,
 method.
 }
 \description{
-\eqn{P(Y \le y | X = x) = F[T(y) - x'\beta]}, and the
+\eqn{P(Y \le y | X = x) = F\[T(y) - x'\beta\]}, and the
 gamma-quantile predictor \eqn{y_{n\gamma}(x) = \inf\{y : T_n(y) >
 x'b_n + u_{n\gamma}\}} with
 \eqn{u_{n\gamma} = \inf\{u : F_n(u) \ge \gamma\}}.

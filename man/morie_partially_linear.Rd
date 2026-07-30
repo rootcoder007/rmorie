@@ -20,7 +20,7 @@ list: beta, se, residuals, root_n, n, p.
 }
 \description{
 \eqn{Y = X'\beta + g(Z) + \epsilon}, with beta from partialling out
-\eqn{E[X|Z]} and \eqn{E[Y|Z]} by kernel regression. beta stays
+\eqn{E\[X|Z\]} and \eqn{E\[Y|Z\]} by kernel regression. beta stays
 root-n even though g converges slowly -- the slower nuisance rate
 does not contaminate the parametric one. Mirrors
 \code{morie.fn.hrzplr}.

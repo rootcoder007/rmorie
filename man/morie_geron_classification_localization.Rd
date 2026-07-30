@@ -28,7 +28,7 @@ List with \code{class_probs}, \code{log_probs}, \code{predicted_class}
 \code{loss_box}, \code{alpha}, \code{n_classes}, \code{estimate}, \code{n}.
 }
 \description{
-The model returns \link{class scores..., x, y, w, h} per image. One head
+The model returns [class scores..., x, y, w, h] per image. One head
 is scored in nats and the other in squared pixels, so \code{alpha} is
 what makes the two comparable. Boxes are centre-form and converted
 to corners for the IoU.

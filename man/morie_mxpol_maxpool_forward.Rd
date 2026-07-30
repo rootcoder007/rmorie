@@ -23,7 +23,7 @@ Named list \code{(y, estimate, argmax, output_shape, method)}.
 R parity for \code{morie.fn.mxpol.maxpool_forward}.
 }
 \details{
-\deqn{y[i,j] = \max_{0 \le m,n < k} x[i s + m, j s + n]}{y[i,j] = max_0 <= m,n < k x[i s + m, j s + n]}
+\deqn{y\[i,j\] = \max_{0 \le m,n < k} x\[i s + m, j s + n\]}{y\[i,j\] = max_0 <= m,n < k x\[i s + m, j s + n\]}
 }
 \examples{
 # See the package vignettes for usage examples:

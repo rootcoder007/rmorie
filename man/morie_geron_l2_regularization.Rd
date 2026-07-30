@@ -7,7 +7,7 @@
 morie_geron_l2_regularization(theta, alpha, skip_bias = FALSE, eta = NULL)
 }
 \arguments{
-\item{theta}{Parameters. @param alpha Strength. @param skip_bias Exclude theta\link{1}. @param eta Optional learning rate.}
+\item{theta}{Parameters. @param alpha Strength. @param skip_bias Exclude theta[1]. @param eta Optional learning rate.}
 }
 \value{
 List with penalty, gradient, l2_norm, shrink_factor, estimate, n, method.

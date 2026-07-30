@@ -9,7 +9,7 @@ morie_geron_local_outlier_factor(X, k = 5)
 \arguments{
 \item{X}{(m, n) data.}
 
-\item{k}{Neighbours in \link{1, m-1}.}
+\item{k}{Neighbours in [1, m-1].}
 }
 \value{
 List with \code{lof}, \code{lrd}, \code{k_distance}, \code{neighbors},

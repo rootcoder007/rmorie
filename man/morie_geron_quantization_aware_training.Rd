@@ -11,7 +11,7 @@ morie_geron_quantization_aware_training(x, s, bits = 8, upstream_grad = NULL)
 
 \item{s}{Positive step size.}
 
-\item{bits}{Width in \link{2, 32}.}
+\item{bits}{Width in [2, 32].}
 
 \item{upstream_grad}{Optional gradient of the same shape.}
 }

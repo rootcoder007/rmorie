@@ -18,7 +18,7 @@ callers create it lazily only when they actually persist to disk.
 \description{
 morie functions that persist artifacts to disk (e.g.
 \code{morie_fetch_siu(cache_html = TRUE)}) default to a
-\emph{session-scoped} subdirectory of \code{\link[base]{tempdir}()},
+\emph{session-scoped} subdirectory of \code{\link\[base\]{tempdir}()},
 which R automatically removes when the session ends. This is the
 most conservative CRAN-Policy-compliant default: nothing morie
 writes ever survives the R session unless the user explicitly

@@ -36,7 +36,7 @@ A data.frame with one row per year.
 \description{
 Accepts either a long-format data.frame (columns \code{year},
 \code{category}, \code{count}) or a nested list keyed
-\code{[[year]][[category]] = count}.
+\code{\[\[year\]\]\[\[category\]\] = count}.
 }
 \details{
 Returns a data.frame indexed by year with columns:

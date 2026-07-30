@@ -23,6 +23,6 @@ KronA layer output and merged weights (Kamath Eq 4.8-4.9)
 \details{
 One merge serves both Python modules exactly as km061 imports
 km062's \verb{_tuned}: km062 -> \code{morie_kamath_ch4_krona_tuned_weights}
-(W + s \link{A_k (x) B_k}), km061 -> \code{morie_kamath_ch4_krona_output}
+(W + s [A_k (x) B_k]), km061 -> \code{morie_kamath_ch4_krona_output}
 (that merged weight applied to X). s = 0 returns W unchanged.
 }

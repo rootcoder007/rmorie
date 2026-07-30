@@ -9,7 +9,7 @@ morie_geron_pca_projection(X, d)
 \arguments{
 \item{X}{(m, n) data.}
 
-\item{d}{Components in \link{1, min(m, n)}.}
+\item{d}{Components in [1, min(m, n)].}
 }
 \value{
 List with \code{projection}, \code{components}, \code{explained_variance},

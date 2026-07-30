@@ -10,7 +10,7 @@ morie_kamath_ch9_mml_vlm_loss(Pos, Neg)
 morie_kamath_ch9_itm_hard_negative(Pos, HardNeg)
 }
 \arguments{
-\item{Pos, Neg}{Probabilities of the correct label in \link{0, 1}.}
+\item{Pos, Neg}{Probabilities of the correct label in [0, 1].}
 
 \item{HardNeg}{Hard-negative probabilities.}
 }

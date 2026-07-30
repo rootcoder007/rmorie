@@ -17,8 +17,8 @@ morie_partition_count(n, distinct = FALSE, odd_only = FALSE)
 A \code{morie_bigint}.
 }
 \description{
-\deqn{p(n) = \sum_{k \ge 1} (-1)^{k+1}\left[
-  p(n - k(3k-1)/2) + p(n - k(3k+1)/2)\right],}
+\deqn{p(n) = \sum_{k \ge 1} (-1)^{k+1}\left\[
+  p(n - k(3k-1)/2) + p(n - k(3k+1)/2)\right\],}
 which needs \eqn{O(\sqrt n)} terms per value rather than \eqn{O(n)}.
 }
 \details{

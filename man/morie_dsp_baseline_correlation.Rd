@@ -12,7 +12,7 @@ morie_dsp_baseline_correlation(x, y)
 \item{y}{Numeric vector.}
 }
 \value{
-Scalar in \verb{[-1, 1]}.
+Scalar in \verb{\[-1, 1\]}.
 }
 \description{
 \code{cor(x - mean(x), y - mean(y))} with explicit zero-norm guard.

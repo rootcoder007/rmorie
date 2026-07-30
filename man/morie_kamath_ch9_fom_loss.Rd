@@ -15,6 +15,6 @@ morie_kamath_ch9_fom_loss(r_i, t_i, R = NULL, P = NULL)
 List with \code{estimate}, \code{per_frame}, \code{n_reordered}.
 }
 \description{
--sum log P\link{frame, true timestamp}. \code{r_i} and \code{t_i} are 0-BASED indices
+-sum log P[frame, true timestamp]. \code{r_i} and \code{t_i} are 0-BASED indices
 into P.
 }

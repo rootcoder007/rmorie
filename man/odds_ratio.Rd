@@ -2,7 +2,7 @@
 % Please edit documentation in R/effect_sizes.R
 \name{odds_ratio}
 \alias{odds_ratio}
-\title{Odds ratio for a 2x2 table \verb{[[a, b], [c, d]]}}
+\title{Odds ratio for a 2x2 table \verb{\[\[a, b\], \[c, d\]\]}}
 \usage{
 odds_ratio(a, b, c, d, confidence = 0.95)
 }
@@ -16,7 +16,7 @@ b = exposed without, c = unexposed with outcome, d = unexposed without.}
 A \code{morie_effect_size}.
 }
 \description{
-Odds ratio for a 2x2 table \verb{[[a, b], [c, d]]}
+Odds ratio for a 2x2 table \verb{\[\[a, b\], \[c, d\]\]}
 }
 \examples{
 # Cohort: 20/100 exposed and 10/100 unexposed develop the outcome.

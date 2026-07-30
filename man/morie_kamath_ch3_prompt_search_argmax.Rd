@@ -9,7 +9,7 @@ morie_kamath_ch3_prompt_search_argmax(x, z, theta, f_fill = NULL)
 \arguments{
 \item{x}{Template. @param z Candidate answers. @param theta Scorer.}
 
-\item{f_fill}{Optional filler; default substitutes \verb{[z]}, else appends.}
+\item{f_fill}{Optional filler; default substitutes \verb{\[z\]}, else appends.}
 }
 \value{
 List with \code{estimate}, \code{z_hat}, \code{filled_prompt}, \code{scores}.

@@ -13,6 +13,6 @@ morie_geron_permutation_masks(perm)
 list(content, query), each a T x T 0/1 matrix.
 }
 \description{
-content\link{t,j}=1 when j precedes-or-equals t in perm (0-based perm);
-query\link{t,j}=1 only for strictly earlier positions.
+content[t,j]=1 when j precedes-or-equals t in perm (0-based perm);
+query[t,j]=1 only for strictly earlier positions.
 }

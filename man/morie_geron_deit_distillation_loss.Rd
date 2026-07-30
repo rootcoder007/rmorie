@@ -17,7 +17,7 @@ morie_geron_deit_distillation_loss(
 
 \item{teacher_preds}{Matrix (B, C) or vector of labels.}
 
-\item{alpha}{Distillation weight in \link{0, 1}.}
+\item{alpha}{Distillation weight in [0, 1].}
 }
 \value{
 List with \code{loss}, \code{loss_cls}, \code{loss_dist}, \code{teacher_labels},

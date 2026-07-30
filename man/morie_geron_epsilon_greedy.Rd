@@ -9,7 +9,7 @@ morie_geron_epsilon_greedy(Q_s, eps, seed = 0)
 \arguments{
 \item{Q_s}{Action values for one state.}
 
-\item{eps}{Exploration rate in \link{0, 1}.}
+\item{eps}{Exploration rate in [0, 1].}
 
 \item{seed}{LCG seed; two uniforms are drawn (explore test, then
 action) exactly as in Python.}

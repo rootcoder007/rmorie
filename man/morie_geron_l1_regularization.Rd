@@ -17,5 +17,5 @@ List with \code{penalty}, \code{gradient}, \code{prox}, \code{n_zero},
 }
 \description{
 \code{skip_bias} zeroes the mask at the FIRST element of the row-major
-flattening, which for a matrix \code{theta} is entry \link{1, 1}.
+flattening, which for a matrix \code{theta} is entry [1, 1].
 }

@@ -20,7 +20,7 @@ list: gamma, anti_diagonal, diagonal_gap, family, theta, method.
 }
 \description{
 Contrasts the copula's two diagonals:
-\eqn{\gamma = 4[\int C(u, 1-u) du - \int (u - C(u,u)) du]}.
+\eqn{\gamma = 4\[\int C(u, 1-u) du - \int (u - C(u,u)) du\]}.
 Mirrors \code{morie.fn.ginicop}.
 }
 \examples{

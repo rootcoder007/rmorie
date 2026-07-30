@@ -20,5 +20,5 @@ List with \code{output}, \code{weights}, \code{reduced_tokens},
 \description{
 Queries at full resolution, keys and values from an R x R
 average-pooled map. The (H, W, d) array is flattened ROW-MAJOR into
-H*W tokens, which in R means indexing \link{i, j, } in that order.
+H*W tokens, which in R means indexing [i, j, ] in that order.
 }

@@ -17,7 +17,7 @@ morie_bnd_moment_inequality(
 \item{data}{observations, rows passed to \code{g}.}
 
 \item{g}{\verb{function(data, theta)} returning an (n, J) matrix
-oriented so the model says \code{E[g_j] <= 0}.}
+oriented so the model says \verb{E\[g_j\] <= 0}.}
 
 \item{theta_grid}{candidate parameter values.}
 
@@ -34,7 +34,7 @@ method.
 }
 \description{
 Chernozhukov, Hong and Tamer (2007). The sample criterion
-\verb{Q_n(theta) = sum_j [sqrt(n) gbar_j / sd_j]_+^2} counts only
+\verb{Q_n(theta) = sum_j \[sqrt(n) gbar_j / sd_j\]_+^2} counts only
 VIOLATED inequalities, so deep inside the identified set -- where
 every sample moment is negative -- it is EXACTLY zero. The
 confidence region is the level set of \code{Q_n} under a multiplier

@@ -18,7 +18,7 @@ morie_geron_randomized_search(
 \arguments{
 \item{param_dist}{Named list of distributions: an R \code{list(lo, hi)} of length 2 is a uniform
 INTERVAL (Python's \verb{(lo, hi)} tuple); a plain vector is a discrete CHOICE list (Python's
-\verb{[...]}), matching Python's own tuple-vs-list distinction. A function is \code{f(u)}.}
+\verb{\[...\]}), matching Python's own tuple-vs-list distinction. A function is \code{f(u)}.}
 
 \item{n_iter, X, y, estimator, K, seed, score}{Controls; \code{estimator(params) -> list(fit=, predict=)}.}
 }

@@ -9,7 +9,7 @@ morie_wasserman_empirical_quantile(data, p)
 \arguments{
 \item{data}{Numeric sample, non-empty.}
 
-\item{p}{Probability level(s) in (0, 1].}
+\item{p}{Probability level(s) in (0, 1\].}
 }
 \value{
 List with \code{estimate}, \code{values}, \code{p}, \code{n}, \code{method}.

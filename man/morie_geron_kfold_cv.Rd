@@ -9,7 +9,7 @@ morie_geron_kfold_cv(n, K, shuffle = FALSE, seed = 0)
 \arguments{
 \item{n}{Number of instances (at least 2).}
 
-\item{K}{Folds in \link{2, n}.}
+\item{K}{Folds in [2, n].}
 
 \item{shuffle}{Permute with the LCG Fisher-Yates first.}
 

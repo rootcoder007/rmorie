@@ -7,7 +7,7 @@
 morie_max_flow_min_cut(capacity, source = 1L, sink = NULL)
 }
 \arguments{
-\item{capacity}{Square non-negative matrix; \code{capacity[i, j]} is the
+\item{capacity}{Square non-negative matrix; \verb{capacity\[i, j\]} is the
 arc capacity from i to j.}
 
 \item{source, sink}{Node indices, numbered from 1.}

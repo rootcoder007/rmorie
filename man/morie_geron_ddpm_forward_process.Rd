@@ -11,7 +11,7 @@ morie_geron_ddpm_forward_process(x0, t, alpha_bar, noise = NULL, seed = 0)
 
 \item{t}{0-based index into \code{alpha_bar}.}
 
-\item{alpha_bar}{Non-increasing cumulative products in \link{0, 1}.}
+\item{alpha_bar}{Non-increasing cumulative products in [0, 1].}
 
 \item{noise}{Optional noise of the same shape; otherwise LCG normals.}
 

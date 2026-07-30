@@ -9,7 +9,7 @@ morie_wayback_url(url, timestamp = NULL)
 \arguments{
 \item{url}{A live URL to look up on the Wayback Machine.}
 
-\item{timestamp}{Optional \code{YYYYMMDD[hhmmss]} to request the snapshot
+\item{timestamp}{Optional \code{YYYYMMDD\[hhmmss\]} to request the snapshot
 closest to that time; \code{NULL} (default) returns the most recent.}
 }
 \value{

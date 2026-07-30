@@ -40,7 +40,7 @@ package's cross tests; no DoubleML at runtime.
 \details{
 Following the DoubleML R package's own conventions, this uses
 the \code{mlr3} ecosystem for the nuisance learners (\code{ml_g} for
-\eqn{E[Y|T,X]} and \code{ml_m} for \eqn{P(T=1|X)}). Defaults are
+\eqn{E\[Y|T,X\]} and \code{ml_m} for \eqn{P(T=1|X)}). Defaults are
 \code{lrn("regr.lm")} and \code{lrn("classif.log_reg")}, which require nothing
 beyond \code{stats}. For higher-capacity defaults, install \code{ranger} and pass
 \code{lrn("regr.ranger")} / \code{lrn("classif.ranger")} via the underlying
@@ -48,8 +48,8 @@ beyond \code{stats}. For higher-capacity defaults, install \code{ranger} and pas
 
 Following Chernozhukov et al. (2018), the IRM extends the partially linear
 model by allowing fully heterogeneous treatment effects:
-\deqn{Y = g_0(T, X) + U,\quad E[U|T,X] = 0}{Y = g_0(T, X) + U, E[U|T,X] = 0}
-\deqn{T = m_0(X) + V,\quad E[V|X] = 0}{T = m_0(X) + V, E[V|X] = 0}
+\deqn{Y = g_0(T, X) + U,\quad E\[U|T,X\] = 0}{Y = g_0(T, X) + U, E\[U|T,X\] = 0}
+\deqn{T = m_0(X) + V,\quad E\[V|X\] = 0}{T = m_0(X) + V, E\[V|X\] = 0}
 }
 \section{CRAN \code{Suggests}}{
 

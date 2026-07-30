@@ -2,7 +2,7 @@
 % Please edit documentation in R/wasserman_native.R
 \name{morie_wasserman_covariance}
 \alias{morie_wasserman_covariance}
-\title{Covariance Cov(X,Y) = E\link{XY} - E\link[dlm:X]{X}E\link{Y} (Ch 4, wsmcov)}
+\title{Covariance Cov(X,Y) = E\[XY\] - E\[X\]E\[Y\] (Ch 4, wsmcov)}
 \usage{
 morie_wasserman_covariance(x, y)
 }
@@ -14,7 +14,7 @@ List with \code{estimate} (population, divisor n),
 \code{sample_covariance}, \code{correlation}, \code{mean_x}, \code{mean_y}, \code{n}, \code{method}.
 }
 \description{
-Covariance Cov(X,Y) = E\link{XY} - E\link[dlm:X]{X}E\link{Y} (Ch 4, wsmcov)
+Covariance Cov(X,Y) = E\[XY\] - E\[X\]E\[Y\] (Ch 4, wsmcov)
 }
 \examples{
 morie_wasserman_covariance(c(1, 2, 3), c(2, 4, 6))$correlation

@@ -15,6 +15,6 @@ morie_kamath_ch6_differential_privacy(M, A, B, S, epsilon)
 List with \code{estimate}, \code{satisfied}, \code{p_A}, \code{p_B}, \code{bound}.
 }
 \description{
-Checks P\link{M(A) in S} <= e^eps P\link{M(B) in S} and reports the epsilon that
+Checks P[M(A) in S] <= e^eps P[M(B) in S] and reports the epsilon that
 would be required.
 }

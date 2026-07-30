@@ -21,7 +21,7 @@ ratio, n, method.
 }
 \description{
 Ordinary-smooth error gives \eqn{O_p(n^{-r})}; supersmooth error
-gives \eqn{O_p[(\log n)^{-s}]}. The gap is the practical message of
+gives \eqn{O_p\[(\log n)^{-s}\]}. The gap is the practical message of
 the chapter: at \eqn{n = 10^6} a logarithmic rate has barely moved.
 Both are returned at the requested n so the difference is a number
 rather than a footnote. Mirrors \code{morie.fn.hrzdcrc}.

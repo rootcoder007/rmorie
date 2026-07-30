@@ -7,7 +7,7 @@
 morie_geron_matmul_order(dims)
 }
 \arguments{
-\item{dims}{Chain dimensions; matrix i has shape (dims\link[fixest:i]{i}, dims\link{i+1}).}
+\item{dims}{Chain dimensions; matrix i has shape (dims[i], dims[i+1]).}
 }
 \value{
 list(cost, split) with cost the min multiplication count.

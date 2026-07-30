@@ -13,7 +13,7 @@ any weight/strata/cluster/domain columns referenced by name.}
 \item{domain_col}{Character; column name of the subpopulation /
 domain indicator in \code{df}.}
 
-\item{domain_value}{Value (matching \code{df[[domain_col]]}) defining
+\item{domain_value}{Value (matching \verb{df\[\[domain_col\]\]}) defining
 the subpopulation to estimate.}
 
 \item{outcome_col}{Character; column name of the outcome variable

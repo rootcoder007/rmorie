@@ -9,7 +9,7 @@ morie_geron_gan_minimax(real, fake, D_real, D_fake, eps = 1e-12)
 \arguments{
 \item{real, fake}{Real and fake batches (used only for their sizes).}
 
-\item{D_real, D_fake}{Discriminator probabilities in \link{0, 1}.}
+\item{D_real, D_fake}{Discriminator probabilities in [0, 1].}
 
 \item{eps}{Clip guard in (0, 0.5).}
 }
@@ -19,5 +19,5 @@ List with \code{value}, \code{d_loss}, \code{g_loss_nonsaturating},
 }
 \description{
 V = mean log D(x) + mean log(1 - D(G(z))) after clipping to
-\link{eps, 1-eps}; the accuracy uses the UNCLIPPED probabilities.
+[eps, 1-eps]; the accuracy uses the UNCLIPPED probabilities.
 }

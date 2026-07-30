@@ -14,7 +14,7 @@ List with \code{estimate} (OR), \code{log_or}, \code{se}, \code{ci_lower},
 \code{ci_upper}, \code{n}, \code{method}.
 }
 \description{
-Table layout [\link{n11, n10}, \link{n01, n00}]: row = exposure, column =
+Table layout \[\[n11, n10\], \[n01, n00\]\]: row = exposure, column =
 outcome. A zero cell is refused; a continuity correction is the
 caller's explicit decision, never a silent default.
 }

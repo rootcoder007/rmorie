@@ -26,7 +26,7 @@ specification_curve(
 \item{sample_filters}{Optional. Accepted shapes (for Python<->R parity):
 (a) \code{list(list(name = "...", fn = function(df) ...), ...)} (R native),
 (b) \code{list(c("name", fn), ...)} or \code{list(list("name", fn), ...)} (Python
-\code{list[tuple[str, callable]]} shape — positional pair). Default: full
+\verb{list\[tuple\[str, callable\]\]} shape — positional pair). Default: full
 sample only.}
 
 \item{model_types}{Character vector of model families:

@@ -22,7 +22,7 @@ Invisibly, the number of files removed.
 Removes files cached by morie under
 \code{tools::R_user_dir("morie", "cache")} (or
 \code{MORIE_CACHE_DIR} if set). morie's default behaviour writes
-caches to a session-scoped \code{\link[base]{tempdir}()}
+caches to a session-scoped \code{\link\[base\]{tempdir}()}
 subdirectory, so this function only matters if you have explicitly
 opted in to persistent caching by passing
 \code{cache_dir = morie_cache_dir(...)} to any of the morie

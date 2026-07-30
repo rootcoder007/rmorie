@@ -60,7 +60,7 @@ of percentile bounds for trimming.}
 
 \item{fay_coefficient}{Fay's coefficient (\eqn{k}) for Fay's-BRR.}
 
-\item{shrinkage_factor}{Numeric in \verb{[0, 1]}; smoothing pull-toward-
+\item{shrinkage_factor}{Numeric in \verb{\[0, 1\]}; smoothing pull-toward-
 mean factor.}
 
 \item{target}{Numeric target sum (\code{normalize}).}

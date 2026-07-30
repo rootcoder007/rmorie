@@ -17,5 +17,5 @@ morie_geron_lstm_cell(x_t, h_prev, c_prev, Wf, Wi, Wg, Wo, bf, bi, bg, bo)
 List with \code{h}, \code{c}, \code{f}, \code{i}, \code{g}, \code{o}, \code{forget_open}.
 }
 \description{
-c = f c_prev + i g, h = o tanh(c); every gate acts on \link{h_prev, x_t}.
+c = f c_prev + i g, h = o tanh(c); every gate acts on [h_prev, x_t].
 }

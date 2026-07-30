@@ -22,7 +22,7 @@ with \eqn{\epsilon_i} the distance to the k-th nearest neighbour.
 \details{
 The \eqn{-\psi(k)} term is what makes this an estimator rather than a
 plug-in: the count in a fixed-radius ball is Poisson and
-\eqn{E[\log N] \ne \log E[N]}, so using \eqn{\log k} leaves a bias
+\eqn{E\[\log N\] \ne \log E\[N\]}, so using \eqn{\log k} leaves a bias
 that does not vanish with n.
 
 Differential entropy is not scale invariant -- rescaling by \eqn{a}

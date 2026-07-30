@@ -23,7 +23,7 @@ scores.}
 \item{stabilized}{If \code{TRUE}, return stabilised IPW weights. Default \code{FALSE}.}
 
 \item{trim_quantiles}{Optional length-2 numeric vector \eqn{(q_l, q_u)}
-in \eqn{`[0, 1]`}; if supplied, weights are clipped to the
+in \eqn{`\[0, 1\]`}; if supplied, weights are clipped to the
 \eqn{q_l}-th and \eqn{q_u}-th quantiles of the unclipped weight
 distribution (Crump et al. 2009 trimming). Default \code{NULL}.}
 }
@@ -36,7 +36,7 @@ dependencies.
 }
 \details{
 Standard IPW: \eqn{w_i = T_i / e_i + (1 - T_i)/(1 - e_i)}, with the
-propensity score \eqn{e_i} clipped at [0.01, 0.99] for stability.
+propensity score \eqn{e_i} clipped at \[0.01, 0.99\] for stability.
 Stabilised IPW replaces \eqn{T} and \eqn{1 - T} with the marginal
 treatment probability \eqn{P(T = 1)} and \eqn{P(T = 0)} respectively.
 }

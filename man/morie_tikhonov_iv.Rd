@@ -20,8 +20,8 @@ list: g, alpha, residual_norm, solution_norm, l_curve,
 condition_number, ill_posed, method.
 }
 \description{
-\eqn{\hat g = \arg\min_g [\|\hat E(Y|W) - \hat Tg\|^2 +
-\alpha_n\|g\|^2]}. The operator T is compact, so its inverse is
+\eqn{\hat g = \arg\min_g \[\|\hat E(Y|W) - \hat Tg\|^2 +
+\alpha_n\|g\|^2\]}. The operator T is compact, so its inverse is
 UNBOUNDED and the problem is ill-posed: without the penalty,
 arbitrarily small perturbations in the estimated right-hand side
 produce arbitrarily large changes in g. The solution norm across a

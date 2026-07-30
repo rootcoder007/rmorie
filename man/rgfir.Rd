@@ -30,7 +30,7 @@ zero-phase via the native filtfilt (or single-pass native filter
 when the signal is too short to allow forward-backward padding).
 }
 \details{
-\deqn{h[n] = w[n] \, 2 f_c \, \mathrm{sinc}(2 f_c (n - M/2))}{h[n] = w[n] 2 f_c sinc(2 f_c (n - M/2))}
+\deqn{h\[n\] = w\[n\] \, 2 f_c \, \mathrm{sinc}(2 f_c (n - M/2))}{h\[n\] = w\[n\] 2 f_c sinc(2 f_c (n - M/2))}
 }
 \examples{
 \donttest{

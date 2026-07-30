@@ -7,7 +7,7 @@
 morie_wasserman_relative_risk(table)
 }
 \arguments{
-\item{table}{2x2 matrix [\link{n11, n10}, \link{n01, n00}] with positive rows
+\item{table}{2x2 matrix \[\[n11, n10\], \[n01, n00\]\] with positive rows
 and event counts.}
 }
 \value{

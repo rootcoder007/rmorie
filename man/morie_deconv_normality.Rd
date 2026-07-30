@@ -25,7 +25,7 @@ morie_deconv_normality(fn_u, f_u, n, h, b, bias = 0, sigma = 1)
 list: z, scaling, p_two_sided, bias_subtracted, method.
 }
 \description{
-\eqn{[n h_n/b_n]^{1/2}(\hat f_U(u) - f_U(u) - \mathrm{bias}) \to_D
+\eqn{\[n h_n/b_n\]^{1/2}(\hat f_U(u) - f_U(u) - \mathrm{bias}) \to_D
 N(0, \sigma^2)}. The normalising factor carries \eqn{b_n}, a
 deconvolution-specific inflation absent from ordinary kernel
 estimation -- it encodes the price of dividing by a vanishing

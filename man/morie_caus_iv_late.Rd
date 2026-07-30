@@ -18,7 +18,7 @@ list: late, se, first_stage, reduced_form, complier_share,
 n_z1, n_z0, weak_first_stage, estimand, n, method.
 }
 \description{
-\verb{LATE = (E[Y|Z=1] - E[Y|Z=0]) / (E[D|Z=1] - E[D|Z=0])}.
+\verb{LATE = (E\[Y|Z=1\] - E\[Y|Z=0\]) / (E\[D|Z=1\] - E\[D|Z=0\])}.
 }
 \details{
 Arithmetically the Wald ratio. What Imbens and Angrist established

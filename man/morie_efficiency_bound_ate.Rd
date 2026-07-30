@@ -22,7 +22,7 @@ morie_efficiency_bound_ate(
 
 \item{family}{"gaussian" or "binomial" for the arm regressions.}
 
-\item{trim}{Propensities are confined to \verb{[trim, 1 - trim]}.}
+\item{trim}{Propensities are confined to \verb{\[trim, 1 - trim\]}.}
 
 \item{alpha}{Level for the interval on the ATE.}
 }
@@ -34,8 +34,8 @@ AIPW ATE), \code{var_aipw}, \code{var_ipw}, \code{aipw_efficiency_ratio},
 }
 \description{
 Hahn's bound under unconfoundedness is
-\deqn{V_{eff} = E\left[\frac{\sigma_1^2(X)}{e(X)} +
-  \frac{\sigma_0^2(X)}{1 - e(X)} + (\tau(X) - \tau)^2\right],}
+\deqn{V_{eff} = E\left\[\frac{\sigma_1^2(X)}{e(X)} +
+  \frac{\sigma_0^2(X)}{1 - e(X)} + (\tau(X) - \tau)^2\right\],}
 a floor on the asymptotic variance of every regular asymptotically
 linear estimator, and \eqn{c\sqrt{V_{eff}/n}} is a floor on the
 worst-case welfare regret of every treatment rule.

@@ -7,7 +7,7 @@
 morie_kamath_hybrid_retrieval_fusion(s_dense, s_sparse, lam, normalize = FALSE)
 }
 \arguments{
-\item{s_dense, s_sparse}{Arm scores. @param lam Mixing weight in \link{0, 1}.}
+\item{s_dense, s_sparse}{Arm scores. @param lam Mixing weight in [0, 1].}
 
 \item{normalize}{Min-max the arms first.}
 }

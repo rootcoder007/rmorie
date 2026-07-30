@@ -19,8 +19,8 @@ iv_two_scale, K, noise_share_of_rv, n, method.
 \description{
 Zhang-Mykland-Ait-Sahalia (2005), Ait-Sahalia-Mykland-Zhang
 (2005): with observed price = efficient price + iid noise,
-\verb{E[RV_all] = IV + 2n E[eps^2]}, so at the finest grid the noise
-dominates and \verb{E[eps^2] = RV_all/(2n)}. That divergence is the
+\verb{E\[RV_all\] = IV + 2n E\[eps^2\]}, so at the finest grid the noise
+dominates and \verb{E\[eps^2\] = RV_all/(2n)}. That divergence is the
 volatility signature plot -- naive RV gets WORSE as data get
 finer. The two-scale estimator
 \verb{IV_TS = RV_subsampled - (nbar/n) RV_all} recovers the integrated

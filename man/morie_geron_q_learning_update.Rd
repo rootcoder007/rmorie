@@ -15,7 +15,7 @@ morie_geron_q_learning_update(Q, s, a, r, s_next, alpha, gamma, done = FALSE)
 
 \item{alpha}{Step size in (0, 1].}
 
-\item{gamma}{Discount in \link{0, 1}.}
+\item{gamma}{Discount in [0, 1].}
 
 \item{done}{Terminal flag.}
 }
@@ -24,6 +24,6 @@ List with \code{Q}, \code{old_value}, \code{new_value}, \code{target},
 \code{td_error}, \code{max_next}.
 }
 \description{
-Q(s,a) += alpha \link{r + gamma max_a' Q(s',a') - Q(s,a)}; \code{done} drops the
+Q(s,a) += alpha [r + gamma max_a' Q(s',a') - Q(s,a)]; \code{done} drops the
 bootstrap. State and action indices are 0-based.
 }

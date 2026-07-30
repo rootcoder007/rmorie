@@ -9,7 +9,7 @@ morie_geron_topk_sampling(logits, k, T = 1)
 \arguments{
 \item{logits}{Score vector.}
 
-\item{k}{Truncation size in \link{1, length(logits)}.}
+\item{k}{Truncation size in [1, length(logits)].}
 
 \item{T}{Positive temperature.}
 }

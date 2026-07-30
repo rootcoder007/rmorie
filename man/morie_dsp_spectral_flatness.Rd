@@ -10,7 +10,7 @@ morie_dsp_spectral_flatness(psd)
 \item{psd}{PSD vector.}
 }
 \value{
-Scalar in \verb{[0, 1]}.
+Scalar in \verb{\[0, 1\]}.
 }
 \description{
 Geometric-to-arithmetic mean ratio of the positive PSD bins;

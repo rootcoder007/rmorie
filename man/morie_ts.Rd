@@ -15,7 +15,7 @@ morie_ts(
 }
 \arguments{
 \item{x}{A numeric vector (or an object coercible to one, including a
-\code{units}-typed vector, which is coerced via \code{\link[=as.numeric]{as.numeric()}}), or an
+\code{units}-typed vector, which is coerced via [as.numeric()]), or an
 existing \code{ts}.}
 
 \item{frequency}{Number of observations per unit of time (e.g. 12 for

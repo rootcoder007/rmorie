@@ -14,7 +14,7 @@ morie_kamath_ch3_back_translation_prob(
 \arguments{
 \item{t}{Candidate prompt. @param thatt Pivot translation.}
 
-\item{p_forward, p_backward}{Leg probabilities in \link{0, 1}.}
+\item{p_forward, p_backward}{Leg probabilities in [0, 1].}
 }
 \value{
 List with \code{estimate}.

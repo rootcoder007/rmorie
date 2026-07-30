@@ -13,7 +13,7 @@ morie_safe_factor(x, levels, reference = NULL)
 intended order — the FIRST is the reference category.}
 
 \item{reference}{Optional; assert which level is the reference
-(must equal \code{levels[1]}).}
+(must equal \code{levels\[1\]}).}
 }
 \value{
 A factor with exactly the declared levels.

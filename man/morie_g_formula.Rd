@@ -17,7 +17,7 @@ morie_g_formula(y, a, l)
 List with \code{EY1}, \code{EY0}, \code{ate}, \code{n}.
 }
 \description{
-\verb{E[Y(a)] = E[E[Y | A = a, L]]}, with an OLS outcome model including
+\verb{E\[Y(a)\] = E\[E\[Y | A = a, L\]\]}, with an OLS outcome model including
 treatment-covariate interactions. Mirrors \code{morie.fn.causmrop}.
 }
 \references{

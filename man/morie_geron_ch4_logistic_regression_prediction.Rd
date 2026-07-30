@@ -7,9 +7,9 @@
 morie_geron_ch4_logistic_regression_prediction(p_hat, threshold = 0.5)
 }
 \arguments{
-\item{p_hat}{Probabilities in \link{0, 1}.}
+\item{p_hat}{Probabilities in [0, 1].}
 
-\item{threshold}{Cut in \link{0, 1}.}
+\item{threshold}{Cut in [0, 1].}
 }
 \value{
 List with \code{y_hat}, \code{positive_rate}, \code{margin}.

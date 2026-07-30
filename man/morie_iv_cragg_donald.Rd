@@ -22,7 +22,7 @@ morie_iv_cragg_donald(
 \item{exogenous}{Optional exogenous covariates.}
 
 \item{outcome}{Optional outcome column name. Default \code{NULL}
-reuses \code{endogenous[1]}; the resulting F-statistic is
+reuses \code{endogenous\[1\]}; the resulting F-statistic is
 unaffected because Cragg-Donald only reads the first stage.}
 }
 \value{

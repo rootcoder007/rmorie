@@ -7,7 +7,7 @@
 morie_geron_lasso_cost_hmlaso(X, y, theta, alpha, skip_bias = FALSE)
 }
 \arguments{
-\item{X, y}{Data. @param theta Coefficients. @param alpha L1 strength. @param skip_bias Exclude theta\link{1}.}
+\item{X, y}{Data. @param theta Coefficients. @param alpha L1 strength. @param skip_bias Exclude theta[1].}
 }
 \value{
 List with cost, mse, penalty, gradient, n_zero, estimate, n, method.

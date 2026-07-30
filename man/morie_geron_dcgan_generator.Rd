@@ -26,6 +26,6 @@ List with \code{image}, \code{image_shape}, \code{seed}, \code{layer_shapes},
 \description{
 Latent -> projection -> spatial seed -> transposed-conv stack, batch
 norm + ReLU on every layer but the last, tanh on the output (which is
-why DCGAN data is scaled to \link{-1, 1}). The batch norm here is the
+why DCGAN data is scaled to [-1, 1]). The batch norm here is the
 whole-tensor population form, as in Python.
 }

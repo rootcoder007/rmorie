@@ -7,7 +7,7 @@
 morie_kamath_ch8_bleu_precision(n_grams)
 }
 \arguments{
-\item{n_grams}{Matrix or vector of \link{clipped_matches, total_generated}.}
+\item{n_grams}{Matrix or vector of [clipped_matches, total_generated].}
 }
 \value{
 List with \code{estimate}, \code{p_n}.

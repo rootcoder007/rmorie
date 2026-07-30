@@ -13,7 +13,7 @@ morie_tps_csi_per_neighbourhood(
 \arguments{
 \item{counts_per_hood}{Long data.frame (columns \code{HOOD_158},
 \code{category}, \code{count}) or nested list
-\code{[[hood]][[category]] = count}.}
+\code{\[\[hood\]\]\[\[category\]\] = count}.}
 
 \item{variant}{One of "total" or "violent".}
 

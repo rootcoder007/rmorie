@@ -48,7 +48,7 @@ Named list \code{(h, estimate, z, r, n, method)}.
 }
 \description{
 R parity for \code{morie.fn.grucl.gru_cell}.  Gates stacked as
-\code{[W_z; W_r; W_n]}.
+\code{\[W_z; W_r; W_n\]}.
 }
 \details{
 \deqn{z, r = \sigma(\ldots); \quad n = \tanh(W_n x + r \odot U_n h); \quad

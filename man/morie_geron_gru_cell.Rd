@@ -20,5 +20,5 @@ List with \code{h}, \code{z}, \code{r}, \code{h_tilde}, \code{update_fraction}.
 PORTED AS THE PYTHON HAS IT: this module uses the tied-gate
 convention h = (1 - z) h_prev + z h_tilde (rather than the more common
 z h_prev + (1 - z) h_tilde), the gates act on the concatenation
-\link{h, x} and the candidate on \link{r * h, x}, and there are no biases.
+[h, x] and the candidate on [r * h, x], and there are no biases.
 }

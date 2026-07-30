@@ -15,7 +15,7 @@ Invisibly returns the printed text; primarily called for
 side effects (printing to stdout).
 }
 \description{
-Mirrors \code{python -m morie.stat_bridge <mode> [...]} so the same
+Mirrors \code{python -m morie.stat_bridge <mode> \[...\]} so the same
 invocation pattern is available via \code{Rscript -e}.
 }
 \details{

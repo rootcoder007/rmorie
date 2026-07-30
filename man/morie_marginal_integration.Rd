@@ -24,7 +24,7 @@ curse_of_dimensionality, n, d, method.
 }
 \description{
 For \eqn{E(Y|X = x) = \mu + m_1(x^1) + \dots + m_d(x^d)} (3.5) with
-the location normalisation \eqn{E[m_j(X^j)] = 0} (3.6), which makes
+the location normalisation \eqn{E\[m_j(X^j)\] = 0} (3.6), which makes
 \eqn{\mu = E(Y)} (3.7) and
 \eqn{m_1(x^1) = \int E(Y|X = x)p_{-1}(x^{-1})dx^{-1} - \mu} (3.8).
 Replacing the conditional mean by the kernel estimator (3.9) and
@@ -35,7 +35,7 @@ the outer integral by a sample average gives
 Hold the component of interest fixed, average the fitted surface
 over the OTHERS at their observed values, subtract the mean. The
 normalisation is what makes that meaningful: without
-\eqn{E[m_j] = 0} each component could absorb a constant and
+\eqn{E\[m_j\] = 0} each component could absorb a constant and
 \eqn{\mu} shed one, so nothing would be identified.
 
 \strong{This estimator carries the curse of dimensionality}, which

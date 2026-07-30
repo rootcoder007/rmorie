@@ -17,7 +17,7 @@ morie_geron_polynomial_features(X, degree, include_bias = TRUE)
 List with \code{features}, \code{powers}, \code{n_features}.
 }
 \description{
-\link{1, X, X^2, ..., X^d} per feature, powers only, no cross terms, so
+[1, X, X^2, ..., X^d] per feature, powers only, no cross terms, so
 the column order is (bias), then all features at power 1, then all at
 power 2, and so on. \code{powers} entries are 0-based (feature, power)
 pairs with (0, 0) marking the bias.

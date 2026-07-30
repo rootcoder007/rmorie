@@ -23,7 +23,7 @@ morie_geron_td_zero_update(
 
 \item{alpha}{Step size in (0, 1].}
 
-\item{gamma}{Discount in \link{0, 1}.}
+\item{gamma}{Discount in [0, 1].}
 
 \item{done}{Terminal flag.}
 }
@@ -32,6 +32,6 @@ List with \code{V}, \code{old_value}, \code{new_value}, \code{target},
 \code{td_error}.
 }
 \description{
-V(s) += alpha \link{r + gamma V(s') - V(s)}; \code{done} drops the bootstrap.
+V(s) += alpha [r + gamma V(s') - V(s)]; \code{done} drops the bootstrap.
 States are 0-based.
 }

@@ -9,7 +9,7 @@ morie_fauzi_gamma_kde(x, grid = NULL, h = NULL, modified = FALSE, a = 2)
 \arguments{
 \item{x}{non-negative numeric sample.}
 
-\item{grid}{evaluation points in \verb{[0, Inf)}; data-driven if \code{NULL}.}
+\item{grid}{evaluation points in \verb{\[0, Inf)}; data-driven if \code{NULL}.}
 
 \item{h}{bandwidth; \code{sd(x) * n^{-2/5}} if \code{NULL}.}
 
@@ -23,7 +23,7 @@ boundary_consistent (\code{TRUE}), bias_order, mass, why_it_works, n,
 method.
 }
 \description{
-The gamma kernel's support IS \verb{[0, Inf)}, so no mass ever lands on
+The gamma kernel's support IS \verb{\[0, Inf)}, so no mass ever lands on
 the negative half-line and the boundary bias simply does not
 arise: the estimator is consistent at zero, where a
 Gaussian-kernel estimate is not. \code{modified = TRUE} applies Fauzi's

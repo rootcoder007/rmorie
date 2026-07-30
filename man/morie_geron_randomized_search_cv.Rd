@@ -22,7 +22,7 @@ numeric range, or a vector of discrete choices.}
 
 \item{n_iter}{Configurations to draw.}
 
-\item{K}{Folds in \link{2, m}.}
+\item{K}{Folds in [2, m].}
 
 \item{fit_score}{Required scoring function.}
 

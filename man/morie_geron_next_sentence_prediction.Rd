@@ -2,7 +2,7 @@
 % Please edit documentation in R/geron_w4c_native.R
 \name{morie_geron_next_sentence_prediction}
 \alias{morie_geron_next_sentence_prediction}
-\title{Next sentence prediction: BERT-style input assembly plus a linear \link{CLS} head (Geron Ch 15, hmnsp)}
+\title{Next sentence prediction: BERT-style input assembly plus a linear [CLS] head (Geron Ch 15, hmnsp)}
 \usage{
 morie_geron_next_sentence_prediction(
   sent_A,
@@ -19,5 +19,5 @@ morie_geron_next_sentence_prediction(
 \item{w, b}{Head weights/bias. @param label Optional 0/1 label for the loss.}
 }
 \description{
-Next sentence prediction: BERT-style input assembly plus a linear \link{CLS} head (Geron Ch 15, hmnsp)
+Next sentence prediction: BERT-style input assembly plus a linear [CLS] head (Geron Ch 15, hmnsp)
 }

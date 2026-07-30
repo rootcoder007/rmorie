@@ -24,7 +24,7 @@ morie_kamath_ch5_ppo_loss(phi, x, y, r_theta, beta, pi_ref = NULL)
 List with \code{estimate}, \code{expected_reward}, \code{kl}, \code{penalty}.
 }
 \description{
-E\link{r} - beta KL(pi_theta || pi_ref), maximised.
+E[r] - beta KL(pi_theta || pi_ref), maximised.
 }
 \details{
 One core serves both Python modules exactly as km068 calls

@@ -22,7 +22,7 @@ order; a parent index at or after its child is refused, which is
 also what rules out cycles.
 }
 \examples{
-dag <- list(list(parents = integer(0), cpt = list(`` = 0.3)),
+dag <- list(list(parents = integer(0), cpt = list(0.3)),
             list(parents = 0L, cpt = list(`0` = 0.2, `1` = 0.9)))
 round(morie_wasserman_directed_graph(dag, c(1, 1))$estimate, 12)
 }

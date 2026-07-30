@@ -50,7 +50,7 @@ Named list \code{(h, c, estimate, i, f, g, o, method)}.
 }
 \description{
 R parity for \code{morie.fn.lstmc.lstm_cell}.  Gates stacked as
-\code{[W_i; W_f; W_g; W_o]}.
+\code{\[W_i; W_f; W_g; W_o\]}.
 }
 \details{
 \deqn{f, i, o = \sigma(\ldots); \quad g = \tanh(\ldots); \quad

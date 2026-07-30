@@ -22,6 +22,6 @@ List with \code{elbo}, \code{loss}, \code{reconstruction_term}, \code{kl},
 \code{kl_per_dim}.
 }
 \description{
-ELBO = E_q\link{log p(x|z)} - beta KL, both terms divided by the batch
+ELBO = E_q[log p(x|z)] - beta KL, both terms divided by the batch
 size; the KL is the closed form.
 }

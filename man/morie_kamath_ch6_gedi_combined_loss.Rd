@@ -7,11 +7,11 @@
 morie_kamath_ch6_gedi_combined_loss(L_g, L_d, lam)
 }
 \arguments{
-\item{L_g, L_d}{Component losses. @param lam Mixing weight in \link{0, 1}.}
+\item{L_g, L_d}{Component losses. @param lam Mixing weight in [0, 1].}
 }
 \value{
 List with \code{estimate}, \code{contributions}.
 }
 \description{
-lam L_g + (1 - lam) L_d, a convex combination, so lam is confined to \link{0, 1}.
+lam L_g + (1 - lam) L_d, a convex combination, so lam is confined to [0, 1].
 }

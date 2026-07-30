@@ -26,7 +26,7 @@ Welch-averaged magnitude-squared morie_coherence::
 \details{
 \deqn{C_{xy}(f) = |S_{xy}(f)|^2 / (S_{xx}(f) S_{yy}(f))}
 
-Bounded in [0, 1].
+Bounded in \[0, 1\].
 }
 \examples{
 \donttest{

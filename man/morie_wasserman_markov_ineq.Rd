@@ -2,12 +2,12 @@
 % Please edit documentation in R/wasserman_native.R
 \name{morie_wasserman_markov_ineq}
 \alias{morie_wasserman_markov_ineq}
-\title{Markov bound P(X >= a) <= E\link[dlm:X]{X}/a for X >= 0 (Ch 4, wsmmrk)}
+\title{Markov bound P(X >= a) <= E\[X\]/a for X >= 0 (Ch 4, wsmmrk)}
 \usage{
 morie_wasserman_markov_ineq(mean, a)
 }
 \arguments{
-\item{mean}{Non-negative expectation E\link[dlm:X]{X}.}
+\item{mean}{Non-negative expectation E\[X\].}
 
 \item{a}{Strictly positive threshold.}
 }
@@ -15,7 +15,7 @@ morie_wasserman_markov_ineq(mean, a)
 List with \code{estimate} (capped at 1), \code{raw_bound}, \code{mean}, \code{a}, \code{method}.
 }
 \description{
-Markov bound P(X >= a) <= E\link[dlm:X]{X}/a for X >= 0 (Ch 4, wsmmrk)
+Markov bound P(X >= a) <= E\[X\]/a for X >= 0 (Ch 4, wsmmrk)
 }
 \examples{
 morie_wasserman_markov_ineq(1, 4)$estimate

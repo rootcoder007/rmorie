@@ -38,8 +38,8 @@ periods_marginally_independent, method.
 }
 \description{
 \eqn{P(\theta|y_1, y^*, x) = f_W(y_1 - \beta'x_1)^{-1}\int
-f_\varepsilon(y_1 - \beta'x_1 - u)[\prod_{k=2}^{\theta}
-F_\varepsilon(y^* - \beta'x_k - u)] f_U(u) du} (5.20).
+f_\varepsilon(y_1 - \beta'x_1 - u)\[\prod_{k=2}^{\theta}
+F_\varepsilon(y^* - \beta'x_k - u)\] f_U(u) du} (5.20).
 }
 \details{
 This is why Sec. 5.2 estimates \eqn{f_U} and \eqn{f_\varepsilon}

@@ -9,7 +9,7 @@ morie_geron_int8_quantization(x, bits = 8)
 \arguments{
 \item{x}{Numeric object.}
 
-\item{bits}{Width in \link{2, 32}.}
+\item{bits}{Width in [2, 32].}
 }
 \value{
 List with \code{q}, \code{scale}, \code{dequantized}, \code{max_abs_error},

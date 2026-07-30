@@ -21,7 +21,7 @@ valid_at_boundary, method.
 The standardised estimators are asymptotically \code{N(0, 1)}, and the
 statement holds AT the boundary as well as inside. The Lyapunov
 condition needs no extra assumption because \code{V} is bounded in
-\verb{[0, 1]}, so every moment exists automatically.
+\verb{\[0, 1\]}, so every moment exists automatically.
 }
 \examples{
 morie_fauzi_theorem_4_4(1.2, 1, 0.01)$z

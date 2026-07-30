@@ -23,7 +23,7 @@ n_effective, n_iter, estimate, n, method.
 }
 \description{
 Mean-field VB with Dirichlet(alpha0) prior on mixing weights;
-responsibility uses E\link{log pi_k} = psi(alpha_k) - psi(sum alpha) via
+responsibility uses E[log pi_k] = psi(alpha_k) - psi(sum alpha) via
 \code{morie_geron_digamma}, which prunes unneeded components as
 alpha0 -> 0.
 }

@@ -29,8 +29,8 @@ attains_omega_SI, theory_requires_steps, n_steps, bandwidth,
 n, d, method.
 }
 \description{
-\eqn{\tilde b_n = \tilde b_n^{*} - [\partial^2 S_n/\partial
-\tilde b\partial\tilde b']^{-1}\partial S_n/\partial\tilde b}
+\eqn{\tilde b_n = \tilde b_n^{*} - \[\partial^2 S_n/\partial
+\tilde b\partial\tilde b'\]^{-1}\partial S_n/\partial\tilde b}
 (2.52), where \eqn{S_n} is the weighted-NLS objective with
 \eqn{W = 1/s_n^2} and \eqn{\tilde b_n^{*}} is ANY root-n
 consistent estimator. The result attains \eqn{\Omega_{SI}}.

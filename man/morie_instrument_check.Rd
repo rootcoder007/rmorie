@@ -20,7 +20,7 @@ list: first_stage_r2, first_stage_F, relevant, corr_U_Z,
 exogeneity_testable, n, n_instruments, method.
 }
 \description{
-Identification needs \eqn{E[U|Z] = 0} (exogeneity) together with
+Identification needs \eqn{E\[U|Z\] = 0} (exogeneity) together with
 variation in X that Z explains (relevance). Both are reported and
 they fail in different ways: a weak but valid instrument gives
 large variance, while a strong but invalid one gives confident

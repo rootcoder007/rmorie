@@ -19,7 +19,7 @@ Named list with \code{ate}, \code{se}, \code{ci_low},
 \code{n1}, \code{n0}, \code{paired}, \code{method}.
 }
 \description{
-\eqn{ATE = E[Y(1) - Y(0)]}. The two arms may be the same units seen
+\eqn{ATE = E\[Y(1) - Y(0)\]}. The two arms may be the same units seen
 under both conditions (\code{paired = TRUE}) or different units.
 The distinction is explicit rather than inferred from matching
 lengths, because the variance formulas differ sharply: pairing uses
