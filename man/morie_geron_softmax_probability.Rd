@@ -13,5 +13,5 @@ morie_geron_softmax_probability(X, theta)
 List with \code{probabilities}, 0-based \code{predictions}, \code{scores}.
 }
 \description{
-Composes \code{\link[=morie_geron_softmax_score]{morie_geron_softmax_score()}} with the grn021 softmax.
+Composes \code{\link[=morie_geron_softmax_score_grsmxs]{morie_geron_softmax_score_grsmxs()}} with the grn021 softmax.
 }
