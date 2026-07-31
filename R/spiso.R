@@ -38,10 +38,31 @@ spiso <- function(coords, z, n_dir = 4, n_bins = 10, max_dist = NULL,
   i <- ij[, 1]; j <- ij[, 2]
   d <- coords[j, , drop = FALSE] - coords[i, , drop = FALSE]
   dist <- sqrt(rowSums(d^2))
+  # A lag and its negation are the same direction, so the angle folds onto
+  # [0, pi). Orient every lag into one half-space BEFORE atan2 rather than
+  # folding after: for a pair enumerated in the opposite order atan2 returns
+  # the supplement, and folding that back mod pi lands one ulp away from the
+  # direct value. That is invisible except for lags sitting exactly on a
+  # sector boundary -- on a regular lattice thousands of them do -- where it
+  # silently reassigns the pair to the neighbouring direction and makes the
+  # result depend on the order the points were listed in.
+  flip <- d[, 1] < 0 | (d[, 1] == 0 & d[, 2] < 0)
+  d[flip, ] <- -d[flip, , drop = FALSE]
   ang <- atan2(d[, 2], d[, 1]) %% pi
   sq <- (z[i] - z[j])^2
   if (is.null(max_dist)) max_dist <- if (length(dist)) max(dist) / 2 else 1
   edges <- seq(0, pi, length.out = n_dir + 1)
+  # A lag whose true direction lies exactly on a sector boundary lands a few
+  # ulp either side of the edge: atan2 is not correctly rounded and differs
+  # between platforms' libm, and the lattice offsets themselves are not
+  # exact in binary. On a regular grid that is not a rare event -- thousands
+  # of pairs sit on the diagonals -- so letting the last bit decide the
+  # sector makes the answer platform-dependent. Snap to the edge at the
+  # resolution of the angle computation and let the half-open
+  # [edge_a, edge_a+1) convention place them.
+  ang_tol <- 8 * .Machine$double.eps * pi
+  for (e in edges) ang[abs(ang - e) < ang_tol] <- e
+  ang[abs(ang - pi) < ang_tol] <- 0
   lagedges <- seq(0, max_dist, length.out = n_bins + 1)
   gam <- matrix(NA_real_, n_dir, n_bins)
   for (a in seq_len(n_dir)) {
