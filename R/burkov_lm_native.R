@@ -8,7 +8,9 @@
 # Inc. Eq numbers PDF-verified (Eq 1.1 p.20, Eq 1.2 p.22, ...).
 
 #' Linear model f(x) = wx + b (Burkov Eq 1.1)
-#' @param x Feature values. @param w Weight. @param b Bias.
+#' @param x Feature values.
+#' @param w Weight.
+#' @param b Bias.
 #' @return List with `predictions`.
 #' @export
 morie_burkov_linear_function <- function(x, w, b) {
@@ -32,7 +34,9 @@ morie_burkov_squared_error <- function(y_hat, y) {
 }
 
 #' MSE cost of the linear model (Burkov Eq 1.3)
-#' @param w,b Parameters. @param x,y Data. @param N Optional size check.
+#' @param w,b Parameters.
+#' @param x,y Data.
+#' @param N Optional size check.
 #' @return List with `cost`, `residuals`.
 #' @export
 morie_burkov_mse_cost <- function(w, b, x, y, N = NULL) {
@@ -51,7 +55,8 @@ morie_burkov_mse_cost <- function(w, b, x, y, N = NULL) {
 }
 
 #' Vector-form linear model w.x + b (Burkov Eq 1.4)
-#' @param w,x Vectors. @param b Bias.
+#' @param w,x Vectors.
+#' @param b Bias.
 #' @export
 morie_burkov_linear_vector <- function(w, x, b) {
   w <- as.numeric(w); x <- as.numeric(x)
@@ -92,7 +97,9 @@ morie_burkov_cosine_similarity <- function(x, y) {
 }
 
 #' First hidden layer phi(W1 x + b1) (Burkov Eq 1.6)
-#' @param W_1 Weight matrix. @param x Input. @param b_1 Bias.
+#' @param W_1 Weight matrix.
+#' @param x Input.
+#' @param b_1 Bias.
 #' @param phi Activation name or function.
 #' @export
 morie_burkov_layer1_output <- function(W_1, x, b_1, phi = "relu") {
@@ -112,7 +119,9 @@ morie_burkov_layer1_output <- function(W_1, x, b_1, phi = "relu") {
 }
 
 #' Second-layer scalar output (Burkov Eq 1.7)
-#' @param W_2 Weight row. @param y_1 Layer-1 output. @param b_2_1 Bias.
+#' @param W_2 Weight row.
+#' @param y_1 Layer-1 output.
+#' @param b_2_1 Bias.
 #' @param phi Activation.
 #' @export
 morie_burkov_layer2_output <- function(W_2, y_1, b_2_1, phi = "identity") {
@@ -128,7 +137,8 @@ morie_burkov_layer2_output <- function(W_2, y_1, b_2_1, phi = "identity") {
 }
 
 #' Logistic regression sigma(w.x + b) (Burkov Eq 1.8)
-#' @param w,x Vectors. @param b Bias.
+#' @param w,x Vectors.
+#' @param b Bias.
 #' @export
 morie_burkov_logistic <- function(w, x, b) {
   w <- as.numeric(w); x <- as.numeric(x)
@@ -143,7 +153,8 @@ morie_burkov_logistic <- function(w, x, b) {
 }
 
 #' Binary cross-entropy for one example (Burkov Eq 1.9)
-#' @param y_hat Predicted probabilities in \\[0, 1\\]. @param y Targets, 0 or 1.
+#' @param y_hat Predicted probabilities in \\[0, 1\\].
+#' @param y Targets, 0 or 1.
 #' @export
 morie_burkov_binary_cross_entropy <- function(y_hat, y) {
   yh <- as.numeric(y_hat); y <- as.numeric(y)
@@ -163,8 +174,11 @@ morie_burkov_binary_cross_entropy <- function(y_hat, y) {
 }
 
 #' Closed-form BCE gradients for logistic regression (Burkov Eq 1.11)
-#' @param y_hat,y Predictions and targets. @param x Design matrix, one
-#'   row per example. @param N Optional size check. @param j Optional
+#' @param y_hat,y Predictions and targets.
+#' @param x Design matrix, one
+#'   row per example.
+#' @param N Optional size check.
+#' @param j Optional
 #'   0-based coordinate for `estimate` (matching the Python mirror).
 #' @export
 morie_burkov_bce_gradients <- function(y_hat, y, x, N = NULL, j = NULL) {
@@ -188,7 +202,8 @@ morie_burkov_bce_gradients <- function(y_hat, y, x, N = NULL, j = NULL) {
 }
 
 #' Categorical cross-entropy with a one-hot target (Burkov Eq 2.1)
-#' @param y_hat Probability distribution. @param c Correct class,
+#' @param y_hat Probability distribution.
+#' @param c Correct class,
 #'   0-based to match the Python mirror.
 #' @export
 morie_burkov_categorical_cross_entropy <- function(y_hat, c) {
@@ -215,7 +230,8 @@ morie_burkov_categorical_cross_entropy <- function(y_hat, c) {
 #' count how often the last token of s is followed by t_next within s.
 #' Eq 2.3's notational equivalence folds in as `notations_agree`.
 #'
-#' @param t_next Candidate token. @param s Token sequence.
+#' @param t_next Candidate token.
+#' @param s Token sequence.
 #' @export
 morie_burkov_next_token <- function(t_next, s) {
   seq_ <- as.character(s)
@@ -258,7 +274,8 @@ morie_burkov_ngram_mle <- function(counts_ngram, counts_prefix) {
 }
 
 #' Laplace add-1 smoothing (Burkov Ch 2)
-#' @param counts_ngram,counts_prefix Counts. @param V Vocabulary size.
+#' @param counts_ngram,counts_prefix Counts.
+#' @param V Vocabulary size.
 #' @export
 morie_burkov_laplace <- function(counts_ngram, counts_prefix, V) {
   c <- as.numeric(counts_ngram); p <- as.numeric(counts_prefix)
@@ -272,7 +289,8 @@ morie_burkov_laplace <- function(counts_ngram, counts_prefix, V) {
 }
 
 #' Add-k smoothing (Burkov Ch 2)
-#' @param counts_ngram,counts_prefix Counts. @param V Vocabulary size.
+#' @param counts_ngram,counts_prefix Counts.
+#' @param V Vocabulary size.
 #' @param k Pseudo-count, positive.
 #' @export
 morie_burkov_add_k <- function(counts_ngram, counts_prefix, V, k = 0.5) {
@@ -292,7 +310,8 @@ morie_burkov_add_k <- function(counts_ngram, counts_prefix, V, k = 0.5) {
 }
 
 #' Linear interpolation of n-gram orders (Burkov Ch 2)
-#' @param probs_by_order Probabilities. @param lambdas Weights, sum 1.
+#' @param probs_by_order Probabilities.
+#' @param lambdas Weights, sum 1.
 #' @export
 morie_burkov_interpolation <- function(probs_by_order, lambdas) {
   ps <- as.numeric(probs_by_order); ls <- as.numeric(lambdas)
@@ -312,7 +331,8 @@ morie_burkov_interpolation <- function(probs_by_order, lambdas) {
 
 #' N-gram backoff with per-level discount (Burkov Ch 2)
 #' @param counts_by_order List of `c(count_ngram, count_prefix)` pairs,
-#'   highest order first. @param alpha Per-level discount in (0, 1\\].
+#'   highest order first.
+#' @param alpha Per-level discount in (0, 1\\].
 #' @export
 morie_burkov_backoff <- function(counts_by_order, alpha = 0.4) {
   a <- as.numeric(alpha)
@@ -428,7 +448,8 @@ morie_burkov_unit_vector <- function(a) {
 }
 
 #' Term frequency and TF-IDF (Burkov Ch 2)
-#' @param term Query term. @param document Token vector.
+#' @param term Query term.
+#' @param document Token vector.
 #' @param normalise Divide by document length.
 #' @export
 morie_burkov_term_frequency <- function(term, document, normalise = FALSE) {
@@ -470,7 +491,8 @@ morie_burkov_tf_idf <- function(term, document, corpus) {
 #' tokens penalised at once, softmax renormalisation can raise one
 #' penalised token's absolute probability when another falls further.
 #'
-#' @param logits Logit vector. @param prev_tokens 0-based indices of
+#' @param logits Logit vector.
+#' @param prev_tokens 0-based indices of
 #'   already-generated tokens (matching the Python mirror).
 #' @param penalty Positive penalty, usually above 1.
 #' @export
@@ -494,7 +516,8 @@ morie_burkov_repetition_penalty <- function(logits, prev_tokens,
 }
 
 #' Weight tying: logits through the shared embedding (Burkov Ch 4)
-#' @param h_last Hidden state. @param E Embedding matrix, V x d.
+#' @param h_last Hidden state.
+#' @param E Embedding matrix, V x d.
 #' @export
 morie_burkov_weight_tying <- function(h_last, E) {
   h <- as.numeric(h_last)
@@ -512,8 +535,10 @@ morie_burkov_weight_tying <- function(h_last, E) {
 }
 
 #' One step of the Elman RNN (Burkov Ch 3)
-#' @param x_t Input. @param h_prev Previous hidden state.
-#' @param Wh,Wx,Wy Weight matrices. @param bh,by Biases.
+#' @param x_t Input.
+#' @param h_prev Previous hidden state.
+#' @param Wh,Wx,Wy Weight matrices.
+#' @param bh,by Biases.
 #' @export
 morie_burkov_elman_rnn <- function(x_t, h_prev, Wh, Wx, Wy, bh, by) {
   x <- as.numeric(x_t); h0 <- as.numeric(h_prev)
@@ -547,7 +572,8 @@ morie_burkov_elman_rnn <- function(x_t, h_prev, Wh, Wx, Wy, bh, by) {
 #' back exactly; the parity tests pin them against Python's autodiff
 #' and against central finite differences.
 #'
-#' @param graph Node list. @param inputs Named leaf values.
+#' @param graph Node list.
+#' @param inputs Named leaf values.
 #' @export
 morie_burkov_computational_graph <- function(graph, inputs) {
   if (length(graph) == 0L) stop("the graph is empty.", call. = FALSE)

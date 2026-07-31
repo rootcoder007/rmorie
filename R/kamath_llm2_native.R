@@ -224,7 +224,8 @@
 #' probabilities (validated to sum to 1); `M` a named character vector
 #' label -> answer word.
 #'
-#' @param x Named answer-word distribution. @param y Class label.
+#' @param x Named answer-word distribution.
+#' @param y Class label.
 #' @param M Named label -> answer-word map.
 #' @return List with `estimate`, `label_probs`, `label_mass`.
 #' @export
@@ -245,9 +246,10 @@ morie_kamath_ch3_prompt_label_mapping <- function(x, y, M) {
 
 #' Label-word softmax (Kamath Eq 3.2)
 #'
-#' p(y|x) = exp(w_{M(y)}.h_z) / sum over the LABEL words only.
+#' p(y|x) = exp(`w_{M(y)}`.h_z) / sum over the LABEL words only.
 #'
-#' @param w Named list of answer-word vectors. @param h_z Answer-slot state.
+#' @param w Named list of answer-word vectors.
+#' @param h_z Answer-slot state.
 #' @param M Named label -> answer-word map.
 #' @return List with `estimate`, `label`, `label_probs`, `logits`.
 #' @export
@@ -276,10 +278,12 @@ morie_kamath_ch3_prompt_softmax_label <- function(w, h_z, M) {
 
 #' Answer search over filled prompts (Kamath Eq 3.3)
 #'
-#' z_hat = argmax_{z in Z} score(f_fill(x, z)). `theta` scores the FILLED
+#' z_hat = `argmax_{z in Z}` score(f_fill(x, z)). `theta` scores the FILLED
 #' prompt; argmax is invariant to any monotone map.
 #'
-#' @param x Template. @param z Candidate answers. @param theta Scorer.
+#' @param x Template.
+#' @param z Candidate answers.
+#' @param theta Scorer.
 #' @param f_fill Optional filler; default substitutes `\[z\]`, else appends.
 #' @return List with `estimate`, `z_hat`, `filled_prompt`, `scores`.
 #' @export
@@ -312,7 +316,8 @@ morie_kamath_ch3_prompt_search_argmax <- function(x, z, theta, f_fill = NULL) {
 #'
 #' Exactly one mask must be present; `mask_index` is 0-BASED.
 #'
-#' @param prompt Cloze prompt. @param mask Mask token.
+#' @param prompt Cloze prompt.
+#' @param mask Mask token.
 #' @return List with `mask_index` (0-based), `tokens`, `estimate`.
 #' @export
 morie_kamath_ch3_dante_cloze <- function(prompt = "Dante was born in [MASK]",
@@ -364,7 +369,8 @@ morie_kamath_ch3_dante_cloze <- function(prompt = "Dante was born in [MASK]",
 #' `morie_kamath_ch3_translate_prefix_prompt`, km048 ->
 #' `morie_kamath_ch3_cloze_prompt_template`.
 #'
-#' @param x Input text. @param z Answer, or NULL to leave the slot open.
+#' @param x Input text.
+#' @param z Answer, or NULL to leave the slot open.
 #' @param template Template string.
 #' @return List with `prompt`, `slot_filled`, `tokens`.
 #' @export
@@ -396,7 +402,8 @@ morie_kamath_ch3_cloze_prompt_template <- function(
 #' A(t) = mean over (x, y) of 1\[y = argmax_y' P_LM(y'|x, t)\]. A proportion,
 #' never a mean of the inputs.
 #'
-#' @param R List of `list(x, y)` pairs. @param t Template.
+#' @param R List of `list(x, y)` pairs.
+#' @param t Template.
 #' @param P_LM Function (x, t) -> named probability vector.
 #' @return List with `estimate`, `n_correct`, `correct`.
 #' @export
@@ -420,7 +427,8 @@ morie_kamath_ch3_top1_prompt_metric <- function(R, t, P_LM) {
 #' P(t) = P_forward(t_hat|t) . P_backward(t|t_hat). The printed equation
 #' cannot be a round trip; the coherent reading is implemented, as in Python.
 #'
-#' @param t Candidate prompt. @param thatt Pivot translation.
+#' @param t Candidate prompt.
+#' @param thatt Pivot translation.
 #' @param p_forward,p_backward Leg probabilities in \[0, 1\].
 #' @return List with `estimate`.
 #' @export
@@ -440,8 +448,11 @@ morie_kamath_ch3_back_translation_prob <- function(t, thatt, p_forward = NULL,
 
 #' Adversarial-trigger QA prompt (Kamath Eq 3.10)
 #'
-#' @param x Question. @param y Context. @param T Trigger token.
-#' @param z_adv Adversarial answer. @param n_triggers Repeats (3 in the book).
+#' @param x Question.
+#' @param y Context.
+#' @param T Trigger token.
+#' @param z_adv Adversarial answer.
+#' @param n_triggers Repeats (3 in the book).
 #' @return List with `prompt`, `tokens`, `n_triggers`.
 #' @export
 morie_kamath_ch3_qa_trigger_template <- function(x, y, T, z_adv,
@@ -468,7 +479,8 @@ morie_kamath_ch3_qa_trigger_template <- function(x, y, T, z_adv,
 #' sum over D_train of log P_T5(T | T(x_in, y)). A probability of 0 is
 #' refused rather than returned as -Inf.
 #'
-#' @param D_train List of `list(x_in, y)` pairs. @param T Template
+#' @param D_train List of `list(x_in, y)` pairs.
+#' @param T Template
 #'   (function of (x_in, y) or a sprintf-free string with `{x}`/`{y}`).
 #' @param T5 Function (T, filled) -> probability in (0, 1\].
 #' @return List with `estimate`, `per_example`, `filled_inputs`.
@@ -496,8 +508,10 @@ morie_kamath_ch3_t5_template_obj <- function(D_train, T, T5) {
 #' A SUM of log p_phi(z_i | h_<i) over the target index set. `Y_idx` is
 #' 0-BASED, as in Python.
 #'
-#' @param phi Function (z_i, h_prefix) -> probability. @param x Source.
-#' @param y Target tokens. @param h Per-position activations.
+#' @param phi Function (z_i, h_prefix) -> probability.
+#' @param x Source.
+#' @param y Target tokens.
+#' @param h Per-position activations.
 #' @param Y_idx Optional 0-based positions.
 #' @return List with `estimate`, `per_position`, `positions_scored`.
 #' @export
@@ -550,7 +564,8 @@ morie_kamath_ch3_prefix_tuning_obj <- function(phi, x, y, h, Y_idx = NULL) {
 #' (fed by the layer input H_i). Passing H_i = H_o reproduces the series
 #' adapter exactly.
 #'
-#' @param H_o Layer output. @param W_down,W_up Bottleneck factors.
+#' @param H_o Layer output.
+#' @param W_down,W_up Bottleneck factors.
 #' @param f Activation; default ReLU.
 #' @return List with `output`, `delta`, `bottleneck_rank`.
 #' @export
@@ -606,7 +621,8 @@ morie_kamath_ch4_parallel_adapter <- function(H_o, H_i, W_down, W_up,
 #' Larger is better -- this is the objective, not a loss.
 #'
 #' @param Phi Function (x_i, y_prefix, y_t) -> probability.
-#' @param x Contexts. @param y Target sequences.
+#' @param x Contexts.
+#' @param y Target sequences.
 #' @return List with `estimate`, `per_pair`, `n_tokens`.
 #' @export
 morie_kamath_ch4_full_finetune_obj <- function(Phi, x, y) {
@@ -618,7 +634,8 @@ morie_kamath_ch4_full_finetune_obj <- function(Phi, x, y) {
 }
 
 #' @rdname morie_kamath_ch4_full_finetune_obj
-#' @param Theta Adapted model. @param Phi_0 Frozen base model.
+#' @param Theta Adapted model.
+#' @param Phi_0 Frozen base model.
 #' @export
 morie_kamath_ch4_lora_obj <- function(Theta, Phi_0, x, y) {
   a <- .morie_km2_seq_obj(Theta, x, y)
@@ -633,7 +650,9 @@ morie_kamath_ch4_lora_obj <- function(Theta, Phi_0, x, y) {
 #'
 #' h = W_0 x + B A x; dW = BA has rank at most r, and that rank is reported.
 #'
-#' @param W_0 Frozen (d, k) weight. @param B (d, r). @param A (r, k).
+#' @param W_0 Frozen (d, k) weight.
+#' @param B (d, r).
+#' @param A (r, k).
 #' @param x Input vector of length k.
 #' @return List with `h`, `base`, `delta_h`, `r`, `delta_W_rank`.
 #' @export
@@ -678,7 +697,8 @@ morie_kamath_ch4_kronecker_product <- function(A, B) {
 #' (A (x) B) x = gamma(B eta(x) A^T). Both folds are COLUMN-MAJOR, which is
 #' R's native `matrix()` layout and what makes the identity hold.
 #'
-#' @param A,B Factors. @param x Vector of length ncol(A) * ncol(B).
+#' @param A,B Factors.
+#' @param x Vector of length ncol(A) * ncol(B).
 #' @return List with `y`, `folded_shape`, `products_avoided`.
 #' @export
 morie_kamath_ch4_krona_efficient <- function(A, B, x) {
@@ -710,7 +730,9 @@ morie_kamath_ch4_krona_efficient <- function(A, B, x) {
 #' (W + s \[A_k (x) B_k\]), km061 -> `morie_kamath_ch4_krona_output`
 #' (that merged weight applied to X). s = 0 returns W unchanged.
 #'
-#' @param W Base weight. @param A_k,B_k Kronecker factors. @param s Scale.
+#' @param W Base weight.
+#' @param A_k,B_k Kronecker factors.
+#' @param s Scale.
 #' @return List with `W_tuned`, `delta`, `shape`.
 #' @export
 morie_kamath_ch4_krona_tuned_weights <- function(W, A_k, B_k, s) {
@@ -751,8 +773,10 @@ morie_kamath_ch4_krona_output <- function(X, W, A_k, B_k, s) {
 #'
 #' h = W_0 x + Lambda_b B Lambda_d A x; only the two diagonals train.
 #'
-#' @param W_0 Frozen weight. @param Lambda_b,Lambda_d Diagonals.
-#' @param A,B Frozen shared factors. @param x Input.
+#' @param W_0 Frozen weight.
+#' @param Lambda_b,Lambda_d Diagonals.
+#' @param A,B Frozen shared factors.
+#' @param x Input.
 #' @return List with `h`, `delta_h`, `r`, `n_trainable`.
 #' @export
 morie_kamath_ch4_vera_forward <- function(W_0, Lambda_b, Lambda_d, A, B, x) {
@@ -778,7 +802,9 @@ morie_kamath_ch4_vera_forward <- function(W_0, Lambda_b, Lambda_d, A, B, x) {
 #'
 #' ||W - Q - A B^T||_F; smaller is better.
 #'
-#' @param W Target weight. @param Q Quantised weight. @param A,B Factors.
+#' @param W Target weight.
+#' @param Q Quantised weight.
+#' @param A,B Factors.
 #' @return List with `estimate`, `residual`, `quantisation_error`, `r`.
 #' @export
 morie_kamath_ch4_loftq_objective <- function(W, Q, A, B) {
@@ -815,8 +841,10 @@ morie_kamath_ch4_loftq_objective <- function(W, Q, A, B) {
 #' `i`, 0 = y_0 wins), km067 -> `morie_kamath_ch5_rm_bradley_terry` (winner
 #' fixed, so i is all zeros).
 #'
-#' @param r_theta Function (x, y) -> reward. @param x Prompts.
-#' @param y_0,y_1 Response pairs. @param i Choice, 0 or 1 per pair.
+#' @param r_theta Function (x, y) -> reward.
+#' @param x Prompts.
+#' @param y_0,y_1 Response pairs.
+#' @param i Choice, 0 or 1 per pair.
 #' @return List with `estimate`, `margins`, `per_pair`.
 #' @export
 morie_kamath_ch5_reward_loss_pairwise <- function(r_theta, x, y_0, y_1, i) {
@@ -855,8 +883,10 @@ morie_kamath_ch5_rm_bradley_terry <- function(x, y_w, y_l, r_theta) {
 #'
 #' R = r_theta(x, y) - beta log(pi_RL / pi_SFT).
 #'
-#' @param x,y Prompt and response. @param pi_RL,pi_SFT Probabilities in (0, 1\].
-#' @param beta Penalty weight. @param r_theta Reward or function (x, y).
+#' @param x,y Prompt and response.
+#' @param pi_RL,pi_SFT Probabilities in (0, 1\].
+#' @param beta Penalty weight.
+#' @param r_theta Reward or function (x, y).
 #' @return List with `estimate`, `penalised_reward`, `penalty`.
 #' @export
 morie_kamath_ch5_reward_kl_penalty <- function(x, y, pi_RL, pi_SFT, beta,
@@ -891,7 +921,8 @@ morie_kamath_ch5_reward_kl_penalty <- function(x, y, pi_RL, pi_SFT, beta,
 #' km069 per prompt and negates the mean: km069 ->
 #' `morie_kamath_ch5_rlhf_objective`, km068 -> `morie_kamath_ch5_ppo_loss`.
 #'
-#' @param pi_theta,pi_ref Response distributions. @param r_phi Rewards.
+#' @param pi_theta,pi_ref Response distributions.
+#' @param r_phi Rewards.
 #' @param beta KL weight.
 #' @return List with `estimate`, `expected_reward`, `kl`, `penalty`.
 #' @export
@@ -923,7 +954,8 @@ morie_kamath_ch5_rlhf_objective <- function(pi_theta, pi_ref, r_phi, beta) {
 
 #' @rdname morie_kamath_ch5_rlhf_objective
 #' @param phi List of per-prompt policy distributions.
-#' @param x Prompts. @param y Per-prompt response name vectors.
+#' @param x Prompts.
+#' @param y Per-prompt response name vectors.
 #' @param r_theta Function (x, y) -> reward.
 #' @export
 morie_kamath_ch5_ppo_loss <- function(phi, x, y, r_theta, beta,
@@ -957,8 +989,10 @@ morie_kamath_ch5_ppo_loss <- function(phi, x, y, r_theta, beta,
 #' pi_r = pi_ref exp(r/beta) / Z. Z is computed, and a supplied Z is checked
 #' rather than trusted.
 #'
-#' @param pi_ref Reference distribution. @param r Rewards.
-#' @param beta Strictly positive. @param Z Optional partition function.
+#' @param pi_ref Reference distribution.
+#' @param r Rewards.
+#' @param beta Strictly positive.
+#' @param Z Optional partition function.
 #' @return List with `pi`, `Z`, `argmax` (0-based).
 #' @export
 morie_kamath_ch5_rlhf_optimal_policy <- function(pi_ref, r, beta, Z = NULL) {
@@ -987,7 +1021,8 @@ morie_kamath_ch5_rlhf_optimal_policy <- function(pi_ref, r, beta, Z = NULL) {
 #' r* = beta log(pi*/pi_ref) + beta log Z.
 #'
 #' @param pi_star,pi_ref Distributions with entries in (0, 1\].
-#' @param beta Strictly positive. @param Z Partition function; default 1.
+#' @param beta Strictly positive.
+#' @param Z Partition function; default 1.
 #' @return List with `r`, `log_ratio`, `offset`.
 #' @export
 morie_kamath_ch5_dpo_reward_optimal <- function(pi_star, pi_ref, beta,
@@ -1015,7 +1050,8 @@ morie_kamath_ch5_dpo_reward_optimal <- function(pi_star, pi_ref, beta,
 #' km072: km072 -> `morie_kamath_ch5_bradley_terry_pref` (named or function
 #' rewards), km073 -> `morie_kamath_ch5_pref_sigmoid_form` (a bare pair).
 #'
-#' @param r_star Named reward vector or function. @param y_w,y_l Responses.
+#' @param r_star Named reward vector or function.
+#' @param y_w,y_l Responses.
 #' @return List with `estimate`, `margin`, `r_w`, `r_l`.
 #' @export
 morie_kamath_ch5_bradley_terry_pref <- function(r_star, y_w, y_l) {
@@ -1071,7 +1107,8 @@ morie_kamath_ch5_pref_sigmoid_form <- function(r_star) {
 #' explicitly and refuses to return unless the beta log Z terms cancel --
 #' the same assertion the Python module makes.
 #'
-#' @param pi_star,pi_ref Two-response policies. @param beta Positive.
+#' @param pi_star,pi_ref Two-response policies.
+#' @param beta Positive.
 #' @return List with `estimate`, `margin`, implicit rewards.
 #' @export
 morie_kamath_ch5_dpo_pref_simplified <- function(pi_star, pi_ref, beta) {
@@ -1105,7 +1142,8 @@ morie_kamath_ch5_dpo_pref_substituted <- function(pi_star, pi_ref, beta,
 #'
 #' -mean log sigmoid of the beta-scaled log-ratio margin.
 #'
-#' @param pi_theta,pi_ref Lists of two-response policies. @param beta Positive.
+#' @param pi_theta,pi_ref Lists of two-response policies.
+#' @param beta Positive.
 #' @return List with `estimate`, `margins`, implicit rewards.
 #' @export
 morie_kamath_ch5_dpo_loss <- function(pi_theta, pi_ref, beta) {
@@ -1131,7 +1169,8 @@ morie_kamath_ch5_dpo_loss <- function(pi_theta, pi_ref, beta) {
 #' Mean supported-fact fraction over the prompts the model ANSWERED; a NULL
 #' response is skipped, not scored 0.
 #'
-#' @param M Function prompt -> response or NULL. @param X Prompts.
+#' @param M Function prompt -> response or NULL.
+#' @param X Prompts.
 #' @param A_y Function response -> atomic facts.
 #' @param C Support predicate or a vector of supported facts.
 #' @return List with `estimate`, `per_prompt`, `response_rate`.
@@ -1164,7 +1203,9 @@ morie_kamath_ch6_factscore <- function(M, X, A_y, C) {
 #'
 #' f: (a, b) -> y with the label space ENFORCED. `y` is "bin", "3way" or "reg".
 #'
-#' @param a,b Context and claim. @param y Output space. @param f Head.
+#' @param a,b Context and claim.
+#' @param y Output space.
+#' @param f Head.
 #' @return List with `estimate`, `label`, `space`, `labels`.
 #' @export
 morie_kamath_ch6_alignment_function <- function(a, b, y, f = NULL) {
@@ -1196,7 +1237,8 @@ morie_kamath_ch6_alignment_function <- function(a, b, y, f = NULL) {
 #'
 #' lam1 L_3way + lam2 L_bin + lam3 L_reg.
 #'
-#' @param L_3way,L_bin,L_reg Component losses. @param lambdas Three weights.
+#' @param L_3way,L_bin,L_reg Component losses.
+#' @param lambdas Three weights.
 #' @return List with `estimate`, `contributions`.
 #' @export
 morie_kamath_ch6_alignscore_total_loss <- function(L_3way, L_bin, L_reg,
@@ -1247,7 +1289,8 @@ morie_kamath_ch6_alignscore_total_loss <- function(L_3way, L_bin, L_reg,
 #'
 #' s(a) = mean cos(a, W_1) - mean cos(a, W_2).
 #'
-#' @param a Attribute vector. @param W_1,W_2 Target word matrices.
+#' @param a Attribute vector.
+#' @param W_1,W_2 Target word matrices.
 #' @return List with `estimate`, `mean_cos_W1`, `mean_cos_W2`.
 #' @export
 morie_kamath_ch6_weat_similarity <- function(a, W_1, W_2) {
@@ -1263,7 +1306,8 @@ morie_kamath_ch6_weat_similarity <- function(a, W_1, W_2) {
 #'
 #' sum s over A_1 minus sum s over A_2.
 #'
-#' @param A_1,A_2 Attribute-word matrices. @param W_1,W_2 Target matrices.
+#' @param A_1,A_2 Attribute-word matrices.
+#' @param W_1,W_2 Target matrices.
 #' @return List with `estimate`, `s_A1`, `s_A2`.
 #' @export
 morie_kamath_ch6_weat_function <- function(A_1, A_2, W_1, W_2) {
@@ -1278,7 +1322,8 @@ morie_kamath_ch6_weat_function <- function(A_1, A_2, W_1, W_2) {
 #' (mean s over A_1 - mean s over A_2) / sd over the union. `ddof = 0` is
 #' numpy's default, i.e. the POPULATION standard deviation, not R's `sd()`.
 #'
-#' @param A_1,A_2 Attribute matrices. @param W_1,W_2 Target matrices.
+#' @param A_1,A_2 Attribute matrices.
+#' @param W_1,W_2 Target matrices.
 #' @param ddof Degrees of freedom subtracted; 0 = population.
 #' @return List with `estimate`, `numerator`, `std`.
 #' @export
@@ -1301,7 +1346,8 @@ morie_kamath_ch6_weat_effect_size <- function(A_1, A_2, W_1, W_2, ddof = 0) {
 #'
 #' Weighted mean of per-sample WEAT effect sizes.
 #'
-#' @param S_A1,S_A2,S_W1,S_W2 Lists of per-sample matrices. @param v Weights.
+#' @param S_A1,S_A2,S_W1,S_W2 Lists of per-sample matrices.
+#' @param v Weights.
 #' @param ddof Passed to the effect size.
 #' @return List with `estimate`, `weat`, `weights`.
 #' @export
@@ -1354,8 +1400,10 @@ morie_kamath_ch6_lpbs_bias <- function(p_a, p_prior) {
 #' Mean over template words of the variance over groups of log(p / prior).
 #' `ddof = 0` is numpy's POPULATION variance.
 #'
-#' @param W Template words. @param A Social groups.
-#' @param p_a,p_prior |W| x |A| probability matrices. @param ddof Default 0.
+#' @param W Template words.
+#' @param A Social groups.
+#' @param p_a,p_prior |W| x |A| probability matrices.
+#' @param ddof Default 0.
 #' @return List with `estimate`, `per_word`, `log_ratios`.
 #' @export
 morie_kamath_ch6_cbs_variance <- function(W, A, p_a, p_prior, ddof = 0) {
@@ -1415,7 +1463,8 @@ morie_kamath_ch6_pll <- function(S, theta = NULL) {
 }
 
 #' @rdname morie_kamath_ch6_pll
-#' @param U Unmodified tokens. @param M Modified tokens.
+#' @param U Unmodified tokens.
+#' @param M Modified tokens.
 #' @export
 morie_kamath_ch6_cps_metric <- function(U, M, theta = NULL) {
   toks <- as.list(U); mod <- as.list(M)
@@ -1435,7 +1484,8 @@ morie_kamath_ch6_cps_metric <- function(U, M, theta = NULL) {
 #' MEAN log P(modified token | unmodified context) -- a mean, not the sum
 #' that Eq 6.10 takes.
 #'
-#' @param M Modified tokens. @param U Unmodified context.
+#' @param M Modified tokens.
+#' @param U Unmodified context.
 #' @param theta Optional function (M, U, i) with i 0-BASED.
 #' @return List with `estimate`, `per_token`, `n_context`.
 #' @export
@@ -1457,7 +1507,8 @@ morie_kamath_ch6_cat_metric <- function(M, U, theta = NULL) {
 #'
 #' psi(original, counterfactual); 1 means unchanged.
 #'
-#' @param Yhat_i,Yhat_j Paired outputs. @param psi Optional comparator.
+#' @param Yhat_i,Yhat_j Paired outputs.
+#' @param psi Optional comparator.
 #' @return List with `estimate`, `per_pair`, `n_invariant`.
 #' @export
 morie_kamath_ch6_sgs_invariance <- function(Yhat_i, Yhat_j, psi = NULL) {
@@ -1487,7 +1538,8 @@ morie_kamath_ch6_sgs_invariance <- function(Yhat_i, Yhat_j, psi = NULL) {
 #'
 #' log P(w|A_i) / P(w|A_j) over generated text.
 #'
-#' @param w Word. @param A_i,A_j Named count vectors or token corpora.
+#' @param w Word.
+#' @param A_i,A_j Named count vectors or token corpora.
 #' @return List with `estimate`, `p_given_Ai`, `p_given_Aj`.
 #' @export
 morie_kamath_ch6_co_occurrence_bias <- function(w, A_i, A_j) {
@@ -1532,7 +1584,9 @@ morie_kamath_ch6_co_occurrence_bias <- function(w, A_i, A_j) {
 #' km092 -> `morie_kamath_ch6_stereotypical_assoc` (counts only in outputs
 #' that mention w).
 #'
-#' @param G_i Group label. @param A_i Attribute words. @param Yhat Outputs.
+#' @param G_i Group label.
+#' @param A_i Attribute words.
+#' @param Yhat Outputs.
 #' @return List with `estimate`, `per_word`, `share_of_tokens`.
 #' @export
 morie_kamath_ch6_demographic_representation <- function(G_i, A_i, Yhat) {
@@ -1568,7 +1622,8 @@ morie_kamath_ch6_stereotypical_assoc <- function(w, A_i, Yhat) {
 #'
 #' Hurtful completions / (prompts x k).
 #'
-#' @param Yhat List of per-prompt completion vectors. @param k Completions.
+#' @param Yhat List of per-prompt completion vectors.
+#' @param k Completions.
 #' @param hurtlex Predicate or a vector of hurtful strings.
 #' @return List with `estimate`, `n_hurtful`, `per_prompt`.
 #' @export
@@ -1622,7 +1677,8 @@ morie_kamath_ch6_honest_score <- function(Yhat, k, hurtlex = NULL) {
 #' distances), km095 -> `morie_kamath_ch6_gender_direction`
 #' (mean of E(second) - E(first) over the pairs).
 #'
-#' @param A List of two-element word pairs. @param E Embedding map/function.
+#' @param A List of two-element word pairs.
+#' @param E Embedding map/function.
 #' @param lam Non-negative weight.
 #' @return List with `estimate`, `per_pair`.
 #' @export
@@ -1654,7 +1710,8 @@ morie_kamath_ch6_gender_direction <- function(A, E) {
 #'
 #' Sum of stereotype embeddings' projections onto the unit gender direction.
 #'
-#' @param W_stereo Stereotype embedding rows. @param g Gender direction.
+#' @param W_stereo Stereotype embedding rows.
+#' @param g Gender direction.
 #' @return List with `estimate`, `projections`, `sum_abs`, `g_norm`.
 #' @export
 morie_kamath_ch6_gender_projection_reg <- function(W_stereo, g) {
@@ -1675,7 +1732,8 @@ morie_kamath_ch6_gender_projection_reg <- function(W_stereo, g) {
 #' -lam times the summed per-layer MEAN attention row entropy. Rows must sum
 #' to 1; 0 log 0 is taken as 0.
 #'
-#' @param A List of attention matrices. @param L Optional layer count.
+#' @param A List of attention matrices.
+#' @param L Optional layer count.
 #' @param lam Non-negative weight.
 #' @return List with `estimate`, `per_layer_entropy`, `total_entropy`.
 #' @export
@@ -1708,7 +1766,8 @@ morie_kamath_ch6_ear_entropy_reg <- function(A, L = NULL, lam = 1) {
 #' lam * MEAN log P(a_i)/P(a_j) over the K word pairs; the unweighted SUM is
 #' reported alongside.
 #'
-#' @param a_i,a_j Paired probabilities in (0, 1\]. @param K Optional count.
+#' @param a_i,a_j Paired probabilities in (0, 1\].
+#' @param K Optional count.
 #' @param lam Finite weight.
 #' @return List with `estimate`, `unweighted`, `per_pair`.
 #' @export
@@ -1756,7 +1815,8 @@ morie_kamath_ch6_log_prob_ratio_attr <- function(a_i, a_j, K = NULL, lam = 1) {
 #' toxic generation), km101 -> `morie_kamath_ch6_toxic_fraction` (share of
 #' generations at or above the threshold). `argmax_index` is 0-BASED.
 #'
-#' @param Yhat Generations. @param c Classifier or score vector.
+#' @param Yhat Generations.
+#' @param c Classifier or score vector.
 #' @return List with `estimate`, `scores`.
 #' @export
 morie_kamath_ch6_emt_metric <- function(Yhat, c) {
@@ -1832,8 +1892,10 @@ morie_kamath_ch6_lstm_chain_rule <- function(w_1_w_M) {
 #' `morie_kamath_ch6_affect_lm` (the same, shifted by beta V g(e)).
 #' `argmax` is 0-BASED.
 #'
-#' @param U Vocabulary projection. @param f Hidden map or vector.
-#' @param c_t_1 Previous cell state. @param b Bias.
+#' @param U Vocabulary projection.
+#' @param f Hidden map or vector.
+#' @param c_t_1 Previous cell state.
+#' @param b Bias.
 #' @return List with `p`, `logits`, `argmax`.
 #' @export
 morie_kamath_ch6_lstm_softmax_word <- function(U, f, c_t_1, b) {
@@ -1853,8 +1915,11 @@ morie_kamath_ch6_lstm_softmax_word <- function(U, f, c_t_1, b) {
 }
 
 #' @rdname morie_kamath_ch6_lstm_softmax_word
-#' @param V Affect projection. @param g Affect hidden map. @param c Cell state.
-#' @param e Affect category. @param beta Affect strength.
+#' @param V Affect projection.
+#' @param g Affect hidden map.
+#' @param c Cell state.
+#' @param e Affect category.
+#' @param beta Affect strength.
 #' @export
 morie_kamath_ch6_affect_lm <- function(U, V, f, g, c, e, beta, b) {
   Um <- as.matrix(U); Vm <- as.matrix(V)
@@ -1879,7 +1944,8 @@ morie_kamath_ch6_affect_lm <- function(U, V, f, g, c, e, beta, b) {
 #'
 #' lam L_g + (1 - lam) L_d, a convex combination, so lam is confined to \[0, 1\].
 #'
-#' @param L_g,L_d Component losses. @param lam Mixing weight in \[0, 1\].
+#' @param L_g,L_d Component losses.
+#' @param lam Mixing weight in \[0, 1\].
 #' @return List with `estimate`, `contributions`.
 #' @export
 morie_kamath_ch6_gedi_combined_loss <- function(L_g, L_d, lam) {
@@ -1897,8 +1963,11 @@ morie_kamath_ch6_gedi_combined_loss <- function(L_g, L_d, lam) {
 #'
 #' p(Yes) renormalised against p(No) on the self-diagnosis prompt.
 #'
-#' @param x Text. @param y Attribute. @param M Function prompt -> named
-#'   Yes/No probabilities. @param sdg Optional prompt builder.
+#' @param x Text.
+#' @param y Attribute.
+#' @param M Function prompt -> named
+#'   Yes/No probabilities.
+#' @param sdg Optional prompt builder.
 #' @return List with `estimate`, `p_yes`, `p_no`, `prompt`.
 #' @export
 morie_kamath_ch6_self_diagnosis_prob <- function(x, y, M, sdg = NULL) {
@@ -1926,8 +1995,11 @@ morie_kamath_ch6_self_diagnosis_prob <- function(x, y, M, sdg = NULL) {
 #'
 #' Product of the target PII's per-token probabilities.
 #'
-#' @param a_m Per-token probabilities. @param A Other PII. @param x Query
-#'   tokens. @param L_q,L_r Query and answer lengths.
+#' @param a_m Per-token probabilities.
+#' @param A Other PII.
+#' @param x Query
+#'   tokens.
+#' @param L_q,L_r Query and answer lengths.
 #' @return List with `estimate`, `log_likelihood`, `context_lengths`.
 #' @export
 morie_kamath_ch6_pii_likelihood <- function(a_m, A, x, L_q, L_r) {
@@ -1951,7 +2023,9 @@ morie_kamath_ch6_pii_likelihood <- function(a_m, A, x, L_q, L_r) {
 #' would be required.
 #'
 #' @param M Function dataset -> named outcome distribution.
-#' @param A,B Neighbouring datasets. @param S Outcome set. @param epsilon Budget.
+#' @param A,B Neighbouring datasets.
+#' @param S Outcome set.
+#' @param epsilon Budget.
 #' @return List with `estimate`, `satisfied`, `p_A`, `p_B`, `bound`.
 #' @export
 morie_kamath_ch6_differential_privacy <- function(M, A, B, S, epsilon) {
@@ -1981,7 +2055,8 @@ morie_kamath_ch6_differential_privacy <- function(M, A, B, S, epsilon) {
 #'
 #' max log(PP_public / PP_lm) over the unique sequences.
 #'
-#' @param S_uniq Sequences. @param PP_public,PP_lm Named vectors or functions.
+#' @param S_uniq Sequences.
+#' @param PP_public,PP_lm Named vectors or functions.
 #' @return List with `estimate`, `argmax`, `per_sequence`, `n_leaking`.
 #' @export
 morie_kamath_ch6_perplexity_leakage <- function(S_uniq, PP_public, PP_lm) {
@@ -2030,7 +2105,8 @@ morie_kamath_ch7_faithfulness_metric <- function(facts) {
 #' Mean cosine between the reverse-generated question embeddings and the
 #' original query embedding.
 #'
-#' @param E_g Question embedding rows. @param E_o Query embedding.
+#' @param E_g Question embedding rows.
+#' @param E_o Query embedding.
 #' @param N Optional question count.
 #' @return List with `estimate`, `similarities`.
 #' @export
@@ -2054,7 +2130,8 @@ morie_kamath_ch7_answer_relevance <- function(E_g, E_o, N = NULL) {
 #'
 #' exp(mean negative log-likelihood per token).
 #'
-#' @param X Tokens. @param N Optional token count.
+#' @param X Tokens.
+#' @param N Optional token count.
 #' @param p_theta Probability vector or function (token, prefix).
 #' @return List with `estimate`, `mean_nll`, `log_probs`.
 #' @export
@@ -2112,7 +2189,8 @@ morie_kamath_ch8_bleu_precision <- function(n_grams) {
 #' `morie_kamath_ch8_bleu_final` (BP times that mean). Any zero precision
 #' collapses the mean to 0 and the log mean to -Inf.
 #'
-#' @param p_n Precisions in \[0, 1\]. @param N Optional order count.
+#' @param p_n Precisions in \[0, 1\].
+#' @param N Optional order count.
 #' @return List with `estimate`, `log_mean`, `p_n`.
 #' @export
 morie_kamath_ch8_bleu_n_geom_mean <- function(p_n, N = NULL) {
@@ -2148,7 +2226,8 @@ morie_kamath_ch8_bleu_final <- function(BP, p_n, N = NULL) {
 #'
 #' 1 when the candidate is longer than the reference, exp(1 - r/c) otherwise.
 #'
-#' @param c Candidate length. @param r Reference length.
+#' @param c Candidate length.
+#' @param r Reference length.
 #' @return List with `estimate`, `penalized`.
 #' @export
 morie_kamath_ch8_brevity_penalty <- function(c, r) {
@@ -2164,7 +2243,8 @@ morie_kamath_ch8_brevity_penalty <- function(c, r) {
 #'
 #' Clipped reference n-gram overlap divided by the reference n-gram total.
 #'
-#' @param S List of reference token SEQUENCES. @param gram_n Order.
+#' @param S List of reference token SEQUENCES.
+#' @param gram_n Order.
 #' @param candidate Generated token sequence.
 #' @return List with `estimate`, `matched`, `total_reference_ngrams`.
 #' @export
@@ -2215,7 +2295,8 @@ morie_kamath_ch8_rouge_n <- function(S, gram_n, candidate = NULL) {
 #' `morie_kamath_ch8_bertscore_precision`, km121 ->
 #' `morie_kamath_ch8_bertscore_f1`. `greedy_match` is 0-BASED.
 #'
-#' @param x Reference token embeddings. @param xhat Candidate embeddings.
+#' @param x Reference token embeddings.
+#' @param xhat Candidate embeddings.
 #' @param normalize Cosine instead of raw dot products.
 #' @return List with `estimate`, `per_token`, `greedy_match`.
 #' @export
@@ -2254,7 +2335,8 @@ morie_kamath_ch8_bertscore_f1 <- function(P_BERT, R_BERT) {
 #' is reported and `optimal` is FALSE; otherwise the exact optimum is solved
 #' and CERTIFIED against its dual before anything is returned.
 #'
-#' @param x_n,y_n Marginal weights of equal total mass. @param C Cost matrix.
+#' @param x_n,y_n Marginal weights of equal total mass.
+#' @param C Cost matrix.
 #' @param F Optional transport plan.
 #' @return List with `estimate`, `flow`, `dual_objective`, `optimal`.
 #' @export
@@ -2299,7 +2381,8 @@ morie_kamath_ch8_wmd <- function(x_n, y_n, C, F = NULL) {
 #' calls km123: km123 -> `morie_kamath_ch8_moverscore_distance`, km126 ->
 #' `morie_kamath_ch8_smd`.
 #'
-#' @param x_i,y_j Embeddings, or objects for `E`. @param E Optional embedder.
+#' @param x_i,y_j Embeddings, or objects for `E`.
+#' @param E Optional embedder.
 #' @return List with `estimate`, `difference`.
 #' @export
 morie_kamath_ch8_moverscore_distance <- function(x_i, y_j, E = NULL) {
@@ -2334,7 +2417,8 @@ morie_kamath_ch8_smd <- function(x, y, E = NULL) {
 #'
 #' Sum of idf over the n tokens of one window. `i` is a 0-BASED start.
 #'
-#' @param x 1-D idf sequence or 2-D embedding rows. @param i 0-based start.
+#' @param x 1-D idf sequence or 2-D embedding rows.
+#' @param i 0-based start.
 #' @param n Window length.
 #' @return List with `estimate`, `embedding`, `window`.
 #' @export
@@ -2357,7 +2441,8 @@ morie_kamath_ch8_ngram_embedding <- function(x, i, n) {
 #'
 #' Window idf sum divided by the normaliser Z.
 #'
-#' @param x idf rows. @param Z Optional normaliser; default the grand sum.
+#' @param x idf rows.
+#' @param Z Optional normaliser; default the grand sum.
 #' @return List with `estimate`, `weights`, `Z`.
 #' @export
 morie_kamath_ch8_ngram_weight <- function(x, Z = NULL) {
@@ -2381,7 +2466,8 @@ morie_kamath_ch8_ngram_weight <- function(x, Z = NULL) {
 #'
 #' Expected rating under the evaluator's score posterior.
 #'
-#' @param s_i Rubric score points. @param p Their probabilities.
+#' @param s_i Rubric score points.
+#' @param p Their probabilities.
 #' @return List with `estimate`, `scores`, `probabilities`.
 #' @export
 morie_kamath_ch8_geval_score <- function(s_i, p) {
@@ -2406,7 +2492,9 @@ morie_kamath_ch8_geval_score <- function(s_i, p) {
 #' kmpask -> `morie_kamath_pass_at_k` (reports `empirical_rate`). Both are
 #' exported so their payloads stay distinguishable.
 #'
-#' @param n Samples drawn. @param c Correct samples. @param k Budget.
+#' @param n Samples drawn.
+#' @param c Correct samples.
+#' @param k Budget.
 #' @return List with `estimate`, `fail_probability`.
 #' @export
 morie_kamath_ch8_pass_at_k <- function(n, c, k) {
@@ -2449,7 +2537,8 @@ morie_kamath_pass_at_k <- function(n, c, k) {
 #'
 #' F_X = ME_X(I_X): runs the caller's encoder and checks its output.
 #'
-#' @param I_X Raw modality input. @param ME_X Encoder function.
+#' @param I_X Raw modality input.
+#' @param ME_X Encoder function.
 #' @return List with `estimate` (Frobenius norm), `features`, `shape`.
 #' @export
 morie_kamath_ch9_modality_encoder <- function(I_X, ME_X) {
@@ -2471,7 +2560,9 @@ morie_kamath_ch9_modality_encoder <- function(I_X, ME_X) {
 #' `argmin` is 0-BASED.
 #'
 #' @param P_X Prompt features: a matrix, or a list of candidate matrices.
-#' @param F_T Text features. @param t Target. @param llm Model function.
+#' @param F_T Text features.
+#' @param t Target.
+#' @param llm Model function.
 #' @param loss_fn Loss function.
 #' @return List with `estimate`, `argmin`, `losses`.
 #' @export
@@ -2500,7 +2591,8 @@ morie_kamath_ch9_input_alignment_loss <- function(P_X, F_T, t, llm = NULL,
 #' IN_ALIGN(F_X)), km147 -> `morie_kamath_ch9_output_alignment` (H_X =
 #' OUT_ALIGN(S_X)). Both accept a matrix (right-multiplied) or a function.
 #'
-#' @param F_X Modality features. @param in_align Matrix or function.
+#' @param F_X Modality features.
+#' @param in_align Matrix or function.
 #' @return List with `estimate`, `prompts`, `shape`.
 #' @export
 morie_kamath_ch9_input_projector <- function(F_X, in_align = NULL) {
@@ -2521,7 +2613,8 @@ morie_kamath_ch9_input_projector <- function(F_X, in_align = NULL) {
 }
 
 #' @rdname morie_kamath_ch9_input_projector
-#' @param S_X Signal tokens. @param out_align Matrix or function.
+#' @param S_X Signal tokens.
+#' @param out_align Matrix or function.
 #' @export
 morie_kamath_ch9_output_alignment <- function(S_X, out_align = NULL) {
   if (is.null(out_align)) stop("out_align= is required.", call. = FALSE)
@@ -2543,7 +2636,9 @@ morie_kamath_ch9_output_alignment <- function(S_X, out_align = NULL) {
 #'
 #' (t, S_X) = LLM(P_X, F_T); the 2-element contract is enforced.
 #'
-#' @param P_X Prompt features. @param F_T Text features. @param llm Model.
+#' @param P_X Prompt features.
+#' @param F_T Text features.
+#' @param llm Model.
 #' @return List with `estimate` (signal-token count), `text`, `signal_tokens`.
 #' @export
 morie_kamath_ch9_llm_signal_tokens <- function(P_X, F_T, llm = NULL) {
@@ -2566,7 +2661,9 @@ morie_kamath_ch9_llm_signal_tokens <- function(P_X, F_T, llm = NULL) {
 #' `morie_kamath_ch9_clip_text_to_image`, km135 ->
 #' `morie_kamath_ch9_clip_contrastive_total` (their sum).
 #'
-#' @param V Image embeddings. @param L Text embeddings. @param sigma Temperature.
+#' @param V Image embeddings.
+#' @param L Text embeddings.
+#' @param sigma Temperature.
 #' @param N Optional batch size.
 #' @return List with `estimate`, `per_pair`, `logits`.
 #' @export
@@ -2651,8 +2748,10 @@ morie_kamath_ch9_itm_hard_negative <- function(Pos, HardNeg) {
 #' Delegates the masked-token arithmetic to `morie_kamath_mlm_loss` (Ch 2,
 #' km022) exactly as the Python module imports it. `x_m` is 0-BASED.
 #'
-#' @param theta Optional model theta(x, v). @param x Token probabilities.
-#' @param v Image-region features. @param x_m 0-based masked positions.
+#' @param theta Optional model theta(x, v).
+#' @param x Token probabilities.
+#' @param v Image-region features.
+#' @param x_m 0-based masked positions.
 #' @return List with `estimate`, `per_position`, `n_image_regions`.
 #' @export
 morie_kamath_ch9_simvlm_mlm <- function(theta, x, v, x_m) {
@@ -2677,7 +2776,8 @@ morie_kamath_ch9_simvlm_mlm <- function(theta, x, v, x_m) {
 #' Summed -log p over the suffix, averaged over sequences. `T_p` is a
 #' 0-BASED prefix length, so the suffix starts at column T_p.
 #'
-#' @param theta Optional model. @param x Probability rows.
+#' @param theta Optional model.
+#' @param x Probability rows.
 #' @param T_p Prefix length.
 #' @return List with `estimate`, `per_sequence`, `n_suffix_tokens`.
 #' @export
@@ -2706,8 +2806,11 @@ morie_kamath_ch9_simvlm_prefixlm <- function(theta, x, T_p) {
 #' 0-BASED class indices; 2-D labels must be one-hot rows. `as_printed`
 #' carries the book's sign, which is the negative of a loss.
 #'
-#' @param theta Optional model. @param w Fallback labels. @param v Regions.
-#' @param g_theta Class distributions or a function of v. @param labels Truth.
+#' @param theta Optional model.
+#' @param w Fallback labels.
+#' @param v Regions.
+#' @param g_theta Class distributions or a function of v.
+#' @param labels Truth.
 #' @return List with `estimate`, `per_region`, `true_class_probability`.
 #' @export
 morie_kamath_ch9_moc_loss <- function(theta, w, v, g_theta, labels = NULL) {
@@ -2750,7 +2853,8 @@ morie_kamath_ch9_moc_loss <- function(theta, w, v, g_theta, labels = NULL) {
 #'
 #' Binary cross-entropy on the match scores.
 #'
-#' @param theta Score function or scores. @param v,t Images and texts.
+#' @param theta Score function or scores.
+#' @param v,t Images and texts.
 #' @param y 0/1 match labels.
 #' @return List with `estimate`, `per_pair`, `scores`.
 #' @export
@@ -2777,7 +2881,8 @@ morie_kamath_ch9_itm_loss <- function(theta, v, t, y) {
 #' (-sum log p over one response), km142 -> `morie_kamath_ch9_itg_loss`
 #' (that sum over the (X, Y) corpus).
 #'
-#' @param R Response token probabilities. @param I Visual context.
+#' @param R Response token probabilities.
+#' @param I Visual context.
 #' @param theta Optional model.
 #' @return List with `estimate`, `mean_nll`, `per_token`.
 #' @export
@@ -2798,7 +2903,8 @@ morie_kamath_ch9_mmllm_autoregressive <- function(R, I, theta = NULL) {
 }
 
 #' @rdname morie_kamath_ch9_mmllm_autoregressive
-#' @param x Visual contexts, or NULL. @param y List of response probabilities.
+#' @param x Visual contexts, or NULL.
+#' @param y List of response probabilities.
 #' @export
 morie_kamath_ch9_itg_loss <- function(x, y) {
   seqs <- as.list(y)
@@ -2817,7 +2923,9 @@ morie_kamath_ch9_itg_loss <- function(x, y) {
 #' -sum log P\[frame, true timestamp\]. `r_i` and `t_i` are 0-BASED indices
 #' into P.
 #'
-#' @param r_i Frame indices. @param t_i Timestamp indices. @param R Count.
+#' @param r_i Frame indices.
+#' @param t_i Timestamp indices.
+#' @param R Count.
 #' @param P Frame-by-timestamp probability matrix.
 #' @return List with `estimate`, `per_frame`, `n_reordered`.
 #' @export
@@ -2846,7 +2954,9 @@ morie_kamath_ch9_fom_loss <- function(r_i, t_i, R = NULL, P = NULL) {
 #'
 #' A = f(I, M; theta), with the model contract enforced.
 #'
-#' @param I Instruction. @param M Multimodal input. @param theta Model.
+#' @param I Instruction.
+#' @param M Multimodal input.
+#' @param theta Model.
 #' @param f Optional override f(I, M, theta).
 #' @return List with `estimate`, `answer`.
 #' @export
@@ -2869,7 +2979,8 @@ morie_kamath_ch9_mm_instr_predict <- function(I, M, theta, f = NULL) {
 #' over candidates. `argmin` is 0-BASED.
 #'
 #' @param H_X A feature matrix, or a list of candidates.
-#' @param tau_X Target features or a function of t. @param t Target text.
+#' @param tau_X Target features or a function of t.
+#' @param t Target text.
 #' @return List with `estimate`, `argmin`, `losses`.
 #' @export
 morie_kamath_ch9_output_projector_mse <- function(H_X, tau_X, t) {
@@ -2894,8 +3005,10 @@ morie_kamath_ch9_output_projector_mse <- function(H_X, tau_X, t) {
 #'
 #' Mean over samples of the squared L2 error between true and predicted noise.
 #'
-#' @param epsilon True noise (rows are samples). @param z_t Latent.
-#' @param H_X Conditioning. @param eps_net Prediction or function.
+#' @param epsilon True noise (rows are samples).
+#' @param z_t Latent.
+#' @param H_X Conditioning.
+#' @param eps_net Prediction or function.
 #' @param t Timestep.
 #' @return List with `estimate`, `per_sample`.
 #' @export
@@ -2927,7 +3040,9 @@ morie_kamath_ch9_ldm_loss <- function(epsilon, z_t, H_X, eps_net = NULL,
 #' `morie_kamath_ch9_flamingo_dataset_mix` (sum_m lambda_m times the mean
 #' per-sequence NLL of dataset m).
 #'
-#' @param y Per-token conditionals. @param x Context. @param L Optional length.
+#' @param y Per-token conditionals.
+#' @param x Context.
+#' @param L Optional length.
 #' @param model Optional model (y, x).
 #' @return List with `estimate` (the product), `log_prob`, `nll`.
 #' @export
@@ -3008,8 +3123,10 @@ morie_kamath_3h_alignment <- function(helpful_score, harmless_score,
 #' P diag(s) Q^T after zeroing all but the top-importance singular values.
 #' `kept` is 0-BASED and sorted.
 #'
-#' @param P Left factor (rows x r). @param s Singular values.
-#' @param Q Right factor (rows x r). @param importance Optional scores.
+#' @param P Left factor (rows x r).
+#' @param s Singular values.
+#' @param Q Right factor (rows x r).
+#' @param importance Optional scores.
 #' @param target_rank How many triplets to keep.
 #' @return List with `estimate`, `Delta_W`, `s_pruned`, `kept`.
 #' @export
@@ -3043,7 +3160,9 @@ morie_kamath_adalora_rank_allocation <- function(P, s, Q, importance = NULL,
 #' h + W_up GELU(W_down h) with m << d enforced. `approximate = "none"` is
 #' the exact erf GELU (R: `z * pnorm(z)`), "tanh" the tanh approximation.
 #'
-#' @param h Hidden rows. @param W_down (m, d). @param W_up (d, m).
+#' @param h Hidden rows.
+#' @param W_down (m, d).
+#' @param W_up (d, m).
 #' @param approximate "none" or "tanh".
 #' @return List with `estimate`, `h_adapted`, `bottleneck`.
 #' @export
@@ -3073,7 +3192,8 @@ morie_kamath_houlsby_adapter <- function(h, W_down, W_up,
 #' Adds the -m (i - j) distance bias to the scores and hands the softmax to
 #' `morie_alammar_sdp_attention` -- one attention core, reused.
 #'
-#' @param Q,K,V Attention matrices. @param slopes Non-negative ALiBi slopes.
+#' @param Q,K,V Attention matrices.
+#' @param slopes Non-negative ALiBi slopes.
 #' @param causal Mask the future when TRUE.
 #' @return List with `output`, `attention`, `bias`, `slopes`.
 #' @export
@@ -3104,8 +3224,10 @@ morie_kamath_alibi_bias <- function(Q, K, V, slopes, causal = FALSE) {
 #' score is MAXIMISED, exactly as in Python.
 #'
 #' @param template List of tokens with NULL trigger slots.
-#' @param dataset Passed through to `model`. @param model Loss function.
-#' @param vocab Candidate tokens. @param grad_fn Optional gradient scorer.
+#' @param dataset Passed through to `model`.
+#' @param model Loss function.
+#' @param vocab Candidate tokens.
+#' @param grad_fn Optional gradient scorer.
 #' @param passes Sweeps over the slots.
 #' @return List with `estimate`, `trigger_tokens`, `prompt`, `positions`.
 #' @export
@@ -3159,8 +3281,10 @@ morie_kamath_autoprompt_gradient_search <- function(template, dataset, model,
 #' Generates reverse questions, embeds them, then delegates the cosine mean
 #' to `morie_kamath_ch7_answer_relevance` (km112).
 #'
-#' @param answer Model answer. @param original_question Query (or embedding).
-#' @param model Function answer -> reverse questions. @param embed Optional.
+#' @param answer Model answer.
+#' @param original_question Query (or embedding).
+#' @param model Function answer -> reverse questions.
+#' @param embed Optional.
 #' @return List with `estimate`, `score`, `similarities`.
 #' @export
 morie_kamath_ragas_answer_relevance <- function(answer, original_question,
@@ -3192,7 +3316,8 @@ morie_kamath_ragas_answer_relevance <- function(answer, original_question,
 #'
 #' Relevant context sentences / retrieved sentences, via km111's ratio core.
 #'
-#' @param context_sentences Retrieved sentences. @param relevance_labels 0/1.
+#' @param context_sentences Retrieved sentences.
+#' @param relevance_labels 0/1.
 #' @return List with `estimate`, `score`, `n_relevant`.
 #' @export
 morie_kamath_ragas_context_relevance <- function(context_sentences,
@@ -3214,7 +3339,8 @@ morie_kamath_ragas_context_relevance <- function(context_sentences,
 #' Counts clipped n-grams against the best-matching reference count, then
 #' delegates to km114 (precision), km116 (brevity penalty) and km117 (final).
 #'
-#' @param hypothesis Token vector. @param references List of token vectors.
+#' @param hypothesis Token vector.
+#' @param references List of token vectors.
 #' @param max_n Highest order.
 #' @return List with `estimate`, `p_n`, `brevity_penalty`.
 #' @export
@@ -3263,9 +3389,11 @@ morie_kamath_bleu_score <- function(hypothesis, references, max_n = 4) {
 #'
 #' IDF-weighted saturated term frequency with length normalisation.
 #'
-#' @param q_terms Query terms. @param doc_terms Document terms.
+#' @param q_terms Query terms.
+#' @param doc_terms Document terms.
 #' @param idf Named IDF vector or one value per query term.
-#' @param avgdl Average document length. @param k1,b BM25 parameters.
+#' @param avgdl Average document length.
+#' @param k1,b BM25 parameters.
 #' @return List with `estimate`, `per_term`, `term_frequencies`.
 #' @export
 morie_kamath_bm25_score <- function(q_terms, doc_terms, idf, avgdl,
@@ -3302,8 +3430,10 @@ morie_kamath_bm25_score <- function(q_terms, doc_terms, idf, avgdl,
 #' Pick the highest reward-model score among N samples. `best_index` is
 #' 0-BASED.
 #'
-#' @param samples Candidate responses. @param rewards Optional scores.
-#' @param reward_fn Optional function (x, y). @param x Prompt.
+#' @param samples Candidate responses.
+#' @param rewards Optional scores.
+#' @param reward_fn Optional function (x, y).
+#' @param x Prompt.
 #' @return List with `estimate`, `best`, `best_index`, `reward_spread`.
 #' @export
 morie_kamath_best_of_n_sampling <- function(samples, rewards = NULL,
@@ -3390,7 +3520,8 @@ morie_kamath_bertscore <- function(hypothesis_tokens, reference_tokens,
 #'
 #' Critique then revise once per principle, in order.
 #'
-#' @param initial_response Starting response. @param constitution Principles.
+#' @param initial_response Starting response.
+#' @param constitution Principles.
 #' @param model Function (stage, principle, response, critique).
 #' @return List with `estimate`, `revised_response`, `history`.
 #' @export
@@ -3422,7 +3553,8 @@ morie_kamath_constitutional_ai_loop <- function(initial_response,
 #'
 #' C * tokens / experts, with the drop threshold reported.
 #'
-#' @param tokens_per_batch Token count. @param num_experts Expert count.
+#' @param tokens_per_batch Token count.
+#' @param num_experts Expert count.
 #' @param C Capacity factor.
 #' @return List with `estimate`, `slots`, `total_slots`, `min_dropped`.
 #' @export
@@ -3475,8 +3607,10 @@ morie_kamath_christiano_deep_rl_feedback <- function(trajectory_pairs, r_phi) {
 #'
 #' N = sqrt(C / (6 * 20)), D = 20 N, checked against C = 6 N D.
 #'
-#' @param compute_budget Total FLOPs. @param alpha,beta Exponents summing to 1.
-#' @param tokens_per_param Tokens per parameter. @param flops_per_token_param
+#' @param compute_budget Total FLOPs.
+#' @param alpha,beta Exponents summing to 1.
+#' @param tokens_per_param Tokens per parameter.
+#' @param flops_per_token_param
 #'   FLOPs constant.
 #' @return List with `estimate`, `N_opt`, `D_opt`, `compute_check`.
 #' @export
@@ -3504,8 +3638,10 @@ morie_kamath_chinchilla_compute_optimal <- function(
 #'
 #' Appends the trigger, then splits reasoning from the answer.
 #'
-#' @param prompt Question. @param model Function prompt -> text.
-#' @param trigger Reasoning trigger. @param answer_marker Split marker.
+#' @param prompt Question.
+#' @param model Function prompt -> text.
+#' @param trigger Reasoning trigger.
+#' @param answer_marker Split marker.
 #' @param parser Optional function text -> list(reasoning, answer).
 #' @return List with `estimate`, `answer`, `reasoning`, `generation`.
 #' @export
@@ -3544,7 +3680,9 @@ morie_kamath_chain_of_thought <- function(
 #' Grades the retrieved documents, then keeps them, falls back to the web,
 #' or mixes.
 #'
-#' @param query Query. @param docs Documents. @param clf Confidence function.
+#' @param query Query.
+#' @param docs Documents.
+#' @param clf Confidence function.
 #' @param tau_hi,tau_lo Upper and lower thresholds.
 #' @return List with `estimate`, `action`, `ctx`, `scores`.
 #' @export
@@ -3572,7 +3710,9 @@ morie_kamath_corrective_rag <- function(query, docs, clf, tau_hi, tau_lo) {
 #' Joint (q, d) scoring with a STABLE descending re-order; `ranking` is
 #' 0-BASED.
 #'
-#' @param q Query. @param docs Documents. @param model Scorer.
+#' @param q Query.
+#' @param docs Documents.
+#' @param model Scorer.
 #' @param top_k Optional cut-off.
 #' @return List with `estimate`, `scores`, `ranking`, `reranked`.
 #' @export
@@ -3624,7 +3764,8 @@ morie_kamath_crowspairs_bias <- function(stereo_pll, anti_pll) {
 #' int8 codes for the block scales plus one shared fp32 constant. Rounding
 #' is banker's rounding in both languages.
 #'
-#' @param scales_fp32 Block scales. @param bits Code width in \[2, 16\].
+#' @param scales_fp32 Block scales.
+#' @param bits Code width in \[2, 16\].
 #' @return List with `estimate` (max error), `scales_int8`, `shared_const`.
 #' @export
 morie_kamath_double_quantization <- function(scales_fp32, bits = 8) {
@@ -3650,7 +3791,8 @@ morie_kamath_double_quantization <- function(scales_fp32, bits = 8) {
 #'
 #' Checks P_D <= e^eps P_D' + delta BOTH ways and reports the worst slack.
 #'
-#' @param eps Privacy loss. @param delta Failure probability.
+#' @param eps Privacy loss.
+#' @param delta Failure probability.
 #' @param p_D,p_Dp Event probabilities on the neighbouring datasets.
 #' @return List with `estimate`, `guarantee`, `slack`, `worst_event`.
 #' @export
@@ -3716,7 +3858,9 @@ morie_kamath_dpo_loss <- function(logp_w, logp_l, logp_ref_w, logp_ref_l,
 #'
 #' Bi-encoder dot products with a STABLE top-k; indices are 0-BASED.
 #'
-#' @param q_embed Query embedding. @param p_embeds Passage rows. @param k Depth.
+#' @param q_embed Query embedding.
+#' @param p_embeds Passage rows.
+#' @param k Depth.
 #' @return List with `estimate`, `top_k_indices`, `top_k_scores`, `scores`.
 #' @export
 morie_kamath_dense_passage_retrieval <- function(q_embed, p_embeds, k) {
@@ -3739,7 +3883,8 @@ morie_kamath_dense_passage_retrieval <- function(q_embed, p_embeds, k) {
 #' Heaviside-gated scores plus the above/below jump. A threshold that puts
 #' every model on one side is refused.
 #'
-#' @param scales Model scales. @param scores Benchmark scores.
+#' @param scales Model scales.
+#' @param scores Benchmark scores.
 #' @param threshold Scale threshold.
 #' @return List with `estimate` (the jump), `emergent_score`, `n_above`.
 #' @export
@@ -3763,7 +3908,8 @@ morie_kamath_emergent_abilities <- function(scales, scores, threshold) {
 #'
 #' log2(candidate space) - log2(the canary's rank).
 #'
-#' @param canary_ll Canary log-likelihood. @param candidate_lls Competitors.
+#' @param canary_ll Canary log-likelihood.
+#' @param candidate_lls Competitors.
 #' @return List with `estimate`, `rank`, `max_exposure`.
 #' @export
 morie_kamath_memorization_exposure <- function(canary_ll, candidate_lls) {
@@ -3785,7 +3931,8 @@ morie_kamath_memorization_exposure <- function(canary_ll, candidate_lls) {
 #' Share of atomic claims the knowledge base supports; the ratio core is
 #' km111.
 #'
-#' @param atomic_claims Claims. @param knowledge_base Predicate or vector.
+#' @param atomic_claims Claims.
+#' @param knowledge_base Predicate or vector.
 #' @return List with `estimate`, `supported`, `unsupported`.
 #' @export
 morie_kamath_factscore <- function(atomic_claims, knowledge_base) {
@@ -3809,8 +3956,10 @@ morie_kamath_factscore <- function(atomic_claims, knowledge_base) {
 #' Ranks the exemplar pool by cosine or dot similarity to the query;
 #' `selected` is 0-BASED and the order is STABLE.
 #'
-#' @param D Exemplar embedding rows. @param query_embed Query.
-#' @param K How many to keep. @param metric "cosine" or "dot".
+#' @param D Exemplar embedding rows.
+#' @param query_embed Query.
+#' @param K How many to keep.
+#' @param metric "cosine" or "dot".
 #' @return List with `selected`, `similarities`, `estimate`.
 #' @export
 morie_kamath_few_shot_exemplar_selection <- function(D, query_embed, K,
@@ -3841,7 +3990,8 @@ morie_kamath_few_shot_exemplar_selection <- function(D, query_embed, K,
 #' v_w = sum of the character n-gram vectors of <word>. The boundary-marked
 #' whole word is always a gram.
 #'
-#' @param word Word. @param ngram_embeddings Named list gram -> vector.
+#' @param word Word.
+#' @param ngram_embeddings Named list gram -> vector.
 #' @param n_min,n_max Gram length range.
 #' @return List with `vector`, `ngrams`, `n_known`, `missing`.
 #' @export
@@ -3896,8 +4046,10 @@ morie_kamath_word_ngrams <- function(word, n_min, n_max, boundary = "<>") {
 #'
 #' sum_s s * softmax(judge logits)_s over the rubric.
 #'
-#' @param x,y Source and candidate. @param rubric Score points or a list
-#'   carrying `scores`. @param model Judge returning one logit per point.
+#' @param x,y Source and candidate.
+#' @param rubric Score points or a list
+#'   carrying `scores`.
+#' @param model Judge returning one logit per point.
 #' @return List with `estimate`, `probabilities`, `score_points`.
 #' @export
 morie_kamath_g_eval <- function(x, y, rubric, model) {
@@ -3925,8 +4077,10 @@ morie_kamath_g_eval <- function(x, y, rubric, model) {
 #' sum f(X_ij) (w_i . w~_j + b_i + b~_j - log X_ij)^2 over the NON-ZERO
 #' counts only.
 #'
-#' @param X Co-occurrence counts. @param W,W_tilde Word and context vectors.
-#' @param b,b_tilde Biases. @param x_max,alpha Weighting parameters.
+#' @param X Co-occurrence counts.
+#' @param W,W_tilde Word and context vectors.
+#' @param b,b_tilde Biases.
+#' @param x_max,alpha Weighting parameters.
 #' @return List with `estimate`, `weights`, `residuals`, `n_nonzero`.
 #' @export
 morie_kamath_glove_cost <- function(X, W, W_tilde, b, b_tilde, x_max = 100,
@@ -3970,7 +4124,8 @@ morie_kamath_glove_weight <- function(x, x_max, alpha) {
 #'
 #' |answer tokens present in the context| / |answer tokens|.
 #'
-#' @param y_tokens Answer tokens. @param ctx_tokens Context tokens.
+#' @param y_tokens Answer tokens.
+#' @param ctx_tokens Context tokens.
 #' @param lowercase Case-fold before matching.
 #' @return List with `estimate`, `n_grounded`, `ungrounded`.
 #' @export
@@ -3991,7 +4146,8 @@ morie_kamath_groundedness_reward <- function(y_tokens, ctx_tokens,
 #'
 #' lam * dense + (1 - lam) * sparse, ranked; `ranking` is 0-BASED.
 #'
-#' @param s_dense,s_sparse Arm scores. @param lam Mixing weight in \[0, 1\].
+#' @param s_dense,s_sparse Arm scores.
+#' @param lam Mixing weight in \[0, 1\].
 #' @param normalize Min-max the arms first.
 #' @return List with `scores`, `ranking`, `estimate`.
 #' @export
@@ -4022,9 +4178,11 @@ morie_kamath_hybrid_retrieval_fusion <- function(s_dense, s_sparse, lam,
 #'
 #' Embeds the model's fake answer and retrieves the top-k by cosine.
 #'
-#' @param query Query. @param model Function query -> hypothetical text.
+#' @param query Query.
+#' @param model Function query -> hypothetical text.
 #' @param embeddings Named list or matrix of document embeddings.
-#' @param embed Optional text embedder. @param k Depth.
+#' @param embed Optional text embedder.
+#' @param k Depth.
 #' @return List with `retrieved`, `similarities`, `hypothetical`, `estimate`.
 #' @export
 morie_kamath_hyde_hypothetical_doc <- function(query, model, embeddings,
@@ -4065,8 +4223,10 @@ morie_kamath_hyde_hypothetical_doc <- function(query, model, embeddings,
 #'
 #' P(y | \[ex_1..ex_K, x\]) from a caller-supplied LM.
 #'
-#' @param demonstrations Exemplar strings. @param query Test input.
-#' @param model Function (prompt, answer) -> probability. @param answer Target.
+#' @param demonstrations Exemplar strings.
+#' @param query Test input.
+#' @param model Function (prompt, answer) -> probability.
+#' @param answer Target.
 #' @param sep Separator.
 #' @return List with `estimate`, `log_prob`, `prompt`, `K`.
 #' @export
@@ -4090,7 +4250,8 @@ morie_kamath_in_context_learning_prob <- function(demonstrations, query,
 #'
 #' Causal-LM cross entropy with the instruction masked out (-100).
 #'
-#' @param logits (T, V) logits. @param response_mask Logical or 0/1 mask.
+#' @param logits (T, V) logits.
+#' @param response_mask Logical or 0/1 mask.
 #' @param targets Token ids (0-BASED).
 #' @return List with `estimate`, `perplexity`, `n_response_tokens`.
 #' @export
@@ -4120,7 +4281,8 @@ morie_kamath_instruction_tuning_loss <- function(logits, response_mask,
 #' Symmetric InfoNCE over cosine(I, T) / tau; the batch must hold at least
 #' two pairs.
 #'
-#' @param I_emb,T_emb Tower outputs. @param tau Temperature.
+#' @param I_emb,T_emb Tower outputs.
+#' @param tau Temperature.
 #' @return List with `estimate`, `loss_i2t`, `loss_t2i`, `similarity`.
 #' @export
 morie_kamath_image_text_contrastive <- function(I_emb, T_emb, tau) {
@@ -4147,7 +4309,9 @@ morie_kamath_image_text_contrastive <- function(I_emb, T_emb, tau) {
 #'
 #' p = sigmoid(w . \[I; T\] + b), or a caller-supplied fusion.
 #'
-#' @param image_emb,text_emb Embeddings. @param W Head weights. @param b Bias.
+#' @param image_emb,text_emb Embeddings.
+#' @param W Head weights.
+#' @param b Bias.
 #' @param fuse Optional fusion function.
 #' @return List with `estimate`, `logit`, `match`, `fused`.
 #' @export
@@ -4175,7 +4339,8 @@ morie_kamath_image_text_matching <- function(image_emb, text_emb, W, b,
 #'
 #' r_phi - beta * KL; a negative KL or a negative beta is refused.
 #'
-#' @param r_phi Rewards. @param kl_divergence KL values (scalar broadcasts).
+#' @param r_phi Rewards.
+#' @param kl_divergence KL values (scalar broadcasts).
 #' @param beta Non-negative weight.
 #' @return List with `shaped`, `estimate`, `mean_kl`, `penalty`.
 #' @export
@@ -4199,8 +4364,11 @@ morie_kamath_kl_reward_shaping <- function(r_phi, kl_divergence, beta) {
 #'
 #' alpha * N * sum f_i P_i; equals alpha under perfect balance.
 #'
-#' @param fractions Dispatch fractions. @param gate_means Mean router probs.
-#' @param N Expert count. @param alpha Weight. @param tol Sum tolerance.
+#' @param fractions Dispatch fractions.
+#' @param gate_means Mean router probs.
+#' @param N Expert count.
+#' @param alpha Weight.
+#' @param tol Sum tolerance.
 #' @return List with `estimate`, `per_expert`, `imbalance_ratio`.
 #' @export
 morie_kamath_moe_load_balance_loss <- function(fractions, gate_means, N,
@@ -4230,8 +4398,12 @@ morie_kamath_moe_load_balance_loss <- function(fractions, gate_means, N,
 #' h = W0 x + (alpha/r) B A x. km058's Eq 4.5 has no scaling; this named
 #' module carries the implementation's alpha/r, so the two stay separate.
 #'
-#' @param W0 Frozen weight. @param A (r, k). @param B (d, r).
-#' @param alpha Scale numerator. @param r Rank. @param x Input.
+#' @param W0 Frozen weight.
+#' @param A (r, k).
+#' @param B (d, r).
+#' @param alpha Scale numerator.
+#' @param r Rank.
+#' @param x Input.
 #' @return List with `h`, `base`, `delta`, `scaling`, `n_trainable`.
 #' @export
 morie_kamath_lora_weight_update <- function(W0, A, B, alpha, r, x) {
@@ -4257,10 +4429,13 @@ morie_kamath_lora_weight_update <- function(W0, A, B, alpha, r, x) {
 #' \[W ViT(image); text\] soft tokens; with `lm_head` and `targets` the causal
 #' cross entropy is added. `targets` are 0-BASED with -100 ignored.
 #'
-#' @param image Image. @param W Projection (d, d_v).
+#' @param image Image.
+#' @param W Projection (d, d_v).
 #' @param visual_encoder Function image -> (n_patches, d_v).
-#' @param text_tokens Text embedding rows. @param lm_head Optional head.
-#' @param targets Optional target ids. @param ignore_index Ignored id.
+#' @param text_tokens Text embedding rows.
+#' @param lm_head Optional head.
+#' @param targets Optional target ids.
+#' @param ignore_index Ignored id.
 #' @return List with `visual_tokens`, `inputs`, optionally `loss`.
 #' @export
 morie_kamath_llava_visual_instruction <- function(image, W, visual_encoder,
@@ -4354,10 +4529,13 @@ morie_kamath_multimodal_mae <- function(x_visible, x_masked_true, masks,
 
 #' Mamba selective SSM scan (Kamath Ch 2)
 #'
-#' h_t = exp(dt A) h_{t-1} + dt B x_t; y_t = C . h_t, with a DIAGONAL A.
+#' h_t = exp(dt A) `h_{t-1}` + dt B x_t; y_t = C . h_t, with a DIAGONAL A.
 #'
-#' @param x Input sequence. @param A State diagonal. @param B,C Per-step
-#'   projections. @param delta Step sizes.
+#' @param x Input sequence.
+#' @param A State diagonal.
+#' @param B,C Per-step
+#'   projections.
+#' @param delta Step sizes.
 #' @return List with `y`, `states`, `A_bar`, `estimate`.
 #' @export
 morie_kamath_mamba_ssm <- function(x, A, B, C, delta) {
@@ -4401,7 +4579,8 @@ morie_kamath_mamba_ssm <- function(x, A, B, C, delta) {
 #'
 #' Predict member iff loss < tau; with labels, TPR / FPR / advantage follow.
 #'
-#' @param losses Per-example losses. @param threshold Cut-off.
+#' @param losses Per-example losses.
+#' @param threshold Cut-off.
 #' @param labels Optional 0/1 membership truth.
 #' @return List with `predictions`, `member_rate`, optionally `accuracy`.
 #' @export
@@ -4437,8 +4616,10 @@ morie_kamath_membership_inference <- function(losses, threshold,
 #' k heads produce k future tokens (0-BASED ids); with `verify` the run of
 #' accepted tokens is counted and reported as the estimate.
 #'
-#' @param hidden_state Hidden vector. @param medusa_heads Matrices or functions.
-#' @param k Heads used. @param verify Optional (position, token) -> logical.
+#' @param hidden_state Hidden vector.
+#' @param medusa_heads Matrices or functions.
+#' @param k Heads used.
+#' @param verify Optional (position, token) -> logical.
 #' @return List with `tokens`, `probabilities`, `accepted`.
 #' @export
 morie_kamath_medusa_heads <- function(hidden_state, medusa_heads, k,
@@ -4487,7 +4668,9 @@ morie_kamath_medusa_heads <- function(hidden_state, medusa_heads, k,
 #' Delegates to `morie_kamath_moe_topk_gating` (km040) and
 #' `morie_kamath_moe_output` (km039); unselected experts are never run.
 #'
-#' @param x Token. @param Wr Router projection. @param experts Expert list.
+#' @param x Token.
+#' @param Wr Router projection.
+#' @param experts Expert list.
 #' @param k Experts kept.
 #' @return List with `output`, `gate_weights`, `selected_experts` (0-based).
 #' @export
@@ -4511,7 +4694,8 @@ morie_kamath_moe_router_softmax <- function(x, Wr, experts, k) {
 #'
 #' @param hypothesis_embeddings,reference_embeddings Token embedding rows.
 #' @param weights_h,weights_r Optional weights (normalised to sum to 1).
-#' @param metric "euclidean" or "cosine". @param normalizer Optional divisor.
+#' @param metric "euclidean" or "cosine".
+#' @param normalizer Optional divisor.
 #' @return List with `estimate`, `wmd`, `normalizer`.
 #' @export
 morie_kamath_moverscore <- function(hypothesis_embeddings,
@@ -4556,7 +4740,9 @@ morie_kamath_moverscore <- function(hypothesis_embeddings,
 }
 
 #' @rdname morie_kamath_moverscore
-#' @param cost Cost matrix. @param p,q Marginals. @param max_iter Guard.
+#' @param cost Cost matrix.
+#' @param p,q Marginals.
+#' @param max_iter Guard.
 #' @export
 morie_kamath_word_movers_distance <- function(cost, p, q, max_iter = 10000) {
   C <- as.matrix(cost)
@@ -4613,7 +4799,9 @@ morie_kamath_ngram_language_model <- function(counts_ngram, counts_prefix) {
 #' Temperature-scaled softmax truncated to the smallest set with cumulative
 #' mass >= p, then renormalised. `kept` is 0-BASED.
 #'
-#' @param logits Logits. @param p Nucleus mass in (0, 1\]. @param T Temperature.
+#' @param logits Logits.
+#' @param p Nucleus mass in (0, 1\].
+#' @param T Temperature.
 #' @return List with `probabilities`, `kept`, `n_kept`, `kept_mass`.
 #' @export
 morie_kamath_nucleus_sampling <- function(logits, p, T = 1) {
@@ -4639,8 +4827,10 @@ morie_kamath_nucleus_sampling <- function(logits, p, T = 1) {
 #' encoders -> llm -> decoders, with every contract checked. No input may be
 #' silently dropped.
 #'
-#' @param inputs_by_modality Named list of inputs. @param encoders Named list.
-#' @param llm Function features -> state. @param decoders Named list.
+#' @param inputs_by_modality Named list of inputs.
+#' @param encoders Named list.
+#' @param llm Function features -> state.
+#' @param decoders Named list.
 #' @param output_modalities Optional subset.
 #' @return List with `outputs`, `features`, `llm_state`.
 #' @export
@@ -4726,7 +4916,8 @@ morie_kamath_p_tuning_v2 <- function(prefixes_by_layer, inputs_by_layer) {
 #' exp(-mean log p); positive log-probabilities are refused because they are
 #' probabilities or logits, not natural logs.
 #'
-#' @param log_probs Log-probabilities (<= 0). @param base "e" or "2".
+#' @param log_probs Log-probabilities (<= 0).
+#' @param base "e" or "2".
 #' @return List with `estimate`, `mean_nll`, `bits_per_token`.
 #' @export
 morie_kamath_perplexity <- function(log_probs, base = "e") {
@@ -4748,9 +4939,12 @@ morie_kamath_perplexity <- function(log_probs, base = "e") {
 #'
 #' Verbalizer cross entropy + alpha * the km022 MLM loss.
 #'
-#' @param verbalizer_logits Class logits. @param y_true 0-BASED true class.
-#' @param mlm_logits (T, V) logits. @param mlm_targets Ids, -100 ignored.
-#' @param alpha Non-negative weight. @param ignore_index Ignored id.
+#' @param verbalizer_logits Class logits.
+#' @param y_true 0-BASED true class.
+#' @param mlm_logits (T, V) logits.
+#' @param mlm_targets Ids, -100 ignored.
+#' @param alpha Non-negative weight.
+#' @param ignore_index Ignored id.
 #' @return List with `estimate`, `loss_ce`, `loss_mlm`, `n_masked`.
 #' @export
 morie_kamath_pet_loss <- function(verbalizer_logits, y_true, mlm_logits,
@@ -4791,7 +4985,8 @@ morie_kamath_pet_loss <- function(verbalizer_logits, y_true, mlm_logits,
 #' `morie_kamath_pre_ln_transformer` (LN before the sublayer). The variance
 #' is the POPULATION variance, matching numpy's `var`.
 #'
-#' @param x Input rows. @param attn_fn,ffn_fn Shape-preserving sublayers.
+#' @param x Input rows.
+#' @param attn_fn,ffn_fn Shape-preserving sublayers.
 #' @param eps LayerNorm epsilon.
 #' @return List with `output`, `after_attention`, `placement`.
 #' @export
@@ -4845,7 +5040,8 @@ morie_kamath_layer_norm_rows <- function(x, eps = 1e-5) {
 #'
 #' mean(r - beta (log pi_theta - log pi_ref)).
 #'
-#' @param rewards Rewards. @param logp_theta,logp_ref Log-probabilities (<= 0).
+#' @param rewards Rewards.
+#' @param logp_theta,logp_ref Log-probabilities (<= 0).
 #' @param beta Non-negative weight.
 #' @return List with `estimate`, `mean_reward`, `kl_estimate`, `per_sample`.
 #' @export
@@ -4874,7 +5070,8 @@ morie_kamath_ppo_rlhf_objective <- function(rewards, logp_theta, logp_ref,
 #' `morie_alammar_sdp_attention`.
 #'
 #' @param prefix_K,prefix_V Virtual key/value tokens.
-#' @param K_input,V_input Real keys and values. @param Q Optional queries.
+#' @param K_input,V_input Real keys and values.
+#' @param Q Optional queries.
 #' @return List with `K`, `V`, `prefix_len`, `n_trainable`.
 #' @export
 morie_kamath_prefix_tuning <- function(prefix_K, prefix_V, K_input, V_input,
@@ -4909,7 +5106,8 @@ morie_kamath_prefix_tuning <- function(prefix_K, prefix_V, K_input, V_input,
 #'
 #' X_aug = \[P; X\]; only the L_p x d prompt is trained.
 #'
-#' @param P Soft prompt rows. @param X Input embedding rows.
+#' @param P Soft prompt rows.
+#' @param X Input embedding rows.
 #' @return List with `X_aug`, `prompt_len`, `n_trainable`.
 #' @export
 morie_kamath_prompt_tuning <- function(P, X) {
@@ -4930,7 +5128,8 @@ morie_kamath_prompt_tuning <- function(P, X) {
 #' Learned queries attend to the visual patches through
 #' `morie_alammar_sdp_attention`, with an optional output projection.
 #'
-#' @param queries Query rows. @param visual_features Patch rows.
+#' @param queries Query rows.
+#' @param visual_features Patch rows.
 #' @param W_out Optional projection.
 #' @return List with `Z`, `attention`, `compression`.
 #' @export
@@ -4959,8 +5158,11 @@ morie_kamath_q_former <- function(queries, visual_features, W_out = NULL) {
 #' The NF4 grid dequantises W0, then `morie_kamath_lora_weight_update` adds
 #' (alpha/r) B A x. Codes are 0-BASED indices into the grid.
 #'
-#' @param W0_nf4 List with `codes` and `absmax`. @param A,B LoRA factors.
-#' @param alpha,r Scaling. @param x Input. @param n_bins Grid size.
+#' @param W0_nf4 List with `codes` and `absmax`.
+#' @param A,B LoRA factors.
+#' @param alpha,r Scaling.
+#' @param x Input.
+#' @param n_bins Grid size.
 #' @return List with `h`, `W0_dequantized`, `n_frozen_4bit`.
 #' @export
 morie_kamath_qlora_4bit <- function(W0_nf4, A, B, alpha, r, x, n_bins = 16) {
@@ -4979,7 +5181,8 @@ morie_kamath_qlora_4bit <- function(W0_nf4, A, B, alpha, r, x, n_bins = 16) {
 }
 
 #' @rdname morie_kamath_qlora_4bit
-#' @param codes 0-based NF4 codes. @param absmax Scalar or per-row scale.
+#' @param codes 0-based NF4 codes.
+#' @param absmax Scalar or per-row scale.
 #' @export
 morie_kamath_dequantize_nf4 <- function(codes, absmax, n_bins = 16) {
   codes <- as.matrix(codes)
@@ -5006,7 +5209,8 @@ morie_kamath_dequantize_nf4 <- function(codes, absmax, n_bins = 16) {
 #' ((Q K^T) .* gamma^(i-j) causal) V, with the recurrent form returned
 #' alongside as the equality check the parallel form must satisfy.
 #'
-#' @param Q,K,V Sequence matrices. @param gamma Decay in (0, 1\].
+#' @param Q,K,V Sequence matrices.
+#' @param gamma Decay in (0, 1\].
 #' @return List with `output`, `decay`, `recurrent_output`.
 #' @export
 morie_kamath_retnet_retention <- function(Q, K, V, gamma) {
@@ -5038,8 +5242,10 @@ morie_kamath_retnet_retention <- function(Q, K, V, gamma) {
 #'
 #' The KL reference is the SFT policy, and that identity is reported.
 #'
-#' @param demos Demonstrations. @param preferences Preference pairs.
-#' @param pi0 Base policy. @param sft,train_rm,ppo Stage functions.
+#' @param demos Demonstrations.
+#' @param preferences Preference pairs.
+#' @param pi0 Base policy.
+#' @param sft,train_rm,ppo Stage functions.
 #' @return List with `policy`, `policy_sft`, `reward_model`, `stages`.
 #' @export
 morie_kamath_rlhf_pipeline <- function(demos, preferences, pi0, sft = NULL,
@@ -5165,7 +5371,9 @@ morie_kamath_reward_model_training_loss <- function(scores_w, scores_l) {
 #'
 #' x / sqrt(mean(x^2) + eps) * g; no mean subtraction, no bias.
 #'
-#' @param x Input rows. @param g Optional gain. @param eps Epsilon.
+#' @param x Input rows.
+#' @param g Optional gain.
+#' @param eps Epsilon.
 #' @return List with `y`, `tensor`, `rms`.
 #' @export
 morie_kamath_rms_norm <- function(x, g = NULL, eps = 1e-6) {
@@ -5193,7 +5401,8 @@ morie_kamath_rms_norm <- function(x, g = NULL, eps = 1e-6) {
 #'
 #' Rotates feature PAIRS by m * base^(-2i/d) at explicit positions.
 #'
-#' @param q (d,) or (seq_len, d) input. @param positions Optional positions.
+#' @param q (d,) or (seq_len, d) input.
+#' @param positions Optional positions.
 #' @param base RoPE base.
 #' @return List with `y`, `angles`, `theta`, `positions`.
 #' @export
@@ -5265,7 +5474,8 @@ morie_kamath_rouge_n <- function(hypothesis, reference, n = 1) {
 #' sum_r 1/(k + rank_r(d)); documents missing from a list simply score
 #' nothing there. Ties break on the document label.
 #'
-#' @param rankings List of ranked id vectors. @param k Damping constant.
+#' @param rankings List of ranked id vectors.
+#' @param k Damping constant.
 #' @return List with `ranking`, `scores`, `appearances`.
 #' @export
 morie_kamath_reciprocal_rank_fusion <- function(rankings, k = 60) {
@@ -5299,8 +5509,10 @@ morie_kamath_reciprocal_rank_fusion <- function(rankings, k = 60) {
 #'
 #' Per-prompt top-k by reward (STABLE ties), retained in original order.
 #'
-#' @param prompts Prompts. @param samples Per-prompt sample lists.
-#' @param rewards Per-prompt reward lists. @param k Kept per prompt.
+#' @param prompts Prompts.
+#' @param samples Per-prompt sample lists.
+#' @param rewards Per-prompt reward lists.
+#' @param k Kept per prompt.
 #' @param sft Optional trainer over the retained pairs.
 #' @return List with `retained`, `retained_rewards`, `n_dropped`.
 #' @export
@@ -5347,7 +5559,8 @@ morie_kamath_rejection_sampling_finetune <- function(prompts, samples,
 #' Decayed normalised value average, computed in log space so long decays
 #' never overflow.
 #'
-#' @param k,v Key and value sequences. @param w Decay (non-negative).
+#' @param k,v Key and value sequences.
+#' @param w Decay (non-negative).
 #' @param u Current-token bonus.
 #' @return List with `wkv`, `estimate`.
 #' @export
@@ -5385,7 +5598,8 @@ morie_kamath_rwkv_time_mix <- function(k, v, w, u = 0) {
 #' Mode of the parsed answers; ties are reported and broken by first
 #' appearance, exactly as in Python.
 #'
-#' @param samples Sampled traces. @param parse Optional answer extractor.
+#' @param samples Sampled traces.
+#' @param parse Optional answer extractor.
 #' @return List with `answer`, `votes`, `agreement`, `tie`.
 #' @export
 morie_kamath_self_consistency <- function(samples, parse = NULL) {
@@ -5418,7 +5632,9 @@ morie_kamath_self_consistency <- function(samples, parse = NULL) {
 #'
 #' L(N) = (N_c/N)^alpha + L_inf, with the reducible part reported.
 #'
-#' @param N Model scale(s). @param N_c Critical scale. @param alpha_N Exponent.
+#' @param N Model scale(s).
+#' @param N_c Critical scale.
+#' @param alpha_N Exponent.
 #' @param L_inf Irreducible loss.
 #' @return List with `estimate`, `reducible`, `irreducible`.
 #' @export
@@ -5490,7 +5706,8 @@ morie_kamath_scaling_laws <- function(N, N_c, alpha_N, L_inf = 0) {
 #' Forward-backward expected counts over every segmentation, then Viterbi
 #' segmentations at the fitted piece probabilities.
 #'
-#' @param corpus Character vector. @param vocab Candidate pieces.
+#' @param corpus Character vector.
+#' @param vocab Candidate pieces.
 #' @param max_iter,tol EM controls.
 #' @return List with `probs`, `log_likelihood`, `segmentations`.
 #' @export
@@ -5591,9 +5808,12 @@ morie_kamath_viterbi_segment <- function(text, probs) {
 #' Seed vocabulary, EM through `morie_kamath_unigram_lm_tokenizer`, then
 #' prune by the EXACT likelihood loss of dropping each multi-character piece.
 #'
-#' @param corpus Character vector. @param vocab_size Target size.
-#' @param max_piece_len Longest seed piece. @param seed_multiplier Seed factor.
-#' @param shrink Fraction retained per prune round. @param max_iter EM cap.
+#' @param corpus Character vector.
+#' @param vocab_size Target size.
+#' @param max_piece_len Longest seed piece.
+#' @param seed_multiplier Seed factor.
+#' @param shrink Fraction retained per prune round.
+#' @param max_iter EM cap.
 #' @return List with `vocab`, `probs`, `log_likelihood`, `n_prune_rounds`.
 #' @export
 morie_kamath_sentencepiece_tokenizer <- function(corpus, vocab_size,
@@ -5674,7 +5894,8 @@ morie_kamath_sentencepiece_tokenizer <- function(corpus, vocab_size,
 #' 0-BASED token id.
 #'
 #' @param draft_probs,target_probs Distributions over one vocabulary.
-#' @param proposed Optional 0-based proposal. @param u Optional uniform draw.
+#' @param proposed Optional 0-based proposal.
+#' @param u Optional uniform draw.
 #' @return List with `estimate`, `accept_prob`, `residual`, `rejection_rate`.
 #' @export
 morie_kamath_speculative_decoding <- function(draft_probs, target_probs,
@@ -5724,8 +5945,10 @@ morie_kamath_speculative_decoding <- function(draft_probs, target_probs,
 #' SAME linear congruential generator Python uses (`.morie_al_lcg`), so a
 #' given seed reproduces the Python output draw for draw.
 #'
-#' @param tokens Token vector. @param mean_span_len Mean span length.
-#' @param corruption_rate Fraction masked. @param seed LCG seed.
+#' @param tokens Token vector.
+#' @param mean_span_len Mean span length.
+#' @param corruption_rate Fraction masked.
+#' @param seed LCG seed.
 #' @param sentinel Sentinel template containing `%d`-style `{}`.
 #' @return List with `input`, `target`, `spans`, `n_masked`, `n_spans`.
 #' @export
@@ -5792,7 +6015,8 @@ morie_kamath_t5_span_corruption <- function(tokens, mean_span_len = 3,
 #' A CLOSED reflection vocabulary; an unknown or contradictory token is
 #' refused rather than ignored.
 #'
-#' @param context Retrieved context. @param reflection_model Token emitter.
+#' @param context Retrieved context.
+#' @param reflection_model Token emitter.
 #' @param question Optional question.
 #' @return List with `tokens`, `by_group`, `retrieve`, `utility`.
 #' @export
@@ -5845,8 +6069,10 @@ morie_kamath_self_rag <- function(context, reflection_model, question = NULL) {
 #' The LLM abstracts the query; contexts from both queries are unioned with
 #' the abstract query's documents FIRST and duplicates dropped.
 #'
-#' @param query Question. @param model Abstraction function.
-#' @param retrieve Optional retriever. @param answer Optional answerer.
+#' @param query Question.
+#' @param model Abstraction function.
+#' @param retrieve Optional retriever.
+#' @param answer Optional answerer.
 #' @return List with `step_back_query`, `context`, `stepped_back`.
 #' @export
 morie_kamath_step_back_prompting <- function(query, model, retrieve = NULL,
@@ -5892,7 +6118,8 @@ morie_kamath_step_back_prompting <- function(query, model, retrieve = NULL,
 #' with `morie_kamath_ppo_rlhf_objective` on the policy batch.
 #'
 #' @param preferences List of (score_chosen, score_rejected).
-#' @param rewards,pi_logprobs,ref_logprobs PPO batch. @param beta KL weight.
+#' @param rewards,pi_logprobs,ref_logprobs PPO batch.
+#' @param beta KL weight.
 #' @return List with `loss_rm`, `rm_accuracy`, `objective`, `kl_estimate`.
 #' @export
 morie_kamath_summarize_from_feedback <- function(preferences, rewards,
@@ -5949,7 +6176,9 @@ morie_kamath_stereoset_bias <- function(stereo_probs, anti_probs) {
 #'
 #' Swish(xW + b) gates (xV + c) elementwise.
 #'
-#' @param x Input. @param W,V Equal-shaped projections. @param b,c Biases.
+#' @param x Input.
+#' @param W,V Equal-shaped projections.
+#' @param b,c Biases.
 #' @return List with `output`, `gate`, `linear`.
 #' @export
 morie_kamath_swiglu_activation <- function(x, W, V, b = NULL, c = NULL) {
@@ -5978,7 +6207,8 @@ morie_kamath_swiglu_activation <- function(x, W, V, b = NULL, c = NULL) {
 }
 
 #' @rdname morie_kamath_swiglu_activation
-#' @param z Pre-activation. @param beta Swish sharpness.
+#' @param z Pre-activation.
+#' @param beta Swish sharpness.
 #' @export
 morie_kamath_swish <- function(z, beta = 1) {
   z <- as.numeric(z)
@@ -5990,7 +6220,8 @@ morie_kamath_swish <- function(z, beta = 1) {
 #'
 #' softmax(z / T), max-shifted; T <= 0 is greedy decoding and is refused.
 #'
-#' @param logits Logits. @param T Temperature.
+#' @param logits Logits.
+#' @param T Temperature.
 #' @return List with `probabilities`, `entropy`, `max_entropy`, `argmax`.
 #' @export
 morie_kamath_temperature_sampling <- function(logits, T) {
@@ -6011,7 +6242,8 @@ morie_kamath_temperature_sampling <- function(logits, T) {
 #' Keeps the top-k gates and renormalises them -- NOT a masked softmax.
 #' `selected_experts` is 0-BASED and sorted.
 #'
-#' @param gates Non-negative gate scores. @param k Experts kept.
+#' @param gates Non-negative gate scores.
+#' @param k Experts kept.
 #' @return List with `weights`, `selected_experts`, `kept_mass`.
 #' @export
 morie_kamath_moe_top_k_gating <- function(gates, k) {
@@ -6036,9 +6268,12 @@ morie_kamath_moe_top_k_gating <- function(gates, k) {
 #'
 #' Beam search over model-scored thoughts; path scores accumulate.
 #'
-#' @param problem Root state. @param branch_factor Children per node.
-#' @param max_depth Depth. @param model Function (state, b) -> list of
-#'   list(thought, score). @param beam Beam width.
+#' @param problem Root state.
+#' @param branch_factor Children per node.
+#' @param max_depth Depth.
+#' @param model Function (state, b) -> list of
+#'   list(thought, score).
+#' @param beam Beam width.
 #' @return List with `best_state`, `best_path`, `best_score`, `frontier`.
 #' @export
 morie_kamath_tree_of_thoughts <- function(problem, branch_factor, max_depth,
@@ -6090,7 +6325,9 @@ morie_kamath_tree_of_thoughts <- function(problem, branch_factor, max_depth,
 #' Accepts a bare probability, a named list carrying `toxic`, or a
 #' (p_benign, p_toxic) pair validated to sum to 1.
 #'
-#' @param text Text. @param classifier Classifier. @param threshold Cut-off.
+#' @param text Text.
+#' @param classifier Classifier.
+#' @param threshold Cut-off.
 #' @return List with `estimate`, `toxic`, `threshold`.
 #' @export
 morie_kamath_toxigen_score <- function(text, classifier, threshold = 0.5) {
@@ -6121,8 +6358,10 @@ morie_kamath_toxigen_score <- function(text, classifier, threshold = 0.5) {
 #' h = W0 x + Lambda_b B Lambda_d A x; only the two diagonals train, A and B
 #' stay frozen and shared.
 #'
-#' @param W0 Frozen weight. @param A_frozen,B_frozen Shared factors.
-#' @param lam_b,lam_d Trainable diagonals. @param x Input.
+#' @param W0 Frozen weight.
+#' @param A_frozen,B_frozen Shared factors.
+#' @param lam_b,lam_d Trainable diagonals.
+#' @param x Input.
 #' @return List with `h`, `delta`, `rank`, `n_trainable`.
 #' @export
 morie_kamath_vera_adapter <- function(W0, A_frozen, B_frozen, lam_b, lam_d,
@@ -6150,7 +6389,8 @@ morie_kamath_vera_adapter <- function(W0, A_frozen, B_frozen, lam_b, lam_d,
 #' Sums the softmax mass of each class's answer tokens; the leftover mass is
 #' reported rather than hidden, and a token may verbalise only one class.
 #'
-#' @param logits Vocabulary logits. @param vocab Token vector.
+#' @param logits Vocabulary logits.
+#' @param vocab Token vector.
 #' @param verbalizer_map Named list class -> answer tokens.
 #' @return List with `probabilities`, `normalized`, `prediction`.
 #' @export
@@ -6231,7 +6471,8 @@ morie_kamath_word2vec_skipgram <- function(center_indices, context_indices,
 #' and new frequencies are blended linearly across the given band.
 #'
 #' @param theta RoPE base (scalar) or the d/2 frequencies.
-#' @param scale Context multiplier. @param d Embedding width (even).
+#' @param scale Context multiplier.
+#' @param d Embedding width (even).
 #' @param ramp Optional (lo, hi) blend band.
 #' @return List with `theta`, `theta_new`, `scale_factors`.
 #' @export
@@ -6278,7 +6519,8 @@ morie_kamath_yarn_context_extrapolation <- function(theta, scale, d,
 #' Mirrors morie.fn.km110 (ported by the lead; the agent shard missed
 #' this module and kmfait).
 #'
-#' @param r 1-based rank(s). @param k Damping constant.
+#' @param r 1-based rank(s).
+#' @param k Damping constant.
 #' @export
 morie_kamath_rrf_score <- function(r, k = 60) {
   r <- as.numeric(r)
@@ -6310,7 +6552,8 @@ morie_kamath_rrf_score <- function(r, k = 60) {
 #' context) -- under-reports rather than hallucinating support, and
 #' the judge used is named in the payload. Mirrors morie.fn.kmfait.
 #'
-#' @param answer Claims. @param context Retrieved passage(s).
+#' @param answer Claims.
+#' @param context Retrieved passage(s).
 #' @param entails Optional judge.
 #' @export
 morie_kamath_ragas_faithfulness <- function(answer, context,

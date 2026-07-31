@@ -413,9 +413,12 @@ morie_geron_self_supervised <- function(X, pretext = "mask", noise = 0.1, seed =
 #' theta = (X_l'X_l + alpha X_u'LX_u)^-1 X_l'y_l, with L = D - W the
 #' graph Laplacian of the RBF affinity on the unlabeled pool.
 #'
-#' @param X_l Labeled inputs (n_l, d). @param y_l Labels, length n_l.
-#' @param X_u Unlabeled pool (n_u, d). @param alpha Smoothness weight (>=0).
-#' @param gamma RBF width (>0). @param fit_intercept Prepend intercept column.
+#' @param X_l Labeled inputs (n_l, d).
+#' @param y_l Labels, length n_l.
+#' @param X_u Unlabeled pool (n_u, d).
+#' @param alpha Smoothness weight (>=0).
+#' @param gamma RBF width (>0).
+#' @param fit_intercept Prepend intercept column.
 #' @return list with theta, fitted, unlabeled_pred, sup_loss, roughness,
 #'   objective, laplacian, affinity, alpha, estimate, n, method.
 #' @export
@@ -714,7 +717,8 @@ morie_geron_sft <- function(model = NULL, instruction_data, epochs = 200, lr = 0
 #' b += lr*y_i; satisfied -> w -= lr*alpha*w. Sample order drawn from a
 #' deterministic LCG Fisher-Yates shuffle.
 #'
-#' @param X Design matrix (n, d). @param y Binary labels (2 distinct values).
+#' @param X Design matrix (n, d).
+#' @param y Binary labels (2 distinct values).
 #' @param lr,n_iter,alpha,seed,shuffle As in the Python original.
 #' @return list with w, b, loss_curve, decision, predicted, accuracy, n_support,
 #'   classes, estimate, n, method.
@@ -783,7 +787,8 @@ morie_geron_sgd_classifier <- function(X, y, lr = 0.1, n_iter = 10, alpha = 0.00
 #' cluster (self excluded), b(i) smallest mean distance to any other
 #' cluster. Singleton clusters score 0 by convention.
 #'
-#' @param X Data (n, d), n >= 2. @param labels Cluster assignment per row.
+#' @param X Data (n, d), n >= 2.
+#' @param labels Cluster assignment per row.
 #' @param metric "euclidean" or "manhattan".
 #' @return list with silhouette, samples, a, b, cluster_means, n_clusters, estimate, n, method.
 #' @export
@@ -864,9 +869,12 @@ morie_geron_silhouette <- function(X, labels, metric = "euclidean") {
 #' its centroid, labels that representative from the nearest labeled
 #' point, and propagates the label to every cluster member.
 #'
-#' @param X Unlabeled pool (n, d). @param X_labeled Labeled instances (m, d).
-#' @param y_labeled Their labels, length m. @param n_clusters Labeling budget.
-#' @param seed LCG seed. @param y_true Optional gold labels to score against.
+#' @param X Unlabeled pool (n, d).
+#' @param X_labeled Labeled instances (m, d).
+#' @param y_labeled Their labels, length m.
+#' @param n_clusters Labeling budget.
+#' @param seed LCG seed.
+#' @param y_true Optional gold labels to score against.
 #' @return list with labels, cluster, centers, representatives, representative_labels,
 #'   accuracy, estimate, n, method.
 #' @export
@@ -908,7 +916,8 @@ morie_geron_semisupervised_cluster <- function(X, X_labeled, y_labeled, n_cluste
 #' Meta-learner trained on out-of-fold base predictions (K-fold
 #' cross-prediction) to avoid the leakage of in-sample base predictions.
 #'
-#' @param X Design matrix (n, d). @param y Targets, length n.
+#' @param X Design matrix (n, d).
+#' @param y Targets, length n.
 #' @param base_models List of function(Xtr, ytr, Xte) -> predictions.
 #' @param meta_model Optional blender function(Xtr, ytr, Xte); default OLS w/ intercept.
 #' @param k_folds Folds for out-of-fold predictions.
@@ -959,9 +968,11 @@ morie_geron_stacking <- function(X, y, base_models, meta_model = NULL, k_folds =
 #' stratum, leftover units to largest fractional remainders (ties to
 #' larger stratum); within-stratum draw via Fisher-Yates on an LCG stream.
 #'
-#' @param X Data rows (n, ...). @param y Optional labels used as strata.
+#' @param X Data rows (n, ...).
+#' @param y Optional labels used as strata.
 #' @param stratum Optional explicit stratum key per row.
-#' @param n_total Sample size (required). @param seed LCG seed.
+#' @param n_total Sample size (required).
+#' @param seed LCG seed.
 #' @return list with indices (0-based), X_sample, y_sample, allocation, strata,
 #'   population_share, sample_share, max_share_error, estimate, n, method.
 #' @export
@@ -1031,7 +1042,9 @@ morie_geron_stratified_sampling <- function(X, y = NULL, stratum = NULL, n_total
 #'
 #' output_dim = floor((in_dim + 2p - k)/s) + 1.
 #'
-#' @param in_dim Input length. @param k Kernel size. @param p Padding each side.
+#' @param in_dim Input length.
+#' @param k Kernel size.
+#' @param p Padding each side.
 #' @param s Stride.
 #' @return list with output_dim, dropped, same_padding, padded_dim, in_dim, k, p, s, estimate, n, method.
 #' @export
@@ -1059,8 +1072,10 @@ morie_geron_stride <- function(in_dim, k, p = 0, s = 1) {
 #' ridge/least squares); adds exact leave-one-out risk from the hat
 #' matrix, e_loo_i = e_i / (1 - h_ii).
 #'
-#' @param X Labeled inputs (n, d). @param y Targets, length n.
-#' @param ridge L2 penalty. @param fit_intercept Include intercept column.
+#' @param X Labeled inputs (n, d).
+#' @param y Targets, length n.
+#' @param ridge L2 penalty.
+#' @param fit_intercept Include intercept column.
 #' @return list with theta, predict, fitted, residuals, empirical_risk, loo_risk,
 #'   optimism, leverage, r2, estimate, n, method.
 #' @export
@@ -1093,7 +1108,8 @@ morie_geron_supervised_learning <- function(X, y, ridge = 0.0, fit_intercept = T
 #'
 #' theta = X^+ y = V Sigma^+ U^T y; minimum-norm solution when rank deficient.
 #'
-#' @param X Design matrix (n, d). @param y Targets, length n.
+#' @param X Design matrix (n, d).
+#' @param y Targets, length n.
 #' @param rcond Optional relative singular-value cutoff; default max(n,d)*eps.
 #' @param fit_intercept Prepend a column of ones.
 #' @return list with theta, singular_values, rank, condition_number, residuals,
@@ -1184,8 +1200,10 @@ morie_geron_save_load_pytorch <- function(model, path, verify = TRUE) {
 #' before partitioning and undo it after.
 #'
 #' @param image (H, W) or (H, W, C) array.
-#' @param window_size Window side length. @param n_layers Blocks.
-#' @param d_model Token embedding width. @param seed LCG seed.
+#' @param window_size Window side length.
+#' @param n_layers Blocks.
+#' @param d_model Token embedding width.
+#' @param seed LCG seed.
 #' @return list with Y, pooled, n_windows, window_tokens, shifted_layers,
 #'   attention_pairs, full_attention_pairs, estimate, n, method.
 #' @export
@@ -1462,7 +1480,8 @@ morie_geron_symd_to_string <- function(t) {
 }
 
 #' Evaluate a parsed tree against an environment (no eval/parse of R code)
-#' @param t Tree node. @param env Named list/numeric vector of variable values.
+#' @param t Tree node.
+#' @param env Named list/numeric vector of variable values.
 #' @return Numeric scalar.
 #' @export
 morie_geron_symd_evaluate <- function(t, env) {
@@ -1729,8 +1748,10 @@ morie_geron_td3 <- function(env, policy = NULL, Q1 = NULL, Q2 = NULL, epochs = 3
 #' stack (final layer linear).
 #'
 #' @param pretrained_model List of weight matrices W_0 (d_in,h1), W_1 (h1,h2), ...
-#' @param X New-task inputs (n, d_in). @param y New-task targets (n,) or (n, d_out).
-#' @param n_frozen Leading layers to freeze. @param epochs,lr As in Python original.
+#' @param X New-task inputs (n, d_in).
+#' @param y New-task targets (n,) or (n, d_out).
+#' @param n_frozen Leading layers to freeze.
+#' @param epochs,lr As in Python original.
 #' @return list with weights, frozen, loss_curve, initial_loss, final_loss,
 #'   trainable_params, total_params, estimate, n, method.
 #' @export
@@ -1800,7 +1821,8 @@ morie_geron_transfer_learning <- function(pretrained_model, X, y, n_frozen = 1, 
 #' for "relu"/"tanh"/"sigmoid", or a plain R function. Records observed
 #' input/output shapes.
 #'
-#' @param model List of ops. @param example_inputs Matrix/vector input.
+#' @param model List of ops.
+#' @param example_inputs Matrix/vector input.
 #' @return list(graph, output) where graph is a list of node lists
 #'   (index, kind, in_shape, out_shape, op).
 #' @export
@@ -1937,7 +1959,8 @@ morie_geron_transformer <- function(X, n_heads = 2, d_model = NULL, n_layers = 2
 #' match, y = sum_i x_i W_i (all-reduce).
 #'
 #' @param model A weight matrix or list of weight matrices.
-#' @param n_devices Number of devices. @param x Optional input activations; default ones.
+#' @param n_devices Number of devices.
+#' @param x Optional input activations; default ones.
 #' @param scheme "column" or "row".
 #' @return list with output, reference, max_diff, shards, params_per_device,
 #'   params_total, comm_elements, all_reduce, scheme, estimate, n, method.
@@ -2010,7 +2033,8 @@ morie_geron_tensor_parallelism <- function(model, n_devices = 2, x = NULL, schem
 #'
 #' @param model Optional initial parameters; zeros by default.
 #' @param dataset Shape depends on method (see Python docstring).
-#' @param method "sft", "dpo", or "ppo". @param epochs,lr,beta,clip_eps,theta_ref As in Python original.
+#' @param method "sft", "dpo", or "ppo".
+#' @param epochs,lr,beta,clip_eps,theta_ref As in Python original.
 #' @return list (shape depends on method) with theta, loss, loss_curve, ..., estimate, n, method.
 #' @export
 morie_geron_trl_finetune <- function(model = NULL, dataset, method = "sft", epochs = 200, lr = 0.1,
@@ -2191,8 +2215,10 @@ morie_geron_torch_compile <- function(model, mode = "default", example_inputs) {
 #' \code{morie_geron_autoencoder} (both from geron_ml_native.R / this
 #' shard).
 #'
-#' @param X Unlabeled data (n, d), n >= 2. @param n_clusters Groups to look for.
-#' @param bottleneck Code width for compression. @param linkage Linkage rule.
+#' @param X Unlabeled data (n, d), n >= 2.
+#' @param n_clusters Groups to look for.
+#' @param bottleneck Code width for compression.
+#' @param linkage Linkage rule.
 #' @return list with labels, silhouette, silhouette_samples, codes, reconstruction,
 #'   recon_error, explained_variance_ratio, merge_heights, estimate, n, method.
 #' @export
@@ -2234,8 +2260,10 @@ morie_geron_unsupervised_learning <- function(X, n_clusters = 2, bottleneck = 1,
 #' pushes X_lab through the frozen encoder, fits a linear head on codes,
 #' compares exact leave-one-out MSE against a raw-feature control.
 #'
-#' @param X_unlab Unlabeled pool (m, d). @param X_lab Labeled inputs (n, d).
-#' @param y_lab Labels, length n. @param bottleneck Code width.
+#' @param X_unlab Unlabeled pool (m, d).
+#' @param X_lab Labeled inputs (n, d).
+#' @param y_lab Labels, length n.
+#' @param bottleneck Code width.
 #' @return list with encoder, encode, codes, theta, theta_control, pretrained_loo,
 #'   control_loo, pretrained_train_mse, control_train_mse, gain, recon_error,
 #'   explained_variance_ratio, estimate, n, method.
@@ -2274,7 +2302,7 @@ morie_geron_layer_norms <- function(grads) {
 
 #' Vanishing gradients: small gradients shrink through many layers
 #'
-#' Reports per-layer ratio ||g_{l+1}||/||g_l|| and the geometric mean
+#' Reports per-layer ratio ||`g_{l+1}`||/||g_l|| and the geometric mean
 #' ratio (constant per-layer factor); flags "vanishing" if the geometric
 #' mean falls below tol.
 #'
@@ -2313,7 +2341,8 @@ morie_geron_vanishing_gradients <- function(grads, tol = 0.5) {
 }
 
 #' ELBO loss and exact gradients for fixed reparameterisation noise
-#' @param X Data (n, d). @param params list(Wmu, bmu, Wlv, blv, Wd, bd).
+#' @param X Data (n, d).
+#' @param params list(Wmu, bmu, Wlv, blv, Wd, bd).
 #' @param eps Matrix of standard-normal noise (n, latent_dim).
 #' @param beta KL weight.
 #' @return list(loss, recon, kl, grads) with grads a same-shaped list as params.
@@ -2346,7 +2375,8 @@ morie_geron_vae_loss_and_grads <- function(X, params, eps, beta = 1.0) {
 #' z = mu + sigma*eps (reparameterisation trick), trained by gradient
 #' descent on the negative ELBO = recon MSE + beta*KL(q||N(0,I)).
 #'
-#' @param X Training data (n, d). @param latent_dim,epochs,lr,beta,seed As in Python original.
+#' @param X Training data (n, d).
+#' @param latent_dim,epochs,lr,beta,seed As in Python original.
 #' @return list with mu, log_var, z, reconstruction, recon_error, kl, elbo,
 #'   loss_curve, params, beta, estimate, n, method.
 #' @export
@@ -2412,7 +2442,8 @@ morie_geron_digamma <- function(x) {
 #' \code{morie_geron_digamma}, which prunes unneeded components as
 #' alpha0 -> 0.
 #'
-#' @param X Data (n, d). @param n_components,max_iter,alpha0,tol,var_floor,seed As in Python original.
+#' @param X Data (n, d).
+#' @param n_components,max_iter,alpha0,tol,var_floor,seed As in Python original.
 #' @return list with weights, means, variances, resp, labels, alpha,
 #'   n_effective, n_iter, estimate, n, method.
 #' @export
@@ -2480,8 +2511,10 @@ morie_geron_variational_bayes_gmm <- function(X, n_components = 3, max_iter = 10
 #' joint vocabulary scores masked positions.
 #'
 #' @param video_tokens,text_tokens Integer (0-based) token id vectors.
-#' @param d_model Embedding width. @param mask_positions Optional 0-based positions to mask.
-#' @param mask_prob Masking rate when mask_positions is NULL. @param seed LCG seed.
+#' @param d_model Embedding width.
+#' @param mask_positions Optional 0-based positions to mask.
+#' @param mask_prob Masking rate when mask_positions is NULL.
+#' @param seed LCG seed.
 #' @return list with loss, token_losses, attention, hidden, masked, predictions,
 #'   targets, cross_modal_mass, n_video, n_text, vocab_size, estimate, n, method.
 #' @export
@@ -2548,7 +2581,8 @@ morie_geron_videobert <- function(video_tokens, text_tokens, d_model = 8, mask_p
 #'
 #' @param image Region features (n_regions, d_v), or (H,W) map flattened to single-feature regions.
 #' @param text Token features (n_tokens, d_t), or 1-D vector of 0-based token ids.
-#' @param d_model Shared co-attention width. @param seed LCG seed.
+#' @param d_model Shared co-attention width.
+#' @param seed LCG seed.
 #' @return list with image_out, text_out, attention_v2t, attention_t2v, pooled,
 #'   image_hidden, text_hidden, n_regions, n_tokens, estimate, n, method.
 #' @export
@@ -2609,7 +2643,8 @@ morie_geron_vilbert <- function(image, text, d_model = 8, seed = 0) {
 #' position encodings, run \code{morie_geron_transformer}, linear head
 #' on the \[CLS\] row.
 #'
-#' @param image (H,W) or (H,W,C) array. @param patch_size Patch side length.
+#' @param image (H,W) or (H,W,C) array.
+#' @param patch_size Patch side length.
 #' @param n_layers,d_model,n_heads,n_classes,seed As in Python original.
 #' @return list with logits, cls, tokens, patches, n_patches, seq_len, patch_dim,
 #'   grid, encoder_params, total_params, predicted, estimate, n, method.
@@ -2667,7 +2702,8 @@ morie_geron_vision_transformer <- function(image, patch_size, n_layers = 2, d_mo
 # ---------------------------------------------------------------------
 
 #' Nearest-codebook-entry assignment
-#' @param z_e Encodings (n, k). @param codebook Codes (K, k).
+#' @param z_e Encodings (n, k).
+#' @param codebook Codes (K, k).
 #' @return list(indices, z_q) with indices 0-based.
 #' @export
 morie_geron_quantize <- function(z_e, codebook) {
@@ -2683,7 +2719,8 @@ morie_geron_quantize <- function(z_e, codebook) {
 #' L = recon MSE + codebook loss + beta*commitment loss; straight-through
 #' estimator copies the decoder gradient at z_q onto z_e.
 #'
-#' @param X Training data (n, d). @param codebook_size,latent_dim,epochs,lr,beta,seed As in Python original.
+#' @param X Training data (n, d).
+#' @param codebook_size,latent_dim,epochs,lr,beta,seed As in Python original.
 #' @return list with codes, indices, z_e, z_q, codebook, counts, reconstruction,
 #'   recon_error, codebook_loss, commitment_loss, perplexity, loss_curve, beta,
 #'   estimate, n, method.
@@ -2761,7 +2798,8 @@ morie_geron_vq_vae <- function(X, codebook_size = 4, latent_dim = 2, epochs = 20
 #' or a supplied pretrained matrix, plus the cosine-similarity matrix.
 #'
 #' @param vocab Character vector of distinct tokens.
-#' @param d Embedding width (ignored if E supplied). @param E Optional pretrained (V,d) matrix.
+#' @param d Embedding width (ignored if E supplied).
+#' @param E Optional pretrained (V,d) matrix.
 #' @param seed LCG seed.
 #' @return list with E, lookup, index, vocab, norms, similarity, n_params, d,
 #'   estimate, n, method. lookup is a function(token_or_char_vector).
@@ -2915,10 +2953,12 @@ morie_geron_wordpiece_tokenizer <- function(corpus, vocab_size = 50) {
 #' Warm restarts: cosine decay with periodic restarts (SGDR)
 #'
 #' eta = eta_min + 0.5*(eta_max-eta_min)*(1+cos(pi*T_cur/T_i)); cycle
-#' lengths grow geometrically T_{i+1} = round(T_i * factor).
+#' lengths grow geometrically `T_{i+1}` = round(T_i * factor).
 #'
-#' @param t Integer step or vector of steps (>=0). @param T0 First cycle length.
-#' @param factor Geometric growth (>=1). @param eta_max,eta_min Learning-rate bounds.
+#' @param t Integer step or vector of steps (>=0).
+#' @param T0 First cycle length.
+#' @param factor Geometric growth (>=1).
+#' @param eta_max,eta_min Learning-rate bounds.
 #' @return list with eta, cycle, cycle_length, step_in_cycle, restarts, T0,
 #'   factor, estimate, n, method.
 #' @export
@@ -2963,7 +3003,9 @@ morie_geron_warm_restarts <- function(t, T0 = 10, factor = 2.0, eta_max = 0.1, e
 # ---------------------------------------------------------------------
 
 #' Depthwise separable convolution weight count
-#' @param k Kernel side. @param c_in Input channels. @param c_out Output channels.
+#' @param k Kernel side.
+#' @param c_in Input channels.
+#' @param c_out Output channels.
 #' @return Integer parameter count k*k*c_in + c_in*c_out.
 #' @export
 morie_geron_separable_params <- function(k, c_in, c_out) {
@@ -3101,7 +3143,8 @@ morie_geron_xception <- function(n_classes = 1000, in_channels = 3, input_size =
 #' G^2/(H+lam)) - gamma. Exact greedy split search over sorted feature
 #' values.
 #'
-#' @param X Design matrix (n, d). @param y Targets ({0,1} for logistic).
+#' @param X Design matrix (n, d).
+#' @param y Targets `({0,1}` for logistic).
 #' @param n_estimators,learning_rate,max_depth,reg_lambda,gamma,min_child_weight,objective As in Python original.
 #' @return list with predicted, raw_score, trees, base_score, loss_curve,
 #'   feature_importance, objective, estimate, n, method.
@@ -3173,7 +3216,8 @@ morie_geron_xgboost <- function(X, y, n_estimators = 10, learning_rate = 0.3, ma
 #' clipping g <- g * clip_norm / ||g||_global.
 #'
 #' @param grads List of >= 2 per-layer gradients, input side first.
-#' @param tol Amplification threshold (> 1). @param clip_norm Optional clipping threshold (> 0).
+#' @param tol Amplification threshold (> 1).
+#' @param clip_norm Optional clipping threshold (> 0).
 #' @return list with norms, ratios, geometric_ratio, amplification, exploding,
 #'   global_norm, clipped, scale, tol, estimate, n, method.
 #' @export
@@ -3303,7 +3347,8 @@ morie_geron_box_iou <- function(a, b) {
 #' shared class probs per cell), score = conf*class_prob, greedy
 #' per-class NMS at iou_threshold.
 #'
-#' @param image Passed to model unchanged. @param model Function(image) -> array (S,S,B*5+C).
+#' @param image Passed to model unchanged.
+#' @param model Function(image) -> array (S,S,B*5+C).
 #' @param n_boxes,conf_threshold,iou_threshold As in Python original.
 #' @return list with boxes, scores, classes (0-based), n_detections, n_candidates,
 #'   suppressed, grid, n_classes, estimate, n, method.
@@ -3372,7 +3417,8 @@ morie_geron_yolo <- function(image, model, n_boxes = 1, conf_threshold = 0.5, io
 #' the null-prompt scores before normalising (contextual calibration).
 #'
 #' @param model Function(prompt) or function(prompt, labels) -> named list/numeric scores.
-#' @param prompt Passed to model unchanged. @param labels Optional candidate labels (>=2).
+#' @param prompt Passed to model unchanged.
+#' @param labels Optional candidate labels (>=2).
 #' @param null_prompt Optional content-free prompt for calibration.
 #' @return list with probabilities, scores, raw_scores, labels, predicted (0-based),
 #'   predicted_label, margin, entropy, calibrated, estimate, n, method.
@@ -3424,7 +3470,8 @@ morie_geron_zero_shot <- function(model, prompt, labels = NULL, null_prompt = NU
 #' eigenvectors, k-means (Lloyd/k-means++ on an LCG stream) in that
 #' embedding.
 #'
-#' @param X Data (n, d). @param n_clusters,affinity,gamma,n_neighbors,seed As in Python original.
+#' @param X Data (n, d).
+#' @param n_clusters,affinity,gamma,n_neighbors,seed As in Python original.
 #' @return list with labels, embedding, centers, eigenvalues, affinity_matrix,
 #'   laplacian, n_components, estimate, n, method.
 #' @export
@@ -3473,10 +3520,12 @@ morie_geron_spectral_clustering <- function(X, n_clusters = 2, affinity = "rbf",
 
 #' Simple RNN forward pass over a sequence
 #'
-#' h_t = tanh(W_x x_t + W_h h_{t-1} + b), unrolled step by step.
+#' h_t = tanh(W_x x_t + W_h `h_{t-1}` + b), unrolled step by step.
 #'
-#' @param X Sequence (T, n_inputs). @param Wx Input weights (n_inputs, n_units).
-#' @param Wh Recurrent weights (n_units, n_units). @param b Optional bias; default zeros.
+#' @param X Sequence (T, n_inputs).
+#' @param Wx Input weights (n_inputs, n_units).
+#' @param Wh Recurrent weights (n_units, n_units).
+#' @param b Optional bias; default zeros.
 #' @param h0 Optional initial hidden state; default zeros.
 #' @return list with H, h_T, grads, jacobian_gain, n_units, estimate, n, method.
 #' @export
@@ -3509,13 +3558,15 @@ morie_geron_simple_rnn <- function(X, Wx, Wh, b = NULL, h0 = NULL) {
 # hmsrp: sparse random projection (Achlioptas/Li)
 # ---------------------------------------------------------------------
 
-#' Sparse random projection matrix with {-1,0,+1} entries
+#' Sparse random projection matrix with `{-1,0,+1}` entries
 #'
 #' R_ij = +-sqrt(s/d_out) with prob 1/(2s) each (s = 1/density), else 0.
 #' Measures realised pairwise-distance distortion.
 #'
-#' @param X Data (n, d_in). @param d_out Target dimension.
-#' @param density Optional non-zero fraction in (0,1\]; default 1/sqrt(d_in). @param seed LCG seed.
+#' @param X Data (n, d_in).
+#' @param d_out Target dimension.
+#' @param density Optional non-zero fraction in (0,1\]; default 1/sqrt(d_in).
+#' @param seed LCG seed.
 #' @return list with X_proj, R, density, s, scale, nnz, max_distortion,
 #'   mean_distortion, estimate, n, method.
 #' @export
@@ -3618,12 +3669,15 @@ morie_geron_semantic_segmentation <- function(image, model, y_true = NULL) {
 
 #' Time series forecasting with a fixed-width lag window
 #'
-#' Supervised windowing (y_{t-w+1..t}) -> y_{t+1}, ridge-regularised
+#' Supervised windowing (`y_{t-w+1..t}`) -> `y_{t+1}`, ridge-regularised
 #' normal equations (min-norm solve), rolled forward recursively or
 #' fit directly per horizon step.
 #'
-#' @param y Univariate series. @param horizon Steps ahead. @param window Lag width.
-#' @param ridge L2 penalty (not on intercept). @param recursive Iterate one-step model vs direct per-step fit.
+#' @param y Univariate series.
+#' @param horizon Steps ahead.
+#' @param window Lag width.
+#' @param ridge L2 penalty (not on intercept).
+#' @param recursive Iterate one-step model vs direct per-step fit.
 #' @return list with forecast, coef, intercept, train_mse, naive_mse, skill,
 #'   window, horizon, estimate, n, method.
 #' @export
@@ -3696,8 +3750,10 @@ morie_geron_time_series_forecast <- function(y, horizon = 1, window = 3, ridge =
 #'
 #' Binary search on beta = 1/(2 sigma^2) per row until row entropy equals log(perplexity).
 #'
-#' @param D2 Squared-distance matrix (n, n). @param perplexity Target perplexity.
-#' @param tol Entropy tolerance. @param max_steps Binary-search iterations.
+#' @param D2 Squared-distance matrix (n, n).
+#' @param perplexity Target perplexity.
+#' @param tol Entropy tolerance.
+#' @param max_steps Binary-search iterations.
 #' @return list(P, betas).
 #' @export
 morie_geron_conditional_p <- function(D2, perplexity, tol = 1e-5, max_steps = 100) {
@@ -3742,7 +3798,8 @@ morie_geron_conditional_p <- function(D2, perplexity, tol = 1e-5, max_steps = 10
 #' p_ij=(p_j|i+p_i|j)/2n. Low-d: Student-t kernel q_ij ~ (1+||yi-yj||^2)^-1.
 #' KL(P||Q) minimised by momentum gradient descent.
 #'
-#' @param X Data (n, d), n >= 3. @param n_components,perplexity,seed,n_iter,lr,momentum As in Python original.
+#' @param X Data (n, d), n >= 3.
+#' @param n_components,perplexity,seed,n_iter,lr,momentum As in Python original.
 #' @return list with embedding, P, Q, kl, kl_curve, betas, perplexity, estimate, n, method.
 #' @export
 morie_geron_tsne <- function(X, n_components = 2, perplexity = 5.0, seed = 0, n_iter = 300,
@@ -3804,7 +3861,8 @@ morie_geron_tsne <- function(X, n_components = 2, perplexity = 5.0, seed = 0, n_
 #'
 #' Deterministic grid search on log(a) and b (no optimiser dependency).
 #'
-#' @param min_dist Minimum spacing. @param spread Spread parameter.
+#' @param min_dist Minimum spacing.
+#' @param spread Spread parameter.
 #' @return list(a, b, sse).
 #' @export
 morie_geron_fit_ab <- function(min_dist, spread = 1.0) {
@@ -3830,7 +3888,8 @@ morie_geron_fit_ab <- function(min_dist, spread = 1.0) {
 #' exact fuzzy cross-entropy minimised by gradient descent (gradient
 #' clipped at norm 4).
 #'
-#' @param X Data (n, d), n >= 3. @param n_components,n_neighbors,min_dist,seed,n_iter,lr As in Python original.
+#' @param X Data (n, d), n >= 3.
+#' @param n_components,n_neighbors,min_dist,seed,n_iter,lr As in Python original.
 #' @return list with embedding, graph, directed_graph, a, b, ab_sse, cross_entropy,
 #'   ce_curve, rho, sigma, estimate, n, method.
 #' @export
