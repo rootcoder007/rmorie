@@ -2,7 +2,14 @@
 
 #' Restricted maximum likelihood (REML) for semivariogram parameters
 #'
-#' Minimises minus twice the restricted log likelihood, eq (4.39),
+#' Follows Sec. 4.5.2 and Sec. 5.5.3. The matrix of error contrasts K is
+#' ELIMINATED via Searle et al. (1992, pp. 451-452),
+#' \eqn{K'(K\Sigma K')^{-1}K = \Sigma^{-1} - \Sigma^{-1}X\Omega X'\Sigma^{-1}},
+#' which reduces the quadratic form to \eqn{r'\Sigma^{-1}r}; a scale parameter
+#' is then profiled out by eq (5.49), leaving the nugget RATIO and the range.
+#' Sec. 5.5.2 names the optimiser ("Newton-Raphson, Quasi-Newton, or some
+#' other suitable algorithm"); the quasi-Newton branch is used, driven by an
+#' exact analytic gradient. Formerly this minimised eq (4.39) directly,
 #' \eqn{\phi_R(\theta) = \ln|K \Sigma(\theta) K'| + (n-p)\ln(2\pi)
 #'      + Z'K'(K\Sigma(\theta)K')^{-1}KZ}, where K is a matrix of error
 #' contrasts chosen so that \eqn{E[KZ(s)] = 0}. REML maximises the likelihood
@@ -38,59 +45,12 @@ spreml <- function(coords, z, X = NULL, variogram_model = "exponential") {
   if (is.null(X)) X <- matrix(1, nrow = n, ncol = 1) else X <- as.matrix(X)
   if (nrow(X) != n) stop("`X` must have one row per observation")
 
-  K <- .schab_error_contrasts(X)
-  KZ <- as.numeric(K %*% z)
-
-  neg2_reml <- function(theta) {
-    nugget <- theta[1]; sill <- theta[2]; rng <- theta[3]
-    if (any(!is.finite(theta)) || nugget < 0 || sill < 0 || rng <= 0 ||
-        (nugget + sill) <= 0) {
-      return(Inf)
-    }
-    sigma <- .schab_covariance_matrix(coords, nugget, sill, rng, variogram_model)
-    m <- K %*% sigma %*% t(K)
-    ch <- tryCatch(chol(m), error = function(e) NULL)
-    if (is.null(ch)) return(Inf)   # theta outside the positive-definite region
-    logdet <- 2 * sum(log(diag(ch)))
-    sol <- backsolve(ch, backsolve(ch, KZ, transpose = TRUE))
-    logdet + nrow(K) * log(2 * pi) + sum(KZ * sol)
-  }
-
-  ev <- .sp_empirical_variogram(coords, z)
-  sb <- .schab_start_and_bounds(ev$lag, ev$gamma)
-  start <- sb$start; lo <- sb$lo; hi <- sb$hi
-
-  # Nelder-Mead rather than a quasi-Newton method: phi_R is +Inf outside the
-  # positive-definite region, so a numerical gradient straddling that boundary
-  # comes back non-finite and the solver quits at the starting point while
-  # reporting success. A simplex never differences across the barrier.
-  bounded <- function(theta) {
-    if (any(!is.finite(theta)) || any(theta < lo) || any(theta > hi)) return(Inf)
-    neg2_reml(theta)
-  }
-  best_x <- start
-  best_f <- bounded(start)
-  for (frac in c(0.05, 0.2, 0.5)) {
-    for (rscale in c(0.5, 1.0, 2.0)) {
-      x0 <- pmin(pmax(c(frac * start[2], start[2], rscale * start[3]), lo), hi)
-      res <- stats::optim(x0, bounded, method = "Nelder-Mead",
-                          control = list(maxit = 2000, reltol = 1e-12))
-      if (is.finite(res$value) && res$value < best_f) {
-        best_x <- res$par
-        best_f <- res$value
-      }
-    }
-  }
-  nugget <- best_x[1]; sill <- best_x[2]; rng <- best_x[3]
-
-  # eq (4.40): the EGLS estimator evaluated at theta_reml.
-  sigma <- .schab_covariance_matrix(coords, nugget, sill, rng, variogram_model)
-  sinv_x <- solve(sigma, X)
-  beta <- solve(crossprod(X, sinv_x), crossprod(sinv_x, z))
-
-  list(nugget = nugget, partial_sill = sill, sill = nugget + sill,
-       range = rng, mean = if (length(beta) > 1) as.numeric(beta) else beta[1],
-       neg2_restricted_loglik = best_f,
-       converged = best_f < bounded(start), n = n, n_contrasts = nrow(K),
+  fit <- .schab_fit_reml(coords, z, X, model = variogram_model)
+  list(nugget = fit$nugget, partial_sill = fit$partial_sill,
+       sill = fit$nugget + fit$partial_sill, range = fit$range,
+       nugget_ratio = fit$nugget_ratio,
+       mean = if (length(fit$beta) > 1) fit$beta else fit$beta[1],
+       neg2_restricted_loglik = fit$neg2_restricted_loglik,
+       converged = fit$converged, n = n, n_contrasts = n - ncol(X),
        model = variogram_model, method = "restricted maximum likelihood")
 }
