@@ -272,6 +272,12 @@ NULL
 #'   (default 5).
 #' @param lat_col,lon_col WGS84 column names (default
 #'   \code{"LAT_WGS84"} / \code{"LONG_WGS84"}).
+#' @param randomisation Null hypothesis for the variance of Moran's I.
+#'   \code{TRUE} (default) fixes the observed values and randomises only
+#'   their assignment to locations, so the sample kurtosis enters;
+#'   \code{FALSE} assumes the values are normal draws. Randomisation is
+#'   the weaker and more defensible assumption for skewed, non-negative
+#'   incident counts, and normality yields the optimistic p-value.
 #' @param use_spdep Retained for back-compat; ignored (the native
 #'   Cliff-Ord computation is always used). Default \code{FALSE}.
 #' @return A named list with classes \code{morie_tps_spatial_result},
