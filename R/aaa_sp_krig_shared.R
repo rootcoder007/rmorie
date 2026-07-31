@@ -64,3 +64,45 @@
   vr <- as.numeric(sigma2 - colSums(sig * lam))
   list(prediction = pred, variance = pmax(vr, 0), weights = lam, mu = mu)
 }
+
+#' Internal: ordinary kriging in terms of the semivariogram, Sec 5.2.2.2.
+#'
+#' eqs (5.19)-(5.22) with Gamma = [gamma(s_i - s_j)] and
+#' gamma(s0) = [gamma(s0 - s_1), ..., gamma(s0 - s_n)]'. The SIGN of the
+#' Lagrange multiplier matters downstream: the trans-Gaussian correction
+#' (5.58) uses (sigma^2_ok - 2 m), so a flipped m moves every prediction
+#' with no other symptom. (5.22) gives two expressions for the variance,
+#' which the suite asserts against each other.
+#' @noRd
+.sp_ordinary_kriging <- function(coords, z, target, semivariogram_fn) {
+  coords <- as.matrix(coords)
+  z <- as.numeric(z)
+  target <- matrix(as.numeric(target), nrow = 1)
+  n <- length(z)
+  if (nrow(coords) != n) {
+    stop("`coords` and `z` must have the same number of rows", call. = FALSE)
+  }
+  gmat <- semivariogram_fn(.sp_cross_dist(coords, coords))
+  gmat <- matrix(gmat, n, n)
+  g0 <- as.numeric(semivariogram_fn(as.numeric(.sp_cross_dist(coords, target))))
+  ones <- rep(1, n)
+  ginv <- MASS_ginv(gmat)
+  denom <- as.numeric(t(ones) %*% ginv %*% ones)
+  if (denom == 0) stop("singular ordinary-kriging system", call. = FALSE)
+  slack <- (1 - as.numeric(t(ones) %*% ginv %*% g0)) / denom
+  lam <- as.numeric(ginv %*% (g0 + ones * slack))
+  m <- -slack
+  list(prediction = sum(lam * z), variance = sum(lam * g0) + m,
+       weights = lam, lagrange = m)
+}
+
+#' Internal: Moore-Penrose pseudo-inverse via SVD, so the kriging system
+#' stays solvable when Gamma is singular. Written out rather than taken from
+#' MASS, which is not a dependency.
+#' @noRd
+MASS_ginv <- function(a, tol = sqrt(.Machine$double.eps)) {
+  s <- svd(a)
+  keep <- s$d > max(tol * s$d[1], 0)
+  if (!any(keep)) return(matrix(0, ncol(a), nrow(a)))
+  s$v[, keep, drop = FALSE] %*% ((1 / s$d[keep]) * t(s$u[, keep, drop = FALSE]))
+}
