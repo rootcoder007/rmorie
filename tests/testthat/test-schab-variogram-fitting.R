@@ -114,21 +114,78 @@ test_that("counts reach WLS and do not leak into OLS", {
 
 # ---------------------------------------------------------------- spreml ---
 
-test_that("the contrast matrix annihilates the mean structure", {
-  X <- matrix(1, nrow = 25, ncol = 1)
+reml_sites <- function() {
+  g <- (0:8) / 1.2
+  as.matrix(expand.grid(x = g, y = g))
+}
+
+test_that("the K-free form differs from the K form by a constant", {
+  # Harville (1977), quoted in Sec 5.5.3: admissible choices of K change the
+  # objective only by an amount free of theta and beta. So the gap between
+  # the K-free objective and the explicit K form must be the SAME number at
+  # every theta -- that is what licenses dropping K, and it is checkable.
+  C <- reml_sites()
+  n <- nrow(C)
+  S <- .schab_covariance_matrix(C, 0.3, 2.0, 3.0, "exponential")
+  z <- 5 + as.numeric(t(chol(S + 1e-10 * diag(n))) %*% (cos((1:n) * 1.7) * sqrt(2)))
+  X <- matrix(1, nrow = n, ncol = 1)
   K <- .schab_error_contrasts(X)
-  expect_equal(dim(K), c(24L, 25L))
-  expect_true(all(abs(K %*% X) < 1e-10))
-  expect_equal(qr(K)$rank, 24L)
+  diffs <- numeric(0)
+  for (p in list(c(0.10, 5), c(0.35, 9), c(0.02, 14))) {
+    res <- .schab_profiled_reml(C, z, X, p[1], p[2], "exponential")
+    Sig <- res$sigma2 * .schab_correlation_matrix(C, p[1], p[2], "exponential")$sigma
+    M <- K %*% Sig %*% t(K); KZ <- as.numeric(K %*% z)
+    kform <- 2 * sum(log(diag(chol(M)))) + nrow(K) * log(2 * pi) +
+      sum(KZ * solve(M, KZ))
+    diffs <- c(diffs, kform - res$value)
+  }
+  expect_lt(max(diffs) - min(diffs), 1e-8)
 })
 
-test_that("the contrast matrix handles a regression mean", {
-  g <- (0:5) / 1.5
-  coords <- as.matrix(expand.grid(x = g, y = g))[1:30, ]
-  X <- cbind(1, coords)
-  K <- .schab_error_contrasts(X)
-  expect_equal(nrow(K), 30L - 3L)
-  expect_true(all(abs(K %*% X) < 1e-10))
+test_that("the REML gradient is the derivative it claims to be", {
+  C <- reml_sites()
+  n <- nrow(C)
+  S <- .schab_covariance_matrix(C, 0.3, 2.0, 3.0, "exponential")
+  z <- 5 + as.numeric(t(chol(S + 1e-10 * diag(n))) %*% (cos((1:n) * 1.7) * sqrt(2)))
+  X <- matrix(1, nrow = n, ncol = 1)
+  xi <- 0.2; a <- 7
+  g <- .schab_profiled_reml(C, z, X, xi, a, "exponential")$gradient
+  num <- numeric(2)
+  for (j in 1:2) {
+    d <- c(0, 0); d[j] <- 1e-6
+    vp <- .schab_profiled_reml(C, z, X, xi + d[1], a + d[2], "exponential")$value
+    vm <- .schab_profiled_reml(C, z, X, xi - d[1], a - d[2], "exponential")$value
+    num[j] <- (vp - vm) / (2 * sum(d))
+  }
+  expect_lt(max(abs(g - num) / pmax(abs(num), 1e-12)), 1e-6)
+})
+
+test_that("REML agrees with the Python arm on a shared fixture", {
+  # Parity only. The sequence driving this field is deterministic but NOT
+  # white, so the fit has no reason to recover the generating parameters and
+  # this must not be read as a recovery check.
+  C <- reml_sites()
+  n <- nrow(C)
+  S <- .schab_covariance_matrix(C, 0.3, 2.0, 3.0, "exponential")
+  z <- 5 + as.numeric(t(chol(S + 1e-10 * diag(n))) %*% (cos((1:n) * 1.7) * sqrt(2)))
+  r <- spreml(C, z, NULL, "exponential")
+  expect_equal(r$nugget, 0.940112416310311, tolerance = 1e-10)
+  expect_equal(r$nugget_ratio, 0.816204550875122, tolerance = 1e-10)
+  expect_equal(r$neg2_restricted_loglik, 82.7313713706666, tolerance = 1e-11)
+  expect_equal(r$n_contrasts, n - 1L)
+})
+
+test_that("REML parameters stay inside the valid space", {
+  C <- reml_sites()
+  n <- nrow(C)
+  S <- .schab_covariance_matrix(C, 0.3, 2.0, 3.0, "exponential")
+  z <- 5 + as.numeric(t(chol(S + 1e-10 * diag(n))) %*% (cos((1:n) * 1.7) * sqrt(2)))
+  r <- spreml(C, z, NULL, "exponential")
+  expect_gte(r$nugget, 0)
+  expect_gte(r$partial_sill, 0)
+  expect_gt(r$range, 0)
+  expect_gte(r$nugget_ratio, 0)
+  expect_lte(r$nugget_ratio, 1)
 })
 
 test_that("the fitting family rejects bad input", {
