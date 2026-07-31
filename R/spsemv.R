@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Empirical semivariogram: half the mean squared difference.
 #'
-#' gamma(h) = 0.5 E[(Z(s) - Z(s+h))^2], estimated by Matheron's method of
+#' gamma(h) = 0.5 E((Z(s) - Z(s+h))^2), estimated by Matheron's method of
 #' moments over lag bins. The factor of one half is what makes gamma
 #' comparable to a variance rather than to a squared difference.
 #'
