@@ -15,6 +15,8 @@
 .morie_logit_fit <- function(X, y, max_iter = 100L, tol = 1e-9) {
   D <- cbind(1, X)
   beta <- rep(0, ncol(D))
+  converged <- FALSE
+  step <- rep(Inf, ncol(D))
   for (i in seq_len(max_iter)) {
     eta <- pmin(pmax(D %*% beta, -35), 35)
     p <- as.vector(1 / (1 + exp(-eta)))
@@ -24,7 +26,20 @@
     step <- tryCatch(solve(H, grad),
                      error = function(e) .morie_ginv(H) %*% grad)
     beta <- beta + step
-    if (max(abs(step)) < tol) break
+    if (max(abs(step)) < tol) {
+      converged <- TRUE
+      break
+    }
+  }
+  # Without this the loop simply runs out of iterations and returns the
+  # last iterate as though it had converged, so a separating or
+  # near-collinear design yields propensity scores that downstream IPW /
+  # matching / DML weight as if they were fitted (RE3.0).
+  if (!converged) {
+    warning(sprintf(paste0("logistic fit did not converge in %d iterations ",
+                           "(last step %.3g > tol %.3g); estimates that use ",
+                           "these fitted values are unreliable."),
+                    max_iter, max(abs(step)), tol), call. = FALSE)
   }
   as.vector(1 / (1 + exp(-pmin(pmax(D %*% beta, -35), 35))))
 }

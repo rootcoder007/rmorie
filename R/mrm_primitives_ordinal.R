@@ -136,6 +136,12 @@ mrm_threshold_specific_ordinal <- function(
   y_raw <- data[[outcome_col]]
   if (is.null(ordinal_levels)) {
     ordinal_levels <- if (is.factor(y_raw)) {
+      # Taking the ordinal scale from a factor means trusting its level
+      # ORDER. An unordered factor orders levels alphabetically, so
+      # c("high", "low", "med") would be read as the ordinal scale and
+      # every threshold would silently be wrong. Require the ordering to
+      # be declared (G2.5) rather than inferred from the alphabet.
+      .morie_check_factor(y_raw, ordered = TRUE, arg = outcome_col)
       levels(y_raw)
     } else {
       sort(unique(stats::na.omit(y_raw)))
@@ -152,7 +158,15 @@ mrm_threshold_specific_ordinal <- function(
          paste(ordinal_levels, collapse = ", "))
   }
 
-  X <- as.matrix(data[, covariate_cols, drop = FALSE])
+  # Covariates may carry a non-standard class with numeric storage (a
+  # `units` column, a haven labelled vector). as.matrix() on those can
+  # yield a character matrix and silently turn the fit into nonsense, so
+  # coerce each column to plain numeric first (G2.11).
+  X <- vapply(covariate_cols,
+              function(cc) .morie_coerce_units(data[[cc]], arg = cc),
+              numeric(nrow(data)))
+  X <- matrix(X, nrow = nrow(data),
+              dimnames = list(NULL, covariate_cols))
   storage.mode(X) <- "double"
   n <- nrow(X)
   p <- ncol(X)

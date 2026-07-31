@@ -53,22 +53,29 @@
 #' @srrstats {G2.13} `.morie_check_data(check_na=)` reports missing data
 #'   in required columns as part of pre-processing.
 #' @srrstats {G2.14} Missing-data handling is explicit per estimator:
-#' @srrstats {G2.14a} Validators error on missing data where an estimator
-#'   cannot proceed (e.g. calibration in `tox.R`).
+#' @srrstats {G2.14a} `.morie_check_data(check_na = "error")` refuses to
+#'   proceed when a required column carries NA, for estimators whose
+#'   result would be meaningless on incomplete rows.
 #' @srrstats {G2.14b} The `.morie_*_drop_na()` helpers drop incomplete
 #'   rows with a recorded row count (ignore-with-message).
-#' @srrstats {G2.14c} Imputation is offered where appropriate
-#'   (`morie_tox_left_censor_impute()`, `validation.R` imputers).
+#' @srrstats {G2.14c} `morie_impute_column()` offers median / mean /
+#'   mode / LOCF imputation as an explicit caller choice, and reports
+#'   `n_imputed` so the cost stays visible.
 #' @srrstats {G2.15} Estimators pass `na.rm = TRUE` or drop NA explicitly
 #'   before calling base routines; none is called with the default
 #'   `na.rm = FALSE` on data that may contain NA.
 #' @srrstats {G2.16} `.morie_check_numvec(finite = TRUE)` rejects
 #'   `NaN`/`Inf`/`-Inf` where undefined values are not meaningful.
 #' @srrstats {G2.5} `.morie_check_factor(ordered=)` asserts whether a
-#'   factor input must be ordered or unordered, erroring otherwise.
+#'   factor input must be ordered or unordered, erroring otherwise; it
+#'   gates the ordinal outcome in `mrm_threshold_specific_ordinal()`,
+#'   where an unordered factor's alphabetical levels would silently be
+#'   read as the ordinal scale.
 #' @srrstats {G2.11} `.morie_coerce_units()` accepts columns with a
 #'   non-standard class but numeric storage (such as `units`-package
-#'   columns), coercing them to plain numeric rather than erroring.
+#'   columns), coercing them to plain numeric rather than erroring; it
+#'   pre-processes every covariate column in
+#'   `mrm_threshold_specific_ordinal()`.
 #' @noRd
 NULL
 
@@ -95,16 +102,82 @@ NULL
     stop(sprintf("`%s` is missing required column(s): %s.",
                  arg, paste(missing_cols, collapse = ", ")), call. = FALSE)
   }
-  if (isTRUE(check_na) && length(required)) {        # G2.13
+  # G2.13 / G2.14: `check_na` selects the missing-data policy.
+  #   TRUE / "message" -- report and let the estimator drop rows (G2.14b)
+  #   "error"          -- refuse to proceed (G2.14a), for estimators whose
+  #                       result would be meaningless on incomplete rows
+  if (!isFALSE(check_na) && length(required)) {
+    policy <- if (isTRUE(check_na)) "message" else match.arg(
+      as.character(check_na), c("message", "error"))
     na_cols <- required[vapply(required,
                                function(c) anyNA(data[[c]]), logical(1))]
     if (length(na_cols)) {
+      if (policy == "error") {
+        stop(sprintf("`%s`: missing values in %s; this estimator cannot ",
+                     arg, paste(na_cols, collapse = ", ")),
+             "proceed on incomplete rows. Drop or impute them first ",
+             "(see `morie_impute_column()`).", call. = FALSE)
+      }
       message(sprintf("`%s`: missing values present in %s; ",
                       arg, paste(na_cols, collapse = ", ")),
               "incomplete rows are dropped by the estimator.")
     }
   }
   data
+}
+
+#' Impute missing values in a column
+#'
+#' Fills `NA` by a stated rule so an estimator that cannot proceed on
+#' incomplete rows has an explicit alternative to dropping them
+#' (G2.14c). The rule is always the caller's choice -- nothing is
+#' imputed implicitly anywhere in the package.
+#'
+#' `"median"` and `"mean"` suit a roughly symmetric or skewed numeric
+#' column respectively. `"mode"` is the only sensible option for a
+#' categorical column. `"locf"` (last observation carried forward)
+#' assumes the rows are in a meaningful order -- time, usually -- and is
+#' wrong if they are not.
+#'
+#' Imputing narrows the apparent spread of a variable: the imputed
+#' values carry no information but are counted as if they did, so any
+#' downstream standard error is optimistic. `n_imputed` is returned so
+#' that cost stays visible.
+#'
+#' @param x A vector with missing values.
+#' @param method One of `"median"`, `"mean"`, `"mode"`, `"locf"`.
+#' @return A list with `values` (the filled vector), `n_imputed` and
+#'   `method`.
+#' @examples
+#' morie_impute_column(c(1, 2, NA, 4), "median")$values
+#' @export
+morie_impute_column <- function(x, method = c("median", "mean", "mode",
+                                              "locf")) {
+  method <- match.arg(method)
+  miss <- is.na(x)
+  n_imputed <- sum(miss)
+  if (n_imputed == 0L) {
+    return(list(values = x, n_imputed = 0L, method = method))
+  }
+  if (method %in% c("median", "mean")) {
+    if (!is.numeric(x)) {
+      stop(sprintf("`method = \"%s\"` needs a numeric column, got %s.",
+                   method, class(x)[1L]), call. = FALSE)
+    }
+    fill <- if (method == "median") stats::median(x, na.rm = TRUE)
+            else mean(x, na.rm = TRUE)
+    x[miss] <- fill
+  } else if (method == "mode") {
+    tab <- table(x[!miss])
+    if (!length(tab)) stop("`x` is entirely missing.", call. = FALSE)
+    x[miss] <- if (is.factor(x)) names(tab)[which.max(tab)] else
+      methods::as(names(tab)[which.max(tab)], class(x)[1L])
+  } else {
+    # locf: a leading NA has nothing to carry forward, so it stays NA
+    # rather than being back-filled from the future.
+    for (i in which(miss)) if (i > 1L) x[i] <- x[i - 1L]
+  }
+  list(values = x, n_imputed = as.integer(n_imputed), method = method)
 }
 
 # Assert a single-valued input of the given type.
