@@ -79,43 +79,23 @@
 
 .schab_fit_semivariogram <- function(lags, ghat, counts, model = "exponential",
                                      kind = "wls") {
+  # Fit by Gauss-Newton, the algorithm Sec. 4.5 names for this problem: the
+  # GEE/OLS estimates (after 4.43) and the composite-likelihood/WLS estimates
+  # (after 4.44) are both to be "calculated ... with a Gauss-Newton
+  # algorithm", and Sec. 4.5.1 adds that the weights must be refreshed as
+  # theta moves. No library optimiser is involved, so this arm and the Python
+  # arm execute the same arithmetic rather than two different solvers.
   if (!kind %in% c("ols", "wls")) stop("`kind` must be 'ols' or 'wls'")
   ok <- is.finite(ghat) & is.finite(lags) & counts > 0
   if (sum(ok) < 3L) {
     stop("need at least 3 usable lag classes to fit 3 parameters")
   }
-  f <- .schab_objective(kind, lags, ghat, counts, model)
   sb <- .schab_start_and_bounds(lags[ok], ghat[ok])
-  start <- sb$start; lo <- sb$lo; hi <- sb$hi
-
-  # Bounds enforced inside the objective, not by the solver: optim() ignores
-  # bounds under Nelder-Mead, and pushing the box into the function is also
-  # what lets this arm run the identical search to the Python one rather than
-  # two solvers that merely agree in intent.
-  bounded <- function(theta) {
-    if (any(!is.finite(theta)) || any(theta < lo) || any(theta > hi)) return(Inf)
-    f(theta)
-  }
-
-  # Several starts: these objectives have a flat ridge along (nugget + sill)
-  # and a simplex launched onto it stalls. The starts span the nugget
-  # fraction, which is the direction the ridge runs in.
-  best_x <- start
-  best_f <- bounded(start)
-  for (frac in c(0.0, 0.1, 0.3, 0.6)) {
-    for (rscale in c(0.25, 0.5, 1.0)) {
-      x0 <- pmin(pmax(c(frac * start[2], start[2], rscale * 2 * start[3]), lo), hi)
-      res <- stats::optim(x0, bounded, method = "Nelder-Mead",
-                          control = list(maxit = 4000, reltol = 1e-12))
-      if (is.finite(res$value) && res$value < best_f) {
-        best_x <- res$par
-        best_f <- res$value
-      }
-    }
-  }
-  converged <- (best_f < bounded(start)) || isTRUE(all.equal(best_x, start))
-  list(nugget = best_x[1], partial_sill = best_x[2], range = best_x[3],
-       objective = best_f, converged = converged)
+  fit <- .schab_gauss_newton(lags, ghat, counts, sb$start, model = model,
+                             kind = kind)
+  list(nugget = fit$theta[1], partial_sill = fit$theta[2],
+       range = fit$theta[3], objective = fit$objective,
+       converged = fit$converged)
 }
 
 .schab_covariance_matrix <- function(coords, nugget, sill, rng, model) {
