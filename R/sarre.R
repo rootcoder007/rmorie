@@ -55,7 +55,9 @@ sarre <- function(x, y, w) {
   }
   I <- diag(n)
   neg_ll <- function(lam) .sarre_negll(lam, I, W, X, y, n)
-  res <- stats::optimize(neg_ll, interval = c(-0.99, 0.99))
+  iv <- .sp_rho_interval(W, "identity")
+  res <- stats::optimize(neg_ll, interval = iv,
+                         tol = 1e-10 * max(diff(iv), 1))
   lam <- res$minimum
   A <- I - lam * W
   AX <- A %*% X

@@ -49,7 +49,9 @@ sarla <- function(x, y, w) {
   e0 <- M %*% y
   e1 <- M %*% (W %*% y)
   neg_ll <- function(rho) .sarla_negll(rho, e0, e1, n, I, W)
-  res <- stats::optimize(neg_ll, interval = c(-0.99, 0.99))
+  iv <- .sp_rho_interval(W, "identity")
+  res <- stats::optimize(neg_ll, interval = iv,
+                         tol = 1e-10 * max(diff(iv), 1))
   rho <- res$minimum
   Wy <- W %*% y
   y_star <- as.numeric(y - rho * Wy)
