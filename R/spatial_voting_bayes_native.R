@@ -54,6 +54,47 @@
        engine = "native Gibbs (Aldrich-McKelvey)")
 }
 
+# --- classical MDS (Torgerson-Gower), native ---------------------------------
+#' Internal helper: classical multidimensional scaling
+#'
+#' Torgerson-Gower classical scaling. Double-centre the squared distance
+#' matrix to recover the Gram matrix, then take its leading eigenvectors:
+#'
+#'   B = -1/2 J D^2 J,  J = I - (1/m) 1 1'
+#'   B = V L V',  X = V_k L_k^(1/2)
+#'
+#' Native replacement for `stats::cmdscale`. Non-positive eigenvalues are
+#' clamped to zero, which is what happens whenever D is not Euclidean.
+#'
+#' @param D Distance matrix (m by m), symmetric with a zero diagonal.
+#' @param k Number of dimensions to return.
+#' @return An m by k matrix of coordinates, columns ordered by decreasing
+#'   eigenvalue.
+#' @references Torgerson (1952) Psychometrika 17:401-419; Gower (1966)
+#'   Biometrika 53:325-338.
+#' @noRd
+.morie_sv_cmdscale <- function(D, k = 2L) {
+  D <- as.matrix(D)
+  m <- nrow(D)
+  if (m != ncol(D)) stop("`D` must be square", call. = FALSE)
+  k <- as.integer(k)
+  if (k < 1L || k >= m) {
+    stop("`k` must satisfy 1 <= k < nrow(D)", call. = FALSE)
+  }
+  D2 <- D^2
+  # double-centring: B = -1/2 J D^2 J, done via row/column means so no
+  # m by m projection matrix is ever formed
+  rm_ <- rowMeans(D2)
+  gm <- mean(D2)
+  B <- -0.5 * (D2 - outer(rm_, rep(1, m)) - outer(rep(1, m), rm_) + gm)
+  B <- (B + t(B)) / 2                    # enforce symmetry against drift
+  e <- eigen(B, symmetric = TRUE)
+  lam <- pmax(e$values[seq_len(k)], 0)   # clamp: D need not be Euclidean
+  X <- e$vectors[, seq_len(k), drop = FALSE] %*% diag(sqrt(lam), nrow = k)
+  dimnames(X) <- list(rownames(D), NULL)
+  X
+}
+
 # --- Bayesian MDS (Oh & Raftery 2001 lognormal distances) -------------------
 #' Internal helper: native Bayesian MDS sampler
 #' @noRd
@@ -66,7 +107,7 @@
     stop("morie_spatial_voting_bayesian_mds: D must contain positive ",
          "distances.", call. = FALSE)
   }
-  X <- stats::cmdscale(D, k = n_dims)
+  X <- .morie_sv_cmdscale(D, k = n_dims)
   if (!is.matrix(X)) X <- matrix(X, ncol = n_dims)
   sigma <- sigma_init
   step <- 0.05 * stats::sd(X)
