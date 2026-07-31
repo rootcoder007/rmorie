@@ -17,7 +17,9 @@ morie_geron_encoder_decoder_transformer(
 )
 }
 \arguments{
-\item{src, tgt}{Token ids. @param n_layers,n_heads,d_model,vocab_size,max_len,d_ff int.}
+\item{src, tgt}{Token ids.}
+
+\item{n_layers, n_heads, d_model, vocab_size, max_len, d_ff}{int.}
 
 \item{share_embeddings}{Share one embedding matrix between the stacks.}
 }

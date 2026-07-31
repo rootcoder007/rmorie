@@ -7,7 +7,9 @@
 morie_kamath_ch3_prompt_softmax_label(w, h_z, M)
 }
 \arguments{
-\item{w}{Named list of answer-word vectors. @param h_z Answer-slot state.}
+\item{w}{Named list of answer-word vectors.}
+
+\item{h_z}{Answer-slot state.}
 
 \item{M}{Named label -> answer-word map.}
 }
@@ -15,5 +17,5 @@ morie_kamath_ch3_prompt_softmax_label(w, h_z, M)
 List with \code{estimate}, \code{label}, \code{label_probs}, \code{logits}.
 }
 \description{
-p(y|x) = exp(w_{M(y)}.h_z) / sum over the LABEL words only.
+p(y|x) = exp(\verb{w_\{M(y)\}}.h_z) / sum over the LABEL words only.
 }

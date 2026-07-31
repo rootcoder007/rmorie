@@ -7,7 +7,13 @@
 morie_geron_filter_kernel(kh, kw, c_in, c_out, seed = 0, init = "he")
 }
 \arguments{
-\item{kh, kw}{Kernel height/width. @param c_in,c_out Channels. @param seed Seed. @param init "he" or "zeros".}
+\item{kh, kw}{Kernel height/width.}
+
+\item{c_in, c_out}{Channels.}
+
+\item{seed}{Seed.}
+
+\item{init}{"he" or "zeros".}
 }
 \value{
 List with kernel, bias, shape, n_parameters, fan_in, std, estimate, n, method.

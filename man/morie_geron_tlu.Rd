@@ -7,7 +7,11 @@
 morie_geron_tlu(x, w, b = 0)
 }
 \arguments{
-\item{x}{Vector or (n, d) matrix. @param w Weights. @param b Bias.}
+\item{x}{Vector or (n, d) matrix.}
+
+\item{w}{Weights.}
+
+\item{b}{Bias.}
 }
 \value{
 List with \code{y} (0/1), \code{z}, \code{w}, \code{b}, \code{estimate}, \code{n}.

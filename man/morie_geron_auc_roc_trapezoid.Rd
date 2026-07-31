@@ -7,7 +7,9 @@
 morie_geron_auc_roc_trapezoid(y_true, y_scores, pos_label = 1)
 }
 \arguments{
-\item{y_true}{Binary labels. @param y_scores Decision scores.}
+\item{y_true}{Binary labels.}
+
+\item{y_scores}{Decision scores.}
 
 \item{pos_label}{Positive-class label.}
 }

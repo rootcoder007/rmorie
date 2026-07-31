@@ -14,9 +14,13 @@ morie_geron_ddim_sampling_step(
 )
 }
 \arguments{
-\item{x_t}{Current sample. @param t,t_prev 0-based timesteps, t_prev < t.}
+\item{x_t}{Current sample.}
 
-\item{eps_pred}{Noise prediction. @param alpha_bar Non-increasing schedule in (0, 1].}
+\item{t, t_prev}{0-based timesteps, t_prev < t.}
+
+\item{eps_pred}{Noise prediction.}
+
+\item{alpha_bar}{Non-increasing schedule in (0, 1].}
 
 \item{clip_x0}{Optional c(lo, hi) clamp on x0.}
 }

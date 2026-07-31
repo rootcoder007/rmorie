@@ -17,7 +17,7 @@ morie_spatial_voting_ordinal_irt(
 
 \item{n_dims}{Latent dimensions.}
 
-\item{n_samples}{MCMC samples. @param burn_in Burn-in length.}
+\item{n_samples}{MCMC samples.}
 
 \item{burn_in}{Integer; MCMC burn-in iterations.}
 

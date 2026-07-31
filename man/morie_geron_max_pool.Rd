@@ -7,7 +7,11 @@
 morie_geron_max_pool(x, window = 2, stride = NULL)
 }
 \arguments{
-\item{x}{Feature map (h,w) or (h,w,c). @param window Square pooling window. @param stride Defaults to window.}
+\item{x}{Feature map (h,w) or (h,w,c).}
+
+\item{window}{Square pooling window.}
+
+\item{stride}{Defaults to window.}
 }
 \value{
 List with pooled, argmax, output_shape, parameters, estimate, n, method.

@@ -7,11 +7,19 @@
 morie_geron_q_learning(Q, s, a, r, s_next, alpha, gamma, done = FALSE)
 }
 \arguments{
-\item{Q}{(states, actions) table. @param s,a 0-based state/action.}
+\item{Q}{(states, actions) table.}
 
-\item{r}{Reward. @param s_next 0-based next state.}
+\item{s, a}{0-based state/action.}
 
-\item{alpha}{In (0, 1]. @param gamma In [0, 1]. @param done Terminal.}
+\item{r}{Reward.}
+
+\item{s_next}{0-based next state.}
+
+\item{alpha}{In (0, 1].}
+
+\item{gamma}{In [0, 1].}
+
+\item{done}{Terminal.}
 }
 \value{
 List with \code{Q}, \code{td_error}, \code{target}, \code{old_value},

@@ -22,7 +22,9 @@ morie_geron_albert(
 
 \item{d_embed}{Factorised width E in [1, d_model].}
 
-\item{vocab_size}{Optional; defaults to max(X) + 1. @param seed LCG seed.}
+\item{vocab_size}{Optional; defaults to max(X) + 1.}
+
+\item{seed}{LCG seed.}
 }
 \value{
 List with \code{hidden} (array batch x T x d), \code{n_params},

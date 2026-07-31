@@ -16,7 +16,11 @@ morie_geron_dataloader(
 \arguments{
 \item{dataset}{Array (batched on dim 1) or an integer length.}
 
-\item{batch_size}{int (>=1). @param shuffle,drop_last Logical. @param seed LCG seed.}
+\item{batch_size}{int (>=1).}
+
+\item{shuffle, drop_last}{Logical.}
+
+\item{seed}{LCG seed.}
 
 \item{num_workers}{Non-negative int, only affects \code{worker_assignment}.}
 }

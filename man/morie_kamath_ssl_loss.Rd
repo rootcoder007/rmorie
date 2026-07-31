@@ -25,15 +25,21 @@ morie_kamath_nsp_loss(x, y, d)
 morie_kamath_span_loss(x, xhat, i, j)
 }
 \arguments{
-\item{L_PTi}{Pretext losses. @param lambda_i Optional weights.}
+\item{L_PTi}{Pretext losses.}
+
+\item{lambda_i}{Optional weights.}
 
 \item{x}{Per-position probabilities of the true token.}
 
 \item{M_x}{0-based scored positions, no duplicates.}
 
-\item{xhat}{Per-token probability of ORIGINAL. @param d Labels.}
+\item{xhat}{Per-token probability of ORIGINAL.}
 
-\item{y}{Target-side probabilities. @param M_y Target mask.}
+\item{d}{Labels.}
+
+\item{y}{Target-side probabilities.}
+
+\item{M_y}{Target mask.}
 
 \item{i, j}{0-based inclusive span bounds.}
 }

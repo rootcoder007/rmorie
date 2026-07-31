@@ -10,7 +10,9 @@ morie_kamath_ch3_dante_cloze(
 )
 }
 \arguments{
-\item{prompt}{Cloze prompt. @param mask Mask token.}
+\item{prompt}{Cloze prompt.}
+
+\item{mask}{Mask token.}
 }
 \value{
 List with \code{mask_index} (0-based), \code{tokens}, \code{estimate}.

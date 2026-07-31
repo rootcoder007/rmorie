@@ -7,7 +7,9 @@
 morie_geron_bic_gmm(log_likelihood, n, n_params)
 }
 \arguments{
-\item{log_likelihood}{Finite scalar. @param n Observations, >= 1.}
+\item{log_likelihood}{Finite scalar.}
+
+\item{n}{Observations, >= 1.}
 
 \item{n_params}{Non-negative count.}
 }

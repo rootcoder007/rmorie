@@ -7,7 +7,9 @@
 morie_check_buffer(buffer, n_states, n_actions, name)
 }
 \arguments{
-\item{buffer}{List of length-4/5 transitions. @param n_states,n_actions Bounds.}
+\item{buffer}{List of length-4/5 transitions.}
+
+\item{n_states, n_actions}{Bounds.}
 
 \item{name}{Caller name for error messages.}
 }

@@ -12,7 +12,13 @@ morie_geron_locally_linear_embedding(
 )
 }
 \arguments{
-\item{X}{Data. @param n_components Embedding dimension. @param n_neighbors Neighbours. @param reg Ridge fraction.}
+\item{X}{Data.}
+
+\item{n_components}{Embedding dimension.}
+
+\item{n_neighbors}{Neighbours.}
+
+\item{reg}{Ridge fraction.}
 }
 \value{
 List with embedding, weights, reconstruction_error, eigenvalues, estimate, n, method.

@@ -7,9 +7,15 @@
 morie_geron_elastic_net(X, y, theta, alpha, r, fit_intercept = TRUE)
 }
 \arguments{
-\item{X, y}{Data. @param theta Parameters (bias first if fit_intercept).}
+\item{X, y}{Data.}
 
-\item{alpha}{Overall penalty (>=0). @param r L1 ratio in [0, 1]. @param fit_intercept Logical.}
+\item{theta}{Parameters (bias first if fit_intercept).}
+
+\item{alpha}{Overall penalty (>=0).}
+
+\item{r}{L1 ratio in [0, 1].}
+
+\item{fit_intercept}{Logical.}
 }
 \value{
 List with \code{cost}, \code{mse}, \code{l1_penalty}, \code{l2_penalty}, \code{gradient}.

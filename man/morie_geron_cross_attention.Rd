@@ -9,7 +9,9 @@ morie_geron_cross_attention(X_dec, X_enc, WQ, WK, WV, mask = NULL)
 \arguments{
 \item{X_dec, X_enc}{Decoder and encoder token matrices.}
 
-\item{WQ, WK, WV}{Projection matrices. @param mask Optional logical matrix.}
+\item{WQ, WK, WV}{Projection matrices.}
+
+\item{mask}{Optional logical matrix.}
 }
 \value{
 List with \code{output}, \code{attention_weights}, \code{logits}, \code{scale}, \code{d_k}.

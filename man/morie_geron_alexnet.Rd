@@ -12,9 +12,13 @@ morie_geron_alexnet(
 )
 }
 \arguments{
-\item{n_classes}{Output units, >= 1. @param input_size Square side length.}
+\item{n_classes}{Output units, >= 1.}
 
-\item{in_channels}{Input channels. @param dropout Rate in [0, 1).}
+\item{input_size}{Square side length.}
+
+\item{in_channels}{Input channels.}
+
+\item{dropout}{Rate in [0, 1).}
 }
 \value{
 List with \code{layers}, \code{total_params}, \code{trainable_params},

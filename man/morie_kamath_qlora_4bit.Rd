@@ -10,11 +10,19 @@ morie_kamath_qlora_4bit(W0_nf4, A, B, alpha, r, x, n_bins = 16)
 morie_kamath_dequantize_nf4(codes, absmax, n_bins = 16)
 }
 \arguments{
-\item{W0_nf4}{List with \code{codes} and \code{absmax}. @param A,B LoRA factors.}
+\item{W0_nf4}{List with \code{codes} and \code{absmax}.}
 
-\item{alpha, r}{Scaling. @param x Input. @param n_bins Grid size.}
+\item{A, B}{LoRA factors.}
 
-\item{codes}{0-based NF4 codes. @param absmax Scalar or per-row scale.}
+\item{alpha, r}{Scaling.}
+
+\item{x}{Input.}
+
+\item{n_bins}{Grid size.}
+
+\item{codes}{0-based NF4 codes.}
+
+\item{absmax}{Scalar or per-row scale.}
 }
 \value{
 List with \code{h}, \code{W0_dequantized}, \code{n_frozen_4bit}.

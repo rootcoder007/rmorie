@@ -14,9 +14,13 @@ morie_kamath_rlhf_pipeline(
 )
 }
 \arguments{
-\item{demos}{Demonstrations. @param preferences Preference pairs.}
+\item{demos}{Demonstrations.}
 
-\item{pi0}{Base policy. @param sft,train_rm,ppo Stage functions.}
+\item{preferences}{Preference pairs.}
+
+\item{pi0}{Base policy.}
+
+\item{sft, train_rm, ppo}{Stage functions.}
 }
 \value{
 List with \code{policy}, \code{policy_sft}, \code{reward_model}, \code{stages}.

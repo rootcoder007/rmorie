@@ -15,9 +15,13 @@ morie_geron_td_learning(
 )
 }
 \arguments{
-\item{V}{Value table. @param s,r,s_next Equal-length transitions.}
+\item{V}{Value table.}
 
-\item{alpha}{In (0, 1]. @param gamma In [0, 1].}
+\item{s, r, s_next}{Equal-length transitions.}
+
+\item{alpha}{In (0, 1].}
+
+\item{gamma}{In [0, 1].}
 
 \item{terminal}{Optional logical vector; TRUE drops the bootstrap.}
 }

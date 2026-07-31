@@ -13,10 +13,16 @@ morie_kamath_tree_of_thoughts(
 )
 }
 \arguments{
-\item{problem}{Root state. @param branch_factor Children per node.}
+\item{problem}{Root state.}
 
-\item{max_depth}{Depth. @param model Function (state, b) -> list of
-list(thought, score). @param beam Beam width.}
+\item{branch_factor}{Children per node.}
+
+\item{max_depth}{Depth.}
+
+\item{model}{Function (state, b) -> list of
+list(thought, score).}
+
+\item{beam}{Beam width.}
 }
 \value{
 List with \code{best_state}, \code{best_path}, \code{best_score}, \code{frontier}.

@@ -7,7 +7,9 @@
 morie_geron_min_max_scaling(X, feature_range = c(0, 1))
 }
 \arguments{
-\item{X}{Data. @param feature_range Target (low, high).}
+\item{X}{Data.}
+
+\item{feature_range}{Target (low, high).}
 }
 \value{
 List with X_scaled, data_min, data_max, data_range, scale, estimate, n, method.

@@ -16,9 +16,13 @@ morie_kamath_autoprompt_gradient_search(
 \arguments{
 \item{template}{List of tokens with NULL trigger slots.}
 
-\item{dataset}{Passed through to \code{model}. @param model Loss function.}
+\item{dataset}{Passed through to \code{model}.}
 
-\item{vocab}{Candidate tokens. @param grad_fn Optional gradient scorer.}
+\item{model}{Loss function.}
+
+\item{vocab}{Candidate tokens.}
+
+\item{grad_fn}{Optional gradient scorer.}
 
 \item{passes}{Sweeps over the slots.}
 }

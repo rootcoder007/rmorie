@@ -11,7 +11,11 @@ morie_geron_conv2d_forward(X, W, b = 0, stride = 1, padding = 0)
 
 \item{W}{Matrix (kh, kw) or 3-D array (C, kh, kw).}
 
-\item{b}{Bias. @param stride Scalar or (sh, sw). @param padding Scalar or (ph, pw).}
+\item{b}{Bias.}
+
+\item{stride}{Scalar or (sh, sw).}
+
+\item{padding}{Scalar or (ph, pw).}
 }
 \value{
 List with \code{Y}, \code{out_shape}, \code{padded_shape}, \code{n_multiply_adds}.

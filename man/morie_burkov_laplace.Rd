@@ -7,7 +7,9 @@
 morie_burkov_laplace(counts_ngram, counts_prefix, V)
 }
 \arguments{
-\item{counts_ngram, counts_prefix}{Counts. @param V Vocabulary size.}
+\item{counts_ngram, counts_prefix}{Counts.}
+
+\item{V}{Vocabulary size.}
 }
 \description{
 Laplace add-1 smoothing (Burkov Ch 2)

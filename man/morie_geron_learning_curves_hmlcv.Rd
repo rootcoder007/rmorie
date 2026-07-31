@@ -15,9 +15,15 @@ morie_geron_learning_curves_hmlcv(
 )
 }
 \arguments{
-\item{X, y}{Data. @param n_splits Sizes to evaluate. @param val_fraction Held-out fraction.}
+\item{X, y}{Data.}
 
-\item{fit, predict}{Optional callables (default OLS via lstsq). @param seed Split seed.}
+\item{n_splits}{Sizes to evaluate.}
+
+\item{val_fraction}{Held-out fraction.}
+
+\item{fit, predict}{Optional callables (default OLS via lstsq).}
+
+\item{seed}{Split seed.}
 }
 \value{
 List with train_sizes, rmse_train, rmse_val, final_gap, verdict, estimate, n, method.

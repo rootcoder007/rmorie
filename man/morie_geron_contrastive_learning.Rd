@@ -12,10 +12,14 @@ morie_geron_contrastive_learning(
 )
 }
 \arguments{
-\item{embeddings}{Matrix (B, d), B >= 3. @param positives 0-based
+\item{embeddings}{Matrix (B, d), B >= 3.}
+
+\item{positives}{0-based
 index of each anchor's positive partner (length B).}
 
-\item{tau}{Temperature. @param normalize Cosine-normalise rows.}
+\item{tau}{Temperature.}
+
+\item{normalize}{Cosine-normalise rows.}
 }
 \value{
 List with \code{loss}, \code{per_anchor_loss}, \code{pos_sim}, \code{neg_sim},

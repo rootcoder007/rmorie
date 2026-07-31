@@ -7,7 +7,9 @@
 morie_geron_encoder_decoder_nmt(src, tgt, model, max_len = NULL, eos = NULL)
 }
 \arguments{
-\item{src}{Source token sequence. @param tgt Target token ids (reference).}
+\item{src}{Source token sequence.}
+
+\item{tgt}{Target token ids (reference).}
 
 \item{model}{List with \code{encode(src)} and \code{decode(z, prefix)} functions.}
 

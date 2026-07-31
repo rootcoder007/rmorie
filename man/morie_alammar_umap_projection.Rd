@@ -16,7 +16,9 @@ morie_alammar_umap_projection(
 )
 }
 \arguments{
-\item{X}{Points. @param n_neighbors,min_dist,d_out,n_steps,learning_rate,seed Settings.}
+\item{X}{Points.}
+
+\item{n_neighbors, min_dist, d_out, n_steps, learning_rate, seed}{Settings.}
 }
 \description{
 UMAP objective minimised by descent (McInnes et al. 2018,

@@ -19,7 +19,9 @@ morie_geron_detr(
 )
 }
 \arguments{
-\item{image}{(H,W) or (C,H,W). @param n_queries,n_layers,d_model,n_heads,n_classes,backbone_stride int.}
+\item{image}{(H,W) or (C,H,W).}
+
+\item{n_queries, n_layers, d_model, n_heads, n_classes, backbone_stride}{int.}
 
 \item{pred_boxes, pred_classes, gt_boxes, gt_classes}{Optional matching inputs.}
 }

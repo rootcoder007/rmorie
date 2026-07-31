@@ -7,7 +7,9 @@
 morie_kamath_ch8_rouge_n(S, gram_n, candidate = NULL)
 }
 \arguments{
-\item{S}{List of reference token SEQUENCES. @param gram_n Order.}
+\item{S}{List of reference token SEQUENCES.}
+
+\item{gram_n}{Order.}
 
 \item{candidate}{Generated token sequence.}
 }

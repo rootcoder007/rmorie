@@ -7,7 +7,11 @@
 morie_kamath_corrective_rag(query, docs, clf, tau_hi, tau_lo)
 }
 \arguments{
-\item{query}{Query. @param docs Documents. @param clf Confidence function.}
+\item{query}{Query.}
+
+\item{docs}{Documents.}
+
+\item{clf}{Confidence function.}
 
 \item{tau_hi, tau_lo}{Upper and lower thresholds.}
 }

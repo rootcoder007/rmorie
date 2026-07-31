@@ -15,7 +15,11 @@ morie_geron_tree_sensitivity_scale(
 )
 }
 \arguments{
-\item{X, y}{Data. @param a,b Affine transform (a > 0). @param feature Optional single column.}
+\item{X, y}{Data.}
+
+\item{a, b}{Affine transform (a > 0).}
+
+\item{feature}{Optional single column.}
 
 \item{criterion, max_depth}{CART controls.}
 }

@@ -10,11 +10,15 @@ morie_kamath_ch9_mmllm_autoregressive(R, I, theta = NULL)
 morie_kamath_ch9_itg_loss(x, y)
 }
 \arguments{
-\item{R}{Response token probabilities. @param I Visual context.}
+\item{R}{Response token probabilities.}
+
+\item{I}{Visual context.}
 
 \item{theta}{Optional model.}
 
-\item{x}{Visual contexts, or NULL. @param y List of response probabilities.}
+\item{x}{Visual contexts, or NULL.}
+
+\item{y}{List of response probabilities.}
 }
 \value{
 List with \code{estimate}, \code{mean_nll}, \code{per_token}.

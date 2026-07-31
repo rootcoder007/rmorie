@@ -14,9 +14,13 @@ morie_geron_perceiver(
 )
 }
 \arguments{
-\item{x}{Input (N, D). @param latents Learned latents (L, D_lat).}
+\item{x}{Input (N, D).}
 
-\item{n_iter}{Cross-attention rounds. @param W_q,W_k,W_v Optional projections.}
+\item{latents}{Learned latents (L, D_lat).}
+
+\item{n_iter}{Cross-attention rounds.}
+
+\item{W_q, W_k, W_v}{Optional projections.}
 }
 \description{
 Perceiver: iterated latent-to-input scaled dot-product cross-attention (Geron Ch 16, hmprcv)

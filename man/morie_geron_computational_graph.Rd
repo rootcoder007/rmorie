@@ -7,7 +7,9 @@
 morie_geron_computational_graph(expr, values = NULL)
 }
 \arguments{
-\item{expr}{Expression tree. @param values Named list of variable values.}
+\item{expr}{Expression tree.}
+
+\item{values}{Named list of variable values.}
 }
 \value{
 List with \code{value}, \code{grad}, \code{gradient}, \code{node_grads},

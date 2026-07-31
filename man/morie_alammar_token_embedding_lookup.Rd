@@ -13,7 +13,9 @@ morie_alammar_document_embedding_pool(token_embeddings, attention_mask = NULL)
 morie_alammar_contextualized_embedding(layer_outputs, layer_idx, position)
 }
 \arguments{
-\item{ids}{0-based token ids. @param E_tok V x d embedding table.}
+\item{ids}{0-based token ids.}
+
+\item{E_tok}{V x d embedding table.}
 
 \item{token_embeddings}{Token vectors, one row each.}
 

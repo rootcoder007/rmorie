@@ -7,7 +7,9 @@
 morie_kamath_double_quantization(scales_fp32, bits = 8)
 }
 \arguments{
-\item{scales_fp32}{Block scales. @param bits Code width in [2, 16].}
+\item{scales_fp32}{Block scales.}
+
+\item{bits}{Code width in [2, 16].}
 }
 \value{
 List with \code{estimate} (max error), \code{scales_int8}, \code{shared_const}.

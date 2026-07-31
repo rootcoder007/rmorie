@@ -12,9 +12,13 @@ morie_kamath_best_of_n_sampling(
 )
 }
 \arguments{
-\item{samples}{Candidate responses. @param rewards Optional scores.}
+\item{samples}{Candidate responses.}
 
-\item{reward_fn}{Optional function (x, y). @param x Prompt.}
+\item{rewards}{Optional scores.}
+
+\item{reward_fn}{Optional function (x, y).}
+
+\item{x}{Prompt.}
 }
 \value{
 List with \code{estimate}, \code{best}, \code{best_index}, \code{reward_spread}.

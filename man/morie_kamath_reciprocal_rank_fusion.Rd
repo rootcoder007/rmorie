@@ -7,7 +7,9 @@
 morie_kamath_reciprocal_rank_fusion(rankings, k = 60)
 }
 \arguments{
-\item{rankings}{List of ranked id vectors. @param k Damping constant.}
+\item{rankings}{List of ranked id vectors.}
+
+\item{k}{Damping constant.}
 }
 \value{
 List with \code{ranking}, \code{scores}, \code{appearances}.

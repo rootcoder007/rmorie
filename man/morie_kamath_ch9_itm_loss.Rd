@@ -7,7 +7,9 @@
 morie_kamath_ch9_itm_loss(theta, v, t, y)
 }
 \arguments{
-\item{theta}{Score function or scores. @param v,t Images and texts.}
+\item{theta}{Score function or scores.}
+
+\item{v, t}{Images and texts.}
 
 \item{y}{0/1 match labels.}
 }

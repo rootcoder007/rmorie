@@ -7,7 +7,9 @@
 morie_kamath_rotary_positional_embedding(q, positions = NULL, base = 10000)
 }
 \arguments{
-\item{q}{(d,) or (seq_len, d) input. @param positions Optional positions.}
+\item{q}{(d,) or (seq_len, d) input.}
+
+\item{positions}{Optional positions.}
 
 \item{base}{RoPE base.}
 }

@@ -7,7 +7,9 @@
 morie_geron_kernel_pca_from_gram(K, n_components)
 }
 \arguments{
-\item{K}{Gram matrix. @param n_components Components to keep.}
+\item{K}{Gram matrix.}
+
+\item{n_components}{Components to keep.}
 }
 \value{
 List(projection, eigenvalues, alphas, K_centered).

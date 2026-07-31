@@ -7,7 +7,9 @@
 morie_kamath_membership_inference(losses, threshold, labels = NULL)
 }
 \arguments{
-\item{losses}{Per-example losses. @param threshold Cut-off.}
+\item{losses}{Per-example losses.}
+
+\item{threshold}{Cut-off.}
 
 \item{labels}{Optional 0/1 membership truth.}
 }

@@ -7,7 +7,9 @@
 morie_geron_gru(x_t, h_prev, weights)
 }
 \arguments{
-\item{x_t}{Input vector. @param h_prev Previous hidden state.}
+\item{x_t}{Input vector.}
+
+\item{h_prev}{Previous hidden state.}
 
 \item{weights}{Named list with W_z,U_z,b_z,W_r,U_r,b_r,W_h,U_h,b_h.}
 }

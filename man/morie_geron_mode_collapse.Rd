@@ -7,7 +7,11 @@
 morie_geron_mode_collapse(samples, reference = NULL, tol = NULL)
 }
 \arguments{
-\item{samples}{Generated samples. @param reference Optional real data. @param tol Optional mode radius.}
+\item{samples}{Generated samples.}
+
+\item{reference}{Optional real data.}
+
+\item{tol}{Optional mode radius.}
 }
 \value{
 List with n_modes, collapse_score, mean_pairwise_distance, coverage, mode_labels, mode_sizes, estimate, n, method.

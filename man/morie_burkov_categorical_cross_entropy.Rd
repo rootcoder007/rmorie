@@ -7,7 +7,9 @@
 morie_burkov_categorical_cross_entropy(y_hat, c)
 }
 \arguments{
-\item{y_hat}{Probability distribution. @param c Correct class,
+\item{y_hat}{Probability distribution.}
+
+\item{c}{Correct class,
 0-based to match the Python mirror.}
 }
 \description{

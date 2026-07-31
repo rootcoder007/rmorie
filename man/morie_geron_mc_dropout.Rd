@@ -7,7 +7,15 @@
 morie_geron_mc_dropout(model, x, K = 100, p = 0.5, seed = 0)
 }
 \arguments{
-\item{model}{function(x_masked) -> prediction. @param x Input. @param K Passes. @param p Drop probability. @param seed Seed.}
+\item{model}{function(x_masked) -> prediction.}
+
+\item{x}{Input.}
+
+\item{K}{Passes.}
+
+\item{p}{Drop probability.}
+
+\item{seed}{Seed.}
 }
 \value{
 List with mean, var, std, sem, samples, predictive_entropy, estimate, n, method.

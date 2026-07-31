@@ -26,7 +26,7 @@ List with \code{output}, \code{activations}, \code{layer_sizes}, \code{n_layers}
 \code{n_parameters}, \code{dead_units}.
 }
 \description{
-a_l = phi(W_l a_{l-1} + b_l), stacked
+a_l = phi(W_l \verb{a_\{l-1\}} + b_l), stacked
 \code{\link[=morie_geron_linear_layer_forward]{morie_geron_linear_layer_forward()}} calls; the last layer uses
 \code{output_activation}.
 }

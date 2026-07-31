@@ -13,10 +13,16 @@ morie_geron_underfitting(
 )
 }
 \arguments{
-\item{train_err}{Training error curve. @param threshold Bar to beat.}
+\item{train_err}{Training error curve.}
 
-\item{val_err}{Optional validation curve. @param baseline Alias for
-\code{threshold}. @param tol Gap tolerance.}
+\item{threshold}{Bar to beat.}
+
+\item{val_err}{Optional validation curve.}
+
+\item{baseline}{Alias for
+\code{threshold}.}
+
+\item{tol}{Gap tolerance.}
 }
 \value{
 List with \code{diagnosis}, \code{underfitting}, \code{train_error},

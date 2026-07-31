@@ -14,7 +14,9 @@ morie_geron_fashion_mnist(
 )
 }
 \arguments{
-\item{epochs, lr, batch_size, n_classes, input_size}{Config. @param filters Channels per conv block.}
+\item{epochs, lr, batch_size, n_classes, input_size}{Config.}
+
+\item{filters}{Channels per conv block.}
 }
 \value{
 List with \code{layers}, \code{total_params}, \code{flatten_dim}, \code{fc_share}, \code{class_names}.

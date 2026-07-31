@@ -7,7 +7,9 @@
 morie_kamath_ch6_gender_projection_reg(W_stereo, g)
 }
 \arguments{
-\item{W_stereo}{Stereotype embedding rows. @param g Gender direction.}
+\item{W_stereo}{Stereotype embedding rows.}
+
+\item{g}{Gender direction.}
 }
 \value{
 List with \code{estimate}, \code{projections}, \code{sum_abs}, \code{g_norm}.

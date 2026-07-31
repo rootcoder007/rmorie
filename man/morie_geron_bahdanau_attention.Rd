@@ -7,9 +7,15 @@
 morie_geron_bahdanau_attention(h, s_prev, W, U, v, b = NULL)
 }
 \arguments{
-\item{h}{Encoder states (T, d_h). @param s_prev Decoder state (d_s).}
+\item{h}{Encoder states (T, d_h).}
 
-\item{W}{(d_a, d_h). @param U (d_a, d_s). @param v (d_a).}
+\item{s_prev}{Decoder state (d_s).}
+
+\item{W}{(d_a, d_h).}
+
+\item{U}{(d_a, d_s).}
+
+\item{v}{(d_a).}
 
 \item{b}{Optional bias (d_a).}
 }

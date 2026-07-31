@@ -9,9 +9,13 @@ morie_geron_swin(image, window_size, n_layers = 2, d_model = 4, seed = 0)
 \arguments{
 \item{image}{(H, W) or (H, W, C) array.}
 
-\item{window_size}{Window side length. @param n_layers Blocks.}
+\item{window_size}{Window side length.}
 
-\item{d_model}{Token embedding width. @param seed LCG seed.}
+\item{n_layers}{Blocks.}
+
+\item{d_model}{Token embedding width.}
+
+\item{seed}{LCG seed.}
 }
 \value{
 list with Y, pooled, n_windows, window_tokens, shifted_layers,

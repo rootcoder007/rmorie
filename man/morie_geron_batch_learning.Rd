@@ -7,7 +7,9 @@
 morie_geron_batch_learning(X, y, fit_intercept = FALSE, ridge = 0)
 }
 \arguments{
-\item{X}{Design matrix. @param y Targets.}
+\item{X}{Design matrix.}
+
+\item{y}{Targets.}
 
 \item{fit_intercept}{Prepend a ones column.}
 

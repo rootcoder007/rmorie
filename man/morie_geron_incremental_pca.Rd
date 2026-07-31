@@ -7,7 +7,9 @@
 morie_geron_incremental_pca(X_iter, n_components, batch_size = NULL)
 }
 \arguments{
-\item{X_iter}{List of batches (matrices), or a single matrix. @param n_components Components to keep.}
+\item{X_iter}{List of batches (matrices), or a single matrix.}
+
+\item{n_components}{Components to keep.}
 
 \item{batch_size}{Rows per batch when X_iter is a single matrix.}
 }

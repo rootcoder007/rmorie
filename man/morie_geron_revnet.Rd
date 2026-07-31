@@ -7,7 +7,9 @@
 morie_geron_revnet(x, F, G)
 }
 \arguments{
-\item{x}{Input, even width on last axis. @param F,G Shape-preserving residual functions.}
+\item{x}{Input, even width on last axis.}
+
+\item{F, G}{Shape-preserving residual functions.}
 }
 \description{
 RevNet: reversible residual block, verified by explicit inversion (Geron Ch 12, hmrvn)

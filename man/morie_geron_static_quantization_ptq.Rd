@@ -12,9 +12,13 @@ morie_geron_static_quantization_ptq(
 )
 }
 \arguments{
-\item{model}{Weights. @param calibration_data Representative activations.}
+\item{model}{Weights.}
 
-\item{bits}{Bit width, 2 to 16. @param percentile Range-clipping percentile in (0, 100].}
+\item{calibration_data}{Representative activations.}
+
+\item{bits}{Bit width, 2 to 16.}
+
+\item{percentile}{Range-clipping percentile in (0, 100].}
 }
 \description{
 Static post-training quantization (PTQ) from calibration ranges (Geron App B, hmptq)

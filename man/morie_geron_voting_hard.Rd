@@ -9,7 +9,9 @@ morie_geron_voting_hard(models, X, y_true = NULL)
 \arguments{
 \item{models}{List of functions mapping X to a label vector.}
 
-\item{X}{Design matrix. @param y_true Optional gold labels.}
+\item{X}{Design matrix.}
+
+\item{y_true}{Optional gold labels.}
 }
 \value{
 List with \code{predicted}, \code{votes}, \code{classes},

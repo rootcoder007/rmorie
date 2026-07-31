@@ -15,7 +15,9 @@ morie_geron_umap(
 )
 }
 \arguments{
-\item{X}{Data (n, d), n >= 3. @param n_components,n_neighbors,min_dist,seed,n_iter,lr As in Python original.}
+\item{X}{Data (n, d), n >= 3.}
+
+\item{n_components, n_neighbors, min_dist, seed, n_iter, lr}{As in Python original.}
 }
 \value{
 list with embedding, graph, directed_graph, a, b, ab_sse, cross_entropy,

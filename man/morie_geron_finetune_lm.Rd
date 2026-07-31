@@ -17,7 +17,9 @@ morie_geron_finetune_lm(
 )
 }
 \arguments{
-\item{model}{function(theta, batch) -> list(loss, grad). @param dataset Training examples.}
+\item{model}{function(theta, batch) -> list(loss, grad).}
+
+\item{dataset}{Training examples.}
 
 \item{epochs, lr, theta, freeze, batch_size, weight_decay, warmup}{Config.}
 }

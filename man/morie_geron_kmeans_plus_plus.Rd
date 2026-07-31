@@ -7,7 +7,11 @@
 morie_geron_kmeans_plus_plus(X, n_clusters, seed = 0)
 }
 \arguments{
-\item{X}{Data. @param n_clusters Centres. @param seed Seed.}
+\item{X}{Data.}
+
+\item{n_clusters}{Centres.}
+
+\item{seed}{Seed.}
 }
 \value{
 List with centers, indices, d2, min_pair_distance, estimate, n, method.

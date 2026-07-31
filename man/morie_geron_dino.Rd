@@ -16,9 +16,13 @@ morie_geron_dino(
 )
 }
 \arguments{
-\item{images}{Passed to callables, otherwise ignored. @param student,teacher (V,K) logits or function.}
+\item{images}{Passed to callables, otherwise ignored.}
 
-\item{center}{Running teacher center (default zeros). @param tau_s,tau_t Temperatures (tau_t < tau_s).}
+\item{student, teacher}{(V,K) logits or function.}
+
+\item{center}{Running teacher center (default zeros).}
+
+\item{tau_s, tau_t}{Temperatures (tau_t < tau_s).}
 
 \item{momentum, center_momentum}{EMA coefficients in [0, 1).}
 }

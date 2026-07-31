@@ -165,10 +165,50 @@ test_that(".tps_knn_adjacency builds k-NN adjacency on 2D coords", {
   expect_true(is.matrix(out) || is.list(out))
 })
 
-test_that(".tps_cliff_ord_variance returns finite variance", {
+test_that(".tps_moran_wconst matches the hand-computed S0/S1/S2", {
+  set.seed(11)
   W <- matrix(stats::runif(25), 5L, 5L)
   W <- (W + t(W)) / 2; diag(W) <- 0
-  out <- rmorie:::.tps_cliff_ord_variance(W, n = 5L,
-                                           S0 = sum(W))
-  expect_true(is.numeric(out) && is.finite(out))
+  k <- rmorie:::.tps_moran_wconst(W)
+  # for a symmetric W these reduce to closed forms independent of the
+  # implementation, so they check the algebra rather than restate it
+  expect_equal(k$S0, sum(W), tolerance = 1e-12)
+  expect_equal(k$S1, 2 * sum(W^2), tolerance = 1e-12)
+  expect_equal(k$S2, sum((2 * rowSums(W))^2), tolerance = 1e-12)
+
+  # asymmetric W: S1 must use the symmetric part, not W itself
+  A <- matrix(stats::runif(25), 5L, 5L); diag(A) <- 0
+  ka <- rmorie:::.tps_moran_wconst(A)
+  expect_equal(ka$S1, 2 * sum(((A + t(A)) / 2)^2), tolerance = 1e-12)
+  expect_false(isTRUE(all.equal(ka$S1, 2 * sum(A^2))))
+})
+
+test_that(".tps_moran_variance labels its null and uses sample kurtosis", {
+  set.seed(12)
+  n <- 5L
+  W <- matrix(stats::runif(25), n, n)
+  W <- (W + t(W)) / 2; diag(W) <- 0
+  z <- stats::rnorm(n); z <- z - mean(z)
+
+  vn <- rmorie:::.tps_moran_variance(W, n, z = z, randomisation = FALSE)
+  expect_identical(vn$assumption, "normality")
+  expect_true(is.finite(vn$variance))
+  # the normality null does not look at the data at all
+  expect_equal(vn$variance,
+               rmorie:::.tps_moran_variance(W, n, z = 10 * z,
+                                            randomisation = FALSE)$variance,
+               tolerance = 1e-12)
+  expect_true(is.na(vn$kurtosis))
+
+  vr <- rmorie:::.tps_moran_variance(W, n, z = z, randomisation = TRUE)
+  expect_identical(vr$assumption, "randomisation")
+  expect_true(is.finite(vr$variance))
+  expect_equal(vr$kurtosis, n * sum(z^4) / sum(z^2)^2, tolerance = 1e-12)
+  # kurtosis is scale-free, so the randomisation null is too
+  expect_equal(vr$variance,
+               rmorie:::.tps_moran_variance(W, n, z = 10 * z,
+                                            randomisation = TRUE)$variance,
+               tolerance = 1e-12)
+  # and the two nulls must actually differ
+  expect_false(isTRUE(all.equal(vr$variance, vn$variance)))
 })

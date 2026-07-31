@@ -16,9 +16,13 @@ morie_geron_char_rnn(
 \arguments{
 \item{text}{Character scalar of at least 2 characters.}
 
-\item{hidden}{Hidden width. @param epochs Training epochs.}
+\item{hidden}{Hidden width.}
 
-\item{lr}{Learning rate. @param seed LCG seed.}
+\item{epochs}{Training epochs.}
+
+\item{lr}{Learning rate.}
+
+\item{seed}{LCG seed.}
 
 \item{generate}{Number of characters to sample greedily.}
 }

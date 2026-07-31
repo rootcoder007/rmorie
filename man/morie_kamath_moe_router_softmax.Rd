@@ -7,7 +7,11 @@
 morie_kamath_moe_router_softmax(x, Wr, experts, k)
 }
 \arguments{
-\item{x}{Token. @param Wr Router projection. @param experts Expert list.}
+\item{x}{Token.}
+
+\item{Wr}{Router projection.}
+
+\item{experts}{Expert list.}
 
 \item{k}{Experts kept.}
 }

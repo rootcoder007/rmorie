@@ -7,7 +7,9 @@
 morie_geron_one_vs_one_hm(X, y, base_estimator = NULL, X_new = NULL)
 }
 \arguments{
-\item{X, y}{Data and class labels. @param base_estimator Optional \code{base_estimator(Xp, yp) -> predict}.}
+\item{X, y}{Data and class labels.}
+
+\item{base_estimator}{Optional \code{base_estimator(Xp, yp) -> predict}.}
 
 \item{X_new}{Optional rows to classify (default \code{X}).}
 }

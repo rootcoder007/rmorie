@@ -25,7 +25,9 @@ morie_kamath_ch3_cloze_prompt_template(
 )
 }
 \arguments{
-\item{x}{Input text. @param z Answer, or NULL to leave the slot open.}
+\item{x}{Input text.}
+
+\item{z}{Answer, or NULL to leave the slot open.}
 
 \item{template}{Template string.}
 }

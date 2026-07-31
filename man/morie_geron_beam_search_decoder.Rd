@@ -14,7 +14,9 @@ morie_geron_beam_search_decoder(
 \arguments{
 \item{scores}{Matrix (T, V) of log-scale scores.}
 
-\item{beam_width}{Hypotheses kept. @param max_len Steps, defaults to T.}
+\item{beam_width}{Hypotheses kept.}
+
+\item{max_len}{Steps, defaults to T.}
 
 \item{length_penalty}{GNMT exponent for the final ranking.}
 }

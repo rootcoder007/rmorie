@@ -9,7 +9,9 @@ morie_geron_hebb_rule(X, Y, eta = 0.1, W = NULL)
 \arguments{
 \item{X}{Presynaptic activity (rows = presentations).}
 
-\item{Y}{Postsynaptic activity. @param eta Positive rate.}
+\item{Y}{Postsynaptic activity.}
+
+\item{eta}{Positive rate.}
 
 \item{W}{Optional starting weights.}
 }

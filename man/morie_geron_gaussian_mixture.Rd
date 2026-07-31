@@ -14,7 +14,11 @@ morie_geron_gaussian_mixture(
 )
 }
 \arguments{
-\item{X}{Data (m, d). @param n_components int (>=1, <=m). @param seed LCG seed.}
+\item{X}{Data (m, d).}
+
+\item{n_components}{int (>=1, <=m).}
+
+\item{seed}{LCG seed.}
 
 \item{max_iter, tol, reg}{EM controls.}
 }

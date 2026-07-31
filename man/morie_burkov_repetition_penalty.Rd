@@ -7,7 +7,9 @@
 morie_burkov_repetition_penalty(logits, prev_tokens, penalty = 1.2)
 }
 \arguments{
-\item{logits}{Logit vector. @param prev_tokens 0-based indices of
+\item{logits}{Logit vector.}
+
+\item{prev_tokens}{0-based indices of
 already-generated tokens (matching the Python mirror).}
 
 \item{penalty}{Positive penalty, usually above 1.}

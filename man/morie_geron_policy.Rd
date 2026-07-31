@@ -7,7 +7,9 @@
 morie_geron_policy(state, pi, seed = 0)
 }
 \arguments{
-\item{state}{Current state (0-based). @param pi Function, matrix, vector or named list.}
+\item{state}{Current state (0-based).}
+
+\item{pi}{Function, matrix, vector or named list.}
 
 \item{seed}{Integer-LCG seed for the sampled action.}
 }

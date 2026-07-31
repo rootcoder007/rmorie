@@ -7,9 +7,13 @@
 morie_geron_cross_attention_report(dec_h, enc_h, W_Q, W_K, W_V, mask = NULL)
 }
 \arguments{
-\item{dec_h}{Decoder states (T_dec, d). @param enc_h Encoder states.}
+\item{dec_h}{Decoder states (T_dec, d).}
 
-\item{W_Q, W_K, W_V}{Projection matrices. @param mask Optional mask.}
+\item{enc_h}{Encoder states.}
+
+\item{W_Q, W_K, W_V}{Projection matrices.}
+
+\item{mask}{Optional mask.}
 }
 \value{
 List with \code{context}, \code{output}, \code{attention_weights},

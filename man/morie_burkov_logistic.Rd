@@ -7,7 +7,9 @@
 morie_burkov_logistic(w, x, b)
 }
 \arguments{
-\item{w, x}{Vectors. @param b Bias.}
+\item{w, x}{Vectors.}
+
+\item{b}{Bias.}
 }
 \description{
 Logistic regression sigma(w.x + b) (Burkov Eq 1.8)

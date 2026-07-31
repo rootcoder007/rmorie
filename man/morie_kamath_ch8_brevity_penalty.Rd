@@ -7,7 +7,9 @@
 morie_kamath_ch8_brevity_penalty(c, r)
 }
 \arguments{
-\item{c}{Candidate length. @param r Reference length.}
+\item{c}{Candidate length.}
+
+\item{r}{Reference length.}
 }
 \value{
 List with \code{estimate}, \code{penalized}.

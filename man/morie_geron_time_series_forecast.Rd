@@ -13,16 +13,22 @@ morie_geron_time_series_forecast(
 )
 }
 \arguments{
-\item{y}{Univariate series. @param horizon Steps ahead. @param window Lag width.}
+\item{y}{Univariate series.}
 
-\item{ridge}{L2 penalty (not on intercept). @param recursive Iterate one-step model vs direct per-step fit.}
+\item{horizon}{Steps ahead.}
+
+\item{window}{Lag width.}
+
+\item{ridge}{L2 penalty (not on intercept).}
+
+\item{recursive}{Iterate one-step model vs direct per-step fit.}
 }
 \value{
 list with forecast, coef, intercept, train_mse, naive_mse, skill,
 window, horizon, estimate, n, method.
 }
 \description{
-Supervised windowing (y_{t-w+1..t}) -> y_{t+1}, ridge-regularised
+Supervised windowing (\verb{y_\{t-w+1..t\}}) -> \verb{y_\{t+1\}}, ridge-regularised
 normal equations (min-norm solve), rolled forward recursively or
 fit directly per horizon step.
 }

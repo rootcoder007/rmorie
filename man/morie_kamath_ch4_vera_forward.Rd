@@ -7,9 +7,13 @@
 morie_kamath_ch4_vera_forward(W_0, Lambda_b, Lambda_d, A, B, x)
 }
 \arguments{
-\item{W_0}{Frozen weight. @param Lambda_b,Lambda_d Diagonals.}
+\item{W_0}{Frozen weight.}
 
-\item{A, B}{Frozen shared factors. @param x Input.}
+\item{Lambda_b, Lambda_d}{Diagonals.}
+
+\item{A, B}{Frozen shared factors.}
+
+\item{x}{Input.}
 }
 \value{
 List with \code{h}, \code{delta_h}, \code{r}, \code{n_trainable}.

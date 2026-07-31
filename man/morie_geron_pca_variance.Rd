@@ -13,9 +13,13 @@ morie_geron_pca_variance(
 )
 }
 \arguments{
-\item{X}{Data (m, p). @param n_components Optional cap passed through to PCA.}
+\item{X}{Data (m, p).}
 
-\item{threshold}{Variance fraction to reach. @param n_probes,seed Random-direction check controls.}
+\item{n_components}{Optional cap passed through to PCA.}
+
+\item{threshold}{Variance fraction to reach.}
+
+\item{n_probes, seed}{Random-direction check controls.}
 }
 \description{
 PCA variance accounting: cumulative ratio, threshold cut, probe check (Geron Ch 7, hmpcav)

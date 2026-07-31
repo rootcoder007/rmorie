@@ -7,7 +7,9 @@
 morie_geron_relu(z, leaky = 0)
 }
 \arguments{
-\item{z}{Pre-activations. @param leaky Negative slope; 0 is plain ReLU.}
+\item{z}{Pre-activations.}
+
+\item{leaky}{Negative slope; 0 is plain ReLU.}
 }
 \description{
 Rectified linear unit activation, with a leaky negative slope and dead-fraction diagnostic (Geron Ch 9, hmrelu)

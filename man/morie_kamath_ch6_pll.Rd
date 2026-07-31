@@ -14,7 +14,9 @@ morie_kamath_ch6_cps_metric(U, M, theta = NULL)
 
 \item{theta}{Optional function of a 0-based index.}
 
-\item{U}{Unmodified tokens. @param M Modified tokens.}
+\item{U}{Unmodified tokens.}
+
+\item{M}{Modified tokens.}
 }
 \value{
 List with \code{estimate}, \code{per_token}.

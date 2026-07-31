@@ -7,7 +7,11 @@
 morie_burkov_mse_cost(w, b, x, y, N = NULL)
 }
 \arguments{
-\item{w, b}{Parameters. @param x,y Data. @param N Optional size check.}
+\item{w, b}{Parameters.}
+
+\item{x, y}{Data.}
+
+\item{N}{Optional size check.}
 }
 \value{
 List with \code{cost}, \code{residuals}.

@@ -7,7 +7,13 @@
 morie_geron_multioutput(X, Y, k = 1, X_new = NULL)
 }
 \arguments{
-\item{X}{Features. @param Y Categorical targets (m,t). @param k Neighbours voting. @param X_new Optional rows to predict.}
+\item{X}{Features.}
+
+\item{Y}{Categorical targets (m,t).}
+
+\item{k}{Neighbours voting.}
+
+\item{X_new}{Optional rows to predict.}
 }
 \value{
 List with predictions, predict, accuracy_per_output, accuracy, n_outputs, estimate, n, method.

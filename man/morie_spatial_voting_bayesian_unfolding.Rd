@@ -14,7 +14,7 @@ morie_spatial_voting_bayesian_unfolding(
 \arguments{
 \item{D}{Respondent-stimulus dissimilarity matrix.}
 
-\item{n_dims}{Latent dimensions. @param n_samples MCMC samples.}
+\item{n_dims}{Latent dimensions.}
 
 \item{n_samples}{Integer; posterior-sample count.}
 

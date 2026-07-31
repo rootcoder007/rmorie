@@ -7,9 +7,13 @@
 morie_kamath_medusa_heads(hidden_state, medusa_heads, k, verify = NULL)
 }
 \arguments{
-\item{hidden_state}{Hidden vector. @param medusa_heads Matrices or functions.}
+\item{hidden_state}{Hidden vector.}
 
-\item{k}{Heads used. @param verify Optional (position, token) -> logical.}
+\item{medusa_heads}{Matrices or functions.}
+
+\item{k}{Heads used.}
+
+\item{verify}{Optional (position, token) -> logical.}
 }
 \value{
 List with \code{tokens}, \code{probabilities}, \code{accepted}.

@@ -9,7 +9,9 @@ morie_kamath_yarn_context_extrapolation(theta, scale, d, ramp = NULL)
 \arguments{
 \item{theta}{RoPE base (scalar) or the d/2 frequencies.}
 
-\item{scale}{Context multiplier. @param d Embedding width (even).}
+\item{scale}{Context multiplier.}
+
+\item{d}{Embedding width (even).}
 
 \item{ramp}{Optional (lo, hi) blend band.}
 }

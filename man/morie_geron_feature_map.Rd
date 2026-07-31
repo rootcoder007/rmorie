@@ -14,9 +14,15 @@ morie_geron_feature_map(
 )
 }
 \arguments{
-\item{x}{(H,W) or (C,H,W). @param K One filter or a stack (F,...). @param b Bias (scalar or per filter).}
+\item{x}{(H,W) or (C,H,W).}
 
-\item{activation}{"relu"/"identity"/"tanh"/"sigmoid". @param stride,padding Conv controls.}
+\item{K}{One filter or a stack (F,...).}
+
+\item{b}{Bias (scalar or per filter).}
+
+\item{activation}{"relu"/"identity"/"tanh"/"sigmoid".}
+
+\item{stride, padding}{Conv controls.}
 }
 \value{
 List with \code{feature_map}, \code{pre_activation}, \code{out_shape}, \code{n_filters}, \code{sparsity}.

@@ -9,7 +9,9 @@ morie_geron_novelty_detection(model, X_new, reference = NULL)
 \arguments{
 \item{model}{Callable log-density, list with \code{log_density}/\code{reference}, or clean training matrix.}
 
-\item{X_new}{Points to test. @param reference Optional log reference density override.}
+\item{X_new}{Points to test.}
+
+\item{reference}{Optional log reference density override.}
 }
 \description{
 Novelty detection by density ratio against a clean training set (Geron Ch 8, hmnov)

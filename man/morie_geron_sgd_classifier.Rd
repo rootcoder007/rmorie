@@ -15,7 +15,9 @@ morie_geron_sgd_classifier(
 )
 }
 \arguments{
-\item{X}{Design matrix (n, d). @param y Binary labels (2 distinct values).}
+\item{X}{Design matrix (n, d).}
+
+\item{y}{Binary labels (2 distinct values).}
 
 \item{lr, n_iter, alpha, seed, shuffle}{As in the Python original.}
 }

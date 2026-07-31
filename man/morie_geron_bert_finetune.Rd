@@ -7,9 +7,15 @@
 morie_geron_bert_finetune(bert, X, y, epochs = 100, lr = 0.1, l2 = 0)
 }
 \arguments{
-\item{bert}{Embedding function. @param X Inputs passed to \code{bert}.}
+\item{bert}{Embedding function.}
 
-\item{y}{0-based class labels. @param epochs Steps. @param lr Step size.}
+\item{X}{Inputs passed to \code{bert}.}
+
+\item{y}{0-based class labels.}
+
+\item{epochs}{Steps.}
+
+\item{lr}{Step size.}
 
 \item{l2}{Non-negative penalty on W (bias unpenalised).}
 }

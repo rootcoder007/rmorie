@@ -10,7 +10,9 @@ morie_kamath_ch5_dpo_pref_simplified(pi_star, pi_ref, beta)
 morie_kamath_ch5_dpo_pref_substituted(pi_star, pi_ref, beta, Z = NULL)
 }
 \arguments{
-\item{pi_star, pi_ref}{Two-response policies. @param beta Positive.}
+\item{pi_star, pi_ref}{Two-response policies.}
+
+\item{beta}{Positive.}
 
 \item{Z}{Partition function carried through; default 1.}
 }

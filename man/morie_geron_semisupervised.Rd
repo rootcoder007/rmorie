@@ -14,11 +14,17 @@ morie_geron_semisupervised(
 )
 }
 \arguments{
-\item{X_l}{Labeled inputs (n_l, d). @param y_l Labels, length n_l.}
+\item{X_l}{Labeled inputs (n_l, d).}
 
-\item{X_u}{Unlabeled pool (n_u, d). @param alpha Smoothness weight (>=0).}
+\item{y_l}{Labels, length n_l.}
 
-\item{gamma}{RBF width (>0). @param fit_intercept Prepend intercept column.}
+\item{X_u}{Unlabeled pool (n_u, d).}
+
+\item{alpha}{Smoothness weight (>=0).}
+
+\item{gamma}{RBF width (>0).}
+
+\item{fit_intercept}{Prepend intercept column.}
 }
 \value{
 list with theta, fitted, unlabeled_pred, sup_loss, roughness,

@@ -7,7 +7,9 @@
 morie_alammar_sdp_attention(Q, K, V, mask = NULL)
 }
 \arguments{
-\item{Q, K, V}{Matrices. @param mask Optional matrix.}
+\item{Q, K, V}{Matrices.}
+
+\item{mask}{Optional matrix.}
 }
 \value{
 List with \code{output}, \code{attention}.

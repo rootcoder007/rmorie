@@ -7,7 +7,11 @@
 morie_kamath_scaling_laws(N, N_c, alpha_N, L_inf = 0)
 }
 \arguments{
-\item{N}{Model scale(s). @param N_c Critical scale. @param alpha_N Exponent.}
+\item{N}{Model scale(s).}
+
+\item{N_c}{Critical scale.}
+
+\item{alpha_N}{Exponent.}
 
 \item{L_inf}{Irreducible loss.}
 }

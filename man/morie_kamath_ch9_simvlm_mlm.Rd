@@ -7,9 +7,13 @@
 morie_kamath_ch9_simvlm_mlm(theta, x, v, x_m)
 }
 \arguments{
-\item{theta}{Optional model theta(x, v). @param x Token probabilities.}
+\item{theta}{Optional model theta(x, v).}
 
-\item{v}{Image-region features. @param x_m 0-based masked positions.}
+\item{x}{Token probabilities.}
+
+\item{v}{Image-region features.}
+
+\item{x_m}{0-based masked positions.}
 }
 \value{
 List with \code{estimate}, \code{per_position}, \code{n_image_regions}.

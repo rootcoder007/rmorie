@@ -14,9 +14,17 @@ morie_geron_mean_shift(
 )
 }
 \arguments{
-\item{X}{Data. @param bandwidth Kernel bandwidth. @param kernel gaussian/flat. @param max_iter Iteration cap.}
+\item{X}{Data.}
 
-\item{tol}{Shift tolerance. @param merge_tol Optional mode-merge distance.}
+\item{bandwidth}{Kernel bandwidth.}
+
+\item{kernel}{gaussian/flat.}
+
+\item{max_iter}{Iteration cap.}
+
+\item{tol}{Shift tolerance.}
+
+\item{merge_tol}{Optional mode-merge distance.}
 }
 \value{
 List with labels, modes, n_clusters, trajectories_iters, estimate, n, method.

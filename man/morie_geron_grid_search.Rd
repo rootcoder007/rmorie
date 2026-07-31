@@ -14,11 +14,15 @@ morie_geron_grid_search(
 )
 }
 \arguments{
-\item{param_grid}{Named list of value vectors. @param X,y Data.}
+\item{param_grid}{Named list of value vectors.}
+
+\item{X, y}{Data.}
 
 \item{estimator}{function(X_train, y_train, ...) -> predict; default ridge.}
 
-\item{K}{Folds. @param score Optional function(y_true, y_pred) -> score.}
+\item{K}{Folds.}
+
+\item{score}{Optional function(y_true, y_pred) -> score.}
 }
 \value{
 List with \code{best_params}, \code{best_score}, \code{results}, \code{n_candidates}, \code{n_fits}.

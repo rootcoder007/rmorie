@@ -7,7 +7,9 @@
 morie_kamath_q_former(queries, visual_features, W_out = NULL)
 }
 \arguments{
-\item{queries}{Query rows. @param visual_features Patch rows.}
+\item{queries}{Query rows.}
+
+\item{visual_features}{Patch rows.}
 
 \item{W_out}{Optional projection.}
 }

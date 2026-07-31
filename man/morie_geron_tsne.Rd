@@ -15,7 +15,9 @@ morie_geron_tsne(
 )
 }
 \arguments{
-\item{X}{Data (n, d), n >= 3. @param n_components,perplexity,seed,n_iter,lr,momentum As in Python original.}
+\item{X}{Data (n, d), n >= 3.}
+
+\item{n_components, perplexity, seed, n_iter, lr, momentum}{As in Python original.}
 }
 \value{
 list with embedding, P, Q, kl, kl_curve, betas, perplexity, estimate, n, method.

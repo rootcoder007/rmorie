@@ -7,7 +7,9 @@
 morie_kamath_memorization_exposure(canary_ll, candidate_lls)
 }
 \arguments{
-\item{canary_ll}{Canary log-likelihood. @param candidate_lls Competitors.}
+\item{canary_ll}{Canary log-likelihood.}
+
+\item{candidate_lls}{Competitors.}
 }
 \value{
 List with \code{estimate}, \code{rank}, \code{max_exposure}.

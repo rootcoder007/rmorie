@@ -7,7 +7,9 @@
 morie_geron_symd_evaluate(t, env)
 }
 \arguments{
-\item{t}{Tree node. @param env Named list/numeric vector of variable values.}
+\item{t}{Tree node.}
+
+\item{env}{Named list/numeric vector of variable values.}
 }
 \value{
 Numeric scalar.

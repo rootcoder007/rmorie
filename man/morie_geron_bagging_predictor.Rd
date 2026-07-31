@@ -7,7 +7,9 @@
 morie_geron_bagging_predictor(predictions, aggregate = "mean")
 }
 \arguments{
-\item{predictions}{Matrix (B, m). @param aggregate "mean", "median", "vote".}
+\item{predictions}{Matrix (B, m).}
+
+\item{aggregate}{"mean", "median", "vote".}
 }
 \value{
 List with \code{prediction}, \code{per_instance_variance},

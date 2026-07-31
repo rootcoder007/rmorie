@@ -17,7 +17,9 @@ morie_geron_random_patches(
 )
 }
 \arguments{
-\item{X, y}{Data and targets. @param base_estimator Optional \code{base_estimator(Xp, yp) -> predict}.}
+\item{X, y}{Data and targets.}
+
+\item{base_estimator}{Optional \code{base_estimator(Xp, yp) -> predict}.}
 
 \item{n_estimators, max_samples, max_features, seed, task, bootstrap}{Controls.}
 }

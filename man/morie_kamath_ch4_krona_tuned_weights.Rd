@@ -10,7 +10,11 @@ morie_kamath_ch4_krona_tuned_weights(W, A_k, B_k, s)
 morie_kamath_ch4_krona_output(X, W, A_k, B_k, s)
 }
 \arguments{
-\item{W}{Base weight. @param A_k,B_k Kronecker factors. @param s Scale.}
+\item{W}{Base weight.}
+
+\item{A_k, B_k}{Kronecker factors.}
+
+\item{s}{Scale.}
 
 \item{X}{Input rows.}
 }

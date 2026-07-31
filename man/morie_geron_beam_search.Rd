@@ -14,9 +14,13 @@ morie_geron_beam_search(
 )
 }
 \arguments{
-\item{model}{Scorer function. @param src Source, passed through.}
+\item{model}{Scorer function.}
 
-\item{beam_width}{Hypotheses kept per step. @param max_len Token cap.}
+\item{src}{Source, passed through.}
+
+\item{beam_width}{Hypotheses kept per step.}
+
+\item{max_len}{Token cap.}
 
 \item{eos}{Optional 0-based end-of-sequence token.}
 

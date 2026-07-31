@@ -7,7 +7,11 @@
 morie_burkov_linear_function(x, w, b)
 }
 \arguments{
-\item{x}{Feature values. @param w Weight. @param b Bias.}
+\item{x}{Feature values.}
+
+\item{w}{Weight.}
+
+\item{b}{Bias.}
 }
 \value{
 List with \code{predictions}.

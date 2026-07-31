@@ -9,7 +9,9 @@ morie_kamath_prefix_tuning(prefix_K, prefix_V, K_input, V_input, Q = NULL)
 \arguments{
 \item{prefix_K, prefix_V}{Virtual key/value tokens.}
 
-\item{K_input, V_input}{Real keys and values. @param Q Optional queries.}
+\item{K_input, V_input}{Real keys and values.}
+
+\item{Q}{Optional queries.}
 }
 \value{
 List with \code{K}, \code{V}, \code{prefix_len}, \code{n_trainable}.

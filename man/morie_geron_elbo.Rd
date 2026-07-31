@@ -14,9 +14,13 @@ morie_geron_elbo(
 )
 }
 \arguments{
-\item{x}{Inputs (m, d). @param mu,log_sigma Posterior params (m, k).}
+\item{x}{Inputs (m, d).}
 
-\item{x_recon}{Optional decoder output (default x). @param likelihood "gaussian"/"bernoulli".}
+\item{mu, log_sigma}{Posterior params (m, k).}
+
+\item{x_recon}{Optional decoder output (default x).}
+
+\item{likelihood}{"gaussian"/"bernoulli".}
 
 \item{sigma_x}{Fixed decoder sd for the Gaussian likelihood.}
 }

@@ -14,9 +14,15 @@ morie_geron_in_context_learning_hmicl(
 )
 }
 \arguments{
-\item{model}{function(prompt, candidate) -> log-probability. @param examples List of (x,y) pairs.}
+\item{model}{function(prompt, candidate) -> log-probability.}
 
-\item{query}{Query input. @param candidates Optional label set. @param template,separator Prompt assembly.}
+\item{examples}{List of (x,y) pairs.}
+
+\item{query}{Query input.}
+
+\item{candidates}{Optional label set.}
+
+\item{template, separator}{Prompt assembly.}
 }
 \value{
 List with prediction, prompt, log_probs, posterior, n_shot, candidates, estimate, n, method.

@@ -13,11 +13,15 @@ morie_geron_diffusion_forward(
 )
 }
 \arguments{
-\item{x0}{Clean sample. @param T Diffusion steps (>=1).}
+\item{x0}{Clean sample.}
+
+\item{T}{Diffusion steps (>=1).}
 
 \item{beta_schedule}{"linear"/"cosine"/vector.}
 
-\item{t}{Step to report (default T). @param seed LCG seed.}
+\item{t}{Step to report (default T).}
+
+\item{seed}{LCG seed.}
 }
 \value{
 List with \code{x_t}, \code{x_chain}, \code{betas}, \code{alphas}, \code{alpha_bar},

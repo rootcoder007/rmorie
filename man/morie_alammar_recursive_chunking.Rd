@@ -24,20 +24,26 @@ morie_alammar_chosen_rejected_template(prompts, chosen, rejected)
 morie_alammar_instruction_data_template(records, template = NULL)
 }
 \arguments{
-\item{text}{Input string. @param separators Tier list.}
+\item{text}{Input string.}
+
+\item{separators}{Tier list.}
 
 \item{target_size, overlap}{Sizes.}
 
-\item{conversation}{List of c(user, assistant) turns. @param N Window.}
+\item{conversation}{List of c(user, assistant) turns.}
 
-\item{turns}{List of c(role, content). @param template_tokens Named
+\item{N}{Window.}
+
+\item{turns}{List of c(role, content).}
+
+\item{template_tokens}{Named
 list role -> c(open, close).}
 
 \item{prompts, chosen, rejected}{Aligned character vectors.}
 
 \item{records}{List of lists with instruction/input/output.}
 
-\item{template}{Format string with {instruction} and {input}.}
+\item{template}{Format string with \code{{instruction}} and \code{{input}}.}
 }
 \description{
 Recursive chunking, buffer memory, templates (Alammar Ch 6-12)

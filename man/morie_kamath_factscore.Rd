@@ -7,7 +7,9 @@
 morie_kamath_factscore(atomic_claims, knowledge_base)
 }
 \arguments{
-\item{atomic_claims}{Claims. @param knowledge_base Predicate or vector.}
+\item{atomic_claims}{Claims.}
+
+\item{knowledge_base}{Predicate or vector.}
 }
 \value{
 List with \code{estimate}, \code{supported}, \code{unsupported}.

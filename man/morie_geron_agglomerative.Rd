@@ -7,7 +7,9 @@
 morie_geron_agglomerative(X, n_clusters = 2, linkage = "single")
 }
 \arguments{
-\item{X}{Observations (n, d). @param n_clusters Stop count.}
+\item{X}{Observations (n, d).}
+
+\item{n_clusters}{Stop count.}
 
 \item{linkage}{"single", "complete", "average" or "centroid".}
 }

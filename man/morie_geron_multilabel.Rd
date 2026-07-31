@@ -7,7 +7,13 @@
 morie_geron_multilabel(X, Y, k = 3, Y_pred = NULL)
 }
 \arguments{
-\item{X}{Features. @param Y Binary label matrix (m,K). @param k Neighbours. @param Y_pred Optional predictions.}
+\item{X}{Features.}
+
+\item{Y}{Binary label matrix (m,K).}
+
+\item{k}{Neighbours.}
+
+\item{Y_pred}{Optional predictions.}
 }
 \value{
 List with Y_pred, subset_accuracy, hamming_loss, jaccard, per_label_f1, macro_f1,

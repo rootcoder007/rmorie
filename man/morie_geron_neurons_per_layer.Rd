@@ -12,9 +12,13 @@ morie_geron_neurons_per_layer(
 )
 }
 \arguments{
-\item{n_features}{Input width. @param n_layers Hidden layers.}
+\item{n_features}{Input width.}
 
-\item{n_outputs}{Output width. @param width Override for w.}
+\item{n_layers}{Hidden layers.}
+
+\item{n_outputs}{Output width.}
+
+\item{width}{Override for w.}
 }
 \value{
 List with \code{width}, \code{width_range}, \code{n_layers},

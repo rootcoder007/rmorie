@@ -7,7 +7,9 @@
 morie_geron_cart_split_cost(X, y, feature, threshold, criterion = "gini")
 }
 \arguments{
-\item{X}{Feature matrix. @param y Labels or targets.}
+\item{X}{Feature matrix.}
+
+\item{y}{Labels or targets.}
 
 \item{feature}{0-based column index, matching Python.}
 

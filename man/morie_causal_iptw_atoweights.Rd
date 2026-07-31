@@ -19,7 +19,7 @@ morie_causal_iptw_atoweights(
 
 \item{estimand}{\code{"ato"}, \code{"ate"} or \code{"att"}.}
 
-\item{trim}{optional threshold; units outside \verb{[trim, 1-trim]} get
+\item{trim}{optional threshold; units outside \eqn{[trim, 1-trim]} get
 weight 0.}
 
 \item{stabilize}{stabilise the ATE/ATT weights.}

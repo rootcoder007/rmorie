@@ -14,9 +14,13 @@ morie_geron_denoising_autoencoder_train(
 )
 }
 \arguments{
-\item{X}{Clean data (m, d). @param noise_std Corruption sd (>0).}
+\item{X}{Clean data (m, d).}
 
-\item{epochs, lr}{Training config. @param hidden Code width (default d).}
+\item{noise_std}{Corruption sd (>0).}
+
+\item{epochs, lr}{Training config.}
+
+\item{hidden}{Code width (default d).}
 
 \item{seed}{LCG seed.}
 }

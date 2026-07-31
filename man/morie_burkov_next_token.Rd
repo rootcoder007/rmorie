@@ -7,7 +7,9 @@
 morie_burkov_next_token(t_next, s)
 }
 \arguments{
-\item{t_next}{Candidate token. @param s Token sequence.}
+\item{t_next}{Candidate token.}
+
+\item{s}{Token sequence.}
 }
 \description{
 Eq 2.2 DEFINES a language model rather than giving an estimator, so

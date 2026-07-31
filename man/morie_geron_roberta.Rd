@@ -17,11 +17,17 @@ morie_geron_roberta(
 )
 }
 \arguments{
-\item{X}{0-based token ids. @param n_layers,n_heads,d_model,d_ff Geometry.}
+\item{X}{0-based token ids.}
 
-\item{vocab_size}{Optional. @param mask_prob Fraction in (0, 1).}
+\item{n_layers, n_heads, d_model, d_ff}{Geometry.}
 
-\item{epochs}{Dynamic-masking passes. @param seed LCG seed.}
+\item{vocab_size}{Optional.}
+
+\item{mask_prob}{Fraction in (0, 1).}
+
+\item{epochs}{Dynamic-masking passes.}
+
+\item{seed}{LCG seed.}
 }
 \value{
 List with \code{hidden}, \code{mlm_loss}, \code{epoch_losses}, \code{masks},

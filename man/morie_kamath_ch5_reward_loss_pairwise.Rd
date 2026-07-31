@@ -10,9 +10,13 @@ morie_kamath_ch5_reward_loss_pairwise(r_theta, x, y_0, y_1, i)
 morie_kamath_ch5_rm_bradley_terry(x, y_w, y_l, r_theta)
 }
 \arguments{
-\item{r_theta}{Function (x, y) -> reward. @param x Prompts.}
+\item{r_theta}{Function (x, y) -> reward.}
 
-\item{y_0, y_1}{Response pairs. @param i Choice, 0 or 1 per pair.}
+\item{x}{Prompts.}
+
+\item{y_0, y_1}{Response pairs.}
+
+\item{i}{Choice, 0 or 1 per pair.}
 
 \item{y_w, y_l}{Winning and losing responses.}
 }

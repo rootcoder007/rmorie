@@ -14,9 +14,17 @@ morie_geron_kmeans(
 )
 }
 \arguments{
-\item{X}{Data. @param n_clusters Clusters. @param seed Base seed. @param max_iter Iteration cap.}
+\item{X}{Data.}
 
-\item{tol}{Centre-shift tolerance. @param n_init Restarts.}
+\item{n_clusters}{Clusters.}
+
+\item{seed}{Base seed.}
+
+\item{max_iter}{Iteration cap.}
+
+\item{tol}{Centre-shift tolerance.}
+
+\item{n_init}{Restarts.}
 }
 \value{
 List with labels, centers, inertia, n_iter, distances, counts, estimate, n, method.

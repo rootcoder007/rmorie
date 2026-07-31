@@ -21,7 +21,9 @@ morie_geron_ddpg(
 )
 }
 \arguments{
-\item{env}{function(s, a) -> list(s2, r, done). @param actor,critic Initial weights.}
+\item{env}{function(s, a) -> list(s2, r, done).}
+
+\item{actor, critic}{Initial weights.}
 
 \item{epochs, lr, gamma, tau, ou_theta, ou_sigma, seed, s0, actor_target, critic_target}{Config.}
 }

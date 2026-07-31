@@ -14,7 +14,9 @@ morie_geron_reinforcement_learning(
 )
 }
 \arguments{
-\item{env}{List with \code{reset()} / \code{step(action)}. @param pi Function \verb{pi(state) -> action or probs}.}
+\item{env}{List with \code{reset()} / \code{step(action)}.}
+
+\item{pi}{Function \verb{pi(state) -> action or probs}.}
 
 \item{gamma, n_episodes, max_steps, seed}{Controls.}
 }

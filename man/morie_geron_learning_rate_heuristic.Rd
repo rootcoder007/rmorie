@@ -11,7 +11,11 @@ morie_geron_learning_rate_heuristic(
 )
 }
 \arguments{
-\item{lr_curve}{Matrix/list of (lr, loss) pairs. @param divergence_factor Multiple of running min. @param safety Divisor.}
+\item{lr_curve}{Matrix/list of (lr, loss) pairs.}
+
+\item{divergence_factor}{Multiple of running min.}
+
+\item{safety}{Divisor.}
 }
 \value{
 List with lr, lr_diverge, lr_min_loss, min_loss, diverged, estimate, n, method.

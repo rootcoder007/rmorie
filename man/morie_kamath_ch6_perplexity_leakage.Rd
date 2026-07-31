@@ -7,7 +7,9 @@
 morie_kamath_ch6_perplexity_leakage(S_uniq, PP_public, PP_lm)
 }
 \arguments{
-\item{S_uniq}{Sequences. @param PP_public,PP_lm Named vectors or functions.}
+\item{S_uniq}{Sequences.}
+
+\item{PP_public, PP_lm}{Named vectors or functions.}
 }
 \value{
 List with \code{estimate}, \code{argmax}, \code{per_sequence}, \code{n_leaking}.

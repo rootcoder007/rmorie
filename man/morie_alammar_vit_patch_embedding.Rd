@@ -15,7 +15,9 @@ morie_alammar_vit_patch_embedding(
 \arguments{
 \item{image}{Numeric matrix; must tile exactly.}
 
-\item{patch_size}{P. @param E (P^2 x d) projection.}
+\item{patch_size}{P.}
+
+\item{E}{(P^2 x d) projection.}
 
 \item{cls_token, E_pos}{Optional class token and positional table.}
 }

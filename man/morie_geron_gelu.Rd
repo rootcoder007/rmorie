@@ -7,7 +7,9 @@
 morie_geron_gelu(z, approximate = FALSE)
 }
 \arguments{
-\item{z}{Numeric vector. @param approximate Use the tanh form.}
+\item{z}{Numeric vector.}
+
+\item{approximate}{Use the tanh form.}
 }
 \value{
 List with \code{a}, \code{activation}, \code{exact}, \code{approx},

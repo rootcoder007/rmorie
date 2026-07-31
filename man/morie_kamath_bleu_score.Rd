@@ -7,7 +7,9 @@
 morie_kamath_bleu_score(hypothesis, references, max_n = 4)
 }
 \arguments{
-\item{hypothesis}{Token vector. @param references List of token vectors.}
+\item{hypothesis}{Token vector.}
+
+\item{references}{List of token vectors.}
 
 \item{max_n}{Highest order.}
 }

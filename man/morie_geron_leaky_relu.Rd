@@ -7,7 +7,9 @@
 morie_geron_leaky_relu(z, alpha = 0.01)
 }
 \arguments{
-\item{z}{Numeric vector. @param alpha Leak slope in [0, 1).}
+\item{z}{Numeric vector.}
+
+\item{alpha}{Leak slope in [0, 1).}
 }
 \value{
 List with \code{activation}, \code{derivative}, \code{n_leaky}, \code{alpha},

@@ -17,13 +17,23 @@ morie_geron_a2c(
 )
 }
 \arguments{
-\item{env}{List with reset/step. @param actor Matrix (n_actions, n_features).}
+\item{env}{List with reset/step.}
 
-\item{critic}{Value weights. @param epochs Episodes.}
+\item{actor}{Matrix (n_actions, n_features).}
 
-\item{lr}{Actor step. @param gamma Discount. @param critic_lr Critic step.}
+\item{critic}{Value weights.}
 
-\item{max_steps}{Episode cap. @param seed LCG seed.}
+\item{epochs}{Episodes.}
+
+\item{lr}{Actor step.}
+
+\item{gamma}{Discount.}
+
+\item{critic_lr}{Critic step.}
+
+\item{max_steps}{Episode cap.}
+
+\item{seed}{LCG seed.}
 }
 \value{
 List with \code{actor}, \code{critic}, \code{returns}, \code{policy}, \code{value},

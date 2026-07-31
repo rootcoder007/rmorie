@@ -14,6 +14,10 @@ morie_index_regression(X, y, beta, h = NULL, grid = NULL)
 \item{beta}{index coefficients.}
 
 \item{h}{bandwidth on the index scale.}
+
+\item{grid}{optional evaluation points on the index scale; passed
+to \code{morie_nw_regression()}, which chooses a default when
+\code{NULL}.}
 }
 \value{
 list: index_grid, G, index, bandwidth, rate_exponent, d.

@@ -7,7 +7,9 @@
 morie_kamath_ch6_weat_function(A_1, A_2, W_1, W_2)
 }
 \arguments{
-\item{A_1, A_2}{Attribute-word matrices. @param W_1,W_2 Target matrices.}
+\item{A_1, A_2}{Attribute-word matrices.}
+
+\item{W_1, W_2}{Target matrices.}
 }
 \value{
 List with \code{estimate}, \code{s_A1}, \code{s_A2}.

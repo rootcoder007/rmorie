@@ -7,7 +7,9 @@
 morie_kamath_verbalizer_mapping(logits, vocab, verbalizer_map)
 }
 \arguments{
-\item{logits}{Vocabulary logits. @param vocab Token vector.}
+\item{logits}{Vocabulary logits.}
+
+\item{vocab}{Token vector.}
 
 \item{verbalizer_map}{Named list class -> answer tokens.}
 }

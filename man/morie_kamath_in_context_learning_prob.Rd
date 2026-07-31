@@ -13,9 +13,13 @@ morie_kamath_in_context_learning_prob(
 )
 }
 \arguments{
-\item{demonstrations}{Exemplar strings. @param query Test input.}
+\item{demonstrations}{Exemplar strings.}
 
-\item{model}{Function (prompt, answer) -> probability. @param answer Target.}
+\item{query}{Test input.}
+
+\item{model}{Function (prompt, answer) -> probability.}
+
+\item{answer}{Target.}
 
 \item{sep}{Separator.}
 }

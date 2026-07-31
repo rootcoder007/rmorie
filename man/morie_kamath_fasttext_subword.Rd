@@ -10,7 +10,9 @@ morie_kamath_fasttext_subword(word, ngram_embeddings, n_min, n_max)
 morie_kamath_word_ngrams(word, n_min, n_max, boundary = "<>")
 }
 \arguments{
-\item{word}{Word. @param ngram_embeddings Named list gram -> vector.}
+\item{word}{Word.}
+
+\item{ngram_embeddings}{Named list gram -> vector.}
 
 \item{n_min, n_max}{Gram length range.}
 

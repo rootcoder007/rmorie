@@ -13,7 +13,9 @@ morie_geron_yolo(
 )
 }
 \arguments{
-\item{image}{Passed to model unchanged. @param model Function(image) -> array (S,S,B*5+C).}
+\item{image}{Passed to model unchanged.}
+
+\item{model}{Function(image) -> array (S,S,B*5+C).}
 
 \item{n_boxes, conf_threshold, iou_threshold}{As in Python original.}
 }

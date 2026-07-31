@@ -14,9 +14,13 @@ morie_geron_bagging(
 )
 }
 \arguments{
-\item{X, y}{Training data. @param base_estimator Optional function(Xb, yb).}
+\item{X, y}{Training data.}
 
-\item{n_estimators}{Replicates. @param seed LCG seed.}
+\item{base_estimator}{Optional function(Xb, yb).}
+
+\item{n_estimators}{Replicates.}
+
+\item{seed}{LCG seed.}
 
 \item{task}{"auto", "regression" or "classification".}
 }

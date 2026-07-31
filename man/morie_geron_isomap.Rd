@@ -7,7 +7,11 @@
 morie_geron_isomap(X, n_components, n_neighbors = 5)
 }
 \arguments{
-\item{X}{Data. @param n_components Embedding dim. @param n_neighbors Neighbours.}
+\item{X}{Data.}
+
+\item{n_components}{Embedding dim.}
+
+\item{n_neighbors}{Neighbours.}
 }
 \value{
 List with embedding, geodesic_distances, eigenvalues, stress, n_neighbors, estimate, n, method.

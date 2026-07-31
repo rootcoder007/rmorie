@@ -7,7 +7,9 @@
 morie_geron_oob_score(X, y, models, task = "auto")
 }
 \arguments{
-\item{X, y}{Data and targets. @param models List of \verb{(predict, in_bag)} pairs or lists with those names.}
+\item{X, y}{Data and targets.}
+
+\item{models}{List of \verb{(predict, in_bag)} pairs or lists with those names.}
 
 \item{task}{"auto", "classification" or "regression".}
 }

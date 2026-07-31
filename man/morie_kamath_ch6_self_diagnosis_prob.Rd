@@ -7,8 +7,14 @@
 morie_kamath_ch6_self_diagnosis_prob(x, y, M, sdg = NULL)
 }
 \arguments{
-\item{x}{Text. @param y Attribute. @param M Function prompt -> named
-Yes/No probabilities. @param sdg Optional prompt builder.}
+\item{x}{Text.}
+
+\item{y}{Attribute.}
+
+\item{M}{Function prompt -> named
+Yes/No probabilities.}
+
+\item{sdg}{Optional prompt builder.}
 }
 \value{
 List with \code{estimate}, \code{p_yes}, \code{p_no}, \code{prompt}.

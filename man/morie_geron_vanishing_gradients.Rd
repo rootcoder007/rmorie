@@ -16,7 +16,7 @@ list with norms, ratios, geometric_ratio, attenuation, vanishing,
 tol, estimate, n, method.
 }
 \description{
-Reports per-layer ratio ||g_{l+1}||/||g_l|| and the geometric mean
+Reports per-layer ratio ||\verb{g_\{l+1\}}||/||g_l|| and the geometric mean
 ratio (constant per-layer factor); flags "vanishing" if the geometric
 mean falls below tol.
 }

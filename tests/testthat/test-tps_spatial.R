@@ -41,7 +41,7 @@ test_that("morie_tps_morans_i_neighbourhood warns when too few hoods", {
   expect_true(any(grepl("valid neighbourhoods|missing", rr$warnings)))
 })
 
-test_that("morie_tps_morans_i_neighbourhood: use_spdep path runs when avail", {
+test_that("morie_tps_morans_i_neighbourhood: use_spdep is accepted and ignored", {
   df <- .mk_tps_inc(400L)
   rr <- morie_tps_morans_i_neighbourhood(df, use_spdep = TRUE)
   expect_s3_class(rr, "morie_tps_spatial_result")

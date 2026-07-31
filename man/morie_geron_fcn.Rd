@@ -7,9 +7,13 @@
 morie_geron_fcn(image, model, upsample = 1, activation = "relu")
 }
 \arguments{
-\item{image}{(H,W) or (C,H,W). @param model List of kernel arrays or (kernels, bias, stride) triples.}
+\item{image}{(H,W) or (C,H,W).}
 
-\item{upsample}{Nearest-neighbour upsample factor. @param activation "relu"/"identity".}
+\item{model}{List of kernel arrays or (kernels, bias, stride) triples.}
+
+\item{upsample}{Nearest-neighbour upsample factor.}
+
+\item{activation}{"relu"/"identity".}
 }
 \value{
 List with \code{class_map}, \code{scores}, \code{segmentation}, \code{out_shape}, \code{n_classes}.

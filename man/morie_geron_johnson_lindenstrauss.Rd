@@ -7,7 +7,9 @@
 morie_geron_johnson_lindenstrauss(n, eps)
 }
 \arguments{
-\item{n}{Number of points (>= 2). @param eps Distortion in (0, 1).}
+\item{n}{Number of points (>= 2).}
+
+\item{eps}{Distortion in (0, 1).}
 }
 \value{
 List with \code{d_min}, \code{d_min_exact}, \code{eps}, \code{n_points},

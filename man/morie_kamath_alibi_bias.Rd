@@ -7,7 +7,9 @@
 morie_kamath_alibi_bias(Q, K, V, slopes, causal = FALSE)
 }
 \arguments{
-\item{Q, K, V}{Attention matrices. @param slopes Non-negative ALiBi slopes.}
+\item{Q, K, V}{Attention matrices.}
+
+\item{slopes}{Non-negative ALiBi slopes.}
 
 \item{causal}{Mask the future when TRUE.}
 }

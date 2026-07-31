@@ -7,7 +7,9 @@
 morie_inception_module(in_ch, o1, r3, o3, r5, o5, pp)
 }
 \arguments{
-\item{in_ch}{Input channels. @param o1,r3,o3,r5,o5,pp Branch widths.}
+\item{in_ch}{Input channels.}
+
+\item{o1, r3, o3, r5, o5, pp}{Branch widths.}
 }
 \value{
 List with \code{branch_1x1}, \code{branch_3x3}, \code{branch_5x5}, \code{branch_pool}, \code{out_channels}, \code{params}.

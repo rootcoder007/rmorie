@@ -7,7 +7,9 @@
 morie_geron_svd_pseudoinverse(X, y, rcond = NULL, fit_intercept = FALSE)
 }
 \arguments{
-\item{X}{Design matrix (n, d). @param y Targets, length n.}
+\item{X}{Design matrix (n, d).}
+
+\item{y}{Targets, length n.}
 
 \item{rcond}{Optional relative singular-value cutoff; default max(n,d)*eps.}
 

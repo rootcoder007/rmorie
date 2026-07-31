@@ -7,7 +7,11 @@
 morie_geron_numerical_diff(f, x, h = 1e-05)
 }
 \arguments{
-\item{f}{Function \code{f(x) -> scalar}. @param x Point (scalar or vector). @param h Step size.}
+\item{f}{Function \code{f(x) -> scalar}.}
+
+\item{x}{Point (scalar or vector).}
+
+\item{h}{Step size.}
 }
 \description{
 Numerical differentiation via central finite differences, Richardson-checked (Geron App A, hmnmd)

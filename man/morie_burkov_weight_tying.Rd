@@ -7,7 +7,9 @@
 morie_burkov_weight_tying(h_last, E)
 }
 \arguments{
-\item{h_last}{Hidden state. @param E Embedding matrix, V x d.}
+\item{h_last}{Hidden state.}
+
+\item{E}{Embedding matrix, V x d.}
 }
 \description{
 Weight tying: logits through the shared embedding (Burkov Ch 4)

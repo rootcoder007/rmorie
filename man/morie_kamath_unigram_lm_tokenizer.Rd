@@ -13,7 +13,9 @@ morie_kamath_unigram_loglik(corpus, probs)
 morie_kamath_viterbi_segment(text, probs)
 }
 \arguments{
-\item{corpus}{Character vector. @param vocab Candidate pieces.}
+\item{corpus}{Character vector.}
+
+\item{vocab}{Candidate pieces.}
 
 \item{max_iter, tol}{EM controls.}
 

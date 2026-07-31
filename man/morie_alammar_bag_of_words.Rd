@@ -23,7 +23,9 @@ morie_alammar_tokenizer_vocab_overlap(vocab_a, vocab_b)
 \item{corpus_freq, A}{Optional column sums and mean class size.}
 
 \item{entity_spans}{List of c(start, end, type), 0-based, end
-exclusive, matching the Python mirror. @param scheme BIO or BIOES.}
+exclusive, matching the Python mirror.}
+
+\item{scheme}{BIO or BIOES.}
 
 \item{vocab_a, vocab_b}{Token vocabularies.}
 }

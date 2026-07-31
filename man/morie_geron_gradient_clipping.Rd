@@ -9,7 +9,9 @@ morie_geron_gradient_clipping(grads, max_norm, norm_type = 2)
 \arguments{
 \item{grads}{Numeric vector/matrix, or a list of them.}
 
-\item{max_norm}{Positive threshold. @param norm_type p, or Inf.}
+\item{max_norm}{Positive threshold.}
+
+\item{norm_type}{p, or Inf.}
 }
 \value{
 List with \code{clipped}, \code{total_norm}, \code{scale}, \code{was_clipped},

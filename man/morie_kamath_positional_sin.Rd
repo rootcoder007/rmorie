@@ -16,13 +16,23 @@ morie_kamath_ffn_relu(z, W_1, W_2, b_1, b_2)
 morie_kamath_layer_norm(h_i, mu = NULL, sigma = NULL, g = 1, eps = 1e-05)
 }
 \arguments{
-\item{i}{Position. @param j Frequency index. @param d Model width.}
+\item{i}{Position.}
 
-\item{z}{Input rows. @param W_1,W_2,b_1,b_2 FFN parameters.}
+\item{j}{Frequency index.}
 
-\item{h_i}{Vector. @param mu,sigma Optional pinned statistics.}
+\item{d}{Model width.}
 
-\item{g}{Gain. @param eps Unused stabiliser kept for the signature.}
+\item{z}{Input rows.}
+
+\item{W_1, W_2, b_1, b_2}{FFN parameters.}
+
+\item{h_i}{Vector.}
+
+\item{mu, sigma}{Optional pinned statistics.}
+
+\item{g}{Gain.}
+
+\item{eps}{Unused stabiliser kept for the signature.}
 }
 \description{
 Positional encodings, FFN, layer norm (Eq 2.13-2.14, 2.17-2.18)

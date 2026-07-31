@@ -7,9 +7,13 @@
 morie_geron_unsupervised_pretraining(X_unlab, X_lab, y_lab, bottleneck = 1)
 }
 \arguments{
-\item{X_unlab}{Unlabeled pool (m, d). @param X_lab Labeled inputs (n, d).}
+\item{X_unlab}{Unlabeled pool (m, d).}
 
-\item{y_lab}{Labels, length n. @param bottleneck Code width.}
+\item{X_lab}{Labeled inputs (n, d).}
+
+\item{y_lab}{Labels, length n.}
+
+\item{bottleneck}{Code width.}
 }
 \value{
 list with encoder, encode, codes, theta, theta_control, pretrained_loo,

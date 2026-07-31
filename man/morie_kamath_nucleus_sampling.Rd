@@ -7,7 +7,11 @@
 morie_kamath_nucleus_sampling(logits, p, T = 1)
 }
 \arguments{
-\item{logits}{Logits. @param p Nucleus mass in (0, 1]. @param T Temperature.}
+\item{logits}{Logits.}
+
+\item{p}{Nucleus mass in (0, 1].}
+
+\item{T}{Temperature.}
 }
 \value{
 List with \code{probabilities}, \code{kept}, \code{n_kept}, \code{kept_mass}.

@@ -7,7 +7,9 @@
 morie_geron_cross_entropy_cost(X, Y, theta)
 }
 \arguments{
-\item{X}{(m, d) design. @param Y Labels or (m, K) targets.}
+\item{X}{(m, d) design.}
+
+\item{Y}{Labels or (m, K) targets.}
 
 \item{theta}{(d, K) coefficients.}
 }

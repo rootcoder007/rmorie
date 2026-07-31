@@ -7,7 +7,9 @@
 morie_geron_trace(model, example_inputs)
 }
 \arguments{
-\item{model}{List of ops. @param example_inputs Matrix/vector input.}
+\item{model}{List of ops.}
+
+\item{example_inputs}{Matrix/vector input.}
 }
 \value{
 list(graph, output) where graph is a list of node lists

@@ -7,7 +7,9 @@
 morie_kamath_self_consistency(samples, parse = NULL)
 }
 \arguments{
-\item{samples}{Sampled traces. @param parse Optional answer extractor.}
+\item{samples}{Sampled traces.}
+
+\item{parse}{Optional answer extractor.}
 }
 \value{
 List with \code{answer}, \code{votes}, \code{agreement}, \code{tie}.

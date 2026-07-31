@@ -15,13 +15,21 @@ morie_geron_cart_algorithm(
 )
 }
 \arguments{
-\item{X}{Feature matrix. @param y Labels or targets.}
+\item{X}{Feature matrix.}
+
+\item{y}{Labels or targets.}
 
 \item{criterion}{"gini", "entropy" or "mse".}
 
-\item{max_depth}{Optional depth cap. @param min_samples_split Minimum
-node size to consider a split. @param min_samples_leaf Minimum leaf
-size. @param min_impurity_decrease Minimum gain to accept a split.}
+\item{max_depth}{Optional depth cap.}
+
+\item{min_samples_split}{Minimum
+node size to consider a split.}
+
+\item{min_samples_leaf}{Minimum leaf
+size.}
+
+\item{min_impurity_decrease}{Minimum gain to accept a split.}
 }
 \value{
 List with \code{tree}, \code{predictions}, \code{n_leaves}, \code{depth},

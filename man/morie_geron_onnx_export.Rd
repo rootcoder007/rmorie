@@ -7,7 +7,9 @@
 morie_geron_onnx_export(model, args, file = NULL)
 }
 \arguments{
-\item{model}{List of layer specs (\code{op}, \code{in_features}, \code{out_features}, ...). @param args Example input.}
+\item{model}{List of layer specs (\code{op}, \code{in_features}, \code{out_features}, ...).}
+
+\item{args}{Example input.}
 
 \item{file}{Optional path for the traced graph (written as JSON).}
 }

@@ -17,6 +17,6 @@ morie_geron_ridge_cost_grridg(X, y, theta, alpha, intercept = TRUE)
 List with \code{cost}, \code{mse}, \code{penalty}, \code{gradient}.
 }
 \description{
-J = MSE + (alpha/2) sum_{i>=1} theta_i^2 with the bias unpenalised;
+J = MSE + (alpha/2) \verb{sum_\{i>=1\}} theta_i^2 with the bias unpenalised;
 the gradient is returned alongside.
 }

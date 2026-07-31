@@ -232,7 +232,7 @@ morie_joseph_simple_exponential_smoothing <- function(y, alpha = NULL,
 #'
 #' @param y series.
 #' @param period seasonal period.
-#' @param alpha,beta,gamma smoothing parameters in `[0, 1]`.
+#' @param alpha,beta,gamma smoothing parameters in \eqn{[0, 1]}.
 #' @param horizon steps ahead; defaults to one full period.
 #' @return list with \code{forecast}, \code{level}, \code{trend},
 #'   \code{seasonal}, \code{fitted}, \code{residuals}, \code{sse}.

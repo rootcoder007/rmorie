@@ -7,7 +7,9 @@
 morie_kamath_ch6_ear_entropy_reg(A, L = NULL, lam = 1)
 }
 \arguments{
-\item{A}{List of attention matrices. @param L Optional layer count.}
+\item{A}{List of attention matrices.}
+
+\item{L}{Optional layer count.}
 
 \item{lam}{Non-negative weight.}
 }

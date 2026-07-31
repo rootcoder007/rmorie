@@ -7,7 +7,11 @@
 morie_burkov_layer1_output(W_1, x, b_1, phi = "relu")
 }
 \arguments{
-\item{W_1}{Weight matrix. @param x Input. @param b_1 Bias.}
+\item{W_1}{Weight matrix.}
+
+\item{x}{Input.}
+
+\item{b_1}{Bias.}
 
 \item{phi}{Activation name or function.}
 }

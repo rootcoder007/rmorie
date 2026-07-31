@@ -21,25 +21,33 @@ morie_alammar_llm_as_judge(responses, rubric, judge_model, n_samples = 1)
 morie_alammar_output_verification(response, criteria, verifier_model)
 }
 \arguments{
-\item{text}{Input. @param candidate_labels Labels.}
+\item{text}{Input.}
+
+\item{candidate_labels}{Labels.}
 
 \item{nli_model}{function(premise, hypothesis) -> score.}
 
 \item{hypothesis_template}{Format string with one \%s.}
 
-\item{input_text}{Input. @param label_tokens Closed label set.}
+\item{input_text}{Input.}
+
+\item{label_tokens}{Closed label set.}
 
 \item{model}{function(input, label) -> log-probability.}
 
 \item{prefix}{Optional task prefix.}
 
-\item{responses}{Character vector. @param rubric Judge rubric.}
+\item{responses}{Character vector.}
+
+\item{rubric}{Judge rubric.}
 
 \item{judge_model}{function(rubric, response, sample_index) -> score.}
 
 \item{n_samples}{Judge samples per response.}
 
-\item{response}{Text under test. @param criteria Character vector.}
+\item{response}{Text under test.}
+
+\item{criteria}{Character vector.}
 
 \item{verifier_model}{function(response, criterion) -> "PASS"|"FAIL".}
 }

@@ -7,7 +7,9 @@
 morie_kamath_constitutional_ai_loop(initial_response, constitution, model)
 }
 \arguments{
-\item{initial_response}{Starting response. @param constitution Principles.}
+\item{initial_response}{Starting response.}
+
+\item{constitution}{Principles.}
 
 \item{model}{Function (stage, principle, response, critique).}
 }

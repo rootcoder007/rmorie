@@ -8,7 +8,9 @@ morie_burkov_backoff(counts_by_order, alpha = 0.4)
 }
 \arguments{
 \item{counts_by_order}{List of \code{c(count_ngram, count_prefix)} pairs,
-highest order first. @param alpha Per-level discount in (0, 1\].}
+highest order first.}
+
+\item{alpha}{Per-level discount in (0, 1\].}
 }
 \description{
 N-gram backoff with per-level discount (Burkov Ch 2)

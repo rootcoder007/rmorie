@@ -7,7 +7,9 @@
 morie_alammar_hdbscan_cluster(X, min_cluster_size = 3, min_samples = NULL)
 }
 \arguments{
-\item{X}{Point matrix. @param min_cluster_size,min_samples Sizes.}
+\item{X}{Point matrix.}
+
+\item{min_cluster_size, min_samples}{Sizes.}
 }
 \description{
 Core distance to the min_samples-th neighbour, mutual reachability,

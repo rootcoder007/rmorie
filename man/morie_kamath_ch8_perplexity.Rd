@@ -7,7 +7,9 @@
 morie_kamath_ch8_perplexity(X, N = NULL, p_theta = NULL)
 }
 \arguments{
-\item{X}{Tokens. @param N Optional token count.}
+\item{X}{Tokens.}
+
+\item{N}{Optional token count.}
 
 \item{p_theta}{Probability vector or function (token, prefix).}
 }

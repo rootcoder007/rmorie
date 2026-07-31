@@ -17,7 +17,11 @@ morie_geron_double_dqn(
 )
 }
 \arguments{
-\item{env}{Unused (provenance only). @param Q,Q_target (S,A) tables. @param buffer Transitions.}
+\item{env}{Unused (provenance only).}
+
+\item{Q, Q_target}{(S,A) tables.}
+
+\item{buffer}{Transitions.}
 
 \item{epochs, lr, gamma, target_sync, batch_size}{Config.}
 }

@@ -22,18 +22,27 @@ morie_kamath_decoder_token_distribution(s_t_1, y_t_1, c, W = NULL)
 morie_kamath_seq2seq_cross_entropy(y, c, U = NULL)
 }
 \arguments{
-\item{h_t_1, x_t}{Previous state and input. @param f Optional cell.}
+\item{h_t_1, x_t}{Previous state and input.}
 
-\item{h_1_h_T}{State matrix, one row per step. @param mapping
-"mean", "last", "max" or a function.}
+\item{f}{Optional cell.}
 
-\item{h_T}{Final state. @param all_states Optional full stack.}
+\item{h_1_h_T}{State matrix, one row per step.}
 
-\item{s_t_1, y_t_1, c}{Decoder inputs. @param g Optional cell.}
+\item{mapping}{"mean", "last", "max" or a function.}
+
+\item{h_T}{Final state.}
+
+\item{all_states}{Optional full stack.}
+
+\item{s_t_1, y_t_1, c}{Decoder inputs.}
+
+\item{g}{Optional cell.}
 
 \item{W}{Optional vocab x 3d score projection.}
 
-\item{y}{Target token indices, 0-based. @param U Optional length pin.}
+\item{y}{Target token indices, 0-based.}
+
+\item{U}{Optional length pin.}
 }
 \description{
 Kamath Ch 2 encoder-decoder scaffolding (Eq 2.1-2.6)

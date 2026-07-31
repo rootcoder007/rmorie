@@ -7,7 +7,11 @@
 morie_geron_kmeans_limits(X, n_clusters = 2, seed = 0)
 }
 \arguments{
-\item{X}{Data. @param n_clusters Clusters. @param seed Seed for k-means.}
+\item{X}{Data.}
+
+\item{n_clusters}{Clusters.}
+
+\item{seed}{Seed for k-means.}
 }
 \value{
 List with anisotropy, max_anisotropy, reassigned_fraction, size_ratio, labels,

@@ -19,17 +19,21 @@ morie_kamath_moe_topk_gating(x, W_g, k = 2)
 morie_kamath_mixtral_moe(x, W_g, expert_weights = NULL)
 }
 \arguments{
-\item{U}{Per-token probabilities. @param k Context size (recorded).}
+\item{U}{Per-token probabilities.}
+
+\item{k}{Experts kept.}
 
 \item{Theta}{Unused, kept for the signature.}
 
 \item{L_1, L_2, lam}{Objective values and weight.}
 
-\item{x}{Input. @param G Gate weights or function.}
+\item{x}{Input.}
+
+\item{G}{Gate weights or function.}
 
 \item{E_i}{Expert functions or precomputed outputs.}
 
-\item{W_g}{Gate projection, d x n. @param k Experts kept.}
+\item{W_g}{Gate projection, d x n.}
 
 \item{expert_weights}{Optional list of (W1, W3, W2) per expert;
 NULL isolates the gate with identity experts.}

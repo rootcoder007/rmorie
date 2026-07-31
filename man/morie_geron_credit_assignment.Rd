@@ -15,7 +15,9 @@ morie_geron_credit_assignment(
 \item{trajectory}{Numeric rewards, or a list of (state, action,
 reward) triples.}
 
-\item{gamma}{Discount in [0, 1]. @param lam Trace decay; default gamma.}
+\item{gamma}{Discount in [0, 1].}
+
+\item{lam}{Trace decay; default gamma.}
 
 \item{normalize}{Standardise the returns.}
 }
@@ -24,8 +26,8 @@ List with \code{returns}, \code{raw_returns}, \code{rewards},
 \code{eligibility}, \code{credit}, \code{discounted_rewards}, \code{total_return}.
 }
 \description{
-Discounted returns G_t = r_t + gamma G_{t+1} computed backwards,
-accumulating eligibility traces e_t = gamma lambda e_{t-1} + 1
+Discounted returns G_t = r_t + gamma \verb{G_\{t+1\}} computed backwards,
+accumulating eligibility traces e_t = gamma lambda \verb{e_\{t-1\}} + 1
 forwards, and the per-step share of the total return. \code{normalize}
 uses the POPULATION sd (numpy default), not R's \code{sd()}.
 }

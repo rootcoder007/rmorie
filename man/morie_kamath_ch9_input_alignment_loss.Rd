@@ -9,7 +9,11 @@ morie_kamath_ch9_input_alignment_loss(P_X, F_T, t, llm = NULL, loss_fn = NULL)
 \arguments{
 \item{P_X}{Prompt features: a matrix, or a list of candidate matrices.}
 
-\item{F_T}{Text features. @param t Target. @param llm Model function.}
+\item{F_T}{Text features.}
+
+\item{t}{Target.}
+
+\item{llm}{Model function.}
 
 \item{loss_fn}{Loss function.}
 }

@@ -7,7 +7,11 @@
 morie_kamath_toxigen_score(text, classifier, threshold = 0.5)
 }
 \arguments{
-\item{text}{Text. @param classifier Classifier. @param threshold Cut-off.}
+\item{text}{Text.}
+
+\item{classifier}{Classifier.}
+
+\item{threshold}{Cut-off.}
 }
 \value{
 List with \code{estimate}, \code{toxic}, \code{threshold}.

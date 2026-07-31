@@ -7,7 +7,9 @@
 morie_kamath_ch6_factscore(M, X, A_y, C)
 }
 \arguments{
-\item{M}{Function prompt -> response or NULL. @param X Prompts.}
+\item{M}{Function prompt -> response or NULL.}
+
+\item{X}{Prompts.}
 
 \item{A_y}{Function response -> atomic facts.}
 

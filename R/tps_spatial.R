@@ -2,9 +2,10 @@
 
 #' srr spatial (SP) standards
 #'
-#' rmorie's spatial methods (Moran's I global/local/LISA, Getis-Ord
-#' G*, Ripley's K, DBSCAN, Kulldorff scan) operate on planar/projected
-#' neighbourhood structures and delegate to `spdep` / `sf` / `gstat`.
+#' The spatial methods (Moran's I global/local/LISA, Getis-Ord G*,
+#' Ripley's K, DBSCAN, Kulldorff scan) operate on planar/projected
+#' neighbourhood structures and are computed natively; `sf` is used to
+#' read polygon geometry, not to compute the statistics.
 #' The applicable standards are addressed here; class-system, CRS
 #' reprojection, and plot-method standards that do not fit rmorie's
 #' coordinate-column interface are declared NA (with reasons) in
@@ -15,12 +16,23 @@
 #'   (Toronto neighbourhood polygons and point coordinates).
 #' @srrstats {SP1.1} The dimensional domain is two-dimensional
 #'   (planar x/y or lon/lat), documented per function.
-#' @srrstats {SP2.1} rmorie uses `sf` and `spdep`, never the retired
-#'   `sp` package.
-#' @srrstats {SP2.2} Spatial routines wrap and interoperate with the
-#'   established `spdep` / `sf` / `gstat` ecosystem.
-#' @srrstats {SP2.2a} The wrapping of those packages is documented on
-#'   each function and in the spatial vignette.
+#' @srrstats {SP2.1} No use of the retired `sp` package anywhere.
+#'   Polygon input is read via `sf`. `spdep` is not a dependency at
+#'   all -- it is absent from DESCRIPTION and never called from `R/`;
+#'   it appears only in the test suite, as the reference the native
+#'   results are compared against.
+#' @srrstats {SP2.2} The spatial routines are native, not wrappers:
+#'   neighbour construction, the Moran/Geary statistics and the
+#'   Cliff-Ord variance are computed in-package. Interoperation with
+#'   the established ecosystem is by AGREEMENT rather than delegation
+#'   -- results are cross-validated against `spdep::moran.test`
+#'   under BOTH of its nulls (randomisation and normality) in
+#'   `tests/cross/`, and `sf` objects are accepted as input where
+#'   polygons are needed.
+#' @srrstats {SP2.2a} Because nothing is wrapped, what is documented
+#'   instead is the agreement: each function states the estimator it
+#'   implements, and `tests/cross/` holds the comparisons against the
+#'   reference implementations.
 #' @srrstats {SP2.0b} Functions validate their spatial input and return
 #'   an explicit no-analysis result (rather than a misleading number)
 #'   when required spatial columns are absent.
@@ -29,8 +41,11 @@
 #' @srrstats {SP2.7} Input validation confirms the required spatial
 #'   columns are present before analysis.
 #' @srrstats {SP3.0} Neighbour construction is user-controllable.
-#' @srrstats {SP3.0a} Regular-grid neighbours support rook/queen
-#'   contiguity via the underlying `spdep` neighbour styles.
+#' @srrstats {SP3.0a} Rook/queen contiguity is defined on a regular
+#'   grid and this domain has none -- the units are irregular
+#'   neighbourhood polygons and point coordinates. Adjacency is
+#'   therefore offered as k-nearest-neighbours or a distance band
+#'   (SP3.0b), which are the contiguity notions that exist here.
 #' @srrstats {SP3.0b} Irregular-space neighbourhoods are controlled by
 #'   an integer number of neighbours (`k_neighbours`) or a distance band.
 #' @srrstats {SP3.1} Neighbour contributions can be distance-weighted
@@ -64,9 +79,10 @@ NULL
 #' it is used for the KNN graph. The 2-D kernel density estimator
 #' prefers \pkg{MASS}\code{::kde2d} when available, otherwise falls
 #' back to a Gaussian density evaluated at the observation points.
-#' If \pkg{spdep} is installed, callers can delegate the global
-#' Moran's I test natively (Cliff-Ord normal approximation,
-#' validated against spdep in tests/cross/).
+#' The global Moran's I test is computed natively from the Cliff-Ord
+#' moments under either the randomisation (default) or normality null,
+#' and both branches are validated against \pkg{spdep} at the matching
+#' setting in tests/cross/.
 #'
 #' Functions
 #' ---------
@@ -156,22 +172,84 @@ NULL
 }
 
 
-#' Internal helper: Tps Cliff Ord Variance
+#' Internal helper: Tps Moran Weight Constants
 #'
-#' Variance of Moran's I under normality (Cliff & Ord 1981):
-#' \deqn{Var(I) = \frac{n^2 S_1 - n S_2 + 3 S_0^2}{S_0^2 (n^2 - 1)}
-#'   - \frac{1}{(n-1)^2}.}
-#' Module 19 fix: the previous combining formula was off by a factor
-#' of order n; this form reproduces
-#' \code{spdep::moran.test(randomisation = FALSE)} exactly
-#' (tests/cross/test-morie_vs_spatial.R).
+#' The three weight sums every Moran/Geary moment is built from
+#' (Cliff & Ord 1981):
+#' \deqn{S_0 = \sum_i \sum_j w_{ij}, \quad
+#'       S_1 = \tfrac{1}{2}\sum_i \sum_j (w_{ij} + w_{ji})^2, \quad
+#'       S_2 = \sum_i \left(\sum_j w_{ij} + \sum_j w_{ji}\right)^2.}
+#' \eqn{S_1} is computed from the symmetric part because
+#' \eqn{\tfrac{1}{2}\sum(w_{ij}+w_{ji})^2 = 2\sum \bar{w}_{ij}^2} with
+#' \eqn{\bar{W} = (W + W')/2} -- row-standardised weights are not
+#' symmetric, so using \eqn{W} directly would be wrong.
 #' @noRd
-.tps_cliff_ord_variance <- function(W, n, S0) {
+.tps_moran_wconst <- function(W) {
   W_sym <- (W + t(W)) / 2
-  S1 <- 2 * sum(W_sym^2)
-  S2 <- sum((colSums(W) + rowSums(W))^2)
-  (n^2 * S1 - n * S2 + 3 * S0^2) / (S0^2 * (n^2 - 1) + 1e-300) -
-    1 / (n - 1)^2
+  list(S0 = sum(W),
+       S1 = 2 * sum(W_sym^2),
+       S2 = sum((colSums(W) + rowSums(W))^2))
+}
+
+
+#' Internal helper: Tps Moran Variance
+#'
+#' Variance of Moran's I under either null, following Cliff & Ord
+#' (1981). With \eqn{E(I) = -1/(n-1)}:
+#'
+#' Normality -- the values are draws from a normal population, so only
+#' the weights matter:
+#' \deqn{Var_N(I) = \frac{n^2 S_1 - n S_2 + 3 S_0^2}{S_0^2 (n^2 - 1)}
+#'   - E(I)^2.}
+#'
+#' Randomisation -- the observed values are fixed and only their
+#' ASSIGNMENT to locations is random, so the sample kurtosis
+#' \eqn{b_2 = n \sum z_i^4 / (\sum z_i^2)^2} enters:
+#' \deqn{Var_R(I) = \frac{n\left[(n^2-3n+3)S_1 - n S_2 + 3S_0^2\right]
+#'   - b_2\left[(n^2-n)S_1 - 2n S_2 + 6S_0^2\right]}
+#'   {(n-1)(n-2)(n-3)S_0^2} - E(I)^2.}
+#'
+#' Randomisation is the default because it is the weaker assumption and
+#' these are incident COUNTS -- skewed, non-negative, nothing like
+#' normal. Under heavy kurtosis the two disagree materially, and the
+#' normal-theory p-value is the optimistic one.
+#'
+#' Both branches reproduce \code{spdep::moran.test()} at its matching
+#' \code{randomisation} setting (tests/cross/test-morie_vs_spatial.R).
+#' A kurtosis large enough to drive the variance negative is reported
+#' rather than silently returned, since the test does not hold there.
+#'
+#' @param W Spatial weights matrix.
+#' @param n Number of areal units.
+#' @param z Centred values (\eqn{x - \bar{x}}); required for the
+#'   randomisation branch, ignored under normality.
+#' @param randomisation Use the randomisation null (default) or the
+#'   normality null.
+#' @return Named list with \code{variance}, \code{kurtosis} and
+#'   \code{assumption}.
+#' @noRd
+.tps_moran_variance <- function(W, n, z = NULL, randomisation = TRUE) {
+  k <- .tps_moran_wconst(W)
+  S0 <- k$S0; S1 <- k$S1; S2 <- k$S2
+  S02 <- S0^2 + 1e-300
+  EI2 <- 1 / (n - 1)^2
+  if (!randomisation) {
+    return(list(
+      variance = (n^2 * S1 - n * S2 + 3 * S0^2) / (S02 * (n^2 - 1)) - EI2,
+      kurtosis = NA_real_, assumption = "normality"))
+  }
+  if (is.null(z)) stop("randomisation variance needs the centred values",
+                       call. = FALSE)
+  if (n < 4L) {
+    return(list(variance = NA_real_, kurtosis = NA_real_,
+                assumption = "randomisation (undefined for n < 4)"))
+  }
+  zz <- sum(z^2)
+  b2 <- if (zz > 0) (n * sum(z^4)) / (zz^2) else NA_real_
+  a <- n * (S1 * (n^2 - 3 * n + 3) - n * S2 + 3 * S0^2)
+  b <- b2 * (S1 * (n^2 - n) - 2 * n * S2 + 6 * S0^2)
+  v <- (a - b) / ((n - 1) * (n - 2) * (n - 3) * S02) - EI2
+  list(variance = v, kurtosis = b2, assumption = "randomisation")
 }
 
 
@@ -216,6 +294,7 @@ morie_tps_morans_i_neighbourhood <- function(df,
                                               k_neighbours = 5L,
                                               lat_col = "LAT_WGS84",
                                               lon_col = "LONG_WGS84",
+                                              randomisation = TRUE,
                                               use_spdep = FALSE) {
   stopifnot(is.data.frame(df), is.character(hood_col))
   call <- sprintf(
@@ -289,15 +368,24 @@ morie_tps_morans_i_neighbourhood <- function(df,
     den <- sum(z * z)
     I_val <- if (den != 0) (n / S0) * (num / den) else NA_real_
     expected_I <- if (n > 1L) -1 / (n - 1) else NA_real_
-    var_I <- .tps_cliff_ord_variance(W, n, S0)
+    vres <- .tps_moran_variance(W, n, z = z, randomisation = randomisation)
+    var_I <- vres$variance
     if (!is.finite(var_I) || var_I <= 0) {
       z_I <- NA_real_
       p <- NA_real_
+      # A negative variance is not a rounding artefact: it means the
+      # kurtosis term exceeded the weight term, so the moment
+      # approximation does not hold for this variable.
+      var_warn <- sprintf(
+        "%s variance is not positive (%.3g); the moment approximation does not hold for this variable%s",
+        vres$assumption, var_I,
+        if (is.finite(vres$kurtosis)) sprintf(" (kurtosis %.2f)", vres$kurtosis) else "")
     } else {
       z_I <- (I_val - expected_I) / sqrt(var_I)
       p <- 2 * stats::pnorm(-abs(z_I))
+      var_warn <- NULL
     }
-    backend <- "internal Cliff-Ord normal approximation"
+    backend <- sprintf("native Cliff-Ord moments, %s null", vres$assumption)
   }
 
   interp <- if (is.finite(z_I)) {

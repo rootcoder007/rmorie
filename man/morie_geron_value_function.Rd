@@ -7,7 +7,11 @@
 morie_geron_value_function(s, pi, gamma, P = NULL, R = NULL)
 }
 \arguments{
-\item{s}{0-based query state. @param pi Policy. @param gamma In [0, 1).}
+\item{s}{0-based query state.}
+
+\item{pi}{Policy.}
+
+\item{gamma}{In [0, 1).}
 
 \item{P}{(n_states, n_actions, n_states) array.}
 

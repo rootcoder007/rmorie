@@ -14,7 +14,11 @@ morie_geron_tree_high_variance(
 )
 }
 \arguments{
-\item{X, y}{Data. @param n_resamples Bootstrap count (>=2). @param seed LCG seed.}
+\item{X, y}{Data.}
+
+\item{n_resamples}{Bootstrap count (>=2).}
+
+\item{seed}{LCG seed.}
 
 \item{criterion, max_depth}{CART controls.}
 }

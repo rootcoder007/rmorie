@@ -18,7 +18,7 @@ List with \code{weights_new}, \code{misclassified}, \code{weighted_error},
 \code{boost_factor}.
 }
 \description{
-w <- w exp(alpha 1{misclassified}), then renormalise. The weighted
+w <- w exp(alpha \verb{1\{misclassified\}}), then renormalise. The weighted
 error BEFORE the update is reported so alpha can be checked against
 log((1-r)/r).
 }

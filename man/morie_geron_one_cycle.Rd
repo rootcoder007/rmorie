@@ -7,7 +7,13 @@
 morie_geron_one_cycle(t, T, lr_max, lr_min, mom_max = 0.95, mom_min = 0.85)
 }
 \arguments{
-\item{t}{Step (0-based). @param T Cycle length. @param lr_max,lr_min Rate bounds. @param mom_max,mom_min Momentum bounds.}
+\item{t}{Step (0-based).}
+
+\item{T}{Cycle length.}
+
+\item{lr_max, lr_min}{Rate bounds.}
+
+\item{mom_max, mom_min}{Momentum bounds.}
 }
 \value{
 List with lr, momentum, lr_schedule, momentum_schedule, peak_step, phase, estimate, n, method.

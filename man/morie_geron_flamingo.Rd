@@ -16,11 +16,17 @@ morie_geron_flamingo(
 )
 }
 \arguments{
-\item{images}{Visual features (n_features, d). @param text Frozen LM hidden states (T, d).}
+\item{images}{Visual features (n_features, d).}
 
-\item{latents}{Optional perceiver latents (default one row of ones). @param W_Q,W_K,W_V Optional projections (default identity).}
+\item{text}{Frozen LM hidden states (T, d).}
 
-\item{gate}{Pre-tanh gate value (default 0). @param image_index Optional per-position image index (0 or -1).}
+\item{latents}{Optional perceiver latents (default one row of ones).}
+
+\item{W_Q, W_K, W_V}{Optional projections (default identity).}
+
+\item{gate}{Pre-tanh gate value (default 0).}
+
+\item{image_index}{Optional per-position image index (0 or -1).}
 }
 \value{
 List with \code{output}, \code{visual_tokens}, \code{cross_attention}, \code{gate_value}, \code{is_identity_at_init}.

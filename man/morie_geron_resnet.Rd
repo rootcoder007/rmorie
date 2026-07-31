@@ -7,7 +7,9 @@
 morie_geron_resnet(x, F, projection = NULL)
 }
 \arguments{
-\item{x}{Input array. @param F Function of x.}
+\item{x}{Input array.}
+
+\item{F}{Function of x.}
 
 \item{projection}{Optional function applied to the skip path.}
 }

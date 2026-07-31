@@ -16,9 +16,13 @@ morie_geron_transfer_learning(
 \arguments{
 \item{pretrained_model}{List of weight matrices W_0 (d_in,h1), W_1 (h1,h2), ...}
 
-\item{X}{New-task inputs (n, d_in). @param y New-task targets (n,) or (n, d_out).}
+\item{X}{New-task inputs (n, d_in).}
 
-\item{n_frozen}{Leading layers to freeze. @param epochs,lr As in Python original.}
+\item{y}{New-task targets (n,) or (n, d_out).}
+
+\item{n_frozen}{Leading layers to freeze.}
+
+\item{epochs, lr}{As in Python original.}
 }
 \value{
 list with weights, frozen, loss_curve, initial_loss, final_loss,

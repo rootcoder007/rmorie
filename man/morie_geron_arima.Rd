@@ -7,9 +7,13 @@
 morie_geron_arima(y, p = 1, d = 0, q = 0, include_mean = TRUE)
 }
 \arguments{
-\item{y}{Univariate series. @param p,q AR and MA orders.}
+\item{y}{Univariate series.}
 
-\item{d}{Differencing order. @param include_mean Fit an intercept.}
+\item{p, q}{AR and MA orders.}
+
+\item{d}{Differencing order.}
+
+\item{include_mean}{Fit an intercept.}
 }
 \value{
 List with \code{ar}, \code{ma}, \code{intercept}, \code{residuals}, \code{sigma2}, \code{aic},

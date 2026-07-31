@@ -7,7 +7,9 @@
 morie_geron_curse_dimensionality(d, n)
 }
 \arguments{
-\item{d}{Dimensions. @param n Sample size.}
+\item{d}{Dimensions.}
+
+\item{n}{Sample size.}
 }
 \value{
 List with \code{nn_distance}, \code{mean_pairwise_distance},

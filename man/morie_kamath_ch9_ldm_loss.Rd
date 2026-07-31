@@ -7,9 +7,13 @@
 morie_kamath_ch9_ldm_loss(epsilon, z_t, H_X, eps_net = NULL, t = NULL)
 }
 \arguments{
-\item{epsilon}{True noise (rows are samples). @param z_t Latent.}
+\item{epsilon}{True noise (rows are samples).}
 
-\item{H_X}{Conditioning. @param eps_net Prediction or function.}
+\item{z_t}{Latent.}
+
+\item{H_X}{Conditioning.}
+
+\item{eps_net}{Prediction or function.}
 
 \item{t}{Timestep.}
 }

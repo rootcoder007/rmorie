@@ -14,9 +14,13 @@ morie_geron_next_sentence_prediction(
 )
 }
 \arguments{
-\item{sent_A, sent_B}{Tokenised sentences. @param encoder Optional \code{encoder(tokens, segments) -> h}.}
+\item{sent_A, sent_B}{Tokenised sentences.}
 
-\item{w, b}{Head weights/bias. @param label Optional 0/1 label for the loss.}
+\item{encoder}{Optional \code{encoder(tokens, segments) -> h}.}
+
+\item{w, b}{Head weights/bias.}
+
+\item{label}{Optional 0/1 label for the loss.}
 }
 \description{
 Next sentence prediction: BERT-style input assembly plus a linear [CLS] head (Geron Ch 15, hmnsp)

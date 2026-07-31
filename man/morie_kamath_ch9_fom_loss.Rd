@@ -7,7 +7,11 @@
 morie_kamath_ch9_fom_loss(r_i, t_i, R = NULL, P = NULL)
 }
 \arguments{
-\item{r_i}{Frame indices. @param t_i Timestamp indices. @param R Count.}
+\item{r_i}{Frame indices.}
+
+\item{t_i}{Timestamp indices.}
+
+\item{R}{Count.}
 
 \item{P}{Frame-by-timestamp probability matrix.}
 }

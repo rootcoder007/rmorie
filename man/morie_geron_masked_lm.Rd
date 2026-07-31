@@ -14,11 +14,17 @@ morie_geron_masked_lm(
 )
 }
 \arguments{
-\item{X}{Integer token ids (0-based), vector or matrix. @param mask_frac Fraction masked.}
+\item{X}{Integer token ids (0-based), vector or matrix.}
 
-\item{model}{Optional function(masked_X, positions) -> probability matrix. @param vocab_size Optional vocab size.}
+\item{mask_frac}{Fraction masked.}
 
-\item{seed}{Seed. @param mask_token Substituted value.}
+\item{model}{Optional function(masked_X, positions) -> probability matrix.}
+
+\item{vocab_size}{Optional vocab size.}
+
+\item{seed}{Seed.}
+
+\item{mask_token}{Substituted value.}
 }
 \value{
 List with loss, baseline_loss, perplexity, masked_positions, targets, probabilities, n_masked, estimate, n, method.

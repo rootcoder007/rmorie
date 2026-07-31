@@ -7,7 +7,9 @@
 morie_burkov_add_k(counts_ngram, counts_prefix, V, k = 0.5)
 }
 \arguments{
-\item{counts_ngram, counts_prefix}{Counts. @param V Vocabulary size.}
+\item{counts_ngram, counts_prefix}{Counts.}
+
+\item{V}{Vocabulary size.}
 
 \item{k}{Pseudo-count, positive.}
 }

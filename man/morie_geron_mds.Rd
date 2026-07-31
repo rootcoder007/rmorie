@@ -7,7 +7,9 @@
 morie_geron_mds(X, n_components, precomputed = FALSE)
 }
 \arguments{
-\item{X}{Data, or a distance matrix if precomputed=TRUE. @param n_components Embedding dimension.}
+\item{X}{Data, or a distance matrix if precomputed=TRUE.}
+
+\item{n_components}{Embedding dimension.}
 
 \item{precomputed}{Treat X as a symmetric distance matrix.}
 }

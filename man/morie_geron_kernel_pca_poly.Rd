@@ -13,7 +13,15 @@ morie_geron_kernel_pca_poly(
 )
 }
 \arguments{
-\item{X}{Data. @param n_components Components. @param degree Degree. @param gamma Scale. @param coef0 Offset.}
+\item{X}{Data.}
+
+\item{n_components}{Components.}
+
+\item{degree}{Degree.}
+
+\item{gamma}{Scale.}
+
+\item{coef0}{Offset.}
 }
 \value{
 List with X_projected, eigenvalues, alphas, K, feature_space_dim, estimate, n, method.

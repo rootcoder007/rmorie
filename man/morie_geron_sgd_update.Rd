@@ -9,7 +9,9 @@ morie_geron_sgd_update(X, y, theta, eta = 0.1, seed = 0, index = NULL)
 \arguments{
 \item{X, y, theta}{Design, targets, coefficients.}
 
-\item{eta}{Positive rate. @param seed LCG seed.}
+\item{eta}{Positive rate.}
+
+\item{seed}{LCG seed.}
 
 \item{index}{Optional 0-based row override.}
 }

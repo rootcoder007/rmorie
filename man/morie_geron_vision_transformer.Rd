@@ -15,7 +15,9 @@ morie_geron_vision_transformer(
 )
 }
 \arguments{
-\item{image}{(H,W) or (H,W,C) array. @param patch_size Patch side length.}
+\item{image}{(H,W) or (H,W,C) array.}
+
+\item{patch_size}{Patch side length.}
 
 \item{n_layers, d_model, n_heads, n_classes, seed}{As in Python original.}
 }

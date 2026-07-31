@@ -7,7 +7,9 @@
 morie_geron_peephole_lstm(x_t, h_prev, c_prev, weights)
 }
 \arguments{
-\item{x_t, h_prev, c_prev}{Input and previous state. @param weights List with W_x, W_h, b, p_i, p_f, p_o.}
+\item{x_t, h_prev, c_prev}{Input and previous state.}
+
+\item{weights}{List with W_x, W_h, b, p_i, p_f, p_o.}
 }
 \description{
 Peephole LSTM cell forward step: gates also see the cell state (Geron Ch 13, hmphp)

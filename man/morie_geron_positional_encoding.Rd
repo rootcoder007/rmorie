@@ -7,7 +7,9 @@
 morie_geron_positional_encoding(pos, d_model, base = 10000)
 }
 \arguments{
-\item{pos}{Position or vector of positions. @param d_model Even width.}
+\item{pos}{Position or vector of positions.}
+
+\item{d_model}{Even width.}
 
 \item{base}{Frequency base (> 1).}
 }

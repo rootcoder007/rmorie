@@ -7,7 +7,9 @@
 morie_kamath_prompt_tuning(P, X)
 }
 \arguments{
-\item{P}{Soft prompt rows. @param X Input embedding rows.}
+\item{P}{Soft prompt rows.}
+
+\item{X}{Input embedding rows.}
 }
 \value{
 List with \code{X_aug}, \code{prompt_len}, \code{n_trainable}.

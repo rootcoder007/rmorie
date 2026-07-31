@@ -9,7 +9,7 @@ morie_wasserman_boosting(X, y, model, T)
 \arguments{
 \item{X}{Feature matrix.}
 
-\item{y}{Labels in {-1, +1}.}
+\item{y}{Labels \verb{in \{-1, +1\}}.}
 
 \item{model}{Weak-learner factory (X, y, w) -> predict function;
 NULL = built-in stumps.}

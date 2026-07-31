@@ -13,7 +13,9 @@ morie_kamath_ch6_toxic_fraction(Yhat, c, threshold = 0.5)
 morie_kamath_ch6_toxicity_probability(Yhat, c, threshold = 0.5)
 }
 \arguments{
-\item{Yhat}{Generations. @param c Classifier or score vector.}
+\item{Yhat}{Generations.}
+
+\item{c}{Classifier or score vector.}
 
 \item{threshold}{Toxicity cut-off; default 0.5.}
 }

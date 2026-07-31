@@ -16,9 +16,13 @@ morie_geron_videobert(
 \arguments{
 \item{video_tokens, text_tokens}{Integer (0-based) token id vectors.}
 
-\item{d_model}{Embedding width. @param mask_positions Optional 0-based positions to mask.}
+\item{d_model}{Embedding width.}
 
-\item{mask_prob}{Masking rate when mask_positions is NULL. @param seed LCG seed.}
+\item{mask_positions}{Optional 0-based positions to mask.}
+
+\item{mask_prob}{Masking rate when mask_positions is NULL.}
+
+\item{seed}{LCG seed.}
 }
 \value{
 list with loss, token_losses, attention, hidden, masked, predictions,

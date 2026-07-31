@@ -7,7 +7,9 @@
 morie_geron_reverse_autodiff(f, x)
 }
 \arguments{
-\item{f}{Function \verb{f(vars) -> tape node} (built from the supplied leaves). @param x Point.}
+\item{f}{Function \verb{f(vars) -> tape node} (built from the supplied leaves).}
+
+\item{x}{Point.}
 }
 \description{
 Reverse-mode automatic differentiation, delegated to morie_geron_autograd (Geron App A, hmrad)

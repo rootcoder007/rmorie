@@ -7,7 +7,11 @@
 morie_geron_pytorch_tensor(x, device = "cpu", dtype = NULL)
 }
 \arguments{
-\item{x}{Data. @param device "cpu", "cuda" or "mps". @param dtype Optional torch dtype name.}
+\item{x}{Data.}
+
+\item{device}{"cpu", "cuda" or "mps".}
+
+\item{dtype}{Optional torch dtype name.}
 }
 \description{
 Torch-style tensor construction (numpy/R-backed, no torch call) (Geron Ch 10, hmpttn)

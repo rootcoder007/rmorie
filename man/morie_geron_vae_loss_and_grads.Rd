@@ -7,7 +7,9 @@
 morie_geron_vae_loss_and_grads(X, params, eps, beta = 1)
 }
 \arguments{
-\item{X}{Data (n, d). @param params list(Wmu, bmu, Wlv, blv, Wd, bd).}
+\item{X}{Data (n, d).}
+
+\item{params}{list(Wmu, bmu, Wlv, blv, Wd, bd).}
 
 \item{eps}{Matrix of standard-normal noise (n, latent_dim).}
 

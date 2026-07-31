@@ -14,7 +14,9 @@ morie_geron_spectral_clustering(
 )
 }
 \arguments{
-\item{X}{Data (n, d). @param n_clusters,affinity,gamma,n_neighbors,seed As in Python original.}
+\item{X}{Data (n, d).}
+
+\item{n_clusters, affinity, gamma, n_neighbors, seed}{As in Python original.}
 }
 \value{
 list with labels, embedding, centers, eigenvalues, affinity_matrix,

@@ -30,7 +30,9 @@ morie_geron_detr_hungarian_matching(
 
 \item{no_object_class}{Optional 0-based no-object index.}
 
-\item{eos_coef}{No-object down-weight. @param class_is_logits Softmax needed.}
+\item{eos_coef}{No-object down-weight.}
+
+\item{class_is_logits}{Softmax needed.}
 }
 \value{
 List with \code{matching}, \code{cost_matrix}, \code{total_cost}, \code{loss},

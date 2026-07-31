@@ -10,9 +10,13 @@ morie_kamath_glove_cost(X, W, W_tilde, b, b_tilde, x_max = 100, alpha = 0.75)
 morie_kamath_glove_weight(x, x_max, alpha)
 }
 \arguments{
-\item{X}{Co-occurrence counts. @param W,W_tilde Word and context vectors.}
+\item{X}{Co-occurrence counts.}
 
-\item{b, b_tilde}{Biases. @param x_max,alpha Weighting parameters.}
+\item{W, W_tilde}{Word and context vectors.}
+
+\item{b, b_tilde}{Biases.}
+
+\item{x_max, alpha}{Weighting parameters.}
 
 \item{x}{Counts to weight.}
 }

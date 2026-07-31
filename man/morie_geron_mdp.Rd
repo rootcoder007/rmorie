@@ -15,9 +15,17 @@ morie_geron_mdp(
 )
 }
 \arguments{
-\item{states, actions}{Label vectors. @param P Array (n_s,n_a,n_s). @param R Array (n_s,n_a,n_s) or (n_s,n_a).}
+\item{states, actions}{Label vectors.}
 
-\item{gamma}{Discount in [0,1). @param max_iter Sweep cap. @param tol Convergence threshold.}
+\item{P}{Array (n_s,n_a,n_s).}
+
+\item{R}{Array (n_s,n_a,n_s) or (n_s,n_a).}
+
+\item{gamma}{Discount in [0,1).}
+
+\item{max_iter}{Sweep cap.}
+
+\item{tol}{Convergence threshold.}
 }
 \value{
 List with V, Q, policy, policy_labels, n_iter, effective_horizon, estimate, n, method.

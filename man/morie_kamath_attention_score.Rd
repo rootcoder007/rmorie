@@ -31,21 +31,29 @@ morie_kamath_multihead_concat(heads, W_O)
 morie_kamath_masked_attention(Q, K, V, M, d_k = NULL)
 }
 \arguments{
-\item{q, k_i}{Query and key. @param alpha Score family or function.}
+\item{q, k_i}{Query and key.}
+
+\item{alpha}{Score family or function.}
 
 \item{a}{Score vector.}
 
 \item{a_i}{One score that must appear in a.}
 
-\item{b}{Weights. @param v Value matrix, one row per weight.}
+\item{b}{Weights.}
 
-\item{k}{Key. @param d_k Optional dimension pin.}
+\item{v}{Value matrix, one row per weight.}
+
+\item{k}{Key.}
+
+\item{d_k}{Optional dimension pin.}
 
 \item{Q, K, V}{Matrices.}
 
 \item{W_Qi, W_Ki, W_Vi}{Per-head projections.}
 
-\item{heads}{List of head outputs. @param W_O Output projection.}
+\item{heads}{List of head outputs.}
+
+\item{W_O}{Output projection.}
 
 \item{M}{Additive mask, applied INSIDE the scaling (the book's
 convention; differs from Vaswani's for finite masks).}

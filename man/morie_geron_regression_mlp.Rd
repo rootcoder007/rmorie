@@ -14,7 +14,9 @@ morie_geron_regression_mlp(
 )
 }
 \arguments{
-\item{X, y}{Data and targets. @param hidden_sizes Hidden widths.}
+\item{X, y}{Data and targets.}
+
+\item{hidden_sizes}{Hidden widths.}
 
 \item{epochs, lr, seed}{Training controls.}
 }

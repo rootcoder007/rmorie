@@ -10,7 +10,11 @@ morie_alammar_classification_head(h_cls, W_cls, b)
 morie_alammar_ner_token_head(h_tokens, W, b, tags = NULL)
 }
 \arguments{
-\item{h_cls}{Hidden vector. @param W_cls Weight matrix. @param b Bias.}
+\item{h_cls}{Hidden vector.}
+
+\item{W_cls}{Weight matrix.}
+
+\item{b}{Bias.}
 
 \item{h_tokens}{Token hidden states, one row each.}
 

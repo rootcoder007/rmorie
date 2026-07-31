@@ -7,7 +7,9 @@
 morie_geron_max_norm(w, r, axis = NULL)
 }
 \arguments{
-\item{w}{Vector or matrix. @param r Positive radius.}
+\item{w}{Vector or matrix.}
+
+\item{r}{Positive radius.}
 
 \item{axis}{NULL, 0, 1 or -1.}
 }

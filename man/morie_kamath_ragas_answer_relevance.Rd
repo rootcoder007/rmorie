@@ -12,9 +12,13 @@ morie_kamath_ragas_answer_relevance(
 )
 }
 \arguments{
-\item{answer}{Model answer. @param original_question Query (or embedding).}
+\item{answer}{Model answer.}
 
-\item{model}{Function answer -> reverse questions. @param embed Optional.}
+\item{original_question}{Query (or embedding).}
+
+\item{model}{Function answer -> reverse questions.}
+
+\item{embed}{Optional.}
 }
 \value{
 List with \code{estimate}, \code{score}, \code{similarities}.

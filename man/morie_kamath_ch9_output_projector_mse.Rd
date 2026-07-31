@@ -9,7 +9,9 @@ morie_kamath_ch9_output_projector_mse(H_X, tau_X, t)
 \arguments{
 \item{H_X}{A feature matrix, or a list of candidates.}
 
-\item{tau_X}{Target features or a function of t. @param t Target text.}
+\item{tau_X}{Target features or a function of t.}
+
+\item{t}{Target text.}
 }
 \value{
 List with \code{estimate}, \code{argmin}, \code{losses}.

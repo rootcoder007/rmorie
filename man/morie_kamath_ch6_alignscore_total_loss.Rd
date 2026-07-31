@@ -7,7 +7,9 @@
 morie_kamath_ch6_alignscore_total_loss(L_3way, L_bin, L_reg, lambdas)
 }
 \arguments{
-\item{L_3way, L_bin, L_reg}{Component losses. @param lambdas Three weights.}
+\item{L_3way, L_bin, L_reg}{Component losses.}
+
+\item{lambdas}{Three weights.}
 }
 \value{
 List with \code{estimate}, \code{contributions}.

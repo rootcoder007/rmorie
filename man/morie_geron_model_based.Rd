@@ -7,7 +7,13 @@
 morie_geron_model_based(X, y, add_bias = TRUE, eta = NULL, n_iter = 1000)
 }
 \arguments{
-\item{X, y}{Data. @param add_bias Prepend ones column. @param eta Optional learning rate. @param n_iter Descent iterations.}
+\item{X, y}{Data.}
+
+\item{add_bias}{Prepend ones column.}
+
+\item{eta}{Optional learning rate.}
+
+\item{n_iter}{Descent iterations.}
 }
 \value{
 List with theta, theta_gd, mse, r2, gap, eta, estimate, n, method.

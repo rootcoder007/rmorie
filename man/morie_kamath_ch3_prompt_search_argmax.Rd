@@ -7,7 +7,11 @@
 morie_kamath_ch3_prompt_search_argmax(x, z, theta, f_fill = NULL)
 }
 \arguments{
-\item{x}{Template. @param z Candidate answers. @param theta Scorer.}
+\item{x}{Template.}
+
+\item{z}{Candidate answers.}
+
+\item{theta}{Scorer.}
 
 \item{f_fill}{Optional filler; default substitutes \verb{\[z\]}, else appends.}
 }
@@ -15,6 +19,6 @@ morie_kamath_ch3_prompt_search_argmax(x, z, theta, f_fill = NULL)
 List with \code{estimate}, \code{z_hat}, \code{filled_prompt}, \code{scores}.
 }
 \description{
-z_hat = argmax_{z in Z} score(f_fill(x, z)). \code{theta} scores the FILLED
+z_hat = \verb{argmax_\{z in Z\}} score(f_fill(x, z)). \code{theta} scores the FILLED
 prompt; argmax is invariant to any monotone map.
 }

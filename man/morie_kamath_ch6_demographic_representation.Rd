@@ -10,7 +10,11 @@ morie_kamath_ch6_demographic_representation(G_i, A_i, Yhat)
 morie_kamath_ch6_stereotypical_assoc(w, A_i, Yhat)
 }
 \arguments{
-\item{G_i}{Group label. @param A_i Attribute words. @param Yhat Outputs.}
+\item{G_i}{Group label.}
+
+\item{A_i}{Attribute words.}
+
+\item{Yhat}{Outputs.}
 
 \item{w}{Gating word.}
 }

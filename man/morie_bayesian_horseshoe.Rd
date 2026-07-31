@@ -7,8 +7,13 @@
 morie_bayesian_horseshoe(X, y, n_iter = 3000L, seed = 42L)
 }
 \arguments{
-\item{X}{design matrix; @param y response; @param n_iter iterations;
-@param seed RNG seed.}
+\item{X}{design matrix.}
+
+\item{y}{response.}
+
+\item{n_iter}{iterations.}
+
+\item{seed}{RNG seed.}
 }
 \value{
 list with \code{beta_samples}, \code{tau_samples},

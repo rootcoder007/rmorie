@@ -7,7 +7,9 @@
 morie_alammar_sliding_window_attention(Q, K, V, window_size)
 }
 \arguments{
-\item{Q, K, V}{One sequence's matrices. @param window_size W.}
+\item{Q, K, V}{One sequence's matrices.}
+
+\item{window_size}{W.}
 }
 \description{
 Sliding-window causal attention (Beltagy et al. 2020)

@@ -7,7 +7,11 @@
 morie_kamath_houlsby_adapter(h, W_down, W_up, approximate = "none")
 }
 \arguments{
-\item{h}{Hidden rows. @param W_down (m, d). @param W_up (d, m).}
+\item{h}{Hidden rows.}
+
+\item{W_down}{(m, d).}
+
+\item{W_up}{(d, m).}
 
 \item{approximate}{"none" or "tanh".}
 }

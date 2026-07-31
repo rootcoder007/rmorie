@@ -7,7 +7,11 @@
 morie_kamath_cross_encoder_rerank(q, docs, model, top_k = NULL)
 }
 \arguments{
-\item{q}{Query. @param docs Documents. @param model Scorer.}
+\item{q}{Query.}
+
+\item{docs}{Documents.}
+
+\item{model}{Scorer.}
 
 \item{top_k}{Optional cut-off.}
 }

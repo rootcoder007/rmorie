@@ -7,8 +7,14 @@
 morie_burkov_bce_gradients(y_hat, y, x, N = NULL, j = NULL)
 }
 \arguments{
-\item{y_hat, y}{Predictions and targets. @param x Design matrix, one
-row per example. @param N Optional size check. @param j Optional
+\item{y_hat, y}{Predictions and targets.}
+
+\item{x}{Design matrix, one
+row per example.}
+
+\item{N}{Optional size check.}
+
+\item{j}{Optional
 0-based coordinate for \code{estimate} (matching the Python mirror).}
 }
 \description{

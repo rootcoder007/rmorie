@@ -7,7 +7,11 @@
 morie_geron_gpt2(X, n_layers = NULL, n_heads = NULL, size = "small", ...)
 }
 \arguments{
-\item{X}{Token ids. @param n_layers,n_heads Optional overrides. @param size "small"/"medium"/"large"/"xl".}
+\item{X}{Token ids.}
+
+\item{n_layers, n_heads}{Optional overrides.}
+
+\item{size}{"small"/"medium"/"large"/"xl".}
 
 \item{...}{Other decoder_only args.}
 }

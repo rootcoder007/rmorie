@@ -26,12 +26,18 @@ morie_alammar_simcse_dropout_aug(
 morie_alammar_openclip_contrastive(I_emb, T_emb, tau = 0.07)
 }
 \arguments{
-\item{a, b}{Row-matched embedding matrices. @param y_true Cosine
+\item{a, b}{Row-matched embedding matrices.}
+
+\item{y_true}{Cosine
 targets in \[-1, 1\].}
 
-\item{anchor, positive, negative}{Row-matched matrices. @param margin m.}
+\item{anchor, positive, negative}{Row-matched matrices.}
 
-\item{negatives}{Matrix of negative embeddings. @param tau Temperature.}
+\item{margin}{m.}
+
+\item{negatives}{Matrix of negative embeddings.}
+
+\item{tau}{Temperature.}
 
 \item{anchors, positives}{Row-matched batches; every other positive
 is an in-batch negative.}

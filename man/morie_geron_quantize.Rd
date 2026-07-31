@@ -7,7 +7,9 @@
 morie_geron_quantize(z_e, codebook)
 }
 \arguments{
-\item{z_e}{Encodings (n, k). @param codebook Codes (K, k).}
+\item{z_e}{Encodings (n, k).}
+
+\item{codebook}{Codes (K, k).}
 }
 \value{
 list(indices, z_q) with indices 0-based.

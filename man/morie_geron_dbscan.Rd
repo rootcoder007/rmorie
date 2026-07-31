@@ -7,9 +7,13 @@
 morie_geron_dbscan(X, eps, min_samples, metric = "euclidean")
 }
 \arguments{
-\item{X}{Points (m, d). @param eps Neighbourhood radius (>0).}
+\item{X}{Points (m, d).}
 
-\item{min_samples}{Core threshold (>=1). @param metric "euclidean"/
+\item{eps}{Neighbourhood radius (>0).}
+
+\item{min_samples}{Core threshold (>=1).}
+
+\item{metric}{"euclidean"/
 "manhattan"/"chebyshev".}
 }
 \value{

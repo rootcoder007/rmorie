@@ -7,9 +7,13 @@
 morie_geron_conditional_p(D2, perplexity, tol = 1e-05, max_steps = 100)
 }
 \arguments{
-\item{D2}{Squared-distance matrix (n, n). @param perplexity Target perplexity.}
+\item{D2}{Squared-distance matrix (n, n).}
 
-\item{tol}{Entropy tolerance. @param max_steps Binary-search iterations.}
+\item{perplexity}{Target perplexity.}
+
+\item{tol}{Entropy tolerance.}
+
+\item{max_steps}{Binary-search iterations.}
 }
 \value{
 list(P, betas).

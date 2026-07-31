@@ -13,7 +13,9 @@ morie_alammar_tokenization_pipeline(
 )
 }
 \arguments{
-\item{text}{Input. @param vocab Vocabulary incl. UNK and specials.}
+\item{text}{Input.}
+
+\item{vocab}{Vocabulary incl. UNK and specials.}
 
 \item{unk_token, lowercase, specials}{Pipeline settings.}
 }

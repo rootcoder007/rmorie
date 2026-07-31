@@ -2,14 +2,18 @@
 % Please edit documentation in R/geron_w4d_native.R
 \name{morie_geron_sparse_rand_projection}
 \alias{morie_geron_sparse_rand_projection}
-\title{Sparse random projection matrix with {-1,0,+1} entries}
+\title{Sparse random projection matrix with \verb{\{-1,0,+1\}} entries}
 \usage{
 morie_geron_sparse_rand_projection(X, d_out, density = NULL, seed = 0)
 }
 \arguments{
-\item{X}{Data (n, d_in). @param d_out Target dimension.}
+\item{X}{Data (n, d_in).}
 
-\item{density}{Optional non-zero fraction in (0,1]; default 1/sqrt(d_in). @param seed LCG seed.}
+\item{d_out}{Target dimension.}
+
+\item{density}{Optional non-zero fraction in (0,1]; default 1/sqrt(d_in).}
+
+\item{seed}{LCG seed.}
 }
 \value{
 list with X_proj, R, density, s, scale, nnz, max_distortion,

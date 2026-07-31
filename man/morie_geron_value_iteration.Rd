@@ -7,9 +7,15 @@
 morie_geron_value_iteration(V, P, R, gamma, tol = 1e-10, max_iter = 10000)
 }
 \arguments{
-\item{V}{Initial values (S). @param P Array (S, A, S). @param R Matrix (S, A).}
+\item{V}{Initial values (S).}
 
-\item{gamma}{Discount in [0, 1). @param tol,max_iter Stopping rule.}
+\item{P}{Array (S, A, S).}
+
+\item{R}{Matrix (S, A).}
+
+\item{gamma}{Discount in [0, 1).}
+
+\item{tol, max_iter}{Stopping rule.}
 }
 \value{
 List with \code{V}, \code{policy}, \code{Q}, \code{iterations}, \code{residual}, \code{converged}.

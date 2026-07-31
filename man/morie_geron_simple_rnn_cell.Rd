@@ -20,6 +20,6 @@ List with \code{h}, \code{pre_activation}, \code{derivative},
 \code{spectral_norm_Whh}, \code{saturated}.
 }
 \description{
-h_t = tanh(Whh h_{t-1} + Wxh x_t + b); the spectral norm of Whh
+h_t = tanh(Whh \verb{h_\{t-1\}} + Wxh x_t + b); the spectral norm of Whh
 decides vanishing versus exploding gradients.
 }

@@ -7,7 +7,9 @@
 morie_geron_aic_gmm(log_likelihood, n_params)
 }
 \arguments{
-\item{log_likelihood}{Finite scalar. @param n_params Non-negative count.}
+\item{log_likelihood}{Finite scalar.}
+
+\item{n_params}{Non-negative count.}
 }
 \value{
 List with \code{aic}, \code{log_likelihood}, \code{n_params}, \code{penalty}.

@@ -12,9 +12,13 @@ morie_kamath_ch4_lora_obj(Theta, Phi_0, x, y)
 \arguments{
 \item{Phi}{Function (x_i, y_prefix, y_t) -> probability.}
 
-\item{x}{Contexts. @param y Target sequences.}
+\item{x}{Contexts.}
 
-\item{Theta}{Adapted model. @param Phi_0 Frozen base model.}
+\item{y}{Target sequences.}
+
+\item{Theta}{Adapted model.}
+
+\item{Phi_0}{Frozen base model.}
 }
 \value{
 List with \code{estimate}, \code{per_pair}, \code{n_tokens}.

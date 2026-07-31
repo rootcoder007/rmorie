@@ -10,7 +10,9 @@ morie_burkov_term_frequency(term, document, normalise = FALSE)
 morie_burkov_tf_idf(term, document, corpus)
 }
 \arguments{
-\item{term}{Query term. @param document Token vector.}
+\item{term}{Query term.}
+
+\item{document}{Token vector.}
 
 \item{normalise}{Divide by document length.}
 

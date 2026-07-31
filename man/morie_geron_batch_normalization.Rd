@@ -15,9 +15,13 @@ morie_geron_batch_normalization(
 )
 }
 \arguments{
-\item{x}{Mini-batch (n, d) or vector. @param gamma,beta Scale and shift.}
+\item{x}{Mini-batch (n, d) or vector.}
 
-\item{eps}{Variance floor. @param momentum EMA factor in [0, 1].}
+\item{gamma, beta}{Scale and shift.}
+
+\item{eps}{Variance floor.}
+
+\item{momentum}{EMA factor in [0, 1].}
 
 \item{running_mean, running_var}{Optional previous statistics.}
 }

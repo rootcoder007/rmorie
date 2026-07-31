@@ -7,9 +7,13 @@
 morie_kamath_step_back_prompting(query, model, retrieve = NULL, answer = NULL)
 }
 \arguments{
-\item{query}{Question. @param model Abstraction function.}
+\item{query}{Question.}
 
-\item{retrieve}{Optional retriever. @param answer Optional answerer.}
+\item{model}{Abstraction function.}
+
+\item{retrieve}{Optional retriever.}
+
+\item{answer}{Optional answerer.}
 }
 \value{
 List with \code{step_back_query}, \code{context}, \code{stepped_back}.

@@ -10,7 +10,11 @@ morie_kamath_ch8_pass_at_k(n, c, k)
 morie_kamath_pass_at_k(n, c, k)
 }
 \arguments{
-\item{n}{Samples drawn. @param c Correct samples. @param k Budget.}
+\item{n}{Samples drawn.}
+
+\item{c}{Correct samples.}
+
+\item{k}{Budget.}
 }
 \value{
 List with \code{estimate}, \code{fail_probability}.

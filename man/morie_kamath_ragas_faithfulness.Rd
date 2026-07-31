@@ -7,7 +7,9 @@
 morie_kamath_ragas_faithfulness(answer, context, entails = NULL)
 }
 \arguments{
-\item{answer}{Claims. @param context Retrieved passage(s).}
+\item{answer}{Claims.}
+
+\item{context}{Retrieved passage(s).}
 
 \item{entails}{Optional judge.}
 }

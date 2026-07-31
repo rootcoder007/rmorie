@@ -14,7 +14,11 @@ morie_geron_quantization_aware_training_hm(
 )
 }
 \arguments{
-\item{model}{Initial full-precision weights. @param X,y Data. @param epochs,lr,bits Controls.}
+\item{model}{Initial full-precision weights.}
+
+\item{X, y}{Data.}
+
+\item{epochs, lr, bits}{Controls.}
 }
 \description{
 Quantization-aware training with a straight-through estimator (Geron App B, hmqat)

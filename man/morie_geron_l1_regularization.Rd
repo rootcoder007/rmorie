@@ -7,7 +7,9 @@
 morie_geron_l1_regularization(theta, alpha, skip_bias = FALSE)
 }
 \arguments{
-\item{theta}{Coefficients. @param alpha Non-negative penalty.}
+\item{theta}{Coefficients.}
+
+\item{alpha}{Non-negative penalty.}
 
 \item{skip_bias}{Leave the first coefficient unpenalised.}
 }

@@ -7,7 +7,13 @@
 morie_geron_kernel_pca_sigmoid(X, n_components, gamma = NULL, coef0 = 1)
 }
 \arguments{
-\item{X}{Data. @param n_components Components. @param gamma Scale. @param coef0 Offset.}
+\item{X}{Data.}
+
+\item{n_components}{Components.}
+
+\item{gamma}{Scale.}
+
+\item{coef0}{Offset.}
 }
 \value{
 List with X_projected, eigenvalues, alphas, K, n_negative_eigenvalues, is_psd, estimate, n, method.

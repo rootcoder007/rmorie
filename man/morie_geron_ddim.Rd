@@ -14,11 +14,17 @@ morie_geron_ddim(
 )
 }
 \arguments{
-\item{x_T}{Starting noise. @param model function(x_t, t) -> eps.}
+\item{x_T}{Starting noise.}
 
-\item{T}{Training schedule length. @param n_steps Reverse steps taken.}
+\item{model}{function(x_t, t) -> eps.}
 
-\item{beta_schedule}{"linear"/"cosine"/vector. @param clip_x0 c(lo, hi).}
+\item{T}{Training schedule length.}
+
+\item{n_steps}{Reverse steps taken.}
+
+\item{beta_schedule}{"linear"/"cosine"/vector.}
+
+\item{clip_x0}{c(lo, hi).}
 }
 \value{
 List with \code{x_0}, \code{trajectory}, \code{timesteps}, \code{model_calls}, \code{speedup}.

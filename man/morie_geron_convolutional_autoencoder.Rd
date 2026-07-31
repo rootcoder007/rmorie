@@ -13,9 +13,13 @@ morie_geron_convolutional_autoencoder(
 )
 }
 \arguments{
-\item{x}{Image (H, W). @param encoder_weights,decoder_weights Lists of kernels.}
+\item{x}{Image (H, W).}
 
-\item{stride}{Shared stride. @param output_activation "identity", "tanh", "sigmoid".}
+\item{encoder_weights, decoder_weights}{Lists of kernels.}
+
+\item{stride}{Shared stride.}
+
+\item{output_activation}{"identity", "tanh", "sigmoid".}
 }
 \value{
 List with \code{x_hat}, \code{code}, \code{code_shape}, \code{loss}, \code{mse_per_pixel},

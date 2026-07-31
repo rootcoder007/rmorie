@@ -7,7 +7,9 @@
 morie_geron_glorot_init(fan_in, fan_out, seed = 0, distribution = "uniform")
 }
 \arguments{
-\item{fan_in, fan_out}{Positive layer widths. @param seed LCG seed.}
+\item{fan_in, fan_out}{Positive layer widths.}
+
+\item{seed}{LCG seed.}
 
 \item{distribution}{"uniform" or "normal".}
 }

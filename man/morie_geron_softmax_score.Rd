@@ -7,7 +7,9 @@
 morie_geron_softmax_score(X, theta)
 }
 \arguments{
-\item{X}{(m, d) design matrix. @param theta (d, K) coefficients.}
+\item{X}{(m, d) design matrix.}
+
+\item{theta}{(d, K) coefficients.}
 }
 \value{
 List with \code{scores}, \code{p}, \code{probabilities}, \code{predicted}
