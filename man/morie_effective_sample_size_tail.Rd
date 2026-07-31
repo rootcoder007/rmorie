@@ -35,6 +35,7 @@ morie_effective_sample_size_tail(matrix(rnorm(4000),
                                         nrow = 4))$ess_tail > 100
 }
 \references{
-Vehtari, A. et al. (2021). \emph{Bayesian Analysis},
-16(2), 667-718.
+Vehtari, A. et al. (2021). Rank-normalization, folding,
+and localization: an improved R-hat for assessing convergence of
+MCMC. \emph{Bayesian Analysis}, 16(2), 667-718.
 }

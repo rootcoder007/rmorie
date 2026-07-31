@@ -21,6 +21,10 @@
   out
 }
 
+#' Print method for \code{morie_weight} objects
+#'
+#' @param x A \code{morie_weight} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @examples
 #' \donttest{
 #' d <- data.frame(t = rbinom(100, 1, 0.4), x = rnorm(100))

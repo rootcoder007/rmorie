@@ -170,6 +170,10 @@ morie_otis_all_analyses <- function(df, year,
 # Default print/format for morie_otis_result
 # ---------------------------------------------------------------------------
 
+#' Format method for \code{morie_otis_result} objects
+#'
+#' @param x A \code{morie_otis_result} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return A character string.
 #' @examples
 #' \donttest{
@@ -211,6 +215,10 @@ format.morie_otis_result <- function(x, ...) {
 ")
 }
 
+#' Print method for \code{morie_otis_result} objects
+#'
+#' @param x A \code{morie_otis_result} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' \donttest{

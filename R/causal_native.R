@@ -28,9 +28,10 @@
 #' @return Named list with \code{ate}, \code{se}, \code{ci_low},
 #'   \code{ci_high}, \code{statistic}, \code{p_value}, \code{df},
 #'   \code{n1}, \code{n0}, \code{paired}, \code{method}.
-#' @references Rubin DB (1974). \emph{Journal of Educational
-#'   Psychology}, 66(5), 688-701. Holland PW (1986). \emph{JASA},
-#'   81(396), 945-960.
+#' @references Rubin DB (1974). Estimating causal effects of treatments
+#'   in randomized and nonrandomized studies. \emph{Journal of
+#'   Educational Psychology}, 66(5), 688-701. Holland PW (1986).
+#'   Statistics and causal inference. \emph{JASA}, 81(396), 945-960.
 #' @examples
 #' set.seed(1)
 #' morie_ate_potential_outcomes(rnorm(50, 2), rnorm(50))$ate
@@ -260,8 +261,10 @@ morie_backdoor_criterion <- function(dag, x, y, z = character(0)) {
 #' @return Named list with \code{c}, \code{a}, \code{b},
 #'   \code{c_prime}, \code{indirect}, \code{proportion_mediated},
 #'   \code{se}, \code{p}, \code{steps}, \code{mediation}, \code{n}.
-#' @references Baron RM & Kenny DA (1986). \emph{Journal of Personality
-#'   and Social Psychology}, 51(6), 1173-1182.
+#' @references Baron RM & Kenny DA (1986). The moderator-mediator
+#'   variable distinction in social psychological research: conceptual,
+#'   strategic, and statistical considerations. \emph{Journal of
+#'   Personality and Social Psychology}, 51(6), 1173-1182.
 #' @examples
 #' set.seed(1); x <- rnorm(200); m <- 0.8 * x + rnorm(200)
 #' morie_baron_kenny(0.3 * x + 0.6 * m + rnorm(200), x, m)$mediation
@@ -315,8 +318,9 @@ morie_baron_kenny <- function(y, x, m, alpha = 0.05) {
 #' @param alpha Significance level.
 #' @return Named list with \code{estimate}, \code{se},
 #'   \code{statistic}, \code{p_value}, \code{ci_low}, \code{ci_high}.
-#' @references Sobel ME (1982). \emph{Sociological Methodology}, 13,
-#'   290-312.
+#' @references Sobel ME (1982). Asymptotic confidence intervals for
+#'   indirect effects in structural equation models. \emph{Sociological
+#'   Methodology}, 13, 290-312.
 #' @examples
 #' morie_indirect_effect_sobel(0.5, 0.4, 0.1, 0.08)$p_value
 #' @export
@@ -361,7 +365,8 @@ morie_indirect_effect_sobel <- function(a, b, se_a = NULL, se_b = NULL, alpha = 
 #' @return Named list with \code{att}, \code{se}, \code{ci_low},
 #'   \code{ci_high}, \code{statistic}, \code{p_value}, \code{n_trimmed},
 #'   \code{ps_min}, \code{ps_max}, \code{method}.
-#' @references Sant'Anna PHC & Zhao J (2020). \emph{Journal of
+#' @references Sant'Anna PHC & Zhao J (2020). Doubly robust
+#'   difference-in-differences estimators. \emph{Journal of
 #'   Econometrics}, 219(1), 101-122.
 #' @examples
 #' set.seed(1); n <- 400; xx <- rnorm(n)
@@ -445,7 +450,8 @@ morie_dr_did <- function(y_pre, y_post, d, x, trim = 0.995, alpha = 0.05) {
 #' @return Named list with \code{total}, \code{direct}, \code{indirect},
 #'   \code{or_total}, \code{or_direct}, \code{or_indirect}, \code{se},
 #'   \code{ci_low}, \code{ci_high}, \code{n}, \code{B}, \code{method}.
-#' @references Tchetgen Tchetgen EJ (2013). \emph{Statistics in
+#' @references Tchetgen Tchetgen EJ (2013). Inverse odds ratio-weighted
+#'   estimation for causal mediation analysis. \emph{Statistics in
 #'   Medicine}, 32(26), 4567-4580.
 #' @examples
 #' set.seed(1); n <- 600; xx <- rbinom(n, 1, 0.5); mm <- xx + rnorm(n)

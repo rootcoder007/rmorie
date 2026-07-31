@@ -712,6 +712,10 @@ morie_tps_fokker_planck_grid <- function(df, ds_name = "?",
 # Print method
 # ---------------------------------------------------------------------------
 
+#' Print method for \code{morie_tps_stochastic_result} objects
+#'
+#' @param x A \code{morie_tps_stochastic_result} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' \donttest{

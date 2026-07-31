@@ -336,6 +336,8 @@ fitted.morie_bayes_fit <- function(object, ...) {
 
 # --- print / plot (BS6.x) --------------------------------------------
 
+#' Print method for \code{morie_bayes_fit} objects
+#'
 #' @param x A `morie_bayes_fit`.
 #' @param ... Unused.
 #' @return `x`, invisibly.
@@ -393,6 +395,8 @@ morie_bayes_plot <- function(x, type = c("trace", "density", "both"),
   invisible(NULL)
 }
 
+#' Plot method for \code{morie_bayes_fit} objects
+#'
 #' @param x A `morie_bayes_fit`.
 #' @param ... Passed to [morie_bayes_plot()].
 #' @return `NULL`, invisibly (default trace plot).

@@ -401,7 +401,8 @@ morie_bipartite_matching <- function(left_n, right_n, edges) {
 #' @param edges List of (left, right) pairs, numbered from 1.
 #' @return A list with `matching_size`, `cover_size`, `cover_is_valid`,
 #'   `konig_holds`, `warnings`.
-#' @references Konig D (1931).
+#' @references Konig D (1931). Grafok es matrixok. \emph{Matematikai es
+#'   Fizikai Lapok}, 38, 116-119.
 #' @export
 morie_konig_theorem <- function(left_n, right_n, edges) {
   ln <- as.integer(left_n); rn <- as.integer(right_n)

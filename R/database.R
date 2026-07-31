@@ -110,7 +110,7 @@
 #'
 #' morie functions that persist artifacts to disk (e.g.
 #' \code{morie_fetch_siu(cache_html = TRUE)}) default to a
-#' \emph{session-scoped} subdirectory of \code{\link\[base\]{tempdir}()},
+#' \emph{session-scoped} subdirectory of \code{\link[base]{tempdir}()},
 #' which R automatically removes when the session ends. This is the
 #' most conservative CRAN-Policy-compliant default: nothing morie
 #' writes ever survives the R session unless the user explicitly
@@ -168,7 +168,7 @@ morie_cache_dir <- function(subdir = NULL) {
 #' Removes files cached by morie under
 #' \code{tools::R_user_dir("morie", "cache")} (or
 #' \code{MORIE_CACHE_DIR} if set). morie's default behaviour writes
-#' caches to a session-scoped \code{\link\[base\]{tempdir}()}
+#' caches to a session-scoped \code{\link[base]{tempdir}()}
 #' subdirectory, so this function only matters if you have explicitly
 #' opted in to persistent caching by passing
 #' \code{cache_dir = morie_cache_dir(...)} to any of the morie

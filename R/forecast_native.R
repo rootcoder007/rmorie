@@ -232,7 +232,7 @@ morie_joseph_simple_exponential_smoothing <- function(y, alpha = NULL,
 #'
 #' @param y series.
 #' @param period seasonal period.
-#' @param alpha,beta,gamma smoothing parameters in [0, 1].
+#' @param alpha,beta,gamma smoothing parameters in `[0, 1]`.
 #' @param horizon steps ahead; defaults to one full period.
 #' @return list with \code{forecast}, \code{level}, \code{trend},
 #'   \code{seasonal}, \code{fitted}, \code{residuals}, \code{sse}.
@@ -264,8 +264,9 @@ morie_holt_winters_additive <- function(y, period = 4, alpha = 0.3,
 #'
 #' @inheritParams morie_holt_winters_additive
 #' @return as \code{\link{morie_holt_winters_additive}}.
-#' @references Winters, P. R. (1960). \emph{Management Science}, 6(3),
-#'   324-342.
+#' @references Winters, P. R. (1960). Forecasting sales by
+#'   exponentially weighted moving averages. \emph{Management Science},
+#'   6(3), 324-342.
 #' @examples
 #' y <- rep(c(10, 20, 30, 20), 5) * (1 + seq_len(20) / 40)
 #' round(morie_holt_winters_mult(y)$forecast, 1)

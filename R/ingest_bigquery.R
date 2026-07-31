@@ -137,7 +137,7 @@ LIMIT ", format(lim, scientific = FALSE))
 #' @param billing_project Project to bill the query to. \code{NULL}
 #'   falls back to the \code{GCP_PROJECT} env var, then to ADC.
 #' @param page_size Rows per download page (forwarded to
-#'   \code{\link\[bigrquery\]{bq_table_download}}).
+#'   \code{\link[bigrquery]{bq_table_download}}).
 #' @param max_rows Optional cap on rows downloaded (defaults to
 #'   \code{Inf}, i.e. all rows).
 #' @param quiet Suppress \pkg{bigrquery} progress output.

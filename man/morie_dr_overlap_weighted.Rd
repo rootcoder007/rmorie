@@ -53,5 +53,6 @@ round(morie_dr_overlap_weighted(y, D, X)$ate, 2)
 \references{
 Chernozhukov, V. et al. (2018). Double/debiased machine
 learning. \emph{The Econometrics Journal}, 21(1), C1-C68. Li, F.
-et al. (2018). \emph{JASA}, 113(521), 390-400.
+et al. (2018). Balancing covariates via propensity score
+weighting. \emph{JASA}, 113(521), 390-400.
 }

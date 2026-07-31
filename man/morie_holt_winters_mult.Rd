@@ -18,7 +18,7 @@ morie_holt_winters_mult(
 
 \item{period}{seasonal period.}
 
-\item{alpha, beta, gamma}{smoothing parameters in \link{0, 1}.}
+\item{alpha, beta, gamma}{smoothing parameters in \verb{[0, 1]}.}
 
 \item{horizon}{steps ahead; defaults to one full period.}
 }
@@ -40,6 +40,7 @@ y <- rep(c(10, 20, 30, 20), 5) * (1 + seq_len(20) / 40)
 round(morie_holt_winters_mult(y)$forecast, 1)
 }
 \references{
-Winters, P. R. (1960). \emph{Management Science}, 6(3),
-324-342.
+Winters, P. R. (1960). Forecasting sales by
+exponentially weighted moving averages. \emph{Management Science},
+6(3), 324-342.
 }

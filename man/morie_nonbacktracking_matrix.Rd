@@ -28,7 +28,9 @@ Mirrors \code{morie.fn.sgtnbe}.
 morie_nonbacktracking_matrix(rbind(c(0, 1), c(1, 2)))$m
 }
 \references{
-Hashimoto, K. (1989). \emph{Adv. Stud. Pure Math.}, 15,
-211-280. Krzakala, F. et al. (2013). \emph{PNAS}, 110(52),
+Hashimoto, K. (1989). Zeta functions of finite graphs
+and representations of p-adic groups. \emph{Adv. Stud. Pure
+Math.}, 15, 211-280. Krzakala, F. et al. (2013). Spectral
+redemption in clustering sparse networks. \emph{PNAS}, 110(52),
 20935-20940.
 }

@@ -62,8 +62,6 @@ NULL
 
 # Binarise a column: "Yes"/"No" character (case-insensitive) -> 1/0;
 # numeric NAs -> 0; integer -> as-integer. Mirrors python _binarise.
-#' Internal helper: Otis Binarise
-#' @noRd
 # .otis_binarise() is defined once in otis.R (the more robust version:
 # logical/numeric>0/rich string set with NA preservation); shared across
 # the OTIS modules.

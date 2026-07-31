@@ -214,7 +214,7 @@ morie_causal_caliper_matching <- function(ps, treat, caliper = NULL, k = 1,
 #'
 #' @param ps propensity scores.
 #' @param treat 0/1 treatment indicator.
-#' @param bins histogram bins on [0, 1].
+#' @param bins histogram bins on `[0, 1]`.
 #' @param eps threshold defining an extreme score.
 #' @return list with \code{common_support}, \code{n_outside},
 #'   \code{prop_extreme}, \code{overlap_coefficient},
@@ -382,7 +382,7 @@ morie_covariate_balance_check <- function(X, treat, weights = NULL,
 #' @param treat 0/1 treatment indicator.
 #' @param ps propensity scores, strictly inside (0, 1).
 #' @param estimand \code{"ato"}, \code{"ate"} or \code{"att"}.
-#' @param trim optional threshold; units outside [trim, 1-trim] get
+#' @param trim optional threshold; units outside `[trim, 1-trim]` get
 #'   weight 0.
 #' @param stabilize stabilise the ATE/ATT weights.
 #' @return list with \code{weights}, \code{ess},

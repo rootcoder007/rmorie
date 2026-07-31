@@ -22,5 +22,7 @@ and by direct Burnside over the explicit rotations, then compared --
 the closed form is a shortcut, and shortcuts are where errors hide.
 }
 \references{
-Polya G (1937).
+Polya G (1937). Kombinatorische Anzahlbestimmungen fuer
+Gruppen, Graphen und chemische Verbindungen. \emph{Acta
+Mathematica}, 68, 145-254.
 }

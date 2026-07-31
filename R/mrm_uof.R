@@ -1047,6 +1047,10 @@ mrm_uof_data_quality_audit <- function(df, sidecar = NULL, expected_schema = NUL
 # Print method
 # ---------------------------------------------------------------------------
 
+#' Print method for \code{morie_mrm_uof_result} objects
+#'
+#' @param x A \code{morie_mrm_uof_result} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' inc <- morie_datasets_corrections_uof_incidents()

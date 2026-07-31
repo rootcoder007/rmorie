@@ -112,7 +112,8 @@ morie_turan_number <- function(n, r) {
 #'
 #' @param n Vertices.
 #' @return As [morie_turan_number()], with `floor_n2_over_4`.
-#' @references Mantel W (1907).
+#' @references Mantel W (1907). Problem 28. \emph{Wiskundige Opgaven},
+#'   10, 60-61.
 #' @export
 morie_mantel_number <- function(n) {
   out <- morie_turan_number(n, 2L)
@@ -130,7 +131,8 @@ morie_mantel_number <- function(n) {
 #'
 #' @param n Ground set size.
 #' @return A list with `count`, `extremal_layers`, `unique_extremal`.
-#' @references Sperner E (1928).
+#' @references Sperner E (1928). Ein Satz ueber Untermengen einer
+#'   endlichen Menge. \emph{Mathematische Zeitschrift}, 27(1), 544-548.
 #' @export
 morie_sperner_width <- function(n) {
   n <- as.integer(n)

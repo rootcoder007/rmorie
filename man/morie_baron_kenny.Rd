@@ -32,6 +32,8 @@ set.seed(1); x <- rnorm(200); m <- 0.8 * x + rnorm(200)
 morie_baron_kenny(0.3 * x + 0.6 * m + rnorm(200), x, m)$mediation
 }
 \references{
-Baron RM & Kenny DA (1986). \emph{Journal of Personality
-and Social Psychology}, 51(6), 1173-1182.
+Baron RM & Kenny DA (1986). The moderator-mediator
+variable distinction in social psychological research: conceptual,
+strategic, and statistical considerations. \emph{Journal of
+Personality and Social Psychology}, 51(6), 1173-1182.
 }

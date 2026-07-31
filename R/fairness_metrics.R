@@ -73,6 +73,10 @@ NULL
 # print
 # ---------------------------------------------------------------------------
 
+#' Print method for \code{morie_fairness_result} objects
+#'
+#' @param x A \code{morie_fairness_result} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return Invisibly returns \code{x} unchanged.
 #' @examples
 #' \donttest{

@@ -24,5 +24,6 @@ Cutting-line endpoints for Coombs-mesh plots
 morie_spatial_voting_cutting_lines(matrix(rnorm(6), 3, 2), c(0.1, -0.2, 0))
 }
 \references{
-Poole (2005).
+Poole KT (2005). \emph{Spatial Models of Parliamentary
+Voting}. Cambridge University Press.
 }

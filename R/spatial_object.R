@@ -306,6 +306,8 @@ morie_spatial_leaflet_spec <- function(x) {
        center = colMeans(wgs$coords), zoom = 8L, points = wgs$coords)
 }
 
+#' Plot method for \code{morie_spatial} objects
+#'
 #' @param x A `morie_spatial`.
 #' @param ... Passed to \[plot()\].
 #' @return `NULL`, invisibly. Longitude/easting on x, latitude/northing on
@@ -325,6 +327,8 @@ plot.morie_spatial <- function(x, ...) {
   invisible(NULL)
 }
 
+#' Print method for \code{morie_spatial} objects
+#'
 #' @param x A `morie_spatial`.
 #' @param ... Unused.
 #' @return `x`, invisibly.

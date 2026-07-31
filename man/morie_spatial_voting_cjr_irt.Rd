@@ -35,5 +35,7 @@ fit <- morie_spatial_voting_cjr_irt(votes, n_samples = 100L,
 head(fit$ideal_points)
 }
 \references{
-Clinton, Jackman & Rivers (2004).
+Clinton J, Jackman S & Rivers D (2004). The statistical
+analysis of roll call data. \emph{American Political Science
+Review}, 98(2), 355-370.
 }

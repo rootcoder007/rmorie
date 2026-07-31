@@ -35,5 +35,7 @@ forest's tree spread understate the uncertainty because the trees
 share the training data. Mirrors \code{morie.fn.crfboot}.
 }
 \references{
-Wager S, Athey S (2018). \emph{JASA} 113(523), 1228-1242.
+Wager S, Athey S (2018). Estimation and inference of
+heterogeneous treatment effects using random forests.
+\emph{JASA} 113(523), 1228-1242.
 }

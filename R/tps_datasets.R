@@ -115,8 +115,6 @@ MORIE_TPS_REGISTRY <- list(
   REPORTED_YEAR    = "REPORT_YEAR"
 )
 
-#' Internal helper: Morie Tps Canonical
-#' @noRd
 # Internal: bundled-sample fallback for a fresh box with no local TPS
 # cache. Looks for tps_<category>_sample.csv in rmorie, then in the
 # rmoriedata companion package (the canonical data holder).

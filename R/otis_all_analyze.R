@@ -906,6 +906,10 @@ morie_otis_analyze_all <- function(datasets, out_dir = NULL) {
   out
 }
 
+#' Print method for \code{morie_otis_analysis_result} objects
+#'
+#' @param x A \code{morie_otis_analysis_result} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' otis_b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)

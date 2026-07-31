@@ -27,5 +27,8 @@ does not care how many events there are at all -- only how entangled
 each one is.
 }
 \references{
-Erdos P, Lovasz L (1975).
+Erdos P, Lovasz L (1975). Problems and results on
+3-chromatic hypergraphs and some related questions. In
+\emph{Infinite and Finite Sets} (Colloquia Mathematica Societatis
+Janos Bolyai, Vol. 10), North-Holland.
 }

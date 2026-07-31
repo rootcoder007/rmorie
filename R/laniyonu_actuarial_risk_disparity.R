@@ -570,6 +570,10 @@ morie_laniyonu_actuarial_risk_disparity <- function(
 }
 
 
+#' Print method for \code{morie_laniyonu_ard_result} objects
+#'
+#' @param x A \code{morie_laniyonu_ard_result} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' \donttest{
@@ -585,15 +589,15 @@ morie_laniyonu_actuarial_risk_disparity <- function(
 #'   df, outcome = "static", race_cols = c("black", "asian"),
 #'   gender_col = "gender", control_cols = "age"))
 #' res$outcome_kind
-#' \references{
-#' O'Connell, C., & Laniyonu, A. (2025).  Race, gender, and risk
-#' assessments in Canadian federal prison.  Race & Justice, 15(3),
-#' 428-453.
-#' Goel, S., Shroff, R., Skeem, J., & Slobogin, C. (2021).  The
-#' accuracy, equity, and jurisprudence of criminal risk assessment.
-#' In Research Handbook on Big Data Law (pp. 9-28).
 #' print(res)
 #' }
+#' @references
+#'   O'Connell, C., & Laniyonu, A. (2025).  Race, gender, and risk
+#'   assessments in Canadian federal prison.  Race & Justice, 15(3),
+#'   428-453.
+#'   Goel, S., Shroff, R., Skeem, J., & Slobogin, C. (2021).  The
+#'   accuracy, equity, and jurisprudence of criminal risk assessment.
+#'   In Research Handbook on Big Data Law (pp. 9-28).
 #' @export
 print.morie_laniyonu_ard_result <- function(x, ...) {
   cat(x$title, "\

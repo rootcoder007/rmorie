@@ -33,6 +33,7 @@ Mirrors \code{morie.fn.abind}.
 morie_indirect_effect_sobel(0.5, 0.4, 0.1, 0.08)$p_value
 }
 \references{
-Sobel ME (1982). \emph{Sociological Methodology}, 13,
-290-312.
+Sobel ME (1982). Asymptotic confidence intervals for
+indirect effects in structural equation models. \emph{Sociological
+Methodology}, 13, 290-312.
 }

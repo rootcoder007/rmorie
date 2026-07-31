@@ -210,6 +210,8 @@ morie_eda_plot <- function(x, xvar, yvar, group = NULL, units = NULL,
                        stringsAsFactors = FALSE))
 }
 
+#' Print method for \code{morie_eda_table} objects
+#'
 #' @param x A `morie_eda_table`.
 #' @param ... Passed to the data.frame print method.
 #' @return `x`, invisibly.

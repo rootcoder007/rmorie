@@ -421,6 +421,10 @@ clear_stat_commands <- function() {
 # Print method
 # ---------------------------------------------------------------------------
 
+#' Print method for \code{morie_stat_command} objects
+#'
+#' @param x A \code{morie_stat_command} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' cmd <- stat_command("demo_echo", "misc", "demo_echo",

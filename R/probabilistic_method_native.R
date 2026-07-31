@@ -145,7 +145,10 @@ morie_alteration_ramsey <- function(k) {
 #' @param d Dependency degree.
 #' @return A list with `condition_value`, `applies`, `max_degree_at_p`,
 #'   `max_probability_at_d`.
-#' @references Erdos P, Lovasz L (1975).
+#' @references Erdos P, Lovasz L (1975). Problems and results on
+#'   3-chromatic hypergraphs and some related questions. In
+#'   \emph{Infinite and Finite Sets} (Colloquia Mathematica Societatis
+#'   Janos Bolyai, Vol. 10), North-Holland.
 #' @export
 morie_lovasz_local_lemma <- function(p, d) {
   p <- as.numeric(p); d <- as.integer(d)

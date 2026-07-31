@@ -39,6 +39,7 @@ tt <- rexp(100); ct <- sample(0:2, 100, TRUE)
 tail(morie_fine_gray_subdistribution_hazard(tt, ct, X)$baseline_cif, 1)
 }
 \references{
-Fine, J. P. and Gray, R. J. (1999). \emph{JASA}, 94(446),
-496-509.
+Fine, J. P. and Gray, R. J. (1999). A proportional
+hazards model for the subdistribution of a competing risk.
+\emph{JASA}, 94(446), 496-509.
 }

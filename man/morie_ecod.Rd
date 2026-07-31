@@ -30,7 +30,7 @@ X <- cbind(rnorm(50), rnorm(50))
 str(morie_ecod(X)$score)
 }
 \references{
-Li, Z. et al. (2022). ECOD: unsupervised outlier
+Li, Z. et al. (2023). ECOD: unsupervised outlier
 detection using empirical cumulative distribution functions.
 \emph{IEEE TKDE}, 35(12), 12181-12193.
 }

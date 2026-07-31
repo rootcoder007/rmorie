@@ -446,6 +446,10 @@ morie_laniyonu_smi_force_disparity <- function(
 }
 
 
+#' Print method for \code{morie_laniyonu_smi_result} objects
+#'
+#' @param x A \code{morie_laniyonu_smi_result} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' \donttest{
@@ -463,12 +467,12 @@ morie_laniyonu_smi_force_disparity <- function(
 #'   df = g, survey_df = survey, survey_trait_col = "smi",
 #'   survey_covariate_cols = c("poverty_rate", "nonwhite_share"), max_iter = 50L))
 #' res$alpha_v
-#' \references{
-#' Laniyonu, A., & Goff, P. A. (2021).  Measuring disparities in
-#' police use of force and injury among persons with serious mental
-#' illness.  BMC Psychiatry, 21(1), 500.
 #' print(res)
 #' }
+#' @references
+#'   Laniyonu, A., & Goff, P. A. (2021).  Measuring disparities in
+#'   police use of force and injury among persons with serious mental
+#'   illness.  BMC Psychiatry, 21(1), 500.
 #' @export
 print.morie_laniyonu_smi_result <- function(x, ...) {
   cat(x$title, "\

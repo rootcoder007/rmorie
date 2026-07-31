@@ -112,16 +112,20 @@ morie_did <- function(data, outcome, unit, time, treatment_time,
   out
 }
 
+#' Print method for \code{morie_did} objects
+#'
+#' @param x A \code{morie_did} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @examples
 #' \donttest{
 #' df <- expand.grid(id = 1:40, t = 1:8)
 #' df$g <- ifelse(df$id <= 20, 5L, NA)
 #' df$y <- rnorm(nrow(df)) + ifelse(!is.na(df$g) & df$t >= df$g, 2, 0)
 #' obj <- morie_did_borusyak(df, "y", "id", "t", "g", n_bootstrap = 29L)
-#' \references{
-#' Borusyak, Jaravel & Spiess (2024) REStud 91(6).
 #' print(obj)
 #' }
+#' @references
+#'   Borusyak, Jaravel & Spiess (2024) REStud 91(6).
 #' @export
 print.morie_did <- function(x, ...) {
   cat("Difference-in-differences --", x$method, "\n")
@@ -232,6 +236,10 @@ morie_iv_2sls <- function(data, outcome, endogenous, instruments,
   out
 }
 
+#' Print method for \code{morie_iv} objects
+#'
+#' @param x A \code{morie_iv} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @examples
 #' \donttest{
 #' n <- 200
@@ -239,11 +247,11 @@ morie_iv_2sls <- function(data, outcome, endogenous, instruments,
 #' d <- z + 0.5 * u + rnorm(n)
 #' y <- 2 * d + u + rnorm(n)
 #' obj <- morie_iv_2sls(data.frame(y, d, z), "y", "d", "z")
-#' \references{
-#' Staiger & Stock (1997); Anderson & Rubin (1949);
-#' Stock & Yogo (2005).
 #' print(obj)
 #' }
+#' @references
+#'   Staiger & Stock (1997); Anderson & Rubin (1949);
+#'   Stock & Yogo (2005).
 #' @export
 print.morie_iv <- function(x, ...) {
   cat("Two-stage least squares --", x$method, "\n")
@@ -354,17 +362,21 @@ morie_rdd <- function(data, outcome, running, cutoff = 0,
   out
 }
 
+#' Print method for \code{morie_rdd} objects
+#'
+#' @param x A \code{morie_rdd} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @examples
 #' \donttest{
 #' set.seed(1)
 #' x <- runif(500, -1, 1)
 #' y <- 1 + 2 * (x >= 0) + x + rnorm(500, sd = 0.5)
 #' obj <- morie_rdd(data.frame(y, x), "y", "x")
-#' \references{
-#' Imbens & Kalyanaraman (2012); Calonico, Cattaneo &
-#' Titiunik (2014); McCrary (2008).
 #' print(obj)
 #' }
+#' @references
+#'   Imbens & Kalyanaraman (2012); Calonico, Cattaneo &
+#'   Titiunik (2014); McCrary (2008).
 #' @export
 print.morie_rdd <- function(x, ...) {
   cat(sprintf("Regression discontinuity (%s), bandwidth = %.4f\n",

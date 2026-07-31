@@ -38,6 +38,10 @@ passing the out-of-bag CATEs and the IPCW-RMST pseudo outcome.
 Mirrors \code{morie.fn.csurv2}.
 }
 \references{
-Cui Y et al. (2023). \emph{JRSS-B} 85(2), 179-211;
-Chernozhukov V et al. (2018). arXiv:1712.04802.
+Cui Y et al. (2023). Estimating heterogeneous treatment
+effects with right-censored data via causal survival forests.
+\emph{JRSS-B} 85(2), 179-211; Chernozhukov V et al. (2018).
+Fisher-Schultz Lecture: generic machine learning inference on
+heterogeneous treatment effects in randomized experiments, with an
+application to immunization in India. arXiv:1712.04802.
 }

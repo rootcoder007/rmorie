@@ -387,6 +387,10 @@ morie_laniyonu_gentrification_policing <- function(
 }
 
 
+#' Print method for \code{morie_laniyonu_gp_result} objects
+#'
+#' @param x A \code{morie_laniyonu_gp_result} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' \donttest{
@@ -404,14 +408,14 @@ morie_laniyonu_gentrification_policing <- function(
 #' df$calls_311_omp <- rpois(nrow(df), 40); df$pct_black <- runif(nrow(df), 0.05, 0.7)
 #' res <- suppressWarnings(morie_laniyonu_gentrification_policing(df = df, log_outcome = TRUE))
 #' res[[1]]$rho
-#' \references{
-#' Laniyonu, A. (2018).  Coffee shops and street stops: Policing
-#' practices in gentrifying neighborhoods.  Urban Affairs Review,
-#' 54(5), 898-930.
-#' LeSage, J. P., & Pace, R. K. (2009).  Introduction to Spatial
-#' Econometrics.  CRC Press.
 #' print(res)
 #' }
+#' @references
+#'   Laniyonu, A. (2018).  Coffee shops and street stops: Policing
+#'   practices in gentrifying neighborhoods.  Urban Affairs Review,
+#'   54(5), 898-930.
+#'   LeSage, J. P., & Pace, R. K. (2009).  Introduction to Spatial
+#'   Econometrics.  CRC Press.
 #' @export
 print.morie_laniyonu_gp_result <- function(x, ...) {
   cat(x$title, "\

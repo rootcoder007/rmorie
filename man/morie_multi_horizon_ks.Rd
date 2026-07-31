@@ -50,7 +50,9 @@ set.seed(1)
 morie_multi_horizon_ks(rnorm(400), horizons = c(1, 5), n_mc = 100)$p_value
 }
 \references{
-Corradi, V. & Swanson, N. R. (2006). \emph{Journal of
-Econometrics}, 135(1-2), 187-228. Lilliefors, H. W. (1967).
-\emph{JASA}, 62(318), 399-402.
+Corradi, V. & Swanson, N. R. (2006). Predictive density
+and conditional confidence interval accuracy tests. \emph{Journal
+of Econometrics}, 135(1-2), 187-228. Lilliefors, H. W. (1967). On
+the Kolmogorov-Smirnov test for normality with mean and variance
+unknown. \emph{JASA}, 62(318), 399-402.
 }

@@ -543,6 +543,10 @@ morie_tps_arima_forecast <- function(df, h = 12L, ds_name = "?") {
 # Print method (shared with tps_stochastic)
 # ---------------------------------------------------------------------------
 
+#' Print method for \code{morie_tps_temporal_result} objects
+#'
+#' @param x A \code{morie_tps_temporal_result} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' \donttest{

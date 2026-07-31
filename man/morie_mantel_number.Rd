@@ -17,5 +17,6 @@ As \code{\link[=morie_turan_number]{morie_turan_number()}}, with \code{floor_n2_
 bipartite graph. The floor matters at odd \eqn{n}.
 }
 \references{
-Mantel W (1907).
+Mantel W (1907). Problem 28. \emph{Wiskundige Opgaven},
+10, 60-61.
 }

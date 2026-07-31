@@ -36,7 +36,8 @@ set.seed(1)
 morie_ate_potential_outcomes(rnorm(50, 2), rnorm(50))$ate
 }
 \references{
-Rubin DB (1974). \emph{Journal of Educational
-Psychology}, 66(5), 688-701. Holland PW (1986). \emph{JASA},
-81(396), 945-960.
+Rubin DB (1974). Estimating causal effects of treatments
+in randomized and nonrandomized studies. \emph{Journal of
+Educational Psychology}, 66(5), 688-701. Holland PW (1986).
+Statistics and causal inference. \emph{JASA}, 81(396), 945-960.
 }

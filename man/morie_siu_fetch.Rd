@@ -37,7 +37,7 @@ the unfiltered index, which surfaces the most recent posts.
 }
 \section{Cache directory}{
 
-By default this writes \code{SIU.csv} under \code{\link\[base\]{tempdir}()}
+By default this writes \code{SIU.csv} under \code{\link[base]{tempdir}()}
 so R cleans it up at end of session. Pass \code{cache_dir =
 morie_cache_dir("siu")} explicitly to opt into a persistent cross-
 session cache; see \code{\link{morie_cache_dir}} and

@@ -244,8 +244,9 @@ morie_effective_sample_size_bayes <- function(chain) {
 #' @param chains matrix of draws, one row per chain.
 #' @return list with \code{ess_bulk}, \code{efficiency},
 #'   \code{sufficient} (ESS >= 100 per chain).
-#' @references Vehtari, A. et al. (2021). \emph{Bayesian Analysis},
-#'   16(2), 667-718.
+#' @references Vehtari, A. et al. (2021). Rank-normalization, folding,
+#'   and localization: an improved R-hat for assessing convergence of
+#'   MCMC. \emph{Bayesian Analysis}, 16(2), 667-718.
 #' @examples
 #' set.seed(1)
 #' morie_effective_sample_size_bulk(matrix(rt(2000, 2), nrow = 4))$sufficient
@@ -287,8 +288,9 @@ morie_effective_sample_size_bulk <- function(chains) {
 #' @param prob tail probability in (0, 0.5).
 #' @return list with \code{ess_tail}, \code{ess_lower}, \code{ess_upper},
 #'   \code{sufficient}.
-#' @references Vehtari, A. et al. (2021). \emph{Bayesian Analysis},
-#'   16(2), 667-718.
+#' @references Vehtari, A. et al. (2021). Rank-normalization, folding,
+#'   and localization: an improved R-hat for assessing convergence of
+#'   MCMC. \emph{Bayesian Analysis}, 16(2), 667-718.
 #' @examples
 #' set.seed(1)
 #' morie_effective_sample_size_tail(matrix(rnorm(4000),

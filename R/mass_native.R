@@ -236,6 +236,11 @@ morie_glm_nb <- function(formula, data, weights, init.theta = NULL,
   fit
 }
 
+#' Summarise method for \code{negbin} objects
+#'
+#' @param object A \code{negbin} object.
+#' @param dispersion A \code{negbin} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @examples
 #' \donttest{
 #' set.seed(1); n <- 300
@@ -243,11 +248,11 @@ morie_glm_nb <- function(formula, data, weights, init.theta = NULL,
 #' y <- rnbinom(n, mu = exp(0.3 + 0.9 * x), size = 3)
 #' fit <- suppressWarnings(morie_glm_nb(y ~ x, data = data.frame(y, x)))
 #' coef(fit)
-#' \references{
-#' Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
-#' Applied Statistics with S}. Springer.
 #' summary(fit)
 #' }
+#' @references
+#'   Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
+#'   Applied Statistics with S}. Springer.
 #' @exportS3Method stats::summary negbin
 summary.negbin <- function(object, dispersion = 1, ...) {
   s <- stats::summary.glm(object, dispersion = dispersion, ...)
@@ -256,6 +261,10 @@ summary.negbin <- function(object, dispersion = 1, ...) {
   s
 }
 
+#' Log-likelihood of method for \code{negbin} objects
+#'
+#' @param object A \code{negbin} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @examples
 #' \donttest{
 #' set.seed(1); n <- 300
@@ -263,11 +272,11 @@ summary.negbin <- function(object, dispersion = 1, ...) {
 #' y <- rnbinom(n, mu = exp(0.3 + 0.9 * x), size = 3)
 #' fit <- suppressWarnings(morie_glm_nb(y ~ x, data = data.frame(y, x)))
 #' coef(fit)
-#' \references{
-#' Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
-#' Applied Statistics with S}. Springer.
 #' logLik(fit)
 #' }
+#' @references
+#'   Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
+#'   Applied Statistics with S}. Springer.
 #' @exportS3Method stats::logLik negbin
 logLik.negbin <- function(object, ...) {
   val <- object$twologlik / 2
@@ -317,6 +326,10 @@ morie_rlm <- function(formula, data, k = 1.345, maxit = 20L, acc = 1e-4) {
             class = "morie_rlm")
 }
 
+#' Summarise method for \code{morie_rlm} objects
+#'
+#' @param object A \code{morie_rlm} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @examples
 #' \donttest{
 #' set.seed(3)
@@ -325,11 +338,11 @@ morie_rlm <- function(formula, data, k = 1.345, maxit = 20L, acc = 1e-4) {
 #' y[1:3] <- y[1:3] + 40
 #' rob <- morie_rlm(y ~ x, data = data.frame(y, x))
 #' rob$coefficients
-#' \references{
-#' Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
-#' Applied Statistics with S}. Springer.
 #' summary(rob)
 #' }
+#' @references
+#'   Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
+#'   Applied Statistics with S}. Springer.
 #' @exportS3Method stats::summary morie_rlm
 summary.morie_rlm <- function(object, ...) {
   s <- object$s; coef <- object$coefficients; wresid <- object$wresid
@@ -441,6 +454,10 @@ morie_polr <- function(formula, data, weights, method = "logistic") {
             class = "morie_polr")
 }
 
+#' Log-likelihood of method for \code{morie_polr} objects
+#'
+#' @param object A \code{morie_polr} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @examples
 #' \donttest{
 #' set.seed(4)
@@ -449,11 +466,11 @@ morie_polr <- function(formula, data, weights, method = "logistic") {
 #' yf <- factor(pmin(yc, 3), levels = 1:3, ordered = TRUE)
 #' fit <- morie_polr(yf ~ x, data = data.frame(yf, x))
 #' fit$zeta
-#' \references{
-#' Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
-#' Applied Statistics with S}. Springer.
 #' logLik(fit)
 #' }
+#' @references
+#'   Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
+#'   Applied Statistics with S}. Springer.
 #' @exportS3Method stats::logLik morie_polr
 logLik.morie_polr <- function(object, ...) {
   val <- -object$deviance / 2

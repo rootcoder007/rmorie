@@ -1135,6 +1135,10 @@ n_effective_tests <- function(correlation_matrix,
 # Print method (delegates to existing morie_rich_result printer)
 # ---------------------------------------------------------------------------
 
+#' Print method for \code{morie_multiple_testing_result} objects
+#'
+#' @param x A \code{morie_multiple_testing_result} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)

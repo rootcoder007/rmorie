@@ -239,7 +239,7 @@ morie_tps_ripley_k <- function(df,
 #' Returns Gi* per neighbourhood (count vector aggregated from the
 #' incident data.frame), using a binary k-NN spatial weights matrix
 #' with self-inclusion (Gi* convention). z-score interpretation: Gi*
-#' > 1.96 = significant hot spot at alpha=0.05; Gi* < -1.96 =
+#' `> 1.96` = significant hot spot at alpha=0.05; `Gi* < -1.96` =
 #' significant cold spot.
 #'
 #' @param df Incident-level data.frame.
@@ -982,6 +982,10 @@ morie_tps_moran_sweep_heatmap <- function(polygons,
 # Print method
 # ---------------------------------------------------------------------------
 
+#' Print method for \code{morie_tps_spatial_advanced_result} objects
+#'
+#' @param x A \code{morie_tps_spatial_advanced_result} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' \donttest{
@@ -991,8 +995,9 @@ morie_tps_moran_sweep_heatmap <- function(polygons,
 #'     LAT_WGS84 = c(rnorm(60, 43.65, 0.005), rnorm(60, 43.70, 0.005)),
 #'     LONG_WGS84 = c(rnorm(60, -79.40, 0.005), rnorm(60, -79.38, 0.005))
 #'   )
-#' obj <- morie_tps_dbscan_clusters(df, eps_km = 0.5, min_samples = 5L)
-#' print(obj)
+#'   obj <- morie_tps_dbscan_clusters(df, eps_km = 0.5, min_samples = 5L)
+#'   print(obj)
+#' }
 #' }
 #' @export
 print.morie_tps_spatial_advanced_result <- function(x, ...) {

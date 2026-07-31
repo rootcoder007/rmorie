@@ -200,6 +200,8 @@ morie_ml_split <- function(data,
   out
 }
 
+#' Print method for \code{morie_ml_split} objects
+#'
 #' @param x A `morie_ml_split`.
 #' @param ... Unused.
 #' @return `x`, invisibly (ML1.5 dataset summary).
@@ -379,6 +381,8 @@ morie_ml_bake <- function(recipe, newdata, reverse = FALSE) {
   out
 }
 
+#' Print method for \code{morie_ml_recipe} objects
+#'
 #' @param x A `morie_ml_recipe`.
 #' @param ... Unused.
 #' @return `x`, invisibly.
@@ -474,6 +478,8 @@ morie_ml_model <- function(type = c("logistic", "linear"),
   spec
 }
 
+#' Print method for \code{morie_ml_model} objects
+#'
 #' @param x A `morie_ml_model`.
 #' @param ... Unused.
 #' @return `x`, invisibly.
@@ -616,6 +622,8 @@ predict.morie_ml_fit <- function(object, newdata, type = c("response", "class"),
   p
 }
 
+#' Print method for \code{morie_ml_fit} objects
+#'
 #' @param x A `morie_ml_fit`.
 #' @param ... Unused.
 #' @return `x`, invisibly.
@@ -635,6 +643,8 @@ print.morie_ml_fit <- function(x, ...) {
   invisible(x)
 }
 
+#' Summarise method for \code{morie_ml_fit} objects
+#'
 #' @param object A `morie_ml_fit`.
 #' @param ... Unused.
 #' @return A one-row data.frame summarising the fit.
