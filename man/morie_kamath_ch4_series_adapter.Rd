@@ -10,7 +10,9 @@ morie_kamath_ch4_series_adapter(H_o, W_down, W_up, f = NULL)
 morie_kamath_ch4_parallel_adapter(H_o, H_i, W_down, W_up, f = NULL)
 }
 \arguments{
-\item{H_o}{Layer output. @param W_down,W_up Bottleneck factors.}
+\item{H_o}{Layer output.}
+
+\item{W_down, W_up}{Bottleneck factors.}
 
 \item{f}{Activation; default ReLU.}
 

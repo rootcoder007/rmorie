@@ -7,7 +7,9 @@
 morie_kamath_ch6_honest_score(Yhat, k, hurtlex = NULL)
 }
 \arguments{
-\item{Yhat}{List of per-prompt completion vectors. @param k Completions.}
+\item{Yhat}{List of per-prompt completion vectors.}
+
+\item{k}{Completions.}
 
 \item{hurtlex}{Predicate or a vector of hurtful strings.}
 }

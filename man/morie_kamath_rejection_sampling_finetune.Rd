@@ -13,9 +13,13 @@ morie_kamath_rejection_sampling_finetune(
 )
 }
 \arguments{
-\item{prompts}{Prompts. @param samples Per-prompt sample lists.}
+\item{prompts}{Prompts.}
 
-\item{rewards}{Per-prompt reward lists. @param k Kept per prompt.}
+\item{samples}{Per-prompt sample lists.}
+
+\item{rewards}{Per-prompt reward lists.}
+
+\item{k}{Kept per prompt.}
 
 \item{sft}{Optional trainer over the retained pairs.}
 }

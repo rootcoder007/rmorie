@@ -7,7 +7,9 @@
 morie_kamath_instruction_tuning_loss(logits, response_mask, targets)
 }
 \arguments{
-\item{logits}{(T, V) logits. @param response_mask Logical or 0/1 mask.}
+\item{logits}{(T, V) logits.}
+
+\item{response_mask}{Logical or 0/1 mask.}
 
 \item{targets}{Token ids (0-BASED).}
 }

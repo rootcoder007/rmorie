@@ -15,7 +15,11 @@ morie_regime_value(
 )
 }
 \arguments{
-\item{y}{outcome; @param d binary treatment; @param X covariates.}
+\item{y}{outcome.}
+
+\item{d}{binary treatment.}
+
+\item{X}{covariates.}
 
 \item{regime}{0/1 recommendation per unit (vector or function of X).}
 

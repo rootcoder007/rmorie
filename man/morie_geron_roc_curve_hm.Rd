@@ -7,7 +7,11 @@
 morie_geron_roc_curve_hm(y_true, scores, pos_label = 1)
 }
 \arguments{
-\item{y_true}{Binary labels. @param scores Decision scores. @param pos_label Positive label.}
+\item{y_true}{Binary labels.}
+
+\item{scores}{Decision scores.}
+
+\item{pos_label}{Positive label.}
 }
 \description{
 ROC curve: FPR vs TPR over thresholds, trapezoid area cross-check (Geron Ch 3, hmroc)

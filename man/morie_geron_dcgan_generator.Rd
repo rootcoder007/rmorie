@@ -13,9 +13,13 @@ morie_geron_dcgan_generator(
 )
 }
 \arguments{
-\item{z}{Latent vector. @param weights List: projection matrix then kernels.}
+\item{z}{Latent vector.}
 
-\item{seed_shape}{Optional c(h0, w0). @param stride Upsampling stride.}
+\item{weights}{List: projection matrix then kernels.}
+
+\item{seed_shape}{Optional c(h0, w0).}
+
+\item{stride}{Upsampling stride.}
 
 \item{batch_norm}{Apply batch norm on hidden layers.}
 }

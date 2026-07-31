@@ -7,7 +7,9 @@
 morie_geron_dynamic_quantization_alt(model, dtype = "int8", activations = NULL)
 }
 \arguments{
-\item{model}{Named list of weight tensors, or one array. @param dtype "int8"/"uint8"/"int16".}
+\item{model}{Named list of weight tensors, or one array.}
+
+\item{dtype}{"int8"/"uint8"/"int16".}
 
 \item{activations}{Optional batch to quantize dynamically.}
 }

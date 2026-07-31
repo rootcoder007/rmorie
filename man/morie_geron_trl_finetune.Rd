@@ -20,7 +20,9 @@ morie_geron_trl_finetune(
 
 \item{dataset}{Shape depends on method (see Python docstring).}
 
-\item{method}{"sft", "dpo", or "ppo". @param epochs,lr,beta,clip_eps,theta_ref As in Python original.}
+\item{method}{"sft", "dpo", or "ppo".}
+
+\item{epochs, lr, beta, clip_eps, theta_ref}{As in Python original.}
 }
 \value{
 list (shape depends on method) with theta, loss, loss_curve, ..., estimate, n, method.

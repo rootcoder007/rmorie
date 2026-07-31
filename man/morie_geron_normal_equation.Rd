@@ -7,7 +7,9 @@
 morie_geron_normal_equation(X, y, fit_intercept = FALSE)
 }
 \arguments{
-\item{X}{Design matrix. @param y Targets.}
+\item{X}{Design matrix.}
+
+\item{y}{Targets.}
 
 \item{fit_intercept}{Prepend a column of ones.}
 }

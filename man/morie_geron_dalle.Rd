@@ -15,11 +15,17 @@ morie_geron_dalle(
 )
 }
 \arguments{
-\item{text}{Prompt token ids. @param model function(context) -> logits.}
+\item{text}{Prompt token ids.}
 
-\item{n_image_tokens}{int (>=1). @param temperature,top_k Sampling knobs.}
+\item{model}{function(context) -> logits.}
 
-\item{image_vocab}{Codebook size (default model width). @param grid c(h,w).}
+\item{n_image_tokens}{int (>=1).}
+
+\item{temperature, top_k}{Sampling knobs.}
+
+\item{image_vocab}{Codebook size (default model width).}
+
+\item{grid}{c(h,w).}
 }
 \value{
 List with \code{image_tokens}, \code{token_grid}, \code{log_likelihood},

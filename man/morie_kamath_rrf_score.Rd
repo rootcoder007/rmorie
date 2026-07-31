@@ -7,7 +7,9 @@
 morie_kamath_rrf_score(r, k = 60)
 }
 \arguments{
-\item{r}{1-based rank(s). @param k Damping constant.}
+\item{r}{1-based rank(s).}
+
+\item{k}{Damping constant.}
 }
 \description{
 Score_RRF = 1/(r + k) per 1-based rank, SUMMED across rankings,

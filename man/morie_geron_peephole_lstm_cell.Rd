@@ -34,6 +34,6 @@ morie_geron_peephole_lstm_cell(
 List with \code{h}, \code{c}, \code{f}, \code{i}, \code{g}, \code{o}.
 }
 \description{
-f and i peep at c_{t-1}, o peeps at the NEW c_t, g has no peephole;
+f and i peep at \verb{c_\{t-1\}}, o peeps at the NEW c_t, g has no peephole;
 the U vectors are diagonal.
 }

@@ -9,7 +9,11 @@ morie_kamath_ch6_differential_privacy(M, A, B, S, epsilon)
 \arguments{
 \item{M}{Function dataset -> named outcome distribution.}
 
-\item{A, B}{Neighbouring datasets. @param S Outcome set. @param epsilon Budget.}
+\item{A, B}{Neighbouring datasets.}
+
+\item{S}{Outcome set.}
+
+\item{epsilon}{Budget.}
 }
 \value{
 List with \code{estimate}, \code{satisfied}, \code{p_A}, \code{p_B}, \code{bound}.

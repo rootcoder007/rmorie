@@ -9,7 +9,9 @@ morie_geron_mixed_precision(model, loss_scale = 1024, grads = NULL)
 \arguments{
 \item{model}{Numeric vector or named list of numeric vectors (weights).}
 
-\item{loss_scale}{Positive finite scale. @param grads Optional gradients matching \code{model}.}
+\item{loss_scale}{Positive finite scale.}
+
+\item{grads}{Optional gradients matching \code{model}.}
 }
 \description{
 No native float16 in base R; the underflow/overflow analysis and the

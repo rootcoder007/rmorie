@@ -16,7 +16,11 @@ morie_geron_dueling_dqn_alt(
 )
 }
 \arguments{
-\item{env}{Unused (provenance only). @param V,A Initial streams. @param buffer Transitions.}
+\item{env}{Unused (provenance only).}
+
+\item{V, A}{Initial streams.}
+
+\item{buffer}{Transitions.}
 
 \item{epochs, lr, gamma, target_sync}{Config.}
 }

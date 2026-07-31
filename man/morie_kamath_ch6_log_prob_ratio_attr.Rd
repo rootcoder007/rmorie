@@ -7,7 +7,9 @@
 morie_kamath_ch6_log_prob_ratio_attr(a_i, a_j, K = NULL, lam = 1)
 }
 \arguments{
-\item{a_i, a_j}{Paired probabilities in (0, 1]. @param K Optional count.}
+\item{a_i, a_j}{Paired probabilities in (0, 1].}
+
+\item{K}{Optional count.}
 
 \item{lam}{Finite weight.}
 }

@@ -18,11 +18,21 @@ morie_geron_adamw(
 )
 }
 \arguments{
-\item{grads}{Gradient vector. @param m,v Moment accumulators.}
+\item{grads}{Gradient vector.}
 
-\item{b1, b2}{Decay rates. @param eta Learning rate. @param wd Weight decay.}
+\item{m, v}{Moment accumulators.}
 
-\item{eps}{Floor. @param t 1-based timestep. @param theta Parameters.}
+\item{b1, b2}{Decay rates.}
+
+\item{eta}{Learning rate.}
+
+\item{wd}{Weight decay.}
+
+\item{eps}{Floor.}
+
+\item{t}{1-based timestep.}
+
+\item{theta}{Parameters.}
 }
 \value{
 List with \code{theta}, \code{step}, \code{adam_step}, \code{decay_step}, \code{m}, \code{v}.

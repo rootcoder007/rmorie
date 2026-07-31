@@ -19,9 +19,17 @@ morie_geron_hidden_layers_heuristic(
 \arguments{
 \item{model}{function(n_layers, X_train, y_train, X_val, y_val) -> val_error.}
 
-\item{X, y}{Data. @param max_layers,min_layers Depth range. @param patience Non-improving depths tolerated.}
+\item{X, y}{Data.}
 
-\item{tol}{Minimum improvement. @param val_fraction Held-out fraction. @param seed Split seed.}
+\item{max_layers, min_layers}{Depth range.}
+
+\item{patience}{Non-improving depths tolerated.}
+
+\item{tol}{Minimum improvement.}
+
+\item{val_fraction}{Held-out fraction.}
+
+\item{seed}{Split seed.}
 }
 \value{
 List with best_n_layers, best_error, errors, depths_tried, stopped_early, estimate, n, method.

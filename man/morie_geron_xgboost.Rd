@@ -17,7 +17,9 @@ morie_geron_xgboost(
 )
 }
 \arguments{
-\item{X}{Design matrix (n, d). @param y Targets ({0,1} for logistic).}
+\item{X}{Design matrix (n, d).}
+
+\item{y}{Targets \verb{(\{0,1\}} for logistic).}
 
 \item{n_estimators, learning_rate, max_depth, reg_lambda, gamma, min_child_weight, objective}{As in Python original.}
 }

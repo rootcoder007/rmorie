@@ -21,9 +21,15 @@ morie_kamath_word_movers_distance(cost, p, q, max_iter = 10000)
 
 \item{weights_h, weights_r}{Optional weights (normalised to sum to 1).}
 
-\item{metric}{"euclidean" or "cosine". @param normalizer Optional divisor.}
+\item{metric}{"euclidean" or "cosine".}
 
-\item{cost}{Cost matrix. @param p,q Marginals. @param max_iter Guard.}
+\item{normalizer}{Optional divisor.}
+
+\item{cost}{Cost matrix.}
+
+\item{p, q}{Marginals.}
+
+\item{max_iter}{Guard.}
 }
 \value{
 List with \code{estimate}, \code{wmd}, \code{normalizer}.

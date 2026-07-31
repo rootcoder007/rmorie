@@ -7,7 +7,11 @@
 morie_geron_memory_cell(c_prev, x_t, f)
 }
 \arguments{
-\item{c_prev}{Initial state. @param x_t Input (n_in,) or (T,n_in). @param f function(c_prev,x_t) -> c_t.}
+\item{c_prev}{Initial state.}
+
+\item{x_t}{Input (n_in,) or (T,n_in).}
+
+\item{f}{function(c_prev,x_t) -> c_t.}
 }
 \value{
 List with c_t, states, deltas, n_steps, estimate, n, method.

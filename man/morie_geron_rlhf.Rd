@@ -14,9 +14,13 @@ morie_geron_rlhf(
 )
 }
 \arguments{
-\item{policy}{Initial (n_prompts, n_responses) logits. @param reward_model Function or matrix.}
+\item{policy}{Initial (n_prompts, n_responses) logits.}
 
-\item{prompts}{Optional prompt identifiers. @param beta,lr,epochs Controls.}
+\item{reward_model}{Function or matrix.}
+
+\item{prompts}{Optional prompt identifiers.}
+
+\item{beta, lr, epochs}{Controls.}
 }
 \description{
 Reinforcement learning from human feedback: reward maximised under a KL penalty (Geron Ch 15, hmrlhf)

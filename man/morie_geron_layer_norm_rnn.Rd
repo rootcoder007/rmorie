@@ -13,7 +13,13 @@ morie_geron_layer_norm_rnn(
 )
 }
 \arguments{
-\item{x}{Pre-activations (T, n_units). @param gamma,beta Scale/shift. @param eps Variance floor. @param activation tanh/relu/none.}
+\item{x}{Pre-activations (T, n_units).}
+
+\item{gamma, beta}{Scale/shift.}
+
+\item{eps}{Variance floor.}
+
+\item{activation}{tanh/relu/none.}
 }
 \value{
 List with h, normalized, mu, var, estimate, n, method.

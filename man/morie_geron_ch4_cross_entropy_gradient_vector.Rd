@@ -7,7 +7,7 @@
 morie_geron_ch4_cross_entropy_gradient_vector(X, Y, Theta, k)
 }
 \arguments{
-\item{X, Y, theta}{Design, labels and (n, K) parameters.}
+\item{X, Y, Theta}{Design, labels and (n, K) parameters.}
 
 \item{k}{0-based class.}
 }

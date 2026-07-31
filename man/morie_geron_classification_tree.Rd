@@ -15,7 +15,9 @@ morie_geron_classification_tree(
 \arguments{
 \item{X, y}{Design and discrete labels.}
 
-\item{criterion}{"gini" or "entropy". @param max_depth Optional cap.}
+\item{criterion}{"gini" or "entropy".}
+
+\item{max_depth}{Optional cap.}
 
 \item{min_samples_leaf}{Minimum leaf size.}
 }

@@ -7,7 +7,9 @@
 morie_kamath_ch6_cat_metric(M, U, theta = NULL)
 }
 \arguments{
-\item{M}{Modified tokens. @param U Unmodified context.}
+\item{M}{Modified tokens.}
+
+\item{U}{Unmodified context.}
 
 \item{theta}{Optional function (M, U, i) with i 0-BASED.}
 }

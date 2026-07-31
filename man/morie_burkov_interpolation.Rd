@@ -7,7 +7,9 @@
 morie_burkov_interpolation(probs_by_order, lambdas)
 }
 \arguments{
-\item{probs_by_order}{Probabilities. @param lambdas Weights, sum 1.}
+\item{probs_by_order}{Probabilities.}
+
+\item{lambdas}{Weights, sum 1.}
 }
 \description{
 Linear interpolation of n-gram orders (Burkov Ch 2)

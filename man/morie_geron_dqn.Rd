@@ -17,9 +17,13 @@ morie_geron_dqn(
 )
 }
 \arguments{
-\item{env}{Kept for provenance only (unused). @param Q,Q_target (S,A) tables.}
+\item{env}{Kept for provenance only (unused).}
 
-\item{buffer}{Transitions. @param epochs,lr,gamma,target_sync,batch_size Config.}
+\item{Q, Q_target}{(S,A) tables.}
+
+\item{buffer}{Transitions.}
+
+\item{epochs, lr, gamma, target_sync, batch_size}{Config.}
 }
 \value{
 List with \code{Q}, \code{Q_target}, \code{loss_history}, \code{greedy_policy}, \code{sync_epochs}.

@@ -7,9 +7,13 @@
 morie_kamath_few_shot_exemplar_selection(D, query_embed, K, metric = "cosine")
 }
 \arguments{
-\item{D}{Exemplar embedding rows. @param query_embed Query.}
+\item{D}{Exemplar embedding rows.}
 
-\item{K}{How many to keep. @param metric "cosine" or "dot".}
+\item{query_embed}{Query.}
+
+\item{K}{How many to keep.}
+
+\item{metric}{"cosine" or "dot".}
 }
 \value{
 List with \code{selected}, \code{similarities}, \code{estimate}.

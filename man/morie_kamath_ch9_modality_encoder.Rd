@@ -7,7 +7,9 @@
 morie_kamath_ch9_modality_encoder(I_X, ME_X)
 }
 \arguments{
-\item{I_X}{Raw modality input. @param ME_X Encoder function.}
+\item{I_X}{Raw modality input.}
+
+\item{ME_X}{Encoder function.}
 }
 \value{
 List with \code{estimate} (Frobenius norm), \code{features}, \code{shape}.

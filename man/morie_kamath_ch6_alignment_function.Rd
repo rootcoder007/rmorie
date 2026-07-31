@@ -7,7 +7,11 @@
 morie_kamath_ch6_alignment_function(a, b, y, f = NULL)
 }
 \arguments{
-\item{a, b}{Context and claim. @param y Output space. @param f Head.}
+\item{a, b}{Context and claim.}
+
+\item{y}{Output space.}
+
+\item{f}{Head.}
 }
 \value{
 List with \code{estimate}, \code{label}, \code{space}, \code{labels}.

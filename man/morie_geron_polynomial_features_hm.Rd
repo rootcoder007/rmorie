@@ -12,7 +12,9 @@ morie_geron_polynomial_features_hm(
 )
 }
 \arguments{
-\item{X}{Data (m, n) or (m,). @param degree Max total degree.}
+\item{X}{Data (m, n) or (m,).}
+
+\item{degree}{Max total degree.}
 
 \item{include_bias, interaction_only}{Expansion flags.}
 }

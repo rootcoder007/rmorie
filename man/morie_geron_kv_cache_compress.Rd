@@ -13,7 +13,11 @@ morie_geron_kv_cache_compress(
 )
 }
 \arguments{
-\item{K, V}{Arrays (n_heads, seq_len, d_head). @param n_bits Bit width. @param per_head Per-head scales.}
+\item{K, V}{Arrays (n_heads, seq_len, d_head).}
+
+\item{n_bits}{Bit width.}
+
+\item{per_head}{Per-head scales.}
 
 \item{dtype_bytes}{Bytes per element before compression.}
 }

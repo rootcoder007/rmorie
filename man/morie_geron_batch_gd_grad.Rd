@@ -7,7 +7,11 @@
 morie_geron_batch_gd_grad(X, y, theta, eta = NULL)
 }
 \arguments{
-\item{X}{Design matrix. @param y Targets. @param theta Parameters.}
+\item{X}{Design matrix.}
+
+\item{y}{Targets.}
+
+\item{theta}{Parameters.}
 
 \item{eta}{Optional learning rate.}
 }

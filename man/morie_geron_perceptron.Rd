@@ -7,9 +7,13 @@
 morie_geron_perceptron(X, y, eta = 1, n_iter = 10)
 }
 \arguments{
-\item{X}{Design matrix. @param y Labels in {0, 1}.}
+\item{X}{Design matrix.}
 
-\item{eta}{Positive rate. @param n_iter Maximum epochs.}
+\item{y}{Labels \verb{in \{0, 1\}}.}
+
+\item{eta}{Positive rate.}
+
+\item{n_iter}{Maximum epochs.}
 }
 \value{
 List with \code{w}, \code{weights}, \code{bias}, \code{predictions},

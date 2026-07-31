@@ -7,7 +7,15 @@
 morie_geron_minibatch_kmeans(X, n_clusters, batch_size, seed = 0, n_iter = 100)
 }
 \arguments{
-\item{X}{Data. @param n_clusters Clusters. @param batch_size Points sampled per iteration. @param seed Seed. @param n_iter Iterations.}
+\item{X}{Data.}
+
+\item{n_clusters}{Clusters.}
+
+\item{batch_size}{Points sampled per iteration.}
+
+\item{seed}{Seed.}
+
+\item{n_iter}{Iterations.}
 }
 \value{
 List with labels, centers, inertia, counts, n_iter, estimate, n, method.

@@ -7,9 +7,13 @@
 morie_geron_dropout_alt(x, p, training = TRUE, seed = 0)
 }
 \arguments{
-\item{x}{Activations. @param p Drop probability in [0, 1).}
+\item{x}{Activations.}
 
-\item{training}{If FALSE, pass through unchanged. @param seed LCG seed.}
+\item{p}{Drop probability in [0, 1).}
+
+\item{training}{If FALSE, pass through unchanged.}
+
+\item{seed}{LCG seed.}
 }
 \value{
 List with \code{y}, \code{mask}, \code{scale}, \code{n_dropped}, \code{drop_fraction}.

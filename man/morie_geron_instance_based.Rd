@@ -14,9 +14,15 @@ morie_geron_instance_based(
 )
 }
 \arguments{
-\item{X_train, y_train}{Stored instances/targets. @param x_query Query point(s).}
+\item{X_train, y_train}{Stored instances/targets.}
 
-\item{k}{Neighbours. @param task auto/classification/regression. @param weights uniform/distance.}
+\item{x_query}{Query point(s).}
+
+\item{k}{Neighbours.}
+
+\item{task}{auto/classification/regression.}
+
+\item{weights}{uniform/distance.}
 }
 \value{
 List with prediction, neighbors, distances, task, feature_ranges, estimate, n, method.

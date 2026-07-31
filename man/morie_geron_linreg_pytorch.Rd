@@ -14,7 +14,15 @@ morie_geron_linreg_pytorch(
 )
 }
 \arguments{
-\item{X, y}{Data. @param epochs Passes. @param lr Learning rate. @param batch_size Mini-batch size. @param seed Shuffle seed.}
+\item{X, y}{Data.}
+
+\item{epochs}{Passes.}
+
+\item{lr}{Learning rate.}
+
+\item{batch_size}{Mini-batch size.}
+
+\item{seed}{Shuffle seed.}
 }
 \value{
 List with w, b, loss_history, final_loss, w_closed_form, b_closed_form, gap, lr_limit, estimate, n, method.

@@ -15,11 +15,17 @@ morie_geron_pasting(
 )
 }
 \arguments{
-\item{X, y}{Data and targets. @param base_estimator Optional \code{base_estimator(Xs, ys) -> predict}.}
+\item{X, y}{Data and targets.}
 
-\item{n_estimators}{Ensemble size. @param sample_size Rows per model (int or fraction).}
+\item{base_estimator}{Optional \code{base_estimator(Xs, ys) -> predict}.}
 
-\item{seed}{Integer-LCG seed. @param task "auto", "regression" or "classification".}
+\item{n_estimators}{Ensemble size.}
+
+\item{sample_size}{Rows per model (int or fraction).}
+
+\item{seed}{Integer-LCG seed.}
+
+\item{task}{"auto", "regression" or "classification".}
 }
 \description{
 Pasting: base models on samples drawn without replacement (Geron Ch 6, hmpas)

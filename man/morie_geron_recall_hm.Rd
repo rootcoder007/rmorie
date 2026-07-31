@@ -7,7 +7,9 @@
 morie_geron_recall_hm(y_true, y_pred, pos_label = 1)
 }
 \arguments{
-\item{y_true, y_pred}{Labels, same length. @param pos_label Positive label.}
+\item{y_true, y_pred}{Labels, same length.}
+
+\item{pos_label}{Positive label.}
 }
 \description{
 Recall (true positive rate) = TP / (TP + FN) (Geron Ch 3, hmrec)

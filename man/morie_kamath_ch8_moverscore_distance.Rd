@@ -10,7 +10,9 @@ morie_kamath_ch8_moverscore_distance(x_i, y_j, E = NULL)
 morie_kamath_ch8_smd(x, y, E = NULL)
 }
 \arguments{
-\item{x_i, y_j}{Embeddings, or objects for \code{E}. @param E Optional embedder.}
+\item{x_i, y_j}{Embeddings, or objects for \code{E}.}
+
+\item{E}{Optional embedder.}
 
 \item{x, y}{Sentence embeddings.}
 }

@@ -7,7 +7,9 @@
 morie_kamath_kl_reward_shaping(r_phi, kl_divergence, beta)
 }
 \arguments{
-\item{r_phi}{Rewards. @param kl_divergence KL values (scalar broadcasts).}
+\item{r_phi}{Rewards.}
+
+\item{kl_divergence}{KL values (scalar broadcasts).}
 
 \item{beta}{Non-negative weight.}
 }

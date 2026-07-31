@@ -13,9 +13,13 @@ morie_kamath_adalora_rank_allocation(
 )
 }
 \arguments{
-\item{P}{Left factor (rows x r). @param s Singular values.}
+\item{P}{Left factor (rows x r).}
 
-\item{Q}{Right factor (rows x r). @param importance Optional scores.}
+\item{s}{Singular values.}
+
+\item{Q}{Right factor (rows x r).}
+
+\item{importance}{Optional scores.}
 
 \item{target_rank}{How many triplets to keep.}
 }

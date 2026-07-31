@@ -7,9 +7,17 @@
 morie_kamath_lora_weight_update(W0, A, B, alpha, r, x)
 }
 \arguments{
-\item{W0}{Frozen weight. @param A (r, k). @param B (d, r).}
+\item{W0}{Frozen weight.}
 
-\item{alpha}{Scale numerator. @param r Rank. @param x Input.}
+\item{A}{(r, k).}
+
+\item{B}{(d, r).}
+
+\item{alpha}{Scale numerator.}
+
+\item{r}{Rank.}
+
+\item{x}{Input.}
 }
 \value{
 List with \code{h}, \code{base}, \code{delta}, \code{scaling}, \code{n_trainable}.

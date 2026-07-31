@@ -7,7 +7,9 @@
 morie_geron_information_gain_hmigr(y, split)
 }
 \arguments{
-\item{y}{Class labels. @param split Group assignment (same length as y).}
+\item{y}{Class labels.}
+
+\item{split}{Group assignment (same length as y).}
 }
 \value{
 List with information_gain, parent_entropy, child_entropy, weighted_child_entropy,

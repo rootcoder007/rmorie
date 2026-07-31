@@ -7,9 +7,15 @@
 morie_kamath_ch3_qa_trigger_template(x, y, T, z_adv, n_triggers = 3)
 }
 \arguments{
-\item{x}{Question. @param y Context. @param T Trigger token.}
+\item{x}{Question.}
 
-\item{z_adv}{Adversarial answer. @param n_triggers Repeats (3 in the book).}
+\item{y}{Context.}
+
+\item{T}{Trigger token.}
+
+\item{z_adv}{Adversarial answer.}
+
+\item{n_triggers}{Repeats (3 in the book).}
 }
 \value{
 List with \code{prompt}, \code{tokens}, \code{n_triggers}.

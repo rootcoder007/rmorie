@@ -7,7 +7,9 @@
 morie_kamath_ch8_ngram_weight(x, Z = NULL)
 }
 \arguments{
-\item{x}{idf rows. @param Z Optional normaliser; default the grand sum.}
+\item{x}{idf rows.}
+
+\item{Z}{Optional normaliser; default the grand sum.}
 }
 \value{
 List with \code{estimate}, \code{weights}, \code{Z}.

@@ -7,7 +7,9 @@
 morie_geron_pvt(image, stage_cfgs, seed = 0)
 }
 \arguments{
-\item{image}{Array (H, W, C) or (H, W). @param stage_cfgs List of stage specs.}
+\item{image}{Array (H, W, C) or (H, W).}
+
+\item{stage_cfgs}{List of stage specs.}
 
 \item{seed}{LCG seed for default projections.}
 }

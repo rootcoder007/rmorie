@@ -7,9 +7,13 @@
 morie_kamath_ch3_prefix_tuning_obj(phi, x, y, h, Y_idx = NULL)
 }
 \arguments{
-\item{phi}{Function (z_i, h_prefix) -> probability. @param x Source.}
+\item{phi}{Function (z_i, h_prefix) -> probability.}
 
-\item{y}{Target tokens. @param h Per-position activations.}
+\item{x}{Source.}
+
+\item{y}{Target tokens.}
+
+\item{h}{Per-position activations.}
 
 \item{Y_idx}{Optional 0-based positions.}
 }

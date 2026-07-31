@@ -14,9 +14,17 @@ morie_geron_multinomial_logistic(
 )
 }
 \arguments{
-\item{X}{Features. @param Y Class indices (0-based) or one-hot matrix. @param lr Learning rate.}
+\item{X}{Features.}
 
-\item{n_iter}{Iterations. @param add_bias Prepend ones column. @param alpha L2 strength on non-bias rows.}
+\item{Y}{Class indices (0-based) or one-hot matrix.}
+
+\item{lr}{Learning rate.}
+
+\item{n_iter}{Iterations.}
+
+\item{add_bias}{Prepend ones column.}
+
+\item{alpha}{L2 strength on non-bias rows.}
 }
 \value{
 List with Theta, probabilities, prediction, loss_history, loss, accuracy, estimate, n, method.

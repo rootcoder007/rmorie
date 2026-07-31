@@ -17,11 +17,17 @@ morie_geron_nadam(
 )
 }
 \arguments{
-\item{grads}{Gradient vector. @param m,v Moments; default zeros.}
+\item{grads}{Gradient vector.}
 
-\item{b1, b2}{Decays in [0, 1). @param eta Positive rate.}
+\item{m, v}{Moments; default zeros.}
 
-\item{t}{1-based timestep. @param eps Non-negative floor.}
+\item{b1, b2}{Decays in [0, 1).}
+
+\item{eta}{Positive rate.}
+
+\item{t}{1-based timestep.}
+
+\item{eps}{Non-negative floor.}
 
 \item{theta}{Parameters; default zeros.}
 }

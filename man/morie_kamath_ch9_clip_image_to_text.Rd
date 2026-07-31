@@ -13,7 +13,11 @@ morie_kamath_ch9_clip_text_to_image(L, V, sigma, N = NULL)
 morie_kamath_ch9_clip_contrastive_total(L_i2t, L_t2i)
 }
 \arguments{
-\item{V}{Image embeddings. @param L Text embeddings. @param sigma Temperature.}
+\item{V}{Image embeddings.}
+
+\item{L}{Text embeddings.}
+
+\item{sigma}{Temperature.}
 
 \item{N}{Optional batch size.}
 

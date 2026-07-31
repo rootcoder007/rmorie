@@ -7,7 +7,9 @@
 morie_kamath_emergent_abilities(scales, scores, threshold)
 }
 \arguments{
-\item{scales}{Model scales. @param scores Benchmark scores.}
+\item{scales}{Model scales.}
+
+\item{scores}{Benchmark scores.}
 
 \item{threshold}{Scale threshold.}
 }

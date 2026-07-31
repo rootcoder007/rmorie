@@ -14,7 +14,9 @@ morie_geron_tree_regularization(
 )
 }
 \arguments{
-\item{X, y}{Data. @param max_depth,min_samples_leaf,min_samples_split,criterion CART controls.}
+\item{X, y}{Data.}
+
+\item{max_depth, min_samples_leaf, min_samples_split, criterion}{CART controls.}
 }
 \value{
 List with \code{tree}, \code{n_leaves}, \code{baseline_leaves}, \code{leaves_saved}, \code{train_score}, \code{train_score_cost}.

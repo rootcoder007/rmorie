@@ -9,7 +9,9 @@ morie_geron_logistic_probability(X, theta, add_bias = FALSE)
 \arguments{
 \item{X}{Design matrix (a vector is one row).}
 
-\item{theta}{Coefficients. @param add_bias Prepend a ones column.}
+\item{theta}{Coefficients.}
+
+\item{add_bias}{Prepend a ones column.}
 }
 \value{
 List with \code{p_hat}, \code{logits}, \code{prediction} (0/1),

@@ -12,7 +12,9 @@ morie_geron_principal_components(
 )
 }
 \arguments{
-\item{X}{Data (m, p). @param n_components Components to keep (default all).}
+\item{X}{Data (m, p).}
+
+\item{n_components}{Components to keep (default all).}
 
 \item{center, scale}{Preprocessing flags.}
 }

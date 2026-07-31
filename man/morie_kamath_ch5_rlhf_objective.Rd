@@ -10,13 +10,17 @@ morie_kamath_ch5_rlhf_objective(pi_theta, pi_ref, r_phi, beta)
 morie_kamath_ch5_ppo_loss(phi, x, y, r_theta, beta, pi_ref = NULL)
 }
 \arguments{
-\item{pi_theta, pi_ref}{Response distributions. @param r_phi Rewards.}
+\item{pi_theta, pi_ref}{Response distributions.}
+
+\item{r_phi}{Rewards.}
 
 \item{beta}{KL weight.}
 
 \item{phi}{List of per-prompt policy distributions.}
 
-\item{x}{Prompts. @param y Per-prompt response name vectors.}
+\item{x}{Prompts.}
+
+\item{y}{Per-prompt response name vectors.}
 
 \item{r_theta}{Function (x, y) -> reward.}
 }

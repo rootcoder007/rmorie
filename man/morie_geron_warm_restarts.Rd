@@ -7,9 +7,13 @@
 morie_geron_warm_restarts(t, T0 = 10, factor = 2, eta_max = 0.1, eta_min = 0)
 }
 \arguments{
-\item{t}{Integer step or vector of steps (>=0). @param T0 First cycle length.}
+\item{t}{Integer step or vector of steps (>=0).}
 
-\item{factor}{Geometric growth (>=1). @param eta_max,eta_min Learning-rate bounds.}
+\item{T0}{First cycle length.}
+
+\item{factor}{Geometric growth (>=1).}
+
+\item{eta_max, eta_min}{Learning-rate bounds.}
 }
 \value{
 list with eta, cycle, cycle_length, step_in_cycle, restarts, T0,
@@ -17,5 +21,5 @@ factor, estimate, n, method.
 }
 \description{
 eta = eta_min + 0.5*(eta_max-eta_min)\emph{(1+cos(pi}T_cur/T_i)); cycle
-lengths grow geometrically T_{i+1} = round(T_i * factor).
+lengths grow geometrically \verb{T_\{i+1\}} = round(T_i * factor).
 }

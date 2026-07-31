@@ -7,10 +7,14 @@
 morie_geron_denoising_autoencoder(x, noise, decoded, corruption = "additive")
 }
 \arguments{
-\item{x}{Clean inputs (m, d). @param noise Corruption, broadcastable, or
+\item{x}{Clean inputs (m, d).}
+
+\item{noise}{Corruption, broadcastable, or
 a 0/1 keep-mask when \code{corruption = "dropout"}.}
 
-\item{decoded}{Reconstructions. @param corruption "additive" or "dropout".}
+\item{decoded}{Reconstructions.}
+
+\item{corruption}{"additive" or "dropout".}
 }
 \value{
 List with \code{loss}, \code{mse_per_element}, \code{per_sample_loss},

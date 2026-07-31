@@ -10,9 +10,13 @@ morie_kamath_ch9_input_projector(F_X, in_align = NULL)
 morie_kamath_ch9_output_alignment(S_X, out_align = NULL)
 }
 \arguments{
-\item{F_X}{Modality features. @param in_align Matrix or function.}
+\item{F_X}{Modality features.}
 
-\item{S_X}{Signal tokens. @param out_align Matrix or function.}
+\item{in_align}{Matrix or function.}
+
+\item{S_X}{Signal tokens.}
+
+\item{out_align}{Matrix or function.}
 }
 \value{
 List with \code{estimate}, \code{prompts}, \code{shape}.

@@ -15,7 +15,13 @@ morie_geron_kfold(
 )
 }
 \arguments{
-\item{X, y}{Data. @param k Folds. @param seed Optional shuffle seed. @param fit,predict,score Optional callables.}
+\item{X, y}{Data.}
+
+\item{k}{Folds.}
+
+\item{seed}{Optional shuffle seed.}
+
+\item{fit, predict, score}{Optional callables.}
 }
 \value{
 List with cv_score, fold_scores, train_indices, test_indices, fold_sizes, estimate, n, method.

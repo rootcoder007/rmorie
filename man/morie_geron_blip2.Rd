@@ -15,11 +15,17 @@ morie_geron_blip2(
 )
 }
 \arguments{
-\item{image}{Patch features (n_patches, d_v). @param text Embedding or token matrix.}
+\item{image}{Patch features (n_patches, d_v).}
 
-\item{n_query, d_query}{Q-Former geometry. @param d_llm LLM width.}
+\item{text}{Embedding or token matrix.}
 
-\item{temperature}{Positive temperature. @param seed LCG seed.}
+\item{n_query, d_query}{Q-Former geometry.}
+
+\item{d_llm}{LLM width.}
+
+\item{temperature}{Positive temperature.}
+
+\item{seed}{LCG seed.}
 }
 \value{
 List with \code{query_output}, \code{llm_input}, \code{attention}, \code{similarity},

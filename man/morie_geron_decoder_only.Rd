@@ -16,9 +16,13 @@ morie_geron_decoder_only(
 )
 }
 \arguments{
-\item{X}{Token ids, used for length only. @param n_layers,n_heads int.}
+\item{X}{Token ids, used for length only.}
 
-\item{d_model, vocab_size, max_len}{int. @param d_ff FFN width (default 4*d_model).}
+\item{n_layers, n_heads}{int.}
+
+\item{d_model, vocab_size, max_len}{int.}
+
+\item{d_ff}{FFN width (default 4*d_model).}
 
 \item{tie_embeddings}{Reuse token embedding as output head.}
 }

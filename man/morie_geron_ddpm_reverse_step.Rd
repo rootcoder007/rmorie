@@ -33,5 +33,5 @@ List with \code{x_prev}, \code{mean}, \code{noise_term}, \code{eps_coef},
 \code{x0_estimate}, \code{alpha_t}, \code{alpha_bar_t}.
 }
 \description{
-x_{t-1} = (x_t - ((1-a_t)/sqrt(1-ab_t)) eps) / sqrt(a_t) + sigma z.
+\verb{x_\{t-1\}} = (x_t - ((1-a_t)/sqrt(1-ab_t)) eps) / sqrt(a_t) + sigma z.
 }

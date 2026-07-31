@@ -7,7 +7,9 @@
 morie_kamath_groundedness_reward(y_tokens, ctx_tokens, lowercase = TRUE)
 }
 \arguments{
-\item{y_tokens}{Answer tokens. @param ctx_tokens Context tokens.}
+\item{y_tokens}{Answer tokens.}
+
+\item{ctx_tokens}{Context tokens.}
 
 \item{lowercase}{Case-fold before matching.}
 }

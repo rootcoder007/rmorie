@@ -17,7 +17,11 @@ morie_geron_gpt3(
 )
 }
 \arguments{
-\item{prompt}{Token ids. @param n_tokens Tokens to generate. @param n_layers,d_model,n_heads,d_ff,vocab_size,n_ctx,dtype_bytes Config.}
+\item{prompt}{Token ids.}
+
+\item{n_tokens}{Tokens to generate.}
+
+\item{n_layers, d_model, n_heads, d_ff, vocab_size, n_ctx, dtype_bytes}{Config.}
 }
 \value{
 List with \code{total_parameters}, \code{parameters_per_layer}, \code{breakdown}, \code{shape_trace}, \code{kv_cache_bytes}.

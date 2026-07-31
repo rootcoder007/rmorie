@@ -7,7 +7,11 @@
 morie_geron_separable_params(k, c_in, c_out)
 }
 \arguments{
-\item{k}{Kernel side. @param c_in Input channels. @param c_out Output channels.}
+\item{k}{Kernel side.}
+
+\item{c_in}{Input channels.}
+
+\item{c_out}{Output channels.}
 }
 \value{
 Integer parameter count k\emph{k}c_in + c_in*c_out.

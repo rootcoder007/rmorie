@@ -7,7 +7,9 @@
 morie_geron_cosine_annealing(t, T, eta_max, eta_min = 0)
 }
 \arguments{
-\item{t}{Step(s) in 0..T. @param T Cycle length.}
+\item{t}{Step(s) in 0..T.}
+
+\item{T}{Cycle length.}
 
 \item{eta_max, eta_min}{Rate bounds.}
 }

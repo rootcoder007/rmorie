@@ -7,7 +7,9 @@
 morie_geron_silhouette(X, labels, metric = "euclidean")
 }
 \arguments{
-\item{X}{Data (n, d), n >= 2. @param labels Cluster assignment per row.}
+\item{X}{Data (n, d), n >= 2.}
+
+\item{labels}{Cluster assignment per row.}
 
 \item{metric}{"euclidean" or "manhattan".}
 }

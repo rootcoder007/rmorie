@@ -13,9 +13,13 @@ morie_kamath_chain_of_thought(
 )
 }
 \arguments{
-\item{prompt}{Question. @param model Function prompt -> text.}
+\item{prompt}{Question.}
 
-\item{trigger}{Reasoning trigger. @param answer_marker Split marker.}
+\item{model}{Function prompt -> text.}
+
+\item{trigger}{Reasoning trigger.}
+
+\item{answer_marker}{Split marker.}
 
 \item{parser}{Optional function text -> list(reasoning, answer).}
 }

@@ -7,7 +7,9 @@
 morie_kamath_ppo_rlhf_objective(rewards, logp_theta, logp_ref, beta)
 }
 \arguments{
-\item{rewards}{Rewards. @param logp_theta,logp_ref Log-probabilities (<= 0).}
+\item{rewards}{Rewards.}
+
+\item{logp_theta, logp_ref}{Log-probabilities (<= 0).}
 
 \item{beta}{Non-negative weight.}
 }

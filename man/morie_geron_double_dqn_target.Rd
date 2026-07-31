@@ -14,9 +14,15 @@ morie_geron_double_dqn_target(
 )
 }
 \arguments{
-\item{Q_online, Q_target}{Matrices (S, A). @param s_next 0-based indices.}
+\item{Q_online, Q_target}{Matrices (S, A).}
 
-\item{r}{Rewards. @param gamma Discount. @param done Optional flags.}
+\item{s_next}{0-based indices.}
+
+\item{r}{Rewards.}
+
+\item{gamma}{Discount.}
+
+\item{done}{Optional flags.}
 }
 \value{
 List with \code{target}, \code{selected_action}, \code{q_eval},

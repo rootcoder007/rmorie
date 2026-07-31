@@ -11,7 +11,11 @@ morie_geron_local_outlier_factor_hmlof(
 )
 }
 \arguments{
-\item{X}{Data. @param n_neighbors Neighbourhood size k. @param contamination Optional outlier fraction.}
+\item{X}{Data.}
+
+\item{n_neighbors}{Neighbourhood size k.}
+
+\item{contamination}{Optional outlier fraction.}
 }
 \value{
 List with lof, lrd, k_distance, neighbors, is_outlier, estimate, n, method.

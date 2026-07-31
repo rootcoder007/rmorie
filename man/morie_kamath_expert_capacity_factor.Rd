@@ -7,7 +7,9 @@
 morie_kamath_expert_capacity_factor(tokens_per_batch, num_experts, C)
 }
 \arguments{
-\item{tokens_per_batch}{Token count. @param num_experts Expert count.}
+\item{tokens_per_batch}{Token count.}
+
+\item{num_experts}{Expert count.}
 
 \item{C}{Capacity factor.}
 }

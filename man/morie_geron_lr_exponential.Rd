@@ -7,7 +7,9 @@
 morie_geron_lr_exponential(eta0, decay, t)
 }
 \arguments{
-\item{eta0}{Positive initial rate. @param decay In (0, 1].}
+\item{eta0}{Positive initial rate.}
+
+\item{decay}{In (0, 1].}
 
 \item{t}{Step or vector of steps.}
 }

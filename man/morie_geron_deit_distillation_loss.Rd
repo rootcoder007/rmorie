@@ -13,7 +13,9 @@ morie_geron_deit_distillation_loss(
 )
 }
 \arguments{
-\item{logits_cls, logits_dist}{Matrices (B, C). @param y 0-based labels.}
+\item{logits_cls, logits_dist}{Matrices (B, C).}
+
+\item{y}{0-based labels.}
 
 \item{teacher_preds}{Matrix (B, C) or vector of labels.}
 

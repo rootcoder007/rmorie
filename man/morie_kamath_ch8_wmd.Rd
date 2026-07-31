@@ -7,7 +7,9 @@
 morie_kamath_ch8_wmd(x_n, y_n, C, F = NULL)
 }
 \arguments{
-\item{x_n, y_n}{Marginal weights of equal total mass. @param C Cost matrix.}
+\item{x_n, y_n}{Marginal weights of equal total mass.}
+
+\item{C}{Cost matrix.}
 
 \item{F}{Optional transport plan.}
 }

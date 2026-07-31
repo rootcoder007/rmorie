@@ -7,7 +7,11 @@
 morie_burkov_layer2_output(W_2, y_1, b_2_1, phi = "identity")
 }
 \arguments{
-\item{W_2}{Weight row. @param y_1 Layer-1 output. @param b_2_1 Bias.}
+\item{W_2}{Weight row.}
+
+\item{y_1}{Layer-1 output.}
+
+\item{b_2_1}{Bias.}
 
 \item{phi}{Activation.}
 }

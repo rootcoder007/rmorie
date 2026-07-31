@@ -7,7 +7,11 @@
 morie_geron_explained_variance_ratio_alt(X, n_components = NULL, center = TRUE)
 }
 \arguments{
-\item{X}{Data (m, n). @param n_components Truncate to leading k (default all). @param center Subtract column means.}
+\item{X}{Data (m, n).}
+
+\item{n_components}{Truncate to leading k (default all).}
+
+\item{center}{Subtract column means.}
 }
 \value{
 List with \code{explained_variance_ratio}, \code{explained_variance}, \code{singular_values}, \code{cumulative}, \code{n_for_95}.

@@ -14,7 +14,9 @@ morie_kamath_speculative_decoding(
 \arguments{
 \item{draft_probs, target_probs}{Distributions over one vocabulary.}
 
-\item{proposed}{Optional 0-based proposal. @param u Optional uniform draw.}
+\item{proposed}{Optional 0-based proposal.}
+
+\item{u}{Optional uniform draw.}
 }
 \value{
 List with \code{estimate}, \code{accept_prob}, \code{residual}, \code{rejection_rate}.

@@ -10,7 +10,11 @@ morie_kamath_ch9_flamingo_factorized(y, x = NULL, L = NULL, model = NULL)
 morie_kamath_ch9_flamingo_dataset_mix(D_m, lambda_m, x = NULL, y = NULL)
 }
 \arguments{
-\item{y}{Per-token conditionals. @param x Context. @param L Optional length.}
+\item{y}{Per-token conditionals.}
+
+\item{x}{Context.}
+
+\item{L}{Optional length.}
 
 \item{model}{Optional model (y, x).}
 

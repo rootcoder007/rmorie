@@ -7,7 +7,9 @@
 morie_kamath_ch3_prompt_label_mapping(x, y, M)
 }
 \arguments{
-\item{x}{Named answer-word distribution. @param y Class label.}
+\item{x}{Named answer-word distribution.}
+
+\item{y}{Class label.}
 
 \item{M}{Named label -> answer-word map.}
 }

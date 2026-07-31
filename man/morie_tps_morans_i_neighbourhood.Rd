@@ -11,6 +11,7 @@ morie_tps_morans_i_neighbourhood(
   k_neighbours = 5L,
   lat_col = "LAT_WGS84",
   lon_col = "LONG_WGS84",
+  randomisation = TRUE,
   use_spdep = FALSE
 )
 }

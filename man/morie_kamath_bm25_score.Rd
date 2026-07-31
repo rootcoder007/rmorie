@@ -7,11 +7,15 @@
 morie_kamath_bm25_score(q_terms, doc_terms, idf, avgdl, k1 = 1.5, b = 0.75)
 }
 \arguments{
-\item{q_terms}{Query terms. @param doc_terms Document terms.}
+\item{q_terms}{Query terms.}
+
+\item{doc_terms}{Document terms.}
 
 \item{idf}{Named IDF vector or one value per query term.}
 
-\item{avgdl}{Average document length. @param k1,b BM25 parameters.}
+\item{avgdl}{Average document length.}
+
+\item{k1, b}{BM25 parameters.}
 }
 \value{
 List with \code{estimate}, \code{per_term}, \code{term_frequencies}.

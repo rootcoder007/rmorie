@@ -7,9 +7,13 @@
 morie_geron_birch(X, n_clusters = 3, threshold = 0.5, branching_factor = 50)
 }
 \arguments{
-\item{X}{Points (n, d). @param n_clusters Final count or NULL.}
+\item{X}{Points (n, d).}
 
-\item{threshold}{Maximum sub-cluster radius. @param branching_factor Leaf cap.}
+\item{n_clusters}{Final count or NULL.}
+
+\item{threshold}{Maximum sub-cluster radius.}
+
+\item{branching_factor}{Leaf cap.}
 }
 \value{
 List with \code{labels}, \code{subcluster_centers}, \code{subcluster_labels},

@@ -7,8 +7,14 @@
 morie_kamath_ch6_pii_likelihood(a_m, A, x, L_q, L_r)
 }
 \arguments{
-\item{a_m}{Per-token probabilities. @param A Other PII. @param x Query
-tokens. @param L_q,L_r Query and answer lengths.}
+\item{a_m}{Per-token probabilities.}
+
+\item{A}{Other PII.}
+
+\item{x}{Query
+tokens.}
+
+\item{L_q, L_r}{Query and answer lengths.}
 }
 \value{
 List with \code{estimate}, \code{log_likelihood}, \code{context_lengths}.

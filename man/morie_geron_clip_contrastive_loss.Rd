@@ -14,7 +14,9 @@ morie_geron_clip_contrastive_loss(
 \arguments{
 \item{image_embeddings, text_embeddings}{Paired matrices (B, d).}
 
-\item{tau}{Positive temperature. @param normalize L2-normalise first.}
+\item{tau}{Positive temperature.}
+
+\item{normalize}{L2-normalise first.}
 }
 \value{
 List with \code{loss}, \code{loss_i2t}, \code{loss_t2i}, \code{similarity},

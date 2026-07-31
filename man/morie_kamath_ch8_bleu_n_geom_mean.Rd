@@ -10,7 +10,9 @@ morie_kamath_ch8_bleu_n_geom_mean(p_n, N = NULL)
 morie_kamath_ch8_bleu_final(BP, p_n, N = NULL)
 }
 \arguments{
-\item{p_n}{Precisions in [0, 1]. @param N Optional order count.}
+\item{p_n}{Precisions in [0, 1].}
+
+\item{N}{Optional order count.}
 
 \item{BP}{Brevity penalty in [0, 1].}
 }

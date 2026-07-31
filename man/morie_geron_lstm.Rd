@@ -7,7 +7,9 @@
 morie_geron_lstm(x_t, h_prev, c_prev, weights)
 }
 \arguments{
-\item{x_t}{Input. @param h_prev,c_prev Previous short/long-term states.}
+\item{x_t}{Input.}
+
+\item{h_prev, c_prev}{Previous short/long-term states.}
 
 \item{weights}{Named list with W_i,U_i,b_i,W_f,U_f,b_f,W_o,U_o,b_o,W_g,U_g,b_g.}
 }

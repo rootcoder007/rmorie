@@ -13,7 +13,9 @@ morie_kamath_ch8_bertscore_precision(x, xhat, normalize = FALSE)
 morie_kamath_ch8_bertscore_f1(P_BERT, R_BERT)
 }
 \arguments{
-\item{x}{Reference token embeddings. @param xhat Candidate embeddings.}
+\item{x}{Reference token embeddings.}
+
+\item{xhat}{Candidate embeddings.}
 
 \item{normalize}{Cosine instead of raw dot products.}
 

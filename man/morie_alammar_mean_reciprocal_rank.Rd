@@ -20,11 +20,17 @@ morie_alammar_mteb_benchmark_score(task_scores, category_map)
 
 \item{relevant_indices}{List of relevant-id vectors.}
 
-\item{retrieved}{Ranked ids. @param relevant Relevant ids. @param k k.}
+\item{retrieved}{Ranked ids.}
+
+\item{relevant}{Relevant ids.}
+
+\item{k}{k.}
 
 \item{relevances}{Graded relevances in ranked order.}
 
-\item{task_scores}{Named list/vector. @param category_map Named map
+\item{task_scores}{Named list/vector.}
+
+\item{category_map}{Named map
 task -> category.}
 }
 \description{

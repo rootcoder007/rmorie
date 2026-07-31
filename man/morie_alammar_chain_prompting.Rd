@@ -13,18 +13,24 @@ morie_alammar_multi_query_retrieval(query, K, retriever, rephraser)
 morie_alammar_react_agent_loop(query, tools, model, max_steps = 5)
 }
 \arguments{
-\item{x}{Original input. @param prompts List of
+\item{x}{Original input.}
+
+\item{prompts}{List of
 function(previous_output, original_input) -> prompt.}
 
 \item{model}{function(prompt) -> text.}
 
-\item{query}{Original query. @param K Rephrasings.}
+\item{query}{Original query.}
+
+\item{K}{Rephrasings.}
 
 \item{retriever}{function(query) -> ranked ids.}
 
 \item{rephraser}{function(query, i) -> alternative query.}
 
-\item{tools}{Named list of functions. @param max_steps Budget.}
+\item{tools}{Named list of functions.}
+
+\item{max_steps}{Budget.}
 }
 \description{
 Prompt chains, multi-query retrieval, the ReAct loop

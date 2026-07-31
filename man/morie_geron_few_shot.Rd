@@ -15,9 +15,17 @@ morie_geron_few_shot(
 )
 }
 \arguments{
-\item{model}{function(prompt) -> prediction. @param examples List of (x, y) pairs. @param query Input to predict.}
+\item{model}{function(prompt) -> prediction.}
 
-\item{k}{Number of demonstrations (default all). @param separator,template Prompt format. @param max_context Optional cap.}
+\item{examples}{List of (x, y) pairs.}
+
+\item{query}{Input to predict.}
+
+\item{k}{Number of demonstrations (default all).}
+
+\item{separator, template}{Prompt format.}
+
+\item{max_context}{Optional cap.}
 }
 \value{
 List with \code{prediction}, \code{zero_shot_prediction}, \code{prompt}, \code{changed_by_context}, \code{k}.

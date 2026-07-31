@@ -17,7 +17,9 @@ morie_geron_ncsn(
 )
 }
 \arguments{
-\item{X}{Training data (m, d). @param sigmas Noise ladder.}
+\item{X}{Training data (m, d).}
+
+\item{sigmas}{Noise ladder.}
 
 \item{epochs, lr, n_noise, seed, n_samples, langevin_steps, step_eps}{Training/sampling controls.}
 }

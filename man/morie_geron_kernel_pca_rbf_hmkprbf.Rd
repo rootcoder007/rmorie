@@ -7,7 +7,11 @@
 morie_geron_kernel_pca_rbf_hmkprbf(X, n_components, gamma = NULL)
 }
 \arguments{
-\item{X}{Data. @param n_components Components. @param gamma Kernel width (default 1/n_features).}
+\item{X}{Data.}
+
+\item{n_components}{Components.}
+
+\item{gamma}{Kernel width (default 1/n_features).}
 }
 \value{
 List with X_projected, eigenvalues, alphas, K, explained_variance_ratio, gamma, estimate, n, method.

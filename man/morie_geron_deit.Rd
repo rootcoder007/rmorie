@@ -20,9 +20,13 @@ morie_geron_deit(
 )
 }
 \arguments{
-\item{image}{(H,W) or (C,H,W). @param patch_size,n_layers,d_model,n_heads,n_classes,in_channels int.}
+\item{image}{(H,W) or (C,H,W).}
 
-\item{teacher}{Logits or function(image). @param logits_cls,logits_dist,y,alpha Loss inputs.}
+\item{patch_size, n_layers, d_model, n_heads, n_classes, in_channels}{int.}
+
+\item{teacher}{Logits or function(image).}
+
+\item{logits_cls, logits_dist, y, alpha}{Loss inputs.}
 }
 \value{
 List with \code{n_patches}, \code{n_tokens}, \code{total_params},

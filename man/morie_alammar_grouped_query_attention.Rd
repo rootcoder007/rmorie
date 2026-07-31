@@ -26,6 +26,6 @@ morie_alammar_multi_query_attention(Q_heads, K_shared, V_shared, n_query_heads)
 \item{K_shared, V_shared}{Single shared K and V matrices.}
 }
 \description{
-head_i = Attn(Q_i, K_{g(i)}, V_{g(i)}) with g(i) = i mod G. G = 1
+head_i = Attn(Q_i, \verb{K_\{g(i)\}, V_\{g(i)\}}) with g(i) = i mod G. G = 1
 recovers MQA; G = H full multi-head. H must divide by G.
 }

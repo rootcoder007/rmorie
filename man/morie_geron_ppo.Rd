@@ -18,7 +18,9 @@ morie_geron_ppo(
 )
 }
 \arguments{
-\item{env}{List with \code{reset()} / \code{step(a)}. @param policy Initial (n_states, n_actions) logits.}
+\item{env}{List with \code{reset()} / \code{step(a)}.}
+
+\item{policy}{Initial (n_states, n_actions) logits.}
 
 \item{epochs, lr, clip_eps, gamma, n_episodes, max_steps, n_updates, seed}{Training controls.}
 }

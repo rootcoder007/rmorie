@@ -7,7 +7,9 @@
 morie_geron_softmax_function(scores, axis = -1)
 }
 \arguments{
-\item{scores}{Numeric vector or matrix. @param axis -1, 0 or 1.}
+\item{scores}{Numeric vector or matrix.}
+
+\item{axis}{-1, 0 or 1.}
 }
 \value{
 List with \code{p}, \code{probabilities}, \code{argmax} (0-based),

@@ -14,7 +14,9 @@ morie_geron_regression_mlp_pytorch(
 )
 }
 \arguments{
-\item{X, y}{Data and targets. @param hidden,epochs,lr,seed Passed to \code{morie_geron_regression_mlp}.}
+\item{X, y}{Data and targets.}
+
+\item{hidden, epochs, lr, seed}{Passed to \code{morie_geron_regression_mlp}.}
 }
 \description{
 Regression MLP as an nn.Sequential architecture (numpy/R-trained, no torch call) (Geron Ch 10, hmrgpt)

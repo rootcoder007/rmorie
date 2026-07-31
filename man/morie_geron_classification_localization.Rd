@@ -18,9 +18,13 @@ morie_geron_classification_localization(
 
 \item{model}{Function of \code{image} returning a vector or (B, K+4) matrix.}
 
-\item{n_classes}{Optional K. @param gt_class Optional 0-based labels.}
+\item{n_classes}{Optional K.}
 
-\item{gt_box}{Optional ground-truth boxes. @param alpha Loss weight.}
+\item{gt_class}{Optional 0-based labels.}
+
+\item{gt_box}{Optional ground-truth boxes.}
+
+\item{alpha}{Loss weight.}
 }
 \value{
 List with \code{class_probs}, \code{log_probs}, \code{predicted_class}

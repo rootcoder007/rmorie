@@ -12,7 +12,9 @@ morie_kamath_ch3_back_translation_prob(
 )
 }
 \arguments{
-\item{t}{Candidate prompt. @param thatt Pivot translation.}
+\item{t}{Candidate prompt.}
+
+\item{thatt}{Pivot translation.}
 
 \item{p_forward, p_backward}{Leg probabilities in [0, 1].}
 }

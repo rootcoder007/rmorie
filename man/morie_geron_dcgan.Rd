@@ -15,11 +15,15 @@ morie_geron_dcgan(
 )
 }
 \arguments{
-\item{X}{Real images (H,W) or (m,H,W). @param z_dim,filters int.}
+\item{X}{Real images (H,W) or (m,H,W).}
+
+\item{z_dim, filters}{int.}
 
 \item{epochs, lr}{Training config (recorded only; see hmgan for the loop).}
 
-\item{seed_shape}{c(h0, w0). @param stride Upsample stride (>=2).}
+\item{seed_shape}{c(h0, w0).}
+
+\item{stride}{Upsample stride (>=2).}
 }
 \value{
 List with \code{generator_layers}, \code{discriminator_layers},

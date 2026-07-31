@@ -9,9 +9,13 @@ morie_geron_hf_pipelines(task, inputs, model, labels = NULL, top_k = 1)
 \arguments{
 \item{task}{One of text-classification, sentiment-analysis, feature-extraction, text-generation.}
 
-\item{inputs}{List of inputs. @param model function(inputs) -> raw output.}
+\item{inputs}{List of inputs.}
 
-\item{labels}{Optional label names. @param top_k Ranked labels per input.}
+\item{model}{function(inputs) -> raw output.}
+
+\item{labels}{Optional label names.}
+
+\item{top_k}{Ranked labels per input.}
 }
 \value{
 List with predictions, scores, raw, task, estimate, n, method.

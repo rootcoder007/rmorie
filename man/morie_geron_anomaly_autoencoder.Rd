@@ -10,7 +10,9 @@ morie_geron_anomaly_autoencoder(model, X, threshold = NULL, quantile = 0.99)
 \item{model}{Function(X) -> reconstruction, or a list with
 \code{reconstruct}, \code{predict}, or \code{encode} + \code{decode}.}
 
-\item{X}{Data to score. @param threshold Optional squared-error cut.}
+\item{X}{Data to score.}
+
+\item{threshold}{Optional squared-error cut.}
 
 \item{quantile}{Quantile in (0, 1] used when \code{threshold} is NULL.}
 }

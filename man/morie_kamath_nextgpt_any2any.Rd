@@ -13,9 +13,13 @@ morie_kamath_nextgpt_any2any(
 )
 }
 \arguments{
-\item{inputs_by_modality}{Named list of inputs. @param encoders Named list.}
+\item{inputs_by_modality}{Named list of inputs.}
 
-\item{llm}{Function features -> state. @param decoders Named list.}
+\item{encoders}{Named list.}
+
+\item{llm}{Function features -> state.}
+
+\item{decoders}{Named list.}
 
 \item{output_modalities}{Optional subset.}
 }

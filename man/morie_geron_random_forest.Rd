@@ -16,7 +16,9 @@ morie_geron_random_forest(
 )
 }
 \arguments{
-\item{X, y}{Data and targets. @param n_estimators,max_features,seed,max_depth,min_samples_leaf,task Controls.}
+\item{X, y}{Data and targets.}
+
+\item{n_estimators, max_features, seed, max_depth, min_samples_leaf, task}{Controls.}
 }
 \description{
 Random forest: bagged CART trees with random per-split feature subsets (Geron Ch 6, hmrfc)

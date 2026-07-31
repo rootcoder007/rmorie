@@ -16,9 +16,15 @@ morie_geron_conv_autoencoder_trained(
 \arguments{
 \item{X}{Image (H, W) or a list of images.}
 
-\item{filters}{Bottleneck width. @param epochs Training epochs.}
+\item{filters}{Bottleneck width.}
 
-\item{lr}{Learning rate. @param seed LCG seed. @param patch Patch size.}
+\item{epochs}{Training epochs.}
+
+\item{lr}{Learning rate.}
+
+\item{seed}{LCG seed.}
+
+\item{patch}{Patch size.}
 }
 \value{
 List with \code{loss_history}, \code{final_loss}, \code{encoder}, \code{decoder},

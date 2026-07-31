@@ -7,7 +7,11 @@
 morie_geron_lenet5(n_classes = 10, input_size = 32, in_channels = 1)
 }
 \arguments{
-\item{n_classes}{Outputs. @param input_size Square input size. @param in_channels Input channels.}
+\item{n_classes}{Outputs.}
+
+\item{input_size}{Square input size.}
+
+\item{in_channels}{Input channels.}
 }
 \value{
 List with layers, total_parameters, output_shape, receptive_field, estimate, n, method.

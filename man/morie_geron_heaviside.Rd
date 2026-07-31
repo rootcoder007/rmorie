@@ -7,7 +7,9 @@
 morie_geron_heaviside(z, at_zero = 1)
 }
 \arguments{
-\item{z}{Numeric vector. @param at_zero Value returned at z == 0.}
+\item{z}{Numeric vector.}
+
+\item{at_zero}{Value returned at z == 0.}
 }
 \value{
 List with \code{activation}, \code{derivative}, \code{n_active},

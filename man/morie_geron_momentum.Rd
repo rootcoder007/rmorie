@@ -14,11 +14,17 @@ morie_geron_momentum(
 )
 }
 \arguments{
-\item{grads}{Gradient vector. @param v Velocity; default zeros.}
+\item{grads}{Gradient vector.}
 
-\item{beta}{Decay in [0, 1). @param eta Positive rate.}
+\item{v}{Velocity; default zeros.}
 
-\item{theta}{Parameters; default zeros. @param nesterov Look-ahead form.}
+\item{beta}{Decay in [0, 1).}
+
+\item{eta}{Positive rate.}
+
+\item{theta}{Parameters; default zeros.}
+
+\item{nesterov}{Look-ahead form.}
 }
 \value{
 List with \code{theta}, \code{theta_next}, \code{step}, \code{v},

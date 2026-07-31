@@ -7,7 +7,11 @@
 morie_geron_model_context_protocol(server, client, requests = NULL)
 }
 \arguments{
-\item{server}{function(request) -> response. @param client Callable or list of requests. @param requests Optional override.}
+\item{server}{function(request) -> response.}
+
+\item{client}{Callable or list of requests.}
+
+\item{requests}{Optional override.}
 }
 \value{
 List with exchanges, n_ok, n_errors, methods, estimate, n, method.

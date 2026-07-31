@@ -15,7 +15,9 @@ morie_alammar_lda_topic_distribution(
 )
 }
 \arguments{
-\item{documents}{List of token vectors. @param n_topics K.}
+\item{documents}{List of token vectors.}
+
+\item{n_topics}{K.}
 
 \item{alpha, beta, n_iter, seed}{Settings.}
 }

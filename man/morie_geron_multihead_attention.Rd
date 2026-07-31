@@ -7,7 +7,13 @@
 morie_geron_multihead_attention(Q, K, V, n_heads, W_O = NULL, mask = NULL)
 }
 \arguments{
-\item{Q, K, V}{Query/key/value matrices. @param n_heads Head count (must divide Q/K width). @param W_O Optional output projection. @param mask Optional mask.}
+\item{Q, K, V}{Query/key/value matrices.}
+
+\item{n_heads}{Head count (must divide Q/K width).}
+
+\item{W_O}{Optional output projection.}
+
+\item{mask}{Optional mask.}
 }
 \value{
 List with output, head_outputs, attention_weights, d_head, estimate, n, method.

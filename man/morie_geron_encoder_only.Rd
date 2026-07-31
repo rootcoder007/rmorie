@@ -17,11 +17,17 @@ morie_geron_encoder_only(
 )
 }
 \arguments{
-\item{X}{Token ids (raw, before CLS/SEP). @param n_layers,n_heads int.}
+\item{X}{Token ids (raw, before CLS/SEP).}
 
-\item{d_model, vocab_size, max_len}{int. @param d_ff FFN width.}
+\item{n_layers, n_heads}{int.}
 
-\item{n_segments}{Segment embedding rows. @param n_classes Optional CLS head.}
+\item{d_model, vocab_size, max_len}{int.}
+
+\item{d_ff}{FFN width.}
+
+\item{n_segments}{Segment embedding rows.}
+
+\item{n_classes}{Optional CLS head.}
 }
 \value{
 List with \code{total_params}, \code{block_params}, \code{embedding_params},

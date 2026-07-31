@@ -14,11 +14,17 @@ morie_kamath_pet_loss(
 )
 }
 \arguments{
-\item{verbalizer_logits}{Class logits. @param y_true 0-BASED true class.}
+\item{verbalizer_logits}{Class logits.}
 
-\item{mlm_logits}{(T, V) logits. @param mlm_targets Ids, -100 ignored.}
+\item{y_true}{0-BASED true class.}
 
-\item{alpha}{Non-negative weight. @param ignore_index Ignored id.}
+\item{mlm_logits}{(T, V) logits.}
+
+\item{mlm_targets}{Ids, -100 ignored.}
+
+\item{alpha}{Non-negative weight.}
+
+\item{ignore_index}{Ignored id.}
 }
 \value{
 List with \code{estimate}, \code{loss_ce}, \code{loss_mlm}, \code{n_masked}.

@@ -7,9 +7,15 @@
 morie_geron_adagrad(grads, s = NULL, eta = 0.01, eps = 1e-10, theta = NULL)
 }
 \arguments{
-\item{grads}{Gradient vector. @param s Squared-gradient accumulator.}
+\item{grads}{Gradient vector.}
 
-\item{eta}{Learning rate. @param eps Floor. @param theta Parameters.}
+\item{s}{Squared-gradient accumulator.}
+
+\item{eta}{Learning rate.}
+
+\item{eps}{Floor.}
+
+\item{theta}{Parameters.}
 }
 \value{
 List with \code{theta}, \code{step}, \code{s}, \code{effective_lr}.

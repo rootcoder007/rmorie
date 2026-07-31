@@ -14,7 +14,9 @@ morie_geron_reinforce(
 )
 }
 \arguments{
-\item{episodes}{List of episodes. @param policy Function \verb{policy(state, action) -> grad log pi}.}
+\item{episodes}{List of episodes.}
+
+\item{policy}{Function \verb{policy(state, action) -> grad log pi}.}
 
 \item{gamma, eta, theta, baseline}{Controls.}
 }

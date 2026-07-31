@@ -7,7 +7,11 @@
 morie_geron_linear_regression_life(gdp, theta0, theta1, life_sat = NULL)
 }
 \arguments{
-\item{gdp}{GDP per capita. @param theta0,theta1 Intercept/slope. @param life_sat Optional observed values.}
+\item{gdp}{GDP per capita.}
+
+\item{theta0, theta1}{Intercept/slope.}
+
+\item{life_sat}{Optional observed values.}
 }
 \value{
 List with prediction, residuals, rmse, r2, theta0, theta1, estimate, n, method.

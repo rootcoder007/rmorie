@@ -7,7 +7,9 @@
 morie_kamath_ch8_ngram_embedding(x, i, n)
 }
 \arguments{
-\item{x}{1-D idf sequence or 2-D embedding rows. @param i 0-based start.}
+\item{x}{1-D idf sequence or 2-D embedding rows.}
+
+\item{i}{0-based start.}
 
 \item{n}{Window length.}
 }

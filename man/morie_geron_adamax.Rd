@@ -16,9 +16,17 @@ morie_geron_adamax(
 )
 }
 \arguments{
-\item{grads}{Gradient vector. @param m First moment. @param u Infinity-norm.}
+\item{grads}{Gradient vector.}
 
-\item{b1, b2}{Decay rates. @param eta Learning rate. @param t Timestep.}
+\item{m}{First moment.}
+
+\item{u}{Infinity-norm.}
+
+\item{b1, b2}{Decay rates.}
+
+\item{eta}{Learning rate.}
+
+\item{t}{Timestep.}
 
 \item{theta}{Parameters.}
 }

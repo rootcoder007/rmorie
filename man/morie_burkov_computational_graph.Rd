@@ -7,7 +7,9 @@
 morie_burkov_computational_graph(graph, inputs)
 }
 \arguments{
-\item{graph}{Node list. @param inputs Named leaf values.}
+\item{graph}{Node list.}
+
+\item{inputs}{Named leaf values.}
 }
 \description{
 \code{graph} is a topologically ordered list of nodes

@@ -7,9 +7,13 @@
 morie_alammar_multi_head_attention(Q, K, V, Wq, Wk, Wv, Wo, heads)
 }
 \arguments{
-\item{Q, K, V}{Matrices. @param Wq,Wk,Wv Lists of matrices.}
+\item{Q, K, V}{Matrices.}
 
-\item{Wo}{Output projection. @param heads Head count.}
+\item{Wq, Wk, Wv}{Lists of matrices.}
+
+\item{Wo}{Output projection.}
+
+\item{heads}{Head count.}
 }
 \description{
 Concat(head_1..head_h) W_O; Wq, Wk, Wv are LISTS of per-head

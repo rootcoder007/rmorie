@@ -14,9 +14,17 @@ morie_geron_deep_rnn(
 )
 }
 \arguments{
-\item{X}{Input sequence (T, d). @param hidden_sizes Width(s) per layer. @param n_layers Optional repeat count.}
+\item{X}{Input sequence (T, d).}
 
-\item{weights}{Optional list of (Wx, Wh, b) triples. @param seed LCG seed. @param activation "tanh"/"relu".}
+\item{hidden_sizes}{Width(s) per layer.}
+
+\item{n_layers}{Optional repeat count.}
+
+\item{weights}{Optional list of (Wx, Wh, b) triples.}
+
+\item{seed}{LCG seed.}
+
+\item{activation}{"tanh"/"relu".}
 }
 \value{
 List with \code{outputs}, \code{states}, \code{final_states}, \code{layer_sizes}, \code{n_params}, \code{state_norms}.

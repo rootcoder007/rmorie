@@ -7,7 +7,9 @@
 morie_dueling_q(V, Adv)
 }
 \arguments{
-\item{V}{State values (S,). @param Adv Advantages (S, nA).}
+\item{V}{State values (S,).}
+
+\item{Adv}{Advantages (S, nA).}
 }
 \value{
 Matrix (S, nA).

@@ -7,11 +7,15 @@
 morie_geron_stratified_sampling(X, y = NULL, stratum = NULL, n_total, seed = 0)
 }
 \arguments{
-\item{X}{Data rows (n, ...). @param y Optional labels used as strata.}
+\item{X}{Data rows (n, ...).}
+
+\item{y}{Optional labels used as strata.}
 
 \item{stratum}{Optional explicit stratum key per row.}
 
-\item{n_total}{Sample size (required). @param seed LCG seed.}
+\item{n_total}{Sample size (required).}
+
+\item{seed}{LCG seed.}
 }
 \value{
 list with indices (0-based), X_sample, y_sample, allocation, strata,

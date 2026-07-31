@@ -7,9 +7,13 @@
 morie_kamath_ch6_cbs_variance(W, A, p_a, p_prior, ddof = 0)
 }
 \arguments{
-\item{W}{Template words. @param A Social groups.}
+\item{W}{Template words.}
 
-\item{p_a, p_prior}{|W| x |A| probability matrices. @param ddof Default 0.}
+\item{A}{Social groups.}
+
+\item{p_a, p_prior}{|W| x |A| probability matrices.}
+
+\item{ddof}{Default 0.}
 }
 \value{
 List with \code{estimate}, \code{per_word}, \code{log_ratios}.

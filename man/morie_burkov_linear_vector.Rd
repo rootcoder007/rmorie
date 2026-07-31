@@ -7,7 +7,9 @@
 morie_burkov_linear_vector(w, x, b)
 }
 \arguments{
-\item{w, x}{Vectors. @param b Bias.}
+\item{w, x}{Vectors.}
+
+\item{b}{Bias.}
 }
 \description{
 Vector-form linear model w.x + b (Burkov Eq 1.4)

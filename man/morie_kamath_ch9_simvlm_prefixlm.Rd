@@ -7,7 +7,9 @@
 morie_kamath_ch9_simvlm_prefixlm(theta, x, T_p)
 }
 \arguments{
-\item{theta}{Optional model. @param x Probability rows.}
+\item{theta}{Optional model.}
+
+\item{x}{Probability rows.}
 
 \item{T_p}{Prefix length.}
 }

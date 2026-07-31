@@ -9,7 +9,7 @@ morie_wasserman_logistic_regression(X, y, max_iter = 100L, tol = 1e-10)
 \arguments{
 \item{X}{Design matrix; add your own intercept.}
 
-\item{y}{Binary response in {0, 1}.}
+\item{y}{Binary response \verb{in \{0, 1\}}.}
 
 \item{max_iter, tol}{Newton controls.}
 }

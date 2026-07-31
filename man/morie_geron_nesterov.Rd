@@ -9,9 +9,13 @@ morie_geron_nesterov(grads, v = NULL, beta = 0.9, eta = 0.001, theta = NULL)
 \arguments{
 \item{grads}{Gradient vector, or function(theta) -> gradient.}
 
-\item{v}{Velocity; default zeros. @param beta Decay in [0, 1).}
+\item{v}{Velocity; default zeros.}
 
-\item{eta}{Positive rate. @param theta Parameters.}
+\item{beta}{Decay in [0, 1).}
+
+\item{eta}{Positive rate.}
+
+\item{theta}{Parameters.}
 }
 \value{
 List with \code{theta}, \code{theta_next}, \code{v}, \code{lookahead},

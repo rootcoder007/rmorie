@@ -7,9 +7,13 @@
 morie_geron_supervised_learning(X, y, ridge = 0, fit_intercept = TRUE)
 }
 \arguments{
-\item{X}{Labeled inputs (n, d). @param y Targets, length n.}
+\item{X}{Labeled inputs (n, d).}
 
-\item{ridge}{L2 penalty. @param fit_intercept Include intercept column.}
+\item{y}{Targets, length n.}
+
+\item{ridge}{L2 penalty.}
+
+\item{fit_intercept}{Include intercept column.}
 }
 \value{
 list with theta, predict, fitted, residuals, empirical_risk, loo_risk,

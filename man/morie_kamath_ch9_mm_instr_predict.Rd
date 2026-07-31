@@ -7,7 +7,11 @@
 morie_kamath_ch9_mm_instr_predict(I, M, theta, f = NULL)
 }
 \arguments{
-\item{I}{Instruction. @param M Multimodal input. @param theta Model.}
+\item{I}{Instruction.}
+
+\item{M}{Multimodal input.}
+
+\item{theta}{Model.}
 
 \item{f}{Optional override f(I, M, theta).}
 }

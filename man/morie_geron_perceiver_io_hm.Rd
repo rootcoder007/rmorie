@@ -15,7 +15,9 @@ morie_geron_perceiver_io_hm(
 )
 }
 \arguments{
-\item{x, latents, queries}{Input, latents and output queries. @param n_iter,W_q,W_k,W_v Encoder controls.}
+\item{x, latents, queries}{Input, latents and output queries.}
+
+\item{n_iter, W_q, W_k, W_v}{Encoder controls.}
 }
 \description{
 Perceiver IO: adds a cross-attention output decoder (Geron Ch 16, hmprio)

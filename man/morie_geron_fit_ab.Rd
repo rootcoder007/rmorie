@@ -7,7 +7,9 @@
 morie_geron_fit_ab(min_dist, spread = 1)
 }
 \arguments{
-\item{min_dist}{Minimum spacing. @param spread Spread parameter.}
+\item{min_dist}{Minimum spacing.}
+
+\item{spread}{Spread parameter.}
 }
 \value{
 list(a, b, sse).

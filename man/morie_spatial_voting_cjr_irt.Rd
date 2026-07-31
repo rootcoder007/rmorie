@@ -16,7 +16,7 @@ morie_spatial_voting_cjr_irt(
 
 \item{n_dims}{Ideal-point dimensions.}
 
-\item{n_samples}{MCMC samples. @param burn_in Burn-in length.}
+\item{n_samples}{MCMC samples.}
 
 \item{burn_in}{Integer; MCMC burn-in iterations.}
 }

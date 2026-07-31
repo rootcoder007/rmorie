@@ -13,7 +13,9 @@ morie_geron_randomized_pca(
 )
 }
 \arguments{
-\item{X}{Data (m, p). @param n_components Components to recover.}
+\item{X}{Data (m, p).}
+
+\item{n_components}{Components to recover.}
 
 \item{seed, n_oversamples, n_power_iter}{Sketch controls.}
 }

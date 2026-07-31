@@ -7,8 +7,12 @@
 morie_alammar_ann_search(query_vec, index, ef_search = 8)
 }
 \arguments{
-\item{query_vec}{Query. @param index List with points, neighbors
-(0-based lists), entry (0-based). @param ef_search Beam budget.}
+\item{query_vec}{Query.}
+
+\item{index}{List with points, neighbors
+(0-based lists), entry (0-based).}
+
+\item{ef_search}{Beam budget.}
 }
 \description{
 Greedy NSW approximate nearest neighbour (Malkov and Yashunin 2020)

@@ -13,11 +13,15 @@ morie_geron_adaboost(
 )
 }
 \arguments{
-\item{X}{Design matrix. @param y Two-class labels.}
+\item{X}{Design matrix.}
 
-\item{base_estimator}{Optional function(X, y, w) -> predict(X) in {-1, 1}.}
+\item{y}{Two-class labels.}
 
-\item{n_estimators}{Rounds. @param eps Error floor/ceiling in (0, 0.5).}
+\item{base_estimator}{Optional function(X, y, w) -> predict(X) \verb{in \{-1, 1\}}.}
+
+\item{n_estimators}{Rounds.}
+
+\item{eps}{Error floor/ceiling in (0, 0.5).}
 }
 \value{
 List with \code{alphas}, \code{errors}, \code{train_errors}, \code{predict},

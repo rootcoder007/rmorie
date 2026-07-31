@@ -7,7 +7,11 @@
 morie_geron_autoencoder_reconstruction_loss(X, encoded, decoded)
 }
 \arguments{
-\item{X}{Inputs (m, d). @param encoded Codes (m, k). @param decoded Reconstructions.}
+\item{X}{Inputs (m, d).}
+
+\item{encoded}{Codes (m, k).}
+
+\item{decoded}{Reconstructions.}
 }
 \value{
 List with \code{loss}, \code{mse_per_element}, \code{per_sample_loss},

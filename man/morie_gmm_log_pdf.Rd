@@ -7,7 +7,11 @@
 morie_gmm_log_pdf(X, mu, Sigma)
 }
 \arguments{
-\item{X}{Points (m, d). @param mu Mean vector. @param Sigma Covariance (d, d).}
+\item{X}{Points (m, d).}
+
+\item{mu}{Mean vector.}
+
+\item{Sigma}{Covariance (d, d).}
 }
 \value{
 Numeric vector length m.

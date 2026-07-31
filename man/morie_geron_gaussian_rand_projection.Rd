@@ -7,7 +7,11 @@
 morie_geron_gaussian_rand_projection(X, d_out, seed = 0)
 }
 \arguments{
-\item{X}{Data (m, d) or a vector treated as one row. @param d_out Target dimension. @param seed RNG seed.}
+\item{X}{Data (m, d) or a vector treated as one row.}
+
+\item{d_out}{Target dimension.}
+
+\item{seed}{RNG seed.}
 }
 \value{
 List with \code{X_projected}, \code{R}, \code{d_in}, \code{d_out}, \code{max_distortion}, \code{mean_distortion}.

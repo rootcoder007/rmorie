@@ -7,7 +7,9 @@
 morie_geron_swish(z, beta = 1)
 }
 \arguments{
-\item{z}{Numeric vector. @param beta Finite gate scale.}
+\item{z}{Numeric vector.}
+
+\item{beta}{Finite gate scale.}
 }
 \value{
 List with \code{a}, \code{grad}, \code{gate}, \code{beta}, \code{estimate}, \code{n}.

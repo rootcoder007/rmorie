@@ -16,7 +16,9 @@ morie_geron_policy_gradient(
 
 \item{policy}{Function \verb{policy(state, action) -> grad log pi} (or \verb{(logp, grad)}).}
 
-\item{gamma}{Discount. @param baseline Subtract the mean return.}
+\item{gamma}{Discount.}
+
+\item{baseline}{Subtract the mean return.}
 }
 \description{
 Policy gradient (REINFORCE) estimator over discounted returns (Geron Ch 19, hmpg)

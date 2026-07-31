@@ -13,7 +13,9 @@ morie_kamath_pre_ln_transformer(x, attn_fn, ffn_fn, eps = 1e-05)
 morie_kamath_layer_norm_rows(x, eps = 1e-05)
 }
 \arguments{
-\item{x}{Input rows. @param attn_fn,ffn_fn Shape-preserving sublayers.}
+\item{x}{Input rows.}
+
+\item{attn_fn, ffn_fn}{Shape-preserving sublayers.}
 
 \item{eps}{LayerNorm epsilon.}
 }

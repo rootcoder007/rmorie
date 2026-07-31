@@ -17,11 +17,21 @@ morie_geron_hyperparameter_tuning(
 )
 }
 \arguments{
-\item{param_grid}{Named list of candidate value vectors. @param X,y Data.}
+\item{param_grid}{Named list of candidate value vectors.}
+
+\item{X, y}{Data.}
 
 \item{estimator}{Optional function(Xtr,ytr,...) -> function(Xnew) predict.}
 
-\item{search}{"grid" or "random". @param n_iter Random draws. @param K Folds. @param seed Seed. @param score Optional scorer.}
+\item{search}{"grid" or "random".}
+
+\item{n_iter}{Random draws.}
+
+\item{K}{Folds.}
+
+\item{seed}{Seed.}
+
+\item{score}{Optional scorer.}
 }
 \value{
 List with best_params, best_score, results, n_candidates, n_fits, distinct_values_per_param, estimate, n, method.

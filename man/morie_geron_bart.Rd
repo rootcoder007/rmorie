@@ -15,7 +15,9 @@ morie_geron_bart(
 )
 }
 \arguments{
-\item{src, tgt}{Token vectors. @param mask_ratio Fraction in (0, 1).}
+\item{src, tgt}{Token vectors.}
+
+\item{mask_ratio}{Fraction in (0, 1).}
 
 \item{mean_span}{Mean geometric span length, >= 1.}
 

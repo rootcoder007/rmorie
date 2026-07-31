@@ -7,7 +7,9 @@
 morie_geron_error_analysis(y_true, y_pred, top_k = 5)
 }
 \arguments{
-\item{y_true, y_pred}{Labels. @param top_k Confusions to list.}
+\item{y_true, y_pred}{Labels.}
+
+\item{top_k}{Confusions to list.}
 }
 \value{
 List with \code{normalized}, \code{error_matrix}, \code{top_confusions}, \code{worst_class}, \code{error_rate}.

@@ -7,7 +7,9 @@
 morie_geron_learning_rate_schedule(t, eta0, t0)
 }
 \arguments{
-\item{t}{Step or vector of steps. @param eta0 Positive rate.}
+\item{t}{Step or vector of steps.}
+
+\item{eta0}{Positive rate.}
 
 \item{t0}{Positive offset.}
 }

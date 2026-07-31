@@ -16,7 +16,9 @@ morie_geron_early_stopping_alt(
 )
 }
 \arguments{
-\item{X_train, y_train, X_val, y_val}{Data. @param n_iter,eta,fit_intercept Training config.}
+\item{X_train, y_train, X_val, y_val}{Data.}
+
+\item{n_iter, eta, fit_intercept}{Training config.}
 
 \item{patience}{Optional online stopping patience.}
 }

@@ -7,7 +7,11 @@
 morie_geron_stride(in_dim, k, p = 0, s = 1)
 }
 \arguments{
-\item{in_dim}{Input length. @param k Kernel size. @param p Padding each side.}
+\item{in_dim}{Input length.}
+
+\item{k}{Kernel size.}
+
+\item{p}{Padding each side.}
 
 \item{s}{Stride.}
 }

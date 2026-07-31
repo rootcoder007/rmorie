@@ -10,13 +10,23 @@ morie_kamath_ch6_lstm_softmax_word(U, f, c_t_1, b)
 morie_kamath_ch6_affect_lm(U, V, f, g, c, e, beta, b)
 }
 \arguments{
-\item{U}{Vocabulary projection. @param f Hidden map or vector.}
+\item{U}{Vocabulary projection.}
 
-\item{c_t_1}{Previous cell state. @param b Bias.}
+\item{f}{Hidden map or vector.}
 
-\item{V}{Affect projection. @param g Affect hidden map. @param c Cell state.}
+\item{c_t_1}{Previous cell state.}
 
-\item{e}{Affect category. @param beta Affect strength.}
+\item{b}{Bias.}
+
+\item{V}{Affect projection.}
+
+\item{g}{Affect hidden map.}
+
+\item{c}{Cell state.}
+
+\item{e}{Affect category.}
+
+\item{beta}{Affect strength.}
 }
 \value{
 List with \code{p}, \code{logits}, \code{argmax}.

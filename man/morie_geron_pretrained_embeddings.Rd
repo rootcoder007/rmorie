@@ -13,9 +13,13 @@ morie_geron_pretrained_embeddings(
 )
 }
 \arguments{
-\item{vocab}{Tokens in index order. @param pretrained Named list token -> vector.}
+\item{vocab}{Tokens in index order.}
 
-\item{freeze}{Whether the table is held fixed. @param seed,oov_scale OOV row controls.}
+\item{pretrained}{Named list token -> vector.}
+
+\item{freeze}{Whether the table is held fixed.}
+
+\item{seed, oov_scale}{OOV row controls.}
 }
 \description{
 Pretrained word embeddings as initialisation, LCG-filled OOV rows (Geron Ch 14, hmpemb)

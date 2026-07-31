@@ -12,9 +12,13 @@ morie_geron_unsupervised_learning(
 )
 }
 \arguments{
-\item{X}{Unlabeled data (n, d), n >= 2. @param n_clusters Groups to look for.}
+\item{X}{Unlabeled data (n, d), n >= 2.}
 
-\item{bottleneck}{Code width for compression. @param linkage Linkage rule.}
+\item{n_clusters}{Groups to look for.}
+
+\item{bottleneck}{Code width for compression.}
+
+\item{linkage}{Linkage rule.}
 }
 \value{
 list with labels, silhouette, silhouette_samples, codes, reconstruction,

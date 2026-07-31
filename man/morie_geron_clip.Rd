@@ -15,7 +15,9 @@ morie_geron_clip(
 \arguments{
 \item{images, texts}{Paired embedding matrices of the same shape.}
 
-\item{tau}{Positive temperature. @param normalize Cosine-normalise.}
+\item{tau}{Positive temperature.}
+
+\item{normalize}{Cosine-normalise.}
 
 \item{class_prompts}{Optional (C, d) prompt embeddings.}
 }

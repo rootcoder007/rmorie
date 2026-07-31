@@ -7,7 +7,11 @@
 morie_geron_biological_neuron(x, w, b, activation = "step")
 }
 \arguments{
-\item{x}{Input vector or (n, d) matrix. @param w Weights. @param b Bias.}
+\item{x}{Input vector or (n, d) matrix.}
+
+\item{w}{Weights.}
+
+\item{b}{Bias.}
 
 \item{activation}{Activation name.}
 }

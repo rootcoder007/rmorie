@@ -14,11 +14,17 @@ morie_kamath_sentencepiece_tokenizer(
 )
 }
 \arguments{
-\item{corpus}{Character vector. @param vocab_size Target size.}
+\item{corpus}{Character vector.}
 
-\item{max_piece_len}{Longest seed piece. @param seed_multiplier Seed factor.}
+\item{vocab_size}{Target size.}
 
-\item{shrink}{Fraction retained per prune round. @param max_iter EM cap.}
+\item{max_piece_len}{Longest seed piece.}
+
+\item{seed_multiplier}{Seed factor.}
+
+\item{shrink}{Fraction retained per prune round.}
+
+\item{max_iter}{EM cap.}
 }
 \value{
 List with \code{vocab}, \code{probs}, \code{log_likelihood}, \code{n_prune_rounds}.

@@ -15,6 +15,6 @@ morie_geron_discounted_return(rewards, gamma)
 List with \code{returns}, \code{G0}, \code{effective_horizon}.
 }
 \description{
-G_t = r_t + gamma G_{t+1} by a backward sweep; effective horizon
+G_t = r_t + gamma \verb{G_\{t+1\}} by a backward sweep; effective horizon
 1/(1-gamma).
 }

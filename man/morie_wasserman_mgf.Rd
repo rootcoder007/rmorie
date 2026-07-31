@@ -2,7 +2,7 @@
 % Please edit documentation in R/wasserman_native.R
 \name{morie_wasserman_mgf}
 \alias{morie_wasserman_mgf}
-\title{Empirical MGF M(t) = (1/n) sum e^{t X_i} (Ch 3, wsmmgf)}
+\title{Empirical MGF M(t) = (1/n) sum \verb{e^\{t X_i\}} (Ch 3, wsmmgf)}
 \usage{
 morie_wasserman_mgf(x, t)
 }
@@ -15,7 +15,7 @@ morie_wasserman_mgf(x, t)
 List with \code{estimate}, \code{values}, \code{t}, \code{n}, \code{method}.
 }
 \description{
-Empirical MGF M(t) = (1/n) sum e^{t X_i} (Ch 3, wsmmgf)
+Empirical MGF M(t) = (1/n) sum \verb{e^\{t X_i\}} (Ch 3, wsmmgf)
 }
 \examples{
 morie_wasserman_mgf(c(1, 2), 0)$estimate

@@ -7,7 +7,9 @@
 morie_kamath_moe_top_k_gating(gates, k)
 }
 \arguments{
-\item{gates}{Non-negative gate scores. @param k Experts kept.}
+\item{gates}{Non-negative gate scores.}
+
+\item{k}{Experts kept.}
 }
 \value{
 List with \code{weights}, \code{selected_experts}, \code{kept_mass}.

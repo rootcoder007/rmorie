@@ -7,7 +7,11 @@
 morie_kamath_ch4_lora_forward(W_0, B, A, x)
 }
 \arguments{
-\item{W_0}{Frozen (d, k) weight. @param B (d, r). @param A (r, k).}
+\item{W_0}{Frozen (d, k) weight.}
+
+\item{B}{(d, r).}
+
+\item{A}{(r, k).}
 
 \item{x}{Input vector of length k.}
 }

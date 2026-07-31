@@ -7,7 +7,9 @@
 morie_kamath_ch6_ceat_random_effects(S_A1, S_A2, S_W1, S_W2, v, ddof = 0)
 }
 \arguments{
-\item{S_A1, S_A2, S_W1, S_W2}{Lists of per-sample matrices. @param v Weights.}
+\item{S_A1, S_A2, S_W1, S_W2}{Lists of per-sample matrices.}
+
+\item{v}{Weights.}
 
 \item{ddof}{Passed to the effect size.}
 }

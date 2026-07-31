@@ -15,9 +15,17 @@ morie_geron_histogram_gradient_boosting(
 )
 }
 \arguments{
-\item{X, y}{Design matrix and targets. @param max_iter Rounds. @param learning_rate Shrinkage.}
+\item{X, y}{Design matrix and targets.}
 
-\item{max_bins}{Bins per feature. @param max_depth Tree depth. @param min_samples_leaf Min rows/leaf.}
+\item{max_iter}{Rounds.}
+
+\item{learning_rate}{Shrinkage.}
+
+\item{max_bins}{Bins per feature.}
+
+\item{max_depth}{Tree depth.}
+
+\item{min_samples_leaf}{Min rows/leaf.}
 }
 \value{
 List with prediction, train_mse, mse_history, baseline, trees, bins_used, bin_edges, estimate, n, method.

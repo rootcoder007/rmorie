@@ -11,19 +11,36 @@ test_that("native Moran machinery matches spdep::moran.test", {
   x <- as.numeric(xy[, 1] > 0.5) + rnorm(n, 0, 0.4)
   W <- rmorie:::.tps_knn_adjacency(xy, k = 5)
   lw <- spdep::mat2listw(W, style = "W", zero.policy = TRUE)
-  ref <- spdep::moran.test(x, lw, zero.policy = TRUE,
-                          randomisation = FALSE)
   # native pieces: row-standardization happens inside spdep via style
   # W; replicate with the same standardized matrix.
   Wr <- W / pmax(rowSums(W), 1e-12)
   z <- x - mean(x)
   S0 <- sum(Wr)
   I_val <- (n / S0) * as.numeric(t(z) %*% Wr %*% z) / sum(z^2)
-  expect_equal(I_val, unname(ref$estimate["Moran I statistic"]),
+
+  # BOTH nulls, each against spdep at its matching setting. Checking
+  # only one would not catch a variance formula that silently returns
+  # the other assumption's number.
+  ref_n <- spdep::moran.test(x, lw, zero.policy = TRUE,
+                             randomisation = FALSE)
+  expect_equal(I_val, unname(ref_n$estimate["Moran I statistic"]),
                tolerance = 1e-10)
-  var_I <- rmorie:::.tps_cliff_ord_variance(Wr, n, S0)
-  expect_equal(var_I, unname(ref$estimate["Variance"]),
+  vn <- rmorie:::.tps_moran_variance(Wr, n, z = z, randomisation = FALSE)
+  expect_equal(vn$variance, unname(ref_n$estimate["Variance"]),
                tolerance = 1e-8)
+  expect_identical(vn$assumption, "normality")
+
+  ref_r <- spdep::moran.test(x, lw, zero.policy = TRUE,
+                             randomisation = TRUE)
+  vr <- rmorie:::.tps_moran_variance(Wr, n, z = z, randomisation = TRUE)
+  expect_equal(vr$variance, unname(ref_r$estimate["Variance"]),
+               tolerance = 1e-8)
+  expect_identical(vr$assumption, "randomisation")
+
+  # the kurtosis that enters the randomisation form
+  expect_equal(vr$kurtosis, n * sum(z^4) / sum(z^2)^2, tolerance = 1e-12)
+  # and the two nulls must actually differ, or the switch is a no-op
+  expect_false(isTRUE(all.equal(vr$variance, vn$variance, tolerance = 1e-12)))
 })
 
 test_that("native empirical variogram matches gstat::variogram", {

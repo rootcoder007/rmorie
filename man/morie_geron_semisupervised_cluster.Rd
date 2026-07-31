@@ -14,11 +14,17 @@ morie_geron_semisupervised_cluster(
 )
 }
 \arguments{
-\item{X}{Unlabeled pool (n, d). @param X_labeled Labeled instances (m, d).}
+\item{X}{Unlabeled pool (n, d).}
 
-\item{y_labeled}{Their labels, length m. @param n_clusters Labeling budget.}
+\item{X_labeled}{Labeled instances (m, d).}
 
-\item{seed}{LCG seed. @param y_true Optional gold labels to score against.}
+\item{y_labeled}{Their labels, length m.}
+
+\item{n_clusters}{Labeling budget.}
+
+\item{seed}{LCG seed.}
+
+\item{y_true}{Optional gold labels to score against.}
 }
 \value{
 list with labels, cluster, centers, representatives, representative_labels,

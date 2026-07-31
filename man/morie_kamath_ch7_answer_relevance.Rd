@@ -7,7 +7,9 @@
 morie_kamath_ch7_answer_relevance(E_g, E_o, N = NULL)
 }
 \arguments{
-\item{E_g}{Question embedding rows. @param E_o Query embedding.}
+\item{E_g}{Question embedding rows.}
+
+\item{E_o}{Query embedding.}
 
 \item{N}{Optional question count.}
 }

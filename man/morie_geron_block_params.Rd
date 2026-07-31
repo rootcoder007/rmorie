@@ -7,7 +7,9 @@
 morie_geron_block_params(d_model, d_ff = NULL, cross_attention = FALSE)
 }
 \arguments{
-\item{d_model}{Model width. @param d_ff FFN width (default 4*d_model).}
+\item{d_model}{Model width.}
+
+\item{d_ff}{FFN width (default 4*d_model).}
 
 \item{cross_attention}{Add a cross-attention sub-layer + norm.}
 }

@@ -7,7 +7,9 @@
 morie_kamath_retnet_retention(Q, K, V, gamma)
 }
 \arguments{
-\item{Q, K, V}{Sequence matrices. @param gamma Decay in (0, 1].}
+\item{Q, K, V}{Sequence matrices.}
+
+\item{gamma}{Decay in (0, 1].}
 }
 \value{
 List with \code{output}, \code{decay}, \code{recurrent_output}.

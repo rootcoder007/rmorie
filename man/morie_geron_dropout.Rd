@@ -18,5 +18,5 @@ List with \code{output}, \code{mask}, \code{keep_prob}, \code{fraction_dropped},
 \code{scale}, \code{expectation_ratio}.
 }
 \description{
-Mask ~ 1{u < 1-p} over the LCG uniform stream, output a * mask / (1-p).
+Mask ~ \verb{1\{u < 1-p\}} over the LCG uniform stream, output a * mask / (1-p).
 }

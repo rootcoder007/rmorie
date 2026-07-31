@@ -53,16 +53,28 @@ morie_alammar_tsdae_objective(
 
 \item{n_layers, n_stages}{Schedule sizes.}
 
-\item{domain_corpus}{Documents. @param mlm_loss_fn function(corpus,
-step) -> loss. @param n_mlm_steps Steps. @param task_loss_fn
-Optional function() -> loss.}
+\item{domain_corpus}{Documents.}
 
-\item{unlabeled_pairs}{List of c(a, b). @param cross_encoder
-function(a, b) -> score. @param gold_pairs,gold_labels Optional.}
+\item{mlm_loss_fn}{function(corpus,
+step) -> loss.}
 
-\item{tokens}{Token vector. @param delete_ratio Deletion rate.}
+\item{n_mlm_steps}{Steps.}
 
-\item{seed}{LCG seed. @param reconstruction_logprob Optional
+\item{task_loss_fn}{Optional function() -> loss.}
+
+\item{unlabeled_pairs}{List of c(a, b).}
+
+\item{cross_encoder}{function(a, b) -> score.}
+
+\item{gold_pairs, gold_labels}{Optional.}
+
+\item{tokens}{Token vector.}
+
+\item{delete_ratio}{Deletion rate.}
+
+\item{seed}{LCG seed.}
+
+\item{reconstruction_logprob}{Optional
 per-ORIGINAL-token log-probs.}
 }
 \description{

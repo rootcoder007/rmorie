@@ -11,7 +11,9 @@ morie_geron_vilbert(image, text, d_model = 8, seed = 0)
 
 \item{text}{Token features (n_tokens, d_t), or 1-D vector of 0-based token ids.}
 
-\item{d_model}{Shared co-attention width. @param seed LCG seed.}
+\item{d_model}{Shared co-attention width.}
+
+\item{seed}{LCG seed.}
 }
 \value{
 list with image_out, text_out, attention_v2t, attention_t2v, pooled,

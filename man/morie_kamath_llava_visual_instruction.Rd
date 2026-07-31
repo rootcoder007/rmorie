@@ -15,13 +15,19 @@ morie_kamath_llava_visual_instruction(
 )
 }
 \arguments{
-\item{image}{Image. @param W Projection (d, d_v).}
+\item{image}{Image.}
+
+\item{W}{Projection (d, d_v).}
 
 \item{visual_encoder}{Function image -> (n_patches, d_v).}
 
-\item{text_tokens}{Text embedding rows. @param lm_head Optional head.}
+\item{text_tokens}{Text embedding rows.}
 
-\item{targets}{Optional target ids. @param ignore_index Ignored id.}
+\item{lm_head}{Optional head.}
+
+\item{targets}{Optional target ids.}
+
+\item{ignore_index}{Ignored id.}
 }
 \value{
 List with \code{visual_tokens}, \code{inputs}, optionally \code{loss}.

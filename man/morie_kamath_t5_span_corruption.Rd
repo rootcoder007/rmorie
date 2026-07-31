@@ -13,9 +13,13 @@ morie_kamath_t5_span_corruption(
 )
 }
 \arguments{
-\item{tokens}{Token vector. @param mean_span_len Mean span length.}
+\item{tokens}{Token vector.}
 
-\item{corruption_rate}{Fraction masked. @param seed LCG seed.}
+\item{mean_span_len}{Mean span length.}
+
+\item{corruption_rate}{Fraction masked.}
+
+\item{seed}{LCG seed.}
 
 \item{sentinel}{Sentinel template containing \verb{\%d}-style \code{{}}.}
 }

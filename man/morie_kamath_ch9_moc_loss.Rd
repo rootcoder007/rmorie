@@ -7,9 +7,15 @@
 morie_kamath_ch9_moc_loss(theta, w, v, g_theta, labels = NULL)
 }
 \arguments{
-\item{theta}{Optional model. @param w Fallback labels. @param v Regions.}
+\item{theta}{Optional model.}
 
-\item{g_theta}{Class distributions or a function of v. @param labels Truth.}
+\item{w}{Fallback labels.}
+
+\item{v}{Regions.}
+
+\item{g_theta}{Class distributions or a function of v.}
+
+\item{labels}{Truth.}
 }
 \value{
 List with \code{estimate}, \code{per_region}, \code{true_class_probability}.

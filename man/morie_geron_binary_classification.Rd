@@ -9,7 +9,9 @@ morie_geron_binary_classification(X, theta, threshold = 0.5, y_true = NULL)
 \arguments{
 \item{X}{Design matrix (bring your own intercept column).}
 
-\item{theta}{Coefficients. @param threshold Cut in [0, 1].}
+\item{theta}{Coefficients.}
+
+\item{threshold}{Cut in [0, 1].}
 
 \item{y_true}{Optional 0/1 labels for the confusion summary.}
 }

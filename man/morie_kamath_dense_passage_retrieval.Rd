@@ -7,7 +7,11 @@
 morie_kamath_dense_passage_retrieval(q_embed, p_embeds, k)
 }
 \arguments{
-\item{q_embed}{Query embedding. @param p_embeds Passage rows. @param k Depth.}
+\item{q_embed}{Query embedding.}
+
+\item{p_embeds}{Passage rows.}
+
+\item{k}{Depth.}
 }
 \value{
 List with \code{estimate}, \code{top_k_indices}, \code{top_k_scores}, \code{scores}.

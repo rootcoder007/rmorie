@@ -16,11 +16,15 @@ morie_geron_cross_validation_score(
 )
 }
 \arguments{
-\item{X, y}{Data. @param K Folds, 2 <= K <= m.}
+\item{X, y}{Data.}
+
+\item{K}{Folds, 2 <= K <= m.}
 
 \item{fit, predict, score}{Optional callables.}
 
-\item{shuffle}{Must be FALSE. @param random_state Ignored.}
+\item{shuffle}{Must be FALSE.}
+
+\item{random_state}{Ignored.}
 }
 \value{
 List with \code{cv_score}, \code{fold_scores}, \code{fold_sizes}, \code{se},

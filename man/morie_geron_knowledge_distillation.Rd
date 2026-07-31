@@ -14,9 +14,15 @@ morie_geron_knowledge_distillation(
 )
 }
 \arguments{
-\item{teacher, student}{Logit matrices (m,C). @param X Unused placeholder (callables not supported here).}
+\item{teacher, student}{Logit matrices (m,C).}
 
-\item{y}{Optional integer hard labels (0-based). @param T Temperature. @param alpha Hard-label weight.}
+\item{X}{Unused placeholder (callables not supported here).}
+
+\item{y}{Optional integer hard labels (0-based).}
+
+\item{T}{Temperature.}
+
+\item{alpha}{Hard-label weight.}
 }
 \value{
 List with loss, ce_loss, kl_loss, teacher_probs, student_probs, agreement, estimate, n, method.

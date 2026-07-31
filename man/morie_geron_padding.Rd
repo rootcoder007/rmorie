@@ -13,9 +13,13 @@ morie_geron_padding(
 )
 }
 \arguments{
-\item{x}{Array (h, w), (h, w, c) or (n, h, w, c). @param pad_h,pad_w Explicit padding.}
+\item{x}{Array (h, w), (h, w, c) or (n, h, w, c).}
 
-\item{kernel_size}{Compute same-padding from a kernel instead. @param stride Output-size bookkeeping.}
+\item{pad_h, pad_w}{Explicit padding.}
+
+\item{kernel_size}{Compute same-padding from a kernel instead.}
+
+\item{stride}{Output-size bookkeeping.}
 }
 \description{
 Zero-padding for valid/same convolutions (Geron Ch 12, hmpd)

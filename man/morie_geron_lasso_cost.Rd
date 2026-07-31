@@ -17,5 +17,5 @@ morie_geron_lasso_cost(X, y, theta, alpha, penalize_intercept = FALSE)
 List with \code{cost}, \code{mse}, \code{l1_penalty}, \code{l1_norm}, \code{n_zero}.
 }
 \description{
-J = MSE + alpha * sum_{i>=1} |theta_i|, on the shared MSE core.
+J = MSE + alpha * \verb{sum_\{i>=1\}} |theta_i|, on the shared MSE core.
 }

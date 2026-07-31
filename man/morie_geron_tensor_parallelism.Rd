@@ -14,7 +14,9 @@ morie_geron_tensor_parallelism(
 \arguments{
 \item{model}{A weight matrix or list of weight matrices.}
 
-\item{n_devices}{Number of devices. @param x Optional input activations; default ones.}
+\item{n_devices}{Number of devices.}
+
+\item{x}{Optional input activations; default ones.}
 
 \item{scheme}{"column" or "row".}
 }

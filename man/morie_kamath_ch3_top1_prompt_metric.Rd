@@ -7,7 +7,9 @@
 morie_kamath_ch3_top1_prompt_metric(R, t, P_LM)
 }
 \arguments{
-\item{R}{List of \code{list(x, y)} pairs. @param t Template.}
+\item{R}{List of \code{list(x, y)} pairs.}
+
+\item{t}{Template.}
 
 \item{P_LM}{Function (x, t) -> named probability vector.}
 }

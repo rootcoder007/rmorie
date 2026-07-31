@@ -13,11 +13,15 @@ morie_kamath_hyde_hypothetical_doc(
 )
 }
 \arguments{
-\item{query}{Query. @param model Function query -> hypothetical text.}
+\item{query}{Query.}
+
+\item{model}{Function query -> hypothetical text.}
 
 \item{embeddings}{Named list or matrix of document embeddings.}
 
-\item{embed}{Optional text embedder. @param k Depth.}
+\item{embed}{Optional text embedder.}
+
+\item{k}{Depth.}
 }
 \value{
 List with \code{retrieved}, \code{similarities}, \code{hypothetical}, \code{estimate}.

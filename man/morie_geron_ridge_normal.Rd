@@ -7,7 +7,9 @@
 morie_geron_ridge_normal(X, y, alpha, intercept_index = 0)
 }
 \arguments{
-\item{X, y}{Design and targets. @param alpha Non-negative penalty.}
+\item{X, y}{Design and targets.}
+
+\item{alpha}{Non-negative penalty.}
 
 \item{intercept_index}{0-based unpenalised index, or NULL.}
 }

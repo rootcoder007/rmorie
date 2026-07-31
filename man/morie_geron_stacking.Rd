@@ -7,7 +7,9 @@
 morie_geron_stacking(X, y, base_models, meta_model = NULL, k_folds = 3)
 }
 \arguments{
-\item{X}{Design matrix (n, d). @param y Targets, length n.}
+\item{X}{Design matrix (n, d).}
+
+\item{y}{Targets, length n.}
 
 \item{base_models}{List of function(Xtr, ytr, Xte) -> predictions.}
 

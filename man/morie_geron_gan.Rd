@@ -16,7 +16,11 @@ morie_geron_gan(
 )
 }
 \arguments{
-\item{X}{Real data (m, d). @param G Optional (W_g, b_g). @param D Optional (w_d, b_d).}
+\item{X}{Real data (m, d).}
+
+\item{G}{Optional (W_g, b_g).}
+
+\item{D}{Optional (w_d, b_d).}
 
 \item{z_dim, epochs, lr, seed, non_saturating}{Config.}
 }

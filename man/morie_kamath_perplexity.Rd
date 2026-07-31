@@ -7,7 +7,9 @@
 morie_kamath_perplexity(log_probs, base = "e")
 }
 \arguments{
-\item{log_probs}{Log-probabilities (<= 0). @param base "e" or "2".}
+\item{log_probs}{Log-probabilities (<= 0).}
+
+\item{base}{"e" or "2".}
 }
 \value{
 List with \code{estimate}, \code{mean_nll}, \code{bits_per_token}.

@@ -7,7 +7,11 @@
 morie_kamath_ch4_loftq_objective(W, Q, A, B)
 }
 \arguments{
-\item{W}{Target weight. @param Q Quantised weight. @param A,B Factors.}
+\item{W}{Target weight.}
+
+\item{Q}{Quantised weight.}
+
+\item{A, B}{Factors.}
 }
 \value{
 List with \code{estimate}, \code{residual}, \code{quantisation_error}, \code{r}.

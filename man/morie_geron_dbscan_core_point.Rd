@@ -7,7 +7,9 @@
 morie_geron_dbscan_core_point(X, eps, min_samples, metric = "euclidean")
 }
 \arguments{
-\item{X}{Points (m, d). @param eps Positive radius.}
+\item{X}{Points (m, d).}
+
+\item{eps}{Positive radius.}
 
 \item{min_samples}{Density threshold, >= 1.}
 

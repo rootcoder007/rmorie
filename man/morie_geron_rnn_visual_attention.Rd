@@ -7,7 +7,9 @@
 morie_geron_rnn_visual_attention(features, h, W, U, v)
 }
 \arguments{
-\item{features}{Spatial map (H, W, D) or (N, D). @param h Decoder state.}
+\item{features}{Spatial map (H, W, D) or (N, D).}
+
+\item{h}{Decoder state.}
 
 \item{W, U, v}{Attention parameters.}
 }

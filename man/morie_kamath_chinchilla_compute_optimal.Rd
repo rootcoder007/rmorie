@@ -13,10 +13,13 @@ morie_kamath_chinchilla_compute_optimal(
 )
 }
 \arguments{
-\item{compute_budget}{Total FLOPs. @param alpha,beta Exponents summing to 1.}
+\item{compute_budget}{Total FLOPs.}
 
-\item{tokens_per_param}{Tokens per parameter. @param flops_per_token_param
-FLOPs constant.}
+\item{alpha, beta}{Exponents summing to 1.}
+
+\item{tokens_per_param}{Tokens per parameter.}
+
+\item{flops_per_token_param}{FLOPs constant.}
 }
 \value{
 List with \code{estimate}, \code{N_opt}, \code{D_opt}, \code{compute_check}.

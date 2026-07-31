@@ -23,7 +23,9 @@ morie_geron_blip_itm_itc(
 
 \item{caption_targets}{Matrix (B, L) of 0-based ids; negatives are padding.}
 
-\item{tau}{Temperature. @param lam_itc,lam_itm,lam_lm Task weights.}
+\item{tau}{Temperature.}
+
+\item{lam_itc, lam_itm, lam_lm}{Task weights.}
 
 \item{normalize}{Cosine similarity.}
 }

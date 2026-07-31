@@ -9,7 +9,9 @@ morie_geron_zero_shot(model, prompt, labels = NULL, null_prompt = NULL)
 \arguments{
 \item{model}{Function(prompt) or function(prompt, labels) -> named list/numeric scores.}
 
-\item{prompt}{Passed to model unchanged. @param labels Optional candidate labels (>=2).}
+\item{prompt}{Passed to model unchanged.}
+
+\item{labels}{Optional candidate labels (>=2).}
 
 \item{null_prompt}{Optional content-free prompt for calibration.}
 }

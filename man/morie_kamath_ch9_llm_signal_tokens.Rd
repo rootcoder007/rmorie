@@ -7,7 +7,11 @@
 morie_kamath_ch9_llm_signal_tokens(P_X, F_T, llm = NULL)
 }
 \arguments{
-\item{P_X}{Prompt features. @param F_T Text features. @param llm Model.}
+\item{P_X}{Prompt features.}
+
+\item{F_T}{Text features.}
+
+\item{llm}{Model.}
 }
 \value{
 List with \code{estimate} (signal-token count), \code{text}, \code{signal_tokens}.

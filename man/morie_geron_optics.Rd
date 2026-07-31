@@ -7,9 +7,13 @@
 morie_geron_optics(X, min_samples = 5, max_eps = Inf, eps_cluster = NULL)
 }
 \arguments{
-\item{X}{Data (n, d). @param min_samples Core-distance neighbourhood size.}
+\item{X}{Data (n, d).}
 
-\item{max_eps}{Largest radius considered. @param eps_cluster Cut for extracting labels.}
+\item{min_samples}{Core-distance neighbourhood size.}
+
+\item{max_eps}{Largest radius considered.}
+
+\item{eps_cluster}{Cut for extracting labels.}
 }
 \description{
 OPTICS: reachability ordering and cluster extraction (Geron Ch 8, hmopt)

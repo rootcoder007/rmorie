@@ -7,7 +7,11 @@
 morie_geron_mlp(X, weights, biases, activations)
 }
 \arguments{
-\item{X}{Input batch. @param weights,biases Per-layer parameters. @param activations Per-layer activation names or functions.}
+\item{X}{Input batch.}
+
+\item{weights, biases}{Per-layer parameters.}
+
+\item{activations}{Per-layer activation names or functions.}
 }
 \value{
 List with output, activations, pre_activations, n_parameters, estimate, n, method.

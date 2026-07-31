@@ -7,7 +7,9 @@
 morie_kamath_rwkv_time_mix(k, v, w, u = 0)
 }
 \arguments{
-\item{k, v}{Key and value sequences. @param w Decay (non-negative).}
+\item{k, v}{Key and value sequences.}
+
+\item{w}{Decay (non-negative).}
 
 \item{u}{Current-token bonus.}
 }

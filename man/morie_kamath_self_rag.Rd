@@ -7,7 +7,9 @@
 morie_kamath_self_rag(context, reflection_model, question = NULL)
 }
 \arguments{
-\item{context}{Retrieved context. @param reflection_model Token emitter.}
+\item{context}{Retrieved context.}
+
+\item{reflection_model}{Token emitter.}
 
 \item{question}{Optional question.}
 }

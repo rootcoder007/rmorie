@@ -7,7 +7,9 @@
 morie_geron_mps_acceleration(tensor, dtype = NULL)
 }
 \arguments{
-\item{tensor}{Data. @param dtype Optional forced target dtype name.}
+\item{tensor}{Data.}
+
+\item{dtype}{Optional forced target dtype name.}
 }
 \description{
 Apple MPS placement plan: dtype demotion cost, no Metal call made (Geron Ch 10, hmpmps)

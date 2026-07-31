@@ -7,7 +7,9 @@
 morie_geron_bias_variance_tradeoff(preds, y, f_true = NULL)
 }
 \arguments{
-\item{preds}{Matrix (n_models, n_points). @param y Targets.}
+\item{preds}{Matrix (n_models, n_points).}
+
+\item{y}{Targets.}
 
 \item{f_true}{Optional noise-free values.}
 }

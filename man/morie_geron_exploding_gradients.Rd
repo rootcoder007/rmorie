@@ -9,7 +9,9 @@ morie_geron_exploding_gradients(grads, tol = 2, clip_norm = NULL)
 \arguments{
 \item{grads}{List of >= 2 per-layer gradients, input side first.}
 
-\item{tol}{Amplification threshold (> 1). @param clip_norm Optional clipping threshold (> 0).}
+\item{tol}{Amplification threshold (> 1).}
+
+\item{clip_norm}{Optional clipping threshold (> 0).}
 }
 \value{
 list with norms, ratios, geometric_ratio, amplification, exploding,

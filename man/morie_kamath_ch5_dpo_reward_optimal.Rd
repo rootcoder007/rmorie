@@ -9,7 +9,9 @@ morie_kamath_ch5_dpo_reward_optimal(pi_star, pi_ref, beta, Z = NULL)
 \arguments{
 \item{pi_star, pi_ref}{Distributions with entries in (0, 1].}
 
-\item{beta}{Strictly positive. @param Z Partition function; default 1.}
+\item{beta}{Strictly positive.}
+
+\item{Z}{Partition function; default 1.}
 }
 \value{
 List with \code{r}, \code{log_ratio}, \code{offset}.

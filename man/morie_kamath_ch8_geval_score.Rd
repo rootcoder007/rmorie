@@ -7,7 +7,9 @@
 morie_kamath_ch8_geval_score(s_i, p)
 }
 \arguments{
-\item{s_i}{Rubric score points. @param p Their probabilities.}
+\item{s_i}{Rubric score points.}
+
+\item{p}{Their probabilities.}
 }
 \value{
 List with \code{estimate}, \code{scores}, \code{probabilities}.

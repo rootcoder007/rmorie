@@ -7,7 +7,9 @@
 morie_kamath_ch3_t5_template_obj(D_train, T, T5)
 }
 \arguments{
-\item{D_train}{List of \code{list(x_in, y)} pairs. @param T Template
+\item{D_train}{List of \code{list(x_in, y)} pairs.}
+
+\item{T}{Template
 (function of (x_in, y) or a sprintf-free string with \code{{x}}/\code{{y}}).}
 
 \item{T5}{Function (T, filled) -> probability in (0, 1].}

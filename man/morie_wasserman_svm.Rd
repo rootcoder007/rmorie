@@ -9,7 +9,7 @@ morie_wasserman_svm(X, y, C = 1e+06, max_iter = 1000L, tol = 1e-12)
 \arguments{
 \item{X}{Feature matrix.}
 
-\item{y}{Labels in {-1, +1}, both classes present.}
+\item{y}{Labels \verb{in \{-1, +1\}}, both classes present.}
 
 \item{C}{Box constraint.}
 

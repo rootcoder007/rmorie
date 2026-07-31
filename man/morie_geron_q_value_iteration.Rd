@@ -14,9 +14,13 @@ morie_geron_q_value_iteration(
 )
 }
 \arguments{
-\item{Q}{Initial table (S, A). @param transitions Array (S, A, S).}
+\item{Q}{Initial table (S, A).}
 
-\item{rewards}{Array (S, A, S) or matrix (S, A). @param gamma Discount.}
+\item{transitions}{Array (S, A, S).}
+
+\item{rewards}{Array (S, A, S) or matrix (S, A).}
+
+\item{gamma}{Discount.}
 
 \item{max_iter, tol}{Stopping rule.}
 }

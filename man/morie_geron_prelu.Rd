@@ -7,7 +7,9 @@
 morie_geron_prelu(z, alpha = 0.25, upstream = NULL)
 }
 \arguments{
-\item{z}{Pre-activations, channels on last axis. @param alpha Scalar or per-channel slope.}
+\item{z}{Pre-activations, channels on last axis.}
+
+\item{alpha}{Scalar or per-channel slope.}
 
 \item{upstream}{Optional dL/da from the next layer.}
 }

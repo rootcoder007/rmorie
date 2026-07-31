@@ -7,7 +7,9 @@
 morie_kamath_ch6_gedi_combined_loss(L_g, L_d, lam)
 }
 \arguments{
-\item{L_g, L_d}{Component losses. @param lam Mixing weight in [0, 1].}
+\item{L_g, L_d}{Component losses.}
+
+\item{lam}{Mixing weight in [0, 1].}
 }
 \value{
 List with \code{estimate}, \code{contributions}.

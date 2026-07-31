@@ -13,9 +13,13 @@ morie_geron_online_learning(
 )
 }
 \arguments{
-\item{X_stream, y_stream}{Stream of rows/targets. @param eta Base learning rate.}
+\item{X_stream, y_stream}{Stream of rows/targets.}
 
-\item{theta}{Optional start (default zeros). @param decay Robbins-Monro decay.}
+\item{eta}{Base learning rate.}
+
+\item{theta}{Optional start (default zeros).}
+
+\item{decay}{Robbins-Monro decay.}
 }
 \description{
 Online (streaming) learning: sequential SGD, prequential loss (Geron Ch 1, hmonl)

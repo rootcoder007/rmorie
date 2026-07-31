@@ -10,9 +10,15 @@ morie_kamath_swiglu_activation(x, W, V, b = NULL, c = NULL)
 morie_kamath_swish(z, beta = 1)
 }
 \arguments{
-\item{x}{Input. @param W,V Equal-shaped projections. @param b,c Biases.}
+\item{x}{Input.}
 
-\item{z}{Pre-activation. @param beta Swish sharpness.}
+\item{W, V}{Equal-shaped projections.}
+
+\item{b, c}{Biases.}
+
+\item{z}{Pre-activation.}
+
+\item{beta}{Swish sharpness.}
 }
 \value{
 List with \code{output}, \code{gate}, \code{linear}.

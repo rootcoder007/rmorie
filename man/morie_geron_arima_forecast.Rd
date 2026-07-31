@@ -7,7 +7,11 @@
 morie_geron_arima_forecast(y, phi, theta, d = 0)
 }
 \arguments{
-\item{y}{Observed series. @param phi AR coefficients. @param theta MA coefficients.}
+\item{y}{Observed series.}
+
+\item{phi}{AR coefficients.}
+
+\item{theta}{MA coefficients.}
 
 \item{d}{Differencing order.}
 }

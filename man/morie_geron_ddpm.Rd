@@ -14,7 +14,11 @@ morie_geron_ddpm(
 )
 }
 \arguments{
-\item{X}{Training data (m, d). @param T Diffusion steps. @param beta_schedule "linear"/"cosine"/vector.}
+\item{X}{Training data (m, d).}
+
+\item{T}{Diffusion steps.}
+
+\item{beta_schedule}{"linear"/"cosine"/vector.}
 
 \item{epochs, lr, seed}{Training config.}
 }

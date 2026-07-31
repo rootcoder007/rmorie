@@ -7,9 +7,13 @@
 morie_geron_one_shot(model, example, query, verbalizer = NULL)
 }
 \arguments{
-\item{model}{Function \code{model(prompt) -> prediction}. @param example \verb{(x1, y1)} pair or list.}
+\item{model}{Function \code{model(prompt) -> prediction}.}
 
-\item{query}{Input to label. @param verbalizer Optional \code{verbalizer(label) -> str}.}
+\item{example}{\verb{(x1, y1)} pair or list.}
+
+\item{query}{Input to label.}
+
+\item{verbalizer}{Optional \code{verbalizer(label) -> str}.}
 }
 \description{
 One-shot in-context prompting: assemble prompt, call model (Geron Ch 15, hmosf)

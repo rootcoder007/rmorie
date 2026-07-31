@@ -7,9 +7,13 @@
 morie_geron_simple_rnn(X, Wx, Wh, b = NULL, h0 = NULL)
 }
 \arguments{
-\item{X}{Sequence (T, n_inputs). @param Wx Input weights (n_inputs, n_units).}
+\item{X}{Sequence (T, n_inputs).}
 
-\item{Wh}{Recurrent weights (n_units, n_units). @param b Optional bias; default zeros.}
+\item{Wx}{Input weights (n_inputs, n_units).}
+
+\item{Wh}{Recurrent weights (n_units, n_units).}
+
+\item{b}{Optional bias; default zeros.}
 
 \item{h0}{Optional initial hidden state; default zeros.}
 }
@@ -17,5 +21,5 @@ morie_geron_simple_rnn(X, Wx, Wh, b = NULL, h0 = NULL)
 list with H, h_T, grads, jacobian_gain, n_units, estimate, n, method.
 }
 \description{
-h_t = tanh(W_x x_t + W_h h_{t-1} + b), unrolled step by step.
+h_t = tanh(W_x x_t + W_h \verb{h_\{t-1\}} + b), unrolled step by step.
 }

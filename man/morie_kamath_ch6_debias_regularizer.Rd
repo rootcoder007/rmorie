@@ -10,7 +10,9 @@ morie_kamath_ch6_debias_regularizer(A, E, lam)
 morie_kamath_ch6_gender_direction(A, E)
 }
 \arguments{
-\item{A}{List of two-element word pairs. @param E Embedding map/function.}
+\item{A}{List of two-element word pairs.}
+
+\item{E}{Embedding map/function.}
 
 \item{lam}{Non-negative weight.}
 }

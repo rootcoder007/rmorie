@@ -15,7 +15,9 @@ morie_geron_random_subspaces(
 )
 }
 \arguments{
-\item{X, y}{Data and targets. @param base_estimator Optional \code{base_estimator(X_sub, y) -> predict}.}
+\item{X, y}{Data and targets.}
+
+\item{base_estimator}{Optional \code{base_estimator(X_sub, y) -> predict}.}
 
 \item{n_estimators, max_features, seed, task}{Controls.}
 }

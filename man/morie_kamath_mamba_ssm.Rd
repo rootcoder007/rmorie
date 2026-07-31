@@ -7,12 +7,18 @@
 morie_kamath_mamba_ssm(x, A, B, C, delta)
 }
 \arguments{
-\item{x}{Input sequence. @param A State diagonal. @param B,C Per-step
-projections. @param delta Step sizes.}
+\item{x}{Input sequence.}
+
+\item{A}{State diagonal.}
+
+\item{B, C}{Per-step
+projections.}
+
+\item{delta}{Step sizes.}
 }
 \value{
 List with \code{y}, \code{states}, \code{A_bar}, \code{estimate}.
 }
 \description{
-h_t = exp(dt A) h_{t-1} + dt B x_t; y_t = C . h_t, with a DIAGONAL A.
+h_t = exp(dt A) \verb{h_\{t-1\}} + dt B x_t; y_t = C . h_t, with a DIAGONAL A.
 }

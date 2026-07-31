@@ -7,7 +7,11 @@
 morie_geron_image_segmentation(image, n_clusters, seed = 0)
 }
 \arguments{
-\item{image}{Array (h,w,c) or (h,w). @param n_clusters Segments. @param seed Seed for k-means.}
+\item{image}{Array (h,w,c) or (h,w).}
+
+\item{n_clusters}{Segments.}
+
+\item{seed}{Seed for k-means.}
 }
 \value{
 List with segmented, labels, palette, inertia, compression_ratio, estimate, n, method.

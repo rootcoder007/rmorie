@@ -7,7 +7,11 @@
 morie_kamath_rms_norm(x, g = NULL, eps = 1e-06)
 }
 \arguments{
-\item{x}{Input rows. @param g Optional gain. @param eps Epsilon.}
+\item{x}{Input rows.}
+
+\item{g}{Optional gain.}
+
+\item{eps}{Epsilon.}
 }
 \value{
 List with \code{y}, \code{tensor}, \code{rms}.

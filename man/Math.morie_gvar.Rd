@@ -7,7 +7,9 @@
 \method{Math}{morie_gvar}(x, ...)
 }
 \arguments{
-\item{x}{A tape node. @param ... Ignored.}
+\item{x}{A tape node.}
+
+\item{...}{Ignored.}
 }
 \value{
 A tape node.

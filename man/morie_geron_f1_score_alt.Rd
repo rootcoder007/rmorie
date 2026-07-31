@@ -7,7 +7,9 @@
 morie_geron_f1_score_alt(y_true, y_pred, pos_label = 1, average = "binary")
 }
 \arguments{
-\item{y_true, y_pred}{Labels. @param pos_label Positive class for average="binary".}
+\item{y_true, y_pred}{Labels.}
+
+\item{pos_label}{Positive class for average="binary".}
 
 \item{average}{"binary"/"macro"/"micro"/NULL.}
 }

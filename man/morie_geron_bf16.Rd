@@ -7,7 +7,9 @@
 morie_geron_bf16(x, rounding = "nearest_even")
 }
 \arguments{
-\item{x}{Values to quantise. @param rounding "nearest_even" or "truncate".}
+\item{x}{Values to quantise.}
+
+\item{rounding}{"nearest_even" or "truncate".}
 }
 \value{
 List with \code{values}, \code{bits} (16-character strings), \code{abs_error},

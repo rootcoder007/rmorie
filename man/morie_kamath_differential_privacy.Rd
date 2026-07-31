@@ -7,7 +7,9 @@
 morie_kamath_differential_privacy(eps, delta, p_D = NULL, p_Dp = NULL)
 }
 \arguments{
-\item{eps}{Privacy loss. @param delta Failure probability.}
+\item{eps}{Privacy loss.}
+
+\item{delta}{Failure probability.}
 
 \item{p_D, p_Dp}{Event probabilities on the neighbouring datasets.}
 }

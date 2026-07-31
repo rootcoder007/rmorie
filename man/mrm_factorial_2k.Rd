@@ -26,7 +26,7 @@ Daniel's method (which lets the user separate active effects from
 a null half-normal line on the same axes).
 }
 \examples{
-# 2^3 full factorial: 8 runs, factors A, B, C in {-1, +1}.
+# 2^3 full factorial: 8 runs, factors A, B, C `in {-1, +1}`.
 set.seed(2026)
 lvl <- c(-1, 1)
 df <- expand.grid(A = lvl, B = lvl, C = lvl)

@@ -14,9 +14,15 @@ morie_geron_classification_mlp(
 )
 }
 \arguments{
-\item{X, y}{Design and labels. @param hidden_sizes Integer vector.}
+\item{X, y}{Design and labels.}
 
-\item{epochs}{Training epochs. @param lr Learning rate. @param seed LCG seed.}
+\item{hidden_sizes}{Integer vector.}
+
+\item{epochs}{Training epochs.}
+
+\item{lr}{Learning rate.}
+
+\item{seed}{LCG seed.}
 }
 \value{
 List with \code{weights}, \code{biases}, \code{loss_history}, \code{final_loss},

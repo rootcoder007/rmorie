@@ -7,7 +7,9 @@
 morie_geron_nmf(X, n_components = 2, max_iter = 400, tol = 1e-06, seed = 42)
 }
 \arguments{
-\item{X}{Non-negative matrix (m, p). @param n_components Inner rank k.}
+\item{X}{Non-negative matrix (m, p).}
+
+\item{n_components}{Inner rank k.}
 
 \item{max_iter, tol, seed}{Fit controls.}
 }

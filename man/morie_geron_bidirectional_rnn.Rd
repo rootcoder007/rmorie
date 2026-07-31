@@ -18,7 +18,9 @@ morie_geron_bidirectional_rnn(
 )
 }
 \arguments{
-\item{X}{Sequence (T, d). @param Wx_f,Wh_f,Wx_b,Wh_b Weight matrices.}
+\item{X}{Sequence (T, d).}
+
+\item{Wx_f, Wh_f, Wx_b, Wh_b}{Weight matrices.}
 
 \item{b_f, b_b, h0_f, h0_b}{Optional biases and initial states.}
 

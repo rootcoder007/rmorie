@@ -7,7 +7,9 @@
 morie_geron_standardization(X, ddof = 0)
 }
 \arguments{
-\item{X}{Numeric vector or matrix. @param ddof Degrees of freedom.}
+\item{X}{Numeric vector or matrix.}
+
+\item{ddof}{Degrees of freedom.}
 }
 \value{
 List with \code{X_std}, \code{Z}, \code{mean}, \code{scale}, \code{ddof},

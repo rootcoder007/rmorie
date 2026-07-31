@@ -14,9 +14,15 @@ morie_geron_gpt1(
 )
 }
 \arguments{
-\item{X}{Token ids. @param n_layers,n_heads Optional overrides. @param logits Optional (T, V) logits.}
+\item{X}{Token ids.}
 
-\item{targets}{Optional next-token targets (default shifted X). @param ... Other decoder_only args.}
+\item{n_layers, n_heads}{Optional overrides.}
+
+\item{logits}{Optional (T, V) logits.}
+
+\item{targets}{Optional next-token targets (default shifted X).}
+
+\item{...}{Other decoder_only args.}
 }
 \value{
 List with \code{total_params}, \code{config}, \code{loss}, \code{perplexity}, \code{n_predicted}.

@@ -7,7 +7,9 @@
 morie_geron_backpropagation(X, y, weights, activations, loss = "mse")
 }
 \arguments{
-\item{X}{Inputs (n, d0). @param y Targets or class labels.}
+\item{X}{Inputs (n, d0).}
+
+\item{y}{Targets or class labels.}
 
 \item{weights}{List of matrices or list(W, b) pairs.}
 
@@ -19,7 +21,7 @@ morie_geron_backpropagation(X, y, weights, activations, loss = "mse")
 List with \code{grads_W}, \code{grads_b}, \code{deltas}, \code{loss}, \code{output}.
 }
 \description{
-delta_L = grad_a L * phi'(z_L); delta_l = (W_{l+1} delta_{l+1}) phi'(z_l).
+delta_L = grad_a L * phi'(z_L); delta_l = \verb{(W_\{l+1\} delta_\{l+1\})} phi'(z_l).
 \code{weights} entries are either a matrix W or a list(W, b). Class labels
 for loss = "ce" are 0-based, as in Python.
 }

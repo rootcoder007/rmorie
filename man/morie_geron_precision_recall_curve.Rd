@@ -16,6 +16,6 @@ List with \code{precision}, \code{recall}, \code{thresholds}, \code{f1},
 \code{average_precision}, \code{best_f1}, \code{best_threshold}.
 }
 \description{
-Precision and recall at each distinct score; AP = sum (R_k - R_{k-1})
+Precision and recall at each distinct score; AP = sum (R_k - \verb{R_\{k-1\}})
 P_k, with no interpolation. \code{best_f1} picks the first maximum.
 }

@@ -9,7 +9,9 @@ morie_geron_word_embeddings(vocab, d = 8, E = NULL, seed = 0)
 \arguments{
 \item{vocab}{Character vector of distinct tokens.}
 
-\item{d}{Embedding width (ignored if E supplied). @param E Optional pretrained (V,d) matrix.}
+\item{d}{Embedding width (ignored if E supplied).}
+
+\item{E}{Optional pretrained (V,d) matrix.}
 
 \item{seed}{LCG seed.}
 }

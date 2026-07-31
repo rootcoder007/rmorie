@@ -7,7 +7,11 @@
 morie_geron_int8_quant(x, n_bits = 8, symmetric = TRUE)
 }
 \arguments{
-\item{x}{Tensor. @param n_bits Bit width (2..16). @param symmetric Symmetric or asymmetric scheme.}
+\item{x}{Tensor.}
+
+\item{n_bits}{Bit width (2..16).}
+
+\item{symmetric}{Symmetric or asymmetric scheme.}
 }
 \value{
 List with q, dequantized, scale, zero_point, max_error, rel_error, compression, estimate, n, method.

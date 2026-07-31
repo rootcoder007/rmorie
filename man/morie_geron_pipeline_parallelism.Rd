@@ -9,7 +9,9 @@ morie_geron_pipeline_parallelism(model, n_stages, n_microbatches = 4)
 \arguments{
 \item{model}{Sequence of layer sizes (or weight arrays; lengths are used).}
 
-\item{n_stages}{Pipeline stages. @param n_microbatches Microbatches per batch.}
+\item{n_stages}{Pipeline stages.}
+
+\item{n_microbatches}{Microbatches per batch.}
 }
 \description{
 Pipeline parallelism: contiguous stage partition plus a microbatch schedule (Geron Ch 17, hmppp)

@@ -7,9 +7,13 @@
 morie_kamath_vera_adapter(W0, A_frozen, B_frozen, lam_b, lam_d, x)
 }
 \arguments{
-\item{W0}{Frozen weight. @param A_frozen,B_frozen Shared factors.}
+\item{W0}{Frozen weight.}
 
-\item{lam_b, lam_d}{Trainable diagonals. @param x Input.}
+\item{A_frozen, B_frozen}{Shared factors.}
+
+\item{lam_b, lam_d}{Trainable diagonals.}
+
+\item{x}{Input.}
 }
 \value{
 List with \code{h}, \code{delta}, \code{rank}, \code{n_trainable}.

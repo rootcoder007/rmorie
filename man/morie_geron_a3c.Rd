@@ -20,11 +20,19 @@ morie_geron_a3c(
 \arguments{
 \item{env}{List with reset/step, or a function(worker_id) returning one.}
 
-\item{actor, critic}{Initial parameters. @param n_workers Workers.}
+\item{actor, critic}{Initial parameters.}
 
-\item{lr, critic_lr}{Step sizes. @param epochs Episodes per worker.}
+\item{n_workers}{Workers.}
 
-\item{gamma}{Discount. @param max_steps Episode cap. @param seed Base seed.}
+\item{lr, critic_lr}{Step sizes.}
+
+\item{epochs}{Episodes per worker.}
+
+\item{gamma}{Discount.}
+
+\item{max_steps}{Episode cap.}
+
+\item{seed}{Base seed.}
 }
 \value{
 List with \code{actor}, \code{critic}, \code{returns}, \code{worker_returns},

@@ -7,7 +7,9 @@
 morie_geron_one_vs_rest_hm(X, y, base_estimator = NULL, X_new = NULL)
 }
 \arguments{
-\item{X, y}{Data and class labels. @param base_estimator Optional \verb{base_estimator(X, yb) -> score fn}.}
+\item{X, y}{Data and class labels.}
+
+\item{base_estimator}{Optional \verb{base_estimator(X, yb) -> score fn}.}
 
 \item{X_new}{Optional rows to classify.}
 }

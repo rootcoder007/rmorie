@@ -17,7 +17,9 @@ morie_geron_contrastive_infonce(
 
 \item{negatives}{Matrix (N, d) shared, or 3-D array (B, N, d).}
 
-\item{tau}{Positive temperature. @param normalize Cosine similarity.}
+\item{tau}{Positive temperature.}
+
+\item{normalize}{Cosine similarity.}
 }
 \value{
 List with \code{loss}, \code{per_anchor_loss}, \code{pos_sim}, \code{neg_sim},

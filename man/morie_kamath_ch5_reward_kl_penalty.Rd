@@ -7,9 +7,13 @@
 morie_kamath_ch5_reward_kl_penalty(x, y, pi_RL, pi_SFT, beta, r_theta = NULL)
 }
 \arguments{
-\item{x, y}{Prompt and response. @param pi_RL,pi_SFT Probabilities in (0, 1].}
+\item{x, y}{Prompt and response.}
 
-\item{beta}{Penalty weight. @param r_theta Reward or function (x, y).}
+\item{pi_RL, pi_SFT}{Probabilities in (0, 1].}
+
+\item{beta}{Penalty weight.}
+
+\item{r_theta}{Reward or function (x, y).}
 }
 \value{
 List with \code{estimate}, \code{penalised_reward}, \code{penalty}.

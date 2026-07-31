@@ -13,9 +13,15 @@ morie_kamath_moe_load_balance_loss(
 )
 }
 \arguments{
-\item{fractions}{Dispatch fractions. @param gate_means Mean router probs.}
+\item{fractions}{Dispatch fractions.}
 
-\item{N}{Expert count. @param alpha Weight. @param tol Sum tolerance.}
+\item{gate_means}{Mean router probs.}
+
+\item{N}{Expert count.}
+
+\item{alpha}{Weight.}
+
+\item{tol}{Sum tolerance.}
 }
 \value{
 List with \code{estimate}, \code{per_expert}, \code{imbalance_ratio}.

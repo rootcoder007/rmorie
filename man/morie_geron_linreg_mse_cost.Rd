@@ -7,7 +7,11 @@
 morie_geron_linreg_mse_cost(X, y, theta)
 }
 \arguments{
-\item{X}{Design matrix. @param y Targets. @param theta Coefficients.}
+\item{X}{Design matrix.}
+
+\item{y}{Targets.}
+
+\item{theta}{Coefficients.}
 }
 \value{
 List with \code{cost}, \code{mse}, \code{gradient}, \code{grad_norm},

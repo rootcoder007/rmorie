@@ -7,8 +7,12 @@
 morie_kamath_g_eval(x, y, rubric, model)
 }
 \arguments{
-\item{x, y}{Source and candidate. @param rubric Score points or a list
-carrying \code{scores}. @param model Judge returning one logit per point.}
+\item{x, y}{Source and candidate.}
+
+\item{rubric}{Score points or a list
+carrying \code{scores}.}
+
+\item{model}{Judge returning one logit per point.}
 }
 \value{
 List with \code{estimate}, \code{probabilities}, \code{score_points}.

@@ -7,7 +7,9 @@
 morie_kamath_ragas_context_relevance(context_sentences, relevance_labels)
 }
 \arguments{
-\item{context_sentences}{Retrieved sentences. @param relevance_labels 0/1.}
+\item{context_sentences}{Retrieved sentences.}
+
+\item{relevance_labels}{0/1.}
 }
 \value{
 List with \code{estimate}, \code{score}, \code{n_relevant}.

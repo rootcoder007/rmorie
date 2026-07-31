@@ -16,7 +16,9 @@ morie_geron_prioritized_replay(
 \arguments{
 \item{buffer}{TD errors, or a list of transitions with a \code{td_error} field.}
 
-\item{alpha, beta, eps}{Prioritisation, IS and floor controls. @param batch_size,seed Optional draw.}
+\item{alpha, beta, eps}{Prioritisation, IS and floor controls.}
+
+\item{batch_size, seed}{Optional draw.}
 }
 \description{
 Prioritized experience replay: TD-error priority sampling, IS weights (Geron Ch 19, hmper)

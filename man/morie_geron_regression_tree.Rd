@@ -7,7 +7,9 @@
 morie_geron_regression_tree(X, y, max_depth = 3, min_samples_leaf = 1)
 }
 \arguments{
-\item{X, y}{Data and targets. @param max_depth,min_samples_leaf Regularisation.}
+\item{X, y}{Data and targets.}
+
+\item{max_depth, min_samples_leaf}{Regularisation.}
 }
 \description{
 CART regression tree minimising per-leaf MSE (Geron Ch 5, hmrdt)

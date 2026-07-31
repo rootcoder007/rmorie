@@ -10,7 +10,9 @@ morie_kamath_ch5_bradley_terry_pref(r_star, y_w, y_l)
 morie_kamath_ch5_pref_sigmoid_form(r_star)
 }
 \arguments{
-\item{r_star}{Named reward vector or function. @param y_w,y_l Responses.}
+\item{r_star}{Named reward vector or function.}
+
+\item{y_w, y_l}{Responses.}
 }
 \value{
 List with \code{estimate}, \code{margin}, \code{r_w}, \code{r_l}.

@@ -7,9 +7,13 @@
 morie_kamath_ch5_rlhf_optimal_policy(pi_ref, r, beta, Z = NULL)
 }
 \arguments{
-\item{pi_ref}{Reference distribution. @param r Rewards.}
+\item{pi_ref}{Reference distribution.}
 
-\item{beta}{Strictly positive. @param Z Optional partition function.}
+\item{r}{Rewards.}
+
+\item{beta}{Strictly positive.}
+
+\item{Z}{Optional partition function.}
 }
 \value{
 List with \code{pi}, \code{Z}, \code{argmax} (0-based).

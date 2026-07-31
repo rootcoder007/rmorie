@@ -7,7 +7,9 @@
 morie_kamath_temperature_sampling(logits, T)
 }
 \arguments{
-\item{logits}{Logits. @param T Temperature.}
+\item{logits}{Logits.}
+
+\item{T}{Temperature.}
 }
 \value{
 List with \code{probabilities}, \code{entropy}, \code{max_entropy}, \code{argmax}.

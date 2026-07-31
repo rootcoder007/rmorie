@@ -7,7 +7,9 @@
 morie_geron_gmm_n_params(k, d, covariance_type = "full")
 }
 \arguments{
-\item{k}{Components. @param d Dimension.}
+\item{k}{Components.}
+
+\item{d}{Dimension.}
 
 \item{covariance_type}{One of "full", "diag", "spherical".}
 }

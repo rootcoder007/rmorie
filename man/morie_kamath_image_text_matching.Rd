@@ -7,7 +7,11 @@
 morie_kamath_image_text_matching(image_emb, text_emb, W, b, fuse = NULL)
 }
 \arguments{
-\item{image_emb, text_emb}{Embeddings. @param W Head weights. @param b Bias.}
+\item{image_emb, text_emb}{Embeddings.}
+
+\item{W}{Head weights.}
+
+\item{b}{Bias.}
 
 \item{fuse}{Optional fusion function.}
 }

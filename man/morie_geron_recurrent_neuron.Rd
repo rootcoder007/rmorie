@@ -2,13 +2,17 @@
 % Please edit documentation in R/geron_w4c_native.R
 \name{morie_geron_recurrent_neuron}
 \alias{morie_geron_recurrent_neuron}
-\title{Recurrent neuron step: h_t = phi(Wx x_t + Wh h_{t-1} + b) (Geron Ch 13, hmrnn)}
+\title{Recurrent neuron step: h_t = phi(Wx x_t + Wh \verb{h_\{t-1\}} + b) (Geron Ch 13, hmrnn)}
 \usage{
 morie_geron_recurrent_neuron(x_t, h_prev, Wx, Wh, b, activation = "tanh")
 }
 \arguments{
-\item{x_t, h_prev}{Input and previous state. @param Wx,Wh,b Weights. @param activation One of tanh/relu/sigmoid/identity.}
+\item{x_t, h_prev}{Input and previous state.}
+
+\item{Wx, Wh, b}{Weights.}
+
+\item{activation}{One of tanh/relu/sigmoid/identity.}
 }
 \description{
-Recurrent neuron step: h_t = phi(Wx x_t + Wh h_{t-1} + b) (Geron Ch 13, hmrnn)
+Recurrent neuron step: h_t = phi(Wx x_t + Wh \verb{h_\{t-1\}} + b) (Geron Ch 13, hmrnn)
 }

@@ -7,7 +7,9 @@
 morie_geron_auc_roc(y_true, scores, pos_label = 1)
 }
 \arguments{
-\item{y_true}{Binary labels. @param scores Decision scores.}
+\item{y_true}{Binary labels.}
+
+\item{scores}{Decision scores.}
 
 \item{pos_label}{Positive-class label.}
 }

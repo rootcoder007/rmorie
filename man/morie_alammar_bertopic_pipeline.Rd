@@ -7,8 +7,12 @@
 morie_alammar_bertopic_pipeline(documents, embeddings, min_cluster_size = 2)
 }
 \arguments{
-\item{documents}{List of token vectors. @param embeddings One row
-per document. @param min_cluster_size Cluster floor.}
+\item{documents}{List of token vectors.}
+
+\item{embeddings}{One row
+per document.}
+
+\item{min_cluster_size}{Cluster floor.}
 }
 \description{
 BERTopic pipeline: reduce, cluster, c-TF-IDF (Grootendorst 2022)

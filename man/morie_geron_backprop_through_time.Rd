@@ -13,7 +13,9 @@ morie_geron_backprop_through_time(
 )
 }
 \arguments{
-\item{loss_grads, hiddens}{Matrices (T, H). @param inputs Matrix (T, D).}
+\item{loss_grads, hiddens}{Matrices (T, H).}
+
+\item{inputs}{Matrix (T, D).}
 
 \item{W_h}{Optional recurrent weights (H, H).}
 
@@ -24,7 +26,7 @@ List with \code{grad_Wx}, \code{grad_Wh}, \code{grad_b}, \code{deltas},
 \code{per_step_delta_norm}, \code{vanishing_ratio}.
 }
 \description{
-delta_t = (dL/dh_t + W_h delta_{t+1}) * (1 - h_t^2); the shared weight
+delta_t = (dL/dh_t + W_h \verb{delta_\{t+1\}}) * (1 - h_t^2); the shared weight
 picks up a term at every step, which is where the vanishing gradient
 shows up in \code{per_step_delta_norm}.
 }

@@ -7,7 +7,11 @@
 morie_geron_layer_normalization_hmlntr(x, gamma = 1, beta = 0, eps = 1e-05)
 }
 \arguments{
-\item{x}{Matrix (m,d) or vector. @param gamma,beta Per-feature scale/shift. @param eps Variance floor.}
+\item{x}{Matrix (m,d) or vector.}
+
+\item{gamma, beta}{Per-feature scale/shift.}
+
+\item{eps}{Variance floor.}
 }
 \value{
 List with y, x_hat, mu, var, estimate, n, method.

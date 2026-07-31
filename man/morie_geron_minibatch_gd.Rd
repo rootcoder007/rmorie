@@ -9,7 +9,9 @@ morie_geron_minibatch_gd(X, y, theta, eta, b, order = NULL, n_steps = 1)
 \arguments{
 \item{X, y, theta}{Design, targets, coefficients.}
 
-\item{eta}{Positive rate. @param b Batch size in 1..m.}
+\item{eta}{Positive rate.}
+
+\item{b}{Batch size in 1..m.}
 
 \item{order}{Optional 0-based permutation; NULL means identity.}
 

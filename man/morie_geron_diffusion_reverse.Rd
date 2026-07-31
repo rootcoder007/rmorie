@@ -14,9 +14,15 @@ morie_geron_diffusion_reverse(
 )
 }
 \arguments{
-\item{x_T}{Starting noise. @param model function(x_t, t) -> eps, t is 1-based.}
+\item{x_T}{Starting noise.}
 
-\item{T}{Steps (>=1). @param beta_schedule "linear"/"cosine"/vector. @param seed LCG seed.}
+\item{model}{function(x_t, t) -> eps, t is 1-based.}
+
+\item{T}{Steps (>=1).}
+
+\item{beta_schedule}{"linear"/"cosine"/vector.}
+
+\item{seed}{LCG seed.}
 
 \item{clip_x0}{Optional c(lo, hi).}
 }

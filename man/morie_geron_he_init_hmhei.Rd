@@ -12,7 +12,11 @@ morie_geron_he_init_hmhei(
 )
 }
 \arguments{
-\item{fan_in, fan_out}{Layer widths. @param seed Seed. @param distribution "normal" or "uniform".}
+\item{fan_in, fan_out}{Layer widths.}
+
+\item{seed}{Seed.}
+
+\item{distribution}{"normal" or "uniform".}
 }
 \value{
 List with W, std_target, var_target, limit, empirical_std, estimate, n, method.
