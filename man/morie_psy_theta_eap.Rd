@@ -27,5 +27,7 @@ X <- matrix(c(1, 0, 1, 1), 1)
 morie_psy_theta_eap(X, cbind(rep(1, 4), c(-1, -0.5, 0.5, 1)))$theta
 }
 \references{
-Bock and Mislevy (1982).
+Bock RD & Mislevy RJ (1982). Adaptive EAP estimation of
+ability in a microcomputer environment. \emph{Applied
+Psychological Measurement}, 6(4), 431-444.
 }

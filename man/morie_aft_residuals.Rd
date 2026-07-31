@@ -34,5 +34,5 @@ round(mean(morie_aft_residuals(f)$cox_snell), 2)
 }
 \references{
 Cox, D. R. and Snell, E. J. (1968). A general definition
-of residuals. \emph{JRSS-B}, 30(2), 248-275.
+of residuals. \emph{JRSS-B}, 30(2), 248-265.
 }

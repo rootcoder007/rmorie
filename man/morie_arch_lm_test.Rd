@@ -33,6 +33,7 @@ set.seed(1)
 morie_arch_lm_test(rnorm(200), q = 2)$p_value
 }
 \references{
-Engle, R. F. (1982). \emph{Econometrica}, 50(4),
-987-1007. Sec. 8.
+Engle, R. F. (1982). Autoregressive conditional
+heteroscedasticity with estimates of the variance of United
+Kingdom inflation. \emph{Econometrica}, 50(4), 987-1007. Sec. 8.
 }

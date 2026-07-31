@@ -125,6 +125,10 @@ morie_dml_clustered <- function(data, treatment, outcome, covariates,
   out
 }
 
+#' Print method for \code{morie_dml_clustered} objects
+#'
+#' @param x A \code{morie_dml_clustered} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' \donttest{
@@ -137,13 +141,13 @@ morie_dml_clustered <- function(data, treatment, outcome, covariates,
 #' y <- 2 * d + x + u + stats::rnorm(n)          # true ATE = 2
 #' df <- data.frame(y = y, d = d, x = x, corridor = g)
 #' obj <- morie_dml_clustered(df, "d", "y", "x", cluster = "corridor")$ate
-#' \references{
-#' Chernozhukov V, et al. (2018). Double/debiased machine learning.
-#' \emph{The Econometrics Journal} 21(1), C1--C68. \doi{10.1111/ectj.12097}
-#' Cameron AC, Gelbach JB, Miller DL (2011). Robust inference with multiway
-#' clustering. \emph{JBES} 29(2), 238--249. \doi{10.1198/jbes.2010.07136}
 #' print(obj)
 #' }
+#' @references
+#'   Chernozhukov V, et al. (2018). Double/debiased machine learning.
+#'   \emph{The Econometrics Journal} 21(1), C1--C68. \doi{10.1111/ectj.12097}
+#'   Cameron AC, Gelbach JB, Miller DL (2011). Robust inference with multiway
+#'   clustering. \emph{JBES} 29(2), 238--249. \doi{10.1198/jbes.2010.07136}
 #' @export
 print.morie_dml_clustered <- function(x, ...) {
   cat(sprintf("Cluster-robust DML (AIPW)\n  ATE = %.4g  SE = %.4g [%s]\n",

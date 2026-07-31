@@ -19,5 +19,6 @@ family is unique; at odd \eqn{n} the two central layers both attain
 it.
 }
 \references{
-Sperner E (1928).
+Sperner E (1928). Ein Satz ueber Untermengen einer
+endlichen Menge. \emph{Mathematische Zeitschrift}, 27(1), 544-548.
 }

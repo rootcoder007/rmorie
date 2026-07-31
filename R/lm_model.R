@@ -141,6 +141,8 @@ morie_lm <- function(formula, data, family = c("gaussian", "binomial"),
 
 # --- accessors (RE4.x) ------------------------------------------------
 
+#' Extract coefficients from method for \code{morie_lm} objects
+#'
 #' @param object A `morie_lm`.
 #' @param ... Unused.
 #' @return Named coefficient vector.
@@ -152,6 +154,8 @@ morie_lm <- function(formula, data, family = c("gaussian", "binomial"),
 #' @export
 coef.morie_lm <- function(object, ...) object$coefficients
 
+#' Extract the covariance matrix of method for \code{morie_lm} objects
+#'
 #' @param object A `morie_lm`.
 #' @param ... Unused.
 #' @return Variance-covariance matrix of the coefficients.
@@ -163,6 +167,8 @@ coef.morie_lm <- function(object, ...) object$coefficients
 #' @export
 vcov.morie_lm <- function(object, ...) object$vcov
 
+#' Extract fitted values from method for \code{morie_lm} objects
+#'
 #' @param object A `morie_lm`.
 #' @param ... Unused.
 #' @return Fitted (modelled) response values.
@@ -174,6 +180,8 @@ vcov.morie_lm <- function(object, ...) object$vcov
 #' @export
 fitted.morie_lm <- function(object, ...) object$fitted_values
 
+#' Extract residuals from method for \code{morie_lm} objects
+#'
 #' @param object A `morie_lm`.
 #' @param ... Unused.
 #' @return Model residuals.
@@ -185,6 +193,8 @@ fitted.morie_lm <- function(object, ...) object$fitted_values
 #' @export
 residuals.morie_lm <- function(object, ...) object$residuals
 
+#' Number of observations in method for \code{morie_lm} objects
+#'
 #' @param object A `morie_lm`.
 #' @param ... Unused.
 #' @return Number of observations used in the fit.
@@ -197,6 +207,8 @@ residuals.morie_lm <- function(object, ...) object$residuals
 #' @export
 nobs.morie_lm <- function(object, ...) object$n_obs
 
+#' Confidence intervals for method for \code{morie_lm} objects
+#'
 #' @param object A `morie_lm`.
 #' @param parm,level Standard [stats::confint()] arguments.
 #' @param ... Unused.
@@ -253,6 +265,8 @@ predict.morie_lm <- function(object, newdata = NULL,
 
 # --- print / summary / plot (RE4.17, RE4.18, RE6.x) -------------------
 
+#' Print method for \code{morie_lm} objects
+#'
 #' @param x A `morie_lm`.
 #' @param ... Unused.
 #' @return `x`, invisibly.
@@ -271,6 +285,8 @@ print.morie_lm <- function(x, ...) {
   invisible(x)
 }
 
+#' Summarise method for \code{morie_lm} objects
+#'
 #' @param object A `morie_lm`.
 #' @param ... Unused.
 #' @return The underlying model summary (coefficients, SEs, tests).
@@ -300,6 +316,8 @@ plot.morie_lm <- function(x, ...) {
   invisible(NULL)
 }
 
+#' Print method for \code{morie_lm_spec} objects
+#'
 #' @param x A `morie_lm_spec`.
 #' @param ... Unused.
 #' @return `x`, invisibly.

@@ -65,7 +65,11 @@ morie_zonal_ebm(1, start = 20)$snowball
 morie_zonal_ebm(1, start = -40)$snowball
 }
 \references{
-Budyko, M. I. (1969). \emph{Tellus}, 21(5), 611-619.
-Sellers, W. D. (1969). \emph{Journal of Applied Meteorology}, 8(3),
+Budyko, M. I. (1969). The effect of solar radiation
+variations on the climate of the Earth. \emph{Tellus}, 21(5),
+611-619.
+Sellers, W. D. (1969). A global climatic model based on the
+energy balance of the earth-atmosphere system.
+\emph{Journal of Applied Meteorology}, 8(3),
 392-400.
 }

@@ -566,7 +566,9 @@ morie_psy_wle_theta <- function(y, a = NULL, b = NULL, c = NULL,
 #' @param prior `c(mean, sd)`.
 #' @param n_nodes quadrature nodes.
 #' @return list: theta, se, n_examinees, n_items, alias_of, method.
-#' @references Bock and Mislevy (1982).
+#' @references Bock RD & Mislevy RJ (1982). Adaptive EAP estimation of
+#'   ability in a microcomputer environment. \emph{Applied
+#'   Psychological Measurement}, 6(4), 431-444.
 #' @examples
 #' X <- matrix(c(1, 0, 1, 1), 1)
 #' morie_psy_theta_eap(X, cbind(rep(1, 4), c(-1, -0.5, 0.5, 1)))$theta

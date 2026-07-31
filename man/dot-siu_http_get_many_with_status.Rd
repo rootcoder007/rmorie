@@ -12,6 +12,21 @@
   max_retries = 3L
 )
 }
+\arguments{
+\item{urls}{Character vector of URLs.}
+
+\item{concurrency}{Maximum simultaneous transfers.}
+
+\item{timeout_s}{Per-request timeout in seconds.}
+
+\item{rate_rps}{Maximum request starts per second across the pool.
+Default \code{4.0} is a polite scrape rate that stays well under
+any common WAF threshold. Set very large (e.g. \code{1e9}) to
+effectively disable throttling.}
+
+\item{max_retries}{Maximum retry attempts per URL on 429/5xx /
+transport failure.}
+}
 \value{
 A list with three parallel slots: \code{body} (character),
 \code{http_code} (integer), \code{attempts} (integer).

@@ -29,5 +29,5 @@ morie_kde_h(rnorm(200))$bandwidth
 }
 \references{
 Horowitz, J. L. Semiparametric and Nonparametric
-Methods in Econometrics. Springer. Ch. 2.
+Methods in Econometrics. Springer. Appendix (pp. 233-255, KDE).
 }

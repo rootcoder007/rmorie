@@ -25,8 +25,9 @@
 #' @param demean Subtract the sample mean before squaring.
 #' @return Named list with \code{statistic}, \code{p_value}, \code{df},
 #'   \code{r2}, \code{n}, \code{q}, \code{method}.
-#' @references Engle, R. F. (1982). \emph{Econometrica}, 50(4),
-#'   987-1007. Sec. 8.
+#' @references Engle, R. F. (1982). Autoregressive conditional
+#'   heteroscedasticity with estimates of the variance of United
+#'   Kingdom inflation. \emph{Econometrica}, 50(4), 987-1007. Sec. 8.
 #' @examples
 #' set.seed(1)
 #' morie_arch_lm_test(rnorm(200), q = 2)$p_value
@@ -99,9 +100,11 @@ morie_arch_lm_test <- function(r, q = 1L, demean = TRUE) {
 #' @return Named list with \code{statistic}, \code{p_value},
 #'   \code{per_horizon} (data.frame: h, n_h, statistic, p_value),
 #'   \code{n}, \code{method}.
-#' @references Corradi, V. & Swanson, N. R. (2006). \emph{Journal of
-#'   Econometrics}, 135(1-2), 187-228. Lilliefors, H. W. (1967).
-#'   \emph{JASA}, 62(318), 399-402.
+#' @references Corradi, V. & Swanson, N. R. (2006). Predictive density
+#'   and conditional confidence interval accuracy tests. \emph{Journal
+#'   of Econometrics}, 135(1-2), 187-228. Lilliefors, H. W. (1967). On
+#'   the Kolmogorov-Smirnov test for normality with mean and variance
+#'   unknown. \emph{JASA}, 62(318), 399-402.
 #' @examples
 #' set.seed(1)
 #' morie_multi_horizon_ks(rnorm(400), horizons = c(1, 5), n_mc = 100)$p_value
@@ -237,8 +240,10 @@ morie_adjacency_matrix <- function(edges, n = NULL, directed = FALSE) {
 #' @param n Optional number of nodes.
 #' @return Named list with \code{B}, \code{directed_edges} (two-column
 #'   matrix, row order of B), \code{n}, \code{m}, \code{method}.
-#' @references Hashimoto, K. (1989). \emph{Adv. Stud. Pure Math.}, 15,
-#'   211-280. Krzakala, F. et al. (2013). \emph{PNAS}, 110(52),
+#' @references Hashimoto, K. (1989). Zeta functions of finite graphs
+#'   and representations of p-adic groups. \emph{Adv. Stud. Pure
+#'   Math.}, 15, 211-280. Krzakala, F. et al. (2013). Spectral
+#'   redemption in clustering sparse networks. \emph{PNAS}, 110(52),
 #'   20935-20940.
 #' @examples
 #' morie_nonbacktracking_matrix(rbind(c(0, 1), c(1, 2)))$m
@@ -274,7 +279,10 @@ morie_nonbacktracking_matrix <- function(edges, n = NULL) {
 #'
 #' @param x Multivariate return matrix, n >= 30 rows, k >= 2 columns.
 #' @return Whatever \code{morie_dcc_multivariate_garch} returns.
-#' @references Engle, R. F. (2002). \emph{JBES}, 20(3), 339-350.
+#' @references Engle, R. F. (2002). Dynamic conditional correlation: a
+#'   simple class of multivariate generalized autoregressive
+#'   conditional heteroskedasticity models. \emph{JBES}, 20(3),
+#'   339-350.
 #' @examples
 #' \donttest{
 #' set.seed(1)

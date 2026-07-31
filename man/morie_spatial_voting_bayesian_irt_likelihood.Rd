@@ -28,5 +28,7 @@ morie_spatial_voting_bayesian_irt_likelihood(
   v, matrix(rnorm(4), 4, 1), rep(0, 5), matrix(rnorm(5), 5, 1))
 }
 \references{
-Clinton, Jackman & Rivers (2004).
+Clinton J, Jackman S & Rivers D (2004). The statistical
+analysis of roll call data. \emph{American Political Science
+Review}, 98(2), 355-370.
 }

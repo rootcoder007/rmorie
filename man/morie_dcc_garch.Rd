@@ -28,5 +28,8 @@ morie_dcc_garch(matrix(rnorm(200), ncol = 2))$a
 }
 }
 \references{
-Engle, R. F. (2002). \emph{JBES}, 20(3), 339-350.
+Engle, R. F. (2002). Dynamic conditional correlation: a
+simple class of multivariate generalized autoregressive
+conditional heteroskedasticity models. \emph{JBES}, 20(3),
+339-350.
 }

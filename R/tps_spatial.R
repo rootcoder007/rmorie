@@ -604,6 +604,10 @@ morie_tps_kde_density <- function(df,
 # Print method
 # ---------------------------------------------------------------------------
 
+#' Print method for \code{morie_tps_spatial_result} objects
+#'
+#' @param x A \code{morie_tps_spatial_result} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' \donttest{

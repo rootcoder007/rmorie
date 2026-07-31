@@ -30,6 +30,7 @@ tt <- rexp(60, exp(X * 0.5))
 dim(morie_dfbeta_cox(tt, rep(1, 60), X)$dfbeta)
 }
 \references{
-Cain, K. C. and Lange, N. T. (1984). \emph{Biometrics},
-40(2), 493-499.
+Cain, K. C. and Lange, N. T. (1984). Approximate case
+influence for the proportional hazards regression model with
+censored data. \emph{Biometrics}, 40(2), 493-499.
 }

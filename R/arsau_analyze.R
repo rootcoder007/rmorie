@@ -770,16 +770,20 @@ morie_arsau_analyze_detailed_dataset <- function(year_range = "2020-2022",
 }
 
 
+#' Print method for \code{morie_arsau_analysis_result} objects
+#'
+#' @param x A \code{morie_arsau_analysis_result} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return Invisibly returns \code{x} unchanged.
 #' @examples
 #' \donttest{
 #' res <- try(morie_arsau_analyze_main_records(year = "2024"))
 #' if (!inherits(res, "try-error")) print(res)
-#' \references{
-#' Ontario Ministry of the Solicitor General, ARSAU 2023
-#' and 2024 main_records technical release notes.
 #' print(res)
 #' }
+#' @references
+#'   Ontario Ministry of the Solicitor General, ARSAU 2023
+#'   and 2024 main_records technical release notes.
 #' @export
 print.morie_arsau_analysis_result <- function(x, ...) {
   cat(x$title, "\n", strrep("=", nchar(x$title)), "\n", sep = "")

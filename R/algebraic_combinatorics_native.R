@@ -430,7 +430,9 @@ morie_burnside_orbit_count <- function(group_permutations, n_colours) {
 #' @param k Number of colours.
 #' @return A list with `count`, `direct_burnside`, `agrees`,
 #'   `divides_exactly`, `total_colourings`.
-#' @references Polya G (1937).
+#' @references Polya G (1937). Kombinatorische Anzahlbestimmungen fuer
+#'   Gruppen, Graphen und chemische Verbindungen. \emph{Acta
+#'   Mathematica}, 68, 145-254.
 #' @export
 morie_cycle_index_necklaces <- function(n, k) {
   n <- as.integer(n); k <- as.integer(k)

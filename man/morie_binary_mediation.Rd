@@ -51,6 +51,7 @@ yy <- rbinom(n, 1, plogis(-0.5 + 0.5 * xx + mm))
 morie_binary_mediation(xx, mm, yy)$indirect
 }
 \references{
-Tchetgen Tchetgen EJ (2013). \emph{Statistics in
+Tchetgen Tchetgen EJ (2013). Inverse odds ratio-weighted
+estimation for causal mediation analysis. \emph{Statistics in
 Medicine}, 32(26), 4567-4580.
 }

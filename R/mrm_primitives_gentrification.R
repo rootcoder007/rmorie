@@ -277,6 +277,10 @@ mrm_gentrification_panel <- function(df,
 # Print method (shared across MRM primitives)
 # ---------------------------------------------------------------------------
 
+#' Print method for \code{morie_mrm_result} objects
+#'
+#' @param x A \code{morie_mrm_result} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' \donttest{
@@ -286,12 +290,13 @@ mrm_gentrification_panel <- function(df,
 #'     race = rbinom(200, 1, 0.4),
 #'     age  = rnorm(200)
 #'   )
-#' obj <- mrm_threshold_specific_ordinal(df,
+#'   obj <- mrm_threshold_specific_ordinal(df,
 #'     outcome_col = "y",
 #'     covariate_cols = c("race", "age"),
 #'     ordinal_levels = c("low", "med", "high")
 #'   )
-#' print(obj)
+#'   print(obj)
+#' }
 #' }
 #' @export
 print.morie_mrm_result <- function(x, ...) {

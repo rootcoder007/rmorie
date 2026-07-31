@@ -113,6 +113,10 @@ NULL
   out
 }
 
+#' Print method for \code{morie_test_result} objects
+#'
+#' @param x A \code{morie_test_result} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' set.seed(1)

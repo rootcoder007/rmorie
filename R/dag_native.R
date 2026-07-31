@@ -53,6 +53,10 @@ morie_dag <- function(edges, exposure, outcome, latent = character()) {
             class = "morie_dag")
 }
 
+#' Print method for \code{morie_dag} objects
+#'
+#' @param x A \code{morie_dag} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @examples
 #' \donttest{
 #' g <- morie_dag(c("race -> placement", "race -> outcome",

@@ -704,7 +704,7 @@ morie_matching_variable_ratio <- function(data, treatment, covariates,
 #' \code{balance_threshold}.  Uses an iterative caliper-tightening
 #' heuristic over \code{morie_matching_nearest_neighbor}; for an
 #' exact mixed-integer-programming alternative see
-#' \code{\link\[designmatch:cardmatch\]{designmatch::cardmatch}}.
+#' \code{\link[designmatch:cardmatch]{designmatch::cardmatch}}.
 #'
 #' @param data Data frame.
 #' @param treatment Binary treatment column name.
@@ -784,8 +784,8 @@ morie_matching_cardinality <- function(data, treatment, covariates,
 #' Kolmogorov-Smirnov statistics for each covariate.  For a richer
 #' covariate-balance report (including continuous + categorical handling
 #' and Love-plot rendering), see
-#' \code{\link\[cobalt:bal.tab\]{cobalt::bal.tab}} /
-#' \code{\link\[cobalt:love.plot\]{cobalt::love.plot}}.
+#' \code{\link[cobalt:bal.tab]{cobalt::bal.tab}} /
+#' \code{\link[cobalt:love.plot]{cobalt::love.plot}}.
 #'
 #' @param data Data frame.
 #' @param treatment Binary treatment column name.
@@ -867,7 +867,7 @@ morie_matching_balance <- function(data, treatment, covariates,
 #'
 #' Returns a data frame suitable for plotting absolute SMDs before and
 #' after matching.  For a publication-ready plot, pass the same
-#' \code{matchit} object to \code{\link\[cobalt:love.plot\]{cobalt::love.plot}}.
+#' \code{matchit} object to \code{\link[cobalt:love.plot]{cobalt::love.plot}}.
 #'
 #' @param unmatched_data,matched_data Data frames.
 #' @param treatment Binary treatment column name.
@@ -908,7 +908,7 @@ morie_matching_love_plot_data <- function(unmatched_data, matched_data,
 #' Publication-ready balance table
 #'
 #' Thin wrapper around \code{morie_matching_balance} returning only the
-#' data-frame component.  See \code{\link\[cobalt:bal.tab\]{cobalt::bal.tab}}
+#' data-frame component.  See \code{\link[cobalt:bal.tab]{cobalt::bal.tab}}
 #' for an alternative with categorical-variable support.
 #'
 #' @inheritParams morie_matching_balance
@@ -1181,7 +1181,7 @@ morie_matching_abadie_imbens_se <- function(data, outcome, treatment,
 #' values of \code{gamma} (the maximum odds ratio of differential treatment
 #' assignment due to an unobserved confounder).  Uses the Wilcoxon
 #' signed-rank approach.  For exact bounds, see
-#' \code{\link\[sensitivitymv:senmv\]{sensitivitymv::senmv}} or the
+#' \code{\link[sensitivitymv:senmv]{sensitivitymv::senmv}} or the
 #' \pkg{rbounds} package.
 #'
 #' @param data Data frame.

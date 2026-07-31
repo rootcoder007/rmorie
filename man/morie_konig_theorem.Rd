@@ -21,5 +21,6 @@ VERIFIED to cover every edge -- a construction returning the right
 size while missing an edge would otherwise pass.
 }
 \references{
-Konig D (1931).
+Konig D (1931). Grafok es matrixok. \emph{Matematikai es
+Fizikai Lapok}, 38, 116-119.
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/wasserman_native.R
 \name{morie_wasserman_hmm_forward}
 \alias{morie_wasserman_hmm_forward}
-\title{HMM forward algorithm with per-step scaling (Ch 23, wsmhmm)}
+\title{HMM forward algorithm with per-step scaling (Rabiner 1989; Wasserman Ch 23 covers the underlying Markov chains) (wsmhmm)}
 \usage{
 morie_wasserman_hmm_forward(obs, A, B, pi)
 }

@@ -85,6 +85,8 @@ morie_distribution <- function(name, ...) {
   out
 }
 
+#' Print method for \code{morie_distribution} objects
+#'
 #' @param x A `morie_distribution`.
 #' @param ... Unused.
 #' @return `x`, invisibly.

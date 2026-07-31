@@ -1,33 +1,33 @@
-# Missing / to-nativize backlog
 
-Functions that exist only in archived branches, or that exist as thin
-wrappers over CRAN packages and must be reimplemented natively.
+## Missing R twins (parity gap, NOT "Python-only OK")
 
-Rule: morie is **not** a wrapper package. A CRAN package may be an
-optional *extender*, never the only path. See
-`feedback_wrapper_as_extender` and `feedback_morie_is_not_a_wrapper_package`.
+Per Vee 2026-07-30: a Python fn module with no R counterpart is a
+MISSING PORT, not an acceptable Python-only. Each needs an R version in
+both trees for true three-way parity. Surfaced by the verification
+sweep as "no R twin"; confirmed against parity_check.py (287 of 36,459
+Python modules currently have BOTH R twins, so the vast majority are
+un-ported -- this list is only the ones the sweep touched and fixed,
+where correctness is now settled and the port can be written against a
+known-good reference).
 
-## Open
+Confirmed-correct Python, R twin status:
+- bshrk  (horseshoe Gibbs, Makalic & Schmidt 2016) -- PORTED 2026-07-30
+- empby  (parametric EB, Morris 1983) -- PORTED 2026-07-30
+- eslsmt (Reinsch smoothing spline) -- PORTED 2026-07-30
+- vlfctn/regime_value (AIPW policy value) -- PORTED 2026-07-30
+- otmapnk (monotone 1-D transport map) -- PORTED 2026-07-30
+- dppca -- NOT twinless after all: `morie_dp_pca` already exists in
+  dp_native2.R (delegates to morie_dp_covariance); no port needed.
+- and the broader set of ~36,000 fn modules with no R counterpart
 
-_(none — see Closed)_
+The five ports live in `R/verification_ports_native.R`, byte-identical
+in r-package/morie/R and r-morie-oss/R, using morie_ export names and the
+native `.morie_logit_fit` (no stats::glm delegation). Deterministic
+members (eslsmt, empby, regime_value) match Python bit-for-bit; the
+RNG/fit members (bshrk, otmapnk) are property-checked.
 
-## Closed
-
-### `morie_causal_mediation` — ABSENT at HEAD, wrapper-only in archive
-
-Found 2026-07-30 while reconciling the duplicate rmorie checkouts. Lived
-only on `staging-archive/worktree-agent-aebe168405933b189-causal`
-(commit `4d78188`, 2026-05-25) and was a **pure wrapper**: it called
-`causalweight::medweight()` and `stop()`ed outright when the package was
-absent, so a plain install had no mediation estimator at all.
-
-The other 14 functions on those four archived branches are all present
-at HEAD, and their core paths have since been nativized (`e_value` at
-HEAD is the native VanderWeele-Ding computation via `morie_evalue()`,
-not an `EValue::` call). Merging the branches would have dragged
-May-25 copies of 441 files back over the native-specialization work, so
-they stay archived; only this one gap needed closing.
-
-Reimplemented natively over `stats::glm` (base R) using the Huber (2014)
-inverse-probability-weighting mediation estimator. No `causalweight`
-dependency.
+PENDING l14 (blocked on tailscale re-auth 2026-07-30): run roxygen to
+emit NAMESPACE exports + man/*.Rd for the five, then R CMD check, then
+`scripts/audit/verify_ports_parity.R`. Do NOT push until that is green
+(no-push-without-R-CMD-check rule). The ~36,000 remaining un-ported fn
+modules are a separate standing backlog, not a same-day task.

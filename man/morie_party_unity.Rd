@@ -25,7 +25,9 @@ convention). Ties within a party leave that roll call undefined for
 its members. Mirrors \code{morie.fn.agpar}.
 }
 \references{
-Poole KT, Rosenthal H (1997). \emph{Congress}. Oxford
-University Press. Rice SA (1925). \emph{Political Science
-Quarterly} 40(1), 60-72.
+Poole KT, Rosenthal H (1997). \emph{Congress: A
+Political-Economic History of Roll Call Voting}. Oxford University
+Press. Rice SA (1925). The behavior of legislative groups: a
+method of measurement. \emph{Political Science Quarterly} 40(1),
+60-72.
 }

@@ -18,5 +18,7 @@ Numeric vector of predicted conditional treatment effects.
 Predict CATEs at new covariate values from a fitted causal forest
 }
 \references{
-Wager S, Athey S (2018). \emph{JASA} 113(523), 1228-1242.
+Wager S, Athey S (2018). Estimation and inference of
+heterogeneous treatment effects using random forests.
+\emph{JASA} 113(523), 1228-1242.
 }

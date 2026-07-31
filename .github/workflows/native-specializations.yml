@@ -83,3 +83,4 @@ jobs:
             check/*.Rcheck/00check.log
             check/*.Rcheck/tests/
           if-no-files-found: ignore
+          retention-days: 7

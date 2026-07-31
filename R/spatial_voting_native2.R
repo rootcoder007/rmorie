@@ -19,9 +19,11 @@
 #' @param party_id Party label per legislator.
 #' @param unity_votes_only Restrict to party-unity votes.
 #' @return List with `unity`, `by_party`, `n_votes_scored`, `n`.
-#' @references Poole KT, Rosenthal H (1997). \emph{Congress}. Oxford
-#'   University Press. Rice SA (1925). \emph{Political Science
-#'   Quarterly} 40(1), 60-72.
+#' @references Poole KT, Rosenthal H (1997). \emph{Congress: A
+#'   Political-Economic History of Roll Call Voting}. Oxford University
+#'   Press. Rice SA (1925). The behavior of legislative groups: a
+#'   method of measurement. \emph{Political Science Quarterly} 40(1),
+#'   60-72.
 #' @export
 morie_party_unity <- function(vote_matrix, party_id, unity_votes_only = FALSE) {
   V <- as.matrix(vote_matrix)

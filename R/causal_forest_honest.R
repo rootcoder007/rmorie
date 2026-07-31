@@ -174,7 +174,9 @@ morie_causal_forest <- function(y, d, x, n_trees = 200L, min_leaf = 10L,
 #' @param forest The `forest` element of a [morie_causal_forest()] fit.
 #' @param newx Covariate matrix with the same columns as the training X.
 #' @return Numeric vector of predicted conditional treatment effects.
-#' @references Wager S, Athey S (2018). \emph{JASA} 113(523), 1228-1242.
+#' @references Wager S, Athey S (2018). Estimation and inference of
+#'   heterogeneous treatment effects using random forests.
+#'   \emph{JASA} 113(523), 1228-1242.
 #' @export
 morie_causal_forest_predict <- function(forest, newx) {
   Xq <- as.matrix(newx)
@@ -201,7 +203,9 @@ morie_causal_forest_predict <- function(forest, newx) {
 #' @param alpha Two-sided interval level.
 #' @return List with `cate`, `ci_low`, `ci_high`, `se`, `ate`,
 #'   `ate_ci`, `B`, `n`.
-#' @references Wager S, Athey S (2018). \emph{JASA} 113(523), 1228-1242.
+#' @references Wager S, Athey S (2018). Estimation and inference of
+#'   heterogeneous treatment effects using random forests.
+#'   \emph{JASA} 113(523), 1228-1242.
 #' @export
 morie_causal_forest_bootstrap <- function(y, d, x, B = 40L, n_trees = 60L,
                                           min_leaf = 10L, seed = 0L,
@@ -329,8 +333,12 @@ morie_causal_survival_forest <- function(time, event, d, x, horizon = NULL,
 #' @inheritParams morie_causal_survival_forest
 #' @return List with `alpha`, `beta`, `se_beta`, `p_value`,
 #'   `heterogeneous`, `ate`, `horizon`, `n`.
-#' @references Cui Y et al. (2023). \emph{JRSS-B} 85(2), 179-211;
-#'   Chernozhukov V et al. (2018). arXiv:1712.04802.
+#' @references Cui Y et al. (2023). Estimating heterogeneous treatment
+#'   effects with right-censored data via causal survival forests.
+#'   \emph{JRSS-B} 85(2), 179-211; Chernozhukov V et al. (2018).
+#'   Fisher-Schultz Lecture: generic machine learning inference on
+#'   heterogeneous treatment effects in randomized experiments, with an
+#'   application to immunization in India. arXiv:1712.04802.
 #' @export
 morie_causal_survival_blp <- function(time, event, d, x, horizon = NULL,
                                       n_trees = 200L, min_leaf = 15L,

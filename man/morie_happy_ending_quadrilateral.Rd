@@ -22,5 +22,6 @@ every 5-subset is checked, which is the theorem's statement, not a
 sample of it.
 }
 \references{
-Erdos P, Szekeres G (1935).
+Erdos P, Szekeres G (1935). A combinatorial problem in
+geometry. \emph{Compositio Mathematica}, 2, 463-470.
 }

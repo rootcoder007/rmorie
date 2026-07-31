@@ -42,6 +42,7 @@ d <- rbinom(n, 1, plogis(0.8 * xx)); u <- rnorm(n, 0, 2)
 morie_dr_did(u + rnorm(n), u + 0.9 * xx + 2 * d + rnorm(n), d, xx)$att
 }
 \references{
-Sant'Anna PHC & Zhao J (2020). \emph{Journal of
+Sant'Anna PHC & Zhao J (2020). Doubly robust
+difference-in-differences estimators. \emph{Journal of
 Econometrics}, 219(1), 101-122.
 }

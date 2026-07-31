@@ -76,7 +76,7 @@
 #' @srrstats {TS5.1} the time axis is labelled (with units where known).
 #' @srrstats {TS5.2} time is placed on the horizontal axis.
 #' @srrstats {TS5.3} units of the time index are printed on the axis where known.
-#' @srrstats {TS5.4} frequency visualisation (dsp PSD) uses positive frequency units, not [-pi,pi].
+#' @srrstats {TS5.4} frequency visualisation (dsp PSD) uses positive frequency units, not `[-pi,pi]`.
 #' @srrstats {TS5.5} plot.morie_ts_forecast(broken=) controls continuous vs broken lines.
 #' @srrstats {TS5.6} forecast distributional limits are shaded by default.
 #' @srrstats {TS5.7} observed (input) values are included in the plot by default.
@@ -334,6 +334,8 @@ morie_ts_arima <- function(x, order = c(0L, 0L, 0L),
   out
 }
 
+#' Print method for \code{morie_ts_model} objects
+#'
 #' @param x A `morie_ts_model`.
 #' @param ... Unused.
 #' @return `x`, invisibly.
@@ -415,6 +417,8 @@ morie_ts_trim_forecast <- function(forecast, max_width) {
   forecast
 }
 
+#' Print method for \code{morie_ts_forecast} objects
+#'
 #' @param x A `morie_ts_forecast`.
 #' @param ... Unused.
 #' @return `x`, invisibly.
@@ -434,6 +438,8 @@ print.morie_ts_forecast <- function(x, ...) {
   invisible(x)
 }
 
+#' Plot method for \code{morie_ts_forecast} objects
+#'
 #' @param x A `morie_ts_forecast`.
 #' @param broken If TRUE, draw the observed series as a broken (segmented)
 #'   line rather than a continuous one; controls line continuity for

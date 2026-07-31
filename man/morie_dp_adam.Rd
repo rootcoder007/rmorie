@@ -56,5 +56,5 @@ morie_dp_adam(matrix(rnorm(80), ncol = 4), C = 1, sigma = 0.1)$t
 \references{
 Kingma, D. P. and Ba, J. (2015). Adam: a method for
 stochastic optimization. \emph{ICLR}. Abadi, M. et al. (2016).
-\emph{CCS}, 308-318.
+Deep learning with differential privacy. \emph{CCS}, 308-318.
 }

@@ -81,8 +81,8 @@
 #' @param timeout HTTP timeout in seconds (default 600).
 #' @param user_agent User-Agent string sent with the request.
 #' @param ... Further arguments forwarded to
-#'   \code{\link\[readr\]{read_csv}} (or
-#'   \code{\link\[utils\]{read.csv}} if \pkg{readr} is unavailable).
+#'   \code{\link[readr]{read_csv}} (or
+#'   \code{\link[utils]{read.csv}} if \pkg{readr} is unavailable).
 #' @return A base R \code{data.frame}.
 #' @examplesIf requireNamespace("httr2", quietly = TRUE)
 #' \donttest{
@@ -169,7 +169,7 @@ morie_ingest_statcan_csv <- function(url,
 #' @param refresh If \code{TRUE}, force \pkg{cansim} to re-download
 #'   rather than using its on-disk cache.
 #' @param ... Further arguments forwarded to
-#'   \code{\link\[cansim\]{get_cansim}}.
+#'   \code{\link[cansim]{get_cansim}}.
 #' @return A base R \code{data.frame}.
 #' @examplesIf requireNamespace("httr2", quietly = TRUE)
 #' \donttest{

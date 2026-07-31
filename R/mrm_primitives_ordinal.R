@@ -14,11 +14,11 @@
 #' \eqn{k = 1, \ldots, K-1}{k = 1, ..., K-1} a separate binary logit is fit to the
 #' indicator \eqn{1\{Y \le k\}}{1\{Y <= k\}}, so the coefficient vector
 #' \eqn{\beta_k}{beta_k} is unconstrained across thresholds.  When
-#' \code{MASS} is available we delegate to \code{\link\[MASS\]{polr}}
+#' \code{MASS} is available we delegate to \code{\link[MASS]{polr}}
 #' for the proportional-odds (PO) baseline; otherwise the PO baseline
 #' is fit by a stacked-IRLS approximation matching the Python
 #' implementation.  The threshold-specific fits always run via
-#' \code{\link\[stats\]{glm}} with \code{family = binomial("logit")}.
+#' \code{\link[stats]{glm}} with \code{family = binomial("logit")}.
 #'
 #' Standard threshold (proportional-odds, K levels, p covariates):
 #' \deqn{P(Y \le k \mid X) = \mathrm{logit}^{-1}(\alpha_k - X \beta)}{P(Y <= k mid X) = logit^-1(alpha_k - X beta)}
@@ -96,7 +96,7 @@ NULL
 #' @param fit_proportional_odds_first Logical; if \code{TRUE} (default)
 #'   the proportional-odds baseline is fit and an LR test against the
 #'   threshold-specific model is reported.
-#' @param max_iter,tol IRLS / GLM control passed to \code{\link\[stats\]{glm.fit}}.
+#' @param max_iter,tol IRLS / GLM control passed to \code{\link[stats]{glm.fit}}.
 #' @return An object of class \code{c("mrm_threshold_specific_ordinal",
 #'   "morie_mrm_result", "list")} with elements
 #'   \code{threshold_labels}, \code{covariate_names},

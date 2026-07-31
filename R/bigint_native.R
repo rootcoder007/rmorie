@@ -93,12 +93,20 @@ as.character.morie_bigint <- function(x, ...) {
   paste0(if (x$sign < 0) "-" else "", paste(parts, collapse = ""))
 }
 
+#' Print method for \code{morie_bigint} objects
+#'
+#' @param x A \code{morie_bigint} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @export
 print.morie_bigint <- function(x, ...) {
   cat(as.character(x), "\n", sep = "")
   invisible(x)
 }
 
+#' Format method for \code{morie_bigint} objects
+#'
+#' @param x A \code{morie_bigint} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @export
 format.morie_bigint <- function(x, ...) as.character(x)
 

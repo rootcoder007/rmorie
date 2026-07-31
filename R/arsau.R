@@ -794,16 +794,20 @@ morie_arsau_describe <- function(kind, year, language = "en", data_dir = NULL,
   out
 }
 
+#' Print method for \code{morie_arsau_result} objects
+#'
+#' @param x A \code{morie_arsau_result} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' \donttest{
 #' res <- try(morie_arsau_analyze_probe_cycle_records(year = "2024"))
 #' if (!inherits(res, "try-error")) print(res)
-#' \references{
-#' Ontario Ministry of the Solicitor General, ARSAU
-#' probe_cycle_records technical notes (2023 and 2024).
 #' print(res)
 #' }
+#' @references
+#'   Ontario Ministry of the Solicitor General, ARSAU
+#'   probe_cycle_records technical notes (2023 and 2024).
 #' @export
 print.morie_arsau_result <- function(x, ...) {
   cat(x$title, "\n", strrep("=", nchar(x$title)), "\n", sep = "")

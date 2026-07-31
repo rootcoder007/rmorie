@@ -147,6 +147,8 @@ predict.morie_cluster <- function(object, newdata, ...) {
   stats::setNames(lab, rownames(newdata))
 }
 
+#' Print method for \code{morie_cluster} objects
+#'
 #' @param x A `morie_cluster`.
 #' @param max_rows Maximum assignment rows to print.
 #' @param ... Unused.
@@ -168,6 +170,8 @@ print.morie_cluster <- function(x, max_rows = 10L, ...) {
   invisible(x)
 }
 
+#' Summarise method for \code{morie_cluster} objects
+#'
 #' @param object A `morie_cluster`.
 #' @param ... Unused.
 #' @return A data.frame with per-cluster size and within-cluster SS.
@@ -208,6 +212,8 @@ plot.morie_cluster <- function(x, ...) {
   invisible(NULL)
 }
 
+#' Print method for \code{morie_cluster_spec} objects
+#'
 #' @param x A `morie_cluster_spec`.
 #' @param ... Unused.
 #' @return `x`, invisibly.

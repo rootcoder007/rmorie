@@ -28,6 +28,7 @@ set.seed(1)
 morie_effective_sample_size_bulk(matrix(rt(2000, 2), nrow = 4))$sufficient
 }
 \references{
-Vehtari, A. et al. (2021). \emph{Bayesian Analysis},
-16(2), 667-718.
+Vehtari, A. et al. (2021). Rank-normalization, folding,
+and localization: an improved R-hat for assessing convergence of
+MCMC. \emph{Bayesian Analysis}, 16(2), 667-718.
 }

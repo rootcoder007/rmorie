@@ -238,6 +238,10 @@ morie_synth_control <- function(data, outcome, unit, time,
   )
 }
 
+#' Print method for \code{morie_synth} objects
+#'
+#' @param x A \code{morie_synth} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @examples
 #' \donttest{
 #' pan <- expand.grid(unit = letters[1:6], time = 1:10)
@@ -246,12 +250,12 @@ morie_synth_control <- function(data, outcome, unit, time,
 #' fit <- morie_synth_control(pan, "y", "unit", "time",
 #'                            treated_unit = "a", treatment_time = 7)
 #' fit$att
-#' \references{
-#' Abadie, A., Diamond, A., & Hainmueller, J. (2010).
-#' Synthetic control methods for comparative case studies.
-#' \emph{JASA}, 105(490), 493--505.
 #' print(fit)
 #' }
+#' @references
+#'   Abadie, A., Diamond, A., & Hainmueller, J. (2010).
+#'   Synthetic control methods for comparative case studies.
+#'   \emph{JASA}, 105(490), 493--505.
 #' @export
 print.morie_synth <- function(x, ...) {
   cat("Synthetic control (rmorie native)\n")

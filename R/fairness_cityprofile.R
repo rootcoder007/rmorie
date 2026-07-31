@@ -258,6 +258,10 @@ morie_fairness_apply_profile <- function(df, profile) {
 # print
 # ---------------------------------------------------------------------------
 
+#' Print method for \code{morie_city_profile} objects
+#'
+#' @param x A \code{morie_city_profile} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' \donttest{

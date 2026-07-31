@@ -85,16 +85,20 @@ morie_crim_etas <- function(times, magnitudes = NULL, m0 = NULL,
   out
 }
 
+#' Print method for \code{morie_etas} objects
+#'
+#' @param x A \code{morie_etas} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @examples
 #' \donttest{
 #' set.seed(1)
 #' tt <- sort(runif(120, 0, 100))
 #' mm <- rexp(120, 1.5) + 2
 #' obj <- morie_crim_etas(tt, mm)
-#' \references{
-#' Ogata (1988) JASA 83(401).
 #' print(obj)
 #' }
+#' @references
+#'   Ogata (1988) JASA 83(401).
 #' @export
 print.morie_etas <- function(x, ...) {
   cat("ETAS (Ogata 1988), n =", x$n, "\n")
@@ -182,15 +186,19 @@ morie_crim_hawkes_multivariate <- function(times, marks, t_max = NULL,
   out
 }
 
+#' Print method for \code{morie_mv_hawkes} objects
+#'
+#' @param x A \code{morie_mv_hawkes} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @examples
 #' \donttest{
 #' set.seed(2)
 #' tt <- sort(runif(150, 0, 100)); mk <- sample(1:2, 150, TRUE)
 #' obj <- morie_crim_hawkes_multivariate(tt, mk, beta = 1)
-#' \references{
-#' Hawkes (1971) Biometrika 58(1).
 #' print(obj)
 #' }
+#' @references
+#'   Hawkes (1971) Biometrika 58(1).
 #' @export
 print.morie_mv_hawkes <- function(x, ...) {
   cat(sprintf("Multivariate Hawkes (K = %d, beta = %.3g), n = %d\n",
@@ -250,15 +258,19 @@ morie_crim_near_repeat <- function(x, y, times, s_threshold,
   out
 }
 
+#' Print method for \code{morie_knox} objects
+#'
+#' @param x A \code{morie_knox} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @examples
 #' \donttest{
 #' set.seed(3)
 #' obj <- morie_crim_near_repeat(runif(60), runif(60), runif(60, 0, 30),
 #'                        s_threshold = 0.1, t_threshold = 3)
-#' \references{
-#' Knox (1964); Townsley, Homel & Chaseling (2003).
 #' print(obj)
 #' }
+#' @references
+#'   Knox (1964); Townsley, Homel & Chaseling (2003).
 #' @export
 print.morie_knox <- function(x, ...) {
   cat("Knox near-repeat test\n")
@@ -333,16 +345,20 @@ morie_crim_risk_terrain <- function(incidents, layers, n_grid = 25L,
   out
 }
 
+#' Print method for \code{morie_rtm} objects
+#'
+#' @param x A \code{morie_rtm} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @examples
 #' \donttest{
 #' set.seed(4)
 #' inc <- cbind(runif(80), runif(80))
 #' lay <- list(bars = cbind(runif(15), runif(15)))
 #' obj <- morie_crim_risk_terrain(inc, lay, n_grid = 10L)
-#' \references{
-#' Caplan, Kennedy & Miller (2011) Justice Quarterly 28(2).
 #' print(obj)
 #' }
+#' @references
+#'   Caplan, Kennedy & Miller (2011) Justice Quarterly 28(2).
 #' @export
 print.morie_rtm <- function(x, ...) {
   cat("Risk terrain model,", x$n, "incidents\n")

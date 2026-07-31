@@ -244,7 +244,8 @@ morie_erdos_szekeres_check <- function(sequence, r = NULL, s = NULL) {
 #' @param points Two-column matrix of integer (x, y), distinct, no 3
 #'   collinear.
 #' @return A list with `found`, `witness` (matrix), `every_five_subset`.
-#' @references Erdos P, Szekeres G (1935).
+#' @references Erdos P, Szekeres G (1935). A combinatorial problem in
+#'   geometry. \emph{Compositio Mathematica}, 2, 463-470.
 #' @export
 morie_happy_ending_quadrilateral <- function(points) {
   p <- round(as.matrix(points))

@@ -544,6 +544,10 @@ SemiparKernels <- function() {
 }
 
 
+#' Print method for \code{morie_semipar_kernels} objects
+#'
+#' @param x A \code{morie_semipar_kernels} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' \donttest{

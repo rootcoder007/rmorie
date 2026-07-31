@@ -575,8 +575,9 @@ morie_cox_dfbeta_influence <- function(fit) {
 #' @param ties \code{"efron"} or \code{"breslow"}.
 #' @return list with \code{dfbeta}, \code{dfbetas},
 #'   \code{score_residuals}, \code{beta}, \code{se}.
-#' @references Cain, K. C. and Lange, N. T. (1984). \emph{Biometrics},
-#'   40(2), 493-499.
+#' @references Cain, K. C. and Lange, N. T. (1984). Approximate case
+#'   influence for the proportional hazards regression model with
+#'   censored data. \emph{Biometrics}, 40(2), 493-499.
 #' @examples
 #' set.seed(1)
 #' X <- matrix(rnorm(60), ncol = 1)
