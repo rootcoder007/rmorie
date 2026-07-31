@@ -36,14 +36,22 @@
 #'   identified and dropped before fitting.
 #' @srrstats {RE2.4a} `.viable_terms()` detects predictor terms with a
 #'   single observed level (perfect collinearity among predictors).
-#' @srrstats {RE3.0} Iterative fitters (glm, Hawkes MLE, HMC backends)
-#'   surface non-convergence via their upstream warnings.
-#' @srrstats {RE3.1} Those warnings can be suppressed by the caller while
-#'   the returned object still records fit status.
-#' @srrstats {RE3.2} Convergence thresholds default to the well-tested
-#'   upstream defaults (documented per wrapper).
-#' @srrstats {RE3.3} Convergence thresholds can be set explicitly through
-#'   the `...` pass-through to the upstream fitter.
+#' @srrstats {RE3.0} The iterative fitters are morie's own -- the
+#'   Newton-Raphson `.morie_logit_fit()` / `.morie_binchoice_fit()`
+#'   behind the propensity models, the Hawkes MLE, the ordinal IRLS --
+#'   and each warns when it exhausts `max_iter` without meeting `tol`,
+#'   rather than returning the last iterate as though it had converged.
+#' @srrstats {RE3.1} The warnings are ordinary R conditions, so a caller
+#'   may `suppressWarnings()` them; the estimate is still returned, and
+#'   the closed-form estimators here have no convergence step to report.
+#' @srrstats {RE3.2} Convergence thresholds default to values documented
+#'   on each fitter (`.morie_logit_fit`: `tol = 1e-9`, `max_iter = 100`;
+#'   `mrm_threshold_specific_ordinal`: `tol = 1e-6`, `max_iter = 200`).
+#' @srrstats {RE3.3} Those thresholds are ordinary named arguments, so
+#'   they can be set explicitly per call -- e.g.
+#'   `mrm_threshold_specific_ordinal(..., tol =, max_iter =)`. There is
+#'   no `...` pass-through because there is no upstream fitter to pass
+#'   to: the estimators are native.
 #' @srrstats {RE4.0} Estimators return a structured result object
 #'   (class `morie_rich_result`) modelling the fit.
 #' @srrstats {RE4.2} Coefficients are returned (`details$all_coefficients`).
