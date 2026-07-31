@@ -61,7 +61,7 @@ sprfss <- function(coords, z, n_blocks = 4, n_bins = 10, max_dist = NULL,
   dv <- z[j2] - z[i2]
   flip <- lagvec[, 1] < 0
   if (ncol(lagvec) >= 2) {
-    onaxis <- abs(lagvec[, 1]) < .Machine$double.eps
+    onaxis <- lagvec[, 1] == 0
     flip <- ifelse(onaxis, lagvec[, 2] < 0, flip)
   }
   dv <- ifelse(flip, -dv, dv)
@@ -72,6 +72,8 @@ sprfss <- function(coords, z, n_blocks = 4, n_bins = 10, max_dist = NULL,
   inc_means <- vapply(seq_len(n_bins),
                       function(b) if (any(ke == b)) mean(dv[ke == b]) else NA_real_,
                       numeric(1))
+  # ddof=1 to match `overall_sd` below -- this is a scale normaliser for the
+  # increments, and the two spreads in one result must be the same estimator.
   inc_sd <- stats::sd(dv); if (!is.finite(inc_sd) || inc_sd == 0) inc_sd <- 1
   inc_bias <- max(abs(inc_means), na.rm = TRUE) / inc_sd
 
