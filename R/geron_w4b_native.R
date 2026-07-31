@@ -50,7 +50,8 @@
 # ---------------------------------------------------------------- 1. hmgru
 
 #' GRU cell forward step (Geron Ch 13, morie.fn hmgru)
-#' @param x_t Input vector. @param h_prev Previous hidden state.
+#' @param x_t Input vector.
+#' @param h_prev Previous hidden state.
 #' @param weights Named list with W_z,U_z,b_z,W_r,U_r,b_r,W_h,U_h,b_h.
 #' @return List with h_t, z_t, r_t, h_tilde, estimate, n, method.
 #' @export
@@ -92,7 +93,9 @@ morie_geron_gru <- function(x_t, h_prev, weights) {
 #' affine map (uniform); not bit-portable to numpy's PCG64. Exact anchors
 #' use the deterministic targets (var_target/std_target/limit/shape); the
 #' draw itself is checked only statistically.
-#' @param fan_in,fan_out Layer widths. @param seed Seed. @param distribution "normal" or "uniform".
+#' @param fan_in,fan_out Layer widths.
+#' @param seed Seed.
+#' @param distribution "normal" or "uniform".
 #' @return List with W, std_target, var_target, limit, empirical_std, estimate, n, method.
 #' @export
 morie_geron_he_init_hmhei <- function(fan_in, seed = 0, fan_out = NULL, distribution = "normal") {
@@ -119,8 +122,10 @@ morie_geron_he_init_hmhei <- function(fan_in, seed = 0, fan_out = NULL, distribu
 
 #' Task pipeline: preprocess -> model -> postprocess (Geron Ch 14, morie.fn hmhfpi)
 #' @param task One of text-classification, sentiment-analysis, feature-extraction, text-generation.
-#' @param inputs List of inputs. @param model function(inputs) -> raw output.
-#' @param labels Optional label names. @param top_k Ranked labels per input.
+#' @param inputs List of inputs.
+#' @param model function(inputs) -> raw output.
+#' @param labels Optional label names.
+#' @param top_k Ranked labels per input.
 #' @return List with predictions, scores, raw, task, estimate, n, method.
 #' @export
 morie_geron_hf_pipelines <- function(task, inputs, model, labels = NULL, top_k = 1) {
@@ -300,8 +305,12 @@ morie_geron_hf_trainer <- function(model, args = list(), train_ds, eval_ds = NUL
 }
 
 #' Histogram-based gradient boosting, squared loss (Geron Ch 6, morie.fn hmhgb)
-#' @param X,y Design matrix and targets. @param max_iter Rounds. @param learning_rate Shrinkage.
-#' @param max_bins Bins per feature. @param max_depth Tree depth. @param min_samples_leaf Min rows/leaf.
+#' @param X,y Design matrix and targets.
+#' @param max_iter Rounds.
+#' @param learning_rate Shrinkage.
+#' @param max_bins Bins per feature.
+#' @param max_depth Tree depth.
+#' @param min_samples_leaf Min rows/leaf.
 #' @return List with prediction, train_mse, mse_history, baseline, trees, bins_used, bin_edges, estimate, n, method.
 #' @export
 morie_geron_histogram_gradient_boosting <- function(X, y, max_iter = 100, learning_rate = 0.1,
@@ -364,8 +373,12 @@ morie_geron_histogram_gradient_boosting <- function(X, y, max_iter = 100, learni
 #' Validation split order comes from the shared LCG stream, not numpy's
 #' PCG64 permutation.
 #' @param model function(n_layers, X_train, y_train, X_val, y_val) -> val_error.
-#' @param X,y Data. @param max_layers,min_layers Depth range. @param patience Non-improving depths tolerated.
-#' @param tol Minimum improvement. @param val_fraction Held-out fraction. @param seed Split seed.
+#' @param X,y Data.
+#' @param max_layers,min_layers Depth range.
+#' @param patience Non-improving depths tolerated.
+#' @param tol Minimum improvement.
+#' @param val_fraction Held-out fraction.
+#' @param seed Split seed.
 #' @return List with best_n_layers, best_error, errors, depths_tried, stopped_early, estimate, n, method.
 #' @export
 morie_geron_hidden_layers_heuristic <- function(model, X, y, max_layers = 10, min_layers = 1,
@@ -443,9 +456,14 @@ morie_geron_hidden_layers_heuristic <- function(model, X, y, max_layers = 10, mi
 #' The grid branch is exact and deterministic (delegates to the existing
 #' morie_geron_cross_validation_score core). The random branch's candidate
 #' draws use the shared LCG stream, not numpy's PCG64 -- non-portable.
-#' @param param_grid Named list of candidate value vectors. @param X,y Data.
+#' @param param_grid Named list of candidate value vectors.
+#' @param X,y Data.
 #' @param estimator Optional function(Xtr,ytr,...) -> function(Xnew) predict.
-#' @param search "grid" or "random". @param n_iter Random draws. @param K Folds. @param seed Seed. @param score Optional scorer.
+#' @param search "grid" or "random".
+#' @param n_iter Random draws.
+#' @param K Folds.
+#' @param seed Seed.
+#' @param score Optional scorer.
 #' @return List with best_params, best_score, results, n_candidates, n_fits, distinct_values_per_param, estimate, n, method.
 #' @export
 morie_geron_hyperparameter_tuning <- function(param_grid, X, y, estimator = NULL, search = "grid",
@@ -492,8 +510,11 @@ morie_geron_hyperparameter_tuning <- function(param_grid, X, y, estimator = NULL
 # ---------------------------------------------------------------- 8. hmicl
 
 #' In-context learning by prompt-conditioned scoring (Geron Ch 15, morie.fn hmicl)
-#' @param model function(prompt, candidate) -> log-probability. @param examples List of (x,y) pairs.
-#' @param query Query input. @param candidates Optional label set. @param template,separator Prompt assembly.
+#' @param model function(prompt, candidate) -> log-probability.
+#' @param examples List of (x,y) pairs.
+#' @param query Query input.
+#' @param candidates Optional label set.
+#' @param template,separator Prompt assembly.
 #' @return List with prediction, prompt, log_probs, posterior, n_shot, candidates, estimate, n, method.
 #' @export
 morie_geron_in_context_learning_hmicl <- function(model, examples, query, candidates = NULL,
@@ -530,7 +551,8 @@ morie_geron_in_context_learning_hmicl <- function(model, examples, query, candid
 # ---------------------------------------------------------------- 9. hmigr (delegates n_groups==2 case to morie_geron_cart_split_cost)
 
 #' Information gain from a split, entropy criterion (Geron Ch 5, morie.fn hmigr)
-#' @param y Class labels. @param split Group assignment (same length as y).
+#' @param y Class labels.
+#' @param split Group assignment (same length as y).
 #' @return List with information_gain, parent_entropy, child_entropy, weighted_child_entropy,
 #'   intrinsic_information, gain_ratio, estimate, n, method.
 #' @export
@@ -573,8 +595,11 @@ morie_geron_information_gain_hmigr <- function(y, split) {
 # ---------------------------------------------------------------- 10. hmins
 
 #' k-nearest-neighbour (instance-based) prediction (Geron Ch 1, morie.fn hmins)
-#' @param X_train,y_train Stored instances/targets. @param x_query Query point(s).
-#' @param k Neighbours. @param task auto/classification/regression. @param weights uniform/distance.
+#' @param X_train,y_train Stored instances/targets.
+#' @param x_query Query point(s).
+#' @param k Neighbours.
+#' @param task auto/classification/regression.
+#' @param weights uniform/distance.
 #' @return List with prediction, neighbors, distances, task, feature_ranges, estimate, n, method.
 #' @export
 morie_geron_instance_based <- function(X_train, y_train, x_query, k = 1, task = "auto", weights = "uniform") {
@@ -632,7 +657,9 @@ morie_geron_instance_based <- function(X_train, y_train, x_query, k = 1, task = 
 # ---------------------------------------------------------------- 11. hmint8
 
 #' Post-training integer quantization (Geron Ch 17, morie.fn hmint8)
-#' @param x Tensor. @param n_bits Bit width (2..16). @param symmetric Symmetric or asymmetric scheme.
+#' @param x Tensor.
+#' @param n_bits Bit width (2..16).
+#' @param symmetric Symmetric or asymmetric scheme.
 #' @return List with q, dequantized, scale, zero_point, max_error, rel_error, compression, estimate, n, method.
 #' @export
 morie_geron_int8_quant <- function(x, n_bits = 8, symmetric = TRUE) {
@@ -668,7 +695,8 @@ morie_geron_int8_quant <- function(x, n_bits = 8, symmetric = TRUE) {
 # ---------------------------------------------------------------- 12. hmipca
 
 #' Incremental PCA via streaming co-moment updates (Geron Ch 7, morie.fn hmipca)
-#' @param X_iter List of batches (matrices), or a single matrix. @param n_components Components to keep.
+#' @param X_iter List of batches (matrices), or a single matrix.
+#' @param n_components Components to keep.
 #' @param batch_size Rows per batch when X_iter is a single matrix.
 #' @return List with components, explained_variance, explained_variance_ratio, mean, n_samples_seen,
 #'   n_batches, estimate, n, method.
@@ -722,7 +750,9 @@ morie_geron_incremental_pca <- function(X_iter, n_components, batch_size = NULL)
 #' k-means++ seeding, D^2 sampling (Geron Ch 8, morie.fn hmkmpp)
 #'
 #' RNG substitute via the shared LCG stream (not numpy PCG64).
-#' @param X Data. @param n_clusters Centres. @param seed Seed.
+#' @param X Data.
+#' @param n_clusters Centres.
+#' @param seed Seed.
 #' @return List with centers, indices, d2, min_pair_distance, estimate, n, method.
 #' @export
 morie_geron_kmeans_plus_plus <- function(X, n_clusters, seed = 0) {
@@ -762,8 +792,12 @@ morie_geron_kmeans_plus_plus <- function(X, n_clusters, seed = 0) {
 }
 
 #' k-means clustering via Lloyd's algorithm, k-means++ seeded (Geron Ch 8, morie.fn hmkmn)
-#' @param X Data. @param n_clusters Clusters. @param seed Base seed. @param max_iter Iteration cap.
-#' @param tol Centre-shift tolerance. @param n_init Restarts.
+#' @param X Data.
+#' @param n_clusters Clusters.
+#' @param seed Base seed.
+#' @param max_iter Iteration cap.
+#' @param tol Centre-shift tolerance.
+#' @param n_init Restarts.
 #' @return List with labels, centers, inertia, n_iter, distances, counts, estimate, n, method.
 #' @export
 morie_geron_kmeans <- function(X, n_clusters, seed = 0, max_iter = 300, tol = 1e-10, n_init = 10) {
@@ -810,7 +844,9 @@ morie_geron_kmeans <- function(X, n_clusters, seed = 0, max_iter = 300, tol = 1e
 # ---------------------------------------------------------------- 13. hmiseg (delegates to morie_geron_kmeans)
 
 #' Colour segmentation by k-means on pixels (Geron Ch 8, morie.fn hmiseg)
-#' @param image Array (h,w,c) or (h,w). @param n_clusters Segments. @param seed Seed for k-means.
+#' @param image Array (h,w,c) or (h,w).
+#' @param n_clusters Segments.
+#' @param seed Seed for k-means.
 #' @return List with segmented, labels, palette, inertia, compression_ratio, estimate, n, method.
 #' @export
 morie_geron_image_segmentation <- function(image, n_clusters, seed = 0) {
@@ -837,8 +873,11 @@ morie_geron_image_segmentation <- function(image, n_clusters, seed = 0) {
 # ---------------------------------------------------------------- 15. hmkd
 
 #' Knowledge distillation loss (Geron Ch 17, morie.fn hmkd)
-#' @param teacher,student Logit matrices (m,C). @param X Unused placeholder (callables not supported here).
-#' @param y Optional integer hard labels (0-based). @param T Temperature. @param alpha Hard-label weight.
+#' @param teacher,student Logit matrices (m,C).
+#' @param X Unused placeholder (callables not supported here).
+#' @param y Optional integer hard labels (0-based).
+#' @param T Temperature.
+#' @param alpha Hard-label weight.
 #' @return List with loss, ce_loss, kl_loss, teacher_probs, student_probs, agreement, estimate, n, method.
 #' @export
 morie_geron_knowledge_distillation <- function(teacher, student, X = NULL, y = NULL, T = 2.0, alpha = 0.5) {
@@ -877,7 +916,10 @@ morie_geron_knowledge_distillation <- function(teacher, student, X = NULL, y = N
 # ---------------------------------------------------------------- 16. hmkfd (delegates to existing CV core)
 
 #' K-fold partition plus CV score (Geron Ch 2, morie.fn hmkfd)
-#' @param X,y Data. @param k Folds. @param seed Optional shuffle seed. @param fit,predict,score Optional callables.
+#' @param X,y Data.
+#' @param k Folds.
+#' @param seed Optional shuffle seed.
+#' @param fit,predict,score Optional callables.
 #' @return List with cv_score, fold_scores, train_indices, test_indices, fold_sizes, estimate, n, method.
 #' @export
 morie_geron_kfold <- function(X, y, k, seed = NULL, fit = NULL, predict = NULL, score = NULL) {
@@ -906,7 +948,9 @@ morie_geron_kfold <- function(X, y, k, seed = NULL, fit = NULL, predict = NULL, 
 # ---------------------------------------------------------------- 17. hmkmlim (delegates to morie_geron_kmeans)
 
 #' k-means assumption diagnostics (Geron Ch 8, morie.fn hmkmlim)
-#' @param X Data. @param n_clusters Clusters. @param seed Seed for k-means.
+#' @param X Data.
+#' @param n_clusters Clusters.
+#' @param seed Seed for k-means.
 #' @return List with anisotropy, max_anisotropy, reassigned_fraction, size_ratio, labels,
 #'   mahalanobis_labels, estimate, n, method.
 #' @export
@@ -963,7 +1007,8 @@ morie_geron_center_gram <- function(K) {
 }
 
 #' Eigen-decomposition step shared by every kernel-PCA variant (Geron Ch 7, morie.fn hmkprbf helper)
-#' @param K Gram matrix. @param n_components Components to keep.
+#' @param K Gram matrix.
+#' @param n_components Components to keep.
 #' @return List(projection, eigenvalues, alphas, K_centered).
 #' @export
 morie_geron_kernel_pca_from_gram <- function(K, n_components) {
@@ -983,7 +1028,9 @@ morie_geron_kernel_pca_from_gram <- function(K, n_components) {
 }
 
 #' Kernel PCA with RBF kernel (Geron Ch 7, morie.fn hmkprbf)
-#' @param X Data. @param n_components Components. @param gamma Kernel width (default 1/n_features).
+#' @param X Data.
+#' @param n_components Components.
+#' @param gamma Kernel width (default 1/n_features).
 #' @return List with X_projected, eigenvalues, alphas, K, explained_variance_ratio, gamma, estimate, n, method.
 #' @export
 morie_geron_kernel_pca_rbf_hmkprbf <- function(X, n_components, gamma = NULL) {
@@ -1003,7 +1050,11 @@ morie_geron_kernel_pca_rbf_hmkprbf <- function(X, n_components, gamma = NULL) {
 }
 
 #' Kernel PCA with polynomial kernel (Geron Ch 7, morie.fn hmkppl)
-#' @param X Data. @param n_components Components. @param degree Degree. @param gamma Scale. @param coef0 Offset.
+#' @param X Data.
+#' @param n_components Components.
+#' @param degree Degree.
+#' @param gamma Scale.
+#' @param coef0 Offset.
 #' @return List with X_projected, eigenvalues, alphas, K, feature_space_dim, estimate, n, method.
 #' @export
 morie_geron_kernel_pca_poly <- function(X, n_components, degree = 3, gamma = NULL, coef0 = 1.0) {
@@ -1024,7 +1075,10 @@ morie_geron_kernel_pca_poly <- function(X, n_components, degree = 3, gamma = NUL
 }
 
 #' Kernel PCA with sigmoid kernel (Geron Ch 7, morie.fn hmkpsg)
-#' @param X Data. @param n_components Components. @param gamma Scale. @param coef0 Offset.
+#' @param X Data.
+#' @param n_components Components.
+#' @param gamma Scale.
+#' @param coef0 Offset.
 #' @return List with X_projected, eigenvalues, alphas, K, n_negative_eigenvalues, is_psd, estimate, n, method.
 #' @export
 morie_geron_kernel_pca_sigmoid <- function(X, n_components, gamma = NULL, coef0 = 1.0) {
@@ -1047,7 +1101,10 @@ morie_geron_kernel_pca_sigmoid <- function(X, n_components, gamma = NULL, coef0 
 # ---------------------------------------------------------------- 23. hmkrn (delegates to morie_geron_he_init_hmhei)
 
 #' Convolutional filter tensor, He-initialised (Geron Ch 12, morie.fn hmkrn)
-#' @param kh,kw Kernel height/width. @param c_in,c_out Channels. @param seed Seed. @param init "he" or "zeros".
+#' @param kh,kw Kernel height/width.
+#' @param c_in,c_out Channels.
+#' @param seed Seed.
+#' @param init "he" or "zeros".
 #' @return List with kernel, bias, shape, n_parameters, fan_in, std, estimate, n, method.
 #' @export
 morie_geron_filter_kernel <- function(kh, kw, c_in, c_out, seed = 0, init = "he") {
@@ -1072,7 +1129,9 @@ morie_geron_filter_kernel <- function(kh, kw, c_in, c_out, seed = 0, init = "he"
 # ---------------------------------------------------------------- 24. hmkvc (delegates to morie_geron_int8_quant)
 
 #' KV-cache quantization (Geron Ch 17, morie.fn hmkvc)
-#' @param K,V Arrays (n_heads, seq_len, d_head). @param n_bits Bit width. @param per_head Per-head scales.
+#' @param K,V Arrays (n_heads, seq_len, d_head).
+#' @param n_bits Bit width.
+#' @param per_head Per-head scales.
 #' @param dtype_bytes Bytes per element before compression.
 #' @return List with K_dequantized, V_dequantized, bytes_before, bytes_after, compression_ratio, max_error, estimate, n, method.
 #' @export
@@ -1116,7 +1175,10 @@ morie_geron_kv_cache_compress <- function(K, V, n_bits = 8, per_head = TRUE, dty
 # ---------------------------------------------------------------- 25. hml1c (delegates to EXISTING morie_geron_1cycle_schedule)
 
 #' 1cycle learning-rate policy (Geron Ch 11, morie.fn hml1c)
-#' @param t Step (0-based). @param T Cycle length. @param lr_max,lr_min Rate bounds. @param mom_max,mom_min Momentum bounds.
+#' @param t Step (0-based).
+#' @param T Cycle length.
+#' @param lr_max,lr_min Rate bounds.
+#' @param mom_max,mom_min Momentum bounds.
 #' @return List with lr, momentum, lr_schedule, momentum_schedule, peak_step, phase, estimate, n, method.
 #' @export
 morie_geron_one_cycle <- function(t, T, lr_max, lr_min, mom_max = 0.95, mom_min = 0.85) {
@@ -1136,7 +1198,10 @@ morie_geron_one_cycle <- function(t, T, lr_max, lr_min, mom_max = 0.95, mom_min 
 # ---------------------------------------------------------------- 26. hml2r
 
 #' L2 (ridge) regularization penalty (Geron Ch 11, morie.fn hml2r)
-#' @param theta Parameters. @param alpha Strength. @param skip_bias Exclude theta\[1\]. @param eta Optional learning rate.
+#' @param theta Parameters.
+#' @param alpha Strength.
+#' @param skip_bias Exclude theta\[1\].
+#' @param eta Optional learning rate.
 #' @return List with penalty, gradient, l2_norm, shrink_factor, estimate, n, method.
 #' @export
 morie_geron_l2_regularization <- function(theta, alpha, skip_bias = FALSE, eta = NULL) {
@@ -1166,7 +1231,10 @@ morie_geron_l2_regularization <- function(theta, alpha, skip_bias = FALSE, eta =
 # ---------------------------------------------------------------- 27. hmlaso (delegates to EXISTING morie_geron_l1_regularization)
 
 #' Lasso cost = MSE + alpha * L1 penalty (Geron Ch 4, morie.fn hmlaso)
-#' @param X,y Data. @param theta Coefficients. @param alpha L1 strength. @param skip_bias Exclude theta\[1\].
+#' @param X,y Data.
+#' @param theta Coefficients.
+#' @param alpha L1 strength.
+#' @param skip_bias Exclude theta\[1\].
 #' @return List with cost, mse, penalty, gradient, n_zero, estimate, n, method.
 #' @export
 morie_geron_lasso_cost_hmlaso <- function(X, y, theta, alpha, skip_bias = FALSE) {
@@ -1190,8 +1258,11 @@ morie_geron_lasso_cost_hmlaso <- function(X, y, theta, alpha, skip_bias = FALSE)
 #' Learning curves: train/validation RMSE vs training-set size (Geron Ch 4, morie.fn hmlcv)
 #'
 #' Split order via the shared LCG stream, not numpy PCG64 permutation.
-#' @param X,y Data. @param n_splits Sizes to evaluate. @param val_fraction Held-out fraction.
-#' @param fit,predict Optional callables (default OLS via lstsq). @param seed Split seed.
+#' @param X,y Data.
+#' @param n_splits Sizes to evaluate.
+#' @param val_fraction Held-out fraction.
+#' @param fit,predict Optional callables (default OLS via lstsq).
+#' @param seed Split seed.
 #' @return List with train_sizes, rmse_train, rmse_val, final_gap, verdict, estimate, n, method.
 #' @export
 morie_geron_learning_curves_hmlcv <- function(X, y, n_splits = 10, val_fraction = 0.2, fit = NULL, predict = NULL, seed = 0) {
@@ -1248,7 +1319,8 @@ morie_geron_pairwise_distances <- function(X) .morie_gr_w4b_pairwise_distances(X
 morie_geron_double_center <- function(D) .morie_gr_w4b_double_center(D)
 
 #' Classical (Torgerson) multidimensional scaling (Geron Ch 7, morie.fn hmmds)
-#' @param X Data, or a distance matrix if precomputed=TRUE. @param n_components Embedding dimension.
+#' @param X Data, or a distance matrix if precomputed=TRUE.
+#' @param n_components Embedding dimension.
 #' @param precomputed Treat X as a symmetric distance matrix.
 #' @return List with embedding, eigenvalues, stress, distance_matrix, n_negative_eigenvalues, estimate, n, method.
 #' @export
@@ -1287,7 +1359,10 @@ morie_geron_mds <- function(X, n_components, precomputed = FALSE) {
 # ---------------------------------------------------------------- 29. hmlle (delegates to morie_geron_pairwise_distances)
 
 #' Locally linear embedding (Geron Ch 7, morie.fn hmlle)
-#' @param X Data. @param n_components Embedding dimension. @param n_neighbors Neighbours. @param reg Ridge fraction.
+#' @param X Data.
+#' @param n_components Embedding dimension.
+#' @param n_neighbors Neighbours.
+#' @param reg Ridge fraction.
 #' @return List with embedding, weights, reconstruction_error, eigenvalues, estimate, n, method.
 #' @export
 morie_geron_locally_linear_embedding <- function(X, n_components, n_neighbors = 5, reg = 1e-3) {
@@ -1331,7 +1406,9 @@ morie_geron_locally_linear_embedding <- function(X, n_components, n_neighbors = 
 # ---------------------------------------------------------------- 30. hmlnet (delegates to EXISTING morie_geron_conv_output_size)
 
 #' LeNet-5 architecture resolution (Geron Ch 12, morie.fn hmlnet)
-#' @param n_classes Outputs. @param input_size Square input size. @param in_channels Input channels.
+#' @param n_classes Outputs.
+#' @param input_size Square input size.
+#' @param in_channels Input channels.
 #' @return List with layers, total_parameters, output_shape, receptive_field, estimate, n, method.
 #' @export
 morie_geron_lenet5 <- function(n_classes = 10, input_size = 32, in_channels = 1) {
@@ -1381,7 +1458,9 @@ morie_geron_lenet5 <- function(n_classes = 10, input_size = 32, in_channels = 1)
 # ---------------------------------------------------------------- 32. hmlntr
 
 #' Layer normalization: per-sample, across features (Geron Ch 11, morie.fn hmlntr)
-#' @param x Matrix (m,d) or vector. @param gamma,beta Per-feature scale/shift. @param eps Variance floor.
+#' @param x Matrix (m,d) or vector.
+#' @param gamma,beta Per-feature scale/shift.
+#' @param eps Variance floor.
 #' @return List with y, x_hat, mu, var, estimate, n, method.
 #' @export
 morie_geron_layer_normalization_hmlntr <- function(x, gamma = 1.0, beta = 0.0, eps = 1e-5) {
@@ -1404,7 +1483,10 @@ morie_geron_layer_normalization_hmlntr <- function(x, gamma = 1.0, beta = 0.0, e
 # ---------------------------------------------------------------- 31. hmlnr (delegates to morie_geron_layer_normalization_hmlntr)
 
 #' Layer normalization inside an RNN cell (Geron Ch 13, morie.fn hmlnr)
-#' @param x Pre-activations (T, n_units). @param gamma,beta Scale/shift. @param eps Variance floor. @param activation tanh/relu/none.
+#' @param x Pre-activations (T, n_units).
+#' @param gamma,beta Scale/shift.
+#' @param eps Variance floor.
+#' @param activation tanh/relu/none.
 #' @return List with h, normalized, mu, var, estimate, n, method.
 #' @export
 morie_geron_layer_norm_rnn <- function(x, gamma = 1.0, beta = 0.0, eps = 1e-5, activation = "tanh") {
@@ -1419,7 +1501,9 @@ morie_geron_layer_norm_rnn <- function(x, gamma = 1.0, beta = 0.0, eps = 1e-5, a
 # ---------------------------------------------------------------- 33. hmlof (delegates to morie_geron_pairwise_distances)
 
 #' Local outlier factor (Geron Ch 8, morie.fn hmlof)
-#' @param X Data. @param n_neighbors Neighbourhood size k. @param contamination Optional outlier fraction.
+#' @param X Data.
+#' @param n_neighbors Neighbourhood size k.
+#' @param contamination Optional outlier fraction.
 #' @return List with lof, lrd, k_distance, neighbors, is_outlier, estimate, n, method.
 #' @export
 morie_geron_local_outlier_factor_hmlof <- function(X, n_neighbors = 20, contamination = NULL) {
@@ -1457,7 +1541,9 @@ morie_geron_local_outlier_factor_hmlof <- function(X, n_neighbors = 20, contamin
 # ---------------------------------------------------------------- 34. hmlrh
 
 #' Learning-rate finder heuristic: divergence point / safety (Geron Ch 9, morie.fn hmlrh)
-#' @param lr_curve Matrix/list of (lr, loss) pairs. @param divergence_factor Multiple of running min. @param safety Divisor.
+#' @param lr_curve Matrix/list of (lr, loss) pairs.
+#' @param divergence_factor Multiple of running min.
+#' @param safety Divisor.
 #' @return List with lr, lr_diverge, lr_min_loss, min_loss, diverged, estimate, n, method.
 #' @export
 morie_geron_learning_rate_heuristic <- function(lr_curve, divergence_factor = 4.0, safety = 10.0) {
@@ -1487,7 +1573,9 @@ morie_geron_learning_rate_heuristic <- function(lr_curve, divergence_factor = 4.
 # ---------------------------------------------------------------- 35. hmlrl
 
 #' Life satisfaction = theta0 + theta1 * GDP per capita (Geron Ch 1, morie.fn hmlrl)
-#' @param gdp GDP per capita. @param theta0,theta1 Intercept/slope. @param life_sat Optional observed values.
+#' @param gdp GDP per capita.
+#' @param theta0,theta1 Intercept/slope.
+#' @param life_sat Optional observed values.
 #' @return List with prediction, residuals, rmse, r2, theta0, theta1, estimate, n, method.
 #' @export
 morie_geron_linear_regression_life <- function(gdp, theta0, theta1, life_sat = NULL) {
@@ -1517,7 +1605,11 @@ morie_geron_linear_regression_life <- function(gdp, theta0, theta1, life_sat = N
 #' Shuffle order via the shared LCG stream, not numpy PCG64. With
 #' batch_size == nrow(X) (the default) descent is full-batch and
 #' shuffle-independent, so the anchor is exact.
-#' @param X,y Data. @param epochs Passes. @param lr Learning rate. @param batch_size Mini-batch size. @param seed Shuffle seed.
+#' @param X,y Data.
+#' @param epochs Passes.
+#' @param lr Learning rate.
+#' @param batch_size Mini-batch size.
+#' @param seed Shuffle seed.
 #' @return List with w, b, loss_history, final_loss, w_closed_form, b_closed_form, gap, lr_limit, estimate, n, method.
 #' @export
 morie_geron_linreg_pytorch <- function(X, y, epochs = 100, lr = 0.01, batch_size = NULL, seed = 0) {
@@ -1563,7 +1655,8 @@ morie_geron_linreg_pytorch <- function(X, y, epochs = 100, lr = 0.01, batch_size
 # ---------------------------------------------------------------- 37. hmlstm
 
 #' LSTM cell forward step (Geron Ch 13, morie.fn hmlstm)
-#' @param x_t Input. @param h_prev,c_prev Previous short/long-term states.
+#' @param x_t Input.
+#' @param h_prev,c_prev Previous short/long-term states.
 #' @param weights Named list with W_i,U_i,b_i,W_f,U_f,b_f,W_o,U_o,b_o,W_g,U_g,b_g.
 #' @return List with h_t, c_t, i_t, f_t, o_t, g_t, estimate, n, method.
 #' @export
@@ -1598,7 +1691,11 @@ morie_geron_lstm <- function(x_t, h_prev, c_prev, weights) {
 #' Mini-batch k-means, Sculley's variant (Geron Ch 8, morie.fn hmmbkm)
 #'
 #' Batch draws via the shared LCG stream, not numpy PCG64 choice.
-#' @param X Data. @param n_clusters Clusters. @param batch_size Points sampled per iteration. @param seed Seed. @param n_iter Iterations.
+#' @param X Data.
+#' @param n_clusters Clusters.
+#' @param batch_size Points sampled per iteration.
+#' @param seed Seed.
+#' @param n_iter Iterations.
 #' @return List with labels, centers, inertia, counts, n_iter, estimate, n, method.
 #' @export
 morie_geron_minibatch_kmeans <- function(X, n_clusters, batch_size, seed = 0, n_iter = 100) {
@@ -1637,7 +1734,11 @@ morie_geron_minibatch_kmeans <- function(X, n_clusters, batch_size, seed = 0, n_
 #' Monte Carlo dropout uncertainty (Geron Ch 11, morie.fn hmmcd)
 #'
 #' Masks via the shared LCG stream, not numpy PCG64.
-#' @param model function(x_masked) -> prediction. @param x Input. @param K Passes. @param p Drop probability. @param seed Seed.
+#' @param model function(x_masked) -> prediction.
+#' @param x Input.
+#' @param K Passes.
+#' @param p Drop probability.
+#' @param seed Seed.
 #' @return List with mean, var, std, sem, samples, predictive_entropy, estimate, n, method.
 #' @export
 morie_geron_mc_dropout <- function(model, x, K = 100, p = 0.5, seed = 0) {
@@ -1671,7 +1772,9 @@ morie_geron_mc_dropout <- function(model, x, K = 100, p = 0.5, seed = 0) {
 # ---------------------------------------------------------------- 40. hmmcel
 
 #' Memory-cell recurrence c_t = f(c_prev, x_t) (Geron Ch 13, morie.fn hmmcel)
-#' @param c_prev Initial state. @param x_t Input (n_in,) or (T,n_in). @param f function(c_prev,x_t) -> c_t.
+#' @param c_prev Initial state.
+#' @param x_t Input (n_in,) or (T,n_in).
+#' @param f function(c_prev,x_t) -> c_t.
 #' @return List with c_t, states, deltas, n_steps, estimate, n, method.
 #' @export
 morie_geron_memory_cell <- function(c_prev, x_t, f) {
@@ -1698,7 +1801,9 @@ morie_geron_memory_cell <- function(c_prev, x_t, f) {
 # ---------------------------------------------------------------- 41. hmmcp
 
 #' MCP/JSON-RPC 2.0 exchange with envelope validation (Geron Ch 15, morie.fn hmmcp)
-#' @param server function(request) -> response. @param client Callable or list of requests. @param requests Optional override.
+#' @param server function(request) -> response.
+#' @param client Callable or list of requests.
+#' @param requests Optional override.
 #' @return List with exchanges, n_ok, n_errors, methods, estimate, n, method.
 #' @export
 morie_geron_model_context_protocol <- function(server, client, requests = NULL) {
@@ -1742,7 +1847,9 @@ morie_geron_model_context_protocol <- function(server, client, requests = NULL) 
 # ---------------------------------------------------------------- 42. hmmdc (delegates to morie_geron_pairwise_distances)
 
 #' Mode-collapse diagnostics (Geron Ch 18, morie.fn hmmdc)
-#' @param samples Generated samples. @param reference Optional real data. @param tol Optional mode radius.
+#' @param samples Generated samples.
+#' @param reference Optional real data.
+#' @param tol Optional mode radius.
 #' @return List with n_modes, collapse_score, mean_pairwise_distance, coverage, mode_labels, mode_sizes, estimate, n, method.
 #' @export
 morie_geron_mode_collapse <- function(samples, reference = NULL, tol = NULL) {
@@ -1792,8 +1899,12 @@ morie_geron_mode_collapse <- function(samples, reference = NULL, tol = NULL) {
 # ---------------------------------------------------------------- 43. hmmdp
 
 #' MDP validation plus value iteration (Geron Ch 19, morie.fn hmmdp)
-#' @param states,actions Label vectors. @param P Array (n_s,n_a,n_s). @param R Array (n_s,n_a,n_s) or (n_s,n_a).
-#' @param gamma Discount in \[0,1). @param max_iter Sweep cap. @param tol Convergence threshold.
+#' @param states,actions Label vectors.
+#' @param P Array (n_s,n_a,n_s).
+#' @param R Array (n_s,n_a,n_s) or (n_s,n_a).
+#' @param gamma Discount in \[0,1).
+#' @param max_iter Sweep cap.
+#' @param tol Convergence threshold.
 #' @return List with V, Q, policy, policy_labels, n_iter, effective_horizon, estimate, n, method.
 #' @export
 morie_geron_mdp <- function(states, actions, P, R, gamma = 0.95, max_iter = 1000, tol = 1e-10) {
@@ -1857,7 +1968,9 @@ morie_geron_mdp <- function(states, actions, P, R, gamma = 0.95, max_iter = 1000
 }
 
 #' Isomap: geodesic MDS via kNN graph + Dijkstra (Geron Ch 7, morie.fn hmiso)
-#' @param X Data. @param n_components Embedding dim. @param n_neighbors Neighbours.
+#' @param X Data.
+#' @param n_components Embedding dim.
+#' @param n_neighbors Neighbours.
 #' @return List with embedding, geodesic_distances, eigenvalues, stress, n_neighbors, estimate, n, method.
 #' @export
 morie_geron_isomap <- function(X, n_components, n_neighbors = 5) {
@@ -1904,7 +2017,10 @@ morie_geron_isomap <- function(X, n_components, n_neighbors = 5) {
 }
 
 #' Multi-head attention: split, attend, concat, project (Geron Ch 15, morie.fn hmmha)
-#' @param Q,K,V Query/key/value matrices. @param n_heads Head count (must divide Q/K width). @param W_O Optional output projection. @param mask Optional mask.
+#' @param Q,K,V Query/key/value matrices.
+#' @param n_heads Head count (must divide Q/K width).
+#' @param W_O Optional output projection.
+#' @param mask Optional mask.
 #' @return List with output, head_outputs, attention_weights, d_head, estimate, n, method.
 #' @export
 morie_geron_multihead_attention <- function(Q, K, V, n_heads, W_O = NULL, mask = NULL) {
@@ -1934,8 +2050,10 @@ morie_geron_multihead_attention <- function(Q, K, V, n_heads, W_O = NULL, mask =
 # ---------------------------------------------------------------- 46. hmmis7
 
 #' Mistral-7B architecture accounting (Geron Ch 15, morie.fn hmmis7)
-#' @param prompt Integer token ids (0-based). @param n_tokens Tokens to generate.
-#' @param n_layers,d_model,n_heads,n_kv_heads,d_ff,vocab_size,window Architecture. @param dtype_bytes Cache bytes/elem.
+#' @param prompt Integer token ids (0-based).
+#' @param n_tokens Tokens to generate.
+#' @param n_layers,d_model,n_heads,n_kv_heads,d_ff,vocab_size,window Architecture.
+#' @param dtype_bytes Cache bytes/elem.
 #' @return List with total_parameters, parameters_per_layer, breakdown, d_head, kv_cache_bytes,
 #'   kv_cache_saving, attention_mask, effective_context, estimate, n, method.
 #' @export
@@ -2002,7 +2120,10 @@ morie_geron_mish <- function(z) {
 # ---------------------------------------------------------------- 48. hmmlb (delegates to EXISTING morie_geron_confusion_matrix)
 
 #' Multilabel classification metrics, leave-one-out kNN default (Geron Ch 3, morie.fn hmmlb)
-#' @param X Features. @param Y Binary label matrix (m,K). @param k Neighbours. @param Y_pred Optional predictions.
+#' @param X Features.
+#' @param Y Binary label matrix (m,K).
+#' @param k Neighbours.
+#' @param Y_pred Optional predictions.
 #' @return List with Y_pred, subset_accuracy, hamming_loss, jaccard, per_label_f1, macro_f1,
 #'   zero_baseline_hamming, estimate, n, method.
 #' @export
@@ -2051,9 +2172,12 @@ morie_geron_multilabel <- function(X, Y, k = 3, Y_pred = NULL) {
 #' Masked language modelling objective (Geron Ch 15, morie.fn hmmlm)
 #'
 #' Mask positions via the shared LCG stream, not numpy PCG64 choice.
-#' @param X Integer token ids (0-based), vector or matrix. @param mask_frac Fraction masked.
-#' @param model Optional function(masked_X, positions) -> probability matrix. @param vocab_size Optional vocab size.
-#' @param seed Seed. @param mask_token Substituted value.
+#' @param X Integer token ids (0-based), vector or matrix.
+#' @param mask_frac Fraction masked.
+#' @param model Optional function(masked_X, positions) -> probability matrix.
+#' @param vocab_size Optional vocab size.
+#' @param seed Seed.
+#' @param mask_token Substituted value.
 #' @return List with loss, baseline_loss, perplexity, masked_positions, targets, probabilities, n_masked, estimate, n, method.
 #' @export
 morie_geron_masked_lm <- function(X, mask_frac = 0.15, model = NULL, vocab_size = NULL, seed = 0, mask_token = -1) {
@@ -2099,7 +2223,9 @@ morie_geron_masked_lm <- function(X, mask_frac = 0.15, model = NULL, vocab_size 
 # ---------------------------------------------------------------- 50. hmmlpf
 
 #' MLP forward pass (Geron Ch 9, morie.fn hmmlpf)
-#' @param X Input batch. @param weights,biases Per-layer parameters. @param activations Per-layer activation names or functions.
+#' @param X Input batch.
+#' @param weights,biases Per-layer parameters.
+#' @param activations Per-layer activation names or functions.
 #' @return List with output, activations, pre_activations, n_parameters, estimate, n, method.
 #' @export
 morie_geron_mlp <- function(X, weights, biases, activations) {
@@ -2133,7 +2259,8 @@ morie_geron_mlp <- function(X, weights, biases, activations) {
 # ---------------------------------------------------------------- 51. hmmms
 
 #' Min-max scaling to a target range (Geron Ch 2, morie.fn hmmms)
-#' @param X Data. @param feature_range Target (low, high).
+#' @param X Data.
+#' @param feature_range Target (low, high).
 #' @return List with X_scaled, data_min, data_max, data_range, scale, estimate, n, method.
 #' @export
 morie_geron_min_max_scaling <- function(X, feature_range = c(0.0, 1.0)) {
@@ -2152,8 +2279,12 @@ morie_geron_min_max_scaling <- function(X, feature_range = c(0.0, 1.0)) {
 # ---------------------------------------------------------------- 52. hmmnl
 
 #' Softmax regression fitted by batch gradient descent (Geron Ch 4, morie.fn hmmnl)
-#' @param X Features. @param Y Class indices (0-based) or one-hot matrix. @param lr Learning rate.
-#' @param n_iter Iterations. @param add_bias Prepend ones column. @param alpha L2 strength on non-bias rows.
+#' @param X Features.
+#' @param Y Class indices (0-based) or one-hot matrix.
+#' @param lr Learning rate.
+#' @param n_iter Iterations.
+#' @param add_bias Prepend ones column.
+#' @param alpha L2 strength on non-bias rows.
 #' @return List with Theta, probabilities, prediction, loss_history, loss, accuracy, estimate, n, method.
 #' @export
 morie_geron_multinomial_logistic <- function(X, Y, lr = 0.1, n_iter = 1000, add_bias = TRUE, alpha = 0.0) {
@@ -2201,8 +2332,12 @@ morie_geron_multinomial_logistic <- function(X, Y, lr = 0.1, n_iter = 1000, add_
 # ---------------------------------------------------------------- 53. hmmnsh
 
 #' Mean shift: mode-seeking via kernel density gradient ascent (Geron Ch 8, morie.fn hmmnsh)
-#' @param X Data. @param bandwidth Kernel bandwidth. @param kernel gaussian/flat. @param max_iter Iteration cap.
-#' @param tol Shift tolerance. @param merge_tol Optional mode-merge distance.
+#' @param X Data.
+#' @param bandwidth Kernel bandwidth.
+#' @param kernel gaussian/flat.
+#' @param max_iter Iteration cap.
+#' @param tol Shift tolerance.
+#' @param merge_tol Optional mode-merge distance.
 #' @return List with labels, modes, n_clusters, trajectories_iters, estimate, n, method.
 #' @export
 morie_geron_mean_shift <- function(X, bandwidth, kernel = "gaussian", max_iter = 300, tol = 1e-6, merge_tol = NULL) {
@@ -2245,7 +2380,10 @@ morie_geron_mean_shift <- function(X, bandwidth, kernel = "gaussian", max_iter =
 # ---------------------------------------------------------------- 54. hmmod
 
 #' Model-based least squares, closed form cross-checked against descent (Geron Ch 1, morie.fn hmmod)
-#' @param X,y Data. @param add_bias Prepend ones column. @param eta Optional learning rate. @param n_iter Descent iterations.
+#' @param X,y Data.
+#' @param add_bias Prepend ones column.
+#' @param eta Optional learning rate.
+#' @param n_iter Descent iterations.
 #' @return List with theta, theta_gd, mse, r2, gap, eta, estimate, n, method.
 #' @export
 morie_geron_model_based <- function(X, y, add_bias = TRUE, eta = NULL, n_iter = 1000) {
@@ -2333,7 +2471,10 @@ morie_geron_model_parallelism <- function(model, n_devices) {
 # ---------------------------------------------------------------- 56. hmmto
 
 #' Multioutput classification by k-NN vote (Geron Ch 3, morie.fn hmmto)
-#' @param X Features. @param Y Categorical targets (m,t). @param k Neighbours voting. @param X_new Optional rows to predict.
+#' @param X Features.
+#' @param Y Categorical targets (m,t).
+#' @param k Neighbours voting.
+#' @param X_new Optional rows to predict.
 #' @return List with predictions, predict, accuracy_per_output, accuracy, n_outputs, estimate, n, method.
 #' @export
 morie_geron_multioutput <- function(X, Y, k = 1, X_new = NULL) {
@@ -2395,7 +2536,9 @@ morie_geron_multioutput <- function(X, Y, k = 1, X_new = NULL) {
 }
 
 #' Max pooling over a sliding window, per channel (Geron Ch 12, morie.fn hmmxp)
-#' @param x Feature map (h,w) or (h,w,c). @param window Square pooling window. @param stride Defaults to window.
+#' @param x Feature map (h,w) or (h,w,c).
+#' @param window Square pooling window.
+#' @param stride Defaults to window.
 #' @return List with pooled, argmax, output_shape, parameters, estimate, n, method.
 #' @export
 morie_geron_max_pool <- function(x, window = 2, stride = NULL) {

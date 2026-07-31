@@ -1060,8 +1060,11 @@ morie_spatial_voting_bayesian_am <- function(Z, n_samples = 1000L,
 }
 
 #' Bayesian MDS (stub) -- log-normal distances via Metropolis
-#' @param D Distance matrix. @param n_dims Dimensions. @param n_samples MCMC samples.
-#' @param burn_in Burn-in length. @param sigma_init Initial sigma.
+#' @param D Distance matrix.
+#' @param n_dims Dimensions.
+#' @param n_samples MCMC samples.
+#' @param burn_in Burn-in length.
+#' @param sigma_init Initial sigma.
 #' @return List: `positions`/`coords` (posterior-mean or modal
 #'   configuration), fit diagnostics, and an `engine` tag.
 #' @references Oh & Raftery (2001) JASA 96(455).
@@ -1101,7 +1104,8 @@ morie_spatial_voting_bayesian_mds <- function(D, n_dims = 2L,
 
 #' Bayesian unfolding (stub) -- Bakker & Poole sampler
 #' @param D Respondent-stimulus dissimilarity matrix.
-#' @param n_dims Latent dimensions. @param n_samples MCMC samples.
+#' @param n_dims Latent dimensions.
+#' @param n_samples MCMC samples.
 #' @param burn_in Burn-in length.
 #' @return List with respondent/stimulus configurations and an
 #'   `engine` tag (smacof deterministic mode, or the native
@@ -1139,7 +1143,8 @@ morie_spatial_voting_bayesian_unfolding <- function(D, n_dims = 2L,
 #' Clinton-Jackman-Rivers Bayesian IRT (stub)
 #' @param votes Binary roll-call matrix.
 #' @param n_dims Ideal-point dimensions.
-#' @param n_samples MCMC samples. @param burn_in Burn-in length.
+#' @param n_samples MCMC samples.
+#' @param burn_in Burn-in length.
 #' @return List: `ideal_points`, `ideal_sd`, `discrimination`,
 #'   `difficulty`, `engine`.
 #' @references Clinton J, Jackman S & Rivers D (2004). The statistical
@@ -1178,8 +1183,10 @@ morie_spatial_voting_cjr_irt <- function(votes, n_dims = 1L,
 
 #' Bayesian IRT likelihood (deterministic part of CJR machinery)
 #'
-#' @param votes Binary matrix. @param x Ideal points.
-#' @param alpha Difficulty. @param beta Discrimination.
+#' @param votes Binary matrix.
+#' @param x Ideal points.
+#' @param alpha Difficulty.
+#' @param beta Discrimination.
 #' @return List with `loglik`, `vote_probs`, `n_correct`, `n_total`,
 #'   `accuracy`.
 #' @references Clinton J, Jackman S & Rivers D (2004). The statistical
@@ -1757,8 +1764,10 @@ morie_spatial_voting_nominate_bootstrap <- function(votes,
 #' utility, sampled via slice sampling (Neal 2003).  Porting the slice
 #' sampler is beyond this session's budget.
 #'
-#' @param votes Vote matrix. @param n_dims Latent dimensions.
-#' @param n_samples MCMC samples. @param burn_in Burn-in length.
+#' @param votes Vote matrix.
+#' @param n_dims Latent dimensions.
+#' @param n_samples MCMC samples.
+#' @param burn_in Burn-in length.
 #' @param seed RNG seed.
 #' @return List with ideal points, discrimination, difficulty and an
 #'   `engine` tag (EM-IRT closed-form approximation).
@@ -1802,7 +1811,8 @@ morie_spatial_voting_alpha_nominate <- function(votes, n_dims = 2L,
 #'
 #' @param Y Ordinal response matrix.
 #' @param n_dims Latent dimensions.
-#' @param n_samples MCMC samples. @param burn_in Burn-in length.
+#' @param n_samples MCMC samples.
+#' @param burn_in Burn-in length.
 #' @param seed RNG seed.
 #' @return List: `ideal_points`, `ideal_sd`, `discrimination`,
 #'   `difficulty`, `cutpoints`, `engine`.
@@ -1855,8 +1865,10 @@ morie_spatial_voting_ordinal_irt <- function(Y, n_dims = 1L,
 #' Time-series IRT where ideal points evolve via a random walk:
 #' \eqn{\phi_{i,t} \sim N(\phi_{i,t-1}, \tau^2)}{phi_i,t ~ N(phi_i,t-1, tau^2)}.
 #'
-#' @param votes Vote matrix. @param time_periods Per-vote period indices.
-#' @param n_samples MCMC samples. @param burn_in Burn-in length.
+#' @param votes Vote matrix.
+#' @param time_periods Per-vote period indices.
+#' @param n_samples MCMC samples.
+#' @param burn_in Burn-in length.
 #' @param seed RNG seed.
 #' @return List of per-period ideal-point matrices with an `engine`
 #'   tag flagging the per-period EM approximation.

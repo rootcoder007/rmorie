@@ -33,7 +33,8 @@
 #' drop) or logical (TRUE keep). Rows of the attention matrix sum to
 #' 1 by construction, and the parity tests assert it.
 #'
-#' @param Q,K,V Matrices. @param mask Optional matrix.
+#' @param Q,K,V Matrices.
+#' @param mask Optional matrix.
 #' @return List with `output`, `attention`.
 #' @export
 morie_alammar_sdp_attention <- function(Q, K, V, mask = NULL) {
@@ -69,8 +70,10 @@ morie_alammar_sdp_attention <- function(Q, K, V, mask = NULL) {
 #' projections -- one per head, refused otherwise, since broadcasting
 #' one matrix would compute h copies of the same head.
 #'
-#' @param Q,K,V Matrices. @param Wq,Wk,Wv Lists of matrices.
-#' @param Wo Output projection. @param heads Head count.
+#' @param Q,K,V Matrices.
+#' @param Wq,Wk,Wv Lists of matrices.
+#' @param Wo Output projection.
+#' @param heads Head count.
 #' @export
 morie_alammar_multi_head_attention <- function(Q, K, V, Wq, Wk, Wv, Wo,
                                                heads) {
@@ -104,7 +107,7 @@ morie_alammar_multi_head_attention <- function(Q, K, V, Wq, Wk, Wv, Wo,
 #' Grouped-query and multi-query attention (Ainslie et al. 2023;
 #' Shazeer 2019)
 #'
-#' head_i = Attn(Q_i, K_{g(i)}, V_{g(i)}) with g(i) = i mod G. G = 1
+#' head_i = Attn(Q_i, `K_{g(i)}, V_{g(i)}`) with g(i) = i mod G. G = 1
 #' recovers MQA; G = H full multi-head. H must divide by G.
 #'
 #' @param Q_heads List of per-head query matrices.
@@ -162,7 +165,8 @@ morie_alammar_multi_query_attention <- function(Q_heads, K_shared,
 }
 
 #' Sliding-window causal attention (Beltagy et al. 2020)
-#' @param Q,K,V One sequence's matrices. @param window_size W.
+#' @param Q,K,V One sequence's matrices.
+#' @param window_size W.
 #' @export
 morie_alammar_sliding_window_attention <- function(Q, K, V, window_size) {
   Q <- as.matrix(Q); K <- as.matrix(K)
@@ -211,7 +215,9 @@ morie_alammar_kv_cache_lookup <- function(K_cache, V_cache, k_new, v_new,
 }
 
 #' Classification and NER heads (Alammar Ch 4)
-#' @param h_cls Hidden vector. @param W_cls Weight matrix. @param b Bias.
+#' @param h_cls Hidden vector.
+#' @param W_cls Weight matrix.
+#' @param b Bias.
 #' @export
 morie_alammar_classification_head <- function(h_cls, W_cls, b) {
   h <- as.numeric(h_cls); W <- as.matrix(W_cls); b <- as.numeric(b)
@@ -259,7 +265,8 @@ morie_alammar_ner_token_head <- function(h_tokens, W, b, tags = NULL) {
 }
 
 #' Token lookup, masked pooling, contextual extraction (Alammar Ch 2/8)
-#' @param ids 0-based token ids. @param E_tok V x d embedding table.
+#' @param ids 0-based token ids.
+#' @param E_tok V x d embedding table.
 #' @export
 morie_alammar_token_embedding_lookup <- function(ids, E_tok) {
   E <- as.matrix(E_tok)
@@ -330,7 +337,8 @@ morie_alammar_contextualized_embedding <- function(layer_outputs,
 
 #' ViT patch embedding (Dosovitskiy et al. 2021)
 #' @param image Numeric matrix; must tile exactly.
-#' @param patch_size P. @param E (P^2 x d) projection.
+#' @param patch_size P.
+#' @param E (P^2 x d) projection.
 #' @param cls_token,E_pos Optional class token and positional table.
 #' @export
 morie_alammar_vit_patch_embedding <- function(image, patch_size, E,
@@ -383,7 +391,8 @@ morie_alammar_vit_patch_embedding <- function(image, patch_size, E,
 # ------------------------------------------------------------------
 
 #' Contrastive and ranking losses of the SBERT/CLIP family
-#' @param a,b Row-matched embedding matrices. @param y_true Cosine
+#' @param a,b Row-matched embedding matrices.
+#' @param y_true Cosine
 #'   targets in \\[-1, 1\\].
 #' @export
 morie_alammar_cosine_similarity_loss <- function(a, b, y_true) {
@@ -405,7 +414,8 @@ morie_alammar_cosine_similarity_loss <- function(a, b, y_true) {
 }
 
 #' @rdname morie_alammar_cosine_similarity_loss
-#' @param anchor,positive,negative Row-matched matrices. @param margin m.
+#' @param anchor,positive,negative Row-matched matrices.
+#' @param margin m.
 #' @export
 morie_alammar_sbert_triplet_loss <- function(anchor, positive, negative,
                                              margin = 1.0) {
@@ -424,7 +434,8 @@ morie_alammar_sbert_triplet_loss <- function(anchor, positive, negative,
 }
 
 #' @rdname morie_alammar_cosine_similarity_loss
-#' @param negatives Matrix of negative embeddings. @param tau Temperature.
+#' @param negatives Matrix of negative embeddings.
+#' @param tau Temperature.
 #' @export
 morie_alammar_infonce_loss <- function(anchor, positive, negatives,
                                        tau = 0.07) {
@@ -590,7 +601,9 @@ morie_alammar_mean_reciprocal_rank <- function(rankings,
 }
 
 #' @rdname morie_alammar_mean_reciprocal_rank
-#' @param retrieved Ranked ids. @param relevant Relevant ids. @param k k.
+#' @param retrieved Ranked ids.
+#' @param relevant Relevant ids.
+#' @param k k.
 #' @export
 morie_alammar_recall_at_k <- function(retrieved, relevant, k) {
   k <- as.integer(k)
@@ -630,7 +643,8 @@ morie_alammar_ndcg_at_k <- function(relevances, k) {
 }
 
 #' @rdname morie_alammar_mean_reciprocal_rank
-#' @param task_scores Named list/vector. @param category_map Named map
+#' @param task_scores Named list/vector.
+#' @param category_map Named map
 #'   task -> category.
 #' @export
 morie_alammar_mteb_benchmark_score <- function(task_scores, category_map) {
@@ -733,7 +747,8 @@ morie_alammar_c_tfidf <- function(term_counts_by_class, corpus_freq = NULL,
 
 #' @rdname morie_alammar_bag_of_words
 #' @param entity_spans List of c(start, end, type), 0-based, end
-#'   exclusive, matching the Python mirror. @param scheme BIO or BIOES.
+#'   exclusive, matching the Python mirror.
+#' @param scheme BIO or BIOES.
 #' @export
 morie_alammar_bio_tagging <- function(tokens, entity_spans,
                                       scheme = "BIO") {
@@ -791,7 +806,8 @@ morie_alammar_tokenizer_vocab_overlap <- function(vocab_a, vocab_b) {
 }
 
 #' Recursive chunking, buffer memory, templates (Alammar Ch 6-12)
-#' @param text Input string. @param separators Tier list.
+#' @param text Input string.
+#' @param separators Tier list.
 #' @param target_size,overlap Sizes.
 #' @export
 morie_alammar_recursive_chunking <- function(text, separators = NULL,
@@ -835,7 +851,8 @@ morie_alammar_recursive_chunking <- function(text, separators = NULL,
 }
 
 #' @rdname morie_alammar_recursive_chunking
-#' @param conversation List of c(user, assistant) turns. @param N Window.
+#' @param conversation List of c(user, assistant) turns.
+#' @param N Window.
 #' @export
 morie_alammar_conversation_buffer_memory <- function(conversation, N) {
   n <- as.integer(N)
@@ -849,7 +866,8 @@ morie_alammar_conversation_buffer_memory <- function(conversation, N) {
 }
 
 #' @rdname morie_alammar_recursive_chunking
-#' @param turns List of c(role, content). @param template_tokens Named
+#' @param turns List of c(role, content).
+#' @param template_tokens Named
 #'   list role -> c(open, close).
 #' @export
 morie_alammar_chat_template <- function(turns, template_tokens = NULL) {
@@ -899,7 +917,7 @@ morie_alammar_chosen_rejected_template <- function(prompts, chosen,
 
 #' @rdname morie_alammar_recursive_chunking
 #' @param records List of lists with instruction/input/output.
-#' @param template Format string with {instruction} and {input}.
+#' @param template Format string with `{instruction}` and `{input}`.
 #' @export
 morie_alammar_instruction_data_template <- function(records,
                                                     template = NULL) {
@@ -929,7 +947,8 @@ morie_alammar_instruction_data_template <- function(records,
 }
 
 #' WordPiece tokenisation pipeline (Alammar Ch 2)
-#' @param text Input. @param vocab Vocabulary incl. UNK and specials.
+#' @param text Input.
+#' @param vocab Vocabulary incl. UNK and specials.
 #' @param unk_token,lowercase,specials Pipeline settings.
 #' @export
 morie_alammar_tokenization_pipeline <- function(text, vocab,
@@ -992,7 +1011,8 @@ morie_alammar_tokenization_pipeline <- function(text, vocab,
 #' Inf of in-tree nodes re-admits them, the bug the Python mirror
 #' caught on planted blobs.
 #'
-#' @param X Point matrix. @param min_cluster_size,min_samples Sizes.
+#' @param X Point matrix.
+#' @param min_cluster_size,min_samples Sizes.
 #' @export
 morie_alammar_hdbscan_cluster <- function(X, min_cluster_size = 3,
                                           min_samples = NULL) {
@@ -1064,7 +1084,8 @@ morie_alammar_hdbscan_cluster <- function(X, min_cluster_size = 3,
 
 #' UMAP objective minimised by descent (McInnes et al. 2018,
 #' simplified: exact k-NN, bisected sigma, full-batch descent)
-#' @param X Points. @param n_neighbors,min_dist,d_out,n_steps,learning_rate,seed Settings.
+#' @param X Points.
+#' @param n_neighbors,min_dist,d_out,n_steps,learning_rate,seed Settings.
 #' @export
 morie_alammar_umap_projection <- function(X, n_neighbors = 5,
                                           min_dist = 0.1, d_out = 2,
@@ -1139,7 +1160,8 @@ morie_alammar_umap_projection <- function(X, n_neighbors = 5,
 
 #' LDA by collapsed Gibbs on the shared LCG (Griffiths and Steyvers
 #' 2004, Eq 5)
-#' @param documents List of token vectors. @param n_topics K.
+#' @param documents List of token vectors.
+#' @param n_topics K.
 #' @param alpha,beta,n_iter,seed Settings.
 #' @export
 morie_alammar_lda_topic_distribution <- function(documents, n_topics,
@@ -1273,8 +1295,10 @@ morie_alammar_setfit_twostep <- function(embeddings, labels) {
 }
 
 #' Greedy NSW approximate nearest neighbour (Malkov and Yashunin 2020)
-#' @param query_vec Query. @param index List with points, neighbors
-#'   (0-based lists), entry (0-based). @param ef_search Beam budget.
+#' @param query_vec Query.
+#' @param index List with points, neighbors
+#'   (0-based lists), entry (0-based).
+#' @param ef_search Beam budget.
 #' @export
 morie_alammar_ann_search <- function(query_vec, index, ef_search = 8) {
   q <- as.numeric(query_vec)
@@ -1337,7 +1361,8 @@ morie_alammar_ann_search <- function(query_vec, index, ef_search = 8) {
 # ------------------------------------------------------------------
 
 #' Zero-shot, T5 and judge orchestration around caller functions
-#' @param text Input. @param candidate_labels Labels.
+#' @param text Input.
+#' @param candidate_labels Labels.
 #' @param nli_model function(premise, hypothesis) -> score.
 #' @param hypothesis_template Format string with one %s.
 #' @export
@@ -1367,7 +1392,8 @@ morie_alammar_zero_shot_classification <- function(text, candidate_labels,
 }
 
 #' @rdname morie_alammar_zero_shot_classification
-#' @param input_text Input. @param label_tokens Closed label set.
+#' @param input_text Input.
+#' @param label_tokens Closed label set.
 #' @param model function(input, label) -> log-probability.
 #' @param prefix Optional task prefix.
 #' @export
@@ -1392,7 +1418,8 @@ morie_alammar_t5_classify <- function(input_text, label_tokens, model,
 }
 
 #' @rdname morie_alammar_zero_shot_classification
-#' @param responses Character vector. @param rubric Judge rubric.
+#' @param responses Character vector.
+#' @param rubric Judge rubric.
 #' @param judge_model function(rubric, response, sample_index) -> score.
 #' @param n_samples Judge samples per response.
 #' @export
@@ -1421,7 +1448,8 @@ morie_alammar_llm_as_judge <- function(responses, rubric, judge_model,
 }
 
 #' @rdname morie_alammar_zero_shot_classification
-#' @param response Text under test. @param criteria Character vector.
+#' @param response Text under test.
+#' @param criteria Character vector.
 #' @param verifier_model function(response, criterion) -> "PASS"|"FAIL".
 #' @export
 morie_alammar_output_verification <- function(response, criteria,
@@ -1453,7 +1481,8 @@ morie_alammar_output_verification <- function(response, criteria,
 }
 
 #' Prompt chains, multi-query retrieval, the ReAct loop
-#' @param x Original input. @param prompts List of
+#' @param x Original input.
+#' @param prompts List of
 #'   function(previous_output, original_input) -> prompt.
 #' @param model function(prompt) -> text.
 #' @export
@@ -1477,7 +1506,8 @@ morie_alammar_chain_prompting <- function(x, prompts, model) {
 }
 
 #' @rdname morie_alammar_chain_prompting
-#' @param query Original query. @param K Rephrasings.
+#' @param query Original query.
+#' @param K Rephrasings.
 #' @param retriever function(query) -> ranked ids.
 #' @param rephraser function(query, i) -> alternative query.
 #' @export
@@ -1506,7 +1536,8 @@ morie_alammar_multi_query_retrieval <- function(query, K, retriever,
 }
 
 #' @rdname morie_alammar_chain_prompting
-#' @param tools Named list of functions. @param max_steps Budget.
+#' @param tools Named list of functions.
+#' @param max_steps Budget.
 #' @export
 morie_alammar_react_agent_loop <- function(query, tools, model,
                                            max_steps = 5) {
@@ -1597,8 +1628,11 @@ morie_alammar_layer_freezing <- function(n_layers, n_stages = NULL) {
 }
 
 #' @rdname morie_alammar_image_captioning
-#' @param domain_corpus Documents. @param mlm_loss_fn function(corpus,
-#'   step) -> loss. @param n_mlm_steps Steps. @param task_loss_fn
+#' @param domain_corpus Documents.
+#' @param mlm_loss_fn function(corpus,
+#'   step) -> loss.
+#' @param n_mlm_steps Steps.
+#' @param task_loss_fn
 #'   Optional function() -> loss.
 #' @export
 morie_alammar_continued_pretraining <- function(domain_corpus,
@@ -1625,8 +1659,10 @@ morie_alammar_continued_pretraining <- function(domain_corpus,
 }
 
 #' @rdname morie_alammar_image_captioning
-#' @param unlabeled_pairs List of c(a, b). @param cross_encoder
-#'   function(a, b) -> score. @param gold_pairs,gold_labels Optional.
+#' @param unlabeled_pairs List of c(a, b).
+#' @param cross_encoder
+#'   function(a, b) -> score.
+#' @param gold_pairs,gold_labels Optional.
 #' @export
 morie_alammar_augmented_sbert <- function(unlabeled_pairs, cross_encoder,
                                           gold_pairs = NULL,
@@ -1665,8 +1701,10 @@ morie_alammar_augmented_sbert <- function(unlabeled_pairs, cross_encoder,
 }
 
 #' @rdname morie_alammar_image_captioning
-#' @param tokens Token vector. @param delete_ratio Deletion rate.
-#' @param seed LCG seed. @param reconstruction_logprob Optional
+#' @param tokens Token vector.
+#' @param delete_ratio Deletion rate.
+#' @param seed LCG seed.
+#' @param reconstruction_logprob Optional
 #'   per-ORIGINAL-token log-probs.
 #' @export
 morie_alammar_tsdae_objective <- function(tokens, delete_ratio = 0.6,
@@ -1707,8 +1745,10 @@ morie_alammar_tsdae_objective <- function(tokens, delete_ratio = 0.6,
 }
 
 #' BERTopic pipeline: reduce, cluster, c-TF-IDF (Grootendorst 2022)
-#' @param documents List of token vectors. @param embeddings One row
-#'   per document. @param min_cluster_size Cluster floor.
+#' @param documents List of token vectors.
+#' @param embeddings One row
+#'   per document.
+#' @param min_cluster_size Cluster floor.
 #' @export
 morie_alammar_bertopic_pipeline <- function(documents, embeddings,
                                             min_cluster_size = 2) {

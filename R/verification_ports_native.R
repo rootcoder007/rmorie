@@ -104,7 +104,9 @@ morie_empirical_bayes <- function(estimates, standard_errors) {
 #' standard deviation of zero -- a boundary-mass heuristic, not a
 #' per-unit standard-error test.
 #'
-#' @param y outcome; @param d binary treatment; @param X covariates.
+#' @param y outcome.
+#' @param d binary treatment.
+#' @param X covariates.
 #' @param regime 0/1 recommendation per unit (vector or function of X).
 #' @param propensity optional propensity vector; fitted by logit if NULL.
 #' @param method one of \code{"aipw"}, \code{"ipw"}, \code{"regression"}.
@@ -182,8 +184,10 @@ morie_regime_value <- function(y, d, X, regime, propensity = NULL,
 #' conditionals follow Makalic & Schmidt (2016), Eqs. (9)-(11); the
 #' hypervariance conditionals are inverse-gamma.
 #'
-#' @param X design matrix; @param y response; @param n_iter iterations;
-#'   @param seed RNG seed.
+#' @param X design matrix.
+#' @param y response.
+#' @param n_iter iterations.
+#' @param seed RNG seed.
 #' @return list with \code{beta_samples}, \code{tau_samples},
 #'   \code{posterior_mean}, \code{posterior_sd}, \code{n_iter}.
 #' @references Carvalho, C. M., Polson, N. G. and Scott, J. G. (2010).
@@ -241,8 +245,9 @@ morie_bayesian_horseshoe <- function(X, y, n_iter = 3000L, seed = 42L) {
 #' is a monotone fit to the closed-form coupling, not a solve of the
 #' Kantorovich problem.
 #'
-#' @param source,target samples; @param n_iter,lr,n_basis fit controls;
-#'   @param seed RNG seed.
+#' @param source,target samples.
+#' @param n_iter,lr,n_basis fit controls.
+#' @param seed RNG seed.
 #' @return list with \code{map_at_source}, \code{monotone}, \code{rmse}.
 #' @references Makkuva, A., Taghvaei, A., Oh, S. and Lee, J. (2020).
 #'   Optimal transport mapping via input convex neural networks. In

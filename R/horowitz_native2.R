@@ -225,6 +225,9 @@ morie_sieve_basis <- function(x, K = 5L, kind = "poly") {
 #' @param y numeric response.
 #' @param beta index coefficients.
 #' @param h bandwidth on the index scale.
+#' @param grid optional evaluation points on the index scale; passed
+#'   to \code{morie_nw_regression()}, which chooses a default when
+#'   \code{NULL}.
 #' @return list: index_grid, G, index, bandwidth, rate_exponent, d.
 #' @references Horowitz, Ch. 2.
 #' @examples

@@ -296,7 +296,7 @@ morie_geron_ddpm_simple_loss <- function(eps, eps_pred, reduction = "mean") {
 
 #' DDPM reverse denoising step (Geron Ch 18, morie.fn grdpmr)
 #'
-#' x_{t-1} = (x_t - ((1-a_t)/sqrt(1-ab_t)) eps) / sqrt(a_t) + sigma z.
+#' `x_{t-1}` = (x_t - ((1-a_t)/sqrt(1-ab_t)) eps) / sqrt(a_t) + sigma z.
 #'
 #' @param x_t,eps_pred Numeric objects of the same shape.
 #' @param t 0-based timestep.
@@ -424,7 +424,7 @@ morie_geron_dqn_loss <- function(Q, Q_target, batch, gamma = 0.99) {
 
 #' Inverted dropout (Geron Ch 11, morie.fn grdro)
 #'
-#' Mask ~ 1{u < 1-p} over the LCG uniform stream, output a * mask / (1-p).
+#' Mask ~ `1{u < 1-p}` over the LCG uniform stream, output a * mask / (1-p).
 #'
 #' @param a Numeric vector or matrix of activations.
 #' @param p Drop probability in \[0, 1).
@@ -609,7 +609,7 @@ morie_geron_encoder_decoder_seq2seq <- function(encoder, decoder, x, max_out_len
 
 #' Lasso cost (Geron Eq 4-10, morie.fn grlaso)
 #'
-#' J = MSE + alpha * sum_{i>=1} |theta_i|, on the shared MSE core.
+#' J = MSE + alpha * `sum_{i>=1}` |theta_i|, on the shared MSE core.
 #'
 #' @param X,y,theta Design, targets and parameters.
 #' @param alpha Non-negative L1 weight.
@@ -2700,7 +2700,7 @@ morie_geron_bert_mlm_loss <- function(logits, targets, mask) {
 
 #' MLP forward pass (Geron Ch 10, morie.fn grmlpf)
 #'
-#' a_l = phi(W_l a_{l-1} + b_l), stacked
+#' a_l = phi(W_l `a_{l-1}` + b_l), stacked
 #' [morie_geron_linear_layer_forward()] calls; the last layer uses
 #' `output_activation`.
 #'
@@ -3154,7 +3154,7 @@ morie_geron_softmax_cost_gradient <- function(X, Y, theta) {
 #' Selects column `k` (0-based) of the grxeng gradient rather than
 #' recomputing it.
 #'
-#' @param X,Y,theta Design, labels and (n, K) parameters.
+#' @param X,Y,Theta Design, labels and (n, K) parameters.
 #' @param k 0-based class.
 #' @return List with `gradient`, `class`, `gradient_norm`, `mean_error`.
 #' @export
@@ -3611,7 +3611,7 @@ morie_geron_sinusoidal_positional_encoding <- function(seq_len, d_model,
 
 #' Peephole LSTM cell (Geron Ch 15, morie.fn grpels)
 #'
-#' f and i peep at c_{t-1}, o peeps at the NEW c_t, g has no peephole;
+#' f and i peep at `c_{t-1}`, o peeps at the NEW c_t, g has no peephole;
 #' the U vectors are diagonal.
 #'
 #' @param x_t,h_prev,c_prev State vectors.
@@ -3844,7 +3844,7 @@ morie_geron_roc_curve <- function(y_true, y_scores) {
 
 #' Precision-recall curve (Geron Ch 3, morie.fn grprc)
 #'
-#' Precision and recall at each distinct score; AP = sum (R_k - R_{k-1})
+#' Precision and recall at each distinct score; AP = sum (R_k - `R_{k-1}`)
 #' P_k, with no interpolation. `best_f1` picks the first maximum.
 #'
 #' @param y_true Binary 0/1 labels.
@@ -4446,7 +4446,7 @@ morie_geron_reparameterization_trick <- function(mu, logvar, eps = NULL,
 
 #' Discounted return (Geron Ch 18, morie.fn grret)
 #'
-#' G_t = r_t + gamma G_{t+1} by a backward sweep; effective horizon
+#' G_t = r_t + gamma `G_{t+1}` by a backward sweep; effective horizon
 #' 1/(1-gamma).
 #'
 #' @param rewards Reward sequence.
@@ -4470,7 +4470,7 @@ morie_geron_discounted_return <- function(rewards, gamma) {
 
 #' Ridge cost (Geron Ch 4, morie.fn grridg)
 #'
-#' J = MSE + (alpha/2) sum_{i>=1} theta_i^2 with the bias unpenalised;
+#' J = MSE + (alpha/2) `sum_{i>=1}` theta_i^2 with the bias unpenalised;
 #' the gradient is returned alongside.
 #'
 #' @param X,y,theta Design, targets and parameters.
@@ -4663,7 +4663,7 @@ morie_geron_randomized_search_cv <- function(X, y, param_dist, n_iter, K,
 
 #' Simple (Elman) RNN cell (Geron Ch 15, morie.fn grrnnc)
 #'
-#' h_t = tanh(Whh h_{t-1} + Wxh x_t + b); the spectral norm of Whh
+#' h_t = tanh(Whh `h_{t-1}` + Wxh x_t + b); the spectral norm of Whh
 #' decides vanishing versus exploding gradients.
 #'
 #' @param x_t,h_prev State vectors.

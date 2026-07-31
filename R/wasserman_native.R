@@ -159,7 +159,7 @@ morie_wasserman_hoeffding <- function(n, t, a, b) {
        method = "Hoeffding 2 exp(-2 n t^2/(b-a)^2) (capped at 1)")
 }
 
-#' Empirical MGF M(t) = (1/n) sum e^{t X_i} (Ch 3, wsmmgf)
+#' Empirical MGF M(t) = (1/n) sum `e^{t X_i}` (Ch 3, wsmmgf)
 #'
 #' @param x Numeric sample, non-empty.
 #' @param t Evaluation point(s).
@@ -1180,7 +1180,7 @@ morie_wasserman_lasso <- function(X, y, lambda_, max_iter = 10000L, tol = 1e-12)
 #' returning a meaningless fit.
 #'
 #' @param X Design matrix; add your own intercept.
-#' @param y Binary response in {0, 1}.
+#' @param y Binary response `in {0, 1}`.
 #' @param max_iter,tol Newton controls.
 #' @return List with `estimate`, `beta`, `se`, `log_likelihood`,
 #'   `iterations`, `converged`, `n`, `p`, `method`.
@@ -1900,7 +1900,7 @@ morie_wasserman_log_linear <- function(table) {
 #' ends the run, and a stump no better than chance stops it.
 #'
 #' @param X Feature matrix.
-#' @param y Labels in {-1, +1}.
+#' @param y Labels `in {-1, +1}`.
 #' @param model Weak-learner factory (X, y, w) -> predict function;
 #'   NULL = built-in stumps.
 #' @param T Boosting rounds, at least 1.
@@ -1958,7 +1958,7 @@ morie_wasserman_boosting <- function(X, y, model, T) {
 #' reported so optimality is inspectable rather than asserted.
 #'
 #' @param X Feature matrix.
-#' @param y Labels in {-1, +1}, both classes present.
+#' @param y Labels `in {-1, +1}`, both classes present.
 #' @param C Box constraint.
 #' @param max_iter,tol Solver controls.
 #' @return List with `estimate` (margin 2/|w|), `w`, `b`,

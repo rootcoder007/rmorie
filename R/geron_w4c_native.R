@@ -178,7 +178,8 @@
 #' is exact for the summary statistics (they only compare |g| against the
 #' FP16 thresholds 65504 / 6.103515625e-05).
 #' @param model Numeric vector or named list of numeric vectors (weights).
-#' @param loss_scale Positive finite scale. @param grads Optional gradients matching `model`.
+#' @param loss_scale Positive finite scale.
+#' @param grads Optional gradients matching `model`.
 #' @export
 morie_geron_mixed_precision <- function(model, loss_scale = 1024.0, grads = NULL) {
   FP16_MAX <- 65504.0; FP16_MIN_NORMAL <- 6.103515625e-05
@@ -217,7 +218,8 @@ morie_geron_mixed_precision <- function(model, loss_scale = 1024.0, grads = NULL
 # ============================================================ hmncsn
 
 #' Noise conditional score network: affine score models per noise level (Geron Ch 18, hmncsn)
-#' @param X Training data (m, d). @param sigmas Noise ladder.
+#' @param X Training data (m, d).
+#' @param sigmas Noise ladder.
 #' @param epochs,lr,n_noise,seed,n_samples,langevin_steps,step_eps Training/sampling controls.
 #' @export
 morie_geron_ncsn <- function(X, sigmas = 1.0, epochs = 400, lr = 0.5, n_noise = 32, seed = 0,
@@ -288,7 +290,9 @@ morie_geron_ncsn <- function(X, sigmas = 1.0, epochs = 400, lr = 0.5, n_noise = 
 # ============================================================ hmnmd
 
 #' Numerical differentiation via central finite differences, Richardson-checked (Geron App A, hmnmd)
-#' @param f Function `f(x) -> scalar`. @param x Point (scalar or vector). @param h Step size.
+#' @param f Function `f(x) -> scalar`.
+#' @param x Point (scalar or vector).
+#' @param h Step size.
 #' @export
 morie_geron_numerical_diff <- function(f, x, h = 1e-5) {
   .morie_gr_need(is.function(f), "geron_numerical_diff: f must be callable")
@@ -326,7 +330,8 @@ morie_geron_numerical_diff <- function(f, x, h = 1e-5) {
 # ============================================================ hmnmf
 
 #' Non-negative matrix factorization by multiplicative updates (Geron Ch 7, hmnmf)
-#' @param X Non-negative matrix (m, p). @param n_components Inner rank k.
+#' @param X Non-negative matrix (m, p).
+#' @param n_components Inner rank k.
 #' @param max_iter,tol,seed Fit controls.
 #' @export
 morie_geron_nmf <- function(X, n_components = 2, max_iter = 400, tol = 1e-6, seed = 42) {
@@ -347,7 +352,8 @@ morie_geron_nmf <- function(X, n_components = 2, max_iter = 400, tol = 1e-6, see
 # ============================================================ hmnmt
 
 #' Encoder-decoder seq2seq: teacher-forced loss and greedy decode (Geron Ch 14, hmnmt)
-#' @param src Source token sequence. @param tgt Target token ids (reference).
+#' @param src Source token sequence.
+#' @param tgt Target token ids (reference).
 #' @param model List with `encode(src)` and `decode(z, prefix)` functions.
 #' @param max_len,eos Greedy decode cap and stop id.
 #' @export
@@ -385,7 +391,8 @@ morie_geron_encoder_decoder_nmt <- function(src, tgt, model, max_len = NULL, eos
 
 #' Novelty detection by density ratio against a clean training set (Geron Ch 8, hmnov)
 #' @param model Callable log-density, list with `log_density`/`reference`, or clean training matrix.
-#' @param X_new Points to test. @param reference Optional log reference density override.
+#' @param X_new Points to test.
+#' @param reference Optional log reference density override.
 #' @export
 morie_geron_novelty_detection <- function(model, X_new, reference = NULL) {
   B <- .morie_gr_mat(X_new, "X_new")
@@ -423,8 +430,10 @@ morie_geron_novelty_detection <- function(model, X_new, reference = NULL) {
 # ============================================================ hmnsp
 
 #' Next sentence prediction: BERT-style input assembly plus a linear \[CLS\] head (Geron Ch 15, hmnsp)
-#' @param sent_A,sent_B Tokenised sentences. @param encoder Optional `encoder(tokens, segments) -> h`.
-#' @param w,b Head weights/bias. @param label Optional 0/1 label for the loss.
+#' @param sent_A,sent_B Tokenised sentences.
+#' @param encoder Optional `encoder(tokens, segments) -> h`.
+#' @param w,b Head weights/bias.
+#' @param label Optional 0/1 label for the loss.
 #' @export
 morie_geron_next_sentence_prediction <- function(sent_A, sent_B, encoder = NULL, w = NULL, b = 0.0, label = NULL) {
   A <- as.character(sent_A); Bs <- as.character(sent_B)
@@ -465,8 +474,10 @@ morie_geron_next_sentence_prediction <- function(sent_A, sent_B, encoder = NULL,
 }
 
 #' One-class SVM (SMO) over an RBF kernel: boundary of the high-density region (Geron Ch 8, hmocsv)
-#' @param X Data (n, d). @param nu Outlier-fraction knob in (0, 1\].
-#' @param gamma RBF width. @param max_iter,tol SMO controls.
+#' @param X Data (n, d).
+#' @param nu Outlier-fraction knob in (0, 1\].
+#' @param gamma RBF width.
+#' @param max_iter,tol SMO controls.
 #' @export
 morie_geron_one_class_svm <- function(X, nu = 0.5, gamma = 1.0, max_iter = 2000, tol = 1e-9) {
   A <- .morie_gr_mat(X, "X")
@@ -516,8 +527,10 @@ morie_geron_one_class_svm <- function(X, nu = 0.5, gamma = 1.0, max_iter = 2000,
 # ============================================================ hmonl
 
 #' Online (streaming) learning: sequential SGD, prequential loss (Geron Ch 1, hmonl)
-#' @param X_stream,y_stream Stream of rows/targets. @param eta Base learning rate.
-#' @param theta Optional start (default zeros). @param decay Robbins-Monro decay.
+#' @param X_stream,y_stream Stream of rows/targets.
+#' @param eta Base learning rate.
+#' @param theta Optional start (default zeros).
+#' @param decay Robbins-Monro decay.
 #' @export
 morie_geron_online_learning <- function(X_stream, y_stream, eta = 0.1, theta = NULL, decay = 0.0) {
   A <- .morie_gr_mat(X_stream, "X_stream")
@@ -543,7 +556,8 @@ morie_geron_online_learning <- function(X_stream, y_stream, eta = 0.1, theta = N
 # ============================================================ hmonnx
 
 #' ONNX export trace: shape-traced graph validated on a concrete input (Geron App B, hmonnx)
-#' @param model List of layer specs (`op`, `in_features`, `out_features`, ...). @param args Example input.
+#' @param model List of layer specs (`op`, `in_features`, `out_features`, ...).
+#' @param args Example input.
 #' @param file Optional path for the traced graph (written as JSON).
 #' @export
 morie_geron_onnx_export <- function(model, args, file = NULL) {
@@ -590,7 +604,8 @@ jsonlite_toJSON_or_stub <- function(x) {
 # ============================================================ hmoob
 
 #' Out-of-bag evaluation over per-estimator bag masks (Geron Ch 6, hmoob)
-#' @param X,y Data and targets. @param models List of `(predict, in_bag)` pairs or lists with those names.
+#' @param X,y Data and targets.
+#' @param models List of `(predict, in_bag)` pairs or lists with those names.
 #' @param task "auto", "classification" or "regression".
 #' @export
 morie_geron_oob_score <- function(X, y, models, task = "auto") {
@@ -631,8 +646,10 @@ morie_geron_oob_score <- function(X, y, models, task = "auto") {
 # ============================================================ hmopt
 
 #' OPTICS: reachability ordering and cluster extraction (Geron Ch 8, hmopt)
-#' @param X Data (n, d). @param min_samples Core-distance neighbourhood size.
-#' @param max_eps Largest radius considered. @param eps_cluster Cut for extracting labels.
+#' @param X Data (n, d).
+#' @param min_samples Core-distance neighbourhood size.
+#' @param max_eps Largest radius considered.
+#' @param eps_cluster Cut for extracting labels.
 #' @export
 morie_geron_optics <- function(X, min_samples = 5, max_eps = Inf, eps_cluster = NULL) {
   A <- .morie_gr_mat(X, "X")
@@ -690,8 +707,10 @@ morie_geron_optics <- function(X, min_samples = 5, max_eps = Inf, eps_cluster = 
 # ============================================================ hmosf
 
 #' One-shot in-context prompting: assemble prompt, call model (Geron Ch 15, hmosf)
-#' @param model Function `model(prompt) -> prediction`. @param example `(x1, y1)` pair or list.
-#' @param query Input to label. @param verbalizer Optional `verbalizer(label) -> str`.
+#' @param model Function `model(prompt) -> prediction`.
+#' @param example `(x1, y1)` pair or list.
+#' @param query Input to label.
+#' @param verbalizer Optional `verbalizer(label) -> str`.
 #' @export
 morie_geron_one_shot <- function(model, example, query, verbalizer = NULL) {
   .morie_gr_need(is.function(model), "geron_one_shot: model must be callable")
@@ -718,7 +737,8 @@ morie_geron_one_shot <- function(model, example, query, verbalizer = NULL) {
 }
 
 #' One-vs-one multiclass: K(K-1)/2 pairwise classifiers with voting (Geron Ch 3, hmovo)
-#' @param X,y Data and class labels. @param base_estimator Optional `base_estimator(Xp, yp) -> predict`.
+#' @param X,y Data and class labels.
+#' @param base_estimator Optional `base_estimator(Xp, yp) -> predict`.
 #' @param X_new Optional rows to classify (default `X`).
 #' @export
 morie_geron_one_vs_one_hm <- function(X, y, base_estimator = NULL, X_new = NULL) {
@@ -765,7 +785,8 @@ morie_geron_one_vs_one_hm <- function(X, y, base_estimator = NULL, X_new = NULL)
 }
 
 #' One-vs-rest multiclass: K binary classifiers, argmax over scores (Geron Ch 3, hmovr)
-#' @param X,y Data and class labels. @param base_estimator Optional `base_estimator(X, yb) -> score fn`.
+#' @param X,y Data and class labels.
+#' @param base_estimator Optional `base_estimator(X, yb) -> score fn`.
 #' @param X_new Optional rows to classify.
 #' @export
 morie_geron_one_vs_rest_hm <- function(X, y, base_estimator = NULL, X_new = NULL) {
@@ -795,9 +816,12 @@ morie_geron_one_vs_rest_hm <- function(X, y, base_estimator = NULL, X_new = NULL
 # ============================================================ hmpas
 
 #' Pasting: base models on samples drawn without replacement (Geron Ch 6, hmpas)
-#' @param X,y Data and targets. @param base_estimator Optional `base_estimator(Xs, ys) -> predict`.
-#' @param n_estimators Ensemble size. @param sample_size Rows per model (int or fraction).
-#' @param seed Integer-LCG seed. @param task "auto", "regression" or "classification".
+#' @param X,y Data and targets.
+#' @param base_estimator Optional `base_estimator(Xs, ys) -> predict`.
+#' @param n_estimators Ensemble size.
+#' @param sample_size Rows per model (int or fraction).
+#' @param seed Integer-LCG seed.
+#' @param task "auto", "regression" or "classification".
 #' @export
 morie_geron_pasting <- function(X, y, base_estimator = NULL, n_estimators = 10, sample_size = NULL,
                                 seed = 0, task = "auto") {
@@ -833,7 +857,8 @@ morie_geron_pasting <- function(X, y, base_estimator = NULL, n_estimators = 10, 
 # ============================================================ hmpcac
 
 #' Principal components via SVD, sign-fixed, reconstruction error reported (Geron Ch 7, hmpcac)
-#' @param X Data (m, p). @param n_components Components to keep (default all).
+#' @param X Data (m, p).
+#' @param n_components Components to keep (default all).
 #' @param center,scale Preprocessing flags.
 #' @export
 morie_geron_principal_components <- function(X, n_components = NULL, center = TRUE, scale = FALSE) {
@@ -853,8 +878,10 @@ morie_geron_principal_components <- function(X, n_components = NULL, center = TR
 # ============================================================ hmpcav
 
 #' PCA variance accounting: cumulative ratio, threshold cut, probe check (Geron Ch 7, hmpcav)
-#' @param X Data (m, p). @param n_components Optional cap passed through to PCA.
-#' @param threshold Variance fraction to reach. @param n_probes,seed Random-direction check controls.
+#' @param X Data (m, p).
+#' @param n_components Optional cap passed through to PCA.
+#' @param threshold Variance fraction to reach.
+#' @param n_probes,seed Random-direction check controls.
 #' @export
 morie_geron_pca_variance <- function(X, n_components = NULL, threshold = 0.95, n_probes = 64, seed = 0) {
   A <- .morie_gr_mat(X, "X")
@@ -882,8 +909,10 @@ morie_geron_pca_variance <- function(X, n_components = NULL, threshold = 0.95, n
 # ============================================================ hmpd
 
 #' Zero-padding for valid/same convolutions (Geron Ch 12, hmpd)
-#' @param x Array (h, w), (h, w, c) or (n, h, w, c). @param pad_h,pad_w Explicit padding.
-#' @param kernel_size Compute same-padding from a kernel instead. @param stride Output-size bookkeeping.
+#' @param x Array (h, w), (h, w, c) or (n, h, w, c).
+#' @param pad_h,pad_w Explicit padding.
+#' @param kernel_size Compute same-padding from a kernel instead.
+#' @param stride Output-size bookkeeping.
 #' @export
 morie_geron_padding <- function(x, pad_h = NULL, pad_w = NULL, kernel_size = NULL, stride = 1) {
   a <- x
@@ -918,8 +947,10 @@ morie_geron_padding <- function(x, pad_h = NULL, pad_w = NULL, kernel_size = NUL
 # ============================================================ hmpemb
 
 #' Pretrained word embeddings as initialisation, LCG-filled OOV rows (Geron Ch 14, hmpemb)
-#' @param vocab Tokens in index order. @param pretrained Named list token -> vector.
-#' @param freeze Whether the table is held fixed. @param seed,oov_scale OOV row controls.
+#' @param vocab Tokens in index order.
+#' @param pretrained Named list token -> vector.
+#' @param freeze Whether the table is held fixed.
+#' @param seed,oov_scale OOV row controls.
 #' @export
 morie_geron_pretrained_embeddings <- function(vocab, pretrained, freeze = TRUE, seed = 0, oov_scale = 0.05) {
   words <- as.character(vocab)
@@ -947,7 +978,8 @@ morie_geron_pretrained_embeddings <- function(vocab, pretrained, freeze = TRUE, 
 
 #' Prioritized experience replay: TD-error priority sampling, IS weights (Geron Ch 19, hmper)
 #' @param buffer TD errors, or a list of transitions with a `td_error` field.
-#' @param alpha,beta,eps Prioritisation, IS and floor controls. @param batch_size,seed Optional draw.
+#' @param alpha,beta,eps Prioritisation, IS and floor controls.
+#' @param batch_size,seed Optional draw.
 #' @export
 morie_geron_prioritized_replay <- function(buffer, alpha = 0.6, beta = 0.4, eps = 1e-6, batch_size = NULL, seed = 0) {
   items <- buffer
@@ -981,7 +1013,8 @@ morie_geron_prioritized_replay <- function(buffer, alpha = 0.6, beta = 0.4, eps 
 #' Policy gradient (REINFORCE) estimator over discounted returns (Geron Ch 19, hmpg)
 #' @param trajectories List of episodes, each a list of `(state, action, reward)`.
 #' @param policy Function `policy(state, action) -> grad log pi` (or `(logp, grad)`).
-#' @param gamma Discount. @param baseline Subtract the mean return.
+#' @param gamma Discount.
+#' @param baseline Subtract the mean return.
 #' @export
 morie_geron_policy_gradient <- function(trajectories, policy, gamma = 0.99, baseline = FALSE) {
   g <- as.numeric(gamma)
@@ -1018,7 +1051,8 @@ morie_geron_policy_gradient <- function(trajectories, policy, gamma = 0.99, base
 .morie_w4c_sigmoid <- function(z) 1.0 / (1.0 + exp(-z))
 
 #' Peephole LSTM cell forward step: gates also see the cell state (Geron Ch 13, hmphp)
-#' @param x_t,h_prev,c_prev Input and previous state. @param weights List with W_x, W_h, b, p_i, p_f, p_o.
+#' @param x_t,h_prev,c_prev Input and previous state.
+#' @param weights List with W_x, W_h, b, p_i, p_f, p_o.
 #' @export
 morie_geron_peephole_lstm <- function(x_t, h_prev, c_prev, weights) {
   x <- as.numeric(x_t); h <- as.numeric(h_prev); c_ <- as.numeric(c_prev)
@@ -1040,7 +1074,8 @@ morie_geron_peephole_lstm <- function(x_t, h_prev, c_prev, weights) {
 # ============================================================ hmplf
 
 #' Polynomial feature expansion up to a given total degree (Geron Ch 4, hmplf)
-#' @param X Data (m, n) or (m,). @param degree Max total degree.
+#' @param X Data (m, n) or (m,).
+#' @param degree Max total degree.
 #' @param include_bias,interaction_only Expansion flags.
 #' @export
 morie_geron_polynomial_features_hm <- function(X, degree, include_bias = TRUE, interaction_only = FALSE) {
@@ -1089,7 +1124,8 @@ morie_geron_polynomial_features_hm <- function(X, degree, include_bias = TRUE, i
 # ============================================================ hmpmps
 
 #' Apple MPS placement plan: dtype demotion cost, no Metal call made (Geron Ch 10, hmpmps)
-#' @param tensor Data. @param dtype Optional forced target dtype name.
+#' @param tensor Data.
+#' @param dtype Optional forced target dtype name.
 #' @export
 morie_geron_mps_acceleration <- function(tensor, dtype = NULL) {
   a <- tensor
@@ -1118,7 +1154,8 @@ morie_geron_mps_acceleration <- function(tensor, dtype = NULL) {
 # ============================================================ hmpol
 
 #' Policy pi(a|s): probabilities, entropy and a reproducible sampled action (Geron Ch 19, hmpol)
-#' @param state Current state (0-based). @param pi Function, matrix, vector or named list.
+#' @param state Current state (0-based).
+#' @param pi Function, matrix, vector or named list.
 #' @param seed Integer-LCG seed for the sampled action.
 #' @export
 morie_geron_policy <- function(state, pi, seed = 0) {
@@ -1164,7 +1201,8 @@ morie_geron_policy <- function(state, pi, seed = 0) {
 }
 
 #' PPO clipped-surrogate policy optimisation over a tabular softmax policy (Geron Ch 19, hmppo)
-#' @param env List with `reset()` / `step(a)`. @param policy Initial (n_states, n_actions) logits.
+#' @param env List with `reset()` / `step(a)`.
+#' @param policy Initial (n_states, n_actions) logits.
 #' @param epochs,lr,clip_eps,gamma,n_episodes,max_steps,n_updates,seed Training controls.
 #' @export
 morie_geron_ppo <- function(env, policy, epochs = 20, lr = 0.1, clip_eps = 0.2, gamma = 0.99,
@@ -1231,7 +1269,8 @@ morie_geron_ppo <- function(env, policy, epochs = 20, lr = 0.1, clip_eps = 0.2, 
 
 #' Pipeline parallelism: contiguous stage partition plus a microbatch schedule (Geron Ch 17, hmppp)
 #' @param model Sequence of layer sizes (or weight arrays; lengths are used).
-#' @param n_stages Pipeline stages. @param n_microbatches Microbatches per batch.
+#' @param n_stages Pipeline stages.
+#' @param n_microbatches Microbatches per batch.
 #' @export
 morie_geron_pipeline_parallelism <- function(model, n_stages, n_microbatches = 4) {
   sizes <- vapply(model, function(v) length(as.numeric(v)), numeric(1))
@@ -1250,7 +1289,9 @@ morie_geron_pipeline_parallelism <- function(model, n_stages, n_microbatches = 4
 # ============================================================ hmprc
 
 #' Precision-recall curve: best-F1 point and recall at 90% precision (Geron Ch 3, hmprc)
-#' @param y_true Binary labels. @param scores Decision scores. @param pos_label Positive label.
+#' @param y_true Binary labels.
+#' @param scores Decision scores.
+#' @param pos_label Positive label.
 #' @export
 morie_geron_precision_recall_curve_hm <- function(y_true, scores, pos_label = 1) {
   yt <- as.vector(y_true); s <- as.numeric(scores)
@@ -1273,8 +1314,10 @@ morie_geron_precision_recall_curve_hm <- function(y_true, scores, pos_label = 1)
 # ============================================================ hmprcv / hmprio / hmpvt
 
 #' Perceiver: iterated latent-to-input scaled dot-product cross-attention (Geron Ch 16, hmprcv)
-#' @param x Input (N, D). @param latents Learned latents (L, D_lat).
-#' @param n_iter Cross-attention rounds. @param W_q,W_k,W_v Optional projections.
+#' @param x Input (N, D).
+#' @param latents Learned latents (L, D_lat).
+#' @param n_iter Cross-attention rounds.
+#' @param W_q,W_k,W_v Optional projections.
 #' @export
 morie_geron_perceiver <- function(x, latents, n_iter = 2, W_q = NULL, W_k = NULL, W_v = NULL) {
   X <- .morie_gr_mat(x, "x"); L <- .morie_gr_mat(latents, "latents")
@@ -1298,7 +1341,8 @@ morie_geron_perceiver <- function(x, latents, n_iter = 2, W_q = NULL, W_k = NULL
 }
 
 #' Perceiver IO: adds a cross-attention output decoder (Geron Ch 16, hmprio)
-#' @param x,latents,queries Input, latents and output queries. @param n_iter,W_q,W_k,W_v Encoder controls.
+#' @param x,latents,queries Input, latents and output queries.
+#' @param n_iter,W_q,W_k,W_v Encoder controls.
 #' @export
 morie_geron_perceiver_io_hm <- function(x, latents, queries, n_iter = 2, W_q = NULL, W_k = NULL, W_v = NULL) {
   enc <- morie_geron_perceiver(x, latents, n_iter = n_iter, W_q = W_q, W_k = W_k, W_v = W_v)
@@ -1314,7 +1358,8 @@ morie_geron_perceiver_io_hm <- function(x, latents, queries, n_iter = 2, W_q = N
 }
 
 #' Pyramid Vision Transformer: hierarchical multi-scale patch-embedding stages (Geron Ch 16, hmpvt)
-#' @param image Array (H, W, C) or (H, W). @param stage_cfgs List of stage specs.
+#' @param image Array (H, W, C) or (H, W).
+#' @param stage_cfgs List of stage specs.
 #' @param seed LCG seed for default projections.
 #' @export
 morie_geron_pvt <- function(image, stage_cfgs, seed = 0) {
@@ -1365,7 +1410,8 @@ morie_geron_pvt <- function(image, stage_cfgs, seed = 0) {
 # ============================================================ hmpre
 
 #' Precision = TP / (TP + FP) (Geron Ch 3, hmpre)
-#' @param y_true,y_pred Labels, same length. @param pos_label Positive label.
+#' @param y_true,y_pred Labels, same length.
+#' @param pos_label Positive label.
 #' @export
 morie_geron_precision_hm <- function(y_true, y_pred, pos_label = 1) {
   yt <- as.vector(y_true); yp <- as.vector(y_pred)
@@ -1384,7 +1430,8 @@ morie_geron_precision_hm <- function(y_true, y_pred, pos_label = 1) {
 # ============================================================ hmprel
 
 #' Parametric ReLU: per-channel learnable negative slope (Geron Ch 11, hmprel)
-#' @param z Pre-activations, channels on last axis. @param alpha Scalar or per-channel slope.
+#' @param z Pre-activations, channels on last axis.
+#' @param alpha Scalar or per-channel slope.
 #' @param upstream Optional dL/da from the next layer.
 #' @export
 morie_geron_prelu <- function(z, alpha = 0.25, upstream = NULL) {
@@ -1405,7 +1452,8 @@ morie_geron_prelu <- function(z, alpha = 0.25, upstream = NULL) {
 # ============================================================ hmpru
 
 #' Global magnitude weight pruning to an exact sparsity, cubic ramp schedule (Geron Ch 17, hmpru)
-#' @param model Numeric vector or named list. @param sparsity Target fraction of zeros in \[0, 1).
+#' @param model Numeric vector or named list.
+#' @param sparsity Target fraction of zeros in \[0, 1).
 #' @param n_rounds Rounds in the returned schedule.
 #' @export
 morie_geron_weight_pruning_hm <- function(model, sparsity, n_rounds = 1) {
@@ -1438,8 +1486,10 @@ morie_geron_weight_pruning_hm <- function(model, sparsity, n_rounds = 1) {
 # ============================================================ hmptq
 
 #' Static post-training quantization (PTQ) from calibration ranges (Geron App B, hmptq)
-#' @param model Weights. @param calibration_data Representative activations.
-#' @param bits Bit width, 2 to 16. @param percentile Range-clipping percentile in (0, 100\].
+#' @param model Weights.
+#' @param calibration_data Representative activations.
+#' @param bits Bit width, 2 to 16.
+#' @param percentile Range-clipping percentile in (0, 100\].
 #' @export
 morie_geron_static_quantization_ptq <- function(model, calibration_data, bits = 8, percentile = 100.0) {
   b <- as.integer(bits); pct <- as.numeric(percentile)
@@ -1479,7 +1529,9 @@ morie_geron_static_quantization_ptq <- function(model, calibration_data, bits = 
                        uint8 = "ubyte", bool = "bool")
 
 #' Torch-style tensor construction (numpy/R-backed, no torch call) (Geron Ch 10, hmpttn)
-#' @param x Data. @param device "cpu", "cuda" or "mps". @param dtype Optional torch dtype name.
+#' @param x Data.
+#' @param device "cpu", "cuda" or "mps".
+#' @param dtype Optional torch dtype name.
 #' @export
 morie_geron_pytorch_tensor <- function(x, device = "cpu", dtype = NULL) {
   dev <- tolower(strsplit(as.character(device), ":")[[1]][1])
@@ -1507,7 +1559,9 @@ morie_geron_pytorch_tensor <- function(x, device = "cpu", dtype = NULL) {
 }
 
 #' Quantization-aware training with a straight-through estimator (Geron App B, hmqat)
-#' @param model Initial full-precision weights. @param X,y Data. @param epochs,lr,bits Controls.
+#' @param model Initial full-precision weights.
+#' @param X,y Data.
+#' @param epochs,lr,bits Controls.
 #' @export
 morie_geron_quantization_aware_training_hm <- function(model, X, y, epochs = 200, lr = 0.1, bits = 8) {
   w <- as.numeric(model)
@@ -1534,7 +1588,8 @@ morie_geron_quantization_aware_training_hm <- function(model, X, y, epochs = 200
 # ============================================================ hmrad (wraps morie_geron_autograd)
 
 #' Reverse-mode automatic differentiation, delegated to morie_geron_autograd (Geron App A, hmrad)
-#' @param f Function `f(vars) -> tape node` (built from the supplied leaves). @param x Point.
+#' @param f Function `f(vars) -> tape node` (built from the supplied leaves).
+#' @param x Point.
 #' @export
 morie_geron_reverse_autodiff <- function(f, x) {
   base <- morie_geron_autograd(f, x)
@@ -1592,7 +1647,8 @@ morie_geron_reverse_autodiff <- function(f, x) {
 .morie_w4c_tree_depth <- function(node) if (node$leaf) 0L else 1L + max(.morie_w4c_tree_depth(node$left), .morie_w4c_tree_depth(node$right))
 
 #' CART regression tree minimising per-leaf MSE (Geron Ch 5, hmrdt)
-#' @param X,y Data and targets. @param max_depth,min_samples_leaf Regularisation.
+#' @param X,y Data and targets.
+#' @param max_depth,min_samples_leaf Regularisation.
 #' @export
 morie_geron_regression_tree <- function(X, y, max_depth = 3, min_samples_leaf = 1) {
   A <- .morie_gr_mat(X, "X"); yv <- as.numeric(y)
@@ -1620,7 +1676,8 @@ morie_geron_regression_tree <- function(X, y, max_depth = 3, min_samples_leaf = 
 # ============================================================ hmrec
 
 #' Recall (true positive rate) = TP / (TP + FN) (Geron Ch 3, hmrec)
-#' @param y_true,y_pred Labels, same length. @param pos_label Positive label.
+#' @param y_true,y_pred Labels, same length.
+#' @param pos_label Positive label.
 #' @export
 morie_geron_recall_hm <- function(y_true, y_pred, pos_label = 1) {
   yt <- as.vector(y_true); yp <- as.vector(y_pred)
@@ -1639,7 +1696,8 @@ morie_geron_recall_hm <- function(y_true, y_pred, pos_label = 1) {
 # ============================================================ hmregn
 
 #' Regression MLP: ReLU hidden layers, linear head, full-batch GD (Geron Ch 9, hmregn)
-#' @param X,y Data and targets. @param hidden_sizes Hidden widths.
+#' @param X,y Data and targets.
+#' @param hidden_sizes Hidden widths.
 #' @param epochs,lr,seed Training controls.
 #' @export
 morie_geron_regression_mlp <- function(X, y, hidden_sizes = 8, epochs = 400, lr = 0.05, seed = 0) {
@@ -1694,7 +1752,8 @@ morie_geron_regression_mlp <- function(X, y, hidden_sizes = 8, epochs = 400, lr 
 # ============================================================ hmrelu
 
 #' Rectified linear unit activation, with a leaky negative slope and dead-fraction diagnostic (Geron Ch 9, hmrelu)
-#' @param z Pre-activations. @param leaky Negative slope; 0 is plain ReLU.
+#' @param z Pre-activations.
+#' @param leaky Negative slope; 0 is plain ReLU.
 #' @export
 morie_geron_relu <- function(z, leaky = 0.0) {
   a <- as.numeric(z); slope <- as.numeric(leaky)
@@ -1715,7 +1774,8 @@ morie_geron_relu <- function(z, leaky = 0.0) {
 }
 
 #' Random forest: bagged CART trees with random per-split feature subsets (Geron Ch 6, hmrfc)
-#' @param X,y Data and targets. @param n_estimators,max_features,seed,max_depth,min_samples_leaf,task Controls.
+#' @param X,y Data and targets.
+#' @param n_estimators,max_features,seed,max_depth,min_samples_leaf,task Controls.
 #' @export
 morie_geron_random_forest <- function(X, y, n_estimators = 10, max_features = "sqrt", seed = 0,
                                       max_depth = 4, min_samples_leaf = 1, task = "auto") {
@@ -1766,7 +1826,8 @@ morie_geron_random_forest <- function(X, y, n_estimators = 10, max_features = "s
 # ============================================================ hmrgpt (wraps hmregn)
 
 #' Regression MLP as an nn.Sequential architecture (numpy/R-trained, no torch call) (Geron Ch 10, hmrgpt)
-#' @param X,y Data and targets. @param hidden,epochs,lr,seed Passed to `morie_geron_regression_mlp`.
+#' @param X,y Data and targets.
+#' @param hidden,epochs,lr,seed Passed to `morie_geron_regression_mlp`.
 #' @export
 morie_geron_regression_mlp_pytorch <- function(X, y, hidden = 8, epochs = 400, lr = 0.05, seed = 0) {
   base <- morie_geron_regression_mlp(X, y, hidden_sizes = hidden, epochs = epochs, lr = lr, seed = seed)
@@ -1785,7 +1846,8 @@ morie_geron_regression_mlp_pytorch <- function(X, y, hidden = 8, epochs = 400, l
 # ============================================================ hmrl
 
 #' Reinforcement learning: Monte-Carlo policy evaluation by rollout (Geron Ch 1, hmrl)
-#' @param env List with `reset()` / `step(action)`. @param pi Function `pi(state) -> action or probs`.
+#' @param env List with `reset()` / `step(action)`.
+#' @param pi Function `pi(state) -> action or probs`.
 #' @param gamma,n_episodes,max_steps,seed Controls.
 #' @export
 morie_geron_reinforcement_learning <- function(env, pi, gamma = 0.99, n_episodes = 1, max_steps = 1000, seed = 0) {
@@ -1821,8 +1883,10 @@ morie_geron_reinforcement_learning <- function(env, pi, gamma = 0.99, n_episodes
 # ============================================================ hmrlhf
 
 #' Reinforcement learning from human feedback: reward maximised under a KL penalty (Geron Ch 15, hmrlhf)
-#' @param policy Initial (n_prompts, n_responses) logits. @param reward_model Function or matrix.
-#' @param prompts Optional prompt identifiers. @param beta,lr,epochs Controls.
+#' @param policy Initial (n_prompts, n_responses) logits.
+#' @param reward_model Function or matrix.
+#' @param prompts Optional prompt identifiers.
+#' @param beta,lr,epochs Controls.
 #' @export
 morie_geron_rlhf <- function(policy, reward_model, prompts = NULL, beta = 0.1, lr = 0.5, epochs = 500) {
   Z0 <- .morie_gr_mat(policy, "policy")
@@ -1858,7 +1922,8 @@ morie_geron_rlhf <- function(policy, reward_model, prompts = NULL, beta = 0.1, l
 # ============================================================ hmrnfc (wraps hmpg)
 
 #' REINFORCE ascent step: gradient from morie_geron_policy_gradient, applied to theta (Geron Ch 19, hmrnfc)
-#' @param episodes List of episodes. @param policy Function `policy(state, action) -> grad log pi`.
+#' @param episodes List of episodes.
+#' @param policy Function `policy(state, action) -> grad log pi`.
 #' @param gamma,eta,theta,baseline Controls.
 #' @export
 morie_geron_reinforce <- function(episodes, policy, gamma = 0.99, eta = 0.01, theta = NULL, baseline = TRUE) {
@@ -1875,8 +1940,10 @@ morie_geron_reinforce <- function(episodes, policy, gamma = 0.99, eta = 0.01, th
 
 # ============================================================ hmrnn
 
-#' Recurrent neuron step: h_t = phi(Wx x_t + Wh h_{t-1} + b) (Geron Ch 13, hmrnn)
-#' @param x_t,h_prev Input and previous state. @param Wx,Wh,b Weights. @param activation One of tanh/relu/sigmoid/identity.
+#' Recurrent neuron step: h_t = phi(Wx x_t + Wh `h_{t-1}` + b) (Geron Ch 13, hmrnn)
+#' @param x_t,h_prev Input and previous state.
+#' @param Wx,Wh,b Weights.
+#' @param activation One of tanh/relu/sigmoid/identity.
 #' @export
 morie_geron_recurrent_neuron <- function(x_t, h_prev, Wx, Wh, b, activation = "tanh") {
   x <- as.numeric(x_t); h <- as.numeric(h_prev)
@@ -1898,7 +1965,9 @@ morie_geron_recurrent_neuron <- function(x_t, h_prev, Wx, Wh, b, activation = "t
 # ============================================================ hmroc (wraps morie_geron_auc_roc)
 
 #' ROC curve: FPR vs TPR over thresholds, trapezoid area cross-check (Geron Ch 3, hmroc)
-#' @param y_true Binary labels. @param scores Decision scores. @param pos_label Positive label.
+#' @param y_true Binary labels.
+#' @param scores Decision scores.
+#' @param pos_label Positive label.
 #' @export
 morie_geron_roc_curve_hm <- function(y_true, scores, pos_label = 1) {
   base <- morie_geron_auc_roc(y_true, scores, pos_label = pos_label)
@@ -1914,7 +1983,8 @@ morie_geron_roc_curve_hm <- function(y_true, scores, pos_label = 1) {
 # ============================================================ hmrpca
 
 #' Randomized PCA via a power-iterated random projection sketch (Geron Ch 7, hmrpca)
-#' @param X Data (m, p). @param n_components Components to recover.
+#' @param X Data (m, p).
+#' @param n_components Components to recover.
 #' @param seed,n_oversamples,n_power_iter Sketch controls.
 #' @export
 morie_geron_randomized_pca <- function(X, n_components, seed = 0, n_oversamples = 10, n_power_iter = 2) {
@@ -1947,7 +2017,8 @@ morie_geron_randomized_pca <- function(X, n_components, seed = 0, n_oversamples 
 .morie_w4c_lcg_features <- .morie_w4c_lcg_sample  # identical Fisher-Yates draw, reused for column sampling
 
 #' Random patches: subsample BOTH rows and features per base model (Geron Ch 6, hmrpt)
-#' @param X,y Data and targets. @param base_estimator Optional `base_estimator(Xp, yp) -> predict`.
+#' @param X,y Data and targets.
+#' @param base_estimator Optional `base_estimator(Xp, yp) -> predict`.
 #' @param n_estimators,max_samples,max_features,seed,task,bootstrap Controls.
 #' @export
 morie_geron_random_patches <- function(X, y, base_estimator = NULL, n_estimators = 10, max_samples = NULL,
@@ -2037,7 +2108,8 @@ morie_geron_randomized_search <- function(param_dist, n_iter, X, y, estimator = 
 # ============================================================ hmrsp
 
 #' Random subspaces: feature bagging without row subsampling (Geron Ch 6, hmrsp)
-#' @param X,y Data and targets. @param base_estimator Optional `base_estimator(X_sub, y) -> predict`.
+#' @param X,y Data and targets.
+#' @param base_estimator Optional `base_estimator(X_sub, y) -> predict`.
 #' @param n_estimators,max_features,seed,task Controls.
 #' @export
 morie_geron_random_subspaces <- function(X, y, base_estimator = NULL, n_estimators = 10, max_features = NULL,
@@ -2071,7 +2143,8 @@ morie_geron_random_subspaces <- function(X, y, base_estimator = NULL, n_estimato
 # ============================================================ hmrvat
 
 #' RNN visual attention: additive (Bahdanau-style) context over a feature map (Geron Ch 16, hmrvat)
-#' @param features Spatial map (H, W, D) or (N, D). @param h Decoder state.
+#' @param features Spatial map (H, W, D) or (N, D).
+#' @param h Decoder state.
 #' @param W,U,v Attention parameters.
 #' @export
 morie_geron_rnn_visual_attention <- function(features, h, W, U, v) {
@@ -2095,7 +2168,8 @@ morie_geron_rnn_visual_attention <- function(features, h, W, U, v) {
 # ============================================================ hmrvn
 
 #' RevNet: reversible residual block, verified by explicit inversion (Geron Ch 12, hmrvn)
-#' @param x Input, even width on last axis. @param F,G Shape-preserving residual functions.
+#' @param x Input, even width on last axis.
+#' @param F,G Shape-preserving residual functions.
 #' @export
 morie_geron_revnet <- function(x, F, G) {
   X <- as.numeric(x)
@@ -2117,7 +2191,8 @@ morie_geron_revnet <- function(x, F, G) {
 # ============================================================ hmrwd
 
 #' Reward function R(s, a, s'): per-transition rewards and the backward discounted return (Geron Ch 19, hmrwd)
-#' @param s,a,s_next Transition or trajectory arrays. @param R Callable `R(s,a,s')` or a 2-D/3-D lookup table.
+#' @param s,a,s_next Transition or trajectory arrays.
+#' @param R Callable `R(s,a,s')` or a 2-D/3-D lookup table.
 #' @param gamma Discount in \[0, 1\].
 #' @export
 morie_geron_reward_function <- function(s, a, s_next, R = NULL, gamma = 1.0) {

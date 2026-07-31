@@ -137,12 +137,25 @@ mrm_threshold_specific_ordinal <- function(
   if (is.null(ordinal_levels)) {
     ordinal_levels <- if (is.factor(y_raw)) {
       # Taking the ordinal scale from a factor means trusting its level
-      # ORDER. An unordered factor orders levels alphabetically, so
-      # c("high", "low", "med") would be read as the ordinal scale and
-      # every threshold would silently be wrong. Require the ordering to
-      # be declared (G2.5) rather than inferred from the alphabet.
-      .morie_check_factor(y_raw, ordered = TRUE, arg = outcome_col)
-      levels(y_raw)
+      # ORDER. `factor(x, levels = c("low", "med", "high"))` states that
+      # order deliberately and is fine unordered. The dangerous case is
+      # the DEFAULT: `factor(c("low", "med", "high"))` sorts levels
+      # alphabetically to c("high", "low", "med"), and every threshold
+      # would silently be computed against the wrong scale. Those two
+      # are indistinguishable after the fact, so warn only when the
+      # levels are in sorted order -- exactly when the default could
+      # have produced them (G2.5).
+      .morie_check_factor(y_raw, ordered = NA, arg = outcome_col)
+      lv <- levels(y_raw)
+      if (!is.ordered(y_raw) && identical(lv, sort(lv))) {
+        warning(sprintf(paste0("`%s` is an unordered factor whose levels are ",
+                               "in alphabetical order (%s). If that is not ",
+                               "the ordinal scale, pass `ordinal_levels` ",
+                               "explicitly or use an ordered factor."),
+                        outcome_col, paste(lv, collapse = " < ")),
+                call. = FALSE)
+      }
+      lv
     } else {
       sort(unique(stats::na.omit(y_raw)))
     }

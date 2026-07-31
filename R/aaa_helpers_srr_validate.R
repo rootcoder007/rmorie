@@ -66,11 +66,13 @@
 #'   `na.rm = FALSE` on data that may contain NA.
 #' @srrstats {G2.16} `.morie_check_numvec(finite = TRUE)` rejects
 #'   `NaN`/`Inf`/`-Inf` where undefined values are not meaningful.
-#' @srrstats {G2.5} `.morie_check_factor(ordered=)` asserts whether a
-#'   factor input must be ordered or unordered, erroring otherwise; it
-#'   gates the ordinal outcome in `mrm_threshold_specific_ordinal()`,
-#'   where an unordered factor's alphabetical levels would silently be
-#'   read as the ordinal scale.
+#' @srrstats {G2.5} `.morie_check_factor(ordered=)` asserts a factor
+#'   input and, where required, its ordered-ness. It gates the ordinal
+#'   outcome in `mrm_threshold_specific_ordinal()`, which additionally
+#'   warns when an UNORDERED factor's levels are in alphabetical order,
+#'   since that is exactly when R's default level ordering could have
+#'   silently supplied the wrong ordinal scale. Deliberately-set levels
+#'   (`factor(x, levels = ...)`) are accepted without complaint.
 #' @srrstats {G2.11} `.morie_coerce_units()` accepts columns with a
 #'   non-standard class but numeric storage (such as `units`-package
 #'   columns), coercing them to plain numeric rather than erroring; it
@@ -168,10 +170,12 @@ morie_impute_column <- function(x, method = c("median", "mean", "mode",
             else mean(x, na.rm = TRUE)
     x[miss] <- fill
   } else if (method == "mode") {
-    tab <- table(x[!miss])
-    if (!length(tab)) stop("`x` is entirely missing.", call. = FALSE)
-    x[miss] <- if (is.factor(x)) names(tab)[which.max(tab)] else
-      methods::as(names(tab)[which.max(tab)], class(x)[1L])
+    obs <- x[!miss]
+    if (!length(obs)) stop("`x` is entirely missing.", call. = FALSE)
+    u <- unique(obs)
+    # match on the values, not their names(): keeps the column's own type
+    # and avoids a methods::as() round-trip through character.
+    x[miss] <- u[which.max(tabulate(match(obs, u), nbins = length(u)))]
   } else {
     # locf: a leading NA has nothing to carry forward, so it stays NA
     # rather than being back-filled from the future.

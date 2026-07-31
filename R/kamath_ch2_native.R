@@ -23,7 +23,8 @@
 }
 
 #' Kamath Ch 2 encoder-decoder scaffolding (Eq 2.1-2.6)
-#' @param h_t_1,x_t Previous state and input. @param f Optional cell.
+#' @param h_t_1,x_t Previous state and input.
+#' @param f Optional cell.
 #' @export
 morie_kamath_encoder_state <- function(h_t_1, x_t, f = NULL) {
   h <- as.numeric(h_t_1); x <- as.numeric(x_t)
@@ -41,7 +42,8 @@ morie_kamath_encoder_state <- function(h_t_1, x_t, f = NULL) {
 }
 
 #' @rdname morie_kamath_encoder_state
-#' @param h_1_h_T State matrix, one row per step. @param mapping
+#' @param h_1_h_T State matrix, one row per step.
+#' @param mapping
 #'   "mean", "last", "max" or a function.
 #' @export
 morie_kamath_context_vector <- function(h_1_h_T, mapping = "mean") {
@@ -65,7 +67,8 @@ morie_kamath_context_vector <- function(h_1_h_T, mapping = "mean") {
 }
 
 #' @rdname morie_kamath_encoder_state
-#' @param h_T Final state. @param all_states Optional full stack.
+#' @param h_T Final state.
+#' @param all_states Optional full stack.
 #' @export
 morie_kamath_context_simplest <- function(h_T, all_states = NULL) {
   h <- as.numeric(h_T)
@@ -84,7 +87,8 @@ morie_kamath_context_simplest <- function(h_T, all_states = NULL) {
 }
 
 #' @rdname morie_kamath_encoder_state
-#' @param s_t_1,y_t_1,c Decoder inputs. @param g Optional cell.
+#' @param s_t_1,y_t_1,c Decoder inputs.
+#' @param g Optional cell.
 #' @export
 morie_kamath_decoder_state <- function(s_t_1, y_t_1, c, g = NULL) {
   s <- as.numeric(s_t_1); y <- as.numeric(y_t_1); cc <- as.numeric(c)
@@ -124,7 +128,8 @@ morie_kamath_decoder_token_distribution <- function(s_t_1, y_t_1, c,
 }
 
 #' @rdname morie_kamath_encoder_state
-#' @param y Target token indices, 0-based. @param U Optional length pin.
+#' @param y Target token indices, 0-based.
+#' @param U Optional length pin.
 #' @export
 morie_kamath_seq2seq_cross_entropy <- function(y, c, U = NULL) {
   idx <- as.integer(y)
@@ -152,7 +157,8 @@ morie_kamath_seq2seq_cross_entropy <- function(y, c, U = NULL) {
 }
 
 #' Kamath Ch 2 attention chain (Eq 2.7-2.12, 2.15-2.16, 2.19)
-#' @param q,k_i Query and key. @param alpha Score family or function.
+#' @param q,k_i Query and key.
+#' @param alpha Score family or function.
 #' @export
 morie_kamath_attention_score <- function(q, k_i, alpha = "scaled_dot") {
   q <- as.numeric(q); k <- as.numeric(k_i)
@@ -206,7 +212,8 @@ morie_kamath_softmax_element <- function(a_i, a) {
 }
 
 #' @rdname morie_kamath_attention_score
-#' @param b Weights. @param v Value matrix, one row per weight.
+#' @param b Weights.
+#' @param v Value matrix, one row per weight.
 #' @export
 morie_kamath_attention_output <- function(b, v) {
   b <- as.numeric(b)
@@ -223,7 +230,8 @@ morie_kamath_attention_output <- function(b, v) {
 }
 
 #' @rdname morie_kamath_attention_score
-#' @param k Key. @param d_k Optional dimension pin.
+#' @param k Key.
+#' @param d_k Optional dimension pin.
 #' @export
 morie_kamath_scaled_dot_score <- function(q, k, d_k = NULL) {
   q <- as.numeric(q); k <- as.numeric(k)
@@ -275,7 +283,8 @@ morie_kamath_multihead_head_i <- function(Q, K, V, W_Qi, W_Ki, W_Vi) {
 }
 
 #' @rdname morie_kamath_attention_score
-#' @param heads List of head outputs. @param W_O Output projection.
+#' @param heads List of head outputs.
+#' @param W_O Output projection.
 #' @export
 morie_kamath_multihead_concat <- function(heads, W_O) {
   hs <- lapply(heads, as.matrix)
@@ -323,7 +332,9 @@ morie_kamath_masked_attention <- function(Q, K, V, M, d_k = NULL) {
 }
 
 #' Positional encodings, FFN, layer norm (Eq 2.13-2.14, 2.17-2.18)
-#' @param i Position. @param j Frequency index. @param d Model width.
+#' @param i Position.
+#' @param j Frequency index.
+#' @param d Model width.
 #' @export
 morie_kamath_positional_sin <- function(i, j, d) {
   i <- as.integer(i); j <- as.integer(j); d <- as.integer(d)
@@ -359,7 +370,8 @@ morie_kamath_positional_cos <- function(i, j, d) {
 }
 
 #' @rdname morie_kamath_positional_sin
-#' @param z Input rows. @param W_1,W_2,b_1,b_2 FFN parameters.
+#' @param z Input rows.
+#' @param W_1,W_2,b_1,b_2 FFN parameters.
 #' @export
 morie_kamath_ffn_relu <- function(z, W_1, W_2, b_1, b_2) {
   Z <- as.matrix(z); W1 <- as.matrix(W_1); W2 <- as.matrix(W_2)
@@ -381,8 +393,10 @@ morie_kamath_ffn_relu <- function(z, W_1, W_2, b_1, b_2) {
 }
 
 #' @rdname morie_kamath_positional_sin
-#' @param h_i Vector. @param mu,sigma Optional pinned statistics.
-#' @param g Gain. @param eps Unused stabiliser kept for the signature.
+#' @param h_i Vector.
+#' @param mu,sigma Optional pinned statistics.
+#' @param g Gain.
+#' @param eps Unused stabiliser kept for the signature.
 #' @export
 morie_kamath_layer_norm <- function(h_i, mu = NULL, sigma = NULL, g = 1,
                                     eps = 1e-5) {
@@ -405,7 +419,8 @@ morie_kamath_layer_norm <- function(h_i, mu = NULL, sigma = NULL, g = 1,
 }
 
 #' The Kamath Ch 2 pretraining loss family (Eq 2.20-2.33)
-#' @param L_PTi Pretext losses. @param lambda_i Optional weights.
+#' @param L_PTi Pretext losses.
+#' @param lambda_i Optional weights.
 #' @export
 morie_kamath_ssl_loss <- function(L_PTi, lambda_i = NULL) {
   L <- as.numeric(L_PTi)
@@ -456,7 +471,8 @@ morie_kamath_mlm_loss <- function(x, M_x) {
 }
 
 #' @rdname morie_kamath_ssl_loss
-#' @param xhat Per-token probability of ORIGINAL. @param d Labels.
+#' @param xhat Per-token probability of ORIGINAL.
+#' @param d Labels.
 #' @export
 morie_kamath_rtd_loss <- function(xhat, d) {
   p <- .morie_km_probs(xhat, "xhat")
@@ -474,7 +490,8 @@ morie_kamath_rtd_loss <- function(xhat, d) {
 }
 
 #' @rdname morie_kamath_ssl_loss
-#' @param y Target-side probabilities. @param M_y Target mask.
+#' @param y Target-side probabilities.
+#' @param M_y Target mask.
 #' @export
 morie_kamath_tlm_loss <- function(x, y, M_x, M_y) {
   lx <- morie_kamath_mlm_loss(x, M_x)
@@ -520,7 +537,8 @@ morie_kamath_span_loss <- function(x, xhat, i, j) {
 }
 
 #' GPT objectives and MoE (Eq 2.34-2.41)
-#' @param U Per-token probabilities. @param k Context size (recorded).
+#' @param U Per-token probabilities.
+#' @param k Context size (recorded).
 #' @param Theta Unused, kept for the signature.
 #' @export
 morie_kamath_gpt_unsupervised <- function(U, k = NULL, Theta = NULL) {
@@ -550,7 +568,8 @@ morie_kamath_gpt_combined <- function(L_1, L_2, lam = 0.5) {
 }
 
 #' @rdname morie_kamath_gpt_unsupervised
-#' @param x Input. @param G Gate weights or function.
+#' @param x Input.
+#' @param G Gate weights or function.
 #' @param E_i Expert functions or precomputed outputs.
 #' @export
 morie_kamath_moe_output <- function(x, G, E_i) {
@@ -581,7 +600,8 @@ morie_kamath_moe_output <- function(x, G, E_i) {
 }
 
 #' @rdname morie_kamath_gpt_unsupervised
-#' @param W_g Gate projection, d x n. @param k Experts kept.
+#' @param W_g Gate projection, d x n.
+#' @param k Experts kept.
 #' @export
 morie_kamath_moe_topk_gating <- function(x, W_g, k = 2) {
   x <- as.numeric(x)

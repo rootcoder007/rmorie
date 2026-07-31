@@ -58,7 +58,8 @@ morie_geron_elu <- function(z, alpha = 1.0) {
 #' Scaled ELU with the Klambauer self-normalising constants. Note the
 #' branch is z <= 0 here (not z < 0), matching the Python module.
 #'
-#' @param z Numeric vector. @param lam,alpha Positive scale constants.
+#' @param z Numeric vector.
+#' @param lam,alpha Positive scale constants.
 #' @return List with `a`, `grad`, `mean`, `var` (population), `lam`,
 #'   `alpha`, `estimate`, `n`.
 #' @export
@@ -85,7 +86,8 @@ morie_geron_selu <- function(z, lam = 1.0507009873554804934193349852946,
 #' Phi(z) + z phi(z) is negative near z = -1, which the parity test
 #' checks by finite differences.
 #'
-#' @param z Numeric vector. @param approximate Use the tanh form.
+#' @param z Numeric vector.
+#' @param approximate Use the tanh form.
 #' @return List with `a`, `activation`, `exact`, `approx`,
 #'   `derivative`, `max_abs_gap`, `estimate`, `n`.
 #' @export
@@ -110,7 +112,8 @@ morie_geron_gelu <- function(z, approximate = FALSE) {
 #' 1 above zero, 0 below, `at_zero` exactly at zero. The derivative is
 #' zero almost everywhere, so the result carries that warning.
 #'
-#' @param z Numeric vector. @param at_zero Value returned at z == 0.
+#' @param z Numeric vector.
+#' @param at_zero Value returned at z == 0.
 #' @return List with `activation`, `derivative`, `n_active`,
 #'   `warnings`, `estimate`, `n`.
 #' @export
@@ -133,7 +136,8 @@ morie_geron_heaviside <- function(z, at_zero = 1.0) {
 #' max(alpha z, z) with alpha in \[0, 1). alpha = 0 is a plain ReLU and
 #' is flagged, because that is the dying-unit case.
 #'
-#' @param z Numeric vector. @param alpha Leak slope in \[0, 1).
+#' @param z Numeric vector.
+#' @param alpha Leak slope in \[0, 1).
 #' @return List with `activation`, `derivative`, `n_leaky`, `alpha`,
 #'   `warnings`, `estimate`, `n`.
 #' @export
@@ -197,7 +201,8 @@ morie_geron_tanh <- function(z) {
 #' `morie_geron_sigmoid` exactly as the Python module delegates to
 #' hmsigm.
 #'
-#' @param z Numeric vector. @param beta Finite gate scale.
+#' @param z Numeric vector.
+#' @param beta Finite gate scale.
 #' @return List with `a`, `grad`, `gate`, `beta`, `estimate`, `n`.
 #' @export
 morie_geron_swish <- function(z, beta = 1.0) {
@@ -217,7 +222,9 @@ morie_geron_swish <- function(z, beta = 1.0) {
 #'
 #' step(w^T x + b) with step(0) = 1. A vector `x` is one row.
 #'
-#' @param x Vector or (n, d) matrix. @param w Weights. @param b Bias.
+#' @param x Vector or (n, d) matrix.
+#' @param w Weights.
+#' @param b Bias.
 #' @return List with `y` (0/1), `z`, `w`, `b`, `estimate`, `n`.
 #' @export
 morie_geron_tlu <- function(x, w, b = 0.0) {
@@ -242,7 +249,8 @@ morie_geron_tlu <- function(x, w, b = 0.0) {
 #' 1 is row-wise for a matrix, 0 is column-wise. For a vector input the
 #' full Jacobian diag(p) - p p^T is returned as well.
 #'
-#' @param scores Numeric vector or matrix. @param axis -1, 0 or 1.
+#' @param scores Numeric vector or matrix.
+#' @param axis -1, 0 or 1.
 #' @return List with `p`, `probabilities`, `argmax` (0-based),
 #'   `jacobian` (vector input only), `estimate`, `n`.
 #' @export
@@ -279,7 +287,8 @@ morie_geron_softmax_function <- function(scores, axis = -1) {
 #' X theta normalised row by row through `morie_geron_softmax_function`,
 #' the same delegation the Python module makes to hmsftm.
 #'
-#' @param X (m, d) design matrix. @param theta (d, K) coefficients.
+#' @param X (m, d) design matrix.
+#' @param theta (d, K) coefficients.
 #' @return List with `scores`, `p`, `probabilities`, `predicted`
 #'   (0-based), `estimate`, `n`.
 #' @export
@@ -405,7 +414,9 @@ morie_geron_mae <- function(y_true, y_pred) {
 #' If `theta` is one longer than the columns of `X`, a leading column
 #' of ones is prepended, matching the Python implicit-bias rule.
 #'
-#' @param X Design matrix. @param y Targets. @param theta Coefficients.
+#' @param X Design matrix.
+#' @param y Targets.
+#' @param theta Coefficients.
 #' @return List with `cost`, `mse`, `gradient`, `grad_norm`,
 #'   `residuals`, `predictions`, `estimate`, `n`.
 #' @export
@@ -440,7 +451,8 @@ morie_geron_linreg_mse_cost <- function(X, y, theta) {
 #' inverse, and refuses a rank-deficient Gram matrix rather than
 #' returning an arbitrary member of the solution set.
 #'
-#' @param X Design matrix. @param y Targets.
+#' @param X Design matrix.
+#' @param y Targets.
 #' @param fit_intercept Prepend a column of ones.
 #' @return List with `theta`, `residuals`, `rss`, `cond`, `estimate`, `n`.
 #' @export
@@ -512,7 +524,8 @@ morie_geron_ridge_cost <- function(X, y, theta, alpha, intercept_index = 0) {
 #' intercept slot. Effective df = tr(X (X^T X + alpha A)^-1 X^T) makes
 #' the shrinkage visible.
 #'
-#' @param X,y Design and targets. @param alpha Non-negative penalty.
+#' @param X,y Design and targets.
+#' @param alpha Non-negative penalty.
 #' @param intercept_index 0-based unpenalised index, or NULL.
 #' @return List with `theta`, `residuals`, `rss`, `effective_df`,
 #'   `alpha`, `estimate`, `n`.
@@ -550,7 +563,8 @@ morie_geron_ridge_normal <- function(X, y, alpha, intercept_index = 0) {
 #' `skip_bias` zeroes the mask at the FIRST element of the row-major
 #' flattening, which for a matrix `theta` is entry \[1, 1\].
 #'
-#' @param theta Coefficients. @param alpha Non-negative penalty.
+#' @param theta Coefficients.
+#' @param alpha Non-negative penalty.
 #' @param skip_bias Leave the first coefficient unpenalised.
 #' @return List with `penalty`, `gradient`, `prox`, `n_zero`,
 #'   `estimate`, `n`.
@@ -583,7 +597,8 @@ morie_geron_l1_regularization <- function(theta, alpha, skip_bias = FALSE) {
 #' matrix: 0 = down columns, 1 (or -1) = across rows; NULL treats the
 #' whole array as one vector.
 #'
-#' @param w Vector or matrix. @param r Positive radius.
+#' @param w Vector or matrix.
+#' @param r Positive radius.
 #' @param axis NULL, 0, 1 or -1.
 #' @return List with `w`, `norm_before`, `norm_after`, `clipped`,
 #'   `n_clipped`, `r`, `estimate`, `n`.
@@ -628,7 +643,8 @@ morie_geron_max_norm <- function(w, r, axis = NULL) {
 #' of them for the multi-tensor form (which returns a list).
 #'
 #' @param grads Numeric vector/matrix, or a list of them.
-#' @param max_norm Positive threshold. @param norm_type p, or Inf.
+#' @param max_norm Positive threshold.
+#' @param norm_type p, or Inf.
 #' @return List with `clipped`, `total_norm`, `scale`, `was_clipped`,
 #'   `new_norm`, `max_norm`, `norm_type`, `estimate`, `n`.
 #' @export
@@ -661,7 +677,8 @@ morie_geron_gradient_clipping <- function(grads, max_norm, norm_type = 2.0) {
 #' eta_t = eta0 * decay^t, plus the number of steps per tenfold drop
 #' (Inf when decay = 1).
 #'
-#' @param eta0 Positive initial rate. @param decay In (0, 1\].
+#' @param eta0 Positive initial rate.
+#' @param decay In (0, 1\].
 #' @param t Step or vector of steps.
 #' @return List with `eta`, `steps_per_decade`, `eta0`, `decay`,
 #'   `estimate`, `n`.
@@ -690,7 +707,8 @@ morie_geron_lr_exponential <- function(eta0, decay, t) {
 #' 0..max(t) are returned so the divergence of sum eta and the
 #' convergence of sum eta^2 can be checked directly.
 #'
-#' @param t Step or vector of steps. @param eta0 Positive rate.
+#' @param t Step or vector of steps.
+#' @param eta0 Positive rate.
 #' @param t0 Positive offset.
 #' @return List with `eta`, `schedule`, `sum_eta`, `sum_eta_squared`,
 #'   `eta0`, `t0`, `estimate`, `n`.
@@ -721,7 +739,8 @@ morie_geron_learning_rate_schedule <- function(t, eta0, t0) {
 #' smooth at both ends, leaving eta_max and reaching eta_min with zero
 #' slope.
 #'
-#' @param t Step(s) in 0..T. @param T Cycle length.
+#' @param t Step(s) in 0..T.
+#' @param T Cycle length.
 #' @param eta_max,eta_min Rate bounds.
 #' @return List with `eta`, `schedule`, `T`, `eta_max`, `eta_min`,
 #'   `estimate`, `n`.
@@ -755,8 +774,10 @@ morie_geron_cosine_annealing <- function(t, T, eta_max, eta_min = 0.0) {
 #' parameter count per layer. This is the LAYER-ALGEBRA route that the
 #' parity test checks against a direct count.
 #'
-#' @param n_features Input width. @param n_layers Hidden layers.
-#' @param n_outputs Output width. @param width Override for w.
+#' @param n_features Input width.
+#' @param n_layers Hidden layers.
+#' @param n_outputs Output width.
+#' @param width Override for w.
 #' @return List with `width`, `width_range`, `n_layers`,
 #'   `n_parameters`, `parameters_per_layer`, `estimate`, `n`.
 #' @export
@@ -825,9 +846,12 @@ morie_geron_overfitting <- function(train_err, val_err, tol = 0.0) {
 #' last max(2, floor(n/3)) points; `converged` compares it against
 #' 1 percent of the final training error.
 #'
-#' @param train_err Training error curve. @param threshold Bar to beat.
-#' @param val_err Optional validation curve. @param baseline Alias for
-#'   `threshold`. @param tol Gap tolerance.
+#' @param train_err Training error curve.
+#' @param threshold Bar to beat.
+#' @param val_err Optional validation curve.
+#' @param baseline Alias for
+#'   `threshold`.
+#' @param tol Gap tolerance.
 #' @return List with `diagnosis`, `underfitting`, `train_error`,
 #'   `val_error`, `gap`, `threshold`, `baseline`, `plateau_slope`,
 #'   `converged`, `estimate`, `n`.
@@ -881,7 +905,8 @@ morie_geron_underfitting <- function(train_err, threshold = NULL,
 #' r = exp((lgamma(d/2 + 1) - log n - (d/2) log pi) / d), the mean
 #' pairwise distance sqrt(d/6), and the border share.
 #'
-#' @param d Dimensions. @param n Sample size.
+#' @param d Dimensions.
+#' @param n Sample size.
 #' @return List with `nn_distance`, `mean_pairwise_distance`,
 #'   `border_fraction`, `border_tolerance`, `n_for_density`,
 #'   `sparsity_factor`, `d`, `estimate`, `n`.
@@ -906,7 +931,8 @@ morie_geron_curse_dimensionality <- function(d, n) {
 #' d_min = ceil(4 ln n / (eps^2/2 - eps^3/3)). Independent of the
 #' original dimensionality, and loose in practice.
 #'
-#' @param n Number of points (>= 2). @param eps Distortion in (0, 1).
+#' @param n Number of points (>= 2).
+#' @param eps Distortion in (0, 1).
 #' @return List with `d_min`, `d_min_exact`, `eps`, `n_points`,
 #'   `estimate`, `n`.
 #' @export
@@ -937,7 +963,8 @@ morie_geron_johnson_lindenstrauss <- function(n, eps) {
 #' POPULATION sd, which is not R's `sd()`; pass ddof = 1 for the n-1
 #' form.
 #'
-#' @param X Numeric vector or matrix. @param ddof Degrees of freedom.
+#' @param X Numeric vector or matrix.
+#' @param ddof Degrees of freedom.
 #' @return List with `X_std`, `Z`, `mean`, `scale`, `ddof`,
 #'   `estimate`, `n`.
 #' @export
@@ -1096,7 +1123,8 @@ morie_geron_imputation_median <- function(X, missing_values = NULL,
 #' `seed + 7919` and combines the two by Box-Muller, exactly as the
 #' Python module does. The reshape is row-major, so byrow = TRUE.
 #'
-#' @param fan_in,fan_out Positive layer widths. @param seed LCG seed.
+#' @param fan_in,fan_out Positive layer widths.
+#' @param seed LCG seed.
 #' @param distribution "uniform" or "normal".
 #' @return List with `W`, `limit`, `std`, `variance`, `fan_in`,
 #'   `fan_out`, `distribution`, `estimate`, `n`.
@@ -1133,9 +1161,12 @@ morie_geron_glorot_init <- function(fan_in, fan_out, seed = 0,
 #' step approaches eta g / (1 - beta), which is the `terminal_step`
 #' field: momentum effectively multiplies the learning rate.
 #'
-#' @param grads Gradient vector. @param v Velocity; default zeros.
-#' @param beta Decay in \[0, 1). @param eta Positive rate.
-#' @param theta Parameters; default zeros. @param nesterov Look-ahead form.
+#' @param grads Gradient vector.
+#' @param v Velocity; default zeros.
+#' @param beta Decay in \[0, 1).
+#' @param eta Positive rate.
+#' @param theta Parameters; default zeros.
+#' @param nesterov Look-ahead form.
 #' @return List with `theta`, `theta_next`, `step`, `v`,
 #'   `terminal_step`, `beta`, `estimate`, `n`.
 #' @export
@@ -1169,8 +1200,10 @@ morie_geron_momentum <- function(grads, v = NULL, beta = 0.9, eta = 0.01,
 #' still reported).
 #'
 #' @param grads Gradient vector, or function(theta) -> gradient.
-#' @param v Velocity; default zeros. @param beta Decay in \[0, 1).
-#' @param eta Positive rate. @param theta Parameters.
+#' @param v Velocity; default zeros.
+#' @param beta Decay in \[0, 1).
+#' @param eta Positive rate.
+#' @param theta Parameters.
 #' @return List with `theta`, `theta_next`, `v`, `lookahead`,
 #'   `gradient`, `step`, `estimate`, `n`.
 #' @export
@@ -1216,9 +1249,12 @@ morie_geron_nesterov <- function(grads, v = NULL, beta = 0.9, eta = 0.001,
 #' t+1 exponent in the first term: it is not a typo, it is what pulls
 #' the current gradient into the step without a second evaluation.
 #'
-#' @param grads Gradient vector. @param m,v Moments; default zeros.
-#' @param b1,b2 Decays in \[0, 1). @param eta Positive rate.
-#' @param t 1-based timestep. @param eps Non-negative floor.
+#' @param grads Gradient vector.
+#' @param m,v Moments; default zeros.
+#' @param b1,b2 Decays in \[0, 1).
+#' @param eta Positive rate.
+#' @param t 1-based timestep.
+#' @param eps Non-negative floor.
 #' @param theta Parameters; default zeros.
 #' @return List with `theta`, `theta_next`, `step`, `m`, `v`, `m_hat`,
 #'   `v_hat`, `t`, `estimate`, `n`.
@@ -1265,7 +1301,8 @@ morie_geron_nadam <- function(grads, m = NULL, v = NULL, b1 = 0.9, b2 = 0.999,
 #' n - 1, and is reported 0-based in `index`.
 #'
 #' @param X,y,theta Design, targets, coefficients.
-#' @param eta Positive rate. @param seed LCG seed.
+#' @param eta Positive rate.
+#' @param seed LCG seed.
 #' @param index Optional 0-based row override.
 #' @return List with `theta`, `theta_next`, `gradient`,
 #'   `batch_gradient`, `residual`, `index` (0-based), `eta`,
@@ -1315,7 +1352,8 @@ morie_geron_sgd_update <- function(X, y, theta, eta = 0.1, seed = 0,
 #' this file.
 #'
 #' @param X,y,theta Design, targets, coefficients.
-#' @param eta Positive rate. @param b Batch size in 1..m.
+#' @param eta Positive rate.
+#' @param b Batch size in 1..m.
 #' @param order Optional 0-based permutation; NULL means identity.
 #' @param n_steps Number of updates.
 #' @return List with `theta`, `gradient`, `full_gradient`,
@@ -1369,7 +1407,8 @@ morie_geron_minibatch_gd <- function(X, y, theta, eta, b, order = NULL,
 #' decision boundary is the linear set theta^T x = 0.
 #'
 #' @param X Design matrix (a vector is one row).
-#' @param theta Coefficients. @param add_bias Prepend a ones column.
+#' @param theta Coefficients.
+#' @param add_bias Prepend a ones column.
 #' @return List with `p_hat`, `logits`, `prediction` (0/1),
 #'   `estimate`, `n`.
 #' @export
@@ -1458,8 +1497,10 @@ morie_geron_logistic_gradient <- function(X, y, theta, add_bias = FALSE) {
 #' epoch makes no mistake. Converges iff the classes are linearly
 #' separable, which is why XOR never converges.
 #'
-#' @param X Design matrix. @param y Labels in {0, 1}.
-#' @param eta Positive rate. @param n_iter Maximum epochs.
+#' @param X Design matrix.
+#' @param y Labels `in {0, 1}`.
+#' @param eta Positive rate.
+#' @param n_iter Maximum epochs.
 #' @return List with `w`, `weights`, `bias`, `predictions`,
 #'   `accuracy`, `mistakes_per_epoch`, `converged`, `estimate`, `n`.
 #' @export
@@ -1505,7 +1546,8 @@ morie_geron_perceptron <- function(X, y, eta = 1.0, n_iter = 10) {
 #' why ||W|| grows without bound under repeated exposure.
 #'
 #' @param X Presynaptic activity (rows = presentations).
-#' @param Y Postsynaptic activity. @param eta Positive rate.
+#' @param Y Postsynaptic activity.
+#' @param eta Positive rate.
 #' @param W Optional starting weights.
 #' @return List with `dW`, `W`, `norm_before`, `norm_after`,
 #'   `warnings`, `estimate`, `n`.
@@ -1543,7 +1585,8 @@ morie_geron_hebb_rule <- function(X, Y, eta = 0.1, W = NULL) {
 #' y = F(x) + x, optionally with a projected skip. dy/dx = I + dF/dx
 #' is what keeps a gradient path open through arbitrary depth.
 #'
-#' @param x Input array. @param F Function of x.
+#' @param x Input array.
+#' @param F Function of x.
 #' @param projection Optional function applied to the skip path.
 #' @return List with `y`, `output`, `residual`, `skip`,
 #'   `residual_fraction`, `estimate`, `n`.
@@ -1577,7 +1620,8 @@ morie_geron_resnet <- function(x, F, projection = NULL) {
 #' voting only helps when the members err on DIFFERENT rows.
 #'
 #' @param models List of functions mapping X to a label vector.
-#' @param X Design matrix. @param y_true Optional gold labels.
+#' @param X Design matrix.
+#' @param y_true Optional gold labels.
 #' @return List with `predicted`, `votes`, `classes`,
 #'   `member_predictions`, `member_accuracy`, `accuracy`,
 #'   `agreement`, `estimate`, `n`.
@@ -1625,7 +1669,8 @@ morie_geron_voting_hard <- function(models, X, y_true = NULL) {
 #' a fixed rotation of PE(p) -- the property that lets the encoding
 #' extrapolate past the training length. It should be ~1e-16.
 #'
-#' @param pos Position or vector of positions. @param d_model Even width.
+#' @param pos Position or vector of positions.
+#' @param d_model Even width.
 #' @param base Frequency base (> 1).
 #' @return List with `pe`, `wavelengths`, `rotation_check`, `d_model`,
 #'   `estimate`, `n`.
@@ -1676,7 +1721,9 @@ morie_geron_positional_encoding <- function(pos, d_model, base = 10000.0) {
 #' `pi` is either a length-n_states vector of 0-based action indices or
 #' an (n_states, n_actions) stochastic matrix; `s` is 0-based.
 #'
-#' @param s 0-based query state. @param pi Policy. @param gamma In \[0, 1).
+#' @param s 0-based query state.
+#' @param pi Policy.
+#' @param gamma In \[0, 1).
 #' @param P (n_states, n_actions, n_states) array.
 #' @param R (n_states, n_actions) or (n_states, n_actions, n_states).
 #' @return List with `V`, `value`, `r_pi`, `P_pi`, `residual`,
@@ -1739,8 +1786,10 @@ morie_geron_value_function <- function(s, pi, gamma, P = NULL, R = NULL) {
 #' own earlier update -- the parity test replays a trajectory
 #' step-for-step to pin that down. States are 0-based.
 #'
-#' @param V Value table. @param s,r,s_next Equal-length transitions.
-#' @param alpha In (0, 1\]. @param gamma In \[0, 1\].
+#' @param V Value table.
+#' @param s,r,s_next Equal-length transitions.
+#' @param alpha In (0, 1\].
+#' @param gamma In \[0, 1\].
 #' @param terminal Optional logical vector; TRUE drops the bootstrap.
 #' @return List with `V`, `td_error`, `target`, `updates`, `alpha`,
 #'   `gamma`, `estimate`, `n`.
@@ -1781,9 +1830,13 @@ morie_geron_td_learning <- function(V, s, r, s_next, alpha = 0.1,
 #' estimate upward. `s`, `a` and `s_next` are 0-based; `max_next` is
 #' NaN on a terminal transition, matching Python.
 #'
-#' @param Q (states, actions) table. @param s,a 0-based state/action.
-#' @param r Reward. @param s_next 0-based next state.
-#' @param alpha In (0, 1\]. @param gamma In \[0, 1\]. @param done Terminal.
+#' @param Q (states, actions) table.
+#' @param s,a 0-based state/action.
+#' @param r Reward.
+#' @param s_next 0-based next state.
+#' @param alpha In (0, 1\].
+#' @param gamma In \[0, 1\].
+#' @param done Terminal.
 #' @return List with `Q`, `td_error`, `target`, `old_value`,
 #'   `new_value`, `max_next`, `estimate`, `n`.
 #' @export
@@ -1819,14 +1872,15 @@ morie_geron_q_learning <- function(Q, s, a, r, s_next, alpha, gamma,
 
 #' Credit assignment over a trajectory (Geron Ch 18, morie.fn hmcrd)
 #'
-#' Discounted returns G_t = r_t + gamma G_{t+1} computed backwards,
-#' accumulating eligibility traces e_t = gamma lambda e_{t-1} + 1
+#' Discounted returns G_t = r_t + gamma `G_{t+1}` computed backwards,
+#' accumulating eligibility traces e_t = gamma lambda `e_{t-1}` + 1
 #' forwards, and the per-step share of the total return. `normalize`
 #' uses the POPULATION sd (numpy default), not R's `sd()`.
 #'
 #' @param trajectory Numeric rewards, or a list of (state, action,
 #'   reward) triples.
-#' @param gamma Discount in \[0, 1\]. @param lam Trace decay; default gamma.
+#' @param gamma Discount in \[0, 1\].
+#' @param lam Trace decay; default gamma.
 #' @param normalize Standardise the returns.
 #' @return List with `returns`, `raw_returns`, `rewards`,
 #'   `eligibility`, `credit`, `discounted_rewards`, `total_return`.
@@ -1981,11 +2035,15 @@ morie_geron_predict_tree <- function(tree, X) {
 #' but hmdtr, hmdthv, hmdtst, hmext, hmgbrt, hmrdt and hmrfc all route
 #' their growth through this same core in Python.
 #'
-#' @param X Feature matrix. @param y Labels or targets.
+#' @param X Feature matrix.
+#' @param y Labels or targets.
 #' @param criterion "gini", "entropy" or "mse".
-#' @param max_depth Optional depth cap. @param min_samples_split Minimum
-#'   node size to consider a split. @param min_samples_leaf Minimum leaf
-#'   size. @param min_impurity_decrease Minimum gain to accept a split.
+#' @param max_depth Optional depth cap.
+#' @param min_samples_split Minimum
+#'   node size to consider a split.
+#' @param min_samples_leaf Minimum leaf
+#'   size.
+#' @param min_impurity_decrease Minimum gain to accept a split.
 #' @return List with `tree`, `predictions`, `n_leaves`, `depth`,
 #'   `n_splits`, `criterion`, `feature_importances`, `train_accuracy`
 #'   or `train_mse`, `estimate`, `n`.
@@ -2052,7 +2110,8 @@ morie_geron_cart_algorithm <- function(X, y, criterion = "gini",
 #' pure leaf predicts with probability 1.
 #'
 #' @param X,y Design and discrete labels.
-#' @param criterion "gini" or "entropy". @param max_depth Optional cap.
+#' @param criterion "gini" or "entropy".
+#' @param max_depth Optional cap.
 #' @param min_samples_leaf Minimum leaf size.
 #' @return List with `tree`, `predictions`, `probabilities`, `classes`,
 #'   `n_leaves`, `depth`, `n_splits`, `train_accuracy`,
@@ -2127,7 +2186,8 @@ morie_geron_classification_tree <- function(X, y, criterion = "gini",
 #' either a vector of 0-based class labels or an (m, K) matrix of row
 #' distributions.
 #'
-#' @param X (m, d) design. @param Y Labels or (m, K) targets.
+#' @param X (m, d) design.
+#' @param Y Labels or (m, K) targets.
 #' @param theta (d, K) coefficients.
 #' @return List with `cost`, `probabilities`, `log_probabilities`,
 #'   `per_sample_cost`, `scores`, `accuracy`, `chance_cost`,
@@ -2191,8 +2251,11 @@ morie_geron_cross_entropy_gradient <- function(X, Y, theta) {
 #' `morie_geron_cross_entropy_cost` on the augmented last layer, as in
 #' the Python module.
 #'
-#' @param X,y Design and labels. @param hidden_sizes Integer vector.
-#' @param epochs Training epochs. @param lr Learning rate. @param seed LCG seed.
+#' @param X,y Design and labels.
+#' @param hidden_sizes Integer vector.
+#' @param epochs Training epochs.
+#' @param lr Learning rate.
+#' @param seed LCG seed.
 #' @return List with `weights`, `biases`, `loss_history`, `final_loss`,
 #'   `predictions`, `probabilities`, `logits`, `accuracy`, `classes`,
 #'   `layer_sizes`, `n_params`, `estimate`, `n`.
@@ -2342,8 +2405,10 @@ morie_geron_confusion_matrix_labeled <- function(y_true, y_pred,
 #' decoder and keys/values from the encoder, so no causal mask is
 #' needed.
 #'
-#' @param dec_h Decoder states (T_dec, d). @param enc_h Encoder states.
-#' @param W_Q,W_K,W_V Projection matrices. @param mask Optional mask.
+#' @param dec_h Decoder states (T_dec, d).
+#' @param enc_h Encoder states.
+#' @param W_Q,W_K,W_V Projection matrices.
+#' @param mask Optional mask.
 #' @return List with `context`, `output`, `attention_weights`,
 #'   `logits`, `scale`, `d_k`, `entropy`, `max_entropy`, `argmax`
 #'   (0-based), `estimate`, `n`.
@@ -2372,7 +2437,8 @@ morie_geron_cross_attention_report <- function(dec_h, enc_h, W_Q, W_K, W_V,
 #' task and the chance loss log(B) rises with it.
 #'
 #' @param images,texts Paired embedding matrices of the same shape.
-#' @param tau Positive temperature. @param normalize Cosine-normalise.
+#' @param tau Positive temperature.
+#' @param normalize Cosine-normalise.
 #' @param class_prompts Optional (C, d) prompt embeddings.
 #' @return List with `loss`, `loss_i2t`, `loss_t2i`, `similarity`,
 #'   `matched_similarity`, `accuracy_i2t`, `accuracy_t2i`,
@@ -2423,8 +2489,10 @@ morie_geron_clip <- function(images, texts, tau = 0.07, normalize = TRUE,
 #'
 #' @param image Passed straight to `model`.
 #' @param model Function of `image` returning a vector or (B, K+4) matrix.
-#' @param n_classes Optional K. @param gt_class Optional 0-based labels.
-#' @param gt_box Optional ground-truth boxes. @param alpha Loss weight.
+#' @param n_classes Optional K.
+#' @param gt_class Optional 0-based labels.
+#' @param gt_box Optional ground-truth boxes.
+#' @param alpha Loss weight.
 #' @return List with `class_probs`, `log_probs`, `predicted_class`
 #'   (0-based), `box`, `box_corners`, `iou`, `loss`, `loss_class`,
 #'   `loss_box`, `alpha`, `n_classes`, `estimate`, `n`.
@@ -2567,7 +2635,8 @@ morie_geron_classification_localization <- function(image, model,
 #' Supported ops: add, sub, mul, div, pow, neg, exp, log, sin, cos,
 #' tanh, sqrt, square.
 #'
-#' @param expr Expression tree. @param values Named list of variable values.
+#' @param expr Expression tree.
+#' @param values Named list of variable values.
 #' @return List with `value`, `grad`, `gradient`, `node_grads`,
 #'   `nodes`, `n_nodes`, `topo_order`, `fd_check`, `estimate`, `n`.
 #' @export
@@ -2665,8 +2734,10 @@ morie_geron_computational_graph <- function(expr, values = NULL) {
 #' structure the RNN has captured.
 #'
 #' @param text Character scalar of at least 2 characters.
-#' @param hidden Hidden width. @param epochs Training epochs.
-#' @param lr Learning rate. @param seed LCG seed.
+#' @param hidden Hidden width.
+#' @param epochs Training epochs.
+#' @param lr Learning rate.
+#' @param seed LCG seed.
 #' @param generate Number of characters to sample greedily.
 #' @return List with `loss_history`, `final_loss`, `chance_loss`,
 #'   `perplexity`, `vocab`, `vocab_size`, `weights`, `hidden`,
@@ -2785,8 +2856,11 @@ morie_geron_char_rnn <- function(text, hidden = 8, epochs = 50, lr = 0.1,
 #' as the Python module cross-checks itself against grcae.
 #'
 #' @param X Image (H, W) or a list of images.
-#' @param filters Bottleneck width. @param epochs Training epochs.
-#' @param lr Learning rate. @param seed LCG seed. @param patch Patch size.
+#' @param filters Bottleneck width.
+#' @param epochs Training epochs.
+#' @param lr Learning rate.
+#' @param seed LCG seed.
+#' @param patch Patch size.
 #' @return List with `loss_history`, `final_loss`, `encoder`, `decoder`,
 #'   `codes` (list of images, each a list of F patch-grid matrices),
 #'   `code_shape`, `reconstruction` (list of images),

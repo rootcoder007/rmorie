@@ -225,9 +225,14 @@ morie_geron_adam_update <- function(theta, grad, m, s, t, eta, b1 = 0.9,
 #' The decay is applied to the parameters, not folded into the gradient,
 #' so it is NOT rescaled by the adaptive denominator.
 #'
-#' @param grads Gradient vector. @param m,v Moment accumulators.
-#' @param b1,b2 Decay rates. @param eta Learning rate. @param wd Weight decay.
-#' @param eps Floor. @param t 1-based timestep. @param theta Parameters.
+#' @param grads Gradient vector.
+#' @param m,v Moment accumulators.
+#' @param b1,b2 Decay rates.
+#' @param eta Learning rate.
+#' @param wd Weight decay.
+#' @param eps Floor.
+#' @param t 1-based timestep.
+#' @param theta Parameters.
 #' @return List with `theta`, `step`, `adam_step`, `decay_step`, `m`, `v`.
 #' @export
 morie_geron_adamw <- function(grads, m = NULL, v = NULL, b1 = 0.9, b2 = 0.999,
@@ -270,8 +275,12 @@ morie_geron_adamw <- function(grads, m = NULL, v = NULL, b1 = 0.9, b2 = 0.999,
 #' u <- max(b2 u, |g|); only m is bias-corrected, because an
 #' exponentially weighted max needs no correction.
 #'
-#' @param grads Gradient vector. @param m First moment. @param u Infinity-norm.
-#' @param b1,b2 Decay rates. @param eta Learning rate. @param t Timestep.
+#' @param grads Gradient vector.
+#' @param m First moment.
+#' @param u Infinity-norm.
+#' @param b1,b2 Decay rates.
+#' @param eta Learning rate.
+#' @param t Timestep.
 #' @param theta Parameters.
 #' @return List with `theta`, `step`, `m`, `u`, `m_hat`.
 #' @export
@@ -306,8 +315,11 @@ morie_geron_adamax <- function(grads, m = NULL, u = NULL, b1 = 0.9, b2 = 0.999,
 #'
 #' s <- s + g^2; step = -eta g / (sqrt(s) + eps).
 #'
-#' @param grads Gradient vector. @param s Squared-gradient accumulator.
-#' @param eta Learning rate. @param eps Floor. @param theta Parameters.
+#' @param grads Gradient vector.
+#' @param s Squared-gradient accumulator.
+#' @param eta Learning rate.
+#' @param eps Floor.
+#' @param theta Parameters.
 #' @return List with `theta`, `step`, `s`, `effective_lr`.
 #' @export
 morie_geron_adagrad <- function(grads, s = NULL, eta = 0.01, eps = 1e-10,
@@ -340,7 +352,8 @@ morie_geron_adagrad <- function(grads, s = NULL, eta = 0.01, eps = 1e-10,
 #' convention: theta_new = theta - step, step = effective_lr * g.
 #'
 #' @param theta,grad,s Equal-length numeric vectors.
-#' @param eta Positive learning rate. @param eps Non-negative floor.
+#' @param eta Positive learning rate.
+#' @param eps Non-negative floor.
 #' @return List with `theta_new`, `s_new`, `effective_lr`, `step`, `step_norm`.
 #' @export
 morie_geron_adagrad_update <- function(theta, grad, s, eta, eps = 1e-10) {
@@ -413,7 +426,7 @@ morie_geron_1cycle_schedule <- function(eta_min, eta_max, t, T, mom_max = 0.95,
 
 #' Batch-size heuristic (Geron Ch 9, morie.fn hmbsz)
 #'
-#' Largest power of two in {32, 64, 128, 256, 512} not exceeding
+#' Largest power of two in `{32, 64, 128, 256, 512}` not exceeding
 #' n_train / steps_per_epoch_target (and memory_limit if supplied),
 #' flooring at min(32, n_train) when nothing is feasible.
 #'
@@ -531,7 +544,8 @@ morie_geron_bic <- function(log_lik, k, n) {
 #' (k - 1) weights + k*d means + k * per-covariance, with per-covariance
 #' d(d+1)/2 (full), d (diag) or 1 (spherical).
 #'
-#' @param k Components. @param d Dimension.
+#' @param k Components.
+#' @param d Dimension.
 #' @param covariance_type One of "full", "diag", "spherical".
 #' @return Integer parameter count.
 #' @export
@@ -551,7 +565,8 @@ morie_geron_gmm_n_params <- function(k, d, covariance_type = "full") {
 #'
 #' AIC = 2p - 2 log L.
 #'
-#' @param log_likelihood Finite scalar. @param n_params Non-negative count.
+#' @param log_likelihood Finite scalar.
+#' @param n_params Non-negative count.
 #' @return List with `aic`, `log_likelihood`, `n_params`, `penalty`.
 #' @export
 morie_geron_aic_gmm <- function(log_likelihood, n_params) {
@@ -569,7 +584,8 @@ morie_geron_aic_gmm <- function(log_likelihood, n_params) {
 #'
 #' BIC = p log n - 2 log L; `stricter_than_aic` is log n > 2.
 #'
-#' @param log_likelihood Finite scalar. @param n Observations, >= 1.
+#' @param log_likelihood Finite scalar.
+#' @param n Observations, >= 1.
 #' @param n_params Non-negative count.
 #' @return List with `bic`, `penalty`, `penalty_per_param`, `stricter_than_aic`.
 #' @export
@@ -593,7 +609,8 @@ morie_geron_bic_gmm <- function(log_likelihood, n, n_params) {
 #' Mid-ranks credit ties 0.5. ROC vertices are returned in descending
 #' threshold order, starting from (0, 0) with threshold Inf.
 #'
-#' @param y_true Binary labels. @param scores Decision scores.
+#' @param y_true Binary labels.
+#' @param scores Decision scores.
 #' @param pos_label Positive-class label.
 #' @return List with `auc`, `fpr`, `tpr`, `thresholds`, `n_pos`, `n_neg`.
 #' @export
@@ -640,7 +657,8 @@ morie_geron_auc_roc <- function(y_true, scores, pos_label = 1) {
 #' [morie_geron_auc_roc()], different construction -- the two are each
 #' other's independent check.
 #'
-#' @param y_true Binary labels. @param y_scores Decision scores.
+#' @param y_true Binary labels.
+#' @param y_scores Decision scores.
 #' @param pos_label Positive-class label.
 #' @return List with `auc`, `fpr`, `tpr`, `thresholds`, `n_pos`, `n_neg`.
 #' @export
@@ -714,7 +732,8 @@ morie_geron_confusion_matrix <- function(y_true, y_pred, n_classes = NULL) {
 #' J = (m_L/m) G_L + (m_R/m) G_R, with gini, entropy (log base 2) or mse
 #' impurity, plus the impurity decrease against the parent.
 #'
-#' @param X Feature matrix. @param y Labels or targets.
+#' @param X Feature matrix.
+#' @param y Labels or targets.
 #' @param feature 0-based column index, matching Python.
 #' @param threshold Split point; `X\[, feature\] <= threshold` goes left.
 #' @param criterion One of "gini", "entropy", "mse".
@@ -767,7 +786,8 @@ morie_geron_cart_split_cost <- function(X, y, feature, threshold,
 #' y_pred = 1\[p_hat >= threshold\].
 #'
 #' @param X Design matrix (bring your own intercept column).
-#' @param theta Coefficients. @param threshold Cut in \[0, 1\].
+#' @param theta Coefficients.
+#' @param threshold Cut in \[0, 1\].
 #' @param y_true Optional 0/1 labels for the confusion summary.
 #' @return List with `y_pred`, `p_hat`, `logit` and, when `y_true` is
 #'   given, `tp`, `fp`, `fn`, `tn`, `accuracy`, `precision`, `recall`, `f1`.
@@ -815,7 +835,8 @@ morie_geron_binary_classification <- function(X, theta, threshold = 0.5,
 #' Variance across models is the POPULATION variance (ddof = 0); the
 #' identity only closes with the biased estimator.
 #'
-#' @param preds Matrix (n_models, n_points). @param y Targets.
+#' @param preds Matrix (n_models, n_points).
+#' @param y Targets.
 #' @param f_true Optional noise-free values.
 #' @return List with `bias2`, `variance`, `noise`, `mse`, `mean_pred`.
 #' @export
@@ -848,7 +869,8 @@ morie_geron_bias_variance_tradeoff <- function(preds, y, f_true = NULL) {
 #' Ridge leaves the intercept unpenalised. The returned `predict` closure
 #' is frozen: new data needs a full retrain, which is what "offline" means.
 #'
-#' @param X Design matrix. @param y Targets.
+#' @param X Design matrix.
+#' @param y Targets.
 #' @param fit_intercept Prepend a ones column.
 #' @param ridge Non-negative L2 penalty.
 #' @return List with `theta`, `predict`, `fitted`, `residuals`, `train_mse`, `r2`.
@@ -893,7 +915,9 @@ morie_geron_batch_learning <- function(X, y, fit_intercept = FALSE, ridge = 0) {
 #'
 #' grad J = (2/m) X^T (X theta - y); with `eta` one descent step too.
 #'
-#' @param X Design matrix. @param y Targets. @param theta Parameters.
+#' @param X Design matrix.
+#' @param y Targets.
+#' @param theta Parameters.
 #' @param eta Optional learning rate.
 #' @return List with `gradient`, `cost`, `residuals`, `theta_next`, `grad_norm`.
 #' @export
@@ -929,7 +953,8 @@ morie_geron_batch_gd_grad <- function(X, y, theta, eta = NULL) {
 #' step. `eta_max_stable` is 2 / lambda_max of (2/m) X^T X.
 #'
 #' @param X,y,theta Design, targets, starting parameters.
-#' @param eta Positive learning rate. @param n_iter Steps, >= 1.
+#' @param eta Positive learning rate.
+#' @param n_iter Steps, >= 1.
 #' @return List with `theta`, `theta_path`, `loss_history`, `gradient`,
 #'   `eta_max_stable`, `converged`.
 #' @export
@@ -1019,7 +1044,9 @@ morie_geron_conv_output_size <- function(in_size, kernel, padding = 0,
 #'
 #' @param X Matrix (H, W) or 3-D array (C, H, W).
 #' @param W Matrix (kh, kw) or 3-D array (C, kh, kw).
-#' @param b Bias. @param stride Scalar or (sh, sw). @param padding Scalar or (ph, pw).
+#' @param b Bias.
+#' @param stride Scalar or (sh, sw).
+#' @param padding Scalar or (ph, pw).
 #' @return List with `Y`, `out_shape`, `padded_shape`, `n_multiply_adds`.
 #' @export
 morie_geron_conv2d_forward <- function(X, W, b = 0, stride = 1, padding = 0) {
@@ -1081,8 +1108,11 @@ morie_geron_conv2d_forward <- function(X, W, b = 0, stride = 1, padding = 0) {
 #' `W = Ws`, `U = Wh`. Both payload spellings are returned (`alpha` is
 #' hmbdn's, `weights` grbah's), and `argmax` is 0-based in both.
 #'
-#' @param h Encoder states (T, d_h). @param s_prev Decoder state (d_s).
-#' @param W (d_a, d_h). @param U (d_a, d_s). @param v (d_a).
+#' @param h Encoder states (T, d_h).
+#' @param s_prev Decoder state (d_s).
+#' @param W (d_a, d_h).
+#' @param U (d_a, d_s).
+#' @param v (d_a).
 #' @param b Optional bias (d_a).
 #' @return List with `alpha`, `weights`, `scores`, `context`, `entropy`, `argmax`.
 #' @export
@@ -1126,7 +1156,8 @@ morie_geron_bahdanau_attention <- function(h, s_prev, W, U, v, b = NULL) {
 #' DISALLOWED pairs with TRUE, matching Python.
 #'
 #' @param X_dec,X_enc Decoder and encoder token matrices.
-#' @param WQ,WK,WV Projection matrices. @param mask Optional logical matrix.
+#' @param WQ,WK,WV Projection matrices.
+#' @param mask Optional logical matrix.
 #' @return List with `output`, `attention_weights`, `logits`, `scale`, `d_k`.
 #' @export
 morie_geron_cross_attention <- function(X_dec, X_enc, WQ, WK, WV, mask = NULL) {
@@ -1162,7 +1193,8 @@ morie_geron_cross_attention <- function(X_dec, X_enc, WQ, WK, WV, mask = NULL) {
 #' Backward states are re-aligned to the original time index before the
 #' concatenation, so `output\[t, \]` mixes prefix and suffix at t.
 #'
-#' @param X Sequence (T, d). @param Wx_f,Wh_f,Wx_b,Wh_b Weight matrices.
+#' @param X Sequence (T, d).
+#' @param Wx_f,Wh_f,Wx_b,Wh_b Weight matrices.
 #' @param b_f,b_b,h0_f,h0_b Optional biases and initial states.
 #' @param activation One of "tanh", "relu", "sigmoid", "identity".
 #' @return List with `output`, `h_fwd`, `h_bwd`, `final`, `hidden_size`.
@@ -1251,7 +1283,9 @@ morie_geron_bidirectional_combine <- function(h_forward, h_backward,
 #'
 #' a = phi(w . x + b); phi in step, sign, sigmoid, tanh, relu, identity.
 #'
-#' @param x Input vector or (n, d) matrix. @param w Weights. @param b Bias.
+#' @param x Input vector or (n, d) matrix.
+#' @param w Weights.
+#' @param b Bias.
 #' @param activation Activation name.
 #' @return List with `a`, `z`, `fires`, `threshold`.
 #' @export
@@ -1289,8 +1323,10 @@ morie_geron_biological_neuron <- function(x, w, b, activation = "step") {
 #' paper. When `running_mean`/`running_var` are absent the batch values
 #' become the running values outright.
 #'
-#' @param x Mini-batch (n, d) or vector. @param gamma,beta Scale and shift.
-#' @param eps Variance floor. @param momentum EMA factor in \[0, 1\].
+#' @param x Mini-batch (n, d) or vector.
+#' @param gamma,beta Scale and shift.
+#' @param eps Variance floor.
+#' @param momentum EMA factor in \[0, 1\].
 #' @param running_mean,running_var Optional previous statistics.
 #' @return List with `y`, `x_hat`, `mu`, `var`, `running_mean`, `running_var`.
 #' @export
@@ -1335,8 +1371,10 @@ morie_geron_batch_normalization <- function(x, gamma = 1, beta = 0, eps = 1e-5,
 #' optional (only when `momentum` is given), and it uses the BIASED batch
 #' variance rather than the unbiased one.
 #'
-#' @param X Mini-batch (m, d). @param gamma,beta Scale and shift.
-#' @param eps Variance floor. @param momentum Optional EMA factor in \[0, 1).
+#' @param X Mini-batch (m, d).
+#' @param gamma,beta Scale and shift.
+#' @param eps Variance floor.
+#' @param momentum Optional EMA factor in \[0, 1).
 #' @param running_mean,running_var Optional statistics to update.
 #' @return List with `Y`, `x_hat`, `batch_mean`, `batch_var`,
 #'   `running_mean`, `running_var`.
@@ -1379,11 +1417,12 @@ morie_geron_batch_normalization_paper <- function(X, gamma, beta, eps = 1e-5,
 
 #' Backpropagation through a feed-forward net (Geron Ch 9, morie.fn hmbp)
 #'
-#' delta_L = grad_a L * phi'(z_L); delta_l = (W_{l+1} delta_{l+1}) phi'(z_l).
+#' delta_L = grad_a L * phi'(z_L); delta_l = `(W_{l+1} delta_{l+1})` phi'(z_l).
 #' `weights` entries are either a matrix W or a list(W, b). Class labels
 #' for loss = "ce" are 0-based, as in Python.
 #'
-#' @param X Inputs (n, d0). @param y Targets or class labels.
+#' @param X Inputs (n, d0).
+#' @param y Targets or class labels.
 #' @param weights List of matrices or list(W, b) pairs.
 #' @param activations Character vector, one per layer.
 #' @param loss "mse" or "ce".
@@ -1553,11 +1592,12 @@ morie_geron_backpropagation_gradient <- function(activations, weights, y_true,
 
 #' Backpropagation through time (Geron Ch 13, morie.fn grbptt)
 #'
-#' delta_t = (dL/dh_t + W_h delta_{t+1}) * (1 - h_t^2); the shared weight
+#' delta_t = (dL/dh_t + W_h `delta_{t+1}`) * (1 - h_t^2); the shared weight
 #' picks up a term at every step, which is where the vanishing gradient
 #' shows up in `per_step_delta_norm`.
 #'
-#' @param loss_grads,hiddens Matrices (T, H). @param inputs Matrix (T, D).
+#' @param loss_grads,hiddens Matrices (T, H).
+#' @param inputs Matrix (T, D).
 #' @param W_h Optional recurrent weights (H, H).
 #' @param h_init Optional state before step 1.
 #' @return List with `grad_Wx`, `grad_Wh`, `grad_b`, `deltas`,
@@ -1646,7 +1686,8 @@ morie_geron_autograd_chain_rule <- function(graph, grad_output) {
 #' targets. `accuracy_*` compare 0-based argmax to the diagonal.
 #'
 #' @param image_embeddings,text_embeddings Paired matrices (B, d).
-#' @param tau Positive temperature. @param normalize L2-normalise first.
+#' @param tau Positive temperature.
+#' @param normalize L2-normalise first.
 #' @return List with `loss`, `loss_i2t`, `loss_t2i`, `similarity`,
 #'   `accuracy_i2t`, `accuracy_t2i`, `chance_loss`.
 #' @export
@@ -1687,7 +1728,8 @@ morie_geron_clip_contrastive_loss <- function(image_embeddings,
 #'
 #' @param anchors,positives Matrices (B, d).
 #' @param negatives Matrix (N, d) shared, or 3-D array (B, N, d).
-#' @param tau Positive temperature. @param normalize Cosine similarity.
+#' @param tau Positive temperature.
+#' @param normalize Cosine similarity.
 #' @return List with `loss`, `per_anchor_loss`, `pos_sim`, `neg_sim`,
 #'   `hardest_negative`, `accuracy`, `chance_loss`.
 #' @export
@@ -1809,7 +1851,8 @@ morie_geron_blip <- function(images, texts, temperature = 1,
 #' @param image_emb,text_emb Matrices (B, d).
 #' @param caption_logits 3-D array (B, L, V).
 #' @param caption_targets Matrix (B, L) of 0-based ids; negatives are padding.
-#' @param tau Temperature. @param lam_itc,lam_itm,lam_lm Task weights.
+#' @param tau Temperature.
+#' @param lam_itc,lam_itm,lam_lm Task weights.
 #' @param normalize Cosine similarity.
 #' @return List with `loss`, `itc`, `itm`, `lm`, `similarity`,
 #'   `itm_accuracy`, `lm_perplexity`.
@@ -1878,9 +1921,12 @@ morie_geron_blip_itm_itc <- function(image_emb, text_emb, caption_logits,
 #' projected to the LLM width. Only the Q-Former is trainable, which is
 #' what `trainable_params` makes explicit.
 #'
-#' @param image Patch features (n_patches, d_v). @param text Embedding or token matrix.
-#' @param n_query,d_query Q-Former geometry. @param d_llm LLM width.
-#' @param temperature Positive temperature. @param seed LCG seed.
+#' @param image Patch features (n_patches, d_v).
+#' @param text Embedding or token matrix.
+#' @param n_query,d_query Q-Former geometry.
+#' @param d_llm LLM width.
+#' @param temperature Positive temperature.
+#' @param seed LCG seed.
 #' @return List with `query_output`, `llm_input`, `attention`, `similarity`,
 #'   `query_similarities`, `trainable_params`.
 #' @export
@@ -1931,7 +1977,8 @@ morie_geron_blip2 <- function(image, text, n_query = 4, d_query = 8,
 #' L = (1 - alpha) CE(cls, y) + alpha CE(dist, argmax teacher). Labels
 #' are 0-based; `teacher_labels` comes back 0-based too.
 #'
-#' @param logits_cls,logits_dist Matrices (B, C). @param y 0-based labels.
+#' @param logits_cls,logits_dist Matrices (B, C).
+#' @param y 0-based labels.
 #' @param teacher_preds Matrix (B, C) or vector of labels.
 #' @param alpha Distillation weight in \[0, 1\].
 #' @return List with `loss`, `loss_cls`, `loss_dist`, `teacher_labels`,
@@ -2045,7 +2092,8 @@ morie_geron_dalle_autoregressive_token <- function(text_tokens,
 #' @param lam_bbox,lam_giou Non-negative cost weights.
 #' @param box_format "xyxy" or "cxcywh".
 #' @param no_object_class Optional 0-based no-object index.
-#' @param eos_coef No-object down-weight. @param class_is_logits Softmax needed.
+#' @param eos_coef No-object down-weight.
+#' @param class_is_logits Softmax needed.
 #' @return List with `matching`, `cost_matrix`, `total_cost`, `loss`,
 #'   `loss_class`, `loss_bbox`, `loss_giou`, `loss_no_object`,
 #'   `matched_giou`, `matched_l1`, `unmatched_predictions`.
@@ -2196,8 +2244,10 @@ morie_geron_detr_hungarian_matching <- function(pred_boxes, pred_classes,
 #'
 #' A = r + gamma (1 - done) V(s') - V(s). State indices are 0-based.
 #'
-#' @param V Value table. @param s,s_next 0-based state indices.
-#' @param r Rewards. @param gamma Discount in \[0, 1\].
+#' @param V Value table.
+#' @param s,s_next 0-based state indices.
+#' @param r Rewards.
+#' @param gamma Discount in \[0, 1\].
 #' @param done Optional terminal flags.
 #' @return List with `advantage`, `td_target`, `value_s`, `value_s_next`,
 #'   `critic_loss`.
@@ -2235,8 +2285,11 @@ morie_geron_actor_critic_advantage <- function(V, s, s_next, r, gamma,
 #' target and the removed overestimation are returned alongside.
 #' `selected_action` is 0-based.
 #'
-#' @param Q_online,Q_target Matrices (S, A). @param s_next 0-based indices.
-#' @param r Rewards. @param gamma Discount. @param done Optional flags.
+#' @param Q_online,Q_target Matrices (S, A).
+#' @param s_next 0-based indices.
+#' @param r Rewards.
+#' @param gamma Discount.
+#' @param done Optional flags.
 #' @return List with `target`, `selected_action`, `q_eval`,
 #'   `vanilla_target`, `overestimation_gap`.
 #' @export
@@ -2271,8 +2324,11 @@ morie_geron_double_dqn_target <- function(Q_online, Q_target, s_next, r, gamma,
 #' V*(s) = max_a \[R(s,a) + gamma sum_s' P(s'|s,a) V*(s')\]. `policy` is
 #' 0-based.
 #'
-#' @param V Initial values (S). @param P Array (S, A, S). @param R Matrix (S, A).
-#' @param gamma Discount in \[0, 1). @param tol,max_iter Stopping rule.
+#' @param V Initial values (S).
+#' @param P Array (S, A, S).
+#' @param R Matrix (S, A).
+#' @param gamma Discount in \[0, 1).
+#' @param tol,max_iter Stopping rule.
 #' @return List with `V`, `policy`, `Q`, `iterations`, `residual`, `converged`.
 #' @export
 morie_geron_value_iteration <- function(V, P, R, gamma, tol = 1e-10,
@@ -2320,8 +2376,10 @@ morie_geron_value_iteration <- function(V, P, R, gamma, tol = 1e-10,
 #' of `transitions` may sum to 1 (available) or 0 (unavailable).
 #' `policy` is 0-based.
 #'
-#' @param Q Initial table (S, A). @param transitions Array (S, A, S).
-#' @param rewards Array (S, A, S) or matrix (S, A). @param gamma Discount.
+#' @param Q Initial table (S, A).
+#' @param transitions Array (S, A, S).
+#' @param rewards Array (S, A, S) or matrix (S, A).
+#' @param gamma Discount.
 #' @param max_iter,tol Stopping rule.
 #' @return List with `Q`, `V`, `policy`, `residual`, `iterations`, `converged`.
 #' @export
@@ -2377,8 +2435,10 @@ morie_geron_q_value_iteration <- function(Q, transitions, rewards, gamma,
 #' x0 = (x_t - sqrt(1 - ab_t) eps) / sqrt(ab_t), then re-noise to t_prev
 #' with eta = 0. Timestep indices are 0-based into `alpha_bar`.
 #'
-#' @param x_t Current sample. @param t,t_prev 0-based timesteps, t_prev < t.
-#' @param eps_pred Noise prediction. @param alpha_bar Non-increasing schedule in (0, 1\].
+#' @param x_t Current sample.
+#' @param t,t_prev 0-based timesteps, t_prev < t.
+#' @param eps_pred Noise prediction.
+#' @param alpha_bar Non-increasing schedule in (0, 1\].
 #' @param clip_x0 Optional c(lo, hi) clamp on x0.
 #' @return List with `x_prev`, `x0_pred`, `alpha_bar_t`, `alpha_bar_prev`,
 #'   `signal_scale`, `noise_scale`.
@@ -2423,10 +2483,15 @@ morie_geron_ddim_sampling_step <- function(x_t, t, t_prev, eps_pred, alpha_bar,
 #' list(state, reward, done). Actions are sampled from the same integer
 #' LCG stream as Python, so runs match token for token.
 #'
-#' @param env List with reset/step. @param actor Matrix (n_actions, n_features).
-#' @param critic Value weights. @param epochs Episodes.
-#' @param lr Actor step. @param gamma Discount. @param critic_lr Critic step.
-#' @param max_steps Episode cap. @param seed LCG seed.
+#' @param env List with reset/step.
+#' @param actor Matrix (n_actions, n_features).
+#' @param critic Value weights.
+#' @param epochs Episodes.
+#' @param lr Actor step.
+#' @param gamma Discount.
+#' @param critic_lr Critic step.
+#' @param max_steps Episode cap.
+#' @param seed LCG seed.
 #' @return List with `actor`, `critic`, `returns`, `policy`, `value`,
 #'   `advantages`.
 #' @export
@@ -2516,9 +2581,13 @@ morie_geron_a2c <- function(env, actor, critic, epochs = 100, lr = 0.1,
 #' makes A3C asynchronous. Worker w uses LCG seed + 7919 w.
 #'
 #' @param env List with reset/step, or a function(worker_id) returning one.
-#' @param actor,critic Initial parameters. @param n_workers Workers.
-#' @param lr,critic_lr Step sizes. @param epochs Episodes per worker.
-#' @param gamma Discount. @param max_steps Episode cap. @param seed Base seed.
+#' @param actor,critic Initial parameters.
+#' @param n_workers Workers.
+#' @param lr,critic_lr Step sizes.
+#' @param epochs Episodes per worker.
+#' @param gamma Discount.
+#' @param max_steps Episode cap.
+#' @param seed Base seed.
 #' @return List with `actor`, `critic`, `returns`, `worker_returns`,
 #'   `policy`, `updates`.
 #' @export
@@ -2611,7 +2680,8 @@ morie_geron_a3c <- function(env, actor, critic, n_workers = 4, lr = 0.1,
 #' The eps-neighbourhood INCLUDES the point itself, so min_samples = 1
 #' makes everything core. `neighbors` entries are 0-based index vectors.
 #'
-#' @param X Points (m, d). @param eps Positive radius.
+#' @param X Points (m, d).
+#' @param eps Positive radius.
 #' @param min_samples Density threshold, >= 1.
 #' @param metric "euclidean", "manhattan" or "chebyshev".
 #' @return List with `is_core`, `is_border`, `is_noise`, `neighbor_counts`,
@@ -2657,7 +2727,8 @@ morie_geron_dbscan_core_point <- function(X, eps, min_samples,
 #' `labels` is deterministic regardless of merge order. `merges` entries
 #' are 0-based (min member of a, min member of b).
 #'
-#' @param X Observations (n, d). @param n_clusters Stop count.
+#' @param X Observations (n, d).
+#' @param n_clusters Stop count.
 #' @param linkage "single", "complete", "average" or "centroid".
 #' @return List with `labels`, `merges`, `heights`, `n_clusters`, `distances`.
 #' @export
@@ -2720,8 +2791,10 @@ morie_geron_agglomerative <- function(X, n_clusters = 2, linkage = "single") {
 #' `threshold`; phase 3 does centroid-linkage agglomerative on the CF
 #' centroids. Labels are 0-based.
 #'
-#' @param X Points (n, d). @param n_clusters Final count or NULL.
-#' @param threshold Maximum sub-cluster radius. @param branching_factor Leaf cap.
+#' @param X Points (n, d).
+#' @param n_clusters Final count or NULL.
+#' @param threshold Maximum sub-cluster radius.
+#' @param branching_factor Leaf cap.
 #' @return List with `labels`, `subcluster_centers`, `subcluster_labels`,
 #'   `subcluster_sizes`, `n_subclusters`, `radii`, `n_leaves`.
 #' @export
@@ -2818,9 +2891,11 @@ morie_geron_birch <- function(X, n_clusters = 3, threshold = 0.5,
 #' alpha_t = 0.5 log((1 - err)/err); w <- w exp(-alpha y f(x)), renormalised.
 #' Default weak learner is a weighted 1-split stump.
 #'
-#' @param X Design matrix. @param y Two-class labels.
-#' @param base_estimator Optional function(X, y, w) -> predict(X) in {-1, 1}.
-#' @param n_estimators Rounds. @param eps Error floor/ceiling in (0, 0.5).
+#' @param X Design matrix.
+#' @param y Two-class labels.
+#' @param base_estimator Optional function(X, y, w) -> predict(X) `in {-1, 1}`.
+#' @param n_estimators Rounds.
+#' @param eps Error floor/ceiling in (0, 0.5).
 #' @return List with `alphas`, `errors`, `train_errors`, `predict`,
 #'   `decision`, `margin`, `weights`, `classes`.
 #' @export
@@ -2907,7 +2982,7 @@ morie_geron_adaboost <- function(X, y, base_estimator = NULL,
 
 #' AdaBoost sample-weight update (Geron Ch 6, morie.fn gradaw)
 #'
-#' w <- w exp(alpha 1{misclassified}), then renormalise. The weighted
+#' w <- w exp(alpha `1{misclassified}`), then renormalise. The weighted
 #' error BEFORE the update is reported so alpha can be checked against
 #' log((1-r)/r).
 #'
@@ -2951,8 +3026,10 @@ morie_geron_adaboost_weight_update <- function(y_true, y_pred, weights,
 #' + 7919 m, so replicates are byte-identical across machines. Default
 #' weak learner is a least-squares 1-split stump.
 #'
-#' @param X,y Training data. @param base_estimator Optional function(Xb, yb).
-#' @param n_estimators Replicates. @param seed LCG seed.
+#' @param X,y Training data.
+#' @param base_estimator Optional function(Xb, yb).
+#' @param n_estimators Replicates.
+#' @param seed LCG seed.
 #' @param task "auto", "regression" or "classification".
 #' @return List with `predict`, `train_pred`, `train_mse`, `oob_pred`,
 #'   `oob_mse`, `oob_coverage`, `member_preds`, `task`.
@@ -3047,7 +3124,8 @@ morie_geron_bagging <- function(X, y, base_estimator = NULL, n_estimators = 10,
 #' Mean / median / hard-vote aggregation, with the across-predictor
 #' variance (ddof = 1, matching grbag) as the disagreement diagnostic.
 #'
-#' @param predictions Matrix (B, m). @param aggregate "mean", "median", "vote".
+#' @param predictions Matrix (B, m).
+#' @param aggregate "mean", "median", "vote".
 #' @return List with `prediction`, `per_instance_variance`,
 #'   `mean_disagreement`, `n_predictors`, `se`.
 #' @export
@@ -3080,9 +3158,11 @@ morie_geron_bagging_predictor <- function(predictions, aggregate = "mean") {
 #' cannot be reproduced in R -- passing TRUE is an error rather than a
 #' silently different split.
 #'
-#' @param X,y Data. @param K Folds, 2 <= K <= m.
+#' @param X,y Data.
+#' @param K Folds, 2 <= K <= m.
 #' @param fit,predict,score Optional callables.
-#' @param shuffle Must be FALSE. @param random_state Ignored.
+#' @param shuffle Must be FALSE.
+#' @param random_state Ignored.
 #' @return List with `cv_score`, `fold_scores`, `fold_sizes`, `se`,
 #'   `worst_fold`, `spread`.
 #' @export
@@ -3145,7 +3225,8 @@ morie_geron_cross_validation_score <- function(X, y, K, fit = NULL,
 #' `explained_variance_ratio` are sign-invariant and are what parity
 #' tests should assert.
 #'
-#' @param X Training data (n, d). @param bottleneck Code width in \[1, d\].
+#' @param X Training data (n, d).
+#' @param bottleneck Code width in \[1, d\].
 #' @param center Subtract feature means (this is what makes it PCA).
 #' @return List with `encoder`, `decoder`, `codes`, `reconstruction`,
 #'   `recon_error`, `explained_variance_ratio`, `mean`, `encode`, `decode`.
@@ -3189,7 +3270,9 @@ morie_geron_autoencoder <- function(X, bottleneck, center = TRUE) {
 #' loss is the mean squared L2 norm PER SAMPLE, `mse_per_element` the
 #' plain elementwise mean; compression_ratio = input_dim / code_dim.
 #'
-#' @param X Inputs (m, d). @param encoded Codes (m, k). @param decoded Reconstructions.
+#' @param X Inputs (m, d).
+#' @param encoded Codes (m, k).
+#' @param decoded Reconstructions.
 #' @return List with `loss`, `mse_per_element`, `per_sample_loss`,
 #'   `code_dim`, `input_dim`, `compression_ratio`, `explained_variance`.
 #' @export
@@ -3215,9 +3298,11 @@ morie_geron_autoencoder_reconstruction_loss <- function(X, encoded, decoded) {
 #' Scoring against x rather than x_tilde is the point: copying the input
 #' is now a losing strategy. `denoising_gain` = noise_energy / loss.
 #'
-#' @param x Clean inputs (m, d). @param noise Corruption, broadcastable, or
+#' @param x Clean inputs (m, d).
+#' @param noise Corruption, broadcastable, or
 #'   a 0/1 keep-mask when `corruption = "dropout"`.
-#' @param decoded Reconstructions. @param corruption "additive" or "dropout".
+#' @param decoded Reconstructions.
+#' @param corruption "additive" or "dropout".
 #' @return List with `loss`, `mse_per_element`, `per_sample_loss`,
 #'   `x_tilde`, `noise_energy`, `denoising_gain`, `snr_db`.
 #' @export
@@ -3284,8 +3369,10 @@ morie_geron_denoising_autoencoder <- function(x, noise, decoded,
 #' gives (n-1)s + k per axis, so a decoder that does not land back on
 #' the input size is an error rather than a silent crop.
 #'
-#' @param x Image (H, W). @param encoder_weights,decoder_weights Lists of kernels.
-#' @param stride Shared stride. @param output_activation "identity", "tanh", "sigmoid".
+#' @param x Image (H, W).
+#' @param encoder_weights,decoder_weights Lists of kernels.
+#' @param stride Shared stride.
+#' @param output_activation "identity", "tanh", "sigmoid".
 #' @return List with `x_hat`, `code`, `code_shape`, `loss`, `mse_per_pixel`,
 #'   `compression_ratio`.
 #' @export
@@ -3331,7 +3418,8 @@ morie_geron_convolutional_autoencoder <- function(x, encoder_weights,
 #'
 #' @param model Function(X) -> reconstruction, or a list with
 #'   `reconstruct`, `predict`, or `encode` + `decode`.
-#' @param X Data to score. @param threshold Optional squared-error cut.
+#' @param X Data to score.
+#' @param threshold Optional squared-error cut.
 #' @param quantile Quantile in (0, 1\] used when `threshold` is NULL.
 #' @return List with `errors`, `is_anomaly`, `threshold`,
 #'   `threshold_calibrated`, `n_anomalies`, `reconstruction`.
@@ -3382,8 +3470,10 @@ morie_geron_anomaly_autoencoder <- function(model, X, threshold = NULL,
 #' why DCGAN data is scaled to \[-1, 1\]). The batch norm here is the
 #' whole-tensor population form, as in Python.
 #'
-#' @param z Latent vector. @param weights List: projection matrix then kernels.
-#' @param seed_shape Optional c(h0, w0). @param stride Upsampling stride.
+#' @param z Latent vector.
+#' @param weights List: projection matrix then kernels.
+#' @param seed_shape Optional c(h0, w0).
+#' @param stride Upsampling stride.
 #' @param batch_norm Apply batch norm on hidden layers.
 #' @return List with `image`, `image_shape`, `seed`, `layer_shapes`,
 #'   `upsample_factor`, `latent_dim`.
@@ -3443,7 +3533,8 @@ morie_geron_dcgan_generator <- function(z, weights, seed_shape = NULL,
 #'
 #' @param model Initial parameters or NULL for zeros.
 #' @param aux_data,target_data Lists of (X, y).
-#' @param aux_epochs,epochs Gradient steps. @param lr Step size.
+#' @param aux_epochs,epochs Gradient steps.
+#' @param lr Step size.
 #' @return List with `theta`, `theta_pretrained`, `theta_scratch`,
 #'   `target_loss`, `scratch_loss`, `transfer_gain`, `aux_losses`,
 #'   `finetune_losses`, `scratch_losses`.
@@ -3507,8 +3598,11 @@ morie_geron_auxiliary_task_pretraining <- function(model, aux_data,
 #' trained by full-batch gradient descent with the exact gradient
 #' X^T (p - onehot) / n. Labels and predictions are 0-based.
 #'
-#' @param bert Embedding function. @param X Inputs passed to `bert`.
-#' @param y 0-based class labels. @param epochs Steps. @param lr Step size.
+#' @param bert Embedding function.
+#' @param X Inputs passed to `bert`.
+#' @param y 0-based class labels.
+#' @param epochs Steps.
+#' @param lr Step size.
 #' @param l2 Non-negative penalty on W (bias unpenalised).
 #' @return List with `W`, `b`, `losses`, `accuracy`, `predict`,
 #'   `probabilities`, `embeddings`.
@@ -3608,7 +3702,8 @@ morie_geron_bert_finetune <- function(bert, X, y, epochs = 100, lr = 0.1,
 #' hardware does; "truncate" drops the low bits. NaN lanes are restored
 #' so a rounding carry cannot turn a NaN into an infinity.
 #'
-#' @param x Values to quantise. @param rounding "nearest_even" or "truncate".
+#' @param x Values to quantise.
+#' @param rounding "nearest_even" or "truncate".
 #' @return List with `values`, `bits` (16-character strings), `abs_error`,
 #'   `rel_error`, `max_rel_error`, `mantissa_bits`, `exponent_bits`.
 #' @export
@@ -3733,7 +3828,8 @@ Ops.morie_gvar <- function(e1, e2) {
 #'
 #' Group generic for `exp`, `log`, `sqrt`, `tanh`, `sin`, `cos`.
 #'
-#' @param x A tape node. @param ... Ignored.
+#' @param x A tape node.
+#' @param ... Ignored.
 #' @return A tape node.
 #' @export
 Math.morie_gvar <- function(x, ...) {
@@ -3832,8 +3928,10 @@ morie_geron_autograd <- function(loss, params) {
 #' coefficients come from OLS on lags plus fitted innovations. `forecast`
 #' is a closure taking a horizon h.
 #'
-#' @param y Univariate series. @param p,q AR and MA orders.
-#' @param d Differencing order. @param include_mean Fit an intercept.
+#' @param y Univariate series.
+#' @param p,q AR and MA orders.
+#' @param d Differencing order.
+#' @param include_mean Fit an intercept.
 #' @return List with `ar`, `ma`, `intercept`, `residuals`, `sigma2`, `aic`,
 #'   `fitted`, `differenced`, `forecast`, `order`.
 #' @export
@@ -3924,7 +4022,9 @@ morie_geron_arima <- function(y, p = 1, d = 0, q = 0, include_mean = TRUE) {
 #' undone by adding back the last value of each lower-order difference.
 #' `theta` uses the PLUS sign convention.
 #'
-#' @param y Observed series. @param phi AR coefficients. @param theta MA coefficients.
+#' @param y Observed series.
+#' @param phi AR coefficients.
+#' @param theta MA coefficients.
 #' @param d Differencing order.
 #' @return List with `forecast`, `forecast_differenced`, `residuals`,
 #'   `differenced`, `sigma2`, `order`.
@@ -3972,8 +4072,10 @@ morie_geron_arima_forecast <- function(y, phi, theta, d = 0) {
 #' checked for normalisation, because an unnormalised one turns beam
 #' search into an arbitrary greedy walk. Emitted tokens are 0-based.
 #'
-#' @param model Scorer function. @param src Source, passed through.
-#' @param beam_width Hypotheses kept per step. @param max_len Token cap.
+#' @param model Scorer function.
+#' @param src Source, passed through.
+#' @param beam_width Hypotheses kept per step.
+#' @param max_len Token cap.
 #' @param eos Optional 0-based end-of-sequence token.
 #' @param length_penalty Exponent alpha in score / len^alpha for the final rank.
 #' @return List with `sequence`, `score`, `beams`, `scores`, `finished`.
@@ -4047,7 +4149,8 @@ morie_geron_beam_search <- function(model, src, beam_width = 3, max_len = 10,
 #' exhaustive over the retained hypotheses. Tokens are 0-based.
 #'
 #' @param scores Matrix (T, V) of log-scale scores.
-#' @param beam_width Hypotheses kept. @param max_len Steps, defaults to T.
+#' @param beam_width Hypotheses kept.
+#' @param max_len Steps, defaults to T.
 #' @param length_penalty GNMT exponent for the final ranking.
 #' @return List with `best_sequence`, `best_score`, `beams` (list of
 #'   list(sequence, score)), `normalised_scores`, `greedy_sequence`.
@@ -4295,7 +4398,8 @@ morie_geron_bpe_merge <- function(corpus, n_merges) {
 #' @param X 0-based token ids, vector or (batch, T) matrix.
 #' @param n_layers,n_heads,d_model,d_ff Encoder geometry.
 #' @param d_embed Factorised width E in \[1, d_model\].
-#' @param vocab_size Optional; defaults to max(X) + 1. @param seed LCG seed.
+#' @param vocab_size Optional; defaults to max(X) + 1.
+#' @param seed LCG seed.
 #' @return List with `hidden` (array batch x T x d), `n_params`,
 #'   `n_params_unshared`, `block_params`, `embedding_params`,
 #'   `embedding_params_direct`, `shared`, `d_embed`.
@@ -4350,9 +4454,11 @@ morie_geron_albert <- function(X, n_layers = 4, n_heads = 2, d_model = 8,
 #' pooled first position. Masked positions come from the same LCG draw as
 #' Python and are returned 0-based.
 #'
-#' @param X 0-based token ids. @param n_layers,n_heads,d_model,d_ff Geometry.
+#' @param X 0-based token ids.
+#' @param n_layers,n_heads,d_model,d_ff Geometry.
 #' @param vocab_size Optional; one extra row is appended for \[MASK\].
-#' @param mask_prob Masking fraction in (0, 1). @param seed LCG seed.
+#' @param mask_prob Masking fraction in (0, 1).
+#' @param seed LCG seed.
 #' @return List with `hidden`, `mlm_loss`, `mlm_losses`, `masked_positions`,
 #'   `nsp_logits`, `attentions`, `embeddings`, `n_params`, `vocab_size`.
 #' @export
@@ -4424,9 +4530,12 @@ morie_geron_bert <- function(X, n_layers = 2, n_heads = 2, d_model = 8,
 #' fresh mask drawn every epoch instead of frozen in preprocessing.
 #' `masks` records sequence 0's positions per epoch, 0-based.
 #'
-#' @param X 0-based token ids. @param n_layers,n_heads,d_model,d_ff Geometry.
-#' @param vocab_size Optional. @param mask_prob Fraction in (0, 1).
-#' @param epochs Dynamic-masking passes. @param seed LCG seed.
+#' @param X 0-based token ids.
+#' @param n_layers,n_heads,d_model,d_ff Geometry.
+#' @param vocab_size Optional.
+#' @param mask_prob Fraction in (0, 1).
+#' @param epochs Dynamic-masking passes.
+#' @param seed LCG seed.
 #' @return List with `hidden`, `mlm_loss`, `epoch_losses`, `masks`,
 #'   `dynamic_masking`, `has_nsp_head`, `n_params`, `n_params_with_nsp`,
 #'   `n_masked_per_sequence`.
@@ -4497,7 +4606,8 @@ morie_geron_roberta <- function(X, n_layers = 2, n_heads = 2, d_model = 8,
 #' cross-entropy in nats per token. `spans` entries are 0-based
 #' c(start, length).
 #'
-#' @param src,tgt Token vectors. @param mask_ratio Fraction in (0, 1).
+#' @param src,tgt Token vectors.
+#' @param mask_ratio Fraction in (0, 1).
 #' @param mean_span Mean geometric span length, >= 1.
 #' @param permute Also rotate the corrupted token list.
 #' @param model Optional function(corrupted, tgt) -> per-token log-probs.
@@ -4594,8 +4704,10 @@ morie_geron_bart <- function(src, tgt, mask_ratio = 0.3, mean_span = 3,
 #' so an input size that collapses a feature map to zero is an error
 #' rather than a silent negative dimension.
 #'
-#' @param n_classes Output units, >= 1. @param input_size Square side length.
-#' @param in_channels Input channels. @param dropout Rate in \[0, 1).
+#' @param n_classes Output units, >= 1.
+#' @param input_size Square side length.
+#' @param in_channels Input channels.
+#' @param dropout Rate in \[0, 1).
 #' @return List with `layers`, `total_params`, `trainable_params`,
 #'   `output_shape`, `flatten_dim`, `conv_params`, `fc_params`.
 #' @export
