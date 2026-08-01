@@ -13,7 +13,7 @@ morie_hockey_stick(n, k)
 list(sum, binomial, holds).
 }
 \description{
-sum_{j=k-1}^{n-1} C(j, k-1) = C(n, k). Mirrors morie.fn ...1e29.
+The sum of C(j, k-1) over j = k-1, ..., n-1 equals C(n, k). Mirrors morie.fn ...1e29.
 }
 \examples{
 morie_hockey_stick(6, 2)$holds
