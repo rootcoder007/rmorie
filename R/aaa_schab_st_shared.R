@@ -33,7 +33,7 @@
   if (nrow(coords) != length(times)) {
     stop("`coords` and `times` must have the same length", call. = FALSE)
   }
-  d <- as.matrix(dist(coords))
+  d <- as.matrix(stats::dist(coords))
   k <- abs(outer(times, times, "-"))
   list(d = d, k = k)
 }
