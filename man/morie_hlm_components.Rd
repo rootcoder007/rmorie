@@ -13,7 +13,9 @@ morie_hlm_components(
 )
 }
 \arguments{
-\item{ms_between, ms_within}{Mean squares. @param n_per_cluster Cluster n
+\item{ms_between, ms_within}{Mean squares.}
+
+\item{n_per_cluster}{Cluster n
 (harmonic mean under unequal sizes).}
 
 \item{ll_null, ll_full}{Log-likelihoods.}

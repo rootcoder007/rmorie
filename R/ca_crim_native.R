@@ -160,7 +160,8 @@ morie_logit_link <- function(p = 0.5, xb = 0, b = 0) {
 #' and likelihood-ratio chi square (4.18). Mirrors ca4e9 to ca4e18.
 #'
 #' @param ybar Mean of the binary response.
-#' @param b Coefficient. @param se Its standard error.
+#' @param b Coefficient.
+#' @param se Its standard error.
 #' @param n_correct,n_total Prediction counts.
 #' @param neg2ll_null,neg2ll_full,neg2ll_reduced Reported -2LL values.
 #' @param n Sample size for Cox and Snell.
@@ -203,7 +204,8 @@ morie_mlogit_probs <- function(xbs) {
 #'
 #' @param probs Category probabilities summing to one.
 #' @param m Category index (1-based, at most length(probs) - 1).
-#' @param tau_m Threshold. @param xb Linear predictor value.
+#' @param tau_m Threshold.
+#' @param xb Linear predictor value.
 #' @return List with cum_prob, cum_logit, logit_plus, logit_minus.
 #' @export
 morie_ordinal_logit_ca <- function(probs, m, tau_m = 0, xb = 0) {
@@ -222,9 +224,12 @@ morie_ordinal_logit_ca <- function(probs, m, tau_m = 0, xb = 0) {
 #' adjusted standard error, and the negative binomial variance mu plus
 #' mu squared alpha (6.8). Mirrors ca6e1 to ca6e8.
 #'
-#' @param b0,b1,x1 Model terms. @param exposure Offset exposure.
-#' @param y,yhat Observed and fitted counts for theta. @param k Predictors.
-#' @param se Poisson standard error. @param mu,alpha Negative binomial terms.
+#' @param b0,b1,x1 Model terms.
+#' @param exposure Offset exposure.
+#' @param y,yhat Observed and fitted counts for theta.
+#' @param k Predictors.
+#' @param se Poisson standard error.
+#' @param mu,alpha Negative binomial terms.
 #' @return List of the named quantities.
 #' @export
 morie_count_glm <- function(b0 = 0, b1 = 0, x1 = 0, exposure = 1,
@@ -250,7 +255,8 @@ morie_count_glm <- function(b0 = 0, b1 = 0, x1 = 0, exposure = 1,
 #' intraclass correlation (7.7) and the LR chi square -2 (LL1 - LL2)
 #' (7.8). Mirrors ca7e6 to ca7e8.
 #'
-#' @param ms_between,ms_within Mean squares. @param n_per_cluster Cluster n
+#' @param ms_between,ms_within Mean squares.
+#' @param n_per_cluster Cluster n
 #'   (harmonic mean under unequal sizes).
 #' @param ll_null,ll_full Log-likelihoods.
 #' @return List with sigma2_u, icc, lr_chi2.
@@ -275,9 +281,14 @@ morie_hlm_components <- function(ms_between, ms_within, n_per_cluster,
 #' lambda equals n f squared (8.5) and R squared from f squared (8.7).
 #' Mirrors ca8e1 to ca8e7.
 #'
-#' @param d Effect size. @param n1,n2 Group sizes. @param t_cv Critical t.
-#' @param df Degrees of freedom. @param f Cohen's f. @param n_total Total n.
-#' @param r Correlation. @param n Sample size for the r delta.
+#' @param d Effect size.
+#' @param n1,n2 Group sizes.
+#' @param t_cv Critical t.
+#' @param df Degrees of freedom.
+#' @param f Cohen's f.
+#' @param n_total Total n.
+#' @param r Correlation.
+#' @param n Sample size for the r delta.
 #' @return List with delta_d, t_beta, beta, power, lambda, delta_r, r2_f2.
 #' @export
 morie_power_ttest_crim <- function(d = NA, n1 = NA, n2 = NA, t_cv = NA,
@@ -309,8 +320,10 @@ morie_power_ttest_crim <- function(d = NA, n1 = NA, n2 = NA, t_cv = NA,
 #' pooled-variance independent t (9.3, 9.11), the 2 by 2 chi square (9.4)
 #' and paired t (9.10). Mirrors ca9e1 to ca9e4, ca9e10, ca9e11.
 #'
-#' @param r_yt,r_yx,r_tx Correlations. @param s_y,s_t Standard deviations.
-#' @param m1,m2,s1,s2,n1,n2 Group summaries. @param a,b,c,d Cell counts.
+#' @param r_yt,r_yx,r_tx Correlations.
+#' @param s_y,s_t Standard deviations.
+#' @param m1,m2,s1,s2,n1,n2 Group summaries.
+#' @param a,b,c,d Cell counts.
 #' @param differences Paired differences.
 #' @return List with b_t, b_t_random, t, df, chi2, t_paired, df_paired
 #'   (only the pieces whose inputs were supplied).
@@ -401,7 +414,8 @@ morie_experiment_anova <- function(groups = NULL, y = NULL,
 #' Equation 10.1 of Weisburd et al. (2022): 100 (xbar_t - xbar_c) over
 #' the square root of the average of the two variances. Mirrors ca10e1.
 #'
-#' @param mean_t,mean_c Group means. @param s_t,s_c Group SDs.
+#' @param mean_t,mean_c Group means.
+#' @param s_t,s_c Group SDs.
 #' @return Numeric bias in percent.
 #' @export
 morie_psm_balance <- function(mean_t, mean_c, s_t, s_c) {
@@ -416,8 +430,10 @@ morie_psm_balance <- function(mean_t, mean_c, s_t, s_c) {
 #' and odds ratios with logged standard errors, and Fisher's Z with its
 #' standard error. Mirrors ca11e1 to ca11e14.
 #'
-#' @param m1,m2,s1,s2,n1,n2 Group summaries. @param t_value Optional t.
-#' @param a,b,c,d 2 by 2 cell counts. @param r Correlation.
+#' @param m1,m2,s1,s2,n1,n2 Group summaries.
+#' @param t_value Optional t.
+#' @param a,b,c,d 2 by 2 cell counts.
+#' @param r Correlation.
 #' @return List of the named effect sizes and standard errors.
 #' @export
 morie_meta_effect_sizes <- function(m1 = NA, m2 = NA, s1 = NA, s2 = NA,
@@ -463,10 +479,16 @@ morie_meta_effect_sizes <- function(m1 = NA, m2 = NA, s1 = NA, s2 = NA,
 #' 0.606 divisors); RR to OR and back; and point-biserial r to d and
 #' back. Mirrors ca11e15 to ca11e33.
 #'
-#' @param ln_or Logged odds ratio. @param se_ln_or Its standard error.
-#' @param p1,p2 Group probabilities. @param n1,n2 Group sizes.
-#' @param d Cohen's d. @param se_d Its standard error. @param rr Risk
-#'   ratio. @param or_value Odds ratio. @param r Point-biserial r.
+#' @param ln_or Logged odds ratio.
+#' @param se_ln_or Its standard error.
+#' @param p1,p2 Group probabilities.
+#' @param n1,n2 Group sizes.
+#' @param d Cohen's d.
+#' @param se_d Its standard error.
+#' @param rr Risk
+#' ratio.
+#' @param or_value Odds ratio.
+#' @param r Point-biserial r.
 #'   @param se_r Its standard error.
 #' @return List of every conversion whose inputs were supplied.
 #' @export
@@ -525,7 +547,8 @@ morie_meta_convert <- function(ln_or = NA, se_ln_or = NA, p1 = NA,
 #' weights, and the Qwithin / Qbetween partition. Mirrors ca11e34 to
 #' ca11e46.
 #'
-#' @param ys Effect sizes. @param ses Their standard errors.
+#' @param ys Effect sizes.
+#' @param ses Their standard errors.
 #' @param z_cv Critical z for the confidence interval.
 #' @param groups Optional integer group labels for the moderator
 #'   partition.

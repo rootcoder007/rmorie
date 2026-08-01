@@ -20,12 +20,24 @@ morie_meta_convert(
 )
 }
 \arguments{
-\item{ln_or}{Logged odds ratio. @param se_ln_or Its standard error.}
+\item{ln_or}{Logged odds ratio.}
 
-\item{p1, p2}{Group probabilities. @param n1,n2 Group sizes.}
+\item{se_ln_or}{Its standard error.}
 
-\item{d}{Cohen's d. @param se_d Its standard error. @param rr Risk
-ratio. @param or_value Odds ratio. @param r Point-biserial r.
+\item{p1, p2}{Group probabilities.}
+
+\item{n1, n2}{Group sizes.}
+
+\item{d}{Cohen's d.}
+
+\item{se_d}{Its standard error.}
+
+\item{rr}{Risk
+ratio.}
+
+\item{or_value}{Odds ratio.}
+
+\item{r}{Point-biserial r.
 @param se_r Its standard error.}
 }
 \value{

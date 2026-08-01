@@ -11,7 +11,9 @@ morie_ordinal_logit_ca(probs, m, tau_m = 0, xb = 0)
 
 \item{m}{Category index (1-based, at most length(probs) - 1).}
 
-\item{tau_m}{Threshold. @param xb Linear predictor value.}
+\item{tau_m}{Threshold.}
+
+\item{xb}{Linear predictor value.}
 }
 \value{
 List with cum_prob, cum_logit, logit_plus, logit_minus.

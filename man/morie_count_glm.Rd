@@ -18,11 +18,17 @@ morie_count_glm(
 )
 }
 \arguments{
-\item{b0, b1, x1}{Model terms. @param exposure Offset exposure.}
+\item{b0, b1, x1}{Model terms.}
 
-\item{y, yhat}{Observed and fitted counts for theta. @param k Predictors.}
+\item{exposure}{Offset exposure.}
 
-\item{se}{Poisson standard error. @param mu,alpha Negative binomial terms.}
+\item{y, yhat}{Observed and fitted counts for theta.}
+
+\item{k}{Predictors.}
+
+\item{se}{Poisson standard error.}
+
+\item{mu, alpha}{Negative binomial terms.}
 }
 \value{
 List of the named quantities.

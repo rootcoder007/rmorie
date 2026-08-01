@@ -19,7 +19,9 @@ morie_logistic_effects(
 \arguments{
 \item{ybar}{Mean of the binary response.}
 
-\item{b}{Coefficient. @param se Its standard error.}
+\item{b}{Coefficient.}
+
+\item{se}{Its standard error.}
 
 \item{n_correct, n_total}{Prediction counts.}
 

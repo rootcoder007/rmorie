@@ -20,9 +20,13 @@ morie_meta_effect_sizes(
 )
 }
 \arguments{
-\item{m1, m2, s1, s2, n1, n2}{Group summaries. @param t_value Optional t.}
+\item{m1, m2, s1, s2, n1, n2}{Group summaries.}
 
-\item{a, b, c, d}{2 by 2 cell counts. @param r Correlation.}
+\item{t_value}{Optional t.}
+
+\item{a, b, c, d}{2 by 2 cell counts.}
+
+\item{r}{Correlation.}
 }
 \value{
 List of the named effect sizes and standard errors.
