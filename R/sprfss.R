@@ -4,10 +4,10 @@
 #' The hierarchy of Sec 2.2. STRICT stationarity means the spatial
 #' distribution is invariant under translation, so the field repeats
 #' itself throughout the domain. SECOND-ORDER (weak) requires only the
-#' first two moments: E[Z(s)] = mu constant and Cov[Z(s), Z(s+h)] = C(h)
+#' first two moments: E\[Z(s)\] = mu constant and Cov\[Z(s), Z(s+h)\] = C(h)
 #' depending on the lag alone. INTRINSIC is weaker still -- only the
-#' INCREMENTS need be stationary, E[Z(s+h) - Z(s)] = 0 with
-#' Var[Z(s+h) - Z(s)] = 2 gamma(h) -- so a process can be intrinsically
+#' INCREMENTS need be stationary, E\[Z(s+h) - Z(s)\] = 0 with
+#' Var\[Z(s+h) - Z(s)\] = 2 gamma(h) -- so a process can be intrinsically
 #' stationary with no finite variance and no covariance function at all.
 #'
 #' Second-order does NOT imply strict in general, but it does in a

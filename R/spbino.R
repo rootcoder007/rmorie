@@ -3,7 +3,7 @@
 #'
 #' The count is not random -- that is the whole difference from the
 #' Poisson process. For any sub-region B, N(B) ~ Binomial(n, p) with
-#' p = nu(B) / nu(A), so E[N(B)] = np and Var[N(B)] = np(1 - p). The
+#' p = nu(B) / nu(A), so E\[N(B)\] = np and Var\[N(B)\] = np(1 - p). The
 #' variance is SMALLER than the mean, whereas a Poisson process has them
 #' equal; conditioning on the total removes that extra variability.
 #' Conditioning an HPP on N(A) = n gives exactly this process

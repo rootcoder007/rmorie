@@ -4,10 +4,10 @@
 #' Parents form a homogeneous Poisson process of intensity rho; each
 #' produces N offspring displaced independently by a radially symmetric
 #' density f. With a stationary parent process the cluster process is
-#' stationary with intensity lambda = rho E[N], and the second-order
+#' stationary with intensity lambda = rho E\[N\], and the second-order
 #' intensity is
 #'
-#'   lambda_2(h) = rho^2 E[N]^2 + rho E[N(N-1)] f(h)
+#'   lambda_2(h) = rho^2 E\[N\]^2 + rho E\[N(N-1)\] f(h)
 #'
 #' For N ~ Poisson(mu) with Gaussian displacements of standard deviation
 #' sigma in the plane this integrates to

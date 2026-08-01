@@ -3,7 +3,7 @@
 #'
 #' Convolving a kernel K with a white-noise field gives a second-order
 #' stationary process whose covariance is the convolution of the kernel
-#' with itself, Cov[Z(s), Z(s+h)] = sigma_x^2 int K(u) K(u+h) du. The
+#' with itself, Cov\[Z(s), Z(s+h)\] = sigma_x^2 int K(u) K(u+h) du. The
 #' construction is useful because ANY kernel yields a valid covariance --
 #' positive definiteness is automatic rather than something to check.
 #'
@@ -11,7 +11,7 @@
 #' convolves to a TENT correlation function, which is also the d = 1
 #' member of the spherical family.
 #'
-#' @param kernel Function K(u); the boxcar on [-1/2, 1/2] by default.
+#' @param kernel Function K(u); the boxcar on \[-1/2, 1/2\] by default.
 #' @param h Lags at which to evaluate the covariance.
 #' @param sigma2_x White-noise variance, positive.
 #' @param half_width,n Quadrature half-width and node count.
