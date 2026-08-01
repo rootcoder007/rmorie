@@ -2,7 +2,7 @@
 #' Empirical covariance function of a second-order stationary field.
 #'
 #' For a second-order stationary random field the covariance depends on
-#' the lag alone, C(h) = Cov[Z(s), Z(s+h)], with C(0) = Var[Z(s)] the
+#' the lag alone, C(h) = Cov\[Z(s), Z(s+h)\], with C(0) = Var\[Z(s)\] the
 #' sill. It is estimated here by binning pairs on lag and averaging the
 #' centred cross-products.
 #'

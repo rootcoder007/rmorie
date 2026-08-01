@@ -2,8 +2,8 @@
 #' Mean-square continuity, decided by the covariance at the origin.
 #'
 #' For a field with constant mean and variance, MS continuity at s means
-#' lim_{h->0} E[(Z(s) - Z(s+h))^2] = 0, and since
-#' E[(Z(s) - Z(s+h))^2] = 2 Var[Z(s)] - 2 C(h) = 2 (C(0) - C(h)) = 2 gamma(h),
+#' lim_\{h->0\} E\[(Z(s) - Z(s+h))^2\] = 0, and since
+#' E\[(Z(s) - Z(s+h))^2\] = 2 Var\[Z(s)\] - 2 C(h) = 2 (C(0) - C(h)) = 2 gamma(h),
 #' the field is mean-square continuous IF AND ONLY IF C is continuous at
 #' the origin. The whole question reduces to the behaviour of C near zero.
 #'
