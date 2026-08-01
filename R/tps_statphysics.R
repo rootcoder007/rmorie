@@ -1232,7 +1232,7 @@ morie_tps_criminal_network_graph <- function(category = "Assault",
         }
       }
       graphics::points(px, py, pch = 21, bg = "#26a269",
-                       cex = 0.8 + 2.2 * sqrt(sizes / max(sizes)))
+                       cex = 0.8 + 2.2 * sqrt(as.numeric(top[nodes]) / max(as.numeric(top[nodes]))))
       graphics::text(px * 1.18, py * 1.18, nodes, cex = 0.62)
     })
   .tps_sp_result(
