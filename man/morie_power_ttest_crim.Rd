@@ -17,11 +17,21 @@ morie_power_ttest_crim(
 )
 }
 \arguments{
-\item{d}{Effect size. @param n1,n2 Group sizes. @param t_cv Critical t.}
+\item{d}{Effect size.}
 
-\item{df}{Degrees of freedom. @param f Cohen's f. @param n_total Total n.}
+\item{n1, n2}{Group sizes.}
 
-\item{r}{Correlation. @param n Sample size for the r delta.}
+\item{t_cv}{Critical t.}
+
+\item{df}{Degrees of freedom.}
+
+\item{f}{Cohen's f.}
+
+\item{n_total}{Total n.}
+
+\item{r}{Correlation.}
+
+\item{n}{Sample size for the r delta.}
 }
 \value{
 List with delta_d, t_beta, beta, power, lambda, delta_r, r2_f2.

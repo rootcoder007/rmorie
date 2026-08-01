@@ -24,9 +24,13 @@ morie_rct_tests(
 )
 }
 \arguments{
-\item{r_yt, r_yx, r_tx}{Correlations. @param s_y,s_t Standard deviations.}
+\item{r_yt, r_yx, r_tx}{Correlations.}
 
-\item{m1, m2, s1, s2, n1, n2}{Group summaries. @param a,b,c,d Cell counts.}
+\item{s_y, s_t}{Standard deviations.}
+
+\item{m1, m2, s1, s2, n1, n2}{Group summaries.}
+
+\item{a, b, c, d}{Cell counts.}
 
 \item{differences}{Paired differences.}
 }

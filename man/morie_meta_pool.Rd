@@ -7,7 +7,9 @@
 morie_meta_pool(ys, ses, z_cv = 1.96, groups = NULL)
 }
 \arguments{
-\item{ys}{Effect sizes. @param ses Their standard errors.}
+\item{ys}{Effect sizes.}
+
+\item{ses}{Their standard errors.}
 
 \item{z_cv}{Critical z for the confidence interval.}
 
