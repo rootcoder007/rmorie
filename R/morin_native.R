@@ -80,7 +80,7 @@ morie_stars_bars <- function(n, N) {
 
 #' Hockey-stick identity
 #'
-#' sum_{j=k-1}^{n-1} C(j, k-1) = C(n, k). Mirrors morie.fn ...1e29.
+#' The sum of C(j, k-1) over j = k-1, ..., n-1 equals C(n, k). Mirrors morie.fn ...1e29.
 #'
 #' @param n,k identity parameters, 1 <= k <= n.
 #' @return list(sum, binomial, holds).
