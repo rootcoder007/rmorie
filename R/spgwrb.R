@@ -1,0 +1,107 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+#' GWR bandwidth selection by cross-validation or corrected AIC
+#'
+#' The bandwidth, not the kernel, is what decides a GWR fit -- "the choice of
+#' a bandwidth is more important than the shape of the kernel". As it grows
+#' the local models converge on the single global OLS fit; as it shrinks each
+#' local fit sees fewer neighbours and spends more degrees of freedom. Both
+#' criteria implemented here trade those two off.
+#'
+#' \describe{
+#'   \item{cv}{Leave-one-out cross-validation,
+#'     \eqn{\sum_i (y_i - \hat{y}_{-i})^2}. The local model at \eqn{i} is
+#'     fitted with its own weight \eqn{w_{ii}} forced to zero, so \eqn{y_i}
+#'     never contributes to predicting itself. This is what Bivand et al.
+#'     (2013, Sec. 9.4.3) describe as the usual choice.}
+#'   \item{aicc}{The corrected AIC of Hurvich, Simonoff & Tsai (1998) as
+#'     adopted for GWR,
+#'     \eqn{AICc = 2n \log(\hat{\sigma}) + n \log(2\pi) +
+#'     n (n + tr(S)) / (n - 2 - tr(S))},
+#'     with \eqn{\hat{\sigma}^2 = y'(I-S)'(I-S)y / n} and \eqn{S} the hat
+#'     matrix of Sec. 6.1.3.1, p. 317.}
+#'   \item{aic}{The uncorrected form, \eqn{\ldots + n + tr(S)}.}
+#' }
+#'
+#' Three different residual variances appear here, because the sources use
+#' three and they are not interchangeable. `sigma2` is \eqn{RSS/n}, the
+#' maximum-likelihood estimate, which Fotheringham et al. (2002) eq (4.23)
+#' says outright is what the AIC and AICc take. `sigma2_gwr` is
+#' \eqn{RSS/(n - 2v_1 + v_2)} with \eqn{v_1 = tr(S)} and \eqn{v_2 = tr(S^TS)}
+#' -- eq (2.16), whose denominator is the effective residual degrees of
+#' freedom, and the one the local standard errors of eq (2.15) are built from
+#' (reported as `se_params`). `sigma2_cressie` is
+#' \eqn{RSS/tr\{(I-L)(I-L)^T\}} -- Schabenberger & Gotway p. 317, after
+#' Cressie (1998). Substituting one for another silently shifts either the
+#' criterion or the standard errors, so all three are reported.
+#'
+#' Search is by golden section -- the method the source itself names
+#' (Fotheringham et al. 2002 p. 60, citing Greig 1980) -- over the interval
+#' running from a thousandth of the coordinate bounding-box diagonal up to the
+#' diagonal itself, which is the interval `spgwr::gwr.sel` uses. With `adaptive = TRUE` the bandwidth is
+#' instead a neighbour count and the criterion is evaluated at every integer
+#' from 2 up to `n`.
+#'
+#' @param x Design matrix, n by p. Include an intercept column if one is
+#'   wanted.
+#' @param y Response, length n.
+#' @param coords Coordinates, n by 2.
+#' @param kernel One of "gaussian", "bisquare", "tricube", "boxcar".
+#' @param criterion One of "cv", "aicc", "aic".
+#' @param adaptive Logical; select a nearest-neighbour count instead.
+#' @param bounds Optional length-2 override of the search interval.
+#' @param tol Golden-section stopping width. Ignored when `adaptive = TRUE`.
+#' @return A list with `optimal_bandwidth`, `score`, `criterion`, `bounds`,
+#'   `adaptive`, `kernel`, and the fit at the optimum: `tr_S`, `tr_STS`,
+#'   `effective_parameters`, `rss`, `sigma2`, `sigma2_gwr`, `sigma2_cressie`,
+#'   `se_params`, `edf_resid`, `v1`, `v2`, `cv`, `aicc`, `aic`, `n`.
+#' @references Schabenberger Ch 6, Sec 6.1.3.1, pp. 316-317 -- the model, the
+#'   hat matrix and Cressie's residual variance. The book gives no
+#'   bandwidth-selection criterion and defers to Fotheringham et al. Bivand,
+#'   Pebesma & Gomez-Rubio (2013), Sec 9.4.3, p. 318. Hurvich, Simonoff & Tsai
+#'   (1998), JRSS B 60:271-293. Fotheringham, Brunsdon & Charlton (2002),
+#'   Geographically Weighted Regression: The Analysis of Spatially Varying
+#'   Relationships, Wiley, read directly -- eq (2.31) the CV score with the
+#'   observations for point i omitted, eq (2.33) = eq (4.21) the AICc,
+#'   eq (4.22) the AIC, eq (4.23) fixing sigma-hat squared as RSS/n for both,
+#'   eqs (2.17)-(2.18) for v1 and v2 with 2v1 - v2 the effective number of
+#'   parameters, eq (2.16) the inference variance, eqs (2.14)-(2.15) the
+#'   parameter variance, eq (2.20) the hat-matrix row, and golden section as
+#'   the book's own named search method (p. 60, after Greig 1980).
+#'   Independently checked against spgwr's published NY8 output.
+#' @export
+spgwrb <- function(x, y, coords, kernel = "gaussian", criterion = "cv",
+                   adaptive = FALSE, bounds = NULL, tol = 1e-4) {
+  x <- as.matrix(x)
+  y <- as.numeric(y)
+  sel <- .schab_select_bandwidth(y, x, coords, kernel = kernel,
+                                 criterion = criterion, adaptive = adaptive,
+                                 bounds = bounds, tol = tol)
+  bw <- sel$bandwidth
+  D <- .schab_pairwise_distances(coords)
+  fit <- .schab_gwr_fit(y, x, D, bw, kernel, adaptive)
+
+  list(
+    optimal_bandwidth = bw,
+    score = sel$score,
+    criterion = criterion,
+    bounds = sel$bounds,
+    adaptive = isTRUE(adaptive),
+    kernel = kernel,
+    tr_S = fit$tr_S,
+    tr_STS = fit$tr_STS,
+    effective_parameters = fit$effective_parameters,
+    rss = fit$rss,
+    sigma2 = fit$sigma2,
+    sigma2_cressie = fit$sigma2_cressie,
+    sigma2_gwr = fit$sigma2_gwr,
+    edf_resid = fit$edf_resid,
+    se_params = fit$se_params,
+    v1 = fit$v1,
+    v2 = fit$v2,
+    cv = .schab_cv_score(y, x, D, bw, kernel, adaptive),
+    aicc = .schab_aicc_from_parts(fit$n, fit$sigma2, fit$tr_S),
+    aic = .schab_aic_from_parts(fit$n, fit$sigma2, fit$tr_S),
+    n = fit$n
+  )
+}
