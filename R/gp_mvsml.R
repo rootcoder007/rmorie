@@ -696,3 +696,87 @@ morie_mvsml_penalized_poisson <- function(X, y, lambda = 1,
   list(beta = beta, fitted = mu, loglik = ll,
        penalized_loglik = ll - pen, iterations = it)
 }
+
+# ---- chapter 8: RKHS regression and kernels (pp.252-266) ----
+
+#' @noRd
+morie_mvsml_kernel_matrix <- function(X, kernel = "linear",
+                                      gamma = NULL, degree = 2,
+                                      coef0 = 1, Z = NULL) {
+  A <- as.matrix(X)
+  B <- if (is.null(Z)) A else as.matrix(Z)
+  if (is.null(gamma)) gamma <- 1 / ncol(A)
+  G <- A %*% t(B)
+  if (kernel == "linear") return(G)
+  if (kernel == "polynomial") return((gamma * G + coef0)^degree)
+  if (kernel == "sigmoid") return(tanh(gamma * G + coef0))
+  d2 <- outer(rowSums(A^2), rowSums(B^2), "+") - 2 * G
+  d2[d2 < 0] <- 0
+  if (kernel == "gaussian") return(exp(-gamma * d2))
+  if (kernel == "exponential") return(exp(-gamma * sqrt(d2)))
+  stop("unknown kernel: ", kernel)
+}
+
+#' @noRd
+morie_mvsml_is_psd <- function(K, tol = 1e-9) {
+  S <- (as.matrix(K) + t(as.matrix(K))) / 2
+  lam <- eigen(S, symmetric = TRUE, only.values = TRUE)$values
+  list(psd = min(lam) >= -tol, eigenvalues = lam)
+}
+
+#' @noRd
+morie_mvsml_rkhs_norm <- function(beta, K) {
+  b <- as.numeric(beta)
+  as.numeric(t(b) %*% as.matrix(K) %*% b)
+}
+
+#' @noRd
+morie_mvsml_rkhs_predict <- function(K_new, beta, eta0 = 0) {
+  as.numeric(eta0 + as.matrix(K_new) %*% as.numeric(beta))
+}
+
+#' @noRd
+morie_mvsml_rkhs_fit <- function(K, y, lambda = 1) {
+  K <- as.matrix(K); y <- as.numeric(y); n <- length(y)
+  A <- matrix(0, n + 1, n + 1); rhs <- numeric(n + 1)
+  A[1, 1] <- 1
+  A[1, -1] <- colSums(K) / n
+  rhs[1] <- mean(y)
+  KtK <- t(K) %*% K
+  A[-1, 1] <- colSums(K) * 2 / n
+  A[-1, -1] <- 2 * KtK / n + lambda * K
+  rhs[-1] <- 2 * as.numeric(t(K) %*% y) / n
+  sol <- as.numeric(morie_mvsml_solve(A, rhs))
+  eta0 <- sol[1]; beta <- sol[-1]
+  fitted <- morie_mvsml_rkhs_predict(K, beta, eta0)
+  resid <- y - fitted
+  loss <- mean(resid^2)
+  pen <- 0.5 * lambda * morie_mvsml_rkhs_norm(beta, K)
+  list(eta0 = eta0, beta = beta, fitted = fitted,
+       residuals = resid, loss = loss, penalty = pen,
+       objective = loss + pen)
+}
+
+#' @noRd
+morie_mvsml_arccos_kernel <- function(X, Z = NULL, depth = 1L,
+                                      normalize_median = FALSE) {
+  A <- as.matrix(X)
+  same <- is.null(Z)
+  B <- if (same) A else as.matrix(Z)
+  na <- sqrt(rowSums(A^2)); nb <- sqrt(rowSums(B^2))
+  Jf <- function(th) sin(th) + (pi - th) * cos(th)
+  cosang <- (A %*% t(B)) / outer(na, nb)
+  cosang[cosang > 1] <- 1; cosang[cosang < -1] <- -1
+  K <- outer(na, nb) * Jf(acos(cosang)) / pi
+  dA <- if (same) diag(K) else na^2
+  dB <- if (same) dA else nb^2
+  if (depth > 1L) for (l in seq_len(depth - 1L)) {
+    den <- sqrt(outer(dA, dB))
+    cs <- K / den
+    cs[cs > 1] <- 1; cs[cs < -1] <- -1
+    K <- den * Jf(acos(cs)) / pi
+    dA <- dA * Jf(0) / pi; dB <- dB * Jf(0) / pi
+  }
+  if (normalize_median) K <- K / median(K)
+  K
+}
