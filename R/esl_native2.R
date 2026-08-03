@@ -414,12 +414,6 @@ morie_esl_thin_plate_spline <- function(X, y, lambda_ = 1, newdata = NULL) {
 ## Manifold learning and prototype methods
 ## ---------------------------------------------------------------------------
 
-.morie_ginv <- function(M) {
-  s <- svd(M)
-  pos <- s$d > max(dim(M)) * .Machine$double.eps * max(s$d)
-  if (!any(pos)) return(matrix(0, ncol(M), nrow(M)))
-  s$v[, pos, drop = FALSE] %*% ((1 / s$d[pos]) * t(s$u[, pos, drop = FALSE]))
-}
 
 #' Independent component analysis (FastICA)
 #'

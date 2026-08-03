@@ -21,6 +21,17 @@
 #'   `adj_r_squared`, `sigma`, `f_statistic`, `f_p_value`, `residuals`
 #' @export
 morie_ols <- function(y, X, add_intercept = TRUE) {
+  # Two definitions of this function existed with OPPOSITE argument
+  # orders -- (y, X) here and (X, y) in gp_mvsml.R -- and the second
+  # silently overwrote the first at load, so half the callers in this
+  # package were transposing their own data without any error.  Both
+  # orders are accepted now, decided by which argument is rectangular.
+  if (is.matrix(y) || is.data.frame(y)) {
+    if (NCOL(y) > 1 && NCOL(X) == 1) {
+      tmp <- y; y <- X; X <- tmp
+    }
+  }
+  y <- as.numeric(y)
   X <- as.matrix(X)
   n <- length(y)
   if (nrow(X) != n) stop("X has ", nrow(X), " rows but y has ", n)
@@ -48,8 +59,11 @@ morie_ols <- function(y, X, add_intercept = TRUE) {
   list(coef = beta, se = se, t = tv, p_value = pv,
        fitted = fitted, residuals = resid, n = n, k = k,
        df_resid = df_resid, df_model = df_model, rss = rss, tss = tss,
-       sigma2 = s2, sigma = sqrt(s2), r_squared = r2,
-       adj_r_squared = adj, f_statistic = fstat,
+       sigma2 = s2, sigma = sqrt(s2),
+       # sigma2_ml, beta and se_beta come from the definition this one
+       # absorbed, so code written against either name keeps working
+       sigma2_ml = rss / n, beta = beta, se_beta = se,
+       r_squared = r2, adj_r_squared = adj, f_statistic = fstat,
        f_p_value = stats::pf(fstat, df_model, df_resid,
                              lower.tail = FALSE),
        XtX_inv = XtXinv, design = X)

@@ -12,6 +12,14 @@
 #' Exact re-implementation of \code{MASS::ginv} for real matrices: the
 #' SVD pseudo-inverse with the same singular-value tolerance rule.
 #' @noRd
+# Shared Moore-Penrose pseudo-inverse.  Two further copies used to exist,
+# in causal_shared_native.R (cutoff max(d)*1e-12) and esl_native2.R
+# (cutoff max(dim)*eps*max(d), the numpy convention).  Because R sources
+# R/ alphabetically this file sorted last and its MASS cutoff --
+# sqrt(eps) ~ 1.49e-8, four to six orders of magnitude looser -- was
+# silently in force for all three call sites.  The survivor is kept so
+# behaviour does not change, with tol exposed for callers that need a
+# tighter rank cut.
 .morie_ginv <- function(X, tol = sqrt(.Machine$double.eps)) {
   if (length(dim(X)) > 2L || !is.numeric(X)) {
     stop("'X' must be a numeric matrix", call. = FALSE)
@@ -310,10 +318,24 @@ logLik.negbin <- function(object, ...) {
 #' rob <- morie_rlm(y ~ x, data = data.frame(y, x))
 #' rob$coefficients
 #' @export
-morie_rlm <- function(formula, data, k = 1.345, maxit = 20L, acc = 1e-4) {
-  mf <- stats::model.frame(formula, data)
-  y <- stats::model.response(mf, "numeric")
-  x <- stats::model.matrix(attr(mf, "terms"), mf)
+morie_rlm <- function(formula, data, k = 1.345, maxit = 20L,
+                      acc = 1e-4, add_intercept = TRUE) {
+  # A second morie_rlm taking (y, X) used to live in
+  # R/timeseries_robust.R, which sorts after this file and so
+  # silently replaced this one at load -- the MASS-parity
+  # formula interface simply vanished from the package.  Both
+  # calling conventions are served here.
+  if (inherits(formula, "formula")) {
+    mf <- stats::model.frame(formula, data)
+    y <- stats::model.response(mf, "numeric")
+    x <- stats::model.matrix(attr(mf, "terms"), mf)
+  } else {
+    y <- as.numeric(formula)
+    x <- as.matrix(data)
+    if (nrow(x) != length(y))
+      stop("X has ", nrow(x), " rows but y has ", length(y))
+    if (add_intercept) x <- cbind(`(Intercept)` = 1, x)
+  }
   psi <- function(u, deriv = 0) if (!deriv) pmin(1, k / abs(u)) else abs(u) <= k
   # Fused Armadillo Huber-M IRLS; matches MASS::rlm to ~1e-15, ~2x faster.
   cp <- .morie_rlm_cpp(x, y, k, as.integer(maxit), acc)
@@ -322,7 +344,11 @@ morie_rlm <- function(formula, data, k = 1.345, maxit = 20L, acc = 1e-4) {
   structure(list(coefficients = coef, residuals = y - fitted,
                  wresid = as.numeric(cp$resid), fitted.values = fitted,
                  s = cp$scale, psi = psi, x = x, weights = numeric(0),
-                 converged = isTRUE(cp$converged), k2 = k),
+                 converged = isTRUE(cp$converged), k2 = k,
+                 scale = cp$scale,
+                 robust_weights = psi(as.numeric(cp$resid) / cp$scale),
+                 n_downweighted = sum(
+                   psi(as.numeric(cp$resid) / cp$scale) < 1 - 1e-12)),
             class = "morie_rlm")
 }
 

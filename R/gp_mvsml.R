@@ -123,22 +123,6 @@ morie_pca <- function(X, k = NULL) {
        cum_variance = cumsum(lam) / sum(lam))
 }
 
-#' @noRd
-morie_ols <- function(X, y, add_intercept = TRUE) {
-  X <- as.matrix(X)
-  if (add_intercept) X <- cbind(1, X)
-  y <- as.numeric(y)
-  XtXi <- morie_solve(t(X) %*% X)
-  beta <- as.numeric(XtXi %*% t(X) %*% y)
-  fitted <- as.numeric(X %*% beta)
-  resid <- y - fitted
-  rss <- sum(resid^2)
-  dof <- length(y) - ncol(X)
-  s2 <- if (dof > 0) rss / dof else NA_real_
-  list(beta = beta, fitted = fitted, residuals = resid, rss = rss,
-       sigma2 = s2, sigma2_ml = rss / length(y),
-       se_beta = sqrt(s2 * diag(XtXi)))
-}
 
 #' @noRd
 morie_ridge <- function(X, y, lambda, add_intercept = TRUE) {
