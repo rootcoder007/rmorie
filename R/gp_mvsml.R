@@ -883,3 +883,57 @@ morie_mvsml_rkhs_mixed_equations <- function(C, K, y, lambda = 1,
        fitted = as.numeric(C %*% theta) + u,
        sigma2_beta = 1 / lambda)
 }
+
+# ---- chapter 9: support vector machines (pp.339-350) ----
+
+#' @noRd
+morie_mvsml_svm_label_matrix <- function(X, y) as.matrix(X) * as.numeric(y)
+
+#' @noRd
+morie_mvsml_svm_decision <- function(X, beta0, beta) {
+  as.numeric(beta0 + as.matrix(X) %*% as.numeric(beta))
+}
+
+#' @noRd
+morie_mvsml_svm_dual_objective <- function(alpha, X, y, K = NULL) {
+  a <- as.numeric(alpha); ys <- as.numeric(y)
+  G <- if (is.null(K)) as.matrix(X) %*% t(as.matrix(X)) else as.matrix(K)
+  sum(a) - 0.5 * sum(outer(a * ys, a * ys) * G)
+}
+
+#' @noRd
+morie_mvsml_svm_beta <- function(alpha, X, y) {
+  as.numeric(t(as.matrix(X)) %*% (as.numeric(alpha) * as.numeric(y)))
+}
+
+#' @noRd
+morie_mvsml_svm_intercept <- function(alpha, X, y, K = NULL,
+                                      tol = 1e-8) {
+  a <- as.numeric(alpha); ys <- as.numeric(y)
+  G <- if (is.null(K)) as.matrix(X) %*% t(as.matrix(X)) else as.matrix(K)
+  S <- which(a > tol)
+  if (!length(S)) return(0)
+  mean(vapply(S, function(i) ys[i] - sum(a[S] * ys[S] * G[i, S]), 0))
+}
+
+#' @noRd
+morie_mvsml_svm_fit_dual <- function(X, y, C = NULL, n_iter = 4000L,
+                                     tol = 1e-9, K = NULL) {
+  X <- as.matrix(X); ys <- as.numeric(y); n <- length(ys)
+  G <- if (is.null(K)) X %*% t(X) else as.matrix(K)
+  H <- outer(ys, ys) * G
+  step <- 1 / (n * max(abs(diag(H))))
+  a <- rep(0, n); yy <- sum(ys^2)
+  for (it in seq_len(n_iter)) {
+    g <- 1 - as.numeric(H %*% a)
+    g <- g - sum(g * ys) / yy * ys          # project onto g . y = 0
+    new <- a + step * g
+    new <- pmax(0, if (is.null(C)) new else pmin(new, C))
+    if (max(abs(new - a)) < tol) { a <- new; break }
+    a <- new
+  }
+  list(alpha = a, beta = morie_mvsml_svm_beta(a, X, ys),
+       beta0 = morie_mvsml_svm_intercept(a, X, ys, K),
+       support_vectors = which(a > 1e-6),
+       objective = morie_mvsml_svm_dual_objective(a, X, ys, K))
+}
