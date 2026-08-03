@@ -585,26 +585,6 @@ morie_meta_pool <- function(ys, ses, z_cv = 1.96, groups = NULL) {
   out
 }
 
-#' Moran's I spatial autocorrelation and its expectation
-#'
-#' Equations 12.1 and 12.2 of Weisburd et al. (2022). Mirrors ca12e1 /
-#' ca12e2.
-#'
-#' @param x Numeric values at n spatial units.
-#' @param w n by n spatial weights matrix.
-#' @return List with i and expected (equal to -1 / (n - 1)).
-#' @export
-morie_morans_i <- function(x, w) {
-  x <- as.numeric(x)
-  w <- as.matrix(w)
-  n <- length(x)
-  stopifnot(n >= 2, all(dim(w) == n))
-  xd <- x - mean(x)
-  denom <- sum(w) * sum(xd^2)
-  stopifnot(denom != 0)
-  list(i = n * as.numeric(t(xd) %*% w %*% xd) / denom,
-       expected = -1 / (n - 1))
-}
 
 #' Spatial lag (SAR) model reduced form
 #'

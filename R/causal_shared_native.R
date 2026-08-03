@@ -5,11 +5,6 @@
 # file so neither tier depends on the other's load order.
 
 # Moore-Penrose pseudo-inverse via SVD, for singular Hessians.
-.morie_ginv <- function(M) {
-  s <- svd(M)
-  pos <- s$d > max(s$d) * 1e-12
-  s$v[, pos, drop = FALSE] %*% ((1 / s$d[pos]) * t(s$u[, pos, drop = FALSE]))
-}
 
 # Newton-Raphson logistic regression; returns fitted probabilities.
 .morie_logit_fit <- function(X, y, max_iter = 100L, tol = 1e-9) {
