@@ -937,3 +937,91 @@ morie_mvsml_svm_fit_dual <- function(X, y, C = NULL, n_iter = 4000L,
        support_vectors = which(a > 1e-6),
        objective = morie_mvsml_svm_dual_objective(a, X, ys, K))
 }
+
+# ---- chapter 10: ANN and backpropagation (pp.385, 409-412) ----
+
+#' @noRd
+morie_mvsml_act <- function(name, z, deriv = FALSE) {
+  if (name == "identity") return(if (deriv) rep(1, length(z)) else z)
+  if (name == "logistic") { s <- 1 / (1 + exp(-pmax(pmin(z, 700), -700)))
+    return(if (deriv) s * (1 - s) else s) }
+  if (name == "tanh") { t <- tanh(z); return(if (deriv) 1 - t^2 else t) }
+  if (name == "relu") return(if (deriv) as.numeric(z > 0) else pmax(0, z))
+  stop("unknown activation: ", name)
+}
+
+#' @noRd
+morie_mvsml_ann_forward <- function(X, W, activations = NULL) {
+  A <- as.matrix(X)
+  acts <- if (is.null(activations))
+    c(rep("logistic", length(W) - 1), "identity") else activations
+  layers <- list(A); nets <- list()
+  for (li in seq_along(W)) {
+    z <- layers[[li]] %*% t(as.matrix(W[[li]]))
+    nets[[li]] <- z
+    layers[[li + 1]] <- matrix(morie_mvsml_act(acts[li], as.numeric(z)),
+                               nrow = nrow(z))
+  }
+  list(output = layers[[length(layers)]], layers = layers,
+       nets = nets, activations = acts)
+}
+
+#' @noRd
+morie_mvsml_ann_sse <- function(y_hat, y) {
+  0.5 * sum((as.matrix(y_hat) - as.matrix(y))^2)
+}
+
+#' @noRd
+morie_mvsml_ann_gradients <- function(X, y, W, activations = NULL) {
+  f <- morie_mvsml_ann_forward(X, W, activations)
+  Y <- as.matrix(y); L <- length(W)
+  acts <- f$activations
+  d <- (f$layers[[L + 1]] - Y) *
+    matrix(morie_mvsml_act(acts[L], as.numeric(f$nets[[L]]), TRUE),
+           nrow = nrow(Y))
+  grads <- vector("list", L)
+  for (li in seq(L, 1)) {
+    grads[[li]] <- t(d) %*% f$layers[[li]]
+    if (li > 1) {
+      d <- (d %*% as.matrix(W[[li]])) *
+        matrix(morie_mvsml_act(acts[li - 1],
+                               as.numeric(f$nets[[li - 1]]), TRUE),
+               nrow = nrow(Y))
+    }
+  }
+  list(gradients = grads, loss = morie_mvsml_ann_sse(f$layers[[L + 1]], Y))
+}
+
+#' @noRd
+morie_mvsml_ann_train <- function(X, y, W, eta = 0.1, n_iter = 500L,
+                                  activations = NULL, tol = 1e-12) {
+  Wc <- lapply(W, as.matrix); hist <- numeric(0)
+  for (it in seq_len(n_iter)) {
+    g <- morie_mvsml_ann_gradients(X, y, Wc, activations)
+    hist <- c(hist, g$loss)
+    for (li in seq_along(Wc)) Wc[[li]] <- Wc[[li]] - eta * g$gradients[[li]]
+    if (length(hist) > 1 && abs(diff(tail(hist, 2))) < tol) break
+  }
+  f <- morie_mvsml_ann_gradients(X, y, Wc, activations)
+  list(W = Wc, loss = f$loss, history = hist, iterations = length(hist))
+}
+
+#' @noRd
+morie_mvsml_ann_numeric_gradient <- function(X, y, W,
+                                             activations = NULL,
+                                             eps = 1e-6) {
+  lapply(seq_along(W), function(li) {
+    Wm <- as.matrix(W[[li]])
+    G <- matrix(0, nrow(Wm), ncol(Wm))
+    for (u in seq_len(nrow(Wm))) for (v in seq_len(ncol(Wm))) {
+      acc <- 0
+      for (s in c(1, -1)) {
+        Wp <- lapply(W, as.matrix); Wp[[li]][u, v] <- Wp[[li]][u, v] + s * eps
+        acc <- acc + s * morie_mvsml_ann_sse(
+          morie_mvsml_ann_forward(X, Wp, activations)$output, y)
+      }
+      G[u, v] <- acc / (2 * eps)
+    }
+    G
+  })
+}
