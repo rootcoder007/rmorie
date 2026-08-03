@@ -780,3 +780,41 @@ morie_mvsml_arccos_kernel <- function(X, Z = NULL, depth = 1L,
   if (normalize_median) K <- K / median(K)
   K
 }
+
+# ---- chapter 8c: Bayesian kernel BLUP (pp.281-285) ----
+
+#' @noRd
+morie_mvsml_hadamard <- function(A, B) as.matrix(A) * as.matrix(B)
+
+#' @noRd
+morie_mvsml_bayesian_kernel_blup <- function(y, K, sigma2_u = 1,
+                                             sigma2_e = 1,
+                                             mu = NULL) {
+  y <- as.numeric(y); K <- as.matrix(K); n <- length(y)
+  if (is.null(mu)) mu <- mean(y)
+  Kinv <- morie_mvsml_pinv(K)
+  A <- Kinv / sigma2_u + diag(1 / sigma2_e, n)
+  Kt <- morie_mvsml_pinv(A)
+  u <- as.numeric(Kt %*% (y - mu)) / sigma2_e
+  list(mu = mu, u = u, K_tilde = Kt,
+       sigma2_u = sigma2_u, sigma2_e = sigma2_e)
+}
+
+#' @noRd
+morie_mvsml_kernel_blup_replicated <- function(Z, K,
+                                               sigma2_u = 1) {
+  Z <- as.matrix(Z)
+  sigma2_u * (Z %*% as.matrix(K) %*% t(Z))
+}
+
+#' @noRd
+morie_mvsml_kernel_blup_gxe <- function(Z_u1, K, Z_E,
+                                        sigma2_u1 = 1,
+                                        sigma2_u2 = 1) {
+  Zu <- as.matrix(Z_u1); ZE <- as.matrix(Z_E)
+  K1 <- Zu %*% as.matrix(K) %*% t(Zu)
+  KE <- ZE %*% t(ZE)
+  list(K1 = sigma2_u1 * K1,
+       K2 = sigma2_u2 * morie_mvsml_hadamard(K1, KE),
+       K_env = KE)
+}
