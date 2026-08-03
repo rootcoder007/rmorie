@@ -364,3 +364,104 @@ morie_mvsml_gxe_multitrait <- function(Y, Z_L, Z_EL, G, Sigma_T,
        b_lines = fit$blup[seq_len(q1)],
        b_gxe = fit$blup[q1 + seq_len(q2)])
 }
+
+# ---- chapter 6: Bayesian genomic linear regression (pp.171-186) ----
+
+#' @noRd
+morie_mvsml_scaled_inv_chisq <- function(nu, S, n = 1L) {
+  S / rchisq(n, df = nu)
+}
+
+#' @noRd
+morie_mvsml_brr_hyper <- function(y, R2 = 0.5, nu = 5, nu_beta = 5,
+                                  sum_var_x = NULL) {
+  var_y <- var(as.numeric(y))
+  S_beta <- var_y * R2 * (nu_beta + 2)
+  if (!is.null(sum_var_x)) S_beta <- S_beta / sum_var_x
+  list(S = var_y * (1 - R2) * (nu + 2), S_beta = S_beta,
+       nu = nu, nu_beta = nu_beta, var_y = var_y)
+}
+
+#' @noRd
+morie_mvsml_chol_lower <- function(G) t(chol(as.matrix(G)))
+
+#' @noRd
+morie_mvsml_brr_gibbs <- function(y, X, n_iter = 2000L,
+                                  burn_in = 500L, nu = 5,
+                                  nu_beta = 5, R2 = 0.5,
+                                  seed = 42L) {
+  set.seed(seed)
+  y <- as.numeric(y); X <- as.matrix(X)
+  n <- length(y); p <- ncol(X)
+  hp <- morie_mvsml_brr_hyper(y, R2, nu, nu_beta)
+  mu <- mean(y); beta <- rep(0, p)
+  s2 <- hp$S / (nu + 2); s2b <- hp$S_beta / (nu_beta + 2)
+  XtX <- t(X) %*% X
+  acc <- list(mu = 0, beta = rep(0, p), s2 = 0, s2b = 0, k = 0L)
+  for (it in seq_len(n_iter)) {
+    s2b <- morie_mvsml_scaled_inv_chisq(nu_beta + p,
+                                        hp$S_beta + sum(beta^2))
+    A <- XtX / s2 + diag(1 / s2b, p)
+    rhs <- t(X) %*% (y - mu) / s2
+    Ai <- morie_mvsml_pinv(A)
+    mean_b <- Ai %*% rhs
+    L <- t(chol(Ai))
+    beta <- as.numeric(mean_b + L %*% rnorm(p))
+    r <- y - X %*% beta
+    mu <- mean(r) + sqrt(s2 / n) * rnorm(1)
+    e <- r - mu
+    s2 <- morie_mvsml_scaled_inv_chisq(nu + n, hp$S + sum(e^2))
+    if (it > burn_in) {
+      acc$k <- acc$k + 1L
+      acc$mu <- acc$mu + mu
+      acc$beta <- acc$beta + beta
+      acc$s2 <- acc$s2 + s2
+      acc$s2b <- acc$s2b + s2b
+    }
+  }
+  list(mu = acc$mu / acc$k, beta = acc$beta / acc$k,
+       sigma2 = acc$s2 / acc$k, sigma2_beta = acc$s2b / acc$k,
+       n_kept = acc$k, hyper = hp)
+}
+
+#' @noRd
+morie_mvsml_bayes_gblup <- function(y, G, n_iter = 2000L,
+                                    burn_in = 500L, seed = 42L,
+                                    ...) {
+  L <- morie_mvsml_chol_lower(G)
+  fit <- morie_mvsml_brr_gibbs(y, L, n_iter = n_iter,
+                               burn_in = burn_in, seed = seed, ...)
+  fit$g <- as.numeric(L %*% fit$beta)
+  fit$sigma2_g <- fit$sigma2_beta
+  fit
+}
+
+#' @noRd
+morie_mvsml_rkhs_cov <- function(Z_L, G, Z_LE = NULL, I_env = NULL,
+                                 sigma2_g = 1, sigma2_ge = 1) {
+  ZL <- as.matrix(Z_L)
+  out <- list(K_L = sigma2_g * (ZL %*% as.matrix(G) %*% t(ZL)))
+  if (!is.null(Z_LE) && !is.null(I_env)) {
+    ZLE <- as.matrix(Z_LE)
+    out$K_LE <- sigma2_ge *
+      (ZLE %*% morie_mvsml_kron(I_env, G) %*% t(ZLE))
+  }
+  out
+}
+
+#' @noRd
+morie_mvsml_extended_predictor <- function(n, X_E = NULL, X = NULL,
+                                           X_EM = NULL) {
+  design <- matrix(1, nrow = n, ncol = 1)
+  widths <- c(intercept = 1L)
+  for (nm in c("environments", "markers", "env_x_marker")) {
+    B <- switch(nm, environments = X_E, markers = X,
+                env_x_marker = X_EM)
+    if (!is.null(B)) {
+      B <- as.matrix(B)
+      design <- cbind(design, B)
+      widths[nm] <- ncol(B)
+    }
+  }
+  list(design = design, widths = widths, n_columns = ncol(design))
+}
