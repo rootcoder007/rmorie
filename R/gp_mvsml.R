@@ -596,3 +596,103 @@ morie_mvsml_ordinal_probit_gibbs <- function(y, X, n_iter = 1500L,
        sigma2_beta = acc_s2b / kept, n_kept = kept,
        n_categories = C)
 }
+
+# ---- chapter 7b: multinomial and Poisson (pp.225-233) ----
+
+#' @noRd
+morie_mvsml_multinomial_probs <- function(X, beta0, beta,
+                                          baseline_last = TRUE) {
+  X <- as.matrix(X)
+  B <- as.matrix(beta)
+  b0 <- as.numeric(beta0)
+  if (baseline_last) {
+    b0 <- c(b0, 0)
+    B <- rbind(B, rep(0, ncol(X)))
+  }
+  eta <- sweep(X %*% t(B), 2, b0, "+")
+  m <- apply(eta, 1, max)
+  ex <- exp(eta - m)
+  ex / rowSums(ex)
+}
+
+#' @noRd
+morie_mvsml_multinomial_loglik <- function(X, y, beta0, beta,
+                                           baseline_last = TRUE) {
+  P <- morie_mvsml_multinomial_probs(X, beta0, beta, baseline_last)
+  sum(log(pmax(P[cbind(seq_along(y), as.integer(y) + 1L)], 1e-300)))
+}
+
+#' @noRd
+morie_mvsml_penalized_multinomial <- function(X, y, beta0, beta,
+                                              lambda,
+                                              penalty = "ridge",
+                                              baseline_last = TRUE) {
+  ll <- morie_mvsml_multinomial_loglik(X, y, beta0, beta,
+                                       baseline_last)
+  pen <- if (penalty == "lasso") sum(abs(as.matrix(beta))) else
+    sum(as.matrix(beta)^2)
+  list(loglik = ll, penalty = lambda * pen,
+       penalized_loglik = ll - lambda * pen)
+}
+
+#' @noRd
+morie_mvsml_multinomial_block <- function(X, y, beta0, beta, lambda,
+                                          cls,
+                                          baseline_last = TRUE) {
+  X <- as.matrix(X); n <- nrow(X); p <- ncol(X)
+  P <- morie_mvsml_multinomial_probs(X, beta0, beta, baseline_last)
+  cc <- cls + 1L
+  Xs <- cbind(1, X)
+  b_cur <- c(as.numeric(beta0)[cc], as.matrix(beta)[cc, ])
+  pc <- pmin(pmax(P[, cc], 1e-6), 1 - 1e-6)
+  w <- pc * (1 - pc)
+  eta <- as.numeric(Xs %*% b_cur)
+  ystar <- eta + ((as.integer(y) == cls) - pc) / w
+  D <- diag(p + 1); D[1, 1] <- 0
+  A <- t(Xs) %*% (Xs * w) + lambda * D
+  sol <- as.numeric(morie_mvsml_solve(A, t(Xs) %*% (w * ystar)))
+  list(beta0 = sol[1], beta = sol[-1], weights = w,
+       working_response = ystar)
+}
+
+#' @noRd
+morie_mvsml_poisson_pmf <- function(y, lambda) {
+  exp(y * log(lambda) - lambda - lgamma(y + 1))
+}
+
+#' @noRd
+morie_mvsml_penalized_poisson <- function(X, y, lambda = 1,
+                                          penalty = "ridge",
+                                          n_iter = 100L,
+                                          tol = 1e-10,
+                                          add_intercept = TRUE) {
+  X <- as.matrix(X)
+  if (add_intercept) X <- cbind(1, X)
+  y <- as.numeric(y); n <- length(y); p <- ncol(X)
+  beta <- rep(0, p)
+  if (add_intercept) beta[1] <- log(max(mean(y), 1e-6))
+  D <- diag(p)
+  if (add_intercept) D[1, 1] <- 0
+  it <- 0L
+  for (i in seq_len(n_iter)) {
+    it <- i
+    eta <- as.numeric(X %*% beta)
+    mu <- exp(pmin(eta, 700))
+    w <- pmax(mu, 1e-9)
+    z <- eta + (y - mu) / w
+    A <- t(X) %*% (X * w) + lambda * D
+    new <- as.numeric(morie_mvsml_solve(A, t(X) %*% (w * z)))
+    if (penalty == "lasso") {
+      idx <- if (add_intercept) -1L else seq_along(new)
+      new[idx] <- sign(new[idx]) * pmax(abs(new[idx]) - lambda, 0)
+    }
+    gap <- max(abs(new - beta)); beta <- new
+    if (gap < tol) break
+  }
+  eta <- as.numeric(X %*% beta)
+  mu <- exp(pmin(eta, 700))
+  ll <- sum(y * eta - mu - lgamma(y + 1))
+  pen <- lambda * sum((beta^2)[diag(D) == 1]) / 2
+  list(beta = beta, fitted = mu, loglik = ll,
+       penalized_loglik = ll - pen, iterations = it)
+}
