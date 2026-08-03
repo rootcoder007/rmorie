@@ -465,3 +465,60 @@ morie_mvsml_extended_predictor <- function(n, X_E = NULL, X = NULL,
   }
   list(design = design, widths = widths, n_columns = ncol(design))
 }
+
+# ---- chapter 6b: multi-trait Bayesian / BMTME (pp.190-196) ----
+
+#' @noRd
+morie_mvsml_inv_wishart <- function(nu, S) {
+  S <- as.matrix(S); p <- nrow(S)
+  L <- t(chol(morie_mvsml_pinv(S)))
+  A <- matrix(0, p, p)
+  for (i in seq_len(p)) {
+    A[i, i] <- sqrt(rchisq(1, nu - i + 1))
+    if (i > 1) A[i, seq_len(i - 1)] <- rnorm(i - 1)
+  }
+  LA <- L %*% A
+  morie_mvsml_pinv(LA %*% t(LA))
+}
+
+#' @noRd
+morie_mvsml_multitrait_ridge <- function(Z1, G) {
+  L <- morie_mvsml_chol_lower(G)
+  list(X1 = as.matrix(Z1) %*% L, L_G = L)
+}
+
+#' @noRd
+morie_mvsml_bmtme_conditionals <- function(Y, Z1, Z2, G, Sigma_T,
+                                           Sigma_E, R, b1 = NULL,
+                                           b2 = NULL, nu_T = NULL,
+                                           S_T = NULL, nu_E = NULL,
+                                           S_E = NULL) {
+  Y <- as.matrix(Y); nT <- ncol(Y)
+  G <- as.matrix(G); J <- nrow(G)
+  Ginv <- morie_mvsml_pinv(G)
+  q2 <- ncol(as.matrix(Z2))
+  if (is.null(b1)) b1 <- matrix(0, J, nT)
+  if (is.null(b2)) b2 <- matrix(0, q2, nT)
+  b1 <- as.matrix(b1); b2 <- as.matrix(b2)
+  SEinv <- morie_mvsml_pinv(Sigma_E); I <- nrow(SEinv)
+  STinv <- morie_mvsml_pinv(Sigma_T)
+  if (is.null(nu_T)) nu_T <- nT + 2
+  if (is.null(nu_E)) nu_E <- I + 2
+  if (is.null(S_T)) S_T <- diag(nT)
+  if (is.null(S_E)) S_E <- diag(I)
+  term1 <- t(b1) %*% Ginv %*% b1
+  term2 <- t(b2) %*% morie_mvsml_kron(SEinv, Ginv) %*% b2
+  scale_T <- term1 + term2 + S_T
+  b2s <- matrix(0, I, J * nT)
+  for (e in seq_len(I)) {
+    idx <- 0L
+    for (t in seq_len(nT)) for (a in seq_len(J)) {
+      idx <- idx + 1L
+      row <- (e - 1L) * J + a
+      b2s[e, idx] <- if (row <= nrow(b2)) b2[row, t] else 0
+    }
+  }
+  inner <- b2s %*% morie_mvsml_kron(Ginv, STinv) %*% t(b2s)
+  list(nu_T_post = nu_T + J + nrow(b2), scale_T = scale_T,
+       nu_E_post = nu_E + J * I, scale_E = inner + S_E)
+}
