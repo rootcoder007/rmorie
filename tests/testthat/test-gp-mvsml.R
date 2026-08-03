@@ -28,7 +28,7 @@ YHAT_BIN <- c(1, 1, 1, 1, 0, 0, 1, 0, 0, 1)
 PI_BIN <- c(0.6, 0.55, 0.8, 0.78, 0.3, 0.42, 0.9, 0.45, 0.3, 0.88)
 
 test_that("chapter-1 fits match the printed book values", {
-  s <- morie_mvsml_one_way(TAB11)
+  s <- morie:::morie_mvsml_one_way(TAB11)
   expect_equal(s$grand_mean, 6.4127, tolerance = 5e-5)       # p.15
   expect_equal(s$sd_single_mean, 0.7197, tolerance = 1e-4)   # p.15
   expect_equal(unname(s$group_means),
@@ -40,7 +40,7 @@ test_that("chapter-1 fits match the printed book values", {
 })
 
 test_that("GRM method 3 matches the book's printed matrix", {
-  G <- morie_mvsml_grm(TAB29_M)
+  G <- morie:::morie_mvsml_grm(TAB29_M)
   expect_equal(G[1, 1], 0.962, tolerance = 1e-3)             # p.52
   expect_equal(G[1, 2], -0.880, tolerance = 1e-3)
   expect_equal(G[5, 5], 1.181, tolerance = 1e-3)
@@ -49,16 +49,16 @@ test_that("GRM method 3 matches the book's printed matrix", {
 })
 
 test_that("GBLUP matches the Python anchors and SNP-BLUP", {
-  G <- morie_mvsml_grm(TAB29_M)
+  G <- morie:::morie_mvsml_grm(TAB29_M)
   Ms <- scale(TAB29_M)
-  gebv <- morie_mvsml_gblup(TAB29_X, TAB29_Y, G,
+  gebv <- morie:::morie_mvsml_gblup(TAB29_X, TAB29_Y, G,
                             sigma2_g = 7 * 0.05)
   expect_equal(gebv,
                c(0.01745411291, -0.06478160598, 0.1011869142,
                  0.02205643803, 0.2338923477, -0.1359354568,
                  -0.1102483217, -0.06362442836),
                tolerance = 1e-8)
-  s <- morie_mvsml_snp_blup(TAB29_X, TAB29_Y, Ms, sigma2_m = 0.05)
+  s <- morie:::morie_mvsml_snp_blup(TAB29_X, TAB29_Y, Ms, sigma2_m = 0.05)
   # book p.55: GBLUP and SNP-BLUP give the same breeding values
   expect_equal(s$gebv, gebv, tolerance = 1e-8)
   expect_equal(s$marker_effects,
@@ -72,14 +72,14 @@ test_that("MME and the V-based solution agree (eq 2.1 vs 2.2)", {
   X <- matrix(1, nrow = 4, ncol = 1)
   Z <- matrix(c(1,0, 1,0, 0,1, 0,1), nrow = 4, byrow = TRUE)
   y <- c(5.0, 5.4, 6.2, 6.6)
-  a <- morie_mvsml_blue_blup_v(X, Z, y, diag(0.5, 2))
-  b <- morie_mvsml_mme(X, Z, y, diag(2, 2))
+  a <- morie:::morie_mvsml_blue_blup_v(X, Z, y, diag(0.5, 2))
+  b <- morie:::morie_mvsml_mme(X, Z, y, diag(2, 2))
   expect_equal(a$blue, b$blue, tolerance = 1e-9)
   expect_equal(a$blup, b$blup, tolerance = 1e-9)
 })
 
 test_that("PCA reproduces the book standard deviations", {
-  r <- morie_mvsml_pca(TAB213)
+  r <- morie:::morie_mvsml_pca(TAB213)
   expect_equal(r$sd_pc,
                c(2.0090648, 0.6469991, 0.4964878, 0.4356803,
                  0.3297472), tolerance = 1e-6)               # p.65
@@ -89,23 +89,23 @@ test_that("PCA reproduces the book standard deviations", {
 test_that("OLS, ridge and EPE match the Python anchors", {
   X <- matrix(c(1,2, 2,1, 3,4, 4,3, 5,6), nrow = 5, byrow = TRUE)
   y <- 1 + 2 * X[, 1] + 3 * X[, 2]
-  o <- morie_mvsml_ols(X, y)
+  o <- morie:::morie_mvsml_ols(X, y)
   expect_equal(o$beta, c(1, 2, 3), tolerance = 1e-8)
-  r <- morie_mvsml_ridge(X, y, 1)
+  r <- morie:::morie_mvsml_ridge(X, y, 1)
   expect_equal(r$beta,
                c(1.628726287, 1.978319783, 2.823848238),
                tolerance = 1e-8)
   expect_equal(r$prss, 12.42818428, tolerance = 1e-7)
   # lambda = 0 recovers OLS; the intercept is never penalized
-  expect_equal(morie_mvsml_ridge(X, y, 0)$beta, c(1, 2, 3),
+  expect_equal(morie:::morie_mvsml_ridge(X, y, 0)$beta, c(1, 2, 3),
                tolerance = 1e-6)
-  expect_equal(morie_mvsml_epe(1, c(1, 1), c(4, 4)), 1.5,
+  expect_equal(morie:::morie_mvsml_epe(1, c(1, 1), c(4, 4)), 1.5,
                tolerance = 1e-12)
-  expect_gt(morie_mvsml_epe(1, c(1, 1), c(4, 0.001)), 1000)
+  expect_gt(morie:::morie_mvsml_epe(1, c(1, 1), c(4, 0.001)), 1000)
 })
 
 test_that("binary metrics match the caret output on p.135", {
-  m <- morie_mvsml_binary_metrics(Y_BIN, YHAT_BIN, positive = 0)
+  m <- morie:::morie_mvsml_binary_metrics(Y_BIN, YHAT_BIN, positive = 0)
   expect_equal(m$pccc, 0.8, tolerance = 1e-12)
   expect_equal(m$kappa, 0.5833, tolerance = 1e-4)
   expect_equal(m$sensitivity, 0.75, tolerance = 1e-12)
@@ -115,14 +115,14 @@ test_that("binary metrics match the caret output on p.135", {
   expect_equal(m$detection_rate, 0.3, tolerance = 1e-12)
   expect_equal(m$balanced_accuracy, 0.7917, tolerance = 1e-4)
   # eq (4.13): tp=5 tn=3 fp=1 fn=1 -> 14/24
-  expect_equal(morie_mvsml_mcc(Y_BIN, YHAT_BIN), 14 / 24,
+  expect_equal(morie:::morie_mvsml_mcc(Y_BIN, YHAT_BIN), 14 / 24,
                tolerance = 1e-12)
 })
 
 test_that("one-versus-all metrics follow eq (4.9)-(4.12)", {
   conf <- table(factor(Y_BIN, levels = 0:1),
                 factor(YHAT_BIN, levels = 0:1))
-  m <- morie_mvsml_class_metrics(as.matrix(conf), 1)
+  m <- morie:::morie_mvsml_class_metrics(as.matrix(conf), 1)
   expect_equal(m$TTP_all, 8)
   expect_equal(m$TFP, 1)
   expect_equal(m$TFN, 1)
@@ -134,9 +134,9 @@ test_that("one-versus-all metrics follow eq (4.9)-(4.12)", {
 test_that("Brier score and MLL follow eq (4.14) and p.136", {
   P <- cbind(1 - PI_BIN, PI_BIN)
   hand <- mean((PI_BIN - Y_BIN)^2 + ((1 - PI_BIN) - (1 - Y_BIN))^2)
-  expect_equal(morie_mvsml_brier(P, Y_BIN), hand, tolerance = 1e-12)
-  expect_equal(morie_mvsml_brier(P, Y_BIN, halved = TRUE), hand / 2,
+  expect_equal(morie:::morie_mvsml_brier(P, Y_BIN), hand, tolerance = 1e-12)
+  expect_equal(morie:::morie_mvsml_brier(P, Y_BIN, halved = TRUE), hand / 2,
                tolerance = 1e-12)
   mll <- -mean(log(ifelse(Y_BIN == 1, PI_BIN, 1 - PI_BIN)))
-  expect_equal(morie_mvsml_mll(P, Y_BIN), mll, tolerance = 1e-12)
+  expect_equal(morie:::morie_mvsml_mll(P, Y_BIN), mll, tolerance = 1e-12)
 })
