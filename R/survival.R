@@ -1,739 +1,213 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# Survival analysis: Kaplan-Meier, Nelson-Aalen, log-rank and Cox.
 #
-# morie survival -- time-to-event analysis: KM, Nelson-Aalen, Cox, residuals,
-# parametric / AFT models, competing risks, RMST, concordance.
+# R mirror of morie/src/morie/fn/_survival_core.py.  Both arms are
+# verified against the `survival` package, which is the reference
+# implementation for this material, so morie provides these natively.
 #
-# R port of src/morie/survival.py. Wraps the recommended `survival` package
-# and the optional `cmprsk` package. Hand-rolls a Greenwood-CI KM that
-# matches the Python output exactly (so downstream tests cross-check).
-#
-# References:
-#   Therneau (2023). survival: A Package for Survival Analysis in R.
-#   Fine & Gray (1999). JASA, 94(446), 496-509.
-#   Kalbfleisch & Prentice (2002). The Statistical Analysis of Failure Time Data.
+# Censoring is the whole difficulty: a subject still alive at the end of
+# follow-up carries the information that it survived that long, and
+# either discarding it or counting it as an event biases every estimate.
 
-#' Shared parameters for morie_survival_* estimators
+#' Kaplan-Meier product-limit estimator
 #'
-#' Roxygen-only stub holding the @param entries shared across the
-#' survival family (KM, Nelson-Aalen, Cox, RMST, AFT, parametric,
-#' Fine-Gray competing risks, Turnbull, landmark, concordance).
-#' Functions reference these via `@inheritParams morie_survival_params`.
-#'
-#' @param time Numeric vector of event/censoring times.
-#' @param event Integer/logical vector; 1 = event, 0 = censored.
-#' @param group Factor/character grouping variable for HR / log-rank
-#'   stratified comparisons.
-#' @param confidence Confidence level for interval estimates (default
-#'   `0.95`).
-#' @param tau RMST truncation horizon (`morie_survival_rmst`/`rmst_diff`).
-#' @param dist Distribution name for parametric/AFT fits (e.g.
-#'   `"weibull"`, `"lognormal"`, `"loglogistic"`).
-#' @param risk_score Numeric vector of predicted risk scores aligned
-#'   with `time` for concordance / discrimination metrics.
-#' @param cox_result A `coxph`-style fit (as returned by
-#'   `morie_survival_cox`); used by residual diagnostics
-#'   (`coxsnell`, `martingale`, `deviance`).
-#' @param data A `data.frame` whose columns supply `duration_col`,
-#'   `event_col`, `covariate_cols`, etc.
-#' @param duration_col Character; column name of the event/censoring
-#'   time in `data`.
-#' @param event_col Character; column name of the event-indicator
-#'   variable in `data`.
-#' @param covariate_cols Character vector of covariate column names.
-#' @param landmark_time Numeric landmark time at which to subset
-#'   the cohort before fitting (lead-time bias correction).
-#' @param event_of_interest Integer event-type code for competing-
-#'   risks analyses (Fine-Gray, CIF).
-#' @param time1 Time vector for group 1 (`rmst_diff`).
-#' @param event1 Event vector for group 1 (`rmst_diff`).
-#' @param time2 Time vector for group 2 (`rmst_diff`).
-#' @param event2 Event vector for group 2 (`rmst_diff`).
-#' @param entry_time Left-truncation entry times.
-#' @param exit_time Exit (event/censoring) times for the
-#'   left-truncated KM estimator.
-#' @param left Left-bracket times for interval-censored data
-#'   (`morie_survival_turnbull`).
-#' @param right Right-bracket times for interval-censored data.
-#' @param max_iter Iteration cap for the Turnbull NPMLE EM loop.
-#' @param tol Convergence tolerance for the Turnbull EM.
-#' @keywords internal
-#' @name morie_survival_params
-NULL
-
-
-#' Internal helper: Req Survival
-#' @noRd
-.req_survival <- function() {
-  morie_ensure_extras("survival")
-}
-
-#' Internal helper: Req Cmprsk
-#' @noRd
-.req_cmprsk <- function() {
-  morie_ensure_extras("cmprsk")
-}
-
-#' Internal helper: Validate Te
-#' @noRd
-.validate_te <- function(time, event) {
-  t <- as.numeric(time)
-  e <- as.numeric(event)
-  if (length(t) != length(e))
-    stop("time and event must have equal length.", call. = FALSE)
-  ok <- is.finite(t) & is.finite(e) & t >= 0
-  list(time = t[ok], event = as.integer(e[ok]), ok = ok)
-}
-
-#' Kaplan-Meier product-limit survival estimator.
-#'
-#' Thin wrapper around `survival::survfit()` returning a tidy list with
-#' Greenwood or complementary-log-log confidence bands.
-#'
-#' @param time Numeric vector of observation times.
-#' @param event 0/1 event indicator (1 = event observed).
-#' @param confidence Confidence level (default 0.95).
-#' @param ci_method "greenwood" (plain) or "log-log".
-#' @return list with `times`, `survival`, `ci_lower`, `ci_upper`,
-#'   `at_risk`, `events`, `censored`, `median_survival`, `method`.
-#' @examples
-#' set.seed(1)
-#' time <- rexp(60); event <- rbinom(60, 1, 0.7)
-#' str(morie_survival_km(time, event), max.level = 1)
+#' `S(t) = prod (1 - d_i/n_i)` with Greenwood's variance and a log-log
+#' confidence interval, which cannot leave `[0, 1]` the way a symmetric
+#' one can.  Note `survival::survfit`'s `std.err` is the error of the
+#' CUMULATIVE HAZARD; `se` here is the error of `S(t)` and `se_cumhaz`
+#' is survfit's, the two differing by a factor of `S`.
+#' @param time follow-up times
+#' @param event 1 for an event, 0 for censored
+#' @param alpha significance level for the interval
+#' @return list with `time`, `surv`, `se`, `se_cumhaz`, `lower`,
+#'   `upper`, `n_risk`, `n_event`
 #' @export
-morie_survival_km <- function(time, event, confidence = 0.95,
-                              ci_method = c("greenwood", "log-log")) {
-  ci_method <- match.arg(ci_method)
-  .req_survival()
-  v <- .validate_te(time, event)
-  fit <- survival::survfit(
-    survival::Surv(v$time, v$event) ~ 1,
-    conf.int = confidence,
-    conf.type = if (ci_method == "log-log") "log-log" else "plain",
-    error = "greenwood"
-  )
-  ev_mask <- fit$n.event > 0
-  list(
-    times = fit$time[ev_mask],
-    survival = fit$surv[ev_mask],
-    ci_lower = fit$lower[ev_mask],
-    ci_upper = fit$upper[ev_mask],
-    at_risk = fit$n.risk[ev_mask],
-    events = fit$n.event[ev_mask],
-    censored = fit$n.censor[ev_mask],
-    median_survival = unname(summary(fit)$table["median"]),
-    method = sprintf("Kaplan-Meier (%s CI)", ci_method)
-  )
-}
-
-#' Nelson-Aalen cumulative-hazard estimator.
-#'
-#' @inheritParams morie_survival_km
-#' @return list with `times`, `cumhaz`, `ci_lower`, `ci_upper`,
-#'   `at_risk`, `events`, `censored`.
-#' @examples
-#' set.seed(1)
-#' time <- rexp(60); event <- rbinom(60, 1, 0.7)
-#' str(morie_survival_nelsonaalen(time, event), max.level = 1)
-#' @export
-morie_survival_nelsonaalen <- function(time, event, confidence = 0.95) {
-  .req_survival()
-  v <- .validate_te(time, event)
-  fit <- survival::survfit(survival::Surv(v$time, v$event) ~ 1,
-                           conf.int = confidence, type = "fh")
-  ev <- fit$n.event > 0
-  ch <- -log(fit$surv[ev])
-  se <- sqrt(cumsum(fit$n.event[ev] / fit$n.risk[ev]^2))
-  z <- qnorm((1 + confidence) / 2)
-  list(
-    times = fit$time[ev],
-    cumhaz = ch,
-    ci_lower = pmax(ch - z * se, 0),
-    ci_upper = ch + z * se,
-    at_risk = fit$n.risk[ev],
-    events = fit$n.event[ev],
-    censored = fit$n.censor[ev],
-    method = "Nelson-Aalen"
-  )
-}
-
-#' Log-rank family tests (logrank / Peto-Peto / Gehan / Tarone-Ware).
-#'
-#' Delegates to `survival::survdiff()` for the standard log-rank weight (rho=0)
-#' and Peto-Peto (rho=1). Gehan/Tarone-Ware are not supported by `survdiff`
-#' directly and currently fall back to rho=1 (Peto) as the closest analogue;
-#' use `survival::survdiff(..., rho=1)` plus FH weights for exact equivalents.
-#'
-#' @param time,event,group Vectors.
-#' @param weight One of "logrank", "peto", "gehan", "tarone".
-#' @return A named list with elements \code{method}, \code{test_statistic}, \code{p_value}, \code{df}, \code{n_groups}, \code{n_total}.
-#' @examples
-#' set.seed(1)
-#' time <- rexp(60); event <- rbinom(60, 1, 0.7)
-#' group <- rep(c(0, 1), 30)
-#' str(morie_survival_logrank(time, event, group), max.level = 1)
-#' @export
-morie_survival_logrank <- function(time, event, group,
-                                   weight = c("logrank", "peto", "gehan", "tarone")) {
-  .req_survival()
-  weight <- match.arg(weight)
-  v <- .validate_te(time, event)
-  # Align group with the SAME rows that v kept; previously this
-  # took the first length(v$time) entries of group, which desyncs
-  # whenever any row was filtered.
-  g <- group[v$ok]
-  rho <- switch(weight, logrank = 0, peto = 1, gehan = 1, tarone = 1)
-  sd <- survival::survdiff(survival::Surv(v$time, v$event) ~ g, rho = rho)
-  df <- length(sd$n) - 1
-  list(
-    method = switch(weight, logrank = "Log-rank test",
-                    peto = "Peto-Peto test",
-                    gehan = "Gehan-Wilcoxon test (rho=1 approx)",
-                    tarone = "Tarone-Ware test (rho=1 approx)"),
-    test_statistic = as.numeric(sd$chisq),
-    p_value = pchisq(as.numeric(sd$chisq), df, lower.tail = FALSE),
-    df = df,
-    n_groups = length(sd$n),
-    n_total = sum(sd$n)
-  )
-}
-
-#' Cox proportional hazards model.
-#'
-#' Wraps `survival::coxph()` with Efron (default) or Breslow tie handling
-#' and returns a tidy list including hazard ratios, CIs, p-values, and the
-#' Breslow baseline cumulative hazard.
-#'
-#' @param data data.frame.
-#' @param duration_col Name of the time column.
-#' @param event_col Name of the 0/1 event column.
-#' @param covariate_cols Character vector of covariate column names.
-#' @param ties "efron" (default) or "breslow".
-#' @param confidence Confidence level (default 0.95).
-#' @param penalizer L2 penalty (passed via `ridge()` term in the formula).
-#' @return A named list with elements \code{coefficients},
-#'   \code{standard_errors}, \code{hazard_ratios}, \code{z_scores},
-#'   \code{p_values}, \code{ci_lower}, \code{ci_upper},
-#'   \code{covariate_names}, \code{concordance}, \code{log_likelihood},
-#'   \code{n_events}, \code{n_observations}, \code{method},
-#'   \code{baseline_hazard}, \code{.coxph}.
-#' @examples
-#' set.seed(1)
-#' df <- data.frame(t = rexp(60), e = rbinom(60, 1, 0.7),
-#'                  x1 = rnorm(60), x2 = rnorm(60))
-#' fit <- morie_survival_cox(df, "t", "e", c("x1", "x2"))
-#' fit$hazard_ratios
-#' @export
-morie_survival_cox <- function(data, duration_col, event_col, covariate_cols,
-                               ties = c("efron", "breslow"),
-                               confidence = 0.95, penalizer = 0) {
-  .req_survival()
-  ties <- match.arg(ties)
-  needed <- c(duration_col, event_col, covariate_cols)
-  df <- data[stats::complete.cases(data[, needed]), needed, drop = FALSE]
-  cov_expr <- paste(covariate_cols, collapse = " + ")
-  if (penalizer > 0) {
-    cov_expr <- sprintf("ridge(%s, theta=%g)",
-                        paste(covariate_cols, collapse = ", "), penalizer)
+morie_kaplan_meier <- function(time, event, alpha = 0.05) {
+  if (length(time) != length(event))
+    stop("time and event must have the same length")
+  if (!all(event %in% c(0, 1))) stop("event must be 0 or 1")
+  ut <- sort(unique(time[event == 1]))
+  z <- stats::qnorm(1 - alpha / 2)
+  surv <- 1; vs <- 0
+  S <- se <- sec <- lo <- hi <- nr <- ne <- numeric(length(ut))
+  for (i in seq_along(ut)) {
+    u <- ut[i]
+    n_i <- sum(time >= u)
+    d_i <- sum(time == u & event == 1)
+    surv <- surv * (1 - d_i / n_i)
+    if (n_i > d_i) vs <- vs + d_i / (n_i * (n_i - d_i))
+    S[i] <- surv; se[i] <- surv * sqrt(vs); sec[i] <- sqrt(vs)
+    nr[i] <- n_i; ne[i] <- d_i
+    if (surv > 0 && surv < 1) {
+      ll <- log(-log(surv)); sd <- sqrt(vs) / abs(log(surv))
+      lo[i] <- exp(-exp(ll + z * sd)); hi[i] <- exp(-exp(ll - z * sd))
+    } else { lo[i] <- surv; hi[i] <- surv }
   }
-  fml <- stats::as.formula(sprintf("survival::Surv(%s, %s) ~ %s",
-                                   duration_col, event_col, cov_expr))
-  fit <- survival::coxph(fml, data = df, ties = ties)
-  s <- summary(fit, conf.int = confidence)
-  bh <- survival::basehaz(fit, centered = FALSE)
-  list(
-    coefficients = stats::coef(fit),
-    standard_errors = sqrt(diag(stats::vcov(fit))),
-    hazard_ratios = exp(stats::coef(fit)),
-    z_scores = s$coefficients[, "z"],
-    p_values = s$coefficients[, "Pr(>|z|)"],
-    ci_lower = s$conf.int[, 3],
-    ci_upper = s$conf.int[, 4],
-    covariate_names = covariate_cols,
-    concordance = unname(s$concordance[1]),
-    log_likelihood = stats::logLik(fit)[[1]],
-    n_events = fit$nevent,
-    n_observations = fit$n,
-    method = sprintf("Cox PH (%s ties)", ties),
-    baseline_hazard = data.frame(time = bh$time, cumulative_hazard = bh$hazard),
-    .coxph = fit
-  )
+  list(time = ut, surv = S, se = se, se_cumhaz = sec, lower = lo,
+       upper = hi, n_risk = nr, n_event = ne, n = length(time),
+       n_events = sum(event))
 }
 
-#' Schoenfeld residuals + PH-assumption test.
+#' Nelson-Aalen cumulative hazard
 #'
-#' Wraps `survival::cox.zph()` (scaled Schoenfeld residuals).
-#' @param cox_result Object returned by `morie_survival_cox()`.
-#' @return A named list with elements \code{residuals}, \code{scaled}, \code{zph_table}.
-#' @examples
-#' set.seed(1)
-#' df <- data.frame(t = rexp(60), e = rbinom(60, 1, 0.7),
-#'                  x1 = rnorm(60), x2 = rnorm(60))
-#' fit <- morie_survival_cox(df, "t", "e", c("x1", "x2"))
-#' str(morie_survival_schoenfeld(fit), max.level = 1)
+#' `H(t) = sum d_i/n_i`.  Better behaved than `-log(KM)` in small
+#' samples, and the natural scale on which to judge proportional
+#' hazards.
+#' @inheritParams morie_kaplan_meier
+#' @return list with `time`, `cumhaz`, `se` and `surv = exp(-H)`
 #' @export
-morie_survival_schoenfeld <- function(cox_result) {
-  .req_survival()
-  if (is.null(cox_result$.coxph))
-    stop("cox_result must come from morie_survival_cox().", call. = FALSE)
-  zph <- survival::cox.zph(cox_result$.coxph)
-  list(
-    residuals = stats::residuals(cox_result$.coxph, type = "schoenfeld"),
-    scaled = stats::residuals(cox_result$.coxph, type = "scaledsch"),
-    zph_table = as.data.frame(zph$table)
-  )
-}
-
-#' Cox-Snell residuals from a fitted morie Cox model.
-#' @inheritParams morie_survival_params
-#' @return A numeric value (scalar).
-#' @examples
-#' set.seed(1)
-#' df <- data.frame(t = rexp(60), e = rbinom(60, 1, 0.7),
-#'                  x1 = rnorm(60), x2 = rnorm(60))
-#' fit <- morie_survival_cox(df, "t", "e", c("x1", "x2"))
-#' str(morie_survival_coxsnell(fit), max.level = 1)
-#' @export
-morie_survival_coxsnell <- function(cox_result) {
-  .req_survival()
-  if (is.null(cox_result$.coxph))
-    stop("cox_result must come from morie_survival_cox().", call. = FALSE)
-  # CS residual = delta_i - M_i (per-row event indicator minus martingale)
-  status <- cox_result$.coxph$y[, "status"]
-  as.numeric(status - stats::residuals(cox_result$.coxph,
-                                       type = "martingale"))
-}
-
-#' Martingale residuals.
-#' @inheritParams morie_survival_params
-#' @return A numeric vector of martingale residuals.
-#' @examples
-#' set.seed(1)
-#' df <- data.frame(t = rexp(60), e = rbinom(60, 1, 0.7),
-#'                  x1 = rnorm(60), x2 = rnorm(60))
-#' fit <- morie_survival_cox(df, "t", "e", c("x1", "x2"))
-#' str(morie_survival_martingale(fit), max.level = 1)
-#' @export
-morie_survival_martingale <- function(cox_result) {
-  .req_survival()
-  if (is.null(cox_result$.coxph))
-    stop("cox_result must come from morie_survival_cox().", call. = FALSE)
-  stats::residuals(cox_result$.coxph, type = "martingale")
-}
-
-#' Deviance residuals.
-#' @inheritParams morie_survival_params
-#' @return A numeric vector of deviance residuals.
-#' @examples
-#' set.seed(1)
-#' df <- data.frame(t = rexp(60), e = rbinom(60, 1, 0.7),
-#'                  x1 = rnorm(60), x2 = rnorm(60))
-#' fit <- morie_survival_cox(df, "t", "e", c("x1", "x2"))
-#' str(morie_survival_deviance(fit), max.level = 1)
-#' @export
-morie_survival_deviance <- function(cox_result) {
-  .req_survival()
-  if (is.null(cox_result$.coxph))
-    stop("cox_result must come from morie_survival_cox().", call. = FALSE)
-  stats::residuals(cox_result$.coxph, type = "deviance")
-}
-
-#' Accelerated failure time model (parametric).
-#'
-#' Wraps `survival::survreg()`. Supported `dist`: "weibull", "lognormal",
-#' "loglogistic", "exponential", "gaussian".
-#' @inheritParams morie_survival_params
-#' @return A named list with elements \code{distribution}, \code{coefficients}, \code{scale}, \code{log_likelihood}, \code{aic}, \code{bic}, \code{n_observations}, \code{n_events}, \code{.survreg}.
-#' @examples
-#' set.seed(1)
-#' df <- data.frame(t = rexp(60), e = rbinom(60, 1, 0.7),
-#'                  x1 = rnorm(60), x2 = rnorm(60))
-#' str(morie_survival_aft(df, "t", "e", c("x1", "x2")), max.level = 1)
-#' @export
-morie_survival_aft <- function(data, duration_col, event_col, covariate_cols,
-                               dist = c("weibull", "lognormal", "loglogistic",
-                                        "exponential", "gaussian")) {
-  .req_survival()
-  dist <- match.arg(dist)
-  needed <- c(duration_col, event_col, covariate_cols)
-  df <- data[stats::complete.cases(data[, needed]), needed, drop = FALSE]
-  fml <- stats::as.formula(sprintf("survival::Surv(%s, %s) ~ %s",
-                                   duration_col, event_col,
-                                   paste(covariate_cols, collapse = " + ")))
-  fit <- survival::survreg(fml, data = df, dist = dist)
-  s <- summary(fit)
-  list(
-    distribution = paste0("AFT-", dist),
-    coefficients = stats::coef(fit),
-    scale = fit$scale,
-    log_likelihood = fit$loglik[2],
-    aic = stats::AIC(fit),
-    bic = stats::BIC(fit),
-    n_observations = nrow(df),
-    n_events = sum(df[[event_col]] == 1),
-    .survreg = fit
-  )
-}
-
-#' Simple parametric survival models (intercept-only).
-#'
-#' For "exponential", "weibull", "lognormal", "loglogistic", "gaussian".
-#' Use `morie_survival_aft()` for covariate-adjusted parametric models.
-#' @inheritParams morie_survival_params
-#' @return A named list with elements \code{distribution}, \code{coefficients}, \code{scale}, \code{log_likelihood}, \code{aic}, \code{bic}, \code{n_observations}, \code{n_events}.
-#' @examples
-#' set.seed(1)
-#' time <- rexp(60); event <- rbinom(60, 1, 0.7)
-#' str(morie_survival_parametric(time, event), max.level = 1)
-#' @export
-morie_survival_parametric <- function(time, event,
-                                       dist = c("weibull", "exponential",
-                                                "lognormal", "loglogistic",
-                                                "gaussian")) {
-  .req_survival()
-  dist <- match.arg(dist)
-  v <- .validate_te(time, event)
-  fit <- survival::survreg(survival::Surv(v$time, v$event) ~ 1, dist = dist)
-  list(
-    distribution = dist,
-    coefficients = stats::coef(fit),
-    scale = fit$scale,
-    log_likelihood = fit$loglik[2],
-    aic = stats::AIC(fit),
-    bic = stats::BIC(fit),
-    n_observations = length(v$time),
-    n_events = sum(v$event == 1)
-  )
-}
-
-#' Harrell's concordance index (C-statistic).
-#'
-#' Uses `survival::concordance()` (which handles ties + censoring correctly).
-#' @inheritParams morie_survival_params
-#' @return A numeric value (scalar).
-#' @examples
-#' set.seed(1)
-#' time <- rexp(60); event <- rbinom(60, 1, 0.7)
-#' risk <- rnorm(60)
-#' morie_survival_concordance(time, event, risk)
-#' @export
-morie_survival_concordance <- function(time, event, risk_score) {
-  .req_survival()
-  v <- .validate_te(time, event)
-  rs <- risk_score[v$ok]
-  c_obj <- survival::concordance(
-    survival::Surv(v$time, v$event) ~ rs, reverse = TRUE
-  )
-  as.numeric(c_obj$concordance)
-}
-
-#' Restricted Mean Survival Time (RMST).
-#'
-#' Integrates the Kaplan-Meier estimator from 0 to `tau` using trapezoidal
-#' integration on the step-function. SE follows the Klein-Moeschberger
-#' formula (approximation matches the Python module).
-#' @inheritParams morie_survival_params
-#' @return A named list with elements \code{rmst}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{tau}.
-#' @examples
-#' set.seed(1)
-#' time <- rexp(60); event <- rbinom(60, 1, 0.7)
-#' str(morie_survival_rmst(time, event, tau = 2), max.level = 1)
-#' @export
-morie_survival_rmst <- function(time, event, tau = NULL, confidence = 0.95) {
-  .req_survival()
-  v <- .validate_te(time, event)
-  fit <- survival::survfit(survival::Surv(v$time, v$event) ~ 1)
-  if (is.null(tau)) tau <- max(fit$time)
-  s <- summary(fit, rmean = tau)$table
-  rmst <- as.numeric(s["rmean"])
-  se <- as.numeric(s["se(rmean)"])
-  z <- qnorm((1 + confidence) / 2)
-  list(rmst = rmst, se = se,
-       ci_lower = rmst - z * se, ci_upper = rmst + z * se, tau = tau)
-}
-
-#' Difference in RMST between two groups.
-#' @inheritParams morie_survival_params
-#' @return A named list with elements \code{rmst_diff}, \code{se}, \code{z}, \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{rmst_group1}, \code{rmst_group2}, \code{tau}.
-#' @examples
-#' set.seed(1)
-#' t1 <- rexp(40); e1 <- rbinom(40, 1, 0.7)
-#' t2 <- rexp(40, rate = 1.5); e2 <- rbinom(40, 1, 0.7)
-#' str(morie_survival_rmst_diff(t1, e1, t2, e2, tau = 2), max.level = 1)
-#' @export
-morie_survival_rmst_diff <- function(time1, event1, time2, event2,
-                                     tau = NULL, confidence = 0.95) {
-  r1 <- morie_survival_rmst(time1, event1, tau = tau, confidence = confidence)
-  r2 <- morie_survival_rmst(time2, event2, tau = r1$tau, confidence = confidence)
-  diff <- r1$rmst - r2$rmst
-  se <- sqrt(r1$se^2 + r2$se^2)
-  z <- if (se > 0) diff / se else 0
-  p <- 2 * pnorm(abs(z), lower.tail = FALSE)
-  zc <- qnorm((1 + confidence) / 2)
-  list(rmst_diff = diff, se = se, z = z, p_value = p,
-       ci_lower = diff - zc * se, ci_upper = diff + zc * se,
-       rmst_group1 = r1$rmst, rmst_group2 = r2$rmst, tau = r1$tau)
-}
-
-#' Cumulative incidence function (Aalen-Johansen) for competing risks.
-#'
-#' Wraps `survival::survfit()` with multi-state `Surv()`.
-#' @param event Integer event code: 0 = censored, 1 = event of interest,
-#'   `>=2` = competing event.
-#' @inheritParams morie_survival_params
-#' @return A named list with elements \code{times}, \code{cif}, \code{ci_lower}, \code{ci_upper}, \code{event_of_interest}, \code{n_total}, \code{method}.
-#' @examples
-#' set.seed(1)
-#' time <- rexp(60); event <- sample(0:2, 60, replace = TRUE)
-#' str(morie_survival_cif(time, event, event_of_interest = 1L), max.level = 1)
-#' @export
-morie_survival_cif <- function(time, event, event_of_interest = 1L,
-                               confidence = 0.95) {
-  .req_survival()
-  t <- as.numeric(time)
-  e <- factor(event, levels = c(0, sort(unique(event[event != 0]))))
-  e[e == 0] <- NA
-  e <- droplevels(e)
-  status <- factor(ifelse(event == 0, "censor",
-                          ifelse(event == event_of_interest,
-                                 "event", "competing")),
-                   levels = c("censor", "event", "competing"))
-  # 3MMM.26 (2026-05-25): type='mstate' is deprecated in survival
-  # >=3.5. Modern API: pass status as a factor whose first level is
-  # the censoring code and survival auto-detects multi-state. We
-  # already build `status` as a factor with "censor" first (L344-347).
-  fit <- survival::survfit(survival::Surv(t, status) ~ 1,
-                           conf.int = confidence)
-  ev_idx <- which(colnames(fit$pstate) == "event")
-  list(times = fit$time,
-       cif = fit$pstate[, ev_idx],
-       ci_lower = fit$lower[, ev_idx],
-       ci_upper = fit$upper[, ev_idx],
-       event_of_interest = event_of_interest,
-       n_total = length(t),
-       method = "Aalen-Johansen")
-}
-
-#' Fine-Gray subdistribution hazard model (competing risks).
-#'
-#' Requires the `cmprsk` package.
-#' @inheritParams morie_survival_params
-#' @return A named list with elements \code{coefficients}, \code{standard_errors}, \code{hazard_ratios}, \code{p_values}, \code{ci_lower}, \code{ci_upper}, \code{covariate_names}, \code{n_events}, \code{n_observations}, \code{method}.
-#' @examples
-#' \donttest{
-#' if (requireNamespace("cmprsk", quietly = TRUE)) {
-#'   set.seed(1)
-#'   df <- data.frame(t = rexp(80), e = sample(0:2, 80, replace = TRUE),
-#'                    x1 = rnorm(80))
-#'   str(morie_survival_finegray(df, "t", "e", "x1"), max.level = 1)
-#' }
-#' }
-#' @export
-morie_survival_finegray <- function(data, duration_col, event_col,
-                                    covariate_cols, event_of_interest = 1L,
-                                    confidence = 0.95) {
-  .req_cmprsk()
-  needed <- c(duration_col, event_col, covariate_cols)
-  df <- data[stats::complete.cases(data[, needed]), needed, drop = FALSE]
-  fit <- cmprsk::crr(
-    ftime = df[[duration_col]],
-    fstatus = df[[event_col]],
-    cov1 = as.matrix(df[, covariate_cols, drop = FALSE]),
-    failcode = event_of_interest,
-    cencode = 0L
-  )
-  s <- summary(fit, conf.int = confidence)
-  # stats::coef(fit) goes through coef.crr (defined below) -> fit$coef.
-  list(
-    coefficients = stats::coef(fit),
-    standard_errors = sqrt(diag(fit$var)),
-    hazard_ratios = exp(stats::coef(fit)),
-    p_values = s$coef[, "p-value"],
-    ci_lower = s$conf.int[, 3],
-    ci_upper = s$conf.int[, 4],
-    covariate_names = covariate_cols,
-    n_events = sum(df[[event_col]] == event_of_interest),
-    n_observations = nrow(df),
-    method = "Fine-Gray subdistribution hazard"
-  )
-}
-
-#' S3 coef method for cmprsk::crr objects.
-#'
-#' cmprsk::crr does not ship a `coef.crr` method, so a bare
-#' `stats::coef()` on a `crr` fit falls through to `coef.default()`
-#' and returns `NULL`. morie registers this method (via S3method
-#' in NAMESPACE, generated by roxygen `@exportS3Method`) so the
-#' standard accessor returns the fitted coefficient vector for any
-#' caller -- not just `morie_survival_finegray`.
-#'
-#' @param object A `cmprsk::crr` fit.
-#' @param ... Ignored.
-#' @return Named numeric vector of regression coefficients.
-#' @examples
-#' \donttest{
-#' if (requireNamespace("cmprsk", quietly = TRUE)) {
-#'   set.seed(1)
-#'   fit <- cmprsk::crr(rexp(80), sample(0:2, 80, replace = TRUE),
-#'                      matrix(rnorm(80), ncol = 1))
-#'   coef(fit)
-#' }
-#' }
-#' @exportS3Method stats::coef crr
-coef.crr <- function(object, ...) {
-  object$coef
-}
-
-#' Hazard ratio between two groups via a simple Cox model.
-#' @inheritParams morie_survival_params
-#' @return A named list with elements \code{hr}, \code{ci_lower}, \code{ci_upper}, \code{p_value}, \code{log_hr}, \code{se}.
-#' @examples
-#' set.seed(1)
-#' time <- rexp(60); event <- rbinom(60, 1, 0.7)
-#' group <- rep(c(0, 1), 30)
-#' str(morie_survival_hr(time, event, group), max.level = 1)
-#' @export
-morie_survival_hr <- function(time, event, group, confidence = 0.95) {
-  .req_survival()
-  v <- .validate_te(time, event)
-  g <- group[v$ok]
-  if (length(unique(g)) != 2)
-    stop("hazard_ratio requires exactly 2 groups.", call. = FALSE)
-  x <- as.integer(g == sort(unique(g))[2])
-  d <- data.frame(time = v$time, event = v$event, grp = x)
-  res <- morie_survival_cox(d, "time", "event", "grp",
-                            confidence = confidence)
-  list(hr = res$hazard_ratios[[1]],
-       ci_lower = res$ci_lower[[1]],
-       ci_upper = res$ci_upper[[1]],
-       p_value = res$p_values[[1]],
-       log_hr = res$coefficients[[1]],
-       se = res$standard_errors[[1]])
-}
-
-#' Landmark dataset constructor.
-#' @inheritParams morie_survival_params
-#' @return A \code{data.frame} of landmark survival estimates.
-#' @examples
-#' set.seed(1)
-#' df <- data.frame(t = rexp(60), e = rbinom(60, 1, 0.7),
-#'                  x1 = rnorm(60), x2 = rnorm(60))
-#' str(morie_survival_landmark(df, "t", "e", landmark_time = 0.5), max.level = 1)
-#' @export
-morie_survival_landmark <- function(data, duration_col, event_col, landmark_time) {
-  df <- data[data[[duration_col]] >= landmark_time, , drop = FALSE]
-  df[[duration_col]] <- df[[duration_col]] - landmark_time
-  df
-}
-
-#' Left-truncated Kaplan-Meier with delayed entry.
-#' @inheritParams morie_survival_params
-#' @return A named list with elements \code{times}, \code{survival}, \code{ci_lower}, \code{ci_upper}, \code{at_risk}, \code{events}, \code{censored}, \code{method}.
-#' @examples
-#' set.seed(1)
-#' entry <- runif(60, 0, 0.3); exit <- entry + rexp(60)
-#' event <- rbinom(60, 1, 0.7)
-#' str(morie_survival_left_truncated_km(entry, exit, event), max.level = 1)
-#' @export
-morie_survival_left_truncated_km <- function(entry_time, exit_time, event,
-                                             confidence = 0.95) {
-  .req_survival()
-  fit <- survival::survfit(
-    survival::Surv(entry_time, exit_time, event) ~ 1,
-    conf.int = confidence
-  )
-  ev <- fit$n.event > 0
-  list(times = fit$time[ev], survival = fit$surv[ev],
-       ci_lower = fit$lower[ev], ci_upper = fit$upper[ev],
-       at_risk = fit$n.risk[ev], events = fit$n.event[ev],
-       censored = fit$n.censor[ev],
-       method = "Left-truncated Kaplan-Meier")
-}
-
-#' Compare parametric survival models by AIC/BIC.
-#' @inheritParams morie_survival_params
-#' @return A logical scalar.
-#' @examples
-#' set.seed(1)
-#' time <- rexp(60); event <- rbinom(60, 1, 0.7)
-#' str(morie_survival_compare_parametric(time, event), max.level = 1)
-#' @export
-morie_survival_compare_parametric <- function(time, event) {
-  dists <- c("exponential", "weibull", "lognormal", "loglogistic", "gaussian")
-  out <- lapply(dists, function(d) {
-    res <- tryCatch(
-      morie_survival_parametric(time, event, dist = d),
-      error = function(e) NULL
-    )
-    if (is.null(res)) return(NULL)
-    data.frame(distribution = d,
-               log_likelihood = res$log_likelihood,
-               aic = res$aic, bic = res$bic,
-               n_events = res$n_events,
-               stringsAsFactors = FALSE)
-  })
-  out <- do.call(rbind, out)
-  out[order(out$aic), , drop = FALSE]
-}
-
-#' Turnbull NPMLE for interval-censored data.
-#'
-#' Delegates to `survival::survfit()` with `Surv(left, right, type = "interval2")`.
-#' Hand-rolled EM is left as a stub for environments without `survival`.
-#' @inheritParams morie_survival_params
-#' @return A named list with the NPMLE \code{times}, the \code{survival}
-#'   function estimates, and \code{method = "Turnbull NPMLE"}.
-#' @examples
-#' set.seed(1)
-#' left <- rexp(40); right <- left + runif(40, 0.1, 1)
-#' str(morie_survival_turnbull(left, right), max.level = 1)
-#' @export
-morie_survival_turnbull <- function(left, right, max_iter = 200, tol = 1e-6) {
-  L <- as.numeric(left)
-  R <- as.numeric(right)
-  if (requireNamespace("survival", quietly = TRUE)) {
-    fit <- survival::survfit(survival::Surv(L, R, type = "interval2") ~ 1)
-    return(list(times = fit$time, survival = fit$surv,
-                method = "Turnbull NPMLE"))
+morie_nelson_aalen <- function(time, event) {
+  ut <- sort(unique(time[event == 1]))
+  H <- 0; V <- 0
+  ch <- se <- sv <- numeric(length(ut))
+  for (i in seq_along(ut)) {
+    u <- ut[i]
+    n_i <- sum(time >= u); d_i <- sum(time == u & event == 1)
+    H <- H + d_i / n_i; V <- V + d_i / n_i^2
+    ch[i] <- H; se[i] <- sqrt(V); sv[i] <- exp(-H)
   }
-  # Native Turnbull (1976) EM fallback. Right-censored observations
-  # carry R = NA or Inf; exact events have L == R.
-  R[is.na(R)] <- Inf
-  if (any(!is.finite(L)) || any(R < L)) {
-    stop("morie_survival_turnbull: left must be finite and <= right.",
-         call. = FALSE)
-  }
-  # Turnbull innermost intervals: a left endpoint immediately followed
-  # (in the pooled sorted endpoint sequence) by a right endpoint.
-  ep <- sort(unique(c(L, R[is.finite(R)])))
-  starts <- c(); ends <- c()
-  for (p in ep) {
-    q_cand <- R[is.finite(R) & R >= p]
-    q_cand <- q_cand[vapply(q_cand, function(q)
-      !any(L > p & L <= q) && !any(R[is.finite(R)] >= p & R[is.finite(R)] < q),
-      logical(1))]
-    if (length(q_cand) && any(L == p)) {
-      starts <- c(starts, p); ends <- c(ends, min(q_cand))
+  list(time = ut, cumhaz = ch, se = se, surv = sv)
+}
+
+#' Log-rank test
+#'
+#' Compares observed failures per group with the number expected under
+#' a common hazard, standardised by the hypergeometric variance.
+#' Equivalent to `survival::survdiff` with `rho = 0`.
+#' @inheritParams morie_kaplan_meier
+#' @param group grouping vector
+#' @return list with `statistic`, `df`, `p_value`, `observed`, `expected`
+#' @export
+morie_logrank_test <- function(time, event, group) {
+  lev <- sort(unique(group)); k <- length(lev)
+  if (k < 2) stop("need at least 2 groups")
+  obs <- exp_ <- numeric(k); V <- matrix(0, k, k)
+  for (u in sort(unique(time[event == 1]))) {
+    n_i <- sum(time >= u); d_i <- sum(time == u & event == 1)
+    nj <- vapply(lev, function(g) sum(time >= u & group == g), numeric(1))
+    dj <- vapply(lev, function(g)
+      sum(time == u & event == 1 & group == g), numeric(1))
+    obs <- obs + dj
+    exp_ <- exp_ + d_i * nj / n_i
+    if (n_i > 1) {
+      f <- d_i * (n_i - d_i) / (n_i - 1)
+      V <- V + f * (diag(nj / n_i, k, k) - outer(nj, nj) / n_i^2)
     }
   }
-  if (any(!is.finite(R))) { # right-censored mass beyond the last endpoint
-    starts <- c(starts, max(ep)); ends <- c(ends, Inf)
+  m <- k - 1
+  dif <- (obs - exp_)[seq_len(m)]
+  stat <- as.numeric(t(dif) %*% solve(V[seq_len(m), seq_len(m),
+                                       drop = FALSE], dif))
+  list(statistic = stat, df = m,
+       p_value = stats::pchisq(stat, m, lower.tail = FALSE),
+       observed = obs, expected = exp_, groups = lev)
+}
+
+#' Cox proportional-hazards model
+#'
+#' `lambda(t | x) = lambda_0(t) exp(x' beta)`, fitted by Newton-Raphson
+#' on the partial likelihood with Efron's tie handling -- the default in
+#' `survival::coxph`, and materially better than Breslow's when ties are
+#' common, as they are whenever follow-up is recorded in whole days.
+#' The baseline hazard is left unspecified, which is the point of the
+#' model; `exp(beta)` is a hazard ratio assumed constant over time.
+#' @inheritParams morie_kaplan_meier
+#' @param X covariate matrix
+#' @param ties "efron" or "breslow"
+#' @param max_iter,tol iteration controls
+#' @param beta coefficient vector at which to evaluate the likelihood
+#' @return list with `coef`, `se`, `z`, `p_value`, `hazard_ratio`,
+#'   `loglik` and the likelihood-ratio test
+#' @export
+morie_cox_ph <- function(time, event, X, ties = "efron",
+                         max_iter = 50, tol = 1e-9) {
+  X <- as.matrix(X); n <- length(time); p <- ncol(X)
+  if (sum(event) == 0) stop("no events: the partial likelihood is empty")
+  ut <- sort(unique(time[event == 1]))
+  beta <- numeric(p)
+  info <- function(b) {
+    w <- exp(as.numeric(X %*% b))
+    g <- numeric(p); H <- matrix(0, p, p)
+    for (u in ut) {
+      rk <- time >= u; dd <- time == u & event == 1
+      m <- sum(dd)
+      s0r <- sum(w[rk]); s1r <- colSums(X[rk, , drop = FALSE] * w[rk])
+      s2r <- crossprod(X[rk, , drop = FALSE], X[rk, , drop = FALSE] * w[rk])
+      s0d <- sum(w[dd]); s1d <- colSums(X[dd, , drop = FALSE] * w[dd])
+      s2d <- crossprod(X[dd, , drop = FALSE], X[dd, , drop = FALSE] * w[dd])
+      g <- g + colSums(X[dd, , drop = FALSE])
+      steps <- if (ties == "breslow") 1 else m
+      for (r in seq_len(steps) - 1) {
+        fr <- if (ties == "breslow") 0 else r / m
+        cnt <- if (ties == "breslow") m else 1
+        s0 <- s0r - fr * s0d; s1 <- s1r - fr * s1d; s2 <- s2r - fr * s2d
+        g <- g - cnt * s1 / s0
+        H <- H + cnt * (s2 / s0 - outer(s1, s1) / s0^2)
+      }
+    }
+    list(g = g, H = H)
   }
-  keep <- !duplicated(paste(starts, ends))
-  starts <- starts[keep]; ends <- ends[keep]
-  m <- length(starts); n <- length(L)
-  A <- outer(seq_len(n), seq_len(m), function(i, j)
-    as.numeric(starts[j] >= L[i] & ends[j] <= R[i]))
-  p_j <- rep(1 / m, m)
   for (it in seq_len(max_iter)) {
-    denom <- as.numeric(A %*% p_j)
-    denom[denom <= 0] <- .Machine$double.eps
-    mu <- A * rep(p_j, each = n) / denom
-    p_new <- colMeans(mu)
-    if (max(abs(p_new - p_j)) < tol) { p_j <- p_new; break }
-    p_j <- p_new
+    i <- info(beta)
+    step <- solve(i$H, i$g)
+    beta <- beta + step
+    if (max(abs(step)) < tol) break
   }
-  surv <- 1 - cumsum(p_j)
-  fin <- is.finite(ends)
-  list(times = ends[fin], survival = pmax(surv[fin], 0),
-       method = "Turnbull NPMLE (native EM)")
+  H <- info(beta)$H
+  V <- solve(H)
+  se <- sqrt(diag(V)); z <- beta / se
+  ll <- morie_cox_partial_loglik(time, event, X, beta, ties)
+  ll0 <- morie_cox_partial_loglik(time, event, X, numeric(p), ties)
+  list(coef = beta, se = se, z = z,
+       p_value = 2 * stats::pnorm(abs(z), lower.tail = FALSE),
+       hazard_ratio = exp(beta), vcov = V, loglik = ll,
+       loglik_null = ll0, lr_statistic = 2 * (ll - ll0),
+       lr_p_value = stats::pchisq(2 * (ll - ll0), p, lower.tail = FALSE),
+       n = n, n_events = sum(event), ties = ties)
+}
+
+#' @rdname morie_cox_ph
+#' @export
+morie_cox_partial_loglik <- function(time, event, X, beta,
+                                     ties = "efron") {
+  X <- as.matrix(X)
+  eta <- as.numeric(X %*% beta)
+  ll <- 0
+  for (u in sort(unique(time[event == 1]))) {
+    rk <- time >= u; dd <- time == u & event == 1
+    m <- sum(dd)
+    sr <- sum(exp(eta[rk])); sd <- sum(exp(eta[dd]))
+    ll <- ll + sum(eta[dd])
+    if (ties == "breslow") ll <- ll - m * log(sr)
+    else for (r in seq_len(m) - 1) ll <- ll - log(sr - r * sd / m)
+  }
+  ll
+}
+
+#' Harrell's concordance index
+#'
+#' Over the pairs whose order is known despite censoring, the
+#' proportion in which the subject failing first carried the higher
+#' predicted risk, ties counted as a half.  0.5 is chance.
+#' @inheritParams morie_kaplan_meier
+#' @param predicted_risk predicted risk score, higher meaning sooner
+#' @return list with `c_index` and the pair counts
+#' @export
+morie_concordance_index <- function(time, event, predicted_risk) {
+  n <- length(time)
+  conc <- disc <- tied <- 0
+  for (i in seq_len(n - 1)) for (j in (i + 1):n) {
+    if (time[i] < time[j] && event[i] == 1) { lo <- i; hi <- j }
+    else if (time[j] < time[i] && event[j] == 1) { lo <- j; hi <- i }
+    else if (time[i] == time[j] && event[i] == 1 && event[j] == 1) {
+      if (predicted_risk[i] != predicted_risk[j]) tied <- tied + 1
+      next
+    } else next
+    if (predicted_risk[lo] > predicted_risk[hi]) conc <- conc + 1
+    else if (predicted_risk[lo] < predicted_risk[hi]) disc <- disc + 1
+    else tied <- tied + 1
+  }
+  tot <- conc + disc + tied
+  if (tot == 0) stop("no comparable pairs")
+  list(c_index = (conc + 0.5 * tied) / tot, concordant = conc,
+       discordant = disc, tied = tied, n_pairs = tot)
 }
