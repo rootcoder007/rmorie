@@ -15,7 +15,7 @@
 #' @param activation optional "relu" or "logistic"
 #' @return list with `feature_map`, `output_shape` and `n_parameters`
 #' @noRd
-morie_mvsml_conv2d <- function(image, kernel, bias = 0, stride = 1,
+morie_conv2d <- function(image, kernel, bias = 0, stride = 1,
                                activation = NULL) {
   # eq. (13.1): each unit sees w'x + b over its receptive field only,
   # and every unit shares the same w (weight sharing), which is what
@@ -52,7 +52,7 @@ morie_mvsml_conv2d <- function(image, kernel, bias = 0, stride = 1,
 #' @param period Fourier period; defaults to the range of `t`
 #' @return numeric matrix with one row per grid point
 #' @noRd
-morie_mvsml_fda_basis <- function(t, n_basis, kind = "fourier",
+morie_fda_basis <- function(t, n_basis, kind = "fourier",
                                   period = NULL) {
   # the basis expansion of eq. (14.5): x(t) = sum_l c_l phi_l(t)
   tt <- as.numeric(t)
@@ -76,14 +76,14 @@ morie_mvsml_fda_basis <- function(t, n_basis, kind = "fourier",
 #'
 #' Least-squares projection c-hat = (Psi'Psi)^-1 Psi'x of a discretely
 #' observed curve onto the basis.
-#' @param Psi basis matrix from [morie_mvsml_fda_basis()]
+#' @param Psi basis matrix from [morie_fda_basis()]
 #' @param x_t observed curve values on the same grid
 #' @return numeric vector of basis coefficients
 #' @noRd
-morie_mvsml_fda_coefficients <- function(Psi, x_t) {
+morie_fda_coefficients <- function(Psi, x_t) {
   # eq. (14.6): c-hat = (Psi'Psi)^-1 Psi'x, least squares onto the basis
   P <- as.matrix(Psi)
-  as.numeric(morie_mvsml_solve(crossprod(P), crossprod(P, as.numeric(x_t))))
+  as.numeric(morie_solve(crossprod(P), crossprod(P, as.numeric(x_t))))
 }
 
 #' Basis inner-product matrix (MVSML eq. 14.7)
@@ -96,12 +96,12 @@ morie_mvsml_fda_coefficients <- function(Psi, x_t) {
 #' @param kind basis kind, "fourier" or "poly"
 #' @return an L1 x L2 numeric matrix
 #' @noRd
-morie_mvsml_fda_inner_product <- function(t, L1, L2, kind = "fourier") {
+morie_fda_inner_product <- function(t, L1, L2, kind = "fourier") {
   # eq. (14.7): Q_{jl} = integral phi_j(t) psi_l(t) dt, by the
   # trapezoid rule over the observed grid
   tt <- as.numeric(t)
-  Phi <- morie_mvsml_fda_basis(tt, L1, kind)
-  Psi <- morie_mvsml_fda_basis(tt, L2, kind)
+  Phi <- morie_fda_basis(tt, L1, kind)
+  Psi <- morie_fda_basis(tt, L2, kind)
   Q <- matrix(0, L1, L2)
   for (j in seq_len(L1)) for (l in seq_len(L2)) {
     f <- Phi[, j] * Psi[, l]
@@ -114,19 +114,19 @@ morie_mvsml_fda_inner_product <- function(t, L1, L2, kind = "fourier") {
 #'
 #' X* = C Q' turns the functional predictor
 #' integral beta(t) x(t) dt into an ordinary linear model in beta.
-#' @inheritParams morie_mvsml_fda_inner_product
+#' @inheritParams morie_fda_inner_product
 #' @param X_curves matrix or list of observed curves, one per subject
 #' @return list with `X_star`, `C`, `Q` and `Psi`
 #' @noRd
-morie_mvsml_fda_design <- function(t, X_curves, L1 = 3, L2 = 5,
+morie_fda_design <- function(t, X_curves, L1 = 3, L2 = 5,
                                    kind = "fourier") {
   # eq. (14.3)/(14.9): X* = C Q', so the functional regression
   # integral beta(t) x(t) dt becomes an ordinary linear model in beta
   tt <- as.numeric(t)
-  Psi <- morie_mvsml_fda_basis(tt, L2, kind)
-  Q <- morie_mvsml_fda_inner_product(tt, L1, L2, kind)
+  Psi <- morie_fda_basis(tt, L2, kind)
+  Q <- morie_fda_inner_product(tt, L1, L2, kind)
   Xc <- if (is.matrix(X_curves)) X_curves else do.call(rbind, X_curves)
-  C <- t(apply(Xc, 1, function(r) morie_mvsml_fda_coefficients(Psi, r)))
+  C <- t(apply(Xc, 1, function(r) morie_fda_coefficients(Psi, r)))
   if (!is.matrix(C)) C <- matrix(C, nrow = nrow(Xc))
   # eq. (14.9) p.581: X* = [1_n X], so the intercept column is part
   # of the design, not something the caller adds
@@ -138,17 +138,17 @@ morie_mvsml_fda_design <- function(t, X_curves, L1 = 3, L2 = 5,
 #'
 #' beta-hat = (X*'X*)^-1 X*'y with
 #' sigma2-hat = (1/n)(y - X*beta-hat)'(y - X*beta-hat).
-#' @inheritParams morie_mvsml_fda_design
+#' @inheritParams morie_fda_design
 #' @param y response vector, one entry per curve
 #' @return list with `beta`, `fitted`, `residuals`, `sigma2`, `X_star`
 #' @noRd
-morie_mvsml_fda_fit <- function(t, X_curves, y, L1 = 3, L2 = 5,
+morie_fda_fit <- function(t, X_curves, y, L1 = 3, L2 = 5,
                                 kind = "fourier") {
   # eq. (14.4): beta-hat = (X*'X*)^-1 X*'y and
   # sigma2-hat = (1/n)(y - X*beta-hat)'(y - X*beta-hat)
-  d <- morie_mvsml_fda_design(t, X_curves, L1, L2, kind)
+  d <- morie_fda_design(t, X_curves, L1, L2, kind)
   Xs <- d$X_star; yy <- as.numeric(y)
-  beta <- as.numeric(morie_mvsml_solve(crossprod(Xs), crossprod(Xs, yy)))
+  beta <- as.numeric(morie_solve(crossprod(Xs), crossprod(Xs, yy)))
   fitted <- as.numeric(Xs %*% beta)
   resid <- yy - fitted
   list(beta = beta, fitted = fitted, residuals = resid,
@@ -160,14 +160,14 @@ morie_mvsml_fda_fit <- function(t, X_curves, y, L1 = 3, L2 = 5,
 #' Reconstructs beta(t) = sum_j b_j phi_j(t) from its basis
 #' coefficients.
 #' @param t numeric grid of evaluation points
-#' @param beta_coefs basis coefficients from [morie_mvsml_fda_fit()]
+#' @param beta_coefs basis coefficients from [morie_fda_fit()]
 #' @param L1 number of basis terms used
 #' @param kind basis kind, "fourier" or "poly"
 #' @return numeric vector of beta(t) values
 #' @noRd
-morie_mvsml_fda_beta_function <- function(t, beta_coefs, L1,
+morie_fda_beta_function <- function(t, beta_coefs, L1,
                                           kind = "fourier") {
-  as.numeric(morie_mvsml_fda_basis(t, L1, kind) %*% as.numeric(beta_coefs))
+  as.numeric(morie_fda_basis(t, L1, kind) %*% as.numeric(beta_coefs))
 }
 
 #' Bayesian information criterion for a basis dimension
@@ -179,7 +179,7 @@ morie_mvsml_fda_beta_function <- function(t, beta_coefs, L1,
 #' @param n_obs number of observations
 #' @return the BIC value
 #' @noRd
-morie_mvsml_fda_bic <- function(loglik, n_params, n_obs) {
+morie_fda_bic <- function(loglik, n_params, n_obs) {
   # p.582: BIC = -2 loglik + (L + 1) log(n); the +1 is the intercept
   -2 * loglik + (n_params + 1) * log(n_obs)
 }
@@ -194,14 +194,14 @@ morie_mvsml_fda_bic <- function(loglik, n_params, n_obs) {
 #' @param kind basis kind, "fourier" or "poly"
 #' @return mean squared leave-one-out prediction error
 #' @noRd
-morie_mvsml_fda_loocv <- function(t, x_t, L2, kind = "fourier") {
+morie_fda_loocv <- function(t, x_t, L2, kind = "fourier") {
   # eq. (14.8): leave one grid point out, refit the basis, predict it
   tt <- as.numeric(t); xx <- as.numeric(x_t)
   err <- 0
   for (i in seq_along(tt)) {
-    Psi <- morie_mvsml_fda_basis(tt[-i], L2, kind, period = max(tt) - min(tt))
-    cf <- morie_mvsml_fda_coefficients(Psi, xx[-i])
-    pi_ <- morie_mvsml_fda_basis(tt, L2, kind, period = max(tt) - min(tt))[i, ]
+    Psi <- morie_fda_basis(tt[-i], L2, kind, period = max(tt) - min(tt))
+    cf <- morie_fda_coefficients(Psi, xx[-i])
+    pi_ <- morie_fda_basis(tt, L2, kind, period = max(tt) - min(tt))[i, ]
     err <- err + (xx[i] - sum(pi_ * cf))^2
   }
   err / length(tt)
@@ -215,7 +215,7 @@ morie_mvsml_fda_loocv <- function(t, x_t, L2, kind = "fourier") {
 #' @param theta_pred linear predictor for the zero probability
 #' @return list with `mu` and `theta`
 #' @noRd
-morie_mvsml_zap_link <- function(mu_pred, theta_pred) {
+morie_zap_link <- function(mu_pred, theta_pred) {
   # eq. (15.1): the two nonparametric links of the zero-altered
   # Poisson, log for the count mean and logit for the zero part
   mu <- exp(as.numeric(mu_pred))
@@ -232,11 +232,11 @@ morie_mvsml_zap_link <- function(mu_pred, theta_pred) {
 #' @param x unused, kept for signature parity with the Python API
 #' @return the log-likelihood value
 #' @noRd
-morie_mvsml_zap_loglik <- function(y_positive, mu = NULL, x = NULL) {
+morie_zap_loglik <- function(y_positive, mu = NULL, x = NULL) {
   # eq. (15.2): the zero-truncated Poisson log-likelihood used as the
   # splitting criterion; the truncation is the log(1 - exp(-mu)) term
   yy <- as.numeric(y_positive)
-  if (is.null(mu)) mu <- morie_mvsml_zap_mle(yy)
+  if (is.null(mu)) mu <- morie_zap_mle(yy)
   mu <- max(mu, 1e-9)
   sum(yy * log(mu) - mu - lgamma(yy + 1) - log1p(-exp(-mu)))
 }
@@ -251,7 +251,7 @@ morie_mvsml_zap_loglik <- function(y_positive, mu = NULL, x = NULL) {
 #' @param max_iter maximum number of bisection steps
 #' @return the estimate of mu, or 0 when the positive mean is at most 1
 #' @noRd
-morie_mvsml_zap_mle <- function(y_positive, tol = 1e-12,
+morie_zap_mle <- function(y_positive, tol = 1e-12,
                                 max_iter = 200) {
   yy <- as.numeric(y_positive)
   if (!length(yy)) stop("need at least one positive observation")
@@ -280,7 +280,7 @@ morie_mvsml_zap_mle <- function(y_positive, tol = 1e-12,
 #' @return list with `prediction`, `zero_probability` and, when
 #'   `threshold` is given, `is_zero` and `prediction_classified`
 #' @noRd
-morie_mvsml_zap_predict <- function(theta_hat, mu_hat, threshold = NULL) {
+morie_zap_predict <- function(theta_hat, mu_hat, threshold = NULL) {
   # eq. (15.3): E[Y] = (1 - theta) mu / (1 - exp(-mu)).
   #
   # Book erratum: (15.3) as printed, and the E(Y) line on p.651, give
@@ -306,12 +306,12 @@ morie_mvsml_zap_predict <- function(theta_hat, mu_hat, threshold = NULL) {
 #' Mean and variance of the zero-altered Poisson (MVSML p. 651)
 #'
 #' The variance is transcribed as printed; the mean uses the corrected
-#' numerator documented in [morie_mvsml_zap_predict()].
+#' numerator documented in [morie_zap_predict()].
 #' @param theta probability of the zero state
 #' @param mu Poisson mean of the count part
 #' @return list with `mean` and `variance`
 #' @noRd
-morie_mvsml_zap_mean_variance <- function(theta, mu) {
+morie_zap_mean_variance <- function(theta, mu) {
   th <- as.numeric(theta); m <- pmax(as.numeric(mu), 1e-9)
   k <- (1 - th) / (1 - exp(-m))
   mean_ <- k * m
@@ -340,7 +340,7 @@ morie_msm_weighted_glm <- function(y, X, weights = NULL,
   w <- if (is.null(weights)) rep(1, n) else as.numeric(weights)
   off <- if (is.null(offset)) rep(0, n) else as.numeric(offset)
   if (identical(family, "gaussian")) {
-    beta <- as.numeric(morie_mvsml_solve(crossprod(Xm, Xm * w),
+    beta <- as.numeric(morie_solve(crossprod(Xm, Xm * w),
                                          crossprod(Xm, w * (yy - off))))
     eta <- off + as.numeric(Xm %*% beta); mu <- eta
   } else {
@@ -357,7 +357,7 @@ morie_msm_weighted_glm <- function(y, X, weights = NULL,
       } else stop("unknown family: ", family)
       z <- eta - off + (yy - mu) / Wd
       ww <- w * Wd
-      new <- as.numeric(morie_mvsml_solve(crossprod(Xm, Xm * ww),
+      new <- as.numeric(morie_solve(crossprod(Xm, Xm * ww),
                                           crossprod(Xm, ww * z)))
       gap <- max(abs(new - beta)); beta <- new
       if (gap < tol) break
@@ -409,8 +409,8 @@ morie_msm_gmm <- function(y, X, Z, weights = NULL) {
   ZtWX <- crossprod(Zm, Xm * w)
   ZtWy <- crossprod(Zm, w * yy)
   beta <- if (ncol(Zm) == ncol(Xm))
-    as.numeric(morie_mvsml_solve(ZtWX, ZtWy))
-  else as.numeric(morie_mvsml_solve(crossprod(ZtWX), crossprod(ZtWX, ZtWy)))
+    as.numeric(morie_solve(ZtWX, ZtWy))
+  else as.numeric(morie_solve(crossprod(ZtWX), crossprod(ZtWX, ZtWy)))
   resid <- yy - as.numeric(Xm %*% beta)
   list(beta = beta, residuals = resid,
        moments = as.numeric(crossprod(Zm, w * resid)) / length(yy))
