@@ -522,3 +522,77 @@ morie_mvsml_bmtme_conditionals <- function(Y, Z1, Z2, G, Sigma_T,
   list(nu_T_post = nu_T + J + nrow(b2), scale_T = scale_T,
        nu_E_post = nu_E + J * I, scale_E = inner + S_E)
 }
+
+# ---- chapter 7: ordinal / categorical models (pp.209-215) ----
+
+#' @noRd
+morie_mvsml_ordinal_probs <- function(eta, thresholds,
+                                      link = "probit") {
+  F <- if (link == "probit") pnorm else plogis
+  t(vapply(as.numeric(eta), function(e) {
+    cuts <- c(0, F(thresholds + e), 1)
+    diff(cuts)
+  }, numeric(length(thresholds) + 1L)))
+}
+
+#' @noRd
+morie_mvsml_rtruncnorm <- function(mean, sd, lo, hi) {
+  a <- if (is.finite(lo)) pnorm((lo - mean) / sd) else 0
+  b <- if (is.finite(hi)) pnorm((hi - mean) / sd) else 1
+  if (b <= a) return(mean)
+  u <- min(max(a + (b - a) * runif(1), 1e-12), 1 - 1e-12)
+  mean + sd * qnorm(u)
+}
+
+#' @noRd
+morie_mvsml_ordinal_probit_gibbs <- function(y, X, n_iter = 1500L,
+                                             burn_in = 400L,
+                                             nu_beta = 5,
+                                             S_beta = 1,
+                                             seed = 42L) {
+  set.seed(seed)
+  y <- as.integer(y); X <- as.matrix(X)
+  n <- length(y); p <- ncol(X); C <- max(y)
+  beta <- rep(0, p); s2b <- 1
+  gamma <- seq_len(C - 1L) - C / 2
+  l <- rep(0, n)
+  col_ss <- colSums(X^2)
+  acc_beta <- rep(0, p); acc_gamma <- rep(0, C - 1L)
+  acc_s2b <- 0; kept <- 0L
+  for (it in seq_len(n_iter)) {
+    eta <- as.numeric(X %*% beta)
+    for (i in seq_len(n)) {
+      c_ <- y[i]
+      lo <- if (c_ >= 2) gamma[c_ - 1L] else -Inf
+      hi <- if (c_ <= C - 1L) gamma[c_] else Inf
+      l[i] <- morie_mvsml_rtruncnorm(-eta[i], 1, lo, hi)
+    }
+    for (j in seq_len(p)) {
+      others <- if (p > 1) X[, -j, drop = FALSE] %*% beta[-j] else 0
+      e_j <- l + others
+      v <- 1 / (1 / s2b + col_ss[j])
+      m <- -v * sum(X[, j] * e_j)
+      beta[j] <- m + sqrt(v) * rnorm(1)
+    }
+    for (c_ in seq_len(C - 1L)) {
+      a_c <- suppressWarnings(max(l[y == c_]))
+      b_c <- suppressWarnings(min(l[y == c_ + 1L]))
+      lo <- max(a_c, if (c_ >= 2) gamma[c_ - 1L] else -Inf)
+      hi <- min(b_c, if (c_ <= C - 2L) gamma[c_ + 1L] else Inf)
+      if (is.finite(lo) && is.finite(hi) && hi > lo) {
+        gamma[c_] <- lo + (hi - lo) * runif(1)
+      }
+    }
+    s2b <- morie_mvsml_scaled_inv_chisq(nu_beta + p,
+                                        S_beta + sum(beta^2))
+    if (it > burn_in) {
+      kept <- kept + 1L
+      acc_beta <- acc_beta + beta
+      acc_gamma <- acc_gamma + gamma
+      acc_s2b <- acc_s2b + s2b
+    }
+  }
+  list(beta = acc_beta / kept, gamma = acc_gamma / kept,
+       sigma2_beta = acc_s2b / kept, n_kept = kept,
+       n_categories = C)
+}
