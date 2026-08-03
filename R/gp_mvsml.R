@@ -818,3 +818,68 @@ morie_mvsml_kernel_blup_gxe <- function(Z_u1, K, Z_E,
        K2 = sigma2_u2 * morie_mvsml_hadamard(K1, KE),
        K_env = KE)
 }
+
+# ---- chapter 8d/8e: kernel compression + RKHS equations ----
+
+#' @noRd
+morie_mvsml_kernel_eigen_design <- function(K, tol = 1e-10) {
+  S <- (as.matrix(K) + t(as.matrix(K))) / 2
+  e <- eigen(S, symmetric = TRUE)
+  keep <- which(e$values > tol)
+  list(P = e$vectors[, keep, drop = FALSE] %*%
+         diag(sqrt(e$values[keep]), length(keep)),
+       rank = length(keep), eigenvalues = e$values[keep])
+}
+
+#' @noRd
+morie_mvsml_nystrom <- function(X, m_index, kernel = "linear",
+                                gamma = NULL) {
+  A <- as.matrix(X); p <- ncol(A); Xm <- A[m_index, , drop = FALSE]
+  if (kernel == "linear") {
+    Kmm <- Xm %*% t(Xm) / p
+    Knm <- A %*% t(Xm) / p
+  } else {
+    Kmm <- morie_mvsml_kernel_matrix(Xm, kernel, gamma)
+    Knm <- morie_mvsml_kernel_matrix(A, kernel, gamma, Z = Xm)
+  }
+  list(Q = Knm %*% morie_mvsml_pinv(Kmm) %*% t(Knm),
+       K_mm = Kmm, K_nm = Knm, rank = length(m_index))
+}
+
+#' @noRd
+morie_mvsml_sparse_kernel_design <- function(X, m_index,
+                                             kernel = "linear",
+                                             gamma = NULL,
+                                             tol = 1e-10) {
+  ny <- morie_mvsml_nystrom(X, m_index, kernel, gamma)
+  e <- eigen((ny$K_mm + t(ny$K_mm)) / 2, symmetric = TRUE)
+  keep <- which(e$values > tol)
+  US <- e$vectors[, keep, drop = FALSE] %*%
+    diag(1 / sqrt(e$values[keep]), length(keep))
+  list(P = ny$K_nm %*% US, Q = ny$Q, rank = length(keep),
+       K_mm = ny$K_mm, K_nm = ny$K_nm)
+}
+
+#' @noRd
+morie_mvsml_rkhs_mixed_equations <- function(C, K, y, lambda = 1,
+                                             sigma2_e = 1,
+                                             form = "direct") {
+  C <- as.matrix(C); K <- as.matrix(K); y <- as.numeric(y)
+  n <- length(y); q <- ncol(C)
+  if (form == "direct") {
+    A <- rbind(cbind(t(C) %*% C, t(C) %*% K),
+               cbind(t(K) %*% C,
+                     t(K) %*% K + lambda * K * sigma2_e))
+    rhs <- c(t(C) %*% y, t(K) %*% y)
+  } else {
+    A <- rbind(cbind(t(C) %*% C, t(C) %*% K),
+               cbind(C, K + diag(lambda * sigma2_e, n)))
+    rhs <- c(t(C) %*% y, y)
+  }
+  sol <- as.numeric(morie_mvsml_solve(A, rhs))
+  theta <- sol[seq_len(q)]; beta <- sol[-seq_len(q)]
+  u <- as.numeric(K %*% beta)
+  list(theta = theta, beta = beta, u = u,
+       fitted = as.numeric(C %*% theta) + u,
+       sigma2_beta = 1 / lambda)
+}
