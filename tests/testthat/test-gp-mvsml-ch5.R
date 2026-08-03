@@ -90,3 +90,19 @@ test_that("kron matches the definition", {
   expect_equal(as.numeric(K[1, ]), c(0, 5, 0, 10))
   expect_equal(as.numeric(K[4, ]), c(18, 21, 24, 28))
 })
+
+test_that("rank-deficient designs fall back on the pseudo-inverse", {
+  # regression: these used to stop with "system is exactly singular"
+  r <- morie_mvsml_gxe_blup(c(5, 6, 5.4, 6.8), matrix(0, 4, 1),
+                            matrix(c(1,0, 0,1, 1,0, 0,1), 4,
+                                   byrow = TRUE),
+                            diag(4), diag(2), 0.5, diag(0.3, 2))
+  expect_equal(r$b_lines, c(-0.26087, 0.26087), tolerance = 1e-5)
+  # the pseudo-inverse of a rank-1 matrix satisfies A A+ A = A
+  A <- matrix(c(1, 2, 2, 4), 2)
+  Ap <- morie_mvsml_pinv(A)
+  expect_equal(A %*% Ap %*% A, A, tolerance = 1e-9)
+  # and it agrees with solve() when the matrix is nonsingular
+  B <- matrix(c(2, 0, 0, 4), 2)
+  expect_equal(morie_mvsml_pinv(B), solve(B), tolerance = 1e-12)
+})

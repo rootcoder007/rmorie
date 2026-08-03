@@ -7,6 +7,31 @@
 # pp.131-136.
 
 #' @noRd
+morie_mvsml_pinv <- function(A, rcond = 1e-15) {
+  A <- as.matrix(A)
+  s <- svd(A)
+  tol <- rcond * max(s$d)
+  di <- ifelse(s$d > tol, 1 / s$d, 0)
+  s$v %*% diag(di, nrow = length(di)) %*% t(s$u)
+}
+
+#' @noRd
+morie_mvsml_solve <- function(A, b = NULL) {
+  # Rank-deficient systems are legitimate here (intercept-only design
+  # blocks, zero covariate columns, a genomic relationship matrix with
+  # fewer markers than lines), so fall back on the rank-gated
+  # pseudo-inverse rather than failing.
+  if (is.null(b)) {
+    out <- try(solve(A), silent = TRUE)
+    if (inherits(out, "try-error")) return(morie_mvsml_pinv(A))
+    return(out)
+  }
+  out <- try(solve(A, b), silent = TRUE)
+  if (inherits(out, "try-error")) return(morie_mvsml_pinv(A) %*% b)
+  out
+}
+
+#' @noRd
 morie_mvsml_one_way <- function(groups) {
   G <- lapply(groups, as.numeric)
   r <- length(G[[1]])
@@ -42,7 +67,7 @@ morie_mvsml_mme <- function(X, Z, y, Sigma_inv, R_inv = NULL) {
   LHS <- rbind(cbind(XtRi %*% X, XtRi %*% Z),
                cbind(ZtRi %*% X, ZtRi %*% Z + as.matrix(Sigma_inv)))
   RHS <- rbind(XtRi %*% y, ZtRi %*% y)
-  sol <- solve(LHS, RHS)
+  sol <- morie_mvsml_solve(LHS, RHS)
   list(blue = as.numeric(sol[seq_len(p)]),
        blup = as.numeric(sol[p + seq_len(q)]))
 }
@@ -53,8 +78,8 @@ morie_mvsml_blue_blup_v <- function(X, Z, y, Sigma, R = NULL) {
   n <- length(y)
   if (is.null(R)) R <- diag(n)
   V <- Z %*% as.matrix(Sigma) %*% t(Z) + R
-  Vi <- solve(V)
-  beta <- solve(t(X) %*% Vi %*% X, t(X) %*% Vi %*% y)
+  Vi <- morie_mvsml_solve(V)
+  beta <- morie_mvsml_solve(t(X) %*% Vi %*% X, t(X) %*% Vi %*% y)
   u <- as.matrix(Sigma) %*% t(Z) %*% Vi %*% (y - X %*% beta)
   list(blue = as.numeric(beta), blup = as.numeric(u))
 }
@@ -103,7 +128,7 @@ morie_mvsml_ols <- function(X, y, add_intercept = TRUE) {
   X <- as.matrix(X)
   if (add_intercept) X <- cbind(1, X)
   y <- as.numeric(y)
-  XtXi <- solve(t(X) %*% X)
+  XtXi <- morie_mvsml_solve(t(X) %*% X)
   beta <- as.numeric(XtXi %*% t(X) %*% y)
   fitted <- as.numeric(X %*% beta)
   resid <- y - fitted
@@ -123,7 +148,8 @@ morie_mvsml_ridge <- function(X, y, lambda, add_intercept = TRUE) {
   p <- ncol(X)
   D <- diag(p)
   if (add_intercept) D[1, 1] <- 0
-  beta <- as.numeric(solve(t(X) %*% X + lambda * D, t(X) %*% y))
+  beta <- as.numeric(morie_mvsml_solve(t(X) %*% X + lambda * D,
+                                      t(X) %*% y))
   fitted <- as.numeric(X %*% beta)
   rss <- sum((y - fitted)^2)
   pen <- lambda * sum((beta^2)[diag(D) == 1])
@@ -215,9 +241,9 @@ morie_mvsml_lmm_v <- function(Z, D, R = NULL) {
 morie_mvsml_lmm_loglik <- function(X, Z, y, D, R = NULL, beta = NULL) {
   X <- as.matrix(X); y <- as.numeric(y); n <- length(y)
   V <- morie_mvsml_lmm_v(Z, D, R)
-  Vi <- solve(V)
+  Vi <- morie_mvsml_solve(V)
   if (is.null(beta)) {
-    beta <- solve(t(X) %*% Vi %*% X, t(X) %*% Vi %*% y)
+    beta <- morie_mvsml_solve(t(X) %*% Vi %*% X, t(X) %*% Vi %*% y)
   }
   r <- y - X %*% beta
   ll <- -0.5 * n * log(2 * pi) -
@@ -230,9 +256,9 @@ morie_mvsml_lmm_loglik <- function(X, Z, y, D, R = NULL, beta = NULL) {
 morie_mvsml_reml_loglik <- function(X, Z, y, D, R = NULL) {
   X <- as.matrix(X); y <- as.numeric(y)
   V <- morie_mvsml_lmm_v(Z, D, R)
-  Vi <- solve(V)
+  Vi <- morie_mvsml_solve(V)
   A <- t(X) %*% Vi %*% X
-  beta <- solve(A, t(X) %*% Vi %*% y)
+  beta <- morie_mvsml_solve(A, t(X) %*% Vi %*% y)
   r <- y - X %*% beta
   ll <- -0.5 * determinant(A, logarithm = TRUE)$modulus[1] -
     0.5 * determinant(V, logarithm = TRUE)$modulus[1] -
@@ -249,14 +275,14 @@ morie_mvsml_em_lmm <- function(X, Z, y, D0 = NULL, sigma2_0 = 1,
   s2 <- sigma2_0
   XtX <- t(X) %*% X
   ZtZ <- t(Z) %*% Z
-  beta <- solve(XtX, t(X) %*% y)
+  beta <- morie_mvsml_solve(XtX, t(X) %*% y)
   bt <- rep(0, q)
   it <- 0L
   for (i in seq_len(n_iter)) {
     it <- i
-    Dt <- solve(solve(D) + ZtZ / s2)
+    Dt <- morie_mvsml_solve(morie_mvsml_solve(D) + ZtZ / s2)
     bt <- as.numeric(Dt %*% t(Z) %*% (y - X %*% beta) / s2)
-    beta_new <- solve(XtX, t(X) %*% (y - Z %*% bt))
+    beta_new <- morie_mvsml_solve(XtX, t(X) %*% (y - Z %*% bt))
     e <- as.numeric(y - X %*% beta_new - Z %*% bt)
     ZDZ <- Z %*% Dt %*% t(Z)
     s2_new <- (sum(diag(ZDZ)) + sum(e^2)) / n
