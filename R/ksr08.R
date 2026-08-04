@@ -1,46 +1,48 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-
-#' Gaussian multiplier bootstrap for Z-estimators
+#' Multiplier bootstrap with exponential weights (Dirichlet weights).
 #'
-#' G_n_xi(f) = n raised to the power of -1/2 times sum_i xi_i (f(X_i) - P_n f), xi ~ N(0,1).
+#' The weights are divided by their own mean so the total weight stays n.
+#' With standard exponential multipliers mu = tau = 1, so the scaling
+#' factor is 1 -- written out rather than dropped, because it is not 1 for
+#' any other weight distribution.
 #'
-#' @param x Numeric vector.
-#' @param B Number of multiplier replications.
-#' @param seed Integer RNG seed.
-#' @param deterministic_seed Optional integer; if supplied, RNG state is
-#'   derived via [morie_det_rng()] keyed on ("ksr08", deterministic_seed)
-#'   so Py<->R streams agree on the canonical fixture.  When `NULL`
-#'   (default) behaviour is unchanged.
-#' @return Named list with estimate, se, n, method.
-#' @references Kosorok (2008), Ch 10.
-#' @examples
-#' morie_ksr08_kosorok_multiplier_bootstrap(x = rnorm(50))
+#' Formula: Ptilde_n f = n^-1 sum_i (xi_i / xibar_n) f(X_i);
+#'   Gtilde_n = sqrt(n) (mu/tau) (Ptilde_n - P_n), xi ~ Exp(1)
+#'
+#' @param x The sample.
+#' @param B Number of replicates (fixed budget).
+#' @param seed Seed for the pinned generator.
+#' @return List with \code{estimate}, \code{boot_mean}, \code{boot_sd},
+#'   \code{process_sd}, \code{ci_lower}, \code{ci_upper}, \code{mu},
+#'   \code{tau}, \code{B}, \code{n}.
+#' @references Kosorok (2008), Introduction to Empirical Processes and
+#'   Semiparametric Inference, Section 2.2.3. Fetched as the full text of
+#'   the book.
 #' @export
-morie_ksr08_kosorok_multiplier_bootstrap <- function(x, B = 1000, seed = 0,
-                                               deterministic_seed = NULL) {
-  x <- as.numeric(x)
-  n <- length(x)
-  if (!is.null(deterministic_seed)) {
-    rmorie::morie_det_rng("ksr08", deterministic_seed)
-  } else {
-    set.seed(seed)
+Multboot <- function(x, B = 200, seed = 1) {
+  x <- .t1_vec(x); n <- length(x); B <- as.integer(B)
+  if (n < 2L) stop("the sample must have at least two observations")
+  if (B < 2L) stop("B must be at least 2")
+  Pn <- mean(x)
+  g <- .t1_lcg(seed)
+  stat <- numeric(B)
+  for (b in seq_len(B)) {
+    w <- numeric(n)
+    for (i in seq_len(n)) {
+      u <- g$unif()
+      if (u <= 0) u <- 1e-300
+      w[i] <- -log(u)
+    }
+    wb <- mean(w)
+    if (wb == 0) stop("the multiplier weights summed to zero")
+    stat[b] <- sum(w / wb * x) / n
   }
-  pn <- mean(x)
-  centred <- x - pn
-  xi <- matrix(stats::rnorm(B * n), nrow = B)
-  g_xi <- (xi %*% centred) / sqrt(n)
-  list(
-    estimate = mean(g_xi),
-    se       = stats::sd(as.numeric(g_xi)),
-    n        = n,
-    method   = "Multiplier bootstrap G_n^xi = n^{-1/2} sum xi (f-Pf)"
-  )
+  bm <- mean(stat); bsd <- stats::sd(stat)
+  q <- sort(stat)
+  lo <- q[max(1L, floor(0.025 * (B - 1)) + 1L)]
+  hi <- q[min(B, ceiling(0.975 * (B - 1)) + 1L)]
+  .t1_result(estimate = Pn, boot_mean = bm, boot_sd = bsd,
+             process_sd = sqrt(n) * 1 * bsd, ci_lower = lo, ci_upper = hi,
+             mu = 1, tau = 1, B = as.numeric(B), n = as.numeric(n),
+             method = "Multiplier bootstrap, Kosorok Section 2.2.3")
 }
-
-# CANONICAL TEST
-# set.seed(0); morie_ksr08_kosorok_multiplier_bootstrap(rnorm(200), B=500, seed=42)
-
-#' @rdname morie_ksr08_kosorok_multiplier_bootstrap
-#' @keywords internal
-#' @export
-morie_kosorok_multiplier_bootstrap <- morie_ksr08_kosorok_multiplier_bootstrap
