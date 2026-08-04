@@ -1,0 +1,1051 @@
+# Rangayyan pattern classification and computer-aided diagnosis: the
+# accuracy measures, the separability measures, and the classifiers of
+# Chapter 10.  Mirror of the Python bsaclass chunks 1 and 2.
+#
+# Chapter map for the 2024 third edition, from the PDF table of contents:
+# chapter 9 is signal DECOMPOSITION and chapter 10 is Computer-aided
+# Diagnosis and Healthcare, which is where these live.
+#
+# Equations verified in the PDF: 10.29, 10.68-10.73, 10.100-10.106,
+# 10.112-10.117.
+#
+# BHATTACHARYYA appears nowhere in this book.  Rangayyan measures class
+# separability with the normalized distance of eq (10.112) and the
+# divergence of eqs (10.115)-(10.117).  Bhatt and ErrBound are kept
+# because they are standard and correct, and are documented as not being
+# from this text.
+
+.morie_rg_scatter <- function(X, mu) {
+  # sum of (x - mu)(x - mu)^T: the SCATTER, not divided by n
+  d <- sweep(as.matrix(X), 2, mu, "-")
+  t(d) %*% d
+}
+
+.morie_rg_groups <- function(X, y) {
+  # split rows by label, preserving first-seen order
+  order <- unique(y)
+  list(order = order,
+       groups = lapply(order, function(l) X[y == l, , drop = FALSE]))
+}
+
+Sens <- function(tp, fn = NULL) {
+  # eq (10.100): S+ = TP / (subjects with the disease).  Measures the
+  # capability to DETECT and says nothing about false alarms -- a test
+  # calling everyone positive scores 1, which is why the book always
+  # reports it beside the specificity.
+  if (is.null(fn)) {
+    t <- as.matrix(tp)
+    if (nrow(t) != 2L || ncol(t) != 2L)
+      stop("give TP and FN, or a 2x2 table [[TP, FN], [FP, TN]]")
+    TP <- t[1, 1]; FN <- t[1, 2]
+  } else {
+    TP <- as.numeric(tp); FN <- as.numeric(fn)
+  }
+  if (TP < 0 || FN < 0) stop("counts cannot be negative")
+  n <- TP + FN
+  if (n <= 0)
+    stop("no subjects with the disease; the sensitivity is undefined")
+  list(sensitivity = TP / n, tpf = TP / n, fnf = FN / n,
+       n_diseased = n, tp = TP, fn = FN,
+       says_nothing_about_false_alarms = TRUE,
+       method = "Rangayyan (2024) eq. (10.100)")
+}
+
+Spec <- function(tn, fp = NULL) {
+  # eq (10.101): S- = TN / (subjects without the disease).
+  if (is.null(fp)) {
+    t <- as.matrix(tn)
+    if (nrow(t) != 2L || ncol(t) != 2L)
+      stop("give TN and FP, or a 2x2 table [[TP, FN], [FP, TN]]")
+    TN <- t[2, 2]; FP <- t[2, 1]
+  } else {
+    TN <- as.numeric(tn); FP <- as.numeric(fp)
+  }
+  if (TN < 0 || FP < 0) stop("counts cannot be negative")
+  n <- TN + FP
+  if (n <= 0)
+    stop("no subjects without the disease; the specificity is undefined")
+  list(specificity = TN / n, tnf = TN / n, fpf = FP / n,
+       n_healthy = n, tn = TN, fp = FP,
+       method = "Rangayyan (2024) eq. (10.101)")
+}
+
+Ppv <- function(tp, fp = NULL, prevalence = NULL, sensitivity = NULL,
+                specificity = NULL) {
+  # eq (10.106): PPV = TP / (TP + FP).  Unlike sensitivity and
+  # specificity it depends on the PREVALENCE, so a PPV measured where
+  # half the subjects are ill does not transfer to screening a
+  # population where one in a thousand is.
+  if (is.null(fp) && !is.numeric(tp)) {
+    t <- as.matrix(tp)
+    if (nrow(t) != 2L || ncol(t) != 2L)
+      stop("give TP and FP, or a 2x2 table [[TP, FN], [FP, TN]]")
+    TP <- t[1, 1]; FP <- t[2, 1]
+  } else {
+    if (is.null(fp)) stop("give TP and FP, or a 2x2 table")
+    TP <- as.numeric(tp); FP <- as.numeric(fp)
+  }
+  if (TP < 0 || FP < 0) stop("counts cannot be negative")
+  n <- TP + FP
+  if (n <= 0) stop("no positive decisions; the PPV is undefined")
+  out <- list(ppv = TP / n, precision = TP / n, tp = TP, fp = FP,
+              n_positive_calls = n, depends_on_prevalence = TRUE,
+              method = "Rangayyan (2024) eq. (10.106)")
+  if (!is.null(prevalence)) {
+    if (is.null(sensitivity) || is.null(specificity))
+      stop("a prevalence correction needs both the sensitivity and the ",
+           "specificity")
+    p <- as.numeric(prevalence)
+    if (p < 0 || p > 1) stop("the prevalence must lie in [0, 1]")
+    se <- as.numeric(sensitivity); sp <- as.numeric(specificity)
+    den <- se * p + (1 - sp) * (1 - p)
+    out$prevalence <- p
+    out$ppv_at_prevalence <- if (den > 0) se * p / den else NULL
+  }
+  out
+}
+
+Accuracy <- function(table = NULL, tp = NULL, tn = NULL, fp = NULL,
+                     fn = NULL, prevalence = NULL) {
+  # The book gives the PREVALENCE-WEIGHTED form first, eq (10.102):
+  #   accuracy = S+ P(A) + S- P(N)
+  # and falls back on eq (10.103), (TP+TN)/total, only "if the prior
+  # probabilities are not available".  Eq (10.103) IS eq (10.102)
+  # evaluated at the prevalence of the TEST SET, so on a set balanced
+  # 50/50 it reports a number that does not describe performance on a
+  # population where the disease is rare.
+  if (!is.null(table)) {
+    t <- as.matrix(table)
+    if (nrow(t) != 2L || ncol(t) != 2L)
+      stop("the table must be 2x2, [[TP, FN], [FP, TN]]")
+    TP <- t[1, 1]; FN <- t[1, 2]; FP <- t[2, 1]; TN <- t[2, 2]
+  } else {
+    if (is.null(tp) || is.null(tn) || is.null(fp) || is.null(fn))
+      stop("give a 2x2 table or all four of tp, tn, fp, fn")
+    TP <- as.numeric(tp); TN <- as.numeric(tn)
+    FP <- as.numeric(fp); FN <- as.numeric(fn)
+  }
+  if (min(TP, TN, FP, FN) < 0) stop("counts cannot be negative")
+  total <- TP + TN + FP + FN
+  if (total <= 0) stop("the table is empty")
+  if (TP + FN <= 0 || TN + FP <= 0)
+    stop("a class is empty; the sensitivity or specificity is undefined")
+  se <- TP / (TP + FN)
+  sp <- TN / (TN + FP)
+  raw <- (TP + TN) / total
+  out <- list(accuracy = raw, raw_accuracy = raw, sensitivity = se,
+              specificity = sp, test_set_prevalence = (TP + FN) / total,
+              eq_10_103_is_eq_10_102_at_the_test_set_prevalence = TRUE,
+              method = "Rangayyan (2024) eqs. (10.102)-(10.103)")
+  if (!is.null(prevalence)) {
+    p <- as.numeric(prevalence)
+    if (p < 0 || p > 1) stop("the prevalence must lie in [0, 1]")
+    w <- se * p + sp * (1 - p)
+    out$accuracy <- w
+    out$weighted_accuracy <- w
+    out$prevalence <- p
+    out$prior_weighted <- TRUE
+  } else out$prior_weighted <- FALSE
+  out
+}
+
+Roc <- function(scores, labels, positive = 1) {
+  # Section 10.9.1.  The area the book calls A_z, by the trapezoidal
+  # rule, which for tied scores is exactly the Mann-Whitney statistic --
+  # the probability a random diseased subject outscores a random healthy
+  # one, ties counted as half.  Summing rectangles instead biases the
+  # area whenever scores tie, which they do whenever a classifier emits
+  # a class rather than a probability.
+  s <- as.numeric(scores)
+  if (length(s) != length(labels))
+    stop("scores and labels must have the same length")
+  if (!length(s)) stop("need at least one observation")
+  pos <- s[labels == positive]
+  neg <- s[labels != positive]
+  if (!length(pos) || !length(neg))
+    stop("the ROC needs both classes present")
+  thr <- sort(unique(s), decreasing = TRUE)
+  tpf <- c(0, vapply(thr, function(t) mean(pos >= t), numeric(1)))
+  fpf <- c(0, vapply(thr, function(t) mean(neg >= t), numeric(1)))
+  area <- sum(0.5 * (tpf[-1] + tpf[-length(tpf)]) * diff(fpf))
+  wins <- sum(outer(pos, neg, function(a, b)
+    ifelse(a > b, 1, ifelse(a == b, 0.5, 0))))
+  mw <- wins / (length(pos) * length(neg))
+  best <- which.min((1 - tpf)^2 + fpf^2)
+  list(fpf = fpf, tpf = tpf, sensitivity = tpf,
+       one_minus_specificity = fpf, thresholds = thr,
+       auc = area, az = area, mann_whitney = mw,
+       trapezoidal_equals_mann_whitney = abs(area - mw) < 1e-9,
+       n_positive = length(pos), n_negative = length(neg),
+       best_index = best - 1L,
+       best_operating_point = c(fpf[best], tpf[best]),
+       ties_counted_as_half = TRUE,
+       method = "Rangayyan (2024) Section 10.9.1 (ROC, A_z)")
+}
+
+McNemar <- function(table, correct = NULL) {
+  # Section 10.9.2, McNemar's test of SYMMETRY.  The book states it on a
+  # general contingency table -- its worked example, Table 10.4, is 3x3
+  # with normal / indeterminate / abnormal -- so any k x k is accepted.
+  # k = 2 gives McNemar with Yates' correction, k > 2 its generalization,
+  # Bowker's test.  Only the OFF-DIAGONAL disagreements enter: the
+  # diagonal, usually most of the cases, contributes nothing, because the
+  # question is whether the disagreements are one-sided.
+  t <- as.matrix(table)
+  k <- nrow(t)
+  if (k < 2L || ncol(t) != k) stop("the table must be square and at least 2x2")
+  if (any(t < 0)) stop("counts cannot be negative")
+  yates <- if (is.null(correct)) (k == 2L) else isTRUE(correct)
+  stat <- 0; df <- 0L; pairs <- list()
+  for (i in seq_len(k)) for (j in seq_len(k)) {
+    if (j <= i) next
+    a <- t[i, j]; b <- t[j, i]
+    if (a + b <= 0) next
+    d <- abs(a - b)
+    if (yates) d <- max(0, d - 1)
+    stat <- stat + d * d / (a + b)
+    df <- df + 1L
+    pairs[[length(pairs) + 1L]] <- list(i = i - 1L, j = j - 1L,
+                                        n_ij = a, n_ji = b)
+  }
+  if (df == 0L)
+    stop("the table is symmetric with no off-diagonal counts; the test ",
+         "is undefined")
+  list(statistic = stat, df = df,
+       p_value = stats::pchisq(stat, df, lower.tail = FALSE),
+       pairs = pairs, n = sum(t), n_agree = sum(diag(t)),
+       continuity_correction = yates, is_bowker = k > 2L, k = k,
+       diagonal_contributes_nothing = TRUE,
+       method = paste("Rangayyan (2024) Section 10.9.2 (McNemar's test",
+                      "of symmetry; Bowker's generalization for k > 2)"))
+}
+
+NormDist <- function(m1, m2, s1, s2) {
+  # eq (10.112): d_n = |m1 - m2| / (sigma1 + sigma2).  The denominator is
+  # the SUM of the SDs, not their quadrature sum -- this is not the
+  # Fisher criterion.  The book states the limitation: d_n = 0 whenever
+  # m1 = m2, however different the dispersions, so classes separated only
+  # by variance score zero.  The divergence has no such blind spot.
+  a <- as.numeric(m1); b <- as.numeric(m2)
+  p <- as.numeric(s1); q <- as.numeric(s2)
+  if (p < 0 || q < 0) stop("a standard deviation cannot be negative")
+  if (p + q <= 0)
+    stop("both standard deviations are zero; the normalized distance is ",
+         "undefined")
+  list(dn = abs(a - b) / (p + q), mean_difference = abs(a - b),
+       sd_sum = p + q,
+       blind_to_variance_when_means_match = abs(a - b) < 1e-300,
+       denominator_is_the_sum_not_the_quadrature_sum = TRUE,
+       method = "Rangayyan (2024) eq. (10.112)")
+}
+
+Divergence <- function(m1, m2, C1, C2) {
+  # eq (10.117), the closed form of the symmetric divergence of
+  # eq (10.115):
+  #   D = (1/2) tr[(Ci - Cj)(Cj^-1 - Ci^-1)]
+  #     + (1/2) tr[(Ci^-1 + Cj^-1)(mi - mj)(mi - mj)^T]
+  # The second term resembles eq (10.112) and vanishes for equal means;
+  # the FIRST does not, so unlike d_n the divergence still separates
+  # classes differing only in covariance.  This is the measure the book
+  # uses; Bhattacharyya appears nowhere in it.
+  a <- as.numeric(m1); b <- as.numeric(m2)
+  A <- as.matrix(C1); B <- as.matrix(C2)
+  p <- length(a)
+  if (length(b) != p) stop("the two mean vectors must have the same length")
+  if (nrow(A) != p || ncol(A) != p || nrow(B) != p || ncol(B) != p)
+    stop("the covariance matrices must be ", p, " x ", p)
+  Ai <- solve(A); Bi <- solve(B)
+  term1 <- 0.5 * sum(diag((A - B) %*% (Bi - Ai)))
+  dm <- matrix(a - b, ncol = 1)
+  term2 <- 0.5 * sum(diag((Ai + Bi) %*% (dm %*% t(dm))))
+  D <- term1 + term2
+  list(divergence = D, covariance_term = term1, mean_term = term2,
+       nonnegative = D >= -1e-9, symmetric = TRUE,
+       zero_for_identical_pdfs = abs(D) < 1e-9,
+       separates_equal_means_via_the_covariance_term = abs(term1) > 1e-12,
+       additive_over_independent_features = TRUE,
+       method = "Rangayyan (2024) eqs. (10.115)-(10.117)")
+}
+
+DivAv <- function(means, covs) {
+  # The book averages the pairwise divergences for a single measure over
+  # m classes.  Averaging hides a badly separated PAIR behind well
+  # separated ones, so the minimum is returned too -- that is the pair
+  # that will actually be confused.
+  m <- length(means)
+  if (m < 2L) stop("need at least two classes")
+  if (length(covs) != m) stop("give one covariance matrix per class")
+  vals <- c(); pairs <- list()
+  for (i in seq_len(m)) for (j in seq_len(m)) {
+    if (j <= i) next
+    d <- Divergence(means[[i]], means[[j]], covs[[i]], covs[[j]])$divergence
+    vals <- c(vals, d)
+    pairs[[length(pairs) + 1L]] <- c(i - 1L, j - 1L, d)
+  }
+  w <- which.min(vapply(pairs, function(p) p[3], numeric(1)))
+  list(average = mean(vals), pairwise = pairs,
+       minimum = pairs[[w]][3],
+       worst_pair = c(pairs[[w]][1], pairs[[w]][2]),
+       n_classes = m, n_pairs = length(vals),
+       average_hides_the_worst_pair = TRUE,
+       method = "Rangayyan (2024) Section 10.10.1 (average divergence)")
+}
+
+Bhatt <- function(m1, m2, C1, C2) {
+  # NOT FROM THIS BOOK.  Rangayyan (2024) measures separability with
+  # eq (10.112) and eqs (10.115)-(10.117); Bhattacharyya distance appears
+  # nowhere in the text.  Kept because it is standard and correct, and
+  # because it -- unlike the divergence -- bounds the Bayes error.
+  a <- as.numeric(m1); b <- as.numeric(m2)
+  A <- as.matrix(C1); B <- as.matrix(C2)
+  p <- length(a)
+  if (length(b) != p) stop("the two mean vectors must have the same length")
+  if (nrow(A) != p || nrow(B) != p) stop("the covariances must be ", p, " x ", p)
+  M <- 0.5 * (A + B)
+  dm <- matrix(a - b, ncol = 1)
+  quad <- as.numeric(t(dm) %*% solve(M) %*% dm)
+  dA <- det(A); dB <- det(B); dM <- det(M)
+  if (dA <= 0 || dB <= 0 || dM <= 0)
+    stop("a covariance matrix is not positive definite")
+  list(bhattacharyya = 0.125 * quad + 0.5 * log(dM / sqrt(dA * dB)),
+       mean_term = 0.125 * quad,
+       covariance_term = 0.5 * log(dM / sqrt(dA * dB)),
+       not_from_this_book = TRUE,
+       book_uses_divergence_eq_10_115 = TRUE,
+       method = paste("standard Bhattacharyya distance for Gaussians;",
+                      "Rangayyan (2024) uses eqs. (10.112) and (10.115)",
+                      "instead"))
+}
+
+ErrBound <- function(p1, p2, db) {
+  # P_e <= sqrt(P1 P2) exp(-D_B).  NOT FROM THIS BOOK -- the standard
+  # Kailath bound.  It pairs with Bhatt, NOT with the book's Divergence:
+  # the divergence does not bound the error this way, and substituting it
+  # would give a number that looks like a bound and is not one.  The
+  # bound is on the OPTIMAL classifier, a floor no real one can beat.
+  a <- as.numeric(p1); b <- as.numeric(p2)
+  if (a < 0 || b < 0) stop("prior probabilities cannot be negative")
+  if (abs(a + b - 1) > 1e-9) stop("the two priors must sum to 1")
+  d <- as.numeric(db)
+  if (d < 0) stop("the Bhattacharyya distance cannot be negative")
+  list(bound = sqrt(a * b) * exp(-d), priors = c(a, b),
+       bhattacharyya = d, tightest_at_equal_priors = abs(a - b) < 1e-12,
+       bounds_the_optimal_classifier_not_yours = TRUE,
+       not_from_this_book = TRUE,
+       pairs_with_bhatt_not_with_divergence = TRUE,
+       method = "Kailath's Bhattacharyya bound; not given in Rangayyan (2024)")
+}
+
+FishCrit <- function(x1, x2) {
+  # J = (m1 - m2)^2 / (s1^2 + s2^2).  Close kin to eq (10.112) but NOT
+  # the same measure: that divides |m1 - m2| by (s1 + s2).  They rank
+  # features identically only when the dispersions are equal.
+  a <- as.numeric(x1); b <- as.numeric(x2)
+  if (length(a) < 2L || length(b) < 2L)
+    stop("each class needs at least two samples")
+  m1 <- mean(a); m2 <- mean(b); v1 <- stats::var(a); v2 <- stats::var(b)
+  if (v1 + v2 <= 0)
+    stop("both classes have zero variance; the criterion is undefined")
+  s1 <- sqrt(v1); s2 <- sqrt(v2)
+  list(j = (m1 - m2)^2 / (v1 + v2), means = c(m1, m2),
+       variances = c(v1, v2),
+       normalized_distance = if (s1 + s2 > 0) abs(m1 - m2) / (s1 + s2)
+         else Inf,
+       agrees_with_eq_10_112_ranking_only_for_equal_spread =
+         abs(s1 - s2) < 1e-12,
+       is_not_eq_10_112 = TRUE,
+       method = "Fisher's criterion; compare Rangayyan (2024) eq. (10.112)")
+}
+
+SepIndex <- function(X, y) {
+  # Section 10.10.1: J = tr(S_B) / tr(S_W).  The trace ratio ignores the
+  # OFF-diagonal structure, so it cannot see that a pair of features is
+  # jointly discriminating when neither is alone -- for that, the
+  # divergence, which uses the full covariance, is the measure to use.
+  Xs <- as.matrix(X)
+  if (nrow(Xs) != length(y))
+    stop("X and y must have the same number of rows")
+  if (nrow(Xs) < 2L) stop("need at least two samples")
+  g <- .morie_rg_groups(Xs, y)
+  if (length(g$order) < 2L) stop("need at least two classes")
+  p <- ncol(Xs)
+  grand <- colMeans(Xs)
+  SW <- matrix(0, p, p); SB <- matrix(0, p, p)
+  for (rows in g$groups) {
+    mu <- colMeans(rows)
+    SW <- SW + .morie_rg_scatter(rows, mu)
+    d <- matrix(mu - grand, ncol = 1)
+    SB <- SB + nrow(rows) * (d %*% t(d))
+  }
+  tw <- sum(diag(SW))
+  if (tw <= 0)
+    stop("the within-class scatter vanishes; every class is a single ",
+         "repeated point")
+  list(j = sum(diag(SB)) / tw, trace_between = sum(diag(SB)),
+       trace_within = tw, s_within = SW, s_between = SB,
+       classes = g$order, n_classes = length(g$order), n_features = p,
+       ignores_off_diagonal_structure = TRUE,
+       method = "Rangayyan (2024) Section 10.10.1 (separability of features)")
+}
+
+FishLda <- function(X, y) {
+  # Section 10.4.2: w = S_W^-1 (m1 - m2), the direction maximizing the
+  # ratio of between- to within-class scatter of the PROJECTED data.  Two
+  # classes only.  It reduces the data to ONE number chosen for
+  # separation, not reconstruction, so unlike a principal component it is
+  # not meant to represent the data.
+  Xs <- as.matrix(X)
+  if (nrow(Xs) != length(y))
+    stop("X and y must have the same number of rows")
+  g <- .morie_rg_groups(Xs, y)
+  if (length(g$order) != 2L)
+    stop("Fisher's linear discriminant as stated is a two-class method; ",
+         "got ", length(g$order), " classes")
+  a <- g$groups[[1]]; b <- g$groups[[2]]
+  if (nrow(a) < 2L || nrow(b) < 2L)
+    stop("each class needs at least two samples")
+  m1 <- colMeans(a); m2 <- colMeans(b)
+  SW <- .morie_rg_scatter(a, m1) + .morie_rg_scatter(b, m2)
+  w <- as.numeric(solve(SW, m1 - m2))
+  pa <- as.numeric(a %*% w); pb <- as.numeric(b %*% w)
+  ma <- mean(pa); mb <- mean(pb)
+  va <- sum((pa - ma)^2); vb <- sum((pb - mb)^2)
+  proj <- list(pa, pb); names(proj) <- as.character(g$order)
+  list(w = w, threshold = 0.5 * (ma + mb), classes = g$order,
+       means = list(m1, m2), s_within = SW, projected = proj,
+       projected_means = c(ma, mb),
+       criterion = if (va + vb > 0) (ma - mb)^2 / (va + vb) else Inf,
+       two_class_only = TRUE, not_a_reconstruction_basis = TRUE,
+       method = "Rangayyan (2024) Section 10.4.2 (Fisher LDA)")
+}
+
+Mahal <- function(x, mu, C) {
+  # Section 10.4.3: D^2 = (x - mu)^T C^-1 (x - mu).  Distance in units of
+  # the data's own scatter: a point far along an axis of natural
+  # variation is NEAR, one close by across the grain is far.  Euclidean
+  # distance would quietly favour whichever feature has the largest units.
+  xs <- as.numeric(x); m <- as.numeric(mu); S <- as.matrix(C)
+  p <- length(xs)
+  if (length(m) != p) stop("x and mu must have the same length")
+  if (nrow(S) != p || ncol(S) != p)
+    stop("the covariance must be ", p, " x ", p)
+  d <- matrix(xs - m, ncol = 1)
+  d2 <- as.numeric(t(d) %*% solve(S) %*% d)
+  eucl <- sqrt(sum((xs - m)^2))
+  list(d2 = d2, distance = if (d2 >= 0) sqrt(d2) else NaN, squared = d2,
+       euclidean = eucl,
+       differs_from_euclidean = abs(sqrt(max(d2, 0)) - eucl) > 1e-12,
+       scale_free = TRUE,
+       method = "Rangayyan (2024) Section 10.4.3 (distance functions)")
+}
+
+LinDisc <- function(x, weights, w0 = NULL) {
+  # Section 10.4.1: d_i(x) = w_i^T x + w_i0, assign to the largest.  The
+  # surfaces between classes are hyperplanes, so a linear machine carves
+  # the space into CONVEX regions -- which is why it cannot separate
+  # classes whose regions are not convex, however many features are added.
+  xs <- as.numeric(x)
+  W <- as.matrix(weights)
+  m <- nrow(W)
+  if (m < 2L) stop("need at least two classes")
+  if (ncol(W) != length(xs))
+    stop("every weight vector must match the length of x")
+  b <- if (is.null(w0)) numeric(m) else as.numeric(w0)
+  if (length(b) != m) stop("give one offset per class")
+  d <- as.numeric(W %*% xs) + b
+  srt <- sort(d, decreasing = TRUE)
+  list(d = d, assigned = which.max(d) - 1L, margin = srt[1] - srt[2],
+       n_classes = m, regions_are_convex = TRUE,
+       decision_surfaces_are_hyperplanes = TRUE,
+       method = paste("Rangayyan (2024) Section 10.4.1 (discriminant and",
+                      "decision functions)"))
+}
+
+LinDSep <- function(X, y) {
+  # Section 10.4.2 with a fitted cut.  The midpoint of the projected
+  # means is optimal only for equal priors AND equal variances, so the
+  # error-minimizing cut is the default and the midpoint is reported
+  # beside it.  Both errors are resubstitution errors -- measured on the
+  # data that chose the cut -- so they are optimistic; Section 10.10.3 is
+  # the book's warning, and KFoldCv or LooCv gives an honest figure.
+  f <- FishLda(X, y)
+  a <- f$projected[[1]]; b <- f$projected[[2]]
+  ma <- f$projected_means[1]; mb <- f$projected_means[2]
+  mid <- 0.5 * (ma + mb)
+  hi_first <- ma > mb
+  cand <- sort(unique(c(a, b)))
+  errf <- function(t) {
+    if (hi_first) sum(a <= t) + sum(b > t) else sum(a > t) + sum(b <= t)
+  }
+  cuts <- c(cand[1] - 1, cand, cand[length(cand)] + 1)
+  ts <- 0.5 * (cuts[-length(cuts)] + cuts[-1])
+  errs <- vapply(ts, errf, numeric(1))
+  w <- which.min(errs)
+  n <- length(a) + length(b)
+  list(w = f$w, threshold = ts[w], midpoint_threshold = mid,
+       classes = f$classes, first_class_is_above = hi_first,
+       training_errors = errs[w], midpoint_errors = errf(mid),
+       training_accuracy = 1 - errs[w] / n, n = n,
+       projected = f$projected,
+       midpoint_optimal_only_for_equal_priors_and_spread = TRUE,
+       resubstitution_error_is_optimistic = TRUE,
+       method = "Rangayyan (2024) Sections 10.4.2 and 10.10.3")
+}
+
+Knn <- function(X, y, query, k = 1, metric = "euclidean", C = NULL) {
+  # eq (10.29) and Section 10.4.4.  The book is explicit about why k > 1:
+  # with k = 1 "the nearest neighbor may happen to be an outlier that is
+  # not representative of its class", so one freak point owns a whole
+  # region.  The Mahalanobis metric is the one to use when features have
+  # different units, since Euclidean distance is otherwise dominated by
+  # whichever feature has the largest numbers.
+  Xs <- as.matrix(X)
+  q <- as.numeric(query)
+  if (nrow(Xs) != length(y))
+    stop("X and y must have the same number of rows")
+  if (!nrow(Xs)) stop("need at least one training sample")
+  p <- length(q)
+  if (ncol(Xs) != p) stop("every row of X must match the query length")
+  kk <- as.integer(k)
+  if (kk < 1L) stop("k must be at least 1")
+  if (kk > nrow(Xs)) stop("k exceeds the number of training samples")
+  if (!metric %in% c("euclidean", "mahalanobis"))
+    stop("metric must be 'euclidean' or 'mahalanobis'")
+  d <- sweep(Xs, 2, q, "-")
+  if (metric == "mahalanobis") {
+    if (is.null(C)) stop("the Mahalanobis metric needs the covariance C")
+    Ci <- solve(as.matrix(C))
+    dist <- sqrt(pmax(0, rowSums((d %*% Ci) * d)))
+  } else dist <- sqrt(rowSums(d * d))
+  ord <- order(dist)[seq_len(kk)]
+  labs <- y[ord]
+  tab <- table(labs)
+  top <- max(tab)
+  tied <- names(tab)[tab == top]
+  if (length(tied) == 1L) {
+    winner <- labs[match(tied, as.character(labs))]
+  } else {
+    sums <- vapply(tied, function(l)
+      sum(dist[ord][as.character(labs) == l]), numeric(1))
+    winner <- labs[match(tied[which.min(sums)], as.character(labs))]
+  }
+  list(assigned = winner, votes = as.list(tab), k = kk, metric = metric,
+       neighbours = lapply(seq_along(ord), function(i)
+         list(index = ord[i] - 1L, label = labs[i],
+              distance = dist[ord][i])),
+       tie = length(tied) > 1L, tied_classes = tied,
+       nearest_distance = dist[ord][1], nearest_label = labs[1],
+       single_neighbour_may_be_an_outlier = kk == 1L,
+       method = "Rangayyan (2024) eq. (10.29) and Section 10.4.4")
+}
+
+BayesCls <- function(likelihoods, priors = NULL) {
+  # eq (10.70): d_i(x) = p(x|C_i) P(C_i), assign to the largest -- the
+  # MAXIMUM A POSTERIORI rule.  Comparing likelihoods alone is maximum
+  # likelihood, a different classifier, and they differ whenever the
+  # classes are unequally common: for a rare disease the prior is
+  # precisely what stops the classifier calling everything positive.
+  lk <- as.numeric(likelihoods)
+  m <- length(lk)
+  if (m < 2L) stop("need at least two classes")
+  if (any(lk < 0)) stop("a likelihood cannot be negative")
+  if (is.null(priors)) pr <- rep(1 / m, m) else {
+    pr <- as.numeric(priors)
+    if (length(pr) != m) stop("give one prior per class")
+    if (any(pr < 0)) stop("a prior cannot be negative")
+    if (abs(sum(pr) - 1) > 1e-9) stop("the priors must sum to 1")
+  }
+  d <- lk * pr
+  tot <- sum(d)
+  list(d = d, posterior = if (tot > 0) d / tot else rep(0, m),
+       assigned = which.max(d) - 1L,
+       maximum_likelihood_choice = which.max(lk) - 1L,
+       prior_changed_the_decision = which.max(d) != which.max(lk),
+       priors = pr, uniform_priors = is.null(priors),
+       method = "Rangayyan (2024) eq. (10.70)")
+}
+
+BayesNorm <- function(x, means, covs, priors = NULL, full = FALSE) {
+  # eq (10.72).  The book takes logarithms at eq (10.71) because the
+  # normal PDF is an exponential and ln is monotonic: the ranking is
+  # unchanged while the arithmetic stops underflowing.  It then drops the
+  # (n/2) ln(2 pi) term, which "does not depend upon i", giving
+  # eq (10.73) -- safe for CLASSIFYING, wrong for reading the value as a
+  # log density, so both forms are returned.  The surfaces are
+  # hyperquadrics and reduce to hyperplanes exactly when the covariances
+  # are equal.
+  xs <- as.numeric(x)
+  m <- length(means)
+  if (m < 2L) stop("need at least two classes")
+  if (length(covs) != m) stop("give one covariance matrix per class")
+  n <- length(xs)
+  if (is.null(priors)) pr <- rep(1 / m, m) else {
+    pr <- as.numeric(priors)
+    if (length(pr) != m) stop("give one prior per class")
+    if (abs(sum(pr) - 1) > 1e-9) stop("the priors must sum to 1")
+  }
+  const <- 0.5 * n * log(2 * pi)
+  dshort <- numeric(m)
+  for (i in seq_len(m)) {
+    if (pr[i] <= 0) { dshort[i] <- -Inf; next }
+    S <- as.matrix(covs[[i]])
+    dt <- det(S)
+    if (dt <= 0) stop("covariance ", i, " is not positive definite")
+    d <- matrix(xs - as.numeric(means[[i]]), ncol = 1)
+    quad <- as.numeric(t(d) %*% solve(S) %*% d)
+    dshort[i] <- log(pr[i]) - 0.5 * log(dt) - 0.5 * quad
+  }
+  dfull <- dshort - const
+  use <- if (full) dfull else dshort
+  eq <- all(vapply(covs, function(S)
+    max(abs(as.matrix(S) - as.matrix(covs[[1]]))) < 1e-12, logical(1)))
+  list(d = use, d_full = dfull, d_dropped_constant = dshort,
+       assigned = which.max(use) - 1L, priors = pr,
+       constant_term = const, surfaces_are_hyperquadrics = TRUE,
+       linear_when_covariances_are_equal = eq,
+       log_form_avoids_underflow = TRUE,
+       method = "Rangayyan (2024) eqs. (10.71)-(10.73)")
+}
+
+Qda <- function(X, y, query, priors = NULL) {
+  # eq (10.73) with the mean and covariance estimated per class by
+  # eqs (10.68)-(10.69).  Each class keeps its OWN covariance, so the
+  # boundaries are quadrics; a single pooled covariance would make this
+  # LDA.  A class needs more samples than features or its covariance is
+  # singular -- QDA estimates p(p+1)/2 covariance parameters PER CLASS,
+  # so it is the first thing to break on small samples.
+  Xs <- as.matrix(X)
+  q <- as.numeric(query)
+  if (nrow(Xs) != length(y))
+    stop("X and y must have the same number of rows")
+  p <- length(q)
+  if (ncol(Xs) != p) stop("every row of X must match the query length")
+  g <- .morie_rg_groups(Xs, y)
+  m <- length(g$order)
+  if (m < 2L) stop("need at least two classes")
+  for (i in seq_len(m)) {
+    if (nrow(g$groups[[i]]) <= p)
+      stop("class ", g$order[i], " has ", nrow(g$groups[[i]]),
+           " samples for ", p, " features; QDA needs more samples than ",
+           "features per class or the covariance is singular")
+  }
+  pr <- if (is.null(priors))
+    vapply(g$groups, function(r) nrow(r) / nrow(Xs), numeric(1))
+    else as.numeric(priors)
+  means <- lapply(g$groups, colMeans)
+  covs <- lapply(g$groups, function(r) stats::cov(r))
+  r <- BayesNorm(q, means, covs, priors = pr)
+  list(g = r$d, assigned = g$order[r$assigned + 1L],
+       assigned_index = r$assigned, classes = g$order, means = means,
+       covariances = covs, priors = pr,
+       reduces_to_lda_when_covariances_are_equal =
+         r$linear_when_covariances_are_equal,
+       # NOTE the parentheses: in R %/% binds TIGHTER than *, so
+       # p * (p + 1) %/% 2 would compute p * ((p + 1) %/% 2)
+       parameters_per_class = (p * (p + 1)) %/% 2,
+       method = paste("Rangayyan (2024) eqs. (10.68)-(10.73), per-class",
+                      "covariances"))
+}
+
+LogReg <- function(X, y, maxiter = 100, tol = 1e-8, ridge = 1e-8) {
+  # Section 10.7, fitted by Newton-Raphson on the log-likelihood.  Unlike
+  # the Bayes classifier it models the POSTERIOR directly and assumes
+  # nothing about the shape of p(x|C), which is why it survives features
+  # that are plainly not Gaussian.  Perfectly separable classes have no
+  # finite maximum, so a small ridge is added and `separable` is reported
+  # -- without it the coefficients merely record where the optimizer
+  # stopped.
+  Xs <- as.matrix(X)
+  ys <- as.numeric(y)
+  if (nrow(Xs) != length(ys))
+    stop("X and y must have the same number of rows")
+  if (any(!ys %in% c(0, 1)))
+    stop("logistic regression needs 0/1 labels")
+  if (length(unique(ys)) < 2L) stop("both classes must be present")
+  n <- nrow(Xs)
+  A <- cbind(1, Xs)
+  p <- ncol(A)
+  w <- numeric(p)
+  lam <- as.numeric(ridge)
+  it <- 0L
+  for (it in seq_len(as.integer(maxiter))) {
+    eta <- pmin(500, pmax(-500, as.numeric(A %*% w)))
+    mu <- 1 / (1 + exp(-eta))
+    g <- as.numeric(t(A) %*% (ys - mu)) - lam * w
+    H <- t(A) %*% (A * (mu * (1 - mu))) + diag(lam, p)
+    step <- tryCatch(as.numeric(solve(H, g)), error = function(e) NULL)
+    if (is.null(step)) break
+    w <- w + step
+    if (max(abs(step)) < tol) break
+  }
+  sep <- it >= as.integer(maxiter) && sqrt(sum(w * w)) > 50
+  eta <- pmin(500, pmax(-500, as.numeric(A %*% w)))
+  mu <- 1 / (1 + exp(-eta))
+  ll <- sum(ys * log(pmax(mu, 1e-300)) + (1 - ys) * log(pmax(1 - mu, 1e-300)))
+  pred <- as.numeric(mu >= 0.5)
+  list(intercept = w[1], coefficients = w[-1], w = w, fitted = mu,
+       predicted = pred, loglik = ll, iterations = it,
+       converged = it < as.integer(maxiter), separable = sep,
+       ridge = lam, training_accuracy = mean(pred == ys), n = n,
+       models_the_posterior_directly = TRUE,
+       no_gaussian_assumption = TRUE,
+       method = "Rangayyan (2024) Section 10.7 (logistic regression)")
+}
+
+KMeans <- function(X, k, maxiter = 100, tol = 1e-10, init = NULL) {
+  # Section 10.5.1.  WCSS falls at every step, so the iteration always
+  # terminates -- at a LOCAL minimum that depends on where the centroids
+  # started.  The method is unsupervised: it finds groups, and whether
+  # those groups are the diagnostic classes is a question it cannot
+  # answer.  Starting centroids are the first k distinct patterns, so the
+  # result is reproducible; random starts would return different
+  # clusterings from the same call.
+  Xs <- as.matrix(X)
+  n <- nrow(Xs)
+  kk <- as.integer(k)
+  if (kk < 1L) stop("k must be at least 1")
+  if (kk > n) stop("k exceeds the number of patterns")
+  p <- ncol(Xs)
+  if (is.null(init)) {
+    uniq <- unique(Xs)
+    if (nrow(uniq) < kk) stop("fewer than k distinct patterns")
+    cent <- uniq[seq_len(kk), , drop = FALSE]
+  } else {
+    cent <- as.matrix(init)
+    if (nrow(cent) != kk || ncol(cent) != p) stop("init must be k x p")
+  }
+  lab <- integer(n); prev <- NA_real_; it <- 0L
+  for (it in seq_len(as.integer(maxiter))) {
+    for (i in seq_len(n)) {
+      d <- rowSums(sweep(cent, 2, Xs[i, ], "-")^2)
+      lab[i] <- which.min(d)
+    }
+    for (c in seq_len(kk)) {
+      rows <- Xs[lab == c, , drop = FALSE]
+      if (!nrow(rows)) {
+        dd <- vapply(seq_len(n), function(i)
+          sum((Xs[i, ] - cent[lab[i], ])^2), numeric(1))
+        far <- which.max(dd)
+        cent[c, ] <- Xs[far, ]
+        lab[far] <- c
+        rows <- Xs[far, , drop = FALSE]
+      }
+      cent[c, ] <- colMeans(rows)
+    }
+    wcss <- sum(vapply(seq_len(n), function(i)
+      sum((Xs[i, ] - cent[lab[i], ])^2), numeric(1)))
+    if (!is.na(prev) && abs(prev - wcss) <= tol) { prev <- wcss; break }
+    prev <- wcss
+  }
+  list(labels = lab - 1L, centroids = cent, wcss = prev, k = kk,
+       sizes = vapply(seq_len(kk), function(c) sum(lab == c), numeric(1)),
+       iterations = it, converged = it < as.integer(maxiter),
+       local_minimum_only = TRUE,
+       depends_on_the_starting_centroids = TRUE,
+       unsupervised_groups_need_not_be_the_classes = TRUE,
+       method = "Rangayyan (2024) Section 10.5.1 (cluster seeking)")
+}
+
+Elbow <- function(X, kmax = 8, kmin = 1) {
+  # WCSS falls monotonically with k and reaches zero at k = n, so it
+  # cannot be minimized -- the choice is the KNEE.  Located here as the
+  # point of maximum distance from the chord joining the curve's ends,
+  # which is a definite rule rather than an eye judgement.  Still a
+  # heuristic: on data with no cluster structure the curve is smooth and
+  # the knee is wherever the arithmetic puts it.
+  Xs <- as.matrix(X)
+  n <- nrow(Xs)
+  lo <- as.integer(kmin); hi <- as.integer(kmax)
+  if (lo < 1L) stop("kmin must be at least 1")
+  if (hi > n) stop("kmax exceeds the number of patterns")
+  if (hi <= lo) stop("kmax must exceed kmin")
+  ks <- lo:hi
+  wcss <- vapply(ks, function(k) KMeans(Xs, k)$wcss, numeric(1))
+  x1 <- ks[1]; y1 <- wcss[1]
+  x2 <- ks[length(ks)]; y2 <- wcss[length(wcss)]
+  den <- sqrt((x2 - x1)^2 + (y2 - y1)^2)
+  knee <- if (den <= 0) ks[1] else
+    ks[which.max(abs((y2 - y1) * ks - (x2 - x1) * wcss +
+                     x2 * y1 - y2 * x1) / den)]
+  list(k = ks, wcss = wcss, knee = knee,
+       monotonic = all(diff(wcss) <= 1e-9),
+       wcss_cannot_be_minimized = TRUE, heuristic_only = TRUE,
+       method = paste("elbow criterion on the k-means WCSS;",
+                      "Rangayyan (2024) Section 10.5.1"))
+}
+
+HClust <- function(X, linkage = "single", k = NULL) {
+  # Section 10.5.1.  Single linkage CHAINS -- it will string distant
+  # clusters together through a bridge of intermediate points -- while
+  # complete linkage is compact and splits elongated clusters.  The
+  # choice is not cosmetic: on the same data they routinely give
+  # different partitions, which is why the full merge history is
+  # returned rather than only a labelling.
+  Xs <- as.matrix(X)
+  n <- nrow(Xs)
+  if (n < 2L) stop("need at least two patterns")
+  if (!linkage %in% c("single", "complete", "average"))
+    stop("linkage must be 'single', 'complete' or 'average'")
+  D <- as.matrix(stats::dist(Xs))
+  groups <- lapply(seq_len(n), function(i) i)
+  names(groups) <- as.character(seq_len(n))
+  history <- list()
+  while (length(groups) > 1L) {
+    keys <- names(groups)
+    best <- NULL
+    for (a in seq_along(keys)) for (b in seq_along(keys)) {
+      if (b <= a) next
+      ga <- groups[[keys[a]]]; gb <- groups[[keys[b]]]
+      ds <- as.numeric(D[ga, gb])
+      dd <- switch(linkage, single = min(ds), complete = max(ds),
+                   average = mean(ds))
+      if (is.null(best) || dd < best$d)
+        best <- list(d = dd, a = keys[a], b = keys[b])
+    }
+    history[[length(history) + 1L]] <- list(
+      merged = c(as.integer(best$a) - 1L, as.integer(best$b) - 1L),
+      distance = best$d,
+      size = length(groups[[best$a]]) + length(groups[[best$b]]),
+      n_clusters_after = length(groups) - 1L)
+    groups[[best$a]] <- c(groups[[best$a]], groups[[best$b]])
+    groups[[best$b]] <- NULL
+  }
+  labels <- NULL
+  if (!is.null(k)) {
+    kk <- as.integer(k)
+    if (kk < 1L || kk > n) stop("k must lie in 1..n")
+    g <- lapply(seq_len(n), function(i) i)
+    names(g) <- as.character(seq_len(n))
+    for (step in history) {
+      if (length(g) == kk) break
+      ka <- as.character(step$merged[1] + 1L)
+      kb <- as.character(step$merged[2] + 1L)
+      g[[ka]] <- c(g[[ka]], g[[kb]])
+      g[[kb]] <- NULL
+    }
+    labels <- integer(n)
+    keys <- names(g)[order(as.integer(names(g)))]
+    for (c in seq_along(keys)) labels[g[[keys[c]]]] <- c - 1L
+  }
+  md <- vapply(history, function(h) h$distance, numeric(1))
+  list(history = history, labels = labels, linkage = linkage, n = n,
+       k = k, merge_distances = md,
+       monotonic_merges = all(diff(md) >= -1e-12),
+       single_linkage_chains = linkage == "single",
+       linkage_changes_the_partition = TRUE,
+       method = "Rangayyan (2024) Section 10.5.1 (cluster seeking)")
+}
+
+KFoldCv <- function(X, y, k = 5, classifier = NULL, stratified = TRUE) {
+  # Section 10.10.3.  The book's point is that the training and test
+  # steps must use SEPARATE data: an error rate measured on the samples
+  # that trained the classifier is optimistic, and with enough free
+  # parameters it reaches zero while the classifier generalizes not at
+  # all.  Folds are stratified by default; unstratified folds on
+  # unbalanced data can leave a class absent from a training fold, which
+  # measures luck rather than generalization.
+  Xs <- as.matrix(X)
+  n <- nrow(Xs)
+  if (n != length(y)) stop("X and y must have the same number of rows")
+  kk <- as.integer(k)
+  if (kk < 2L || kk > n) stop("k must lie in 2..n")
+  if (is.null(classifier))
+    classifier <- function(Xt, yt, q) Knn(Xt, yt, q, k = 1)$assigned
+  folds <- vector("list", kk)
+  for (i in seq_len(kk)) folds[[i]] <- integer(0)
+  if (stratified) {
+    c <- 0L
+    for (lab in unique(y)) {
+      for (i in which(y == lab)) {
+        folds[[c %% kk + 1L]] <- c(folds[[c %% kk + 1L]], i)
+        c <- c + 1L
+      }
+    }
+  } else {
+    for (f in seq_len(kk))
+      folds[[f]] <- seq_len(n)[seq_len(n) %% kk == (f - 1L)]
+  }
+  errors <- 0L; per_fold <- list()
+  for (f in seq_len(kk)) {
+    test <- folds[[f]]
+    if (!length(test)) next
+    tr <- setdiff(seq_len(n), test)
+    if (length(unique(y[tr])) < 2L)
+      stop("fold ", f, " leaves fewer than two classes in the training ",
+           "set; use stratified folds or a smaller k")
+    e <- sum(vapply(test, function(i)
+      classifier(Xs[tr, , drop = FALSE], y[tr], Xs[i, ]) != y[i],
+      logical(1)))
+    errors <- errors + e
+    per_fold[[length(per_fold) + 1L]] <- list(
+      fold = f - 1L, n = length(test), errors = e,
+      error_rate = e / length(test))
+  }
+  list(error_rate = errors / n, accuracy = 1 - errors / n,
+       errors = errors, n = n, k = kk, per_fold = per_fold,
+       stratified = isTRUE(stratified),
+       train_and_test_must_be_separate = TRUE,
+       method = "Rangayyan (2024) Section 10.10.3 (training and test steps)")
+}
+
+LooCv <- function(X, y, classifier = NULL) {
+  # K-fold with K = N.  It uses the most training data of any split, so
+  # it is nearly unbiased, and it is deterministic -- there is only one
+  # way to leave one out, so unlike 5-fold it gives the same answer every
+  # time.  The cost is N fits and a high variance: the training sets
+  # differ by a single sample, so the errors are heavily correlated.
+  Xs <- as.matrix(X)
+  n <- nrow(Xs)
+  if (n != length(y)) stop("X and y must have the same number of rows")
+  if (n < 3L) stop("need at least three samples")
+  if (is.null(classifier))
+    classifier <- function(Xt, yt, q) Knn(Xt, yt, q, k = 1)$assigned
+  wrong <- integer(0)
+  for (i in seq_len(n)) {
+    tr <- setdiff(seq_len(n), i)
+    if (length(unique(y[tr])) < 2L)
+      stop("removing sample ", i, " leaves one class; the classifier ",
+           "cannot be trained")
+    if (classifier(Xs[tr, , drop = FALSE], y[tr], Xs[i, ]) != y[i])
+      wrong <- c(wrong, i)
+  }
+  e <- length(wrong)
+  list(error_rate = e / n, accuracy = 1 - e / n, errors = e,
+       misclassified = wrong - 1L, n = n, n_fits = n,
+       deterministic = TRUE, nearly_unbiased = TRUE,
+       high_variance = TRUE,
+       method = "Rangayyan (2024) Section 10.10.3 (leave-one-out)")
+}
+
+.morie_rg_smo <- function(K, ys, Cv, maxiter, tol) {
+  # shared SMO-style coordinate ascent on pairs, which respects the
+  # equality constraint sum a_i y_i = 0 that single-coordinate updates
+  # cannot
+  n <- length(ys)
+  a <- numeric(n); b <- 0; it <- 0L
+  for (it in seq_len(as.integer(maxiter))) {
+    changed <- 0L
+    for (i in seq_len(n)) {
+      fi <- sum(a * ys * K[, i]) + b
+      Ei <- fi - ys[i]
+      if ((ys[i] * Ei < -tol && a[i] < Cv) ||
+          (ys[i] * Ei > tol && a[i] > 0)) {
+        j <- (i + it) %% n + 1L
+        if (j == i) next
+        Ej <- sum(a * ys * K[, j]) + b - ys[j]
+        ai <- a[i]; aj <- a[j]
+        if (ys[i] != ys[j]) {
+          L <- max(0, aj - ai); H <- min(Cv, Cv + aj - ai)
+        } else {
+          L <- max(0, ai + aj - Cv); H <- min(Cv, ai + aj)
+        }
+        if (H - L < 1e-12) next
+        eta <- 2 * K[i, j] - K[i, i] - K[j, j]
+        if (eta >= -1e-12) next
+        anj <- min(H, max(L, aj - ys[j] * (Ei - Ej) / eta))
+        if (abs(anj - aj) < 1e-12) next
+        ani <- ai + ys[i] * ys[j] * (aj - anj)
+        b1 <- b - Ei - ys[i] * (ani - ai) * K[i, i] -
+          ys[j] * (anj - aj) * K[i, j]
+        b2 <- b - Ej - ys[i] * (ani - ai) * K[i, j] -
+          ys[j] * (anj - aj) * K[j, j]
+        b <- if (ani > 0 && ani < Cv) b1 else
+          if (anj > 0 && anj < Cv) b2 else 0.5 * (b1 + b2)
+        a[i] <- ani; a[j] <- anj
+        changed <- changed + 1L
+      }
+    }
+    if (changed == 0L) break
+  }
+  list(a = a, b = b, it = it)
+}
+
+Svm <- function(X, y, C = 1, maxiter = 2000, tol = 1e-6) {
+  # Section 10.4.5.  Only the patterns with a_i > 0 -- the SUPPORT
+  # VECTORS -- enter the solution, so the boundary is set by the samples
+  # nearest it and is untouched by the bulk of the data.  That is the
+  # strength on small samples and the weakness against one mislabelled
+  # point near the boundary, which C controls: small C tolerates
+  # violations, large C insists on separating and contorts around an
+  # outlier.
+  Xs <- as.matrix(X)
+  ys <- as.numeric(y)
+  n <- nrow(Xs)
+  if (n != length(ys)) stop("X and y must have the same number of rows")
+  if (length(setdiff(unique(ys), c(-1, 1))))
+    stop("the SVM needs labels -1 and +1")
+  if (length(unique(ys)) < 2L) stop("both classes must be present")
+  Cv <- as.numeric(C)
+  if (Cv <= 0) stop("C must be positive")
+  K <- Xs %*% t(Xs)
+  r <- .morie_rg_smo(K, ys, Cv, maxiter, tol)
+  w <- as.numeric(t(Xs) %*% (r$a * ys))
+  sv <- which(r$a > 1e-8)
+  nw <- sqrt(sum(w * w))
+  pred <- ifelse(as.numeric(Xs %*% w) + r$b >= 0, 1, -1)
+  list(w = w, b = r$b, alpha = r$a, support_vectors = sv - 1L,
+       n_support = length(sv), margin = if (nw > 0) 2 / nw else Inf,
+       C = Cv, iterations = r$it,
+       converged = r$it < as.integer(maxiter),
+       training_accuracy = mean(pred == ys),
+       boundary_set_by_the_support_vectors_only = TRUE,
+       large_c_contorts_around_outliers = TRUE,
+       method = "Rangayyan (2024) Section 10.4.5 (support vector machine)")
+}
+
+SvmKern <- function(X, y, query = NULL, kernel = "rbf", gamma = NULL,
+                    degree = 3, coef0 = 0, C = 1, maxiter = 2000,
+                    tol = 1e-6) {
+  # Section 10.4.5.  The dual depends on the data only through inner
+  # products, so replacing that product with a kernel fits a linear
+  # boundary in a space the data is never mapped into.  The boundary in
+  # the ORIGINAL space is curved and there is no weight vector to report:
+  # the classifier IS the support vectors and their coefficients, which
+  # is why kernel SVMs grow with the training set where the linear one
+  # does not.  The sigmoid kernel is not positive definite for all
+  # parameters, so the dual is not guaranteed concave.
+  Xs <- as.matrix(X)
+  ys <- as.numeric(y)
+  n <- nrow(Xs)
+  if (n != length(ys)) stop("X and y must have the same number of rows")
+  if (length(setdiff(unique(ys), c(-1, 1))))
+    stop("the SVM needs labels -1 and +1")
+  p <- ncol(Xs)
+  g <- if (is.null(gamma)) 1 / p else as.numeric(gamma)
+  if (!kernel %in% c("rbf", "poly", "linear", "sigmoid"))
+    stop("kernel must be 'rbf', 'poly', 'linear' or 'sigmoid'")
+  kf <- function(u, v) {
+    dot <- sum(u * v)
+    switch(kernel,
+           linear = dot,
+           poly = (dot + as.numeric(coef0))^as.integer(degree),
+           sigmoid = tanh(g * dot + as.numeric(coef0)),
+           rbf = exp(-g * sum((u - v)^2)))
+  }
+  K <- matrix(0, n, n)
+  for (i in seq_len(n)) for (j in seq_len(n)) K[i, j] <- kf(Xs[i, ], Xs[j, ])
+  Cv <- as.numeric(C)
+  r <- .morie_rg_smo(K, ys, Cv, maxiter, tol)
+  sv <- which(r$a > 1e-8)
+  pred <- ifelse(vapply(seq_len(n), function(i)
+    sum(r$a * ys * K[, i]) + r$b, numeric(1)) >= 0, 1, -1)
+  out <- list(alpha = r$a, b = r$b, support_vectors = sv - 1L,
+              n_support = length(sv), kernel = kernel, gamma = g, C = Cv,
+              iterations = r$it,
+              converged = r$it < as.integer(maxiter),
+              training_accuracy = mean(pred == ys),
+              no_weight_vector_in_the_original_space = kernel != "linear",
+              model_grows_with_the_training_set = TRUE,
+              sigmoid_kernel_is_not_always_positive_definite =
+                kernel == "sigmoid",
+              method = "Rangayyan (2024) Section 10.4.5 (kernel SVM)")
+  if (!is.null(query)) {
+    q <- as.numeric(query)
+    if (length(q) != p) stop("the query must match the feature length")
+    s <- sum(r$a * ys * vapply(seq_len(n), function(t) kf(Xs[t, ], q),
+                               numeric(1))) + r$b
+    out$decision <- s
+    out$assigned <- if (s >= 0) 1 else -1
+  }
+  out
+}
