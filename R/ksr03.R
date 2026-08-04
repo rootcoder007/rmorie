@@ -33,3 +33,17 @@ Glivenko <- function(x, F) {
              dkw_bound = min(1, 2 * exp(-2 * n * D^2)), n = as.numeric(n),
              method = "Glivenko-Cantelli supremum with the DKW-Massart bound")
 }
+
+# NAMESPACE exported both of these names, but only the short function above
+# was ever defined, so loading the namespace could not resolve them. Same
+# alias pattern as ksr02.R.
+
+#' @rdname Glivenko
+#' @keywords internal
+#' @export
+morie_ksr03_kosorok_glivenko_cantelli <- Glivenko
+
+#' @rdname Glivenko
+#' @keywords internal
+#' @export
+morie_kosorok_glivenko_cantelli <- Glivenko

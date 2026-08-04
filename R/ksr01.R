@@ -31,3 +31,17 @@ Empproc <- function(x, t, F) {
              n = n, k = k,
              method = "Empirical process, Kosorok Section 2.1")
 }
+
+# NAMESPACE exported both of these names, but only the short function above
+# was ever defined, so loading the namespace could not resolve them. Same
+# alias pattern as ksr02.R.
+
+#' @rdname Empproc
+#' @keywords internal
+#' @export
+morie_ksr01_kosorok_empirical_process <- Empproc
+
+#' @rdname Empproc
+#' @keywords internal
+#' @export
+morie_kosorok_empirical_process <- Empproc

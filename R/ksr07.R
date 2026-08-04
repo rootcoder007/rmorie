@@ -43,3 +43,17 @@ Bootemp <- function(x, B = 200, seed = 1) {
              B = as.numeric(B), n = as.numeric(n),
              method = "Nonparametric bootstrap, Kosorok Section 2.2.3")
 }
+
+# NAMESPACE exported both of these names, but only the short function above
+# was ever defined, so loading the namespace could not resolve them. Same
+# alias pattern as ksr02.R.
+
+#' @rdname Bootemp
+#' @keywords internal
+#' @export
+morie_ksr07_kosorok_bootstrap_empirical <- Bootemp
+
+#' @rdname Bootemp
+#' @keywords internal
+#' @export
+morie_kosorok_bootstrap_empirical <- Bootemp
