@@ -28,9 +28,14 @@ Sobolidx <- function(model, input_dist = NULL, N = 64, d = NULL) {
   dd <- if (!is.null(d)) as.integer(d) else if (!is.null(input_dist)) length(input_dist) else 2L
   n <- as.integer(N)
   A <- matrix(0, n, dd); B <- matrix(0, n, dd)
+  # A and B must be INDEPENDENT samples.  Continuing one low-discrepancy
+  # sequence gives points that are not: with base 2 and n a power of two,
+  # vdc(j + n) and vdc(j) share their leading bits, the estimator's cross
+  # terms stop cancelling, and S_i comes out badly wrong.  A and B
+  # therefore use disjoint prime bases.
   for (j in seq_len(n)) for (a in seq_len(dd)) {
     A[j, a] <- .s03vdc(j - 1L, primes[a])
-    B[j, a] <- .s03vdc(j - 1L + n, primes[a])
+    B[j, a] <- .s03vdc(j - 1L, primes[dd + a])
   }
   tf <- function(row) {
     if (is.null(input_dist)) return(as.numeric(row))
