@@ -31,16 +31,33 @@ NULL
 }
 
 .t1_lstsq <- function(X, y) {
+  # Minimum-norm least squares via the SVD, matching numpy.linalg.lstsq
+  # and so the Python arm's _lstsq.
+  #
+  # This used qr.coef with the NA coefficients of aliased columns mapped
+  # to 0 -- a basic solution, not the minimum-norm one. Both minimise the
+  # residual (identical 0.6892 on a design whose third column is the sum
+  # of the first two), but they are different points of the solution set,
+  # so the arms disagreed outright. Worse, the basic solution depends on
+  # column order: permuting that design to (3, 1, 2) moved the answer
+  # from (0.55, 1.35, 0) to (1.35, -0.80, 0). The minimum-norm solution
+  # is unique and permutation-invariant.
   X <- as.matrix(X); y <- as.numeric(y)
-  qrX <- qr(X)
-  beta <- as.numeric(qr.coef(qrX, y))
-  beta[is.na(beta)] <- 0
+  n <- nrow(X); k <- ncol(X)
+  sv <- svd(X)
+  eps <- .Machine$double.eps
+  cut <- if (length(sv$d)) max(sv$d) * eps * max(n, k) else 0
+  keep <- sv$d > cut
+  dinv <- ifelse(keep, 1 / sv$d, 0)
+  beta <- as.numeric(sv$v %*% (dinv * crossprod(sv$u, y)))
   fitted <- as.numeric(X %*% beta)
   resid <- y - fitted
-  R <- qr.R(qrX)
-  Rinv <- tryCatch(solve(R), error = function(e) MASS_ginv(R))
-  list(beta = beta, fitted = fitted, resid = resid,
-       xtxinv = Rinv %*% t(Rinv))
+  # Moore-Penrose (X'X)+ = V diag(1/d^2) V'. Both this and beta are
+  # invariant to the sign convention of the singular vectors, so LAPACK's
+  # choice here and ours in Python cannot make the arms differ.
+  d2inv <- ifelse(keep, 1 / sv$d^2, 0)
+  xtxinv <- sv$v %*% (d2inv * t(sv$v))
+  list(beta = beta, fitted = fitted, resid = resid, xtxinv = xtxinv)
 }
 
 MASS_ginv <- function(M) {
