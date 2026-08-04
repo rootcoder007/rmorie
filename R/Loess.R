@@ -7,7 +7,8 @@
 #' residual over six times the median absolute residual.  Source consulted:
 #' Cleveland (1979), JASA 74(368), 829-836.  Follows the lowest/clowess step
 #' sequence including the h9/h1 and c9/c1 guards, so it reproduces
-#' stats::lowess exactly at delta = 0.
+#' stats::lowess exactly at delta = 0.  Named Loess, not loess, so that
+#' library(morie) cannot mask stats::loess -- the signatures differ.
 #'
 #' @param x,y predictor and response.
 #' @param span fraction of points per neighbourhood.
@@ -16,9 +17,9 @@
 #'   iterations, n, method.
 #' @keywords internal
 #' @examples
-#' loess(1:10, c(1.2, 2.3, 2.9, 4.1, 5.2, 5.8, 7.3, 8.1, 8.9, 10.2), 0.5)$fitted
+#' Loess(1:10, c(1.2, 2.3, 2.9, 4.1, 5.2, 5.8, 7.3, 8.1, 8.9, 10.2), 0.5)$fitted
 #' @export
-loess <- function(x, y, span = 2 / 3, iterations = 3L) {
+Loess <- function(x, y, span = 2 / 3, iterations = 3L) {
   xa <- as.numeric(x); ya <- as.numeric(y)
   ordr <- base::order(xa)
   xv <- xa[ordr]; yv <- ya[ordr]
@@ -85,10 +86,10 @@ loess <- function(x, y, span = 2 / 3, iterations = 3L) {
 }
 
 # CANONICAL TEST
-# r <- loess(1:10, c(1.2,2.3,2.9,4.1,5.2,5.8,7.3,8.1,8.9,10.2), 0.5, 3L)
+# r <- Loess(1:10, c(1.2,2.3,2.9,4.1,5.2,5.8,7.3,8.1,8.9,10.2), 0.5, 3L)
 # stopifnot(abs(r$fitted[1] - 1.25178975416042) < 1e-10)
 
-#' @rdname loess
+#' @rdname Loess
 #' @keywords internal
 #' @export
-morie_loess <- loess
+morie_loess <- Loess

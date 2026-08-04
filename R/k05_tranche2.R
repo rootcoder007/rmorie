@@ -209,45 +209,13 @@ morie_lord_chisq <- function(b_R, b_F, V_R, V_F = NULL) {
        method = "Lord (1980) chi-square test of item parameter equality")
 }
 
-#' Cochran's Q heterogeneity statistic
-#'
-#' Q = sum w_i (y_i - theta_FE)^2 with w_i = 1/v_i, chi-square on k-1
-#' df under homogeneity. Because E[Q] = k-1 when the studies share one
-#' true effect, the excess Q-(k-1) drives everything else reported:
-#' DerSimonian-Laird tau^2 = max(0, (Q-df)/C) with
-#' C = sum w - sum w^2 / sum w, Higgins I^2 = max(0, (Q-df)/Q), and
-#' H^2 = Q/df. Q has poor power with few studies and is trigger-happy
-#' with many, so a non-significant Q is weak evidence FOR homogeneity;
-#' I^2 is reported alongside because it does not grow with k.
-#'
-#' @param yi observed effect sizes.
-#' @param vi their sampling variances (not standard errors).
-#' @return list: statistic (Q), pvalue, df, k, theta_fe, se_fe, tau2,
-#'   i2, h2, weights, c_constant, method.
-#' @references Cochran, W. G. (1954), \emph{Biometrics} 10(1), 101-129;
-#'   DerSimonian & Laird (1986), \emph{Control. Clin. Trials} 7, 177-188;
-#'   Higgins & Thompson (2002), \emph{Stat. Med.} 21, 1539-1558.
-#' @examples
-#' morie_cochran_q(c(0.8, 0.2), c(0.04, 0.06))$statistic
-#' @export
-morie_cochran_q <- function(yi, vi) {
-  y <- as.numeric(yi); v <- as.numeric(vi)
-  if (length(y) != length(v)) stop("yi and vi must have the same length.", call. = FALSE)
-  k <- length(y)
-  if (k < 2L) stop("need at least 2 studies.", call. = FALSE)
-  if (any(v <= 0)) stop("sampling variances must be strictly positive.", call. = FALSE)
-  w <- 1 / v; sw <- sum(w)
-  theta <- sum(w * y) / sw
-  q <- sum(w * (y - theta)^2)
-  df <- k - 1
-  cc <- sw - sum(w^2) / sw
-  tau2 <- if (cc > 0) max(0, (q - df) / cc) else 0
-  i2 <- if (q > 0) max(0, (q - df) / q) else 0
-  list(statistic = q, pvalue = stats::pchisq(q, df, lower.tail = FALSE),
-       df = df, k = k, theta_fe = theta, se_fe = sqrt(1 / sw),
-       tau2 = tau2, i2 = i2, h2 = q / df, weights = w, c_constant = cc,
-       method = "Cochran (1954) Q; DerSimonian-Laird tau^2; Higgins I^2")
-}
+# Cochran's Q: the R arm already lives in aaa_macn.R as
+# morie_ma_cochran_q, written by another agent against this same Python
+# module while this slice was in flight. Its arithmetic, field names and
+# method string are identical to what this file would have defined, so
+# rather than ship a second copy that can silently drift, morie_cochran_q
+# is an alias of it. See aaa_macn.R for the references and the derivation.
+morie_cochran_q <- function(yi, vi) morie_ma_cochran_q(yi, vi)
 
 #' Tarone-Ware and the weighted log-rank family
 #'

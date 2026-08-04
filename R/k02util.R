@@ -92,3 +92,30 @@ k02gh <- function(n) {
   }
   list(x = x, w = w)
 }
+
+k02mod <- function(A, comm) {
+  a <- as.matrix(A); n <- nrow(a)
+  k <- rowSums(a); m2 <- sum(a)
+  if (m2 <= 0) return(0)
+  q <- 0
+  for (i in seq_len(n)) for (j in seq_len(n)) {
+    if (comm[i] == comm[j]) q <- q + (a[i, j] - k[i] * k[j] / m2)
+  }
+  q / m2
+}
+
+k02bfs <- function(A) {
+  a <- as.matrix(A); n <- nrow(a)
+  nbr <- lapply(seq_len(n), function(i) which(a[i, ] != 0 & seq_len(n) != i))
+  out <- matrix(-1L, n, n)
+  for (s in seq_len(n)) {
+    dist <- rep(-1L, n); dist[s] <- 0L
+    queue <- c(s); head <- 1L
+    while (head <= length(queue)) {
+      u <- queue[head]; head <- head + 1L
+      for (v in nbr[[u]]) if (dist[v] < 0L) { dist[v] <- dist[u] + 1L; queue <- c(queue, v) }
+    }
+    out[s, ] <- dist
+  }
+  out
+}
