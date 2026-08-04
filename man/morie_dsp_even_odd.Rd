@@ -20,7 +20,7 @@ components about the centre: \code{x_even = (x + rev(x))/2},
 \examples{
 x <- c(1, 2, 3, 4, 5)
 d <- morie_dsp_even_odd(x)
-d$even + d$odd  # reconstructs x
+d$even + d$odd # reconstructs x
 }
 \references{
 Rangayyan & Krishnan (2015), Ch. 3.

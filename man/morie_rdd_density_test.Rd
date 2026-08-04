@@ -29,10 +29,10 @@ manipulation / discontinuity-in-density test of Cattaneo, Jansson
 }
 \examples{
 \donttest{
-  if (requireNamespace("rddensity", quietly = TRUE)) {
-    set.seed(1)
-    x <- c(rnorm(500, -0.2), rnorm(500, 0.2))
-    morie_rdd_density_test(x, cutoff = 0)
-  }
+if (requireNamespace("rddensity", quietly = TRUE)) {
+  set.seed(1)
+  x <- c(rnorm(500, -0.2), rnorm(500, 0.2))
+  morie_rdd_density_test(x, cutoff = 0)
+}
 }
 }

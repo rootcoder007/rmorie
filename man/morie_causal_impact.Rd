@@ -55,7 +55,8 @@ to the package.
 \examples{
 set.seed(1)
 x <- cumsum(rnorm(100))
-y <- 1.5 * x + rnorm(100); y[71:100] <- y[71:100] + 5
+y <- 1.5 * x + rnorm(100)
+y[71:100] <- y[71:100] + 5
 df <- data.frame(y = y, x = x)
 res <- try(morie_causal_impact(df, c(1, 70), c(71, 100)))
 if (!inherits(res, "try-error")) str(res, max.level = 1)

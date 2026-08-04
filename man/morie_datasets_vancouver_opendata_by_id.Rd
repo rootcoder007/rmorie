@@ -31,7 +31,8 @@ the unrestricted \verb{/exports/csv} endpoint instead.
 \examples{
 \donttest{
 df <- morie_datasets_vancouver_opendata_by_id("non-market-housing",
-                                                 limit = 50)
+  limit = 50
+)
 nrow(df)
 }
 }

@@ -40,7 +40,8 @@ divides by it. That asymmetry is why they take different
 bandwidths in practice. Mirrors \code{morie.fn.hrzfneps}.
 }
 \examples{
-n <- 60; tt <- 3
+n <- 60
+tt <- 3
 x <- array(rnorm(n * tt * 2), dim = c(n, tt, 2))
 y <- matrix(rnorm(n * tt), n, tt)
 morie_panel_densities(y, x, c(1, -0.5))$f_U_requires_division

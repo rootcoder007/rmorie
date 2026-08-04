@@ -33,7 +33,9 @@ variables.
 \examples{
 if (requireNamespace("ppcor", quietly = TRUE)) {
   set.seed(1)
-  x <- rnorm(40); z <- rnorm(40); y <- x + z + rnorm(40)
+  x <- rnorm(40)
+  z <- rnorm(40)
+  y <- x + z + rnorm(40)
   morie_ppcor_partial(x, y, z)
 }
 }

@@ -66,6 +66,7 @@ assesses convergence with several checkers, and returns the posterior
 draws with diagnostics.
 }
 \examples{
-d <- data.frame(x = rnorm(50)); d$y <- 1 + 2 * d$x + rnorm(50)
+d <- data.frame(x = rnorm(50))
+d$y <- 1 + 2 * d$x + rnorm(50)
 fit <- morie_bayes_lm(y ~ x, d, chains = 2, iter = 500, warmup = 200)
 }

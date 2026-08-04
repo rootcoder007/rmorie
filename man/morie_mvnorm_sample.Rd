@@ -31,10 +31,10 @@ given mean vector and covariance matrix.
 }
 \examples{
 \donttest{
-  if (requireNamespace("mvtnorm", quietly = TRUE)) {
-    set.seed(1)
-    S <- matrix(c(1, 0.4, 0.4, 1), 2, 2)
-    morie_mvnorm_sample(100, mean = c(0, 0), sigma = S)
-  }
+if (requireNamespace("mvtnorm", quietly = TRUE)) {
+  set.seed(1)
+  S <- matrix(c(1, 0.4, 0.4, 1), 2, 2)
+  morie_mvnorm_sample(100, mean = c(0, 0), sigma = S)
+}
 }
 }

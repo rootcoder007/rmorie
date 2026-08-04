@@ -38,7 +38,8 @@ is risk.
 \examples{
 set.seed(3)
 X <- matrix(rnorm(200), ncol = 2)
-tt <- rexp(100); ct <- sample(0:2, 100, TRUE)
+tt <- rexp(100)
+ct <- sample(0:2, 100, TRUE)
 morie_cause_specific_hazard(tt, ct, X)$hazard_ratio
 }
 \references{

@@ -21,7 +21,8 @@ morie_fairness_predpol_score_disparity(score, group, reference = NULL)
 Descriptive score-by-group disparity
 }
 \examples{
-set.seed(7); n <- 80L
+set.seed(7)
+n <- 80L
 group <- rep(c("X", "Y"), each = n / 2L)
 score <- ifelse(group == "X", rnorm(n, 0, 1), rnorm(n, 2, 1))
 morie_fairness_predpol_score_disparity(score, group)

@@ -22,7 +22,8 @@ value and averages them. Out-of-bounds triggers are dropped.
 }
 \examples{
 set.seed(11L)
-fs <- 200L; t <- seq(0, (2000 - 1) / fs, length.out = 2000)
+fs <- 200L
+t <- seq(0, (2000 - 1) / fs, length.out = 2000)
 x <- sin(2 * pi * 5 * t)
 triggers <- seq(60L, length(x) - 100L, by = 100L)
 morie_dsp_synchronized_average(x, trigger_indices = triggers, window = 80L)

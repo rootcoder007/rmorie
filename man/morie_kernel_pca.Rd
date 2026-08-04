@@ -25,10 +25,10 @@ feature space induced by a reproducing-kernel.
 }
 \examples{
 \donttest{
-  if (requireNamespace("kernlab", quietly = TRUE)) {
-    set.seed(1)
-    x <- matrix(stats::rnorm(200), ncol = 4)
-    morie_kernel_pca(x, kernel = "rbfdot", features = 2)
-  }
+if (requireNamespace("kernlab", quietly = TRUE)) {
+  set.seed(1)
+  x <- matrix(stats::rnorm(200), ncol = 4)
+  morie_kernel_pca(x, kernel = "rbfdot", features = 2)
+}
 }
 }

@@ -35,15 +35,15 @@ universal kriging given a fitted variogram model.
 }
 \examples{
 \donttest{
-  if (requireNamespace("gstat", quietly = TRUE) &&
-      requireNamespace("sp", quietly = TRUE)) {
-    data(meuse, package = "sp")
-    data(meuse.grid, package = "sp")
-    sp::coordinates(meuse) <- ~ x + y
-    sp::coordinates(meuse.grid) <- ~ x + y
-    vg <- gstat::variogram(log(zinc) ~ 1, data = meuse)
-    mod <- gstat::fit.variogram(vg, gstat::vgm(1, "Sph", 900, 1))
-    morie_geostat_krige(log(zinc) ~ 1, meuse, meuse.grid, mod)
-  }
+if (requireNamespace("gstat", quietly = TRUE) &&
+  requireNamespace("sp", quietly = TRUE)) {
+  data(meuse, package = "sp")
+  data(meuse.grid, package = "sp")
+  sp::coordinates(meuse) <- ~ x + y
+  sp::coordinates(meuse.grid) <- ~ x + y
+  vg <- gstat::variogram(log(zinc) ~ 1, data = meuse)
+  mod <- gstat::fit.variogram(vg, gstat::vgm(1, "Sph", 900, 1))
+  morie_geostat_krige(log(zinc) ~ 1, meuse, meuse.grid, mod)
+}
 }
 }

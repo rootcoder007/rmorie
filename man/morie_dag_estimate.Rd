@@ -27,7 +27,8 @@ Estimate the identified effect from data
 }
 \examples{
 set.seed(1)
-z <- rnorm(400); x <- rbinom(400, 1, plogis(z))
+z <- rnorm(400)
+x <- rbinom(400, 1, plogis(z))
 y <- 0.8 * x + z + rnorm(400)
 df <- data.frame(z = z, x = x, y = y)
 g <- morie_dag(c("z -> x", "z -> y", "x -> y"), "x", "y")

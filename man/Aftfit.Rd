@@ -3,33 +3,30 @@
 \name{Aftfit}
 \alias{Aftfit}
 \alias{morie_survival_aft}
-\title{Accelerated failure time model}
+\title{Accelerated failure time regression}
 \usage{
 Aftfit(time, event, X, dist = "weibull", alpha = 0.05)
+
+morie_survival_aft(time, event, X, dist = "weibull", alpha = 0.05)
 }
 \arguments{
-\item{time}{Numeric vector of follow-up times.}
+\item{time}{observed follow-up times.}
 
-\item{event}{Numeric or logical vector; 1 (or \code{TRUE}) for an event, 0 for right censoring.}
+\item{event}{event indicator, 1 = event, 0 = censored.}
 
-\item{X}{Numeric matrix of covariates, one row per subject.}
+\item{X}{covariate matrix, one row per subject.}
 
-\item{dist}{Character; one of \code{"weibull"}, \code{"exponential"}, \code{"lognormal"}, \code{"loglogistic"}.}
+\item{dist}{distribution of the error term.}
 
-\item{alpha}{Numeric; one minus the confidence level. Defaults to \code{0.05}.}
+\item{alpha}{significance level for the intervals.}
 }
 \value{
-A list with \code{beta}, \code{se}, \code{time_ratio}, \code{scale}, \code{loglik}, \code{ph_equivalent} and, when that holds, \code{hazard_ratio}.
+list with the coefficients, standard errors, time ratios, the scale and the log-likelihood.
 }
 \description{
-Accelerated failure time model.
+log T = x'beta + sigma W.
+Coefficients act MULTIPLICATIVELY ON TIME rather than on the hazard, so exp(beta) is a time ratio and not a hazard ratio.
 }
-\details{
-Coefficients act MULTIPLICATIVELY ON TIME: \code{exp(beta)} is the factor by which a unit of the covariate stretches survival, so it points the opposite way from a hazard ratio. Only the Weibull and exponential are also proportional-hazards models, and only for those is \code{hazard_ratio} returned.
-
-\code{morie_survival_aft} is the pre-policy spelling and is the same
-function.
-}
-\examples{
-Aftfit(c(1, 2, 3, 4, 5), c(1, 1, 0, 1, 1), matrix(c(0, 1, 0, 1, 0)))
+\references{
+Kalbfleisch, J. D. and Prentice, R. L. (2002). The Statistical Analysis of Failure Time Data, 2nd ed., Wiley, Chapter 3.
 }

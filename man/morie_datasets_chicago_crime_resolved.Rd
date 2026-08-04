@@ -87,7 +87,8 @@ crime fetch, matching the dual-API design from 3VV+.
 df <- morie_datasets_chicago_crime_resolved(
   offline = TRUE,
   max_features = 5L,
-  resolvers = c("ward", "iucr"))
+  resolvers = c("ward", "iucr")
+)
 names(df)
 \dontshow{\}) # examplesIf}
 }

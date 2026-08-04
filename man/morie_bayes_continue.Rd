@@ -20,7 +20,8 @@ A new \code{morie_bayes_fit} started from \code{fit}'s last draws.
 Continue an MCMC run from its final state
 }
 \examples{
-d <- data.frame(x = rnorm(40)); d$y <- d$x + rnorm(40)
+d <- data.frame(x = rnorm(40))
+d$y <- d$x + rnorm(40)
 f1 <- morie_bayes_lm(y ~ x, d, chains = 2, iter = 200, warmup = 100)
 f2 <- morie_bayes_continue(f1, iter = 200)
 }

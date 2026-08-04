@@ -17,7 +17,8 @@ Print method for \code{morie_mv_hawkes} objects
 \examples{
 \donttest{
 set.seed(2)
-tt <- sort(runif(150, 0, 100)); mk <- sample(1:2, 150, TRUE)
+tt <- sort(runif(150, 0, 100))
+mk <- sample(1:2, 150, TRUE)
 obj <- morie_crim_hawkes_multivariate(tt, mk, beta = 1)
 print(obj)
 }

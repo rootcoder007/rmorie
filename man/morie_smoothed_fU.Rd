@@ -38,7 +38,8 @@ mandatory rather than a refinement. Mirrors
 \code{morie.fn.hrzfnu}.
 }
 \examples{
-n <- 60; tt <- 3
+n <- 60
+tt <- 3
 x <- array(rnorm(n * tt * 2), dim = c(n, tt, 2))
 morie_smoothed_fU(matrix(rnorm(n * tt), n, tt), x, c(1, -0.5))$cutoff
 }

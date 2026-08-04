@@ -46,7 +46,8 @@ df <- data.frame(
   time = sample(1:8, 500, replace = TRUE)
 )
 out <- morie_did_placebo_test_time(df, "y", "d", "time",
-                                   true_treatment_time = 7,
-                                   placebo_times = c(3, 4, 5))
+  true_treatment_time = 7,
+  placebo_times = c(3, 4, 5)
+)
 out
 }

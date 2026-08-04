@@ -33,6 +33,6 @@ outcome rate divided by the privileged group's rate. A value below
 }
 \examples{
 pred <- c(1, 1, 1, 1, 1, 1, 1, 1, 0, 0)
-race <- c("A","A","A","A","A","B","B","B","B","B")
+race <- c("A", "A", "A", "A", "A", "B", "B", "B", "B", "B")
 morie_fairness_disparate_impact(pred, race, privileged = "A")$value
 }

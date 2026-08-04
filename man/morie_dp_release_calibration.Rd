@@ -40,8 +40,10 @@ between neighbouring datasets, which is close to no guarantee at all;
 the function warns rather than returning it silently.
 }
 \examples{
-round(morie_dp_release_calibration(1, target_error = 0.01,
-                                   n = 1000)$epsilon, 4)
+round(morie_dp_release_calibration(1,
+  target_error = 0.01,
+  n = 1000
+)$epsilon, 4)
 }
 \references{
 Dwork, C. and Roth, A. (2014). \emph{FnTTCS}, 9(3-4).

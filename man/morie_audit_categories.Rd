@@ -29,7 +29,9 @@ columns (\code{haven_labelled}), case-variant duplicate labels,
 unused levels, and high-cardinality accidents.
 }
 \examples{
-df <- data.frame(race = factor(c("1", "2", "2", "3")),
-                 city = c("Toronto", "toronto", "Ottawa", "Ottawa"))
+df <- data.frame(
+  race = factor(c("1", "2", "2", "3")),
+  city = c("Toronto", "toronto", "Ottawa", "Ottawa")
+)
 morie_audit_categories(df)
 }

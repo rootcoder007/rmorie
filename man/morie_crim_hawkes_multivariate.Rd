@@ -28,7 +28,8 @@ log-likelihood with the O(n) exponential recursion per (j,k) pair.
 }
 \examples{
 set.seed(2)
-tt <- sort(runif(150, 0, 100)); mk <- sample(1:2, 150, TRUE)
+tt <- sort(runif(150, 0, 100))
+mk <- sample(1:2, 150, TRUE)
 morie_crim_hawkes_multivariate(tt, mk, beta = 1)
 }
 \references{

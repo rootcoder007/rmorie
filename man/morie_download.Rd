@@ -29,7 +29,8 @@ or change upstream.
 \donttest{
 morie_download(
   "https://data.ontario.ca/dataset/data-on-inmates-in-ontario",
-  tempfile(fileext = ".html"))
+  tempfile(fileext = ".html")
+)
 }
 }
 \seealso{

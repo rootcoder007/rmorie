@@ -44,8 +44,10 @@ otherwise.
 \examples{
 set.seed(1)
 ts_dat <- as.numeric(arima.sim(list(ar = 0.4), n = 50L))
-res <- block_bootstrap(ts_dat, mean, block_size = 5L, n_boot = 20L,
-                       method = "circular")
+res <- block_bootstrap(ts_dat, mean,
+  block_size = 5L, n_boot = 20L,
+  method = "circular"
+)
 res$estimate
 }
 \seealso{

@@ -35,10 +35,10 @@ then runs the Gibbs sampler for \code{iterations} sweeps.
 }
 \examples{
 \donttest{
-  if (requireNamespace("dirichletprocess", quietly = TRUE)) {
-    set.seed(1)
-    y <- c(stats::rnorm(50, -2), stats::rnorm(50, 2))
-    morie_dp_gaussian_mixture(y, iterations = 200)
-  }
+if (requireNamespace("dirichletprocess", quietly = TRUE)) {
+  set.seed(1)
+  y <- c(stats::rnorm(50, -2), stats::rnorm(50, 2))
+  morie_dp_gaussian_mixture(y, iterations = 200)
+}
 }
 }

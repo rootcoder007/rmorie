@@ -3,29 +3,24 @@
 \name{morie_concordance_index}
 \alias{morie_concordance_index}
 \alias{morie_survival_concordance}
-\title{Concordance index}
+\title{Harrell's concordance index}
 \usage{
 morie_concordance_index(time, event, predicted_risk)
+
+morie_survival_concordance(time, event, predicted_risk)
 }
 \arguments{
-\item{time}{Numeric vector of follow-up times.}
+\item{time}{follow-up times}
 
-\item{event}{Numeric or logical vector; 1 for an event, 0 for right censoring.}
+\item{event}{1 for an event, 0 for censored}
 
-\item{predicted_risk}{Numeric vector of predicted risks, higher meaning earlier failure.}
+\item{predicted_risk}{predicted risk score, higher meaning sooner}
 }
 \value{
-A list with \code{c_index} and the concordant, discordant and tied pair counts.
+list with \code{c_index} and the pair counts
 }
 \description{
-Concordance index.
-}
-\details{
-The fraction of comparable pairs ordered correctly by the predicted risk: 0.5 is chance and 1 is perfect. Only pairs whose ordering is known despite censoring are comparable, so heavy censoring leaves it resting on few pairs.
-
-\code{morie_survival_concordance} is the pre-policy spelling and is the same
-function.
-}
-\examples{
-morie_concordance_index(c(1, 2, 3, 4), c(1, 1, 0, 1), c(3, 2, 1, 0.5))
+Over the pairs whose order is known despite censoring, the
+proportion in which the subject failing first carried the higher
+predicted risk, ties counted as a half.  0.5 is chance.
 }

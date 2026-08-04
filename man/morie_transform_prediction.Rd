@@ -57,7 +57,9 @@ conditional quantile is usually root-n estimable, needing
 yg <- seq(0.5, 8, length.out = 60)
 ug <- seq(-4, 4, length.out = 81)
 morie_transform_prediction(c(0.3, 0.2), 2, log(yg), plogis(ug),
-                           c(1, -0.5), y_grid = yg, u_grid = ug)$gamma
+  c(1, -0.5),
+  y_grid = yg, u_grid = ug
+)$gamma
 }
 \references{
 Horowitz, Sec. 6.4; Cheng et al. (1997).

@@ -45,8 +45,10 @@ there to make that visible rather than discoverable later.
 }
 \examples{
 set.seed(1)
-r <- morie_dp_synthetic_data(matrix(rnorm(200), ncol = 2), epsilon = 4,
-                             bounds = c(-4, 4))
+r <- morie_dp_synthetic_data(matrix(rnorm(200), ncol = 2),
+  epsilon = 4,
+  bounds = c(-4, 4)
+)
 dim(r$synthetic)
 }
 \references{

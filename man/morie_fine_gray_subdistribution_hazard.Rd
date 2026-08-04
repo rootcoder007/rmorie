@@ -35,7 +35,8 @@ the subdistribution hazard was defined.
 \examples{
 set.seed(3)
 X <- matrix(rnorm(200), ncol = 2)
-tt <- rexp(100); ct <- sample(0:2, 100, TRUE)
+tt <- rexp(100)
+ct <- sample(0:2, 100, TRUE)
 tail(morie_fine_gray_subdistribution_hazard(tt, ct, X)$baseline_cif, 1)
 }
 \references{

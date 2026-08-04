@@ -22,7 +22,8 @@ Rename a city data.frame onto the canonical audit schema
 \examples{
 df <- data.frame(beat = c("A", "B"), score = c(0.1, 0.9))
 p <- morie_fairness_city_profile(
-  "demo", area_col = "beat", risk_col = "score"
+  "demo",
+  area_col = "beat", risk_col = "score"
 )
 morie_fairness_apply_profile(df, p)
 }

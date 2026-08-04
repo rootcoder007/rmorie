@@ -38,10 +38,13 @@ cause or re-estimating on subsets should leave the estimate stable.
 }
 \examples{
 set.seed(1)
-z <- rnorm(400); x <- rbinom(400, 1, plogis(z))
+z <- rnorm(400)
+x <- rbinom(400, 1, plogis(z))
 y <- 0.8 * x + z + rnorm(400)
 df <- data.frame(z = z, x = x, y = y)
 g <- morie_dag(c("z -> x", "z -> y", "x -> y"), "x", "y")
-morie_dag_refute(g, df, method = "placebo_treatment",
-                 estimator = "backdoor.linear", n_reps = 5)
+morie_dag_refute(g, df,
+  method = "placebo_treatment",
+  estimator = "backdoor.linear", n_reps = 5
+)
 }

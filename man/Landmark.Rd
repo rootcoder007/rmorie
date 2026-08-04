@@ -3,35 +3,38 @@
 \name{Landmark}
 \alias{Landmark}
 \alias{morie_survival_landmark}
-\title{Landmark analysis}
+\title{Landmark analysis of survival}
 \usage{
 Landmark(time, event, landmark_time, X = NULL, group = NULL, alpha = 0.05)
+
+morie_survival_landmark(
+  time,
+  event,
+  landmark_time,
+  X = NULL,
+  group = NULL,
+  alpha = 0.05
+)
 }
 \arguments{
-\item{time}{Numeric vector of follow-up times.}
+\item{time}{observed follow-up times.}
 
-\item{event}{Numeric or logical vector; 1 (or \code{TRUE}) for an event, 0 for right censoring.}
+\item{event}{event indicator, 1 = event, 0 = censored.}
 
-\item{landmark_time}{The landmark. Subjects who fail or are censored before it are dropped.}
+\item{landmark_time}{the landmark at which the clock is reset.}
 
-\item{X}{Optional covariate matrix, subset to the retained subjects.}
+\item{X}{optional covariate matrix.}
 
-\item{group}{Optional grouping vector, subset the same way.}
+\item{group}{optional grouping vector.}
 
-\item{alpha}{Numeric; one minus the confidence level. Defaults to \code{0.05}.}
+\item{alpha}{significance level for the interval.}
 }
 \value{
-A list with the retained \code{time} (clock reset to the landmark), \code{event}, \code{n_retained}, \code{n_dropped} and \code{surv}.
+list with the landmark survival estimate, the number retained and dropped, and the group comparison when supplied.
 }
 \description{
-Landmark analysis.
+Subjects failing or censored before the landmark are dropped and the clock is reset there, which removes the immortal-time bias that arises from conditioning on a post-baseline event.
 }
-\details{
-The standard remedy for immortal-time bias when a covariate is measured after baseline. Everything estimated afterwards is conditional on surviving to the landmark, which is not the same population the unconditional analysis describes.
-
-\code{morie_survival_landmark} is the pre-policy spelling and is the same
-function.
-}
-\examples{
-Landmark(c(1, 2, 3, 4, 5), c(1, 1, 0, 1, 1), 2)
+\references{
+Anderson, J. R., Cain, K. C. and Gelber, R. D. (1983). Analysis of survival by tumor response. Journal of Clinical Oncology 1(11), 710-719.
 }

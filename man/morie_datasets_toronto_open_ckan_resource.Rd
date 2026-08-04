@@ -23,7 +23,8 @@ endpoint for an arbitrary Toronto package resource.
 \donttest{
 cat_df <- morie_datasets_toronto_opendata_bulk_layers()
 df <- try(morie_datasets_toronto_open_ckan_resource(cat_df$resource_id[1],
-                                                    limit = 5L))
+  limit = 5L
+))
 if (!inherits(df, "try-error")) head(df)
 }
 \dontshow{\}) # examplesIf}

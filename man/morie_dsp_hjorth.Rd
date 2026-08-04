@@ -19,7 +19,7 @@ All three Hjorth parameters
 set.seed(1)
 x <- rnorm(500)
 out <- morie_dsp_hjorth(x)
-out$activity  # equals var(x)
+out$activity # equals var(x)
 }
 \references{
 Rangayyan & Krishnan (2015), Ch. 5, sec. 5.5;

@@ -45,7 +45,8 @@ what downstream MRM analyses consume.
 }
 \examples{
 set.seed(1)
-X <- cbind(1, rnorm(50)); y <- drop(X \%*\% c(1, 2)) + rnorm(50)
+X <- cbind(1, rnorm(50))
+y <- drop(X \%*\% c(1, 2)) + rnorm(50)
 str(wild_bootstrap(y, X, n_boot = 199L), max.level = 1)
 }
 \seealso{

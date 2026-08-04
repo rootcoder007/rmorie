@@ -2,10 +2,8 @@
 % Please edit documentation in R/investigation.R
 \name{morie_run_treatment_effects_analysis}
 \alias{morie_run_treatment_effects_analysis}
-\title{Run a treatment-effects analysis (point estimate, SE, 95\% CI)}
+\title{Run an extended treatment-effects analysis (ATE / ATT / ATC + CATE)}
 \usage{
-morie_run_treatment_effects_analysis(data, treatment, outcome, covariates)
-
 morie_run_treatment_effects_analysis(data, treatment, outcome, covariates)
 }
 \arguments{
@@ -18,15 +16,9 @@ morie_run_treatment_effects_analysis(data, treatment, outcome, covariates)
 \item{covariates}{Character vector of covariate column names.}
 }
 \value{
-A list with \code{ate}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{n}, \code{method}.
-
 Named list as described above.
 }
 \description{
-Mirrors the Python \code{morie.run_treatment_effects_analysis()}. Convenience
-wrapper around \code{\link[=morie_estimate_ate]{morie_estimate_ate()}} that also produces a 95\% confidence
-interval (delta-method approximation).
-
 R port of \code{investigation.run_treatment_effects_analysis}.  Returns a
 list with:
 \itemize{
@@ -43,15 +35,6 @@ previous R surface for backward compatibility.
 }
 }
 \examples{
-set.seed(1)
-df <- data.frame(
-  y = rnorm(200),
-  t = rbinom(200, 1, 0.5),
-  x1 = rnorm(200), x2 = rnorm(200)
-)
-morie_run_treatment_effects_analysis(df,
-  treatment = "t", outcome = "y", covariates = c("x1", "x2")
-)
 set.seed(1)
 df <- data.frame(d = rbinom(80, 1, 0.4), x1 = rnorm(80), x2 = rnorm(80))
 df$y <- df$d + df$x1 + rnorm(80)

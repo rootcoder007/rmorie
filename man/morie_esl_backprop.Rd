@@ -33,8 +33,10 @@ stays separate from the derivative.
 set.seed(1)
 X <- matrix(rnorm(120), ncol = 3)
 y <- rnorm(40)
-W <- list(alpha = matrix(rnorm(12) * 0.5, 3, 4), alpha0 = numeric(4),
-          beta = matrix(rnorm(4) * 0.5, 4, 1), beta0 = 0)
+W <- list(
+  alpha = matrix(rnorm(12) * 0.5, 3, 4), alpha0 = numeric(4),
+  beta = matrix(rnorm(4) * 0.5, 4, 1), beta0 = 0
+)
 dim(morie_esl_backprop(X, y, W)$grad_alpha)
 }
 \references{

@@ -17,18 +17,7 @@ morie_mrcv_glmm(
 \arguments{
 \item{b0}{Intercept. @param beta_w_a,beta_y_b,beta_z_c MRCV effects.}
 
-
-\item{beta_w_a}{argument \code{beta_w_a}; not described in the source.}
-
-\item{beta_y_b}{argument \code{beta_y_b}; not described in the source.}
-
-\item{beta_z_c}{argument \code{beta_z_c}; not described in the source.}
-
-\item{b1}{argument \code{b1}; not described in the source.}
-
-\item{x}{argument \code{x}; not described in the source.}
-
-\item{random_intercept}{argument \code{random_intercept}; not described in the source.}
+\item{b1, x, random_intercept}{GLMM pieces.}
 }
 \value{
 List with mu_spmi, mu_three, eta_glmm (as supplied).

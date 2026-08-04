@@ -21,5 +21,7 @@ R parity of \code{morie.entheo_dmt.load_eeg_region}. Reads
 DMT, PCB, and difference regressor cubes.
 }
 \examples{
-\donttest{try(morie_entheo_load_eeg_region("Frontal"))}
+\donttest{
+try(morie_entheo_load_eeg_region("Frontal"))
+}
 }

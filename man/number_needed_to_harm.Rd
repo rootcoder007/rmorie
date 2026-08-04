@@ -21,7 +21,7 @@ Number needed to harm (NNH) — sign-reversed NNT
 \examples{
 # Exposure raises the bad outcome from 10\% to 20\% -> NNH = 1/0.10 = 10.
 res <- number_needed_to_harm(20, 80, 10, 90)
-res$estimate                 # people exposed to cause one extra harm
+res$estimate # people exposed to cause one extra harm
 
 # NNH is the reciprocal of the (absolute) risk difference, like NNT but
 # for a harmful exposure.

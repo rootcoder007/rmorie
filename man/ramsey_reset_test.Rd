@@ -22,6 +22,7 @@ Ramsey RESET test for functional-form misspecification
 }
 \examples{
 set.seed(1)
-X <- cbind(1, rnorm(60)); y <- drop(X \%*\% c(1, 2)) + rnorm(60)
+X <- cbind(1, rnorm(60))
+y <- drop(X \%*\% c(1, 2)) + rnorm(60)
 str(ramsey_reset_test(y, X), max.level = 1)
 }

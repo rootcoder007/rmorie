@@ -21,9 +21,9 @@ Risk difference for a 2x2 table
 \examples{
 # Absolute difference in risk between exposed and unexposed.
 res <- risk_difference(20, 80, 10, 90)
-res$estimate                 # 0.20 - 0.10 = 0.10
+res$estimate # 0.20 - 0.10 = 0.10
 c(lower = res$ci_lower, upper = res$ci_upper)
 
 # RD = 0 means equal risk; sign shows direction.
-risk_difference(10, 90, 20, 80)$estimate     # -0.10 (exposed lower)
+risk_difference(10, 90, 20, 80)$estimate # -0.10 (exposed lower)
 }

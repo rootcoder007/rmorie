@@ -27,7 +27,8 @@ tidymodels equivalent (cross-referenced).
 }
 \examples{
 set.seed(1)
-X <- matrix(rnorm(40), ncol = 2); y <- rnorm(20)
+X <- matrix(rnorm(40), ncol = 2)
+y <- rnorm(20)
 model_fn <- function(Xt, yt) stats::lm.fit(cbind(1, Xt), yt)
 score_fn <- function(yt, yp) mean((yt - yp)^2)
 predict.lm_lite2 <- function(object, newdata, ...) {
@@ -39,7 +40,8 @@ res <- leave_one_out_cv(X, y,
     fit <- stats::lm.fit(cbind(1, Xt), yt)
     structure(list(coef = fit$coefficients), class = "lm_lite2")
   },
-  score_fn = score_fn)
+  score_fn = score_fn
+)
 str(res, max.level = 1)
 }
 \seealso{

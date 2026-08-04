@@ -24,8 +24,12 @@ An object of class \code{morie_dag}: list with \code{nodes}, \code{edges}
 Build a causal DAG
 }
 \examples{
-g <- morie_dag(c("race -> placement", "race -> outcome",
-                 "placement -> outcome"),
-               exposure = "placement", outcome = "outcome")
+g <- morie_dag(
+  c(
+    "race -> placement", "race -> outcome",
+    "placement -> outcome"
+  ),
+  exposure = "placement", outcome = "outcome"
+)
 morie_dag_identify(g)
 }

@@ -3,33 +3,27 @@
 \name{Paracompare}
 \alias{Paracompare}
 \alias{morie_survival_compare_parametric}
-\title{Compare parametric survival families}
+\title{Compare parametric survival families by information criterion}
 \usage{
 Paracompare(time, event, X = NULL, dists = NULL)
+
+morie_survival_compare_parametric(time, event, X = NULL, dists = NULL)
 }
 \arguments{
-\item{time}{Numeric vector of follow-up times.}
+\item{time}{observed follow-up times.}
 
-\item{event}{Numeric or logical vector; 1 (or \code{TRUE}) for an event, 0 for right censoring.}
+\item{event}{event indicator, 1 = event, 0 = censored.}
 
-\item{X}{Optional covariate matrix; when given, AFT models are compared instead of intercept-only fits.}
+\item{X}{optional covariate matrix.}
 
-\item{dists}{Character vector of families to try. \code{NULL}, the
-default, tries all four: \code{"exponential"}, \code{"weibull"},
-\code{"lognormal"} and \code{"loglogistic"}.}
+\item{dists}{families to compare; defaults to all supported.}
 }
 \value{
-A list with \code{table} ordered by AIC, \code{best_aic}, \code{failed}, \code{families_not_nested} and \code{lr_weibull_vs_exponential}.
+list with one row per family giving the log-likelihood, AIC and BIC, ordered by AIC.
 }
 \description{
-Compare parametric survival families.
+Each family is fitted by maximum likelihood and ranked by AIC, with BIC reported alongside so a disagreement between the two is visible rather than hidden.
 }
-\details{
-Ranked by AIC. Apart from the exponential inside the Weibull the families are NOT nested, so the AIC ordering is the only comparison available; a family whose fit fails is kept visible in \code{failed} rather than silently dropped.
-
-\code{morie_survival_compare_parametric} is the pre-policy spelling and is the same
-function.
-}
-\examples{
-Paracompare(c(1, 2, 3, 4, 5, 6), c(1, 1, 0, 1, 1, 1))
+\references{
+Kalbfleisch, J. D. and Prentice, R. L. (2002). The Statistical Analysis of Failure Time Data, 2nd ed., Wiley.
 }

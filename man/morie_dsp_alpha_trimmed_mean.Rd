@@ -26,7 +26,7 @@ filter as \code{alpha -> 0.5}.
 set.seed(2)
 t <- seq(0, 199) / 200
 x <- sin(2 * pi * 4 * t) + rnorm(200, sd = 0.3)
-x[seq(20, 200, by = 20)] <- 10  # impulse contamination
+x[seq(20, 200, by = 20)] <- 10 # impulse contamination
 y <- morie_dsp_alpha_trimmed_mean(x, window = 9L, alpha = 0.3)
 head(y)
 }

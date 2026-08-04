@@ -32,7 +32,7 @@ narrative.
 }
 \examples{
 morie_describe("aalen")
-morie_describe("morie_aalen")  # leading prefix stripped
+morie_describe("morie_aalen") # leading prefix stripped
 # Function-object form: pass any morie callable unquoted
 # (btsrp is the bootstrap primitive; its narrative ships in
 # the bundled describe corpus).

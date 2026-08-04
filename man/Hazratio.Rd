@@ -6,28 +6,24 @@
 \title{Hazard ratios with confidence intervals}
 \usage{
 Hazratio(beta, se, alpha = 0.05, names = NULL)
+
+morie_survival_hr(beta, se, alpha = 0.05, names = NULL)
 }
 \arguments{
-\item{beta}{Numeric vector of log hazard ratios.}
+\item{beta}{coefficient vector on the log-hazard scale.}
 
-\item{se}{Numeric vector of their standard errors; must be nonnegative.}
+\item{se}{standard errors of \code{beta}.}
 
-\item{alpha}{Numeric; one minus the confidence level. Defaults to \code{0.05}.}
+\item{alpha}{significance level.}
 
-\item{names}{Optional labels.}
+\item{names}{optional names for the coefficients.}
 }
 \value{
-A list with \code{hazard_ratio}, \code{lower}, \code{upper}, \code{p_value} and \code{interval_on_log_scale}.
+list with the hazard ratios, the interval bounds, and the z statistics and p-values.
 }
 \description{
-Hazard ratios with confidence intervals.
+HR = exp(beta) with the interval formed on the LOG scale and exponentiated, so it is asymmetric about the hazard ratio and never crosses zero.
 }
-\details{
-The interval is formed on the log scale and exponentiated, so it is asymmetric about the ratio and cannot cross zero. Building it as \code{HR +/- z se(HR)} is the common slip and can produce a negative lower limit.
-
-\code{morie_survival_hr} is the pre-policy spelling and is the same
-function.
-}
-\examples{
-Hazratio(c(0.5, -0.2), c(0.2, 0.1))
+\references{
+Klein, J. P. and Moeschberger, M. L. (2003). Survival Analysis, 2nd ed., Springer.
 }

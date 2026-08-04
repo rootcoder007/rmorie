@@ -53,7 +53,8 @@ parameterization, conservative version) see
 \examples{
 set.seed(7)
 n <- 300
-d <- rbinom(n, 1, 0.5); p <- rbinom(n, 1, 0.5)
+d <- rbinom(n, 1, 0.5)
+p <- rbinom(n, 1, 0.5)
 y <- 1 + 0.3 * d + 0.4 * p + 0.5 * d * p + rnorm(n, sd = 0.5)
 df <- data.frame(y = y, d = d, post = p)
 out <- morie_did_sensitivity_analysis(df, "y", "d", "post")

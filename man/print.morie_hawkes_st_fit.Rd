@@ -23,7 +23,8 @@ Print method for \code{morie_hawkes_st_fit} objects
 # longer horizons (e.g. end_time = 40) for real analyses.
 ev <- morie_hawkes_st_simulate(
   list(mu = 0.2, alpha = 0.5, beta = 1, sigma = 0.4),
-  end_time = 12, region = c(0, 10, 0, 10), seed = 7)
+  end_time = 12, region = c(0, 10, 0, 10), seed = 7
+)
 obj <- morie_hawkes_st_fit(ev, end_time = 12, area = 100)$params
 print(obj)
 }

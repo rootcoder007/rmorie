@@ -20,5 +20,5 @@ Phase 3CCC2. Included snapshot of NYC OpenData
 }
 \examples{
 df <- morie_datasets_nyc_council_districts(offline = TRUE)
-range(as.integer(df$coundist))  # districts 1 through 51
+range(as.integer(df$coundist)) # districts 1 through 51
 }

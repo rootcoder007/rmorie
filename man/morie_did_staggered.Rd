@@ -52,6 +52,7 @@ df$treat_time <- ifelse(df$unit <= 20, 4, Inf)
 df$d <- as.integer(df$time >= df$treat_time)
 df$y <- 0.1 * df$time + 0.6 * df$d + rnorm(nrow(df), sd = 0.4)
 out <- morie_did_staggered(df, "y", "unit", "time", "treat_time",
-                           n_bootstrap = 50L, seed = 2)
+  n_bootstrap = 50L, seed = 2
+)
 str(out, max.level = 1)
 }

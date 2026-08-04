@@ -18,7 +18,8 @@ Print method for \code{morie_knox} objects
 \donttest{
 set.seed(3)
 obj <- morie_crim_near_repeat(runif(60), runif(60), runif(60, 0, 30),
-                       s_threshold = 0.1, t_threshold = 3)
+  s_threshold = 0.1, t_threshold = 3
+)
 print(obj)
 }
 }

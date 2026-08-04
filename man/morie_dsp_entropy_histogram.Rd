@@ -23,7 +23,7 @@ uni <- runif(2000, min = -1, max = 1)
 norm <- rnorm(2000)
 Hu <- morie_dsp_entropy_histogram(uni, n_bins = 20L)
 Hn <- morie_dsp_entropy_histogram(norm, n_bins = 20L)
-c(uniform = Hu, gaussian = Hn)  # uniform has higher entropy
+c(uniform = Hu, gaussian = Hn) # uniform has higher entropy
 }
 \references{
 Rangayyan & Krishnan (2015), Ch. 5, sec. 5.6.

@@ -3,31 +3,28 @@
 \name{Turnbull}
 \alias{Turnbull}
 \alias{morie_survival_turnbull}
-\title{Turnbull NPMLE for interval-censored data}
+\title{Turnbull estimator for interval-censored data}
 \usage{
 Turnbull(left, right, max_iter = 1000L, tol = 1e-10)
+
+morie_survival_turnbull(left, right, max_iter = 1000L, tol = 1e-10)
 }
 \arguments{
-\item{left}{Numeric vector of interval left endpoints.}
+\item{left}{left endpoints of the censoring intervals.}
 
-\item{right}{Numeric vector of right endpoints; \code{Inf} for right censoring.}
+\item{right}{right endpoints; use \code{Inf} for right-censored observations.}
 
-\item{max_iter}{EM iteration limit.}
+\item{max_iter}{maximum EM iterations.}
 
-\item{tol}{Convergence tolerance.}
+\item{tol}{convergence tolerance.}
 }
 \value{
-A list with the maximal intervals, their \code{mass}, \code{surv}, \code{loglik}, \code{n_intervals}, \code{converged} and \code{npmle_not_unique_within_intervals}.
+list with the estimated masses, the intersection intervals, the survival curve and the iteration count.
 }
 \description{
-Turnbull NPMLE for interval-censored data.
+Self-consistency (EM) for the nonparametric MLE.
+Mass sits only on the maximal intersections of the observed intervals, so the estimator is a step function that jumps nowhere else.
 }
-\details{
-Mass sits only on the maximal intersection intervals and is found by self-consistency, an EM algorithm. How the mass is distributed WITHIN each interval is not identified, so the survival curve is only determined at the interval endpoints.
-
-\code{morie_survival_turnbull} is the pre-policy spelling and is the same
-function.
-}
-\examples{
-Turnbull(c(0, 1, 2, 3), c(2, 3, 4, Inf))
+\references{
+Turnbull, B. W. (1976). The empirical distribution function with arbitrarily grouped, censored and truncated data. JRSS-B 38(3), 290-295.
 }

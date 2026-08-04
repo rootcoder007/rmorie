@@ -19,7 +19,8 @@ Whole-signal ZCR if \code{frame_length = NULL}; otherwise per-frame
 ZCR over consecutive non-overlapping frames.
 }
 \examples{
-N <- 1000L; t <- seq.int(0, N - 1L) / N
+N <- 1000L
+t <- seq.int(0, N - 1L) / N
 x <- sin(2 * pi * 5 * t)
 morie_dsp_zero_crossing(x)
 }

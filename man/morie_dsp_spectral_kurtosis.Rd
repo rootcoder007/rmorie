@@ -19,7 +19,8 @@ Standardised fourth central moment of frequency under the PSD
 treated as a probability mass.
 }
 \examples{
-fs <- 1024; t <- seq.int(0, 1023) / fs
+fs <- 1024
+t <- seq.int(0, 1023) / fs
 out <- morie_dsp_psd_periodogram(cos(2 * pi * 50 * t), fs = fs)
 morie_dsp_spectral_kurtosis(out$psd, out$freqs)
 }

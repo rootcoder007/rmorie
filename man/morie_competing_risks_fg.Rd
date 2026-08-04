@@ -37,7 +37,8 @@ instead of it; when the two disagree, the disagreement is the finding.
 \examples{
 set.seed(3)
 X <- matrix(rnorm(200), ncol = 2)
-tt <- rexp(100); ct <- sample(0:2, 100, TRUE)
+tt <- rexp(100)
+ct <- sample(0:2, 100, TRUE)
 morie_competing_risks_fg(tt, ct, X)$subdistribution_hazard_ratio
 }
 \references{

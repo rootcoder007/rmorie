@@ -5,8 +5,21 @@
 \alias{morie_cokriging}
 \title{Simple morie_cokriging for co-located bivariate spatial prediction.}
 \usage{
-cokrg(x, y, coords, target, sill_p = 1, range_p = 1, sill_s = 1, range_s = 1,
-      cross_sill = 0.5, cross_range = 1, nugget = 0)
+cokrg(
+  x,
+  y,
+  coords,
+  target,
+  sill_p = 1,
+  range_p = 1,
+  sill_s = 1,
+  range_s = 1,
+  cross_sill = 0.5,
+  cross_range = 1,
+  nugget = 0
+)
+
+morie_cokriging(coords, z1, z2, s0, cross_vario = NULL, model = NULL)
 }
 \arguments{
 \item{x}{Primary variable (n,).}
@@ -17,19 +30,13 @@ cokrg(x, y, coords, target, sill_p = 1, range_p = 1, sill_s = 1, range_s = 1,
 
 \item{target}{Target coords (m by d) or (d,).}
 
+\item{sill_p, range_p}{Primary auto-covariance parameters.}
+
+\item{sill_s, range_s}{Secondary auto-covariance parameters.}
+
+\item{cross_sill, cross_range}{Cross-covariance parameters.}
+
 \item{nugget}{Nugget.}
-
-\item{sill_p}{argument \code{sill_p}; not described in the source.}
-
-\item{range_p}{argument \code{range_p}; not described in the source.}
-
-\item{sill_s}{argument \code{sill_s}; not described in the source.}
-
-\item{range_s}{argument \code{range_s}; not described in the source.}
-
-\item{cross_sill}{argument \code{cross_sill}; not described in the source.}
-
-\item{cross_range}{argument \code{cross_range}; not described in the source.}
 }
 \value{
 Named list: estimate, se, n, method.
