@@ -4,14 +4,12 @@
 \alias{morie_spatial_lag_model}
 \alias{morie_spatial_error_model}
 \alias{morie_ripley_k}
-\alias{morie_cokriging}
 \alias{morie_local_dp_randomised_response}
 \title{Maximum-likelihood spatial models, point patterns and local privacy}
 \usage{
 morie_spatial_lag_model(y, X, W, add_intercept = TRUE)
 morie_spatial_error_model(y, X, W, add_intercept = TRUE)
 morie_ripley_k(coords, r_grid, area = NULL, edge_correction = TRUE)
-morie_cokriging(coords, z1, z2, s0, cross_vario = NULL, model = NULL)
 morie_local_dp_randomised_response(truth, k, epsilon, seed = 2)
 }
 \arguments{
@@ -61,3 +59,6 @@ processes. \emph{Journal of Applied Probability} 13, 255-266.
 Warner, S. L. (1965) Randomized response. \emph{JASA} 60, 63-69.
 }
 \keyword{spatial}
+\seealso{
+\code{\link{morie_cokriging}}
+}
