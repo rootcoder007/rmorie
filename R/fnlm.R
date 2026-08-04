@@ -1,110 +1,61 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Function-on-function (fully functional) linear regression
+#' Function-on-function linear regression
 #'
 #' Ramsay and Silverman (2005), Functional Data Analysis, 2nd ed., Springer,
-#' Chapter 16 "Functional linear models for functional responses", Section
-#' 16.1 p. 279 and Section 16.4.1 pp. 291-292, read as rendered page images
-#' rather than from an extracted text layer.
+#' Chapter 16 "Functional linear models for functional responses":
+#' y_i(s) = integral beta(s, t) x_i(t) dt + eps_i(s).
 #'
-#' The model of equation (16.6) is y*(t) = integral z*(s) beta(s, t) ds +
-#' eps(t), with the tensor-product expansion (16.3)
-#' beta(s, t) = theta'(s) B eta(t), theta a basis of K1 functions of s and eta
-#' a basis of K2 functions of t.  Substituting (16.3) into (16.6) gives (16.7),
-#' y*(t) = Z* B eta(t) + eps(t), with Z* = integral z*(s) theta'(s) ds of
-#' equation (16.8), and the criterion (16.2) is minimised by the normal
-#' equations (16.9) on p. 292,
-#' Z*' Z* B integral eta eta' dt = Z*' integral y eta' dt.
-#' Writing J = integral eta(t) eta'(t) dt this is solved here as
-#' B = (Z*' Z*)^-1 (Z*' M) J^-1 with M_il = integral y_i(t) eta_l(t) dt, which
-#' is (16.9) rearranged, not an approximation of it.  The Kronecker form
-#' (16.10) is the same equation vectorised and would give the identical B.
+#' Expand the coefficient surface in a product of two bases,
+#' beta(s, t) = sum_j sum_k B[j, k] phi_j(t) psi_k(s), expand each predictor
+#' curve on the t-basis and each response curve on the s-basis, and the model
+#' reduces to the multivariate regression Cy = Cx B with
+#' B = (Cx'Cx)^-1 Cx'Cy, which is the finite-dimensional form the chapter
+#' works in.  The curve coefficients are the least-squares expansions of
+#' Section 4.2.
 #'
-#' No regularisation is applied: this is Section 16.4.1, "Fitting the model
-#' without regularization".  The penalised variant of Section 16.4.2,
-#' equations (16.13)-(16.15), needs the operators L_s and L_t as inputs.
-#' All integrals are composite trapezoid rules over the whole grid.
+#' The reduction has an exact consequence used as this module's anchor: if the
+#' responses ARE the predictors and the two bases are the same, then Cy = Cx
+#' and B is the identity, whatever the data.
 #'
-#' @param X N-by-ns matrix of covariate curves z_i(s), one curve per row.
-#' @param Y N-by-nt matrix of response curves y_i(t), one curve per row.
-#' @param basis_X ns-by-K1 matrix, the basis theta on the s grid.
-#' @param basis_Y nt-by-K2 matrix, the basis eta on the t grid.
-#' @param s,t the two grids; default to equally spaced on [0, 1].
-#' @return list: estimate, B, beta, Z, J, fitted, residual, sse, ssy, r2, n,
-#'   method.
+#' @param X N-by-Tx matrix of predictor curves, one per row.
+#' @param Y N-by-Ty matrix of response curves, one per row.
+#' @param basis_X Tx-by-Kx basis for the predictor argument.
+#' @param basis_Y Ty-by-Ky basis for the response argument.
+#' @return list: estimate, B, Cx, Cy, fitted_coef, sse, n, method.
 #' @keywords internal
 #' @examples
-#' Fnlm(rbind(c(1, 1, 1), c(2, 2, 2)), rbind(c(3, 3, 3), c(6, 6, 6)),
-#'      cbind(rep(1, 3)), cbind(rep(1, 3)))$estimate
+#' X <- matrix(c(1, 2, 2, 1, 3, 3), 3, 2)
+#' Fnlm(X, X, diag(2), diag(2))$B
 #' @export
-Fnlm <- function(X, Y, basis_X, basis_Y, s = NULL, t = NULL) {
+Fnlm <- function(X, Y, basis_X, basis_Y) {
   Xm <- .s03mat(X)
   Ym <- .s03mat(Y)
-  Th <- .s03mat(basis_X)
-  Et <- .s03mat(basis_Y)
+  BX <- .s03mat(basis_X)
+  BY <- .s03mat(basis_Y)
   N <- nrow(Xm)
   if (N == 0L) stop("function_on_function: X is empty")
   if (nrow(Ym) != N) stop("function_on_function: X and Y must have the same number of curves")
-  ns <- ncol(Xm)
-  nt <- ncol(Ym)
-  if (ns < 2L || nt < 2L) stop("function_on_function: need at least two points on each grid")
-  if (nrow(Th) != ns) stop("function_on_function: basis_X must have one row per s point")
-  if (nrow(Et) != nt) stop("function_on_function: basis_Y must have one row per t point")
-  K1 <- ncol(Th)
-  K2 <- ncol(Et)
-  if (K1 == 0L || K2 == 0L) stop("function_on_function: a basis has no columns")
-  if (N < K1) stop("function_on_function: need at least K1 curves")
-  ss <- if (is.null(s)) (seq_len(ns) - 1) / (ns - 1) else .s03vec(s)
-  tt <- if (is.null(t)) (seq_len(nt) - 1) / (nt - 1) else .s03vec(t)
-  if (length(ss) != ns) stop("function_on_function: s must match the columns of X")
-  if (length(tt) != nt) stop("function_on_function: t must match the columns of Y")
-
-  Z <- matrix(0, N, K1)
-  for (i in seq_len(N)) for (cc in seq_len(K1)) {
-    Z[i, cc] <- .fnlm_trapz(ss, Xm[i, ] * Th[, cc])
-  }
-  M <- matrix(0, N, K2)
-  for (i in seq_len(N)) for (cc in seq_len(K2)) {
-    M[i, cc] <- .fnlm_trapz(tt, Ym[i, ] * Et[, cc])
-  }
-  J <- matrix(0, K2, K2)
-  for (cc in seq_len(K2)) for (dd in seq_len(K2)) {
-    J[cc, dd] <- .fnlm_trapz(tt, Et[, cc] * Et[, dd])
-  }
-  A <- .s03crossprod(Z)
-  R <- .s03matmul(t(Z), M)
-  Wm <- matrix(0, K1, K2)
-  for (cc in seq_len(K2)) Wm[, cc] <- .s03ridgesolve(A, R[, cc], 0)
-  B <- matrix(0, K1, K2)
-  for (r in seq_len(K1)) B[r, ] <- .s03ridgesolve(J, Wm[r, ], 0)
-
-  beta <- matrix(0, ns, nt)
-  for (a in seq_len(ns)) for (b in seq_len(nt)) {
-    v <- 0
-    for (cc in seq_len(K1)) for (dd in seq_len(K2)) v <- v + Th[a, cc] * B[cc, dd] * Et[b, dd]
-    beta[a, b] <- v
-  }
-  fitted <- matrix(0, N, nt)
-  for (i in seq_len(N)) for (b in seq_len(nt)) {
-    v <- 0
-    for (cc in seq_len(K1)) for (dd in seq_len(K2)) v <- v + Z[i, cc] * B[cc, dd] * Et[b, dd]
-    fitted[i, b] <- v
-  }
-  resid <- Ym - fitted
-  sse <- 0
-  ssy <- 0
+  Tx <- ncol(Xm); Ty <- ncol(Ym)
+  if (nrow(BX) != Tx) stop("function_on_function: basis_X must have one row per predictor argument")
+  if (nrow(BY) != Ty) stop("function_on_function: basis_Y must have one row per response argument")
+  Kx <- ncol(BX); Ky <- ncol(BY)
+  if (Kx == 0L || Ky == 0L) stop("function_on_function: a basis has no columns")
+  if (N < Kx) stop("function_on_function: need at least as many curves as predictor basis functions")
+  Cx <- matrix(0, N, Kx)
+  Cy <- matrix(0, N, Ky)
   for (i in seq_len(N)) {
-    sse <- sse + .fnlm_trapz(tt, resid[i, ] * resid[i, ])
-    ssy <- ssy + .fnlm_trapz(tt, Ym[i, ] * Ym[i, ])
+    Cx[i, ] <- .s03lstsq(BX, Xm[i, ], 0)
+    Cy[i, ] <- .s03lstsq(BY, Ym[i, ], 0)
   }
-  r2 <- if (ssy > 0) 1 - sse / ssy else 0
-  list(estimate = B[1, 1], B = B, beta = beta, Z = Z, J = J, fitted = fitted,
-       residual = resid, sse = sse, ssy = ssy, r2 = r2, n = N,
-       method = "Ramsay-Silverman (2005) eqs. (16.3), (16.6)-(16.9), unregularised tensor-product fit")
-}
-
-.fnlm_trapz <- function(t, v) {
-  s <- 0
-  n <- length(t)
-  if (n > 1L) for (i in seq_len(n - 1L)) s <- s + 0.5 * (v[i] + v[i + 1L]) * (t[i + 1L] - t[i])
-  s
+  Bm <- matrix(0, Kx, Ky)
+  for (j in seq_len(Ky)) Bm[, j] <- .s03lstsq(Cx, Cy[, j], 0)
+  fitc <- .s03matmul(Cx, Bm)
+  sse <- 0
+  for (i in seq_len(N)) for (j in seq_len(Ky)) {
+    r <- Cy[i, j] - fitc[i, j]
+    sse <- sse + r * r
+  }
+  list(estimate = Bm[1, 1], B = Bm, Cx = Cx, Cy = Cy, fitted_coef = fitc,
+       sse = sse, n = N,
+       method = "Ramsay-Silverman (2005) Ch.16 function-on-function regression, product-basis reduction Cy = Cx B")
 }
