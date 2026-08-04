@@ -11,8 +11,13 @@
 #' \eqn{D' = D/D_{max}} if \eqn{D > 0} else \eqn{D/D_{min}}.
 #' Normalising by the attainable extreme is the whole content of the
 #' proposal: raw D is bounded by the allele frequencies and cannot be
-#' compared across loci, whereas D' lies in [-1, 1] and reaches 1 in
-#' absolute value exactly when one haplotype is absent.  Genotypes are
+#' compared across loci, whereas D' reaches 1 exactly when one
+#' haplotype is absent.  Note the sign convention, which is the one
+#' genetics::LD uses and is easy to misread: \eqn{D_{min}} is negative,
+#' so dividing a negative D by it gives a positive D'.  \code{estimate}
+#' is therefore the normalised magnitude in [0, 1] and the direction is
+#' carried by the sign of \code{D}; sources that put D' on [-1, 1] mean
+#' \code{sign(D) * estimate}.  Genotypes are
 #' unphased, so only the double heterozygote is ambiguous; it is
 #' resolved by EM run for a fixed 500 iterations with no convergence
 #' test, so the answer is deterministic and identical in both arms.

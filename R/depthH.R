@@ -5,10 +5,14 @@
 #' point is the one no halfspace can isolate, and the definition is
 #' affine invariant.
 #'
-#' In the plane the minimising direction is normal to one of the vectors
-#' from theta to a data point, so enumerating those is exact. Above two
-#' dimensions the minimum is taken over the directions to the data
-#' points, which is an UPPER bound, reported as \code{exact = 0}.
+#' In the plane the count is constant on each arc between consecutive
+#' normals to the vectors from theta to a data point, so the minimum is
+#' attained in the INTERIOR of an arc. Testing the normals themselves is
+#' the natural-looking mistake: a data point then lies exactly on the
+#' closed boundary and is counted, so a point outside the convex hull
+#' comes back with positive depth. Arc midpoints are used instead -- no
+#' epsilon, and exact. Above two dimensions the minimum is taken over the
+#' data directions, an UPPER bound, flagged by \code{exact = 0}.
 #'
 #' Formula: \code{depth(theta) = min_u #{i: u'(x_i - theta) >= 0} / n}.
 #'
@@ -25,10 +29,18 @@ DepthH <- function(X, theta) {
   d <- Xm - matrix(t_, n, p, byrow = TRUE)
   dirs <- list()
   if (p == 2L) {
+    crit <- numeric(0)
     for (i in seq_len(n)) {
       if (d[i, 1] == 0 && d[i, 2] == 0) next
-      dirs[[length(dirs) + 1L]] <- c(-d[i, 2], d[i, 1])
-      dirs[[length(dirs) + 1L]] <- c(d[i, 2], -d[i, 1])
+      a <- atan2(d[i, 2], d[i, 1])
+      crit <- c(crit, (a + pi / 2) %% (2 * pi), (a - pi / 2) %% (2 * pi))
+    }
+    crit <- sort(crit)
+    m <- length(crit)
+    for (i in seq_len(m)) {
+      hi <- crit[if (i == m) 1L else i + 1L] + (if (i == m) 2 * pi else 0)
+      mid <- 0.5 * (crit[i] + hi)
+      dirs[[length(dirs) + 1L]] <- c(cos(mid), sin(mid))
     }
     exact <- 1L
   } else {
