@@ -52,3 +52,26 @@
   }
   x
 }
+
+#' @noRd
+.irt_rsm_probs <- function(theta, b, tau) {
+  # Andrich rating scale categories h = 0..m, m = length(tau):
+  #   eta_h = h (theta - b) - sum_{j<=h} tau_j,   eta_0 = 0
+  eta <- c(0, seq_along(tau) * (theta - b) - cumsum(tau))
+  list(p = .irt_softmax(eta), eta = eta)
+}
+
+#' @noRd
+.irt_nrm_probs <- function(theta, a, c) {
+  # Bock nominal model: eta_r = a_r theta + c_r
+  eta <- a * theta + c
+  list(p = .irt_softmax(eta), eta = eta)
+}
+
+#' @noRd
+.irt_cat_moments <- function(probs, scores) {
+  # For these exponential-family category models the Fisher information in
+  # one item is exactly the variance of the category score.
+  mu <- sum(probs * scores)
+  c(mean = mu, var = sum(probs * (scores - mu)^2))
+}
