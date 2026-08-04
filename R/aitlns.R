@@ -1,36 +1,46 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Map standard normal draws to additive logistic normal compositions.
+#' Draw compositions from a logistic-normal via the alr inverse.
 #'
-#' Formula: x_r = alr^-1( mu + L z_r ),  Sigma = L L' the lower Cholesky factor
+#' Sampling is done in the unconstrained coordinates and mapped back;
+#' sampling the parts directly and renormalising gives a different
+#' distribution. The Cholesky factor is used because it is unique for a
+#' positive-definite Sigma, so both arms map the same normal draws to the
+#' same compositions.
 #'
-#' @param Z Standard normal draws supplied by the caller, one row per composition.  The noise is an argument, not drawn internally, so the function is deterministic.
-#' @param mu Mean of the additive log-ratio coordinates, length D - 1.
-#' @param Sigma Covariance of the additive log-ratio coordinates; must be positive definite.
-#' @param ref 1-based index the reference part is restored to; the default is the last position D.
-#' @param total Constant kappa each returned composition sums to.
+#' Formula: Z ~ N(0, I_\{D-1\}); Y = mu + L Z with L L' = Sigma;
+#'   X = alr^-1(Y) = C(exp(Y_1), ..., exp(Y_\{D-1\}), 1)
 #'
-#' @return List with ``compositions``, ``alr``, ``L``, ``ref``, ``n``, ``D``.
-#' @references Aitchison, J. (1986), The Statistical Analysis of Compositional Data, Chapman and Hall, is this shelf's primary book and is NOT in the reference library, so it could not be read.  The log-ratio algebra and the additive logistic normal law were taken instead from Mateu-Figueras, G., Pawlowsky-Glahn, V. and Egozcue, J. J., The normal distribution in some constrained sample spaces, arXiv:0802.2643 (published as SORT 37(1):29-56, 2013), Sects. 4.1 and 4.3, which attribute the law to Aitchison (1982, 1986); that paper was FETCHED and is archived in the reference library with a row in EXTERNAL_SOURCES.md.  Sampling the additive logistic normal is sampling the multivariate normal in alr coordinates and inverting the transform, since the law is defined by exactly that construction.  The caller supplies the standard normal matrix Z so that the result is reproducible and identical in both language arms; no random number generator is touched here.
+#' @param mu Mean of the alr coordinates, length D-1.
+#' @param Sigma Positive-definite covariance of the alr coordinates.
+#' @param n Number of compositions drawn.
+#' @param seed Seed for the pinned generator.
+#' @param total Constant each composition sums to.
+#' @return List with \code{sample}, \code{alr}, \code{center},
+#'   \code{mean_alr}, \code{n}, \code{D}.
+#' @references Aitchison (1986), The Statistical Analysis of
+#'   Compositional Data, Chapter 6. The reference part is the LAST,
+#'   matching aitalr and aitalri.
 #' @export
-Lognormdraw <- function(Z, mu, Sigma, ref = NULL, total = 1) {
-  Zm <- .t1_mat(Z); n <- nrow(Zm); p <- ncol(Zm); D <- p + 1L
-  if (n == 0L) stop("Z must have at least one row")
-  mu <- .t1_vec(mu)
-  if (length(mu) != p) stop("mu must have one entry per column of Z")
-  Sg <- .t1_mat(Sigma)
-  if (nrow(Sg) != p || ncol(Sg) != p)
-    stop("Sigma must match the number of columns of Z")
-  L <- t(chol(Sg))
-  k <- if (is.null(ref)) D else as.integer(ref)
-  if (k < 1L || k > D) stop("ref must be a 1-based part index")
-  idx <- setdiff(seq_len(D), k)
-  t <- as.numeric(total)
-  Y <- sweep(Zm %*% t(L), 2, mu, "+")
-  out <- matrix(0, n, D)
-  for (r in seq_len(n)) {
-    full <- numeric(D); full[idx] <- Y[r, ]
-    e <- exp(full - max(full)); out[r, ] <- t * e / sum(e)
+Lgtnsim <- function(mu, Sigma, n, seed = 1, total = 1) {
+  mu <- .t1_vec(mu); p <- length(mu)
+  if (p < 1L) stop("mu must have at least one entry")
+  S <- as.matrix(Sigma)
+  if (nrow(S) != p || ncol(S) != p) stop("Sigma must be (D-1) x (D-1)")
+  n <- as.integer(n)
+  if (n < 1L) stop("n must be at least 1")
+  L <- t(chol(S))
+  g <- .t1_lcg(seed)
+  D <- p + 1L; k <- as.numeric(total)
+  Y <- matrix(0, n, p); Xs <- matrix(0, n, D)
+  for (t in seq_len(n)) {
+    z <- vapply(seq_len(p), function(i) g$norm(), 0)
+    y <- as.numeric(mu + L %*% z)
+    Y[t, ] <- y
+    e <- c(exp(y), 1)
+    Xs[t, ] <- k * e / sum(e)
   }
-  .t1_result(compositions = out, alr = Y, L = L, ref = k, n = n, D = D,
-             method = "Additive logistic normal draws from supplied noise")
+  e <- c(exp(mu), 1)
+  .t1_result(sample = Xs, alr = Y, center = k * e / sum(e),
+             mean_alr = colMeans(Y), n = as.numeric(n), D = as.numeric(D),
+             method = "Logistic-normal sampling via alr^-1")
 }

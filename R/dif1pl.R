@@ -27,19 +27,31 @@
 #'   examinees are stratified on its distinct values.  A single stratum
 #'   is used when omitted.
 #' @param correct Apply the 0.5 continuity correction.  Default TRUE.
+#' @param reference Which value of \code{group} is the reference group.
+#'   Defaults to the first value encountered.  \code{statistic} is
+#'   unaffected, but \code{alpha_MH} inverts and \code{delta_MH} changes
+#'   sign, so pass this explicitly whenever the direction of the DIF
+#'   matters.
 #' @return list: statistic, p_value, df, alpha_MH, delta_MH, sum_A,
 #'   sum_E, sum_V, n_strata, n_used, n, method.
 #' @examples
 #' Difmh(c(1, 0, 1, 1, 0, 0, 1, 0), c("r", "r", "r", "r", "f", "f", "f", "f"))$statistic
 #' @export
-Difmh <- function(y, group, item = NULL, correct = TRUE) {
+Difmh <- function(y, group, item = NULL, correct = TRUE, reference = NULL) {
   y <- as.numeric(y)
   n <- length(y)
   if (length(group) != n) stop("group must be the same length as y")
   if (!all(y == 0 | y == 1)) stop("y must be coded 0/1")
   levs <- unique(as.character(group))
   if (length(levs) != 2L) stop("group must have exactly 2 distinct values")
-  is_ref <- as.character(group) == levs[1]
+  ref <- if (is.null(reference)) {
+    levs[1]
+  } else if (as.character(reference) %in% levs) {
+    as.character(reference)
+  } else {
+    stop("reference is not one of the two group values")
+  }
+  is_ref <- as.character(group) == ref
   strata <- if (is.null(item)) rep(0L, n) else item
   if (length(strata) != n) stop("item must be the same length as y")
 
