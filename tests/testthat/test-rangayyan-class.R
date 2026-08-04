@@ -137,11 +137,11 @@ test_that("DivAv reports the worst pair, not only the average", {
 })
 
 test_that("Bhattacharyya is documented as not from this book", {
-  r <- Bhatt(c(0, 1), c(2, -1), CC1, CC2)
+  r <- BhattGauss(c(0, 1), c(2, -1), CC1, CC2)
   expect_true(r$not_from_this_book)
   expect_true(r$book_uses_divergence_eq_10_115)
   expect_gt(r$bhattacharyya, 0)
-  expect_equal(Bhatt(c(1, 2), c(1, 2), CC1, CC1)$bhattacharyya, 0,
+  expect_equal(BhattGauss(c(1, 2), c(1, 2), CC1, CC1)$bhattacharyya, 0,
                tolerance = 1e-12)
 })
 
@@ -442,7 +442,7 @@ test_that("Hellinger is a metric where the Bhattacharyya distance is not", {
 test_that("every borrowed measure carries its primary citation", {
   p1 <- c(0.2, 0.3, 0.5); p2 <- c(0.1, 0.4, 0.5)
   rs <- list(BhattCoef(p1, p2), Chernoff(p1, p2), Hellinger(p1, p2),
-             ErrBound(0.5, 0.5, 1), Bhatt(c(0, 1), c(2, -1), CC1, CC2))
+             ErrBound(0.5, 0.5, 1), BhattGauss(c(0, 1), c(2, -1), CC1, CC2))
   for (r in rs) {
     expect_true(r$not_from_this_book)
     expect_gt(nchar(r$reference), 40)

@@ -381,8 +381,11 @@ DivAv <- function(means, covs) {
 }
 
 Kld <- function(p1, p2) {
-  # eq (5.33): KLD(p1, p2) = sum_l p2(x_l) ln[p2(x_l) / p1(x_l)].  Note
-  # the book's argument order -- the sum is weighted by the SECOND PDF.
+  # eq (5.33): KLD(p1, p2) = sum_l p2(x_l) ln[p2(x_l) / p1(x_l)].
+  # NOTE THE ARGUMENT ORDER -- the book weights by the SECOND PDF, so its
+  # KLD(p1, p2) is D_KL(p2 || p1) in standard notation, the REVERSE of
+  # what most texts and libraries mean by KL(p, q).  That is the single
+  # most likely way to get a wrong number out of this family.
   # KLD is not symmetric, so swapping the arguments gives a different
   # number; both are returned so the asymmetry is visible rather than a
   # trap.  Their sum is exactly the divergence of eq (10.115).
@@ -486,7 +489,9 @@ Chernoff <- function(p1, p2, alpha = NULL, n_grid = 201) {
 }
 
 Hellinger <- function(p1, p2) {
-  # H = sqrt(1 - BC), so H^2 = 1 - BC.  Unlike the Bhattacharyya distance
+  # H = sqrt(1 - BC), so H^2 = 1 - BC.  The Python arm delegates to
+  # morie.fn.helld.hellinger_dist; this is the same arithmetic, kept here
+  # because the R tree has no separate helld module.  Unlike the Bhattacharyya distance
   # -ln BC, this is a TRUE METRIC: bounded in [0, 1], symmetric, and it
   # satisfies the triangle inequality, which -ln BC does not.  That is
   # the reason to reach for it -- anything needing a metric over
@@ -517,12 +522,16 @@ Hellinger <- function(p1, p2) {
        method = "Hellinger distance, H^2 = 1 - BC")
 }
 
-Bhatt <- function(m1, m2, C1, C2) {
+BhattGauss <- function(m1, m2, C1, C2) {
   # NOT FROM THIS BOOK.  A full-text search of the 2024 third edition --
   # Rangayyan and Krishnan -- finds no occurrence of "Bhattacharyya", nor
   # of Chernoff or Hellinger.  The book gives the KLD of eq (5.33) and
   # the divergence of eqs (10.115)-(10.117), which is the symmetric sum
   # of the two KLDs, and cites Swain for them.
+  #
+  # Named BhattGauss because Bhatt already belongs to morie.fn.bhatt,
+  # which computes the same quantity from SAMPLE SETS rather than from
+  # Gaussian parameters.
   #
   # WHAT IT IS FOR: D_B = -ln BC where BC is the Bhattacharyya
   # coefficient, the overlap of the two class-conditional densities.
