@@ -60,3 +60,64 @@
   if (sigma <= 0) sigma <- 1
   4^(1 / 3) * sigma * n^(-1 / 3)
 }
+
+#' The book's `R(z) = sqrt(2 pi) z^(z+1/2) / (e^z Gamma(z+1))`, Eq. (1.12).
+#'
+#' The Stirling defect of the gamma function: `R(z)` increases monotonically
+#' to 1 from below (Remark 1.2), which is exactly the fact the book uses to
+#' read off the `O(n^-1 h^-1/4)` interior and `O(n^-1 h^-3/4)` boundary rates
+#' of `Var[A_h(x)]` in (1.11). Computed through `lgamma` so the `z^(z+1/2)`
+#' factor cannot overflow at the small bandwidths this suite uses
+#' (`z ~ h^(-1/2)`).
+#' @noRd
+.morie_fauzi_rratio <- function(z) {
+  if (any(z <= 0)) stop("R(z) is defined for z > 0.")
+  exp(0.5 * log(2 * pi) + (z + 0.5) * log(z) - z - lgamma(z + 1))
+}
+
+#' `A_h(v)` of Eq. (1.9): the sample mean of the
+#' Gamma(shape = `h^(-1/2)`, scale = `v sqrt(h) + h`) density.
+#'
+#' NOT Chen's gamma kernel, which takes shape `v/h + 1` and scale `h`. The
+#' book fixes the SHAPE at `h^(-1/2)` and moves the scale; that single change
+#' buys the smaller variance orders of Remark 1.2 and costs the bias its
+#' rate, taking it from `O(h)` up to `O(sqrt(h))` in (1.10) -- which the
+#' geometric extrapolation (1.14) then buys back.
+#' @noRd
+.morie_fauzi_agamma <- function(x, v, h) {
+  x <- as.numeric(x)
+  if (h <= 0) stop("bandwidth must be positive.")
+  if (any(x < 0)) stop("gamma kernels need data on [0, infinity).")
+  if (any(v < 0)) stop("the evaluation points must lie in [0, infinity).")
+  shape <- 1 / sqrt(h)
+  vapply(v, function(pt) mean(stats::dgamma(x, shape = shape,
+                                            scale = pt * sqrt(h) + h)), numeric(1))
+}
+
+#' Exact one-sided Kolmogorov distribution function, Birnbaum-Tingey.
+#'
+#' `P(D_n^+ >= d) = d sum_{j=0}^{floor(n(1-d))} choose(n,j) (d+j/n)^(j-1)
+#' (1-d-j/n)^(n-j)`, and this returns `1 -` that. Summed through logarithms so
+#' the binomial coefficient cannot overflow, and mirroring
+#' `morie.fn._stats_core.ksone` term for term so the Python and R arms agree to
+#' the last bit rather than merely to plotting accuracy.
+#' @noRd
+.morie_fauzi_ksone <- function(d, n) {
+  d <- as.numeric(d); n <- as.integer(n)
+  if (d <= 0) return(0)
+  if (d >= 1) return(1)
+  limit <- as.integer(n * (1 - d))
+  s <- 0
+  for (j in 0:limit) {
+    a <- d + j / n
+    b <- 1 - d - j / n
+    if (b <= 0) {
+      if (n - j == 0L) b_term <- 0 else next
+    } else {
+      b_term <- (n - j) * log(b)
+    }
+    lc <- lchoose(n, j)
+    s <- s + exp(lc + (j - 1) * log(a) + b_term) * d
+  }
+  1 - max(0, min(1, s))
+}

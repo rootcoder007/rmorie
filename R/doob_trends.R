@@ -84,8 +84,8 @@ CCRSO_TABLE3_AGE <- data.frame(
 #' Internal helper: Doob Result
 #' @noRd
 .doob_result <- function(title, summary_lines, tables = list(),
-                          interpretation = NULL, payload = list(),
-                          warnings = character()) {
+                         interpretation = NULL, payload = list(),
+                         warnings = character()) {
   structure(
     list(
       title           = title,
@@ -116,12 +116,14 @@ analyze_doob_table1_releases <- function() {
   tbl <- CCRSO_TABLE1_RELEASES
   rows <- lapply(seq_len(nrow(tbl)), function(i) {
     r <- tbl[i, ]
-    c(r$type,
+    c(
+      r$type,
       sprintf("%.1f (%.2f%%)", r$revoke_violent, r$revoke_violent_pct),
       sprintf("%.1f (%.1f%%)", r$revoke_non_violent, r$revoke_non_violent_pct),
       sprintf("%.1f (%.1f%%)", r$revoke_breach, r$revoke_breach_pct),
       sprintf("%.1f (%.1f%%)", r$success, r$success_pct),
-      sprintf("%.1f", r$total))
+      sprintf("%.1f", r$total)
+    )
   })
   total_pop <- sum(tbl$total)
   total_violent_revokes <- sum(tbl$revoke_violent)
@@ -129,24 +131,36 @@ analyze_doob_table1_releases <- function() {
     if (total_pop > 0) 100 * total_violent_revokes / total_pop else 0
 
   .doob_result(
-    title = paste0("Doob Affidavit Table 1 -- Successful & unsuccessful ",
-                   "conditional releases (5-year avg, CCRSO 2013/14-2017/18)"),
+    title = paste0(
+      "Doob Affidavit Table 1 -- Successful & unsuccessful ",
+      "conditional releases (5-year avg, CCRSO 2013/14-2017/18)"
+    ),
     summary_lines = list(
       c("Source", "CCRSO 2018 pp.94-98, Doob Affidavit Exhibit B"),
       c("Total annual releases (5-yr avg)", round(total_pop, 1)),
       c("Total annual revoke-violent (5-yr avg)", round(total_violent_revokes, 1)),
-      c("Overall violent-revocation rate",
-        sprintf("%.3f%%", overall_violent_revoke_pct)),
-      c("Doob's headline point",
-        paste0(">= 99.4% of releases are successful or non-violent-",
-               "revoked -- the violent-revocation rate is < 1%"))
+      c(
+        "Overall violent-revocation rate",
+        sprintf("%.3f%%", overall_violent_revoke_pct)
+      ),
+      c(
+        "Doob's headline point",
+        paste0(
+          ">= 99.4% of releases are successful or non-violent-",
+          "revoked -- the violent-revocation rate is < 1%"
+        )
+      )
     ),
     tables = list(list(
-      title   = paste0("Table 1: Average annual releases by type, ",
-                       "with revocation breakdowns:"),
-      headers = c("Type", "Revoke (violent)", "Revoke (non-violent)",
-                  "Revoke (breach)", "Successful", "Total"),
-      rows    = rows
+      title = paste0(
+        "Table 1: Average annual releases by type, ",
+        "with revocation breakdowns:"
+      ),
+      headers = c(
+        "Type", "Revoke (violent)", "Revoke (non-violent)",
+        "Revoke (breach)", "Successful", "Total"
+      ),
+      rows = rows
     )),
     interpretation = paste0(
       "Reproduces Doob's Federal Court Table 1. The headline finding: ",
@@ -157,8 +171,8 @@ analyze_doob_table1_releases <- function() {
       "location restrictions), not new criminal conduct."
     ),
     payload = list(
-      table1                     = tbl,
-      total_pop_per_year         = total_pop,
+      table1 = tbl,
+      total_pop_per_year = total_pop,
       violent_revocation_rate_pct = overall_violent_revoke_pct
     )
   )
@@ -180,42 +194,52 @@ analyze_doob_table2_flow <- function() {
   tbl <- CCRSO_TABLE2_FLOW
   rows <- lapply(seq_len(nrow(tbl)), function(i) {
     r <- tbl[i, ]
-    c(r$year, r$avg_count, r$admissions,
+    c(
+      r$year, r$avg_count, r$admissions,
       if (is.na(r$deaths)) "n/a" else r$deaths,
-      r$full_parole_releases, r$statutory_releases)
+      r$full_parole_releases, r$statutory_releases
+    )
   })
-  n_years          <- nrow(tbl)
-  avg_count        <- sum(tbl$avg_count) / n_years
-  avg_admissions   <- sum(tbl$admissions) / n_years
-  avg_full_parole  <- sum(tbl$full_parole_releases) / n_years
+  n_years <- nrow(tbl)
+  avg_count <- sum(tbl$avg_count) / n_years
+  avg_admissions <- sum(tbl$admissions) / n_years
+  avg_full_parole <- sum(tbl$full_parole_releases) / n_years
   avg_stat_release <- sum(tbl$statutory_releases) / n_years
 
   rows[[length(rows) + 1]] <- c(
     "Average", round(avg_count, 1), round(avg_admissions, 1),
-    45,  # Doob's stated 5-yr average for deaths
+    45, # Doob's stated 5-yr average for deaths
     round(avg_full_parole, 1), round(avg_stat_release, 1)
   )
   monthly_releases <- avg_stat_release / 12
 
   .doob_result(
-    title = paste0("Doob Affidavit Table 2 -- Flow of prisoners into and out ",
-                   "of penitentiaries (CCRSO 2013/14-2017/18)"),
+    title = paste0(
+      "Doob Affidavit Table 2 -- Flow of prisoners into and out ",
+      "of penitentiaries (CCRSO 2013/14-2017/18)"
+    ),
     summary_lines = list(
       c("Source", "CCRSO 2018, Doob Affidavit Exhibit B"),
       c("Average annual count (5-yr)", round(avg_count, 1)),
       c("Average annual admissions (5-yr)", round(avg_admissions, 1)),
       c("Average statutory releases / year (5-yr)", round(avg_stat_release, 1)),
       c("Average statutory releases / month", round(monthly_releases, 1)),
-      c("Doob's headline point",
-        paste0("About 427 statutory releases per month -- releasing ",
-               "prisoners 6 months early would empty ~17.5% of the ",
-               "penitentiary system in one tranche."))
+      c(
+        "Doob's headline point",
+        paste0(
+          "About 427 statutory releases per month -- releasing ",
+          "prisoners 6 months early would empty ~17.5% of the ",
+          "penitentiary system in one tranche."
+        )
+      )
     ),
     tables = list(list(
-      title   = "Table 2: Annual prisoner flow + 5-year average:",
-      headers = c("Year", "Avg count", "Admissions", "Deaths",
-                  "Full parole rel.", "Statutory rel."),
-      rows    = rows
+      title = "Table 2: Annual prisoner flow + 5-year average:",
+      headers = c(
+        "Year", "Avg count", "Admissions", "Deaths",
+        "Full parole rel.", "Statutory rel."
+      ),
+      rows = rows
     )),
     interpretation = paste0(
       "Reproduces Doob's Federal Court Table 2. The flow shows remarkable ",
@@ -253,8 +277,8 @@ analyze_doob_table3_age_overrepresentation <- function() {
   irrs <- vector("list", nrow(tbl))
   for (i in seq_len(nrow(tbl))) {
     r <- tbl[i, ]
-    irr_custody    <- r$csc_in_custody_pct  / r$canada_adult_pop_pct
-    irr_admissions <- r$csc_admissions_pct  / r$canada_adult_pop_pct
+    irr_custody <- r$csc_in_custody_pct / r$canada_adult_pop_pct
+    irr_admissions <- r$csc_admissions_pct / r$canada_adult_pop_pct
     rows[[i]] <- c(
       r$age_group,
       format(r$canada_adult_pop, big.mark = ","),
@@ -266,30 +290,42 @@ analyze_doob_table3_age_overrepresentation <- function() {
       sprintf("%.2f", irr_custody),
       sprintf("%.2f", irr_admissions)
     )
-    irrs[[i]] <- list(age_group = r$age_group,
-                      irr_custody = irr_custody,
-                      irr_admissions = irr_admissions)
+    irrs[[i]] <- list(
+      age_group = r$age_group,
+      irr_custody = irr_custody,
+      irr_admissions = irr_admissions
+    )
   }
   .doob_result(
-    title = paste0("Doob Affidavit Table 3 -- Prisoner age distribution: ",
-                   "Canada adult population vs CSC in-custody / admissions"),
+    title = paste0(
+      "Doob Affidavit Table 3 -- Prisoner age distribution: ",
+      "Canada adult population vs CSC in-custody / admissions"
+    ),
     summary_lines = list(
       c("Source", "CCRSO 2018 + StatsCan CANSIM, Doob Affidavit Exhibits A,C,D"),
       c("Age 50+ as % of Canada adult population", "47.3%"),
       c("Age 50+ as % of CSC in-custody", "25.2%"),
       c("Age 50+ as % of CSC admissions (2017-18)", "16.9%"),
-      c("Doob's headline point",
-        paste0("Older adults are dramatically under-represented in CSC ",
-               "custody (25.2% vs 47.3%) and even more so in admissions ",
-               "(16.9%) -- the prison population skews young."))
+      c(
+        "Doob's headline point",
+        paste0(
+          "Older adults are dramatically under-represented in CSC ",
+          "custody (25.2% vs 47.3%) and even more so in admissions ",
+          "(16.9%) -- the prison population skews young."
+        )
+      )
     ),
     tables = list(list(
-      title   = paste0("Table 3: Age distribution + over-/under-",
-                       "representation IRR (CSC%/Canada%):"),
-      headers = c("Age", "Adult pop", "Adult %", "In custody", "Custody %",
-                  "Admissions", "Admissions %", "IRR custody",
-                  "IRR admissions"),
-      rows    = rows
+      title = paste0(
+        "Table 3: Age distribution + over-/under-",
+        "representation IRR (CSC%/Canada%):"
+      ),
+      headers = c(
+        "Age", "Adult pop", "Adult %", "In custody", "Custody %",
+        "Admissions", "Admissions %", "IRR custody",
+        "IRR admissions"
+      ),
+      rows = rows
     )),
     interpretation = paste0(
       "Reproduces Doob's Federal Court Table 3 plus over-/under-",
@@ -327,9 +363,11 @@ pettitt_changepoint <- function(series) {
   arr <- arr[is.finite(arr)]
   n <- length(arr)
   if (n < 5) {
-    return(list(change_point_index = NA_integer_, U_max = NA_real_,
-                 p_value = NA_real_,
-                 note = "n < 5; Pettitt test not applicable"))
+    return(list(
+      change_point_index = NA_integer_, U_max = NA_real_,
+      p_value = NA_real_,
+      note = "n < 5; Pettitt test not applicable"
+    ))
   }
   U <- numeric(n)
   # Mann-Whitney U-like statistic accumulated up to each split-point.
@@ -346,15 +384,19 @@ pettitt_changepoint <- function(series) {
   }
   abs_U <- abs(U)
   # Python's argmax returns the FIRST max; R's which.max does the same.
-  k_max <- which.max(abs_U) - 1L  # 0-indexed to match Python output
+  k_max <- which.max(abs_U) - 1L # 0-indexed to match Python output
   U_max <- abs_U[k_max + 1L]
   # Pettitt 1979 eq. 11 approximate p-value.
   p_approx <- 2 * exp(-6 * U_max^2 / (n^3 + n^2))
-  list(change_point_index = as.integer(k_max),
-       U_max              = as.numeric(U_max),
-       p_value            = min(p_approx, 1),
-       note               = paste0("Pettitt 1979 approximate p-value; ",
-                                   "single-change-point assumption"))
+  list(
+    change_point_index = as.integer(k_max),
+    U_max = as.numeric(U_max),
+    p_value = min(p_approx, 1),
+    note = paste0(
+      "Pettitt 1979 approximate p-value; ",
+      "single-change-point assumption"
+    )
+  )
 }
 
 
@@ -379,15 +421,17 @@ pettitt_changepoint <- function(series) {
 #' res$payload$r_pearson
 #' @export
 decoupling_test <- function(crime_series, imprisonment_series,
-                              years = NULL) {
+                            years = NULL) {
   crime <- as.numeric(crime_series)
-  imp   <- as.numeric(imprisonment_series)
+  imp <- as.numeric(imprisonment_series)
   if (length(crime) != length(imp)) {
     return(.doob_result(
       title = "Doob decoupling test",
       summary_lines = list(),
-      warnings = sprintf("length mismatch: crime=%d, imp=%d",
-                          length(crime), length(imp))
+      warnings = sprintf(
+        "length mismatch: crime=%d, imp=%d",
+        length(crime), length(imp)
+      )
     ))
   }
   n <- length(crime)
@@ -406,30 +450,42 @@ decoupling_test <- function(crime_series, imprisonment_series,
     p <- 2 * (1 - pnorm(abs(z) * sqrt(n - 3)))
   }
   pcp_crime <- pettitt_changepoint(crime)
-  pcp_imp   <- pettitt_changepoint(imp)
+  pcp_imp <- pettitt_changepoint(imp)
   yrs_str <- if (!is.null(years)) {
     sprintf("%d-%d", min(years), max(years))
   } else {
     sprintf("n=%d years", n)
   }
   .doob_result(
-    title = paste0("Doob decoupling test -- Pearson(crime rate, ",
-                   "imprisonment rate) over time"),
+    title = paste0(
+      "Doob decoupling test -- Pearson(crime rate, ",
+      "imprisonment rate) over time"
+    ),
     summary_lines = list(
       c("Years", yrs_str),
       c("n", n),
       c("Pearson r", round(r_pearson, 4)),
       c("Two-sided p (Fisher z)", round(p, 6)),
-      c("Pettitt change-point: crime",
+      c(
+        "Pettitt change-point: crime",
         ifelse(is.na(pcp_crime$change_point_index), "n/a",
-                as.character(pcp_crime$change_point_index))),
-      c("Pettitt change-point: imprisonment",
+          as.character(pcp_crime$change_point_index)
+        )
+      ),
+      c(
+        "Pettitt change-point: imprisonment",
         ifelse(is.na(pcp_imp$change_point_index), "n/a",
-                as.character(pcp_imp$change_point_index))),
-      c("Doob's thesis",
-        paste0("If r is small / sign-mismatched / non-significant, ",
-               "imprisonment is decoupled from crime -- supports the ",
-               "affidavit's central claim."))
+          as.character(pcp_imp$change_point_index)
+        )
+      ),
+      c(
+        "Doob's thesis",
+        paste0(
+          "If r is small / sign-mismatched / non-significant, ",
+          "imprisonment is decoupled from crime -- supports the ",
+          "affidavit's central claim."
+        )
+      )
     ),
     interpretation = paste0(
       "Tests Doob's central thesis from Federal Court Affidavit ",
@@ -482,17 +538,27 @@ analyze_doob_full_affidavit <- function() {
     }
   }
   .doob_result(
-    title = paste0("Doob Federal Court Affidavit (T-539-20) -- ",
-                   "aggregate national-level replication"),
+    title = paste0(
+      "Doob Federal Court Affidavit (T-539-20) -- ",
+      "aggregate national-level replication"
+    ),
     summary_lines = list(
       c("Source", "Doob Affidavit T-539-20 Vol 3, pp. 778-795"),
       c("Tables replicated", "1, 2, 3"),
-      c("Figures 1-4 (time series)",
-        paste0("require StatsCan CANSIM data; use ",
-               "decoupling_test(crime, imp) once series available")),
-      c("Companion analyses in morie",
-        paste0("MRM modules on OTIS provincial data; MRM chi^2 on ",
-               "c/d-series; SIU IAP federal context"))
+      c(
+        "Figures 1-4 (time series)",
+        paste0(
+          "require StatsCan CANSIM data; use ",
+          "decoupling_test(crime, imp) once series available"
+        )
+      ),
+      c(
+        "Companion analyses in morie",
+        paste0(
+          "MRM modules on OTIS provincial data; MRM chi^2 on ",
+          "c/d-series; SIU IAP federal context"
+        )
+      )
     ),
     tables = sections,
     interpretation = paste0(

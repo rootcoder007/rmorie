@@ -75,7 +75,8 @@ NULL
 #' @examples
 #' if (requireNamespace("DescTools", quietly = TRUE)) {
 #'   set.seed(1)
-#'   x <- sample(c("a", "b"), 60, TRUE); y <- sample(c("u", "v"), 60, TRUE)
+#'   x <- sample(c("a", "b"), 60, TRUE)
+#'   y <- sample(c("u", "v"), 60, TRUE)
 #'   morie_desc_cramers_v(table(x, y))
 #' }
 #' @export
@@ -104,7 +105,8 @@ morie_desc_cramers_v <- function(x, y = NULL, ...) {
 #' @examples
 #' if (requireNamespace("DescTools", quietly = TRUE)) {
 #'   set.seed(1)
-#'   r1 <- sample(1:3, 50, TRUE); r2 <- r1
+#'   r1 <- sample(1:3, 50, TRUE)
+#'   r2 <- r1
 #'   r2[1:10] <- sample(1:3, 10, TRUE)
 #'   morie_desc_kappa(table(r1, r2))
 #' }
@@ -215,7 +217,7 @@ morie_desc_atkinson <- function(x, parameter = 0.5, ...) {
 #'   and \code{$raw} (the upstream \code{check_model} object).
 #' @examples
 #' if (requireNamespace("performance", quietly = TRUE) &&
-#'     requireNamespace("see", quietly = TRUE)) {
+#'   requireNamespace("see", quietly = TRUE)) {
 #'   set.seed(1)
 #'   df <- data.frame(y = rnorm(50), x = rnorm(50))
 #'   res <- morie_performance_check_model(stats::lm(y ~ x, df))
@@ -335,7 +337,9 @@ morie_performance_check_outliers <- function(x, ...) {
 #' @examples
 #' if (requireNamespace("ppcor", quietly = TRUE)) {
 #'   set.seed(1)
-#'   x <- rnorm(40); z <- rnorm(40); y <- x + z + rnorm(40)
+#'   x <- rnorm(40)
+#'   z <- rnorm(40)
+#'   y <- x + z + rnorm(40)
 #'   morie_ppcor_partial(x, y, z)
 #' }
 #' @export
@@ -369,7 +373,9 @@ morie_ppcor_partial <- function(x, y = NULL, z = NULL,
 #' @examples
 #' if (requireNamespace("ppcor", quietly = TRUE)) {
 #'   set.seed(1)
-#'   x <- rnorm(40); z <- rnorm(40); y <- x + z + rnorm(40)
+#'   x <- rnorm(40)
+#'   z <- rnorm(40)
+#'   y <- x + z + rnorm(40)
 #'   morie_ppcor_semipartial(x, y, z)
 #' }
 #' @export
@@ -380,14 +386,20 @@ morie_ppcor_semipartial <- function(x, y = NULL, z = NULL,
     list(method = "semipartial_cor (rmorie native)", raw = raw)
   } else {
     zz <- as.matrix(z)
-    sp <- morie_semipartial_cor(cbind(x = as.numeric(x),
-                                      y = as.numeric(y), zz),
-                                method = method)
-    raw <- data.frame(estimate = sp$estimate["x", "y"],
-                      p.value = sp$p.value["x", "y"],
-                      statistic = sp$statistic["x", "y"],
-                      n = sp$n, gp = ncol(zz), Method = method,
-                      stringsAsFactors = FALSE)
+    sp <- morie_semipartial_cor(
+      cbind(
+        x = as.numeric(x),
+        y = as.numeric(y), zz
+      ),
+      method = method
+    )
+    raw <- data.frame(
+      estimate = sp$estimate["x", "y"],
+      p.value = sp$p.value["x", "y"],
+      statistic = sp$statistic["x", "y"],
+      n = sp$n, gp = ncol(zz), Method = method,
+      stringsAsFactors = FALSE
+    )
     list(method = "semipartial_cor_test (rmorie native)", raw = raw)
   }
 }
@@ -418,8 +430,10 @@ morie_ppcor_semipartial <- function(x, y = NULL, z = NULL,
 #' @export
 morie_coin_independence <- function(formula, data, ...) {
   raw <- morie_indep_test(formula, data = data, ...)
-  list(method = "morie independence permutation test", raw = raw,
-       statistic = raw$statistic, p.value = raw$p.value)
+  list(
+    method = "morie independence permutation test", raw = raw,
+    statistic = raw$statistic, p.value = raw$p.value
+  )
 }
 
 #' Permutation Wilcoxon test via \pkg{coin}
@@ -444,8 +458,10 @@ morie_coin_independence <- function(formula, data, ...) {
 #' @export
 morie_coin_wilcoxon <- function(formula, data, ...) {
   raw <- morie_wilcox_test(formula, data = data, ...)
-  list(method = "morie Wilcoxon permutation test", raw = raw,
-       statistic = raw$statistic, p.value = raw$p.value)
+  list(
+    method = "morie Wilcoxon permutation test", raw = raw,
+    statistic = raw$statistic, p.value = raw$p.value
+  )
 }
 
 #' Permutation one-way ANOVA via \pkg{coin}
@@ -470,8 +486,10 @@ morie_coin_wilcoxon <- function(formula, data, ...) {
 #' @export
 morie_coin_oneway <- function(formula, data, ...) {
   raw <- morie_oneway_test(formula, data = data, ...)
-  list(method = "morie one-way permutation test", raw = raw,
-       statistic = raw$statistic, p.value = raw$p.value)
+  list(
+    method = "morie one-way permutation test", raw = raw,
+    statistic = raw$statistic, p.value = raw$p.value
+  )
 }
 
 

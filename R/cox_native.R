@@ -14,20 +14,24 @@
   e <- as.numeric(event)
   if (length(t) != length(e)) {
     stop(sprintf("time has %d entries but event has %d", length(t), length(e)),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   if (length(t) == 0L) stop("time must be non-empty", call. = FALSE)
   if (any(t < 0)) stop("time must be non-negative", call. = FALSE)
   if (!all(e == 0 | e == 1)) {
     stop("event must be 0 (censored) or 1 (event)", call. = FALSE)
   }
-  if (is.null(X)) return(list(t = t, e = e, X = NULL))
+  if (is.null(X)) {
+    return(list(t = t, e = e, X = NULL))
+  }
   Xm <- as.matrix(X)
   storage.mode(Xm) <- "double"
   if (nrow(Xm) != length(t)) Xm <- t(Xm)
   if (nrow(Xm) != length(t)) {
     stop(sprintf("X has %d rows but time has %d", nrow(Xm), length(t)),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   list(t = t, e = e, X = Xm)
 }
@@ -97,7 +101,8 @@
   for (it in seq_len(max_iter)) {
     sc <- .morie_cox_score(ts, es, Xs, beta, offs, ties)
     step <- tryCatch(solve(sc$I, sc$U),
-                     error = function(err) .morie_ginv(sc$I) %*% sc$U)
+      error = function(err) .morie_ginv(sc$I) %*% sc$U
+    )
     step <- as.vector(step)
     beta <- beta + step
     loglik <- sc$loglik
@@ -110,8 +115,10 @@
   # final step, matching _surv.py exactly. Re-evaluating at the stepped
   # beta would be marginally more correct and would break parity, so the
   # two languages stay wrong together rather than disagreeing.
-  list(beta = beta, loglik = loglik, I = sc$I, U = sc$U,
-       n_iter = as.integer(it), converged = converged)
+  list(
+    beta = beta, loglik = loglik, I = sc$I, U = sc$U,
+    n_iter = as.integer(it), converged = converged
+  )
 }
 
 .morie_cox_baseline <- function(t, e, X, beta, offset = NULL) {
@@ -144,20 +151,24 @@
 .morie_cox_result <- function(t, e, X, fit, label, method) {
   I <- fit$I
   cov <- tryCatch(solve(I), error = function(err) NULL)
-  se <- if (is.null(cov)) rep(NA_real_, length(fit$beta)) else {
+  se <- if (is.null(cov)) {
+    rep(NA_real_, length(fit$beta))
+  } else {
     sqrt(pmax(diag(cov), 0))
   }
   z <- fit$beta / se
   ev <- t[e == 1]
   n_ties <- length(ev) - length(unique(ev))
-  list(beta = fit$beta, se = se, z = z,
-       p_value = 2 * stats::pnorm(abs(z), lower.tail = FALSE),
-       hazard_ratio = exp(fit$beta), loglik = fit$loglik, cov = cov,
-       information = I, n_ties = as.integer(n_ties),
-       n_events = as.integer(sum(e)), n = length(t),
-       n_iter = fit$n_iter, converged = fit$converged,
-       ties = tolower(label), time = t, event = e, X = X,
-       method = method)
+  list(
+    beta = fit$beta, se = se, z = z,
+    p_value = 2 * stats::pnorm(abs(z), lower.tail = FALSE),
+    hazard_ratio = exp(fit$beta), loglik = fit$loglik, cov = cov,
+    information = I, n_ties = as.integer(n_ties),
+    n_events = as.integer(sum(e)), n = length(t),
+    n_iter = fit$n_iter, converged = fit$converged,
+    ties = tolower(label), time = t, event = e, X = X,
+    method = method
+  )
 }
 
 
@@ -207,7 +218,7 @@ morie_breslow_tie_correction <- function(time, event, X, ...) {
 #' @examples
 #' set.seed(1)
 #' X <- matrix(rnorm(120), ncol = 2)
-#' tt <- round(rexp(60, exp(X %*% c(0.7, -0.4))), 1)   # ties on purpose
+#' tt <- round(rexp(60, exp(X %*% c(0.7, -0.4))), 1) # ties on purpose
 #' morie_efron_tie_correction(tt, rep(1, 60), X)$beta
 #' @export
 morie_efron_tie_correction <- function(time, event, X, ...) {
@@ -247,16 +258,22 @@ morie_cox_breslow_step <- function(time, event, X, beta = NULL,
   if (is.null(beta)) beta <- .morie_cox_fit(d$t, d$e, d$X, ties = ties)$beta
   beta <- as.numeric(beta)
   if (length(beta) != ncol(d$X)) {
-    stop(sprintf("beta has %d entries but X has %d columns",
-                 length(beta), ncol(d$X)), call. = FALSE)
+    stop(sprintf(
+      "beta has %d entries but X has %d columns",
+      length(beta), ncol(d$X)
+    ), call. = FALSE)
   }
   bh <- .morie_cox_baseline(d$t, d$e, d$X, beta)
-  list(times = bh$times, hazard = bh$hazard, cumhazard = bh$cumhazard,
-       survival = exp(-bh$cumhazard), beta = beta, n = length(d$t),
-       tail_caveat = paste("the baseline is undefined beyond the last event",
-                           "time; the curve is flat there by convention,",
-                           "not by evidence"),
-       method = "cox_breslow_step")
+  list(
+    times = bh$times, hazard = bh$hazard, cumhazard = bh$cumhazard,
+    survival = exp(-bh$cumhazard), beta = beta, n = length(d$t),
+    tail_caveat = paste(
+      "the baseline is undefined beyond the last event",
+      "time; the curve is flat there by convention,",
+      "not by evidence"
+    ),
+    method = "cox_breslow_step"
+  )
 }
 
 
@@ -285,9 +302,11 @@ morie_cox_breslow_step <- function(time, event, X, beta = NULL,
 morie_cox_martingale_residuals <- function(fit) {
   for (k in c("time", "event", "X", "beta")) {
     if (is.null(fit[[k]])) {
-      stop(sprintf(paste("fit is missing '%s'; pass a result from",
-                         "morie_efron_tie_correction or",
-                         "morie_breslow_tie_correction"), k), call. = FALSE)
+      stop(sprintf(paste(
+        "fit is missing '%s'; pass a result from",
+        "morie_efron_tie_correction or",
+        "morie_breslow_tie_correction"
+      ), k), call. = FALSE)
     }
   }
   t <- as.numeric(fit$time)
@@ -302,9 +321,11 @@ morie_cox_martingale_residuals <- function(fit) {
   H_at <- ifelse(idx >= 1L, bh$cumhazard[pmax(idx, 1L)], 0)
   expected <- w * H_at
   resid <- e - expected
-  list(residuals = resid, expected = expected, event = e,
-       mean = mean(resid), cumhazard = bh$cumhazard, times = bh$times,
-       method = "cox_martingale_residuals")
+  list(
+    residuals = resid, expected = expected, event = e,
+    mean = mean(resid), cumhazard = bh$cumhazard, times = bh$times,
+    method = "cox_martingale_residuals"
+  )
 }
 
 
@@ -335,13 +356,17 @@ morie_deviance_residual_cox <- function(fit) {
   e <- m$event
   inner <- -2 * (M + ifelse(e > 0, e * log(pmax(e - M, 1e-300)), 0))
   d <- sign(M) * sqrt(pmax(inner, 0))
-  list(residuals = d, martingale = M,
-       n_extreme = as.integer(sum(abs(d) > 2.5)),
-       mean = mean(d), sd = if (length(d) > 1L) stats::sd(d) else NA_real_,
-       censoring_caveat = paste("symmetry degrades under heavy censoring; a",
-                                "mass of small negative residuals is expected",
-                                "there, not lack of fit"),
-       method = "deviance_residual_cox")
+  list(
+    residuals = d, martingale = M,
+    n_extreme = as.integer(sum(abs(d) > 2.5)),
+    mean = mean(d), sd = if (length(d) > 1L) stats::sd(d) else NA_real_,
+    censoring_caveat = paste(
+      "symmetry degrades under heavy censoring; a",
+      "mass of small negative residuals is expected",
+      "there, not lack of fit"
+    ),
+    method = "deviance_residual_cox"
+  )
 }
 
 
@@ -372,8 +397,10 @@ morie_deviance_residual_cox <- function(fit) {
 #' f <- morie_efron_tie_correction(tt, rep(1, 40), X)
 #' round(morie_cox_schoenfeld_residuals(f)$p_value, 3)
 #' @export
-morie_cox_schoenfeld_residuals <- function(fit, transform = c("km", "rank",
-                                                              "identity")) {
+morie_cox_schoenfeld_residuals <- function(fit, transform = c(
+                                             "km", "rank",
+                                             "identity"
+                                           )) {
   transform <- match.arg(transform)
   t <- as.numeric(fit$time)
   e <- as.numeric(fit$event)
@@ -391,8 +418,7 @@ morie_cox_schoenfeld_residuals <- function(fit, transform = c("km", "rank",
     res[r_i, ] <- X[i, ] - as.vector(wr %*% X[at_risk, , drop = FALSE]) / sum(wr)
   }
   times <- t[ev_idx]
-  g <- switch(
-    transform,
+  g <- switch(transform,
     km = {
       km <- .morie_km_estimate(t, e)
       idx <- pmin(pmax(findInterval(times, km$times), 1L), length(km$survival))
@@ -412,8 +438,10 @@ morie_cox_schoenfeld_residuals <- function(fit, transform = c("km", "rank",
       pval[j] <- 2 * stats::pnorm(abs(zst), lower.tail = FALSE)
     }
   }
-  list(residuals = res, times = times, correlation = corr, p_value = pval,
-       transform = transform, method = "cox_schoenfeld_residuals")
+  list(
+    residuals = res, times = times, correlation = corr, p_value = pval,
+    transform = transform, method = "cox_schoenfeld_residuals"
+  )
 }
 
 
@@ -449,14 +477,18 @@ morie_cox_stratified <- function(time, event, X, stratum, ties = "efron",
   d <- .morie_cox_prepare(time, event, X)
   st <- as.vector(stratum)
   if (length(st) != length(d$t)) {
-    stop(sprintf("stratum has %d entries but time has %d",
-                 length(st), length(d$t)), call. = FALSE)
+    stop(sprintf(
+      "stratum has %d entries but time has %d",
+      length(st), length(d$t)
+    ), call. = FALSE)
   }
   levels_ <- unique(sort(st))
   p <- ncol(d$X)
   beta <- numeric(p)
-  empty <- levels_[vapply(levels_, function(lv) sum(d$e[st == lv]) == 0,
-                          logical(1))]
+  empty <- levels_[vapply(
+    levels_, function(lv) sum(d$e[st == lv]) == 0,
+    logical(1)
+  )]
   converged <- FALSE
   it <- 0L
   ll_total <- 0
@@ -470,15 +502,18 @@ morie_cox_stratified <- function(time, event, X, stratum, ties = "efron",
       if (sum(d$e[m]) == 0) next
       ts <- d$t[m]
       ord <- order(ts)
-      sc <- .morie_cox_score(ts[ord], d$e[m][ord],
-                             d$X[m, , drop = FALSE][ord, , drop = FALSE],
-                             beta, numeric(sum(m)), ties)
+      sc <- .morie_cox_score(
+        ts[ord], d$e[m][ord],
+        d$X[m, , drop = FALSE][ord, , drop = FALSE],
+        beta, numeric(sum(m)), ties
+      )
       U <- U + sc$U
       I_total <- I_total + sc$I
       ll_total <- ll_total + sc$loglik
     }
     step <- as.vector(tryCatch(solve(I_total, U),
-                               error = function(err) .morie_ginv(I_total) %*% U))
+      error = function(err) .morie_ginv(I_total) %*% U
+    ))
     beta <- beta + step
     if (max(abs(step)) < tol) {
       converged <- TRUE
@@ -486,21 +521,28 @@ morie_cox_stratified <- function(time, event, X, stratum, ties = "efron",
     }
   }
   se <- tryCatch(sqrt(pmax(diag(solve(I_total)), 0)),
-                 error = function(err) rep(NA_real_, p))
+    error = function(err) rep(NA_real_, p)
+  )
   z <- beta / se
-  list(beta = beta, se = se, z = z,
-       p_value = 2 * stats::pnorm(abs(z), lower.tail = FALSE),
-       hazard_ratio = exp(beta), loglik = ll_total, information = I_total,
-       strata = levels_,
-       events_per_stratum = vapply(levels_,
-                                   function(lv) as.integer(sum(d$e[st == lv])),
-                                   integer(1)),
-       empty_strata = empty, n = length(d$t), n_iter = as.integer(it),
-       converged = converged,
-       stratifier_caveat = paste("a stratification variable has no coefficient",
-                                 "and no hazard ratio; stratify on the",
-                                 "nuisance, never on the exposure"),
-       method = "cox_stratified")
+  list(
+    beta = beta, se = se, z = z,
+    p_value = 2 * stats::pnorm(abs(z), lower.tail = FALSE),
+    hazard_ratio = exp(beta), loglik = ll_total, information = I_total,
+    strata = levels_,
+    events_per_stratum = vapply(
+      levels_,
+      function(lv) as.integer(sum(d$e[st == lv])),
+      integer(1)
+    ),
+    empty_strata = empty, n = length(d$t), n_iter = as.integer(it),
+    converged = converged,
+    stratifier_caveat = paste(
+      "a stratification variable has no coefficient",
+      "and no hazard ratio; stratify on the",
+      "nuisance, never on the exposure"
+    ),
+    method = "cox_stratified"
+  )
 }
 
 
@@ -559,10 +601,12 @@ morie_cox_dfbeta_influence <- function(fit) {
   dfbeta <- L %*% Iinv
   dfbetas <- sweep(dfbeta, 2L, ifelse(se > 0, se, NA_real_), "/")
   worst <- which.max(apply(abs(dfbetas), 1L, max))
-  list(dfbeta = dfbeta, dfbetas = dfbetas, score_residuals = L,
-       max_influence = max(abs(dfbetas), na.rm = TRUE),
-       most_influential = as.integer(worst - 1L),
-       method = "cox_dfbeta_influence")
+  list(
+    dfbeta = dfbeta, dfbetas = dfbetas, score_residuals = L,
+    max_influence = max(abs(dfbetas), na.rm = TRUE),
+    most_influential = as.integer(worst - 1L),
+    method = "cox_dfbeta_influence"
+  )
 }
 
 
@@ -592,8 +636,10 @@ morie_dfbeta_cox <- function(time, event, X, ties = c("efron", "breslow")) {
     morie_breslow_tie_correction(time, event, X)
   }
   inf <- morie_cox_dfbeta_influence(fit)
-  list(dfbeta = inf$dfbeta, dfbetas = inf$dfbetas,
-       score_residuals = inf$score_residuals, beta = fit$beta, se = fit$se,
-       max_influence = inf$max_influence,
-       most_influential = inf$most_influential, method = "dfbeta_cox")
+  list(
+    dfbeta = inf$dfbeta, dfbetas = inf$dfbetas,
+    score_residuals = inf$score_residuals, beta = fit$beta, se = fit$se,
+    max_influence = inf$max_influence,
+    most_influential = inf$most_influential, method = "dfbeta_cox"
+  )
 }

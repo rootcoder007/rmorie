@@ -28,7 +28,7 @@
   }
   rds <- system.file("extdata", "describe_corpus.Rds", package = "rmorie")
   if ((!nzchar(rds) || !file.exists(rds)) &&
-      requireNamespace("rmoriedata", quietly = TRUE)) {
+    requireNamespace("rmoriedata", quietly = TRUE)) {
     rds <- system.file("extdata", "describe_corpus.Rds", package = "rmoriedata")
   }
   if (!nzchar(rds) || !file.exists(rds)) {
@@ -52,9 +52,9 @@
 #' @noRd
 .morie_normalise_describe_name <- function(name) {
   name <- as.character(name)[[1L]]
-  name <- sub("^morie_",    "", name)
+  name <- sub("^morie_", "", name)
   name <- sub("^describe_", "", name)
-  name <- sub("\\.md$",     "", name)
+  name <- sub("\\.md$", "", name)
   name
 }
 
@@ -82,7 +82,7 @@
 #'
 #' @examples
 #' morie_describe("aalen")
-#' morie_describe("morie_aalen")  # leading prefix stripped
+#' morie_describe("morie_aalen") # leading prefix stripped
 #' # Function-object form: pass any morie callable unquoted
 #' # (btsrp is the bootstrap primitive; its narrative ships in
 #' # the bundled describe corpus).
@@ -95,15 +95,19 @@ morie_describe <- function(callable) {
   name <- if (is.function(callable)) {
     n <- deparse(substitute(callable))
     if (!is.character(n) || length(n) != 1L || !nzchar(n)) {
-      stop("morie_describe(): could not infer callable name; ",
-           "pass a character scalar instead.")
+      stop(
+        "morie_describe(): could not infer callable name; ",
+        "pass a character scalar instead."
+      )
     }
     n
   } else if (is.character(callable)) {
     callable[[1L]]
   } else {
-    stop("morie_describe(): expected a function or a character scalar; ",
-         "got ", typeof(callable), ".")
+    stop(
+      "morie_describe(): expected a function or a character scalar; ",
+      "got ", typeof(callable), "."
+    )
   }
   morie_describe_by_name(name)
 }
@@ -127,16 +131,22 @@ morie_describe <- function(callable) {
 #' @export
 morie_describe_by_name <- function(name) {
   if (!is.character(name) || length(name) != 1L || !nzchar(name)) {
-    stop("morie_describe_by_name(): expected a non-empty ",
-         "character scalar; got ", typeof(name), ".")
+    stop(
+      "morie_describe_by_name(): expected a non-empty ",
+      "character scalar; got ", typeof(name), "."
+    )
   }
   corpus <- .morie_load_describe_corpus()
   key <- .morie_normalise_describe_name(name)
   if (!key %in% names(corpus)) {
-    message(sprintf("morie_describe(): no narrative for %s (key='%s').",
-                    sQuote(name), key))
-    message(sprintf("The describe corpus contains %d entries.",
-                    length(corpus)))
+    message(sprintf(
+      "morie_describe(): no narrative for %s (key='%s').",
+      sQuote(name), key
+    ))
+    message(sprintf(
+      "The describe corpus contains %d entries.",
+      length(corpus)
+    ))
     message("To browse: head(names(rmorie:::.morie_load_describe_corpus()), 20).")
     return(invisible(NULL))
   }

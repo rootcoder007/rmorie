@@ -21,7 +21,7 @@
 #' morie_bkprp_backpropagation(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_bkprp_backpropagation <- function(x, y, w = NULL, b = NULL,
-                                  activation = "sigmoid") {
+                                        activation = "sigmoid") {
   x <- as.matrix(x)
   y <- as.matrix(y)
   n_in <- ncol(x)

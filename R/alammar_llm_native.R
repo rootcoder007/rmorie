@@ -15,10 +15,12 @@
 }
 
 .morie_al_cos <- function(a, b) {
-  na <- sqrt(sum(a^2)); nb <- sqrt(sum(b^2))
+  na <- sqrt(sum(a^2))
+  nb <- sqrt(sum(b^2))
   if (na == 0 || nb == 0) {
     stop("a zero vector has no direction; cosine similarity with it is undefined.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   sum(a * b) / (na * nb)
 }
@@ -38,10 +40,14 @@
 #' @return List with `output`, `attention`.
 #' @export
 morie_alammar_sdp_attention <- function(Q, K, V, mask = NULL) {
-  Q <- as.matrix(Q); K <- as.matrix(K); V <- as.matrix(V)
+  Q <- as.matrix(Q)
+  K <- as.matrix(K)
+  V <- as.matrix(V)
   if (ncol(Q) != ncol(K)) {
-    stop(sprintf("Q and K must share d_k; got %d and %d.", ncol(Q),
-                 ncol(K)), call. = FALSE)
+    stop(sprintf(
+      "Q and K must share d_k; got %d and %d.", ncol(Q),
+      ncol(K)
+    ), call. = FALSE)
   }
   if (nrow(K) != nrow(V)) {
     stop("K and V must have the same number of rows.", call. = FALSE)
@@ -59,9 +65,11 @@ morie_alammar_sdp_attention <- function(Q, K, V, mask = NULL) {
     }
   }
   A <- .morie_al_softmax_rows(scores)
-  list(output = A %*% V, attention = A, d_k = ncol(Q), n = nrow(Q),
-       estimate = (A %*% V)[1, 1],
-       method = "Scaled dot-product attention (Vaswani et al. 2017)")
+  list(
+    output = A %*% V, attention = A, d_k = ncol(Q), n = nrow(Q),
+    estimate = (A %*% V)[1, 1],
+    method = "Scaled dot-product attention (Vaswani et al. 2017)"
+  )
 }
 
 #' Multi-head attention (Vaswani et al. 2017)
@@ -81,27 +89,37 @@ morie_alammar_multi_head_attention <- function(Q, K, V, Wq, Wk, Wv, Wo,
   for (nm in c("Wq", "Wk", "Wv")) {
     W <- get(nm)
     if (length(W) != heads) {
-      stop(sprintf("%s has %d projection matrices but heads = %d; one per head, or the heads are copies.",
-                   nm, length(W), heads), call. = FALSE)
+      stop(sprintf(
+        "%s has %d projection matrices but heads = %d; one per head, or the heads are copies.",
+        nm, length(W), heads
+      ), call. = FALSE)
     }
   }
-  Q <- as.matrix(Q); K <- as.matrix(K); V <- as.matrix(V)
+  Q <- as.matrix(Q)
+  K <- as.matrix(K)
+  V <- as.matrix(V)
   outs <- vector("list", heads)
   for (i in seq_len(heads)) {
-    h <- morie_alammar_sdp_attention(Q %*% as.matrix(Wq[[i]]),
-                                     K %*% as.matrix(Wk[[i]]),
-                                     V %*% as.matrix(Wv[[i]]))
+    h <- morie_alammar_sdp_attention(
+      Q %*% as.matrix(Wq[[i]]),
+      K %*% as.matrix(Wk[[i]]),
+      V %*% as.matrix(Wv[[i]])
+    )
     outs[[i]] <- h$output
   }
   concat <- do.call(cbind, outs)
   Wo <- as.matrix(Wo)
   if (ncol(concat) != nrow(Wo)) {
-    stop(sprintf("concatenated heads have width %d but Wo has %d rows.",
-                 ncol(concat), nrow(Wo)), call. = FALSE)
+    stop(sprintf(
+      "concatenated heads have width %d but Wo has %d rows.",
+      ncol(concat), nrow(Wo)
+    ), call. = FALSE)
   }
   out <- concat %*% Wo
-  list(output = out, heads = heads, estimate = out[1, 1], n = nrow(Q),
-       method = "Multi-head attention (Vaswani et al. 2017)")
+  list(
+    output = out, heads = heads, estimate = out[1, 1], n = nrow(Q),
+    method = "Multi-head attention (Vaswani et al. 2017)"
+  )
 }
 
 #' Grouped-query and multi-query attention (Ainslie et al. 2023;
@@ -117,16 +135,23 @@ morie_alammar_multi_head_attention <- function(Q, K, V, Wq, Wk, Wv, Wo,
 morie_alammar_grouped_query_attention <- function(Q_heads, K_groups,
                                                   V_groups, n_query_heads,
                                                   n_kv_groups) {
-  H <- as.integer(n_query_heads); G <- as.integer(n_kv_groups)
-  if (H < 1L || G < 1L) stop("head and group counts must be positive.",
-                             call. = FALSE)
+  H <- as.integer(n_query_heads)
+  G <- as.integer(n_kv_groups)
+  if (H < 1L || G < 1L) {
+    stop("head and group counts must be positive.",
+      call. = FALSE
+    )
+  }
   if (H %% G != 0L) {
-    stop(sprintf("n_query_heads = %d must be divisible by n_kv_groups = %d.",
-                 H, G), call. = FALSE)
+    stop(sprintf(
+      "n_query_heads = %d must be divisible by n_kv_groups = %d.",
+      H, G
+    ), call. = FALSE)
   }
   if (length(Q_heads) != H) {
     stop(sprintf("expected %d query heads; got %d.", H, length(Q_heads)),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   if (length(K_groups) != G || length(V_groups) != G) {
     stop(sprintf("expected %d K and V groups.", G), call. = FALSE)
@@ -136,13 +161,17 @@ morie_alammar_grouped_query_attention <- function(Q_heads, K_groups,
   for (i in seq_len(H)) {
     g <- (i - 1L) %% G + 1L
     assignment[i] <- g - 1L
-    outs[[i]] <- morie_alammar_sdp_attention(Q_heads[[i]], K_groups[[g]],
-                                             V_groups[[g]])$output
+    outs[[i]] <- morie_alammar_sdp_attention(
+      Q_heads[[i]], K_groups[[g]],
+      V_groups[[g]]
+    )$output
   }
   concat <- do.call(cbind, outs)
-  list(output = concat, group_assignment = assignment,
-       kv_cache_ratio = G / H, estimate = concat[1, 1], n = H,
-       method = "Grouped-query attention (Ainslie et al. 2023)")
+  list(
+    output = concat, group_assignment = assignment,
+    kv_cache_ratio = G / H, estimate = concat[1, 1], n = H,
+    method = "Grouped-query attention (Ainslie et al. 2023)"
+  )
 }
 
 #' @rdname morie_alammar_grouped_query_attention
@@ -154,14 +183,17 @@ morie_alammar_multi_query_attention <- function(Q_heads, K_shared,
   if (H < 1L) stop("n_query_heads must be positive.", call. = FALSE)
   if (length(Q_heads) != H) {
     stop(sprintf("expected %d query heads; got %d.", H, length(Q_heads)),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   outs <- lapply(Q_heads, function(q) {
     morie_alammar_sdp_attention(q, K_shared, V_shared)$output
   })
   concat <- do.call(cbind, outs)
-  list(output = concat, kv_cache_ratio = 1 / H, estimate = concat[1, 1],
-       n = H, method = "Multi-query attention (Shazeer 2019)")
+  list(
+    output = concat, kv_cache_ratio = 1 / H, estimate = concat[1, 1],
+    n = H, method = "Multi-query attention (Shazeer 2019)"
+  )
 }
 
 #' Sliding-window causal attention (Beltagy et al. 2020)
@@ -169,13 +201,15 @@ morie_alammar_multi_query_attention <- function(Q_heads, K_shared,
 #' @param window_size W.
 #' @export
 morie_alammar_sliding_window_attention <- function(Q, K, V, window_size) {
-  Q <- as.matrix(Q); K <- as.matrix(K)
+  Q <- as.matrix(Q)
+  K <- as.matrix(K)
   W <- as.integer(window_size)
   if (W < 1L) stop("window_size must be positive.", call. = FALSE)
   n <- nrow(Q)
   if (n != nrow(K)) {
     stop("sliding-window attention is defined over one sequence.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   mask <- matrix(-Inf, n, n)
   for (i in seq_len(n)) {
@@ -183,9 +217,11 @@ morie_alammar_sliding_window_attention <- function(Q, K, V, window_size) {
     mask[i, lo:i] <- 0
   }
   out <- morie_alammar_sdp_attention(Q, K, V, mask = mask)
-  list(output = out$output, attention = out$attention, window = W,
-       estimate = out$estimate, n = n,
-       method = "Sliding-window causal attention (Beltagy et al. 2020)")
+  list(
+    output = out$output, attention = out$attention, window = W,
+    estimate = out$estimate, n = n,
+    method = "Sliding-window causal attention (Beltagy et al. 2020)"
+  )
 }
 
 #' KV-cache append plus one attention row (Alammar Ch 3)
@@ -198,7 +234,8 @@ morie_alammar_kv_cache_lookup <- function(K_cache, V_cache, k_new, v_new,
   v_new <- matrix(as.numeric(v_new), nrow = 1)
   q_new <- matrix(as.numeric(q_new), nrow = 1)
   if (is.null(K_cache) || length(K_cache) == 0L) {
-    K <- k_new; V <- v_new
+    K <- k_new
+    V <- v_new
   } else {
     K <- rbind(as.matrix(K_cache), k_new)
     V <- rbind(as.matrix(V_cache), v_new)
@@ -207,11 +244,13 @@ morie_alammar_kv_cache_lookup <- function(K_cache, V_cache, k_new, v_new,
     stop("K and V caches must stay the same length.", call. = FALSE)
   }
   out <- morie_alammar_sdp_attention(q_new, K, V)
-  list(output = as.numeric(out$output[1, ]),
-       attention = as.numeric(out$attention[1, ]),
-       K_cache = K, V_cache = V, cache_length = nrow(K),
-       estimate = out$estimate, n = nrow(K),
-       method = "KV-cache single-step attention (Alammar Ch 3)")
+  list(
+    output = as.numeric(out$output[1, ]),
+    attention = as.numeric(out$attention[1, ]),
+    K_cache = K, V_cache = V, cache_length = nrow(K),
+    estimate = out$estimate, n = nrow(K),
+    method = "KV-cache single-step attention (Alammar Ch 3)"
+  )
 }
 
 #' Classification and NER heads (Alammar Ch 4)
@@ -220,10 +259,14 @@ morie_alammar_kv_cache_lookup <- function(K_cache, V_cache, k_new, v_new,
 #' @param b Bias.
 #' @export
 morie_alammar_classification_head <- function(h_cls, W_cls, b) {
-  h <- as.numeric(h_cls); W <- as.matrix(W_cls); b <- as.numeric(b)
+  h <- as.numeric(h_cls)
+  W <- as.matrix(W_cls)
+  b <- as.numeric(b)
   if (ncol(W) != length(h)) {
-    stop(sprintf("W has %d columns but h_cls has %d entries.", ncol(W),
-                 length(h)), call. = FALSE)
+    stop(sprintf(
+      "W has %d columns but h_cls has %d entries.", ncol(W),
+      length(h)
+    ), call. = FALSE)
   }
   if (nrow(W) != length(b)) {
     stop("W rows must match b.", call. = FALSE)
@@ -231,10 +274,12 @@ morie_alammar_classification_head <- function(h_cls, W_cls, b) {
   logits <- as.numeric(W %*% h + b)
   z <- logits - max(logits)
   p <- exp(z) / sum(exp(z))
-  list(logits = logits, probabilities = p,
-       predicted_class = which.max(logits) - 1L,
-       estimate = logits[1], n = length(b),
-       method = "Linear classification head + softmax (Alammar Ch 4)")
+  list(
+    logits = logits, probabilities = p,
+    predicted_class = which.max(logits) - 1L,
+    estimate = logits[1], n = length(b),
+    method = "Linear classification head + softmax (Alammar Ch 4)"
+  )
 }
 
 #' @rdname morie_alammar_classification_head
@@ -242,7 +287,9 @@ morie_alammar_classification_head <- function(h_cls, W_cls, b) {
 #' @param W,tags Weight matrix and 0-based tag targets (or NULL).
 #' @export
 morie_alammar_ner_token_head <- function(h_tokens, W, b, tags = NULL) {
-  H <- as.matrix(h_tokens); W <- as.matrix(W); b <- as.numeric(b)
+  H <- as.matrix(h_tokens)
+  W <- as.matrix(W)
+  b <- as.numeric(b)
   if (ncol(W) != ncol(H)) {
     stop("W columns must match hidden dimensions.", call. = FALSE)
   }
@@ -258,10 +305,12 @@ morie_alammar_ner_token_head <- function(h_tokens, W, b, tags = NULL) {
     }
     loss <- mean(-log(P[cbind(seq_along(t), t + 1L)]))
   }
-  list(probabilities = P, predicted_tags = as.integer(pred),
-       cross_entropy = loss,
-       estimate = if (!is.null(loss)) loss else as.numeric(pred[1]),
-       n = nrow(H), method = "Per-token NER head + CE (Alammar Ch 4)")
+  list(
+    probabilities = P, predicted_tags = as.integer(pred),
+    cross_entropy = loss,
+    estimate = if (!is.null(loss)) loss else as.numeric(pred[1]),
+    n = nrow(H), method = "Per-token NER head + CE (Alammar Ch 4)"
+  )
 }
 
 #' Token lookup, masked pooling, contextual extraction (Alammar Ch 2/8)
@@ -272,14 +321,20 @@ morie_alammar_token_embedding_lookup <- function(ids, E_tok) {
   E <- as.matrix(E_tok)
   ids <- as.integer(ids)
   if (any(ids < 0L | ids >= nrow(E))) {
-    stop(sprintf("token id %d is outside the vocabulary of %d.",
-                 ids[which(ids < 0L | ids >= nrow(E))[1]], nrow(E)),
-         call. = FALSE)
+    stop(
+      sprintf(
+        "token id %d is outside the vocabulary of %d.",
+        ids[which(ids < 0L | ids >= nrow(E))[1]], nrow(E)
+      ),
+      call. = FALSE
+    )
   }
   out <- E[ids + 1L, , drop = FALSE]
-  list(embeddings = out, estimate = out[1, 1], vocab_size = nrow(E),
-       dim = ncol(E), n = length(ids),
-       method = "Token embedding lookup (Alammar Ch 2)")
+  list(
+    embeddings = out, estimate = out[1, 1], vocab_size = nrow(E),
+    dim = ncol(E), n = length(ids),
+    method = "Token embedding lookup (Alammar Ch 2)"
+  )
 }
 
 #' @rdname morie_alammar_token_embedding_lookup
@@ -289,19 +344,25 @@ morie_alammar_token_embedding_lookup <- function(ids, E_tok) {
 morie_alammar_document_embedding_pool <- function(token_embeddings,
                                                   attention_mask = NULL) {
   H <- as.matrix(token_embeddings)
-  m <- if (is.null(attention_mask)) rep(1, nrow(H)) else
+  m <- if (is.null(attention_mask)) {
+    rep(1, nrow(H))
+  } else {
     as.numeric(attention_mask)
+  }
   if (length(m) != nrow(H)) {
     stop("mask length must match the token count.", call. = FALSE)
   }
   if (sum(m) == 0) {
     stop("the mask excludes every token; an all-padding document has no embedding.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   d <- colSums(H * m) / sum(m)
-  list(embedding = as.numeric(d), tokens_pooled = sum(m),
-       estimate = d[1], n = nrow(H),
-       method = "Masked mean pooling (Alammar Ch 8)")
+  list(
+    embedding = as.numeric(d), tokens_pooled = sum(m),
+    estimate = d[1], n = nrow(H),
+    method = "Masked mean pooling (Alammar Ch 8)"
+  )
 }
 
 #' @rdname morie_alammar_token_embedding_lookup
@@ -314,25 +375,32 @@ morie_alammar_contextualized_embedding <- function(layer_outputs,
   if (length(dim(L)) != 3L) {
     stop("layer_outputs must be (n_layers, seq_len, dim).", call. = FALSE)
   }
-  nl <- dim(L)[1]; sq <- dim(L)[2]
-  li <- as.integer(layer_idx); pos <- as.integer(position)
+  nl <- dim(L)[1]
+  sq <- dim(L)[2]
+  li <- as.integer(layer_idx)
+  pos <- as.integer(position)
   if (li < -nl || li >= nl) {
     stop(sprintf("layer %d out of range for %d layers.", li, nl),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   if (pos < -sq || pos >= sq) {
     stop(sprintf("position %d out of range for length %d.", pos, sq),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   if (li < 0L) li <- nl + li
   if (pos < 0L) pos <- sq + pos
   v <- L[li + 1L, pos + 1L, ]
   varies <- sq > 1L && !isTRUE(all.equal(
     L[li + 1L, , , drop = FALSE],
-    array(rep(L[li + 1L, 1L, ], each = sq), dim = c(1L, sq, dim(L)[3]))))
-  list(embedding = as.numeric(v), context_varies = varies,
-       estimate = v[1], layer = layer_idx, position = position, n = sq,
-       method = "Contextualised embedding extraction (Alammar Ch 2)")
+    array(rep(L[li + 1L, 1L, ], each = sq), dim = c(1L, sq, dim(L)[3]))
+  ))
+  list(
+    embedding = as.numeric(v), context_varies = varies,
+    estimate = v[1], layer = layer_idx, position = position, n = sq,
+    method = "Contextualised embedding extraction (Alammar Ch 2)"
+  )
 }
 
 #' ViT patch embedding (Dosovitskiy et al. 2021)
@@ -348,14 +416,19 @@ morie_alammar_vit_patch_embedding <- function(image, patch_size, E,
   P <- as.integer(patch_size)
   E <- as.matrix(E)
   if (P < 1L) stop("patch_size must be positive.", call. = FALSE)
-  H <- nrow(img); W <- ncol(img)
+  H <- nrow(img)
+  W <- ncol(img)
   if (H %% P != 0L || W %% P != 0L) {
-    stop(sprintf("a %d x %d image does not tile into %d x %d patches; a remainder row would silently shift every later patch.",
-                 H, W, P, P), call. = FALSE)
+    stop(sprintf(
+      "a %d x %d image does not tile into %d x %d patches; a remainder row would silently shift every later patch.",
+      H, W, P, P
+    ), call. = FALSE)
   }
   if (nrow(E) != P * P) {
-    stop(sprintf("E must have %d rows to accept a flattened patch.",
-                 P * P), call. = FALSE)
+    stop(sprintf(
+      "E must have %d rows to accept a flattened patch.",
+      P * P
+    ), call. = FALSE)
   }
   patches <- list()
   for (i in seq(1L, H, by = P)) {
@@ -381,9 +454,11 @@ morie_alammar_vit_patch_embedding <- function(image, patch_size, E,
     Z <- Z + Ep
   }
   rownames(Z) <- NULL
-  list(sequence = Z, n_patches = length(patches), estimate = Z[1, 1],
-       n = nrow(Z),
-       method = "ViT patch embedding (Dosovitskiy et al. 2021)")
+  list(
+    sequence = Z, n_patches = length(patches), estimate = Z[1, 1],
+    n = nrow(Z),
+    method = "ViT patch embedding (Dosovitskiy et al. 2021)"
+  )
 }
 
 # ------------------------------------------------------------------
@@ -396,21 +471,26 @@ morie_alammar_vit_patch_embedding <- function(image, patch_size, E,
 #'   targets in \\[-1, 1\\].
 #' @export
 morie_alammar_cosine_similarity_loss <- function(a, b, y_true) {
-  A <- as.matrix(a); B <- as.matrix(b); y <- as.numeric(y_true)
+  A <- as.matrix(a)
+  B <- as.matrix(b)
+  y <- as.numeric(y_true)
   if (!all(dim(A) == dim(B)) || nrow(A) != length(y)) {
     stop("need matched pairs and one target per pair.", call. = FALSE)
   }
   if (any(abs(y) > 1)) {
     stop("targets are cosine values and must lie in [-1, 1].",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   sims <- vapply(seq_len(nrow(A)), function(i) {
     .morie_al_cos(A[i, ], B[i, ])
   }, numeric(1))
   losses <- (sims - y)^2
-  list(estimate = mean(losses), losses = losses, similarities = sims,
-       n = length(y),
-       method = "Cosine similarity loss (Reimers and Gurevych 2019)")
+  list(
+    estimate = mean(losses), losses = losses, similarities = sims,
+    n = length(y),
+    method = "Cosine similarity loss (Reimers and Gurevych 2019)"
+  )
 }
 
 #' @rdname morie_alammar_cosine_similarity_loss
@@ -419,7 +499,9 @@ morie_alammar_cosine_similarity_loss <- function(a, b, y_true) {
 #' @export
 morie_alammar_sbert_triplet_loss <- function(anchor, positive, negative,
                                              margin = 1.0) {
-  A <- as.matrix(anchor); P <- as.matrix(positive); N <- as.matrix(negative)
+  A <- as.matrix(anchor)
+  P <- as.matrix(positive)
+  N <- as.matrix(negative)
   m <- as.numeric(margin)
   if (!all(dim(A) == dim(P)) || !all(dim(A) == dim(N))) {
     stop("anchor, positive and negative must align.", call. = FALSE)
@@ -428,9 +510,11 @@ morie_alammar_sbert_triplet_loss <- function(anchor, positive, negative,
   dp <- sqrt(rowSums((A - P)^2))
   dn <- sqrt(rowSums((A - N)^2))
   losses <- pmax(0, dp - dn + m)
-  list(estimate = mean(losses), losses = losses, active = losses > 0,
-       d_positive = dp, d_negative = dn, n = nrow(A),
-       method = "Triplet loss (Schroff et al. 2015)")
+  list(
+    estimate = mean(losses), losses = losses, active = losses > 0,
+    d_positive = dp, d_negative = dn, n = nrow(A),
+    method = "Triplet loss (Schroff et al. 2015)"
+  )
 }
 
 #' @rdname morie_alammar_cosine_similarity_loss
@@ -441,7 +525,8 @@ morie_alammar_infonce_loss <- function(anchor, positive, negatives,
                                        tau = 0.07) {
   t <- as.numeric(tau)
   if (t <= 0) stop("the temperature must be positive.", call. = FALSE)
-  a <- as.numeric(anchor); p <- as.numeric(positive)
+  a <- as.numeric(anchor)
+  p <- as.numeric(positive)
   N <- as.matrix(negatives)
   sp <- .morie_al_cos(a, p) / t
   sn <- vapply(seq_len(nrow(N)), function(i) {
@@ -450,9 +535,11 @@ morie_alammar_infonce_loss <- function(anchor, positive, negatives,
   zs <- c(sp, sn)
   m <- max(zs)
   logZ <- m + log(sum(exp(zs - m)))
-  list(estimate = logZ - sp, positive_similarity = sp * t,
-       negative_similarities = sn * t, n = nrow(N) + 1L,
-       method = "InfoNCE (van den Oord et al. 2018)")
+  list(
+    estimate = logZ - sp, positive_similarity = sp * t,
+    negative_similarities = sn * t, n = nrow(N) + 1L,
+    method = "InfoNCE (van den Oord et al. 2018)"
+  )
 }
 
 .morie_al_inbatch_ce <- function(S) {
@@ -469,21 +556,27 @@ morie_alammar_multiple_negatives_ranking <- function(anchors, positives,
                                                      tau = 0.05) {
   t <- as.numeric(tau)
   if (t <= 0) stop("the temperature must be positive.", call. = FALSE)
-  A <- as.matrix(anchors); P <- as.matrix(positives)
+  A <- as.matrix(anchors)
+  P <- as.matrix(positives)
   if (!all(dim(A) == dim(P))) {
     stop("anchors and positives must align.", call. = FALSE)
   }
   B <- nrow(A)
   if (B < 2L) {
     stop("in-batch negatives need a batch of at least 2; with one pair there are no negatives and the loss is trivially 0.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
-  S <- outer(seq_len(B), seq_len(B),
-             Vectorize(function(i, j) .morie_al_cos(A[i, ], P[j, ]) / t))
+  S <- outer(
+    seq_len(B), seq_len(B),
+    Vectorize(function(i, j) .morie_al_cos(A[i, ], P[j, ]) / t)
+  )
   losses <- .morie_al_inbatch_ce(S)
-  list(estimate = mean(losses), losses = losses,
-       similarity_matrix = S * t, n = B,
-       method = "Multiple negatives ranking (Henderson et al. 2017)")
+  list(
+    estimate = mean(losses), losses = losses,
+    similarity_matrix = S * t, n = B,
+    method = "Multiple negatives ranking (Henderson et al. 2017)"
+  )
 }
 
 #' @rdname morie_alammar_cosine_similarity_loss
@@ -501,13 +594,20 @@ morie_alammar_simcse_dropout_aug <- function(embeddings_dropout1,
     stop("the two dropout passes must align.", call. = FALSE)
   }
   B <- nrow(H1)
-  if (B < 2L) stop("need a batch of at least 2 for in-batch negatives.",
-                   call. = FALSE)
-  S <- outer(seq_len(B), seq_len(B),
-             Vectorize(function(i, j) .morie_al_cos(H1[i, ], H2[j, ]) / t))
+  if (B < 2L) {
+    stop("need a batch of at least 2 for in-batch negatives.",
+      call. = FALSE
+    )
+  }
+  S <- outer(
+    seq_len(B), seq_len(B),
+    Vectorize(function(i, j) .morie_al_cos(H1[i, ], H2[j, ]) / t)
+  )
   losses <- .morie_al_inbatch_ce(S)
-  list(estimate = mean(losses), losses = losses, n = B,
-       method = "SimCSE with dropout augmentation (Gao et al. 2021)")
+  list(
+    estimate = mean(losses), losses = losses, n = B,
+    method = "SimCSE with dropout augmentation (Gao et al. 2021)"
+  )
 }
 
 #' @rdname morie_alammar_cosine_similarity_loss
@@ -516,23 +616,28 @@ morie_alammar_simcse_dropout_aug <- function(embeddings_dropout1,
 morie_alammar_openclip_contrastive <- function(I_emb, T_emb, tau = 0.07) {
   t <- as.numeric(tau)
   if (t <= 0) stop("the temperature must be positive.", call. = FALSE)
-  I <- as.matrix(I_emb); Tm <- as.matrix(T_emb)
+  I <- as.matrix(I_emb)
+  Tm <- as.matrix(T_emb)
   if (!all(dim(I) == dim(Tm))) {
     stop("image and text batches must align.", call. = FALSE)
   }
   if (nrow(I) < 2L) stop("need a batch of at least 2.", call. = FALSE)
-  ni <- sqrt(rowSums(I^2)); nt <- sqrt(rowSums(Tm^2))
+  ni <- sqrt(rowSums(I^2))
+  nt <- sqrt(rowSums(Tm^2))
   if (any(ni == 0) || any(nt == 0)) {
     stop("zero embedding vectors have no direction.", call. = FALSE)
   }
-  I <- I / ni; Tm <- Tm / nt
+  I <- I / ni
+  Tm <- Tm / nt
   S <- I %*% t(Tm) / t
   li <- .morie_al_inbatch_ce(S)
   lt <- .morie_al_inbatch_ce(t(S))
-  list(estimate = (mean(li) + mean(lt)) / 2,
-       image_to_text_loss = mean(li), text_to_image_loss = mean(lt),
-       similarity_matrix = S * t, n = nrow(I),
-       method = "CLIP symmetric contrastive loss (Radford et al. 2021)")
+  list(
+    estimate = (mean(li) + mean(lt)) / 2,
+    image_to_text_loss = mean(li), text_to_image_loss = mean(lt),
+    similarity_matrix = S * t, n = nrow(I),
+    method = "CLIP symmetric contrastive loss (Radford et al. 2021)"
+  )
 }
 
 #' Skip-gram negative sampling and the Bradley-Terry reward loss
@@ -541,7 +646,8 @@ morie_alammar_openclip_contrastive <- function(I_emb, T_emb, tau = 0.07) {
 morie_alammar_negative_sampling_skipgram <- function(center_vec,
                                                      context_vec,
                                                      negative_vecs) {
-  c <- as.numeric(center_vec); w <- as.numeric(context_vec)
+  c <- as.numeric(center_vec)
+  w <- as.numeric(context_vec)
   N <- as.matrix(negative_vecs)
   if (length(c) != length(w) || ncol(N) != length(c)) {
     stop("all vectors must share one dimension.", call. = FALSE)
@@ -551,24 +657,29 @@ morie_alammar_negative_sampling_skipgram <- function(center_vec,
   negs <- vapply(seq_len(nrow(N)), function(i) {
     logsig(-sum(c * N[i, ]))
   }, numeric(1))
-  list(estimate = -(pos + sum(negs)), positive_logsig = pos,
-       negative_logsigs = negs, k = nrow(N), n = length(c),
-       method = "Skip-gram negative sampling (Mikolov et al. 2013)")
+  list(
+    estimate = -(pos + sum(negs)), positive_logsig = pos,
+    negative_logsigs = negs, k = nrow(N), n = length(c),
+    method = "Skip-gram negative sampling (Mikolov et al. 2013)"
+  )
 }
 
 #' @rdname morie_alammar_negative_sampling_skipgram
 #' @param scores_w,scores_l Winner and loser reward scores.
 #' @export
 morie_alammar_reward_model_bt <- function(scores_w, scores_l) {
-  rw <- as.numeric(scores_w); rl <- as.numeric(scores_l)
+  rw <- as.numeric(scores_w)
+  rl <- as.numeric(scores_l)
   if (length(rw) != length(rl)) {
     stop("need one loser score per winner score.", call. = FALSE)
   }
   diff <- rw - rl
-  losses <- log1p(exp(-abs(diff))) + pmax(-diff, 0)   # log(1 + e^-d)
-  list(estimate = mean(losses), losses = losses,
-       pair_accuracy = mean(diff > 0), n = length(diff),
-       method = "Bradley-Terry reward loss (Ouyang et al. 2022)")
+  losses <- log1p(exp(-abs(diff))) + pmax(-diff, 0) # log(1 + e^-d)
+  list(
+    estimate = mean(losses), losses = losses,
+    pair_accuracy = mean(diff > 0), n = length(diff),
+    method = "Bradley-Terry reward loss (Ouyang et al. 2022)"
+  )
 }
 
 # ------------------------------------------------------------------
@@ -595,9 +706,11 @@ morie_alammar_mean_reciprocal_rank <- function(rankings,
       rrs[q] <- 1 / hit
     }
   }
-  list(estimate = mean(rrs), reciprocal_ranks = rrs,
-       queries_missed = missed, n = length(rrs),
-       method = "Mean reciprocal rank (Alammar Ch 8)")
+  list(
+    estimate = mean(rrs), reciprocal_ranks = rrs,
+    queries_missed = missed, n = length(rrs),
+    method = "Mean reciprocal rank (Alammar Ch 8)"
+  )
 }
 
 #' @rdname morie_alammar_mean_reciprocal_rank
@@ -611,12 +724,15 @@ morie_alammar_recall_at_k <- function(retrieved, relevant, k) {
   rel <- unique(relevant)
   if (length(rel) == 0L) {
     stop("the relevant set is empty; recall is 0/0 and reporting 1 or 0 there would be a choice, not a measurement.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   top <- utils::head(retrieved, k)
   hit <- sum(rel %in% top)
-  list(estimate = hit / length(rel), hits = hit, n_relevant = length(rel),
-       k = k, n = length(top), method = "Recall@k (Alammar Ch 8)")
+  list(
+    estimate = hit / length(rel), hits = hit, n_relevant = length(rel),
+    k = k, n = length(top), method = "Recall@k (Alammar Ch 8)"
+  )
 }
 
 #' @rdname morie_alammar_mean_reciprocal_rank
@@ -626,8 +742,11 @@ morie_alammar_ndcg_at_k <- function(relevances, k) {
   r <- as.numeric(relevances)
   k <- as.integer(k)
   if (k < 1L) stop("k must be positive.", call. = FALSE)
-  if (any(r < 0)) stop("graded relevances must be non-negative.",
-                       call. = FALSE)
+  if (any(r < 0)) {
+    stop("graded relevances must be non-negative.",
+      call. = FALSE
+    )
+  }
   dcg <- function(v) {
     v <- utils::head(v, k)
     sum((2^v - 1) / log2(seq_along(v) + 1))
@@ -636,10 +755,13 @@ morie_alammar_ndcg_at_k <- function(relevances, k) {
   ideal <- dcg(sort(r, decreasing = TRUE))
   if (ideal == 0) {
     stop("every relevance is 0, so IDCG is 0 and NDCG is undefined; declaring the ranking perfect there would be a lie.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
-  list(estimate = got / ideal, dcg = got, idcg = ideal, k = k,
-       n = length(r), method = "NDCG@k (Jarvelin and Kekalainen 2002)")
+  list(
+    estimate = got / ideal, dcg = got, idcg = ideal, k = k,
+    n = length(r), method = "NDCG@k (Jarvelin and Kekalainen 2002)"
+  )
 }
 
 #' @rdname morie_alammar_mean_reciprocal_rank
@@ -652,17 +774,21 @@ morie_alammar_mteb_benchmark_score <- function(task_scores, category_map) {
   if (length(ts) == 0L) stop("no task scores supplied.", call. = FALSE)
   missing <- setdiff(names(ts), names(category_map))
   if (length(missing)) {
-    stop(sprintf("tasks %s have no category.",
-                 paste(missing, collapse = ", ")), call. = FALSE)
+    stop(sprintf(
+      "tasks %s have no category.",
+      paste(missing, collapse = ", ")
+    ), call. = FALSE)
   }
   cats <- unlist(category_map)[names(ts)]
   cat_means <- tapply(ts, cats, mean)
   overall <- mean(cat_means)
   flat <- mean(ts)
-  list(estimate = overall, category_means = as.list(cat_means),
-       flat_task_mean = flat,
-       weighting_matters = abs(overall - flat) > 1e-12, n = length(ts),
-       method = "MTEB mean-of-category-means (Muennighoff et al. 2023)")
+  list(
+    estimate = overall, category_means = as.list(cat_means),
+    flat_task_mean = flat,
+    weighting_matters = abs(overall - flat) > 1e-12, n = length(ts),
+    method = "MTEB mean-of-category-means (Muennighoff et al. 2023)"
+  )
 }
 
 #' Greedy and sampled decoding (Alammar Ch 6)
@@ -670,15 +796,18 @@ morie_alammar_mteb_benchmark_score <- function(task_scores, category_map) {
 #' @export
 morie_alammar_greedy_decoding <- function(logits) {
   Z <- as.matrix(logits)
-  toks <- integer(nrow(Z)); ties <- logical(nrow(Z))
+  toks <- integer(nrow(Z))
+  ties <- logical(nrow(Z))
   for (i in seq_len(nrow(Z))) {
     m <- max(Z[i, ])
     winners <- which(Z[i, ] == m)
     toks[i] <- winners[1] - 1L
     ties[i] <- length(winners) > 1L
   }
-  list(tokens = toks, had_ties = ties, estimate = as.numeric(toks[1]),
-       n = length(toks), method = "Greedy decoding argmax (Alammar Ch 6)")
+  list(
+    tokens = toks, had_ties = ties, estimate = as.numeric(toks[1]),
+    n = length(toks), method = "Greedy decoding argmax (Alammar Ch 6)"
+  )
 }
 
 #' @rdname morie_alammar_greedy_decoding
@@ -687,18 +816,21 @@ morie_alammar_greedy_decoding <- function(logits) {
 morie_alammar_sampling_decoding <- function(logits, seed = 0) {
   Z <- as.matrix(logits)
   s <- as.numeric(seed) %% 2^32
-  toks <- integer(nrow(Z)); us <- numeric(nrow(Z))
+  toks <- integer(nrow(Z))
+  us <- numeric(nrow(Z))
   for (i in seq_len(nrow(Z))) {
     z <- Z[i, ] - max(Z[i, ])
     p <- exp(z) / sum(exp(z))
     s <- .morie_al_lcg(s)
     u <- (s + 0.5) / 2^32
     us[i] <- u
-    toks[i] <- sum(cumsum(p) <= u)   # smallest v with cum > u, 0-based
+    toks[i] <- sum(cumsum(p) <= u) # smallest v with cum > u, 0-based
   }
-  list(tokens = toks, uniforms = us, estimate = as.numeric(toks[1]),
-       n = length(toks),
-       method = "Ancestral sampling via shared LCG (Alammar Ch 6)")
+  list(
+    tokens = toks, uniforms = us, estimate = as.numeric(toks[1]),
+    n = length(toks),
+    method = "Ancestral sampling via shared LCG (Alammar Ch 6)"
+  )
 }
 
 # ------------------------------------------------------------------
@@ -709,16 +841,22 @@ morie_alammar_sampling_decoding <- function(logits, seed = 0) {
 #' @param tokens,vocab Character vectors.
 #' @export
 morie_alammar_bag_of_words <- function(tokens, vocab) {
-  toks <- as.character(tokens); voc <- as.character(vocab)
-  if (anyDuplicated(voc)) stop("the vocabulary contains duplicates.",
-                               call. = FALSE)
+  toks <- as.character(tokens)
+  voc <- as.character(vocab)
+  if (anyDuplicated(voc)) {
+    stop("the vocabulary contains duplicates.",
+      call. = FALSE
+    )
+  }
   if (length(voc) == 0L) stop("the vocabulary is empty.", call. = FALSE)
   bow <- vapply(voc, function(v) sum(toks == v), integer(1))
   oov <- sum(!(toks %in% voc))
-  list(bow_vector = unname(bow), oov_count = oov,
-       estimate = as.numeric(bow[1]), vocab_size = length(voc),
-       n = length(toks),
-       method = "Bag-of-words counts over a fixed vocabulary (Alammar Ch 1)")
+  list(
+    bow_vector = unname(bow), oov_count = oov,
+    estimate = as.numeric(bow[1]), vocab_size = length(voc),
+    n = length(toks),
+    method = "Bag-of-words counts over a fixed vocabulary (Alammar Ch 1)"
+  )
 }
 
 #' @rdname morie_alammar_bag_of_words
@@ -735,14 +873,17 @@ morie_alammar_c_tfidf <- function(term_counts_by_class, corpus_freq = NULL,
   }
   if (any(f_t <= 0)) {
     stop("a term with zero corpus frequency cannot be weighted; drop it before calling.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   a <- if (is.null(A)) mean(rowSums(M)) else as.numeric(A)
   W <- M * matrix(log1p(a / f_t), nrow(M), ncol(M), byrow = TRUE)
-  list(weights = W, A = a, corpus_freq = f_t,
-       top_term_per_class = apply(W, 1, which.max) - 1L,
-       estimate = W[1, 1], n = nrow(M),
-       method = "c-TF-IDF (Grootendorst 2022, Eq 3)")
+  list(
+    weights = W, A = a, corpus_freq = f_t,
+    top_term_per_class = apply(W, 1, which.max) - 1L,
+    estimate = W[1, 1], n = nrow(M),
+    method = "c-TF-IDF (Grootendorst 2022, Eq 3)"
+  )
 }
 
 #' @rdname morie_alammar_bag_of_words
@@ -757,20 +898,26 @@ morie_alammar_bio_tagging <- function(tokens, entity_spans,
   scheme <- toupper(as.character(scheme))
   if (!scheme %in% c("BIO", "BIOES")) {
     stop(sprintf("scheme must be BIO or BIOES; got '%s'.", scheme),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   tags <- rep("O", n)
   claimed <- rep(FALSE, n)
   for (span in entity_spans) {
-    s <- as.integer(span[[1]]); e <- as.integer(span[[2]])
+    s <- as.integer(span[[1]])
+    e <- as.integer(span[[2]])
     typ <- as.character(span[[3]])
     if (s < 0L || e <= s || e > n) {
-      stop(sprintf("span (%d, %d) is out of range for %d tokens (end exclusive).",
-                   s, e, n), call. = FALSE)
+      stop(sprintf(
+        "span (%d, %d) is out of range for %d tokens (end exclusive).",
+        s, e, n
+      ), call. = FALSE)
     }
     if (any(claimed[(s + 1L):e])) {
-      stop(sprintf("span (%d, %d) overlaps an earlier span; BIO cannot represent overlapping entities.",
-                   s, e), call. = FALSE)
+      stop(sprintf(
+        "span (%d, %d) overlaps an earlier span; BIO cannot represent overlapping entities.",
+        s, e
+      ), call. = FALSE)
     }
     claimed[(s + 1L):e] <- TRUE
     if (scheme == "BIO") {
@@ -786,23 +933,29 @@ morie_alammar_bio_tagging <- function(tokens, entity_spans,
       }
     }
   }
-  list(tags = tags, n_entities = length(entity_spans),
-       estimate = sum(tags != "O"), n = n,
-       method = sprintf("%s span tagging (Alammar Ch 4)", scheme))
+  list(
+    tags = tags, n_entities = length(entity_spans),
+    estimate = sum(tags != "O"), n = n,
+    method = sprintf("%s span tagging (Alammar Ch 4)", scheme)
+  )
 }
 
 #' @rdname morie_alammar_bag_of_words
 #' @param vocab_a,vocab_b Token vocabularies.
 #' @export
 morie_alammar_tokenizer_vocab_overlap <- function(vocab_a, vocab_b) {
-  A <- unique(as.character(vocab_a)); B <- unique(as.character(vocab_b))
+  A <- unique(as.character(vocab_a))
+  B <- unique(as.character(vocab_b))
   if (length(A) == 0L && length(B) == 0L) {
     stop("both vocabularies are empty; 0/0.", call. = FALSE)
   }
-  inter <- length(intersect(A, B)); un <- length(union(A, B))
-  list(estimate = inter / un, intersection = inter, union = un,
-       only_a = length(setdiff(A, B)), only_b = length(setdiff(B, A)),
-       n = un, method = "Jaccard vocabulary overlap (Alammar Ch 2)")
+  inter <- length(intersect(A, B))
+  un <- length(union(A, B))
+  list(
+    estimate = inter / un, intersection = inter, union = un,
+    only_a = length(setdiff(A, B)), only_b = length(setdiff(B, A)),
+    n = un, method = "Jaccard vocabulary overlap (Alammar Ch 2)"
+  )
 }
 
 #' Recursive chunking, buffer memory, templates (Alammar Ch 6-12)
@@ -814,17 +967,23 @@ morie_alammar_recursive_chunking <- function(text, separators = NULL,
                                              target_size = 200,
                                              overlap = 0) {
   s <- as.character(text)
-  seps <- if (is.null(separators)) c("\n\n", "\n", ". ", " ") else
+  seps <- if (is.null(separators)) {
+    c("\n\n", "\n", ". ", " ")
+  } else {
     as.character(separators)
+  }
   size <- as.integer(target_size)
   ov <- as.integer(overlap)
   if (size < 1L) stop("target_size must be positive.", call. = FALSE)
   if (ov < 0L || ov >= size) {
     stop("overlap must be non-negative and below target_size.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   split_rec <- function(piece, tier) {
-    if (nchar(piece) <= size) return(piece)
+    if (nchar(piece) <= size) {
+      return(piece)
+    }
     if (tier > length(seps)) {
       starts <- seq(1L, nchar(piece), by = size)
       return(vapply(starts, function(i) {
@@ -832,7 +991,9 @@ morie_alammar_recursive_chunking <- function(text, separators = NULL,
       }, character(1)))
     }
     parts <- strsplit(piece, seps[tier], fixed = TRUE)[[1]]
-    if (length(parts) == 1L) return(split_rec(piece, tier + 1L))
+    if (length(parts) == 1L) {
+      return(split_rec(piece, tier + 1L))
+    }
     unlist(lapply(parts, split_rec, tier = tier + 1L))
   }
   chunks <- split_rec(s, 1L)
@@ -844,10 +1005,12 @@ morie_alammar_recursive_chunking <- function(text, separators = NULL,
       chunks[i] <- paste0(tail_, chunks[i])
     }
   }
-  list(chunks = chunks, n_chunks = length(chunks),
-       max_chunk_length = if (length(chunks)) max(nchar(chunks)) else 0L,
-       overlap = ov, estimate = length(chunks), n = nchar(s),
-       method = "Recursive character chunking (Alammar Ch 8)")
+  list(
+    chunks = chunks, n_chunks = length(chunks),
+    max_chunk_length = if (length(chunks)) max(nchar(chunks)) else 0L,
+    overlap = ov, estimate = length(chunks), n = nchar(s),
+    method = "Recursive character chunking (Alammar Ch 8)"
+  )
 }
 
 #' @rdname morie_alammar_recursive_chunking
@@ -857,12 +1020,18 @@ morie_alammar_recursive_chunking <- function(text, separators = NULL,
 morie_alammar_conversation_buffer_memory <- function(conversation, N) {
   n <- as.integer(N)
   if (n < 1L) stop("N must be positive.", call. = FALSE)
-  turns <- lapply(conversation, function(t) c(as.character(t[[1]]),
-                                              as.character(t[[2]])))
+  turns <- lapply(conversation, function(t) {
+    c(
+      as.character(t[[1]]),
+      as.character(t[[2]])
+    )
+  })
   kept <- utils::tail(turns, n)
-  list(memory = kept, turns_forgotten = max(0L, length(turns) - n),
-       estimate = length(kept), n = length(turns),
-       method = "Conversation buffer memory (Alammar Ch 7)")
+  list(
+    memory = kept, turns_forgotten = max(0L, length(turns) - n),
+    estimate = length(kept), n = length(turns),
+    method = "Conversation buffer memory (Alammar Ch 7)"
+  )
 }
 
 #' @rdname morie_alammar_recursive_chunking
@@ -872,23 +1041,31 @@ morie_alammar_conversation_buffer_memory <- function(conversation, N) {
 #' @export
 morie_alammar_chat_template <- function(turns, template_tokens = NULL) {
   tt <- if (is.null(template_tokens)) {
-    list(system = c("<|system|>\n", "\n"), user = c("<|user|>\n", "\n"),
-         assistant = c("<|assistant|>\n", "\n"))
-  } else template_tokens
+    list(
+      system = c("<|system|>\n", "\n"), user = c("<|user|>\n", "\n"),
+      assistant = c("<|assistant|>\n", "\n")
+    )
+  } else {
+    template_tokens
+  }
   parts <- character(0)
   for (turn in turns) {
     role <- as.character(turn[[1]])
     if (is.null(tt[[role]])) {
-      stop(sprintf("role '%s' has no template tokens; rendering it unmarked would hide the turn from the model.",
-                   role), call. = FALSE)
+      stop(sprintf(
+        "role '%s' has no template tokens; rendering it unmarked would hide the turn from the model.",
+        role
+      ), call. = FALSE)
     }
     oc <- tt[[role]]
     parts <- c(parts, paste0(oc[1], turn[[2]], oc[2]))
   }
   prompt <- paste(parts, collapse = "")
-  list(prompt = prompt, n_turns = length(turns),
-       estimate = nchar(prompt), n = length(turns),
-       method = "Chat template rendering (Alammar Ch 6)")
+  list(
+    prompt = prompt, n_turns = length(turns),
+    estimate = nchar(prompt), n = length(turns),
+    method = "Chat template rendering (Alammar Ch 6)"
+  )
 }
 
 #' @rdname morie_alammar_recursive_chunking
@@ -896,7 +1073,8 @@ morie_alammar_chat_template <- function(turns, template_tokens = NULL) {
 #' @export
 morie_alammar_chosen_rejected_template <- function(prompts, chosen,
                                                    rejected) {
-  P <- as.character(prompts); C <- as.character(chosen)
+  P <- as.character(prompts)
+  C <- as.character(chosen)
   R <- as.character(rejected)
   if (length(P) != length(C) || length(P) != length(R)) {
     stop("prompts, chosen and rejected must align.", call. = FALSE)
@@ -904,15 +1082,19 @@ morie_alammar_chosen_rejected_template <- function(prompts, chosen,
   if (length(P) == 0L) stop("no records supplied.", call. = FALSE)
   for (i in seq_along(P)) {
     if (C[i] == R[i]) {
-      stop(sprintf("record %d has identical chosen and rejected; it encodes no preference.",
-                   i - 1L), call. = FALSE)
+      stop(sprintf(
+        "record %d has identical chosen and rejected; it encodes no preference.",
+        i - 1L
+      ), call. = FALSE)
     }
   }
   recs <- lapply(seq_along(P), function(i) {
     list(prompt = P[i], chosen = C[i], rejected = R[i])
   })
-  list(records = recs, estimate = length(recs), n = length(recs),
-       method = "Preference pair records (Alammar Ch 12)")
+  list(
+    records = recs, estimate = length(recs), n = length(recs),
+    method = "Preference pair records (Alammar Ch 12)"
+  )
 }
 
 #' @rdname morie_alammar_recursive_chunking
@@ -923,27 +1105,35 @@ morie_alammar_instruction_data_template <- function(records,
                                                     template = NULL) {
   tmpl <- if (is.null(template)) {
     "### Instruction:\n{instruction}\n### Input:\n{input}\n### Response:\n"
-  } else template
+  } else {
+    template
+  }
   if (length(records) == 0L) stop("no records supplied.", call. = FALSE)
-  texts <- character(0); spans <- list()
+  texts <- character(0)
+  spans <- list()
   for (i in seq_along(records)) {
     rec <- records[[i]]
     for (key in c("instruction", "output")) {
       if (is.null(rec[[key]])) {
         stop(sprintf("record %d is missing '%s'.", i - 1L, key),
-             call. = FALSE)
+          call. = FALSE
+        )
       }
     }
     head_ <- gsub("{instruction}", rec$instruction, tmpl, fixed = TRUE)
     head_ <- gsub("{input}", if (is.null(rec$input)) "" else rec$input,
-                  head_, fixed = TRUE)
+      head_,
+      fixed = TRUE
+    )
     out <- as.character(rec$output)
     texts <- c(texts, paste0(head_, out))
     spans[[i]] <- c(nchar(head_), nchar(head_) + nchar(out))
   }
-  list(texts = texts, output_spans = spans, estimate = length(texts),
-       n = length(texts),
-       method = "Instruction template with output loss mask (Alammar Ch 11)")
+  list(
+    texts = texts, output_spans = spans, estimate = length(texts),
+    n = length(texts),
+    method = "Instruction template with output loss mask (Alammar Ch 11)"
+  )
 }
 
 #' WordPiece tokenisation pipeline (Alammar Ch 2)
@@ -954,12 +1144,15 @@ morie_alammar_instruction_data_template <- function(records,
 morie_alammar_tokenization_pipeline <- function(text, vocab,
                                                 unk_token = "[UNK]",
                                                 lowercase = TRUE,
-                                                specials = c("[CLS]",
-                                                             "[SEP]")) {
+                                                specials = c(
+                                                  "[CLS]",
+                                                  "[SEP]"
+                                                )) {
   voc <- as.character(vocab)
   if (!(unk_token %in% voc)) {
     stop(sprintf("the vocabulary must contain '%s'.", unk_token),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   s <- as.character(text)
   if (isTRUE(lowercase)) s <- tolower(s)
@@ -973,12 +1166,21 @@ morie_alammar_tokenization_pipeline <- function(text, vocab,
       j <- nchar(w)
       found <- NULL
       while (j >= i) {
-        cand <- if (i == 1L) substr(w, i, j) else
+        cand <- if (i == 1L) {
+          substr(w, i, j)
+        } else {
           paste0("##", substr(w, i, j))
-        if (cand %in% voc) { found <- cand; break }
+        }
+        if (cand %in% voc) {
+          found <- cand
+          break
+        }
         j <- j - 1L
       }
-      if (is.null(found)) { ok <- FALSE; break }
+      if (is.null(found)) {
+        ok <- FALSE
+        break
+      }
       pieces <- c(pieces, found)
       i <- j + 1L
     }
@@ -987,14 +1189,18 @@ morie_alammar_tokenization_pipeline <- function(text, vocab,
   if (!is.null(specials) && length(specials)) {
     missing <- specials[!(specials %in% voc)]
     if (length(missing)) {
-      stop(sprintf("special tokens %s are not in the vocabulary.",
-                   paste(missing, collapse = ", ")), call. = FALSE)
+      stop(sprintf(
+        "special tokens %s are not in the vocabulary.",
+        paste(missing, collapse = ", ")
+      ), call. = FALSE)
     }
     toks <- c(specials[1], toks, specials[2])
   }
-  list(tokens = toks, n_unk = sum(toks == unk_token),
-       estimate = length(toks), n = length(words),
-       method = "WordPiece tokenisation pipeline (Alammar Ch 2)")
+  list(
+    tokens = toks, n_unk = sum(toks == unk_token),
+    estimate = length(toks), n = length(words),
+    method = "WordPiece tokenisation pipeline (Alammar Ch 2)"
+  )
 }
 
 # ------------------------------------------------------------------
@@ -1023,15 +1229,19 @@ morie_alammar_hdbscan_cluster <- function(X, min_cluster_size = 3,
   if (mcs < 2L) stop("min_cluster_size must be at least 2.", call. = FALSE)
   if (ms < 1L || ms >= n) {
     stop(sprintf("min_samples must lie in [1, %d]; got %d.", n - 1L, ms),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   D <- as.matrix(stats::dist(X))
   core <- apply(D, 1, function(r) sort(r)[ms + 1L])
   MR <- pmax(outer(core, rep(1, n)), outer(rep(1, n), core), D)
   diag(MR) <- 0
-  visited <- rep(FALSE, n); visited[1] <- TRUE
+  visited <- rep(FALSE, n)
+  visited[1] <- TRUE
   edges <- matrix(0, n - 1L, 3L)
-  dist_ <- MR[1, ]; src <- rep(1L, n); dist_[1] <- Inf
+  dist_ <- MR[1, ]
+  src <- rep(1L, n)
+  dist_[1] <- Inf
   for (step in seq_len(n - 1L)) {
     j <- which.min(dist_)
     edges[step, ] <- c(dist_[j], src[j], j)
@@ -1053,18 +1263,23 @@ morie_alammar_hdbscan_cluster <- function(X, min_cluster_size = 3,
     }
     for (e in seq_len(nrow(edges))) {
       if (edges[e, 1] < threshold) {
-        ra <- find(edges[e, 2]); rb <- find(edges[e, 3])
+        ra <- find(edges[e, 2])
+        rb <- find(edges[e, 3])
         if (ra != rb) parent[ra] <- rb
       }
     }
     split(seq_len(n), vapply(seq_len(n), find, numeric(1)))
   }
   cands <- c(sort(unique(edges[, 1])), Inf)
-  best <- -1L; threshold <- Inf
+  best <- -1L
+  threshold <- Inf
   for (cand in cands) {
     comps <- components(cand)
     score <- sum(vapply(comps, length, integer(1)) >= mcs)
-    if (score > best) { best <- score; threshold <- cand }
+    if (score > best) {
+      best <- score
+      threshold <- cand
+    }
   }
   labels <- rep(-1L, n)
   lab <- 0L
@@ -1076,10 +1291,12 @@ morie_alammar_hdbscan_cluster <- function(X, min_cluster_size = 3,
       lab <- lab + 1L
     }
   }
-  list(labels = labels, n_clusters = lab, n_noise = sum(labels == -1L),
-       core_distances = as.numeric(core), cut_threshold = threshold,
-       estimate = as.numeric(lab), n = n,
-       method = "Mutual-reachability single linkage with min cluster size (Campello et al. 2013, cluster-count-maximising cut)")
+  list(
+    labels = labels, n_clusters = lab, n_noise = sum(labels == -1L),
+    core_distances = as.numeric(core), cut_threshold = threshold,
+    estimate = as.numeric(lab), n = n,
+    method = "Mutual-reachability single linkage with min cluster size (Campello et al. 2013, cluster-count-maximising cut)"
+  )
 }
 
 #' UMAP objective minimised by descent (McInnes et al. 2018,
@@ -1096,7 +1313,8 @@ morie_alammar_umap_projection <- function(X, n_neighbors = 5,
   k <- as.integer(n_neighbors)
   if (k < 2L || k >= n) {
     stop(sprintf("n_neighbors must lie in [2, %d].", n - 1L),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   dd <- as.integer(d_out)
   if (dd < 1L) stop("d_out must be positive.", call. = FALSE)
@@ -1108,7 +1326,8 @@ morie_alammar_umap_projection <- function(X, n_neighbors = 5,
     nb <- ord[2:(k + 1L)]
     dists <- D[i, nb]
     rho <- dists[1]
-    lo <- 1e-8; hi <- 1e4
+    lo <- 1e-8
+    hi <- 1e4
     for (it in seq_len(64L)) {
       sig <- (lo + hi) / 2
       s <- sum(exp(-pmax(dists - rho, 0) / sig))
@@ -1153,9 +1372,11 @@ morie_alammar_umap_projection <- function(X, n_neighbors = 5,
     Z <- Z - lr * grad
   }
   obj1 <- objective(Z)
-  list(embedding = Z, objective_initial = obj0, objective_final = obj1,
-       objective_decreased = obj1 < obj0, estimate = obj1, n = n,
-       method = "UMAP fuzzy cross-entropy, full-batch descent (McInnes et al. 2018, simplified)")
+  list(
+    embedding = Z, objective_initial = obj0, objective_final = obj1,
+    objective_decreased = obj1 < obj0, estimate = obj1, n = n,
+    method = "UMAP fuzzy cross-entropy, full-batch descent (McInnes et al. 2018, simplified)"
+  )
 }
 
 #' LDA by collapsed Gibbs on the shared LCG (Griffiths and Steyvers
@@ -1173,9 +1394,13 @@ morie_alammar_lda_topic_distribution <- function(documents, n_topics,
   if (length(docs) == 0L || any(vapply(docs, length, integer(1)) == 0L)) {
     stop("every document must contain at least one token.", call. = FALSE)
   }
-  a <- as.numeric(alpha); b <- as.numeric(beta)
-  if (a <= 0 || b <= 0) stop("alpha and beta must be positive.",
-                             call. = FALSE)
+  a <- as.numeric(alpha)
+  b <- as.numeric(beta)
+  if (a <= 0 || b <= 0) {
+    stop("alpha and beta must be positive.",
+      call. = FALSE
+    )
+  }
   vocab <- sort(unique(unlist(docs)))
   V <- length(vocab)
   s <- as.numeric(seed) %% 2^32
@@ -1222,9 +1447,11 @@ morie_alammar_lda_topic_distribution <- function(documents, n_topics,
   }
   theta <- (n_dk + a) / (rowSums(n_dk) + K * a)
   phi <- (n_kw + b) / (rowSums(n_kw) + V * b)
-  list(theta = theta, phi = phi, vocabulary = vocab,
-       estimate = theta[1, 1], n = length(docs),
-       method = "LDA collapsed Gibbs (Griffiths and Steyvers 2004)")
+  list(
+    theta = theta, phi = phi, vocabulary = vocab,
+    estimate = theta[1, 1], n = length(docs),
+    method = "LDA collapsed Gibbs (Griffiths and Steyvers 2004)"
+  )
 }
 
 #' Softmax head on frozen embeddings; SetFit pair generation
@@ -1237,16 +1464,21 @@ morie_alammar_embedding_classifier <- function(embeddings, labels,
                                                l2 = 1e-4) {
   X <- as.matrix(embeddings)
   y <- as.integer(labels)
-  if (nrow(X) != length(y)) stop("need one label per embedding.",
-                                 call. = FALSE)
+  if (nrow(X) != length(y)) {
+    stop("need one label per embedding.",
+      call. = FALSE
+    )
+  }
   classes <- sort(unique(y))
   if (!identical(classes, seq.int(0L, length(classes) - 1L))) {
     stop("labels must be 0..K-1 with every class present.", call. = FALSE)
   }
   K <- length(classes)
   if (K < 2L) stop("need at least 2 classes.", call. = FALSE)
-  n <- nrow(X); d <- ncol(X)
-  W <- matrix(0, K, d); b <- numeric(K)
+  n <- nrow(X)
+  d <- ncol(X)
+  W <- matrix(0, K, d)
+  b <- numeric(K)
   lr <- as.numeric(learning_rate)
   for (step in seq_len(as.integer(n_steps))) {
     Zl <- X %*% t(W) + matrix(b, n, K, byrow = TRUE)
@@ -1259,10 +1491,12 @@ morie_alammar_embedding_classifier <- function(embeddings, labels,
   Zl <- X %*% t(W) + matrix(b, n, K, byrow = TRUE)
   P <- .morie_al_softmax_rows(Zl)
   pred <- apply(P, 1, which.max) - 1L
-  list(weights = W, bias = b, train_accuracy = mean(pred == y),
-       cross_entropy = mean(-log(P[cbind(seq_len(n), y + 1L)] + 1e-12)),
-       predictions = as.integer(pred), estimate = mean(pred == y), n = n,
-       method = "Softmax head on frozen embeddings (Alammar Ch 4)")
+  list(
+    weights = W, bias = b, train_accuracy = mean(pred == y),
+    cross_entropy = mean(-log(P[cbind(seq_len(n), y + 1L)] + 1e-12)),
+    predictions = as.integer(pred), estimate = mean(pred == y), n = n,
+    method = "Softmax head on frozen embeddings (Alammar Ch 4)"
+  )
 }
 
 #' @rdname morie_alammar_embedding_classifier
@@ -1270,28 +1504,38 @@ morie_alammar_embedding_classifier <- function(embeddings, labels,
 morie_alammar_setfit_twostep <- function(embeddings, labels) {
   X <- as.matrix(embeddings)
   y <- as.integer(labels)
-  if (nrow(X) != length(y)) stop("need one label per embedding.",
-                                 call. = FALSE)
+  if (nrow(X) != length(y)) {
+    stop("need one label per embedding.",
+      call. = FALSE
+    )
+  }
   n <- length(y)
-  pos <- list(); neg <- list()
+  pos <- list()
+  neg <- list()
   for (i in seq_len(n - 1L)) {
     for (j in (i + 1L):n) {
-      pair <- c(i - 1L, j - 1L)    # 0-based, matching Python
-      if (y[i] == y[j]) pos[[length(pos) + 1L]] <- pair
-      else neg[[length(neg) + 1L]] <- pair
+      pair <- c(i - 1L, j - 1L) # 0-based, matching Python
+      if (y[i] == y[j]) {
+        pos[[length(pos) + 1L]] <- pair
+      } else {
+        neg[[length(neg) + 1L]] <- pair
+      }
     }
   }
   if (length(pos) == 0L || length(neg) == 0L) {
     stop("contrastive pairs need at least two classes with at least two members each.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   head_ <- morie_alammar_embedding_classifier(X, y)
-  list(positive_pairs = pos, negative_pairs = neg,
-       n_positive = length(pos), n_negative = length(neg),
-       head_train_accuracy = head_$train_accuracy,
-       head_predictions = head_$predictions,
-       estimate = head_$train_accuracy, n = n,
-       method = "SetFit pair generation + head (Tunstall et al. 2022)")
+  list(
+    positive_pairs = pos, negative_pairs = neg,
+    n_positive = length(pos), n_negative = length(neg),
+    head_train_accuracy = head_$train_accuracy,
+    head_predictions = head_$predictions,
+    estimate = head_$train_accuracy, n = n,
+    method = "SetFit pair generation + head (Tunstall et al. 2022)"
+  )
 }
 
 #' Greedy NSW approximate nearest neighbour (Malkov and Yashunin 2020)
@@ -1348,12 +1592,15 @@ morie_alammar_ann_search <- function(query_vec, index, ef_search = 8) {
   }
   best <- cand[which.min(vapply(cand, d, numeric(1)))]
   true_best <- which.min(sqrt(rowSums((P - matrix(q, nrow(P), length(q),
-                                                  byrow = TRUE))^2))) - 1L
-  list(nearest = best, distance = d(best), greedy_path = hops,
-       candidates_examined = length(cand), exact_nearest = true_best,
-       found_exact = best == true_best, estimate = as.numeric(best),
-       n = nrow(P),
-       method = "Greedy NSW descent + beam (Malkov and Yashunin 2020)")
+    byrow = TRUE
+  ))^2))) - 1L
+  list(
+    nearest = best, distance = d(best), greedy_path = hops,
+    candidates_examined = length(cand), exact_nearest = true_best,
+    found_exact = best == true_best, estimate = as.numeric(best),
+    n = nrow(P),
+    method = "Greedy NSW descent + beam (Malkov and Yashunin 2020)"
+  )
 }
 
 # ------------------------------------------------------------------
@@ -1371,24 +1618,33 @@ morie_alammar_zero_shot_classification <- function(text, candidate_labels,
                                                    hypothesis_template =
                                                      "This example is about %s.") {
   labels <- as.character(candidate_labels)
-  if (length(labels) == 0L) stop("no candidate labels supplied.",
-                                 call. = FALSE)
-  if (anyDuplicated(labels)) stop("candidate labels contain duplicates.",
-                                  call. = FALSE)
+  if (length(labels) == 0L) {
+    stop("no candidate labels supplied.",
+      call. = FALSE
+    )
+  }
+  if (anyDuplicated(labels)) {
+    stop("candidate labels contain duplicates.",
+      call. = FALSE
+    )
+  }
   if (!is.function(nli_model)) {
     stop("nli_model must be a function (premise, hypothesis) -> score.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   scores <- vapply(labels, function(l) {
     as.numeric(nli_model(as.character(text), sprintf(hypothesis_template, l)))
   }, numeric(1))
   z <- scores - max(scores)
   p <- exp(z) / sum(exp(z))
-  list(probabilities = as.list(stats::setNames(p, labels)),
-       predicted_label = labels[which.max(p)],
-       entailment_scores = unname(scores), estimate = max(p),
-       n = length(labels),
-       method = "Zero-shot NLI classification (Yin et al. 2019)")
+  list(
+    probabilities = as.list(stats::setNames(p, labels)),
+    predicted_label = labels[which.max(p)],
+    entailment_scores = unname(scores), estimate = max(p),
+    n = length(labels),
+    method = "Zero-shot NLI classification (Yin et al. 2019)"
+  )
 }
 
 #' @rdname morie_alammar_zero_shot_classification
@@ -1400,21 +1656,27 @@ morie_alammar_zero_shot_classification <- function(text, candidate_labels,
 morie_alammar_t5_classify <- function(input_text, label_tokens, model,
                                       prefix = "") {
   labels <- as.character(label_tokens)
-  if (length(labels) == 0L) stop("no label tokens supplied.",
-                                 call. = FALSE)
+  if (length(labels) == 0L) {
+    stop("no label tokens supplied.",
+      call. = FALSE
+    )
+  }
   if (!is.function(model)) {
     stop("model must be a function (input, label) -> log-probability.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   lp <- vapply(labels, function(l) {
     as.numeric(model(paste0(prefix, input_text), l))
   }, numeric(1))
   z <- lp - max(lp)
   p <- exp(z) / sum(exp(z))
-  list(predicted_label = labels[which.max(p)],
-       probabilities = as.list(stats::setNames(p, labels)),
-       log_scores = unname(lp), estimate = max(p), n = length(labels),
-       method = "T5 text-to-text classification (Raffel et al. 2020)")
+  list(
+    predicted_label = labels[which.max(p)],
+    probabilities = as.list(stats::setNames(p, labels)),
+    log_scores = unname(lp), estimate = max(p), n = length(labels),
+    method = "T5 text-to-text classification (Raffel et al. 2020)"
+  )
 }
 
 #' @rdname morie_alammar_zero_shot_classification
@@ -1427,7 +1689,8 @@ morie_alammar_llm_as_judge <- function(responses, rubric, judge_model,
                                        n_samples = 1) {
   if (!is.function(judge_model)) {
     stop("judge_model must be a function (rubric, response, sample_index) -> score.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   R <- as.character(responses)
   if (length(R) == 0L) stop("no responses supplied.", call. = FALSE)
@@ -1441,10 +1704,12 @@ morie_alammar_llm_as_judge <- function(responses, rubric, judge_model,
   if (k == 1L) scores <- matrix(scores, ncol = 1L)
   means <- rowMeans(scores)
   sds <- if (k > 1L) apply(scores, 1, stats::sd) else numeric(length(R))
-  list(scores = unname(means), judge_sd = unname(sds),
-       best_response = which.max(means) - 1L, estimate = max(means),
-       n = length(R),
-       method = "LLM-as-judge with self-disagreement reported (Zheng et al. 2023)")
+  list(
+    scores = unname(means), judge_sd = unname(sds),
+    best_response = which.max(means) - 1L, estimate = max(means),
+    n = length(R),
+    method = "LLM-as-judge with self-disagreement reported (Zheng et al. 2023)"
+  )
 }
 
 #' @rdname morie_alammar_zero_shot_classification
@@ -1456,28 +1721,34 @@ morie_alammar_output_verification <- function(response, criteria,
                                               verifier_model) {
   if (!is.function(verifier_model)) {
     stop("verifier_model must be a function (response, criterion) -> 'PASS' | 'FAIL'.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   crits <- as.character(criteria)
   if (length(crits) == 0L) {
     stop("no criteria supplied; an empty gate passes everything and verifies nothing.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   verdicts <- character(length(crits))
   for (i in seq_along(crits)) {
     v <- verifier_model(as.character(response), crits[i])
     if (!(v %in% c("PASS", "FAIL"))) {
-      stop(sprintf("verifier returned '%s' for '%s'; only 'PASS' or 'FAIL' count as answers.",
-                   v, crits[i]), call. = FALSE)
+      stop(sprintf(
+        "verifier returned '%s' for '%s'; only 'PASS' or 'FAIL' count as answers.",
+        v, crits[i]
+      ), call. = FALSE)
     }
     verdicts[i] <- v
   }
   names(verdicts) <- crits
   passed <- all(verdicts == "PASS")
-  list(passed = passed, verdicts = as.list(verdicts),
-       failed_criteria = crits[verdicts == "FAIL"],
-       estimate = as.numeric(passed), n = length(crits),
-       method = "Criterion-gated output verification (Alammar Ch 7)")
+  list(
+    passed = passed, verdicts = as.list(verdicts),
+    failed_criteria = crits[verdicts == "FAIL"],
+    estimate = as.numeric(passed), n = length(crits),
+    method = "Criterion-gated output verification (Alammar Ch 7)"
+  )
 }
 
 #' Prompt chains, multi-query retrieval, the ReAct loop
@@ -1487,8 +1758,11 @@ morie_alammar_output_verification <- function(response, criteria,
 #' @param model function(prompt) -> text.
 #' @export
 morie_alammar_chain_prompting <- function(x, prompts, model) {
-  if (!is.function(model)) stop("model must be a function prompt -> text.",
-                                call. = FALSE)
+  if (!is.function(model)) {
+    stop("model must be a function prompt -> text.",
+      call. = FALSE
+    )
+  }
   if (length(prompts) == 0L) stop("no prompts supplied.", call. = FALSE)
   y <- NULL
   steps <- list()
@@ -1501,8 +1775,10 @@ morie_alammar_chain_prompting <- function(x, prompts, model) {
     y <- as.character(model(prompt))
     steps[[i]] <- list(prompt = as.character(prompt), output = y)
   }
-  list(final_output = y, steps = steps, estimate = length(steps),
-       n = length(steps), method = "Prompt chaining (Alammar Ch 7)")
+  list(
+    final_output = y, steps = steps, estimate = length(steps),
+    n = length(steps), method = "Prompt chaining (Alammar Ch 7)"
+  )
 }
 
 #' @rdname morie_alammar_chain_prompting
@@ -1518,10 +1794,12 @@ morie_alammar_multi_query_retrieval <- function(query, K, retriever,
   }
   k <- as.integer(K)
   if (k < 0L) stop("K must be non-negative.", call. = FALSE)
-  queries <- c(as.character(query),
-               vapply(seq_len(k) - 1L, function(i) {
-                 as.character(rephraser(as.character(query), i))
-               }, character(1)))
+  queries <- c(
+    as.character(query),
+    vapply(seq_len(k) - 1L, function(i) {
+      as.character(rephraser(as.character(query), i))
+    }, character(1))
+  )
   seen <- c()
   added <- integer(length(queries))
   for (qi in seq_along(queries)) {
@@ -1530,9 +1808,11 @@ morie_alammar_multi_query_retrieval <- function(query, K, retriever,
     seen <- c(seen, new)
     added[qi] <- length(new)
   }
-  list(documents = seen, queries = queries, added_per_query = added,
-       estimate = length(seen), n = length(queries),
-       method = "Multi-query retrieval union (Alammar Ch 8)")
+  list(
+    documents = seen, queries = queries, added_per_query = added,
+    estimate = length(seen), n = length(queries),
+    method = "Multi-query retrieval union (Alammar Ch 8)"
+  )
 }
 
 #' @rdname morie_alammar_chain_prompting
@@ -1551,28 +1831,38 @@ morie_alammar_react_agent_loop <- function(query, tools, model,
   for (i in seq_len(steps)) {
     step <- model(ctx)
     if (!is.null(step$final)) {
-      trace[[length(trace) + 1L]] <- list(thought = step$thought,
-                                          final = step$final)
-      return(list(answer = step$final, trace = trace,
-                  steps_used = length(trace), exhausted = FALSE,
-                  estimate = length(trace), n = length(trace),
-                  method = "ReAct loop (Yao et al. 2023)"))
+      trace[[length(trace) + 1L]] <- list(
+        thought = step$thought,
+        final = step$final
+      )
+      return(list(
+        answer = step$final, trace = trace,
+        steps_used = length(trace), exhausted = FALSE,
+        estimate = length(trace), n = length(trace),
+        method = "ReAct loop (Yao et al. 2023)"
+      ))
     }
     action <- step$action
     obs <- if (!is.null(action) && !is.null(tools[[action]])) {
       as.character(tools[[action]](step$action_input))
     } else {
-      sprintf("ERROR: unknown action '%s'; available: %s", action,
-              paste(sort(names(tools)), collapse = ", "))
+      sprintf(
+        "ERROR: unknown action '%s'; available: %s", action,
+        paste(sort(names(tools)), collapse = ", ")
+      )
     }
-    rec <- list(thought = step$thought, action = action,
-                observation = obs)
+    rec <- list(
+      thought = step$thought, action = action,
+      observation = obs
+    )
     trace[[length(trace) + 1L]] <- rec
     ctx[[length(ctx) + 1L]] <- rec
   }
-  list(answer = NULL, trace = trace, steps_used = length(trace),
-       exhausted = TRUE, estimate = length(trace), n = length(trace),
-       method = "ReAct loop (Yao et al. 2023)")
+  list(
+    answer = NULL, trace = trace, steps_used = length(trace),
+    exhausted = TRUE, estimate = length(trace), n = length(trace),
+    method = "ReAct loop (Yao et al. 2023)"
+  )
 }
 
 #' Captioning projection, unfreezing, continued pretraining,
@@ -1595,16 +1885,20 @@ morie_alammar_image_captioning <- function(image, visual_encoder,
   } else {
     W <- as.matrix(projector)
     if (ncol(W) != length(feats)) {
-      stop(sprintf("projector has %d columns but the encoder produced %d features.",
-                   ncol(W), length(feats)), call. = FALSE)
+      stop(sprintf(
+        "projector has %d columns but the encoder produced %d features.",
+        ncol(W), length(feats)
+      ), call. = FALSE)
     }
     as.numeric(W %*% feats)
   }
   caption <- as.character(llm(z, as.character(prompt)))
-  list(caption = caption, projected = z, feature_dim = length(feats),
-       projected_dim = length(z), estimate = nchar(caption),
-       n = length(z),
-       method = "Visual projection into the LM (Alammar Ch 9)")
+  list(
+    caption = caption, projected = z, feature_dim = length(feats),
+    projected_dim = length(z), estimate = nchar(caption),
+    n = length(z),
+    method = "Visual projection into the LM (Alammar Ch 9)"
+  )
 }
 
 #' @rdname morie_alammar_image_captioning
@@ -1621,10 +1915,12 @@ morie_alammar_layer_freezing <- function(n_layers, n_stages = NULL) {
     thaw <- round(s * L / S)
     seq_len(L) - 1L >= L - thaw
   })
-  list(masks = masks, n_stages = S,
-       trainable_per_stage = vapply(masks, sum, integer(1)),
-       estimate = as.numeric(S), n = L,
-       method = "Gradual unfreezing (Howard and Ruder 2018)")
+  list(
+    masks = masks, n_stages = S,
+    trainable_per_stage = vapply(masks, sum, integer(1)),
+    estimate = as.numeric(S), n = L,
+    method = "Gradual unfreezing (Howard and Ruder 2018)"
+  )
 }
 
 #' @rdname morie_alammar_image_captioning
@@ -1640,7 +1936,8 @@ morie_alammar_continued_pretraining <- function(domain_corpus,
                                                 task_loss_fn = NULL) {
   if (!is.function(mlm_loss_fn)) {
     stop("mlm_loss_fn must be a function (corpus, step) -> loss.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   steps <- as.integer(n_mlm_steps)
   if (steps < 1L) stop("n_mlm_steps must be positive.", call. = FALSE)
@@ -1650,12 +1947,17 @@ morie_alammar_continued_pretraining <- function(domain_corpus,
   curve <- vapply(seq_len(steps) - 1L, function(s) {
     as.numeric(mlm_loss_fn(domain_corpus, s))
   }, numeric(1))
-  list(mlm_loss_curve = curve,
-       mlm_improved = if (steps > 1L) curve[steps] < curve[1] else NA,
-       task_loss = if (is.function(task_loss_fn))
-         as.numeric(task_loss_fn()) else NULL,
-       estimate = curve[steps], n = steps,
-       method = "Continued domain pretraining (Gururangan et al. 2020)")
+  list(
+    mlm_loss_curve = curve,
+    mlm_improved = if (steps > 1L) curve[steps] < curve[1] else NA,
+    task_loss = if (is.function(task_loss_fn)) {
+      as.numeric(task_loss_fn())
+    } else {
+      NULL
+    },
+    estimate = curve[steps], n = steps,
+    method = "Continued domain pretraining (Gururangan et al. 2020)"
+  )
 }
 
 #' @rdname morie_alammar_image_captioning
@@ -1669,7 +1971,8 @@ morie_alammar_augmented_sbert <- function(unlabeled_pairs, cross_encoder,
                                           gold_labels = NULL) {
   if (!is.function(cross_encoder)) {
     stop("cross_encoder must be a function (text_a, text_b) -> score.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   if (length(unlabeled_pairs) == 0L) {
     stop("no unlabeled pairs supplied.", call. = FALSE)
@@ -1686,18 +1989,22 @@ morie_alammar_augmented_sbert <- function(unlabeled_pairs, cross_encoder,
     }
     n_gold <- length(gl)
     pred <- vapply(gold_pairs, function(p) {
-      as.numeric(cross_encoder(as.character(p[[1]]),
-                               as.character(p[[2]])))
+      as.numeric(cross_encoder(
+        as.character(p[[1]]),
+        as.character(p[[2]])
+      ))
     }, numeric(1))
     if (n_gold >= 2L && stats::sd(gl) > 0 && stats::sd(pred) > 0) {
       agreement <- stats::cor(pred, gl)
     }
   }
-  list(n_silver = length(silver), n_gold = n_gold,
-       silver_labels = silver,
-       cross_encoder_gold_agreement = agreement,
-       estimate = mean(silver), n = length(silver) + n_gold,
-       method = "Augmented SBERT silver labelling (Thakur et al. 2021)")
+  list(
+    n_silver = length(silver), n_gold = n_gold,
+    silver_labels = silver,
+    cross_encoder_gold_agreement = agreement,
+    estimate = mean(silver), n = length(silver) + n_gold,
+    method = "Augmented SBERT silver labelling (Thakur et al. 2021)"
+  )
 }
 
 #' @rdname morie_alammar_image_captioning
@@ -1713,8 +2020,11 @@ morie_alammar_tsdae_objective <- function(tokens, delete_ratio = 0.6,
   toks <- as.character(tokens)
   if (length(toks) == 0L) stop("no tokens supplied.", call. = FALSE)
   r <- as.numeric(delete_ratio)
-  if (r <= 0 || r >= 1) stop("delete_ratio must lie in (0, 1).",
-                             call. = FALSE)
+  if (r <= 0 || r >= 1) {
+    stop("delete_ratio must lie in (0, 1).",
+      call. = FALSE
+    )
+  }
   s <- as.numeric(seed) %% 2^32
   keep_mask <- logical(length(toks))
   for (i in seq_along(toks)) {
@@ -1732,16 +2042,19 @@ morie_alammar_tsdae_objective <- function(tokens, delete_ratio = 0.6,
     lps <- as.numeric(reconstruction_logprob)
     if (length(lps) != length(toks)) {
       stop("need one reconstruction log-prob per ORIGINAL token; the decoder must rebuild the uncorrupted sentence.",
-           call. = FALSE)
+        call. = FALSE
+      )
     }
     loss <- -sum(lps)
   }
-  list(corrupted = kept, deleted = deleted,
-       actual_delete_ratio = length(deleted) / length(toks),
-       loss = loss,
-       estimate = if (!is.null(loss)) loss else length(deleted),
-       n = length(toks),
-       method = "TSDAE deletion corruption + NLL (Wang et al. 2021)")
+  list(
+    corrupted = kept, deleted = deleted,
+    actual_delete_ratio = length(deleted) / length(toks),
+    loss = loss,
+    estimate = if (!is.null(loss)) loss else length(deleted),
+    n = length(toks),
+    method = "TSDAE deletion corruption + NLL (Wang et al. 2021)"
+  )
 }
 
 #' BERTopic pipeline: reduce, cluster, c-TF-IDF (Grootendorst 2022)
@@ -1764,14 +2077,16 @@ morie_alammar_bertopic_pipeline <- function(documents, embeddings,
   sv <- svd(C)
   Z <- C %*% sv$v[, seq_len(min(2L, ncol(C))), drop = FALSE]
   cl <- morie_alammar_hdbscan_cluster(Z,
-                                      min_cluster_size = min_cluster_size,
-                                      min_samples = 1)
+    min_cluster_size = min_cluster_size,
+    min_samples = 1
+  )
   labels <- cl$labels
   vocab <- sort(unique(unlist(docs)))
   clusters <- sort(unique(labels[labels >= 0L]))
   if (length(clusters) == 0L) {
     stop("every document came out as noise; loosen min_cluster_size.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   M <- matrix(0, length(clusters), length(vocab))
   for (i in seq_along(docs)) {
@@ -1786,11 +2101,16 @@ morie_alammar_bertopic_pipeline <- function(documents, embeddings,
   ct <- morie_alammar_c_tfidf(M)
   W <- ct$weights
   top <- stats::setNames(
-    vapply(seq_len(nrow(W)), function(i) vocab[which.max(W[i, ])],
-           character(1)),
-    as.character(clusters))
-  list(labels = labels, reduced = Z, topic_top_word = as.list(top),
-       n_topics = length(clusters), vocabulary = vocab,
-       estimate = length(clusters), n = length(docs),
-       method = "BERTopic: reduce, cluster, c-TF-IDF (Grootendorst 2022)")
+    vapply(
+      seq_len(nrow(W)), function(i) vocab[which.max(W[i, ])],
+      character(1)
+    ),
+    as.character(clusters)
+  )
+  list(
+    labels = labels, reduced = Z, topic_top_word = as.list(top),
+    n_topics = length(clusters), vocabulary = vocab,
+    estimate = length(clusters), n = length(docs),
+    method = "BERTopic: reduce, cluster, c-TF-IDF (Grootendorst 2022)"
+  )
 }

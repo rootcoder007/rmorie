@@ -90,7 +90,9 @@ NULL
   # perfect collinearity check (BS3.2)
   if (qr(X)$rank < ncol(X)) {
     stop("design matrix is rank-deficient (perfectly collinear predictors); ",
-         "sampler bypassed", call. = FALSE)
+      "sampler bypassed",
+      call. = FALSE
+    )
   }
   list(y = as.numeric(y), X = X, p = ncol(X))
 }
@@ -124,7 +126,8 @@ NULL
 #' @param verbose Emit per-chain progress messages.
 #' @return A `morie_bayes_fit` object.
 #' @examples
-#' d <- data.frame(x = rnorm(50)); d$y <- 1 + 2 * d$x + rnorm(50)
+#' d <- data.frame(x = rnorm(50))
+#' d$y <- 1 + 2 * d$x + rnorm(50)
 #' fit <- morie_bayes_lm(y ~ x, d, chains = 2, iter = 500, warmup = 200)
 #' @export
 morie_bayes_lm <- function(formula, data, prior_sd = 10, chains = 4L,
@@ -135,20 +138,25 @@ morie_bayes_lm <- function(formula, data, prior_sd = 10, chains = 4L,
                            verbose = FALSE) {
   data <- .morie_check_data(data, arg = "data")
   des <- .bayes_design(formula, data)
-  y <- des$y; X <- des$X; p <- des$p
-  npar <- p + 1L                                     # betas + log(sigma)
+  y <- des$y
+  X <- des$X
+  p <- des$p
+  npar <- p + 1L # betas + log(sigma)
 
-  if (length(prior_sd) > 1L && length(prior_sd) != p) {   # BS2.3 / BS2.4
-    stop(sprintf("prior_sd has length %d but there are %d coefficients",
-                 length(prior_sd), p), call. = FALSE)
+  if (length(prior_sd) > 1L && length(prior_sd) != p) { # BS2.3 / BS2.4
+    stop(sprintf(
+      "prior_sd has length %d but there are %d coefficients",
+      length(prior_sd), p
+    ), call. = FALSE)
   }
   psd <- if (length(prior_sd) == 1L) rep(prior_sd, p) else prior_sd
 
   log_post <- function(th) {
-    beta <- th[seq_len(p)]; sigma <- exp(th[npar])
+    beta <- th[seq_len(p)]
+    sigma <- exp(th[npar])
     mu <- as.numeric(X %*% beta)
     sum(stats::dnorm(y, mu, sigma, log = TRUE)) +
-      sum(stats::dnorm(beta, 0, psd, log = TRUE)) + th[npar]  # log-sigma jacobian
+      sum(stats::dnorm(beta, 0, psd, log = TRUE)) + th[npar] # log-sigma jacobian
   }
 
   # identical-seed diagnostic (BS2.10)
@@ -162,15 +170,22 @@ morie_bayes_lm <- function(formula, data, prior_sd = 10, chains = 4L,
 
   run_chain <- function(ci) {
     set.seed(chain_seeds[ci])
-    th <- if (is.list(starting_values)) starting_values[[ci]]
-          else if (!is.null(starting_values)) starting_values
-          else c(stats::coef(stats::lm.fit(X, y)), log(stats::sd(y)))
+    th <- if (is.list(starting_values)) {
+      starting_values[[ci]]
+    } else if (!is.null(starting_values)) {
+      starting_values
+    } else {
+      c(stats::coef(stats::lm.fit(X, y)), log(stats::sd(y)))
+    }
     draws <- matrix(NA_real_, nrow = warmup + iter, ncol = npar)
     lp <- log_post(th)
     for (t in seq_len(warmup + iter)) {
       prop <- th + stats::rnorm(npar, 0, step)
       lp_prop <- log_post(prop)
-      if (log(stats::runif(1)) < lp_prop - lp) { th <- prop; lp <- lp_prop }
+      if (log(stats::runif(1)) < lp_prop - lp) {
+        th <- prop
+        lp <- lp_prop
+      }
       draws[t, ] <- th
     }
     if (verbose) message(sprintf("chain %d done", ci))
@@ -179,15 +194,19 @@ morie_bayes_lm <- function(formula, data, prior_sd = 10, chains = 4L,
 
   chains_out <- tryCatch(
     lapply(seq_len(chains), run_chain),
-    error = function(e) e)
-  if (inherits(chains_out, "error")) {               # BS2.15
+    error = function(e) e
+  )
+  if (inherits(chains_out, "error")) { # BS2.15
     out <- list(error = conditionMessage(chains_out), converged = FALSE)
     class(out) <- c("morie_bayes_fit", "morie_rich_result", "list")
     return(out)
   }
 
   parnames <- c(colnames(X), "log_sigma")
-  chains_out <- lapply(chains_out, function(m) { colnames(m) <- parnames; m })
+  chains_out <- lapply(chains_out, function(m) {
+    colnames(m) <- parnames
+    m
+  })
 
   rhat <- ess <- NULL
   converged <- NA
@@ -195,9 +214,11 @@ morie_bayes_lm <- function(formula, data, prior_sd = 10, chains = 4L,
     rhat <- morie_bayes_rhat(chains_out)
     ess <- morie_bayes_ess(chains_out)
     converged <- all(rhat < converge_threshold, na.rm = TRUE)
-    if (!isTRUE(converged) && !quiet) {              # BS4.5 / BS5.5
+    if (!isTRUE(converged) && !quiet) { # BS4.5 / BS5.5
       warning("chains have not converged (max R-hat = ",
-              round(max(rhat), 3), ")", call. = FALSE)
+        round(max(rhat), 3), ")",
+        call. = FALSE
+      )
     }
   }
 
@@ -209,7 +230,8 @@ morie_bayes_lm <- function(formula, data, prior_sd = 10, chains = 4L,
     rhat = rhat, ess = ess, converged = converged,
     converge_threshold = converge_threshold,
     seeds = chain_seeds, starting_values = starting_values,
-    n_chains = chains, n_iter = iter, prior_sd = psd)
+    n_chains = chains, n_iter = iter, prior_sd = psd
+  )
   class(out) <- c("morie_bayes_fit", "morie_rich_result", "list")
   out
 }
@@ -223,13 +245,17 @@ morie_bayes_lm <- function(formula, data, prior_sd = 10, chains = 4L,
 #' morie_bayes_rhat(list(matrix(rnorm(200), 100), matrix(rnorm(200), 100)))
 #' @export
 morie_bayes_rhat <- function(chains) {
-  m <- length(chains); n <- nrow(chains[[1]])
+  m <- length(chains)
+  n <- nrow(chains[[1]])
   vapply(seq_len(ncol(chains[[1]])), function(j) {
     xs <- vapply(chains, function(c) c[, j], numeric(n))
-    chain_means <- colMeans(xs); grand <- mean(chain_means)
+    chain_means <- colMeans(xs)
+    grand <- mean(chain_means)
     B <- n / (m - 1) * sum((chain_means - grand)^2)
     W <- mean(apply(xs, 2, stats::var))
-    if (W == 0) return(1)
+    if (W == 0) {
+      return(1)
+    }
     sqrt(((n - 1) / n * W + B / n) / W)
   }, numeric(1)) -> r
   stats::setNames(r, colnames(chains[[1]]))
@@ -242,10 +268,11 @@ morie_bayes_rhat <- function(chains) {
 #' morie_bayes_ess(list(matrix(rnorm(200), 100)))
 #' @export
 morie_bayes_ess <- function(chains) {
-  post <- do.call(rbind, chains); n <- nrow(post)
+  post <- do.call(rbind, chains)
+  n <- nrow(post)
   vapply(seq_len(ncol(post)), function(j) {
     a <- stats::acf(post[, j], plot = FALSE, lag.max = min(50L, n - 1L))$acf[-1]
-    a <- a[seq_len(which(c(a, -1) < 0)[1] - 1)]      # sum positive autocorr
+    a <- a[seq_len(which(c(a, -1) < 0)[1] - 1)] # sum positive autocorr
     n / (1 + 2 * sum(a, na.rm = TRUE))
   }, numeric(1)) -> e
   stats::setNames(pmax(e, 1), colnames(post))
@@ -258,10 +285,13 @@ morie_bayes_ess <- function(chains) {
 #' morie_bayes_geweke(list(matrix(rnorm(400), 200)))
 #' @export
 morie_bayes_geweke <- function(chains) {
-  post <- do.call(rbind, chains); n <- nrow(post)
-  a <- seq_len(floor(0.1 * n)); b <- (ceiling(0.5 * n) + 1):n
+  post <- do.call(rbind, chains)
+  n <- nrow(post)
+  a <- seq_len(floor(0.1 * n))
+  b <- (ceiling(0.5 * n) + 1):n
   vapply(seq_len(ncol(post)), function(j) {
-    xa <- post[a, j]; xb <- post[b, j]
+    xa <- post[a, j]
+    xb <- post[b, j]
     (mean(xa) - mean(xb)) /
       sqrt(stats::var(xa) / length(xa) + stats::var(xb) / length(xb))
   }, numeric(1)) -> z
@@ -272,9 +302,12 @@ morie_bayes_geweke <- function(chains) {
 #' @param fit A `morie_bayes_fit`.
 #' @return A list with `rhat`, `ess`, and `geweke`.
 #' @examples
-#' d <- data.frame(x = rnorm(40)); d$y <- d$x + rnorm(40)
-#' morie_bayes_diagnostics(morie_bayes_lm(y ~ x, d, chains = 2, iter = 300,
-#'                                        warmup = 100))
+#' d <- data.frame(x = rnorm(40))
+#' d$y <- d$x + rnorm(40)
+#' morie_bayes_diagnostics(morie_bayes_lm(y ~ x, d,
+#'   chains = 2, iter = 300,
+#'   warmup = 100
+#' ))
 #' @export
 morie_bayes_diagnostics <- function(fit) {
   stopifnot(inherits(fit, "morie_bayes_fit"))
@@ -289,34 +322,42 @@ morie_bayes_diagnostics <- function(fit) {
 #' @param ... Passed to [morie_bayes_lm()].
 #' @return A new `morie_bayes_fit` started from `fit`'s last draws.
 #' @examples
-#' d <- data.frame(x = rnorm(40)); d$y <- d$x + rnorm(40)
+#' d <- data.frame(x = rnorm(40))
+#' d$y <- d$x + rnorm(40)
 #' f1 <- morie_bayes_lm(y ~ x, d, chains = 2, iter = 200, warmup = 100)
 #' f2 <- morie_bayes_continue(f1, iter = 200)
 #' @export
 morie_bayes_continue <- function(fit, iter = 1000L, ...) {
   stopifnot(inherits(fit, "morie_bayes_fit"))
-  starts <- lapply(fit$chains, function(c) c[nrow(c), ])   # last state per chain
+  starts <- lapply(fit$chains, function(c) c[nrow(c), ]) # last state per chain
   data <- as.data.frame(cbind(fit$y, fit$X[, -1, drop = FALSE]))
   names(data)[1] <- all.vars(fit$formula)[1]
-  morie_bayes_lm(fit$formula, data, chains = fit$n_chains, iter = iter,
-                 warmup = 0L, starting_values = starts, ...)
+  morie_bayes_lm(fit$formula, data,
+    chains = fit$n_chains, iter = iter,
+    warmup = 0L, starting_values = starts, ...
+  )
 }
 
 #' Compare posterior means against an external (lm) reference
 #' @param fit A `morie_bayes_fit`.
 #' @return A data.frame of posterior vs OLS coefficient estimates.
 #' @examples
-#' d <- data.frame(x = rnorm(60)); d$y <- 1 + 2 * d$x + rnorm(60)
-#' morie_bayes_compare(morie_bayes_lm(y ~ x, d, chains = 2, iter = 800,
-#'                                    warmup = 300))
+#' d <- data.frame(x = rnorm(60))
+#' d$y <- 1 + 2 * d$x + rnorm(60)
+#' morie_bayes_compare(morie_bayes_lm(y ~ x, d,
+#'   chains = 2, iter = 800,
+#'   warmup = 300
+#' ))
 #' @export
 morie_bayes_compare <- function(fit) {
   stopifnot(inherits(fit, "morie_bayes_fit"))
   ols <- stats::coef(stats::lm.fit(fit$X, fit$y))
-  data.frame(parameter = colnames(fit$X),
-             posterior_mean = unname(fit$coefficients),
-             ols = unname(ols),
-             row.names = NULL)
+  data.frame(
+    parameter = colnames(fit$X),
+    posterior_mean = unname(fit$coefficients),
+    ols = unname(ols),
+    row.names = NULL
+  )
 }
 
 #' Posterior fitted values (on the response scale)
@@ -325,7 +366,8 @@ morie_bayes_compare <- function(fit) {
 #' @return Numeric fitted values.
 #' @examples
 #' \donttest{
-#' d <- data.frame(x = rnorm(50)); d$y <- 1 + 2 * d$x + rnorm(50)
+#' d <- data.frame(x = rnorm(50))
+#' d$y <- 1 + 2 * d$x + rnorm(50)
 #' fit <- morie_bayes_lm(y ~ x, d, chains = 2, iter = 500, warmup = 200)
 #' head(fitted(fit))
 #' }
@@ -343,17 +385,23 @@ fitted.morie_bayes_fit <- function(object, ...) {
 #' @return `x`, invisibly.
 #' @examples
 #' \donttest{
-#' d <- data.frame(x = rnorm(50)); d$y <- 1 + 2 * d$x + rnorm(50)
+#' d <- data.frame(x = rnorm(50))
+#' d$y <- 1 + 2 * d$x + rnorm(50)
 #' fit <- morie_bayes_lm(y ~ x, d, chains = 2, iter = 500, warmup = 200)
 #' print(fit)
 #' }
 #' @export
 print.morie_bayes_fit <- function(x, ...) {
-  if (!is.null(x$error)) { cat("<morie_bayes_fit: ERROR>", x$error, "\n"); return(invisible(x)) }
+  if (!is.null(x$error)) {
+    cat("<morie_bayes_fit: ERROR>", x$error, "\n")
+    return(invisible(x))
+  }
   cat("<morie_bayes_fit>\n")
   cat(sprintf("  %d chains x %d iter\n", x$n_chains, x$n_iter))
-  cat(sprintf("  converged: %s (max R-hat %.3f)\n", x$converged,
-              if (is.null(x$rhat)) NA else max(x$rhat)))
+  cat(sprintf(
+    "  converged: %s (max R-hat %.3f)\n", x$converged,
+    if (is.null(x$rhat)) NA else max(x$rhat)
+  ))
   print(round(x$coefficients, 4))
   invisible(x)
 }
@@ -383,14 +431,21 @@ morie_bayes_plot <- function(x, type = c("trace", "density", "both"),
   if (type %in% c("trace", "both")) {
     for (ci in seq_along(x$chains)) {
       v <- x$chains[[ci]][, j]
-      if (ci == 1) plot(v, type = "l", xlab = "iteration",
-                        ylab = x$par_names[j], main = "trace", ...)
-      else graphics::lines(v, col = ci)
+      if (ci == 1) {
+        plot(v,
+          type = "l", xlab = "iteration",
+          ylab = x$par_names[j], main = "trace", ...
+        )
+      } else {
+        graphics::lines(v, col = ci)
+      }
     }
   }
   if (type %in% c("density", "both")) {
-    plot(stats::density(x$posterior[, j]), main = "posterior",
-         xlab = x$par_names[j])
+    plot(stats::density(x$posterior[, j]),
+      main = "posterior",
+      xlab = x$par_names[j]
+    )
   }
   invisible(NULL)
 }
@@ -402,7 +457,8 @@ morie_bayes_plot <- function(x, type = c("trace", "density", "both"),
 #' @return `NULL`, invisibly (default trace plot).
 #' @examples
 #' \donttest{
-#' d <- data.frame(x = rnorm(50)); d$y <- 1 + 2 * d$x + rnorm(50)
+#' d <- data.frame(x = rnorm(50))
+#' d$y <- 1 + 2 * d$x + rnorm(50)
 #' fit <- morie_bayes_lm(y ~ x, d, chains = 2, iter = 500, warmup = 200)
 #' plot(fit)
 #' }
@@ -414,9 +470,12 @@ plot.morie_bayes_fit <- function(x, ...) morie_bayes_plot(x, ...)
 #' @param param Parameter index or name.
 #' @return `NULL`, invisibly.
 #' @examples
-#' d <- data.frame(x = rnorm(40)); d$y <- d$x + rnorm(40)
-#' morie_bayes_density(morie_bayes_lm(y ~ x, d, chains = 2, iter = 300,
-#'                                    warmup = 100))
+#' d <- data.frame(x = rnorm(40))
+#' d$y <- d$x + rnorm(40)
+#' morie_bayes_density(morie_bayes_lm(y ~ x, d,
+#'   chains = 2, iter = 300,
+#'   warmup = 100
+#' ))
 #' @export
 morie_bayes_density <- function(fit, param = 1L) {
   morie_bayes_plot(fit, type = "density", param = param)

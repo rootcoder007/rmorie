@@ -14,7 +14,7 @@
 #' morie_ghosal_gp_matern(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_ghosal_gp_matern <- function(x, y, nu = 1.5, length_scale = NULL,
-                             sigma_f = 1.0, noise = NULL, x_star = NULL) {
+                                   sigma_f = 1.0, noise = NULL, x_star = NULL) {
   if (is.vector(x)) x <- matrix(as.numeric(x), ncol = 1L) else x <- as.matrix(x)
   y <- as.numeric(y)
   n <- nrow(x)

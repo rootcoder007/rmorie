@@ -35,198 +35,202 @@
   list(
     # --- power-design outputs ----------------------------------------
     "power_summary.csv" = paste0(
-"Question this file answers: \"What were the design assumptions for my\
+      "Question this file answers: \"What were the design assumptions for my\
 ",
-"power analysis, and what's the recommended sample size at a glance?\"\
+      "power analysis, and what's the recommended sample size at a glance?\"\
 ",
-"\
+      "\
 ",
-"It's a one-row summary.  Read across; columns include:\
+      "It's a one-row summary.  Read across; columns include:\
 ",
-"  - effect_size          The minimum effect you said you want to detect\
+      "  - effect_size          The minimum effect you said you want to detect\
 ",
-"  - alpha                False-positive rate (typically 0.05)\
+      "  - alpha                False-positive rate (typically 0.05)\
 ",
-"  - power                True-positive rate (typically 0.80)\
+      "  - power                True-positive rate (typically 0.80)\
 ",
-"  - n_recommended        Per-group sample size to hit (power, effect) at alpha\
+      "  - n_recommended        Per-group sample size to hit (power, effect) at alpha\
 ",
-"\
+      "\
 ",
-"If you want detail beyond the summary row, see the companion files\
+      "If you want detail beyond the summary row, see the companion files\
 ",
-"listed in `power_two_proportion_gender.csv` (two-proportion grid) and\
+      "listed in `power_two_proportion_gender.csv` (two-proportion grid) and\
 ",
-"`power_one_proportion_grid.csv` (one-proportion grid)."),
-
+      "`power_one_proportion_grid.csv` (one-proportion grid)."
+    ),
     "power_two_proportion_gender.csv" = paste0(
-"Question this file answers: \"How many participants per gender group\
+      "Question this file answers: \"How many participants per gender group\
 ",
-"do I need to detect an effect of size X?\"\
+      "do I need to detect an effect of size X?\"\
 ",
-"\
+      "\
 ",
-"Read each row: pick the effect_size you want to detect; the row tells\
+      "Read each row: pick the effect_size you want to detect; the row tells\
 ",
-"you the per-group sample size needed.\
+      "you the per-group sample size needed.\
 ",
-"\
+      "\
 ",
-"Columns:\
+      "Columns:\
 ",
-"  - effect_size          The difference in proportions you want to detect\
+      "  - effect_size          The difference in proportions you want to detect\
 ",
-"                         (e.g. 0.05 = a 5 percentage-point gap between\
+      "                         (e.g. 0.05 = a 5 percentage-point gap between\
 ",
-"                          men and women)\
+      "                          men and women)\
 ",
-"  - n_per_group          Number of participants per group required\
+      "  - n_per_group          Number of participants per group required\
 ",
-"  - power                Achieved power at this n (should match your design)\
+      "  - power                Achieved power at this n (should match your design)\
 ",
-"  - assumed_baseline     The baseline proportion the calculation uses\
+      "  - assumed_baseline     The baseline proportion the calculation uses\
 ",
-"\
+      "\
 ",
-"Typical usage: scroll to the row matching your hypothesised effect, read\
+      "Typical usage: scroll to the row matching your hypothesised effect, read\
 ",
-"n_per_group, double it for total sample."),
-
+      "n_per_group, double it for total sample."
+    ),
     "power_one_proportion_grid.csv" = paste0(
-"Same idea as power_two_proportion_gender.csv, but for a single-proportion\
+      "Same idea as power_two_proportion_gender.csv, but for a single-proportion\
 ",
-"design (one group, no comparison): \"What's the smallest deviation from\
+      "design (one group, no comparison): \"What's the smallest deviation from\
 ",
-"a null proportion p0 I can detect with n participants at alpha=0.05?\"\
+      "a null proportion p0 I can detect with n participants at alpha=0.05?\"\
 ",
-"\
+      "\
 ",
-"Pick a row by n; read effect_size for the smallest detectable difference."),
-
+      "Pick a row by n; read effect_size for the smallest detectable difference."
+    ),
     "power_ebac_endpoint_anchors.csv" = paste0(
-"Power-analysis grid specific to alcohol-impairment endpoints (eBAC =\
+      "Power-analysis grid specific to alcohol-impairment endpoints (eBAC =\
 ",
-"estimated blood alcohol concentration).  Each row is one anchor point:\
+      "estimated blood alcohol concentration).  Each row is one anchor point:\
 ",
-"\"if your endpoint is ebac_tot > 0.08 vs <= 0.08, what's the sample size?\""),
-
+      "\"if your endpoint is ebac_tot > 0.08 vs <= 0.08, what's the sample size?\""
+    ),
     "power_gpower_reference_two_group.csv" = paste0(
-"Cross-reference: matches morie's two-group power numbers to G*Power\
+      "Cross-reference: matches morie's two-group power numbers to G*Power\
 ",
-"(the gold-standard reference tool).  If you're submitting to a journal\
+      "(the gold-standard reference tool).  If you're submitting to a journal\
 ",
-"that demands G*Power, this is the table to cite."),
-
+      "that demands G*Power, this is the table to cite."
+    ),
     "power_interaction_assumptions.csv" = paste0(
-"Assumptions used by the interaction-effect (e.g. gender x age) power\
+      "Assumptions used by the interaction-effect (e.g. gender x age) power\
 ",
-"calculation.  Read this if you want to know what the interaction model\
+      "calculation.  Read this if you want to know what the interaction model\
 ",
-"assumed before trusting power_interaction_pairwise_details.csv."),
-
+      "assumed before trusting power_interaction_pairwise_details.csv."
+    ),
     "power_interaction_feasibility_flags.csv" = paste0(
-"Flags for whether each proposed interaction cell is feasible at the\
+      "Flags for whether each proposed interaction cell is feasible at the\
 ",
-"target sample size.  TRUE = enough data expected, FALSE = under-powered."),
-
+      "target sample size.  TRUE = enough data expected, FALSE = under-powered."
+    ),
     "power_interaction_group_allocations.csv" = paste0(
-"How the total sample is split across interaction cells (e.g. men 18-24,\
+      "How the total sample is split across interaction cells (e.g. men 18-24,\
 ",
-"men 25-44, women 18-24, women 25-44).  Tells you the per-cell n."),
-
+      "men 25-44, women 18-24, women 25-44).  Tells you the per-cell n."
+    ),
     "power_interaction_imbalance_penalty.csv" = paste0(
-"The penalty to power introduced by unequal cell sizes.  If allocations\
+      "The penalty to power introduced by unequal cell sizes.  If allocations\
 ",
-"in power_interaction_group_allocations are skewed, this quantifies how\
+      "in power_interaction_group_allocations are skewed, this quantifies how\
 ",
-"much power you lose vs. a balanced design."),
-
+      "much power you lose vs. a balanced design."
+    ),
     "power_interaction_pairwise_details.csv" = paste0(
-"The detail backing power_interaction_assumptions.  Pairwise effect sizes\
+      "The detail backing power_interaction_assumptions.  Pairwise effect sizes\
 ",
-"for each combination of interaction levels."),
-
+      "for each combination of interaction levels."
+    ),
     "power_interaction_sample_size_targets.csv" = paste0(
-"The sample-size *targets* (per cell) to hit your desired power for each\
+      "The sample-size *targets* (per cell) to hit your desired power for each\
 ",
-"interaction comparison.  Compare to your actual allocations file."),
-
+      "interaction comparison.  Compare to your actual allocations file."
+    ),
     "randomization_block_blueprints.csv" = paste0(
-"Pre-baked randomization-scheme blueprints (block sizes, stratification\
+      "Pre-baked randomization-scheme blueprints (block sizes, stratification\
 ",
-"factors).  Pick one and the *_example CSVs show what the resulting\
+      "factors).  Pick one and the *_example CSVs show what the resulting\
 ",
-"allocation looks like."),
-
+      "allocation looks like."
+    ),
     "randomization_schedule_example_heavy_drinking_30d.csv" = paste0(
-"A *worked-example* randomization schedule using heavy-drinking-30-day as\
+      "A *worked-example* randomization schedule using heavy-drinking-30-day as\
 ",
-"the stratifying outcome.  Shows the participant id -> arm assignment\
+      "the stratifying outcome.  Shows the participant id -> arm assignment\
 ",
-"table; useful for replicating in your own survey software."),
-
+      "table; useful for replicating in your own survey software."
+    ),
     "randomization_schedule_example_ebac_legal.csv" = paste0(
-"Worked-example randomization schedule stratified by ebac_legal (the\
+      "Worked-example randomization schedule stratified by ebac_legal (the\
 ",
-"legal-limit blood-alcohol-concentration endpoint)."),
-
+      "legal-limit blood-alcohol-concentration endpoint)."
+    ),
     "randomization_schedule_example_ebac_tot.csv" = paste0(
-"Worked-example randomization schedule stratified by ebac_tot (the\
+      "Worked-example randomization schedule stratified by ebac_tot (the\
 ",
-"total-impairment blood-alcohol-concentration endpoint)."),
+      "total-impairment blood-alcohol-concentration endpoint)."
+    ),
 
     # --- data-wrangling outputs --------------------------------------
     "data_na_summary.csv" = paste0(
-"Per-column missingness summary.  Each row is one input column; columns\
+      "Per-column missingness summary.  Each row is one input column; columns\
 ",
-"include n_missing, pct_missing.  Read this BEFORE running any inference\
+      "include n_missing, pct_missing.  Read this BEFORE running any inference\
 ",
-"module -- fields with high missingness need imputation or exclusion."),
-
+      "module -- fields with high missingness need imputation or exclusion."
+    ),
     "data_wrangling_log.csv" = paste0(
-"Step-by-step log of what the data-wrangling module did to your input\
+      "Step-by-step log of what the data-wrangling module did to your input\
 ",
-"(renames, coercions, dropped rows).  Useful for the methods section."),
+      "(renames, coercions, dropped rows).  Useful for the methods section."
+    ),
 
     # --- descriptive-statistics outputs ------------------------------
     "binomial_summaries.csv" = paste0(
-"Survey-weighted binomial summaries (e.g. heavy_drinking_30d prevalence)\
+      "Survey-weighted binomial summaries (e.g. heavy_drinking_30d prevalence)\
 ",
-"WITHOUT survey weights.  Compare against binomial_summaries_survey_weighted\
+      "WITHOUT survey weights.  Compare against binomial_summaries_survey_weighted\
 ",
-"to see how much the weights shift the estimates."),
-
+      "to see how much the weights shift the estimates."
+    ),
     "binomial_summaries_survey_weighted.csv" = paste0(
-"Survey-weighted binomial summaries WITH the CPADS weighting variable\
+      "Survey-weighted binomial summaries WITH the CPADS weighting variable\
 ",
-"applied.  These are the prevalence estimates you'd report in a paper."),
-
+      "applied.  These are the prevalence estimates you'd report in a paper."
+    ),
     "probability_estimates.csv" = paste0(
-"Joint and conditional probability estimates across the survey design.\
+      "Joint and conditional probability estimates across the survey design.\
 ",
-"Read column by column; row labels indicate the conditioning event."),
+      "Read column by column; row labels indicate the conditioning event."
+    ),
 
     # --- frequentist-inference outputs -------------------------------
     "frequentist_heavy_drinking_prevalence_ci.csv" = paste0(
-"Frequentist (Wilson / Clopper-Pearson) confidence intervals for the\
+      "Frequentist (Wilson / Clopper-Pearson) confidence intervals for the\
 ",
-"prevalence of heavy drinking.  Each row is one subgroup; columns are\
+      "prevalence of heavy drinking.  Each row is one subgroup; columns are\
 ",
-"estimate, ci_lower, ci_upper."),
-
+      "estimate, ci_lower, ci_upper."
+    ),
     "frequentist_effect_sizes.csv" = paste0(
-"Cohen's-d / odds-ratio / risk-difference effect sizes for the primary\
+      "Cohen's-d / odds-ratio / risk-difference effect sizes for the primary\
 ",
-"contrasts of the analysis.  Read alongside p-values from\
+      "contrasts of the analysis.  Read alongside p-values from\
 ",
-"frequentist_hypothesis_tests.csv."),
-
+      "frequentist_hypothesis_tests.csv."
+    ),
     "frequentist_hypothesis_tests.csv" = paste0(
-"Per-contrast p-values and test statistics.  CAUTION: these are\
+      "Per-contrast p-values and test statistics.  CAUTION: these are\
 ",
-"NOT corrected for multiple comparisons by default -- apply\
+      "NOT corrected for multiple comparisons by default -- apply\
 ",
-"Bonferroni / Benjamini-Hochberg yourself if your design demands it.")
+      "Bonferroni / Benjamini-Hochberg yourself if your design demands it."
+    )
   )
 }
 
@@ -249,12 +253,15 @@
 explain_file <- function(filename) {
   explanations <- .morie_explanations()
   name <- basename(filename)
-  if (name %in% names(explanations)) return(explanations[[name]])
+  if (name %in% names(explanations)) {
+    return(explanations[[name]])
+  }
 
   base <- tools::file_path_sans_ext(name)
   for (candidate in names(explanations)) {
-    if (tools::file_path_sans_ext(candidate) == base)
+    if (tools::file_path_sans_ext(candidate) == base) {
       return(explanations[[candidate]])
+    }
   }
 
   paste0(

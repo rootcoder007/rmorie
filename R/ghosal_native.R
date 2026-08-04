@@ -31,8 +31,11 @@
 .morie_gh_minimax_rate <- function(n, s, d = 1) {
   n <- .morie_gh_n(n)
   s <- as.numeric(s)
-  if (s <= 0) stop(sprintf("smoothness must be positive, got %g.", s),
-                   call. = FALSE)
+  if (s <= 0) {
+    stop(sprintf("smoothness must be positive, got %g.", s),
+      call. = FALSE
+    )
+  }
   n^(-s / (2 * s + as.numeric(d)))
 }
 
@@ -51,25 +54,34 @@
   xv <- as.numeric(x)
   g <- as.numeric(grid)
   m <- as.integer(levels)
-  if (m < 1L) stop(sprintf("levels must be at least 1, got %d.", m),
-                   call. = FALSE)
+  if (m < 1L) {
+    stop(sprintf("levels must be at least 1, got %d.", m),
+      call. = FALSE
+    )
+  }
   a <- if (is.null(a_fn)) function(k) as.numeric(k)^2 else a_fn
   a0 <- if (is.null(lo)) min(xv) else as.numeric(lo)
   a1 <- if (is.null(hi)) max(xv) else as.numeric(hi)
-  if (a1 <= a0) stop(sprintf("need lo < hi, got (%g, %g).", a0, a1),
-                     call. = FALSE)
+  if (a1 <= a0) {
+    stop(sprintf("need lo < hi, got (%g, %g).", a0, a1),
+      call. = FALSE
+    )
+  }
   dens <- rep(1 / (a1 - a0), length(g))
   for (lev in seq_len(m)) {
     edges <- seq(a0, a1, length.out = 2^lev + 1L)
     counts <- as.numeric(graphics::hist(xv, breaks = edges, plot = FALSE)$counts)
     am <- a(lev)
-    idx <- pmin(pmax(findInterval(g, edges, rightmost.closed = FALSE), 1L),
-                2^lev) - 1L
+    idx <- pmin(
+      pmax(findInterval(g, edges, rightmost.closed = FALSE), 1L),
+      2^lev
+    ) - 1L
     left <- counts[seq(1L, length(counts), by = 2L)]
     right <- counts[seq(2L, length(counts), by = 2L)]
     p_left <- (am + left) / (2 * am + left + right)
     share <- ifelse(idx %% 2L == 0L, p_left[idx %/% 2L + 1L],
-                    1 - p_left[idx %/% 2L + 1L])
+      1 - p_left[idx %/% 2L + 1L]
+    )
     dens <- dens * 2 * share
   }
   ifelse(g < a0 | g > a1, 0, dens)
@@ -109,20 +121,28 @@ morie_dp_predictive <- function(x, alpha = 1, grid = NULL) {
   n <- length(xv)
   if (n < 1L) stop("need at least one observation.", call. = FALSE)
   a <- as.numeric(alpha)
-  if (a <= 0) stop(sprintf("alpha must be positive, got %g.", a),
-                   call. = FALSE)
+  if (a <= 0) {
+    stop(sprintf("alpha must be positive, got %g.", a),
+      call. = FALSE
+    )
+  }
   tb <- table(xv)
   vals <- as.numeric(names(tb))
   counts <- as.numeric(tb)
-  g <- if (is.null(grid)) seq(min(xv) - 3, max(xv) + 3, length.out = 200L) else
+  g <- if (is.null(grid)) {
+    seq(min(xv) - 3, max(xv) + 3, length.out = 200L)
+  } else {
     as.numeric(grid)
-  list(grid = g, base_weight = a / (a + n), atom_weight = n / (a + n),
-       atoms = vals, atom_probs = counts / (a + n),
-       base_density = stats::dnorm(g) * a / (a + n),
-       n_distinct = length(vals), is_density = FALSE,
-       limit_note = "alpha -> 0 gives the empirical distribution; alpha -> infinity gives G_0",
-       n = n,
-       method = "Polya urn predictive (Sec. 4.1.4); atoms at the distinct values, mass n/(alpha+n)")
+  }
+  list(
+    grid = g, base_weight = a / (a + n), atom_weight = n / (a + n),
+    atoms = vals, atom_probs = counts / (a + n),
+    base_density = stats::dnorm(g) * a / (a + n),
+    n_distinct = length(vals), is_density = FALSE,
+    limit_note = "alpha -> 0 gives the empirical distribution; alpha -> infinity gives G_0",
+    n = n,
+    method = "Polya urn predictive (Sec. 4.1.4); atoms at the distinct values, mass n/(alpha+n)"
+  )
 }
 
 #' Newton's predictive recursion
@@ -155,23 +175,36 @@ morie_predictive_recursion <- function(x, theta_grid = NULL, sigma = 1,
                                        weights = NULL, f0 = NULL) {
   xv <- as.numeric(x)
   n <- length(xv)
-  if (n < 2L) stop(sprintf("need at least 2 observations, got %d.", n),
-                   call. = FALSE)
+  if (n < 2L) {
+    stop(sprintf("need at least 2 observations, got %d.", n),
+      call. = FALSE
+    )
+  }
   s <- as.numeric(sigma)
-  if (s <= 0) stop(sprintf("sigma must be positive, got %g.", s),
-                   call. = FALSE)
+  if (s <= 0) {
+    stop(sprintf("sigma must be positive, got %g.", s),
+      call. = FALSE
+    )
+  }
   th <- if (is.null(theta_grid)) {
     seq(min(xv) - 2 * s, max(xv) + 2 * s, length.out = 201L)
-  } else as.numeric(theta_grid)
-  f <- if (is.null(f0)) rep(1 / (max(th) - min(th)), length(th)) else
+  } else {
+    as.numeric(theta_grid)
+  }
+  f <- if (is.null(f0)) {
+    rep(1 / (max(th) - min(th)), length(th))
+  } else {
     as.numeric(f0)
+  }
   if (length(f) != length(th)) {
     stop("f0 must match theta_grid.", call. = FALSE)
   }
   w <- if (is.null(weights)) (seq_len(n) + 1)^(-2 / 3) else as.numeric(weights)
   if (length(w) != n) {
-    stop(sprintf("weights has %d entries for %d observations.",
-                 length(w), n), call. = FALSE)
+    stop(sprintf(
+      "weights has %d entries for %d observations.",
+      length(w), n
+    ), call. = FALSE)
   }
   if (any(w <= 0 | w >= 1)) {
     stop("weights must lie strictly in (0, 1).", call. = FALSE)
@@ -185,13 +218,17 @@ morie_predictive_recursion <- function(x, theta_grid = NULL, sigma = 1,
   }
   mass <- .morie_gh_trapz(th, f)
   if (mass > 0) f <- f / mass
-  mixed <- vapply(th, function(v) .morie_gh_trapz(th, kern(v, th) * f),
-                  numeric(1))
-  list(theta_grid = th, f_mixing = f, mixed_density = mixed,
-       order_dependent = TRUE, single_pass = TRUE,
-       weight_rule = "w_i = (i+2)^{-2/3}: sum w = inf, sum w^2 < inf, and w_1 < 1",
-       n = n,
-       method = "Predictive recursion (Sec. 5.4); one sweep, no MCMC, order dependent")
+  mixed <- vapply(
+    th, function(v) .morie_gh_trapz(th, kern(v, th) * f),
+    numeric(1)
+  )
+  list(
+    theta_grid = th, f_mixing = f, mixed_density = mixed,
+    order_dependent = TRUE, single_pass = TRUE,
+    weight_rule = "w_i = (i+2)^{-2/3}: sum w = inf, sum w^2 < inf, and w_1 < 1",
+    n = n,
+    method = "Predictive recursion (Sec. 5.4); one sweep, no MCMC, order dependent"
+  )
 }
 
 #' Polya tree posterior mean density
@@ -223,23 +260,31 @@ morie_polya_tree_density <- function(x, grid = NULL, levels = 6L,
   xv <- as.numeric(x)
   if (length(xv) < 4L) {
     stop(sprintf("need at least 4 observations, got %d.", length(xv)),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   sc <- as.numeric(a_scale)
-  if (sc <= 0) stop(sprintf("a_scale must be positive, got %g.", sc),
-                    call. = FALSE)
+  if (sc <= 0) {
+    stop(sprintf("a_scale must be positive, got %g.", sc),
+      call. = FALSE
+    )
+  }
   a0 <- if (is.null(lo)) min(xv) else as.numeric(lo)
   a1 <- if (is.null(hi)) max(xv) else as.numeric(hi)
   g <- if (is.null(grid)) seq(a0, a1, length.out = 200L) else as.numeric(grid)
-  dens <- .morie_gh_polya_tree(xv, g, levels = levels,
-                               a_fn = function(m) sc * m^2, lo = a0, hi = a1)
-  list(grid = g, density = dens, levels = as.integer(levels),
-       a_rule = "a_m = a_scale * m^2 (growing, so the prior is on densities)",
-       absolutely_continuous_prior = TRUE,
-       mass = .morie_gh_trapz(g, dens),
-       consistent_at = "any Lipschitz density, in Hellinger distance",
-       n = length(xv),
-       method = "Polya tree posterior mean (Sec. 7.2.3); closed form by Beta conjugacy")
+  dens <- .morie_gh_polya_tree(xv, g,
+    levels = levels,
+    a_fn = function(m) sc * m^2, lo = a0, hi = a1
+  )
+  list(
+    grid = g, density = dens, levels = as.integer(levels),
+    a_rule = "a_m = a_scale * m^2 (growing, so the prior is on densities)",
+    absolutely_continuous_prior = TRUE,
+    mass = .morie_gh_trapz(g, dens),
+    consistent_at = "any Lipschitz density, in Hellinger distance",
+    n = length(xv),
+    method = "Polya tree posterior mean (Sec. 7.2.3); closed form by Beta conjugacy"
+  )
 }
 
 #' Mixture of Polya trees
@@ -270,12 +315,17 @@ morie_polya_tree_mixture <- function(x, grid = NULL, levels = 6L,
   xv <- as.numeric(x)
   if (length(xv) < 4L) {
     stop(sprintf("need at least 4 observations, got %d.", length(xv)),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   sc <- as.numeric(a_scale)
-  if (sc <= 0) stop(sprintf("a_scale must be positive, got %g.", sc),
-                    call. = FALSE)
-  lo <- min(xv); hi <- max(xv)
+  if (sc <= 0) {
+    stop(sprintf("a_scale must be positive, got %g.", sc),
+      call. = FALSE
+    )
+  }
+  lo <- min(xv)
+  hi <- max(xv)
   span <- hi - lo
   if (span <= 0) stop("the sample has zero spread.", call. = FALSE)
   g <- if (is.null(grid)) seq(lo, hi, length.out = 200L) else as.numeric(grid)
@@ -283,17 +333,21 @@ morie_polya_tree_mixture <- function(x, grid = NULL, levels = 6L,
   cell <- span / (2^as.integer(levels))
   comps <- vapply(sh, function(s) {
     off <- s * cell
-    .morie_gh_polya_tree(xv, g, levels = levels,
-                         a_fn = function(m) sc * m^2,
-                         lo = lo - off, hi = hi + (cell - off))
+    .morie_gh_polya_tree(xv, g,
+      levels = levels,
+      a_fn = function(m) sc * m^2,
+      lo = lo - off, hi = hi + (cell - off)
+    )
   }, numeric(length(g)))
   dens <- rowMeans(comps)
-  list(grid = g, density = dens, n_components = length(sh),
-       max_jump = max(abs(diff(dens))),
-       max_jump_single = max(abs(diff(comps[, 1L]))),
-       smoother_than_single = max(abs(diff(dens))) <= max(abs(diff(comps[, 1L]))),
-       n = length(xv),
-       method = "Mixture of Polya trees (Sec. 3.7.2); averages away the partition artefacts")
+  list(
+    grid = g, density = dens, n_components = length(sh),
+    max_jump = max(abs(diff(dens))),
+    max_jump_single = max(abs(diff(comps[, 1L]))),
+    smoother_than_single = max(abs(diff(dens))) <= max(abs(diff(comps[, 1L]))),
+    n = length(xv),
+    method = "Mixture of Polya trees (Sec. 3.7.2); averages away the partition artefacts"
+  )
 }
 
 #' Adaptive Polya tree rate
@@ -320,17 +374,23 @@ morie_polya_tree_rate <- function(x, s = NULL, n = NULL, levels = 6L,
   nn <- .morie_gh_n(nn)
   lg <- log(nn)
   sv <- if (is.null(s)) 1 else as.numeric(s)
-  if (sv <= 0) stop(sprintf("smoothness must be positive, got %g.", sv),
-                    call. = FALSE)
+  if (sv <= 0) {
+    stop(sprintf("smoothness must be positive, got %g.", sv),
+      call. = FALSE
+    )
+  }
   mm <- .morie_gh_minimax_rate(nn, sv)
-  scan <- lapply(c(0.5, 1, 1.5, 2, 3), function(v)
-    c(v, .morie_gh_minimax_rate(nn, v) * lg))
-  list(n = nn, smoothness = sv, rate = mm * lg, minimax_rate = mm,
-       log_factor = lg, ratio_to_minimax = lg, adaptive = TRUE,
-       requires_knowing_s = FALSE, scan = scan,
-       a_rule = sprintf("a_m = %g * m^2", as.numeric(a_scale)),
-       levels = as.integer(levels),
-       method = "Adaptive Polya tree: n^{-s/(2s+1)} log n for every s, without knowing s")
+  scan <- lapply(c(0.5, 1, 1.5, 2, 3), function(v) {
+    c(v, .morie_gh_minimax_rate(nn, v) * lg)
+  })
+  list(
+    n = nn, smoothness = sv, rate = mm * lg, minimax_rate = mm,
+    log_factor = lg, ratio_to_minimax = lg, adaptive = TRUE,
+    requires_knowing_s = FALSE, scan = scan,
+    a_rule = sprintf("a_m = %g * m^2", as.numeric(a_scale)),
+    levels = as.integer(levels),
+    method = "Adaptive Polya tree: n^{-s/(2s+1)} log n for every s, without knowing s"
+  )
 }
 
 #' i.i.d. posterior contraction theorem
@@ -364,16 +424,23 @@ morie_contraction_conditions <- function(x, eps = NULL, n = NULL,
   if (e <= 0) stop(sprintf("eps must be positive, got %g.", e), call. = FALSE)
   ne2 <- nn * e * e
   ent_ok <- if (is.null(entropy)) NULL else as.numeric(entropy) <= ne2
-  pm_ok <- if (is.null(prior_mass)) NULL else
+  pm_ok <- if (is.null(prior_mass)) {
+    NULL
+  } else {
     as.numeric(prior_mass) >= exp(-as.numeric(C) * ne2)
-  list(n = nn, eps = e, n_eps_squared = ne2, entropy_budget = ne2,
-       prior_mass_budget = exp(-as.numeric(C) * ne2),
-       entropy_ok = ent_ok, prior_mass_ok = pm_ok,
-       all_conditions_checked = !is.null(ent_ok) && !is.null(pm_ok),
-       metric = "Hellinger",
-       conditions = paste("entropy <= n eps^2; prior mass >= exp(-C n eps^2);",
-                          "sieve remainder o(exp(-(C+4) n eps^2))"),
-       method = "i.i.d. contraction theorem (Sec. 8.2); all three conditions calibrated by n eps^2")
+  }
+  list(
+    n = nn, eps = e, n_eps_squared = ne2, entropy_budget = ne2,
+    prior_mass_budget = exp(-as.numeric(C) * ne2),
+    entropy_ok = ent_ok, prior_mass_ok = pm_ok,
+    all_conditions_checked = !is.null(ent_ok) && !is.null(pm_ok),
+    metric = "Hellinger",
+    conditions = paste(
+      "entropy <= n eps^2; prior mass >= exp(-C n eps^2);",
+      "sieve remainder o(exp(-(C+4) n eps^2))"
+    ),
+    method = "i.i.d. contraction theorem (Sec. 8.2); all three conditions calibrated by n eps^2"
+  )
 }
 
 #' Gaussian-process density contraction rate
@@ -408,27 +475,38 @@ morie_gp_density_rate <- function(x, s = NULL, n = NULL,
   nn <- if (is.null(n)) length(as.numeric(x)) else n
   nn <- .morie_gh_n(nn)
   sv <- if (is.null(s)) 1 else as.numeric(s)
-  if (sv <= 0) stop(sprintf("smoothness must be positive, got %g.", sv),
-                    call. = FALSE)
+  if (sv <= 0) {
+    stop(sprintf("smoothness must be positive, got %g.", sv),
+      call. = FALSE
+    )
+  }
   if (!kernel %in% c("squared_exponential", "matern", "rescaled_se")) {
     stop("kernel must be 'squared_exponential', 'matern' or 'rescaled_se'.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   mm <- .morie_gh_minimax_rate(nn, sv)
   if (kernel == "matern") {
-    rate <- mm; kind <- "polynomial (minimax)"; attains <- TRUE
+    rate <- mm
+    kind <- "polynomial (minimax)"
+    attains <- TRUE
   } else if (kernel == "rescaled_se") {
     rate <- mm * log(nn)^((sv + 1) / (2 * sv + 1))
-    kind <- "polynomial up to a log factor"; attains <- FALSE
+    kind <- "polynomial up to a log factor"
+    attains <- FALSE
   } else {
-    rate <- log(nn)^(-sv); kind <- "LOGARITHMIC"; attains <- FALSE
+    rate <- log(nn)^(-sv)
+    kind <- "LOGARITHMIC"
+    attains <- FALSE
   }
-  list(n = nn, smoothness = sv, kernel = kernel, rate = rate,
-       minimax_rate = mm, attains_minimax = attains,
-       ratio_to_minimax = rate / mm, rate_kind = kind,
-       link = "f = exp(psi) / int exp(psi): positivity and normalisation for free",
-       driver = "the concentration function: RKHS approximation + small-ball probability",
-       method = "GP density contraction (Sec. 11.3.1); the kernel's smoothness decides the rate")
+  list(
+    n = nn, smoothness = sv, kernel = kernel, rate = rate,
+    minimax_rate = mm, attains_minimax = attains,
+    ratio_to_minimax = rate / mm, rate_kind = kind,
+    link = "f = exp(psi) / int exp(psi): positivity and normalisation for free",
+    driver = "the concentration function: RKHS approximation + small-ball probability",
+    method = "GP density contraction (Sec. 11.3.1); the kernel's smoothness decides the rate"
+  )
 }
 
 #' Dirichlet-process survival and the Kaplan-Meier limit
@@ -454,18 +532,25 @@ morie_gp_density_rate <- function(x, s = NULL, n = NULL,
 morie_dp_survival <- function(x, event = NULL, alpha = 1, g0_rate = NULL) {
   xv <- as.numeric(x)
   n <- length(xv)
-  if (n < 2L) stop(sprintf("need at least 2 observations, got %d.", n),
-                   call. = FALSE)
+  if (n < 2L) {
+    stop(sprintf("need at least 2 observations, got %d.", n),
+      call. = FALSE
+    )
+  }
   if (any(xv < 0)) stop("times must be non-negative.", call. = FALSE)
   ev <- if (is.null(event)) rep(1, n) else as.numeric(event)
   if (length(ev) != n) {
     stop(sprintf("event has %d entries for %d times.", length(ev), n),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   if (!all(ev %in% c(0, 1))) stop("event must be binary 0/1.", call. = FALSE)
   a <- as.numeric(alpha)
-  if (a <= 0) stop(sprintf("alpha must be positive, got %g.", a),
-                   call. = FALSE)
+  if (a <= 0) {
+    stop(sprintf("alpha must be positive, got %g.", a),
+      call. = FALSE
+    )
+  }
   uniq <- sort(unique(xv))
   km <- numeric(length(uniq))
   surv <- 1
@@ -479,11 +564,13 @@ morie_dp_survival <- function(x, event = NULL, alpha = 1, g0_rate = NULL) {
   rate <- if (is.null(g0_rate)) 1 / max(mean(xv), 1e-12) else as.numeric(g0_rate)
   wt <- n / (a + n)
   dp <- wt * km + (1 - wt) * exp(-rate * uniq)
-  list(times = uniq, survival_dp = dp, survival_km = km,
-       max_abs_diff_to_km = max(abs(dp - km)), alpha = a,
-       limit_note = "alpha -> 0 gives Kaplan-Meier exactly; alpha -> infinity gives the base measure",
-       n_events = sum(ev), n = n,
-       method = "DP posterior survival (Sec. 13.2); Kaplan-Meier is the alpha -> 0 limit")
+  list(
+    times = uniq, survival_dp = dp, survival_km = km,
+    max_abs_diff_to_km = max(abs(dp - km)), alpha = a,
+    limit_note = "alpha -> 0 gives Kaplan-Meier exactly; alpha -> infinity gives the base measure",
+    n_events = sum(ev), n = n,
+    method = "DP posterior survival (Sec. 13.2); Kaplan-Meier is the alpha -> 0 limit"
+  )
 }
 
 #' Empirical Bayes for the Dirichlet concentration
@@ -509,16 +596,24 @@ morie_dp_survival <- function(x, event = NULL, alpha = 1, g0_rate = NULL) {
 morie_empirical_bayes_dp <- function(x, alpha_grid = NULL, sigma = 1) {
   xv <- as.numeric(x)
   n <- length(xv)
-  if (n < 2L) stop(sprintf("need at least 2 observations, got %d.", n),
-                   call. = FALSE)
+  if (n < 2L) {
+    stop(sprintf("need at least 2 observations, got %d.", n),
+      call. = FALSE
+    )
+  }
   k <- length(unique(xv))
-  ag <- if (is.null(alpha_grid)) 10^seq(-2, 2, length.out = 200L) else
+  ag <- if (is.null(alpha_grid)) {
+    10^seq(-2, 2, length.out = 200L)
+  } else {
     as.numeric(alpha_grid)
+  }
   if (any(ag <= 0)) stop("alpha values must be positive.", call. = FALSE)
   lm <- k * log(ag) + lgamma(ag) - lgamma(ag + n)
-  list(alpha_hat = ag[which.max(lm)], alpha_grid = ag, log_marginal = lm,
-       n_clusters = k, understates_uncertainty = TRUE,
-       fully_bayes_alternative = "put a prior on alpha and integrate it out",
-       n = n,
-       method = "Empirical Bayes for the DP concentration; the marginal depends on the CLUSTER count")
+  list(
+    alpha_hat = ag[which.max(lm)], alpha_grid = ag, log_marginal = lm,
+    n_clusters = k, understates_uncertainty = TRUE,
+    fully_bayes_alternative = "put a prior on alpha and integrate it out",
+    n = n,
+    method = "Empirical Bayes for the DP concentration; the marginal depends on the CLUSTER count"
+  )
 }

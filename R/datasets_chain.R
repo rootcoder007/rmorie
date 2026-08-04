@@ -44,8 +44,10 @@
 #' @return A \code{data.frame}.
 #' @keywords internal
 #' @noRd
-.morie_load_chain <- function(source = c("auto", "live", "bundled",
-                                          "synthetic", "empty"),
+.morie_load_chain <- function(source = c(
+                                "auto", "live", "bundled",
+                                "synthetic", "empty"
+                              ),
                               live_fn = NULL,
                               bundled_name = NULL,
                               synth_fn = NULL,
@@ -53,34 +55,49 @@
   source <- match.arg(source)
 
   step_live <- function() {
-    if (is.null(live_fn)) return(NULL)
+    if (is.null(live_fn)) {
+      return(NULL)
+    }
     out <- tryCatch(live_fn(), error = function(e) NULL)
     if (is.data.frame(out)) out else NULL
   }
   step_bundled <- function() {
     if (is.null(bundled_name) || is.na(bundled_name) ||
-        !nzchar(bundled_name)) return(NULL)
+      !nzchar(bundled_name)) {
+      return(NULL)
+    }
     path <- system.file("extdata",
-                        paste0(bundled_name, ".csv"),
-                        package = "rmorie")
-    if (!nzchar(path) || !file.exists(path)) return(NULL)
-    out <- tryCatch(utils::read.csv(path,
-                                     check.names = FALSE,
-                                     stringsAsFactors = FALSE),
-                    error = function(e) NULL)
+      paste0(bundled_name, ".csv"),
+      package = "rmorie"
+    )
+    if (!nzchar(path) || !file.exists(path)) {
+      return(NULL)
+    }
+    out <- tryCatch(
+      utils::read.csv(path,
+        check.names = FALSE,
+        stringsAsFactors = FALSE
+      ),
+      error = function(e) NULL
+    )
     if (is.data.frame(out)) out else NULL
   }
   step_synth <- function() {
-    if (is.null(synth_fn)) return(NULL)
+    if (is.null(synth_fn)) {
+      return(NULL)
+    }
     out <- tryCatch(synth_fn(), error = function(e) NULL)
     if (is.data.frame(out)) out else NULL
   }
   step_empty <- function() {
-    if (is.null(columns) || length(columns) == 0L) return(NULL)
+    if (is.null(columns) || length(columns) == 0L) {
+      return(NULL)
+    }
     as.data.frame(
       stats::setNames(
         replicate(length(columns), character(0), simplify = FALSE),
-        as.character(columns)),
+        as.character(columns)
+      ),
       stringsAsFactors = FALSE
     )
   }
@@ -89,7 +106,8 @@
     out <- step_live()
     if (is.null(out)) {
       stop("morie: source = 'live' but live_fn() failed or returned NULL.",
-           call. = FALSE)
+        call. = FALSE
+      )
     }
     return(out)
   }
@@ -97,8 +115,9 @@
     out <- step_bundled()
     if (is.null(out)) {
       stop("morie: source = 'bundled' but no inst/extdata/",
-           bundled_name, ".csv was found.",
-           call. = FALSE)
+        bundled_name, ".csv was found.",
+        call. = FALSE
+      )
     }
     return(out)
   }
@@ -106,7 +125,8 @@
     out <- step_synth()
     if (is.null(out)) {
       stop("morie: source = 'synthetic' but no synthetic generator is wired.",
-           call. = FALSE)
+        call. = FALSE
+      )
     }
     return(out)
   }
@@ -114,20 +134,29 @@
     out <- step_empty()
     if (is.null(out)) {
       stop("morie: source = 'empty' but no documented column schema is wired.",
-           call. = FALSE)
+        call. = FALSE
+      )
     }
     return(out)
   }
 
   # source = "auto" (default): try every step in order.
   out <- step_live()
-  if (!is.null(out)) return(out)
+  if (!is.null(out)) {
+    return(out)
+  }
   out <- step_bundled()
-  if (!is.null(out)) return(out)
+  if (!is.null(out)) {
+    return(out)
+  }
   out <- step_synth()
-  if (!is.null(out)) return(out)
+  if (!is.null(out)) {
+    return(out)
+  }
   out <- step_empty()
-  if (!is.null(out)) return(out)
+  if (!is.null(out)) {
+    return(out)
+  }
   stop(paste(
     "morie: every step of the load chain (live/bundled/synthetic/empty)",
     "returned NULL. Wire at least one of live_fn, bundled_name,",

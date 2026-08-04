@@ -75,25 +75,25 @@
 
 #' Internal helper: Boot Have Boot
 #' @noRd
-.boot_have_boot       <- function() requireNamespace("boot",       quietly = TRUE)
+.boot_have_boot <- function() requireNamespace("boot", quietly = TRUE)
 #' Internal helper: Boot Have Bootstrap
 #' @noRd
-.boot_have_bootstrap  <- function() requireNamespace("bootstrap",  quietly = TRUE)
+.boot_have_bootstrap <- function() requireNamespace("bootstrap", quietly = TRUE)
 #' Internal helper: Boot Have Resample
 #' @noRd
-.boot_have_resample   <- function() requireNamespace("resample",   quietly = TRUE)
+.boot_have_resample <- function() requireNamespace("resample", quietly = TRUE)
 #' Internal helper: Boot Have Rsample
 #' @noRd
-.boot_have_rsample    <- function() requireNamespace("rsample",    quietly = TRUE)
+.boot_have_rsample <- function() requireNamespace("rsample", quietly = TRUE)
 #' Internal helper: Boot Have Simpleboot
 #' @noRd
 .boot_have_simpleboot <- function() requireNamespace("simpleboot", quietly = TRUE)
 #' Internal helper: Boot Have Coin
 #' @noRd
-.boot_have_coin       <- function() requireNamespace("coin",       quietly = TRUE)
+.boot_have_coin <- function() requireNamespace("coin", quietly = TRUE)
 #' Internal helper: Boot Have Ipred
 #' @noRd
-.boot_have_ipred      <- function() requireNamespace("ipred",      quietly = TRUE)
+.boot_have_ipred <- function() requireNamespace("ipred", quietly = TRUE)
 
 # Result container constructors (unchanged shapes).
 
@@ -104,12 +104,14 @@
                                   boot_distribution, original_estimate,
                                   acceleration = 0) {
   structure(
-    list(estimate = estimate, se = se,
-         ci_lower = ci_lower, ci_upper = ci_upper, bias = bias,
-         n_boot = n_boot, method = method, ci_method = ci_method,
-         boot_distribution = boot_distribution,
-         original_estimate = original_estimate,
-         acceleration = acceleration),
+    list(
+      estimate = estimate, se = se,
+      ci_lower = ci_lower, ci_upper = ci_upper, bias = bias,
+      n_boot = n_boot, method = method, ci_method = ci_method,
+      boot_distribution = boot_distribution,
+      original_estimate = original_estimate,
+      acceleration = acceleration
+    ),
     class = c("morie_bootstrap_result", "list")
   )
 }
@@ -120,11 +122,13 @@
                                   n, jackknife_estimates, pseudovalues,
                                   influence_values) {
   structure(
-    list(estimate = estimate, se = se,
-         ci_lower = ci_lower, ci_upper = ci_upper, bias = bias,
-         n = n, jackknife_estimates = jackknife_estimates,
-         pseudovalues = pseudovalues,
-         influence_values = influence_values),
+    list(
+      estimate = estimate, se = se,
+      ci_lower = ci_lower, ci_upper = ci_upper, bias = bias,
+      n = n, jackknife_estimates = jackknife_estimates,
+      pseudovalues = pseudovalues,
+      influence_values = influence_values
+    ),
     class = c("morie_jackknife_result", "list")
   )
 }
@@ -137,11 +141,13 @@
                                          ci_lower = NA_real_,
                                          ci_upper = NA_real_) {
   structure(
-    list(observed_statistic = observed_statistic, p_value = p_value,
-         null_distribution = null_distribution,
-         n_permutations = n_permutations,
-         alternative = alternative,
-         ci_lower = ci_lower, ci_upper = ci_upper),
+    list(
+      observed_statistic = observed_statistic, p_value = p_value,
+      null_distribution = null_distribution,
+      n_permutations = n_permutations,
+      alternative = alternative,
+      ci_lower = ci_lower, ci_upper = ci_upper
+    ),
     class = c("morie_permutation_test_result", "list")
   )
 }
@@ -151,9 +157,11 @@
 .new_cv_result <- function(scores, mean_score, se_score, ci_lower, ci_upper,
                            n_folds, metric, fold_sizes) {
   structure(
-    list(scores = scores, mean_score = mean_score, se_score = se_score,
-         ci_lower = ci_lower, ci_upper = ci_upper,
-         n_folds = n_folds, metric = metric, fold_sizes = fold_sizes),
+    list(
+      scores = scores, mean_score = mean_score, se_score = se_score,
+      ci_lower = ci_lower, ci_upper = ci_upper,
+      n_folds = n_folds, metric = metric, fold_sizes = fold_sizes
+    ),
     class = c("morie_cv_result", "list")
   )
 }
@@ -193,8 +201,7 @@
 #' Internal helper: Boot Ci Extract
 #' @noRd
 .boot_ci_extract <- function(bci, ci_method) {
-  type_key <- switch(
-    ci_method,
+  type_key <- switch(ci_method,
     "percentile"  = "percent",
     "basic"       = "basic",
     "normal"      = "normal",
@@ -203,7 +210,9 @@
     "percent"
   )
   comp <- bci[[type_key]]
-  if (is.null(comp)) return(c(NA_real_, NA_real_))
+  if (is.null(comp)) {
+    return(c(NA_real_, NA_real_))
+  }
   ncols <- ncol(comp)
   c(as.numeric(comp[1L, ncols - 1L]), as.numeric(comp[1L, ncols]))
 }
@@ -244,8 +253,10 @@
 bootstrap <- function(data, statistic, n_boot = 2000L, ci_level = 0.95,
                       ci_method = "bca", seed = 42L,
                       stratify = NULL, cluster = NULL) {
-  if (!ci_method %in% c("percentile", "normal", "basic", "bca",
-                        "studentized")) {
+  if (!ci_method %in% c(
+    "percentile", "normal", "basic", "bca",
+    "studentized"
+  )) {
     stop(sprintf("Unknown ci_method: %s", ci_method))
   }
 
@@ -260,17 +271,20 @@ bootstrap <- function(data, statistic, n_boot = 2000L, ci_level = 0.95,
   if (is.null(cluster) && ci_method != "studentized") {
     bf <- .boot_statistic_adapter(statistic)
     strata_arg <- if (is.null(stratify)) NULL else as.integer(factor(stratify))
-    bo <- morie_boot(data = data, statistic = bf, R = n_boot,
-                     strata = strata_arg)
+    bo <- morie_boot(
+      data = data, statistic = bf, R = n_boot,
+      strata = strata_arg
+    )
     boot_stats <- as.numeric(bo$t[, 1L])
     se <- stats::sd(boot_stats)
     bias <- mean(boot_stats) - original
     acc <- 0
     type_key <- switch(ci_method,
-                       "percentile" = "perc",
-                       "normal"     = "norm",
-                       "basic"      = "basic",
-                       "bca"        = "bca")
+      "percentile" = "perc",
+      "normal"     = "norm",
+      "basic"      = "basic",
+      "bca"        = "bca"
+    )
     ci_pair <- tryCatch(
       morie_boot_ci(bo, conf = ci_level, type = type_key)[[type_key]],
       error = function(e) c(NA_real_, NA_real_)
@@ -278,8 +292,10 @@ bootstrap <- function(data, statistic, n_boot = 2000L, ci_level = 0.95,
     if (anyNA(ci_pair)) {
       # Fallback for tiny n_boot where BCa influence is undefined.
       alpha <- 1 - ci_level
-      ci_pair <- c(.pct(boot_stats, 100 * alpha / 2),
-                   .pct(boot_stats, 100 * (1 - alpha / 2)))
+      ci_pair <- c(
+        .pct(boot_stats, 100 * alpha / 2),
+        .pct(boot_stats, 100 * (1 - alpha / 2))
+      )
     }
     return(.new_bootstrap_result(
       estimate = original, se = se,
@@ -388,8 +404,8 @@ bootstrap <- function(data, statistic, n_boot = 2000L, ci_level = 0.95,
     jack[i] <- as.numeric(statistic(.idx(data, -i)))
   }
   jm <- mean(jack)
-  num <- sum((jm - jack) ^ 3)
-  den <- 6 * (sum((jm - jack) ^ 2)) ^ 1.5
+  num <- sum((jm - jack)^3)
+  den <- 6 * (sum((jm - jack)^2))^1.5
   a <- num / max(den, 1e-10)
 
   z_lo <- stats::qnorm(alpha / 2)
@@ -427,14 +443,18 @@ bootstrap <- function(data, statistic, n_boot = 2000L, ci_level = 0.95,
 #' @seealso \code{boot::boot}.
 #' @examples
 #' set.seed(1)
-#' str(parametric_bootstrap(rnorm(40), statistic = mean,
-#'                          n_boot = 200L), max.level = 1)
+#' str(parametric_bootstrap(rnorm(40),
+#'   statistic = mean,
+#'   n_boot = 200L
+#' ), max.level = 1)
 #' @export
 parametric_bootstrap <- function(data, statistic, distribution = "normal",
                                  n_boot = 2000L, ci_level = 0.95,
                                  seed = 42L, ...) {
-  if (!distribution %in% c("normal", "poisson", "binomial",
-                           "exponential", "gamma")) {
+  if (!distribution %in% c(
+    "normal", "poisson", "binomial",
+    "exponential", "gamma"
+  )) {
     stop(sprintf("Unknown distribution: %s", distribution))
   }
 
@@ -476,19 +496,22 @@ parametric_bootstrap <- function(data, statistic, distribution = "normal",
 #' Internal helper: Param Boot Pars
 #' @noRd
 .param_boot_pars <- function(distribution, data, dp) {
-  switch(
-    distribution,
-    "normal"      = list(mu = dp$mu %||% mean(data),
-                         sigma = dp$sigma %||% stats::sd(data)),
-    "poisson"     = list(lam = dp$lam %||% mean(data)),
-    "binomial"    = list(p = dp$p %||% mean(data)),
+  switch(distribution,
+    "normal" = list(
+      mu = dp$mu %||% mean(data),
+      sigma = dp$sigma %||% stats::sd(data)
+    ),
+    "poisson" = list(lam = dp$lam %||% mean(data)),
+    "binomial" = list(p = dp$p %||% mean(data)),
     "exponential" = list(scale = dp$scale %||% mean(data)),
-    "gamma"       = {
+    "gamma" = {
       if (is.null(dp$shape) || is.null(dp$scale)) {
         mu <- mean(data)
         va <- stats::var(data)
-        list(shape = mu ^ 2 / max(va, 1e-10),
-             scale = max(va, 1e-10) / mu)
+        list(
+          shape = mu^2 / max(va, 1e-10),
+          scale = max(va, 1e-10) / mu
+        )
       } else {
         list(shape = dp$shape, scale = dp$scale)
       }
@@ -500,14 +523,17 @@ parametric_bootstrap <- function(data, statistic, distribution = "normal",
 #' Internal helper: Param Boot Rangen
 #' @noRd
 .param_boot_rangen <- function(distribution, n) {
-  switch(
-    distribution,
-    "normal"      = function(d, p) stats::rnorm(n, p$mu, p$sigma),
-    "poisson"     = function(d, p) as.numeric(stats::rpois(n, p$lam)),
-    "binomial"    = function(d, p) as.numeric(stats::rbinom(n, 1, p$p)),
+  switch(distribution,
+    "normal" = function(d, p) stats::rnorm(n, p$mu, p$sigma),
+    "poisson" = function(d, p) as.numeric(stats::rpois(n, p$lam)),
+    "binomial" = function(d, p) as.numeric(stats::rbinom(n, 1, p$p)),
     "exponential" = function(d, p) stats::rexp(n, rate = 1 / p$scale),
-    "gamma"       = function(d, p) stats::rgamma(n, shape = p$shape,
-                                                 scale = p$scale)
+    "gamma" = function(d, p) {
+      stats::rgamma(n,
+        shape = p$shape,
+        scale = p$scale
+      )
+    }
   )
 }
 
@@ -542,7 +568,8 @@ parametric_bootstrap <- function(data, statistic, distribution = "normal",
 #'   [morie_did_wild_cluster_bootstrap()].
 #' @examples
 #' set.seed(1)
-#' X <- cbind(1, rnorm(50)); y <- drop(X %*% c(1, 2)) + rnorm(50)
+#' X <- cbind(1, rnorm(50))
+#' y <- drop(X %*% c(1, 2)) + rnorm(50)
 #' str(wild_bootstrap(y, X, n_boot = 199L), max.level = 1)
 #' @export
 wild_bootstrap <- function(y, X, statistic_idx = 2L, n_boot = 999L,
@@ -599,7 +626,7 @@ wild_bootstrap <- function(y, X, statistic_idx = 2L, n_boot = 999L,
     sq5 <- sqrt(5)
     p_m <- (sq5 + 1) / (2 * sq5)
     v1 <- -(sq5 - 1) / 2
-    v2 <-  (sq5 + 1) / 2
+    v2 <- (sq5 + 1) / 2
     ifelse(stats::runif(n) < p_m, v1, v2)
   }
 }
@@ -630,8 +657,10 @@ wild_bootstrap <- function(y, X, statistic_idx = 2L, n_boot = 999L,
 #' @examples
 #' set.seed(1)
 #' ts_dat <- as.numeric(arima.sim(list(ar = 0.4), n = 50L))
-#' res <- block_bootstrap(ts_dat, mean, block_size = 5L, n_boot = 20L,
-#'                        method = "circular")
+#' res <- block_bootstrap(ts_dat, mean,
+#'   block_size = 5L, n_boot = 20L,
+#'   method = "circular"
+#' )
 #' res$estimate
 #' @export
 block_bootstrap <- function(data, statistic, block_size,
@@ -648,15 +677,19 @@ block_bootstrap <- function(data, statistic, block_size,
   if (method != "circular" && is.null(dim(data))) {
     sim_arg <- if (method == "moving") "fixed" else "geom"
     bf <- function(d) as.numeric(statistic(d))
-    bo <- morie_tsboot(tseries = as.numeric(data),
-                       statistic = bf,
-                       R = n_boot,
-                       l = as.integer(block_size),
-                       sim = sim_arg)
+    bo <- morie_tsboot(
+      tseries = as.numeric(data),
+      statistic = bf,
+      R = n_boot,
+      l = as.integer(block_size),
+      sim = sim_arg
+    )
     boot_stats <- as.numeric(bo$t[, 1L])
   } else {
-    boot_stats <- .block_boot_inline(data, statistic, block_size,
-                                     n_boot, method)
+    boot_stats <- .block_boot_inline(
+      data, statistic, block_size,
+      n_boot, method
+    )
   }
 
   se <- stats::sd(boot_stats)
@@ -740,11 +773,13 @@ jackknife <- function(data, statistic, ci_level = 0.95) {
   original <- as.numeric(statistic(data))
 
   if (.boot_have_bootstrap() && is.null(dim(data))) {
-    jk <- bootstrap::jackknife(as.numeric(data),
-                               function(x) as.numeric(statistic(x)))
+    jk <- bootstrap::jackknife(
+      as.numeric(data),
+      function(x) as.numeric(statistic(x))
+    )
     jack <- as.numeric(jk$jack.values)
     bias <- as.numeric(jk$jack.bias)
-    se   <- as.numeric(jk$jack.se)
+    se <- as.numeric(jk$jack.se)
   } else {
     jack <- numeric(n)
     for (i in seq_len(n)) {
@@ -752,7 +787,7 @@ jackknife <- function(data, statistic, ci_level = 0.95) {
     }
     jm <- mean(jack)
     bias <- (n - 1) * (jm - original)
-    se <- sqrt((n - 1) / n * sum((jack - jm) ^ 2))
+    se <- sqrt((n - 1) / n * sum((jack - jm)^2))
   }
 
   jm <- mean(jack)
@@ -805,10 +840,13 @@ delete_d_jackknife <- function(data, statistic, d = 2L,
     delete_sets <- utils::combn(n, d, simplify = FALSE)
   } else {
     delete_sets <- replicate(max_subsets,
-                             sort(sample.int(n, d, replace = FALSE)),
-                             simplify = FALSE)
-    keys <- vapply(delete_sets, function(x) paste(x, collapse = ","),
-                   character(1))
+      sort(sample.int(n, d, replace = FALSE)),
+      simplify = FALSE
+    )
+    keys <- vapply(
+      delete_sets, function(x) paste(x, collapse = ","),
+      character(1)
+    )
     delete_sets <- delete_sets[!duplicated(keys)]
   }
 
@@ -821,7 +859,7 @@ delete_d_jackknife <- function(data, statistic, d = 2L,
   jm <- mean(jack)
   cc <- (n - d) / d
   bias <- cc * (jm - original)
-  se <- sqrt(cc / m * sum((jack - jm) ^ 2))
+  se <- sqrt(cc / m * sum((jack - jm)^2))
 
   z <- stats::qnorm(1 - (1 - ci_level) / 2)
   ci_lo <- original - bias - z * se
@@ -865,7 +903,8 @@ delete_d_jackknife <- function(data, statistic, d = 2L,
 #' @examples
 #' set.seed(1)
 #' str(permutation_test(rnorm(25), rnorm(25, 0.5),
-#'                      n_permutations = 499L), max.level = 1)
+#'   n_permutations = 499L
+#' ), max.level = 1)
 #' @export
 permutation_test <- function(group1, group2, statistic = "mean_diff",
                              n_permutations = 9999L,
@@ -890,8 +929,7 @@ permutation_test <- function(group1, group2, statistic = "mean_diff",
     null_dist[i] <- as.numeric(stat_fn(perm[seq_len(n1)], perm[(n1 + 1):n]))
   }
 
-  p_value <- switch(
-    alternative,
+  p_value <- switch(alternative,
     "two-sided" = mean(abs(null_dist) >= abs(observed)),
     "greater"   = mean(null_dist >= observed),
     "less"      = mean(null_dist <= observed)
@@ -910,12 +948,13 @@ permutation_test <- function(group1, group2, statistic = "mean_diff",
 #' Internal helper: Perm Stat Fn
 #' @noRd
 .perm_stat_fn <- function(statistic) {
-  if (is.function(statistic)) return(statistic)
-  switch(
-    statistic,
-    "mean_diff"   = function(a, b) mean(a) - mean(b),
+  if (is.function(statistic)) {
+    return(statistic)
+  }
+  switch(statistic,
+    "mean_diff" = function(a, b) mean(a) - mean(b),
     "median_diff" = function(a, b) stats::median(a) - stats::median(b),
-    "t_stat"      = function(a, b) {
+    "t_stat" = function(a, b) {
       s1 <- stats::var(a)
       s2 <- stats::var(b)
       se <- sqrt(s1 / length(a) + s2 / length(b))
@@ -944,7 +983,8 @@ permutation_test <- function(group1, group2, statistic = "mean_diff",
 #' set.seed(1)
 #' x <- rnorm(25)
 #' str(paired_permutation_test(x, x + rnorm(25, 0.3),
-#'                             n_permutations = 499L), max.level = 1)
+#'   n_permutations = 499L
+#' ), max.level = 1)
 #' @export
 paired_permutation_test <- function(x, y, statistic = "mean_diff",
                                     n_permutations = 9999L,
@@ -971,8 +1011,7 @@ paired_permutation_test <- function(x, y, statistic = "mean_diff",
     null_dist[i] <- as.numeric(stat_fn(diffs * signs))
   }
 
-  p_value <- switch(
-    alternative,
+  p_value <- switch(alternative,
     "two-sided" = mean(abs(null_dist) >= abs(observed)),
     "greater"   = mean(null_dist >= observed),
     "less"      = mean(null_dist <= observed)
@@ -1008,8 +1047,10 @@ paired_permutation_test <- function(x, y, statistic = "mean_diff",
 #' @return A \code{morie_bootstrap_result}.
 #' @examples
 #' set.seed(1)
-#' str(subsampling(rnorm(60), statistic = mean,
-#'                 n_subsamples = 200L), max.level = 1)
+#' str(subsampling(rnorm(60),
+#'   statistic = mean,
+#'   n_subsamples = 200L
+#' ), max.level = 1)
 #' @export
 subsampling <- function(data, statistic, subsample_size = NULL,
                         n_subsamples = 1000L, ci_level = 0.95,
@@ -1018,7 +1059,7 @@ subsampling <- function(data, statistic, subsample_size = NULL,
   n <- .nrow_like(data)
   original <- as.numeric(statistic(data))
 
-  if (is.null(subsample_size)) subsample_size <- as.integer(n ^ 0.7)
+  if (is.null(subsample_size)) subsample_size <- as.integer(n^0.7)
   subsample_size <- min(subsample_size, n - 1L)
 
   sub_stats <- numeric(n_subsamples)
@@ -1076,8 +1117,12 @@ subsampling <- function(data, statistic, subsample_size = NULL,
 #' set.seed(1)
 #' X <- matrix(rnorm(25 * 2), ncol = 2)
 #' y <- rnorm(25)
-#' model_fn <- function(Xt, yt) structure(
-#'   list(coef = drop(solve(crossprod(Xt), crossprod(Xt, yt)))), class = "lm_lite")
+#' model_fn <- function(Xt, yt) {
+#'   structure(
+#'     list(coef = drop(solve(crossprod(Xt), crossprod(Xt, yt)))),
+#'     class = "lm_lite"
+#'   )
+#' }
 #' predict.lm_lite <- function(object, newdata, ...) drop(newdata %*% object$coef)
 #' registerS3method("predict", "lm_lite", predict.lm_lite)
 #' score_fn <- function(yt, yp) mean((yt - yp)^2)
@@ -1102,15 +1147,19 @@ bootstrap_632 <- function(X, y, model_fn, score_fn,
     if (length(oob) == 0L) next
     model_b <- model_fn(X[idx, , drop = FALSE], y[idx])
     y_pred_oob <- stats::predict(model_b, X[oob, , drop = FALSE])
-    boot_errors <- c(boot_errors,
-                     as.numeric(score_fn(y[oob], y_pred_oob)))
+    boot_errors <- c(
+      boot_errors,
+      as.numeric(score_fn(y[oob], y_pred_oob))
+    )
   }
 
   if (length(boot_errors) == 0L) {
-    return(list(apparent_error = apparent,
-                bootstrap_error = NA_real_,
-                error_632 = NA_real_,
-                error_632plus = NA_real_))
+    return(list(
+      apparent_error = apparent,
+      bootstrap_error = NA_real_,
+      error_632 = NA_real_,
+      error_632plus = NA_real_
+    ))
   }
 
   boot_error <- mean(boot_errors)
@@ -1123,7 +1172,7 @@ bootstrap_632 <- function(X, y, model_fn, score_fn,
     gamma <- p * (1 - q) + (1 - p) * q
   } else {
     counts <- as.numeric(table(y))
-    gamma <- 1 - sum((counts / n) ^ 2)
+    gamma <- 1 - sum((counts / n)^2)
   }
 
   r_no <- (boot_error - apparent) / max(gamma - apparent, 1e-10)
@@ -1131,10 +1180,12 @@ bootstrap_632 <- function(X, y, model_fn, score_fn,
   w <- 0.632 / (1 - 0.368 * r_no)
   error_632plus <- (1 - w) * apparent + w * boot_error
 
-  list(apparent_error = apparent,
-       bootstrap_error = boot_error,
-       error_632 = error_632,
-       error_632plus = error_632plus)
+  list(
+    apparent_error = apparent,
+    bootstrap_error = boot_error,
+    error_632 = error_632,
+    error_632plus = error_632plus
+  )
 }
 
 # ---------------------------------------------------------------------------
@@ -1253,7 +1304,8 @@ bootstrap_632 <- function(X, y, model_fn, score_fn,
 #' @seealso \code{caret::trainControl}, \code{rsample::vfold_cv}.
 #' @examples
 #' set.seed(1)
-#' X <- matrix(rnorm(80), ncol = 2); y <- rnorm(40)
+#' X <- matrix(rnorm(80), ncol = 2)
+#' y <- rnorm(40)
 #' predict.lm_lite3 <- function(object, newdata, ...) {
 #'   drop(cbind(1, newdata) %*% object$coef)
 #' }
@@ -1264,7 +1316,8 @@ bootstrap_632 <- function(X, y, model_fn, score_fn,
 #'     structure(list(coef = fit$coefficients), class = "lm_lite3")
 #'   },
 #'   score_fn = function(yt, yp) mean((yt - yp)^2),
-#'   n_folds = 5L, n_repeats = 2L)
+#'   n_folds = 5L, n_repeats = 2L
+#' )
 #' str(res, max.level = 1)
 #' @export
 repeated_cv <- function(X, y, model_fn, score_fn,
@@ -1273,7 +1326,8 @@ repeated_cv <- function(X, y, model_fn, score_fn,
   all_fold_sizes <- integer(0)
   for (r in seq_len(n_repeats)) {
     res <- .boot_cross_validate(X, y, model_fn, score_fn,
-                                n_folds = n_folds, seed = seed + r - 1L)
+      n_folds = n_folds, seed = seed + r - 1L
+    )
     all_scores <- c(all_scores, res$scores)
     all_fold_sizes <- c(all_fold_sizes, res$fold_sizes)
   }
@@ -1305,7 +1359,8 @@ repeated_cv <- function(X, y, model_fn, score_fn,
 #' @seealso \code{rsample::loo_cv}, \code{caret::trainControl}.
 #' @examples
 #' set.seed(1)
-#' X <- matrix(rnorm(40), ncol = 2); y <- rnorm(20)
+#' X <- matrix(rnorm(40), ncol = 2)
+#' y <- rnorm(20)
 #' model_fn <- function(Xt, yt) stats::lm.fit(cbind(1, Xt), yt)
 #' score_fn <- function(yt, yp) mean((yt - yp)^2)
 #' predict.lm_lite2 <- function(object, newdata, ...) {
@@ -1317,7 +1372,8 @@ repeated_cv <- function(X, y, model_fn, score_fn,
 #'     fit <- stats::lm.fit(cbind(1, Xt), yt)
 #'     structure(list(coef = fit$coefficients), class = "lm_lite2")
 #'   },
-#'   score_fn = score_fn)
+#'   score_fn = score_fn
+#' )
 #' str(res, max.level = 1)
 #' @export
 leave_one_out_cv <- function(X, y, model_fn, score_fn) {
@@ -1403,8 +1459,10 @@ morie_boot_basic_ci <- function(boot_obj,
 #' @export
 morie_rsample_bootstraps <- function(data, times = 25L, ...) {
   if (!.boot_have_rsample()) {
-    stop("morie_rsample_bootstraps() requires the 'rsample' package; ",
-         "install it.")
+    stop(
+      "morie_rsample_bootstraps() requires the 'rsample' package; ",
+      "install it."
+    )
   }
   rsample::bootstraps(data = data, times = as.integer(times), ...)
 }
@@ -1432,6 +1490,8 @@ morie_rsample_bootstraps <- function(data, times = 25L, ...) {
 #' }
 #' @export
 morie_simpleboot_two <- function(x, y, statistic = mean, R = 1000L, ...) {
-  morie_two_boot(x = as.numeric(x), y = as.numeric(y),
-                 statistic = statistic, R = as.integer(R), ...)
+  morie_two_boot(
+    x = as.numeric(x), y = as.numeric(y),
+    statistic = statistic, R = as.integer(R), ...
+  )
 }

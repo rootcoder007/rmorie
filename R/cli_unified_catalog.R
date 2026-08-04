@@ -37,14 +37,16 @@ morie_cli_dump_catalog <- function(out_path = NULL) {
   # dict_url, n_rows_bundled. Map to CLI schema.
   unified <- data.frame(
     dataset_key = df$dataset_key,
-    portal      = df$source,
-    title       = ifelse(is.na(df$id) | !nzchar(df$id),
-                         df$dataset_key, df$id),
+    portal = df$source,
+    title = ifelse(is.na(df$id) | !nzchar(df$id),
+      df$dataset_key, df$id
+    ),
     description = ifelse(is.na(df$loader), "",
-                         paste0("loader=", df$loader)),
-    url         = ifelse(is.na(df$dict_url), "", df$dict_url),
-    license     = "",
-    formats     = ifelse(is.na(df$api_modes), "", df$api_modes),
+      paste0("loader=", df$loader)
+    ),
+    url = ifelse(is.na(df$dict_url), "", df$dict_url),
+    license = "",
+    formats = ifelse(is.na(df$api_modes), "", df$api_modes),
     stringsAsFactors = FALSE
   )
 

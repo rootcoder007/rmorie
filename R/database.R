@@ -428,16 +428,21 @@ morie_cache_list <- function(db_path = NULL, con = NULL) {
   h <- .morie_db_handle(con, db_path)
   if (h$type %in% c("parquet", "rds")) {
     ext <- if (h$type == "parquet") "parquet" else "rds"
-    files <- list.files(h$dir, pattern = paste0("\\.", ext, "$"),
-      full.names = TRUE)
+    files <- list.files(h$dir,
+      pattern = paste0("\\.", ext, "$"),
+      full.names = TRUE
+    )
     if (length(files) == 0L) {
-      return(data.frame(table = character(), rows = integer(),
-        stringsAsFactors = FALSE))
+      return(data.frame(
+        table = character(), rows = integer(),
+        stringsAsFactors = FALSE
+      ))
     }
     rows <- vapply(files, function(f) {
       if (ext == "parquet") {
         n <- tryCatch(as.integer(nanoparquet::read_parquet_info(f)$num_rows),
-          error = function(e) NA_integer_)
+          error = function(e) NA_integer_
+        )
         if (is.na(n)) as.integer(nrow(nanoparquet::read_parquet(f))) else n
       } else {
         as.integer(nrow(readRDS(f)))
@@ -744,7 +749,8 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
     # site-gated behind sign-up and never served by this open loader.
     if (requireNamespace("rmoriedata", quietly = TRUE)) {
       slugs <- tryCatch(rmoriedata::morie_data_catalog()$slug,
-        error = function(e) character())
+        error = function(e) character()
+      )
       if (key %in% slugs) {
         return(as.data.frame(rmoriedata::morie_data_load(key)))
       }
@@ -768,7 +774,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
     # 1. Built-in database (ships with package).
     builtin_path <- tryCatch(morie_builtin_db(), error = function(e) NULL)
     if (!is.null(builtin_path) && !file.exists(builtin_path)) {
-      builtin_path <- NULL  # dev fallback path may not exist; skip tier 1
+      builtin_path <- NULL # dev fallback path may not exist; skip tier 1
     }
     if (!is.null(builtin_path) && requireNamespace("DBI", quietly = TRUE) &&
       requireNamespace("RSQLite", quietly = TRUE)) {

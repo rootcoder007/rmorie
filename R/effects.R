@@ -84,9 +84,9 @@ NULL
 #' @export
 estimate_ate <- function(data, outcome, treatment, weights_col) {
   fml <- stats::as.formula(paste(outcome, "~", treatment))
-  w   <- data[[weights_col]]
+  w <- data[[weights_col]]
   fit <- stats::lm(fml, data = data, weights = w)
-  vc  <- morie_vcov_hc(fit, type = "HC3")
+  vc <- morie_vcov_hc(fit, type = "HC3")
   list(
     ate = as.numeric(stats::coef(fit)[treatment]),
     se  = as.numeric(sqrt(diag(vc))[treatment])
@@ -119,25 +119,30 @@ estimate_ate <- function(data, outcome, treatment, weights_col) {
 #' tr <- rbinom(n, 1, plogis(X[, 1]))
 #' y <- 2 * tr + X[, 1] + rnorm(n)
 #' df <- data.frame(y = y, d = tr, x1 = X[, 1], x2 = X[, 2])
-#' res <- suppressWarnings(estimate_plr(df, treatment = "d", outcome = "y",
-#'                                      covariates = c("x1", "x2")))
+#' res <- suppressWarnings(estimate_plr(df,
+#'   treatment = "d", outcome = "y",
+#'   covariates = c("x1", "x2")
+#' ))
 #' res$ate
 #' }
 #' @export
 estimate_plr <- function(data, treatment, outcome, covariates,
                          n_folds = 5L, random_state = 42L) {
   required_cols <- c(treatment, outcome, covariates)
-  missing_cols  <- setdiff(required_cols, names(data))
+  missing_cols <- setdiff(required_cols, names(data))
   if (length(missing_cols)) {
-    stop("Columns missing from data: ",
-         paste(missing_cols, collapse = ", "))
+    stop(
+      "Columns missing from data: ",
+      paste(missing_cols, collapse = ", ")
+    )
   }
   if (n_folds < 2L) {
     stop("n_folds must be >= 2, got ", n_folds)
   }
 
-  df    <- stats::na.omit(data[, c(treatment, outcome, covariates),
-                               drop = FALSE])
+  df <- stats::na.omit(data[, c(treatment, outcome, covariates),
+    drop = FALSE
+  ])
   n_obs <- nrow(df)
 
   # Native cross-fit PLR (Chernozhukov et al. 2018) with ridge nuisance
@@ -158,22 +163,26 @@ estimate_plr <- function(data, treatment, outcome, covariates,
   d_hat <- numeric(n_obs)
   for (k in seq_len(n_folds)) {
     train_idx <- which(folds != k)
-    test_idx  <- which(folds == k)
-    y_hat[test_idx] <- fit_predict(x_mat[train_idx, , drop = FALSE],
-                                   y[train_idx],
-                                   x_mat[test_idx, , drop = FALSE])
-    d_hat[test_idx] <- fit_predict(x_mat[train_idx, , drop = FALSE],
-                                   d[train_idx],
-                                   x_mat[test_idx, , drop = FALSE])
+    test_idx <- which(folds == k)
+    y_hat[test_idx] <- fit_predict(
+      x_mat[train_idx, , drop = FALSE],
+      y[train_idx],
+      x_mat[test_idx, , drop = FALSE]
+    )
+    d_hat[test_idx] <- fit_predict(
+      x_mat[train_idx, , drop = FALSE],
+      d[train_idx],
+      x_mat[test_idx, , drop = FALSE]
+    )
   }
   d_resid <- d - d_hat
   y_resid <- y - y_hat
-  ate     <- sum(d_resid * y_resid) / sum(d_resid * d_resid)
-  psi     <- (y_resid - ate * d_resid) * d_resid
-  j0      <- mean(d_resid * d_resid)
+  ate <- sum(d_resid * y_resid) / sum(d_resid * d_resid)
+  psi <- (y_resid - ate * d_resid) * d_resid
+  j0 <- mean(d_resid * d_resid)
   var_ate <- mean(psi^2) / (j0^2 * n_obs)
-  se      <- sqrt(var_ate)
-  z       <- stats::qnorm(0.975)
+  se <- sqrt(var_ate)
+  z <- stats::qnorm(0.975)
   list(
     ate      = ate,
     se       = se,
@@ -206,7 +215,9 @@ estimate_plr <- function(data, treatment, outcome, covariates,
 #' @examples
 #' set.seed(1)
 #' n <- 80
-#' x1 <- rnorm(n); x2 <- rnorm(n); z <- rbinom(n, 1, 0.5)
+#' x1 <- rnorm(n)
+#' x2 <- rnorm(n)
+#' z <- rbinom(n, 1, 0.5)
 #' d <- as.integer(plogis(0.3 + 0.8 * z + 0.4 * x1) > runif(n))
 #' y <- 1 + 0.5 * d + 0.3 * x1 + rnorm(n)
 #' df <- data.frame(y, d, z, x1, x2)
@@ -217,14 +228,18 @@ estimate_pliv <- function(data, treatment, outcome, instrument,
                           covariates, n_folds = 5L,
                           random_state = 42L) {
   required_cols <- c(treatment, outcome, instrument, covariates)
-  missing_cols  <- setdiff(required_cols, names(data))
+  missing_cols <- setdiff(required_cols, names(data))
   if (length(missing_cols)) {
-    stop("Columns missing from data: ",
-         paste(missing_cols, collapse = ", "))
+    stop(
+      "Columns missing from data: ",
+      paste(missing_cols, collapse = ", ")
+    )
   }
 
-  df    <- stats::na.omit(data[, c(treatment, outcome, instrument,
-                                   covariates), drop = FALSE])
+  df <- stats::na.omit(data[, c(
+    treatment, outcome, instrument,
+    covariates
+  ), drop = FALSE])
   n_obs <- nrow(df)
 
   # Native partialled-out IV (PLIV): cross-fit ridge nuisances for
@@ -241,15 +256,21 @@ estimate_pliv <- function(data, treatment, outcome, instrument,
   ry <- rd <- rz <- numeric(n_obs)
   for (f in seq_len(n_folds)) {
     te <- folds == f
-    ry[te] <- y_v[te] - .morie_cv_ridge_predict(x_mat[!te, , drop = FALSE],
-                                                y_v[!te],
-                                                x_mat[te, , drop = FALSE])
-    rd[te] <- d_v[te] - .morie_cv_ridge_predict(x_mat[!te, , drop = FALSE],
-                                                d_v[!te],
-                                                x_mat[te, , drop = FALSE])
-    rz[te] <- z_v[te] - .morie_cv_ridge_predict(x_mat[!te, , drop = FALSE],
-                                                z_v[!te],
-                                                x_mat[te, , drop = FALSE])
+    ry[te] <- y_v[te] - .morie_cv_ridge_predict(
+      x_mat[!te, , drop = FALSE],
+      y_v[!te],
+      x_mat[te, , drop = FALSE]
+    )
+    rd[te] <- d_v[te] - .morie_cv_ridge_predict(
+      x_mat[!te, , drop = FALSE],
+      d_v[!te],
+      x_mat[te, , drop = FALSE]
+    )
+    rz[te] <- z_v[te] - .morie_cv_ridge_predict(
+      x_mat[!te, , drop = FALSE],
+      z_v[!te],
+      x_mat[te, , drop = FALSE]
+    )
   }
   theta <- sum(rz * ry) / sum(rz * rd)
   psi <- rz * (ry - rd * theta)
@@ -291,8 +312,10 @@ estimate_pliv <- function(data, treatment, outcome, instrument,
 #' tr <- rbinom(n, 1, plogis(X[, 1]))
 #' y <- 2.5 * tr + drop(X %*% c(1, 0.5, -0.7)) + rnorm(n)
 #' d <- data.frame(y = y, d = tr, x1 = X[, 1], x2 = X[, 2], x3 = X[, 3])
-#' res <- estimate_ate_gcomputation(d, treatment = "d", outcome = "y",
-#'                                  covariates = c("x1", "x2", "x3"))
+#' res <- estimate_ate_gcomputation(d,
+#'   treatment = "d", outcome = "y",
+#'   covariates = c("x1", "x2", "x3")
+#' )
 #' res$ate
 #' @export
 estimate_ate_gcomputation <- function(data, treatment, outcome,
@@ -300,17 +323,22 @@ estimate_ate_gcomputation <- function(data, treatment, outcome,
                                       outcome_model = "linear") {
   valid_models <- c("linear", "logistic")
   if (!outcome_model %in% valid_models) {
-    stop("outcome_model must be one of: ",
-         paste(valid_models, collapse = ", "))
+    stop(
+      "outcome_model must be one of: ",
+      paste(valid_models, collapse = ", ")
+    )
   }
   required_cols <- c(treatment, outcome, covariates)
-  missing_cols  <- setdiff(required_cols, names(data))
+  missing_cols <- setdiff(required_cols, names(data))
   if (length(missing_cols)) {
-    stop("Columns missing from data: ",
-         paste(missing_cols, collapse = ", "))
+    stop(
+      "Columns missing from data: ",
+      paste(missing_cols, collapse = ", ")
+    )
   }
-  df    <- stats::na.omit(data[, c(treatment, outcome, covariates),
-                               drop = FALSE])
+  df <- stats::na.omit(data[, c(treatment, outcome, covariates),
+    drop = FALSE
+  ])
   n_obs <- nrow(df)
   if (n_obs < 10L) {
     stop("G-computation requires at least 10 complete observations.")
@@ -318,19 +346,25 @@ estimate_ate_gcomputation <- function(data, treatment, outcome,
 
   if (requireNamespace("stdReg", quietly = TRUE)) {
     fml <- stats::as.formula(
-      paste0(outcome, " ~ ",
-             paste(c(treatment, covariates), collapse = " + "))
+      paste0(
+        outcome, " ~ ",
+        paste(c(treatment, covariates), collapse = " + ")
+      )
     )
     fam <- if (outcome_model == "linear") {
       stats::gaussian()
     } else {
       stats::binomial()
     }
-    mod    <- stats::glm(fml, data = df, family = fam)
-    fitobj <- stdReg::stdGlm(fit = mod, data = df, X = treatment,
-                             x = c(0, 1))
-    sm     <- summary(fitobj, contrast = "difference",
-                      reference = 0, CI.level = 0.95)
+    mod <- stats::glm(fml, data = df, family = fam)
+    fitobj <- stdReg::stdGlm(
+      fit = mod, data = df, X = treatment,
+      x = c(0, 1)
+    )
+    sm <- summary(fitobj,
+      contrast = "difference",
+      reference = 0, CI.level = 0.95
+    )
     est <- sm$est.table
     return(list(
       ate           = as.numeric(est[2, "Estimate"]),
@@ -346,35 +380,47 @@ estimate_ate_gcomputation <- function(data, treatment, outcome,
   feature_cols <- c(treatment, covariates)
   fit_and_predict_ate <- function(boot_df) {
     means <- colMeans(boot_df[, feature_cols, drop = FALSE])
-    sds   <- apply(boot_df[, feature_cols, drop = FALSE], 2, stats::sd)
+    sds <- apply(boot_df[, feature_cols, drop = FALSE], 2, stats::sd)
     sds[sds == 0] <- 1
-    xs    <- sweep(sweep(boot_df[, feature_cols, drop = FALSE], 2,
-                         means, "-"), 2, sds, "/")
+    xs <- sweep(sweep(
+      boot_df[, feature_cols, drop = FALSE], 2,
+      means, "-"
+    ), 2, sds, "/")
     df_fit <- as.data.frame(xs)
     df_fit[[outcome]] <- boot_df[[outcome]]
     if (outcome_model == "linear") {
       mod <- stats::lm(stats::as.formula(paste0(outcome, " ~ .")),
-                       data = df_fit)
+        data = df_fit
+      )
     } else {
       mod <- stats::glm(stats::as.formula(paste0(outcome, " ~ .")),
-                        data = df_fit, family = stats::binomial())
+        data = df_fit, family = stats::binomial()
+      )
     }
     x_t1 <- boot_df[, feature_cols, drop = FALSE]
     x_t1[[treatment]] <- 1
     x_t0 <- boot_df[, feature_cols, drop = FALSE]
     x_t0[[treatment]] <- 0
-    x_t1_s <- as.data.frame(sweep(sweep(x_t1, 2, means, "-"),
-                                  2, sds, "/"))
-    x_t0_s <- as.data.frame(sweep(sweep(x_t0, 2, means, "-"),
-                                  2, sds, "/"))
+    x_t1_s <- as.data.frame(sweep(
+      sweep(x_t1, 2, means, "-"),
+      2, sds, "/"
+    ))
+    x_t0_s <- as.data.frame(sweep(
+      sweep(x_t0, 2, means, "-"),
+      2, sds, "/"
+    ))
     if (outcome_model == "linear") {
       y1_hat <- stats::predict(mod, newdata = x_t1_s)
       y0_hat <- stats::predict(mod, newdata = x_t0_s)
     } else {
-      y1_hat <- stats::predict(mod, newdata = x_t1_s,
-                               type = "response")
-      y0_hat <- stats::predict(mod, newdata = x_t0_s,
-                               type = "response")
+      y1_hat <- stats::predict(mod,
+        newdata = x_t1_s,
+        type = "response"
+      )
+      y0_hat <- stats::predict(mod,
+        newdata = x_t0_s,
+        type = "response"
+      )
     }
     mean(y1_hat - y0_hat)
   }
@@ -392,9 +438,11 @@ estimate_ate_gcomputation <- function(data, treatment, outcome,
   boot_ates <- boot_ates[is.finite(boot_ates)]
   if (length(boot_ates) < 50L) {
     warning("Fewer than 50 successful bootstrap iterations; ",
-            "SE may be unreliable.", call. = FALSE)
+      "SE may be unreliable.",
+      call. = FALSE
+    )
   }
-  se   <- if (length(boot_ates) > 1L) stats::sd(boot_ates) else NA_real_
+  se <- if (length(boot_ates) > 1L) stats::sd(boot_ates) else NA_real_
   ci_lo <- if (length(boot_ates)) {
     as.numeric(stats::quantile(boot_ates, 0.025))
   } else {
@@ -445,10 +493,12 @@ sensitivity_rosenbaum <- function(data, treatment, outcome,
                                   gamma_range = c(1, 3),
                                   n_gamma = 20L) {
   required_cols <- c(treatment, outcome)
-  missing_cols  <- setdiff(required_cols, names(data))
+  missing_cols <- setdiff(required_cols, names(data))
   if (length(missing_cols)) {
-    stop("Columns missing from data: ",
-         paste(missing_cols, collapse = ", "))
+    stop(
+      "Columns missing from data: ",
+      paste(missing_cols, collapse = ", ")
+    )
   }
   if (gamma_range[1] < 1) {
     stop("Minimum Gamma must be >= 1.0, got ", gamma_range[1])
@@ -460,63 +510,71 @@ sensitivity_rosenbaum <- function(data, treatment, outcome,
     stop("n_gamma must be >= 2, got ", n_gamma)
   }
 
-  df      <- stats::na.omit(data[, c(treatment, outcome),
-                                 drop = FALSE])
+  df <- stats::na.omit(data[, c(treatment, outcome),
+    drop = FALSE
+  ])
   treated <- df[df[[treatment]] == 1, outcome]
   control <- df[df[[treatment]] == 0, outcome]
-  min_n   <- min(length(treated), length(control))
+  min_n <- min(length(treated), length(control))
   if (min_n < 2L) {
     stop("At least 2 treated and 2 control units required.")
   }
 
   treated_sorted <- sort(treated)[seq_len(min_n)]
   control_sorted <- sort(control)[seq_len(min_n)]
-  differences    <- treated_sorted - control_sorted
-  gammas         <- seq(gamma_range[1], gamma_range[2],
-                        length.out = n_gamma)
+  differences <- treated_sorted - control_sorted
+  gammas <- seq(gamma_range[1], gamma_range[2],
+    length.out = n_gamma
+  )
 
   if (min_n >= 5L) {
     # Native Rosenbaum signed-rank bounds across the Gamma sequence --
     # the same table rbounds::psens() prints (cross-validated in tests).
     out <- do.call(rbind, lapply(gammas, function(g) {
       b <- .morie_psens_wilcoxon_d(differences, g)
-      data.frame(Gamma = g,
-                 p_lower = as.numeric(b[["p_lower"]]),
-                 p_upper = as.numeric(b[["p_upper"]]))
+      data.frame(
+        Gamma = g,
+        p_lower = as.numeric(b[["p_lower"]]),
+        p_upper = as.numeric(b[["p_upper"]])
+      )
     }))
     return(out)
   }
 
-  n_pairs  <- length(differences)
+  n_pairs <- length(differences)
   abs_diff <- abs(differences)
-  ranks    <- rank(abs_diff)
-  t_plus   <- sum(ranks[differences > 0])
-  results  <- vector("list", n_gamma)
+  ranks <- rank(abs_diff)
+  t_plus <- sum(ranks[differences > 0])
+  results <- vector("list", n_gamma)
   for (i in seq_along(gammas)) {
     gamma <- gammas[i]
     p_max <- gamma / (1 + gamma)
     p_min <- 1 / (1 + gamma)
-    mu_u  <- n_pairs * (n_pairs + 1) / 2 * p_max
+    mu_u <- n_pairs * (n_pairs + 1) / 2 * p_max
     var_u <- n_pairs * (n_pairs + 1) * (2 * n_pairs + 1) / 6 *
       p_max * (1 - p_max)
-    mu_l  <- n_pairs * (n_pairs + 1) / 2 * p_min
+    mu_l <- n_pairs * (n_pairs + 1) / 2 * p_min
     var_l <- n_pairs * (n_pairs + 1) * (2 * n_pairs + 1) / 6 *
       p_min * (1 - p_min)
     p_upper <- if (var_u > 0) {
       2 * stats::pnorm(abs((t_plus - mu_u) / sqrt(var_u)),
-                       lower.tail = FALSE)
+        lower.tail = FALSE
+      )
     } else {
       NA_real_
     }
     p_lower <- if (var_l > 0) {
       2 * stats::pnorm(abs((t_plus - mu_l) / sqrt(var_l)),
-                       lower.tail = FALSE)
+        lower.tail = FALSE
+      )
     } else {
       NA_real_
     }
-    results[[i]] <- data.frame(Gamma = gamma,
-                               p_lower = p_lower,
-                               p_upper = p_upper)
+    results[[i]] <- data.frame(
+      Gamma = gamma,
+      p_lower = p_lower,
+      p_upper = p_upper
+    )
   }
   do.call(rbind, results)
 }
@@ -545,14 +603,20 @@ sensitivity_rosenbaum <- function(data, treatment, outcome,
 e_value <- function(ate, se, null = 0, sd_y = 1) {
   if (se <= 0) stop("se must be > 0, got ", se)
   z <- abs(ate - null) / se
-  if (z == 0) return(1)
+  if (z == 0) {
+    return(1)
+  }
 
   # Module 26: native VanderWeele-Ding continuous-scale E-value.
   d <- (ate - null) / sd_y
   ev <- morie_evalue(d, "MD", true = 0)$point
-  if (is.finite(ev) && ev >= 1) return(ev)
+  if (is.finite(ev) && ev >= 1) {
+    return(ev)
+  }
   rr <- exp(z)
-  if (rr <= 1) return(1)
+  if (rr <= 1) {
+    return(1)
+  }
   rr + sqrt(rr * (rr - 1))
 }
 
@@ -622,8 +686,10 @@ morie_effects_emmeans <- function(model, specs, ...) {
 #' }
 #' @export
 morie_effects_predictions <- function(model, newdata = NULL, ...) {
-  .morie_effects_require("marginaleffects",
-                         "morie_effects_predictions")
+  .morie_effects_require(
+    "marginaleffects",
+    "morie_effects_predictions"
+  )
   if (is.null(newdata)) {
     marginaleffects::predictions(model, ...)
   } else {
@@ -653,8 +719,10 @@ morie_effects_predictions <- function(model, newdata = NULL, ...) {
 #' }
 #' @export
 morie_effects_comparisons <- function(model, variables = NULL, ...) {
-  .morie_effects_require("marginaleffects",
-                         "morie_effects_comparisons")
+  .morie_effects_require(
+    "marginaleffects",
+    "morie_effects_comparisons"
+  )
   if (is.null(variables)) {
     marginaleffects::comparisons(model, ...)
   } else {
@@ -682,8 +750,10 @@ morie_effects_comparisons <- function(model, variables = NULL, ...) {
 #' }
 #' @export
 morie_effects_slopes <- function(model, variables = NULL, ...) {
-  .morie_effects_require("marginaleffects",
-                         "morie_effects_slopes")
+  .morie_effects_require(
+    "marginaleffects",
+    "morie_effects_slopes"
+  )
   if (is.null(variables)) {
     marginaleffects::slopes(model, ...)
   } else {
@@ -715,19 +785,21 @@ morie_effects_tidy <- function(model, ...) {
     return(broom::tidy(model, ...))
   }
   cf <- tryCatch(summary(model)$coefficients,
-                 error = function(e) NULL)
+    error = function(e) NULL
+  )
   if (is.null(cf)) {
     stop("morie_effects_tidy(): install `broom` to tidy this model ",
-         "class, or pass a model with summary()$coefficients.",
-         call. = FALSE)
+      "class, or pass a model with summary()$coefficients.",
+      call. = FALSE
+    )
   }
   cf <- as.data.frame(cf)
   data.frame(
-    term      = rownames(cf),
-    estimate  = cf[[1]],
+    term = rownames(cf),
+    estimate = cf[[1]],
     std.error = if (ncol(cf) >= 2L) cf[[2]] else NA_real_,
     statistic = if (ncol(cf) >= 3L) cf[[3]] else NA_real_,
-    p.value   = if (ncol(cf) >= 4L) cf[[4]] else NA_real_,
+    p.value = if (ncol(cf) >= 4L) cf[[4]] else NA_real_,
     row.names = NULL,
     stringsAsFactors = FALSE
   )

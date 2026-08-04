@@ -135,8 +135,9 @@ preprocess_fmri <- function(record,
 .entheo_bandpass <- function(x, sfreq, low, high, order = 4L) {
   ny <- sfreq / 2
   bf <- .morie_dsp_butter(order, c(low / ny, high / ny), type = "pass")
-  return(t(apply(x, 1, function(row)
-    .morie_dsp_filtfilt(bf$b, bf$a, row))))
+  return(t(apply(x, 1, function(row) {
+    .morie_dsp_filtfilt(bf$b, bf$a, row)
+  })))
   # (FFT-mask variant retained below for reference paths.)
   n <- ncol(x)
   freqs <- seq(0, sfreq / 2, length.out = n %/% 2 + 1)
@@ -160,8 +161,9 @@ preprocess_fmri <- function(record,
   ),
   type = "stop"
   )
-  return(t(apply(x, 1, function(row)
-    .morie_dsp_filtfilt(bf$b, bf$a, row))))
+  return(t(apply(x, 1, function(row) {
+    .morie_dsp_filtfilt(bf$b, bf$a, row)
+  })))
   n <- ncol(x)
   freqs <- seq(0, sfreq / 2, length.out = n %/% 2 + 1)
   bw <- freq / q

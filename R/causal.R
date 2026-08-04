@@ -51,36 +51,36 @@ NULL
 
 #' Internal helper: Causal Have Weightit
 #' @noRd
-.causal_have_weightit     <- function() {
-  requireNamespace("WeightIt",     quietly = TRUE)
+.causal_have_weightit <- function() {
+  requireNamespace("WeightIt", quietly = TRUE)
 }
 #' Internal helper: Causal Have Aipw
 #' @noRd
-.causal_have_aipw         <- function() {
-  requireNamespace("AIPW",         quietly = TRUE)
+.causal_have_aipw <- function() {
+  requireNamespace("AIPW", quietly = TRUE)
 }
 #' Internal helper: Causal Have Stdreg
 #' @noRd
-.causal_have_stdreg       <- function() {
-  requireNamespace("stdReg",       quietly = TRUE)
+.causal_have_stdreg <- function() {
+  requireNamespace("stdReg", quietly = TRUE)
 }
 #' Internal helper: Causal Have Doubleml
 #' @noRd
-.causal_have_doubleml     <- function() {
-  requireNamespace("DoubleML",     quietly = TRUE) &&
-    requireNamespace("mlr3",         quietly = TRUE) &&
+.causal_have_doubleml <- function() {
+  requireNamespace("DoubleML", quietly = TRUE) &&
+    requireNamespace("mlr3", quietly = TRUE) &&
     requireNamespace("mlr3learners", quietly = TRUE) &&
-    requireNamespace("ranger",       quietly = TRUE)
+    requireNamespace("ranger", quietly = TRUE)
 }
 #' Internal helper: Causal Have Evalue
 #' @noRd
-.causal_have_evalue       <- function() {
-  requireNamespace("EValue",       quietly = TRUE)
+.causal_have_evalue <- function() {
+  requireNamespace("EValue", quietly = TRUE)
 }
 #' Internal helper: Causal Have Rbounds
 #' @noRd
-.causal_have_rbounds      <- function() {
-  requireNamespace("rbounds",      quietly = TRUE)
+.causal_have_rbounds <- function() {
+  requireNamespace("rbounds", quietly = TRUE)
 }
 #' Internal helper: Causal Have Sensitivitymv
 #' @noRd
@@ -94,19 +94,19 @@ NULL
 }
 #' Internal helper: Causal Have Aer
 #' @noRd
-.causal_have_aer          <- function() {
-  requireNamespace("AER",          quietly = TRUE)
+.causal_have_aer <- function() {
+  requireNamespace("AER", quietly = TRUE)
 }
 #' Internal helper: Causal Have Grf
 #' @noRd
-.causal_have_grf          <- function() {
-  requireNamespace("grf",          quietly = TRUE)
+.causal_have_grf <- function() {
+  requireNamespace("grf", quietly = TRUE)
 }
 #' Internal helper: Causal Have Ivreg
 #' @noRd
-.causal_have_ivreg        <- function() {
-  requireNamespace("ivreg",        quietly = TRUE) ||
-    requireNamespace("AER",          quietly = TRUE)
+.causal_have_ivreg <- function() {
+  requireNamespace("ivreg", quietly = TRUE) ||
+    requireNamespace("AER", quietly = TRUE)
 }
 
 #' Internal helper: Fit Propensity
@@ -438,8 +438,10 @@ morie_estimate_aipw <- function(data, treatment, outcome, covariates,
 #' morie_estimate_dr_forest(df, "t", "y", "x")
 #' @export
 morie_estimate_dr_forest <- function(data, treatment, outcome, covariates,
-                                     target_sample = c("all", "treated",
-                                                       "control", "overlap")) {
+                                     target_sample = c(
+                                       "all", "treated",
+                                       "control", "overlap"
+                                     )) {
   target_sample <- match.arg(target_sample)
   X <- stats::model.matrix(
     stats::as.formula(paste("~", paste(covariates, collapse = " + "))),
@@ -450,8 +452,10 @@ morie_estimate_dr_forest <- function(data, treatment, outcome, covariates,
   nf <- .morie_causal_forest_native(X, Y, W)
   est <- .morie_causal_forest_ate(nf, Y, W, target_sample)
   ci <- .wald_ci(est$ate, est$se)
-  list(ate = est$ate, se = est$se, ci_lower = ci[1], ci_upper = ci[2],
-       n = length(Y))
+  list(
+    ate = est$ate, se = est$se, ci_lower = ci[1], ci_upper = ci[2],
+    n = length(Y)
+  )
 }
 
 
@@ -552,19 +556,24 @@ morie_estimate_gate <- function(data, treatment, outcome, covariates,
 morie_estimate_cate <- function(data, treatment, outcome, covariates,
                                 propensity_col = NULL,
                                 outcome_model = c("linear", "logistic"),
-                                meta_learner = c("t_learner", "s_learner",
-                                                 "x_learner", "dr_learner")) {
+                                meta_learner = c(
+                                  "t_learner", "s_learner",
+                                  "x_learner", "dr_learner"
+                                )) {
   outcome_model <- match.arg(outcome_model)
   meta_learner <- match.arg(meta_learner)
   if (meta_learner %in% c("x_learner", "dr_learner")) {
     df <- data[stats::complete.cases(
-      data[, c(treatment, outcome, covariates)]), , drop = FALSE]
+      data[, c(treatment, outcome, covariates)]
+    ), , drop = FALSE]
     X <- as.matrix(df[, covariates, drop = FALSE])
     y <- as.numeric(df[[outcome]])
     d <- as.numeric(df[[treatment]])
-    return(if (meta_learner == "x_learner")
+    return(if (meta_learner == "x_learner") {
       .morie_cate_x_learner(X, y, d)
-    else .morie_cate_dr_learner(X, y, d))
+    } else {
+      .morie_cate_dr_learner(X, y, d)
+    })
   }
   fam <- if (outcome_model == "logistic") {
     stats::binomial()
@@ -577,10 +586,14 @@ morie_estimate_cate <- function(data, treatment, outcome, covariates,
   formula <- stats::as.formula(paste(outcome, "~", rhs))
 
   if (meta_learner == "t_learner") {
-    fit1 <- stats::glm(formula, data = data[t == 1, , drop = FALSE],
-                       family = fam)
-    fit0 <- stats::glm(formula, data = data[t == 0, , drop = FALSE],
-                       family = fam)
+    fit1 <- stats::glm(formula,
+      data = data[t == 1, , drop = FALSE],
+      family = fam
+    )
+    fit0 <- stats::glm(formula,
+      data = data[t == 0, , drop = FALSE],
+      family = fam
+    )
     mu1 <- as.numeric(stats::predict(fit1, newdata = data, type = "response"))
     mu0 <- as.numeric(stats::predict(fit0, newdata = data, type = "response"))
   } else {
@@ -667,10 +680,14 @@ morie_estimate_late <- function(data, treatment, outcome, instrument,
   } else {
     # Native 2SLS (k-class engine, module 17), homoskedastic SE to
     # match the ivreg default this wrapper historically reported.
-    d <- .morie_iv_design(data, outcome, treatment, instrument,
-                          covariates)
-    fit_iv <- .morie_iv_kclass_native(d$y, d$X, d$Z, kappa = 1,
-                                      robust = FALSE)
+    d <- .morie_iv_design(
+      data, outcome, treatment, instrument,
+      covariates
+    )
+    fit_iv <- .morie_iv_kclass_native(d$y, d$X, d$Z,
+      kappa = 1,
+      robust = FALSE
+    )
     late <- fit_iv$beta[[treatment]]
     se <- fit_iv$se[[treatment]]
   }
@@ -767,9 +784,11 @@ morie_sensitivity_rosenbaum <- function(treated, control,
     # rbounds::psens() reports (cross-validated in tests).
     tab <- lapply(gamma_range, function(gamma) {
       b <- .morie_psens_wilcoxon(treated, control, gamma)
-      data.frame(gamma = gamma,
-                 p_lower = as.numeric(b[["p_lower"]]),
-                 p_upper = as.numeric(b[["p_upper"]]))
+      data.frame(
+        gamma = gamma,
+        p_lower = as.numeric(b[["p_lower"]]),
+        p_upper = as.numeric(b[["p_upper"]])
+      )
     })
     return(do.call(rbind, tab))
   }
@@ -824,8 +843,10 @@ morie_sensitivity_rosenbaum <- function(treated, control,
 #' @export
 morie_estimate_g_computation <- function(data, treatment, outcome,
                                          covariates,
-                                         outcome_model = c("linear",
-                                                           "logistic")) {
+                                         outcome_model = c(
+                                           "linear",
+                                           "logistic"
+                                         )) {
   outcome_model <- match.arg(outcome_model)
   fam <- if (outcome_model == "logistic") {
     stats::binomial()
@@ -838,19 +859,24 @@ morie_estimate_g_computation <- function(data, treatment, outcome,
   fit <- stats::glm(formula, data = data, family = fam)
 
   if (.causal_have_stdreg()) {
-    res <- tryCatch({
-      std <- stdReg::stdGlm(fit = fit, data = data, X = treatment,
-                            x = c(0, 1))
-      sm <- summary(std, contrast = "difference", reference = 0)
-      # sm$est.table is a matrix with rows for each x and cols
-      # Estimate / Std. Error / lower / upper.
-      tab <- sm$est.table
-      ate_idx <- which(rownames(tab) == "1")
-      ate <- as.numeric(tab[ate_idx, "Estimate"])
-      se  <- as.numeric(tab[ate_idx, "Std. Error"])
-      ci  <- .wald_ci(ate, se)
-      list(ate = ate, se = se, ci_lower = ci[1], ci_upper = ci[2])
-    }, error = function(e) NULL)
+    res <- tryCatch(
+      {
+        std <- stdReg::stdGlm(
+          fit = fit, data = data, X = treatment,
+          x = c(0, 1)
+        )
+        sm <- summary(std, contrast = "difference", reference = 0)
+        # sm$est.table is a matrix with rows for each x and cols
+        # Estimate / Std. Error / lower / upper.
+        tab <- sm$est.table
+        ate_idx <- which(rownames(tab) == "1")
+        ate <- as.numeric(tab[ate_idx, "Estimate"])
+        se <- as.numeric(tab[ate_idx, "Std. Error"])
+        ci <- .wald_ci(ate, se)
+        list(ate = ate, se = se, ci_lower = ci[1], ci_upper = ci[2])
+      },
+      error = function(e) NULL
+    )
     if (!is.null(res)) {
       return(res)
     }
@@ -868,7 +894,6 @@ morie_estimate_g_computation <- function(data, treatment, outcome,
   ci <- .wald_ci(ate, se)
   list(ate = ate, se = se, ci_lower = ci[1], ci_upper = ci[2])
 }
-
 
 
 # ---------------------------------------------------------------------------
@@ -970,8 +995,9 @@ morie_estimate_double_ml <- function(data, outcome, treatment, covariates,
   n <- nrow(prep$frame)
   z <- 1.959964
   out <- .morie_dml_plr_native(prep$X, prep$y, prep$d,
-                               n_folds = n_folds, n_rep = n_rep,
-                               random_state = random_state)
+    n_folds = n_folds, n_rep = n_rep,
+    random_state = random_state
+  )
   list(
     ate = out$theta, se = out$se,
     ci_lower = out$theta - z * out$se,
@@ -997,7 +1023,8 @@ morie_estimate_double_ml <- function(data, outcome, treatment, covariates,
   A <- crossprod(Xs_tr) + lambda * diag(p)
   b <- crossprod(Xs_tr, y_tr - yc)
   beta <- tryCatch(solve(A, b),
-                   error = function(e) .morie_ginv(A) %*% b)
+    error = function(e) .morie_ginv(A) %*% b
+  )
   as.numeric(Xs_te %*% beta) + yc
 }
 
@@ -1041,7 +1068,8 @@ morie_estimate_double_ml <- function(data, outcome, treatment, covariates,
 #' @examples
 #' set.seed(1)
 #' x <- cumsum(rnorm(100))
-#' y <- 1.5 * x + rnorm(100); y[71:100] <- y[71:100] + 5
+#' y <- 1.5 * x + rnorm(100)
+#' y[71:100] <- y[71:100] + 5
 #' df <- data.frame(y = y, x = x)
 #' res <- try(morie_causal_impact(df, c(1, 70), c(71, 100)))
 #' if (!inherits(res, "try-error")) str(res, max.level = 1)
@@ -1135,8 +1163,10 @@ morie_causal_weighting <- function(data, treatment, covariates,
   formula <- stats::as.formula(
     paste(treatment, "~", paste(covariates, collapse = " + "))
   )
-  w <- WeightIt::weightit(formula, data = data, method = method,
-                          estimand = estimand, ...)
+  w <- WeightIt::weightit(formula,
+    data = data, method = method,
+    estimand = estimand, ...
+  )
   wt <- as.numeric(w$weights)
   ess <- (sum(wt)^2) / sum(wt^2)
   list(

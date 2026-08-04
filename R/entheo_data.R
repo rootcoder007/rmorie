@@ -51,8 +51,10 @@ load_dmt_imaging <- function(subject_id = NULL, root = NULL) {
     parsed <- suppressWarnings(as.integer(sid_chars))
     needs_extract <- is.na(parsed) & nzchar(sid_chars)
     if (any(needs_extract)) {
-      digit_match <- regmatches(sid_chars[needs_extract],
-                                  regexpr("[0-9]+", sid_chars[needs_extract]))
+      digit_match <- regmatches(
+        sid_chars[needs_extract],
+        regexpr("[0-9]+", sid_chars[needs_extract])
+      )
       parsed[needs_extract] <- suppressWarnings(as.integer(digit_match))
     }
     subs <- sprintf("%02d", parsed)

@@ -35,7 +35,7 @@
 NULL
 
 
-.MORIE_FAIRNESS_FOUR_FIFTHS <- 0.8  # EEOC four-fifths threshold
+.MORIE_FAIRNESS_FOUR_FIFTHS <- 0.8 # EEOC four-fifths threshold
 
 
 # ---------------------------------------------------------------------------
@@ -65,8 +65,6 @@ NULL
   class(out) <- c("morie_fairness_result", "morie_rich_result", "list")
   out
 }
-
-
 
 
 # ---------------------------------------------------------------------------

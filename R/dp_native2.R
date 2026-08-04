@@ -74,17 +74,23 @@ morie_dp_covariance <- function(X, C = 1, epsilon = 1, delta = 1e-5,
   } else {
     raw
   }
-  list(release = out, raw = raw, sigma = sigma, clipped_fraction = clipped,
-       n_negative_eigenvalues = as.integer(n_neg), epsilon = bud$epsilon,
-       delta = bud$delta, C = C, n = n,
-       warnings = if (n_neg > p %/% 2) {
-         sprintf(paste("%d of %d eigenvalues were negative before projection;",
-                       "the budget may be too small for this dimension"),
-                 n_neg, p)
-       } else {
-         character(0)
-       },
-       method = "dp_covariance")
+  list(
+    release = out, raw = raw, sigma = sigma, clipped_fraction = clipped,
+    n_negative_eigenvalues = as.integer(n_neg), epsilon = bud$epsilon,
+    delta = bud$delta, C = C, n = n,
+    warnings = if (n_neg > p %/% 2) {
+      sprintf(
+        paste(
+          "%d of %d eigenvalues were negative before projection;",
+          "the budget may be too small for this dimension"
+        ),
+        n_neg, p
+      )
+    } else {
+      character(0)
+    },
+    method = "dp_covariance"
+  )
 }
 
 
@@ -120,29 +126,35 @@ morie_dp_pca <- function(X, k = 2, epsilon = 1, delta = 1e-5, C = 1,
   if (k < 1L || k > p) {
     stop(sprintf("k must be between 1 and %d", p), call. = FALSE)
   }
-  cov <- morie_dp_covariance(X, C = C, epsilon = epsilon, delta = delta,
-                             seed = seed)
-  ev <- eigen(cov$release, symmetric = TRUE)      # already descending
+  cov <- morie_dp_covariance(X,
+    C = C, epsilon = epsilon, delta = delta,
+    seed = seed
+  )
+  ev <- eigen(cov$release, symmetric = TRUE) # already descending
   vals <- ev$values
   vecs <- ev$vectors
   gap <- if (k < p) vals[k] - vals[k + 1L] else Inf
   total <- sum(pmax(vals, 0))
   warn <- cov$warnings
   if (is.finite(gap) && vals[1L] > 0 && gap < 0.05 * vals[1L]) {
-    warn <- c(warn, paste("the eigengap is small relative to the leading",
-                          "eigenvalue; individual components are unstable,",
-                          "though the subspace they span may not be"))
+    warn <- c(warn, paste(
+      "the eigengap is small relative to the leading",
+      "eigenvalue; individual components are unstable,",
+      "though the subspace they span may not be"
+    ))
   }
-  list(components = vecs[, seq_len(k), drop = FALSE], eigenvalues = vals,
-       eigengap = gap,
-       explained_variance_ratio = if (total > 0) {
-         pmax(vals[seq_len(k)], 0) / total
-       } else {
-         rep(NA_real_, k)
-       },
-       scores = X %*% vecs[, seq_len(k), drop = FALSE],
-       covariance = cov$release, epsilon = cov$epsilon, delta = cov$delta,
-       warnings = warn, method = "dp_pca")
+  list(
+    components = vecs[, seq_len(k), drop = FALSE], eigenvalues = vals,
+    eigengap = gap,
+    explained_variance_ratio = if (total > 0) {
+      pmax(vals[seq_len(k)], 0) / total
+    } else {
+      rep(NA_real_, k)
+    },
+    scores = X %*% vecs[, seq_len(k), drop = FALSE],
+    covariance = cov$release, epsilon = cov$epsilon, delta = cov$delta,
+    warnings = warn, method = "dp_pca"
+  )
 }
 
 
@@ -176,19 +188,29 @@ morie_dp_minmax <- function(x, epsilon = 1, a = NULL, b = NULL, alpha = 0.01,
   }
   v <- as.numeric(x)
   half <- as.numeric(epsilon) / 2
-  lo <- morie_dp_quantile(v, q = alpha, epsilon = half, a = a, b = b,
-                          seed = seed)
-  hi <- morie_dp_quantile(v, q = 1 - alpha, epsilon = half, a = a, b = b,
-                          seed = if (is.null(seed)) NULL else seed + 1L)
-  list(lower = lo$release, upper = hi$release, alpha = alpha,
-       epsilon = as.numeric(epsilon), epsilon_each = half,
-       true_min = min(v), true_max = max(v),
-       warnings = c(lo$warnings,
-                    paste("these are the alpha and 1-alpha quantiles, NOT the",
-                          "minimum and maximum -- the true extremes are each",
-                          "determined by one record and cannot be released",
-                          "privately")),
-       method = "dp_minmax")
+  lo <- morie_dp_quantile(v,
+    q = alpha, epsilon = half, a = a, b = b,
+    seed = seed
+  )
+  hi <- morie_dp_quantile(v,
+    q = 1 - alpha, epsilon = half, a = a, b = b,
+    seed = if (is.null(seed)) NULL else seed + 1L
+  )
+  list(
+    lower = lo$release, upper = hi$release, alpha = alpha,
+    epsilon = as.numeric(epsilon), epsilon_each = half,
+    true_min = min(v), true_max = max(v),
+    warnings = c(
+      lo$warnings,
+      paste(
+        "these are the alpha and 1-alpha quantiles, NOT the",
+        "minimum and maximum -- the true extremes are each",
+        "determined by one record and cannot be released",
+        "privately"
+      )
+    ),
+    method = "dp_minmax"
+  )
 }
 
 
@@ -217,12 +239,16 @@ morie_privacy_amplification <- function(epsilon, q, delta = 0) {
   q <- as.numeric(q)[1L]
   if (q <= 0 || q > 1) stop("q must be in (0, 1]", call. = FALSE)
   eps_a <- log1p(q * expm1(eps))
-  list(epsilon_amplified = eps_a, delta_amplified = q * as.numeric(delta),
-       ratio = eps_a / eps, linear_approx = q * eps, epsilon = eps, q = q,
-       warnings = paste("amplification holds only for secret, freshly drawn",
-                        "subsamples; a fixed or observable subsample gives",
-                        "none"),
-       method = "privacy_amplification")
+  list(
+    epsilon_amplified = eps_a, delta_amplified = q * as.numeric(delta),
+    ratio = eps_a / eps, linear_approx = q * eps, epsilon = eps, q = q,
+    warnings = paste(
+      "amplification holds only for secret, freshly drawn",
+      "subsamples; a fixed or observable subsample gives",
+      "none"
+    ),
+    method = "privacy_amplification"
+  )
 }
 
 
@@ -262,9 +288,11 @@ morie_renyi_dp_composition <- function(epsilons, alpha = 2, delta = 1e-5) {
   }
   total <- sum(eps)
   penalty <- log(1 / delta) / (alpha - 1)
-  list(rdp_total = total, epsilon = total + penalty, delta = delta,
-       alpha = alpha, k = length(eps), conversion_penalty = penalty,
-       method = "renyi_dp_composition")
+  list(
+    rdp_total = total, epsilon = total + penalty, delta = delta,
+    alpha = alpha, k = length(eps), conversion_penalty = penalty,
+    method = "renyi_dp_composition"
+  )
 }
 
 
@@ -289,8 +317,10 @@ morie_renyi_dp_composition <- function(epsilons, alpha = 2, delta = 1e-5) {
 #'   \code{noise_scale}, \code{direction}.
 #' @references Dwork, C. and Roth, A. (2014). \emph{FnTTCS}, 9(3-4).
 #' @examples
-#' round(morie_dp_release_calibration(1, target_error = 0.01,
-#'                                    n = 1000)$epsilon, 4)
+#' round(morie_dp_release_calibration(1,
+#'   target_error = 0.01,
+#'   n = 1000
+#' )$epsilon, 4)
 #' @export
 morie_dp_release_calibration <- function(sensitivity = 1, target_error = NULL,
                                          epsilon = NULL, confidence = 0.95,
@@ -318,16 +348,20 @@ morie_dp_release_calibration <- function(sensitivity = 1, target_error = NULL,
     direction <- "epsilon -> error"
   }
   b <- sensitivity / (n * eps)
-  list(epsilon = eps, half_width = w, noise_scale = b,
-       noise_sd = sqrt(2) * b, direction = direction,
-       sensitivity = sensitivity, confidence = confidence, n = n,
-       warnings = if (eps > 10) {
-         paste("epsilon exceeds 10, so the likelihood ratio is above 22000",
-               "and the guarantee is close to vacuous")
-       } else {
-         character(0)
-       },
-       method = "dp_release_calibration")
+  list(
+    epsilon = eps, half_width = w, noise_scale = b,
+    noise_sd = sqrt(2) * b, direction = direction,
+    sensitivity = sensitivity, confidence = confidence, n = n,
+    warnings = if (eps > 10) {
+      paste(
+        "epsilon exceeds 10, so the likelihood ratio is above 22000",
+        "and the guarantee is close to vacuous"
+      )
+    } else {
+      character(0)
+    },
+    method = "dp_release_calibration"
+  )
 }
 
 
@@ -363,17 +397,23 @@ morie_epsilon_dp <- function(mech, D, D_prime, n_samples = 20000, bins = 50,
   old <- .morie_dp_seed(seed)
   on.exit(.morie_dp_unseed(old), add = TRUE)
   n_samples <- as.integer(n_samples)
-  a <- vapply(seq_len(n_samples), function(i) as.numeric(mech(D))[1L],
-              numeric(1))
-  b <- vapply(seq_len(n_samples), function(i) as.numeric(mech(D_prime))[1L],
-              numeric(1))
+  a <- vapply(
+    seq_len(n_samples), function(i) as.numeric(mech(D))[1L],
+    numeric(1)
+  )
+  b <- vapply(
+    seq_len(n_samples), function(i) as.numeric(mech(D_prime))[1L],
+    numeric(1)
+  )
   lo <- min(a, b)
   hi <- max(a, b)
   if (lo == hi) {
-    return(list(epsilon_empirical = Inf, max_log_ratio = Inf,
-                n_usable_bins = 0L, n_excluded_bins = 0L,
-                warnings = "the mechanism is deterministic; it provides no privacy",
-                method = "epsilon_dp"))
+    return(list(
+      epsilon_empirical = Inf, max_log_ratio = Inf,
+      n_usable_bins = 0L, n_excluded_bins = 0L,
+      warnings = "the mechanism is deterministic; it provides no privacy",
+      method = "epsilon_dp"
+    ))
   }
   edges <- seq(lo, hi, length.out = as.integer(bins) + 1L)
   nb <- length(edges) - 1L
@@ -389,13 +429,17 @@ morie_epsilon_dp <- function(mech, D, D_prime, n_samples = 20000, bins = 50,
   } else {
     max(abs(log((ca[usable] / sum(ca)) / (cb[usable] / sum(cb)))))
   }
-  list(epsilon_empirical = ratio, max_log_ratio = ratio,
-       n_usable_bins = as.integer(sum(usable)),
-       n_excluded_bins = as.integer(sum(!usable)),
-       n_samples = n_samples,
-       warnings = paste("this is a LOWER bound from one dataset pair: it can",
-                        "disprove a claimed guarantee but never establish one"),
-       method = "epsilon_dp")
+  list(
+    epsilon_empirical = ratio, max_log_ratio = ratio,
+    n_usable_bins = as.integer(sum(usable)),
+    n_excluded_bins = as.integer(sum(!usable)),
+    n_samples = n_samples,
+    warnings = paste(
+      "this is a LOWER bound from one dataset pair: it can",
+      "disprove a claimed guarantee but never establish one"
+    ),
+    method = "epsilon_dp"
+  )
 }
 
 
@@ -415,25 +459,33 @@ morie_epsilon_dp <- function(mech, D, D_prime, n_samples = 20000, bins = 50,
 #' @examples
 #' set.seed(1)
 #' m <- function(d) sum(d) + morie_dp_laplace_mechanism(0, 1, 1)$release
-#' morie_approx_dp(m, rep(1, 10), rep(1, 9), epsilon = 1,
-#'                 n_samples = 2000)$delta_empirical < 1
+#' morie_approx_dp(m, rep(1, 10), rep(1, 9),
+#'   epsilon = 1,
+#'   n_samples = 2000
+#' )$delta_empirical < 1
 #' @export
 morie_approx_dp <- function(mech, D, D_prime, epsilon = 1, n_samples = 20000,
                             bins = 50, seed = NULL) {
   old <- .morie_dp_seed(seed)
   on.exit(.morie_dp_unseed(old), add = TRUE)
   n_samples <- as.integer(n_samples)
-  a <- vapply(seq_len(n_samples), function(i) as.numeric(mech(D))[1L],
-              numeric(1))
-  b <- vapply(seq_len(n_samples), function(i) as.numeric(mech(D_prime))[1L],
-              numeric(1))
+  a <- vapply(
+    seq_len(n_samples), function(i) as.numeric(mech(D))[1L],
+    numeric(1)
+  )
+  b <- vapply(
+    seq_len(n_samples), function(i) as.numeric(mech(D_prime))[1L],
+    numeric(1)
+  )
   lo <- min(a, b)
   hi <- max(a, b)
   if (lo == hi) {
-    return(list(delta_empirical = 1, epsilon = as.numeric(epsilon),
-                n_violating_bins = 0L,
-                warnings = "the mechanism is deterministic; it provides no privacy",
-                method = "approx_dp"))
+    return(list(
+      delta_empirical = 1, epsilon = as.numeric(epsilon),
+      n_violating_bins = 0L,
+      warnings = "the mechanism is deterministic; it provides no privacy",
+      method = "approx_dp"
+    ))
   }
   edges <- seq(lo, hi, length.out = as.integer(bins) + 1L)
   nb <- length(edges) - 1L
@@ -446,12 +498,16 @@ morie_approx_dp <- function(mech, D, D_prime, epsilon = 1, n_samples = 20000,
   pb <- cb / max(sum(cb), 1)
   viol <- pa > exp(epsilon) * pb
   delta <- sum(pmax(pa[viol] - exp(epsilon) * pb[viol], 0))
-  list(delta_empirical = delta, epsilon = as.numeric(epsilon),
-       n_violating_bins = as.integer(sum(viol)), n_samples = n_samples,
-       warnings = paste("a lower bound from one dataset pair; and note that",
-                        "delta is not slack -- at delta = 1/n a per-record",
-                        "leak is permitted"),
-       method = "approx_dp")
+  list(
+    delta_empirical = delta, epsilon = as.numeric(epsilon),
+    n_violating_bins = as.integer(sum(viol)), n_samples = n_samples,
+    warnings = paste(
+      "a lower bound from one dataset pair; and note that",
+      "delta is not slack -- at delta = 1/n a per-record",
+      "leak is permitted"
+    ),
+    method = "approx_dp"
+  )
 }
 
 
@@ -483,20 +539,26 @@ morie_dp_unit_definition <- function(records, unit = NULL) {
   units <- names(tb)
   counts <- as.integer(tb)
   mx <- max(counts)
-  out <- list(n_records = length(r), n_units = length(counts),
-              max_contribution = mx, sensitivity_multiplier = mx,
-              units = units, contributions = counts,
-              mean_contribution = mean(counts),
-              warnings = if (mx > 1L) {
-                sprintf(paste("one unit contributes %d records, so a",
-                              "sensitivity computed per record understates",
-                              "the unit-level sensitivity by %dx; either",
-                              "multiply the noise or cap contributions first"),
-                        mx, mx)
-              } else {
-                character(0)
-              },
-              method = "dp_unit_definition")
+  out <- list(
+    n_records = length(r), n_units = length(counts),
+    max_contribution = mx, sensitivity_multiplier = mx,
+    units = units, contributions = counts,
+    mean_contribution = mean(counts),
+    warnings = if (mx > 1L) {
+      sprintf(
+        paste(
+          "one unit contributes %d records, so a",
+          "sensitivity computed per record understates",
+          "the unit-level sensitivity by %dx; either",
+          "multiply the noise or cap contributions first"
+        ),
+        mx, mx
+      )
+    } else {
+      character(0)
+    },
+    method = "dp_unit_definition"
+  )
   if (!is.null(unit)) out$unit_contribution <- sum(r == unit)
   out
 }

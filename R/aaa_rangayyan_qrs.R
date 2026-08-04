@@ -34,7 +34,8 @@
   n <- length(x)
   if (n < 2L) stop("DFT needs at least two samples")
   j <- seq_len(n) - 1
-  re <- numeric(n); im <- numeric(n)
+  re <- numeric(n)
+  im <- numeric(n)
   for (k in seq_len(n) - 1L) {
     w <- -2 * pi * k / n
     re[k + 1L] <- .morie_fsum(x * cos(w * j))
@@ -51,7 +52,8 @@
   ks <- 0:nyq
   power <- numeric(length(ks))
   for (kk in ks) {
-    re <- sp$re[kk + 1L]; im <- sp$im[kk + 1L]
+    re <- sp$re[kk + 1L]
+    im <- sp$im[kk + 1L]
     p <- (re * re + im * im) / (fs * n)
     if (kk > 0L && kk < n - kk) p <- p * 2
     power[kk + 1L] <- p
@@ -68,7 +70,8 @@
   for (i in seq_len(n) - 1L) {
     gi <- g[i + 1L]
     if (gi <= th) next
-    lo <- max(0L, i - m); hi <- min(n, i + m + 1L)
+    lo <- max(0L, i - m)
+    hi <- min(n, i + m + 1L)
     ok <- TRUE
     if (lo <= i - 1L) ok <- all(gi > g[(lo + 1L):i])
     if (ok && (i + 1L) <= (hi - 1L)) ok <- all(gi > g[(i + 2L):hi])
@@ -107,8 +110,8 @@
   out <- numeric(n)
   for (i in seq_len(n) - 1L) {
     out[i + 1L] <- (2 * x[i + 1L] + (if (i >= 1L) x[i] else 0) -
-                      (if (i >= 3L) x[i - 2L] else 0) -
-                      2 * (if (i >= 4L) x[i - 3L] else 0)) / 8
+      (if (i >= 3L) x[i - 2L] else 0) -
+      2 * (if (i >= 4L) x[i - 3L] else 0)) / 8
   }
   out
 }
@@ -124,20 +127,24 @@
 
 .morie_qrs_corr <- function(a, b) {
   n <- length(a)
-  if (n != length(b) || n < 2L)
+  if (n != length(b) || n < 2L) {
     stop("correlation needs two equal-length series of length >= 2")
+  }
   ma <- .morie_fsum(a) / n
   mb <- .morie_fsum(b) / n
   sa <- .morie_fsum((a - ma)^2)
   sb <- .morie_fsum((b - mb)^2)
-  if (sa <= 0 || sb <= 0) return(0)
+  if (sa <= 0 || sb <= 0) {
+    return(0)
+  }
   .morie_fsum((a - ma) * (b - mb)) / sqrt(sa * sb)
 }
 
 .morie_qrs_check <- function(x, least = 1L, what = "signal") {
   v <- if (is.null(x)) numeric(0) else as.numeric(x)
-  if (length(v) < least)
+  if (length(v) < least) {
     stop(sprintf("%s needs at least %d samples, got %d", what, least, length(v)))
+  }
   v
 }
 
@@ -177,8 +184,9 @@ BlWander <- function(ecg, fs, pole = 0.995) {
   fsv <- as.numeric(fs)
   if (fsv <= 0) stop("fs must be positive")
   a <- as.numeric(pole)
-  if (!(a >= 0 && a < 1))
+  if (!(a >= 0 && a < 1)) {
     stop(sprintf("the pole must lie inside the unit circle, 0 <= pole < 1; got %g", a))
+  }
   y <- numeric(n)
   prev <- 0
   for (i in seq_len(n - 1L) + 1L) {
@@ -189,19 +197,27 @@ BlWander <- function(ecg, fs, pole = 0.995) {
     w <- 2 * pi * f / fsv
     num <- complex(real = 1 - cos(w), imaginary = sin(w))
     den <- complex(real = 1 - a * cos(w), imaginary = a * sin(w))
-    if (Mod(den) == 0) return(Inf)
+    if (Mod(den) == 0) {
+      return(Inf)
+    }
     Mod(num / den) * fsv
   }
-  g0 <- gain(0); ghalf <- gain(0.5); gnyq <- gain(fsv / 2)
-  list(ecg_detrended = y, n = n, fs = fsv, pole = a,
-       gain_dc = g0, gain_at_half_hz = ghalf, gain_at_nyquist = gnyq,
-       gain_relative_at_half_hz = if (gnyq > 0) ghalf / gnyq else NULL,
-       dc_is_rejected = g0 < 1e-12,
-       zero_at_z_equals_one = TRUE,
-       pole_restores_gain_above_the_wander_band = TRUE,
-       differentiates_by_the_one_over_T_factor = TRUE,
-       method = paste0("Rangayyan (2024) eqs. (3.132)-(3.133), modified ",
-                       "first-order difference for baseline-wander removal"))
+  g0 <- gain(0)
+  ghalf <- gain(0.5)
+  gnyq <- gain(fsv / 2)
+  list(
+    ecg_detrended = y, n = n, fs = fsv, pole = a,
+    gain_dc = g0, gain_at_half_hz = ghalf, gain_at_nyquist = gnyq,
+    gain_relative_at_half_hz = if (gnyq > 0) ghalf / gnyq else NULL,
+    dc_is_rejected = g0 < 1e-12,
+    zero_at_z_equals_one = TRUE,
+    pole_restores_gain_above_the_wander_band = TRUE,
+    differentiates_by_the_one_over_T_factor = TRUE,
+    method = paste0(
+      "Rangayyan (2024) eqs. (3.132)-(3.133), modified ",
+      "first-order difference for baseline-wander removal"
+    )
+  )
 }
 
 
@@ -224,20 +240,26 @@ DicNotch <- function(cp, fs, qrs = NULL, mwin = 16) {
   for (i in seq_len(n) - 1L) {
     kk <- 1:mwin
     kk <- kk[i - kk + 1L >= 0L]
-    s[i + 1L] <- if (length(kk))
-      .morie_fsum(p[i - kk + 2L]^2 * (mwin - kk + 1L)) else 0
+    s[i + 1L] <- if (length(kk)) {
+      .morie_fsum(p[i - kk + 2L]^2 * (mwin - kk + 1L))
+    } else {
+      0
+    }
   }
   tol <- max(1L, as.integer(round(0.020 * fs)))
   guard <- max(1L, as.integer(round(0.050 * fs)))
   localmin <- function(centre) {
-    lo <- max(0L, centre - tol); hi <- min(n, centre + tol + 1L)
+    lo <- max(0L, centre - tol)
+    hi <- min(n, centre + tol + 1L)
     .morie_qrs_argmin(cp, lo, hi)
   }
-  notch <- integer(0); upstroke <- integer(0)
+  notch <- integer(0)
+  upstroke <- integer(0)
   if (!is.null(qrs)) {
     span <- as.integer(round(0.500 * fs))
     for (q in as.integer(qrs)) {
-      lo <- max(0L, q); hi <- min(n, q + span)
+      lo <- max(0L, q)
+      hi <- min(n, q + span)
       if (hi - lo < 3L * guard) next
       sseg <- s[(lo + 1L):hi]
       pk <- .morie_qrs_peaks(sseg, 0.25 * max(sseg), guard)
@@ -248,14 +270,21 @@ DicNotch <- function(cp, fs, qrs = NULL, mwin = 16) {
   } else {
     pk <- .morie_qrs_peaks(s, 0.25 * max(s), guard)
     for (j in seq_along(pk)) {
-      if ((j - 1L) %% 2L == 0L) upstroke <- c(upstroke, pk[j])
-      else notch <- c(notch, localmin(pk[j]))
+      if ((j - 1L) %% 2L == 0L) {
+        upstroke <- c(upstroke, pk[j])
+      } else {
+        notch <- c(notch, localmin(pk[j]))
+      }
     }
   }
-  list(notch = notch, upstroke = upstroke, s = s, p = p,
-       mwin = mwin, fs = fs, tolerancems = 20,
-       method = paste0("dicrotic notch detection, Rangayyan (2024) Section ",
-                       "4.3.5, Eqs 4.22 and 4.23 (Lehner and Rangayyan)"))
+  list(
+    notch = notch, upstroke = upstroke, s = s, p = p,
+    mwin = mwin, fs = fs, tolerancems = 20,
+    method = paste0(
+      "dicrotic notch detection, Rangayyan (2024) Section ",
+      "4.3.5, Eqs 4.22 and 4.23 (Lehner and Rangayyan)"
+    )
+  )
 }
 
 
@@ -268,8 +297,9 @@ CPulseFeat <- function(cp, fs, qrs, hr = NULL) {
   q <- as.integer(qrs)
   if (length(q) < 1L) stop("need at least one QRS position")
   if (is.null(hr)) {
-    if (length(q) < 2L)
+    if (length(q) < 2L) {
       stop("hr must be given when fewer than two QRS positions are supplied")
+    }
     hr <- 60 * fs / (.morie_fsum(diff(q)) / (length(q) - 1L))
   }
   hr <- as.numeric(hr)
@@ -281,11 +311,14 @@ CPulseFeat <- function(cp, fs, qrs, hr = NULL) {
   n <- length(cp)
   span <- as.integer(round(0.500 * fs))
 
-  perc <- integer(0); dicw <- integer(0)
-  pep <- numeric(0); et <- numeric(0)
+  perc <- integer(0)
+  dicw <- integer(0)
+  pep <- numeric(0)
+  et <- numeric(0)
   kmax <- min(length(notch), length(ups))
   for (k in seq_len(kmax)) {
-    u <- ups[k]; d <- notch[k]
+    u <- ups[k]
+    d <- notch[k]
     if (d <= u) next
     perc <- c(perc, .morie_qrs_argmax(cp, u, d))
     hi <- min(n, d + as.integer(round(0.200 * fs)))
@@ -296,15 +329,19 @@ CPulseFeat <- function(cp, fs, qrs, hr = NULL) {
   }
   pepc <- pep + 0.4 * hr
   etc <- et + 1.6 * hr
-  list(upstroke = ups, percussion = perc, notch = notch, dicwave = dicw,
-       pep = pep, et = et, pepc = pepc, etc = etc,
-       peppmean = .morie_qrs_mean(pep), etmean = .morie_qrs_mean(et),
-       pepcmean = .morie_qrs_mean(pepc), etcmean = .morie_qrs_mean(etc),
-       hr = hr, fs = fs,
-       normpepc = c(131, 13), normetcmale = c(395, 13),
-       normetcfemale = c(415, 11),
-       method = paste0("carotid pulse features and systolic time intervals, ",
-                       "Rangayyan (2024) Sections 1.2.10 and 4.9"))
+  list(
+    upstroke = ups, percussion = perc, notch = notch, dicwave = dicw,
+    pep = pep, et = et, pepc = pepc, etc = etc,
+    peppmean = .morie_qrs_mean(pep), etmean = .morie_qrs_mean(et),
+    pepcmean = .morie_qrs_mean(pepc), etcmean = .morie_qrs_mean(etc),
+    hr = hr, fs = fs,
+    normpepc = c(131, 13), normetcmale = c(395, 13),
+    normetcfemale = c(415, 11),
+    method = paste0(
+      "carotid pulse features and systolic time intervals, ",
+      "Rangayyan (2024) Sections 1.2.10 and 4.9"
+    )
+  )
 }
 
 
@@ -354,12 +391,16 @@ QrsDeriv <- function(x, fs, thresh = 1) {
       i <- i + 1L
     }
   }
-  list(qrs = qrs, y0 = y0, y1 = y1, y2 = y2, y3 = y3, mask = mask,
-       thresh = thresh, fs = fs,
-       hr = if (length(qrs)) 60 * length(qrs) / (n / fs) else 0,
-       method = paste0("derivative-based QRS detection, Rangayyan (2024) ",
-                       "Section 4.3.1, Eqs 4.1-4.3 with the 8-point MA of ",
-                       "Eq 3.108 (Balda et al.)"))
+  list(
+    qrs = qrs, y0 = y0, y1 = y1, y2 = y2, y3 = y3, mask = mask,
+    thresh = thresh, fs = fs,
+    hr = if (length(qrs)) 60 * length(qrs) / (n / fs) else 0,
+    method = paste0(
+      "derivative-based QRS detection, Rangayyan (2024) ",
+      "Section 4.3.1, Eqs 4.1-4.3 with the 8-point MA of ",
+      "Eq 3.108 (Balda et al.)"
+    )
+  )
 }
 
 
@@ -370,13 +411,17 @@ EcgEmgCpl <- function(ecg, emg, qrs, fs) {
   fs <- .morie_qrs_fs(fs)
   ecg <- .morie_qrs_check(ecg, 16L, "ECG")
   emg <- .morie_qrs_check(emg, 16L, "EMG")
-  if (length(ecg) != length(emg))
+  if (length(ecg) != length(emg)) {
     stop("ECG and EMG must have the same length and rate")
+  }
   q <- as.integer(qrs)
   if (length(q) < 3L) stop("need at least three QRS positions")
-  hr <- numeric(0); rms <- numeric(0); mnf <- numeric(0)
+  hr <- numeric(0)
+  rms <- numeric(0)
+  mnf <- numeric(0)
   for (k in seq_len(length(q) - 1L) + 1L) {
-    a <- q[k - 1L]; b <- q[k]
+    a <- q[k - 1L]
+    b <- q[k]
     if (b - a < 8L) next
     seg <- emg[(a + 1L):b]
     mu <- .morie_fsum(seg) / length(seg)
@@ -385,17 +430,25 @@ EcgEmgCpl <- function(ecg, emg, qrs, fs) {
     rms <- c(rms, sqrt(.morie_fsum(seg * seg) / length(seg)))
     sp <- .morie_qrs_psd(seg, fs)
     tot <- .morie_fsum(sp$power)
-    mnf <- c(mnf, if (tot > 0)
-      .morie_fsum(sp$freqs * sp$power) / tot else 0)
+    mnf <- c(mnf, if (tot > 0) {
+      .morie_fsum(sp$freqs * sp$power) / tot
+    } else {
+      0
+    })
   }
-  if (length(hr) < 2L)
+  if (length(hr) < 2L) {
     stop("too few usable cardiac cycles for a coupling estimate")
-  list(hr = hr, rms = rms, meanfreq = mnf,
-       rrms = .morie_qrs_corr(hr, rms), rmnf = .morie_qrs_corr(hr, mnf),
-       nbeats = length(hr), fs = fs,
-       method = paste0("per-cycle EMG RMS and mean frequency correlated with ",
-                       "instantaneous heart rate, Rangayyan (2024) Sections ",
-                       "2.2.5 and 2.2.6"))
+  }
+  list(
+    hr = hr, rms = rms, meanfreq = mnf,
+    rrms = .morie_qrs_corr(hr, rms), rmnf = .morie_qrs_corr(hr, mnf),
+    nbeats = length(hr), fs = fs,
+    method = paste0(
+      "per-cycle EMG RMS and mean frequency correlated with ",
+      "instantaneous heart rate, Rangayyan (2024) Sections ",
+      "2.2.5 and 2.2.6"
+    )
+  )
 }
 
 
@@ -415,16 +468,23 @@ EcgFeat <- function(x, qrs, fs) {
   twinlo <- max(1L, as.integer(round(0.100 * fs)))
   twinhi <- max(2L, as.integer(round(0.450 * fs)))
 
-  pamp <- numeric(0); ramp <- numeric(0); qamp <- numeric(0)
-  samp <- numeric(0); tamp <- numeric(0)
-  qrsdur <- numeric(0); pdur <- numeric(0); tdur <- numeric(0)
-  prdur <- numeric(0); qtdur <- numeric(0)
+  pamp <- numeric(0)
+  ramp <- numeric(0)
+  qamp <- numeric(0)
+  samp <- numeric(0)
+  tamp <- numeric(0)
+  qrsdur <- numeric(0)
+  pdur <- numeric(0)
+  tdur <- numeric(0)
+  prdur <- numeric(0)
+  qtdur <- numeric(0)
 
   for (pos in q) {
     a <- max(0L, pos - pqa)
     b <- max(a + 1L, pos - pqb)
     ref <- .morie_fsum(x[(a + 1L):b]) / (b - a)
-    lo <- max(0L, pos - half); hi <- min(n, pos + half)
+    lo <- max(0L, pos - half)
+    hi <- min(n, pos + half)
     if (hi - lo < 3L) next
     r <- .morie_qrs_argmax(x, lo, hi)
     qi <- if (r > lo) .morie_qrs_argmin(x, lo, r + 1L) else r
@@ -441,38 +501,46 @@ EcgFeat <- function(x, qrs, fs) {
     while (qe < hi - 1L && abs(x[qe + 1L] - ref) > tol) qe <- qe + 1L
     qrsdur <- c(qrsdur, (qe - qs) / fs)
 
-    pa <- max(0L, qs - pwin); pb <- qs
+    pa <- max(0L, qs - pwin)
+    pb <- qs
     if (pb - pa >= 2L) {
       pidx <- pa + which.max(abs(x[(pa + 1L):pb] - ref)) - 1L
       pamp <- c(pamp, x[pidx + 1L] - ref)
       pmag <- max(abs(x[pidx + 1L] - ref), 1e-12)
-      ps <- pidx; pe <- pidx
+      ps <- pidx
+      pe <- pidx
       while (ps > pa && abs(x[ps + 1L] - ref) > 0.1 * pmag) ps <- ps - 1L
       while (pe < pb - 1L && abs(x[pe + 1L] - ref) > 0.1 * pmag) pe <- pe + 1L
       pdur <- c(pdur, (pe - ps) / fs)
       prdur <- c(prdur, (qs - ps) / fs)
     }
 
-    ta <- min(n - 1L, pos + twinlo); tb <- min(n, pos + twinhi)
+    ta <- min(n - 1L, pos + twinlo)
+    tb <- min(n, pos + twinhi)
     if (tb - ta >= 2L) {
       ti <- ta + which.max(abs(x[(ta + 1L):tb] - ref)) - 1L
       tamp <- c(tamp, x[ti + 1L] - ref)
       tmag <- max(abs(x[ti + 1L] - ref), 1e-12)
-      ts <- ti; te <- ti
+      ts <- ti
+      te <- ti
       while (ts > ta && abs(x[ts + 1L] - ref) > 0.1 * tmag) ts <- ts - 1L
       while (te < tb - 1L && abs(x[te + 1L] - ref) > 0.1 * tmag) te <- te + 1L
       tdur <- c(tdur, (te - ts) / fs)
       qtdur <- c(qtdur, (te - qs) / fs)
     }
   }
-  list(pamp = pamp, qamp = qamp, ramp = ramp, samp = samp, tamp = tamp,
-       qrsdur = qrsdur, pdur = pdur, tdur = tdur,
-       prdur = prdur, qtdur = qtdur,
-       qrsdurmean = .morie_qrs_mean(qrsdur), prdurmean = .morie_qrs_mean(prdur),
-       qtdurmean = .morie_qrs_mean(qtdur), rampmean = .morie_qrs_mean(ramp),
-       nbeats = length(q), fs = fs,
-       method = paste0("ECG wave amplitudes and durations against the PQ ",
-                       "isoelectric reference, Rangayyan (2024) Section 1.2.4"))
+  list(
+    pamp = pamp, qamp = qamp, ramp = ramp, samp = samp, tamp = tamp,
+    qrsdur = qrsdur, pdur = pdur, tdur = tdur,
+    prdur = prdur, qtdur = qtdur,
+    qrsdurmean = .morie_qrs_mean(qrsdur), prdurmean = .morie_qrs_mean(prdur),
+    qtdurmean = .morie_qrs_mean(qtdur), rampmean = .morie_qrs_mean(ramp),
+    nbeats = length(q), fs = fs,
+    method = paste0(
+      "ECG wave amplitudes and durations against the PQ ",
+      "isoelectric reference, Rangayyan (2024) Section 1.2.4"
+    )
+  )
 }
 
 
@@ -490,24 +558,34 @@ EcgWaveShp <- function(qrsdur, stdev, rdur = NULL, sdur = NULL,
   st <- "isoelectric"
   if (stdev >= 0.1) st <- "elevated" else if (stdev <= -0.1) st <- "depressed"
   req <- character(0)
-  if (ms >= 105 && ms <= 120)
-    req <- c(req, paste0("LBBB also needs: negative QRS in V1,V2; Q or S >= ",
-                         "80 ms in V1,V2; no Q in any two of I,V5,V6; R > 60 ",
-                         "ms in any two of I,aVL,V5,V6"))
-  if (ms >= 91 && ms <= 120)
-    req <- c(req, paste0("RBBB also needs: S >= 40 ms in any two of ",
-                         "I,aVL,V4,V5,V6; and in V1 or V2 either R (or R') > ",
-                         "30 ms with amplitude > 100 uV and no S (or S')"))
-  list(qrsdurms = ms,
-       qrswide = ms > 120,
-       lbbbdur = ms >= 105 && ms <= 120,
-       rbbbdur = ms >= 91 && ms <= 120,
-       sdurok = if (is.null(sdur)) NULL else as.numeric(sdur) * 1000 >= 40,
-       rdurok = if (is.null(rdur)) NULL else as.numeric(rdur) * 1000 > 60,
-       qabsent = if (is.null(qpresent)) NULL else !isTRUE(as.logical(qpresent)),
-       stdev = stdev, stfinding = st, required = req,
-       method = paste0("ECG waveshape rules for ischemia and bundle-branch ",
-                       "block, Rangayyan (2024) Sections 1.2.4 and 10.2.1"))
+  if (ms >= 105 && ms <= 120) {
+    req <- c(req, paste0(
+      "LBBB also needs: negative QRS in V1,V2; Q or S >= ",
+      "80 ms in V1,V2; no Q in any two of I,V5,V6; R > 60 ",
+      "ms in any two of I,aVL,V5,V6"
+    ))
+  }
+  if (ms >= 91 && ms <= 120) {
+    req <- c(req, paste0(
+      "RBBB also needs: S >= 40 ms in any two of ",
+      "I,aVL,V4,V5,V6; and in V1 or V2 either R (or R') > ",
+      "30 ms with amplitude > 100 uV and no S (or S')"
+    ))
+  }
+  list(
+    qrsdurms = ms,
+    qrswide = ms > 120,
+    lbbbdur = ms >= 105 && ms <= 120,
+    rbbbdur = ms >= 91 && ms <= 120,
+    sdurok = if (is.null(sdur)) NULL else as.numeric(sdur) * 1000 >= 40,
+    rdurok = if (is.null(rdur)) NULL else as.numeric(rdur) * 1000 > 60,
+    qabsent = if (is.null(qpresent)) NULL else !isTRUE(as.logical(qpresent)),
+    stdev = stdev, stfinding = st, required = req,
+    method = paste0(
+      "ECG waveshape rules for ischemia and bundle-branch ",
+      "block, Rangayyan (2024) Sections 1.2.4 and 10.2.1"
+    )
+  )
 }
 
 
@@ -528,7 +606,9 @@ ExerEcgSt <- function(x, qrs, fs, jofs = 0.060, thresh = 0.1) {
   off <- max(1L, as.integer(round(jofs * fs)))
   span <- max(2L, as.integer(round(0.040 * fs)))
 
-  dev <- numeric(0); slope <- numeric(0); pattern <- character(0)
+  dev <- numeric(0)
+  slope <- numeric(0)
+  pattern <- character(0)
   for (pos in q) {
     a <- max(0L, pos - pqa)
     b <- max(a + 1L, pos - pqb)
@@ -539,22 +619,30 @@ ExerEcgSt <- function(x, qrs, fs, jofs = 0.060, thresh = 0.1) {
     sl <- (x[m + span + 1L] - x[m + 1L]) * fs / span
     dev <- c(dev, lvl)
     slope <- c(slope, sl)
-    pattern <- c(pattern, if (sl > 0.05) "upsloping"
-                 else if (sl < -0.05) "downsloping" else "horizontal")
+    pattern <- c(pattern, if (sl > 0.05) {
+      "upsloping"
+    } else if (sl < -0.05) "downsloping" else "horizontal")
   }
-  if (!length(dev))
+  if (!length(dev)) {
     stop("no beat had enough samples after the J point for an ST measurement")
-  list(stdev = dev, stslope = slope, pattern = pattern,
-       stdevmean = .morie_fsum(dev) / length(dev),
-       stslopemean = .morie_fsum(slope) / length(slope),
-       flagged = sum(abs(dev) >= thresh),
-       thresh = thresh,
-       threshnote = paste0("0.1 mV is a conventional clinical figure, not ",
-                           "from Rangayyan (2024); no primary source ",
-                           "verified here"),
-       jofs = jofs, fs = fs,
-       method = paste0("ST level and slope against the PQ isoelectric ",
-                       "reference, Rangayyan (2024) Section 1.2.4"))
+  }
+  list(
+    stdev = dev, stslope = slope, pattern = pattern,
+    stdevmean = .morie_fsum(dev) / length(dev),
+    stslopemean = .morie_fsum(slope) / length(slope),
+    flagged = sum(abs(dev) >= thresh),
+    thresh = thresh,
+    threshnote = paste0(
+      "0.1 mV is a conventional clinical figure, not ",
+      "from Rangayyan (2024); no primary source ",
+      "verified here"
+    ),
+    jofs = jofs, fs = fs,
+    method = paste0(
+      "ST level and slope against the PQ isoelectric ",
+      "reference, Rangayyan (2024) Section 1.2.4"
+    )
+  )
 }
 
 
@@ -586,7 +674,8 @@ HrvFreq <- function(rr, fsr = 4, bands = "taskforce") {
       grid[k + 1L] <- rr[length(rr)]
       next
     }
-    t0 <- tt[j + 1L]; t1 <- tt[j + 2L]
+    t0 <- tt[j + 1L]
+    t1 <- tt[j + 2L]
     w <- if (t1 <= t0) 0 else (tk - t0) / (t1 - t0)
     w <- min(1, max(0, w))
     grid[k + 1L] <- rr[j + 1L] * (1 - w) + rr[j + 2L] * w
@@ -599,16 +688,22 @@ HrvFreq <- function(rr, fsr = 4, bands = "taskforce") {
     sel <- sp$freqs > b[1L] & sp$freqs <= b[2L]
     if (!any(sel)) 0 else .morie_fsum(sp$power[sel] * df)
   }
-  vlf <- band(lim$vlf); lf <- band(lim$lf); hf <- band(lim$hf)
+  vlf <- band(lim$vlf)
+  lf <- band(lim$lf)
+  hf <- band(lim$hf)
   tot <- vlf + lf + hf
   pct <- function(v) if (tot > 0) 100 * v / tot else 0
-  list(vlf = vlf, lf = lf, hf = hf, total = tot,
-       vlfpct = pct(vlf), lfpct = pct(lf), hfpct = pct(hf),
-       lfhf = if (hf > 0) lf / hf else NULL,
-       bands = bands, limits = lim, fsr = fsr, n = length(rr),
-       method = paste0("frequency-domain HRV bands, Rangayyan (2024) Section ",
-                       "8.12 (Bianchi et al. bands, and the Task Force bands ",
-                       "quoted there)"))
+  list(
+    vlf = vlf, lf = lf, hf = hf, total = tot,
+    vlfpct = pct(vlf), lfpct = pct(lf), hfpct = pct(hf),
+    lfhf = if (hf > 0) lf / hf else NULL,
+    bands = bands, limits = lim, fsr = fsr, n = length(rr),
+    method = paste0(
+      "frequency-domain HRV bands, Rangayyan (2024) Section ",
+      "8.12 (Bianchi et al. bands, and the Task Force bands ",
+      "quoted there)"
+    )
+  )
 }
 
 
@@ -625,13 +720,17 @@ HrvTime <- function(rr) {
   d <- diff(ms)
   rmssd <- sqrt(.morie_fsum(d * d) / length(d))
   nn50 <- sum(abs(d) > 50)
-  list(sdnn = sdnn, rmssd = rmssd, nn50 = nn50,
-       pnn50 = 100 * nn50 / length(d),
-       meannn = mu, meanhr = 60000 / mu, n = n, units = "ms",
-       method = paste0("time-domain HRV (SDNN, RMSSD, pNN50), Task Force of ",
-                       "the ESC and NASPE, Circulation 93(5):1043-1065, 1996; ",
-                       "Rangayyan (2024) Section 2.2.5 motivates but does not ",
-                       "define these"))
+  list(
+    sdnn = sdnn, rmssd = rmssd, nn50 = nn50,
+    pnn50 = 100 * nn50 / length(d),
+    meannn = mu, meanhr = 60000 / mu, n = n, units = "ms",
+    method = paste0(
+      "time-domain HRV (SDNN, RMSSD, pNN50), Task Force of ",
+      "the ESC and NASPE, Circulation 93(5):1043-1065, 1996; ",
+      "Rangayyan (2024) Section 2.2.5 motivates but does not ",
+      "define these"
+    )
+  )
 }
 
 
@@ -643,19 +742,24 @@ HSoundId <- function(ecg, cp, fs) {
   fs <- .morie_qrs_fs(fs)
   ecg <- .morie_qrs_check(ecg, 40L, "ECG")
   cp <- .morie_qrs_check(cp, 40L, "carotid pulse")
-  if (length(ecg) != length(cp))
+  if (length(ecg) != length(cp)) {
     stop("ECG and carotid pulse must have the same length")
+  }
   q <- QrsDetect(ecg, fs)$qrs
   if (!length(q)) stop("no QRS complexes detected; cannot place S1 or S2")
   notch <- DicNotch(cp, fs, qrs = q)$notch
   lag <- as.integer(round(0.0526 * fs))
   s2 <- pmax(0L, notch - lag)
-  list(s1 = q, s2 = s2, notch = notch, qrs = q,
-       s2delayms = 52.6, s2delaymeasured = c(42.6, 5), searchwindowms = 500,
-       fs = fs,
-       method = paste0("S1/S2 identification from ECG and carotid pulse ",
-                       "timing, Rangayyan (2024) Section 4.9 (Lehner and ",
-                       "Rangayyan)"))
+  list(
+    s1 = q, s2 = s2, notch = notch, qrs = q,
+    s2delayms = 52.6, s2delaymeasured = c(42.6, 5), searchwindowms = 500,
+    fs = fs,
+    method = paste0(
+      "S1/S2 identification from ECG and carotid pulse ",
+      "timing, Rangayyan (2024) Section 4.9 (Lehner and ",
+      "Rangayyan)"
+    )
+  )
 }
 
 
@@ -666,8 +770,9 @@ MEcgFilt <- function(abd, thor, order = 16, mu = 0.01) {
   # no random initialisation.
   abd <- .morie_qrs_check(abd, 4L, "abdominal ECG")
   thor <- .morie_qrs_check(thor, 4L, "thoracic ECG")
-  if (length(abd) != length(thor))
+  if (length(abd) != length(thor)) {
     stop("abdominal and thoracic signals must have the same length")
+  }
   order <- as.integer(order)
   if (order < 1L) stop("order must be >= 1")
   if (length(abd) <= order) stop("signals must be longer than the filter order")
@@ -693,11 +798,15 @@ MEcgFilt <- function(abd, thor, order = 16, mu = 0.01) {
     g <- mu / (p + eps)
     w <- w + g * e * xv
   }
-  list(fetal = err, maternal = est, weights = w,
-       order = order, mu = mu, n = n,
-       method = paste0("adaptive cancellation of the maternal ECG with a ",
-                       "thoracic reference, Rangayyan (2024) Sections 3.3.5 ",
-                       "and 9.7.2 (normalised LMS)"))
+  list(
+    fetal = err, maternal = est, weights = w,
+    order = order, mu = mu, n = n,
+    method = paste0(
+      "adaptive cancellation of the maternal ECG with a ",
+      "thoracic reference, Rangayyan (2024) Sections 3.3.5 ",
+      "and 9.7.2 (normalised LMS)"
+    )
+  )
 }
 
 
@@ -715,15 +824,20 @@ MotionArt <- function(x, fs, win = 1, factor = 4) {
   w <- max(4L, as.integer(round(win * fs)))
   n <- length(x)
   starts <- seq(0L, n - 1L, by = w)
-  rng <- numeric(length(starts)); act <- numeric(length(starts))
+  rng <- numeric(length(starts))
+  act <- numeric(length(starts))
   for (si in seq_along(starts)) {
     a <- starts[si]
     seg <- x[(a + 1L):min(n, a + w)]
     rng[si] <- max(seg) - min(seg)
-    act[si] <- if (length(seg) > 1L)
-      .morie_fsum(abs(diff(seg))) / max(1L, length(seg) - 1L) else 0
+    act[si] <- if (length(seg) > 1L) {
+      .morie_fsum(abs(diff(seg))) / max(1L, length(seg) - 1L)
+    } else {
+      0
+    }
   }
-  mr <- .morie_qrs_median(rng); ma <- .morie_qrs_median(act)
+  mr <- .morie_qrs_median(rng)
+  ma <- .morie_qrs_median(act)
   bad <- (rng > factor * mr & mr > 0) | (act > factor * ma & ma > 0)
 
   segs <- list()
@@ -740,7 +854,8 @@ MotionArt <- function(x, fs, win = 1, factor = 4) {
   }
   clean <- x
   for (sg in segs) {
-    a <- sg[1L]; b <- sg[2L]
+    a <- sg[1L]
+    b <- sg[2L]
     lv <- if (a > 0L) x[a] else (if (b < n) x[b + 1L] else 0)
     rv <- if (b < n) x[b + 1L] else lv
     span <- max(1L, b - a)
@@ -751,14 +866,21 @@ MotionArt <- function(x, fs, win = 1, factor = 4) {
       kk <- kk + 1L
     }
   }
-  flagged <- if (length(segs))
-    .morie_fsum(vapply(segs, function(s) min(n, s[2L]) - s[1L], numeric(1))) else 0
-  list(clean = clean, artifact = segs, nsegments = length(segs),
-       fraction = flagged / n, win = win, factor = factor, fs = fs,
-       method = paste0("motion-artifact detection by window range and ",
-                       "activity against their medians; Rangayyan (2024) ",
-                       "Section 1.2.11 characterises the artifact but gives ",
-                       "no detection equation"))
+  flagged <- if (length(segs)) {
+    .morie_fsum(vapply(segs, function(s) min(n, s[2L]) - s[1L], numeric(1)))
+  } else {
+    0
+  }
+  list(
+    clean = clean, artifact = segs, nsegments = length(segs),
+    fraction = flagged / n, win = win, factor = factor, fs = fs,
+    method = paste0(
+      "motion-artifact detection by window range and ",
+      "activity against their medians; Rangayyan (2024) ",
+      "Section 1.2.11 characterises the artifact but gives ",
+      "no detection equation"
+    )
+  )
 }
 
 
@@ -769,7 +891,8 @@ QrsDetect <- function(x, fs = 200) {
   fs <- .morie_qrs_fs(fs)
   x <- .morie_qrs_check(x, 40L, "ECG")
   chain <- .morie_qrs_chain(x, fs)
-  ig <- chain$ig; wint <- chain$w
+  ig <- chain$ig
+  wint <- chain$w
   n <- length(ig)
   # cumulative group delay: 5 samples (eq 4.8 at 200 Hz), 16 for the allpass
   # branch of eq 4.13, 2 for the derivative, half the integrator window.
@@ -787,35 +910,47 @@ QrsDetect <- function(x, fs = 200) {
   t1 <- npki + 0.25 * (spki - npki)
   t2 <- 0.5 * t1
 
-  qrs <- integer(0); peaks <- numeric(0)
-  rr1 <- numeric(0); rr2 <- numeric(0)
-  rrave2 <- NULL; searchback <- 0L
+  qrs <- integer(0)
+  peaks <- numeric(0)
+  rr1 <- numeric(0)
+  rr2 <- numeric(0)
+  rrave2 <- NULL
+  searchback <- 0L
 
   for (i in cand) {
     pk <- ig[i + 1L]
     nq <- length(qrs)
     if (nq && (i - qrs[nq]) < refrac) {
-      if (pk > peaks[nq]) { qrs[nq] <- i; peaks[nq] <- pk }
+      if (pk > peaks[nq]) {
+        qrs[nq] <- i
+        peaks[nq] <- pk
+      }
       next
     }
-    lo <- NULL; hi <- NULL; missed <- NULL
+    lo <- NULL
+    hi <- NULL
+    missed <- NULL
     if (!is.null(rrave2)) {
-      lo <- 0.92 * rrave2; hi <- 1.16 * rrave2; missed <- 1.66 * rrave2
+      lo <- 0.92 * rrave2
+      hi <- 1.16 * rrave2
+      missed <- 1.66 * rrave2
     }
     if (nq && !is.null(missed) && (i - qrs[nq]) / fs > missed) {
       wsel <- cand[cand >= qrs[nq] + refrac & cand < i & ig[cand + 1L] > t2]
       if (length(wsel)) {
         best <- wsel[which.max(ig[wsel + 1L])]
-        qrs <- c(qrs, best); peaks <- c(peaks, ig[best + 1L])
-        spki <- 0.25 * ig[best + 1L] + 0.75 * spki       # eq (4.18)
+        qrs <- c(qrs, best)
+        peaks <- c(peaks, ig[best + 1L])
+        spki <- 0.25 * ig[best + 1L] + 0.75 * spki # eq (4.18)
         searchback <- searchback + 1L
         t1 <- npki + 0.25 * (spki - npki)
         t2 <- 0.5 * t1
       }
     }
     if (pk > t1) {
-      qrs <- c(qrs, i); peaks <- c(peaks, pk)
-      spki <- 0.125 * pk + 0.875 * spki                  # eq (4.16)
+      qrs <- c(qrs, i)
+      peaks <- c(peaks, pk)
+      spki <- 0.125 * pk + 0.875 * spki # eq (4.16)
       if (length(qrs) > 1L) {
         m <- length(qrs)
         rr <- (qrs[m] - qrs[m - 1L]) / fs
@@ -825,26 +960,33 @@ QrsDetect <- function(x, fs = 200) {
           rr2 <- c(rr2, rr)
           if (length(rr2) > 8L) rr2 <- rr2[-1L]
         }
-        if (length(rr2)) rrave2 <- .morie_fsum(rr2) / length(rr2)
-        else if (length(rr1)) rrave2 <- .morie_fsum(rr1) / length(rr1)
+        if (length(rr2)) {
+          rrave2 <- .morie_fsum(rr2) / length(rr2)
+        } else if (length(rr1)) rrave2 <- .morie_fsum(rr1) / length(rr1)
       }
     } else {
-      npki <- 0.125 * pk + 0.875 * npki                  # eq (4.16)
+      npki <- 0.125 * pk + 0.875 * npki # eq (4.16)
     }
-    t1 <- npki + 0.25 * (spki - npki)                    # eq (4.17)
+    t1 <- npki + 0.25 * (spki - npki) # eq (4.17)
     t2 <- 0.5 * t1
   }
   loc <- sort(unique(pmax(0L, qrs - delay)))
   rr <- if (length(loc) > 1L) diff(loc) / fs else numeric(0)
   hr <- if (length(loc)) 60 * length(loc) / (length(x) / fs) else 0
-  list(qrs = loc, rr = rr, hr = hr, integrated = ig, bandpass = chain$bp,
-       delay = delay, spki = spki, npki = npki, thresh1 = t1, thresh2 = t2,
-       searchback = searchback, fs = fs,
-       fsnote = paste0("filter coefficients are integers fixed for fs = 200 ",
-                       "Hz; timing constants scale with fs"),
-       method = paste0("Pan-Tompkins QRS detection, Rangayyan (2024) Section ",
-                       "4.3.2, Eqs 4.8-4.18; Pan and Tompkins, IEEE TBME ",
-                       "32(3):230-236, 1985"))
+  list(
+    qrs = loc, rr = rr, hr = hr, integrated = ig, bandpass = chain$bp,
+    delay = delay, spki = spki, npki = npki, thresh1 = t1, thresh2 = t2,
+    searchback = searchback, fs = fs,
+    fsnote = paste0(
+      "filter coefficients are integers fixed for fs = 200 ",
+      "Hz; timing constants scale with fs"
+    ),
+    method = paste0(
+      "Pan-Tompkins QRS detection, Rangayyan (2024) Section ",
+      "4.3.2, Eqs 4.8-4.18; Pan and Tompkins, IEEE TBME ",
+      "32(3):230-236, 1985"
+    )
+  )
 }
 
 
@@ -856,15 +998,24 @@ PcgParts <- function(pcg, ecg, cp, fs) {
   pcg <- .morie_qrs_check(pcg, 40L, "PCG")
   ecg <- .morie_qrs_check(ecg, 40L, "ECG")
   cp <- .morie_qrs_check(cp, 40L, "carotid pulse")
-  if (!(length(pcg) == length(ecg) && length(ecg) == length(cp)))
+  if (!(length(pcg) == length(ecg) && length(ecg) == length(cp))) {
     stop("PCG, ECG and carotid pulse must have the same length")
+  }
   ids <- HSoundId(ecg, cp, fs)
-  s1 <- ids$s1; s2 <- ids$s2
-  if (!length(s1) || !length(s2))
+  s1 <- ids$s1
+  s2 <- ids$s2
+  if (!length(s1) || !length(s2)) {
     stop("could not locate both S1 and S2 events")
-  rms <- function(a, b) if (b > a)
-    sqrt(.morie_fsum(pcg[(a + 1L):b]^2) / (b - a)) else 0
-  systole <- list(); diastole <- list()
+  }
+  rms <- function(a, b) {
+    if (b > a) {
+      sqrt(.morie_fsum(pcg[(a + 1L):b]^2) / (b - a))
+    } else {
+      0
+    }
+  }
+  systole <- list()
+  diastole <- list()
   for (a in s1) {
     later <- s2[s2 > a]
     if (!length(later)) next
@@ -873,12 +1024,16 @@ PcgParts <- function(pcg, ecg, cp, fs) {
     nxt <- s1[s1 > b]
     if (length(nxt)) diastole[[length(diastole) + 1L]] <- c(b, nxt[1L])
   }
-  list(s1 = s1, s2 = s2, systole = systole, diastole = diastole,
-       systolerms = vapply(systole, function(p) rms(p[1L], p[2L]), numeric(1)),
-       diastolerms = vapply(diastole, function(p) rms(p[1L], p[2L]), numeric(1)),
-       fs = fs,
-       method = paste0("PCG segmentation into systole and diastole, ",
-                       "Rangayyan (2024) Section 4.9"))
+  list(
+    s1 = s1, s2 = s2, systole = systole, diastole = diastole,
+    systolerms = vapply(systole, function(p) rms(p[1L], p[2L]), numeric(1)),
+    diastolerms = vapply(diastole, function(p) rms(p[1L], p[2L]), numeric(1)),
+    fs = fs,
+    method = paste0(
+      "PCG segmentation into systole and diastole, ",
+      "Rangayyan (2024) Section 4.9"
+    )
+  )
 }
 
 
@@ -894,15 +1049,17 @@ PLineNotch <- function(x, fs, f0 = 60, harmonics = 1) {
   if (!(f0 > 0)) stop("f0 must be positive")
   if (harmonics < 1L) stop("harmonics must be >= 1")
   y <- x
-  coeffs <- list(); notched <- numeric(0)
+  coeffs <- list()
+  notched <- numeric(0)
   for (h in seq_len(harmonics)) {
     f <- h * f0
     if (f >= fs / 2) break
     w <- 2 * pi * f / fs
     b1 <- -2 * cos(w)
     gain <- 1 + b1 + 1
-    if (abs(gain) < 1e-12)
+    if (abs(gain) < 1e-12) {
       stop(sprintf("notch at %g Hz has zero DC gain; choose another frequency", f))
+    }
     b <- c(1 / gain, b1 / gain, 1 / gain)
     coeffs[[length(coeffs) + 1L]] <- b
     notched <- c(notched, f)
@@ -914,11 +1071,14 @@ PLineNotch <- function(x, fs, f0 = 60, harmonics = 1) {
     }
     y <- z
   }
-  if (!length(notched))
+  if (!length(notched)) {
     stop("f0 is at or above the Nyquist frequency; nothing to notch")
-  list(y = y, coeffs = coeffs, notched = notched, f0 = f0, fs = fs,
-       n = length(y),
-       method = "unit-circle comb notch filter, Rangayyan (2024) Eq 3.150")
+  }
+  list(
+    y = y, coeffs = coeffs, notched = notched, f0 = f0, fs = fs,
+    n = length(y),
+    method = "unit-circle comb notch filter, Rangayyan (2024) Eq 3.150"
+  )
 }
 
 
@@ -931,11 +1091,14 @@ PpgFeat <- function(ppg, fs, mwin = 16) {
   fs <- .morie_qrs_fs(fs)
   ppg <- .morie_qrs_check(ppg, 32L, "PPG")
   notch <- DicNotch(ppg, fs, mwin = mwin)$notch
-  if (!length(notch))
+  if (!length(notch)) {
     stop("no dicrotic notch found; cannot delineate PPG pulses")
+  }
   n <- length(ppg)
   back <- max(2L, as.integer(round(0.400 * fs)))
-  sysp <- integer(0); diap <- integer(0); feet <- integer(0)
+  sysp <- integer(0)
+  diap <- integer(0)
+  feet <- integer(0)
   amp <- numeric(0)
   for (d in notch) {
     a <- max(0L, d - back)
@@ -952,13 +1115,17 @@ PpgFeat <- function(ppg, fs, mwin = 16) {
   if (!length(amp)) stop("could not delineate any complete PPG pulse")
   dc <- .morie_fsum(ppg) / n
   ac <- .morie_fsum(amp) / length(amp)
-  list(systolic = sysp, notch = notch, diastolic = diap, onset = feet,
-       amplitude = amp, ac = ac, dc = dc,
-       pi = if (dc != 0) 100 * ac / dc else NULL,
-       rate = 60 * length(sysp) / (n / fs), fs = fs,
-       method = paste0("PPG pulse features with the carotid dicrotic-notch ",
-                       "operator, Rangayyan (2024) Sections 1.2.11 and 4.3.5 ",
-                       "(Eqs 4.22, 4.23)"))
+  list(
+    systolic = sysp, notch = notch, diastolic = diap, onset = feet,
+    amplitude = amp, ac = ac, dc = dc,
+    pi = if (dc != 0) 100 * ac / dc else NULL,
+    rate = 60 * length(sysp) / (n / fs), fs = fs,
+    method = paste0(
+      "PPG pulse features with the carotid dicrotic-notch ",
+      "operator, Rangayyan (2024) Sections 1.2.11 and 4.3.5 ",
+      "(Eqs 4.22, 4.23)"
+    )
+  )
 }
 
 
@@ -971,14 +1138,16 @@ PWaveDet <- function(x, qrs, fs, template = NULL) {
   fs <- .morie_qrs_fs(fs)
   x <- .morie_qrs_check(x, 16L, "ECG")
   q <- as.integer(qrs)
-  if (length(q) < 2L)
+  if (length(q) < 2L) {
     stop("need at least two QRS positions to define an RR interval")
+  }
   n <- length(x)
   half <- max(1L, as.integer(round(0.050 * fs)))
   base <- max(1L, as.integer(round(0.040 * fs)))
   y <- x
   for (pos in q) {
-    a <- max(0L, pos - half); b <- min(n, pos + half)
+    a <- max(0L, pos - half)
+    b <- min(n, pos + half)
     ra <- max(0L, a - base)
     lvl <- if (ra < a) .morie_fsum(x[(ra + 1L):a]) / (a - ra) else 0
     if (a < b) y[(a + 1L):b] <- lvl
@@ -991,19 +1160,24 @@ PWaveDet <- function(x, qrs, fs, template = NULL) {
   for (k in seq_len(length(q) - 1L) + 1L) {
     rr <- (q[k] - q[k - 1L]) / fs
     qtmax <- 29 * rr + 0.250
-    start <- max(q[k - 1L],
-                 q[k - 1L] + as.integer(round(min(qtmax, 0.75 * rr) * fs)))
+    start <- max(
+      q[k - 1L],
+      q[k - 1L] + as.integer(round(min(qtmax, 0.75 * rr) * fs))
+    )
     stop_ <- max(start + 2L, q[k] - half)
     wins[[k - 1L]] <- if (stop_ <= start || stop_ > n) NULL else c(start, stop_)
   }
   usable <- Filter(Negate(is.null), wins)
-  if (!length(usable))
+  if (!length(usable)) {
     stop("no usable P-wave search interval between the supplied QRS positions")
+  }
   wlen <- min(vapply(usable, function(w) w[2L] - w[1L], numeric(1)))
 
   ternary <- function(seg) {
     m <- max(abs(seg))
-    if (m <= 0) return(rep(0, length(seg)))
+    if (m <= 0) {
+      return(rep(0, length(seg)))
+    }
     r <- abs(seg) / m
     ifelse(r >= 0.75, 2, ifelse(r >= 0.50, 1, 0))
   }
@@ -1019,20 +1193,35 @@ PWaveDet <- function(x, qrs, fs, template = NULL) {
   ppos <- vector("list", length(wins))
   for (wi in seq_along(wins)) {
     w <- wins[[wi]]
-    if (is.null(w)) { ppos[wi] <- list(NULL); next }
-    a <- w[1L]; b <- w[2L]
+    if (is.null(w)) {
+      ppos[wi] <- list(NULL)
+      next
+    }
+    a <- w[1L]
+    b <- w[2L]
     tern <- ternary(bp[(a + 1L):b])
-    if (length(tern) < tl) { ppos[wi] <- list(NULL); next }
-    best <- 0L; bestv <- NULL
+    if (length(tern) < tl) {
+      ppos[wi] <- list(NULL)
+      next
+    }
+    best <- 0L
+    bestv <- NULL
     for (s in seq_len(length(tern) - tl + 1L) - 1L) {
       v <- .morie_fsum(tern[(s + 1L):(s + tl)] * template)
-      if (is.null(bestv) || v > bestv) { best <- s; bestv <- v }
+      if (is.null(bestv) || v > bestv) {
+        best <- s
+        bestv <- v
+      }
     }
     ppos[[wi]] <- a + best + tl %/% 2L
   }
-  list(p = ppos, template = template, windows = wins, bandpass = bp, fs = fs,
-       method = paste0("P-wave detection, Rangayyan (2024) Section 4.3.3 ",
-                       "(Hengeveld and van Bemmel)"))
+  list(
+    p = ppos, template = template, windows = wins, bandpass = bp, fs = fs,
+    method = paste0(
+      "P-wave detection, Rangayyan (2024) Section 4.3.3 ",
+      "(Hengeveld and van Bemmel)"
+    )
+  )
 }
 
 
@@ -1050,12 +1239,14 @@ EdrSignal <- function(x, qrs, fs, fsr = 4) {
   pqa <- max(1L, as.integer(round(0.080 * fs)))
   pqb <- max(1L, as.integer(round(0.040 * fs)))
   half <- max(1L, as.integer(round(0.050 * fs)))
-  times <- numeric(0); amps <- numeric(0)
+  times <- numeric(0)
+  amps <- numeric(0)
   for (pos in q) {
     a <- max(0L, pos - pqa)
     b <- max(a + 1L, pos - pqb)
     ref <- .morie_fsum(x[(a + 1L):b]) / (b - a)
-    lo <- max(0L, pos - half); hi <- min(n, pos + half + 1L)
+    lo <- max(0L, pos - half)
+    hi <- min(n, pos + half + 1L)
     if (hi - lo < 2L) next
     amps <- c(amps, max(x[(lo + 1L):hi]) - ref)
     times <- c(times, pos / fs)
@@ -1069,7 +1260,8 @@ EdrSignal <- function(x, qrs, fs, fsr = 4) {
   for (k in seq_len(m) - 1L) {
     tk <- times[1L] + k / fsr
     while (j < length(times) - 2L && times[j + 2L] < tk) j <- j + 1L
-    t0 <- times[j + 1L]; t1 <- times[j + 2L]
+    t0 <- times[j + 1L]
+    t1 <- times[j + 2L]
     w <- if (t1 <= t0) 0 else (tk - t0) / (t1 - t0)
     w <- min(1, max(0, w))
     grid[k + 1L] <- amps[j + 1L] * (1 - w) + amps[j + 2L] * w
@@ -1079,12 +1271,16 @@ EdrSignal <- function(x, qrs, fs, fsr = 4) {
   sp <- .morie_qrs_psd(edr, fsr)
   cand <- which(sp$freqs >= 0.1 & sp$freqs <= 0.5)
   rate <- if (length(cand)) 60 * sp$freqs[cand[which.max(sp$power[cand])]] else NULL
-  list(edr = edr, amp = amps, times = times, resprate = rate, fsr = fsr,
-       nbeats = length(amps),
-       method = paste0("ECG-derived respiration from R-wave amplitude ",
-                       "modulation; Rangayyan (2024) Section 2.2.4 for the ",
-                       "physiology, Arunachalam and Brown, Proc. IEEE EMBC ",
-                       "2009, pp. 5681-5684, for the estimator"))
+  list(
+    edr = edr, amp = amps, times = times, resprate = rate, fsr = fsr,
+    nbeats = length(amps),
+    method = paste0(
+      "ECG-derived respiration from R-wave amplitude ",
+      "modulation; Rangayyan (2024) Section 2.2.4 for the ",
+      "physiology, Arunachalam and Brown, Proc. IEEE EMBC ",
+      "2009, pp. 5681-5684, for the estimator"
+    )
+  )
 }
 
 
@@ -1096,9 +1292,11 @@ ApneaEdr <- function(edr, spo2, fs, hours = NULL, mindur = 10, desat = 3) {
   fs <- .morie_qrs_fs(fs)
   edr <- .morie_qrs_check(edr, 16L, "EDR")
   spo2 <- .morie_qrs_check(spo2, 16L, "SpO2")
-  if (length(edr) != length(spo2))
+  if (length(edr) != length(spo2)) {
     stop("EDR and SpO2 must have the same length and rate")
-  mindur <- as.numeric(mindur); desat <- as.numeric(desat)
+  }
+  mindur <- as.numeric(mindur)
+  desat <- as.numeric(desat)
   if (!(mindur > 0)) stop("mindur must be positive")
   if (!(desat > 0)) stop("desat must be positive")
   n <- length(edr)
@@ -1110,7 +1308,8 @@ ApneaEdr <- function(edr, spo2, fs, hours = NULL, mindur = 10, desat = 3) {
   low <- env < 0.30 * base
   need <- max(1L, as.integer(round(mindur * fs)))
   look <- max(1L, as.integer(round(30 * fs)))
-  events <- list(); depth <- numeric(0)
+  events <- list()
+  depth <- numeric(0)
   i <- 0L
   while (i < n) {
     if (low[i + 1L]) {
@@ -1132,13 +1331,17 @@ ApneaEdr <- function(edr, spo2, fs, hours = NULL, mindur = 10, desat = 3) {
       i <- i + 1L
     }
   }
-  list(events = events, nevents = length(events),
-       ahi = length(events) / hours, desatdepth = depth, hours = hours,
-       mindur = mindur, desat = desat, fs = fs,
-       method = paste0("apnea event scoring from respiratory-envelope pauses ",
-                       "confirmed by SpO2 desaturation; Rangayyan (2024) ",
-                       "Section 10.2.5 frames the problem and the AHI but ",
-                       "gives no detection algorithm"))
+  list(
+    events = events, nevents = length(events),
+    ahi = length(events) / hours, desatdepth = depth, hours = hours,
+    mindur = mindur, desat = desat, fs = fs,
+    method = paste0(
+      "apnea event scoring from respiratory-envelope pauses ",
+      "confirmed by SpO2 desaturation; Rangayyan (2024) ",
+      "Section 10.2.5 frames the problem and the AHI but ",
+      "gives no detection algorithm"
+    )
+  )
 }
 
 
@@ -1150,11 +1353,15 @@ LfHfRatio <- function(rr, fsr = 4, bands = "taskforce") {
   v <- .morie_qrs_check(rr, 2L, "RR series")
   mu <- .morie_fsum(v) / length(v)
   var <- .morie_fsum((v - mu)^2) / (length(v) - 1L)
-  list(lfhf = res$lfhf, lf = res$lf, hf = res$hf,
-       lfpct = res$lfpct, hfpct = res$hfpct, rrvar = var,
-       bands = bands, n = length(v),
-       method = paste0("LF/HF spectral power ratio, Rangayyan (2024) Section ",
-                       "8.12 and Figure 8.38 (Bianchi et al.)"))
+  list(
+    lfhf = res$lfhf, lf = res$lf, hf = res$hf,
+    lfpct = res$lfpct, hfpct = res$hfpct, rrvar = var,
+    bands = bands, n = length(v),
+    method = paste0(
+      "LF/HF spectral power ratio, Rangayyan (2024) Section ",
+      "8.12 and Figure 8.38 (Bianchi et al.)"
+    )
+  )
 }
 
 
@@ -1168,19 +1375,25 @@ TwaSpectr <- function(twaves, noiselo = 0.33, noisehi = 0.45) {
   beats <- lapply(twaves, .morie_qrs_check, least = 2L, what = "T wave")
   m <- length(beats)
   if (m < 8L) stop("spectral TWA needs at least eight beats")
-  if (m %% 2L) { beats <- beats[-m]; m <- m - 1L }
+  if (m %% 2L) {
+    beats <- beats[-m]
+    m <- m - 1L
+  }
   npts <- length(beats[[1L]])
-  if (any(vapply(beats, length, integer(1)) != npts))
+  if (any(vapply(beats, length, integer(1)) != npts)) {
     stop("all T waves must have the same number of samples")
-  if (!(noiselo > 0 && noiselo < noisehi && noisehi < 0.5))
+  }
+  if (!(noiselo > 0 && noiselo < noisehi && noisehi < 0.5)) {
     stop("noise band must satisfy 0 < noiselo < noisehi < 0.5")
+  }
   acc <- numeric(m %/% 2L + 1L)
   for (j in seq_len(npts)) {
     series <- vapply(beats, function(b) b[j], numeric(1))
     mu <- .morie_fsum(series) / m
     sp <- .morie_qrs_dft(series - mu)
     for (k in seq_len(m %/% 2L + 1L) - 1L) {
-      re <- sp$re[k + 1L]; im <- sp$im[k + 1L]
+      re <- sp$re[k + 1L]
+      im <- sp$im[k + 1L]
       p <- (re * re + im * im) / (m * m)
       if (k > 0L && k < m - k) p <- p * 2
       acc[k + 1L] <- acc[k + 1L] + p
@@ -1190,19 +1403,24 @@ TwaSpectr <- function(twaves, noiselo = 0.33, noisehi = 0.45) {
   cyc <- (seq_len(m %/% 2L + 1L) - 1L) / m
   kalt <- m %/% 2L
   band <- which(cyc >= noiselo & cyc <= noisehi)
-  if (length(band) < 2L)
+  if (length(band) < 2L) {
     stop("noise band contains fewer than two spectral bins; use more beats")
+  }
   nm <- .morie_fsum(acc[band]) / length(band)
   nsd <- sqrt(.morie_fsum((acc[band] - nm)^2) / (length(band) - 1L))
   altp <- acc[kalt + 1L]
   valt <- if (altp > nm) sqrt(altp - nm) else 0
   kscore <- if (nsd > 0) (altp - nm) / nsd else NULL
-  list(valt = valt, kscore = kscore, altpower = altp, noisemean = nm,
-       noisesd = nsd, nbeats = m, npoints = npts, cyclesperbeat = 0.5,
-       present = !is.null(kscore) && kscore >= 3,
-       method = paste0("spectral method for T-wave alternans, Rangayyan ",
-                       "(2024) Section 9.10 citing Smith et al., Circulation ",
-                       "77(1):110-121, 1988"))
+  list(
+    valt = valt, kscore = kscore, altpower = altp, noisemean = nm,
+    noisesd = nsd, nbeats = m, npoints = npts, cyclesperbeat = 0.5,
+    present = !is.null(kscore) && kscore >= 3,
+    method = paste0(
+      "spectral method for T-wave alternans, Rangayyan ",
+      "(2024) Section 9.10 citing Smith et al., Circulation ",
+      "77(1):110-121, 1988"
+    )
+  )
 }
 
 
@@ -1220,14 +1438,16 @@ TWaveDet <- function(chans, qrs, fs, tdur = 0.160) {
   if (!is.list(chans)) chans <- list(chans)
   ch <- lapply(chans, .morie_qrs_check, least = 8L, what = "channel")
   n <- length(ch[[1L]])
-  if (any(vapply(ch, length, integer(1)) != n))
+  if (any(vapply(ch, length, integer(1)) != n)) {
     stop("all channels must have the same length")
+  }
   half <- max(1L, as.integer(round(0.050 * fs)))
   base <- max(1L, as.integer(round(0.040 * fs)))
   blank <- lapply(ch, function(cvec) {
     b <- cvec
     for (pos in q) {
-      a1 <- max(0L, pos - half); a2 <- min(n, pos + half)
+      a1 <- max(0L, pos - half)
+      a2 <- min(n, pos + half)
       ra <- max(0L, a1 - base)
       lvl <- if (ra < a1) .morie_fsum(cvec[(ra + 1L):a1]) / (a1 - ra) else 0
       if (a1 < a2) b[(a1 + 1L):a2] <- lvl
@@ -1245,9 +1465,12 @@ TWaveDet <- function(chans, qrs, fs, tdur = 0.160) {
   offset <- vector("list", length(q))
   for (kk in seq_along(q)) {
     pos <- q[kk]
-    a <- min(n - 1L, pos + lo); b <- min(n, pos + hi)
+    a <- min(n - 1L, pos + lo)
+    b <- min(n, pos + hi)
     if (b - a < 2L) {
-      tpos[kk] <- list(NULL); onset[kk] <- list(NULL); offset[kk] <- list(NULL)
+      tpos[kk] <- list(NULL)
+      onset[kk] <- list(NULL)
+      offset[kk] <- list(NULL)
       next
     }
     s <- .morie_qrs_argmax(lt, a, b)
@@ -1256,11 +1479,15 @@ TWaveDet <- function(chans, qrs, fs, tdur = 0.160) {
     e <- min(n, s + wsamp)
     tpos[[kk]] <- s + which.max(abs(bsum[(s + 1L):e])) - 1L
   }
-  list(t = tpos, onset = onset, offset = offset, length = lt,
-       tdur = tdur, nchan = length(ch), fs = fs,
-       method = paste0("T-wave detection by the length transformation, ",
-                       "Rangayyan (2024) Section 4.3.4, Eq 4.21 (Gritzali ",
-                       "et al.)"))
+  list(
+    t = tpos, onset = onset, offset = offset, length = lt,
+    tdur = tdur, nchan = length(ch), fs = fs,
+    method = paste0(
+      "T-wave detection by the length transformation, ",
+      "Rangayyan (2024) Section 4.3.4, Eq 4.21 (Gritzali ",
+      "et al.)"
+    )
+  )
 }
 
 
@@ -1273,22 +1500,28 @@ VfDetect <- function(x, fs, win = 4, conc = 0.60, crest = 4) {
   # (so the spectral concentration is high).
   fs <- .morie_qrs_fs(fs)
   x <- .morie_qrs_check(x, 64L, "ECG")
-  win <- as.numeric(win); conc <- as.numeric(conc); crest <- as.numeric(crest)
+  win <- as.numeric(win)
+  conc <- as.numeric(conc)
+  crest <- as.numeric(crest)
   if (!(win > 0)) stop("win must be positive")
   if (!(conc > 0 && conc <= 1)) stop("conc must lie in (0, 1]")
   if (!(crest > 1)) stop("crest must be greater than 1")
   wsamp <- max(32L, as.integer(round(win * fs)))
   if (length(x) < wsamp) stop("signal shorter than one analysis window")
-  flags <- logical(0); doms <- numeric(0); concs <- numeric(0)
-  rates <- numeric(0); crests <- numeric(0)
+  flags <- logical(0)
+  doms <- numeric(0)
+  concs <- numeric(0)
+  rates <- numeric(0)
+  crests <- numeric(0)
   for (a in seq(0L, length(x) - wsamp, by = wsamp)) {
     seg <- x[(a + 1L):(a + wsamp)]
     mu <- .morie_fsum(seg) / length(seg)
     seg <- seg - mu
     sp <- .morie_qrs_psd(seg, fs)
     band <- which(sp$freqs >= 0.5 & sp$freqs <= 25)
-    if (!length(band))
+    if (!length(band)) {
       stop("analysis window too short to resolve the 0.5-25 Hz band")
+    }
     kbest <- band[which.max(sp$power[band])]
     fdom <- sp$freqs[kbest]
     tot <- .morie_fsum(sp$power[band])
@@ -1296,7 +1529,8 @@ VfDetect <- function(x, fs, win = 4, conc = 0.60, crest = 4) {
     cval <- if (tot > 0) .morie_fsum(sp$power[near]) / tot else 0
     det <- tryCatch(QrsDetect(seg, fs), error = function(e) NULL)
     if (is.null(det)) {
-      nb <- 0L; cf <- 0
+      nb <- 0L
+      cf <- 0
     } else {
       nb <- length(det$qrs)
       ig <- det$integrated
@@ -1309,13 +1543,17 @@ VfDetect <- function(x, fs, win = 4, conc = 0.60, crest = 4) {
     rates <- c(rates, 60 * nb / (wsamp / fs))
     crests <- c(crests, cf)
   }
-  list(flag = flags, domfreq = doms, concentration = concs, crest = crests,
-       rate = rates, conc = conc, crestmax = crest, nwin = length(flags),
-       fraction = sum(flags) / length(flags), win = win, fs = fs,
-       method = paste0("VF heuristic from QRS absence and spectral ",
-                       "concentration; Rangayyan (2024) Sections 1.2.4 and ",
-                       "8.11 describe VF but give no detector, and no ",
-                       "external primary source was verified for this rule"))
+  list(
+    flag = flags, domfreq = doms, concentration = concs, crest = crests,
+    rate = rates, conc = conc, crestmax = crest, nwin = length(flags),
+    fraction = sum(flags) / length(flags), win = win, fs = fs,
+    method = paste0(
+      "VF heuristic from QRS absence and spectral ",
+      "concentration; Rangayyan (2024) Sections 1.2.4 and ",
+      "8.11 describe VF but give no detector, and no ",
+      "external primary source was verified for this rule"
+    )
+  )
 }
 
 
@@ -1325,9 +1563,13 @@ QrsDeriv1 <- function(x) {
   # response.
   x <- .morie_qrs_check(x, 3L, "ECG")
   n <- length(x)
-  list(y0 = .morie_qrs_pad(abs(x[3:n] - x[1:(n - 2L)]), 2L), n = n,
-       method = paste0("first-derivative QRS operator, Rangayyan (2024) ",
-                       "Eq 4.1 (Balda et al.)"))
+  list(
+    y0 = .morie_qrs_pad(abs(x[3:n] - x[1:(n - 2L)]), 2L), n = n,
+    method = paste0(
+      "first-derivative QRS operator, Rangayyan (2024) ",
+      "Eq 4.1 (Balda et al.)"
+    )
+  )
 }
 
 
@@ -1338,9 +1580,13 @@ QrsDeriv2 <- function(x) {
   x <- .morie_qrs_check(x, 5L, "ECG")
   n <- length(x)
   y1 <- abs(x[5:n] - 2 * x[3:(n - 2L)] + x[1:(n - 4L)])
-  list(y1 = .morie_qrs_pad(y1, 4L), n = n,
-       method = paste0("second-derivative QRS operator, Rangayyan (2024) ",
-                       "Eq 4.2 (Balda et al.)"))
+  list(
+    y1 = .morie_qrs_pad(y1, 4L), n = n,
+    method = paste0(
+      "second-derivative QRS operator, Rangayyan (2024) ",
+      "Eq 4.2 (Balda et al.)"
+    )
+  )
 }
 
 
@@ -1350,9 +1596,13 @@ QrsDerivMx <- function(y0, y1) {
   y0 <- .morie_qrs_check(y0, 1L, "y0")
   y1 <- .morie_qrs_check(y1, 1L, "y1")
   if (length(y0) != length(y1)) stop("y0 and y1 must have the same length")
-  list(y2 = 1.3 * y0 + 1.1 * y1, w0 = 1.3, w1 = 1.1, n = length(y0),
-       method = paste0("combined derivative QRS operator, Rangayyan (2024) ",
-                       "Eq 4.3 (Balda et al.)"))
+  list(
+    y2 = 1.3 * y0 + 1.1 * y1, w0 = 1.3, w1 = 1.1, n = length(y0),
+    method = paste0(
+      "combined derivative QRS operator, Rangayyan (2024) ",
+      "Eq 4.3 (Balda et al.)"
+    )
+  )
 }
 
 
@@ -1372,9 +1622,13 @@ QrsWSqDrv <- function(x, nwin = 8) {
     d <- x[nn - ii + 2L] - x[nn - ii + 1L]
     g1[nn - nwin + 1L] <- .morie_fsum(d * d * wt)
   }
-  list(g1 = .morie_qrs_pad(g1, nwin), nwin = nwin, n = n,
-       method = paste0("weighted squared first-derivative operator, ",
-                       "Rangayyan (2024) Eq 4.4 (Murthy and Rangaraj)"))
+  list(
+    g1 = .morie_qrs_pad(g1, nwin), nwin = nwin, n = n,
+    method = paste0(
+      "weighted squared first-derivative operator, ",
+      "Rangayyan (2024) Eq 4.4 (Murthy and Rangaraj)"
+    )
+  )
 }
 
 
@@ -1384,9 +1638,13 @@ QrsDrvSmth <- function(g1, mwin = 8) {
   g1 <- .morie_qrs_check(g1, 1L, "g1")
   mwin <- as.integer(mwin)
   if (mwin < 1L) stop("mwin must be >= 1")
-  list(g = .morie_qrs_mavg(g1, mwin), mwin = mwin, n = length(g1),
-       method = paste0("MA smoothing of the weighted-derivative output, ",
-                       "Rangayyan (2024) Eq 4.5"))
+  list(
+    g = .morie_qrs_mavg(g1, mwin), mwin = mwin, n = length(g1),
+    method = paste0(
+      "MA smoothing of the weighted-derivative output, ",
+      "Rangayyan (2024) Eq 4.5"
+    )
+  )
 }
 
 
@@ -1399,7 +1657,8 @@ QrsLPassTf <- function(freq, fs = 200) {
   fr <- as.numeric(freq)
   if (!length(fr)) stop("need at least one frequency")
   k <- 0:5
-  mag <- numeric(length(fr)); ph <- numeric(length(fr))
+  mag <- numeric(length(fr))
+  ph <- numeric(length(fr))
   for (i in seq_along(fr)) {
     w <- 2 * pi * fr[i] / fs
     sr <- .morie_fsum(cos(-w * k))
@@ -1409,13 +1668,19 @@ QrsLPassTf <- function(freq, fs = 200) {
     mag[i] <- sqrt(re * re + im * im)
     ph[i] <- atan2(im, re)
   }
-  list(freq = fr, mag = mag, phase = ph,
-       b = c(1 / 32, 0, 0, 0, 0, 0, -2 / 32, 0, 0, 0, 0, 0, 1 / 32),
-       a = c(1, -2, 1), fs = fs,
-       fsnote = paste0("integer coefficients designed for fs = 200 Hz ",
-                       "(fc = 11 Hz, 5-sample delay)"),
-       method = paste0("Pan-Tompkins lowpass transfer function, Rangayyan ",
-                       "(2024) Eq 4.7"))
+  list(
+    freq = fr, mag = mag, phase = ph,
+    b = c(1 / 32, 0, 0, 0, 0, 0, -2 / 32, 0, 0, 0, 0, 0, 1 / 32),
+    a = c(1, -2, 1), fs = fs,
+    fsnote = paste0(
+      "integer coefficients designed for fs = 200 Hz ",
+      "(fc = 11 Hz, 5-sample delay)"
+    ),
+    method = paste0(
+      "Pan-Tompkins lowpass transfer function, Rangayyan ",
+      "(2024) Eq 4.7"
+    )
+  )
 }
 
 
@@ -1429,12 +1694,16 @@ QrsLPassDf <- function(x) {
     y[i + 1L] <- (if (i >= 1L) 2 * y[i] else 0) -
       (if (i >= 2L) y[i - 1L] else 0) +
       (x[i + 1L] - (if (i >= 6L) 2 * x[i - 5L] else 0) +
-         (if (i >= 12L) x[i - 11L] else 0)) / 32
+        (if (i >= 12L) x[i - 11L] else 0)) / 32
   }
-  list(y = y, delay = 5L, n = n,
-       fsnote = "coefficients fixed for fs = 200 Hz",
-       method = paste0("Pan-Tompkins lowpass difference equation, Rangayyan ",
-                       "(2024) Eq 4.8"))
+  list(
+    y = y, delay = 5L, n = n,
+    fsnote = "coefficients fixed for fs = 200 Hz",
+    method = paste0(
+      "Pan-Tompkins lowpass difference equation, Rangayyan ",
+      "(2024) Eq 4.8"
+    )
+  )
 }
 
 
@@ -1445,7 +1714,8 @@ QrsHpLpTf <- function(freq, fs = 200) {
   fr <- as.numeric(freq)
   if (!length(fr)) stop("need at least one frequency")
   k <- 0:31
-  mag <- numeric(length(fr)); ph <- numeric(length(fr))
+  mag <- numeric(length(fr))
+  ph <- numeric(length(fr))
   for (i in seq_along(fr)) {
     w <- 2 * pi * fr[i] / fs
     re <- .morie_fsum(cos(-w * k))
@@ -1453,9 +1723,13 @@ QrsHpLpTf <- function(freq, fs = 200) {
     mag[i] <- sqrt(re * re + im * im)
     ph[i] <- atan2(im, re)
   }
-  list(freq = fr, mag = mag, phase = ph, b = rep(1, 32), fs = fs,
-       method = paste0("lowpass component of the Pan-Tompkins highpass, ",
-                       "Rangayyan (2024) Eq 4.9"))
+  list(
+    freq = fr, mag = mag, phase = ph, b = rep(1, 32), fs = fs,
+    method = paste0(
+      "lowpass component of the Pan-Tompkins highpass, ",
+      "Rangayyan (2024) Eq 4.9"
+    )
+  )
 }
 
 
@@ -1469,8 +1743,10 @@ QrsHpLpDf <- function(x) {
     y[i + 1L] <- (if (i >= 1L) y[i] else 0) + x[i + 1L] -
       (if (i >= 32L) x[i - 31L] else 0)
   }
-  list(y = y, n = n,
-       method = "recursive 32-point running sum, Rangayyan (2024) Eq 4.10")
+  list(
+    y = y, n = n,
+    method = "recursive 32-point running sum, Rangayyan (2024) Eq 4.10"
+  )
 }
 
 
@@ -1482,7 +1758,8 @@ QrsHPassTf <- function(freq, fs = 200) {
   fr <- as.numeric(freq)
   if (!length(fr)) stop("need at least one frequency")
   k <- 0:31
-  mag <- numeric(length(fr)); ph <- numeric(length(fr))
+  mag <- numeric(length(fr))
+  ph <- numeric(length(fr))
   for (i in seq_along(fr)) {
     w <- 2 * pi * fr[i] / fs
     lre <- .morie_fsum(cos(-w * k)) / 32
@@ -1492,10 +1769,14 @@ QrsHPassTf <- function(freq, fs = 200) {
     mag[i] <- sqrt(re * re + im * im)
     ph[i] <- atan2(im, re)
   }
-  list(freq = fr, mag = mag, phase = ph, fs = fs,
-       fsnote = "fc = 5 Hz and 80 ms delay hold at fs = 200 Hz",
-       method = paste0("Pan-Tompkins highpass transfer function, Rangayyan ",
-                       "(2024) Eq 4.11"))
+  list(
+    freq = fr, mag = mag, phase = ph, fs = fs,
+    fsnote = "fc = 5 Hz and 80 ms delay hold at fs = 200 Hz",
+    method = paste0(
+      "Pan-Tompkins highpass transfer function, Rangayyan ",
+      "(2024) Eq 4.11"
+    )
+  )
 }
 
 
@@ -1512,11 +1793,15 @@ QrsHPassDf <- function(x) {
       (if (i >= 32L) x[i - 31L] else 0)
     p[i + 1L] <- (if (i >= 16L) x[i - 15L] else 0) -
       ((if (i >= 1L) y[i] else 0) + x[i + 1L] -
-         (if (i >= 32L) x[i - 31L] else 0)) / 32
+        (if (i >= 32L) x[i - 31L] else 0)) / 32
   }
-  list(p = p, y = y, n = n,
-       method = paste0("Pan-Tompkins highpass difference equation, Rangayyan ",
-                       "(2024) Eq 4.12"))
+  list(
+    p = p, y = y, n = n,
+    method = paste0(
+      "Pan-Tompkins highpass difference equation, Rangayyan ",
+      "(2024) Eq 4.12"
+    )
+  )
 }
 
 
@@ -1533,10 +1818,14 @@ QrsHPassIo <- function(x) {
       (if (i >= 17L) x[i - 16L] else 0) +
       (if (i >= 32L) x[i - 31L] / 32 else 0)
   }
-  list(p = p, n = n, delayms = 80,
-       fsnote = "the 80 ms delay and 5 Hz cutoff hold at fs = 200 Hz",
-       method = paste0("combined Pan-Tompkins highpass relation, Rangayyan ",
-                       "(2024) Eq 4.13"))
+  list(
+    p = p, n = n, delayms = 80,
+    fsnote = "the 80 ms delay and 5 Hz cutoff hold at fs = 200 Hz",
+    method = paste0(
+      "combined Pan-Tompkins highpass relation, Rangayyan ",
+      "(2024) Eq 4.13"
+    )
+  )
 }
 
 
@@ -1547,10 +1836,14 @@ QrsDerivOp <- function(x) {
   x <- .morie_qrs_check(x, 1L, "signal")
   n <- length(x)
   y <- .morie_qrs_ptderiv(x)
-  list(y = y, b = c(2 / 8, 1 / 8, 0, -1 / 8, -2 / 8), n = n,
-       fsnote = "linear up to about 30 Hz at fs = 200 Hz",
-       method = paste0("Pan-Tompkins derivative operator, Rangayyan (2024) ",
-                       "Eq 4.14"))
+  list(
+    y = y, b = c(2 / 8, 1 / 8, 0, -1 / 8, -2 / 8), n = n,
+    fsnote = "linear up to about 30 Hz at fs = 200 Hz",
+    method = paste0(
+      "Pan-Tompkins derivative operator, Rangayyan (2024) ",
+      "Eq 4.14"
+    )
+  )
 }
 
 
@@ -1562,11 +1855,15 @@ QrsMwInt <- function(x, nwin = 30, fs = NULL) {
   if (!is.null(fs)) nwin <- max(1L, as.integer(round(0.150 * .morie_qrs_fs(fs))))
   nwin <- as.integer(nwin)
   if (nwin < 1L) stop("nwin must be >= 1")
-  list(y = .morie_qrs_mavg(x, nwin), nwin = nwin,
-       widthsec = if (!is.null(fs)) nwin / as.numeric(fs) else NULL,
-       n = length(x),
-       method = paste0("Pan-Tompkins moving-window integrator, Rangayyan ",
-                       "(2024) Eq 4.15"))
+  list(
+    y = .morie_qrs_mavg(x, nwin), nwin = nwin,
+    widthsec = if (!is.null(fs)) nwin / as.numeric(fs) else NULL,
+    n = length(x),
+    method = paste0(
+      "Pan-Tompkins moving-window integrator, Rangayyan ",
+      "(2024) Eq 4.15"
+    )
+  )
 }
 
 
@@ -1578,13 +1875,20 @@ QrsThresh <- function(peaki, spki, npki, issignal) {
   peaki <- as.numeric(peaki)
   spki <- as.numeric(spki)
   npki <- as.numeric(npki)
-  if (isTRUE(as.logical(issignal))) spki <- 0.125 * peaki + 0.875 * spki
-  else npki <- 0.125 * peaki + 0.875 * npki
+  if (isTRUE(as.logical(issignal))) {
+    spki <- 0.125 * peaki + 0.875 * spki
+  } else {
+    npki <- 0.125 * peaki + 0.875 * npki
+  }
   t1 <- npki + 0.25 * (spki - npki)
-  list(spki = spki, npki = npki, thresh1 = t1, thresh2 = 0.5 * t1,
-       peaki = peaki, issignal = isTRUE(as.logical(issignal)),
-       method = paste0("Pan-Tompkins adaptive thresholds, Rangayyan (2024) ",
-                       "Eqs 4.16 and 4.17"))
+  list(
+    spki = spki, npki = npki, thresh1 = t1, thresh2 = 0.5 * t1,
+    peaki = peaki, issignal = isTRUE(as.logical(issignal)),
+    method = paste0(
+      "Pan-Tompkins adaptive thresholds, Rangayyan (2024) ",
+      "Eqs 4.16 and 4.17"
+    )
+  )
 }
 
 
@@ -1594,9 +1898,13 @@ QrsSpkiUpd <- function(peaki, spki) {
   # the running estimate is too high and the heavier weight pulls it down.
   peaki <- as.numeric(peaki)
   spki <- as.numeric(spki)
-  list(spki = 0.25 * peaki + 0.75 * spki, previous = spki, peaki = peaki,
-       method = paste0("Pan-Tompkins search-back SPKI update, Rangayyan ",
-                       "(2024) Eq 4.18"))
+  list(
+    spki = 0.25 * peaki + 0.75 * spki, previous = spki, peaki = peaki,
+    method = paste0(
+      "Pan-Tompkins search-back SPKI update, Rangayyan ",
+      "(2024) Eq 4.18"
+    )
+  )
 }
 
 
@@ -1608,9 +1916,13 @@ HrFromCnt <- function(nbeats, duration) {
   duration <- as.numeric(duration)
   if (nbeats < 0L) stop("nbeats must be non-negative")
   if (!(duration > 0)) stop("duration must be positive")
-  list(hr = 60 * nbeats / duration, nbeats = nbeats, duration = duration,
-       method = paste0("average heart rate from beat count, Rangayyan (2024) ",
-                       "Eq 4.19"))
+  list(
+    hr = 60 * nbeats / duration, nbeats = nbeats, duration = duration,
+    method = paste0(
+      "average heart rate from beat count, Rangayyan (2024) ",
+      "Eq 4.19"
+    )
+  )
 }
 
 
@@ -1627,10 +1939,13 @@ LengthXfm <- function(chans, wwin, fs) {
   if (!is.list(chans)) chans <- list(chans)
   ch <- lapply(chans, .morie_qrs_check, least = 2L, what = "channel")
   nlen <- length(ch[[1L]])
-  if (any(vapply(ch, length, integer(1)) != nlen))
+  if (any(vapply(ch, length, integer(1)) != nlen)) {
     stop("all channels must have the same length")
-  dm <- matrix(unlist(lapply(ch, diff)), nrow = nlen - 1L,
-               ncol = length(ch))
+  }
+  dm <- matrix(unlist(lapply(ch, diff)),
+    nrow = nlen - 1L,
+    ncol = length(ch)
+  )
   step <- sqrt(apply(dm, 1L, function(r) .morie_fsum(r * r)))
   wsamp <- max(1L, as.integer(round(wwin * fs)))
   out <- numeric(nlen)
@@ -1640,10 +1955,14 @@ LengthXfm <- function(chans, wwin, fs) {
     if (k >= wsamp) run <- run - step[k - wsamp + 1L]
     out[max(0L, k - wsamp + 1L) + 1L] <- run
   }
-  list(length = out, nchan = length(ch), wsamp = wsamp, wsec = wwin,
-       fs = fs, n = nlen,
-       method = paste0("length transformation, Rangayyan (2024) Eq 4.21 ",
-                       "(Gritzali et al.)"))
+  list(
+    length = out, nchan = length(ch), wsamp = wsamp, wsec = wwin,
+    fs = fs, n = nlen,
+    method = paste0(
+      "length transformation, Rangayyan (2024) Eq 4.21 ",
+      "(Gritzali et al.)"
+    )
+  )
 }
 
 
@@ -1661,12 +1980,19 @@ DNotchSmth <- function(p, mwin = 16) {
   for (i in seq_len(n) - 1L) {
     kk <- 1:mwin
     kk <- kk[i - kk + 1L >= 0L]
-    s[i + 1L] <- if (length(kk))
-      .morie_fsum(p[i - kk + 2L]^2 * w[kk]) else 0
+    s[i + 1L] <- if (length(kk)) {
+      .morie_fsum(p[i - kk + 2L]^2 * w[kk])
+    } else {
+      0
+    }
   }
-  list(s = s, weights = w, mwin = mwin, n = n,
-       method = paste0("squared weighted smoothing for dicrotic notch, ",
-                       "Rangayyan (2024) Eq 4.23 (Lehner and Rangayyan)"))
+  list(
+    s = s, weights = w, mwin = mwin, n = n,
+    method = paste0(
+      "squared weighted smoothing for dicrotic notch, ",
+      "Rangayyan (2024) Eq 4.23 (Lehner and Rangayyan)"
+    )
+  )
 }
 
 

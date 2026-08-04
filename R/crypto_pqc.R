@@ -72,8 +72,8 @@ morie_crypto_mlkem768_keygen <- function() {
 #' if (morie_crypto_liboqs_available()) {
 #'   kp <- morie_crypto_mlkem768_keygen()
 #'   e <- morie_crypto_mlkem768_encaps(kp$pk)
-#'   length(e$ct)             # 1088
-#'   length(e$shared_secret)  # 32
+#'   length(e$ct) # 1088
+#'   length(e$shared_secret) # 32
 #' }
 #' @export
 morie_crypto_mlkem768_encaps <- function(pk) {
@@ -115,8 +115,8 @@ morie_crypto_mlkem768_decaps <- function(sk, ct) {
 #' @examples
 #' if (morie_crypto_liboqs_available()) {
 #'   kp <- morie_crypto_mldsa65_keygen()
-#'   length(kp$pk)  # 1952 (FIPS 204)
-#'   length(kp$sk)  # 4032
+#'   length(kp$pk) # 1952 (FIPS 204)
+#'   length(kp$sk) # 4032
 #' }
 #' @export
 morie_crypto_mldsa65_keygen <- function() {

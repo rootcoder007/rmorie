@@ -28,14 +28,23 @@
   shift <- ifelse(is.finite(lower), lower, 0)
   if (any(!is.finite(lower))) {
     stop("free (unbounded-below) variables are not supported here.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   Au <- if (is.null(A_ub)) matrix(0, 0L, k) else as.matrix(A_ub)
-  bu <- if (is.null(b_ub)) numeric(0) else as.numeric(b_ub) -
-    as.numeric(Au %*% shift)
+  bu <- if (is.null(b_ub)) {
+    numeric(0)
+  } else {
+    as.numeric(b_ub) -
+      as.numeric(Au %*% shift)
+  }
   Ae <- if (is.null(A_eq)) matrix(0, 0L, k) else as.matrix(A_eq)
-  be <- if (is.null(b_eq)) numeric(0) else as.numeric(b_eq) -
-    as.numeric(Ae %*% shift)
+  be <- if (is.null(b_eq)) {
+    numeric(0)
+  } else {
+    as.numeric(b_eq) -
+      as.numeric(Ae %*% shift)
+  }
   ub_rows <- which(is.finite(upper))
   for (i in ub_rows) {
     r <- numeric(k)
@@ -47,8 +56,10 @@
   m_e <- nrow(Ae)
   # standard form: [A_ub | I; A_eq | 0] z+ = b, all vars >= 0
   n_s <- m_u
-  A <- rbind(cbind(Au, if (n_s) diag(n_s) else matrix(0, 0L, 0L)),
-             cbind(Ae, matrix(0, m_e, n_s)))
+  A <- rbind(
+    cbind(Au, if (n_s) diag(n_s) else matrix(0, 0L, 0L)),
+    cbind(Ae, matrix(0, m_e, n_s))
+  )
   b <- c(bu, be)
   neg <- b < 0
   A[neg, ] <- -A[neg, , drop = FALSE]
@@ -59,7 +70,9 @@
     # no rows at all: the problem is separable over the box, and each
     # coordinate goes to whichever end its cost points at
     z <- ifelse(cv >= 0, 0, upper - shift)
-    if (any(cv < 0 & !is.finite(upper))) return(list(status = 3L))
+    if (any(cv < 0 & !is.finite(upper))) {
+      return(list(status = 3L))
+    }
     return(list(status = 0L, x = z + shift, fun = sum(cv * (z + shift))))
   }
   # phase 1: artificials
@@ -80,32 +93,38 @@
       if (!length(ent)) {
         return(list(basis = basis, x = xb, status = 0L))
       }
-      j <- min(ent)                        # Bland
+      j <- min(ent) # Bland
       d <- solve(B, A[, j])
       pos <- which(d > 1e-9)
-      if (!length(pos)) return(list(status = 3L))   # unbounded
+      if (!length(pos)) {
+        return(list(status = 3L))
+      } # unbounded
       ratio <- xb[pos] / d[pos]
       leave_candidates <- pos[abs(ratio - min(ratio)) < 1e-12]
-      i <- leave_candidates[which.min(basis[leave_candidates])]  # Bland
+      i <- leave_candidates[which.min(basis[leave_candidates])] # Bland
       basis[i] <- j
       B <- A[, basis, drop = FALSE]
     }
-    list(status = 4L)                      # iteration cap: numerical trouble
+    list(status = 4L) # iteration cap: numerical trouble
   }
   r1 <- run(A1, b, basis, obj1)
   if (r1$status != 0L || sum(obj1[r1$basis] * r1$x) > 1e-7) {
-    return(list(status = 2L))              # infeasible
+    return(list(status = 2L)) # infeasible
   }
   # drive any artificial still basic out (degenerate); ban artificials
   basis <- r1$basis
   obj <- c(cv, numeric(n_s), rep(0, m))
   r2 <- run(A1, b, basis, obj, ban = n + seq_len(m))
-  if (r2$status != 0L) return(list(status = r2$status))
+  if (r2$status != 0L) {
+    return(list(status = r2$status))
+  }
   x <- numeric(n + m)
   x[r2$basis] <- r2$x
   z <- x[seq_len(k)]
-  list(status = 0L, x = z + shift,
-       fun = sum(cv * (z + shift)) - 0)    # objective on the original scale
+  list(
+    status = 0L, x = z + shift,
+    fun = sum(cv * (z + shift)) - 0
+  ) # objective on the original scale
 }
 
 
@@ -144,7 +163,8 @@ morie_bnd_manski <- function(y, observed, support, treatment = NULL) {
   k1 <- as.numeric(support[2L])
   if (!(k0 < k1)) {
     stop(sprintf("the support must satisfy K0 < K1, got [%g, %g].", k0, k1),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   n <- length(yv)
   one_mean <- function(seen) {
@@ -153,9 +173,11 @@ morie_bnd_manski <- function(y, observed, support, treatment = NULL) {
     if (p > 0) {
       ys <- yv[seen]
       if (any(ys < k0 - 1e-12) || any(ys > k1 + 1e-12)) {
-        stop(paste("an observed outcome lies outside the declared support;",
-                   "the support is the one assumption here, so violating it",
-                   "voids the bounds."), call. = FALSE)
+        stop(paste(
+          "an observed outcome lies outside the declared support;",
+          "the support is the one assumption here, so violating it",
+          "voids the bounds."
+        ), call. = FALSE)
       }
       m <- mean(ys)
     }
@@ -165,19 +187,23 @@ morie_bnd_manski <- function(y, observed, support, treatment = NULL) {
     obs <- as.logical(observed)
     if (length(obs) != n) {
       stop(sprintf("observed has %d entries for %d.", length(obs), n),
-           call. = FALSE)
+        call. = FALSE
+      )
     }
     r <- one_mean(obs)
-    return(list(lower = r[1L], upper = r[2L], width = r[2L] - r[1L],
-                p_observed = r[3L], identified = r[3L] == 1,
-                width_identity = "(K1 - K0)(1 - P(obs)) exactly",
-                n = n,
-                method = "Manski worst-case bounds on a partially observed mean"))
+    return(list(
+      lower = r[1L], upper = r[2L], width = r[2L] - r[1L],
+      p_observed = r[3L], identified = r[3L] == 1,
+      width_identity = "(K1 - K0)(1 - P(obs)) exactly",
+      n = n,
+      method = "Manski worst-case bounds on a partially observed mean"
+    ))
   }
   Tv <- as.numeric(treatment)
   if (length(Tv) != n) {
     stop(sprintf("treatment has %d entries for %d.", length(Tv), n),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   if (!all(Tv %in% c(0, 1))) {
     stop("treatment must be binary 0/1.", call. = FALSE)
@@ -186,13 +212,17 @@ morie_bnd_manski <- function(y, observed, support, treatment = NULL) {
   r0 <- one_mean(Tv == 0)
   ate_lo <- r1[1L] - r0[2L]
   ate_hi <- r1[2L] - r0[1L]
-  list(ate_lower = ate_lo, ate_upper = ate_hi, ate_width = ate_hi - ate_lo,
-       y1_bounds = c(r1[1L], r1[2L]), y0_bounds = c(r0[1L], r0[2L]),
-       p_treated = r1[3L], contains_zero = ate_lo <= 0 && 0 <= ate_hi,
-       width_identity = paste("the ATE bounds always have width exactly",
-                              "K1 - K0, so they always contain zero"),
-       identified = FALSE, n = n,
-       method = "Manski (1990) worst-case bounds on the average treatment effect")
+  list(
+    ate_lower = ate_lo, ate_upper = ate_hi, ate_width = ate_hi - ate_lo,
+    y1_bounds = c(r1[1L], r1[2L]), y0_bounds = c(r0[1L], r0[2L]),
+    p_treated = r1[3L], contains_zero = ate_lo <= 0 && 0 <= ate_hi,
+    width_identity = paste(
+      "the ATE bounds always have width exactly",
+      "K1 - K0, so they always contain zero"
+    ),
+    identified = FALSE, n = n,
+    method = "Manski (1990) worst-case bounds on the average treatment effect"
+  )
 }
 
 
@@ -231,8 +261,10 @@ morie_bnd_imbens_manski <- function(lower_hat, upper_hat, se_lower,
   nn <- as.integer(n)
   a <- as.numeric(alpha)
   if (tu < tl) {
-    stop(sprintf("upper_hat must be at least lower_hat, got [%g, %g].",
-                 tl, tu), call. = FALSE)
+    stop(sprintf(
+      "upper_hat must be at least lower_hat, got [%g, %g].",
+      tl, tu
+    ), call. = FALSE)
   }
   if (sl <= 0 || su <= 0) {
     stop("both standard deviations must be positive.", call. = FALSE)
@@ -246,18 +278,28 @@ morie_bnd_imbens_manski <- function(lower_hat, upper_hat, se_lower,
   z1 <- stats::qnorm(1 - a)
   z2 <- stats::qnorm(1 - a / 2)
   gap <- function(cc) stats::pnorm(cc + shift) - stats::pnorm(-cc) - (1 - a)
-  cval <- if (gap(z1) >= 0) z1 else if (gap(z2) <= 0) z2 else {
+  cval <- if (gap(z1) >= 0) {
+    z1
+  } else if (gap(z2) <= 0) {
+    z2
+  } else {
     stats::uniroot(gap, c(z1, z2), tol = 1e-12)$root
   }
-  list(ci = c(tl - cval * sl / sqrt(nn), tu + cval * su / sqrt(nn)),
-       c = cval, z_one_sided = z1, z_two_sided = z2, delta = delta,
-       covers = paste("the TRUE PARAMETER at 1 - alpha; a set-covering",
-                      "interval would use the two-sided z throughout"),
-       stoye_caveat = paste("the interpolation presumes delta's own sampling",
-                            "error is negligible or the bound superefficient",
-                            "(Stoye 2009)"),
-       n = nn,
-       method = "Imbens-Manski (2004) Eq. (6) confidence interval")
+  list(
+    ci = c(tl - cval * sl / sqrt(nn), tu + cval * su / sqrt(nn)),
+    c = cval, z_one_sided = z1, z_two_sided = z2, delta = delta,
+    covers = paste(
+      "the TRUE PARAMETER at 1 - alpha; a set-covering",
+      "interval would use the two-sided z throughout"
+    ),
+    stoye_caveat = paste(
+      "the interpolation presumes delta's own sampling",
+      "error is negligible or the bound superefficient",
+      "(Stoye 2009)"
+    ),
+    n = nn,
+    method = "Imbens-Manski (2004) Eq. (6) confidence interval"
+  )
 }
 
 
@@ -305,7 +347,9 @@ morie_bnd_moment_inequality <- function(data, g, theta_grid, alpha = 0.05,
   grid <- as.numeric(theta_grid)
   old <- if (exists(".Random.seed", envir = globalenv())) {
     get(".Random.seed", envir = globalenv())
-  } else NULL
+  } else {
+    NULL
+  }
   set.seed(seed)
   on.exit(if (!is.null(old)) assign(".Random.seed", old, envir = globalenv()))
 
@@ -330,22 +374,30 @@ morie_bnd_moment_inequality <- function(data, g, theta_grid, alpha = 0.05,
     binding <- tt > -sqrt(2 * log(log(max(n, 3))))
     bq <- if (any(binding)) {
       rowSums(pmax(boot_t[, binding, drop = FALSE], 0)^2)
-    } else numeric(as.integer(B))
+    } else {
+      numeric(as.integer(B))
+    }
     crit[i] <- stats::quantile(bq, 1 - a, names = FALSE, type = 7L)
   }
   inset <- Q <= crit
   argmin <- which(Q <= min(Q) + 1e-12)
   cs <- if (any(inset)) c(min(grid[inset]), max(grid[inset])) else NULL
-  list(theta_grid = grid, criterion = Q, critical_value = crit,
-       in_confidence_set = inset, set_estimate = grid[argmin],
-       confidence_set_bounds = cs,
-       positive_part_note = paste("only VIOLATED inequalities enter Q_n;",
-                                  "deep inside the identified set every",
-                                  "sample moment is negative and Q_n is",
-                                  "exactly zero"),
-       n = n, J = J,
-       method = paste("Chernozhukov-Hong-Tamer criterion-function confidence",
-                      "region for moment inequalities"))
+  list(
+    theta_grid = grid, criterion = Q, critical_value = crit,
+    in_confidence_set = inset, set_estimate = grid[argmin],
+    confidence_set_bounds = cs,
+    positive_part_note = paste(
+      "only VIOLATED inequalities enter Q_n;",
+      "deep inside the identified set every",
+      "sample moment is negative and Q_n is",
+      "exactly zero"
+    ),
+    n = n, J = J,
+    method = paste(
+      "Chernozhukov-Hong-Tamer criterion-function confidence",
+      "region for moment inequalities"
+    )
+  )
 }
 
 
@@ -386,12 +438,14 @@ morie_bnd_lp <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
   k <- length(cv)
   if (k < 1L) {
     stop("the target functional needs at least one coefficient.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   bx <- if (is.null(bounds)) rep(list(c(0, 1)), k) else bounds
   if (length(bx) != k) {
     stop(sprintf("bounds has %d pairs for %d coordinates.", length(bx), k),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   lower <- vapply(bx, function(p) as.numeric(p[1L]), numeric(1))
   upper <- vapply(bx, function(p) {
@@ -401,35 +455,41 @@ morie_bnd_lp <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
   n_ub <- if (is.null(A_ub)) 0L else nrow(as.matrix(A_ub))
   n_eq <- if (is.null(A_eq)) 0L else nrow(as.matrix(A_eq))
   if (n_ub && (ncol(as.matrix(A_ub)) != k ||
-               length(as.numeric(b_ub)) != n_ub)) {
+    length(as.numeric(b_ub)) != n_ub)) {
     stop("A_ub and b_ub have inconsistent shapes.", call. = FALSE)
   }
   if (n_eq && (ncol(as.matrix(A_eq)) != k ||
-               length(as.numeric(b_eq)) != n_eq)) {
+    length(as.numeric(b_eq)) != n_eq)) {
     stop("A_eq and b_eq have inconsistent shapes.", call. = FALSE)
   }
   lo <- .bnd_simplex(cv, A_ub, b_ub, A_eq, b_eq, lower, upper)
   hi <- .bnd_simplex(-cv, A_ub, b_ub, A_eq, b_eq, lower, upper)
   infeasible <- lo$status == 2L || hi$status == 2L
   unbounded <- lo$status == 3L || hi$status == 3L
-  list(lower = if (lo$status == 0L) lo$fun else
-    if (lo$status == 3L) -Inf else NA_real_,
-    upper = if (hi$status == 0L) -hi$fun else
-      if (hi$status == 3L) Inf else NA_real_,
+  list(
+    lower = if (lo$status == 0L) lo$fun else if (lo$status == 3L) -Inf else NA_real_,
+    upper = if (hi$status == 0L) -hi$fun else if (hi$status == 3L) Inf else NA_real_,
     width = if (lo$status == 0L && hi$status == 0L) {
       -hi$fun - lo$fun
-    } else NA_real_,
+    } else {
+      NA_real_
+    },
     argmin = if (lo$status == 0L) lo$x else NULL,
     argmax = if (hi$status == 0L) hi$x else NULL,
     feasible = !infeasible, bounded = !unbounded, sharp = TRUE,
-    sharpness_note = paste("the interval IS the identified set for the",
-                           "target: the feasible set is convex, so every",
-                           "value between the optima is attained"),
-    infeasibility_note = paste("an empty feasible set is a specification",
-                               "REJECTION -- the maintained assumptions",
-                               "contradict the data moments"),
+    sharpness_note = paste(
+      "the interval IS the identified set for the",
+      "target: the feasible set is convex, so every",
+      "value between the optima is attained"
+    ),
+    infeasibility_note = paste(
+      "an empty feasible set is a specification",
+      "REJECTION -- the maintained assumptions",
+      "contradict the data moments"
+    ),
     k = k, n_inequalities = n_ub, n_equalities = n_eq,
-    method = "Sharp LP bounds on a linear target (Mogstad-Santos-Torgovitsky 2018)")
+    method = "Sharp LP bounds on a linear target (Mogstad-Santos-Torgovitsky 2018)"
+  )
 }
 
 
@@ -473,7 +533,8 @@ morie_bnd_polya_tree <- function(y, grid = NULL, tree_depth = 6L,
   depth <- as.integer(tree_depth)
   if (is.na(depth) || depth < 1L || depth > 16L) {
     stop(sprintf("tree_depth must lie in 1..16, got %s.", format(tree_depth)),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   av <- as.numeric(alpha)
   if (av <= 0) {
@@ -501,7 +562,7 @@ morie_bnd_polya_tree <- function(y, grid = NULL, tree_depth = 6L,
     nr <- counts[seq(2L, n_here, by = 2L)]
     p_left <- (am + nl) / (2 * am + nl + nr)
     rep_each <- ncell / n_here
-    split <- as.numeric(rbind(p_left, 1 - p_left))  # interleave L, R
+    split <- as.numeric(rbind(p_left, 1 - p_left)) # interleave L, R
     probs <- probs * rep(split, each = rep_each)
   }
   cellw <- (hi - lo) / ncell
@@ -512,14 +573,20 @@ morie_bnd_polya_tree <- function(y, grid = NULL, tree_depth = 6L,
   dens[inside] <- dens_cells[gi[inside] + 1L]
   mass <- if (length(g) > 2L && all(diff(g) > 0)) {
     sum(diff(g) * (dens[-1L] + dens[-length(dens)])) / 2
-  } else NULL
-  list(grid = g, density = dens, mass = mass,
-       tree_depth = depth, alpha = av,
-       alpha_rule = paste("alpha_m = alpha m^2, the Kraft rule that makes",
-                          "the prior sit on absolutely continuous",
-                          "distributions; a CONSTANT alpha_m gives a",
-                          "Dirichlet-process-like tree with discrete",
-                          "realisations"),
-       n = n,
-       method = "Polya tree posterior mean density (Lavine 1992)")
+  } else {
+    NULL
+  }
+  list(
+    grid = g, density = dens, mass = mass,
+    tree_depth = depth, alpha = av,
+    alpha_rule = paste(
+      "alpha_m = alpha m^2, the Kraft rule that makes",
+      "the prior sit on absolutely continuous",
+      "distributions; a CONSTANT alpha_m gives a",
+      "Dirichlet-process-like tree with discrete",
+      "realisations"
+    ),
+    n = n,
+    method = "Polya tree posterior mean density (Lavine 1992)"
+  )
 }

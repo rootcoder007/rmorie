@@ -26,16 +26,16 @@
 
 .MORIE_DATASET_PATTERNS <- list(
   treatment = "(treat|cannabis|drug|alcohol|interven|expos|assign|smok|vaccin|medic)",
-  outcome   = paste0(
+  outcome = paste0(
     "(outcome|result|response|y_|_freq|_harm|_drink|disorder|death|mortal|",
     "surviv|event|diagnos|prevalence|incidence|hospitali|readmit|relapse)"
   ),
-  weight    = "(weight|^wt$|^wt_|_wt$|^pw$|^pw_|_pw$|survey_wt|wtpumf|samp.*wt|ipw|iptw)",
-  stratum   = "(strat|stratum|_strata$)",
-  cluster   = "(cluster|psu|^clust_|_clust$)",
-  id        = "(^id$|_id$|^id_|^index$|^rowid|^record|^uid$|^caseid)",
-  interval  = "(year|index|score|temperature|temp_|_temp$|date|time|latitude|longitude)",
-  ordinal   = paste0(
+  weight = "(weight|^wt$|^wt_|_wt$|^pw$|^pw_|_pw$|survey_wt|wtpumf|samp.*wt|ipw|iptw)",
+  stratum = "(strat|stratum|_strata$)",
+  cluster = "(cluster|psu|^clust_|_clust$)",
+  id = "(^id$|_id$|^id_|^index$|^rowid|^record|^uid$|^caseid)",
+  interval = "(year|index|score|temperature|temp_|_temp$|date|time|latitude|longitude)",
+  ordinal = paste0(
     "(likert|rank|grade|level|stage|scale|class|quartile|quintile|decile|",
     "tercile|rating|satisfaction|severity|frequency_cat|education|income_group|",
     "age_group|health)"
@@ -46,7 +46,9 @@
 #' @keywords internal
 #' @noRd
 .morie_dataset_match <- function(name, key) {
-  if (!nzchar(name %||% "")) return(FALSE)
+  if (!nzchar(name %||% "")) {
+    return(FALSE)
+  }
   grepl(.MORIE_DATASET_PATTERNS[[key]], name, perl = TRUE, ignore.case = TRUE)
 }
 
@@ -76,7 +78,7 @@
 #' @return Character scalar; one of `"nominal"`, `"ordinal"`, `"interval"`,
 #'   `"ratio"`.
 #' @examples
-#' morie_dataset_infer_level(c("a", "b", "c"))          # "nominal"
+#' morie_dataset_infer_level(c("a", "b", "c")) # "nominal"
 #' morie_dataset_infer_level(c(1.5, 2.3, 4.1))
 #' @export
 morie_dataset_infer_level <- function(x, name = NULL, ordinal_threshold = 10L) {
@@ -94,10 +96,16 @@ morie_dataset_infer_level <- function(x, name = NULL, ordinal_threshold = 10L) {
     return("nominal")
   }
   if (is.numeric(x)) {
-    if (n_unique <= 2L) return("nominal")
-    if (n_unique <= 20L && .morie_dataset_match(nm, "ordinal")) return("ordinal")
+    if (n_unique <= 2L) {
+      return("nominal")
+    }
+    if (n_unique <= 20L && .morie_dataset_match(nm, "ordinal")) {
+      return("ordinal")
+    }
     if (is.double(x) && !is.integer(x)) {
-      if (.morie_dataset_match(nm, "interval")) return("interval")
+      if (.morie_dataset_match(nm, "interval")) {
+        return("interval")
+      }
       return("ratio")
     }
     if (length(non_null) > 0L) {
@@ -122,22 +130,36 @@ morie_dataset_infer_level <- function(x, name = NULL, ordinal_threshold = 10L) {
 #' @return One of `"id"`, `"weight"`, `"stratum"`, `"cluster"`,
 #'   `"treatment"`, `"outcome"`, `"covariate"`.
 #' @examples
-#' morie_dataset_detect_role(1:5, "case_id")           # "id"
+#' morie_dataset_detect_role(1:5, "case_id") # "id"
 #' morie_dataset_detect_role(c(0, 1), "treatment_arm") # "treatment"
 #' morie_dataset_detect_role(c(0, 1, 0), "outcome_event") # "outcome"
-#' morie_dataset_detect_role(c(1, 2, 3), "foo")        # "covariate"
+#' morie_dataset_detect_role(c(1, 2, 3), "foo") # "covariate"
 #' @export
 morie_dataset_detect_role <- function(x, name) {
   nm <- as.character(name %||% "")
   non_null <- x[!is.na(x)]
   is_binary <- length(unique(non_null)) == 2L
-  if (.morie_dataset_match(nm, "id"))      return("id")
-  if (.morie_dataset_match(nm, "weight") && is.numeric(x)) return("weight")
-  if (.morie_dataset_match(nm, "stratum")) return("stratum")
-  if (.morie_dataset_match(nm, "cluster")) return("cluster")
-  if (is_binary && .morie_dataset_match(nm, "treatment")) return("treatment")
-  if (.morie_dataset_match(nm, "outcome")) return("outcome")
-  if (.morie_dataset_match(nm, "treatment")) return("treatment")
+  if (.morie_dataset_match(nm, "id")) {
+    return("id")
+  }
+  if (.morie_dataset_match(nm, "weight") && is.numeric(x)) {
+    return("weight")
+  }
+  if (.morie_dataset_match(nm, "stratum")) {
+    return("stratum")
+  }
+  if (.morie_dataset_match(nm, "cluster")) {
+    return("cluster")
+  }
+  if (is_binary && .morie_dataset_match(nm, "treatment")) {
+    return("treatment")
+  }
+  if (.morie_dataset_match(nm, "outcome")) {
+    return("outcome")
+  }
+  if (.morie_dataset_match(nm, "treatment")) {
+    return("treatment")
+  }
   "covariate"
 }
 
@@ -202,8 +224,10 @@ morie_dataset_summarize_column <- function(x, level) {
 morie_dataset_column_profile <- function(series, name,
                                          ordinal_threshold = 10L,
                                          binary_threshold = 2L) {
-  level <- morie_dataset_infer_level(series, name = name,
-                                     ordinal_threshold = ordinal_threshold)
+  level <- morie_dataset_infer_level(series,
+    name = name,
+    ordinal_threshold = ordinal_threshold
+  )
   role <- morie_dataset_detect_role(series, name)
   non_null <- series[!is.na(series)]
   n_unique <- length(unique(non_null))
@@ -287,14 +311,16 @@ morie_dataset_profile <- function(df,
   }
 
   pick_best <- function(candidates) {
-    if (length(candidates) == 0L) return(NULL)
+    if (length(candidates) == 0L) {
+      return(NULL)
+    }
     scores <- vapply(candidates, function(c) c$score, integer(1))
     candidates[[which.max(scores)]]$name
   }
 
   suggested_treatment <- hint_treatment %||% pick_best(treatment_candidates)
-  suggested_outcome   <- hint_outcome   %||% pick_best(outcome_candidates)
-  suggested_weights   <- hint_weights   %||% (if (length(weight_candidates)) weight_candidates[[1L]] else NULL)
+  suggested_outcome <- hint_outcome %||% pick_best(outcome_candidates)
+  suggested_weights <- hint_weights %||% (if (length(weight_candidates)) weight_candidates[[1L]] else NULL)
 
   structure(
     list(
@@ -345,8 +371,10 @@ morie_dataset_profile_to_list <- function(profile) {
 #' cat(morie_dataset_profile_summary_table(p))
 #' @export
 morie_dataset_profile_summary_table <- function(profile) {
-  header <- sprintf("Dataset Profile  (%d rows x %d cols)",
-                    profile$n_rows, profile$n_cols)
+  header <- sprintf(
+    "Dataset Profile  (%d rows x %d cols)",
+    profile$n_rows, profile$n_cols
+  )
   sep <- strrep("-", 100L)
   cols_header <- sprintf(
     "%-30s %-12s %-10s %7s %7s %7s %-15s",
@@ -420,9 +448,13 @@ morie_dataset_load <- function(path, encoding = "UTF-8", ...) {
     lines <- readLines(path, warn = FALSE)
     lines <- lines[nzchar(trimws(lines))]
     rows <- lapply(lines, function(l) {
-      as.data.frame(lapply(morie_fetch_json(l, simplify = FALSE),
-                           function(v) if (is.null(v)) NA else v),
-                    stringsAsFactors = FALSE)
+      as.data.frame(
+        lapply(
+          morie_fetch_json(l, simplify = FALSE),
+          function(v) if (is.null(v)) NA else v
+        ),
+        stringsAsFactors = FALSE
+      )
     })
     out <- do.call(rbind, c(rows, list(make.row.names = FALSE)))
     return(out)
@@ -535,8 +567,12 @@ morie_dataset_suggest_plan <- function(profile) {
       names(profile$columns), function(nm) {
         cp <- profile$columns[[nm]]
         if (identical(cp$suggested_role, "covariate") &&
-            cp$level %in% c("nominal", "ordinal") &&
-            cp$n_unique > 2L && cp$n_unique <= 10L) nm else NA_character_
+          cp$level %in% c("nominal", "ordinal") &&
+          cp$n_unique > 2L && cp$n_unique <= 10L) {
+          nm
+        } else {
+          NA_character_
+        }
       }, character(1)
     )
     group_candidates <- group_candidates[!is.na(group_candidates)]

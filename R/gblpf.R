@@ -40,7 +40,8 @@ morie_gblup_full <- function(x, y, markers, lambda_gblup = NULL) {
   )
   rhs <- c(crossprod(X, y), y)
   sol <- tryCatch(as.numeric(solve(C, rhs)),
-                  error = function(e) as.numeric(.morie_ginv(C) %*% rhs))
+    error = function(e) as.numeric(.morie_ginv(C) %*% rhs)
+  )
   beta <- sol[seq_len(p)]
   g_hat <- sol[(p + 1):(p + n)]
   y_hat <- X %*% beta + g_hat

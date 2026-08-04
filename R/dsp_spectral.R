@@ -16,7 +16,8 @@
 #' @return List with `freqs` and `psd`, both length `floor(N/2)+1`.
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.4.
 #' @examples
-#' fs <- 1024; t <- seq.int(0, 1023) / fs
+#' fs <- 1024
+#' t <- seq.int(0, 1023) / fs
 #' x <- cos(2 * pi * 50 * t)
 #' out <- morie_dsp_psd_periodogram(x, fs = fs)
 #' out$freqs[which.max(out$psd)]
@@ -81,7 +82,8 @@ morie_dsp_psd_bartlett <- function(x, fs = 1, n_segments = 8L) {
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.4;
 #'   Welch (1967).
 #' @examples
-#' fs <- 1024; t <- seq.int(0, 2047) / fs
+#' fs <- 1024
+#' t <- seq.int(0, 2047) / fs
 #' x <- cos(2 * pi * 50 * t)
 #' out <- morie_dsp_psd_welch(x, fs = fs, nperseg = 256L)
 #' out$freqs[which.max(out$psd)]
@@ -122,7 +124,8 @@ morie_dsp_psd_welch <- function(x, fs = 1, nperseg = 256L,
 #' @return Scalar moment.
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.6.
 #' @examples
-#' fs <- 1024; t <- seq.int(0, 1023) / fs
+#' fs <- 1024
+#' t <- seq.int(0, 1023) / fs
 #' out <- morie_dsp_psd_periodogram(cos(2 * pi * 50 * t), fs = fs)
 #' morie_dsp_spectral_moment(out$psd, out$freqs, order = 0L)
 #' @export
@@ -140,12 +143,15 @@ morie_dsp_spectral_moment <- function(psd, freqs, order = 0L) {
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.6.
 #' @examples
 #' freqs <- seq.int(0, 64) / 64
-#' psd <- numeric(65); psd[20L] <- 1
+#' psd <- numeric(65)
+#' psd[20L] <- 1
 #' morie_dsp_mean_frequency(psd, freqs)
 #' @export
 morie_dsp_mean_frequency <- function(psd, freqs) {
   m0 <- morie_dsp_spectral_moment(psd, freqs, 0L)
-  if (m0 == 0) return(0)
+  if (m0 == 0) {
+    return(0)
+  }
   morie_dsp_spectral_moment(psd, freqs, 1L) / m0
 }
 
@@ -166,7 +172,9 @@ morie_dsp_median_frequency <- function(psd, freqs) {
   df <- if (length(freqs) > 1L) freqs[2] - freqs[1] else 1
   cum <- cumsum(psd * df)
   total <- cum[length(cum)]
-  if (total == 0) return(0)
+  if (total == 0) {
+    return(0)
+  }
   idx <- which(cum >= total / 2)[1L]
   if (is.na(idx)) idx <- length(freqs)
   freqs[idx]
@@ -190,7 +198,9 @@ morie_dsp_spectral_edge <- function(psd, freqs, pct = 0.95) {
   df <- if (length(freqs) > 1L) freqs[2] - freqs[1] else 1
   cum <- cumsum(psd * df)
   total <- cum[length(cum)]
-  if (total == 0) return(0)
+  if (total == 0) {
+    return(0)
+  }
   idx <- which(cum >= pct * total)[1L]
   if (is.na(idx)) idx <- length(freqs)
   freqs[idx]
@@ -215,7 +225,9 @@ morie_dsp_spectral_ratio <- function(psd, freqs, band1, band2) {
   df <- if (length(freqs) > 1L) freqs[2] - freqs[1] else 1
   p1 <- sum(psd[freqs >= band1[1] & freqs <= band1[2]]) * df
   p2 <- sum(psd[freqs >= band2[1] & freqs <= band2[2]]) * df
-  if (p2 == 0) return(Inf)
+  if (p2 == 0) {
+    return(Inf)
+  }
   p1 / p2
 }
 
@@ -234,9 +246,13 @@ morie_dsp_spectral_ratio <- function(psd, freqs, band1, band2) {
 #' @export
 morie_dsp_spectral_flatness <- function(psd) {
   p <- psd[psd > 0]
-  if (length(p) == 0L) return(0)
+  if (length(p) == 0L) {
+    return(0)
+  }
   am <- mean(p)
-  if (am == 0) return(0)
+  if (am == 0) {
+    return(0)
+  }
   exp(mean(log(p))) / am
 }
 
@@ -256,7 +272,9 @@ morie_dsp_spectral_flatness <- function(psd) {
 #' @export
 morie_dsp_spectral_entropy <- function(psd) {
   total <- sum(psd)
-  if (total == 0) return(0)
+  if (total == 0) {
+    return(0)
+  }
   p <- psd / total
   p <- p[p > 0]
   -sum(p * log2(p))
@@ -271,18 +289,23 @@ morie_dsp_spectral_entropy <- function(psd) {
 #' @return Scalar.
 #' @references Rangayyan & Krishnan (2015), Ch. 6.
 #' @examples
-#' fs <- 1024; t <- seq.int(0, 1023) / fs
+#' fs <- 1024
+#' t <- seq.int(0, 1023) / fs
 #' out <- morie_dsp_psd_periodogram(cos(2 * pi * 50 * t), fs = fs)
 #' morie_dsp_spectral_kurtosis(out$psd, out$freqs)
 #' @export
 morie_dsp_spectral_kurtosis <- function(psd, freqs) {
   total <- sum(psd)
-  if (total == 0) return(0)
+  if (total == 0) {
+    return(0)
+  }
   p <- psd / total
   fm <- sum(freqs * p)
   m2 <- sum((freqs - fm)^2 * p)
   m4 <- sum((freqs - fm)^4 * p)
-  if (m2 == 0) return(0)
+  if (m2 == 0) {
+    return(0)
+  }
   m4 / m2^2
 }
 
@@ -338,7 +361,7 @@ morie_dsp_acf_from_psd <- function(psd) {
 #' @examples
 #' freqs <- seq.int(0, 100) / 100
 #' psd <- rep(1, 101)
-#' morie_dsp_band_power(psd, freqs, 0.2, 0.5)  # ~0.3
+#' morie_dsp_band_power(psd, freqs, 0.2, 0.5) # ~0.3
 #' @export
 morie_dsp_band_power <- function(psd, freqs, f_low, f_high) {
   df <- if (length(freqs) > 1L) freqs[2] - freqs[1] else 1
@@ -363,7 +386,9 @@ morie_dsp_band_power <- function(psd, freqs, f_low, f_high) {
 #' @export
 morie_dsp_fractal_dim_psd <- function(psd, freqs) {
   valid <- (freqs > 0) & (psd > 0)
-  if (sum(valid) < 2L) return(1.5)
+  if (sum(valid) < 2L) {
+    return(1.5)
+  }
   fit <- stats::lm(log10(psd[valid]) ~ log10(freqs[valid]))
   beta <- -unname(stats::coef(fit)[2L])
   (5 - beta) / 2
@@ -430,20 +455,22 @@ morie_dsp_coherence <- function(x, y, fs = 1, nperseg = 256L) {
 #' @export
 morie_dsp_window <- function(N, wtype = "hamming") {
   N <- as.integer(N)
-  if (N < 1L) return(numeric(0))
+  if (N < 1L) {
+    return(numeric(0))
+  }
   n <- seq.int(0, N - 1L)
   wt <- tolower(wtype)
   switch(wt,
-    "hamming"    = 0.54 - 0.46 * cos(2 * pi * n / (N - 1L)),
-    "hann"       = 0.5 - 0.5 * cos(2 * pi * n / (N - 1L)),
-    "hanning"    = 0.5 - 0.5 * cos(2 * pi * n / (N - 1L)),
-    "blackman"   = 0.42 - 0.5 * cos(2 * pi * n / (N - 1L)) +
-                   0.08 * cos(4 * pi * n / (N - 1L)),
-    "bartlett"   = pmin(n, N - 1L - n) * (2 / (N - 1L)),
+    "hamming" = 0.54 - 0.46 * cos(2 * pi * n / (N - 1L)),
+    "hann" = 0.5 - 0.5 * cos(2 * pi * n / (N - 1L)),
+    "hanning" = 0.5 - 0.5 * cos(2 * pi * n / (N - 1L)),
+    "blackman" = 0.42 - 0.5 * cos(2 * pi * n / (N - 1L)) +
+      0.08 * cos(4 * pi * n / (N - 1L)),
+    "bartlett" = pmin(n, N - 1L - n) * (2 / (N - 1L)),
     "triangular" = pmin(n, N - 1L - n) * (2 / (N - 1L)),
-    "kaiser"     = .kaiser_window(N, beta = 14),
+    "kaiser" = .kaiser_window(N, beta = 14),
     "rectangular" = rep(1, N),
-    "boxcar"     = rep(1, N),
+    "boxcar" = rep(1, N),
     0.54 - 0.46 * cos(2 * pi * n / (N - 1L))
   )
 }
@@ -489,7 +516,9 @@ morie_dsp_fbm_synthesis <- function(N, H = 0.5) {
 #' Internal helper: Kaiser Window
 #' @noRd
 .kaiser_window <- function(N, beta = 14) {
-  if (N == 1L) return(1)
+  if (N == 1L) {
+    return(1)
+  }
   n <- seq.int(0, N - 1L)
   alpha <- (N - 1) / 2
   num <- .bessel_i0(beta * sqrt(1 - ((n - alpha) / alpha)^2))
@@ -506,19 +535,19 @@ morie_dsp_fbm_synthesis <- function(N, H = 0.5) {
   y_small <- (ax[small] / 3.75)^2
   out[small] <- 1 + y_small *
     (3.5156229 + y_small *
-    (3.0899424 + y_small *
-    (1.2067492 + y_small *
-    (0.2659732 + y_small *
-    (0.0360768 + y_small * 0.0045813)))))
+      (3.0899424 + y_small *
+        (1.2067492 + y_small *
+          (0.2659732 + y_small *
+            (0.0360768 + y_small * 0.0045813)))))
   y_big <- 3.75 / ax[!small]
   out[!small] <- (exp(ax[!small]) / sqrt(ax[!small])) *
     (0.39894228 + y_big *
-    (0.01328592 + y_big *
-    (0.00225319 + y_big *
-    (-0.00157565 + y_big *
-    (0.00916281 + y_big *
-    (-0.02057706 + y_big *
-    (0.02635537 + y_big *
-    (-0.01647633 + y_big * 0.00392377))))))))
+      (0.01328592 + y_big *
+        (0.00225319 + y_big *
+          (-0.00157565 + y_big *
+            (0.00916281 + y_big *
+              (-0.02057706 + y_big *
+                (0.02635537 + y_big *
+                  (-0.01647633 + y_big * 0.00392377))))))))
   out
 }

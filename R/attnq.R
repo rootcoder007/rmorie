@@ -17,7 +17,7 @@
 #' morie_attnq_scaled_dot_product_attention(Q = matrix(rnorm(150), 50, 3))
 #' @export
 morie_attnq_scaled_dot_product_attention <- function(Q, K = NULL, V = NULL,
-                                               mask = NULL) {
+                                                     mask = NULL) {
   Q <- as.matrix(Q)
   if (is.null(K)) K <- Q else K <- as.matrix(K)
   if (is.null(V)) V <- Q else V <- as.matrix(V)

@@ -19,7 +19,8 @@
     grad <- crossprod(D, y - p)
     H <- crossprod(D * W, D)
     step <- tryCatch(solve(H, grad),
-                     error = function(e) .morie_ginv(H) %*% grad)
+      error = function(e) .morie_ginv(H) %*% grad
+    )
     beta <- beta + step
     if (max(abs(step)) < tol) {
       converged <- TRUE
@@ -31,10 +32,14 @@
   # near-collinear design yields propensity scores that downstream IPW /
   # matching / DML weight as if they were fitted (RE3.0).
   if (!converged) {
-    warning(sprintf(paste0("logistic fit did not converge in %d iterations ",
-                           "(last step %.3g > tol %.3g); estimates that use ",
-                           "these fitted values are unreliable."),
-                    max_iter, max(abs(step)), tol), call. = FALSE)
+    warning(sprintf(
+      paste0(
+        "logistic fit did not converge in %d iterations ",
+        "(last step %.3g > tol %.3g); estimates that use ",
+        "these fitted values are unreliable."
+      ),
+      max_iter, max(abs(step)), tol
+    ), call. = FALSE)
   }
   as.vector(1 / (1 + exp(-pmin(pmax(D %*% beta, -35), 35))))
 }

@@ -64,7 +64,7 @@ NULL
 #' agg$mean_risk # 15 35
 #' agg$outcome_rate # 0.5 1.0
 morie_predpol_aggregate_areas <- function(area, risk, outcome, group = NULL,
-                                    population = NULL) {
+                                          population = NULL) {
   if (length(area) != length(risk) || length(area) != length(outcome)) {
     stop("area, risk and outcome must be the same length", call. = FALSE)
   }
@@ -143,7 +143,7 @@ morie_predpol_aggregate_areas <- function(area, risk, outcome, group = NULL,
 #' res$group_rank_gap$X # 3  (group X over-predicted)
 #' res$spearman # -1 (perfectly miscalibrated)
 morie_predpol_calibration_audit <- function(areas, mean_risk, outcome_rate,
-                                      group) {
+                                            group) {
   n <- length(areas)
   if (!(n == length(mean_risk) && n == length(outcome_rate) &&
     n == length(group))) {

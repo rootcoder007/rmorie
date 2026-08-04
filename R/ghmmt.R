@@ -13,8 +13,8 @@
 #' morie_ghosal_moment_matching(x = rnorm(50))
 #' @export
 morie_ghosal_moment_matching <- function(x, alpha = 1.0, A_lower = NULL,
-                                   A_upper = NULL, base_mean = 0,
-                                   base_sd = 1) {
+                                         A_upper = NULL, base_mean = 0,
+                                         base_sd = 1) {
   x <- as.numeric(x)
   n <- length(x)
   if (is.null(A_lower)) A_lower <- -Inf

@@ -62,15 +62,21 @@ morie_grm_vanraden <- function(markers, method = 1) {
   ## are now explicit.
   mode <- if (is.character(method)) {
     switch(method,
-      G_VR1 = 1L, G_VR2 = 2L, G_XX = 3L,
-      stop("method must be one of: 1, 2, 3, 'G_VR1', 'G_VR2', 'G_XX' (got '",
-           method, "')")
+      G_VR1 = 1L,
+      G_VR2 = 2L,
+      G_XX = 3L,
+      stop(
+        "method must be one of: 1, 2, 3, 'G_VR1', 'G_VR2', 'G_XX' (got '",
+        method, "')"
+      )
     )
   } else if (is.numeric(method) && length(method) == 1L && method %in% c(1, 2, 3)) {
     as.integer(method)
   } else {
-    stop("method must be one of: 1, 2, 3, 'G_VR1', 'G_VR2', 'G_XX' (got ",
-         paste(format(method), collapse = ", "), ")")
+    stop(
+      "method must be one of: 1, 2, 3, 'G_VR1', 'G_VR2', 'G_XX' (got ",
+      paste(format(method), collapse = ", "), ")"
+    )
   }
 
   p <- colMeans(M) / 2

@@ -19,16 +19,21 @@
 #'   criterion; Shachter (1998) for the Bayes-Ball d-separation
 #'   algorithm used by \code{morie_dag_identify}.
 #' @examples
-#' g <- morie_dag(c("race -> placement", "race -> outcome",
-#'                  "placement -> outcome"),
-#'                exposure = "placement", outcome = "outcome")
+#' g <- morie_dag(
+#'   c(
+#'     "race -> placement", "race -> outcome",
+#'     "placement -> outcome"
+#'   ),
+#'   exposure = "placement", outcome = "outcome"
+#' )
 #' morie_dag_identify(g)
 #' @export
 morie_dag <- function(edges, exposure, outcome, latent = character()) {
   em <- do.call(rbind, lapply(edges, function(e) {
     p <- trimws(strsplit(e, "->", fixed = TRUE)[[1]])
-    if (length(p) != 2L || !all(nzchar(p)))
+    if (length(p) != 2L || !all(nzchar(p))) {
       stop("edge must look like 'A -> B': ", e, call. = FALSE)
+    }
     p
   }))
   colnames(em) <- c("from", "to")
@@ -41,16 +46,22 @@ morie_dag <- function(edges, exposure, outcome, latent = character()) {
   seen <- 0L
   indeg2 <- indeg
   while (length(q)) {
-    v <- q[1]; q <- q[-1]; seen <- seen + 1L
+    v <- q[1]
+    q <- q[-1]
+    seen <- seen + 1L
     for (w in em[em[, "from"] == v, "to"]) {
       indeg2[w] <- indeg2[w] - 1L
       if (indeg2[w] == 0L) q <- c(q, w)
     }
   }
   if (seen != length(nodes)) stop("graph has a cycle", call. = FALSE)
-  structure(list(nodes = nodes, edges = em, exposure = exposure,
-                 outcome = outcome, latent = latent),
-            class = "morie_dag")
+  structure(
+    list(
+      nodes = nodes, edges = em, exposure = exposure,
+      outcome = outcome, latent = latent
+    ),
+    class = "morie_dag"
+  )
 }
 
 #' Print method for \code{morie_dag} objects
@@ -59,16 +70,22 @@ morie_dag <- function(edges, exposure, outcome, latent = character()) {
 #' @param ... Ignored; accepted for S3 consistency.
 #' @examples
 #' \donttest{
-#' g <- morie_dag(c("race -> placement", "race -> outcome",
-#'                  "placement -> outcome"),
-#'                exposure = "placement", outcome = "outcome")
+#' g <- morie_dag(
+#'   c(
+#'     "race -> placement", "race -> outcome",
+#'     "placement -> outcome"
+#'   ),
+#'   exposure = "placement", outcome = "outcome"
+#' )
 #' morie_dag_identify(g)
 #' print(g)
 #' }
 #' @export
 print.morie_dag <- function(x, ...) {
-  cat("morie causal DAG:", length(x$nodes), "nodes,",
-      nrow(x$edges), "edges\n")
+  cat(
+    "morie causal DAG:", length(x$nodes), "nodes,",
+    nrow(x$edges), "edges\n"
+  )
   cat("  exposure:", x$exposure, " outcome:", x$outcome, "\n")
   if (length(x$latent)) cat("  latent:", paste(x$latent, collapse = ", "), "\n")
   apply(x$edges, 1, function(e) cat("  ", e[1], "->", e[2], "\n"))
@@ -113,25 +130,33 @@ print.morie_dag <- function(x, ...) {
   visit <- list(c(x, "up"))
   seen <- character(0)
   while (length(visit)) {
-    cur <- visit[[1]]; visit <- visit[-1]
+    cur <- visit[[1]]
+    visit <- visit[-1]
     key <- paste(cur, collapse = "|")
     if (key %in% seen) next
     seen <- c(seen, key)
-    v <- cur[1]; dir <- cur[2]
-    if (v %in% y && !(v %in% z)) return(FALSE)
+    v <- cur[1]
+    dir <- cur[2]
+    if (v %in% y && !(v %in% z)) {
+      return(FALSE)
+    }
     if (dir == "up" && !(v %in% z)) {
-      for (p in g$edges[g$edges[, "to"] == v, "from"])
+      for (p in g$edges[g$edges[, "to"] == v, "from"]) {
         visit <- c(visit, list(c(p, "up")))
-      for (c_ in g$edges[g$edges[, "from"] == v, "to"])
+      }
+      for (c_ in g$edges[g$edges[, "from"] == v, "to"]) {
         visit <- c(visit, list(c(c_, "down")))
+      }
     } else if (dir == "down") {
       if (!(v %in% z)) {
-        for (c_ in g$edges[g$edges[, "from"] == v, "to"])
+        for (c_ in g$edges[g$edges[, "from"] == v, "to"]) {
           visit <- c(visit, list(c(c_, "down")))
+        }
       }
       if (v %in% anc_z) {
-        for (p in g$edges[g$edges[, "to"] == v, "from"])
+        for (p in g$edges[g$edges[, "to"] == v, "from"]) {
           visit <- c(visit, list(c(p, "up")))
+        }
       }
     }
   }
@@ -154,18 +179,24 @@ print.morie_dag <- function(x, ...) {
 #' morie_dag_identify(g)
 #' @export
 morie_dag_identify <- function(dag) {
-  x <- dag$exposure; y <- dag$outcome
+  x <- dag$exposure
+  y <- dag$outcome
   cand <- setdiff(
-    intersect(dag$nodes,
-              .morie_dag_anc(dag, c(x, y))),
-    c(.morie_dag_desc(dag, x), y, dag$latent))
+    intersect(
+      dag$nodes,
+      .morie_dag_anc(dag, c(x, y))
+    ),
+    c(.morie_dag_desc(dag, x), y, dag$latent)
+  )
   # backdoor graph: drop x's outgoing edges
   gb <- dag
   gb$edges <- dag$edges[dag$edges[, "from"] != x, , drop = FALSE]
   ok <- .morie_dag_dsep(gb, x, y, cand)
-  list(identified = ok,
-       estimand = if (ok) "backdoor" else NA_character_,
-       adjustment_set = if (ok) cand else character(0))
+  list(
+    identified = ok,
+    estimand = if (ok) "backdoor" else NA_character_,
+    adjustment_set = if (ok) cand else character(0)
+  )
 }
 
 #' Estimate the identified effect from data
@@ -178,43 +209,59 @@ morie_dag_identify <- function(dag) {
 #'   and `estimand`.
 #' @examples
 #' set.seed(1)
-#' z <- rnorm(400); x <- rbinom(400, 1, plogis(z))
+#' z <- rnorm(400)
+#' x <- rbinom(400, 1, plogis(z))
 #' y <- 0.8 * x + z + rnorm(400)
 #' df <- data.frame(z = z, x = x, y = y)
 #' g <- morie_dag(c("z -> x", "z -> y", "x -> y"), "x", "y")
 #' morie_dag_estimate(g, df, method = "backdoor.linear")
 #' @export
 morie_dag_estimate <- function(dag, data,
-                               method = c("backdoor.aipw",
-                                          "backdoor.linear",
-                                          "backdoor.dml")) {
+                               method = c(
+                                 "backdoor.aipw",
+                                 "backdoor.linear",
+                                 "backdoor.dml"
+                               )) {
   method <- match.arg(method)
   id <- morie_dag_identify(dag)
-  if (!id$identified)
+  if (!id$identified) {
     stop("effect not identified by the backdoor criterion in this DAG",
-         call. = FALSE)
+      call. = FALSE
+    )
+  }
   zs <- id$adjustment_set
-  x <- dag$exposure; y <- dag$outcome
+  x <- dag$exposure
+  y <- dag$outcome
   res <- if (!length(zs) && method != "backdoor.linear") {
     # unconfounded: difference in means with a linear fallback shape
     f <- stats::lm(stats::as.formula(paste(y, "~", x)), data = data)
-    est <- unname(stats::coef(f)[x]); se <- summary(f)$coefficients[x, 2]
-    list(ate = est, se = se, ci_lower = est - 1.96 * se,
-         ci_upper = est + 1.96 * se, n = nrow(data))
+    est <- unname(stats::coef(f)[x])
+    se <- summary(f)$coefficients[x, 2]
+    list(
+      ate = est, se = se, ci_lower = est - 1.96 * se,
+      ci_upper = est + 1.96 * se, n = nrow(data)
+    )
   } else if (method == "backdoor.linear") {
     rhs <- paste(c(x, zs), collapse = " + ")
     f <- stats::lm(stats::as.formula(paste(y, "~", rhs)), data = data)
-    est <- unname(stats::coef(f)[x]); se <- summary(f)$coefficients[x, 2]
-    list(ate = est, se = se, ci_lower = est - 1.96 * se,
-         ci_upper = est + 1.96 * se, n = nrow(data))
+    est <- unname(stats::coef(f)[x])
+    se <- summary(f)$coefficients[x, 2]
+    list(
+      ate = est, se = se, ci_lower = est - 1.96 * se,
+      ci_upper = est + 1.96 * se, n = nrow(data)
+    )
   } else if (method == "backdoor.aipw") {
     morie_estimate_aipw(data, treatment = x, outcome = y, covariates = zs)
   } else {
-    morie_estimate_double_ml(data, outcome = y, treatment = x,
-                             covariates = zs)
+    morie_estimate_double_ml(data,
+      outcome = y, treatment = x,
+      covariates = zs
+    )
   }
-  c(res, list(estimand = "backdoor", adjustment_set = zs,
-              method = paste0(method, " (rmorie native)")))
+  c(res, list(
+    estimand = "backdoor", adjustment_set = zs,
+    method = paste0(method, " (rmorie native)")
+  ))
 }
 
 #' Refute an estimated causal effect
@@ -234,17 +281,22 @@ morie_dag_estimate <- function(dag, data,
 #'   `passed` (logical heuristic), `method`.
 #' @examples
 #' set.seed(1)
-#' z <- rnorm(400); x <- rbinom(400, 1, plogis(z))
+#' z <- rnorm(400)
+#' x <- rbinom(400, 1, plogis(z))
 #' y <- 0.8 * x + z + rnorm(400)
 #' df <- data.frame(z = z, x = x, y = y)
 #' g <- morie_dag(c("z -> x", "z -> y", "x -> y"), "x", "y")
-#' morie_dag_refute(g, df, method = "placebo_treatment",
-#'                  estimator = "backdoor.linear", n_reps = 5)
+#' morie_dag_refute(g, df,
+#'   method = "placebo_treatment",
+#'   estimator = "backdoor.linear", n_reps = 5
+#' )
 #' @export
 morie_dag_refute <- function(dag, data,
-                             method = c("placebo_treatment",
-                                        "random_common_cause",
-                                        "data_subset"),
+                             method = c(
+                               "placebo_treatment",
+                               "random_common_cause",
+                               "data_subset"
+                             ),
                              estimator = "backdoor.linear",
                              n_reps = 20L, seed = 42L) {
   method <- match.arg(method)
@@ -263,8 +315,10 @@ morie_dag_refute <- function(dag, data,
     g2 <- dag
     if (method == "random_common_cause") {
       # noise variable enters the adjustment set candidates
-      g2$edges <- rbind(dag$edges, c("._rcc", dag$exposure),
-                        c("._rcc", dag$outcome))
+      g2$edges <- rbind(
+        dag$edges, c("._rcc", dag$exposure),
+        c("._rcc", dag$outcome)
+      )
       g2$nodes <- c(dag$nodes, "._rcc")
     }
     morie_dag_estimate(g2, d2, method = estimator)$ate
@@ -274,8 +328,10 @@ morie_dag_refute <- function(dag, data,
   } else {
     abs(mean(reps) - orig) < max(0.15 * abs(orig), 0.05)
   }
-  list(original = orig, refuted = mean(reps), reps = reps,
-       passed = passed, method = method)
+  list(
+    original = orig, refuted = mean(reps), reps = reps,
+    passed = passed, method = method
+  )
 }
 
 #' Canonical MRM causal DAGs
@@ -295,15 +351,21 @@ morie_dag_refute <- function(dag, data,
 morie_mrm_dags <- function() {
   list(
     placement = morie_dag(
-      c("race -> placement", "race -> outcome",
+      c(
+        "race -> placement", "race -> outcome",
         "prior_record -> placement", "prior_record -> outcome",
         "age -> placement", "age -> outcome",
-        "placement -> outcome"),
-      exposure = "placement", outcome = "outcome"),
+        "placement -> outcome"
+      ),
+      exposure = "placement", outcome = "outcome"
+    ),
     use_of_force = morie_dag(
-      c("neighbourhood -> police_contact", "neighbourhood -> force",
+      c(
+        "neighbourhood -> police_contact", "neighbourhood -> force",
         "race -> police_contact", "race -> force",
-        "police_contact -> force"),
-      exposure = "police_contact", outcome = "force")
+        "police_contact -> force"
+      ),
+      exposure = "police_contact", outcome = "force"
+    )
   )
 }

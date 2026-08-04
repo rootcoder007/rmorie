@@ -24,10 +24,12 @@
   b <- as.numeric(beta)
   if (length(b) == 0L) stop("beta must be non-empty.", call. = FALSE)
   if (b[1L] == 0) {
-    stop(paste("the first component of beta is zero, so |beta_1| = 1 cannot",
-               "be imposed; reorder X so a component with a nonzero",
-               "coefficient and a continuous conditional distribution comes",
-               "first."), call. = FALSE)
+    stop(paste(
+      "the first component of beta is zero, so |beta_1| = 1 cannot",
+      "be imposed; reorder X so a component with a nonzero",
+      "coefficient and a continuous conditional distribution comes",
+      "first."
+    ), call. = FALSE)
   }
   b / abs(b[1L])
 }
@@ -95,25 +97,32 @@ morie_transform_T_F <- function(x, y, bandwidth, beta_hat, y0 = NULL,
   }
   n <- nrow(X)
   d <- ncol(X)
-  if (n < 20L) stop(sprintf("need at least 20 observations, got %d.", n),
-                    call. = FALSE)
+  if (n < 20L) {
+    stop(sprintf("need at least 20 observations, got %d.", n),
+      call. = FALSE
+    )
+  }
   b <- .morie_hrz_normalize_scale(beta_hat)
   if (length(b) != d) {
     stop(sprintf("beta_hat has %d entries for %d covariates.", length(b), d),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   hb <- as.numeric(bandwidth)
   h_ny <- hb[1L]
   h_nz <- if (length(hb) == 1L) hb[1L] else hb[2L]
   if (h_ny <= 0 || h_nz <= 0) {
     stop(sprintf("bandwidths must be positive, got (%g, %g).", h_ny, h_nz),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   z_idx <- as.numeric(X %*% b)
   yy0 <- if (is.null(y0)) stats::median(yv) else as.numeric(y0)
   yg <- if (is.null(y_grid)) {
     seq(stats::quantile(yv, 0.05), stats::quantile(yv, 0.95), length.out = 41L)
-  } else as.numeric(y_grid)
+  } else {
+    as.numeric(y_grid)
+  }
 
   # w is a weight on z with compact support S_w integrating to 1
   # (6.58); the interquartile range keeps S_w where p_Z is bounded
@@ -128,12 +137,16 @@ morie_transform_T_F <- function(x, y, bandwidth, beta_hat, y0 = NULL,
     kzp <- .morie_hrz_kz6_deriv(a)
     ind <- as.numeric(yv <= v)
     dd <- sum(kz) / (n * h_nz)
-    if (dd <= 0) return(0)
+    if (dd <= 0) {
+      return(0)
+    }
     nn_ <- sum(ind * kz) / (n * h_nz)
     d_dd <- -sum(kzp) / (n * h_nz^2)
     d_nn <- -sum(ind * kzp) / (n * h_nz^2)
     g_nz <- (d_nn * dd - nn_ * d_dd) / dd^2
-    if (g_nz == 0) return(0)
+    if (g_nz == 0) {
+      return(0)
+    }
     g_ny <- sum(stats::dnorm((yv - v) / h_ny) * kz) / (n * h_ny * h_nz * dd)
     g_ny / g_nz
   }
@@ -146,7 +159,7 @@ morie_transform_T_F <- function(x, y, bandwidth, beta_hat, y0 = NULL,
     sum(diff(zs) * (utils::head(vals, -1L) + utils::tail(vals, -1L)) / 2)
   }, numeric(1))
   cum <- c(0, cumsum(diff(vs) * (utils::head(inner, -1L) +
-                                   utils::tail(inner, -1L)) / 2))
+    utils::tail(inner, -1L)) / 2))
   base <- stats::approx(vs, cum, xout = yy0, rule = 2L)$y
   t_at <- function(q) -(stats::approx(vs, cum, xout = q, rule = 2L)$y - base)
   t_hat <- t_at(yg)
@@ -155,7 +168,8 @@ morie_transform_T_F <- function(x, y, bandwidth, beta_hat, y0 = NULL,
   q1 <- if (is.null(y1)) as.numeric(stats::quantile(yv, 0.90)) else as.numeric(y1)
   if (q2 >= q1) {
     stop(sprintf("the trimming window needs y2 < y1, got (%g, %g).", q2, q1),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   t_y2 <- t_at(q2)
   t_y1 <- t_at(q1)
@@ -164,18 +178,22 @@ morie_transform_T_F <- function(x, y, bandwidth, beta_hat, y0 = NULL,
   uni <- t_at(yv) - z_idx
   ug <- if (is.null(u_grid)) {
     seq(stats::quantile(uni, 0.1), stats::quantile(uni, 0.9), length.out = 41L)
-  } else as.numeric(u_grid)
+  } else {
+    as.numeric(u_grid)
+  }
   f_hat <- vapply(ug, function(u) {
     inwin <- (t_y2 - u < z_idx) & (z_idx <= t_y1 - u)
     bn <- mean(inwin)
     if (bn > 0) mean((uni <= u) & inwin) / bn else NA_real_
   }, numeric(1))
 
-  list(y_grid = yg, T_hat = t_hat, u_grid = ug, F_hat = f_hat,
-       beta = b, y0 = yy0, window = c(q2, q1), h_ny = h_ny, h_nz = h_nz,
-       F_is_empirical_cdf = FALSE, normalisation = .MORIE_HRZ_SCALE_NOTE,
-       n = n, d = d,
-       method = "Horowitz (1996) T_n (6.60) and F_n (6.66); F is not the EDF of U_n")
+  list(
+    y_grid = yg, T_hat = t_hat, u_grid = ug, F_hat = f_hat,
+    beta = b, y0 = yy0, window = c(q2, q1), h_ny = h_ny, h_nz = h_nz,
+    F_is_empirical_cdf = FALSE, normalisation = .MORIE_HRZ_SCALE_NOTE,
+    n = n, d = d,
+    method = "Horowitz (1996) T_n (6.60) and F_n (6.66); F is not the EDF of U_n"
+  )
 }
 
 #' Asymptotic properties of Horowitz's T_n and F_n
@@ -227,21 +245,24 @@ morie_transform_asymptotics <- function(x, y, bandwidth, n = NULL) {
   h_nz <- if (length(hb) == 1L) hb[1L] else hb[2L]
   if (h_ny <= 0 || h_nz <= 0) {
     stop(sprintf("bandwidths must be positive, got (%g, %g).", h_ny, h_nz),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   ref_y <- nn^(-1 / 3)
   ref_z <- nn^(-1 / 10)
   # HT9 fixes the RATES, not the constants
   ok <- (h_ny / ref_y >= 0.1) && (h_ny / ref_y <= 10) &&
     (h_nz / ref_z >= 0.1) && (h_nz / ref_z <= 10) && (h_nz > h_ny)
-  list(asymptotic_distribution = "tight mean-zero Gaussian process",
-       limit_is_process = TRUE, rate = nn^-0.5, rate_exponent = -0.5,
-       h_ny_reference = ref_y, h_nz_reference = ref_z,
-       h_ny = h_ny, h_nz = h_nz,
-       bandwidths_consistent_with_HT9 = ok, Kz_order_required = 6L,
-       uniform_over = "a compact interval strictly inside the support of Y",
-       n = nn, d = ncol(X),
-       method = "Theorems 6.4-6.5: uniform consistency and n^{1/2} weak convergence to a Gaussian PROCESS")
+  list(
+    asymptotic_distribution = "tight mean-zero Gaussian process",
+    limit_is_process = TRUE, rate = nn^-0.5, rate_exponent = -0.5,
+    h_ny_reference = ref_y, h_nz_reference = ref_z,
+    h_ny = h_ny, h_nz = h_nz,
+    bandwidths_consistent_with_HT9 = ok, Kz_order_required = 6L,
+    uniform_over = "a compact interval strictly inside the support of Y",
+    n = nn, d = ncol(X),
+    method = "Theorems 6.4-6.5: uniform consistency and n^{1/2} weak convergence to a Gaussian PROCESS"
+  )
 }
 
 #' Chen's (2002) rank estimator of T
@@ -293,41 +314,55 @@ morie_chen_transform <- function(x, y, bandwidth = NULL, beta_hat = NULL,
   }
   n <- nrow(X)
   d <- ncol(X)
-  if (n < 10L) stop(sprintf("need at least 10 observations, got %d.", n),
-                    call. = FALSE)
-  b <- if (is.null(beta_hat)) c(1, numeric(d - 1L)) else
+  if (n < 10L) {
+    stop(sprintf("need at least 10 observations, got %d.", n),
+      call. = FALSE
+    )
+  }
+  b <- if (is.null(beta_hat)) {
+    c(1, numeric(d - 1L))
+  } else {
     .morie_hrz_normalize_scale(beta_hat)
+  }
   if (length(b) != d) {
     stop(sprintf("beta_hat has %d entries for %d covariates.", length(b), d),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   z_idx <- as.numeric(X %*% b)
   yy0 <- if (is.null(y0)) stats::median(yv) else as.numeric(y0)
   yg <- if (is.null(y_grid)) {
     seq(stats::quantile(yv, 0.1), stats::quantile(yv, 0.9), length.out = 21L)
-  } else as.numeric(y_grid)
+  } else {
+    as.numeric(y_grid)
+  }
   dmat <- outer(z_idx, z_idx, "-")
   diag(dmat) <- NA_real_
   dj0 <- as.numeric(yv >= yy0)
   tg <- if (is.null(t_grid)) {
     seq(min(dmat, na.rm = TRUE), max(dmat, na.rm = TRUE), length.out = 121L)
-  } else as.numeric(t_grid)
+  } else {
+    as.numeric(t_grid)
+  }
   denom <- n * (n - 1L)
   t_hat <- numeric(length(yg))
   objmax <- numeric(length(yg))
   for (k in seq_along(yg)) {
     wgt <- outer(as.numeric(yv >= yg[k]), dj0, "-")
-    vals <- vapply(tg, function(tt)
-      sum(wgt * (dmat >= tt), na.rm = TRUE) / denom, numeric(1))
+    vals <- vapply(tg, function(tt) {
+      sum(wgt * (dmat >= tt), na.rm = TRUE) / denom
+    }, numeric(1))
     j <- which.max(vals)
     t_hat[k] <- tg[j]
     objmax[k] <- vals[j]
   }
-  list(y_grid = yg, T_hat = t_hat, objective_max = objmax, y0 = yy0,
-       beta = b, t_grid = tg, uses_kernel = FALSE, rate_exponent = -0.5,
-       faster_than_horowitz = FALSE, normalisation = .MORIE_HRZ_SCALE_NOTE,
-       n = n, d = d,
-       method = "Chen (2002) pairwise rank maximisation (6.67); same n^{-1/2} rate as Horowitz")
+  list(
+    y_grid = yg, T_hat = t_hat, objective_max = objmax, y0 = yy0,
+    beta = b, t_grid = tg, uses_kernel = FALSE, rate_exponent = -0.5,
+    faster_than_horowitz = FALSE, normalisation = .MORIE_HRZ_SCALE_NOTE,
+    n = n, d = d,
+    method = "Chen (2002) pairwise rank maximisation (6.67); same n^{-1/2} rate as Horowitz"
+  )
 }
 
 #' Kernel-smoothed baseline hazard
@@ -375,19 +410,25 @@ morie_baseline_hazard <- function(t, x, event, beta_hat, bandwidth = NULL,
     stop("x must have one row per entry of t.", call. = FALSE)
   }
   if (length(ev) != length(tv)) {
-    stop(sprintf("event has %d entries for %d durations.",
-                 length(ev), length(tv)), call. = FALSE)
+    stop(sprintf(
+      "event has %d entries for %d durations.",
+      length(ev), length(tv)
+    ), call. = FALSE)
   }
   if (!all(ev %in% c(0, 1))) stop("event must be binary 0/1.", call. = FALSE)
   if (any(tv < 0)) stop("durations must be non-negative.", call. = FALSE)
   n <- nrow(X)
   d <- ncol(X)
-  if (n < 5L) stop(sprintf("need at least 5 observations, got %d.", n),
-                   call. = FALSE)
+  if (n < 5L) {
+    stop(sprintf("need at least 5 observations, got %d.", n),
+      call. = FALSE
+    )
+  }
   b <- as.numeric(beta_hat)
   if (length(b) != d) {
     stop(sprintf("beta_hat has %d entries for %d covariates.", length(b), d),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   risk <- exp(as.numeric(X %*% b))
   if (!all(is.finite(risk))) {
@@ -407,19 +448,29 @@ morie_baseline_hazard <- function(t, x, event, beta_hat, bandwidth = NULL,
   spread <- max(jump_t) - min(jump_t)
   hh <- if (is.null(bandwidth)) {
     (if (spread > 0) spread else 1) * n^(-0.2)
-  } else as.numeric(bandwidth)
-  if (hh <= 0) stop(sprintf("bandwidth must be positive, got %g.", hh),
-                    call. = FALSE)
-  g <- if (is.null(grid)) seq(min(jump_t), max(jump_t), length.out = 50L) else
+  } else {
+    as.numeric(bandwidth)
+  }
+  if (hh <= 0) {
+    stop(sprintf("bandwidth must be positive, got %g.", hh),
+      call. = FALSE
+    )
+  }
+  g <- if (is.null(grid)) {
+    seq(min(jump_t), max(jump_t), length.out = 50L)
+  } else {
     as.numeric(grid)
+  }
   # (6.44) as a Stieltjes sum: dLambda_n0 puts mass jump_w at each
   # event time
   lam <- rowSums(stats::dnorm(outer(g, jump_t, "-") / hh) *
-                   rep(jump_w, each = length(g))) / hh
-  list(grid = g, lambda0_hat = lam, cumhaz_times = jump_t, cumhaz = cumhaz,
-       bandwidth = hh, A_K = 1, rate_exponent = -0.4,
-       root_n_attainable = FALSE, n_events = length(jump_t), n = n,
-       method = "Breslow cumulative hazard smoothed by (6.44); differentiating the step function does not work")
+    rep(jump_w, each = length(g))) / hh
+  list(
+    grid = g, lambda0_hat = lam, cumhaz_times = jump_t, cumhaz = cumhaz,
+    bandwidth = hh, A_K = 1, rate_exponent = -0.4,
+    root_n_attainable = FALSE, n_events = length(jump_t), n = n,
+    method = "Breslow cumulative hazard smoothed by (6.44); differentiating the step function does not work"
+  )
 }
 
 #' Prediction from a fitted transformation model
@@ -455,7 +506,9 @@ morie_baseline_hazard <- function(t, x, event, beta_hat, bandwidth = NULL,
 #' yg <- seq(0.5, 8, length.out = 60)
 #' ug <- seq(-4, 4, length.out = 81)
 #' morie_transform_prediction(c(0.3, 0.2), 2, log(yg), plogis(ug),
-#'                            c(1, -0.5), y_grid = yg, u_grid = ug)$gamma
+#'   c(1, -0.5),
+#'   y_grid = yg, u_grid = ug
+#' )$gamma
 #' @export
 morie_transform_prediction <- function(x, y_threshold, T_hat, F_hat, beta_hat,
                                        gamma = NULL, y_grid = NULL,
@@ -465,7 +518,8 @@ morie_transform_prediction <- function(x, y_threshold, T_hat, F_hat, beta_hat,
   if (ncol(X) != length(b)) X <- t(X)
   if (ncol(X) != length(b)) {
     stop(sprintf("x must have %d columns to match beta_hat.", length(b)),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   idx <- as.numeric(X %*% b)
   yq <- as.numeric(y_threshold)
@@ -474,25 +528,37 @@ morie_transform_prediction <- function(x, y_threshold, T_hat, F_hat, beta_hat,
     stop("y_grid is required when T_hat is a vector.", call. = FALSE)
   }
   yg <- as.numeric(y_grid)
-  tg <- if (is.function(T_hat)) vapply(yg, T_hat, numeric(1)) else
+  tg <- if (is.function(T_hat)) {
+    vapply(yg, T_hat, numeric(1))
+  } else {
     as.numeric(T_hat)
+  }
   if (length(tg) != length(yg)) {
-    stop(sprintf("T_hat has %d entries for %d grid points.",
-                 length(tg), length(yg)), call. = FALSE)
+    stop(sprintf(
+      "T_hat has %d entries for %d grid points.",
+      length(tg), length(yg)
+    ), call. = FALSE)
   }
   if (any(diff(tg) < 0)) {
-    stop(paste("T_hat must be non-decreasing; assumption HT4 makes T",
-               "strictly increasing."), call. = FALSE)
+    stop(paste(
+      "T_hat must be non-decreasing; assumption HT4 makes T",
+      "strictly increasing."
+    ), call. = FALSE)
   }
   if (is.null(u_grid)) {
     stop("u_grid is required when F_hat is a vector.", call. = FALSE)
   }
   ug <- as.numeric(u_grid)
-  fg <- if (is.function(F_hat)) vapply(ug, F_hat, numeric(1)) else
+  fg <- if (is.function(F_hat)) {
+    vapply(ug, F_hat, numeric(1))
+  } else {
     as.numeric(F_hat)
+  }
   if (length(fg) != length(ug)) {
-    stop(sprintf("F_hat has %d entries for %d grid points.",
-                 length(fg), length(ug)), call. = FALSE)
+    stop(sprintf(
+      "F_hat has %d entries for %d grid points.",
+      length(fg), length(ug)
+    ), call. = FALSE)
   }
   if (any(fg < 0) || any(fg > 1)) {
     stop("F_hat must lie in [0, 1].", call. = FALSE)
@@ -500,8 +566,9 @@ morie_transform_prediction <- function(x, y_threshold, T_hat, F_hat, beta_hat,
   t_of <- function(v) stats::approx(yg, tg, xout = v, rule = 2L)$y
   f_of <- function(v) stats::approx(ug, fg, xout = v, rule = 2L)$y
 
-  prob <- outer(idx, yq, function(zz, vv)
-    f_of(t_of(vv) - zz))
+  prob <- outer(idx, yq, function(zz, vv) {
+    f_of(t_of(vv) - zz)
+  })
   g <- if (is.null(gamma)) 0.5 else as.numeric(gamma)
   if (!(g > 0 && g < 1)) {
     stop(sprintf("gamma must lie in (0, 1), got %g.", g), call. = FALSE)
@@ -516,11 +583,13 @@ morie_transform_prediction <- function(x, y_threshold, T_hat, F_hat, beta_hat,
   prob_out <- if (length(idx) == 1L) {
     if (length(yq) == 1L) as.numeric(prob[1L, 1L]) else as.numeric(prob[1L, ])
   } else if (length(yq) == 1L) as.numeric(prob[, 1L]) else prob
-  list(probability = prob_out,
-       quantile = if (length(idx) > 1L) quant else quant[1L],
-       gamma = g, u_gamma = u_g,
-       index = if (length(idx) > 1L) idx else idx[1L],
-       mean_root_n_estimable = FALSE, quantile_root_n_estimable = TRUE,
-       n_points = length(idx),
-       method = "P(Y<=y|x) = F[T(y) - x'b]; the conditional MEAN is not root-n estimable when T is nonparametric")
+  list(
+    probability = prob_out,
+    quantile = if (length(idx) > 1L) quant else quant[1L],
+    gamma = g, u_gamma = u_g,
+    index = if (length(idx) > 1L) idx else idx[1L],
+    mean_root_n_estimable = FALSE, quantile_root_n_estimable = TRUE,
+    n_points = length(idx),
+    method = "P(Y<=y|x) = F[T(y) - x'b]; the conditional MEAN is not root-n estimable when T is nonparametric"
+  )
 }

@@ -424,7 +424,8 @@ morie_extreme_value_copula <- function(u, v, A = "gumbel", theta = 2) {
 #'   Sklar, A. (1959). Publ. Inst. Statist. Univ. Paris 8, 229-231.
 #' @examples
 #' set.seed(1)
-#' t1 <- rexp(30); t2 <- t1 + rexp(30, 5)
+#' t1 <- rexp(30)
+#' t2 <- t1 + rexp(30, 5)
 #' morie_copula_survival(t1, rep(1, 30), t2, rep(1, 30))$tau_sample
 #' @export
 morie_copula_survival <- function(time1, event1, time2, event2,

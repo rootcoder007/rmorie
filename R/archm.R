@@ -26,7 +26,9 @@
     eps[t] <- y[t] - mu - delta * sqrt(s2[t])
   }
   ll <- 0.5 * sum(log(2 * pi * s2) + eps^2 / s2)
-  if (!is.finite(ll)) return(1e10)
+  if (!is.finite(ll)) {
+    return(1e10)
+  }
   ll
 }
 

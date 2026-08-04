@@ -32,9 +32,12 @@
 .morie_ensure_exec_allowed <- function(feature = "dynamic execution") {
   if (.morie_exec_disabled()) {
     stop(sprintf(
-      paste0("%s is disabled because MORIE_NO_EXEC is set. ",
-             "Unset MORIE_NO_EXEC to allow it on this machine."),
-      feature), call. = FALSE)
+      paste0(
+        "%s is disabled because MORIE_NO_EXEC is set. ",
+        "Unset MORIE_NO_EXEC to allow it on this machine."
+      ),
+      feature
+    ), call. = FALSE)
   }
   invisible(TRUE)
 }
@@ -48,9 +51,12 @@
 .morie_safe_readRDS <- function(path, feature = "reading an .rds file") {
   if (.morie_exec_disabled()) {
     stop(sprintf(
-      paste0("%s is disabled because MORIE_NO_EXEC is set (readRDS can ",
-             "execute code while loading). Unset MORIE_NO_EXEC to allow it."),
-      feature), call. = FALSE)
+      paste0(
+        "%s is disabled because MORIE_NO_EXEC is set (readRDS can ",
+        "execute code while loading). Unset MORIE_NO_EXEC to allow it."
+      ),
+      feature
+    ), call. = FALSE)
   }
   readRDS(path)
 }
@@ -67,7 +73,9 @@
 .morie_knob_status <- function() {
   knobs <- c(
     MORIE_NO_EXEC = paste(
-      "when set: process execution and .rds loading are disabled"))
+      "when set: process execution and .rds loading are disabled"
+    )
+  )
   data.frame(
     name = names(knobs),
     enabled = vapply(names(knobs), .morie_env_true, logical(1)),

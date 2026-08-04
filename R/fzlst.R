@@ -1,10 +1,19 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Fauzi: L-statistic for kernel functionals (Ch 5)
+#' L-statistic for kernel functionals (Ch 3, Eq. 3.4)
 #'
 #' \eqn{L_n = \sum_i c_{n,i} X_{(i)}}{L_n = sum_i c_n,i X_(i)} with
 #' \eqn{c_{n,i} = \int_{(i-1)/n}^{i/n} J(u) du}{c_n,i = int_(i-1)/n^i/n J(u) du}.
 #' Default J(u)=1 gives the sample mean.
+#'
+#' The book's own L-statistic is Eq. (3.4), the KERNEL QUANTILE estimator
+#' `Qhat_{p,h} = sum_i v_{i,n} X_{i:n}` with
+#' `v_{i,n} = (1/h) int_{(i-1)/n}^{i/n} K((u-p)/h) du`, which is this function
+#' with `score = function(u) K((u - p)/h)/h`. No separate entry point is
+#' needed and none is added. Sec. 3.2 spells out why standard L-statistic
+#' theory does not apply to it: the weights depend on `n` through `h`, and the
+#' limiting score function is a delta function rather than a fixed `J` -- the
+#' technical obstacle Chapter 3 works around with an H-decomposition.
 #'
 #' @param x Numeric vector.
 #' @param score Function J(u); default constant 1.
@@ -25,19 +34,20 @@ fzlst <- function(x, score = NULL, n_quad = 200L) {
   }
   if (is.null(score)) score <- function(u) rep(1, length(u))
   x_sorted <- sort(x)
-  fine_n <- n * 16L
-  fine_u <- seq(0, 1, length.out = fine_n + 1L)
+  # STRIDE fine nodes per cell, so cell i is exactly
+  # fine_u[(i-1)*STRIDE + 1] .. fine_u[i*STRIDE + 1] and the cell edges land
+  # on fine nodes by construction. Computing the indices arithmetically is
+  # exact; a findInterval(all.inside = TRUE) lookup clamps the FINAL edge one
+  # node short, which silently truncated the last cell and biased every
+  # weight (mean of 1:50 came out 27.03 instead of 25.5).
+  STRIDE <- 16L
+  fine_u <- seq(0, 1, length.out = n * STRIDE + 1L)
   J_fine <- score(fine_u)
-  edges <- seq(0, 1, length.out = n + 1L)
-  cells <- findInterval(edges, fine_u, all.inside = TRUE)
-  cells[length(cells)] <- length(fine_u) - 1L # last edge
   weights <- numeric(n)
   for (i in seq_len(n)) {
-    a <- cells[i]
-    b <- cells[i + 1L]
-    if (b <= a) b <- a + 1L
-    seg_u <- fine_u[a:(b + 1L)]
-    seg_J <- J_fine[a:(b + 1L)]
+    idx <- ((i - 1L) * STRIDE + 1L):(i * STRIDE + 1L)
+    seg_u <- fine_u[idx]
+    seg_J <- J_fine[idx]
     # trapezoidal rule
     weights[i] <- sum((seg_J[-length(seg_J)] + seg_J[-1L]) *
       diff(seg_u)) / 2
@@ -61,7 +71,7 @@ fzlst <- function(x, score = NULL, n_quad = 200L) {
   var <- max(var, 0)
   list(
     estimate = L, se = sqrt(var), n = n,
-    method = "Fauzi L-statistic with user score function J (Ch 5)"
+    method = "L-statistic with user score function J (Eq. 3.4)"
   )
 }
 
@@ -73,3 +83,8 @@ fzlst <- function(x, score = NULL, n_quad = 200L) {
 #' @keywords internal
 #' @export
 morie_fauzi_l_statistic <- fzlst
+
+#' @rdname fzlst
+#' @keywords internal
+#' @export
+Lstat <- fzlst

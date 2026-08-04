@@ -62,17 +62,19 @@ NULL
 morie_eda_table <- function(data, index = NULL) {
   data <- .morie_check_data(data, arg = "data")
   if (is.null(index)) {
-    data[[".row_id"]] <- seq_len(nrow(data)); index <- ".row_id"
+    data[[".row_id"]] <- seq_len(nrow(data))
+    index <- ".row_id"
   }
   if (!index %in% names(data)) {
     stop(sprintf("index column '%s' not found", index), call. = FALSE)
   }
-  if (anyDuplicated(data[[index]])) {                  # EA2.1
+  if (anyDuplicated(data[[index]])) { # EA2.1
     stop(sprintf("index column '%s' has duplicate values", index),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
-  attr(data, "index") <- index                         # EA2.2b
-  class(data) <- c("morie_eda_table", "data.frame")    # EA2.2a
+  attr(data, "index") <- index # EA2.2b
+  class(data) <- c("morie_eda_table", "data.frame") # EA2.2a
   data
 }
 
@@ -96,7 +98,8 @@ morie_eda_index <- function(x) attr(x, "index")
 morie_eda_join <- function(x, y, by) {
   if (missing(by) || is.null(by)) {
     stop("`by` must be given explicitly; joins never assume column names",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   m <- merge(as.data.frame(x), as.data.frame(y), by = by)
   morie_eda_table(m, index = if (!anyDuplicated(m[[by]])) by else NULL)
@@ -110,8 +113,9 @@ morie_eda_join <- function(x, y, by) {
 #' @export
 morie_eda_dataset <- function(...) {
   tabs <- list(...)
-  tabs <- lapply(tabs, function(t)
-    if (inherits(t, "morie_eda_table")) t else morie_eda_table(t))
+  tabs <- lapply(tabs, function(t) {
+    if (inherits(t, "morie_eda_table")) t else morie_eda_table(t)
+  })
   class(tabs) <- c("morie_eda_dataset", "list")
   tabs
 }
@@ -122,7 +126,7 @@ morie_eda_dataset <- function(...) {
 #' @examples
 #' morie_eda_as_vector(structure(1:3, foo = "bar"))
 #' @export
-morie_eda_as_vector <- function(x) {                   # EA2.6
+morie_eda_as_vector <- function(x) { # EA2.6
   as.vector(unclass(x))
 }
 
@@ -144,13 +148,14 @@ morie_eda_summary <- function(x, digits = 3L) {
     data.frame(
       variable = nm,
       class = class(col)[1],
-      storage_mode = storage.mode(col),               # EA5.3
+      storage_mode = storage.mode(col), # EA5.3
       n_missing = sum(is.na(col)),
       mean = if (num) round(mean(col, na.rm = TRUE), digits) else NA_real_,
-      sd   = if (num) round(stats::sd(col, na.rm = TRUE), digits) else NA_real_,
-      min  = if (num) round(min(col, na.rm = TRUE), digits) else NA_real_,
-      max  = if (num) round(max(col, na.rm = TRUE), digits) else NA_real_,
-      stringsAsFactors = FALSE, row.names = NULL)
+      sd = if (num) round(stats::sd(col, na.rm = TRUE), digits) else NA_real_,
+      min = if (num) round(min(col, na.rm = TRUE), digits) else NA_real_,
+      max = if (num) round(max(col, na.rm = TRUE), digits) else NA_real_,
+      stringsAsFactors = FALSE, row.names = NULL
+    )
   }))
 }
 
@@ -164,17 +169,21 @@ morie_eda_summary <- function(x, digits = 3L) {
 #' @export
 morie_eda_compare <- function(..., digits = 3L) {
   inputs <- list(...)
-  nms <- names(inputs); if (is.null(nms)) nms <- seq_along(inputs)
+  nms <- names(inputs)
+  if (is.null(nms)) nms <- seq_along(inputs)
   do.call(rbind, Map(function(t, nm) {
-    s <- morie_eda_summary(t, digits = digits); cbind(source = nm, s)
+    s <- morie_eda_summary(t, digits = digits)
+    cbind(source = nm, s)
   }, inputs, nms))
 }
 
 # colourblind-safe palette (Okabe-Ito) for EA5.0b
 #' Internal helper: Eda Palette
 #' @noRd
-.eda_palette <- c("#0072B2", "#D55E00", "#009E73", "#CC79A7",
-                  "#F0E442", "#56B4E9", "#E69F00", "#000000")
+.eda_palette <- c(
+  "#0072B2", "#D55E00", "#009E73", "#CC79A7",
+  "#F0E442", "#56B4E9", "#E69F00", "#000000"
+)
 
 #' Accessible exploratory plot of one variable against another
 #'
@@ -197,17 +206,27 @@ morie_eda_compare <- function(..., digits = 3L) {
 morie_eda_plot <- function(x, xvar, yvar, group = NULL, units = NULL,
                            cex = 1.3, digits = 2L) {
   x <- as.data.frame(x)
-  xlab <- if (!is.null(units) && xvar %in% names(units))
-    sprintf("%s (%s)", xvar, units[[xvar]]) else xvar        # EA5.5
-  ylab <- if (!is.null(units) && yvar %in% names(units))
-    sprintf("%s (%s)", yvar, units[[yvar]]) else yvar
+  xlab <- if (!is.null(units) && xvar %in% names(units)) {
+    sprintf("%s (%s)", xvar, units[[xvar]])
+  } else {
+    xvar
+  } # EA5.5
+  ylab <- if (!is.null(units) && yvar %in% names(units)) {
+    sprintf("%s (%s)", yvar, units[[yvar]])
+  } else {
+    yvar
+  }
   col_idx <- if (!is.null(group)) as.integer(factor(x[[group]])) else 1L
   cols <- .eda_palette[((col_idx - 1L) %% length(.eda_palette)) + 1L]
-  plot(x[[xvar]], x[[yvar]], xlab = xlab, ylab = ylab,
-       cex = cex, cex.lab = cex, cex.axis = cex, pch = 19, col = cols,
-       xaxp = c(range(pretty(x[[xvar]])), 5))                # EA5.4 pretty
-  invisible(data.frame(x = x[[xvar]], y = x[[yvar]], colour = cols,
-                       stringsAsFactors = FALSE))
+  plot(x[[xvar]], x[[yvar]],
+    xlab = xlab, ylab = ylab,
+    cex = cex, cex.lab = cex, cex.axis = cex, pch = 19, col = cols,
+    xaxp = c(range(pretty(x[[xvar]])), 5)
+  ) # EA5.4 pretty
+  invisible(data.frame(
+    x = x[[xvar]], y = x[[yvar]], colour = cols,
+    stringsAsFactors = FALSE
+  ))
 }
 
 #' Print method for \code{morie_eda_table} objects
@@ -222,8 +241,10 @@ morie_eda_plot <- function(x, xvar, yvar, group = NULL, units = NULL,
 #' }
 #' @export
 print.morie_eda_table <- function(x, ...) {
-  cat(sprintf("<morie_eda_table> %d x %d  index: %s\n",
-              nrow(x), ncol(x), attr(x, "index")))
+  cat(sprintf(
+    "<morie_eda_table> %d x %d  index: %s\n",
+    nrow(x), ncol(x), attr(x, "index")
+  ))
   print(utils::head(as.data.frame(x)), ...)
   invisible(x)
 }

@@ -94,15 +94,18 @@ morie_arsau_registry_df <- function(language = "en") {
   rows <- lapply(reg, function(e) {
     desc <- if (use_fr) e$description_fr else e$description_en
     data.frame(
-      year_or_range    = e$year_or_range,
-      kind             = e$kind,
-      csv_filename     = e$csv_filename,
-      sidecar_filename = if (is.null(e$sidecar_filename)) NA_character_
-                         else e$sidecar_filename,
-      expected_rows    = as.integer(e$expected_rows),
-      expected_cols    = as.integer(e$expected_cols),
-      is_valid         = isTRUE(e$is_valid),
-      description      = as.character(desc),
+      year_or_range = e$year_or_range,
+      kind = e$kind,
+      csv_filename = e$csv_filename,
+      sidecar_filename = if (is.null(e$sidecar_filename)) {
+        NA_character_
+      } else {
+        e$sidecar_filename
+      },
+      expected_rows = as.integer(e$expected_rows),
+      expected_cols = as.integer(e$expected_cols),
+      is_valid = isTRUE(e$is_valid),
+      description = as.character(desc),
       stringsAsFactors = FALSE
     )
   })
@@ -132,21 +135,29 @@ morie_arsau_registry_df <- function(language = "en") {
 #'   served by \code{datastore_search} (\url{https://data.ontario.ca/}).
 #' @examples
 #' sc <- list(fields = list(
-#'   list(id = "PoliceService", type = "text",
-#'        info = list(notes = "Name of the service.")),
-#'   list(id = "IncidentYear", type = "int",
-#'        info = list(notes = "Reporting year."))))
+#'   list(
+#'     id = "PoliceService", type = "text",
+#'     info = list(notes = "Name of the service.")
+#'   ),
+#'   list(
+#'     id = "IncidentYear", type = "int",
+#'     info = list(notes = "Reporting year.")
+#'   )
+#' ))
 #' morie_arsau_sidecar_schema(sc)
 #' @export
 morie_arsau_sidecar_schema <- function(sidecar) {
   if (!is.list(sidecar)) {
     stop("morie_arsau_sidecar_schema: 'sidecar' must be a list.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   fields <- sidecar$fields
   if (is.null(fields) || length(fields) == 0L) {
-    return(data.frame(name = character(0), type = character(0),
-                      notes = character(0), stringsAsFactors = FALSE))
+    return(data.frame(
+      name = character(0), type = character(0),
+      notes = character(0), stringsAsFactors = FALSE
+    ))
   }
   rows <- list()
   for (f in fields) {
@@ -154,18 +165,20 @@ morie_arsau_sidecar_schema <- function(sidecar) {
     nm <- trimws(as.character(f$id %||% ""))
     if (!nzchar(nm)) next
     ftype <- f$type
-    info  <- if (is.list(f$info)) f$info else list()
+    info <- if (is.list(f$info)) f$info else list()
     notes <- info$notes
     rows[[length(rows) + 1L]] <- data.frame(
-      name  = nm,
-      type  = if (is.null(ftype)) NA_character_ else as.character(ftype),
+      name = nm,
+      type = if (is.null(ftype)) NA_character_ else as.character(ftype),
       notes = if (is.null(notes)) NA_character_ else as.character(notes),
       stringsAsFactors = FALSE
     )
   }
   if (length(rows) == 0L) {
-    return(data.frame(name = character(0), type = character(0),
-                      notes = character(0), stringsAsFactors = FALSE))
+    return(data.frame(
+      name = character(0), type = character(0),
+      notes = character(0), stringsAsFactors = FALSE
+    ))
   }
   out <- do.call(rbind, rows)
   rownames(out) <- NULL
@@ -186,19 +199,24 @@ morie_arsau_sidecar_schema <- function(sidecar) {
 #' @references CKAN \emph{datastore_search} response schema.
 #' @examples
 #' sc <- list(
-#'   fields = list(list(id = "PoliceService", type = "text"),
-#'                 list(id = "IncidentYear", type = "int")),
+#'   fields = list(
+#'     list(id = "PoliceService", type = "text"),
+#'     list(id = "IncidentYear", type = "int")
+#'   ),
 #'   records = list(
 #'     list(PoliceService = "Toronto", IncidentYear = 2023L),
-#'     list(PoliceService = "OPP", IncidentYear = 2023L)))
+#'     list(PoliceService = "OPP", IncidentYear = 2023L)
+#'   )
+#' )
 #' morie_arsau_sidecar_to_frame(sc)
 #' @export
 morie_arsau_sidecar_to_frame <- function(sidecar) {
   if (!is.list(sidecar)) {
     stop("morie_arsau_sidecar_to_frame: 'sidecar' must be a list.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
-  fields  <- sidecar$fields  %||% list()
+  fields <- sidecar$fields %||% list()
   records <- sidecar$records %||% list()
   col_names <- vapply(
     fields,
@@ -208,9 +226,12 @@ morie_arsau_sidecar_to_frame <- function(sidecar) {
   col_names <- col_names[nzchar(col_names)]
 
   if (length(records) == 0L) {
-    if (length(col_names) == 0L) return(data.frame())
+    if (length(col_names) == 0L) {
+      return(data.frame())
+    }
     empty_cols <- replicate(length(col_names), character(0),
-                            simplify = FALSE)
+      simplify = FALSE
+    )
     names(empty_cols) <- col_names
     return(as.data.frame(empty_cols, stringsAsFactors = FALSE))
   }
@@ -292,7 +313,8 @@ morie_arsau_read_xlsx_dictionary <- function(path, sheet = 1L) {
   }
   if (!file.exists(path)) {
     stop(sprintf("XLSX data-dictionary not found at %s", path),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   df <- as.data.frame(
     readxl::read_excel(path, sheet = sheet),
@@ -318,8 +340,10 @@ morie_arsau_read_xlsx_dictionary <- function(path, sheet = 1L) {
     if (!(req %in% names(df))) df[[req]] <- NA_character_
   }
   # Put the canonical triple first.
-  ordered <- c("name", "type", "notes",
-               setdiff(names(df), c("name", "type", "notes")))
+  ordered <- c(
+    "name", "type", "notes",
+    setdiff(names(df), c("name", "type", "notes"))
+  )
   df <- df[, ordered, drop = FALSE]
   rownames(df) <- NULL
   df
@@ -345,7 +369,8 @@ morie_arsau_read_xlsx_dictionary <- function(path, sheet = 1L) {
 #'   dictionaries accompanying the ARSAU CSV releases.
 #' @examples
 #' path <- system.file("extdata", "OTIS_DATA_DICTIONARY.md",
-#'                     package = "morie")
+#'   package = "morie"
+#' )
 #' if (nzchar(path)) {
 #'   out <- morie_arsau_read_markdown_dictionary(path)
 #'   str(out)
@@ -354,7 +379,8 @@ morie_arsau_read_xlsx_dictionary <- function(path, sheet = 1L) {
 morie_arsau_read_markdown_dictionary <- function(path) {
   if (!file.exists(path)) {
     stop(sprintf("Markdown data-dictionary not found at %s", path),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   lines <- readLines(path, warn = FALSE, encoding = "UTF-8")
   # Keep only pipe-table lines (start and end with a pipe, possibly
@@ -373,15 +399,18 @@ morie_arsau_read_markdown_dictionary <- function(path) {
     trimws(strsplit(s, "|", fixed = TRUE)[[1L]])
   }
   header <- split_row(pipe_lines[1L])
-  body   <- pipe_lines[-1L]
+  body <- pipe_lines[-1L]
   rows <- lapply(body, function(s) {
     vals <- split_row(s)
     length(vals) <- length(header)
     setNames(as.list(vals), header)
   })
   out <- do.call(rbind, lapply(rows, as.data.frame,
-                               stringsAsFactors = FALSE))
-  if (is.null(out)) return(data.frame())
+    stringsAsFactors = FALSE
+  ))
+  if (is.null(out)) {
+    return(data.frame())
+  }
   rownames(out) <- NULL
   out
 }
@@ -404,16 +433,20 @@ morie_arsau_read_markdown_dictionary <- function(path) {
 #' @references Ontario Data Catalogue CKAN API:
 #'   \code{datastore_search} (\url{https://data.ontario.ca/}).
 #' @examples
-#' url <- morie_arsau_ckan_url(kind = "main_records", year = "2024",
-#'                             limit = 100L)
+#' url <- morie_arsau_ckan_url(
+#'   kind = "main_records", year = "2024",
+#'   limit = 100L
+#' )
 #' url
 #' @export
 morie_arsau_ckan_url <- function(kind, year, limit = 5000L) {
   reg <- ARSAU_REGISTRY()
   key <- paste(as.character(year), kind, sep = "|")
   if (!(key %in% names(reg))) {
-    stop(sprintf("ARSAU has no %s entry for %s.",
-                 sQuote(kind), sQuote(year)), call. = FALSE)
+    stop(sprintf(
+      "ARSAU has no %s entry for %s.",
+      sQuote(kind), sQuote(year)
+    ), call. = FALSE)
   }
   entry <- reg[[key]]
   if (is.null(entry$sidecar_filename)) {
@@ -444,7 +477,8 @@ morie_arsau_ckan_url <- function(kind, year, limit = 5000L) {
 #' @examples
 #' \donttest{
 #' res <- try(morie_arsau_fetch_sidecar(ARSAU_KINDS[1], ARSAU_YEARS[1],
-#'                                      limit = 50L))
+#'   limit = 50L
+#' ))
 #' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' }
 #' @export
@@ -480,12 +514,12 @@ morie_arsau_fetch_sidecar <- function(kind, year, limit = 5000L,
   # CKAN wraps the useful content under $result.
   if (!is.null(payload$result) && is.list(payload$result)) {
     return(list(
-      fields  = payload$result$fields  %||% list(),
+      fields  = payload$result$fields %||% list(),
       records = payload$result$records %||% list()
     ))
   }
   list(
-    fields  = payload$fields  %||% list(),
+    fields  = payload$fields %||% list(),
     records = payload$records %||% list()
   )
 }
@@ -515,8 +549,10 @@ morie_arsau_fetch_sidecar <- function(kind, year, limit = 5000L,
 #'   \code{skipped} (registry keys), and \code{target_dir}.
 #' @examples
 #' \donttest{
-#' res <- try(morie_arsau_download(tempdir(), kinds = ARSAU_KINDS()[1],
-#'                                 years = ARSAU_YEARS()[1], quiet = TRUE))
+#' res <- try(morie_arsau_download(tempdir(),
+#'   kinds = ARSAU_KINDS()[1],
+#'   years = ARSAU_YEARS()[1], quiet = TRUE
+#' ))
 #' if (!inherits(res, "try-error")) length(res$downloaded)
 #' }
 #' @export
@@ -535,28 +571,46 @@ morie_arsau_download <- function(target_dir, kinds = NULL, years = NULL,
       next
     }
     resource_id <- sub("\\.json$", "", entry$sidecar_filename)
-    url <- sprintf("https://data.ontario.ca/datastore/dump/%s?format=csv",
-                   resource_id)
-    dest <- file.path(target_dir,
-                      sprintf("arsau_%s_%s.csv",
-                              gsub("[^A-Za-z0-9]+", "_", entry$year_or_range),
-                              gsub("[^A-Za-z0-9]+", "_", entry$kind)))
-    ok <- tryCatch({
-      body <- .morie_dataset_http_text(url,
-                                       timeout_s = as.integer(timeout_sec))
-      writeLines(body, dest)
-      TRUE
-    }, error = function(e) {
-      if (!quiet) warning(sprintf("ARSAU %s: %s", key,
-                                  conditionMessage(e)), call. = FALSE)
-      FALSE
-    })
+    url <- sprintf(
+      "https://data.ontario.ca/datastore/dump/%s?format=csv",
+      resource_id
+    )
+    dest <- file.path(
+      target_dir,
+      sprintf(
+        "arsau_%s_%s.csv",
+        gsub("[^A-Za-z0-9]+", "_", entry$year_or_range),
+        gsub("[^A-Za-z0-9]+", "_", entry$kind)
+      )
+    )
+    ok <- tryCatch(
+      {
+        body <- .morie_dataset_http_text(url,
+          timeout_s = as.integer(timeout_sec)
+        )
+        writeLines(body, dest)
+        TRUE
+      },
+      error = function(e) {
+        if (!quiet) {
+          warning(sprintf(
+            "ARSAU %s: %s", key,
+            conditionMessage(e)
+          ), call. = FALSE)
+        }
+        FALSE
+      }
+    )
     if (ok) downloaded <- c(downloaded, dest) else skipped <- c(skipped, key)
   }
   if (!quiet) {
-    message(sprintf("ARSAU download: %d file(s) written to %s (%d skipped)",
-                    length(downloaded), target_dir, length(skipped)))
+    message(sprintf(
+      "ARSAU download: %d file(s) written to %s (%d skipped)",
+      length(downloaded), target_dir, length(skipped)
+    ))
   }
-  invisible(list(downloaded = downloaded, skipped = skipped,
-                 target_dir = target_dir))
+  invisible(list(
+    downloaded = downloaded, skipped = skipped,
+    target_dir = target_dir
+  ))
 }

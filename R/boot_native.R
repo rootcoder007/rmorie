@@ -62,9 +62,13 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
   k <- length(t0)
   t <- matrix(NA_real_, R, k)
   for (r in seq_len(R)) t[r, ] <- as.numeric(statistic(data, idx[r, ], ...))
-  structure(list(t0 = t0, t = t, R = R, data = data,
-                 statistic = statistic, strata = strata, index = idx),
-            class = "morie_boot")
+  structure(
+    list(
+      t0 = t0, t = t, R = R, data = data,
+      statistic = statistic, strata = strata, index = idx
+    ),
+    class = "morie_boot"
+  )
 }
 
 # boot:::freq.array -- R x n resample frequency counts.
@@ -106,9 +110,18 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
   out <- numeric(length(alpha))
   for (i in seq_along(alpha)) {
     ki <- k[i]
-    if (ki == 0) { out[i] <- t[1L]; next }
-    if (ki >= R) { out[i] <- t[R]; next }
-    if (ki == rk[i]) { out[i] <- t[ki]; next }
+    if (ki == 0) {
+      out[i] <- t[1L]
+      next
+    }
+    if (ki >= R) {
+      out[i] <- t[R]
+      next
+    }
+    if (ki == rk[i]) {
+      out[i] <- t[ki]
+      next
+    }
     q1 <- stats::qnorm(alpha[i])
     q2 <- stats::qnorm(ki / (R + 1))
     q3 <- stats::qnorm((ki + 1) / (R + 1))
@@ -117,7 +130,7 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
   out
 }
 
-.morie_ci_perc  <- function(t, conf) .morie_norm_inter(t, (1 + c(-conf, conf)) / 2)
+.morie_ci_perc <- function(t, conf) .morie_norm_inter(t, (1 + c(-conf, conf)) / 2)
 
 .morie_ci_basic <- function(t0, t, conf) {
   2 * t0 - .morie_norm_inter(t, (1 + c(conf, -conf)) / 2)
@@ -169,12 +182,15 @@ morie_boot_ci <- function(boot_obj, conf = 0.95,
                           index = 1L) {
   t <- boot_obj$t[, index]
   t0 <- boot_obj$t0[index]
-  res <- lapply(type, function(ty) switch(ty,
-    perc  = .morie_ci_perc(t, conf),
-    norm  = .morie_ci_norm(t0, t, conf),
-    basic = .morie_ci_basic(t0, t, conf),
-    bca   = .morie_ci_bca(boot_obj, index, conf),
-    stop("unknown CI type: ", ty)))
+  res <- lapply(type, function(ty) {
+    switch(ty,
+      perc  = .morie_ci_perc(t, conf),
+      norm  = .morie_ci_norm(t0, t, conf),
+      basic = .morie_ci_basic(t0, t, conf),
+      bca   = .morie_ci_bca(boot_obj, index, conf),
+      stop("unknown CI type: ", ty)
+    )
+  })
   names(res) <- type
   res
 }
@@ -183,7 +199,9 @@ morie_boot_ci <- function(boot_obj, conf = 0.95,
 .morie_ts_array <- function(n, n.sim, R, l, sim, endcorr) {
   endpt <- if (endcorr) n else n - l + 1
   if (sim == "geom") {
-    len.tot <- rep(0, R); lens <- NULL; cont <- TRUE
+    len.tot <- rep(0, R)
+    lens <- NULL
+    cont <- TRUE
     while (cont) {
       temp <- 1 + stats::rgeom(R, 1 / l)
       temp <- pmin(temp, n.sim - len.tot)
@@ -203,7 +221,9 @@ morie_boot_ci <- function(boot_obj, conf = 0.95,
 }
 
 .morie_make_ends <- function(a, n) {
-  if (a[2L] == 0) return(numeric())
+  if (a[2L] == 0) {
+    return(numeric())
+  }
   1 + (seq.int(a[1L], a[1L] + a[2L] - 1, length.out = a[2L]) - 1) %% n
 }
 
@@ -226,8 +246,10 @@ morie_boot_ci <- function(boot_obj, conf = 0.95,
 #'   bootstrap. \emph{JASA}, 89(428), 1303-1313.
 #' @examples
 #' set.seed(1)
-#' b <- morie_tsboot(stats::as.ts(rnorm(60)), statistic = mean,
-#'                   R = 100L, l = 5)
+#' b <- morie_tsboot(stats::as.ts(rnorm(60)),
+#'   statistic = mean,
+#'   R = 100L, l = 5
+#' )
 #' str(b, max.level = 1)
 #' @export
 morie_tsboot <- function(tseries, statistic, R, l, sim = "fixed",
@@ -244,8 +266,10 @@ morie_tsboot <- function(tseries, statistic, R, l, sim = "fixed",
     } else {
       cbind(ia$starts[r, ], ia$lengths)
     }
-    inds <- unlist(lapply(seq_len(nrow(ends)),
-                          function(j) .morie_make_ends(ends[j, ], n)))
+    inds <- unlist(lapply(
+      seq_len(nrow(ends)),
+      function(j) .morie_make_ends(ends[j, ], n)
+    ))
     inds <- inds[seq_len(n.sim)]
     series <- ts.orig[inds, ]
     t[r, ] <- as.numeric(statistic(series, ...))
@@ -272,7 +296,8 @@ morie_tsboot <- function(tseries, statistic, R, l, sim = "fixed",
 #' str(b, max.level = 1)
 #' @export
 morie_two_boot <- function(x, y, statistic = mean, R = 1000L, ...) {
-  x <- as.numeric(x); y <- as.numeric(y)
+  x <- as.numeric(x)
+  y <- as.numeric(y)
   ind <- c(rep(1L, length(x)), rep(2L, length(y)))
   func <- match.fun(statistic)
   boot.func <- function(d, idx) {

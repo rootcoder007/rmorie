@@ -33,7 +33,9 @@
 }
 
 .schab_factorial <- function(p) {
-  if (p < 2) return(1)
+  if (p < 2) {
+    return(1)
+  }
   prod(2:p)
 }
 
@@ -106,8 +108,9 @@
   }
   d_mat <- as.matrix(stats::dist(coords))
   d_vec <- as.numeric(sqrt(rowSums((coords - matrix(target, nrow(coords),
-                                                    ncol(coords),
-                                                    byrow = TRUE))^2)))
+    ncol(coords),
+    byrow = TRUE
+  ))^2)))
   rho_mat <- matrix(correlation_fn(as.numeric(d_mat)), nrow(d_mat), ncol(d_mat))
   rho_vec <- as.numeric(correlation_fn(d_vec))
   eta <- .schab_hermite_orthonormal(y, degree)
@@ -118,12 +121,15 @@
     r_mat <- rho_mat^p
     r_vec <- rho_vec^p
     lam <- tryCatch(solve(r_mat, r_vec),
-                    error = function(e) as.numeric(MASS_ginv(r_mat) %*% r_vec))
+      error = function(e) as.numeric(MASS_ginv(r_mat) %*% r_vec)
+    )
     pred <- pred + b[p + 1L] * sum(lam * eta[p + 1L, ])
     s2 <- 1 - sum(lam * r_vec)
     comp[p + 1L] <- s2
     var <- var + b[p + 1L]^2 * s2
   }
-  list(prediction = pred, variance = var, coefficients = b,
-       component_variances = comp)
+  list(
+    prediction = pred, variance = var, coefficients = b,
+    component_variances = comp
+  )
 }

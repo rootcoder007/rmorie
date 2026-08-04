@@ -26,7 +26,8 @@
   cov <- as.matrix(cov)
   if (nrow(cov) != ncol(cov)) stop("`cov` must be square", call. = FALSE)
   u <- tryCatch(chol(cov),
-                error = function(e) chol(cov + jitter * diag(nrow(cov))))
+    error = function(e) chol(cov + jitter * diag(nrow(cov)))
+  )
   t(u)
 }
 
@@ -54,9 +55,10 @@
     stop("`cov` must be square and match `mean`", call. = FALSE)
   }
   root <- switch(method,
-                 cholesky = .schab_cholesky_root(cov),
-                 spectral = .schab_spectral_root(cov),
-                 stop("`method` must be 'cholesky' or 'spectral'", call. = FALSE))
+    cholesky = .schab_cholesky_root(cov),
+    spectral = .schab_spectral_root(cov),
+    stop("`method` must be 'cholesky' or 'spectral'", call. = FALSE)
+  )
   as.numeric(mean + root %*% .morie_random_normal(n, seed = seed, stream = stream))
 }
 
@@ -79,8 +81,10 @@
     stop("`n_obs` must leave at least one target location", call. = FALSE)
   }
   mu <- if (length(mean) == 1L) rep(as.numeric(mean), n) else as.numeric(mean)
-  sim <- .schab_simulate_unconditional(rep(0, n), cov_all, method = method,
-                                       seed = seed, stream = stream)
+  sim <- .schab_simulate_unconditional(rep(0, n), cov_all,
+    method = method,
+    seed = seed, stream = stream
+  )
   sigma_obs <- cov_all[seq_len(n_obs), seq_len(n_obs), drop = FALSE]
   cvec <- cov_all[, seq_len(n_obs), drop = FALSE]
   resid <- (z_obs - mu[seq_len(n_obs)]) - sim[seq_len(n_obs)]
