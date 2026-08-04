@@ -65,25 +65,28 @@
 #' # rmoriedata companion package (no network). The first call warms
 #' # the cross-portal catalog cache
 #' # (~2.8s); subsequent calls reuse it (<0.1s each).
-#' df1 <- morie_datasets_load_by_key("vpd_crime")           # 550 rows
-#' df2 <- morie_datasets_load_by_key("nypd_arrests_ytd")    # 5 rows
-#' df3 <- morie_datasets_load_by_key("assault")             # 5 rows
+#' df1 <- morie_datasets_load_by_key("vpd_crime") # 550 rows
+#' df2 <- morie_datasets_load_by_key("nypd_arrests_ytd") # 5 rows
+#' df3 <- morie_datasets_load_by_key("assault") # 5 rows
 #' c(vpd = nrow(df1), nypd = nrow(df2), tps_assault = nrow(df3))
 #' @export
 morie_datasets_load_by_key <- function(dataset_key,
-                                         offline = TRUE,
-                                         max_features = NULL,
-                                         mode = c("auto", "soda2",
-                                                   "soda3", "odata"),
-                                         app_token = NULL,
-                                         source = NULL) {
+                                       offline = TRUE,
+                                       max_features = NULL,
+                                       mode = c(
+                                         "auto", "soda2",
+                                         "soda3", "odata"
+                                       ),
+                                       app_token = NULL,
+                                       source = NULL) {
   mode <- match.arg(mode)
   cat_df <- morie_dataset_portal_catalog()
   row <- cat_df[cat_df$dataset_key == dataset_key, , drop = FALSE]
   if (nrow(row) == 0L) {
     stop(sprintf(
       "unknown dataset_key '%s'. Try morie_datasets_browse(keyword = ...) ",
-      dataset_key), call. = FALSE)
+      dataset_key
+    ), call. = FALSE)
   }
   if (nrow(row) > 1L) {
     # 3HHH5: dataset_key collides across portals (e.g., "public-art"
@@ -91,48 +94,64 @@ morie_datasets_load_by_key <- function(dataset_key,
     # Require an explicit source= to disambiguate instead of silently
     # picking the first match.
     if (is.null(source)) {
-      stop(sprintf(paste0(
-        "dataset_key '%s' is ambiguous -- present in %d sources: %s. ",
-        "Pass source = '<one_of_the_above>' to disambiguate."),
-        dataset_key, nrow(row),
-        paste(sort(unique(row$source)), collapse = ", ")),
-        call. = FALSE)
+      stop(
+        sprintf(
+          paste0(
+            "dataset_key '%s' is ambiguous -- present in %d sources: %s. ",
+            "Pass source = '<one_of_the_above>' to disambiguate."
+          ),
+          dataset_key, nrow(row),
+          paste(sort(unique(row$source)), collapse = ", ")
+        ),
+        call. = FALSE
+      )
     }
     row <- row[row$source == source, , drop = FALSE]
     if (nrow(row) == 0L) {
-      stop(sprintf(paste0(
-        "dataset_key '%s' has no entry for source = '%s'. ",
-        "Available sources: %s."),
-        dataset_key, source,
-        paste(sort(unique(cat_df$source[cat_df$dataset_key == dataset_key])),
-              collapse = ", ")),
-        call. = FALSE)
+      stop(
+        sprintf(
+          paste0(
+            "dataset_key '%s' has no entry for source = '%s'. ",
+            "Available sources: %s."
+          ),
+          dataset_key, source,
+          paste(sort(unique(cat_df$source[cat_df$dataset_key == dataset_key])),
+            collapse = ", "
+          )
+        ),
+        call. = FALSE
+      )
     }
   }
-  src    <- row$source
-  id     <- row$id
+  src <- row$source
+  id <- row$id
   loader <- row$loader
 
   # --- Targeted (included-fixture) wrappers --------------------
   # The catalog loader names a real morie function. If it does NOT
   # contain "by_id" / "by_key" / "ckan_resource" / "cube_metadata"
   # / "vancouver_opendata_by_id", call it directly.
-  is_targeted <- !grepl("(_by_id|_by_key|_ckan_resource|_cube_metadata)$",
-                          loader)
+  is_targeted <- !grepl(
+    "(_by_id|_by_key|_ckan_resource|_cube_metadata)$",
+    loader
+  )
   if (is_targeted &&
-      exists(loader, mode = "function", envir = asNamespace("rmorie"))) {
+    exists(loader, mode = "function", envir = asNamespace("rmorie"))) {
     fn <- get(loader, envir = asNamespace("rmorie"))
     args <- formals(fn)
     call_args <- list()
     if ("offline" %in% names(args)) call_args$offline <- offline
-    if ("max_features" %in% names(args))
+    if ("max_features" %in% names(args)) {
       call_args$max_features <- max_features
+    }
     # 3FFF2: thread mode + app_token to Socrata-backed wrappers
     # that support them.
-    if ("mode" %in% names(args) && mode != "auto")
+    if ("mode" %in% names(args) && mode != "auto") {
       call_args$mode <- mode
-    if ("app_token" %in% names(args) && !is.null(app_token))
+    }
+    if ("app_token" %in% names(args) && !is.null(app_token)) {
       call_args$app_token <- app_token
+    }
     return(do.call(fn, call_args))
   }
 
@@ -146,68 +165,104 @@ morie_datasets_load_by_key <- function(dataset_key,
       # key->package mapping); `id` here is the CKAN package GUID, which it
       # rejects as unknown.
       morie_datasets_ontario_ckan_by_key(dataset_key,
-                                           offline = offline)
+        offline = offline
+      )
     },
     "montreal_opendata" = {
       rid <- .morie_ckan_resolve_first_csv(
-        package_name = id, ckan_base = .MORIE_MONTREAL_CKAN_BASE)
+        package_name = id, ckan_base = .MORIE_MONTREAL_CKAN_BASE
+      )
       morie_datasets_montreal_ckan_resource(
         resource_id = rid,
-        limit = if (is.null(max_features)) 100L
-                else as.integer(max_features))
+        limit = if (is.null(max_features)) {
+          100L
+        } else {
+          as.integer(max_features)
+        }
+      )
     },
     "toronto_opendata" = {
       rid <- .morie_ckan_resolve_first_csv(
-        package_name = id, ckan_base = .MORIE_TORONTO_CKAN_BASE)
+        package_name = id, ckan_base = .MORIE_TORONTO_CKAN_BASE
+      )
       morie_datasets_toronto_open_ckan_resource(
         resource_id = rid,
-        limit = if (is.null(max_features)) 100L
-                else as.integer(max_features))
+        limit = if (is.null(max_features)) {
+          100L
+        } else {
+          as.integer(max_features)
+        }
+      )
     },
     "vancouver_opendata" = {
       morie_datasets_vancouver_opendata_by_id(id)
     },
     "calgary_opendata" = {
       morie_datasets_calgary_socrata_by_id(
-        id, limit = if (is.null(max_features)) 1000L
-                    else as.integer(max_features))
+        id,
+        limit = if (is.null(max_features)) {
+          1000L
+        } else {
+          as.integer(max_features)
+        }
+      )
     },
     "chicago" = {
       morie_datasets_chicago_socrata_by_id(
-        id, limit = if (is.null(max_features)) 1000L
-                    else as.integer(max_features))
+        id,
+        limit = if (is.null(max_features)) {
+          1000L
+        } else {
+          as.integer(max_features)
+        }
+      )
     },
     "nyc_opendata" = {
       morie_datasets_nyc_socrata_by_id(
-        id, limit = if (is.null(max_features)) 1000L
-                    else as.integer(max_features))
+        id,
+        limit = if (is.null(max_features)) {
+          1000L
+        } else {
+          as.integer(max_features)
+        }
+      )
     },
     "edmonton_opendata" = {
       morie_datasets_edmonton_socrata_by_id(
-        id, limit = if (is.null(max_features)) 1000L
-                    else as.integer(max_features))
+        id,
+        limit = if (is.null(max_features)) {
+          1000L
+        } else {
+          as.integer(max_features)
+        }
+      )
     },
     "ottawa_opendata" = {
       morie_datasets_tps_arcgis_hub_by_id(id, max_features = max_features)
     },
     "vpd_geodash" = {
-      morie_datasets_vpd_crime(offline = offline,
-                                max_features = max_features)
+      morie_datasets_vpd_crime(
+        offline = offline,
+        max_features = max_features
+      )
     },
     "statcan_ccjs" = {
       morie_datasets_statcan_cube_metadata(as.integer(id))
     },
     "nyc_nypd" = {
-      args <- list(dataset_key = dataset_key,
-                    max_features = max_features,
-                    offline = offline)
+      args <- list(
+        dataset_key = dataset_key,
+        max_features = max_features,
+        offline = offline
+      )
       if (mode != "auto") args$mode <- mode
       if (!is.null(app_token)) args$app_token <- app_token
       do.call(morie_datasets_nyc_nypd_by_key, args)
     },
     stop(sprintf(
       "morie_datasets_load_by_key('%s'): unhandled source '%s'.",
-      dataset_key, src), call. = FALSE)
+      dataset_key, src
+    ), call. = FALSE)
   )
 }
 
@@ -236,17 +291,23 @@ morie_datasets_load_by_key <- function(dataset_key,
 .morie_ckan_resolve_first_csv <- function(package_name, ckan_base) {
   url <- sprintf("%s/action/package_show?id=%s", ckan_base, package_name)
   r <- .morie_dataset_http_json(url)
-  if (!isTRUE(r$success))
+  if (!isTRUE(r$success)) {
     stop(sprintf("CKAN package_show failed for '%s'", package_name),
-          call. = FALSE)
+      call. = FALSE
+    )
+  }
   res <- r$result$resources
-  if (is.null(res) || (is.data.frame(res) && nrow(res) == 0L))
+  if (is.null(res) || (is.data.frame(res) && nrow(res) == 0L)) {
     stop(sprintf("CKAN package '%s' has no resources", package_name),
-          call. = FALSE)
+      call. = FALSE
+    )
+  }
   fmt <- if ("format" %in% names(res)) res$format else NULL
   if (!is.null(fmt)) {
     csv_idx <- which(toupper(fmt) == "CSV")
-    if (length(csv_idx) > 0L) return(res$id[csv_idx[1]])
+    if (length(csv_idx) > 0L) {
+      return(res$id[csv_idx[1]])
+    }
   }
   res$id[1]
 }

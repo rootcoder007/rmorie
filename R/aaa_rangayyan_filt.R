@@ -8,19 +8,23 @@
 
 .morie_rg_polyz <- function(coefs, z) {
   zc <- as.complex(z)
-  if (any(zc == 0))
+  if (any(zc == 0)) {
     stop("z = 0 is a pole of a causal transfer function")
-  vapply(zc, function(zz)
-    sum(coefs * zz^(-(seq_along(coefs) - 1L))), complex(1))
+  }
+  vapply(zc, function(zz) {
+    sum(coefs * zz^(-(seq_along(coefs) - 1L)))
+  }, complex(1))
 }
 
 LsiSerH <- function(h_1, h_2, n = NULL) {
   # eq (3.45): cascading two LSI systems convolves their impulse
   # responses.  Convolution commutes, so a filter chain may be reordered,
   # and the result is len(h1) + len(h2) - 1 long.
-  a <- as.numeric(h_1); b <- as.numeric(h_2)
-  if (!length(a) || !length(b))
+  a <- as.numeric(h_1)
+  b <- as.numeric(h_2)
+  if (!length(a) || !length(b)) {
     stop("both impulse responses need at least one tap")
+  }
   m <- length(a) + length(b) - 1L
   out <- vapply(seq_len(m) - 1L, function(i) {
     j <- seq.int(max(0L, i - length(b) + 1L), min(i, length(a) - 1L))
@@ -32,18 +36,22 @@ LsiSerH <- function(h_1, h_2, n = NULL) {
     if (k < 0L) stop("n must be a nonnegative index")
     val <- if (k < m) out[k + 1L] else 0
   }
-  list(h = out, n_taps = m, value = val, index = n, commutes = TRUE,
-       longer_than_either_input = TRUE,
-       method = "Rangayyan (2024) eq. (3.45); series LSI systems convolve")
+  list(
+    h = out, n_taps = m, value = val, index = n, commutes = TRUE,
+    longer_than_either_input = TRUE,
+    method = "Rangayyan (2024) eq. (3.45); series LSI systems convolve"
+  )
 }
 
 LsiParH <- function(h_1, h_2, n = NULL) {
   # eq (3.49): parallel branches add their impulse responses, and the
   # result is as long as the LONGER branch -- not longer, the contrast
   # with the series case where the lengths add.
-  a <- as.numeric(h_1); b <- as.numeric(h_2)
-  if (!length(a) || !length(b))
+  a <- as.numeric(h_1)
+  b <- as.numeric(h_2)
+  if (!length(a) || !length(b)) {
     stop("both impulse responses need at least one tap")
+  }
   m <- max(length(a), length(b))
   pad <- function(v) c(v, rep(0, m - length(v)))
   out <- pad(a) + pad(b)
@@ -53,18 +61,22 @@ LsiParH <- function(h_1, h_2, n = NULL) {
     if (k < 0L) stop("n must be a nonnegative index")
     val <- if (k < m) out[k + 1L] else 0
   }
-  list(h = out, n_taps = m, value = val, index = n,
-       length_is_the_longer_branch = TRUE,
-       method = "Rangayyan (2024) eq. (3.49); parallel LSI systems add")
+  list(
+    h = out, n_taps = m, value = val, index = n,
+    length_is_the_longer_branch = TRUE,
+    method = "Rangayyan (2024) eq. (3.49); parallel LSI systems add"
+  )
 }
 
 Laplace <- function(h, t, s) {
   # eq (3.50), by the trapezoidal rule over the samples supplied.  What
   # is returned is the transform OF THE SAMPLED RECORD over the interval
   # it covers, which is why the limits come back with it.
-  hs <- as.numeric(h); ts <- as.numeric(t)
-  if (length(hs) != length(ts))
+  hs <- as.numeric(h)
+  ts <- as.numeric(t)
+  if (length(hs) != length(ts)) {
     stop("h and t must have the same length")
+  }
   if (length(hs) < 2L) stop("need at least two samples to integrate")
   if (any(diff(ts) <= 0)) stop("t must be strictly increasing")
   sv <- as.complex(s)
@@ -72,10 +84,12 @@ Laplace <- function(h, t, s) {
     f <- hs * exp(-z * ts)
     sum(0.5 * (f[-length(f)] + f[-1]) * diff(ts))
   }, complex(1))
-  list(H = if (length(out) == 1L) out[[1]] else out, s = s,
-       t_min = ts[1], t_max = ts[length(ts)], n = length(ts),
-       trapezoidal = TRUE, over_the_sampled_interval_only = TRUE,
-       method = "Rangayyan (2024) eq. (3.50)")
+  list(
+    H = if (length(out) == 1L) out[[1]] else out, s = s,
+    t_min = ts[1], t_max = ts[length(ts)], n = length(ts),
+    trapezoidal = TRUE, over_the_sampled_interval_only = TRUE,
+    method = "Rangayyan (2024) eq. (3.50)"
+  )
 }
 
 LaplaceFr <- function(h, omega, t = NULL, T = NULL) {
@@ -91,8 +105,9 @@ LaplaceFr <- function(h, omega, t = NULL, T = NULL) {
     ts <- (seq_along(hs) - 1L) * (Tv / (length(hs) - 1L))
   } else {
     ts <- as.numeric(t)
-    if (length(ts) != length(hs))
+    if (length(ts) != length(hs)) {
       stop("h and t must have the same length")
+    }
   }
   ws <- as.numeric(omega)
   out <- vapply(ws, function(w) {
@@ -100,12 +115,14 @@ LaplaceFr <- function(h, omega, t = NULL, T = NULL) {
     sum(0.5 * (f[-length(f)] + f[-1]) * diff(ts))
   }, complex(1))
   scalar <- length(out) == 1L
-  list(H = if (scalar) out[[1]] else out, omega = omega,
-       magnitude = if (scalar) Mod(out[[1]]) else Mod(out),
-       phase = if (scalar) Arg(out[[1]]) else Arg(out),
-       t_min = ts[1], t_max = ts[length(ts)],
-       valid_only_inside_the_roc = TRUE,
-       method = "Rangayyan (2024) eq. (3.52)")
+  list(
+    H = if (scalar) out[[1]] else out, omega = omega,
+    magnitude = if (scalar) Mod(out[[1]]) else Mod(out),
+    phase = if (scalar) Arg(out[[1]]) else Arg(out),
+    t_min = ts[1], t_max = ts[length(ts)],
+    valid_only_inside_the_roc = TRUE,
+    method = "Rangayyan (2024) eq. (3.52)"
+  )
 }
 
 IirTf <- function(b_k, a_k, z, N = NULL, M = NULL) {
@@ -116,20 +133,25 @@ IirTf <- function(b_k, a_k, z, N = NULL, M = NULL) {
   b <- as.numeric(b_k)
   a <- if (is.null(a_k)) numeric(0) else as.numeric(a_k)
   if (!length(b)) stop("need at least one numerator coefficient")
-  if (!is.null(N) && as.integer(N) != length(b) - 1L)
+  if (!is.null(N) && as.integer(N) != length(b) - 1L) {
     stop("N must be len(b_k) - 1")
-  if (!is.null(M) && as.integer(M) != length(a))
+  }
+  if (!is.null(M) && as.integer(M) != length(a)) {
     stop("M must be len(a_k)")
+  }
   den_coefs <- c(1, a)
   den <- .morie_rg_polyz(den_coefs, z)
-  if (any(Mod(den) <= 1e-300))
+  if (any(Mod(den) <= 1e-300)) {
     stop("z is a pole of H(z); the transfer function is unbounded there")
+  }
   H <- .morie_rg_polyz(b, z) / den
-  list(H = if (length(H) == 1L) H[[1]] else H, z = z,
-       numerator = b, denominator = den_coefs,
-       N = length(b) - 1L, M = length(a),
-       leading_one_is_implicit = TRUE,
-       method = "Rangayyan (2024) eq. (3.67)")
+  list(
+    H = if (length(H) == 1L) H[[1]] else H, z = z,
+    numerator = b, denominator = den_coefs,
+    N = length(b) - 1L, M = length(a),
+    leading_one_is_implicit = TRUE,
+    method = "Rangayyan (2024) eq. (3.67)"
+  )
 }
 
 IirDiff <- function(x, b_k, a_k = NULL, y = NULL, N = NULL, M = NULL,
@@ -156,13 +178,16 @@ IirDiff <- function(x, b_k, a_k = NULL, y = NULL, N = NULL, M = NULL,
   val <- NULL
   if (!is.null(n)) {
     idx <- as.integer(n)
-    if (idx < 0L || idx >= length(out))
+    if (idx < 0L || idx >= length(out)) {
       stop("n is outside the computed output")
+    }
     val <- out[idx + 1L]
   }
-  list(y = out, value = val, index = n, N = length(b) - 1L, M = length(a),
-       recursive = length(a) > 0L, feedback_is_subtracted = TRUE,
-       method = "Rangayyan (2024) eq. (3.68)")
+  list(
+    y = out, value = val, index = n, N = length(b) - 1L, M = length(a),
+    recursive = length(a) > 0L, feedback_is_subtracted = TRUE,
+    method = "Rangayyan (2024) eq. (3.68)"
+  )
 }
 
 PzMag <- function(l_k, r_k, N = NULL, M = NULL) {
@@ -172,19 +197,27 @@ PzMag <- function(l_k, r_k, N = NULL, M = NULL) {
   # vanishing pole distance is refused rather than returning Inf.
   ls <- if (is.null(l_k)) numeric(0) else as.numeric(l_k)
   rs <- if (is.null(r_k)) numeric(0) else as.numeric(r_k)
-  if (!is.null(N) && as.integer(N) != length(ls))
+  if (!is.null(N) && as.integer(N) != length(ls)) {
     stop("N must be the number of zero distances")
-  if (!is.null(M) && as.integer(M) != length(rs))
+  }
+  if (!is.null(M) && as.integer(M) != length(rs)) {
     stop("M must be the number of pole distances")
+  }
   if (any(c(ls, rs) < 0)) stop("a distance cannot be negative")
-  if (any(rs <= 1e-300))
-    stop("a pole lies on the evaluation point; the magnitude response ",
-         "is unbounded there")
-  num <- prod(ls); den <- prod(rs)
-  list(magnitude = num / den, zero_product = num, pole_product = den,
-       n_zeros = length(ls), n_poles = length(rs),
-       on_a_zero = any(ls <= 1e-300),
-       method = "Rangayyan (2024) eq. (3.72)")
+  if (any(rs <= 1e-300)) {
+    stop(
+      "a pole lies on the evaluation point; the magnitude response ",
+      "is unbounded there"
+    )
+  }
+  num <- prod(ls)
+  den <- prod(rs)
+  list(
+    magnitude = num / den, zero_product = num, pole_product = den,
+    n_zeros = length(ls), n_poles = length(rs),
+    on_a_zero = any(ls <= 1e-300),
+    method = "Rangayyan (2024) eq. (3.72)"
+  )
 }
 
 PzPhase <- function(z_0, alpha_k, beta_k, N = NULL, M = NULL) {
@@ -196,19 +229,22 @@ PzPhase <- function(z_0, alpha_k, beta_k, N = NULL, M = NULL) {
   be <- if (is.null(beta_k)) numeric(0) else as.numeric(beta_k)
   n <- if (is.null(N)) length(al) else as.integer(N)
   m <- if (is.null(M)) length(be) else as.integer(M)
-  if (n != length(al) || m != length(be))
+  if (n != length(al) || m != length(be)) {
     stop("N and M must match the number of angles given")
+  }
   zc <- as.complex(z_0)
   if (zc == 0) stop("z_0 = 0 has no defined angle")
   ang <- Arg(zc)
   origin <- (m - n) * ang
   phase <- origin + .morie_fsum(al) - .morie_fsum(be)
-  list(phase = phase, wrapped = (phase + pi) %% (2 * pi) - pi,
-       origin_term = origin, zero_angle_sum = .morie_fsum(al),
-       pole_angle_sum = .morie_fsum(be), z_0_angle = ang,
-       n_zeros = n, n_poles = m,
-       origin_term_vanishes_when_orders_match = n == m,
-       method = "Rangayyan (2024) eq. (3.73)")
+  list(
+    phase = phase, wrapped = (phase + pi) %% (2 * pi) - pi,
+    origin_term = origin, zero_angle_sum = .morie_fsum(al),
+    pole_angle_sum = .morie_fsum(be), z_0_angle = ang,
+    n_zeros = n, n_poles = m,
+    origin_term_vanishes_when_orders_match = n == m,
+    method = "Rangayyan (2024) eq. (3.73)"
+  )
 }
 
 MaFir <- function(x, b_k = NULL, N = NULL, n = NULL) {
@@ -226,8 +262,9 @@ MaFir <- function(x, b_k = NULL, N = NULL, n = NULL) {
   } else {
     b <- as.numeric(b_k)
     if (!length(b)) stop("need at least one coefficient")
-    if (!is.null(N) && as.integer(N) != length(b) - 1L)
+    if (!is.null(N) && as.integer(N) != length(b) - 1L) {
       stop("N must be len(b_k) - 1")
+    }
   }
   out <- vapply(seq_along(xs), function(i) {
     k <- which(i - (seq_along(b) - 1L) >= 1L)
@@ -239,11 +276,13 @@ MaFir <- function(x, b_k = NULL, N = NULL, n = NULL) {
     if (idx < 0L || idx >= length(out)) stop("n is outside the record")
     val <- out[idx + 1L]
   }
-  list(y = out, value = val, index = n, b = b, N = length(b) - 1L,
-       settled_from = length(b) - 1L, dc_gain = .morie_fsum(b),
-       equal_weights = is.null(b_k),
-       delay_samples = if (is.null(b_k)) (length(b) - 1) / 2 else NULL,
-       method = "Rangayyan (2024) eqs. (3.97)-(3.99)")
+  list(
+    y = out, value = val, index = n, b = b, N = length(b) - 1L,
+    settled_from = length(b) - 1L, dc_gain = .morie_fsum(b),
+    equal_weights = is.null(b_k),
+    delay_samples = if (is.null(b_k)) (length(b) - 1) / 2 else NULL,
+    method = "Rangayyan (2024) eqs. (3.97)-(3.99)"
+  )
 }
 
 MaTf <- function(b_k, z, N = NULL) {
@@ -251,13 +290,16 @@ MaTf <- function(b_k, z, N = NULL) {
   # so an FIR filter is stable whatever its coefficients.
   b <- as.numeric(b_k)
   if (!length(b)) stop("need at least one coefficient")
-  if (!is.null(N) && as.integer(N) != length(b) - 1L)
+  if (!is.null(N) && as.integer(N) != length(b) - 1L) {
     stop("N must be len(b_k) - 1")
+  }
   H <- .morie_rg_polyz(b, z)
-  list(H = if (length(H) == 1L) H[[1]] else H, z = z, b = b,
-       N = length(b) - 1L, dc_gain = .morie_fsum(b),
-       always_stable = TRUE, poles_only_at_the_origin = TRUE,
-       method = "Rangayyan (2024) eq. (3.99)")
+  list(
+    H = if (length(H) == 1L) H[[1]] else H, z = z, b = b,
+    N = length(b) - 1L, dc_gain = .morie_fsum(b),
+    always_stable = TRUE, poles_only_at_the_origin = TRUE,
+    method = "Rangayyan (2024) eq. (3.99)"
+  )
 }
 
 HannFilt <- function(x, n = NULL) {
@@ -278,9 +320,11 @@ HannFilt <- function(x, n = NULL) {
     if (idx < 0L || idx >= length(out)) stop("n is outside the record")
     val <- out[idx + 1L]
   }
-  list(y = out, value = val, index = n, n = length(out),
-       taps = c(0.25, 0.5, 0.25), delay_samples = 1, settled_from = 2L,
-       dc_gain = 1, method = "Rangayyan (2024) eq. (3.100)")
+  list(
+    y = out, value = val, index = n, n = length(out),
+    taps = c(0.25, 0.5, 0.25), delay_samples = 1, settled_from = 2L,
+    dc_gain = 1, method = "Rangayyan (2024) eq. (3.100)"
+  )
 }
 
 HannImp <- function(n = NULL) {
@@ -293,9 +337,11 @@ HannImp <- function(n = NULL) {
     idx <- as.integer(n)
     val <- if (idx >= 0L && idx < 3L) taps[idx + 1L] else 0
   }
-  list(h = taps, value = val, index = n, n_taps = 3L, sum = 1,
-       finite = TRUE, symmetric = TRUE,
-       method = "Rangayyan (2024) eq. (3.101)")
+  list(
+    h = taps, value = val, index = n, n_taps = 3L, sum = 1,
+    finite = TRUE, symmetric = TRUE,
+    method = "Rangayyan (2024) eq. (3.101)"
+  )
 }
 
 HannZ <- function(X, z) {
@@ -306,9 +352,11 @@ HannZ <- function(X, z) {
   zc <- as.complex(z)
   if (zc == 0) stop("z = 0 is a pole of a causal transfer function")
   H <- 0.25 * (1 + 2 * zc^-1 + zc^-2)
-  list(Y = H * as.complex(X), H = H, X = as.complex(X), z = zc,
-       transfer_function_is_input_independent = TRUE,
-       method = "Rangayyan (2024) eq. (3.102)")
+  list(
+    Y = H * as.complex(X), H = H, X = as.complex(X), z = zc,
+    transfer_function_is_input_independent = TRUE,
+    method = "Rangayyan (2024) eq. (3.102)"
+  )
 }
 
 HannTf <- function(z) {
@@ -316,25 +364,30 @@ HannTf <- function(z) {
   # Nyquist.  The double zero is why the response reaches nought there
   # smoothly and why the attenuation nearby is second order.
   zc <- as.complex(z)
-  if (any(zc == 0))
+  if (any(zc == 0)) {
     stop("z = 0 is a pole of a causal transfer function")
+  }
   H <- 0.25 * (1 + zc^-1)^2
-  list(H = if (length(H) == 1L) H[[1]] else H, z = z,
-       zeros = c(-1, -1), zero_multiplicity = 2L,
-       zeros_at_nyquist = TRUE, dc_gain = 1,
-       method = "Rangayyan (2024) eq. (3.103)")
+  list(
+    H = if (length(H) == 1L) H[[1]] else H, z = z,
+    zeros = c(-1, -1), zero_multiplicity = 2L,
+    zeros_at_nyquist = TRUE, dc_gain = 1,
+    method = "Rangayyan (2024) eq. (3.103)"
+  )
 }
 
 HannFr <- function(omega) {
   # eq (3.104): the transfer function on the unit circle, raw form.
   w <- as.numeric(omega)
   H <- 0.25 * (1 + 2 * complex(real = cos(-w), imaginary = sin(-w)) +
-               complex(real = cos(-2 * w), imaginary = sin(-2 * w)))
+    complex(real = cos(-2 * w), imaginary = sin(-2 * w)))
   scalar <- length(H) == 1L
-  list(H = if (scalar) H[[1]] else H, omega = omega,
-       magnitude = if (scalar) Mod(H[[1]]) else Mod(H),
-       on_the_unit_circle = TRUE,
-       method = "Rangayyan (2024) eq. (3.104)")
+  list(
+    H = if (scalar) H[[1]] else H, omega = omega,
+    magnitude = if (scalar) Mod(H[[1]]) else Mod(H),
+    on_the_unit_circle = TRUE,
+    method = "Rangayyan (2024) eq. (3.104)"
+  )
 }
 
 HannFrs <- function(omega) {
@@ -344,15 +397,17 @@ HannFrs <- function(omega) {
   w <- as.numeric(omega)
   H <- 0.5 * (1 + cos(w)) * complex(real = cos(-w), imaginary = sin(-w))
   raw <- 0.25 * (1 + 2 * complex(real = cos(-w), imaginary = sin(-w)) +
-                 complex(real = cos(-2 * w), imaginary = sin(-2 * w)))
+    complex(real = cos(-2 * w), imaginary = sin(-2 * w)))
   gap <- max(Mod(H - raw))
   scalar <- length(H) == 1L
-  list(H = if (scalar) H[[1]] else H, omega = omega,
-       envelope = 0.5 * (1 + cos(w)),
-       max_difference_from_eq_3_104 = gap,
-       agrees_with_raw_form = gap <= 1e-12,
-       real_factor_times_a_pure_delay = TRUE, linear_phase = TRUE,
-       method = "Rangayyan (2024) eq. (3.105)")
+  list(
+    H = if (scalar) H[[1]] else H, omega = omega,
+    envelope = 0.5 * (1 + cos(w)),
+    max_difference_from_eq_3_104 = gap,
+    agrees_with_raw_form = gap <= 1e-12,
+    real_factor_times_a_pure_delay = TRUE, linear_phase = TRUE,
+    method = "Rangayyan (2024) eq. (3.105)"
+  )
 }
 
 HannMag <- function(omega) {
@@ -361,10 +416,12 @@ HannMag <- function(omega) {
   # negative -- and is kept only because the book writes it.
   w <- as.numeric(omega)
   mag <- abs(0.5 * (1 + cos(w)))
-  list(magnitude = if (length(mag) == 1L) mag[[1]] else mag,
-       omega = omega, dc_gain = 1, nyquist_gain = 0, lowpass = TRUE,
-       absolute_value_is_redundant = TRUE,
-       method = "Rangayyan (2024) eq. (3.106)")
+  list(
+    magnitude = if (length(mag) == 1L) mag[[1]] else mag,
+    omega = omega, dc_gain = 1, nyquist_gain = 0, lowpass = TRUE,
+    absolute_value_is_redundant = TRUE,
+    method = "Rangayyan (2024) eq. (3.106)"
+  )
 }
 
 HannPh <- function(omega) {
@@ -373,10 +430,12 @@ HannPh <- function(omega) {
   # distortion" means.
   w <- as.numeric(omega)
   ph <- -w
-  list(phase = if (length(ph) == 1L) ph[[1]] else ph, omega = omega,
-       group_delay = 1, slope = -1, linear_phase = TRUE,
-       constant_group_delay = TRUE,
-       method = "Rangayyan (2024) eq. (3.107)")
+  list(
+    phase = if (length(ph) == 1L) ph[[1]] else ph, omega = omega,
+    group_delay = 1, slope = -1, linear_phase = TRUE,
+    constant_group_delay = TRUE,
+    method = "Rangayyan (2024) eq. (3.107)"
+  )
 }
 
 OsFilt <- function(x, window, kind = "median", alpha = 0, weights = NULL,
@@ -390,21 +449,27 @@ OsFilt <- function(x, window, kind = "median", alpha = 0, weights = NULL,
   if (!length(xs)) stop("need at least one sample")
   w <- as.integer(window)
   if (w < 1L) stop("the window must hold at least one sample")
-  if (w %% 2L == 0L)
+  if (w %% 2L == 0L) {
     stop("the window must be odd so it can be centred, got ", w)
+  }
   if (w > length(xs)) stop("the window is longer than the record")
   kinds <- c("min", "max", "minmax", "median", "trimmed", "l", "order")
-  if (!kind %in% kinds)
+  if (!kind %in% kinds) {
     stop("kind must be one of ", paste(kinds, collapse = ", "))
+  }
   av <- as.numeric(alpha)
-  if (kind == "trimmed" && !(av >= 0 && av < 0.5))
-    stop("the book writes 0 <= alpha < 0.5; at 0.5 the whole list is ",
-         "trimmed away, got ", av)
+  if (kind == "trimmed" && !(av >= 0 && av < 0.5)) {
+    stop(
+      "the book writes 0 <= alpha < 0.5; at 0.5 the whole list is ",
+      "trimmed away, got ", av
+    )
+  }
   if (kind == "l") {
     if (is.null(weights)) stop("the L-filter needs one weight per rank")
     wts <- as.numeric(weights)
-    if (length(wts) != w)
+    if (length(wts) != w) {
       stop("the L-filter needs ", w, " weights, one per rank")
+    }
     tot <- .morie_fsum(wts)
     if (abs(tot) <= 1e-300) stop("the L-filter weights sum to zero")
   }
@@ -418,39 +483,53 @@ OsFilt <- function(x, window, kind = "median", alpha = 0, weights = NULL,
   padded <- function(seq) {
     # whole-sample symmetric reflection: the edge value is repeated, so a
     # monotone run passes through a median filter untouched
-    if (half == 0L) return(seq)
-    c(rev(seq[seq_len(half)]), seq,
-      rev(seq[seq.int(length(seq) - half + 1L, length(seq))]))
+    if (half == 0L) {
+      return(seq)
+    }
+    c(
+      rev(seq[seq_len(half)]), seq,
+      rev(seq[seq.int(length(seq) - half + 1L, length(seq))])
+    )
   }
 
   rank_pass <- function(seq, take) {
     pad <- padded(seq)
-    vapply(seq_along(seq), function(i) take(sort(pad[i:(i + w - 1L)])),
-           numeric(1))
+    vapply(
+      seq_along(seq), function(i) take(sort(pad[i:(i + w - 1L)])),
+      numeric(1)
+    )
   }
 
-  out <- switch(
-    kind,
+  out <- switch(kind,
     min = rank_pass(xs, function(r) r[1]),
     max = rank_pass(xs, function(r) r[w]),
-    minmax = rank_pass(rank_pass(xs, function(r) r[1]),
-                       function(r) r[w]),
+    minmax = rank_pass(
+      rank_pass(xs, function(r) r[1]),
+      function(r) r[w]
+    ),
     median = rank_pass(xs, function(r) r[half + 1L]),
     order = rank_pass(xs, function(r) r[i_ord]),
     trimmed = {
       drop <- as.integer(av * w)
       if (2L * drop >= w) drop <- (w - 1L) %/% 2L
-      rank_pass(xs, function(r)
-        .morie_fsum(r[seq.int(drop + 1L, w - drop)]) / (w - 2L * drop))
+      rank_pass(xs, function(r) {
+        .morie_fsum(r[seq.int(drop + 1L, w - drop)]) / (w - 2L * drop)
+      })
     },
-    l = rank_pass(xs, function(r) .morie_fsum(wts * r) / tot))
+    l = rank_pass(xs, function(r) .morie_fsum(wts * r) / tot)
+  )
 
-  list(y = out, n = length(out), window = w, kind = kind,
-       alpha = if (kind == "trimmed") av else NULL,
-       trimmed_each_end = if (kind == "trimmed") as.integer(av * w)
-         else NULL,
-       order = if (kind == "order") i_ord else NULL,
-       nonlinear = TRUE, no_frequency_response = TRUE,
-       edges = "symmetric reflection",
-       method = "Rangayyan (2024) Section 3.8 (order-statistic filters)")
+  list(
+    y = out, n = length(out), window = w, kind = kind,
+    alpha = if (kind == "trimmed") av else NULL,
+    trimmed_each_end = if (kind == "trimmed") {
+      as.integer(av * w)
+    } else {
+      NULL
+    },
+    order = if (kind == "order") i_ord else NULL,
+    nonlinear = TRUE, no_frequency_response = TRUE,
+    edges = "symmetric reflection",
+    method = "Rangayyan (2024) Section 3.8 (order-statistic filters)"
+  )
 }

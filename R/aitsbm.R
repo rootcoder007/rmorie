@@ -62,12 +62,16 @@ morie_subcompositional_incoherence <- function(x, idx) {
   D <- ncol(X)
   if (D < 3L) {
     stop("Need at least 3 parts to form a proper subcomposition, got D=",
-         D, ".", call. = FALSE)
+      D, ".",
+      call. = FALSE
+    )
   }
   if (n < 3L) stop("Need at least 3 observations, got ", n, ".", call. = FALSE)
   if (!all(X > 0)) {
     stop("Compositional parts must be strictly positive; log-ratios are ",
-         "undefined at zero.", call. = FALSE)
+      "undefined at zero.",
+      call. = FALSE
+    )
   }
 
   sub <- as.integer(idx)
@@ -76,7 +80,9 @@ morie_subcompositional_incoherence <- function(x, idx) {
   }
   if (length(sub) >= D) {
     stop("idx must name fewer than D=", D,
-         " parts, else the subcomposition is the composition.", call. = FALSE)
+      " parts, else the subcomposition is the composition.",
+      call. = FALSE
+    )
   }
   if (any(sub < 1L) || any(sub > D)) {
     stop("idx entries must lie in [1, ", D, "].", call. = FALSE)

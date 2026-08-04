@@ -34,8 +34,10 @@ morie_stirling_second <- function(n, k = NULL) {
   if (is.na(n) || n < 0L) {
     stop(sprintf("n must be non-negative; got %s", n), call. = FALSE)
   }
-  row <- c(list(morie_bigint(1)),
-           replicate(n, morie_bigint(0), simplify = FALSE))
+  row <- c(
+    list(morie_bigint(1)),
+    replicate(n, morie_bigint(0), simplify = FALSE)
+  )
   if (n >= 1L) {
     for (i in seq_len(n)) {
       new <- replicate(n + 1L, morie_bigint(0), simplify = FALSE)
@@ -47,9 +49,13 @@ morie_stirling_second <- function(n, k = NULL) {
       row <- new
     }
   }
-  if (is.null(k)) return(row)
+  if (is.null(k)) {
+    return(row)
+  }
   k <- as.integer(k)
-  if (k < 0L || k > n) return(morie_bigint(0))
+  if (k < 0L || k > n) {
+    return(morie_bigint(0))
+  }
   row[[k + 1L]]
 }
 
@@ -71,8 +77,10 @@ morie_stirling_first <- function(n, k = NULL, signed = FALSE) {
   if (is.na(n) || n < 0L) {
     stop(sprintf("n must be non-negative; got %s", n), call. = FALSE)
   }
-  row <- c(list(morie_bigint(1)),
-           replicate(n, morie_bigint(0), simplify = FALSE))
+  row <- c(
+    list(morie_bigint(1)),
+    replicate(n, morie_bigint(0), simplify = FALSE)
+  )
   if (n >= 1L) {
     for (i in seq_len(n)) {
       new <- replicate(n + 1L, morie_bigint(0), simplify = FALSE)
@@ -85,14 +93,18 @@ morie_stirling_first <- function(n, k = NULL, signed = FALSE) {
     }
   }
   flip <- function(v, j) {
-    if (!isTRUE(signed) || (n - j) %% 2L == 0L) return(v)
+    if (!isTRUE(signed) || (n - j) %% 2L == 0L) {
+      return(v)
+    }
     morie_big_sub(morie_bigint(0), v)
   }
   if (is.null(k)) {
     return(lapply(seq_along(row), function(j) flip(row[[j]], j - 1L)))
   }
   k <- as.integer(k)
-  if (k < 0L || k > n) return(morie_bigint(0))
+  if (k < 0L || k > n) {
+    return(morie_bigint(0))
+  }
   flip(row[[k + 1L]], k)
 }
 
@@ -114,7 +126,9 @@ morie_bell_number <- function(n) {
   if (is.na(n) || n < 0L) {
     stop(sprintf("n must be non-negative; got %s", n), call. = FALSE)
   }
-  if (n == 0L) return(morie_bigint(1))
+  if (n == 0L) {
+    return(morie_bigint(1))
+  }
   row <- list(morie_bigint(1))
   for (i in seq_len(n)) {
     nxt <- list(row[[length(row)]])
@@ -175,16 +189,20 @@ morie_partition_count <- function(n, distinct = FALSE, odd_only = FALSE) {
       for (part in seq_len(n)) {
         if (part > n) break
         for (total in seq.int(n, part)) {
-          dp[[total + 1L]] <- morie_big_add(dp[[total + 1L]],
-                                            dp[[total - part + 1L]])
+          dp[[total + 1L]] <- morie_big_add(
+            dp[[total + 1L]],
+            dp[[total - part + 1L]]
+          )
         }
       }
     } else {
       part <- 1L
       while (part <= n) {
         for (total in seq.int(part, n)) {
-          dp[[total + 1L]] <- morie_big_add(dp[[total + 1L]],
-                                            dp[[total - part + 1L]])
+          dp[[total + 1L]] <- morie_big_add(
+            dp[[total + 1L]],
+            dp[[total - part + 1L]]
+          )
         }
         part <- part + 2L
       }
@@ -210,12 +228,18 @@ morie_partition_count <- function(n, distinct = FALSE, odd_only = FALSE) {
         if (g1 > m && g2 > m) break
         pos <- (k %% 2L == 1L)
         if (g1 <= m) {
-          total <- if (pos) morie_big_add(total, p[[m - g1 + 1L]]) else
+          total <- if (pos) {
+            morie_big_add(total, p[[m - g1 + 1L]])
+          } else {
             morie_big_sub(total, p[[m - g1 + 1L]])
+          }
         }
         if (g2 <= m) {
-          total <- if (pos) morie_big_add(total, p[[m - g2 + 1L]]) else
+          total <- if (pos) {
+            morie_big_add(total, p[[m - g2 + 1L]])
+          } else {
             morie_big_sub(total, p[[m - g2 + 1L]])
+          }
         }
         k <- k + 1L
       }
@@ -234,12 +258,17 @@ morie_partition_count <- function(n, distinct = FALSE, odd_only = FALSE) {
 #' @return A `morie_bigint`.
 #' @export
 morie_partitions_into_parts <- function(n, k) {
-  n <- as.integer(n); k <- as.integer(k)
+  n <- as.integer(n)
+  k <- as.integer(k)
   if (is.na(n) || is.na(k) || n < 0L || k < 0L) {
     stop("n and k must be non-negative.", call. = FALSE)
   }
-  if (k == 0L) return(morie_bigint(if (n == 0L) 1 else 0))
-  if (k > n) return(morie_bigint(0))
+  if (k == 0L) {
+    return(morie_bigint(if (n == 0L) 1 else 0))
+  }
+  if (k > n) {
+    return(morie_bigint(0))
+  }
   dp <- vector("list", (n + 1L) * (k + 1L))
   idx <- function(i, j) i * (k + 1L) + j + 1L
   for (i in 0:n) for (j in 0:k) dp[[idx(i, j)]] <- morie_bigint(0)
@@ -270,8 +299,11 @@ morie_derangements <- function(n) {
   if (n >= 1L) {
     for (i in seq_len(n)) {
       d <- morie_big_mul(morie_bigint(i), d)
-      d <- if (i %% 2L == 0L) morie_big_add(d, morie_bigint(1)) else
+      d <- if (i %% 2L == 0L) {
+        morie_big_add(d, morie_bigint(1))
+      } else {
         morie_big_sub(d, morie_bigint(1))
+      }
     }
   }
   d
@@ -292,38 +324,55 @@ morie_derangements <- function(n) {
 #' @export
 morie_twelvefold_way <- function(n, k, balls = c("labelled", "unlabelled"),
                                  boxes = c("labelled", "unlabelled"),
-                                 condition = c("any", "injective",
-                                               "surjective")) {
-  balls <- match.arg(balls); boxes <- match.arg(boxes)
+                                 condition = c(
+                                   "any", "injective",
+                                   "surjective"
+                                 )) {
+  balls <- match.arg(balls)
+  boxes <- match.arg(boxes)
   condition <- match.arg(condition)
-  n <- as.integer(n); k <- as.integer(k)
+  n <- as.integer(n)
+  k <- as.integer(k)
   if (is.na(n) || is.na(k) || n < 0L || k < 0L) {
     stop("n and k must be non-negative.", call. = FALSE)
   }
-  lb <- balls == "labelled"; lx <- boxes == "labelled"
+  lb <- balls == "labelled"
+  lx <- boxes == "labelled"
   falling <- function(a, b) {
     out <- morie_bigint(1)
-    if (b > a) return(morie_bigint(0))
-    if (b == 0L) return(out)
+    if (b > a) {
+      return(morie_bigint(0))
+    }
+    if (b == 0L) {
+      return(out)
+    }
     for (i in seq_len(b)) out <- morie_big_mul(out, morie_bigint(a - i + 1L))
     out
   }
   if (lb && lx) {
-    if (condition == "any") { cnt <- morie_big_pow(k, n); f <- "k^n" }
-    else if (condition == "injective") {
-      cnt <- falling(k, n); f <- "k falling factorial n"
+    if (condition == "any") {
+      cnt <- morie_big_pow(k, n)
+      f <- "k^n"
+    } else if (condition == "injective") {
+      cnt <- falling(k, n)
+      f <- "k falling factorial n"
     } else {
       cnt <- morie_big_mul(morie_big_factorial(k), morie_stirling_second(n, k))
       f <- "k! S(n,k)"
     }
   } else if (!lb && lx) {
     if (condition == "any") {
-      cnt <- morie_big_binom(n + k - 1L, n); f <- "C(n+k-1, n)"
+      cnt <- morie_big_binom(n + k - 1L, n)
+      f <- "C(n+k-1, n)"
     } else if (condition == "injective") {
-      cnt <- morie_big_binom(k, n); f <- "C(k, n)"
+      cnt <- morie_big_binom(k, n)
+      f <- "C(k, n)"
     } else {
-      cnt <- if (n >= k && k >= 1L) morie_big_binom(n - 1L, n - k) else
+      cnt <- if (n >= k && k >= 1L) {
+        morie_big_binom(n - 1L, n - k)
+      } else {
         morie_bigint(if (n == 0L && k == 0L) 1 else 0)
+      }
       f <- "C(n-1, n-k)"
     }
   } else if (lb && !lx) {
@@ -332,22 +381,36 @@ morie_twelvefold_way <- function(n, k, balls = c("labelled", "unlabelled"),
       for (j in 0:k) cnt <- morie_big_add(cnt, morie_stirling_second(n, j))
       f <- "sum_j S(n,j)"
     } else if (condition == "injective") {
-      cnt <- morie_bigint(if (n <= k) 1 else 0); f <- "[n <= k]"
-    } else { cnt <- morie_stirling_second(n, k); f <- "S(n,k)" }
+      cnt <- morie_bigint(if (n <= k) 1 else 0)
+      f <- "[n <= k]"
+    } else {
+      cnt <- morie_stirling_second(n, k)
+      f <- "S(n,k)"
+    }
   } else {
     if (condition == "any") {
       cnt <- morie_bigint(0)
-      for (j in 0:k) cnt <- morie_big_add(cnt,
-                                          morie_partitions_into_parts(n, j))
+      for (j in 0:k) {
+        cnt <- morie_big_add(
+          cnt,
+          morie_partitions_into_parts(n, j)
+        )
+      }
       f <- "sum_j p(n,j)"
     } else if (condition == "injective") {
-      cnt <- morie_bigint(if (n <= k) 1 else 0); f <- "[n <= k]"
-    } else { cnt <- morie_partitions_into_parts(n, k); f <- "p(n,k)" }
+      cnt <- morie_bigint(if (n <= k) 1 else 0)
+      f <- "[n <= k]"
+    } else {
+      cnt <- morie_partitions_into_parts(n, k)
+      f <- "p(n,k)"
+    }
   }
-  list(count = cnt, formula = f,
-       cell = sprintf("%s balls, %s boxes, %s", balls, boxes, condition),
-       balls = balls, boxes = boxes, condition = condition, n = n, k = k,
-       method = "Twelvefold way (Stanley, Enumerative Combinatorics 1.9)")
+  list(
+    count = cnt, formula = f,
+    cell = sprintf("%s balls, %s boxes, %s", balls, boxes, condition),
+    balls = balls, boxes = boxes, condition = condition, n = n, k = k,
+    method = "Twelvefold way (Stanley, Enumerative Combinatorics 1.9)"
+  )
 }
 
 #' Mobius inversion over the divisor lattice
@@ -387,13 +450,19 @@ morie_mobius_inversion <- function(f_values) {
     g[m] <- sum(mu[m %/% d] * f[d])
   }
   rebuilt <- vapply(seq_len(n), function(m) {
-    d <- seq_len(m); d <- d[m %% d == 0]; sum(g[d])
+    d <- seq_len(m)
+    d <- d[m %% d == 0]
+    sum(g[d])
   }, numeric(1))
   sums <- vapply(seq_len(n), function(m) {
-    d <- seq_len(m); d <- d[m %% d == 0]; sum(mu[d])
+    d <- seq_len(m)
+    d <- d[m %% d == 0]
+    sum(mu[d])
   }, numeric(1))
-  list(g = g, mobius = mu, divisor_sums = sums,
-       reconstruction_residual = max(abs(f - rebuilt)),
-       mobius_identity_residual = max(abs(sums - c(1, rep(0, n - 1)))),
-       n = n, method = "Mobius inversion (Stanley 3.7)")
+  list(
+    g = g, mobius = mu, divisor_sums = sums,
+    reconstruction_residual = max(abs(f - rebuilt)),
+    mobius_identity_residual = max(abs(sums - c(1, rep(0, n - 1)))),
+    n = n, method = "Mobius inversion (Stanley 3.7)"
+  )
 }

@@ -81,28 +81,37 @@ morie_cluster <- function(x, k = 2L, scale = FALSE,
   storage.mode(xm) <- "double"
   rn <- rownames(xm)
   if (is.null(rn)) {
-    if (!is.null(case_labels)) rn <- as.character(case_labels)     # UL3.2
+    if (!is.null(case_labels)) {
+      rn <- as.character(case_labels)
+    } # UL3.2
     else {
       warning("input has no row names; using positional labels", call. = FALSE)
-      rn <- as.character(seq_len(nrow(xm)))                        # UL1.2
+      rn <- as.character(seq_len(nrow(xm))) # UL1.2
     }
   }
   if (anyNA(xm)) {
-    if (na_action == "fail") stop("missing values with na_action='fail'",
-                                  call. = FALSE)
-    keep <- stats::complete.cases(xm); xm <- xm[keep, , drop = FALSE]
+    if (na_action == "fail") {
+      stop("missing values with na_action='fail'",
+        call. = FALSE
+      )
+    }
+    keep <- stats::complete.cases(xm)
+    xm <- xm[keep, , drop = FALSE]
     rn <- rn[keep]
   }
   # scale diagnostics (UL2.0)
   col_sds <- apply(xm, 2, stats::sd)
   if (!scale && length(col_sds) > 1 &&
-      max(col_sds) / min(col_sds[col_sds > 0]) > 100) {
+    max(col_sds) / min(col_sds[col_sds > 0]) > 100) {
     warning("predictor scales differ by >100x; consider scale = TRUE",
-            call. = FALSE)
+      call. = FALSE
+    )
   }
   centers_scale <- NULL
-  if (scale) { centers_scale <- list(m = colMeans(xm), s = col_sds)
-    xm <- scale(xm) }
+  if (scale) {
+    centers_scale <- list(m = colMeans(xm), s = col_sds)
+    xm <- scale(xm)
+  }
 
   set.seed(seed)
   km <- stats::kmeans(xm, centers = k, nstart = 10L)
@@ -119,7 +128,8 @@ morie_cluster <- function(x, k = 2L, scale = FALSE,
     k = k, sizes = tabulate(labels, nbins = k),
     withinss = km$withinss[ord], tot_withinss = km$tot.withinss,
     scale = scale, scale_params = centers_scale,
-    case_names = rn, feature_names = colnames(xm), n_obs = nrow(xm))
+    case_names = rn, feature_names = colnames(xm), n_obs = nrow(xm)
+  )
   class(out) <- c("morie_cluster", "morie_rich_result", "list")
   out
 }
@@ -137,8 +147,10 @@ predict.morie_cluster <- function(object, newdata, ...) {
   xm <- as.matrix(newdata[, object$feature_names, drop = FALSE])
   storage.mode(xm) <- "double"
   if (object$scale) {
-    xm <- sweep(sweep(xm, 2, object$scale_params$m), 2,
-                object$scale_params$s, "/")
+    xm <- sweep(
+      sweep(xm, 2, object$scale_params$m), 2,
+      object$scale_params$s, "/"
+    )
   }
   # nearest centroid (no re-optimisation)
   d <- as.matrix(stats::dist(rbind(object$centers, xm)))
@@ -165,7 +177,7 @@ print.morie_cluster <- function(x, max_rows = 10L, ...) {
   cat(sprintf("<morie_cluster> k=%d  n=%d\n", x$k, x$n_obs))
   cat("  sizes (largest first):", paste(x$sizes, collapse = ", "), "\n")
   cat("  assignments (first rows):\n")
-  print(utils::head(x$assignments, max_rows))          # UL4.3a
+  print(utils::head(x$assignments, max_rows)) # UL4.3a
   if (x$n_obs > max_rows) cat(sprintf("  ... %d more\n", x$n_obs - max_rows))
   invisible(x)
 }
@@ -184,8 +196,10 @@ print.morie_cluster <- function(x, max_rows = 10L, ...) {
 #' }
 #' @export
 summary.morie_cluster <- function(object, ...) {
-  data.frame(cluster = seq_len(object$k), size = object$sizes,
-             withinss = object$withinss)
+  data.frame(
+    cluster = seq_len(object$k), size = object$sizes,
+    withinss = object$withinss
+  )
 }
 
 #' Default 2-D cluster plot
@@ -202,13 +216,25 @@ summary.morie_cluster <- function(object, ...) {
 #' @export
 plot.morie_cluster <- function(x, ...) {
   ctr <- x$centers
-  if (ncol(ctr) < 2) { plot(ctr[, 1], rep(0, nrow(ctr)), xlab = "dim 1",
-                            ylab = "", ...); return(invisible(NULL)) }
-  plot(ctr[, 1], ctr[, 2], xlab = x$feature_names[1], ylab = x$feature_names[2],
-       pch = 19, main = "morie_cluster centroids", ...)
-  if (x$k <= 20L) graphics::text(ctr[, 1], ctr[, 2], labels = seq_len(x$k),
-                                 pos = 3)
-  else warning("too many clusters to label readably", call. = FALSE)  # UL6.2
+  if (ncol(ctr) < 2) {
+    plot(ctr[, 1], rep(0, nrow(ctr)),
+      xlab = "dim 1",
+      ylab = "", ...
+    )
+    return(invisible(NULL))
+  }
+  plot(ctr[, 1], ctr[, 2],
+    xlab = x$feature_names[1], ylab = x$feature_names[2],
+    pch = 19, main = "morie_cluster centroids", ...
+  )
+  if (x$k <= 20L) {
+    graphics::text(ctr[, 1], ctr[, 2],
+      labels = seq_len(x$k),
+      pos = 3
+    )
+  } else {
+    warning("too many clusters to label readably", call. = FALSE)
+  } # UL6.2
   invisible(NULL)
 }
 

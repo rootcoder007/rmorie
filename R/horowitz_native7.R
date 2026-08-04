@@ -37,8 +37,11 @@
   b <- as.numeric(beta)
   n <- nrow(Y)
   tt <- ncol(Y)
-  if (tt < 2L) stop(sprintf("need at least 2 periods, got %d.", tt),
-                    call. = FALSE)
+  if (tt < 2L) {
+    stop(sprintf("need at least 2 periods, got %d.", tt),
+      call. = FALSE
+    )
+  }
   if (is.matrix(x)) {
     if (nrow(x) == n * tt && ncol(x) == length(b)) {
       X <- array(0, dim = c(n, tt, length(b)))
@@ -46,8 +49,10 @@
     } else if (nrow(x) == n && ncol(x) == tt && length(b) == 1L) {
       X <- array(x, dim = c(n, tt, 1L))
     } else {
-      stop(sprintf("x has %d x %d entries, cannot match %d x %d.",
-                   nrow(x), ncol(x), n, tt), call. = FALSE)
+      stop(sprintf(
+        "x has %d x %d entries, cannot match %d x %d.",
+        nrow(x), ncol(x), n, tt
+      ), call. = FALSE)
     }
   } else if (length(dim(x)) == 3L) {
     X <- x
@@ -55,12 +60,16 @@
     stop("x must be (n, T, d) or (n*T, d).", call. = FALSE)
   }
   if (dim(X)[1L] != n || dim(X)[2L] != tt) {
-    stop(sprintf("x has %d x %d panel dimensions, expected %d x %d.",
-                 dim(X)[1L], dim(X)[2L], n, tt), call. = FALSE)
+    stop(sprintf(
+      "x has %d x %d panel dimensions, expected %d x %d.",
+      dim(X)[1L], dim(X)[2L], n, tt
+    ), call. = FALSE)
   }
   if (dim(X)[3L] != length(b)) {
-    stop(sprintf("beta has %d entries for %d covariates.",
-                 length(b), dim(X)[3L]), call. = FALSE)
+    stop(sprintf(
+      "beta has %d entries for %d covariates.",
+      length(b), dim(X)[3L]
+    ), call. = FALSE)
   }
   xb <- matrix(0, n, tt)
   for (j in seq_along(b)) xb <- xb + X[, , j] * b[j]
@@ -74,15 +83,19 @@
                                        n_tau = 2001L) {
   if (nu_U <= 0 || nu_eps <= 0) {
     stop(sprintf("bandwidths must be positive, got (%g, %g).", nu_U, nu_eps),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
-  trapz <- function(xx, yy) sum(diff(xx) * (utils::head(yy, -1L) +
-                                              utils::tail(yy, -1L)) / 2)
+  trapz <- function(xx, yy) {
+    sum(diff(xx) * (utils::head(yy, -1L) +
+      utils::tail(yy, -1L)) / 2)
+  }
   tau_e <- seq(-1 / nu_eps, 1 / nu_eps, length.out = n_tau)
   psi_eta_e <- rowMeans(exp(1i * outer(tau_e, eta)))
   integ_e <- sqrt(Mod(psi_eta_e)) * .morie_hrz_smoothing_cf(nu_eps * tau_e)
-  f_eps <- vapply(grid_z, function(z)
-    Re(trapz(tau_e, integ_e * exp(-1i * tau_e * z))) / (2 * pi), numeric(1))
+  f_eps <- vapply(grid_z, function(z) {
+    Re(trapz(tau_e, integ_e * exp(-1i * tau_e * z))) / (2 * pi)
+  }, numeric(1))
 
   tau_u <- seq(-1 / nu_U, 1 / nu_U, length.out = n_tau)
   psi_w_u <- rowMeans(exp(1i * outer(tau_u, w)))
@@ -90,8 +103,9 @@
   root <- sqrt(Mod(psi_eta_u))
   weight <- .morie_hrz_smoothing_cf(nu_U * tau_u)
   integ_u <- ifelse(weight > 0, psi_w_u * weight / pmax(root, 1e-300), 0)
-  f_u <- vapply(grid_u, function(u)
-    Re(trapz(tau_u, integ_u * exp(-1i * tau_u * u))) / (2 * pi), numeric(1))
+  f_u <- vapply(grid_u, function(u) {
+    Re(trapz(tau_u, integ_u * exp(-1i * tau_u * u))) / (2 * pi)
+  }, numeric(1))
   list(f_U = f_u, f_eps = f_eps)
 }
 
@@ -129,7 +143,8 @@
 #' @references Horowitz, Sec. 5.2.1-5.2.2, eqs. (5.21)-(5.26),
 #'   Theorem 5.4; Horowitz and Markatou (1996).
 #' @examples
-#' n <- 60; tt <- 3
+#' n <- 60
+#' tt <- 3
 #' x <- array(rnorm(n * tt * 2), dim = c(n, tt, 2))
 #' y <- matrix(rnorm(n * tt), n, tt)
 #' morie_panel_deconvolution(y, x, c(1, -0.5))$symmetry_required
@@ -145,20 +160,28 @@ morie_panel_deconvolution <- function(y, x, beta, nu_U = NULL, nu_eps = NULL,
   nu2 <- if (is.null(nu_eps)) default else as.numeric(nu_eps)
   gu <- if (is.null(grid_u)) {
     seq(stats::quantile(r$W, 0.05), stats::quantile(r$W, 0.95),
-        length.out = 61L)
-  } else as.numeric(grid_u)
+      length.out = 61L
+    )
+  } else {
+    as.numeric(grid_u)
+  }
   gz <- if (is.null(grid_z)) {
     seq(stats::quantile(r$eta, 0.05), stats::quantile(r$eta, 0.95),
-        length.out = 61L)
-  } else as.numeric(grid_z)
+      length.out = 61L
+    )
+  } else {
+    as.numeric(grid_z)
+  }
   d <- .morie_hrz_deconvolve_pair(r$W, r$eta, gu, gz, nu1, nu2)
-  list(grid_u = gu, f_U = d$f_U, grid_z = gz, f_eps = d$f_eps,
-       psi_eps_from_root = TRUE, symmetry_required = TRUE,
-       nu_U = nu1, nu_eps = nu2,
-       fastest_possible_rate = "(log n)^{-1} for normal eps",
-       asymptotics_in = "n with T fixed",
-       n = r$n, T = r$T, d = length(as.numeric(beta)),
-       method = "Panel deconvolution (5.21)-(5.26); psi_eps = psi_eta^{1/2} needs eps symmetric")
+  list(
+    grid_u = gu, f_U = d$f_U, grid_z = gz, f_eps = d$f_eps,
+    psi_eps_from_root = TRUE, symmetry_required = TRUE,
+    nu_U = nu1, nu_eps = nu2,
+    fastest_possible_rate = "(log n)^{-1} for normal eps",
+    asymptotics_in = "n with T fixed",
+    n = r$n, T = r$T, d = length(as.numeric(beta)),
+    method = "Panel deconvolution (5.21)-(5.26); psi_eps = psi_eta^{1/2} needs eps symmetric"
+  )
 }
 
 #' Smoothed deconvolution estimator of f_U
@@ -186,7 +209,8 @@ morie_panel_deconvolution <- function(y, x, beta, nu_U = NULL, nu_eps = NULL,
 #'   n, T, method.
 #' @references Horowitz, Sec. 5.2.1, eq. (5.26).
 #' @examples
-#' n <- 60; tt <- 3
+#' n <- 60
+#' tt <- 3
 #' x <- array(rnorm(n * tt * 2), dim = c(n, tt, 2))
 #' morie_smoothed_fU(matrix(rnorm(n * tt), n, tt), x, c(1, -0.5))$cutoff
 #' @export
@@ -196,16 +220,24 @@ morie_smoothed_fU <- function(y, x, beta, nu_U = NULL, grid = NULL) {
     stop(sprintf("need at least 10 individuals, got %d.", r$n), call. = FALSE)
   }
   nu1 <- if (is.null(nu_U)) log(r$n)^-0.5 else as.numeric(nu_U)
-  if (nu1 <= 0) stop(sprintf("nu_U must be positive, got %g.", nu1),
-                     call. = FALSE)
+  if (nu1 <= 0) {
+    stop(sprintf("nu_U must be positive, got %g.", nu1),
+      call. = FALSE
+    )
+  }
   g <- if (is.null(grid)) {
     seq(stats::quantile(r$W, 0.05), stats::quantile(r$W, 0.95),
-        length.out = 61L)
-  } else as.numeric(grid)
+      length.out = 61L
+    )
+  } else {
+    as.numeric(grid)
+  }
   d <- .morie_hrz_deconvolve_pair(r$W, r$eta, g, g[1L], nu1, nu1)
-  list(grid = g, f_U = d$f_U, nu_U = nu1, cutoff = 1 / nu1,
-       regularisation_required = TRUE, n = r$n, T = r$T,
-       method = "(5.26): psi_zeta compactly supported, so the ratio is never formed past the cut-off")
+  list(
+    grid = g, f_U = d$f_U, nu_U = nu1, cutoff = 1 / nu1,
+    regularisation_required = TRUE, n = r$n, T = r$T,
+    method = "(5.26): psi_zeta compactly supported, so the ratio is never formed past the cut-off"
+  )
 }
 
 #' Both panel-deconvolution density estimators
@@ -229,7 +261,8 @@ morie_smoothed_fU <- function(y, x, beta, nu_U = NULL, grid = NULL) {
 #' @references Horowitz, Sec. 5.2.1-5.2.2, eqs. (5.25)-(5.26),
 #'   P1-P4, Theorem 5.4.
 #' @examples
-#' n <- 60; tt <- 3
+#' n <- 60
+#' tt <- 3
 #' x <- array(rnorm(n * tt * 2), dim = c(n, tt, 2))
 #' y <- matrix(rnorm(n * tt), n, tt)
 #' morie_panel_densities(y, x, c(1, -0.5))$f_U_requires_division
@@ -245,18 +278,26 @@ morie_panel_densities <- function(y, x, beta, nu_U = NULL, nu_eps = NULL,
   nu2 <- if (is.null(nu_eps)) default else as.numeric(nu_eps)
   gu <- if (is.null(grid_u)) {
     seq(stats::quantile(r$W, 0.05), stats::quantile(r$W, 0.95),
-        length.out = 61L)
-  } else as.numeric(grid_u)
+      length.out = 61L
+    )
+  } else {
+    as.numeric(grid_u)
+  }
   gz <- if (is.null(grid_z)) {
     seq(stats::quantile(r$eta, 0.05), stats::quantile(r$eta, 0.95),
-        length.out = 61L)
-  } else as.numeric(grid_z)
+      length.out = 61L
+    )
+  } else {
+    as.numeric(grid_z)
+  }
   d <- .morie_hrz_deconvolve_pair(r$W, r$eta, gu, gz, nu1, nu2)
-  list(grid_u = gu, f_U = d$f_U, grid_z = gz, f_eps = d$f_eps,
-       nu_U = nu1, nu_eps = nu2,
-       f_eps_requires_division = FALSE, f_U_requires_division = TRUE,
-       bandwidths_independent = TRUE, n = r$n, T = r$T,
-       method = "(5.25) needs no division; (5.26) does, so the two carry separate bandwidths")
+  list(
+    grid_u = gu, f_U = d$f_U, grid_z = gz, f_eps = d$f_eps,
+    nu_U = nu1, nu_eps = nu2,
+    f_eps_requires_division = FALSE, f_U_requires_division = TRUE,
+    bandwidths_independent = TRUE, n = r$n, T = r$T,
+    method = "(5.25) needs no division; (5.26) does, so the two carry separate bandwidths"
+  )
 }
 
 #' First-passage-time probability in a panel model
@@ -290,8 +331,10 @@ morie_panel_densities <- function(y, x, beta, nu_U = NULL, nu_eps = NULL,
 #' @references Horowitz, Sec. 5.2.3, eq. (5.20).
 #' @examples
 #' gu <- seq(-5, 5, length.out = 201)
-#' morie_first_passage_time(3, 0, 1, matrix(0, 3, 2), c(1, -0.5),
-#'                          dnorm(gu), gu, dnorm(gu, sd = 0.5), gu)$probability
+#' morie_first_passage_time(
+#'   3, 0, 1, matrix(0, 3, 2), c(1, -0.5),
+#'   dnorm(gu), gu, dnorm(gu, sd = 0.5), gu
+#' )$probability
 #' @export
 morie_first_passage_time <- function(theta, y1, y_star, x, beta, f_U, grid_u,
                                      f_eps, grid_z) {
@@ -304,37 +347,54 @@ morie_first_passage_time <- function(theta, y1, y_star, x, beta, f_U, grid_u,
   if (ncol(X) != length(b)) X <- t(X)
   if (ncol(X) != length(b)) {
     stop(sprintf("x must have %d columns to match beta.", length(b)),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   if (nrow(X) < th) {
-    stop(sprintf("x has %d periods but theta = %d needs %d.",
-                 nrow(X), th, th), call. = FALSE)
+    stop(sprintf(
+      "x has %d periods but theta = %d needs %d.",
+      nrow(X), th, th
+    ), call. = FALSE)
   }
   gu <- as.numeric(grid_u)
   fu <- as.numeric(f_U)
   gz <- as.numeric(grid_z)
   fe <- as.numeric(f_eps)
   if (length(fu) != length(gu)) {
-    stop(sprintf("f_U has %d entries for %d grid points.",
-                 length(fu), length(gu)), call. = FALSE)
+    stop(sprintf(
+      "f_U has %d entries for %d grid points.",
+      length(fu), length(gu)
+    ), call. = FALSE)
   }
   if (length(fe) != length(gz)) {
-    stop(sprintf("f_eps has %d entries for %d grid points.",
-                 length(fe), length(gz)), call. = FALSE)
+    stop(sprintf(
+      "f_eps has %d entries for %d grid points.",
+      length(fe), length(gz)
+    ), call. = FALSE)
   }
   if (any(fu < 0) || any(fe < 0)) {
     stop("densities must be non-negative.", call. = FALSE)
   }
-  trapz <- function(xx, yy) sum(diff(xx) * (utils::head(yy, -1L) +
-                                              utils::tail(yy, -1L)) / 2)
+  trapz <- function(xx, yy) {
+    sum(diff(xx) * (utils::head(yy, -1L) +
+      utils::tail(yy, -1L)) / 2)
+  }
   f_cum <- c(0, cumsum(diff(gz) * (utils::head(fe, -1L) +
-                                     utils::tail(fe, -1L)) / 2))
+    utils::tail(fe, -1L)) / 2))
   total <- f_cum[length(f_cum)]
   if (total > 0) f_cum <- f_cum / total
-  f_eps_cdf <- function(v) pmin(pmax(stats::approx(gz, f_cum, xout = v,
-                                                   rule = 2L)$y, 0), 1)
-  f_eps_at <- function(v) pmax(stats::approx(gz, fe, xout = v, yleft = 0,
-                                             yright = 0, rule = 1L)$y, 0)
+  f_eps_cdf <- function(v) {
+    pmin(pmax(stats::approx(gz, f_cum,
+      xout = v,
+      rule = 2L
+    )$y, 0), 1)
+  }
+  f_eps_at <- function(v) {
+    pmax(stats::approx(gz, fe,
+      xout = v, yleft = 0,
+      yright = 0, rule = 1L
+    )$y, 0)
+  }
   idx1 <- as.numeric(y1 - X[1L, ] %*% b)
   prod_v <- rep(1, length(gu))
   for (k in 2:th) {
@@ -343,12 +403,16 @@ morie_first_passage_time <- function(theta, y1, y_star, x, beta, f_U, grid_u,
   numer <- trapz(gu, f_eps_at(idx1 - gu) * prod_v * fu)
   f_w <- trapz(gu, f_eps_at(idx1 - gu) * fu)
   if (f_w <= 0) {
-    stop(paste("f_W vanishes at the initial residual; the conditioning event",
-               "has zero estimated density there."), call. = FALSE)
+    stop(paste(
+      "f_W vanishes at the initial residual; the conditioning event",
+      "has zero estimated density there."
+    ), call. = FALSE)
   }
-  list(probability = min(max(numer / f_w, 0), 1), theta = th,
-       f_W_at_initial = f_w,
-       periods_conditionally_independent = TRUE,
-       periods_marginally_independent = FALSE,
-       method = "(5.20): the product is integrated against f_U, since periods share U_j")
+  list(
+    probability = min(max(numer / f_w, 0), 1), theta = th,
+    f_W_at_initial = f_w,
+    periods_conditionally_independent = TRUE,
+    periods_marginally_independent = FALSE,
+    method = "(5.20): the product is integrated against f_U, since periods share U_j"
+  )
 }

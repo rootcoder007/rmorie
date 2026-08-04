@@ -55,8 +55,10 @@
   if (!identical(correction, "border")) {
     stop("`correction` must be 'border' or 'none'")
   }
-  db <- pmin(p[, 1] - region[1], region[3] - p[, 1],
-             p[, 2] - region[2], region[4] - p[, 2])
+  db <- pmin(
+    p[, 1] - region[1], region[3] - p[, 1],
+    p[, 2] - region[2], region[4] - p[, 2]
+  )
   vapply(r, function(h) {
     keep <- db > h
     m <- sum(keep)

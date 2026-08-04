@@ -33,7 +33,9 @@ morie_partitions_of <- function(n, max_part = NULL) {
   if (is.na(n) || n < 0L) {
     stop(sprintf("n must be non-negative; got %s", n), call. = FALSE)
   }
-  if (n == 0L) return(list(integer(0)))
+  if (n == 0L) {
+    return(list(integer(0)))
+  }
   cap <- if (is.null(max_part)) n else min(as.integer(max_part), n)
   out <- list()
   for (first in seq.int(cap, 1L)) {
@@ -63,12 +65,16 @@ morie_partitions_of <- function(n, max_part = NULL) {
 morie_hook_lengths <- function(shape) {
   lam <- as.integer(shape)
   if (anyNA(lam) || any(lam <= 0L)) {
-    stop(sprintf("every part must be positive; got %s",
-                 paste(shape, collapse = ", ")), call. = FALSE)
+    stop(sprintf(
+      "every part must be positive; got %s",
+      paste(shape, collapse = ", ")
+    ), call. = FALSE)
   }
   if (length(lam) > 1L && any(diff(lam) > 0L)) {
-    stop(sprintf("a partition must be weakly decreasing; got %s",
-                 paste(shape, collapse = ", ")), call. = FALSE)
+    stop(sprintf(
+      "a partition must be weakly decreasing; got %s",
+      paste(shape, collapse = ", ")
+    ), call. = FALSE)
   }
   conj <- vapply(seq_len(lam[1]), function(j) sum(lam > j - 1L), integer(1))
   hooks <- vector("list", length(lam))
@@ -76,8 +82,10 @@ morie_hook_lengths <- function(shape) {
     j <- seq_len(lam[i])
     hooks[[i]] <- lam[i] - j + conj[j] - i + 1L
   }
-  list(hooks = hooks, product = prod(as.numeric(unlist(hooks))),
-       shape = lam, conjugate = conj, n = sum(lam))
+  list(
+    hooks = hooks, product = prod(as.numeric(unlist(hooks))),
+    shape = lam, conjugate = conj, n = sum(lam)
+  )
 }
 
 # helper: exponent of prime p in n!, by Legendre's formula
@@ -110,7 +118,9 @@ morie_hook_lengths <- function(shape) {
   }
   if (x > 1) {
     idx <- match(x, primes)
-    if (is.na(idx)) return(list(exps = exps, remainder = x))
+    if (is.na(idx)) {
+      return(list(exps = exps, remainder = x))
+    }
     exps[idx] <- exps[idx] + 1
   }
   list(exps = exps, remainder = 1)
@@ -152,8 +162,10 @@ morie_standard_tableaux_count <- function(shape) {
     if (f$remainder > 1) {
       # a hook length can never exceed n, so every prime factor of it
       # is already in the sieve; reaching here means the sieve is wrong
-      stop(sprintf("hook length %g has a prime factor above %d",
-                   hv, max(primes)), call. = FALSE)
+      stop(sprintf(
+        "hook length %g has a prime factor above %d",
+        hv, max(primes)
+      ), call. = FALSE)
     }
     exps <- exps - f$exps
   }
@@ -163,9 +175,13 @@ morie_standard_tableaux_count <- function(shape) {
   if (!negative) {
     for (idx in seq_along(primes)) {
       if (exps[idx] > 0) {
-        count <- morie_big_mul(count,
-                               morie_big_pow(morie_bigint(primes[idx]),
-                                             exps[idx]))
+        count <- morie_big_mul(
+          count,
+          morie_big_pow(
+            morie_bigint(primes[idx]),
+            exps[idx]
+          )
+        )
       }
     }
   } else {
@@ -192,13 +208,17 @@ morie_standard_tableaux_count <- function(shape) {
     fits_double = morie_big_fits_double(count),
     hooks = h$hooks, shape = h$shape, n = n,
     warnings = character(0),
-    method = "Hook length formula (Frame, Robinson and Thrall 1954)")
+    method = "Hook length formula (Frame, Robinson and Thrall 1954)"
+  )
   if (!divides) {
-    out$warnings <- c(out$warnings, sprintf(paste(
-      "The hook product %s does not divide %d! exactly (remainder %s),",
-      "which cannot happen for a genuine partition. The shape or the",
-      "hook computation is wrong."), as.character(hprod), n,
-      as.character(rem)))
+    out$warnings <- c(out$warnings, sprintf(
+      paste(
+        "The hook product %s does not divide %d! exactly (remainder %s),",
+        "which cannot happen for a genuine partition. The shape or the",
+        "hook computation is wrong."
+      ), as.character(hprod), n,
+      as.character(rem)
+    ))
   }
   out
 }
@@ -206,7 +226,9 @@ morie_standard_tableaux_count <- function(shape) {
 # small sieve; hook lengths never exceed n, so this is all we need
 .morie_primes_upto <- function(n) {
   n <- as.integer(n)
-  if (n < 2L) return(integer(0))
+  if (n < 2L) {
+    return(integer(0))
+  }
   sieve <- rep(TRUE, n)
   sieve[1] <- FALSE
   # seq_len, not 2:floor(sqrt(n)) -- for n < 4 the latter counts DOWN
@@ -268,8 +290,10 @@ morie_rsk_correspondence <- function(permutation) {
   w <- as.integer(permutation)
   n <- length(w)
   if (anyNA(w) || !identical(sort(w), seq_len(n))) {
-    stop(sprintf("expected a permutation of 1..%d; got %s", n,
-                 paste(permutation, collapse = ", ")), call. = FALSE)
+    stop(sprintf(
+      "expected a permutation of 1..%d; got %s", n,
+      paste(permutation, collapse = ", ")
+    ), call. = FALSE)
   }
   p <- list()
   q <- list()
@@ -283,11 +307,13 @@ morie_rsk_correspondence <- function(permutation) {
   qshape <- vapply(q, length, integer(1))
   inc <- if (length(shape)) shape[1] else 0L
   dec <- length(shape)
-  list(p_tableau = p, q_tableau = q, shape = shape, q_shape = qshape,
-       same_shape = identical(shape, qshape),
-       longest_increasing = inc, longest_decreasing = dec,
-       estimate = as.numeric(inc), permutation = w, n = n,
-       method = "Robinson-Schensted (Robinson 1938; Schensted 1961)")
+  list(
+    p_tableau = p, q_tableau = q, shape = shape, q_shape = qshape,
+    same_shape = identical(shape, qshape),
+    longest_increasing = inc, longest_decreasing = dec,
+    estimate = as.numeric(inc), permutation = w, n = n,
+    method = "Robinson-Schensted (Robinson 1938; Schensted 1961)"
+  )
 }
 
 #' Recover the permutation from its two tableaux
@@ -302,8 +328,10 @@ morie_rsk_correspondence <- function(permutation) {
 morie_rsk_inverse <- function(p_tableau, q_tableau) {
   p <- lapply(p_tableau, as.numeric)
   q <- lapply(q_tableau, as.numeric)
-  if (!identical(vapply(p, length, integer(1)),
-                 vapply(q, length, integer(1)))) {
+  if (!identical(
+    vapply(p, length, integer(1)),
+    vapply(q, length, integer(1))
+  )) {
     stop("P and Q must have the same shape.", call. = FALSE)
   }
   n <- sum(vapply(p, length, integer(1)))
@@ -311,11 +339,15 @@ morie_rsk_inverse <- function(p_tableau, q_tableau) {
   for (step in seq.int(n, 1L)) {
     row <- NA_integer_
     for (i in seq_along(q)) {
-      if (length(q[[i]]) && q[[i]][length(q[[i]])] == step) { row <- i; break }
+      if (length(q[[i]]) && q[[i]][length(q[[i]])] == step) {
+        row <- i
+        break
+      }
     }
     if (is.na(row)) {
       stop(sprintf("%d is not at the end of any row of Q.", step),
-           call. = FALSE)
+        call. = FALSE
+      )
     }
     q[[row]] <- q[[row]][-length(q[[row]])]
     x <- p[[row]][length(p[[row]])]
@@ -371,12 +403,15 @@ morie_burnside_orbit_count <- function(group_permutations, n_colours) {
   }
   if (is.na(k) || k < 1L) {
     stop(sprintf("n_colours must be positive; got %s", n_colours),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   for (el in g) {
     if (anyNA(el) || !identical(sort(el), seq.int(0L, n - 1L))) {
-      stop(sprintf("%s is not a permutation of 0 .. %d",
-                   paste(el, collapse = ", "), n - 1L), call. = FALSE)
+      stop(sprintf(
+        "%s is not a permutation of 0 .. %d",
+        paste(el, collapse = ", "), n - 1L
+      ), call. = FALSE)
     }
   }
   cyc <- vapply(g, function(el) {
@@ -386,7 +421,10 @@ morie_burnside_orbit_count <- function(group_permutations, n_colours) {
       if (seen[i]) next
       count <- count + 1L
       j <- i
-      while (!seen[j]) { seen[j] <- TRUE; j <- el[j] + 1L }
+      while (!seen[j]) {
+        seen[j] <- TRUE
+        j <- el[j] + 1L
+      }
     }
     count
   }, integer(1))
@@ -397,24 +435,28 @@ morie_burnside_orbit_count <- function(group_permutations, n_colours) {
   rem <- total - orbits * gorder
   total_col <- k^as.numeric(n)
   naive <- total_col / gorder
-  out <- list(orbits = orbits, estimate = orbits,
-              exact = format(orbits, scientific = FALSE, trim = TRUE),
-              fixed_points = fixed, cycle_counts = cyc, sum_fixed = total,
-              group_order = gorder, total_colourings = total_col,
-              naive_division = naive,
-              naive_is_wrong = abs(naive - orbits) > 1e-12,
-              divides_exactly = rem == 0, n = n,
-              warnings = character(0), method = "Burnside's lemma")
+  out <- list(
+    orbits = orbits, estimate = orbits,
+    exact = format(orbits, scientific = FALSE, trim = TRUE),
+    fixed_points = fixed, cycle_counts = cyc, sum_fixed = total,
+    group_order = gorder, total_colourings = total_col,
+    naive_division = naive,
+    naive_is_wrong = abs(naive - orbits) > 1e-12,
+    divides_exactly = rem == 0, n = n,
+    warnings = character(0), method = "Burnside's lemma"
+  )
   if (rem != 0) {
     out$warnings <- c(out$warnings, sprintf(paste(
       "The fixed-point total %g is not divisible by the group order %d,",
       "which is impossible if the supplied permutations really form a",
-      "group. Check closure."), total, gorder))
+      "group. Check closure."
+    ), total, gorder))
   }
   if (total > 2^53) {
     out$warnings <- c(out$warnings, paste(
       "The fixed-point total exceeds 2^53, where doubles stop being exact",
-      "integers, so the orbit count may be off by a small amount."))
+      "integers, so the orbit count may be off by a small amount."
+    ))
   }
   out
 }
@@ -435,7 +477,8 @@ morie_burnside_orbit_count <- function(group_permutations, n_colours) {
 #'   Mathematica}, 68, 145-254.
 #' @export
 morie_cycle_index_necklaces <- function(n, k) {
-  n <- as.integer(n); k <- as.integer(k)
+  n <- as.integer(n)
+  k <- as.integer(k)
   if (is.na(n) || n < 1L) {
     stop(sprintf("n must be positive; got %s", n), call. = FALSE)
   }
@@ -443,7 +486,9 @@ morie_cycle_index_necklaces <- function(n, k) {
     stop(sprintf("k must be positive; got %s", k), call. = FALSE)
   }
   phi <- function(m) {
-    r <- m; mm <- m; p <- 2L
+    r <- m
+    mm <- m
+    p <- 2L
     while (p * p <= mm) {
       if (mm %% p == 0L) {
         while (mm %% p == 0L) mm <- mm %/% p
@@ -455,16 +500,20 @@ morie_cycle_index_necklaces <- function(n, k) {
     r
   }
   divs <- seq_len(n)[n %% seq_len(n) == 0L]
-  total <- sum(vapply(divs, function(d) phi(n %/% d) * k^as.numeric(d),
-                      numeric(1)))
+  total <- sum(vapply(
+    divs, function(d) phi(n %/% d) * k^as.numeric(d),
+    numeric(1)
+  ))
   count <- floor(total / n)
   rem <- total - count * n
   rot <- lapply(seq.int(0L, n - 1L), function(s) (seq.int(0L, n - 1L) + s) %% n)
   direct <- morie_burnside_orbit_count(rot, k)$orbits
-  list(count = count, estimate = count,
-       exact = format(count, scientific = FALSE, trim = TRUE),
-       direct_burnside = direct, agrees = count == direct,
-       divides_exactly = rem == 0, total_colourings = k^as.numeric(n),
-       n = n, k = k,
-       method = "Cycle index of the cyclic group (Polya enumeration)")
+  list(
+    count = count, estimate = count,
+    exact = format(count, scientific = FALSE, trim = TRUE),
+    direct_burnside = direct, agrees = count == direct,
+    divides_exactly = rem == 0, total_colourings = k^as.numeric(n),
+    n = n, k = k,
+    method = "Cycle index of the cyclic group (Polya enumeration)"
+  )
 }

@@ -30,8 +30,10 @@
     stop("`form` must be \"identity\" or \"weighted\"")
   }
   ev <- eigen((M + t(M)) / 2, symmetric = TRUE, only.values = TRUE)$values
-  c(if (min(ev) < 0) 1 / min(ev) else -Inf,
-    if (max(ev) > 0) 1 / max(ev) else Inf)
+  c(
+    if (min(ev) < 0) 1 / min(ev) else -Inf,
+    if (max(ev) > 0) 1 / max(ev) else Inf
+  )
 }
 
 #' Internal: `.sp_rho_bounds` shrunk to a closed interval for optimisers.

@@ -58,7 +58,7 @@ morie_ccc_multivariate_garch <- function(x) {
   # with log|H_t| = log|R| + sum_j log h_jt and the quadratic form in z.
   quad <- rowSums((Z %*% Rinv) * Z)
   ll <- -0.5 * sum(k * log(2 * pi) + as.numeric(ld$modulus) +
-                     rowSums(log(H)) + quad)
+    rowSums(log(H)) + quad)
 
   list(
     R = R,

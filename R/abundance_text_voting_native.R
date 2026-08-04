@@ -39,9 +39,13 @@ morie_bracken_abundance <- function(kraken_output, kmer_distribution,
   r <- as.numeric(kraken_output)
   P <- as.matrix(kmer_distribution)
   if (nrow(P) != length(r)) {
-    if (ncol(P) == length(r)) P <- t(P) else {
-      stop(sprintf("kmer_distribution is %d x %d but there are %d nodes.",
-                   nrow(P), ncol(P), length(r)), call. = FALSE)
+    if (ncol(P) == length(r)) {
+      P <- t(P)
+    } else {
+      stop(sprintf(
+        "kmer_distribution is %d x %d but there are %d nodes.",
+        nrow(P), ncol(P), length(r)
+      ), call. = FALSE)
     }
   }
   n_sp <- ncol(P)
@@ -50,9 +54,13 @@ morie_bracken_abundance <- function(kraken_output, kmer_distribution,
   if (any(P < 0)) stop("k-mer probabilities must be non-negative.", call. = FALSE)
   cs <- colSums(P)
   if (!isTRUE(all.equal(as.numeric(cs), rep(1, n_sp), tolerance = 1e-6))) {
-    stop(sprintf(paste("each column of kmer_distribution must sum to 1; got",
-                       "column sums ranging %.6g to %.6g"),
-                 min(cs), max(cs)), call. = FALSE)
+    stop(sprintf(
+      paste(
+        "each column of kmer_distribution must sum to 1; got",
+        "column sums ranging %.6g to %.6g"
+      ),
+      min(cs), max(cs)
+    ), call. = FALSE)
   }
   total <- sum(r)
   if (total <= 0) stop("no reads to distribute.", call. = FALSE)
@@ -62,7 +70,8 @@ morie_bracken_abundance <- function(kraken_output, kmer_distribution,
   r_use <- ifelse(reachable, r, 0)
 
   theta <- rep(1 / n_sp, n_sp)
-  it <- 0L; converged <- FALSE
+  it <- 0L
+  converged <- FALSE
   for (i in seq_len(max_iter)) {
     it <- i
     w <- P * rep(theta, each = nrow(P))
@@ -70,7 +79,11 @@ morie_bracken_abundance <- function(kraken_output, kmer_distribution,
     post <- w / ifelse(den > 0, den, 1)
     counts <- as.vector(crossprod(post, r_use))
     new <- counts / max(sum(counts), 1e-300)
-    if (max(abs(new - theta)) < tol) { theta <- new; converged <- TRUE; break }
+    if (max(abs(new - theta)) < tol) {
+      theta <- new
+      converged <- TRUE
+      break
+    }
     theta <- new
   }
   w <- P * rep(theta, each = nrow(P))
@@ -96,26 +109,31 @@ morie_bracken_abundance <- function(kraken_output, kmer_distribution,
   if (!converged) {
     warns <- c(warns, sprintf(paste(
       "Expectation-maximisation did not converge in %d iterations, so the",
-      "abundances are not a fixed point."), max_iter))
+      "abundances are not a fixed point."
+    ), max_iter))
   }
   if (!identifiable) {
     warns <- c(warns, sprintf(paste(
       "Two species have indistinguishable k-mer distributions (cosine",
       "%.6f). The likelihood is flat along the direction trading one for",
       "the other, so the split between them reflects the starting point,",
-      "not the data."), worst))
+      "not the data."
+    ), worst))
   }
   if (stranded > 0) {
     warns <- c(warns, sprintf(paste(
       "%.0f reads sit at nodes no species in the distribution can produce.",
-      "They are excluded from the total."), stranded))
+      "They are excluded from the total."
+    ), stranded))
   }
-  list(estimate = est, fractions = theta, naive_species_reads = naive,
-       reads_reassigned = usable - sum(naive), reads_unassignable = stranded,
-       total_reads = total, iterations = it, converged = converged,
-       log_likelihood = loglik, identifiable = identifiable,
-       max_column_cosine = worst, n_nodes = nrow(P), n = n_sp,
-       warnings = warns, method = "Bracken Bayesian abundance re-estimation")
+  list(
+    estimate = est, fractions = theta, naive_species_reads = naive,
+    reads_reassigned = usable - sum(naive), reads_unassignable = stranded,
+    total_reads = total, iterations = it, converged = converged,
+    log_likelihood = loglik, identifiable = identifiable,
+    max_column_cosine = worst, n_nodes = nrow(P), n = n_sp,
+    warnings = warns, method = "Bracken Bayesian abundance re-estimation"
+  )
 }
 
 #' Effective sample size of an autocorrelated sequence
@@ -150,7 +168,9 @@ morie_ess_autocorrelation <- function(x, max_lag = NULL) {
   for (k in seq_len(m)) {
     rho[k + 1L] <- sum(cc[seq_len(n - k)] * cc[(k + 1L):n]) / denom
   }
-  totl <- 0; used <- 0L; k <- 1L
+  totl <- 0
+  used <- 0L
+  k <- 1L
   while (k + 1L <= m) {
     pair <- rho[k + 1L] + rho[k + 2L]
     if (pair <= 0) break
@@ -195,29 +215,36 @@ morie_loss_stream_variance <- function(losses, alpha = 0.05) {
   ac <- morie_ess_autocorrelation(x)
   ess <- max(ac$ess, 1)
   se <- if (n > 1L) sqrt(vr / ess) else NA_real_
-  infl <- if (n > 1L && is.finite(se_naive) && se_naive > 0) se / se_naive else
+  infl <- if (n > 1L && is.finite(se_naive) && se_naive > 0) {
+    se / se_naive
+  } else {
     NA_real_
+  }
   zc <- stats::qnorm(1 - alpha / 2)
   warns <- character(0)
   if (is.finite(infl) && infl > 1.5) {
     warns <- c(warns, sprintf(paste(
       "The loss stream is strongly autocorrelated (integrated time %.1f).",
       "Treating the %d recorded steps as independent would understate the",
-      "standard error by a factor of %.2f."), ac$tau_int, n, infl))
+      "standard error by a factor of %.2f."
+    ), ac$tau_int, n, infl))
   }
   if (ess < 10) {
     warns <- c(warns, sprintf(paste(
       "The effective sample size is only %.1f. The mean is not well",
-      "determined by this run however many steps were logged."), ess))
+      "determined by this run however many steps were logged."
+    ), ess))
   }
-  list(estimate = mu, variance = vr, se = se, se_naive = se_naive,
-       se_inflation = infl, ess = ess, tau_int = ac$tau_int,
-       ci_lower = if (is.finite(se)) mu - zc * se else NA_real_,
-       ci_upper = if (is.finite(se)) mu + zc * se else NA_real_,
-       ci_naive_lower = if (is.finite(se_naive)) mu - zc * se_naive else NA_real_,
-       ci_naive_upper = if (is.finite(se_naive)) mu + zc * se_naive else NA_real_,
-       n = n, warnings = warns,
-       method = "Autocorrelation-aware variance of a training loss stream")
+  list(
+    estimate = mu, variance = vr, se = se, se_naive = se_naive,
+    se_inflation = infl, ess = ess, tau_int = ac$tau_int,
+    ci_lower = if (is.finite(se)) mu - zc * se else NA_real_,
+    ci_upper = if (is.finite(se)) mu + zc * se else NA_real_,
+    ci_naive_lower = if (is.finite(se_naive)) mu - zc * se_naive else NA_real_,
+    ci_naive_upper = if (is.finite(se_naive)) mu + zc * se_naive else NA_real_,
+    n = n, warnings = warns,
+    method = "Autocorrelation-aware variance of a training loss stream"
+  )
 }
 
 #' Term frequency-inverse document frequency, computed natively
@@ -240,8 +267,10 @@ morie_tfidf <- function(texts, min_df = 1, max_df = 1) {
   hi <- if (max_df <= 1) max_df * n else max_df
   vocab <- sort(names(df)[df >= lo & df <= hi])
   if (!length(vocab)) {
-    stop(paste("no terms survived the document-frequency filter; relax",
-               "min_df or max_df."), call. = FALSE)
+    stop(paste(
+      "no terms survived the document-frequency filter; relax",
+      "min_df or max_df."
+    ), call. = FALSE)
   }
   tf <- matrix(0, n, length(vocab), dimnames = list(NULL, vocab))
   for (i in seq_len(n)) {
@@ -268,13 +297,17 @@ morie_tfidf <- function(texts, min_df = 1, max_df = 1) {
 #' @export
 morie_bspline_basis <- function(x, n_basis = 15L, degree = 3L) {
   x <- as.numeric(x)
-  n_basis <- as.integer(n_basis); degree <- as.integer(degree)
+  n_basis <- as.integer(n_basis)
+  degree <- as.integer(degree)
   if (degree < 0L) stop("degree must be non-negative.", call. = FALSE)
   if (n_basis < degree + 1L) {
-    stop(sprintf("n_basis must be at least degree + 1 = %d; got %d",
-                 degree + 1L, n_basis), call. = FALSE)
+    stop(sprintf(
+      "n_basis must be at least degree + 1 = %d; got %d",
+      degree + 1L, n_basis
+    ), call. = FALSE)
   }
-  a <- min(x); b <- max(x)
+  a <- min(x)
+  b <- max(x)
   if (!(b > a)) stop("the evaluation range is degenerate.", call. = FALSE)
   n_int <- n_basis - degree - 1L
   interior <- seq(a, b, length.out = n_int + 2L)
@@ -329,15 +362,18 @@ morie_face_smooth <- function(Y, argvals = NULL, n_basis = 12L, degree = 3L,
                               lambdas = NULL, pve = 0.99,
                               penalty_order = 2L) {
   M <- as.matrix(Y)
-  n <- nrow(M); p <- ncol(M)
+  n <- nrow(M)
+  p <- ncol(M)
   if (n < 2L) stop(sprintf("need at least two curves; got %d", n), call. = FALSE)
   if (p < 4L) {
     stop(sprintf("need at least four grid points; got %d", p), call. = FALSE)
   }
   t <- if (is.null(argvals)) seq(0, 1, length.out = p) else as.numeric(argvals)
   if (length(t) != p) {
-    stop(sprintf("argvals has length %d but Y has %d columns.",
-                 length(t), p), call. = FALSE)
+    stop(sprintf(
+      "argvals has length %d but Y has %d columns.",
+      length(t), p
+    ), call. = FALSE)
   }
   if (pve <= 0 || pve > 1) {
     stop(sprintf("pve must lie in (0, 1]; got %s", pve), call. = FALSE)
@@ -359,16 +395,23 @@ morie_face_smooth <- function(Y, argvals = NULL, n_basis = 12L, degree = 3L,
   off <- !diag(TRUE, p)
   if (is.null(lambdas)) lambdas <- 10^seq(-6, 4, length.out = 21L)
 
-  best_gcv <- Inf; lam <- lambdas[1]; S <- NULL
+  best_gcv <- Inf
+  lam <- lambdas[1]
+  S <- NULL
   for (L in lambdas) {
     A <- crossprod(B) + L * P
     Smat <- B %*% tryCatch(solve(A, t(B)),
-                           error = function(e) .morie_ginv(A) %*% t(B))
+      error = function(e) .morie_ginv(A) %*% t(B)
+    )
     fit <- Smat %*% raw %*% t(Smat)
     resid <- (raw - fit)[off]
     denom <- (1 - sum(diag(Smat)) / p)^2
     gcv <- sum(resid^2) / max(denom, 1e-12)
-    if (gcv < best_gcv) { best_gcv <- gcv; lam <- L; S <- Smat }
+    if (gcv < best_gcv) {
+      best_gcv <- gcv
+      lam <- L
+      S <- Smat
+    }
   }
 
   idx <- cbind(seq_len(p), seq_len(p))
@@ -386,15 +429,23 @@ morie_face_smooth <- function(Y, argvals = NULL, n_basis = 12L, degree = 3L,
     filled[idx] <- diag(C)
     Cn <- S %*% filled %*% t(S)
     Cn <- (Cn + t(Cn)) / 2
-    if (max(abs(diag(Cn) - diag(C))) < 1e-12) { C <- Cn; break }
+    if (max(abs(diag(Cn) - diag(C))) < 1e-12) {
+      C <- Cn
+      break
+    }
     C <- Cn
   }
-  klo <- max(as.integer(0.1 * p), 1L); khi <- as.integer(0.9 * p)
-  if (khi <= klo) { klo <- 1L; khi <- p }
+  klo <- max(as.integer(0.1 * p), 1L)
+  khi <- as.integer(0.9 * p)
+  if (khi <= klo) {
+    klo <- 1L
+    khi <- p
+  }
   sigma2 <- mean(pmax((diag(raw) - diag(C))[klo:khi], 0))
 
   ev <- eigen(C, symmetric = TRUE)
-  vals <- ev$values; vecs <- ev$vectors
+  vals <- ev$values
+  vecs <- ev$vectors
   neg <- sum(abs(vals[vals < 0]))
   vals <- pmax(vals, 0)
   totalv <- sum(vals)
@@ -405,43 +456,55 @@ morie_face_smooth <- function(Y, argvals = NULL, n_basis = 12L, degree = 3L,
 
   warns <- character(0)
   if (neg > 1e-8 * max(totalv, 1e-300)) {
-    warns <- c(warns, sprintf(paste(
-      "The smoothed covariance had negative eigenvalues carrying %.4g of",
-      "mass, truncated to zero. A covariance operator cannot have any."),
-      neg))
+    warns <- c(warns, sprintf(
+      paste(
+        "The smoothed covariance had negative eigenvalues carrying %.4g of",
+        "mass, truncated to zero. A covariance operator cannot have any."
+      ),
+      neg
+    ))
   }
-  list(covariance = C, raw_covariance = raw, eigenvalues = vals,
-       eigenfunctions = phi, mean_function = mu, noise_variance = sigma2,
-       negative_eigenvalue_mass = neg, npc = npc, pve_cumulative = cum,
-       total_variance = totalv, lambda = lam, gcv = best_gcv,
-       n_basis = ncol(B), argvals = t, n = n, warnings = warns,
-       method = "FACE sandwich-smoothed covariance with FPCA")
+  list(
+    covariance = C, raw_covariance = raw, eigenvalues = vals,
+    eigenfunctions = phi, mean_function = mu, noise_variance = sigma2,
+    negative_eigenvalue_mass = neg, npc = npc, pve_cumulative = cum,
+    total_variance = totalv, lambda = lam, gcv = best_gcv,
+    n_basis = ncol(B), argvals = t, n = n, warnings = warns,
+    method = "FACE sandwich-smoothed covariance with FPCA"
+  )
 }
 
 .morie_descendants <- function(A, start) {
-  seen <- integer(0); stack <- start
+  seen <- integer(0)
+  stack <- start
   while (length(stack)) {
-    u <- stack[1]; stack <- stack[-1]
+    u <- stack[1]
+    stack <- stack[-1]
     ch <- which(A[u, ])
     new <- setdiff(ch, seen)
-    seen <- c(seen, new); stack <- c(stack, new)
+    seen <- c(seen, new)
+    stack <- c(stack, new)
   }
   seen
 }
 
 .morie_reachable <- function(A, x, Z) {
   n <- nrow(A)
-  anc <- integer(0); stack <- Z
+  anc <- integer(0)
+  stack <- Z
   while (length(stack)) {
-    u <- stack[1]; stack <- stack[-1]
+    u <- stack[1]
+    stack <- stack[-1]
     if (u %in% anc) next
     anc <- c(anc, u)
     stack <- c(stack, which(A[, u]))
   }
-  seen <- character(0); reach <- integer(0)
+  seen <- character(0)
+  reach <- integer(0)
   frontier <- list(list(u = x, d = "up"))
   while (length(frontier)) {
-    st <- frontier[[1]]; frontier <- frontier[-1]
+    st <- frontier[[1]]
+    frontier <- frontier[-1]
     key <- paste(st$u, st$d)
     if (key %in% seen) next
     seen <- c(seen, key)
@@ -478,11 +541,16 @@ morie_face_smooth <- function(Y, argvals = NULL, n_basis = 12L, degree = 3L,
 #' @export
 morie_is_backdoor_admissible <- function(adj, treatment, outcome, Z) {
   A <- matrix(as.logical(adj), nrow(adj), ncol(adj))
-  t <- as.integer(treatment); y <- as.integer(outcome)
+  t <- as.integer(treatment)
+  y <- as.integer(outcome)
   Z <- as.integer(Z)
-  if (t %in% Z || y %in% Z) return(FALSE)
+  if (t %in% Z || y %in% Z) {
+    return(FALSE)
+  }
   desc <- .morie_descendants(A, t)
-  if (length(intersect(Z, desc))) return(FALSE)
+  if (length(intersect(Z, desc))) {
+    return(FALSE)
+  }
   B <- A
   B[t, ] <- FALSE
   !(y %in% .morie_reachable(B, t, Z))
@@ -501,7 +569,8 @@ morie_is_backdoor_admissible <- function(adj, treatment, outcome, Z) {
 morie_backdoor_sets <- function(adj, treatment, outcome, max_size = NULL) {
   A <- matrix(as.logical(adj), nrow(adj), ncol(adj))
   n <- nrow(A)
-  t <- as.integer(treatment); y <- as.integer(outcome)
+  t <- as.integer(treatment)
+  y <- as.integer(outcome)
   desc <- .morie_descendants(A, t)
   pool <- setdiff(seq_len(n), c(t, y, desc))
   lim <- if (is.null(max_size)) length(pool) else as.integer(max_size)
@@ -560,18 +629,24 @@ morie_identify_estimate_refute <- function(dag, data, treatment, outcome,
   p <- nrow(A)
   if (ncol(A) != p) stop("dag must be square.", call. = FALSE)
   if (ncol(D) != p) {
-    if (nrow(D) == p) D <- t(D) else {
-      stop(sprintf("data has %d columns but the dag has %d nodes.",
-                   ncol(D), p), call. = FALSE)
+    if (nrow(D) == p) {
+      D <- t(D)
+    } else {
+      stop(sprintf(
+        "data has %d columns but the dag has %d nodes.",
+        ncol(D), p
+      ), call. = FALSE)
     }
   }
   n <- nrow(D)
-  t <- as.integer(treatment); y <- as.integer(outcome)
+  t <- as.integer(treatment)
+  y <- as.integer(outcome)
   if (t == y) stop("treatment and outcome must differ.", call. = FALSE)
   if (any(diag(A))) stop("the dag has a self-loop.", call. = FALSE)
   if (n < p + 3L) {
     stop(sprintf("need more rows than nodes; got %d rows, %d nodes.", n, p),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
 
   sets <- morie_backdoor_sets(A, t, y)
@@ -579,9 +654,11 @@ morie_identify_estimate_refute <- function(dag, data, treatment, outcome,
     Z <- sort(as.integer(adjustment))
     identified <- morie_is_backdoor_admissible(A, t, y, Z)
   } else if (length(sets)) {
-    Z <- sets[[1]]; identified <- TRUE
+    Z <- sets[[1]]
+    identified <- TRUE
   } else {
-    Z <- integer(0); identified <- FALSE
+    Z <- integer(0)
+    identified <- FALSE
   }
   desc_t <- .morie_descendants(A, t)
   mediators <- intersect(Z, desc_t)
@@ -590,7 +667,8 @@ morie_identify_estimate_refute <- function(dag, data, treatment, outcome,
   fit <- function(dat, tcol, zc) {
     X <- cbind(1, dat[, tcol])
     if (length(zc)) X <- cbind(X, dat[, zc, drop = FALSE])
-    b <- qr.coef(qr(X), dat[, y]); b[is.na(b)] <- 0
+    b <- qr.coef(qr(X), dat[, y])
+    b[is.na(b)] <- 0
     resid <- dat[, y] - as.vector(X %*% b)
     dof <- max(nrow(dat) - ncol(X), 1L)
     s2 <- sum(resid^2) / dof
@@ -598,21 +676,26 @@ morie_identify_estimate_refute <- function(dag, data, treatment, outcome,
     unname(c(b[2], sqrt(max(s2 * XtXi[2, 2], 0))))
   }
   ef <- fit(D, t, Z)
-  eff <- ef[1]; se <- ef[2]
+  eff <- ef[1]
+  se <- ef[2]
 
   set.seed(seed)
-  placebo <- numeric(n_refute); common <- numeric(n_refute)
+  placebo <- numeric(n_refute)
+  common <- numeric(n_refute)
   subset <- numeric(n_refute)
   for (i in seq_len(n_refute)) {
-    Dp <- D; Dp[, t] <- sample(D[, t])
+    Dp <- D
+    Dp[, t] <- sample(D[, t])
     placebo[i] <- fit(Dp, t, Z)[1]
     Dc <- cbind(D, stats::rnorm(n))
     common[i] <- fit(Dc, t, c(Z, p + 1L))[1]
     idx <- sample.int(n, max(as.integer(0.8 * n), p + 3L))
     subset[i] <- fit(D[idx, , drop = FALSE], t, Z)[1]
   }
-  pm <- mean(placebo); psd <- stats::sd(placebo)
-  cm <- mean(common); ssd <- stats::sd(subset)
+  pm <- mean(placebo)
+  psd <- stats::sd(placebo)
+  cm <- mean(common)
+  ssd <- stats::sd(subset)
   pass_p <- abs(pm) < 2 * max(psd, 1e-12)
   pass_c <- abs(cm - eff) < max(0.1 * abs(eff), 2 * se)
   pass_s <- ssd < 3 * max(se, 1e-12)
@@ -623,33 +706,42 @@ morie_identify_estimate_refute <- function(dag, data, treatment, outcome,
     warns <- c(warns, paste(
       "The back-door criterion is not satisfied by any subset of the",
       "measured variables. Adjusting anyway does not make the estimate",
-      "causal; it makes it a different biased number."))
+      "causal; it makes it a different biased number."
+    ))
   }
   if (length(mediators)) {
-    warns <- c(warns, sprintf(paste(
-      "Node(s) %s in the adjustment set are descendants of the treatment.",
-      "Conditioning on a mediator removes part of the effect being",
-      "measured, so this estimate is attenuated by construction."),
-      paste(mediators, collapse = ", ")))
+    warns <- c(warns, sprintf(
+      paste(
+        "Node(s) %s in the adjustment set are descendants of the treatment.",
+        "Conditioning on a mediator removes part of the effect being",
+        "measured, so this estimate is attenuated by construction."
+      ),
+      paste(mediators, collapse = ", ")
+    ))
   }
   if (length(colliders)) {
-    warns <- c(warns, sprintf(paste(
-      "Node(s) %s in the adjustment set are colliders. Conditioning on a",
-      "collider CREATES an association between its parents where none",
-      "existed, so adjusting here adds bias rather than removing it."),
-      paste(colliders, collapse = ", ")))
+    warns <- c(warns, sprintf(
+      paste(
+        "Node(s) %s in the adjustment set are colliders. Conditioning on a",
+        "collider CREATES an association between its parents where none",
+        "existed, so adjusting here adds bias rather than removing it."
+      ),
+      paste(colliders, collapse = ", ")
+    ))
   }
   zc <- stats::qnorm(1 - alpha / 2)
-  list(estimate = eff, se = se, ci_lower = eff - zc * se,
-       ci_upper = eff + zc * se, identified = identified,
-       adjustment_set = Z, all_backdoor_sets = sets,
-       n_backdoor_sets = length(sets),
-       adjusted_for_mediator = mediators, adjusted_for_collider = colliders,
-       placebo_effect = pm, placebo_sd = psd, random_cause_effect = cm,
-       subset_sd = ssd, passed_placebo = pass_p,
-       passed_random_cause = pass_c, passed_subset = pass_s,
-       refutations_passed = passed, n = n, warnings = warns,
-       method = "Model-identify-estimate-refute causal workflow")
+  list(
+    estimate = eff, se = se, ci_lower = eff - zc * se,
+    ci_upper = eff + zc * se, identified = identified,
+    adjustment_set = Z, all_backdoor_sets = sets,
+    n_backdoor_sets = length(sets),
+    adjusted_for_mediator = mediators, adjusted_for_collider = colliders,
+    placebo_effect = pm, placebo_sd = psd, random_cause_effect = cm,
+    subset_sd = ssd, passed_placebo = pass_p,
+    passed_random_cause = pass_c, passed_subset = pass_s,
+    refutations_passed = passed, n = n, warnings = warns,
+    method = "Model-identify-estimate-refute causal workflow"
+  )
 }
 
 #' Treatment effect adjusting for what the text reveals
@@ -688,7 +780,8 @@ morie_identify_estimate_refute <- function(dag, data, treatment, outcome,
 #' @export
 morie_text_ate <- function(texts, T, Y, X = NULL, n_components = 10L,
                            trim = 0.02, alpha = 0.05, embedding = NULL) {
-  tv <- as.numeric(T); yv <- as.numeric(Y)
+  tv <- as.numeric(T)
+  yv <- as.numeric(Y)
   n <- length(tv)
   if (length(yv) != n) {
     stop(sprintf("Y has length %d but T has %d.", length(yv), n), call. = FALSE)
@@ -703,13 +796,17 @@ morie_text_ate <- function(texts, T, Y, X = NULL, n_components = 10L,
     E <- as.matrix(embedding)
     if (nrow(E) != n) E <- t(E)
     if (nrow(E) != n) {
-      stop(sprintf("embedding has %d rows but there are %d units.",
-                   nrow(E), n), call. = FALSE)
+      stop(sprintf(
+        "embedding has %d rows but there are %d units.",
+        nrow(E), n
+      ), call. = FALSE)
     }
   } else {
     if (length(texts) != n) {
-      stop(sprintf("texts has %d documents but there are %d units.",
-                   length(texts), n), call. = FALSE)
+      stop(sprintf(
+        "texts has %d documents but there are %d units.",
+        length(texts), n
+      ), call. = FALSE)
     }
     tf <- morie_tfidf(texts)$matrix
     k <- min(as.integer(n_components), min(dim(tf)))
@@ -730,15 +827,23 @@ morie_text_ate <- function(texts, T, Y, X = NULL, n_components = 10L,
   e <- pmin(pmax(e_raw, trim), 1 - trim)
   n_trim <- sum(e_raw < trim | e_raw > 1 - trim)
 
-  m1 <- tv == 1; m0 <- tv == 0
+  m1 <- tv == 1
+  m0 <- tv == 0
   if (sum(m1) < ncol(Wd) + 1L || sum(m0) < ncol(Wd) + 1L) {
-    stop(sprintf(paste("an arm has too few units (%d treated, %d control)",
-                       "for %d design columns. Reduce n_components."),
-                 sum(m1), sum(m0), ncol(Wd)), call. = FALSE)
+    stop(sprintf(
+      paste(
+        "an arm has too few units (%d treated, %d control)",
+        "for %d design columns. Reduce n_components."
+      ),
+      sum(m1), sum(m0), ncol(Wd)
+    ), call. = FALSE)
   }
-  b1 <- qr.coef(qr(Wd[m1, , drop = FALSE]), yv[m1]); b1[is.na(b1)] <- 0
-  b0 <- qr.coef(qr(Wd[m0, , drop = FALSE]), yv[m0]); b0[is.na(b0)] <- 0
-  mu1 <- as.vector(Wd %*% b1); mu0 <- as.vector(Wd %*% b0)
+  b1 <- qr.coef(qr(Wd[m1, , drop = FALSE]), yv[m1])
+  b1[is.na(b1)] <- 0
+  b0 <- qr.coef(qr(Wd[m0, , drop = FALSE]), yv[m0])
+  b0[is.na(b0)] <- 0
+  mu1 <- as.vector(Wd %*% b1)
+  mu0 <- as.vector(Wd %*% b0)
   psi <- mu1 - mu0 + tv * (yv - mu1) / e - (1 - tv) * (yv - mu0) / (1 - e)
   ate <- mean(psi)
   se <- sqrt(mean((psi - ate)^2) / n)
@@ -746,27 +851,37 @@ morie_text_ate <- function(texts, T, Y, X = NULL, n_components = 10L,
   wts <- ifelse(tv == 1, 1 / e, 1 / (1 - e))
   share <- max(wts) / sum(wts)
 
-  warns <- paste("The adjustment set is a bag-of-words representation,",
-                 "which cannot encode negation or word order. Confounding",
-                 "carried by those is not removed, and the estimate will",
-                 "look adjusted regardless.")
+  warns <- paste(
+    "The adjustment set is a bag-of-words representation,",
+    "which cannot encode negation or word order. Confounding",
+    "carried by those is not removed, and the estimate will",
+    "look adjusted regardless."
+  )
   if (isTRUE(gf$separated)) {
-    warns <- c(warns, paste("The propensity model separates the data: the",
-                            "text predicts treatment almost perfectly."))
+    warns <- c(warns, paste(
+      "The propensity model separates the data: the",
+      "text predicts treatment almost perfectly."
+    ))
   }
   if (share > 0.05) {
-    warns <- c(warns, sprintf(paste("A single unit carries %.1f%% of the",
-                                    "total weight. Reduce n_components."),
-                              100 * share))
+    warns <- c(warns, sprintf(
+      paste(
+        "A single unit carries %.1f%% of the",
+        "total weight. Reduce n_components."
+      ),
+      100 * share
+    ))
   }
   zc <- stats::qnorm(1 - alpha / 2)
-  list(estimate = ate, se = se, ci_lower = ate - zc * se,
-       ci_upper = ate + zc * se, naive_difference = naive,
-       adjustment_movement = ate - naive, propensity = e,
-       propensity_untrimmed = e_raw, n_trimmed = n_trim,
-       max_weight_share = share, embedding = E, n_components = ncol(E),
-       n = n, warnings = warns,
-       method = "Treatment effect with a text-derived adjustment set")
+  list(
+    estimate = ate, se = se, ci_lower = ate - zc * se,
+    ci_upper = ate + zc * se, naive_difference = naive,
+    adjustment_movement = ate - naive, propensity = e,
+    propensity_untrimmed = e_raw, n_trimmed = n_trim,
+    max_weight_share = share, embedding = E, n_components = ncol(E),
+    n = n, warnings = warns,
+    method = "Treatment effect with a text-derived adjustment set"
+  )
 }
 
 #' W-NOMINATE ideal points by alternating optimisation
@@ -825,23 +940,30 @@ morie_wnominate_fit <- function(votes, n_dims = 1L, polarity = NULL,
   }
   n_dropped <- ncol(V) - length(keep)
   if (length(keep) < n_dims + 1L) {
-    stop(sprintf(paste("only %d roll calls divide the chamber, which cannot",
-                       "identify a %d-dimensional space."),
-                 length(keep), n_dims), call. = FALSE)
+    stop(sprintf(
+      paste(
+        "only %d roll calls divide the chamber, which cannot",
+        "identify a %d-dimensional space."
+      ),
+      length(keep), n_dims
+    ), call. = FALSE)
   }
   V <- V[, keep, drop = FALSE]
   obs <- is.finite(V)
   Y <- ifelse(obs, V, 0)
-  n <- nrow(V); m <- ncol(V)
+  n <- nrow(V)
+  m <- ncol(V)
   if (n < n_dims + 2L) {
     stop(sprintf("need at least %d legislators; got %d", n_dims + 2L, n),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
 
   Cm <- ifelse(obs, Y - 0.5, 0)
   sv <- svd(Cm)
   k <- min(n_dims, ncol(sv$u))
-  x <- matrix(0, n, n_dims); w <- matrix(0, m, n_dims)
+  x <- matrix(0, n, n_dims)
+  w <- matrix(0, m, n_dims)
   x[, seq_len(k)] <- sv$u[, seq_len(k), drop = FALSE]
   w[, seq_len(k)] <- sv$v[, seq_len(k), drop = FALSE] *
     rep(sv$d[seq_len(k)], each = m)
@@ -864,7 +986,8 @@ morie_wnominate_fit <- function(votes, n_dims = 1L, polarity = NULL,
         ridge * diag(ncol(design))
       g <- (t(design) * rep(wt, each = ncol(design))) %*% z
       nb <- tryCatch(as.vector(solve(A, g)),
-                     error = function(e) as.vector(.morie_ginv(A) %*% g))
+        error = function(e) as.vector(.morie_ginv(A) %*% g)
+      )
       if (!all(is.finite(nb))) break
       step <- nb - b
       nrm <- max(abs(step))
@@ -878,7 +1001,10 @@ morie_wnominate_fit <- function(votes, n_dims = 1L, polarity = NULL,
     sum(obs * (Y * log(p) + (1 - Y) * log(1 - p)))
   }
 
-  ll_old <- -Inf; delta <- Inf; it <- 0L; converged <- FALSE
+  ll_old <- -Inf
+  delta <- Inf
+  it <- 0L
+  converged <- FALSE
   for (i in seq_len(max_iter)) {
     it <- i
     for (li in seq_len(n)) {
@@ -891,11 +1017,16 @@ morie_wnominate_fit <- function(votes, n_dims = 1L, polarity = NULL,
       if (sum(oj) < n_dims + 2L) next
       Dm <- cbind(1, x[oj, , drop = FALSE])
       bj <- pfit(Dm, Y[oj, j], c(a[j], w[j, ]))
-      a[j] <- bj[1]; w[j, ] <- bj[-1]
+      a[j] <- bj[1]
+      w[j, ] <- bj[-1]
     }
     ll <- loglik(matrix(a, n, m, byrow = TRUE) + x %*% t(w))
     delta <- abs(ll - ll_old)
-    if (delta < tol * (1 + abs(ll_old))) { ll_old <- ll; converged <- TRUE; break }
+    if (delta < tol * (1 + abs(ll_old))) {
+      ll_old <- ll
+      converged <- TRUE
+      break
+    }
     ll_old <- ll
   }
 
@@ -903,14 +1034,21 @@ morie_wnominate_fit <- function(votes, n_dims = 1L, polarity = NULL,
   a <- a + as.vector(centre %*% t(w))
   x <- x - rep(centre, each = n)
   rms <- sqrt(mean(rowSums(x^2)))
-  if (rms > 0) { x <- x / rms; w <- w * rms }
+  if (rms > 0) {
+    x <- x / rms
+    w <- w * rms
+  }
   flipped <- FALSE
   if (!is.null(polarity)) {
     kk <- as.integer(polarity)
     if (kk < 1L || kk > n) {
       stop(sprintf("polarity must lie in 1 .. %d; got %d", n, kk), call. = FALSE)
     }
-    if (x[kk, 1] < 0) { x[, 1] <- -x[, 1]; w[, 1] <- -w[, 1]; flipped <- TRUE }
+    if (x[kk, 1] < 0) {
+      x[, 1] <- -x[, 1]
+      w[, 1] <- -w[, 1]
+      flipped <- TRUE
+    }
   }
   eta <- matrix(a, n, m, byrow = TRUE) + x %*% t(w)
   pred <- (eta > 0) * 1
@@ -931,25 +1069,30 @@ morie_wnominate_fit <- function(votes, n_dims = 1L, polarity = NULL,
       "Alternating optimisation stopped at %d iterations with the",
       "log-likelihood still moving by %.4g per sweep. The objective is not",
       "jointly concave, so a stopped fit is not necessarily near an",
-      "optimum."), max_iter, delta))
+      "optimum."
+    ), max_iter, delta))
   }
   if (is.null(polarity)) {
     warns <- c(warns, paste(
       "No polarity was fixed. The configuration is identified only up to",
       "rotation, reflection and scale, so the sign of every dimension is",
-      "arbitrary and will differ between starts."))
+      "arbitrary and will differ between starts."
+    ))
   }
   if (n_dropped > 0L) {
     warns <- c(warns, sprintf(paste(
       "%d roll calls were unanimous and carry no information about",
       "position. They are excluded; including them would inflate correct",
-      "classification without improving the fit."), n_dropped))
+      "classification without improving the fit."
+    ), n_dropped))
   }
-  list(ideal_points = x, rollcall_normals = w, rollcall_intercepts = a,
-       log_likelihood = ll_old, log_likelihood_change = delta,
-       correct_classification = correct, modal_baseline = modal,
-       aggregate_pre = pre, iterations = it, converged = converged,
-       n_dropped_rollcalls = n_dropped, rollcalls_kept = keep,
-       polarity_flipped = flipped, n_dims = n_dims, n = n, warnings = warns,
-       method = "W-NOMINATE alternating ideal-point estimation")
+  list(
+    ideal_points = x, rollcall_normals = w, rollcall_intercepts = a,
+    log_likelihood = ll_old, log_likelihood_change = delta,
+    correct_classification = correct, modal_baseline = modal,
+    aggregate_pre = pre, iterations = it, converged = converged,
+    n_dropped_rollcalls = n_dropped, rollcalls_kept = keep,
+    polarity_flipped = flipped, n_dims = n_dims, n = n, warnings = warns,
+    method = "W-NOMINATE alternating ideal-point estimation"
+  )
 }

@@ -103,8 +103,10 @@ morie_gh_dp_posterior <- function(G0_A, alpha, n_in_A, n) {
 #' @export
 morie_gh_dp_ndistinct <- function(n, alpha) {
   i <- seq_len(n)
-  list(mean = sum(alpha / (alpha + i - 1)),
-       var = sum(alpha * (i - 1) / (alpha + i - 1)^2))
+  list(
+    mean = sum(alpha / (alpha + i - 1)),
+    var = sum(alpha * (i - 1) / (alpha + i - 1)^2)
+  )
 }
 
 #' Stick-breaking truncation level for a given residual tolerance
@@ -151,7 +153,7 @@ morie_gh_dp_median_cdf <- function(G_x, alpha, n_grid = 4000L) {
   u <- 0.5 + (seq_len(n_grid) - 0.5) * h
   u <- u[u < 1]
   sum(exp(lgamma(a + b) - lgamma(a) - lgamma(b) +
-            (a - 1) * log(u) + (b - 1) * log(1 - u))) * h
+    (a - 1) * log(u) + (b - 1) * log(1 - u))) * h
 }
 
 #' Log Ewens sampling formula for a partition given by multiplicities
@@ -309,7 +311,8 @@ morie_gh_pt_posterior_density <- function(x, data, depth = 4L) {
 #' @return numeric scalar in \eqn{[0, 1]}
 #' @export
 morie_gh_hellinger2 <- function(p, q) {
-  p <- p / sum(p); q <- q / sum(q)
+  p <- p / sum(p)
+  q <- q / sum(q)
   1 - sum(sqrt(p * q))
 }
 
@@ -327,7 +330,8 @@ morie_gh_hellinger2 <- function(p, q) {
 #' @return numeric scalar divergence in nats
 #' @export
 morie_gh_kl <- function(p, q) {
-  p <- p / sum(p); q <- q / sum(q)
+  p <- p / sum(p)
+  q <- q / sum(q)
   keep <- p > 0
   sum(p[keep] * log(p[keep] / pmax(q[keep], 1e-300)))
 }
@@ -346,7 +350,8 @@ morie_gh_kl <- function(p, q) {
 #' @return numeric scalar divergence in nats
 #' @export
 morie_gh_renyi <- function(p, q, alpha = 0.5) {
-  p <- p / sum(p); q <- q / sum(q)
+  p <- p / sum(p)
+  q <- q / sum(q)
   log(sum(p^alpha * q^(1 - alpha))) / (alpha - 1)
 }
 
@@ -453,6 +458,8 @@ morie_gh_ibp_expected_dishes <- function(n, alpha) {
 #'   Cambridge University Press.
 #' @export
 morie_gh_dp_predictive <- function(alpha, n) {
-  list(weight_fresh = alpha / (alpha + n),
-       weight_per_obs = 1 / (alpha + n))
+  list(
+    weight_fresh = alpha / (alpha + n),
+    weight_per_obs = 1 / (alpha + n)
+  )
 }

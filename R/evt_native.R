@@ -22,7 +22,8 @@
   n <- length(xs)
   if (n < r + 1) {
     stop(sprintf("b_%d needs at least %d observations.", r, r + 1),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   j <- seq_len(n)
   w <- rep(1, n)
@@ -35,8 +36,11 @@
   b1 <- .evt_pwm(x, 1L)
   b2 <- .evt_pwm(x, 2L)
   l2 <- 2 * b1 - b0
-  if (l2 == 0) stop("the second L-moment is zero; the data are constant.",
-                    call. = FALSE)
+  if (l2 == 0) {
+    stop("the second L-moment is zero; the data are constant.",
+      call. = FALSE
+    )
+  }
   l3 <- 6 * b2 - 6 * b1 + b0
   list(l1 = b0, l2 = l2, l3 = l3, t3 = l3 / l2)
 }
@@ -46,7 +50,8 @@
   k <- as.integer(k)
   if (k < 1L || k >= length(xs)) {
     stop(sprintf("k must lie in 1..%d, got %d.", length(xs) - 1L, k),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   xs[seq_len(k + 1L)]
 }
@@ -83,23 +88,31 @@ morie_evt_hill <- function(x, k = NULL) {
   kk <- if (auto) as.integer(sqrt(n)) else as.integer(k)
   top <- .evt_top(xv, kk)
   if (top[kk + 1L] <= 0) {
-    stop(paste("the threshold order statistic is not positive; the Hill",
-               "estimator is only defined for positive heavy-tailed data",
-               "(xi > 0)."), call. = FALSE)
+    stop(paste(
+      "the threshold order statistic is not positive; the Hill",
+      "estimator is only defined for positive heavy-tailed data",
+      "(xi > 0)."
+    ), call. = FALSE)
   }
   logs <- log(top)
   xi <- mean(logs[seq_len(kk)]) - logs[kk + 1L]
-  out <- list(xi = xi, tail_alpha = if (xi > 0) 1 / xi else Inf,
-              se = xi / sqrt(kk),
-              se_caveat = paste("xi/sqrt(k) is the bias-free asymptotic SE;",
-                                "in the biased regime it understates the",
-                                "error"),
-              k = kk, threshold = top[kk + 1L],
-              valid_for = paste("xi > 0 only -- Frechet-type tails; for xi",
-                                "of any sign use morie_evt_pickands or",
-                                "morie_evt_dedh"),
-              n = n,
-              method = "Hill (1975): mean log-excess of the top k order statistics")
+  out <- list(
+    xi = xi, tail_alpha = if (xi > 0) 1 / xi else Inf,
+    se = xi / sqrt(kk),
+    se_caveat = paste(
+      "xi/sqrt(k) is the bias-free asymptotic SE;",
+      "in the biased regime it understates the",
+      "error"
+    ),
+    k = kk, threshold = top[kk + 1L],
+    valid_for = paste(
+      "xi > 0 only -- Frechet-type tails; for xi",
+      "of any sign use morie_evt_pickands or",
+      "morie_evt_dedh"
+    ),
+    n = n,
+    method = "Hill (1975): mean log-excess of the top k order statistics"
+  )
   if (auto) {
     ks <- 2:min(n %/% 2L, 500L)
     xs_sorted <- sort(xv, decreasing = TRUE)
@@ -107,9 +120,11 @@ morie_evt_hill <- function(x, k = NULL) {
     cums <- cumsum(lx)
     out$hill_plot_k <- ks
     out$hill_plot_xi <- cums[ks] / ks - lx[ks + 1L]
-    out$k_choice_note <- paste("variance falls and bias grows with k; the",
-                               "plot is returned because a single number",
-                               "hides the instability")
+    out$k_choice_note <- paste(
+      "variance falls and bias grows with k; the",
+      "plot is returned because a single number",
+      "hides the instability"
+    )
   }
   out
 }
@@ -168,20 +183,27 @@ morie_evt_pickands <- function(x, k = NULL) {
   cc <- xv[n - 4L * kk + 1L]
   if (!(a > b && b > cc)) {
     stop("the three order statistics are tied; the spacing ratio is undefined.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   xi <- log((a - b) / (b - cc)) / log(2)
-  avar <- if (abs(xi) < 1e-8) 3 / (4 * log(2)^2) else {
+  avar <- if (abs(xi) < 1e-8) {
+    3 / (4 * log(2)^2)
+  } else {
     xi^2 * (2^(2 * xi + 1) + 1) / (2 * (2^xi - 1) * log(2))^2
   }
-  list(xi = xi, se = sqrt(avar / kk), k = kk,
-       order_stats_used = c(a, b, cc),
-       valid_for = "every real xi -- heavy, light and bounded tails alike",
-       versus_hill = paste("far less efficient than Hill where Hill is",
-                           "valid (xi > 0); the tool for when the sign of",
-                           "xi is itself in question"),
-       n = n,
-       method = "Pickands (1975): log spacing ratio at k, 2k, 4k over log 2")
+  list(
+    xi = xi, se = sqrt(avar / kk), k = kk,
+    order_stats_used = c(a, b, cc),
+    valid_for = "every real xi -- heavy, light and bounded tails alike",
+    versus_hill = paste(
+      "far less efficient than Hill where Hill is",
+      "valid (xi > 0); the tool for when the sign of",
+      "xi is itself in question"
+    ),
+    n = n,
+    method = "Pickands (1975): log spacing ratio at k, 2k, 4k over log 2"
+  )
 }
 
 
@@ -211,9 +233,13 @@ morie_evt_dedh <- function(x, k = NULL) {
   kk <- if (is.null(k)) as.integer(sqrt(n)) else as.integer(k)
   top <- .evt_top(xv, kk)
   if (top[kk + 1L] <= 0) {
-    stop(paste("the threshold order statistic is not positive; the moment",
-               "estimator takes logs, so shift the data above zero first."),
-         call. = FALSE)
+    stop(
+      paste(
+        "the threshold order statistic is not positive; the moment",
+        "estimator takes logs, so shift the data above zero first."
+      ),
+      call. = FALSE
+    )
   }
   d <- log(top[seq_len(kk)]) - log(top[kk + 1L])
   M1 <- mean(d)
@@ -223,21 +249,29 @@ morie_evt_dedh <- function(x, k = NULL) {
   }
   corr <- 1 - 0.5 / (1 - M1^2 / M2)
   xi <- M1 + corr
-  avar <- if (xi >= 0) xi^2 + 1 else {
+  avar <- if (xi >= 0) {
+    xi^2 + 1
+  } else {
     omx <- 1 - xi
     omx^2 * (1 - 2 * xi) * (4 - 8 * (1 - 2 * xi) / (1 - 3 * xi) +
-                              (5 - 11 * xi) * (1 - 2 * xi) /
-                              ((1 - 3 * xi) * (1 - 4 * xi)))
+      (5 - 11 * xi) * (1 - 2 * xi) /
+        ((1 - 3 * xi) * (1 - 4 * xi)))
   }
-  list(xi = xi, hill_part = M1, correction = corr, M1 = M1, M2 = M2,
-       se = sqrt(max(avar, 0) / kk), k = kk, threshold = top[kk + 1L],
-       agrees_with_hill_when = paste("xi > 0: the correction converges to",
-                                     "zero and the first term IS the Hill",
-                                     "estimator"),
-       valid_for = paste("every real xi; the log still needs positive data,",
-                         "a location restriction rather than a tail one"),
-       n = n,
-       method = "Dekkers-Einmahl-de Haan (1989) moment estimator, Eq. (1.7)")
+  list(
+    xi = xi, hill_part = M1, correction = corr, M1 = M1, M2 = M2,
+    se = sqrt(max(avar, 0) / kk), k = kk, threshold = top[kk + 1L],
+    agrees_with_hill_when = paste(
+      "xi > 0: the correction converges to",
+      "zero and the first term IS the Hill",
+      "estimator"
+    ),
+    valid_for = paste(
+      "every real xi; the log still needs positive data,",
+      "a location restriction rather than a tail one"
+    ),
+    n = n,
+    method = "Dekkers-Einmahl-de Haan (1989) moment estimator, Eq. (1.7)"
+  )
 }
 
 
@@ -277,8 +311,7 @@ morie_evt_gev_lmoments <- function(block_maxima) {
     mu <- lm$l1 - alpha / k * (1 - gamma(1 + k))
   }
   xi <- -k
-  tail <- if (xi > 0.01) "Frechet (heavy, xi > 0)" else
-    if (xi < -0.01) "Weibull (bounded, xi < 0)" else "Gumbel (light, xi ~ 0)"
+  tail <- if (xi > 0.01) "Frechet (heavy, xi > 0)" else if (xi < -0.01) "Weibull (bounded, xi < 0)" else "Gumbel (light, xi ~ 0)"
   rl <- local({
     mu0 <- mu
     a0 <- alpha
@@ -288,15 +321,19 @@ morie_evt_gev_lmoments <- function(block_maxima) {
       if (abs(k0) < 1e-9) mu0 - a0 * log(y) else mu0 + a0 / k0 * (1 - y^k0)
     }
   })
-  list(mu = mu, sigma = alpha, k_hosking = k, xi = xi,
-       l1 = lm$l1, l2 = lm$l2, t3 = lm$t3, tail_type = tail,
-       sign_convention = "Hosking's k = -xi: heavy tail means k < 0, xi > 0",
-       return_level_fn = rl,
-       why_not_ml = paste("GEV maximum likelihood is non-regular for",
-                          "xi < -0.5 and loses to L-moments in the small",
-                          "samples block maxima produce"),
-       n_blocks = n,
-       method = "GEV by L-moments (Hosking 1990), unbiased PWMs")
+  list(
+    mu = mu, sigma = alpha, k_hosking = k, xi = xi,
+    l1 = lm$l1, l2 = lm$l2, t3 = lm$t3, tail_type = tail,
+    sign_convention = "Hosking's k = -xi: heavy tail means k < 0, xi > 0",
+    return_level_fn = rl,
+    why_not_ml = paste(
+      "GEV maximum likelihood is non-regular for",
+      "xi < -0.5 and loses to L-moments in the small",
+      "samples block maxima produce"
+    ),
+    n_blocks = n,
+    method = "GEV by L-moments (Hosking 1990), unbiased PWMs"
+  )
 }
 
 
@@ -321,9 +358,11 @@ morie_evt_gev_pwm <- function(block_maxima) {
   out$b1 <- .evt_pwm(block_maxima, 1L)
   out$b2 <- .evt_pwm(block_maxima, 2L)
   out$alias_of <- "morie_evt_gev_lmoments"
-  out$same_estimator_because <- paste("L-moments are linear combinations of",
-                                      "the PWMs, so the two fits coincide",
-                                      "exactly")
+  out$same_estimator_because <- paste(
+    "L-moments are linear combinations of",
+    "the PWMs, so the two fits coincide",
+    "exactly"
+  )
   out
 }
 
@@ -356,7 +395,8 @@ morie_evt_gpd_pwm <- function(x, threshold = NULL) {
     exc <- xv
     if (any(exc < 0)) {
       stop("excesses must be non-negative; pass the threshold to have them formed here.",
-           call. = FALSE)
+        call. = FALSE
+      )
     }
   }
   n <- length(exc)
@@ -377,22 +417,34 @@ morie_evt_gpd_pwm <- function(x, threshold = NULL) {
     k0 <- k
     base <- if (is.null(u)) 0 else u
     function(m) {
-      if (abs(k0) < 1e-9) base + s0 * log(m) else
+      if (abs(k0) < 1e-9) {
+        base + s0 * log(m)
+      } else {
         base + s0 / k0 * (1 - m^(-k0))
+      }
     }
   })
-  list(sigma = sigma, k_hosking = k, xi = -k,
-       n_excesses = n, threshold = u, mean_excess = mean(exc),
-       reliable = reliable,
-       reliability_note = if (reliable) NULL else
-         paste("k <= -0.5 (xi >= 0.5): infinite variance territory, where",
-               "the PWM estimator's own theory stops"),
-       why_pwm = paste("lower bias than ML for -0.5 < k < 0.5 and none of",
-                       "ML's convergence failures at exceedance sample",
-                       "sizes (Hosking-Wallis Sec. 4)"),
-       sign_convention = "Hosking's k = -xi",
-       return_level_fn = rl,
-       method = "GPD by probability-weighted moments (Hosking-Wallis 1987)")
+  list(
+    sigma = sigma, k_hosking = k, xi = -k,
+    n_excesses = n, threshold = u, mean_excess = mean(exc),
+    reliable = reliable,
+    reliability_note = if (reliable) {
+      NULL
+    } else {
+      paste(
+        "k <= -0.5 (xi >= 0.5): infinite variance territory, where",
+        "the PWM estimator's own theory stops"
+      )
+    },
+    why_pwm = paste(
+      "lower bias than ML for -0.5 < k < 0.5 and none of",
+      "ML's convergence failures at exceedance sample",
+      "sizes (Hosking-Wallis Sec. 4)"
+    ),
+    sign_convention = "Hosking's k = -xi",
+    return_level_fn = rl,
+    method = "GPD by probability-weighted moments (Hosking-Wallis 1987)"
+  )
 }
 
 
@@ -433,21 +485,28 @@ morie_evt_extremal_runs <- function(x, threshold, run_length = 1L) {
   ne <- length(exc)
   if (ne < 2L) {
     stop(sprintf("only %d exceedance(s) of %g; lower the threshold.", ne, u),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   gaps <- diff(exc)
   nc <- 1L + sum(gaps > r)
-  list(theta = nc / ne, n_exceedances = ne, n_clusters = nc,
-       mean_cluster_size = ne / nc, run_length = r, threshold = u,
-       interpretation = paste("theta is the reciprocal mean cluster size:",
-                              "the effective number of independent extremes",
-                              "is theta * n"),
-       sensitivity_note = paste("run_length too short splits genuine",
-                                "clusters, too long merges distinct ones;",
-                                "the intervals estimator has no such tuning",
-                                "parameter"),
-       n = n,
-       method = "Runs estimator of the extremal index (Smith-Weissman 1994)")
+  list(
+    theta = nc / ne, n_exceedances = ne, n_clusters = nc,
+    mean_cluster_size = ne / nc, run_length = r, threshold = u,
+    interpretation = paste(
+      "theta is the reciprocal mean cluster size:",
+      "the effective number of independent extremes",
+      "is theta * n"
+    ),
+    sensitivity_note = paste(
+      "run_length too short splits genuine",
+      "clusters, too long merges distinct ones;",
+      "the intervals estimator has no such tuning",
+      "parameter"
+    ),
+    n = n,
+    method = "Runs estimator of the extremal index (Smith-Weissman 1994)"
+  )
 }
 
 
@@ -482,7 +541,8 @@ morie_evt_extremal_intervals <- function(x, threshold) {
   N <- length(exc)
   if (N < 3L) {
     stop(sprintf("only %d exceedance(s) of %g; lower the threshold.", N, u),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   T <- as.numeric(diff(exc))
   if (max(T) <= 2) {
@@ -492,15 +552,19 @@ morie_evt_extremal_intervals <- function(x, threshold) {
     theta <- min(1, 2 * sum(T - 1)^2 / ((N - 1) * sum((T - 1) * (T - 2))))
     form <- "Eq. (34): gaps beyond 2 present, corrected moments"
   }
-  list(theta = theta, n_exceedances = N, form_used = form,
-       mean_interexceedance = mean(T), max_interexceedance = max(T),
-       implied_mean_cluster_size = if (theta > 0) 1 / theta else Inf,
-       no_tuning_note = paste("unlike the runs estimator there is no",
-                              "run-length parameter: the",
-                              "interexceedance-time mixture identifies",
-                              "theta by a moment ratio"),
-       threshold = u, n = n,
-       method = "Intervals estimator of the extremal index (Ferro-Segers 2003)")
+  list(
+    theta = theta, n_exceedances = N, form_used = form,
+    mean_interexceedance = mean(T), max_interexceedance = max(T),
+    implied_mean_cluster_size = if (theta > 0) 1 / theta else Inf,
+    no_tuning_note = paste(
+      "unlike the runs estimator there is no",
+      "run-length parameter: the",
+      "interexceedance-time mixture identifies",
+      "theta by a moment ratio"
+    ),
+    threshold = u, n = n,
+    method = "Intervals estimator of the extremal index (Ferro-Segers 2003)"
+  )
 }
 
 
@@ -531,11 +595,15 @@ morie_evt_extremal_sliding <- function(x, threshold = NULL,
   if (n < 40L) {
     stop(sprintf("need at least 40 observations, got %d.", n), call. = FALSE)
   }
-  b <- if (is.null(block_length)) as.integer(sqrt(n)) else
+  b <- if (is.null(block_length)) {
+    as.integer(sqrt(n))
+  } else {
     as.integer(block_length)
+  }
   if (b < 2L || b > n %/% 2L) {
     stop(sprintf("block_length must lie in 2..%d, got %d.", n %/% 2L, b),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   Fhat <- rank(xv, ties.method = "first") / (n + 1)
   theta_from <- function(maxF, bb) {
@@ -554,17 +622,22 @@ morie_evt_extremal_sliding <- function(x, threshold = NULL,
     max(Fhat[((j - 1L) * b + 1L):(j * b)])
   }, numeric(1))
   th_disj <- theta_from(disj_max, b)
-  list(theta = th_slide, theta_disjoint = th_disj, block_length = b,
-       n_sliding_blocks = length(slide_max), n_disjoint_blocks = nd,
-       sliding_beats_disjoint_because = paste(
-         "every observation participates in b windows instead of one;",
-         "Northrop (2015) shows the sliding estimator's asymptotic variance",
-         "is strictly smaller"),
-       threshold_note = paste("this estimator uses block maxima, not a",
-                              "threshold; the argument is accepted only for",
-                              "signature parity and is ignored"),
-       n = n,
-       method = "Northrop (2015) sliding-blocks semiparametric maxima estimator")
+  list(
+    theta = th_slide, theta_disjoint = th_disj, block_length = b,
+    n_sliding_blocks = length(slide_max), n_disjoint_blocks = nd,
+    sliding_beats_disjoint_because = paste(
+      "every observation participates in b windows instead of one;",
+      "Northrop (2015) shows the sliding estimator's asymptotic variance",
+      "is strictly smaller"
+    ),
+    threshold_note = paste(
+      "this estimator uses block maxima, not a",
+      "threshold; the argument is accepted only for",
+      "signature parity and is ignored"
+    ),
+    n = n,
+    method = "Northrop (2015) sliding-blocks semiparametric maxima estimator"
+  )
 }
 
 
@@ -588,14 +661,16 @@ morie_evt_extremal_sliding <- function(x, threshold = NULL,
 #'   *Biometrika* 96:1-17, Prop. 3; Pickands (1981).
 #' @examples
 #' morie_evt_madogram(stats::rnorm(100), stats::rnorm(100),
-#'                    t = c(0.5))$A
+#'   t = c(0.5)
+#' )$A
 #' @export
 morie_evt_madogram <- function(x, y, t = NULL) {
   xv <- as.numeric(x)
   yv <- as.numeric(y)
   if (length(xv) != length(yv)) {
     stop(sprintf("x has %d entries and y has %d.", length(xv), length(yv)),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   n <- length(xv)
   if (n < 20L) {
@@ -617,15 +692,21 @@ morie_evt_madogram <- function(x, y, t = NULL) {
   nu_h <- 0.5 * mean(abs(U^2 - V^2))
   c_h <- 1 / 3
   A_half <- min(max((nu_h + c_h) / (1 - nu_h - c_h), 0.5), 1)
-  list(t = tg, A = A, A_raw = A_raw,
-       clipped_fraction = mean(abs(A - A_raw) > 1e-12),
-       dependence_summary = 2 * (1 - A_half),
-       envelope = paste("max(t, 1-t) <= A <= 1; A = 1 is asymptotic",
-                        "independence, the lower envelope complete",
-                        "dependence"),
-       clipping_note = paste("heavy clipping means the extreme-value model",
-                             "itself fits badly, not that the estimator",
-                             "misfired"),
-       n = n,
-       method = "Lambda-madogram estimate of the Pickands dependence function (Naveau et al. 2009)")
+  list(
+    t = tg, A = A, A_raw = A_raw,
+    clipped_fraction = mean(abs(A - A_raw) > 1e-12),
+    dependence_summary = 2 * (1 - A_half),
+    envelope = paste(
+      "max(t, 1-t) <= A <= 1; A = 1 is asymptotic",
+      "independence, the lower envelope complete",
+      "dependence"
+    ),
+    clipping_note = paste(
+      "heavy clipping means the extreme-value model",
+      "itself fits badly, not that the estimator",
+      "misfired"
+    ),
+    n = n,
+    method = "Lambda-madogram estimate of the Pickands dependence function (Naveau et al. 2009)"
+  )
 }

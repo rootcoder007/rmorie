@@ -37,8 +37,12 @@
 .esl_mtry <- function(p, task = "regression") {
   p <- as.integer(p)
   if (is.na(p) || p < 1L) stop("need at least one predictor.", call. = FALSE)
-  if (identical(task, "classification")) return(max(1L, as.integer(floor(sqrt(p)))))
-  if (identical(task, "regression")) return(max(1L, as.integer(floor(p / 3))))
+  if (identical(task, "classification")) {
+    return(max(1L, as.integer(floor(sqrt(p)))))
+  }
+  if (identical(task, "regression")) {
+    return(max(1L, as.integer(floor(p / 3))))
+  }
   stop("task must be 'regression' or 'classification'.", call. = FALSE)
 }
 
@@ -71,13 +75,21 @@
       }
     }
   }
-  if (is.null(best)) return(list(leaf = TRUE, value = mean(y)))
+  if (is.null(best)) {
+    return(list(leaf = TRUE, value = mean(y)))
+  }
   left <- X[, best$j] <= best$t
-  list(leaf = FALSE, feature = best$j, threshold = best$t,
-       left = .esl_grow(X[left, , drop = FALSE], y[left], mtry, depth + 1L,
-                        max_depth, min_node),
-       right = .esl_grow(X[!left, , drop = FALSE], y[!left], mtry, depth + 1L,
-                         max_depth, min_node))
+  list(
+    leaf = FALSE, feature = best$j, threshold = best$t,
+    left = .esl_grow(
+      X[left, , drop = FALSE], y[left], mtry, depth + 1L,
+      max_depth, min_node
+    ),
+    right = .esl_grow(
+      X[!left, , drop = FALSE], y[!left], mtry, depth + 1L,
+      max_depth, min_node
+    )
+  )
 }
 
 # population variance, matching numpy's np.var default (ddof = 0);
@@ -85,7 +97,9 @@
 # differently
 .esl_var_p <- function(y) {
   n <- length(y)
-  if (n < 1L) return(0)
+  if (n < 1L) {
+    return(0)
+  }
   mean((y - mean(y))^2)
 }
 
@@ -105,8 +119,10 @@
   yv <- as.numeric(y)
   if (nrow(A) != length(yv)) A <- t(A)
   if (nrow(A) != length(yv)) {
-    stop(sprintf("%s has %d rows for %d responses.", what, nrow(A),
-                 length(yv)), call. = FALSE)
+    stop(sprintf(
+      "%s has %d rows for %d responses.", what, nrow(A),
+      length(yv)
+    ), call. = FALSE)
   }
   list(X = A, y = yv)
 }
@@ -145,30 +161,36 @@ morie_esl_residual_variance <- function(X, y, beta = NULL) {
   p <- ncol(D) - 1L
   df <- n - p - 1L
   if (df <= 0L) {
-    stop(sprintf(paste("(3.8) needs N > p + 1; got N = %d and p = %d, so",
-                       "the residual degrees of freedom would be %d and the",
-                       "estimate is undefined."), n, p, df), call. = FALSE)
+    stop(sprintf(paste(
+      "(3.8) needs N > p + 1; got N = %d and p = %d, so",
+      "the residual degrees of freedom would be %d and the",
+      "estimate is undefined."
+    ), n, p, df), call. = FALSE)
   }
   b <- if (is.null(beta)) {
     qr.coef(qr(D), yv)
   } else {
     bb <- as.numeric(beta)
     if (length(bb) != ncol(D)) {
-      stop(sprintf("beta has %d entries for a design of %d columns.",
-                   length(bb), ncol(D)), call. = FALSE)
+      stop(sprintf(
+        "beta has %d entries for a design of %d columns.",
+        length(bb), ncol(D)
+      ), call. = FALSE)
     }
     bb
   }
   fitted <- as.numeric(D %*% b)
   resid <- yv - fitted
   rss <- sum(resid^2)
-  list(value = rss / df, sigma = sqrt(rss / df), rss = rss,
-       df = df, n = n, p = p, intercept_in_X = has_int,
-       mle_variance = rss / n, bias_factor = df / n,
-       fitted = fitted, residuals = resid,
-       denominator_note = "N - p - 1, not N: that is what makes it unbiased (3.8)",
-       chi_square_fact = "(N-p-1) sigma_hat^2 ~ sigma^2 chi^2_{N-p-1} (3.11)",
-       method = "ESL (3.8) unbiased residual variance")
+  list(
+    value = rss / df, sigma = sqrt(rss / df), rss = rss,
+    df = df, n = n, p = p, intercept_in_X = has_int,
+    mle_variance = rss / n, bias_factor = df / n,
+    fitted = fitted, residuals = resid,
+    denominator_note = "N - p - 1, not N: that is what makes it unbiased (3.8)",
+    chi_square_fact = "(N-p-1) sigma_hat^2 ~ sigma^2 chi^2_{N-p-1} (3.11)",
+    method = "ESL (3.8) unbiased residual variance"
+  )
 }
 
 
@@ -207,7 +229,9 @@ morie_esl_kernel_density <- function(x, data, lambda_ = NULL) {
   lam <- if (is.null(lambda_)) {
     s <- stats::sd(D[, 1L])
     1.06 * (if (s > 0) s else 1) * n^(-0.2)
-  } else as.numeric(lambda_)
+  } else {
+    as.numeric(lambda_)
+  }
   if (lam <= 0) {
     stop(sprintf("lambda must be positive, got %g.", lam), call. = FALSE)
   }
@@ -222,12 +246,16 @@ morie_esl_kernel_density <- function(x, data, lambda_ = NULL) {
     g <- Q[, 1L]
     mass <- sum(diff(g) * (dens[-1L] + dens[-length(dens)])) / 2
   }
-  list(x = if (p > 1L) Q else Q[, 1L], density = dens, lambda = lam,
-       n = n, p = p, mass = mass, normaliser = norm,
-       is_convolution = TRUE,
-       convolution_note = paste("(6.23): the empirical df convolved with a",
-                                "Gaussian of standard deviation lambda"),
-       method = "ESL (6.23)/(6.24) Parzen density with a Gaussian product kernel")
+  list(
+    x = if (p > 1L) Q else Q[, 1L], density = dens, lambda = lam,
+    n = n, p = p, mass = mass, normaliser = norm,
+    is_convolution = TRUE,
+    convolution_note = paste(
+      "(6.23): the empirical df convolved with a",
+      "Gaussian of standard deviation lambda"
+    ),
+    method = "ESL (6.23)/(6.24) Parzen density with a Gaussian product kernel"
+  )
 }
 
 
@@ -283,15 +311,21 @@ morie_esl_bootstrap_err <- function(X, y, model = NULL, B = 100,
   if (is.na(Bn) || Bn < 1L) {
     stop("need at least one bootstrap replicate.", call. = FALSE)
   }
-  fit <- if (is.null(model)) function(Xtr, ytr) {
-    b <- qr.coef(qr(cbind(1, Xtr)), ytr)
-    function(Xn) as.numeric(cbind(1, Xn) %*% b)
-  } else model
+  fit <- if (is.null(model)) {
+    function(Xtr, ytr) {
+      b <- qr.coef(qr(cbind(1, Xtr)), ytr)
+      function(Xn) as.numeric(cbind(1, Xn) %*% b)
+    }
+  } else {
+    model
+  }
   L <- if (is.null(loss)) function(a, b) (a - b)^2 else loss
 
   old <- if (exists(".Random.seed", envir = globalenv())) {
     get(".Random.seed", envir = globalenv())
-  } else NULL
+  } else {
+    NULL
+  }
   set.seed(seed)
   on.exit(if (!is.null(old)) assign(".Random.seed", old, envir = globalenv()))
 
@@ -309,18 +343,24 @@ morie_esl_bootstrap_err <- function(X, y, model = NULL, B = 100,
   per_i <- rep(NA_real_, n)
   per_i[keep] <- colSums(losses * oob)[keep] / counts[keep]
   err_loo <- if (any(keep)) mean(per_i[keep]) else NA_real_
-  list(err_boot = err_boot, err_loo_boot = err_loo,
-       err_train = mean(L(yv, fit(A, yv)(A))),
-       inclusion_probability = .esl_inclusion(n),
-       optimistic = TRUE,
-       optimism_note = paste("(7.54) trains and tests on overlapping samples,",
-                             "so it is biased DOWNWARD; use err_loo_boot",
-                             "(7.56)"),
-       n_dropped = sum(!keep), per_observation = per_i,
-       which_to_use = paste("err_loo_boot for an honest estimate; feed it and",
-                            "err_train to morie_esl_oob_632"),
-       B = Bn, n = n,
-       method = "ESL (7.54) Err_boot and (7.56) leave-one-out bootstrap Err^(1)")
+  list(
+    err_boot = err_boot, err_loo_boot = err_loo,
+    err_train = mean(L(yv, fit(A, yv)(A))),
+    inclusion_probability = .esl_inclusion(n),
+    optimistic = TRUE,
+    optimism_note = paste(
+      "(7.54) trains and tests on overlapping samples,",
+      "so it is biased DOWNWARD; use err_loo_boot",
+      "(7.56)"
+    ),
+    n_dropped = sum(!keep), per_observation = per_i,
+    which_to_use = paste(
+      "err_loo_boot for an honest estimate; feed it and",
+      "err_train to morie_esl_oob_632"
+    ),
+    B = Bn, n = n,
+    method = "ESL (7.54) Err_boot and (7.56) leave-one-out bootstrap Err^(1)"
+  )
 }
 
 
@@ -373,8 +413,10 @@ morie_esl_oob_632 <- function(err_train, err_loo_boot, gamma = NULL,
     yv <- as.numeric(y)
     pv <- as.numeric(y_pred)
     if (length(yv) != length(pv)) {
-      stop(sprintf("y has %d entries and y_pred has %d.", length(yv),
-                   length(pv)), call. = FALSE)
+      stop(sprintf(
+        "y has %d entries and y_pred has %d.", length(yv),
+        length(pv)
+      ), call. = FALSE)
     }
     gamma <- mean(outer(yv, pv, "-")^2)
   }
@@ -395,16 +437,22 @@ morie_esl_oob_632 <- function(err_train, err_loo_boot, gamma = NULL,
     w <- 0.632 / (1 - 0.368 * rr)
     err632p <- (1 - w) * et + w * e1
   }
-  list(value = err632, err_632 = err632, err_632_plus = err632p,
-       weight = w, relative_overfitting_rate = rr, gamma = gamma,
-       err_train = et, err_loo_boot = e1, uses_leave_one_out = TRUE,
-       second_argument_note = paste("(7.57) takes Err^(1) from (7.56), NOT",
-                                    "Err_boot from (7.54); the latter is",
-                                    "biased downward and needs no correction",
-                                    "downward"),
-       weight_range = paste("w runs from .632 at R = 0 to 1 at R = 1, so the",
-                            ".632+ estimate runs from Err^(.632) to Err^(1)"),
-       method = "ESL (7.57) .632 and (7.61) .632+ prediction-error estimators")
+  list(
+    value = err632, err_632 = err632, err_632_plus = err632p,
+    weight = w, relative_overfitting_rate = rr, gamma = gamma,
+    err_train = et, err_loo_boot = e1, uses_leave_one_out = TRUE,
+    second_argument_note = paste(
+      "(7.57) takes Err^(1) from (7.56), NOT",
+      "Err_boot from (7.54); the latter is",
+      "biased downward and needs no correction",
+      "downward"
+    ),
+    weight_range = paste(
+      "w runs from .632 at R = 0 to 1 at R = 1, so the",
+      ".632+ estimate runs from Err^(.632) to Err^(1)"
+    ),
+    method = "ESL (7.57) .632 and (7.61) .632+ prediction-error estimators"
+  )
 }
 
 
@@ -466,20 +514,26 @@ morie_esl_random_forest <- function(X, y, B = 100, mtry = NULL,
   m <- if (is.null(mtry)) .esl_mtry(p, "regression") else as.integer(mtry)
   if (is.na(m) || m < 1L || m > p) {
     stop(sprintf("mtry must lie in 1..%d, got %s.", p, format(mtry)),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
-  Q <- if (is.null(newdata)) A else {
+  Q <- if (is.null(newdata)) {
+    A
+  } else {
     QQ <- as.matrix(newdata)
     storage.mode(QQ) <- "double"
     QQ
   }
   if (ncol(Q) != p) {
     stop(sprintf("newdata has %d columns, expected %d.", ncol(Q), p),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   old <- if (exists(".Random.seed", envir = globalenv())) {
     get(".Random.seed", envir = globalenv())
-  } else NULL
+  } else {
+    NULL
+  }
   set.seed(seed)
   on.exit(if (!is.null(old)) assign(".Random.seed", old, envir = globalenv()))
 
@@ -488,8 +542,10 @@ morie_esl_random_forest <- function(X, y, B = 100, mtry = NULL,
   oob_cnt <- numeric(n)
   for (b in seq_len(Bn)) {
     rows <- sample.int(n, n, replace = TRUE)
-    tree <- .esl_grow(A[rows, , drop = FALSE], yv[rows], m, 0L,
-                      as.integer(max_depth), as.integer(min_node))
+    tree <- .esl_grow(
+      A[rows, , drop = FALSE], yv[rows], m, 0L,
+      as.integer(max_depth), as.integer(min_node)
+    )
     pred <- pred + .esl_predict_tree(tree, Q)
     out <- setdiff(seq_len(n), rows)
     if (length(out)) {
@@ -502,21 +558,29 @@ morie_esl_random_forest <- function(X, y, B = 100, mtry = NULL,
   has_oob <- oob_cnt > 0
   oob_pred <- rep(NA_real_, n)
   oob_pred[has_oob] <- oob_sum[has_oob] / oob_cnt[has_oob]
-  list(prediction = pred,
-       oob_prediction = oob_pred,
-       oob_mse = if (any(has_oob)) {
-         mean((yv[has_oob] - oob_pred[has_oob])^2)
-       } else NA_real_,
-       train_mse = if (is.null(newdata)) mean((yv - pred)^2) else NULL,
-       mtry = m,
-       mtry_rule = paste("floor(p/3) for regression; floor(sqrt(p)) is the",
-                         "CLASSIFICATION default. They cross at p = 9; above",
-                         "it the regression rule is the larger of the two"),
-       subset_drawn_per = "node",
-       why_per_node = paste("averaging B identically distributed trees leaves",
-                            "rho sigma^2 behind, so the gain is bounded by",
-                            "how decorrelated they are; a per-tree subset",
-                            "decorrelates far less than a per-node one"),
-       n_oob_missing = sum(!has_oob), B = Bn, n = n, p = p,
-       method = "ESL Algorithm 15.1 random forest for regression")
+  list(
+    prediction = pred,
+    oob_prediction = oob_pred,
+    oob_mse = if (any(has_oob)) {
+      mean((yv[has_oob] - oob_pred[has_oob])^2)
+    } else {
+      NA_real_
+    },
+    train_mse = if (is.null(newdata)) mean((yv - pred)^2) else NULL,
+    mtry = m,
+    mtry_rule = paste(
+      "floor(p/3) for regression; floor(sqrt(p)) is the",
+      "CLASSIFICATION default. They cross at p = 9; above",
+      "it the regression rule is the larger of the two"
+    ),
+    subset_drawn_per = "node",
+    why_per_node = paste(
+      "averaging B identically distributed trees leaves",
+      "rho sigma^2 behind, so the gain is bounded by",
+      "how decorrelated they are; a per-tree subset",
+      "decorrelates far less than a per-node one"
+    ),
+    n_oob_missing = sum(!has_oob), B = Bn, n = n, p = p,
+    method = "ESL Algorithm 15.1 random forest for regression"
+  )
 }

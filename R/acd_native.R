@@ -100,9 +100,11 @@ morie_logistic_fit <- function(x, y, b = NULL) {
     if (1 - y[i] > 0) dev <- dev + (1 - y[i]) * log((1 - pi[i]) / (1 - y[i]))
   }
   wdiag <- pi * (1 - pi)
-  list(beta = as.numeric(b),
-       cov = solve(t(x * wdiag) %*% x),
-       loglik = ll, deviance = -2 * dev, pi = pi)
+  list(
+    beta = as.numeric(b),
+    cov = solve(t(x * wdiag) %*% x),
+    loglik = ll, deviance = -2 * dev, pi = pi
+  )
 }
 
 #' Logistic-scale Wald intervals for odds ratios and probabilities
@@ -152,8 +154,9 @@ morie_logistic_wald <- function(b1 = NA, var_b1 = NA, c = 1, z = 1.96,
 morie_multinomial_pmf <- function(counts, probs, product = FALSE) {
   if (is.matrix(counts) && product) {
     out <- 1
-    for (i in seq_len(nrow(counts)))
+    for (i in seq_len(nrow(counts))) {
       out <- out * stats::dmultinom(counts[i, ], prob = probs[i, ])
+    }
     return(out)
   }
   stats::dmultinom(as.numeric(counts), prob = as.numeric(probs))
@@ -193,9 +196,12 @@ morie_multicategory_logit <- function(bj0 = NA, bjs = NULL, xs = NULL,
     stopifnot(all(diff(cp) >= -1e-12), j >= 1, j <= length(cp) - 1)
     out$pi_j <- cp[j + 1] - cp[j]
   }
-  if (!is.na(pi_hat) && !is.na(var_pi))
-    out$wald <- c(lower = pi_hat - z * sqrt(var_pi),
-                  upper = pi_hat + z * sqrt(var_pi))
+  if (!is.na(pi_hat) && !is.na(var_pi)) {
+    out$wald <- c(
+      lower = pi_hat - z * sqrt(var_pi),
+      upper = pi_hat + z * sqrt(var_pi)
+    )
+  }
   out
 }
 
@@ -238,9 +244,10 @@ morie_poisson_loglinear <- function(mu_hat = NA, n = NA, z = 1.96,
     stopifnot(length(b) == 4)
     out$or_loglinear <- exp(b[1] + b[2] - b[3] - b[4])
   }
-  if (!is.na(beta_z_jp) && !is.na(beta_xz_i))
+  if (!is.na(beta_z_jp) && !is.na(beta_xz_i)) {
     out$mean_ratio <- exp((beta_z_j - beta_z_jp) +
-                            beta_xz_i * (s_j - s_jp))
+      beta_xz_i * (s_j - s_jp))
+  }
   out
 }
 
@@ -262,9 +269,10 @@ morie_bic_model_average <- function(bics, thetas = NULL,
   if (!is.null(thetas)) {
     th <- as.numeric(thetas)
     out$theta_ma <- sum(taus * th)
-    if (!is.null(variances))
+    if (!is.null(variances)) {
       out$var_ma <- sum(taus * ((th - out$theta_ma)^2 +
-                                  as.numeric(variances)))
+        as.numeric(variances)))
+    }
   }
   out
 }
@@ -286,12 +294,14 @@ morie_diagnostic_prevalence <- function(pi = NA, se = NA, sp = NA,
     stopifnot(se + sp > 1)
     out$prevalence <- (pi + sp - 1) / (se + sp - 1)
   }
-  if (!is.na(i_size) && !is.na(pi_tilde))
+  if (!is.na(i_size) && !is.na(pi_tilde)) {
     out$expected_tests <- 1 + i_size *
       (se + (1 - se - sp) * (1 - pi_tilde)^i_size)
-  if (!is.na(b0) && !is.null(bs))
+  }
+  if (!is.na(b0) && !is.null(bs)) {
     out$pi_group <- 1 / (1 + exp(-(b0 + sum(as.numeric(bs) *
-                                              as.numeric(xs)))))
+      as.numeric(xs)))))
+  }
   out
 }
 
@@ -345,24 +355,28 @@ morie_survey_categorical <- function(weights = NULL, ys = NULL,
                                      pi_hat = NA, n_hat = NA,
                                      var_pi = NA, t_crit = NA) {
   out <- list()
-  if (!is.null(weights))
+  if (!is.null(weights)) {
     out$n_hat_i <- sum(as.numeric(weights)[ys == category])
+  }
   if (!is.null(replicate_estimates)) {
     r <- as.numeric(replicate_estimates)
     out$jackknife_var <- (length(r) - 1) / length(r) *
       sum((r - full_estimate)^2)
   }
-  if (!is.na(var_ni))
+  if (!is.na(var_ni)) {
     out$var_pi_delta <- (var_ni + pi_hat^2 * var_n -
-                           2 * pi_hat * cov_ni_n) / n_hat^2
+      2 * pi_hat * cov_ni_n) / n_hat^2
+  }
   if (!is.na(var_pi) && !is.na(t_crit)) {
     n_eff <- pi_hat * (1 - pi_hat) / var_pi
     t2 <- t_crit^2
     centre <- 2 * n_eff * pi_hat + t2
     half <- t_crit * sqrt(t2 + 4 * n_eff * pi_hat * (1 - pi_hat))
-    out$kott_carr <- c(n_effective = n_eff,
-                       lower = (centre - half) / (2 * (n_eff + t2)),
-                       upper = (centre + half) / (2 * (n_eff + t2)))
+    out$kott_carr <- c(
+      n_effective = n_eff,
+      lower = (centre - half) / (2 * (n_eff + t2)),
+      upper = (centre + half) / (2 * (n_eff + t2))
+    )
   }
   out
 }
@@ -413,8 +427,9 @@ morie_bayes_binomial <- function(p_a_given_b = NA, p_b = NA,
     out$posterior_prob <- num / (num + p_a_given_notb * (1 - p_b))
   }
   if (!is.na(w) && !is.na(a)) {
-    if (!is.na(pi))
+    if (!is.na(pi)) {
       out$posterior_density <- stats::dbeta(pi, w + a, n - w + b)
+    }
     out$bayes_estimate <- (w + a) / (n + a + b)
   }
   if (!is.null(logliks)) {
@@ -440,8 +455,9 @@ morie_spline_logit <- function(x = NA, knot = NA, coef_left = NULL,
                                knots = NULL, a = NA, b_pt = NA) {
   tps <- function(xx, bb, kk) {
     v <- bb[1] + bb[2] * xx + bb[3] * xx^2 + bb[4] * xx^3
-    for (d in seq_along(kk))
+    for (d in seq_along(kk)) {
       if (xx > kk[d]) v <- v + bb[4 + d] * (xx - kk[d])^3
+    }
     v
   }
   out <- list()
@@ -453,8 +469,9 @@ morie_spline_logit <- function(x = NA, knot = NA, coef_left = NULL,
     bb <- as.numeric(betas)
     kk <- as.numeric(knots)
     if (!is.na(x)) out$spline <- tps(x, bb, kk)
-    if (!is.na(a) && !is.na(b_pt))
+    if (!is.na(a) && !is.na(b_pt)) {
       out$spline_or <- exp(tps(a, bb, kk) - tps(b_pt, bb, kk))
+    }
   }
   out
 }

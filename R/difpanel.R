@@ -51,7 +51,9 @@ morie_sibtest <- function(x, group, matching = NULL, min_per_cell = 2L,
   p <- ncol(X)
   if (length(group) != n) {
     stop("group must have one entry per row of x; got ", length(group),
-         " and ", n, ".", call. = FALSE)
+      " and ", n, ".",
+      call. = FALSE
+    )
   }
   lev <- sort(unique(group))
   if (length(lev) != 2L) {
@@ -60,12 +62,15 @@ morie_sibtest <- function(x, group, matching = NULL, min_per_cell = 2L,
   if (!all(is.finite(X))) stop("x must be finite.", call. = FALSE)
   if (p < 2L && is.null(matching)) {
     stop("With one item there is no rest score to match on; supply `matching`.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   is_ref <- group == lev[1L]
   if (!is.null(matching) && length(matching) != n) {
     stop("matching must have one entry per row of x; got ", length(matching),
-         " and ", n, ".", call. = FALSE)
+      " and ", n, ".",
+      call. = FALSE
+    )
   }
 
   beta <- se <- numeric(p)
@@ -95,16 +100,20 @@ morie_sibtest <- function(x, group, matching = NULL, min_per_cell = 2L,
       }
     }
 
-    b <- 0; v <- 0; used <- 0L
+    b <- 0
+    v <- 0
+    used <- 0L
     for (k in sort(unique(score))) {
       sel <- score == k
       yr <- y[sel & is_ref]
       yf <- y[sel & !is_ref]
       if (length(yr) < min_per_cell || length(yf) < min_per_cell) next
       pi_k <- (length(yr) + length(yf)) / n
-      mr <- mean(yr); mf <- mean(yf)
+      mr <- mean(yr)
+      mf <- mean(yf)
       if (correct) {
-        a <- adj[["ref"]]; f <- adj[["foc"]]
+        a <- adj[["ref"]]
+        f <- adj[["foc"]]
         tr <- a[["vbar"]] + a[["rho"]] * (k - a[["vbar"]])
         tf <- f[["vbar"]] + f[["rho"]] * (k - f[["vbar"]])
         target <- (tr + tf) / 2
@@ -130,8 +139,10 @@ morie_sibtest <- function(x, group, matching = NULL, min_per_cell = 2L,
     n_reference = sum(is_ref),
     n_focal = sum(!is_ref),
     correct = correct,
-    method = paste0("SIBTEST (Shealy & Stout 1993)",
-                    if (correct) ", true-score regression correction" else ", uncorrected")
+    method = paste0(
+      "SIBTEST (Shealy & Stout 1993)",
+      if (correct) ", true-score regression correction" else ", uncorrected"
+    )
   )
 }
 
@@ -172,7 +183,9 @@ morie_sibtest <- function(x, group, matching = NULL, min_per_cell = 2L,
 # 4 (T/100)^(2/9).
 .nw_lrv <- function(u, bandwidth = NULL) {
   Tn <- length(u)
-  if (Tn < 2L) return(if (Tn) stats::var(u) else 0)
+  if (Tn < 2L) {
+    return(if (Tn) stats::var(u) else 0)
+  }
   K <- if (is.null(bandwidth)) as.integer(4 * (Tn / 100)^(2 / 9)) else as.integer(bandwidth)
   K <- max(0L, min(K, Tn - 1L))
   uc <- u - mean(u)
@@ -247,7 +260,8 @@ morie_sibtest <- function(x, group, matching = NULL, min_per_cell = 2L,
 #'   Bulletin of Economics and Statistics}, 61(S1), 653-670.
 #' @examples
 #' set.seed(1)
-#' Tn <- 80; N <- 6
+#' Tn <- 80
+#' N <- 6
 #' x1 <- unlist(lapply(seq_len(N), function(i) cumsum(rnorm(Tn))))
 #' x2 <- unlist(lapply(seq_len(N), function(i) cumsum(rnorm(Tn))))
 #' y <- x1 + 0.5 * x2 + rnorm(N * Tn)
@@ -258,11 +272,15 @@ morie_panel_cointegration <- function(x, groups, lags = 1L,
   X <- as.matrix(x)
   if (ncol(X) < 2L) {
     stop("x needs a dependent column and at least one regressor; got ",
-         ncol(X), " column(s).", call. = FALSE)
+      ncol(X), " column(s).",
+      call. = FALSE
+    )
   }
   if (length(groups) != nrow(X)) {
     stop("groups must have one entry per row of x; got ", length(groups),
-         " and ", nrow(X), ".", call. = FALSE)
+      " and ", nrow(X), ".",
+      call. = FALSE
+    )
   }
   if (!all(is.finite(X))) stop("x must be finite.", call. = FALSE)
   units <- unique(groups)
@@ -273,7 +291,9 @@ morie_panel_cointegration <- function(x, groups, lags = 1L,
   if (lags < 0L) stop("lags must not be negative, got ", lags, ".", call. = FALSE)
   if (!case %in% names(.PEDRONI_T2)) {
     stop("case must be one of ", paste(names(.PEDRONI_T2), collapse = ", "),
-         "; got ", case, ".", call. = FALSE)
+      "; got ", case, ".",
+      call. = FALSE
+    )
   }
 
   A_num <- A_den <- 0
@@ -285,12 +305,18 @@ morie_panel_cointegration <- function(x, groups, lags = 1L,
     yv <- X[sel, 1L]
     Zx <- X[sel, -1L, drop = FALSE]
     e <- stats::lm.fit(cbind(1, Zx), yv)$residuals
-    if (length(e) < 4L * (lags + 1L)) { skipped <- c(skipped, u); next }
+    if (length(e) < 4L * (lags + 1L)) {
+      skipped <- c(skipped, u)
+      next
+    }
     nz <- .pdcoin_nuisance(yv, Zx, e, bandwidth)
     lag_e <- e[-length(e)]
     de <- diff(e)
     ss <- sum(lag_e^2)
-    if (ss <= 0 || nz[["L11_sq"]] <= 0) { skipped <- c(skipped, u); next }
+    if (ss <= 0 || nz[["L11_sq"]] <= 0) {
+      skipped <- c(skipped, u)
+      next
+    }
     cross <- sum(lag_e * de) - length(lag_e) * nz[["lambda"]]
 
     A_den <- A_den + ss / nz[["L11_sq"]]
@@ -303,7 +329,8 @@ morie_panel_cointegration <- function(x, groups, lags = 1L,
 
   if (A_den <= 0 || length(T_used) == 0L) {
     stop("No panel unit had enough usable observations; check group sizes and lags.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
 
   N <- length(T_used)
@@ -320,13 +347,16 @@ morie_panel_cointegration <- function(x, groups, lags = 1L,
 
   warn <- character(0)
   if (length(skipped)) {
-    warn <- c(warn, paste0(length(skipped), " unit(s) skipped for too few observations: ",
-                           paste(skipped, collapse = ", ")))
+    warn <- c(warn, paste0(
+      length(skipped), " unit(s) skipped for too few observations: ",
+      paste(skipped, collapse = ", ")
+    ))
   }
 
   m <- ncol(X) - 1L
   key <- as.character(m)
-  z <- list(); pv <- list()
+  z <- list()
+  pv <- list()
   if (!is.null(.PEDRONI_T2[[case]][[key]])) {
     for (nm in names(stats_raw)) {
       mv <- .PEDRONI_T2[[case]][[key]][[nm]]
@@ -335,8 +365,10 @@ morie_panel_cointegration <- function(x, groups, lags = 1L,
       pv[[nm]] <- if (nm == "panel_v") stats::pnorm(zz, lower.tail = FALSE) else stats::pnorm(zz)
     }
   } else {
-    warn <- c(warn, paste0("Pedroni Table 2 covers m = 2..7 regressors; this panel has m = ",
-                           m, ", so no standardised p-values are available."))
+    warn <- c(warn, paste0(
+      "Pedroni Table 2 covers m = 2..7 regressors; this panel has m = ",
+      m, ", so no standardised p-values are available."
+    ))
   }
 
   list(

@@ -55,17 +55,20 @@ cli_main <- function(subject, json = "{}") {
   }
 
   not_wired <- function(subj, hint) {
-    list(subject = subj, status = "not_available",
-         message = hint)
+    list(
+      subject = subj, status = "not_available",
+      message = hint
+    )
   }
 
   result <- tryCatch(
-    switch(
-      subject,
+    switch(subject,
       otis = {
         df <- morie_otis_load()
-        do.call(morie_otis_all_analyses,
-                keep(morie_otis_all_analyses, c(list(df = df), opts)))
+        do.call(
+          morie_otis_all_analyses,
+          keep(morie_otis_all_analyses, c(list(df = df), opts))
+        )
       },
       siu = {
         do.call(morie_siu_all_analyses, keep(morie_siu_all_analyses, opts))
@@ -78,17 +81,28 @@ cli_main <- function(subject, json = "{}") {
       },
       tps = not_wired(
         "tps",
-        paste0("`analyze tps` requires selecting TPS datasets first; use the ",
-               "R API: morie_tps_load(<name>) then morie_tps_analyze_all(dfs).")),
-      stop(sprintf("unknown analysis subject: '%s' (expected one of otis, siu, tps, nypd, cpd)",
-                   subject), call. = FALSE)
+        paste0(
+          "`analyze tps` requires selecting TPS datasets first; use the ",
+          "R API: morie_tps_load(<name>) then morie_tps_analyze_all(dfs)."
+        )
+      ),
+      stop(sprintf(
+        "unknown analysis subject: '%s' (expected one of otis, siu, tps, nypd, cpd)",
+        subject
+      ), call. = FALSE)
     ),
-    error = function(e) list(subject = subject, status = "error",
-                             message = conditionMessage(e))
+    error = function(e) {
+      list(
+        subject = subject, status = "error",
+        message = conditionMessage(e)
+      )
+    }
   )
 
-  cat(.morie_to_json(result, auto_unbox = TRUE, force = TRUE,
-                       null = "null", na = "null", digits = 6))
+  cat(.morie_to_json(result,
+    auto_unbox = TRUE, force = TRUE,
+    null = "null", na = "null", digits = 6
+  ))
   cat("\n")
   invisible(result)
 }

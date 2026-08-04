@@ -34,7 +34,7 @@
     stop("HKDF output length must be in 1..255*32", call. = FALSE)
   }
   if (is.null(salt)) salt <- as.raw(rep(0L, 32L))
-  if (is.character(ikm))  ikm  <- charToRaw(ikm)
+  if (is.character(ikm)) ikm <- charToRaw(ikm)
   if (is.character(info)) info <- charToRaw(info)
   if (is.character(salt)) salt <- charToRaw(salt)
   # Module 22: native HMAC-SHA256 (RFC 5869 extract step).
@@ -112,8 +112,10 @@ morie_crypto_hybrid_encrypt <- function(plaintext, recipient_pk) {
   wrap_nonce <- morie_crypto_random_bytes(12L)
   w <- morie_crypto_chacha20_poly1305_encrypt(wrap_key, wrap_nonce, sym_key)
   payload_nonce <- morie_crypto_random_bytes(12L)
-  p <- morie_crypto_chacha20_poly1305_encrypt(sym_key, payload_nonce,
-                                              plaintext)
+  p <- morie_crypto_chacha20_poly1305_encrypt(
+    sym_key, payload_nonce,
+    plaintext
+  )
   len4 <- writeBin(length(kem_ct), raw(), size = 4L, endian = "big")
   c(len4, kem_ct, wrap_nonce, w$ct, w$tag, payload_nonce, p$ct, p$tag)
 }
@@ -144,8 +146,10 @@ morie_crypto_hybrid_decrypt <- function(ciphertext, recipient_sk) {
   if (length(ciphertext) < 4L) {
     stop("ciphertext too short to contain header", call. = FALSE)
   }
-  kem_ct_len <- readBin(ciphertext[1:4], "integer", size = 4L,
-                        endian = "big")
+  kem_ct_len <- readBin(ciphertext[1:4], "integer",
+    size = 4L,
+    endian = "big"
+  )
   offset <- 4L
   min_len <- offset + kem_ct_len + 12L + 32L + 16L + 12L + 16L
   if (kem_ct_len < 0L || length(ciphertext) < min_len) {
@@ -168,12 +172,15 @@ morie_crypto_hybrid_decrypt <- function(ciphertext, recipient_sk) {
   wrap_tag <- ciphertext[(offset + 1L):(offset + 16L)]
   offset <- offset + 16L
   sym_key <- morie_crypto_chacha20_poly1305_decrypt(
-    wrap_key, wrap_nonce, c(wrapped_ct, wrap_tag))
+    wrap_key, wrap_nonce, c(wrapped_ct, wrap_tag)
+  )
   payload_nonce <- ciphertext[(offset + 1L):(offset + 12L)]
   offset <- offset + 12L
   aead_with_tag <- ciphertext[(offset + 1L):length(ciphertext)]
-  morie_crypto_chacha20_poly1305_decrypt(sym_key, payload_nonce,
-                                         aead_with_tag)
+  morie_crypto_chacha20_poly1305_decrypt(
+    sym_key, payload_nonce,
+    aead_with_tag
+  )
 }
 
 # Note: the public `morie_crypto_hkdf_sha256()` is the libsodium-backed

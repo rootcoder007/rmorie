@@ -35,7 +35,8 @@
 #' @examples
 #' set.seed(3)
 #' X <- matrix(rnorm(200), ncol = 2)
-#' tt <- rexp(100); ct <- sample(0:2, 100, TRUE)
+#' tt <- rexp(100)
+#' ct <- sample(0:2, 100, TRUE)
 #' morie_cause_specific_hazard(tt, ct, X)$hazard_ratio
 #' @export
 morie_cause_specific_hazard <- function(time, event_type, X, cause = 1,
@@ -43,8 +44,10 @@ morie_cause_specific_hazard <- function(time, event_type, X, cause = 1,
   t <- as.numeric(time)
   d <- as.vector(event_type)
   if (length(t) != length(d)) {
-    stop(sprintf("time has %d entries but event_type has %d",
-                 length(t), length(d)), call. = FALSE)
+    stop(sprintf(
+      "time has %d entries but event_type has %d",
+      length(t), length(d)
+    ), call. = FALSE)
   }
   if (!any(d == cause)) {
     stop(sprintf("no events of cause %s in event_type", cause), call. = FALSE)
@@ -53,19 +56,24 @@ morie_cause_specific_hazard <- function(time, event_type, X, cause = 1,
   prep <- .morie_cox_prepare(t, e, X)
   fit <- .morie_cox_fit(prep$t, prep$e, prep$X, ties = ties)
   se <- tryCatch(sqrt(pmax(diag(solve(fit$I)), 0)),
-                 error = function(err) rep(NA_real_, length(fit$beta)))
+    error = function(err) rep(NA_real_, length(fit$beta))
+  )
   z <- fit$beta / se
-  list(beta = fit$beta, se = se, z = z,
-       p_value = 2 * stats::pnorm(abs(z), lower.tail = FALSE),
-       hazard_ratio = exp(fit$beta), loglik = fit$loglik,
-       information = fit$I, n_cause = as.integer(sum(e)),
-       n_competing = as.integer(sum(d != 0 & d != cause)),
-       n_censored = as.integer(sum(d == 0)), cause = cause,
-       n = length(t), converged = fit$converged,
-       incidence_caveat = paste("competing events are censored here, so",
-                                "1 - exp(-Lambda) OVERSTATES incidence; use",
-                                "the Fine-Gray model for actual risk"),
-       method = "cause_specific_hazard")
+  list(
+    beta = fit$beta, se = se, z = z,
+    p_value = 2 * stats::pnorm(abs(z), lower.tail = FALSE),
+    hazard_ratio = exp(fit$beta), loglik = fit$loglik,
+    information = fit$I, n_cause = as.integer(sum(e)),
+    n_competing = as.integer(sum(d != 0 & d != cause)),
+    n_censored = as.integer(sum(d == 0)), cause = cause,
+    n = length(t), converged = fit$converged,
+    incidence_caveat = paste(
+      "competing events are censored here, so",
+      "1 - exp(-Lambda) OVERSTATES incidence; use",
+      "the Fine-Gray model for actual risk"
+    ),
+    method = "cause_specific_hazard"
+  )
 }
 
 
@@ -104,7 +112,8 @@ morie_cause_specific_hazard <- function(time, event_type, X, cause = 1,
       I <- I + dcount * (S2 / max(S0, 1e-300) - outer(mu, mu))
     }
     step <- as.vector(tryCatch(solve(I, U),
-                               error = function(err) .morie_ginv(I) %*% U))
+      error = function(err) .morie_ginv(I) %*% U
+    ))
     beta <- beta + step
     if (max(abs(step)) < tol) break
   }
@@ -133,7 +142,8 @@ morie_cause_specific_hazard <- function(time, event_type, X, cause = 1,
 #' @examples
 #' set.seed(3)
 #' X <- matrix(rnorm(200), ncol = 2)
-#' tt <- rexp(100); ct <- sample(0:2, 100, TRUE)
+#' tt <- rexp(100)
+#' ct <- sample(0:2, 100, TRUE)
 #' morie_competing_risks_fg(tt, ct, X)$subdistribution_hazard_ratio
 #' @export
 morie_competing_risks_fg <- function(time, event_type, X, cause = 1,
@@ -141,8 +151,10 @@ morie_competing_risks_fg <- function(time, event_type, X, cause = 1,
   t <- as.numeric(time)
   d <- as.vector(event_type)
   if (length(t) != length(d)) {
-    stop(sprintf("time has %d entries but event_type has %d",
-                 length(t), length(d)), call. = FALSE)
+    stop(sprintf(
+      "time has %d entries but event_type has %d",
+      length(t), length(d)
+    ), call. = FALSE)
   }
   if (!any(d == cause)) {
     stop(sprintf("no events of cause %s in event_type", cause), call. = FALSE)
@@ -154,7 +166,9 @@ morie_competing_risks_fg <- function(time, event_type, X, cause = 1,
   csurv <- km$survival
   Gfun <- function(u) {
     u <- as.numeric(u)
-    if (length(ct) == 0L) return(rep(1, length(u)))
+    if (length(ct) == 0L) {
+      return(rep(1, length(u)))
+    }
     pos <- findInterval(u, ct)
     ifelse(pos >= 1L, csurv[pmin(pmax(pos, 1L), length(csurv))], 1)
   }
@@ -162,19 +176,24 @@ morie_competing_risks_fg <- function(time, event_type, X, cause = 1,
   Gi <- pmax(Gfun(t), 1e-8)
   fg <- .morie_fg_newton(t, e, prep$X, competing, Gfun, Gi)
   se <- tryCatch(sqrt(pmax(diag(solve(fg$I)), 0)),
-                 error = function(err) rep(NA_real_, length(fg$beta)))
+    error = function(err) rep(NA_real_, length(fg$beta))
+  )
   z <- fg$beta / se
-  list(beta = fg$beta, se = se, z = z,
-       p_value = 2 * stats::pnorm(abs(z), lower.tail = FALSE),
-       subdistribution_hazard_ratio = exp(fg$beta),
-       hazard_ratio = exp(fg$beta), weights = Gi, loglik = fg$loglik,
-       n_cause = as.integer(sum(e)), n_competing = as.integer(sum(competing)),
-       cause = cause, n = length(t), converged = TRUE,
-       interpretation_caveat = paste("the risk set keeps subjects who already",
-                                     "failed from a competing cause; a",
-                                     "Fine-Gray hazard ratio is a statement",
-                                     "about RISK, not about mechanism"),
-       method = "competing_risks_fg")
+  list(
+    beta = fg$beta, se = se, z = z,
+    p_value = 2 * stats::pnorm(abs(z), lower.tail = FALSE),
+    subdistribution_hazard_ratio = exp(fg$beta),
+    hazard_ratio = exp(fg$beta), weights = Gi, loglik = fg$loglik,
+    n_cause = as.integer(sum(e)), n_competing = as.integer(sum(competing)),
+    cause = cause, n = length(t), converged = TRUE,
+    interpretation_caveat = paste(
+      "the risk set keeps subjects who already",
+      "failed from a competing cause; a",
+      "Fine-Gray hazard ratio is a statement",
+      "about RISK, not about mechanism"
+    ),
+    method = "competing_risks_fg"
+  )
 }
 
 
@@ -202,7 +221,8 @@ morie_competing_risks_fg <- function(time, event_type, X, cause = 1,
 #' @examples
 #' set.seed(3)
 #' X <- matrix(rnorm(200), ncol = 2)
-#' tt <- rexp(100); ct <- sample(0:2, 100, TRUE)
+#' tt <- rexp(100)
+#' ct <- sample(0:2, 100, TRUE)
 #' tail(morie_fine_gray_subdistribution_hazard(tt, ct, X)$baseline_cif, 1)
 #' @export
 morie_fine_gray_subdistribution_hazard <- function(time, cause, X,
@@ -215,16 +235,19 @@ morie_fine_gray_subdistribution_hazard <- function(time, cause, X,
   storage.mode(Xm) <- "double"
   if (nrow(Xm) != length(t)) Xm <- t(Xm)
   bh <- .morie_cox_baseline(t, e, Xm, fit$beta,
-                            offset = log(pmax(fit$weights, 1e-12)))
+    offset = log(pmax(fit$weights, 1e-12))
+  )
   base_cif <- 1 - exp(-bh$cumhazard)
   lin <- exp(pmax(pmin(as.vector(Xm %*% fit$beta), 500), -500))
   cif <- 1 - exp(-outer(lin, bh$cumhazard))
-  list(beta = fit$beta, se = fit$se, p_value = fit$p_value,
-       subdistribution_hazard_ratio = fit$subdistribution_hazard_ratio,
-       times = bh$times, baseline_cif = base_cif,
-       cumulative_incidence = cif, cumhazard = bh$cumhazard,
-       cause = of_cause, n = length(t),
-       method = "fine_gray_subdistribution_hazard")
+  list(
+    beta = fit$beta, se = fit$se, p_value = fit$p_value,
+    subdistribution_hazard_ratio = fit$subdistribution_hazard_ratio,
+    times = bh$times, baseline_cif = base_cif,
+    cumulative_incidence = cif, cumhazard = bh$cumhazard,
+    cause = of_cause, n = length(t),
+    method = "fine_gray_subdistribution_hazard"
+  )
 }
 
 
@@ -267,15 +290,19 @@ morie_cox_frailty <- function(time, event, X, cluster, theta = NULL,
   d <- .morie_cox_prepare(time, event, X)
   cl <- as.vector(cluster)
   if (length(cl) != length(d$t)) {
-    stop(sprintf("cluster has %d entries but time has %d",
-                 length(cl), length(d$t)), call. = FALSE)
+    stop(sprintf(
+      "cluster has %d entries but time has %d",
+      length(cl), length(d$t)
+    ), call. = FALSE)
   }
   levels_ <- unique(sort(cl))
   idx <- match(cl, levels_)
   K <- length(levels_)
   if (K == length(d$t)) {
-    stop(paste("every cluster has one member, so a shared frailty is not",
-               "identifiable"), call. = FALSE)
+    stop(paste(
+      "every cluster has one member, so a shared frailty is not",
+      "identifiable"
+    ), call. = FALSE)
   }
 
   inner <- function(th_val) {
@@ -308,37 +335,44 @@ morie_cox_frailty <- function(time, event, X, cluster, theta = NULL,
         break
       }
     }
-    list(beta = beta_l, frailty = frail_l, d_k = d_k, r_k = r_k,
-         loglik = ll_l, n_iter = as.integer(it_l), converged = conv_l)
+    list(
+      beta = beta_l, frailty = frail_l, d_k = d_k, r_k = r_k,
+      loglik = ll_l, n_iter = as.integer(it_l), converged = conv_l
+    )
   }
 
   marginal <- function(th_val) {
     r <- inner(th_val)
     a <- 1 / th_val
     sum(lgamma(a + r$d_k) - lgamma(a) - (a + r$d_k) * log1p(th_val * r$r_k) +
-          r$d_k * log(th_val)) + r$loglik
+      r$d_k * log(th_val)) + r$loglik
   }
 
   th <- if (is.null(theta)) {
     opt <- stats::optimize(function(lg) -marginal(exp(lg)),
-                           interval = c(log(1e-4), log(10)), tol = 1e-3)
+      interval = c(log(1e-4), log(10)), tol = 1e-3
+    )
     exp(opt$minimum)
   } else {
     as.numeric(theta)
   }
   res <- inner(th)
   logw <- log(pmax(res$frailty[idx], 1e-12))
-  f1 <- .morie_cox_fit(d$t, d$e, d$X, ties = ties, offset = logw,
-                       max_iter = 1L)
+  f1 <- .morie_cox_fit(d$t, d$e, d$X,
+    ties = ties, offset = logw,
+    max_iter = 1L
+  )
   Iinv <- tryCatch(solve(f1$I), error = function(err) .morie_ginv(f1$I))
   scale <- 1 + th * (mean(tabulate(idx, nbins = K)) - 1)
   se <- sqrt(pmax(diag(Iinv) * max(scale, 1), 0))
   z <- res$beta / se
-  list(beta = res$beta, se = se, z = z,
-       p_value = 2 * stats::pnorm(abs(z), lower.tail = FALSE),
-       hazard_ratio = exp(res$beta), theta = th,
-       kendall_tau = th / (th + 2), frailty = res$frailty,
-       clusters = levels_, n_clusters = as.integer(K), loglik = res$loglik,
-       n = length(d$t), n_iter = res$n_iter, converged = res$converged,
-       method = "cox_frailty")
+  list(
+    beta = res$beta, se = se, z = z,
+    p_value = 2 * stats::pnorm(abs(z), lower.tail = FALSE),
+    hazard_ratio = exp(res$beta), theta = th,
+    kendall_tau = th / (th + 2), frailty = res$frailty,
+    clusters = levels_, n_clusters = as.integer(K), loglik = res$loglik,
+    n = length(d$t), n_iter = res$n_iter, converged = res$converged,
+    method = "cox_frailty"
+  )
 }

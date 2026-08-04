@@ -18,7 +18,7 @@
   A <- as.matrix(X)
   storage.mode(A) <- "double"
   if (ncol(A) &&
-      any(apply(A, 2L, function(cc) isTRUE(all.equal(cc, rep(1, nrow(A))))))) {
+    any(apply(A, 2L, function(cc) isTRUE(all.equal(cc, rep(1, nrow(A))))))) {
     return(A)
   }
   cbind(1, A)
@@ -56,7 +56,9 @@
   rss_u <- sum(.caus_annihilate(Zf, matrix(D, ncol = 1L))^2)
   q <- ncol(Zf) - 1L
   dfr <- length(D) - ncol(Zf)
-  if (q < 1L || dfr < 1L || rss_u <= 0) return(NA_real_)
+  if (q < 1L || dfr < 1L || rss_u <= 0) {
+    return(NA_real_)
+  }
   ((rss_r - rss_u) / q) / (rss_u / dfr)
 }
 
@@ -101,16 +103,20 @@ morie_caus_iv_2sls <- function(y, X, Z, cluster = NULL) {
     stop("y, X and Z must agree on the number of rows.", call. = FALSE)
   }
   if (m < k) {
-    stop(sprintf(paste("the order condition fails: %d instruments (including",
-                       "the constant) for %d regressors. 2SLS is not",
-                       "identified."), m, k), call. = FALSE)
+    stop(sprintf(paste(
+      "the order condition fails: %d instruments (including",
+      "the constant) for %d regressors. 2SLS is not",
+      "identified."
+    ), m, k), call. = FALSE)
   }
   Xhat <- .caus_project(Zm, Xm)
   XtX <- crossprod(Xhat)
   if (qr(XtX)$rank < k) {
-    stop(paste("the rank condition fails: the projected regressors are",
-               "collinear, so Z carries no independent variation for at",
-               "least one endogenous regressor."), call. = FALSE)
+    stop(paste(
+      "the rank condition fails: the projected regressors are",
+      "collinear, so Z carries no independent variation for at",
+      "least one endogenous regressor."
+    ), call. = FALSE)
   }
   beta <- as.numeric(qr.coef(qr(XtX), crossprod(Xhat, yv)))
   u <- yv - as.numeric(Xm %*% beta)
@@ -122,7 +128,8 @@ morie_caus_iv_2sls <- function(y, X, Z, cluster = NULL) {
     cl <- as.vector(cluster)
     if (length(cl) != n) {
       stop(sprintf("cluster has %d entries for %d rows.", length(cl), n),
-           call. = FALSE)
+        call. = FALSE
+      )
     }
     meat <- matrix(0, k, k)
     for (g in unique(cl)) {
@@ -141,19 +148,24 @@ morie_caus_iv_2sls <- function(y, X, Z, cluster = NULL) {
     sargan <- n * r2
     sargan_p <- stats::pchisq(sargan, nres, lower.tail = FALSE)
   }
-  excl <- Zm[, !apply(Zm, 2L, function(cc)
-    isTRUE(all.equal(cc, rep(1, n)))), drop = FALSE]
-  list(beta = beta, se = se, t = ifelse(se > 0, beta / se, NA_real_),
-       residuals = u, fitted = as.numeric(Xm %*% beta),
-       first_stage_F = .caus_first_stage_f(Xm[, k], excl),
-       order_condition = TRUE,
-       overidentified = nres > 0L, n_overid_restrictions = nres,
-       sargan = sargan, sargan_p = sargan_p, vcov_type = vt,
-       residual_note = paste("residuals are y - X beta with the ORIGINAL X;",
-                             "using the first-stage fitted values gives a",
-                             "smaller number that is not a standard error"),
-       n = n, k = k, m = m,
-       method = "Two-stage least squares, beta = (X'P_Z X)^-1 X'P_Z y")
+  excl <- Zm[, !apply(Zm, 2L, function(cc) {
+    isTRUE(all.equal(cc, rep(1, n)))
+  }), drop = FALSE]
+  list(
+    beta = beta, se = se, t = ifelse(se > 0, beta / se, NA_real_),
+    residuals = u, fitted = as.numeric(Xm %*% beta),
+    first_stage_F = .caus_first_stage_f(Xm[, k], excl),
+    order_condition = TRUE,
+    overidentified = nres > 0L, n_overid_restrictions = nres,
+    sargan = sargan, sargan_p = sargan_p, vcov_type = vt,
+    residual_note = paste(
+      "residuals are y - X beta with the ORIGINAL X;",
+      "using the first-stage fitted values gives a",
+      "smaller number that is not a standard error"
+    ),
+    n = n, k = k, m = m,
+    method = "Two-stage least squares, beta = (X'P_Z X)^-1 X'P_Z y"
+  )
 }
 
 
@@ -206,8 +218,10 @@ morie_caus_iv_liml <- function(y, X, Z, fuller = NULL, endog = NULL) {
   k <- ncol(Xm)
   m <- ncol(Zm)
   if (m < k) {
-    stop(sprintf("the order condition fails: %d instruments for %d regressors.",
-                 m, k), call. = FALSE)
+    stop(sprintf(
+      "the order condition fails: %d instruments for %d regressors.",
+      m, k
+    ), call. = FALSE)
   }
   if (is.null(endog)) {
     is_exog <- logical(k)
@@ -233,10 +247,14 @@ morie_caus_iv_liml <- function(y, X, Z, fuller = NULL, endog = NULL) {
     is_exog[idx] <- FALSE
   }
   if (all(is_exog)) {
-    stop(paste("no endogenous regressor was identified: every column of X",
-               "also appears in Z, so there is nothing to instrument.",
-               "Pass endog explicitly if the detection is wrong."),
-         call. = FALSE)
+    stop(
+      paste(
+        "no endogenous regressor was identified: every column of X",
+        "also appears in Z, so there is nothing to instrument.",
+        "Pass endog explicitly if the detection is wrong."
+      ),
+      call. = FALSE
+    )
   }
   W <- .caus_intercept(Xm[, is_exog, drop = FALSE])
   Ybar <- cbind(yv, Xm[, !is_exog, drop = FALSE])
@@ -253,7 +271,8 @@ morie_caus_iv_liml <- function(y, X, Z, fuller = NULL, endog = NULL) {
     a <- as.numeric(fuller)
     if (a < 0) {
       stop(sprintf("Fuller's a must be non-negative, got %g.", a),
-           call. = FALSE)
+        call. = FALSE
+      )
     }
     kappa <- kappa - a / (n - m)
   }
@@ -264,17 +283,21 @@ morie_caus_iv_liml <- function(y, X, Z, fuller = NULL, endog = NULL) {
   bread <- solve(A2)
   Xt <- Xm - kappa * MzX
   V <- bread %*% crossprod(Xt, Xt * u^2) %*% bread
-  list(beta = beta, se = sqrt(pmax(diag(V), 0)), residuals = u,
-       kappa = kappa, kappa_minus_one = kappa - 1,
-       just_identified = nres == 0L,
-       equals_2sls = abs(kappa - 1) < 1e-9,
-       endogenous_columns = which(!is_exog),
-       fuller_a = if (is.null(fuller)) NULL else as.numeric(fuller),
-       n_overid_restrictions = nres,
-       kappa_fact = paste("kappa >= 1 always, and equals 1 exactly when the",
-                          "model is just identified, where LIML IS 2SLS"),
-       n = n, k = k, m = m,
-       method = "LIML as the k-class estimator with k = the Anderson-Rubin ratio")
+  list(
+    beta = beta, se = sqrt(pmax(diag(V), 0)), residuals = u,
+    kappa = kappa, kappa_minus_one = kappa - 1,
+    just_identified = nres == 0L,
+    equals_2sls = abs(kappa - 1) < 1e-9,
+    endogenous_columns = which(!is_exog),
+    fuller_a = if (is.null(fuller)) NULL else as.numeric(fuller),
+    n_overid_restrictions = nres,
+    kappa_fact = paste(
+      "kappa >= 1 always, and equals 1 exactly when the",
+      "model is just identified, where LIML IS 2SLS"
+    ),
+    n = n, k = k, m = m,
+    method = "LIML as the k-class estimator with k = the Anderson-Rubin ratio"
+  )
 }
 
 
@@ -318,7 +341,8 @@ morie_caus_iv_late <- function(y, D, Z) {
     v <- if (nm == "D") Dv else Zv
     if (!all(v %in% c(0, 1))) {
       stop(sprintf("%s must be binary 0/1 for the LATE theorem.", nm),
-           call. = FALSE)
+        call. = FALSE
+      )
     }
   }
   z1 <- Zv == 1
@@ -326,32 +350,42 @@ morie_caus_iv_late <- function(y, D, Z) {
   n1 <- sum(z1)
   n0 <- sum(z0)
   if (n1 < 2L || n0 < 2L) {
-    stop(sprintf("need at least 2 observations in each arm, got %d and %d.",
-                 n1, n0), call. = FALSE)
+    stop(sprintf(
+      "need at least 2 observations in each arm, got %d and %d.",
+      n1, n0
+    ), call. = FALSE)
   }
   rf <- mean(yv[z1]) - mean(yv[z0])
   fs <- mean(Dv[z1]) - mean(Dv[z0])
   if (abs(fs) < 1e-12) {
-    stop(paste("the first stage is zero: the instrument does not move",
-               "treatment, so the Wald ratio is 0/0 and nothing is",
-               "identified."), call. = FALSE)
+    stop(paste(
+      "the first stage is zero: the instrument does not move",
+      "treatment, so the Wald ratio is 0/0 and nothing is",
+      "identified."
+    ), call. = FALSE)
   }
   late <- rf / fs
   vy <- stats::var(yv[z1]) / n1 + stats::var(yv[z0]) / n0
   vd <- stats::var(Dv[z1]) / n1 + stats::var(Dv[z0]) / n0
   cv <- stats::cov(yv[z1], Dv[z1]) / n1 + stats::cov(yv[z0], Dv[z0]) / n0
   v <- (vy - 2 * late * cv + late^2 * vd) / fs^2
-  list(late = late, se = sqrt(max(v, 0)), first_stage = fs,
-       reduced_form = rf, complier_share = fs, n_z1 = n1, n_z0 = n0,
-       weak_first_stage = abs(fs) < 0.05,
-       estimand = paste("the average effect among COMPLIERS, not the",
-                        "population average treatment effect"),
-       monotonicity_assumed = paste("no defiers: nobody the instrument pushes",
-                                    "OUT of treatment. Not testable, but its",
-                                    "consequence -- a first stage of one sign",
-                                    "throughout -- is visible above"),
-       n = length(yv),
-       method = "Imbens-Angrist LATE, the Wald ratio under monotonicity")
+  list(
+    late = late, se = sqrt(max(v, 0)), first_stage = fs,
+    reduced_form = rf, complier_share = fs, n_z1 = n1, n_z0 = n0,
+    weak_first_stage = abs(fs) < 0.05,
+    estimand = paste(
+      "the average effect among COMPLIERS, not the",
+      "population average treatment effect"
+    ),
+    monotonicity_assumed = paste(
+      "no defiers: nobody the instrument pushes",
+      "OUT of treatment. Not testable, but its",
+      "consequence -- a first stage of one sign",
+      "throughout -- is visible above"
+    ),
+    n = length(yv),
+    method = "Imbens-Angrist LATE, the Wald ratio under monotonicity"
+  )
 }
 
 
@@ -393,31 +427,41 @@ morie_caus_iv_dag <- function(y, D, Z, homogeneous = FALSE) {
   z0 <- Zv == 0
   sd_fs <- sqrt(stats::var(Dv[z1]) / sum(z1) + stats::var(Dv[z0]) / sum(z0))
   tstat <- if (sd_fs > 0) o$first_stage / sd_fs else Inf
-  list(beta = o$late, se = o$se,
-       estimand = if (isTRUE(homogeneous)) {
-         "the average treatment effect, under the asserted constant effect"
-       } else {
-         paste("the compliers' average effect; NOT the population ATE unless",
-               "effects are constant")
-       },
-       homogeneous_asserted = isTRUE(homogeneous),
-       relevance = o$first_stage, relevance_t = tstat,
-       relevance_p = 2 * stats::pnorm(abs(tstat), lower.tail = FALSE),
-       assumptions = list(
-         relevance = "Z moves D",
-         exclusion = "no arrow Z -> Y except through D",
-         exchangeability = "no common cause of Z and Y",
-         homogeneity_or_monotonicity = paste(
-           "constant effects gives the ATE; otherwise monotonicity gives the",
-           "compliers' effect")),
-       testable = "relevance",
-       untestable = c("exclusion", "exchangeability", "homogeneity",
-                      "monotonicity"),
-       same_number_as_late = paste("identical arithmetic to",
-                                   "morie_caus_iv_late; only the assumption",
-                                   "set and hence the estimand differ"),
-       n = o$n,
-       method = "Wald / IV estimator under a Z -> D -> Y graph")
+  list(
+    beta = o$late, se = o$se,
+    estimand = if (isTRUE(homogeneous)) {
+      "the average treatment effect, under the asserted constant effect"
+    } else {
+      paste(
+        "the compliers' average effect; NOT the population ATE unless",
+        "effects are constant"
+      )
+    },
+    homogeneous_asserted = isTRUE(homogeneous),
+    relevance = o$first_stage, relevance_t = tstat,
+    relevance_p = 2 * stats::pnorm(abs(tstat), lower.tail = FALSE),
+    assumptions = list(
+      relevance = "Z moves D",
+      exclusion = "no arrow Z -> Y except through D",
+      exchangeability = "no common cause of Z and Y",
+      homogeneity_or_monotonicity = paste(
+        "constant effects gives the ATE; otherwise monotonicity gives the",
+        "compliers' effect"
+      )
+    ),
+    testable = "relevance",
+    untestable = c(
+      "exclusion", "exchangeability", "homogeneity",
+      "monotonicity"
+    ),
+    same_number_as_late = paste(
+      "identical arithmetic to",
+      "morie_caus_iv_late; only the assumption",
+      "set and hence the estimand differ"
+    ),
+    n = o$n,
+    method = "Wald / IV estimator under a Z -> D -> Y graph"
+  )
 }
 
 
@@ -464,7 +508,7 @@ morie_caus_aipw <- function(y, T, ps, m1, m0, trim = 0.01) {
   M0 <- as.numeric(m0)
   n <- length(yv)
   if (length(Tv) != n || length(e) != n || length(M1) != n ||
-        length(M0) != n) {
+    length(M0) != n) {
     stop("y, T, ps, m1 and m0 must have the same length.", call. = FALSE)
   }
   if (!all(Tv %in% c(0, 1))) stop("T must be binary 0/1.", call. = FALSE)
@@ -478,29 +522,37 @@ morie_caus_aipw <- function(y, T, ps, m1, m0, trim = 0.01) {
   n_trim <- sum(e < tr | e > 1 - tr)
   ec <- if (tr > 0) pmin(pmax(e, tr), 1 - tr) else e
   if (any(ec <= 0) || any(ec >= 1)) {
-    stop(paste("a propensity score is exactly 0 or 1, so a unit has no",
-               "counterfactual and the estimator divides by zero; use",
-               "trim > 0 or drop the unit."), call. = FALSE)
+    stop(paste(
+      "a propensity score is exactly 0 or 1, so a unit has no",
+      "counterfactual and the estimator divides by zero; use",
+      "trim > 0 or drop the unit."
+    ), call. = FALSE)
   }
   reg <- M1 - M0
   aug <- Tv * (yv - M1) / ec - (1 - Tv) * (yv - M0) / (1 - ec)
   infl <- reg + aug
   ate <- mean(infl)
   se <- stats::sd(infl) / sqrt(n)
-  list(ate = ate, se = se,
-       ci = c(ate - stats::qnorm(0.975) * se, ate + stats::qnorm(0.975) * se),
-       influence = infl, regression_component = mean(reg),
-       augmentation_component = mean(aug),
-       n_trimmed = n_trim, min_ps = min(e), max_ps = max(e),
-       effective_overlap = mean(e > 0.1 & e < 0.9),
-       doubly_robust = paste("consistent if EITHER the propensity score or",
-                             "the outcome regressions are correct, not",
-                             "necessarily both; wrong on both and it is wrong"),
-       trimming_note = paste("trimming changes the estimand to an average",
-                             "over the retained region, not the whole",
-                             "population"),
-       n = n,
-       method = "AIPW / doubly robust ATE (Robins, Rotnitzky and Zhao 1994)")
+  list(
+    ate = ate, se = se,
+    ci = c(ate - stats::qnorm(0.975) * se, ate + stats::qnorm(0.975) * se),
+    influence = infl, regression_component = mean(reg),
+    augmentation_component = mean(aug),
+    n_trimmed = n_trim, min_ps = min(e), max_ps = max(e),
+    effective_overlap = mean(e > 0.1 & e < 0.9),
+    doubly_robust = paste(
+      "consistent if EITHER the propensity score or",
+      "the outcome regressions are correct, not",
+      "necessarily both; wrong on both and it is wrong"
+    ),
+    trimming_note = paste(
+      "trimming changes the estimand to an average",
+      "over the retained region, not the whole",
+      "population"
+    ),
+    n = n,
+    method = "AIPW / doubly robust ATE (Robins, Rotnitzky and Zhao 1994)"
+  )
 }
 
 
@@ -550,21 +602,31 @@ morie_caus_dml_partial_lin <- function(y, D, X, n_folds = 5, learner = NULL,
   }
   nf <- as.integer(n_folds)
   if (is.na(nf) || nf < 2L || nf > n) {
-    stop(sprintf(paste("n_folds must lie in 2..%d, got %s; cross-fitting",
-                       "with one fold is not cross-fitting."), n,
-                 format(n_folds)), call. = FALSE)
+    stop(sprintf(
+      paste(
+        "n_folds must lie in 2..%d, got %s; cross-fitting",
+        "with one fold is not cross-fitting."
+      ), n,
+      format(n_folds)
+    ), call. = FALSE)
   }
-  fit <- if (is.null(learner)) function(Xtr, ytr) {
-    Xc <- cbind(1, Xtr)
-    pen <- diag(ncol(Xc))
-    pen[1L, 1L] <- 0
-    b <- solve(crossprod(Xc) + pen, crossprod(Xc, ytr))
-    function(Xn) as.numeric(cbind(1, Xn) %*% b)
-  } else learner
+  fit <- if (is.null(learner)) {
+    function(Xtr, ytr) {
+      Xc <- cbind(1, Xtr)
+      pen <- diag(ncol(Xc))
+      pen[1L, 1L] <- 0
+      b <- solve(crossprod(Xc) + pen, crossprod(Xc, ytr))
+      function(Xn) as.numeric(cbind(1, Xn) %*% b)
+    }
+  } else {
+    learner
+  }
 
   old <- if (exists(".Random.seed", envir = globalenv())) {
     get(".Random.seed", envir = globalenv())
-  } else NULL
+  } else {
+    NULL
+  }
   set.seed(seed)
   on.exit(if (!is.null(old)) assign(".Random.seed", old, envir = globalenv()))
   perm <- sample.int(n)
@@ -581,8 +643,10 @@ morie_caus_dml_partial_lin <- function(y, D, X, n_folds = 5, learner = NULL,
   }
   den <- sum(dres^2)
   if (den <= 0) {
-    stop(paste("the residualised treatment has no variation left: X explains",
-               "D completely, so theta is not identified."), call. = FALSE)
+    stop(paste(
+      "the residualised treatment has no variation left: X explains",
+      "D completely, so theta is not identified."
+    ), call. = FALSE)
   }
   theta <- sum(dres * yres) / den
   eps <- yres - theta * dres
@@ -590,23 +654,33 @@ morie_caus_dml_partial_lin <- function(y, D, X, n_folds = 5, learner = NULL,
   yr_in <- yv - fit(Xm, yv)(Xm)
   dr_in <- Dv - fit(Xm, Dv)(Xm)
   din <- sum(dr_in^2)
-  list(theta = theta, se = se,
-       ci = c(theta - stats::qnorm(0.975) * se,
-              theta + stats::qnorm(0.975) * se),
-       y_residual = yres, d_residual = dres,
-       theta_in_sample = if (din > 0) sum(dr_in * yr_in) / din else NA_real_,
-       cross_fitted = TRUE, n_folds = nf,
-       first_stage_r2 = if (stats::var(Dv) > 0) {
-         1 - stats::var(dres) / stats::var(Dv)
-       } else NA_real_,
-       why_cross_fit = paste("fitting the nuisances on the data used for the",
-                             "final moment leaves a regularisation bias that",
-                             "does not vanish at root-n"),
-       why_orthogonal = paste("residualising BOTH Y and D on X makes the",
-                              "score Neyman-orthogonal; residualising only Y",
-                              "is not orthogonal and the bias returns"),
-       n = n, p = p,
-       method = "Double machine learning, partially linear model")
+  list(
+    theta = theta, se = se,
+    ci = c(
+      theta - stats::qnorm(0.975) * se,
+      theta + stats::qnorm(0.975) * se
+    ),
+    y_residual = yres, d_residual = dres,
+    theta_in_sample = if (din > 0) sum(dr_in * yr_in) / din else NA_real_,
+    cross_fitted = TRUE, n_folds = nf,
+    first_stage_r2 = if (stats::var(Dv) > 0) {
+      1 - stats::var(dres) / stats::var(Dv)
+    } else {
+      NA_real_
+    },
+    why_cross_fit = paste(
+      "fitting the nuisances on the data used for the",
+      "final moment leaves a regularisation bias that",
+      "does not vanish at root-n"
+    ),
+    why_orthogonal = paste(
+      "residualising BOTH Y and D on X makes the",
+      "score Neyman-orthogonal; residualising only Y",
+      "is not orthogonal and the bias returns"
+    ),
+    n = n, p = p,
+    method = "Double machine learning, partially linear model"
+  )
 }
 
 
@@ -655,25 +729,32 @@ morie_caus_did_sun_abraham <- function(Y_panel, G_first_treat,
   Tn <- ncol(Y)
   if (length(G) != n) {
     stop(sprintf("G_first_treat has %d entries for %d units.", length(G), n),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   if (!control %in% c("never", "notyet")) {
     stop("control must be 'never' or 'notyet'.", call. = FALSE)
   }
   never <- !is.finite(G)
   if (identical(control, "never") && !any(never)) {
-    stop(paste("no never-treated units, so there is no clean control group;",
-               "use control='notyet'."), call. = FALSE)
+    stop(paste(
+      "no never-treated units, so there is no clean control group;",
+      "use control='notyet'."
+    ), call. = FALSE)
   }
   cohorts <- sort(unique(G[is.finite(G)]))
   cohorts <- cohorts[cohorts >= 2 & cohorts <= Tn]
   if (!length(cohorts)) {
-    stop(paste("no cohort is treated at a period with both a pre-period and",
-               "a post-period, so no effect is estimable."), call. = FALSE)
+    stop(paste(
+      "no cohort is treated at a period with both a pre-period and",
+      "a post-period, so no effect is estimable."
+    ), call. = FALSE)
   }
   rel <- if (is.null(rel_periods)) {
     seq(max(-5, -(min(cohorts) - 1)), min(5, Tn - min(cohorts)))
-  } else as.integer(rel_periods)
+  } else {
+    as.integer(rel_periods)
+  }
 
   catt <- matrix(NA_real_, length(cohorts), length(rel))
   wts <- matrix(0, length(cohorts), length(rel))
@@ -683,7 +764,9 @@ morie_caus_did_sun_abraham <- function(Y_panel, G_first_treat,
     for (li in seq_along(rel)) {
       t <- e + rel[li]
       if (t < 1 || t > Tn || e - 1 < 1) next
-      ctrl <- if (identical(control, "never")) never else {
+      ctrl <- if (identical(control, "never")) {
+        never
+      } else {
         ((G > t) | never) & !treated
       }
       if (!any(ctrl) || !any(treated)) next
@@ -699,7 +782,9 @@ morie_caus_did_sun_abraham <- function(Y_panel, G_first_treat,
     if (col[li] > 0) wts[, li] <- wts[, li] / col[li]
   }
   mu <- vapply(seq_along(rel), function(li) {
-    if (col[li] <= 0) return(NA_real_)
+    if (col[li] <= 0) {
+      return(NA_real_)
+    }
     sum(wts[, li] * ifelse(is.na(catt[, li]), 0, catt[, li]))
   }, numeric(1))
 
@@ -715,18 +800,22 @@ morie_caus_did_sun_abraham <- function(Y_panel, G_first_treat,
     if (length(cells)) mean(cells) else NA_real_
   }, numeric(1))
 
-  list(rel_periods = rel, mu = mu, catt = catt, weights = wts,
-       cohorts = cohorts, naive_twfe = naive,
-       weights_nonnegative = all(wts >= -1e-12),
-       weights_sum_to_one = all(abs(colSums(wts)[col > 0] - 1) < 1e-9),
-       reference_period = -1L,
-       n_never_treated = sum(never), control_group = control,
-       why_not_twfe = paste("a two-way fixed-effects event-study coefficient",
-                            "is a weighted sum of cohort effects at MANY",
-                            "relative times with possibly NEGATIVE weights,",
-                            "so under heterogeneity it can carry the wrong",
-                            "sign; the interaction weights are shares and",
-                            "cannot"),
-       n_units = n, n_periods = Tn,
-       method = "Sun-Abraham interaction-weighted event study (2021)")
+  list(
+    rel_periods = rel, mu = mu, catt = catt, weights = wts,
+    cohorts = cohorts, naive_twfe = naive,
+    weights_nonnegative = all(wts >= -1e-12),
+    weights_sum_to_one = all(abs(colSums(wts)[col > 0] - 1) < 1e-9),
+    reference_period = -1L,
+    n_never_treated = sum(never), control_group = control,
+    why_not_twfe = paste(
+      "a two-way fixed-effects event-study coefficient",
+      "is a weighted sum of cohort effects at MANY",
+      "relative times with possibly NEGATIVE weights,",
+      "so under heterogeneity it can carry the wrong",
+      "sign; the interaction weights are shares and",
+      "cannot"
+    ),
+    n_units = n, n_periods = Tn,
+    method = "Sun-Abraham interaction-weighted event study (2021)"
+  )
 }

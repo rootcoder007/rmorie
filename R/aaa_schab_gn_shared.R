@@ -40,11 +40,10 @@
   # (exp(-3) = 0.049787, the book's convention, Sec. 4.3); match it.
   cc <- 3
   r <- .sp_correlogram(h, rng, model)
-  dr_da <- switch(
-    model,
+  dr_da <- switch(model,
     exponential = r * (cc * h / rng^2),
-    gaussian    = r * (2 * cc * h^2 / rng^3),
-    spherical   = {
+    gaussian = r * (2 * cc * h^2 / rng^3),
+    spherical = {
       out <- numeric(length(h))
       inside <- h <= rng
       hi <- h[inside]
@@ -62,7 +61,9 @@
   # OLS is R = phi I, so the weights are 1. WLS uses Cressie's (1985)
   # approximation (4.33), Var[gamma_hat(h_m)] = 2 gamma^2 / |N(h_m)|, whose
   # reciprocal is the weight in (4.34).
-  if (identical(kind, "ols")) return(rep(1, length(fitted)))
+  if (identical(kind, "ols")) {
+    return(rep(1, length(fitted)))
+  }
   denom <- 2 * fitted^2
   ifelse(denom > 0, counts / ifelse(denom > 0, denom, 1), 0)
 }
@@ -77,7 +78,9 @@
                                 kind = "wls", max_iter = 200L, tol = 1e-12,
                                 max_halvings = 40L) {
   ok <- is.finite(lags) & is.finite(ghat) & counts > 0
-  h <- lags[ok]; g <- ghat[ok]; n <- counts[ok]
+  h <- lags[ok]
+  g <- ghat[ok]
+  n <- counts[ok]
   if (length(h) < 3L) {
     stop("need at least 3 usable lag classes to fit 3 parameters", call. = FALSE)
   }
@@ -85,20 +88,26 @@
   objective <- function(theta) {
     fitted <- .sp_semivariogram(h, theta[1], theta[2], theta[3], model)
     if (any(!is.finite(fitted))) {
-      return(list(value = Inf, fitted = fitted, w = rep(0, length(h)),
-                  resid = rep(0, length(h))))
+      return(list(
+        value = Inf, fitted = fitted, w = rep(0, length(h)),
+        resid = rep(0, length(h))
+      ))
     }
     if (identical(kind, "wls") && any(fitted <= 0)) {
       # gamma(h) = 0 at a positive lag means no nugget and no partial sill:
       # the model has collapsed and (4.34) is undefined there.
-      return(list(value = Inf, fitted = fitted, w = rep(0, length(h)),
-                  resid = rep(0, length(h))))
+      return(list(
+        value = Inf, fitted = fitted, w = rep(0, length(h)),
+        resid = rep(0, length(h))
+      ))
     }
     w <- .schab_gn_weights(kind, fitted, n)
     resid <- g - fitted
     val <- sum(w * resid^2)
-    list(value = if (is.finite(val)) val else Inf, fitted = fitted,
-         w = w, resid = resid)
+    list(
+      value = if (is.finite(val)) val else Inf, fitted = fitted,
+      w = w, resid = resid
+    )
   }
 
   theta <- .schab_gn_project(start)

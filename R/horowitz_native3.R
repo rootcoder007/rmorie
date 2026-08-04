@@ -54,19 +54,30 @@ morie_deconvolution <- function(W, sigma_eps, grid = NULL, h = NULL,
                                 error = "normal") {
   W <- as.numeric(W)
   n <- length(W)
-  if (n < 8L) stop(sprintf("need at least 8 observations, got %d.", n),
-                   call. = FALSE)
+  if (n < 8L) {
+    stop(sprintf("need at least 8 observations, got %d.", n),
+      call. = FALSE
+    )
+  }
   s <- as.numeric(sigma_eps)
-  if (s <= 0) stop(sprintf("sigma_eps must be positive, got %g.", s),
-                   call. = FALSE)
+  if (s <= 0) {
+    stop(sprintf("sigma_eps must be positive, got %g.", s),
+      call. = FALSE
+    )
+  }
   if (!error %in% c("normal", "laplace")) {
     stop("error must be 'normal' or 'laplace'.", call. = FALSE)
   }
   hh <- if (is.null(h)) {
     if (error == "normal") s / sqrt(log(n)) else n^(-0.2)
-  } else as.numeric(h)
-  if (hh <= 0) stop(sprintf("bandwidth must be positive, got %g.", hh),
-                    call. = FALSE)
+  } else {
+    as.numeric(h)
+  }
+  if (hh <= 0) {
+    stop(sprintf("bandwidth must be positive, got %g.", hh),
+      call. = FALSE
+    )
+  }
   g <- if (is.null(grid)) seq(min(W), max(W), length.out = 200L) else as.numeric(grid)
 
   # sinc-kernel Fourier transform: compactly supported in tau, which
@@ -83,15 +94,17 @@ morie_deconvolution <- function(W, sigma_eps, grid = NULL, h = NULL,
     regime <- "ordinary smooth"
     note <- "psi_eps decays polynomially: rate stays polynomial, n^{-r}"
   }
-  damp <- (1 - (tau / tt)^2)^3  # vanishes at the cut-off
+  damp <- (1 - (tau / tt)^2)^3 # vanishes at the cut-off
   integrand <- psi_w / psi_e * damp
   dens <- vapply(g, function(u) {
     z <- integrand * exp(-1i * tau * u)
     Re(sum(diff(tau) * (utils::head(z, -1L) + utils::tail(z, -1L)) / 2)) / (2 * pi)
   }, numeric(1))
-  list(grid = g, density = dens, bandwidth = hh, regime = regime,
-       rate_note = note, n = n,
-       method = "Fourier deconvolution with a compact damping kernel")
+  list(
+    grid = g, density = dens, bandwidth = hh, regime = regime,
+    rate_note = note, n = n,
+    method = "Fourier deconvolution with a compact damping kernel"
+  )
 }
 
 #' Convergence rates for deconvolution
@@ -121,11 +134,13 @@ morie_deconv_rate <- function(n, error = "normal", s = 2, r = 2) {
   poly <- n^(-as.numeric(r))
   logr <- log(n)^(-as.numeric(s))
   supersmooth <- error == "normal"
-  list(rate = if (supersmooth) logr else poly,
-       regime = if (supersmooth) "supersmooth" else "ordinary smooth",
-       polynomial_rate = poly, logarithmic_rate = logr,
-       ratio = if (poly > 0) logr / poly else Inf, n = n,
-       method = "n^{-r} vs (log n)^{-s}; the gap is the chapter's point")
+  list(
+    rate = if (supersmooth) logr else poly,
+    regime = if (supersmooth) "supersmooth" else "ordinary smooth",
+    polynomial_rate = poly, logarithmic_rate = logr,
+    ratio = if (poly > 0) logr / poly else Inf, n = n,
+    method = "n^{-r} vs (log n)^{-s}; the gap is the chapter's point"
+  )
 }
 
 #' Asymptotic normality of the deconvolution estimator
@@ -158,14 +173,19 @@ morie_deconv_normality <- function(fn_u, f_u, n, h, b, bias = 0, sigma = 1) {
     stop("need n >= 2 and positive h, b.", call. = FALSE)
   }
   sig <- as.numeric(sigma)
-  if (sig <= 0) stop(sprintf("sigma must be positive, got %g.", sig),
-                     call. = FALSE)
+  if (sig <= 0) {
+    stop(sprintf("sigma must be positive, got %g.", sig),
+      call. = FALSE
+    )
+  }
   scale <- sqrt(n * h / b)
   z <- scale * (as.numeric(fn_u) - as.numeric(f_u) - as.numeric(bias)) / sig
-  list(z = z, scaling = scale,
-       p_two_sided = 2 * stats::pnorm(abs(z), lower.tail = FALSE),
-       bias_subtracted = as.numeric(bias),
-       method = "[n h / b]^{1/2}(f-hat - f - bias) -> N(0, sigma^2)")
+  list(
+    z = z, scaling = scale,
+    p_two_sided = 2 * stats::pnorm(abs(z), lower.tail = FALSE),
+    bias_subtracted = as.numeric(bias),
+    method = "[n h / b]^{1/2}(f-hat - f - bias) -> N(0, sigma^2)"
+  )
 }
 
 #' Density-weighted average derivative
@@ -217,11 +237,13 @@ morie_average_derivative <- function(X, y, h = NULL, weighted = TRUE) {
     infl[, j] <- contrib - delta[j]
   }
   se <- sqrt(colSums(infl^2)) / n
-  list(delta = if (d > 1L) delta else delta[1L],
-       se = if (d > 1L) se else se[1L],
-       root_n = TRUE, proportional_to_beta = TRUE,
-       bandwidth = if (d > 1L) hs else hs[1L], n = n, d = d,
-       method = "Density-weighted average derivative; root-n by parts")
+  list(
+    delta = if (d > 1L) delta else delta[1L],
+    se = if (d > 1L) se else se[1L],
+    root_n = TRUE, proportional_to_beta = TRUE,
+    bandwidth = if (d > 1L) hs else hs[1L], n = n, d = d,
+    method = "Density-weighted average derivative; root-n by parts"
+  )
 }
 
 #' Sample average derivative with an undersmoothed bandwidth
@@ -253,9 +275,11 @@ morie_average_derivative_hat <- function(X, y, h = NULL) {
     h <- .hrz_silverman(Xm[, 1L]) * n^(-0.05)
   }
   out <- morie_average_derivative(Xm, y, h = h)
-  list(delta_hat = out$delta, se = out$se, bandwidth = out$bandwidth,
-       undersmoothed = TRUE, n = out$n,
-       method = "Sample average derivative; LOO and undersmoothing are required")
+  list(
+    delta_hat = out$delta, se = out$se, bandwidth = out$bandwidth,
+    undersmoothed = TRUE, n = out$n,
+    method = "Sample average derivative; LOO and undersmoothing are required"
+  )
 }
 
 #' Tikhonov regularisation for nonparametric IV
@@ -284,30 +308,39 @@ morie_tikhonov_iv <- function(T, Ey_w, alpha = NULL, alphas = NULL) {
   b <- as.numeric(Ey_w)
   if (nrow(Tm) != length(b)) {
     stop(sprintf("T has %d rows but Ey_w has %d.", nrow(Tm), length(b)),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   k <- ncol(Tm)
   tt <- crossprod(Tm)
   tb <- crossprod(Tm, b)
   cond <- if (k > 0L) kappa(tt, exact = TRUE) else Inf
   solve_a <- function(a) as.numeric(solve(tt + as.numeric(a) * diag(k), tb))
-  grid <- if (is.null(alphas)) c(1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1) else
+  grid <- if (is.null(alphas)) {
+    c(1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1)
+  } else {
     as.numeric(alphas)
+  }
   if (any(grid <= 0)) stop("alpha values must be positive.", call. = FALSE)
   curve <- lapply(grid, function(a) {
     ga <- solve_a(a)
     c(a, sqrt(sum((Tm %*% ga - b)^2)), sqrt(sum(ga^2)))
   })
   a_use <- if (is.null(alpha)) grid[length(grid) %/% 2L + 1L] else as.numeric(alpha)
-  if (a_use <= 0) stop(sprintf("alpha must be positive, got %g.", a_use),
-                       call. = FALSE)
+  if (a_use <= 0) {
+    stop(sprintf("alpha must be positive, got %g.", a_use),
+      call. = FALSE
+    )
+  }
   g <- solve_a(a_use)
-  list(g = g, alpha = a_use,
-       residual_norm = sqrt(sum((Tm %*% g - b)^2)),
-       solution_norm = sqrt(sum(g^2)),
-       l_curve = do.call(rbind, curve), condition_number = cond,
-       ill_posed = TRUE,
-       method = "Tikhonov; T compact so T^{-1} is unbounded")
+  list(
+    g = g, alpha = a_use,
+    residual_norm = sqrt(sum((Tm %*% g - b)^2)),
+    solution_norm = sqrt(sum(g^2)),
+    l_curve = do.call(rbind, curve), condition_number = cond,
+    ill_posed = TRUE,
+    method = "Tikhonov; T compact so T^{-1} is unbounded"
+  )
 }
 
 #' Sieve (series) solution of the nonparametric IV equation
@@ -335,7 +368,8 @@ morie_sieve_iv <- function(T, Ey_w, K = NULL) {
   b <- as.numeric(Ey_w)
   if (nrow(Tm) != length(b)) {
     stop(sprintf("T has %d rows but Ey_w has %d.", nrow(Tm), length(b)),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   k <- ncol(Tm)
   kd <- if (is.null(K)) max(1L, min(k, as.integer(sqrt(nrow(Tm))))) else as.integer(K)
@@ -347,11 +381,13 @@ morie_sieve_iv <- function(T, Ey_w, K = NULL) {
   gk[is.na(gk)] <- 0
   g <- numeric(k)
   g[seq_len(kd)] <- gk
-  list(g = g, K = kd,
-       residual_norm = sqrt(sum((tk %*% gk - b)^2)),
-       condition_number_at_K = kappa(crossprod(tk), exact = TRUE),
-       regularisation = "truncation",
-       method = "Sieve NPIV; K regularises exactly as alpha does")
+  list(
+    g = g, K = kd,
+    residual_norm = sqrt(sum((tk %*% gk - b)^2)),
+    condition_number_at_K = kappa(crossprod(tk), exact = TRUE),
+    regularisation = "truncation",
+    method = "Sieve NPIV; K regularises exactly as alpha does"
+  )
 }
 
 #' Sieve estimate of the NPIV operator
@@ -389,10 +425,12 @@ morie_npiv_operator <- function(X, W, K = 5L, kind = "poly") {
   tm <- crossprod(q, p) / length(X)
   sv <- svd(tm, nu = 0L, nv = 0L)$d
   ratio <- if (sv[1L] > 0) sv[length(sv)] / sv[1L] else 0
-  list(T = tm, singular_values = sv, decay_ratio = ratio,
-       severity = if (ratio < 1e-6) "severe" else "mild",
-       K = K, n = length(X),
-       method = "T_jk = E[p_k(X) q_j(W)]; singular decay IS the ill-posedness")
+  list(
+    T = tm, singular_values = sv, decay_ratio = ratio,
+    severity = if (ratio < 1e-6) "severe" else "mild",
+    K = K, n = length(X),
+    method = "T_jk = E[p_k(X) q_j(W)]; singular decay IS the ill-posedness"
+  )
 }
 
 #' Nonparametric quantile IV
@@ -419,9 +457,11 @@ morie_npiv_quantile <- function(T, tau_target, K = NULL, tau = 0.5) {
     stop(sprintf("tau must lie in (0, 1), got %g.", tau), call. = FALSE)
   }
   out <- morie_sieve_iv(T, tau_target, K = K)
-  list(g = out$g, K = out$K, residual_norm = out$residual_norm,
-       tau = as.numeric(tau), nonlinear = TRUE,
-       method = "Quantile restriction; nonlinear in g, same ill-posedness")
+  list(
+    g = out$g, K = out$K, residual_norm = out$residual_norm,
+    tau = as.numeric(tau), nonlinear = TRUE,
+    method = "Quantile restriction; nonlinear in g, same ill-posedness"
+  )
 }
 
 #' Instrument relevance and exogeneity diagnostics
@@ -484,9 +524,11 @@ morie_instrument_check <- function(X, Z, U = NULL, y = NULL) {
     u <- yy - as.numeric(cbind(1, x1) %*% b2)
     corr <- stats::cor(u, Zm[, 1L])
   }
-  list(first_stage_r2 = r2, first_stage_F = ff,
-       relevant = ff > 10,  # the usual rule of thumb
-       corr_U_Z = corr, exogeneity_testable = FALSE,
-       n = n, n_instruments = q,
-       method = "Relevance is testable; exogeneity is NOT, and is not claimed")
+  list(
+    first_stage_r2 = r2, first_stage_F = ff,
+    relevant = ff > 10, # the usual rule of thumb
+    corr_U_Z = corr, exogeneity_testable = FALSE,
+    n = n, n_instruments = q,
+    method = "Relevance is testable; exogeneity is NOT, and is not claimed"
+  )
 }

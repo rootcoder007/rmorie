@@ -195,13 +195,15 @@
     }
     # Module 23: native SAX-built tree fallback.
     return(morie_fetch_xml(paste(readLines(path, warn = FALSE),
-                                 collapse = "\n")))
+      collapse = "\n"
+    )))
   }
   if (format == "html") {
     if (!requireNamespace("xml2", quietly = TRUE)) {
       # Module 23: native tolerant HTML tree fallback.
       return(morie_fetch_html(paste(readLines(path, warn = FALSE),
-                                    collapse = "\n")))
+        collapse = "\n"
+      )))
     }
     doc <- xml2::read_html(path)
     if (simplify && requireNamespace("rvest", quietly = TRUE)) {
@@ -340,7 +342,8 @@ morie_fetch <- function(url,
 #' @examples
 #' \donttest{
 #' hits <- try(morie_ckan_search("cannabis survey",
-#'                               portal = "open.canada.ca"))
+#'   portal = "open.canada.ca"
+#' ))
 #' if (is.data.frame(hits)) {
 #'   head(hits[, c("dataset_title", "resource_id", "format")])
 #' }

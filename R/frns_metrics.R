@@ -139,21 +139,16 @@ NULL
 # ---- 1. disparate impact --------------------------------------------------
 
 
-
 # ---- 2. demographic parity ------------------------------------------------
-
 
 
 # ---- 3. equalized odds ----------------------------------------------------
 
 
-
 # ---- 4. average odds difference -------------------------------------------
 
 
-
 # ---- 5. Gini --------------------------------------------------------------
-
 
 
 # ---- 6. bias amplification score ------------------------------------------
@@ -168,7 +163,7 @@ NULL
 }
 
 .morie_fairness_check_aligned <- function(...) {
-  pairs <- list(...)  # list of c(name, length)
+  pairs <- list(...) # list of c(name, length)
   n <- pairs[[1L]]$len
   for (p in pairs) {
     if (p$len != n) {
@@ -232,8 +227,10 @@ NULL
     neg <- !pos
     tpr <- if (any(pos)) mean(gp[pos] == favorable) else NA_real_
     fpr <- if (any(neg)) mean(gp[neg] == favorable) else NA_real_
-    out[[i]] <- list(g = g, n = as.integer(sum(m)),
-                     tpr = as.numeric(tpr), fpr = as.numeric(fpr))
+    out[[i]] <- list(
+      g = g, n = as.integer(sum(m)),
+      tpr = as.numeric(tpr), fpr = as.numeric(fpr)
+    )
   }
   out
 }
@@ -272,7 +269,7 @@ NULL
 #'   worst (smallest) ratio across groups.
 #' @examples
 #' pred <- c(1, 1, 1, 1, 1, 1, 1, 1, 0, 0)
-#' race <- c("A","A","A","A","A","B","B","B","B","B")
+#' race <- c("A", "A", "A", "A", "A", "B", "B", "B", "B", "B")
 #' morie_fairness_disparate_impact(pred, race, privileged = "A")$value
 #' @export
 morie_fairness_disparate_impact <- function(y_pred, group,
@@ -282,7 +279,7 @@ morie_fairness_disparate_impact <- function(y_pred, group,
   grp <- .morie_fairness_as_1d(group, "group")
   .morie_fairness_check_aligned(
     list(name = "y_pred", len = length(yp)),
-    list(name = "group",  len = length(grp))
+    list(name = "group", len = length(grp))
   )
 
   rates <- .morie_fairness_favorable_rates(yp, grp, favorable)
@@ -380,7 +377,7 @@ morie_fairness_disparate_impact <- function(y_pred, group,
 #'   largest absolute gap across groups.
 #' @examples
 #' pred <- c(1, 1, 1, 1, 0, 0, 0, 1, 0, 0)
-#' race <- c("A","A","A","A","A","B","B","B","B","B")
+#' race <- c("A", "A", "A", "A", "A", "B", "B", "B", "B", "B")
 #' morie_fairness_demographic_parity(pred, race, privileged = "A")$value
 #' @export
 morie_fairness_demographic_parity <- function(y_pred, group,
@@ -390,7 +387,7 @@ morie_fairness_demographic_parity <- function(y_pred, group,
   grp <- .morie_fairness_as_1d(group, "group")
   .morie_fairness_check_aligned(
     list(name = "y_pred", len = length(yp)),
-    list(name = "group",  len = length(grp))
+    list(name = "group", len = length(grp))
   )
 
   rates <- .morie_fairness_favorable_rates(yp, grp, favorable)
@@ -417,17 +414,21 @@ morie_fairness_demographic_parity <- function(y_pred, group,
 
   non_ref <- gaps[names(gaps) != priv]
   finite_nr <- non_ref[is.finite(non_ref)]
-  worst <- if (length(finite_nr) > 0L) finite_nr[which.max(abs(finite_nr))]
-           else if (length(non_ref) > 0L) NA_real_ else 0.0
+  worst <- if (length(finite_nr) > 0L) {
+    finite_nr[which.max(abs(finite_nr))]
+  } else if (length(non_ref) > 0L) NA_real_ else 0.0
   worst_val <- as.numeric(worst)
 
   interp <- paste0(
-    sprintf("The largest favourable-rate gap is %+.3f (group rate minus the '%s' reference rate). ",
-            worst_val, priv),
-    if (abs(worst_val) >= 0.1)
+    sprintf(
+      "The largest favourable-rate gap is %+.3f (group rate minus the '%s' reference rate). ",
+      worst_val, priv
+    ),
+    if (abs(worst_val) >= 0.1) {
       "A gap far from zero means favourable outcomes differ materially across groups, i.e. the system grants them at different rates."
-    else
+    } else {
       "Gaps are small; favourable-outcome rates are close to parity, though this does not account for differences in ground-truth base rates."
+    }
   )
 
   .morie_fairness_result(
@@ -470,10 +471,10 @@ morie_fairness_demographic_parity <- function(y_pred, group,
 #' @return A \code{morie_fairness_result}; headline value is the
 #'   largest absolute TPR-or-FPR gap.
 #' @examples
-#' truth <- c(1,0,1,0,1,0,1,0)
-#' pred  <- c(1,0,1,0,1,1,0,1)
-#' race  <- c("A","A","A","A","B","B","B","B")
-#' morie_fairness_equalized_odds(truth, pred, race, privileged="A")$value
+#' truth <- c(1, 0, 1, 0, 1, 0, 1, 0)
+#' pred <- c(1, 0, 1, 0, 1, 1, 0, 1)
+#' race <- c("A", "A", "A", "A", "B", "B", "B", "B")
+#' morie_fairness_equalized_odds(truth, pred, race, privileged = "A")$value
 #' @export
 morie_fairness_equalized_odds <- function(y_true, y_pred, group,
                                           privileged = NULL,
@@ -484,7 +485,7 @@ morie_fairness_equalized_odds <- function(y_true, y_pred, group,
   .morie_fairness_check_aligned(
     list(name = "y_true", len = length(yt)),
     list(name = "y_pred", len = length(yp)),
-    list(name = "group",  len = length(grp))
+    list(name = "group", len = length(grp))
   )
 
   per <- .morie_fairness_rates_from_labels(yt, yp, grp, favorable)
@@ -524,8 +525,10 @@ morie_fairness_equalized_odds <- function(y_true, y_pred, group,
     )
   }
 
-  all_gaps <- c(tpr_gaps[names(tpr_gaps) != priv],
-                fpr_gaps[names(fpr_gaps) != priv])
+  all_gaps <- c(
+    tpr_gaps[names(tpr_gaps) != priv],
+    fpr_gaps[names(fpr_gaps) != priv]
+  )
   finite <- all_gaps[is.finite(all_gaps)]
   worst <- if (length(finite) > 0L) finite[which.max(abs(finite))] else NaN
   worst_val <- as.numeric(worst)
@@ -533,10 +536,11 @@ morie_fairness_equalized_odds <- function(y_true, y_pred, group,
 
   interp <- paste0(
     sprintf("The largest equalized-odds gap is %+.3f. ", worst_val),
-    if (violation)
+    if (violation) {
       "Error rates differ substantially across groups: the system is not equally accurate for everyone, which is a stronger fairness concern than an outcome-rate gap alone."
-    else
+    } else {
       "TPR and FPR are close across groups; the system's error profile is roughly even."
+    }
   )
 
   .morie_fairness_result(
@@ -594,7 +598,7 @@ morie_fairness_average_odds_difference <- function(y_true, y_pred, group,
   .morie_fairness_check_aligned(
     list(name = "y_true", len = length(yt)),
     list(name = "y_pred", len = length(yp)),
-    list(name = "group",  len = length(grp))
+    list(name = "group", len = length(grp))
   )
 
   per <- .morie_fairness_rates_from_labels(yt, yp, grp, favorable)
@@ -678,8 +682,10 @@ morie_fairness_gini <- function(values, group = NULL) {
   vals <- as.numeric(.morie_fairness_as_1d(values, "values"))
   warnings <- character(0)
   if (any(vals < 0, na.rm = TRUE)) {
-    warnings <- c(warnings,
-      "negative values present; the Gini coefficient assumes non-negative quantities and the result may be uninformative.")
+    warnings <- c(
+      warnings,
+      "negative values present; the Gini coefficient assumes non-negative quantities and the result may be uninformative."
+    )
   }
 
   overall <- .morie_fairness_gini_core(vals)
@@ -690,7 +696,7 @@ morie_fairness_gini <- function(values, group = NULL) {
     grp <- .morie_fairness_as_1d(group, "group")
     .morie_fairness_check_aligned(
       list(name = "values", len = length(vals)),
-      list(name = "group",  len = length(grp))
+      list(name = "group", len = length(grp))
     )
     rows <- list()
     for (g in .morie_fairness_ordered_unique(grp)) {
@@ -711,10 +717,11 @@ morie_fairness_gini <- function(values, group = NULL) {
 
   interp <- paste0(
     sprintf("Gini = %.3f. ", overall),
-    if (overall >= 0.5)
+    if (overall >= 0.5) {
       "The quantity is highly concentrated - a small share of units absorbs most of it."
-    else
+    } else {
       "The quantity is relatively evenly spread."
+    }
   )
 
   .morie_fairness_result(
@@ -723,8 +730,10 @@ morie_fairness_gini <- function(values, group = NULL) {
     sections = sections,
     warnings = warnings,
     interpretation = interp,
-    payload = list(value = overall, gini = overall,
-                   per_group = per_group)
+    payload = list(
+      value = overall, gini = overall,
+      per_group = per_group
+    )
   )
 }
 
@@ -759,7 +768,7 @@ morie_fairness_bias_amplification <- function(y_pred, group,
   grp <- .morie_fairness_as_1d(group, "group")
   .morie_fairness_check_aligned(
     list(name = "y_pred", len = length(yp)),
-    list(name = "group",  len = length(grp))
+    list(name = "group", len = length(grp))
   )
 
   rates <- .morie_fairness_favorable_rates(yp, grp, favorable)
@@ -776,7 +785,9 @@ morie_fairness_bias_amplification <- function(y_pred, group,
   non_ref <- gaps[names(gaps) != priv]
   delta_parity <- if (length(non_ref) > 0L) {
     as.numeric(non_ref[which.max(abs(non_ref))])
-  } else 0.0
+  } else {
+    0.0
+  }
 
   rate_vec <- vapply(rates, function(r) r$rate, numeric(1))
   gini <- .morie_fairness_gini_core(rate_vec)
@@ -793,12 +804,15 @@ morie_fairness_bias_amplification <- function(y_pred, group,
   }
 
   interp <- paste0(
-    sprintf("Bias Amplification Score = %+.4f (parity gap %+.3f x Gini %.3f). ",
-            bas, delta_parity, gini),
-    if (abs(bas) >= 0.05)
+    sprintf(
+      "Bias Amplification Score = %+.4f (parity gap %+.3f x Gini %.3f). ",
+      bas, delta_parity, gini
+    ),
+    if (abs(bas) >= 0.05) {
       "Both a directional disparity and substantial cross-group inequality are present - the system amplifies bias."
-    else
+    } else {
       "At least one component is small, so little amplification is indicated."
+    }
   )
 
   .morie_fairness_result(

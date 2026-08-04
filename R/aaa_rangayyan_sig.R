@@ -13,8 +13,12 @@ AICorder <- function(prediction_errors, n_samples, window = "hamming") {
   n <- as.integer(n_samples)
   if (n <= 0) stop("n_samples must be positive")
   frac <- if (is.character(window)) {
-    switch(tolower(window), hamming = 0.4, rectangular = 1, none = 1,
-           stop("unknown window: ", window))
+    switch(tolower(window),
+      hamming = 0.4,
+      rectangular = 1,
+      none = 1,
+      stop("unknown window: ", window)
+    )
   } else {
     f <- as.numeric(window)
     if (f <= 0 || f > 1) stop("effective-sample fraction must be in (0, 1]")
@@ -22,8 +26,10 @@ AICorder <- function(prediction_errors, n_samples, window = "hamming") {
   }
   n_eff <- frac * n
   crit <- log(eps) + 2 * seq_along(eps) / n_eff
-  list(order = which.min(crit), criterion = crit, n_effective = n_eff,
-       method = "Rangayyan (2024) eq. (7.60)")
+  list(
+    order = which.min(crit), criterion = crit, n_effective = n_eff,
+    method = "Rangayyan (2024) eq. (7.60)"
+  )
 }
 
 .morie_dft_power <- function(seg) {
@@ -47,8 +53,9 @@ BartlettPSD <- function(x, fs = 1, n_segments = NULL,
   xs <- as.numeric(x)
   n <- length(xs)
   if (n < 2) stop("need at least two samples")
-  if (is.null(n_segments) == is.null(segment_length))
+  if (is.null(n_segments) == is.null(segment_length)) {
     stop("give exactly one of n_segments, segment_length")
+  }
   if (!is.null(n_segments)) {
     k <- as.integer(n_segments)
     if (k < 1) stop("n_segments must be positive")
@@ -66,9 +73,11 @@ BartlettPSD <- function(x, fs = 1, n_segments = NULL,
     acc <- if (is.null(acc)) p else acc + p
   }
   psd <- acc / k
-  list(psd = psd, freqs = (seq_along(psd) - 1) * fs / m,
-       n_segments = k, segment_length = m,
-       method = "Rangayyan (2024) eqs. (6.14)-(6.16)")
+  list(
+    psd = psd, freqs = (seq_along(psd) - 1) * fs / m,
+    n_segments = k, segment_length = m,
+    method = "Rangayyan (2024) eqs. (6.14)-(6.16)"
+  )
 }
 
 ARtoCepstrum <- function(a_coeffs, gain = NULL) {
@@ -94,8 +103,10 @@ ARtoCepstrum <- function(a_coeffs, gain = NULL) {
     if (g <= 0) stop("gain must be positive")
     c0 <- log(g)
   }
-  list(cepstrum = h[-1], c0 = c0, order = p,
-       method = "Rangayyan (2024) eq. (7.65)")
+  list(
+    cepstrum = h[-1], c0 = c0, order = p,
+    method = "Rangayyan (2024) eq. (7.65)"
+  )
 }
 
 # pre-policy spellings

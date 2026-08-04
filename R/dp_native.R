@@ -16,7 +16,9 @@
   if (!is.finite(epsilon) || epsilon <= 0) {
     stop("epsilon must be finite and positive", call. = FALSE)
   }
-  if (is.null(delta)) return(list(epsilon = epsilon, delta = NULL))
+  if (is.null(delta)) {
+    return(list(epsilon = epsilon, delta = NULL))
+  }
   delta <- as.numeric(delta)[1L]
   if (delta < 0 || delta >= 1) stop("delta must be in [0, 1)", call. = FALSE)
   list(epsilon = epsilon, delta = delta)
@@ -30,8 +32,10 @@
 
 .morie_dp_gaussian_sigma <- function(sensitivity, epsilon, delta) {
   if (delta <= 0) {
-    stop(paste("the Gaussian mechanism needs delta > 0; use the Laplace",
-               "mechanism for pure epsilon-DP"), call. = FALSE)
+    stop(paste(
+      "the Gaussian mechanism needs delta > 0; use the Laplace",
+      "mechanism for pure epsilon-DP"
+    ), call. = FALSE)
   }
   as.numeric(sensitivity) * sqrt(2 * log(1.25 / delta)) / as.numeric(epsilon)
 }
@@ -46,7 +50,9 @@
 }
 
 .morie_dp_seed <- function(seed) {
-  if (is.null(seed)) return(NULL)
+  if (is.null(seed)) {
+    return(NULL)
+  }
   old <- if (exists(".Random.seed", envir = globalenv())) {
     get(".Random.seed", envir = globalenv())
   } else {
@@ -81,8 +87,10 @@
 #'   Calibrating noise to sensitivity in private data analysis.
 #'   \emph{TCC}, 265-284.
 #' @examples
-#' morie_dp_laplace_mechanism(42, sensitivity = 1, epsilon = 0.5,
-#'                            seed = 1)$noise_scale
+#' morie_dp_laplace_mechanism(42,
+#'   sensitivity = 1, epsilon = 0.5,
+#'   seed = 1
+#' )$noise_scale
 #' @export
 morie_dp_laplace_mechanism <- function(y, sensitivity = 1, epsilon = 1,
                                        seed = NULL) {
@@ -94,9 +102,11 @@ morie_dp_laplace_mechanism <- function(y, sensitivity = 1, epsilon = 1,
   on.exit(.morie_dp_unseed(old), add = TRUE)
   b <- sensitivity / eps
   rel <- y + .morie_dp_rlaplace(length(y), b)
-  list(release = rel, noise_scale = b, noise_sd = sqrt(2) * b, epsilon = eps,
-       delta = 0, sensitivity = sensitivity, mechanism = "laplace",
-       method = "dp_laplace_mechanism")
+  list(
+    release = rel, noise_scale = b, noise_sd = sqrt(2) * b, epsilon = eps,
+    delta = 0, sensitivity = sensitivity, mechanism = "laplace",
+    method = "dp_laplace_mechanism"
+  )
 }
 
 
@@ -133,14 +143,18 @@ morie_dp_gaussian_mechanism <- function(y, sensitivity = 1, epsilon = 1,
   rel <- y + stats::rnorm(length(y), 0, sigma)
   warn <- character(0)
   if (bud$epsilon > 1) {
-    warn <- sprintf(paste("the classical Gaussian bound requires epsilon <= 1",
-                          "but epsilon=%g; sigma here is not a proof of",
-                          "(epsilon, delta)-DP -- use the analytic Gaussian",
-                          "mechanism or split the budget"), bud$epsilon)
+    warn <- sprintf(paste(
+      "the classical Gaussian bound requires epsilon <= 1",
+      "but epsilon=%g; sigma here is not a proof of",
+      "(epsilon, delta)-DP -- use the analytic Gaussian",
+      "mechanism or split the budget"
+    ), bud$epsilon)
   }
-  list(release = rel, sigma = sigma, noise_sd = sigma, epsilon = bud$epsilon,
-       delta = bud$delta, sensitivity = sensitivity, mechanism = "gaussian",
-       warnings = warn, method = "dp_gaussian_mechanism")
+  list(
+    release = rel, sigma = sigma, noise_sd = sigma, epsilon = bud$epsilon,
+    delta = bud$delta, sensitivity = sensitivity, mechanism = "gaussian",
+    warnings = warn, method = "dp_gaussian_mechanism"
+  )
 }
 
 
@@ -166,7 +180,8 @@ morie_dp_gaussian_mechanism <- function(y, sensitivity = 1, epsilon = 1,
 #'   differential privacy. \emph{FOCS}, 94-103.
 #' @examples
 #' r <- morie_dp_exponential_mechanism(c("a", "b", "c"), c(0, 5, 1),
-#'                                     epsilon = 2, seed = 1)
+#'   epsilon = 2, seed = 1
+#' )
 #' round(r$probabilities, 3)
 #' @export
 morie_dp_exponential_mechanism <- function(candidates, utility, epsilon = 1,
@@ -177,8 +192,10 @@ morie_dp_exponential_mechanism <- function(candidates, utility, epsilon = 1,
   cands <- as.list(candidates)
   u <- as.numeric(utility)
   if (length(u) != length(cands)) {
-    stop(sprintf("utility has %d entries but there are %d candidates",
-                 length(u), length(cands)), call. = FALSE)
+    stop(sprintf(
+      "utility has %d entries but there are %d candidates",
+      length(u), length(cands)
+    ), call. = FALSE)
   }
   if (!all(is.finite(u))) stop("utility must be finite", call. = FALSE)
   logp <- eps * u / (2 * sensitivity)
@@ -188,9 +205,11 @@ morie_dp_exponential_mechanism <- function(candidates, utility, epsilon = 1,
   old <- .morie_dp_seed(seed)
   on.exit(.morie_dp_unseed(old), add = TRUE)
   idx <- sample.int(length(cands), 1L, prob = p)
-  list(selected = cands[[idx]], index = as.integer(idx - 1L),
-       probabilities = p, epsilon = eps, sensitivity = sensitivity,
-       mechanism = "exponential", method = "dp_exponential_mechanism")
+  list(
+    selected = cands[[idx]], index = as.integer(idx - 1L),
+    probabilities = p, epsilon = eps, sensitivity = sensitivity,
+    mechanism = "exponential", method = "dp_exponential_mechanism"
+  )
 }
 
 
@@ -233,9 +252,11 @@ morie_randomized_response_dp <- function(truth, epsilon = 1, seed = NULL) {
   est <- (raw - (1 - p)) / (2 * p - 1)
   n <- length(t)
   var <- raw * (1 - raw) / max(n, 1) / (2 * p - 1)^2
-  list(responses = resp, p_truth = p, raw_proportion = raw, estimate = est,
-       se = sqrt(max(var, 0)), n = as.integer(n), epsilon = eps,
-       mechanism = "randomized_response", method = "randomized_response_dp")
+  list(
+    responses = resp, p_truth = p, raw_proportion = raw, estimate = est,
+    se = sqrt(max(var, 0)), n = as.integer(n), epsilon = eps,
+    mechanism = "randomized_response", method = "randomized_response_dp"
+  )
 }
 
 
@@ -280,9 +301,11 @@ morie_dp_count <- function(D, epsilon = 1, predicate = NULL, seed = NULL,
   b <- 1 / eps
   raw <- true_count + .morie_dp_rlaplace(1L, b)
   rel <- if (nonneg) max(raw, 0) else raw
-  list(release = rel, raw = raw, true_count = true_count, noise_scale = b,
-       sensitivity = 1, epsilon = eps, clamped = nonneg && raw < 0,
-       method = "dp_count")
+  list(
+    release = rel, raw = raw, true_count = true_count, noise_scale = b,
+    sensitivity = 1, epsilon = eps, clamped = nonneg && raw < 0,
+    method = "dp_count"
+  )
 }
 
 
@@ -320,16 +343,20 @@ morie_dp_sum <- function(x, a, b, epsilon = 1, seed = NULL) {
   old <- .morie_dp_seed(seed)
   on.exit(.morie_dp_unseed(old), add = TRUE)
   rel <- sum(cl$x) + .morie_dp_rlaplace(1L, scale)
-  list(release = rel, true_sum = sum(cl$x), noise_scale = scale,
-       sensitivity = sens, clipped_fraction = clipped_frac,
-       bounds = c(cl$a, cl$b), n = length(cl$x), epsilon = eps,
-       warnings = if (clipped_frac > 0.1) {
-         paste("more than 10% of values were clipped; the bounds are biting",
-               "and the release is biased toward the interior")
-       } else {
-         character(0)
-       },
-       method = "dp_sum")
+  list(
+    release = rel, true_sum = sum(cl$x), noise_scale = scale,
+    sensitivity = sens, clipped_fraction = clipped_frac,
+    bounds = c(cl$a, cl$b), n = length(cl$x), epsilon = eps,
+    warnings = if (clipped_frac > 0.1) {
+      paste(
+        "more than 10% of values were clipped; the bounds are biting",
+        "and the release is biased toward the interior"
+      )
+    } else {
+      character(0)
+    },
+    method = "dp_sum"
+  )
 }
 
 
@@ -373,9 +400,11 @@ morie_dp_quantile <- function(x, q = 0.5, epsilon = 1, a = NULL, b = NULL,
       a <- a - 0.5
       b <- b + 0.5
     }
-    warn <- paste("bounds were taken from the data, which is itself a",
-                  "non-private query; supply `a` and `b` from outside the",
-                  "data for a real release")
+    warn <- paste(
+      "bounds were taken from the data, which is itself a",
+      "non-private query; supply `a` and `b` from outside the",
+      "data for a real release"
+    )
   }
   cl <- .morie_dp_clip(v, a, b)
   s <- sort(cl$x)
@@ -392,11 +421,15 @@ morie_dp_quantile <- function(x, q = 0.5, epsilon = 1, a = NULL, b = NULL,
   on.exit(.morie_dp_unseed(old), add = TRUE)
   i <- sample.int(n + 1L, 1L, prob = p)
   rel <- stats::runif(1L, edges[i], edges[i + 1L])
-  list(release = rel, true_quantile = stats::quantile(cl$x, q, names = FALSE,
-                                                      type = 7L),
-       interval = c(edges[i], edges[i + 1L]), probabilities = p,
-       bounds = c(cl$a, cl$b), q = q, n = as.integer(n), epsilon = eps,
-       warnings = warn, method = "dp_quantile")
+  list(
+    release = rel, true_quantile = stats::quantile(cl$x, q,
+      names = FALSE,
+      type = 7L
+    ),
+    interval = c(edges[i], edges[i + 1L]), probabilities = p,
+    bounds = c(cl$a, cl$b), q = q, n = as.integer(n), epsilon = eps,
+    warnings = warn, method = "dp_quantile"
+  )
 }
 
 
@@ -416,11 +449,15 @@ morie_dp_quantile <- function(x, q = 0.5, epsilon = 1, a = NULL, b = NULL,
 #' round(morie_dp_median(rnorm(500), epsilon = 2, a = -4, b = 4)$release, 2)
 #' @export
 morie_dp_median <- function(x, epsilon = 1, a = NULL, b = NULL, seed = NULL) {
-  r <- morie_dp_quantile(x, q = 0.5, epsilon = epsilon, a = a, b = b,
-                         seed = seed)
-  list(release = r$release, true_median = r$true_quantile,
-       interval = r$interval, bounds = r$bounds, n = r$n, epsilon = r$epsilon,
-       warnings = r$warnings, method = "dp_median")
+  r <- morie_dp_quantile(x,
+    q = 0.5, epsilon = epsilon, a = a, b = b,
+    seed = seed
+  )
+  list(
+    release = r$release, true_median = r$true_quantile,
+    interval = r$interval, bounds = r$bounds, n = r$n, epsilon = r$epsilon,
+    warnings = r$warnings, method = "dp_median"
+  )
 }
 
 
@@ -455,7 +492,8 @@ morie_dp_histogram <- function(x, bins = 10, epsilon = 1, range_ = NULL,
   if (length(bins) == 1L) {
     if (bins < 1) {
       stop("bins must be a positive integer or an array of edges",
-           call. = FALSE)
+        call. = FALSE
+      )
     }
     rng_ <- if (is.null(range_)) range(v) else as.numeric(range_)
     edges <- seq(rng_[1L], rng_[2L], length.out = as.integer(bins) + 1L)
@@ -472,7 +510,9 @@ morie_dp_histogram <- function(x, bins = 10, epsilon = 1, range_ = NULL,
   on.exit(.morie_dp_unseed(old), add = TRUE)
   raw <- as.numeric(counts) + .morie_dp_rlaplace(nb, scale)
   rel <- if (nonneg) pmax(raw, 0) else raw
-  list(release = rel, raw = raw, true_counts = counts, edges = edges,
-       noise_scale = scale, sensitivity = sens, epsilon = eps,
-       method = "dp_histogram")
+  list(
+    release = rel, raw = raw, true_counts = counts, edges = edges,
+    noise_scale = scale, sensitivity = sens, epsilon = eps,
+    method = "dp_histogram"
+  )
 }

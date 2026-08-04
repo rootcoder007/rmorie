@@ -90,39 +90,61 @@ NULL
                               check_na = FALSE) {
   if (is.matrix(data)) data <- as.data.frame(data)
   if (!is.data.frame(data)) {
-    stop(sprintf("`%s` must be a data.frame-like table, not %s.",
-                 arg, class(data)[1L]), call. = FALSE)
+    stop(sprintf(
+      "`%s` must be a data.frame-like table, not %s.",
+      arg, class(data)[1L]
+    ), call. = FALSE)
   }
-  data <- as.data.frame(data)                       # tibble/dt -> df (G2.7/G2.8)
+  data <- as.data.frame(data) # tibble/dt -> df (G2.7/G2.8)
   listcols <- names(data)[vapply(data, is.list, logical(1))]
-  if (length(listcols)) {                           # G2.12
-    stop(sprintf("`%s` has unsupported list-column(s): %s.",
-                 arg, paste(listcols, collapse = ", ")), call. = FALSE)
+  if (length(listcols)) { # G2.12
+    stop(sprintf(
+      "`%s` has unsupported list-column(s): %s.",
+      arg, paste(listcols, collapse = ", ")
+    ), call. = FALSE)
   }
   missing_cols <- setdiff(required, names(data))
   if (length(missing_cols)) {
-    stop(sprintf("`%s` is missing required column(s): %s.",
-                 arg, paste(missing_cols, collapse = ", ")), call. = FALSE)
+    stop(sprintf(
+      "`%s` is missing required column(s): %s.",
+      arg, paste(missing_cols, collapse = ", ")
+    ), call. = FALSE)
   }
   # G2.13 / G2.14: `check_na` selects the missing-data policy.
   #   TRUE / "message" -- report and let the estimator drop rows (G2.14b)
   #   "error"          -- refuse to proceed (G2.14a), for estimators whose
   #                       result would be meaningless on incomplete rows
   if (!isFALSE(check_na) && length(required)) {
-    policy <- if (isTRUE(check_na)) "message" else match.arg(
-      as.character(check_na), c("message", "error"))
-    na_cols <- required[vapply(required,
-                               function(c) anyNA(data[[c]]), logical(1))]
+    policy <- if (isTRUE(check_na)) {
+      "message"
+    } else {
+      match.arg(
+        as.character(check_na), c("message", "error")
+      )
+    }
+    na_cols <- required[vapply(
+      required,
+      function(c) anyNA(data[[c]]), logical(1)
+    )]
     if (length(na_cols)) {
       if (policy == "error") {
-        stop(sprintf("`%s`: missing values in %s; this estimator cannot ",
-                     arg, paste(na_cols, collapse = ", ")),
-             "proceed on incomplete rows. Drop or impute them first ",
-             "(see `morie_impute_column()`).", call. = FALSE)
+        stop(
+          sprintf(
+            "`%s`: missing values in %s; this estimator cannot ",
+            arg, paste(na_cols, collapse = ", ")
+          ),
+          "proceed on incomplete rows. Drop or impute them first ",
+          "(see `morie_impute_column()`).",
+          call. = FALSE
+        )
       }
-      message(sprintf("`%s`: missing values present in %s; ",
-                      arg, paste(na_cols, collapse = ", ")),
-              "incomplete rows are dropped by the estimator.")
+      message(
+        sprintf(
+          "`%s`: missing values present in %s; ",
+          arg, paste(na_cols, collapse = ", ")
+        ),
+        "incomplete rows are dropped by the estimator."
+      )
     }
   }
   data
@@ -153,8 +175,10 @@ NULL
 #' @examples
 #' morie_impute_column(c(1, 2, NA, 4), "median")$values
 #' @export
-morie_impute_column <- function(x, method = c("median", "mean", "mode",
-                                              "locf")) {
+morie_impute_column <- function(x, method = c(
+                                  "median", "mean", "mode",
+                                  "locf"
+                                )) {
   method <- match.arg(method)
   miss <- is.na(x)
   n_imputed <- sum(miss)
@@ -163,11 +187,16 @@ morie_impute_column <- function(x, method = c("median", "mean", "mode",
   }
   if (method %in% c("median", "mean")) {
     if (!is.numeric(x)) {
-      stop(sprintf("`method = \"%s\"` needs a numeric column, got %s.",
-                   method, class(x)[1L]), call. = FALSE)
+      stop(sprintf(
+        "`method = \"%s\"` needs a numeric column, got %s.",
+        method, class(x)[1L]
+      ), call. = FALSE)
     }
-    fill <- if (method == "median") stats::median(x, na.rm = TRUE)
-            else mean(x, na.rm = TRUE)
+    fill <- if (method == "median") {
+      stats::median(x, na.rm = TRUE)
+    } else {
+      mean(x, na.rm = TRUE)
+    }
     x[miss] <- fill
   } else if (method == "mode") {
     obs <- x[!miss]
@@ -188,19 +217,24 @@ morie_impute_column <- function(x, method = c("median", "mean", "mode",
 #' Internal helper: Morie Check Scalar
 #' @noRd
 .morie_check_scalar <- function(x,
-                                type = c("numeric", "character",
-                                         "logical", "integer"),
+                                type = c(
+                                  "numeric", "character",
+                                  "logical", "integer"
+                                ),
                                 arg = "x") {
   type <- match.arg(type)
-  if (length(x) != 1L) {                            # G2.0 / G2.2
-    stop(sprintf("`%s` must be a single value, got length %d.",
-                 arg, length(x)), call. = FALSE)
+  if (length(x) != 1L) { # G2.0 / G2.2
+    stop(sprintf(
+      "`%s` must be a single value, got length %d.",
+      arg, length(x)
+    ), call. = FALSE)
   }
-  ok <- switch(type,                                # G2.1
+  ok <- switch(type, # G2.1
     numeric   = is.numeric(x),
     integer   = is.numeric(x),
     character = is.character(x),
-    logical   = is.logical(x))
+    logical   = is.logical(x)
+  )
   if (!ok) stop(sprintf("`%s` must be %s.", arg, type), call. = FALSE)
   x
 }
@@ -209,14 +243,17 @@ morie_impute_column <- function(x, method = c("median", "mean", "mode",
 #' Internal helper: Morie Check Numvec
 #' @noRd
 .morie_check_numvec <- function(x, arg = "x", finite = TRUE, min_len = 1L) {
-  x <- as.numeric(x)                                # G2.4b / G2.6
+  x <- as.numeric(x) # G2.4b / G2.6
   if (length(x) < min_len) {
-    stop(sprintf("`%s` must have length >= %d, got %d.",
-                 arg, min_len, length(x)), call. = FALSE)
+    stop(sprintf(
+      "`%s` must have length >= %d, got %d.",
+      arg, min_len, length(x)
+    ), call. = FALSE)
   }
-  if (isTRUE(finite) && any(!is.finite(x))) {       # G2.16
+  if (isTRUE(finite) && any(!is.finite(x))) { # G2.16
     stop(sprintf("`%s` contains non-finite values (NA/NaN/Inf).", arg),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   x
 }
@@ -247,12 +284,18 @@ morie_impute_column <- function(x, method = c("median", "mean", "mode",
 #' Internal helper: Morie Coerce Units
 #' @noRd
 .morie_coerce_units <- function(x, arg = "x") {
-  if (is.numeric(x) && is.null(attr(x, "class"))) return(as.numeric(x))
-  v <- tryCatch(as.numeric(x), warning = function(w) NULL,
-                error = function(e) NULL)
+  if (is.numeric(x) && is.null(attr(x, "class"))) {
+    return(as.numeric(x))
+  }
+  v <- tryCatch(as.numeric(x),
+    warning = function(w) NULL,
+    error = function(e) NULL
+  )
   if (is.null(v) || all(is.na(v)) && !all(is.na(x))) {
-    stop(sprintf("`%s` has a non-standard class that is not numeric-coercible.",
-                 arg), call. = FALSE)
+    stop(sprintf(
+      "`%s` has a non-standard class that is not numeric-coercible.",
+      arg
+    ), call. = FALSE)
   }
   v
 }

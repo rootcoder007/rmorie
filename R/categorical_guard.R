@@ -40,24 +40,32 @@
 #' @export
 morie_safe_recode <- function(x, mapping, keep = character()) {
   if (is.factor(x)) x <- as.character(x)
-  stopifnot(is.character(mapping), !is.null(names(mapping)),
-            all(nzchar(names(mapping))))
+  stopifnot(
+    is.character(mapping), !is.null(names(mapping)),
+    all(nzchar(names(mapping)))
+  )
   seen <- unique(x[!is.na(x)])
   unmapped <- setdiff(seen, c(names(mapping), keep))
   if (length(unmapped)) {
     stop("morie_safe_recode: values with NO mapping: ",
-         paste(sQuote(unmapped), collapse = ", "),
-         ". Every observed category must be mapped by name (or ",
-         "listed in `keep`); silent pass-through is how group ",
-         "labels get corrupted.", call. = FALSE)
+      paste(sQuote(unmapped), collapse = ", "),
+      ". Every observed category must be mapped by name (or ",
+      "listed in `keep`); silent pass-through is how group ",
+      "labels get corrupted.",
+      call. = FALSE
+    )
   }
   out <- ifelse(is.na(x), NA_character_,
-                ifelse(x %in% names(mapping),
-                       unname(mapping[x]), x))
+    ifelse(x %in% names(mapping),
+      unname(mapping[x]), x
+    )
+  )
   attr(out, "morie_recode_audit") <- list(
     mapping = mapping, kept = keep,
     checksum = .rmorie_sha256_hex_impl(
-      paste(names(mapping), mapping, sep = "=", collapse = ";")))
+      paste(names(mapping), mapping, sep = "=", collapse = ";")
+    )
+  )
   out
 }
 
@@ -76,20 +84,24 @@ morie_safe_recode <- function(x, mapping, keep = character()) {
 #' @return A factor with exactly the declared levels.
 #' @examples
 #' morie_safe_factor(c("White", "Black", "White"),
-#'                   levels = c("White", "Black"))
+#'   levels = c("White", "Black")
+#' )
 #' @export
 morie_safe_factor <- function(x, levels, reference = NULL) {
   if (is.factor(x)) x <- as.character(x)
   stray <- setdiff(unique(x[!is.na(x)]), levels)
   if (length(stray)) {
     stop("morie_safe_factor: values outside the declared levels: ",
-         paste(sQuote(stray), collapse = ", "), call. = FALSE)
+      paste(sQuote(stray), collapse = ", "),
+      call. = FALSE
+    )
   }
   if (!is.null(reference) && !identical(reference, levels[1L])) {
     stop("morie_safe_factor: declared reference ", sQuote(reference),
-         " is not levels[1] (", sQuote(levels[1L]), "); reorder ",
-         "`levels` so the reference is explicit and first.",
-         call. = FALSE)
+      " is not levels[1] (", sQuote(levels[1L]), "); reorder ",
+      "`levels` so the reference is explicit and first.",
+      call. = FALSE
+    )
   }
   factor(x, levels = levels)
 }
@@ -113,8 +125,10 @@ morie_safe_factor <- function(x, levels, reference = NULL) {
 #'   \code{hazards}) plus a \code{clean} attribute. Its print method
 #'   shouts the hazards.
 #' @examples
-#' df <- data.frame(race = factor(c("1", "2", "2", "3")),
-#'                  city = c("Toronto", "toronto", "Ottawa", "Ottawa"))
+#' df <- data.frame(
+#'   race = factor(c("1", "2", "2", "3")),
+#'   city = c("Toronto", "toronto", "Ottawa", "Ottawa")
+#' )
 #' morie_audit_categories(df)
 #' @export
 morie_audit_categories <- function(data, cols = NULL) {
@@ -123,59 +137,87 @@ morie_audit_categories <- function(data, cols = NULL) {
     is.factor(v) || is.character(v) ||
       inherits(v, c("haven_labelled", "labelled"))
   }
-  if (is.null(cols)) cols <- names(data)[vapply(data, is_cat,
-                                                logical(1))]
+  if (is.null(cols)) {
+    cols <- names(data)[vapply(
+      data, is_cat,
+      logical(1)
+    )]
+  }
   rows <- lapply(cols, function(cn) {
     v <- data[[cn]]
     hazards <- character(0)
     if (inherits(v, c("haven_labelled", "labelled"))) {
-      hazards <- c(hazards,
-                   "still carries foreign value labels: decode to ",
-                   "labels BEFORE analysis (the numeric codes are ",
-                   "NOT the categories)")
+      hazards <- c(
+        hazards,
+        "still carries foreign value labels: decode to ",
+        "labels BEFORE analysis (the numeric codes are ",
+        "NOT the categories)"
+      )
       v <- as.character(v)
     }
-    lv <- if (is.factor(v)) levels(v) else
+    lv <- if (is.factor(v)) {
+      levels(v)
+    } else {
       as.character(sort(unique(v[!is.na(v)])))
+    }
     obs <- unique(as.character(v[!is.na(v)]))
     if (length(lv) && all(grepl("^[0-9.]+$", lv))) {
       hazards <- c(hazards, paste0(
         "all labels numeric-looking (", paste(utils::head(lv, 4),
-                                              collapse = ","),
+          collapse = ","
+        ),
         "...): likely imported CODES whose value labels were lost; ",
         "as.numeric() on this column returns level INDICES, not ",
-        "data"))
+        "data"
+      ))
     }
     lc <- tolower(lv)
     if (anyDuplicated(lc)) {
       dup <- lv[lc %in% lc[duplicated(lc)]]
-      hazards <- c(hazards, paste0("case-variant duplicate labels: ",
-                                   paste(sQuote(dup),
-                                         collapse = ", ")))
+      hazards <- c(hazards, paste0(
+        "case-variant duplicate labels: ",
+        paste(sQuote(dup),
+          collapse = ", "
+        )
+      ))
     }
     if (is.factor(v) && length(setdiff(lv, obs))) {
       hazards <- c(hazards, paste0(
         "unused levels: ", paste(sQuote(setdiff(lv, obs)),
-                                 collapse = ", ")))
+          collapse = ", "
+        )
+      ))
     }
     if (length(lv) > 50L) {
-      hazards <- c(hazards, paste0(length(lv),
-                                   " levels: identifier mistaken ",
-                                   "for a category?"))
+      hazards <- c(hazards, paste0(
+        length(lv),
+        " levels: identifier mistaken ",
+        "for a category?"
+      ))
     }
-    data.frame(column = cn,
-               storage = paste(class(data[[cn]]), collapse = "/"),
-               n_levels = length(lv),
-               levels = paste(utils::head(lv, 8), collapse = "|"),
-               reference = if (length(lv)) lv[1] else NA_character_,
-               hazards = if (length(hazards))
-                 paste(hazards, collapse = " ;; ") else "",
-               stringsAsFactors = FALSE)
+    data.frame(
+      column = cn,
+      storage = paste(class(data[[cn]]), collapse = "/"),
+      n_levels = length(lv),
+      levels = paste(utils::head(lv, 8), collapse = "|"),
+      reference = if (length(lv)) lv[1] else NA_character_,
+      hazards = if (length(hazards)) {
+        paste(hazards, collapse = " ;; ")
+      } else {
+        ""
+      },
+      stringsAsFactors = FALSE
+    )
   })
-  out <- if (length(rows)) do.call(rbind, rows) else
-    data.frame(column = character(), storage = character(),
-               n_levels = integer(), levels = character(),
-               reference = character(), hazards = character())
+  out <- if (length(rows)) {
+    do.call(rbind, rows)
+  } else {
+    data.frame(
+      column = character(), storage = character(),
+      n_levels = integer(), levels = character(),
+      reference = character(), hazards = character()
+    )
+  }
   attr(out, "clean") <- !any(nzchar(out$hazards))
   class(out) <- c("morie_category_audit", "data.frame")
   out
@@ -187,8 +229,10 @@ morie_audit_categories <- function(data, cols = NULL) {
 #' @param ... Ignored; accepted for S3 consistency.
 #' @examples
 #' \donttest{
-#' df <- data.frame(race = factor(c("1", "2", "2", "3")),
-#'                  city = c("Toronto", "toronto", "Ottawa", "Ottawa"))
+#' df <- data.frame(
+#'   race = factor(c("1", "2", "2", "3")),
+#'   city = c("Toronto", "toronto", "Ottawa", "Ottawa")
+#' )
 #' obj <- morie_audit_categories(df)
 #' print(obj)
 #' }
@@ -196,9 +240,11 @@ morie_audit_categories <- function(data, cols = NULL) {
 print.morie_category_audit <- function(x, ...) {
   cat("Categorical audit:", nrow(x), "column(s)\n")
   for (i in seq_len(nrow(x))) {
-    cat(sprintf("  %-16s %-10s %d level(s), reference %s\n",
-                x$column[i], x$storage[i], x$n_levels[i],
-                sQuote(x$reference[i])))
+    cat(sprintf(
+      "  %-16s %-10s %d level(s), reference %s\n",
+      x$column[i], x$storage[i], x$n_levels[i],
+      sQuote(x$reference[i])
+    ))
     if (nzchar(x$hazards[i])) {
       for (h in strsplit(x$hazards[i], " ;; ", fixed = TRUE)[[1]]) {
         cat("    !! HAZARD:", h, "\n")
@@ -224,7 +270,8 @@ print.morie_category_audit <- function(x, ...) {
 #' @return Invisibly, the cross-tabulation (as a data frame), if and
 #'   only if every check passes.
 #' @examples
-#' x <- c("W", "B", "W"); y <- c("White", "Black", "White")
+#' x <- c("W", "B", "W")
+#' y <- c("White", "Black", "White")
 #' morie_crosstab_verify(x, y, c(W = "White", B = "Black"))
 #' @export
 morie_crosstab_verify <- function(original, recoded, declared) {
@@ -232,13 +279,16 @@ morie_crosstab_verify <- function(original, recoded, declared) {
   if (is.factor(recoded)) recoded <- as.character(recoded)
   if (length(original) != length(recoded)) {
     stop("morie_crosstab_verify: length mismatch (", length(original),
-         " vs ", length(recoded), "): rows were lost or duplicated ",
-         "during the recode.", call. = FALSE)
+      " vs ", length(recoded), "): rows were lost or duplicated ",
+      "during the recode.",
+      call. = FALSE
+    )
   }
   if (!identical(is.na(original), is.na(recoded))) {
     stop("morie_crosstab_verify: missingness changed during the ",
-         "recode (values silently became NA, or NAs were filled).",
-         call. = FALSE)
+      "recode (values silently became NA, or NAs were filled).",
+      call. = FALSE
+    )
   }
   ok <- !is.na(original)
   tab <- table(original = original[ok], recoded = recoded[ok])
@@ -246,13 +296,16 @@ morie_crosstab_verify <- function(original, recoded, declared) {
   if (any(fan_out > 1L)) {
     bad <- names(fan_out)[fan_out > 1L]
     stop("morie_crosstab_verify: original category mapped to ",
-         "MULTIPLE new categories: ", paste(sQuote(bad),
-                                            collapse = ", "),
-         ". The recode is not a function of the category label.",
-         call. = FALSE)
+      "MULTIPLE new categories: ", paste(sQuote(bad),
+        collapse = ", "
+      ),
+      ". The recode is not a function of the category label.",
+      call. = FALSE
+    )
   }
-  realized <- apply(tab, 1L, function(r)
-    colnames(tab)[which(r > 0)])
+  realized <- apply(tab, 1L, function(r) {
+    colnames(tab)[which(r > 0)]
+  })
   for (old in names(realized)) {
     expected <- if (old %in% names(declared)) {
       unname(declared[old])
@@ -261,9 +314,11 @@ morie_crosstab_verify <- function(original, recoded, declared) {
     }
     if (!identical(realized[[old]], expected)) {
       stop("morie_crosstab_verify: ", sQuote(old), " was mapped to ",
-           sQuote(realized[[old]]), " but the declared mapping says ",
-           sQuote(expected), ". THIS is how groups get swapped; fix ",
-           "the recode before any model runs.", call. = FALSE)
+        sQuote(realized[[old]]), " but the declared mapping says ",
+        sQuote(expected), ". THIS is how groups get swapped; fix ",
+        "the recode before any model runs.",
+        call. = FALSE
+      )
     }
   }
   invisible(as.data.frame(tab))
@@ -280,18 +335,21 @@ morie_crosstab_verify <- function(original, recoded, declared) {
   if (is.factor(x) || is.character(x)) {
     lv <- if (is.factor(x)) levels(x) else unique(as.character(x))
     stop("Column ", sQuote(col), " is categorical (",
-         paste(sQuote(utils::head(lv, 4)), collapse = ", "),
-         "...). Refusing to coerce: as.numeric() on a factor ",
-         "returns level INDICES (1, 2, ...), not your data, and a ",
-         "mis-ordered level silently relabels every observation. ",
-         "Encode explicitly first, e.g. morie_safe_recode() + ",
-         "as.integer(x == \"treated_label\").", call. = FALSE)
+      paste(sQuote(utils::head(lv, 4)), collapse = ", "),
+      "...). Refusing to coerce: as.numeric() on a factor ",
+      "returns level INDICES (1, 2, ...), not your data, and a ",
+      "mis-ordered level silently relabels every observation. ",
+      "Encode explicitly first, e.g. morie_safe_recode() + ",
+      "as.integer(x == \"treated_label\").",
+      call. = FALSE
+    )
   }
   ux <- unique(x[!is.na(x)])
   if (!all(ux %in% c(0, 1))) {
     stop("Column ", sQuote(col), " must be binary 0/1 (saw: ",
-         paste(utils::head(ux, 5), collapse = ", "), ").",
-         call. = FALSE)
+      paste(utils::head(ux, 5), collapse = ", "), ").",
+      call. = FALSE
+    )
   }
   invisible(TRUE)
 }

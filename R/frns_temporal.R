@@ -51,7 +51,7 @@ NULL
 #' res <- morie_predpol_temporal_audit(period, city, pred, grp, privileged = "X")
 #' res$per_city$A$dir_range # 0 — disparity is stable across periods
 morie_predpol_temporal_audit <- function(period, city, y_pred, group,
-                                   privileged = NULL, favorable = 1) {
+                                         privileged = NULL, favorable = 1) {
   n <- length(period)
   if (!(n == length(city) && n == length(y_pred) && n == length(group))) {
     stop("period, city, y_pred and group must all align", call. = FALSE)

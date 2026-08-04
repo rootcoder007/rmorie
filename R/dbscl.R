@@ -14,7 +14,7 @@
 #' morie_dbscan_clustering(x = rnorm(50))
 #' @export
 morie_dbscan_clustering <- function(x, eps = 0.5, min_samples = 5L,
-                              metric = "euclidean") {
+                                    metric = "euclidean") {
   if (!requireNamespace("dbscan", quietly = TRUE)) {
     stop("Function 'morie_dbscan_clustering' requires package 'dbscan'. Install with install.packages('dbscan').")
   }

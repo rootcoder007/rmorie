@@ -43,12 +43,14 @@
 #' @export
 morie_datasets_vpd_legal_disclaimer <- function() {
   path <- system.file("extdata", "vpd_legal_disclaimer.txt",
-                      package = "rmorie")
+    package = "rmorie"
+  )
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", "vpd_legal_disclaimer.txt", package = "rmoriedata")
   }
-  if (!nzchar(path))
+  if (!nzchar(path)) {
     stop("bundled VPD legal disclaimer missing", call. = FALSE)
+  }
   readLines(path, warn = FALSE)
 }
 
@@ -157,56 +159,69 @@ morie_datasets_vpd_legal_disclaimer <- function() {
 #'   \url{https://geodash.vpd.ca/opendata/}.
 #' @examplesIf nzchar(system.file("extdata", "vpd_crime_sample.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_vpd_crime(offline = TRUE)
-#' nrow(df)              # 550
+#' nrow(df) # 550
 #' table(df$TYPE)
 #' table(df$NEIGHBOURHOOD)
 #' @export
 morie_datasets_vpd_crime <- function(offline = TRUE,
-                                       zip_path = NULL,
-                                       csv_path = NULL,
-                                       max_features = NULL,
-                                       accept_terms = FALSE) {
-  if (!is.null(zip_path) && !is.null(csv_path))
+                                     zip_path = NULL,
+                                     csv_path = NULL,
+                                     max_features = NULL,
+                                     accept_terms = FALSE) {
+  if (!is.null(zip_path) && !is.null(csv_path)) {
     stop("pass only one of zip_path / csv_path", call. = FALSE)
+  }
 
   if (!is.null(zip_path)) {
-    if (!file.exists(zip_path))
+    if (!file.exists(zip_path)) {
       stop(sprintf("VPD zip not found: %s", zip_path), call. = FALSE)
+    }
     .morie_vpd_terms_warning(accept_terms)
     tmp <- tempfile(fileext = ".csv")
     on.exit(unlink(tmp), add = TRUE)
     res <- system2("unzip",
-                    args = c("-p", shQuote(zip_path),
-                              "crimedata_csv_AllNeighbourhoods_AllYears.csv"),
-                    stdout = tmp)
-    if (!file.exists(tmp) || file.size(tmp) == 0L)
+      args = c(
+        "-p", shQuote(zip_path),
+        "crimedata_csv_AllNeighbourhoods_AllYears.csv"
+      ),
+      stdout = tmp
+    )
+    if (!file.exists(tmp) || file.size(tmp) == 0L) {
       stop("VPD zip extract failed -- ensure unzip is installed",
-           call. = FALSE)
+        call. = FALSE
+      )
+    }
     df <- utils::read.csv(tmp, stringsAsFactors = FALSE)
   } else if (!is.null(csv_path)) {
-    if (!file.exists(csv_path))
+    if (!file.exists(csv_path)) {
       stop(sprintf("VPD CSV not found: %s", csv_path), call. = FALSE)
+    }
     .morie_vpd_terms_warning(accept_terms)
     df <- utils::read.csv(csv_path, stringsAsFactors = FALSE)
   } else if (offline) {
     path <- system.file("extdata", "vpd_crime_sample.csv",
-                        package = "rmorie")
+      package = "rmorie"
+    )
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "vpd_crime_sample.csv",
-                          package = "rmoriedata")
+        package = "rmoriedata"
+      )
     }
-    if (!nzchar(path))
+    if (!nzchar(path)) {
       stop("bundled VPD crime sample missing", call. = FALSE)
+    }
     df <- utils::read.csv(path, stringsAsFactors = FALSE)
   } else {
     stop("VPD provides no automation API. Either set offline = TRUE ",
-         "(bundled sample) or download the zip manually from ",
-         "https://geodash.vpd.ca/opendata/ and pass zip_path = '...'.",
-         call. = FALSE)
+      "(bundled sample) or download the zip manually from ",
+      "https://geodash.vpd.ca/opendata/ and pass zip_path = '...'.",
+      call. = FALSE
+    )
   }
 
-  if (!is.null(max_features))
+  if (!is.null(max_features)) {
     df <- utils::head(df, as.integer(max_features))
+  }
   df
 }
 
@@ -215,12 +230,17 @@ morie_datasets_vpd_crime <- function(offline = TRUE,
 #' Internal helper: Morie Vpd Terms Warning
 #' @noRd
 .morie_vpd_terms_warning <- function(accept_terms) {
-  if (isTRUE(accept_terms)) return(invisible())
-  if (isTRUE(.MORIE_VPD_TERMS_WARNED$warned)) return(invisible())
+  if (isTRUE(accept_terms)) {
+    return(invisible())
+  }
+  if (isTRUE(.MORIE_VPD_TERMS_WARNED$warned)) {
+    return(invisible())
+  }
   warning(paste0(
     "Loading VPD crime data implies acceptance of VPD's open data ",
     "terms (see morie_datasets_vpd_legal_disclaimer()). Pass ",
-    "accept_terms = TRUE to silence this warning."), call. = FALSE)
+    "accept_terms = TRUE to silence this warning."
+  ), call. = FALSE)
   .MORIE_VPD_TERMS_WARNED$warned <- TRUE
   invisible()
 }

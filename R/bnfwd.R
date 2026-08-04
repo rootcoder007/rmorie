@@ -16,7 +16,7 @@
 #' morie_bnfwd_batch_norm_forward(x = rnorm(50))
 #' @export
 morie_bnfwd_batch_norm_forward <- function(x, gamma = NULL, beta = NULL,
-                                     eps = 1e-5) {
+                                           eps = 1e-5) {
   x <- as.matrix(x)
   # axis=0 (batch) -> per-feature stats
   mu <- colMeans(x)

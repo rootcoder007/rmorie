@@ -45,14 +45,18 @@ morie_joseph_naive_forecast <- function(y, horizon = 1, season = NULL) {
     if (m < 1L || m > n) {
       stop(sprintf("season must be between 1 and %d", n), call. = FALSE)
     }
-    fc <- vapply(seq_len(horizon),
-                 function(h) y[n - m + ((h - 1L) %% m) + 1L], numeric(1))
+    fc <- vapply(
+      seq_len(horizon),
+      function(h) y[n - m + ((h - 1L) %% m) + 1L], numeric(1)
+    )
     name <- sprintf("seasonal naive (m=%d)", m)
     denom <- if (n > m) mean(abs(y[(m + 1L):n] - y[seq_len(n - m)])) else NA_real_
   }
-  list(forecast = fc, method_used = name, last_value = y[n],
-       in_sample_mae = denom, horizon = horizon, season = season,
-       method = "joseph_naive_forecast")
+  list(
+    forecast = fc, method_used = name, last_value = y[n],
+    in_sample_mae = denom, horizon = horizon, season = season,
+    method = "joseph_naive_forecast"
+  )
 }
 
 
@@ -92,9 +96,11 @@ morie_drift_forecast <- function(y, h = 1) {
   resid <- diff(y) - drift
   sigma <- if (length(resid) > 1L) stats::sd(resid) else 0
   se <- sigma * sqrt(steps * (1 + steps / max(n - 1, 1)))
-  list(forecast = fc, drift = drift, se = se, lower = fc - 1.96 * se,
-       upper = fc + 1.96 * se, sigma = sigma, h = h,
-       method = "drift_forecast")
+  list(
+    forecast = fc, drift = drift, se = se, lower = fc - 1.96 * se,
+    upper = fc + 1.96 * se, sigma = sigma, h = h,
+    method = "drift_forecast"
+  )
 }
 
 
@@ -140,9 +146,11 @@ morie_joseph_simple_exponential_smoothing <- function(y, alpha = NULL,
   if (horizon < 1L) stop("horizon must be at least 1", call. = FALSE)
   if (is.null(alpha)) {
     grid <- seq(0.01, 1, length.out = 100L)
-    sses <- vapply(grid,
-                   function(a) sum((y - .morie_ses_run(a, y)$fitted)^2),
-                   numeric(1))
+    sses <- vapply(
+      grid,
+      function(a) sum((y - .morie_ses_run(a, y)$fitted)^2),
+      numeric(1)
+    )
     alpha <- grid[which.min(sses)]
   } else {
     alpha <- as.numeric(alpha)
@@ -152,10 +160,12 @@ morie_joseph_simple_exponential_smoothing <- function(y, alpha = NULL,
   }
   r <- .morie_ses_run(alpha, y)
   resid <- y - r$fitted
-  list(forecast = rep(r$level, horizon), level = r$level, fitted = r$fitted,
-       residuals = resid, alpha = alpha, sse = sum(resid^2),
-       effective_window = 2 / alpha - 1, horizon = horizon,
-       method = "joseph_simple_exponential_smoothing")
+  list(
+    forecast = rep(r$level, horizon), level = r$level, fitted = r$fitted,
+    residuals = resid, alpha = alpha, sse = sum(resid^2),
+    effective_window = 2 / alpha - 1, horizon = horizon,
+    method = "joseph_simple_exponential_smoothing"
+  )
 }
 
 
@@ -167,10 +177,15 @@ morie_joseph_simple_exponential_smoothing <- function(y, alpha = NULL,
   if (m < 2L) stop("period must be at least 2", call. = FALSE)
   if (length(y) < 2L * m) {
     stop(sprintf("need at least %d observations for period %d", 2L * m, m),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   for (nm in c("alpha", "beta", "gamma")) {
-    v <- switch(nm, alpha = alpha, beta = beta, gamma = gamma)
+    v <- switch(nm,
+      alpha = alpha,
+      beta = beta,
+      gamma = gamma
+    )
     if (v < 0 || v > 1) {
       stop(sprintf("%s must be in [0, 1]", nm), call. = FALSE)
     }
@@ -179,7 +194,8 @@ morie_joseph_simple_exponential_smoothing <- function(y, alpha = NULL,
   if (horizon < 1L) stop("horizon must be at least 1", call. = FALSE)
   if (mult && any(y <= 0)) {
     stop("multiplicative seasonality needs strictly positive data",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   s0 <- mean(y[seq_len(m)])
   s1 <- mean(y[(m + 1L):(2L * m)])
@@ -204,18 +220,22 @@ morie_joseph_simple_exponential_smoothing <- function(y, alpha = NULL,
   }
   steps <- seq_len(horizon)
   ns <- length(seas)
-  tail_s <- vapply(steps, function(h) seas[ns - m + ((h - 1L) %% m) + 1L],
-                   numeric(1))
+  tail_s <- vapply(
+    steps, function(h) seas[ns - m + ((h - 1L) %% m) + 1L],
+    numeric(1)
+  )
   fc <- if (mult) {
     (level + steps * trend) * tail_s
   } else {
     level + steps * trend + tail_s
   }
   resid <- y - fitted
-  list(forecast = fc, level = level, trend = trend,
-       seasonal = seas[(ns - m + 1L):ns], fitted = fitted, residuals = resid,
-       sse = sum(resid^2), alpha = alpha, beta = beta, gamma = gamma,
-       period = m, horizon = horizon)
+  list(
+    forecast = fc, level = level, trend = trend,
+    seasonal = seas[(ns - m + 1L):ns], fitted = fitted, residuals = resid,
+    sse = sum(resid^2), alpha = alpha, beta = beta, gamma = gamma,
+    period = m, horizon = horizon
+  )
 }
 
 
@@ -246,7 +266,8 @@ morie_holt_winters_additive <- function(y, period = 4, alpha = 0.3,
                                         beta = 0.1, gamma = 0.1,
                                         horizon = NULL) {
   out <- .morie_holt_winters(y, period, alpha, beta, gamma, horizon,
-                             mult = FALSE)
+    mult = FALSE
+  )
   out$method <- "holt_winters_additive"
   out
 }
@@ -274,7 +295,8 @@ morie_holt_winters_additive <- function(y, period = 4, alpha = 0.3,
 morie_holt_winters_mult <- function(y, period = 4, alpha = 0.3, beta = 0.1,
                                     gamma = 0.1, horizon = NULL) {
   out <- .morie_holt_winters(y, period, alpha, beta, gamma, horizon,
-                             mult = TRUE)
+    mult = TRUE
+  )
   out$method <- "holt_winters_mult"
   out
 }
@@ -331,17 +353,21 @@ morie_croston <- function(y, alpha = 0.1, variant = c("croston", "sba")) {
   }
   rate <- z / max(p, 1e-12)
   bias <- if (identical(variant, "sba")) 1 - alpha / 2 else 1
-  list(forecast = rate * bias, rate = rate, demand_size = z, interval = p,
-       bias_factor = bias, n_nonzero = length(nz),
-       intermittency = 1 - length(nz) / length(y), alpha = alpha,
-       variant = variant,
-       warnings = if (identical(variant, "croston")) {
-         paste("the plain Croston estimator is biased upward by about",
-               "1/(1 - alpha/2); consider variant='sba'")
-       } else {
-         character(0)
-       },
-       method = "croston")
+  list(
+    forecast = rate * bias, rate = rate, demand_size = z, interval = p,
+    bias_factor = bias, n_nonzero = length(nz),
+    intermittency = 1 - length(nz) / length(y), alpha = alpha,
+    variant = variant,
+    warnings = if (identical(variant, "croston")) {
+      paste(
+        "the plain Croston estimator is biased upward by about",
+        "1/(1 - alpha/2); consider variant='sba'"
+      )
+    } else {
+      character(0)
+    },
+    method = "croston"
+  )
 }
 
 
@@ -383,16 +409,20 @@ morie_joseph_croston_intermittent <- function(y, alpha = 0.1,
   } else {
     "smooth"
   }
-  list(forecast = r$forecast, rate = r$rate, demand_size = r$demand_size,
-       interval = r$interval, bias_factor = r$bias_factor,
-       n_nonzero = r$n_nonzero, intermittency = r$intermittency,
-       classification = cls, cv_squared = cv2, average_interval = p,
-       alpha = r$alpha, variant = variant,
-       warnings = c(r$warnings, if (identical(cls, "smooth")) {
-         paste("demand is smooth; ordinary exponential smoothing is more",
-               "appropriate than Croston here")
-       }),
-       method = "joseph_croston_intermittent")
+  list(
+    forecast = r$forecast, rate = r$rate, demand_size = r$demand_size,
+    interval = r$interval, bias_factor = r$bias_factor,
+    n_nonzero = r$n_nonzero, intermittency = r$intermittency,
+    classification = cls, cv_squared = cv2, average_interval = p,
+    alpha = r$alpha, variant = variant,
+    warnings = c(r$warnings, if (identical(cls, "smooth")) {
+      paste(
+        "demand is smooth; ordinary exponential smoothing is more",
+        "appropriate than Croston here"
+      )
+    }),
+    method = "joseph_croston_intermittent"
+  )
 }
 
 
@@ -437,10 +467,12 @@ morie_theta_method <- function(y, horizon = 1, theta = 2) {
   level <- .morie_ses_run(alpha, line_theta)$level
   drift <- slope / 2
   steps <- seq_len(horizon)
-  list(forecast = level + drift * steps, drift = drift, alpha = alpha,
-       linear_slope = slope, theta_line_0 = line0, theta_line = line_theta,
-       level = level, horizon = horizon, theta = theta,
-       method = "theta_method")
+  list(
+    forecast = level + drift * steps, drift = drift, alpha = alpha,
+    linear_slope = slope, theta_line_0 = line0, theta_line = line_theta,
+    level = level, horizon = horizon, theta = theta,
+    method = "theta_method"
+  )
 }
 
 
@@ -472,29 +504,39 @@ morie_theta_method <- function(y, horizon = 1, theta = 2) {
 #' morie_joseph_mint_reconciliation(c(10, 4, 5), S)$coherent
 #' @export
 morie_joseph_mint_reconciliation <- function(y_hat, S, W = NULL,
-                                             method = c("ols", "wls",
-                                                        "mint")) {
+                                             method = c(
+                                               "ols", "wls",
+                                               "mint"
+                                             )) {
   method <- match.arg(method)
   y <- as.numeric(y_hat)
   S <- as.matrix(S)
   storage.mode(S) <- "double"
   if (length(y) != nrow(S)) {
-    stop(sprintf("y_hat has %d entries but S has %d rows", length(y),
-                 nrow(S)), call. = FALSE)
+    stop(sprintf(
+      "y_hat has %d entries but S has %d rows", length(y),
+      nrow(S)
+    ), call. = FALSE)
   }
   n <- nrow(S)
   Wm <- if (is.null(W)) diag(n) else as.matrix(W)
   if (!identical(dim(Wm), c(n, n))) {
     stop(sprintf("W must be (%d, %d)", n, n), call. = FALSE)
   }
-  Wm <- switch(method, ols = diag(n), wls = diag(diag(Wm), n, n), mint = Wm)
+  Wm <- switch(method,
+    ols = diag(n),
+    wls = diag(diag(Wm), n, n),
+    mint = Wm
+  )
   Wi <- .morie_ginv(Wm)
   G <- .morie_ginv(t(S) %*% Wi %*% S) %*% t(S) %*% Wi
   bottom <- as.vector(G %*% y)
   rec <- as.vector(S %*% bottom)
   resid <- y - as.vector(S %*% (.morie_ginv(S) %*% y))
-  list(reconciled = rec, bottom = bottom,
-       coherent = isTRUE(all.equal(rec, as.vector(S %*% bottom))),
-       adjustment = rec - y, incoherence_before = sqrt(sum(resid^2)), G = G,
-       method_used = method, method = "joseph_mint_reconciliation")
+  list(
+    reconciled = rec, bottom = bottom,
+    coherent = isTRUE(all.equal(rec, as.vector(S %*% bottom))),
+    adjustment = rec - y, incoherence_before = sqrt(sum(resid^2)), G = G,
+    method_used = method, method = "joseph_mint_reconciliation"
+  )
 }

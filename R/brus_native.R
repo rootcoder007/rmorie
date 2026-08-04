@@ -15,8 +15,10 @@
 morie_ht_estimators <- function(z, pi, n_population) {
   z <- as.numeric(z)
   pi <- as.numeric(pi)
-  stopifnot(length(z) == length(pi), all(pi > 0), all(pi <= 1),
-            n_population > 0)
+  stopifnot(
+    length(z) == length(pi), all(pi > 0), all(pi <= 1),
+    n_population > 0
+  )
   total <- sum(z / pi)
   list(total = total, mean = total / n_population, weights = 1 / pi)
 }
@@ -41,17 +43,22 @@ morie_si_estimators <- function(y = NULL, n = NA, n_population = NA,
     y <- as.numeric(y)
     stopifnot(all(y %in% c(0, 1)))
     out$p_hat <- mean(y)
-    if (!is.na(n) && !is.na(n_population) && n >= 2)
+    if (!is.na(n) && !is.na(n_population) && n >= 2) {
       out$var_p <- (1 - n / n_population) * out$p_hat * (1 - out$p_hat) /
         (n - 1)
+    }
   }
-  if (!is.na(estimate) && !is.na(variance) && !is.na(u_crit))
-    out$ci <- c(estimate - u_crit * sqrt(variance),
-                estimate + u_crit * sqrt(variance))
+  if (!is.na(estimate) && !is.na(variance) && !is.na(u_crit)) {
+    out$ci <- c(
+      estimate - u_crit * sqrt(variance),
+      estimate + u_crit * sqrt(variance)
+    )
+  }
   if (!is.na(zbar_hat) && !is.na(area) && !is.na(sample_area)) {
     out$total_inf <- area / sample_area * zbar_hat
-    if (!is.na(s2_hat) && !is.na(n))
+    if (!is.na(s2_hat) && !is.na(n)) {
       out$var_total_inf <- (area / sample_area)^2 * s2_hat / n
+    }
   }
   out
 }
@@ -79,9 +86,10 @@ morie_stsi_estimators <- function(stratum_means = NULL,
     w <- as.numeric(stratum_weights)
     out$variance <- sum(w^2 * as.numeric(stratum_variances))
   }
-  if (!is.na(c0))
+  if (!is.na(c0)) {
     out$cost <- c0 + sum(as.numeric(stratum_sizes) *
-                           as.numeric(stratum_costs))
+      as.numeric(stratum_costs))
+  }
   out
 }
 
@@ -113,8 +121,9 @@ morie_cluster_twostage <- function(cluster_totals = NULL,
       out$total_pps <- m_population / nn * sum(t / mm)
       out$mean_from_total <- out$total_pps / m_population
     }
-    if (!is.na(n_clusters_population))
+    if (!is.na(n_clusters_population)) {
       out$total_si <- n_clusters_population / nn * sum(t)
+    }
   }
   if (!is.null(primary_unit_means)) {
     pm <- as.numeric(primary_unit_means)
@@ -123,8 +132,9 @@ morie_cluster_twostage <- function(cluster_totals = NULL,
     out$s2_psu <- stats::var(pm)
     out$ts_variance <- out$s2_psu / length(pm)
   }
-  if (!is.na(s2_between) && !is.na(s2_within) && !is.na(n) && !is.na(m))
+  if (!is.na(s2_between) && !is.na(s2_within) && !is.na(n) && !is.na(m)) {
     out$true_variance <- s2_between / n + s2_within / (n * m)
+  }
   out
 }
 
@@ -142,10 +152,12 @@ morie_twostage_design <- function(s_w, s_b, c1, c2, v_max = NA,
                                   c_max = NA) {
   stopifnot(s_w > 0, s_b > 0, c1 > 0, c2 > 0)
   out <- list(m_opt = s_w / s_b * sqrt(c1 / c2))
-  if (!is.na(v_max))
+  if (!is.na(v_max)) {
     out$n_for_variance <- (s_w * s_b * sqrt(c2 / c1) + s_b^2) / v_max
-  if (!is.na(c_max))
+  }
+  if (!is.na(c_max)) {
     out$n_for_budget <- c_max * s_b / (s_w * sqrt(c1 * c2) + s_b * c1)
+  }
   out
 }
 
@@ -218,10 +230,11 @@ morie_model_assisted <- function(m_all = NULL, z_sample = NULL,
     out$regr_general <- mean(as.numeric(xa %*% b)) +
       sum(resid / ps) / n_population
   }
-  if (!is.na(zbar_pi) && !is.null(b_hats))
+  if (!is.na(zbar_pi) && !is.null(b_hats)) {
     out$regr_slopes <- zbar_pi + sum(as.numeric(b_hats) *
-                                       (as.numeric(xbar_true) -
-                                          as.numeric(xbar_pi)))
+      (as.numeric(xbar_true) -
+        as.numeric(xbar_pi)))
+  }
   if (!is.na(t_pi_z) && !is.na(t_pi_x) && !is.na(t_x_true)) {
     stopifnot(t_pi_x != 0)
     out$ratio <- t_pi_z / t_pi_x * t_x_true
@@ -255,9 +268,10 @@ morie_greg_variance <- function(e = NULL, n = NA, n_population = NA,
       out$variance <- (1 - n / n_population) * out$s2_e / n
       if (ratio) out$ratio_variance <- n_population^2 * out$s2_e / n
     }
-    if (!is.null(g))
+    if (!is.null(g)) {
       out$g_variance <- (1 - n / n_population) *
         sum(as.numeric(g)^2 * ev^2) / (n * (n - 1))
+    }
     if (!is.null(pi)) {
       pv <- as.numeric(pi)
       stopifnot(all(pv > 0))
@@ -266,9 +280,10 @@ morie_greg_variance <- function(e = NULL, n = NA, n_population = NA,
         n_population^2
     }
   }
-  if (!is.na(x_k))
+  if (!is.na(x_k)) {
     out$g_weight <- 1 + (xbar_true - xbar_sample) * (x_k - xbar_sample) /
       s2_x
+  }
   out
 }
 
@@ -299,17 +314,20 @@ morie_calibration <- function(group_means_sample = NULL,
   if (!is.null(pi_sample) && !is.na(b_hat)) {
     pv <- as.numeric(pi_sample)
     stopifnot(all(pv > 0))
-    if (!is.null(z_sample) && !is.na(n_population) && is.na(a_hat))
+    if (!is.null(z_sample) && !is.na(n_population) && is.na(a_hat)) {
       out$intercept <- (1 - b_hat) * sum(as.numeric(z_sample) / pv) /
         n_population
-    if (!is.na(zbar_pi) && !is.na(a_hat))
+    }
+    if (!is.na(zbar_pi) && !is.na(a_hat)) {
       out$calibrated <- zbar_pi + a_hat * (1 - sum(1 / pv) /
-                                             n_population) +
+        n_population) +
         b_hat * (m_all_mean - m_ht_mean)
+    }
   }
-  if (!is.null(z_sample) && !is.na(b_si))
+  if (!is.null(z_sample) && !is.na(b_si)) {
     out$si_shortcut <- mean(as.numeric(z_sample)) +
       b_si * (m_all_mean - m_sample_mean)
+  }
   out
 }
 
@@ -335,32 +353,37 @@ morie_balanced_twophase <- function(t_pi_z = NA, t_x_true = NA,
                                     zbar_hat = NA, s2_z = NA, s2_e = NA,
                                     n2 = NA) {
   out <- list()
-  if (!is.na(t_pi_z) && !is.na(b_hat))
+  if (!is.na(t_pi_z) && !is.na(b_hat)) {
     out$regression_total <- t_pi_z + b_hat * (t_x_true - t_pi_x)
+  }
   if (!is.null(e)) {
     ev <- as.numeric(e)
     if (!is.null(pi)) {
       pv <- as.numeric(pi)
       nn <- length(ev)
-      if (!is.null(c_k) && !is.na(n_population))
+      if (!is.null(c_k) && !is.na(n_population)) {
         out$balanced_variance <- sum(as.numeric(c_k) * (ev / pv)^2) *
           nn / (nn - p) / n_population^2
-      if (!is.null(e_local_mean))
+      }
+      if (!is.null(e_local_mean)) {
         out$local_mean_variance <- n / (n - p) * p / (p + 1) *
           sum((1 - pv) * (ev / pv - as.numeric(e_local_mean))^2)
+      }
     }
-    if (!is.na(n) && is.null(pi))
+    if (!is.na(n) && is.null(pi)) {
       out$s2_resid <- sum(ev^2) / (n - 1)
+    }
   }
   if (!is.null(n1h)) {
     a <- as.numeric(n1h)
     out$twophase_strat <- sum((a / n1)^2 * as.numeric(s2_2h) /
-                                as.numeric(n2h)) +
+      as.numeric(n2h)) +
       sum((a / n1) * (as.numeric(zbar_2h) - zbar_hat)^2) / n1
   }
-  if (!is.na(s2_z) && !is.na(s2_e))
+  if (!is.na(s2_z) && !is.na(s2_e)) {
     out$twophase_regr <- (1 - n1 / n_population) * s2_z / n1 +
       (1 - n2 / n1) * s2_e / n2
+  }
   out
 }
 
@@ -383,22 +406,29 @@ morie_sample_size <- function(p_star = NA, se_max = NA, u_crit = NA,
                               probs = NULL, coverages = NULL,
                               alpha = NA) {
   out <- list()
-  if (!is.na(p_star) && !is.na(se_max))
+  if (!is.na(p_star) && !is.na(se_max)) {
     out$n_prop_se <- (sqrt(p_star * (1 - p_star)) / se_max)^2 + 1
-  if (!is.na(u_crit) && !is.na(s_star) && !is.na(l_max))
+  }
+  if (!is.na(u_crit) && !is.na(s_star) && !is.na(l_max)) {
     out$n_mean_length <- (u_crit * s_star / (l_max / 2))^2
-  if (!is.na(u_crit) && !is.na(cv_star) && !is.na(r_max))
+  }
+  if (!is.na(u_crit) && !is.na(cv_star) && !is.na(r_max)) {
     out$n_cv <- (u_crit * cv_star / r_max)^2
-  if (!is.na(u_crit) && !is.na(p_star) && !is.na(l_max))
+  }
+  if (!is.na(u_crit) && !is.na(p_star) && !is.na(l_max)) {
     out$n_prop_length <- (u_crit * sqrt(p_star * (1 - p_star)) /
-                            (l_max / 2))^2 + 1
-  if (!is.na(design_effect) && !is.na(n_si))
+      (l_max / 2))^2 + 1
+  }
+  if (!is.na(design_effect) && !is.na(n_si)) {
     out$n_design_effect <- sqrt(design_effect) * n_si
-  if (!is.na(p) && !is.na(z) && !is.na(n))
+  }
+  if (!is.na(p) && !is.na(z) && !is.na(n)) {
     out$beta_pdf <- stats::dbeta(p, z + c, n - z + d)
-  if (!is.na(v) && !is.na(l) && !is.na(z) && !is.na(n))
+  }
+  if (!is.na(v) && !is.na(l) && !is.na(z) && !is.na(n)) {
     out$interval_prob <- stats::pbeta(min(v + l, 1), z + c, n - z + d) -
       stats::pbeta(v, z + c, n - z + d)
+  }
   if (!is.null(lengths)) {
     el <- sum(as.numeric(lengths) * as.numeric(probs))
     out$expected_length <- el
@@ -435,9 +465,10 @@ morie_ospats <- function(gamma_bar_h = NULL, weights = NULL, n_h = NULL,
   out <- list()
   if (!is.null(gamma_bar_h)) {
     g <- as.numeric(gamma_bar_h)
-    if (!is.null(weights) && !is.null(n_h))
+    if (!is.null(weights) && !is.null(n_h)) {
       out$stsi_variance <- sum(as.numeric(weights)^2 * g /
-                                 as.numeric(n_h))
+        as.numeric(n_h))
+    }
     if (!is.na(n)) out$equal_area_variance <- sum(g) / n^2
   }
   if (!is.null(s_h) && !is.null(weights)) {
@@ -450,13 +481,16 @@ morie_ospats <- function(gamma_bar_h = NULL, weights = NULL, n_h = NULL,
     }
     out$objective_o <- sum(w * s)^2
   }
-  if (!is.na(zhat_i) && !is.na(r2))
+  if (!is.na(zhat_i) && !is.na(r2)) {
     out$d2 <- (zhat_i - zhat_j)^2 / r2 + s2_i + s2_j - 2 * s2_ij
-  if (!is.na(d2_upper_sum) && !is.na(n_h_units))
+  }
+  if (!is.na(d2_upper_sum) && !is.na(n_h_units)) {
     out$stratum_variance <- d2_upper_sum / n_h_units^2
-  if (!is.null(per_stratum_sums) && !is.na(n_population))
+  }
+  if (!is.null(per_stratum_sums) && !is.na(n_population)) {
     out$ospats_objective <- sum(sqrt(as.numeric(per_stratum_sums))) /
       n_population
+  }
   out
 }
 
@@ -487,11 +521,13 @@ morie_kriging <- function(cov_ss = NULL, cov_s0 = NULL, sigma2 = NA,
     out$lam <- sol[seq_len(nn)]
     out$nu <- sol[nn + 1]
   }
-  if (!is.null(lam) && !is.null(cov_s0) && !is.na(sigma2) && !is.na(nu))
+  if (!is.null(lam) && !is.null(cov_s0) && !is.na(sigma2) && !is.na(nu)) {
     out$v_ok_cov <- sigma2 - sum(as.numeric(lam) * as.numeric(cov_s0)) -
       nu
-  if (!is.null(lam) && !is.null(gamma_s0) && !is.na(nu))
+  }
+  if (!is.null(lam) && !is.null(gamma_s0) && !is.na(nu)) {
     out$v_ok_gamma <- sum(as.numeric(lam) * as.numeric(gamma_s0)) + nu
+  }
   if (!is.null(h) && !is.na(c1)) {
     hv <- as.numeric(h)
     stopifnot(all(hv >= 0), c0 >= 0, c1 > 0, phi > 0)
@@ -505,8 +541,8 @@ morie_kriging <- function(cov_ss = NULL, cov_s0 = NULL, sigma2 = NA,
     ld <- determinant(cm, logarithm = TRUE)
     stopifnot(ld$sign > 0)
     out$loglik <- -0.5 * (length(zv) * log(2 * pi) +
-                            as.numeric(ld$modulus) +
-                            as.numeric(t(diff) %*% solve(cm, diff)))
+      as.numeric(ld$modulus) +
+      as.numeric(t(diff) %*% solve(cm, diff)))
   }
   out
 }
@@ -536,9 +572,12 @@ morie_variogram_design <- function(mu = NA, a_i = NA, b_ij = NA,
     ai <- solve(am)
     pp <- length(da_list)
     info <- matrix(0, pp, pp)
-    for (i in seq_len(pp)) for (j in seq_len(pp))
-      info[i, j] <- 0.5 * sum(diag(ai %*% as.matrix(da_list[[i]]) %*%
-                                     ai %*% as.matrix(da_list[[j]])))
+    for (i in seq_len(pp)) {
+      for (j in seq_len(pp)) {
+        info[i, j] <- 0.5 * sum(diag(ai %*% as.matrix(da_list[[i]]) %*%
+          ai %*% as.matrix(da_list[[j]])))
+      }
+    }
     out$fisher_info <- info
   }
   if (!is.null(cov_theta) && !is.null(dv_dtheta)) {
@@ -551,14 +590,18 @@ morie_variogram_design <- function(mu = NA, a_i = NA, b_ij = NA,
     am <- as.matrix(a_mat)
     pp <- length(dlam_dtheta)
     acc <- 0
-    for (i in seq_len(pp)) for (j in seq_len(pp))
-      acc <- acc + ct[i, j] *
-        as.numeric(t(as.numeric(dlam_dtheta[[i]])) %*% am %*%
-                     as.numeric(dlam_dtheta[[j]]))
+    for (i in seq_len(pp)) {
+      for (j in seq_len(pp)) {
+        acc <- acc + ct[i, j] *
+          as.numeric(t(as.numeric(dlam_dtheta[[i]])) %*% am %*%
+            as.numeric(dlam_dtheta[[j]]))
+      }
+    }
     out$e_tau2 <- acc
   }
-  if (!is.na(akv) && !is.na(vkv) && !is.na(v_ok))
+  if (!is.na(akv) && !is.na(vkv) && !is.na(v_ok)) {
     out$eac <- akv + vkv / (2 * v_ok)
+  }
   out
 }
 
@@ -595,11 +638,13 @@ morie_survey_variances <- function(sigma2 = NA, n = NA, rho_bar = NA,
       out$n_effective <- n / (1 + (n - 1) * rho_bar)
     }
   }
-  if (!is.na(s2) && !is.na(n) && !is.na(n_population))
+  if (!is.na(s2) && !is.na(n) && !is.na(n_population)) {
     out$v_fpc <- (1 - n / n_population) * s2 / n
-  if (!is.null(xbar_d))
+  }
+  if (!is.null(xbar_d)) {
     out$small_area <- sum(as.numeric(xbar_d) * as.numeric(beta_hat)) +
       v_d
+  }
   if (!is.null(times)) {
     t <- as.numeric(times)
     d <- t - mean(t)
@@ -614,16 +659,19 @@ morie_survey_variances <- function(sigma2 = NA, n = NA, rho_bar = NA,
   if (!is.na(beta0)) out$linear_model <- beta0 + beta1 * x_val
   if (!is.null(x_design) && !is.null(z_obs)) {
     xm <- as.matrix(x_design)
-    out$ols_beta <- as.numeric(solve(t(xm) %*% xm,
-                                     t(xm) %*% as.numeric(z_obs)))
+    out$ols_beta <- as.numeric(solve(
+      t(xm) %*% xm,
+      t(xm) %*% as.numeric(z_obs)
+    ))
     if (!is.na(sigma2_eps) && !is.null(x0)) {
       x0v <- as.numeric(x0)
       out$ols_pred_var <- sigma2_eps *
         (1 + as.numeric(t(x0v) %*% solve(t(xm) %*% xm, x0v)))
     }
   }
-  if (!is.null(c_hat))
+  if (!is.null(c_hat)) {
     out$class_indicator <- as.numeric(identical(c_hat, c_true) &&
-                                        identical(c_hat, u))
+      identical(c_hat, u))
+  }
   out
 }

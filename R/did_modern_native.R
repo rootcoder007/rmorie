@@ -14,7 +14,9 @@
   missing_cols <- setdiff(need, names(data))
   if (length(missing_cols)) {
     stop("Columns missing from data: ",
-         paste(missing_cols, collapse = ", "), call. = FALSE)
+      paste(missing_cols, collapse = ", "),
+      call. = FALSE
+    )
   }
   g <- data[[treatment_time]]
   g[!is.finite(g)] <- NA
@@ -56,8 +58,10 @@
 morie_did_sun_abraham <- function(data, outcome, unit, time,
                                   treatment_time, leads = 4L,
                                   lags = 4L, alpha = 0.05) {
-  fr <- .morie_did_modern_frame(data, outcome, unit, time,
-                                treatment_time)
+  fr <- .morie_did_modern_frame(
+    data, outcome, unit, time,
+    treatment_time
+  )
   if (all(is.na(fr$g))) stop("No treated units.", call. = FALSE)
   cohorts <- sort(unique(fr$g[!is.na(fr$g)]))
   # FULL saturation: every (cohort, rel time) cell that exists in the
@@ -77,7 +81,8 @@ morie_did_sun_abraham <- function(data, outcome, unit, time,
   }
   X <- do.call(cbind, cols)
   fit <- .morie_did_twfe_native(fr$y, X, fr$unit, as.factor(fr$time),
-                                cluster_ids = data[[unit]])
+    cluster_ids = data[[unit]]
+  )
   cells <- data.frame(
     cell = colnames(X),
     cohort = as.numeric(sub("^c([0-9.]+)_r.*$", "\\1", colnames(X))),
@@ -97,9 +102,11 @@ morie_did_sun_abraham <- function(data, outcome, unit, time,
     wts <- wts / sum(wts)
     est <- sum(wts * cc$estimate)
     se <- sqrt(sum(wts^2 * cc$std.error^2))
-    data.frame(rel_time = r, estimate = est, std.error = se,
-               conf.low = est - z * se, conf.high = est + z * se,
-               n = nrow(cc))
+    data.frame(
+      rel_time = r, estimate = est, std.error = se,
+      conf.low = est - z * se, conf.high = est + z * se,
+      n = nrow(cc)
+    )
   })
   out <- do.call(rbind, rows)
   attr(out, "cells") <- cells
@@ -119,9 +126,12 @@ morie_did_sun_abraham <- function(data, outcome, unit, time,
     gm_new <- tapply(y0 - a_new[u0], t0, mean)
     gm_new[is.na(gm_new)] <- 0
     if (max(abs(a_new - a), abs(gm_new - gm)) < 1e-10) {
-      a <- a_new; gm <- gm_new; break
+      a <- a_new
+      gm <- gm_new
+      break
     }
-    a <- a_new; gm <- gm_new
+    a <- a_new
+    gm <- gm_new
   }
   list(a = a, g = gm)
 }
@@ -150,18 +160,24 @@ morie_did_sun_abraham <- function(data, outcome, unit, time,
 morie_did_borusyak <- function(data, outcome, unit, time,
                                treatment_time, n_bootstrap = 199L,
                                seed = 42L, alpha = 0.05) {
-  fr <- .morie_did_modern_frame(data, outcome, unit, time,
-                                treatment_time)
+  fr <- .morie_did_modern_frame(
+    data, outcome, unit, time,
+    treatment_time
+  )
   est_once <- function(df_idx) {
     y <- fr$y[df_idx]
     u <- droplevels(fr$unit[df_idx])
     tt <- as.factor(fr$time[df_idx])
     d <- fr$treated_post[df_idx]
     untreated <- d == 0
-    if (sum(untreated) < 4L || sum(d) == 0L) return(NA_real_)
+    if (sum(untreated) < 4L || sum(d) == 0L) {
+      return(NA_real_)
+    }
     # FEs from untreated cells only (alternating projections).
-    fe <- .morie_did_fe_solve(y[untreated], droplevels(u[untreated]),
-                              droplevels(tt[untreated]))
+    fe <- .morie_did_fe_solve(
+      y[untreated], droplevels(u[untreated]),
+      droplevels(tt[untreated])
+    )
     y0_hat <- fe$a[as.character(u)] + fe$g[as.character(tt)]
     diffs <- (y - y0_hat)[d == 1]
     mean(diffs, na.rm = TRUE)
@@ -211,17 +227,23 @@ morie_did_borusyak <- function(data, outcome, unit, time,
 morie_did_did2s <- function(data, outcome, unit, time, treatment_time,
                             n_bootstrap = 199L, seed = 42L,
                             alpha = 0.05) {
-  fr <- .morie_did_modern_frame(data, outcome, unit, time,
-                                treatment_time)
+  fr <- .morie_did_modern_frame(
+    data, outcome, unit, time,
+    treatment_time
+  )
   est_once <- function(idx) {
     y <- fr$y[idx]
     u <- droplevels(fr$unit[idx])
     tt <- as.factor(fr$time[idx])
     d <- fr$treated_post[idx]
     untreated <- d == 0
-    if (sum(untreated) < 4L || sum(d) == 0L) return(NA_real_)
-    fe <- .morie_did_fe_solve(y[untreated], droplevels(u[untreated]),
-                              droplevels(tt[untreated]))
+    if (sum(untreated) < 4L || sum(d) == 0L) {
+      return(NA_real_)
+    }
+    fe <- .morie_did_fe_solve(
+      y[untreated], droplevels(u[untreated]),
+      droplevels(tt[untreated])
+    )
     y_tilde <- y - (fe$a[as.character(u)] + fe$g[as.character(tt)])
     # Stage 2: OLS of the residualized outcome on the indicator.
     sum(y_tilde * d, na.rm = TRUE) / sum(d[!is.na(y_tilde)])

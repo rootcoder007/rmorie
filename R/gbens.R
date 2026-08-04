@@ -23,10 +23,10 @@
 #' morie_gradient_boosting_ensemble(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_gradient_boosting_ensemble <- function(x, y, n_estimators = 100L,
-                                       learning_rate = 0.1,
-                                       max_depth = 3L,
-                                       task = "auto", seed = 0L,
-                                       deterministic_seed = NULL) {
+                                             learning_rate = 0.1,
+                                             max_depth = 3L,
+                                             task = "auto", seed = 0L,
+                                             deterministic_seed = NULL) {
   x <- .morie_ensure_design_matrix(x)
   if (is.null(dim(x))) x <- matrix(x, ncol = 1)
   x <- as.matrix(x)
@@ -44,7 +44,8 @@ morie_gradient_boosting_ensemble <- function(x, y, n_estimators = 100L,
     set.seed(seed)
   }
   fit <- .morie_gb_fit(
-    x, y, task = task, n_estimators = as.integer(n_estimators),
+    x, y,
+    task = task, n_estimators = as.integer(n_estimators),
     learning_rate = learning_rate, max_depth = as.integer(max_depth)
   )
   if (task == "classification") {

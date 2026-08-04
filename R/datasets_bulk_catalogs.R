@@ -132,12 +132,15 @@ morie_datasets_vancouver_opendata_bulk_layers <- function(offline = TRUE) {
 #' }
 #' @export
 morie_datasets_nyc_socrata_by_id <- function(soda_id,
-                                               limit = 1000L) {
-  url <- sprintf("https://data.cityofnewyork.us/resource/%s.json?$limit=%d",
-                  soda_id, as.integer(limit))
+                                             limit = 1000L) {
+  url <- sprintf(
+    "https://data.cityofnewyork.us/resource/%s.json?$limit=%d",
+    soda_id, as.integer(limit)
+  )
   df <- .morie_dataset_http_json(url)
-  for (j in rev(seq_along(df)))
+  for (j in rev(seq_along(df))) {
     if (is.list(df[[j]])) df[[j]] <- NULL
+  }
   df
 }
 
@@ -152,12 +155,15 @@ morie_datasets_nyc_socrata_by_id <- function(soda_id,
 #' }
 #' @export
 morie_datasets_chicago_socrata_by_id <- function(soda_id,
-                                                   limit = 1000L) {
-  url <- sprintf("https://data.cityofchicago.org/resource/%s.json?$limit=%d",
-                  soda_id, as.integer(limit))
+                                                 limit = 1000L) {
+  url <- sprintf(
+    "https://data.cityofchicago.org/resource/%s.json?$limit=%d",
+    soda_id, as.integer(limit)
+  )
   df <- .morie_dataset_http_json(url)
-  for (j in rev(seq_along(df)))
+  for (j in rev(seq_along(df))) {
     if (is.list(df[[j]])) df[[j]] <- NULL
+  }
   df
 }
 
@@ -165,12 +171,17 @@ morie_datasets_chicago_socrata_by_id <- function(soda_id,
 #' @noRd
 .morie_bulk_fixture <- function(fname, offline) {
   if (!isTRUE(offline)) {
-    stop(sprintf(paste0(
-      "Live re-harvest of '%s' is not implemented as a public API. ",
-      "Use the bundled snapshot via offline = TRUE; ",
-      "or call the underlying Socrata/CKAN/Hub catalog endpoint directly."),
-      fname),
-      call. = FALSE)
+    stop(
+      sprintf(
+        paste0(
+          "Live re-harvest of '%s' is not implemented as a public API. ",
+          "Use the bundled snapshot via offline = TRUE; ",
+          "or call the underlying Socrata/CKAN/Hub catalog endpoint directly."
+        ),
+        fname
+      ),
+      call. = FALSE
+    )
   }
   # Look in rmorie first (tiny CSVs ship here), then rmoriedata
   # (heavy bulk catalogs ship there). Return an empty data.frame on
@@ -180,11 +191,14 @@ morie_datasets_chicago_socrata_by_id <- function(soda_id,
     path <- system.file("extdata", fname, package = "rmoriedata")
   }
   if (!nzchar(path)) {
-    warning(sprintf(
-      "bulk catalog '%s' not bundled; returning empty data.frame. %s",
-      fname,
-      "Install the rmoriedata companion: remotes::install_github('rootcoder007/rmoriedata')"),
-      call. = FALSE)
+    warning(
+      sprintf(
+        "bulk catalog '%s' not bundled; returning empty data.frame. %s",
+        fname,
+        "Install the rmoriedata companion: remotes::install_github('rootcoder007/rmoriedata')"
+      ),
+      call. = FALSE
+    )
     return(data.frame())
   }
   utils::read.csv(path, stringsAsFactors = FALSE, check.names = FALSE)

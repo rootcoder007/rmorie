@@ -13,7 +13,7 @@
 #' morie_ghosal_posterior_consistency(x = rnorm(50))
 #' @export
 morie_ghosal_posterior_consistency <- function(x, ref_loc = NULL, ref_scale = NULL,
-                                         eps = 0.1, K = 200, seed = 0) {
+                                               eps = 0.1, K = 200, seed = 0) {
   set.seed(seed)
   x <- as.numeric(x)
   n <- length(x)

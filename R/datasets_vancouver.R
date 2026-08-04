@@ -41,31 +41,40 @@
 #'   \url{https://opendata.vancouver.ca/api-console/explore/v2.1/}.
 #' @examplesIf nzchar(system.file("extdata", "vancouver_opendata_catalog.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' cat_df <- morie_datasets_vancouver_opendata_layers(offline = TRUE)
-#' nrow(cat_df)  # 190
+#' nrow(cat_df) # 190
 #' head(cat_df$title)
 #' @export
 morie_datasets_vancouver_opendata_layers <- function(offline = TRUE,
-                                                       max_features = NULL) {
+                                                     max_features = NULL) {
   if (isTRUE(offline)) {
     path <- system.file("extdata", "vancouver_opendata_catalog.csv",
-                        package = "rmorie")
+      package = "rmorie"
+    )
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "vancouver_opendata_catalog.csv", package = "rmoriedata")
     }
-    if (!nzchar(path))
+    if (!nzchar(path)) {
       stop("bundled Vancouver Open Data catalog fixture missing",
-           call. = FALSE)
-    df <- utils::read.csv(path, stringsAsFactors = FALSE,
-                           check.names = FALSE)
+        call. = FALSE
+      )
+    }
+    df <- utils::read.csv(path,
+      stringsAsFactors = FALSE,
+      check.names = FALSE
+    )
   } else {
     # Paginate via offset (Opendatasoft max limit=100/req).
     all_rows <- list()
     offset <- 0L
     repeat {
-      url <- sprintf(paste0("%s/catalog/datasets?limit=100",
-                              "&select=dataset_id,title,publisher,records_count",
-                              "&offset=%d&order_by=dataset_id"),
-                       .MORIE_VANCOUVER_OPENDATA_BASE, offset)
+      url <- sprintf(
+        paste0(
+          "%s/catalog/datasets?limit=100",
+          "&select=dataset_id,title,publisher,records_count",
+          "&offset=%d&order_by=dataset_id"
+        ),
+        .MORIE_VANCOUVER_OPENDATA_BASE, offset
+      )
       r <- .morie_dataset_http_json(url)
       if (is.null(r$results) || length(r$results) == 0L) break
       all_rows[[length(all_rows) + 1L]] <- r$results
@@ -74,8 +83,9 @@ morie_datasets_vancouver_opendata_layers <- function(offline = TRUE,
     }
     df <- if (length(all_rows)) do.call(rbind, all_rows) else data.frame()
   }
-  if (!is.null(max_features))
+  if (!is.null(max_features)) {
     df <- utils::head(df, as.integer(max_features))
+  }
   df
 }
 
@@ -109,9 +119,11 @@ NULL
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", fname, package = "rmoriedata")
   }
-  if (!nzchar(path))
+  if (!nzchar(path)) {
     stop(sprintf("bundled Vancouver fixture missing: %s", fname),
-         call. = FALSE)
+      call. = FALSE
+    )
+  }
   utils::read.csv(path, stringsAsFactors = FALSE, check.names = FALSE)
 }
 
@@ -124,13 +136,14 @@ NULL
 #' head(df)
 #' @export
 morie_datasets_vancouver_graffiti <- function(offline = TRUE,
-                                                max_features = NULL) {
+                                              max_features = NULL) {
   if (offline) {
     df <- .morie_vancouver_fixture("vancouver_graffiti_sample.csv")
   } else {
     df <- morie_datasets_vancouver_opendata_by_id("graffiti",
-                                                    limit = 100L,
-                                                    format = "json")
+      limit = 100L,
+      format = "json"
+    )
     if ("geo_point_2d" %in% names(df)) {
       df$lon <- df$geo_point_2d$lon
       df$lat <- df$geo_point_2d$lat
@@ -138,8 +151,9 @@ morie_datasets_vancouver_graffiti <- function(offline = TRUE,
     }
     df$geom <- NULL
   }
-  if (!is.null(max_features))
+  if (!is.null(max_features)) {
     df <- utils::head(df, as.integer(max_features))
+  }
   df
 }
 
@@ -152,13 +166,17 @@ morie_datasets_vancouver_graffiti <- function(offline = TRUE,
 #' head(df)
 #' @export
 morie_datasets_vancouver_noise_control_areas <- function(offline = TRUE,
-                                                            max_features = NULL) {
-  df <- if (offline)
+                                                         max_features = NULL) {
+  df <- if (offline) {
     .morie_vancouver_fixture("vancouver_noise_control_areas.csv")
-  else morie_datasets_vancouver_opendata_by_id("noise-control-areas",
-                                                  limit = 10L)
-  if (!is.null(max_features))
+  } else {
+    morie_datasets_vancouver_opendata_by_id("noise-control-areas",
+      limit = 10L
+    )
+  }
+  if (!is.null(max_features)) {
     df <- utils::head(df, as.integer(max_features))
+  }
   df
 }
 
@@ -171,13 +189,17 @@ morie_datasets_vancouver_noise_control_areas <- function(offline = TRUE,
 #' head(df)
 #' @export
 morie_datasets_vancouver_homeless_shelters <- function(offline = TRUE,
-                                                         max_features = NULL) {
-  df <- if (offline)
+                                                       max_features = NULL) {
+  df <- if (offline) {
     .morie_vancouver_fixture("vancouver_homeless_shelters.csv")
-  else morie_datasets_vancouver_opendata_by_id("homeless-shelter-locations",
-                                                  limit = 50L)
-  if (!is.null(max_features))
+  } else {
+    morie_datasets_vancouver_opendata_by_id("homeless-shelter-locations",
+      limit = 50L
+    )
+  }
+  if (!is.null(max_features)) {
     df <- utils::head(df, as.integer(max_features))
+  }
   df
 }
 
@@ -190,14 +212,21 @@ morie_datasets_vancouver_homeless_shelters <- function(offline = TRUE,
 #' head(df)
 #' @export
 morie_datasets_vancouver_property_use_inspection_districts <- function(
-    offline = TRUE, max_features = NULL) {
-  df <- if (offline)
+  offline = TRUE, max_features = NULL
+) {
+  df <- if (offline) {
     .morie_vancouver_fixture(
-      "vancouver_property_use_inspection_districts.csv")
-  else morie_datasets_vancouver_opendata_by_id(
-    "property-use-inspection-districts", limit = 50L)
-  if (!is.null(max_features))
+      "vancouver_property_use_inspection_districts.csv"
+    )
+  } else {
+    morie_datasets_vancouver_opendata_by_id(
+      "property-use-inspection-districts",
+      limit = 50L
+    )
+  }
+  if (!is.null(max_features)) {
     df <- utils::head(df, as.integer(max_features))
+  }
   df
 }
 
@@ -210,13 +239,17 @@ morie_datasets_vancouver_property_use_inspection_districts <- function(
 #' head(df)
 #' @export
 morie_datasets_vancouver_fire_halls <- function(offline = TRUE,
-                                                  max_features = NULL) {
-  df <- if (offline)
+                                                max_features = NULL) {
+  df <- if (offline) {
     .morie_vancouver_fixture("vancouver_fire_halls.csv")
-  else morie_datasets_vancouver_opendata_by_id("fire-halls",
-                                                  limit = 50L)
-  if (!is.null(max_features))
+  } else {
+    morie_datasets_vancouver_opendata_by_id("fire-halls",
+      limit = 50L
+    )
+  }
+  if (!is.null(max_features)) {
     df <- utils::head(df, as.integer(max_features))
+  }
   df
 }
 
@@ -238,13 +271,17 @@ morie_datasets_vancouver_fire_halls <- function(offline = TRUE,
 #' head(df)
 #' @export
 morie_datasets_vancouver_community_centres <- function(offline = TRUE,
-                                                         max_features = NULL) {
-  df <- if (offline)
+                                                       max_features = NULL) {
+  df <- if (offline) {
     .morie_vancouver_fixture("vancouver_community_centres.csv")
-  else morie_datasets_vancouver_opendata_by_id("community-centres",
-                                                  limit = 50L)
-  if (!is.null(max_features))
+  } else {
+    morie_datasets_vancouver_opendata_by_id("community-centres",
+      limit = 50L
+    )
+  }
+  if (!is.null(max_features)) {
     df <- utils::head(df, as.integer(max_features))
+  }
   df
 }
 
@@ -262,13 +299,18 @@ morie_datasets_vancouver_community_centres <- function(offline = TRUE,
 #' head(df)
 #' @export
 morie_datasets_vancouver_community_food_markets <- function(offline = TRUE,
-                                                              max_features = NULL) {
-  df <- if (offline)
+                                                            max_features = NULL) {
+  df <- if (offline) {
     .morie_vancouver_fixture("vancouver_community_food_markets.csv")
-  else morie_datasets_vancouver_opendata_by_id(
-    "community-food-markets-and-farmers-markets", limit = 100L)
-  if (!is.null(max_features))
+  } else {
+    morie_datasets_vancouver_opendata_by_id(
+      "community-food-markets-and-farmers-markets",
+      limit = 100L
+    )
+  }
+  if (!is.null(max_features)) {
     df <- utils::head(df, as.integer(max_features))
+  }
   df
 }
 
@@ -285,13 +327,17 @@ morie_datasets_vancouver_community_food_markets <- function(offline = TRUE,
 #' head(df)
 #' @export
 morie_datasets_vancouver_disability_parking <- function(offline = TRUE,
-                                                          max_features = NULL) {
-  df <- if (offline)
+                                                        max_features = NULL) {
+  df <- if (offline) {
     .morie_vancouver_fixture("vancouver_disability_parking.csv")
-  else morie_datasets_vancouver_opendata_by_id("disability-parking",
-                                                  limit = 100L)
-  if (!is.null(max_features))
+  } else {
+    morie_datasets_vancouver_opendata_by_id("disability-parking",
+      limit = 100L
+    )
+  }
+  if (!is.null(max_features)) {
     df <- utils::head(df, as.integer(max_features))
+  }
   df
 }
 
@@ -310,13 +356,17 @@ morie_datasets_vancouver_disability_parking <- function(offline = TRUE,
 #' head(df)
 #' @export
 morie_datasets_vancouver_public_art <- function(offline = TRUE,
-                                                  max_features = NULL) {
-  df <- if (offline)
+                                                max_features = NULL) {
+  df <- if (offline) {
     .morie_vancouver_fixture("vancouver_public_art.csv")
-  else morie_datasets_vancouver_opendata_by_id("public-art",
-                                                  limit = 100L)
-  if (!is.null(max_features))
+  } else {
+    morie_datasets_vancouver_opendata_by_id("public-art",
+      limit = 100L
+    )
+  }
+  if (!is.null(max_features)) {
     df <- utils::head(df, as.integer(max_features))
+  }
   df
 }
 
@@ -336,26 +386,35 @@ morie_datasets_vancouver_public_art <- function(offline = TRUE,
 #' @examples
 #' \donttest{
 #' df <- morie_datasets_vancouver_opendata_by_id("non-market-housing",
-#'                                                  limit = 50)
+#'   limit = 50
+#' )
 #' nrow(df)
 #' }
 #' @export
 morie_datasets_vancouver_opendata_by_id <- function(dataset_id,
-                                                      limit = 100L,
-                                                      format = c("json", "csv")) {
+                                                    limit = 100L,
+                                                    format = c("json", "csv")) {
   format <- match.arg(format)
   if (format == "json") {
-    url <- sprintf("%s/catalog/datasets/%s/records?limit=%d",
-                    .MORIE_VANCOUVER_OPENDATA_BASE,
-                    dataset_id, as.integer(limit))
+    url <- sprintf(
+      "%s/catalog/datasets/%s/records?limit=%d",
+      .MORIE_VANCOUVER_OPENDATA_BASE,
+      dataset_id, as.integer(limit)
+    )
     r <- .morie_dataset_http_json(url)
-    if (is.null(r$results)) return(data.frame())
+    if (is.null(r$results)) {
+      return(data.frame())
+    }
     return(r$results)
   }
   # CSV export
-  url <- sprintf("%s/catalog/datasets/%s/exports/csv",
-                  .MORIE_VANCOUVER_OPENDATA_BASE, dataset_id)
+  url <- sprintf(
+    "%s/catalog/datasets/%s/exports/csv",
+    .MORIE_VANCOUVER_OPENDATA_BASE, dataset_id
+  )
   text <- .morie_dataset_http_text(url)
-  utils::read.csv(text = text, sep = ";", stringsAsFactors = FALSE,
-                  check.names = FALSE)
+  utils::read.csv(
+    text = text, sep = ";", stringsAsFactors = FALSE,
+    check.names = FALSE
+  )
 }
