@@ -61,7 +61,7 @@ morie_conv2d <- function(image, kernel, bias = 0, stride = 1,
 #' x(t) = sum_l c_l phi_l(t).
 #' @param t numeric grid of observation points
 #' @param n_basis number of basis functions
-#' @param kind "fourier" (default) or "poly"
+#' @param kind "fourier" (default), or "poly" / "polynomial"
 #' @param period Fourier period; defaults to the range of `t`
 #' @return numeric matrix with one row per grid point
 #' @noRd
@@ -69,8 +69,28 @@ morie_fda_basis <- function(t, n_basis, kind = "fourier",
                             period = NULL) {
   # the basis expansion of eq. (14.5): x(t) = sum_l c_l phi_l(t)
   tt <- as.numeric(t)
-  if (is.null(period)) period <- max(tt) - min(tt)
-  if (period <= 0) period <- 1
+  if (length(tt) == 0L) {
+    stop("t is empty.", call. = FALSE)
+  }
+  n_basis <- as.integer(n_basis)
+  if (is.na(n_basis) || n_basis < 1L) {
+    stop("n_basis must be a positive integer.", call. = FALSE)
+  }
+  lo <- min(tt)
+  span <- max(tt) - lo
+  if (span <= 0) {
+    span <- 1
+  }
+  if (is.null(period)) {
+    period <- span
+  } else {
+    period <- as.numeric(period)
+    # previously any non-positive period was silently clamped to 1, which
+    # returned a basis over a domain the caller never asked for
+    if (!is.finite(period) || period <= 0) {
+      stop("period must be a finite positive number.", call. = FALSE)
+    }
+  }
   Psi <- matrix(0, length(tt), n_basis)
   if (identical(kind, "fourier")) {
     Psi[, 1] <- 1
@@ -83,8 +103,24 @@ morie_fda_basis <- function(t, n_basis, kind = "fourier",
         k <- k + 1L
       }
     }
+  } else if (kind %in% c("poly", "polynomial")) {
+    # monomials of the domain rescaled to [0, 1]. Raw tt^(l - 1) spans the
+    # same space, but is unusable in double precision: at tt = 2015..2020
+    # with n_basis = 5 the Gram matrix that morie_fda_coefficients inverts
+    # has condition number 2.2e34, against the ~1e16 a double carries, so
+    # every coefficient returned on a realistic time domain was noise.
+    # Rescaled, the same data gives 5.7e4. Matches the Python arm, which
+    # always rescaled -- the two arms previously disagreed outright.
+    u <- (tt - lo) / span
+    for (l in seq_len(n_basis)) {
+      Psi[, l] <- u^(l - 1L)
+    }
   } else {
-    for (l in seq_len(n_basis)) Psi[, l] <- tt^(l - 1L)
+    # was a bare else, so kind = "typo!" silently returned the polynomial
+    # basis instead of reporting the mistake
+    stop("unknown basis: ", as.character(kind)[1L],
+         " (expected \"fourier\", \"poly\" or \"polynomial\")",
+         call. = FALSE)
   }
   Psi
 }
