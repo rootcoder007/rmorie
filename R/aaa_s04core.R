@@ -263,3 +263,71 @@ NULL
   for (j in seq_len(n)) if (p[j + 1L] > 0L) ans[p[j + 1L]] <- j - 1L
   ans
 }
+
+## Two-way ANOVA mean squares for the intraclass correlations.
+.s4_icc_ms <- function(y, subject, rater) {
+  yv <- as.numeric(y)
+  sv <- as.integer(round(as.numeric(subject)))
+  rv <- as.integer(round(as.numeric(rater)))
+  subs <- unique(sv); rats <- unique(rv)
+  n <- length(subs); k <- length(rats)
+  grand <- sum(yv) / length(yv)
+  rm_ <- vapply(subs, function(s) mean(yv[sv == s]), 0)
+  cm_ <- vapply(rats, function(r) mean(yv[rv == r]), 0)
+  ss_r <- k * sum((rm_ - grand)^2)
+  ss_c <- n * sum((cm_ - grand)^2)
+  ss_t <- sum((yv - grand)^2)
+  ss_e <- ss_t - ss_r - ss_c
+  list(ms_r = if (n > 1) ss_r / (n - 1) else NaN,
+       ms_c = if (k > 1) ss_c / (k - 1) else NaN,
+       ms_e = if (n > 1 && k > 1) ss_e / ((n - 1) * (k - 1)) else NaN,
+       k = as.numeric(k), n = as.numeric(n))
+}
+
+## Zhang-Stephens empirical-Bayes generalised Pareto fit. Fixed grid of
+## 30 + floor(sqrt(N)) points weighted by the profile likelihood -- no
+## optimiser, so the arms cannot land on different local optima.
+.s4_gpdfit <- function(x) {
+  N <- length(x)
+  if (N < 5L) return(list(k = NaN, sigma = NaN))
+  M <- 30L + as.integer(floor(sqrt(N)))
+  xstar <- x[as.integer(floor(N / 4 + 0.5))]
+  jj <- seq_len(M)
+  theta <- 1 / x[N] + (1 - sqrt(M / (jj - 0.5))) / (3 * xstar)
+  lt <- numeric(M)
+  for (i in jj) {
+    a <- theta[i]
+    kk <- sum(log1p(-a * x)) / N
+    lt[i] <- if (kk < 0 && a != 0) N * (log(-a / kk) - kk - 1) else -1e300
+  }
+  w <- exp(lt - max(lt))
+  th <- if (sum(w) > 0) sum(theta * w) / sum(w) else 0
+  k <- sum(log1p(-th * x)) / N
+  sigma <- if (th != 0) -k / th else NaN
+  k <- k * N / (N + 10) + 0.5 * 10 / (N + 10)
+  list(k = k, sigma = sigma)
+}
+
+## Pareto-smoothed importance sampling on log weights.
+.s4_psis <- function(lw) {
+  lw <- as.numeric(lw); Sn <- length(lw)
+  lw <- lw - max(lw)
+  M <- as.integer(min(0.2 * Sn, 3 * sqrt(Sn)))
+  if (M < 5L) return(list(lw = lw, k = NaN))
+  o <- order(lw, seq_along(lw))
+  tail <- o[(Sn - M + 1L):Sn]
+  cut <- lw[o[Sn - M]]
+  ecut <- exp(cut)
+  x <- sort(exp(lw[tail]) - ecut)
+  if (x[length(x)] <= 0) return(list(lw = lw, k = NaN))
+  g <- .s4_gpdfit(x)
+  if (!is.nan(g$k) && !is.nan(g$sigma)) {
+    for (z in seq_len(M)) {
+      p <- (z - 0.5) / M
+      q <- if (g$k != 0) g$sigma / g$k * expm1(-g$k * log1p(-p)) else -g$sigma * log1p(-p)
+      lw[tail[z]] <- log(q + ecut)
+    }
+  }
+  lw <- pmin(lw, max(lw))
+  list(lw = lw, k = g$k)
+}
