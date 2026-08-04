@@ -30,8 +30,50 @@ morie_sparse_kernel_design(X, m_index, kernel = "linear", gamma = NULL, tol = 1e
 \item{X}{numeric matrix of inputs, one row per observation}
 \item{y}{numeric response vector}
 \item{kernel}{kernel name, one of linear, gaussian, polynomial, exponential, sigmoid or arccos}
-\item{bandwidth}{kernel bandwidth or scale parameter}
-\item{...}{further arguments passed to the kernel}
+
+\item{gamma}{argument \code{gamma}; not described in the source.}
+
+\item{degree}{argument \code{degree}; not described in the source.}
+
+\item{coef0}{argument \code{coef0}; not described in the source.}
+
+\item{Z}{argument \code{Z}; not described in the source.}
+
+\item{K}{argument \code{K}; not described in the source.}
+
+\item{lambda}{argument \code{lambda}; not described in the source.}
+
+\item{K_new}{argument \code{K_new}; not described in the source.}
+
+\item{beta}{argument \code{beta}; not described in the source.}
+
+\item{eta0}{argument \code{eta0}; not described in the source.}
+
+\item{C}{argument \code{C}; not described in the source.}
+
+\item{sigma2_e}{argument \code{sigma2_e}; not described in the source.}
+
+\item{form}{argument \code{form}; not described in the source.}
+
+\item{depth}{argument \code{depth}; not described in the source.}
+
+\item{normalize_median}{argument \code{normalize_median}; not described in the source.}
+
+\item{sigma2_u}{argument \code{sigma2_u}; not described in the source.}
+
+\item{mu}{argument \code{mu}; not described in the source.}
+
+\item{Z_u1}{argument \code{Z_u1}; not described in the source.}
+
+\item{Z_E}{argument \code{Z_E}; not described in the source.}
+
+\item{sigma2_u1}{argument \code{sigma2_u1}; not described in the source.}
+
+\item{sigma2_u2}{argument \code{sigma2_u2}; not described in the source.}
+
+\item{tol}{argument \code{tol}; not described in the source.}
+
+\item{m_index}{argument \code{m_index}; not described in the source.}
 }
 \value{
 A list holding the fitted quantities for the method called: point

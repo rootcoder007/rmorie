@@ -20,6 +20,14 @@ morie_logistic_wald(
 \item{z}{Critical value. @param xs Covariate vector (leading 1).}
 
 \item{cov}{Coefficient covariance. @param xb Linear predictor value.}
+
+\item{var_b1}{argument \code{var_b1}; not described in the source.}
+
+\item{c}{argument \code{c}; not described in the source.}
+
+\item{xs}{argument \code{xs}; not described in the source.}
+
+\item{xb}{argument \code{xb}; not described in the source.}
 }
 \value{
 List with or, or_lower, or_upper, var_xb, pi, pi_lower, pi_upper.

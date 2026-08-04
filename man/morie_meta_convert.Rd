@@ -24,10 +24,6 @@ morie_meta_convert(
 
 \item{se_ln_or}{Its standard error.}
 
-\item{p1, p2}{Group probabilities.}
-
-\item{n1, n2}{Group sizes.}
-
 \item{d}{Cohen's d.}
 
 \item{se_d}{Its standard error.}
@@ -39,6 +35,16 @@ ratio.}
 
 \item{r}{Point-biserial r.
 @param se_r Its standard error.}
+
+\item{p1}{argument \code{p1}; not described in the source.}
+
+\item{p2}{argument \code{p2}; not described in the source.}
+
+\item{n1}{argument \code{n1}; not described in the source.}
+
+\item{n2}{argument \code{n2}; not described in the source.}
+
+\item{se_r}{Its standard error.}
 }
 \value{
 List of every conversion whose inputs were supplied.

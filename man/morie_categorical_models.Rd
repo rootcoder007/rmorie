@@ -21,7 +21,32 @@ morie_penalized_poisson(X, y, lambda = 1, penalty = "ridge", n_iter = 100L, tol 
 \item{X}{predictor matrix}
 \item{n_iter}{number of Gibbs iterations}
 \item{lambda}{penalty parameter}
-\item{...}{further arguments controlling the fit}
+
+\item{eta}{argument \code{eta}; not described in the source.}
+
+\item{thresholds}{argument \code{thresholds}; not described in the source.}
+
+\item{link}{argument \code{link}; not described in the source.}
+
+\item{burn_in}{argument \code{burn_in}; not described in the source.}
+
+\item{nu_beta}{argument \code{nu_beta}; not described in the source.}
+
+\item{S_beta}{argument \code{S_beta}; not described in the source.}
+
+\item{seed}{argument \code{seed}; not described in the source.}
+
+\item{beta0}{argument \code{beta0}; not described in the source.}
+
+\item{beta}{argument \code{beta}; not described in the source.}
+
+\item{baseline_last}{argument \code{baseline_last}; not described in the source.}
+
+\item{penalty}{argument \code{penalty}; not described in the source.}
+
+\item{tol}{argument \code{tol}; not described in the source.}
+
+\item{add_intercept}{argument \code{add_intercept}; not described in the source.}
 }
 \value{
 A list holding the fitted quantities for the method called: point

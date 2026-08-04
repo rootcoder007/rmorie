@@ -21,7 +21,16 @@ morie_fda_loocv(t, x_t, L2, kind = "fourier")
 \item{L1}{number of coefficient-function basis terms}
 \item{L2}{number of curve basis terms}
 \item{kind}{basis kind, "fourier" or "poly"}
-\item{...}{further arguments passed to the basis}
+
+\item{beta_coefs}{basis coefficients from [morie_fda_fit()]}
+
+\item{loglik}{maximised log-likelihood}
+
+\item{n_params}{number of estimated parameters}
+
+\item{n_obs}{number of observations}
+
+\item{x_t}{observed curve values}
 }
 \value{
 A list holding the fitted quantities for the method called: point

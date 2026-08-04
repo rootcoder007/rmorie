@@ -17,7 +17,8 @@ morie_ann_train(X, y, W, eta = 0.1, n_iter = 500L, activations = NULL, tol = 1e-
 \item{activations}{character vector of activation names, one per layer}
 \item{eta}{learning rate}
 \item{n_iter}{number of gradient-descent steps}
-\item{...}{further arguments controlling training}
+
+\item{tol}{argument \code{tol}; not described in the source.}
 }
 \value{
 A list holding the fitted quantities for the method called: point

@@ -10,10 +10,6 @@ morie_adf_test(y, lags = 1, kind = "drift")
 \item{y}{numeric series, or the response for \code{morie_rlm}}
 \item{lags}{number of lagged differences in the ADF regression}
 \item{kind}{"none", "drift" or "trend"}
-\item{X}{predictor matrix}
-\item{add_intercept}{prepend an intercept column}
-\item{k}{Huber tuning constant}
-\item{max_iter, tol}{iteration controls}
 }
 \value{
 \code{morie_adf_test} returns the test statistic with Dickey-Fuller

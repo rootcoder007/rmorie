@@ -11,7 +11,14 @@ morie_brr_gibbs(y, X, n_iter = 2000L, burn_in = 500L, nu = 5, nu_beta = 5, R2 = 
 \item{X}{predictor matrix}
 \item{n_iter}{number of Gibbs iterations}
 \item{burn_in}{iterations discarded as burn-in}
-\item{...}{further arguments controlling the sampler}
+
+\item{nu}{argument \code{nu}; not described in the source.}
+
+\item{nu_beta}{argument \code{nu_beta}; not described in the source.}
+
+\item{R2}{argument \code{R2}; not described in the source.}
+
+\item{seed}{argument \code{seed}; not described in the source.}
 }
 \value{
 A list holding the fitted quantities for the method called: point

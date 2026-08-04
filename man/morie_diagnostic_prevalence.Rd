@@ -19,6 +19,20 @@ morie_diagnostic_prevalence(
 \item{pi}{Apparent positive probability. @param se,sp Sensitivity and
 specificity. @param i_size Group size I. @param pi_tilde True
 prevalence. @param b0,bs,xs Group-testing logit pieces.}
+
+\item{se}{argument \code{se}; not described in the source.}
+
+\item{sp}{argument \code{sp}; not described in the source.}
+
+\item{i_size}{argument \code{i_size}; not described in the source.}
+
+\item{pi_tilde}{argument \code{pi_tilde}; not described in the source.}
+
+\item{b0}{argument \code{b0}; not described in the source.}
+
+\item{bs}{argument \code{bs}; not described in the source.}
+
+\item{xs}{argument \code{xs}; not described in the source.}
 }
 \value{
 List with prevalence, expected_tests, pi_group (as supplied).
