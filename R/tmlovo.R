@@ -21,9 +21,9 @@
 #'   rmse_resid, n, method.
 #' @keywords internal
 #' @examples
-#' Tmleor(c(1, 0, 1, 1, 0, 1), c(1, 0, 1, 0, 1, 0))$psi_gcomp
+#' Tmleoutcomeonlyregr(c(1, 0, 1, 1, 0, 1), c(1, 0, 1, 0, 1, 0))$psi_gcomp
 #' @export
-Tmleor <- function(y, D, X = NULL, alpha = 0.05) {
+Tmleoutcomeonlyregr <- function(y, D, X = NULL, alpha = 0.05) {
   yv <- .s03vec(y); d <- .s03vec(D); n <- length(yv)
   Z <- .s03design(X, n)
   Q <- cbind(1, d, Z[, -1, drop = FALSE])

@@ -121,7 +121,7 @@
     r_mat <- rho_mat^p
     r_vec <- rho_vec^p
     lam <- tryCatch(solve(r_mat, r_vec),
-      error = function(e) as.numeric(MASS_ginv(r_mat) %*% r_vec)
+      error = function(e) as.numeric(.morie_pinv(r_mat) %*% r_vec)
     )
     pred <- pred + b[p + 1L] * sum(lam * eta[p + 1L, ])
     s2 <- 1 - sum(lam * r_vec)

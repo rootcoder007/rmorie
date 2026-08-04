@@ -51,13 +51,7 @@ t3ols <- function(X, y) {
   X <- as.matrix(X); y <- as.numeric(y)
   xtx <- t(X) %*% X; xty <- t(X) %*% y
   b <- try(solve(xtx, xty), silent = TRUE)
-  if (inherits(b, "try-error")) b <- MASS_ginv(xtx) %*% xty
+  if (inherits(b, "try-error")) b <- .morie_pinv(xtx) %*% xty
   as.numeric(b)
 }
 
-MASS_ginv <- function(M) {
-  s <- svd(M)
-  tol <- max(dim(M)) * max(s$d) * .Machine$double.eps
-  dinv <- ifelse(s$d > tol, 1 / s$d, 0)
-  s$v %*% diag(dinv, length(dinv)) %*% t(s$u)
-}

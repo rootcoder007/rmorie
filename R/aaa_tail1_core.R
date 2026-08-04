@@ -1,3 +1,10 @@
+.morie_pinv <- function(M, rcond = 1e-15) {
+  s <- svd(M)
+  cutoff <- rcond * max(s$d)
+  dinv <- ifelse(s$d > cutoff, 1 / s$d, 0)
+  s$v %*% diag(dinv, length(dinv)) %*% t(s$u)
+}
+
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Shared numeric helpers for the tail1 batch
 #'
@@ -60,11 +67,6 @@ NULL
   list(beta = beta, fitted = fitted, resid = resid, xtxinv = xtxinv)
 }
 
-MASS_ginv <- function(M) {
-  s <- svd(M)
-  d <- ifelse(s$d > 1e-12, 1 / s$d, 0)
-  s$v %*% diag(d, length(d)) %*% t(s$u)
-}
 
 .t1_hatdiag <- function(X, xtxinv) {
   X <- as.matrix(X)
