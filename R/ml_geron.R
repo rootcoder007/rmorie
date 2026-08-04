@@ -56,10 +56,6 @@
   .morie_gr_xor32(crc, 4294967295)
 }
 
-.morie_gr_softmax <- function(row) {
-  ex <- exp(row - max(row))
-  ex / sum(ex)
-}
 
 # --- ch. 4, p. 158: the bias/variance trade-off ------------------------
 

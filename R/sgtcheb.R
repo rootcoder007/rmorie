@@ -1,12 +1,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Exact Cheeger constant, with the eigenvalue bounds it satisfies.
+#' Exact Sgtcheegerbound constant, with the eigenvalue bounds it satisfies.
 #'
 #' Computed by exhaustive enumeration of the vertex bipartitions, so it is
 #' exact rather than a relaxation. Enumeration is exponential, hence the
 #' \code{max_n} guard.
 #'
 #' Formula: h_G(S) = |E(S, Sbar)| / min(vol S, vol Sbar),
-#'   h_G = min_S h_G(S); Cheeger inequality 2 h_G >= lambda_1 > h_G^2 / 2,
+#'   h_G = min_S h_G(S); Sgtcheegerbound inequality 2 h_G >= lambda_1 > h_G^2 / 2,
 #'   and the sharper lambda_1 >= 1 - sqrt(1 - h_G^2)
 #'
 #' @param W Symmetric non-negative weight matrix, connected.
@@ -20,13 +20,13 @@
 #'   lambda_1 >= 1 - sqrt(1 - h_G^2). Fetched from the author's own copy
 #'   of the chapter.
 #' @export
-Cheeger <- function(W, max_n = 20) {
+Sgtcheegerbound <- function(W, max_n = 20) {
   W <- as.matrix(W)
   n <- nrow(W)
   if (ncol(W) != n) stop("W must be square")
   if (n > as.integer(max_n))
     stop("exact enumeration refused above max_n vertices")
-  if (n < 2L) stop("the Cheeger constant needs at least two vertices")
+  if (n < 2L) stop("the Sgtcheegerbound constant needs at least two vertices")
   d <- rowSums(W)
   vol <- sum(d)
   best <- NA_real_; arg <- integer(0); cut <- 0; vs <- 0
@@ -49,5 +49,5 @@ Cheeger <- function(W, max_n = 20) {
              vol_complement = vol - vs, lambda1 = lam1,
              upper_bound = 2 * best, lower_bound = best^2 / 2,
              lower_bound_sharp = sharp, n = n,
-             method = "Cheeger constant with Chung Theorems 2.2 and 2.3")
+             method = "Sgtcheegerbound constant with Chung Theorems 2.2 and 2.3")
 }
