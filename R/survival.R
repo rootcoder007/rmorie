@@ -211,3 +211,26 @@ morie_concordance_index <- function(time, event, predicted_risk) {
   list(c_index = (conc + 0.5 * tied) / tot, concordant = conc,
        discordant = disc, tied = tied, n_pairs = tot)
 }
+
+# Pre-policy spellings of the estimators renamed when the survival
+# family was de-externalized.  Kept working as aliases.
+
+#' @rdname morie_kaplan_meier
+#' @export
+morie_survival_km <- morie_kaplan_meier
+
+#' @rdname morie_nelson_aalen
+#' @export
+morie_survival_nelsonaalen <- morie_nelson_aalen
+
+#' @rdname morie_logrank_test
+#' @export
+morie_survival_logrank <- morie_logrank_test
+
+#' @rdname morie_cox_ph
+#' @export
+morie_survival_cox <- morie_cox_ph
+
+#' @rdname morie_concordance_index
+#' @export
+morie_survival_concordance <- morie_concordance_index

@@ -64,7 +64,7 @@
   }, numeric(1))
 }
 
-morie_survival_rmst <- function(time, event, tau = NULL, alpha = 0.05) {
+Rmst <- function(time, event, tau = NULL, alpha = 0.05) {
   # RMST(tau) = integral_0^tau S(t) dt, the area under the KM curve, with
   # the variance of Klein and Moeschberger (2003) eq. (4.5.4).  The
   # horizon is not optional in substance: RMST is estimable only out to
@@ -112,7 +112,7 @@ morie_survival_rmst <- function(time, event, tau = NULL, alpha = 0.05) {
                       "area under the Kaplan-Meier curve"))
 }
 
-morie_survival_rmst_diff <- function(time, event, group, tau = NULL,
+Rmstdiff <- function(time, event, group, tau = NULL,
                                      alpha = 0.05) {
   # RMST_1 - RMST_2 with SE = sqrt(V1 + V2), the groups independent.
   # tau MUST be common to both arms and is capped at the smaller of the
@@ -135,9 +135,9 @@ morie_survival_rmst_diff <- function(time, event, group, tau = NULL,
   cap <- min(vapply(parts, function(p) max(p$t), numeric(1)))
   horizon <- if (is.null(tau)) cap else min(as.numeric(tau), cap)
   capped <- !is.null(tau) && as.numeric(tau) > cap
-  a <- morie_survival_rmst(parts[[1]]$t, parts[[1]]$e, tau = horizon,
+  a <- Rmst(parts[[1]]$t, parts[[1]]$e, tau = horizon,
                            alpha = alpha)
-  b <- morie_survival_rmst(parts[[2]]$t, parts[[2]]$e, tau = horizon,
+  b <- Rmst(parts[[2]]$t, parts[[2]]$e, tau = horizon,
                            alpha = alpha)
   diff <- a$rmst - b$rmst
   se <- sqrt(a$variance + b$variance)
@@ -152,7 +152,7 @@ morie_survival_rmst_diff <- function(time, event, group, tau = NULL,
        method = "difference of restricted means over a COMMON horizon")
 }
 
-morie_survival_martingale <- function(time, event, X, beta) {
+Martingale <- function(time, event, X, beta) {
   # M_i = delta_i - H0(t_i) exp(x_i' beta): observed events minus
   # expected.  They sum to zero at the fitted beta, which is returned as
   # a check.  Used for functional form -- residuals from a NULL model
@@ -170,7 +170,7 @@ morie_survival_martingale <- function(time, event, X, beta) {
        method = "M_i = delta_i - H0(t_i) exp(x_i' beta), Breslow baseline")
 }
 
-morie_survival_deviance <- function(time, event, X, beta) {
+Devresid <- function(time, event, X, beta) {
   # d_i = sign(M) sqrt(-2[M + delta log(delta - M)]), a symmetrizing
   # transform of the martingale residuals: roughly normal when the model
   # fits, so a large |d_i| is an outlier in the usual sense.  The log
@@ -178,7 +178,7 @@ morie_survival_deviance <- function(time, event, X, beta) {
   # swept aside.  The sum of squares is NOT the model deviance for a Cox
   # fit -- the partial likelihood is not a full likelihood.
   z <- .ms_check(time, event); t <- z$t; e <- z$e
-  m <- morie_survival_martingale(t, e, X, beta)$residuals
+  m <- Martingale(t, e, X, beta)$residuals
   d <- numeric(length(t))
   for (i in seq_along(t)) {
     inner <- m[i]
@@ -198,7 +198,7 @@ morie_survival_deviance <- function(time, event, X, beta) {
        method = "d_i = sign(M) sqrt(-2[M + delta log(delta - M)])")
 }
 
-morie_survival_coxsnell <- function(time, event, X, beta) {
+Coxsnell <- function(time, event, X, beta) {
   # r_i = H0(t_i) exp(x_i' beta) = delta_i - M_i, the fitted cumulative
   # hazard.  If the model is right these behave like a censored unit
   # exponential sample, so the Nelson-Aalen hazard OF THE RESIDUALS
@@ -225,7 +225,7 @@ morie_survival_coxsnell <- function(time, event, X, beta) {
        method = "r_i = H0(t_i) exp(x_i' beta) = delta_i - M_i")
 }
 
-morie_survival_schoenfeld <- function(time, event, X, beta, vcov = NULL,
+Schoenfeld <- function(time, event, X, beta, vcov = NULL,
                                       scaled = TRUE) {
   # s_i = x_i - weighted risk-set mean at each event time.  Grambsch and
   # Therneau (1994) scale them, s* = beta + d V s; under proportional
@@ -281,13 +281,13 @@ morie_survival_schoenfeld <- function(time, event, X, beta, vcov = NULL,
   out
 }
 
-morie_survival_hr <- function(beta, se, alpha = 0.05, names = NULL) {
+Hazratio <- function(beta, se, alpha = 0.05, names = NULL) {
   # HR = exp(beta), CI = exp(beta +/- z se).  The interval is formed on
   # the LOG scale and exponentiated, so it is asymmetric about the HR and
   # cannot cross zero.  Building it as HR +/- z se(HR) -- the common slip
   # -- gives an interval that can include negative hazard ratios and has
   # the wrong coverage.  Constant over time only if PH holds; check with
-  # morie_survival_schoenfeld before quoting one number.
+  # Schoenfeld before quoting one number.
   b <- as.numeric(beta); s <- as.numeric(se)
   if (length(b) != length(s)) stop("beta and se must have the same length")
   if (!length(b)) stop("need at least one coefficient")
@@ -303,7 +303,7 @@ morie_survival_hr <- function(beta, se, alpha = 0.05, names = NULL) {
                       "log scale"))
 }
 
-morie_survival_cif <- function(time, cause, code = 1, alpha = 0.05) {
+Cif <- function(time, cause, code = 1, alpha = 0.05) {
   # Aalen-Johansen: CIF_k(t) = sum S(t_{i-1}) d_ki / n_i, with S the
   # ALL-CAUSE Kaplan-Meier.  The S(t_{i-1}) factor is the entire point:
   # censoring the competing events and running an ordinary KM gives
@@ -342,7 +342,7 @@ morie_survival_cif <- function(time, cause, code = 1, alpha = 0.05) {
                       "curve censors the competing events and overstates"))
 }
 
-morie_survival_finegray <- function(time, cause, X, code = 1,
+Finegray <- function(time, cause, X, code = 1,
                                     max_iter = 50L, tol = 1e-9) {
   # Fine and Gray (1999, JASA 94:496-509).  A Cox model on the
   # SUBDISTRIBUTION risk set: a subject failing of a competing cause
@@ -405,7 +405,7 @@ morie_survival_finegray <- function(time, cause, X, code = 1,
                       "IPCW risk set"))
 }
 
-morie_survival_left_truncated_km <- function(entry, time, event,
+Ltkm <- function(entry, time, event,
                                              alpha = 0.05) {
   # The only change from the ordinary estimator is the risk set:
   # n_i = #{ j : entry_j < t_i <= time_j }.  Ignoring the truncation
@@ -444,7 +444,7 @@ morie_survival_left_truncated_km <- function(entry, time, event,
                       "entry < t <= time"))
 }
 
-morie_survival_landmark <- function(time, event, landmark_time, X = NULL,
+Landmark <- function(time, event, landmark_time, X = NULL,
                                     group = NULL, alpha = 0.05) {
   # Drop subjects who fail or are censored before the landmark, reset the
   # clock, analyse the survivors.  The standard remedy for immortal-time
@@ -492,7 +492,7 @@ morie_survival_landmark <- function(time, event, landmark_time, X = NULL,
   out
 }
 
-morie_survival_turnbull <- function(left, right, max_iter = 1000L,
+Turnbull <- function(left, right, max_iter = 1000L,
                                     tol = 1e-10) {
   # Turnbull (1976, JRSS-B 38:290-295).  Mass sits only on the maximal
   # "Turnbull intervals" and is found by self-consistency, which is an EM
@@ -610,7 +610,7 @@ morie_survival_turnbull <- function(left, right, max_iter = 1000L,
        fixed_scale = fixed, convergence = fit$convergence)
 }
 
-morie_survival_parametric <- function(time, event, dist = "weibull") {
+Parasurv <- function(time, event, dist = "weibull") {
   # ML for a log-location-scale family with right censoring:
   #   prod f(t)^delta S(t)^(1-delta).
   # Censored observations enter through S, not f -- dropping them or
@@ -639,7 +639,7 @@ morie_survival_parametric <- function(time, event, dist = "weibull") {
   fit
 }
 
-morie_survival_aft <- function(time, event, X, dist = "weibull",
+Aftfit <- function(time, event, X, dist = "weibull",
                                alpha = 0.05) {
   # log T = x'beta + sigma W.  Coefficients act MULTIPLICATIVELY ON TIME:
   # exp(beta_j) is the factor by which a unit of x_j stretches survival,
@@ -668,7 +668,7 @@ morie_survival_aft <- function(time, event, X, dist = "weibull",
   fit
 }
 
-morie_survival_compare_parametric <- function(time, event, X = NULL,
+Paracompare <- function(time, event, X = NULL,
                                               dists = NULL) {
   # Each family fitted by ML and ranked by AIC, with BIC alongside.  The
   # families are NOT nested (except exponential inside Weibull), so a
@@ -681,8 +681,8 @@ morie_survival_compare_parametric <- function(time, event, X = NULL,
   fits <- list(); errs <- list()
   for (d in nm) {
     r <- tryCatch(
-      if (is.null(X)) morie_survival_parametric(time, event, dist = d)
-      else morie_survival_aft(time, event, X, dist = d),
+      if (is.null(X)) Parasurv(time, event, dist = d)
+      else Aftfit(time, event, X, dist = d),
       error = function(e) e)
     if (inherits(r, "error")) errs[[d]] <- conditionMessage(r)
     else fits[[d]] <- r
@@ -708,3 +708,67 @@ morie_survival_compare_parametric <- function(time, event, X = NULL,
   }
   out
 }
+
+# Pre-policy spellings.  The naming policy makes the CamelCase name
+# canonical -- no underscores, the namespace is the prefix -- and keeps
+# the older spelling as an alias so existing code keeps working.
+
+#' @rdname Aftfit
+#' @export
+morie_survival_aft <- Aftfit
+
+#' @rdname Cif
+#' @export
+morie_survival_cif <- Cif
+
+#' @rdname Paracompare
+#' @export
+morie_survival_compare_parametric <- Paracompare
+
+#' @rdname Coxsnell
+#' @export
+morie_survival_coxsnell <- Coxsnell
+
+#' @rdname Devresid
+#' @export
+morie_survival_deviance <- Devresid
+
+#' @rdname Finegray
+#' @export
+morie_survival_finegray <- Finegray
+
+#' @rdname Hazratio
+#' @export
+morie_survival_hr <- Hazratio
+
+#' @rdname Landmark
+#' @export
+morie_survival_landmark <- Landmark
+
+#' @rdname Ltkm
+#' @export
+morie_survival_left_truncated_km <- Ltkm
+
+#' @rdname Martingale
+#' @export
+morie_survival_martingale <- Martingale
+
+#' @rdname Parasurv
+#' @export
+morie_survival_parametric <- Parasurv
+
+#' @rdname Rmst
+#' @export
+morie_survival_rmst <- Rmst
+
+#' @rdname Rmstdiff
+#' @export
+morie_survival_rmst_diff <- Rmstdiff
+
+#' @rdname Schoenfeld
+#' @export
+morie_survival_schoenfeld <- Schoenfeld
+
+#' @rdname Turnbull
+#' @export
+morie_survival_turnbull <- Turnbull
