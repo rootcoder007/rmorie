@@ -3,29 +3,25 @@
 \name{Parasurv}
 \alias{Parasurv}
 \alias{morie_survival_parametric}
-\title{Parametric survival fit}
+\title{Parametric survival fit by maximum likelihood}
 \usage{
 Parasurv(time, event, dist = "weibull")
+
+morie_survival_parametric(time, event, dist = "weibull")
 }
 \arguments{
-\item{time}{Numeric vector of follow-up times.}
+\item{time}{observed follow-up times.}
 
-\item{event}{Numeric or logical vector; 1 (or \code{TRUE}) for an event, 0 for right censoring.}
+\item{event}{event indicator, 1 = event, 0 = censored.}
 
-\item{dist}{Character; one of \code{"weibull"}, \code{"exponential"}, \code{"lognormal"}, \code{"loglogistic"}.}
+\item{dist}{distribution: one of weibull, exponential, lognormal or loglogistic.}
 }
 \value{
-A list with \code{loglik}, \code{aic}, \code{location}, \code{scale}, \code{fixed_scale} and, for the Weibull, \code{lr_vs_exponential}.
+list with the location and scale estimates, the log-likelihood, AIC and BIC.
 }
 \description{
-Parametric survival fit.
+ML for a log-location-scale family with right censoring, maximising prod f(t)^delta S(t)^(1-delta).
 }
-\details{
-Maximum likelihood for a log-location-scale family with right censoring. Censored observations enter through the survivor function, not the density; treating them as events, or dropping them, biases the fit. The exponential is the Weibull with scale fixed at 1, so the two are nested and the likelihood-ratio statistic is reported.
-
-\code{morie_survival_parametric} is the pre-policy spelling and is the same
-function.
-}
-\examples{
-Parasurv(c(1, 2, 3, 4, 5), c(1, 1, 0, 1, 1), "weibull")
+\references{
+Kalbfleisch, J. D. and Prentice, R. L. (2002). The Statistical Analysis of Failure Time Data, 2nd ed., Wiley.
 }

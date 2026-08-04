@@ -36,11 +36,11 @@ full \pkg{rdpower} simulation-based surface alongside it.
 }
 \examples{
 \donttest{
-  if (requireNamespace("rdpower", quietly = TRUE)) {
-    set.seed(1)
-    R <- runif(500, -1, 1)
-    Y <- 0.4 * R + (R >= 0) * 0.2 + rnorm(500, sd = 0.5)
-    morie_rdd_power_calc(cbind(Y, R), cutoff = 0, tau = 0.2)
-  }
+if (requireNamespace("rdpower", quietly = TRUE)) {
+  set.seed(1)
+  R <- runif(500, -1, 1)
+  Y <- 0.4 * R + (R >= 0) * 0.2 + rnorm(500, sd = 0.5)
+  morie_rdd_power_calc(cbind(Y, R), cutoff = 0, tau = 0.2)
+}
 }
 }

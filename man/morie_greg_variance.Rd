@@ -20,23 +20,13 @@ morie_greg_variance(
 \arguments{
 \item{e}{Residuals. @param n,n_population Sizes.}
 
+\item{x_k, xbar_true, xbar_sample, s2_x}{Simple g-weight pieces.}
+
 \item{g}{g-weights for the weighted variance.}
 
 \item{pi}{Inclusion probabilities (calibration-residual route).}
 
 \item{ratio}{If TRUE return the N^2 S2(e)/n ratio-total variance.}
-
-\item{n}{argument \code{n}; not described in the source.}
-
-\item{n_population}{argument \code{n_population}; not described in the source.}
-
-\item{x_k}{argument \code{x_k}; not described in the source.}
-
-\item{xbar_true}{argument \code{xbar_true}; not described in the source.}
-
-\item{xbar_sample}{argument \code{xbar_sample}; not described in the source.}
-
-\item{s2_x}{argument \code{s2_x}; not described in the source.}
 }
 \value{
 List with s2_e, variance, g_weight, g_variance, ratio_variance,

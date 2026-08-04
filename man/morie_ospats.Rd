@@ -28,34 +28,11 @@ morie_ospats(
 
 \item{n}{Total sample size. @param s_h,c_h Allocation pieces.}
 
+\item{zhat_i, zhat_j, r2, s2_i, s2_j, s2_ij}{Pairwise pieces.}
 
-\item{weights}{argument \code{weights}; not described in the source.}
+\item{d2_upper_sum, n_h_units}{Stratum-variance pieces.}
 
-\item{n_h}{argument \code{n_h}; not described in the source.}
-
-\item{s_h}{argument \code{s_h}; not described in the source.}
-
-\item{c_h}{argument \code{c_h}; not described in the source.}
-
-\item{zhat_i}{argument \code{zhat_i}; not described in the source.}
-
-\item{zhat_j}{argument \code{zhat_j}; not described in the source.}
-
-\item{r2}{argument \code{r2}; not described in the source.}
-
-\item{s2_i}{argument \code{s2_i}; not described in the source.}
-
-\item{s2_j}{argument \code{s2_j}; not described in the source.}
-
-\item{s2_ij}{argument \code{s2_ij}; not described in the source.}
-
-\item{d2_upper_sum}{argument \code{d2_upper_sum}; not described in the source.}
-
-\item{n_h_units}{argument \code{n_h_units}; not described in the source.}
-
-\item{per_stratum_sums}{argument \code{per_stratum_sums}; not described in the source.}
-
-\item{n_population}{argument \code{n_population}; not described in the source.}
+\item{per_stratum_sums, n_population}{Objective pieces.}
 }
 \value{
 List with stsi_variance, equal_area_variance, alloc_variance,

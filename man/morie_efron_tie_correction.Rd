@@ -28,7 +28,7 @@ a useful test, and one the parity suite asserts.
 \examples{
 set.seed(1)
 X <- matrix(rnorm(120), ncol = 2)
-tt <- round(rexp(60, exp(X \%*\% c(0.7, -0.4))), 1)   # ties on purpose
+tt <- round(rexp(60, exp(X \%*\% c(0.7, -0.4))), 1) # ties on purpose
 morie_efron_tie_correction(tt, rep(1, 60), X)$beta
 }
 \references{

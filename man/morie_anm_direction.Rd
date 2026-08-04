@@ -32,7 +32,8 @@ active range the cause carries almost no information.
 Mirrors \code{morie.fn.anmod}.
 }
 \examples{
-set.seed(1); xv <- runif(150, -2, 2)
+set.seed(1)
+xv <- runif(150, -2, 2)
 morie_anm_direction(xv, xv^3 + rnorm(150, 0, 0.5), B = 49)$direction
 }
 \references{

@@ -36,7 +36,8 @@ events), Gumbel upper-tail (late), Frank neither. Mirrors
 }
 \examples{
 set.seed(1)
-t1 <- rexp(30); t2 <- t1 + rexp(30, 5)
+t1 <- rexp(30)
+t2 <- t1 + rexp(30, 5)
 morie_copula_survival(t1, rep(1, 30), t2, rep(1, 30))$tau_sample
 }
 \references{

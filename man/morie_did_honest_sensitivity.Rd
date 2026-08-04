@@ -49,7 +49,8 @@ df$treat_time <- ifelse(df$unit <= 30, 5, Inf)
 df$d <- as.integer(df$time >= df$treat_time)
 df$y <- 0.5 * df$time + 1.5 * df$d + rnorm(nrow(df), sd = 0.5)
 es <- morie_did_event_study(df, "y", "unit", "time", "treat_time",
-                            leads = 3L, lags = 3L)
+  leads = 3L, lags = 3L
+)
 out <- morie_did_honest_sensitivity(es, m_bar_range = c(0, 1, 5))
 out
 }

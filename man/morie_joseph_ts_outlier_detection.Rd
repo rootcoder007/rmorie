@@ -29,7 +29,8 @@ normal. The window has to be wider than the longest run one expects
 to catch.
 }
 \examples{
-y <- sin(seq(0, 6, length.out = 100)); y[50] <- 12
+y <- sin(seq(0, 6, length.out = 100))
+y[50] <- 12
 which(morie_joseph_ts_outlier_detection(y)$outlier)
 }
 \references{

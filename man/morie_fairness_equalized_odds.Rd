@@ -37,8 +37,8 @@ system can satisfy demographic parity yet make many more false
 positives against one group.
 }
 \examples{
-truth <- c(1,0,1,0,1,0,1,0)
-pred  <- c(1,0,1,0,1,1,0,1)
-race  <- c("A","A","A","A","B","B","B","B")
-morie_fairness_equalized_odds(truth, pred, race, privileged="A")$value
+truth <- c(1, 0, 1, 0, 1, 0, 1, 0)
+pred <- c(1, 0, 1, 0, 1, 1, 0, 1)
+race <- c("A", "A", "A", "A", "B", "B", "B", "B")
+morie_fairness_equalized_odds(truth, pred, race, privileged = "A")$value
 }

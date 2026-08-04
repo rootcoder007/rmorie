@@ -56,8 +56,10 @@ the origin.
 set.seed(1)
 X <- matrix(runif(400, -2, 2), ncol = 2)
 y <- sin(X[, 1]) + X[, 2]^2
-morie_esl_neural_net(X, y, M = 8, lr = 0.3, n_epochs = 2000L,
-                     seed = 1L)$r_squared > 0.8
+morie_esl_neural_net(X, y,
+  M = 8, lr = 0.3, n_epochs = 2000L,
+  seed = 1L
+)$r_squared > 0.8
 }
 \references{
 Hastie, T., et al. (2009). ESL (2nd ed.), Sec 11.3-11.4.

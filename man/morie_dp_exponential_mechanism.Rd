@@ -40,7 +40,8 @@ halves the claimed epsilon.
 }
 \examples{
 r <- morie_dp_exponential_mechanism(c("a", "b", "c"), c(0, 5, 1),
-                                    epsilon = 2, seed = 1)
+  epsilon = 2, seed = 1
+)
 round(r$probabilities, 3)
 }
 \references{

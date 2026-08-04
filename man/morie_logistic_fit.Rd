@@ -10,8 +10,6 @@ morie_logistic_fit(x, y, b = NULL)
 \item{x}{Design matrix (with intercept column). @param y 0/1 response.}
 
 \item{b}{Coefficients (fit by Newton-Raphson when NULL).}
-
-\item{y}{argument \code{y}; not described in the source.}
 }
 \value{
 List with beta, cov, loglik, deviance, pi.

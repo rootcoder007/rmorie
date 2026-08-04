@@ -23,10 +23,15 @@ tidy \code{data.frame} of column metadata.  Entries that lack an
 }
 \examples{
 sc <- list(fields = list(
-  list(id = "PoliceService", type = "text",
-       info = list(notes = "Name of the service.")),
-  list(id = "IncidentYear", type = "int",
-       info = list(notes = "Reporting year."))))
+  list(
+    id = "PoliceService", type = "text",
+    info = list(notes = "Name of the service.")
+  ),
+  list(
+    id = "IncidentYear", type = "int",
+    info = list(notes = "Reporting year.")
+  )
+))
 morie_arsau_sidecar_schema(sc)
 }
 \references{

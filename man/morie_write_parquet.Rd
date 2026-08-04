@@ -11,8 +11,7 @@ morie_write_parquet(df, path, compression = "snappy")
 
 \item{path}{Destination path.}
 
-\item{compression}{\code{"snappy"} (default) or \code{NULL} for
-uncompressed.}
+\item{compression}{\code{"snappy"} (default) or \code{NULL} for uncompressed.}
 }
 \value{
 \code{path}, invisibly.
@@ -20,12 +19,4 @@ uncompressed.}
 \description{
 Native Parquet writer: single row group, PLAIN encoding, all columns
 OPTIONAL. Output is read back unchanged by pyarrow and nanoparquet.
-}
-\examples{
-df <- data.frame(case = c("23-OCI-001", NA), year = c(2023L, 2024L),
-                 stringsAsFactors = FALSE)
-p <- tempfile(fileext = ".parquet")
-morie_write_parquet(df, p)
-identical(nrow(morie_read_parquet(p)), 2L)
-unlink(p)
 }

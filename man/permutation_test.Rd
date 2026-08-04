@@ -43,7 +43,8 @@ full null distribution which downstream MRM code consumes.
 \examples{
 set.seed(1)
 str(permutation_test(rnorm(25), rnorm(25, 0.5),
-                     n_permutations = 499L), max.level = 1)
+  n_permutations = 499L
+), max.level = 1)
 }
 \seealso{
 \code{coin::oneway_test}, \code{coin::independence_test}.

@@ -42,8 +42,10 @@ well below 1/n -- cryptographically small, not merely small.
 \examples{
 set.seed(1)
 m <- function(d) sum(d) + morie_dp_laplace_mechanism(0, 1, 1)$release
-morie_approx_dp(m, rep(1, 10), rep(1, 9), epsilon = 1,
-                n_samples = 2000)$delta_empirical < 1
+morie_approx_dp(m, rep(1, 10), rep(1, 9),
+  epsilon = 1,
+  n_samples = 2000
+)$delta_empirical < 1
 }
 \references{
 Dwork, C. and Roth, A. (2014). \emph{FnTTCS}, 9(3-4),

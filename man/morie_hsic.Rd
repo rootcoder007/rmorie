@@ -22,5 +22,6 @@ correlation at zero while the variables remain fully dependent.
 Mirrors \code{morie.fn.anmod}'s \code{hsic}.
 }
 \examples{
-set.seed(1); morie_hsic(rnorm(100), rnorm(100))
+set.seed(1)
+morie_hsic(rnorm(100), rnorm(100))
 }

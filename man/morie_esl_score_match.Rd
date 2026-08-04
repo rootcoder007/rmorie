@@ -35,8 +35,9 @@ dimension and motivated the sliced and denoising variants.
 \examples{
 set.seed(1)
 X <- matrix(rnorm(400, 2), ncol = 1)
-J <- sapply(c(0, 1, 2, 3), function(m)
-  morie_esl_score_match(function(Z) -(Z - m), X)$objective)
+J <- sapply(c(0, 1, 2, 3), function(m) {
+  morie_esl_score_match(function(Z) -(Z - m), X)$objective
+})
 which.min(J)
 }
 \references{

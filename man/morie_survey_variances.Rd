@@ -30,50 +30,15 @@ morie_survey_variances(
 )
 }
 \arguments{
+\item{sigma2, n, rho_bar, s2, n_population}{Chapter 26 pieces.}
 
-\item{sigma2}{argument \code{sigma2}; not described in the source.}
+\item{xbar_d, beta_hat, v_d}{Small-area pieces. @param times Trend.}
 
-\item{n}{argument \code{n}; not described in the source.}
+\item{x, c_mat, zhat}{GLS pieces. @param beta0,beta1,x_val Model 16.1.}
 
-\item{rho_bar}{argument \code{rho_bar}; not described in the source.}
+\item{x_design, z_obs}{OLS pieces. @param sigma2_eps,x0 Prediction var.}
 
-\item{s2}{argument \code{s2}; not described in the source.}
-
-\item{n_population}{argument \code{n_population}; not described in the source.}
-
-\item{xbar_d}{argument \code{xbar_d}; not described in the source.}
-
-\item{beta_hat}{argument \code{beta_hat}; not described in the source.}
-
-\item{v_d}{argument \code{v_d}; not described in the source.}
-
-\item{times}{argument \code{times}; not described in the source.}
-
-\item{x}{argument \code{x}; not described in the source.}
-
-\item{c_mat}{argument \code{c_mat}; not described in the source.}
-
-\item{zhat}{argument \code{zhat}; not described in the source.}
-
-\item{beta0}{argument \code{beta0}; not described in the source.}
-
-\item{beta1}{argument \code{beta1}; not described in the source.}
-
-\item{x_val}{argument \code{x_val}; not described in the source.}
-
-\item{x_design}{argument \code{x_design}; not described in the source.}
-
-\item{z_obs}{argument \code{z_obs}; not described in the source.}
-
-\item{sigma2_eps}{argument \code{sigma2_eps}; not described in the source.}
-
-\item{x0}{argument \code{x0}; not described in the source.}
-
-\item{c_hat}{argument \code{c_hat}; not described in the source.}
-
-\item{c_true}{argument \code{c_true}; not described in the source.}
-
-\item{u}{argument \code{u}; not described in the source.}
+\item{c_hat, c_true, u}{Classification pieces.}
 }
 \value{
 List of the requested quantities.

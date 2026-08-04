@@ -19,7 +19,8 @@ One-sided rFFT-based periodogram. Inner bins are doubled to fold
 negative-frequency power into the one-sided spectrum.
 }
 \examples{
-fs <- 1024; t <- seq.int(0, 1023) / fs
+fs <- 1024
+t <- seq.int(0, 1023) / fs
 x <- cos(2 * pi * 50 * t)
 out <- morie_dsp_psd_periodogram(x, fs = fs)
 out$freqs[which.max(out$psd)]

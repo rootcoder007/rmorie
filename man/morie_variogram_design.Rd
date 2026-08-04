@@ -23,36 +23,9 @@ morie_variogram_design(
 )
 }
 \arguments{
-
-\item{mu}{argument \code{mu}; not described in the source.}
-
-\item{a_i}{argument \code{a_i}; not described in the source.}
-
-\item{b_ij}{argument \code{b_ij}; not described in the source.}
-
-\item{c_ijk}{argument \code{c_ijk}; not described in the source.}
-
-\item{eps}{argument \code{eps}; not described in the source.}
-
-\item{a}{argument \code{a}; not described in the source.}
-
-\item{da_list}{argument \code{da_list}; not described in the source.}
-
-\item{cov_theta}{argument \code{cov_theta}; not described in the source.}
-
-\item{dv_dtheta}{argument \code{dv_dtheta}; not described in the source.}
-
-\item{v_ok}{argument \code{v_ok}; not described in the source.}
-
-\item{e_tau2}{argument \code{e_tau2}; not described in the source.}
-
-\item{dlam_dtheta}{argument \code{dlam_dtheta}; not described in the source.}
-
-\item{a_mat}{argument \code{a_mat}; not described in the source.}
-
-\item{akv}{argument \code{akv}; not described in the source.}
-
-\item{vkv}{argument \code{vkv}; not described in the source.}
+\item{mu, a_i, b_ij, c_ijk, eps}{Nested pieces. @param a,da_list REML
+pieces. @param cov_theta,dv_dtheta VKV pieces. @param v_ok,e_tau2 AKV
+pieces. @param dlam_dtheta,a_mat Tau2 pieces. @param akv,vkv EAC.}
 }
 \value{
 List with nested, fisher_info, vkv, akv, e_tau2, eac.

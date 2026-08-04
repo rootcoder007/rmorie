@@ -54,7 +54,8 @@ possible is \eqn{(\log n)^{-1}}. Asymptotics are in n with T
 FIXED. Mirrors \code{morie.fn.hrzpanel}.
 }
 \examples{
-n <- 60; tt <- 3
+n <- 60
+tt <- 3
 x <- array(rnorm(n * tt * 2), dim = c(n, tt, 2))
 y <- matrix(rnorm(n * tt), n, tt)
 morie_panel_deconvolution(y, x, c(1, -0.5))$symmetry_required

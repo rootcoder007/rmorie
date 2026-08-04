@@ -30,8 +30,10 @@ sensitivity that is too small does not degrade the guarantee -- it
 voids it.
 }
 \examples{
-morie_dp_laplace_mechanism(42, sensitivity = 1, epsilon = 0.5,
-                           seed = 1)$noise_scale
+morie_dp_laplace_mechanism(42,
+  sensitivity = 1, epsilon = 0.5,
+  seed = 1
+)$noise_scale
 }
 \references{
 Dwork, C., McSherry, F., Nissim, K. and Smith, A. (2006).

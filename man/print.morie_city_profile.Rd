@@ -20,7 +20,8 @@ Print method for \code{morie_city_profile} objects
 \examples{
 \donttest{
 p <- morie_fairness_city_profile(
-  "chicago", area_col = "community_area",
+  "chicago",
+  area_col = "community_area",
   risk_col = "rti", group_col = "majority_race"
 )
 p$name

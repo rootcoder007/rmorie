@@ -37,8 +37,11 @@ the influence function, so the weighting is accounted for.
 Mirrors \code{morie.fn.aiptdd}.
 }
 \examples{
-set.seed(1); n <- 400; xx <- rnorm(n)
-d <- rbinom(n, 1, plogis(0.8 * xx)); u <- rnorm(n, 0, 2)
+set.seed(1)
+n <- 400
+xx <- rnorm(n)
+d <- rbinom(n, 1, plogis(0.8 * xx))
+u <- rnorm(n, 0, 2)
 morie_dr_did(u + rnorm(n), u + 0.9 * xx + 2 * d + rnorm(n), d, xx)$att
 }
 \references{

@@ -24,7 +24,8 @@ Examples: \code{"https://open.canada.ca/data"}, \code{"https://data.ontario.ca"}
 \donttest{
 out <- try(morie_datasets_ckan_search(
   portal = "https://open.canada.ca/data",
-  query = "policing", rows = 3L))
+  query = "policing", rows = 3L
+))
 if (!inherits(out, "try-error")) head(out)
 }
 }

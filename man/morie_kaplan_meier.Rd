@@ -3,29 +3,27 @@
 \name{morie_kaplan_meier}
 \alias{morie_kaplan_meier}
 \alias{morie_survival_km}
-\title{Kaplan-Meier survival estimate}
+\title{Kaplan-Meier product-limit estimator}
 \usage{
 morie_kaplan_meier(time, event, alpha = 0.05)
+
+morie_survival_km(time, event, alpha = 0.05)
 }
 \arguments{
-\item{time}{Numeric vector of follow-up times.}
+\item{time}{follow-up times}
 
-\item{event}{Numeric or logical vector; 1 for an event, 0 for right censoring.}
+\item{event}{1 for an event, 0 for censored}
 
-\item{alpha}{Numeric; one minus the confidence level.}
+\item{alpha}{significance level for the interval}
 }
 \value{
-A list with \code{time}, \code{n_risk}, \code{n_event}, \code{surv}, \code{se}, \code{lower} and \code{upper}.
+list with \code{time}, \code{surv}, \code{se}, \code{se_cumhaz}, \code{lower},
+\code{upper}, \code{n_risk}, \code{n_event}
 }
 \description{
-Kaplan-Meier survival estimate.
-}
-\details{
-The product-limit estimator, with Greenwood standard errors and a log-log transformed interval so the limits stay inside the unit interval.
-
-\code{morie_survival_km} is the pre-policy spelling and is the same
-function.
-}
-\examples{
-morie_kaplan_meier(c(1, 2, 3, 4), c(1, 0, 1, 1))
+\code{S(t) = prod (1 - d_i/n_i)} with Greenwood's variance and a log-log
+confidence interval, which cannot leave \verb{[0, 1]} the way a symmetric
+one can.  Note \code{survival::survfit}'s \code{std.err} is the error of the
+CUMULATIVE HAZARD; \code{se} here is the error of \code{S(t)} and \code{se_cumhaz}
+is survfit's, the two differing by a factor of \code{S}.
 }

@@ -31,11 +31,11 @@ in kriging and other geostatistical workflows.
 }
 \examples{
 \donttest{
-  if (requireNamespace("gstat", quietly = TRUE) &&
-      requireNamespace("sp", quietly = TRUE)) {
-    data(meuse, package = "sp")
-    sp::coordinates(meuse) <- ~ x + y
-    morie_geostat_variogram(log(zinc) ~ 1, data = meuse)
-  }
+if (requireNamespace("gstat", quietly = TRUE) &&
+  requireNamespace("sp", quietly = TRUE)) {
+  data(meuse, package = "sp")
+  sp::coordinates(meuse) <- ~ x + y
+  morie_geostat_variogram(log(zinc) ~ 1, data = meuse)
+}
 }
 }

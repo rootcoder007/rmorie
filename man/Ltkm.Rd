@@ -3,31 +3,27 @@
 \name{Ltkm}
 \alias{Ltkm}
 \alias{morie_survival_left_truncated_km}
-\title{Kaplan-Meier under left truncation}
+\title{Kaplan-Meier estimator under left truncation}
 \usage{
 Ltkm(entry, time, event, alpha = 0.05)
+
+morie_survival_left_truncated_km(entry, time, event, alpha = 0.05)
 }
 \arguments{
-\item{entry}{Numeric vector of entry times; each must be strictly before its follow-up time.}
+\item{entry}{entry (truncation) times.}
 
-\item{time}{Numeric vector of follow-up times.}
+\item{time}{observed follow-up times.}
 
-\item{event}{Numeric or logical vector; 1 (or \code{TRUE}) for an event, 0 for right censoring.}
+\item{event}{event indicator, 1 = event, 0 = censored.}
 
-\item{alpha}{Numeric; one minus the confidence level. Defaults to \code{0.05}.}
+\item{alpha}{significance level for the interval.}
 }
 \value{
-A list with \code{time}, \code{surv}, \code{n_risk}, \code{se}, \code{lower}, \code{upper}, \code{ignoring_truncation} and \code{max_difference}.
+list with the survival estimate, its standard error, the confidence interval and the risk-set sizes.
 }
 \description{
-Kaplan-Meier under left truncation.
+The only change from the ordinary estimator is the risk set: a subject enters at \code{entry} rather than at time zero, so it is at risk only over (entry, time].
 }
-\details{
-The only change from the ordinary estimator is the risk set, which counts subjects who have entered and not yet left. Ignoring delayed entry biases survival upward; the estimate that ignores it is returned alongside so the size of that bias is visible.
-
-\code{morie_survival_left_truncated_km} is the pre-policy spelling and is the same
-function.
-}
-\examples{
-Ltkm(c(0, 0, 1, 1), c(2, 3, 4, 5), c(1, 1, 0, 1))
+\references{
+Klein, J. P. and Moeschberger, M. L. (2003). Survival Analysis, 2nd ed., Springer, Section 3.4.
 }

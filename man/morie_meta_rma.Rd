@@ -32,12 +32,12 @@ per-study effect sizes and their sampling variances.
 }
 \examples{
 \donttest{
-  if (requireNamespace("metafor", quietly = TRUE)) {
-    set.seed(1)
-    k <- 12
-    vi <- stats::runif(k, 0.02, 0.10)
-    yi <- stats::rnorm(k, mean = 0.3, sd = sqrt(vi))
-    morie_meta_rma(yi = yi, vi = vi)
-  }
+if (requireNamespace("metafor", quietly = TRUE)) {
+  set.seed(1)
+  k <- 12
+  vi <- stats::runif(k, 0.02, 0.10)
+  yi <- stats::rnorm(k, mean = 0.3, sd = sqrt(vi))
+  morie_meta_rma(yi = yi, vi = vi)
+}
 }
 }

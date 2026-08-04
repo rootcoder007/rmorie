@@ -23,38 +23,15 @@ morie_poisson_loglinear(
 )
 }
 \arguments{
+\item{mu_hat, n, z}{Score interval pieces. @param b0,bs,xs Log link.}
+
 \item{exposure}{Rate-model exposure t. @param beta_x_i,beta_z_j,
 beta_xz_ij Loglinear cell parameters.}
 
 \item{bxz}{Four interaction parameters c(ij, i'j', i'j, ij') for the
 odds ratio of eq 4.7.}
 
-
-\item{mu_hat}{argument \code{mu_hat}; not described in the source.}
-
-\item{n}{argument \code{n}; not described in the source.}
-
-\item{z}{argument \code{z}; not described in the source.}
-
-\item{b0}{argument \code{b0}; not described in the source.}
-
-\item{bs}{argument \code{bs}; not described in the source.}
-
-\item{xs}{argument \code{xs}; not described in the source.}
-
-\item{beta_x_i}{argument \code{beta_x_i}; not described in the source.}
-
-\item{beta_z_j}{argument \code{beta_z_j}; not described in the source.}
-
-\item{beta_xz_ij}{argument \code{beta_xz_ij}; not described in the source.}
-
-\item{beta_z_jp}{argument \code{beta_z_jp}; not described in the source.}
-
-\item{beta_xz_i}{argument \code{beta_xz_i}; not described in the source.}
-
-\item{s_j}{argument \code{s_j}; not described in the source.}
-
-\item{s_jp}{argument \code{s_jp}; not described in the source.}
+\item{beta_z_jp, beta_xz_i, s_j, s_jp}{Ordinal-score ratio pieces.}
 }
 \value{
 List with score_ci, mu, mu_rate, mu_cell, or_loglinear,

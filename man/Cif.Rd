@@ -3,31 +3,28 @@
 \name{Cif}
 \alias{Cif}
 \alias{morie_survival_cif}
-\title{Cumulative incidence under competing risks}
+\title{Cumulative incidence function under competing risks}
 \usage{
 Cif(time, cause, code = 1, alpha = 0.05)
+
+morie_survival_cif(time, cause, code = 1, alpha = 0.05)
 }
 \arguments{
-\item{time}{Numeric vector of follow-up times.}
+\item{time}{observed follow-up times.}
 
-\item{cause}{Integer vector of cause codes; \code{0} marks censoring.}
+\item{cause}{cause of failure, 0 for censored.}
 
-\item{code}{The cause whose incidence is wanted. Defaults to \code{1}.}
+\item{code}{the cause whose incidence is wanted.}
 
-\item{alpha}{Numeric; one minus the confidence level. Defaults to \code{0.05}.}
+\item{alpha}{significance level for the interval.}
 }
 \value{
-A list with \code{time}, \code{cif}, \code{se}, \code{lower}, \code{upper}, \code{naive_one_minus_km}, \code{naive_overstates_by} and \code{overall_survival_at_end}.
+list with the cumulative incidence, its standard error, the confidence interval and the event times.
 }
 \description{
-Cumulative incidence under competing risks.
+Aalen-Johansen: CIF_k(t) = sum S(t_{i-1}) d_ki / n_i, where S is the ALL-CAUSE Kaplan-Meier.
+That factor is the point: treating competing events as censored overstates the incidence.
 }
-\details{
-The Aalen-Johansen estimator. The all-cause survival factor is the entire point: censoring the competing events and running an ordinary Kaplan-Meier overstates the incidence, and the size of that error is returned as \code{naive_overstates_by}. Cumulative incidences over all causes sum to one minus overall survival.
-
-\code{morie_survival_cif} is the pre-policy spelling and is the same
-function.
-}
-\examples{
-Cif(c(1, 2, 3, 4, 5), c(1, 2, 1, 0, 2))
+\references{
+Aalen, O. O. and Johansen, S. (1978). An empirical transition matrix for non-homogeneous Markov chains based on censored observations. Scandinavian Journal of Statistics 5(3), 141-150.
 }

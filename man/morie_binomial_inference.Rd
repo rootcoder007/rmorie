@@ -13,10 +13,6 @@ morie_binomial_inference(w, n, p = NA, z = 1.96, interval_fn = NULL)
 
 \item{interval_fn}{Function(w, n) returning c(lower, upper) for the
 true-confidence-level sum; NULL skips it.}
-
-\item{n}{argument \code{n}; not described in the source.}
-
-\item{p}{argument \code{p}; not described in the source.}
 }
 \value{
 List with pmf, var_mle, wilson (estimate/lower/upper), and

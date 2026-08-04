@@ -25,6 +25,7 @@ is a function (each old category to exactly one new category)
 that matches the declared mapping, with no rows lost.
 }
 \examples{
-x <- c("W", "B", "W"); y <- c("White", "Black", "White")
+x <- c("W", "B", "W")
+y <- c("White", "Black", "White")
 morie_crosstab_verify(x, y, c(W = "White", B = "Black"))
 }

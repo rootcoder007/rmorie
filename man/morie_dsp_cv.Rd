@@ -19,7 +19,7 @@ Scalar.
 set.seed(1)
 x <- rnorm(100, mean = 5)
 morie_dsp_cv(x)
-morie_dsp_cv(c(-1, 1))  # zero mean: Inf
+morie_dsp_cv(c(-1, 1)) # zero mean: Inf
 }
 \references{
 Rangayyan & Krishnan (2015), Ch. 3.

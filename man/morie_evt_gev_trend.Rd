@@ -9,8 +9,6 @@ morie_evt_gev_trend(x, t = seq_along(x) - 1)
 }
 \arguments{
 \item{x}{series of maxima; t optional time index}
-
-\item{t}{argument \code{t}; not described in the source.}
 }
 \description{
 Nonstationary GEV with a linear trend in location

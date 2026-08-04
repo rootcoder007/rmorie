@@ -6,28 +6,25 @@
 \title{Restricted mean survival time}
 \usage{
 Rmst(time, event, tau = NULL, alpha = 0.05)
+
+morie_survival_rmst(time, event, tau = NULL, alpha = 0.05)
 }
 \arguments{
-\item{time}{Numeric vector of follow-up times.}
+\item{time}{observed follow-up times.}
 
-\item{event}{Numeric or logical vector; 1 (or \code{TRUE}) for an event, 0 for right censoring.}
+\item{event}{event indicator, 1 = event, 0 = censored.}
 
-\item{tau}{Horizon. Defaults to the largest observed time, and is reported as \code{tau_beyond_data} when it exceeds the follow-up.}
+\item{tau}{restriction horizon; defaults to the largest observed event time.}
 
-\item{alpha}{Numeric; one minus the confidence level. Defaults to \code{0.05}.}
+\item{alpha}{significance level for the interval.}
 }
 \value{
-A list with \code{rmst}, \code{se}, \code{variance}, \code{lower}, \code{upper}, \code{tau} and \code{tau_beyond_data}.
+list with the RMST, its standard error, the confidence interval and the horizon used.
 }
 \description{
-Restricted mean survival time.
+Area under the Kaplan-Meier curve up to \code{tau}, RMST(tau) = integral_0^tau S(t) dt, with the variance of Klein and Moeschberger (2003) eq.
+(4.5.4).
 }
-\details{
-The area under the Kaplan-Meier curve out to \code{tau}, with the variance of Klein and Moeschberger (2003), eq. (4.5.4). Unlike the mean survival time it is estimable under censoring, because it does not depend on the unobserved tail beyond \code{tau}.
-
-\code{morie_survival_rmst} is the pre-policy spelling and is the same
-function.
-}
-\examples{
-Rmst(c(1, 2, 3, 4), c(1, 1, 1, 1), tau = 4)
+\references{
+Klein, J. P. and Moeschberger, M. L. (2003). Survival Analysis, 2nd ed., Springer, eq. (4.5.4).
 }

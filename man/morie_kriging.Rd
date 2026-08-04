@@ -21,32 +21,10 @@ morie_kriging(
 )
 }
 \arguments{
+\item{cov_ss, cov_s0}{Kriging system pieces. @param sigma2,lam,nu
+Variance pieces. @param gamma_s0 Semivariance form pieces.}
 
-\item{cov_ss}{argument \code{cov_ss}; not described in the source.}
-
-\item{cov_s0}{argument \code{cov_s0}; not described in the source.}
-
-\item{sigma2}{argument \code{sigma2}; not described in the source.}
-
-\item{lam}{argument \code{lam}; not described in the source.}
-
-\item{nu}{argument \code{nu}; not described in the source.}
-
-\item{gamma_s0}{argument \code{gamma_s0}; not described in the source.}
-
-\item{h}{argument \code{h}; not described in the source.}
-
-\item{c0}{argument \code{c0}; not described in the source.}
-
-\item{c1}{argument \code{c1}; not described in the source.}
-
-\item{phi}{argument \code{phi}; not described in the source.}
-
-\item{z}{argument \code{z}; not described in the source.}
-
-\item{mu}{argument \code{mu}; not described in the source.}
-
-\item{cov}{argument \code{cov}; not described in the source.}
+\item{h, c0, c1, phi}{Semivariogram pieces. @param z,mu,cov Likelihood.}
 }
 \value{
 List with lam, nu, v_ok_cov, v_ok_gamma, gamma_h, loglik.

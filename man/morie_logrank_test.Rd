@@ -6,27 +6,21 @@
 \title{Log-rank test}
 \usage{
 morie_logrank_test(time, event, group)
+
+morie_survival_logrank(time, event, group)
 }
 \arguments{
-\item{time}{Numeric vector of follow-up times.}
+\item{time}{follow-up times}
 
-\item{event}{Numeric or logical vector; 1 for an event, 0 for right censoring.}
+\item{event}{1 for an event, 0 for censored}
 
-\item{group}{Grouping vector with at least two distinct values.}
+\item{group}{grouping vector}
 }
 \value{
-A list with \code{statistic}, \code{df}, \code{p_value} and the per-group observed and expected counts.
+list with \code{statistic}, \code{df}, \code{p_value}, \code{observed}, \code{expected}
 }
 \description{
-Log-rank test.
-}
-\details{
-Compares observed with expected events at each event time. It has most power against proportional-hazards alternatives and can miss curves that cross, where the early and late differences cancel.
-
-\code{morie_survival_logrank} is the pre-policy spelling and is the same
-function.
-}
-\examples{
-morie_logrank_test(c(1, 2, 3, 4, 5, 6), c(1, 1, 1, 1, 0, 1),
-                   c(0, 0, 0, 1, 1, 1))
+Compares observed failures per group with the number expected under
+a common hazard, standardised by the hypergeometric variance.
+Equivalent to \code{survival::survdiff} with \code{rho = 0}.
 }

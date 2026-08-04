@@ -28,7 +28,9 @@ discards exactly those cases.
 Mirrors \code{morie.fn.bkmed}.
 }
 \examples{
-set.seed(1); x <- rnorm(200); m <- 0.8 * x + rnorm(200)
+set.seed(1)
+x <- rnorm(200)
+m <- 0.8 * x + rnorm(200)
 morie_baron_kenny(0.3 * x + 0.6 * m + rnorm(200), x, m)$mediation
 }
 \references{

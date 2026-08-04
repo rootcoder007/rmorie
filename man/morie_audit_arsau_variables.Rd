@@ -17,8 +17,10 @@ Audit every ARSAU variable.
 }
 \examples{
 spec <- function(nm, dt, vv = NULL) list(name = nm, dtype = dt, valid_values = vv)
-specs <- list(v1 = list(spec("PoliceService", "string", c("OPP", "TPS")),
-                        spec("REPORTING_YEAR", "int")))
+specs <- list(v1 = list(
+  spec("PoliceService", "string", c("OPP", "TPS")),
+  spec("REPORTING_YEAR", "int")
+))
 res <- morie_audit_arsau_variables(specs)
 res$domain
 }

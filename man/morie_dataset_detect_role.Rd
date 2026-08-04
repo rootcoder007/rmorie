@@ -19,8 +19,8 @@ One of \code{"id"}, \code{"weight"}, \code{"stratum"}, \code{"cluster"},
 Detect the suggested epidemiological role of a column.
 }
 \examples{
-morie_dataset_detect_role(1:5, "case_id")           # "id"
+morie_dataset_detect_role(1:5, "case_id") # "id"
 morie_dataset_detect_role(c(0, 1), "treatment_arm") # "treatment"
 morie_dataset_detect_role(c(0, 1, 0), "outcome_event") # "outcome"
-morie_dataset_detect_role(c(1, 2, 3), "foo")        # "covariate"
+morie_dataset_detect_role(c(1, 2, 3), "foo") # "covariate"
 }

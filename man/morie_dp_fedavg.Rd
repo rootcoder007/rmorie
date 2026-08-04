@@ -34,8 +34,10 @@ scaling up helps for free.
 }
 \examples{
 set.seed(1)
-morie_dp_fedavg(matrix(rnorm(50), ncol = 5), C = 1,
-                sigma = 1)$noise_sd_per_client
+morie_dp_fedavg(matrix(rnorm(50), ncol = 5),
+  C = 1,
+  sigma = 1
+)$noise_sd_per_client
 }
 \references{
 McMahan, H. B. et al. (2018). Learning differentially

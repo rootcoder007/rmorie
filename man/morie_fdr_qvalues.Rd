@@ -31,10 +31,10 @@ null-distribution scale parameter.
 }
 \examples{
 \donttest{
-  if (requireNamespace("fdrtool", quietly = TRUE)) {
-    set.seed(1)
-    x <- c(stats::rnorm(900), stats::rnorm(100, mean = 3))
-    morie_fdr_qvalues(x, statistic = "normal")
-  }
+if (requireNamespace("fdrtool", quietly = TRUE)) {
+  set.seed(1)
+  x <- c(stats::rnorm(900), stats::rnorm(100, mean = 3))
+  morie_fdr_qvalues(x, statistic = "normal")
+}
 }
 }

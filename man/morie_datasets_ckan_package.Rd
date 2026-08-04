@@ -19,8 +19,10 @@ Pull every CSV resource of a CKAN package as a list of data frames.
 }
 \examples{
 \donttest{
-res <- try(morie_datasets_ckan_package("https://open.canada.ca/data",
-                                       "public-safety-canada-grants-and-contributions"))
+res <- try(morie_datasets_ckan_package(
+  "https://open.canada.ca/data",
+  "public-safety-canada-grants-and-contributions"
+))
 if (!inherits(res, "try-error")) str(res, max.level = 1)
 }
 }
