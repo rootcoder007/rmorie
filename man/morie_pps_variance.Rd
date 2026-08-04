@@ -9,6 +9,10 @@ morie_pps_variance(z, p, t_hat)
 \arguments{
 \item{z}{Sample values. @param p Draw probabilities. @param t_hat
 Estimated total.}
+
+\item{p}{argument \code{p}; not described in the source.}
+
+\item{t_hat}{argument \code{t_hat}; not described in the source.}
 }
 \value{
 Numeric variance estimate.

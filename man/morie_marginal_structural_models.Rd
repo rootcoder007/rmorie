@@ -30,7 +30,6 @@ morie_msm_time_varying_exposure(y, exposure_history, weights = NULL)
 \item{offset}{optional log-exposure offset}
 \item{alpha}{negative-binomial overdispersion parameter}
 \item{instruments}{optional instrument matrix for the GMM estimator}
-\item{...}{further arguments passed to the fitting routine}
 }
 \value{
 A list holding the fitted quantities for the method called: point

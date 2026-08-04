@@ -10,6 +10,8 @@ morie_evt_xi_ci_profile(x, alpha = 0.05, model = "gev")
 \item{x}{data (block maxima or excesses); model "gev" or "gpd"}
 
 \item{alpha}{1 - confidence level}
+
+\item{model}{argument \code{model}; not described in the source.}
 }
 \description{
 Profile-likelihood CI for the shape xi (Coles 2001 sec. 2.6.5)

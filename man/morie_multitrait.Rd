@@ -9,6 +9,7 @@
 \title{Multi-trait and genotype-by-environment models}
 \usage{
 morie_multitrait(Y, Z, G, Sigma_T, R_T, X = NULL)
+morie_multitrait(Y, Z, G, Sigma_T, R_T, X = NULL)
 morie_multitrait_ridge(Z1, G)
 morie_gxe_multitrait(Y, Z_L, Z_EL, G, Sigma_T, Sigma_E, Sigma_2T, R_T, X = NULL)
 morie_gxe_blup(y, X_E, Z_L, Z_EL, G, sigma2_g, Sigma_E, sigma2_e = 1)
@@ -18,8 +19,46 @@ morie_bmtme_conditionals(Y, Z1, Z2, G, Sigma_T, Sigma_E, R, b1 = NULL, b2 = NULL
 \item{Y}{response matrix, one column per trait}
 \item{X}{fixed-effect design matrix}
 \item{Z}{random-effect design matrix}
-\item{K}{relationship matrix}
-\item{...}{further arguments passed to the underlying solver}
+
+\item{G}{argument \code{G}; not described in the source.}
+
+\item{Sigma_T}{argument \code{Sigma_T}; not described in the source.}
+
+\item{R_T}{argument \code{R_T}; not described in the source.}
+
+\item{Z1}{argument \code{Z1}; not described in the source.}
+
+\item{Z_L}{argument \code{Z_L}; not described in the source.}
+
+\item{Z_EL}{argument \code{Z_EL}; not described in the source.}
+
+\item{Sigma_E}{argument \code{Sigma_E}; not described in the source.}
+
+\item{Sigma_2T}{argument \code{Sigma_2T}; not described in the source.}
+
+\item{y}{argument \code{y}; not described in the source.}
+
+\item{X_E}{argument \code{X_E}; not described in the source.}
+
+\item{sigma2_g}{argument \code{sigma2_g}; not described in the source.}
+
+\item{sigma2_e}{argument \code{sigma2_e}; not described in the source.}
+
+\item{Z2}{argument \code{Z2}; not described in the source.}
+
+\item{R}{argument \code{R}; not described in the source.}
+
+\item{b1}{argument \code{b1}; not described in the source.}
+
+\item{b2}{argument \code{b2}; not described in the source.}
+
+\item{nu_T}{argument \code{nu_T}; not described in the source.}
+
+\item{S_T}{argument \code{S_T}; not described in the source.}
+
+\item{nu_E}{argument \code{nu_E}; not described in the source.}
+
+\item{S_E}{argument \code{S_E}; not described in the source.}
 }
 \value{
 A list holding the fitted quantities for the method called: point

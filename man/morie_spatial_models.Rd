@@ -21,11 +21,6 @@ morie_local_dp_randomised_response(truth, k, epsilon, seed = 2)
 \item{r_grid}{radii at which to evaluate K}
 \item{area}{window area; the bounding box by default}
 \item{edge_correction}{apply Ripley's isotropic correction}
-\item{z1}{primary variable}
-\item{z2}{secondary variable}
-\item{s0}{prediction location}
-\item{cross_vario}{cross-variogram function of distance}
-\item{model}{direct variogram function of distance}
 \item{truth}{integer vector of true values in 0..k-1}
 \item{k}{number of categories}
 \item{epsilon}{privacy parameter; smaller is more private}

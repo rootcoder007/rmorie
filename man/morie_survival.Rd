@@ -9,13 +9,9 @@ morie_cox_partial_loglik(time, event, X, beta, ties = "efron")
 \arguments{
 \item{time}{follow-up times}
 \item{event}{1 for an event, 0 for censored}
-\item{alpha}{significance level for the confidence interval}
-\item{group}{grouping vector for the log-rank test}
 \item{X}{covariate matrix}
 \item{beta}{coefficient vector}
 \item{ties}{"efron" or "breslow"}
-\item{max_iter, tol}{Newton-Raphson controls}
-\item{predicted_risk}{risk score, higher meaning failing sooner}
 }
 \value{
 The estimators return the estimate over the event times with its

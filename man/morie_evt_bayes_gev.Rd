@@ -11,6 +11,10 @@ morie_evt_bayes_gev(x, n_draws = 2000, seed = 42, prior_sd = c(100, 10, 1))
 \item{x}{block maxima; n_draws retained draws; seed RNG seed}
 
 \item{prior_sd}{prior standard deviations for (mu, log sigma, xi)}
+
+\item{n_draws}{argument \code{n_draws}; not described in the source.}
+
+\item{seed}{argument \code{seed}; not described in the source.}
 }
 \description{
 Bayesian GEV posterior via random-walk Metropolis

@@ -4,12 +4,13 @@
 \alias{morie_morans_i}
 \title{Moran's I spatial autocorrelation and its expectation}
 \usage{
-morie_morans_i(x, w)
+morie_morans_i(x, W)
 }
 \arguments{
 \item{x}{Numeric values at n spatial units.}
 
-\item{w}{n by n spatial weights matrix.}
+
+\item{W}{numeric spatial weights matrix}
 }
 \value{
 List with i and expected (equal to -1 / (n - 1)).
