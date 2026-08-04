@@ -2,14 +2,12 @@
 \name{morie_spatial_econometrics}
 \alias{morie_spatial_econometrics}
 \alias{morie_weights_totals}
-\alias{morie_morans_i}
 \alias{morie_morans_i_test}
 \alias{morie_spatial_2sls}
 \alias{morie_gm_error_sar}
 \title{Spatial autocorrelation and spatial-econometric estimators}
 \usage{
 morie_weights_totals(W)
-morie_morans_i(x, W)
 morie_morans_i_test(x, W, randomisation = TRUE, alternative = "greater")
 morie_spatial_2sls(y, X, W, add_intercept = TRUE)
 morie_gm_error_sar(y, X, W, add_intercept = TRUE)
@@ -57,3 +55,6 @@ Bivand, R. S., Pebesma, E. & Gomez-Rubio, V. (2013) \emph{Applied
 Spatial Data Analysis with R}, 2nd ed. Springer (Use R!).
 }
 \keyword{spatial}
+\seealso{
+\code{\link{morie_morans_i}}
+}
