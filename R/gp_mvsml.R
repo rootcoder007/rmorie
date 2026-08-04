@@ -139,7 +139,18 @@ morie_pca <- function(X, k = NULL) {
   Q <- (t(Xs) %*% Xs) / (n - 1)
   e <- eigen(Q, symmetric = TRUE)
   lam <- e$values
-  PC <- Xs %*% e$vectors
+  # An eigenvector is defined only up to sign, and eigen() and Python's
+  # eigh need not choose the same one. Pin it: each column's
+  # largest-magnitude entry is made positive, matching the convention in
+  # _tail1core.eigsym. Without this the eigenvalues agree across the two
+  # arms while the loadings differ by -1.
+  V <- e$vectors
+  for (j in seq_len(ncol(V))) {
+    piv <- which.max(abs(V[, j]))
+    if (V[piv, j] < 0) V[, j] <- -V[, j]
+  }
+  e$vectors <- V
+  PC <- Xs %*% V
   k <- if (is.null(k)) ncol(Xs) else k
   list(
     eigenvalues = lam, sd_pc = sqrt(pmax(lam, 0)),

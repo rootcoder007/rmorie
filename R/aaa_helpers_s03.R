@@ -316,3 +316,155 @@
   }
   sqrt(pi / (2 * x)) * exp(-x) * s
 }
+
+
+# ---------------------------------------------- regression workhorses
+#
+# Written out rather than delegating to glm()/lm() so that the Python
+# mirror performs the identical arithmetic in the identical order.
+
+# Logistic regression by IRLS: Newton-Raphson on the log-likelihood,
+# which for the canonical link is exactly IRLS,
+# beta <- beta + (X' W X)^-1 X' (y - p), W = diag(p (1 - p)).
+.s03logit <- function(X, y, iters = 60L, ridge = 1e-10, tol = 1e-13) {
+  n <- nrow(X); p <- ncol(X)
+  beta <- numeric(p)
+  for (it in seq_len(iters)) {
+    eta <- .s03matvec(X, beta)
+    mu <- vapply(eta, .s03sigmoid, 0)
+    w <- mu * (1 - mu)
+    XtWX <- matrix(0, p, p); Xtr <- numeric(p)
+    for (i in seq_len(n)) {
+      r <- y[i] - mu[i]
+      for (a in seq_len(p)) {
+        Xtr[a] <- Xtr[a] + X[i, a] * r
+        for (b in seq_len(p)) XtWX[a, b] <- XtWX[a, b] + X[i, a] * w[i] * X[i, b]
+      }
+    }
+    step <- .s03ridgesolve(XtWX, Xtr, ridge)
+    mx <- 0
+    for (a in seq_len(p)) {
+      beta[a] <- beta[a] + step[a]
+      if (abs(step[a]) > mx) mx <- abs(step[a])
+    }
+    if (mx < tol) break
+  }
+  beta
+}
+
+.s03design <- function(X, n) {
+  if (is.null(X)) return(matrix(1, n, 1))
+  rows <- .s03mat(X)
+  if (nrow(rows) == 0L) return(matrix(1, n, 1))
+  cbind(1, rows)
+}
+
+# Doubly robust DiD for panel data, Sant'Anna and Zhao (2020) eq. (2.6):
+#   tau = E[(w1(D) - w0(D, X; pi)) (dY - mu_0(X))]
+#   w1  = D / E[D]
+#   w0  = [pi(X)(1-D)/(1-pi(X))] / E[pi(X)(1-D)/(1-pi(X))]
+.s03drdid <- function(dy, D, X = NULL, weights = NULL) {
+  dyv <- .s03vec(dy); d <- .s03vec(D); n <- length(dyv)
+  Z <- .s03design(X, n)
+  w <- if (!is.null(weights)) .s03vec(weights) else rep(1, n)
+  gam <- .s03logit(Z, d, 60L)
+  # bounded away from 0 and 1: with a covariate that separates D the IRLS
+  # fit diverges and 1 - pi underflows to zero, which is a positivity
+  # violation, not an arithmetic accident.
+  pi_ <- pmin(pmax(vapply(.s03matvec(Z, gam), .s03sigmoid, 0), 1e-12), 1 - 1e-12)
+  keep <- which(d < 0.5)
+  Z0 <- Z[keep, , drop = FALSE]; y0 <- dyv[keep]
+  b0 <- if (length(keep)) .s03lstsq(Z0, y0) else numeric(ncol(Z))
+  mu0 <- .s03matvec(Z, b0)
+  s1 <- 0; s0 <- 0
+  for (i in seq_len(n)) {
+    s1 <- s1 + w[i] * d[i]
+    s0 <- s0 + w[i] * pi_[i] * (1 - d[i]) / (1 - pi_[i])
+  }
+  w1 <- numeric(n); w0 <- numeric(n)
+  for (i in seq_len(n)) {
+    w1[i] <- if (s1 > 0) w[i] * d[i] / s1 else 0
+    w0[i] <- if (s0 > 0) w[i] * pi_[i] * (1 - d[i]) / (1 - pi_[i]) / s0 else 0
+  }
+  tau <- 0
+  for (i in seq_len(n)) tau <- tau + (w1[i] - w0[i]) * (dyv[i] - mu0[i])
+  inf <- numeric(n)
+  for (i in seq_len(n)) inf[i] <- n * (w1[i] - w0[i]) * (dyv[i] - mu0[i]) - tau
+  v <- 0
+  for (x in inf) v <- v + x * x
+  se <- if (n) sqrt(v / (n * n)) else NaN
+  list(tau = tau, inf = inf, se = se, pi = pi_, mu0 = mu0, w1 = w1, w0 = w0,
+       gamma = gam, beta0 = b0)
+}
+
+# Mammen's two-point multiplier at a van der Corput point: mean 1,
+# variance 1, third moment 1, and deterministic, so both arms agree.
+.s03mammen <- function(i) {
+  r5 <- sqrt(5)
+  p <- (r5 + 1) / (2 * r5)
+  if (.s03vdc(i, 2L) < p) (1 - r5) / 2 else (1 + r5) / 2
+}
+
+# Targeted maximum likelihood for the ATE (van der Laan and Rubin 2006,
+# Int. J. Biostatistics 2(1), art. 11).  The initial Qbar is fluctuated
+# along the logistic submodel whose score is the clever covariate
+# H = D/g - (1-D)/(1-g); eps solves the score equation by Newton, then
+# psi = mean(Q*(1,X) - Q*(0,X)).  y is scaled to [0, 1] so the logistic
+# fluctuation is valid for continuous outcomes (Gruber and van der Laan
+# 2010).
+.s03tmle <- function(y, D, X = NULL, trim = 0, link = "logit") {
+  yv <- .s03vec(y); d <- .s03vec(D); n <- length(yv)
+  Z <- .s03design(X, n)
+  g <- vapply(.s03matvec(Z, .s03logit(Z, d, 60L)), .s03sigmoid, 0)
+  t <- as.numeric(trim)
+  if (t > 0) g <- pmin(pmax(g, t), 1 - t)
+  lo <- min(yv); hi <- max(yv)
+  rng <- if (hi > lo) hi - lo else 1
+  ys <- (yv - lo) / rng
+  Q <- cbind(1, d, Z[, -1, drop = FALSE])
+  bq <- .s03lstsq(Q, ys)
+  q1 <- numeric(n); q0 <- numeric(n); qa <- numeric(n)
+  for (i in seq_len(n)) {
+    row1 <- c(1, 1, Z[i, -1]); row0 <- c(1, 0, Z[i, -1])
+    s1 <- 0; s0 <- 0
+    for (j in seq_along(bq)) { s1 <- s1 + bq[j] * row1[j]; s0 <- s0 + bq[j] * row0[j] }
+    q1[i] <- min(max(s1, 1e-8), 1 - 1e-8)
+    q0[i] <- min(max(s0, 1e-8), 1 - 1e-8)
+    qa[i] <- if (d[i] > 0.5) q1[i] else q0[i]
+  }
+  H <- d / g - (1 - d) / (1 - g)
+  eps <- 0
+  for (it in seq_len(80L)) {
+    num <- 0; den <- 0
+    for (i in seq_len(n)) {
+      z <- log(qa[i] / (1 - qa[i])) + eps * H[i]
+      p <- .s03sigmoid(z)
+      num <- num + H[i] * (ys[i] - p)
+      den <- den + H[i] * H[i] * p * (1 - p)
+    }
+    if (den <= 0) break
+    step <- num / den
+    eps <- eps + step
+    if (abs(step) < 1e-13) break
+  }
+  q1s <- numeric(n); q0s <- numeric(n)
+  for (i in seq_len(n)) {
+    q1s[i] <- .s03sigmoid(log(q1[i] / (1 - q1[i])) + eps / g[i])
+    q0s[i] <- .s03sigmoid(log(q0[i] / (1 - q0[i])) - eps / (1 - g[i]))
+  }
+  psi_s <- 0
+  for (i in seq_len(n)) psi_s <- psi_s + (q1s[i] - q0s[i]) / n
+  psi <- psi_s * rng
+  m1 <- 0; m0 <- 0
+  for (i in seq_len(n)) { m1 <- m1 + q1s[i] / n; m0 <- m0 + q0s[i] / n }
+  inf <- numeric(n)
+  for (i in seq_len(n)) {
+    qas <- if (d[i] > 0.5) q1s[i] else q0s[i]
+    inf[i] <- rng * (H[i] * (ys[i] - qas) + (q1s[i] - q0s[i]) - psi_s)
+  }
+  v <- 0
+  for (x in inf) v <- v + x * x
+  se <- if (n) sqrt(v / (n * n)) else NaN
+  list(psi = psi, se = se, eps = eps, g = g, q1 = q1s, q0 = q0s, inf = inf,
+       ey1 = lo + rng * m1, ey0 = lo + rng * m0, scale = rng, shift = lo)
+}
