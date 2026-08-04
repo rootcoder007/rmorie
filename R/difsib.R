@@ -34,6 +34,10 @@
 #'   Required.
 #' @param correction Apply the Shealy-Stout regression correction.
 #'   Default FALSE.
+#' @param reference Which value of \code{group} is the reference group.
+#'   Defaults to the first value encountered, which makes the SIGN of
+#'   \code{beta} depend on row order; pass this explicitly whenever the
+#'   direction of the DIF matters.
 #' @return list: beta, sigma, statistic, p_value, df, n_levels, levels,
 #'   pstar, correction, n, method.
 #' @examples
@@ -42,7 +46,8 @@
 #' g <- rep(c("r", "f"), 30)
 #' Difsib(rbinom(60, 1, 0.5), g, matching = m)$beta
 #' @export
-Difsib <- function(y, group, studied = NULL, matching = NULL, correction = FALSE) {
+Difsib <- function(y, group, studied = NULL, matching = NULL, correction = FALSE,
+                   reference = NULL) {
   s <- as.numeric(if (is.null(studied)) y else studied)
   n <- length(s)
   g <- as.character(group)
@@ -52,7 +57,13 @@ Difsib <- function(y, group, studied = NULL, matching = NULL, correction = FALSE
   if (length(mt) != n) stop("matching must be the same length as the item score")
   levs <- unique(g)
   if (length(levs) != 2L) stop("group must have exactly 2 distinct values")
-  ref <- levs[1]
+  ref <- if (is.null(reference)) {
+    levs[1]
+  } else if (as.character(reference) %in% levs) {
+    as.character(reference)
+  } else {
+    stop("reference is not one of the two group values")
+  }
 
   keys <- sort(unique(mt))
   nk <- length(keys)
