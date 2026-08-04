@@ -275,6 +275,12 @@ morie_rob_huber <- function(X, y, c = NULL, max_iter = 100L) {
     beta <- beta_new
   }
   r <- yv - as.numeric(A %*% beta)
+  # Recompute the scale from the FINAL residuals.  It was left at the
+  # value from the previous iterate, which also propagated into `se`
+  # below (se = sqrt(diag * kappa * scale^2)).  No MASS-parity contract
+  # here -- this is Huber (1964, 1973) -- so the scale should simply
+  # describe the residuals actually returned.
+  if (scale > 0) scale <- .rob_mad(r)
   u <- if (scale > 0) r / scale else r
   w <- ifelse(abs(u) <= cc, 1, cc / pmax(abs(u), 1e-300))
   psi <- pmin(pmax(u, -cc), cc)
@@ -361,6 +367,9 @@ morie_rob_m <- function(X, y, psi = "huber", c = NULL, max_iter = 100L) {
     beta <- beta_new
   }
   r <- yv - as.numeric(A %*% beta)
+  # Same one-iteration lag as morie_rob_huber above; here it also made
+  # the reported weights inconsistent with the reported scale.
+  if (scale > 0) scale <- .rob_mad(r)
   list(beta = beta, scale = scale, residuals = r,
        weights = if (scale > 0) wfun(r / scale) else rep(1, n),
        psi = psi, c = cc,
