@@ -15,6 +15,50 @@
 # because they are standard and correct, and are documented as not being
 # from this text.
 
+.morie_rg_gcd <- function(a, b) {
+  a <- abs(a); b <- abs(b)
+  while (b > 0) { t <- b; b <- a %% b; a <- t }
+  a
+}
+
+.morie_rg_frac <- function(n, d) {
+  # an exact rational as a list, so counts-based ratios are not rounded
+  if (d == 0) stop("a rational cannot have a zero denominator")
+  if (d < 0) { n <- -n; d <- -d }
+  g <- .morie_rg_gcd(n, d)
+  if (g == 0) g <- 1
+  structure(list(n = n / g, d = d / g), class = "morie_frac")
+}
+
+.morie_rg_asfrac <- function(v) {
+  if (inherits(v, "morie_frac")) return(v)
+  s <- as.character(v)
+  if (grepl("^-?[0-9]+$", s)) return(.morie_rg_frac(as.numeric(s), 1))
+  if (grepl("^-?[0-9]*\\.[0-9]+$", s)) {
+    dec <- sub("^-?[0-9]*\\.", "", s)
+    p <- nchar(dec)
+    return(.morie_rg_frac(as.numeric(s) * 10^p, 10^p))
+  }
+  stop("cannot represent ", s, " exactly; give an integer, a decimal ",
+       "string, or a morie_frac")
+}
+
+.morie_rg_fadd <- function(a, b)
+  .morie_rg_frac(a$n * b$d + b$n * a$d, a$d * b$d)
+.morie_rg_fsub <- function(a, b)
+  .morie_rg_frac(a$n * b$d - b$n * a$d, a$d * b$d)
+.morie_rg_fmul <- function(a, b) .morie_rg_frac(a$n * b$n, a$d * b$d)
+
+# as.numeric() dispatches to as.double methods, not as.numeric ones
+as.double.morie_frac <- function(x, ...) x$n / x$d
+as.numeric.morie_frac <- function(x, ...) x$n / x$d
+format.morie_frac <- function(x, ...) paste0(x$n, "/", x$d)
+print.morie_frac <- function(x, ...) cat(format(x), "\n")
+"==.morie_frac" <- function(e1, e2) {
+  a <- .morie_rg_asfrac(e1); b <- .morie_rg_asfrac(e2)
+  a$n == b$n && a$d == b$d
+}
+
 .morie_rg_scatter <- function(X, mu) {
   # sum of (x - mu)(x - mu)^T: the SCATTER, not divided by n
   d <- sweep(as.matrix(X), 2, mu, "-")
@@ -106,14 +150,19 @@ Ppv <- function(tp, fp = NULL, prevalence = NULL, sensitivity = NULL,
 }
 
 Accuracy <- function(table = NULL, tp = NULL, tn = NULL, fp = NULL,
-                     fn = NULL, prevalence = NULL) {
-  # The book gives the PREVALENCE-WEIGHTED form first, eq (10.102):
-  #   accuracy = S+ P(A) + S- P(N)
-  # and falls back on eq (10.103), (TP+TN)/total, only "if the prior
-  # probabilities are not available".  Eq (10.103) IS eq (10.102)
-  # evaluated at the prevalence of the TEST SET, so on a set balanced
-  # 50/50 it reports a number that does not describe performance on a
-  # population where the disease is rare.
+                     fn = NULL, prevalence = NULL, kind = NULL,
+                     exact = FALSE) {
+  # Every definition, not just one.  Eq (10.102), stated first, is
+  # prevalence weighted:  accuracy = S+ P(A) + S- P(N).  Eq (10.103) is
+  # the fallback used only "if the prior probabilities are not
+  # available", and IS eq (10.102) at the prevalence of the TEST SET, so
+  # on a set balanced 50/50 it describes a population that does not
+  # exist.  The balanced form -- the unweighted mean of sensitivity and
+  # specificity -- is eq (10.102) at a prevalence of one half.
+  #
+  # `exact` returns exact rationals: the inputs are integer counts, so
+  # the raw accuracy is a RATIO OF INTEGERS and rounding it to a double
+  # is a choice, not a necessity.
   if (!is.null(table)) {
     t <- as.matrix(table)
     if (nrow(t) != 2L || ncol(t) != 2L)
@@ -122,31 +171,71 @@ Accuracy <- function(table = NULL, tp = NULL, tn = NULL, fp = NULL,
   } else {
     if (is.null(tp) || is.null(tn) || is.null(fp) || is.null(fn))
       stop("give a 2x2 table or all four of tp, tn, fp, fn")
-    TP <- as.numeric(tp); TN <- as.numeric(tn)
-    FP <- as.numeric(fp); FN <- as.numeric(fn)
+    TP <- tp; TN <- tn; FP <- fp; FN <- fn
   }
-  if (min(TP, TN, FP, FN) < 0) stop("counts cannot be negative")
+  cts <- c(TP, TN, FP, FN)
+  if (any(cts < 0)) stop("counts cannot be negative")
+  if (any(cts != round(cts))) stop("counts must be whole numbers")
+  TP <- as.integer(TP); TN <- as.integer(TN)
+  FP <- as.integer(FP); FN <- as.integer(FN)
   total <- TP + TN + FP + FN
-  if (total <= 0) stop("the table is empty")
-  if (TP + FN <= 0 || TN + FP <= 0)
+  if (total <= 0L) stop("the table is empty")
+  if (TP + FN <= 0L || TN + FP <= 0L)
     stop("a class is empty; the sensitivity or specificity is undefined")
-  se <- TP / (TP + FN)
-  sp <- TN / (TN + FP)
-  raw <- (TP + TN) / total
-  out <- list(accuracy = raw, raw_accuracy = raw, sensitivity = se,
-              specificity = sp, test_set_prevalence = (TP + FN) / total,
-              eq_10_103_is_eq_10_102_at_the_test_set_prevalence = TRUE,
-              method = "Rangayyan (2024) eqs. (10.102)-(10.103)")
+  kinds <- c("raw", "weighted", "balanced")
+  if (!is.null(kind) && !kind %in% kinds)
+    stop("kind must be one of ", paste(kinds, collapse = ", "))
+
+  if (exact) {
+    se <- .morie_rg_frac(TP, TP + FN)
+    sp <- .morie_rg_frac(TN, TN + FP)
+    raw <- .morie_rg_frac(TP + TN, total)
+    tprev <- .morie_rg_frac(TP + FN, total)
+    balanced <- .morie_rg_fmul(.morie_rg_frac(1, 2),
+                               .morie_rg_fadd(se, sp))
+  } else {
+    se <- TP / (TP + FN); sp <- TN / (TN + FP)
+    raw <- (TP + TN) / total; tprev <- (TP + FN) / total
+    balanced <- 0.5 * (se + sp)
+  }
+
+  weighted <- NULL; prev <- NULL
   if (!is.null(prevalence)) {
-    p <- as.numeric(prevalence)
-    if (p < 0 || p > 1) stop("the prevalence must lie in [0, 1]")
-    w <- se * p + sp * (1 - p)
-    out$accuracy <- w
-    out$weighted_accuracy <- w
-    out$prevalence <- p
-    out$prior_weighted <- TRUE
-  } else out$prior_weighted <- FALSE
-  out
+    if (exact) {
+      prev <- .morie_rg_asfrac(prevalence)
+      if (prev$n < 0 || prev$n > prev$d)
+        stop("the prevalence must lie in [0, 1]")
+      one <- .morie_rg_frac(1, 1)
+      weighted <- .morie_rg_fadd(
+        .morie_rg_fmul(se, prev),
+        .morie_rg_fmul(sp, .morie_rg_fsub(one, prev)))
+    } else {
+      prev <- as.numeric(prevalence)
+      if (prev < 0 || prev > 1) stop("the prevalence must lie in [0, 1]")
+      weighted <- se * prev + sp * (1 - prev)
+    }
+  }
+
+  chosen <- kind
+  if (is.null(chosen))
+    chosen <- if (!is.null(prevalence)) "weighted" else "raw"
+  if (chosen == "weighted" && is.null(weighted))
+    stop("kind='weighted' needs a prevalence; without the priors the ",
+         "book falls back on eq. (10.103), kind='raw'")
+  headline <- switch(chosen, raw = raw, weighted = weighted,
+                     balanced = balanced)
+
+  list(accuracy = headline, kind = chosen, raw_accuracy = raw,
+       weighted_accuracy = weighted, balanced_accuracy = balanced,
+       sensitivity = se, specificity = sp, prevalence = prev,
+       test_set_prevalence = tprev,
+       counts = list(tp = TP, tn = TN, fp = FP, fn = FN),
+       n = total, exact = isTRUE(exact),
+       prior_weighted = chosen == "weighted",
+       balanced_is_eq_10_102_at_one_half = TRUE,
+       eq_10_103_is_eq_10_102_at_the_test_set_prevalence = TRUE,
+       method = paste("Rangayyan (2024) eqs. (10.102)-(10.103), with",
+                      "the balanced form at P(A) = 1/2"))
 }
 
 Roc <- function(scores, labels, positive = 1) {
@@ -291,11 +380,157 @@ DivAv <- function(means, covs) {
        method = "Rangayyan (2024) Section 10.10.1 (average divergence)")
 }
 
+Kld <- function(p1, p2) {
+  # eq (5.33): KLD(p1, p2) = sum_l p2(x_l) ln[p2(x_l) / p1(x_l)].  Note
+  # the book's argument order -- the sum is weighted by the SECOND PDF.
+  # KLD is not symmetric, so swapping the arguments gives a different
+  # number; both are returned so the asymmetry is visible rather than a
+  # trap.  Their sum is exactly the divergence of eq (10.115).
+  #
+  # The book uses this as a FEATURE: Rangayyan and Wu computed the KLD
+  # between a signal's PDF and Parzen-window models of the normal and
+  # abnormal VAG classes, reaching 73 per cent with the KLD alone.
+  a <- as.numeric(p1); b <- as.numeric(p2)
+  if (length(a) != length(b))
+    stop("the two PDFs must be sampled on the same grid")
+  if (!length(a)) stop("need at least one bin")
+  if (any(a < 0) || any(b < 0)) stop("a PDF cannot be negative")
+  bad <- sum(b > 0 & a <= 0)
+  if (bad)
+    stop("p1 vanishes at ", bad, " bin(s) where p2 does not; the KLD ",
+         "is unbounded there")
+  k <- b > 0
+  fwd <- .morie_fsum(b[k] * log(b[k] / a[k]))
+  j <- a > 0 & b > 0
+  rev <- .morie_fsum(a[j] * log(a[j] / b[j]))
+  list(kld = fwd, reversed = rev, symmetric_sum = fwd + rev,
+       asymmetric = abs(fwd - rev) > 1e-12,
+       weighted_by_the_second_pdf = TRUE,
+       symmetric_sum_is_the_divergence_of_eq_10_115 = TRUE,
+       nonnegative = fwd >= -1e-12,
+       method = "Rangayyan (2024) eq. (5.33)")
+}
+
+BhattCoef <- function(p1, p2) {
+  # BC(p1, p2) = sum_l sqrt(p1 p2): the OVERLAP between two PDFs,
+  # bounded in [0, 1].  This is what the Bhattacharyya DISTANCE is built
+  # from, D_B = -ln BC, and what makes the error bound work: the overlap
+  # of the two class-conditional densities IS the region where the
+  # optimal classifier must make mistakes.  NOT FROM THIS BOOK.
+  a <- as.numeric(p1); b <- as.numeric(p2)
+  if (length(a) != length(b))
+    stop("the two PDFs must be sampled on the same grid")
+  if (!length(a)) stop("need at least one bin")
+  if (any(a < 0) || any(b < 0)) stop("a PDF cannot be negative")
+  bc <- .morie_fsum(sqrt(a * b))
+  list(coefficient = bc, overlap = bc,
+       distance = if (bc > 0) -log(bc) else Inf,
+       identical = abs(bc - 1) < 1e-12, disjoint = bc <= 1e-15,
+       in_unit_interval = bc >= -1e-12 && bc <= 1 + 1e-12,
+       the_overlap_is_where_errors_must_happen = TRUE,
+       not_from_this_book = TRUE,
+       reference = paste("Bhattacharyya A. On a measure of divergence",
+                         "between two statistical populations defined by",
+                         "their probability distributions. Bulletin of",
+                         "the Calcutta Mathematical Society 35:99-109,",
+                         "1943 (Zbl 0063.00364)."),
+       method = paste("Bhattacharyya coefficient; Rangayyan (2024) uses",
+                      "the KLD of eq. (5.33) and the divergence of",
+                      "eq. (10.115)"))
+}
+
+Chernoff <- function(p1, p2, alpha = NULL, n_grid = 201) {
+  # rho_a = sum_l p1^a p2^(1-a);  C = -ln min_a rho_a.  The Bhattacharyya
+  # coefficient is exactly this at a = 1/2, which is the relationship the
+  # whole family turns on.  Leaving alpha unset searches for the
+  # minimizing a, which is what makes the Chernoff bound TIGHTER than the
+  # Bhattacharyya bound -- the latter is the same bound fixed at a = 1/2
+  # rather than the best a.  Every a gives a valid bound
+  # P_e <= P1^a P2^(1-a) rho_a; the minimum gives the best of them.
+  # NOT FROM RANGAYYAN (2024).
+  a <- as.numeric(p1); b <- as.numeric(p2)
+  if (length(a) != length(b))
+    stop("the two PDFs must be sampled on the same grid")
+  if (!length(a)) stop("need at least one bin")
+  if (any(a < 0) || any(b < 0)) stop("a PDF cannot be negative")
+  k <- a > 0 & b > 0
+  rho <- function(t) .morie_fsum(a[k]^t * b[k]^(1 - t))
+  if (!is.null(alpha)) {
+    av <- as.numeric(alpha)
+    if (av < 0 || av > 1) stop("alpha must lie in [0, 1]")
+    best_a <- av; best_rho <- rho(av); searched <- FALSE
+  } else {
+    m <- as.integer(n_grid)
+    if (m < 3L) stop("need at least three grid points")
+    grid <- (seq_len(m) - 1) / (m - 1)
+    vals <- vapply(grid, rho, numeric(1))
+    i <- which.min(vals)
+    best_a <- grid[i]; best_rho <- vals[i]; searched <- TRUE
+  }
+  bc <- rho(0.5)
+  list(coefficient = best_rho, alpha = best_a,
+       information = if (best_rho > 0) -log(best_rho) else Inf,
+       bhattacharyya_coefficient = bc,
+       bhattacharyya_is_alpha_one_half = TRUE,
+       alpha_searched = searched,
+       at_least_as_tight_as_bhattacharyya = best_rho <= bc + 1e-12,
+       reference = paste("Chernoff H. A measure of asymptotic efficiency",
+                         "for tests of a hypothesis based on the sum of",
+                         "observations. Annals of Mathematical Statistics",
+                         "23(4):493-507, 1952,",
+                         "doi:10.1214/aoms/1177729330. The alpha = 1/2",
+                         "identity is Nielsen and Nock, Pattern",
+                         "Recognition Letters, 2014."),
+       not_from_this_book = TRUE,
+       method = "Chernoff alpha-coefficient and information")
+}
+
+Hellinger <- function(p1, p2) {
+  # H = sqrt(1 - BC), so H^2 = 1 - BC.  Unlike the Bhattacharyya distance
+  # -ln BC, this is a TRUE METRIC: bounded in [0, 1], symmetric, and it
+  # satisfies the triangle inequality, which -ln BC does not.  That is
+  # the reason to reach for it -- anything needing a metric over
+  # distributions needs this and not D_B.  The 1/2 normalization is the
+  # usual one; unnormalized gives H^2 = 2(1 - BC), so the convention is
+  # reported rather than assumed.  NOT FROM RANGAYYAN (2024).
+  a <- as.numeric(p1); b <- as.numeric(p2)
+  if (length(a) != length(b))
+    stop("the two PDFs must be sampled on the same grid")
+  if (!length(a)) stop("need at least one bin")
+  if (any(a < 0) || any(b < 0)) stop("a PDF cannot be negative")
+  bc <- .morie_fsum(sqrt(a * b))
+  h2 <- max(0, 1 - bc)
+  list(hellinger = sqrt(h2), squared = h2,
+       bhattacharyya_coefficient = bc,
+       identity_h2_equals_one_minus_bc = TRUE,
+       is_a_true_metric = TRUE,
+       satisfies_the_triangle_inequality = TRUE,
+       bhattacharyya_distance_does_not = TRUE,
+       normalization = "one half; unnormalized gives 2(1 - BC)",
+       in_unit_interval = sqrt(h2) >= -1e-12 && sqrt(h2) <= 1 + 1e-12,
+       reference = paste("Hellinger E. Neue Begruendung der Theorie",
+                         "quadratischer Formen von unendlichvielen",
+                         "Veraenderlichen. Journal fuer die reine und",
+                         "angewandte Mathematik 136:210-271, 1909,",
+                         "doi:10.1515/crll.1909.136.210."),
+       not_from_this_book = TRUE,
+       method = "Hellinger distance, H^2 = 1 - BC")
+}
+
 Bhatt <- function(m1, m2, C1, C2) {
-  # NOT FROM THIS BOOK.  Rangayyan (2024) measures separability with
-  # eq (10.112) and eqs (10.115)-(10.117); Bhattacharyya distance appears
-  # nowhere in the text.  Kept because it is standard and correct, and
-  # because it -- unlike the divergence -- bounds the Bayes error.
+  # NOT FROM THIS BOOK.  A full-text search of the 2024 third edition --
+  # Rangayyan and Krishnan -- finds no occurrence of "Bhattacharyya", nor
+  # of Chernoff or Hellinger.  The book gives the KLD of eq (5.33) and
+  # the divergence of eqs (10.115)-(10.117), which is the symmetric sum
+  # of the two KLDs, and cites Swain for them.
+  #
+  # WHAT IT IS FOR: D_B = -ln BC where BC is the Bhattacharyya
+  # coefficient, the overlap of the two class-conditional densities.
+  # That overlap is precisely where the optimal classifier is forced to
+  # err, which is why D_B BOUNDS the Bayes error while the divergence
+  # bounds nothing.  The two answer different questions: the divergence
+  # says how far apart the classes are, this says how well ANY
+  # classifier could possibly do.
   a <- as.numeric(m1); b <- as.numeric(m2)
   A <- as.matrix(C1); B <- as.matrix(C2)
   p <- length(a)
@@ -312,6 +547,12 @@ Bhatt <- function(m1, m2, C1, C2) {
        covariance_term = 0.5 * log(dM / sqrt(dA * dB)),
        not_from_this_book = TRUE,
        book_uses_divergence_eq_10_115 = TRUE,
+       reference = paste("Bhattacharyya A. Bulletin of the Calcutta",
+                         "Mathematical Society 35:99-109, 1943; the",
+                         "Gaussian closed form and the error bound are",
+                         "Kailath T, IEEE Transactions on Communication",
+                         "Technology 15(1):52-60, 1967,",
+                         "doi:10.1109/TCOM.1967.1089532."),
        method = paste("standard Bhattacharyya distance for Gaussians;",
                       "Rangayyan (2024) uses eqs. (10.112) and (10.115)",
                       "instead"))
@@ -333,6 +574,11 @@ ErrBound <- function(p1, p2, db) {
        bounds_the_optimal_classifier_not_yours = TRUE,
        not_from_this_book = TRUE,
        pairs_with_bhatt_not_with_divergence = TRUE,
+       reference = paste("Kailath T. The divergence and Bhattacharyya",
+                         "distance measures in signal selection. IEEE",
+                         "Transactions on Communication Technology",
+                         "15(1):52-60, February 1967,",
+                         "doi:10.1109/TCOM.1967.1089532."),
        method = "Kailath's Bhattacharyya bound; not given in Rangayyan (2024)")
 }
 

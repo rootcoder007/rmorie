@@ -403,3 +403,52 @@ test_that("the Bhattacharyya coefficient is an overlap in [0, 1]", {
   far <- BhattCoef(c(0.9, 0.1), c(0.1, 0.9))$distance
   expect_lt(ErrBound(0.5, 0.5, far)$bound, ErrBound(0.5, 0.5, close)$bound)
 })
+
+test_that("Chernoff at one half is the Bhattacharyya coefficient", {
+  p1 <- c(0.2, 0.3, 0.5); p2 <- c(0.1, 0.4, 0.5)
+  bc <- BhattCoef(p1, p2)$coefficient
+  h <- Chernoff(p1, p2, alpha = 0.5)
+  expect_close(h$coefficient, bc, tol = 1e-12)
+  expect_true(h$bhattacharyya_is_alpha_one_half)
+  expect_false(h$alpha_searched)
+  best <- Chernoff(p1, p2)
+  expect_lte(best$coefficient, bc + 1e-12)
+  expect_true(best$at_least_as_tight_as_bhattacharyya)
+  expect_true(best$alpha_searched)
+  expect_error(Chernoff(p1, p2, alpha = 1.5), "alpha must lie")
+})
+
+test_that("Hellinger squared is one minus the coefficient", {
+  p1 <- c(0.2, 0.3, 0.5); p2 <- c(0.1, 0.4, 0.5)
+  h <- Hellinger(p1, p2)
+  expect_close(h$squared, 1 - BhattCoef(p1, p2)$coefficient, tol = 1e-12)
+  expect_true(h$identity_h2_equals_one_minus_bc)
+  expect_true(h$in_unit_interval)
+  expect_close(Hellinger(p1, p1)$hellinger, 0, tol = 1e-12)
+  expect_close(Hellinger(c(1, 0), c(0, 1))$hellinger, 1, tol = 1e-12)
+})
+
+test_that("Hellinger is a metric where the Bhattacharyya distance is not", {
+  a <- c(0.2, 0.3, 0.5); b <- c(0.1, 0.4, 0.5); cc <- c(0.5, 0.25, 0.25)
+  hab <- Hellinger(a, b)$hellinger
+  hbc <- Hellinger(b, cc)$hellinger
+  hac <- Hellinger(a, cc)$hellinger
+  expect_lte(hac, hab + hbc + 1e-12)          # the triangle inequality
+  expect_close(hab, Hellinger(b, a)$hellinger, tol = 1e-12)
+  expect_true(Hellinger(a, b)$is_a_true_metric)
+  expect_true(Hellinger(a, b)$bhattacharyya_distance_does_not)
+})
+
+test_that("every borrowed measure carries its primary citation", {
+  p1 <- c(0.2, 0.3, 0.5); p2 <- c(0.1, 0.4, 0.5)
+  rs <- list(BhattCoef(p1, p2), Chernoff(p1, p2), Hellinger(p1, p2),
+             ErrBound(0.5, 0.5, 1), Bhatt(c(0, 1), c(2, -1), CC1, CC2))
+  for (r in rs) {
+    expect_true(r$not_from_this_book)
+    expect_gt(nchar(r$reference), 40)
+  }
+  expect_true(grepl("1943", BhattCoef(p1, p2)$reference))
+  expect_true(grepl("493-507", Chernoff(p1, p2)$reference))
+  expect_true(grepl("1909", Hellinger(p1, p2)$reference))
+  expect_true(grepl("1967", ErrBound(0.5, 0.5, 1)$reference))
+})
