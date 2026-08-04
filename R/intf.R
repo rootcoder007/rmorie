@@ -4,17 +4,18 @@
 #' Ramsay and Silverman (2005), Functional Data Analysis, 2nd ed., Springer:
 #' for x(t) = sum_k c_k phi_k(t) the integral is linear in the coefficients,
 #' integral x(t) dt = sum_k c_k integral phi_k(t) dt, so integrating a fitted
-#' curve reduces to integrating each basis function once.  The basis integrals
-#' are taken by the composite trapezoid rule over the WHOLE grid, end
-#' intervals included.
+#' curve reduces to integrating each basis function once.
 #'
-#' @param coef the K coefficients.
-#' @param basis n-by-K matrix of basis functions evaluated on the grid.
+#' The basis integrals are taken by the composite trapezoid rule over the
+#' WHOLE grid, end intervals included.
+#'
+#' @param coef K coefficients.
+#' @param basis n-by-K matrix of basis functions on the grid.
 #' @param t the grid; defaults to equally spaced on [0, 1].
 #' @return list: estimate, basis_integrals, n, nbasis, method.
 #' @keywords internal
 #' @examples
-#' Intf(c(2), cbind(rep(1, 5)))$estimate
+#' Intf(c(3, 4), cbind(1, seq(0, 1, length.out = 5)))$estimate
 #' @export
 Intf <- function(coef, basis, t = NULL) {
   cc <- .s03vec(coef)
@@ -23,19 +24,12 @@ Intf <- function(coef, basis, t = NULL) {
   K <- ncol(B)
   if (n < 2L) stop("integrate_function: need at least two grid points")
   if (length(cc) != K) stop("integrate_function: coef must have one entry per basis column")
-  tt <- if (is.null(t)) (seq_len(n) - 1) / (n - 1) else .s03vec(t)
+  tt <- if (is.null(t)) .fdgrid(n) else .s03vec(t)
   if (length(tt) != n) stop("integrate_function: t must match the number of basis rows")
   ints <- numeric(K)
-  for (j in seq_len(K)) ints[j] <- .intf_trapz(tt, B[, j])
+  for (j in seq_len(K)) ints[j] <- .fdtrapz(tt, B[, j])
   total <- 0
   for (j in seq_len(K)) total <- total + cc[j] * ints[j]
   list(estimate = total, basis_integrals = ints, n = n, nbasis = K,
        method = "Ramsay-Silverman (2005) linearity of the integral over a basis expansion, trapezoid over the whole grid")
-}
-
-.intf_trapz <- function(t, v) {
-  s <- 0
-  n <- length(t)
-  if (n > 1L) for (i in seq_len(n - 1L)) s <- s + 0.5 * (v[i] + v[i + 1L]) * (t[i + 1L] - t[i])
-  s
 }
