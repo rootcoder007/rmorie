@@ -60,6 +60,20 @@ test_that("rlm recovers the clean fit better than least squares", {
 
 test_that("rlm uses the MAD about zero, as MASS does", {
   r <- morie_rlm(YR, RX)
-  expect_equal(r$scale, stats::median(abs(r$residuals)) / 0.6745,
-               tolerance = 1e-12)
+  # The point of this test is the CENTRING: MASS uses mad(resid, 0), the
+  # MAD about zero, not about the residual median.  Centring it instead
+  # shifts the scale and every weight with it.
+  centred <- stats::median(abs(r$residuals - stats::median(r$residuals)))
+  about0 <- stats::median(abs(r$residuals))
+  expect_equal(r$scale_final, about0 / 0.6745, tolerance = 1e-12)
+  expect_false(isTRUE(all.equal(about0, centred, tolerance = 1e-6)))
+
+  # r$scale itself follows MASS, which returns the scale computed at the
+  # START of the final IRLS iteration -- so it does NOT equal
+  # median(abs(its own residuals))/0.6745.  MASS::rlm fails that equality
+  # too (measured relative gap 7.0e-05 on a 60-point fixture with three
+  # outliers), so asserting it at 1e-12 was asserting something no
+  # MASS-compatible implementation can satisfy.  The right bound is the
+  # IRLS convergence tolerance, not machine epsilon.
+  expect_equal(r$scale, r$scale_final, tolerance = 1e-3)
 })
