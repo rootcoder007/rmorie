@@ -2413,7 +2413,7 @@ Wsignif <- function(w, k, n) {
 
 #' ARE from derivatives and variances -- Theorem 13.2.2, eq. (13.2.1), p. 485
 #' @noRd
-Areratio <- function(deriv, var, deriv_star, var_star) {
+Arepitman <- function(deriv, var, deriv_star, var_star) {
   d <- as.numeric(deriv); v <- as.numeric(var)
   ds <- as.numeric(deriv_star); vs <- as.numeric(var_star)
   if (v <= 0 || vs <= 0) stop("variances must be strictly positive.", call. = FALSE)
