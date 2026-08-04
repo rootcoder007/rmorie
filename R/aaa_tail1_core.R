@@ -1,3 +1,20 @@
+# Moore-Penrose pseudo-inverse, MASS::ginv's rule: relative cutoff
+# tol * d[1] with tol = sqrt(.Machine$double.eps), i.e. ~1.49e-8 of the
+# largest singular value. Kept DISTINCT from .morie_pinv (rcond * max(s),
+# rcond = 1e-15) because they are two different published conventions and
+# code ported from MASS::ginv must keep MASS's answer. Mirrors
+# morie.fn._array_core.ginv exactly.
+MASS_ginv <- function(X, tol = sqrt(.Machine$double.eps)) {
+  X <- as.matrix(X)
+  s <- svd(X)
+  positive <- s$d > max(tol * s$d[1L], 0)
+  if (!any(positive)) {
+    return(array(0, dim(X)[2L:1L]))
+  }
+  s$v[, positive, drop = FALSE] %*%
+    ((1 / s$d[positive]) * t(s$u[, positive, drop = FALSE]))
+}
+
 .morie_pinv <- function(M, rcond = 1e-15) {
   s <- svd(M)
   cutoff <- rcond * max(s$d)
