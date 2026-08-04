@@ -51,5 +51,5 @@ NYPD Complaint Data Current (Year To Date)
 }
 \examples{
 df <- morie_datasets_nyc_nypd_complaint_ytd(offline = TRUE)
-ncol(df)  # 36: adds geocoded_column over the historic schema
+ncol(df) # 36: adds geocoded_column over the historic schema
 }

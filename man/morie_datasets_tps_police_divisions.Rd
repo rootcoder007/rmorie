@@ -25,6 +25,6 @@ address, and area_sqkm.
 \examples{
 \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_tps_police_divisions(offline = TRUE)
-nrow(df)  # 16
+nrow(df) # 16
 \dontshow{\}) # examplesIf}
 }

@@ -61,7 +61,8 @@ Mirrors \code{morie.fn.pdcoin} on the Python side.
 }
 \examples{
 set.seed(1)
-Tn <- 80; N <- 6
+Tn <- 80
+N <- 6
 x1 <- unlist(lapply(seq_len(N), function(i) cumsum(rnorm(Tn))))
 x2 <- unlist(lapply(seq_len(N), function(i) cumsum(rnorm(Tn))))
 y <- x1 + 0.5 * x2 + rnorm(N * Tn)

@@ -42,8 +42,10 @@ block) and \code{sim = "geom"} (stationary) resampling schemes.
 }
 \examples{
 set.seed(1)
-b <- morie_tsboot(stats::as.ts(rnorm(60)), statistic = mean,
-                  R = 100L, l = 5)
+b <- morie_tsboot(stats::as.ts(rnorm(60)),
+  statistic = mean,
+  R = 100L, l = 5
+)
 str(b, max.level = 1)
 }
 \references{

@@ -27,8 +27,10 @@ does, the driftless-diffusion model does not describe these bars,
 and that is an error rather than a clipped zero.
 }
 \examples{
-morie_vol_garman_klass(c(100, 101), c(102, 103), c(99, 100),
-                       c(101, 102))$sigma
+morie_vol_garman_klass(
+  c(100, 101), c(102, 103), c(99, 100),
+  c(101, 102)
+)$sigma
 }
 \references{
 Garman and Klass (1980), \emph{Journal of Business}

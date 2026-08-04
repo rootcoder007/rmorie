@@ -3,31 +3,27 @@
 \name{Devresid}
 \alias{Devresid}
 \alias{morie_survival_deviance}
-\title{Deviance residuals from a Cox fit}
+\title{Deviance residuals from a fitted Cox model}
 \usage{
 Devresid(time, event, X, beta)
+
+morie_survival_deviance(time, event, X, beta)
 }
 \arguments{
-\item{time}{Numeric vector of follow-up times.}
+\item{time}{observed follow-up times.}
 
-\item{event}{Numeric or logical vector; 1 (or \code{TRUE}) for an event, 0 for right censoring.}
+\item{event}{event indicator, 1 = event, 0 = censored.}
 
-\item{X}{Numeric matrix of covariates, one row per subject.}
+\item{X}{covariate matrix, one row per subject.}
 
-\item{beta}{Numeric vector of Cox coefficients, one per column of \code{X}.}
+\item{beta}{fitted coefficient vector.}
 }
 \value{
-A list with \code{residuals}, \code{martingale} and \code{is_model_deviance}.
+list with the deviance residuals and the martingale residuals they derive from.
 }
 \description{
-Deviance residuals from a Cox fit.
+d_i = sign(M) sqrt(-2\link{M + delta log(delta - M)}), a symmetrizing transform of the martingale residuals: roughly normal when the model holds.
 }
-\details{
-A symmetrizing transform of the martingale residuals, roughly normal when the model fits, so a large absolute value is an outlier in the usual sense. These are per-subject residuals and do not add up to the model deviance; \code{is_model_deviance} says so.
-
-\code{morie_survival_deviance} is the pre-policy spelling and is the same
-function.
-}
-\examples{
-Devresid(c(1, 2, 3, 4), c(1, 0, 1, 1), matrix(c(0, 1, 0, 1)), 0.3)
+\references{
+Therneau, T. M., Grambsch, P. M. and Fleming, T. R. (1990). Martingale-based residuals for survival models. Biometrika 77(1), 147-160.
 }

@@ -35,6 +35,8 @@ set.seed(1)
 x <- rnorm(30)
 y <- rnorm(30, mean = 0.6)
 r <- bootstrap_effect_size_ci(function(a, b) mean(a) - mean(b),
-                              x, y, n_boot = 50L)
+  x, y,
+  n_boot = 50L
+)
 r$estimate
 }

@@ -34,7 +34,9 @@ moved rather than gone away.
 \examples{
 set.seed(1)
 n <- 400
-g <- rbinom(n, 1, 0.5); tt <- rbinom(n, 1, 0.5); p <- rbinom(n, 1, 0.5)
+g <- rbinom(n, 1, 0.5)
+tt <- rbinom(n, 1, 0.5)
+p <- rbinom(n, 1, 0.5)
 y <- 1 + g + tt + p + 2 * g * tt * p + rnorm(n)
 round(morie_causal_did_three_way(y, tt, p, g)$ddd, 2)
 }

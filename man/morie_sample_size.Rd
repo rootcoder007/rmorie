@@ -28,46 +28,12 @@ morie_sample_size(
 )
 }
 \arguments{
+\item{p_star, se_max, u_crit, s_star, l_max, cv_star, r_max}{Frequentist
+pieces. @param design_effect,n_si Design-effect pieces.}
 
-\item{p_star}{argument \code{p_star}; not described in the source.}
+\item{p, z, n, c, d}{Beta posterior pieces. @param v,l Interval pieces.}
 
-\item{se_max}{argument \code{se_max}; not described in the source.}
-
-\item{u_crit}{argument \code{u_crit}; not described in the source.}
-
-\item{s_star}{argument \code{s_star}; not described in the source.}
-
-\item{l_max}{argument \code{l_max}; not described in the source.}
-
-\item{cv_star}{argument \code{cv_star}; not described in the source.}
-
-\item{r_max}{argument \code{r_max}; not described in the source.}
-
-\item{design_effect}{argument \code{design_effect}; not described in the source.}
-
-\item{n_si}{argument \code{n_si}; not described in the source.}
-
-\item{p}{argument \code{p}; not described in the source.}
-
-\item{z}{argument \code{z}; not described in the source.}
-
-\item{n}{argument \code{n}; not described in the source.}
-
-\item{c}{argument \code{c}; not described in the source.}
-
-\item{d}{argument \code{d}; not described in the source.}
-
-\item{v}{argument \code{v}; not described in the source.}
-
-\item{l}{argument \code{l}; not described in the source.}
-
-\item{lengths}{argument \code{lengths}; not described in the source.}
-
-\item{probs}{argument \code{probs}; not described in the source.}
-
-\item{coverages}{argument \code{coverages}; not described in the source.}
-
-\item{alpha}{argument \code{alpha}; not described in the source.}
+\item{lengths, probs, coverages, alpha}{ALC/ACC pieces.}
 }
 \value{
 List with the requested sample sizes and criteria.

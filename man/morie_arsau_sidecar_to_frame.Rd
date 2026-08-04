@@ -21,11 +21,15 @@ column order in the resulting \code{data.frame}.
 }
 \examples{
 sc <- list(
-  fields = list(list(id = "PoliceService", type = "text"),
-                list(id = "IncidentYear", type = "int")),
+  fields = list(
+    list(id = "PoliceService", type = "text"),
+    list(id = "IncidentYear", type = "int")
+  ),
   records = list(
     list(PoliceService = "Toronto", IncidentYear = 2023L),
-    list(PoliceService = "OPP", IncidentYear = 2023L)))
+    list(PoliceService = "OPP", IncidentYear = 2023L)
+  )
+)
 morie_arsau_sidecar_to_frame(sc)
 }
 \references{

@@ -44,11 +44,15 @@ squares is used.
 \examples{
 set.seed(1)
 n <- 400
-d <- rbinom(n, 1, 0.5); p <- rbinom(n, 1, 0.5)
+d <- rbinom(n, 1, 0.5)
+p <- rbinom(n, 1, 0.5)
 y <- 1 + 0.3 * d + 0.4 * p + 0.5 * d * p + rnorm(n, sd = 0.5)
-df <- data.frame(y = y, d = d, post = p,
-                 w = runif(n, 0.5, 2))
+df <- data.frame(
+  y = y, d = d, post = p,
+  w = runif(n, 0.5, 2)
+)
 res <- morie_did_repeated_cross_section(df, "y", "d", "post",
-                                        weights = "w")
+  weights = "w"
+)
 res$estimate
 }

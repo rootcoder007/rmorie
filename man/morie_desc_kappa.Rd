@@ -26,7 +26,8 @@ multi-rater matrix / data frame) for inter-rater agreement.
 \examples{
 if (requireNamespace("DescTools", quietly = TRUE)) {
   set.seed(1)
-  r1 <- sample(1:3, 50, TRUE); r2 <- r1
+  r1 <- sample(1:3, 50, TRUE)
+  r2 <- r1
   r2[1:10] <- sample(1:3, 10, TRUE)
   morie_desc_kappa(table(r1, r2))
 }

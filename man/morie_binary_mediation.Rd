@@ -46,7 +46,10 @@ uncertainty.
 Mirrors \code{morie.fn.binmed}.
 }
 \examples{
-set.seed(1); n <- 600; xx <- rbinom(n, 1, 0.5); mm <- xx + rnorm(n)
+set.seed(1)
+n <- 600
+xx <- rbinom(n, 1, 0.5)
+mm <- xx + rnorm(n)
 yy <- rbinom(n, 1, plogis(-0.5 + 0.5 * xx + mm))
 morie_binary_mediation(xx, mm, yy)$indirect
 }

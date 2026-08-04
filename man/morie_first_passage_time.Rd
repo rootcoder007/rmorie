@@ -56,8 +56,10 @@ Mirrors \code{morie.fn.hrzfpt}.
 }
 \examples{
 gu <- seq(-5, 5, length.out = 201)
-morie_first_passage_time(3, 0, 1, matrix(0, 3, 2), c(1, -0.5),
-                         dnorm(gu), gu, dnorm(gu, sd = 0.5), gu)$probability
+morie_first_passage_time(
+  3, 0, 1, matrix(0, 3, 2), c(1, -0.5),
+  dnorm(gu), gu, dnorm(gu, sd = 0.5), gu
+)$probability
 }
 \references{
 Horowitz, Sec. 5.2.3, eq. (5.20).

@@ -26,5 +26,6 @@ on values outside it, and records the declared reference level.
 }
 \examples{
 morie_safe_factor(c("White", "Black", "White"),
-                  levels = c("White", "Black"))
+  levels = c("White", "Black")
+)
 }

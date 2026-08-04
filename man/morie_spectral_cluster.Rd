@@ -27,13 +27,13 @@ Thin extender over \code{kernlab::specc} that performs Ng / Jordan
 }
 \examples{
 \donttest{
-  if (requireNamespace("kernlab", quietly = TRUE)) {
-    set.seed(1)
-    x <- rbind(
-      matrix(stats::rnorm(80, mean = -2), ncol = 2),
-      matrix(stats::rnorm(80, mean =  2), ncol = 2)
-    )
-    morie_spectral_cluster(x, centers = 2)
-  }
+if (requireNamespace("kernlab", quietly = TRUE)) {
+  set.seed(1)
+  x <- rbind(
+    matrix(stats::rnorm(80, mean = -2), ncol = 2),
+    matrix(stats::rnorm(80, mean = 2), ncol = 2)
+  )
+  morie_spectral_cluster(x, centers = 2)
+}
 }
 }

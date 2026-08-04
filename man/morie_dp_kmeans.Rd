@@ -38,8 +38,10 @@ reinitialised, which is reported.
 }
 \examples{
 set.seed(1)
-r <- morie_dp_kmeans(matrix(rnorm(200), ncol = 2), k = 2, epsilon = 5,
-                     bounds = c(-4, 4))
+r <- morie_dp_kmeans(matrix(rnorm(200), ncol = 2),
+  k = 2, epsilon = 5,
+  bounds = c(-4, 4)
+)
 dim(r$centers)
 }
 \references{

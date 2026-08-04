@@ -9,14 +9,6 @@ morie_evt_return_level_pot(u, sigma, xi, zeta_u, m)
 \arguments{
 \item{u}{threshold; sigma,xi GPD parameters; zeta_u = P(X > u);
 m observations}
-
-\item{sigma}{argument \code{sigma}; not described in the source.}
-
-\item{xi}{argument \code{xi}; not described in the source.}
-
-\item{zeta_u}{argument \code{zeta_u}; not described in the source.}
-
-\item{m}{argument \code{m}; not described in the source.}
 }
 \description{
 POT m-observation return level (Coles 2001 eq. 4.12-4.14)

@@ -3,31 +3,28 @@
 \name{Martingale}
 \alias{Martingale}
 \alias{morie_survival_martingale}
-\title{Martingale residuals from a Cox fit}
+\title{Martingale residuals from a fitted Cox model}
 \usage{
 Martingale(time, event, X, beta)
+
+morie_survival_martingale(time, event, X, beta)
 }
 \arguments{
-\item{time}{Numeric vector of follow-up times.}
+\item{time}{observed follow-up times.}
 
-\item{event}{Numeric or logical vector; 1 (or \code{TRUE}) for an event, 0 for right censoring.}
+\item{event}{event indicator, 1 = event, 0 = censored.}
 
-\item{X}{Numeric matrix of covariates, one row per subject.}
+\item{X}{covariate matrix, one row per subject.}
 
-\item{beta}{Numeric vector of Cox coefficients, one per column of \code{X}.}
+\item{beta}{fitted coefficient vector.}
 }
 \value{
-A list with \code{residuals}, \code{sum}, \code{max}, \code{min} and \code{sums_to_zero}.
+list with the residuals, their sum, and the cumulative baseline hazard.
 }
 \description{
-Martingale residuals from a Cox fit.
+M_i = delta_i - H0(t_i) exp(x_i' beta): observed events minus expected.
+They sum to zero at the fitted beta, which is returned so the fit can be checked.
 }
-\details{
-Observed events minus expected, \code{delta_i - H0(t_i) exp(x_i^T beta)}. They sum to zero at the fitted coefficients, which is returned as a check, and are bounded above by 1 but not below.
-
-\code{morie_survival_martingale} is the pre-policy spelling and is the same
-function.
-}
-\examples{
-Martingale(c(1, 2, 3, 4), c(1, 0, 1, 1), matrix(c(0, 1, 0, 1)), 0.3)
+\references{
+Therneau, T. M., Grambsch, P. M. and Fleming, T. R. (1990). Martingale-based residuals for survival models. Biometrika 77(1), 147-160.
 }

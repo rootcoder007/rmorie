@@ -21,7 +21,7 @@ Number needed to treat (NNT) = 1 / |RD|
 \examples{
 # Treatment lowers the bad outcome from 20\% to 10\% -> NNT = 1/0.10 = 10.
 res <- number_needed_to_treat(10, 90, 20, 80)
-res$estimate                 # patients to treat to prevent one event
+res$estimate # patients to treat to prevent one event
 
 # NNT is the reciprocal of the (absolute) risk difference.
 1 / abs(risk_difference(10, 90, 20, 80)$estimate)

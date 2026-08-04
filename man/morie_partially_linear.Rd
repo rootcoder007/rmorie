@@ -26,7 +26,8 @@ does not contaminate the parametric one. Mirrors
 \code{morie.fn.hrzplr}.
 }
 \examples{
-Z <- runif(200); X <- matrix(rnorm(400), ncol = 2)
+Z <- runif(200)
+X <- matrix(rnorm(400), ncol = 2)
 morie_partially_linear(X, Z, X \%*\% c(1.5, -0.7) + sin(2 * Z))$root_n
 }
 \references{

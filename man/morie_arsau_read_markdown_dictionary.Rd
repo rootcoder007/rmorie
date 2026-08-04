@@ -26,7 +26,8 @@ required: the parser is pure base R.
 }
 \examples{
 path <- system.file("extdata", "OTIS_DATA_DICTIONARY.md",
-                    package = "morie")
+  package = "morie"
+)
 if (nzchar(path)) {
   out <- morie_arsau_read_markdown_dictionary(path)
   str(out)

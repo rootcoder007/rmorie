@@ -3,33 +3,29 @@
 \name{Rmstdiff}
 \alias{Rmstdiff}
 \alias{morie_survival_rmst_diff}
-\title{Difference in restricted mean survival time}
+\title{Difference in restricted mean survival time between two groups}
 \usage{
 Rmstdiff(time, event, group, tau = NULL, alpha = 0.05)
+
+morie_survival_rmst_diff(time, event, group, tau = NULL, alpha = 0.05)
 }
 \arguments{
-\item{time}{Numeric vector of follow-up times.}
+\item{time}{observed follow-up times.}
 
-\item{event}{Numeric or logical vector; 1 (or \code{TRUE}) for an event, 0 for right censoring.}
+\item{event}{event indicator, 1 = event, 0 = censored.}
 
-\item{group}{Vector taking exactly two distinct values.}
+\item{group}{two-level grouping vector.}
 
-\item{tau}{Common horizon. Capped at the smaller of the two arms' largest times, which is reported as \code{tau_capped}.}
+\item{tau}{restriction horizon; defaults to the largest event time common to both groups.}
 
-\item{alpha}{Numeric; one minus the confidence level. Defaults to \code{0.05}.}
+\item{alpha}{significance level for the interval.}
 }
 \value{
-A list with \code{difference}, \code{se}, \code{lower}, \code{upper}, \code{p_value}, \code{tau} and \code{tau_capped}.
+list with the difference, its standard error, the confidence interval and each group's RMST.
 }
 \description{
-Difference in restricted mean survival time.
+RMST_1 - RMST_2 with standard error sqrt(V1 + V2), the two groups treated as independent.
 }
-\details{
-The horizon must be common to both arms; a per-arm horizon compares different quantities. The two arms are independent, so the variances add.
-
-\code{morie_survival_rmst_diff} is the pre-policy spelling and is the same
-function.
-}
-\examples{
-Rmstdiff(c(1, 2, 3, 4, 5, 6), c(1, 1, 1, 1, 1, 1), c(0, 0, 0, 1, 1, 1))
+\references{
+Klein, J. P. and Moeschberger, M. L. (2003). Survival Analysis, 2nd ed., Springer.
 }

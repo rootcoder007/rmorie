@@ -27,9 +27,9 @@ Thin extender over \code{copula::rCopula} that generates
 }
 \examples{
 \donttest{
-  if (requireNamespace("copula", quietly = TRUE)) {
-    set.seed(1)
-    morie_copula_sample(100, copula::claytonCopula(2, dim = 3))
-  }
+if (requireNamespace("copula", quietly = TRUE)) {
+  set.seed(1)
+  morie_copula_sample(100, copula::claytonCopula(2, dim = 3))
+}
 }
 }

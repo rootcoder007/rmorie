@@ -33,7 +33,8 @@ through \code{\link{morie_fetch_ckan}} or \code{\link{morie_fetch}}.
 \examples{
 \donttest{
 hits <- try(morie_ckan_search("cannabis survey",
-                              portal = "open.canada.ca"))
+  portal = "open.canada.ca"
+))
 if (is.data.frame(hits)) {
   head(hits[, c("dataset_title", "resource_id", "format")])
 }

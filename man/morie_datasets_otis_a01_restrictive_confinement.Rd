@@ -35,6 +35,8 @@ OTIS a01 -- Restrictive Confinement (detailed per-individual)
 }
 \examples{
 df <- morie_datasets_otis_a01_restrictive_confinement(offline = TRUE)
-head(df[, c("EndFiscalYear", "Gender", "Age_Category",
-            "Number_Of_Placements")])
+head(df[, c(
+  "EndFiscalYear", "Gender", "Age_Category",
+  "Number_Of_Placements"
+)])
 }

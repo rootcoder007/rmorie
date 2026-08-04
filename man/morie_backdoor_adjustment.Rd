@@ -31,7 +31,7 @@ is a claim about the graph and cannot be checked from data. See
 Mirrors \code{morie.fn.bdrj}.
 }
 \examples{
-morie_backdoor_adjustment(c(1,1,0,0), c(1,0,1,0), c(0,0,1,1))$distribution
+morie_backdoor_adjustment(c(1, 1, 0, 0), c(1, 0, 1, 0), c(0, 0, 1, 1))$distribution
 }
 \references{
 Pearl J (2009). \emph{Causality}, 2nd edn, Thm 3.3.2.

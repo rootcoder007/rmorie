@@ -6,33 +6,29 @@
 \title{Schoenfeld residuals and the proportional-hazards test}
 \usage{
 Schoenfeld(time, event, X, beta, vcov = NULL, scaled = TRUE)
+
+morie_survival_schoenfeld(time, event, X, beta, vcov = NULL, scaled = TRUE)
 }
 \arguments{
-\item{time}{Numeric vector of follow-up times.}
+\item{time}{observed follow-up times.}
 
-\item{event}{Numeric or logical vector; 1 (or \code{TRUE}) for an event, 0 for right censoring.}
+\item{event}{event indicator, 1 = event, 0 = censored.}
 
-\item{X}{Numeric matrix of covariates, one row per subject.}
+\item{X}{covariate matrix, one row per subject.}
 
-\item{beta}{Numeric vector of Cox coefficients, one per column of \code{X}.}
+\item{beta}{fitted coefficient vector.}
 
-\item{vcov}{Covariance matrix of \code{beta}. Required when \code{scaled} is \code{TRUE}.}
+\item{vcov}{covariance matrix of beta, used to scale the residuals.}
 
-\item{scaled}{Scale the residuals after Grambsch and Therneau (1994).}
+\item{scaled}{whether to return the scaled residuals.}
 }
 \value{
-A list with \code{residuals} (one row per event time), \code{time}, optionally \code{scaled}, and \code{ph_test}.
+list with the residuals, the event times, and the proportional-hazards test statistic and p-value.
 }
 \description{
-Schoenfeld residuals and the proportional-hazards test.
+s_i = x_i minus the weighted risk-set mean at each event time.
+Grambsch and Therneau's scaled version tests proportional hazards by regressing the residuals on time.
 }
-\details{
-One residual per EVENT time, not per subject: the covariate minus the weighted risk-set mean. A trend against time is evidence against proportional hazards, which is what \code{ph_test} reports.
-
-\code{morie_survival_schoenfeld} is the pre-policy spelling and is the same
-function.
-}
-\examples{
-Schoenfeld(c(1, 2, 3, 4), c(1, 0, 1, 1), matrix(c(0, 1, 0, 1)), 0.3,
-           vcov = matrix(0.25, 1, 1))
+\references{
+Grambsch, P. M. and Therneau, T. M. (1994). Proportional hazards tests and diagnostics based on weighted residuals. Biometrika 81(3), 515-526.
 }

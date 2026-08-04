@@ -16,7 +16,7 @@ Sizes: \code{pk} = 1952 bytes, \code{sk} = 4032 bytes.
 \examples{
 if (morie_crypto_liboqs_available()) {
   kp <- morie_crypto_mldsa65_keygen()
-  length(kp$pk)  # 1952 (FIPS 204)
-  length(kp$sk)  # 4032
+  length(kp$pk) # 1952 (FIPS 204)
+  length(kp$sk) # 4032
 }
 }

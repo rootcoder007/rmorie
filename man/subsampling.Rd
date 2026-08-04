@@ -39,6 +39,8 @@ novel/no-clean-CRAN-equivalent.
 }
 \examples{
 set.seed(1)
-str(subsampling(rnorm(60), statistic = mean,
-                n_subsamples = 200L), max.level = 1)
+str(subsampling(rnorm(60),
+  statistic = mean,
+  n_subsamples = 200L
+), max.level = 1)
 }

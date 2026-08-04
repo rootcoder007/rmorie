@@ -3,31 +3,28 @@
 \name{Coxsnell}
 \alias{Coxsnell}
 \alias{morie_survival_coxsnell}
-\title{Cox-Snell residuals}
+\title{Cox-Snell residuals from a fitted Cox model}
 \usage{
 Coxsnell(time, event, X, beta)
+
+morie_survival_coxsnell(time, event, X, beta)
 }
 \arguments{
-\item{time}{Numeric vector of follow-up times.}
+\item{time}{observed follow-up times.}
 
-\item{event}{Numeric or logical vector; 1 (or \code{TRUE}) for an event, 0 for right censoring.}
+\item{event}{event indicator, 1 = event, 0 = censored.}
 
-\item{X}{Numeric matrix of covariates, one row per subject.}
+\item{X}{covariate matrix, one row per subject.}
 
-\item{beta}{Numeric vector of Cox coefficients, one per column of \code{X}.}
+\item{beta}{fitted coefficient vector.}
 }
 \value{
-A list with \code{residuals} and the Nelson-Aalen \code{cumhaz} of those residuals.
+list with the Cox-Snell residuals and the Nelson-Aalen estimate computed from them.
 }
 \description{
-Cox-Snell residuals.
+r_i = H0(t_i) exp(x_i' beta) = delta_i - M_i, the fitted cumulative hazard.
+If the model is right these behave like a censored unit exponential sample.
 }
-\details{
-The fitted cumulative hazard, equal to \code{delta_i} minus the martingale residual. If the model is right these behave like a censored unit exponential sample, so the Nelson-Aalen hazard OF THE RESIDUALS should follow the 45-degree line.
-
-\code{morie_survival_coxsnell} is the pre-policy spelling and is the same
-function.
-}
-\examples{
-Coxsnell(c(1, 2, 3, 4), c(1, 0, 1, 1), matrix(c(0, 1, 0, 1)), 0.3)
+\references{
+Cox, D. R. and Snell, E. J. (1968). A general definition of residuals. JRSS-B 30(2), 248-275.
 }

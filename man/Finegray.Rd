@@ -5,34 +5,29 @@
 \alias{morie_survival_finegray}
 \title{Fine-Gray subdistribution hazard model}
 \usage{
-Finegray(time, cause, X, code = 1, max_iter = 50L, tol = 1e-9)
+Finegray(time, cause, X, code = 1, max_iter = 50L, tol = 1e-09)
+
+morie_survival_finegray(time, cause, X, code = 1, max_iter = 50L, tol = 1e-09)
 }
 \arguments{
-\item{time}{Numeric vector of follow-up times.}
+\item{time}{observed follow-up times.}
 
-\item{cause}{Integer vector of cause codes; \code{0} marks censoring.}
+\item{cause}{cause of failure, 0 for censored.}
 
-\item{X}{Numeric matrix of covariates, one row per subject.}
+\item{X}{covariate matrix, one row per subject.}
 
-\item{code}{The cause whose incidence is wanted. Defaults to \code{1}.}
+\item{code}{the cause of interest.}
 
-\item{max_iter}{Newton-Raphson iteration limit.}
+\item{max_iter}{maximum Newton-Raphson iterations.}
 
-\item{tol}{Convergence tolerance on the score.}
+\item{tol}{convergence tolerance.}
 }
 \value{
-A list with \code{coef}, \code{se}, \code{subdistribution_hazard_ratio}, \code{loglik}, \code{n_competing} and \code{converged}.
+list with the coefficients, their standard errors, the log-likelihood and the iteration count.
 }
 \description{
-Fine-Gray subdistribution hazard model.
+A Cox model on the subdistribution hazard, in which subjects failing from a competing cause remain in the risk set with a decreasing weight, so the coefficients act directly on the cumulative incidence.
 }
-\details{
-A Cox model on the SUBDISTRIBUTION risk set: a subject failing of a competing cause stays in the risk set with a censoring-weighted contribution instead of leaving it. The coefficients therefore act on the cumulative incidence, and differ from those of a cause-specific Cox fit.
-
-\code{morie_survival_finegray} is the pre-policy spelling and is the same
-function.
-}
-\examples{
-Finegray(c(1, 2, 3, 4, 5, 6), c(1, 2, 1, 0, 2, 1),
-         matrix(c(0, 1, 0, 1, 0, 1)))
+\references{
+Fine, J. P. and Gray, R. J. (1999). A proportional hazards model for the subdistribution of a competing risk. JASA 94(446), 496-509.
 }

@@ -38,8 +38,10 @@ falls.
 }
 \examples{
 set.seed(1)
-X <- rbind(matrix(rnorm(100, -3, 0.5), ncol = 2),
-           matrix(rnorm(100, 3, 0.5), ncol = 2))
+X <- rbind(
+  matrix(rnorm(100, -3, 0.5), ncol = 2),
+  matrix(rnorm(100, 3, 0.5), ncol = 2)
+)
 y <- rep(c(-1, 1), each = 50)
 morie_esl_svc(X, y, C = 1, seed = 1L)$accuracy
 }

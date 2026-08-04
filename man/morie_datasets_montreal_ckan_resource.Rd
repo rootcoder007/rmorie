@@ -31,6 +31,7 @@ beyond the included SIM sample.
 # /api/3/action/datastore_search on donnees.montreal.ca):
 df <- try(morie_datasets_montreal_ckan_resource(
   resource_id = "ff81ecc4-d3b0-4661-806f-a27870e63a4e",
-  limit = 50))
+  limit = 50
+))
 }
 }

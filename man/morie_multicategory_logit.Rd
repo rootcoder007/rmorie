@@ -26,18 +26,7 @@ morie_multicategory_logit(
 
 \item{j}{Category index. @param polr If TRUE negate the slopes.}
 
-
-\item{bjs}{argument \code{bjs}; not described in the source.}
-
-\item{xs}{argument \code{xs}; not described in the source.}
-
-\item{polr}{argument \code{polr}; not described in the source.}
-
-\item{pi_hat}{argument \code{pi_hat}; not described in the source.}
-
-\item{var_pi}{argument \code{var_pi}; not described in the source.}
-
-\item{z}{argument \code{z}; not described in the source.}
+\item{pi_hat, var_pi, z}{Wald pieces.}
 }
 \value{
 List with logit, probs, pi_j, wald (as supplied).

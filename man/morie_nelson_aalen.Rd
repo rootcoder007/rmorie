@@ -6,24 +6,19 @@
 \title{Nelson-Aalen cumulative hazard}
 \usage{
 morie_nelson_aalen(time, event)
+
+morie_survival_nelsonaalen(time, event)
 }
 \arguments{
-\item{time}{Numeric vector of follow-up times.}
+\item{time}{follow-up times}
 
-\item{event}{Numeric or logical vector; 1 for an event, 0 for right censoring.}
+\item{event}{1 for an event, 0 for censored}
 }
 \value{
-A list with \code{time}, \code{cumhaz} and \code{se}.
+list with \code{time}, \code{cumhaz}, \code{se} and \code{surv = exp(-H)}
 }
 \description{
-Nelson-Aalen cumulative hazard.
-}
-\details{
-The cumulative hazard as a sum of \code{d_i / n_i}. It is the natural scale for checking a parametric hazard, since a straight line through the origin means a constant hazard.
-
-\code{morie_survival_nelsonaalen} is the pre-policy spelling and is the same
-function.
-}
-\examples{
-morie_nelson_aalen(c(1, 2, 3, 4), c(1, 0, 1, 1))
+\verb{H(t) = sum d_i/n_i}.  Better behaved than \code{-log(KM)} in small
+samples, and the natural scale on which to judge proportional
+hazards.
 }

@@ -79,8 +79,10 @@ pic_id <- cat$hub_id[cat$title ==
   "Persons in Crisis Calls for Service Attended Open Data"]
 \donttest{
 df <- try(morie_datasets_tps_arcgis_hub_by_id(
-  pic_id, format = "json", where = "OCC_YEAR=2024",
-  max_features = 25L, offline = TRUE))
+  pic_id,
+  format = "json", where = "OCC_YEAR=2024",
+  max_features = 25L, offline = TRUE
+))
 if (!inherits(df, "try-error")) head(df)
 }
 \dontshow{\}) # examplesIf}

@@ -30,7 +30,8 @@ Generic Ontario CKAN dataset loader (by registry key)
 \examples{
 \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_ontario_ckan_by_key("arsau_uof_main_records_2024",
-                                         offline = TRUE)
+  offline = TRUE
+)
 head(df)
 \dontshow{\}) # examplesIf}
 }

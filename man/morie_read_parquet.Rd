@@ -20,12 +20,3 @@ Native Parquet reader: no nanoparquet, no arrow. Handles the v1
 format with PLAIN, RLE and dictionary encodings, Snappy or no
 compression. Nested and repeated columns are refused.
 }
-\examples{
-df <- data.frame(case = c("23-OCI-001", NA), year = c(2023L, 2024L),
-                 rate = c(0.5, -1.25), stringsAsFactors = FALSE)
-p <- tempfile(fileext = ".parquet")
-morie_write_parquet(df, p)
-morie_read_parquet(p)
-morie_read_parquet(p, columns = "year")
-unlink(p)
-}

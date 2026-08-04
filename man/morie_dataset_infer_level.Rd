@@ -35,6 +35,6 @@ name hit (likert/grade/scale/...): \code{"ordinal"}.
 }
 }
 \examples{
-morie_dataset_infer_level(c("a", "b", "c"))          # "nominal"
+morie_dataset_infer_level(c("a", "b", "c")) # "nominal"
 morie_dataset_infer_level(c(1.5, 2.3, 4.1))
 }

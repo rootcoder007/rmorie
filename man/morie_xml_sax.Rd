@@ -25,6 +25,7 @@ tree from them.
 \examples{
 starts <- character(0)
 morie_xml_sax("<a><b>hi</b></a>",
-              on_start = function(tag, attrs) starts <<- c(starts, tag))
+  on_start = function(tag, attrs) starts <<- c(starts, tag)
+)
 starts
 }

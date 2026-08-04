@@ -2,36 +2,38 @@
 % Please edit documentation in R/survival.R
 \name{morie_cox_ph}
 \alias{morie_cox_ph}
+\alias{morie_cox_partial_loglik}
 \alias{morie_survival_cox}
 \title{Cox proportional-hazards model}
 \usage{
-morie_cox_ph(time, event, X, ties = "efron", max_iter = 50, tol = 1e-9)
+morie_cox_ph(time, event, X, ties = "efron", max_iter = 50, tol = 1e-09)
+
+morie_cox_partial_loglik(time, event, X, beta, ties = "efron")
+
+morie_survival_cox(time, event, X, ties = "efron", max_iter = 50, tol = 1e-09)
 }
 \arguments{
-\item{time}{Numeric vector of follow-up times.}
+\item{time}{follow-up times}
 
-\item{event}{Numeric or logical vector; 1 for an event, 0 for right censoring.}
+\item{event}{1 for an event, 0 for censored}
 
-\item{X}{Numeric matrix of covariates, one row per subject.}
+\item{X}{covariate matrix}
 
-\item{ties}{Tie handling; \code{"efron"} or \code{"breslow"}.}
+\item{ties}{"efron" or "breslow"}
 
-\item{max_iter}{Newton-Raphson iteration limit.}
+\item{max_iter, tol}{iteration controls}
 
-\item{tol}{Convergence tolerance on the score.}
+\item{beta}{coefficient vector at which to evaluate the likelihood}
 }
 \value{
-A list with \code{coef}, \code{se}, \code{vcov}, \code{loglik}, \code{z}, \code{p_value} and \code{converged}.
+list with \code{coef}, \code{se}, \code{z}, \code{p_value}, \code{hazard_ratio},
+\code{loglik} and the likelihood-ratio test
 }
 \description{
-Cox proportional-hazards model.
-}
-\details{
-Partial-likelihood estimation, leaving the baseline hazard unspecified. Efron's tie correction is the default because Breslow's is noticeably biased when ties are common, which they are whenever time is recorded coarsely.
-
-\code{morie_survival_cox} is the pre-policy spelling and is the same
-function.
-}
-\examples{
-morie_cox_ph(c(1, 2, 3, 4, 5), c(1, 1, 0, 1, 1), matrix(c(0, 1, 0, 1, 0)))
+\verb{lambda(t | x) = lambda_0(t) exp(x' beta)}, fitted by Newton-Raphson
+on the partial likelihood with Efron's tie handling -- the default in
+\code{survival::coxph}, and materially better than Breslow's when ties are
+common, as they are whenever follow-up is recorded in whole days.
+The baseline hazard is left unspecified, which is the point of the
+model; \code{exp(beta)} is a hazard ratio assumed constant over time.
 }

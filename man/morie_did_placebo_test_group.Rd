@@ -41,12 +41,16 @@ Placebo DiD on sub-groups expected to be unaffected
 \examples{
 set.seed(1)
 n <- 400
-d <- rbinom(n, 1, 0.5); p <- rbinom(n, 1, 0.5)
+d <- rbinom(n, 1, 0.5)
+p <- rbinom(n, 1, 0.5)
 y <- 1 + 0.3 * d + 0.4 * p + 0.5 * d * p + rnorm(n, sd = 0.5)
-df <- data.frame(y = y, d = d, post = p,
-                 grp = sample(c("A", "B"), n, replace = TRUE))
+df <- data.frame(
+  y = y, d = d, post = p,
+  grp = sample(c("A", "B"), n, replace = TRUE)
+)
 out <- morie_did_placebo_test_group(df, "y", "d", "post",
-                                    group_col = "grp",
-                                    unaffected_groups = c("A", "B"))
+  group_col = "grp",
+  unaffected_groups = c("A", "B")
+)
 out
 }

@@ -28,7 +28,8 @@ fits badly.
 }
 \examples{
 morie_evt_madogram(stats::rnorm(100), stats::rnorm(100),
-                   t = c(0.5))$A
+  t = c(0.5)
+)$A
 }
 \references{
 Naveau, Guillou, Cooley and Diebolt (2009),

@@ -53,8 +53,10 @@ if (requireNamespace("coresynth", quietly = TRUE)) {
   df$treat_time <- ifelse(df$unit <= 5, 6, Inf)
   df$d <- as.integer(df$time >= df$treat_time)
   df$y <- 0.1 * df$time + 0.5 * df$d + rnorm(nrow(df), sd = 0.3)
-  out <- morie_did_synthdid_estimate(df, unit = "unit", time = "time",
-                                     treatment = "d", outcome = "y")
+  out <- morie_did_synthdid_estimate(df,
+    unit = "unit", time = "time",
+    treatment = "d", outcome = "y"
+  )
   out$att
 }
 }

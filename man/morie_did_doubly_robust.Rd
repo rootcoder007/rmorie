@@ -66,12 +66,16 @@ consistent if either model is correctly specified.
 set.seed(23)
 n <- 300
 treat <- rep(c(0L, 1L), each = n / 2)
-df <- data.frame(unit = rep(1:n, 2), treat = rep(treat, 2),
-                 post = rep(c(0L, 1L), each = n), x = rnorm(2 * n))
+df <- data.frame(
+  unit = rep(1:n, 2), treat = rep(treat, 2),
+  post = rep(c(0L, 1L), each = n), x = rnorm(2 * n)
+)
 df$y <- 0.5 * df$post + 3 * df$treat * df$post + rnorm(2 * n, sd = 0.4)
-res <- morie_did_doubly_robust(df, outcome = "y", treatment = "treat",
-                               post = "post", covariates = "x",
-                               n_bootstrap = 50L, seed = 1L)
+res <- morie_did_doubly_robust(df,
+  outcome = "y", treatment = "treat",
+  post = "post", covariates = "x",
+  n_bootstrap = 50L, seed = 1L
+)
 res$estimate
 }
 \references{

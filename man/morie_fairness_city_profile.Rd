@@ -40,7 +40,8 @@ to the audit.
 }
 \examples{
 p <- morie_fairness_city_profile(
-  "chicago", area_col = "community_area",
+  "chicago",
+  area_col = "community_area",
   risk_col = "rti", group_col = "majority_race"
 )
 p$name

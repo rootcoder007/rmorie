@@ -17,6 +17,7 @@ Coefficient of determination R^2
 }
 \examples{
 set.seed(1)
-x <- rnorm(30); y <- x + rnorm(30)
+x <- rnorm(30)
+y <- x + rnorm(30)
 r_squared(x, y)
 }

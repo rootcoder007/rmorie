@@ -7,12 +7,7 @@
 morie_evt_chi(x, y, u = 0.95)
 }
 \arguments{
-
-\item{x}{argument \code{x}; not described in the source.}
-
-\item{y}{argument \code{y}; not described in the source.}
-
-\item{u}{argument \code{u}; not described in the source.}
+\item{x, y}{equal-length series; u quantile level}
 }
 \description{
 Empirical chi(u) tail dependence (Coles 2001 sec. 8.4 p.164)

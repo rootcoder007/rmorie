@@ -76,7 +76,8 @@ df$treat_time <- ifelse(df$unit <= 25, 4, Inf)
 df$d <- as.integer(df$time >= df$treat_time)
 df$y <- 0.1 * df$time + 0.6 * df$d + rnorm(nrow(df), sd = 0.4)
 out <- morie_did_group_time_att(df, "y", "unit", "time", "treat_time",
-                                n_bootstrap = 30L, seed = 4)
+  n_bootstrap = 30L, seed = 4
+)
 head(out)
 }
 \references{

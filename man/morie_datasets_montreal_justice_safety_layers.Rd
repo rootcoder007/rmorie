@@ -24,7 +24,7 @@ and ~20 others.
 \examples{
 \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 cat_df <- morie_datasets_montreal_justice_safety_layers()
-nrow(cat_df)  # 23
+nrow(cat_df) # 23
 head(cat_df$title)
 \dontshow{\}) # examplesIf}
 }

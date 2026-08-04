@@ -43,7 +43,8 @@ with different RNG seeds and pools the per-fold scores.
 }
 \examples{
 set.seed(1)
-X <- matrix(rnorm(80), ncol = 2); y <- rnorm(40)
+X <- matrix(rnorm(80), ncol = 2)
+y <- rnorm(40)
 predict.lm_lite3 <- function(object, newdata, ...) {
   drop(cbind(1, newdata) \%*\% object$coef)
 }
@@ -54,7 +55,8 @@ res <- repeated_cv(X, y,
     structure(list(coef = fit$coefficients), class = "lm_lite3")
   },
   score_fn = function(yt, yp) mean((yt - yp)^2),
-  n_folds = 5L, n_repeats = 2L)
+  n_folds = 5L, n_repeats = 2L
+)
 str(res, max.level = 1)
 }
 \seealso{

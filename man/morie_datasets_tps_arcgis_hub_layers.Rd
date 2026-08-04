@@ -56,7 +56,7 @@ Calls for Service Attended.}
 \examples{
 \dontshow{if (nzchar(system.file("extdata", "tps_arcgis_hub_catalog.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 cat <- morie_datasets_tps_arcgis_hub_layers()
-nrow(cat)        # 71
+nrow(cat) # 71
 head(cat$title)
 \dontshow{\}) # examplesIf}
 }

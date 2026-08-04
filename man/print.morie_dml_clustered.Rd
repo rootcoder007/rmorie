@@ -20,12 +20,14 @@ Print method for \code{morie_dml_clustered} objects
 \examples{
 \donttest{
 set.seed(1)
-G <- 40L; ng <- 10L; n <- G * ng
+G <- 40L
+ng <- 10L
+n <- G * ng
 g <- rep(seq_len(G), each = ng)
-u <- stats::rnorm(G)[g]                       # cluster effect
+u <- stats::rnorm(G)[g] # cluster effect
 x <- stats::rnorm(n)
 d <- stats::rbinom(n, 1, stats::plogis(0.5 * x + u))
-y <- 2 * d + x + u + stats::rnorm(n)          # true ATE = 2
+y <- 2 * d + x + u + stats::rnorm(n) # true ATE = 2
 df <- data.frame(y = y, d = d, x = x, corridor = g)
 obj <- morie_dml_clustered(df, "d", "y", "x", cluster = "corridor")$ate
 print(obj)
