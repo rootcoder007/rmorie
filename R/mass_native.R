@@ -345,7 +345,19 @@ morie_rlm <- function(formula, data, k = 1.345, maxit = 20L,
                  wresid = as.numeric(cp$resid), fitted.values = fitted,
                  s = cp$scale, psi = psi, x = x, weights = numeric(0),
                  converged = isTRUE(cp$converged), k2 = k,
+                 # MASS returns the scale from the START of the final
+                 # IRLS iteration, so it does NOT equal
+                 # median(abs(residuals))/0.6745 -- measured relative gap
+                 # ~7e-5 against MASS itself.  `scale` keeps the MASS
+                 # convention because that is this function's contract;
+                 # `scale_final` is the value consistent with the
+                 # residuals actually returned, for callers who want it.
                  scale = cp$scale,
+                 scale_final = {
+                   m0 <- stats::median(abs(as.numeric(cp$resid)))
+                   if (m0 > 0) m0 / 0.6745 else 0
+                 },
+                 scale_follows_mass_not_the_final_residuals = TRUE,
                  robust_weights = psi(as.numeric(cp$resid) / cp$scale),
                  n_downweighted = sum(
                    psi(as.numeric(cp$resid) / cp$scale) < 1 - 1e-12)),
