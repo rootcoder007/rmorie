@@ -69,7 +69,8 @@ test_that("McNemar reproduces the book's Table 10.4", {
   r <- McNemar(TAB104)
   expect_equal(r$statistic, 12)
   expect_equal(r$df, 3L)
-  expect_equal(r$p_value, 0.0073831605, tolerance = 1e-6)
+  # absolute, matching the Python arm; testthat tolerance is relative
+  expect_close(r$p_value, 0.007383, tol = 1e-6)
   expect_true(r$is_bowker)
   expect_equal(r$n, 18)
   # and the book's stated sensitivities follow from the same table
@@ -328,4 +329,77 @@ test_that("the kernel trick solves XOR where the linear SVM cannot", {
   expect_true(SvmKern(xor, yx, kernel = "sigmoid", gamma = 0.5, C = 1)$
                 sigmoid_kernel_is_not_always_positive_definite)
   expect_error(SvmKern(xor, yx, kernel = "cosine"), "kernel must be")
+})
+
+test_that("accuracy offers every definition at once", {
+  r <- Accuracy(tp = 45, tn = 40, fp = 10, fn = 5, prevalence = 0.01)
+  expect_equal(r$raw_accuracy, 0.85)
+  expect_equal(r$balanced_accuracy, 0.85)
+  expect_equal(r$weighted_accuracy, 0.801)
+  expect_equal(r$kind, "weighted")
+  expect_equal(r$accuracy, r$weighted_accuracy)
+  for (k in c("raw", "balanced")) {
+    a <- Accuracy(tp = 45, tn = 40, fp = 10, fn = 5, kind = k)
+    expect_equal(a$kind, k)
+  }
+  expect_error(Accuracy(tp = 45, tn = 40, fp = 10, fn = 5,
+                        kind = "weighted"), "needs a prevalence")
+  expect_error(Accuracy(tp = 45, tn = 40, fp = 10, fn = 5, kind = "f1"),
+               "kind must be")
+  expect_error(Accuracy(tp = 45.5, tn = 40, fp = 10, fn = 5), "whole")
+})
+
+test_that("balanced accuracy is eq (10.102) at one half", {
+  a <- Accuracy(tp = 45, tn = 40, fp = 10, fn = 5, exact = TRUE)
+  b <- Accuracy(tp = 45, tn = 40, fp = 10, fn = 5, prevalence = "0.5",
+                exact = TRUE)
+  expect_true(a$balanced_accuracy == b$weighted_accuracy)
+  expect_true(a$balanced_is_eq_10_102_at_one_half)
+})
+
+test_that("exact accuracy is a rational, not a rounded double", {
+  r <- Accuracy(tp = 45, tn = 40, fp = 10, fn = 5, exact = TRUE)
+  expect_s3_class(r$raw_accuracy, "morie_frac")
+  expect_equal(format(r$raw_accuracy), "17/20")
+  expect_equal(as.numeric(r$raw_accuracy), 0.85)
+  w <- Accuracy(tp = 45, tn = 40, fp = 10, fn = 5, prevalence = "0.01",
+                exact = TRUE)
+  expect_equal(format(w$accuracy), "801/1000")
+  expect_equal(as.numeric(w$accuracy), 0.801)
+  # one third has no finite binary representation
+  t <- Accuracy(tp = 1, tn = 1, fp = 1, fn = 2, exact = TRUE)
+  expect_equal(format(t$sensitivity), "1/3")
+})
+
+test_that("the KLD eq (5.33) is weighted by the second PDF", {
+  p1 <- c(0.2, 0.3, 0.5); p2 <- c(0.1, 0.4, 0.5)
+  r <- Kld(p1, p2)
+  expect_close(r$kld, sum(p2 * log(p2 / p1)), tol = 1e-12)
+  expect_true(r$weighted_by_the_second_pdf)
+  expect_true(r$asymmetric)
+  expect_close(r$symmetric_sum, r$kld + r$reversed, tol = 1e-12)
+  expect_true(r$symmetric_sum_is_the_divergence_of_eq_10_115)
+  p <- c(0.25, 0.25, 0.5)
+  expect_close(Kld(p, p)$kld, 0, tol = 1e-15)
+  expect_error(Kld(c(0, 0.5, 0.5), c(0.3, 0.3, 0.4)), "unbounded")
+  expect_error(Kld(c(0.5, 0.5), c(0.3, 0.3, 0.4)), "same grid")
+})
+
+test_that("the Bhattacharyya coefficient is an overlap in [0, 1]", {
+  p1 <- c(0.2, 0.3, 0.5); p2 <- c(0.1, 0.4, 0.5)
+  r <- BhattCoef(p1, p2)
+  expect_true(r$in_unit_interval)
+  expect_close(BhattCoef(p1, p1)$coefficient, 1, tol = 1e-12)
+  expect_true(BhattCoef(p1, p1)$identical)
+  d <- BhattCoef(c(1, 0), c(0, 1))
+  expect_close(d$coefficient, 0, tol = 1e-15)
+  expect_true(d$disjoint)
+  expect_equal(d$distance, Inf)
+  expect_close(r$distance, -log(r$coefficient), tol = 1e-12)
+  expect_true(r$the_overlap_is_where_errors_must_happen)
+  expect_true(r$not_from_this_book)
+  # the bound tightens as the overlap falls
+  close <- BhattCoef(c(0.5, 0.5), c(0.45, 0.55))$distance
+  far <- BhattCoef(c(0.9, 0.1), c(0.1, 0.9))$distance
+  expect_lt(ErrBound(0.5, 0.5, far)$bound, ErrBound(0.5, 0.5, close)$bound)
 })
