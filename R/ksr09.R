@@ -44,3 +44,17 @@ Zestim <- function(x, kind = "huber", k = 1.345, iters = 200) {
              iters = as.numeric(it), n = as.numeric(n),
              method = "Z-estimator, Kosorok Section 2.2.5")
 }
+
+# NAMESPACE exported both of these names, but only the short function above
+# was ever defined, so loading the namespace could not resolve them. Same
+# alias pattern as ksr02.R.
+
+#' @rdname Zestim
+#' @keywords internal
+#' @export
+morie_ksr09_kosorok_z_estimator <- Zestim
+
+#' @rdname Zestim
+#' @keywords internal
+#' @export
+morie_kosorok_z_estimator <- Zestim
