@@ -436,7 +436,12 @@ morie_dsp_higuchi_fd <- function(x, kmax = 10L) {
       idx <- seq.int(0L, n_pts) * k + m
       idx <- idx[idx <= n]
       seg <- x[idx]
-      lm_sum <- lm_sum + sum(abs(diff(seg))) * (n - 1) / (n_pts * k)
+      # Eq (5.40) of Rangayyan & Krishnan (2024) p.304, which is Higuchi
+      # (1988) eq (1): L(m,k) = (1/k) (N-1)/(k floor((N-m)/k)) sum|dx|.
+      # The leading 1/k was missing, so L(k) came out k times too large
+      # and the log-log slope was short by exactly one: a straight line,
+      # whose fractal dimension is 1, returned 0.
+      lm_sum <- lm_sum + sum(abs(diff(seg))) * (n - 1) / (n_pts * k) / k
     }
     lk[k] <- lm_sum / k
   }

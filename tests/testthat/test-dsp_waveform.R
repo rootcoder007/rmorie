@@ -109,6 +109,18 @@ test_that("Higuchi FD is finite for a sine", {
   expect_true(is.finite(fd))
 })
 
+test_that("Higuchi FD of a straight line is exactly 1", {
+  # Closed form.  For x(n) = a n every difference in eq (5.40) equals a k,
+  # so L(k) = a (N - 1) / k exactly, and the slope of log L(k) against
+  # log(1/k) is 1.  This anchor catches a dropped factor of k, which used
+  # to make the function return 0 here.
+  expect_equal(morie_dsp_higuchi_fd(as.numeric(1:200), kmax = 10L), 1,
+               tolerance = 1e-9)
+  # Scale and offset invariance: FD is a shape measure.
+  expect_equal(morie_dsp_higuchi_fd(as.numeric(1:200) * -7 + 3, kmax = 10L), 1,
+               tolerance = 1e-9)
+})
+
 test_that("Katz FD returns 0 on a flat signal", {
   expect_equal(morie_dsp_katz_fd(rep(2, 50)), 0, tolerance = 1e-12)
 })
