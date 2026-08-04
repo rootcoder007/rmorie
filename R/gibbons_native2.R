@@ -2410,3 +2410,257 @@ Wsignif <- function(w, k, n) {
        s = q * k * n * (n + 1) / 12,
        table_n = as.integer(k <= 5L || n <= 5L), k = k, n = n)
 }
+
+#' ARE from derivatives and variances -- Theorem 13.2.2, eq. (13.2.1), p. 485
+#' @noRd
+Areratio <- function(deriv, var, deriv_star, var_star) {
+  d <- as.numeric(deriv); v <- as.numeric(var)
+  ds <- as.numeric(deriv_star); vs <- as.numeric(var_star)
+  if (v <= 0 || vs <= 0) stop("variances must be strictly positive.", call. = FALSE)
+  if (ds == 0) stop("the reference derivative must be non-zero.", call. = FALSE)
+  e1 <- d^2 / v; e2 <- ds^2 / vs
+  list(are = (d / ds)^2 * vs / v, check = e1 / e2, efficacy = e1,
+       efficacy_star = e2)
+}
+
+#' Efficacy -- eq. (13.2.4), p. 486
+#' @noRd
+Efficacy <- function(deriv, var) {
+  d <- as.numeric(deriv); v <- as.numeric(var)
+  if (v <= 0) stop("var must be strictly positive.", call. = FALSE)
+  list(efficacy = d^2 / v, deriv = d, var = v)
+}
+
+#' Sign test efficacy -- eq. (13.3.3), p. 489
+#' @noRd
+Effsign <- function(n, fmed) {
+  n <- as.integer(n); f <- as.numeric(fmed)
+  if (n < 1L) stop("n must be at least 1.", call. = FALSE)
+  if (f <= 0) stop("fmed must be strictly positive.", call. = FALSE)
+  e <- 4 * n * f^2
+  list(efficacy = e, per_obs = e / n, n = n, fmed = f)
+}
+
+#' One-sample t efficacy -- eq. (13.3.2), p. 488
+#' @noRd
+Efft <- function(n, sigma2) {
+  n <- as.integer(n); s2 <- as.numeric(sigma2)
+  if (n < 1L) stop("n must be at least 1.", call. = FALSE)
+  if (s2 <= 0) stop("sigma2 must be strictly positive.", call. = FALSE)
+  list(efficacy = n / s2, per_obs = 1 / s2, n = n, sigma2 = s2)
+}
+
+#' Signed-rank efficacy -- eq. (13.3.4), p. 490
+#' @noRd
+Effwsr <- function(n, f0, integral) {
+  n <- as.integer(n); f0 <- as.numeric(f0); ii <- as.numeric(integral)
+  if (n < 2L) stop("n must be at least 2.", call. = FALSE)
+  e <- 24 * (f0 / (n - 1) + ii)^2 * n * (n - 1)^2 / ((n + 1) * (2 * n + 1))
+  list(efficacy = e, limit = 12 * n * ii^2, integral = ii, n = n)
+}
+
+#' Mann-Whitney / rank-sum efficacy -- eq. (13.3.10), p. 494
+#' @noRd
+Effwrs <- function(m, n, integral) {
+  m <- as.integer(m); n <- as.integer(n); ii <- as.numeric(integral)
+  if (m < 1L || n < 1L) stop("m and n must be at least 1.", call. = FALSE)
+  list(efficacy = 12 * m * n * ii^2 / (m + n + 1), integral = ii, m = m, n = n)
+}
+
+#' Two-sample t efficacy -- eq. (13.3.9), p. 494
+#' @noRd
+Efft2 <- function(m, n, sigma2) {
+  m <- as.integer(m); n <- as.integer(n); s2 <- as.numeric(sigma2)
+  if (m < 1L || n < 1L) stop("m and n must be at least 1.", call. = FALSE)
+  if (s2 <= 0) stop("sigma2 must be strictly positive.", call. = FALSE)
+  list(efficacy = m * n / (s2 * (m + n)), m = m, n = n, sigma2 = s2)
+}
+
+#' Chi-square test of independence -- Sec. 14.2, p. 505
+#' @noRd
+Chiindep <- function(table, correct = FALSE) {
+  tb <- as.matrix(table); storage.mode(tb) <- "double"
+  r <- nrow(tb); c <- ncol(tb)
+  if (r < 2L) stop("need at least 2 rows.", call. = FALSE)
+  if (c < 2L) stop("need at least 2 columns.", call. = FALSE)
+  rs <- rowSums(tb); cs <- colSums(tb); nn <- sum(rs)
+  if (nn <= 0) stop("the table must contain positive counts.", call. = FALSE)
+  exp <- outer(rs, cs) / nn
+  if (any(exp <= 0)) stop("an expected frequency is zero.", call. = FALSE)
+  yates <- correct && r == 2L && c == 2L
+  d <- abs(tb - exp)
+  if (yates) d <- pmax(0, d - 0.5)
+  q <- sum(d^2 / exp)
+  df <- (r - 1L) * (c - 1L)
+  list(statistic = q, df = df,
+       p_value = stats::pchisq(q, df, lower.tail = FALSE),
+       expected = exp, n = nn, r = r, c = c)
+}
+
+#' k x 2 equal-proportions test -- eq. (14.3.2), p. 514
+#' @noRd
+Chik2 <- function(successes, ns) {
+  y <- as.numeric(successes); nv <- as.numeric(ns); k <- length(y)
+  if (k < 2L || length(nv) != k)
+    stop("need at least 2 groups and matching sizes.", call. = FALSE)
+  if (any(nv <= 0)) stop("group sizes must be positive.", call. = FALSE)
+  nn <- sum(nv); ph <- sum(y) / nn
+  if (ph <= 0 || ph >= 1)
+    stop("the pooled proportion must lie inside (0, 1).", call. = FALSE)
+  q <- sum(y^2 / nv) / (ph * (1 - ph)) - nn * ph / (1 - ph)
+  df <- k - 1L
+  list(statistic = q, df = df,
+       p_value = stats::pchisq(q, df, lower.tail = FALSE),
+       phat = ph, props = y / nv, k = k, n = nn)
+}
+
+#' Hypergeometric point probability for a 2 x 2 table
+#' @noRd
+.gbHyper <- function(a, r1, r2, c1) {
+  nn <- r1 + r2
+  if (a < max(0, c1 - r2) || a > min(r1, c1)) return(0)
+  choose(r1, a) * choose(r2, c1 - a) / choose(nn, c1)
+}
+
+#' Fisher exact test -- Sec. 14.4, p. 517
+#' @noRd
+Fisherex <- function(table, alternative = "two-sided") {
+  tb <- round(as.matrix(table))
+  if (nrow(tb) != 2L || ncol(tb) != 2L) stop("table must be 2 x 2.", call. = FALSE)
+  a <- tb[1, 1]; b <- tb[1, 2]; cc <- tb[2, 1]; d <- tb[2, 2]
+  if (min(a, b, cc, d) < 0) stop("counts must be non-negative.", call. = FALSE)
+  r1 <- a + b; r2 <- cc + d; c1 <- a + cc
+  lo <- max(0, c1 - r2); hi <- min(r1, c1)
+  if (hi < lo) stop("degenerate margins.", call. = FALSE)
+  ks <- lo:hi
+  probs <- vapply(ks, function(k) .gbHyper(k, r1, r2, c1), 0)
+  pobs <- probs[ks == a]
+  pg <- sum(probs[ks >= a]); pl <- sum(probs[ks <= a])
+  pv <- switch(alternative,
+    "greater" = pg, "less" = pl,
+    "two-sided" = sum(probs[probs <= pobs * (1 + 1e-12)]),
+    stop("alternative must be two-sided, greater or less.", call. = FALSE))
+  list(p_value = min(1, pv), p_greater = pg, p_less = pl, prob = pobs,
+       statistic = a, support = c(lo, hi))
+}
+
+#' One-sided Fisher exact test -- Sec. 14.4, p. 517
+#' @noRd
+Fisherex1 <- function(table, alternative = "greater") {
+  tb <- round(as.matrix(table))
+  if (nrow(tb) != 2L || ncol(tb) != 2L) stop("table must be 2 x 2.", call. = FALSE)
+  a <- tb[1, 1]; b <- tb[1, 2]; cc <- tb[2, 1]; d <- tb[2, 2]
+  if (min(a, b, cc, d) < 0) stop("counts must be non-negative.", call. = FALSE)
+  r1 <- a + b; r2 <- cc + d; c1 <- a + cc; nn <- r1 + r2
+  ks <- max(0, c1 - r2):min(r1, c1)
+  probs <- vapply(ks, function(k) .gbHyper(k, r1, r2, c1), 0)
+  pg <- sum(probs[ks >= a]); pl <- sum(probs[ks <= a])
+  pv <- switch(alternative, "greater" = pg, "less" = pl,
+               stop("alternative must be greater or less.", call. = FALSE))
+  list(p_value = min(1, pv), p_greater = pg, p_less = pl,
+       prob = probs[ks == a], statistic = a, mean = r1 * c1 / nn)
+}
+
+#' McNemar test -- eq. (14.5.1), p. 523
+#' @noRd
+Mcnemarq <- function(table, correct = FALSE) {
+  tb <- as.matrix(table); storage.mode(tb) <- "double"
+  if (nrow(tb) != 2L || ncol(tb) != 2L) stop("table must be 2 x 2.", call. = FALSE)
+  x12 <- tb[1, 2]; x21 <- tb[2, 1]; nd <- x12 + x21
+  if (nd <= 0) stop("there are no discordant pairs.", call. = FALSE)
+  d <- abs(x12 - x21)
+  if (correct) d <- max(0, d - 1)
+  q <- d^2 / nd
+  k <- as.integer(round(min(x12, x21))); ni <- as.integer(round(nd))
+  pex <- min(1, 2 * sum(choose(ni, 0:k)) * 0.5^ni)
+  list(statistic = q, df = 1L,
+       p_value = stats::pchisq(q, 1, lower.tail = FALSE), p_exact = pex,
+       x12 = x12, x21 = x21, ndisc = nd)
+}
+
+#' McNemar CI -- Sec. 14.5, eq. (14.5.2), p. 523
+#' @noRd
+Mcnemarci <- function(table, alpha = 0.05) {
+  tb <- as.matrix(table); storage.mode(tb) <- "double"
+  if (nrow(tb) != 2L || ncol(tb) != 2L) stop("table must be 2 x 2.", call. = FALSE)
+  alpha <- as.numeric(alpha)
+  if (alpha <= 0 || alpha >= 1)
+    stop("alpha must lie strictly inside (0, 1).", call. = FALSE)
+  nn <- sum(tb)
+  if (nn <= 0) stop("the table must contain positive counts.", call. = FALSE)
+  p12 <- tb[1, 2] / nn; p21 <- tb[2, 1] / nn
+  est <- p12 - p21
+  se <- sqrt(max(0, (p12 + p21 - est^2) / nn))
+  sen <- sqrt((p12 + p21) / nn)
+  z <- stats::qnorm(1 - alpha / 2)
+  list(estimate = est, lower = est - z * se, upper = est + z * se,
+       se = se, se_null = sen, n = nn)
+}
+
+#' Multinomial goodness of fit -- Sec. 14.6, p. 528
+#' @noRd
+Multgof <- function(observed, probs, ddof = 0) {
+  o <- as.numeric(observed); p <- as.numeric(probs); k <- length(o)
+  if (k < 2L || length(p) != k)
+    stop("need at least 2 matching categories.", call. = FALSE)
+  if (abs(sum(p) - 1) > 1e-9) stop("probs must sum to 1.", call. = FALSE)
+  if (any(p <= 0)) stop("probs must be strictly positive.", call. = FALSE)
+  nn <- sum(o); exp <- nn * p
+  q <- sum((o - exp)^2 / exp)
+  df <- k - 1L - as.integer(ddof)
+  if (df < 1L) stop("degrees of freedom must be at least 1.", call. = FALSE)
+  ni <- as.integer(round(nn)); ci <- as.integer(round(o))
+  lp <- lgamma(ni + 1) + sum(ci * log(p) - lgamma(ci + 1))
+  list(statistic = q, df = df,
+       p_value = stats::pchisq(q, df, lower.tail = FALSE),
+       expected = exp, prob = exp(lp), n = nn, k = k)
+}
+
+#' Linear rank test for ordered categories -- Sec. 14.6.1, p. 531
+#' @noRd
+Linbylin <- function(table, scores = NULL) {
+  tb <- as.matrix(table); storage.mode(tb) <- "double"
+  if (nrow(tb) != 2L) stop("table must have exactly 2 rows.", call. = FALSE)
+  c <- ncol(tb)
+  if (c < 2L) stop("both rows must have the same length, >= 2.", call. = FALSE)
+  cs <- colSums(tb); n1 <- sum(tb[1, ]); n2 <- sum(tb[2, ]); nn <- n1 + n2
+  if (nn < 2) stop("the table must contain at least 2 observations.", call. = FALSE)
+  if (is.null(scores)) {
+    w <- cumsum(c(0, cs[-c])) + (cs + 1) / 2
+  } else {
+    w <- as.numeric(scores)
+    if (length(w) != c) stop("scores must have length c.", call. = FALSE)
+  }
+  t <- sum(w * tb[1, ])
+  wbar <- sum(cs * w) / nn
+  mean <- n1 * wbar
+  var <- n1 * n2 / (nn * (nn - 1)) * sum(cs * (w - wbar)^2)
+  sd <- if (var > 0) sqrt(var) else NaN
+  z <- if (var > 0) (t - mean) / sd else NaN
+  list(statistic = t, mean = mean, var = var, sd = sd, z = z,
+       p_value = 1 - stats::pnorm(z),
+       p_twosided = 2 * (1 - stats::pnorm(abs(z))), scores = w, n = nn)
+}
+
+#' Odds ratio by Woolf's logit method (Woolf 1955) -- NOT from Gibbons
+#' @noRd
+Oddsrat <- function(table, alpha = 0.05, cc = 0) {
+  tb <- as.matrix(table); storage.mode(tb) <- "double"
+  tb <- tb + as.numeric(cc)
+  if (nrow(tb) != 2L || ncol(tb) != 2L) stop("table must be 2 x 2.", call. = FALSE)
+  a <- tb[1, 1]; b <- tb[1, 2]; c2 <- tb[2, 1]; d <- tb[2, 2]
+  if (min(a, b, c2, d) <= 0)
+    stop(paste("every cell must be positive for the logit method;",
+               "pass cc=0.5 to add a continuity constant."), call. = FALSE)
+  alpha <- as.numeric(alpha)
+  if (alpha <= 0 || alpha >= 1)
+    stop("alpha must lie strictly inside (0, 1).", call. = FALSE)
+  orr <- a * d / (b * c2); lor <- log(orr)
+  var <- 1 / a + 1 / b + 1 / c2 + 1 / d
+  se <- sqrt(var); z <- stats::qnorm(1 - alpha / 2)
+  chi <- lor^2 / var
+  list(estimate = orr, log_or = lor, se = se,
+       lower = exp(lor - z * se), upper = exp(lor + z * se),
+       statistic = chi, df = 1L,
+       p_value = stats::pchisq(chi, 1, lower.tail = FALSE))
+}
