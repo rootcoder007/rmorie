@@ -29,16 +29,30 @@ jobs:
         run: Rscript scripts/audit/check_r_undefined.R .
       - name: System libraries + toolchain
         run: apt-get update -qq && apt-get install -y --no-install-recommends build-essential libcurl4-openssl-dev libssl-dev libxml2-dev
+      - name: Point every R process at a live P3M stream
+        # rocker images bake a DATED P3M snapshot into Rprofile.site, and
+        # P3M prunes old dates -- 2025-10-30 started returning 404 and
+        # failed this job for a reason unrelated to the package. Derive
+        # the codename from the image itself rather than assuming it, and
+        # pin to `latest` so it cannot rot again.
+        run: |
+          . /etc/os-release
+          CODENAME="${VERSION_CODENAME:-noble}"
+          RHOME=$(R RHOME)
+          echo "container: $ID $VERSION_ID ($CODENAME)"
+          printf 'options(repos = c(runiverse = "https://rootcoder007.r-universe.dev", P3M = "https://packagemanager.posit.co/cran/__linux__/%s/latest", CRAN = "https://cloud.r-project.org"))\n' "$CODENAME" >> "$RHOME/etc/Rprofile.site"
+          Rscript -e 'cat("repos now:\n"); print(getOption("repos"))'
+        shell: bash
       - name: Install hard dependencies + tooling
         run: |
           options(HTTPUserAgent = sprintf(
             "R/%s R (%s)", getRversion(),
             paste(getRversion(), R.version["platform"],
                   R.version["arch"], R.version["os"])))
-          repos <- c(
-            runiverse = "https://rootcoder007.r-universe.dev",
-            P3M = "https://packagemanager.posit.co/cran/__linux__/bookworm/latest",
-            CRAN = "https://cloud.r-project.org")
+          # Set in Rprofile.site by the step above, with the codename
+          # taken from the running image. Re-declaring it here is how the
+          # wrong distro got in.
+          repos <- getOption("repos")
           pkgs <- c("here", "Rcpp", "RcppArmadillo", "rmoriebricklayer", "rmoriedata",
                     "testthat", "pkgload", "rcmdcheck")
           install.packages(pkgs, repos = repos, Ncpus = 2)
