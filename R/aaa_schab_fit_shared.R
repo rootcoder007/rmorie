@@ -19,9 +19,13 @@
     # lags / counts spelling too so a hand-built list also works.
     lags <- as.numeric(if (!is.null(ev$lag)) ev$lag else ev$lags)
     gamma <- as.numeric(ev$gamma)
-    counts <- if (!is.null(ev$n_pairs)) as.numeric(ev$n_pairs)
-              else if (!is.null(ev$counts)) as.numeric(ev$counts)
-              else rep(1, length(lags))
+    counts <- if (!is.null(ev$n_pairs)) {
+      as.numeric(ev$n_pairs)
+    } else if (!is.null(ev$counts)) {
+      as.numeric(ev$counts)
+    } else {
+      rep(1, length(lags))
+    }
     return(list(lags = lags, gamma = gamma, counts = counts))
   }
   if (is.list(ev) && is.null(names(ev)) && length(ev) %in% c(2L, 3L)) {
@@ -48,17 +52,25 @@
   if (!any(finite)) stop("empirical semivariogram is entirely non-finite")
   gmax <- max(ghat[finite])
   hmax <- max(lags[finite])
-  list(start = c(0.1 * gmax, 0.9 * gmax, 0.5 * hmax),
-       lo = c(0, 0, 1e-8 * hmax + 1e-12),
-       hi = c(10 * gmax + 1, 10 * gmax + 1, 10 * hmax))
+  list(
+    start = c(0.1 * gmax, 0.9 * gmax, 0.5 * hmax),
+    lo = c(0, 0, 1e-8 * hmax + 1e-12),
+    hi = c(10 * gmax + 1, 10 * gmax + 1, 10 * hmax)
+  )
 }
 
 .schab_objective <- function(kind, lags, ghat, counts, model) {
   ok <- is.finite(ghat) & is.finite(lags) & counts > 0
-  h <- lags[ok]; g <- ghat[ok]; n <- counts[ok]
+  h <- lags[ok]
+  g <- ghat[ok]
+  n <- counts[ok]
   function(theta) {
-    nugget <- theta[1]; sill <- theta[2]; rng <- theta[3]
-    if (nugget < 0 || sill < 0 || rng <= 0) return(Inf)
+    nugget <- theta[1]
+    sill <- theta[2]
+    rng <- theta[3]
+    if (nugget < 0 || sill < 0 || rng <= 0) {
+      return(Inf)
+    }
     fitted <- .sp_semivariogram(h, nugget, sill, rng, model)
     resid <- g - fitted
     if (identical(kind, "ols")) {
@@ -72,7 +84,9 @@
     # rather than a plain weighted fit.
     denom <- 2 * fitted^2
     good <- denom > 0
-    if (!any(good)) return(Inf)
+    if (!any(good)) {
+      return(Inf)
+    }
     sum(n[good] * resid[good]^2 / denom[good])
   }
 }
@@ -91,11 +105,15 @@
     stop("need at least 3 usable lag classes to fit 3 parameters")
   }
   sb <- .schab_start_and_bounds(lags[ok], ghat[ok])
-  fit <- .schab_gauss_newton(lags, ghat, counts, sb$start, model = model,
-                             kind = kind)
-  list(nugget = fit$theta[1], partial_sill = fit$theta[2],
-       range = fit$theta[3], objective = fit$objective,
-       converged = fit$converged)
+  fit <- .schab_gauss_newton(lags, ghat, counts, sb$start,
+    model = model,
+    kind = kind
+  )
+  list(
+    nugget = fit$theta[1], partial_sill = fit$theta[2],
+    range = fit$theta[3], objective = fit$objective,
+    converged = fit$converged
+  )
 }
 
 .schab_covariance_matrix <- function(coords, nugget, sill, rng, model) {
@@ -120,7 +138,8 @@
   # orthogonal complement of the column space of X gives one such K for any
   # linear mean structure.
   X <- as.matrix(X)
-  n <- nrow(X); p <- ncol(X)
+  n <- nrow(X)
+  p <- ncol(X)
   s <- svd(X, nu = n, nv = p)
   tol <- max(n, p) * .Machine$double.eps * (if (length(s$d)) s$d[1] else 1)
   rank <- sum(s$d > tol)

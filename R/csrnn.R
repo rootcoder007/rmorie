@@ -20,7 +20,9 @@
   }
   if (length(window) != 2L * d) {
     stop("window must give ", d, " (min, max) pairs for ", d,
-         "-dimensional coords; got ", length(window), " values.", call. = FALSE)
+      "-dimensional coords; got ", length(window), " values.",
+      call. = FALSE
+    )
   }
   # One convention only: d rows of (min, max). Reading a 2 x d matrix as
   # lower/upper corners is equally natural, but at d = 2 both readings
@@ -34,8 +36,9 @@
   bounds <- if (is.matrix(window)) {
     if (!identical(dim(window), c(d, 2L))) {
       stop("a matrix window must be ", d, " x 2, with one (min, max) row ",
-           "per dimension; got ", nrow(window), " x ", ncol(window), ".",
-           call. = FALSE)
+        "per dimension; got ", nrow(window), " x ", ncol(window), ".",
+        call. = FALSE
+      )
     }
     matrix(as.numeric(window), nrow = d, ncol = 2L)
   } else {
@@ -111,7 +114,9 @@ morie_csr_nn_test <- function(coords, window = NULL, cdf = NULL,
   n <- nrow(P)
   if (n < 3L) {
     stop("Need at least 3 events to form nearest-neighbour distances, got ",
-         n, ".", call. = FALSE)
+      n, ".",
+      call. = FALSE
+    )
   }
   if (!all(is.finite(P))) stop("coords must be finite.", call. = FALSE)
 

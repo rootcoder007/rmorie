@@ -88,11 +88,11 @@ NULL
 #' @export
 #' @examples
 #' \donttest{
-#'   if (requireNamespace("locfdr", quietly = TRUE)) {
-#'     set.seed(1)
-#'     zz <- c(stats::rnorm(900), stats::rnorm(100, mean = 3))
-#'     morie_locfdr_estimate(zz)
-#'   }
+#' if (requireNamespace("locfdr", quietly = TRUE)) {
+#'   set.seed(1)
+#'   zz <- c(stats::rnorm(900), stats::rnorm(100, mean = 3))
+#'   morie_locfdr_estimate(zz)
+#' }
 #' }
 morie_locfdr_estimate <- function(zz, ...) {
   .morie_nonparam_need("locfdr", "morie_locfdr_estimate")
@@ -127,11 +127,11 @@ morie_locfdr_estimate <- function(zz, ...) {
 #' @export
 #' @examples
 #' \donttest{
-#'   if (requireNamespace("fdrtool", quietly = TRUE)) {
-#'     set.seed(1)
-#'     x <- c(stats::rnorm(900), stats::rnorm(100, mean = 3))
-#'     morie_fdr_qvalues(x, statistic = "normal")
-#'   }
+#' if (requireNamespace("fdrtool", quietly = TRUE)) {
+#'   set.seed(1)
+#'   x <- c(stats::rnorm(900), stats::rnorm(100, mean = 3))
+#'   morie_fdr_qvalues(x, statistic = "normal")
+#' }
 #' }
 morie_fdr_qvalues <- function(x, statistic = "normal", ...) {
   .morie_nonparam_need("fdrtool", "morie_fdr_qvalues")
@@ -167,13 +167,13 @@ morie_fdr_qvalues <- function(x, statistic = "normal", ...) {
 #' @export
 #' @examples
 #' \donttest{
-#'   if (requireNamespace("quantreg", quietly = TRUE)) {
-#'     set.seed(1)
-#'     n  <- 100
-#'     df <- data.frame(x = stats::rnorm(n))
-#'     df$y <- 1 + 2 * df$x + stats::rnorm(n)
-#'     morie_quantile_reg(y ~ x, tau = c(0.25, 0.5, 0.75), data = df)
-#'   }
+#' if (requireNamespace("quantreg", quietly = TRUE)) {
+#'   set.seed(1)
+#'   n <- 100
+#'   df <- data.frame(x = stats::rnorm(n))
+#'   df$y <- 1 + 2 * df$x + stats::rnorm(n)
+#'   morie_quantile_reg(y ~ x, tau = c(0.25, 0.5, 0.75), data = df)
+#' }
 #' }
 morie_quantile_reg <- function(formula, tau = 0.5, data, ...) {
   .morie_nonparam_need("quantreg", "morie_quantile_reg")
@@ -210,13 +210,13 @@ morie_quantile_reg <- function(formula, tau = 0.5, data, ...) {
 #' @export
 #' @examples
 #' \donttest{
-#'   if (requireNamespace("np", quietly = TRUE)) {
-#'     set.seed(1)
-#'     n  <- 50
-#'     df <- data.frame(x = stats::runif(n, -1, 1))
-#'     df$y <- sin(pi * df$x) + stats::rnorm(n, sd = 0.1)
-#'     morie_np_kernel_reg(y ~ x, data = df)
-#'   }
+#' if (requireNamespace("np", quietly = TRUE)) {
+#'   set.seed(1)
+#'   n <- 50
+#'   df <- data.frame(x = stats::runif(n, -1, 1))
+#'   df$y <- sin(pi * df$x) + stats::rnorm(n, sd = 0.1)
+#'   morie_np_kernel_reg(y ~ x, data = df)
+#' }
 #' }
 morie_np_kernel_reg <- function(formula, data, ...) {
   .morie_nonparam_need("np", "morie_np_kernel_reg")
@@ -229,8 +229,8 @@ morie_np_kernel_reg <- function(formula, data, ...) {
   # not a top-level frame. Bypass by building the model frame
   # ourselves and dispatching the default (non-formula) np method.
   mf <- stats::model.frame(formula, data = as.data.frame(data))
-  y  <- stats::model.response(mf)
-  X  <- mf[, -1L, drop = FALSE]
+  y <- stats::model.response(mf)
+  X <- mf[, -1L, drop = FALSE]
   bws <- np::npregbw(xdat = X, ydat = y, ...)
   fit <- np::npreg(bws = bws)
   list(
@@ -270,11 +270,11 @@ morie_np_kernel_reg <- function(formula, data, ...) {
 #' @export
 #' @examples
 #' \donttest{
-#'   if (requireNamespace("dirichletprocess", quietly = TRUE)) {
-#'     set.seed(1)
-#'     y <- c(stats::rnorm(50, -2), stats::rnorm(50, 2))
-#'     morie_dp_gaussian_mixture(y, iterations = 200)
-#'   }
+#' if (requireNamespace("dirichletprocess", quietly = TRUE)) {
+#'   set.seed(1)
+#'   y <- c(stats::rnorm(50, -2), stats::rnorm(50, 2))
+#'   morie_dp_gaussian_mixture(y, iterations = 200)
+#' }
 #' }
 morie_dp_gaussian_mixture <- function(y, iterations = 1000, ...) {
   .morie_nonparam_need("dirichletprocess", "morie_dp_gaussian_mixture")
@@ -320,27 +320,27 @@ morie_dp_gaussian_mixture <- function(y, iterations = 1000, ...) {
 #' @export
 #' @examples
 #' \donttest{
-#'   if (requireNamespace("lcmm", quietly = TRUE)) {
-#'     data("data_hlme", package = "lcmm")
-#'     # lcmm needs initial values when ng > 1: fit the one-class
-#'     # model first and seed the two-class fit from it (B = ...).
-#'     m1 <- morie_lcmm_latent_class(
-#'       fixed   = Y ~ Time,
-#'       random  = ~ Time,
-#'       subject = "ID",
-#'       data    = data_hlme,
-#'       ng      = 1
-#'     )
-#'     morie_lcmm_latent_class(
-#'       fixed   = Y ~ Time,
-#'       random  = ~ Time,
-#'       subject = "ID",
-#'       data    = data_hlme,
-#'       ng      = 2,
-#'       mixture = ~ Time,
-#'       B       = m1$raw
-#'     )
-#'   }
+#' if (requireNamespace("lcmm", quietly = TRUE)) {
+#'   data("data_hlme", package = "lcmm")
+#'   # lcmm needs initial values when ng > 1: fit the one-class
+#'   # model first and seed the two-class fit from it (B = ...).
+#'   m1 <- morie_lcmm_latent_class(
+#'     fixed   = Y ~ Time,
+#'     random  = ~Time,
+#'     subject = "ID",
+#'     data    = data_hlme,
+#'     ng      = 1
+#'   )
+#'   morie_lcmm_latent_class(
+#'     fixed   = Y ~ Time,
+#'     random  = ~Time,
+#'     subject = "ID",
+#'     data    = data_hlme,
+#'     ng      = 2,
+#'     mixture = ~Time,
+#'     B       = m1$raw
+#'   )
+#' }
 #' }
 morie_lcmm_latent_class <- function(fixed, random = ~1, subject, data,
                                     ng = 2, ...) {

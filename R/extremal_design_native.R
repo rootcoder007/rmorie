@@ -36,13 +36,19 @@ morie_has_clique <- function(adjacency, k) {
   A <- as.matrix(adjacency)
   n <- nrow(A)
   k <- as.integer(k)
-  if (k <= 0L) return(integer(0))
-  if (k > n) return(NULL)
+  if (k <= 0L) {
+    return(integer(0))
+  }
+  if (k > n) {
+    return(NULL)
+  }
   cmb <- utils::combn(n, k)
   for (c in seq_len(ncol(cmb))) {
     v <- cmb[, c]
     pr <- utils::combn(v, 2)
-    if (all(A[cbind(pr[1, ], pr[2, ])] != 0)) return(as.integer(v))
+    if (all(A[cbind(pr[1, ], pr[2, ])] != 0)) {
+      return(as.integer(v))
+    }
   }
   NULL
 }
@@ -57,7 +63,8 @@ morie_has_clique <- function(adjacency, k) {
 #' @return A list with `adjacency`, `parts`, `edges`.
 #' @export
 morie_turan_graph <- function(n, r) {
-  n <- as.integer(n); r <- as.integer(r)
+  n <- as.integer(n)
+  r <- as.integer(r)
   if (n < 0L) stop(sprintf("n must be non-negative; got %d", n), call. = FALSE)
   if (r < 1L) stop(sprintf("r must be at least 1; got %d", r), call. = FALSE)
   A <- matrix(0L, n, n)
@@ -65,7 +72,10 @@ morie_turan_graph <- function(n, r) {
   if (n > 1L) {
     for (i in seq_len(n - 1L)) {
       for (j in seq.int(i + 1L, n)) {
-        if (part_of[i] != part_of[j]) { A[i, j] <- 1L; A[j, i] <- 1L }
+        if (part_of[i] != part_of[j]) {
+          A[i, j] <- 1L
+          A[j, i] <- 1L
+        }
       }
     }
   }
@@ -91,18 +101,21 @@ morie_turan_graph <- function(n, r) {
 #' @references Turan P (1941). Bollobas B (2004), Ch VI.
 #' @export
 morie_turan_number <- function(n, r) {
-  n <- as.integer(n); r <- as.integer(r)
+  n <- as.integer(n)
+  r <- as.integer(r)
   if (n < 0L) stop(sprintf("n must be non-negative; got %d", n), call. = FALSE)
   if (r < 1L) stop(sprintf("r must be at least 1; got %d", r), call. = FALSE)
   sizes <- (n %/% r) + as.integer(seq_len(r) <= (n %% r))
   exact <- choose(n, 2) - sum(choose(sizes, 2))
   approx <- (1 - 1 / r) * n * n / 2
   g <- morie_turan_graph(n, r)
-  list(count = exact, rounded_formula = approx,
-       formula_is_exact = abs(approx - exact) < 1e-9,
-       part_sizes = sizes, construction_edges = g$edges,
-       attained = g$edges == exact, forbidden_clique = r + 1L,
-       n = n, r = r, method = "Turan's theorem (Turan 1941)")
+  list(
+    count = exact, rounded_formula = approx,
+    formula_is_exact = abs(approx - exact) < 1e-9,
+    part_sizes = sizes, construction_edges = g$edges,
+    attained = g$edges == exact, forbidden_clique = r + 1L,
+    n = n, r = r, method = "Turan's theorem (Turan 1941)"
+  )
 }
 
 #' Mantel's theorem: the triangle-free case
@@ -139,9 +152,11 @@ morie_sperner_width <- function(n) {
   if (n < 0L) stop(sprintf("n must be non-negative; got %d", n), call. = FALSE)
   w <- choose(n, n %/% 2L)
   layers <- if (n %% 2L == 0L) n %/% 2L else c(n %/% 2L, n %/% 2L + 1L)
-  list(count = w, extremal_layers = layers,
-       unique_extremal = n %% 2L == 0L, total_subsets = 2^n, n = n,
-       method = "Sperner's theorem (Sperner 1928)")
+  list(
+    count = w, extremal_layers = layers,
+    unique_extremal = n %% 2L == 0L, total_subsets = 2^n, n = n,
+    method = "Sperner's theorem (Sperner 1928)"
+  )
 }
 
 #' Erdos-Ko-Rado: the largest intersecting family of k-subsets
@@ -161,11 +176,13 @@ morie_sperner_width <- function(n) {
 #'   12:313-320.
 #' @export
 morie_erdos_ko_rado <- function(n, k) {
-  n <- as.integer(n); k <- as.integer(k)
+  n <- as.integer(n)
+  k <- as.integer(k)
   if (n < 0L || k < 0L) stop("n and k must be non-negative.", call. = FALSE)
   if (k > n) {
     stop(sprintf("k must not exceed n; got k = %d, n = %d", k, n),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   regime <- n >= 2L * k
   star <- if (k >= 1L) choose(n - 1L, k - 1L) else 0
@@ -176,11 +193,14 @@ morie_erdos_ko_rado <- function(n, k) {
       "n = %d is below 2k = %d, outside the Erdos-Ko-Rado regime. The star",
       "bound C(n-1, k-1) = %g is NOT the answer here; it is smaller than the",
       "truth because every family is intersecting when no two k-sets can be",
-      "disjoint."), n, 2L * k, star)
+      "disjoint."
+    ), n, 2L * k, star)
   }
-  list(count = count, star_size = star, all_k_sets = choose(n, k),
-       ekr_regime = regime, n = n, k = k, warnings = warns,
-       method = "Erdos-Ko-Rado theorem (1961)")
+  list(
+    count = count, star_size = star, all_k_sets = choose(n, k),
+    ekr_regime = regime, n = n, k = k, warnings = warns,
+    method = "Erdos-Ko-Rado theorem (1961)"
+  )
 }
 
 #' Dilworth's theorem, with both sides computed
@@ -203,19 +223,30 @@ morie_dilworth_decomposition <- function(leq) {
   for (i in seq_len(n)) {
     if (!M[i, i]) {
       stop(sprintf("leq must be reflexive; element %d is not.", i),
-           call. = FALSE)
+        call. = FALSE
+      )
     }
   }
-  for (i in seq_len(n)) for (j in seq_len(n)) {
-    if (i != j && M[i, j] && M[j, i]) {
-      stop(sprintf(paste("leq must be antisymmetric; %d and %d are mutually",
-                         "below one another."), i, j), call. = FALSE)
+  for (i in seq_len(n)) {
+    for (j in seq_len(n)) {
+      if (i != j && M[i, j] && M[j, i]) {
+        stop(sprintf(paste(
+          "leq must be antisymmetric; %d and %d are mutually",
+          "below one another."
+        ), i, j), call. = FALSE)
+      }
     }
   }
-  for (i in seq_len(n)) for (j in seq_len(n)) for (k in seq_len(n)) {
-    if (M[i, j] && M[j, k] && !M[i, k]) {
-      stop(sprintf(paste("leq must be transitive; %d <= %d <= %d but not",
-                         "%d <= %d."), i, j, k, i, k), call. = FALSE)
+  for (i in seq_len(n)) {
+    for (j in seq_len(n)) {
+      for (k in seq_len(n)) {
+        if (M[i, j] && M[j, k] && !M[i, k]) {
+          stop(sprintf(paste(
+            "leq must be transitive; %d <= %d <= %d but not",
+            "%d <= %d."
+          ), i, j, k, i, k), call. = FALSE)
+        }
+      }
     }
   }
   strict <- M & !diag(TRUE, n)
@@ -246,23 +277,35 @@ morie_dilworth_decomposition <- function(leq) {
     found <- NULL
     for (c in seq_len(ncol(cmb))) {
       v <- cmb[, c]
-      if (sz == 1L) { found <- v; break }
+      if (sz == 1L) {
+        found <- v
+        break
+      }
       pr <- utils::combn(v, 2)
       if (!any(strict[cbind(pr[1, ], pr[2, ])] |
-               strict[cbind(pr[2, ], pr[1, ])])) { found <- v; break }
+        strict[cbind(pr[2, ], pr[1, ])])) {
+        found <- v
+        break
+      }
     }
-    if (!is.null(found)) { best <- as.integer(found); break }
+    if (!is.null(found)) {
+      best <- as.integer(found)
+      break
+    }
   }
   warns <- character(0)
   if (length(best) != chain_cover) {
     warns <- sprintf(paste(
       "The antichain (%d) and chain cover (%d) disagree, contradicting",
       "Dilworth's theorem. One computation is wrong, or the relation is not",
-      "a partial order."), length(best), chain_cover)
+      "a partial order."
+    ), length(best), chain_cover)
   }
-  list(antichain_size = length(best), chain_cover_size = chain_cover,
-       dilworth_holds = length(best) == chain_cover, antichain = best,
-       n = n, warnings = warns, method = "Dilworth's theorem (1950)")
+  list(
+    antichain_size = length(best), chain_cover_size = chain_cover,
+    dilworth_holds = length(best) == chain_cover, antichain = best,
+    n = n, warnings = warns, method = "Dilworth's theorem (1950)"
+  )
 }
 
 #' Necessary conditions for a balanced incomplete block design
@@ -282,21 +325,26 @@ morie_dilworth_decomposition <- function(leq) {
 #' @references Fisher RA (1940). Stinson DR (2004).
 #' @export
 morie_bibd_parameters <- function(v, k, lam) {
-  v <- as.integer(v); k <- as.integer(k); lam <- as.integer(lam)
+  v <- as.integer(v)
+  k <- as.integer(k)
+  lam <- as.integer(lam)
   if (v < 1L || k < 1L || lam < 1L) {
     stop("v, k and lambda must be positive.", call. = FALSE)
   }
   if (k > v) {
     stop(sprintf("block size k = %d cannot exceed v = %d", k, v),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   if (k < 2L) {
     stop(sprintf("block size k must be at least 2; got %d", k), call. = FALSE)
   }
-  num_r <- lam * (v - 1L); den_r <- k - 1L
+  num_r <- lam * (v - 1L)
+  den_r <- k - 1L
   r_ok <- num_r %% den_r == 0L
   r <- if (r_ok) num_r %/% den_r else NULL
-  b_ok <- FALSE; b <- NULL
+  b_ok <- FALSE
+  b <- NULL
   if (!is.null(r)) {
     b_ok <- (v * r) %% k == 0L
     if (b_ok) b <- (v * r) %/% k
@@ -305,13 +353,17 @@ morie_bibd_parameters <- function(v, k, lam) {
   fisher_ok <- !is.null(b) && b >= v
   feasible <- div_ok && fisher_ok
 
-  exists <- NULL; note <- ""
+  exists <- NULL
+  note <- ""
   if (!feasible) {
-    exists <- FALSE; note <- "ruled out by the counting or Fisher conditions"
+    exists <- FALSE
+    note <- "ruled out by the counting or Fisher conditions"
   } else if (v == 22L && k == 7L && lam == 2L) {
     exists <- FALSE
-    note <- paste("ruled out by Bruck-Ryser-Chowla despite passing every",
-                  "counting condition")
+    note <- paste(
+      "ruled out by Bruck-Ryser-Chowla despite passing every",
+      "counting condition"
+    )
   } else if (k == v) {
     exists <- TRUE
     note <- "trivial: the single block containing every point"
@@ -322,18 +374,22 @@ morie_bibd_parameters <- function(v, k, lam) {
       "The counting conditions and Fisher's inequality are NECESSARY, not",
       "sufficient. Their passing does not establish that the design exists",
       "-- (22, 7, 2) passes all of them and is impossible by",
-      "Bruck-Ryser-Chowla. `exists` is left undetermined here."))
+      "Bruck-Ryser-Chowla. `exists` is left undetermined here."
+    ))
   }
   if (identical(exists, FALSE) && feasible) {
     warns <- c(warns, sprintf(paste(
       "This parameter set is arithmetically feasible but the design does not",
-      "exist: %s."), note))
+      "exist: %s."
+    ), note))
   }
-  list(v = v, k = k, lambda = lam, r = r, b = b,
-       divisibility_ok = div_ok, r_integral = r_ok, b_integral = b_ok,
-       fisher_ok = fisher_ok, feasible = feasible, exists = exists,
-       note = note, n = v, warnings = warns,
-       method = "BIBD necessary conditions with Fisher's inequality")
+  list(
+    v = v, k = k, lambda = lam, r = r, b = b,
+    divisibility_ok = div_ok, r_integral = r_ok, b_integral = b_ok,
+    fisher_ok = fisher_ok, feasible = feasible, exists = exists,
+    note = note, n = v, warnings = warns,
+    method = "BIBD necessary conditions with Fisher's inequality"
+  )
 }
 
 #' Steiner triple systems, with the Bose construction verified
@@ -355,7 +411,8 @@ morie_steiner_triple_system <- function(v, construct = TRUE) {
   if (v < 0L) stop(sprintf("v must be non-negative; got %d", v), call. = FALSE)
   exists <- v %in% c(0L, 1L) || (v %% 6L) %in% c(1L, 3L)
   n_triples <- if (exists) (v * (v - 1L)) %/% 6L else NULL
-  triples <- NULL; verified <- NULL
+  triples <- NULL
+  verified <- NULL
 
   if (isTRUE(construct) && exists && v >= 3L && v %% 6L == 3L) {
     m <- v %/% 3L
@@ -370,8 +427,10 @@ morie_steiner_triple_system <- function(v, construct = TRUE) {
         for (b in seq_len(m) - 1L) {
           if (b <= a) next
           mm <- ((a + b) * half) %% m
-          tl[[length(tl) + 1L]] <- c(idx(a, j), idx(b, j),
-                                     idx(mm, (j + 1L) %% 3L))
+          tl[[length(tl) + 1L]] <- c(
+            idx(a, j), idx(b, j),
+            idx(mm, (j + 1L) %% 3L)
+          )
         }
       }
     }
@@ -390,13 +449,17 @@ morie_steiner_triple_system <- function(v, construct = TRUE) {
   }
   warns <- character(0)
   if (identical(verified, FALSE)) {
-    warns <- paste("The Bose construction did not produce a valid system:",
-                   "some pair is covered a number of times other than once.")
+    warns <- paste(
+      "The Bose construction did not produce a valid system:",
+      "some pair is covered a number of times other than once."
+    )
   }
-  list(v = v, exists = exists, n_triples = n_triples, triples = triples,
-       verified = verified, condition = "v = 1 or 3 (mod 6)",
-       condition_is_sufficient = TRUE, n = v, warnings = warns,
-       method = "Steiner triple system (Kirkman 1847; Bose 1939)")
+  list(
+    v = v, exists = exists, n_triples = n_triples, triples = triples,
+    verified = verified, condition = "v = 1 or 3 (mod 6)",
+    condition_is_sufficient = TRUE, n = v, warnings = warns,
+    method = "Steiner triple system (Kirkman 1847; Bose 1939)"
+  )
 }
 
 #' A Latin square of order n
@@ -413,10 +476,15 @@ morie_latin_square <- function(n, method = c("cyclic", "shifted")) {
   n <- as.integer(n)
   if (n < 1L) stop(sprintf("n must be at least 1; got %d", n), call. = FALSE)
   i <- seq_len(n) - 1L
-  L <- if (method == "cyclic") outer(i, i, function(a, b) (a + b) %% n) else
+  L <- if (method == "cyclic") {
+    outer(i, i, function(a, b) (a + b) %% n)
+  } else {
     outer(i, i, function(a, b) (a * 2L + b) %% n)
-  list(square = L, order = n, valid = morie_is_latin_square(L)$valid,
-       method = method)
+  }
+  list(
+    square = L, order = n, valid = morie_is_latin_square(L)$valid,
+    method = method
+  )
 }
 
 #' Is every symbol used once in each row and each column?
@@ -432,8 +500,10 @@ morie_is_latin_square <- function(square) {
   rows_ok <- all(apply(L, 1L, function(r) length(unique(r)) == n))
   cols_ok <- all(apply(L, 2L, function(c) length(unique(c)) == n))
   syms_ok <- length(unique(as.vector(L))) == n
-  list(valid = rows_ok && cols_ok && syms_ok, rows_ok = rows_ok,
-       columns_ok = cols_ok, symbol_count_ok = syms_ok, order = n)
+  list(
+    valid = rows_ok && cols_ok && syms_ok, rows_ok = rows_ok,
+    columns_ok = cols_ok, symbol_count_ok = syms_ok, order = n
+  )
 }
 
 #' Are two Latin squares orthogonal?
@@ -454,7 +524,8 @@ morie_is_latin_square <- function(square) {
 #'   `both_are_latin`, `pairs_seen`.
 #' @export
 morie_are_orthogonal <- function(square_a, square_b) {
-  A <- as.matrix(square_a); B <- as.matrix(square_b)
+  A <- as.matrix(square_a)
+  B <- as.matrix(square_b)
   n <- nrow(A)
   if (nrow(B) != n) {
     stop("the two squares must have the same order.", call. = FALSE)
@@ -467,9 +538,11 @@ morie_are_orthogonal <- function(square_a, square_b) {
   pairs <- paste(as.vector(A), as.vector(B), sep = ",")
   tb <- table(pairs)
   cond <- length(tb) == n * n && all(tb == 1L)
-  list(orthogonal = cond && va && vb, pair_condition_holds = cond,
-       both_are_latin = va && vb, first_is_latin = va, second_is_latin = vb,
-       pairs_seen = length(tb), pairs_needed = n * n, order = n)
+  list(
+    orthogonal = cond && va && vb, pair_condition_holds = cond,
+    both_are_latin = va && vb, first_is_latin = va, second_is_latin = vb,
+    pairs_seen = length(tb), pairs_needed = n * n, order = n
+  )
 }
 
 #' The Hamming sphere-packing bound
@@ -489,26 +562,31 @@ morie_are_orthogonal <- function(square_a, square_b) {
 #' @references Hamming RW (1950) \emph{Bell Syst Tech J} 29:147-160.
 #' @export
 morie_hamming_bound <- function(n, d, q = 2) {
-  n <- as.integer(n); d <- as.integer(d); q <- as.integer(q)
+  n <- as.integer(n)
+  d <- as.integer(d)
+  q <- as.integer(q)
   if (n < 1L || d < 1L || q < 2L) {
     stop("n and d must be positive and q at least 2.", call. = FALSE)
   }
   if (d > n) {
     stop(sprintf("d must not exceed n; got d = %d, n = %d", d, n),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   t <- (d - 1L) %/% 2L
   i <- seq_len(t + 1L) - 1L
   vol <- sum(choose(n, i) * (q - 1)^i)
   total <- morie_big_pow(q, n)
   dm <- morie_big_divmod_small(total, vol)
-  list(bound = as.numeric(as.character(dm$quotient)),
-       bound_exact = as.character(dm$quotient),
-       errors_corrected = t, ball_volume = vol,
-       total_words = as.character(total),
-       is_perfect_possible = dm$remainder == 0,
-       n = n, d = d, q = q,
-       method = "Hamming sphere-packing bound (Hamming 1950)")
+  list(
+    bound = as.numeric(as.character(dm$quotient)),
+    bound_exact = as.character(dm$quotient),
+    errors_corrected = t, ball_volume = vol,
+    total_words = as.character(total),
+    is_perfect_possible = dm$remainder == 0,
+    n = n, d = d, q = q,
+    method = "Hamming sphere-packing bound (Hamming 1950)"
+  )
 }
 
 #' The Singleton bound
@@ -524,21 +602,26 @@ morie_hamming_bound <- function(n, d, q = 2) {
 #'   10(2):116-118.
 #' @export
 morie_singleton_bound <- function(n, d, q = 2) {
-  n <- as.integer(n); d <- as.integer(d); q <- as.integer(q)
+  n <- as.integer(n)
+  d <- as.integer(d)
+  q <- as.integer(q)
   if (n < 1L || d < 1L || q < 2L) {
     stop("n and d must be positive and q at least 2.", call. = FALSE)
   }
   if (d > n) {
     stop(sprintf("d must not exceed n; got d = %d, n = %d", d, n),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   b <- morie_big_pow(q, n - d + 1L)
   ham <- morie_hamming_bound(n, d, q)
   bn <- as.numeric(as.character(b))
-  list(bound = bn, bound_exact = as.character(b),
-       hamming_bound = ham$bound, tighter = min(bn, ham$bound),
-       hamming_is_tighter = ham$bound < bn, n = n, d = d, q = q,
-       method = "Singleton bound (Singleton 1964)")
+  list(
+    bound = bn, bound_exact = as.character(b),
+    hamming_bound = ham$bound, tighter = min(bn, ham$bound),
+    hamming_is_tighter = ham$bound < bn, n = n, d = d, q = q,
+    method = "Singleton bound (Singleton 1964)"
+  )
 }
 
 #' Verify a block design directly from its blocks
@@ -587,16 +670,20 @@ morie_incidence_check <- function(blocks, v) {
   if (uncovered > 0) {
     warns <- c(warns, sprintf(paste(
       "%d pairs appear in no block, so this is not a design covering every",
-      "pair."), uncovered))
+      "pair."
+    ), uncovered))
   }
   if (length(sizes) > 1L) {
     warns <- c(warns, sprintf(
       "Blocks have differing sizes %s; a BIBD needs them uniform.",
-      paste(sort(sizes), collapse = ", ")))
+      paste(sort(sizes), collapse = ", ")
+    ))
   }
-  list(is_bibd = is_bibd, b = length(B), v = v, k = k_val, r = r_val,
-       lambda = lam_val, block_sizes = sort(sizes),
-       point_replications = point, uncovered_pairs = uncovered,
-       n = v, warnings = warns,
-       method = "Direct verification of a block design")
+  list(
+    is_bibd = is_bibd, b = length(B), v = v, k = k_val, r = r_val,
+    lambda = lam_val, block_sizes = sort(sizes),
+    point_replications = point, uncovered_pairs = uncovered,
+    n = v, warnings = warns,
+    method = "Direct verification of a block design"
+  )
 }

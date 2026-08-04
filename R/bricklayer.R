@@ -33,22 +33,28 @@ morie_bricklayer <- function(yes = FALSE, check = FALSE) {
   find_python <- function() {
     for (p in c("python3", "python")) {
       exe <- Sys.which(p)
-      if (nzchar(exe)) return(unname(exe))
+      if (nzchar(exe)) {
+        return(unname(exe))
+      }
     }
     ""
   }
   py <- find_python()
   py_run_ok <- function(code) {
-    if (!nzchar(py)) return(FALSE)
+    if (!nzchar(py)) {
+      return(FALSE)
+    }
     isTRUE(tryCatch(
       system2(py, c("-c", shQuote(code)), stdout = FALSE, stderr = FALSE) == 0L,
       error = function(e) FALSE
     ))
   }
   have_py_morie <- py_run_ok(
-    "import importlib.util,sys; sys.exit(0 if importlib.util.find_spec('morie') else 1)")
+    "import importlib.util,sys; sys.exit(0 if importlib.util.find_spec('morie') else 1)"
+  )
   py_backend_ok <- py_run_ok(
-    "import importlib.util,sys; sys.exit(0 if importlib.util.find_spec('morie._core') else 1)")
+    "import importlib.util,sys; sys.exit(0 if importlib.util.find_spec('morie._core') else 1)"
+  )
 
   have_cli <- nzchar(Sys.which("rmorie"))
   have_rdata <- requireNamespace("rmoriedata", quietly = TRUE)
@@ -62,26 +68,36 @@ morie_bricklayer <- function(yes = FALSE, check = FALSE) {
   mark <- function(ok, label) cat(sprintf("  [%s] %s\n", if (ok) "x" else " ", label))
   cat("morie family status:\n")
   mark(have_py_morie, "morie            (Python / pip)")
-  mark(TRUE,          "rmorie           (R / this session)")
-  mark(have_rdata,    "rmoriedata       (R)")
-  mark(have_rbrick,   "rmoriebricklayer (R / shared C core)")
-  mark(have_cli,      "rmorie-cli       (proprietary -- not auto-installed)")
-  mark(tc_ok,         "C/C++ toolchain  (cc + c++ -- REQUIRED for the compiled core)")
-  if (have_py_morie && !py_backend_ok)
+  mark(TRUE, "rmorie           (R / this session)")
+  mark(have_rdata, "rmoriedata       (R)")
+  mark(have_rbrick, "rmoriebricklayer (R / shared C core)")
+  mark(have_cli, "rmorie-cli       (proprietary -- not auto-installed)")
+  mark(tc_ok, "C/C++ toolchain  (cc + c++ -- REQUIRED for the compiled core)")
+  if (have_py_morie && !py_backend_ok) {
     cat("  !! morie (Python) is installed but morie._core (C++ backend) is NOT active -- degraded.\n")
-  if (!r_backend_ok)
+  }
+  if (!r_backend_ok) {
     cat("  !! rmorie's C/C++ kernels are NOT active (morie_fast_available() is FALSE) -- slow pure-R fallback.\n")
-  if (!tc_ok)
+  }
+  if (!tc_ok) {
     cat("  !! No C/C++ toolchain detected. Install one (e.g. build-essential / Rtools / xcode-select)\n",
-        "     -- the family needs it to build the shared core and run properly.\n", sep = "")
+      "     -- the family needs it to build the shared core and run properly.\n",
+      sep = ""
+    )
+  }
   cat("\n")
 
-  present <- c(morie = have_py_morie, rmorie = TRUE, rmoriedata = have_rdata,
-              rmoriebricklayer = have_rbrick, `rmorie-cli` = have_cli)
-  if (isTRUE(check)) return(invisible(present))
+  present <- c(
+    morie = have_py_morie, rmorie = TRUE, rmoriedata = have_rdata,
+    rmoriebricklayer = have_rbrick, `rmorie-cli` = have_cli
+  )
+  if (isTRUE(check)) {
+    return(invisible(present))
+  }
 
-  if (!have_cli)
+  if (!have_cli) {
     cat("note: rmorie-cli is proprietary (Receipt-of-Custody); obtain it at", CLI_URL, "\n")
+  }
 
   if (have_py_morie) {
     cat("Python morie is already present. Nothing to install.\n")
@@ -96,7 +112,9 @@ morie_bricklayer <- function(yes = FALSE, check = FALSE) {
   if (!do_it) {
     if (!interactive()) {
       cat("Non-interactive; not installing. Run with yes = TRUE, or:\n  ",
-          py, " -m pip install morie\n", sep = "")
+        py, " -m pip install morie\n",
+        sep = ""
+      )
       return(invisible(present))
     }
     ans <- readline("Install the Python package morie now? [Y/n] ")
@@ -113,7 +131,8 @@ morie_bricklayer <- function(yes = FALSE, check = FALSE) {
   if (rc != 0L) {
     cat("Python morie install failed (see output above).\n")
   } else if (!py_run_ok(
-      "import importlib.util,sys; sys.exit(0 if importlib.util.find_spec('morie._core') else 1)")) {
+    "import importlib.util,sys; sys.exit(0 if importlib.util.find_spec('morie._core') else 1)"
+  )) {
     cat("WARNING: morie installed but morie._core (C++ backend) did not load -- it will be degraded.\n")
   } else {
     cat("Done. morie (Python) is ready.\n")
@@ -143,7 +162,8 @@ morie_bricklayer <- function(yes = FALSE, check = FALSE) {
 morie_wayback_url <- function(url, timestamp = NULL) {
   if (!requireNamespace("rmoriebricklayer", quietly = TRUE)) {
     stop("rmoriebricklayer is required for morie_wayback_url(); run morie_bricklayer().",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   rmoriebricklayer::wayback_snapshot_url(url, timestamp = timestamp)
 }
@@ -167,14 +187,17 @@ morie_wayback_url <- function(url, timestamp = NULL) {
 #' \donttest{
 #' morie_download(
 #'   "https://data.ontario.ca/dataset/data-on-inmates-in-ontario",
-#'   tempfile(fileext = ".html"))
+#'   tempfile(fileext = ".html")
+#' )
 #' }
 #' @export
 morie_download <- function(url, target_path, attempt_wayback = NULL) {
   if (!requireNamespace("rmoriebricklayer", quietly = TRUE)) {
     stop("rmoriebricklayer is required for morie_download(); run morie_bricklayer().",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   rmoriebricklayer::friendly_download(url, target_path,
-                                      attempt_wayback = attempt_wayback)
+    attempt_wayback = attempt_wayback
+  )
 }

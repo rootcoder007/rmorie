@@ -20,7 +20,9 @@
   if (is.na(B) || B < 2L) stop("need at least 2 replicates.", call. = FALSE)
   old <- if (exists(".Random.seed", envir = globalenv())) {
     get(".Random.seed", envir = globalenv())
-  } else NULL
+  } else {
+    NULL
+  }
   set.seed(seed)
   on.exit(if (!is.null(old)) assign(".Random.seed", old, envir = globalenv()))
   vapply(seq_len(B), function(b) {
@@ -54,15 +56,19 @@ morie_bt_iid <- function(x, stat, B = 1000L, seed = 0) {
   reps <- .btv_boot_reps(d, stat, B, seed)
   est <- as.numeric(stat(d))
   ci <- unname(stats::quantile(reps, c(0.025, 0.975), type = 7L))
-  list(replicates = reps, estimate = est, se = stats::sd(reps),
-       bias = mean(reps) - est, ci_percentile = ci,
-       B = length(reps), n = length(d),
-       consistency_caveat = paste("the bootstrap estimates the statistic's",
-                                  "distribution under the EMPIRICAL law;",
-                                  "for statistics it is inconsistent for --",
-                                  "the sample maximum above all -- it fails",
-                                  "without warning"),
-       method = "Efron (1979) nonparametric IID bootstrap")
+  list(
+    replicates = reps, estimate = est, se = stats::sd(reps),
+    bias = mean(reps) - est, ci_percentile = ci,
+    B = length(reps), n = length(d),
+    consistency_caveat = paste(
+      "the bootstrap estimates the statistic's",
+      "distribution under the EMPIRICAL law;",
+      "for statistics it is inconsistent for --",
+      "the sample maximum above all -- it fails",
+      "without warning"
+    ),
+    method = "Efron (1979) nonparametric IID bootstrap"
+  )
 }
 
 
@@ -84,16 +90,22 @@ morie_bt_var <- function(theta_b) {
   r <- as.numeric(theta_b)
   if (length(r) < 2L) stop("need at least 2 replicates.", call. = FALSE)
   if (any(!is.finite(r))) {
-    stop(paste("every replicate must be finite; a failed refit should be",
-               "dropped before this point, and dropping it changes the",
-               "estimand."), call. = FALSE)
+    stop(paste(
+      "every replicate must be finite; a failed refit should be",
+      "dropped before this point, and dropping it changes the",
+      "estimand."
+    ), call. = FALSE)
   }
   v <- stats::var(r)
-  list(value = v, se = sqrt(v), mean_replicate = mean(r),
-       B = length(r), denominator = "B - 1",
-       denominator_note = paste("B - 1, not B: the replicates are centred",
-                                "at their own mean (Efron-Tibshirani 6.5)"),
-       method = "Bootstrap variance from replicates, Efron-Tibshirani (6.5)")
+  list(
+    value = v, se = sqrt(v), mean_replicate = mean(r),
+    B = length(r), denominator = "B - 1",
+    denominator_note = paste(
+      "B - 1, not B: the replicates are centred",
+      "at their own mean (Efron-Tibshirani 6.5)"
+    ),
+    method = "Bootstrap variance from replicates, Efron-Tibshirani (6.5)"
+  )
 }
 
 
@@ -120,17 +132,23 @@ morie_bt_bias <- function(theta_hat, theta_b) {
   r <- as.numeric(theta_b)
   if (length(r) < 2L) stop("need at least 2 replicates.", call. = FALSE)
   bias <- mean(r) - th
-  list(bias = bias, corrected = th - bias, estimate = th,
-       mean_replicate = mean(r),
-       relative_bias = if (th != 0) bias / th else Inf,
-       B = length(r),
-       direction_note = paste("the corrected value is 2 theta_hat -",
-                              "mean(reps), on the OPPOSITE side of theta_hat",
-                              "from the replicate mean"),
-       correction_warning = paste("correction adds variance and can raise",
-                                  "the MSE (Efron-Tibshirani Ch. 10); report",
-                                  "the bias, correct only when it dominates"),
-       method = "Bootstrap bias = mean(replicates) - estimate")
+  list(
+    bias = bias, corrected = th - bias, estimate = th,
+    mean_replicate = mean(r),
+    relative_bias = if (th != 0) bias / th else Inf,
+    B = length(r),
+    direction_note = paste(
+      "the corrected value is 2 theta_hat -",
+      "mean(reps), on the OPPOSITE side of theta_hat",
+      "from the replicate mean"
+    ),
+    correction_warning = paste(
+      "correction adds variance and can raise",
+      "the MSE (Efron-Tibshirani Ch. 10); report",
+      "the bias, correct only when it dominates"
+    ),
+    method = "Bootstrap bias = mean(replicates) - estimate"
+  )
 }
 
 
@@ -158,24 +176,33 @@ morie_bt_bias <- function(theta_hat, theta_b) {
 morie_bt_jackknife <- function(x, stat) {
   d <- as.numeric(x)
   n <- length(d)
-  if (n < 3L) stop(sprintf("need at least 3 observations, got %d.", n),
-                   call. = FALSE)
+  if (n < 3L) {
+    stop(sprintf("need at least 3 observations, got %d.", n),
+      call. = FALSE
+    )
+  }
   th <- as.numeric(stat(d))
   loo <- vapply(seq_len(n), function(i) as.numeric(stat(d[-i])), numeric(1))
   m <- mean(loo)
   bias <- (n - 1) * (m - th)
   v <- (n - 1) / n * sum((loo - m)^2)
-  list(leave_one_out = loo, estimate = th, bias = bias,
-       corrected = th - bias, variance = v, se = sqrt(v),
-       pseudovalues = n * th - (n - 1) * loo,
-       inflation_note = paste("both (n-1) factors undo the leave-one-out",
-                              "values' huddling; dropping either understates",
-                              "by a factor of order n"),
-       smoothness_caveat = paste("inconsistent for non-smooth statistics --",
-                                 "the median is the canonical failure (Efron",
-                                 "1979 Sec. 3); use the bootstrap there"),
-       n = n,
-       method = "Leave-one-out jackknife (Quenouille 1949; Tukey 1958)")
+  list(
+    leave_one_out = loo, estimate = th, bias = bias,
+    corrected = th - bias, variance = v, se = sqrt(v),
+    pseudovalues = n * th - (n - 1) * loo,
+    inflation_note = paste(
+      "both (n-1) factors undo the leave-one-out",
+      "values' huddling; dropping either understates",
+      "by a factor of order n"
+    ),
+    smoothness_caveat = paste(
+      "inconsistent for non-smooth statistics --",
+      "the median is the canonical failure (Efron",
+      "1979 Sec. 3); use the bootstrap there"
+    ),
+    n = n,
+    method = "Leave-one-out jackknife (Quenouille 1949; Tukey 1958)"
+  )
 }
 
 
@@ -233,15 +260,23 @@ morie_bt_oob <- function(x, y, fit_fn, predict_fn, B = 100L, loss = NULL,
   yv <- as.numeric(y)
   if (nrow(A) != length(yv)) A <- t(A)
   n <- length(yv)
-  if (n < 4L) stop(sprintf("need at least 4 observations, got %d.", n),
-                   call. = FALSE)
+  if (n < 4L) {
+    stop(sprintf("need at least 4 observations, got %d.", n),
+      call. = FALSE
+    )
+  }
   Bn <- as.integer(B)
-  if (is.na(Bn) || Bn < 1L) stop("need at least one replicate.",
-                                 call. = FALSE)
+  if (is.na(Bn) || Bn < 1L) {
+    stop("need at least one replicate.",
+      call. = FALSE
+    )
+  }
   L <- if (is.null(loss)) function(a, b) (a - b)^2 else loss
   old <- if (exists(".Random.seed", envir = globalenv())) {
     get(".Random.seed", envir = globalenv())
-  } else NULL
+  } else {
+    NULL
+  }
   set.seed(seed)
   on.exit(if (!is.null(old)) assign(".Random.seed", old, envir = globalenv()))
   loss_sum <- numeric(n)
@@ -260,16 +295,21 @@ morie_bt_oob <- function(x, y, fit_fn, predict_fn, B = 100L, loss = NULL,
   per_i <- rep(NA_real_, n)
   per_i[keep] <- loss_sum[keep] / oob_cnt[keep]
   full <- fit_fn(A, yv)
-  list(err_oob = if (any(keep)) mean(per_i[keep]) else NA_real_,
-       err_apparent = mean(as.numeric(L(yv, as.numeric(
-         predict_fn(full, A))))),
-       per_observation = per_i, n_dropped = sum(!keep),
-       oob_fraction = mean(oob_cnt) / Bn,
-       honesty_note = paste("no observation is ever scored by a fit that",
-                            "saw it; each point is out of bag for about",
-                            "36.8% of replicates"),
-       B = Bn, n = n,
-       method = "Out-of-bag error (Efron-Tibshirani 1997; Breiman 1996)")
+  list(
+    err_oob = if (any(keep)) mean(per_i[keep]) else NA_real_,
+    err_apparent = mean(as.numeric(L(yv, as.numeric(
+      predict_fn(full, A)
+    )))),
+    per_observation = per_i, n_dropped = sum(!keep),
+    oob_fraction = mean(oob_cnt) / Bn,
+    honesty_note = paste(
+      "no observation is ever scored by a fit that",
+      "saw it; each point is out of bag for about",
+      "36.8% of replicates"
+    ),
+    B = Bn, n = n,
+    method = "Out-of-bag error (Efron-Tibshirani 1997; Breiman 1996)"
+  )
 }
 
 
@@ -298,7 +338,8 @@ morie_bt_oob <- function(x, y, fit_fn, predict_fn, B = 100L, loss = NULL,
 #'   their Application*, Chs. 2-3, 5; Fieller (1954).
 #' @examples
 #' morie_bt_ci_ratio(stats::rnorm(50, 2), stats::rnorm(50, 1),
-#'                   B = 200)$ci
+#'   B = 200
+#' )$ci
 #' @export
 morie_bt_ci_ratio <- function(x, y, stat_x = NULL, stat_y = NULL,
                               B = 2000L, alpha = 0.05, seed = 0,
@@ -308,23 +349,33 @@ morie_bt_ci_ratio <- function(x, y, stat_x = NULL, stat_y = NULL,
   sx <- if (is.null(stat_x)) mean else stat_x
   sy <- if (is.null(stat_y)) mean else stat_y
   a <- as.numeric(alpha)
-  if (a <= 0 || a >= 1) stop(sprintf("alpha must lie in (0, 1), got %g.", a),
-                             call. = FALSE)
+  if (a <= 0 || a >= 1) {
+    stop(sprintf("alpha must lie in (0, 1), got %g.", a),
+      call. = FALSE
+    )
+  }
   Bn <- as.integer(B)
   if (is.na(Bn) || Bn < 100L) {
-    stop(sprintf("need at least 100 replicates for quantiles, got %s.",
-                 format(B)), call. = FALSE)
+    stop(sprintf(
+      "need at least 100 replicates for quantiles, got %s.",
+      format(B)
+    ), call. = FALSE)
   }
   if (isTRUE(paired) && length(xv) != length(yv)) {
     stop("paired resampling needs equal-length samples.", call. = FALSE)
   }
   den0 <- as.numeric(sy(yv))
-  if (den0 == 0) stop("the denominator statistic is zero on the data.",
-                      call. = FALSE)
+  if (den0 == 0) {
+    stop("the denominator statistic is zero on the data.",
+      call. = FALSE
+    )
+  }
   ratio <- as.numeric(sx(xv)) / den0
   old <- if (exists(".Random.seed", envir = globalenv())) {
     get(".Random.seed", envir = globalenv())
-  } else NULL
+  } else {
+    NULL
+  }
   set.seed(seed)
   on.exit(if (!is.null(old)) assign(".Random.seed", old, envir = globalenv()))
   reps <- numeric(Bn)
@@ -337,27 +388,35 @@ morie_bt_ci_ratio <- function(x, y, stat_x = NULL, stat_y = NULL,
       den <- as.numeric(sy(yv[idx]))
     } else {
       num <- as.numeric(sx(xv[sample.int(length(xv), length(xv),
-                                         replace = TRUE)]))
+        replace = TRUE
+      )]))
       den <- as.numeric(sy(yv[sample.int(length(yv), length(yv),
-                                         replace = TRUE)]))
+        replace = TRUE
+      )]))
     }
     if (abs(den) < 1e-3 * scale) small <- small + 1L
     reps[b] <- if (den != 0) num / den else NA_real_
   }
   good <- reps[is.finite(reps)]
   ci <- unname(stats::quantile(good, c(a / 2, 1 - a / 2), type = 7L))
-  list(ratio = ratio, ci = ci, replicates = reps, se = stats::sd(good),
-       small_denominator_fraction = small / Bn,
-       why_bootstrap = paste("a ratio's distribution is skewed and the",
-                             "delta method breaks down for small",
-                             "denominators; the percentile interval reads",
-                             "the quantiles directly"),
-       paired = isTRUE(paired),
-       pairing_note = paste("paired data must be resampled as PAIRS to keep",
-                            "the dependence; this is a modelling statement,",
-                            "not a convenience flag"),
-       B = Bn, alpha = a, n_x = length(xv), n_y = length(yv),
-       method = "Percentile bootstrap CI for a ratio (Davison-Hinkley 1997)")
+  list(
+    ratio = ratio, ci = ci, replicates = reps, se = stats::sd(good),
+    small_denominator_fraction = small / Bn,
+    why_bootstrap = paste(
+      "a ratio's distribution is skewed and the",
+      "delta method breaks down for small",
+      "denominators; the percentile interval reads",
+      "the quantiles directly"
+    ),
+    paired = isTRUE(paired),
+    pairing_note = paste(
+      "paired data must be resampled as PAIRS to keep",
+      "the dependence; this is a modelling statement,",
+      "not a convenience flag"
+    ),
+    B = Bn, alpha = a, n_x = length(xv), n_y = length(yv),
+    method = "Percentile bootstrap CI for a ratio (Davison-Hinkley 1997)"
+  )
 }
 
 
@@ -383,28 +442,43 @@ morie_vol_parkinson <- function(high, low, periods_per_year = NULL) {
   H <- as.numeric(high)
   L <- as.numeric(low)
   if (length(H) != length(L)) {
-    stop(sprintf("high has %d entries and low has %d.", length(H),
-                 length(L)), call. = FALSE)
+    stop(sprintf(
+      "high has %d entries and low has %d.", length(H),
+      length(L)
+    ), call. = FALSE)
   }
   n <- length(H)
-  if (n < 2L) stop(sprintf("need at least 2 bars, got %d.", n),
-                   call. = FALSE)
+  if (n < 2L) {
+    stop(sprintf("need at least 2 bars, got %d.", n),
+      call. = FALSE
+    )
+  }
   if (any(L <= 0)) stop("prices must be positive.", call. = FALSE)
-  if (any(H < L)) stop("high must be at least low in every bar.",
-                       call. = FALSE)
+  if (any(H < L)) {
+    stop("high must be at least low in every bar.",
+      call. = FALSE
+    )
+  }
   const <- 1 / (4 * log(2))
   v <- const * mean(log(H / L)^2)
   s <- sqrt(v)
-  list(variance = v, sigma = s,
-       sigma_annualised = if (is.null(periods_per_year)) NULL else
-         s * sqrt(as.numeric(periods_per_year)),
-       constant = const,
-       constant_note = paste("1/(4 log 2): E[(log range)^2] = 4 log2",
-                             "sigma^2 for driftless Brownian motion"),
-       efficiency_vs_close = 4.9,
-       drift_bias = "drift inflates the range, so trending periods read high",
-       n = n,
-       method = "Parkinson (1980) range estimator, 1/(4 log 2) mean squared log-range")
+  list(
+    variance = v, sigma = s,
+    sigma_annualised = if (is.null(periods_per_year)) {
+      NULL
+    } else {
+      s * sqrt(as.numeric(periods_per_year))
+    },
+    constant = const,
+    constant_note = paste(
+      "1/(4 log 2): E[(log range)^2] = 4 log2",
+      "sigma^2 for driftless Brownian motion"
+    ),
+    efficiency_vs_close = 4.9,
+    drift_bias = "drift inflates the range, so trending periods read high",
+    n = n,
+    method = "Parkinson (1980) range estimator, 1/(4 log 2) mean squared log-range"
+  )
 }
 
 
@@ -427,8 +501,10 @@ morie_vol_parkinson <- function(high, low, periods_per_year = NULL) {
 #' @references Garman and Klass (1980), *Journal of Business*
 #'   53:67-78, Eq. (20).
 #' @examples
-#' morie_vol_garman_klass(c(100, 101), c(102, 103), c(99, 100),
-#'                        c(101, 102))$sigma
+#' morie_vol_garman_klass(
+#'   c(100, 101), c(102, 103), c(99, 100),
+#'   c(101, 102)
+#' )$sigma
 #' @export
 morie_vol_garman_klass <- function(open_, high, low, close,
                                    periods_per_year = NULL) {
@@ -440,8 +516,11 @@ morie_vol_garman_klass <- function(open_, high, low, close,
   if (length(H) != n || length(L) != n || length(C) != n) {
     stop("open, high, low and close must share a length.", call. = FALSE)
   }
-  if (n < 2L) stop(sprintf("need at least 2 bars, got %d.", n),
-                   call. = FALSE)
+  if (n < 2L) {
+    stop(sprintf("need at least 2 bars, got %d.", n),
+      call. = FALSE
+    )
+  }
   if (any(L <= 0)) stop("prices must be positive.", call. = FALSE)
   if (any(H < L | O > H | O < L | C > H | C < L)) {
     stop("each bar needs low <= open, close <= high.", call. = FALSE)
@@ -451,23 +530,32 @@ morie_vol_garman_klass <- function(open_, high, low, close,
   per_bar <- 0.5 * hl - (2 * log(2) - 1) * co
   v <- mean(per_bar)
   if (v <= 0) {
-    stop(paste("the average Garman-Klass variance is not positive: the",
-               "driftless-diffusion model this estimator assumes does not",
-               "describe these bars."), call. = FALSE)
+    stop(paste(
+      "the average Garman-Klass variance is not positive: the",
+      "driftless-diffusion model this estimator assumes does not",
+      "describe these bars."
+    ), call. = FALSE)
   }
   s <- sqrt(v)
-  list(variance = v, sigma = s,
-       sigma_annualised = if (is.null(periods_per_year)) NULL else
-         s * sqrt(as.numeric(periods_per_year)),
-       range_term = mean(0.5 * hl),
-       openclose_term = mean((2 * log(2) - 1) * co),
-       negative_sign_note = paste("the open-close term enters NEGATIVELY:",
-                                  "given the range, a large open-to-close",
-                                  "move signals trend, not volatility"),
-       efficiency_vs_close = 7.4,
-       negative_bar_fraction = mean(per_bar < 0),
-       n = n,
-       method = "Garman-Klass (1980) Eq. (20)")
+  list(
+    variance = v, sigma = s,
+    sigma_annualised = if (is.null(periods_per_year)) {
+      NULL
+    } else {
+      s * sqrt(as.numeric(periods_per_year))
+    },
+    range_term = mean(0.5 * hl),
+    openclose_term = mean((2 * log(2) - 1) * co),
+    negative_sign_note = paste(
+      "the open-close term enters NEGATIVELY:",
+      "given the range, a large open-to-close",
+      "move signals trend, not volatility"
+    ),
+    efficiency_vs_close = 7.4,
+    negative_bar_fraction = mean(per_bar < 0),
+    n = n,
+    method = "Garman-Klass (1980) Eq. (20)"
+  )
 }
 
 
@@ -495,25 +583,33 @@ morie_vol_harmonic <- function(sigma) {
   n <- length(s)
   if (n < 1L) stop("need at least one volatility.", call. = FALSE)
   if (any(s <= 0)) {
-    stop(paste("volatilities must be positive; a zero makes the harmonic",
-               "mean zero regardless of everything else."), call. = FALSE)
+    stop(paste(
+      "volatilities must be positive; a zero makes the harmonic",
+      "mean zero regardless of everything else."
+    ), call. = FALSE)
   }
   hm <- n / sum(1 / s)
   gm <- exp(mean(log(s)))
   am <- mean(s)
   rms <- sqrt(mean(s^2))
-  list(harmonic = hm, geometric = gm, arithmetic = am, rms = rms,
-       inequality_holds = hm <= gm + 1e-12 && gm <= am + 1e-12,
-       which_to_use = paste("arithmetic on VARIANCES (the rms here) for",
-                            "aggregating sub-period volatility into a",
-                            "total; harmonic when the quantity enters",
-                            "through its reciprocal"),
-       contamination_asymmetry = paste("the harmonic mean is dominated by",
-                                       "the SMALLEST values: robust to",
-                                       "spuriously large sigmas, worst-case",
-                                       "for spuriously small ones"),
-       n = n,
-       method = "Harmonic / geometric / arithmetic / rms volatility aggregates")
+  list(
+    harmonic = hm, geometric = gm, arithmetic = am, rms = rms,
+    inequality_holds = hm <= gm + 1e-12 && gm <= am + 1e-12,
+    which_to_use = paste(
+      "arithmetic on VARIANCES (the rms here) for",
+      "aggregating sub-period volatility into a",
+      "total; harmonic when the quantity enters",
+      "through its reciprocal"
+    ),
+    contamination_asymmetry = paste(
+      "the harmonic mean is dominated by",
+      "the SMALLEST values: robust to",
+      "spuriously large sigmas, worst-case",
+      "for spuriously small ones"
+    ),
+    n = n,
+    method = "Harmonic / geometric / arithmetic / rms volatility aggregates"
+  )
 }
 
 
@@ -543,15 +639,22 @@ morie_vol_harmonic <- function(sigma) {
 morie_vol_noise <- function(r_intraday, K = NULL) {
   r <- as.numeric(r_intraday)
   n <- length(r)
-  if (n < 30L) stop(sprintf("need at least 30 intraday returns, got %d.", n),
-                    call. = FALSE)
+  if (n < 30L) {
+    stop(sprintf("need at least 30 intraday returns, got %d.", n),
+      call. = FALSE
+    )
+  }
   rv_all <- sum(r^2)
   noise_var <- rv_all / (2 * n)
-  KK <- if (is.null(K)) max(2L, as.integer(round(n^(2 / 3)))) else
+  KK <- if (is.null(K)) {
+    max(2L, as.integer(round(n^(2 / 3))))
+  } else {
     as.integer(K)
+  }
   if (KK < 2L || KK > n %/% 2L) {
     stop(sprintf("K must lie in 2..%d, got %d.", n %/% 2L, KK),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   p <- c(0, cumsum(r))
   rvs <- counts <- numeric(0)
@@ -564,13 +667,17 @@ morie_vol_noise <- function(r_intraday, K = NULL) {
   }
   rv_avg <- mean(rvs)
   nbar <- mean(counts)
-  list(noise_variance = noise_var, noise_sd = sqrt(noise_var),
-       rv_all = rv_all, rv_subsampled = rv_avg,
-       iv_two_scale = rv_avg - (nbar / n) * rv_all, K = KK,
-       noise_share_of_rv = 2 * n * noise_var / rv_all,
-       signature_note = paste("E[RV_all] = IV + 2n E[eps^2]: at the finest",
-                              "grid the noise term dominates, which is why",
-                              "naive RV gets WORSE as sampling gets finer"),
-       n = n,
-       method = "Noise variance RV_all/(2n) and two-scale IV (ZMA 2005)")
+  list(
+    noise_variance = noise_var, noise_sd = sqrt(noise_var),
+    rv_all = rv_all, rv_subsampled = rv_avg,
+    iv_two_scale = rv_avg - (nbar / n) * rv_all, K = KK,
+    noise_share_of_rv = 2 * n * noise_var / rv_all,
+    signature_note = paste(
+      "E[RV_all] = IV + 2n E[eps^2]: at the finest",
+      "grid the noise term dominates, which is why",
+      "naive RV gets WORSE as sampling gets finer"
+    ),
+    n = n,
+    method = "Noise variance RV_all/(2n) and two-scale IV (ZMA 2005)"
+  )
 }

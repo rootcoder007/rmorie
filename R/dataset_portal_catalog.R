@@ -97,8 +97,10 @@
 #' nrow(catalog)
 #' @export
 morie_dataset_portal_catalog_clear_cache <- function() {
-  rm(list = ls(.morie_portal_catalog_env),
-     envir = .morie_portal_catalog_env)
+  rm(
+    list = ls(.morie_portal_catalog_env),
+    envir = .morie_portal_catalog_env
+  )
   invisible(NULL)
 }
 
@@ -141,13 +143,15 @@ morie_dataset_portal_catalog_clear_cache <- function() {
 #'   [morie_datasets_load_by_key()], [morie_datasets_browse()]
 #' @export
 morie_dataset_portal_catalog <- function(portal = NULL) {
-  portal_choices <- c("chicago", "nyc_nypd", "nyc_opendata",
-                      "tps_arcgis_hub", "tps_psdp",
-                      "ontario_ckan", "vancouver_opendata",
-                      "vpd_geodash", "statcan_ccjs",
-                      "montreal_opendata", "toronto_opendata",
-                      "calgary_opendata", "edmonton_opendata",
-                      "ottawa_opendata")
+  portal_choices <- c(
+    "chicago", "nyc_nypd", "nyc_opendata",
+    "tps_arcgis_hub", "tps_psdp",
+    "ontario_ckan", "vancouver_opendata",
+    "vpd_geodash", "statcan_ccjs",
+    "montreal_opendata", "toronto_opendata",
+    "calgary_opendata", "edmonton_opendata",
+    "ottawa_opendata"
+  )
   if (!is.null(portal)) {
     portal <- match.arg(portal, choices = portal_choices)
   }
@@ -190,10 +194,14 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
       api_modes = socrata_modes,
       loader = sprintf("morie_datasets_%s", k),
       dict_url = if (!is.null(e$data_dictionary_url) &&
-                       !is.na(e$data_dictionary_url))
-                    e$data_dictionary_url else NA_character_,
+        !is.na(e$data_dictionary_url)) {
+        e$data_dictionary_url
+      } else {
+        NA_character_
+      },
       n_rows_bundled = .morie_portal_fixture_rows(e$fixture),
-      stringsAsFactors = FALSE))
+      stringsAsFactors = FALSE
+    ))
   }
 
   # --- NYC OpenData BULK (3GGG1, 2851 entities) ----------------
@@ -205,10 +213,13 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
       id = nyc_bulk$soda_id[i],
       api_modes = "soda2,soda2_csv,soda2_geojson,soda3,odata",
       loader = "morie_datasets_nyc_socrata_by_id",
-      dict_url = sprintf("https://data.cityofnewyork.us/d/%s",
-                          nyc_bulk$soda_id[i]),
+      dict_url = sprintf(
+        "https://data.cityofnewyork.us/d/%s",
+        nyc_bulk$soda_id[i]
+      ),
       n_rows_bundled = NA_integer_,
-      stringsAsFactors = FALSE))
+      stringsAsFactors = FALSE
+    ))
   }
 
   # --- Chicago Open Data BULK (3GGG2, 1856 entities) -----------
@@ -220,20 +231,29 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
       id = chi_bulk$soda_id[i],
       api_modes = "soda2,soda2_csv,soda2_geojson,soda3,odata",
       loader = "morie_datasets_chicago_socrata_by_id",
-      dict_url = sprintf("https://data.cityofchicago.org/d/%s",
-                          chi_bulk$soda_id[i]),
+      dict_url = sprintf(
+        "https://data.cityofchicago.org/d/%s",
+        chi_bulk$soda_id[i]
+      ),
       n_rows_bundled = NA_integer_,
-      stringsAsFactors = FALSE))
+      stringsAsFactors = FALSE
+    ))
   }
 
   # --- External Socrata (Chicago + NYPD SQF) --------------------
   ext <- morie_datasets_external_socrata_layers()
   for (i in seq_len(nrow(ext))) {
-    rid <- sub(".*resource/([^.]+)\\.json.*", "\\1",
-                ext$resource_url[i])
-    src <- if (grepl("cityofchicago", ext$portal[i])) "chicago"
-           else if (grepl("cityofnewyork", ext$portal[i])) "nyc_opendata"
-           else ext$portal[i]
+    rid <- sub(
+      ".*resource/([^.]+)\\.json.*", "\\1",
+      ext$resource_url[i]
+    )
+    src <- if (grepl("cityofchicago", ext$portal[i])) {
+      "chicago"
+    } else if (grepl("cityofnewyork", ext$portal[i])) {
+      "nyc_opendata"
+    } else {
+      ext$portal[i]
+    }
     push(data.frame(
       dataset_key = ext$dataset_key[i],
       source = src,
@@ -242,7 +262,8 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
       loader = sprintf("morie_datasets_%s", ext$dataset_key[i]),
       dict_url = NA_character_,
       n_rows_bundled = .morie_portal_fixture_rows(ext$fixture[i]),
-      stringsAsFactors = FALSE))
+      stringsAsFactors = FALSE
+    ))
   }
 
   # --- TPS PSDP (11 layers) -------------------------------------
@@ -256,7 +277,8 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
       loader = sprintf("morie_datasets_tps_%s", psdp$layer_key[i]),
       dict_url = NA_character_,
       n_rows_bundled = .morie_portal_fixture_rows(psdp$fixture[i]),
-      stringsAsFactors = FALSE))
+      stringsAsFactors = FALSE
+    ))
   }
 
   # --- TPS ArcGIS Hub (71 catalog items, by hub_id) -------------
@@ -270,7 +292,8 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
       loader = "morie_datasets_tps_arcgis_hub_by_id",
       dict_url = NA_character_,
       n_rows_bundled = NA_integer_,
-      stringsAsFactors = FALSE))
+      stringsAsFactors = FALSE
+    ))
   }
 
   # --- Ontario CKAN (OTIS family) -------------------------------
@@ -284,7 +307,8 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
       loader = "morie_datasets_ontario_ckan_by_key",
       dict_url = NA_character_,
       n_rows_bundled = .morie_portal_fixture_rows(ock$fixture[i]),
-      stringsAsFactors = FALSE))
+      stringsAsFactors = FALSE
+    ))
   }
 
   # --- NYC OpenData boundary loaders (7 fixtures from 3CCC2) ---
@@ -298,7 +322,8 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
       loader = bnd$loader[i],
       dict_url = NA_character_,
       n_rows_bundled = bnd$n_rows[i],
-      stringsAsFactors = FALSE))
+      stringsAsFactors = FALSE
+    ))
   }
 
   # --- Vancouver Open Data BULK (3HHH2, 190 datasets) ---------
@@ -309,50 +334,71 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
       dataset_key = lk, source = "vancouver_opendata", id = lk,
       api_modes = "opendatasoft_v21",
       loader = "morie_datasets_vancouver_opendata_by_id",
-      dict_url = sprintf("https://opendata.vancouver.ca/explore/dataset/%s",
-                          lk),
+      dict_url = sprintf(
+        "https://opendata.vancouver.ca/explore/dataset/%s",
+        lk
+      ),
       n_rows_bundled = NA_integer_,
-      stringsAsFactors = FALSE))
+      stringsAsFactors = FALSE
+    ))
   }
 
   # --- Calgary Open Data BULK (3GGG4, 933 entities) -----------
   cal_bulk <- quiet(morie_datasets_calgary_opendata_bulk_layers(offline = TRUE))
-  cal_n_map <- c("78gh-n26t" = 200L, "bdez-pds9" = 200L,
-                  "cqsb-2hhg" = 43L)
-  cal_loader_map <- c("78gh-n26t" = "morie_datasets_calgary_community_crime_stats",
-                       "bdez-pds9" = "morie_datasets_calgary_fire_response_calls",
-                       "cqsb-2hhg" = "morie_datasets_calgary_fire_stations")
+  cal_n_map <- c(
+    "78gh-n26t" = 200L, "bdez-pds9" = 200L,
+    "cqsb-2hhg" = 43L
+  )
+  cal_loader_map <- c(
+    "78gh-n26t" = "morie_datasets_calgary_community_crime_stats",
+    "bdez-pds9" = "morie_datasets_calgary_fire_response_calls",
+    "cqsb-2hhg" = "morie_datasets_calgary_fire_stations"
+  )
   for (i in seq_len(nrow(cal_bulk))) {
     lk <- cal_bulk$soda_id[i]
     push(data.frame(
       dataset_key = lk, source = "calgary_opendata", id = lk,
       api_modes = "soda2,soda2_csv,soda2_geojson,soda3,odata",
-      loader = unname(if (lk %in% names(cal_loader_map))
-                         cal_loader_map[[lk]]
-                       else "morie_datasets_calgary_socrata_by_id"),
+      loader = unname(if (lk %in% names(cal_loader_map)) {
+        cal_loader_map[[lk]]
+      } else {
+        "morie_datasets_calgary_socrata_by_id"
+      }),
       dict_url = sprintf("https://data.calgary.ca/d/%s", lk),
-      n_rows_bundled = unname(if (lk %in% names(cal_n_map))
-                                 cal_n_map[[lk]] else NA_integer_),
-      stringsAsFactors = FALSE))
+      n_rows_bundled = unname(if (lk %in% names(cal_n_map)) {
+        cal_n_map[[lk]]
+      } else {
+        NA_integer_
+      }),
+      stringsAsFactors = FALSE
+    ))
   }
 
   # --- Edmonton Open Data BULK (3GGG, 2027 entities) ----------
   edm_bulk <- quiet(morie_datasets_edmonton_opendata_bulk_layers(offline = TRUE))
   edm_n_map <- c("e7aq-scxv" = 10L, "b4y7-zhnz" = 31L)
-  edm_loader_map <- c("e7aq-scxv" = "morie_datasets_edmonton_police_stations",
-                       "b4y7-zhnz" = "morie_datasets_edmonton_fire_stations")
+  edm_loader_map <- c(
+    "e7aq-scxv" = "morie_datasets_edmonton_police_stations",
+    "b4y7-zhnz" = "morie_datasets_edmonton_fire_stations"
+  )
   for (i in seq_len(nrow(edm_bulk))) {
     lk <- edm_bulk$soda_id[i]
     push(data.frame(
       dataset_key = lk, source = "edmonton_opendata", id = lk,
       api_modes = "soda2,soda2_csv,soda2_geojson,soda3,odata",
-      loader = unname(if (lk %in% names(edm_loader_map))
-                         edm_loader_map[[lk]]
-                       else "morie_datasets_edmonton_socrata_by_id"),
+      loader = unname(if (lk %in% names(edm_loader_map)) {
+        edm_loader_map[[lk]]
+      } else {
+        "morie_datasets_edmonton_socrata_by_id"
+      }),
       dict_url = sprintf("https://data.edmonton.ca/d/%s", lk),
-      n_rows_bundled = unname(if (lk %in% names(edm_n_map))
-                                 edm_n_map[[lk]] else NA_integer_),
-      stringsAsFactors = FALSE))
+      n_rows_bundled = unname(if (lk %in% names(edm_n_map)) {
+        edm_n_map[[lk]]
+      } else {
+        NA_integer_
+      }),
+      stringsAsFactors = FALSE
+    ))
   }
 
   # --- Ottawa Open Data BULK (3GGG5, 287 datasets) ------------
@@ -363,32 +409,43 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
       source = "ottawa_opendata", id = ott_bulk$hub_id[i],
       api_modes = "arcgis_rest,arcgis_hub",
       loader = "morie_datasets_tps_arcgis_hub_by_id",
-      dict_url = sprintf("https://open.ottawa.ca/datasets/%s",
-                          ott_bulk$hub_id[i]),
+      dict_url = sprintf(
+        "https://open.ottawa.ca/datasets/%s",
+        ott_bulk$hub_id[i]
+      ),
       n_rows_bundled = NA_integer_,
-      stringsAsFactors = FALSE))
+      stringsAsFactors = FALSE
+    ))
   }
 
   # --- Toronto Open Data BULK (3GGG3, 540 packages) -----------
   tor_bulk <- quiet(morie_datasets_toronto_opendata_bulk_layers(offline = TRUE))
   tor_loader_map <- c(
     "ambulance-station-locations" = "morie_datasets_toronto_ambulance_stations",
-    "police-annual-statistical-report-miscellaneous-data" = "morie_datasets_toronto_asr_miscellaneous")
+    "police-annual-statistical-report-miscellaneous-data" = "morie_datasets_toronto_asr_miscellaneous"
+  )
   tor_n_map <- c(
     "ambulance-station-locations" = 46L,
-    "police-annual-statistical-report-miscellaneous-data" = 40L)
+    "police-annual-statistical-report-miscellaneous-data" = 40L
+  )
   for (i in seq_len(nrow(tor_bulk))) {
     lk <- tor_bulk$package_name[i]
     push(data.frame(
       dataset_key = lk, source = "toronto_opendata", id = lk,
       api_modes = "ckan",
-      loader = unname(if (lk %in% names(tor_loader_map))
-                         tor_loader_map[[lk]]
-                       else "morie_datasets_toronto_open_ckan_resource"),
+      loader = unname(if (lk %in% names(tor_loader_map)) {
+        tor_loader_map[[lk]]
+      } else {
+        "morie_datasets_toronto_open_ckan_resource"
+      }),
       dict_url = sprintf("https://open.toronto.ca/dataset/%s", lk),
-      n_rows_bundled = unname(if (lk %in% names(tor_n_map))
-                                 tor_n_map[[lk]] else NA_integer_),
-      stringsAsFactors = FALSE))
+      n_rows_bundled = unname(if (lk %in% names(tor_n_map)) {
+        tor_n_map[[lk]]
+      } else {
+        NA_integer_
+      }),
+      stringsAsFactors = FALSE
+    ))
   }
 
   # --- Montreal Open Data BULK (3HHH1, 401 packages) ----------
@@ -398,13 +455,19 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
     push(data.frame(
       dataset_key = lk, source = "montreal_opendata", id = lk,
       api_modes = "ckan",
-      loader = if (lk == "interventions-service-securite-incendie-montreal")
-                "morie_datasets_montreal_sim_interventions"
-              else "morie_datasets_montreal_ckan_resource",
+      loader = if (lk == "interventions-service-securite-incendie-montreal") {
+        "morie_datasets_montreal_sim_interventions"
+      } else {
+        "morie_datasets_montreal_ckan_resource"
+      },
       dict_url = sprintf("https://donnees.montreal.ca/dataset/%s", lk),
-      n_rows_bundled = if (lk == "interventions-service-securite-incendie-montreal")
-                         349L else NA_integer_,
-      stringsAsFactors = FALSE))
+      n_rows_bundled = if (lk == "interventions-service-securite-incendie-montreal") {
+        349L
+      } else {
+        NA_integer_
+      },
+      stringsAsFactors = FALSE
+    ))
   }
 
   # --- StatCan CCJS WDS REST cubes (10 curated) ----------------
@@ -416,10 +479,13 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
       id = as.character(sc$product_id[i]),
       api_modes = "statcan_wds",
       loader = "morie_datasets_statcan_cube_metadata",
-      dict_url = sprintf("https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=%d",
-                          sc$product_id[i]),
+      dict_url = sprintf(
+        "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=%d",
+        sc$product_id[i]
+      ),
       n_rows_bundled = NA_integer_,
-      stringsAsFactors = FALSE))
+      stringsAsFactors = FALSE
+    ))
   }
 
   # --- VPD GeoDASH (manual download, sample included) -----------
@@ -431,7 +497,8 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
     loader = "morie_datasets_vpd_crime",
     dict_url = "https://geodash.vpd.ca/opendata/",
     n_rows_bundled = .morie_portal_fixture_rows("vpd_crime_sample.csv"),
-    stringsAsFactors = FALSE))
+    stringsAsFactors = FALSE
+  ))
 
   out <- do.call(rbind, rows)
   rownames(out) <- NULL
@@ -442,18 +509,21 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
 
   if (!is.null(portal)) {
     portal <- match.arg(portal,
-                         choices = c("chicago", "nyc_nypd",
-                                      "nyc_opendata",
-                                      "tps_arcgis_hub", "tps_psdp",
-                                      "ontario_ckan",
-                                      "vancouver_opendata",
-                                      "vpd_geodash",
-                                      "statcan_ccjs",
-                                      "montreal_opendata",
-                                      "toronto_opendata",
-                                      "calgary_opendata",
-                                      "edmonton_opendata",
-                                      "ottawa_opendata"))
+      choices = c(
+        "chicago", "nyc_nypd",
+        "nyc_opendata",
+        "tps_arcgis_hub", "tps_psdp",
+        "ontario_ckan",
+        "vancouver_opendata",
+        "vpd_geodash",
+        "statcan_ccjs",
+        "montreal_opendata",
+        "toronto_opendata",
+        "calgary_opendata",
+        "edmonton_opendata",
+        "ottawa_opendata"
+      )
+    )
     out <- out[out$source == portal, , drop = FALSE]
     rownames(out) <- NULL
   }
@@ -467,12 +537,16 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
 #' Internal helper: Morie Portal Fixture Rows
 #' @noRd
 .morie_portal_fixture_rows <- function(fname) {
-  if (is.null(fname) || is.na(fname) || !nzchar(fname))
+  if (is.null(fname) || is.na(fname) || !nzchar(fname)) {
     return(NA_integer_)
+  }
   path <- system.file("extdata", fname, package = "rmorie")
-  if (!nzchar(path))
+  if (!nzchar(path)) {
     path <- system.file("extdata", fname, package = "rmoriedata")
-  if (!nzchar(path)) return(NA_integer_)
+  }
+  if (!nzchar(path)) {
+    return(NA_integer_)
+  }
   # Lightweight row count via tally of newlines minus the header.
   n_lines <- length(readLines(path, warn = FALSE))
   max(0L, n_lines - 1L)

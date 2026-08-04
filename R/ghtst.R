@@ -12,7 +12,7 @@
 #' morie_ghosal_np_testing(x = rnorm(50))
 #' @export
 morie_ghosal_np_testing <- function(x, ref_loc = 0, ref_scale = 1, depth = 6,
-                              c = 1.0) {
+                                    c = 1.0) {
   x <- as.numeric(x)
   n <- length(x)
   if (n < 2) {

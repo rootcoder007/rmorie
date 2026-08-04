@@ -13,8 +13,8 @@
 #' morie_ghosal_gp_squared_exponential(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_ghosal_gp_squared_exponential <- function(x, y, length_scale = NULL,
-                                          sigma_f = 1.0, noise = NULL,
-                                          x_star = NULL) {
+                                                sigma_f = 1.0, noise = NULL,
+                                                x_star = NULL) {
   if (is.vector(x)) x <- matrix(as.numeric(x), ncol = 1L) else x <- as.matrix(x)
   y <- as.numeric(y)
   n <- nrow(x)

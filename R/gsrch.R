@@ -65,17 +65,19 @@ morie_grid_search_cv <- function(x, y, method = NULL, tune_grid = NULL,
   metric <- if (task == "classification") "Accuracy" else "RMSE"
   scores <- if (metric %in% names(results)) results[[metric]] else results[[1L]]
   list(
-    estimate              = as.numeric(max(scores, na.rm = TRUE)),
-    best_params           = as.list(best),
-    best_score            = as.numeric(max(scores, na.rm = TRUE)),
+    estimate = as.numeric(max(scores, na.rm = TRUE)),
+    best_params = as.list(best),
+    best_score = as.numeric(max(scores, na.rm = TRUE)),
     cv_results_params = results[
-      , setdiff(colnames(results),
-                c("Accuracy", "Kappa", "RMSE", "Rsquared", "MAE")),
+      , setdiff(
+        colnames(results),
+        c("Accuracy", "Kappa", "RMSE", "Rsquared", "MAE")
+      ),
       drop = FALSE
     ],
     cv_results_mean_score = scores,
-    task                  = task,
-    n                     = nrow(x),
-    method                = sprintf("Grid search CV (%s)", method)
+    task = task,
+    n = nrow(x),
+    method = sprintf("Grid search CV (%s)", method)
   )
 }

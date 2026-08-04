@@ -52,8 +52,10 @@ NULL
 #' @return The intensity \eqn{\lambda(t_q, x_q, y_q)} (a non-negative scalar).
 #' @examples
 #' ev <- data.frame(t = c(0.1, 0.5), x = c(0, 1), y = c(0, 1))
-#' morie_hawkes_st_intensity(ev, 0.6, 0.1, 0.1,
-#'                           list(mu = 0.2, alpha = 0.5, beta = 1, sigma = 0.5))
+#' morie_hawkes_st_intensity(
+#'   ev, 0.6, 0.1, 0.1,
+#'   list(mu = 0.2, alpha = 0.5, beta = 1, sigma = 0.5)
+#' )
 #' @export
 morie_hawkes_st_intensity <- function(events, t_q, x_q, y_q, params) {
   .hst_check_params(params)
@@ -87,9 +89,11 @@ morie_hawkes_st_intensity <- function(events, t_q, x_q, y_q, params) {
 #' @examples
 #' ev <- morie_hawkes_st_simulate(
 #'   list(mu = 0.2, alpha = 0.5, beta = 1, sigma = 0.3),
-#'   end_time = 20, region = c(0, 10, 0, 10), seed = 1)
+#'   end_time = 20, region = c(0, 10, 0, 10), seed = 1
+#' )
 #' morie_hawkes_st_loglik(ev, list(mu = 0.2, alpha = 0.5, beta = 1, sigma = 0.3),
-#'                        end_time = 20, area = 100)
+#'   end_time = 20, area = 100
+#' )
 #' @export
 morie_hawkes_st_loglik <- function(events, params, end_time = NULL, area = 1) {
   .hst_check_params(params)
@@ -102,7 +106,9 @@ morie_hawkes_st_loglik <- function(events, params, end_time = NULL, area = 1) {
   y <- y[o]
   n <- length(t)
   T_h <- end_time %||% max(t)
-  if (n == 0L) return(-params$mu * T_h * area)
+  if (n == 0L) {
+    return(-params$mu * T_h * area)
+  }
 
   # Sum of log-intensities at each event (O(n^2) pairwise).
   loglam <- 0
@@ -112,7 +118,7 @@ morie_hawkes_st_loglik <- function(events, params, end_time = NULL, area = 1) {
       dt <- t[j] - t[seq_len(j - 1L)]
       d2 <- (x[j] - x[seq_len(j - 1L)])^2 + (y[j] - y[seq_len(j - 1L)])^2
       lam <- lam + sum(params$alpha * params$beta * exp(-params$beta * dt) *
-                         .hst_spatial(d2, params$sigma))
+        .hst_spatial(d2, params$sigma))
     }
     loglam <- loglam + log(lam)
   }
@@ -140,7 +146,8 @@ morie_hawkes_st_loglik <- function(events, params, end_time = NULL, area = 1) {
 #'   (generation: 0 = immigrant), sorted by \code{t}.
 #' @examples
 #' morie_hawkes_st_simulate(list(mu = 0.1, alpha = 0.4, beta = 1, sigma = 0.5),
-#'                          end_time = 10, region = c(0, 5, 0, 5), seed = 42)
+#'   end_time = 10, region = c(0, 5, 0, 5), seed = 42
+#' )
 #' @export
 morie_hawkes_st_simulate <- function(params, end_time, region, seed = NULL,
                                      max_events = 1e5L) {
@@ -227,23 +234,31 @@ morie_hawkes_st_simulate <- function(params, end_time, region, seed = NULL,
 #' @examples
 #' ev <- morie_hawkes_st_simulate(
 #'   list(mu = 0.2, alpha = 0.5, beta = 1, sigma = 0.4),
-#'   end_time = 40, region = c(0, 10, 0, 10), seed = 7)
+#'   end_time = 40, region = c(0, 10, 0, 10), seed = 7
+#' )
 #' morie_hawkes_st_fit(ev, end_time = 40, area = 100)$params
 #' @export
 morie_hawkes_st_fit <- function(events, end_time = NULL, area = 1,
                                 start = NULL) {
   t <- as.numeric(events$t)
   T_h <- end_time %||% max(t)
-  s <- start %||% list(mu = max(length(t) / (T_h * area), 1e-3),
-                       alpha = 0.3, beta = 1, sigma = 1)
+  s <- start %||% list(
+    mu = max(length(t) / (T_h * area), 1e-3),
+    alpha = 0.3, beta = 1, sigma = 1
+  )
   par0 <- log(c(s$mu, s$alpha, s$beta, s$sigma))
   nll <- function(lp) {
-    p <- list(mu = exp(lp[1]), alpha = exp(lp[2]),
-              beta = exp(lp[3]), sigma = exp(lp[4]))
+    p <- list(
+      mu = exp(lp[1]), alpha = exp(lp[2]),
+      beta = exp(lp[3]), sigma = exp(lp[4])
+    )
     val <- tryCatch(
       morie_hawkes_st_loglik(events, p, end_time = T_h, area = area),
-      error = function(e) NA_real_)
-    if (!is.finite(val)) return(1e10)
+      error = function(e) NA_real_
+    )
+    if (!is.finite(val)) {
+      return(1e10)
+    }
     -val
   }
   opt <- stats::optim(par0, nll, method = "L-BFGS-B")
@@ -267,17 +282,22 @@ morie_hawkes_st_fit <- function(events, end_time = NULL, area = 1,
 #' # longer horizons (e.g. end_time = 40) for real analyses.
 #' ev <- morie_hawkes_st_simulate(
 #'   list(mu = 0.2, alpha = 0.5, beta = 1, sigma = 0.4),
-#'   end_time = 12, region = c(0, 10, 0, 10), seed = 7)
+#'   end_time = 12, region = c(0, 10, 0, 10), seed = 7
+#' )
 #' obj <- morie_hawkes_st_fit(ev, end_time = 12, area = 100)$params
 #' print(obj)
 #' }
 #' @export
 print.morie_hawkes_st_fit <- function(x, ...) {
   p <- x$params
-  cat(sprintf("Spatiotemporal Hawkes fit (n = %d, logLik = %.2f)\n",
-              x$n, x$loglik))
-  cat(sprintf("  mu = %.4g  alpha = %.4g%s  beta = %.4g  sigma = %.4g\n",
-              p$mu, p$alpha, if (p$alpha >= 1) " (UNSTABLE, >=1)" else "",
-              p$beta, p$sigma))
+  cat(sprintf(
+    "Spatiotemporal Hawkes fit (n = %d, logLik = %.2f)\n",
+    x$n, x$loglik
+  ))
+  cat(sprintf(
+    "  mu = %.4g  alpha = %.4g%s  beta = %.4g  sigma = %.4g\n",
+    p$mu, p$alpha, if (p$alpha >= 1) " (UNSTABLE, >=1)" else "",
+    p$beta, p$sigma
+  ))
   invisible(x)
 }

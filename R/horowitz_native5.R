@@ -76,16 +76,21 @@ morie_lewbel_binary <- function(x, y, z, bandwidth = NULL, instruments = NULL,
     stop("x must have one row per entry of y.", call. = FALSE)
   }
   if (length(v) != length(yv)) {
-    stop(sprintf("z must have one entry per row of x, got %d for %d.",
-                 length(v), length(yv)), call. = FALSE)
+    stop(sprintf(
+      "z must have one entry per row of x, got %d for %d.",
+      length(v), length(yv)
+    ), call. = FALSE)
   }
   if (!all(yv %in% c(0, 1))) stop("y must be binary 0/1.", call. = FALSE)
   if (!density %in% c("nonparametric", "normal")) {
     stop("density must be 'nonparametric' or 'normal'.", call. = FALSE)
   }
   n <- length(yv)
-  if (n < 10L) stop(sprintf("need at least 10 observations, got %d.", n),
-                    call. = FALSE)
+  if (n < 10L) {
+    stop(sprintf("need at least 10 observations, got %d.", n),
+      call. = FALSE
+    )
+  }
 
   has_const <- any(apply(X, 2L, function(cc) isTRUE(all.equal(cc, rep(cc[1L], n)))))
   Xd <- if (has_const) X else cbind(1, X)
@@ -93,8 +98,11 @@ morie_lewbel_binary <- function(x, y, z, bandwidth = NULL, instruments = NULL,
 
   zi <- NULL
   if (!is.null(instruments)) {
-    zi <- if (is.matrix(instruments)) instruments else
+    zi <- if (is.matrix(instruments)) {
+      instruments
+    } else {
       matrix(as.numeric(instruments), ncol = 1L)
+    }
     if (nrow(zi) != n) zi <- t(zi)
     if (nrow(zi) != n) {
       stop("instruments must have one row per observation.", call. = FALSE)
@@ -102,8 +110,10 @@ morie_lewbel_binary <- function(x, y, z, bandwidth = NULL, instruments = NULL,
     zc <- any(apply(zi, 2L, function(cc) isTRUE(all.equal(cc, rep(cc[1L], n)))))
     if (!zc) zi <- cbind(1, zi)
     if (ncol(zi) < d) {
-      stop(sprintf("need at least %d instruments for %d regressors, got %d.",
-                   d, d, ncol(zi)), call. = FALSE)
+      stop(sprintf(
+        "need at least %d instruments for %d regressors, got %d.",
+        d, d, ncol(zi)
+      ), call. = FALSE)
     }
   }
 
@@ -119,26 +129,33 @@ morie_lewbel_binary <- function(x, y, z, bandwidth = NULL, instruments = NULL,
     sd_u <- sqrt(mean(u^2))
     if (sd_u <= 0) {
       stop("the special regressor is fully explained by S; U has zero variance and f(U) is undefined.",
-           call. = FALSE)
+        call. = FALSE
+      )
     }
     fhat <- stats::dnorm(u / sd_u) / sd_u
     hh <- NULL
   } else {
     hh <- if (is.null(bandwidth)) .hrz_silverman(u) else as.numeric(bandwidth)
-    if (hh <= 0) stop(sprintf("bandwidth must be positive, got %g.", hh),
-                      call. = FALSE)
+    if (hh <= 0) {
+      stop(sprintf("bandwidth must be positive, got %g.", hh),
+        call. = FALSE
+      )
+    }
     fhat <- rowSums(.hrz_gauss_kernel(outer(u, u, "-") / hh)) / (n * hh)
   }
   if (any(fhat <= 0)) {
     stop("the fitted density of U vanishes at some observation; T would be undefined there.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
 
   # Step 3: T = [Y - I(V >= 0)] / f(U)
   tt <- (yv - as.numeric(v >= 0)) / fhat
 
   # Step 4: linear regression of T on X, 2SLS when instruments given
-  a_mat <- if (is.null(zi)) Xd else {
+  a_mat <- if (is.null(zi)) {
+    Xd
+  } else {
     pz <- qr.coef(qr(zi), Xd)
     pz[is.na(pz)] <- 0
     zi %*% pz
@@ -149,15 +166,19 @@ morie_lewbel_binary <- function(x, y, z, bandwidth = NULL, instruments = NULL,
   resid <- as.numeric(tt - Xd %*% beta)
   dof <- max(n - d, 1L)
   xtx <- crossprod(a_mat)
-  xtx_inv <- tryCatch(solve(xtx), error = function(e)
+  xtx_inv <- tryCatch(solve(xtx), error = function(e) {
     stop("the regressor cross-product is singular; beta is not identified.",
-         call. = FALSE))
+      call. = FALSE
+    )
+  })
   se <- unname(sqrt(diag(xtx_inv) * sum(resid^2) / dof))
 
-  list(beta = beta, se = se, coefficient_on_V = 1,
-       min_density = min(fhat), max_weight = max(1 / fhat),
-       root_n_consistent = TRUE, heteroskedasticity_allowed = TRUE,
-       identifies_choice_probabilities = TRUE,
-       bandwidth = hh, endogenous = !is.null(zi), n = n, d = d,
-       method = "Lewbel special regressor: T = [Y - I(V >= 0)] / f(U), then a linear regression")
+  list(
+    beta = beta, se = se, coefficient_on_V = 1,
+    min_density = min(fhat), max_weight = max(1 / fhat),
+    root_n_consistent = TRUE, heteroskedasticity_allowed = TRUE,
+    identifies_choice_probabilities = TRUE,
+    bandwidth = hh, endogenous = !is.null(zi), n = n, d = d,
+    method = "Lewbel special regressor: T = [Y - I(V >= 0)] / f(U), then a linear regression"
+  )
 }

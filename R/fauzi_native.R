@@ -64,14 +64,18 @@
 # O(h^2) everywhere including at the edge.
 .fz_transform <- function(kind = "log") {
   if (identical(kind, "log")) {
-    return(list(g = exp, g_inv = log, dg = exp, d2g = exp,
-                support = c(0, Inf), name = "exp/log"))
+    return(list(
+      g = exp, g_inv = log, dg = exp, d2g = exp,
+      support = c(0, Inf), name = "exp/log"
+    ))
   }
   if (identical(kind, "identity")) {
-    return(list(g = function(z) z, g_inv = function(t) t,
-                dg = function(z) rep(1, length(z)),
-                d2g = function(z) rep(0, length(z)),
-                support = c(-Inf, Inf), name = "identity"))
+    return(list(
+      g = function(z) z, g_inv = function(t) t,
+      dg = function(z) rep(1, length(z)),
+      d2g = function(z) rep(0, length(z)),
+      support = c(-Inf, Inf), name = "identity"
+    ))
   }
   stop("kind must be 'log' or 'identity'.", call. = FALSE)
 }
@@ -82,25 +86,36 @@
 # trade the book makes explicit.
 .fz_muller <- function(u, m = 4L) {
   m <- as.integer(m)
-  if (m == 2L) return(.fz_K(u))
-  if (m == 4L) return((3 - u^2) / 2 * .fz_K(u))
-  if (m == 6L) return((15 - 10 * u^2 + u^4) / 8 * .fz_K(u))
+  if (m == 2L) {
+    return(.fz_K(u))
+  }
+  if (m == 4L) {
+    return((3 - u^2) / 2 * .fz_K(u))
+  }
+  if (m == 6L) {
+    return((15 - 10 * u^2 + u^4) / 8 * .fz_K(u))
+  }
   stop("m must be 2, 4 or 6.", call. = FALSE)
 }
 
 .fz_check_sample <- function(x, min_n = 2L) {
   x <- as.numeric(x)
   if (length(x) < min_n) {
-    stop(sprintf("need at least %d observations, got %d.",
-                 min_n, length(x)), call. = FALSE)
+    stop(sprintf(
+      "need at least %d observations, got %d.",
+      min_n, length(x)
+    ), call. = FALSE)
   }
   x
 }
 
 .fz_check_h <- function(h) {
   h <- as.numeric(h)
-  if (h <= 0) stop(sprintf("bandwidth must be positive, got %g.", h),
-                   call. = FALSE)
+  if (h <= 0) {
+    stop(sprintf("bandwidth must be positive, got %g.", h),
+      call. = FALSE
+    )
+  }
   h
 }
 
@@ -135,16 +150,22 @@ morie_fauzi_kde <- function(x, grid = NULL, h = NULL) {
   hh <- .fz_check_h(hh)
   g <- if (is.null(grid)) {
     .fz_seq(min(xv) - 3 * hh, max(xv) + 3 * hh, 200L)
-  } else as.numeric(grid)
+  } else {
+    as.numeric(grid)
+  }
   dens <- rowSums(.fz_K(outer(g, xv, "-") / hh)) / (n * hh)
-  list(grid = g, density = dens, bandwidth = hh,
-       mass = .fz_trapz(dens, g),
-       interior_bias_order = "O(h^2)",
-       boundary_bias_order = "O(h) -- does NOT vanish at the same rate",
-       boundary_consistent = FALSE,
-       n = n,
-       method = paste("Rosenblatt-Parzen KDE; the boundary failure is",
-                      "what Ch. 1 and Ch. 4 are for"))
+  list(
+    grid = g, density = dens, bandwidth = hh,
+    mass = .fz_trapz(dens, g),
+    interior_bias_order = "O(h^2)",
+    boundary_bias_order = "O(h) -- does NOT vanish at the same rate",
+    boundary_consistent = FALSE,
+    n = n,
+    method = paste(
+      "Rosenblatt-Parzen KDE; the boundary failure is",
+      "what Ch. 1 and Ch. 4 are for"
+    )
+  )
 }
 
 
@@ -184,16 +205,22 @@ morie_fauzi_mise <- function(n, h = NULL, R_K = NULL, mu2_K = 1,
   hh <- .fz_check_h(if (is.null(h)) h_opt else as.numeric(h))
   var_part <- rk / (nn * hh)
   bias_part <- hh^4 / 4 * m2^2 * rf
-  list(mise = var_part + bias_part, variance_part = var_part,
-       bias_part = bias_part, h = hh, h_optimal = h_opt,
-       mise_optimal = rk / (nn * h_opt) + h_opt^4 / 4 * m2^2 * rf,
-       rate_exponent = -0.8, parametric_rate_exponent = -1,
-       bandwidth_rate = "h_opt proportional to n^{-1/5}",
-       ceiling_note = paste("n^{-4/5} is the best a second-order kernel",
-                            "can do for a twice-differentiable density"),
-       n = nn,
-       method = paste("MISE = R(K)/(nh) + h^4 mu2^2 R(f'')/4;",
-                      "the two terms pull opposite ways"))
+  list(
+    mise = var_part + bias_part, variance_part = var_part,
+    bias_part = bias_part, h = hh, h_optimal = h_opt,
+    mise_optimal = rk / (nn * h_opt) + h_opt^4 / 4 * m2^2 * rf,
+    rate_exponent = -0.8, parametric_rate_exponent = -1,
+    bandwidth_rate = "h_opt proportional to n^{-1/5}",
+    ceiling_note = paste(
+      "n^{-4/5} is the best a second-order kernel",
+      "can do for a twice-differentiable density"
+    ),
+    n = nn,
+    method = paste(
+      "MISE = R(K)/(nh) + h^4 mu2^2 R(f'')/4;",
+      "the two terms pull opposite ways"
+    )
+  )
 }
 
 
@@ -228,9 +255,15 @@ morie_fauzi_gamma_kde <- function(x, grid = NULL, h = NULL,
   g <- if (is.null(grid)) .fz_seq(0, max(xv) * 1.2, 200L) else as.numeric(grid)
   if (any(g < 0)) stop("the grid must lie in [0, infinity).", call. = FALSE)
   dens_at <- function(bw) {
-    vapply(g, function(v) mean(stats::dgamma(xv, shape = v / bw + 1,
-                                             scale = bw)),
-           numeric(1))
+    vapply(
+      g, function(v) {
+        mean(stats::dgamma(xv,
+          shape = v / bw + 1,
+          scale = bw
+        ))
+      },
+      numeric(1)
+    )
   }
   base <- dens_at(hh)
   if (modified) {
@@ -244,16 +277,22 @@ morie_fauzi_gamma_kde <- function(x, grid = NULL, h = NULL,
     dens <- base
     order <- "O(h)"
   }
-  list(grid = g, density = dens, bandwidth = hh,
-       modified = isTRUE(modified), a = as.numeric(a),
-       boundary_consistent = TRUE, bias_order = order,
-       mass = .fz_trapz(dens, g),
-       why_it_works = paste("the kernel's support IS [0, infinity), so no",
-                            "mass crosses the boundary and no correction",
-                            "is needed"),
-       n = n,
-       method = paste("Chen gamma kernel density, with Fauzi's",
-                      "self-elimination modification"))
+  list(
+    grid = g, density = dens, bandwidth = hh,
+    modified = isTRUE(modified), a = as.numeric(a),
+    boundary_consistent = TRUE, bias_order = order,
+    mass = .fz_trapz(dens, g),
+    why_it_works = paste(
+      "the kernel's support IS [0, infinity), so no",
+      "mass crosses the boundary and no correction",
+      "is needed"
+    ),
+    n = n,
+    method = paste(
+      "Chen gamma kernel density, with Fauzi's",
+      "self-elimination modification"
+    )
+  )
 }
 
 
@@ -290,20 +329,28 @@ morie_fauzi_kdfe <- function(x, grid = NULL, h = NULL) {
   hh <- .fz_check_h(if (is.null(h)) .fz_kdfe_h(xv) else as.numeric(h))
   g <- if (is.null(grid)) {
     .fz_seq(min(xv) - 3 * hh, max(xv) + 3 * hh, 200L)
-  } else as.numeric(grid)
+  } else {
+    as.numeric(grid)
+  }
   f_hat <- rowSums(.fz_W(outer(g, xv, "-") / hh)) / n
   emp <- vapply(g, function(v) mean(xv <= v), numeric(1))
-  list(grid = g, F_hat = f_hat, F_empirical = emp, bandwidth = hh,
-       bandwidth_rate = "n^{-1/3} (Azzalini), not the n^{-1/5} density rule",
-       monotone = all(diff(f_hat) >= -1e-12),
-       bias_term = "h^2 mu_2(K) f'(x)/2 + o(h^2): f PRIME, not f double prime",
-       uses_integrated_kernel = TRUE,
-       why_over_edf = paste("the empirical df is a step function: not",
-                            "continuous, not smoothly invertible, and has",
-                            "no density"),
-       n = n,
-       method = paste("Nadaraya KDFE (2.2); smooths with W = integral of K,",
-                      "so the bias carries f'"))
+  list(
+    grid = g, F_hat = f_hat, F_empirical = emp, bandwidth = hh,
+    bandwidth_rate = "n^{-1/3} (Azzalini), not the n^{-1/5} density rule",
+    monotone = all(diff(f_hat) >= -1e-12),
+    bias_term = "h^2 mu_2(K) f'(x)/2 + o(h^2): f PRIME, not f double prime",
+    uses_integrated_kernel = TRUE,
+    why_over_edf = paste(
+      "the empirical df is a step function: not",
+      "continuous, not smoothly invertible, and has",
+      "no density"
+    ),
+    n = n,
+    method = paste(
+      "Nadaraya KDFE (2.2); smooths with W = integral of K,",
+      "so the bias carries f'"
+    )
+  )
 }
 
 
@@ -337,15 +384,21 @@ morie_fauzi_boundary_free_kde <- function(x, grid = NULL, h = NULL,
   lo <- tr$support[1L]
   hi <- tr$support[2L]
   if (any(xv <= lo) || any(xv >= hi)) {
-    stop(sprintf("the sample must lie strictly inside the support for the %s transformation.",
-                 tr$name), call. = FALSE)
+    stop(sprintf(
+      "the sample must lie strictly inside the support for the %s transformation.",
+      tr$name
+    ), call. = FALSE)
   }
   z <- tr$g_inv(xv)
   hh <- .fz_check_h(if (is.null(h)) stats::sd(z) * n^(-0.2) else as.numeric(h))
   g <- if (is.null(grid)) {
-    .fz_seq(unname(stats::quantile(xv, 0.02, type = 7L)),
-            unname(stats::quantile(xv, 0.98, type = 7L)), 200L)
-  } else as.numeric(grid)
+    .fz_seq(
+      unname(stats::quantile(xv, 0.02, type = 7L)),
+      unname(stats::quantile(xv, 0.98, type = 7L)), 200L
+    )
+  } else {
+    as.numeric(grid)
+  }
   if (any(g <= lo) || any(g >= hi)) {
     stop("the grid must lie strictly inside the support.", call. = FALSE)
   }
@@ -353,16 +406,22 @@ morie_fauzi_boundary_free_kde <- function(x, grid = NULL, h = NULL,
   g_prime <- tr$dg(gz)
   jac <- 1 / g_prime
   dens <- rowSums(.fz_K(outer(gz, z, "-") / hh)) * jac / (n * hh)
-  list(grid = g, density = dens, bandwidth = hh, transform = tr$name,
-       jacobian = jac, g_prime = g_prime,
-       mass = .fz_trapz(dens, g),
-       boundary_bias_order = "O(h^2) everywhere, including the boundary",
-       jacobian_note = paste("1/g'(g^{-1}(t)) is the change-of-variables",
-                             "factor; without it the result is a density on",
-                             "the transformed scale, not the original one"),
-       n = n,
-       method = paste("Boundary-free KDE by bijection (Ch. 4); no boundary",
-                      "exists on the transformed scale"))
+  list(
+    grid = g, density = dens, bandwidth = hh, transform = tr$name,
+    jacobian = jac, g_prime = g_prime,
+    mass = .fz_trapz(dens, g),
+    boundary_bias_order = "O(h^2) everywhere, including the boundary",
+    jacobian_note = paste(
+      "1/g'(g^{-1}(t)) is the change-of-variables",
+      "factor; without it the result is a density on",
+      "the transformed scale, not the original one"
+    ),
+    n = n,
+    method = paste(
+      "Boundary-free KDE by bijection (Ch. 4); no boundary",
+      "exists on the transformed scale"
+    )
+  )
 }
 
 
@@ -414,15 +473,21 @@ morie_fauzi_cumulative_survival_1 <- function(x, t_grid, h = NULL,
     .fz_trapz(cm$tr$dg(zz) * rowMeans(.fz_V(outer(zz, cm$zx, "-") / cm$hh)), zz)
   }, numeric(1))
   s_surv <- rowMeans(.fz_V(outer(cm$zt, cm$zx, "-") / cm$hh))
-  list(t_grid = cm$tg, S_cumulative = s_cum, S_survival = s_surv,
-       bandwidth = cm$hh, preserves_derivative_relation = TRUE,
-       bias_coefficient = "b_2 (4.15)",
-       mirror_note = paste("V_1 integrates x to infinity with argument",
-                           "(z - y)/h; V_2 integrates minus infinity to y",
-                           "with (x - z)/h"),
-       n = cm$n,
-       method = paste("First cumulative survival estimator (4.8);",
-                      "d/dt gives -S_tilde exactly"))
+  list(
+    t_grid = cm$tg, S_cumulative = s_cum, S_survival = s_surv,
+    bandwidth = cm$hh, preserves_derivative_relation = TRUE,
+    bias_coefficient = "b_2 (4.15)",
+    mirror_note = paste(
+      "V_1 integrates x to infinity with argument",
+      "(z - y)/h; V_2 integrates minus infinity to y",
+      "with (x - z)/h"
+    ),
+    n = cm$n,
+    method = paste(
+      "First cumulative survival estimator (4.8);",
+      "d/dt gives -S_tilde exactly"
+    )
+  )
 }
 
 
@@ -454,16 +519,22 @@ morie_fauzi_cumulative_survival_2 <- function(x, t_grid, h = NULL,
     }, numeric(1)))
   }, numeric(1))
   s_surv <- rowMeans(.fz_V(outer(cm$zt, cm$zx, "-") / cm$hh))
-  list(t_grid = cm$tg, S_cumulative = s_cum, S_survival = s_surv,
-       bandwidth = cm$hh, preserves_derivative_relation = FALSE,
-       bias_coefficient = "b_3 (4.21)",
-       g_prime_note = paste("multiplying V by g' is what makes this an",
-                            "estimator of the cumulative survival function",
-                            "at all"),
-       same_covariance_as_first = TRUE,
-       n = cm$n,
-       method = paste("Second cumulative survival estimator (4.17);",
-                      "mirror of the first, bias b_3"))
+  list(
+    t_grid = cm$tg, S_cumulative = s_cum, S_survival = s_surv,
+    bandwidth = cm$hh, preserves_derivative_relation = FALSE,
+    bias_coefficient = "b_3 (4.21)",
+    g_prime_note = paste(
+      "multiplying V by g' is what makes this an",
+      "estimator of the cumulative survival function",
+      "at all"
+    ),
+    same_covariance_as_first = TRUE,
+    n = cm$n,
+    method = paste(
+      "Second cumulative survival estimator (4.17);",
+      "mirror of the first, bias b_3"
+    )
+  )
 }
 
 
@@ -472,7 +543,8 @@ morie_fauzi_cumulative_survival_2 <- function(x, t_grid, h = NULL,
   fx <- as.numeric(f_X)
   if (length(fx) != length(tv)) {
     stop(sprintf("f_X has %d entries for %d points.", length(fx), length(tv)),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   if (any(fx < 0)) stop("a density must be non-negative.", call. = FALSE)
   tr <- .fz_transform(transform)
@@ -480,16 +552,22 @@ morie_fauzi_cumulative_survival_2 <- function(x, t_grid, h = NULL,
     stop("t must lie strictly inside the support.", call. = FALSE)
   }
   zt <- tr$g_inv(tv)
-  list(tv = tv, fx = fx, tr = tr, zt = zt,
-       gp = tr$dg(zt), gpp = tr$d2g(zt))
+  list(
+    tv = tv, fx = fx, tr = tr, zt = zt,
+    gp = tr$dg(zt), gpp = tr$d2g(zt)
+  )
 }
 
 .fz_bias_payload <- function(cm) {
-  list(g_prime = cm$gp, g_double_prime = cm$gpp,
-       bias_order = "O(h^2) everywhere, including the boundary region",
-       contrast = paste("the naive kernel estimator degrades to O(h) or",
-                        "O(1) at the boundary (Remark 4.5)"),
-       transform = cm$tr$name)
+  list(
+    g_prime = cm$gp, g_double_prime = cm$gpp,
+    bias_order = "O(h^2) everywhere, including the boundary region",
+    contrast = paste(
+      "the naive kernel estimator degrades to O(h) or",
+      "O(1) at the boundary (Remark 4.5)"
+    ),
+    transform = cm$tr$name
+  )
 }
 
 
@@ -520,13 +598,19 @@ morie_fauzi_b1_coefficient <- function(t, f_X, f_X_prime = NULL,
   }
   fp <- as.numeric(f_X_prime)
   if (length(fp) != length(cm$tv)) {
-    stop(sprintf("f_X_prime has %d entries for %d.", length(fp),
-                 length(cm$tv)), call. = FALSE)
+    stop(sprintf(
+      "f_X_prime has %d entries for %d.", length(fp),
+      length(cm$tv)
+    ), call. = FALSE)
   }
-  c(list(t = cm$tv, b_1 = cm$gpp * cm$fx + cm$gp^2 * fp),
+  c(
+    list(t = cm$tv, b_1 = cm$gpp * cm$fx + cm$gp^2 * fp),
     .fz_bias_payload(cm),
-    list(method = paste("b_1 from Eq. (4.14); the transformation makes the",
-                        "bias constant computable")))
+    list(method = paste(
+      "b_1 from Eq. (4.14); the transformation makes the",
+      "bias constant computable"
+    ))
+  )
 }
 
 
@@ -554,9 +638,13 @@ morie_fauzi_b2_coefficient <- function(t, f_X, f_X_prime = NULL,
     cm$gp[i]^2 * cm$fx[i] +
       .fz_trapz(cm$tr$d2g(zz) * cm$tr$dg(zz) * fv, zz)
   }, numeric(1))
-  c(list(t = cm$tv, b_2 = b2), .fz_bias_payload(cm),
-    list(method = paste("b_2 from Eq. (4.15); the transformation makes the",
-                        "bias constant computable")))
+  c(
+    list(t = cm$tv, b_2 = b2), .fz_bias_payload(cm),
+    list(method = paste(
+      "b_2 from Eq. (4.15); the transformation makes the",
+      "bias constant computable"
+    ))
+  )
 }
 
 
@@ -583,15 +671,20 @@ morie_fauzi_b3_coefficient <- function(t, f_X, f_X_prime = NULL,
   sx <- as.numeric(S_X)
   if (length(sx) != length(cm$tv)) {
     stop(sprintf("S_X has %d entries for %d.", length(sx), length(cm$tv)),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   if (any(sx < 0 | sx > 1)) {
     stop("S_X must lie in [0, 1].", call. = FALSE)
   }
-  c(list(t = cm$tv, b_3 = cm$gp^2 * cm$fx - cm$gpp * sx),
+  c(
+    list(t = cm$tv, b_3 = cm$gp^2 * cm$fx - cm$gpp * sx),
     .fz_bias_payload(cm),
-    list(method = paste("b_3 from Eq. (4.21); the transformation makes the",
-                        "bias constant computable")))
+    list(method = paste(
+      "b_3 from Eq. (4.21); the transformation makes the",
+      "bias constant computable"
+    ))
+  )
 }
 
 
@@ -620,17 +713,23 @@ morie_fauzi_mrl_naive <- function(x, t_grid, h = NULL) {
   upper <- max(xv) + 8 * hh
   mrl <- vapply(tg, function(t) {
     den <- sum(.fz_V((t - xv) / hh))
-    if (den <= 0) return(NA_real_)
+    if (den <= 0) {
+      return(NA_real_)
+    }
     zz <- .fz_seq(t, upper, 400L)
     num <- .fz_trapz(rowSums(.fz_V(outer(zz, xv, "-") / hh)), zz)
     num / den
   }, numeric(1))
-  list(t_grid = tg, mrl = mrl, bandwidth = hh,
-       interior_bias_order = "O(h^2)",
-       boundary_bias_order = "O(h), and can degrade to O(1)",
-       boundary_safe = FALSE, n = n,
-       method = paste("Naive kernel MRL (4.2); the baseline whose boundary",
-                      "failure Ch. 4 fixes"))
+  list(
+    t_grid = tg, mrl = mrl, bandwidth = hh,
+    interior_bias_order = "O(h^2)",
+    boundary_bias_order = "O(h), and can degrade to O(1)",
+    boundary_safe = FALSE, n = n,
+    method = paste(
+      "Naive kernel MRL (4.2); the baseline whose boundary",
+      "failure Ch. 4 fixes"
+    )
+  )
 }
 
 
@@ -659,20 +758,30 @@ morie_fauzi_mrl_naive <- function(x, t_grid, h = NULL) {
 #' @export
 morie_fauzi_mrl_boundary_free_2 <- function(x, t_grid, h = NULL,
                                             transform = "log") {
-  out <- morie_fauzi_cumulative_survival_2(x, t_grid, h = h,
-                                           transform = transform)
+  out <- morie_fauzi_cumulative_survival_2(x, t_grid,
+    h = h,
+    transform = transform
+  )
   s <- out$S_survival
   mrl <- ifelse(s > 0, out$S_cumulative / pmax(s, 1e-300), NA_real_)
-  list(t_grid = out$t_grid, mrl = mrl, bandwidth = out$bandwidth,
-       bias_order = "O(h^2) everywhere, including the boundary region",
-       bias_formula = paste("h^2/(2 S_X(t)) [b_3(t) + m_X(t) b_1(t)]",
-                            "int y^2 K(y) dy"),
-       variance_vanishes_at_boundary = TRUE,
-       prefer_variant_1_when = paste("the analytic relation between S and",
-                                     "S_cum must be preserved (Remark 4.2)"),
-       n = out$n,
-       method = paste("Boundary-free MRL estimator m_tilde_{X,2} (4.24);",
-                      "Theorem 4.3 bias"))
+  list(
+    t_grid = out$t_grid, mrl = mrl, bandwidth = out$bandwidth,
+    bias_order = "O(h^2) everywhere, including the boundary region",
+    bias_formula = paste(
+      "h^2/(2 S_X(t)) [b_3(t) + m_X(t) b_1(t)]",
+      "int y^2 K(y) dy"
+    ),
+    variance_vanishes_at_boundary = TRUE,
+    prefer_variant_1_when = paste(
+      "the analytic relation between S and",
+      "S_cum must be preserved (Remark 4.2)"
+    ),
+    n = out$n,
+    method = paste(
+      "Boundary-free MRL estimator m_tilde_{X,2} (4.24);",
+      "Theorem 4.3 bias"
+    )
+  )
 }
 
 
@@ -711,10 +820,16 @@ morie_fauzi_theorem_4_3 <- function(t, S_X, S_bar_X, m_X, b1,
   m <- as.numeric(m_X)
   c1 <- as.numeric(b1)
   for (nm in c("S_X", "S_bar_X", "m_X", "b1")) {
-    arr <- switch(nm, S_X = s, S_bar_X = sb, m_X = m, b1 = c1)
+    arr <- switch(nm,
+      S_X = s,
+      S_bar_X = sb,
+      m_X = m,
+      b1 = c1
+    )
     if (length(arr) != length(tv)) {
       stop(sprintf("%s has %d entries for %d.", nm, length(arr), length(tv)),
-           call. = FALSE)
+        call. = FALSE
+      )
     }
   }
   if (any(s <= 0)) {
@@ -724,29 +839,44 @@ morie_fauzi_theorem_4_3 <- function(t, S_X, S_bar_X, m_X, b1,
   hh <- as.numeric(h)
   if (is.na(nn) || nn < 2L || hh <= 0) {
     stop(sprintf("need n >= 2 and h > 0, got (%s, %g).", format(n), hh),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   vw <- if (is.null(VW)) 1 / (2 * sqrt(pi)) else as.numeric(VW)
   gp <- rep(as.numeric(g_prime), length.out = length(tv))
   fx <- rep(as.numeric(f_X), length.out = length(tv))
   b4 <- 2 * sb - s * m^2
   b5 <- gp * fx * m^2
-  bias1 <- if (is.null(b2)) NULL else
+  bias1 <- if (is.null(b2)) {
+    NULL
+  } else {
     hh^2 / (2 * s) * (as.numeric(b2) + m * c1) * as.numeric(mu2)
-  bias2 <- if (is.null(b3)) NULL else
+  }
+  bias2 <- if (is.null(b3)) {
+    NULL
+  } else {
     hh^2 / (2 * s) * (as.numeric(b3) + m * c1) * as.numeric(mu2)
-  list(t = tv, bias_1 = bias1, bias_2 = bias2,
-       variance = b4 / (nn * s^2) - hh * b5 / (nn * s^2) * vw,
-       b4 = b4, b5 = b5,
-       differ_only_in = paste("b_2 for the first estimator, b_3 for the",
-                              "second; everything else is shared",
-                              "(Remark 4.3)"),
-       variance_leading_order = paste("O(1/n); the bandwidth enters only at",
-                                      "O(h/n), so the variance is far less",
-                                      "bandwidth-sensitive than the bias"),
-       n = nn, h = hh,
-       method = paste("Theorem 4.3 (4.25)-(4.28): biases and variances of",
-                      "the boundary-free MRL estimators"))
+  }
+  list(
+    t = tv, bias_1 = bias1, bias_2 = bias2,
+    variance = b4 / (nn * s^2) - hh * b5 / (nn * s^2) * vw,
+    b4 = b4, b5 = b5,
+    differ_only_in = paste(
+      "b_2 for the first estimator, b_3 for the",
+      "second; everything else is shared",
+      "(Remark 4.3)"
+    ),
+    variance_leading_order = paste(
+      "O(1/n); the bandwidth enters only at",
+      "O(h/n), so the variance is far less",
+      "bandwidth-sensitive than the bias"
+    ),
+    n = nn, h = hh,
+    method = paste(
+      "Theorem 4.3 (4.25)-(4.28): biases and variances of",
+      "the boundary-free MRL estimators"
+    )
+  )
 }
 
 
@@ -776,14 +906,20 @@ morie_fauzi_theorem_4_4 <- function(mrl_hat, mrl_true, variance) {
   if (any(v < 0)) stop("variances must be non-negative.", call. = FALSE)
   sd_v <- sqrt(pmax(v, 0))
   z <- ifelse(sd_v > 0, (mh - mt) / pmax(sd_v, 1e-300), NA_real_)
-  list(z = z, p_two_sided = 2 * stats::pnorm(abs(z), lower.tail = FALSE),
-       holds_for = "both m_tilde_{X,1} and m_tilde_{X,2}",
-       why_lyapunov_works = paste("V is bounded in [0, 1], so every moment",
-                                  "exists automatically and the Lyapunov",
-                                  "condition needs no extra assumption"),
-       valid_at_boundary = TRUE,
-       method = paste("Theorem 4.4: standardised boundary-free MRL",
-                      "estimators are asymptotically N(0, 1)"))
+  list(
+    z = z, p_two_sided = 2 * stats::pnorm(abs(z), lower.tail = FALSE),
+    holds_for = "both m_tilde_{X,1} and m_tilde_{X,2}",
+    why_lyapunov_works = paste(
+      "V is bounded in [0, 1], so every moment",
+      "exists automatically and the Lyapunov",
+      "condition needs no extra assumption"
+    ),
+    valid_at_boundary = TRUE,
+    method = paste(
+      "Theorem 4.4: standardised boundary-free MRL",
+      "estimators are asymptotically N(0, 1)"
+    )
+  )
 }
 
 
@@ -822,8 +958,10 @@ morie_fauzi_theorem_4_5 <- function(mrl_hat, mrl_true, t_grid,
     lo <- as.numeric(interval[1L])
     hi <- as.numeric(interval[2L])
     if (!is.finite(lo) || !is.finite(hi) || hi <= lo) {
-      stop(paste("the interval must be bounded with lo < hi; uniform",
-                 "consistency is stated on a BOUNDED B."), call. = FALSE)
+      stop(paste(
+        "the interval must be bounded with lo < hi; uniform",
+        "consistency is stated on a BOUNDED B."
+      ), call. = FALSE)
     }
     sel <- tg >= lo & tg <= hi
     iv <- c(lo, hi)
@@ -833,15 +971,23 @@ morie_fauzi_theorem_4_5 <- function(mrl_hat, mrl_true, t_grid,
   }
   err <- abs(mh[sel] - mt[sel])
   k <- which.max(err)
-  list(sup_error = max(err, na.rm = TRUE), argmax_t = tg[sel][k],
-       interval = iv, mode = "uniform, almost sure",
-       requires_bounded_B = TRUE, stronger_than_pointwise = TRUE,
-       proof_device = paste("monotonicity plus pointwise convergence on a",
-                            "finite grid, as in Glivenko-Cantelli"),
-       licenses = paste("using the whole estimated curve -- a maximum, a",
-                        "crossing point -- not just one pre-chosen t"),
-       method = paste("Theorem 4.5: strong uniform consistency on a",
-                      "bounded interval"))
+  list(
+    sup_error = max(err, na.rm = TRUE), argmax_t = tg[sel][k],
+    interval = iv, mode = "uniform, almost sure",
+    requires_bounded_B = TRUE, stronger_than_pointwise = TRUE,
+    proof_device = paste(
+      "monotonicity plus pointwise convergence on a",
+      "finite grid, as in Glivenko-Cantelli"
+    ),
+    licenses = paste(
+      "using the whole estimated curve -- a maximum, a",
+      "crossing point -- not just one pre-chosen t"
+    ),
+    method = paste(
+      "Theorem 4.5: strong uniform consistency on a",
+      "bounded interval"
+    )
+  )
 }
 
 
@@ -868,21 +1014,28 @@ morie_fauzi_theorem_4_6 <- function(x, a1, mrl_at_a1, h = NULL) {
   a <- as.numeric(a1)
   if (any(xv < a)) {
     stop(sprintf("a1 = %g is not a lower bound of the sample.", a),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   lhs <- as.numeric(mrl_at_a1) + a
   xbar <- mean(xv)
   gap <- abs(lhs - xbar)
   tol <- if (is.null(h)) NULL else as.numeric(h)^2
-  list(identity_lhs = lhs, sample_mean = xbar, gap = gap,
-       expected_order = "O(h^2)",
-       within_expected = if (is.null(tol)) NULL else gap <= 5 * tol,
-       a1 = a, n = length(xv),
-       why_it_holds = paste("at the start of the support everyone is still",
-                            "at risk, so MRL(a_1) + a_1 is the overall mean"),
-       diagnostic_use = paste("a large gap indicates a bandwidth too big or",
-                              "a transformation mismatched to the support"),
-       method = "Theorem 4.6 (4.29): m_tilde(a_1) + a_1 = Xbar + O_p(h^2)")
+  list(
+    identity_lhs = lhs, sample_mean = xbar, gap = gap,
+    expected_order = "O(h^2)",
+    within_expected = if (is.null(tol)) NULL else gap <= 5 * tol,
+    a1 = a, n = length(xv),
+    why_it_holds = paste(
+      "at the start of the support everyone is still",
+      "at risk, so MRL(a_1) + a_1 is the overall mean"
+    ),
+    diagnostic_use = paste(
+      "a large gap indicates a bandwidth too big or",
+      "a transformation mismatched to the support"
+    ),
+    method = "Theorem 4.6 (4.29): m_tilde(a_1) + a_1 = Xbar + O_p(h^2)"
+  )
 }
 
 
@@ -910,7 +1063,8 @@ morie_fauzi_conditions_c1_c6 <- function(x = NULL, transform = "log",
     C3 = "bijectivity and simplicity of the transformation g",
     C4 = "validity of the serial expansions used in the proofs",
     C5 = "int g'(ux)K(x)dx and int g'(ux)V(x)dx finite near the origin",
-    C6 = "E(X), E(X^2) and E(X^3) exist")
+    C6 = "E(X), E(X^2) and E(X^3) exist"
+  )
   moments <- NULL
   heavy <- NULL
   if (!is.null(x) && isTRUE(check_moments)) {
@@ -922,14 +1076,20 @@ morie_fauzi_conditions_c1_c6 <- function(x = NULL, transform = "log",
     ref <- moments$E_X^3 + 3 * moments$E_X * sd_x^2
     heavy <- ref > 0 && moments$E_X3 > 20 * ref
   }
-  list(conditions = conds, C3_bijective = TRUE, C6_moments = moments,
-       heavy_tail_warning = heavy,
-       binding_in_practice = c("C5", "C6"),
-       why = paste("C5 and C6 are what make the bias and variance formulas",
-                   "derivable; C6 rules out heavy-tailed data entirely"),
-       transform = tr$name,
-       method = paste("Conditions C1-C6 of Ch. 4, with the C6 moment check",
-                      "made explicit"))
+  list(
+    conditions = conds, C3_bijective = TRUE, C6_moments = moments,
+    heavy_tail_warning = heavy,
+    binding_in_practice = c("C5", "C6"),
+    why = paste(
+      "C5 and C6 are what make the bias and variance formulas",
+      "derivable; C6 rules out heavy-tailed data entirely"
+    ),
+    transform = tr$name,
+    method = paste(
+      "Conditions C1-C6 of Ch. 4, with the C6 moment check",
+      "made explicit"
+    )
+  )
 }
 
 
@@ -970,15 +1130,21 @@ morie_fauzi_kernel_quantile <- function(x, p, h = NULL) {
   wl <- .fz_W(outer(edges, pv, "-") / hh)
   wi <- wl[-1L, , drop = FALSE] - wl[-(n + 1L), , drop = FALSE]
   wsum <- colSums(wi)
-  list(p = pv, quantile = as.numeric(colSums(wi * xv) / wsum),
-       sample_quantile = unname(stats::quantile(xv, pv, type = 7L)),
-       bandwidth = hh, weights_sum = wsum,
-       smooths_in = "the PROBABILITY argument, not in x",
-       why = paste("the sample quantile uses one order statistic and jumps",
-                   "as p crosses i/n; the tails are exactly where that hurts"),
-       n = n,
-       method = paste("Kernel quantile estimator (3.1) as a weighted sum of",
-                      "order statistics"))
+  list(
+    p = pv, quantile = as.numeric(colSums(wi * xv) / wsum),
+    sample_quantile = unname(stats::quantile(xv, pv, type = 7L)),
+    bandwidth = hh, weights_sum = wsum,
+    smooths_in = "the PROBABILITY argument, not in x",
+    why = paste(
+      "the sample quantile uses one order statistic and jumps",
+      "as p crosses i/n; the tails are exactly where that hurts"
+    ),
+    n = n,
+    method = paste(
+      "Kernel quantile estimator (3.1) as a weighted sum of",
+      "order statistics"
+    )
+  )
 }
 
 
@@ -1010,21 +1176,25 @@ morie_fauzi_quantile_amse <- function(p, n, f_at_quantile = NULL,
     stop(sprintf("n must be at least 2, got %s.", format(n)), call. = FALSE)
   }
   if (is.null(f_at_quantile) && is.null(Q_prime)) {
-    stop(paste("supply either the density at the quantile or Q'(p);",
-               "the AMSE is not determined by p and n alone."), call. = FALSE)
+    stop(paste(
+      "supply either the density at the quantile or Q'(p);",
+      "the AMSE is not determined by p and n alone."
+    ), call. = FALSE)
   }
   if (!is.null(Q_prime)) {
     qp <- as.numeric(Q_prime)
     if (length(qp) != length(pv)) {
       stop(sprintf("Q_prime has %d entries for %d.", length(qp), length(pv)),
-           call. = FALSE)
+        call. = FALSE
+      )
     }
     qp[qp == 0] <- NA_real_
   } else {
     dens <- as.numeric(f_at_quantile)
     if (length(dens) != length(pv)) {
       stop(sprintf("f_at_quantile has %d for %d.", length(dens), length(pv)),
-           call. = FALSE)
+        call. = FALSE
+      )
     }
     if (any(dens <= 0)) {
       stop("the density at the quantile must be positive.", call. = FALSE)
@@ -1033,14 +1203,20 @@ morie_fauzi_quantile_amse <- function(p, n, f_at_quantile = NULL,
   }
   binom <- pv * (1 - pv) / nn
   amse <- qp^2 * binom
-  list(p = pv, amse = amse, se = sqrt(pmax(amse, 0)),
-       binomial_part = binom, density_part = qp^2, n = nn,
-       tail_note = paste("as p goes to 0 or 1 the binomial part shrinks but",
-                         "the density part grows faster for thinning tails,",
-                         "so the AMSE increases -- that is why extreme",
-                         "quantiles are hard"),
-       method = paste("AMSE of the sample quantile (3.3);",
-                      "p(1-p)/(n f^2) = Q'(p)^2 p(1-p)/n"))
+  list(
+    p = pv, amse = amse, se = sqrt(pmax(amse, 0)),
+    binomial_part = binom, density_part = qp^2, n = nn,
+    tail_note = paste(
+      "as p goes to 0 or 1 the binomial part shrinks but",
+      "the density part grows faster for thinning tails,",
+      "so the AMSE increases -- that is why extreme",
+      "quantiles are hard"
+    ),
+    method = paste(
+      "AMSE of the sample quantile (3.3);",
+      "p(1-p)/(n f^2) = Q'(p)^2 p(1-p)/n"
+    )
+  )
 }
 
 
@@ -1069,17 +1245,26 @@ morie_fauzi_order_m_kernel <- function(u, m = 4L) {
   kg <- .fz_muller(grid, mm)
   moments <- stats::setNames(
     lapply(0:mm, function(j) .fz_trapz(grid^j * kg, grid)),
-    as.character(0:mm))
-  list(u = uv, K = k, order = mm, moments = moments,
-       takes_negative_values = any(kg < -1e-12),
-       bias_order = sprintf("O(h^%d)", mm),
-       tradeoff = paste("a vanishing second moment forces negative values,",
-                        "so the density can go negative and the",
-                        "distribution non-monotone; acceptable for",
-                        "quantiles, not for a density to be plotted"),
-       method = sprintf(paste("Order-%d kernel; moments 1..%d vanish,",
-                              "pushing the bias to O(h^%d)"),
-                        mm, mm - 1L, mm))
+    as.character(0:mm)
+  )
+  list(
+    u = uv, K = k, order = mm, moments = moments,
+    takes_negative_values = any(kg < -1e-12),
+    bias_order = sprintf("O(h^%d)", mm),
+    tradeoff = paste(
+      "a vanishing second moment forces negative values,",
+      "so the density can go negative and the",
+      "distribution non-monotone; acceptable for",
+      "quantiles, not for a density to be plotted"
+    ),
+    method = sprintf(
+      paste(
+        "Order-%d kernel; moments 1..%d vanish,",
+        "pushing the bias to O(h^%d)"
+      ),
+      mm, mm - 1L, mm
+    )
+  )
 }
 
 
@@ -1100,14 +1285,18 @@ morie_fauzi_muller_kernel <- function(u) {
   uv <- as.numeric(u)
   grid <- .fz_seq(-10, 10, 4001L)
   kg <- .fz_muller(grid, 4L)
-  list(u = uv, K = .fz_muller(uv, 4L),
-       mu0 = .fz_trapz(kg, grid),
-       mu2 = .fz_trapz(grid^2 * kg, grid),
-       mu4 = .fz_trapz(grid^4 * kg, grid),
-       negative_beyond = sqrt(3),
-       bias_order = "O(h^4)",
-       method = paste("Fourth-order Mueller kernel (3 - u^2)phi(u)/2;",
-                      "mu_2 = 0 by construction"))
+  list(
+    u = uv, K = .fz_muller(uv, 4L),
+    mu0 = .fz_trapz(kg, grid),
+    mu2 = .fz_trapz(grid^2 * kg, grid),
+    mu4 = .fz_trapz(grid^4 * kg, grid),
+    negative_beyond = sqrt(3),
+    bias_order = "O(h^4)",
+    method = paste(
+      "Fourth-order Mueller kernel (3 - u^2)phi(u)/2;",
+      "mu_2 = 0 by construction"
+    )
+  )
 }
 
 
@@ -1144,8 +1333,10 @@ morie_fauzi_lemma_3_1 <- function(x, p, h = NULL, q_true = NULL) {
     stop(sprintf("p must lie strictly in (0, 1), got %g.", pp), call. = FALSE)
   }
   if (is.null(q_true)) {
-    centred_at <- paste("sample quantile -- the linear term is degenerate",
-                        "here; supply q_true for the lemma as stated")
+    centred_at <- paste(
+      "sample quantile -- the linear term is degenerate",
+      "here; supply q_true for the lemma as stated"
+    )
     q <- unname(stats::quantile(xv, pp, type = 7L))
   } else {
     centred_at <- "population quantile (supplied)"
@@ -1154,22 +1345,30 @@ morie_fauzi_lemma_3_1 <- function(x, p, h = NULL, q_true = NULL) {
   hb <- 1.06 * stats::sd(xv) * n^(-0.2)
   f_q <- mean(.fz_K((q - xv) / hb)) / hb
   if (f_q <= 0) {
-    stop(paste("the estimated density at the quantile is zero;",
-               "the representation divides by it."), call. = FALSE)
+    stop(paste(
+      "the estimated density at the quantile is zero;",
+      "the representation divides by it."
+    ), call. = FALSE)
   }
   infl <- (pp - as.numeric(xv <= q)) / f_q
   lin <- mean(infl)
   est <- morie_fauzi_kernel_quantile(xv, pp, h = h)$quantile[1L]
-  list(influence = infl, linear_term = lin, estimate = est,
-       remainder = est - q - lin,
-       density_at_quantile = f_q, centre = q, centred_at = centred_at,
-       asymptotic_variance = pp * (1 - pp) / (n * f_q^2),
-       representation = paste("Bahadur-type: an i.i.d. average plus a",
-                              "smaller-order remainder, which is what makes",
-                              "normality, the variance and the Edgeworth",
-                              "expansion all follow from standard theory",
-                              "for sums"),
-       n = n,
-       method = paste("Lemma 3.1: asymptotic representation of the kernel",
-                      "quantile estimator"))
+  list(
+    influence = infl, linear_term = lin, estimate = est,
+    remainder = est - q - lin,
+    density_at_quantile = f_q, centre = q, centred_at = centred_at,
+    asymptotic_variance = pp * (1 - pp) / (n * f_q^2),
+    representation = paste(
+      "Bahadur-type: an i.i.d. average plus a",
+      "smaller-order remainder, which is what makes",
+      "normality, the variance and the Edgeworth",
+      "expansion all follow from standard theory",
+      "for sums"
+    ),
+    n = n,
+    method = paste(
+      "Lemma 3.1: asymptotic representation of the kernel",
+      "quantile estimator"
+    )
+  )
 }

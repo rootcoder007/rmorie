@@ -57,28 +57,41 @@
 }
 
 .schab_profiled_reml <- function(coords, z, X, nugget_ratio, rng, model) {
-  n <- nrow(X); k <- ncol(X)
-  bad <- list(value = Inf, gradient = c(0, 0), sigma2 = NA_real_,
-              beta = rep(NA_real_, k))
-  if (nugget_ratio < 0 || nugget_ratio > 1 || rng <= 0) return(bad)
+  n <- nrow(X)
+  k <- ncol(X)
+  bad <- list(
+    value = Inf, gradient = c(0, 0), sigma2 = NA_real_,
+    beta = rep(NA_real_, k)
+  )
+  if (nugget_ratio < 0 || nugget_ratio > 1 || rng <= 0) {
+    return(bad)
+  }
   cm <- .schab_correlation_matrix(coords, nugget_ratio, rng, model)
   ch <- tryCatch(chol(cm$sigma), error = function(e) NULL)
-  if (is.null(ch)) return(bad)
+  if (is.null(ch)) {
+    return(bad)
+  }
   logdet <- 2 * sum(log(diag(ch)))
   sinv <- chol2inv(ch)
   sx <- sinv %*% X
   xsx <- crossprod(X, sx)
   omega <- tryCatch(solve(xsx), error = function(e) NULL)
-  if (is.null(omega)) return(bad)
+  if (is.null(omega)) {
+    return(bad)
+  }
   ldx <- determinant(xsx, logarithm = TRUE)
-  if (ldx$sign <= 0) return(bad)
+  if (ldx$sign <= 0) {
+    return(bad)
+  }
   logdet_xsx <- as.numeric(ldx$modulus)
   beta <- as.numeric(omega %*% crossprod(sx, z))
   resid <- as.numeric(z - X %*% beta)
   sr <- as.numeric(sinv %*% resid)
   dof <- n - k
   sigma2 <- sum(resid * sr) / dof
-  if (!is.finite(sigma2) || sigma2 <= 0) return(bad)
+  if (!is.finite(sigma2) || sigma2 <= 0) {
+    return(bad)
+  }
   value <- logdet + logdet_xsx + dof * log(sigma2) + dof * (log(2 * pi) - 1)
 
   # Exact gradient. For each derivative D of Sigma(theta*):
@@ -123,11 +136,14 @@
   # and a = exp(u2) keeps the range positive, so the constraints of Sec. 4.3
   # hold by construction rather than by clipping.
   wrapped <- function(u) {
-    xi <- .schab_logistic(u[1]); a <- exp(u[2])
+    xi <- .schab_logistic(u[1])
+    a <- exp(u[2])
     res <- .schab_profiled_reml(coords, z, X, xi, a, model)
     if (!is.finite(res$value)) {
-      return(list(value = Inf, gradient = c(0, 0), sigma2 = res$sigma2,
-                  beta = res$beta))
+      return(list(
+        value = Inf, gradient = c(0, 0), sigma2 = res$sigma2,
+        beta = res$beta
+      ))
     }
     res$gradient <- res$gradient * c(xi * (1 - xi), a)
     res
@@ -140,14 +156,15 @@
     if (!is.finite(cur$value) || max(abs(cur$gradient)) < tol) break
     direction <- as.numeric(-hess_inv %*% cur$gradient)
     slope <- sum(cur$gradient * direction)
-    if (slope >= 0) {                       # not a descent direction; reset
+    if (slope >= 0) { # not a descent direction; reset
       hess_inv <- diag(2)
       direction <- -cur$gradient
       slope <- sum(cur$gradient * direction)
     }
     step <- 1
     moved <- FALSE
-    trial <- NULL; tr <- NULL
+    trial <- NULL
+    tr <- NULL
     # Armijo backtracking with the textbook constants c1 = 1e-4, rho = 1/2
     # (Nocedal & Wright), fixed rather than tuned.
     for (b in seq_len(60L)) {
@@ -163,7 +180,7 @@
     s <- trial - x
     y <- tr$gradient - cur$gradient
     sy <- sum(s * y)
-    if (sy > 1e-300) {                       # BFGS update, skipped if unstable
+    if (sy > 1e-300) { # BFGS update, skipped if unstable
       rho <- 1 / sy
       eye <- diag(2)
       hess_inv <- (eye - rho * outer(s, y)) %*% hess_inv %*%
@@ -175,8 +192,10 @@
 
   xi <- .schab_logistic(x[1])
   a <- exp(x[2])
-  list(nugget_ratio = xi, range = a, sigma2 = cur$sigma2,
-       nugget = xi * cur$sigma2, partial_sill = (1 - xi) * cur$sigma2,
-       beta = cur$beta, neg2_restricted_loglik = cur$value,
-       converged = max(abs(cur$gradient)) < 1e-6)
+  list(
+    nugget_ratio = xi, range = a, sigma2 = cur$sigma2,
+    nugget = xi * cur$sigma2, partial_sill = (1 - xi) * cur$sigma2,
+    beta = cur$beta, neg2_restricted_loglik = cur$value,
+    converged = max(abs(cur$gradient)) < 1e-6
+  )
 }

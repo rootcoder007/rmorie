@@ -31,11 +31,13 @@ morie_dsp_rms <- function(x) {
 #' t <- seq.int(0, 999) / 1000
 #' x <- sin(2 * pi * 5 * t)
 #' morie_dsp_form_factor(x)
-#' morie_dsp_form_factor(rep(0, 5))  # all-zero signal: 0
+#' morie_dsp_form_factor(rep(0, 5)) # all-zero signal: 0
 #' @export
 morie_dsp_form_factor <- function(x) {
   m <- mean(abs(x))
-  if (m == 0) return(0)
+  if (m == 0) {
+    return(0)
+  }
   morie_dsp_rms(x) / m
 }
 
@@ -49,11 +51,13 @@ morie_dsp_form_factor <- function(x) {
 #' @examples
 #' t <- seq.int(0, 9999) / 10000
 #' x <- sin(2 * pi * 5 * t)
-#' morie_dsp_crest_factor(x)  # ~sqrt(2) for a unit sine
+#' morie_dsp_crest_factor(x) # ~sqrt(2) for a unit sine
 #' @export
 morie_dsp_crest_factor <- function(x) {
   r <- morie_dsp_rms(x)
-  if (r == 0) return(0)
+  if (r == 0) {
+    return(0)
+  }
   max(abs(x)) / r
 }
 
@@ -70,7 +74,9 @@ morie_dsp_crest_factor <- function(x) {
 morie_dsp_shape_factor <- function(x) {
   num <- mean(abs(x))
   den <- mean(sqrt(abs(x)))^2
-  if (den == 0) return(0)
+  if (den == 0) {
+    return(0)
+  }
   num / den
 }
 
@@ -119,7 +125,9 @@ morie_dsp_waveform_length_norm <- function(x) {
 #' @export
 morie_dsp_turns_count <- function(x, threshold = 0) {
   d <- diff(x)
-  if (length(d) < 2L) return(0L)
+  if (length(d) < 2L) {
+    return(0L)
+  }
   prev <- d[-length(d)]
   nxt <- d[-1L]
   as.integer(sum(prev * nxt < 0 & abs(prev - nxt) > threshold))
@@ -140,7 +148,9 @@ morie_dsp_turns_count <- function(x, threshold = 0) {
 #' @export
 morie_dsp_slope_sign_changes <- function(x, threshold = 0) {
   d <- diff(x)
-  if (length(d) < 2L) return(0L)
+  if (length(d) < 2L) {
+    return(0L)
+  }
   prev <- d[-length(d)]
   nxt <- d[-1L]
   as.integer(sum(prev * nxt < 0 & abs(nxt) > threshold))
@@ -193,7 +203,7 @@ morie_dsp_myopulse_rate <- function(x, threshold = NULL) {
 #' @examples
 #' set.seed(3)
 #' x <- rnorm(100)
-#' morie_dsp_hjorth_activity(x)  # equals var(x)
+#' morie_dsp_hjorth_activity(x) # equals var(x)
 #' @export
 morie_dsp_hjorth_activity <- function(x) {
   stats::var(x)
@@ -213,7 +223,9 @@ morie_dsp_hjorth_activity <- function(x) {
 #' @export
 morie_dsp_hjorth_mobility <- function(x) {
   a <- stats::var(x)
-  if (a == 0) return(0)
+  if (a == 0) {
+    return(0)
+  }
   sqrt(stats::var(diff(x)) / a)
 }
 
@@ -232,7 +244,9 @@ morie_dsp_hjorth_mobility <- function(x) {
 #' @export
 morie_dsp_hjorth_complexity <- function(x) {
   m <- morie_dsp_hjorth_mobility(x)
-  if (m == 0) return(0)
+  if (m == 0) {
+    return(0)
+  }
   morie_dsp_hjorth_mobility(diff(x)) / m
 }
 
@@ -246,7 +260,7 @@ morie_dsp_hjorth_complexity <- function(x) {
 #' set.seed(1)
 #' x <- rnorm(500)
 #' out <- morie_dsp_hjorth(x)
-#' out$activity  # equals var(x)
+#' out$activity # equals var(x)
 #' @export
 morie_dsp_hjorth <- function(x) {
   list(
@@ -263,7 +277,7 @@ morie_dsp_hjorth <- function(x) {
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.3.
 #' @examples
 #' x <- c(-2, 3, -1, 4)
-#' morie_dsp_integrated_emg(x)  # sum(|x|) = 10
+#' morie_dsp_integrated_emg(x) # sum(|x|) = 10
 #' @export
 morie_dsp_integrated_emg <- function(x) {
   sum(abs(x))
@@ -294,7 +308,9 @@ morie_dsp_mean_abs <- function(x) {
 #' @export
 morie_dsp_variance_ratio <- function(x, y) {
   v <- stats::var(y)
-  if (v == 0) return(Inf)
+  if (v == 0) {
+    return(Inf)
+  }
   stats::var(x) / v
 }
 
@@ -310,7 +326,7 @@ morie_dsp_variance_ratio <- function(x, y) {
 #' t <- seq(0, 1, length.out = 100)
 #' x <- sin(2 * pi * 5 * t)
 #' morie_dsp_arc_length(x)
-#' morie_dsp_arc_length(rep(0, 5))  # flat signal: n - 1
+#' morie_dsp_arc_length(rep(0, 5)) # flat signal: n - 1
 #' @export
 morie_dsp_arc_length <- function(x) {
   sum(sqrt(1 + diff(x)^2))
@@ -332,7 +348,9 @@ morie_dsp_centroidal_time <- function(x, fs = 1) {
   t <- (seq_along(x) - 1L) / fs
   e <- x^2
   total <- sum(e)
-  if (total == 0) return(0)
+  if (total == 0) {
+    return(0)
+  }
   sum(t * e) / total
 }
 
@@ -354,14 +372,18 @@ morie_dsp_centroidal_time <- function(x, fs = 1) {
 morie_dsp_amplitude_histogram <- function(x, n_bins = 50L) {
   rng <- range(x)
   edges <- seq(rng[1], rng[2], length.out = n_bins + 1L)
-  h <- graphics::hist(x, breaks = edges, plot = FALSE,
-                      include.lowest = TRUE, right = TRUE)
+  h <- graphics::hist(x,
+    breaks = edges, plot = FALSE,
+    include.lowest = TRUE, right = TRUE
+  )
   counts <- as.integer(h$counts)
   centers <- (edges[-1L] + edges[-(n_bins + 1L)]) / 2
   total <- sum(counts)
   probs <- if (total > 0) counts / total else rep(0, n_bins)
-  list(counts = counts, centers = centers,
-       probabilities = probs, edges = edges)
+  list(
+    counts = counts, centers = centers,
+    probabilities = probs, edges = edges
+  )
 }
 
 #' Shannon entropy from amplitude histogram
@@ -377,7 +399,7 @@ morie_dsp_amplitude_histogram <- function(x, n_bins = 50L) {
 #' norm <- rnorm(2000)
 #' Hu <- morie_dsp_entropy_histogram(uni, n_bins = 20L)
 #' Hn <- morie_dsp_entropy_histogram(norm, n_bins = 20L)
-#' c(uniform = Hu, gaussian = Hn)  # uniform has higher entropy
+#' c(uniform = Hu, gaussian = Hn) # uniform has higher entropy
 #' @export
 morie_dsp_entropy_histogram <- function(x, n_bins = 50L) {
   p <- morie_dsp_amplitude_histogram(x, n_bins)$probabilities
@@ -407,7 +429,7 @@ morie_dsp_higuchi_fd <- function(x, kmax = 10L) {
   for (k in seq_len(kmax)) {
     lm_sum <- 0
     for (m in seq_len(k)) {
-      n_pts <- (n - m) %/% k  # Higuchi (1988) M = floor((N-m)/k)
+      n_pts <- (n - m) %/% k # Higuchi (1988) M = floor((N-m)/k)
       if (n_pts < 2L) next
       # Need M+1 indices to get M differences (matches Higuchi eq 1 exactly).
       # Earlier `seq(0, n_pts-1)` gave only M-1 differences.
@@ -419,7 +441,9 @@ morie_dsp_higuchi_fd <- function(x, kmax = 10L) {
     lk[k] <- lm_sum / k
   }
   valid <- lk > 0
-  if (sum(valid) < 2L) return(1)
+  if (sum(valid) < 2L) {
+    return(1)
+  }
   log_k <- log(1 / seq_len(kmax))
   log_l <- log(lk + 1e-15)
   fit <- stats::lm(log_l[valid] ~ log_k[valid])
@@ -441,17 +465,20 @@ morie_dsp_higuchi_fd <- function(x, kmax = 10L) {
 #' t <- seq.int(0, 511) / 512
 #' x <- sin(2 * pi * 8 * t)
 #' morie_dsp_katz_fd(x)
-#' morie_dsp_katz_fd(rep(2, 50))  # flat signal: 0
+#' morie_dsp_katz_fd(rep(2, 50)) # flat signal: 0
 #' @export
 morie_dsp_katz_fd <- function(x, n_scales = 10L) {
   x_norm <- x - min(x)
   rng <- max(x_norm)
-  if (rng == 0) return(0)
+  if (rng == 0) {
+    return(0)
+  }
   x_norm <- x_norm / rng
   n <- length(x_norm)
   scales <- unique(pmin(pmax(
     as.integer(10^seq(0, log10(n / 2), length.out = n_scales)),
-    1L), n))
+    1L
+  ), n))
   counts <- integer(length(scales))
   for (j in seq_along(scales)) {
     s <- scales[j]
@@ -487,7 +514,8 @@ morie_dsp_ruler_fd <- function(x, n_rulers = 10L) {
   n <- length(x)
   rulers <- unique(pmin(pmax(
     as.integer(10^seq(0, log10(n / 2), length.out = n_rulers)),
-    1L), n %/% 2L))
+    1L
+  ), n %/% 2L))
   lengths <- numeric(length(rulers))
   for (j in seq_along(rulers)) {
     r <- rulers[j]
@@ -499,7 +527,9 @@ morie_dsp_ruler_fd <- function(x, n_rulers = 10L) {
     }
     lengths[j] <- total
   }
-  if (length(lengths) < 2L) return(1)
+  if (length(lengths) < 2L) {
+    return(1)
+  }
   log_r <- log(as.numeric(rulers))
   log_l <- log(lengths + 1e-15)
   slope <- unname(stats::coef(stats::lm(log_l ~ log_r))[2L])
@@ -527,7 +557,8 @@ morie_dsp_parzen_pdf <- function(x, bandwidth = NULL, n_points = 100L) {
   }
   if (bandwidth <= 0) bandwidth <- 0.1
   grid <- seq(min(x) - 3 * bandwidth, max(x) + 3 * bandwidth,
-              length.out = n_points)
+    length.out = n_points
+  )
   d <- numeric(n_points)
   for (xi in x) {
     d <- d + exp(-0.5 * ((grid - xi) / bandwidth)^2)
@@ -614,9 +645,11 @@ morie_dsp_qrs_features <- function(beat) {
   area <- sum((ab[-1L] + ab[-length(ab)]) / 2)
   slope_up <- if (peak > 1L) max(diff(beat[1:peak])) else 0
   slope_down <- if (peak < length(beat)) min(diff(beat[peak:length(beat)])) else 0
-  list(amplitude = amplitude, duration = duration, area = area,
-       slope_up = slope_up, slope_down = slope_down,
-       peak_index = as.integer(peak))
+  list(
+    amplitude = amplitude, duration = duration, area = area,
+    slope_up = slope_up, slope_down = slope_down,
+    peak_index = as.integer(peak)
+  )
 }
 
 #' Baseline-corrected Pearson correlation
@@ -630,13 +663,15 @@ morie_dsp_qrs_features <- function(beat) {
 #' @examples
 #' set.seed(1)
 #' x <- rnorm(100)
-#' morie_dsp_baseline_correlation(x, x)  # identical inputs: 1
+#' morie_dsp_baseline_correlation(x, x) # identical inputs: 1
 #' @export
 morie_dsp_baseline_correlation <- function(x, y) {
   xc <- x - mean(x)
   yc <- y - mean(y)
   den <- sqrt(sum(xc^2) * sum(yc^2))
-  if (den == 0) return(0)
+  if (den == 0) {
+    return(0)
+  }
   sum(xc * yc) / den
 }
 
@@ -647,7 +682,8 @@ morie_dsp_baseline_correlation <- function(x, y) {
 #' @noRd
 .unwrap <- function(p, tol = pi) {
   d <- diff(p)
-  adj <- ifelse(d >  tol, d - 2 * pi,
-         ifelse(d < -tol, d + 2 * pi, d))
+  adj <- ifelse(d > tol, d - 2 * pi,
+    ifelse(d < -tol, d + 2 * pi, d)
+  )
   c(p[1L], p[1L] + cumsum(adj))
 }

@@ -27,12 +27,16 @@
 #'   comparison of floating-point values.
 #' @noRd
 .morie_twfe_demean <- function(M, f1, f2, tol = 1e-11, max_iter = 500L) {
-  M <- as.matrix(M); storage.mode(M) <- "double"
-  i1 <- as.integer(as.factor(f1)); i2 <- as.integer(as.factor(f2))
+  M <- as.matrix(M)
+  storage.mode(M) <- "double"
+  i1 <- as.integer(as.factor(f1))
+  i2 <- as.integer(as.factor(f2))
   # Fused Armadillo alternating-projection sweep (0-based codes). Same
   # unique within-projection as the R rowsum path, to `tol`.
-  out <- .morie_twfe_demean_cpp(M, i1 - 1L, i2 - 1L,
-                                max(i1), max(i2), tol, max_iter)
+  out <- .morie_twfe_demean_cpp(
+    M, i1 - 1L, i2 - 1L,
+    max(i1), max(i2), tol, max_iter
+  )
   dimnames(out) <- dimnames(M)
   out
 }
@@ -69,7 +73,8 @@
   meat <- crossprod(scores)
   # K: slopes + FE coefficients not nested in the cluster. Unit FEs are
   # nested when clustering on unit (the default); time FEs never are.
-  n_unit <- length(unique(unit)); n_time <- length(unique(time))
+  n_unit <- length(unique(unit))
+  n_time <- length(unique(time))
   # A cluster is nested in unit iff every unit maps to a single cluster.
   # The default clusters on unit, where nesting is identically true --
   # short-circuit it; otherwise test by (unit, cluster) pair counts,
@@ -80,12 +85,16 @@
   K <- length(keep) + fe_K
   adj <- (n - 1) / (n - K) * G / (G - 1)
   V <- adj * (XtX_inv %*% meat %*% XtX_inv)
-  beta <- rep(NA_real_, ncol(Xd)); beta[keep] <- beta_k
-  se <- rep(NA_real_, ncol(Xd)); se[keep] <- sqrt(pmax(diag(V), 0))
+  beta <- rep(NA_real_, ncol(Xd))
+  beta[keep] <- beta_k
+  se <- rep(NA_real_, ncol(Xd))
+  se[keep] <- sqrt(pmax(diag(V), 0))
   names(beta) <- names(se) <- colnames(Xd)
-  list(beta = beta, se = se, vcov = V, keep = keep, residuals = resid,
-       n = n, n_clusters = G, df_t = G - 1L,
-       n_units = n_unit, n_periods = n_time)
+  list(
+    beta = beta, se = se, vcov = V, keep = keep, residuals = resid,
+    n = n, n_clusters = G, df_t = G - 1L,
+    n_units = n_unit, n_periods = n_time
+  )
 }
 
 # ---------------------------------------------------------------------------
@@ -114,7 +123,8 @@
 #' @noRd
 .morie_did_ps_fit <- function(D, X) {
   fit <- suppressWarnings(stats::glm.fit(X, D,
-                                         family = stats::binomial()))
+    family = stats::binomial()
+  ))
   ps <- as.numeric(fit$fitted.values)
   ps <- pmin(ps, 1 - 1e-16)
   score <- (D - ps) * X
@@ -133,7 +143,8 @@
   # influence-function linear rep stay full-length.
   n <- length(y)
   sel <- subset_w != 0
-  Xs <- X[sel, , drop = FALSE]; wXs <- Xs * subset_w[sel]
+  Xs <- X[sel, , drop = FALSE]
+  wXs <- Xs * subset_w[sel]
   XpX <- crossprod(wXs, Xs) / n
   XpX_inv <- tryCatch(solve(XpX), error = function(e) .morie_ginv(XpX))
   beta <- as.numeric(XpX_inv %*% (crossprod(wXs, y[sel]) / n))
@@ -237,51 +248,53 @@
   or_c1 <- .morie_did_or_fit(y, X, as.numeric(D == 0 & post == 1))
   or_t0 <- .morie_did_or_fit(y, X, as.numeric(D == 1 & post == 0))
   or_t1 <- .morie_did_or_fit(y, X, as.numeric(D == 1 & post == 1))
-  mu_c0 <- or_c0$fitted; mu_c1 <- or_c1$fitted
-  mu_t0 <- or_t0$fitted; mu_t1 <- or_t1$fitted
+  mu_c0 <- or_c0$fitted
+  mu_c1 <- or_c1$fitted
+  mu_t0 <- or_t0$fitted
+  mu_t1 <- or_t1$fitted
   mu_c <- post * mu_c1 + (1 - post) * mu_c0
   lam <- mean(post)
   # Weights (DRDID::drdid_rc)
-  w_treat_pre  <- D * (1 - post)
+  w_treat_pre <- D * (1 - post)
   w_treat_post <- D * post
-  w_cont_pre  <- ps * (1 - D) * (1 - post) / (1 - ps)
+  w_cont_pre <- ps * (1 - D) * (1 - post) / (1 - ps)
   w_cont_post <- ps * (1 - D) * post / (1 - ps)
   w_d <- D
   w_dt1 <- D * post
   w_dt0 <- D * (1 - post)
-  eta_treat_pre  <- w_treat_pre  * (y - mu_c) / mean(w_treat_pre)
+  eta_treat_pre <- w_treat_pre * (y - mu_c) / mean(w_treat_pre)
   eta_treat_post <- w_treat_post * (y - mu_c) / mean(w_treat_post)
-  eta_cont_pre   <- w_cont_pre   * (y - mu_c) / mean(w_cont_pre)
-  eta_cont_post  <- w_cont_post  * (y - mu_c) / mean(w_cont_post)
+  eta_cont_pre <- w_cont_pre * (y - mu_c) / mean(w_cont_pre)
+  eta_cont_post <- w_cont_post * (y - mu_c) / mean(w_cont_post)
   # Local-efficiency adjustment terms
-  eta_d_post  <- w_d   * (mu_t1 - mu_c1) / mean(w_d)
+  eta_d_post <- w_d * (mu_t1 - mu_c1) / mean(w_d)
   eta_dt1_post <- w_dt1 * (mu_t1 - mu_c1) / mean(w_dt1)
-  eta_d_pre  <- w_d   * (mu_t0 - mu_c0) / mean(w_d)
+  eta_d_pre <- w_d * (mu_t0 - mu_c0) / mean(w_d)
   eta_dt0_pre <- w_dt0 * (mu_t0 - mu_c0) / mean(w_dt0)
-  att_treat_pre  <- mean(eta_treat_pre)
+  att_treat_pre <- mean(eta_treat_pre)
   att_treat_post <- mean(eta_treat_post)
-  att_cont_pre   <- mean(eta_cont_pre)
-  att_cont_post  <- mean(eta_cont_post)
-  att_d_post  <- mean(eta_d_post)
+  att_cont_pre <- mean(eta_cont_pre)
+  att_cont_post <- mean(eta_cont_post)
+  att_d_post <- mean(eta_d_post)
   att_dt1_post <- mean(eta_dt1_post)
-  att_d_pre  <- mean(eta_d_pre)
+  att_d_pre <- mean(eta_d_pre)
   att_dt0_pre <- mean(eta_dt0_pre)
   att <- (att_treat_post - att_treat_pre) -
     (att_cont_post - att_cont_pre) +
     (att_d_post - att_dt1_post) - (att_d_pre - att_dt0_pre)
   # --- Influence function (verbatim structure of DRDID::drdid_rc) ---
-  inf_treat_pre  <- eta_treat_pre - w_treat_pre * att_treat_pre /
+  inf_treat_pre <- eta_treat_pre - w_treat_pre * att_treat_pre /
     mean(w_treat_pre)
   inf_treat_post <- eta_treat_post - w_treat_post * att_treat_post /
     mean(w_treat_post)
   M1_post <- -colMeans(w_treat_post * X) / mean(w_treat_post)
-  M1_pre  <- -colMeans(w_treat_pre * X) / mean(w_treat_pre)
+  M1_pre <- -colMeans(w_treat_pre * X) / mean(w_treat_pre)
   inf_treat_or_post <- as.numeric(or_c1$lin_rep %*% M1_post)
-  inf_treat_or_pre  <- as.numeric(or_c0$lin_rep %*% M1_pre)
+  inf_treat_or_pre <- as.numeric(or_c0$lin_rep %*% M1_pre)
   inf_treat_or <- inf_treat_or_post + inf_treat_or_pre
   inf_treat <- inf_treat_post - inf_treat_pre + inf_treat_or
   # Control components (estimation effects of ps and mu_c)
-  inf_cont_pre  <- eta_cont_pre - w_cont_pre * att_cont_pre /
+  inf_cont_pre <- eta_cont_pre - w_cont_pre * att_cont_pre /
     mean(w_cont_pre)
   inf_cont_post <- eta_cont_post - w_cont_post * att_cont_post /
     mean(w_cont_post)
@@ -291,7 +304,7 @@
     mean(w_cont_post)
   inf_cont_ps <- as.numeric(psf$lin_rep %*% (M2_post - M2_pre))
   M3_post <- -colMeans(w_cont_post * X) / mean(w_cont_post)
-  M3_pre  <- -colMeans(w_cont_pre * X) / mean(w_cont_pre)
+  M3_pre <- -colMeans(w_cont_pre * X) / mean(w_cont_pre)
   inf_cont_or <- as.numeric(or_c1$lin_rep %*% M3_post) +
     as.numeric(or_c0$lin_rep %*% M3_pre)
   inf_cont <- inf_cont_post - inf_cont_pre + inf_cont_ps + inf_cont_or
@@ -302,7 +315,7 @@
   inf_eff4 <- eta_dt0_pre - w_dt0 * att_dt0_pre / mean(w_dt0)
   inf_eff <- (inf_eff1 - inf_eff2) - (inf_eff3 - inf_eff4)
   mom_post <- colMeans((w_d / mean(w_d) - w_dt1 / mean(w_dt1)) * X)
-  mom_pre  <- colMeans((w_d / mean(w_d) - w_dt0 / mean(w_dt0)) * X)
+  mom_pre <- colMeans((w_d / mean(w_d) - w_dt0 / mean(w_dt0)) * X)
   inf_or <- as.numeric((or_t1$lin_rep - or_c1$lin_rep) %*% mom_post) -
     as.numeric((or_t0$lin_rep - or_c0$lin_rep) %*% mom_pre)
   IF <- inf_treat - inf_cont + inf_eff + inf_or
@@ -330,7 +343,8 @@
   }
   if (!is.null(seed)) set.seed(seed)
   sq5 <- sqrt(5)
-  k1 <- 0.5 * (1 - sq5); k2 <- 0.5 * (1 + sq5)
+  k1 <- 0.5 * (1 - sq5)
+  k2 <- 0.5 * (1 + sq5)
   p_k1 <- 0.5 * (1 + sq5) / sq5
   boot <- matrix(NA_real_, biters, ncol(IF_mat))
   for (b in seq_len(biters)) {
@@ -339,7 +353,7 @@
   }
   se <- apply(boot, 2L, function(z) {
     (stats::quantile(z, 0.75, na.rm = TRUE, names = FALSE) -
-       stats::quantile(z, 0.25, na.rm = TRUE, names = FALSE)) /
+      stats::quantile(z, 0.25, na.rm = TRUE, names = FALSE)) /
       (stats::qnorm(0.75) - stats::qnorm(0.25))
   }) / sqrt(n)
   list(se = as.numeric(se), boot = boot)
@@ -372,10 +386,11 @@
   ids <- sort(unique(df[[unit]]))
   n_ids <- length(ids)
   engine <- switch(est_method,
-                   dr = .morie_drdid_panel_native,
-                   reg = .morie_reg_did_panel_native,
-                   ipw = .morie_ipw_did_panel_native,
-                   stop("Unknown est_method: ", est_method))
+    dr = .morie_drdid_panel_native,
+    reg = .morie_reg_did_panel_native,
+    ipw = .morie_ipw_did_panel_native,
+    stop("Unknown est_method: ", est_method)
+  )
   # Pull columns out as atomic vectors once; the per-cell work below then
   # indexes these instead of subsetting the data.frame ([.data.frame plus
   # character coercion dominated the profile). uid_all is the 1-based
@@ -385,8 +400,11 @@
   y_all <- as.numeric(df[[outcome]])
   Xcov_all <- if (length(covariates)) {
     m <- as.matrix(df[, covariates, drop = FALSE])
-    storage.mode(m) <- "double"; m
-  } else NULL
+    storage.mode(m) <- "double"
+    m
+  } else {
+    NULL
+  }
   rows <- list()
   IF_cols <- list()
   for (g in glist) {
@@ -408,15 +426,22 @@
       }
       keep_unit <- (g_all == g) | is_control
       cidx <- which(keep_unit & (time_all == pret | time_all == tt))
-      su <- uid_all[cidx]; st <- time_all[cidx]
+      su <- uid_all[cidx]
+      st <- time_all[cidx]
       # Units observed in both periods (appear exactly twice in the cell).
       keep2 <- tabulate(su, nbins = n_ids)[su] == 2L
-      cidx <- cidx[keep2]; su <- su[keep2]; st <- st[keep2]
+      cidx <- cidx[keep2]
+      su <- su[keep2]
+      st <- st[keep2]
       if (!length(su)) next
       # Order by (unit, time); ids is sorted so unit-code order matches
       # unit-value order, and pret < tt gives pre then post per unit.
-      o <- order(su, st); cidx <- cidx[o]; su <- su[o]; st <- st[o]
-      is_pre <- st == pret; is_post <- st == tt
+      o <- order(su, st)
+      cidx <- cidx[o]
+      su <- su[o]
+      st <- st[o]
+      is_pre <- st == pret
+      is_post <- st == tt
       if (!any(is_pre)) next
       pre_idx <- cidx[is_pre]
       dy <- y_all[cidx[is_post]] - y_all[pre_idx]
@@ -438,16 +463,23 @@
         # cohort size, carried through so the aggregation can weight by
         # P(G = g) rather than treating every cell as equally important
         n_treated = sum(D), n_control = sum(1 - D),
-        se_analytic = if (identical(se_convention, "bessel"))
+        se_analytic = if (identical(se_convention, "bessel")) {
           stats::sd(IF_full) / sqrt(n_ids)
-        else sqrt(mean(IF_full^2) / n_ids))
+        } else {
+          sqrt(mean(IF_full^2) / n_ids)
+        }
+      )
       IF_cols[[length(IF_cols) + 1L]] <- IF_full
     }
   }
   if (!length(rows)) {
-    return(list(results = data.frame(group = numeric(), t = numeric(),
-                                     att = numeric(), se = numeric()),
-                IF = NULL))
+    return(list(
+      results = data.frame(
+        group = numeric(), t = numeric(),
+        att = numeric(), se = numeric()
+      ),
+      IF = NULL
+    ))
   }
   res <- do.call(rbind, rows)
   IF_mat <- do.call(cbind, IF_cols)
@@ -480,16 +512,20 @@
   # Collapse to group x time cells (mean outcome, mean treatment,
   # cell size), as did_multiplegt does internally.
   cell <- stats::aggregate(df[, c(outcome, treatment)],
-                           by = list(.g = df[[unit]], .t = df[[time]]),
-                           FUN = mean)
+    by = list(.g = df[[unit]], .t = df[[time]]),
+    FUN = mean
+  )
   cnt <- stats::aggregate(list(.n = rep(1L, nrow(df))),
-                          by = list(.g = df[[unit]], .t = df[[time]]),
-                          FUN = sum)
+    by = list(.g = df[[unit]], .t = df[[time]]),
+    FUN = sum
+  )
   cell <- merge(cell, cnt, by = c(".g", ".t"))
   tlist <- sort(unique(cell$.t))
-  num <- 0; den <- 0
+  num <- 0
+  den <- 0
   for (k in seq_along(tlist)[-1L]) {
-    t0 <- tlist[k - 1L]; t1 <- tlist[k]
+    t0 <- tlist[k - 1L]
+    t1 <- tlist[k]
     a <- cell[cell$.t == t0, , drop = FALSE]
     b <- cell[cell$.t == t1, , drop = FALSE]
     m <- merge(a, b, by = ".g", suffixes = c("_0", "_1"))
@@ -497,11 +533,11 @@
     d0 <- m[[paste0(treatment, "_0")]]
     d1 <- m[[paste0(treatment, "_1")]]
     dy <- m[[paste0(outcome, "_1")]] - m[[paste0(outcome, "_0")]]
-    w  <- m$.n_1
-    join   <- d0 == 0 & d1 == 1
-    stay0  <- d0 == 0 & d1 == 0
-    leave  <- d0 == 1 & d1 == 0
-    stay1  <- d0 == 1 & d1 == 1
+    w <- m$.n_1
+    join <- d0 == 0 & d1 == 1
+    stay0 <- d0 == 0 & d1 == 0
+    leave <- d0 == 1 & d1 == 0
+    stay1 <- d0 == 1 & d1 == 1
     if (any(join) && any(stay0)) {
       did_plus <- stats::weighted.mean(dy[join], w[join]) -
         stats::weighted.mean(dy[stay0], w[stay0])
@@ -517,7 +553,9 @@
       den <- den + n_minus
     }
   }
-  if (den == 0) return(NA_real_)
+  if (den == 0) {
+    return(NA_real_)
+  }
   num / den
 }
 
@@ -577,18 +615,24 @@
     # 2x2 DiD via FWL on the demeaned system; also return the weight
     # ingredient n^2 * var(demeaned D).
     Dd <- .morie_twfe_demean(cbind(sub$.d, sub$.y), sub$.g, sub$.t)
-    dtil <- Dd[, 1L]; ytil <- Dd[, 2L]
+    dtil <- Dd[, 1L]
+    ytil <- Dd[, 2L]
     vd <- sum(dtil^2)
-    if (vd < 1e-12) return(NULL)
-    list(est = sum(dtil * ytil) / vd,
-         wt_raw = vd / nrow(sub) * nrow(sub)^2)
+    if (vd < 1e-12) {
+      return(NULL)
+    }
+    list(
+      est = sum(dtil * ytil) / vd,
+      wt_raw = vd / nrow(sub) * nrow(sub)^2
+    )
   }
   rows <- list()
   for (i in seq_along(cohorts)) {
     for (j in seq_along(cohorts)) {
       if (i == j) next
-      k <- cohorts[i]; l <- cohorts[j]
-      if (!is.finite(k)) next   # "treated" side must be a real cohort
+      k <- cohorts[i]
+      l <- cohorts[j]
+      if (!is.finite(k)) next # "treated" side must be a real cohort
       if (is.finite(l) && k >= l) {
         # k = later-treated vs l = earlier-treated: usable window is
         # l's post-period only (earlier group's treatment is constant
@@ -606,7 +650,8 @@
           rows[[length(rows) + 1L]] <- data.frame(
             treated = k, untreated = l,
             type = "Earlier vs Later Treated",
-            estimate = tt$est, wt_raw = tt$wt_raw)
+            estimate = tt$est, wt_raw = tt$wt_raw
+          )
         }
         # (b) l treated vs k acting as (already-treated) control,
         # after k treats.
@@ -617,7 +662,8 @@
           rows[[length(rows) + 1L]] <- data.frame(
             treated = l, untreated = k,
             type = "Later vs Earlier Treated",
-            estimate = tt$est, wt_raw = tt$wt_raw)
+            estimate = tt$est, wt_raw = tt$wt_raw
+          )
         }
       } else {
         # Treated cohort vs never-treated
@@ -626,15 +672,18 @@
           rows[[length(rows) + 1L]] <- data.frame(
             treated = k, untreated = Inf,
             type = "Treated vs Untreated",
-            estimate = tt$est, wt_raw = tt$wt_raw)
+            estimate = tt$est, wt_raw = tt$wt_raw
+          )
         }
       }
     }
   }
   if (!length(rows)) {
-    return(data.frame(treated = numeric(), untreated = numeric(),
-                      type = character(), estimate = numeric(),
-                      weight = numeric()))
+    return(data.frame(
+      treated = numeric(), untreated = numeric(),
+      type = character(), estimate = numeric(),
+      weight = numeric()
+    ))
   }
   out <- do.call(rbind, rows)
   out$weight <- out$wt_raw / sum(out$wt_raw)
@@ -656,11 +705,13 @@
 #' @noRd
 .morie_twfe_weights_native <- function(df, group, time, treatment) {
   cell <- stats::aggregate(df[, treatment, drop = FALSE],
-                           by = list(.g = df[[group]], .t = df[[time]]),
-                           FUN = mean)
+    by = list(.g = df[[group]], .t = df[[time]]),
+    FUN = mean
+  )
   cnt <- stats::aggregate(list(.n = rep(1L, nrow(df))),
-                          by = list(.g = df[[group]], .t = df[[time]]),
-                          FUN = sum)
+    by = list(.g = df[[group]], .t = df[[time]]),
+    FUN = sum
+  )
   cell <- merge(cell, cnt, by = c(".g", ".t"))
   d <- cell[[treatment]]
   # N-weighted two-way demeaning of D on group + time FE
@@ -680,6 +731,8 @@
   denom <- sum(w[treated] * d[treated] * dm[treated])
   weights <- rep(NA_real_, nrow(cell))
   weights[treated] <- (w[treated] * d[treated] * dm[treated]) / denom
-  data.frame(group = cell$.g, time = cell$.t,
-             treatment = d, n = cell$.n, weight = weights)
+  data.frame(
+    group = cell$.g, time = cell$.t,
+    treatment = d, n = cell$.n, weight = weights
+  )
 }

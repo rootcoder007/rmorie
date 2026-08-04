@@ -23,9 +23,9 @@
 #' )
 #' @export
 morie_deep_learning_genomic <- function(x, y, markers, hidden = 16,
-                                  n_epochs = 200, lr = 1e-2,
-                                  l2 = 1e-3, seed = 0,
-                                  deterministic_seed = NULL) {
+                                        n_epochs = 200, lr = 1e-2,
+                                        l2 = 1e-3, seed = 0,
+                                        deterministic_seed = NULL) {
   if (!is.null(deterministic_seed)) {
     rmorie::morie_det_rng("dlgen", deterministic_seed)
   } else {

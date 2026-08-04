@@ -34,11 +34,15 @@
 .morie_optimize_scale_normalized <- function(fn, d, n_restarts = 8L, seed = 0L,
                                              x0 = NULL) {
   d <- as.integer(d)
-  if (d < 2L) stop(sprintf("need at least 2 coefficients, got %d.", d),
-                   call. = FALSE)
+  if (d < 2L) {
+    stop(sprintf("need at least 2 coefficients, got %d.", d),
+      call. = FALSE
+    )
+  }
   if (d == 2L) {
     grid <- seq(-.MORIE_GRID_SCAN_HALF_WIDTH, .MORIE_GRID_SCAN_HALF_WIDTH,
-                length.out = .MORIE_GRID_SCAN_POINTS)
+      length.out = .MORIE_GRID_SCAN_POINTS
+    )
     vals <- vapply(grid, function(g) fn(c(1, g)), numeric(1))
     k <- which.min(vals)
     return(list(beta = c(1, grid[k]), value = vals[k]))
@@ -49,8 +53,10 @@
   best <- NULL
   best_val <- Inf
   for (st in starts) {
-    r <- stats::optim(st, function(z) fn(c(1, z)), method = "Nelder-Mead",
-                      control = list(maxit = 3000L, reltol = 1e-12))
+    r <- stats::optim(st, function(z) fn(c(1, z)),
+      method = "Nelder-Mead",
+      control = list(maxit = 3000L, reltol = 1e-12)
+    )
     if (r$value < best_val) {
       best_val <- r$value
       best <- r$par
@@ -85,9 +91,11 @@ morie_choice_based_shares <- function(pi1) {
   denom <- sqrt(p0) + sqrt(p1)
   q0 <- sqrt(p0) / denom
   q1 <- sqrt(p1) / denom
-  list(q1 = q1, q0 = q0, factor = p1 / q1 + p0 / q0,
-       factor_at_random_sample = 2,
-       method = "q_j proportional to sqrt(pi_j); minimises pi_1/q_1 + pi_0/q_0")
+  list(
+    q1 = q1, q0 = q0, factor = p1 / q1 + p0 / q0,
+    factor_at_random_sample = 2,
+    method = "q_j proportional to sqrt(pi_j); minimises pi_1/q_1 + pi_0/q_0"
+  )
 }
 
 #' Maximum-score estimator for a choice-based sample
@@ -134,8 +142,11 @@ morie_choice_based_max_score <- function(x, y, sampling_weights,
   if (!all(yv %in% c(0, 1))) stop("y must be binary 0/1.", call. = FALSE)
   n <- nrow(X)
   d <- ncol(X)
-  if (d < 2L) stop(sprintf("need at least 2 covariates, got %d.", d),
-                   call. = FALSE)
+  if (d < 2L) {
+    stop(sprintf("need at least 2 covariates, got %d.", d),
+      call. = FALSE
+    )
+  }
   w <- as.numeric(sampling_weights)
   if (length(w) == 1L) {
     pi1 <- w
@@ -148,7 +159,8 @@ morie_choice_based_max_score <- function(x, y, sampling_weights,
   }
   if (!(pi1 > 0 && pi1 < 1 && pi0 > 0 && pi0 < 1)) {
     stop(sprintf("aggregate shares must lie in (0, 1), got (%g, %g).", pi0, pi1),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   n1 <- sum(yv == 1)
   n0 <- n - n1
@@ -156,8 +168,11 @@ morie_choice_based_max_score <- function(x, y, sampling_weights,
     stop("need both response categories present.", call. = FALSE)
   }
   hh <- if (is.null(h)) n^(-0.2) else as.numeric(h)
-  if (hh <= 0) stop(sprintf("bandwidth must be positive, got %g.", hh),
-                    call. = FALSE)
+  if (hh <= 0) {
+    stop(sprintf("bandwidth must be positive, got %g.", hh),
+      call. = FALSE
+    )
+  }
   score <- function(b) {
     v <- as.numeric(X %*% b)
     # (4.35)'s K is the INTEGRAL of a kernel -- a smooth CDF standing
@@ -166,13 +181,16 @@ morie_choice_based_max_score <- function(x, y, sampling_weights,
     (pi1 / n1) * sum(yv * ind) - (pi0 / n0) * sum((1 - yv) * ind)
   }
   fit <- .morie_optimize_scale_normalized(function(b) -score(b), d,
-                                          n_restarts = n_restarts, seed = seed)
-  list(beta = fit$beta, score = -fit$value, pi1 = pi1, pi0 = pi0,
-       n1 = n1, n0 = n0, smoothed = isTRUE(smoothed),
-       bandwidth = if (smoothed) hh else NULL,
-       rate_exponent = if (smoothed) -0.4 else -1 / 3,
-       standard_errors_valid = isTRUE(smoothed), n = n, d = d,
-       method = "Choice-based max score (4.33)/(4.35); population shares reweight the strata")
+    n_restarts = n_restarts, seed = seed
+  )
+  list(
+    beta = fit$beta, score = -fit$value, pi1 = pi1, pi0 = pi0,
+    n1 = n1, n0 = n0, smoothed = isTRUE(smoothed),
+    bandwidth = if (smoothed) hh else NULL,
+    rate_exponent = if (smoothed) -0.4 else -1 / 3,
+    standard_errors_valid = isTRUE(smoothed), n = n, d = d,
+    method = "Choice-based max score (4.33)/(4.35); population shares reweight the strata"
+  )
 }
 
 #' Maximum-score estimator for panel binary response
@@ -217,8 +235,10 @@ morie_panel_max_score <- function(x, y, n_periods, smoothed = TRUE, h = NULL,
   }
   if (is.matrix(x)) {
     if (nrow(x) %% tt != 0L) {
-      stop(sprintf("x has %d rows, not a multiple of n_periods=%d.",
-                   nrow(x), tt), call. = FALSE)
+      stop(sprintf(
+        "x has %d rows, not a multiple of n_periods=%d.",
+        nrow(x), tt
+      ), call. = FALSE)
     }
     d <- ncol(x)
     n <- nrow(x) %/% tt
@@ -230,19 +250,25 @@ morie_panel_max_score <- function(x, y, n_periods, smoothed = TRUE, h = NULL,
     d <- dim(X)[3L]
     if (dim(X)[2L] != tt) {
       stop(sprintf("x has %d periods, expected %d.", dim(X)[2L], tt),
-           call. = FALSE)
+        call. = FALSE
+      )
     }
   } else {
     stop("x must be (n, T, d) or (n*T, d).", call. = FALSE)
   }
   Y <- if (is.matrix(y)) y else matrix(as.numeric(y), ncol = tt, byrow = TRUE)
   if (!identical(dim(Y), c(n, tt))) {
-    stop(sprintf("y has %d x %d entries, expected %d x %d.",
-                 nrow(Y), ncol(Y), n, tt), call. = FALSE)
+    stop(sprintf(
+      "y has %d x %d entries, expected %d x %d.",
+      nrow(Y), ncol(Y), n, tt
+    ), call. = FALSE)
   }
   if (!all(Y %in% c(0, 1))) stop("y must be binary 0/1.", call. = FALSE)
-  if (d < 2L) stop(sprintf("need at least 2 covariates, got %d.", d),
-                   call. = FALSE)
+  if (d < 2L) {
+    stop(sprintf("need at least 2 covariates, got %d.", d),
+      call. = FALSE
+    )
+  }
 
   wl <- list()
   dyl <- list()
@@ -258,28 +284,37 @@ morie_panel_max_score <- function(x, y, n_periods, smoothed = TRUE, h = NULL,
   dY <- unlist(dyl, use.names = FALSE)
 
   # a covariate constant within every individual differences to zero
-  const_cols <- which(vapply(seq_len(d), function(j)
+  const_cols <- which(vapply(seq_len(d), function(j) {
     isTRUE(all.equal(as.numeric(X[, , j] - X[, 1L, j]),
-                     numeric(n * tt), tolerance = 1e-12)), logical(1)))
+      numeric(n * tt),
+      tolerance = 1e-12
+    ))
+  }, logical(1)))
 
   hh <- if (is.null(h)) n^(-0.2) else as.numeric(h)
-  if (hh <= 0) stop(sprintf("bandwidth must be positive, got %g.", hh),
-                    call. = FALSE)
+  if (hh <= 0) {
+    stop(sprintf("bandwidth must be positive, got %g.", hh),
+      call. = FALSE
+    )
+  }
   score <- function(b) {
     v <- as.numeric(W %*% b)
     ind <- if (smoothed) stats::pnorm(v / hh) else as.numeric(v >= 0)
     sum(dY * ind) / n
   }
   fit <- .morie_optimize_scale_normalized(function(b) -score(b), d,
-                                          n_restarts = n_restarts, seed = seed)
-  list(beta = fit$beta, score = -fit$value, n_pairs = length(dY),
-       n_discordant_pairs = sum(dY != 0),
-       unidentified_columns = as.integer(const_cols),
-       intercept_identified = FALSE, smoothed = isTRUE(smoothed),
-       bandwidth = if (smoothed) hh else NULL,
-       rate_exponent = if (smoothed) -0.4 else -1 / 3,
-       n = n, T = tt, d = d,
-       method = "Panel max score (4.39)/(4.40); differencing kills U_i and the intercept with it")
+    n_restarts = n_restarts, seed = seed
+  )
+  list(
+    beta = fit$beta, score = -fit$value, n_pairs = length(dY),
+    n_discordant_pairs = sum(dY != 0),
+    unidentified_columns = as.integer(const_cols),
+    intercept_identified = FALSE, smoothed = isTRUE(smoothed),
+    bandwidth = if (smoothed) hh else NULL,
+    rate_exponent = if (smoothed) -0.4 else -1 / 3,
+    n = n, T = tt, d = d,
+    method = "Panel max score (4.39)/(4.40); differencing kills U_i and the intercept with it"
+  )
 }
 
 #' Maximum-score estimator for an ordered-response model
@@ -338,30 +373,42 @@ morie_ordered_max_score <- function(x, y, thresholds = NULL, smoothed = FALSE,
   d <- ncol(X)
   m_cat <- max(yi) + 1L
   if (m_cat < 3L) {
-    stop(sprintf("an ordered-response model needs at least 3 categories, got %d.",
-                 m_cat), call. = FALSE)
+    stop(sprintf(
+      "an ordered-response model needs at least 3 categories, got %d.",
+      m_cat
+    ), call. = FALSE)
   }
-  if (d < 2L) stop(sprintf("need at least 2 covariates, got %d.", d),
-                   call. = FALSE)
+  if (d < 2L) {
+    stop(sprintf("need at least 2 covariates, got %d.", d),
+      call. = FALSE
+    )
+  }
   # W = 1 + (number of finite cut-points Y* passed)
   W <- 1 + as.numeric(yi)
   known <- !is.null(thresholds)
   if (known) {
     a0 <- as.numeric(thresholds)
     if (length(a0) != m_cat - 1L) {
-      stop(sprintf("thresholds must have M-1 = %d entries, got %d.",
-                   m_cat - 1L, length(a0)), call. = FALSE)
+      stop(sprintf(
+        "thresholds must have M-1 = %d entries, got %d.",
+        m_cat - 1L, length(a0)
+      ), call. = FALSE)
     }
     if (any(diff(a0) <= 0)) {
       stop("thresholds must be strictly increasing.", call. = FALSE)
     }
   }
   hh <- if (is.null(h)) n^(-0.2) else as.numeric(h)
-  if (hh <= 0) stop(sprintf("bandwidth must be positive, got %g.", hh),
-                    call. = FALSE)
+  if (hh <= 0) {
+    stop(sprintf("bandwidth must be positive, got %g.", hh),
+      call. = FALSE
+    )
+  }
   unpack <- function(z) {
     b <- c(1, z[seq_len(d - 1L)])
-    if (known) return(list(b = b, a = a0))
+    if (known) {
+      return(list(b = b, a = a0))
+    }
     gaps <- abs(z[-seq_len(d - 1L)])
     list(b = b, a = if (m_cat > 2L) c(0, cumsum(gaps)) else 0)
   }
@@ -373,7 +420,7 @@ morie_ordered_max_score <- function(x, y, thresholds = NULL, smoothed = FALSE,
       # objective, so it is MAXIMISED and negated here
       wim <- outer(yi, seq_len(m_cat - 1L) - 1L, ">") * 1
       -sum((2 * wim - 1) *
-             stats::pnorm(outer(v, pk$a, "-") / hh)) / n
+        stats::pnorm(outer(v, pk$a, "-") / hh)) / n
     } else {
       mean(abs(W - (1 + rowSums(outer(v, pk$a, ">")))))
     }
@@ -383,7 +430,8 @@ morie_ordered_max_score <- function(x, y, thresholds = NULL, smoothed = FALSE,
     # applies -- and for d = 2 it scans the grid exhaustively rather
     # than trusting a simplex on a step function
     fit <- .morie_optimize_scale_normalized(function(b) objective(b[-1L]), d,
-                                            n_restarts = n_restarts, seed = seed)
+      n_restarts = n_restarts, seed = seed
+    )
     return(list(
       beta = fit$beta, thresholds = a0,
       objective = if (smoothed) -fit$value else fit$value,
@@ -391,7 +439,8 @@ morie_ordered_max_score <- function(x, y, thresholds = NULL, smoothed = FALSE,
       thresholds_estimated = FALSE, scale_normalisation_required = FALSE,
       smoothed = isTRUE(smoothed), bandwidth = if (smoothed) hh else NULL,
       M = m_cat, n = n, d = d,
-      method = "Ordered max score (4.43); a median regression, so absolute deviations are MINIMISED"))
+      method = "Ordered max score (4.43); a median regression, so absolute deviations are MINIMISED"
+    ))
   }
   k <- (d - 1L) + max(m_cat - 2L, 0L)
   set.seed(seed)
@@ -400,22 +449,26 @@ morie_ordered_max_score <- function(x, y, thresholds = NULL, smoothed = FALSE,
   best <- NULL
   best_val <- Inf
   for (st in starts) {
-    r <- stats::optim(st, objective, method = "Nelder-Mead",
-                      control = list(maxit = 5000L, reltol = 1e-12))
+    r <- stats::optim(st, objective,
+      method = "Nelder-Mead",
+      control = list(maxit = 5000L, reltol = 1e-12)
+    )
     if (r$value < best_val) {
       best_val <- r$value
       best <- r$par
     }
   }
   pk <- unpack(best)
-  list(beta = pk$b, thresholds = pk$a,
-       objective = if (smoothed) -best_val else best_val,
-       sense = if (smoothed) "maximised" else "minimised",
-       thresholds_estimated = !known,
-       scale_normalisation_required = FALSE, smoothed = isTRUE(smoothed),
-       bandwidth = if (smoothed) hh else NULL,
-       M = m_cat, n = n, d = d,
-       method = "Ordered max score (4.43); a median regression, so absolute deviations are MINIMISED")
+  list(
+    beta = pk$b, thresholds = pk$a,
+    objective = if (smoothed) -best_val else best_val,
+    sense = if (smoothed) "maximised" else "minimised",
+    thresholds_estimated = !known,
+    scale_normalisation_required = FALSE, smoothed = isTRUE(smoothed),
+    bandwidth = if (smoothed) hh else NULL,
+    M = m_cat, n = n, d = d,
+    method = "Ordered max score (4.43); a median regression, so absolute deviations are MINIMISED"
+  )
 }
 
 #' Rate of convergence of the smoothed maximum-score estimator
@@ -449,14 +502,18 @@ morie_sms_rate <- function(n, smoothness_order = 2L) {
   }
   s <- as.integer(smoothness_order)
   if (is.na(s) || s < 2L) {
-    stop(sprintf("the theorem requires a smoothness order of at least 2, got %s.",
-                 smoothness_order), call. = FALSE)
+    stop(sprintf(
+      "the theorem requires a smoothness order of at least 2, got %s.",
+      smoothness_order
+    ), call. = FALSE)
   }
   expo <- -s / (2 * s + 1)
-  list(rate = nn^expo, exponent = expo,
-       bandwidth_exponent = -1 / (2 * s + 1),
-       unsmoothed_rate = nn^(-1 / 3), unsmoothed_exponent = -1 / 3,
-       ratio_to_unsmoothed = nn^expo / nn^(-1 / 3),
-       attains_root_n = FALSE, smoothness_order = s, n = nn,
-       method = "n^{-s/(2s+1)} from (n h_n)^{1/2} with n h_n^{2s+1} -> lambda")
+  list(
+    rate = nn^expo, exponent = expo,
+    bandwidth_exponent = -1 / (2 * s + 1),
+    unsmoothed_rate = nn^(-1 / 3), unsmoothed_exponent = -1 / 3,
+    ratio_to_unsmoothed = nn^expo / nn^(-1 / 3),
+    attains_root_n = FALSE, smoothness_order = s, n = nn,
+    method = "n^{-s/(2s+1)} from (n h_n)^{1/2} with n h_n^{2s+1} -> lambda"
+  )
 }

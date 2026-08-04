@@ -23,9 +23,12 @@
                                         subsample = 0.5,
                                         n_folds = 5L,
                                         random_state = 42L) {
-  if (length(unique(w)) < 2L || nrow(X) < 2L * n_folds)
+  if (length(unique(w)) < 2L || nrow(X) < 2L * n_folds) {
     stop("morie_estimate_dr_forest: needs both treatment arms and at ",
-         "least ", 2L * n_folds, " rows", call. = FALSE)
+      "least ", 2L * n_folds, " rows",
+      call. = FALSE
+    )
+  }
   ml_y <- .morie_dml_xfit_ridge_gcv(X, y, n_folds, random_state)
   ps <- .morie_dml_xfit_logit(X, w, n_folds, random_state + 1L)
   u <- y - ml_y
@@ -33,11 +36,13 @@
   vv <- pmax(v^2, 1e-8)
   pseudo <- u / ifelse(abs(v) < 1e-4, sign(v + 1e-12) * 1e-4, v)
   fw <- vv
-  fit <- .morie_rlearner_forest_cpp(X, pseudo, fw, X,
-                                    as.integer(n_trees),
-                                    as.integer(max_depth),
-                                    as.integer(min_node),
-                                    subsample, as.integer(random_state))
+  fit <- .morie_rlearner_forest_cpp(
+    X, pseudo, fw, X,
+    as.integer(n_trees),
+    as.integer(max_depth),
+    as.integer(min_node),
+    subsample, as.integer(random_state)
+  )
   tau <- fit[, 1L]
   mu1 <- ml_y + (1 - ps) * tau
   mu0 <- ml_y - ps * tau
@@ -56,8 +61,11 @@
     control  = w == 0,
     overlap  = rep(TRUE, length(y))
   )
-  wt <- if (target_sample == "overlap") nf$ps * (1 - nf$ps)
-        else as.numeric(sel)
+  wt <- if (target_sample == "overlap") {
+    nf$ps * (1 - nf$ps)
+  } else {
+    as.numeric(sel)
+  }
   ate <- sum(wt * psi) / sum(wt)
   se <- sqrt(sum(wt^2 * (psi - ate)^2)) / sum(wt)
   list(ate = ate, se = se)

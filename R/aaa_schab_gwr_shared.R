@@ -75,7 +75,9 @@
 
 .schab_reshape_like <- function(values, template) {
   d <- dim(template)
-  if (is.null(d)) return(as.numeric(values))
+  if (is.null(d)) {
+    return(as.numeric(values))
+  }
   array(values, dim = d)
 }
 
@@ -217,7 +219,9 @@
   n <- as.numeric(n)
   tr_S <- as.numeric(tr_S)
   denom <- n - 2 - tr_S
-  if (denom <= 0) return(Inf)
+  if (denom <= 0) {
+    return(Inf)
+  }
   2 * n * log(sqrt(sigma2)) + n * log(2 * pi) + n * (n + tr_S) / denom
 }
 
@@ -238,7 +242,9 @@
   for (i in seq_len(n)) {
     w <- .schab_local_weights(D[i, ], bandwidth, kernel, adaptive)
     w[i] <- 0
-    if (!any(w > 0)) return(Inf)
+    if (!any(w > 0)) {
+      return(Inf)
+    }
     beta_i <- as.numeric(.schab_wls_operator(X, w) %*% y)
     r <- y[i] - sum(X[i, ] * beta_i)
     total <- total + r * r
@@ -256,7 +262,9 @@
     stop(sprintf("unknown criterion '%s'", criterion))
   }
   fit <- .schab_gwr_fit(y, X, distances, bandwidth, kernel, adaptive)
-  if (fit$sigma2 <= 0) return(Inf)
+  if (fit$sigma2 <= 0) {
+    return(Inf)
+  }
   if (criterion == "aicc") {
     .schab_aicc_from_parts(fit$n, fit$sigma2, fit$tr_S)
   } else {
@@ -280,11 +288,15 @@
   for (i in seq_len(max_iter)) {
     if (abs(b - a) < tol) break
     if (fc < fd) {
-      b <- dd; dd <- cc; fd <- fc
+      b <- dd
+      dd <- cc
+      fd <- fc
       cc <- b - invphi * (b - a)
       fc <- func(cc)
     } else {
-      a <- cc; cc <- dd; fc <- fd
+      a <- cc
+      cc <- dd
+      fc <- fd
       dd <- a + invphi * (b - a)
       fd <- func(dd)
     }
@@ -317,18 +329,23 @@
       .schab_gwr_criterion(y, X, D, k, kernel, TRUE, criterion)
     }, numeric(1))
     best <- grid[which.min(scores)]
-    return(list(bandwidth = as.integer(best), score = min(scores),
-                criterion = criterion,
-                bounds = c(grid[1], grid[length(grid)]),
-                adaptive = TRUE, grid = grid, scores = scores))
+    return(list(
+      bandwidth = as.integer(best), score = min(scores),
+      criterion = criterion,
+      bounds = c(grid[1], grid[length(grid)]),
+      adaptive = TRUE, grid = grid, scores = scores
+    ))
   }
   rng <- if (is.null(bounds)) .schab_default_bounds(coords) else bounds
   opt <- .schab_golden_section(
     function(h) .schab_gwr_criterion(y, X, D, h, kernel, FALSE, criterion),
-    rng[1], rng[2], tol = tol
+    rng[1], rng[2],
+    tol = tol
   )
-  list(bandwidth = opt$x, score = opt$value, criterion = criterion,
-       bounds = rng, adaptive = FALSE)
+  list(
+    bandwidth = opt$x, score = opt$value, criterion = criterion,
+    bounds = rng, adaptive = FALSE
+  )
 }
 
 # mgwr/search.py multi_bw. Each covariate j is smoothed against the partial
@@ -388,7 +405,7 @@
     y <- matrix((as.numeric(y) - y_centre) / y_scale, ncol = 1L)
     for (j in seq_len(k)) {
       sdj <- sd_pop(X[, j])
-      if (sdj > 0) {                    # leave a constant column alone
+      if (sdj > 0) { # leave a constant column alone
         x_centre[j] <- mean(X[, j])
         x_scale[j] <- sdj
       }
@@ -400,8 +417,10 @@
     .schab_gwr_fit(as.numeric(resp), design, D, bw, kernel, adaptive)
   }
   select_sub <- function(resp, design) {
-    .schab_select_bandwidth(as.numeric(resp), design, coords, kernel = kernel,
-                            criterion = criterion, adaptive = adaptive)$bandwidth
+    .schab_select_bandwidth(as.numeric(resp), design, coords,
+      kernel = kernel,
+      criterion = criterion, adaptive = adaptive
+    )$bandwidth
   }
 
   bw_gwr <- if (is.null(init_bandwidth)) select_sub(y, X) else init_bandwidth
@@ -467,13 +486,15 @@
   } else {
     all(bws > 0.95 * .schab_default_bounds(coords)[2])
   }
-  list(bandwidths = bws, at_search_boundary = at_boundary,
-       standardized = isTRUE(standardize),
-       y_centre = y_centre, y_scale = y_scale,
-       x_centre = x_centre, x_scale = x_scale,
-       params = params, fitted = fitted,
-       resid = y_raw - fitted, bandwidth_gwr = bw_gwr,
-       bandwidth_history = bw_history, score_history = score_history,
-       n_iter = length(score_history), converged = converged,
-       criterion = criterion, kernel = kernel)
+  list(
+    bandwidths = bws, at_search_boundary = at_boundary,
+    standardized = isTRUE(standardize),
+    y_centre = y_centre, y_scale = y_scale,
+    x_centre = x_centre, x_scale = x_scale,
+    params = params, fitted = fitted,
+    resid = y_raw - fitted, bandwidth_gwr = bw_gwr,
+    bandwidth_history = bw_history, score_history = score_history,
+    n_iter = length(score_history), converged = converged,
+    criterion = criterion, kernel = kernel
+  )
 }

@@ -53,71 +53,104 @@
 
 .MORIE_TPS_PSDP_REGISTRY <- list(
   assault = list(
-    arcgis_url = paste0(.MORIE_TPS_PSDP_BASE_ARCGIS,
-                        "/Assault_Open_Data/FeatureServer/0"),
+    arcgis_url = paste0(
+      .MORIE_TPS_PSDP_BASE_ARCGIS,
+      "/Assault_Open_Data/FeatureServer/0"
+    ),
     fixture = "tps_psdp_assault_sample.csv",
     label = "Assault",
-    hub_id = "b4d0398d37eb4aa184065ed625ddb922"),
+    hub_id = "b4d0398d37eb4aa184065ed625ddb922"
+  ),
   autotheft = list(
-    arcgis_url = paste0(.MORIE_TPS_PSDP_BASE_ARCGIS,
-                        "/Auto_Theft_Open_Data/FeatureServer/0"),
+    arcgis_url = paste0(
+      .MORIE_TPS_PSDP_BASE_ARCGIS,
+      "/Auto_Theft_Open_Data/FeatureServer/0"
+    ),
     fixture = "tps_psdp_autotheft_sample.csv",
     label = "AutoTheft",
-    hub_id = "95ab41aee16847dba8453bf1688249d6"),
+    hub_id = "95ab41aee16847dba8453bf1688249d6"
+  ),
   bicycletheft = list(
-    arcgis_url = paste0(.MORIE_TPS_PSDP_BASE_ARCGIS,
-                        "/Bicycle_Thefts_Open_Data/FeatureServer/0"),
+    arcgis_url = paste0(
+      .MORIE_TPS_PSDP_BASE_ARCGIS,
+      "/Bicycle_Thefts_Open_Data/FeatureServer/0"
+    ),
     fixture = "tps_psdp_bicycletheft_sample.csv",
     label = "BicycleTheft",
-    hub_id = "a89d10d5e28444ceb0c8d1d4c0ee39cc"),
+    hub_id = "a89d10d5e28444ceb0c8d1d4c0ee39cc"
+  ),
   breakandenter = list(
-    arcgis_url = paste0(.MORIE_TPS_PSDP_BASE_ARCGIS,
-                        "/Break_and_Enter_Open_Data/FeatureServer/0"),
+    arcgis_url = paste0(
+      .MORIE_TPS_PSDP_BASE_ARCGIS,
+      "/Break_and_Enter_Open_Data/FeatureServer/0"
+    ),
     fixture = "tps_psdp_breakandenter_sample.csv",
     label = "BreakAndEnter",
-    hub_id = "040ead448df2412da252cfbb532e77ac"),
+    hub_id = "040ead448df2412da252cfbb532e77ac"
+  ),
   hatecrimes = list(
-    arcgis_url = paste0(.MORIE_TPS_PSDP_BASE_ARCGIS,
-                        "/Hate_Crimes_Open_Data/FeatureServer/0"),
+    arcgis_url = paste0(
+      .MORIE_TPS_PSDP_BASE_ARCGIS,
+      "/Hate_Crimes_Open_Data/FeatureServer/0"
+    ),
     fixture = "tps_psdp_hatecrimes_sample.csv",
     label = "HateCrimes",
-    hub_id = "3dc9a8fae28b42c7aaf8fc62c7fbfdaa"),
+    hub_id = "3dc9a8fae28b42c7aaf8fc62c7fbfdaa"
+  ),
   homicides = list(
-    arcgis_url = paste0(.MORIE_TPS_PSDP_BASE_ARCGIS,
-                        "/Homicides_Open_Data_ASR_RC_TBL_002/FeatureServer/0"),
+    arcgis_url = paste0(
+      .MORIE_TPS_PSDP_BASE_ARCGIS,
+      "/Homicides_Open_Data_ASR_RC_TBL_002/FeatureServer/0"
+    ),
     fixture = "tps_psdp_homicides_sample.csv",
     label = "Homicides",
-    hub_id = "d96bf5b67c1c49879f354dad51cf81f9"),
+    hub_id = "d96bf5b67c1c49879f354dad51cf81f9"
+  ),
   intimate_partner_family_violence = list(
-    arcgis_url = paste0(.MORIE_TPS_PSDP_BASE_ARCGIS,
-                        "/Intimate_Partner_and_Family_Violence_Open_Data/FeatureServer/0"),
+    arcgis_url = paste0(
+      .MORIE_TPS_PSDP_BASE_ARCGIS,
+      "/Intimate_Partner_and_Family_Violence_Open_Data/FeatureServer/0"
+    ),
     fixture = "tps_psdp_intimate_partner_family_violence_sample.csv",
     label = "IntimatePartnerAndFamilyViolence",
-    hub_id = "724113c886ee4df2b917dcc047f82d26"),
+    hub_id = "724113c886ee4df2b917dcc047f82d26"
+  ),
   robbery = list(
-    arcgis_url = paste0(.MORIE_TPS_PSDP_BASE_ARCGIS,
-                        "/Robbery_Open_Data/FeatureServer/0"),
+    arcgis_url = paste0(
+      .MORIE_TPS_PSDP_BASE_ARCGIS,
+      "/Robbery_Open_Data/FeatureServer/0"
+    ),
     fixture = "tps_psdp_robbery_sample.csv",
     label = "Robbery",
-    hub_id = "d0e1e98de5f945faa2fe635dee3f4062"),
+    hub_id = "d0e1e98de5f945faa2fe635dee3f4062"
+  ),
   shooting_firearm_discharges = list(
-    arcgis_url = paste0(.MORIE_TPS_PSDP_BASE_ARCGIS,
-                        "/Shooting_and_Firearm_Discharges_Open_Data/FeatureServer/0"),
+    arcgis_url = paste0(
+      .MORIE_TPS_PSDP_BASE_ARCGIS,
+      "/Shooting_and_Firearm_Discharges_Open_Data/FeatureServer/0"
+    ),
     fixture = "tps_psdp_shooting_firearm_discharges_sample.csv",
     label = "ShootingAndFirearmDischarges",
-    hub_id = "64ddeca12da34403869968ec725e23c4"),
+    hub_id = "64ddeca12da34403869968ec725e23c4"
+  ),
   theft_from_motor_vehicle = list(
-    arcgis_url = paste0(.MORIE_TPS_PSDP_BASE_ARCGIS,
-                        "/Theft_From_Motor_Vehicle_Open_Data/FeatureServer/0"),
+    arcgis_url = paste0(
+      .MORIE_TPS_PSDP_BASE_ARCGIS,
+      "/Theft_From_Motor_Vehicle_Open_Data/FeatureServer/0"
+    ),
     fixture = "tps_psdp_theft_from_motor_vehicle_sample.csv",
     label = "TheftFromMotorVehicle",
-    hub_id = "d9303bc20f8a4351b7744a8703eecb80"),
+    hub_id = "d9303bc20f8a4351b7744a8703eecb80"
+  ),
   theft_over = list(
-    arcgis_url = paste0(.MORIE_TPS_PSDP_BASE_ARCGIS,
-                        "/Theft_Over_Open_Data/FeatureServer/0"),
+    arcgis_url = paste0(
+      .MORIE_TPS_PSDP_BASE_ARCGIS,
+      "/Theft_Over_Open_Data/FeatureServer/0"
+    ),
     fixture = "tps_psdp_theft_over_sample.csv",
     label = "TheftOver",
-    hub_id = "7530d9b637c340059ccb81a782481c04")
+    hub_id = "7530d9b637c340059ccb81a782481c04"
+  )
 )
 
 #' List the TPS PSDP layers wrapped by morie
@@ -131,11 +164,13 @@
 morie_tps_psdp_layers <- function() {
   rows <- lapply(names(.MORIE_TPS_PSDP_REGISTRY), function(k) {
     e <- .MORIE_TPS_PSDP_REGISTRY[[k]]
-    data.frame(layer_key = k, label = e$label,
-                arcgis_url = e$arcgis_url,
-                fixture = e$fixture,
-                hub_id = e$hub_id %||% NA_character_,
-                stringsAsFactors = FALSE)
+    data.frame(
+      layer_key = k, label = e$label,
+      arcgis_url = e$arcgis_url,
+      fixture = e$fixture,
+      hub_id = e$hub_id %||% NA_character_,
+      stringsAsFactors = FALSE
+    )
   })
   out <- do.call(rbind, rows)
   rownames(out) <- NULL
@@ -151,13 +186,18 @@ morie_tps_psdp_layers <- function() {
 #' Internal helper: Morie Tps Psdp Dispatch
 #' @noRd
 .morie_tps_psdp_dispatch <- function(layer_key, year, max_features,
-                                      offline, layer_url) {
+                                     offline, layer_url) {
   if (!(layer_key %in% names(.MORIE_TPS_PSDP_REGISTRY))) {
-    stop(sprintf(paste0(
-      "unknown TPS PSDP layer_key '%s'. Available: %s"),
-      layer_key,
-      paste(names(.MORIE_TPS_PSDP_REGISTRY), collapse = ", ")),
-      call. = FALSE)
+    stop(
+      sprintf(
+        paste0(
+          "unknown TPS PSDP layer_key '%s'. Available: %s"
+        ),
+        layer_key,
+        paste(names(.MORIE_TPS_PSDP_REGISTRY), collapse = ", ")
+      ),
+      call. = FALSE
+    )
   }
   entry <- .MORIE_TPS_PSDP_REGISTRY[[layer_key]]
   if (isTRUE(offline)) {
@@ -166,16 +206,22 @@ morie_tps_psdp_layers <- function() {
       path <- system.file("extdata", entry$fixture, package = "rmoriedata")
     }
     if (!nzchar(path)) {
-      stop(sprintf("bundled TPS PSDP fixture %s missing",
-                   entry$fixture), call. = FALSE)
+      stop(sprintf(
+        "bundled TPS PSDP fixture %s missing",
+        entry$fixture
+      ), call. = FALSE)
     }
-    df <- utils::read.csv(path, stringsAsFactors = FALSE,
-                           check.names = FALSE)
+    df <- utils::read.csv(path,
+      stringsAsFactors = FALSE,
+      check.names = FALSE
+    )
     # The OCC_YEAR column is canonical across most clusters; for the
     # HateCrimes (OCCURRENCE_YEAR) + IPFV (REPORT_YEAR) variants we
     # honour year filtering on the right column if present.
-    year_col <- intersect(c("OCC_YEAR", "OCCURRENCE_YEAR",
-                             "REPORT_YEAR"), names(df))[1]
+    year_col <- intersect(c(
+      "OCC_YEAR", "OCCURRENCE_YEAR",
+      "REPORT_YEAR"
+    ), names(df))[1]
     if (!is.null(year) && !is.na(year_col)) {
       df <- df[df[[year_col]] == as.integer(year), , drop = FALSE]
       rownames(df) <- NULL
@@ -185,17 +231,25 @@ morie_tps_psdp_layers <- function() {
     }
     return(df)
   }
-  where <- if (is.null(year)) "1=1" else sprintf("OCC_YEAR = %d",
-                                                  as.integer(year))
+  where <- if (is.null(year)) {
+    "1=1"
+  } else {
+    sprintf(
+      "OCC_YEAR = %d",
+      as.integer(year)
+    )
+  }
   # Backward-compat escape hatch: if the caller passes a layer_url
   # override, hit it directly via the pre-3TT+ FeatureServer query
   # helper. This preserves the historical behaviour for callers
   # depending on non-canonical mirrors.
   if (!is.null(layer_url)) {
     return(.morie_tps_psdp_feature_query(
-      layer_url, where = where,
+      layer_url,
+      where = where,
       max_features = max_features,
-      return_geometry = FALSE))
+      return_geometry = FALSE
+    ))
   }
   # 3TT+ canonical path: route through the TPS Hub catalog by
   # hub_id. Same underlying FeatureServer, but the resolution +
@@ -207,10 +261,11 @@ morie_tps_psdp_layers <- function() {
     where = where,
     max_features = max_features,
     layer_idx = 0L,
-    offline = TRUE)  # offline=TRUE here means "resolve the
-                      # FeatureServer URL via the included catalog
-                      # (no network for the resolve step)"; the
-                      # data query itself always hits the network.
+    offline = TRUE
+  ) # offline=TRUE here means "resolve the
+  # FeatureServer URL via the included catalog
+  # (no network for the resolve step)"; the
+  # data query itself always hits the network.
 }
 
 # ---------------------------------------------------------------------------
@@ -225,11 +280,13 @@ morie_tps_psdp_layers <- function() {
 #' head(df)
 #' @export
 morie_datasets_tps_assault <- function(year = NULL,
-                                         max_features = NULL,
-                                         offline = TRUE,
-                                         layer_url = NULL) {
-  .morie_tps_psdp_dispatch("assault", year, max_features, offline,
-                            layer_url)
+                                       max_features = NULL,
+                                       offline = TRUE,
+                                       layer_url = NULL) {
+  .morie_tps_psdp_dispatch(
+    "assault", year, max_features, offline,
+    layer_url
+  )
 }
 
 #' TPS PSDP -- Auto Theft
@@ -242,11 +299,13 @@ morie_datasets_tps_assault <- function(year = NULL,
 #' }
 #' @export
 morie_datasets_tps_autotheft <- function(year = NULL,
-                                           max_features = NULL,
-                                           offline = TRUE,
-                                           layer_url = NULL) {
-  .morie_tps_psdp_dispatch("autotheft", year, max_features, offline,
-                            layer_url)
+                                         max_features = NULL,
+                                         offline = TRUE,
+                                         layer_url = NULL) {
+  .morie_tps_psdp_dispatch(
+    "autotheft", year, max_features, offline,
+    layer_url
+  )
 }
 
 #' TPS PSDP -- Bicycle Theft
@@ -257,11 +316,13 @@ morie_datasets_tps_autotheft <- function(year = NULL,
 #' head(df[, c("PRIMARY_OFFENCE", "BIKE_MAKE", "BIKE_TYPE", "STATUS")])
 #' @export
 morie_datasets_tps_bicycletheft <- function(year = NULL,
-                                              max_features = NULL,
-                                              offline = TRUE,
-                                              layer_url = NULL) {
-  .morie_tps_psdp_dispatch("bicycletheft", year, max_features,
-                            offline, layer_url)
+                                            max_features = NULL,
+                                            offline = TRUE,
+                                            layer_url = NULL) {
+  .morie_tps_psdp_dispatch(
+    "bicycletheft", year, max_features,
+    offline, layer_url
+  )
 }
 
 #' TPS PSDP -- Break and Enter
@@ -274,11 +335,13 @@ morie_datasets_tps_bicycletheft <- function(year = NULL,
 #' }
 #' @export
 morie_datasets_tps_breakandenter <- function(year = NULL,
-                                               max_features = NULL,
-                                               offline = TRUE,
-                                               layer_url = NULL) {
-  .morie_tps_psdp_dispatch("breakandenter", year, max_features,
-                            offline, layer_url)
+                                             max_features = NULL,
+                                             offline = TRUE,
+                                             layer_url = NULL) {
+  .morie_tps_psdp_dispatch(
+    "breakandenter", year, max_features,
+    offline, layer_url
+  )
 }
 
 #' TPS PSDP -- Hate Crimes
@@ -286,15 +349,19 @@ morie_datasets_tps_breakandenter <- function(year = NULL,
 #' @return A \code{data.frame}.
 #' @examples
 #' df <- morie_datasets_tps_hatecrimes(offline = TRUE)
-#' head(df[, c("OCCURRENCE_YEAR", "PRIMARY_OFFENCE", "RACE_BIAS",
-#'             "ARREST_MADE")])
+#' head(df[, c(
+#'   "OCCURRENCE_YEAR", "PRIMARY_OFFENCE", "RACE_BIAS",
+#'   "ARREST_MADE"
+#' )])
 #' @export
 morie_datasets_tps_hatecrimes <- function(year = NULL,
-                                            max_features = NULL,
-                                            offline = TRUE,
-                                            layer_url = NULL) {
-  .morie_tps_psdp_dispatch("hatecrimes", year, max_features, offline,
-                            layer_url)
+                                          max_features = NULL,
+                                          offline = TRUE,
+                                          layer_url = NULL) {
+  .morie_tps_psdp_dispatch(
+    "hatecrimes", year, max_features, offline,
+    layer_url
+  )
 }
 
 #' TPS PSDP -- Homicides
@@ -305,11 +372,13 @@ morie_datasets_tps_hatecrimes <- function(year = NULL,
 #' table(df$HOMICIDE_TYPE)
 #' @export
 morie_datasets_tps_homicides <- function(year = NULL,
-                                           max_features = NULL,
-                                           offline = TRUE,
-                                           layer_url = NULL) {
-  .morie_tps_psdp_dispatch("homicides", year, max_features, offline,
-                            layer_url)
+                                         max_features = NULL,
+                                         offline = TRUE,
+                                         layer_url = NULL) {
+  .morie_tps_psdp_dispatch(
+    "homicides", year, max_features, offline,
+    layer_url
+  )
 }
 
 #' TPS PSDP -- Intimate Partner and Family Violence
@@ -317,14 +386,19 @@ morie_datasets_tps_homicides <- function(year = NULL,
 #' @return A \code{data.frame}.
 #' @examples
 #' df <- morie_datasets_tps_intimate_partner_family_violence(offline = TRUE)
-#' head(df[, c("INDEX", "FAMILY_VIOLENCE_FLAG",
-#'             "FAMILY_VIOLENCE_RELATION", "COUNT")])
+#' head(df[, c(
+#'   "INDEX", "FAMILY_VIOLENCE_FLAG",
+#'   "FAMILY_VIOLENCE_RELATION", "COUNT"
+#' )])
 #' @export
 morie_datasets_tps_intimate_partner_family_violence <- function(
   year = NULL, max_features = NULL,
-  offline = TRUE, layer_url = NULL) {
-  .morie_tps_psdp_dispatch("intimate_partner_family_violence",
-                            year, max_features, offline, layer_url)
+  offline = TRUE, layer_url = NULL
+) {
+  .morie_tps_psdp_dispatch(
+    "intimate_partner_family_violence",
+    year, max_features, offline, layer_url
+  )
 }
 
 #' TPS PSDP -- Robbery
@@ -335,11 +409,13 @@ morie_datasets_tps_intimate_partner_family_violence <- function(
 #' head(df)
 #' @export
 morie_datasets_tps_robbery <- function(year = NULL,
-                                         max_features = NULL,
-                                         offline = TRUE,
-                                         layer_url = NULL) {
-  .morie_tps_psdp_dispatch("robbery", year, max_features, offline,
-                            layer_url)
+                                       max_features = NULL,
+                                       offline = TRUE,
+                                       layer_url = NULL) {
+  .morie_tps_psdp_dispatch(
+    "robbery", year, max_features, offline,
+    layer_url
+  )
 }
 
 #' TPS PSDP -- Shooting and Firearm Discharges
@@ -351,9 +427,12 @@ morie_datasets_tps_robbery <- function(year = NULL,
 #' @export
 morie_datasets_tps_shooting_firearm_discharges <- function(
   year = NULL, max_features = NULL,
-  offline = TRUE, layer_url = NULL) {
-  .morie_tps_psdp_dispatch("shooting_firearm_discharges",
-                            year, max_features, offline, layer_url)
+  offline = TRUE, layer_url = NULL
+) {
+  .morie_tps_psdp_dispatch(
+    "shooting_firearm_discharges",
+    year, max_features, offline, layer_url
+  )
 }
 
 #' TPS PSDP -- Theft From Motor Vehicle
@@ -367,9 +446,12 @@ morie_datasets_tps_shooting_firearm_discharges <- function(
 #' @export
 morie_datasets_tps_theft_from_motor_vehicle <- function(
   year = NULL, max_features = NULL,
-  offline = TRUE, layer_url = NULL) {
-  .morie_tps_psdp_dispatch("theft_from_motor_vehicle",
-                            year, max_features, offline, layer_url)
+  offline = TRUE, layer_url = NULL
+) {
+  .morie_tps_psdp_dispatch(
+    "theft_from_motor_vehicle",
+    year, max_features, offline, layer_url
+  )
 }
 
 #' TPS PSDP -- Theft Over
@@ -382,11 +464,13 @@ morie_datasets_tps_theft_from_motor_vehicle <- function(
 #' }
 #' @export
 morie_datasets_tps_theft_over <- function(year = NULL,
-                                            max_features = NULL,
-                                            offline = TRUE,
-                                            layer_url = NULL) {
-  .morie_tps_psdp_dispatch("theft_over", year, max_features, offline,
-                            layer_url)
+                                          max_features = NULL,
+                                          offline = TRUE,
+                                          layer_url = NULL) {
+  .morie_tps_psdp_dispatch(
+    "theft_over", year, max_features, offline,
+    layer_url
+  )
 }
 
 # ---------------------------------------------------------------------------
@@ -407,26 +491,32 @@ morie_datasets_tps_theft_over <- function(year = NULL,
 #'   `CITY`, `AREA_SQKM`, plus shape area / perimeter fields.
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_tps_police_divisions(offline = TRUE)
-#' nrow(df)  # 16
+#' nrow(df) # 16
 #' @export
 morie_datasets_tps_police_divisions <- function(offline = TRUE,
-                                                  max_features = NULL) {
+                                                max_features = NULL) {
   if (offline) {
     path <- system.file("extdata", "tps_police_divisions.csv",
-                        package = "rmorie")
+      package = "rmorie"
+    )
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "tps_police_divisions.csv", package = "rmoriedata")
     }
-    if (!nzchar(path))
+    if (!nzchar(path)) {
       stop("bundled TPS police divisions fixture missing",
-           call. = FALSE)
-    df <- utils::read.csv(path, stringsAsFactors = FALSE,
-                           check.names = FALSE,
-                           colClasses = c(DIV = "character"))
+        call. = FALSE
+      )
+    }
+    df <- utils::read.csv(path,
+      stringsAsFactors = FALSE,
+      check.names = FALSE,
+      colClasses = c(DIV = "character")
+    )
   } else {
     df <- morie_datasets_tps_arcgis_hub_by_id(
-            "fda21b25213c4c07b08c5162cba5081f",
-            max_features = max_features)
+      "fda21b25213c4c07b08c5162cba5081f",
+      max_features = max_features
+    )
   }
   if (!is.null(max_features)) df <- utils::head(df, as.integer(max_features))
   df
@@ -478,21 +568,31 @@ morie_datasets_tps_police_divisions <- function(offline = TRUE,
 #' names(df)
 #' @export
 morie_datasets_tps_psdp_resolved <- function(
-    layer_key,
-    year = NULL,
-    max_features = NULL,
-    offline = TRUE,
-    layer_url = NULL,
-    resolvers = c("division", "hood158", "hood140",
-                   "nia", "psdp_class")) {
+  layer_key,
+  year = NULL,
+  max_features = NULL,
+  offline = TRUE,
+  layer_url = NULL,
+  resolvers = c(
+    "division", "hood158", "hood140",
+    "nia", "psdp_class"
+  )
+) {
   resolvers <- match.arg(
     resolvers,
-    choices = c("division", "hood158", "hood140",
-                 "nia", "psdp_class"),
-    several.ok = TRUE)
-  out <- .morie_tps_psdp_dispatch(layer_key, year, max_features,
-                                    offline, layer_url)
-  if (nrow(out) == 0L) return(out)
+    choices = c(
+      "division", "hood158", "hood140",
+      "nia", "psdp_class"
+    ),
+    several.ok = TRUE
+  )
+  out <- .morie_tps_psdp_dispatch(
+    layer_key, year, max_features,
+    offline, layer_url
+  )
+  if (nrow(out) == 0L) {
+    return(out)
+  }
 
   prefix_cols <- function(df, drop, prefix) {
     keep <- setdiff(names(df), drop)
@@ -507,8 +607,10 @@ morie_datasets_tps_psdp_resolved <- function(
     div <- prefix_cols(div, drop = "DIVISION", prefix = "division")
     out$DIVISION <- as.character(out$DIVISION)
     div$DIVISION <- as.character(div$DIVISION)
-    out <- merge(out, div, by = "DIVISION",
-                  all.x = TRUE, sort = FALSE)
+    out <- merge(out, div,
+      by = "DIVISION",
+      all.x = TRUE, sort = FALSE
+    )
   }
 
   # HOOD_158 join.
@@ -523,8 +625,10 @@ morie_datasets_tps_psdp_resolved <- function(
     hd <- prefix_cols(hd, drop = "HOOD_158", prefix = "hood158")
     out$HOOD_158 <- as.character(out$HOOD_158)
     hd$HOOD_158 <- as.character(hd$HOOD_158)
-    out <- merge(out, hd, by = "HOOD_158",
-                  all.x = TRUE, sort = FALSE)
+    out <- merge(out, hd,
+      by = "HOOD_158",
+      all.x = TRUE, sort = FALSE
+    )
   }
 
   # HOOD_140 join.
@@ -538,8 +642,10 @@ morie_datasets_tps_psdp_resolved <- function(
     hd <- prefix_cols(hd, drop = "HOOD_140", prefix = "hood140")
     out$HOOD_140 <- as.character(out$HOOD_140)
     hd$HOOD_140 <- as.character(hd$HOOD_140)
-    out <- merge(out, hd, by = "HOOD_140",
-                  all.x = TRUE, sort = FALSE)
+    out <- merge(out, hd,
+      by = "HOOD_140",
+      all.x = TRUE, sort = FALSE
+    )
   }
 
   # NIA flag (Neighbourhood Improvement Area).  Joins on either
@@ -553,15 +659,19 @@ morie_datasets_tps_psdp_resolved <- function(
       }
       nia$nia_is_nia <- TRUE
       keep <- c(nia_col, "nia_is_nia")
-      if ("AREA_NAME" %in% names(nia))
+      if ("AREA_NAME" %in% names(nia)) {
         keep <- c(keep, "AREA_NAME")
+      }
       nia <- nia[, intersect(keep, names(nia)), drop = FALSE]
-      if ("AREA_NAME" %in% names(nia))
+      if ("AREA_NAME" %in% names(nia)) {
         names(nia)[names(nia) == "AREA_NAME"] <- "nia_area_name"
+      }
       out[[nia_col]] <- as.character(out[[nia_col]])
       nia[[nia_col]] <- as.character(nia[[nia_col]])
-      out <- merge(out, nia, by = nia_col,
-                    all.x = TRUE, sort = FALSE)
+      out <- merge(out, nia,
+        by = nia_col,
+        all.x = TRUE, sort = FALSE
+      )
       out$nia_is_nia[is.na(out$nia_is_nia)] <- FALSE
     }
   }
@@ -571,7 +681,7 @@ morie_datasets_tps_psdp_resolved <- function(
     lay <- morie_tps_psdp_layers()
     hit <- lay[lay$layer_key == layer_key, , drop = FALSE]
     if (nrow(hit) == 1L) {
-      out$psdp_class_key   <- hit$layer_key
+      out$psdp_class_key <- hit$layer_key
       out$psdp_class_label <- hit$label
       out$psdp_class_hub_id <- hit$hub_id
     }

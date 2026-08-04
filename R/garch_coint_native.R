@@ -116,8 +116,10 @@ morie_garch_spec_fit <- function(r, spec = "garch") {
   e <- eps / scale
 
   x0 <- switch(spec,
-    garch = c(-4, 2, -1.5), igarch = c(-6, 2),
-    gjr = c(-4, 2, -1.5, 0.2), aparch = c(-4, 2, -1.5, 0.2, 0)
+    garch = c(-4, 2, -1.5),
+    igarch = c(-6, 2),
+    gjr = c(-4, 2, -1.5, 0.2),
+    aparch = c(-4, 2, -1.5, 0.2, 0)
   )
   neg <- function(x) {
     p <- .morie_garch_pack(spec, x)
@@ -128,16 +130,20 @@ morie_garch_spec_fit <- function(r, spec = "garch") {
     ll <- -0.5 * sum(log(2 * pi * s2) + e^2 / s2)
     if (is.finite(ll)) -ll else 1e10
   }
-  res <- stats::optim(x0, neg, method = "Nelder-Mead",
-                      control = list(maxit = 6000, reltol = 1e-10))
+  res <- stats::optim(x0, neg,
+    method = "Nelder-Mead",
+    control = list(maxit = 6000, reltol = 1e-10)
+  )
   p <- .morie_garch_pack(spec, res$par)
   s2 <- morie_garch_recursion(e, p, spec) * scale^2
   pp <- p
   pp$omega <- if (spec == "aparch") p$omega * scale^p$delta else p$omega * scale^2
 
   pers <- switch(spec,
-    garch = p$alpha + p$beta, igarch = 1,
-    gjr = p$alpha + p$beta + 0.5 * p$gamma, aparch = p$alpha + p$beta
+    garch = p$alpha + p$beta,
+    igarch = 1,
+    gjr = p$alpha + p$beta + 0.5 * p$gamma,
+    aparch = p$alpha + p$beta
   )
   fc <- switch(spec,
     igarch = pp$omega + p$beta * s2[n] + (1 - p$beta) * eps[n]^2,
@@ -203,8 +209,10 @@ morie_bekk_garch <- function(R) {
     }
     if (is.finite(ll)) -ll else 1e10
   }
-  res <- stats::optim(c(-2, 2), neg, method = "Nelder-Mead",
-                      control = list(maxit = 800))
+  res <- stats::optim(c(-2, 2), neg,
+    method = "Nelder-Mead",
+    control = list(maxit = 800)
+  )
   a <- 0.999 / (1 + exp(-max(min(res$par[1], 30), -30)))
   b <- (0.999 - a) / (1 + exp(-max(min(res$par[2], 30), -30)))
   list(
@@ -362,9 +370,13 @@ morie_holt_winters <- function(y, alpha = NULL, beta = NULL, gamma = NULL,
   seasonal <- match.arg(seasonal, c("additive", "multiplicative"))
   mult <- seasonal == "multiplicative"
   if (mult && any(y <= 0)) {
-    stop(paste("multiplicative seasonality needs strictly positive data;",
-               "use seasonal = 'additive' for series with zeros or negatives."),
-         call. = FALSE)
+    stop(
+      paste(
+        "multiplicative seasonality needs strictly positive data;",
+        "use seasonal = 'additive' for series with zeros or negatives."
+      ),
+      call. = FALSE
+    )
   }
   h <- as.integer(horizon)
   if (h < 1L) stop("horizon must be at least 1.", call. = FALSE)
@@ -410,8 +422,10 @@ morie_holt_winters <- function(y, alpha = NULL, beta = NULL, gamma = NULL,
       r <- y[-seq_len(m)] - o$fit[-seq_len(m)]
       if (all(is.finite(r))) sum(r^2) else 1e18
     }
-    par <- stats::optim(c(0, -2, -1), sse, method = "Nelder-Mead",
-                        control = list(maxit = 800))$par
+    par <- stats::optim(c(0, -2, -1), sse,
+      method = "Nelder-Mead",
+      control = list(maxit = 800)
+    )$par
     if (is.null(alpha)) alpha <- sq(par[1])
     if (is.null(beta)) beta <- sq(par[2])
     if (is.null(gamma)) gamma <- sq(par[3])
@@ -478,7 +492,8 @@ morie_reconcile_hierarchy <- function(y_hat_bottom = NULL, S, base = NULL,
   }
   if (is.null(base)) {
     stop(sprintf("method = '%s' needs the full base forecast vector.", method),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   yh <- as.numeric(base)
   if (length(yh) != n) stop(sprintf("base must have %d entries.", n), call. = FALSE)

@@ -32,7 +32,7 @@
 #'   Angle-based outlier detection in high-dimensional data. \emph{KDD}.
 #' @examples
 #' X <- rbind(matrix(rnorm(60), ncol = 2), c(9, 9))
-#' which.min(morie_abod(X)$abof)   # the planted point
+#' which.min(morie_abod(X)$abof) # the planted point
 #' @export
 morie_abod <- function(X, k = NULL) {
   X <- as.matrix(X)
@@ -75,10 +75,12 @@ morie_abod <- function(X, k = NULL) {
   score <- -abof
   rank <- integer(n)
   rank[order(-score)] <- seq_len(n) - 1L
-  list(abof = abof, score = score, rank = rank, k = k,
-       n = n, d = ncol(X),
-       mode = if (is.null(k)) "exact" else "approximate",
-       method = "abod")
+  list(
+    abof = abof, score = score, rank = rank, k = k,
+    n = n, d = ncol(X),
+    mode = if (is.null(k)) "exact" else "approximate",
+    method = "abod"
+  )
 }
 
 
@@ -135,8 +137,10 @@ morie_ecod <- function(X) {
   score <- pmax(pmax(lo, hi), auto)
   rank <- integer(n)
   rank[order(-score)] <- seq_len(n) - 1L
-  list(score = score, rank = rank, tail_left = left, tail_right = right,
-       skewness = skew, n = n, d = d, method = "ecod")
+  list(
+    score = score, rank = rank, tail_left = left, tail_right = right,
+    skewness = skew, n = n, d = d, method = "ecod"
+  )
 }
 
 
@@ -174,7 +178,8 @@ morie_hbos <- function(X, bins = 10, mode = c("static", "dynamic")) {
     col <- X[, j]
     if (identical(mode, "dynamic")) {
       edges <- unique(stats::quantile(col, seq(0, 1, length.out = bins + 1L),
-                                      type = 7L, names = FALSE))
+        type = 7L, names = FALSE
+      ))
       if (length(edges) < 2L) edges <- c(min(col) - 0.5, max(col) + 0.5)
     } else {
       lo <- min(col)
@@ -198,8 +203,10 @@ morie_hbos <- function(X, bins = 10, mode = c("static", "dynamic")) {
   score <- rowSums(-log(dens))
   rank <- integer(n)
   rank[order(-score)] <- seq_len(n) - 1L
-  list(score = score, rank = rank, densities = dens, bin_edges = edges_all,
-       mode = mode, bins = bins, n = n, d = d, method = "hbos")
+  list(
+    score = score, rank = rank, densities = dens, bin_edges = edges_all,
+    mode = mode, bins = bins, n = n, d = d, method = "hbos"
+  )
 }
 
 
@@ -245,27 +252,36 @@ morie_isolation_forest <- function(X, n_trees = 100, sample_size = 256,
     NULL
   }
   on.exit(if (!is.null(old)) assign(".Random.seed", old, envir = globalenv()),
-          add = TRUE)
+    add = TRUE
+  )
   set.seed(as.integer(seed))
   limit <- ceiling(log2(psi))
 
   cfun <- function(m) {
-    if (m <= 1) return(0)
+    if (m <= 1) {
+      return(0)
+    }
     2 * (log(m - 1) + 0.5772156649) - 2 * (m - 1) / m
   }
 
   path <- function(x, idx, depth, sub) {
     repeat {
-      if (depth >= limit || length(idx) <= 1L) return(depth + cfun(length(idx)))
+      if (depth >= limit || length(idx) <= 1L) {
+        return(depth + cfun(length(idx)))
+      }
       block <- sub[idx, , drop = FALSE]
       lo <- apply(block, 2L, min)
       hi <- apply(block, 2L, max)
       wide <- which(hi > lo)
-      if (length(wide) == 0L) return(depth + cfun(length(idx)))
+      if (length(wide) == 0L) {
+        return(depth + cfun(length(idx)))
+      }
       j <- if (length(wide) == 1L) wide else sample(wide, 1L)
       thr <- stats::runif(1L, lo[j], hi[j])
       nxt <- if (x[j] < thr) idx[sub[idx, j] < thr] else idx[sub[idx, j] >= thr]
-      if (length(nxt) == 0L) return(depth + 1)
+      if (length(nxt) == 0L) {
+        return(depth + 1)
+      }
       idx <- nxt
       depth <- depth + 1
     }
@@ -283,12 +299,16 @@ morie_isolation_forest <- function(X, n_trees = 100, sample_size = 256,
   score <- 2^(-lengths / max(cfun(psi), 1e-12))
   rank <- integer(n)
   rank[order(-score)] <- seq_len(n) - 1L
-  list(score = score, rank = rank, path_length = lengths, threshold = 0.5,
-       n_trees = n_trees, sample_size = psi, n = n,
-       axis_parallel_caveat = paste("splits are axis-parallel, so structure",
-                                    "at an angle is invisible: points inside",
-                                    "a tight diagonal band score as anomalous"),
-       method = "isolation_forest")
+  list(
+    score = score, rank = rank, path_length = lengths, threshold = 0.5,
+    n_trees = n_trees, sample_size = psi, n = n,
+    axis_parallel_caveat = paste(
+      "splits are axis-parallel, so structure",
+      "at an angle is invisible: points inside",
+      "a tight diagonal band score as anomalous"
+    ),
+    method = "isolation_forest"
+  )
 }
 
 
@@ -327,14 +347,18 @@ morie_local_outlier_factor <- function(X, k = 20) {
   ord <- t(apply(D, 1L, order))
   nbrs <- ord[, seq_len(k), drop = FALSE]
   kdist <- D[cbind(seq_len(n), ord[, k])]
-  reach <- pmax(matrix(kdist[nbrs], n, k),
-                matrix(D[cbind(rep(seq_len(n), k), as.vector(nbrs))], n, k))
+  reach <- pmax(
+    matrix(kdist[nbrs], n, k),
+    matrix(D[cbind(rep(seq_len(n), k), as.vector(nbrs))], n, k)
+  )
   lrd <- 1 / pmax(rowMeans(reach), 1e-12)
   lof <- rowMeans(matrix(lrd[nbrs], n, k)) / pmax(lrd, 1e-12)
   rank <- integer(n)
   rank[order(-lof)] <- seq_len(n) - 1L
-  list(lof = lof, score = lof, rank = rank, lrd = lrd, k_distance = kdist,
-       neighbors = nbrs - 1L, k = k, n = n, method = "local_outlier_factor")
+  list(
+    lof = lof, score = lof, rank = rank, lrd = lrd, k_distance = kdist,
+    neighbors = nbrs - 1L, k = k, n = n, method = "local_outlier_factor"
+  )
 }
 
 
@@ -376,7 +400,8 @@ morie_mcd_outlier <- function(X, support_fraction = NULL, n_trials = 50,
   p <- ncol(X)
   if (n <= p) {
     stop(sprintf("need more observations than dimensions (n=%d, p=%d)", n, p),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   frac <- if (is.null(support_fraction)) 0.75 else as.numeric(support_fraction)
   if (frac <= 0.5 || frac > 1) {
@@ -389,7 +414,8 @@ morie_mcd_outlier <- function(X, support_fraction = NULL, n_trials = 50,
     NULL
   }
   on.exit(if (!is.null(old)) assign(".Random.seed", old, envir = globalenv()),
-          add = TRUE)
+    add = TRUE
+  )
   set.seed(as.integer(seed))
 
   maha <- function(Z, mu, Si) {
@@ -428,14 +454,18 @@ morie_mcd_outlier <- function(X, support_fraction = NULL, n_trials = 50,
   cd2 <- maha(X, colMeans(X), .morie_ginv(cS))
   cut <- stats::qchisq(1 - alpha, df = p)
   out <- d2 > cut
-  list(distance = sqrt(pmax(d2, 0)),
-       classical_distance = sqrt(pmax(cd2, 0)),
-       outlier = out, location = best_mu, covariance = best_S,
-       cutoff = sqrt(cut), n_outliers = sum(out), h = as.integer(h),
-       support_fraction = frac, n = n,
-       cutoff_caveat = paste("the chi-squared cutoff is exact only",
-                             "asymptotically and under normality"),
-       method = "mcd_outlier")
+  list(
+    distance = sqrt(pmax(d2, 0)),
+    classical_distance = sqrt(pmax(cd2, 0)),
+    outlier = out, location = best_mu, covariance = best_S,
+    cutoff = sqrt(cut), n_outliers = sum(out), h = as.integer(h),
+    support_fraction = frac, n = n,
+    cutoff_caveat = paste(
+      "the chi-squared cutoff is exact only",
+      "asymptotically and under normality"
+    ),
+    method = "mcd_outlier"
+  )
 }
 
 
@@ -459,7 +489,8 @@ morie_mcd_outlier <- function(X, support_fraction = NULL, n_trials = 50,
 #'   Detect and Handle Outliers}. ASQC Quality Press. (the 1.4826 MAD
 #'   scaling and the 3.5 default)
 #' @examples
-#' y <- sin(seq(0, 6, length.out = 100)); y[50] <- 12
+#' y <- sin(seq(0, 6, length.out = 100))
+#' y[50] <- 12
 #' which(morie_joseph_ts_outlier_detection(y)$outlier)
 #' @export
 morie_joseph_ts_outlier_detection <- function(y, W = 10, threshold = 3.5) {
@@ -469,7 +500,8 @@ morie_joseph_ts_outlier_detection <- function(y, W = 10, threshold = 3.5) {
   if (W < 1L) stop("W must be at least 1", call. = FALSE)
   if (n < 2L * W + 1L) {
     stop(sprintf("series of length %d is too short for W=%d", n, W),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   med <- numeric(n)
   mad <- numeric(n)
@@ -484,11 +516,15 @@ morie_joseph_ts_outlier_detection <- function(y, W = 10, threshold = 3.5) {
   score <- ifelse(scale > 0, abs(y - med) / scale, 0)
   score[!is.finite(score)] <- 0
   out <- score > threshold
-  list(outlier = out, score = score, rolling_median = med,
-       rolling_mad = mad, n_outliers = sum(out), W = W,
-       threshold = as.numeric(threshold), n = n,
-       run_caveat = paste("a run of consecutive outliers longer than half",
-                          "the window becomes the local median and is",
-                          "declared normal"),
-       method = "joseph_ts_outlier_detection")
+  list(
+    outlier = out, score = score, rolling_median = med,
+    rolling_mad = mad, n_outliers = sum(out), W = W,
+    threshold = as.numeric(threshold), n = n,
+    run_caveat = paste(
+      "a run of consecutive outliers longer than half",
+      "the window becomes the local median and is",
+      "declared normal"
+    ),
+    method = "joseph_ts_outlier_detection"
+  )
 }

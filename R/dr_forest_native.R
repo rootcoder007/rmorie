@@ -54,7 +54,8 @@ morie_dr_overlap_weighted <- function(y, D, X, ps = NULL, n_folds = 2,
   n <- length(y)
   if (!(length(D) == n && nrow(X) == n)) {
     stop("y, D and X must agree on the number of observations",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   if (!all(D == 0 | D == 1)) stop("D must be 0/1", call. = FALSE)
   n_folds <- as.integer(n_folds)
@@ -73,13 +74,17 @@ morie_dr_overlap_weighted <- function(y, D, X, ps = NULL, n_folds = 2,
     if (is.null(ps)) {
       b <- numeric(ncol(A))
       for (it in seq_len(200L)) {
-        p <- 1 / (1 + exp(-pmax(pmin(as.vector(A[tr, , drop = FALSE] %*% b),
-                                     500), -500)))
+        p <- 1 / (1 + exp(-pmax(pmin(
+          as.vector(A[tr, , drop = FALSE] %*% b),
+          500
+        ), -500)))
         b <- b - 0.5 * (as.vector(crossprod(A[tr, , drop = FALSE], p - D[tr])) /
-                          max(sum(tr), 1) + 1e-4 * b)
+          max(sum(tr), 1) + 1e-4 * b)
       }
-      e_hat[te] <- 1 / (1 + exp(-pmax(pmin(as.vector(A[te, , drop = FALSE] %*% b),
-                                           500), -500)))
+      e_hat[te] <- 1 / (1 + exp(-pmax(pmin(
+        as.vector(A[te, , drop = FALSE] %*% b),
+        500
+      ), -500)))
     } else {
       e_hat[te] <- as.numeric(ps)[te]
     }
@@ -102,13 +107,17 @@ morie_dr_overlap_weighted <- function(y, D, X, ps = NULL, n_folds = 2,
   ate <- sum(h * psi) / tot
   infl <- h * (psi - ate) / (tot / n)
   se <- stats::sd(infl) / sqrt(n)
-  list(ate = ate, se = se, ci = c(ate - 1.96 * se, ate + 1.96 * se),
-       estimand = "ATO (overlap-weighted)", influence = infl,
-       propensity = e_hat, mu1 = mu1, mu0 = mu0,
-       max_weight_share = max(h) / tot, n_folds = n_folds,
-       warnings = paste("doubly robust means consistent if EITHER nuisance",
-                        "model is right, not that both may be wrong"),
-       method = "dr_overlap_weighted")
+  list(
+    ate = ate, se = se, ci = c(ate - 1.96 * se, ate + 1.96 * se),
+    estimand = "ATO (overlap-weighted)", influence = infl,
+    propensity = e_hat, mu1 = mu1, mu0 = mu0,
+    max_weight_share = max(h) / tot, n_folds = n_folds,
+    warnings = paste(
+      "doubly robust means consistent if EITHER nuisance",
+      "model is right, not that both may be wrong"
+    ),
+    method = "dr_overlap_weighted"
+  )
 }
 
 
@@ -147,20 +156,25 @@ morie_placebo_dr_did <- function(y_pre1, y_pre2, D, X, ...) {
   y2 <- as.numeric(y_pre2)
   if (length(y1) != length(y2)) {
     stop("the two pre-period outcomes must have the same length",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   r <- morie_dr_overlap_weighted(y2 - y1, D, X, ...)
   est <- r$ate
   se <- r$se
   z <- if (se > 0) est / se else NA_real_
   p <- if (is.finite(z)) 2 * stats::pnorm(abs(z), lower.tail = FALSE) else NA_real_
-  list(placebo_effect = est, se = se, z = z, p_value = p, ci = r$ci,
-       passed = isTRUE(p > 0.05), min_detectable = 2.8 * se,
-       propensity = r$propensity,
-       warnings = paste("failure is informative, passing is weak: a pre-trend",
-                        "smaller than the effect of interest is not evidence",
-                        "of parallel trends"),
-       method = "placebo_dr_did")
+  list(
+    placebo_effect = est, se = se, z = z, p_value = p, ci = r$ci,
+    passed = isTRUE(p > 0.05), min_detectable = 2.8 * se,
+    propensity = r$propensity,
+    warnings = paste(
+      "failure is informative, passing is weak: a pre-trend",
+      "smaller than the effect of interest is not evidence",
+      "of parallel trends"
+    ),
+    method = "placebo_dr_did"
+  )
 }
 
 
@@ -210,16 +224,21 @@ morie_egregious_loss_forest <- function(y, D, X, n_trees = 200L,
   storage.mode(X) <- "double"
   if (nrow(X) != length(y)) {
     stop(sprintf("X has %d rows but y has %d", nrow(X), length(y)),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   if (imbalance_penalty < 0) {
-    stop(sprintf("imbalance_penalty must be non-negative, got %g",
-                 imbalance_penalty), call. = FALSE)
+    stop(sprintf(
+      "imbalance_penalty must be non-negative, got %g",
+      imbalance_penalty
+    ), call. = FALSE)
   }
-  fit <- morie_causal_forest(y, D, X, n_trees = n_trees, min_leaf = min_leaf,
-                             max_depth = max_depth, subsample = subsample,
-                             imbalance_penalty = imbalance_penalty,
-                             seed = seed)
+  fit <- morie_causal_forest(y, D, X,
+    n_trees = n_trees, min_leaf = min_leaf,
+    max_depth = max_depth, subsample = subsample,
+    imbalance_penalty = imbalance_penalty,
+    seed = seed
+  )
   cate <- fit$cate_oob
   good <- is.finite(cate)
   k <- sum(good)
@@ -235,16 +254,20 @@ morie_egregious_loss_forest <- function(y, D, X, n_trees = 200L,
     }
   }
   for (tr in fit$forest$trees) collect(tr)
-  list(cate = cate, ate = ate, se = se,
-       ci = c(ate - 1.96 * se, ate + 1.96 * se), leaf_sizes = sizes,
-       n_leaves = length(sizes),
-       imbalance_penalty = as.numeric(imbalance_penalty),
-       estimate = ate, n = length(y),
-       warnings = if (k < length(y)) {
-         sprintf("%d rows had no out-of-bag tree; their CATE is NA",
-                 length(y) - k)
-       } else {
-         character(0)
-       },
-       method = "egregious_loss_forest")
+  list(
+    cate = cate, ate = ate, se = se,
+    ci = c(ate - 1.96 * se, ate + 1.96 * se), leaf_sizes = sizes,
+    n_leaves = length(sizes),
+    imbalance_penalty = as.numeric(imbalance_penalty),
+    estimate = ate, n = length(y),
+    warnings = if (k < length(y)) {
+      sprintf(
+        "%d rows had no out-of-bag tree; their CATE is NA",
+        length(y) - k
+      )
+    } else {
+      character(0)
+    },
+    method = "egregious_loss_forest"
+  )
 }

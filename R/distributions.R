@@ -42,21 +42,31 @@ NULL
 #' Internal helper: Dist Registry
 #' @noRd
 .dist_registry <- list(
-  normal      = list(suffix = "norm",  discrete = FALSE,
-                     mean = function(p) p$mean,
-                     var  = function(p) p$sd^2),
-  exponential = list(suffix = "exp",   discrete = FALSE,
-                     mean = function(p) 1 / p$rate,
-                     var  = function(p) 1 / p$rate^2),
-  gamma       = list(suffix = "gamma", discrete = FALSE,
-                     mean = function(p) p$shape / p$rate,
-                     var  = function(p) p$shape / p$rate^2),
-  poisson     = list(suffix = "pois",  discrete = TRUE,
-                     mean = function(p) p$lambda,
-                     var  = function(p) p$lambda),
-  binomial    = list(suffix = "binom", discrete = TRUE,
-                     mean = function(p) p$size * p$prob,
-                     var  = function(p) p$size * p$prob * (1 - p$prob))
+  normal = list(
+    suffix = "norm", discrete = FALSE,
+    mean = function(p) p$mean,
+    var = function(p) p$sd^2
+  ),
+  exponential = list(
+    suffix = "exp", discrete = FALSE,
+    mean = function(p) 1 / p$rate,
+    var = function(p) 1 / p$rate^2
+  ),
+  gamma = list(
+    suffix = "gamma", discrete = FALSE,
+    mean = function(p) p$shape / p$rate,
+    var = function(p) p$shape / p$rate^2
+  ),
+  poisson = list(
+    suffix = "pois", discrete = TRUE,
+    mean = function(p) p$lambda,
+    var = function(p) p$lambda
+  ),
+  binomial = list(
+    suffix = "binom", discrete = TRUE,
+    mean = function(p) p$size * p$prob,
+    var = function(p) p$size * p$prob * (1 - p$prob)
+  )
 )
 
 #' Construct a general probability-distribution object
@@ -78,9 +88,11 @@ NULL
 morie_distribution <- function(name, ...) {
   name <- match.arg(name, names(.dist_registry))
   params <- list(...)
-  out <- list(name = name, params = params,
-              suffix = .dist_registry[[name]]$suffix,
-              discrete = .dist_registry[[name]]$discrete)
+  out <- list(
+    name = name, params = params,
+    suffix = .dist_registry[[name]]$suffix,
+    discrete = .dist_registry[[name]]$discrete
+  )
   class(out) <- c("morie_distribution", "morie_rich_result", "list")
   out
 }
@@ -97,9 +109,13 @@ morie_distribution <- function(name, ...) {
 #' }
 #' @export
 print.morie_distribution <- function(x, ...) {
-  cat(sprintf("<morie_distribution: %s(%s)>\n", x$name,
-              paste(names(x$params), unlist(x$params), sep = "=",
-                    collapse = ", ")))
+  cat(sprintf(
+    "<morie_distribution: %s(%s)>\n", x$name,
+    paste(names(x$params), unlist(x$params),
+      sep = "=",
+      collapse = ", "
+    )
+  ))
   invisible(x)
 }
 
@@ -118,7 +134,8 @@ print.morie_distribution <- function(x, ...) {
 #' morie_dist_pdf(morie_distribution("normal", mean = 0, sd = 1), 0)
 #' @export
 morie_dist_pdf <- function(dist, x) {
-  stopifnot(inherits(dist, "morie_distribution")); .dist_call(dist, "d", x)
+  stopifnot(inherits(dist, "morie_distribution"))
+  .dist_call(dist, "d", x)
 }
 
 #' Cumulative distribution function at points
@@ -129,7 +146,8 @@ morie_dist_pdf <- function(dist, x) {
 #' morie_dist_cdf(morie_distribution("normal", mean = 0, sd = 1), 1.96)
 #' @export
 morie_dist_cdf <- function(dist, q) {
-  stopifnot(inherits(dist, "morie_distribution")); .dist_call(dist, "p", q)
+  stopifnot(inherits(dist, "morie_distribution"))
+  .dist_call(dist, "p", q)
 }
 
 #' Quantile function
@@ -140,7 +158,8 @@ morie_dist_cdf <- function(dist, q) {
 #' morie_dist_quantile(morie_distribution("normal", mean = 0, sd = 1), 0.975)
 #' @export
 morie_dist_quantile <- function(dist, p) {
-  stopifnot(inherits(dist, "morie_distribution")); .dist_call(dist, "q", p)
+  stopifnot(inherits(dist, "morie_distribution"))
+  .dist_call(dist, "q", p)
 }
 
 #' A moment of a distribution, analytically or by integration
@@ -198,7 +217,9 @@ morie_dist_integrate <- function(dist, integrand = NULL,
   stopifnot(inherits(dist, "morie_distribution"))
   if (isTRUE(dist$discrete)) {
     stop("morie_dist_integrate() is for continuous distributions; ",
-         "use morie_dist_sum()", call. = FALSE)
+      "use morie_dist_sum()",
+      call. = FALSE
+    )
   }
   if (is.null(integrand)) integrand <- function(x) morie_dist_pdf(dist, x)
   if (is.null(lower)) lower <- morie_dist_quantile(dist, 1e-8)
@@ -207,7 +228,8 @@ morie_dist_integrate <- function(dist, integrand = NULL,
   probe <- integrand(morie_dist_quantile(dist, c(0.25, 0.5, 0.75)))
   if (any(!is.finite(probe))) {
     stop("integrand is not finite on the support; integral is unstable",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   if (any(morie_dist_pdf(dist, seq(lower, upper, length.out = 5)) < 0)) {
     stop("density is negative; not a valid probability density", call. = FALSE)
@@ -234,15 +256,18 @@ morie_dist_integrate <- function(dist, integrand = NULL,
 #' @export
 morie_dist_sum <- function(dist, moment_order = 0L, center = 0, tol = 1e-10) {
   stopifnot(inherits(dist, "morie_distribution"), isTRUE(dist$discrete))
-  upper <- morie_dist_quantile(dist, 1 - tol)          # finite truncation point
+  upper <- morie_dist_quantile(dist, 1 - tol) # finite truncation point
   k <- 0:upper
   mass <- morie_dist_pdf(dist, k)
   # demonstrate a finite limit: the omitted tail mass is below tolerance
   tail_mass <- 1 - sum(mass)
   if (tail_mass > 1e-6) {
     warning("discrete series tail mass exceeds tolerance; result truncated",
-            call. = FALSE)
+      call. = FALSE
+    )
   }
-  if (moment_order == 0L) return(sum(mass))
+  if (moment_order == 0L) {
+    return(sum(mass))
+  }
   sum((k - center)^moment_order * mass)
 }

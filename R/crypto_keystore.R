@@ -19,9 +19,9 @@
     file.path(tempdir(), ".morie", "keys", "keystore.json")
   }
 }
-.MORIE_SCRYPT_N  <- 2L^14L
-.MORIE_SCRYPT_R  <- 8L
-.MORIE_SCRYPT_P  <- 1L
+.MORIE_SCRYPT_N <- 2L^14L
+.MORIE_SCRYPT_R <- 8L
+.MORIE_SCRYPT_P <- 1L
 .MORIE_SCRYPT_DK <- 32L
 .MORIE_SODIUM_NONCE_LEN <- 24L
 
@@ -30,11 +30,13 @@
 .morie_keystore_require <- function() {
   if (!requireNamespace("sodium", quietly = TRUE)) {
     stop("morie_crypto requires sodium; install.packages('sodium')",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   if (!requireNamespace("jsonlite", quietly = TRUE)) {
     stop("morie_crypto_keystore requires jsonlite; install.packages('jsonlite')",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
 }
 
@@ -75,7 +77,9 @@
   if (nchar(h) %% 2L != 0L) {
     stop("hex string has odd length", call. = FALSE)
   }
-  if (nchar(h) == 0L) return(raw(0))
+  if (nchar(h) == 0L) {
+    return(raw(0))
+  }
   pairs <- substring(h, seq(1L, nchar(h), 2L), seq(2L, nchar(h), 2L))
   as.raw(strtoi(pairs, 16L))
 }
@@ -210,13 +214,14 @@ morie_crypto_keystore_load <- function(name, password,
   salt <- .morie_hex_to_raw(store$salt)
   enc_key <- .morie_derive_key(password, salt)
   entry <- store$keys[[name]]
-  nonce  <- .morie_hex_to_raw(entry$sk_nonce)
+  nonce <- .morie_hex_to_raw(entry$sk_nonce)
   sealed <- .morie_hex_to_raw(entry$sk_ct)
   sk <- tryCatch(
     sodium::data_decrypt(sealed, key = enc_key, nonce = nonce),
     error = function(e) {
       stop("Failed to decrypt secret key (wrong password or corrupt entry)",
-           call. = FALSE)
+        call. = FALSE
+      )
     }
   )
   pk <- .morie_hex_to_raw(entry$pk)
@@ -243,6 +248,8 @@ morie_crypto_keystore_list <- function(password,
   store <- .morie_read_store(path)
   salt <- .morie_hex_to_raw(store$salt)
   invisible(.morie_derive_key(password, salt))
-  if (is.null(store$keys)) return(character(0))
+  if (is.null(store$keys)) {
+    return(character(0))
+  }
   names(store$keys)
 }

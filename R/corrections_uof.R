@@ -56,8 +56,8 @@ morie_corrections_uof_resource_ids <- function() {
 #' @keywords internal
 #' @noRd
 .morie_corrections_uof_load <- function(key, offline = TRUE,
-                                          resource_id = NULL,
-                                          source = NULL) {
+                                        resource_id = NULL,
+                                        source = NULL) {
   if (is.null(source) || identical(source, "")) {
     source <- if (isTRUE(offline)) "bundled" else "live"
   }
@@ -67,7 +67,8 @@ morie_corrections_uof_resource_ids <- function() {
     if (is.null(rid) || is.na(rid)) {
       stop(sprintf(
         "no canonical CKAN resource_id for corrections-uof key %s",
-        sQuote(key)), call. = FALSE)
+        sQuote(key)
+      ), call. = FALSE)
     }
     .morie_ontario_ckan_dump_csv(rid)
   }
@@ -99,8 +100,8 @@ morie_corrections_uof_resource_ids <- function() {
 #' head(df)
 #' @export
 morie_datasets_corrections_uof_incidents <- function(offline = TRUE,
-                                                       resource_id = NULL,
-                                                       source = NULL) {
+                                                     resource_id = NULL,
+                                                     source = NULL) {
   .morie_corrections_uof_load("incidents", offline, resource_id, source)
 }
 
@@ -112,8 +113,8 @@ morie_datasets_corrections_uof_incidents <- function(offline = TRUE,
 #' head(df)
 #' @export
 morie_datasets_corrections_uof_inmate_incident <- function(offline = TRUE,
-                                                             resource_id = NULL,
-                                                             source = NULL) {
+                                                           resource_id = NULL,
+                                                           source = NULL) {
   .morie_corrections_uof_load("inmate_incident", offline, resource_id, source)
 }
 
@@ -125,8 +126,8 @@ morie_datasets_corrections_uof_inmate_incident <- function(offline = TRUE,
 #' head(df)
 #' @export
 morie_datasets_corrections_uof_staff_incident <- function(offline = TRUE,
-                                                            resource_id = NULL,
-                                                            source = NULL) {
+                                                          resource_id = NULL,
+                                                          source = NULL) {
   .morie_corrections_uof_load("staff_incident", offline, resource_id, source)
 }
 
@@ -138,8 +139,8 @@ morie_datasets_corrections_uof_staff_incident <- function(offline = TRUE,
 #' head(df)
 #' @export
 morie_datasets_corrections_uof_incident_type <- function(offline = TRUE,
-                                                           resource_id = NULL,
-                                                           source = NULL) {
+                                                         resource_id = NULL,
+                                                         source = NULL) {
   .morie_corrections_uof_load("incident_type", offline, resource_id, source)
 }
 
@@ -151,8 +152,8 @@ morie_datasets_corrections_uof_incident_type <- function(offline = TRUE,
 #' head(df)
 #' @export
 morie_datasets_corrections_uof_institution_summary <- function(offline = TRUE,
-                                                                 resource_id = NULL,
-                                                                 source = NULL) {
+                                                               resource_id = NULL,
+                                                               source = NULL) {
   .morie_corrections_uof_load("institution_summary", offline, resource_id, source)
 }
 
@@ -164,8 +165,8 @@ morie_datasets_corrections_uof_institution_summary <- function(offline = TRUE,
 #' head(df)
 #' @export
 morie_datasets_corrections_uof_location_summary <- function(offline = TRUE,
-                                                              resource_id = NULL,
-                                                              source = NULL) {
+                                                            resource_id = NULL,
+                                                            source = NULL) {
   .morie_corrections_uof_load("location_summary", offline, resource_id, source)
 }
 
@@ -177,10 +178,12 @@ morie_datasets_corrections_uof_location_summary <- function(offline = TRUE,
 #' head(df)
 #' @export
 morie_datasets_corrections_uof_select_incident_summary <- function(offline = TRUE,
-                                                                     resource_id = NULL,
-                                                                     source = NULL) {
-  .morie_corrections_uof_load("select_incident_summary", offline,
-                                resource_id, source)
+                                                                   resource_id = NULL,
+                                                                   source = NULL) {
+  .morie_corrections_uof_load(
+    "select_incident_summary", offline,
+    resource_id, source
+  )
 }
 
 #' Inmate-participant demographics (head)
@@ -191,8 +194,8 @@ morie_datasets_corrections_uof_select_incident_summary <- function(offline = TRU
 #' head(df)
 #' @export
 morie_datasets_corrections_uof_inmate_participant <- function(offline = TRUE,
-                                                                resource_id = NULL,
-                                                                source = NULL) {
+                                                              resource_id = NULL,
+                                                              source = NULL) {
   .morie_corrections_uof_load("inmate_participant", offline, resource_id, source)
 }
 
@@ -204,8 +207,8 @@ morie_datasets_corrections_uof_inmate_participant <- function(offline = TRUE,
 #' head(df)
 #' @export
 morie_datasets_corrections_uof_indigenous <- function(offline = TRUE,
-                                                       resource_id = NULL,
-                                                       source = NULL) {
+                                                      resource_id = NULL,
+                                                      source = NULL) {
   .morie_corrections_uof_load("indigenous", offline, resource_id, source)
 }
 
@@ -217,8 +220,8 @@ morie_datasets_corrections_uof_indigenous <- function(offline = TRUE,
 #' head(df)
 #' @export
 morie_datasets_corrections_uof_ethnic_origin <- function(offline = TRUE,
-                                                           resource_id = NULL,
-                                                           source = NULL) {
+                                                         resource_id = NULL,
+                                                         source = NULL) {
   .morie_corrections_uof_load("ethnic_origin", offline, resource_id, source)
 }
 
@@ -230,8 +233,8 @@ morie_datasets_corrections_uof_ethnic_origin <- function(offline = TRUE,
 #' head(df)
 #' @export
 morie_datasets_corrections_uof_race <- function(offline = TRUE,
-                                                  resource_id = NULL,
-                                                  source = NULL) {
+                                                resource_id = NULL,
+                                                source = NULL) {
   .morie_corrections_uof_load("race", offline, resource_id, source)
 }
 
@@ -243,8 +246,8 @@ morie_datasets_corrections_uof_race <- function(offline = TRUE,
 #' head(df)
 #' @export
 morie_datasets_corrections_uof_religion <- function(offline = TRUE,
-                                                     resource_id = NULL,
-                                                     source = NULL) {
+                                                    resource_id = NULL,
+                                                    source = NULL) {
   .morie_corrections_uof_load("religion", offline, resource_id, source)
 }
 
@@ -283,13 +286,18 @@ morie_synth_corrections_uof <- function(key, n = 30L, seed = 1L) {
   bundled_path <- system.file(
     "extdata",
     sprintf("corrections_uof_%s_sample.csv", key),
-    package = "rmorie")
+    package = "rmorie"
+  )
   if (!nzchar(bundled_path) || !file.exists(bundled_path)) {
-    stop(sprintf("morie_synth_corrections_uof: no bundled sample for key %s",
-                 sQuote(key)), call. = FALSE)
+    stop(sprintf(
+      "morie_synth_corrections_uof: no bundled sample for key %s",
+      sQuote(key)
+    ), call. = FALSE)
   }
-  schema <- utils::read.csv(bundled_path, nrows = 5L,
-                              stringsAsFactors = FALSE, check.names = FALSE)
+  schema <- utils::read.csv(bundled_path,
+    nrows = 5L,
+    stringsAsFactors = FALSE, check.names = FALSE
+  )
   cols <- names(schema)
   draw_col <- function(col_name) {
     real <- schema[[col_name]]
@@ -301,7 +309,9 @@ morie_synth_corrections_uof <- function(key, n = 30L, seed = 1L) {
     }
     # Otherwise: re-sample the observed character levels.
     pool <- unique(stats::na.omit(as.character(real)))
-    if (length(pool) == 0L) return(rep(NA_character_, n))
+    if (length(pool) == 0L) {
+      return(rep(NA_character_, n))
+    }
     sample(pool, n, replace = TRUE)
   }
   out <- as.data.frame(

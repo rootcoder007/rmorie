@@ -15,8 +15,10 @@
 #' @export
 morie_burkov_linear_function <- function(x, w, b) {
   x <- as.numeric(x)
-  list(predictions = w * x + b, estimate = (w * x + b)[1], w = w, b = b,
-       n = length(x), method = "Linear model f(x) = wx + b (Burkov Eq 1.1)")
+  list(
+    predictions = w * x + b, estimate = (w * x + b)[1], w = w, b = b,
+    n = length(x), method = "Linear model f(x) = wx + b (Burkov Eq 1.1)"
+  )
 }
 
 #' Squared error (Burkov Eq 1.2)
@@ -24,13 +26,16 @@ morie_burkov_linear_function <- function(x, w, b) {
 #' @return List with `errors`.
 #' @export
 morie_burkov_squared_error <- function(y_hat, y) {
-  y_hat <- as.numeric(y_hat); y <- as.numeric(y)
+  y_hat <- as.numeric(y_hat)
+  y <- as.numeric(y)
   if (length(y_hat) != length(y)) {
     stop("y_hat and y must have the same length.", call. = FALSE)
   }
   err <- (y_hat - y)^2
-  list(errors = err, estimate = err[1], n = length(y),
-       method = "Squared error (Burkov Eq 1.2)")
+  list(
+    errors = err, estimate = err[1], n = length(y),
+    method = "Squared error (Burkov Eq 1.2)"
+  )
 }
 
 #' MSE cost of the linear model (Burkov Eq 1.3)
@@ -40,18 +45,23 @@ morie_burkov_squared_error <- function(y_hat, y) {
 #' @return List with `cost`, `residuals`.
 #' @export
 morie_burkov_mse_cost <- function(w, b, x, y, N = NULL) {
-  x <- as.numeric(x); y <- as.numeric(y)
+  x <- as.numeric(x)
+  y <- as.numeric(y)
   if (length(x) != length(y)) {
     stop("x and y must have the same length.", call. = FALSE)
   }
   if (!is.null(N) && as.integer(N) != length(x)) {
-    stop(sprintf(paste("N = %s does not match the dataset size %d; the N",
-                       "in Eq 1.3 is the dataset size, not a free",
-                       "parameter."), N, length(x)), call. = FALSE)
+    stop(sprintf(paste(
+      "N = %s does not match the dataset size %d; the N",
+      "in Eq 1.3 is the dataset size, not a free",
+      "parameter."
+    ), N, length(x)), call. = FALSE)
   }
   resid <- w * x + b - y
-  list(cost = mean(resid^2), estimate = mean(resid^2), residuals = resid,
-       n = length(x), method = "MSE cost J(w, b) (Burkov Eq 1.3)")
+  list(
+    cost = mean(resid^2), estimate = mean(resid^2), residuals = resid,
+    n = length(x), method = "MSE cost J(w, b) (Burkov Eq 1.3)"
+  )
 }
 
 #' Vector-form linear model w.x + b (Burkov Eq 1.4)
@@ -59,41 +69,54 @@ morie_burkov_mse_cost <- function(w, b, x, y, N = NULL) {
 #' @param b Bias.
 #' @export
 morie_burkov_linear_vector <- function(w, x, b) {
-  w <- as.numeric(w); x <- as.numeric(x)
+  w <- as.numeric(w)
+  x <- as.numeric(x)
   if (length(w) != length(x)) {
     stop("w and x must have the same length.", call. = FALSE)
   }
-  list(estimate = sum(w * x) + b, dot = sum(w * x), b = b, n = length(x),
-       method = "Linear model y = w.x + b (Burkov Eq 1.4)")
+  list(
+    estimate = sum(w * x) + b, dot = sum(w * x), b = b, n = length(x),
+    method = "Linear model y = w.x + b (Burkov Eq 1.4)"
+  )
 }
 
 #' Cosine similarity (Burkov Eq 1.5)
 #' @param x,y Vectors; neither may be zero.
 #' @export
 morie_burkov_cosine_similarity <- function(x, y) {
-  x <- as.numeric(x); y <- as.numeric(y)
+  x <- as.numeric(x)
+  y <- as.numeric(y)
   if (length(x) != length(y)) {
     stop("x and y must have the same length.", call. = FALSE)
   }
-  nx <- sqrt(sum(x^2)); ny <- sqrt(sum(y^2))
+  nx <- sqrt(sum(x^2))
+  ny <- sqrt(sum(y^2))
   if (nx == 0 || ny == 0) {
     stop("a zero vector has no direction; cosine similarity with it is undefined.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   cc <- max(-1, min(1, sum(x * y) / (nx * ny)))
-  list(estimate = cc, angle_radians = acos(cc), n = length(x),
-       method = "Cosine similarity (Burkov Eq 1.5)")
+  list(
+    estimate = cc, angle_radians = acos(cc), n = length(x),
+    method = "Cosine similarity (Burkov Eq 1.5)"
+  )
 }
 
 .morie_burkov_phi <- function(name) {
-  if (is.function(name)) return(name)
+  if (is.function(name)) {
+    return(name)
+  }
   switch(name,
-         identity = function(z) z,
-         relu = function(z) pmax(z, 0),
-         tanh = tanh,
-         sigmoid = function(z) 1 / (1 + exp(-z)),
-         stop(sprintf("unknown activation '%s'; pass a function or one of identity, relu, sigmoid, tanh.",
-                      name), call. = FALSE))
+    identity = function(z) z,
+    relu = function(z) pmax(z, 0),
+    tanh = tanh,
+    sigmoid = function(z) 1 / (1 + exp(-z)),
+    stop(sprintf(
+      "unknown activation '%s'; pass a function or one of identity, relu, sigmoid, tanh.",
+      name
+    ), call. = FALSE)
+  )
 }
 
 #' First hidden layer phi(W1 x + b1) (Burkov Eq 1.6)
@@ -103,19 +126,27 @@ morie_burkov_cosine_similarity <- function(x, y) {
 #' @param phi Activation name or function.
 #' @export
 morie_burkov_layer1_output <- function(W_1, x, b_1, phi = "relu") {
-  W <- as.matrix(W_1); x <- as.numeric(x); b <- as.numeric(b_1)
+  W <- as.matrix(W_1)
+  x <- as.numeric(x)
+  b <- as.numeric(b_1)
   if (ncol(W) != length(x)) {
-    stop(sprintf("W_1 has %d columns but x has %d entries.", ncol(W),
-                 length(x)), call. = FALSE)
+    stop(sprintf(
+      "W_1 has %d columns but x has %d entries.", ncol(W),
+      length(x)
+    ), call. = FALSE)
   }
   if (nrow(W) != length(b)) {
-    stop(sprintf("W_1 has %d rows but b_1 has %d entries.", nrow(W),
-                 length(b)), call. = FALSE)
+    stop(sprintf(
+      "W_1 has %d rows but b_1 has %d entries.", nrow(W),
+      length(b)
+    ), call. = FALSE)
   }
   pre <- as.numeric(W %*% x + b)
   out <- .morie_burkov_phi(phi)(pre)
-  list(output = out, preactivation = pre, estimate = out[1],
-       n = length(out), method = "Layer 1 output phi(W1 x + b1) (Burkov Eq 1.6)")
+  list(
+    output = out, preactivation = pre, estimate = out[1],
+    n = length(out), method = "Layer 1 output phi(W1 x + b1) (Burkov Eq 1.6)"
+  )
 }
 
 #' Second-layer scalar output (Burkov Eq 1.7)
@@ -125,15 +156,20 @@ morie_burkov_layer1_output <- function(W_1, x, b_1, phi = "relu") {
 #' @param phi Activation.
 #' @export
 morie_burkov_layer2_output <- function(W_2, y_1, b_2_1, phi = "identity") {
-  w <- as.numeric(W_2); y1 <- as.numeric(y_1)
+  w <- as.numeric(W_2)
+  y1 <- as.numeric(y_1)
   if (length(w) != length(y1)) {
-    stop(sprintf("W_2 has %d weights but y_1 has %d entries.", length(w),
-                 length(y1)), call. = FALSE)
+    stop(sprintf(
+      "W_2 has %d weights but y_1 has %d entries.", length(w),
+      length(y1)
+    ), call. = FALSE)
   }
   pre <- sum(w * y1) + b_2_1
-  list(estimate = .morie_burkov_phi(phi)(pre), preactivation = pre,
-       n = length(y1),
-       method = "Layer 2 output phi(W2 y1 + b21) (Burkov Eq 1.7)")
+  list(
+    estimate = .morie_burkov_phi(phi)(pre), preactivation = pre,
+    n = length(y1),
+    method = "Layer 2 output phi(W2 y1 + b21) (Burkov Eq 1.7)"
+  )
 }
 
 #' Logistic regression sigma(w.x + b) (Burkov Eq 1.8)
@@ -141,15 +177,18 @@ morie_burkov_layer2_output <- function(W_2, y_1, b_2_1, phi = "identity") {
 #' @param b Bias.
 #' @export
 morie_burkov_logistic <- function(w, x, b) {
-  w <- as.numeric(w); x <- as.numeric(x)
+  w <- as.numeric(w)
+  x <- as.numeric(x)
   if (length(w) != length(x)) {
     stop("w and x must have the same length.", call. = FALSE)
   }
   z <- sum(w * x) + b
   p <- 1 / (1 + exp(-z))
-  list(estimate = p, logit = z, predicted_class = as.integer(p >= 0.5),
-       n = length(x),
-       method = "Logistic regression sigma(w.x + b) (Burkov Eq 1.8)")
+  list(
+    estimate = p, logit = z, predicted_class = as.integer(p >= 0.5),
+    n = length(x),
+    method = "Logistic regression sigma(w.x + b) (Burkov Eq 1.8)"
+  )
 }
 
 #' Binary cross-entropy for one example (Burkov Eq 1.9)
@@ -157,7 +196,8 @@ morie_burkov_logistic <- function(w, x, b) {
 #' @param y Targets, 0 or 1.
 #' @export
 morie_burkov_binary_cross_entropy <- function(y_hat, y) {
-  yh <- as.numeric(y_hat); y <- as.numeric(y)
+  yh <- as.numeric(y_hat)
+  y <- as.numeric(y)
   if (length(yh) != length(y)) {
     stop("y_hat and y must have the same length.", call. = FALSE)
   }
@@ -168,9 +208,11 @@ morie_burkov_binary_cross_entropy <- function(y_hat, y) {
     stop("targets must be 0 or 1 for Eq 1.9.", call. = FALSE)
   }
   loss <- -(y * log(yh) + (1 - y) * log(1 - yh))
-  loss[is.nan(loss)] <- 0   # 0 * log 0 limit
-  list(losses = loss, estimate = loss[1], mean_loss = mean(loss),
-       n = length(y), method = "Binary cross-entropy (Burkov Eq 1.9)")
+  loss[is.nan(loss)] <- 0 # 0 * log 0 limit
+  list(
+    losses = loss, estimate = loss[1], mean_loss = mean(loss),
+    n = length(y), method = "Binary cross-entropy (Burkov Eq 1.9)"
+  )
 }
 
 #' Closed-form BCE gradients for logistic regression (Burkov Eq 1.11)
@@ -182,23 +224,28 @@ morie_burkov_binary_cross_entropy <- function(y_hat, y) {
 #'   0-based coordinate for `estimate` (matching the Python mirror).
 #' @export
 morie_burkov_bce_gradients <- function(y_hat, y, x, N = NULL, j = NULL) {
-  yh <- as.numeric(y_hat); y <- as.numeric(y)
+  yh <- as.numeric(y_hat)
+  y <- as.numeric(y)
   X <- as.matrix(x)
   if (nrow(X) != length(yh)) X <- t(X)
   if (nrow(X) != length(yh) || length(y) != length(yh)) {
     stop("need one row of x per example.", call. = FALSE)
   }
   if (!is.null(N) && as.integer(N) != length(y)) {
-    stop(sprintf("N = %s does not match the dataset size %d.", N,
-                 length(y)), call. = FALSE)
+    stop(sprintf(
+      "N = %s does not match the dataset size %d.", N,
+      length(y)
+    ), call. = FALSE)
   }
   resid <- yh - y
   gw <- colMeans(X * resid)
   gb <- mean(resid)
   est <- if (!is.null(j)) gw[as.integer(j) + 1L] else gw[1]
-  list(grad_w = as.numeric(gw), grad_b = gb, estimate = as.numeric(est),
-       n = length(y),
-       method = "BCE gradients for logistic regression (Burkov Eq 1.11)")
+  list(
+    grad_w = as.numeric(gw), grad_b = gb, estimate = as.numeric(est),
+    n = length(y),
+    method = "BCE gradients for logistic regression (Burkov Eq 1.11)"
+  )
 }
 
 #' Categorical cross-entropy with a one-hot target (Burkov Eq 2.1)
@@ -207,20 +254,29 @@ morie_burkov_bce_gradients <- function(y_hat, y, x, N = NULL, j = NULL) {
 #'   0-based to match the Python mirror.
 #' @export
 morie_burkov_categorical_cross_entropy <- function(y_hat, c) {
-  p <- as.numeric(y_hat); c <- as.integer(c)
+  p <- as.numeric(y_hat)
+  c <- as.integer(c)
   if (c < 0L || c >= length(p)) {
-    stop(sprintf("class %d is out of range for %d classes.", c,
-                 length(p)), call. = FALSE)
+    stop(sprintf(
+      "class %d is out of range for %d classes.", c,
+      length(p)
+    ), call. = FALSE)
   }
   if (any(p < 0) || abs(sum(p) - 1) > 1e-8) {
-    stop(sprintf(paste("y_hat must be a probability distribution",
-                       "(non-negative, summing to 1); it sums to %.6g."),
-                 sum(p)), call. = FALSE)
+    stop(sprintf(
+      paste(
+        "y_hat must be a probability distribution",
+        "(non-negative, summing to 1); it sums to %.6g."
+      ),
+      sum(p)
+    ), call. = FALSE)
   }
   loss <- if (p[c + 1L] > 0) -log(p[c + 1L]) else Inf
-  list(estimate = loss, p_correct = p[c + 1L], n_classes = length(p),
-       n = length(p),
-       method = "Categorical cross-entropy -log p_c (Burkov Eq 2.1)")
+  list(
+    estimate = loss, p_correct = p[c + 1L], n_classes = length(p),
+    n = length(p),
+    method = "Categorical cross-entropy -log p_c (Burkov Eq 2.1)"
+  )
 }
 
 #' Autoregressive next-token probability, bigram MLE (Burkov Eq 2.2/2.3)
@@ -241,36 +297,49 @@ morie_burkov_next_token <- function(t_next, s) {
   ctx <- seq_[length(seq_)]
   idx <- which(seq_[-length(seq_)] == ctx)
   if (length(idx) == 0L) {
-    stop(sprintf(paste("the context token '%s' never has a successor in",
-                       "s, so the MLE conditional is undefined (0/0)."),
-                 ctx), call. = FALSE)
+    stop(sprintf(
+      paste(
+        "the context token '%s' never has a successor in",
+        "s, so the MLE conditional is undefined (0/0)."
+      ),
+      ctx
+    ), call. = FALSE)
   }
   follow <- seq_[idx + 1L]
   p <- mean(follow == as.character(t_next))
   dist <- table(follow) / length(follow)
-  list(estimate = p, context = ctx,
-       distribution = as.list(setNames(as.numeric(dist), names(dist))),
-       notations_agree = TRUE, n = length(seq_),
-       method = "Autoregressive next-token probability, bigram MLE (Burkov Eq 2.2)")
+  list(
+    estimate = p, context = ctx,
+    distribution = as.list(setNames(as.numeric(dist), names(dist))),
+    notations_agree = TRUE, n = length(seq_),
+    method = "Autoregressive next-token probability, bigram MLE (Burkov Eq 2.2)"
+  )
 }
 
 #' N-gram MLE probability (Burkov Ch 2)
 #' @param counts_ngram,counts_prefix Counts.
 #' @export
 morie_burkov_ngram_mle <- function(counts_ngram, counts_prefix) {
-  c <- as.numeric(counts_ngram); p <- as.numeric(counts_prefix)
+  c <- as.numeric(counts_ngram)
+  p <- as.numeric(counts_prefix)
   if (c < 0 || p < 0) stop("counts must be non-negative.", call. = FALSE)
   if (p == 0) {
-    stop(paste("the prefix was never observed, so the MLE conditional is",
-               "undefined (0/0); use smoothing or backoff."), call. = FALSE)
+    stop(paste(
+      "the prefix was never observed, so the MLE conditional is",
+      "undefined (0/0); use smoothing or backoff."
+    ), call. = FALSE)
   }
   if (c > p) {
-    stop(sprintf(paste("count(ngram) = %g exceeds count(prefix) = %g,",
-                       "which is impossible: every ngram occurrence",
-                       "contains its prefix."), c, p), call. = FALSE)
+    stop(sprintf(paste(
+      "count(ngram) = %g exceeds count(prefix) = %g,",
+      "which is impossible: every ngram occurrence",
+      "contains its prefix."
+    ), c, p), call. = FALSE)
   }
-  list(estimate = c / p, count_ngram = c, count_prefix = p, n = as.integer(p),
-       method = "N-gram MLE count/prefix (Burkov Ch 2)")
+  list(
+    estimate = c / p, count_ngram = c, count_prefix = p, n = as.integer(p),
+    method = "N-gram MLE count/prefix (Burkov Ch 2)"
+  )
 }
 
 #' Laplace add-1 smoothing (Burkov Ch 2)
@@ -278,14 +347,17 @@ morie_burkov_ngram_mle <- function(counts_ngram, counts_prefix) {
 #' @param V Vocabulary size.
 #' @export
 morie_burkov_laplace <- function(counts_ngram, counts_prefix, V) {
-  c <- as.numeric(counts_ngram); p <- as.numeric(counts_prefix)
+  c <- as.numeric(counts_ngram)
+  p <- as.numeric(counts_prefix)
   v <- as.integer(V)
   if (c < 0 || p < 0) stop("counts must be non-negative.", call. = FALSE)
   if (v < 1L) stop("vocabulary size must be positive.", call. = FALSE)
   if (c > p) stop("count(ngram) cannot exceed count(prefix).", call. = FALSE)
-  list(estimate = (c + 1) / (p + v), count_ngram = c, count_prefix = p,
-       vocab_size = v, n = as.integer(p),
-       method = "Laplace add-1 smoothing (Burkov Ch 2)")
+  list(
+    estimate = (c + 1) / (p + v), count_ngram = c, count_prefix = p,
+    vocab_size = v, n = as.integer(p),
+    method = "Laplace add-1 smoothing (Burkov Ch 2)"
+  )
 }
 
 #' Add-k smoothing (Burkov Ch 2)
@@ -294,19 +366,27 @@ morie_burkov_laplace <- function(counts_ngram, counts_prefix, V) {
 #' @param k Pseudo-count, positive.
 #' @export
 morie_burkov_add_k <- function(counts_ngram, counts_prefix, V, k = 0.5) {
-  c <- as.numeric(counts_ngram); p <- as.numeric(counts_prefix)
-  v <- as.integer(V); k <- as.numeric(k)
+  c <- as.numeric(counts_ngram)
+  p <- as.numeric(counts_prefix)
+  v <- as.integer(V)
+  k <- as.numeric(k)
   if (c < 0 || p < 0) stop("counts must be non-negative.", call. = FALSE)
   if (v < 1L) stop("vocabulary size must be positive.", call. = FALSE)
   if (k <= 0) {
-    stop(sprintf(paste("k must be positive; got %g. k = 0 is the",
-                       "unsmoothed MLE and has its own function."), k),
-         call. = FALSE)
+    stop(
+      sprintf(paste(
+        "k must be positive; got %g. k = 0 is the",
+        "unsmoothed MLE and has its own function."
+      ), k),
+      call. = FALSE
+    )
   }
   if (c > p) stop("count(ngram) cannot exceed count(prefix).", call. = FALSE)
-  list(estimate = (c + k) / (p + k * v), count_ngram = c, count_prefix = p,
-       vocab_size = v, k = k, n = as.integer(p),
-       method = "Add-k smoothing (Burkov Ch 2)")
+  list(
+    estimate = (c + k) / (p + k * v), count_ngram = c, count_prefix = p,
+    vocab_size = v, k = k, n = as.integer(p),
+    method = "Add-k smoothing (Burkov Ch 2)"
+  )
 }
 
 #' Linear interpolation of n-gram orders (Burkov Ch 2)
@@ -314,19 +394,24 @@ morie_burkov_add_k <- function(counts_ngram, counts_prefix, V, k = 0.5) {
 #' @param lambdas Weights, sum 1.
 #' @export
 morie_burkov_interpolation <- function(probs_by_order, lambdas) {
-  ps <- as.numeric(probs_by_order); ls <- as.numeric(lambdas)
+  ps <- as.numeric(probs_by_order)
+  ls <- as.numeric(lambdas)
   if (length(ps) != length(ls)) {
     stop("need one lambda per order.", call. = FALSE)
   }
   if (any(ls < 0) || abs(sum(ls) - 1) > 1e-9) {
-    stop(sprintf("lambdas must be non-negative and sum to 1; they sum to %.6g.",
-                 sum(ls)), call. = FALSE)
+    stop(sprintf(
+      "lambdas must be non-negative and sum to 1; they sum to %.6g.",
+      sum(ls)
+    ), call. = FALSE)
   }
   if (any(ps < 0 | ps > 1)) {
     stop("probabilities must lie in [0, 1].", call. = FALSE)
   }
-  list(estimate = sum(ls * ps), probs = ps, lambdas = ls, n = length(ps),
-       method = "Linear interpolation of n-gram orders (Burkov Ch 2)")
+  list(
+    estimate = sum(ls * ps), probs = ps, lambdas = ls, n = length(ps),
+    method = "Linear interpolation of n-gram orders (Burkov Ch 2)"
+  )
 }
 
 #' N-gram backoff with per-level discount (Burkov Ch 2)
@@ -345,20 +430,25 @@ morie_burkov_backoff <- function(counts_by_order, alpha = 0.4) {
   discount <- 1
   for (level in seq_along(counts_by_order)) {
     pair <- as.numeric(counts_by_order[[level]])
-    c <- pair[1]; p <- pair[2]
+    c <- pair[1]
+    p <- pair[2]
     if (c < 0 || p < 0) stop("counts must be non-negative.", call. = FALSE)
     if (c > p) stop("count(ngram) cannot exceed count(prefix).", call. = FALSE)
     if (c > 0) {
-      return(list(estimate = discount * c / p, order_used = level - 1L,
-                  backed_off = level - 1L, discount = discount,
-                  n = as.integer(p),
-                  method = "N-gram backoff (Burkov Ch 2)"))
+      return(list(
+        estimate = discount * c / p, order_used = level - 1L,
+        backed_off = level - 1L, discount = discount,
+        n = as.integer(p),
+        method = "N-gram backoff (Burkov Ch 2)"
+      ))
     }
     discount <- discount * a
   }
-  stop(paste("every order has count 0, including the lowest; backoff has",
-             "nowhere left to go. Supply a unigram floor with a positive",
-             "count."), call. = FALSE)
+  stop(paste(
+    "every order has count 0, including the lowest; backoff has",
+    "nowhere left to go. Supply a unigram floor with a positive",
+    "count."
+  ), call. = FALSE)
 }
 
 #' Kneser-Ney smoothing (Burkov Ch 2)
@@ -369,7 +459,8 @@ morie_burkov_backoff <- function(counts_by_order, alpha = 0.4) {
 #' @export
 morie_burkov_kneser_ney <- function(counts_ngram, counts_prefix,
                                     continuation_counts, d = 0.75) {
-  c <- as.numeric(counts_ngram); p <- as.numeric(counts_prefix)
+  c <- as.numeric(counts_ngram)
+  p <- as.numeric(counts_prefix)
   dd <- as.numeric(d)
   if (c < 0 || p <= 0) {
     stop("need non-negative count and positive prefix.", call. = FALSE)
@@ -377,24 +468,31 @@ morie_burkov_kneser_ney <- function(counts_ngram, counts_prefix,
   if (c > p) stop("count(ngram) cannot exceed count(prefix).", call. = FALSE)
   if (dd <= 0 || dd >= 1) {
     stop(sprintf("the discount d must lie in (0, 1); got %g.", dd),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   cc <- as.numeric(continuation_counts)
-  n_after <- cc[1]; cont_w <- cc[2]; total_types <- cc[3]
+  n_after <- cc[1]
+  cont_w <- cc[2]
+  total_types <- cc[3]
   if (total_types <= 0 || cont_w < 0 || n_after < 0) {
     stop("continuation counts must be non-negative with positive total bigram types.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   if (cont_w > total_types) {
     stop("a word cannot appear in more contexts than there are bigram types.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   lam <- dd * n_after / p
   p_cont <- cont_w / total_types
-  list(estimate = max(c - dd, 0) / p + lam * p_cont,
-       discounted_mle = max(c - dd, 0) / p, lambda = lam,
-       p_continuation = p_cont, n = as.integer(p),
-       method = "Kneser-Ney smoothing (Burkov Ch 2)")
+  list(
+    estimate = max(c - dd, 0) / p + lam * p_cont,
+    discounted_mle = max(c - dd, 0) / p, lambda = lam,
+    p_continuation = p_cont, n = as.integer(p),
+    method = "Kneser-Ney smoothing (Burkov Ch 2)"
+  )
 }
 
 #' Bits per character from cross-entropy (Burkov Ch 2)
@@ -403,35 +501,43 @@ morie_burkov_kneser_ney <- function(counts_ngram, counts_prefix,
 #' @export
 morie_burkov_bits_per_character <- function(ce_loss, n_tokens,
                                             n_characters) {
-  l <- as.numeric(ce_loss); nt <- as.integer(n_tokens)
+  l <- as.numeric(ce_loss)
+  nt <- as.integer(n_tokens)
   nc <- as.integer(n_characters)
   if (l < 0) stop("cross-entropy cannot be negative.", call. = FALSE)
   if (nt < 1L || nc < 1L) {
     stop("token and character counts must be positive.", call. = FALSE)
   }
-  list(estimate = (l * nt) / (log(2) * nc), bits_per_token = l / log(2),
-       chars_per_token = nc / nt, n = nt,
-       method = "Bits per character (Burkov Ch 2)")
+  list(
+    estimate = (l * nt) / (log(2) * nc), bits_per_token = l / log(2),
+    chars_per_token = nc / nt, n = nt,
+    method = "Bits per character (Burkov Ch 2)"
+  )
 }
 
 #' Dot product, L2 norm and unit vector (Burkov Ch 1)
 #' @param a,b Vectors.
 #' @export
 morie_burkov_dot_product <- function(a, b) {
-  a <- as.numeric(a); b <- as.numeric(b)
+  a <- as.numeric(a)
+  b <- as.numeric(b)
   if (length(a) != length(b)) {
     stop("vectors must have the same length.", call. = FALSE)
   }
-  list(estimate = sum(a * b), n = length(a),
-       method = "Dot product (Burkov Ch 1)")
+  list(
+    estimate = sum(a * b), n = length(a),
+    method = "Dot product (Burkov Ch 1)"
+  )
 }
 
 #' @rdname morie_burkov_dot_product
 #' @export
 morie_burkov_vector_norm <- function(a) {
   a <- as.numeric(a)
-  list(estimate = sqrt(sum(a^2)), squared = sum(a^2), n = length(a),
-       method = "L2 norm (Burkov Ch 1)")
+  list(
+    estimate = sqrt(sum(a^2)), squared = sum(a^2), n = length(a),
+    method = "L2 norm (Burkov Ch 1)"
+  )
 }
 
 #' @rdname morie_burkov_dot_product
@@ -441,10 +547,13 @@ morie_burkov_unit_vector <- function(a) {
   n <- sqrt(sum(a^2))
   if (n == 0) {
     stop("the zero vector has no direction and cannot be normalised.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
-  list(unit = a / n, estimate = (a / n)[1], norm = n, n = length(a),
-       method = "Unit vector a/||a|| (Burkov Ch 1)")
+  list(
+    unit = a / n, estimate = (a / n)[1], norm = n, n = length(a),
+    method = "Unit vector a/||a|| (Burkov Ch 1)"
+  )
 }
 
 #' Term frequency and TF-IDF (Burkov Ch 2)
@@ -457,9 +566,11 @@ morie_burkov_term_frequency <- function(term, document, normalise = FALSE) {
   if (length(doc) == 0L) stop("the document is empty.", call. = FALSE)
   cnt <- sum(doc == as.character(term))
   est <- if (isTRUE(normalise)) cnt / length(doc) else as.numeric(cnt)
-  list(estimate = est, count = cnt, doc_length = length(doc),
-       normalised = isTRUE(normalise), n = length(doc),
-       method = "Term frequency (Burkov Ch 2)")
+  list(
+    estimate = est, count = cnt, doc_length = length(doc),
+    normalised = isTRUE(normalise), n = length(doc),
+    method = "Term frequency (Burkov Ch 2)"
+  )
 }
 
 #' @rdname morie_burkov_term_frequency
@@ -473,14 +584,18 @@ morie_burkov_tf_idf <- function(term, document, corpus) {
   tf <- sum(doc == t)
   df <- sum(vapply(docs, function(d) t %in% d, logical(1)))
   if (df == 0L) {
-    stop(sprintf(paste("term '%s' appears in no corpus document, so IDF",
-                       "is undefined; is the query document part of the",
-                       "corpus?"), t), call. = FALSE)
+    stop(sprintf(paste(
+      "term '%s' appears in no corpus document, so IDF",
+      "is undefined; is the query document part of the",
+      "corpus?"
+    ), t), call. = FALSE)
   }
   idf <- log(length(docs) / df)
-  list(estimate = tf * idf, tf = tf, df = df, idf = idf,
-       n_documents = length(docs), n = length(doc),
-       method = "TF-IDF (Burkov Ch 2)")
+  list(
+    estimate = tf * idf, tf = tf, df = df, idf = idf,
+    n_documents = length(docs), n = length(doc),
+    method = "TF-IDF (Burkov Ch 2)"
+  )
 }
 
 #' Repetition penalty on decoder logits (Burkov Ch 5)
@@ -504,15 +619,19 @@ morie_burkov_repetition_penalty <- function(logits, prev_tokens,
   prev <- sort(unique(as.integer(prev_tokens)))
   for (t in prev) {
     if (t < 0L || t >= length(z)) {
-      stop(sprintf("token index %d is out of range for %d logits.", t,
-                   length(z)), call. = FALSE)
+      stop(sprintf(
+        "token index %d is out of range for %d logits.", t,
+        length(z)
+      ), call. = FALSE)
     }
     i <- t + 1L
     z[i] <- if (z[i] > 0) z[i] / r else z[i] * r
   }
-  list(penalised = z, estimate = z[1], penalty = r, tokens_hit = prev,
-       n = length(z),
-       method = "Repetition penalty on logits (Burkov Ch 5)")
+  list(
+    penalised = z, estimate = z[1], penalty = r, tokens_hit = prev,
+    n = length(z),
+    method = "Repetition penalty on logits (Burkov Ch 5)"
+  )
 }
 
 #' Weight tying: logits through the shared embedding (Burkov Ch 4)
@@ -523,15 +642,21 @@ morie_burkov_weight_tying <- function(h_last, E) {
   h <- as.numeric(h_last)
   E <- as.matrix(E)
   if (ncol(E) != length(h)) {
-    stop(sprintf(paste("E is %d x %d but the hidden state has %d",
-                       "dimensions; weight tying needs E's columns to",
-                       "match the hidden width."), nrow(E), ncol(E),
-                 length(h)), call. = FALSE)
+    stop(sprintf(
+      paste(
+        "E is %d x %d but the hidden state has %d",
+        "dimensions; weight tying needs E's columns to",
+        "match the hidden width."
+      ), nrow(E), ncol(E),
+      length(h)
+    ), call. = FALSE)
   }
   logits <- as.numeric(E %*% h)
-  list(logits = logits, estimate = logits[1], vocab_size = nrow(E),
-       hidden_size = ncol(E), n = length(h),
-       method = "Weight tying logits = h E^T (Burkov Ch 4)")
+  list(
+    logits = logits, estimate = logits[1], vocab_size = nrow(E),
+    hidden_size = ncol(E), n = length(h),
+    method = "Weight tying logits = h E^T (Burkov Ch 4)"
+  )
 }
 
 #' One step of the Elman RNN (Burkov Ch 3)
@@ -541,16 +666,22 @@ morie_burkov_weight_tying <- function(h_last, E) {
 #' @param bh,by Biases.
 #' @export
 morie_burkov_elman_rnn <- function(x_t, h_prev, Wh, Wx, Wy, bh, by) {
-  x <- as.numeric(x_t); h0 <- as.numeric(h_prev)
-  Wh <- as.matrix(Wh); Wx <- as.matrix(Wx); Wy <- as.matrix(Wy)
-  bh <- as.numeric(bh); by <- as.numeric(by)
+  x <- as.numeric(x_t)
+  h0 <- as.numeric(h_prev)
+  Wh <- as.matrix(Wh)
+  Wx <- as.matrix(Wx)
+  Wy <- as.matrix(Wy)
+  bh <- as.numeric(bh)
+  by <- as.numeric(by)
   if (!all(dim(Wh) == c(length(h0), length(h0)))) {
     stop(sprintf("Wh must be %d x %d.", length(h0), length(h0)),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   if (!all(dim(Wx) == c(length(h0), length(x)))) {
     stop(sprintf("Wx must be %d x %d.", length(h0), length(x)),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   if (ncol(Wy) != length(h0)) {
     stop(sprintf("Wy must have %d columns.", length(h0)), call. = FALSE)
@@ -560,8 +691,10 @@ morie_burkov_elman_rnn <- function(x_t, h_prev, Wh, Wx, Wy, bh, by) {
   }
   h <- tanh(as.numeric(Wh %*% h0 + Wx %*% x + bh))
   y <- as.numeric(Wy %*% h + by)
-  list(h = h, y = y, estimate = y[1], n = length(h),
-       method = "Elman RNN step (Burkov Ch 3)")
+  list(
+    h = h, y = y, estimate = y[1], n = length(h),
+    method = "Elman RNN step (Burkov Ch 3)"
+  )
 }
 
 #' Computational-graph forward and reverse pass (Burkov Ch 1)
@@ -578,36 +711,52 @@ morie_burkov_elman_rnn <- function(x_t, h_prev, Wh, Wx, Wy, bh, by) {
 morie_burkov_computational_graph <- function(graph, inputs) {
   if (length(graph) == 0L) stop("the graph is empty.", call. = FALSE)
   sig <- function(a) 1 / (1 + exp(-a))
-  fwd <- list(add = function(a, b) a + b, sub = function(a, b) a - b,
-              mul = function(a, b) a * b, tanh = function(a) tanh(a),
-              sigmoid = sig, relu = function(a) max(a, 0),
-              square = function(a) a * a, log = function(a) log(a),
-              exp = function(a) exp(a))
-  bwd <- list(add = function(a, b, g) c(g, g),
-              sub = function(a, b, g) c(g, -g),
-              mul = function(a, b, g) c(g * b, g * a),
-              tanh = function(a, g) g * (1 - tanh(a)^2),
-              sigmoid = function(a, g) g * sig(a) * (1 - sig(a)),
-              relu = function(a, g) if (a > 0) g else 0,
-              square = function(a, g) 2 * a * g,
-              log = function(a, g) g / a,
-              exp = function(a, g) g * exp(a))
+  fwd <- list(
+    add = function(a, b) a + b, sub = function(a, b) a - b,
+    mul = function(a, b) a * b, tanh = function(a) tanh(a),
+    sigmoid = sig, relu = function(a) max(a, 0),
+    square = function(a) a * a, log = function(a) log(a),
+    exp = function(a) exp(a)
+  )
+  bwd <- list(
+    add = function(a, b, g) c(g, g),
+    sub = function(a, b, g) c(g, -g),
+    mul = function(a, b, g) c(g * b, g * a),
+    tanh = function(a, g) g * (1 - tanh(a)^2),
+    sigmoid = function(a, g) g * sig(a) * (1 - sig(a)),
+    relu = function(a, g) if (a > 0) g else 0,
+    square = function(a, g) 2 * a * g,
+    log = function(a, g) g / a,
+    exp = function(a, g) g * exp(a)
+  )
   values <- as.list(inputs)
   for (node in graph) {
     if (is.null(fwd[[node$op]])) {
-      stop(sprintf("unknown op '%s'; supported: %s.", node$op,
-                   paste(sort(names(fwd)), collapse = ", ")),
-           call. = FALSE)
+      stop(
+        sprintf(
+          "unknown op '%s'; supported: %s.", node$op,
+          paste(sort(names(fwd)), collapse = ", ")
+        ),
+        call. = FALSE
+      )
     }
     missing <- setdiff(node$args, names(values))
     if (length(missing)) {
-      stop(sprintf(paste("node '%s' needs %s before they are computed;",
-                         "the graph must be topologically ordered."),
-                   node$name, paste(missing, collapse = ", ")),
-           call. = FALSE)
+      stop(
+        sprintf(
+          paste(
+            "node '%s' needs %s before they are computed;",
+            "the graph must be topologically ordered."
+          ),
+          node$name, paste(missing, collapse = ", ")
+        ),
+        call. = FALSE
+      )
     }
-    values[[node$name]] <- do.call(fwd[[node$op]],
-                                   lapply(node$args, function(a) values[[a]]))
+    values[[node$name]] <- do.call(
+      fwd[[node$op]],
+      lapply(node$args, function(a) values[[a]])
+    )
   }
   out_name <- graph[[length(graph)]]$name
   grads <- setNames(as.list(rep(0, length(values))), names(values))
@@ -621,8 +770,10 @@ morie_burkov_computational_graph <- function(graph, inputs) {
       grads[[a]] <- grads[[a]] + local[i]
     }
   }
-  list(output = values[[out_name]], estimate = values[[out_name]],
-       gradients = grads[names(inputs)], values = values,
-       n = length(graph),
-       method = "Computational-graph autodiff (Burkov Ch 1)")
+  list(
+    output = values[[out_name]], estimate = values[[out_name]],
+    gradients = grads[names(inputs)], values = values,
+    n = length(graph),
+    method = "Computational-graph autodiff (Burkov Ch 1)"
+  )
 }

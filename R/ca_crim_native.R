@@ -25,8 +25,10 @@ morie_ols_simple <- function(x, y) {
   r <- sum(yd * xd) / sqrt(sum(yd^2) * sxx)
   resid <- y - (b0 + b1 * x)
   se_b1 <- sqrt(sum(resid^2) / (n - 2) / sxx)
-  list(b1 = b1, b0 = b0, r = r, se_b1 = se_b1, t = b1 / se_b1,
-       t_from_r = r * sqrt((n - 2) / (1 - r^2)), df = n - 2, n = n)
+  list(
+    b1 = b1, b0 = b0, r = r, se_b1 = se_b1, t = b1 / se_b1,
+    t_from_r = r * sqrt((n - 2) / (1 - r^2)), df = n - 2, n = n
+  )
 }
 
 #' Two-predictor OLS slopes from correlations
@@ -40,8 +42,10 @@ morie_ols_simple <- function(x, y) {
 morie_ols_two_iv <- function(r_y1, r_y2, r_12, s_y, s_1, s_2) {
   stopifnot(abs(r_12) < 1)
   den <- 1 - r_12^2
-  list(b1 = (r_y1 - r_y2 * r_12) / den * (s_y / s_1),
-       b2 = (r_y2 - r_y1 * r_12) / den * (s_y / s_2))
+  list(
+    b1 = (r_y1 - r_y2 * r_12) / den * (s_y / s_1),
+    b2 = (r_y2 - r_y1 * r_12) / den * (s_y / s_2)
+  )
 }
 
 #' OLS fit indices: variance partition, R squared, adjusted R squared, F
@@ -64,11 +68,13 @@ morie_fit_indices <- function(y, yhat, k = 1) {
   ss_model <- sum((yhat - ybar)^2)
   ss_resid <- sum((y - yhat)^2)
   r2 <- ss_model / ss_total
-  list(var_total = ss_total / n, var_model = ss_model / n,
-       var_resid = ss_resid / n, ss_total = ss_total, ss_model = ss_model,
-       ss_resid = ss_resid, r2 = r2,
-       adj_r2 = 1 - (1 - r2) * (n - 1) / (n - k - 1),
-       f_from_r2 = r2 * (n - k - 1) / ((1 - r2) * k), n = n)
+  list(
+    var_total = ss_total / n, var_model = ss_model / n,
+    var_resid = ss_resid / n, ss_total = ss_total, ss_model = ss_model,
+    ss_resid = ss_resid, r2 = r2,
+    adj_r2 = 1 - (1 - r2) * (n - 1) / (n - k - 1),
+    f_from_r2 = r2 * (n - k - 1) / ((1 - r2) * k), n = n
+  )
 }
 
 #' Nested-model F change tests
@@ -118,7 +124,9 @@ morie_f_change <- function(ss_resid_restricted = NA, ss_resid_full = NA,
 #' @export
 morie_std_coef <- function(b, s_x, s_y = NULL, gelman = FALSE) {
   stopifnot(s_x > 0)
-  if (is.null(s_y)) return(b * (if (gelman) 2 * s_x else s_x))
+  if (is.null(s_y)) {
+    return(b * (if (gelman) 2 * s_x else s_x))
+  }
   stopifnot(s_y > 0)
   b * s_x / s_y
 }
@@ -149,8 +157,10 @@ morie_vif_tolerance <- function(r2_x) {
 #' @export
 morie_logit_link <- function(p = 0.5, xb = 0, b = 0) {
   stopifnot(p > 0, p < 1)
-  list(logit = log(p / (1 - p)), odds = p / (1 - p),
-       p_from_xb = 1 / (1 + exp(-xb)), odds_ratio = exp(b))
+  list(
+    logit = log(p / (1 - p)), odds = p / (1 - p),
+    p_from_xb = 1 / (1 + exp(-xb)), odds_ratio = exp(b)
+  )
 }
 
 #' Logistic regression effect and fit statistics
@@ -172,9 +182,11 @@ morie_logistic_effects <- function(ybar, b, se, n_correct, n_total,
                                    neg2ll_reduced = NA, n = NA) {
   stopifnot(ybar > 0, ybar < 1, se > 0)
   chi2 <- neg2ll_null - neg2ll_full
-  out <- list(dm = ybar * (1 - ybar) * b,
-              pct_correct = 100 * n_correct / n_total,
-              model_chi2 = chi2, wald = (b / se)^2, z = b / se)
+  out <- list(
+    dm = ybar * (1 - ybar) * b,
+    pct_correct = 100 * n_correct / n_total,
+    model_chi2 = chi2, wald = (b / se)^2, z = b / se
+  )
   if (!is.na(n)) out$cox_snell_r2 <- 1 - exp(-chi2 / n)
   if (!is.na(neg2ll_reduced)) out$lr_chi2 <- neg2ll_reduced - neg2ll_full
   out
@@ -210,11 +222,15 @@ morie_mlogit_probs <- function(xbs) {
 #' @export
 morie_ordinal_logit_ca <- function(probs, m, tau_m = 0, xb = 0) {
   probs <- as.numeric(probs)
-  stopifnot(all(probs >= 0), abs(sum(probs) - 1) < 1e-8,
-            m >= 1, m <= length(probs) - 1)
+  stopifnot(
+    all(probs >= 0), abs(sum(probs) - 1) < 1e-8,
+    m >= 1, m <= length(probs) - 1
+  )
   cp <- sum(probs[seq_len(m)])
-  list(cum_prob = cp, cum_logit = log(cp / (1 - cp)),
-       logit_plus = tau_m + xb, logit_minus = tau_m - xb)
+  list(
+    cum_prob = cp, cum_logit = log(cp / (1 - cp)),
+    logit_plus = tau_m + xb, logit_minus = tau_m - xb
+  )
 }
 
 #' Count-model (Poisson family) utilities
@@ -236,12 +252,17 @@ morie_count_glm <- function(b0 = 0, b1 = 0, x1 = 0, exposure = 1,
                             y = NULL, yhat = NULL, k = 1, se = NA,
                             mu = NA, alpha = NA) {
   stopifnot(exposure > 0)
-  out <- list(predict = exp(b0 + b1 * x1), irr = exp(b1),
-              predict_offset = exp(b0 + b1 * x1 + log(exposure)))
+  out <- list(
+    predict = exp(b0 + b1 * x1), irr = exp(b1),
+    predict_offset = exp(b0 + b1 * x1 + log(exposure))
+  )
   if (!is.null(y) && !is.null(yhat)) {
-    y <- as.numeric(y); yhat <- as.numeric(yhat)
-    stopifnot(length(y) == length(yhat), all(yhat > 0),
-              length(y) > k + 1)
+    y <- as.numeric(y)
+    yhat <- as.numeric(yhat)
+    stopifnot(
+      length(y) == length(yhat), all(yhat > 0),
+      length(y) > k + 1
+    )
     out$theta <- sum((y - yhat)^2 / yhat) / (length(y) - k - 1)
     if (!is.na(se)) out$se_quasi <- se * sqrt(out$theta)
   }
@@ -265,11 +286,17 @@ morie_hlm_components <- function(ms_between, ms_within, n_per_cluster,
                                  ll_null = NA, ll_full = NA) {
   stopifnot(n_per_cluster > 0)
   s2u <- (ms_between - ms_within) / n_per_cluster
-  out <- list(sigma2_u = s2u,
-              icc = if (s2u >= 0 && ms_within > 0)
-                s2u / (s2u + ms_within) else NA_real_)
-  if (!is.na(ll_null) && !is.na(ll_full))
+  out <- list(
+    sigma2_u = s2u,
+    icc = if (s2u >= 0 && ms_within > 0) {
+      s2u / (s2u + ms_within)
+    } else {
+      NA_real_
+    }
+  )
+  if (!is.na(ll_null) && !is.na(ll_full)) {
     out$lr_chi2 <- -2 * (ll_null - ll_full)
+  }
   out
 }
 
@@ -309,8 +336,9 @@ morie_power_ttest_crim <- function(d = NA, n1 = NA, n2 = NA, t_cv = NA,
     out$lambda <- n_total * f^2
     out$r2_f2 <- f^2 / (1 + f^2)
   }
-  if (!is.na(r) && !is.na(n))
+  if (!is.na(r) && !is.na(n)) {
     out$delta_r <- r * sqrt(n - 2) / sqrt(1 - r^2)
+  }
   out
 }
 
@@ -335,8 +363,9 @@ morie_rct_tests <- function(r_yt = NA, r_yx = NA, r_tx = NA, s_y = NA,
   out <- list()
   if (!is.na(r_yt) && !is.na(s_y) && !is.na(s_t)) {
     out$b_t_random <- r_yt * s_y / s_t
-    if (!is.na(r_yx) && !is.na(r_tx))
+    if (!is.na(r_yx) && !is.na(r_tx)) {
       out$b_t <- (r_yt - r_yx * r_tx) / (1 - r_tx^2) * (s_y / s_t)
+    }
   }
   if (!is.na(m1) && !is.na(n1) && !is.na(n2)) {
     df <- n1 + n2 - 2
@@ -380,10 +409,12 @@ morie_experiment_anova <- function(groups = NULL, y = NULL,
     allv <- unlist(groups)
     n_total <- length(allv)
     grand <- mean(allv)
-    ss_b <- sum(vapply(groups, function(g)
-      length(g) * (mean(g) - grand)^2, numeric(1)))
-    ss_w <- sum(vapply(groups, function(g)
-      sum((g - mean(g))^2), numeric(1)))
+    ss_b <- sum(vapply(groups, function(g) {
+      length(g) * (mean(g) - grand)^2
+    }, numeric(1)))
+    ss_w <- sum(vapply(groups, function(g) {
+      sum((g - mean(g))^2)
+    }, numeric(1)))
     out$ms_between <- ss_b / (a - 1)
     out$ms_within <- ss_w / (n_total - a)
     out$f <- out$ms_between / out$ms_within
@@ -395,10 +426,12 @@ morie_experiment_anova <- function(groups = NULL, y = NULL,
     tl <- unique(treatment)
     bl <- unique(block)
     grand <- mean(y)
-    ss_t <- sum(vapply(tl, function(t)
-      sum(treatment == t) * (mean(y[treatment == t]) - grand)^2, numeric(1)))
-    ss_bk <- sum(vapply(bl, function(k)
-      sum(block == k) * (mean(y[block == k]) - grand)^2, numeric(1)))
+    ss_t <- sum(vapply(tl, function(t) {
+      sum(treatment == t) * (mean(y[treatment == t]) - grand)^2
+    }, numeric(1)))
+    ss_bk <- sum(vapply(bl, function(k) {
+      sum(block == k) * (mean(y[block == k]) - grand)^2
+    }, numeric(1)))
     ss_tot <- sum((y - grand)^2)
     df_res <- length(y) - length(tl) - length(bl) + 1
     stopifnot(df_res > 0)
@@ -451,7 +484,7 @@ morie_meta_effect_sizes <- function(m1 = NA, m2 = NA, s1 = NA, s2 = NA,
     if (!is.null(out$d) && !is.na(out$d)) {
       out$g <- out$j * out$d
       out$se_g <- sqrt((n1 + n2) / (n1 * n2) +
-                         out$g^2 / (2 * (n1 + n2)))
+        out$g^2 / (2 * (n1 + n2)))
     }
     if (!is.na(t_value)) out$d_from_t <- t_value * sqrt((n1 + n2) / (n1 * n2))
   }
@@ -461,7 +494,7 @@ morie_meta_effect_sizes <- function(m1 = NA, m2 = NA, s1 = NA, s2 = NA,
     out$rr <- p1 / p2
     out$or <- a * d / (b * c)
     out$se_ln_rr <- sqrt((1 - p1) / ((a + b) * p1) +
-                           (1 - p2) / ((c + d) * p2))
+      (1 - p2) / ((c + d) * p2))
     out$se_ln_or <- sqrt(1 / a + 1 / b + 1 / c + 1 / d)
   }
   if (!is.na(r)) {
@@ -510,30 +543,35 @@ morie_meta_convert <- function(ln_or = NA, se_ln_or = NA, p1 = NA,
     z1 <- stats::qnorm(p1)
     z2 <- stats::qnorm(p2)
     out$d_probit <- z1 - z2
-    if (!is.na(n1) && !is.na(n2))
+    if (!is.na(n1) && !is.na(n2)) {
       out$se_d_probit <- sqrt(2 * pi * p1 * (1 - p1) * exp(z1^2) / n1 +
-                                2 * pi * p2 * (1 - p2) * exp(z2^2) / n2)
+        2 * pi * p2 * (1 - p2) * exp(z2^2) / n2)
+    }
   }
   if (!is.na(d)) {
     out$ln_or_logit <- d / 0.551
     out$ln_or_cox <- d / 0.606
     h <- if (!is.na(n1) && !is.na(n2)) (n1 + n2)^2 / (n1 * n2) else 4
     out$r_from_d <- d / sqrt(d^2 + h)
-    if (!is.na(se_d))
+    if (!is.na(se_d)) {
       out$se_r_from_d <- sqrt(h * se_d^2 / (d^2 + h)^3)
+    }
   }
   if (!is.na(se_d)) {
     out$se_ln_or_logit <- sqrt(se_d^2 / 0.551^2)
     out$se_ln_or_cox <- sqrt(se_d^2 / 0.606^2)
   }
-  if (!is.na(rr) && !is.na(p2))
+  if (!is.na(rr) && !is.na(p2)) {
     out$or_from_rr <- rr * p2 * (1 - p2) / (p2 * (1 - rr * p2))
-  if (!is.na(or_value) && !is.na(p2))
+  }
+  if (!is.na(or_value) && !is.na(p2)) {
     out$rr_from_or <- or_value / (1 - p2 + p2 * or_value)
+  }
   if (!is.na(r)) {
     out$d_from_r <- 2 * r / sqrt(1 - r^2)
-    if (!is.na(se_r))
+    if (!is.na(se_r)) {
       out$se_d_from_r <- sqrt(4 * se_r^2 / (1 - r^2)^3)
+    }
   }
   out
 }
@@ -566,11 +604,13 @@ morie_meta_pool <- function(ys, ses, z_cv = 1.96, groups = NULL) {
   df <- length(ys) - 1
   cc <- sum(ws) - sum(ws^2) / sum(ws)
   tau2 <- max(0, (q - df) / cc)
-  out <- list(weights = ws, mean = m, se = se_m, z = m / se_m,
-              ci = c(m - z_cv * se_m, m + z_cv * se_m),
-              q = q, df = df,
-              i2 = max(0, (q - df) / q * 100),
-              tau2 = tau2, weights_random = 1 / (ses^2 + tau2))
+  out <- list(
+    weights = ws, mean = m, se = se_m, z = m / se_m,
+    ci = c(m - z_cv * se_m, m + z_cv * se_m),
+    q = q, df = df,
+    i2 = max(0, (q - df) / q * 100),
+    tau2 = tau2, weights_random = 1 / (ses^2 + tau2)
+  )
   if (!is.null(groups)) {
     qw <- 0
     for (g in unique(groups)) {

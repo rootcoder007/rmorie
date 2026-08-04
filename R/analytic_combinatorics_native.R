@@ -39,9 +39,13 @@ morie_rational_gf_coefficients <- function(numerator, denominator, n_terms) {
   q <- as.numeric(denominator)
   m <- as.integer(n_terms)
   if (length(q) == 0L || q[1] == 0) {
-    stop(paste("the denominator must have a non-zero constant term; a",
-               "zero there is a pole at the origin, not a power series."),
-         call. = FALSE)
+    stop(
+      paste(
+        "the denominator must have a non-zero constant term; a",
+        "zero there is a pole at the origin, not a power series."
+      ),
+      call. = FALSE
+    )
   }
   if (is.na(m) || m < 1L) {
     stop(sprintf("n_terms must be positive; got %s", n_terms), call. = FALSE)
@@ -55,17 +59,21 @@ morie_rational_gf_coefficients <- function(numerator, denominator, n_terms) {
     for (n in seq_len(m)) {
       acc <- if (n <= length(pb)) pb[[n]] else morie_bigint(0)
       for (i in seq_len(min(n - 1L, length(qb) - 1L))) {
-        acc <- morie_big_sub(acc, morie_big_mul(qb[[i + 1L]],
-                                                coeffs[[n - i]]))
+        acc <- morie_big_sub(acc, morie_big_mul(
+          qb[[i + 1L]],
+          coeffs[[n - i]]
+        ))
       }
       # q0 = +-1, so division is a sign flip at most
       if (q[1] == -1) acc <- morie_big_sub(morie_bigint(0), acc)
       coeffs[[n]] <- acc
     }
     ex <- vapply(coeffs, as.character, character(1))
-    list(coefficients = as.numeric(ex), exact_coefficients = ex,
-         all_integral = TRUE, is_exact = TRUE, n = m,
-         method = "Analytic combinatorics (Flajolet and Sedgewick 2009)")
+    list(
+      coefficients = as.numeric(ex), exact_coefficients = ex,
+      all_integral = TRUE, is_exact = TRUE, n = m,
+      method = "Analytic combinatorics (Flajolet and Sedgewick 2009)"
+    )
   } else {
     coeffs <- numeric(m)
     for (n in seq_len(m)) {
@@ -75,14 +83,17 @@ morie_rational_gf_coefficients <- function(numerator, denominator, n_terms) {
       }
       coeffs[n] <- acc / q[1]
     }
-    list(coefficients = coeffs, exact_coefficients = NULL,
-         all_integral = all(coeffs == floor(coeffs)), is_exact = FALSE,
-         n = m,
-         warnings = paste(
-           "The setup is not integral with unit leading denominator, so",
-           "the expansion ran in doubles and low-order digits may be",
-           "lost past 2^53."),
-         method = "Analytic combinatorics (Flajolet and Sedgewick 2009)")
+    list(
+      coefficients = coeffs, exact_coefficients = NULL,
+      all_integral = all(coeffs == floor(coeffs)), is_exact = FALSE,
+      n = m,
+      warnings = paste(
+        "The setup is not integral with unit leading denominator, so",
+        "the expansion ran in doubles and low-order digits may be",
+        "lost past 2^53."
+      ),
+      method = "Analytic combinatorics (Flajolet and Sedgewick 2009)"
+    )
   }
 }
 
@@ -106,7 +117,8 @@ morie_dominant_singularity_growth <- function(denominator,
   q <- as.numeric(denominator)
   if (length(q) == 0L || q[1] == 0) {
     stop("the denominator must have a non-zero constant term.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   qat <- function(x) {
     acc <- 0
@@ -114,17 +126,26 @@ morie_dominant_singularity_growth <- function(denominator,
     acc
   }
   q0 <- qat(0)
-  lo <- 0; hi <- 1e-6
+  lo <- 0
+  hi <- 1e-6
   found <- FALSE
   while (hi < 1e9) {
-    if (qat(hi) * q0 < 0) { found <- TRUE; break }
-    lo <- hi; hi <- hi * 2
+    if (qat(hi) * q0 < 0) {
+      found <- TRUE
+      break
+    }
+    lo <- hi
+    hi <- hi * 2
   }
   if (!found) {
-    stop(paste("no positive real root of the denominator was found below",
-               "1e9; the dominant singularity is complex or absent, and",
-               "this routine only handles the Pringsheim case."),
-         call. = FALSE)
+    stop(
+      paste(
+        "no positive real root of the denominator was found below",
+        "1e9; the dominant singularity is complex or absent, and",
+        "this routine only handles the Pringsheim case."
+      ),
+      call. = FALSE
+    )
   }
   for (i in seq_len(200L)) {
     mid <- 0.5 * (lo + hi)
@@ -132,7 +153,8 @@ morie_dominant_singularity_growth <- function(denominator,
   }
   rho <- 0.5 * (lo + hi)
   rate <- 1 / rho
-  measured <- NULL; gap <- NULL
+  measured <- NULL
+  gap <- NULL
   if (!is.null(coefficients)) {
     cs <- as.numeric(coefficients)
     nc <- length(cs)
@@ -141,9 +163,11 @@ morie_dominant_singularity_growth <- function(denominator,
       gap <- abs(measured - rate) / rate
     }
   }
-  list(radius = rho, growth_rate = rate, estimate = rate,
-       measured_ratio = measured, relative_gap = gap, n = length(q) - 1L,
-       method = "Analytic combinatorics (Flajolet and Sedgewick 2009)")
+  list(
+    radius = rho, growth_rate = rate, estimate = rate,
+    measured_ratio = measured, relative_gap = gap, n = length(q) - 1L,
+    method = "Analytic combinatorics (Flajolet and Sedgewick 2009)"
+  )
 }
 
 #' The basic transfer theorem
@@ -168,16 +192,19 @@ morie_singularity_transfer <- function(alpha, n) {
     stop(sprintf(paste(
       "alpha must not be a non-positive integer; got %s:",
       "(1-x)^-alpha is a polynomial there and the transfer theorem",
-      "does not apply."), alpha), call. = FALSE)
+      "does not apply."
+    ), alpha), call. = FALSE)
   }
   i <- seq_len(n)
   exact <- prod((a + i - 1) / i)
   asym <- n^(a - 1) / gamma(a)
   corrected <- asym * (1 + a * (a - 1) / (2 * n))
-  list(exact_coefficient = exact, asymptotic = asym, corrected = corrected,
-       ratio = exact / asym, corrected_ratio = exact / corrected,
-       estimate = asym, alpha = a, n = n,
-       method = "Analytic combinatorics (Flajolet and Sedgewick 2009)")
+  list(
+    exact_coefficient = exact, asymptotic = asym, corrected = corrected,
+    ratio = exact / asym, corrected_ratio = exact / corrected,
+    estimate = asym, alpha = a, n = n,
+    method = "Analytic combinatorics (Flajolet and Sedgewick 2009)"
+  )
 }
 
 #' Stirling's series with its error bound checked
@@ -211,7 +238,8 @@ morie_stirling_series_error <- function(n, terms = 3) {
       "terms must lie in 0..4; got %s: the error bound is the first",
       "OMITTED term, so K = 5 would need B12, which is not tabulated",
       "here. A bound faked from a lower Bernoulli number would be a",
-      "promise the theory never made."), terms), call. = FALSE)
+      "promise the theory never made."
+    ), terms), call. = FALSE)
   }
   bern <- c(1 / 6, -1 / 30, 1 / 42, -1 / 30, 5 / 66)
   approx <- n * log(n) - n + 0.5 * log(2 * pi * n)
@@ -223,11 +251,13 @@ morie_stirling_series_error <- function(n, terms = 3) {
   truth <- lgamma(n + 1)
   err <- abs(approx - truth)
   floorv <- 8 * abs(truth) * 2^-53
-  list(log_factorial = truth, series_value = approx, error = err,
-       bound = bound, double_floor = floorv,
-       error_within_bound = err <= bound + floorv,
-       estimate = approx, terms = k, n = n,
-       method = "Stirling's series (de Bruijn 1981, section 3.10)")
+  list(
+    log_factorial = truth, series_value = approx, error = err,
+    bound = bound, double_floor = floorv,
+    error_within_bound = err <= bound + floorv,
+    estimate = approx, terms = k, n = n,
+    method = "Stirling's series (de Bruijn 1981, section 3.10)"
+  )
 }
 
 #' The rounding identity for derangements
@@ -250,40 +280,47 @@ morie_derangement_rounding <- function(n) {
   if (is.na(n) || n < 0L) {
     stop(sprintf("n must be non-negative; got %s", n), call. = FALSE)
   }
-  dm2 <- morie_bigint(1)   # D_0
-  dm1 <- morie_bigint(0)   # D_1
+  dm2 <- morie_bigint(1) # D_0
+  dm1 <- morie_bigint(0) # D_1
   dn <- if (n == 0L) dm2 else dm1
   if (n >= 2L) {
     for (m in 2:n) {
       dn <- morie_big_mul(morie_bigint(m - 1), morie_big_add(dm1, dm2))
-      dm2 <- dm1; dm1 <- dn
+      dm2 <- dm1
+      dm1 <- dn
     }
   }
   # inclusion-exclusion: sum_k (-1)^k n!/k!, built as t_k = t_{k-1}
   # shrinking -- n!/k! = (n!/(k-1)!)/k, exact at every step
-  term <- morie_big_factorial(n)   # k = 0
+  term <- morie_big_factorial(n) # k = 0
   acc <- term
   if (n >= 1L) {
     for (k in 1:n) {
       term <- morie_big_divmod_small(term, k)$quotient
-      acc <- if (k %% 2L == 1L) morie_big_sub(acc, term) else
+      acc <- if (k %% 2L == 1L) {
+        morie_big_sub(acc, term)
+      } else {
         morie_big_add(acc, term)
+      }
     }
   }
   agree <- morie_big_cmp(dn, acc) == 0
-  out <- list(derangements = as.numeric(as.character(dn)),
-              exact = as.character(dn),
-              estimate = as.numeric(as.character(dn)),
-              routes_agree = agree,
-              is_nearest_integer = n >= 1L && agree,
-              within_theoretical_bound = agree,
-              distance_bound = if (n >= 1L) 1 / (n + 1) else 0,
-              n = n, warnings = character(0),
-              method = "Meromorphic asymptotics: D_n = round(n!/e)")
+  out <- list(
+    derangements = as.numeric(as.character(dn)),
+    exact = as.character(dn),
+    estimate = as.numeric(as.character(dn)),
+    routes_agree = agree,
+    is_nearest_integer = n >= 1L && agree,
+    within_theoretical_bound = agree,
+    distance_bound = if (n >= 1L) 1 / (n + 1) else 0,
+    n = n, warnings = character(0),
+    method = "Meromorphic asymptotics: D_n = round(n!/e)"
+  )
   if (!agree) {
     out$warnings <- c(out$warnings, paste(
       "The recurrence and the inclusion-exclusion sum disagree, so one",
-      "of them is implemented wrongly and no rounding claim is made."))
+      "of them is implemented wrongly and no rounding claim is made."
+    ))
     out$is_nearest_integer <- FALSE
     out$within_theoretical_bound <- FALSE
   }
@@ -332,8 +369,10 @@ morie_hardy_ramanujan_partitions <- function(n) {
   exact <- p[[n + 1L]]
   asym <- exp(pi * sqrt(2 * n / 3)) / (4 * n * sqrt(3))
   ratio <- asym / as.numeric(as.character(exact))
-  list(partitions = as.numeric(as.character(exact)),
-       exact = as.character(exact), estimate = asym, asymptotic = asym,
-       ratio = ratio, relative_error = ratio - 1, n = n,
-       method = "Hardy-Ramanujan asymptotic (1918)")
+  list(
+    partitions = as.numeric(as.character(exact)),
+    exact = as.character(exact), estimate = asym, asymptotic = asym,
+    ratio = ratio, relative_error = ratio - 1, n = n,
+    method = "Hardy-Ramanujan asymptotic (1918)"
+  )
 }

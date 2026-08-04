@@ -63,7 +63,8 @@ morie_table_inertia <- function(x, cdf = NULL, n = NULL) {
   if (!all(is.finite(N))) stop("x must be finite.", call. = FALSE)
   if (any(N < 0)) {
     stop("x must be non-negative; a correspondence table has no negative cells.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   total <- sum(N)
   if (total <= 0) {
@@ -75,7 +76,9 @@ morie_table_inertia <- function(x, cdf = NULL, n = NULL) {
   c_ <- colSums(P)
   if (any(r <= 0) || any(c_ <= 0)) {
     stop("Every row and column must have positive mass; drop all-zero rows ",
-         "or columns first.", call. = FALSE)
+      "or columns first.",
+      call. = FALSE
+    )
   }
 
   E <- outer(r, c_)

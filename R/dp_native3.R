@@ -45,8 +45,10 @@ morie_dp_sgd <- function(grads, C = 1, sigma = 1, lr = 0.1, theta = NULL,
   if (C <= 0) stop("C must be positive", call. = FALSE)
   if (sigma < 0) stop("sigma must be non-negative", call. = FALSE)
   if (is.null(dim(grads)) || length(dim(grads)) != 2L) {
-    stop(paste("grads must be per-example, shape (B, p); clipping an",
-               "averaged gradient provides no privacy"), call. = FALSE)
+    stop(paste(
+      "grads must be per-example, shape (B, p); clipping an",
+      "averaged gradient provides no privacy"
+    ), call. = FALSE)
   }
   G <- as.matrix(grads)
   storage.mode(G) <- "double"
@@ -59,18 +61,24 @@ morie_dp_sgd <- function(grads, C = 1, sigma = 1, lr = 0.1, theta = NULL,
   noise <- if (sigma > 0) stats::rnorm(p, 0, sigma * C) else numeric(p)
   gbar <- (colSums(Gc) + noise) / B
   update <- -lr * gbar
-  out <- list(update = update, private_gradient = gbar,
-              clipped_fraction = mean(norms > C), noise_sd = sigma * C,
-              C = C, sigma = as.numeric(sigma), batch_size = B,
-              warnings = paste("this accounts for ONE step; compose across",
-                               "steps with morie_renyi_dp_composition, and",
-                               "apply subsampling amplification"),
-              method = "dp_sgd")
+  out <- list(
+    update = update, private_gradient = gbar,
+    clipped_fraction = mean(norms > C), noise_sd = sigma * C,
+    C = C, sigma = as.numeric(sigma), batch_size = B,
+    warnings = paste(
+      "this accounts for ONE step; compose across",
+      "steps with morie_renyi_dp_composition, and",
+      "apply subsampling amplification"
+    ),
+    method = "dp_sgd"
+  )
   if (!is.null(theta)) {
     th <- as.numeric(theta)
     if (length(th) != p) {
-      stop(sprintf("theta has %d entries but gradients have %d",
-                   length(th), p), call. = FALSE)
+      stop(sprintf(
+        "theta has %d entries but gradients have %d",
+        length(th), p
+      ), call. = FALSE)
     }
     out$theta <- th + update
   }
@@ -120,18 +128,22 @@ morie_dp_adam <- function(grads, C = 1, sigma = 1, lr = 1e-3,
   B <- step$batch_size
   noise_sd <- (sigma * C) / max(B, 1)
   snr <- sqrt(sum(g^2)) / max(noise_sd * sqrt(length(g)), 1e-300)
-  list(update = update, state = st, m = st$m, v = st$v,
-       private_gradient = g, signal_to_noise = snr,
-       clipped_fraction = step$clipped_fraction, noise_sd = noise_sd,
-       t = as.integer(t),
-       warnings = if (snr < 1) {
-         paste("signal-to-noise is below 1, so Adam's second moment is",
-               "tracking DP noise rather than gradient scale; plain DP-SGD",
-               "is often better in this regime")
-       } else {
-         character(0)
-       },
-       method = "dp_adam")
+  list(
+    update = update, state = st, m = st$m, v = st$v,
+    private_gradient = g, signal_to_noise = snr,
+    clipped_fraction = step$clipped_fraction, noise_sd = noise_sd,
+    t = as.integer(t),
+    warnings = if (snr < 1) {
+      paste(
+        "signal-to-noise is below 1, so Adam's second moment is",
+        "tracking DP noise rather than gradient scale; plain DP-SGD",
+        "is often better in this regime"
+      )
+    } else {
+      character(0)
+    },
+    method = "dp_adam"
+  )
 }
 
 
@@ -160,8 +172,10 @@ morie_dp_adam <- function(grads, C = 1, sigma = 1, lr = 1e-3,
 #'   clustering. \emph{CODASPY}, 26-37.
 #' @examples
 #' set.seed(1)
-#' r <- morie_dp_kmeans(matrix(rnorm(200), ncol = 2), k = 2, epsilon = 5,
-#'                      bounds = c(-4, 4))
+#' r <- morie_dp_kmeans(matrix(rnorm(200), ncol = 2),
+#'   k = 2, epsilon = 5,
+#'   bounds = c(-4, 4)
+#' )
 #' dim(r$centers)
 #' @export
 morie_dp_kmeans <- function(X, k = 3, epsilon = 1, n_iter = 5, bounds = NULL,
@@ -179,8 +193,10 @@ morie_dp_kmeans <- function(X, k = 3, epsilon = 1, n_iter = 5, bounds = NULL,
   if (is.null(bounds)) {
     lo <- min(X)
     hi <- max(X)
-    warn <- paste("bounds were taken from the data, which is a non-private",
-                  "query; supply `bounds` from outside the data")
+    warn <- paste(
+      "bounds were taken from the data, which is a non-private",
+      "query; supply `bounds` from outside the data"
+    )
   } else {
     lo <- as.numeric(bounds[1L])
     hi <- as.numeric(bounds[2L])
@@ -224,15 +240,19 @@ morie_dp_kmeans <- function(X, k = 3, epsilon = 1, n_iter = 5, bounds = NULL,
   }
   a <- assign_labels(centers)
   labels <- a$labels
-  list(centers = centers, labels = labels - 1L,
-       epsilon_per_iteration = eps_iter, n_reinitialised = reinit,
-       inertia = sum(a$d2[cbind(seq_len(n), labels)]), epsilon = eps, k = k,
-       n_iter = n_iter, bounds = c(lo, hi),
-       warnings = c(warn, if (reinit > 0L) {
-         paste("clusters were reinitialised from noisy counts below 1; the",
-               "budget is thin for this k")
-       }),
-       method = "dp_kmeans")
+  list(
+    centers = centers, labels = labels - 1L,
+    epsilon_per_iteration = eps_iter, n_reinitialised = reinit,
+    inertia = sum(a$d2[cbind(seq_len(n), labels)]), epsilon = eps, k = k,
+    n_iter = n_iter, bounds = c(lo, hi),
+    warnings = c(warn, if (reinit > 0L) {
+      paste(
+        "clusters were reinitialised from noisy counts below 1; the",
+        "budget is thin for this k"
+      )
+    }),
+    method = "dp_kmeans"
+  )
 }
 
 
@@ -268,8 +288,10 @@ morie_dp_kmeans <- function(X, k = 3, epsilon = 1, n_iter = 5, bounds = NULL,
 #' y <- as.numeric(runif(200) < 1 / (1 + exp(-(X %*% c(1, -1)))))
 #' morie_dp_logistic(X, y, epsilon = 4)$accuracy > 0.4
 #' @export
-morie_dp_logistic <- function(X, y, epsilon = 1, method = c("objective",
-                                                            "output"),
+morie_dp_logistic <- function(X, y, epsilon = 1, method = c(
+                                "objective",
+                                "output"
+                              ),
                               lam = 0.01, C = 1, n_iter = 100, lr = 0.1,
                               seed = NULL) {
   method <- match.arg(method)
@@ -279,12 +301,14 @@ morie_dp_logistic <- function(X, y, epsilon = 1, method = c("objective",
   y <- as.numeric(y)
   if (nrow(X) != length(y)) {
     stop(sprintf("X has %d rows but y has %d", nrow(X), length(y)),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   if (!all(y == 0 | y == 1)) stop("y must be 0/1", call. = FALSE)
   if (identical(method, "objective") && lam <= 0) {
     stop("objective perturbation requires lam > 0 for strong convexity",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   n <- length(y)
   norms <- sqrt(rowSums(X^2))
@@ -334,12 +358,14 @@ morie_dp_logistic <- function(X, y, epsilon = 1, method = c("objective",
     # density (4) with beta = n lam eps / 2.
     beta <- beta + draw_b(2 / (n * lam * eps))
   }
-  beta <- beta / C  # back to the clipped-feature scale
+  beta <- beta / C # back to the clipped-feature scale
   prob <- 1 / (1 + exp(-pmax(pmin(as.vector(Xc %*% beta), 500), -500)))
-  list(beta = beta, prob = prob, accuracy = mean((prob >= 0.5) == y),
-       clipped_fraction = mean(norms > C), method_used = method,
-       epsilon = eps, lam = as.numeric(lam), C = as.numeric(C), n = n,
-       method = "dp_logistic")
+  list(
+    beta = beta, prob = prob, accuracy = mean((prob >= 0.5) == y),
+    clipped_fraction = mean(norms > C), method_used = method,
+    epsilon = eps, lam = as.numeric(lam), C = as.numeric(C), n = n,
+    method = "dp_logistic"
+  )
 }
 
 
@@ -368,8 +394,10 @@ morie_dp_logistic <- function(X, y, epsilon = 1, method = c("objective",
 #'   via Bayesian networks. \emph{ACM TODS}, 42(4), 1-41.
 #' @examples
 #' set.seed(1)
-#' r <- morie_dp_synthetic_data(matrix(rnorm(200), ncol = 2), epsilon = 4,
-#'                              bounds = c(-4, 4))
+#' r <- morie_dp_synthetic_data(matrix(rnorm(200), ncol = 2),
+#'   epsilon = 4,
+#'   bounds = c(-4, 4)
+#' )
 #' dim(r$synthetic)
 #' @export
 morie_dp_synthetic_data <- function(X, epsilon = 1, n_synth = NULL, bins = 10,
@@ -411,19 +439,27 @@ morie_dp_synthetic_data <- function(X, epsilon = 1, n_synth = NULL, bins = 10,
   }
   cr <- if (p >= 2L) stats::cor(Xc[, 1L], Xc[, 2L]) else NA_real_
   cs <- if (p >= 2L) stats::cor(synth[, 1L], synth[, 2L]) else NA_real_
-  list(synthetic = synth,
-       preserved = "per-feature marginal distributions",
-       destroyed = c("all inter-feature correlation", "joint structure",
-                     "interactions"),
-       marginal_error = marg_err, correlation_real = cr,
-       correlation_synthetic = cs, epsilon = eps, n_synth = n_synth,
-       bins = nb,
-       warnings = c(warn,
-                    paste("this preserves MARGINALS ONLY; every inter-feature",
-                          "correlation is destroyed, so regressions and",
-                          "interactions on it will be wrong while looking",
-                          "plausible")),
-       method = "dp_synthetic_data")
+  list(
+    synthetic = synth,
+    preserved = "per-feature marginal distributions",
+    destroyed = c(
+      "all inter-feature correlation", "joint structure",
+      "interactions"
+    ),
+    marginal_error = marg_err, correlation_real = cr,
+    correlation_synthetic = cs, epsilon = eps, n_synth = n_synth,
+    bins = nb,
+    warnings = c(
+      warn,
+      paste(
+        "this preserves MARGINALS ONLY; every inter-feature",
+        "correlation is destroyed, so regressions and",
+        "interactions on it will be wrong while looking",
+        "plausible"
+      )
+    ),
+    method = "dp_synthetic_data"
+  )
 }
 
 
@@ -462,7 +498,8 @@ morie_dp_changepoint <- function(y, epsilon = 1, bounds = NULL,
   min_segment <- as.integer(min_segment)
   if (n < 2L * min_segment + 1L) {
     stop(sprintf("series too short for min_segment=%d", min_segment),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   warn <- character(0)
   if (is.null(bounds)) {
@@ -494,15 +531,21 @@ morie_dp_changepoint <- function(y, epsilon = 1, bounds = NULL,
   old <- .morie_dp_seed(seed)
   on.exit(.morie_dp_unseed(old), add = TRUE)
   pick <- sample.int(length(cand), 1L, prob = p)
-  list(changepoint = cand[pick], utility = util[pick],
-       best_utility = max(util),
-       utility_ratio = if (max(util) > 0) util[pick] / max(util) else NA_real_,
-       candidates = cand, probabilities = p, epsilon = eps, n = n,
-       warnings = c(warn,
-                    paste("the mechanism always returns a location; compare",
-                          "best_utility against what noise alone would give",
-                          "before believing there is a changepoint")),
-       method = "dp_changepoint")
+  list(
+    changepoint = cand[pick], utility = util[pick],
+    best_utility = max(util),
+    utility_ratio = if (max(util) > 0) util[pick] / max(util) else NA_real_,
+    candidates = cand, probabilities = p, epsilon = eps, n = n,
+    warnings = c(
+      warn,
+      paste(
+        "the mechanism always returns a location; compare",
+        "best_utility against what noise alone would give",
+        "before believing there is a changepoint"
+      )
+    ),
+    method = "dp_changepoint"
+  )
 }
 
 
@@ -529,8 +572,10 @@ morie_dp_changepoint <- function(y, epsilon = 1, bounds = NULL,
 #'   private recurrent language models. \emph{ICLR}.
 #' @examples
 #' set.seed(1)
-#' morie_dp_fedavg(matrix(rnorm(50), ncol = 5), C = 1,
-#'                 sigma = 1)$noise_sd_per_client
+#' morie_dp_fedavg(matrix(rnorm(50), ncol = 5),
+#'   C = 1,
+#'   sigma = 1
+#' )$noise_sd_per_client
 #' @export
 morie_dp_fedavg <- function(client_updates, C = 1, sigma = 1, seed = NULL) {
   if (is.null(dim(client_updates)) || length(dim(client_updates)) != 2L) {
@@ -547,14 +592,18 @@ morie_dp_fedavg <- function(client_updates, C = 1, sigma = 1, seed = NULL) {
   old <- .morie_dp_seed(seed)
   on.exit(.morie_dp_unseed(old), add = TRUE)
   noise <- if (sigma > 0) stats::rnorm(p, 0, sigma * C) else numeric(p)
-  list(aggregate = (colSums(Uc) + noise) / m,
-       clipped_fraction = mean(norms > C),
-       noise_sd_per_client = sigma * C / m, noise_sd_aggregate = sigma * C,
-       n_clients = m, C = C, sigma = as.numeric(sigma),
-       warnings = paste("the privacy unit here is the CLIENT; clipping per",
-                        "example inside a client would leave a heavy",
-                        "contributor exposed"),
-       method = "dp_fedavg")
+  list(
+    aggregate = (colSums(Uc) + noise) / m,
+    clipped_fraction = mean(norms > C),
+    noise_sd_per_client = sigma * C / m, noise_sd_aggregate = sigma * C,
+    n_clients = m, C = C, sigma = as.numeric(sigma),
+    warnings = paste(
+      "the privacy unit here is the CLIENT; clipping per",
+      "example inside a client would leave a heavy",
+      "contributor exposed"
+    ),
+    method = "dp_fedavg"
+  )
 }
 
 
@@ -586,13 +635,21 @@ morie_dp_gan <- function(disc_grads, C = 1, sigma = 1, lr = 0.1,
                          n_disc_steps = 1, seed = NULL) {
   step <- morie_dp_sgd(disc_grads, C = C, sigma = sigma, lr = 1, seed = seed)
   g <- step$private_gradient
-  list(disc_update = -lr * g, private_gradient = g, generator_is_free = TRUE,
-       steps_to_account = as.integer(n_disc_steps),
-       clipped_fraction = step$clipped_fraction, noise_sd = step$noise_sd,
-       C = as.numeric(C), sigma = as.numeric(sigma),
-       warnings = c(paste("only the discriminator needs privatising; noising",
-                          "the generator as well spends budget for nothing"),
-                    paste("account over discriminator steps, which outnumber",
-                          "generator steps")),
-       method = "dp_gan")
+  list(
+    disc_update = -lr * g, private_gradient = g, generator_is_free = TRUE,
+    steps_to_account = as.integer(n_disc_steps),
+    clipped_fraction = step$clipped_fraction, noise_sd = step$noise_sd,
+    C = as.numeric(C), sigma = as.numeric(sigma),
+    warnings = c(
+      paste(
+        "only the discriminator needs privatising; noising",
+        "the generator as well spends budget for nothing"
+      ),
+      paste(
+        "account over discriminator steps, which outnumber",
+        "generator steps"
+      )
+    ),
+    method = "dp_gan"
+  )
 }

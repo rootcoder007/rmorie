@@ -32,10 +32,14 @@ morie_dsp_threshold_detect <- function(x, threshold, min_distance = 1L,
     stop("direction must be one of 'above', 'below', 'either'")
   )
   idx <- which(mask)
-  if (length(idx) == 0L || min_distance <= 1L) return(idx)
+  if (length(idx) == 0L || min_distance <= 1L) {
+    return(idx)
+  }
   kept <- idx[1L]
-  for (i in idx[-1L]) if (i - kept[length(kept)] >= min_distance) {
-    kept <- c(kept, i)
+  for (i in idx[-1L]) {
+    if (i - kept[length(kept)] >= min_distance) {
+      kept <- c(kept, i)
+    }
   }
   kept
 }
@@ -53,7 +57,8 @@ morie_dsp_threshold_detect <- function(x, threshold, min_distance = 1L,
 #' @references Rangayyan & Krishnan (2015), Ch. 4, sec. 4.3.
 #' @examples
 #' set.seed(1)
-#' x <- rep(0, 300); x[c(60, 150, 240)] <- 5
+#' x <- rep(0, 300)
+#' x[c(60, 150, 240)] <- 5
 #' x <- stats::filter(x, rep(1 / 5, 5), sides = 2)
 #' x[is.na(x)] <- 0
 #' str(morie_dsp_derivative_detect(as.numeric(x), fs = 100), max.level = 1)
@@ -61,7 +66,9 @@ morie_dsp_threshold_detect <- function(x, threshold, min_distance = 1L,
 morie_dsp_derivative_detect <- function(x, fs = 1,
                                         threshold_factor = 0.5) {
   dx <- diff(x) * fs
-  if (length(dx) < 3L) return(integer(0))
+  if (length(dx) < 3L) {
+    return(integer(0))
+  }
   thr <- threshold_factor * max(abs(dx))
   peaks <- integer(0)
   for (i in 2L:(length(dx) - 1L)) {
@@ -82,7 +89,8 @@ morie_dsp_derivative_detect <- function(x, fs = 1,
 #' @return Scalar (whole signal) or numeric vector (per frame).
 #' @references Rangayyan & Krishnan (2015), Ch. 4, sec. 4.3.
 #' @examples
-#' N <- 1000L; t <- seq.int(0, N - 1L) / N
+#' N <- 1000L
+#' t <- seq.int(0, N - 1L) / N
 #' x <- sin(2 * pi * 5 * t)
 #' morie_dsp_zero_crossing(x)
 #' @export
@@ -122,12 +130,20 @@ morie_dsp_template_match <- function(x, template, threshold = 0.7) {
   x <- as.numeric(x)
   template <- as.numeric(template)
   n <- length(template)
-  if (length(x) < n) return(list(indices = integer(0),
-                                 correlations = numeric(0)))
+  if (length(x) < n) {
+    return(list(
+      indices = integer(0),
+      correlations = numeric(0)
+    ))
+  }
   t_norm <- template - mean(template)
-  t_std <- stats::sd(template) * sqrt((n - 1) / n)  # match np.std (population)
-  if (t_std == 0) return(list(indices = integer(0),
-                              correlations = numeric(0)))
+  t_std <- stats::sd(template) * sqrt((n - 1) / n) # match np.std (population)
+  if (t_std == 0) {
+    return(list(
+      indices = integer(0),
+      correlations = numeric(0)
+    ))
+  }
   m <- length(x) - n + 1L
   cors <- numeric(m)
   for (i in seq_len(m)) {
@@ -165,16 +181,21 @@ morie_dsp_onset_detect <- function(x, fs, energy_window_ms = 20,
   energy <- .same_convolve(x^2, kernel)
   # Robust noise floor: 10th percentile (was: median, which sits inside
   # the burst on a flat-then-loud signal and yields a too-high threshold).
-  baseline <- max(stats::quantile(energy, 0.1, na.rm = TRUE,
-                                   names = FALSE),
-                   .Machine$double.eps)
+  baseline <- max(
+    stats::quantile(energy, 0.1,
+      na.rm = TRUE,
+      names = FALSE
+    ),
+    .Machine$double.eps
+  )
   thr <- baseline * threshold_factor
   onsets <- integer(0)
   above <- FALSE
   for (i in seq_along(energy)) {
-    if (!above && energy[i] > thr) { onsets <- c(onsets, i)
-    above <- TRUE }
-    else if (above && energy[i] < baseline) above <- FALSE
+    if (!above && energy[i] > thr) {
+      onsets <- c(onsets, i)
+      above <- TRUE
+    } else if (above && energy[i] < baseline) above <- FALSE
   }
   onsets
 }
@@ -218,7 +239,9 @@ morie_dsp_shannon_energy <- function(x) {
 morie_dsp_teager_energy <- function(x) {
   n <- length(x)
   psi <- numeric(n)
-  if (n < 3L) return(psi)
+  if (n < 3L) {
+    return(psi)
+  }
   psi[2L:(n - 1L)] <- x[2L:(n - 1L)]^2 - x[1L:(n - 2L)] * x[3L:n]
   psi
 }
@@ -236,7 +259,7 @@ morie_dsp_teager_energy <- function(x) {
 #' t <- seq.int(0, 1023) / fs
 #' x <- 2 * sin(2 * pi * 64 * t)
 #' env <- morie_dsp_hilbert_envelope(x)
-#' mean(env[20:1004])  # ~2 (the amplitude)
+#' mean(env[20:1004]) # ~2 (the amplitude)
 #' @export
 morie_dsp_hilbert_envelope <- function(x) {
   # Module 20: native analytic signal in the FFT domain.
@@ -285,7 +308,9 @@ morie_dsp_pan_tompkins <- function(ecg, fs = 360) {
   integrated <- .same_convolve(squared, kernel)
   thr <- 0.5 * max(integrated)
   cand <- which(integrated > thr)
-  if (length(cand) == 0L) return(integer(0))
+  if (length(cand) == 0L) {
+    return(integer(0))
+  }
   refract <- as.integer(0.2 * fs)
   qrs <- cand[1L]
   for (c in cand[-1L]) {
@@ -312,8 +337,11 @@ morie_dsp_dicrotic_notch <- function(pulse, fs = 125) {
   # Module 20: native local-maxima detector with minimum spacing.
   d2 <- diff(pulse, differences = 2L)
   positions <- .morie_dsp_findpeaks(-d2,
-                                    min_distance = as.integer(0.1 * fs))
-  if (!length(positions)) return(integer(0))
+    min_distance = as.integer(0.1 * fs)
+  )
+  if (!length(positions)) {
+    return(integer(0))
+  }
   systolic_end <- as.integer(0.3 * fs)
   positions[positions > systolic_end]
 }
@@ -413,7 +441,7 @@ morie_dsp_complex_cepstrum <- function(x) {
 #' @return Numeric vector of BPM values.
 #' @references Rangayyan & Krishnan (2015), Ch. 4, sec. 4.8.
 #' @examples
-#' morie_dsp_hr_from_rr(c(1.0, 1.0, 1.0))  # 1s RR intervals -> 60 bpm
+#' morie_dsp_hr_from_rr(c(1.0, 1.0, 1.0)) # 1s RR intervals -> 60 bpm
 #' @export
 morie_dsp_hr_from_rr <- function(rr_intervals) {
   rr <- as.numeric(rr_intervals)
@@ -435,7 +463,8 @@ morie_dsp_hr_from_rr <- function(rr_intervals) {
 #' x <- sin(2 * pi * 5 * t) + rnorm(length(t), 0, 0.2)
 #' y <- sin(2 * pi * 5 * t + 0.5) + rnorm(length(t), 0, 0.2)
 #' str(morie_dsp_coherence_spectrum(x, y, fs = 128, nperseg = 128L),
-#'     max.level = 1)
+#'   max.level = 1
+#' )
 #' @export
 morie_dsp_coherence_spectrum <- function(x, y, fs = 1, nperseg = 256L) {
   morie_dsp_coherence(x, y, fs = fs, nperseg = nperseg)
@@ -488,7 +517,8 @@ morie_dsp_csd <- function(x, y, fs = 1, nperseg = 256L) {
 #' @noRd
 .unwrap_d <- function(p, tol = pi) {
   d <- diff(p)
-  adj <- ifelse(d >  tol, d - 2 * pi,
-         ifelse(d < -tol, d + 2 * pi, d))
+  adj <- ifelse(d > tol, d - 2 * pi,
+    ifelse(d < -tol, d + 2 * pi, d)
+  )
   c(p[1L], p[1L] + cumsum(adj))
 }

@@ -164,7 +164,8 @@ morie_crypto_lamport_keygen <- function() {
     }
   }
   structure(list(pk = pk, sk = sk, used = new.env(parent = emptyenv())),
-            class = c("morie_lamport_keypair", "list"))
+    class = c("morie_lamport_keypair", "list")
+  )
 }
 
 #' Sign one message with a Lamport keypair (native)
@@ -184,18 +185,21 @@ morie_crypto_lamport_sign <- function(keypair, message) {
   stopifnot(inherits(keypair, "morie_lamport_keypair"))
   if (isTRUE(keypair$used$signed)) {
     stop("This Lamport keypair has already signed a message; one-time ",
-         "keys must never be reused (reuse forfeits security). ",
-         "Generate a fresh keypair, or use SLH-DSA for many-time ",
-         "signatures.", call. = FALSE)
+      "keys must never be reused (reuse forfeits security). ",
+      "Generate a fresh keypair, or use SLH-DSA for many-time ",
+      "signatures.",
+      call. = FALSE
+    )
   }
   if (is.character(message)) message <- charToRaw(message)
   dg <- .rmorie_sha256_impl(message)
-  bits <- as.integer(rawToBits(dg))       # 256 bits, LSB-first per byte
+  bits <- as.integer(rawToBits(dg)) # 256 bits, LSB-first per byte
   reveal <- vector("list", 256L)
   for (i in 1:256) reveal[[i]] <- keypair$sk[[bits[i] + 1L, i]]
   keypair$used$signed <- TRUE
   structure(list(reveal = reveal, digest_hex = .rmorie_sha256_hex_impl(message)),
-            class = c("morie_lamport_signature", "list"))
+    class = c("morie_lamport_signature", "list")
+  )
 }
 
 #' Verify a Lamport one-time signature (native)
@@ -222,8 +226,10 @@ morie_crypto_lamport_verify <- function(pk, message, signature) {
   }
   bits <- as.integer(rawToBits(dg))
   for (i in 1:256) {
-    if (!identical(.rmorie_sha256_hex_impl(signature$reveal[[i]]),
-                   pk[bits[i] + 1L, i])) {
+    if (!identical(
+      .rmorie_sha256_hex_impl(signature$reveal[[i]]),
+      pk[bits[i] + 1L, i]
+    )) {
       return(FALSE)
     }
   }
@@ -240,23 +246,33 @@ morie_crypto_lamport_verify <- function(pk, message, signature) {
 #' @export
 morie_crypto_pqc_inventory <- function() {
   oqs <- isTRUE(tryCatch(morie_crypto_liboqs_available(),
-                         error = function(e) FALSE))
+    error = function(e) FALSE
+  ))
   has_alg <- function(fn) {
     oqs && !inherits(tryCatch(fn(), error = function(e) e), "error")
   }
   data.frame(
-    family = c("lattice", "lattice", "hash-based", "hash-based",
-               "code-based"),
-    primitive = c("ML-KEM-768 (Kyber)", "ML-DSA-65 (Dilithium)",
-                  "SLH-DSA-SHA2-128s (SPHINCS+)",
-                  "Lamport OTS (native SHA-256)", "HQC-128"),
-    standard = c("FIPS 203", "FIPS 204", "FIPS 205",
-                 "Lamport 1979", "NIST round-4 (2025)"),
-    available = c(oqs, oqs,
-                  has_alg(morie_crypto_slhdsa_keygen),
-                  !inherits(tryCatch(morie_crypto_random_bytes(1L),
-                                     error = function(e) e), "error"),
-                  has_alg(morie_crypto_hqc_keygen)),
+    family = c(
+      "lattice", "lattice", "hash-based", "hash-based",
+      "code-based"
+    ),
+    primitive = c(
+      "ML-KEM-768 (Kyber)", "ML-DSA-65 (Dilithium)",
+      "SLH-DSA-SHA2-128s (SPHINCS+)",
+      "Lamport OTS (native SHA-256)", "HQC-128"
+    ),
+    standard = c(
+      "FIPS 203", "FIPS 204", "FIPS 205",
+      "Lamport 1979", "NIST round-4 (2025)"
+    ),
+    available = c(
+      oqs, oqs,
+      has_alg(morie_crypto_slhdsa_keygen),
+      !inherits(tryCatch(morie_crypto_random_bytes(1L),
+        error = function(e) e
+      ), "error"),
+      has_alg(morie_crypto_hqc_keygen)
+    ),
     stringsAsFactors = FALSE
   )
 }

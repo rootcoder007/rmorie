@@ -83,11 +83,11 @@ NULL
 #' @export
 #' @examples
 #' \donttest{
-#'   if (requireNamespace("rddensity", quietly = TRUE)) {
-#'     set.seed(1)
-#'     x <- c(rnorm(500, -0.2), rnorm(500, 0.2))
-#'     morie_rdd_density_test(x, cutoff = 0)
-#'   }
+#' if (requireNamespace("rddensity", quietly = TRUE)) {
+#'   set.seed(1)
+#'   x <- c(rnorm(500, -0.2), rnorm(500, 0.2))
+#'   morie_rdd_density_test(x, cutoff = 0)
+#' }
 #' }
 morie_rdd_density_test <- function(X, cutoff = 0, ...) {
   .morie_rdd_need("rddensity", "morie_rdd_density_test")
@@ -121,12 +121,12 @@ morie_rdd_density_test <- function(X, cutoff = 0, ...) {
 #' @export
 #' @examples
 #' \donttest{
-#'   if (requireNamespace("rdlocrand", quietly = TRUE)) {
-#'     set.seed(1)
-#'     R <- runif(200, -1, 1)
-#'     Y <- 0.5 * R + (R >= 0) * 0.3 + rnorm(200, sd = 0.5)
-#'     morie_rdd_local_randinf(Y, R, wl = -0.1, wr = 0.1)
-#'   }
+#' if (requireNamespace("rdlocrand", quietly = TRUE)) {
+#'   set.seed(1)
+#'   R <- runif(200, -1, 1)
+#'   Y <- 0.5 * R + (R >= 0) * 0.3 + rnorm(200, sd = 0.5)
+#'   morie_rdd_local_randinf(Y, R, wl = -0.1, wr = 0.1)
+#' }
 #' }
 morie_rdd_local_randinf <- function(Y, R, wl, wr, ...) {
   .morie_rdd_need("rdlocrand", "morie_rdd_local_randinf")
@@ -165,12 +165,12 @@ morie_rdd_local_randinf <- function(Y, R, wl, wr, ...) {
 #' @export
 #' @examples
 #' \donttest{
-#'   if (requireNamespace("rdpower", quietly = TRUE)) {
-#'     set.seed(1)
-#'     R <- runif(500, -1, 1)
-#'     Y <- 0.4 * R + (R >= 0) * 0.2 + rnorm(500, sd = 0.5)
-#'     morie_rdd_power_calc(cbind(Y, R), cutoff = 0, tau = 0.2)
-#'   }
+#' if (requireNamespace("rdpower", quietly = TRUE)) {
+#'   set.seed(1)
+#'   R <- runif(500, -1, 1)
+#'   Y <- 0.4 * R + (R >= 0) * 0.2 + rnorm(500, sd = 0.5)
+#'   morie_rdd_power_calc(cbind(Y, R), cutoff = 0, tau = 0.2)
+#' }
 #' }
 morie_rdd_power_calc <- function(data, cutoff = 0, ...) {
   .morie_rdd_need("rdpower", "morie_rdd_power_calc")
@@ -209,11 +209,11 @@ morie_rdd_power_calc <- function(data, cutoff = 0, ...) {
 #' @export
 #' @examples
 #' \donttest{
-#'   if (requireNamespace("anominate", quietly = TRUE) &&
-#'       requireNamespace("pscl", quietly = TRUE)) {
-#'     data("sen111", package = "anominate")  # the rollcall anominate ships
-#'     morie_anominate_ideal_points(sen111, dims = 1, nsamp = 200, burnin = 100)
-#'   }
+#' if (requireNamespace("anominate", quietly = TRUE) &&
+#'   requireNamespace("pscl", quietly = TRUE)) {
+#'   data("sen111", package = "anominate") # the rollcall anominate ships
+#'   morie_anominate_ideal_points(sen111, dims = 1, nsamp = 200, burnin = 100)
+#' }
 #' }
 morie_anominate_ideal_points <- function(rcObject, ...) {
   .morie_rdd_need("anominate", "morie_anominate_ideal_points")

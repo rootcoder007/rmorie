@@ -45,23 +45,31 @@
 #' @return An object of class `morie_bigint`.
 #' @export
 morie_bigint <- function(x) {
-  if (inherits(x, "morie_bigint")) return(x)
+  if (inherits(x, "morie_bigint")) {
+    return(x)
+  }
   if (is.numeric(x)) {
     if (length(x) != 1L || !is.finite(x)) {
       stop("numeric input must be a single finite value.", call. = FALSE)
     }
     if (abs(x) > 2^53) {
-      stop(paste("numeric input exceeds 2^53, where doubles stop being",
-                 "exact integers; pass a decimal string instead."),
-           call. = FALSE)
+      stop(
+        paste(
+          "numeric input exceeds 2^53, where doubles stop being",
+          "exact integers; pass a decimal string instead."
+        ),
+        call. = FALSE
+      )
     }
     if (x != floor(x)) stop("numeric input must be a whole number.", call. = FALSE)
     x <- format(x, scientific = FALSE, trim = TRUE)
   }
   s <- trimws(as.character(x))
   sign <- 1
-  if (startsWith(s, "-")) { sign <- -1; s <- substring(s, 2) }
-  else if (startsWith(s, "+")) s <- substring(s, 2)
+  if (startsWith(s, "-")) {
+    sign <- -1
+    s <- substring(s, 2)
+  } else if (startsWith(s, "+")) s <- substring(s, 2)
   if (!nzchar(s) || grepl("[^0-9]", s)) {
     stop(sprintf("not a decimal integer: '%s'", x), call. = FALSE)
   }
@@ -80,14 +88,18 @@ morie_bigint <- function(x) {
 
 #' @export
 as.character.morie_bigint <- function(x, ...) {
-  if (x$sign == 0) return("0")
+  if (x$sign == 0) {
+    return("0")
+  }
   n <- length(x$limbs)
   parts <- character(n)
   parts[1] <- format(x$limbs[n], scientific = FALSE, trim = TRUE)
   if (n > 1L) {
     for (i in seq.int(n - 1L, 1L)) {
-      parts[n - i + 1L] <- formatC(x$limbs[i], width = .MORIE_BIG_DIG,
-                                   flag = "0", format = "d")
+      parts[n - i + 1L] <- formatC(x$limbs[i],
+        width = .MORIE_BIG_DIG,
+        flag = "0", format = "d"
+      )
     }
   }
   paste0(if (x$sign < 0) "-" else "", paste(parts, collapse = ""))
@@ -111,10 +123,15 @@ print.morie_bigint <- function(x, ...) {
 format.morie_bigint <- function(x, ...) as.character(x)
 
 .morie_big_cmp_abs <- function(a, b) {
-  la <- length(a); lb <- length(b)
-  if (la != lb) return(if (la > lb) 1L else -1L)
+  la <- length(a)
+  lb <- length(b)
+  if (la != lb) {
+    return(if (la > lb) 1L else -1L)
+  }
   for (i in seq.int(la, 1L)) {
-    if (a[i] != b[i]) return(if (a[i] > b[i]) 1L else -1L)
+    if (a[i] != b[i]) {
+      return(if (a[i] > b[i]) 1L else -1L)
+    }
   }
   0L
 }
@@ -127,8 +144,13 @@ format.morie_bigint <- function(x, ...) as.character(x)
   carry <- 0
   for (i in seq_len(n)) {
     t <- a[i] + b[i] + carry
-    if (t >= .MORIE_BIG_BASE) { out[i] <- t - .MORIE_BIG_BASE; carry <- 1 }
-    else { out[i] <- t; carry <- 0 }
+    if (t >= .MORIE_BIG_BASE) {
+      out[i] <- t - .MORIE_BIG_BASE
+      carry <- 1
+    } else {
+      out[i] <- t
+      carry <- 0
+    }
   }
   out[n + 1L] <- carry
   .morie_big_trim(out)
@@ -142,8 +164,13 @@ format.morie_bigint <- function(x, ...) as.character(x)
   borrow <- 0
   for (i in seq_len(n)) {
     t <- a[i] - b[i] - borrow
-    if (t < 0) { out[i] <- t + .MORIE_BIG_BASE; borrow <- 1 }
-    else { out[i] <- t; borrow <- 0 }
+    if (t < 0) {
+      out[i] <- t + .MORIE_BIG_BASE
+      borrow <- 1
+    } else {
+      out[i] <- t
+      borrow <- 0
+    }
   }
   .morie_big_trim(out)
 }
@@ -154,9 +181,14 @@ format.morie_bigint <- function(x, ...) as.character(x)
 #' @return -1, 0 or 1.
 #' @export
 morie_big_cmp <- function(a, b) {
-  a <- morie_bigint(a); b <- morie_bigint(b)
-  if (a$sign != b$sign) return(if (a$sign > b$sign) 1L else -1L)
-  if (a$sign == 0) return(0L)
+  a <- morie_bigint(a)
+  b <- morie_bigint(b)
+  if (a$sign != b$sign) {
+    return(if (a$sign > b$sign) 1L else -1L)
+  }
+  if (a$sign == 0) {
+    return(0L)
+  }
   c <- .morie_big_cmp_abs(a$limbs, b$limbs)
   if (a$sign > 0) c else -c
 }
@@ -167,16 +199,26 @@ morie_big_cmp <- function(a, b) {
 #' @return A `morie_bigint`.
 #' @export
 morie_big_add <- function(a, b) {
-  a <- morie_bigint(a); b <- morie_bigint(b)
-  if (a$sign == 0) return(b)
-  if (b$sign == 0) return(a)
+  a <- morie_bigint(a)
+  b <- morie_bigint(b)
+  if (a$sign == 0) {
+    return(b)
+  }
+  if (b$sign == 0) {
+    return(a)
+  }
   if (a$sign == b$sign) {
     return(.morie_big_new(a$sign, .morie_big_add_abs(a$limbs, b$limbs)))
   }
   c <- .morie_big_cmp_abs(a$limbs, b$limbs)
-  if (c == 0L) return(.morie_big_new(0, 0))
-  if (c > 0L) .morie_big_new(a$sign, .morie_big_sub_abs(a$limbs, b$limbs))
-  else .morie_big_new(b$sign, .morie_big_sub_abs(b$limbs, a$limbs))
+  if (c == 0L) {
+    return(.morie_big_new(0, 0))
+  }
+  if (c > 0L) {
+    .morie_big_new(a$sign, .morie_big_sub_abs(a$limbs, b$limbs))
+  } else {
+    .morie_big_new(b$sign, .morie_big_sub_abs(b$limbs, a$limbs))
+  }
 }
 
 #' Subtract arbitrary-precision integers
@@ -199,9 +241,13 @@ morie_big_sub <- function(a, b) {
 #' @return A `morie_bigint`.
 #' @export
 morie_big_mul <- function(a, b) {
-  a <- morie_bigint(a); b <- morie_bigint(b)
-  if (a$sign == 0 || b$sign == 0) return(.morie_big_new(0, 0))
-  la <- length(a$limbs); lb <- length(b$limbs)
+  a <- morie_bigint(a)
+  b <- morie_bigint(b)
+  if (a$sign == 0 || b$sign == 0) {
+    return(.morie_big_new(0, 0))
+  }
+  la <- length(a$limbs)
+  lb <- length(b$limbs)
   res <- numeric(la + lb)
   for (i in seq_len(la)) {
     carry <- 0
@@ -235,7 +281,9 @@ morie_big_divmod_small <- function(a, d) {
   if (length(d) != 1L || d <= 0 || d != floor(d) || d >= 2^31) {
     stop("d must be a positive whole number below 2^31.", call. = FALSE)
   }
-  if (a$sign == 0) return(list(quotient = .morie_big_new(0, 0), remainder = 0))
+  if (a$sign == 0) {
+    return(list(quotient = .morie_big_new(0, 0), remainder = 0))
+  }
   n <- length(a$limbs)
   q <- numeric(n)
   rem <- 0
@@ -257,8 +305,11 @@ morie_big_divmod_small <- function(a, d) {
 #' @export
 morie_big_pow <- function(a, k) {
   k <- as.integer(k)
-  if (is.na(k) || k < 0L) stop("k must be a non-negative whole number.",
-                               call. = FALSE)
+  if (is.na(k) || k < 0L) {
+    stop("k must be a non-negative whole number.",
+      call. = FALSE
+    )
+  }
   result <- morie_bigint(1)
   base <- morie_bigint(a)
   while (k > 0L) {
@@ -276,10 +327,15 @@ morie_big_pow <- function(a, k) {
 #' @export
 morie_big_factorial <- function(n) {
   n <- as.integer(n)
-  if (is.na(n) || n < 0L) stop("n must be a non-negative whole number.",
-                               call. = FALSE)
+  if (is.na(n) || n < 0L) {
+    stop("n must be a non-negative whole number.",
+      call. = FALSE
+    )
+  }
   out <- morie_bigint(1)
-  if (n < 2L) return(out)
+  if (n < 2L) {
+    return(out)
+  }
   for (i in seq.int(2L, n)) out <- morie_big_mul(out, morie_bigint(i))
   out
 }
@@ -301,20 +357,26 @@ morie_big_factorial <- function(n) {
 #' @return A `morie_bigint`.
 #' @export
 morie_big_binom <- function(n, k) {
-  n <- as.integer(n); k <- as.integer(k)
+  n <- as.integer(n)
+  k <- as.integer(k)
   if (is.na(n) || is.na(k) || n < 0L) {
     stop("n must be a non-negative whole number.", call. = FALSE)
   }
-  if (k < 0L || k > n) return(morie_bigint(0))
+  if (k < 0L || k > n) {
+    return(morie_bigint(0))
+  }
   k <- min(k, n - k)
   out <- morie_bigint(1)
-  if (k == 0L) return(out)
+  if (k == 0L) {
+    return(out)
+  }
   for (i in seq_len(k)) {
     out <- morie_big_mul(out, morie_bigint(n - k + i))
     dm <- morie_big_divmod_small(out, i)
     if (dm$remainder != 0) {
       stop("internal error: the multiplicative recurrence left a remainder.",
-           call. = FALSE)
+        call. = FALSE
+      )
     }
     out <- dm$quotient
   }

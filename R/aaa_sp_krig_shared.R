@@ -27,7 +27,8 @@
 #' @return Numeric matrix (n by m).
 #' @noRd
 .sp_cross_dist <- function(a, b) {
-  a <- as.matrix(a); b <- as.matrix(b)
+  a <- as.matrix(a)
+  b <- as.matrix(b)
   out <- matrix(0, nrow(a), nrow(b))
   for (j in seq_len(nrow(b))) {
     out[, j] <- sqrt(colSums((t(a) - b[j, ])^2))
@@ -92,8 +93,10 @@
   slack <- (1 - as.numeric(t(ones) %*% ginv %*% g0)) / denom
   lam <- as.numeric(ginv %*% (g0 + ones * slack))
   m <- -slack
-  list(prediction = sum(lam * z), variance = sum(lam * g0) + m,
-       weights = lam, lagrange = m)
+  list(
+    prediction = sum(lam * z), variance = sum(lam * g0) + m,
+    weights = lam, lagrange = m
+  )
 }
 
 #' Internal: Moore-Penrose pseudo-inverse via SVD, so the kriging system
@@ -103,6 +106,8 @@
 MASS_ginv <- function(a, tol = sqrt(.Machine$double.eps)) {
   s <- svd(a)
   keep <- s$d > max(tol * s$d[1], 0)
-  if (!any(keep)) return(matrix(0, ncol(a), nrow(a)))
+  if (!any(keep)) {
+    return(matrix(0, ncol(a), nrow(a)))
+  }
   s$v[, keep, drop = FALSE] %*% ((1 / s$d[keep]) * t(s$u[, keep, drop = FALSE]))
 }
