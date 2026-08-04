@@ -1,16 +1,14 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Fourier basis in the Ramsay-Silverman normalisation
+#' Fourier basis, Ramsay-Silverman normalisation
 #'
 #' Ramsay and Silverman (2005), Functional Data Analysis, 2nd ed., Springer,
-#' Chapter 3, Section 3.3.1 "The Fourier basis system for periodic data": the
-#' basis is phi_0(t) = 1, phi_{2r-1}(t) = sin(r omega t),
-#' phi_{2r}(t) = cos(r omega t), with omega = 2 pi / P and P the period, taken
-#' here as the range of t when it is not supplied.
-#'
-#' This is the UNNORMALISED form of Section 3.3.1.  The 1/sqrt(P) and
-#' sqrt(2/P) scaled variant lives in Fours, which follows the Montesinos
-#' Lopez normalisation instead.  The two must not be confused: they differ by
-#' column scaling only, but the scaling changes every coefficient.
+#' Chapter 3, Section 3.3.1 "The Fourier basis system for periodic data":
+#' phi_0(t) = 1, phi_{2r-1}(t) = sin(r omega t), phi_{2r}(t) = cos(r omega t)
+#' with omega = 2 pi / P and P the period, taken as the range of t when not
+#' supplied.  This is the UNNORMALISED form of Section 3.3.1; the 1/sqrt(P)
+#' and sqrt(2/P) scaled variant is in Fours, which follows the Montesinos
+#' Lopez normalisation.  They differ by column scaling only, but the scaling
+#' changes every coefficient, so they are separate functions.
 #'
 #' @param t evaluation points.
 #' @param K number of sine/cosine pairs; the basis has 2*K + 1 functions.
@@ -18,7 +16,7 @@
 #' @return list: estimate, Phi, omega, period, n, nbasis, method.
 #' @keywords internal
 #' @examples
-#' Fhar(seq(0, 1, length.out = 5), 1, 1)$omega
+#' Fhar(seq(0, 4, length.out = 5), 1, 4)$omega
 #' @export
 Fhar <- function(t, K, period = NULL) {
   tt <- .s03vec(t)
