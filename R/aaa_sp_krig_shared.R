@@ -87,7 +87,7 @@
   gmat <- matrix(gmat, n, n)
   g0 <- as.numeric(semivariogram_fn(as.numeric(.sp_cross_dist(coords, target))))
   ones <- rep(1, n)
-  ginv <- .morie_pinv(gmat)
+  ginv <- MASS_ginv(gmat)
   denom <- as.numeric(t(ones) %*% ginv %*% ones)
   if (denom == 0) stop("singular ordinary-kriging system", call. = FALSE)
   slack <- (1 - as.numeric(t(ones) %*% ginv %*% g0)) / denom
