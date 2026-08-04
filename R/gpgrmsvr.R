@@ -123,9 +123,7 @@ Yangr <- function(marker_matrix, freq = NULL, yang_diagonal = FALSE) {
   if (isTRUE(yang_diagonal)) {
     Mk <- M[, keep, drop = FALSE]
     pk <- pi_[keep]; vk <- vr[keep]
-    num <- sweep(Mk^2, 2, 1 + 2 * pk, function(a, b) a) -
-      sweep(Mk, 2, 1 + 2 * pk, "*")
-    num <- num + rep(2 * pk^2, each = J)
+    num <- Mk^2 - sweep(Mk, 2, 1 + 2 * pk, "*") + rep(2 * pk^2, each = J)
     diag(A) <- 1 + rowSums(sweep(num, 2, vk, "/")) / p
   }
   list(estimate = mean(diag(A)), A = A, freq = pi_, n_lines = J,
