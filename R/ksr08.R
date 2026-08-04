@@ -46,3 +46,17 @@ Multboot <- function(x, B = 200, seed = 1) {
              mu = 1, tau = 1, B = as.numeric(B), n = as.numeric(n),
              method = "Multiplier bootstrap, Kosorok Section 2.2.3")
 }
+
+# NAMESPACE exported both of these names, but only the short function above
+# was ever defined, so loading the namespace could not resolve them. Same
+# alias pattern as ksr02.R.
+
+#' @rdname Multboot
+#' @keywords internal
+#' @export
+morie_ksr08_kosorok_multiplier_bootstrap <- Multboot
+
+#' @rdname Multboot
+#' @keywords internal
+#' @export
+morie_kosorok_multiplier_bootstrap <- Multboot

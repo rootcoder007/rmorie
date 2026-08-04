@@ -44,3 +44,17 @@ Onestep <- function(x, theta0, kind = "huber", k = 1.345) {
              n_used = sum(dpsi != 0), n = as.numeric(n),
              method = "One-step estimator on the Z-estimating equation")
 }
+
+# NAMESPACE exported both of these names, but only the short function above
+# was ever defined, so loading the namespace could not resolve them. Same
+# alias pattern as ksr02.R.
+
+#' @rdname Onestep
+#' @keywords internal
+#' @export
+morie_ksr15_kosorok_one_step_estimator <- Onestep
+
+#' @rdname Onestep
+#' @keywords internal
+#' @export
+morie_kosorok_one_step_estimator <- Onestep
