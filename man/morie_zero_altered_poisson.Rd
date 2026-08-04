@@ -21,7 +21,16 @@ morie_zap_link(mu_pred, theta_pred)
 \item{mu_hat}{estimated count means}
 \item{y_positive}{strictly positive counts}
 \item{threshold}{classification cut-off for the ZAPC rule}
-\item{...}{further arguments controlling the fit}
+
+\item{x}{unused, kept for signature parity with the Python API}
+
+\item{tol}{convergence tolerance on the estimating equation}
+
+\item{max_iter}{maximum number of bisection steps}
+
+\item{mu_pred}{linear predictor for the count mean}
+
+\item{theta_pred}{linear predictor for the zero probability}
 }
 \value{
 A list holding the fitted quantities for the method called: point

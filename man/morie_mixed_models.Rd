@@ -20,8 +20,28 @@ morie_reml_loglik(X, Z, y, D, R = NULL)
 \item{y}{numeric response vector}
 \item{X}{fixed-effect design matrix}
 \item{Z}{random-effect design matrix}
-\item{K}{relationship or covariance matrix of the random effect}
-\item{...}{further arguments passed to the underlying solver}
+
+\item{groups}{argument \code{groups}; not described in the source.}
+
+\item{Sigma_inv}{argument \code{Sigma_inv}; not described in the source.}
+
+\item{R_inv}{argument \code{R_inv}; not described in the source.}
+
+\item{Sigma}{argument \code{Sigma}; not described in the source.}
+
+\item{R}{argument \code{R}; not described in the source.}
+
+\item{D0}{argument \code{D0}; not described in the source.}
+
+\item{sigma2_0}{argument \code{sigma2_0}; not described in the source.}
+
+\item{n_iter}{argument \code{n_iter}; not described in the source.}
+
+\item{tol}{argument \code{tol}; not described in the source.}
+
+\item{D}{argument \code{D}; not described in the source.}
+
+\item{beta}{argument \code{beta}; not described in the source.}
 }
 \value{
 A list holding the fitted quantities for the method called: point

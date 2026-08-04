@@ -17,11 +17,23 @@ morie_bayes_gblup(y, G, n_iter = 2000L, burn_in = 500L, seed = 42L, ...)
 \arguments{
 \item{y}{numeric response vector}
 \item{X}{fixed-effect design matrix}
-\item{Z}{marker or incidence matrix}
 \item{G}{genomic relationship matrix}
 \item{M}{centred and scaled marker matrix}
-\item{lambda}{variance ratio sigma2_e / sigma2_g}
 \item{...}{further arguments passed to the underlying solver}
+
+\item{sigma2_g}{argument \code{sigma2_g}; not described in the source.}
+
+\item{sigma2_e}{argument \code{sigma2_e}; not described in the source.}
+
+\item{Z_L}{argument \code{Z_L}; not described in the source.}
+
+\item{sigma2_m}{argument \code{sigma2_m}; not described in the source.}
+
+\item{n_iter}{argument \code{n_iter}; not described in the source.}
+
+\item{burn_in}{argument \code{burn_in}; not described in the source.}
+
+\item{seed}{argument \code{seed}; not described in the source.}
 }
 \value{
 A list holding the fitted quantities for the method called: point

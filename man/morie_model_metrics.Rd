@@ -17,11 +17,28 @@ morie_pca(X, k = NULL)
 morie_ridge(X, y, lambda, add_intercept = TRUE)
 }
 \arguments{
-\item{observed}{observed labels or values}
-\item{predicted}{predicted labels, probabilities or values}
 \item{X}{predictor matrix}
 \item{y}{response vector}
-\item{...}{further arguments passed to the underlying fit}
+
+\item{y_true}{argument \code{y_true}; not described in the source.}
+
+\item{y_pred}{argument \code{y_pred}; not described in the source.}
+
+\item{positive}{argument \code{positive}; not described in the source.}
+
+\item{conf}{argument \code{conf}; not described in the source.}
+
+\item{i}{argument \code{i}; not described in the source.}
+
+\item{probs}{argument \code{probs}; not described in the source.}
+
+\item{halved}{argument \code{halved}; not described in the source.}
+
+\item{k}{argument \code{k}; not described in the source.}
+
+\item{lambda}{argument \code{lambda}; not described in the source.}
+
+\item{add_intercept}{argument \code{add_intercept}; not described in the source.}
 }
 \value{
 A list holding the fitted quantities for the method called: point
