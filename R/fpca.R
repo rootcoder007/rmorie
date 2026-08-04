@@ -11,15 +11,25 @@
 #' Section 2.8, gives multivariate PCA on a rectangular matrix, which is the
 #' discrete analogue only.
 #'
-#' The functional version is therefore taken from the primary source the book
-#' itself cites for functional data, Ramsay, J., Hooker, G. and Graves, S.
-#' (2009), Functional Data Analysis with R and MATLAB, Springer, whose
-#' Karhunen-Loeve expansion is x_i(t) = mu(t) + sum_k score_ik phi_k(t), with
-#' phi_k the eigenfunctions of the covariance surface
-#' v(s,t) = (1/(n-1)) sum_i (x_i(s)-mu(s))(x_i(t)-mu(t)) and the normalisation
-#' integral phi_k^2 = 1 rather than the Euclidean one.  The integral is taken
-#' by the trapezoid rule on the observation grid, which is what makes this the
-#' functional and not the multivariate problem.
+#' The functional version is taken from the functional-data literature the book
+#' itself points at.  Ramsay, J. O. and Silverman, B. W. (2005), Functional
+#' Data Analysis, 2nd edition, Springer Series in Statistics,
+#' doi:10.1007/b98888, is the standard source for the theory; Ramsay, J. O.,
+#' Hooker, G. and Graves, S. (2009), Functional Data Analysis with R and
+#' MATLAB, Springer, doi:10.1007/978-0-387-98185-7, is its companion software
+#' text.  Both bibliographic records are verified against Crossref.
+#'
+#' CITATION LIMIT, stated rather than papered over.  Neither book's text could
+#' be fetched, so no page or equation number is attributed to either, and the
+#' statements below are given as this function's own specification rather than
+#' as quotations.  The Karhunen-Loeve expansion implemented is
+#' x_i(t) = mu(t) + sum_k score_ik phi_k(t), with phi_k the eigenfunctions of
+#' the covariance surface v(s,t) = (1/(n-1)) sum_i (x_i(s)-mu(s))(x_i(t)-mu(t))
+#' and the normalisation integral phi_k^2 = 1 rather than the Euclidean one.
+#' The integral is taken by the trapezoid rule on the observation grid, which is
+#' what makes this the functional and not the multivariate problem, and the
+#' anchors verify the orthonormality and the exactness of the expansion directly
+#' rather than against a quoted page.
 #'
 #' @param data_functions n-by-m matrix; row i is curve i sampled on the common
 #'   grid.

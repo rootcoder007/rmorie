@@ -11,15 +11,28 @@
 #' Chapter 5, volume [Pages 141-170], carries only the unstructured and
 #' diagonal forms.
 #'
-#' The structure is therefore taken from the primary source, Smith, A.,
-#' Cullis, B. and Thompson, R. (2001), Analyzing variety by environment data
-#' using multiplicative mixed models and adjustments for spatial field
-#' trends, Biometrics 57(4), 1138-1147, which writes the k-factor variety by
-#' environment variance matrix as Sigma_g = Lambda Lambda^T + Psi, Lambda the
-#' n_env-by-k loadings and Psi the diagonal of environment specific
-#' variances.  The identifiability constraint the same paper imposes -- the
-#' upper triangle of Lambda above the diagonal is zero -- fixes the free
-#' parameter count at n_env*k - k(k-1)/2 + n_env.
+#' The structure is therefore taken from the primary source for
+#' factor-analytic variety-by-environment models, Smith, A., Cullis, B. and
+#' Thompson, R. (2001), Analyzing variety by environment data using
+#' multiplicative mixed models and adjustments for spatial field trend,
+#' Biometrics 57(4), 1138-1147, doi:10.1111/j.0006-341X.2001.01138.x.  That
+#' bibliographic record is verified against Crossref; note the published title
+#' ends "spatial field trend", singular.
+#'
+#' CITATION LIMIT, stated rather than papered over.  The Smith, Cullis and
+#' Thompson paper is fully closed access -- Unpaywall reports no open location,
+#' and the Rothamsted repository copy is staff-restricted -- so its text could
+#' NOT be read.  The specific claims that this paper writes the variance matrix
+#' as Lambda Lambda^T + Psi, that it imposes the zero-upper-triangle
+#' identifiability constraint, and that it gives a free parameter count are
+#' therefore UNVERIFIED and are not asserted here.  What is implemented is the
+#' k-factor factor-analytic structure as this function's own specification
+#' states it, Sigma = Lambda Lambda^T + Psi, with Lambda the n_env-by-k
+#' loadings, Psi the diagonal of environment specific variances, and the
+#' conventional lower-triangular constraint on Lambda that makes the
+#' decomposition identifiable, which gives n_env*k - k(k-1)/2 + n_env free
+#' parameters by direct count.  Nothing beyond that statement is assumed, and
+#' no equation is attributed to a page that was not read.
 #'
 #' DETERMINISM.  When no loadings are supplied the canonical Lambda is laid
 #' out on van der Corput points, not drawn, so both arms build the same
