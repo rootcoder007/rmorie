@@ -12,9 +12,12 @@
 #' matrix with entries P_ij = int_0^T phi_i^(p)(t) phi_j^(p)(t)".  "Typical
 #' chosen values of p are 1 and 2."
 #'
-#' Derivatives are taken by the central difference on the equally spaced grid
-#' and integrated by the trapezoid rule; both are exact for quadratics, and
-#' the penalty of an affine function is exactly zero as (14.11) requires.
+#' Derivatives are taken by central differences inside the grid and by
+#' one-sided differences at its two ends, so the trapezoid rule integrates
+#' over the whole of [a, b] rather than dropping the two end intervals.  Both
+#' stencils are exact at the polynomial degree the order needs, so f(t) = t^2
+#' integrates to exactly 4 and an affine function to exactly 0, as (14.11)
+#' requires.
 #'
 #' @param basis a vector of function values on an equally spaced grid, or an
 #'   m-by-L matrix whose columns are basis functions on that grid.
@@ -29,7 +32,7 @@
 Rpnlt <- function(basis, lam, a = 0, b = 1, p = 2) {
   B <- .s03mat(basis)
   m <- nrow(B)
-  if (m < 3L) stop("roughness_penalty: need at least three grid points")
+  if (m < 4L) stop("roughness_penalty: need at least four grid points")
   L <- ncol(B)
   lam <- as.numeric(lam)
   if (lam < 0) stop("roughness_penalty: lambda must be non-negative")
@@ -39,14 +42,18 @@ Rpnlt <- function(basis, lam, a = 0, b = 1, p = 2) {
   b <- as.numeric(b)
   if (!(b > a)) stop("roughness_penalty: the grid must have positive width")
   h <- (b - a) / (m - 1L)
-  nD <- m - 2L
-  D <- matrix(0, nD, L)
-  for (i in seq_len(nD)) {
+  D <- matrix(0, m, L)
+  for (i in seq_len(m)) {
     for (j in seq_len(L)) {
       D[i, j] <- if (pp == 1L) {
-        (B[i + 2L, j] - B[i, j]) / (2 * h)
+        if (i == 1L) (-3 * B[1L, j] + 4 * B[2L, j] - B[3L, j]) / (2 * h)
+        else if (i == m) (3 * B[m, j] - 4 * B[m - 1L, j] + B[m - 2L, j]) / (2 * h)
+        else (B[i + 1L, j] - B[i - 1L, j]) / (2 * h)
       } else {
-        (B[i + 2L, j] - 2 * B[i + 1L, j] + B[i, j]) / (h * h)
+        if (i == 1L) (2 * B[1L, j] - 5 * B[2L, j] + 4 * B[3L, j] - B[4L, j]) / (h * h)
+        else if (i == m) {
+          (2 * B[m, j] - 5 * B[m - 1L, j] + 4 * B[m - 2L, j] - B[m - 3L, j]) / (h * h)
+        } else (B[i + 1L, j] - 2 * B[i, j] + B[i - 1L, j]) / (h * h)
       }
     }
   }
@@ -54,8 +61,8 @@ Rpnlt <- function(basis, lam, a = 0, b = 1, p = 2) {
   for (i in seq_len(L)) {
     for (j in seq_len(L)) {
       s <- 0
-      for (r in seq_len(nD)) {
-        wgt <- if (r == 1L || r == nD) 0.5 else 1
+      for (r in seq_len(m)) {
+        wgt <- if (r == 1L || r == m) 0.5 else 1
         s <- s + wgt * D[r, i] * D[r, j]
       }
       P[i, j] <- s * h
