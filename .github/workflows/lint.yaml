@@ -1,0 +1,110 @@
+name: lint
+
+# Catches syntax and style breakage on push instead of at R CMD check
+# time. The Rd/usage drift that produced 39 broken help files was only
+# found by a full check run; the doc job below runs the same two
+# tools::check* functions on their own, in seconds.
+
+on:
+  push:
+    branches: [main, master, feat/**, dep-map, native-specializations]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lint-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lintr:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::lintr, local::.
+          needs: lint
+
+      - name: Lint
+        run: lintr::lint_package()
+        shell: Rscript {0}
+        env:
+          LINTR_ERROR_ON_LINT: true
+
+  docs:
+    # Independent of lintr: a package can be perfectly styled and still
+    # ship \usage sections that disagree with the code, which is exactly
+    # what happened here.
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: local::.
+          needs: check
+
+      - name: Rd consistency (codoc + usage + undocumented args)
+        run: |
+          pkg <- "."
+          bad <- FALSE
+
+          say <- function(what, res) {
+            txt <- utils::capture.output(print(res))
+            txt <- txt[nzchar(trimws(txt))]
+            if (length(txt)) {
+              cat("::error::", what, " reported ", length(txt),
+                  " line(s)\n", sep = "")
+              cat(txt, sep = "\n")
+              cat("\n")
+              TRUE
+            } else {
+              cat("OK: ", what, "\n", sep = "")
+              FALSE
+            }
+          }
+
+          bad <- say("codoc (code/documentation mismatches)",
+                     tools::codoc(dir = pkg)) || bad
+          bad <- say("checkDocFiles (undocumented / stale arguments)",
+                     tools::checkDocFiles(dir = pkg)) || bad
+          bad <- say("checkDocStyle", tools::checkDocStyle(dir = pkg)) || bad
+          bad <- say("undoc (undocumented objects)",
+                     tools::undoc(dir = pkg)) || bad
+
+          rd <- list.files(file.path(pkg, "man"), pattern = "[.]Rd$",
+                           full.names = TRUE)
+          probs <- unlist(lapply(rd, function(f) {
+            out <- utils::capture.output(
+              tools::checkRd(f, listOK = FALSE), type = "message")
+            if (length(out)) paste0(basename(f), ": ", out) else NULL
+          }))
+          if (length(probs)) {
+            cat("::error::checkRd reported ", length(probs), " problem(s)\n",
+                sep = "")
+            cat(head(probs, 50), sep = "\n")
+            bad <- TRUE
+          } else {
+            cat("OK: checkRd across ", length(rd), " files\n", sep = "")
+          }
+
+          if (bad) quit(status = 1L)
+        shell: Rscript {0}
