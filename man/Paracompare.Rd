@@ -5,7 +5,7 @@
 \alias{morie_survival_compare_parametric}
 \title{Compare parametric survival families}
 \usage{
-Paracompare(time, event, X = NULL, dists = c("weibull", "exponential", "lognormal", "loglogistic"))
+Paracompare(time, event, X = NULL, dists = NULL)
 }
 \arguments{
 \item{time}{Numeric vector of follow-up times.}
@@ -14,7 +14,9 @@ Paracompare(time, event, X = NULL, dists = c("weibull", "exponential", "lognorma
 
 \item{X}{Optional covariate matrix; when given, AFT models are compared instead of intercept-only fits.}
 
-\item{dists}{Character vector of families to try.}
+\item{dists}{Character vector of families to try. \code{NULL}, the
+default, tries all four: \code{"exponential"}, \code{"weibull"},
+\code{"lognormal"} and \code{"loglogistic"}.}
 }
 \value{
 A list with \code{table} ordered by AIC, \code{best_aic}, \code{failed}, \code{families_not_nested} and \code{lr_weibull_vs_exponential}.

@@ -6,7 +6,6 @@
 \alias{morie_mcc}
 \alias{morie_brier}
 \alias{morie_pca}
-\alias{morie_ols}
 \alias{morie_ridge}
 \title{Model evaluation metrics}
 \usage{
@@ -15,7 +14,6 @@ morie_class_metrics(conf, i)
 morie_mcc(y_true, y_pred, positive = 1)
 morie_brier(probs, y_true, halved = FALSE)
 morie_pca(X, k = NULL)
-morie_ols(X, y, add_intercept = TRUE)
 morie_ridge(X, y, lambda, add_intercept = TRUE)
 }
 \arguments{
@@ -39,3 +37,6 @@ These functions mirror, in R, the implementations in the Python package
 tests in \code{tests/testthat/}.
 }
 \keyword{models}
+\seealso{
+\code{\link{morie_ols}}
+}

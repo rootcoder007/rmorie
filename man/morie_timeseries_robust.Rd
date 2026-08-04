@@ -2,12 +2,9 @@
 \name{morie_timeseries_robust}
 \alias{morie_timeseries_robust}
 \alias{morie_adf_test}
-\alias{morie_rlm}
 \title{Unit-root testing and robust regression}
 \usage{
 morie_adf_test(y, lags = 1, kind = "drift")
-morie_rlm(y, X, add_intercept = TRUE, k = 1.345, max_iter = 20,
-          tol = 1e-6)
 }
 \arguments{
 \item{y}{numeric series, or the response for \code{morie_rlm}}
@@ -47,3 +44,6 @@ Huber, P. J. (1964) Robust estimation of a location parameter.
 \emph{Annals of Mathematical Statistics} 35, 73-101.
 }
 \keyword{ts}
+\seealso{
+\code{\link{morie_rlm}}
+}
