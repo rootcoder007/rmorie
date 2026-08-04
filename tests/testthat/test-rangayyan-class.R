@@ -137,11 +137,11 @@ test_that("DivAv reports the worst pair, not only the average", {
 })
 
 test_that("Bhattacharyya is documented as not from this book", {
-  r <- BhattGauss(c(0, 1), c(2, -1), CC1, CC2)
+  r <- GaussOverlap(c(0, 1), c(2, -1), CC1, CC2)
   expect_true(r$not_from_this_book)
   expect_true(r$book_uses_divergence_eq_10_115)
   expect_gt(r$bhattacharyya, 0)
-  expect_equal(BhattGauss(c(1, 2), c(1, 2), CC1, CC1)$bhattacharyya, 0,
+  expect_equal(GaussOverlap(c(1, 2), c(1, 2), CC1, CC1)$bhattacharyya, 0,
                tolerance = 1e-12)
 })
 
@@ -149,7 +149,7 @@ test_that("the error bound pairs with Bhattacharyya, not the divergence", {
   r <- ErrBound(0.5, 0.5, 1.4)
   expect_equal(r$bound, 0.5 * exp(-1.4))
   expect_true(r$not_from_this_book)
-  expect_true(r$pairs_with_bhatt_not_with_divergence)
+  expect_true(r$pairs_with_the_overlap_not_with_divergence)
   expect_error(ErrBound(0.3, 0.3, 1), "sum to 1")
 })
 
@@ -387,11 +387,11 @@ test_that("the KLD eq (5.33) is weighted by the second PDF", {
 
 test_that("the Bhattacharyya coefficient is an overlap in [0, 1]", {
   p1 <- c(0.2, 0.3, 0.5); p2 <- c(0.1, 0.4, 0.5)
-  r <- BhattCoef(p1, p2)
+  r <- PdfOverlap(p1, p2)
   expect_true(r$in_unit_interval)
-  expect_close(BhattCoef(p1, p1)$coefficient, 1, tol = 1e-12)
-  expect_true(BhattCoef(p1, p1)$identical)
-  d <- BhattCoef(c(1, 0), c(0, 1))
+  expect_close(PdfOverlap(p1, p1)$coefficient, 1, tol = 1e-12)
+  expect_true(PdfOverlap(p1, p1)$identical)
+  d <- PdfOverlap(c(1, 0), c(0, 1))
   expect_close(d$coefficient, 0, tol = 1e-15)
   expect_true(d$disjoint)
   expect_equal(d$distance, Inf)
@@ -399,14 +399,14 @@ test_that("the Bhattacharyya coefficient is an overlap in [0, 1]", {
   expect_true(r$the_overlap_is_where_errors_must_happen)
   expect_true(r$not_from_this_book)
   # the bound tightens as the overlap falls
-  close <- BhattCoef(c(0.5, 0.5), c(0.45, 0.55))$distance
-  far <- BhattCoef(c(0.9, 0.1), c(0.1, 0.9))$distance
+  close <- PdfOverlap(c(0.5, 0.5), c(0.45, 0.55))$distance
+  far <- PdfOverlap(c(0.9, 0.1), c(0.1, 0.9))$distance
   expect_lt(ErrBound(0.5, 0.5, far)$bound, ErrBound(0.5, 0.5, close)$bound)
 })
 
 test_that("Chernoff at one half is the Bhattacharyya coefficient", {
   p1 <- c(0.2, 0.3, 0.5); p2 <- c(0.1, 0.4, 0.5)
-  bc <- BhattCoef(p1, p2)$coefficient
+  bc <- PdfOverlap(p1, p2)$coefficient
   h <- Chernoff(p1, p2, alpha = 0.5)
   expect_close(h$coefficient, bc, tol = 1e-12)
   expect_true(h$bhattacharyya_is_alpha_one_half)
@@ -421,7 +421,7 @@ test_that("Chernoff at one half is the Bhattacharyya coefficient", {
 test_that("Hellinger squared is one minus the coefficient", {
   p1 <- c(0.2, 0.3, 0.5); p2 <- c(0.1, 0.4, 0.5)
   h <- Hellinger(p1, p2)
-  expect_close(h$squared, 1 - BhattCoef(p1, p2)$coefficient, tol = 1e-12)
+  expect_close(h$squared, 1 - PdfOverlap(p1, p2)$coefficient, tol = 1e-12)
   expect_true(h$identity_h2_equals_one_minus_bc)
   expect_true(h$in_unit_interval)
   expect_close(Hellinger(p1, p1)$hellinger, 0, tol = 1e-12)
@@ -441,13 +441,13 @@ test_that("Hellinger is a metric where the Bhattacharyya distance is not", {
 
 test_that("every borrowed measure carries its primary citation", {
   p1 <- c(0.2, 0.3, 0.5); p2 <- c(0.1, 0.4, 0.5)
-  rs <- list(BhattCoef(p1, p2), Chernoff(p1, p2), Hellinger(p1, p2),
-             ErrBound(0.5, 0.5, 1), BhattGauss(c(0, 1), c(2, -1), CC1, CC2))
+  rs <- list(PdfOverlap(p1, p2), Chernoff(p1, p2), Hellinger(p1, p2),
+             ErrBound(0.5, 0.5, 1), GaussOverlap(c(0, 1), c(2, -1), CC1, CC2))
   for (r in rs) {
     expect_true(r$not_from_this_book)
     expect_gt(nchar(r$reference), 40)
   }
-  expect_true(grepl("1943", BhattCoef(p1, p2)$reference))
+  expect_true(grepl("1943", PdfOverlap(p1, p2)$reference))
   expect_true(grepl("493-507", Chernoff(p1, p2)$reference))
   expect_true(grepl("1909", Hellinger(p1, p2)$reference))
   expect_true(grepl("1967", ErrBound(0.5, 0.5, 1)$reference))

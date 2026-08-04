@@ -11,7 +11,7 @@
 #
 # BHATTACHARYYA appears nowhere in this book.  Rangayyan measures class
 # separability with the normalized distance of eq (10.112) and the
-# divergence of eqs (10.115)-(10.117).  Bhatt and ErrBound are kept
+# divergence of eqs (10.115)-(10.117).  GaussOverlap and ErrBound are
 # because they are standard and correct, and are documented as not being
 # from this text.
 
@@ -414,7 +414,7 @@ Kld <- function(p1, p2) {
        method = "Rangayyan (2024) eq. (5.33)")
 }
 
-BhattCoef <- function(p1, p2) {
+PdfOverlap <- function(p1, p2) {
   # BC(p1, p2) = sum_l sqrt(p1 p2): the OVERLAP between two PDFs,
   # bounded in [0, 1].  This is what the Bhattacharyya DISTANCE is built
   # from, D_B = -ln BC, and what makes the error bound work: the overlap
@@ -522,16 +522,17 @@ Hellinger <- function(p1, p2) {
        method = "Hellinger distance, H^2 = 1 - BC")
 }
 
-BhattGauss <- function(m1, m2, C1, C2) {
+GaussOverlap <- function(m1, m2, C1, C2) {
   # NOT FROM THIS BOOK.  A full-text search of the 2024 third edition --
   # Rangayyan and Krishnan -- finds no occurrence of "Bhattacharyya", nor
   # of Chernoff or Hellinger.  The book gives the KLD of eq (5.33) and
   # the divergence of eqs (10.115)-(10.117), which is the symmetric sum
   # of the two KLDs, and cites Swain for them.
   #
-  # Named BhattGauss because Bhatt already belongs to morie.fn.bhatt,
-  # which computes the same quantity from SAMPLE SETS rather than from
-  # Gaussian parameters.
+  # Named for what it MEASURES -- the overlap of two Gaussians -- not
+  # for Bhattacharyya, whose surname is not a method name.  The same
+  # formula estimated from SAMPLE SETS is morie.fn.bhatt, verified to
+  # agree with this to 1e-10.
   #
   # WHAT IT IS FOR: D_B = -ln BC where BC is the Bhattacharyya
   # coefficient, the overlap of the two class-conditional densities.
@@ -569,7 +570,7 @@ BhattGauss <- function(m1, m2, C1, C2) {
 
 ErrBound <- function(p1, p2, db) {
   # P_e <= sqrt(P1 P2) exp(-D_B).  NOT FROM THIS BOOK -- the standard
-  # Kailath bound.  It pairs with Bhatt, NOT with the book's Divergence:
+  # Kailath bound.  It pairs with GaussOverlap, NOT with Divergence:
   # the divergence does not bound the error this way, and substituting it
   # would give a number that looks like a bound and is not one.  The
   # bound is on the OPTIMAL classifier, a floor no real one can beat.
@@ -582,7 +583,7 @@ ErrBound <- function(p1, p2, db) {
        bhattacharyya = d, tightest_at_equal_priors = abs(a - b) < 1e-12,
        bounds_the_optimal_classifier_not_yours = TRUE,
        not_from_this_book = TRUE,
-       pairs_with_bhatt_not_with_divergence = TRUE,
+       pairs_with_the_overlap_not_with_divergence = TRUE,
        reference = paste("Kailath T. The divergence and Bhattacharyya",
                          "distance measures in signal selection. IEEE",
                          "Transactions on Communication Technology",
