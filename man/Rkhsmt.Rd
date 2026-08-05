@@ -24,7 +24,10 @@ Rkhsmt(
 
 \item{n_iter}{maximum number of conditional-mean sweeps.}
 
-\item{X}{optional J-by-p fixed-effect design.}
+\item{X}{optional J-by-p fixed-effect design.  Do NOT include an intercept
+column: mu is already the intercept, and an X that carries one leaves beta
+unidentified.  The solve is ridged, so both arms still agree on a value,
+but that value means nothing.}
 
 \item{Z1}{optional J-by-J incidence matrix of lines; identity when absent.}
 
