@@ -41,3 +41,37 @@
   if (i > m) i <- m
   s[i]
 }
+
+# Moment-inequality criterion for an interval-identified scalar.
+# Molinari (2021) eqs (4.2)-(4.4): only violated inequalities contribute,
+# so the criterion is exactly zero on [E yL, E yU].
+
+.bnd_interval <- function(moments, name) {
+  M <- as.matrix(moments)
+  if (nrow(M) < 2L) stop(paste0(name, ": need at least two observations"))
+  if (ncol(M) != 2L)
+    stop(paste0(name, ": moments must have two columns, yL and yU"))
+  if (any(M[, 2] < M[, 1]))
+    stop(paste0(name, ": yU is below yL at some observation"))
+  list(yl = as.numeric(M[, 1]), yu = as.numeric(M[, 2]))
+}
+
+.bnd_mistats <- function(yl, yu) {
+  sL <- stats::sd(yl)
+  sU <- stats::sd(yu)
+  if (sL <= 0) sL <- 1e-12
+  if (sU <= 0) sU <- 1e-12
+  list(n = length(yl), mL = mean(yl), sL = sL, mU = mean(yu), sU = sU)
+}
+
+.bnd_crit <- function(theta, st) {
+  rn <- sqrt(st$n)
+  a <- max(rn * (st$mL - theta) / st$sL, 0)
+  b <- max(rn * (theta - st$mU) / st$sU, 0)
+  a * a + b * b
+}
+
+.bnd_critmax <- function(theta, st) {
+  rn <- sqrt(st$n)
+  max(rn * (st$mL - theta) / st$sL, rn * (theta - st$mU) / st$sU, 0)
+}
