@@ -84,7 +84,7 @@ Htebias <- function(y, D, tau_hat, y_hat = NULL, w_hat = NULL) {
     n = n,
     method = paste(
       "BLP calibration test, HC3",
-      "(grf::test_calibration; Chernozhukov et al. 2018)"
+      "(the grf test_calibration statistic; Chernozhukov et al. 2018)"
     )
   )
 }
