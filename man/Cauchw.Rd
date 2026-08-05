@@ -12,14 +12,45 @@ Cauchw(y, c = 2.3849)
 \item{c}{Positive tuning constant. Default 2.3849.}
 }
 \value{
-List with \code{estimate} (the weights), \code{weights}, \code{psi}, \code{rho}, \code{objective}, \code{c}, \code{n}, \code{method}.
+List with \code{estimate} (the weights), \code{weights}, \code{psi},
+\code{rho}, \code{objective}, \code{c}, \code{n}, \code{method}.
 }
 \description{
-\code{w(r) = 1/(1 + (r/c)^2)}, with \code{psi(r) = r w(r)} and \code{rho(r) = (c^2/2) log(1 + (r/c)^2)}. Unlike Huber the weight falls from \code{r = 0} and never reaches zero, so the estimator redescends without rejecting; psi peaks at \code{r = c}.
+Holland, P. W. and Welsch, R. E. (1977), "Robust regression using
+iteratively reweighted least-squares", Communications in Statistics - Theory
+and Methods 6(9), 813-827, doi:10.1080/03610927708827533. The bibliographic
+record is verified against Crossref.
+}
+\details{
+CITATION LIMIT, stated rather than papered over. The article is closed
+access: Taylor and Francis returns 403 to every fetch, OpenAlex and Semantic
+Scholar report no open-access location, and no preprint or technical-report
+version was found. No page or equation number is therefore attributed to it.
+The weight function below is the one this module was specified with,
+\code{w(r) = 1/(1 + (r/c)^2)}, and the companions follow from it by the
+standard M-estimation relations rather than by quotation:
+\code{psi(r) = r w(r) = r/(1 + (r/c)^2)} and
+\code{rho(r) = (c^2/2) log(1 + (r/c)^2)}, with \code{d rho / dr = psi}.
+
+The rho is the log-density of a Cauchy up to constants, which is where the
+name comes from and why the function behaves as it does. Unlike Huber, the
+weight starts falling at r = 0 and never reaches zero: every observation
+keeps some influence, however far out it lies, so the estimator redescends
+but does not reject. psi attains its maximum at r = c and decreases
+thereafter, so a residual twice as large as c carries LESS weight in absolute
+terms than one at c -- the property Huber lacks and the bisquare takes to the
+extreme of exact rejection.
+
+The default tuning constant c = 2.3849 is the value conventionally quoted for
+about 95 percent asymptotic efficiency at the Gaussian; the function does not
+assert it, and the accompanying anchor derives the efficiency
+\code{(E psi')^2 / E psi^2} by quadrature instead of trusting the number.
 }
 \examples{
-Cauchw(c(0, 1, 2.3849, 10))$weights
+Cauchw(c(0, 1, 2.3849, 10))$weights  # 1, ..., exactly 0.5 at r = c, ...
 }
 \references{
-Holland, P. W. and Welsch, R. E. (1977), Communications in Statistics - Theory and Methods 6(9):813-827, doi:10.1080/03610927708827533.
+Holland, P. W. and Welsch, R. E. (1977), Communications in
+Statistics - Theory and Methods 6(9):813-827,
+doi:10.1080/03610927708827533.
 }

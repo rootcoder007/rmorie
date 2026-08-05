@@ -7,17 +7,50 @@
 Sieg(x, y)
 }
 \arguments{
-\item{x, y}{Predictor and response, same length, at least two points with two distinct x values.}
+\item{x, y}{Predictor and response, same length, at least two points with two
+distinct x values.}
 }
 \value{
-List with \code{estimate} (the slope), \code{slope}, \code{intercept}, \code{fitted}, \code{residuals}, \code{n}, \code{n_used}, \code{breakdown_point}, \code{method}.
+List with \code{estimate} (the slope), \code{slope},
+\code{intercept}, \code{fitted}, \code{residuals}, \code{n},
+\code{n_used}, \code{breakdown_point}, \code{method}.
 }
 \description{
-Two nested medians rather than one: the median over points of the median over partners of the pairwise slope, and then the median level. Half the sample can be replaced by arbitrary values without the line moving to infinity, where Theil-Sen breaks down at about 29 percent.
+Siegel, A. F. (1982), "Robust regression using repeated medians", Biometrika
+69(1), 242-244, doi:10.1093/biomet/69.1.242.
+}
+\details{
+CITATION LIMIT, stated rather than papered over. The Biometrika article is
+closed access (Semantic Scholar and OpenAlex both report no open-access
+location) and the Princeton technical-report version, DTIC ADA092660,
+returns 403 to every fetch tried. The estimator is therefore taken from a
+source that states it in full and cites Siegel for it: Borowski, M. and
+Fried, R. (2011), "Robust repeated median regression in moving windows with
+data-adaptive width selection", SFB 823 Discussion Paper 28/2011, TU
+Dortmund University, doi:10.17877/de290r-13059, Section 2, equation (3),
+page 3, read off a rendered page image. That equation is
+\code{beta = med_i med_{i' != i} (y_i - y_i')/(x_i - x_i')} and
+\code{level = med_i (y_i - beta x_i)}, and the same page states the property
+that makes the estimator worth having: a finite-sample replacement breakdown
+point of \code{floor(n/2)/n}, about 50 percent, which Davies and Gather
+(2005) show is the maximum possible for a regression-equivariant estimator.
+
+The doubled median is the whole idea. Theil-Sen takes ONE median over all
+n(n-1)/2 pairwise slopes and breaks down at about 29 percent; taking a median
+within each point first, and then across points, means a minority of
+arbitrarily corrupted observations cannot move either level of the
+calculation. Half the sample can be replaced by nonsense and the line does
+not move to infinity.
+
+Points sharing an x value with no other point contribute no inner median and
+are skipped; if no pair of distinct x values exists at all, no slope is
+defined and that is an error rather than a number.
 }
 \examples{
 Sieg(1:7, 3 * (1:7) - 2)$estimate  # exactly 3
 }
 \references{
-Siegel, A. F. (1982), Biometrika 69(1):242-244, doi:10.1093/biomet/69.1.242; the form used is equation (3) of Borowski and Fried (2011), doi:10.17877/de290r-13059.
+Siegel, A. F. (1982), Biometrika 69(1):242-244,
+doi:10.1093/biomet/69.1.242; the form used is equation (3) of Borowski and
+Fried (2011), doi:10.17877/de290r-13059.
 }

@@ -8,7 +8,7 @@
 #'
 #' @param h Numeric vector of non-negative lags.
 #' @param rng Practical (or true) range, positive.
-#' @param model One of "exponential", "gaussian", "spherical".
+#' @param model One of "exponential", "gaussian", "spherical", "wave".
 #' @return Numeric vector R(h).
 #' @references Schabenberger & Gotway (2005), Sec 4.3, eqs (4.10)-(4.13).
 #' @noRd
@@ -19,6 +19,14 @@
   switch(model,
     exponential = exp(-3 * h / rng),
     gaussian = exp(-3 * (h / rng)^2),
+    wave = {
+      # Cardinal-sine (hole-effect / wave) model, eq (4.19), p. 148.
+      # The book writes THIS model in terms of alpha directly -- no
+      # factor of 3, no practical-range rescaling, unlike (4.10)/(4.11).
+      # R(0) = 1 by the limit sin(u)/u -> 1.
+      u <- h / rng
+      ifelse(u == 0, 1, sin(ifelse(u == 0, 1, u)) / ifelse(u == 0, 1, u))
+    },
     spherical = {
       u <- h / rng
       ifelse(h <= rng, 1 - 1.5 * u + 0.5 * u^3, 0)
