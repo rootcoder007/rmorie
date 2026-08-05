@@ -17,15 +17,7 @@ List with \code{W1_sob}, \code{quad_form}, \code{mass_gap},
 \code{n}.
 }
 \description{
-\code{W_1} linearised around a common reference measure is exactly the
-\code{H^{-1}} norm of the difference, and unlike \code{W_1} that norm
-is quadratic: it needs one linear solve, not a linear program, and it
-embeds into a Hilbert space so kernel methods apply directly. The price
-is that it is only a first-order approximation.
-}
-\details{
-Formula: \code{W_1(mu,nu) ~ ||mu - nu||_{H^{-1}} = sqrt((mu-nu)'
-(-Delta)^{-1} (mu-nu))} -- Peyre (2018), Section 2.
+
 }
 \references{
 Peyre, G. (2018). ESAIM: Control, Optimisation and Calculus

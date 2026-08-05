@@ -22,5 +22,5 @@ gCastle GES scoring option (ch. 13, p. 348, citing Chickering 2003);
 no BIC formula is printed there. The formula used here is the
 standard Gaussian one, stated so nothing is attributed to the book
 that the book does not say:
-score(G) = sum_j \link{-n/2 (log(2 pi s2_j) + 1)} - (log n / 2) k.
+score(G) = sum_j [-n/2 (log(2 pi s2_j) + 1)] - (log n / 2) k.
 }

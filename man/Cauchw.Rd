@@ -44,7 +44,7 @@ extreme of exact rejection.
 The default tuning constant c = 2.3849 is the value conventionally quoted for
 about 95 percent asymptotic efficiency at the Gaussian; the function does not
 assert it, and the accompanying anchor derives the efficiency
-\code{(E psi')^2 / E psi^2} by quadrature instead of trusting the number.
+\eqn{(E psi prime)^2 / E psi^2} by quadrature instead of trusting the number.
 }
 \examples{
 Cauchw(c(0, 1, 2.3849, 10))$weights  # 1, ..., exactly 0.5 at r = c, ...

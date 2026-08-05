@@ -3,7 +3,7 @@
 #'
 #' Callaway and Sant'Anna (2021), Difference-in-differences with multiple
 #' time periods, Journal of Econometrics 225(2), 200-230
-#' (arXiv:1803.09015 -- FETCHED), define ATT(g, t) = E[Y_t(g) - Y_t(0) |
+#' (arXiv:1803.09015 -- FETCHED), define ATT(g, t) = E\[Y_t(g) - Y_t(0) |
 #' G_g = 1] and the event-time aggregation over cohorts observed at each
 #' horizon; Sant'Anna and Zhao (2020), Journal of Econometrics 219(1),
 #' 101-122 (arXiv:1812.01723 -- FETCHED), equation (2.6) supplies the

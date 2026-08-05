@@ -21,7 +21,7 @@ list: estimate, loss, parts, weights, n, method.
 \description{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer, read
-as rendered pages.  Volume \link{Pages 477-532}, Chapter 12, Section 12.4,
+as rendered pages.  Volume [Pages 477-532], Chapter 12, Section 12.4,
 pp. 490-493: the multi-trait network is compiled with a per-trait loss and
 per-trait loss_weights, "we need to specify a loss function and metrics for
 each trait (outcome), that need to be in agreement with the type of
@@ -37,11 +37,11 @@ the value obtained by dividing the distance of the first trait by the
 distance of the second trait", which is what weights = NULL reproduces.
 }
 \details{
-Volume \link{Pages 427-476}, Chapter 11, Section 11.1.3, p. 428, fixes which
+Volume [Pages 427-476], Chapter 11, Section 11.1.3, p. 428, fixes which
 loss goes with which outcome: sum of squares for continuous, logistic
 (cross-entropy) for binary, categorical cross-entropy for categorical and
-ordinal, Poisson (or negative binomial) for counts.  Volume \link[=Pages
-379-425]{Pages 379-425}, Section 10.7.2, p. 401, writes the Poisson loss as
+ordinal, Poisson (or negative binomial) for counts.  Volume [Pages
+379-425], Section 10.7.2, p. 401, writes the Poisson loss as
 L = sum_ij (yhat_ij - y_ij log yhat_ij).
 }
 \examples{

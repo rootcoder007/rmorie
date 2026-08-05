@@ -212,7 +212,7 @@
 #' no BIC formula is printed there. The formula used here is the
 #' standard Gaussian one, stated so nothing is attributed to the book
 #' that the book does not say:
-#' score(G) = sum_j [-n/2 (log(2 pi s2_j) + 1)] - (log n / 2) k.
+#' score(G) = sum_j \[-n/2 (log(2 pi s2_j) + 1)\] - (log n / 2) k.
 #' @param data numeric matrix, one row per observation
 #' @param dag edge matrix or list(node = children)
 #' @param names column names matching the DAG node labels
@@ -553,8 +553,8 @@ morie_poschk <- function(treat, stratum, tol = 0) {
 #' The estimator is taken from the primary source. Robinson
 #' decomposition, eq. (1): "Y_i - m*(X_i) = {W_i - e*(X_i)} tau*(X_i) +
 #' eps_i"; R-learner objective, eq. (4): "tau_hat(.) = argmin_tau
-#' [L_hat_n{tau(.)} + Lambda_n{tau(.)}]" with "L_hat_n{tau(.)} = (1/n)
-#' sum_i [{Y_i - m_hat^(-q(i))(X_i)} - {W_i - e_hat^(-q(i))(X_i)}
+#' \[L_hat_n{tau(.)} + Lambda_n{tau(.)}\]" with "L_hat_n{tau(.)} = (1/n)
+#' sum_i \[{Y_i - m_hat^(-q(i))(X_i)} - {W_i - e_hat^(-q(i))(X_i)}
 #' tau(X_i)]^2" -- Nie, X. and Wager, S. (2021), Quasi-Oracle
 #' Estimation of Heterogeneous Treatment Effects, Biometrika
 #' 108(2):299-319 (arXiv:1712.04912). Computed with Lambda_n = 0 and

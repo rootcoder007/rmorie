@@ -19,18 +19,7 @@ List with \code{beta}, \code{se}, \code{tau2}, \code{R2},
 }
 \description{
 A random-effects pool reports heterogeneity; a meta-regression asks
-where it comes from. The residual \code{tau^2} is the part the
-moderators fail to explain, and it belongs in the weights, otherwise
-the standard errors are those of a fixed-effect fit and are too small.
-The moderators are study-level, so this is ecological regression: a
-covariate that predicts the effect across studies says nothing about
-the same covariate within a study.
-}
-\details{
-Formula: \code{y_i = x_i' beta + u_i + e_i}, \code{Var(u) = tau^2},
-\code{Var(e_i) = v_i}, weights \code{1/(v_i + tau^2)}. \code{tau^2} is
-the moment estimator \code{max(0, (Q_E - (n - p)) / (tr W -
-tr((X'WX)^{-1} X'W^2 X)))} -- van Houwelingen, Arends and Stijnen
+where it comes from. The residual \eqn{au^2} is the part the
 (2002) Section 4.
 }
 \references{

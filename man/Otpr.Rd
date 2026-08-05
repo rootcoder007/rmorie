@@ -27,7 +27,7 @@ cost with a zero-price dummy row and column.
 }
 \details{
 Formula: \code{min_T <T,C>} subject to \code{T 1 <= a},
-\code{T' 1 <= b}, \code{sum T = m}.
+\eqn{T prime 1 <= b}, \code{sum T = m}.
 }
 \references{
 Caffarelli, L. A. and McCann, R. J. (2010). Annals of

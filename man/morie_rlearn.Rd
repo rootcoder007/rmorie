@@ -26,9 +26,9 @@ covers the S-, T-, X- and DR-learners but has no R-learner section.
 The estimator is taken from the primary source. Robinson
 decomposition, eq. (1): "Y_i - m*(X_i) = {W_i - e*(X_i)} tau*(X_i) +
 eps_i"; R-learner objective, eq. (4): "tau_hat(.) = argmin_tau
-\link{L_hat_n{tau(.)} + Lambda_n{tau(.)}}" with "L_hat_n{tau(.)} = (1/n)
-sum_i \link[={Y_i - m_hat^(-q(i))(X_i)} - {W_i - e_hat^(-q(i))(X_i)}
-tau(X_i)]{{Y_i - m_hat^(-q(i))(X_i)} - {W_i - e_hat^(-q(i))(X_i)} tau(X_i)}^2" -- Nie, X. and Wager, S. (2021), Quasi-Oracle
+[L_hat_n{tau(.)} + Lambda_n{tau(.)}]" with "L_hat_n{tau(.)} = (1/n)
+sum_i [{Y_i - m_hat^(-q(i))(X_i)} - {W_i - e_hat^(-q(i))(X_i)}
+tau(X_i)]^2" -- Nie, X. and Wager, S. (2021), Quasi-Oracle
 Estimation of Heterogeneous Treatment Effects, Biometrika
 108(2):299-319 (arXiv:1712.04912). Computed with Lambda_n = 0 and
 the cross-fitted nuisances supplied BY THE CALLER, so the fold

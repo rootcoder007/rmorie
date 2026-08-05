@@ -32,7 +32,7 @@ detect a problem.
 \details{
 The estimate is the OLS coefficient on \code{D} in
 \code{y_neg = b0 + b_D D + X gamma + e} with the homoscedastic
-standard error \code{sqrt(s^2 (X'X)^-1_DD)}, \code{s^2 = RSS/(n - p)},
+standard error \eqn{sqrt(s^2 (X primeX)^-1_DD)}, \code{s^2 = RSS/(n - p)},
 and the test is the Wald z-test of \code{b_D = 0}.
 }
 \references{

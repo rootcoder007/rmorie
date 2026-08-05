@@ -16,7 +16,7 @@ argument of the pasted stub was called X; it is the CATE prediction
 vector the best linear predictor is calibrated against, not a
 covariate matrix.}
 
-\item{y_hat}{Optional out-of-fold predictions of E\link{Y|X}; defaults to
+\item{y_hat}{Optional out-of-fold predictions of E[Y|X]; defaults to
 \code{mean(y)}.}
 
 \item{w_hat}{Optional out-of-fold propensity scores; defaults to
@@ -46,7 +46,7 @@ estimates are biased or noise.
 
 HC3 is written out rather than delegated, since \pkg{sandwich} is not
 a dependency here:
-\code{V = (X'X)^-1 [sum_i x_i x_i' e_i^2/(1 - h_ii)^2] (X'X)^-1},
+\eqn{V = (X primeX)^-1 \[sum_i x_i x_i prime e_i^2/(1 - h_ii)^2\] (X primeX)^-1},
 MacKinnon and White (1985), the grf default.
 }
 \examples{

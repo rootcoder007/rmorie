@@ -28,7 +28,7 @@ it at, so both are returned.
 }
 \details{
 Formula: \code{delta(a) = b1 (th2 + th3 a)},
-\code{zeta(a) = th1 + th3 (b0 + b1 a + b2'c)}.
+\eqn{zeta(a) = th1 + th3 (b0 + b1 a + b2 primec)}.
 }
 \references{
 Imai, K., Keele, L. & Yamamoto, T. (2010). Statistical
