@@ -123,3 +123,55 @@
   s2 <- v + ifelse(seq_along(y) <= K, tau2, 0)
   sum(-0.5 * log(2 * pi * s2) - 0.5 * y * y / s2)
 }
+
+# Marsaglia & Tsang (2000) squeeze-method gamma variate, mirroring
+# _array_core._SplitMix64._gamma_variate: shape < 1 is boosted via
+# Gamma(a+1) U^(1/a), and each rejection trial consumes one normal
+# (two uniforms) plus one uniform, so the stream position matches the
+# Python arm trial for trial.
+#
+# NOTE: _array_core defines gamma/beta TWICE inside _SplitMix64; the
+# earlier pair (a non-squeeze Marsaglia-Tsang) is dead code shadowed by
+# the later pair.  This mirrors the LIVE one.
+#' @keywords internal
+#' @noRd
+.ghc_gamma1 <- function(e, shape, scale = 1) {
+  a <- as.numeric(shape)
+  if (a <= 0) stop("shape must be positive")
+  if (a < 1) {
+    u <- .ghc_unif(e, 1L)
+    while (u <= 0) u <- .ghc_unif(e, 1L)
+    return(.ghc_gamma1(e, a + 1) * u^(1 / a) * scale)
+  }
+  d <- a - 1 / 3
+  cc <- 1 / sqrt(9 * d)
+  repeat {
+    x <- .ghc_norm(e, 1L)
+    v <- (1 + cc * x)^3
+    if (v <= 0) next
+    u <- .ghc_unif(e, 1L)
+    if (u < 1 - 0.0331 * x^4) return(d * v * scale)
+    if (u > 0 && log(u) < 0.5 * x * x + d * (1 - v + log(v)))
+      return(d * v * scale)
+  }
+}
+
+#' @keywords internal
+#' @noRd
+.ghc_beta1 <- function(e, a, b) {
+  x <- .ghc_gamma1(e, a)
+  y <- .ghc_gamma1(e, b)
+  x / (x + y)
+}
+
+# Moore-Penrose pseudo-inverse with numpy's default cutoff
+# (rcond = 1e-15 times the largest singular value).
+#' @keywords internal
+#' @noRd
+.ghc_pinv <- function(a, rcond = 1e-15) {
+  a <- as.matrix(a)
+  s <- svd(a)
+  cutoff <- rcond * max(c(s$d, 0))
+  inv <- ifelse(s$d > cutoff, 1 / s$d, 0)
+  s$v %*% (inv * t(s$u))
+}
