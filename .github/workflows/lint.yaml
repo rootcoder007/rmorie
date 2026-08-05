@@ -35,6 +35,21 @@ jobs:
             https://rootcoder007.r-universe.dev
             https://stan-dev.r-universe.dev
 
+      # pak workers run vanilla R and ignore Rprofile repos; point pak at
+      # the P3M mirror and pre-install the r-universe-only dependencies.
+      - name: Point pak at the P3M binary mirror
+        shell: bash
+        run: |
+          if [ -n "${RSPM:-}" ]; then
+            echo "PKG_CRAN_MIRROR=${RSPM}" >> "$GITHUB_ENV"
+          fi
+      - name: System libraries for the bricklayer C++ core
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libcurl4-openssl-dev libssl-dev libxml2-dev
+      - name: Pre-install r-universe-only dependencies
+        run: install.packages(c("rmoriebricklayer", "rmoriedata", "cmdstanr"), repos = c("https://rootcoder007.r-universe.dev", "https://stan-dev.r-universe.dev", "https://cloud.r-project.org"))
+        shell: Rscript {0}
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::lintr, local::.
@@ -63,6 +78,21 @@ jobs:
             https://rootcoder007.r-universe.dev
             https://stan-dev.r-universe.dev
 
+      # pak workers run vanilla R and ignore Rprofile repos; point pak at
+      # the P3M mirror and pre-install the r-universe-only dependencies.
+      - name: Point pak at the P3M binary mirror
+        shell: bash
+        run: |
+          if [ -n "${RSPM:-}" ]; then
+            echo "PKG_CRAN_MIRROR=${RSPM}" >> "$GITHUB_ENV"
+          fi
+      - name: System libraries for the bricklayer C++ core
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libcurl4-openssl-dev libssl-dev libxml2-dev
+      - name: Pre-install r-universe-only dependencies
+        run: install.packages(c("rmoriebricklayer", "rmoriedata", "cmdstanr"), repos = c("https://rootcoder007.r-universe.dev", "https://stan-dev.r-universe.dev", "https://cloud.r-project.org"))
+        shell: Rscript {0}
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: local::.
