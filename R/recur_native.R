@@ -8,7 +8,8 @@
 # ties, Newton on the stratified counting-process partial likelihood.
 
 .morie_cox_counting <- function(start, stop, event, X, strata = NULL,
-                                max_iter = 50L, tol = 1e-9) {
+                                max_iter = 50L, tol = 1e-9,
+                                offset = NULL) {
   s <- as.numeric(start); t <- as.numeric(stop); e <- as.numeric(event)
   Xm <- as.matrix(X); storage.mode(Xm) <- "double"
   if (nrow(Xm) != length(t)) Xm <- t(Xm)
@@ -23,12 +24,18 @@
   if (length(strata) != n) {
     stop("strata must match the number of rows", call. = FALSE)
   }
+  if (is.null(offset)) offs <- rep(0, n) else {
+    offs <- as.numeric(offset)
+    if (length(offs) != n) {
+      stop("offset must match the number of rows", call. = FALSE)
+    }
+  }
   n_events <- sum(e)
   if (n_events == 0) stop("no events in the data", call. = FALSE)
   beta <- rep(0, p)
   loglik <- 0; info <- matrix(0, p, p); it <- 0L
   for (it in seq_len(max_iter)) {
-    eta <- pmax(pmin(as.vector(Xm %*% beta), 500), -500)
+    eta <- pmax(pmin(as.vector(Xm %*% beta) + offs, 500), -500)
     w <- exp(eta)
     U <- rep(0, p); info <- matrix(0, p, p); loglik <- 0
     for (g in unique(strata)) {
