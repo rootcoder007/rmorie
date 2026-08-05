@@ -167,3 +167,111 @@
        var_beta = sigma2 * XtXi,
        se_beta = sqrt(sigma2 * diag(XtXi)))
 }
+
+# --- chapter 5: Kronecker products and the multi-trait model, eq (5.5) -----
+.gpkron <- function(A, B) kronecker(.gpmat(A), .gpmat(B))
+
+.gpmultitrait <- function(Y, Z, G, Sigma_T, R_T, X = NULL) {
+  Ym <- .gpmat(Y); J <- nrow(Ym); nT <- ncol(Ym)
+  y <- as.numeric(t(Ym))                      # stacked line-by-line
+  I_nT <- diag(nT)
+  Xm <- .gpkron(matrix(1, J, 1), I_nT)
+  if (!is.null(X)) Xm <- cbind(Xm, .gpmat(X))
+  Zm <- .gpkron(Z, I_nT)
+  Sigma <- .gpkron(G, Sigma_T)
+  R <- .gpkron(diag(J), R_T)
+  bb <- .gpblueblup(Xm, Zm, y, Sigma, R)
+  b <- bb$u
+  list(mu = bb$beta[seq_len(nT)], beta = bb$beta, b = b,
+       b_by_line = lapply(seq_len(length(b) %/% nT),
+                          function(i) b[((i - 1L) * nT + 1L):(i * nT)]))
+}
+
+# --- chapter 7: multinomial logistic model, eqs (7.6)-(7.10) ---------------
+.gpmnprobs <- function(X, beta0, beta, baseline_last = TRUE) {
+  Xm <- .gpmat(X); b0 <- .gpflat(beta0); B <- .gpmat(beta)
+  if (baseline_last) { b0 <- c(b0, 0); B <- rbind(B, rep(0, ncol(Xm))) }
+  t(apply(Xm, 1L, function(row) {
+    eta <- b0 + as.numeric(B %*% row)
+    ex <- exp(eta - max(eta))
+    ex / sum(ex)
+  }))
+}
+
+.gpmnloglik <- function(X, y, beta0, beta, baseline_last = TRUE) {
+  P <- .gpmnprobs(X, beta0, beta, baseline_last)
+  ys <- as.integer(.gpflat(y))
+  sum(log(pmax(P[cbind(seq_along(ys), ys + 1L)], 1e-300)))
+}
+
+.gppenmnloglik <- function(X, y, beta0, beta, lam, penalty = "ridge",
+                           baseline_last = TRUE) {
+  ll <- .gpmnloglik(X, y, beta0, beta, baseline_last)
+  B <- .gpmat(beta)
+  pen <- if (identical(penalty, "lasso")) sum(abs(B)) else sum(B^2)
+  list(loglik = ll, penalty = as.numeric(lam) * pen,
+       penalized_loglik = ll - as.numeric(lam) * pen)
+}
+
+# --- chapter 10: ANN loss, eq (10.5) --------------------------------------
+.gpannsse <- function(y_hat, y) 0.5 * sum((.gpmat(y_hat) - .gpmat(y))^2)
+
+# --- chapter 3: expected prediction error, p.80 ---------------------------
+.gpepe <- function(sigma2, x_star, eigenvalues) {
+  xs <- .gpflat(x_star); lam <- .gpflat(eigenvalues)
+  if (any(lam <= 0)) stop("eigenvalues must be positive")
+  as.numeric(sigma2) * (1 + sum(xs^2 / lam))
+}
+
+# --- chapter 15: zero-altered Poisson forest, eqs (15.1)-(15.4) -----------
+.gpzaplink <- function(mu_pred, theta_pred)
+  list(mu = exp(min(as.numeric(mu_pred), 700)),
+       theta = 1 / (1 + exp(-as.numeric(theta_pred))))
+
+# Book erratum: eq. (15.3) as printed drops the mu from the numerator. The
+# ZAP pmf printed above it, the Var(Y) line below it, and the p.652
+# estimating equation for mu all carry the mu, so the internally consistent
+# mean (1 - theta) mu / (1 - exp(-mu)) is what is implemented.
+.gpzappredict <- function(theta_hat, mu_hat) {
+  th <- as.numeric(theta_hat); mu <- as.numeric(mu_hat)
+  denom <- 1 - exp(-mu)
+  if (denom <= 0) 0 else (1 - th) * mu / denom
+}
+
+.gpzapcpredict <- function(theta_hat, mu_hat, threshold = 0.5)
+  if (as.numeric(theta_hat) > as.numeric(threshold)) 0 else as.numeric(mu_hat)
+
+.gpztploglik <- function(y_positive, mu) {
+  ys <- .gpflat(y_positive); n <- length(ys); mu <- as.numeric(mu)
+  if (mu <= 0 || n == 0L) return(-Inf)
+  -n * log(1 - exp(-mu)) + log(mu) * sum(ys) - n * mu - sum(lgamma(ys + 1))
+}
+
+.gpztpmle <- function(y_positive, tol = 1e-12, max_iter = 200) {
+  ys <- .gpflat(y_positive); n <- length(ys)
+  if (n == 0L) stop("need at least one positive observation")
+  target <- sum(ys) / n
+  if (target <= 1) return(0)
+  lo <- 1e-9; hi <- 1
+  while (hi / (1 - exp(-hi)) < target) { hi <- hi * 2; if (hi > 1e6) break }
+  for (k in seq_len(as.integer(max_iter))) {
+    mid <- 0.5 * (lo + hi)
+    v <- mid / (1 - exp(-mid))
+    if (abs(v - target) < tol) return(mid)
+    if (v < target) lo <- mid else hi <- mid
+  }
+  0.5 * (lo + hi)
+}
+
+.gpzapbestsplit <- function(y, x, candidates = NULL) {
+  ys <- .gpflat(y); xs <- .gpflat(x)
+  vals <- if (is.null(candidates)) sort(unique(xs)) else .gpflat(candidates)
+  bt <- NULL; bl <- -Inf
+  for (v in vals) {
+    L <- ys[xs <= v & ys > 0]; R <- ys[xs > v & ys > 0]
+    if (!length(L) || !length(R)) next
+    ll <- .gpztploglik(L, .gpztpmle(L)) + .gpztploglik(R, .gpztpmle(R))
+    if (is.null(bt) || ll > bl) { bt <- v; bl <- ll }
+  }
+  list(threshold = bt, loglik = if (is.null(bt)) -Inf else bl)
+}
