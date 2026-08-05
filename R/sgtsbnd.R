@@ -1,0 +1,35 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+#' Kesten-Stigum detectability threshold for the symmetric SBM
+#'
+#' \code{a} and \code{b} are the rescaled within- and between-group
+#' degrees \code{c_in} and \code{c_out}, so the mean degree is
+#' \code{c = (a + (k - 1) b) / k}.
+#'
+#' Formula: detectable iff \code{|a - b| > k sqrt(c)}, equivalently
+#' \code{(a - b)^2 > k (a + (k - 1) b)}. The placeholder this replaces
+#' carried an extra \code{1/(k-1)}, which is correct only at k = 2;
+#' equation (44) on page 14 of arXiv:1109.3041 was read from a rendered
+#' page image.
+#'
+#' @param a Rescaled within-group degree, non-negative.
+#' @param b Rescaled between-group degree, non-negative.
+#' @param k Number of equally sized groups, at least 2.
+#' @return List with \code{detectable}, \code{estimate}, \code{margin},
+#'   \code{c}, \code{threshold}, \code{k}.
+#' @references Decelle, A., Krzakala, F., Moore, C. & Zdeborova, L.
+#'   (2011). Asymptotic analysis of the stochastic block model for
+#'   modular networks and its algorithmic applications. Physical Review
+#'   E 84, 066106. \doi{10.1103/PhysRevE.84.066106}; equation (44).
+#' @export
+Sgtsbnd <- function(a, b, k = 2) {
+  a <- as.numeric(a); b <- as.numeric(b); k <- as.integer(k)
+  if (k < 2L) stop("Sgtsbnd: k must be at least 2")
+  if (a < 0 || b < 0) stop("Sgtsbnd: degrees must be non-negative")
+  cc <- (a + (k - 1) * b) / k
+  thr <- k * sqrt(cc)
+  margin <- abs(a - b) - thr
+  det <- if (margin > 0) 1 else 0
+  .t1_result(detectable = det, estimate = det, margin = margin, c = cc,
+             threshold = thr, k = k,
+             method = "Kesten-Stigum SBM detectability, |a-b| > k sqrt(c)")
+}
