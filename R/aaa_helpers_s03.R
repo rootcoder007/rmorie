@@ -66,7 +66,21 @@
       if (j > 1L) for (p in seq_len(j - 1L)) s <- s + L[i, p] * L[j, p]
       if (i == j) {
         d <- A[i, i] - s
-        L[i, j] <- if (d > 0) sqrt(d) else 0
+        if (!(d > 0)) {
+          # A Cholesky factor exists only for a positive-definite matrix.
+          # Returning 0 here used to make the solve hand back the ZERO
+          # VECTOR, which a Newton step on a log-likelihood Hessian
+          # (negative definite) accepted silently: beta stayed at 0 and
+          # three-way parity passed at 1e-9 because both arms did the same
+          # thing. Solve against -H, or ridge the matrix into positive
+          # definiteness, but do not accept a wrong answer.
+          stop(sprintf(paste("chol: matrix is not positive definite",
+                             "(pivot %d is %.17g); a Cholesky factor does",
+                             "not exist. If this is a log-likelihood",
+                             "Hessian, solve against -H."), i, d),
+               call. = FALSE)
+        }
+        L[i, j] <- sqrt(d)
       } else {
         L[i, j] <- if (L[j, j] != 0) (A[i, j] - s) / L[j, j] else 0
       }
