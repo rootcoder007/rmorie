@@ -47,5 +47,11 @@
   lo <- if (is.finite(b[1])) max(b[1], -1e6) else -1e6
   hi <- if (is.finite(b[2])) min(b[2], 1e6) else 1e6
   eps <- pad * max(hi - lo, 1e-12)
-  c(lo + eps, hi - eps)
+  # Snap the endpoints inward onto a 1e-8 lattice. The bound comes from an
+  # eigen-decomposition, and the Python arms Jacobi solver and Rs LAPACK
+  # agree only to about 1e-12 relative -- enough for an optimiser (or a
+  # deterministic grid) started from these endpoints to land on a visibly
+  # different point when the likelihood is flat. Snapping makes the
+  # interval bit-identical across the two arms.
+  c(ceiling((lo + eps) * 1e8) / 1e8, floor((hi - eps) * 1e8) / 1e8)
 }

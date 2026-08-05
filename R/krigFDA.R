@@ -24,7 +24,7 @@
 # Cressie (1993) secs. 3.4.2 and 3.4.5; Schabenberger & Gotway (2005) ch. 5.
 
 #' @noRd
-morie_kriging <- function(coords, values, new_coords, model = "exponential",
+KrigFDA <- function(coords, values, new_coords, model = "exponential",
                           nugget = 0, sill = 1, range_ = 1, trend_order = 1) {
   z <- as.numeric(values)
   n <- length(z)
@@ -100,4 +100,3 @@ morie_kriging <- function(coords, values, new_coords, model = "exponential",
 }
 
 #' @noRd
-KrigFDA <- morie_kriging

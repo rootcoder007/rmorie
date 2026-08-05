@@ -29,7 +29,10 @@ all J lines of environment 1, then all J lines of environment 2, and so on.}
 
 \item{n_iter}{maximum number of conditional-mean sweeps.}
 
-\item{X}{optional (I*J)-by-p fixed-effect design.}
+\item{X}{optional (I*J)-by-p fixed-effect design.  Do NOT include an
+intercept column: mu is already the intercept, and an X that carries one
+leaves beta unidentified.  The solve is ridged, so both arms still agree on
+a value, but that value means nothing.}
 
 \item{v_T, S_T, v_E, S_E, v_R, S_R}{inverse-Wishart hyperparameters of steps 5,
 6 and 7.}
