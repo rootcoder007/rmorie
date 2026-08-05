@@ -275,3 +275,47 @@
   }
   list(threshold = bt, loglik = if (is.null(bt)) -Inf else bl)
 }
+
+# --- chapter 7: ordinal latent-scale predictors, eqs (7.3)-(7.5) ----------
+.gpordlatent <- function(n, X_E = NULL, X = NULL, X_EM = NULL,
+                         Z_L = NULL, L_g = NULL) {
+  blocks <- list(); nm <- character(0)
+  add <- function(name, M) { blocks[[length(blocks) + 1L]] <<- .gpmat(M); nm <<- c(nm, name) }
+  if (!is.null(X_E)) add("environments", X_E)
+  if (!is.null(X)) add("markers", X)
+  if (!is.null(X_EM)) add("env_x_marker", X_EM)
+  if (!is.null(Z_L)) add("genetic",
+    if (!is.null(L_g)) .gpmat(Z_L) %*% .gpmat(L_g) else .gpmat(Z_L))
+  if (!length(blocks)) stop("the predictor needs at least one block")
+  design <- do.call(cbind, lapply(blocks, function(M) M[seq_len(n), , drop = FALSE]))
+  w <- as.list(vapply(blocks, ncol, 1L)); names(w) <- nm
+  list(design = design, widths = w, n_columns = ncol(design))
+}
+
+# --- chapter 8: reproducing kernel Hilbert space, eqs (8.1)-(8.3) ---------
+.gprkhsnorm <- function(beta, K) {
+  b <- .gpflat(beta); as.numeric(t(b) %*% .gpmat(K) %*% b)
+}
+
+.gprkhspredict <- function(K_new, beta, eta0 = 0)
+  as.numeric(eta0) + as.numeric(.gpmat(K_new) %*% .gpflat(beta))
+
+.gprkhsfitsq <- function(K, y, lam = 1) {
+  Km <- .gpmat(K); ys <- .gpflat(y); n <- length(ys)
+  A <- matrix(0, n + 1L, n + 1L); rhs <- numeric(n + 1L)
+  colsum <- colSums(Km)
+  A[1L, 1L] <- 1
+  A[1L, 2L:(n + 1L)] <- colsum / n
+  rhs[1L] <- sum(ys) / n
+  A[2L:(n + 1L), 1L] <- colsum * 2 / n
+  A[2L:(n + 1L), 2L:(n + 1L)] <- 2 * (t(Km) %*% Km) / n + as.numeric(lam) * Km
+  rhs[2L:(n + 1L)] <- 2 * as.numeric(t(Km) %*% ys) / n
+  sol <- .gpsolve(A, rhs)
+  eta0 <- sol[1L]; beta <- sol[-1L]
+  fitted <- .gprkhspredict(Km, beta, eta0)
+  resid <- ys - fitted
+  loss <- sum(resid^2) / n
+  pen <- 0.5 * as.numeric(lam) * .gprkhsnorm(beta, Km)
+  list(eta0 = eta0, beta = beta, fitted = fitted, residuals = resid,
+       loss = loss, penalty = pen, objective = loss + pen)
+}
