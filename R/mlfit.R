@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Gaussian ML log-likelihood of a linear mixed model at a given V
 #'
-#' \code{l(beta, V; y) = -1/2 [n log(2 pi) + log|V| +
-#' (y - X beta)' V^-1 (y - X beta)]} with \code{beta} profiled out at its
-#' GLS value \code{(X' V^-1 X)^-1 X' V^-1 y}, which is the maximiser for
+#' \eqn{l(beta, V; y) = -1/2 \[n log(2 pi) + log|V| +
+# prime (y - X beta) prime V^-1 (y - X beta)]} with \code{beta} profiled out at its
+#' GLS value \eqn{(X prime V^-1 X)^-1 X prime V^-1 y}, which is the maximiser for
 #' any fixed \code{V}; what is returned is therefore the profile
 #' log-likelihood in \code{V}. \code{V} must be positive definite -- an
 #' inadmissible set of variance components is refused, not returned.
@@ -14,7 +14,7 @@
 #'
 #' @param y Response, length n.
 #' @param X Fixed-effects design, n by p.
-#' @param V Marginal variance \code{Z D Z' + R}, n by n.
+#' @param V Marginal variance \eqn{Z D Z prime + R}, n by n.
 #' @return List with estimate (log-likelihood), loglik, neg2loglik,
 #'   logdet_V, quadratic_form, aic, bic, n, p.
 #' @references Hartley and Rao (1967), Biometrika 54(1-2), 93-108,

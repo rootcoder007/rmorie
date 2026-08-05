@@ -29,8 +29,8 @@ is taken -- the check that the bookkeeping is right.
 }
 \details{
 Formula: Yhat = sum_l N_l ybar_l / sum_l N_l;
-V = (M/N)^2 \link[= ((M-m)/M)/(m(m-1)) * sum (N_l ybar_l - N_l Yhat)^2
-    + (1/(mM)) * sum N_l^2 ((N_l-n_l)/N_l) s_l^2 / n_l ]{ ((M-m)/M)/(m(m-1)) * sum (N_l ybar_l - N_l Yhat)^2 + (1/(mM)) * sum N_l^2 ((N_l-n_l)/N_l) s_l^2 / n_l }
+V = (M/N)^2 [ ((M-m)/M)/(m(m-1)) * sum (N_l ybar_l - N_l Yhat)^2
++ (1/(mM)) * sum N_l^2 ((N_l-n_l)/N_l) s_l^2 / n_l ]
 }
 \references{
 Cochran (1977), Sampling Techniques, 3rd edition, Chapter

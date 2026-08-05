@@ -33,7 +33,7 @@ List with \code{estimate} (predictions), \code{predictions},
 }
 \description{
 Solves the ordinary-kriging system
-\code{[[Gamma, 1], [1', 0]] [lambda; mu] = [gamma_0; 1]} at each
+\eqn{\[\[Gamma, 1\], \[1 prime, 0\]\] \[lambda; mu\] = \[gamma_0; 1\]} at each
 prediction location, where \code{Gamma_ij} is the semivariance between
 observed locations and \code{gamma_0} the semivariance between the
 observed locations and the target.  The unbiasedness constraint

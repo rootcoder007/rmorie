@@ -4,7 +4,7 @@
 #' NOT IN THE BOOK.  Montesinos Lopez, Montesinos Lopez and Crossa (2022),
 #' Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 #' Springer, was searched in full -- all seventeen page-range volumes and the
-#' index, [Pages 683-691].  Chapter 8, volume [Pages 251-336], is the kernel
+#' index, \[Pages 683-691\].  Chapter 8, volume \[Pages 251-336\], is the kernel
 #' chapter and builds every kernel it uses as an explicit n-by-n matrix; it
 #' never approximates one by a feature map, and "random Fourier" and "Bochner"
 #' do not occur anywhere.
@@ -15,10 +15,10 @@
 #' pp. 1177-1184.  It is a NIPS proceedings paper and carries no DOI.
 #'
 #' CITATION CARE.  That paper gives exactly ONE feature map, its equation for
-#' z(x) in Algorithm 1: z(x) = sqrt(2/D) [cos(w_1^T x + b_1), ...,
+#' z(x) in Algorithm 1: z(x) = sqrt(2/D) \[cos(w_1^T x + b_1), ...,
 #' cos(w_D^T x + b_D)]^T, with w_1, ..., w_D drawn from p(w), the Fourier
 #' transform of the kernel, and b_1, ..., b_D drawn from Uniform(0, 2 pi).  The
-#' 2D-dimensional sin/cos map -- [sin(w^T x), cos(w^T x)] stacked without a
+#' 2D-dimensional sin/cos map -- \[sin(w^T x), cos(w^T x)\] stacked without a
 #' phase offset -- that is often attributed to this paper is NOT in it, and is
 #' not implemented here.
 #'
@@ -36,7 +36,7 @@
 #' for w and scaled to (0, 2 pi) for b.
 #'
 #' The separate bases are load-bearing, not cosmetic.  Writing
-#' cos(A)cos(B) = [cos(A - B) + cos(A + B)]/2 gives
+#' cos(A)cos(B) = \[cos(A - B) + cos(A + B)\]/2 gives
 #' z(x)^T z(y) = (1/D) sum_j cos(w_j^T (x - y))
 #'             + (1/D) sum_j cos(w_j^T (x + y) + 2 b_j),
 #' and the estimator is only unbiased because the SECOND sum vanishes, which

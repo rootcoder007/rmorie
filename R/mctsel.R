@@ -2,7 +2,7 @@
 #' MCTS selection: the PUCT and UCT action rules
 #'
 #' Schrittwieser et al. (2020), arXiv:1911.08265 (FETCHED), appendix B,
-#' prints the selection rule in full: a = argmax_a [ Q(s,a) + P(s,a)
+#' prints the selection rule in full: a = argmax_a \[ Q(s,a) + P(s,a)
 #' sqrt(sum_b N(s,b)) / (1 + N(s,a)) (c1 + log((sum_b N(s,b) + c2 + 1) /
 #' c2)) ], with c1 = 1.25 and c2 = 19652.  The AlphaGo Zero / AlphaZero
 #' rule (Silver et al., Nature 550, 354-359; arXiv:1712.01815 -- FETCHED,

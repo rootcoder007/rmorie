@@ -43,8 +43,8 @@ Sutton, Precup and Singh (1999), Between MDPs and semi-MDPs, Artificial
 Intelligence 112(1-2), 181-211.  An option is omega = (I, pi_omega,
 beta_omega) -- initiation set, internal policy, termination condition
 -- and, because an option occupies k steps, the backup is the SMDP one:
-Q(s, omega) <- Q(s, omega) + alpha \link[=r + gamma^k max_omega' Q(s',
-omega') - Q(s, omega)]{r + gamma^k max_omega' Q(s', omega') - Q(s, omega)} with r = R_1 + gamma R_2 + ... + gamma^(k-1)
+Q(s, omega) <- Q(s, omega) + alpha [r + gamma^k max_omega' Q(s',
+omega') - Q(s, omega)] with r = R_1 + gamma R_2 + ... + gamma^(k-1)
 R_k.  The gamma^k in place of gamma is the whole content of the
 semi-Markov generalisation.  The AIJ paper is paywalled; the definition
 and the backup are quoted in their standard published form and are

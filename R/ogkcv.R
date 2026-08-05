@@ -12,8 +12,8 @@
 #' (1) \code{y_j = x_j / sigma_j} with \code{sigma_j} the MAD;
 #' (2) \code{U_jk} by the GK identity on the standardized columns,
 #'     \code{U_jj = 1};
-#' (3) \code{U = E Lambda E'}, \code{z = E' y};
-#' (4) \code{Gamma = diag(sigma(z_l)^2)}, \code{Sigma = A Gamma A'}
+#' (3) \eqn{U = E Lambda E prime}, \eqn{z = E prime y};
+#' (4) \code{Gamma = diag(sigma(z_l)^2)}, \eqn{Sigma = A Gamma A prime}
 #'     with \code{A = diag(sigma) E}, positive semi-definite by
 #'     construction;
 #' (5) location \code{mu = A m(z)}, \code{m} the coordinatewise median.
@@ -24,7 +24,7 @@
 #' @param y Either the full data matrix (n by p) or, when \code{X} is
 #'   given, its first column.
 #' @param X Remaining columns; when supplied the data matrix is
-#'   \code{[y, X]} and the robust regression coefficient
+#'   \eqn{\[y, X\]} and the robust regression coefficient
 #'   \code{Sigma_xx^-1 Sigma_xy} is returned as well.
 #' @return List with \code{sigma}, \code{location}, \code{scales},
 #'   \code{estimate}, \code{eigenvalues}, \code{det}, \code{beta}

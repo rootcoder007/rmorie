@@ -21,8 +21,8 @@ q_ik proportional to 1 + ((i+k) mod K) and p_kj = (2 + ((k J + j) mod
 List with Q, P, loglik, loglik0, I, J, K, steps.
 }
 \description{
-L(Q,P) = sum_ij \link[= g_ij log(sum_k q_ik p_kj)
-                + (2-g_ij) log(sum_k q_ik (1-p_kj)) ]{ g_ij log(sum_k q_ik p_kj) + (2-g_ij) log(sum_k q_ik (1-p_kj)) }, maximised by the
+L(Q,P) = sum_ij [ g_ij log(sum_k q_ik p_kj)
++ (2-g_ij) log(sum_k q_ik (1-p_kj)) ], maximised by the
 EM updates on allele responsibilities a_ijk and b_ijk.
 }
 \references{

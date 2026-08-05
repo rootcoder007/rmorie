@@ -25,7 +25,7 @@ polytope, so at most \code{n + m - 1} of its entries are non-zero.
 }
 \details{
 Formula: \code{min_T <T, C>} subject to \code{T 1 = a},
-\code{T' 1 = b}, \code{T >= 0} -- Kantorovich's problem, eq. (2.11) of
+\eqn{T prime 1 = b}, \code{T >= 0} -- Kantorovich's problem, eq. (2.11) of
 Peyre and Cuturi (2019). Solved by the transportation simplex:
 north-west-corner start, potentials from the basis tree, MODI pivoting.
 }

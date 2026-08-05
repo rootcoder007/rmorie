@@ -22,14 +22,7 @@ List with \code{g}, \code{r}, \code{K}, \code{h},
 \code{estimate}, \code{lambda_hat}, \code{n}.
 }
 \description{
-Formula: \code{g(r) = K'(r) / (2 pi r)}. \code{K} is estimated with
-the reduced-sample (border) correction and differentiated by a
-central difference of half-width \code{h},
-\code{g_hat(r) = (K_hat(r + h) - K_hat(r - h)) / (2 h) / (2 pi r)},
-which is deterministic -- no kernel smoothing and no data-dependent
-bandwidth rule. Under complete spatial randomness \code{K(r) = pi
-r^2} so \code{g(r) = 1} at every radius; above one means clustering
-at that scale and below one regularity.
+
 }
 \references{
 Stoyan, D. & Stoyan, H. (1994). Fractals, Random Shapes

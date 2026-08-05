@@ -23,7 +23,7 @@ finds it. The diagonal factors are returned as well because they are
 what the transport modules actually consume.
 }
 \details{
-Formula: \code{K <- diag(1/(K 1)) K}, \code{K <- K diag(1/(K' 1))},
+Formula: \code{K <- diag(1/(K 1)) K}, \eqn{K <- K diag(1/(K prime 1))},
 repeated -- Sinkhorn and Knopp (1967), Theorem 1.
 }
 \references{

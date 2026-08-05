@@ -8,8 +8,8 @@
 #'
 #' Determinism: fixed sweeps, ordinary least squares start, no tolerance.
 #'
-#' Formula: iterate \code{beta = argmin sum w_i (y_i - x_i'beta)^2} with
-#' \code{w_i = [1 - (r_i/(c s))^2]^2} inside and 0 outside.
+#' Formula: iterate \eqn{beta = argmin sum w_i (y_i - x_i primebeta)^2} with
+#' \eqn{w_i = \[1 - (r_i/(c s))^2\]^2} inside and 0 outside.
 #'
 #' @param X Design matrix; supply your own intercept column.
 #' @param y Response.

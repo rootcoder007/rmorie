@@ -39,8 +39,8 @@ and reacting, SIGART Bulletin 2(4), 160-163: the same experience is
 used twice, once to learn a model and once to plan with it.  The model
 is the maximum-likelihood tabular one, phat(s'|s,a) = N(s,a,s')/N(s,a)
 and rhat(s,a) = sum of rewards / N(s,a); the planner is value iteration
-(Bellman 1957, Dynamic Programming), V(s) <- max_a \link[=rhat(s,a) + gamma
-sum_s' phat(s'|s,a) V(s')]{rhat(s,a) + gamma sum_s' phat(s'|s,a) V(s')}.  Neither source was available here as a
+(Bellman 1957, Dynamic Programming), V(s) <- max_a [rhat(s,a) + gamma
+sum_s' phat(s'|s,a) V(s')].  Neither source was available here as a
 full text; both equations are quoted in their standard published form
 and reproduced identically in Sutton and Barto (2018) sections 8.1-8.2
 and 4.4 (FETCHED).  Unvisited (s, a) pairs are excluded from the

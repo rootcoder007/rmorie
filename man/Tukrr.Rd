@@ -28,8 +28,8 @@ decided by a scale the outliers themselves inflated.
 \details{
 Determinism: fixed sweeps, ordinary least squares start, no tolerance.
 
-Formula: iterate \code{beta = argmin sum w_i (y_i - x_i'beta)^2} with
-\code{w_i = [1 - (r_i/(c s))^2]^2} inside and 0 outside.
+Formula: iterate \eqn{beta = argmin sum w_i (y_i - x_i primebeta)^2} with
+\eqn{w_i = \[1 - (r_i/(c s))^2\]^2} inside and 0 outside.
 }
 \references{
 Beaton, A. E. & Tukey, J. W. (1974). Technometrics
