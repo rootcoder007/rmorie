@@ -6,46 +6,52 @@
 # demonstrations run on simulated designs, so parity at 1e-9 is only
 # meaningful if the draws themselves agree.
 #
-# R has no unsigned 64-bit type, so every 64-bit word is carried as
-# c(hi, lo) with each half an exact double in [0, 2^32).  All products
-# are formed from 16-bit limbs, which keeps every intermediate below
-# 2^53 and therefore exact.
+# R has no unsigned 64-bit type, so every 64-bit word is carried as a
+# pair of double vectors (hi, lo), each in [0, 2^32).  All products are
+# formed from 16-bit limbs, which keeps every intermediate below 2^53
+# and therefore exact.  SplitMix64's state is a plain counter,
+# state_i = seed + i * GOLDEN, so a whole block of draws is computed
+# vectorised rather than one call at a time.
 
 .ghc_M32 <- 4294967296
 
 .ghc_xor32 <- function(a, b) {
   # bitwXor is signed-32-bit; split into 16-bit halves to stay in range.
-  bitwXor(a %/% 65536L, b %/% 65536L) * 65536 + bitwXor(a %% 65536, b %% 65536)
+  bitwXor(a %/% 65536, b %/% 65536) * 65536 + bitwXor(a %% 65536, b %% 65536)
 }
 
-.ghc_xor64 <- function(a, b) c(.ghc_xor32(a[1], b[1]), .ghc_xor32(a[2], b[2]))
+.ghc_xor64 <- function(a, b)
+  list(hi = .ghc_xor32(a$hi, b$hi), lo = .ghc_xor32(a$lo, b$lo))
 
 .ghc_add64 <- function(a, b) {
-  lo <- a[2] + b[2]
-  carry <- if (lo >= .ghc_M32) 1 else 0
-  c((a[1] + b[1] + carry) %% .ghc_M32, lo %% .ghc_M32)
+  lo <- a$lo + b$lo
+  carry <- lo %/% .ghc_M32
+  list(hi = (a$hi + b$hi + carry) %% .ghc_M32, lo = lo %% .ghc_M32)
 }
 
 .ghc_shr64 <- function(a, k) {
   # logical right shift, 0 < k < 32 (the only widths SplitMix64 uses)
   p <- 2^k
-  c(floor(a[1] / p), floor(a[2] / p) + (a[1] %% p) * 2^(32 - k))
+  list(hi = floor(a$hi / p),
+       lo = floor(a$lo / p) + (a$hi %% p) * 2^(32 - k))
 }
 
 .ghc_mul32 <- function(a, b) {
-  # exact 32x32 -> 64 via 16-bit limbs
+  # exact 32x32 -> 64 via 16-bit limbs; `a` a vector, `b` a scalar
   a0 <- a %% 65536; a1 <- a %/% 65536
   b0 <- b %% 65536; b1 <- b %/% 65536
   mid <- a0 * b1 + a1 * b0
   lo <- a0 * b0 + (mid %% 65536) * 65536
-  c((a1 * b1 + mid %/% 65536 + lo %/% .ghc_M32) %% .ghc_M32, lo %% .ghc_M32)
+  list(hi = (a1 * b1 + mid %/% 65536 + lo %/% .ghc_M32) %% .ghc_M32,
+       lo = lo %% .ghc_M32)
 }
 
 .ghc_mul64 <- function(a, b) {
   # (a * b) mod 2^64: only the low word of each cross term survives
-  r <- .ghc_mul32(a[2], b[2])
-  hi <- (r[1] + .ghc_mul32(a[1], b[2])[2] + .ghc_mul32(a[2], b[1])[2]) %% .ghc_M32
-  c(hi, r[2])
+  r <- .ghc_mul32(a$lo, b[2])
+  list(hi = (r$hi + .ghc_mul32(a$hi, b[2])$lo +
+               .ghc_mul32(a$lo, b[1])$lo) %% .ghc_M32,
+       lo = r$lo)
 }
 
 .GHC_GOLDEN <- c(2654435769, 2135587861)   # 0x9E3779B97F4A7C15
@@ -56,38 +62,30 @@
 #' @noRd
 .ghc_rng <- function(seed = 0) {
   s <- as.numeric(seed)
-  if (s == 0) {
-    state <- .GHC_GOLDEN
-  } else {
-    state <- c(floor(s / .ghc_M32) %% .ghc_M32, s %% .ghc_M32)
-  }
   e <- new.env(parent = emptyenv())
-  e$state <- state
+  e$s0 <- if (s == 0) .GHC_GOLDEN else
+    c(floor(s / .ghc_M32) %% .ghc_M32, s %% .ghc_M32)
+  e$i <- 0                                # draws consumed so far
   e
 }
 
 #' @keywords internal
 #' @noRd
-.ghc_next <- function(e) {
-  e$state <- .ghc_add64(e$state, .GHC_GOLDEN)
-  z <- e$state
+.ghc_unif <- function(e, n = 1L, low = 0, high = 1) {
+  n <- as.integer(n)
+  if (n < 1L) return(numeric(0))
+  idx <- e$i + seq_len(n)
+  e$i <- e$i + n
+  # state_i = s0 + i * GOLDEN  (mod 2^64), the SplitMix64 counter
+  z <- .ghc_add64(list(hi = rep(e$s0[1], n), lo = rep(e$s0[2], n)),
+                  .ghc_mul64(list(hi = floor(idx / .ghc_M32),
+                                  lo = idx %% .ghc_M32), .GHC_GOLDEN))
   z <- .ghc_mul64(.ghc_xor64(z, .ghc_shr64(z, 30)), .GHC_MIX1)
   z <- .ghc_mul64(.ghc_xor64(z, .ghc_shr64(z, 27)), .GHC_MIX2)
-  .ghc_xor64(z, .ghc_shr64(z, 31))
-}
-
-#' @keywords internal
-#' @noRd
-.ghc_unif <- function(e, n = 1L, low = 0, high = 1) {
-  out <- numeric(n)
-  if (n < 1L) return(numeric(0))
-  for (i in seq_len(n)) {
-    z <- .ghc_next(e)
-    # (z >> 11) / 2^53, split so the numerator never leaves the exact range
-    u <- z[1] / .ghc_M32 + floor(z[2] / 2048) / 9007199254740992
-    out[i] <- low + (high - low) * u
-  }
-  out
+  z <- .ghc_xor64(z, .ghc_shr64(z, 31))
+  # (z >> 11) / 2^53, split so the numerator never leaves the exact range
+  u <- z$hi / .ghc_M32 + floor(z$lo / 2048) / 9007199254740992
+  low + (high - low) * u
 }
 
 #' @keywords internal
@@ -95,14 +93,23 @@
 .ghc_norm <- function(e, n = 1L, loc = 0, scale = 1) {
   # Box-Muller, cosine branch only, exactly as the Python arm does it:
   # two uniforms are consumed per variate and the sine branch is discarded.
-  out <- numeric(n)
+  n <- as.integer(n)
   if (n < 1L) return(numeric(0))
-  for (i in seq_len(n)) {
-    u1 <- max(.ghc_unif(e, 1L), 1e-300)
-    u2 <- .ghc_unif(e, 1L)
-    out[i] <- loc + scale * sqrt(-2 * log(u1)) * cos(2 * pi * u2)
-  }
-  out
+  uu <- .ghc_unif(e, 2L * n)
+  u1 <- pmax(uu[seq(1L, 2L * n, by = 2L)], 1e-300)
+  u2 <- uu[seq(2L, 2L * n, by = 2L)]
+  loc + scale * sqrt(-2 * log(u1)) * cos(2 * pi * u2)
+}
+
+# Weighted draw with replacement, mirroring _array_core Generator.choice
+# with `p=`: one uniform per draw, inverse-CDF on the UNNORMALISED weights.
+#' @keywords internal
+#' @noRd
+.ghc_choice_p <- function(e, vals, w) {
+  u <- .ghc_unif(e, 1L) * sum(w)
+  i <- which(u <= cumsum(w))[1]
+  if (is.na(i)) i <- length(w)
+  vals[i]
 }
 
 # Exact log marginal likelihood of a normal-means model keeping the first
@@ -115,16 +122,4 @@
   v <- 1 / n_prec
   s2 <- v + ifelse(seq_along(y) <= K, tau2, 0)
   sum(-0.5 * log(2 * pi * s2) - 0.5 * y * y / s2)
-}
-
-# Weighted draw with replacement, mirroring _array_core Generator.choice
-# with `p=`: one uniform per draw, inverse-CDF on the UNNORMALISED weights.
-#' @keywords internal
-#' @noRd
-.ghc_choice_p <- function(e, vals, w) {
-  u <- .ghc_unif(e, 1L) * sum(w)
-  cs <- cumsum(w)
-  i <- which(u <= cs)[1]
-  if (is.na(i)) i <- length(w)
-  vals[i]
 }
