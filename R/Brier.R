@@ -11,7 +11,7 @@
 #'
 #' R arm of the existing Python \code{brier} module.
 #'
-#' Formula: BS(t) = (1/n) [ sum_i w_i I(T_i <= t, d_i = 1) S(t|x_i)^2
+#' Formula: BS(t) = (1/n) \[ sum_i w_i I(T_i <= t, d_i = 1) S(t|x_i)^2
 #'                        + sum_i I(T_i > t) (1 - S(t|x_i))^2 ]
 #' with w_i = 1 / G(T_i), G the Kaplan-Meier estimate of censoring.
 #'

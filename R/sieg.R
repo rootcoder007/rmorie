@@ -13,7 +13,7 @@
 #' data-adaptive width selection", SFB 823 Discussion Paper 28/2011, TU
 #' Dortmund University, doi:10.17877/de290r-13059, Section 2, equation (3),
 #' page 3, read off a rendered page image. That equation is
-#' \code{beta = med_i med_{i' != i} (y_i - y_i')/(x_i - x_i')} and
+#' \eqn{eta = med_i med_{i prime != i} (y_i - y_i')/(x_i - x_i')} and
 #' \code{level = med_i (y_i - beta x_i)}, and the same page states the property
 #' that makes the estimator worth having: a finite-sample replacement breakdown
 #' point of \code{floor(n/2)/n}, about 50 percent, which Davies and Gather

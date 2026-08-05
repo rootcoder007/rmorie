@@ -52,16 +52,16 @@ PMLR 38:351-360.
 The inducing-point posterior q(u) = N(m, S) at inputs Z induces
 q(f_n) = N(a_n' m, k_nn - a_n' k_mn + a_n' S a_n) with
 a_n = K_mm^{-1} k_mn (Eqs. 6-8), and the bound maximised is
-ELBO = sum_n E_{q(f_n)}\link{log p(y_n|f_n)} - KL(q(u) || p(u)), the
+ELBO = sum_n E_{q(f_n)}[log p(y_n|f_n)] - KL(q(u) || p(u)), the
 Bernoulli expectation done by Gauss-Hermite quadrature. The Gaussian
-KL is closed form: (1/2)\link[=tr(K^{-1} S) + m' K^{-1} m - M + log|K| -
-log|S|]{tr(K^{-1} S) + m' K^{-1} m - M + log|K| - log|S|}.
+KL is closed form: (1/2)[tr(K^{-1} S) + m' K^{-1} m - M + log|K| -
+log|S|].
 
 QUADRATURE. Nodes and weights are not tabulated: they come from
 Golub-Welsch, the eigenvalues of the symmetric tridiagonal Jacobi
 matrix with zero diagonal and off-diagonal sqrt(k/2), weights
 sqrt(pi) v_{1i}^2. \code{quad_check} is the error in
-E_{N(0,1)}\link{f^2} = 1, which a wrong node set cannot pass.
+E_{N(0,1)}[f^2] = 1, which a wrong node set cannot pass.
 
 OPTIMISATION. m and the Cholesky factor of S are fitted by gradient
 ascent with central finite differences and deterministic backtracking.

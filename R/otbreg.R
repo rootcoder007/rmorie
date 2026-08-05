@@ -8,7 +8,7 @@
 #' rescaling each row to sum to \code{a}; on the columns, to \code{b}.
 #'
 #' Formula: \code{T <- diag(a / (T 1)) T} then
-#' \code{T <- T diag(b / (T' 1))}, repeated -- Benamou et al. (2015)
+#' \eqn{T <- T diag(b / (T prime 1))}, repeated -- Benamou et al. (2015)
 #' eq. (5)-(6); Peyre and Cuturi (2019) eq. (4.6)-(4.7).
 #'
 #' @param K Gibbs kernel, n by m, entrywise positive.

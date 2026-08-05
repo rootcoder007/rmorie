@@ -29,20 +29,7 @@ List with \code{beta}, \code{se}, \code{estimate},
 \code{n_events}, \code{c}, \code{lam0}.
 }
 \description{
-Kalbfleisch put a gamma process \code{H ~ GP(c, H_0)} on the
-baseline cumulative hazard and left the regression coefficient
-unconstrained. The posterior-mean increment at an observed event
-time pools the prior increment and the observed count by their
-weights,
-\code{dH(t_k) = (c dH_0(t_k) + dN_k) / (c + sum_{j in R_k} exp(x_j'b))},
-with \code{R_k} the risk set. As \code{c -> 0} this is exactly the
-Breslow estimator; with \code{b = 0} as well it is Nelson-Aalen.
-}
-\details{
-\code{b} maximises the Breslow partial log-likelihood
-\code{l(b) = sum_k [sum_{i in D_k} x_i'b - d_k log sum_{j in R_k}
-exp(x_j'b)]}, which is concave, so the Newton step is taken against
-the observed information and no line search is needed.
+
 }
 \references{
 Kalbfleisch, J. D. (1978). Non-parametric Bayesian

@@ -7,9 +7,9 @@
 #' the histograms. Fixing the support turns the problem into a coupled set
 #' of Sinkhorn problems sharing a common row scaling.
 #'
-#' Formula: \code{argmin_nu sum_k w_k OT_eps(mu_k, nu)}, solved by
-#' \code{u_k = nu/(K_k v_k)}, \code{nu = prod_k (K_k v_k)^{w_k}},
-#' \code{v_k = mu_k/(K_k' u_k)} -- Benamou et al. (2015) Section 3.2;
+#' Formula: \eqn{rgmin_nu sum_k w_k OT_eps(mu_k, nu)}, solved by
+# prime \code{u_k = nu/(K_k v_k)}, \code{nu = prod_k (K_k v_k)^{w_k}},
+#' \eqn{v_k = mu_k/(K_k prime u_k)} -- Benamou et al. (2015) Section 3.2;
 #' Peyre and Cuturi (2019) eq. (9.11), (9.15).
 #'
 #' @param A Input histograms, n by K, one per column.

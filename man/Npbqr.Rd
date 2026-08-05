@@ -31,15 +31,14 @@ requires; the tau-quantile restriction is preserved by any scale
 mixture, so a Dirichlet process is placed on the mixing distribution
 of the scale. The location parameter is unaffected, which is why the
 regression coefficient can be read off the check-loss fit,
-\code{b_hat = argmin sum rho_tau(y_i - x_i'b)} with
-\code{rho_tau(u) = u (tau - 1{u < 0})}, and only the error model
+\eqn{_hat = argmin sum rho_tau(y_i - x_i primeb)} with
 changes. The fit uses the shared fixed-iteration IRLS helper, which
 takes exactly the same path in both language arms.
 }
 \details{
 The scale part is closed form: the ALD maximum likelihood scale is
 \code{sigma_hat = (1/n) sum rho_tau(r_i)}, and the DP mixing
-distribution induces \code{E[K_n] = sum alpha / (alpha + i - 1)}
+distribution induces \code{E\[K_n\] = sum alpha / (alpha + i - 1)}
 distinct scales a priori.
 }
 \references{

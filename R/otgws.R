@@ -10,12 +10,12 @@
 #'
 #' The Gromov objective is not convex, so what the iteration returns is a
 #' stationary point. When the two spaces share a symmetry and the plan is
-#' started at \code{a b'}, which is itself symmetric, the iteration cannot
-#' break the tie and settles on the symmetric average of the two optima
-#' rather than on either of them.
-#'
-#' Formula: \code{min_T sum_ijkl |Cx_ik - Cy_jl|^2 T_ij T_kl - eps H(T)},
-#' solved by \code{T^{l+1} = argmin <T, -Cx T^l Cy> - eps H(T)} -- Peyre
+#' started at \eqn{ b prime}, which is itself symmetric, the iteration cannot
+# prime break the tie and settles on the symmetric average of the two optima
+# prime rather than on either of them.
+# prime
+# prime Formula: \code{min_T sum_ijkl |Cx_ik - Cy_jl|^2 T_ij T_kl - eps H(T)},
+# prime solved by \code{T^{l+1} = argmin <T, -Cx T^l Cy> - eps H(T)} -- Peyre
 #' and Cuturi (2019) eq. (10.27)-(10.28), p. 176; Peyre, Cuturi and
 #' Solomon (2016).
 #'

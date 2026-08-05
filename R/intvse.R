@@ -9,7 +9,7 @@
 #' assumptions, and a question a policy could implement -- at the cost of
 #' no longer decomposing an individual effect.
 #'
-#' Formula: \code{IDE = (th1 + th3(b0 + b1 a* + b2'c))(a - a*)},
+#' Formula: \eqn{IDE = (th1 + th3(b0 + b1 a* + b2 primec))(a - a*)},
 #' \code{IIE = (th2 + th3 a) b1 (a - a*)}, summing to the total effect.
 #'
 #' @param Y Outcome.

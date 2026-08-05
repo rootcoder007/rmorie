@@ -24,7 +24,7 @@ scale and the correlation, so the cost is invariant to any full-rank
 affine recoding of the data.
 }
 \details{
-Formula: \code{C_ij = (x_i - y_j)' Sigma^{-1} (x_i - y_j)}.
+Formula: \eqn{_ij = (x_i - y_j) prime Sigma^{-1} (x_i - y_j)}.
 }
 \references{
 De Maesschalck, R., Jouan-Rimbaud, D. and Massart, D. L.

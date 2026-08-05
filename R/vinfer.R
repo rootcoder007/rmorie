@@ -7,8 +7,8 @@
 #'
 #' The mean-field family factorises q(z) = prod_j q_j(z_j), and Section 3
 #' gives the coordinate update that maximises the lower bound with the
-#' other factors fixed: log q*_j(z_j) = E_{q_{-j}}[log p(x, z)] + const.
-#' The bound is ELBO(q) = E_q[log p(x,z)] - E_q[log q(z)] <= log p(x), and
+#' other factors fixed: log q*_j(z_j) = E_{q_{-j}}\[log p(x, z)\] + const.
+#' The bound is ELBO(q) = E_q\[log p(x,z)\] - E_q\[log q(z)\] <= log p(x), and
 #' no coordinate update may decrease it -- asserted here as
 #' \code{elbo_monotone} rather than assumed.
 #'
@@ -17,8 +17,8 @@
 #' N(mu, 1/tau), mu | tau ~ N(mu0, 1/(lambda0 tau)), tau ~ Gamma(a0, b0),
 #' with q(mu, tau) = q(mu) q(tau). The updates are closed form:
 #' mu_N = (lambda0 mu0 + N xbar)/(lambda0 + N), lambda_N = (lambda0 + N)
-#' E[tau], a_N = a0 + (N+1)/2, b_N = b0 + E_mu[sum (x_n - mu)^2 +
-#' lambda0 (mu - mu0)^2]/2, E[tau] = a_N/b_N.
+#' E\[tau\], a_N = a0 + (N+1)/2, b_N = b0 + E_mu\[sum (x_n - mu)^2 +
+#' lambda0 (mu - mu0)^2\]/2, E\[tau\] = a_N/b_N.
 #'
 #' Only this joint is implemented; that is this implementation's scope
 #' choice, stated rather than attributed -- a general log_p callable
@@ -34,7 +34,7 @@
 #' @param x Observed sample.
 #' @param mu0,lambda0,a0,b0 Normal-Gamma prior hyperparameters.
 #' @param max_iter Maximum coordinate sweeps.
-#' @param tol Stop when E[tau] moves by less than this.
+#' @param tol Stop when E\[tau\] moves by less than this.
 #' @return List with \code{mu_n}, \code{lambda_n}, \code{a_n}, \code{b_n},
 #'   \code{e_tau}, \code{e_mu}, \code{var_mu}, \code{elbo},
 #'   \code{elbo_path}, \code{elbo_monotone}, \code{iterations},

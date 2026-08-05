@@ -5,7 +5,7 @@
 #' is taken -- the check that the bookkeeping is right.
 #'
 #' Formula: Yhat = sum_l N_l ybar_l / sum_l N_l;
-#'   V = (M/N)^2 [ ((M-m)/M)/(m(m-1)) * sum (N_l ybar_l - N_l Yhat)^2
+#'   V = (M/N)^2 \[ ((M-m)/M)/(m(m-1)) * sum (N_l ybar_l - N_l Yhat)^2
 #'     + (1/(mM)) * sum N_l^2 ((N_l-n_l)/N_l) s_l^2 / n_l ]
 #'
 #' @param Y List of observation vectors, one per sampled PSU.

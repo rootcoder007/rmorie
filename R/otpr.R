@@ -9,7 +9,7 @@
 #' cost with a zero-price dummy row and column.
 #'
 #' Formula: \code{min_T <T,C>} subject to \code{T 1 <= a},
-#' \code{T' 1 <= b}, \code{sum T = m}.
+#' \eqn{T prime 1 <= b}, \code{sum T = m}.
 #'
 #' @param a,b Source and target weights.
 #' @param C Ground cost, n by k.
