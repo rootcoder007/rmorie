@@ -5,6 +5,9 @@
 # DMC 165-210, DC 215-235, ISI/BUI/FWI/DSR 235-280, DATA EL/FL).
 # Anchored on the report's printed 49-day SAMPLE OF OUTPUT (p.17):
 # all 49 x 7 values reproduced to print rounding.
+# Note: later implementations (NOR-X-424; CRAN cffdrs) revise the
+# FFMC constant 147.2 to 147.27723; we keep 147.2 to match the
+# FTR-33 standard program and its printed sample output.
 # Mirrors Python morie.fn.fwxF exactly.
 
 .fwx_el <- c(6.5, 7.5, 9.0, 12.8, 13.9, 13.9, 12.4, 10.9, 9.4, 8.0, 7.0, 6.0)
