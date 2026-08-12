@@ -2,28 +2,38 @@
 % Please edit documentation in R/hdbsc_native.R
 \name{morie_hdbsc}
 \alias{morie_hdbsc}
-\title{HDBSCAN* flat clustering via the mutual-reachability MST}
+\title{HDBSCAN* flat clustering by excess-of-mass stability extraction}
 \usage{
-morie_hdbsc(X, min_pts = 5, min_cluster_size = 5)
+morie_hdbsc(
+  X,
+  min_pts = 5,
+  min_cluster_size = 5,
+  selection = "eom",
+  verbose = FALSE
+)
 }
 \arguments{
 \item{X}{Data matrix (n x d).}
 
-\item{min_pts}{mpts core-distance neighbor count.}
+\item{min_pts}{mpts core-distance neighbour count.}
 
-\item{min_cluster_size}{Minimum valid cluster size.}
+\item{min_cluster_size}{Minimum cluster size (mclSize).}
 }
 \value{
-A list with elements \code{labels}, \code{core_distances},
-\code{n_clusters}, \code{mst_edges}, \code{min_pts},
-\code{method}.
+A list with elements \code{labels} (-1 = noise),
+\code{core_distances}, \code{n_clusters}, \code{stabilities},
+\code{condensed_tree}, \code{cluster_tree}, \code{min_pts},
+\code{min_cluster_size}, \code{method}.
 }
 \description{
-Core distance = distance to the mpts-nearest neighbor (Def. 5);
+Core distance = distance to the mpts-nearest neighbour (Def. 5);
 mutual reachability d_mreach = max(core_i, core_j, d) (Def. 7);
-single-linkage MST (Prop. 1); the threshold cut yielding the most
-min_cluster_size-valid connected components is returned, others
-labelled noise (-1).
+single-linkage density hierarchy (Prop. 1); condensed with a
+minimum cluster size (Algorithm 2); cluster stability
+S(C) = sum(lambda_max - lambda_min) (Eq. 3); flat partition by the
+bottom-up max-stability recursion (Algorithm 3, Eqs. 4-5).
+Clusters selected at different density levels separate
+differing-density clusters no single DBSCAN* threshold can.
 }
 \references{
 Campello, R. J. G. B., Moulavi, D. and Sander, J.
