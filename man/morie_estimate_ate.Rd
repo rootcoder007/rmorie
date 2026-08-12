@@ -13,7 +13,9 @@ morie_estimate_ate(
   trim = c(0.01, 0.99),
   trim_type = "value",
   ps_model = "mle",
-  ridge_lambda = 1
+  ridge_lambda = 1,
+  weight_trim = NULL,
+  weight_trim_side = "upper"
 )
 }
 \arguments{
