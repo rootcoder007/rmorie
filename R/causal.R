@@ -285,6 +285,29 @@ NULL
 # behaviour.
 .MOR_PS_EPS <- 1e-6
 
+# Cap the IPW WEIGHTS at percentile cutpoints -- the operation Lee,
+# B. K., Lessler, J. and Stuart, E. A. (2011), "Weight Trimming and
+# Propensity Score Weighting", PLoS ONE 6(3), e18174, actually
+# perform: "we trimmed high weights downwards, with cutpoints ranging
+# from the 99th to the 50th percentiles ... all weights with value
+# above the [cutpoint] were set equal to the [cutpoint]".  Note that
+# they cap the HIGH side only, which is why side = "upper" is the
+# default here.  Contrast .mor_trim_ps, which caps the SCORES.
+# See also Cole, S. R. and Hernan, M. A. (2008), American Journal of
+# Epidemiology 168(6), 656-664.
+.mor_trim_weights <- function(w, weight_trim = NULL, side = "upper") {
+  if (is.null(weight_trim)) return(w)
+  if (!(side %in% c("upper", "both")))
+    stop("weight_trim_side must be 'upper' or 'both'")
+  q <- as.numeric(weight_trim)
+  if (length(q) == 1L) q <- c(0, q)
+  lo <- q[1]; hi <- q[2]
+  if (!(lo >= 0 && lo < hi && hi <= 1))
+    stop("weight_trim must satisfy 0 <= lo < hi <= 1")
+  cuts <- stats::quantile(w, c(lo, hi), names = FALSE, type = 7)
+  if (side == "both") pmin(pmax(w, cuts[1]), cuts[2]) else pmin(w, cuts[2])
+}
+
 .mor_trim_ps <- function(ps, trim = c(0.01, 0.99), trim_type = "value") {
   ps <- as.numeric(ps)
   if (!(trim_type %in% c("value", "quantile")))
@@ -356,7 +379,9 @@ morie_estimate_ate <- function(data, treatment, outcome, covariates,
                                trim = c(0.01, 0.99),
                                trim_type = "value",
                                ps_model = "mle",
-                               ridge_lambda = 1) {
+                               ridge_lambda = 1,
+                               weight_trim = NULL,
+                               weight_trim_side = "upper") {
   t <- as.numeric(data[[treatment]])
   y <- as.numeric(data[[outcome]])
   # same propensity routes as morie_estimate_aipw: leaving this
@@ -373,6 +398,7 @@ morie_estimate_ate <- function(data, treatment, outcome, covariates,
   }
 
   w <- t / ps + (1 - t) / (1 - ps)
+  w <- .mor_trim_weights(w, weight_trim, weight_trim_side)
   ate <- .hajek_diff(y[t == 1], w[t == 1], y[t == 0], w[t == 0])
   # Standard IPW influence-function SE (Hernan-Robins, "What If" Ch 12.6):
   # psi_i = t*y/ps - (1-t)*y/(1-ps) - ATE. Divides by sqrt(total n).
@@ -1370,3 +1396,41 @@ morie_causal_robust_se <- function(model,
 # package is no longer available via install.packages(). If
 # causalweight (and LARF) return to CRAN, restore this wrapper from
 # git history (commit 4d78188).
+
+
+#' Hajek estimator for a population mean
+#'
+#' The ratio (Hajek) estimator
+#' \eqn{\bar{y}_H = \sum_i w_i y_i / \sum_i w_i}, which normalises
+#' the Horvitz-Thompson estimator by the ESTIMATED population size and
+#' is therefore insensitive to the overall scale of the weights.  The
+#' standard error uses Taylor (delta-method) linearisation under the
+#' with-replacement approximation.
+#'
+#' Mirrors Python \code{morie.survey.hajek_mean}; this is the SURVEY
+#' Hajek mean, a different estimator from the Hajek IPW average
+#' treatment effect in \code{\link{morie_estimate_ate}}, which is a
+#' DIFFERENCE of two such weighted means.
+#'
+#' @param y Response values.
+#' @param weights Survey weights \eqn{w_i = 1/\pi_i}, all positive.
+#' @return A list with \code{mean}, \code{se}, \code{ci_lower},
+#'   \code{ci_upper}.
+#' @references Hajek, J. (1971). Comment in Godambe and Sprott (Eds.),
+#'   Foundations of Statistical Inference. Holt, Rinehart and Winston;
+#'   Cochran, W. G. (1977). Sampling Techniques, 3rd ed., Sec. 6.13.
+#' @export
+morie_hajek_mean <- function(y, weights) {
+  y <- as.numeric(y); w <- as.numeric(weights)
+  if (length(y) != length(w))
+    stop(sprintf("y and weights must have the same length; got %d and %d.",
+                 length(y), length(w)))
+  if (any(w <= 0)) stop("All weights must be > 0.")
+  if (length(y) < 2L)
+    stop("At least 2 observations are required for SE computation.")
+  sum_w <- sum(w)
+  m <- sum(w * y) / sum_w
+  se <- sqrt(max(0, sum(w^2 * (y - m)^2) / sum_w^2))
+  z <- stats::qnorm(0.975)
+  list(mean = m, se = se, ci_lower = m - z * se, ci_upper = m + z * se)
+}
