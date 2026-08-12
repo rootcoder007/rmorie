@@ -20,33 +20,75 @@
   list(ffl = ff, cycle3 = cyc %/% 3L)
 }
 
-.motiff_shuffle <- function(adj, n, e, swaps) {
-  # row-major edge enumeration, matching the Python
-  # [(i, j) for i in range(n) for j in range(n)] order exactly
-  ei <- integer(0); ej <- integer(0)
-  for (i in seq_len(n)) for (j in seq_len(n)) {
-    if (i != j && adj[i, j]) { ei <- c(ei, i); ej <- c(ej, j) }
-  }
-  E <- cbind(ei, ej)
-  present <- new.env(hash = TRUE)
+.motiff_shuffle <- function(adj, n, e, swaps, preserve_mutual) {
+  # mfinder switching (Milo refs. 17-18) mirroring Python exactly:
+  # row-major classify into single edges and mutual (bidirectional)
+  # pairs; single<->single and mutual<->mutual switches only, so the
+  # mutual-edge count is invariant; identical RNG draw order.
   key <- function(i, j) paste0(i, "_", j)
-  for (r in seq_len(nrow(E))) assign(key(E[r, 1], E[r, 2]), TRUE, present)
-  m <- nrow(E)
+  present <- new.env(hash = TRUE)
+  si <- integer(0); sj <- integer(0)          # single edges
+  mi <- integer(0); mj <- integer(0)          # mutual pairs [min,max]
+  seen <- new.env(hash = TRUE)
+  for (i in seq_len(n)) for (j in seq_len(n)) {
+    if (i == j || !adj[i, j]) next
+    if (adj[j, i]) {
+      lo <- min(i, j); hi <- max(i, j)
+      kk <- key(lo, hi)
+      if (!exists(kk, seen, inherits = FALSE)) {
+        assign(kk, TRUE, seen)
+        mi <- c(mi, lo); mj <- c(mj, hi)
+      }
+    } else {
+      si <- c(si, i); sj <- c(sj, j)
+    }
+  }
+  S <- cbind(si, sj); M <- cbind(mi, mj)
+  for (r in seq_len(nrow(S))) assign(key(S[r, 1], S[r, 2]), TRUE, present)
+  for (r in seq_len(nrow(M))) {
+    assign(key(M[r, 1], M[r, 2]), TRUE, present)
+    assign(key(M[r, 2], M[r, 1]), TRUE, present)
+  }
+  ns <- nrow(S); nm <- nrow(M)
+  tot <- ns + nm
+  frac_m <- if (tot > 0) nm / tot else 0
+  has <- function(i, j) exists(key(i, j), present, inherits = FALSE)
   for (s in seq_len(swaps)) {
-    a <- floor(.ghc_unif(e, 1) * m) + 1
-    b <- floor(.ghc_unif(e, 1) * m) + 1
-    if (a == b) next
-    i1 <- E[a, 1]; j1 <- E[a, 2]; i2 <- E[b, 1]; j2 <- E[b, 2]
-    if (i1 == i2 || j1 == j2 || i1 == j2 || i2 == j1) next
-    if (exists(key(i1, j2), present, inherits = FALSE) ||
-        exists(key(i2, j1), present, inherits = FALSE)) next
-    rm(list = c(key(i1, j1), key(i2, j2)), envir = present)
-    assign(key(i1, j2), TRUE, present)
-    assign(key(i2, j1), TRUE, present)
-    E[a, 2] <- j2; E[b, 2] <- j1
+    pool_mut <- FALSE
+    if (isTRUE(preserve_mutual)) pool_mut <- (.ghc_unif(e, 1) < frac_m)
+    ua <- .ghc_unif(e, 1)
+    ub <- .ghc_unif(e, 1)
+    if (pool_mut) {
+      if (nm < 2) next
+      a <- floor(ua * nm) + 1; b <- floor(ub * nm) + 1
+      if (a == b) next
+      i1 <- M[a, 1]; j1 <- M[a, 2]; i2 <- M[b, 1]; j2 <- M[b, 2]
+      if (length(unique(c(i1, j1, i2, j2))) < 4) next
+      if (has(i1, j2) || has(j2, i1) || has(i2, j1) || has(j1, i2)) next
+      rm(list = c(key(i1, j1), key(j1, i1), key(i2, j2), key(j2, i2)),
+         envir = present)
+      assign(key(i1, j2), TRUE, present); assign(key(j2, i1), TRUE, present)
+      assign(key(i2, j1), TRUE, present); assign(key(j1, i2), TRUE, present)
+      M[a, ] <- c(min(i1, j2), max(i1, j2))
+      M[b, ] <- c(min(i2, j1), max(i2, j1))
+    } else {
+      if (ns < 2) next
+      a <- floor(ua * ns) + 1; b <- floor(ub * ns) + 1
+      if (a == b) next
+      i1 <- S[a, 1]; j1 <- S[a, 2]; i2 <- S[b, 1]; j2 <- S[b, 2]
+      if (length(unique(c(i1, j1, i2, j2))) < 4) next
+      if (has(i1, j2) || has(i2, j1)) next
+      if (isTRUE(preserve_mutual) && (has(j2, i1) || has(j1, i2))) next
+      rm(list = c(key(i1, j1), key(i2, j2)), envir = present)
+      assign(key(i1, j2), TRUE, present); assign(key(i2, j1), TRUE, present)
+      S[a, 2] <- j2; S[b, 2] <- j1
+    }
   }
   new <- matrix(0L, n, n)
-  for (r in seq_len(nrow(E))) new[E[r, 1], E[r, 2]] <- 1L
+  for (nm_key in ls(present)) {
+    ij <- as.integer(strsplit(nm_key, "_")[[1]])
+    new[ij[1], ij[2]] <- 1L
+  }
   new
 }
 
@@ -61,6 +103,9 @@
 #' @param n_random Ensemble size.
 #' @param seed SplitMix64 seed (mirrors the Python arm).
 #' @param swaps Edge swaps per randomization (default 10 * edges).
+#' @param preserve_mutual TRUE (default) preserves the mutual-edge
+#'   count (mfinder, Milo refs. 17-18); FALSE fixes only in/out
+#'   degree.
 #' @return A list with elements \code{count}, \code{z_score},
 #'   \code{p_value}, \code{rand_mean}, \code{rand_sd}, \code{motif},
 #'   \code{n_random}, \code{seed}, \code{method}.
@@ -69,7 +114,7 @@
 #'   824-827.
 #' @export
 morie_motiff <- function(adjacency, motif = "ffl", n_random = 100,
-                         seed = 0, swaps = NULL) {
+                         seed = 0, swaps = NULL, preserve_mutual = TRUE) {
   A <- matrix(as.integer(as.matrix(adjacency) != 0),
               nrow = nrow(adjacency))
   n <- nrow(A)
@@ -81,7 +126,8 @@ morie_motiff <- function(adjacency, motif = "ffl", n_random = 100,
   e <- .ghc_rng(seed)
   rand <- integer(n_random)
   for (r in seq_len(n_random)) {
-    Ar <- .motiff_shuffle(A, n, e, as.integer(swaps))
+    Ar <- .motiff_shuffle(A, n, e, as.integer(swaps),
+                          isTRUE(preserve_mutual))
     rand[r] <- .motiff_triads(Ar, n)[[motif]]
   }
   mu <- mean(rand)
@@ -90,6 +136,10 @@ morie_motiff <- function(adjacency, motif = "ffl", n_random = 100,
   p <- (sum(rand >= real) + 1) / (length(rand) + 1)
   list(count = real, z_score = z, p_value = p, rand_mean = mu,
        rand_sd = sd_, motif = motif, n_random = as.integer(n_random),
-       seed = seed,
-       method = "Milo et al. (2002) motif Z score / p-value")
+       seed = seed, preserve_mutual = isTRUE(preserve_mutual),
+       method = if (isTRUE(preserve_mutual))
+         paste("Milo et al. (2002) motif Z score / p-value",
+               "(mfinder degree+mutual ensemble)")
+       else paste("Milo et al. (2002) motif Z score / p-value",
+                  "(in/out-degree ensemble)"))
 }

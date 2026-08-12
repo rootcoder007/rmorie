@@ -4,7 +4,14 @@
 \alias{morie_motiff}
 \title{Milo et al. (2002) network-motif significance}
 \usage{
-morie_motiff(adjacency, motif = "ffl", n_random = 100, seed = 0, swaps = NULL)
+morie_motiff(
+  adjacency,
+  motif = "ffl",
+  n_random = 100,
+  seed = 0,
+  swaps = NULL,
+  preserve_mutual = TRUE
+)
 }
 \arguments{
 \item{adjacency}{Directed 0/1 adjacency (n x n).}
@@ -16,6 +23,10 @@ morie_motiff(adjacency, motif = "ffl", n_random = 100, seed = 0, swaps = NULL)
 \item{seed}{SplitMix64 seed (mirrors the Python arm).}
 
 \item{swaps}{Edge swaps per randomization (default 10 * edges).}
+
+\item{preserve_mutual}{TRUE (default) preserves the mutual-edge
+count (mfinder, Milo refs. 17-18); FALSE fixes only in/out
+degree.}
 }
 \value{
 A list with elements \code{count}, \code{z_score},
