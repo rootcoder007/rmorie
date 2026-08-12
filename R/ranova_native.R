@@ -101,6 +101,13 @@ morie_ranova <- function(y, group) {
 #' @param group Class label per observation.
 #' @param tol Convergence tolerance.
 #' @param max_iter Maximum optimiser iterations.
+#' @param solver Which route to the REML solution: "closed" uses
+#'   Searle et al. Sec. 4.8 (on balanced data the REML solutions ARE
+#'   the ANOVA estimators) and errors on unbalanced data; "optim"
+#'   always maximises l_R numerically, valid for any design; "auto"
+#'   (default) uses the closed form where it applies and the
+#'   optimiser otherwise. Both routes are kept so either can be
+#'   chosen or compared.
 #' @return A list with elements \code{sigma2_a}, \code{sigma2_e},
 #'   \code{mu}, \code{loglik}, \code{n_iter}, \code{converged},
 #'   \code{icc}, \code{a}, \code{N}, \code{closed_form},
@@ -110,7 +117,8 @@ morie_ranova <- function(y, group) {
 #'   Patterson, H. D. and Thompson, R. (1971). Biometrika, 58,
 #'   545-554.
 #' @export
-morie_remlfn <- function(y, group, tol = 1e-10, max_iter = 5000) {
+morie_remlfn <- function(y, group, tol = 1e-10, max_iter = 5000,
+                        solver = "auto") {
   y <- as.numeric(y)
   if (length(y) != length(group))
     stop("y and group must have equal length")
@@ -123,14 +131,21 @@ morie_remlfn <- function(y, group, tol = 1e-10, max_iter = 5000) {
   st <- morie_ranova(y, group)
   s2e <- st$mse; if (s2e <= 0) s2e <- 1e-8
   s2a <- st$sigma2_a; if (s2a <= 0) s2a <- s2e / max(a, 2)
-  if (isTRUE(st$balanced) && st$sigma2_a_raw > 0) {
+  if (!solver %in% c("auto", "closed", "optim"))
+    stop("solver must be 'auto', 'closed' or 'optim'")
+  if (solver == "closed" && !isTRUE(st$balanced))
+    stop(paste("solver='closed' is only valid for balanced data;",
+               "Searle Sec. 4.8 states REML = ANOVA for balanced data only"))
+  use_closed <- solver == "closed" ||
+    (solver == "auto" && isTRUE(st$balanced) && st$sigma2_a_raw > 0)
+  if (use_closed) {
     s2a <- st$sigma2_a_raw; s2e <- st$mse
     r <- .reml_loglik(gs, ns, s2a, s2e)
     denom <- s2a + s2e
     return(list(sigma2_a = s2a, sigma2_e = s2e, mu = r$mu,
                 loglik = r$ll, n_iter = 0L, converged = TRUE,
                 icc = if (denom > 0) s2a / denom else 0,
-                a = a, N = N, closed_form = TRUE,
+                a = a, N = N, closed_form = TRUE, solver = solver,
                 method = paste("REML variance components (Searle et al.",
                   "1992, Sec. 4.8 closed form: REML = ANOVA on",
                   "balanced data)")))
@@ -179,7 +194,7 @@ morie_remlfn <- function(y, group, tol = 1e-10, max_iter = 5000) {
   list(sigma2_a = s2a, sigma2_e = s2e, mu = r$mu, loglik = r$ll,
        n_iter = as.integer(op$counts[1]), converged = op$convergence == 0,
        icc = if (denom > 0) s2a / denom else 0,
-       a = a, N = N, closed_form = FALSE,
+       a = a, N = N, closed_form = FALSE, solver = solver,
        method = "REML variance components (Searle et al. 1992, Sec. 6.6)")
 }
 
