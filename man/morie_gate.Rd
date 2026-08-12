@@ -10,7 +10,11 @@ morie_gate(
   outcome,
   covariates,
   group_col,
-  propensity_col = NULL
+  propensity_col = NULL,
+  trim = c(0.01, 0.99),
+  trim_type = "value",
+  ps_model = "mle",
+  ridge_lambda = 1
 )
 }
 \arguments{
@@ -27,6 +31,22 @@ morie_gate(
 \item{propensity_col}{Optional name of a column holding
 pre-computed propensity scores; \code{NULL} (default) estimates
 them within each group.  Both routes are available.}
+
+\item{trim}{Propensity trimming bounds, or \code{NULL} for none.}
+
+\item{trim_type}{\code{"value"} (default) clamps the propensity
+scores to the absolute bounds \code{trim}; \code{"quantile"}
+winsorises them at their own sample quantiles.  The value route is
+the default here precisely because sample quantiles are unstable
+inside small strata, which is the situation this estimator creates.
+The Python arm takes the same two arguments with the same defaults.}
+
+\item{ps_model}{Propensity estimator: \code{"mle"} (default,
+unpenalised logistic maximum likelihood on the raw covariates) or
+\code{"ridge"} (L2-penalised logistic on standardised
+covariates).  Both estimators are available on both arms.}
+
+\item{ridge_lambda}{Penalty strength for \code{ps_model = "ridge"}.}
 }
 \value{
 A data frame with one row per estimated group and columns
