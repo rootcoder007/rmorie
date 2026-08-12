@@ -244,16 +244,37 @@ NULL
 #                          independent, so a stratified fit cannot be
 #                          destabilised by a small stratum's own
 #                          quantiles.  Default.
-#   trim_type = "quantile" winsorise at the scores' own sample
-#                          quantiles.  This is WEIGHT TRUNCATION: units are
-#                          kept and their scores pulled in.  It is NOT the
-#                          rule of Crump, Hotz, Imbens and Mitnik (2009),
-#                          Biometrika 96(1), 187-199 -- verified against that
-#                          paper, they DISCARD units whose estimated propensity
-#                          lies outside a range (their rule of thumb is
-#                          [0.1, 0.9]), which changes the estimand to the ATE
-#                          on the retained subpopulation.  Neither route here
-#                          discards, so the paper must not be cited for them.
+#   trim_type = "quantile" winsorise the SCORES at their own sample
+#                          quantiles.  Percentile capping is the
+#                          standard trimming device in this literature:
+#                          Lee, B. K., Lessler, J. and Stuart, E. A.
+#                          (2011), Weight trimming and propensity score
+#                          weighting, PLoS ONE 6(3), e18174,
+#                          doi:10.1371/journal.pone.0018174, "trimmed
+#                          high weights downwards, with cutpoints
+#                          ranging from the 99th to the 50th
+#                          percentiles ... all weights with value above
+#                          the [cutpoint] were set equal to the
+#                          [cutpoint]"; see also Cole, S. R. and
+#                          Hernan, M. A. (2008), Constructing inverse
+#                          probability weights for marginal structural
+#                          models, American Journal of Epidemiology
+#                          168(6), 656-664.
+#                          TWO DIFFERENCES from Lee et al., stated so
+#                          the citation is not overclaimed: they cap
+#                          the WEIGHTS, this caps the SCORES (which
+#                          bounds the weights indirectly); and they cap
+#                          the high side only, this caps both tails.
+#                          A weights-side route is the natural next
+#                          addition -- see NEEDED_SOURCES.md.
+#                          It is also NOT the rule of Crump, Hotz,
+#                          Imbens and Mitnik (2009), Biometrika 96(1),
+#                          187-199 -- verified against that paper, they
+#                          DISCARD units whose estimated propensity
+#                          lies outside a range (rule of thumb
+#                          [0.1, 0.9]), which changes the estimand to
+#                          the ATE on the retained subpopulation.
+#                          Neither route here discards.
 #   trim = NULL            no trimming beyond the numerical guard that
 #                          keeps the inverse-probability weights finite.
 # NOTE: before 2026-08-12 this package always winsorised at the 1st and
@@ -331,13 +352,24 @@ morie_estimate_propensity_scores <- function(data, treatment, covariates,
 #' )
 #' morie_estimate_ate(df, "t", "y", "x")
 morie_estimate_ate <- function(data, treatment, outcome, covariates,
-                               propensity_col = NULL) {
+                               propensity_col = NULL,
+                               trim = c(0.01, 0.99),
+                               trim_type = "value",
+                               ps_model = "mle",
+                               ridge_lambda = 1) {
   t <- as.numeric(data[[treatment]])
   y <- as.numeric(data[[outcome]])
+  # same propensity routes as morie_estimate_aipw: leaving this
+  # function on the old fixed .clip_ps path would mean the Hajek IPW
+  # estimator and the AIPW estimator silently used different
+  # propensity scores on the same data.
   ps <- if (!is.null(propensity_col)) {
-    .clip_ps(data[[propensity_col]])
+    .mor_trim_ps(data[[propensity_col]], trim, trim_type)
   } else {
-    morie_estimate_propensity_scores(data, treatment, covariates)
+    morie_estimate_propensity_scores(data, treatment, covariates,
+                                     trim = trim, trim_type = trim_type,
+                                     ps_model = ps_model,
+                                     ridge_lambda = ridge_lambda)
   }
 
   w <- t / ps + (1 - t) / (1 - ps)
