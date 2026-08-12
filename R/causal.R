@@ -308,11 +308,36 @@ NULL
   if (side == "both") pmin(pmax(w, cuts[1]), cuts[2]) else pmin(w, cuts[2])
 }
 
+# Which units SURVIVE trimming.  Only trim_type = "discard" drops
+# anything; the winsorising routes keep every unit.
+#
+# "discard" is the rule of Crump, R. K., Hotz, V. J., Imbens, G. W. and
+# Mitnik, O. A. (2009), "Dealing with limited overlap in estimation of
+# average treatment effects", Biometrika 96(1), 187-199, verified
+# verbatim against that paper: "a good approximation to the optimal
+# rule is provided by the simple selection rule to drop all units with
+# estimated propensity scores outside the range [0.1,0.9]".
+#
+# LOUD WARNING, because this is not a numerical detail: discarding
+# CHANGES THE ESTIMAND.  The result is no longer the ATE on the whole
+# sample but the ATE on the retained subpopulation -- which is the
+# entire point of their Sec. 5, since that subpopulation is the one the
+# data can actually identify.  The estimators report n_discarded and an
+# estimand note whenever this route is taken.
+.mor_ps_keep <- function(ps, trim = c(0.1, 0.9), trim_type = "value") {
+  if (!identical(trim_type, "discard") || is.null(trim))
+    return(rep(TRUE, length(ps)))
+  lo <- as.numeric(trim[1]); hi <- as.numeric(trim[2])
+  if (!(lo >= 0 && lo < hi && hi <= 1))
+    stop("trim must satisfy 0 <= lo < hi <= 1")
+  ps >= lo & ps <= hi
+}
+
 .mor_trim_ps <- function(ps, trim = c(0.01, 0.99), trim_type = "value") {
   ps <- as.numeric(ps)
-  if (!(trim_type %in% c("value", "quantile")))
-    stop("trim_type must be 'value' or 'quantile'")
-  if (!is.null(trim)) {
+  if (!(trim_type %in% c("value", "quantile", "discard")))
+    stop("trim_type must be 'value', 'quantile' or 'discard'")
+  if (!is.null(trim) && trim_type != "discard") {
     lo <- as.numeric(trim[1]); hi <- as.numeric(trim[2])
     if (!(lo >= 0 && lo < hi && hi <= 1))
       stop("trim must satisfy 0 <= lo < hi <= 1")
@@ -397,6 +422,12 @@ morie_estimate_ate <- function(data, treatment, outcome, covariates,
                                      ridge_lambda = ridge_lambda)
   }
 
+  keep <- .mor_ps_keep(ps, trim, trim_type)
+  n_discarded <- sum(!keep)
+  if (n_discarded > 0L) {
+    if (sum(keep) < 2L) stop("discard trimming removed almost every unit")
+    t <- t[keep]; y <- y[keep]; ps <- ps[keep]
+  }
   w <- t / ps + (1 - t) / (1 - ps)
   w <- .mor_trim_weights(w, weight_trim, weight_trim_side)
   ate <- .hajek_diff(y[t == 1], w[t == 1], y[t == 0], w[t == 0])
@@ -595,6 +626,15 @@ morie_estimate_aipw <- function(data, treatment, outcome, covariates,
   if (!(outcome_fit %in% c("separate", "pooled")))
     stop("outcome_fit must be 'separate' or 'pooled'")
   Xc <- .mor_ps_design(data, covariates)
+  # Crump et al. discard route: drop units outside the overlap range
+  # BEFORE fitting anything, and remember how many went.
+  keep <- .mor_ps_keep(ps, trim, trim_type)
+  n_discarded <- sum(!keep)
+  if (n_discarded > 0L) {
+    if (sum(keep) < 2L) stop("discard trimming removed almost every unit")
+    t <- t[keep]; y <- y[keep]; ps <- ps[keep]
+    Xc <- Xc[keep, , drop = FALSE]
+  }
   n <- nrow(Xc)
   if (outcome_fit == "pooled") {
     Xp <- cbind(Xc[, 1], t, Xc[, -1, drop = FALSE])
@@ -609,6 +649,7 @@ morie_estimate_aipw <- function(data, treatment, outcome, covariates,
   }
 
   psi <- .influence_score_aipw(y, t, ps, mu1, mu0)
+  # (n_discarded / estimand note are appended to the result below)
   ate <- mean(psi)
   se <- stats::sd(psi) / sqrt(length(psi))
   ci <- .wald_ci(ate, se)

@@ -4,7 +4,17 @@
 \alias{morie_estimate_ate}
 \title{Estimate the Average Treatment Effect (ATE) via Hajek IPW}
 \usage{
-morie_estimate_ate(data, treatment, outcome, covariates, propensity_col = NULL)
+morie_estimate_ate(
+  data,
+  treatment,
+  outcome,
+  covariates,
+  propensity_col = NULL,
+  trim = c(0.01, 0.99),
+  trim_type = "value",
+  ps_model = "mle",
+  ridge_lambda = 1
+)
 }
 \arguments{
 \item{data}{A data frame.}
