@@ -39,7 +39,9 @@
 #' @param trim Propensity trimming bounds, or \code{NULL} for none.
 #' @param trim_type \code{"value"} (default) clamps the propensity
 #'   scores to the absolute bounds \code{trim}; \code{"quantile"}
-#'   winsorises them at their own sample quantiles.  The value route is
+#'   winsorises them at their own sample quantiles.  Both are weight
+#'   truncation and keep every unit; neither is the DISCARD rule of
+#'   Crump et al. (2009), which changes the estimand.  The value route is
 #'   the default here precisely because sample quantiles are unstable
 #'   inside small strata, which is the situation this estimator creates.
 #'   The Python arm takes the same two arguments with the same defaults.
