@@ -111,12 +111,75 @@ NULL
 
 #' Internal helper: Fit Propensity
 #' @noRd
-.fit_propensity <- function(data, treatment, covariates) {
-  formula <- stats::as.formula(
-    paste(treatment, "~", paste(covariates, collapse = " + "))
-  )
-  fit <- stats::glm(formula, data = data, family = stats::binomial())
-  stats::fitted(fit)
+# Two propensity ESTIMATORS, both available, matching Python
+# morie.fn.ps_fit._ps_irls exactly so the arms cannot drift apart by
+# inheriting whatever each ecosystem's logistic regression defaults to:
+#   ps_model = "mle"    unpenalised logistic maximum likelihood on the
+#                       RAW covariates -- the textbook propensity
+#                       model, and the default;
+#   ps_model = "ridge"  L2-penalised logistic on STANDARDISED
+#                       covariates, the penalty applying to the
+#                       non-intercept coefficients with strength
+#                       `ridge_lambda`; useful under collinearity or
+#                       near-separation.
+# Before 2026-08-12 this package always used the MLE route while the
+# Python arm always used the ridge route, which is why their AIPW
+# estimates disagreed at ~2e-04.
+
+.mor_ps_design <- function(data, covariates) {
+  cols <- lapply(covariates, function(cn) {
+    v <- data[[cn]]
+    if (is.numeric(v)) return(as.numeric(v))
+    lv <- sort(unique(as.character(v)))
+    as.numeric(match(as.character(v), lv) - 1L)
+  })
+  cbind(1, do.call(cbind, cols))
+}
+
+.mor_ps_standardize <- function(X) {
+  n <- nrow(X)
+  for (j in seq.int(2L, ncol(X))) {
+    m <- mean(X[, j])
+    s <- sqrt(sum((X[, j] - m)^2) / n)
+    if (s <= 0) s <- 1
+    X[, j] <- (X[, j] - m) / s
+  }
+  X
+}
+
+.mor_ps_irls <- function(X, y, lam = 0, max_iter = 200L, tol = 1e-12) {
+  n <- nrow(X); p <- ncol(X)
+  beta <- numeric(p)
+  pen <- c(0, rep(as.numeric(lam), p - 1L))
+  for (it in seq_len(as.integer(max_iter))) {
+    eta <- pmin(pmax(as.numeric(X %*% beta), -30), 30)
+    mu <- 1 / (1 + exp(-eta))
+    w <- pmax(mu * (1 - mu), 1e-10)
+    z <- eta + (y - mu) / w
+    A <- crossprod(X, X * w) + diag(pen, p)
+    rhs <- crossprod(X, w * z)
+    new <- as.numeric(solve(A, rhs))
+    delta <- max(abs(new - beta))
+    beta <- new
+    if (delta < tol) break
+  }
+  eta <- pmin(pmax(as.numeric(X %*% beta), -30), 30)
+  1 / (1 + exp(-eta))
+}
+
+
+.fit_propensity <- function(data, treatment, covariates,
+                            ps_model = "mle", ridge_lambda = 1) {
+  if (!(ps_model %in% c("mle", "ridge")))
+    stop("ps_model must be 'mle' or 'ridge'")
+  y <- as.numeric(data[[treatment]])
+  X <- .mor_ps_design(data, covariates)
+  if (ps_model == "ridge") {
+    X <- .mor_ps_standardize(X)
+    .mor_ps_irls(X, y, lam = as.numeric(ridge_lambda))
+  } else {
+    .mor_ps_irls(X, y, lam = 0)
+  }
 }
 
 #' Internal helper: Fit Propensity Weightit
@@ -210,15 +273,15 @@ NULL
 
 morie_estimate_propensity_scores <- function(data, treatment, covariates,
                                              trim = c(0.01, 0.99),
-                                             trim_type = "value") {
-  ps <- if (.causal_have_weightit()) {
-    tryCatch(
-      .fit_propensity_weightit(data, treatment, covariates),
-      error = function(e) .fit_propensity(data, treatment, covariates)
-    )
-  } else {
-    .fit_propensity(data, treatment, covariates)
-  }
+                                             trim_type = "value",
+                                             ps_model = "mle",
+                                             ridge_lambda = 1) {
+  # the native fit is used unconditionally now: WeightIt's method
+  # = "glm" is only the MLE route, so delegating to it would silently
+  # ignore ps_model = "ridge" and break the parity the routes exist to
+  # guarantee.
+  ps <- .fit_propensity(data, treatment, covariates,
+                        ps_model = ps_model, ridge_lambda = ridge_lambda)
   .mor_trim_ps(ps, trim, trim_type)
 }
 
@@ -420,7 +483,9 @@ morie_estimate_aipw <- function(data, treatment, outcome, covariates,
                                 propensity_col = NULL,
                                 outcome_model = c("linear", "logistic"),
                                 trim = c(0.01, 0.99),
-                                trim_type = "value") {
+                                trim_type = "value",
+                                ps_model = "mle",
+                                ridge_lambda = 1) {
   outcome_model <- match.arg(outcome_model)
   t <- as.numeric(data[[treatment]])
   y <- as.numeric(data[[outcome]])
@@ -428,7 +493,9 @@ morie_estimate_aipw <- function(data, treatment, outcome, covariates,
     .mor_trim_ps(data[[propensity_col]], trim, trim_type)
   } else {
     morie_estimate_propensity_scores(data, treatment, covariates,
-                                     trim = trim, trim_type = trim_type)
+                                     trim = trim, trim_type = trim_type,
+                                     ps_model = ps_model,
+                                     ridge_lambda = ridge_lambda)
   }
 
   fam <- if (outcome_model == "logistic") {

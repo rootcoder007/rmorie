@@ -43,6 +43,11 @@
 #'   the default here precisely because sample quantiles are unstable
 #'   inside small strata, which is the situation this estimator creates.
 #'   The Python arm takes the same two arguments with the same defaults.
+#' @param ps_model Propensity estimator: \code{"mle"} (default,
+#'   unpenalised logistic maximum likelihood on the raw covariates) or
+#'   \code{"ridge"} (L2-penalised logistic on standardised
+#'   covariates).  Both estimators are available on both arms.
+#' @param ridge_lambda Penalty strength for \code{ps_model = "ridge"}.
 #' @return A data frame with one row per estimated group and columns
 #'   \code{group}, \code{ate}, \code{se}, \code{ci_lower},
 #'   \code{ci_upper}, \code{n}.
@@ -52,7 +57,8 @@
 #' @export
 morie_gate <- function(data, treatment, outcome, covariates, group_col,
                        propensity_col = NULL, trim = c(0.01, 0.99),
-                       trim_type = "value") {
+                       trim_type = "value", ps_model = "mle",
+                       ridge_lambda = 1) {
   required_cols <- unique(c(treatment, outcome, group_col, covariates))
   frame <- data[required_cols]
   frame <- frame[stats::complete.cases(frame), , drop = FALSE]
@@ -70,7 +76,9 @@ morie_gate <- function(data, treatment, outcome, covariates, group_col,
                                    covariates = covariates,
                                    propensity_col = propensity_col,
                                    outcome_model = "linear",
-                                   trim = trim, trim_type = trim_type),
+                                   trim = trim, trim_type = trim_type,
+                                   ps_model = ps_model,
+                                   ridge_lambda = ridge_lambda),
                silent = TRUE)
     if (inherits(res, "try-error")) {
       warning(sprintf("GATE: failed for group '%s': %s", gv,
