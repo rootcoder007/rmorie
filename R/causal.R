@@ -245,9 +245,15 @@ NULL
 #                          destabilised by a small stratum's own
 #                          quantiles.  Default.
 #   trim_type = "quantile" winsorise at the scores' own sample
-#                          quantiles, i.e. trimming to a common-support
-#                          region in the spirit of Crump, Hotz, Imbens
-#                          and Mitnik (2009), Biometrika 96(1), 187-199.
+#                          quantiles.  This is WEIGHT TRUNCATION: units are
+#                          kept and their scores pulled in.  It is NOT the
+#                          rule of Crump, Hotz, Imbens and Mitnik (2009),
+#                          Biometrika 96(1), 187-199 -- verified against that
+#                          paper, they DISCARD units whose estimated propensity
+#                          lies outside a range (their rule of thumb is
+#                          [0.1, 0.9]), which changes the estimand to the ATE
+#                          on the retained subpopulation.  Neither route here
+#                          discards, so the paper must not be cited for them.
 #   trim = NULL            no trimming beyond the numerical guard that
 #                          keeps the inverse-probability weights finite.
 # NOTE: before 2026-08-12 this package always winsorised at the 1st and
