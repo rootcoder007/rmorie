@@ -41,6 +41,18 @@ Causdr2 <- function(y, d, X, K = 2L, seed = 1L) {
   }
   K <- as.integer(K)
   if (K < 1L || K > n) stop("K must lie in 1..n", call. = FALSE)
+  ## The nuisance regressions add their own intercept below, so a
+  ## constant column in X makes the design singular. Without this the
+  ## failure surfaces from solve() as a bare "system is exactly
+  ## singular", which says nothing about which argument was wrong.
+  ## Matches the Python arm's check.
+  const_col <- which(apply(Xa, 2L, function(z) max(z) - min(z)) == 0)
+  if (length(const_col) > 0L) {
+    stop(sprintf(paste0("causdr2: column %d of X is constant; the ",
+                        "nuisance regressions add their own intercept, ",
+                        "so do not pass one"), const_col[1L]),
+         call. = FALSE)
+  }
   Dg <- cbind(1, Xa)
   if (K == 1L) {
     folds <- rep(0L, n)
