@@ -13,14 +13,6 @@ morie_estimate_dr_forest(
 )
 }
 \arguments{
-\item{data}{A data frame.}
-
-\item{treatment}{Name of the binary treatment column.}
-
-\item{outcome}{Name of the outcome column.}
-
-\item{covariates}{Character vector of covariate names.}
-
 \item{target_sample}{Sample to average over, passed to grf: one of
 \code{"all"}, \code{"treated"}, \code{"control"}, \code{"overlap"}.}
 }

@@ -15,20 +15,6 @@ morie_estimate_cate(
 )
 }
 \arguments{
-\item{data}{A data frame.}
-
-\item{treatment}{Name of the binary treatment column.}
-
-\item{outcome}{Name of the outcome column.}
-
-\item{covariates}{Character vector of covariate names.}
-
-\item{propensity_col}{Optional: name of a pre-computed propensity
-score column.}
-
-\item{outcome_model}{Family for the outcome model: \code{"linear"} or
-\code{"logistic"}.}
-
 \item{meta_learner}{One of \code{"t_learner"} (default), \code{"s_learner"},
 \code{"x_learner"} (Kuenzel et al. 2019 — two-stage with
 propensity-weighted combination; strong under arm imbalance), or

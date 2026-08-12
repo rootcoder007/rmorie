@@ -14,7 +14,8 @@ morie_gate(
   trim = c(0.01, 0.99),
   trim_type = "value",
   ps_model = "mle",
-  ridge_lambda = 1
+  ridge_lambda = 1,
+  outcome_fit = "separate"
 )
 }
 \arguments{
@@ -47,6 +48,10 @@ unpenalised logistic maximum likelihood on the raw covariates) or
 covariates).  Both estimators are available on both arms.}
 
 \item{ridge_lambda}{Penalty strength for \code{ps_model = "ridge"}.}
+
+\item{outcome_fit}{\code{"separate"} (default) fits the outcome
+model on each treatment arm; \code{"pooled"} fits one regression
+with a treatment dummy.  Both routes are available on both arms.}
 }
 \value{
 A data frame with one row per estimated group and columns
