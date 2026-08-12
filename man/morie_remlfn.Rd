@@ -4,7 +4,7 @@
 \alias{morie_remlfn}
 \title{REML estimation of variance components (one-way random model)}
 \usage{
-morie_remlfn(y, group, tol = 1e-10, max_iter = 5000)
+morie_remlfn(y, group, tol = 1e-10, max_iter = 5000, solver = "auto")
 }
 \arguments{
 \item{y}{Observations.}
@@ -14,6 +14,14 @@ morie_remlfn(y, group, tol = 1e-10, max_iter = 5000)
 \item{tol}{Convergence tolerance.}
 
 \item{max_iter}{Maximum optimiser iterations.}
+
+\item{solver}{Which route to the REML solution: "closed" uses
+Searle et al. Sec. 4.8 (on balanced data the REML solutions ARE
+the ANOVA estimators) and errors on unbalanced data; "optim"
+always maximises l_R numerically, valid for any design; "auto"
+(default) uses the closed form where it applies and the
+optimiser otherwise. Both routes are kept so either can be
+chosen or compared.}
 }
 \value{
 A list with elements \code{sigma2_a}, \code{sigma2_e},
