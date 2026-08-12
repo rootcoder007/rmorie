@@ -10,7 +10,11 @@ morie_estimate_aipw(
   outcome,
   covariates,
   propensity_col = NULL,
-  outcome_model = c("linear", "logistic")
+  outcome_model = c("linear", "logistic"),
+  trim = c(0.01, 0.99),
+  trim_type = "value",
+  ps_model = "mle",
+  ridge_lambda = 1
 )
 }
 \arguments{
