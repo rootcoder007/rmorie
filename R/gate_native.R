@@ -48,6 +48,9 @@
 #'   \code{"ridge"} (L2-penalised logistic on standardised
 #'   covariates).  Both estimators are available on both arms.
 #' @param ridge_lambda Penalty strength for \code{ps_model = "ridge"}.
+#' @param outcome_fit \code{"separate"} (default) fits the outcome
+#'   model on each treatment arm; \code{"pooled"} fits one regression
+#'   with a treatment dummy.  Both routes are available on both arms.
 #' @return A data frame with one row per estimated group and columns
 #'   \code{group}, \code{ate}, \code{se}, \code{ci_lower},
 #'   \code{ci_upper}, \code{n}.
@@ -58,7 +61,7 @@
 morie_gate <- function(data, treatment, outcome, covariates, group_col,
                        propensity_col = NULL, trim = c(0.01, 0.99),
                        trim_type = "value", ps_model = "mle",
-                       ridge_lambda = 1) {
+                       ridge_lambda = 1, outcome_fit = "separate") {
   required_cols <- unique(c(treatment, outcome, group_col, covariates))
   frame <- data[required_cols]
   frame <- frame[stats::complete.cases(frame), , drop = FALSE]
@@ -78,7 +81,8 @@ morie_gate <- function(data, treatment, outcome, covariates, group_col,
                                    outcome_model = "linear",
                                    trim = trim, trim_type = trim_type,
                                    ps_model = ps_model,
-                                   ridge_lambda = ridge_lambda),
+                                   ridge_lambda = ridge_lambda,
+                                   outcome_fit = outcome_fit),
                silent = TRUE)
     if (inherits(res, "try-error")) {
       warning(sprintf("GATE: failed for group '%s': %s", gv,

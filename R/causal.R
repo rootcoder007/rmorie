@@ -148,6 +148,12 @@ NULL
 }
 
 .mor_ps_irls <- function(X, y, lam = 0, max_iter = 200L, tol = 1e-12) {
+  beta <- .mor_ps_irls_beta(X, y, lam = lam, max_iter = max_iter, tol = tol)
+  eta <- pmin(pmax(as.numeric(X %*% beta), -30), 30)
+  1 / (1 + exp(-eta))
+}
+
+.mor_ps_irls_beta <- function(X, y, lam = 0, max_iter = 200L, tol = 1e-12) {
   n <- nrow(X); p <- ncol(X)
   beta <- numeric(p)
   pen <- c(0, rep(as.numeric(lam), p - 1L))
@@ -163,8 +169,7 @@ NULL
     beta <- new
     if (delta < tol) break
   }
-  eta <- pmin(pmax(as.numeric(X %*% beta), -30), 30)
-  1 / (1 + exp(-eta))
+  beta
 }
 
 
@@ -479,13 +484,38 @@ morie_estimate_atc <- function(data, treatment, outcome, covariates,
 #' df <- data.frame(t = rbinom(200, 1, 0.4), y = rnorm(200), x = rnorm(200))
 #' morie_estimate_aipw(df, "t", "y", "x")
 #' @export
+# Outcome-model routes for AIPW, matching Python
+# morie.fn.aipw._om_fit_predict exactly.
+#   outcome_fit = "separate" (default) fits E[Y | X, T = t] on each arm,
+#                 so the covariate slopes may differ between treated and
+#                 control -- the usual AIPW form;
+#   outcome_fit = "pooled"   fits one regression Y ~ T + X and predicts
+#                 with T set to 1 and to 0, imposing a common slope.
+# Before 2026-08-12 this arm was pooled while the Python arm was
+# separate, silently, which is the last of the three differences that
+# made their AIPW estimates disagree.
+
+.mor_om_fit_predict <- function(X, y, rows, Xpred, outcome_model) {
+  Xs <- X[rows, , drop = FALSE]
+  ys <- y[rows]
+  if (outcome_model == "logistic") {
+    beta <- .mor_ps_irls_beta(Xs, ys, lam = 0)
+    eta <- pmin(pmax(as.numeric(Xpred %*% beta), -30), 30)
+    return(1 / (1 + exp(-eta)))
+  }
+  beta <- as.numeric(solve(crossprod(Xs), crossprod(Xs, ys)))
+  as.numeric(Xpred %*% beta)
+}
+
+
 morie_estimate_aipw <- function(data, treatment, outcome, covariates,
                                 propensity_col = NULL,
                                 outcome_model = c("linear", "logistic"),
                                 trim = c(0.01, 0.99),
                                 trim_type = "value",
                                 ps_model = "mle",
-                                ridge_lambda = 1) {
+                                ridge_lambda = 1,
+                                outcome_fit = "separate") {
   outcome_model <- match.arg(outcome_model)
   t <- as.numeric(data[[treatment]])
   y <- as.numeric(data[[outcome]])
@@ -498,21 +528,21 @@ morie_estimate_aipw <- function(data, treatment, outcome, covariates,
                                      ridge_lambda = ridge_lambda)
   }
 
-  fam <- if (outcome_model == "logistic") {
-    stats::binomial()
+  if (!(outcome_fit %in% c("separate", "pooled")))
+    stop("outcome_fit must be 'separate' or 'pooled'")
+  Xc <- .mor_ps_design(data, covariates)
+  n <- nrow(Xc)
+  if (outcome_fit == "pooled") {
+    Xp <- cbind(Xc[, 1], t, Xc[, -1, drop = FALSE])
+    X1 <- cbind(Xc[, 1], rep(1, n), Xc[, -1, drop = FALSE])
+    X0 <- cbind(Xc[, 1], rep(0, n), Xc[, -1, drop = FALSE])
+    rows <- seq_len(n)
+    mu1 <- .mor_om_fit_predict(Xp, y, rows, X1, outcome_model)
+    mu0 <- .mor_om_fit_predict(Xp, y, rows, X0, outcome_model)
   } else {
-    stats::gaussian()
+    mu1 <- .mor_om_fit_predict(Xc, y, which(t == 1), Xc, outcome_model)
+    mu0 <- .mor_om_fit_predict(Xc, y, which(t == 0), Xc, outcome_model)
   }
-  formula <- stats::as.formula(
-    paste(outcome, "~", paste(c(treatment, covariates), collapse = " + "))
-  )
-  fit <- stats::glm(formula, data = data, family = fam)
-  data1 <- data
-  data1[[treatment]] <- 1
-  data0 <- data
-  data0[[treatment]] <- 0
-  mu1 <- as.numeric(stats::predict(fit, newdata = data1, type = "response"))
-  mu0 <- as.numeric(stats::predict(fit, newdata = data0, type = "response"))
 
   psi <- .influence_score_aipw(y, t, ps, mu1, mu0)
   ate <- mean(psi)
