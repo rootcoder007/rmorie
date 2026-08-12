@@ -444,6 +444,16 @@ morie_estimate_ate <- function(data, treatment, outcome, covariates,
   ess <- (sum(w)^2) / sum(w^2)
 
   list(
+
+    n_used = length(y),
+
+    n_discarded = n_discarded,
+
+    estimand = if (n_discarded > 0)
+
+      "ATE on the retained subpopulation (Crump et al. 2009 discard)" else
+
+      "ATE on the full sample",
     ate = ate, se = se, ci_lower = ci[1], ci_upper = ci[2],
     n = length(y), ess = ess
   )
@@ -654,7 +664,17 @@ morie_estimate_aipw <- function(data, treatment, outcome, covariates,
   se <- stats::sd(psi) / sqrt(length(psi))
   ci <- .wald_ci(ate, se)
 
-  list(ate = ate, se = se, ci_lower = ci[1], ci_upper = ci[2], n = length(y))
+  list(
+
+    n_used = length(y),
+
+    n_discarded = n_discarded,
+
+    estimand = if (n_discarded > 0)
+
+      "ATE on the retained subpopulation (Crump et al. 2009 discard)" else
+
+      "ATE on the full sample",ate = ate, se = se, ci_lower = ci[1], ci_upper = ci[2], n = length(y))
 }
 
 #' Doubly-robust ATE via causal forest (grf)
