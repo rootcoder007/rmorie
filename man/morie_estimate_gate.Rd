@@ -15,21 +15,7 @@ morie_estimate_gate(
 )
 }
 \arguments{
-\item{data}{A data frame.}
-
-\item{treatment}{Name of the binary treatment column.}
-
-\item{outcome}{Name of the outcome column.}
-
-\item{covariates}{Character vector of covariate names.}
-
 \item{group_col}{Name of the grouping variable (e.g. \code{"gender"}).}
-
-\item{propensity_col}{Optional: name of a pre-computed propensity
-score column.}
-
-\item{outcome_model}{Family for the outcome model: \code{"linear"} or
-\code{"logistic"}.}
 }
 \value{
 Data frame with columns: \code{group}, \code{ate}, \code{se},

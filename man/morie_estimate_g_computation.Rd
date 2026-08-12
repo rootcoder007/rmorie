@@ -12,18 +12,6 @@ morie_estimate_g_computation(
   outcome_model = c("linear", "logistic")
 )
 }
-\arguments{
-\item{data}{A data frame.}
-
-\item{treatment}{Name of the binary treatment column.}
-
-\item{outcome}{Name of the outcome column.}
-
-\item{covariates}{Character vector of covariate names.}
-
-\item{outcome_model}{Family for the outcome model: \code{"linear"} or
-\code{"logistic"}.}
-}
 \value{
 Named list: \code{ate}, \code{se}, \code{ci_lower}, \code{ci_upper}.
 }
