@@ -153,7 +153,7 @@ morie_attrInf <- function(tree, targets, priors,
     y <- t$label
 
     if (mode == "blackbox") {
-      model <- function(x) tree_predict(tree, x)
+      model <- function(x) .attrInf_tree_predict(tree, x)
       got <- map_invert(model, y, known, cand, err, priors, sens)
     } else {
       got <- wbwc_invert(tree, known, cand, priors, sens, unknown)
@@ -202,7 +202,7 @@ morie_attrInf <- function(tree, targets, priors,
   )
 }
 
-tree_predict <- function(tree, x) {
+.attrInf_tree_predict <- function(tree, x) {
   node <- tree
   while (!.leaf(node)) {
     if (!is.list(node) || is.null(node) ||

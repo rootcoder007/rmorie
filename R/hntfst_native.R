@@ -139,7 +139,7 @@ leaf_of <- function(tree, x) {
   list(node = node, path = path)
 }
 
-tree_predict <- function(tree, x) {
+.hntfst_tree_predict <- function(tree, x) {
   leaf_of(tree, x)$node$value
 }
 
@@ -213,7 +213,7 @@ honest_forest <- function(X, y, W = NULL, kind = "double-sample",
                        subsample = sub)
     tree <- res$tree
     for (q in 1:nrow(Q)) {
-      preds[b, q] <- tree_predict(tree, Q[q, ])
+      preds[b, q] <- .hntfst_tree_predict(tree, Q[q, ])
     }
     walk <- function(nd, dep) {
       if (isTRUE(nd$leaf)) {
