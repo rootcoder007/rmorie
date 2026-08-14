@@ -54,7 +54,7 @@
 #' @export
 Ihstst <- function(hap, core, positions = NULL, min_ehh = 0.05,
                    standardize = NULL) {
-  dec <- Ehhdec(hap, core, positions)
+  dec <- morie_ehhdec(hap, core, positions)
   pos <- dec$positions
   if (dec$n0 < 2L || dec$n1 < 2L) {
     stop("both core alleles need at least 2 chromosomes", call. = FALSE)
@@ -107,8 +107,8 @@ Ihstst <- function(hap, core, positions = NULL, min_ehh = 0.05,
 #' @export
 Xpehh1 <- function(hapA, hapB, core, positions = NULL, min_ehh = 0.05,
                    standardize = NULL) {
-  decA <- Ehhdec(hapA, core, positions)
-  decB <- Ehhdec(hapB, core, positions)
+  decA <- morie_ehhdec(hapA, core, positions)
+  decB <- morie_ehhdec(hapB, core, positions)
   if (length(decA$positions) != length(decB$positions)) {
     stop("populations must cover the same SNPs", call. = FALSE)
   }
