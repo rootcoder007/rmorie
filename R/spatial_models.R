@@ -135,7 +135,7 @@ morie_ripley_k <- function(coords, r_grid, area = NULL,
 #' @param model direct variogram function of distance
 #' @return list with `prediction`, `variance`, `lambda` and `mu`
 #' @export
-morie_cokriging <- function(coords, z1, z2, s0, cross_vario = NULL,
+morie_cokrig <- function(coords, z1, z2, s0, cross_vario = NULL,
                             model = NULL) {
   P <- as.matrix(coords)
   n <- nrow(P)
@@ -206,3 +206,7 @@ morie_local_dp_randomised_response <- function(truth, k, epsilon,
        p_keep = p_keep, p_flip = p_flip, epsilon = epsilon,
        k = k, n = n)
 }
+
+#' @rdname morie_cokrig
+#' @export
+morie_cokriging <- morie_cokrig

@@ -73,4 +73,4 @@ cokrg <- function(x, y, coords, target,
 #' @rdname cokrg
 #' @keywords internal
 #' @export
-morie_cokriging <- cokrg
+morie_cokrg <- cokrg
