@@ -69,9 +69,13 @@ shrink_covariance <- function(residuals, lam = NULL) {
 
 ._cholsolve <- function(A, b) {
   A <- as.matrix(A)
-  L <- tryCatch(chol(A), error = function(e) NULL)
-  if (!is.null(L)) {
-    return(as.numeric(backsolve(t(L), forwardsolve(L, b))))
+  # chol() returns the UPPER factor U with A = t(U) %*% U, so the
+  # forward solve must use t(U) and the back solve U. Passing U to
+  # forwardsolve and t(U) to backsolve, as this did, silently solves a
+  # different system: for a 3x3 it returned b[1]/A[1,1] and zeros.
+  U <- tryCatch(chol(A), error = function(e) NULL)
+  if (!is.null(U)) {
+    return(as.numeric(backsolve(U, forwardsolve(t(U), b))))
   }
   as.numeric(solve(A, b))
 }
@@ -112,7 +116,10 @@ mint_P <- function(S, W = NULL, method = "shrink", residuals = NULL,
     e <- numeric(n)
     e[i] <- 1.0
     row <- ._cholsolve(AR, e)
-    P[i, ] <- as.numeric(row %*% Winv_S)
+    # row is length n and Winv_S is m x n, so row %*% Winv_S does
+    # not conform. MinT wants row i of P to be W^-1 S A^-1 e_i,
+    # i.e. sum_j row[j] * Winv_S[a][j] for each a -- Winv_S %*% row
+    P[i, ] <- as.numeric(Winv_S %*% row)
   }
   list(P = P, lambda = lam)
 }
