@@ -69,7 +69,7 @@ morie_gwasem_gower <- function(S) {
 }
 
 .gwasem_eigh <- function(M) {
-  ee <- .gtrf_sym_eigen(M)
+  ee <- eigen(as.matrix(M), symmetric = TRUE)
   list(values = ee$values, vectors = ee$vectors)
 }
 
