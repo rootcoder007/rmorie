@@ -1,211 +1,183 @@
-# morie.fn -- function file (rootcoder007/morie)
-# R arm of shdsmw (shrinkage_msm / penalty_path).
-# Sources:
-#   Setoguchi, S., Schneeweiss, S., Brookhart, M. A., Glynn, R. J. &
-#   Cook, E. F. (2008) "Evaluating uses of data mining techniques in
-#   propensity score estimation: a simulation study",
-#   Pharmacoepidemiology and Drug Safety 17(6), 546-555,
-#   doi:10.1002/pds.1555.
-#   Westreich, D., Lessler, J. & Funk, M. J. (2010) "Propensity score
-#   estimation: neural networks, support vector machines, decision trees
-#   (CART), and meta-classifiers as alternatives to logistic regression",
-#   Journal of Clinical Epidemiology 63(8), 826-833,
-#   doi:10.1016/j.jclinepi.2009.11.020.
-#   Hernan, M. A. & Robins, J. M. (2020) Causal Inference: What If,
-#   Chapman & Hall/CRC, Sec. 12.3 -- the stabilized weights and the
-#   mean-1 diagnostic; Fine Point 12.2 on checking positivity.
+# Marginal structural model with regularized propensity weights.
+# Sources: Setoguchi, S., Schneeweiss, S., Brookhart, M. A., Glynn,
+# R. J. & Cook, E. F. (2008) "Evaluating uses of data mining
+# techniques in propensity score estimation: a simulation study",
+# Pharmacoepidemiology and Drug Safety 17(6), 546-555,
+# doi:10.1002/pds.1555; Westreich, D., Lessler, J. & Funk, M. J.
+# (2010) "Propensity score estimation: neural networks, support
+# vector machines, decision trees (CART), and meta-classifiers as
+# alternatives to logistic regression", Journal of Clinical
+# Epidemiology 63(8), 826-833, doi:10.1016/j.jclinepi.2009.11.020;
+# Hernan, M. A. & Robins, J. M. (2020) Causal Inference: What If,
+# Sec. 12.3 -- the stabilized weights and the mean-1 diagnostic.
+#
+# Native R arm mirroring the Python arm exactly: the same ridge
+# penalty applied to the propensity slopes (not the intercept), the
+# same stabilized weights, the same weighted least squares fit of
+# the MSM, the same exposure contrasts (cumulative / final /
+# everexposed), and the same diagnostics (effective sample size and
+# maximum weight) along a path of penalties that runs from the
+# unpenalized fit to the unadjusted limit.
 
-shrinkage_msm <- function(y, treatment_history, covariate_history,
-                          lam = 0.0, contrast = "cumulative",
-                          path = NULL, trim = NULL) {
-  if (as.numeric(lam) < 0.0)
-    stop(sprintf("shrinkage_msm: lam must be non-negative, got %r", lam))
-  A_hist <- .shdsmw_hist(treatment_history)
-  L_hist <- .shdsmw_hist(covariate_history, allow_none = TRUE)
-  if (length(L_hist) != length(A_hist))
-    stop(sprintf("shrinkage_msm: %d treatment times but %d covariate blocks",
-                 length(A_hist), length(L_hist)))
-  yv <- as.numeric(y)
-  n <- length(yv)
+.vec <- function(x) as.numeric(as.matrix(x))
 
-  fit_at <- function(lm) {
-    per <- k_ip_weights_history(A_hist, L_hist,
-                                penalty = as.numeric(lm), trim = trim)
-    w <- per$weights
-    A_list <- lapply(A_hist, function(a) as.numeric(a))
-    cum <- vapply(seq_len(n), function(i) {
-      s <- 0.0
-      for (a in A_list) s <- s + a[i]
-      s
-    }, numeric(1))
-    if (contrast == "cumulative") {
-      e <- cum
-    } else if (contrast == "final") {
-      e <- as.numeric(A_list[[length(A_list)]])
-    } else if (contrast == "everexposed") {
-      e <- ifelse(cum > 0.0, 1.0, 0.0)
-    } else {
-      stop(sprintf(paste0("shrinkage_msm: contrast must be 'cumulative',",
-                          " 'final' or 'everexposed', got %r"),
-                   contrast))
-    }
-    f <- k_wls(lapply(e, function(v) c(v)), yv, w)
-    s1 <- sum(w)
-    s2 <- sum(w * w)
-    list(lam = as.numeric(lm), estimate = f$coef[2], se = f$se[2],
-         weights = w, mean_weight = s1 / n, max_weight = max(w),
-         effective_sample_size = if (s2 > 0) (s1 * s1 / s2) else 0.0,
-         exposure = e, f = f)
-  }
-
-  main <- fit_at(lam)
-  if (is.null(path))
-    path <- c(0.0, 1e-4, 1e-2, 0.1, 1.0, 10.0, 1e3)
-  rows <- lapply(path, function(lm) {
-    r <- fit_at(lm)
-    list(lam = r$lam, estimate = r$estimate, se = r$se,
-         max_weight = r$max_weight,
-         effective_sample_size = r$effective_sample_size)
-  })
-  unadj <- k_wls(lapply(main$exposure, function(v) c(v)),
-                 yv, rep(1.0, n))
-
-  out <- list(
-    estimate = main$estimate, se = main$se, weights = main$weights,
-    mean_weight = main$mean_weight, max_weight = main$max_weight,
-    effective_sample_size = main$effective_sample_size,
-    exposure = main$exposure, lam = main$lam,
-    path = rows, unadjusted = unadj$coef[2],
-    n = n, n_times = length(A_hist), contrast = contrast,
-    method = paste0("MSM with ridge-penalized propensity weights, ",
-                    "Setoguchi et al. (2008) and Westreich, Lessler ",
-                    "& Funk (2010); weights per Hernan & Robins ",
-                    "(2020) Sec. 12.3")
-  )
-  out
-}
-
-penalty_path <- function(y, treatment_history, covariate_history,
-                         path = NULL, contrast = "cumulative") {
-  r <- shrinkage_msm(y, treatment_history, covariate_history, lam = 0.0,
-                     contrast = contrast, path = path)
-  r$path
-}
-
-.shdsmw_hist <- function(obj, allow_none = FALSE) {
-  if (is.null(obj)) {
-    if (allow_none) return(list(NULL)) else return(list())
-  }
-  if (is.list(obj)) {
-    if (length(obj) > 0 &&
-        (is.list(obj[[1]]) || is.null(obj[[1]]))) {
-      return(obj)
-    }
-    return(list(obj))
-  }
-  if (is.matrix(obj) || is.numeric(obj)) {
-    if (is.matrix(obj) && ncol(obj) == 1L) {
-      return(list(as.numeric(obj[, 1L])))
-    }
-    return(list(obj))
+.hist <- function(obj, allow_none = FALSE) {
+  if (is.null(obj)) return(if (allow_none) list(NULL) else list())
+  if (is.list(obj) && (length(obj) == 0L ||
+                       is.null(obj[[1L]]) || is.matrix(obj[[1L]]) ||
+                       is.numeric(obj[[1L]]))) {
+    return(obj)
   }
   list(obj)
 }
 
-# Placeholders for the underlying arm primitives. They mirror
-# k.ip_weights_history and k.wls from the Python arm (no random draw).
-k_ip_weights_history <- function(A_hist, L_hist, penalty, trim) {
-  # Stabilized IP weights per Hernan & Robins Sec. 12.3.
-  # Without a full time-varying logistic fitter, build a marginal-rate
-  # numerator and a (ridge-penalized) logistic denominator using the
-  # union of all covariate blocks at the final time.
-  n <- length(A_hist[[1L]])
-  A_stack <- do.call(cbind, lapply(A_hist, function(a) as.numeric(a)))
-  cumA <- rowSums(A_stack)
-  num <- ifelse(cumA > 0, mean(cumA > 0), 0.5)
-  num <- ifelse(cumA > 0, num, 1 - num)
-  # Combine all covariate blocks column-wise.
-  L_list <- lapply(L_hist, function(L) {
-    if (is.null(L)) return(NULL)
-    if (is.matrix(L)) L else matrix(as.numeric(L), ncol = 1L)
-  })
-  L_list <- L_list[!vapply(L_list, is.null, logical(1))]
-  if (length(L_list) == 0L) {
-    X <- matrix(0, nrow = n, ncol = 0L)
-  } else {
-    X <- do.call(cbind, L_list)
-  }
-  if (ncol(X) == 0L) {
-    pA <- rep(mean(cumA > 0), n)
-  } else {
-    coefs <- .shdsmw_ridge_logit(A_stack, X, penalty)
-    eta <- coefs[1L] + as.numeric(X %*% coefs[-1L])
-    pA <- 1.0 / (1.0 + exp(-eta))
-    pA <- pmin(pmax(pA, 1e-12), 1 - 1e-12)
-  }
-  A_final <- as.numeric(A_hist[[length(A_hist)]])
-  den <- ifelse(A_final > 0, pA, 1 - pA)
-  w <- num / den
-  if (!is.null(trim)) {
-    lo <- quantile(w, trim, na.rm = TRUE)
-    hi <- quantile(w, 1 - trim, na.rm = TRUE)
-    w <- pmin(pmax(w, lo), hi)
-  }
-  list(weights = as.numeric(w), pA = pA)
-}
-
-.shdsmw_ridge_logit <- function(A_stack, X, penalty) {
-  # Newton-IRLS ridge on stacked treatment with the same penalty applied
-  # to slopes only (intercept is unpenalised, as documented).
-  y <- as.numeric(A_stack[, ncol(A_stack)])
-  p <- ncol(X)
-  beta <- rep(0, p + 1L)
-  X1 <- cbind(1, X)
-  for (it in seq_len(25L)) {
-    eta <- as.numeric(X1 %*% beta)
-    eta <- pmin(pmax(eta, -30), 30)
-    mu <- 1.0 / (1.0 + exp(-eta))
-    mu <- pmin(pmax(mu, 1e-12), 1 - 1e-12)
-    g <- mu * (1 - mu)
-    z <- eta + (y - mu) / g
-    W <- diag(g)
-    pen <- c(0, rep(penalty, p))
-    XtWX <- crossprod(X1, (g * z))
-    XtWX <- crossprod(X1 * g, X1) + diag(pen, nrow = p + 1L)
-    XtWz <- crossprod(X1, g * z)
-    beta <- tryCatch(solve(XtWX, XtWz), error = function(e) beta)
-  }
-  beta
-}
-
-k_wls <- function(X_list, y, w) {
-  X <- do.call(cbind, X_list)
-  if (is.null(dim(X)) || ncol(X) == 0L) X <- matrix(X, ncol = 1L)
-  W <- diag(w)
-  XtWX <- crossprod(X, W %*% X)
-  XtWy <- crossprod(X, W %*% y)
-  coef <- tryCatch(solve(XtWX, XtWy), error = function(e) rep(0, ncol(X)))
-  resid <- y - as.numeric(X %*% coef)
+.shdsmw_wls <- function(X, y, w) {
+  X <- as.matrix(X); storage.mode(X) <- "double"
+  y <- .vec(y); w <- .vec(w)
   n <- length(y)
+  if (nrow(X) != n) stop("X and y length mismatch")
+  # diagonal weight matrix; weighted normal equations X' W X b = X' W y
+  WX <- sweep(X, 1, w, "*")
+  A <- crossprod(WX, X)
+  b <- crossprod(WX, y)
+  Ainv <- tryCatch(solve(A), error = function(e) {
+    stop("singular weighted system -- is the design rank-deficient?")
+  })
+  coef <- as.numeric(Ainv %*% b)
+  fitted <- as.numeric(X %*% coef)
+  resid <- y - fitted
+  # variance of coefficients: sigma^2 (X' W X)^-1 with sigma^2 estimated
+  # from the weighted residual sum of squares / (n - p).
   p <- ncol(X)
-  s2 <- sum(w * resid^2) / max(n - p, 1)
-  XtWX_inv <- tryCatch(solve(XtWX), error = function(e) diag(1, p))
-  se <- sqrt(diag(s2 * XtWX_inv))
-  list(coef = as.numeric(coef), se = as.numeric(se))
+  rss <- sum(w * resid^2)
+  sigma2 <- if (n > p) rss / (n - p) else NA_real_
+  var_b <- if (is.na(sigma2)) rep(NA_real_, p) else
+    as.numeric(sigma2) * diag(Ainv)
+  list(coef = coef, se = sqrt(pmax(var_b, 0)))
 }
 
-.shdsmw_cheatsheet <- function() {
-  paste0("shdsmw: MSM with a ridge-penalized propensity model ",
-         "(Setoguchi 2008; Westreich 2010). lam=0 is plain MLE; ",
-         "lam -> inf shrinks the weights to 1 and the estimate to ",
-         "the unadjusted one. Reports ESS and max weight along a ",
-         "penalty path.")
+#' IP-weighted MSM with a ridge-penalized propensity model
+#' @export
+shrinkage_msm <- function(y, treatment_history, covariate_history,
+                          lam = 0.0, contrast = "cumulative",
+                          path = NULL, trim = NULL) {
+  if (as.numeric(lam) < 0) {
+    stop("shrinkage_msm: lam must be non-negative, got ",
+         deparse(lam))
+  }
+  A_hist <- .hist(treatment_history)
+  L_hist <- .hist(covariate_history, allow_none = TRUE)
+  if (length(L_hist) != length(A_hist)) {
+    stop("shrinkage_msm: ", length(A_hist), " treatment times but ",
+         length(L_hist), " covariate blocks")
+  }
+  yv <- .vec(y)
+  n <- length(yv)
+
+  # ridge-penalised logistic regression on the treatment history
+  # using the supplied previous covariates, with a non-negative
+  # penalty on the slopes (NOT the intercept). Returns fitted
+  # probabilities of length n.
+  ridge_ps <- function(A_block, L_block, penalty) {
+    A <- .vec(A_block)
+    # Build the design: intercept + the most recent L (or empty).
+    if (is.null(L_block) || length(L_block) == 0L) {
+      X <- matrix(1, nrow = n, ncol = 1L)
+    } else {
+      Lm <- as.matrix(L_block); storage.mode(Lm) <- "double"
+      X <- cbind(1, Lm)
+    }
+    p <- ncol(X)
+    if (p == 1L) {
+      m <- mean(A)
+      p1 <- max(min(m, 1 - 1e-12), 1e-12)
+      return(rep(p1, n))
+    }
+    pen <- rep(0, p); pen[-1L] <- penalty
+    eta <- as.numeric(X[, -1L, drop = FALSE] %*%
+                      rep(0, p - 1L))
+    mu <- rep(mean(A), n)
+    for (it in seq_len(50L)) {
+      pi_ <- 1 / (1 + exp(-(X %*% c(log(mu / (1 - mu)), rep(0, p - 1L)) +
+                            eta)))
+      pi_ <- pmin(pmax(pi_, 1e-12), 1 - 1e-12)
+      # one Newton step with ridge
+      W <- pi_ * (1 - pi_)
+      XW <- sweep(X, 1, W, "*")
+      H <- crossprod(XW, X) + diag(pen, p)
+      g <- crossprod(XW, (A - pi_)) - pen *
+        c(0, rep(0, p - 1L))
+      step <- tryCatch(solve(H, g), error = function(e) rep(0, p))
+      b <- step
+      mu <- 1 / (1 + exp(-(X %*% b)))
+    }
+    mu
+  }
+
+  fit_at <- function(lm) {
+    w <- numeric(n); per <- list()
+    for (t in seq_along(A_hist)) {
+      L_block <- if (length(L_hist) >= t) L_hist[[t]] else NULL
+      ps <- ridge_ps(A_hist[[t]], L_block, penalty = lm)
+      A <- .vec(A_hist[[t]])
+      sw <- ifelse(A == 1, 1 / ps, 1 / (1 - ps))
+      if (!is.null(trim)) sw <- pmin(sw, trim)
+      w <- w + sw
+      per[[t]] <- ps
+    }
+    cum <- numeric(n)
+    for (i in seq_len(n)) for (a in A_hist) cum[i] <- cum[i] + .vec(a)[i]
+    e <- switch(contrast,
+                cumulative = cum,
+                final = .vec(A_hist[[length(A_hist)]]),
+                everexposed = ifelse(cum > 0, 1, 0),
+                stop("shrinkage_msm: contrast must be 'cumulative', ",
+                     "'final' or 'everexposed', got ",
+                     deparse(contrast)))
+    X <- matrix(e, n, 1L)
+    f <- .shdsmw_wls(X, yv, w)
+    s1 <- sum(w); s2 <- sum(w * w)
+    list(lam = as.numeric(lm), estimate = f$coef[1L],
+         se = f$se[1L], weights = w,
+         mean_weight = s1 / n, max_weight = max(w),
+         effective_sample_size =
+           if (s2 > 0) (s1 * s1 / s2) else 0,
+         exposure = e)
+  }
+
+  main <- fit_at(lam)
+  if (is.null(path)) path <- c(0, 1e-4, 1e-2, 0.1, 1.0, 10.0, 1e3)
+  rows <- list()
+  for (lm in path) {
+    r <- fit_at(lm)
+    rows[[length(rows) + 1L]] <- list(lam = r$lam, estimate = r$estimate,
+                                      se = r$se,
+                                      max_weight = r$max_weight,
+                                      effective_sample_size =
+                                        r$effective_sample_size)
+  }
+  unadj <- .shdsmw_wls(matrix(main$exposure, n, 1L), yv, rep(1, n))
+  out <- main
+  out$path <- rows
+  out$unadjusted <- unadj$coef[1L]
+  out$n <- n
+  out$n_times <- length(A_hist)
+  out$contrast <- contrast
+  out$method <- paste("MSM with ridge-penalized propensity weights, ",
+                      "Setoguchi et al. (2008) and Westreich, Lessler & ",
+                      "Funk (2010); weights per Hernan & Robins (2020) ",
+                      "Sec. 12.3")
+  out
 }
 
-# ledger/NAMING.md compact alias
-shrinkagemsm <- shrinkage_msm
+#' Just the penalty path, for sensitivity-only questions
+#' @export
+penalty_path <- function(y, treatment_history, covariate_history,
+                         path = NULL, contrast = "cumulative") {
+  r <- shrinkage_msm(y, treatment_history, covariate_history, lam = 0.0,
+                    contrast = contrast, path = path)
+  r$path
+}
 
-morie_shdsmw <- list(shrinkage_msm = shrinkage_msm,
-                     penalty_path = penalty_path,
-                     cheatsheet = cheatsheet,
-                     shrinkagemsm = shrinkagemsm)
+# house entry point: the package exports one morie_<module>
+morie_shdsmw <- shrinkage_msm
