@@ -21,8 +21,8 @@ Vcquant <- function(V, b = 3, seed = 1) {
   if (n < 1L) stop("the cache must hold at least one value vector")
   if (b < 2L)
     stop("b must be at least 2: one bit per coordinate goes to the sign sketch of the residual")
-  Pi <- .b1_rotation(d, seed)
-  base <- .b1_codebook(b - 1L)
+  Pi <- .kvmse_rotation(d, seed)
+  base <- .kvmse_codebook(b - 1L)
   g <- .t1_lcg(seed + 1)
   S <- matrix(0, d, d)
   for (i in seq_len(d)) for (j in seq_len(d)) S[i, j] <- g$norm()
@@ -33,7 +33,7 @@ Vcquant <- function(V, b = 3, seed = 1) {
     nrm <- sqrt(sum(x^2))
     sc <- if (nrm > 0) nrm / sqrt(d) else 1
     cb <- sc * base
-    yt <- cb[.b1_quantize(y, cb) + 1L]
+    yt <- cb[.kvmse_quantize(y, cb) + 1L]
     xm <- as.numeric(t(Pi) %*% yt)
     r <- x - xm
     gam <- sqrt(sum(r^2))

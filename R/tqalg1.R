@@ -18,18 +18,18 @@
 #' @references Zandieh et al., arXiv:2504.19874, Algorithm 1 lines 2-11
 #'   and Theorem 1. Fetched from arXiv. The paper specifies the codebook
 #'   only as the MSE-minimising centroids; the Lloyd-Max construction is
-#'   documented in the batch helper .b1_codebook.
+#'   documented in the batch helper .kvmse_codebook.
 #' @export
 Kvquant <- function(x, b = 2, seed = 1) {
   x <- .t1_vec(x); d <- length(x); b <- as.integer(b)
   if (d < 1L) stop("the vector must be non-empty")
   if (b < 1L) stop("the bit width must be at least 1")
-  Pi <- .b1_rotation(d, seed)
+  Pi <- .kvmse_rotation(d, seed)
   y <- as.numeric(Pi %*% x)
   nrm <- sqrt(sum(x^2))
   sc <- if (nrm > 0) nrm / sqrt(d) else 1
-  cb <- sc * .b1_codebook(b)
-  idx <- .b1_quantize(y, cb)
+  cb <- sc * .kvmse_codebook(b)
+  idx <- .kvmse_quantize(y, cb)
   yt <- cb[idx + 1L]
   xt <- as.numeric(t(Pi) %*% yt)
   mse <- sum((x - xt)^2)
