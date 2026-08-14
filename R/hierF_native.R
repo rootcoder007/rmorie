@@ -1,0 +1,157 @@
+# MinT: optimal reconciliation of hierarchical forecasts.
+#
+# Sources:
+#   Wickramasuriya, S. L., Athanasopoulos, G. & Hyndman, R. J. (2019)
+#   "Optimal Forecast Reconciliation for Hierarchical and Grouped Time
+#   Series Through Trace Minimization", JASA 114(526), 804-819.
+#   Hyndman, R. J., Ahmed, R. A., Athanasopoulos, G. & Shang, H. L.
+#   (2011) "Optimal combination forecasts for hierarchical time series",
+#   CSDA 55(9), 2579-2589.
+#   Schafer, J. & Strimmer, K. (2005) "A Shrinkage Approach to
+#   Large-Scale Covariance Matrix Estimation and Implications for
+#   Functional Genomics", SAGMB 4(1), article 32.
+#   Penrose, R. (1956) "On best approximate solutions of linear matrix
+#   equations", Math. Proc. Cambridge Phil. Soc. 52(1), 17-19.
+
+summing_matrix <- function(groups, n_bottom) {
+  if (n_bottom < 1L) stop("hierF: need at least one bottom series")
+  S <- matrix(0.0, length(groups), n_bottom)
+  for (r in seq_along(groups)) {
+    for (i in groups[[r]]) {
+      if (i < 0L || i >= n_bottom) {
+        stop(sprintf("hierF: bottom index %d out of range", i))
+      }
+      S[r, i + 1L] <- 1.0
+    }
+  }
+  bot <- diag(1.0, n_bottom, n_bottom)
+  rbind(S, bot)
+}
+
+is_coherent <- function(y, S, tol = 1e-9) {
+  m <- nrow(S)
+  n <- ncol(S)
+  b <- y[(m - n + 1L):m]
+  all(abs(y[1:m] - as.numeric(S %*% b)) <= tol)
+}
+
+shrink_covariance <- function(residuals, lam = NULL) {
+  T <- nrow(residuals)
+  if (T < 2L) {
+    stop(sprintf("hierF: need at least 2 residual rows, got %d", T))
+  }
+  m <- ncol(residuals)
+  mu <- colMeans(residuals)
+  R <- scale(residuals, center = mu, scale = FALSE)
+  Sig <- crossprod(R) / (T - 1L)
+  D <- diag(diag(Sig))
+  if (is.null(lam)) {
+    off_sum <- 0.0
+    for (a in 1:m) {
+      for (b in 1:m) {
+        if (a != b) off_sum <- off_sum + Sig[a, b]^2
+      }
+    }
+    var <- 0.0
+    for (a in 1:m) {
+      for (b in 1:m) {
+        if (a == b) next
+        w <- R[, a] * R[, b]
+        wm <- mean(w)
+        var <- var + sum((w - wm)^2) * T / (T - 1)^3
+      }
+    }
+    lam <- if (off_sum <= 1e-12) 1.0 else min(1.0, max(0.0, var / off_sum))
+  }
+  Sig_shr <- (1.0 - lam) * Sig + lam * D
+  list(cov = Sig_shr, lambda = lam)
+}
+
+._cholsolve <- function(A, b) {
+  A <- as.matrix(A)
+  L <- tryCatch(chol(A), error = function(e) NULL)
+  if (!is.null(L)) {
+    return(as.numeric(backsolve(t(L), forwardsolve(L, b))))
+  }
+  as.numeric(solve(A, b))
+}
+
+mint_P <- function(S, W = NULL, method = "shrink", residuals = NULL,
+                   ridge = 1e-10) {
+  if (!(method %in% c("ols", "wls", "shrink", "custom"))) {
+    stop(sprintf("hierF: method must be ols, wls, shrink or custom, got %r", method))
+  }
+  m <- nrow(S)
+  n <- ncol(S)
+  lam <- NULL
+  if (method == "ols") {
+    Wm <- diag(1.0, m, m)
+  } else if (method == "wls") {
+    if (is.null(residuals)) stop("hierF: wls needs residuals")
+    T <- nrow(residuals)
+    v <- pmax(colMeans(residuals^2), 1e-12)
+    Wm <- diag(v, m, m)
+  } else if (method == "shrink") {
+    if (is.null(residuals)) stop("hierF: shrink needs residuals")
+    sc <- shrink_covariance(residuals)
+    Wm <- sc$cov
+    lam <- sc$lambda
+  } else {
+    if (is.null(W)) stop("hierF: method='custom' needs W")
+    Wm <- as.matrix(W)
+  }
+  WmR <- Wm + diag(ridge, m, m)
+  Winv_S <- matrix(0.0, m, n)
+  for (j in 1:n) {
+    Winv_S[, j] <- ._cholsolve(WmR, S[, j])
+  }
+  A <- crossprod(S, Winv_S)
+  AR <- A + diag(ridge, n, n)
+  P <- matrix(0.0, n, m)
+  for (i in 1:n) {
+    e <- numeric(n)
+    e[i] <- 1.0
+    row <- ._cholsolve(AR, e)
+    P[i, ] <- as.numeric(row %*% Winv_S)
+  }
+  list(P = P, lambda = lam)
+}
+
+mint_reconcile <- function(base, S, method = "shrink", residuals = NULL,
+                           W = NULL, ridge = 1e-10) {
+  Sm <- as.matrix(S)
+  m <- nrow(Sm)
+  n <- ncol(Sm)
+  yb <- as.numeric(base)
+  if (length(yb) != m) {
+    stop(sprintf("hierF: %d base forecasts for %d series",
+                 length(yb), m))
+  }
+  out <- mint_P(Sm, W = W, method = method, residuals = residuals,
+                ridge = ridge)
+  P <- out$P
+  lam <- out$lambda
+  b <- as.numeric(P %*% yb)
+  rec <- as.numeric(Sm %*% b)
+  PS <- P %*% Sm
+  ps_err <- max(abs(PS - diag(1.0, n, n)))
+  list(estimate = rec, reconciled = rec, bottom = b, base = yb,
+       P = P, S = Sm, method = method, shrinkage = lam,
+       n_series = m, n_bottom = n, coherent = is_coherent(rec, Sm),
+       ps_identity_error = ps_err,
+       adjustment = rec - yb,
+       cite = "MinT, Wickramasuriya, Athanasopoulos & Hyndman (2019)",
+       method_detail = "P = (S' W^-1 S)^-1 S' W^-1")
+}
+
+mintreconcile <- mint_reconcile
+hierarchical_forecast <- mint_reconcile
+
+morie_hierF <- function(base, S, method = "shrink", residuals = NULL,
+                        W = NULL, ridge = 1e-10) {
+  mint_reconcile(base, S, method, residuals, W, ridge)
+}
+
+cheatsheet <- function() {
+  paste("hierF: y = S b, reconcile with ytilde = S P yhat where P = (S'W^-1 S)^-1 S'W^-1 minimises tr(P W P') subject to PS = I (MinT). PS = I makes SP a PROJECTION -- an already coherent forecast is left alone. Wrong P still adds up, because S forces that; it is just the wrong coherent point. W: ols=I, wls=diag, shrink=the paper's default because the full covariance is singular when m > T.")
+}

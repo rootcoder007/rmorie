@@ -1,0 +1,231 @@
+# morie.fn -- function file (rootcoder007/morie)
+# R arm of smatch (poisson_design, sccs_poisson_fit, sample_size, power,
+# relative_efficiency).
+# Sources:
+#   Whitaker, H. J., Farrington, C. P., Spiessens, B. & Musonda, P.
+#   (2006) "Tutorial in biostatistics: The self-controlled case series
+#   method", Statistics in Medicine 25, 1768-1797, doi:10.1002/sim.2302.
+#   Sec. 4 (the associated Poisson model with an individual factor and
+#   a log-time offset), Sec. 7.3-7.5 (risk-period choice, covariates,
+#   relative efficiency) and Sec. 7.6 (the sample size expression
+#   implemented here).
+#   Farrington, C. P. (1995) "Relative Incidence Estimation from Case
+#   Series for Vaccine Safety Evaluation", Biometrics 51(1), 228-235,
+#   JSTOR https://www.jstor.org/stable/2533328. The conditional
+#   likelihood the Poisson form reproduces.
+#   Musonda, P., Farrington, C. P. & Whitaker, H. J. (2006) "Sample
+#   sizes for self-controlled case series studies", Statistics in
+#   Medicine 25(15), 2618-2631. The age-varying case (not implemented).
+
+.SMATCH_EPS <- 1e-12
+
+.smatch_cholsolve <- function(M, b) {
+  # Symmetric positive-definite solve via base R's chol.
+  L <- chol(M)
+  y <- forwardsolve(t(L), b)
+  as.numeric(backsolve(L, y))
+}
+
+.smatch_build_intervals <- function(start, end, exposure, events, rp, ab) {
+  # Mirrors build_intervals from sccsno: returns a list of cells
+  # (age_band, risk_idx, exposure_time, event_count) per individual.
+  cells <- list()
+  for (r in seq_along(rp)) {
+    a <- rp[[r]][1]; b <- rp[[r]][2]
+    a <- max(a, start); b <- min(b, end)
+    if (b <= a) next
+    e <- b - a
+    in_rp <- !is.null(exposure) && any(exposure >= a & exposure < b)
+    n_ev <- sum(events >= a & events < b)
+    if (!in_rp && n_ev == 0L) next
+    cells[[length(cells) + 1L]] <- list(0L, as.integer(r), e, n_ev)
+  }
+  # Age bands (illustrative: 0 = youngest band).
+  if (length(ab) > 0L) {
+    for (j in seq_along(ab)) {
+      aa <- ab[j]; bb <- if (j < length(ab)) ab[j + 1L] else Inf
+      e <- max(0, min(bb, end) - max(aa, start))
+      n_ev <- sum(events >= max(aa, start) & events < min(bb, end))
+      if (e > 0 || n_ev > 0L)
+        cells[[length(cells) + 1L]] <-
+          list(as.integer(j), 0L, e, n_ev)
+    }
+  }
+  cells
+}
+
+poisson_design <- function(cases, risk_periods, age_breaks = numeric(0)) {
+  rp <- lapply(risk_periods, function(r) c(as.numeric(r[1]), as.numeric(r[2])))
+  ab <- as.numeric(age_breaks)
+  n_risk <- length(rp)
+  n_age <- length(ab) + 1L
+  people <- list()
+  for (c in cases) {
+    ev <- as.numeric(c$events)
+    if (length(ev) == 0L) next
+    cells <- .smatch_build_intervals(as.numeric(c$start),
+                                     as.numeric(c$end), c$exposure,
+                                     ev, rp, ab)
+    if (length(cells) > 0L) people[[length(people) + 1L]] <- cells
+  }
+  if (length(people) == 0L)
+    stop("smatch: no case contributed an event")
+  P <- length(people)
+  ncol <- n_risk + (n_age - 1L) + P
+  y <- c(); off <- c(); X <- list()
+  for (i in seq_along(people)) {
+    cells <- people[[i]]
+    for (cell in cells) {
+      j <- cell[[1L]]; r_idx <- cell[[2L]]; e <- cell[[3L]]
+      n <- cell[[4L]]
+      if (e <= .SMATCH_EPS) next
+      row <- rep(0.0, ncol)
+      if (r_idx > 0L) row[r_idx] <- 1.0
+      if (j > 0L) row[n_risk + j] <- 1.0
+      row[n_risk + n_age - 1L + i] <- 1.0
+      X[[length(X) + 1L]] <- row
+      y <- c(y, as.numeric(n))
+      off <- c(off, log(e))
+    }
+  }
+  if (length(y) == 0L) stop("smatch: no case contributed an event")
+  Xm <- do.call(rbind, X)
+  list(y = y, offset = off, X = Xm, n_risk = n_risk, n_age = n_age,
+       n_people = P, n_rows = length(y))
+}
+
+sccs_poisson_fit <- function(cases, risk_periods, age_breaks = numeric(0),
+                             iters = 200, tol = 1e-12, ridge = 1e-9) {
+  d <- poisson_design(cases, risk_periods, age_breaks = age_breaks)
+  y <- d$y; off <- d$offset; X <- d$X
+  p <- ncol(X)
+  beta <- rep(0.0, p)
+  conv <- FALSE; it <- 0L
+  for (it in seq_len(as.integer(iters))) {
+    eta <- off + as.numeric(X %*% beta)
+    eta <- pmin(pmax(eta, -500), 500)
+    mu <- exp(eta)
+    W <- pmax(mu, 1e-12)
+    z <- eta - off + (y - mu) / pmax(mu, 1e-12)
+    XtWX <- crossprod(X, X * W) + diag(ridge, p)
+    XtWz <- as.numeric(crossprod(X, W * z))
+    nb <- tryCatch(.smatch_cholsolve(XtWX, XtWz),
+                   error = function(e) {
+                     stop("smatch: the Poisson design is singular ",
+                          "-- an interval has no exposure time or ",
+                          "an individual has no variation")
+                   })
+    mx <- max(abs(nb - beta))
+    beta <- nb
+    if (mx < tol) { conv <- TRUE; break }
+  }
+  nr <- d$n_risk
+  list(estimate = exp(beta[seq_len(nr)]),
+       relative_incidence = exp(beta[seq_len(nr)]),
+       log_ri = beta[seq_len(nr)],
+       age_effects = beta[(nr + 1L):(nr + d$n_age - 1L)],
+       individual_effects =
+         beta[(nr + d$n_age):length(beta)],
+       coef = beta, converged = conv, iterations = it,
+       n_rows = d$n_rows, n_people = d$n_people,
+       method = paste0("associated Poisson model with a per-individual ",
+                       "factor and log-time offset; Whitaker et al. ",
+                       "(2006) Sec. 4"),
+       identical_to = "the conditional multinomial fit of sccsno")
+}
+
+.smatch_qnorm <- function(p) qnorm(p)
+
+.smatch_pnorm <- function(z) pnorm(z)
+
+sample_size <- function(log_ri, r, p_exposed, alpha = 0.05, power = 0.8) {
+  b <- as.numeric(log_ri)
+  rr <- as.numeric(r)
+  p <- as.numeric(p_exposed)
+  if (b == 0.0)
+    stop("smatch: the sample size is unbounded at a log relative incidence of 0")
+  if (!(rr > 0.0 && rr < 1.0))
+    stop(sprintf(paste0("smatch: r must lie strictly in (0, 1), got ",
+                        "%r -- it is the risk period as a fraction ",
+                        "of the observation period"), r))
+  if (!(p > 0.0 && p <= 1.0))
+    stop(sprintf("smatch: p_exposed must lie in (0, 1], got %r", p_exposed))
+  if (!(as.numeric(alpha) > 0.0 && as.numeric(alpha) < 1.0))
+    stop("smatch: alpha must lie in (0, 1)")
+  if (!(as.numeric(power) > 0.0 && as.numeric(power) < 1.0))
+    stop("smatch: power must lie in (0, 1)")
+  eb <- exp(b)
+  den <- rr * eb + 1.0 - rr
+  rho <- rr * eb / den
+  A <- 2.0 * (rho * b - log(den))
+  if (A <= .SMATCH_EPS)
+    stop(sprintf(paste0("smatch: the information A is non-positive ",
+                        "(%.3e) -- the design carries no signal here"),
+                 A))
+  B <- b * b * rho * (1.0 - rho) / A
+  C <- 1.0 + (1.0 - p) / (p * den)
+  za <- .smatch_qnorm(1.0 - as.numeric(alpha) / 2.0)
+  zg <- .smatch_qnorm(as.numeric(power))
+  n <- (C / A) * (za + zg * sqrt(B)) ^ 2
+  list(n_events = n, n_events_ceiling = as.integer(ceiling(n)),
+       rho = rho, A = A, B = B, C = C,
+       z_alpha_2 = za, z_power = zg,
+       log_ri = b, r = rr, p_exposed = p,
+       assumes = "age effects negligible; see Musonda, Farrington & Whitaker (2006) otherwise",
+       method = "Whitaker et al. (2006) Sec. 7.6")
+}
+
+power <- function(n_events, log_ri, r, p_exposed, alpha = 0.05) {
+  s <- sample_size(log_ri, r, p_exposed, alpha = alpha, power = 0.5)
+  A <- s$A; B <- s$B; C <- s$C
+  za <- s$z_alpha_2
+  root <- sqrt(max(as.numeric(n_events) * A / C, 0.0))
+  zg <- if (B > .SMATCH_EPS) (root - za) / sqrt(B) else Inf
+  list(power = pnorm(zg), z_power = zg,
+       n_events = as.numeric(n_events), A = A, B = B, C = C)
+}
+
+relative_efficiency <- function(r, log_ri) {
+  rr <- as.numeric(r); b <- as.numeric(log_ri)
+  if (!(rr > 0.0 && rr < 1.0))
+    stop("smatch: r must lie strictly in (0, 1)")
+  eb <- exp(b)
+  den <- rr * eb + 1.0 - rr
+  rho <- rr * eb / den
+  list(rho = rho, efficiency = 1.0 - rho,
+       r = rr, log_ri = b,
+       interpretation = paste0("the fraction of cases falling in the ",
+                               "risk period is rho; the marginal ",
+                               "information lost grows with it, so a ",
+                               "SHORT risk period keeps efficiency ",
+                               "high (Sec. 7.5)"))
+}
+
+cheatsheet <- function() {
+  paste0("smatch: the case series fitted as a POISSON model -- ",
+         "counts n_ijk, offset log(e_ijk), factors for age, ",
+         "exposure AND one per individual. The individual factors ",
+         "force the fitted totals to match the observed ones, ",
+         "which IS the conditioning, so this is the same fit as ",
+         "the multinomial, not an approximation. Sample size ",
+         "(Sec. 7.6): rho = re^b/(re^b+1-r), A = 2{rho b - ",
+         "log(re^b+1-r)}, B = b^2 rho(1-rho)/A -> 1 as b -> 0, ",
+         "C = 1 + (1-p)/(p(re^b+1-r)), n = (C/A)(z_a2 + z_g sqrt ",
+         "B)^2. p is the POPULATION exposed fraction, not the ",
+         "cases.")
+}
+
+# ledger/NAMING.md compact alias
+selfcontrolledcaseseries <- sccs_poisson_fit
+sccs_design <- sccs_poisson_fit
+sccsdesign <- sccs_poisson_fit
+
+morie_smatch <- list(poisson_design = poisson_design,
+                     sccs_poisson_fit = sccs_poisson_fit,
+                     sample_size = sample_size,
+                     power = power,
+                     relative_efficiency = relative_efficiency,
+                     cheatsheet = cheatsheet,
+                     selfcontrolledcaseseries = selfcontrolledcaseseries,
+                     sccs_design = sccs_design,
+                     sccsdesign = sccsdesign)
