@@ -7,7 +7,7 @@
 
 .GHC_EPS <- 1e-9
 
-.logit <- function(z) 1 / (1 + exp(-max(-500, min(500, z))))
+.bnshrt_logistic <- function(z) 1 / (1 + exp(-max(-500, min(500, z))))
 
 morie_sequence_probabilities <- function(beta, gamma, x, alpha, y0,
                                          link = "logit") {
