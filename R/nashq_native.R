@@ -372,4 +372,3 @@ nashqlearning <- morie_nashq
          "games. stage_game_type() reports which you have.")
 }
 
-cheatsheet <- .nashq_cheatsheet

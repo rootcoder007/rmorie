@@ -20,7 +20,7 @@
 # aggregation, the same near-tie diagnostics, the same validation
 # messages.
 
-.METHODS <- c("cv-tmle", "sample-split", "naive")
+.TMLDTA_METHODS <- c("cv-tmle", "sample-split", "naive")
 .EPS <- 1e-9
 
 .logit <- function(p) {
@@ -217,7 +217,7 @@ morie_tmldta <- function(y, D, X, candidate_strata = NULL,
                          method = "cv-tmle", n_folds = 10,
                          trim = 0.01, ridge = 1e-8, level = 0.95,
                          bounds = NULL) {
-  if (!method %in% .METHODS)
+  if (!method %in% .TMLDTA_METHODS)
     stop("tmldta: method must be one of cv-tmle, sample-split, naive")
   yv <- as.numeric(y); Av <- as.numeric(D); n <- length(yv)
   if (length(Av) != n) stop("tmldta: outcome and exposure differ in length")
