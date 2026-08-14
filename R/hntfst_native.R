@@ -21,15 +21,18 @@
 ._best_split <- function(X, y, rows, feats, min_leaf, alpha) {
   n <- length(rows)
   if (n < 2L * min_leaf) return(NULL)
-  base <- ._mean(y[rows])
-  tot <- sum((y[rows] - base)^2)
+  # rows are 0-based everywhere in this file, as they are in the
+  # Python arm; R subscripts are 1-based
+  ridx <- rows + 1L
+  base <- ._mean(y[ridx])
+  tot <- sum((y[ridx] - base)^2)
   best <- NULL
   floor_size <- max(min_leaf, as.integer(ceiling(alpha * n)))
-  sum_y <- sum(y[rows])
-  sum_y2 <- sum(y[rows]^2)
+  sum_y <- sum(y[ridx])
+  sum_y2 <- sum(y[ridx]^2)
   for (f in feats) {
-    order_idx <- order(X[rows, f])
-    o_rows <- rows[order_idx]
+    order_idx <- order(X[ridx, f])
+    o_rows <- ridx[order_idx]
     vals <- X[o_rows, f]
     ys <- y[o_rows]
     csum <- 0.0
