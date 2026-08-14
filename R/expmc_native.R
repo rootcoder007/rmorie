@@ -67,4 +67,7 @@ morie_laplc <- function(...) morie_dp_laplace_mechanism(...)
 #' @references Warner, S. L. (1965). Randomized response. Journal of
 #'   the American Statistical Association, 60(309), 63-69.
 #' @export
-morie_locdp <- function(...) morie_randomized_response_dp(...)
+# Rrand is the arm that matches the Python locdp field for field
+# (q, raw_rate, released, true_rate); morie_randomized_response_dp
+# returns a different shape (p_truth, raw_proportion, responses)
+morie_locdp <- function(...) Rrand(...)
