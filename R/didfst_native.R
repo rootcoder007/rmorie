@@ -124,7 +124,7 @@ morie_didfst_did_forest <- function(Y, D, X, event_time, x_eval = NULL,
                  nrow(Xm), n))
   Dv <- as.numeric(D)
   flat <- morie_didfst_did_estimate(delta, Dv)
-  gf <- .grow_forest(Xm, delta, W = Dv, kind = kind,
+  gf <- grow_forest(Xm, delta, W = Dv, kind = kind,
                      n_trees = n_trees, min_leaf = min_leaf,
                      alpha = alpha, max_depth = max_depth,
                      seed = as.integer(seed), clusters = clusters)
@@ -133,7 +133,7 @@ morie_didfst_did_forest <- function(Y, D, X, event_time, x_eval = NULL,
   taus <- numeric(nrow(pts))
   wt_t <- numeric(nrow(pts)); wt_c <- numeric(nrow(pts))
   for (i in seq_len(nrow(pts))) {
-    w <- .forest_weights(trees, Xm, pts[i, ])
+    w <- forest_weights(trees, Xm, pts[i, ])
     r <- morie_didfst_did_estimate(delta, Dv, weights = w)
     taus[i] <- r$estimate; wt_t[i] <- r$treated_weight; wt_c[i] <- r$control_weight
   }
