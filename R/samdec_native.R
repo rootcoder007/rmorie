@@ -228,7 +228,7 @@ morie_samdec <- function(prompt_tokens, image_tokens, grid_shape,
 sam_mask_decoder <- decode_mask
 sammaskdecoder <- decode_mask
 
-cheatsheet <- function() {
+.samdec_cheatsheet <- function() {
   paste("samdec: image embedding + prompt embeddings + a learned",
         "OUTPUT TOKEN -> mask. The decoder block does prompt",
         "self-attention and cross-attention in BOTH directions, so",

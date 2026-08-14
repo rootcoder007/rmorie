@@ -187,7 +187,7 @@ smo_platt <- function(y, K, C = 1.0, tol = 1e-3, eps = 1e-5,
                      "NEGATIVE of the LIBSVM convention used in svmopt"))
 }
 
-cheatsheet <- function() {
+.smoopt_cheatsheet <- function() {
   paste0("smoopt: same SVM dual as svmopt, different CHOICE of ",
          "pair. Two multipliers because the equality constraint ",
          "forces them to move together, and at two the QP is ",

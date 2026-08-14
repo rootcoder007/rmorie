@@ -111,6 +111,6 @@ morie_droSPI <- function(precip, scale = 3L, by_month = TRUE) {
 standardized_precipitation_index <- morie_droSPI
 spi <- morie_droSPI
 
-cheatsheet <- function() {
+.droSPI_cheatsheet <- function() {
   "droSPI: gamma-fit totals (Thom MLE), H=q+(1-q)G, A-S normal transform"
 }

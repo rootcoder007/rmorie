@@ -155,7 +155,7 @@ skipgram_pairs <- function(walks, window = 2) {
   do.call(rbind, pairs)
 }
 
-cheatsheet <- function() {
+.node2v_cheatsheet <- function() {
   paste("node2v: graph as document, walk as sentence, skip-gram on ",
         "top. The point is that NO sampling strategy wins everywhere: ",
         "BFS gives a low-variance local structural view, DFS a ",

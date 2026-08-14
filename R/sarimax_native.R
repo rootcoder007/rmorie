@@ -302,7 +302,7 @@ auto_order <- function(y, X = NULL, d = 0, D = 0, s = 1, method = "css",
 
 `%||%` <- function(a, b) if (is.null(a)) b else a
 
-cheatsheet <- function() {
+.sarimax_cheatsheet <- function() {
   paste("sarimax: y = beta'x + n with seasonal ARIMA errors. beta",
         "is profiled out by exact GLS on the Kalman innovations,",
         "so only the ARIMA parameters go to the optimiser.",

@@ -145,7 +145,7 @@ solve_lp <- function(A, b, c, tol = 1e-9, max_iter = 100L, nu = 3.0,
 predictor_corrector <- solve_lp
 mehrotras_predictor <- solve_lp
 
-cheatsheet <- function() {
+.mehtad_cheatsheet <- function() {
   paste("mehtad: the expensive part of an interior-point iteration ",
         "is ONE factorisation of A D A'; a second right-hand side ",
         "is nearly free, so spend it on information. PREDICTOR: ",
@@ -173,7 +173,7 @@ morie_mehtad <- function(op, ...) {
     "solve_lp" = solve_lp(...),
     "predictor_corrector" = solve_lp(...),
     "mehrotras_predictor" = solve_lp(...),
-    "cheatsheet" = list(cheatsheet = cheatsheet()),
+    "cheatsheet" = list(cheatsheet = .mehtad_cheatsheet()),
     stop("mehtad: unknown op ", shQuote(op))
   )
 }

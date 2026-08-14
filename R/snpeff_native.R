@@ -211,7 +211,7 @@ snpeff <- function(cds, variants, cds_start = 0, upstream = 5000,
                      "is 1-based, as the notation requires"))
 }
 
-cheatsheet <- function() {
+.snpeff_cheatsheet <- function() {
   paste0("snpeff: variant annotation (Cingolani et al. 2012). ",
          "Classify by codon change: synonymous, missense, ",
          "stop_gained, stop_lost, start_lost; by indel length mod 3: ",

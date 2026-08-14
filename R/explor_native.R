@@ -216,7 +216,7 @@ explor <- function(states, actions, next_states, n_actions = NULL,
   payload
 }
 
-cheatsheet <- function() {
+.explor_cheatsheet <- function() {
   paste0("explor: ICM (Pathak 2017). phi learned via the INVERSE model ",
          "(eqs. 2-3) so it encodes only what the agent can affect; ",
          "forward model f(phi(s),a) (eq. 4); curiosity r^i = ",

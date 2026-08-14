@@ -334,7 +334,7 @@ memb <- function(target_predict, shadow_data, eval_in, eval_out,
 
 membership_inference <- memb
 
-cheatsheet <- function() {
+.memb_cheatsheet <- function() {
   paste("memb: membership inference (Shokri et al. 2017). Black-box ",
         "output vector in, member/non-member out. Train k SHADOW ",
         "models on data distributed like the target's, where you DO ",
@@ -362,7 +362,7 @@ morie_memb <- function(op, ...) {
     "precision_recall" = precision_recall(...),
     "logistic_trainer" = list(train_fn = logistic_trainer(...)),
     "knn_trainer" = list(train_fn = knn_trainer(...)),
-    "cheatsheet" = list(cheatsheet = cheatsheet()),
+    "cheatsheet" = list(cheatsheet = .memb_cheatsheet()),
     stop("memb: unknown op ", shQuote(op))
   )
 }

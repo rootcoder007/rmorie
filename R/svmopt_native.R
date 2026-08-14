@@ -174,7 +174,7 @@ smo <- function(y, K, C = 1.0, tol = 1e-8, max_iter = 20000) {
                      "the stopping criterion"))
 }
 
-cheatsheet <- function() {
+.svmopt_cheatsheet <- function() {
   paste0("svmopt: the SVM DUAL is where the kernel enters and where ",
          "the structure is exploitable -- max sum(a) - 0.5 a'Qa ",
          "subject to 0 <= a <= C and sum(y a) = 0. The Hessian is ",

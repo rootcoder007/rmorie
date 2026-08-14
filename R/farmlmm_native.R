@@ -177,7 +177,7 @@ farmcpu <- function(y, G, max_iter = 10, threshold = NULL,
                     sep = " "))
 }
 
-cheatsheet <- function() {
+.farmlmm_cheatsheet <- function() {
   paste("farmlmm: an MLM controls false positives with kinship",
         "estimated from ALL markers -- which therefore contains",
         "the marker being tested, and that confounding costs",

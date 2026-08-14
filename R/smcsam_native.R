@@ -238,7 +238,7 @@ smcsam <- function(log_gamma, initial, n_particles = 500L, ladder = NULL,
        method = "SMC sampler (Del Moral, Doucet & Jasra 2006)")
 }
 
-cheatsheet <- function() {
+.smcsam_cheatsheet <- function() {
   paste("smcsam: SMC samplers (Del Moral, Doucet & Jasra 2006). A ",
         "sequence pi_n on a FIXED space is made sequential by an ",
         "artificial joint target built from BACKWARD kernels L_k, so ",

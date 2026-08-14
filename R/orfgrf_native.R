@@ -261,7 +261,7 @@ orthogonal_random_forest <- function(Y, T, X, W, x_eval = NULL,
                       " residualization", sep = ""))
 }
 
-cheatsheet <- function() {
+.orfgrf_cheatsheet <- function() {
   paste("orfgrf: ORF. Moment E[Y - theta(x) T - f(x,W) | X=x] = 0. ",
         "Residualize BOTH Y and T on the controls W, then ",
         "theta(x) = sum a_i T~ Y~ / sum a_i T~^2 under forest ",

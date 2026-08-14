@@ -361,7 +361,7 @@ iptw_ate <- function(y, A, H, library = NULL, n_folds = 10,
 }
 
 # --- cheatsheet -----------------------------------------------------
-cheatsheet <- function() {
+.flxipt_cheatsheet <- function() {
   paste0("flxipt: Super Learner. Z[i,j] = candidate j's HELD-OUT ",
          "prediction for i; fit the meta-learner of y on Z (nnls ",
          "convex combination, or discrete = the CV selector); apply ",

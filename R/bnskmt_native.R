@@ -172,7 +172,7 @@ compare_forms <- function(m, instruments, form = "sum", n_equality = 0L) {
        note = "KS is driven by the single worst instrument, CvM by the average; a concentrated violation favours KS and a diffuse one favours CvM")
 }
 
-cheatsheet <- function() {
+.bnskmt_cheatsheet <- function() {
   paste0(
     "bnskmt: conditional moment inequalities, KS form. Same ",
     "construction as bndsmw -- conditional inequality becomes ",

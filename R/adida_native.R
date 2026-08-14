@@ -258,7 +258,7 @@ temporal_combination <- function(y, levels, horizon = 1L, method = "tsb",
 #'
 #' @return Character string summarising the framework.
 #' @export
-cheatsheet <- function() {
+.adida_cheatsheet <- function() {
   paste0("adida: sum into buckets of m, forecast the aggregate, ",
          "divide back by m. Aggregation cuts the zero fraction, ",
          "which is the self-improving mechanism. Set m = LEAD TIME ",

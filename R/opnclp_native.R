@@ -166,7 +166,7 @@ infonce <- function(image_embeddings, text_embeddings,
   )
 }
 
-cheatsheet <- function() {
+.opnclp_cheatsheet <- function() {
   paste("opnclp: CLIP-scale laws had been measured on PRIVATE data ",
         "and models; re-run on public LAION with an open ",
         "implementation, up to 2B pairs, and the scaling is a POWER ",
