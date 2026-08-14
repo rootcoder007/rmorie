@@ -19,7 +19,7 @@
 # an ARMA process used by loglik and for the stationary initial state
 # covariance.
 
-.METHODS <- c("ml", "uls", "css", "moment")
+.SARIMA_METHODS <- c("ml", "uls", "css", "moment")
 
 .SARIMA_SERIES_G_BY_MONTH <- list(
   c(112, 115, 145, 171, 196, 204, 242, 284, 315, 340, 360, 417),
@@ -202,8 +202,7 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
     sumlogf <- sumlogf + log(f)
     a <- as.numeric(T %*% a)
     TP <- T %*% P
-    P <- TP %*% t(T)
-    for (i in 1:r) P[i, i] <- P[i, i] + R[i] * R[i]
+    P <- TP %*% t(T) + R %o% R
   }
   sigma2 <- ssq / n
   ll <- (-0.5 * n * (log(2 * pi * sigma2) + 1) - 0.5 * sumlogf)
@@ -265,11 +264,11 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
   list(x = simplex[best, ], fun = fv[best], success = TRUE)
 }
 
-fit <- function(y, order = c(0, 1, 1), seasonal_order = c(0, 1, 1), s = 12,
+.sarima_fit <- function(y, order = c(0, 1, 1), seasonal_order = c(0, 1, 1), s = 12,
                 method = "ml", start = NULL) {
-  if (!(method %in% .METHODS))
+  if (!(method %in% .SARIMA_METHODS))
     stop(sprintf("sarima: method must be one of %s, got %s",
-                 paste(.METHODS, collapse = ", "), method))
+                 paste(.SARIMA_METHODS, collapse = ", "), method))
   p <- as.integer(order[1]); d <- as.integer(order[2]); q <- as.integer(order[3])
   P <- as.integer(seasonal_order[1]); D <- as.integer(seasonal_order[2]); Q <- as.integer(seasonal_order[3])
   s <- as.integer(s)

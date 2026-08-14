@@ -35,6 +35,22 @@
 #' @return A list with \code{m_hat} and \code{e_hat}.
 #' @keywords internal
 #' @noRd
+
+# Split counts by (depth, feature), depth 1 at the root. Mirrors
+# morie.fn.crfsel._depth_counts; element [[depth]] holds the counts at
+# that depth, so the caller indexes by depth directly.
+.depth_counts <- function(tree, max_depth, d) {
+  counts <- lapply(seq_len(max_depth), function(i) numeric(d))
+  walk <- function(nd, depth) {
+    if (isTRUE(nd$leaf) || depth > max_depth) return(invisible(NULL))
+    counts[[depth]][nd$feature] <<- counts[[depth]][nd$feature] + 1
+    walk(nd$left, depth + 1L)
+    walk(nd$right, depth + 1L)
+  }
+  walk(tree, 1L)
+  counts
+}
+
 .center_cate <- function(y, W, X, n_folds, n_trees, min_leaf, seed) {
   n <- length(y)
   if (n_folds < 2L) n_folds <- 2L
@@ -48,17 +64,17 @@
     if (length(tr) == 0L) next
     Xt <- X[tr, , drop = FALSE]
     # outcome forest
-    trees_y <- .grow_forest(Xt, y[tr], n_trees, min_leaf,
-                             seed + 0L)
+    trees_y <- grow_forest(Xt, y[tr], n_trees = n_trees,
+                           min_leaf = min_leaf, seed = seed + 0L)$trees
     mh[val] <- vapply(val, function(i) {
-      w <- .forest_weights(trees_y, Xt, X[i, ])
+      w <- forest_weights(trees_y, Xt, X[i, ])
       sum(w * y[tr])
     }, numeric(1))
     # treatment forest
-    trees_w <- .grow_forest(Xt, W[tr], n_trees, min_leaf,
-                             seed + 1L)
+    trees_w <- grow_forest(Xt, W[tr], n_trees = n_trees,
+                           min_leaf = min_leaf, seed = seed + 1L)$trees
     eh[val] <- vapply(val, function(i) {
-      w <- .forest_weights(trees_w, Xt, X[i, ])
+      w <- forest_weights(trees_w, Xt, X[i, ])
       sum(w * W[tr])
     }, numeric(1))
   }
@@ -123,7 +139,7 @@
   err_fn <- function(Xa) {
     tot <- 0
     for (i in seq_len(n)) {
-      w <- .forest_weights(trees, X, Xa[i, ])
+      w <- forest_weights(trees, X, Xa[i, ])
       pred <- sum(w * y)
       tot <- tot + (y[i] - pred) ^ 2
     }
@@ -197,8 +213,8 @@ morie_crfsel <- function(y, W, X, n_trees = 200L, min_leaf = 5L,
   if (denom < 1e-12)
     stop("crfsel: the treatment does not vary")
   pseudo <- wr * yr / denom
-  trees <- .grow_forest(Xm, pseudo, n_trees = n_trees,
-                         min_leaf = min_leaf, seed = as.integer(seed))
+  trees <- grow_forest(Xm, pseudo, n_trees = n_trees,
+                       min_leaf = min_leaf, seed = as.integer(seed))$trees
   freq <- .split_frequency_importance(trees, d, max_depth, decay)
   if (isTRUE(permutation)) {
     perm <- .permutation_importance(trees, Xm, pseudo, NULL,
