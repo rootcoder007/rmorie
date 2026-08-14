@@ -1481,7 +1481,14 @@ morie_causal_robust_se <- function(model,
 #'   Foundations of Statistical Inference. Holt, Rinehart and Winston;
 #'   Cochran, W. G. (1977). Sampling Techniques, 3rd ed., Sec. 6.13.
 #' @export
-morie_hajek_mean <- function(y, weights) {
+# NOTE: this takes sampling WEIGHTS. The exported
+# morie_hajek_mean takes inclusion PROBABILITIES pi, matching
+# the Python arm hjkest.hajek_estimator(y, pi) -- and weights
+# are the reciprocals of those, so the two are not
+# interchangeable. Both were defined as morie_hajek_mean and
+# survey_native.R sorts later, so this one never ran; it is
+# scoped rather than left as a name that silently loses.
+.causal_hajek_weighted_mean <- function(y, weights) {
   y <- as.numeric(y); w <- as.numeric(weights)
   if (length(y) != length(w))
     stop(sprintf("y and weights must have the same length; got %d and %d.",
