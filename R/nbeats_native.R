@@ -6,7 +6,12 @@ nbeats_trend_basis <- function(length, degree, offset = 0, scale = NULL) {
   if (degree < 0L) stop(sprintf("nbeats: degree must be non-negative, got %d", degree))
   sc <- if (is.null(scale)) as.numeric(length) else as.numeric(scale)
   t_seq <- (seq_len(length) - 1L)
-  sapply(seq_len(degree + 1L) - 1L, function(p) ((offset + t_seq) / sc)^p)
+  # rows are basis functions, columns are time -- P x L, matching the
+  # Python arm and nbeats_seasonality_basis. sapply() alone returns the
+  # transpose, which left the two bases in this file disagreeing and
+  # made the seasonality block non-conformable.
+  t(sapply(seq_len(degree + 1L) - 1L,
+           function(p) ((offset + t_seq) / sc)^p))
 }
 
 nbeats_seasonality_basis <- function(length, harmonics, offset = 0, period = NULL) {
@@ -48,9 +53,11 @@ nbeats_block <- function(window, horizon, kind = "generic", degree = 2,
     bb <- diag(1, nrow = L, ncol = L)
     fb <- matrix(1 / max(L, 1), nrow = L, ncol = H)
   }
-  theta <- nbeats_lstsq(bb, window, ridge)
-  backcast <- as.numeric(bb %*% theta)
-  forecast <- as.numeric(fb %*% theta)
+  # bases are P x L, so the design matrix is t(bb) (L x P) and both
+  # casts are evaluated as t(basis) %*% theta
+  theta <- nbeats_lstsq(t(bb), window, ridge)
+  backcast <- as.numeric(t(bb) %*% theta)
+  forecast <- as.numeric(t(fb) %*% theta)
   list(backcast = backcast, forecast = forecast, theta = theta)
 }
 
