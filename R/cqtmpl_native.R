@@ -29,7 +29,7 @@
 #' @return Numeric coefficient vector of length p.
 #' @keywords internal
 #' @noRd
-.wls <- function(X, y, w) {
+.cqtmpl_wls <- function(X, y, w) {
   p <- ncol(X)
   A <- matrix(0, p, p)
   b <- numeric(p)
@@ -192,7 +192,7 @@ morie_cqtmpl <- function(y, left, right, r_left, r_right,
       Y[2L * i - 1L] <- y[i]; Y[2L * i] <- y[i]
       W[2L * i - 1L] <- 1 - post[i]; W[2L * i] <- post[i]
     }
-    beta <- .wls(X, Y, W)
+    beta <- .cqtmpl_wls(X, Y, W)
     s2 <- sum(W * (Y - as.numeric(X %*% beta)) ^ 2) / n
   }
   # null model
@@ -203,7 +203,7 @@ morie_cqtmpl <- function(y, left, right, r_left, r_right,
   } else {
     X0 <- matrix(1, n, 1)
   }
-  b0 <- .wls(X0, y, rep(1, n))
+  b0 <- .cqtmpl_wls(X0, y, rep(1, n))
   r0 <- y - as.numeric(X0 %*% b0)
   s0 <- mean(r0 ^ 2)
   ll0 <- -0.5 * n * (log(2 * pi * s0) + 1)
