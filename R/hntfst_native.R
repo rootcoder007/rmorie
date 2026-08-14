@@ -206,7 +206,10 @@ honest_forest <- function(X, y, W = NULL, kind = "double-sample",
     in_bag[b, sub + 1L] <- TRUE
     res <- honest_tree(Xm, yv, W = W, kind = kind, min_leaf = min_leaf,
                        alpha = alpha, pi = pi, max_depth = max_depth,
-                       seed = as.integer(seed) * 7919L + b,
+                       # b is 1-based in R and 0-based in the
+                       # Python arm, so b-1 keeps tree t on the
+                       # same RNG stream in both
+                       seed = as.integer(seed) * 7919L + b - 1L,
                        subsample = sub)
     tree <- res$tree
     for (q in 1:nrow(Q)) {
@@ -274,7 +277,10 @@ grow_forest <- function(X, y, W = NULL, kind = "double-sample",
     }
     res <- honest_tree(X, y, W = W, kind = kind, min_leaf = min_leaf,
                        alpha = alpha, pi = pi, max_depth = max_depth,
-                       seed = as.integer(seed) * 7919L + b,
+                       # b is 1-based in R and 0-based in the
+                       # Python arm, so b-1 keeps tree t on the
+                       # same RNG stream in both
+                       seed = as.integer(seed) * 7919L + b - 1L,
                        subsample = sub)
     trees[[b]] <- res$tree
     bag <- logical(n)
