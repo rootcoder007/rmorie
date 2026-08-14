@@ -21,9 +21,9 @@
 prophe_additive_components <- function(t, y, seasonalities = NULL,
                                        holidays = NULL,
                                        holiday_window = c(0, 0), ...) {
-  fit <- prphet_prophet_fit(t, y, seasonalities = seasonalities,
+  fit <- morie_prphet_fit(t, y, seasonalities = seasonalities,
                             holidays = holidays,
-                            holiday_window = holiday_window, ...)
+                            holiday.window = holiday_window, ...)
   tv <- fit$t
   n <- length(tv)
   coef <- fit$coef
@@ -35,15 +35,16 @@ prophe_additive_components <- function(t, y, seasonalities = NULL,
       name <- s[[1L]]
       period <- s[[2L]]
       order <- as.integer(s[[3L]])
-      Fmat <- prphet_fourier_terms(tv, period, order)
+      Fmat <- morie_prphet_fourier_terms(tv, period, order)
       vals <- numeric(n)
       for (i in seq_len(n)) {
         acc <- 0.0
         for (nn in seq_len(order)) {
           cos_key <- paste0(name, "_cos", nn)
           sin_key <- paste0(name, "_sin", nn)
-          acc <- acc + (coef[[cos_key]] * Fmat[[i]][2L * nn - 2L]
-                        + coef[[sin_key]] * Fmat[[i]][2L * nn - 1L])
+          # Python indexes F[i][2*nn - 2] and [2*nn - 1] 0-based
+          acc <- acc + (coef[[cos_key]] * Fmat[i, 2L * nn - 1L]
+                        + coef[[sin_key]] * Fmat[i, 2L * nn])
         }
         vals[i] <- acc
       }
@@ -51,16 +52,16 @@ prophe_additive_components <- function(t, y, seasonalities = NULL,
     }
   }
   if (!is.null(holidays) && length(holidays) > 0L) {
-    H <- prphet_holiday_matrix(tv, holidays, holiday_window[1L],
+    H <- morie_prphet_holiday_matrix(tv, holidays, holiday_window[1L],
                                holiday_window[2L])
-    Hmat <- H$matrix
+    Hmat <- H$rows
     names <- H$names
     vals <- numeric(n)
     for (i in seq_len(n)) {
       acc <- 0.0
       for (j in seq_along(names)) {
         key <- paste0("holiday_", names[j])
-        acc <- acc + coef[[key]] * Hmat[[i]][j]
+        acc <- acc + coef[[key]] * Hmat[i, j]
       }
       vals[i] <- acc
     }
