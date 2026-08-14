@@ -77,7 +77,7 @@ fit_power_law <- function(x, y) {
   )
 }
 
-predict <- function(fit, compute) {
+.opnclp_predict <- function(fit, compute) {
   c <- as.numeric(compute)
   if (c <= 0.0)
     stop("opnclp: compute must be positive")
