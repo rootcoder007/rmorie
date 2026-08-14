@@ -140,7 +140,7 @@ fit_ffm <- function(rows, labels, fields, n_features, n_fields,
        caveat = "FFM overfits readily -- the paper stops early on a validation set")
 }
 
-cheatsheet <- function() {
+.ffmFM_cheatsheet <- function() {
   paste("ffmFM: one latent vector per feature PER FIELD, because a",
         "feature interacts differently with an advertiser than",
         "with a gender. The interaction is <w_{j1,f2}, w_{j2,f1}>",

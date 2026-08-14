@@ -83,7 +83,7 @@ order_is_graph_determined <- function(features, adj, perm, k_keep,
        note = "the sort key must be a function of the GRAPH, not of the vertex listing")
 }
 
-cheatsheet <- function() {
+.sortP_cheatsheet <- function() {
   paste("sortP: the under-stated problem in graph classification is",
         "how to read vertices in a MEANINGFUL AND CONSISTENT",
         "order so an ordinary network can be trained on graphs.",

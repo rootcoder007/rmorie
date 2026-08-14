@@ -201,7 +201,7 @@ relative_efficiency <- function(r, log_ri) {
                                "high (Sec. 7.5)"))
 }
 
-cheatsheet <- function() {
+.smatch_cheatsheet <- function() {
   paste0("smatch: the case series fitted as a POISSON model -- ",
          "counts n_ijk, offset log(e_ijk), factors for age, ",
          "exposure AND one per individual. The individual factors ",

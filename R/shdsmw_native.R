@@ -194,7 +194,7 @@ k_wls <- function(X_list, y, w) {
   list(coef = as.numeric(coef), se = as.numeric(se))
 }
 
-cheatsheet <- function() {
+.shdsmw_cheatsheet <- function() {
   paste0("shdsmw: MSM with a ridge-penalized propensity model ",
          "(Setoguchi 2008; Westreich 2010). lam=0 is plain MLE; ",
          "lam -> inf shrinks the weights to 1 and the estimate to ",

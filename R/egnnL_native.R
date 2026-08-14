@@ -167,7 +167,7 @@ equivariance_error <- function(H, X, phi_e, phi_x, phi_h, Q, g,
        note = "x must transform WITH Q and g; h must not move at all")
 }
 
-cheatsheet <- function() {
+.egnnL_cheatsheet <- function() {
   paste0("egnnL: equivariance to translation, rotation and reflection ",
          "WITHOUT spherical harmonics. m_ij depends on position only ",
          "through ||x_i - x_j||^2, so it is invariant; x_i <- x_i + C ",

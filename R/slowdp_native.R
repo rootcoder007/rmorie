@@ -123,7 +123,7 @@ truncated_dp <- function(alpha, K, base_sampler = NULL, rng = NULL,
                      "survivors, which is why the amount is returned"))
 }
 
-cheatsheet <- function() {
+.slowdp_cheatsheet <- function() {
   paste0("slowdp: Sethuraman writes the DP as a PROGRAM -- ",
          "p_k = V_k prod(1 - V_l) with V_k ~ Beta(1, alpha) and ",
          "atoms from the base measure, summing to 1 almost surely. ",

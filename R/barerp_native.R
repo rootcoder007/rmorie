@@ -581,7 +581,7 @@ barriermethod <- barrier_method
 #'
 #' @return Character string summarising the method.
 #' @export
-cheatsheet <- function() {
+.barerp_cheatsheet <- function() {
   paste0("barerp: the logarithmic barrier method. Frisch (1956) ",
          "eq. 5.1 defines the potential as the sum of the logs of ",
          "all the variables -- slacks included -- and moves along a ",

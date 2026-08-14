@@ -80,6 +80,6 @@ morie_funBoot <- function(curves, statistic = NULL, alpha = 0.05, B = 500L,
 functional_bootstrap_band <- morie_funBoot
 functional_bootstrap <- morie_funBoot
 
-cheatsheet <- function() {
+.funBoot_cheatsheet <- function() {
   "funBoot: D = q_{1-a}(dist(T*_b, mean T*)); band = ball(center, D)"
 }

@@ -128,7 +128,7 @@ s6_layer <- function(X, A, W_B, W_C, W_delta, ...) {
   selective_scan(X, A, W_B, W_C, W_delta, ...)$y
 }
 
-cheatsheet <- function() {
+.mambss_cheatsheet <- function() {
   "mambss: S6. B, C, Delta are FUNCTIONS of x (Alg. 2), so the model is time-varying and only the scan works -- no convolution. ZOH: Abar = exp(Delta A), Bbar = (exp(Delta A) - 1) B / A. s_Delta projects to ONE dim then broadcasts over D. Theorem 1: N=1, A=-1, B=1, softplus gives exactly g = sigmoid(Linear(x)), h = (1-g)h + g x."
 }
 

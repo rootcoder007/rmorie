@@ -286,7 +286,7 @@ offline_rl_cql <- offlrl
 offlinerlcql <- offlrl
 conservative_q_learning <- offlrl
 
-cheatsheet <- function() {
+.offlrl_cheatsheet <- function() {
   paste("offlrl: CQL (Kumar 2020). Fitted Q plus alpha*(push DOWN ",
         "E_mu[Q] - push UP E_pi_beta[Q]) so the Q-function LOWER ",
         "BOUNDS the truth and OOD actions stop being over-estimated. ",

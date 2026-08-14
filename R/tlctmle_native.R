@@ -196,7 +196,7 @@ ctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L, seed = 0L,
        note = "collaboration changes WHICH g is targeted against, not whether the score equation is solved")
 }
 
-cheatsheet <- function() {
+.tlctmle_cheatsheet <- function() {
   paste("tlctmle: fitting g as well as possible ON ITS OWN TERMS ",
         "is the wrong objective -- a covariate that predicts ",
         "treatment but not the outcome removes no bias and ",

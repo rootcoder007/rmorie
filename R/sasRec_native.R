@@ -97,7 +97,7 @@ complexity <- function(n, d) {
        note = "the parallelism, not the operation count, is where the order-of-magnitude speed-up comes from")
 }
 
-cheatsheet <- function() {
+.sasRec_cheatsheet <- function() {
   paste("sasRec: Markov chains win where data are SPARSE (parsimony ",
         "is critical), RNNs where they are DENSE (complexity is ",
         "affordable) -- and the choice is normally made once for a ",

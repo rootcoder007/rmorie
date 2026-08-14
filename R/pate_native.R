@@ -230,7 +230,7 @@ pate <- function(teacher_predicts, queries, gamma = 0.05,
   )
 }
 
-cheatsheet <- function() {
+.pate_cheatsheet <- function() {
   paste("pate: private aggregation of teacher ensembles (Papernot et ",
         "al. 2017). Teachers trained on disjoint partitions vote; the ",
         "student sees only argmax_j {n_j + Lap(1/gamma)} (eq.1), which ",

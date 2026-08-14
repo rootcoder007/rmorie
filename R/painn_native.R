@@ -169,7 +169,7 @@ equivariance_error <- function(model, s, v, R, Q, tol = 1e-9) {
   )
 }
 
-cheatsheet <- function() {
+.painn_cheatsheet <- function() {
   paste("painn: message passing was LESS DATA EFFICIENT than kernel ",
         "methods, and the diagnosis is INVARIANT representations -- a ",
         "network of scalars can only combine distances and cannot ",

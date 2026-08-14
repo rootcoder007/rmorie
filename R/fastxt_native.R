@@ -235,7 +235,7 @@ fasttext <- function(corpus, dim = 50, n_min = 3, n_max = 6,
                       sep = " "))
 }
 
-cheatsheet <- function() {
+.fastxt_cheatsheet <- function() {
   paste("fastxt: word = bag of character n-grams with < >",
         "boundaries plus the whole word; s(w,c) = sum_g z_g . v_c",
         "(Bojanowski et al. 2017 Sec.3.2). where/n=3 -> <wh whe her",

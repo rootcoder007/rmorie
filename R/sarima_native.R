@@ -454,7 +454,7 @@ r_convention <- function(fitted) {
        note = "R writes (1 + theta B); the book writes (1 - theta B)")
 }
 
-cheatsheet <- function() {
+.sarima_cheatsheet <- function() {
   paste("sarima: phi(B)Phi(B^s) nabla^d nabla_s^D z = theta(B)Theta(B^s) a. ",
         "The airline (0,1,1)x(0,1,1)_12 is an MA(13) in w = nabla nabla_12 z ",
         "with two parameters, nonzero autocorrelations only at lags 1, 11, 12, ",

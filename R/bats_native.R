@@ -579,7 +579,7 @@ concentrated_loglik <- function(y, resid, omega) {
   out
 }
 
-cheatsheet <- function() {
+.bats_cheatsheet <- function() {
   paste0("bats: De Livera, Hyndman & Snyder (2010). BATS = Box-Cox ",
          "transform, ARMA errors, Trend, Seasonal -- an innovations ",
          "state space model with one seasonal index per period ",

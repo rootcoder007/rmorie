@@ -207,7 +207,7 @@ cv_select_lambda <- function(X, y, lambdas, V = 5L, seed = 0L,
        note = "lambda bounds the variation norm, so the tuning parameter is interpretable")
 }
 
-cheatsheet <- function() {
+.tlhal_cheatsheet <- function() {
   paste("tlhal: replace SMOOTHNESS with a VARIATION NORM bound. ",
         "Any cadlag function of finite variation is a sum over ",
         "subsets of integrals against products of indicators, so ",

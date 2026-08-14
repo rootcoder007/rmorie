@@ -107,7 +107,7 @@ training_stage <- function(stage) {
        note = "tuning the language model first would tune it against features that do not yet mean anything")
 }
 
-cheatsheet <- function() {
+.llavx_cheatsheet <- function() {
   paste("llavx: instruction tuning works in language and lacked ",
         "MULTIMODAL data, so generate it with a LANGUAGE-ONLY ",
         "GPT-4 fed a SYMBOLIC image -- captions and boxes. The ",
@@ -132,7 +132,7 @@ morie_llavx <- function(op, ...) {
     "visualinstruction" = build_sequence(...),
     "llava_visual_chat" = build_sequence(...),
     "training_stage" = training_stage(...),
-    "cheatsheet" = list(cheatsheet = cheatsheet()),
+    "cheatsheet" = list(cheatsheet = .llavx_cheatsheet()),
     stop("llavx: unknown op ", shQuote(op))
   )
 }
