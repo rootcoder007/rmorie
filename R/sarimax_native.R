@@ -14,9 +14,9 @@ ROOT_TOL <- 1.001
 .SEARCHING <- FALSE
 
 .filter_column <- function(w, ar, ma) {
-  ss <- .state_space(ar, ma)
+  ss <- .sarima_state_space(ar, ma)
   T <- ss$T; R <- ss$R; r <- ss$r
-  P <- .initial_covariance(T, R, r)
+  P <- .sarima_initial_covariance(T, R, r)
   a <- rep(0.0, r)
   v_out <- numeric(0)
   f_out <- numeric(0)
@@ -31,13 +31,13 @@ ROOT_TOL <- 1.001
     f_out <- c(f_out, f)
     a <- as.numeric(T %*% a)
     TP <- T %*% P
-    P <- t(TP) %*% T + R %o% R
+    P <- TP %*% t(T) + R %o% R
   }
   list(v = v_out, f = f_out)
 }
 
 .residual_column <- function(w, ar, ma) {
-  r <- .css(w, ar, ma, full = TRUE)
+  r <- css(w, ar, ma, full = TRUE)
   list(v = r$residuals, f = rep(1.0, length(w)))
 }
 
@@ -104,7 +104,7 @@ profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
   cols
 }
 
-fit <- function(y, X = NULL, order = c(0, 1, 1), seasonal_order = c(0, 1, 1),
+.sarimax_fit <- function(y, X = NULL, order = c(0, 1, 1), seasonal_order = c(0, 1, 1),
                 s = 12, include_constant = NULL, method = "ml") {
   if (!method %in% c("ml", "uls", "css")) {
     stop(sprintf("sarimax: method must be 'ml', 'uls' or 'css', got %s", method))
@@ -120,8 +120,8 @@ fit <- function(y, X = NULL, order = c(0, 1, 1), seasonal_order = c(0, 1, 1),
                  d, D))
   }
   if (include_constant) cols <- c(list(rep(1.0, length(y))), cols)
-  wy <- .difference(y, d, D, s)
-  wX <- lapply(cols, function(c) .difference(c, d, D, s))
+  wy <- difference(y, d, D, s)
+  wX <- lapply(cols, function(c) difference(c, d, D, s))
   if (include_constant) wX[[1L]] <- rep(1.0, length(wy))
   npar <- p + q + P + Q
   if (npar == 0 && length(wX) == 0L) stop("sarimax: nothing to estimate")
@@ -135,9 +135,9 @@ fit <- function(y, X = NULL, order = c(0, 1, 1), seasonal_order = c(0, 1, 1),
   }
   objective <- function(v) {
     u <- unpack(v)
-    if (!(.roots_ok(u$phi, ROOT_TOL) && .roots_ok(u$Ph, ROOT_TOL))) return(1e10)
-    ep <- .expand_polynomials(u$phi, u$Ph, u$th, u$Th, s)
-    if (!.roots_ok(ep$ma, ROOT_TOL)) return(1e10)
+    if (!(.sarima_roots_ok(u$phi, ROOT_TOL) && .sarima_roots_ok(u$Ph, ROOT_TOL))) return(1e10)
+    ep <- expand_polynomials(u$phi, u$Ph, u$th, u$Th, s)
+    if (!.sarima_roots_ok(ep$ma, ROOT_TOL)) return(1e10)
     tryCatch({
       r <- profile_beta(wy, wX, ep$ar, ep$ma,
                         if (method == "css") "conditional" else "exact")
@@ -155,14 +155,14 @@ fit <- function(y, X = NULL, order = c(0, 1, 1), seasonal_order = c(0, 1, 1),
   if (npar > 0L) {
     niter <- if (.SEARCHING) 1L else 8L
     for (i in seq_len(niter)) {
-      res <- .minimize_nm(objective, xhat)
+      res <- .sarima_minimize_nm(objective, xhat)
       cand <- as.numeric(res$x)
       val <- objective(cand)
       if (val < best - 1e-11) { best <- val; xhat <- cand } else break
     }
   }
   u <- unpack(xhat)
-  ep <- .expand_polynomials(u$phi, u$Ph, u$th, u$Th, s)
+  ep <- expand_polynomials(u$phi, u$Ph, u$th, u$Th, s)
   r <- profile_beta(wy, wX, ep$ar, ep$ma)
   n <- length(wy)
   sigma2 <- r$ssq / n
@@ -234,7 +234,7 @@ neighbours <- function(order, seasonal_order, constant, s) {
   if (constant && (order[2L] + seasonal_order[2L]) >= 2L) return(NULL)
   if (sum(order) + sum(seasonal_order) - order[2L] - seasonal_order[2L] == 0 &&
       !constant && is.null(X)) return(NULL)
-  tryCatch(fit(y, X, order, seasonal_order, s,
+  tryCatch(.sarimax_fit(y, X, order, seasonal_order, s,
                include_constant = constant, method = method),
            error = function(e) NULL)
 }
@@ -315,7 +315,7 @@ auto_order <- function(y, X = NULL, d = 0, D = 0, s = 1, method = "css",
 }
 
 morie_sarimax <- function(...) {
-  fit(...)
+  .sarimax_fit(...)
 }
 
-sarimax <- fit
+sarimax <- .sarimax_fit
