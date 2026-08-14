@@ -7,7 +7,7 @@
 .EPS <- 1e-12
 
 # Weighted least squares (no intercept; rows are powers of d from 1).
-.wls <- function(rows, ys, w) {
+.bnskt2_wls <- function(rows, ys, w) {
   X <- do.call(rbind, rows)
   y <- as.numeric(ys); w <- sqrt(pmax(as.numeric(w), 0.0))
   Xw <- X * w; yw <- y * w
@@ -33,7 +33,7 @@
   if (length(rows) < as.integer(order) + 1L)
     stop(sprintf("bnskt2: too few observations on the %s of the kink within the bandwidth (%d for order %d)",
                  side, length(rows), order))
-  fit <- .wls(rows, ys, ws)
+  fit <- .bnskt2_wls(rows, ys, ws)
   list(slope = fit$coef[1L], coef = fit$coef, n = length(rows))
 }
 
