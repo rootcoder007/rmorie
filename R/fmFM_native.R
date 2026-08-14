@@ -30,7 +30,7 @@ predict_naive <- function(x, w0, w, V) {
 }
 
 # --- the same value in O(kn) by Lemma 3.1 ---------------------------
-predict <- function(x, w0, w, V) {
+.fmFM_predict <- function(x, w0, w, V) {
   xs <- as.numeric(x)
   n <- length(xs); kk <- length(V[[1]])
   s <- as.numeric(w0) + sum(w * xs)
@@ -81,7 +81,7 @@ fit_fm <- function(X, y, k_dim = 4, iters = 300, alpha = 0.02,
   hist <- numeric(iters)
   for (it in seq_len(iters)) {
     for (r in seq_len(nrow(rows))) {
-      e <- predict(rows[r, ], w0, w, V) - t[r]
+      e <- .fmFM_predict(rows[r, ], w0, w, V) - t[r]
       w0 <- w0 - a * e
       for (i in seq_len(n)) {
         if (rows[r, i] == 0) next
@@ -94,7 +94,7 @@ fit_fm <- function(X, y, k_dim = 4, iters = 300, alpha = 0.02,
     }
     sse <- 0
     for (r in seq_len(nrow(rows))) {
-      sse <- sse + (predict(rows[r, ], w0, w, V) - t[r])^2
+      sse <- sse + (.fmFM_predict(rows[r, ], w0, w, V) - t[r])^2
     }
     hist[it] <- sse / nrow(rows)
   }
