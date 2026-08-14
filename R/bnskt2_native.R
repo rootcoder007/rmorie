@@ -120,7 +120,7 @@ covariate_kink_test <- function(V, Z, kink, bandwidth, order = 2L,
        interpretation = "a kink here is evidence the design is picking up composition rather than the policy")
 }
 
-cheatsheet <- function() {
+.bnskt2_cheatsheet <- function() {
   paste0(
     "bnskt2: regression KINK design. RD uses a JUMP in treatment; ",
     "RKD uses a change in SLOPE -- benefits rising with earnings up ",

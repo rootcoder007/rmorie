@@ -152,6 +152,6 @@ morie_hierF <- function(base, S, method = "shrink", residuals = NULL,
   mint_reconcile(base, S, method, residuals, W, ridge)
 }
 
-cheatsheet <- function() {
+.hierF_cheatsheet <- function() {
   paste("hierF: y = S b, reconcile with ytilde = S P yhat where P = (S'W^-1 S)^-1 S'W^-1 minimises tr(P W P') subject to PS = I (MinT). PS = I makes SP a PROJECTION -- an already coherent forecast is left alone. Wrong P still adds up, because S forces that; it is just the wrong coherent point. W: ols=I, wls=diag, shrink=the paper's default because the full covariance is singular when m > T.")
 }

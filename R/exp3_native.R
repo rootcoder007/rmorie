@@ -58,6 +58,6 @@ morie_exp3 <- function(x, gamma_, T = NULL, seed = 0) {
 exp3_bandit <- morie_exp3
 exp3 <- morie_exp3
 
-cheatsheet <- function() {
+.exp3_cheatsheet <- function() {
   "exp3(x, gamma_) -> Exp3 adversarial bandit on a (T, K) reward table (Auer et al 2002, fig 1)."
 }

@@ -165,7 +165,7 @@ patchtst_encode <- function(X, patch_len, stride = NULL,
   )
 }
 
-cheatsheet <- function() {
+.patchT_cheatsheet <- function() {
   paste("patchT: PatchTST. A single time step is not a word, so ",
         "tokenise SUBSERIES: patches of length P, stride S, giving ",
         "N = (L-P)/S + 1 tokens instead of L -- attention shrinks by ",

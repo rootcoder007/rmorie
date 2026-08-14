@@ -114,7 +114,7 @@ morie_comet <- function(hyp, src, ref, W, b = NULL) {
   estimator_score(hyp, src, ref, W, b = b)
 }
 
-cheatsheet <- function() {
+.comet_cheatsheet <- function() {
   paste("comet: replace n-gram overlap with a LEARNED metric",
         "trained on human judgements, embedding hypothesis,",
         "reference AND SOURCE. The source is the structural",

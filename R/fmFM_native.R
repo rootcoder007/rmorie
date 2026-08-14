@@ -106,7 +106,7 @@ fit_fm <- function(X, y, k_dim = 4, iters = 300, alpha = 0.02,
 }
 
 # --- cheatsheet -----------------------------------------------------
-cheatsheet <- function() {
+.fmFM_cheatsheet <- function() {
   paste0("fmFM: y = w0 + sum w_i x_i + sum_{i<j} <v_i,v_j> x_i x_j. ",
          "Factorising the interaction parameter COUPLES pairs that ",
          "an SVM treats independently, which is why FMs estimate ",

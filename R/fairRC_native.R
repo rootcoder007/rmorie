@@ -128,7 +128,7 @@ rRD <- function(protected, step = 10, normalize = TRUE) {
   .measure(p, "rRD", step, normalize, cav)
 }
 
-cheatsheet <- function() {
+.fairRC_cheatsheet <- function() {
   paste0("fairRC: statistical parity for RANKINGS -- did group ",
          "membership influence POSITION. Set-based fairness at ",
          "top-10, top-20, ... with a 1/log2(i) discount, so ",

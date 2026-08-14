@@ -199,7 +199,7 @@ fixed_length_ci <- function(beta, sigma, n_pre, n_post, M = 0.0,
                        "tighter"))
 }
 
-cheatsheet <- function() {
+.snmtst_cheatsheet <- function() {
   paste0("snmtst: honest DiD. beta = tau + delta with tau_pre = 0, ",
          "so the PRE coefficients estimate the violation. Instead ",
          "of assuming delta = 0, bound it: Delta^SD(M) caps the ",

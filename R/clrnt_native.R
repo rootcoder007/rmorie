@@ -221,7 +221,7 @@ morie_clrnt <- function(clint_in_vitro, cl_h = NULL, fu_blood = NULL,
         charge = charge, fold = fold)
 }
 
-cheatsheet <- function() {
+.clrnt_cheatsheet <- function() {
   paste("clrnt: in vitro to in vivo CLint,u (Wood, Houston & Hallifax",
         "2017). fu in the incubation from eq.1 (microsomes) or eq.2",
         "(hepatocytes) when unmeasured; scale by PBSF x liver weight",

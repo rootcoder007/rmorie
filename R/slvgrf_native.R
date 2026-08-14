@@ -168,7 +168,7 @@ rate_test <- function(scores, priority, weight = "autoc", reps = 500,
                        "et al. (2025) Corollary 5"))
 }
 
-cheatsheet <- function() {
+.slvgrf_cheatsheet <- function() {
   paste0("slvgrf: score a PRIORITIZATION RULE, not a CATE fit. ",
          "TOC(u) = mean effect in the top u minus the ATE, so ",
          "TOC(1) = 0 exactly. RATE = int alpha(u) TOC(u) du; ",

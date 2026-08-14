@@ -147,6 +147,6 @@ her <- hindsr
 
 morie_hindsr <- hindsr
 
-cheatsheet <- function() {
+.hindsr_cheatsheet <- function() {
   paste("hindsr: HER (Andrychowicz 2017 Alg. 1). Store each transition with the original goal, then again for each g' in S(episode) with the reward RECOMPUTED under g'. S in {final, future (k, best), episode, random}; r(s,a,g) = -[f_g(s') = 0].")
 }

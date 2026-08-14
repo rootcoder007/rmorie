@@ -150,7 +150,7 @@ word_patch_alignment <- function(text_boxes, masked_patches, width,
   )
 }
 
-cheatsheet <- function() {
+.ocrwit_cheatsheet <- function() {
   paste("ocrwit: document models pre-trained text and image with ",
         "DIFFERENT objectives, giving two spaces and a bridge. ",
         "LayoutLMv3 makes them symmetric -- mask and reconstruct ",

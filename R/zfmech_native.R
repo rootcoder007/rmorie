@@ -240,7 +240,7 @@ postprocessing <- function(rho) {
 #'   both conversions.
 #' @references Bun, M. & Steinke, T. (2016).
 #' @export
-cheatsheet <- function() {
+.zfmech_cheatsheet <- function() {
   paste("zfmech: rho-zCDP means D_alpha(M(x)||M(x')) <= rho alpha ",
         "for EVERY alpha > 1. Gaussian mechanism: rho = ",
         "Delta^2/(2 sigma^2), and the bound is exactly tight. ",

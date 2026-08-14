@@ -166,7 +166,7 @@ purity_completeness <- function(bins, truth) {
 metabat2 <- bin_contigs
 metagenome_binning <- bin_contigs
 
-cheatsheet <- function() {
+.metabd_cheatsheet <- function() {
   paste("metabd: bin contigs into draft genomes from TWO signals ",
         "-- tetranucleotide composition (available always, noisy ",
         "on short contigs) and abundance covariance ACROSS SAMPLES ",
@@ -192,7 +192,7 @@ morie_metabd <- function(op, ...) {
     "metabat2" = bin_contigs(...),
     "metagenome_binning" = bin_contigs(...),
     "purity_completeness" = purity_completeness(...),
-    "cheatsheet" = list(cheatsheet = cheatsheet()),
+    "cheatsheet" = list(cheatsheet = .metabd_cheatsheet()),
     stop("metabd: unknown op ", shQuote(op))
   )
 }

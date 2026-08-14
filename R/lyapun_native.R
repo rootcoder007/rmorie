@@ -304,7 +304,7 @@ lyapunov_exponent <- function(y, embedding = NULL, tau = NULL, dt = 1.0,
 
 largest_lyapunov <- lyapunov_exponent
 
-cheatsheet <- function() {
+.lyapun_cheatsheet <- function() {
   paste("lyapun: largest Lyapunov exponent (Rosenstein, Collins & De ",
         "Luca 1993). Embed with delay J and dimension m, find each ",
         "point's nearest neighbour at least a mean period away, and ",
@@ -328,7 +328,7 @@ morie_lyapun <- function(op, ...) {
     "autocorrelation_lag" = autocorrelation_lag(...),
     "mean_period" = mean_period(...),
     "divergence_curve" = divergence_curve(...),
-    "cheatsheet" = list(cheatsheet = cheatsheet()),
+    "cheatsheet" = list(cheatsheet = .lyapun_cheatsheet()),
     stop("lyapun: unknown op ", shQuote(op))
   )
 }

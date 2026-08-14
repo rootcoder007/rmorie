@@ -159,7 +159,7 @@ folkrank_search <- folkrank
 tag_aware_rec <- folkrank
 tagawarerec <- folkrank
 
-cheatsheet <- function() {
+.tagRC_cheatsheet <- function() {
   paste("tagRC: a folksonomy is (user, tag, resource) TRIPLES, so",
         "the structure is an undirected triadic HYPEREDGE, not a",
         "directed binary link -- PageRank cannot be applied directly.",

@@ -323,6 +323,6 @@ morie_hntfst <- function(X, y, W = NULL, kind = "double-sample",
                 pi, max_depth, seed, at, level, correction)
 }
 
-cheatsheet <- function() {
+.hntfst_cheatsheet <- function() {
   paste("hntfst: honest forest. Procedure 1 splits the subsample into I and J, places splits with J's responses and I's features but NEVER I's responses, and estimates leaves from I alone (Def. 2). Procedure 2 splits on W instead of Y. Def. 3: each feature has prob >= pi/d of being split on. Variance is the IJ, eq. (8), with the n(n-1)/(n-s)^2 correction for subsampling without replacement.")
 }

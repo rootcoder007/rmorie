@@ -160,7 +160,7 @@ density_is_view_independent <- function(model, point, directions,
   )
 }
 
-cheatsheet <- function() {
+.nrfrad_cheatsheet <- function() {
   paste("nrfrad: a scene IS a continuous 5D function -- position plus ",
         "viewing direction to density and radiance -- stored in a ",
         "plain MLP; the weights are the scene. DENSITY must come from ",

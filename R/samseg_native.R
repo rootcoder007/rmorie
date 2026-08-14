@@ -107,7 +107,7 @@ promptable_segment <- function(image_embedding, prompt_tokens, decoder,
                     "intended object", sep = ""))
 }
 
-cheatsheet <- function() {
+.samseg_cheatsheet <- function() {
   paste("samseg: the task is 'return a VALID mask for any prompt, ",
         "and for an AMBIGUOUS prompt a valid mask for at least one ",
         "intended object' -- which is what makes it usable as ",
