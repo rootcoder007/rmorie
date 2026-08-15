@@ -301,3 +301,7 @@ morie_survnnr <- morie_survnnr_partial_loglik
 #' @rdname morie_survnnr_partial_loglik
 #' @export
 morie_survnnr <- morie_survnnr_partial_loglik
+
+#' @rdname morie_survnnr_partial_loglik
+#' @export
+morie_survnnr <- morie_survnnr_partial_loglik

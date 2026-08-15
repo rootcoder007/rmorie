@@ -265,3 +265,7 @@ morie_sdpwts <- sdpwts_lmi
 #' @rdname sdpwts_lmi
 #' @export
 morie_sdpwts <- sdpwts_lmi
+
+#' @rdname sdpwts_lmi
+#' @export
+morie_sdpwts <- sdpwts_lmi
