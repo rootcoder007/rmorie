@@ -62,9 +62,9 @@
   }
   rows <- list()
   for (tau in grid) {
-    f <- prophet_fit(t, y, n_changepoints = n_changepoints,
-                     changepoint_range = changepoint_range,
-                     changepoint_prior = tau,
+    f <- morie_prphet_fit(t, y, n.changepoints = n_changepoints,
+                     changepoint.range = changepoint_range,
+                     changepoint.prior = tau,
                      seasonalities = seasonalities, ...)
     d <- f[["deltas"]]
     # exactly zero, not "small": the L1 solution really does zero them,
@@ -84,9 +84,9 @@
                                         n_changepoints = 15,
                                         changepoint_range = 0.8,
                                         seasonalities = NULL, ...) {
-  f <- prophet_fit(t, y, n_changepoints = n_changepoints,
-                   changepoint_range = changepoint_range,
-                   changepoint_prior = tau, seasonalities = seasonalities,
+  f <- morie_prphet_fit(t, y, n.changepoints = n_changepoints,
+                   changepoint.range = changepoint_range,
+                   changepoint.prior = tau, seasonalities = seasonalities,
                    ...)
   d <- f[["deltas"]]
   cps <- f[["changepoints"]]
@@ -144,7 +144,7 @@
         nd <- c(nd, mag)
       }
     }
-    sims[[sim]] <- piecewise_trend(tf, fit[["k"]], fit[["m"]], nd, ncps)
+    sims[[sim]] <- morie_prphet_piecewise_trend(tf, fit[["k"]], fit[["m"]], nd, ncps)
   }
   sims
 }
