@@ -74,8 +74,8 @@
   if (any(g <= 0.0)) {
     stop(sprintf("lda: gamma must be strictly positive, got %g", min(g)))
   }
-  s <- k.digamma(sum(g))
-  return(k.digamma(g) - s)
+  s <- .s03digamma(sum(g))
+  return(.s03digamma(g) - s)
 }
 
 .morie_lda_variational_inference <- function(doc, alpha, beta, iters=100, tol=1e-8) {
