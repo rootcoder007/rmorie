@@ -240,3 +240,7 @@ morie_inlasm <- list(
   inla_spatial = inla_spatial,
   inlaspatial = inlaspatial
 )
+
+#' @rdname gaussian_approximation
+#' @export
+morie_inlasm <- gaussian_approximation

@@ -251,3 +251,7 @@ cnvlfc_convergent_cross_mapping <- function(x, y, E = 2L, tau = 1L, ...) {
 #' @rdname cnvlfc_embed
 #' @export
 morie_cnvlfc <- cnvlfc_embed
+
+#' @rdname cnvlfc_embed
+#' @export
+morie_cnvlfc <- cnvlfc_embed

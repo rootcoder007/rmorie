@@ -164,3 +164,7 @@ scaling_comparison <- function(configs) {
 #' @rdname patch_grid
 #' @export
 morie_dits16 <- patch_grid
+
+#' @rdname patch_grid
+#' @export
+morie_dits16 <- patch_grid
