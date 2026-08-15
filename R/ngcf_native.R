@@ -174,3 +174,7 @@ neuralgraphcf <- ngcf_stack_layers
 # public names resolved by fn/_lazy_map.json
 # Main entry point
 morie_ngcf <- ngcf_stack_layers
+
+#' @rdname ngcf_laplacian_coefficient
+#' @export
+morie_ngcf <- ngcf_laplacian_coefficient

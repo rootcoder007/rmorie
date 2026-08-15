@@ -240,3 +240,7 @@ morie_edgrn <- edgrn_tmm_factor
 #' @rdname edgrn_tmm_factor
 #' @export
 morie_edgrn <- edgrn_tmm_factor
+
+#' @rdname edgrn_tmm_factor
+#' @export
+morie_edgrn <- edgrn_tmm_factor
