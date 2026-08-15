@@ -219,3 +219,7 @@ morie_gnnEx <- gnnEx_computation_graph
 #' @rdname gnnEx_computation_graph
 #' @export
 morie_gnnEx <- gnnEx_computation_graph
+
+#' @rdname gnnEx_computation_graph
+#' @export
+morie_gnnEx <- gnnEx_computation_graph
