@@ -173,3 +173,7 @@ morie_sdxlcd_sdxlunet <- morie_sdxlcd_condition_vector
 
 # main entry point
 morie_sdxlcd <- morie_sdxlcd_condition_vector
+
+#' @rdname morie_sdxlcd_fourier_embedding
+#' @export
+morie_sdxlcd <- morie_sdxlcd_fourier_embedding

@@ -263,3 +263,7 @@ morie_ncfRS <- morie_ncfRS_gmf
 #' @rdname morie_ncfRS_gmf
 #' @export
 morie_ncfRS <- morie_ncfRS_gmf
+
+#' @rdname morie_ncfRS_gmf
+#' @export
+morie_ncfRS <- morie_ncfRS_gmf
