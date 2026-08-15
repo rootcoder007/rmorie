@@ -97,7 +97,11 @@
       I <- info$I
       n_I <- length(I)
       if (n_I > 0) {
-        u <- .ghc_unif(1, n_I)
+        # .ghc_unif(e, n) takes the RNG ENVIRONMENT first. Passing 1 here
+        # meant e was an atomic, so e$i failed -- and rng_state, created
+        # just above, was never actually used, so the permutations did not
+        # advance a stream at all.
+        u <- .ghc_unif(rng_state, n_I)
         perm <- I[order(u)]
         yp[I] <- y[perm]
       }
@@ -118,7 +122,7 @@
   J <- info$J
   n_J <- length(J)
   if (n_J > 0) {
-    u_J <- .ghc_unif(1, n_J)
+    u_J <- .ghc_unif(rng_state, n_J)
     perm_J <- J[order(u_J)]
     yj[J] <- y[perm_J]
   }
