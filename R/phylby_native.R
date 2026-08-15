@@ -78,8 +78,8 @@
   out <- list()
   nc <- length(node)
   for (c in seq(1, nc, 2)) {
-    out[[length(out) + 1]] <- c(path, c + 1)
-    child_paths <- .phylby_branch_paths(node[[c]], c(path, c))
+    out[[length(out) + 1]] <- c(path, c)
+    child_paths <- .phylby_branch_paths(node[[c]], c(path, c - 1L))
     out <- c(out, child_paths)
   }
   return(out)
@@ -90,8 +90,8 @@
   out <- list()
   nc <- length(node)
   for (c in seq(1, nc, 2)) {
-    out[[length(out) + 1]] <- list(path = c(path, c), subtree = node[[c]])
-    child_subtrees <- .phylby_subtrees(node[[c]], c(path, c))
+    out[[length(out) + 1]] <- list(path = c(path, c - 1L), subtree = node[[c]])
+    child_subtrees <- .phylby_subtrees(node[[c]], c(path, c - 1L))
     out <- c(out, child_subtrees)
   }
   return(out)
@@ -169,7 +169,7 @@
   log_prior <- sum(log(lam) - lam * lengths)
   ll <- 0.0
   if (is.null(partitions)) {
-    ll <- phylml(tree, seqs, pi, rate)$log_likelihood
+    ll <- morie_phylml(tree, seqs, pi, rate)$log_likelihood
   } else {
     names_p <- sort(unique(partitions))
     if (is.null(rates)) {
@@ -189,7 +189,7 @@
         s <- seqs[[t]]
         sub[[t]] <- paste(substring(s, keep, keep), collapse = "")
       }
-      ll <- ll + phylml(tree, sub, pi, rate * rates[[k]])$log_likelihood
+      ll <- ll + morie_phylml(tree, sub, pi, rate * rates[[k]])$log_likelihood
     }
     log_prior <- log_prior + sum(-rate_vals)
   }
