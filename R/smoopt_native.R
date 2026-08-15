@@ -212,7 +212,7 @@ morie_smoopt <- list(error_cache = error_cache,
                      second_choice = second_choice,
                      compute_threshold = compute_threshold,
                      smo_platt = smo_platt,
-                     cheatsheet = cheatsheet,
+                     cheatsheet = .smoopt_cheatsheet,
                      sequential_minimal_optimization =
                        sequential_minimal_optimization,
                      smo_solver = smo_solver,
