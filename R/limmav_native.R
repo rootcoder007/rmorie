@@ -73,6 +73,7 @@
 
 .limmav_digamma <- function(x) {
   x <- as.numeric(x)
+  if (length(x) > 1L) return(vapply(x, .limmav_digamma, numeric(1)))
   if (x <= 0) stop("limmav: digamma needs x > 0")
   tot <- 0.0
   while (x < 10.0) {
