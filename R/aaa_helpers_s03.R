@@ -299,6 +299,11 @@
 # Same recurrence + asymptotic series as the Python arm, so the two agree
 # term for term rather than relying on R's digamma matching a Python series.
 .s03digamma <- function(x) {
+  # Vectorised: the recurrence below is scalar (while (x < 6) on a vector
+  # is an error in modern R), and this helper is SHARED, so every caller
+  # that passes a vector -- lda, limmav and anything else using digamma --
+  # broke on it.
+  if (length(x) > 1L) return(vapply(x, .s03digamma, numeric(1)))
   r <- 0
   while (x < 6) { r <- r - 1 / x; x <- x + 1 }
   f <- 1 / (x * x)
