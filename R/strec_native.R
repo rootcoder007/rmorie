@@ -255,3 +255,7 @@ strec_stamp <- strec_stamp_scores
 
 # Entry point
 morie_strec <- strec_stamp_scores
+
+#' @rdname strec_trilinear
+#' @export
+morie_strec <- strec_trilinear

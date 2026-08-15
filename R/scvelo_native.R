@@ -317,3 +317,7 @@ morie_scvelo <- morie_dynamical_fit
 #' @rdname morie_solve_kinetics
 #' @export
 morie_scvelo <- morie_solve_kinetics
+
+#' @rdname morie_solve_kinetics
+#' @export
+morie_scvelo <- morie_solve_kinetics

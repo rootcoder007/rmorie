@@ -377,3 +377,7 @@ morie_distq <- atoms
 #' @rdname atoms
 #' @export
 morie_distq <- atoms
+
+#' @rdname atoms
+#' @export
+morie_distq <- atoms
