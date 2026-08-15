@@ -39,7 +39,9 @@ morie_timesfm_input_patches <- function(x, patch_len, pad_value = 0) {
   pad <- (p - rem) %% p
   padded <- c(rep(as.numeric(pad_value), pad), v)
   n <- length(padded) %/% p
-  patches <- lapply(seq_len(n), function(i) padded[((i - 1L) * p + 1L):(i * p)])
+  patches <- lapply(seq_len(n), function(i) {
+    padded[((i - 1L) * p + 1L):(i * p)]
+  })
   list(patches = patches, n_patches = n, patch_len = p, n_padded = pad,
        L = length(v),
        note = paste("padded on the LEFT so the newest point ends the",
@@ -50,7 +52,11 @@ morie_timesfm_causal_mask <- function(n_patches) {
   n <- as.integer(n_patches)
   if (n < 1L) stop("timesfm: need at least one patch")
   m <- matrix(0, nrow = n, ncol = n)
-  for (i in seq_len(n)) for (j in seq_len(n)) if (j <= i) m[i, j] <- 1
+  for (i in seq_len(n)) {
+    for (j in seq_len(n)) {
+      if (j <= i) m[i, j] <- 1
+    }
+  }
   list(mask = m, n_patches = n, training_signals = n)
 }
 
@@ -91,7 +97,8 @@ morie_timesfm <- function(history, predictor, horizon, input_patch_len,
     nxt <- as.numeric(predictor(pat))
     if (length(nxt) != q) {
       stop(sprintf(paste("timesfm: the predictor returned %d values but",
-                         "output_patch_len is %d"), length(nxt), q))
+                         "output_patch_len is %d"),
+                   length(nxt), q))
     }
     out <- c(out, nxt)
     ctx <- c(ctx, nxt)
@@ -103,4 +110,16 @@ morie_timesfm <- function(history, predictor, horizon, input_patch_len,
        context_grew_to = length(ctx),
        method = paste("decoder-only patched rollout; Das, Kong, Sen &",
                       "Zhou (2024)"))
+}
+
+morie_timesfm_cheatsheet <- function() {
+  paste("timesfm: decoder-only + input patching. Causal attention",
+        "over patches means N patches give N training signals,",
+        "not one. The design choice that matters: the OUTPUT",
+        "patch may be LONGER than the input patch, so a horizon H",
+        "needs ceil(H/q) generation steps rather than ceil(H/p)",
+        "-- fewer rollouts, less accumulated drift. q >= H is a",
+        "single direct prediction. 200M parameters and O(100B)",
+        "timepoints beats prompting a large language model, at a",
+        "fraction of the cost.")
 }

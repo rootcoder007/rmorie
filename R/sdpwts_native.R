@@ -249,3 +249,7 @@ sdpwts_cheatsheet <- function() {
          "known, not inferred. Check against max t s.t. A - tI >= ",
          "0, whose answer is lambda_min(A).")
 }
+
+#' @rdname sdpwts_lmi
+#' @export
+morie_sdpwts <- sdpwts_lmi
