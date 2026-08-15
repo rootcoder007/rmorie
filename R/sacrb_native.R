@@ -178,22 +178,22 @@
   best <- list()
   for (r in refs_tokens) {
     rc <- .sacrb_ngram_counts(r, n)
-    for (g_key in names(rc)) {
-      v <- rc[[g_key]]
-      bv <- if (is.null(best[[g_key]])) 0L else best[[g_key]]
-      if (v > bv) {
-        best[[g_key]] <- v
+    for (key in names(rc)) {
+      v <- rc[[key]]
+      if (is.null(best[[key]])) {
+        best[[key]] <- v
+      } else if (v > best[[key]]) {
+        best[[key]] <- v
       }
     }
   }
   clipped <- 0L
-  for (g_key in names(cc)) {
-    v <- cc[[g_key]]
-    bv <- if (is.null(best[[g_key]])) 0L else best[[g_key]]
+  for (key in names(cc)) {
+    v <- cc[[key]]
+    bv <- if (is.null(best[[key]])) 0L else best[[key]]
     clipped <- clipped + min(v, bv)
   }
-  list(numerator = clipped,
-       denominator = total,
+  list(numerator = clipped, denominator = total,
        precision = clipped / as.numeric(total))
 }
 
@@ -211,12 +211,45 @@
 
 .sacrb_best_match <- function(clen, rlens) {
   diffs <- abs(rlens - clen)
-  idx <- order(diffs, rlens)[1L]
-  rlens[idx]
+  min_diff <- min(diffs)
+  candidates <- rlens[diffs == min_diff]
+  min(candidates)
 }
 
-morie_sacrb <- function(candidates, references, max_n = 4, weights = NULL,
-                        tokenizer = "13a", lowercase = FALSE) {
+.sacrb_signature <- function(tokenizer = "13a", lowercase = FALSE,
+                             max_n = 4L, n_refs = 1L,
+                             version = "morie-sacrb-1") {
+  sprintf("nrefs:%d|case:%s|tok:%s|ngram:%d|version:%s",
+          as.integer(n_refs),
+          if (isTRUE(lowercase)) "lc" else "mixed",
+          as.character(tokenizer),
+          as.integer(max_n),
+          version)
+}
+
+.sacrb_cheatsheet <- function() {
+  paste0("sacrb: BLEU = BP * exp(sum w_n log p_n), with clipped ",
+         "n-gram precision and BP = 1 if c > r else exp(1 - r/c). ",
+         "The penalty is computed over the WHOLE CORPUS, not per ",
+         "sentence, and r uses the CLOSEST reference length, not ",
+         "the shortest. Long candidates are not penalised twice -- ",
+         "modified precision already handles them. The number ",
+         "depends on TOKENISATION, so two BLEU scores are ",
+         "comparable only when their signatures match.")
+}
+
+# Public API exposed alongside the private helpers
+sacrb_tokenize_13a <- .sacrb_tokenize_13a
+sacrb_tokenize_intl <- .sacrb_tokenize_intl
+sacrb_ngram_counts <- .sacrb_ngram_counts
+sacrb_modified_precision <- .sacrb_modified_precision
+sacrb_brevity_penalty <- .sacrb_brevity_penalty
+sacrb_signature <- .sacrb_signature
+sacrb_cheatsheet <- .sacrb_cheatsheet
+
+morie_sacrb <- function(candidates, references, max_n = 4L,
+                        weights = NULL, tokenizer = "13a",
+                        lowercase = FALSE) {
   C <- as.character(candidates)
   R <- lapply(references, function(refs) as.character(refs))
 
@@ -232,10 +265,12 @@ morie_sacrb <- function(candidates, references, max_n = 4, weights = NULL,
       stop("sacrb: every candidate needs at least one reference")
     }
   }
+
   N <- as.integer(max_n)
   if (N < 1L) {
     stop("sacrb: max_n must be at least 1")
   }
+
   if (is.null(weights)) {
     w <- rep(1.0 / N, N)
   } else {
@@ -248,8 +283,8 @@ morie_sacrb <- function(candidates, references, max_n = 4, weights = NULL,
     stop(sprintf("sacrb: the weights must sum to 1, got %.6f", sum(w)))
   }
 
-  num <- integer(N)
-  den <- integer(N)
+  num <- rep(0L, N)
+  den <- rep(0L, N)
   c_total <- 0L
   r_total <- 0L
 
@@ -257,7 +292,8 @@ morie_sacrb <- function(candidates, references, max_n = 4, weights = NULL,
     ct <- .sacrb_tok(C[i], tokenizer, lowercase)
     rt <- lapply(R[[i]], function(x) .sacrb_tok(x, tokenizer, lowercase))
     c_total <- c_total + length(ct)
-    r_total <- r_total + .sacrb_best_match(length(ct), sapply(rt, length))
+    r_total <- r_total + .sacrb_best_match(length(ct),
+                                            sapply(rt, length))
     for (n in seq_len(N)) {
       mp <- .sacrb_modified_precision(ct, rt, n)
       num[n] <- num[n] + mp$numerator
@@ -278,7 +314,7 @@ morie_sacrb <- function(candidates, references, max_n = 4, weights = NULL,
     score <- bp * exp(sum(w * log(precisions)))
   }
 
-  result <- list(
+  list(
     estimate = score,
     bleu = score,
     score = 100.0 * score,
@@ -286,38 +322,17 @@ morie_sacrb <- function(candidates, references, max_n = 4, weights = NULL,
     bp = bp,
     candidate_length = c_total,
     reference_length = r_total,
-    ratio = c_total / as.numeric(max(r_total, 1L)),
+    ratio = c_total / max(r_total, 1L),
     tokenizer = tokenizer,
     lowercase = as.logical(lowercase),
     max_n = N,
-    signature = .sacrb_signature(tokenizer, lowercase, N, length(R[[1]])),
+    signature = .sacrb_signature(tokenizer, lowercase, N,
+                                 length(R[[1]])),
     method = "corpus BLEU; Papineni et al. (2002) Sec. 2.3, "
              "reported with a sacreBLEU-style signature "
              "(Post 2018)"
   )
-  class(result) <- "RichResult"
-  result
 }
 
-.sacrb_signature <- function(tokenizer = "13a", lowercase = FALSE, max_n = 4,
-                              n_refs = 1, version = "morie-sacrb-1") {
-  sprintf("nrefs:%d|case:%s|tok:%s|ngram:%d|version:%s",
-          as.integer(n_refs),
-          if (lowercase) "lc" else "mixed",
-          as.character(tokenizer),
-          as.integer(max_n),
-          version)
-}
-
-.sacrb_cheatsheet <- function() {
-  paste0("sacrb: BLEU = BP * exp(sum w_n log p_n), with clipped ",
-         "n-gram precision and BP = 1 if c > r else exp(1 - r/c). ",
-         "The penalty is computed over the WHOLE CORPUS, not per ",
-         "sentence, and r uses the CLOSEST reference length, not ",
-         "the shortest. Long candidates are not penalised twice -- ",
-         "modified precision already handles them. The number ",
-         "depends on TOKENISATION, so two BLEU scores are ",
-         "comparable only when their signatures match.")
-}
-
-sacrebleu <- morie_sacrb
+# compact alias per ledger/NAMING.md
+sacrb_bleu <- morie_sacrb
