@@ -120,9 +120,15 @@
     simplex <- simplex[ord, , drop = FALSE]
     fv <- fv[ord]
 
-    # Check convergence
-    if (max(abs(simplex[1, ] - simplex[n + 1, ])) < xatol &&
-        abs(fv[1] - fv[n + 1]) < fatol) {
+    # Check convergence. The Python arm (_sci_core._nelder_mead) measures
+    # the spread of EVERY vertex against the best one, not just the worst
+    # against the best, and uses <= rather than <. With more than one
+    # parameter the two rules stop on different iterations -- which is why
+    # n_iter came out 117 against 125 while the estimates agreed.
+    spread <- max(abs(fv[2:(n + 1)] - fv[1]))
+    width <- max(abs(sweep(simplex[2:(n + 1), , drop = FALSE], 2,
+                           simplex[1, ], "-")))
+    if (spread <= fatol && width <= xatol) {
       converged <- TRUE
       break
     }
