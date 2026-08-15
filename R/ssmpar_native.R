@@ -217,3 +217,7 @@ morie_ssmpar <- compose
 #' @rdname compose
 #' @export
 morie_ssmpar <- compose
+
+#' @rdname compose
+#' @export
+morie_ssmpar <- compose

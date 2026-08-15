@@ -433,3 +433,7 @@ morie_cheatsheet <- function() {
 
 # compact alias per ledger/NAMING.md
 morie_tmlecensoring <- morie_tmle_censoring
+
+#' @rdname morie_coarsen_interval
+#' @export
+morie_tmlcen <- morie_coarsen_interval
