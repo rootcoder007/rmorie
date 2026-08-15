@@ -438,21 +438,6 @@
 #' Default TPS ArcGIS layer registry (verified 2026-05).
 #' @keywords internal
 #' @noRd
-.MORIE_DATASETS_TPS_LAYERS <- list(
-  `major-crime` = paste0(
-    "https://services.arcgis.com/S9th0jAJ7bqgIRjw/arcgis/rest/services/",
-    "Major_Crime_Indicators_Open_Data/FeatureServer/0"
-  ),
-  `shooting-firearms` = paste0(
-    "https://services.arcgis.com/S9th0jAJ7bqgIRjw/arcgis/rest/services/",
-    "Shooting_and_Firearm_Discharges_Open_Data/FeatureServer/0"
-  ),
-  homicide = paste0(
-    "https://services.arcgis.com/S9th0jAJ7bqgIRjw/arcgis/rest/services/",
-    "Homicides_Open_Data_ASR_RC_TBL_002/FeatureServer/0"
-  )
-)
-
 #' Fetch a TPS ArcGIS FeatureServer layer as a data frame.
 #' @keywords internal
 #' @noRd
@@ -518,7 +503,7 @@ morie_datasets_tps_major_crime <- function(year = NULL,
     return(df)
   }
   .morie_dataset_tps_fetch(
-    .MORIE_DATASETS_TPS_LAYERS[["major-crime"]],
+    .MORIE_TPS_LAYER_REGISTRY[["major-crime"]],
     where = .morie_dataset_year_where(year),
     max_features = max_features,
     return_geometry = include_geometry
@@ -537,7 +522,7 @@ morie_datasets_tps_major_crime <- function(year = NULL,
 #' @export
 morie_datasets_tps_shootings <- function(year = NULL, max_features = NULL) {
   .morie_dataset_tps_fetch(
-    .MORIE_DATASETS_TPS_LAYERS[["shooting-firearms"]],
+    .MORIE_TPS_LAYER_REGISTRY[["shooting-firearms"]],
     where = .morie_dataset_year_where(year),
     max_features = max_features
   )
@@ -555,7 +540,7 @@ morie_datasets_tps_shootings <- function(year = NULL, max_features = NULL) {
 #' @export
 morie_datasets_tps_homicide <- function(year = NULL, max_features = NULL) {
   .morie_dataset_tps_fetch(
-    .MORIE_DATASETS_TPS_LAYERS[["homicide"]],
+    .MORIE_TPS_LAYER_REGISTRY[["homicide"]],
     where = .morie_dataset_year_where(year),
     max_features = max_features
   )
@@ -570,8 +555,8 @@ morie_datasets_tps_homicide <- function(year = NULL, max_features = NULL) {
 #' @export
 morie_datasets_tps_layers <- function() {
   data.frame(
-    name = names(.MORIE_DATASETS_TPS_LAYERS),
-    url = unlist(unname(.MORIE_DATASETS_TPS_LAYERS)),
+    name = names(.MORIE_TPS_LAYER_REGISTRY),
+    url = unlist(unname(.MORIE_TPS_LAYER_REGISTRY)),
     stringsAsFactors = FALSE
   )
 }
