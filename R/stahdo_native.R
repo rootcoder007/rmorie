@@ -1,4 +1,3 @@
-```r
 # morie.fn -- function file (rootcoder007/morie)
 # Stahel-Donoho outlyingness and the estimator built on it.
 #
@@ -236,26 +235,21 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
     if (s <= 1e-12) next
     used <- used + 1L
     m <- .stahdo_median(proj)
-    for (i in seq_len(n)) {
-      d <- abs(proj[i] - m) / s
-      if (d > r[i]) r[i] <- d
-    }
+    d <- abs(proj - m) / s
+    r <- pmax(r, d)
   }
   if (used == 0L) {
     stop("stahdo: every searched direction has zero MAD, ",
          "so no outlyingness is defined")
   }
-  list(outlyingness = r,
-       n_directions = length(dirs),
-       n_used = used,
-       exhaustive = exhaustive,
+  list(outlyingness = r, n_directions = length(dirs),
+       n_used = used, exhaustive = exhaustive,
        directions = directions)
 }
 
 .stahdo_weight <- function(r, cutoff) {
   c <- as.numeric(cutoff)
-  if (r <= c) return(1.0)
-  return((c / r) ^ 2)
+  ifelse(r <= c, 1.0, (c / r)^2)
 }
 
 .stahdo_chi2_cdf <- function(x, k) {
@@ -265,9 +259,79 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
   if (z < a + 1.0) {
     term <- 1.0 / a
     s <- term
-    for (i in 1:500) {
+    for (i in 1:499) {
       term <- term * z / (a + i)
       s <- s + term
       if (abs(term) < 1e-15 * abs(s)) break
     }
-    return(s * exp(-z + a * log
+    return(s * exp(-z + a * log(z) - lgamma(a)))
+  }
+  b <- z + 1.0 - a
+  cc <- 1e300
+  d <- 1.0 / (z + 1.0 - a)
+  h <- d
+  for (i in 1:499) {
+    an <- -i * (i - a)
+    b <- b + 2.0
+    d <- an * d + b
+    if (abs(d) < 1e-300) d <- 1e-300
+    cc <- b + an / cc
+    if (abs(cc) < 1e-300) cc <- 1e-300
+    d <- 1.0 / d
+    delta <- d * cc
+    h <- h * delta
+    if (abs(delta - 1.0) < 1e-15) break
+  }
+  q <- exp(-z + a * log(z) - lgamma(a)) * h
+  1.0 - q
+}
+
+.stahdo_chi2_median <- function(p) {
+  lo <- 0.0
+  hi <- 100.0 + 10.0 * p
+  for (i in 1:200) {
+    mid <- 0.5 * (lo + hi)
+    if (.stahdo_chi2_cdf(mid, p) < 0.5) {
+      lo <- mid
+    } else {
+      hi <- mid
+    }
+  }
+  0.5 * (lo + hi)
+}
+
+.stahdo_stahel_donoho <- function(X, directions = "subsample",
+                                  n_directions = 500, seed = 1,
+                                  cutoff = NULL) {
+  prep <- .stahdo_prep(X)
+  M <- prep$M
+  n <- prep$n
+  p <- prep$p
+  o <- .stahdo_outlyingness(X, directions, n_directions, seed)
+  r <- o$outlyingness
+  c <- if (is.null(cutoff)) sqrt(.stahdo_chi2_median(p)) else as.numeric(cutoff)
+  if (c <= 0) stop("stahdo: the cutoff must be positive")
+  w <- .stahdo_weight(r, c)
+  sw <- sum(w)
+  if (sw <= 0) {
+    stop("stahdo: every observation was downweighted to zero")
+  }
+  loc <- colSums(M * w) / sw
+  Xc <- M - matrix(loc, nrow = n, ncol = p, byrow = TRUE)
+  cov <- crossprod(Xc * w, Xc) / sw
+  list(
+    estimate = loc, location = loc, scatter = cov,
+    outlyingness = r, weights = w, cutoff = c,
+    n_directions = o$n_directions, n_used = o$n_used,
+    exhaustive = o$exhaustive, directions = directions,
+    n_downweighted = sum(w < 1.0),
+    n = n, p = p,
+    method = sprintf("Stahel-Donoho estimator (Maronna & Yohai 1995) with %s directions", directions)
+  )
+}
+
+morie_stahdo <- function(X, directions = "subsample",
+                        n_directions = 500, seed = 1,
+                        cutoff = NULL) {
+  .stahdo_stahel_donoho(X, directions, n_directions, seed, cutoff)
+}

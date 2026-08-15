@@ -194,51 +194,52 @@ morie_survroc_kaplan_meier <- function(times, events, at = NULL) {
 }
 
 morie_survroc_sensitivity <- function(times, events, marker, threshold, t,
-                                     route = "km") {
-  .survroc_pair(times, events, marker, threshold, t, route)[[1]]
+                                      route = "km") {
+  pr <- .survroc_pair(times, events, marker, threshold, t, route)
+  unname(pr[1])
 }
 
 morie_survroc_specificity <- function(times, events, marker, threshold, t,
-                                     route = "km") {
-  .survroc_pair(times, events, marker, threshold, t, route)[[2]]
+                                      route = "km") {
+  pr <- .survroc_pair(times, events, marker, threshold, t, route)
+  unname(pr[2])
 }
 
 morie_survroc_roc_at <- function(times, events, marker, t, route = "km") {
   cln <- .survroc_clean(times, events, marker)
   M <- cln$M
   vals <- sort(unique(M))
-  eps <- max(vals) - min(vals)
+  rng <- range(vals)
+  eps <- rng[2] - rng[1]
   if (eps == 0) eps <- 1.0
-  cuts <- c(min(vals) - eps, vals, max(vals) + eps)
-  pts <- list()
-  for (cc in cuts) {
-    pair <- .survroc_pair(times, events, marker, cc, t, route)
-    pts[[length(pts) + 1L]] <- list(
-      threshold = cc,
-      sensitivity = as.numeric(pair[["se"]]),
-      specificity = as.numeric(pair[["sp"]]),
-      fpr = 1.0 - as.numeric(pair[["sp"]])
-    )
+  cuts <- c(rng[1] - eps, vals, rng[2] + eps)
+  pts <- vector("list", length(cuts))
+  for (k in seq_along(cuts)) {
+    cc <- cuts[k]
+    pr <- .survroc_pair(times, events, marker, cc, t, route)
+    se_v <- unname(pr[1])
+    sp_v <- unname(pr[2])
+    pts[[k]] <- list(threshold = cc, sensitivity = se_v,
+                     specificity = sp_v, fpr = 1.0 - sp_v)
   }
-  thresholds <- vapply(pts, function(p) p$threshold, numeric(1))
-  ord <- order(-thresholds)
+  ord <- order(-sapply(pts, function(p) p$threshold))
   pts[ord]
 }
 
 morie_survroc_auc_at <- function(times, events, marker, t, route = "km") {
   pts <- morie_survroc_roc_at(times, events, marker, t, route)
+  if (length(pts) < 2L) return(0.0)
   a <- 0.0
-  if (length(pts) >= 2L) {
-    for (k in seq_len(length(pts) - 1L)) {
-      p <- pts[[k]]
-      q <- pts[[k + 1L]]
-      a <- a + (q$fpr - p$fpr) * (p$sensitivity + q$sensitivity) / 2.0
-    }
+  for (k in seq_len(length(pts) - 1L)) {
+    p <- pts[[k]]
+    q <- pts[[k + 1L]]
+    a <- a + (q$fpr - p$fpr) * (p$sensitivity + q$sensitivity) / 2.0
   }
   a
 }
 
-morie_survroc <- function(times, events, marker, t, route = "km") {
+morie_survroc_time_dependent_roc <- function(times, events, marker, t,
+                                             route = "km") {
   cln <- .survroc_clean(times, events, marker)
   T <- cln$T
   E <- cln$E
@@ -251,28 +252,25 @@ morie_survroc <- function(times, events, marker, t, route = "km") {
       a <- a + (q$fpr - p$fpr) * (p$sensitivity + q$sensitivity) / 2.0
     }
   }
-  out_of_range <- list()
-  for (p in pts) {
-    in_se <- p$sensitivity >= -1e-9 && p$sensitivity <= 1 + 1e-9
-    in_sp <- p$specificity >= -1e-9 && p$specificity <= 1 + 1e-9
-    if (!(in_se && in_sp)) {
-      out_of_range[[length(out_of_range) + 1L]] <- p
-    }
-  }
-  n <- length(T)
+  oor <- pts[vapply(pts, function(p) {
+    !(p$sensitivity >= -1e-9 && p$sensitivity <= 1 + 1e-9 &&
+      p$specificity >= -1e-9 && p$specificity <= 1 + 1e-9)
+  }, logical(1))]
   list(
     estimate = a,
     auc = a,
     roc = pts,
     horizon = as.numeric(t),
     route = route,
-    n = n,
+    n = length(T),
     n_events_by_t = sum(T <= t & E == 1L),
     n_at_risk_after_t = sum(T > t),
     n_censored_before_t = sum(T < t & E == 0L),
     survival_at_t = morie_survroc_kaplan_meier(T, E, t),
-    out_of_range = out_of_range,
+    out_of_range = oor,
     method = sprintf("Heagerty, Lumley & Pepe (2000) cumulative "
                      "case / dynamic control ROC, %s estimator", route)
   )
 }
+
+morie_survroc <- morie_survroc_time_dependent_roc
