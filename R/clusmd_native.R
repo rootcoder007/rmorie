@@ -409,3 +409,7 @@ morie_clusmd <- morie_clusmd_neighbour_lists
 #' @rdname morie_clusmd_neighbour_lists
 #' @export
 morie_clusmd <- morie_clusmd_neighbour_lists
+
+#' @rdname morie_clusmd_neighbour_lists
+#' @export
+morie_clusmd <- morie_clusmd_neighbour_lists
