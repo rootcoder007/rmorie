@@ -437,3 +437,7 @@ morie_tmlecensoring <- morie_tmle_censoring
 #' @rdname morie_coarsen_interval
 #' @export
 morie_tmlcen <- morie_coarsen_interval
+
+#' @rdname morie_coarsen_interval
+#' @export
+morie_tmlcen <- morie_coarsen_interval

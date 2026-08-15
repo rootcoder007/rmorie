@@ -320,3 +320,7 @@ morie_inlasm <- gaussian_approximation
 #' @rdname gaussian_approximation
 #' @export
 morie_inlasm <- gaussian_approximation
+
+#' @rdname gaussian_approximation
+#' @export
+morie_inlasm <- gaussian_approximation
