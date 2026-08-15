@@ -1,4 +1,3 @@
-```r
 # Synthetic control estimates and placebo (permutation) inference.
 #
 # Abadie, A., Diamond, A., & Hainmueller, J. (2015) "Comparative Politics and
@@ -10,15 +9,11 @@
   if (n == 0L) return(numeric(0))
   u <- sort(v, decreasing = TRUE)
   css <- 0.0
-  rho <- 0L
   theta <- 0.0
   for (i in seq_len(n)) {
     css <- css + u[i]
     t <- (css - 1.0) / i
-    if (u[i] - t > 0) {
-      rho <- i
-      theta <- t
-    }
+    if (u[i] - t > 0) theta <- t
   }
   pmax(v - theta, 0.0)
 }
@@ -50,10 +45,7 @@
 
   w <- rep(1.0 / J, J)
 
-  resid <- function(ws) {
-    X1 - as.numeric(D %*% ws)
-  }
-
+  resid <- function(ws) X1 - as.numeric(D %*% ws)
   loss <- function(ws) {
     r <- resid(ws)
     sum(vv * r * r)
@@ -68,8 +60,8 @@
   cur <- loss(w)
   converged <- FALSE
   it <- 0L
-  new <- cur + 1
   cand <- w
+  new <- cur + 1
 
   for (it in seq_len(as.integer(max_iter))) {
     r <- resid(w)
@@ -126,7 +118,6 @@
 morie_plcbsc <- function(y_treated, y_donors, t0, x_treated = NULL,
                          x_donors = NULL, v = NULL,
                          statistic = "effect", ...) {
-
   y1 <- as.numeric(y_treated)
   Y0 <- do.call(rbind, lapply(y_donors, as.numeric))
   T <- length(y1)
@@ -173,4 +164,67 @@ morie_plcbsc <- function(y_treated, y_donors, t0, x_treated = NULL,
               if (is.null(x_donors)) NULL else x_donors[[j]],
               ox)
     pg <- .plcbsc_gaps(Y0[j, ], others, pf$weights)
-    placebo[j] <- .plcbsc_effect
+    placebo[j] <- .plcbsc_effect(pg, t0, statistic)
+  }
+
+  abs_est <- abs(est)
+  abs_placebo <- abs(placebo)
+  all_stats <- c(abs_est, abs_placebo)
+  at_least <- sum(all_stats >= abs_est - 1e-12)
+  pvalue <- at_least / length(all_stats)
+  rank <- match(abs_est, sort(all_stats, decreasing = TRUE))
+
+  list(
+    estimate = est,
+    gaps = gaps,
+    weights = main$weights,
+    fit_loss = main$loss,
+    placebo = placebo,
+    pvalue = pvalue,
+    rank = rank,
+    n_donors = J,
+    t0 = t0,
+    statistic = statistic,
+    rmspe_pre = .plcbsc_rmspe(gaps[seq_len(t0)]),
+    rmspe_post = .plcbsc_rmspe(gaps[(t0 + 1):T]),
+    note = paste0("inference is by permutation over the donor pool, so the ",
+                  "smallest attainable p-value is 1/(J+1) = ",
+                  sprintf("%.4g", 1.0 / (J + 1))),
+    method = "synthetic control with in-space placebos (Abadie, Diamond & Hainmueller 2015)"
+  )
+}
+
+.plcbsc_in_time_placebo <- function(y_treated, y_donors, t0, fake_t0, v = NULL, ...) {
+  y1 <- as.numeric(y_treated)
+  Y0 <- do.call(rbind, lapply(y_donors, as.numeric))
+  fake_t0 <- as.integer(fake_t0)
+  t0 <- as.integer(t0)
+  if (!(fake_t0 >= 1L && fake_t0 < t0)) {
+    stop("plcbsc: fake_t0 must fall before the real t0 and leave a pre-period")
+  }
+  fit_kwargs <- list(...)
+  others_x_list <- lapply(seq_len(nrow(Y0)), function(j) Y0[j, seq_len(fake_t0)])
+  args <- c(list(x_treated = y1[seq_len(fake_t0)],
+                 x_donors = others_x_list,
+                 v = v), fit_kwargs)
+  fit <- do.call(.plcbsc_synthetic_control, args)
+  others_y_list <- lapply(seq_len(nrow(Y0)), function(j) Y0[j, ])
+  gaps <- .plcbsc_gaps(y1, others_y_list, fit$weights)
+  list(weights = fit$weights, gaps = gaps,
+       placebo_effect = sum(gaps[(fake_t0 + 1):t0]) / (t0 - fake_t0),
+       rmspe_pre = .plcbsc_rmspe(gaps[seq_len(fake_t0)]),
+       rmspe_placebo = .plcbsc_rmspe(gaps[(fake_t0 + 1):t0]))
+}
+
+.plcbsc_cheatsheet <- function() {
+  paste("plcbsc: synthetic control + placebo inference (Abadie, Diamond & Hainmueller 2015).",
+        "Weights live on the SIMPLEX -- non-negative, summing to one -- which is what stops the",
+        "counterfactual extrapolating outside the donors' support, unlike regression weights.",
+        "No standard errors: run the whole procedure pretending each donor was treated, and the",
+        "p-value is the fraction of placebo effects at least as large as the real one, so the",
+        "smallest attainable p-value is 1/(J+1). in_time_placebo moves the date instead of the",
+        "unit. The post/pre RMSPE ratio is offered as an option, not attributed to this paper.")
+}
+
+placebo_inference <- morie_plcbsc
+placebo_scm_inference <- morie_plcbsc

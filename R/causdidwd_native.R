@@ -35,7 +35,7 @@
   n <- length(yv)
   if (!(length(uv) == length(tv) && length(uv) == n))
     stop(sprintf(paste("causdidwd: Y, unit and period must agree in",
-                        "length (%d, %d, %d)"),
+                       "length (%d, %d, %d)"),
                  n, length(uv), length(tv)))
   if (n < 4L)
     stop(sprintf("causdidwd: need at least 4 observations, got %d", n))
@@ -56,6 +56,28 @@
 
 .causdidwd_with_intercept <- function(rows) {
   cbind(1, rows)
+}
+
+.causdidwd_cohorts <- function(first_treated, period) {
+  ts <- sort(unique(as.character(period)))
+  ord <- setNames(seq_along(ts) - 1L, ts)
+  n <- length(first_treated)
+  G <- character(n)
+  for (i in seq_len(n)) {
+    v <- first_treated[[i]]
+    if (is.null(v) || (length(v) == 1L && is.na(v))) {
+      G[i] <- NA_character_
+    } else {
+      s <- as.character(v)
+      if (!(s %in% names(ord))) {
+        stop(sprintf("causdidwd: adoption period %s is not a period in the data", s))
+      }
+      G[i] <- s
+    }
+  }
+  if (!any(!is.na(G)))
+    stop("causdidwd: no unit is ever treated")
+  list(G = G, ts = ts, order = ord)
 }
 
 #' Pooled OLS with a full set of unit and period dummies
@@ -86,7 +108,7 @@ morie_two_way_fixed_effects <- function(Y, unit, period, X) {
     stop(sprintf(paste("causdidwd: need at least 2 units and 2",
                        "periods, got %d and %d"),
                  length(us), length(ts)))
-  ui <- match(p$u, us)            # 1-based
+  ui <- match(p$u, us)
   ti <- match(p$t, ts)
   px <- ncol(Xm)
   rows <- matrix(0, p$n, px + length(us) - 1L + length(ts) - 1L)
@@ -131,10 +153,12 @@ morie_two_way_mundlak <- function(Y, unit, period, X) {
   map_u <- list()
   map_t <- list()
   for (i in seq_len(p$n)) {
-    if (is.null(map_u[[p$u[i]]])) map_u[[p$u[i]]] <- integer(0)
-    map_u[[p$u[i]]] <- c(map_u[[p$u[i]]], i)
-    if (is.null(map_t[[p$t[i]]])) map_t[[p$t[i]]] <- integer(0)
-    map_t[[p$t[i]]] <- c(map_t[[p$t[i]]], i)
+    key_u <- p$u[i]
+    key_t <- p$t[i]
+    if (is.null(map_u[[key_u]])) map_u[[key_u]] <- integer(0)
+    map_u[[key_u]] <- c(map_u[[key_u]], i)
+    if (is.null(map_t[[key_t]])) map_t[[key_t]] <- integer(0)
+    map_t[[key_t]] <- c(map_t[[key_t]], i)
   }
   ubar <- vector("list", length(map_u)); names(ubar) <- names(map_u)
   for (g in names(map_u)) {
@@ -154,50 +178,30 @@ morie_two_way_mundlak <- function(Y, unit, period, X) {
   for (i in seq_len(p$n))
     rows[i, ] <- c(Xm[i, ], ubar[[p$u[i]]], tbar[[p$t[i]]])
   beta <- .s03lstsq(.causdidwd_with_intercept(rows), p$y, 1e-10)
-  list(coef         = beta[seq_len(px) + 1L],
-       full         = beta,
-       n_columns    = 1L + 3L * px,
-       method       = paste("two-way Mundlak: pooled OLS with",
-                            "unit-specific time averages and",
-                            "period-specific cross-sectional averages;",
-                            "Wooldridge (2025) Sec. 3"),
+  list(coef        = beta[seq_len(px) + 1L],
+       full        = beta,
+       n_columns   = 1L + 3L * px,
+       method      = "two-way Mundlak: pooled OLS with unit-specific time averages and period-specific cross-sectional averages; Wooldridge (2025) Sec. 3",
        identical_to = "two-way fixed effects")
-}
-
-.causdidwd_cohorts <- function(first_treated, period) {
-  ts <- .causdidwd_unique_sorted(period)
-  order <- seq_along(ts) - 1L        # 0-based
-  G <- character(length(first_treated))
-  for (i in seq_along(first_treated)) {
-    v <- first_treated[[i]]
-    if (is.null(v) || (length(v) == 1L && is.na(v))) {
-      G[i] <- NA_character_
-      next
-    }
-    s <- as.character(v)
-    if (!(s %in% ts))
-      stop(sprintf("causdidwd: adoption period %s is not a period in the data",
-                   sQuote(s)))
-    G[i] <- s
-  }
-  if (all(is.na(G))) stop("causdidwd: no unit is ever treated")
-  list(G = G, ts = ts, order = order)
 }
 
 #' The saturated cohort-by-period regression of Sec. 5
 #'
-#' Every \eqn{(g, t)}{(g, t)} cell with \eqn{t >= g}{t >= g} gets
+#' Every \eqn{(g, t)}{(g, t)} cell with \eqn{t \ge g}{t >= g} gets
 #' its own coefficient, so the fitted coefficients **are** the
-#' \eqn{ATT(g, t)}{ATT(g,t)}.  Nothing is averaged, so nothing can
+#' \eqn{ATT(g, t)}{ATT(g, t)}.  Nothing is averaged, so nothing can
 #' be averaged with a negative weight.
 #'
-#' @param first_treated N-vector of adoption periods (\code{NULL} for
-#'   never-treated units).
-#' @param X Optional N-by-p matrix of time-varying covariates.
-#' @return A list with \code{estimate} (mean of \code{att}),
-#'   \code{att} (named numeric keyed by "(g,t)" strings),
-#'   \code{cells}, \code{n_cells}, \code{coef}, \code{cohorts},
-#'   \code{periods}, \code{n}, \code{method}, \code{note}.
+#' @inheritParams morie_two_way_fixed_effects
+#' @param first_treated N-vector of adoption periods (the period in
+#'   which each unit is first treated; \code{NULL} or \code{NA} for
+#'   never-treated).
+#' @param X Optional N-by-p matrix of covariates.
+#' @return A named list mirroring the RichResult payload: \code{estimate},
+#'   \code{att} (named numeric vector keyed by \code{"<g>|<t>"}),
+#'   \code{cells} (list of \code{c(g, t)} pairs), \code{n_cells},
+#'   \code{coef}, \code{cohorts}, \code{periods}, \code{n},
+#'   \code{method}, \code{note}.
 #' @references Wooldridge (2025) Sec. 5.
 #' @export
 morie_etwfe <- function(Y, unit, period, first_treated, X = NULL) {
@@ -206,60 +210,72 @@ morie_etwfe <- function(Y, unit, period, first_treated, X = NULL) {
     stop(sprintf("causdidwd: %d adoption periods for %d observations",
                  length(first_treated), p$n))
   ch <- .causdidwd_cohorts(first_treated, p$t)
-  G <- ch$G; ts <- ch$ts; ord <- ch$order
-  # cells: sorted set of (G[i], t[i]) for treated-post observations
+  G <- ch$G
+  ts <- ch$ts
+  ord <- ch$order
+
   cell_keys <- character(0)
   for (i in seq_len(p$n)) {
-    if (is.na(G[i])) next
-    gi <- ord[match(G[i], ts)]
-    ti <- ord[match(p$t[i], ts)]
-    if (ti >= gi) {
-      key <- paste0(G[i], ",", p$t[i])
-      if (!(key %in% cell_keys)) cell_keys <- c(cell_keys, key)
+    if (!is.na(G[i]) && ord[p$t[i]] >= ord[G[i]]) {
+      key <- paste(G[i], p$t[i], sep = "\r")
+      if (!(key %in% cell_keys))
+        cell_keys <- c(cell_keys, key)
     }
   }
   if (length(cell_keys) == 0L)
     stop("causdidwd: no post-treatment cell exists")
+  cell_keys <- sort(cell_keys)
+
+  n_cells <- length(cell_keys)
   us <- .causdidwd_unique_sorted(p$u)
   ui <- match(p$u, us)
   ti <- match(p$t, ts)
-  Xm <- if (is.null(X)) matrix(0, p$n, 0) else .s03mat(X)
-  if (nrow(Xm) != p$n)
-    stop(sprintf("causdidwd: X has %d rows for %d observations",
-                 nrow(Xm), p$n))
-  px <- ncol(Xm)
-  ncells <- length(cell_keys)
-  ncols  <- ncells + px + length(us) - 1L + length(ts) - 1L
-  rows   <- matrix(0, p$n, ncols)
-  for (i in seq_len(p$n)) {
-    cell_col <- numeric(ncells)
-    if (!is.na(G[i])) {
-      key <- paste0(G[i], ",", p$t[i])
-      pos <- match(key, cell_keys)
-      if (!is.na(pos)) cell_col[pos] <- 1
-    }
-    d <- numeric(length(us) - 1L)
-    if (ui[i] > 1L) d[ui[i] - 1L] <- 1
-    f <- numeric(length(ts) - 1L)
-    if (ti[i] > 1L) f[ti[i] - 1L] <- 1
-    rows[i, ] <- c(cell_col, Xm[i, ], d, f)
+
+  if (is.null(X)) {
+    Xm <- matrix(0, p$n, 0L)
+  } else {
+    Xm <- .s03mat(X)
+    if (nrow(Xm) != p$n)
+      stop(sprintf("causdidwd: X has %d rows for %d observations",
+                   nrow(Xm), p$n))
   }
-  beta <- .s03lstsq(.causdidwd_with_intercept(rows), p$y, 1e-10)
-  att <- numeric(ncells)
-  names(att) <- cell_keys
-  for (j in seq_len(ncells)) att[j] <- beta[j + 1L]
-  list(estimate = mean(att),
-       att      = att,
-       cells    = cell_keys,
-       n_cells  = ncells,
-       coef     = beta,
-       cohorts  = sort(unique(G[!is.na(G)])),
-       periods  = ts,
-       n        = p$n,
-       method   = paste("extended two-way fixed effects: saturated in",
-                        "cohort x period; Wooldridge (2025) Sec. 5"),
-       note     = paste("each coefficient IS an ATT(g,t); nothing is",
-                        "averaged, so no negative weights arise"))
+  px <- ncol(Xm)
+
+  n_cols <- n_cells + px + (length(us) - 1L) + (length(ts) - 1L)
+  design <- matrix(0, p$n, n_cols)
+  for (i in seq_len(p$n)) {
+    if (!is.na(G[i])) {
+      key <- paste(G[i], p$t[i], sep = "\r")
+      ci <- match(key, cell_keys)
+      if (!is.na(ci))
+        design[i, ci] <- 1
+    }
+    if (px > 0L)
+      design[i, n_cells + seq_len(px)] <- Xm[i, ]
+    if (ui[i] > 1L)
+      design[i, n_cells + px + ui[i] - 1L] <- 1
+    if (ti[i] > 1L)
+      design[i, n_cells + px + length(us) - 1L + ti[i] - 1L] <- 1
+  }
+  beta <- .s03lstsq(cbind(1, design), p$y, 1e-10)
+
+  att_values <- beta[seq_len(n_cells) + 1L]
+  att <- setNames(att_values, cell_keys)
+  cells_list <- lapply(cell_keys,
+                       function(k) strsplit(k, "\r", fixed = TRUE)[[1]])
+
+  list(
+    estimate = mean(att_values),
+    att      = att,
+    cells    = cells_list,
+    n_cells  = n_cells,
+    coef     = beta,
+    cohorts  = sort(unique(G[!is.na(G)])),
+    periods  = ts,
+    n        = p$n,
+    method   = "extended two-way fixed effects: saturated in cohort x period; Wooldridge (2025) Sec. 5",
+    note     = "each coefficient IS an ATT(g,t); nothing is averaged, so no negative weights arise"
+  )
 }
 
 #' The two-step imputation estimator of Sec. 4
@@ -270,11 +286,10 @@ morie_etwfe <- function(Y, unit, period, first_treated, X = NULL) {
 #' this is numerically identical to \code{morie_etwfe}.
 #'
 #' @inheritParams morie_etwfe
-#' @return A list with \code{estimate}, \code{att}, \code{n_cells},
-#'   \code{n_untreated_used}, \code{coef}, \code{method},
-#'   \code{identical_to}.
-#' @references Wooldridge (2025) Sec. 4 (procedure) and Sec. 5
-#'   (equivalence).
+#' @return A named list mirroring the RichResult payload: \code{estimate},
+#'   \code{att}, \code{n_cells}, \code{n_untreated_used}, \code{coef},
+#'   \code{method}, \code{identical_to}.
+#' @references Wooldridge (2025) Sec. 4.
 #' @export
 morie_imputation <- function(Y, unit, period, first_treated, X = NULL) {
   p <- .causdidwd_panel(Y, unit, period)
@@ -282,130 +297,151 @@ morie_imputation <- function(Y, unit, period, first_treated, X = NULL) {
     stop(sprintf("causdidwd: %d adoption periods for %d observations",
                  length(first_treated), p$n))
   ch <- .causdidwd_cohorts(first_treated, p$t)
-  G <- ch$G; ts <- ch$ts; ord <- ch$order
-  treated <- rep(FALSE, p$n)
-  for (i in seq_len(p$n)) {
-    if (is.na(G[i])) next
-    if (ord[match(p$t[i], ts)] >= ord[match(G[i], ts)]) treated[i] <- TRUE
-  }
-  untreated <- which(!treated)
-  if (length(untreated) < 2L)
+  G <- ch$G
+  ts <- ch$ts
+  ord <- ch$order
+
+  treated <- !is.na(G) & ord[p$t] >= ord[G]
+  untreated_idx <- which(!treated)
+  if (length(untreated_idx) < 2L)
     stop("causdidwd: too few untreated observations to fit the baseline model")
+
   us <- .causdidwd_unique_sorted(p$u)
   ui <- match(p$u, us)
   ti <- match(p$t, ts)
-  Xm <- if (is.null(X)) matrix(0, p$n, 0) else .s03mat(X)
-  if (nrow(Xm) != p$n)
-    stop(sprintf("causdidwd: X has %d rows for %d observations",
-                 nrow(Xm), p$n))
+
+  if (is.null(X)) {
+    Xm <- matrix(0, p$n, 0L)
+  } else {
+    Xm <- .s03mat(X)
+    if (nrow(Xm) != p$n)
+      stop(sprintf("causdidwd: X has %d rows for %d observations",
+                   nrow(Xm), p$n))
+  }
   px <- ncol(Xm)
-  build_row <- function(i) {
-    d <- numeric(length(us) - 1L)
-    if (ui[i] > 1L) d[ui[i] - 1L] <- 1
-    f <- numeric(length(ts) - 1L)
-    if (ti[i] > 1L) f[ti[i] - 1L] <- 1
-    c(Xm[i, ], d, f)
+
+  n_cols <- px + (length(us) - 1L) + (length(ts) - 1L)
+  R <- matrix(0, length(untreated_idx), n_cols)
+  for (k in seq_along(untreated_idx)) {
+    i <- untreated_idx[k]
+    off <- 0L
+    if (px > 0L) {
+      R[k, seq_len(px)] <- Xm[i, ]
+      off <- px
+    }
+    if (ui[i] > 1L)
+      R[k, off + ui[i] - 1L] <- 1
+    off <- off + length(us) - 1L
+    if (ti[i] > 1L)
+      R[k, off + ti[i] - 1L] <- 1
   }
-  Ru <- matrix(0, length(untreated), px + length(us) - 1L + length(ts) - 1L)
-  for (k in seq_along(untreated)) {
-    i <- untreated[k]
-    Ru[k, ] <- build_row(i)
-  }
-  yu <- p$y[untreated]
-  beta <- .s03lstsq(.causdidwd_with_intercept(Ru), yu, 1e-10)
-  # accumulate residuals by (G[i], t[i]) for treated obs
-  cell_sums <- list()
-  cell_cnt  <- list()
+  y_untreated <- p$y[untreated_idx]
+  beta <- .s03lstsq(cbind(1, R), y_untreated, 1e-10)
+
+  cells <- list()
   for (i in seq_len(p$n)) {
     if (!treated[i]) next
-    ri <- c(1, build_row(i))
-    yhat <- 0
-    for (j in seq_along(beta)) yhat <- yhat + ri[j] * beta[j]
-    key <- paste0(G[i], ",", p$t[i])
-    if (is.null(cell_sums[[key]])) {
-      cell_sums[[key]] <- p$y[i] - yhat
-      cell_cnt[[key]]  <- 1L
-    } else {
-      cell_sums[[key]] <- cell_sums[[key]] + p$y[i] - yhat
-      cell_cnt[[key]]  <- cell_cnt[[key]] + 1L
+    row_i <- numeric(length(beta))
+    row_i[1L] <- 1
+    off <- 1L
+    if (px > 0L) {
+      row_i[off + seq_len(px)] <- Xm[i, ]
+      off <- off + px
     }
+    if (ui[i] > 1L)
+      row_i[off + ui[i] - 1L] <- 1
+    off <- off + length(us) - 1L
+    if (ti[i] > 1L)
+      row_i[off + ti[i] - 1L] <- 1
+    yhat <- sum(row_i * beta)
+    key <- paste(G[i], p$t[i], sep = "\r")
+    if (is.null(cells[[key]]))
+      cells[[key]] <- numeric(0)
+    cells[[key]] <- c(cells[[key]], p$y[i] - yhat)
   }
-  keys <- names(cell_sums)
-  att <- numeric(length(keys))
-  names(att) <- keys
-  for (k in seq_along(keys)) att[k] <- cell_sums[[keys[k]]] / cell_cnt[[keys[k]]]
-  list(estimate         = mean(att),
-       att              = att,
-       n_cells          = length(att),
-       n_untreated_used = length(untreated),
-       coef             = beta,
-       method           = paste("two-step imputation on untreated",
-                                "observations; Wooldridge (2025) Sec. 4"),
-       identical_to     = "etwfe, by Sec. 5")
+
+  att_keys <- names(cells)
+  att_values <- vapply(cells, mean, numeric(1))
+  att <- setNames(att_values, att_keys)
+
+  list(
+    estimate         = mean(att_values),
+    att              = att,
+    n_cells          = length(att),
+    n_untreated_used = length(untreated_idx),
+    coef             = beta,
+    method           = "two-step imputation on untreated observations; Wooldridge (2025) Sec. 4",
+    identical_to     = "etwfe, by Sec. 5"
+  )
 }
 
-#' Collapse the ATT(g,t) to one number or an event-time profile
+#' Collapse the ATT(g, t) to one number or a profile (Sec. 7)
 #'
-#' With Sec. 7 weights made visible.  The \code{simple} scheme takes
-#' a (possibly user-supplied) weighted mean of the cell estimates.
-#' The \code{event} scheme averages within each calendar period
-#' \eqn{t}{t}.  The \code{cohort} scheme averages within each
-#' treatment cohort \eqn{g}{g}.
-#'
-#' @param result Either an \code{etwfe} / \code{imputation} output
-#'   (with an \code{att} element) or a bare \code{att}-like named
-#'   numeric.
-#' @param scheme One of \code{"simple"}, \code{"event"},
-#'   \code{"cohort"}.
-#' @param weights Optional named numeric of weights (one per cell)
-#'   for the \code{"simple"} scheme.
-#' @return For \code{simple}: a list with \code{estimate},
-#'   \code{weights}, \code{scheme}.  For \code{event} / \code{cohort}:
-#'   a list with \code{profile}, \code{estimate}, \code{scheme}.
+#' @param result Output of \code{morie_etwfe} or
+#'   \code{morie_imputation}.
+#' @param scheme One of \code{"simple"} (uniform weights),
+#'   \code{"event"} (profile by \code{(g, t)}), or \code{"cohort"}
+#'   (profile by calendar period \code{t}).
+#' @param weights Optional named numeric vector of weights for the
+#'   \code{"simple"} scheme; defaults to uniform.
+#' @return A named list: for \code{"simple"} \code{estimate},
+#'   \code{weights}, \code{scheme}; for \code{"event"} or
+#'   \code{"cohort"} \code{profile}, \code{scheme}, \code{estimate}.
 #' @references Wooldridge (2025) Sec. 7.
 #' @export
 morie_aggregate <- function(result, scheme = "simple", weights = NULL) {
   if (!(scheme %in% c("simple", "event", "cohort")))
-    stop(sprintf(paste("causdidwd: scheme must be simple, event or",
-                       "cohort, got %s"), sQuote(scheme)))
-  if (is.list(result) && !is.null(result$att)) {
-    att <- result$att
-  } else {
-    att <- result
-  }
-  if (length(att) == 0L) stop("causdidwd: nothing to aggregate")
+    stop(sprintf("causdidwd: scheme must be simple, event or cohort, got %s",
+                 scheme))
+  att <- result$att
+  if (is.null(att) || length(att) == 0L)
+    stop("causdidwd: nothing to aggregate")
+
   if (scheme == "simple") {
     if (is.null(weights)) {
       w <- setNames(rep(1.0 / length(att), length(att)), names(att))
     } else {
-      w <- as.numeric(weights)
-      names(w) <- names(att)
+      w <- weights
     }
     tot <- sum(w)
-    if (abs(tot) <= .EPS) stop("causdidwd: the weights sum to zero")
-    return(list(estimate = sum(att * w) / tot,
-                weights  = w,
-                scheme   = "simple"))
+    if (abs(tot) <= .EPS)
+      stop("causdidwd: the weights sum to zero")
+    est <- sum(att * w) / tot
+    return(list(estimate = est, weights = w, scheme = "simple"))
   }
-  prof <- list()
-  for (nm in names(att)) {
-    parts <- strsplit(nm, ",", fixed = TRUE)[[1]]
-    if (length(parts) != 2L) next
-    g <- parts[1]; t <- parts[2]
-    key <- if (scheme == "cohort") g else t
-    if (is.null(prof[[key]])) prof[[key]] <- numeric(0)
-    prof[[key]] <- c(prof[[key]], att[[nm]])
+
+  keys <- names(att)
+  if (scheme == "cohort") {
+    split_keys <- strsplit(keys, "\r", fixed = TRUE)
+    group_keys <- vapply(split_keys, function(x) x[2L], character(1))
+  } else {
+    group_keys <- keys
   }
-  prof <- lapply(prof, mean)
-  list(estimate = mean(unlist(prof, use.names = FALSE)),
-       profile  = setNames(unlist(prof, use.names = FALSE), names(prof)),
-       scheme   = scheme)
+  unique_groups <- unique(group_keys)
+  prof <- vapply(unique_groups,
+                 function(g) mean(att[group_keys == g]),
+                 numeric(1))
+  est <- mean(prof)
+  list(profile = prof, scheme = scheme, estimate = est)
 }
 
-# Module-name entry point.  Mirrors morie.fn.causdidwd.etwfe and
-# the alias morie.fn.causdidwd.causal_did_wooldridge_eta.
-#' @rdname morie_etwfe
-#' @export
-morie_causdidwd <- function(Y, unit, period, first_treated, X = NULL) {
-  morie_etwfe(Y, unit, period, first_treated, X = X)
+morie_cheatsheet <- function() {
+  paste("causdidwd: ETWFE. TWFE == two-way MUNDLAK -- pooled OLS ",
+        "with unit-specific time averages AND period-specific ",
+        "cross-sectional averages gives the identical ",
+        "coefficients, in 3p columns rather than N+T dummies. ",
+        "TWFE is not broken; a RESTRICTIVE model is. Saturate in ",
+        "cohort x period and each coefficient IS an ATT(g,t) -- ",
+        "nothing is averaged, so no negative weights. Imputation ",
+        "on untreated observations gives the same numbers.",
+        sep = "")
 }
+
+# Compact alias per ledger/NAMING.md
+morie_etwfedid <- morie_etwfe
+
+# Public names resolved by fn/_lazy_map.json
+morie_causal_did_wooldridge_eta <- morie_etwfe
+
+# Module entry point
+morie_causdidwd <- morie_etwfe
