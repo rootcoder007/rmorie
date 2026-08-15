@@ -155,7 +155,8 @@
     uid <- d$user
     R <- as.list(others[[uid]])
     if (!(item %in% names(R))) next
-    mu <- sum(as.numeric(unlist(R))) / length(R)
+    R_vals <- as.numeric(unlist(R))
+    mu <- sum(R_vals) / length(R_vals)
     num <- num + d$w * (as.numeric(R[[item]]) - mu)
     den <- den + abs(d$w)
     naive_num <- naive_num + d$w * as.numeric(R[[item]])
@@ -164,19 +165,17 @@
   }
   if (used == 0L || den <= .ucfR_EPS) {
     return(list(
-      estimate = mean_a,
-      prediction = mean_a,
-      n_neighbours = 0L,
-      fell_back = TRUE,
+      estimate = mean_a, prediction = mean_a,
+      n_neighbours = 0L, fell_back = TRUE,
       method = "user-based collaborative filtering; Resnick et al. (1994)",
       note = "nobody comparable rated this item, so the user's own mean is the honest answer"
     ))
   }
-  est <- mean_a + num / den
+  pred <- mean_a + num / den
   naive_mean <- if (abs(naive_den) > .ucfR_EPS) naive_num / naive_den else NULL
   list(
-    estimate = est,
-    prediction = est,
+    estimate = pred,
+    prediction = pred,
     naive_weighted_mean = naive_mean,
     user_mean = mean_a,
     n_neighbours = used,
@@ -190,7 +189,6 @@
   "ucfR: people who agreed before will probably agree again -- so predict from correlated users, with NO content analysis, which is why it worked on Usenet news. Correlate over CO-RATED items only; unrated is silent, not zero. Predict the user's own mean plus a weighted average of neighbours' DEVIATIONS from their means, since one person's 3 is another's 5 -- averaging raw ratings imports the neighbour's generosity. Normalise by the sum of ABSOLUTE weights, so a reliable disagreer still counts. A correlation of 1.0 from two co-rated items is not evidence: scale by min(n/50, 1)."
 }
 
-# Compact alias per ledger/NAMING.md
 morie_ucfR <- list(
   co_rated = .ucfR_co_rated,
   significance_weight = .ucfR_significance_weight,

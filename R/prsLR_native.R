@@ -1,4 +1,3 @@
-```r
 # morie.fn -- function file (rootcoder007/morie)
 # LR parsing: deciding a reduction from the left, with lookahead.
 #
@@ -72,6 +71,7 @@
 
 .prsLR_first_seq <- function(seq, first, nts) {
   out <- character(0)
+  if (length(seq) == 0) return(c(.prsLR_EPSILON))
   for (s in seq) {
     if (!(s %in% nts)) {
       out <- c(out, s)
@@ -155,7 +155,7 @@
 }
 
 .prsLR_closure <- function(items, ag, first, nts, k) {
-  out <- as.character(items)
+  out <- unique(as.character(items))
   changed <- TRUE
   while (changed) {
     changed <- FALSE
@@ -167,34 +167,37 @@
       if (dot >= length(rhs) || !(rhs[[dot + 1]] %in% nts)) next
       B <- rhs[[dot + 1]]
       if (k == 0) {
-        looks <- list(NA_character_)
+        looks <- NA_character_
       } else {
         look <- parts[3]
         tail <- if (dot + 1 < length(rhs)) rhs[(dot + 2):length(rhs)] else list()
         fs   <- .prsLR_first_seq(tail, first, nts)
-        looks_vec <- setdiff(fs, .prsLR_EPSILON)
+        looks <- setdiff(fs, .prsLR_EPSILON)
         if (.prsLR_EPSILON %in% fs || length(tail) == 0) {
-          looks_vec <- union(looks_vec, look)
+          looks <- union(looks, look)
         }
-        looks <- as.list(looks_vec)
       }
       for (j in seq_along(ag$rules)) {
         if (ag$rules[[j]][[1]] != B) next
-        for (b in looks) {
-          if (k == 0) {
-            new <- paste0(j, ":", 0)
-          } else {
-            new <- paste0(j, ":", 0, ":", b)
-          }
+        if (k == 0) {
+          new <- paste0(j, ":0")
           if (!(new %in% out)) {
             out <- c(out, new)
             changed <- TRUE
+          }
+        } else {
+          for (b in looks) {
+            new <- paste0(j, ":0:", b)
+            if (!(new %in% out)) {
+              out <- c(out, new)
+              changed <- TRUE
+            }
           }
         }
       }
     }
   }
-  unique(out)
+  sort(unique(out))
 }
 
 .prsLR_goto <- function(state, sym, ag, first, nts, k) {
@@ -206,17 +209,288 @@
     rhs <- ag$rules[[i]][[2]]
     if (dot < length(rhs) && rhs[[dot + 1]] == sym) {
       if (k == 0) {
-        new <- paste0(i, ":", dot + 1)
+        moved <- c(moved, paste0(i, ":", dot + 1))
       } else {
         look <- parts[3]
-        new  <- paste0(i, ":", dot + 1, ":", look)
+        moved <- c(moved, paste0(i, ":", dot + 1, ":", look))
       }
-      moved <- c(moved, new)
     }
   }
   if (length(moved) == 0) return(character(0))
-  .prsLR_closure(unique(moved), ag, first, nts, k)
+  .prsLR_closure(moved, ag, first, nts, k)
 }
 
 .prsLR_core <- function(state) {
-  s
+  cores <- character(0)
+  for (it in state) {
+    parts <- strsplit(it, ":", fixed = TRUE)[[1]]
+    cores <- c(cores, paste(parts[1], parts[2], sep = ":"))
+  }
+  sort(unique(cores))
+}
+
+.prsLR_canonical_collection <- function(ag, k) {
+  g0 <- list(rules = ag$rules, start = ag$start)
+  first <- .prsLR_first_sets(g0)
+  nts <- .prsLR_nonterminals(g0)
+  syms <- c(nts, .prsLR_terminals(g0))
+  start_item <- if (k == 0) "1:0" else paste0("1:0:", .prsLR_END)
+  I0 <- .prsLR_closure(start_item, ag, first, nts, k)
+  states <- list(I0)
+  index <- list()
+  index[[paste(I0, collapse = "|")]] <- 0
+  trans <- list()
+  q <- list(I0)
+  while (length(q) > 0) {
+    I <- q[[1]]
+    q <- q[-1]
+    I_idx <- index[[paste(I, collapse = "|")]]
+    for (X in syms) {
+      J <- .prsLR_goto(I, X, ag, first, nts, k)
+      if (length(J) == 0) next
+      J_key <- paste(J, collapse = "|")
+      if (is.null(index[[J_key]])) {
+        index[[J_key]] <- length(states)
+        states <- c(states, list(J))
+        q <- c(q, list(J))
+      }
+      trans_key <- paste(I_idx, X, sep = ":")
+      trans[[trans_key]] <- index[[J_key]]
+    }
+  }
+  list(states = states, index = index, transitions = trans,
+       first = first, nonterminals = nts)
+}
+
+.prsLR_build_tables <- function(g, method) {
+  if (!(method %in% .prsLR_METHODS)) {
+    stop(sprintf("prsLR: method must be one of %s, got %s",
+                 paste(.prsLR_METHODS, collapse = ", "), method))
+  }
+  ag <- .prsLR_augment(g)
+  k <- if (method == "slr1") 0 else 1
+  col <- .prsLR_canonical_collection(ag, k)
+  states <- col$states
+  trans_raw <- col$transitions
+  trans <- list()
+  for (key in names(trans_raw)) {
+    parts <- strsplit(key, ":", fixed = TRUE)[[1]]
+    s <- as.integer(parts[1])
+    X <- parts[2]
+    new_key <- paste(s, X, sep = ":")
+    trans[[new_key]] <- trans_raw[[key]]
+  }
+  nts <- col$nonterminals
+  follow <- if (method == "slr1") {
+    .prsLR_follow_sets(list(rules = ag$rules, start = ag$start), col$first)
+  } else NULL
+
+  if (method == "lalr1") {
+    groups <- list()
+    for (n in seq_along(states)) {
+      core <- paste(.prsLR_core(states[[n]]), collapse = "|")
+      if (is.null(groups[[core]])) groups[[core]] <- integer(0)
+      groups[[core]] <- c(groups[[core]], n - 1)
+    }
+    remap <- integer(0)
+    merged <- list()
+    for (core in names(groups)) {
+      members <- groups[[core]]
+      new <- length(merged)
+      union_items <- character(0)
+      for (n in members) {
+        remap <- c(remap, setNames(new, as.character(n)))
+        union_items <- c(union_items, states[[n + 1]])
+      }
+      merged <- c(merged, list(sort(unique(union_items))))
+    }
+    states <- merged
+    new_trans <- list()
+    for (key in names(trans)) {
+      parts <- strsplit(key, ":", fixed = TRUE)[[1]]
+      s <- as.integer(parts[1])
+      X <- parts[2]
+      t <- trans[[key]]
+      new_s <- remap[as.character(s)]
+      new_t <- remap[as.character(t)]
+      new_key <- paste(new_s, X, sep = ":")
+      new_trans[[new_key]] <- new_t
+    }
+    trans <- new_trans
+  }
+
+  action <- list()
+  gotos <- list()
+  confl <- list()
+
+  put_action <- function(s, a, act) {
+    key <- paste(s, a, sep = ":")
+    if (!is.null(action[[key]])) {
+      existing <- action[[key]]
+      if (!identical(existing, act)) {
+        kind <- if ("shift" %in% c(existing[1], act[1])) "shift/reduce" else "reduce/reduce"
+        confl[[length(confl) + 1]] <<- list(
+          state = s, lookahead = a,
+          existing = existing, proposed = act, kind = kind
+        )
+      }
+    } else {
+      action[[key]] <<- act
+    }
+  }
+
+  for (key in names(trans)) {
+    parts <- strsplit(key, ":", fixed = TRUE)[[1]]
+    s <- as.integer(parts[1])
+    X <- parts[2]
+    t <- trans[[key]]
+    if (X %in% nts) {
+      gotos[[key]] <- t
+    } else {
+      put_action(s, X, c("shift", as.character(t)))
+    }
+  }
+  for (s_idx in seq_along(states)) {
+    s <- s_idx - 1
+    st <- states[[s_idx]]
+    for (it in st) {
+      parts <- strsplit(it, ":", fixed = TRUE)[[1]]
+      i <- as.integer(parts[1])
+      dot <- as.integer(parts[2])
+      rule <- ag$rules[[i]]
+      lhs <- rule[[1]]
+      rhs <- rule[[2]]
+      if (dot != length(rhs)) next
+      if (i == 1) {
+        put_action(s, .prsLR_END, c("accept", NA_character_))
+        next
+      }
+      if (method == "slr1") {
+        looks <- follow[[lhs]]
+      } else {
+        looks <- parts[3]
+      }
+      for (a in looks) {
+        put_action(s, a, c("reduce", as.character(i)))
+      }
+    }
+  }
+  list(action = action, goto = gotos, states = states,
+       n_states = length(states), conflicts = confl,
+       rules = ag$rules, augmented = ag, method = method)
+}
+
+.prsLR_leaf <- function(sym) {
+  list(symbol = sym, children = NULL)
+}
+
+.prsLR_parse <- function(g, tokens, method, tables) {
+  t <- if (!is.null(tables)) tables else .prsLR_build_tables(g, method)
+  if (length(t$conflicts) > 0) {
+    c <- t$conflicts[[1]]
+    stop(sprintf("prsLR: the grammar is not %s -- %d conflict(s), first a %s in state %d on %s",
+                 t$method, length(t$conflicts), c$kind, c$state, c$lookahead))
+  }
+  toks <- c(as.character(tokens), .prsLR_END)
+  stack <- c(0L)
+  trees <- list()
+  pos <- 1L
+  for (iter in seq_len(100000)) {
+    if (pos > length(toks)) break
+    a <- toks[pos]
+    key <- paste(stack[length(stack)], a, sep = ":")
+    act <- t$action[[key]]
+    if (is.null(act)) {
+      stop(sprintf("prsLR: syntax error at token %d (%s) in state %d",
+                   pos - 1L, a, stack[length(stack)]))
+    }
+    op <- act[1]
+    arg <- act[2]
+    if (op == "shift") {
+      stack <- c(stack, as.integer(arg))
+      trees <- c(trees, list(.prsLR_leaf(a)))
+      pos <- pos + 1L
+    } else if (op == "reduce") {
+      i <- as.integer(arg)
+      rule <- t$rules[[i]]
+      lhs <- rule[[1]]
+      rhs <- rule[[2]]
+      n <- length(rhs)
+      kids <- list()
+      for (j in seq_len(n)) {
+        stack <- stack[-length(stack)]
+        kids <- c(kids, list(trees[[length(trees)]]))
+        trees <- trees[-length(trees)]
+      }
+      kids <- rev(kids)
+      node <- list(symbol = lhs, children = kids)
+      goto_key <- paste(stack[length(stack)], lhs, sep = ":")
+      nxt <- t$goto[[goto_key]]
+      if (is.null(nxt)) {
+        stop(sprintf("prsLR: no goto for %s in state %d", lhs, stack[length(stack)]))
+      }
+      stack <- c(stack, nxt)
+      trees <- c(trees, list(node))
+    } else {
+      if (length(trees) != 1 || pos != length(toks)) {
+        stop(sprintf("prsLR: accepted with %d trees and %d tokens left",
+                     length(trees), length(toks) - pos))
+      }
+      return(trees[[1]])
+    }
+  }
+  stop("prsLR: the parser did not terminate")
+}
+
+# ---- Public API --------------------------------------------------------
+
+morie_augment <- function(g) {
+  .prsLR_augment(g)
+}
+
+morie_closure <- function(items, ag, first, nts, k = 1) {
+  .prsLR_closure(items, ag, first, nts, k)
+}
+
+morie_goto <- function(state, sym, ag, first, nts, k = 1) {
+  .prsLR_goto(state, sym, ag, first, nts, k)
+}
+
+morie_canonical_collection <- function(ag, k = 1) {
+  .prsLR_canonical_collection(ag, k)
+}
+
+morie_build_tables <- function(g, method = "lr1") {
+  .prsLR_build_tables(g, method)
+}
+
+morie_conflicts <- function(g, method = "lr1") {
+  t <- .prsLR_build_tables(g, method)
+  list(
+    estimate = t$conflicts,
+    conflicts = t$conflicts,
+    n_conflicts = length(t$conflicts),
+    method = method,
+    n_states = t$n_states,
+    ok = length(t$conflicts) == 0
+  )
+}
+
+morie_parse <- function(g, tokens, method = "lr1", tables = NULL) {
+  .prsLR_parse(g, tokens, method, tables)
+}
+
+morie_prsLR <- function(grammar_, tokens, method = "lr1") {
+  g <- .prsLR_grammar(grammar_)
+  t <- .prsLR_build_tables(g, method)
+  tree <- .prsLR_parse(g, tokens, method, t)
+  list(
+    estimate = tree,
+    tree = tree,
+    method = method,
+    n_states = t$n_states,
+    conflicts = t$conflicts,
+    tokens = as.character(tokens),
+    yield = .prsLR_linearise(tree)
+  )
+}
