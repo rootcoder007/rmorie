@@ -45,7 +45,7 @@
 
   w <- rep(1.0 / J, J)
 
-  resid <- function(ws) X1 - as.numeric(D %*% ws)
+  resid <- function(ws) X1 - as.numeric(crossprod(D, ws))
   loss <- function(ws) {
     r <- resid(ws)
     sum(vv * r * r)
@@ -88,13 +88,13 @@
   }
 
   list(weights = w, loss = cur,
-       fitted = as.numeric(D %*% w),
+       fitted = as.numeric(crossprod(D, w)),
        n_iter = it, converged = converged)
 }
 
 .plcbsc_gaps <- function(y_treated, y_donors, weights) {
   Y0 <- do.call(rbind, lapply(y_donors, as.numeric))
-  y_treated - as.numeric(Y0 %*% weights)
+  y_treated - as.numeric(crossprod(Y0, weights))
 }
 
 .plcbsc_rmspe <- function(gaps) {
