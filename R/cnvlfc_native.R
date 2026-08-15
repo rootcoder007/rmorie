@@ -33,7 +33,9 @@
             pts[i, k] <- v[ii - (k - 1L) * t]
         }
     }
-    list(points = pts, index = idx, E = e, tau = t)
+    # index is REPORTED, so it follows the Python 0-based
+    # convention; idx itself stays 1-based for the subsetting above.
+    list(points = pts, index = idx - 1L, E = e, tau = t)
 }
 
 .cnvlfc_corr <- function(a, b) {

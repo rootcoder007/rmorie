@@ -82,7 +82,10 @@ make_blocks <- function(n_markers, chromosomes = NULL, block_size = 1000) {
     boundary <- (i == n) || ((i > 1) && (chrom[i] != chrom[i - 1])) || ((i - start + 1) >= b)
     if (boundary) {
       blocks[[length(blocks) + 1]] <- list(
-        start = start,
+        # Python reports a half-open block [start, stop): start is 0-based,
+        # stop is the EXCLUSIVE end, which numerically equals R's 1-based
+        # INCLUSIVE stop. So start shifts and stop does not.
+        start = start - 1L,
         stop = i,
         chromosome = chrom[start],
         size = i - start + 1
