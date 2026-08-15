@@ -86,12 +86,19 @@ morie_survrsf_rule_status <- function(rule=NULL) {
   if (e$s == 0) {
     e$s <- 1
   }
+  # Python _Rng is the 64-bit MMIX LCG: s = s*6364136223846793005 +
+  # 1442695040888963407 mod 2^64, output (s >> 11) / 2^53. Carried here
+  # as (hi, lo) 32-bit words via the exact ghc limb helpers, seeded the
+  # same way (one multiply-add applied to the seed itself).
+  A64 <- c(1481765933, 1284865837)
+  C64 <- list(hi = 335903614, lo = 4150755663)
+  sd0 <- as.numeric(seed)
+  st <- .ghc_add64(.ghc_mul64(list(hi = floor(sd0 / 4294967296),
+                                   lo = sd0 %% 4294967296), A64), C64)
+  e$w <- st
   e$next_ <- function() {
-    hi <- e$s %/% 65536
-    lo <- e$s %% 65536
-    e$s <- ((((1103515245 * hi) %% 2147483648) * 65536) %% 2147483648 +
-            1103515245 * lo + 12345) %% 2147483648
-    e$s / 2147483648
+    e$w <- .ghc_add64(.ghc_mul64(e$w, A64), C64)
+    e$w$hi / 4294967296 + floor(e$w$lo / 2048) / 9007199254740992
   }
   e$randint <- function(n) {
     as.integer(e$next_() * n) %% n

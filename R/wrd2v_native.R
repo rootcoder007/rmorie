@@ -38,18 +38,12 @@
 .wrd2v_ARCH <- c("skip-gram", "cbow")
 
 .wrd2v_rng <- function(seed) {
-  # float-safe 32-bit LCG returning uniforms in [0, 1)
+  # SplitMix64 via .ghc_rng: the Python arm is np.random.default_rng(seed)
+  # (_array_core _SplitMix64), so the draws here are bit-identical to it
   e <- new.env(parent=emptyenv())
-  e$s <- as.numeric(seed) %% 2147483648
-  if (e$s == 0) {
-    e$s <- 1
-  }
+  e$state <- .ghc_rng(seed)
   e$random <- function() {
-    hi <- e$s %/% 65536
-    lo <- e$s %% 65536
-    e$s <- ((((1103515245 * hi) %% 2147483648) * 65536) %% 2147483648 +
-            1103515245 * lo + 12345) %% 2147483648
-    e$s / 2147483648
+    .ghc_unif(e$state, 1L)
   }
   e
 }
