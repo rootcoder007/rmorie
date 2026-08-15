@@ -26,32 +26,21 @@
   as.numeric(backsolve(L, y))
 }
 
-.smatch_build_intervals <- function(start, end, exposure, events, rp, ab) {
-  # Mirrors build_intervals from sccsno: returns a list of cells
-  # (age_band, risk_idx, exposure_time, event_count) per individual.
-  cells <- list()
-  for (r in seq_along(rp)) {
-    a <- rp[[r]][1]; b <- rp[[r]][2]
-    a <- max(a, start); b <- min(b, end)
-    if (b <= a) next
-    e <- b - a
-    in_rp <- !is.null(exposure) && any(exposure >= a & exposure < b)
-    n_ev <- sum(events >= a & events < b)
-    if (!in_rp && n_ev == 0L) next
-    cells[[length(cells) + 1L]] <- list(0L, as.integer(r), e, n_ev)
+.smatch_build_intervals <- function(start, end, exposure, events, rp,
+                                    ab) {
+  # Python's smatch imports build_intervals from sccsno rather than defining
+  # one; delegating keeps the two in step instead of drifting apart again.
+  cells <- morie_sccsno_build_intervals(start, end, exposure, events, rp, ab)
+  as_cell <- function(band, risk, e, n) {
+    list(age = as.integer(band), risk = as.integer(risk),
+         exposure = as.numeric(e), n = as.numeric(n))
   }
-  # Age bands (illustrative: 0 = youngest band).
-  if (length(ab) > 0L) {
-    for (j in seq_along(ab)) {
-      aa <- ab[j]; bb <- if (j < length(ab)) ab[j + 1L] else Inf
-      e <- max(0, min(bb, end) - max(aa, start))
-      n_ev <- sum(events >= max(aa, start) & events < min(bb, end))
-      if (e > 0 || n_ev > 0L)
-        cells[[length(cells) + 1L]] <-
-          list(as.integer(j), 0L, e, n_ev)
-    }
+  if (is.matrix(cells)) {
+    return(lapply(seq_len(nrow(cells)), function(q)
+      as_cell(cells[q, 1L], cells[q, 2L], cells[q, 3L], cells[q, 4L])))
   }
-  cells
+  lapply(cells, function(cl)
+    as_cell(cl[[1L]], cl[[2L]], cl[[3L]], cl[[4L]]))
 }
 
 poisson_design <- function(cases, risk_periods, age_breaks = numeric(0)) {
