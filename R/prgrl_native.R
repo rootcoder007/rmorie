@@ -391,7 +391,7 @@ easy_only_fit <- function(X, y, difficulty, X_test, y_test, quantile = 0.5,
   )
 }
 
-cheatsheet <- function() {
+.prgrl_cheatsheet <- function() {
   "prgrl: curriculum learning (Bengio et al. 2009). Q_lambda(z) proportional to W_lambda(z) P(z) with W_1 = 1; it is a curriculum only if H(Q_lambda) increases and W_lambda(z) never falls as lambda grows (eqns 3-4), which is checkable and is checked. prgrl trains the same learner on the schedule and on the shuffled data and compares HELD-OUT error under a fixed update budget, which is Section 4.2's experiment; easy_only_fit is Section 4.1's."
 }
 

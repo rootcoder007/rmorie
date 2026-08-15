@@ -16,10 +16,10 @@
 
 # Base R has no erf/erfc; both are pnorm in disguise. Defined here so
 # the arm stays base-R only, as the package requires.
-.erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
-.erfc <- function(x) 2 * pnorm(-x * sqrt(2))
+.farmlmm_erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
+.farmlmm_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
 
-.EPS <- 1e-12
+.farmlmm_EPS <- 1e-12
 
 # mirror _s03core.mat
 .farmlmm_to_mat <- function(X) {
@@ -36,7 +36,7 @@
   as.numeric(y)
 }
 
-.norm_cdf <- function(x) 0.5 * (1 + .erf(x / sqrt(2)))
+.norm_cdf <- function(x) 0.5 * (1 + .farmlmm_erf(x / sqrt(2)))
 
 # mirror _s03core.wls
 .farmlmm_wls <- function(X, y, w, rcond) {
@@ -80,7 +80,7 @@
   mg <- mean(g); mk <- mean(kg)
   num <- sum((g - mg) * (kg - mk))
   den <- sqrt(sum((g - mg) ^ 2) * sum((kg - mk) ^ 2))
-  list(correlation = if (den > .EPS) num / den else 0,
+  list(correlation = if (den > .farmlmm_EPS) num / den else 0,
        marker = as.integer(marker),
        note = "kinship from ALL markers contains the tested marker; that is the confounding")
 }
@@ -108,7 +108,7 @@
     xj <- X[, 1]
     xm <- mean(xj)
     sxx <- sum((xj - xm) ^ 2)
-    se <- if (sxx > .EPS) sqrt(s2 / sxx) else Inf
+    se <- if (sxx > .farmlmm_EPS) sqrt(s2 / sxx) else Inf
     t <- if (se > 0) co[2L] / se else 0
     pv[j] <- 2 * (1 - .norm_cdf(abs(t)))
     betas[j] <- co[2L]

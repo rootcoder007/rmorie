@@ -289,7 +289,7 @@ morie_glove <- function(corpus, dim = 50, window = 10, epochs = 25, lr = 0.05,
 }
 
 
-cheatsheet <- function() {
+.glove_cheatsheet <- function() {
   paste0("glove: J = sum f(X_ij)(w_i.wt_j + b_i + bt_j - log X_ij)^2 ",
          "with f(x) = (x/xmax)^alpha capped at 1, xmax=100, ",
          "alpha=3/4 (Pennington-Socher-Manning 2014 eqs.8-9). ",

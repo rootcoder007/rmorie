@@ -105,7 +105,7 @@ project_ball <- function(x, radius = 1.0, centre = NULL) {
   c + d * r / nrm
 }
 
-project_simplex <- function(x, total = 1.0) {
+.pgdsdg_project_simplex <- function(x, total = 1.0) {
   s <- as.numeric(total)
   if (s <= 0) {
     stop("pgdsdg: the simplex total must be positive")

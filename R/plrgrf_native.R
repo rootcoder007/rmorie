@@ -164,7 +164,7 @@ morie_plrgrf <- function(y, W, X, at = NULL, n_trees = 200,
        method = "partial-linear generalized random forest, Athey, Tibshirani & Wager (2019) eq. (2)-(3) with local centering")
 }
 
-cheatsheet <- function() {
+.plrgrf_cheatsheet <- function() {
   "plrgrf: residualise FIRST -- Ytilde = Y - m(X), Wtilde = W - e(X), both cross-fitted -- then solve eq. (2) in the forest neighbourhood: tau(x) = sum a_i Wtilde Ytilde / sum a_i Wtilde^2. Skip the centering and the forest splits on m(X), the confounding surface, not on tau."
 }
 

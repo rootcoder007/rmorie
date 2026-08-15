@@ -15,7 +15,7 @@
 # 438(7066), 355-359, doi:10.1038/nature04153. The negative binomial
 # offspring parameterisation with dispersion k that this model uses.
 
-.EPS <- 1e-12
+.ttrace_EPS <- 1e-12
 
 .gamma_draw <- function(shape, scale, e) {
   a <- as.numeric(shape)
@@ -61,7 +61,7 @@ negbinom_offspring <- function(R0, dispersion, e) {
   if (kk <= 0.0)
     stop("ttrace: the dispersion k must be positive, got ",
          format(dispersion))
-  if (r0 <= .EPS) return(0L)
+  if (r0 <= .ttrace_EPS) return(0L)
   if (kk > 1e6) {
     lam <- r0
   } else {

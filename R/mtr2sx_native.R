@@ -62,8 +62,8 @@
 
 # Base R has no erf/erfc; both are pnorm in disguise. Defined here so
 # the arm stays base-R only, as the package requires.
-.erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
-.erfc <- function(x) 2 * pnorm(-x * sqrt(2))
+.mtr2sx_erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
+.mtr2sx_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
 
 morie_mtr2sx <- function(beta_x, se_x, beta_y, se_y,
                         model = "multiplicative",

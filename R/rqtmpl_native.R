@@ -36,8 +36,8 @@ LOG10E <- log10(exp(1))
 
 # Base R has no erf/erfc; both are pnorm in disguise. Defined here so
 # the arm stays base-R only, as the package requires.
-.erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
-.erfc <- function(x) 2 * pnorm(-x * sqrt(2))
+.rqtmpl_erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
+.rqtmpl_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
 
 morie_haldane <- function(distance) {
   d <- as.numeric(distance)
@@ -306,7 +306,7 @@ morie_threshold <- function(alpha = 0.05) {
   for (k in seq_len(200L)) {
     mid <- (lo + hi) / 2
     # .erfc(mid / sqrt(2)) > a  <=>  P(Z > mid) > a
-    if (.erfc(mid / sqrt(2)) > a) lo <- mid else hi <- mid
+    if (.rqtmpl_erfc(mid / sqrt(2)) > a) lo <- mid else hi <- mid
   }
   z <- (lo + hi) / 2
   list(threshold = 0.5 * LOG10E * z * z, z = z, alpha = a,
@@ -342,7 +342,7 @@ morie_progeny_required <- function(var_qtl, var_residual, alpha = 0.05) {
 #' @return Character string summarising interval mapping, LOD, the
 #'   single-marker threshold, ELOD and the 0.22 approximation.
 #' @export
-morie_cheatsheet <- function() {
+.rqtmpl_morie_cheatsheet <- function() {
   paste("rqtmpl: interval mapping walks a QTL along an interval",
         "and maximises the MIXTURE likelihood (7) by EM, because",
         "the QTL genotype is unknown -- G_i(x) comes from the",
@@ -377,6 +377,6 @@ morie_rqtmpl <- function() {
        elod = morie_elod,
        threshold = morie_threshold,
        progeny_required = morie_progeny_required,
-       cheatsheet = morie_cheatsheet,
+       cheatsheet = .rqtmpl_morie_cheatsheet,
        LOG10E = LOG10E)
 }

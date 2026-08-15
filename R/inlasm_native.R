@@ -54,7 +54,7 @@
 # doi:10.1201/9780203492024. The sparse GMRF computations the
 # method rests on.
 
-.EPS <- 1e-12
+.inlasm_EPS <- 1e-12
 .MAX_HYPER <- 6
 
 gaussian_approximation <- function(log_lik, log_lik_d1, log_lik_d2,
@@ -70,7 +70,7 @@ gaussian_approximation <- function(log_lik, log_lik_d1, log_lik_d2,
   for (it in seq_len(as.integer(iters))) {
     g <- as.numeric(log_lik_d1(x)) - Q * (x - m)
     h <- as.numeric(log_lik_d2(x)) - Q
-    if (h >= -.EPS) {
+    if (h >= -.inlasm_EPS) {
       stop(sprintf("inlasm: the objective is not locally concave at x = %g, so the Gaussian approximation has no mode here", x))
     }
     step <- g / h
@@ -115,7 +115,7 @@ laplace_marginal <- function(log_joint, x_grid, theta) {
   for (i in seq_len(length(xs) - 1L)) {
     area <- area + 0.5 * (w[i] + w[i + 1L]) * (xs[i + 1L] - xs[i])
   }
-  if (area <= .EPS) {
+  if (area <= .inlasm_EPS) {
     stop("inlasm: the marginal has no mass on this grid")
   }
   dens <- w / area
@@ -192,7 +192,7 @@ integrate_marginals <- function(conditional_marginals, log_weights, x_grid) {
   for (i in seq_len(length(xs) - 1L)) {
     area <- area + 0.5 * (dens[i] + dens[i + 1L]) * (xs[i + 1L] - xs[i])
   }
-  if (area > .EPS) {
+  if (area > .inlasm_EPS) {
     dens <- dens / area
   }
   mean_v <- 0.0
@@ -219,7 +219,7 @@ integrate_marginals <- function(conditional_marginals, log_weights, x_grid) {
   )
 }
 
-cheatsheet <- function() {
+.inlasm_cheatsheet <- function() {
   "inlasm: latent GAUSSIAN field x, a FEW hyperparameters theta, non-Gaussian response -- so the posterior marginals have no closed form. MCMC works in principle but has convergence AND time problems, sometimes badly enough that it is not appropriate for routine analysis. INLA is deterministic: p(x_i|y) = INTEGRAL p(x_i|theta,y) p(theta|y) dtheta, where the inner term is a LAPLACE approximation and the outer integral is a finite weighted SUM over a small design of theta -- which is exactly why dim(theta) must stay low. The Gaussian inner step is EXACT for a Gaussian likelihood; the simplified Laplace adds the skewness it cannot represent. Seconds or minutes against hours or days."
 }
 
@@ -235,7 +235,7 @@ morie_inlasm <- list(
   hyperparameter_design = hyperparameter_design,
   integrate_marginals = integrate_marginals,
   skewness_correction = skewness_correction,
-  cheatsheet = cheatsheet,
+  cheatsheet = .inlasm_cheatsheet,
   inla = inla,
   inla_spatial = inla_spatial,
   inlaspatial = inlaspatial

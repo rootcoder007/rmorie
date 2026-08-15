@@ -21,10 +21,10 @@
 # messages.
 
 .TMLDYN_METHODS <- c("cv-tmle", "tmle", "ipw", "gcomp")
-.EPS <- 1e-9
+.tmldyn_EPS <- 1e-9
 
 .tmldyn_logit <- function(p) {
-  q <- min(max(as.numeric(p), .EPS), 1 - .EPS)
+  q <- min(max(as.numeric(p), .tmldyn_EPS), 1 - .tmldyn_EPS)
   log(q / (1 - q))
 }
 
@@ -94,7 +94,7 @@ intervention_mechanism <- function(L0, A0, L1, A1, trim = 0.01,
   t <- as.numeric(trim)
   if (!(t >= 0 && t < 0.5))
     stop("tmldyn: trim must be in [0, 0.5)")
-  lo <- max(t, .EPS); hi <- 1 - max(t, .EPS)
+  lo <- max(t, .tmldyn_EPS); hi <- 1 - max(t, .tmldyn_EPS)
   p0 <- pmin(pmax(p0, lo), hi)
   p1 <- pmin(pmax(p1, lo), hi)
   g0 <- ifelse(A0 == 1, p0, 1 - p0)
@@ -417,8 +417,8 @@ morie_tmldyn <- function(y, treatment_history, covariate_history,
       q1 <- fq1$q1
       for (i in val) {
         q2d[i] <- min(max(q2(rd0[i], rd1[[as.integer(rd0[i]) + 1L]][i],
-                              i), .EPS), 1 - .EPS)
-        q1d[i] <- min(max(q1(rd0[i], i), .EPS), 1 - .EPS)
+                              i), .tmldyn_EPS), 1 - .tmldyn_EPS)
+        q1d[i] <- min(max(q1(rd0[i], i), .tmldyn_EPS), 1 - .tmldyn_EPS)
       }
     }
     if (method == "gcomp") {

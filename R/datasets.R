@@ -438,7 +438,7 @@
 #' Default TPS ArcGIS layer registry (verified 2026-05).
 #' @keywords internal
 #' @noRd
-.MORIE_TPS_LAYER_REGISTRY <- list(
+.MORIE_DATASETS_TPS_LAYERS <- list(
   `major-crime` = paste0(
     "https://services.arcgis.com/S9th0jAJ7bqgIRjw/arcgis/rest/services/",
     "Major_Crime_Indicators_Open_Data/FeatureServer/0"
@@ -518,7 +518,7 @@ morie_datasets_tps_major_crime <- function(year = NULL,
     return(df)
   }
   .morie_dataset_tps_fetch(
-    .MORIE_TPS_LAYER_REGISTRY[["major-crime"]],
+    .MORIE_DATASETS_TPS_LAYERS[["major-crime"]],
     where = .morie_dataset_year_where(year),
     max_features = max_features,
     return_geometry = include_geometry
@@ -537,7 +537,7 @@ morie_datasets_tps_major_crime <- function(year = NULL,
 #' @export
 morie_datasets_tps_shootings <- function(year = NULL, max_features = NULL) {
   .morie_dataset_tps_fetch(
-    .MORIE_TPS_LAYER_REGISTRY[["shooting-firearms"]],
+    .MORIE_DATASETS_TPS_LAYERS[["shooting-firearms"]],
     where = .morie_dataset_year_where(year),
     max_features = max_features
   )
@@ -555,7 +555,7 @@ morie_datasets_tps_shootings <- function(year = NULL, max_features = NULL) {
 #' @export
 morie_datasets_tps_homicide <- function(year = NULL, max_features = NULL) {
   .morie_dataset_tps_fetch(
-    .MORIE_TPS_LAYER_REGISTRY[["homicide"]],
+    .MORIE_DATASETS_TPS_LAYERS[["homicide"]],
     where = .morie_dataset_year_where(year),
     max_features = max_features
   )
@@ -570,8 +570,8 @@ morie_datasets_tps_homicide <- function(year = NULL, max_features = NULL) {
 #' @export
 morie_datasets_tps_layers <- function() {
   data.frame(
-    name = names(.MORIE_TPS_LAYER_REGISTRY),
-    url = unlist(unname(.MORIE_TPS_LAYER_REGISTRY)),
+    name = names(.MORIE_DATASETS_TPS_LAYERS),
+    url = unlist(unname(.MORIE_DATASETS_TPS_LAYERS)),
     stringsAsFactors = FALSE
   )
 }

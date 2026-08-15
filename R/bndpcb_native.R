@@ -3,7 +3,7 @@
 # nonstandard problems; bet-proofness rules out a recognisable subset
 # where coverage drops below the nominal level.
 
-.GHC_EPS <- 1e-12
+.bndpcb_GHC_EPS <- 1e-12
 
 morie_truncated_normal_interval <- function(x, level = 0.95,
                                              lower_bound = 0) {
@@ -44,7 +44,7 @@ morie_coverage_by_region <- function(theta, level = 0.95, lower_bound = 0,
        subset_coverage = if (stot > 0) scov / stot else NaN,
        subset_share = stot / tot,
        mean_width = mean(widths),
-       p_empty = sum(widths <= .GHC_EPS) / length(widths),
+       p_empty = sum(widths <= .bndpcb_GHC_EPS) / length(widths),
        split = cut, theta = th, draws = n)
 }
 

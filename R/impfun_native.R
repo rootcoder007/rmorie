@@ -234,7 +234,7 @@ concordance <- function(imputed, truth) {
   )
 }
 
-cheatsheet <- function() {
+.impfun_cheatsheet <- function() {
   "impfun: imputation is bounded by the REFERENCE PANEL, and panels disagree about which SNPs they carry -- merging by INTERSECTION discards the coverage that motivated merging. IMPUTE2 merges by ROLE: SNPs typed in the study align the haplotypes, the rest are targets. Underneath is Li-Stephens copying, the study haplotype as a MOSAIC of references switching at the recombination rate. Dosages carry uncertainty, and accuracy is measured on MASKED truth, because a confident model can be confidently wrong."
 }
 

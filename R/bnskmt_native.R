@@ -4,7 +4,7 @@
 # Companion to bndsmw: same construction, supremum over g instead of
 # integral over Q, GMS critical values (Andrews & Soares 2010).
 
-.EPS <- 1e-12
+.bnskmt_EPS <- 1e-12
 
 S_function <- function(std_moments, form = "sum", n_equality = 0L) {
   v <- as.numeric(std_moments); J <- length(v); ne <- as.integer(n_equality)
@@ -40,7 +40,7 @@ hypercube_instruments <- function(X, n_levels = 3L) {
   d <- length(Xm[[1L]])
   lo <- sapply(seq_len(d), function(j) min(sapply(Xm, function(r) r[j])))
   hi <- sapply(seq_len(d), function(j) max(sapply(Xm, function(r) r[j])))
-  span <- pmax(hi - lo, .EPS)
+  span <- pmax(hi - lo, .bnskmt_EPS)
   G <- list()
   for (lev in seq_len(as.integer(n_levels) - 1L)) {
     cells <- 2 ^ lev
@@ -74,7 +74,7 @@ ks_statistic <- function(m, instruments, form = "sum", n_equality = 0L) {
     wm <- weighted_moments(m, G[[a]])
     n <- wm$n
     std <- sapply(seq_along(wm$mean),
-                  function(j) sqrt(n) * wm$mean[j] / max(wm$sd[j], .EPS))
+                  function(j) sqrt(n) * wm$mean[j] / max(wm$sd[j], .bnskmt_EPS))
     s <- S_function(std, form = form, n_equality = n_equality)
     parts[a] <- s
     if (s > best) { best <- s; arg <- a }
@@ -103,7 +103,7 @@ ks_critical_value <- function(m, instruments, form = "sum",
       wm  <- weighted_moments(Mb, gb)
       wm0 <- weighted_moments(M,  g)
       std <- sapply(seq_along(wm$mean), function(j) {
-        sd <- max(wm0$sd[j], .EPS)
+        sd <- max(wm0$sd[j], .bnskmt_EPS)
         xi  <- sqrt(n) * wm0$mean[j] / sd
         centred <- sqrt(n) * (wm$mean[j] - wm0$mean[j]) / sd
         centred + if (xi <= kap) 0.0 else 1e6
@@ -154,7 +154,7 @@ cvm_statistic <- function(m, instruments, form = "sum", n_equality = 0L,
     wm <- weighted_moments(m, G[[a]])
     n <- wm$n
     std <- sapply(seq_along(wm$mean),
-                  function(j) sqrt(n) * wm$mean[j] / max(wm$sd[j], .EPS))
+                  function(j) sqrt(n) * wm$mean[j] / max(wm$sd[j], .bnskmt_EPS))
     s <- S_function(std, form = form, n_equality = n_equality)
     parts[a] <- s; tot <- tot + q[a] * s
   }
@@ -167,7 +167,7 @@ compare_forms <- function(m, instruments, form = "sum", n_equality = 0L) {
   cv <- cvm_statistic(m, instruments, form = form, n_equality = n_equality)
   ks <- ks_statistic(m, instruments, form = form, n_equality = n_equality)
   list(cvm = cv$statistic, ks = ks$statistic,
-       ratio_ks_over_cvm = ks$statistic / max(cv$statistic, .EPS),
+       ratio_ks_over_cvm = ks$statistic / max(cv$statistic, .bnskmt_EPS),
        argmax_instrument = ks$argmax,
        note = "KS is driven by the single worst instrument, CvM by the average; a concentrated violation favours KS and a diffuse one favours CvM")
 }

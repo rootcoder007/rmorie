@@ -326,7 +326,7 @@ laggedval_iptw <- morie_lggvls
 laggedvaliptw  <- morie_lggvls
 
 # cheatsheet
-cheatsheet <- function() {
+.lggvls_cheatsheet <- function() {
   paste("lggvls: sustained-exposure IPTW (Robins 1986). Weight =",
         "prod_k f(A_k|Abar_{k-1}) / f(A_k|Abar_{k-1}, Lbar_k,",
         "L_{k-1..k-lag}, Y_{k-1..k-lag}); MSM on cumulative, final",

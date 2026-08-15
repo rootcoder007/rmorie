@@ -10,7 +10,7 @@
 # and must agree. FMs subsume MF, SVD++, PITF, FPMC under particular
 # input encodings.
 
-.EPS <- 1e-12
+.fmFM_EPS <- 1e-12
 
 # --- eq. (1) as written -- the O(kn^2) double sum -------------------
 predict_naive <- function(x, w0, w, V) {

@@ -61,7 +61,7 @@
 # :mod:`ucfR`.
 # """
 
-.EPS <- 1e-12
+.hybRC_EPS <- 1e-12
 
 .METHODS <- c("weighted", "switching", "mixed", "feature_combination",
               "cascade", "feature_augmentation", "meta_level")
@@ -272,7 +272,7 @@ meta_level <- function(model_builder, consumer, data) {
   )
 }
 
-cheatsheet <- function() {
+.hybRC_cheatsheet <- function() {
   paste("hybRC: collaborative filtering cannot recommend what",
         "nobody rated; content-based filtering cannot surprise",
         "anyone. Combining is obvious, HOW is not -- and the seven",

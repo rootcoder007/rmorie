@@ -81,7 +81,7 @@
   list(z = z, kl = kl)
 }
 
-morie_glm <- function(x, p0, p1, threshold = NULL,
+morie_glr_test <- function(x, p0, p1, threshold = NULL,
                       family = "bernoulli", sd = 1.0) {
   if (is.null(x) || length(x) == 0L)
     stop("glr_test: x must hold at least one observation")
@@ -164,13 +164,13 @@ morie_glm <- function(x, p0, p1, threshold = NULL,
 
 page_cusum <- function(x, p0, p1, threshold = NULL,
                        family = "bernoulli", sd = 1.0) {
-  morie_glm(x = x, p0 = p0, p1 = p1, threshold = threshold,
+  morie_glr_test(x = x, p0 = p0, p1 = p1, threshold = threshold,
             family = family, sd = sd)
 }
 
 glrtest <- function(x, p0, p1, threshold = NULL,
                     family = "bernoulli", sd = 1.0) {
-  morie_glm(x = x, p0 = p0, p1 = p1, threshold = threshold,
+  morie_glr_test(x = x, p0 = p0, p1 = p1, threshold = threshold,
             family = family, sd = sd)
 }
 
@@ -179,3 +179,5 @@ glrtest <- function(x, p0, p1, threshold = NULL,
          "log(f1/f0) (Lai 1995 eq. 2.3); families bernoulli/normal/",
          "poisson; KL number gives Lorden's delay log(gamma)/KL.")
 }
+
+glr_test <- morie_glr_test

@@ -288,21 +288,6 @@ morie_lmm_loglik <- function(X, Z, y, D, R = NULL, beta = NULL) {
 }
 
 #' @noRd
-morie_reml_loglik <- function(X, Z, y, D, R = NULL) {
-  X <- as.matrix(X)
-  y <- as.numeric(y)
-  V <- morie_lmm_v(Z, D, R)
-  Vi <- morie_solve(V)
-  A <- t(X) %*% Vi %*% X
-  beta <- morie_solve(A, t(X) %*% Vi %*% y)
-  r <- y - X %*% beta
-  ll <- -0.5 * determinant(A, logarithm = TRUE)$modulus[1] -
-    0.5 * determinant(V, logarithm = TRUE)$modulus[1] -
-    0.5 * as.numeric(t(r) %*% Vi %*% r)
-  list(loglik = ll, beta = as.numeric(beta))
-}
-
-#' @noRd
 morie_em_lmm <- function(X, Z, y, D0 = NULL, sigma2_0 = 1,
                          n_iter = 200L, tol = 1e-10) {
   X <- as.matrix(X)

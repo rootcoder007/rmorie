@@ -13,7 +13,7 @@
 # Papamakarios, G. et al. (2021) "Normalizing Flows for Probabilistic
 # Modeling and Inference", JMLR 22(57), 1-64, arXiv:1912.02762.
 
-.EPS <- 1e-12
+.flow_an_EPS <- 1e-12
 .LOG2PI <- log(2 * pi)
 
 .flow_an_to_mat <- function(X) {

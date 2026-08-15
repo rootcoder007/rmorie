@@ -5,7 +5,7 @@
 # integral of S over Q. GMS critical values push moments slack by
 # more than kappa_n to +infinity.
 
-.GHC_EPS <- 1e-12
+.bndsmw_GHC_EPS <- 1e-12
 .S_FORMS <- c("sum", "qlr", "max")
 
 morie_hypercube_instruments <- function(X, n_levels = 3L) {
@@ -14,7 +14,7 @@ morie_hypercube_instruments <- function(X, n_levels = 3L) {
   if (n == 0L) stop("bndsmw: no observations")
   d <- ncol(Xm)
   lo <- apply(Xm, 2, min); hi <- apply(Xm, 2, max)
-  span <- pmax(hi - lo, .GHC_EPS)
+  span <- pmax(hi - lo, .bndsmw_GHC_EPS)
   G <- list()
   for (lev in seq_len(as.integer(n_levels) - 1L)) {
     cells <- 2 ^ lev
@@ -91,7 +91,7 @@ morie_cvm_statistic <- function(m, instruments, form = "sum",
     g <- G[[a]]
     wm <- morie_weighted_moments(m, g)
     n <- wm$n
-    std <- sqrt(n) * wm$mean / pmax(wm$sd, .GHC_EPS)
+    std <- sqrt(n) * wm$mean / pmax(wm$sd, .bndsmw_GHC_EPS)
     s <- morie_S_function(std, form = form, n_equality = n_equality)
     parts[a] <- s
     tot <- tot + q[a] * s
@@ -123,7 +123,7 @@ morie_gms_critical_value <- function(m, instruments, form = "sum",
       wm0 <- morie_weighted_moments(M, g)
       std <- numeric(length(wm$mean))
       for (j in seq_along(wm$mean)) {
-        sd <- max(wm0$sd[j], .GHC_EPS)
+        sd <- max(wm0$sd[j], .bndsmw_GHC_EPS)
         xi <- sqrt(n) * wm0$mean[j] / sd
         centred <- sqrt(n) * (wm$mean[j] - wm0$mean[j]) / sd
         std[j] <- centred + (if (xi <= kap) 0 else 1e6)

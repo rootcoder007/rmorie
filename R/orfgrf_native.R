@@ -29,8 +29,8 @@
 # They are inlined here so the file is self-contained, with the same
 # signatures the Python arm imports.
 
-.EPS <- 1e-10
-.ROUTES <- c("local", "global")
+.orfgrf_EPS <- 1e-10
+.orfgrf_ROUTES <- c("local", "global")
 
 # Minimal honest CART builder. Each tree gets half the observations
 # chosen uniformly without replacement; honesty is enforced by
@@ -151,7 +151,7 @@ local_nuisance <- function(target, W, weights, exclude = NULL,
   if (!is.null(exclude))
     w[as.integer(exclude) + 1L] <- 0
   sw <- sum(w)
-  if (sw <= .EPS)
+  if (sw <= .orfgrf_EPS)
     stop("orfgrf: the local neighbourhood is empty after weighting")
   # Weighted normal equations: (X' W X + ridge I) beta = X' W y
   # with X = [1 W] (intercept included by hand).
@@ -176,7 +176,7 @@ orthogonal_moment <- function(y_res, t_res, weights) {
   den <- sum(weights * t_res * t_res)
   num <- sum(weights * t_res * y_res)
   scale <- sum(weights)
-  if (scale <= .EPS || den <= .EPS * max(scale, 1.0))
+  if (scale <= .orfgrf_EPS || den <= .orfgrf_EPS * max(scale, 1.0))
     stop("orfgrf: no residual treatment variation near this point ",
          "(weighted sum of T~^2 is ", den, ") -- the effect is not ",
          "identified here")
@@ -190,7 +190,7 @@ orthogonal_moment <- function(y_res, t_res, weights) {
 orf_estimate <- function(Y, T, X, W, x, trees,
                          residualize = "local", ridge = 1e-8,
                          leave_one_out = TRUE) {
-  if (!(residualize %in% .ROUTES))
+  if (!(residualize %in% .orfgrf_ROUTES))
     stop("orfgrf: residualize must be local or global, got ",
          residualize)
   n <- length(Y)

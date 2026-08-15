@@ -120,7 +120,7 @@ grouped_block <- .resnxt_grouped_block
 block_equivalence <- .resnxt_block_equivalence
 block_parameters <- .resnxt_block_parameters
 match_complexity <- .resnxt_match_complexity
-cheatsheet <- .resnxt_cheatsheet
+.resnxt_cheatsheet <- .resnxt_cheatsheet
 
 # Compact alias per ledger/NAMING.md
 resnext <- aggregated_block

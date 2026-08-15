@@ -2,7 +2,7 @@
 # Griffin et al. (2014); Robins, Hernan & Brumback (2000).
 # Base R only.
 
-.EPS <- 1e-12
+.bhltmsm_EPS <- 1e-12
 .STATES <- c("none", "outpatient", "residential", "screening")
 
 cumulative_episodes <- function(histories, states = .STATES) {
@@ -157,7 +157,7 @@ fit_msm <- function(outcome, cumulative, weights = NULL, states = .STATES) {
   for (a in seq_len(ncol(X))) {
     xm <- sum(w * X[, a]) / sum(w)
     sxx <- sum(w * (X[, a] - xm)^2)
-    ses[a] <- if (sxx > .EPS) sqrt(s2 / sxx) else Inf
+    ses[a] <- if (sxx > .bhltmsm_EPS) sqrt(s2 / sxx) else Inf
   }
   names <- as.character(states)[seq_len(ncol(X))]
   list(estimate = co[-1], intercept = co[1],

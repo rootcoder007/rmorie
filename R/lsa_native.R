@@ -8,7 +8,7 @@
 # Hofmann, T. (1999) "Probabilistic Latent Semantic Analysis", UAI
 # 1999, 289-296, arXiv:1301.6705.
 
-.EPS <- 1e-12
+.lsa_EPS <- 1e-12
 .WEIGHTS <- c("raw", "log_entropy", "tfidf")
 
 .ghc_svd <- function(A) {
@@ -36,7 +36,7 @@ term_weighting <- function(X, how = "log_entropy") {
   out <- matrix(0, t, d)
   for (i in seq_len(t)) {
     gf <- sum(A[i, ])
-    if (gf <= .EPS) { out[i, ] <- 0; next }
+    if (gf <= .lsa_EPS) { out[i, ] <- 0; next }
     ent <- 0.0
     for (j in seq_len(d)) {
       p <- A[i, j] / gf
@@ -90,7 +90,7 @@ fold_in <- function(query, model) {
   for (f in seq_len(k)) {
     s <- 0
     for (i in seq_along(q)) s <- s + q[i] * T[i, f]
-    out[f] <- s / max(S[f], .EPS)
+    out[f] <- s / max(S[f], .lsa_EPS)
   }
   out
 }
@@ -104,7 +104,7 @@ cosine_ranking <- function(q_hat, model, top_k = 5) {
     for (f in seq_len(k)) dv[f] <- D[j, f] * S[f]
     na <- sqrt(sum(q_hat * q_hat))
     nb <- sqrt(sum(dv * dv))
-    if (na <= .EPS || nb <= .EPS) {
+    if (na <= .lsa_EPS || nb <= .lsa_EPS) {
       out[[j]] <- c(j, 0.0)
     } else {
       sc <- 0

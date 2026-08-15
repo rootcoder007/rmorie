@@ -170,6 +170,6 @@ morie_lbfgsm <- function(fun, x0, grad, m = 10, max_iter = 200, tol = 1e-8,
 lbfgs_minimize <- morie_lbfgsm
 lbfgsm <- morie_lbfgsm
 
-cheatsheet <- function() {
+.lbfgsm_cheatsheet <- function() {
   "lbfgsm: L-BFGS two-loop recursion, H0 = (s'y/y'y) I, curvature pairs with y's <= 0 skipped, Armijo backtracking."
 }

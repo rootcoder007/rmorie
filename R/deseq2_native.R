@@ -13,8 +13,8 @@
 
 # Base R has no erf/erfc; both are pnorm in disguise. Defined here so
 # the arm stays base-R only, as the package requires.
-.erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
-.erfc <- function(x) 2 * pnorm(-x * sqrt(2))
+.deseq2_erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
+.deseq2_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
 
 .ghc_DESEQ2_EPS <- 1e-12
 
@@ -27,7 +27,7 @@
 #' @param x Positive numeric.
 #' @return Numeric scalar.
 #' @export
-trigamma <- function(x) {
+.deseq2_trigamma <- function(x) {
   x <- as.numeric(x)
   if (x <= 0) stop("deseq2: trigamma needs x > 0")
   tot <- 0
@@ -294,7 +294,7 @@ dispersion_trend <- function(mu_bar, disp, max_iter = 10L, tol = 1e-6) {
   adj
 }
 
-.ghc_deseq2_norm_cdf <- function(z) 0.5 * (1 + .erf(z / sqrt(2)))
+.ghc_deseq2_norm_cdf <- function(z) 0.5 * (1 + .deseq2_erf(z / sqrt(2)))
 
 .ghc_deseq2_norm_ppf <- function(pr) {
   lo <- -40; hi <- 40
@@ -377,7 +377,7 @@ deseq2 <- function(counts, design, contrast = NULL, size = NULL,
   # step 3: prior width and MAP
   resid <- log(gw[usable]) - log(fitted[usable])
   s_lr <- if (length(resid) > 1L) .ghc_deseq2_mad(resid) else 0
-  sigma_d2 <- max(s_lr^2 - trigamma((m - p) / 2), 0.25)
+  sigma_d2 <- max(s_lr^2 - .deseq2_trigamma((m - p) / 2), 0.25)
   disp <- numeric(n_genes); outlier <- rep(FALSE, n_genes)
   for (i in seq_len(n_genes)) {
     if (base_mean[i] <= 0) { disp[i] <- max(fitted[i], min_disp); next }
