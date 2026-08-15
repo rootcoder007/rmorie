@@ -449,3 +449,7 @@ morie_causdidwd <- morie_etwfe
 #' @rdname morie_two_way_fixed_effects
 #' @export
 morie_causdidwd <- morie_two_way_fixed_effects
+
+#' @rdname morie_two_way_fixed_effects
+#' @export
+morie_causdidwd <- morie_two_way_fixed_effects

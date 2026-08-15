@@ -153,7 +153,7 @@ t5enc_relative_bucket <- function(relative_position, bidirectional = TRUE,
   ret <- 0L
   if (bidirectional) {
     nb <- nb %/% 2L
-    ret <- ret + (if (rp > 0L) nb else 0L)
+    ret <- ret + if (rp > 0L) nb else 0L
     rp <- abs(rp)
   } else {
     rp <- -min(rp, 0L)
@@ -180,9 +180,9 @@ t5enc_format_regression <- function(value, increment = 0.2, lo = 1.0, hi = 5.0) 
 t5enc_parse_prediction <- function(text, labels = NULL) {
   s <- trimws(as.character(text))
   if (is.null(labels)) {
-    val <- suppressWarnings(as.numeric(s))
-    if (!is.na(val)) {
-      return(list(value = val, valid = TRUE))
+    num <- suppressWarnings(as.numeric(s))
+    if (!is.na(num)) {
+      return(list(value = num, valid = TRUE))
     } else {
       return(list(value = NULL, valid = FALSE,
                   note = "not a number; counted as wrong"))
@@ -197,7 +197,20 @@ t5enc_parse_prediction <- function(text, labels = NULL) {
 }
 
 t5enc_cheatsheet <- function() {
-  "t5enc: EVERY task as text-to-text -- classification emits the label TEXT, regression emits a rounded number as a string, and a task prefix says which job it is. One model, one loss, one decoder, and tasks can be mixed. The cost: the decoder can emit something that is not a valid label, and that counts as WRONG rather than being snapped to the nearest one. Pre-training is SPAN corruption -- contiguous spans replaced by ONE sentinel each, so the target is far shorter (15%, mean span 3). Positions are RELATIVE, log-bucketed, shared across layers; there is no absolute position signal."
+  paste(
+    "t5enc: EVERY task as text-to-text -- classification emits ",
+    "the label TEXT, regression emits a rounded number as a ",
+    "string, and a task prefix says which job it is. One ",
+    "model, one loss, one decoder, and tasks can be mixed. The ",
+    "cost: the decoder can emit something that is not a valid ",
+    "label, and that counts as WRONG rather than being snapped ",
+    "to the nearest one. Pre-training is SPAN corruption -- ",
+    "contiguous spans replaced by ONE sentinel each, so the ",
+    "target is far shorter (15%, mean span 3). Positions are ",
+    "RELATIVE, log-bucketed, shared across layers; there is no ",
+    "absolute position signal.",
+    sep = ""
+  )
 }
 
 # compact alias per ledger/NAMING.md
@@ -207,4 +220,16 @@ t5encoder <- t5enc_span_corruption
 t5 <- t5enc_span_corruption
 
 # entry point
-morie_t5enc <- t5enc_span_corruption
+morie_t5enc <- function(method = c("task_prefix", "span_corruption",
+                                    "relative_bucket", "format_regression",
+                                    "parse_prediction", "cheatsheet"), ...) {
+  method <- match.arg(method)
+  switch(method,
+    task_prefix = t5enc_task_prefix(...),
+    span_corruption = t5enc_span_corruption(...),
+    relative_bucket = t5enc_relative_bucket(...),
+    format_regression = t5enc_format_regression(...),
+    parse_prediction = t5enc_parse_prediction(...),
+    cheatsheet = t5enc_cheatsheet()
+  )
+}

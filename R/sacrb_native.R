@@ -323,3 +323,7 @@ morie_sacrb_bleu <- function(candidates, references, max_n = 4L,
 
 # compact alias per ledger/NAMING.md
 morie_sacrb_sacrebleu <- morie_sacrb_bleu
+
+#' @rdname morie_sacrb_bleu
+#' @export
+morie_sacrb <- morie_sacrb_bleu
