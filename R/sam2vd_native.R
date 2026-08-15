@@ -281,3 +281,7 @@ morie_sam2vd_sam2_video_propagation <- morie_sam2vd_propagate
 #' @rdname morie_sam2vd_memory_bank
 #' @export
 morie_sam2vd <- morie_sam2vd_memory_bank
+
+#' @rdname morie_sam2vd_memory_bank
+#' @export
+morie_sam2vd <- morie_sam2vd_memory_bank
