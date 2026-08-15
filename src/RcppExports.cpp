@@ -59,6 +59,38 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// morie_crypto_blake2b_native
+Rcpp::RawVector morie_crypto_blake2b_native(SEXP data, int outlen, SEXP key);
+RcppExport SEXP _rmorie_morie_crypto_blake2b_native(SEXP dataSEXP, SEXP outlenSEXP, SEXP keySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< int >::type outlen(outlenSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type key(keySEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_crypto_blake2b_native(data, outlen, key));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_crypto_argon2_native
+Rcpp::RawVector morie_crypto_argon2_native(SEXP password, SEXP salt, int memory, int passes, int parallelism, int tag_length, std::string variant, SEXP secret, SEXP associated);
+RcppExport SEXP _rmorie_morie_crypto_argon2_native(SEXP passwordSEXP, SEXP saltSEXP, SEXP memorySEXP, SEXP passesSEXP, SEXP parallelismSEXP, SEXP tag_lengthSEXP, SEXP variantSEXP, SEXP secretSEXP, SEXP associatedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type password(passwordSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type salt(saltSEXP);
+    Rcpp::traits::input_parameter< int >::type memory(memorySEXP);
+    Rcpp::traits::input_parameter< int >::type passes(passesSEXP);
+    Rcpp::traits::input_parameter< int >::type parallelism(parallelismSEXP);
+    Rcpp::traits::input_parameter< int >::type tag_length(tag_lengthSEXP);
+    Rcpp::traits::input_parameter< std::string >::type variant(variantSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type secret(secretSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type associated(associatedSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_crypto_argon2_native(password, salt, memory, passes, parallelism, tag_length, variant, secret, associated));
+    return rcpp_result_gen;
+END_RCPP
+}
 // morie_crypto_liboqs_available
 bool morie_crypto_liboqs_available();
 RcppExport SEXP _rmorie_morie_crypto_liboqs_available() {
@@ -1077,6 +1109,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_crypto_sha256_hex_native", (DL_FUNC) &_rmorie_morie_crypto_sha256_hex_native, 1},
     {"_rmorie_morie_crypto_hmac_sha256_native", (DL_FUNC) &_rmorie_morie_crypto_hmac_sha256_native, 2},
     {"_rmorie_morie_crypto_pbkdf2_sha256_native", (DL_FUNC) &_rmorie_morie_crypto_pbkdf2_sha256_native, 4},
+    {"_rmorie_morie_crypto_blake2b_native", (DL_FUNC) &_rmorie_morie_crypto_blake2b_native, 3},
+    {"_rmorie_morie_crypto_argon2_native", (DL_FUNC) &_rmorie_morie_crypto_argon2_native, 9},
     {"_rmorie_morie_crypto_liboqs_available", (DL_FUNC) &_rmorie_morie_crypto_liboqs_available, 0},
     {"_rmorie_morie_crypto_liboqs_version", (DL_FUNC) &_rmorie_morie_crypto_liboqs_version, 0},
     {"_rmorie_morie_crypto_mlkem768_keygen", (DL_FUNC) &_rmorie_morie_crypto_mlkem768_keygen, 0},
