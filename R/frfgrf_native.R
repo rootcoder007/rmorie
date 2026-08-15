@@ -94,7 +94,9 @@
   if (np > 0) {
     for (iter in seq_len(np)) {
       yp <- y
-      I <- info$I
+      # info$I is REPORTED 0-based (hntfst builds seq_len(n) - 1L);
+      # R subscripts are 1-based, so convert at the point of use.
+      I <- info$I + 1L
       n_I <- length(I)
       if (n_I > 0) {
         # .ghc_unif(e, n) takes the RNG ENVIRONMENT first. Passing 1 here
@@ -119,7 +121,8 @@
   # every response would pass the first test trivially, so the second
   # is what makes the first mean something.
   yj <- y
-  J <- info$J
+  # info$J is REPORTED 0-based, same as I above.
+  J <- info$J + 1L
   n_J <- length(J)
   if (n_J > 0) {
     u_J <- .ghc_unif(rng_state, n_J)

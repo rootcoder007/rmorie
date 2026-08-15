@@ -93,11 +93,11 @@ merge_panels <- function(panels, study_snps) {
     stop("impfun: every panel must have a name")
   }
   per <- list()
-  all_snps <- character(0)
+  all_snps <- NULL
   for (nm in panel_names) {
-    snps <- as.character(panels[[nm]])
+    snps <- unique(panels[[nm]])
     per[[nm]] <- snps
-    all_snps <- union(all_snps, snps)
+    all_snps <- if (is.null(all_snps)) snps else union(all_snps, snps)
   }
   inter <- per[[panel_names[1L]]]
   if (length(panel_names) > 1L) {
@@ -105,7 +105,7 @@ merge_panels <- function(panels, study_snps) {
       inter <- intersect(inter, per[[nm]])
     }
   }
-  study_chr <- unique(as.character(study_snps))
+  study_chr <- unique(study_snps)
   scaffold <- sort(intersect(all_snps, study_chr))
   if (length(scaffold) == 0L) {
     stop("impfun: no SNP is typed in both the study and a panel; there is nothing to align against")
