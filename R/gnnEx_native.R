@@ -212,90 +212,25 @@ morie_gnnEx <- gnnEx_explain_node
 gnnexplainer <- gnnEx_explain_node
 gnn_explainer <- gnnEx_explain_node
 
-#' @rdname gnnEx_computation_graph
-#' @export
-morie_gnnEx <- gnnEx_computation_graph
 
-#' @rdname gnnEx_computation_graph
-#' @export
-morie_gnnEx <- gnnEx_computation_graph
 
-#' @rdname gnnEx_computation_graph
-#' @export
-morie_gnnEx <- gnnEx_computation_graph
 
-#' @rdname gnnEx_computation_graph
-#' @export
-morie_gnnEx <- gnnEx_computation_graph
 
-#' @rdname gnnEx_computation_graph
-#' @export
-morie_gnnEx <- gnnEx_computation_graph
 
-#' @rdname gnnEx_computation_graph
-#' @export
-morie_gnnEx <- gnnEx_computation_graph
 
-#' @rdname gnnEx_computation_graph
-#' @export
-morie_gnnEx <- gnnEx_computation_graph
 
-#' @rdname gnnEx_computation_graph
-#' @export
-morie_gnnEx <- gnnEx_computation_graph
 
-#' @rdname gnnEx_computation_graph
-#' @export
-morie_gnnEx <- gnnEx_computation_graph
 
-#' @rdname gnnEx_computation_graph
-#' @export
-morie_gnnEx <- gnnEx_computation_graph
 
-#' @rdname gnnEx_computation_graph
-#' @export
-morie_gnnEx <- gnnEx_computation_graph
 
-#' @rdname gnnEx_computation_graph
-#' @export
-morie_gnnEx <- gnnEx_computation_graph
 
-#' @rdname gnnEx_computation_graph
-#' @export
-morie_gnnEx <- gnnEx_computation_graph
 
-#' @rdname gnnEx_computation_graph
-#' @export
-morie_gnnEx <- gnnEx_computation_graph
 
-#' @rdname gnnEx_computation_graph
-#' @export
-morie_gnnEx <- gnnEx_computation_graph
 
-#' @rdname gnnEx_computation_graph
-#' @export
-morie_gnnEx <- gnnEx_computation_graph
 
-#' @rdname gnnEx_computation_graph
-#' @export
-morie_gnnEx <- gnnEx_computation_graph
 
-#' @rdname gnnEx_computation_graph
-#' @export
-morie_gnnEx <- gnnEx_computation_graph
 
-#' @rdname gnnEx_computation_graph
-#' @export
-morie_gnnEx <- gnnEx_computation_graph
 
-#' @rdname gnnEx_computation_graph
-#' @export
-morie_gnnEx <- gnnEx_computation_graph
 
-#' @rdname gnnEx_computation_graph
-#' @export
-morie_gnnEx <- gnnEx_computation_graph
 
-#' @rdname gnnEx_computation_graph
-#' @export
-morie_gnnEx <- gnnEx_computation_graph
+

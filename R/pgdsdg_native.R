@@ -222,66 +222,19 @@ morie_pgdsdg <- projected_gradient_descent <- function(f, grad, x0, project, ...
 #' @export
 morie_pgdsdg <- project_box
 
-#' @rdname project_box
-#' @export
-morie_pgdsdg <- project_box
 
-#' @rdname project_box
-#' @export
-morie_pgdsdg <- project_box
 
-#' @rdname project_box
-#' @export
-morie_pgdsdg <- project_box
 
-#' @rdname project_box
-#' @export
-morie_pgdsdg <- project_box
 
-#' @rdname project_box
-#' @export
-morie_pgdsdg <- project_box
 
-#' @rdname project_box
-#' @export
-morie_pgdsdg <- project_box
 
-#' @rdname project_box
-#' @export
-morie_pgdsdg <- project_box
 
-#' @rdname project_box
-#' @export
-morie_pgdsdg <- project_box
 
-#' @rdname project_box
-#' @export
-morie_pgdsdg <- project_box
 
-#' @rdname project_box
-#' @export
-morie_pgdsdg <- project_box
 
-#' @rdname project_box
-#' @export
-morie_pgdsdg <- project_box
 
-#' @rdname project_box
-#' @export
-morie_pgdsdg <- project_box
 
-#' @rdname project_box
-#' @export
-morie_pgdsdg <- project_box
 
-#' @rdname project_box
-#' @export
-morie_pgdsdg <- project_box
 
-#' @rdname project_box
-#' @export
-morie_pgdsdg <- project_box
 
-#' @rdname project_box
-#' @export
-morie_pgdsdg <- project_box
+

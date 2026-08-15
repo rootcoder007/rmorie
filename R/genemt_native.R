@@ -288,18 +288,7 @@ morie_genemt_gene_meta_analysis <- morie_genemt_gene_set_regression
 #' @export
 morie_genemt <- morie_genemt_ld_principal_components
 
-#' @rdname morie_genemt_ld_principal_components
-#' @export
-morie_genemt <- morie_genemt_ld_principal_components
 
-#' @rdname morie_genemt_ld_principal_components
-#' @export
-morie_genemt <- morie_genemt_ld_principal_components
 
-#' @rdname morie_genemt_ld_principal_components
-#' @export
-morie_genemt <- morie_genemt_ld_principal_components
 
-#' @rdname morie_genemt_ld_principal_components
-#' @export
-morie_genemt <- morie_genemt_ld_principal_components
+

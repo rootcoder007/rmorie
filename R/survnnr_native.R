@@ -290,50 +290,15 @@ morie_survnnr_deep_surv <- morie_survnnr_fit
 # entry point
 morie_survnnr <- morie_survnnr_fit
 
-#' @rdname morie_survnnr_partial_loglik
-#' @export
-morie_survnnr <- morie_survnnr_partial_loglik
 
-#' @rdname morie_survnnr_partial_loglik
-#' @export
-morie_survnnr <- morie_survnnr_partial_loglik
 
-#' @rdname morie_survnnr_partial_loglik
-#' @export
-morie_survnnr <- morie_survnnr_partial_loglik
 
-#' @rdname morie_survnnr_partial_loglik
-#' @export
-morie_survnnr <- morie_survnnr_partial_loglik
 
-#' @rdname morie_survnnr_partial_loglik
-#' @export
-morie_survnnr <- morie_survnnr_partial_loglik
 
-#' @rdname morie_survnnr_partial_loglik
-#' @export
-morie_survnnr <- morie_survnnr_partial_loglik
 
-#' @rdname morie_survnnr_partial_loglik
-#' @export
-morie_survnnr <- morie_survnnr_partial_loglik
 
-#' @rdname morie_survnnr_partial_loglik
-#' @export
-morie_survnnr <- morie_survnnr_partial_loglik
 
-#' @rdname morie_survnnr_partial_loglik
-#' @export
-morie_survnnr <- morie_survnnr_partial_loglik
 
-#' @rdname morie_survnnr_partial_loglik
-#' @export
-morie_survnnr <- morie_survnnr_partial_loglik
 
-#' @rdname morie_survnnr_partial_loglik
-#' @export
-morie_survnnr <- morie_survnnr_partial_loglik
 
-#' @rdname morie_survnnr_partial_loglik
-#' @export
-morie_survnnr <- morie_survnnr_partial_loglik
+

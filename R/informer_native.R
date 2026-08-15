@@ -205,90 +205,25 @@ morie_informer_informer_long_horizon <- morie_informer_probsparse_attention
 # Main entry point
 morie_informer <- morie_informer_probsparse_attention
 
-#' @rdname morie_informer_sparsity_measure
-#' @export
-morie_informer <- morie_informer_sparsity_measure
 
-#' @rdname morie_informer_sparsity_measure
-#' @export
-morie_informer <- morie_informer_sparsity_measure
 
-#' @rdname morie_informer_sparsity_measure
-#' @export
-morie_informer <- morie_informer_sparsity_measure
 
-#' @rdname morie_informer_sparsity_measure
-#' @export
-morie_informer <- morie_informer_sparsity_measure
 
-#' @rdname morie_informer_sparsity_measure
-#' @export
-morie_informer <- morie_informer_sparsity_measure
 
-#' @rdname morie_informer_sparsity_measure
-#' @export
-morie_informer <- morie_informer_sparsity_measure
 
-#' @rdname morie_informer_sparsity_measure
-#' @export
-morie_informer <- morie_informer_sparsity_measure
 
-#' @rdname morie_informer_sparsity_measure
-#' @export
-morie_informer <- morie_informer_sparsity_measure
 
-#' @rdname morie_informer_sparsity_measure
-#' @export
-morie_informer <- morie_informer_sparsity_measure
 
-#' @rdname morie_informer_sparsity_measure
-#' @export
-morie_informer <- morie_informer_sparsity_measure
 
-#' @rdname morie_informer_sparsity_measure
-#' @export
-morie_informer <- morie_informer_sparsity_measure
 
-#' @rdname morie_informer_sparsity_measure
-#' @export
-morie_informer <- morie_informer_sparsity_measure
 
-#' @rdname morie_informer_sparsity_measure
-#' @export
-morie_informer <- morie_informer_sparsity_measure
 
-#' @rdname morie_informer_sparsity_measure
-#' @export
-morie_informer <- morie_informer_sparsity_measure
 
-#' @rdname morie_informer_sparsity_measure
-#' @export
-morie_informer <- morie_informer_sparsity_measure
 
-#' @rdname morie_informer_sparsity_measure
-#' @export
-morie_informer <- morie_informer_sparsity_measure
 
-#' @rdname morie_informer_sparsity_measure
-#' @export
-morie_informer <- morie_informer_sparsity_measure
 
-#' @rdname morie_informer_sparsity_measure
-#' @export
-morie_informer <- morie_informer_sparsity_measure
 
-#' @rdname morie_informer_sparsity_measure
-#' @export
-morie_informer <- morie_informer_sparsity_measure
 
-#' @rdname morie_informer_sparsity_measure
-#' @export
-morie_informer <- morie_informer_sparsity_measure
 
-#' @rdname morie_informer_sparsity_measure
-#' @export
-morie_informer <- morie_informer_sparsity_measure
 
-#' @rdname morie_informer_sparsity_measure
-#' @export
-morie_informer <- morie_informer_sparsity_measure
+

@@ -240,74 +240,21 @@ morie_ncfRS_ncf <- morie_ncfRS_fit_gmf
 # main entry point
 morie_ncfRS <- morie_ncfRS_fit_gmf
 
-#' @rdname morie_ncfRS_gmf
-#' @export
-morie_ncfRS <- morie_ncfRS_gmf
 
-#' @rdname morie_ncfRS_gmf
-#' @export
-morie_ncfRS <- morie_ncfRS_gmf
 
-#' @rdname morie_ncfRS_gmf
-#' @export
-morie_ncfRS <- morie_ncfRS_gmf
 
-#' @rdname morie_ncfRS_gmf
-#' @export
-morie_ncfRS <- morie_ncfRS_gmf
 
-#' @rdname morie_ncfRS_gmf
-#' @export
-morie_ncfRS <- morie_ncfRS_gmf
 
-#' @rdname morie_ncfRS_gmf
-#' @export
-morie_ncfRS <- morie_ncfRS_gmf
 
-#' @rdname morie_ncfRS_gmf
-#' @export
-morie_ncfRS <- morie_ncfRS_gmf
 
-#' @rdname morie_ncfRS_gmf
-#' @export
-morie_ncfRS <- morie_ncfRS_gmf
 
-#' @rdname morie_ncfRS_gmf
-#' @export
-morie_ncfRS <- morie_ncfRS_gmf
 
-#' @rdname morie_ncfRS_gmf
-#' @export
-morie_ncfRS <- morie_ncfRS_gmf
 
-#' @rdname morie_ncfRS_gmf
-#' @export
-morie_ncfRS <- morie_ncfRS_gmf
 
-#' @rdname morie_ncfRS_gmf
-#' @export
-morie_ncfRS <- morie_ncfRS_gmf
 
-#' @rdname morie_ncfRS_gmf
-#' @export
-morie_ncfRS <- morie_ncfRS_gmf
 
-#' @rdname morie_ncfRS_gmf
-#' @export
-morie_ncfRS <- morie_ncfRS_gmf
 
-#' @rdname morie_ncfRS_gmf
-#' @export
-morie_ncfRS <- morie_ncfRS_gmf
 
-#' @rdname morie_ncfRS_gmf
-#' @export
-morie_ncfRS <- morie_ncfRS_gmf
 
-#' @rdname morie_ncfRS_gmf
-#' @export
-morie_ncfRS <- morie_ncfRS_gmf
 
-#' @rdname morie_ncfRS_gmf
-#' @export
-morie_ncfRS <- morie_ncfRS_gmf
+

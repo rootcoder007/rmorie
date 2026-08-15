@@ -332,38 +332,12 @@ morie_tmlecrosslagged <- morie_tmle_cross_lagged
 #' @export
 morie_tmlcll <- morie_clpm_coefficients
 
-#' @rdname morie_clpm_coefficients
-#' @export
-morie_tmlcll <- morie_clpm_coefficients
 
-#' @rdname morie_clpm_coefficients
-#' @export
-morie_tmlcll <- morie_clpm_coefficients
 
-#' @rdname morie_clpm_coefficients
-#' @export
-morie_tmlcll <- morie_clpm_coefficients
 
-#' @rdname morie_clpm_coefficients
-#' @export
-morie_tmlcll <- morie_clpm_coefficients
 
-#' @rdname morie_clpm_coefficients
-#' @export
-morie_tmlcll <- morie_clpm_coefficients
 
-#' @rdname morie_clpm_coefficients
-#' @export
-morie_tmlcll <- morie_clpm_coefficients
 
-#' @rdname morie_clpm_coefficients
-#' @export
-morie_tmlcll <- morie_clpm_coefficients
 
-#' @rdname morie_clpm_coefficients
-#' @export
-morie_tmlcll <- morie_clpm_coefficients
 
-#' @rdname morie_clpm_coefficients
-#' @export
-morie_tmlcll <- morie_clpm_coefficients
+
