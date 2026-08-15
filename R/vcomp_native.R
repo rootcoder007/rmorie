@@ -41,8 +41,8 @@ morie_vcomp <- function(y, group, method = "reml", conf_level = 0.95) {
   if (!(0 < conf_level && conf_level < 1)) {
     stop("vcomp: conf_level must lie in (0, 1), got ", conf_level)
   }
-  av <- ranova(y, group)
-  fit <- if (method == "reml") remlfn(y, group) else av
+  av <- morie_ranova(y, group)
+  fit <- if (method == "reml") morie_remlfn(y, group) else av
   s2a <- as.numeric(fit$sigma2_a)
   s2e <- as.numeric(fit$sigma2_e)
   denom <- s2a + s2e

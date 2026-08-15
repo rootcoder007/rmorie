@@ -1,144 +1,59 @@
 # morie.fn -- function file (rootcoder007/morie)
 # Self-controlled case series: cases only, each its own control.
 #
-# A cohort study of a rare vaccine reaction needs the whole cohort. A
-# case-control study needs matched controls. The self-controlled case
-# series needs neither -- only the people who had the event, and for
-# each of them the dates of exposure and of the event. Everything else
-# cancels.
-#
-# Why it cancels. Events arise in an age-dependent Poisson process whose
-# rate for individual i is
-#
-#   lambda_i(t | v_i, x_i) = lambda_{i0}(t) * exp(gamma^T x_i + sum_r beta_r X_{ir}(t))
-#
-# with X_{ir}(t) = 1 when t falls in the r-th risk interval
-# (v_i + a_r, v_i + b_r] after vaccination at age v_i, and lambda_{i0}
+# Events arise in an age-dependent Poisson process whose rate for
+# individual i is
+#   lambda_i(t | v_i, x_i) = lambda_i0(t) exp(gamma'x_i +
+#                            sum_r beta_r X_ir(t)),
+# with X_ir(t) = 1 when t falls in the r-th risk interval
+# (v_i + a_r, v_i + b_r] after vaccination at age v_i, and lambda_i0
 # piecewise constant on age bands. Writing the log baseline as
-# phi_i + alpha_j splits it into an individual effect and an age effect.
-# Conditioning on the number of events a person had -- and on their
-# exposure history -- removes phi_i and gamma^T x_i exactly, because
-# both are constants that multiply every interval of that person's
-# follow-up alike. The conditional likelihood is multinomial:
+# phi_i + alpha_j splits it into an individual effect and an age
+# effect. Conditioning on the number of events a person had -- and on
+# their exposure history -- removes phi_i and gamma'x_i EXACTLY. The
+# conditional likelihood is multinomial:
+#   L = prod_i prod_k exp(alpha_j(t_ik) + beta_r(t_ik))
+#                     / sum_j e_ij exp(alpha_j + beta_r(j)),
+# where e_ij is the time individual i spent in interval j. Any fixed
+# characteristic is inside phi_i and therefore cannot confound.
 #
-#   L = prod_i prod_{k=1}^{n_i}
-#       exp(alpha_{j(t_ik)} + beta_{r(t_ik)})
-#       / (sum_j e_ij * exp(alpha_j + beta_{r(j)}))
+# What does NOT cancel: anything that varies within a person over
+# time. If the age bands are too coarse, age leaks into beta-hat.
 #
-# where e_ij is the time individual i spent in interval j.
-#
-# What does NOT cancel. Age does, and only because it is modelled.
-# Anything that varies within a person over time is a live confounder:
-# if the age bands are too coarse, age leaks into beta-hat.
-#
-# The assumption in this module's name. Farrington's derivation
-# requires that the event does not alter subsequent observation -- no
-# event-dependent censoring (the event must not be fatal or
-# observation-terminating) and no event-dependent exposure (having the
-# event must not change whether or when you get vaccinated). This
-# module implements the case where those hold.
-#
-# A pre-exposure window is a diagnostic, not decoration. If vaccination
-# is deferred because a child is unwell, event rates dip just before
-# exposure. Fitting an explicit pre-exposure interval makes that
-# visible.
+# Farrington's derivation requires that the event does not alter
+# subsequent observation -- no event-dependent censoring and no
+# event-dependent exposure. A pre-exposure window is a diagnostic: a
+# pre-exposure relative incidence far from 1 is evidence the exposure
+# was event-dependent, which invalidates the design.
 #
 # References
 # ----------
 # Farrington, C. P. (1995) "Relative Incidence Estimation from Case
 # Series for Vaccine Safety Evaluation", Biometrics 51(1), 228-235.
-# JSTOR stable URL https://www.jstor.org/stable/2533328.
+# JSTOR stable URL https://www.jstor.org/stable/2533328. Secs. 2-3.
 #
-# Whitaker, H. J., Farrington, C. P., Spiessens, B. & Musonda, P. (2006)
-# "Tutorial in biostatistics: The self-controlled case series method",
-# Statistics in Medicine 25, 1768-1797, doi:10.1002/sim.2302.
+# Whitaker, H. J., Farrington, C. P., Spiessens, B. & Musonda, P.
+# (2006) "Tutorial in biostatistics: The self-controlled case series
+# method", Statistics in Medicine 25, 1768-1797, doi:10.1002/sim.2302.
 
 .sccsno_EPS <- 1e-12
 
-.sccsno_cholsolve <- function(A, b) {
-  p <- nrow(A)
-  L <- matrix(0, p, p)
-  for (i in 1:p) {
-    for (j in 1:i) {
-      idx <- seq_len(j - 1)
-      s <- if (length(idx) > 0) sum(L[i, idx] * L[j, idx]) else 0
-      if (i == j) {
-        v <- A[i, i] - s
-        if (v <= 0) stop("singular matrix")
-        L[i, j] <- sqrt(v)
-      } else {
-        L[i, j] <- (A[i, j] - s) / L[j, j]
-      }
+.sccsno_cuts <- function(start, end, exposure, risk_periods, age_breaks) {
+  # Ordered distinct cutpoints for one individual (Fig. 1).
+  pts <- c(as.numeric(start), as.numeric(end))
+  for (b in age_breaks) {
+    if (as.numeric(start) < as.numeric(b) &&
+        as.numeric(b) < as.numeric(end)) {
+      pts <- c(pts, as.numeric(b))
     }
   }
-  y <- numeric(p)
-  for (i in 1:p) {
-    idx <- seq_len(i - 1)
-    s <- if (length(idx) > 0) sum(L[i, idx] * y[idx]) else 0
-    y[i] <- (b[i] - s) / L[i, i]
-  }
-  x <- numeric(p)
-  for (i in p:1) {
-    idx <- if (i < p) (i + 1):p else integer(0)
-    s <- if (length(idx) > 0) sum(L[idx, i] * x[idx]) else 0
-    x[i] <- (y[i] - s) / L[i, i]
-  }
-  x
-}
-
-.sccsno_qnorm <- function(p) {
-  a1 <- -3.969683028665376e+01
-  a2 <-  2.209460984245205e+02
-  a3 <- -2.759285104469687e+02
-  a4 <-  1.383577518672690e+02
-  a5 <- -3.066479806614716e+01
-  a6 <-  2.506628277459239e+00
-  b1 <- -5.447609879822406e+01
-  b2 <-  1.615858368580409e+02
-  b3 <- -1.556989798598866e+02
-  b4 <-  6.680131188771972e+01
-  b5 <- -1.328068155288572e+01
-  c1 <- -7.784894002430293e-03
-  c2 <- -3.223964580411365e-01
-  c3 <- -2.400758277161838e+00
-  c4 <- -2.549732539343734e+00
-  c5 <-  4.374664141464968e+00
-  c6 <-  2.938163982698783e+00
-  d1 <-  7.784695709041462e-03
-  d2 <-  3.224671290700398e-01
-  d3 <-  2.445134137142996e+00
-  d4 <-  3.754408661907416e+00
-  plow <- 0.02425
-  phigh <- 1 - plow
-  if (p < plow) {
-    q <- sqrt(-2 * log(p))
-    -(((((c1*q + c2)*q + c3)*q + c4)*q + c5)*q + c6) /
-     (((((d1*q + d2)*q + d3)*q + d4)*q + 1)
-  } else if (p <= phigh) {
-    q <- p - 0.5
-    r <- q * q
-    (((((a1*r + a2)*r + a3)*r + a4)*r + a5)*r + a6) * q /
-    (((((b1*r + b2)*r + b3)*r + b4)*r + b5)*r + 1)
-  } else {
-    q <- sqrt(-2 * log(1 - p))
-    -(((((c1*q + c2)*q + c3)*q + c4)*q + c5)*q + c6) /
-     (((((d1*q + d2)*q + d3)*q + d4)*q + 1)
-  }
-}
-
-.sccsno_cuts <- function(start, end, exposure, risk_periods, age_breaks) {
-  s <- as.numeric(start); e <- as.numeric(end)
-  pts <- unique(c(s, e))
-  for (b in age_breaks) {
-    bb <- as.numeric(b)
-    if (s < bb && bb < e) pts <- c(pts, bb)
-  }
   if (!is.null(exposure)) {
-    exv <- as.numeric(exposure)
-    for (rb in risk_periods) {
-      a <- as.numeric(rb[[1]]); b <- as.numeric(rb[[2]])
-      for (pp in c(exv + a, exv + b)) {
-        if (s < pp && pp < e) pts <- c(pts, pp)
+    for (i in seq_len(nrow(risk_periods))) {
+      for (p in c(as.numeric(exposure) + risk_periods[i, 1L],
+                  as.numeric(exposure) + risk_periods[i, 2L])) {
+        if (as.numeric(start) < p && p < as.numeric(end)) {
+          pts <- c(pts, p)
+        }
       }
     }
   }
@@ -146,92 +61,134 @@
 }
 
 .sccsno_band <- function(t, age_breaks) {
-  j <- 0
+  # Index of the age band containing t (0-based, matching alpha[j+1]).
+  j <- 0L
   for (b in age_breaks) {
-    if (t >= as.numeric(b)) j <- j + 1 else break
+    if (t >= as.numeric(b)) {
+      j <- j + 1L
+    } else {
+      break
+    }
   }
   j
 }
 
 .sccsno_risk <- function(t, exposure, risk_periods) {
-  if (is.null(exposure)) return(0)
-  exv <- as.numeric(exposure)
-  for (r in seq_along(risk_periods)) {
-    rb <- risk_periods[[r]]
-    a <- as.numeric(rb[[1]]); b <- as.numeric(rb[[2]])
-    if (exv + a < t && t <= exv + b) return(r)
+  # Index of the risk period containing t; 0 is the control period.
+  if (is.null(exposure)) {
+    return(0L)
   }
-  0
+  for (r in seq_len(nrow(risk_periods))) {
+    if (as.numeric(exposure) + risk_periods[r, 1L] < t &&
+        t <= as.numeric(exposure) + risk_periods[r, 2L]) {
+      return(r)
+    }
+  }
+  0L
 }
 
-build_intervals <- function(start, end, exposure, event_times, risk_periods,
-                            age_breaks) {
-  s <- as.numeric(start); e <- as.numeric(end)
+morie_sccsno_build_intervals <- function(start, end, exposure, event_times,
+                                         risk_periods, age_breaks) {
+  # One individual's follow-up, cut into (age band, risk period) cells
+  # with their exposure times and event counts. Returns a matrix with
+  # columns (age_band, risk_period, e_ij, n_ij). risk_periods is a
+  # 2-column matrix (or list of pairs) of (a, b] offsets.
+  rp <- .sccsno_rp(risk_periods)
+  s <- as.numeric(start)
+  e <- as.numeric(end)
   if (!(e > s)) {
-    stop(sprintf("sccsno: the observation period must have positive length, got [%g, %g]", s, e))
+    stop(sprintf(paste0("sccsno: the observation period must have ",
+                        "positive length, got [%g, %g]"), s, e))
   }
-  for (rb in risk_periods) {
-    a <- as.numeric(rb[[1]]); b <- as.numeric(rb[[2]])
-    if (!(b > a)) {
-      stop(sprintf("sccsno: a risk period must satisfy b > a, got (%g, %g]", a, b))
+  for (i in seq_len(nrow(rp))) {
+    if (!(rp[i, 2L] > rp[i, 1L])) {
+      stop(sprintf("sccsno: a risk period must satisfy b > a, got (%g, %g]",
+                   rp[i, 1L], rp[i, 2L]))
     }
   }
-  if (!is.null(exposure)) {
-    exv <- as.numeric(exposure)
-    if (!(s <= exv && exv <= e)) {
-      stop(sprintf("sccsno: the exposure at %g lies outside the observation period [%g, %g]", exv, s, e))
-    }
+  if (!is.null(exposure) &&
+      !(s <= as.numeric(exposure) && as.numeric(exposure) <= e)) {
+    stop(sprintf(paste0("sccsno: the exposure at %g lies outside the ",
+                        "observation period [%g, %g]"),
+                 as.numeric(exposure), s, e))
   }
-  cuts <- .sccsno_cuts(s, e, exposure, risk_periods, age_breaks)
-  nc <- length(cuts)
-  cells <- matrix(0, nc - 1, 4)
-  for (q in seq_len(nc - 1)) {
-    lo <- cuts[q]; hi <- cuts[q + 1]
+  cuts <- .sccsno_cuts(s, e, exposure, rp, age_breaks)
+  m <- length(cuts) - 1L
+  cells <- matrix(0.0, nrow=m, ncol=4L)
+  colnames(cells) <- c("age_band", "risk_period", "e", "n")
+  for (q in seq_len(m)) {
+    lo <- cuts[q]
+    hi <- cuts[q + 1L]
     mid <- 0.5 * (lo + hi)
-    cells[q, 1] <- .sccsno_band(mid, age_breaks)
-    cells[q, 2] <- .sccsno_risk(mid, exposure, risk_periods)
-    cells[q, 3] <- hi - lo
-    cells[q, 4] <- 0
+    cells[q, 1L] <- .sccsno_band(mid, age_breaks)
+    cells[q, 2L] <- .sccsno_risk(mid, exposure, rp)
+    cells[q, 3L] <- hi - lo
   }
   for (t in event_times) {
     tv <- as.numeric(t)
     if (!(s <= tv && tv <= e)) {
-      stop(sprintf("sccsno: an event at %g lies outside the observation period [%g, %g]", tv, s, e))
+      stop(sprintf(paste0("sccsno: an event at %g lies outside the ",
+                          "observation period [%g, %g]"), tv, s, e))
     }
     placed <- FALSE
-    for (q in seq_len(nc - 1)) {
-      cond <- (cuts[q] < tv && tv <= cuts[q + 1]) || (q == 1 && tv == cuts[1])
-      if (cond) {
-        cells[q, 4] <- cells[q, 4] + 1
+    for (q in seq_len(m)) {
+      if ((cuts[q] < tv && tv <= cuts[q + 1L]) ||
+          (q == 1L && tv == cuts[1L])) {
+        cells[q, 4L] <- cells[q, 4L] + 1
         placed <- TRUE
         break
       }
     }
     if (!placed) {
-      cells[nrow(cells), 4] <- cells[nrow(cells), 4] + 1
+      cells[m, 4L] <- cells[m, 4L] + 1
     }
   }
   cells
 }
 
-sccs_loglik <- function(params, cells_by_person, n_risk, n_age) {
-  beta <- numeric(n_risk + 1)
-  if (n_risk >= 1) beta[2:(n_risk + 1)] <- as.numeric(params[1:n_risk])
-  alpha <- numeric(n_age)
-  if (n_age - 1 >= 1) alpha[2:n_age] <- as.numeric(params[(n_risk + 1):(n_risk + n_age - 1)])
+.sccsno_rp <- function(risk_periods) {
+  if (is.matrix(risk_periods)) {
+    rp <- risk_periods
+  } else {
+    rp <- do.call(rbind, lapply(risk_periods,
+                                function(p) as.numeric(unlist(p))))
+  }
+  storage.mode(rp) <- "double"
+  rp
+}
+
+morie_sccsno_loglik <- function(params, cells_by_person, n_risk, n_age) {
+  # The conditional log-likelihood of Sec. 3. params is
+  # (beta_1..beta_s, alpha_1..alpha_{m-1}) with beta_0 = alpha_0 = 0.
+  # The individual effects phi_i do not appear -- that is the point.
+  beta <- c(0.0, as.numeric(params[seq_len(n_risk)]))
+  if (n_age > 1L) {
+    alpha <- c(0.0, as.numeric(params[n_risk + seq_len(n_age - 1L)]))
+  } else {
+    alpha <- 0.0
+  }
   ll <- 0.0
   for (cells in cells_by_person) {
-    tot <- sum(cells[, 4])
-    if (tot == 0) next
-    den <- 0.0
-    for (k in seq_len(nrow(cells))) {
-      j <- cells[k, 1]; r <- cells[k, 2]; e <- cells[k, 3]
-      den <- den + e * exp(alpha[j + 1] + beta[r + 1])
+    tot <- sum(cells[, 4L])
+    if (tot == 0) {
+      next
     }
-    if (den <= .sccsno_EPS) stop("sccsno: an individual has no observation time")
-    for (k in seq_len(nrow(cells))) {
-      j <- cells[k, 1]; r <- cells[k, 2]; n <- cells[k, 4]
-      if (n) ll <- ll + n * (alpha[j + 1] + beta[r + 1])
+    den <- 0.0
+    for (q in seq_len(nrow(cells))) {
+      j <- as.integer(cells[q, 1L])
+      r <- as.integer(cells[q, 2L])
+      den <- den + cells[q, 3L] * exp(alpha[j + 1L] + beta[r + 1L])
+    }
+    if (den <= .sccsno_EPS) {
+      stop("sccsno: an individual has no observation time")
+    }
+    for (q in seq_len(nrow(cells))) {
+      n <- cells[q, 4L]
+      if (n > 0) {
+        j <- as.integer(cells[q, 1L])
+        r <- as.integer(cells[q, 2L])
+        ll <- ll + n * (alpha[j + 1L] + beta[r + 1L])
+      }
     }
     ll <- ll - tot * log(den)
   }
@@ -239,156 +196,176 @@ sccs_loglik <- function(params, cells_by_person, n_risk, n_age) {
 }
 
 .sccsno_grad_hess <- function(params, cells_by_person, n_risk, n_age) {
-  p <- n_risk + n_age - 1
-  g <- numeric(p)
-  H <- matrix(0, p, p)
-  beta <- numeric(n_risk + 1)
-  if (n_risk >= 1) beta[2:(n_risk + 1)] <- as.numeric(params[1:n_risk])
-  alpha <- numeric(n_age)
-  if (n_age - 1 >= 1) alpha[2:n_age] <- as.numeric(params[(n_risk + 1):(n_risk + n_age - 1)])
+  p <- n_risk + n_age - 1L
+  g <- rep(0.0, p)
+  H <- matrix(0.0, p, p)
+  beta <- c(0.0, as.numeric(params[seq_len(n_risk)]))
+  if (n_age > 1L) {
+    alpha <- c(0.0, as.numeric(params[n_risk + seq_len(n_age - 1L)]))
+  } else {
+    alpha <- 0.0
+  }
+  idx <- function(j, r) {
+    # Design row: risk dummies then age dummies, both baseline 0.
+    row <- rep(0.0, p)
+    if (r > 0L) {
+      row[r] <- 1.0
+    }
+    if (j > 0L) {
+      row[n_risk + j] <- 1.0
+    }
+    row
+  }
   for (cells in cells_by_person) {
-    tot <- sum(cells[, 4])
-    if (tot == 0) next
-    nc <- nrow(cells)
-    w <- numeric(nc)
-    rows <- matrix(0, nc, p)
+    tot <- sum(cells[, 4L])
+    if (tot == 0) {
+      next
+    }
+    m <- nrow(cells)
+    w <- numeric(m)
+    rows <- matrix(0.0, m, p)
     den <- 0.0
-    for (c in seq_len(nc)) {
-      j <- cells[c, 1]; r <- cells[c, 2]; e <- cells[c, 3]
-      v <- e * exp(alpha[j + 1] + beta[r + 1])
+    for (q in seq_len(m)) {
+      j <- as.integer(cells[q, 1L])
+      r <- as.integer(cells[q, 2L])
+      v <- cells[q, 3L] * exp(alpha[j + 1L] + beta[r + 1L])
       den <- den + v
-      w[c] <- v
-      if (r > 0) rows[c, r] <- 1.0
-      if (j > 0) rows[c, n_risk + j] <- 1.0
+      w[q] <- v
+      rows[q, ] <- idx(j, r)
     }
     pr <- w / den
-    for (c in seq_len(nc)) {
-      n <- cells[c, 4]
-      if (n) {
-        for (a in seq_len(p)) g[a] <- g[a] + n * rows[c, a]
+    for (q in seq_len(m)) {
+      n <- cells[q, 4L]
+      if (n > 0) {
+        g <- g + n * rows[q, ]
       }
     }
-    mn <- numeric(p)
-    for (a in seq_len(p)) {
-      mn[a] <- sum(pr * rows[, a])
-    }
-    for (a in seq_len(p)) {
-      g[a] <- g[a] - tot * mn[a]
-      for (b in seq_len(p)) {
-        sec <- sum(pr * rows[, a] * rows[, b])
-        H[a, b] <- H[a, b] - tot * (sec - mn[a] * mn[b])
-      }
-    }
+    mean_ <- as.numeric(crossprod(rows, pr))
+    g <- g - tot * mean_
+    sec <- crossprod(rows, rows * pr)
+    H <- H - tot * (sec - outer(mean_, mean_))
   }
-  list(g = g, H = H)
+  list(g=g, H=H)
 }
 
-sccs_fit <- function(cases, risk_periods, age_breaks = numeric(0), iters = 100,
-                     tol = 1e-10, ridge = 1e-10) {
-  rp <- lapply(risk_periods, function(rb) c(as.numeric(rb[[1]]), as.numeric(rb[[2]])))
+morie_sccsno_fit <- function(cases, risk_periods, age_breaks=c(),
+                             iters=100, tol=1e-10, ridge=1e-10) {
+  # Maximise the conditional likelihood by Newton-Raphson. cases is a
+  # list of lists with names start, end, exposure (or NULL) and
+  # events. Only individuals with at least one event contribute.
+  rp <- .sccsno_rp(risk_periods)
   ab <- as.numeric(age_breaks)
-  if (length(ab) > 0 && any(diff(ab) < 0)) stop("sccsno: age_breaks must be increasing")
-  n_risk <- length(rp)
-  n_age <- length(ab) + 1
-  if (n_risk < 1) stop("sccsno: at least one risk period is needed")
-  cells_by_person <- list()
-  used <- 0
-  for (c in cases) {
-    ev <- c$events
-    if (is.null(ev) || length(ev) == 0) next
-    cells <- build_intervals(c$start, c$end, c$exposure, ev, rp, ab)
-    cells_by_person[[length(cells_by_person) + 1]] <- cells
-    used <- used + 1
+  if (is.unsorted(ab, strictly=FALSE)) {
+    stop("sccsno: age_breaks must be increasing")
   }
-  if (used == 0) stop("sccsno: no case contributed an event")
-  p <- n_risk + n_age - 1
-  par <- numeric(p)
+  n_risk <- nrow(rp)
+  n_age <- length(ab) + 1L
+  if (n_risk < 1L) {
+    stop("sccsno: at least one risk period is needed")
+  }
+  cells_by_person <- list()
+  used <- 0L
+  for (cse in cases) {
+    ev <- cse[["events"]]
+    if (is.null(ev) || length(ev) == 0L) {
+      next
+    }
+    cells <- morie_sccsno_build_intervals(cse[["start"]], cse[["end"]],
+                                          cse[["exposure"]], ev, rp, ab)
+    cells_by_person[[used + 1L]] <- cells
+    used <- used + 1L
+  }
+  if (used == 0L) {
+    stop("sccsno: no case contributed an event")
+  }
+  p <- n_risk + n_age - 1L
+  par <- rep(0.0, p)
   conv <- FALSE
-  it <- 0
+  it <- 0L
   for (it in seq_len(as.integer(iters))) {
     gh <- .sccsno_grad_hess(par, cells_by_person, n_risk, n_age)
-    A <- -gh$H
-    diag(A) <- diag(A) + ridge
-    step <- tryCatch(.sccsno_cholsolve(A, gh$g), error = function(e) {
-      stop("sccsno: the information matrix is singular -- some interval carries no events or no exposure time")
-    })
-    mx <- max(abs(step))
+    A <- -gh$H + diag(ridge, p)
+    step <- tryCatch(
+      backsolve(chol(A), forwardsolve(t(chol(A)), gh$g)),
+      error=function(e) NULL)
+    if (is.null(step)) {
+      stop(paste0("sccsno: the information matrix is singular -- some ",
+                  "interval carries no events or no exposure time"))
+    }
     par <- par + step
-    if (mx < tol) {
+    if (max(abs(step)) < tol) {
       conv <- TRUE
       break
     }
   }
   gh <- .sccsno_grad_hess(par, cells_by_person, n_risk, n_age)
-  A <- -gh$H
-  diag(A) <- diag(A) + ridge
-  cols <- matrix(0, p, p)
-  for (a in seq_len(p)) {
-    e <- numeric(p)
-    e[a] <- 1.0
-    cols[, a] <- .sccsno_cholsolve(A, e)
-  }
-  se <- numeric(p)
-  for (a in seq_len(p)) {
-    se[a] <- if (cols[a, a] > 0) sqrt(cols[a, a]) else NaN
-  }
-  beta <- par[1:n_risk]
+  A <- -gh$H + diag(ridge, p)
+  cov_ <- tryCatch(chol2inv(chol(A)), error=function(e) solve(A))
+  se <- ifelse(diag(cov_) > 0, sqrt(diag(cov_)), NaN)
+  beta <- par[seq_len(n_risk)]
+  age_idx <- if (p > n_risk) seq.int(n_risk + 1L, p) else integer(0)
   list(
-    estimate = exp(beta),
-    relative_incidence = exp(beta),
-    log_ri = beta,
-    se_log_ri = se[1:n_risk],
-    age_effects = par[(n_risk + 1):p],
-    se_age = se[(n_risk + 1):p],
-    coef = par,
-    se = se,
-    loglik = sccs_loglik(par, cells_by_person, n_risk, n_age),
-    n_cases = used,
-    converged = conv,
-    iterations = it,
-    n_risk_periods = n_risk,
-    n_age_bands = n_age,
-    method = "self-controlled case series, conditional likelihood of Farrington (1995) Sec. 3",
-    conditions_out = "individual frailty and every time-invariant covariate"
+    estimate=exp(beta),
+    relative_incidence=exp(beta),
+    log_ri=beta, se_log_ri=se[seq_len(n_risk)],
+    age_effects=par[age_idx], se_age=se[age_idx],
+    coef=par, se=se,
+    loglik=morie_sccsno_loglik(par, cells_by_person, n_risk, n_age),
+    n_cases=used, converged=conv, iterations=it,
+    n_risk_periods=n_risk, n_age_bands=n_age,
+    method=paste0("self-controlled case series, conditional ",
+                  "likelihood of Farrington (1995) Sec. 3"),
+    conditions_out=paste0("individual frailty and every ",
+                          "time-invariant covariate")
   )
 }
 
-relative_incidence <- function(fit, level = 0.95) {
-  z <- .sccsno_qnorm(0.5 + as.numeric(level) / 2.0)
-  out <- vector("list", length(fit$log_ri))
-  for (i in seq_along(fit$log_ri)) {
-    b <- fit$log_ri[i]; s <- fit$se_log_ri[i]
-    out[[i]] <- list(
-      ri = exp(b),
-      lower = exp(b - z * s),
-      upper = exp(b + z * s),
-      log_ri = b,
-      se = s
-    )
+morie_sccsno_relative_incidence <- function(fit, level=0.95) {
+  # Point estimates and Wald intervals on the incidence scale.
+  z <- stats::qnorm(0.5 + as.numeric(level) / 2.0)
+  out <- list()
+  for (i in seq_along(fit[["log_ri"]])) {
+    b <- fit[["log_ri"]][i]
+    s <- fit[["se_log_ri"]][i]
+    out[[i]] <- list(ri=exp(b), lower=exp(b - z * s),
+                     upper=exp(b + z * s), log_ri=b, se=s)
   }
-  list(intervals = out, level = as.numeric(level))
+  list(intervals=out, level=as.numeric(level))
 }
 
-check_assumptions <- function(fit_with_pre, pre_index = 0, tol = 0.25) {
-  ri <- fit_with_pre$relative_incidence[as.integer(pre_index) + 1]
+morie_sccsno_check_assumptions <- function(fit_with_pre, pre_index=0,
+                                           tol=0.25) {
+  # Read the pre-exposure window as a design diagnostic. A relative
+  # incidence far from 1 in a window BEFORE exposure means the event
+  # influenced whether or when exposure happened; that breaks the
+  # derivation itself.
+  ri <- fit_with_pre[["relative_incidence"]][as.integer(pre_index) + 1L]
   ok <- abs(log(ri)) <= as.numeric(tol)
-  list(
-    pre_exposure_ri = ri,
-    consistent_with_design = ok,
-    tolerance_log = as.numeric(tol),
-    interpretation = "a pre-exposure RI near 1 is consistent with event-independent exposure; far from 1 indicates the event affected exposure, which invalidates the design rather than biasing it"
-  )
+  list(pre_exposure_ri=ri, consistent_with_design=ok,
+       tolerance_log=as.numeric(tol),
+       interpretation=paste0(
+         "a pre-exposure RI near 1 is consistent with ",
+         "event-independent exposure; far from 1 indicates the ",
+         "event affected exposure, which invalidates the ",
+         "design rather than biasing it"))
 }
 
-cheatsheet <- function() {
-  "sccsno: SCCS. Cases ONLY. Conditioning on each person's event count cancels phi_i exactly, so every time-INVARIANT confounder -- measured or not -- is gone by construction. What does NOT cancel is anything varying WITHIN a person: age must be modelled with bands or it leaks into beta. Requires no event-dependent censoring and no event-dependent exposure; a pre-exposure window with RI far from 1 says the latter failed."
+morie_sccsno_cheatsheet <- function() {
+  paste0(
+    "sccsno: SCCS. Cases ONLY. Conditioning on each person's ",
+    "event count cancels phi_i exactly, so every ",
+    "time-INVARIANT confounder -- measured or not -- is gone ",
+    "by construction. What does NOT cancel is anything varying ",
+    "WITHIN a person: age must be modelled with bands or it ",
+    "leaks into beta. Requires no event-dependent censoring ",
+    "and no event-dependent exposure; a pre-exposure window ",
+    "with RI far from 1 says the latter failed."
+  )
 }
 
 # compact alias per ledger/NAMING.md
-sccsnoevent <- sccs_fit
+morie_sccsno_sccsnoevent <- morie_sccsno_fit
+morie_sccsno_sccs_no_replacement <- morie_sccsno_fit
 
-# public names resolved by fn/_lazy_map.json
-sccs_no_replacement <- sccs_fit
-
-# entry point
-morie_sccsno <- sccs_fit
+#' @export
+morie_sccsno <- morie_sccsno_fit
