@@ -314,50 +314,15 @@ morie_rna_velocity <- morie_dynamical_fit
 # baseline as a degenerate case.
 morie_scvelo <- morie_dynamical_fit
 
-#' @rdname morie_solve_kinetics
-#' @export
-morie_scvelo <- morie_solve_kinetics
 
-#' @rdname morie_solve_kinetics
-#' @export
-morie_scvelo <- morie_solve_kinetics
 
-#' @rdname morie_solve_kinetics
-#' @export
-morie_scvelo <- morie_solve_kinetics
 
-#' @rdname morie_solve_kinetics
-#' @export
-morie_scvelo <- morie_solve_kinetics
 
-#' @rdname morie_solve_kinetics
-#' @export
-morie_scvelo <- morie_solve_kinetics
 
-#' @rdname morie_solve_kinetics
-#' @export
-morie_scvelo <- morie_solve_kinetics
 
-#' @rdname morie_solve_kinetics
-#' @export
-morie_scvelo <- morie_solve_kinetics
 
-#' @rdname morie_solve_kinetics
-#' @export
-morie_scvelo <- morie_solve_kinetics
 
-#' @rdname morie_solve_kinetics
-#' @export
-morie_scvelo <- morie_solve_kinetics
 
-#' @rdname morie_solve_kinetics
-#' @export
-morie_scvelo <- morie_solve_kinetics
 
-#' @rdname morie_solve_kinetics
-#' @export
-morie_scvelo <- morie_solve_kinetics
 
-#' @rdname morie_solve_kinetics
-#' @export
-morie_scvelo <- morie_solve_kinetics
+

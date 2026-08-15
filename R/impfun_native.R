@@ -247,90 +247,25 @@ genotype_imputation <- copying_model
 # Main entry point for the impfun module (Li-Stephens copying model)
 morie_impfun <- copying_model
 
-#' @rdname merge_panels
-#' @export
-morie_impfun <- merge_panels
 
-#' @rdname merge_panels
-#' @export
-morie_impfun <- merge_panels
 
-#' @rdname merge_panels
-#' @export
-morie_impfun <- merge_panels
 
-#' @rdname merge_panels
-#' @export
-morie_impfun <- merge_panels
 
-#' @rdname merge_panels
-#' @export
-morie_impfun <- merge_panels
 
-#' @rdname merge_panels
-#' @export
-morie_impfun <- merge_panels
 
-#' @rdname merge_panels
-#' @export
-morie_impfun <- merge_panels
 
-#' @rdname merge_panels
-#' @export
-morie_impfun <- merge_panels
 
-#' @rdname merge_panels
-#' @export
-morie_impfun <- merge_panels
 
-#' @rdname merge_panels
-#' @export
-morie_impfun <- merge_panels
 
-#' @rdname merge_panels
-#' @export
-morie_impfun <- merge_panels
 
-#' @rdname merge_panels
-#' @export
-morie_impfun <- merge_panels
 
-#' @rdname merge_panels
-#' @export
-morie_impfun <- merge_panels
 
-#' @rdname merge_panels
-#' @export
-morie_impfun <- merge_panels
 
-#' @rdname merge_panels
-#' @export
-morie_impfun <- merge_panels
 
-#' @rdname merge_panels
-#' @export
-morie_impfun <- merge_panels
 
-#' @rdname merge_panels
-#' @export
-morie_impfun <- merge_panels
 
-#' @rdname merge_panels
-#' @export
-morie_impfun <- merge_panels
 
-#' @rdname merge_panels
-#' @export
-morie_impfun <- merge_panels
 
-#' @rdname merge_panels
-#' @export
-morie_impfun <- merge_panels
 
-#' @rdname merge_panels
-#' @export
-morie_impfun <- merge_panels
 
-#' @rdname merge_panels
-#' @export
-morie_impfun <- merge_panels
+
