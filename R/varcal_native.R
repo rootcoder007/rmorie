@@ -75,7 +75,17 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
   return(-10.0 * log10(p))
 }
 
+.varcal_chars <- function(x) {
+  if (is.character(x) && length(x) == 1L) strsplit(x, "")[[1]] else x
+}
+
+.varcal_norm_reads <- function(reads) {
+  lapply(reads, function(r) { r$seq <- .varcal_chars(r$seq); r })
+}
+
 varcal_pileup_column <- function(reads, position, reference) {
+  reads <- .varcal_norm_reads(reads)
+  reference <- .varcal_chars(reference)
   obs <- list()
   for (r in reads) {
     start <- as.integer(r$pos)
@@ -100,6 +110,8 @@ varcal_pileup_column <- function(reads, position, reference) {
 
 varcal_find_candidates <- function(reads, reference, min_alt_count = 2,
                                    min_alt_fraction = 0.05, min_bq = 10) {
+  reads <- .varcal_norm_reads(reads)
+  reference <- .varcal_chars(reference)
   if (min_alt_fraction < 0.0 || min_alt_fraction > 1.0) {
     stop("varcal: min_alt_fraction must lie in [0, 1]")
   }
@@ -150,6 +162,8 @@ varcal_find_candidates <- function(reads, reference, min_alt_count = 2,
 varcal_encode_pileup <- function(reads, reference, candidate, width = 21,
                                  height = 100,
                                  channels = "base_quality_strand") {
+  reads <- .varcal_norm_reads(reads)
+  reference <- .varcal_chars(reference)
   if (!(channels %in% varcal_CHANNEL_SETS)) {
     stop(sprintf("varcal: channels must be one of %s, got %s",
                  paste(varcal_CHANNEL_SETS, collapse = ", "),
@@ -265,6 +279,8 @@ varcal_genotype_posterior <- function(image, scorer = NULL, prior = NULL) {
 
 morie_varcal <- function(reads, reference, scorer = NULL, min_quality = 10.0,
                          ...) {
+  reads <- .varcal_norm_reads(reads)
+  reference <- .varcal_chars(reference)
   kw <- list(...)
   cands <- do.call(varcal_find_candidates,
                    c(list(reads = reads, reference = reference), kw))
