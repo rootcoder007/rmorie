@@ -72,14 +72,12 @@ bigram_topic_predictive <- function(N_ijk, N_jk, beta, m, prior = 1) {
   list(N_ijk = N_ijk, N_jk = N_jk, N_kd = N_kd, N_d = N_d)
 }
 
+# The Python arm draws from np.random.default_rng, i.e. SplitMix64 --
+# not an LCG at all. Making the LCG exact would still have left the two
+# arms on different generators, so this takes the bit-identical mirror
+# of default_rng that .ghc_rng already provides.
 .lcg_uniform <- function(seed, n) {
-  st <- as.integer(seed); if (st <= 0) st <- 1L
-  out <- numeric(n)
-  for (i in 1:n) {
-    st <- (1103515245L * st + 12345L) %% 2147483648L
-    out[i] <- st / 2147483648
-  }
-  out
+  .ghc_unif(.ghc_rng(as.numeric(seed)), n)
 }
 
 gibbs_bigram_topic <- function(docs, T, V, alpha = 0.5, beta = 0.5,
@@ -147,7 +145,7 @@ gibbs_bigram_topic <- function(docs, T, V, alpha = 0.5, beta = 0.5,
     if (it > as.integer(burn)) {
       kept <- kept + 1L
       for (d in seq_along(D)) {
-        for (t in 1:length(D[[d]])) {
+        for (t in seq_along(D[[d]])) {
           acc[[d]][t, z[[d]][t] + 1] <- acc[[d]][t, z[[d]][t] + 1] + 1
         }
       }

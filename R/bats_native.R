@@ -434,7 +434,7 @@ concentrated_loglik <- function(y, resid, omega) {
   out
 }
 
-.bounds <- function(spec) {
+.bats_bounds <- function(spec) {
   lo <- 0; hi <- 1
   if (spec$use_trend) {
     lo <- c(lo, 0); hi <- c(hi, 1)
@@ -476,7 +476,7 @@ concentrated_loglik <- function(y, resid, omega) {
 }
 
 .fit_spec <- function(y, spec, long_run_b = 0, maxiter = 2000) {
-  bds <- .bounds(spec)
+  bds <- .bats_bounds(spec)
   lo <- bds$lo; hi <- bds$hi
   clamp <- function(th) pmin(pmax(as.numeric(th), lo), hi)
 

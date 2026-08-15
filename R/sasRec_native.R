@@ -79,7 +79,7 @@ predict_next <- function(state, item_embeddings, top_k = 5, exclude = numeric(0)
   storage.mode(E) <- "double"
   ex <- as.integer(unlist(exclude))
   sc <- numeric(nrow(E))
-  for (i in 1:nrow(E)) sc[i] <- sum(s * E[i, ])
+  for (i in seq_len(nrow(E))) sc[i] <- sum(s * E[i, ])
   if (length(ex) > 0) sc[ex + 1L] <- NA
   ord <- order(-sc, na.last = TRUE)
   keep <- ord[!is.na(sc[ord])][1:min(top_k, length(ord))]

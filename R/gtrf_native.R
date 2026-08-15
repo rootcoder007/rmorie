@@ -120,7 +120,7 @@ random_sign_flip <- function(pe, rng) {
 #' @param edge_bias Optional list of edge biases keyed by (i, j).
 #' @return List with output, note.
 #' @export
-sparse_attention <- function(H, adj, WQ, WK, WV, edge_bias = NULL) {
+morie_gtrf_sparse_attention <- function(H, adj, WQ, WK, WV, edge_bias = NULL) {
   H <- as.matrix(H); storage.mode(H) <- "double"
   WQ <- as.matrix(WQ); WK <- as.matrix(WK); WV <- as.matrix(WV)
   storage.mode(WQ) <- "double"; storage.mode(WK) <- "double"
@@ -175,7 +175,7 @@ graph_transformer_layer <- function(H, adj, WQ, WK, WV, W1, W2,
     stop(paste0("gtrf: norm must be batch, layer or none, got '",
                 norm, "'"))
   H <- as.matrix(H); storage.mode(H) <- "double"
-  att <- sparse_attention(H, adj, WQ, WK, WV, edge_bias)$output
+  att <- morie_gtrf_sparse_attention(H, adj, WQ, WK, WV, edge_bias)$output
   res <- H + att
   res <- .gtrf_normalize(res, norm)
   W1 <- as.matrix(W1); W2 <- as.matrix(W2)

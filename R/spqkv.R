@@ -10,7 +10,7 @@
 #' @param seed Integer RNG seed (default 0).
 #' @return Named list with tensor (additive mask), boolean, density, method.
 #' @keywords internal
-sparse_attention <- function(x, window = 4L, stride = 8L,
+morie_spqkv_sparse_attention <- function(x, window = 4L, stride = 8L,
                              n_random = 0L, seed = 0L) {
   N <- if (length(x) == 1L && is.numeric(x)) {
     as.integer(x)

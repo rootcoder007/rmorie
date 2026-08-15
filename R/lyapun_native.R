@@ -41,7 +41,7 @@
   out
 }
 
-embed <- function(y, m, tau) {
+morie_lyapun_embed <- function(y, m, tau) {
   y <- .lyapun_as_series(y)
   m <- as.integer(m); tau <- as.integer(tau)
   if (m < 1L)
@@ -140,7 +140,7 @@ divergence_curve <- function(y, m = NULL, tau = NULL, dt = 1.0,
   if (is.null(m)) m <- 3L
   if (dt <= 0)
     stop("lyapun: the sampling period must be positive")
-  pts <- embed(y, m, tau)
+  pts <- morie_lyapun_embed(y, m, tau)
   n_pts <- length(pts)
   if (is.null(min_sep))
     min_sep <- as.integer(round(mean_period(y, dt)))
@@ -319,12 +319,12 @@ largest_lyapunov <- lyapunov_exponent
 
 morie_lyapun <- function(op, ...) {
   if (missing(op) || length(op) != 1L)
-    stop("lyapun: op must be one of lyapunov_exponent, embed, autocorrelation_lag, mean_period, divergence_curve, cheatsheet")
+    stop("lyapun: op must be one of lyapunov_exponent, morie_lyapun_embed, autocorrelation_lag, mean_period, divergence_curve, cheatsheet")
   op <- as.character(op)
   switch(op,
     "lyapunov_exponent" = lyapunov_exponent(...),
     "largest_lyapunov" = lyapunov_exponent(...),
-    "embed" = embed(...),
+    "morie_lyapun_embed" = morie_lyapun_embed(...),
     "autocorrelation_lag" = autocorrelation_lag(...),
     "mean_period" = mean_period(...),
     "divergence_curve" = divergence_curve(...),

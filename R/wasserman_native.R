@@ -1019,7 +1019,7 @@ morie_density <- function(G) {
   .morie_wsm_need(all(diag(A) == 0), "self-loops are not allowed (nonzero diagonal).")
   .morie_wsm_need(all(A %in% c(0, 1)), "the adjacency matrix must be binary.")
   edges <- sum(A) %/% 2
-  possible <- n * (n - 1) %/% 2
+  possible <- (n * (n - 1)) %/% 2
   list(estimate = edges / possible, n_edges = edges, n_possible = possible,
        n = n, method = "density |E| / C(n,2), undirected simple graph")
 }

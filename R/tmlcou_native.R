@@ -18,12 +18,12 @@
 
 .EPS <- 1e-12
 
-.logit <- function(p) {
+.tmlcou_logit <- function(p) {
   q <- min(max(as.numeric(p), 1e-9), 1 - 1e-9)
   log(q / (1 - q))
 }
 
-.expit <- function(x) if (x > -700) 1 / (1 + exp(-x)) else 0
+.tmlcou_expit <- function(x) if (x > -700) 1 / (1 + exp(-x)) else 0
 
 #' Map the outcome to [0,1] by an affine transform
 #'
@@ -127,7 +127,7 @@ morie_tmlcou <- function(y, D, X, offset = NULL, g = NULL,
     des <- cbind(1, W)
     bhat <- as.numeric(coef(glm(a ~ des - 1, family = binomial())))
     lp <- as.numeric(des %*% bhat)
-    gg <- pmin(pmax(.expit(lp), 0.01), 0.99)
+    gg <- pmin(pmax(.tmlcou_expit(lp), 0.01), 0.99)
   } else {
     gg <- pmin(pmax(as.numeric(g), 1e-6), 1 - 1e-6)
   }
@@ -145,10 +145,10 @@ morie_tmlcou <- function(y, D, X, offset = NULL, g = NULL,
   }
   H <- a / gg - (1 - a) / (1 - gg)
   qa <- ifelse(a == 1, q1, q0)
-  off <- vapply(qa, .logit, numeric(1))
+  off <- vapply(qa, .tmlcou_logit, numeric(1))
   e <- 0
   for (k in seq_len(as.integer(iters))) {
-    p <- .expit(off + e * H)
+    p <- .tmlcou_expit(off + e * H)
     gr <- sum(H * (ys - p))
     he <- sum(H * H * p * (1 - p))
     if (he < 1e-12) break
@@ -156,8 +156,8 @@ morie_tmlcou <- function(y, D, X, offset = NULL, g = NULL,
     e <- e + step
     if (abs(step) < 1e-12) break
   }
-  q1s <- .expit(.logit(q1) + e / gg)
-  q0s <- .expit(.logit(q0) - e / (1 - gg))
+  q1s <- .tmlcou_expit(.tmlcou_logit(q1) + e / gg)
+  q0s <- .tmlcou_expit(.tmlcou_logit(q0) - e / (1 - gg))
   psi_s <- sum(q1s - q0s) / n
   psi <- psi_s * sc$range
   d <- numeric(n)

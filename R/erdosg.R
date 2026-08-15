@@ -35,7 +35,7 @@ Erdosg <- function(n, p) {
   n <- as.integer(n); p <- as.numeric(p)
   if (n < 1L) stop("n must be positive")
   if (!(p >= 0 && p <= 1)) stop("p must lie in [0, 1]")
-  m <- n * (n - 1L) %/% 2L
+  m <- (n * (n - 1L)) %/% 2L
   adj <- matrix(0L, n, n)
   k <- 0L; edges <- 0L
   if (n > 1L) for (i in seq_len(n)) {

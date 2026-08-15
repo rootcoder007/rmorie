@@ -255,7 +255,7 @@ morie_psymet_bartlett <- function(data) {
   R <- cor(X)
   det_R <- max(det(R), 1e-15)
   chisq <- -(n - 1 - (2 * k + 5) / 6) * log(det_R)
-  df <- k * (k - 1) %/% 2
+  df <- (k * (k - 1)) %/% 2
   list(chisq = as.numeric(chisq), df = df,
        pval = as.numeric(pchisq(chisq, df, lower.tail = FALSE)))
 }

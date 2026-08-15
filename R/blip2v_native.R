@@ -22,10 +22,10 @@ qformer_attend <- function(queries, image_features, WQ, WK, WV) {
   proj <- function(W, x) as.numeric(W %*% x)
   out <- matrix(0, nrow(Q), ncol(WV))
   weights <- matrix(0, nrow(Q), nrow(F))
-  for (i in 1:nrow(Q)) {
+  for (i in seq_len(nrow(Q))) {
     qq <- proj(WQ, Q[i, ])
     sc <- numeric(nrow(F))
-    for (j in 1:nrow(F)) {
+    for (j in seq_len(nrow(F))) {
       kj <- proj(WK, F[j, ])
       sc[j] <- sum(qq * kj) / sqrt(dk)
     }
@@ -66,7 +66,7 @@ stage_one_objectives <- function(query_out, text_out, temperature = 0.07) {
     sum(a * b) / (na * nb)
   }
   sims <- numeric(nrow(Q))
-  for (i in 1:nrow(Q)) sims[i] <- cos_sim(Q[i, ], T_)
+  for (i in seq_len(nrow(Q))) sims[i] <- cos_sim(Q[i, ], T_)
   list(per_query_similarity = sims,
        image_text_similarity = max(sims),
        best_query = which.max(sims),

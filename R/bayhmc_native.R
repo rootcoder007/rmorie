@@ -84,7 +84,7 @@ morie_bayhmc <- function(logp, theta0, n_iter = 1000L, warmup = NULL,
   if (warm < 0L || warm > n_iter)
     stop("bayhmc: warmup must be between 0 and n_iter")
 
-  g <- if (!is.null(grad)) grad else function(t) .num_grad(logp, t)
+  g <- if (!is.null(grad)) grad else function(t) .bayhmc_num_grad(logp, t)
   e <- .ghc_rng(seed)
   norm_one <- function() .ghc_norm(e, 1L)
   unif_one <- function() .ghc_unif(e, 1L)
@@ -221,7 +221,7 @@ DELTA_MAX <- 1000.0
 
 # Central-difference numerical gradient, used when the caller does
 # not supply one. Same step h = 1e-5 as the Python arm.
-.num_grad <- function(logp, theta, h = 1e-5) {
+.bayhmc_num_grad <- function(logp, theta, h = 1e-5) {
   d <- length(theta)
   out <- numeric(d)
   for (i in seq_len(d)) {

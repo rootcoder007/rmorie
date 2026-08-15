@@ -23,12 +23,12 @@
 .TMLDYN_METHODS <- c("cv-tmle", "tmle", "ipw", "gcomp")
 .EPS <- 1e-9
 
-.logit <- function(p) {
+.tmldyn_logit <- function(p) {
   q <- min(max(as.numeric(p), .EPS), 1 - .EPS)
   log(q / (1 - q))
 }
 
-.expit <- function(z) {
+.tmldyn_expit <- function(z) {
   if (z > 700) 1 else if (z < -700) 0 else 1 / (1 + exp(-z))
 }
 
@@ -84,12 +84,12 @@ intervention_mechanism <- function(L0, A0, L1, A1, trim = 0.01,
     b0 <- as.numeric(suppressWarnings(
       coef(glm(A0 ~ ., data = data.frame(X0[, -1, drop = FALSE]),
                family = binomial()))))
-    p0 <- .expit(as.numeric(X0 %*% b0))
+    p0 <- .tmldyn_expit(as.numeric(X0 %*% b0))
     X1 <- cbind(1, A0, L0, L1)
     b1 <- as.numeric(suppressWarnings(
       coef(glm(A1 ~ ., data = data.frame(X1[, -1, drop = FALSE]),
                family = binomial()))))
-    p1 <- .expit(as.numeric(X1 %*% b1))
+    p1 <- .tmldyn_expit(as.numeric(X1 %*% b1))
   }
   t <- as.numeric(trim)
   if (!(t >= 0 && t < 0.5))
@@ -229,7 +229,7 @@ exceptional_law_share <- function(blips, tol = 0.01) {
   for (k in seq_len(as.integer(iters))) {
     num <- 0; den <- 0
     for (i in rows) {
-      p <- .expit(offset_logit[i] + e * H[i])
+      p <- .tmldyn_expit(offset_logit[i] + e * H[i])
       num <- num + H[i] * (outcome[i] - p)
       den <- den + H[i]^2 * p * (1 - p)
     }
@@ -241,7 +241,7 @@ exceptional_law_share <- function(blips, tol = 0.01) {
   e
 }
 
-.folds <- function(n, n_folds) {
+.tmldyn_folds <- function(n, n_folds) {
   J <- max(2L, min(as.integer(n_folds), n))
   lapply(seq_len(J) - 1L, function(j) which(seq_len(n) %% J == j))
 }
@@ -373,7 +373,7 @@ morie_tmldyn <- function(y, treatment_history, covariate_history,
     splits <- list(); rules <- list()
     d0 <- rep(0, n); d1 <- list(rep(0, n), rep(0, n))
     blip1 <- rep(0, n); blip2 <- list(rep(0, n), rep(0, n))
-    for (val in .folds(n, n_folds)) {
+    for (val in .tmldyn_folds(n, n_folds)) {
       train <- setdiff(seq_len(n), val)
       fit <- sequential_blips(ys, L0, A0, L1, A1, V0 = V0, V1 = V1,
                                ridge = ridge, idx = train)
@@ -425,12 +425,12 @@ morie_tmldyn <- function(y, treatment_history, covariate_history,
       psi_s <- mean(q1d); eic <- q1d - psi_s
       eps1 <- 0; eps2 <- 0
     } else {
-      off2 <- vapply(q2d, .logit, numeric(1))
+      off2 <- vapply(q2d, .tmldyn_logit, numeric(1))
       eps2 <- .fluctuate(ys, off2, H2, seq_len(n))
-      q2d <- .expit(off2 + eps2 * H2)
-      off1 <- vapply(q1d, .logit, numeric(1))
+      q2d <- .tmldyn_expit(off2 + eps2 * H2)
+      off1 <- vapply(q1d, .tmldyn_logit, numeric(1))
       eps1 <- .fluctuate(q2d, off1, H1, seq_len(n))
-      q1d <- .expit(off1 + eps1 * H1)
+      q1d <- .tmldyn_expit(off1 + eps1 * H1)
       psi_s <- mean(q1d)
       eic <- (q1d - psi_s) + H1 * (q2d - q1d) + H2 * (ys - q2d)
     }

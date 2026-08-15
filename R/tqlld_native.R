@@ -15,7 +15,7 @@
 
 .SOURCES <- c("gaussian", "empirical", "uniform")
 
-.phi <- function(x) exp(-0.5 * x * x) / sqrt(2 * pi)
+.tqlld_phi <- function(x) exp(-0.5 * x * x) / sqrt(2 * pi)
 
 .gaussian_cells <- function(bounds, lo, hi, n_grid) {
   edges <- c(lo, bounds, hi)
@@ -27,7 +27,7 @@
     h <- (b - a) / m
     for (i in seq_len(m)) {
       x <- a + (i - 0.5) * h
-      w <- .phi(x) * h
+      w <- .tqlld_phi(x) * h
       mass[k] <- mass[k] + w
       mom[k] <- mom[k] + x * w
     }
