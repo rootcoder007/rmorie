@@ -62,9 +62,9 @@
   }
   rows <- list()
   for (tau in grid) {
-    f <- morie_prphet_fit(t, y, n.changepoints = n_changepoints,
-                     changepoint.range = changepoint_range,
-                     changepoint.prior = tau,
+    f <- morie_prphet_fit(t, y, n_changepoints = n_changepoints,
+                     changepoint_range = changepoint_range,
+                     changepoint_prior = tau,
                      seasonalities = seasonalities, ...)
     d <- f[["deltas"]]
     # exactly zero, not "small": the L1 solution really does zero them,
@@ -72,7 +72,7 @@
     active <- sum(d != 0.0)
     rows[[length(rows) + 1L]] <- list(
       tau = tau, active = active,
-      rmse = sqrt(k$mean(f[["residual"]]^2)),
+      rmse = sqrt(mean(f[["residual"]]^2)),
       l1 = sum(abs(d)),
       deltas = d
     )
@@ -84,9 +84,9 @@
                                         n_changepoints = 15,
                                         changepoint_range = 0.8,
                                         seasonalities = NULL, ...) {
-  f <- morie_prphet_fit(t, y, n.changepoints = n_changepoints,
-                   changepoint.range = changepoint_range,
-                   changepoint.prior = tau, seasonalities = seasonalities,
+  f <- morie_prphet_fit(t, y, n_changepoints = n_changepoints,
+                   changepoint_range = changepoint_range,
+                   changepoint_prior = tau, seasonalities = seasonalities,
                    ...)
   d <- f[["deltas"]]
   cps <- f[["changepoints"]]
@@ -104,7 +104,7 @@
     tau = as.numeric(tau), fit = f,
     last_candidate_fraction = last_candidate_fraction,
     changepoint_range = as.numeric(changepoint_range),
-    rmse = sqrt(k$mean(f[["residual"]]^2)),
+    rmse = sqrt(mean(f[["residual"]]^2)),
     method = "automatic changepoint selection under a Laplace prior, Taylor & Letham (2018) Sec. 3.1.3"
   )
 }
@@ -159,9 +159,9 @@
   lo <- hi <- med <- numeric(H)
   for (h in seq_len(H)) {
     col <- sort(vapply(sims, function(s) s[h], numeric(1)))
-    lo[h] <- k$quantile7(col, lo_q)
-    hi[h] <- k$quantile7(col, hi_q)
-    med[h] <- k$quantile7(col, 0.5)
+    lo[h] <- .s03quantile7(col, lo_q)
+    hi[h] <- .s03quantile7(col, hi_q)
+    med[h] <- .s03quantile7(col, 0.5)
   }
   list(
     estimate = med, median = med, lower = lo, upper = hi,
