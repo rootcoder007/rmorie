@@ -91,7 +91,7 @@ morie_mdpval <- function(P, R, gamma, tol = 1e-10, max_iter = 100000,
   }
   list(estimate = V, policy = pol, q = Q, n_iter = it, delta = delta,
        converged = delta < tol,
-       method = "MDP value iteration (Sutton & Barto 2018, Sec. 4.4)")
+       method = "Value iteration (Bellman optimality sweeps) for a finite MDP")
 }
 
 #' Howard policy iteration for a finite Markov decision process
@@ -117,48 +117,3 @@ morie_mdpval <- function(P, R, gamma, tol = 1e-10, max_iter = 100000,
 #'   Learning: An Introduction, 2nd ed. MIT Press, Section 4.3.
 #'   Howard, R. A. (1960). Dynamic Programming and Markov Processes.
 #' @export
-morie_mdppol <- function(P, R, gamma, tol = 1e-12, max_eval = 100000,
-                         max_improve = 1000, pi0 = NULL) {
-  z <- .mdp_args(P, R); Pm <- z$Pm; R <- z$R; S <- z$S; A <- z$A
-  gamma <- as.numeric(gamma); tol <- as.numeric(tol)
-  pol <- rep(0L, S)
-  if (!is.null(pi0)) {
-    p0 <- as.integer(pi0)
-    for (s in seq_len(S)) {
-      if (p0[s] < 0 || p0[s] >= A) stop(sprintf("pi0[%d] out of range", s))
-      pol[s] <- p0[s]
-    }
-  }
-  V <- rep(0, S); n_eval <- 0L; stable <- FALSE; rounds <- 0L
-  for (rounds in seq_len(as.integer(max_improve))) {
-    for (k in seq_len(as.integer(max_eval))) {
-      n_eval <- n_eval + 1L
-      delta <- 0
-      for (s in seq_len(S)) {
-        v <- V[s]
-        a <- pol[s] + 1L
-        Vs <- R[s, a] + gamma * sum(Pm[[a]][s, ] * V)
-        V[s] <- Vs
-        d <- abs(v - Vs)
-        if (d > delta) delta <- d
-      }
-      if (delta < tol) break
-    }
-    stable <- TRUE
-    for (s in seq_len(S)) {
-      old <- pol[s] + 1L
-      qs <- vapply(seq_len(A), function(a)
-        R[s, a] + gamma * sum(Pm[[a]][s, ] * V), numeric(1))
-      b <- 1L
-      for (a in seq_len(A)) if (a > 1L && qs[a] > qs[b]) b <- a
-      if (qs[b] > qs[old] + 1e-12) { pol[s] <- b - 1L; stable <- FALSE }
-    }
-    if (stable) break
-  }
-  Q <- matrix(0, S, A)
-  for (s in seq_len(S)) for (a in seq_len(A))
-    Q[s, a] <- R[s, a] + gamma * sum(Pm[[a]][s, ] * V)
-  list(estimate = V, policy = as.numeric(pol), q = Q,
-       n_improve = rounds, n_eval = n_eval, policy_stable = stable,
-       method = "MDP policy iteration (Sutton & Barto 2018, Sec. 4.3)")
-}
