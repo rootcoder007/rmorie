@@ -98,11 +98,11 @@
   lse    <- mx + log(sum(exp(M - mx)) / length(M))
   mean_m <- mean(M)
   var    <- sum((M - mean_m)^2) / max(length(M) - 1L, 1L)
-  list(estimate         = mean(J) - lse,
-       log_sum_exp      = lse,
+  list(estimate          = mean(J) - lse,
+       log_sum_exp       = lse,
        negative_variance = var,
-       bounded          = FALSE,
-       note             = "unbounded above; large scores dominate the "
+       bounded           = FALSE,
+       note              = "unbounded above; large scores dominate the "
                           "log-mean-exp")
 }
 
@@ -137,19 +137,18 @@
   est  <- if (identical(estimator, "jsd")) .infmax_jsd_estimator
           else                            .infmax_dv_estimator
   r    <- est(joint, marg)
-  list(objective   = r$estimate,
-       estimator   = estimator,
-       n_positive  = length(joint),
-       n_negative  = length(marg),
-       note        = "one score per image; the spatial structure is "
-                     "discarded")
+  list(objective  = r$estimate,
+       estimator  = estimator,
+       n_positive = length(joint),
+       n_negative = length(marg),
+       note       = "one score per image; the spatial structure is "
+                    "discarded")
 }
 
 .infmax_local_objective <- function(global_features, feature_maps, critic,
                                     estimator = "jsd") {
   # MI between the global vector and EACH LOCAL patch, averaged.
-  G <- lapply(global_features,
-              function(r) as.numeric(unlist(r)))
+  G <- lapply(global_features, function(r) as.numeric(unlist(r)))
   M <- lapply(feature_maps,
               function(m) lapply(m, function(p) as.numeric(unlist(p))))
   n <- length(G)
@@ -160,29 +159,30 @@
     stop("infmax: at least 2 examples are needed for negatives")
   }
   L <- length(M[[1]])
-  for (mm in seq_along(M)) {
-    if (length(M[[mm]]) != L) {
-      stop("infmax: the feature maps have differing numbers of locations")
+  for (m in M) {
+    if (length(m) != L) {
+      stop("infmax: the feature maps have differing "
+           "numbers of locations")
     }
   }
   joint <- numeric(n * L)
-  marg  <- numeric(n * L * (n - 1L))
-  ji <- 0L
-  mi <- 0L
+  marg  <- numeric(n * (n - 1L) * L)
+  k_joint <- 0L
+  k_marg  <- 0L
   for (i in seq_len(n)) {
     for (l in seq_len(L)) {
-      ji <- ji + 1L
-      joint[ji] <- as.numeric(critic(G[[i]], M[[i]][[l]]))
+      k_joint <- k_joint + 1L
+      joint[k_joint] <- as.numeric(critic(G[[i]], M[[i]][[l]]))
       for (j in seq_len(n)) {
         if (j != i) {
-          mi <- mi + 1L
-          marg[mi] <- as.numeric(critic(G[[i]], M[[j]][[l]]))
+          k_marg <- k_marg + 1L
+          marg[k_marg] <- as.numeric(critic(G[[i]], M[[j]][[l]]))
         }
       }
     }
   }
-  joint <- joint[seq_len(ji)]
-  marg  <- marg[seq_len(mi)]
+  joint <- joint[seq_len(k_joint)]
+  marg  <- marg[seq_len(k_marg)]
   est   <- if (identical(estimator, "jsd")) .infmax_jsd_estimator
            else                            .infmax_dv_estimator
   r     <- est(joint, marg)
@@ -198,21 +198,25 @@
 }
 
 .infmax_cheatsheet <- function() {
-  paste0("infmax: maximising MI between input and representation is "
-         "a bad objective alone -- MI is invariant to invertible "
-         "maps, so memorising noise scores as well as capturing "
-         "content. Measure it LOCALLY instead: between the global "
-         "summary and each patch of the feature map, so a feature "
-         "must pay off at many locations. Use the JENSEN-SHANNON "
-         "estimator, -sp(-T) minus sp(T), which is BOUNDED, rather "
-         "than Donsker-Varadhan, whose expectation sits inside a "
-         "log and whose variance explodes. Unlike CPC there is ONE "
-         "global feature, ONE estimator, and no autoregression.")
+  paste("infmax: maximising MI between input and representation is "
+        "a bad objective alone -- MI is invariant to invertible "
+        "maps, so memorising noise scores as well as capturing "
+        "content. Measure it LOCALLY instead: between the global "
+        "summary and each patch of the feature map, so a feature "
+        "must pay off at many locations. Use the JENSEN-SHANNON "
+        "estimator, -sp(-T) minus sp(T), which is BOUNDED, rather "
+        "than Donsker-Varadhan, whose expectation sits inside a "
+        "log and whose variance explodes. Unlike CPC there is ONE "
+        "global feature, ONE estimator, and no autoregression.")
 }
 
-# compact aliases per ledger/NAMING.md
-.infmax_deepinfomax       <- .infmax_local_objective
-.infmax_infomax_objective <- .infmax_local_objective
+# Main entry point: the Deep InfoMax local objective, matching the
+# Python module's compact aliases (deepinfomax, infomax_objective).
+morie_infmax <- function(global_features, feature_maps, critic,
+                         estimator = "jsd") {
+  .infmax_local_objective(global_features, feature_maps, critic, estimator)
+}
 
-# entry point
-morie_infmax <- .infmax_local_objective
+# Public alias names that mirror the Python module's exports.
+deepinfomax       <- morie_infmax
+infomax_objective <- morie_infmax

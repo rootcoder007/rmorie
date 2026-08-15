@@ -270,3 +270,7 @@ morie_phmmsr <- phmmsr_msv_score
 #' @rdname phmmsr_msv_score
 #' @export
 morie_phmmsr <- phmmsr_msv_score
+
+#' @rdname phmmsr_msv_score
+#' @export
+morie_phmmsr <- phmmsr_msv_score

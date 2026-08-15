@@ -1,4 +1,3 @@
-```r
 # morie.fn -- function file (rootcoder007/morie)
 # GloVe -- global vectors for word representation.
 #
@@ -65,7 +64,7 @@
       parts <- parts[nzchar(parts)]
       docs[[length(docs) + 1L]] <- parts
     } else {
-      # A vector or list of tokens: each element is a token.
+      # A vector or list of tokens.
       docs[[length(docs) + 1L]] <- as.character(item)
     }
   }
@@ -75,49 +74,224 @@
   docs
 }
 
-# Private helper: build the co-occurrence table as a sorted data frame
-# with columns i, j, count.  R is 1-based, so all indices are 1-based.
-.glove_cooccurrence_df <- function(corpus, window, harmonic, min_count) {
+
+# Eq. (9): the GloVe weighting function. f(0) = 0, non-decreasing,
+# capped at 1.
+glove_weight <- function(x, x_max = 100.0, alpha = 0.75) {
+  x <- as.numeric(x)
+  x_max <- as.numeric(x_max)
+  alpha <- as.numeric(alpha)
+  if (x <= 0.0) {
+    return(0.0)
+  }
+  if (x >= x_max) {
+    return(1.0)
+  }
+  (x / x_max) ^ alpha
+}
+
+
+# Word-word co-occurrence counts over a symmetric context window.
+# Sec. 4.2: a token d positions away contributes 1/d to the count
+# when harmonic = TRUE.
+cooccurrence <- function(corpus, window = 10, harmonic = TRUE, min_count = 1) {
   docs <- .glove_as_docs(corpus)
-  # Count token frequencies across the whole corpus.
   all_tokens <- unlist(docs, use.names = FALSE)
+  if (length(all_tokens) == 0L) {
+    stop("glove: the corpus has no tokens")
+  }
   token_counts <- table(all_tokens)
-  # Vocab: tokens with count >= min_count, sorted.
   vocab <- sort(names(token_counts)[token_counts >= as.integer(min_count)])
-  # Index: token -> 1-based position in vocab.
+  # 1-based index: token -> row position in W and Wt.
   index_vec <- setNames(seq_along(vocab), vocab)
-  # Compute co-occurrences within the (symmetric) context window.
   w <- as.integer(window)
   if (w < 1L) {
     stop(sprintf("cooccurrence: window must be at least 1, got %r", window))
   }
-  pair_list <- list()
+  # Collect (i, j, increment) triples.
+  triple_list <- list()
   for (doc in docs) {
     if (length(doc) == 0L) next
     ids <- as.integer(index_vec[doc])
+    ids <- ids[!is.na(ids)]
     n_ids <- length(ids)
     for (pos in seq_len(n_ids)) {
-      lo <- max(1L, as.integer(pos) - w)
+      lo <- max(1L, pos - w)
       # Guard: 1:0 in R is c(1, 0), so the loop must be skipped when empty.
       if (lo >= pos) next
+      i_ <- ids[pos]
       for (other in lo:(pos - 1L)) {
-        j <- ids[other]
+        j_ <- ids[other]
         d_ <- pos - other
-        inc <- if (isTRUE(harmonic)) 1.0 / as.numeric(d_) else 1.0
-        i_ <- ids[pos]
-        # Symmetric pair: (i, j) and (j, i) both get the same increment.
-        pair_list[[length(pair_list) + 1L]] <- c(i_ = i_, j_ = j, inc = inc)
-        pair_list[[length(pair_list) + 1L]] <- c(i_ = j, j_ = i_, inc = inc)
+        inc <- if (isTRUE(harmonic)) 1.0 / d_ else 1.0
+        triple_list[[length(triple_list) + 1L]] <- c(i_, j_, inc)
+        triple_list[[length(triple_list) + 1L]] <- c(j_, i_, inc)
       }
     }
   }
-  if (length(pair_list) == 0L) {
+  if (length(triple_list) == 0L) {
     Xdf <- data.frame(i = integer(0), j = integer(0), count = numeric(0))
   } else {
-    M <- do.call(rbind, pair_list)
-    df <- as.data.frame(M)
-    colnames(df) <- c("i", "j", "inc")
-    # Aggregate duplicate (i, j) pairs by summing the increments.
+    M <- do.call(rbind, triple_list)
+    df <- data.frame(i = M[, 1L], j = M[, 2L], inc = M[, 3L])
     Xdf <- aggregate(inc ~ i + j, data = df, FUN = sum)
     colnames(Xdf) <- c("i", "j", "count")
-    # Sort by (i, j) to match Python
+    # Sort by (i, j) to match Python's sorted(X.items()).
+    Xdf <- Xdf[order(Xdf$i, Xdf$j), , drop = FALSE]
+    rownames(Xdf) <- NULL
+  }
+  list(X = Xdf, vocab = as.character(vocab), index = index_vec)
+}
+
+
+# Eq. (8), evaluated over the nonzero entries only.
+glove_loss <- function(X, W, Wt, b, bt, x_max = 100.0, alpha = 0.75) {
+  total <- 0.0
+  n <- nrow(X)
+  if (n == 0L) return(0.0)
+  for (k in seq_len(n)) {
+    i <- X$i[k]
+    j <- X$j[k]
+    x <- X$count[k]
+    if (x <= 0.0) next
+    pred <- sum(W[i, ] * Wt[j, ]) + b[i] + bt[j]
+    diff <- pred - log(x)
+    fw <- glove_weight(x, x_max, alpha)
+    total <- total + fw * diff * diff
+  }
+  total
+}
+
+
+# Fit GloVe vectors.
+morie_glove <- function(corpus, dim = 50, window = 10, epochs = 25, lr = 0.05,
+                        x_max = 100.0, alpha = 0.75, harmonic = TRUE,
+                        min_count = 1, seed = 0, combine = "sum") {
+  if (!combine %in% c("sum", "w", "wtilde", "concat")) {
+    stop(sprintf("glove: combine must be 'sum', 'w', 'wtilde' or 'concat', got %r",
+                 combine))
+  }
+  d <- as.integer(dim)
+  if (d < 1L) {
+    stop(sprintf("glove: dim must be at least 1, got %r", dim))
+  }
+  cooc <- cooccurrence(corpus, window = window, harmonic = harmonic,
+                       min_count = min_count)
+  X <- cooc$X
+  vocab <- cooc$vocab
+  index_vec <- cooc$index
+  V <- length(vocab)
+  if (V < 2L) {
+    stop(sprintf(paste0("glove: the corpus has %d word(s) above min_count=%r; ",
+                        "GloVe factorises a co-occurrence matrix and needs ",
+                        "at least two"), V, min_count))
+  }
+  if (nrow(X) == 0L) {
+    stop("glove: no co-occurrences within the window, so eq. (8) has no terms")
+  }
+
+  # Initialise parameters with the same RNG sequence as the Python
+  # np.random.default_rng(seed): W row by row, then Wt row by row,
+  # then b, then bt.
+  rng <- .ghc_rng(as.integer(seed))
+  scale <- 0.5 / d
+  uW <- .ghc_unif(rng, V * d)
+  uWt <- .ghc_unif(rng, V * d)
+  ub <- .ghc_unif(rng, V)
+  ubt <- .ghc_unif(rng, V)
+  W <- matrix((uW - 0.5) * scale, nrow = V, ncol = d, byrow = TRUE)
+  Wt <- matrix((uWt - 0.5) * scale, nrow = V, ncol = d, byrow = TRUE)
+  b <- (ub - 0.5) * scale
+  bt <- (ubt - 0.5) * scale
+
+  # AdaGrad accumulators, initialised to 1 as in the reference code.
+  gW <- matrix(1.0, nrow = V, ncol = d)
+  gWt <- matrix(1.0, nrow = V, ncol = d)
+  gb <- rep(1.0, V)
+  gbt <- rep(1.0, V)
+
+  # Sort entries by (i, j) to match Python's sorted(X.items()).
+  entries <- X[order(X$i, X$j), , drop = FALSE]
+
+  history <- numeric(0)   # eq. (8) at the end of each epoch
+  running <- numeric(0)   # the SGD running total
+  eta <- as.numeric(lr)
+
+  for (epoch in seq_len(as.integer(epochs))) {
+    total <- 0.0
+    n <- nrow(entries)
+    for (k in seq_len(n)) {
+      i <- entries$i[k]
+      j <- entries$j[k]
+      x <- entries$count[k]
+      if (x <= 0.0) next
+      wi <- W[i, ]
+      wj <- Wt[j, ]
+      pred <- sum(wi * wj) + b[i] + bt[j]
+      diff <- pred - log(x)
+      fw <- glove_weight(x, x_max, alpha)
+      total <- total + fw * diff * diff
+      g <- 2.0 * fw * diff
+      gi <- g * wj
+      gj <- g * wi
+      W[i, ]  <- W[i, ]  - eta * gi / sqrt(gW[i, ])
+      Wt[j, ] <- Wt[j, ] - eta * gj / sqrt(gWt[j, ])
+      gW[i, ]  <- gW[i, ]  + gi * gi
+      gWt[j, ] <- gWt[j, ] + gj * gj
+      b[i]  <- b[i]  - eta * g / sqrt(gb[i])
+      bt[j] <- bt[j] - eta * g / sqrt(gbt[j])
+      gb[i]  <- gb[i]  + g * g
+      gbt[j] <- gbt[j] + g * g
+    }
+    running <- c(running, total)
+    # eq. (8) evaluated at the parameters this epoch ended with,
+    # rather than the running sum accumulated while they moved.
+    history <- c(history, glove_loss(X, W, Wt, b, bt, x_max, alpha))
+  }
+
+  if (combine == "sum") {
+    vecs_mat <- W + Wt
+  } else if (combine == "w") {
+    vecs_mat <- W
+  } else if (combine == "wtilde") {
+    vecs_mat <- Wt
+  } else {
+    vecs_mat <- cbind(W, Wt)
+  }
+
+  # Mirror the Python list-of-lists shape for estimate / vectors.
+  vecs_list <- lapply(seq_len(V), function(i) as.numeric(vecs_mat[i, ]))
+
+  list(
+    estimate = vecs_list,
+    vectors = vecs_list,
+    vocab = vocab,
+    index = index_vec,
+    W = W,
+    W_tilde = Wt,
+    b = b,
+    b_tilde = bt,
+    cooccurrence = X,
+    loss_history = history,
+    running_loss = running,
+    final_loss = if (length(history) > 0L) history[length(history)] else NaN,
+    n_vocab = V,
+    n_pairs = nrow(entries),
+    dim = d,
+    window = as.integer(window),
+    harmonic = as.logical(harmonic),
+    x_max = as.numeric(x_max),
+    alpha = as.numeric(alpha),
+    combine = combine,
+    method = paste0("GloVe weighted least squares on log co-occurrence, ",
+                    "Pennington, Socher & Manning (2014) eqs. (8)-(9)")
+  )
+}
+
+
+cheatsheet <- function() {
+  paste0("glove: J = sum f(X_ij)(w_i.wt_j + b_i + bt_j - log X_ij)^2 ",
+         "with f(x) = (x/xmax)^alpha capped at 1, xmax=100, ",
+         "alpha=3/4 (Pennington-Socher-Manning 2014 eqs.8-9). ",
+         "Harmonic 1/d context window; AdaGrad; final vector w + wt.")
+}
