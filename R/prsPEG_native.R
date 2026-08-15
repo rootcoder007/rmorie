@@ -7,7 +7,7 @@
 # prioritised choice, same greedy *, + and ?, same & and ! lookahead,
 # same plain and packrat (memoised) recognisers.
 
-.EPS <- 1e-12
+.prsPEG_EPS <- 1e-12
 FAIL <- NA_integer_
 
 .probe <- function(text, pos, ctx, fn) {

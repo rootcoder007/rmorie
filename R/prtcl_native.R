@@ -9,7 +9,7 @@
 # morie.fn.prtcl: same Algorithm 1 / Algorithm 2 with the same ESS rule
 # and the same downward bias in log mean weight.
 
-.EPS <- 1e-300
+.prtcl_EPS <- 1e-300
 
 morie_prtcl_effective_sample_size <- function(weights) {
   s1 <- sum(weights); s2 <- sum(weights^2)

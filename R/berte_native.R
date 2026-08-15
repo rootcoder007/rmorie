@@ -2,8 +2,8 @@
 # Devlin et al. (2019); Vaswani et al. (2017); Ba et al. (2016); Hendrycks & Gimpel.
 # Base R only.
 
-.EPS <- 1e-12
-.NEG <- -1e9
+.berte_EPS <- 1e-12
+.berte_NEG <- -1e9
 
 gelu <- function(x) {
   # GELU exact using erf; avoid pnorm dependency for portability
@@ -64,11 +64,11 @@ attention_weights <- function(Q, K, n_heads, pad_mask = NULL, causal = FALSE) {
     scores <- scale * (Qh %*% t(Kh))
     if (!is.null(pad_mask)) {
       bad <- !pad_mask
-      scores[, bad] <- .NEG
+      scores[, bad] <- .berte_NEG
     }
     if (causal) {
       # j > i forbidden: rows are queries (i), columns are keys (j)
-      scores[upper.tri(scores)] <- .NEG
+      scores[upper.tri(scores)] <- .berte_NEG
     }
     mx <- apply(scores, 1, max)
     e <- exp(scores - mx)

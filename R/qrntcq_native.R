@@ -10,7 +10,7 @@
 # generation-time density, same integral-as-prevention, same ceiling,
 # same utility ratio cancellation.
 
-.EPS <- 1e-12
+.qrntcq_EPS <- 1e-12
 
 morie_qrntcq_gamma_generation_time <- function(shape = 2.83, scale = 1.86,
                                               grid = NULL, t.max = 30,
@@ -28,7 +28,7 @@ morie_qrntcq_gamma_generation_time <- function(shape = 2.83, scale = 1.86,
   }
   z <- 0.5 * sum((head(dens, -1) + tail(dens, -1)) *
                  diff(ts))
-  if (z <= .EPS)
+  if (z <= .qrntcq_EPS)
     stop("qrntcq: the generation-time density integrates to zero")
   list(t = ts, density = dens / z)
 }
@@ -61,7 +61,7 @@ morie_qrntcq_quarantine_efficacy <- function(t.Q, t.R,
     stop(paste0("qrntcq: quarantine cannot start before exposure (t_Q ",
                 q, " < t_E ", t.E, ")"))
   remaining <- .mass(ts, ys, q, ts[length(ts)])
-  if (remaining <= .EPS)
+  if (remaining <= .qrntcq_EPS)
     return(list(efficacy = 0, remaining.mass = remaining,
                 prevented.mass = 0,
                 note = "no transmission remains after t_Q, so quarantine can prevent nothing"))
@@ -125,7 +125,7 @@ morie_qrntcq_optimal_duration <- function(t.Q = 3, generation.time = NULL,
     morie_qrntcq_gamma_generation_time() else generation.time
   best <- NULL; curve <- list()
   t <- t.Q + step
-  while (t <= t.max + .EPS) {
+  while (t <= t.max + .qrntcq_EPS) {
     e <- morie_qrntcq_quarantine_efficacy(t.Q, t, g)$efficacy
     u <- e / (t - t.Q)
     curve[[length(curve) + 1L]] <- list(t.R = t, efficacy = e, utility = u)

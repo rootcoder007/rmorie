@@ -59,7 +59,7 @@
 # Estimation", ICML 2018, PMLR 80, 531-540, arXiv:1801.04062. The
 # Donsker-Varadhan estimator being replaced.
 
-.EPS <- 1e-12
+.infmax_EPS <- 1e-12
 
 .infmax_softplus <- function(z) {
   # sp(z) = log(1 + exp(z)), branch-stable so neither branch overflows.

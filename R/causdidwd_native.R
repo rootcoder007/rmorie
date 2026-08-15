@@ -26,7 +26,7 @@
 # reference cell dropped from each set), same ridged least squares
 # via .s03lstsq, same payload keys.
 
-.EPS <- 1e-12
+.causdidwd_EPS <- 1e-12
 
 .causdidwd_panel <- function(Y, unit, period) {
   yv <- as.numeric(unlist(Y, use.names = FALSE))
@@ -404,7 +404,7 @@ morie_aggregate <- function(result, scheme = "simple", weights = NULL) {
       w <- weights
     }
     tot <- sum(w)
-    if (abs(tot) <= .EPS)
+    if (abs(tot) <= .causdidwd_EPS)
       stop("causdidwd: the weights sum to zero")
     est <- sum(att * w) / tot
     return(list(estimate = est, weights = w, scheme = "simple"))
@@ -425,7 +425,7 @@ morie_aggregate <- function(result, scheme = "simple", weights = NULL) {
   list(profile = prof, scheme = scheme, estimate = est)
 }
 
-morie_cheatsheet <- function() {
+.causdidwd_morie_cheatsheet <- function() {
   paste("causdidwd: ETWFE. TWFE == two-way MUNDLAK -- pooled OLS ",
         "with unit-specific time averages AND period-specific ",
         "cross-sectional averages gives the identical ",

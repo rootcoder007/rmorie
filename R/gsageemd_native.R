@@ -24,7 +24,7 @@
 #' @param W Optional weight matrix for max_pool.
 #' @return Permutation-invariant summary vector.
 #' @export
-aggregate <- function(vectors, how = "mean", W = NULL) {
+morie_gsageemd_aggregate <- function(vectors, how = "mean", W = NULL) {
   if (!(how %in% .GSAGEEMD_AGGS))
     stop(paste0("gsageemd: aggregator must be one of ",
                 paste(.GSAGEEMD_AGGS, collapse = ", "),
@@ -105,7 +105,7 @@ sage_layer <- function(H, adj, W, how = "mean", sizes = NULL,
     }
     if (length(nk) == 0L)
       stop(paste0("gsageemd: node ", v, " has no neighbours"))
-    agg <- aggregate(H[nk + 1L, , drop = FALSE], how)
+    agg <- morie_gsageemd_aggregate(H[nk + 1L, , drop = FALSE], how)
     cat <- c(as.numeric(H[v + 1L, ]), agg)
     if (ncol(W) != length(cat))
       stop(paste0("gsageemd: W expects ", ncol(W),

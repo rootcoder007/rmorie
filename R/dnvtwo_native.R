@@ -280,7 +280,7 @@ self_distillation_loss <- function(student, teacher, temperature_s = 0.1,
 #'
 #' @return Character string.
 #' @export
-cheatsheet <- function() {
+.dnvtwo_cheatsheet <- function() {
   paste0("dnvtwo: self-supervision lost feature quality when scaled ",
          "to UNCURATED data -- the cause is data quality and ",
          "diversity, not the objective. So CURATE automatically: ",
@@ -312,7 +312,7 @@ morie_dnvtwo <- list(
   self_distillation_loss = self_distillation_loss,
   dinov2 = self_distillation_loss,
   dinov2_repr = self_distillation_loss,
-  cheatsheet = cheatsheet
+  cheatsheet = .dnvtwo_cheatsheet
 )
 
 

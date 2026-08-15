@@ -54,8 +54,8 @@
 
 # Base R has no erf/erfc; both are pnorm in disguise. Defined here so
 # the arm stays base-R only, as the package requires.
-.erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
-.erfc <- function(x) 2 * pnorm(-x * sqrt(2))
+.survvae_erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
+.survvae_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
 
 .GHC_SURVVAE_PRIMITIVES <- c("weibull", "lognormal")
 .GHC_SURVVAE_FLOOR <- 1e-300

@@ -17,7 +17,7 @@
 # noise-variance added to the influence-curve variance, the same
 # basic composition, the same validation messages.
 
-.EPS <- 1e-12
+.tmldyk_EPS <- 1e-12
 
 #' One draw from Lap(0, b) by inverse transform
 #'

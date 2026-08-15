@@ -60,7 +60,7 @@
 # doi:10.1214/14-STS501.
 # """
 
-.EPS <- 1e-12
+.tlnetlg_EPS <- 1e-12
 
 # Private helpers (prefixed with .tlnetlg_ to avoid name collisions)
 .tlnetlg_vec <- function(x) {
@@ -202,7 +202,7 @@ morie_tlnetlg_network_variance <- function(ic, friends) {
   se <- sqrt(max(total, 0.0))
   se_naive <- sqrt(naive)
 
-  ratio <- if (naive > .EPS) sqrt(max(total, 0.0) / naive) else NaN
+  ratio <- if (naive > .tlnetlg_EPS) sqrt(max(total, 0.0) / naive) else NaN
 
   list(
     se = se,

@@ -59,7 +59,7 @@
 # for YouTube Recommendations", *RecSys 2016*, 191-198,
 # doi:10.1145/2959100.2959190. The retrieval setting.
 
-.EPS <- 1e-12
+.twoT_EPS <- 1e-12
 
 .twoT_as_vec <- function(v) {
   if (is.null(v)) return(numeric(0))
@@ -95,7 +95,7 @@ morie_twoT_tower_embedding <- function(features, W, b = NULL, normalise = TRUE) 
     return(list(embedding = z, normalised = FALSE))
   }
   n <- sqrt(sum(z * z))
-  if (n <= .EPS) {
+  if (n <= .twoT_EPS) {
     stop("twoT: the tower produced a zero embedding")
   }
   list(embedding = z / n, norm = n, normalised = TRUE)
@@ -156,7 +156,7 @@ morie_twoT_streaming_frequency <- function(hits, n_steps, alpha = 0.05,
   prob <- list()
   for (jk in names(B)) {
     v <- B[[jk]]
-    prob[[jk]] <- 1.0 / max(v, .EPS)
+    prob[[jk]] <- 1.0 / max(v, .twoT_EPS)
   }
   list(B = B, probability = prob, n_items = length(B),
        note = paste("B is the average number of steps between hits,",

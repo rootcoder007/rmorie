@@ -66,7 +66,7 @@
 # Dirichlet prior that removes the per-document parameter growth;
 # implemented in lda.
 
-.EPS <- 1e-300
+.plsa_EPS <- 1e-300
 
 .plsa_check <- function(n_dw) {
   if (is.list(n_dw) && !is.data.frame(n_dw) && !is.matrix(n_dw)) {
@@ -93,7 +93,7 @@
       if (N[d, w] <= 0) next
       num <- Pz * Pd_z[, d] * Pw_z[, w]
       s <- sum(num)
-      if (s <= .EPS) {
+      if (s <= .plsa_EPS) {
         post[d, w, ] <- rep(1.0 / K, K)
       } else {
         post[d, w, ] <- num / s
@@ -109,9 +109,9 @@
   D <- chk$D
   V <- chk$V
   K <- as.integer(K)
-  Pw_z <- matrix(.EPS, nrow = K, ncol = V)
-  Pd_z <- matrix(.EPS, nrow = K, ncol = D)
-  Pz <- rep(.EPS, K)
+  Pw_z <- matrix(.plsa_EPS, nrow = K, ncol = V)
+  Pd_z <- matrix(.plsa_EPS, nrow = K, ncol = D)
+  Pz <- rep(.plsa_EPS, K)
   for (d in seq_len(D)) {
     for (w in seq_len(V)) {
       c <- N[d, w]
@@ -147,7 +147,7 @@
   chk <- .plsa_check(n_dw)
   N <- chk$N
   P <- .plsa_joint_probability(Pz, Pd_z, Pw_z)
-  P <- pmax(P, .EPS)
+  P <- pmax(P, .plsa_EPS)
   sum(N * log(P))
 }
 
@@ -244,7 +244,7 @@ plsa <- probabilisticlsa
 # Public helpers
 e_step <- function(n_dw, Pz, Pd_z, Pw_z) .plsa_e_step(n_dw, Pz, Pd_z, Pw_z)
 m_step <- function(n_dw, post, K) .plsa_m_step(n_dw, post, K)
-log_likelihood <- function(n_dw, Pz, Pd_z, Pw_z) .plsa_log_likelihood(n_dw, Pz, Pd_z, Pw_z)
+.plsa_log_likelihood <- function(n_dw, Pz, Pd_z, Pw_z) .plsa_log_likelihood(n_dw, Pz, Pd_z, Pw_z)
 joint_probability <- function(Pz, Pd_z, Pw_z) .plsa_joint_probability(Pz, Pd_z, Pw_z)
 perplexity <- function(n_dw, Pz, Pd_z, Pw_z) .plsa_perplexity(n_dw, Pz, Pd_z, Pw_z)
-cheatsheet <- .plsa_cheatsheet
+.plsa_cheatsheet <- .plsa_cheatsheet

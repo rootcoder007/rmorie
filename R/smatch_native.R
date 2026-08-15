@@ -175,7 +175,7 @@ sample_size <- function(log_ri, r, p_exposed, alpha = 0.05, power = 0.8) {
        method = "Whitaker et al. (2006) Sec. 7.6")
 }
 
-power <- function(n_events, log_ri, r, p_exposed, alpha = 0.05) {
+.smatch_power <- function(n_events, log_ri, r, p_exposed, alpha = 0.05) {
   s <- sample_size(log_ri, r, p_exposed, alpha = alpha, power = 0.5)
   A <- s$A; B <- s$B; C <- s$C
   za <- s$z_alpha_2
@@ -223,7 +223,7 @@ sccsdesign <- sccs_poisson_fit
 morie_smatch <- list(poisson_design = poisson_design,
                      sccs_poisson_fit = sccs_poisson_fit,
                      sample_size = sample_size,
-                     power = power,
+                     power = .smatch_power,
                      relative_efficiency = relative_efficiency,
                      cheatsheet = .smatch_cheatsheet,
                      selfcontrolledcaseseries = selfcontrolledcaseseries,

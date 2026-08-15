@@ -193,7 +193,7 @@ optimal_policy <- function(logp_ref, reward, beta) {
   return(list(unnorm - logZ, as.numeric(logZ)))
 }
 
-cheatsheet <- function() {
+.dpoF_cheatsheet <- function() {
   return("dpoF: DPO loss -log sigma(beta log pi_w/ref_w - beta log pi_l/ref_l) (Rafailov 2023 eq. 7); implicit reward rhat = beta log pi/pi_ref; grad weight sigma(rhat_l - rhat_w); model='plackett-luce' is eq. 20 and reduces to eq. 7 at K=2. optimal_policy() is eq. 4.")
 }
 

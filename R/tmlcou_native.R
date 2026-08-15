@@ -16,7 +16,7 @@
 # with a logistic submodel on the clever covariate, the same
 # unscale on return, the same validation messages.
 
-.EPS <- 1e-12
+.tmlcou_EPS <- 1e-12
 
 .tmlcou_logit <- function(p) {
   q <- min(max(as.numeric(p), 1e-9), 1 - 1e-9)
@@ -40,7 +40,7 @@ rescale <- function(y, lower = NULL, upper = NULL) {
   a <- if (is.null(lower)) min(v) else as.numeric(lower)
   b <- if (is.null(upper)) max(v) else as.numeric(upper)
   if (b <= a) stop("tmlcou: the upper bound must exceed the lower one")
-  if (any(v < a - .EPS | v > b + .EPS))
+  if (any(v < a - .tmlcou_EPS | v > b + .tmlcou_EPS))
     stop("tmlcou: an outcome lies outside the stated bounds")
   list(scaled = (v - a) / (b - a), lower = a, upper = b,
        range = b - a)
@@ -76,7 +76,7 @@ linear_fluctuation_unsafe <- function(Q, H, Y) {
   if (!(length(h) == length(yy) && length(yy) == n))
     stop("tmlcou: Q, H, Y must have the same length")
   num <- sum(h * (yy - q)); den <- sum(h * h)
-  e <- if (den > .EPS) num / den else 0
+  e <- if (den > .tmlcou_EPS) num / den else 0
   upd <- q + e * h
   list(epsilon = e, Q_star = upd,
        out_of_range = sum(upd < 0 | upd > 1),

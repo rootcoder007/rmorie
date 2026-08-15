@@ -98,7 +98,7 @@ derivatives <- function(S, I, beta, nu, mu, sigma) {
   list(dS = dS, dI = dI)
 }
 
-simulate <- function(beta, nu, mu, sigma, S0 = NULL, I0 = NULL,
+.hiatus_simulate <- function(beta, nu, mu, sigma, S0 = NULL, I0 = NULL,
                      t_end = 2000.0, dt = 0.05, mutation = 0.0,
                      record_every = 100L) {
   chk <- ._check(beta, nu, mu, sigma)
@@ -202,14 +202,14 @@ linear_strain_space <- function(n, width = 2.0, floor = 0.0) {
   out
 }
 
-twostrainhiatus <- simulate
-hiatus_model <- simulate
-hiatusmodel <- simulate
+twostrainhiatus <- .hiatus_simulate
+hiatus_model <- .hiatus_simulate
+hiatusmodel <- .hiatus_simulate
 
 morie_hiatus <- function(beta, nu, mu, sigma, S0 = NULL, I0 = NULL,
                          t_end = 2000.0, dt = 0.05, mutation = 0.0,
                          record_every = 100L) {
-  simulate(beta, nu, mu, sigma, S0, I0, t_end, dt, mutation,
+  .hiatus_simulate(beta, nu, mu, sigma, S0, I0, t_end, dt, mutation,
            record_every)
 }
 

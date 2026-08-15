@@ -295,7 +295,7 @@ morie_latent_time <- function(fits) {
 # there. The dynamical model is the answer to the two assumptions the
 # steady-state model makes and that transient or heterogeneous
 # populations break.
-morie_cheatsheet <- function() {
+.scvelo_morie_cheatsheet <- function() {
   paste("scvelo: du/dt = alpha - beta u, ds/dt = beta u - gamma s,",
         "and velocity IS ds/dt. The steady-state model reads velocity",
         "off a fitted gamma/beta ratio and needs the steady states to",

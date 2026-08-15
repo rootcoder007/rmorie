@@ -7,12 +7,12 @@
 # search routes, same recall measurement, same RAG-Sequence and
 # RAG-Token marginalisations.
 
-.EPS <- 1e-12
+.ragRet_EPS <- 1e-12
 .METRICS <- c("inner_product", "cosine")
 
 morie_ragRet_normalise <- function(v) {
   x <- as.numeric(v); n <- sqrt(sum(x^2))
-  if (n <= .EPS) stop("ragRet: a zero vector has no direction")
+  if (n <= .ragRet_EPS) stop("ragRet: a zero vector has no direction")
   x / n
 }
 
@@ -123,7 +123,7 @@ morie_ragRet_marginalise <- function(doc.scores, token.probs,
   if (length(p) == 0L) stop("ragRet: no retrieved documents")
   if (any(p < 0)) stop("ragRet: the document scores must be non-negative probabilities")
   z <- sum(p)
-  if (z <= .EPS) stop("ragRet: the document weights are all zero")
+  if (z <= .ragRet_EPS) stop("ragRet: the document weights are all zero")
   w <- p / z
   T <- lapply(token.probs, as.numeric)
   if (length(T) != length(w))
@@ -131,7 +131,7 @@ morie_ragRet_marginalise <- function(doc.scores, token.probs,
                 length(T), " token distributions"))
   if (mode == "sequence") {
     seq <- vapply(seq_along(w), function(d)
-      exp(sum(log(pmax(T[[d]], .EPS)))), numeric(1))
+      exp(sum(log(pmax(T[[d]], .ragRet_EPS)))), numeric(1))
     return(list(estimate = sum(w * seq),
                 probability = sum(w * seq),
                 per_document = seq, weights = w, mode = "sequence",
@@ -145,8 +145,8 @@ morie_ragRet_marginalise <- function(doc.scores, token.probs,
     per.tok <- vapply(seq_len(n.tok), function(t)
       sum(vapply(seq_along(w), function(d) w[d] * T[[d]][t],
                  numeric(1))), numeric(1))
-    return(list(estimate = exp(sum(log(pmax(per.tok, .EPS)))),
-                probability = exp(sum(log(pmax(per.tok, .EPS)))),
+    return(list(estimate = exp(sum(log(pmax(per.tok, .ragRet_EPS)))),
+                probability = exp(sum(log(pmax(per.tok, .ragRet_EPS)))),
                 per_token = per.tok, weights = w, mode = "token",
                 method = "RAG-Token marginalisation; Lewis et al. (2020)",
                 note = "each token may draw on a DIFFERENT document, so facts can be composed across passages"))
