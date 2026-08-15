@@ -83,3 +83,24 @@ Gbtcom <- function(data, outcome, treatment, unit, time) {
                    "TWFE DiD coefficient")
   )
 }
+
+#' Goodman-Bacon decomposition, vector interface
+#'
+#' The signature-compatible mirror of Python \code{morie.fn.gbtcom},
+#' which takes the four columns as vectors. \code{Gbtcom} keeps the
+#' data-frame form for R callers who already hold a panel.
+#'
+#' @param y Outcome, one entry per unit-period.
+#' @param D Treatment indicator, same length.
+#' @param unit Unit identifier, same length.
+#' @param time Period identifier, same length.
+#' @return As \code{Gbtcom}.
+#' @export
+morie_gbtcom <- function(y, D, unit, time) {
+  n <- length(y)
+  if (length(D) != n || length(unit) != n || length(time) != n)
+    stop("gbtcom: y, D, unit and time must have the same length")
+  df <- data.frame(y = as.numeric(y), D = as.numeric(D),
+                   unit = unit, time = time, stringsAsFactors = FALSE)
+  Gbtcom(df, "y", "D", "unit", "time")
+}
