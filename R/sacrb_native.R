@@ -327,3 +327,7 @@ morie_sacrb_sacrebleu <- morie_sacrb_bleu
 #' @rdname morie_sacrb_bleu
 #' @export
 morie_sacrb <- morie_sacrb_bleu
+
+#' @rdname morie_sacrb_bleu
+#' @export
+morie_sacrb <- morie_sacrb_bleu

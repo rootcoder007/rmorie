@@ -119,17 +119,16 @@
     Z <- as.numeric(z0)
     if (is.null(x0)) {
       p0v <- as.numeric(p0)
-      if (!(0 < p0v && p0v <= 1)) {
+      if (!(p0v > 0 && p0v <= 1)) {
         stop(sprintf("tsbF: p0 must be in (0, 1], got %s", p0))
       }
       X <- 1.0 / p0v
       P <- p0v
     } else {
-      x0v <- as.numeric(x0)
-      if (x0v < 1.0) {
+      if (as.numeric(x0) < 1.0) {
         stop(sprintf("tsbF: x0 must be at least 1, got %s", x0))
       }
-      X <- x0v
+      X <- as.numeric(x0)
       P <- if (is.null(p0)) 1.0 / X else as.numeric(p0)
     }
     if (Z <= 0) {
@@ -172,21 +171,22 @@
 }
 
 morie_tsbF_tsb_forecast <- function(y, alpha = 0.1, beta = 0.05, horizon = 1,
-                                     init = "global", z0 = NULL, p0 = NULL,
-                                     burn_in = 0) {
+                                    init = "global", z0 = NULL, p0 = NULL,
+                                    burn_in = 0) {
   yv <- as.numeric(y)
   n <- length(yv)
   if (n < 2) stop(sprintf("tsbF: need at least 2 observations, got %d", n))
-  for (nm in c("alpha", "beta")) {
-    v <- if (nm == "alpha") alpha else beta
-    if (!(0 < as.numeric(v) && as.numeric(v) <= 1)) {
-      stop(sprintf("tsbF: %s must be in (0, 1], got %s", nm, v))
-    }
+  if (!(alpha > 0 && alpha <= 1)) {
+    stop(sprintf("tsbF: alpha must be in (0, 1], got %s", alpha))
   }
-  x0_val <- if (is.null(p0)) NULL else 1.0 / as.numeric(p0)
-  st <- .tsbF_init(yv, init = init, z0 = z0, p0 = p0, x0 = x0_val)
+  if (!(beta > 0 && beta <= 1)) {
+    stop(sprintf("tsbF: beta must be in (0, 1], got %s", beta))
+  }
+  x0_arg <- if (is.null(p0)) NULL else 1.0 / p0
+  st <- .tsbF_init(yv, init = init, z0 = z0, p0 = p0, x0 = x0_arg)
   zi <- st$Z
   pi <- st$P
+
   a <- as.numeric(alpha)
   b <- as.numeric(beta)
   z <- zi
@@ -194,7 +194,7 @@ morie_tsbF_tsb_forecast <- function(y, alpha = 0.1, beta = 0.05, horizon = 1,
   fitted <- numeric(n)
   probs <- numeric(n)
   sizes <- numeric(n)
-  for (t in seq_len(n)) {
+  for (t in 1:n) {
     occ <- if (yv[t] > 0) 1.0 else 0.0
     p <- p + b * (occ - p)
     if (occ > 0) {
@@ -204,40 +204,48 @@ morie_tsbF_tsb_forecast <- function(y, alpha = 0.1, beta = 0.05, horizon = 1,
     sizes[t] <- z
     fitted[t] <- p * z
   }
-  res <- list(
-    estimate = rep(fitted[n], as.integer(horizon)),
-    forecast = rep(fitted[n], as.integer(horizon)),
+
+  h <- as.integer(horizon)
+  result <- list(
+    estimate = rep(fitted[n], h),
+    forecast = rep(fitted[n], h),
     fitted = .tsbF_burn(fitted, burn_in),
     fitted_full = fitted,
     probability = .tsbF_burn(probs, burn_in),
     size = .tsbF_burn(sizes, burn_in),
-    init = init, burn_in = as.integer(burn_in),
-    z_init = zi, p_init = pi,
-    p_final = p, z_final = z, alpha = a, beta = b,
+    init = init,
+    burn_in = as.integer(burn_in),
+    z_init = zi,
+    p_init = pi,
+    p_final = p,
+    z_final = z,
+    alpha = a,
+    beta = b,
     method = "TSB, Teunter, Syntetos & Babai (2011)",
     updates_on_zeros = TRUE
   )
-  return(res)
+  return(result)
 }
 
 morie_tsbF_croston_forecast <- function(y, alpha = 0.1, horizon = 1,
-                                         init = "global", z0 = NULL, x0 = NULL,
-                                         burn_in = 0) {
+                                        init = "global", z0 = NULL, x0 = NULL,
+                                        burn_in = 0) {
   yv <- as.numeric(y)
   n <- length(yv)
   if (n < 2) stop(sprintf("tsbF: need at least 2 observations, got %d", n))
-  if (!(0 < as.numeric(alpha) && as.numeric(alpha) <= 1)) {
+  if (!(alpha > 0 && alpha <= 1)) {
     stop(sprintf("tsbF: alpha must be in (0, 1], got %s", alpha))
   }
-  st <- .tsbF_init(yv, init = init, z0 = z0, x0 = x0)
+  st <- .tsbF_init(yv, init = init, z0 = z0, x0 = x0, p0 = NULL)
   zi <- st$Z
   xi <- st$X
+
   a <- as.numeric(alpha)
   z <- zi
   x <- xi
   since <- 0
   fitted <- numeric(n)
-  for (t in seq_len(n)) {
+  for (t in 1:n) {
     since <- since + 1
     if (yv[t] > 0) {
       z <- z + a * (yv[t] - z)
@@ -246,38 +254,46 @@ morie_tsbF_croston_forecast <- function(y, alpha = 0.1, horizon = 1,
     }
     fitted[t] <- z / max(x, .tsbF_EPS)
   }
-  res <- list(
-    estimate = rep(fitted[n], as.integer(horizon)),
-    forecast = rep(fitted[n], as.integer(horizon)),
+
+  h <- as.integer(horizon)
+  result <- list(
+    estimate = rep(fitted[n], h),
+    forecast = rep(fitted[n], h),
     fitted = .tsbF_burn(fitted, burn_in),
     fitted_full = fitted,
-    z_final = z, x_final = x, alpha = a,
-    init = init, burn_in = as.integer(burn_in),
-    z_init = zi, x_init = xi,
+    z_final = z,
+    x_final = x,
+    alpha = a,
+    init = init,
+    burn_in = as.integer(burn_in),
+    z_init = zi,
+    x_init = xi,
     method = "Croston (1972)",
     updates_on_zeros = FALSE
   )
-  return(res)
+  return(result)
 }
 
 morie_tsbF_sba_forecast <- function(y, alpha = 0.1, horizon = 1,
                                     init = "global", z0 = NULL, x0 = NULL,
                                     burn_in = 0) {
-  cro <- morie_tsbF_croston_forecast(y, alpha = alpha, horizon = horizon,
-                                      init = init, z0 = z0, x0 = x0,
-                                      burn_in = burn_in)
+  c <- morie_tsbF_croston_forecast(y, alpha = alpha, horizon = horizon,
+                                   init = init, z0 = z0, x0 = x0,
+                                   burn_in = burn_in)
   d <- 1.0 - as.numeric(alpha) / 2.0
-  res <- list(
-    estimate = cro$forecast * d,
-    forecast = cro$forecast * d,
-    fitted = cro$fitted * d,
-    fitted_full = cro$fitted_full * d,
-    init = init, burn_in = as.integer(burn_in),
-    deflator = d, alpha = as.numeric(alpha),
+  result <- list(
+    estimate = c$forecast * d,
+    forecast = c$forecast * d,
+    fitted = c$fitted * d,
+    fitted_full = c$fitted_full * d,
+    init = init,
+    burn_in = as.integer(burn_in),
+    deflator = d,
+    alpha = as.numeric(alpha),
     method = "Syntetos-Boylan Approximation (2005)",
     updates_on_zeros = FALSE
   )
-  return(res)
+  return(result)
 }
 
 morie_tsbF_demand_classification <- function(y, adi_cut = 1.32, cv2_cut = 0.49) {
@@ -287,43 +303,65 @@ morie_tsbF_demand_classification <- function(y, adi_cut = 1.32, cv2_cut = 0.49) 
   adi <- length(yv) / as.numeric(length(pos))
   mu <- sum(pos) / length(pos)
   cv2 <- if (mu > 0) (sd(pos) / mu)^2 else 0.0
-  cls <- if (adi <= adi_cut && cv2 <= cv2_cut) "smooth"
-    else if (adi <= adi_cut) "erratic"
-    else if (cv2 <= cv2_cut) "intermittent"
-    else "lumpy"
+  cls <- if (adi <= adi_cut && cv2 <= cv2_cut) {
+    "smooth"
+  } else if (adi <= adi_cut) {
+    "erratic"
+  } else if (cv2 <= cv2_cut) {
+    "intermittent"
+  } else {
+    "lumpy"
+  }
   return(list(class = cls, adi = adi, cv2 = cv2,
               n_positive = length(pos), n = length(yv)))
 }
 
-morie_tsbF_intermittent_forecast <- function(y, method = "tsb", alpha = 0.1, beta = 0.05,
-                                              horizon = 1, init = "global", z0 = NULL,
-                                              x0 = NULL, p0 = NULL, burn_in = 0) {
+morie_tsbF_intermittent_forecast <- function(y, method = "tsb", alpha = 0.1,
+                                             beta = 0.05, horizon = 1,
+                                             init = "global", z0 = NULL,
+                                             x0 = NULL, p0 = NULL,
+                                             burn_in = 0) {
   if (!(method %in% .tsbF_METHODS)) {
     stop(sprintf("tsbF: method must be one of %s, got %s",
                  paste(.tsbF_METHODS, collapse = ", "), method))
   }
   if (method == "tsb") {
     return(morie_tsbF_tsb_forecast(y, alpha = alpha, beta = beta,
-                                    horizon = horizon, init = init, z0 = z0,
-                                    p0 = p0, burn_in = burn_in))
+                                   horizon = horizon, init = init, z0 = z0,
+                                   p0 = p0, burn_in = burn_in))
   }
   if (method == "croston") {
     return(morie_tsbF_croston_forecast(y, alpha = alpha, horizon = horizon,
-                                        init = init, z0 = z0, x0 = x0,
-                                        burn_in = burn_in))
+                                       init = init, z0 = z0, x0 = x0,
+                                       burn_in = burn_in))
   }
   return(morie_tsbF_sba_forecast(y, alpha = alpha, horizon = horizon,
-                                  init = init, z0 = z0, x0 = x0, burn_in = burn_in))
+                                 init = init, z0 = z0, x0 = x0,
+                                 burn_in = burn_in))
 }
 
 morie_tsbF_cheatsheet <- function() {
-  return("tsbF: TSB updates the PROBABILITY every period (p' += beta(occ - p')) and the SIZE only on demand; forecast is the PRODUCT p'z', which is unbiased because the two are independent. Croston smooths the INTERVAL and forecasts z'/x' -- nothing updates on a zero, so an obsolete item keeps its forecast forever, and the ratio carries an inversion bias. SBA deflates by (1 - alpha/2). The inversion bias is ASYMPTOTIC: use init='known' to see it, because with init='heuristic' the initial state decays as (1-alpha)^t and takes ~3/alpha periods to clear, which can flip the measured sign (Prak et al. 2021). burn_in drops that transient.")
+  return(paste0(
+    "tsbF: TSB updates the PROBABILITY every period (p' += ",
+    "beta(occ - p')) and the SIZE only on demand; forecast is ",
+    "the PRODUCT p'z', which is unbiased because the two are ",
+    "independent. Croston smooths the INTERVAL and forecasts ",
+    "z'/x' -- nothing updates on a zero, so an obsolete item ",
+    "keeps its forecast forever, and the ratio carries an ",
+    "inversion bias. SBA deflates by (1 - alpha/2). The ",
+    "inversion bias is ASYMPTOTIC: use init='known' to see ",
+    "it, because with init='heuristic' the initial state ",
+    "decays as (1-alpha)^t and takes ~3/alpha periods to ",
+    "clear, which can flip the measured sign (Prak et al. ",
+    "2021). burn_in drops that transient."))
 }
 
-morie_tsbF <- morie_tsbF_intermittent_forecast
-
-# compact alias per ledger/NAMING.md
-tsbforecast <- morie_tsbF_tsb_forecast
-
-# public names resolved by fn/_lazy_map.json
-tsb <- morie_tsbF_tsb_forecast
+# Main entry point -- dispatch to the requested method.
+morie_tsbF <- function(y, method = "tsb", alpha = 0.1, beta = 0.05,
+                       horizon = 1, init = "global", z0 = NULL,
+                       x0 = NULL, p0 = NULL, burn_in = 0) {
+  morie_tsbF_intermittent_forecast(y, method = method, alpha = alpha,
+                                   beta = beta, horizon = horizon,
+                                   init = init, z0 = z0, x0 = x0, p0 = p0,
+                                   burn_in = burn_in)
+}
