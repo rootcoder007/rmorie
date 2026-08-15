@@ -389,3 +389,7 @@ morie_caltbR <- genre_distribution
 #' @rdname genre_distribution
 #' @export
 morie_caltbR <- genre_distribution
+
+#' @rdname genre_distribution
+#' @export
+morie_caltbR <- genre_distribution
