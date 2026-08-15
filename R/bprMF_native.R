@@ -437,3 +437,7 @@ morie_bprMF <- bpr_sigmoid
 #' @rdname bpr_sigmoid
 #' @export
 morie_bprMF <- bpr_sigmoid
+
+#' @rdname bpr_sigmoid
+#' @export
+morie_bprMF <- bpr_sigmoid
