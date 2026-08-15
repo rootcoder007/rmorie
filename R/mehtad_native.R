@@ -81,42 +81,51 @@ centering_parameter <- function(mu, mu_affine, nu = 3.0) {
        note = "ratio near 1 means the affine trajectory is badly approximated locally, so centre more")
 }
 
-.mehtad_newton <- function(M, x, s, rp, rd, rc) {
+.mehtad_solve_normal <- function(A, d, rhs, ridge = 1e-11) {
+  M <- as.matrix(A); storage.mode(M) <- "double"
   m <- nrow(M); n <- ncol(M)
-  d <- x / s
-  t <- (-rc / s) + d * rd
-  rhs <- -rp - as.numeric(M %*% t)
-  Nmat <- matrix(0, m, m)
-  for (i in seq_len(m)) for (j in seq_len(m)) {
-    s_ij <- 0
-    for (tt in seq_len(n)) s_ij <- s_ij + M[i, tt] * d[tt] * M[j, tt]
-    Nmat[i, j] <- s_ij
-  }
-  for (i in seq_len(m)) Nmat[i, i] <- Nmat[i, i] + 1e-11
-  dy <- .mehtad_cholsolve(Nmat, rhs)
-  ds <- -(rd + as.numeric(t(M) %*% dy))
-  dx <- (-rc - x * ds) / s
+  dM <- M * rep(d, each = m)
+  N <- dM %*% t(M)
+  diag(N) <- diag(N) + ridge
+  L <- chol(N)
+  y_forw <- forwardsolve(t(L), as.numeric(rhs))
+  backsolve(L, y_forw)
+}
+
+newton_direction <- function(A, x, s, rp, rd, rc) {
+  M <- as.matrix(A); storage.mode(M) <- "double"
+  m <- nrow(M); n <- ncol(M)
+  xv <- as.numeric(x); sv <- as.numeric(s)
+  d <- xv / sv
+  t <- -as.numeric(rc) / sv + d * as.numeric(rd)
+  rhs <- -as.numeric(rp) - as.numeric(M %*% t)
+  dy <- .mehtad_solve_normal(M, d, rhs)
+  ds <- -(as.numeric(rd) + as.numeric(t(M) %*% dy))
+  dx <- (-as.numeric(rc) - xv * ds) / sv
   list(dx = dx, dy = dy, ds = ds)
 }
 
+.mehtad_newton <- newton_direction
+
 solve_lp <- function(A, b, c, tol = 1e-9, max_iter = 100L, nu = 3.0,
                      eta = 0.9995, corrector = TRUE) {
-  M <- .mehtad_mat(A)
+  M <- as.matrix(A); storage.mode(M) <- "double"
   m <- nrow(M); n <- ncol(M)
-  bv <- .mehtad_vec(b); cv <- .mehtad_vec(c)
+  bv <- as.numeric(b); cv <- as.numeric(c)
   if (length(bv) != m || length(cv) != n)
-    stop("mehtad: A is ", m, "x", n, " but b has ", length(bv),
-         " and c has ", length(cv))
+    stop(sprintf("mehtad: A is %dx%d but b has %d and c has %d",
+                 m, n, length(bv), length(cv)))
   x <- rep(1.0, n); s <- rep(1.0, n); y <- rep(0.0, m)
-  it <- 0L; converged <- FALSE
+  it <- 0L
   for (it in seq_len(as.integer(max_iter))) {
     r <- mehtad_residuals(M, bv, cv, x, y, s)
     mu <- r$mu
     if (mu < as.numeric(tol) && r$primal_norm < as.numeric(tol) &&
-        r$dual_norm < as.numeric(tol)) { converged <- TRUE; break }
+        r$dual_norm < as.numeric(tol)) break
     rc <- x * s
-    aff <- .mehtad_newton(M, x, s, r$primal, r$dual, rc)
-    ap <- max_step(x, aff$dx, eta); ad <- max_step(s, aff$ds, eta)
+    aff <- newton_direction(M, x, s, r$primal, r$dual, rc)
+    ap <- max_step(x, aff$dx, eta)
+    ad <- max_step(s, aff$ds, eta)
     mu_aff <- sum((x + ap * aff$dx) * (s + ad * aff$ds)) / n
     sig <- centering_parameter(mu, mu_aff, nu)$sigma
     if (corrector) {
@@ -124,10 +133,13 @@ solve_lp <- function(A, b, c, tol = 1e-9, max_iter = 100L, nu = 3.0,
     } else {
       rc2 <- x * s - sig * mu
     }
-    d <- .mehtad_newton(M, x, s, r$primal, r$dual, rc2)
-    ap <- max_step(x, d$dx, eta); ad <- max_step(s, d$ds, eta)
-    x <- x + ap * d$dx; s <- s + ad * d$ds; y <- y + ad * d$dy
-    if (min(x, s) <= 0)
+    d <- newton_direction(M, x, s, r$primal, r$dual, rc2)
+    ap <- max_step(x, d$dx, eta)
+    ad <- max_step(s, d$ds, eta)
+    x <- x + ap * d$dx
+    s <- s + ad * d$ds
+    y <- y + ad * d$dy
+    if (min(min(x), min(s)) <= 0)
       stop("mehtad: an iterate left the positive orthant, which the fraction-to-boundary rule exists to prevent")
   }
   rf <- mehtad_residuals(M, bv, cv, x, y, s)
@@ -137,7 +149,7 @@ solve_lp <- function(A, b, c, tol = 1e-9, max_iter = 100L, nu = 3.0,
        iterations = it, corrector = isTRUE(corrector),
        primal_residual = rf$primal_norm,
        dual_residual = rf$dual_norm,
-       converged = (rf$mu < as.numeric(tol) && rf$primal_norm < as.numeric(tol)) || converged,
+       converged = rf$mu < as.numeric(tol) && rf$primal_norm < as.numeric(tol),
        method = "Mehrotra predictor-corrector; Mehrotra (1992)",
        note = "the corrector reuses the predictor's factorisation, so the second-order term costs a right-hand side rather than an iteration")
 }

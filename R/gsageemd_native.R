@@ -24,12 +24,20 @@
 #' @param W Optional weight matrix for max_pool.
 #' @return Permutation-invariant summary vector.
 #' @export
+.gsageemd_mat <- function(x) {
+  # k.mat's contract: accept a list of vectors OR a matrix, yield a matrix.
+  m <- if (is.matrix(x)) x else if (is.data.frame(x)) as.matrix(x) else
+    do.call(rbind, lapply(x, as.numeric))
+  storage.mode(m) <- "double"
+  m
+}
+
 morie_gsageemd_aggregate <- function(vectors, how = "mean", W = NULL) {
   if (!(how %in% .GSAGEEMD_AGGS))
     stop(paste0("gsageemd: aggregator must be one of ",
                 paste(.GSAGEEMD_AGGS, collapse = ", "),
                 ", got '", how, "'"))
-  V <- as.matrix(vectors); storage.mode(V) <- "double"
+  V <- .gsageemd_mat(vectors)
   if (nrow(V) == 0L)
     stop("gsageemd: no neighbours to aggregate")
   d <- ncol(V)
