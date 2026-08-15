@@ -121,12 +121,14 @@ morie_rmrl_reward_machine_run <- function(machine, labels) {
   )
 }
 
-.rmrl_eps_greedy <- function(row, A, epsilon) {
+.rmrl_eps_greedy <- function(row, A, epsilon, rng) {
   # epsilon-greedy with ties broken UNIFORMLY AT RANDOM. The table
   # starts all-zero, so every action ties; deterministic tie-breaking
   # would turn the initial behaviour into a systematic drift.
-  if (stats::runif(1) < epsilon) {
-    return(A[[as.integer(stats::runif(1) * length(A)) + 1L]])
+  # rng is a .ghc_rng state: the Python arm draws rng.random() from
+  # np.random.default_rng(seed), bit-identical to .ghc_unif here.
+  if (.ghc_unif(rng, 1L) < epsilon) {
+    return(A[[as.integer(.ghc_unif(rng, 1L) * length(A)) + 1L]])
   }
   bv <- NULL
   best <- list()
@@ -142,7 +144,7 @@ morie_rmrl_reward_machine_run <- function(machine, labels) {
   if (length(best) == 1L) {
     return(best[[1L]])
   }
-  best[[as.integer(stats::runif(1) * length(best)) + 1L]]
+  best[[as.integer(.ghc_unif(rng, 1L) * length(best)) + 1L]]
 }
 
 morie_rmrl <- function(machines, states, actions, step, label, gamma=0.9,
@@ -191,7 +193,7 @@ morie_rmrl <- function(machines, states, actions, step, label, gamma=0.9,
       stop("rmrl: task_order shorter than episodes")
     }
   }
-  set.seed(as.integer(seed))
+  rng <- .ghc_rng(seed)
   akeys <- vapply(A, as.character, character(1))
   # q[["i\ru"]][["s"]] is a named numeric vector over actions --
   # one q-function per machine state (line 2).
@@ -219,7 +221,7 @@ morie_rmrl <- function(machines, states, actions, step, label, gamma=0.9,
         break
       }
       a <- .rmrl_eps_greedy(q[[.rmrl_key(i - 1L, u)]][[as.character(s)]],
-                            A, epsilon)
+                            A, epsilon, rng)
       out <- step(s, a)
       done <- FALSE
       if (is.list(out) && length(out) == 2L) {
@@ -301,7 +303,7 @@ morie_rmrl_qlearn_flat <- function(machine, states, actions, step, label,
   } else {
     function() start
   }
-  set.seed(as.integer(seed))
+  rng <- .ghc_rng(seed)
   akeys <- vapply(A, as.character, character(1))
   q <- list()
   for (u in machine$states) {
@@ -320,7 +322,7 @@ morie_rmrl_qlearn_flat <- function(machine, states, actions, step, label,
       if (isTRUE(de(s)) || as.character(u) %in% machine$terminal) {
         break
       }
-      a <- .rmrl_eps_greedy(q[[.rmrl_key(u, s)]], A, epsilon)
+      a <- .rmrl_eps_greedy(q[[.rmrl_key(u, s)]], A, epsilon, rng)
       out <- step(s, a)
       done <- FALSE
       if (is.list(out) && length(out) == 2L) {
