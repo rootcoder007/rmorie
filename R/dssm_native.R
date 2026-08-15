@@ -382,3 +382,7 @@ morie_dssm <- morie_dssm_letter_ngrams
 #' @rdname morie_dssm_letter_ngrams
 #' @export
 morie_dssm <- morie_dssm_letter_ngrams
+
+#' @rdname morie_dssm_letter_ngrams
+#' @export
+morie_dssm <- morie_dssm_letter_ngrams
