@@ -56,6 +56,7 @@
 # arXiv:2207.12598. The guidance framework this parallels.
 
 .vidgen_mat <- function(x) {
+  if (is.matrix(x)) return(x * 1.0)
   rows <- lapply(x, function(r) as.numeric(unlist(r)))
   do.call(rbind, rows)
 }
