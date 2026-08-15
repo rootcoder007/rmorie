@@ -55,13 +55,33 @@ morie_droPDSI_palmer_pdsi <- function(precip, pet, awc = 100.0,
   Phat <- alpha * PE + beta * PR + gamma * PRO - delta * PL
   d <- P - Phat
 
-  md <- sum(abs(d)) / n
-  mP <- sum(P) / n; mPE <- sum(PE) / n
-  mL <- sum(L) / n; mR <- sum(R) / n; mRO <- sum(RO) / n
-  num <- (mPE + mR + mRO) / (mP + mL + .droPDSI_EPS) + 2.8
-  Kp <- 1.5 * log10(if (num > 0) num / (md + .droPDSI_EPS) else 1.0) + 0.5
-  Kp <- max(Kp, 0.0)
-  Z <- Kp * d
+  # Palmer's climatic characteristic is computed PER CALENDAR MONTH and then
+  # rescaled across months; a single record-wide K collapses to zero on
+  # ordinary seasonal data and takes the whole index with it.
+  mon <- if (is.null(month)) (seq_len(n) - 1L) %% 12L else
+    as.integer(month) %% 12L
+  if (length(mon) != n)
+    stop(sprintf("droPDSI: %d observations but %d month labels", n,
+                 length(mon)))
+  Kp_month <- numeric(12); D_month <- numeric(12)
+  for (j in 0:11) {
+    idx <- which(mon == j)
+    if (length(idx) == 0L) next
+    cnt <- length(idx)
+    Dj <- sum(abs(d[idx])) / cnt
+    mPE <- sum(PE[idx]) / cnt; mR <- sum(R[idx]) / cnt
+    mRO <- sum(RO[idx]) / cnt; mP <- sum(P[idx]) / cnt
+    mL <- sum(L[idx]) / cnt
+    ratio_j <- (mPE + mR + mRO) / (mP + mL + .droPDSI_EPS) + 2.8
+    arg <- ratio_j / (Dj + .droPDSI_EPS)
+    Kp_month[j + 1L] <- 1.5 * log10(if (arg > .droPDSI_EPS) arg else
+                                    .droPDSI_EPS) + 0.5
+    D_month[j + 1L] <- Dj
+  }
+  denom <- sum(D_month * Kp_month)
+  if (abs(denom) > .droPDSI_EPS) Kp_month <- 17.67 * Kp_month / denom
+  Kp <- sum(Kp_month) / 12.0
+  Z <- vapply(seq_len(n), function(i) Kp_month[mon[i] + 1L] * d[i], numeric(1))
 
   X <- numeric(n); prev <- 0.0
   for (i in seq_len(n)) { cur <- 0.897 * prev + Z[i] / 3.0; X[i] <- cur; prev <- cur }
@@ -69,7 +89,8 @@ morie_droPDSI_palmer_pdsi <- function(precip, pet, awc = 100.0,
   list(estimate = X, pdsi = X, z_index = Z, departure = d,
        cafec_precip = Phat,
        alpha = alpha, beta = beta, gamma = gamma, delta = delta,
-       K = Kp, evapotranspiration = ET, recharge = R, runoff = RO,
+       K = Kp, K_month = Kp_month,
+       mean_abs_departure = D_month, evapotranspiration = ET, recharge = R, runoff = RO,
        loss = L, soil_surface_capacity = su_cap,
        soil_under_capacity = sl_cap, n = as.integer(n),
        duration_factor = 0.897, duration_divisor = 3.0,
