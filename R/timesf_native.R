@@ -17,3 +17,16 @@ morie_timesf <- function(history, predictor, horizon, input_patch_len,
   morie_timesfm(history, predictor, horizon, input_patch_len,
                 output_patch_len)
 }
+
+# compact alias per ledger/NAMING.md
+.timesf_foundation <- morie_timesf
+
+# public name resolved by fn/_lazy_map.json
+.timesfm_foundation <- morie_timesf
+
+# Cheatsheet summarising the re-export relationship.
+.timesf_cheatsheet <- function() {
+  paste0("timesf: the same ledger method as `timesfm` -- one ",
+         "paper, one implementation, re-exported so the two ",
+         "entries cannot drift. ", morie_timesfm_cheatsheet())
+}
