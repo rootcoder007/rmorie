@@ -161,61 +161,134 @@
   st <- bitwAnd(as.integer(seed), 0x7FFFFFFF)
   if (st == 0) st <- 1L
 
-  rnd <- function() {
-    st <<- .ghc_lcg31(st)
-    st / 2147483648.0
-  }
+  # First centre: draw uniformly from the cells.
+  st <- .ghc_lcg31(st)
+  r <- st / 2^31
+  idx <- as.integer(r * N) + 1L
+  centres <- matrix(Zn[idx, ], nrow=1)
 
-  centres <- matrix(0, nrow=K, ncol=d)
-  centres[1, ] <- Zn[as.integer(rnd() * N) + 1L, ]
-
-  if (K > 1) {
-    for (kk in 2:K) {
-      cos_sim <- Zn %*% t(centres[seq_len(kk - 1), , drop=FALSE])
-      dists <- 1 - cos_sim
-      best <- dists[, 1]
-      if (ncol(dists) > 1) {
-        for (j in 2:ncol(dists)) {
-          best <- pmin(best, dists[, j])
+  while (nrow(centres) < K) {
+    # k-means++ style probability is the squared cosine distance to the
+    # nearest existing centre.
+    cos_sim <- centres %*% t(Zn)
+    best_cos <- apply(cos_sim, 2, max)
+    d2 <- pmax(1 - best_cos, 0)^2
+    tot <- sum(d2)
+    if (tot <= 0) {
+      st <- .ghc_lcg31(st)
+      r <- st / 2^31
+      idx <- as.integer(r * N) + 1L
+      centres <- rbind(centres, Zn[idx, ])
+    } else {
+      st <- .ghc_lcg31(st)
+      r <- st / 2^31
+      target <- r * tot
+      acc <- 0
+      chosen <- N
+      for (i in seq_len(N)) {
+        acc <- acc + d2[i]
+        if (acc >= target) {
+          chosen <- i
+          break
         }
       }
-      d2 <- pmax(best, 0)^2
-      tot <- sum(d2)
-      if (tot <= 0) {
-        centres[kk, ] <- Zn[as.integer(rnd() * N) + 1L, ]
-      } else {
-        t <- rnd() * tot
-        acc <- 0
-        chosen <- N
-        for (i in seq_len(N)) {
-          acc <- acc + d2[i]
-          if (acc >= t) {
-            chosen <- i
-            break
-          }
-        }
-        centres[kk, ] <- Zn[chosen, ]
-      }
+      centres <- rbind(centres, Zn[chosen, ])
     }
   }
 
-  for (iter in seq_len(10)) {
-    cos_sim <- Zn %*% t(centres)
-    groups <- max.col(cos_sim)
+  # A few Lloyd rounds so the seed is not a random draw.
+  for (round in 1:10) {
+    cos_sim <- centres %*% t(Zn)
+    groups <- max.col(t(cos_sim))
+    new_centres <- centres
     for (k in seq_len(K)) {
       members <- which(groups == k)
       if (length(members) > 0) {
-        centres[k, ] <- colMeans(Zn[members, , drop=FALSE])
+        new_centres[k, ] <- colSums(Zn[members, , drop=FALSE]) / length(members)
       }
     }
-    centres <- .scintg_l2_normalise(centres)
+    centres <- .scintg_l2_normalise(new_centres)
   }
+
   centres
 }
 
-.scintg_maximum_diversity_clustering <- function(Z, batches, K=NULL, sigma=0.1, theta=2.0,
-                                                max_iter=25, tol=1e-5, seed=0, Y=NULL,
-                                                diversity="penalise") {
+.scintg_solve <- function(A, B) {
+  n <- nrow(A)
+  m <- ncol(B)
+  M <- cbind(A, B)
+  for (c in seq_len(n)) {
+    piv_range <- seq(c, n)
+    piv_vals <- abs(M[piv_range, c])
+    piv_idx <- piv_range[which.max(piv_vals)]
+    if (abs(M[piv_idx, c]) < 1e-14) {
+      stop("scintg: the ridge system is singular; raise lambda")
+    }
+    if (piv_idx != c) {
+      tmp <- M[c, ]
+      M[c, ] <- M[piv_idx, ]
+      M[piv_idx, ] <- tmp
+    }
+    for (r in seq_len(n)) {
+      if (r == c) next
+      f <- M[r, c] / M[c, c]
+      M[r, c:(n+m)] <- M[r, c:(n+m)] - f * M[c, c:(n+m)]
+    }
+  }
+  X <- M[, (n+1):(n+m), drop=FALSE]
+  diag_vals <- diag(M[, seq_len(n), drop=FALSE])
+  X <- X / diag_vals
+  X
+}
+
+.scintg_correct_batch <- function(Z, R, batches, lam=1.0, reference=NULL) {
+  rows <- .scintg_matrix(Z)
+  N <- nrow(rows)
+  d <- ncol(rows)
+  K <- nrow(R)
+  if (K == 0 || ncol(R) != N) stop("scintg: R must be K by N")
+  if (length(batches) != N) stop("scintg: one batch label per cell is required")
+  if (lam < 0) stop("scintg: lambda must be non-negative")
+  des <- .scintg_design(batches)
+  phi <- des$phi
+  names <- des$names
+  B <- length(names)
+  if (!is.null(reference)) {
+    if (length(reference) != N) stop("scintg: one reference flag per cell")
+    for (i in seq_len(N)) {
+      if (isTRUE(reference[i])) {
+        phi[i, ] <- c(1, rep(0, B))
+      }
+    }
+  }
+  out <- rows
+  Ws <- vector("list", K)
+  for (k in seq_len(K)) {
+    Rk <- R[k, ]
+    # A[a, b] = sum_i phi[i, a] * Rk[i] * phi[i, b]
+    A <- crossprod(phi, phi * Rk)
+    # lambda_0 = 0, lambda_b = lam
+    if (B + 1 >= 2) {
+      diag_A <- diag(A)
+      diag_A[2:(B+1)] <- diag_A[2:(B+1)] + lam
+      diag(A) <- diag_A
+    }
+    # rhs[a, j] = sum_i phi[i, a] * Rk[i] * rows[i, j]
+    rhs <- crossprod(phi, rows * Rk)
+    W <- .scintg_solve(A, rhs)
+    W[1, ] <- 0
+    Ws[[k]] <- W
+    # out[i, j] -= Rk[i] * sum_a phi[i, a] * W[a, j]
+    correction <- phi %*% W
+    out <- out - Rk * correction
+  }
+  list(Z=out, W=Ws, batches=names)
+}
+
+.scintg_maximum_diversity_clustering <- function(Z, batches, K=NULL, sigma=0.1,
+                                                 theta=2.0, max_iter=25,
+                                                 tol=1e-5, seed=0, Y=NULL,
+                                                 diversity="penalise") {
   if (!(diversity %in% .scintg_signs)) {
     stop(sprintf("scintg: diversity must be one of %s",
                  paste(.scintg_signs, collapse=", ")))
@@ -232,24 +305,21 @@
   }
   K <- as.integer(K)
   if (K < 1 || K > N) stop("scintg: K must be between 1 and the cell count")
-
   Zn <- .scintg_l2_normalise(rows)
-
   if (!is.null(Y)) {
-    centres <- .scintg_l2_normalise(Y)
-    if (nrow(centres) != K) stop("scintg: Y must have one row per cluster")
+    Ymat <- as.matrix(Y)
+    storage.mode(Ymat) <- "double"
+    if (nrow(Ymat) != K) stop("scintg: Y must have one row per cluster")
+    centres <- .scintg_l2_normalise(Ymat)
   } else {
     centres <- .scintg_kmeans_init(Zn, K, seed)
   }
-
   names <- sort(unique(as.character(batches)))
-  batches_chr <- as.character(batches)
-  bidx <- match(batches_chr, names)
-
+  bidx <- match(as.character(batches), names)
   R <- matrix(1.0 / K, nrow=K, ncol=N)
   prev <- NULL
   for (iter in seq_len(as.integer(max_iter))) {
-    counts <- .scintg_cluster_batch_counts(R, batches_chr, names)
+    counts <- .scintg_cluster_batch_counts(R, batches, names)
     O <- counts$O
     E <- counts$E
     newR <- matrix(0, nrow=K, ncol=N)
@@ -258,11 +328,15 @@
       col <- numeric(K)
       for (k in seq_len(K)) {
         dist <- 1 - sum(centres[k, ] * Zn[i, ])
-        val <- -2.0 * dist / sigma
+        val <- -2 * dist / sigma
         if (theta > 0) {
           o <- O[k, bi]
           e <- E[k, bi]
-          ratio <- if (o > 0 && e > 0) o / e else 1e-12
+          if (o > 0 && e > 0) {
+            ratio <- o / e
+          } else {
+            ratio <- 1e-12
+          }
           sign <- if (diversity == "as_printed") 1.0 else -1.0
           val <- val + sign * theta * log(ratio)
         }
@@ -274,134 +348,85 @@
       if (s > 0) {
         newR[, i] <- ex / s
       } else {
-        newR[, i] <- rep(1.0 / K, K)
+        newR[, i] <- 1.0 / K
       }
     }
     R <- newR
+    # Y = Z R^T, then L2 normalise (Dhillon's spherical centroids)
     centres <- .scintg_l2_normalise(R %*% Zn)
-    obj <- .scintg_harmony_objective(Zn, R, centres, batches_chr, sigma, theta)
+    obj <- .scintg_harmony_objective(Zn, R, centres, batches, sigma, theta)
     if (!is.null(prev) && abs(prev - obj$total) <= tol * max(abs(prev), 1e-12)) {
       break
     }
     prev <- obj$total
   }
   list(R=R, Y=centres, K=K,
-       objective=.scintg_harmony_objective(Zn, R, centres, batches_chr, sigma, theta))
-}
-
-.scintg_correct_batch <- function(Z, R, batches, lam=1.0, reference=NULL) {
-  rows <- .scintg_matrix(Z)
-  N <- nrow(rows)
-  d <- ncol(rows)
-  K <- nrow(R)
-  if (K == 0 || ncol(R) != N) stop("scintg: R must be K by N")
-  if (length(batches) != N) stop("scintg: one batch label per cell is required")
-  if (lam < 0) stop("scintg: lambda must be non-negative")
-
-  des <- .scintg_design(batches)
-  phi <- des$phi
-  names <- des$names
-  B <- length(names)
-
-  if (!is.null(reference)) {
-    if (length(reference) != N) stop("scintg: one reference flag per cell")
-    ref <- as.logical(reference)
-    ref[is.na(ref)] <- FALSE
-    for (i in seq_len(N)) {
-      if (ref[i]) {
-        phi[i, ] <- c(1, rep(0, B))
-      }
-    }
-  }
-
-  out <- rows
-  Ws <- list()
-
-  for (k in seq_len(K)) {
-    Rk <- R[k, ]
-    weighted_phi <- phi * Rk
-    A <- crossprod(phi, weighted_phi)
-    if (B >= 1) {
-      diag_A <- diag(A)
-      diag_A[2:(B + 1)] <- diag_A[2:(B + 1)] + lam
-      diag(A) <- diag_A
-    }
-    rhs <- crossprod(phi, rows * Rk)
-    W <- solve(A, rhs)
-    W[1, ] <- 0
-    Ws[[k]] <- W
-    correction <- phi %*% W
-    out <- out - Rk * correction
-  }
-
-  list(Z=out, W=Ws, batches=names)
+       objective=.scintg_harmony_objective(Zn, R, centres, batches, sigma, theta))
 }
 
 morie_scintg <- function(Z, batches, K=NULL, sigma=0.1, theta=2.0, lam=1.0,
-                        max_iter=10, cluster_iter=25, tol=1e-4, seed=0,
-                        reference=NULL, diversity="penalise") {
+                          max_iter=10, cluster_iter=25, tol=1e-4, seed=0,
+                          reference=NULL, diversity="penalise") {
   rows <- .scintg_matrix(Z)
   N <- nrow(rows)
   d <- ncol(rows)
-  batches_chr <- as.character(batches)
-  if (length(batches_chr) != N) stop("scintg: one batch label per cell is required")
-  if (length(unique(batches_chr)) < 2) stop("scintg: at least two batches are needed")
+  if (length(batches) != N) stop("scintg: one batch label per cell is required")
+  if (length(unique(batches)) < 2) stop("scintg: at least two batches are needed")
   if (max_iter < 1) stop("scintg: max_iter must be at least 1")
-
   cur <- rows
   Y <- NULL
   hist <- numeric(0)
-  for (iter in seq_len(as.integer(max_iter))) {
-    cl <- .scintg_maximum_diversity_clustering(cur, batches_chr, K, sigma, theta,
-                                              cluster_iter, seed=seed, Y=Y,
-                                              diversity=diversity)
+  for (round in seq_len(as.integer(max_iter))) {
+    cl <- .scintg_maximum_diversity_clustering(cur, batches, K, sigma, theta,
+                                                cluster_iter, seed=seed, Y=Y,
+                                                diversity=diversity)
     Y <- cl$Y
-    got <- .scintg_correct_batch(cur, cl$R, batches_chr, lam, reference)
+    got <- .scintg_correct_batch(cur, cl$R, batches, lam, reference)
     shift <- max(abs(got$Z - cur))
     cur <- got$Z
     hist <- c(hist, cl$objective$total)
     if (shift <= tol) break
   }
-  final <- .scintg_maximum_diversity_clustering(cur, batches_chr, K, sigma, theta,
-                                               cluster_iter, seed=seed, Y=Y,
-                                               diversity=diversity)
+  final <- .scintg_maximum_diversity_clustering(cur, batches, K, sigma, theta,
+                                                cluster_iter, seed=seed, Y=Y,
+                                                diversity=diversity)
   list(
-    estimate = cur,
-    embedding = cur,
-    R = final$R,
-    Y = final$Y,
-    K = final$K,
-    objective = final$objective,
-    history = hist,
-    n_rounds = length(hist),
-    theta = as.numeric(theta),
-    sigma = as.numeric(sigma),
-    lam = as.numeric(lam),
-    diversity = diversity,
-    method = ("Harmony (Korsunsky et al. 2019): maximum diversity "
-              "clustering (eq. 8) alternated with mixture-of-experts "
-              "ridge correction (eq. 14)"),
-    note = ("theta=0 reduces the cluster step to ordinary soft "
-            "spherical k-means; the intercept row of W_k is zeroed "
-            "so batch-independent variation is kept, which is why a "
-            "reference cell (design row [1, 0, ...]) never moves. "
-            "Equation 8 is printed with (O/E)^+theta, which raises "
-            "cluster/batch dependence rather than lowering it; "
-            "diversity='penalise' uses the -theta the stated "
-            "objective implies, 'as_printed' the literal form")
+    estimate=cur,
+    embedding=cur,
+    R=final$R,
+    Y=final$Y,
+    K=final$K,
+    objective=final$objective,
+    history=hist,
+    n_rounds=length(hist),
+    theta=as.numeric(theta),
+    sigma=as.numeric(sigma),
+    lam=as.numeric(lam),
+    diversity=diversity,
+    method=paste("Harmony (Korsunsky et al. 2019): maximum diversity",
+                 "clustering (eq. 8) alternated with mixture-of-experts",
+                 "ridge correction (eq. 14)"),
+    note=paste("theta=0 reduces the cluster step to ordinary soft",
+               "spherical k-means; the intercept row of W_k is zeroed",
+               "so batch-independent variation is kept, which is why a",
+               "reference cell (design row [1, 0, ...]) never moves.",
+               "Equation 8 is printed with (O/E)^+theta, which raises",
+               "cluster/batch dependence rather than lowering it;",
+               "diversity='penalise' uses the -theta the stated",
+               "objective implies, 'as_printed' the literal form")
   )
 }
 
-morie_harmony_integrate <- morie_scintg
-morie_singlecell_integration <- morie_scintg
+harmony_integrate <- morie_scintg
+singlecell_integration <- morie_scintg
 
 .scintg_cheatsheet <- function() {
-  ("scintg: Harmony (Korsunsky et al. 2019). Alternates maximum "
-   "diversity clustering -- soft spherical k-means whose "
-   "assignment R_ki is proportional to (O_ki/E_ki)^theta "
-   "exp(-2(1 - Y_k'Z_i)/sigma), with O the observed and E the "
-   "independence-expected cluster/batch mass -- with a "
-   "mixture-of-experts ridge correction W_k = (phi* diag(R_k) "
-   "phi*' + lambda I)^-1 phi* diag(R_k) Z' whose intercept row "
-   "is zeroed, so batch goes and cell type stays.")
+  paste("scintg: Harmony (Korsunsky et al. 2019). Alternates maximum",
+        "diversity clustering -- soft spherical k-means whose",
+        "assignment R_ki is proportional to (O_ki/E_ki)^theta",
+        "exp(-2(1 - Y_k'Z_i)/sigma), with O the observed and E the",
+        "independence-expected cluster/batch mass -- with a",
+        "mixture-of-experts ridge correction W_k = (phi* diag(R_k)",
+        "phi*' + lambda I)^-1 phi* diag(R_k) Z' whose intercept row",
+        "is zeroed, so batch goes and cell type stays.")
 }

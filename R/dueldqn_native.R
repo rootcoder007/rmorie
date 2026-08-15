@@ -272,3 +272,7 @@ morie_dueldqn <- dueling_aggregate
 #' @rdname dueling_aggregate
 #' @export
 morie_dueldqn <- dueling_aggregate
+
+#' @rdname dueling_aggregate
+#' @export
+morie_dueldqn <- dueling_aggregate

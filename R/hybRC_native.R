@@ -363,3 +363,7 @@ morie_hybRC <- weighted
 #' @rdname weighted
 #' @export
 morie_hybRC <- weighted
+
+#' @rdname weighted
+#' @export
+morie_hybRC <- weighted
