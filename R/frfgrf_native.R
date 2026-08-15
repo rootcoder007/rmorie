@@ -192,9 +192,9 @@
                                       subsample_frac = 0.5, alpha = 0.05,
                                       pi = 0.5, seed = 0,
                                       kind = "double-sample", sizes = NULL) {
-  yv <- k$vec(y)
+  yv <- as.numeric(y)
   n <- length(yv)
-  Xm <- k$mat(X)
+  Xm <- as.matrix(X)
   if (nrow(Xm) != n) {
     stop(sprintf("frfgrf: %d covariate rows for %d outcomes",
                  nrow(Xm), n))

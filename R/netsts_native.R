@@ -82,7 +82,7 @@
   beta
 }
 
-.netsts_lstm_cell <- function(x, h, c, W, b, forget_bias) {
+.netsts_lstm_cell <- function(x, h, c, W, b, forget_bias = 0.0) {
   d <- length(h)
   if (length(c) != d) stop("netsts: hidden and cell sizes differ")
   inp <- c(as.numeric(x), h)
@@ -104,7 +104,7 @@
   list(h = hn, c = cn, gates = list(i = i_g, f = f_g, g = g_g, o = o_g))
 }
 
-.netsts_lstm_run <- function(X, W, b, hidden, forget_bias) {
+.netsts_lstm_run <- function(X, W, b, hidden, forget_bias = 0.0) {
   d <- as.integer(hidden)
   h <- rep(0.0, d)
   c <- rep(0.0, d)
