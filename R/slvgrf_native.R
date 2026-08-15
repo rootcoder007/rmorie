@@ -190,6 +190,6 @@ morie_slvgrf <- list(aipw_scores = aipw_scores,
                      autoc = autoc,
                      qini_curve = qini_curve,
                      rate_test = rate_test,
-                     cheatsheet = cheatsheet,
+                     cheatsheet = .slvgrf_cheatsheet,
                      slicedgrf = slicedgrf,
                      sliced_grf = sliced_grf)

@@ -93,5 +93,5 @@ morie_smcopt <- list(smcopt = smcopt,
                      sequential_mc = sequential_mc,
                      smc_optimise = smc_optimise,
                      annealing_ladder = annealing_ladder,
-                     cheatsheet = cheatsheet,
+                     cheatsheet = .smcopt_cheatsheet,
                      sequentialmc = sequentialmc)
