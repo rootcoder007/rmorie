@@ -35,7 +35,7 @@
   ),
   homicide = paste0(
     "https://services.arcgis.com/S9th0jAJ7bqgIRjw/arcgis/rest/services/",
-    "Homicides_Open_Data/FeatureServer/0"
+    "Homicides_Open_Data_ASR_RC_TBL_002/FeatureServer/0"
   ),
   robbery = paste0(
     "https://services.arcgis.com/S9th0jAJ7bqgIRjw/arcgis/rest/services/",
