@@ -129,7 +129,7 @@ dipole_moment <- function(charges, R, centre = NULL) {
   )
 }
 
-equivariance_error <- function(model, s, v, R, Q, tol = 1e-9) {
+morie_painn_equivariance_error <- function(model, s, v, R, Q, tol = 1e-9) {
   pos <- .painn_mat(R)
   d <- ncol(pos)
   Qm <- .painn_mat(Q)

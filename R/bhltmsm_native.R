@@ -154,7 +154,7 @@ fit_msm <- function(outcome, cumulative, weights = NULL, states = .STATES) {
   dof <- max(n - ncol(X) - 1, 1)
   s2 <- sum(w * res^2) / dof
   ses <- numeric(ncol(X))
-  for (a in 1:ncol(X)) {
+  for (a in seq_len(ncol(X))) {
     xm <- sum(w * X[, a]) / sum(w)
     sxx <- sum(w * (X[, a] - xm)^2)
     ses[a] <- if (sxx > .EPS) sqrt(s2 / sxx) else Inf

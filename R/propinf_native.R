@@ -361,7 +361,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 }
 
 .propinf_rng_next <- function(e) {
-  e$st <- (1103515245L * e$st + 12345L) %% 2147483647L
+  e$st <- .ghc_lcg31(e$st)
   e$st / 2147483647
 }
 
@@ -374,7 +374,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 # directly on the LCG output. Mirror that exactly.
 
 .propinf_lcg_draw <- function(e) {
-  e$st <- (1103515245L * e$st + 12345L) %% 2147483647L
+  e$st <- .ghc_lcg31(e$st)
   e$st / 2147483647
 }
 

@@ -16,7 +16,7 @@
 .EPS <- 1e-12
 .LOG2PI <- log(2 * pi)
 
-.to_mat <- function(X) {
+.flow_an_to_mat <- function(X) {
   if (is.data.frame(X)) X <- as.matrix(X)
   X <- as.matrix(X)
   if (!is.numeric(X)) storage.mode(X) <- "numeric"
@@ -94,12 +94,12 @@
 }
 
 .anomaly_score <- function(X, layers, threshold_quantile = 0.95, reference = NULL) {
-  Xm <- .to_mat(X)
+  Xm <- .flow_an_to_mat(X)
   scores <- apply(Xm, 1, function(row) -.log_prob(row, layers)$lp)
   if (is.null(reference)) {
     ref <- scores
   } else {
-    refm <- .to_mat(reference)
+    refm <- .flow_an_to_mat(reference)
     ref <- apply(refm, 1, function(row) -.log_prob(row, layers)$lp)
   }
   q <- as.numeric(threshold_quantile)

@@ -2100,7 +2100,7 @@ Ctrltree <- function(samples, r = NULL) {
 Taunull <- function(n, s = NULL) {
   n <- as.integer(n)
   if (n < 2L) stop("n must be at least 2.", call. = FALSE)
-  maxinv <- n * (n - 1L) %/% 2L
+  maxinv <- (n * (n - 1L)) %/% 2L
   counts <- numeric(maxinv + 1L); counts[1] <- 1
   for (i in 2:n) {
     new <- numeric(maxinv + 1L); run <- 0

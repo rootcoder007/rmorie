@@ -392,7 +392,7 @@ morie_estimate_gumbel <- function(m, n, letter_freqs, match = 5,
   cum <- cumsum(freqs)
   state <- as.integer(seed); if (state == 0) state <- 1
   rnd <- function() {
-    state <<- (1103515245 * state + 12345) %% (1L * 2^31)
+    state <<- .ghc_lcg31(state)
     state / (1L * 2^31)
   }
   achars <- strsplit(alphabet, "")[[1]]

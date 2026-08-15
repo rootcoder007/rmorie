@@ -148,7 +148,7 @@ centering_steps <- function(m, eps, t0, mu) {
 # numerical derivatives, supplied or differenced
 # ---------------------------------------------------------------------------
 
-.num_grad <- function(f, x, h = 1e-6) {
+.barerp_num_grad <- function(f, x, h = 1e-6) {
   x <- as.numeric(x)
   n <- length(x)
   out <- numeric(n)
@@ -201,7 +201,7 @@ grad.Fun <- function(self, x) {
     v <- self$.g(x)
     return(as.numeric(v))
   }
-  .num_grad(self$f, x)
+  .barerp_num_grad(self$f, x)
 }
 hess.Fun <- function(self, x) {
   if (!is.null(self$.h)) {

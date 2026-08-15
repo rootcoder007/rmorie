@@ -123,7 +123,7 @@ log_prior <- function(R, prior = "uniform", scale = 1, r_max = NULL,
 .rng <- function(seed) {
   st <- as.integer(seed); if (st <= 0) st <- 1L
   f <- function() {
-    st <<- (1103515245L * st + 12345L) %% 2147483648L
+    st <<- .ghc_lcg31(st)
     st / 2147483648
   }
   f
