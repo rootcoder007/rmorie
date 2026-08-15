@@ -82,12 +82,15 @@
 
 .ukfF_ut <- function(pts, w, fun) {
   np <- nrow(pts)
-  m_in <- ncol(pts)
-  ys <- matrix(0, np, m_in)
-  for (k in 1:np) {
-    ys[k, ] <- fun(pts[k, ])
+  # size the output by what fun RETURNS, not by the input dimension --
+  # a state->measurement map can change dimension
+  y1 <- as.numeric(fun(pts[1, ]))
+  m_out <- length(y1)
+  ys <- matrix(0, np, m_out)
+  ys[1, ] <- y1
+  if (np > 1L) for (k in 2:np) {
+    ys[k, ] <- as.numeric(fun(pts[k, ]))
   }
-  m_out <- ncol(ys)
   mean_y <- as.numeric(crossprod(ys, w))
   diff <- ys - matrix(mean_y, np, m_out, byrow = TRUE)
   cov_y <- crossprod(diff * w, diff)
