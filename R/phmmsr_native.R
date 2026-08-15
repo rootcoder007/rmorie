@@ -222,3 +222,7 @@ profile_hmm_search <- phmmsr_search_pipeline
 
 # entry point
 morie_phmmsr <- phmmsr_search_pipeline
+
+#' @rdname phmmsr_msv_score
+#' @export
+morie_phmmsr <- phmmsr_msv_score
