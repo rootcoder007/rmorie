@@ -46,74 +46,14 @@
 # choosing among them.
 
 .ngnest_nbeats_stack <- function(window, H, blocks, ridge = 1e-8) {
-  lb <- length(window)
-  if (lb < 4L) stop("window too short")
-
-  current_input <- as.numeric(window)
-  fc_sum <- rep(0, H)
-
-  for (block in blocks) {
-    btype <- block[[1]]
-    p1 <- as.integer(block[[2]])
-    p2 <- as.integer(block[[3]])
-
-    if (btype == "trend") {
-      deg <- max(p1, 1L)
-      idx_lb <- seq_len(lb)
-      idx_fc <- lb + seq_len(H)
-      denom <- max(lb - 1L, 1L)
-      t_lb <- (idx_lb - 1L) / denom
-      t_fc <- (idx_fc - 1L) / denom
-
-      B_lb <- sapply(0:deg, function(d) t_lb^d)
-      B_fc <- sapply(0:deg, function(d) t_fc^d)
-
-      BtB <- crossprod(B_lb)
-      reg <- ridge * diag(ncol(B_lb))
-      theta <- tryCatch(
-        solve(BtB + reg, crossprod(B_lb, current_input)),
-        error = function(e) rep(0, ncol(B_lb))
-      )
-
-      backcast <- as.vector(B_lb %*% theta)
-      fc_block <- as.vector(B_fc %*% theta)
-    } else if (btype == "seasonality") {
-      n_harm <- max(p1, 1L)
-      period <- max(H, lb)
-
-      idx_lb <- seq_len(lb)
-      idx_fc <- lb + seq_len(H)
-
-      basis_lb <- matrix(0, lb, 2L * n_harm)
-      basis_fc <- matrix(0, H, 2L * n_harm)
-      for (k in seq_len(n_harm)) {
-        basis_lb[, 2L * k - 1L] <- cos(2 * pi * k * idx_lb / period)
-        basis_lb[, 2L * k]      <- sin(2 * pi * k * idx_lb / period)
-        basis_fc[, 2L * k - 1L] <- cos(2 * pi * k * idx_fc / period)
-        basis_fc[, 2L * k]      <- sin(2 * pi * k * idx_fc / period)
-      }
-
-      BtB <- crossprod(basis_lb)
-      reg <- ridge * diag(ncol(basis_lb))
-      theta <- tryCatch(
-        solve(BtB + reg, crossprod(basis_lb, current_input)),
-        error = function(e) rep(0, ncol(basis_lb))
-      )
-
-      backcast <- as.vector(basis_lb %*% theta)
-      fc_block <- as.vector(basis_fc %*% theta)
-    } else {
-      last_val <- current_input[lb]
-      fc_block <- rep(last_val, H)
-      backcast <- rep(mean(current_input), lb)
-    }
-
-    fc_sum <- fc_sum + fc_block
-    current_input <- current_input - backcast
-  }
-
-  residual <- current_input
-  return(list(fc_sum, residual, NULL))
+  # Delegate to the shared implementation, which is what the Python arm
+  # does (morie.fn.ngnest imports nbeats_stack from morie.fn.nbeats). The
+  # local copy that used to live here normalised trend time by (lb - 1)
+  # rather than lb and built the Fourier basis on max(H, lb) with 1-based
+  # time, so its forecasts drifted from the spec.
+  if (length(window) < 4L) stop("window too short")
+  res <- nbeats_stack(window, H, blocks, ridge = ridge)
+  list(res$forecast, res$residual, res$trace)
 }
 
 .ngnest_default_block_sets <- function() {
