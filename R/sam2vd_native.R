@@ -337,3 +337,7 @@ morie_sam2vd <- morie_sam2vd_memory_bank
 #' @rdname morie_sam2vd_memory_bank
 #' @export
 morie_sam2vd <- morie_sam2vd_memory_bank
+
+#' @rdname morie_sam2vd_memory_bank
+#' @export
+morie_sam2vd <- morie_sam2vd_memory_bank
