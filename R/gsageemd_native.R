@@ -132,7 +132,7 @@ sage_layer <- function(H, adj, W, how = "mean", sizes = NULL,
 #' @return List with estimate, embeddings, depth, aggregator,
 #'   per_batch_bound, method, note.
 #' @export
-embed <- function(features, adj, Ws, how = "mean", sizes = NULL,
+morie_gsageemd_embed <- function(features, adj, Ws, how = "mean", sizes = NULL,
                   seed = 0) {
   rng <- .ghc_rng(as.integer(seed))
   H <- as.matrix(features); storage.mode(H) <- "double"
@@ -165,7 +165,7 @@ unsupervised_loss <- function(z_u, z_v, z_negatives) {
 }
 
 #' @export
-graphsage <- embed
+graphsage <- morie_gsageemd_embed
 
 # house entry point: the package exports one morie_<module>
-morie_gsageemd <- embed
+morie_gsageemd <- morie_gsageemd_embed

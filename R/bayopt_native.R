@@ -7,7 +7,7 @@
 # helpers
 # --------------------------------------------------------------------------
 
-.phi <- function(z) exp(-0.5 * z * z) / sqrt(2 * pi)
+.bayopt_phi <- function(z) exp(-0.5 * z * z) / sqrt(2 * pi)
 
 .Phi <- function(z) pnorm(z)
 
@@ -89,12 +89,16 @@ squared_exponential <- function(a, b, amplitude = 1, length_scale = 1) {
 .chol_solve <- function(L, b) {
   n <- nrow(L)
   y <- numeric(n)
-  for (i in 1:n) {
-    y[i] <- (b[i] - sum(L[i, 1:(i - 1)] * y[1:(i - 1)])) / L[i, i]
-  }
+  # seq_len, and a guard on the back-substitution: 1:(i - 1) is c(1, 0)
+  # at i = 1, and (i + 1):n counts DOWN at i = n, so both ends of this
+  # solve read the wrong entries.
+  for (i in seq_len(n))
+    y[i] <- (b[i] - sum(L[i, seq_len(i - 1L)] * y[seq_len(i - 1L)])) / L[i, i]
   x <- numeric(n)
-  for (i in n:1) {
-    x[i] <- (y[i] - sum(L[(i + 1):n, i] * x[(i + 1):n])) / L[i, i]
+  for (i in n:1L) {
+    s <- 0.0
+    if (i < n) s <- sum(L[(i + 1L):n, i] * x[(i + 1L):n])
+    x[i] <- (y[i] - s) / L[i, i]
   }
   x
 }
@@ -204,7 +208,7 @@ probability_of_improvement <- function(mu, sd, best, xi = 0) {
 expected_improvement <- function(mu, sd, best, xi = 0) {
   if (sd <= 0) return(0)
   g <- (best - xi - mu) / sd
-  sd * (g * .Phi(g) + .phi(g))
+  sd * (g * .Phi(g) + .bayopt_phi(g))
 }
 
 lower_confidence_bound <- function(mu, sd, kappa = 2) {
@@ -227,9 +231,9 @@ acquisition_gradient <- function(gmu, gsd, mu, sd, best, acq = "ei",
   if (acq == "lcb") return(-gmu + kappa * gsd)
   if (sd <= 1e-12) return(rep(0, d))
   g <- (best - xi - mu) / sd
-  if (acq == "ei") return(.phi(g) * gsd - .Phi(g) * gmu)
+  if (acq == "ei") return(.bayopt_phi(g) * gsd - .Phi(g) * gmu)
   dg <- (-gmu - g * gsd) / sd
-  .phi(g) * dg
+  .bayopt_phi(g) * dg
 }
 
 # --------------------------------------------------------------------------
@@ -246,7 +250,7 @@ maximise_acquisition <- function(X, y, best, box, acq = "ei",
   st <- as.integer(seed)
   if (st <= 0) st <- 1L
   rnd <- function() {
-    st <<- (1103515245L * st + 12345L) %% 2147483648L
+    st <<- .ghc_lcg31(st)
     st / 2147483648
   }
 
@@ -328,7 +332,7 @@ bayopt <- function(f, bounds, n_iter = 20, n_init = 5, acq = "ei",
   d <- length(box)
   st <- as.integer(seed); if (st <= 0) st <- 1L
   rnd <- function() {
-    st <<- (1103515245L * st + 12345L) %% 2147483648L
+    st <<- .ghc_lcg31(st)
     st / 2147483648
   }
   draw <- function() {
@@ -347,7 +351,11 @@ bayopt <- function(f, bounds, n_iter = 20, n_init = 5, acq = "ei",
     if (length(Y) != nrow(X))
       stop("bayopt: X0 and y0 have different lengths")
   } else {
-    X <- t(sapply(seq_len(as.integer(n_init)), function(i) draw()))
+    # t(sapply(...)) collapses to a 1 x n matrix when d == 1, i.e. the
+    # transpose of the design, so ncol was read as the sample size.
+    X <- matrix(unlist(lapply(seq_len(as.integer(n_init)),
+                              function(i) draw())),
+                ncol = d, byrow = TRUE)
     Y <- vapply(seq_len(nrow(X)), function(i) as.numeric(f(X[i, ])),
                 numeric(1))
   }

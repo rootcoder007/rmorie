@@ -18,7 +18,7 @@
       out <- numeric(n)
       x <- as.integer(seed) + as.integer(st$stream) * 1009L
       for (i in 1:n) {
-        x <- (1103515245L * x + 12345L) %% 2147483648L
+        x <- .ghc_lcg31(x)
         out[i] <- x / 2147483648
       }
       st$buf <- out

@@ -25,7 +25,7 @@
 #' @return Numeric vector, same length as \code{x}.
 #' @keywords internal
 #' @noRd
-.softmax <- function(x) {
+.crsfmr_softmax <- function(x) {
   m <- max(x)
   ex <- exp(x - m)
   ex / sum(ex)
@@ -57,7 +57,7 @@ morie_crsfmr_attention <- function(Q, K, V) {
     logits <- numeric(nrow(Km))
     for (j in seq_len(nrow(Km)))
       logits[j] <- scale * sum(Qm[i, ] * Km[j, ])
-    w <- .softmax(logits)
+    w <- .crsfmr_softmax(logits)
     W[i, ] <- w
     for (a in seq_len(ncol(Vm)))
       out[i, a] <- sum(w * Vm[, a])

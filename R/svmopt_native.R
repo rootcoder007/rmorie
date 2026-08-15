@@ -62,7 +62,7 @@ dual_objective <- function(alpha, y, K) {
   sum(a) - 0.5 * q
 }
 
-.bounds <- function(i, j, a, y, C) {
+.svmopt_bounds <- function(i, j, a, y, C) {
   if (y[i] != y[j]) {
     L <- max(0.0, a[j] - a[i])
     Hh <- min(C, C + a[j] - a[i])
@@ -77,7 +77,7 @@ solve_pair <- function(i, j, alpha, y, K, grad, C) {
   a <- as.numeric(alpha)
   if (i == j)
     stop("svmopt: the working set must contain two DIFFERENT indices")
-  bnd <- .bounds(i, j, a, as.numeric(y), C)
+  bnd <- .svmopt_bounds(i, j, a, as.numeric(y), C)
   L <- bnd$L; Hh <- bnd$H
   if (Hh <= L + .SVMOPT_EPS)
     return(list(alpha = a, moved = 0.0, clipped = TRUE,
@@ -201,7 +201,7 @@ morie_svmopt <- list(kernel_matrix = kernel_matrix,
                      smo = smo,
                      recover_bias = recover_bias,
                      cheatsheet = .svmopt_cheatsheet,
-                     .bounds = .bounds,
+                     .svmopt_bounds = .svmopt_bounds,
                      svm_dual_qp = svm_dual_qp,
                      svm_dual = svm_dual,
                      svmdual = svmdual)

@@ -22,7 +22,7 @@
 .EPS <- 1e-12
 
 # mirror _s03core.mat
-.to_mat <- function(X) {
+.farmlmm_to_mat <- function(X) {
   if (is.data.frame(X)) X <- as.matrix(X)
   if (is.null(dim(X))) X <- matrix(as.numeric(X), nrow = length(X))
   X <- matrix(as.numeric(X), nrow = nrow(X))
@@ -40,7 +40,7 @@
 
 # mirror _s03core.wls
 .farmlmm_wls <- function(X, y, w, rcond) {
-  X <- .to_mat(X)
+  X <- .farmlmm_to_mat(X)
   y <- .to_vec(y)
   w <- as.numeric(w)
   if (nrow(X) != length(y)) stop("wls: length mismatch")
@@ -54,7 +54,7 @@
 }
 
 .kinship_from_markers <- function(G, markers = NULL) {
-  M <- .to_mat(G)
+  M <- .farmlmm_to_mat(G)
   n <- nrow(M); p <- ncol(M)
   cols <- if (is.null(markers)) seq_len(p) else as.integer(markers) + 1L
   if (length(cols) == 0L) stop("farmlmm: kinship needs at least one marker")
@@ -73,7 +73,7 @@
 }
 
 .confounding <- function(G, K, marker) {
-  M <- .to_mat(G)
+  M <- .farmlmm_to_mat(G)
   n <- nrow(M)
   g <- M[, as.integer(marker) + 1L]
   kg <- as.numeric(K %*% g) / n
@@ -87,7 +87,7 @@
 
 .fixed_effect_scan <- function(y, G, covariates = integer(0), K = NULL) {
   yv <- .to_vec(y)
-  M <- .to_mat(G)
+  M <- .farmlmm_to_mat(G)
   n <- nrow(M); p <- ncol(M)
   if (length(yv) != n) {
     stop(sprintf("farmlmm: %d phenotypes but %d genotypes", length(yv), n))
@@ -135,7 +135,7 @@
 
 .farmcpu <- function(y, G, max_iter = 10L, threshold = NULL, seed = 0L) {
   yv <- .to_vec(y)
-  M <- .to_mat(G)
+  M <- .farmlmm_to_mat(G)
   p <- ncol(M)
   thr <- if (is.null(threshold)) 0.05 / p else as.numeric(threshold)
   sel <- integer(0); hist <- list(); converged <- FALSE

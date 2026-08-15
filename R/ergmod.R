@@ -57,7 +57,7 @@ Ergmod <- function(G, statistics = "edges", theta_init = NULL, iters = 100,
       }
     }, 0, USE.NAMES = FALSE)
   }
-  nd <- n * (n - 1L) %/% 2L
+  nd <- (n * (n - 1L)) %/% 2L
   if (nd < p) stop("fewer dyads than parameters")
   X <- matrix(0, nd, p); yv <- numeric(nd)
   d <- 0L

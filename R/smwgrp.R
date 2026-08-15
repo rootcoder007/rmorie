@@ -43,7 +43,7 @@ smwgrp <- function(A) {
 
 # CANONICAL TEST
 # A <- matrix(0,6,6); E <- rbind(c(1,2),c(1,3),c(2,3),c(3,4),c(4,5),c(4,6),c(5,6))
-# for (i in 1:nrow(E)) { A[E[i,1],E[i,2]] <- 1; A[E[i,2],E[i,1]] <- 1 }
+# for (i in seq_len(nrow(E))) { A[E[i,1],E[i,2]] <- 1; A[E[i,2],E[i,1]] <- 1 }
 # stopifnot(abs(smwgrp(A)$path_length - 1.8) < 1e-12)
 
 #' @rdname smwgrp

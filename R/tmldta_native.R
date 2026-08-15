@@ -23,12 +23,12 @@
 .TMLDTA_METHODS <- c("cv-tmle", "sample-split", "naive")
 .EPS <- 1e-9
 
-.logit <- function(p) {
+.tmldta_logit <- function(p) {
   q <- min(max(as.numeric(p), .EPS), 1 - .EPS)
   log(q / (1 - q))
 }
 
-.expit <- function(x) if (x > -700) 1 / (1 + exp(-x)) else 0
+.tmldta_expit <- function(x) if (x > -700) 1 / (1 + exp(-x)) else 0
 
 .levels <- function(A, candidate_strata) {
   if (!is.null(candidate_strata)) {
@@ -61,7 +61,7 @@
     coef(glm(y[rows] ~ X - 1, family = binomial()))))
   q_fn <- function(a, i) {
     r <- design_row(a, i)
-    .expit(sum(r * b))
+    .tmldta_expit(sum(r * b))
   }
   list(q = q_fn, b = b)
 }
@@ -74,7 +74,7 @@
       coef(glm(mask[rows] ~ .,
                data = data.frame(X[rows, , drop = FALSE]),
                family = binomial()))))
-    .expit(as.numeric(X %*% b))
+    .tmldta_expit(as.numeric(X %*% b))
   }
   pH <- cat_fit(ifelse(A == aH, 1, 0))
   pL <- cat_fit(ifelse(A == aL, 1, 0))
@@ -145,13 +145,13 @@ split_specific_tmle <- function(y, A, W, levels, aL, aH,
   fg <- .fit_g(A, W, aL, aH, fit_rows, ridge, trim)
   gH <- fg$gH; gL <- fg$gL
   H <- ifelse(A == aH, 1 / gH, 0) - ifelse(A == aL, 1 / gL, 0)
-  off <- vapply(seq_len(n), function(i) .logit(fq$q(A[i], i)),
+  off <- vapply(seq_len(n), function(i) .tmldta_logit(fq$q(A[i], i)),
                  numeric(1))
   eps <- 0
   if (target) {
     e <- 0
     for (it in seq_len(60L)) {
-      p <- .expit(off[est_rows] + e * H[est_rows])
+      p <- .tmldta_expit(off[est_rows] + e * H[est_rows])
       gr <- sum(H[est_rows] * (y[est_rows] - p))
       he <- sum(H[est_rows]^2 * p * (1 - p))
       if (he < 1e-12) break
@@ -163,7 +163,7 @@ split_specific_tmle <- function(y, A, W, levels, aL, aH,
   }
   qstar <- function(a, i) {
     h <- if (a == aH) 1 / gH[i] else -1 / gL[i]
-    .expit(.logit(fq$q(a, i)) + eps * h)
+    .tmldta_expit(.tmldta_logit(fq$q(a, i)) + eps * h)
   }
   m <- length(est_rows)
   psi <- sum(vapply(est_rows, function(i)
@@ -171,7 +171,7 @@ split_specific_tmle <- function(y, A, W, levels, aL, aH,
   D <- numeric(m)
   for (k in seq_along(est_rows)) {
     i <- est_rows[k]
-    resid <- .expit(off[i] + eps * H[i])
+    resid <- .tmldta_expit(off[i] + eps * H[i])
     D[k] <- H[i] * (y[i] - resid) + qstar(aH, i) - qstar(aL, i) - psi
   }
   names(D) <- as.character(est_rows)
@@ -180,7 +180,7 @@ split_specific_tmle <- function(y, A, W, levels, aL, aH,
   list(psi = psi, D = D, info = list(eps = eps, max_weight = max_w))
 }
 
-.folds <- function(n, n_folds) {
+.tmldta_folds <- function(n, n_folds) {
   V <- max(2L, min(as.integer(n_folds), n))
   lapply(seq_len(V) - 1L, function(v) which(seq_len(n) %% V == v))
 }
@@ -250,7 +250,7 @@ morie_tmldta <- function(y, D, X, candidate_strata = NULL,
     psi_hat <- ss$psi
     eps_all <- c(0)
   } else {
-    folds <- .folds(n, n_folds)
+    folds <- .tmldta_folds(n, n_folds)
     splits <- list(); per_split <- list(); ics <- list(); eps_all <- c()
     for (est in folds) {
       gen <- setdiff(all_rows, est)

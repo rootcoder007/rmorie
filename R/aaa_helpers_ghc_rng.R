@@ -175,3 +175,23 @@
   inv <- ifelse(s$d > cutoff, 1 / s$d, 0)
   s$v %*% (inv * t(s$u))
 }
+
+# glibc's LCG, exactly. Several modules mirror a Python arm that does
+# (1103515245 * st + 12345) % (1 << 31) in big integers. Written
+# directly in R that product reaches 2.4e18, far past the 2^53 where a
+# double stops being exact -- and with integer literals it overflows to
+# NA outright. Split the state into 16-bit limbs and reduce each partial
+# product before recombining, so every intermediate stays below 2^53.
+.ghc_lcg31 <- function(st) {
+  hi <- st %/% 65536
+  lo <- st %% 65536
+  a_hi <- (1103515245 * hi) %% 2147483648
+  a_lo <- (1103515245 * lo) %% 2147483648
+  ((a_hi * 65536) %% 2147483648 + a_lo + 12345) %% 2147483648
+}
+
+# The uniform the Python arms take from it: st / 2^31 AFTER the step.
+.ghc_lcg31_unif <- function(env) {
+  env$st <- .ghc_lcg31(env$st)
+  env$st / 2147483648
+}

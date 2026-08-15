@@ -80,7 +80,7 @@ semantic_attention <- function(Z_per_metapath, W, b, q) {
     nm <- names_v[idx]
     Z <- as.matrix(Z_per_metapath[[nm]])
     acc <- 0.0
-    for (i in 1:nrow(Z)) {
+    for (i in seq_len(nrow(Z))) {
       proj <- tanh(as.numeric(b) + as.numeric(W %*% Z[i, ]))
       acc <- acc + sum(q * proj)
     }
@@ -100,7 +100,7 @@ semantic_attention <- function(Z_per_metapath, W, b, q) {
 han_forward <- function(H, edges, types, metapaths, a_vec, W_node,
                         W_sem, b_sem, q_sem, slope = 0.2) {
   if (is.matrix(H)) {
-    feats <- lapply(1:nrow(H), function(i) as.numeric(H[i, ]))
+    feats <- lapply(seq_len(nrow(H)), function(i) as.numeric(H[i, ]))
   } else {
     feats <- lapply(H, as.numeric)
   }

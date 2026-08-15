@@ -127,7 +127,7 @@ Vargpc <- function(X, y, X_test = NULL, m_inducing = 4, lengthscale = 1,
   gw <- numeric(Q)
   for (i in seq_len(Q)) gw[i] <- sqrt(pi) * je$vectors[1L, i] * je$vectors[1L, i]
   sq <- sqrt(pi); r2 <- sqrt(2)
-  npar <- M + M * (M + 1L) %/% 2L
+  npar <- M + (M * (M + 1L)) %/% 2L
   elbo_of <- function(p) {
     mu_u <- p[seq_len(M)]
     Lm <- ltri(p[(M + 1L):npar], M)

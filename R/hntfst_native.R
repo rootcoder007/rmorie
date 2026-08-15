@@ -215,7 +215,7 @@ honest_forest <- function(X, y, W = NULL, kind = "double-sample",
                        seed = as.integer(seed) * 7919L + b - 1L,
                        subsample = sub)
     tree <- res$tree
-    for (q in 1:nrow(Q)) {
+    for (q in seq_len(nrow(Q))) {
       preds[b, q] <- .hntfst_tree_predict(tree, Q[q, ])
     }
     walk <- function(nd, dep) {
@@ -232,7 +232,7 @@ honest_forest <- function(X, y, W = NULL, kind = "double-sample",
 
   fitted <- colMeans(preds)
   var <- numeric(nrow(Q))
-  for (q in 1:nrow(Q)) {
+  for (q in seq_len(nrow(Q))) {
     var[q] <- infinitesimal_jackknife(preds[, q], in_bag, n, s, correction)
   }
   se <- sqrt(pmax(var, 0.0))
@@ -240,7 +240,7 @@ honest_forest <- function(X, y, W = NULL, kind = "double-sample",
   tot_splits <- sum(splits_on)
   if (tot_splits == 0L) tot_splits <- 1L
   list(estimate = fitted, fitted = fitted, se = se,
-       ci = lapply(1:nrow(Q), function(q)
+       ci = lapply(seq_len(nrow(Q)), function(q)
          c(fitted[q] - z * se[q], fitted[q] + z * se[q])),
        variance = var, n = n, s = s, n_trees = B,
        split_counts = splits_on,
