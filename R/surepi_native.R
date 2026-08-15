@@ -271,3 +271,7 @@ morie_surepi <- surepi_ears_detect
 #' @rdname surepi_c1_mild
 #' @export
 morie_surepi <- surepi_c1_mild
+
+#' @rdname surepi_c1_mild
+#' @export
+morie_surepi <- surepi_c1_mild
