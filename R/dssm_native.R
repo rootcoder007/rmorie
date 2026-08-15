@@ -302,3 +302,7 @@ morie_dssm_click_posterior <- function(query_vector, clicked_vector,
 #' @rdname morie_dssm_letter_ngrams
 #' @export
 morie_dssm <- morie_dssm_letter_ngrams
+
+#' @rdname morie_dssm_letter_ngrams
+#' @export
+morie_dssm <- morie_dssm_letter_ngrams
