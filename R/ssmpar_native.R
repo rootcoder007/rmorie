@@ -182,46 +182,14 @@ ssm_parallel_scan <- parallel_scan
 # entry point
 morie_ssmpar <- parallel_scan
 
-#' @rdname compose
-#' @export
-morie_ssmpar <- compose
 
-#' @rdname compose
-#' @export
-morie_ssmpar <- compose
 
-#' @rdname compose
-#' @export
-morie_ssmpar <- compose
 
-#' @rdname compose
-#' @export
-morie_ssmpar <- compose
 
-#' @rdname compose
-#' @export
-morie_ssmpar <- compose
 
-#' @rdname compose
-#' @export
-morie_ssmpar <- compose
 
-#' @rdname compose
-#' @export
-morie_ssmpar <- compose
 
-#' @rdname compose
-#' @export
-morie_ssmpar <- compose
 
-#' @rdname compose
-#' @export
-morie_ssmpar <- compose
 
-#' @rdname compose
-#' @export
-morie_ssmpar <- compose
 
-#' @rdname compose
-#' @export
-morie_ssmpar <- compose
+

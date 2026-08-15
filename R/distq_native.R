@@ -338,86 +338,24 @@ distributional_rl <- categorical_projection
 #' @export
 morie_distq <- atoms
 
-#' @rdname atoms
-#' @export
-morie_distq <- atoms
 
-#' @rdname atoms
-#' @export
-morie_distq <- atoms
 
-#' @rdname atoms
-#' @export
-morie_distq <- atoms
 
-#' @rdname atoms
-#' @export
-morie_distq <- atoms
 
-#' @rdname atoms
-#' @export
-morie_distq <- atoms
 
-#' @rdname atoms
-#' @export
-morie_distq <- atoms
 
-#' @rdname atoms
-#' @export
-morie_distq <- atoms
 
-#' @rdname atoms
-#' @export
-morie_distq <- atoms
 
-#' @rdname atoms
-#' @export
-morie_distq <- atoms
 
-#' @rdname atoms
-#' @export
-morie_distq <- atoms
 
-#' @rdname atoms
-#' @export
-morie_distq <- atoms
 
-#' @rdname atoms
-#' @export
-morie_distq <- atoms
 
-#' @rdname atoms
-#' @export
-morie_distq <- atoms
 
-#' @rdname atoms
-#' @export
-morie_distq <- atoms
 
-#' @rdname atoms
-#' @export
-morie_distq <- atoms
 
-#' @rdname atoms
-#' @export
-morie_distq <- atoms
 
-#' @rdname atoms
-#' @export
-morie_distq <- atoms
 
-#' @rdname atoms
-#' @export
-morie_distq <- atoms
 
-#' @rdname atoms
-#' @export
-morie_distq <- atoms
 
-#' @rdname atoms
-#' @export
-morie_distq <- atoms
 
-#' @rdname atoms
-#' @export
-morie_distq <- atoms
+

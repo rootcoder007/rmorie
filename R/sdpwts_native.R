@@ -250,54 +250,16 @@ sdpwts_cheatsheet <- function() {
          "0, whose answer is lambda_min(A).")
 }
 
-#' @rdname sdpwts_lmi
-#' @export
-morie_sdpwts <- sdpwts_lmi
 
-#' @rdname sdpwts_lmi
-#' @export
-morie_sdpwts <- sdpwts_lmi
 
-#' @rdname sdpwts_lmi
-#' @export
-morie_sdpwts <- sdpwts_lmi
 
-#' @rdname sdpwts_lmi
-#' @export
-morie_sdpwts <- sdpwts_lmi
 
-#' @rdname sdpwts_lmi
-#' @export
-morie_sdpwts <- sdpwts_lmi
 
-#' @rdname sdpwts_lmi
-#' @export
-morie_sdpwts <- sdpwts_lmi
 
-#' @rdname sdpwts_lmi
-#' @export
-morie_sdpwts <- sdpwts_lmi
 
-#' @rdname sdpwts_lmi
-#' @export
-morie_sdpwts <- sdpwts_lmi
 
-#' @rdname sdpwts_lmi
-#' @export
-morie_sdpwts <- sdpwts_lmi
 
-#' @rdname sdpwts_lmi
-#' @export
-morie_sdpwts <- sdpwts_lmi
 
-#' @rdname sdpwts_lmi
-#' @export
-morie_sdpwts <- sdpwts_lmi
 
-#' @rdname sdpwts_lmi
-#' @export
-morie_sdpwts <- sdpwts_lmi
 
-#' @rdname sdpwts_lmi
-#' @export
-morie_sdpwts <- sdpwts_lmi
+

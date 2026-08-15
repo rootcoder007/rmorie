@@ -1,4 +1,3 @@
-```r
 # voom: precision weights for RNA-seq log-counts.
 #
 # Law, C. W., Chen, Y., Shi, W., & Smyth, G. K. (2014) "voom: precision weights
@@ -128,6 +127,39 @@
   y
 }
 
+.limmav_erf <- function(x) {
+  a1 <-  0.254829592
+  a2 <- -0.284496736
+  a3 <-  1.421413741
+  a4 <- -1.453152027
+  a5 <-  1.061405429
+  pp <-  0.3275911
+  sign <- if (x < 0) -1 else 1
+  ax <- abs(x)
+  t <- 1.0 / (1.0 + pp * ax)
+  y <- 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * exp(-ax * ax)
+  sign * y
+}
+
+.limmav_benjamini_hochberg <- function(p) {
+  p <- as.numeric(p)
+  n <- length(p)
+  if (n == 0) return(numeric(0))
+  ord <- order(p)
+  ranked <- p[ord]
+  adj <- numeric(n)
+  prev <- 1.0
+  for (i in n:1) {
+    val <- ranked[i] * n / i
+    if (val < prev) prev <- val
+    adj[i] <- prev
+  }
+  adj <- pmin(adj, 1.0)
+  out <- numeric(n)
+  out[ord] <- adj
+  out
+}
+
 .limmav_ebayes <- function(sigma2, df, robust_floor = 1e-12) {
   s2 <- as.numeric(sigma2)
   G <- length(s2)
@@ -139,7 +171,9 @@
   }
   if (length(dg) != G) stop("limmav: one degrees-of-freedom value per gene")
   use <- which(s2 > robust_floor & dg > 0)
-  if (length(use) == 0) stop("limmav: every gene has zero variance or zero degrees of freedom")
+  if (length(use) == 0) {
+    stop("limmav: every gene has zero variance or zero degrees of freedom")
+  }
   e <- log(s2[use]) - .limmav_digamma(dg[use] / 2.0) + log(dg[use] / 2.0)
   ebar <- mean(e)
   n <- length(e)
@@ -166,22 +200,49 @@
        df_total = dg + d0, no_gene_variation = FALSE)
 }
 
-.limmav_log_cpm <- function(counts, lib_sizes = NULL, prior_count = 0.5, lib_offset = 1.0) {
-  K <- as.matrix(counts)
-  storage.mode(K) <- "double"
-  if (nrow(K) == 0 || ncol(K) == 0) {
+.limmav_ols <- function(X, y, w = NULL) {
+  X <- as.matrix(X)
+  storage.mode(X) <- "double"
+  y <- as.numeric(y)
+  n <- length(y)
+  p <- ncol(X)
+  if (is.null(w)) {
+    ww <- rep(1.0, n)
+  } else {
+    ww <- as.numeric(w)
+  }
+  WX <- ww * X
+  M <- crossprod(WX, X)
+  v <- as.numeric(crossprod(WX, y))
+  inv <- tryCatch(solve(M), error = function(e) NULL)
+  if (is.null(inv)) stop("limmav: the design matrix is singular")
+  beta <- as.numeric(solve(M, v))
+  fit <- as.numeric(X %*% beta)
+  df <- n - p
+  if (df <= 0) stop("limmav: no residual degrees of freedom")
+  rss <- sum(ww * (y - fit)^2)
+  list(beta = beta, fit = fit, sd = sqrt(rss / df), inv = inv, df = df)
+}
+
+.limmav_log_cpm <- function(counts, lib_sizes = NULL, prior_count = 0.5,
+                            lib_offset = 1.0) {
+  counts <- as.matrix(counts)
+  storage.mode(counts) <- "double"
+  if (nrow(counts) == 0 || ncol(counts) == 0) {
     stop("limmav: counts must be a non-empty gene x sample matrix")
   }
-  m <- ncol(K)
-  if (any(K < 0)) stop("limmav: counts must be non-negative")
+  m <- ncol(counts)
+  if (any(counts < 0)) stop("limmav: counts must be non-negative")
   if (is.null(lib_sizes)) {
-    R <- colSums(K)
+    R <- colSums(counts)
   } else {
     R <- as.numeric(lib_sizes)
     if (length(R) != m) stop("limmav: one library size per sample")
   }
   if (any(R <= 0)) stop("limmav: library sizes must be positive")
-  y <- log2((K + prior_count) / (R + lib_offset) * 1e6)
+  y <- log2(counts + prior_count) -
+       matrix(log2(R + lib_offset), nrow = nrow(counts),
+              ncol = m, byrow = TRUE) + log2(1e6)
   list(y = y, R = R)
 }
 
@@ -192,117 +253,89 @@
   if (n != length(y)) stop("limmav: x and y must have the same length")
   if (n == 0) stop("limmav: nothing to smooth")
   if (span <= 0 || span > 1) stop("limmav: span must lie in (0, 1]")
-
-  order_idx <- order(x)
-  xs <- x[order_idx]
-  ys <- y[order_idx]
+  ord <- order(x)
+  xs <- x[ord]
+  ys <- y[ord]
   q <- max(2, ceiling(span * n))
   rw <- rep(1.0, n)
   fitted <- ys
-
+  iterations <- as.integer(iterations)
   for (it in 0:iterations) {
     for (i in seq_len(n)) {
-      lo_r <- max(1, min(i - q %/% 2, n - q + 1))
-      hi_r <- lo_r + q - 1
-
-      d <- max(abs(xs[i] - xs[lo_r]), abs(xs[hi_r] - xs[i]), 1e-12)
-      sw <- 0.0; sx <- 0.0; sy <- 0.0; sxx <- 0.0; sxy <- 0.0
-      for (k in lo_r:hi_r) {
+      lo <- max(1, min(i - q %/% 2, n - q + 1))
+      hi <- lo + q - 1
+      d <- max(abs(xs[i] - xs[lo]), abs(xs[hi] - xs[i]), 1e-12)
+      sw <- 0.0
+      sx <- 0.0
+      sy <- 0.0
+      sxx <- 0.0
+      sxy <- 0.0
+      for (k in lo:hi) {
         u <- abs(xs[k] - xs[i]) / d
-        w <- if (u < 1.0) (1.0 - u^3)^3 else 0.0
-        w <- w * rw[k]
-        if (w <= 0) next
-        sw <- sw + w
-        sx <- sx + w * xs[k]
-        sy <- sy + w * ys[k]
-        sxx <- sxx + w * xs[k]^2
-        sxy <- sxy + w * xs[k] * ys[k]
+        wt <- if (u < 1.0) (1.0 - u^3)^3 else 0.0
+        wt <- wt * rw[k]
+        if (wt <= 0) next
+        sw <- sw + wt
+        sx <- sx + wt * xs[k]
+        sy <- sy + wt * ys[k]
+        sxx <- sxx + wt * xs[k] * xs[k]
+        sxy <- sxy + wt * xs[k] * ys[k]
       }
       if (sw <= 0) {
         fitted[i] <- ys[i]
-        next
-      }
-      den <- sw * sxx - sx * sx
-      if (abs(den) < 1e-12) {
-        fitted[i] <- sy / sw
       } else {
-        b <- (sw * sxy - sx * sy) / den
-        a <- (sy - b * sx) / sw
-        fitted[i] <- a + b * xs[i]
+        den <- sw * sxx - sx * sx
+        if (abs(den) < 1e-12) {
+          fitted[i] <- sy / sw
+        } else {
+          b <- (sw * sxy - sx * sy) / den
+          a <- (sy - b * sx) / sw
+          fitted[i] <- a + b * xs[i]
+        }
       }
     }
     if (it == iterations) break
     res <- abs(ys - fitted)
     s <- sort(res)[n %/% 2 + 1]
     if (s <= 0) break
-    rw <- (1 - pmin(res / (6 * s), 1))^2
+    rw <- (1 - pmin(res / (6 * s), 1)^2)^2
   }
-
   out <- numeric(n)
-  out[order_idx] <- fitted
+  for (pos in seq_along(ord)) {
+    i <- ord[pos]
+    out[i] <- fitted[pos]
+  }
   out
 }
 
-.limmav_ols <- function(X, y, w = NULL) {
-  X <- as.matrix(X)
-  y <- as.numeric(y)
-  n <- nrow(X)
-  p <- ncol(X)
-  if (is.null(w)) {
-    ww <- rep(1.0, n)
-  } else {
-    ww <- as.numeric(w)
-  }
-  Xw <- ww * X
-  M <- crossprod(X, Xw)
-  v <- crossprod(X, ww * y)
-
-  beta <- tryCatch(solve(M, v), error = function(e) {
-    stop("limmav: the design matrix is singular")
-  })
-  inv <- tryCatch(solve(M), error = function(e) {
-    stop("limmav: the design matrix is singular")
-  })
-
-  fit <- as.numeric(X %*% beta)
-  df <- n - p
-  if (df <= 0) stop("limmav: no residual degrees of freedom")
-  rss <- sum(ww * (y - fit)^2)
-  sd <- sqrt(rss / df)
-
-  list(beta = as.numeric(beta), fit = fit, sd = sd, inv = inv, df = df)
-}
-
 .limmav_voom_weights <- function(counts, design, lib_sizes = NULL, span = 0.5) {
-  y_R <- .limmav_log_cpm(counts, lib_sizes)
-  y <- y_R$y
-  R <- y_R$R
+  lc <- .limmav_log_cpm(counts, lib_sizes)
+  y <- lc$y
+  R <- lc$R
   G <- nrow(y)
   m <- ncol(y)
   X <- as.matrix(design)
+  storage.mode(X) <- "double"
   if (nrow(X) != m) {
     stop(sprintf("limmav: the design has %d rows but there are %d samples",
                  nrow(X), m))
   }
-
   fitted <- matrix(0, G, m)
   sds <- numeric(G)
   means <- numeric(G)
   for (g in seq_len(G)) {
-    res <- .limmav_ols(X, y[g, ])
-    fitted[g, ] <- res$fit
-    sds[g] <- res$sd
+    ols <- .limmav_ols(X, y[g, ])
+    fitted[g, ] <- ols$fit
+    sds[g] <- ols$sd
     means[g] <- mean(y[g, ])
   }
-
   logR <- mean(log2(R + 1.0))
   r_tilde <- means + logR - log2(1e6)
-
   sqrt_sd <- sqrt(sds)
   smooth <- .limmav_lowess(r_tilde, sqrt_sd, span = span)
-  order_g <- order(r_tilde)
-  kx <- r_tilde[order_g]
-  ky <- smooth[order_g]
+  ord <- order(r_tilde)
+  kx <- r_tilde[ord]
+  ky <- smooth[ord]
 
   lo <- function(t) {
     if (t <= kx[1]) return(ky[1])
@@ -332,31 +365,34 @@
       W[g, i] <- if (s > 0) 1.0 / (s^4) else 0.0
     }
   }
-
   list(log_cpm = y, weights = W, mean_log_count = r_tilde,
        sqrt_sd = sqrt_sd, trend_x = kx, trend_y = ky,
        lib_sizes = R, lo = lo)
 }
 
 .limmav_weighted_lm <- function(y, X, w, contrast) {
-  res <- .limmav_ols(X, y, w)
-  beta <- res$beta
-  sd <- res$sd
-  inv <- res$inv
-  df <- res$df
-  p <- ncol(X)
-  est <- sum(contrast * beta)
-  v_un <- sum(contrast * (inv %*% contrast))
+  ols <- .limmav_ols(X, y, w)
+  beta <- ols$beta
+  inv <- ols$inv
+  sd <- ols$sd
+  df <- ols$df
+  p <- length(beta)
+  c_vec <- as.numeric(contrast)
+  est <- sum(c_vec * beta)
+  v_un <- 0
+  for (a in seq_len(p)) {
+    for (b in seq_len(p)) {
+      v_un <- v_un + c_vec[a] * inv[a, b] * c_vec[b]
+    }
+  }
   var <- v_un * sd * sd
-  se <- sqrt(max(var, 0.0))
-  t <- if (se > 0) est / se else 0.0
-  list(est = est, se = se, t = t, df = df, sd = sd, v_un = v_un)
+  se <- sqrt(max(var, 0))
+  t_val <- if (se > 0) est / se else 0.0
+  list(est = est, se = se, t = t_val, df = df, sd = sd, v_un = v_un)
 }
 
 .limmav_t_sf <- function(t, df) {
-  x <- df / (df + t * t)
-  a <- 0.5 * df
-  b <- 0.5
+  x <- df / (df + t^2)
 
   betacf <- function(a, b, x) {
     qab <- a + b
@@ -389,48 +425,150 @@
     h
   }
 
-  lbeta <- if (x > 0 && x < 1) {
-    lgamma(a + b) - lgamma(a) - lgamma(b) + a * log(x) + b * log(1.0 - x)
-  } else {
-    NULL
-  }
-  if (is.null(lbeta)) {
-    return(if (x >= 1) 1.0 else 0.0)
-  }
+  a <- 0.5 * df
+  b <- 0.5
+  if (x <= 0) return(0.0)
+  if (x >= 1) return(1.0)
+  lbeta <- lgamma(a + b) - lgamma(a) - lgamma(b) +
+           a * log(x) + b * log(1.0 - x)
   if (x < (a + 1.0) / (a + b + 2.0)) {
-    exp(lbeta) * betacf(a, b, x) / a
+    return(exp(lbeta) * betacf(a, b, x) / a)
   } else {
-    1.0 - exp(lbeta) * betacf(b, a, 1.0 - x) / b
+    return(1.0 - exp(lbeta) * betacf(b, a, 1.0 - x) / b)
   }
-}
-
-.limmav_benjamini_hochberg <- function(pvalues) {
-  p <- as.numeric(pvalues)
-  G <- length(p)
-  if (G == 0) return(numeric(0))
-  ord <- order(p)
-  p_sorted <- p[ord]
-  ranks <- seq_len(G)
-  adj_sorted <- pmin(p_sorted * G / ranks, 1)
-  if (G > 1) {
-    for (i in (G-1):1) {
-      adj_sorted[i] <- min(adj_sorted[i], adj_sorted[i+1])
-    }
-  }
-  result <- numeric(G)
-  result[ord] <- adj_sorted
-  result
 }
 
 morie_limmav <- function(counts, design, contrast = NULL, lib_sizes = NULL,
-                          span = 0.5, weights = TRUE, moderate = TRUE) {
+                         span = 0.5, weights = TRUE, moderate = TRUE) {
   if (is.matrix(design)) {
     X <- design
+    storage.mode(X) <- "double"
+  } else if (is.list(design)) {
+    first <- design[[1]]
+    if (is.list(first) || (is.atomic(first) && length(first) > 1)) {
+      X <- matrix(as.numeric(unlist(design)), nrow = length(design),
+                  byrow = TRUE)
+    } else {
+      labels <- sapply(design, as.character)
+      levels <- unique(labels)
+      if (length(levels) < 2) stop("limmav: the design has only one group")
+      X <- cbind(1, sapply(levels[-1], function(lv) as.numeric(labels == lv)))
+    }
   } else {
-    labs <- as.character(design)
-    levels <- unique(labs)
+    labels <- as.character(design)
+    levels <- unique(labels)
     if (length(levels) < 2) stop("limmav: the design has only one group")
-    X <- matrix(0, nrow = length(labs), ncol = length(levels))
-    X[, 1] <- 1
-    for (j in 2:length(levels)) {
-      X[, j] <- as.numeric(labs ==
+    X <- cbind(1, sapply(levels[-1], function(lv) as.numeric(labels == lv)))
+  }
+
+  v <- .limmav_voom_weights(counts, X, lib_sizes, span)
+  y <- v$log_cpm
+  W <- v$weights
+  G <- nrow(y)
+  m <- ncol(y)
+  p <- ncol(X)
+  c_vec <- if (is.null(contrast)) {
+    c(rep(0.0, p - 1), 1.0)
+  } else {
+    if (length(contrast) != p) {
+      stop(sprintf("limmav: the contrast must have one entry per coefficient (%d)",
+                   p))
+    }
+    as.numeric(contrast)
+  }
+
+  est <- numeric(G)
+  se <- numeric(G)
+  tt <- numeric(G)
+  pv <- numeric(G)
+  sd2 <- numeric(G)
+  vun <- numeric(G)
+  df <- m - p
+  for (g in seq_len(G)) {
+    wlm <- .limmav_weighted_lm(y[g, ], X,
+                               if (weights) W[g, ] else NULL,
+                               c_vec)
+    est[g] <- wlm$est
+    se[g] <- wlm$se
+    tt[g] <- wlm$t
+    sd2[g] <- wlm$sd^2
+    vun[g] <- wlm$v_un
+    pv[g] <- .limmav_t_sf(wlm$t, wlm$df)
+  }
+  eb <- NULL
+  if (moderate) {
+    eb <- .limmav_ebayes(sd2, df)
+    se <- numeric(G)
+    tt <- numeric(G)
+    pv <- numeric(G)
+    for (g in seq_len(G)) {
+      s_post <- sqrt(eb$s2_post[g])
+      se_g <- s_post * sqrt(max(vun[g], 0))
+      t_g <- if (se_g > 0) est[g] / se_g else 0
+      dtot <- eb$df_total[g]
+      se[g] <- se_g
+      tt[g] <- t_g
+      pv[g] <- if (is.finite(dtot)) {
+        .limmav_t_sf(t_g, dtot)
+      } else {
+        2.0 * (1.0 - 0.5 * (1.0 + .limmav_erf(abs(t_g) / sqrt(2.0))))
+      }
+    }
+  }
+  padj <- .limmav_benjamini_hochberg(pv)
+
+  list(
+    estimate = est,
+    log_fold_change = est,
+    se = se,
+    t = tt,
+    pvalue = pv,
+    padj = padj,
+    df = df,
+    df_total = if (is.null(eb)) NULL else eb$df_total,
+    d0 = if (is.null(eb)) NULL else eb$d0,
+    s0_sq = if (is.null(eb)) NULL else eb$s0_sq,
+    s2_gene = sd2,
+    s2_post = if (is.null(eb)) NULL else eb$s2_post,
+    moderated = moderate,
+    voom_weights = W,
+    log_cpm = y,
+    mean_log_count = v$mean_log_count,
+    sqrt_sd = v$sqrt_sd,
+    trend_x = v$trend_x,
+    trend_y = v$trend_y,
+    lib_sizes = v$lib_sizes,
+    weighted = weights,
+    n_genes = G,
+    n_samples = m,
+    note = if (moderate) {
+      paste("moderated t: gene-wise variances shrunk toward s0^2 on d0",
+            "prior degrees of freedom and tested on d_g + d0 (Smyth 2004)")
+    } else {
+      paste("moderate=False: ordinary weighted-least-squares t-statistics,",
+            "no empirical Bayes")
+    },
+    method = "voom precision weights (Law, Chen, Shi & Smyth 2014)"
+  )
+}
+
+morie_voom <- morie_limmav
+morie_limma_voom <- morie_limmav
+morie_limmavoom <- morie_limmav
+
+.limmav_cheatsheet <- function() {
+  paste("limmav: voom (Law, Chen, Shi & Smyth 2014). log-cpm = ",
+        "log2((r + 0.5)/(R + 1) * 1e6) -- 0.5 keeps the log finite and ",
+        "tames low counts, 1 keeps the ratio below 1. Fit by OLS, take ",
+        "the residual SDs, LOWESS sqrt(s) against mean log-count ",
+        "(square roots because they are symmetric), read the curve as ",
+        "a piecewise linear lo(), map each FITTED log-cpm to a fitted ",
+        "log-count, and the weight is lo()^-4 -- an inverse variance, ",
+        "per OBSERVATION not per gene, because libraries differ in ",
+        "depth. Then Smyth (2004) empirical Bayes: s~^2 = (d0 s0^2 + ",
+        "d_g s_g^2)/(d0 + d_g), t~ = beta/(s~ sqrt(v)), tested on ",
+        "d_g + d0 degrees of freedom, with d0 and s0^2 from matching ",
+        "the first two moments of log s_g^2. d0 = 0 gives back the ",
+        "ordinary t; d0 = infinity gives a statistic proportional to ",
+        "beta.", sep = "")
+}

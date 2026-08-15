@@ -209,86 +209,24 @@ dueling_step <- function(value, advantage, action, reward, gamma,
 #' @export
 morie_dueldqn <- dueling_aggregate
 
-#' @rdname dueling_aggregate
-#' @export
-morie_dueldqn <- dueling_aggregate
 
-#' @rdname dueling_aggregate
-#' @export
-morie_dueldqn <- dueling_aggregate
 
-#' @rdname dueling_aggregate
-#' @export
-morie_dueldqn <- dueling_aggregate
 
-#' @rdname dueling_aggregate
-#' @export
-morie_dueldqn <- dueling_aggregate
 
-#' @rdname dueling_aggregate
-#' @export
-morie_dueldqn <- dueling_aggregate
 
-#' @rdname dueling_aggregate
-#' @export
-morie_dueldqn <- dueling_aggregate
 
-#' @rdname dueling_aggregate
-#' @export
-morie_dueldqn <- dueling_aggregate
 
-#' @rdname dueling_aggregate
-#' @export
-morie_dueldqn <- dueling_aggregate
 
-#' @rdname dueling_aggregate
-#' @export
-morie_dueldqn <- dueling_aggregate
 
-#' @rdname dueling_aggregate
-#' @export
-morie_dueldqn <- dueling_aggregate
 
-#' @rdname dueling_aggregate
-#' @export
-morie_dueldqn <- dueling_aggregate
 
-#' @rdname dueling_aggregate
-#' @export
-morie_dueldqn <- dueling_aggregate
 
-#' @rdname dueling_aggregate
-#' @export
-morie_dueldqn <- dueling_aggregate
 
-#' @rdname dueling_aggregate
-#' @export
-morie_dueldqn <- dueling_aggregate
 
-#' @rdname dueling_aggregate
-#' @export
-morie_dueldqn <- dueling_aggregate
 
-#' @rdname dueling_aggregate
-#' @export
-morie_dueldqn <- dueling_aggregate
 
-#' @rdname dueling_aggregate
-#' @export
-morie_dueldqn <- dueling_aggregate
 
-#' @rdname dueling_aggregate
-#' @export
-morie_dueldqn <- dueling_aggregate
 
-#' @rdname dueling_aggregate
-#' @export
-morie_dueldqn <- dueling_aggregate
 
-#' @rdname dueling_aggregate
-#' @export
-morie_dueldqn <- dueling_aggregate
 
-#' @rdname dueling_aggregate
-#' @export
-morie_dueldqn <- dueling_aggregate
+

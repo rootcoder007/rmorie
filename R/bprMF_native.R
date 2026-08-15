@@ -406,86 +406,24 @@ bayesianpersonalizedranking <- bpr_learn_bpr_R
 #' @export
 morie_bprMF <- bpr_sigmoid
 
-#' @rdname bpr_sigmoid
-#' @export
-morie_bprMF <- bpr_sigmoid
 
-#' @rdname bpr_sigmoid
-#' @export
-morie_bprMF <- bpr_sigmoid
 
-#' @rdname bpr_sigmoid
-#' @export
-morie_bprMF <- bpr_sigmoid
 
-#' @rdname bpr_sigmoid
-#' @export
-morie_bprMF <- bpr_sigmoid
 
-#' @rdname bpr_sigmoid
-#' @export
-morie_bprMF <- bpr_sigmoid
 
-#' @rdname bpr_sigmoid
-#' @export
-morie_bprMF <- bpr_sigmoid
 
-#' @rdname bpr_sigmoid
-#' @export
-morie_bprMF <- bpr_sigmoid
 
-#' @rdname bpr_sigmoid
-#' @export
-morie_bprMF <- bpr_sigmoid
 
-#' @rdname bpr_sigmoid
-#' @export
-morie_bprMF <- bpr_sigmoid
 
-#' @rdname bpr_sigmoid
-#' @export
-morie_bprMF <- bpr_sigmoid
 
-#' @rdname bpr_sigmoid
-#' @export
-morie_bprMF <- bpr_sigmoid
 
-#' @rdname bpr_sigmoid
-#' @export
-morie_bprMF <- bpr_sigmoid
 
-#' @rdname bpr_sigmoid
-#' @export
-morie_bprMF <- bpr_sigmoid
 
-#' @rdname bpr_sigmoid
-#' @export
-morie_bprMF <- bpr_sigmoid
 
-#' @rdname bpr_sigmoid
-#' @export
-morie_bprMF <- bpr_sigmoid
 
-#' @rdname bpr_sigmoid
-#' @export
-morie_bprMF <- bpr_sigmoid
 
-#' @rdname bpr_sigmoid
-#' @export
-morie_bprMF <- bpr_sigmoid
 
-#' @rdname bpr_sigmoid
-#' @export
-morie_bprMF <- bpr_sigmoid
 
-#' @rdname bpr_sigmoid
-#' @export
-morie_bprMF <- bpr_sigmoid
 
-#' @rdname bpr_sigmoid
-#' @export
-morie_bprMF <- bpr_sigmoid
 
-#' @rdname bpr_sigmoid
-#' @export
-morie_bprMF <- bpr_sigmoid
+

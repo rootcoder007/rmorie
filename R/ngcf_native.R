@@ -175,66 +175,19 @@ neuralgraphcf <- ngcf_stack_layers
 # Main entry point
 morie_ngcf <- ngcf_stack_layers
 
-#' @rdname ngcf_laplacian_coefficient
-#' @export
-morie_ngcf <- ngcf_laplacian_coefficient
 
-#' @rdname ngcf_laplacian_coefficient
-#' @export
-morie_ngcf <- ngcf_laplacian_coefficient
 
-#' @rdname ngcf_laplacian_coefficient
-#' @export
-morie_ngcf <- ngcf_laplacian_coefficient
 
-#' @rdname ngcf_laplacian_coefficient
-#' @export
-morie_ngcf <- ngcf_laplacian_coefficient
 
-#' @rdname ngcf_laplacian_coefficient
-#' @export
-morie_ngcf <- ngcf_laplacian_coefficient
 
-#' @rdname ngcf_laplacian_coefficient
-#' @export
-morie_ngcf <- ngcf_laplacian_coefficient
 
-#' @rdname ngcf_laplacian_coefficient
-#' @export
-morie_ngcf <- ngcf_laplacian_coefficient
 
-#' @rdname ngcf_laplacian_coefficient
-#' @export
-morie_ngcf <- ngcf_laplacian_coefficient
 
-#' @rdname ngcf_laplacian_coefficient
-#' @export
-morie_ngcf <- ngcf_laplacian_coefficient
 
-#' @rdname ngcf_laplacian_coefficient
-#' @export
-morie_ngcf <- ngcf_laplacian_coefficient
 
-#' @rdname ngcf_laplacian_coefficient
-#' @export
-morie_ngcf <- ngcf_laplacian_coefficient
 
-#' @rdname ngcf_laplacian_coefficient
-#' @export
-morie_ngcf <- ngcf_laplacian_coefficient
 
-#' @rdname ngcf_laplacian_coefficient
-#' @export
-morie_ngcf <- ngcf_laplacian_coefficient
 
-#' @rdname ngcf_laplacian_coefficient
-#' @export
-morie_ngcf <- ngcf_laplacian_coefficient
 
-#' @rdname ngcf_laplacian_coefficient
-#' @export
-morie_ngcf <- ngcf_laplacian_coefficient
 
-#' @rdname ngcf_laplacian_coefficient
-#' @export
-morie_ngcf <- ngcf_laplacian_coefficient
+

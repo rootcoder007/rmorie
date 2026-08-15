@@ -366,86 +366,24 @@ morie_clusmd_butina_clustering <- function(fps, threshold = 0.8,
 #' @export
 morie_clusmd <- morie_clusmd_neighbour_lists
 
-#' @rdname morie_clusmd_neighbour_lists
-#' @export
-morie_clusmd <- morie_clusmd_neighbour_lists
 
-#' @rdname morie_clusmd_neighbour_lists
-#' @export
-morie_clusmd <- morie_clusmd_neighbour_lists
 
-#' @rdname morie_clusmd_neighbour_lists
-#' @export
-morie_clusmd <- morie_clusmd_neighbour_lists
 
-#' @rdname morie_clusmd_neighbour_lists
-#' @export
-morie_clusmd <- morie_clusmd_neighbour_lists
 
-#' @rdname morie_clusmd_neighbour_lists
-#' @export
-morie_clusmd <- morie_clusmd_neighbour_lists
 
-#' @rdname morie_clusmd_neighbour_lists
-#' @export
-morie_clusmd <- morie_clusmd_neighbour_lists
 
-#' @rdname morie_clusmd_neighbour_lists
-#' @export
-morie_clusmd <- morie_clusmd_neighbour_lists
 
-#' @rdname morie_clusmd_neighbour_lists
-#' @export
-morie_clusmd <- morie_clusmd_neighbour_lists
 
-#' @rdname morie_clusmd_neighbour_lists
-#' @export
-morie_clusmd <- morie_clusmd_neighbour_lists
 
-#' @rdname morie_clusmd_neighbour_lists
-#' @export
-morie_clusmd <- morie_clusmd_neighbour_lists
 
-#' @rdname morie_clusmd_neighbour_lists
-#' @export
-morie_clusmd <- morie_clusmd_neighbour_lists
 
-#' @rdname morie_clusmd_neighbour_lists
-#' @export
-morie_clusmd <- morie_clusmd_neighbour_lists
 
-#' @rdname morie_clusmd_neighbour_lists
-#' @export
-morie_clusmd <- morie_clusmd_neighbour_lists
 
-#' @rdname morie_clusmd_neighbour_lists
-#' @export
-morie_clusmd <- morie_clusmd_neighbour_lists
 
-#' @rdname morie_clusmd_neighbour_lists
-#' @export
-morie_clusmd <- morie_clusmd_neighbour_lists
 
-#' @rdname morie_clusmd_neighbour_lists
-#' @export
-morie_clusmd <- morie_clusmd_neighbour_lists
 
-#' @rdname morie_clusmd_neighbour_lists
-#' @export
-morie_clusmd <- morie_clusmd_neighbour_lists
 
-#' @rdname morie_clusmd_neighbour_lists
-#' @export
-morie_clusmd <- morie_clusmd_neighbour_lists
 
-#' @rdname morie_clusmd_neighbour_lists
-#' @export
-morie_clusmd <- morie_clusmd_neighbour_lists
 
-#' @rdname morie_clusmd_neighbour_lists
-#' @export
-morie_clusmd <- morie_clusmd_neighbour_lists
 
-#' @rdname morie_clusmd_neighbour_lists
-#' @export
-morie_clusmd <- morie_clusmd_neighbour_lists
+
