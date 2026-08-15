@@ -17,7 +17,7 @@
 #   sizes for self-controlled case series studies", Statistics in
 #   Medicine 25(15), 2618-2631. The age-varying case (not implemented).
 
-.SMATCH_EPS <- 1e-12
+.smatch_EPS <- 1e-12
 
 .smatch_cholsolve <- function(M, b) {
   # Symmetric positive-definite solve via base R's chol.
@@ -43,7 +43,7 @@
     as_cell(cl[[1L]], cl[[2L]], cl[[3L]], cl[[4L]]))
 }
 
-poisson_design <- function(cases, risk_periods, age_breaks = numeric(0)) {
+morie_smatch_poisson_design <- function(cases, risk_periods, age_breaks = numeric(0)) {
   rp <- lapply(risk_periods, function(r) c(as.numeric(r[1]), as.numeric(r[2])))
   ab <- as.numeric(age_breaks)
   n_risk <- length(rp)
@@ -67,7 +67,7 @@ poisson_design <- function(cases, risk_periods, age_breaks = numeric(0)) {
     for (cell in cells) {
       j <- cell[[1L]]; r_idx <- cell[[2L]]; e <- cell[[3L]]
       n <- cell[[4L]]
-      if (e <= .SMATCH_EPS) next
+      if (e <= .smatch_EPS) next
       row <- rep(0.0, ncol)
       if (r_idx > 0L) row[r_idx] <- 1.0
       if (j > 0L) row[n_risk + j] <- 1.0
@@ -83,9 +83,9 @@ poisson_design <- function(cases, risk_periods, age_breaks = numeric(0)) {
        n_people = P, n_rows = length(y))
 }
 
-sccs_poisson_fit <- function(cases, risk_periods, age_breaks = numeric(0),
+morie_smatch_sccs_poisson_fit <- function(cases, risk_periods, age_breaks = numeric(0),
                              iters = 200, tol = 1e-12, ridge = 1e-9) {
-  d <- poisson_design(cases, risk_periods, age_breaks = age_breaks)
+  d <- morie_smatch_poisson_design(cases, risk_periods, age_breaks = age_breaks)
   y <- d$y; off <- d$offset; X <- d$X
   p <- ncol(X)
   beta <- rep(0.0, p)
@@ -127,7 +127,7 @@ sccs_poisson_fit <- function(cases, risk_periods, age_breaks = numeric(0),
 
 .smatch_pnorm <- function(z) pnorm(z)
 
-sample_size <- function(log_ri, r, p_exposed, alpha = 0.05, power = 0.8) {
+morie_smatch_sample_size <- function(log_ri, r, p_exposed, alpha = 0.05, power = 0.8) {
   b <- as.numeric(log_ri)
   rr <- as.numeric(r)
   p <- as.numeric(p_exposed)
@@ -147,7 +147,7 @@ sample_size <- function(log_ri, r, p_exposed, alpha = 0.05, power = 0.8) {
   den <- rr * eb + 1.0 - rr
   rho <- rr * eb / den
   A <- 2.0 * (rho * b - log(den))
-  if (A <= .SMATCH_EPS)
+  if (A <= .smatch_EPS)
     stop(sprintf(paste0("smatch: the information A is non-positive ",
                         "(%.3e) -- the design carries no signal here"),
                  A))
@@ -164,17 +164,17 @@ sample_size <- function(log_ri, r, p_exposed, alpha = 0.05, power = 0.8) {
        method = "Whitaker et al. (2006) Sec. 7.6")
 }
 
-.smatch_power <- function(n_events, log_ri, r, p_exposed, alpha = 0.05) {
-  s <- sample_size(log_ri, r, p_exposed, alpha = alpha, power = 0.5)
+morie_smatch_power <- function(n_events, log_ri, r, p_exposed, alpha = 0.05) {
+  s <- morie_smatch_sample_size(log_ri, r, p_exposed, alpha = alpha, power = 0.5)
   A <- s$A; B <- s$B; C <- s$C
   za <- s$z_alpha_2
   root <- sqrt(max(as.numeric(n_events) * A / C, 0.0))
-  zg <- if (B > .SMATCH_EPS) (root - za) / sqrt(B) else Inf
+  zg <- if (B > .smatch_EPS) (root - za) / sqrt(B) else Inf
   list(power = pnorm(zg), z_power = zg,
        n_events = as.numeric(n_events), A = A, B = B, C = C)
 }
 
-relative_efficiency <- function(r, log_ri) {
+morie_smatch_relative_efficiency <- function(r, log_ri) {
   rr <- as.numeric(r); b <- as.numeric(log_ri)
   if (!(rr > 0.0 && rr < 1.0))
     stop("smatch: r must lie strictly in (0, 1)")
@@ -205,16 +205,8 @@ relative_efficiency <- function(r, log_ri) {
 }
 
 # ledger/NAMING.md compact alias
-selfcontrolledcaseseries <- sccs_poisson_fit
-sccs_design <- sccs_poisson_fit
-sccsdesign <- sccs_poisson_fit
+morie_smatch_selfcontrolledcaseseries <- morie_smatch_sccs_poisson_fit
+morie_smatch_sccs_design <- morie_smatch_sccs_poisson_fit
+morie_smatch_sccsdesign <- morie_smatch_sccs_poisson_fit
 
-morie_smatch <- list(poisson_design = poisson_design,
-                     sccs_poisson_fit = sccs_poisson_fit,
-                     sample_size = sample_size,
-                     power = .smatch_power,
-                     relative_efficiency = relative_efficiency,
-                     cheatsheet = .smatch_cheatsheet,
-                     selfcontrolledcaseseries = selfcontrolledcaseseries,
-                     sccs_design = sccs_design,
-                     sccsdesign = sccsdesign)
+morie_smatch <- morie_smatch_poisson_design
