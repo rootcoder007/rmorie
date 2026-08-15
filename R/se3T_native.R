@@ -275,3 +275,7 @@ morie_se3T <- morie_se3T_rotation_matrix
 #' @rdname morie_se3T_rotation_matrix
 #' @export
 morie_se3T <- morie_se3T_rotation_matrix
+
+#' @rdname morie_se3T_rotation_matrix
+#' @export
+morie_se3T <- morie_se3T_rotation_matrix

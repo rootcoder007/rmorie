@@ -206,3 +206,7 @@ morie_ngcf <- ngcf_laplacian_coefficient
 #' @rdname ngcf_laplacian_coefficient
 #' @export
 morie_ngcf <- ngcf_laplacian_coefficient
+
+#' @rdname ngcf_laplacian_coefficient
+#' @export
+morie_ngcf <- ngcf_laplacian_coefficient
