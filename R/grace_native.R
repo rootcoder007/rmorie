@@ -197,6 +197,6 @@ morie_graphcontrastive <- function(U, V, tau = 0.5, intra = TRUE) {
   .grace_objective(U, V, tau, intra)
 }
 
-morie_cheatsheet <- function() {
+.grace_morie_cheatsheet <- function() {
   .grace_cheatsheet()
 }

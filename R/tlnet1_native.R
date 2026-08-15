@@ -250,7 +250,7 @@ network_influence_variance <- function(ic, friends) {
 }
 
 #' One-line description of the module.
-cheatsheet <- function() {
+.tlnet1_cheatsheet <- function() {
   paste0("tlnet1: N units on a known social network, F_i = i's ",
          "friends, |F_i|/N -> 0. Two dependencies allowed: exposure ",
          "on own and friends' covariates, outcome on own and ",

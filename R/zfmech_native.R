@@ -138,7 +138,7 @@ gaussian_mechanism <- morie_zfmech
 #'   rho with no delta budget and no advanced composition theorem.
 #' @references Bun, M. & Steinke, T. (2016). Lemma 1.7.
 #' @export
-compose <- function(rhos) {
+.zfmech_compose <- function(rhos) {
   rs <- as.numeric(rhos)
   if (any(rs < 0))
     stop("zfmech: every rho must be non-negative")

@@ -22,10 +22,10 @@
 # Technical Report CMU-CS-90-190, School of Computer Science, Carnegie
 # Mellon University.
 
-.EPS <- 1e-12
+.ssmpar_EPS <- 1e-12
 
 
-compose <- function(left, right) {
+.ssmpar_compose <- function(left, right) {
   # (A2, b2) o (A1, b1) = (A2*A1, A2*b1 + b2)
   left <- as.numeric(left)
   right <- as.numeric(right)
@@ -69,7 +69,7 @@ sequential_scan <- function(pairs, x0 = 0.0) {
     nxt <- list()
     n_level <- length(level)
     for (i in seq(1, n_level - 1, 2)) {
-      nxt[[length(nxt) + 1]] <- compose(level[[i]], level[[i + 1]])
+      nxt[[length(nxt) + 1]] <- .ssmpar_compose(level[[i]], level[[i + 1]])
     }
     if (n_level %% 2 == 1) {
       nxt[[length(nxt) + 1]] <- level[[n_level]]
@@ -102,14 +102,14 @@ parallel_scan <- function(pairs, x0 = 0.0) {
         blk <- P[[lo]]
         if (lo < j) {
           for (t in (lo + 1):(j)) {
-            blk <- compose(blk, P[[t]])
+            blk <- .ssmpar_compose(blk, P[[t]])
           }
         }
-        acc <- compose(blk, acc)
+        acc <- .ssmpar_compose(blk, acc)
         j <- lo - 1
         step <- step * 2
       } else {
-        acc <- compose(P[[j]], acc)
+        acc <- .ssmpar_compose(P[[j]], acc)
         j <- j - 1
       }
     }
@@ -133,8 +133,8 @@ parallel_scan <- function(pairs, x0 = 0.0) {
 
 check_associativity <- function(a, b, c, tol = 1e-12) {
   # Test (a o b) o c == a o (b o c) directly.
-  left <- compose(compose(a, b), c)
-  right <- compose(a, compose(b, c))
+  left <- .ssmpar_compose(.ssmpar_compose(a, b), c)
+  right <- .ssmpar_compose(a, .ssmpar_compose(b, c))
   d <- max(abs(left[1] - right[1]), abs(left[2] - right[2]))
   list(left = left, right = right, deviation = d,
        associative = d <= as.numeric(tol),
@@ -159,7 +159,7 @@ scan_depth <- function(length) {
 }
 
 
-cheatsheet <- function() {
+.ssmpar_cheatsheet <- function() {
   paste0(
     "ssmpar: x_t = A_t x_{t-1} + b_t looks sequential, but each step is ",
     "an AFFINE MAP and composition (A2,b2)o(A1,b1) = (A2A1, A2b1+b2) is ",

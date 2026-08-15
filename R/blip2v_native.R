@@ -3,7 +3,7 @@
 # Li, Li, Savarese & Hoi (2023) ICML, arXiv:2301.12597.
 # Base R only.
 
-.EPS <- 1e-12
+.blip2v_EPS <- 1e-12
 .STAGES <- c(1, 2)
 
 query_tokens <- function(n_queries, dim, seed = 0, scale = 0.02) {
@@ -61,7 +61,7 @@ stage_one_objectives <- function(query_out, text_out, temperature = 0.07) {
   if (t <= 0) stop("blip2v: the temperature must be positive")
   cos_sim <- function(a, b) {
     na <- sqrt(sum(a^2)); nb <- sqrt(sum(b^2))
-    if (na <= .EPS || nb <= .EPS)
+    if (na <= .blip2v_EPS || nb <= .blip2v_EPS)
       stop("blip2v: a zero embedding has no direction")
     sum(a * b) / (na * nb)
   }

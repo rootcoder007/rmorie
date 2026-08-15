@@ -8,7 +8,7 @@
 # same Fourier seasonality, same per-holiday indicator, same cyclic
 # coordinate descent with the Laplace L1 penalty on the deltas only.
 
-.EPS <- 1e-12
+.prphet_EPS <- 1e-12
 
 .changepoints <- function(t, n.cp, range = 0.8, cps = NULL) {
   if (!is.null(cps)) return(as.numeric(cps))

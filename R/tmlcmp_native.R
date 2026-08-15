@@ -271,7 +271,7 @@ morie_tmlcmp <- function(time, event_type, D, X, times=NULL,
   )
 }
 
-cheatsheet <- function() {
+.tmlcmp_cheatsheet <- function() {
   paste("tmlcmp: with competing risks the estimand is CUMULATIVE",
         "INCIDENCE, F_j = integral S(u-) lambda_j(u) du, not a",
         "cause-specific hazard -- raising a COMPETING hazard",

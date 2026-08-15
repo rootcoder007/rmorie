@@ -9,7 +9,7 @@
 # Z[i, j] = candidate j's held-out prediction for i; meta-learner is
 # fit on Z; refit candidates on all data and combine.  IPTW: A/g + (1-A)/(1-g).
 
-.EPS <- 1e-9
+.flxipt_EPS <- 1e-9
 .FLXIPT_METAS <- c("nnls", "discrete", "ols")
 
 # --- design expansion per learner kind ------------------------------
@@ -196,7 +196,7 @@ cv_risk <- function(y, Z, loss = "l2") {
     for (j in seq_len(J)) out[j] <- mean((y - Z[, j])^2)
   } else if (loss == "nll") {
     for (j in seq_len(J)) {
-      p <- pmin(pmax(Z[, j], .EPS), 1 - .EPS)
+      p <- pmin(pmax(Z[, j], .flxipt_EPS), 1 - .flxipt_EPS)
       out[j] <- -mean(y * log(p) + (1 - y) * log(1 - p))
     }
   } else {
@@ -263,7 +263,7 @@ super_learner <- function(y, X, library = NULL, n_folds = 10,
   fitted <- as.numeric(full %*% weights)
   if (binary) fitted <- pmin(pmax(fitted, 0), 1)
   ens <- as.numeric(Z %*% weights)
-  if (binary) ens <- pmin(pmax(ens, .EPS), 1 - .EPS)
+  if (binary) ens <- pmin(pmax(ens, .flxipt_EPS), 1 - .flxipt_EPS)
   ens_risk <- cv_risk(yv, matrix(ens, ncol = 1), loss)[1]
   list(
     fitted = fitted, estimate = ens_risk,
@@ -304,7 +304,7 @@ flexible_iptw <- function(A, H, library = NULL, n_folds = 10,
   sl <- super_learner(Av, H, library = library, n_folds = n_folds,
                       meta = meta, binary = TRUE, loss = "l2",
                       ridge = ridge)
-  tcap <- max(t, .EPS)
+  tcap <- max(t, .flxipt_EPS)
   g <- pmin(pmax(sl$fitted, tcap), 1 - tcap)
   if (isTRUE(stabilize)) {
     pa <- sum(Av) / n

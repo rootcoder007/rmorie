@@ -2,7 +2,7 @@
 # Ramshaw & Marcus (1995); Tjong Kim Sang & De Meulder (2003); Viterbi (1967).
 # Base R only.
 
-.NEG <- -Inf
+.benRea_NEG <- -Inf
 
 bio_labels <- function(types) {
   ts <- as.character(types)
@@ -76,14 +76,14 @@ viterbi_decode <- function(emissions, labels, transitions = NULL,
   T <- if (is.null(transitions)) valid_transitions(labels) else transitions
   S <- if (is.null(transition_scores)) matrix(0, n, n) else transition_scores
   ok0 <- start_allowed(labels)
-  dp <- matrix(.NEG, L, n)
+  dp <- matrix(.benRea_NEG, L, n)
   bk <- matrix(-1L, L, n)
   for (j in 1:n) if (ok0[j]) dp[1, j] <- em[1, j]
   for (t in 2:L) {
     for (j in 1:n) {
-      best <- .NEG; arg <- -1L
+      best <- .benRea_NEG; arg <- -1L
       for (i in 1:n) {
-        if (!T[i, j] || dp[t - 1, i] == .NEG) next
+        if (!T[i, j] || dp[t - 1, i] == .benRea_NEG) next
         v <- dp[t - 1, i] + S[i, j]
         if (v > best) { best <- v; arg <- i }
       }
@@ -94,7 +94,7 @@ viterbi_decode <- function(emissions, labels, transitions = NULL,
     }
   }
   end <- which.max(dp[L, ])
-  if (dp[L, end] == .NEG) stop("benRea: no valid path exists")
+  if (dp[L, end] == .benRea_NEG) stop("benRea: no valid path exists")
   path_idx <- end
   for (t in L:2) {
     path_idx <- c(bk[t, path_idx[1]], path_idx)

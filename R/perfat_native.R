@@ -2,7 +2,7 @@
 # Reference: Choromanski et al. (2021) "Rethinking Attention with
 # Performers", arXiv:2009.14794.
 
-.EPS <- 1e-9
+.perfat_EPS <- 1e-9
 
 .dot <- function(a, b) sum(a * b)
 .norm2 <- function(a) sum(a * a)
@@ -111,7 +111,7 @@ favor_attention <- function(Q, K, V, n_features = 128L, seed = 0L,
     for (i in seq_len(L)) {
       num <- as.numeric(Qf[i, , drop = FALSE] %*% KV)
       den <- .dot(Qf[i, ], Ksum)
-      if (abs(den) < .EPS)
+      if (abs(den) < .perfat_EPS)
         stop(sprintf("perfat: a renormaliser vanished at query %d; this is what the trig map does and Lemma 1 prevents", i))
       out[i, ] <- num / den
     }
@@ -126,7 +126,7 @@ favor_attention <- function(Q, K, V, n_features = 128L, seed = 0L,
       }
       num <- as.numeric(Qf[i, , drop = FALSE] %*% KV)
       den <- .dot(Qf[i, ], Ksum)
-      if (abs(den) < .EPS)
+      if (abs(den) < .perfat_EPS)
         stop(sprintf("perfat: a renormaliser vanished at query %d", i))
       out[i, ] <- num / den
     }

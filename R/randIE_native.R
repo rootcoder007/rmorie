@@ -7,8 +7,8 @@
 # same algebraic identity, same g-formula and weighting routes, same
 # own_mediator_mean diagnostic.
 
-.EPS <- 1e-12
-.ROUTES <- c("gformula", "weighting")
+.randIE_EPS <- 1e-12
+.randIE_ROUTES <- c("gformula", "weighting")
 
 .labels <- function(v, name) {
   out <- as.character(v)
@@ -56,7 +56,7 @@ morie_randIE_interventional_mean <- function(Y, A, M, C = NULL, a = "1",
                                              a.star = "0",
                                              route = "gformula",
                                              laplace = 0) {
-  if (!(route %in% .ROUTES))
+  if (!(route %in% .randIE_ROUTES))
     stop(paste0("randIE: route must be gformula or weighting, got ",
                 route))
   y <- as.numeric(Y)
@@ -120,11 +120,11 @@ morie_randIE_interventional_mean <- function(Y, A, M, C = NULL, a = "1",
         else md$p[[pkey.star]][mv[i] == md$levels]
       p.obs <- if (is.null(md$p[[pkey.obs]])) 0
         else md$p[[pkey.obs]][mv[i] == md$levels]
-      if (is.na(p.obs) || p.obs <= .EPS) next
+      if (is.na(p.obs) || p.obs <= .randIE_EPS) next
       w <- if (is.na(p.star)) 0 else p.star / p.obs
       num <- num + w * y[i]; den <- den + w
     }
-    if (den <= .EPS)
+    if (den <= .randIE_EPS)
       stop(paste0("randIE: the mediator-density ratio put no weight on arm '", a, "'"))
     total <- num / den
   }
@@ -162,7 +162,7 @@ morie_randIE_decompose <- function(result) {
   tot <- result$total; d <- result$direct; i <- result$indirect
   list(total = tot, direct = d, indirect = i,
        residual = tot - (d + i),
-       proportion.mediated = if (abs(tot) > .EPS) i / tot else NaN)
+       proportion.mediated = if (abs(tot) > .randIE_EPS) i / tot else NaN)
 }
 
 # house entry point: the package exports one morie_<module>

@@ -6,7 +6,7 @@
 # and Initialization of Diagonal State Space Models", NeurIPS 2022,
 # arXiv:2206.11893.
 
-.EPS <- 1e-12
+.mambss_EPS <- 1e-12
 
 softplus <- function(z) {
   x <- as.numeric(z)

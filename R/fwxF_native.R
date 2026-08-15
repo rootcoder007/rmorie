@@ -204,4 +204,4 @@ fire_weather_index <- morie_fwxF
   "fwxF: Canadian FWI System daily FFMC/DMC/DC/ISI/BUI/FWI/DSR (FTR-33)"
 }
 
-cheatsheet <- .fwxF_cheatsheet
+.fwxF_cheatsheet <- .fwxF_cheatsheet

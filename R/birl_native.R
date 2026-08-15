@@ -88,7 +88,7 @@ policy_iteration <- function(T, R, gamma, policy = NULL, max_iter = 200) {
   list(policy = pi, V = V, Q = q_values(T, R, gamma, V), sweeps = sweeps)
 }
 
-log_likelihood <- function(Q, observations, alpha = 1) {
+.birl_log_likelihood <- function(Q, observations, alpha = 1) {
   if (alpha <= 0) stop("birl: alpha must be positive")
   if (length(observations) == 0) stop("birl: no observations")
   total <- 0
@@ -146,7 +146,7 @@ policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
   score <- function(Qm, Rv) {
     lp <- log_prior(Rv, prior, scale, r_max, J, H, NULL)
     if (is.infinite(lp) && lp < 0) return(lp)
-    log_likelihood(Qm, observations, alpha) + lp
+    .birl_log_likelihood(Qm, observations, alpha) + lp
   }
   cur <- score(Q, R)
   samples <- matrix(0, n_iter, nS)

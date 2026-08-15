@@ -10,7 +10,7 @@
 #   Haveliwala, T. H. (2002) "Topic-sensitive PageRank", WWW '02,
 #   517-526, doi:10.1145/511446.511513.
 
-.EPS <- 1e-12
+.tagRC_EPS <- 1e-12
 
 tripartite_graph <- function(triples) {
   nodes <- character(0)
@@ -110,7 +110,7 @@ adapted_pagerank <- function(adjacency, nodes, p = NULL, d = 0.7,
         a <- adjv[[u]]
         if (is.null(a)) next
         a <- as.numeric(a)
-        if (a > 0.0 && deg[[v]] > .EPS) {
+        if (a > 0.0 && deg[[v]] > .tagRC_EPS) {
           s <- s + w[[v]] * a / deg[[v]]
         }
       }

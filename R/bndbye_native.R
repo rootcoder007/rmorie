@@ -4,7 +4,7 @@
 # never updated by data. The HPD credible set excludes parts of the
 # estimated identified set; the confidence set extends beyond it.
 
-.GHC_EPS <- 1e-12
+.bndbye_GHC_EPS <- 1e-12
 
 morie_identified_set_interval <- function(phi_hat, half_width) {
   h <- as.numeric(half_width)
@@ -16,7 +16,7 @@ morie_identified_set_interval <- function(phi_hat, half_width) {
 morie_conditional_prior_uniform <- function(theta_set, n_grid = 401L) {
   lo <- as.numeric(theta_set$lower); hi <- as.numeric(theta_set$upper)
   if (hi < lo) stop("bndbye: the identified set is empty")
-  if (hi - lo <= .GHC_EPS) return(list(grid = lo, density = 1))
+  if (hi - lo <= .bndbye_GHC_EPS) return(list(grid = lo, density = 1))
   g <- lo + (hi - lo) * seq_len(as.integer(n_grid) - 1L) /
                 (as.integer(n_grid) - 1L)
   list(grid = g, density = rep(1 / (hi - lo), length(g)))
@@ -36,7 +36,7 @@ morie_posterior_hpd <- function(theta_set, level = 0.95,
   step <- (g[length(g)] - g[1]) / (length(g) - 1L)
   mass <- d * step
   tot <- sum(mass)
-  if (tot <= .GHC_EPS) stop("bndbye: the conditional prior has no mass")
+  if (tot <= .bndbye_GHC_EPS) stop("bndbye: the conditional prior has no mass")
   mass <- mass / tot
   ord <- order(-d)
   acc <- 0; chosen <- integer(0)
@@ -72,13 +72,13 @@ morie_compare_sets <- function(phi_hat, half_width, se_phi, level = 0.95,
                              conditional_prior = conditional_prior,
                              n_grid = n_grid)
   cs <- morie_frequentist_confidence_set(ts, se_phi, level = level)
-  list(estimate = hpd$width / max(cs$width, .GHC_EPS),
+  list(estimate = hpd$width / max(cs$width, .bndbye_GHC_EPS),
        identified_set = ts, credible_hpd = hpd, confidence_set = cs,
        hpd_inside_identified_set =
          hpd$lower >= ts$lower - 1e-9 && hpd$upper <= ts$upper + 1e-9,
        cs_contains_identified_set =
          cs$lower <= ts$lower + 1e-9 && cs$upper >= ts$upper - 1e-9,
-       width_ratio_hpd_over_cs = hpd$width / max(cs$width, .GHC_EPS),
+       width_ratio_hpd_over_cs = hpd$width / max(cs$width, .bndbye_GHC_EPS),
        conditional_prior_reported = !is.null(conditional_prior),
        method = "Moon & Schorfheide (2012): HPD excludes parts of Theta(phi_hat); the confidence set extends beyond it",
        recommendation = "report Theta(phi_hat) and the conditional prior alongside any credible set -- the credible set alone cannot be interpreted")

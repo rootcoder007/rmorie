@@ -21,10 +21,10 @@
 # messages.
 
 .TMLDTA_METHODS <- c("cv-tmle", "sample-split", "naive")
-.EPS <- 1e-9
+.tmldta_EPS <- 1e-9
 
 .tmldta_logit <- function(p) {
-  q <- min(max(as.numeric(p), .EPS), 1 - .EPS)
+  q <- min(max(as.numeric(p), .tmldta_EPS), 1 - .tmldta_EPS)
   log(q / (1 - q))
 }
 

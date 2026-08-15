@@ -281,6 +281,6 @@ morie_regmlm <- function(G, y, chromosomes = NULL, block_size = 1000, n_ridge = 
 
 whole_genome_regression <- morie_regmlm
 
-cheatsheet <- function() {
+.regmlm_cheatsheet <- function() {
   "regmlm: Step 1 is two stacked ridges. Level 0 fits J ridges per block of B markers at DIFFERENT shrinkages (MAP under a Gaussian prior), turning 500k markers into 2.5k local polygenic scores at B=1000, J=5. Level 1 combines them under cross-validation -- in-sample would be circular. The combined predictor is split by chromosome, each background EXCLUDING its own chromosome, because testing a variant against a background containing it is proximal contamination. Step 2 tests each variant with that background as an offset."
 }

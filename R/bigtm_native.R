@@ -3,7 +3,7 @@
 # MacKay & Peto (1995); Blei, Ng & Jordan (2003); Griffiths & Steyvers (2004).
 # Base R only.
 
-.EPS <- 1e-300
+.bigtm_EPS <- 1e-300
 .PRIORS <- c(1, 2)
 
 dirichlet_predictive <- function(N_ij, N_j, beta, m) {

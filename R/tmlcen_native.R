@@ -422,7 +422,7 @@ morie_tmle_censoring <- function(time, event, censor, treatment, covariates,
   ))
 }
 
-morie_cheatsheet <- function() {
+.tmlcen_morie_cheatsheet <- function() {
   paste0("tmlcen: censoring by IPCW. right = Gbar_c(k|A,W) = ",
          "prod(1-lambda_C), weight person-time by 1/Gbar_c, hazard ",
          "to survival by the product limit (H&R Ch.17). interval = ",

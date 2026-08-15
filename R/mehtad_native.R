@@ -41,7 +41,7 @@
   as.numeric(solve(t(L), solve(L, rhs)))
 }
 
-residuals <- function(A, b, c, x, y, s) {
+mehtad_residuals <- function(A, b, c, x, y, s) {
   M <- .mehtad_mat(A)
   m <- nrow(M); n <- ncol(M)
   xv <- .mehtad_vec(x); yv <- .mehtad_vec(y); sv <- .mehtad_vec(s)
@@ -110,7 +110,7 @@ solve_lp <- function(A, b, c, tol = 1e-9, max_iter = 100L, nu = 3.0,
   x <- rep(1.0, n); s <- rep(1.0, n); y <- rep(0.0, m)
   it <- 0L; converged <- FALSE
   for (it in seq_len(as.integer(max_iter))) {
-    r <- residuals(M, bv, cv, x, y, s)
+    r <- mehtad_residuals(M, bv, cv, x, y, s)
     mu <- r$mu
     if (mu < as.numeric(tol) && r$primal_norm < as.numeric(tol) &&
         r$dual_norm < as.numeric(tol)) { converged <- TRUE; break }
@@ -130,7 +130,7 @@ solve_lp <- function(A, b, c, tol = 1e-9, max_iter = 100L, nu = 3.0,
     if (min(x, s) <= 0)
       stop("mehtad: an iterate left the positive orthant, which the fraction-to-boundary rule exists to prevent")
   }
-  rf <- residuals(M, bv, cv, x, y, s)
+  rf <- mehtad_residuals(M, bv, cv, x, y, s)
   list(estimate = x, x = x, y = y, s = s, mu = rf$mu,
        objective = sum(cv * x),
        dual_objective = sum(bv * y),
@@ -166,7 +166,7 @@ morie_mehtad <- function(op, ...) {
     stop("mehtad: op must be one of residuals, max_step, centering_parameter, newton_direction, solve_lp, cheatsheet")
   op <- as.character(op)
   switch(op,
-    "residuals" = residuals(...),
+    "residuals" = mehtad_residuals(...),
     "max_step" = list(max_step = max_step(...)),
     "centering_parameter" = centering_parameter(...),
     "newton_direction" = .mehtad_newton(...),

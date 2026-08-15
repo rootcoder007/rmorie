@@ -5,7 +5,7 @@
 # convex hull of the model's sequence probabilities over (alpha, y_0).
 # This is a linear feasibility problem.
 
-.GHC_EPS <- 1e-9
+.bnshrt_GHC_EPS <- 1e-9
 
 .bnshrt_logistic <- function(z) 1 / (1 + exp(-max(-500, min(500, z))))
 
@@ -60,7 +60,7 @@ morie_sequence_frequencies <- function(Y) {
   out
 }
 
-project_simplex <- function(v) {
+.bnshrt_project_simplex <- function(v) {
   n <- length(v)
   u <- sort(v, decreasing = TRUE)
   css <- 0; rho <- 0; theta <- 0
@@ -94,15 +94,15 @@ morie_in_identified_set <- function(freq, beta, gamma, x, alpha_grid,
     Av <- as.numeric(A %*% v)
     AtAv <- as.numeric(2 * crossprod(A, Av))
     nrm <- sqrt(sum(AtAv^2))
-    if (nrm <= .GHC_EPS) break
+    if (nrm <= .bnshrt_GHC_EPS) break
     v <- AtAv / nrm; L <- nrm
   }
-  step <- 1 / max(L, .GHC_EPS)
+  step <- 1 / max(L, .bnshrt_GHC_EPS)
   y_acc <- w; t_acc <- 1; prev <- w
   for (it in seq_len(as.integer(iters))) {
     pred <- as.numeric(A %*% y_acc)
     grad <- as.numeric(2 * crossprod(A, pred - target))
-    w <- project_simplex(y_acc - step * grad)
+    w <- .bnshrt_project_simplex(y_acc - step * grad)
     t_new <- 0.5 * (1 + sqrt(1 + 4 * t_acc^2))
     mom <- (t_acc - 1) / t_new
     y_acc <- w + mom * (w - prev)
@@ -136,8 +136,8 @@ morie_identified_set <- function(Y, x, beta_grid, gamma_grid, alpha_grid,
        set = keep, n_feasible = length(keep),
        beta_bounds = c(min(bs), max(bs)), gamma_bounds = c(min(gs), max(gs)),
        beta_width = max(bs) - min(bs), gamma_width = max(gs) - min(gs),
-       point_identified = (max(bs) - min(bs) < .GHC_EPS &&
-                           max(gs) - min(gs) < .GHC_EPS),
+       point_identified = (max(bs) - min(bs) < .bnshrt_GHC_EPS &&
+                           max(gs) - min(gs) < .bnshrt_GHC_EPS),
        discrepancy = disc,
        method = "identified set by mixture feasibility over (alpha, y0); Honore & Tamer (2006) Sec. 2.1",
        assumes = "nothing about G(alpha | x) or the initial condition distribution")

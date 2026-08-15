@@ -235,7 +235,7 @@ optimise_branch <- function(make_tree, seqs, pi = NULL, u = 1.0, lo = 1e-6, hi =
   return(result)
 }
 
-cheatsheet <- function() {
+.phylml_cheatsheet <- function() {
   return("phylml: Felsenstein (1981) pruning. L_s(k) = prod over children of sum_x P_sx(v) L_x(child); tips are 0/1 indicators; L = sum_s pi_s L_s(root) (eq. 5). Turns a 2^(2n-2)-term sum into a linear traversal. F81 model P_ij(t) = e^-ut delta_ij + (1-e^-ut) pi_j (eq. 7), reversible, and the PULLEY PRINCIPLE means the two root branches matter only through their sum.")
 }
 

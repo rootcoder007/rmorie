@@ -4,7 +4,7 @@
 # polynomial regression on each side, smooth-density condition and
 # covariate sanity check.
 
-.EPS <- 1e-12
+.bnskt2_EPS <- 1e-12
 
 # Weighted least squares (no intercept; rows are powers of d from 1).
 .bnskt2_wls <- function(rows, ys, w) {
@@ -75,7 +75,7 @@ rkd_estimate <- function(V, Y, kink, bandwidth, order = 2L,
     den <- as.numeric(policy_slope_change)
     den_src <- "known policy rule"
   }
-  if (abs(den) <= .EPS)
+  if (abs(den) <= .bnskt2_EPS)
     stop(sprintf("bnskt2: the change in the policy slope is zero (%.3g) -- there is no kink to identify from", den))
   list(estimate = num / den, tau = num / den,
        outcome_kink = num, policy_kink = den,
@@ -102,7 +102,7 @@ density_kink_test <- function(V, kink, bandwidth, n_bins = 20L, order = 1L) {
   right <- .side_fit(ctr, dens, kp, bw, as.integer(order), "right", "uniform")
   left  <- .side_fit(ctr, dens, kp, bw, as.integer(order), "left",  "uniform")
   change <- right$slope - left$slope
-  scale <- max(sum(dens) / length(dens), .EPS)
+  scale <- max(sum(dens) / length(dens), .bnskt2_EPS)
   list(slope_change = change, relative = change / scale,
        slope_right = right$slope, slope_left = left$slope,
        n_inside = length(inside), n_bins = as.integer(n_bins),

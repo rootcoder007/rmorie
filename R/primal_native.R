@@ -171,7 +171,7 @@ morie_tv_denoise_1d <- function(signal, lam = 1.0, max_iter = 1000,
   return(res)
 }
 
-morie_cheatsheet <- function() {
+.primal_morie_cheatsheet <- function() {
   return(paste("primal: Chambolle-Pock, y = prox_{s F*}(y + s K xbar),",
                "x = prox_{t G}(x - t K* y), xbar = x + theta (x - x_prev);",
                "requires tau sigma ||K||^2 < 1."))

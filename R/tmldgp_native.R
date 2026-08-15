@@ -17,7 +17,7 @@
 # same penalised nuisances with an unpenalised targeting step, the
 # same validation messages.
 
-.EPS <- 1e-12
+.tmldgp_EPS <- 1e-12
 
 .tmldgp_logit <- function(p) {
   q <- min(max(as.numeric(p), 1e-9), 1 - 1e-9)
@@ -52,7 +52,7 @@ lasso_path <- function(X, y, lam, iters = 500, tol = 1e-9) {
     for (j in seq_len(p)) {
       r <- t - b0 - (rows %*% b - rows[, j] * b[j])
       zj <- sum(rows[, j]^2)
-      if (zj < .EPS) next
+      if (zj < .tmldgp_EPS) next
       new <- .soft(sum(rows[, j] * r) / n, lam) / (zj / n)
       big <- max(big, abs(new - b[j]))
       b[j] <- new

@@ -51,23 +51,3 @@ morie_expmc <- function(...) morie_dp_exponential_mechanism(...)
 #'   (2006). Calibrating noise to sensitivity in private data
 #'   analysis. TCC 2006, LNCS 3876, 265-284.
 #' @export
-morie_laplc <- function(...) morie_dp_laplace_mechanism(...)
-
-#' Local differential privacy by randomized response (entry point)
-#'
-#' Each respondent randomizes before the collector sees anything;
-#' the Warner randomized-response flip probability
-#' 1/(1 + e^epsilon) achieves epsilon-local-DP (Warner 1965;
-#' Kasiviswanathan et al. 2011; Dwork & Roth 2014, Sec. 3.2).  Entry
-#' point onto this package's native
-#' \code{morie_randomized_response_dp}.
-#'
-#' @param ... Passed to \code{morie_randomized_response_dp}.
-#' @return The list returned by \code{morie_randomized_response_dp}.
-#' @references Warner, S. L. (1965). Randomized response. Journal of
-#'   the American Statistical Association, 60(309), 63-69.
-#' @export
-# Rrand is the arm that matches the Python locdp field for field
-# (q, raw_rate, released, true_rate); morie_randomized_response_dp
-# returns a different shape (p_truth, raw_proportion, responses)
-morie_locdp <- function(...) Rrand(...)

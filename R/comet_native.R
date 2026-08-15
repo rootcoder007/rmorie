@@ -18,7 +18,7 @@
 # the same segment-level Kendall's tau, and the same reference-free
 # variant that works only because the source is in the input.
 
-.EPS <- 1e-12
+.comet_EPS <- 1e-12
 
 .comet_vec <- function(x) as.numeric(x)
 
