@@ -140,17 +140,9 @@
 .svycox_score_and_info <- function(T, E, M, w, beta, n, p) {
     eta <- numeric(n)
     for (i in seq_len(n)) {
-        Mi <- M[[i]]
-        s <- 0.0
-        for (k in seq_len(p)) {
-            s <- s + Mi[k] * beta[k]
-        }
-        eta[i] <- s
+        eta[i] <- sum(M[[i]] * beta)
     }
-    r <- numeric(n)
-    for (i in seq_len(n)) {
-        r[i] <- w[i] * exp(eta[i])
-    }
+    r <- w * exp(eta)
     U <- numeric(p)
     I_mat <- matrix(0.0, p, p)
     resid <- matrix(0.0, n, p)
@@ -161,26 +153,19 @@
             next
         }
         risk <- ord[i_ord:n]
-        s0 <- 0.0
-        for (j in risk) {
-            s0 <- s0 + r[j]
-        }
+        s0 <- sum(r[risk])
         if (s0 <= 0) {
             next
         }
         s1 <- numeric(p)
-        for (k in seq_len(p)) {
-            ss <- 0.0
-            for (j in risk) {
-                ss <- ss + r[j] * M[[j]][k]
-            }
-            s1[k] <- ss
+        for (j in risk) {
+            s1 <- s1 + r[j] * M[[j]]
         }
         xbar <- s1 / s0
         Mi <- M[[i]]
         for (k in seq_len(p)) {
             U[k] <- U[k] + w[i] * (Mi[k] - xbar[k])
-            resid[i, k] <- resid[i, k] + (Mi[k] - xbar[k])
+            resid[i, k] <- resid[i, k] + Mi[k] - xbar[k]
         }
         for (k in seq_len(p)) {
             for (l in seq_len(p)) {
@@ -193,12 +178,12 @@
             }
         }
         for (j in risk) {
-            f <- w[i] * r[j] / s0
-            denom <- max(w[j], 1e-300)
             Mj <- M[[j]]
+            f <- w[i] * r[j] / s0
+            wj <- max(w[j], 1e-300)
             for (k in seq_len(p)) {
                 resid[j, k] <- resid[j, k] -
-                    f * (Mj[k] - xbar[k]) / denom
+                    f * (Mj[k] - xbar[k]) / wj
             }
         }
     }
@@ -207,49 +192,34 @@
 
 .svycox_solve <- function(A, b) {
     p <- length(b)
-    Ab <- matrix(0.0, p, p + 1L)
-    for (i in seq_len(p)) {
-        for (j in seq_len(p)) {
-            Ab[i, j] <- A[i, j]
-        }
-        Ab[i, p + 1L] <- b[i]
-    }
-    for (c in seq_len(p)) {
-        piv <- c
-        max_val <- abs(Ab[c, c])
-        if (c < p) {
-            for (r in (c + 1L):p) {
-                if (abs(Ab[r, c]) > max_val) {
-                    max_val <- abs(Ab[r, c])
-                    piv <- r
-                }
-            }
-        }
-        if (abs(Ab[piv, c]) < 1e-14) {
-            stop("svycox: the information matrix is singular. Either "
-                 "a covariate is constant or collinear among the "
-                 "failures, or the groups are completely separated -- "
-                 "one always failing before the other -- in which "
-                 "case the partial likelihood is monotone and no "
+    Ab <- cbind(A, b)
+    for (c_ in seq_len(p)) {
+        sub <- seq(c_, p)
+        piv_local <- which.max(abs(Ab[sub, c_]))
+        piv <- c_ - 1L + piv_local
+        if (abs(Ab[piv, c_]) < 1e-14) {
+            stop("svycox: the information matrix is singular. ",
+                 "Either a covariate is constant or collinear among ",
+                 "the failures, or the groups are completely separated ",
+                 "-- one always failing before the other -- in which ",
+                 "case the partial likelihood is monotone and no ",
                  "finite estimate exists")
         }
-        if (piv != c) {
-            tmp <- Ab[c, ]
-            Ab[c, ] <- Ab[piv, ]
+        if (piv != c_) {
+            tmp <- Ab[c_, ]
+            Ab[c_, ] <- Ab[piv, ]
             Ab[piv, ] <- tmp
         }
-        for (r in seq_len(p)) {
-            if (r == c) {
+        for (r_ in seq_len(p)) {
+            if (r_ == c_) {
                 next
             }
-            f <- Ab[r, c] / Ab[c, c]
-            for (k in c:(p + 1L)) {
-                Ab[r, k] <- Ab[r, k] - f * Ab[c, k]
-            }
+            f <- Ab[r_, c_] / Ab[c_, c_]
+            Ab[r_, c_:(p + 1L)] <- Ab[r_, c_:(p + 1L)] -
+                f * Ab[c_, c_:(p + 1L)]
         }
     }
-    d <- diag(Ab)
-    return(Ab[seq_len(p), p + 1L] / d)
+    return(sapply(seq_len(p), function(i) Ab[i, p + 1L] / Ab[i, i]))
 }
 
 .svycox_inverse <- function(A) {
@@ -259,65 +229,38 @@
         e <- numeric(p)
         e[j] <- 1.0
         col <- .svycox_solve(A, e)
-        for (i in seq_len(p)) {
-            out[i, j] <- col[i]
-        }
+        out[, j] <- col
     }
     return(out)
 }
 
-morie_svycox_score_residuals <- function(time, event, X, beta,
-                                          weights = NULL) {
-    prep <- .svycox_prep(time, event, X, weights, NULL, NULL)
-    T <- prep$T
-    E <- prep$E
-    M <- prep$M
-    w <- prep$w
-    n <- prep$n
-    p <- prep$p
-    beta <- as.numeric(beta)
-    return(.svycox_score_and_info(T, E, M, w, beta, n, p)$resid)
-}
-
-.svycox_design_variance <- function(contrib, w, h, c_id, p) {
-    cells <- list()
-    for (i in seq_along(w)) {
-        key <- paste(h[i], c_id[i], sep = "\r")
-        if (is.null(cells[[key]])) {
-            cells[[key]] <- numeric(p)
+.svycox_design_variance <- function(contrib, w, h, c, p) {
+    n <- length(w)
+    keys <- paste(h, c, sep = "\r")
+    unique_keys <- unique(keys)
+    cell_h <- character(length(unique_keys))
+    cell_totals <- matrix(0.0, nrow = length(unique_keys), ncol = p)
+    for (ki in seq_along(unique_keys)) {
+        idx <- which(keys == unique_keys[ki])
+        cell_h[ki] <- h[idx[1]]
+        for (i in idx) {
+            cell_totals[ki, ] <- cell_totals[ki, ] + w[i] * contrib[i, ]
         }
-        for (k in seq_len(p)) {
-            cells[[key]][k] <- cells[[key]][k] + w[i] * contrib[i, k]
-        }
-    }
-    by_h <- list()
-    for (key in names(cells)) {
-        parts <- strsplit(key, "\r", fixed = TRUE)[[1]]
-        hh <- parts[1]
-        if (is.null(by_h[[hh]])) {
-            by_h[[hh]] <- list()
-        }
-        by_h[[hh]][[length(by_h[[hh]]) + 1L]] <- cells[[key]]
     }
     V <- matrix(0.0, p, p)
-    for (hh in names(by_h)) {
-        vs <- by_h[[hh]]
-        nh <- length(vs)
+    unique_strata <- unique(cell_h)
+    for (hh in unique_strata) {
+        cells_in_h <- which(cell_h == hh)
+        nh <- length(cells_in_h)
         if (nh < 2L) {
-            stop(sprintf("svycox: stratum %s has a single cluster, "
-                         "so its variance contribution is not "
-                         "estimable", hh))
+            stop(sprintf("svycox: stratum %s has a single cluster, ",
+                         "so its variance contribution is not estimable",
+                         hh))
         }
-        mean_v <- numeric(p)
-        for (k in seq_len(p)) {
-            s <- 0.0
-            for (v in vs) {
-                s <- s + v[k]
-            }
-            mean_v[k] <- s / nh
-        }
+        mean_v <- colSums(cell_totals[cells_in_h, , drop = FALSE]) / nh
         f <- nh / (nh - 1)
-        for (v in vs) {
+        for (ki in cells_in_h) {
+            v <- cell_totals[ki, ]
             for (k in seq_len(p)) {
                 for (l in seq_len(p)) {
                     V[k, l] <- V[k, l] +
@@ -329,17 +272,31 @@ morie_svycox_score_residuals <- function(time, event, X, beta,
     return(V)
 }
 
-morie_svycox <- function(time, event, X, weights = NULL, strata = NULL,
-                         cluster = NULL, max_iter = 100, tol = 1e-9) {
+.svycox_score_residuals <- function(time, event, X, beta, weights = NULL) {
+    prep <- .svycox_prep(time, event, X, weights, NULL, NULL)
+    T <- prep$T
+    E <- prep$E
+    M <- prep$M
+    w <- prep$w
+    n <- prep$n
+    p <- prep$p
+    beta <- as.numeric(beta)
+    si <- .svycox_score_and_info(T, E, M, w, beta, n, p)
+    return(si$resid)
+}
+
+.svycox_svycoxph <- function(time, event, X, weights = NULL, strata = NULL,
+                             cluster = NULL, max_iter = 100, tol = 1e-9) {
     prep <- .svycox_prep(time, event, X, weights, strata, cluster)
     T <- prep$T
     E <- prep$E
     M <- prep$M
     w <- prep$w
     h <- prep$h
-    c_id <- prep$c
+    c <- prep$c
     n <- prep$n
     p <- prep$p
+
     beta <- numeric(p)
     hist <- numeric(0)
     converged <- FALSE
@@ -349,74 +306,63 @@ morie_svycox <- function(time, event, X, weights = NULL, strata = NULL,
         I_mat <- si$I
         step <- .svycox_solve(I_mat, U)
         beta <- beta + step
-        cur <- max(abs(step))
-        hist <- c(hist, cur)
-        if (cur < tol) {
+        hist <- c(hist, max(abs(step)))
+        if (hist[length(hist)] < tol) {
             converged <- TRUE
             break
         }
     }
     if (!converged) {
-        stop(sprintf("svycox: Newton-Raphson did not converge in %d "
-                     "iterations (last step %.3g)",
+        stop(sprintf("svycox: Newton-Raphson did not converge in ",
+                     "%d iterations (last step %.3g)",
                      as.integer(max_iter), hist[length(hist)]))
     }
+
     si <- .svycox_score_and_info(T, E, M, w, beta, n, p)
     U <- si$U
     I_mat <- si$I
     resid <- si$resid
+
     Iinv <- .svycox_inverse(I_mat)
-    Vd <- .svycox_design_variance(resid, w, h, c_id, p)
+    Vd <- .svycox_design_variance(resid, w, h, c, p)
     V <- Iinv %*% Vd %*% Iinv
+
     se <- numeric(p)
     se_model <- numeric(p)
-    de <- numeric(p)
+    design_effect <- numeric(p)
     z <- numeric(p)
-    hr <- numeric(p)
     for (k in seq_len(p)) {
-        if (V[k, k] > 0) {
-            se[k] <- sqrt(V[k, k])
+        se[k] <- if (V[k, k] > 0) sqrt(V[k, k]) else NaN
+        se_model[k] <- if (Iinv[k, k] > 0) sqrt(Iinv[k, k]) else NaN
+        design_effect[k] <- if (se_model[k] > 0) {
+            (se[k] / se_model[k])^2
         } else {
-            se[k] <- NaN
+            NaN
         }
-        if (Iinv[k, k] > 0) {
-            se_model[k] <- sqrt(Iinv[k, k])
-        } else {
-            se_model[k] <- NaN
-        }
-        if (se_model[k] > 0) {
-            de[k] <- (se[k] / se_model[k])^2
-        } else {
-            de[k] <- NaN
-        }
-        if (se[k] > 0) {
-            z[k] <- beta[k] / se[k]
-        } else {
-            z[k] <- NaN
-        }
-        hr[k] <- exp(beta[k])
+        z[k] <- if (se[k] > 0) beta[k] / se[k] else NaN
     }
+
     return(list(
         estimate = beta,
         coefficients = beta,
-        hazard_ratios = hr,
+        hazard_ratios = exp(beta),
         std_errors = se,
         model_std_errors = se_model,
         vcov = V,
         information = I_mat,
         score = U,
-        design_effect = de,
+        design_effect = design_effect,
         z = z,
         n = n,
         n_events = sum(E),
         n_iterations = length(hist),
         ties = "breslow",
-        method = "Binder (1992) weighted partial likelihood with a "
-                 "design-based sandwich variance"
+        method = "Binder (1992) weighted partial likelihood with a design-based sandwich variance"
     ))
 }
 
-morie_svycox_survey_cox <- function(time, event, X, weights = NULL,
-                                    strata = NULL, cluster = NULL, ...) {
-    morie_svycox(time, event, X, weights, strata, cluster, ...)
+morie_svycox <- function(time, event, X, weights = NULL, strata = NULL,
+                         cluster = NULL, ...) {
+    .svycox_svycoxph(time, event, X, weights = weights, strata = strata,
+                     cluster = cluster, ...)
 }

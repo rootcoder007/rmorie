@@ -347,3 +347,7 @@ morie_tmlcll <- morie_clpm_coefficients
 #' @rdname morie_clpm_coefficients
 #' @export
 morie_tmlcll <- morie_clpm_coefficients
+
+#' @rdname morie_clpm_coefficients
+#' @export
+morie_tmlcll <- morie_clpm_coefficients

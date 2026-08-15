@@ -201,3 +201,7 @@ morie_sdxlcd <- morie_sdxlcd_fourier_embedding
 #' @rdname morie_sdxlcd_fourier_embedding
 #' @export
 morie_sdxlcd <- morie_sdxlcd_fourier_embedding
+
+#' @rdname morie_sdxlcd_fourier_embedding
+#' @export
+morie_sdxlcd <- morie_sdxlcd_fourier_embedding
