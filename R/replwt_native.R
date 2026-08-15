@@ -1,4 +1,3 @@
-```r
 # morie.fn -- function file (rootcoder007/morie)
 # Replicate weights: variance without a variance formula.
 #
@@ -53,7 +52,7 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 .replwt_design <- function(weights, strata = NULL, psu = NULL) {
   w <- as.numeric(weights)
   n <- length(w)
-  if (n < 2) stop("replwt: a design needs at least two units")
+  if (n < 2L) stop("replwt: a design needs at least two units")
   if (any(w <= 0)) stop("replwt: sampling weights must be positive")
 
   if (is.null(strata)) {
@@ -95,7 +94,7 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
   stratum_order <- character()
 
   for (k in seq_along(psu_order)) {
-    hh <- psu_order[[k]][1]
+    hh <- psu_order[[k]][1L]
     if (is.null(stratum_psus[[hh]])) {
       stratum_order <- c(stratum_order, hh)
       stratum_psus[[hh]] <- k
@@ -133,6 +132,15 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
            lapply(H, function(r) c(r, -r)))
   }
   H
+}
+
+.replwt_psu_totals <- function(d, values) {
+  out <- numeric(length(d$psu_order))
+  for (k in seq_along(d$psu_order)) {
+    idx <- d$psu_units[[k]]
+    out[k] <- sum(d$weights[idx] * values[idx])
+  }
+  out
 }
 
 .replwt_jackknife_weights <- function(d, method = "jkn") {
@@ -189,4 +197,147 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
   )
 }
 
-.replwt_brr_weights <- function(d, fay = 0.0)
+.replwt_brr_weights <- function(d, fay = 0.0) {
+  rho <- as.numeric(fay)
+  if (rho < 0.0 || rho >= 1.0) {
+    stop(sprintf("replwt: Fay's rho must lie in [0, 1), got %g", rho))
+  }
+
+  strata <- d$stratum_order
+  for (hh in strata) {
+    if (length(d$stratum_psus[[hh]]) != 2L) {
+      stop(sprintf("replwt: BRR needs exactly two PSUs per stratum; stratum %s has %d",
+                   hh, length(d$stratum_psus[[hh]])))
+    }
+  }
+
+  H <- length(strata)
+  R <- 1L
+  while (R < H + 1L) R <- R * 2L
+  M <- .replwt_hadamard(R)
+
+  reps <- list()
+  for (r in seq_len(R)) {
+    w <- d$weights
+    for (j in seq_along(strata)) {
+      hh <- strata[j]
+      ps_indices <- d$stratum_psus[[hh]]
+      a_idx <- ps_indices[1L]
+      b_idx <- ps_indices[2L]
+      if (M[[r]][j + 1L] > 0L) {
+        keep_idx <- a_idx
+        drop_idx <- b_idx
+      } else {
+        keep_idx <- b_idx
+        drop_idx <- a_idx
+      }
+      keep_units <- d$psu_units[[keep_idx]]
+      drop_units <- d$psu_units[[drop_idx]]
+      w[keep_units] <- w[keep_units] * (2.0 - rho)
+      w[drop_units] <- w[drop_units] * rho
+    }
+    reps[[length(reps) + 1L]] <- w
+  }
+
+  c_scale <- 1.0 / (R * (1.0 - rho)^2)
+  list(
+    weights = reps,
+    scale = rep(c_scale, R),
+    n_replicates = R,
+    hadamard_order = R,
+    fay = rho,
+    method = if (rho > 0) "fay" else "brr"
+  )
+}
+
+.replwt_bootstrap_weights <- function(d, R = 200, seed = 1) {
+  R <- as.integer(R)
+  if (R < 2L) {
+    stop("replwt: need at least two bootstrap replicates")
+  }
+  e <- .ghc_rng(as.integer(seed))
+  reps <- list()
+  for (rep_i in seq_len(R)) {
+    w <- d$weights
+    for (hh in d$stratum_order) {
+      ps_indices <- d$stratum_psus[[hh]]
+      nh <- length(ps_indices)
+      mh <- nh - 1L
+      count <- integer(nh)
+      for (j in seq_len(mh)) {
+        u <- .ghc_unif(e, 1L)
+        idx <- (as.integer(u * nh) %% nh) + 1L
+        count[idx] <- count[idx] + 1L
+      }
+      root <- sqrt(mh / (nh - 1))
+      for (k_idx in seq_along(ps_indices)) {
+        k <- ps_indices[k_idx]
+        f <- 1.0 - root + root * (nh / as.numeric(mh)) * count[k_idx]
+        units <- d$psu_units[[k]]
+        w[units] <- w[units] * f
+      }
+    }
+    reps[[length(reps) + 1L]] <- w
+  }
+  list(
+    weights = reps,
+    scale = rep(1.0 / R, R),
+    n_replicates = R,
+    seed = as.integer(seed),
+    method = "bootstrap"
+  )
+}
+
+.replwt_replicate_variance <- function(estimator, d, rep, values = NULL) {
+  call_est <- function(w) {
+    if (is.null(values)) {
+      as.numeric(estimator(w))
+    } else {
+      as.numeric(estimator(w, values))
+    }
+  }
+
+  theta <- call_est(d$weights)
+  rep_thetas <- vapply(rep$weights, call_est, numeric(1L))
+  v <- sum(rep$scale * (rep_thetas - theta)^2)
+
+  list(
+    estimate = theta,
+    theta = theta,
+    variance = v,
+    std_error = if (v >= 0) sqrt(v) else NaN,
+    replicates = rep_thetas,
+    n_replicates = length(rep_thetas),
+    method = rep$method
+  )
+}
+
+morie_replwt <- function(d, method = "jkn", R = 200, fay = 0.0, seed = 1) {
+  if (!method %in% METHODS) {
+    stop(sprintf("replwt: method must be one of %s, got %s",
+                 paste(METHODS, collapse = ", "), method))
+  }
+  if (method %in% c("jk1", "jkn")) {
+    rep <- .replwt_jackknife_weights(d, method)
+  } else if (method == "brr") {
+    rep <- .replwt_brr_weights(d, 0.0)
+  } else if (method == "fay") {
+    if (!fay) {
+      stop("replwt: Fay's method needs a non-zero rho; use method='brr' for rho = 0")
+    }
+    rep <- .replwt_brr_weights(d, fay)
+  } else {
+    rep <- .replwt_bootstrap_weights(d, R, seed)
+  }
+  list(
+    estimate = rep$weights,
+    weights = rep$weights,
+    scale = rep$scale,
+    n_replicates = length(rep$weights),
+    method = rep$method,
+    dropped = if (is.null(rep$dropped)) NULL else rep$dropped,
+    hadamard_order = if (is.null(rep$hadamard_order)) NULL else rep$hadamard_order,
+    fay = if (is.null(rep$fay)) NULL else rep$fay,
+    seed = if (is.null(rep$seed)) NULL else rep$seed
+  )
+}

@@ -168,16 +168,16 @@
 
 .sacrb_modified_precision <- function(cand_tokens, refs_tokens, n) {
   cc <- .sacrb_ngram_counts(cand_tokens, n)
-  total <- 0L
-  if (length(cc) > 0L) {
-    total <- sum(unlist(cc, use.names = FALSE))
+  if (length(cc) == 0L) {
+    return(list(numerator = 0L, denominator = 0L, precision = 0.0))
   }
+  total <- sum(unlist(cc, use.names = FALSE))
   if (total == 0L) {
     return(list(numerator = 0L, denominator = 0L, precision = 0.0))
   }
   best <- list()
-  for (r in refs_tokens) {
-    rc <- .sacrb_ngram_counts(r, n)
+  for (rt in refs_tokens) {
+    rc <- .sacrb_ngram_counts(rt, n)
     for (key in names(rc)) {
       v <- rc[[key]]
       if (is.null(best[[key]])) {
@@ -190,11 +190,14 @@
   clipped <- 0L
   for (key in names(cc)) {
     v <- cc[[key]]
-    bv <- if (is.null(best[[key]])) 0L else best[[key]]
-    clipped <- clipped + min(v, bv)
+    b <- if (is.null(best[[key]])) 0L else best[[key]]
+    clipped <- clipped + min(v, b)
   }
-  list(numerator = clipped, denominator = total,
-       precision = clipped / as.numeric(total))
+  list(
+    numerator = clipped,
+    denominator = total,
+    precision = clipped / as.numeric(total)
+  )
 }
 
 .sacrb_brevity_penalty <- function(c, r) {
@@ -210,49 +213,20 @@
 }
 
 .sacrb_best_match <- function(clen, rlens) {
+  if (length(rlens) == 0L) {
+    return(0L)
+  }
   diffs <- abs(rlens - clen)
   min_diff <- min(diffs)
   candidates <- rlens[diffs == min_diff]
   min(candidates)
 }
 
-.sacrb_signature <- function(tokenizer = "13a", lowercase = FALSE,
-                             max_n = 4L, n_refs = 1L,
-                             version = "morie-sacrb-1") {
-  sprintf("nrefs:%d|case:%s|tok:%s|ngram:%d|version:%s",
-          as.integer(n_refs),
-          if (isTRUE(lowercase)) "lc" else "mixed",
-          as.character(tokenizer),
-          as.integer(max_n),
-          version)
-}
-
-.sacrb_cheatsheet <- function() {
-  paste0("sacrb: BLEU = BP * exp(sum w_n log p_n), with clipped ",
-         "n-gram precision and BP = 1 if c > r else exp(1 - r/c). ",
-         "The penalty is computed over the WHOLE CORPUS, not per ",
-         "sentence, and r uses the CLOSEST reference length, not ",
-         "the shortest. Long candidates are not penalised twice -- ",
-         "modified precision already handles them. The number ",
-         "depends on TOKENISATION, so two BLEU scores are ",
-         "comparable only when their signatures match.")
-}
-
-# Public API exposed alongside the private helpers
-sacrb_tokenize_13a <- .sacrb_tokenize_13a
-sacrb_tokenize_intl <- .sacrb_tokenize_intl
-sacrb_ngram_counts <- .sacrb_ngram_counts
-sacrb_modified_precision <- .sacrb_modified_precision
-sacrb_brevity_penalty <- .sacrb_brevity_penalty
-sacrb_signature <- .sacrb_signature
-sacrb_cheatsheet <- .sacrb_cheatsheet
-
-morie_sacrb <- function(candidates, references, max_n = 4L,
-                        weights = NULL, tokenizer = "13a",
-                        lowercase = FALSE) {
+morie_sacrb_bleu <- function(candidates, references, max_n = 4L,
+                             weights = NULL, tokenizer = "13a",
+                             lowercase = FALSE) {
   C <- as.character(candidates)
   R <- lapply(references, function(refs) as.character(refs))
-
   if (length(C) != length(R)) {
     stop(sprintf("sacrb: %d candidates but %d reference sets",
                  length(C), length(R)))
@@ -260,17 +234,13 @@ morie_sacrb <- function(candidates, references, max_n = 4L,
   if (length(C) == 0L) {
     stop("sacrb: no candidates given")
   }
-  for (i in seq_along(R)) {
-    if (length(R[[i]]) == 0L) {
-      stop("sacrb: every candidate needs at least one reference")
-    }
+  if (any(lengths(R) == 0L)) {
+    stop("sacrb: every candidate needs at least one reference")
   }
-
   N <- as.integer(max_n)
   if (N < 1L) {
     stop("sacrb: max_n must be at least 1")
   }
-
   if (is.null(weights)) {
     w <- rep(1.0 / N, N)
   } else {
@@ -282,38 +252,34 @@ morie_sacrb <- function(candidates, references, max_n = 4L,
   if (abs(sum(w) - 1.0) > 1e-9) {
     stop(sprintf("sacrb: the weights must sum to 1, got %.6f", sum(w)))
   }
-
-  num <- rep(0L, N)
-  den <- rep(0L, N)
+  num <- integer(N)
+  den <- integer(N)
   c_total <- 0L
   r_total <- 0L
-
   for (i in seq_along(C)) {
     ct <- .sacrb_tok(C[i], tokenizer, lowercase)
     rt <- lapply(R[[i]], function(x) .sacrb_tok(x, tokenizer, lowercase))
     c_total <- c_total + length(ct)
-    r_total <- r_total + .sacrb_best_match(length(ct),
-                                            sapply(rt, length))
+    r_total <- r_total + .sacrb_best_match(
+      length(ct),
+      vapply(rt, length, integer(1L))
+    )
     for (n in seq_len(N)) {
       mp <- .sacrb_modified_precision(ct, rt, n)
       num[n] <- num[n] + mp$numerator
       den[n] <- den[n] + mp$denominator
     }
   }
-
   precisions <- numeric(N)
   for (n in seq_len(N)) {
     precisions[n] <- if (den[n] > 0L) num[n] / den[n] else 0.0
   }
-
   bp <- .sacrb_brevity_penalty(c_total, r_total)
-
   if (any(precisions <= 0.0)) {
     score <- 0.0
   } else {
     score <- bp * exp(sum(w * log(precisions)))
   }
-
   list(
     estimate = score,
     bleu = score,
@@ -328,11 +294,32 @@ morie_sacrb <- function(candidates, references, max_n = 4L,
     max_n = N,
     signature = .sacrb_signature(tokenizer, lowercase, N,
                                  length(R[[1]])),
-    method = "corpus BLEU; Papineni et al. (2002) Sec. 2.3, "
-             "reported with a sacreBLEU-style signature "
-             "(Post 2018)"
+    method = paste0("corpus BLEU; Papineni et al. (2002) Sec. 2.3, ",
+                    "reported with a sacreBLEU-style signature ",
+                    "(Post 2018)")
   )
 }
 
+.sacrb_signature <- function(tokenizer = "13a", lowercase = FALSE,
+                            max_n = 4L, n_refs = 1L,
+                            version = "morie-sacrb-1") {
+  paste0("nrefs:", as.integer(n_refs),
+         "|case:", if (isTRUE(lowercase)) "lc" else "mixed",
+         "|tok:", as.character(tokenizer),
+         "|ngram:", as.integer(max_n),
+         "|version:", version)
+}
+
+.sacrb_cheatsheet <- function() {
+  paste0("sacrb: BLEU = BP * exp(sum w_n log p_n), with clipped ",
+         "n-gram precision and BP = 1 if c > r else exp(1 - r/c). ",
+         "The penalty is computed over the WHOLE CORPUS, not per ",
+         "sentence, and r uses the CLOSEST reference length, not ",
+         "the shortest. Long candidates are not penalised twice -- ",
+         "modified precision already handles them. The number ",
+         "depends on TOKENISATION, so two BLEU scores are ",
+         "comparable only when their signatures match.")
+}
+
 # compact alias per ledger/NAMING.md
-sacrb_bleu <- morie_sacrb
+morie_sacrb_sacrebleu <- morie_sacrb_bleu

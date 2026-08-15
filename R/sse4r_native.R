@@ -174,47 +174,55 @@ morie_sse4r <- function(sequence, user_embedding, item_table,
     d <- length(seq_list[[1L]])
     di <- d - length(u)
     qy <- seq_list[[length(seq_list)]]
-    m <- min(length(u), di)
+    m_int <- min(length(u), di)
 
-    n_seq <- length(seq_list)
-    seq_mat <- matrix(0, nrow = n_seq, ncol = d)
-    for (i in seq_len(n_seq)) {
-      seq_mat[i, ] <- seq_list[[i]]
+    L <- length(seq_list)
+    sc <- numeric(L)
+    for (t in seq_len(L)) {
+      st <- seq_list[[t]]
+      item_part <- sum(qy[seq_len(di)] * st[seq_len(di)])
+      user_part <- sum(u[seq_len(m_int)] * st[seq_len(m_int)])
+      sc[t] <- (item_part + user_part) / sqrt(d)
     }
-
-    item_scores <- as.numeric(seq_mat[, seq_len(di), drop = FALSE] %*% qy[seq_len(di)])
-    user_scores <- as.numeric(seq_mat[, seq_len(m), drop = FALSE] %*% u[seq_len(m)])
-    sc <- (item_scores + user_scores) / sqrt(d)
 
     m_max <- max(sc)
     e <- exp(sc - m_max)
-    w <- e / sum(e)
+    z <- sum(e)
+    w <- e / z
 
-    ctx <- as.numeric(crossprod(w, seq_mat))
+    ctx <- numeric(d)
+    for (a in seq_len(d)) {
+      ctx[a] <- sum(w * vapply(seq_list, function(s) s[a], numeric(1)))
+    }
   } else {
     ctx <- as.numeric(attend(seq_list))
-    d <- length(ctx)
-    di <- d - length(u)
+  }
+
+  di_final <- length(ctx) - length(u)
+
+  if (ncol(T_mat) != di_final) {
+    stop(sprintf("sse4r: the item table is %d-wide but the item part of the context is %d",
+                 ncol(T_mat), di_final))
   }
 
   n_items <- nrow(T_mat)
+  u_len <- length(u)
   scores <- numeric(n_items)
+  item_idx <- seq_len(di_final)
+  user_idx <- di_final + seq_len(u_len)
+
   for (j in seq_len(n_items)) {
     row <- T_mat[j, ]
-    if (length(row) != di) {
-      stop(sprintf("sse4r: the item table is %d-wide but the item part of the context is %d",
-                   length(row), di))
-    }
-    scores[j] <- sum(ctx[seq_len(di)] * row) +
-      sum(ctx[(di + 1L):length(ctx)] * u)
+    scores[j] <- sum(ctx[item_idx] * row) + sum(ctx[user_idx] * u)
   }
 
   order_idx <- order(-scores)
   kk <- min(as.integer(top_k), length(order_idx))
+  top_k_idx <- if (kk > 0L) order_idx[seq_len(kk)] else integer(0L)
 
   list(
-    estimate = order_idx[seq_len(kk)],
-    top_k = order_idx[seq_len(kk)],
+    estimate = top_k_idx,
+    top_k = top_k_idx,
     scores = scores,
     context = ctx,
     method = "personalised Transformer recommendation; Wu, Li, Hsieh & Sharpnack (2020)",
@@ -222,16 +230,23 @@ morie_sse4r <- function(sequence, user_embedding, item_table,
   )
 }
 
-.sse4r_cheatsheet <- function() {
-  paste("sse4r: a self-attentive sequential recommender models WHAT "
-        "was clicked and ignores WHO clicked, so two users with the "
-        "same recent items get the same answer. Fix it by "
-        "CONCATENATING a user embedding to EVERY item in the "
-        "sequence -- appended once at the end, attention could "
-        "ignore it. That adds one row per user, each with few "
-        "sequences, so it memorises; SSE regularises by REPLACING "
-        "an embedding with another from the SAME table with "
-        "probability p. Not zeroing (that is dropout) -- exchanging, "
-        "which keeps different rows mutually compatible. The "
-        "observed rate is p(1-1/n), not p.")
+sse4r_cheatsheet <- function() {
+  paste0("sse4r: a self-attentive sequential recommender models WHAT ",
+         "was clicked and ignores WHO clicked, so two users with the ",
+         "same recent items get the same answer. Fix it by ",
+         "CONCATENATING a user embedding to EVERY item in the ",
+         "sequence -- appended once at the end, attention could ",
+         "ignore it. That adds one row per user, each with few ",
+         "sequences, so it memorises; SSE regularises by REPLACING ",
+         "an embedding with another from the SAME table with ",
+         "probability p. Not zeroing (that is dropout) -- exchanging, ",
+         "which keeps different rows mutually compatible. The ",
+         "observed rate is p(1-1/n), not p.")
 }
+
+# compact alias per ledger/NAMING.md
+ssept <- morie_sse4r
+
+# public names resolved by fn/_lazy_map.json
+ssepta_seq <- morie_sse4r
+sseptaseq <- morie_sse4r

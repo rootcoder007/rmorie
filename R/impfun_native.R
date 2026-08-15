@@ -314,3 +314,7 @@ morie_impfun <- merge_panels
 #' @rdname merge_panels
 #' @export
 morie_impfun <- merge_panels
+
+#' @rdname merge_panels
+#' @export
+morie_impfun <- merge_panels

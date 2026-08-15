@@ -283,3 +283,7 @@ morie_genemt_magma <- morie_genemt_gene_set_regression
 
 # Public name resolved by fn/_lazy_map.json
 morie_genemt_gene_meta_analysis <- morie_genemt_gene_set_regression
+
+#' @rdname morie_genemt_ld_principal_components
+#' @export
+morie_genemt <- morie_genemt_ld_principal_components

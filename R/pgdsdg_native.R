@@ -265,3 +265,7 @@ morie_pgdsdg <- project_box
 #' @rdname project_box
 #' @export
 morie_pgdsdg <- project_box
+
+#' @rdname project_box
+#' @export
+morie_pgdsdg <- project_box
