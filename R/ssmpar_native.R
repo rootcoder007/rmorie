@@ -185,3 +185,7 @@ morie_ssmpar <- parallel_scan
 #' @rdname compose
 #' @export
 morie_ssmpar <- compose
+
+#' @rdname compose
+#' @export
+morie_ssmpar <- compose

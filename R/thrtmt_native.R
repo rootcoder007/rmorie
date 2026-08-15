@@ -139,3 +139,7 @@ thrtmt_blip_function <- function(y, A, W, V = NULL, ridge = 1e-8) {
               info = list(coef = b, v_coef = bv, blip_w = blip_w,
                           q1 = q1, q0 = q0)))
 }
+
+#' @rdname thrtmt_blip_function
+#' @export
+morie_thrtmt <- thrtmt_blip_function
