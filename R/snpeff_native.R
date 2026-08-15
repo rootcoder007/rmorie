@@ -229,6 +229,6 @@ morie_snpeff <- list(snpeff = snpeff,
                      translate = translate,
                      codon_table = codon_table,
                      annotate_variant = annotate_variant,
-                     cheatsheet = cheatsheet,
+                     cheatsheet = .snpeff_cheatsheet,
                      variant_effect = variant_effect,
                      varianteffect = varianteffect)

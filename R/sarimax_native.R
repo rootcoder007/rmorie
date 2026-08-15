@@ -126,11 +126,16 @@ profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
   npar <- p + q + P + Q
   if (npar == 0 && length(wX) == 0L) stop("sarimax: nothing to estimate")
   unpack <- function(v) {
-    i <- 0
-    phi <- v[(i + 1):(i + p)]; i <- i + p
-    th <- v[(i + 1):(i + q)]; i <- i + q
-    Ph <- v[(i + 1):(i + P)]; i <- i + P
-    Th <- v[(i + 1):(i + Q)]
+    # seq_len, not (i+1):(i+p): with p = 0 the colon form is 1:0,
+    # which in R is c(1, 0) and returns the FIRST element instead of
+    # none. Every block after it then reads the wrong slice, so an
+    # order like (0,1,1)(0,1,1) estimated the wrong parameters
+    # entirely. sarima_native.R already guards this; sarimax did not.
+    i <- 0L
+    phi <- v[i + seq_len(p)]; i <- i + p
+    th  <- v[i + seq_len(q)]; i <- i + q
+    Ph  <- v[i + seq_len(P)]; i <- i + P
+    Th  <- v[i + seq_len(Q)]
     list(phi = phi, th = th, Ph = Ph, Th = Th)
   }
   objective <- function(v) {

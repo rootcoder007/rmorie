@@ -26,4 +26,4 @@ morie_krigun <- function(coords, values, s_predict, trend_order = 1,
 }
 
 #' @noRd
-Krigun <- morie_universal_kriging
+Krigun <- morie_krigun

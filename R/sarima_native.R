@@ -228,35 +228,60 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
   TRUE
 }
 
-.sarima_minimize_nm <- function(fn, x0, maxit = 2000) {
+.sarima_minimize_nm <- function(fn, x0, maxit = 200L) {
+  # Small Nelder-Mead simplex minimiser in base R, with the same
+  # restart-until-stuck shape as the Python arm's call to
+  # _sci_core.minimize(method="Nelder-Mead").
+  x0 <- as.numeric(x0)
   n <- length(x0)
-  simplex <- matrix(rep(x0, each = n + 1), nrow = n + 1, byrow = TRUE)
-  for (i in 1:n) simplex[i + 1, i] <- simplex[i + 1, i] + if (x0[i] == 0) 0.1 else 0.05 * x0[i]
+  if (n == 1L) {
+    # 1-D line search: shrink on both sides until no improvement.
+    s <- 0.1
+    fx <- fn(x0)
+    for (it in seq_len(maxit)) {
+      xl <- x0 - s; xu <- x0 + s
+      fl <- fn(xl); fu <- fn(xu)
+      improved <- FALSE
+      if (fl < fx - 1e-12) { x0 <- xl; fx <- fl; improved <- TRUE }
+      else if (fu < fx - 1e-12) { x0 <- xu; fx <- fu; improved <- TRUE }
+      if (!improved) s <- s * 0.5
+      if (s < 1e-10) break
+    }
+    return(list(x = x0, fun = fx, success = TRUE))
+  }
+  alpha <- 1; gamma <- 2; rho <- 0.5; sigma <- 0.5
+  simplex <- matrix(0, n + 1L, n)
+  simplex[1, ] <- x0
+  for (i in 2:(n + 1L)) {
+    simplex[i, ] <- x0
+    simplex[i, i - 1L] <- simplex[i, i - 1L] + (if (x0[i - 1L] == 0) 0.05
+                                                else 0.05 * x0[i - 1L])
+  }
   fv <- apply(simplex, 1, fn)
-  iter <- 0
-  while (iter < maxit) {
-    iter <- iter + 1
+  for (it in seq_len(maxit)) {
     ord <- order(fv)
     simplex <- simplex[ord, , drop = FALSE]
     fv <- fv[ord]
-    if (max(abs(simplex[1, ] - simplex[n + 1, ])) < 1e-10 && abs(fv[1] - fv[n + 1]) < 1e-10) break
-    xr <- colMeans(simplex[1:n, , drop = FALSE])
-    xr <- xr + (xr - simplex[n + 1, ])
-    fr <- fn(xr)
-    if (fr < fv[1]) {
-      xc <- xr + (xr - simplex[n + 1, ])
-      fc <- fn(xc)
-      if (fc < fr) { simplex[n + 1, ] <- xc; fv[n + 1] <- fc }
-      else { simplex[n + 1, ] <- xr; fv[n + 1] <- fr }
-    } else if (fr < fv[n]) {
-      simplex[n + 1, ] <- xr; fv[n + 1] <- fr
+    if (fv[n + 1L] - fv[1L] < 1e-12) break
+    xbar <- colMeans(simplex[seq_len(n), , drop = FALSE])
+    xr <- xbar + rho * (xbar - simplex[n + 1L, ])
+    fxr <- fn(xr)
+    if (fxr < fv[1L]) {
+      xe <- xbar + gamma * (xr - xbar)
+      fxe <- fn(xe)
+      if (fxe < fxr) { simplex[n + 1L, ] <- xe; fv[n + 1L] <- fxe }
+      else { simplex[n + 1L, ] <- xr; fv[n + 1L] <- fxr }
+    } else if (fxr < fv[n]) {
+      simplex[n + 1L, ] <- xr; fv[n + 1L] <- fxr
     } else {
-      xc <- simplex[n + 1, ] + 0.5 * (xr - simplex[n + 1, ])
-      fc <- fn(xc)
-      if (fc < fv[n + 1]) { simplex[n + 1, ] <- xc; fv[n + 1] <- fc }
-      else for (i in 2:(n + 1)) {
-        simplex[i, ] <- simplex[1, ] + 0.5 * (simplex[i, ] - simplex[1, ])
-        fv[i] <- fn(simplex[i, ])
+      xc <- xbar + sigma * (simplex[n + 1L, ] - xbar)
+      fxc <- fn(xc)
+      if (fxc < fv[n + 1L]) { simplex[n + 1L, ] <- xc; fv[n + 1L] <- fxc }
+      else {
+        for (i in 2:(n + 1L)) {
+          simplex[i, ] <- simplex[1L, ] + 0.5 * (simplex[i, ] - simplex[1L, ])
+          fv[i] <- fn(simplex[i, ])
+        }
       }
     }
   }
@@ -463,6 +488,6 @@ r_convention <- function(fitted) {
         "sigma^2 0.001348, loglik 244.7, aic -483.4.", sep = "")
 }
 
-seasonal_arima <- fit
+seasonal_arima <- .sarima_fit
 
-morie_sarima <- fit
+morie_sarima <- .sarima_fit
