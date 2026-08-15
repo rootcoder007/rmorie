@@ -89,7 +89,7 @@
 }
 
 .prgrl_rng <- function(seed) {
-  st <- as.integer(seed) & 0x7FFFFFFF
+  st <- as.numeric(seed) %% 2147483648
   if (st == 0L) st <- 1L
   e <- new.env()
   e$st <- st

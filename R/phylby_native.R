@@ -47,7 +47,11 @@
     return(below)
   }
   walk(tree)
-  return(acc$out)
+  # Python accumulates splits in a set; a split reached twice is stored once.
+  out <- acc$out
+  if (length(out) < 2L) return(out)
+  keys <- vapply(out, function(s) paste(sort(s), collapse = ","), character(1))
+  out[!duplicated(keys)]
 }
 
 .phylby_topology_key <- function(tree) {
@@ -198,7 +202,7 @@
 }
 
 .phylby_rng <- function(seed) {
-  st <- as.integer(seed) & 0x7FFFFFFF
+  st <- as.numeric(seed) %% 2147483648
   if (st == 0) st <- 1L
   env <- new.env()
   env$st <- st
@@ -364,7 +368,7 @@ morie_phylby <- function(alignment, n_iter = 2000, burnin = NULL, n_chains = 4,
           accepted <- accepted + 1
         }
       }
-      if (as.integer(n_chains) > 1 && it0 %% as.integer(swap_every) == 0) {
+      if (as.integer(n_chains) > 1 && (it0 + 1) %% as.integer(swap_every) == 0) {
         a <- floor(rnd() * n_chains) + 1
         b <- floor(rnd() * n_chains) + 1
         if (a != b) {
