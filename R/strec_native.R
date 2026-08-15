@@ -287,3 +287,7 @@ morie_strec <- strec_trilinear
 #' @rdname strec_trilinear
 #' @export
 morie_strec <- strec_trilinear
+
+#' @rdname strec_trilinear
+#' @export
+morie_strec <- strec_trilinear
