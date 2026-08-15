@@ -295,3 +295,7 @@ morie_genemt <- morie_genemt_ld_principal_components
 #' @rdname morie_genemt_ld_principal_components
 #' @export
 morie_genemt <- morie_genemt_ld_principal_components
+
+#' @rdname morie_genemt_ld_principal_components
+#' @export
+morie_genemt <- morie_genemt_ld_principal_components

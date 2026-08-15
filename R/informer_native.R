@@ -284,3 +284,7 @@ morie_informer <- morie_informer_sparsity_measure
 #' @rdname morie_informer_sparsity_measure
 #' @export
 morie_informer <- morie_informer_sparsity_measure
+
+#' @rdname morie_informer_sparsity_measure
+#' @export
+morie_informer <- morie_informer_sparsity_measure
