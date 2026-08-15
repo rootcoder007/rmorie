@@ -1,4 +1,3 @@
-```r
 # morie.fn -- function file (rootcoder007/morie)
 # MAGMA: gene and gene-set analysis by regression.
 #
@@ -153,8 +152,10 @@ morie_genemt_gene_statistic <- function(y, G, keep = 0.999) {
     stop("genemt: the gene has no non-degenerate components")
   }
 
-  co <- .genemt_wls(X, yv, rep(1.0, n), 1e-8)$coef
-  fit <- co[1] + X %*% co[2:(m + 1)]
+  # Design matrix: intercept + m retained principal components.
+  Xa <- cbind(1, X)
+  co <- .genemt_wls(Xa, yv, rep(1.0, n), 1e-8)$coef
+  fit <- as.numeric(Xa %*% co)
   ybar <- sum(yv) / n
   ssr <- sum((fit - ybar)^2)
   sse <- sum((yv - fit)^2)
@@ -181,16 +182,16 @@ morie_genemt_gene_covariates <- function(n_markers, gene_length,
   }
   dens <- nm / gl
   cov <- cbind(log(nm), log(gl), log(dens))
-  names <- c("log_n_markers", "log_length", "log_density")
+  names_vec <- c("log_n_markers", "log_length", "log_density")
   if (!is.null(ld_scores)) {
     ls <- as.numeric(ld_scores)
     cov <- cbind(cov, ls)
-    names <- c(names, "ld_score")
+    names_vec <- c(names_vec, "ld_score")
   }
   list(covariates = cov,
-       names = names,
-       note = paste0("not optional: without them, long genes look ",
-                     "enriched for everything"))
+       names = names_vec,
+       note = paste("not optional: without them, long genes look ",
+                    "enriched for everything", sep = ""))
 }
 
 morie_genemt_gene_set_regression <- function(z_scores, membership,
@@ -202,9 +203,11 @@ morie_genemt_gene_set_regression <- function(z_scores, membership,
     stop(sprintf("genemt: %d z-scores but %d membership values",
                  n, length(s)))
   }
-  X <- matrix(s, ncol = 1)
+  # Design matrix: intercept + membership (+ optional covariates).
+  X <- cbind(1, s)
   if (!is.null(covariates)) {
     C <- as.matrix(covariates)
+    storage.mode(C) <- "numeric"
     if (nrow(C) != n) {
       stop(sprintf("genemt: %d covariate rows for %d genes",
                    nrow(C), n))
@@ -212,25 +215,25 @@ morie_genemt_gene_set_regression <- function(z_scores, membership,
     X <- cbind(X, C)
   }
   co <- .genemt_wls(X, z, rep(1.0, n), 1e-8)$coef
-  fit <- co[1] + X %*% co[2:ncol(X)]
+  fit <- as.numeric(X %*% co)
   res <- z - fit
-  dof <- max(n - ncol(X) - 1, 1)
+  dof <- max(n - ncol(X), 1)
   s2 <- sum(res * res) / dof
   sm <- sum(s) / n
   sxx <- sum((s - sm)^2)
   se <- if (sxx > .genemt_EPS) sqrt(s2 / sxx) else Inf
-  t <- if (se > 0) co[2] / se else 0.0
-  list(estimate = co[2], beta = co[2], se = se, t = t,
-       p = 1.0 - .genemt_norm_cdf(t),
+  t_stat <- if (se > 0) co[2] / se else 0.0
+  list(estimate = co[2], beta = co[2], se = se, t = t_stat,
+       p = 1.0 - .genemt_norm_cdf(t_stat),
        n_genes = n,
        covariates_used = !is.null(covariates),
        method = "MAGMA gene-set regression; de Leeuw et al. (2015)",
-       note = paste0("one-sided: enrichment means a POSITIVE ",
-                     "coefficient"))
+       note = paste("one-sided: enrichment means a POSITIVE ",
+                    "coefficient", sep = ""))
 }
 
 morie_genemt_conditional_set_test <- function(z_scores, set_a, set_b,
-                                              covariates = NULL) {
+                                             covariates = NULL) {
   z <- as.numeric(z_scores)
   a <- as.numeric(set_a)
   b <- as.numeric(set_b)
@@ -238,16 +241,45 @@ morie_genemt_conditional_set_test <- function(z_scores, set_a, set_b,
   if (!(length(a) == length(b) && length(b) == n)) {
     stop("genemt: the sets and z-scores differ in length")
   }
-  base <- matrix(b, ncol = 1)
+  # Conditional covariates: set_b (+ optional extra covariates).
+  # gene_set_regression will prepend its own intercept, so do not
+  # include one here.
+  base <- cbind(b)
   if (!is.null(covariates)) {
     C <- as.matrix(covariates)
+    storage.mode(C) <- "numeric"
     base <- cbind(base, C)
   }
-  marg <- morie_genemt_gene_set_regression(z_scores, set_a, covariates)
-  cond <- morie_genemt_gene_set_regression(z_scores, set_a, base)
+  marg <- morie_genemt_gene_set_regression(z, a, covariates)
+  cond <- morie_genemt_gene_set_regression(z, a, base)
   attenuation <- if (abs(marg$beta) > .genemt_EPS) {
     (marg$beta - cond$beta) / marg$beta
   } else {
     0.0
   }
-  list(marg
+  list(marginal_beta = marg$beta, marginal_p = marg$p,
+       conditional_beta = cond$beta, conditional_p = cond$p,
+       attenuation = attenuation,
+       note = paste("if the signal was really the other set, the ",
+                    "conditional coefficient collapses", sep = ""))
+}
+
+morie_genemt_cheatsheet <- function() {
+  paste("genemt: single markers are underpowered, so aggregate -- ",
+        "but existing tools lost power to LINKAGE DISEQUILIBRIUM ",
+        "and needed PERMUTATION for p-values. MAGMA's gene test is ",
+        "a MULTIPLE REGRESSION on principal components of the LD ",
+        "structure: orthogonal by construction, analytic p-value, ",
+        "hence fast. The gene-set test is a SEPARATE LAYER around ",
+        "it -- a regression of gene Z-scores on membership, which ",
+        "generalises to CONTINUOUS gene properties, multiple sets ",
+        "at once, and conditioning one set on another. Gene size ",
+        "and density are covariates, or long genes look enriched ",
+        "for everything.", sep = "")
+}
+
+# Compact alias per ledger/NAMING.md
+morie_genemt_magma <- morie_genemt_gene_set_regression
+
+# Public name resolved by fn/_lazy_map.json
+morie_genemt_gene_meta_analysis <- morie_genemt_gene_set_regression
