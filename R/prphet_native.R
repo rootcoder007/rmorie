@@ -72,7 +72,7 @@ morie_prphet_holiday_matrix <- function(t, holidays, lower = 0, upper = 0) {
 }
 
 morie_prphet_design <- function(t, cps, seasonalities = NULL, holidays = NULL,
-                                holiday.window = c(0, 0)) {
+                                holiday_window = c(0, 0)) {
   tm <- morie_prphet_trend_matrix(t, cps)
   cols <- c("k", "m", paste0("delta_", seq_along(cps) - 1L))
   blocks <- list(tm)
@@ -86,8 +86,8 @@ morie_prphet_design <- function(t, cps, seasonalities = NULL, holidays = NULL,
   }
   hn <- character(0)
   if (!is.null(holidays) && length(holidays) > 0L) {
-    hm <- morie_prphet_holiday_matrix(t, holidays, holiday.window[1],
-                                      holiday.window[2])
+    hm <- morie_prphet_holiday_matrix(t, holidays, holiday_window[1],
+                                      holiday_window[2])
     blocks[[length(blocks) + 1L]] <- hm$rows
     hn <- hm$names
     cols <- c(cols, paste0("holiday_", hn))
@@ -96,21 +96,21 @@ morie_prphet_design <- function(t, cps, seasonalities = NULL, holidays = NULL,
   list(X = X, cols = cols, holiday.names = hn)
 }
 
-morie_prphet_fit <- function(t, y, n.changepoints = 10L, changepoint.range = 0.8,
+morie_prphet_fit <- function(t, y, n_changepoints = 10L, changepoint_range = 0.8,
                              changepoints = NULL, seasonalities = NULL,
-                             holidays = NULL, holiday.window = c(0, 0),
-                             changepoint.prior = 0.05, ridge = 1e-8) {
+                             holidays = NULL, holiday_window = c(0, 0),
+                             changepoint_prior = 0.05, ridge = 1e-8) {
   tv <- as.numeric(t); yv <- as.numeric(y)
   n <- length(tv)
   if (length(yv) != n)
     stop(paste0("prphet: ", n, " times but ", length(yv), " observations"))
   if (n < 8L) stop(paste0("prphet: need at least 8 observations, got ", n))
-  tau <- as.numeric(changepoint.prior)
+  tau <- as.numeric(changepoint_prior)
   if (tau <= 0)
     stop(paste0("prphet: changepoint_prior must be positive, got ",
                 tau))
-  cps <- .changepoints(tv, n.changepoints, changepoint.range, changepoints)
-  des <- morie_prphet_design(tv, cps, seasonalities, holidays, holiday.window)
+  cps <- .changepoints(tv, n_changepoints, changepoint_range, changepoints)
+  des <- morie_prphet_design(tv, cps, seasonalities, holidays, holiday_window)
   X <- des$X; cols <- des$cols
   p <- length(cols)
   pen <- rep(0, p)
@@ -148,7 +148,7 @@ morie_prphet_fit <- function(t, y, n.changepoints = 10L, changepoint.range = 0.8
        trend = morie_prphet_piecewise_trend(tv, named[["k"]], named[["m"]],
                                             deltas, cps),
        holiday.names = des$holiday.names, t = tv, n = n,
-       changepoint.prior = tau,
+       changepoint_prior = tau,
        n.active.changepoints = sum(deltas != 0),
        sigma = sqrt(sum(resid^2) / max(n - p, 1)),
        seasonalities = if (is.null(seasonalities)) character(0)
@@ -157,10 +157,10 @@ morie_prphet_fit <- function(t, y, n.changepoints = 10L, changepoint.range = 0.8
 }
 
 morie_prphet_predict <- function(fit, t.new, seasonalities = NULL,
-                                 holidays = NULL, holiday.window = c(0, 0)) {
+                                 holidays = NULL, holiday_window = c(0, 0)) {
   tn <- as.numeric(t.new)
   des <- morie_prphet_design(tn, fit$changepoints, seasonalities, holidays,
-                              holiday.window)
+                              holiday_window)
   if (!identical(des$cols, fit$columns))
     stop("prphet: the prediction design does not match the fitted one; pass the same seasonalities and holidays")
   as.numeric(des$X %*% fit$beta)
