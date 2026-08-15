@@ -36,7 +36,7 @@
 }
 
 .ukfF_solve_mat <- function(a, b_cols) {
-  # solve A X = B for X (small systems, partial pivoting)
+  # solve A X = B for X (small systems, partial pivoting, Gauss-Jordan)
   k <- nrow(a)
   nb <- ncol(b_cols)
   m <- cbind(a, b_cols)
@@ -54,8 +54,8 @@
     m[c_, ] <- m[c_, ] / d
     for (r_ in 1:k) {
       if (r_ != c_ && m[r_, c_] != 0) {
-        f <- m[r_, c_]
-        m[r_, ] <- m[r_, ] - f * m[c_, ]
+        f_ <- m[r_, c_]
+        m[r_, ] <- m[r_, ] - f_ * m[c_, ]
       }
     }
   }
@@ -82,13 +82,13 @@
 
 .ukfF_ut <- function(pts, w, fun) {
   np <- nrow(pts)
-  m <- ncol(pts)
-  ys <- matrix(0, np, m)
+  m_in <- ncol(pts)
+  ys <- matrix(0, np, m_in)
   for (k in 1:np) {
     ys[k, ] <- fun(pts[k, ])
   }
   m_out <- ncol(ys)
-  mean_y <- as.numeric(ys %*% w)
+  mean_y <- as.numeric(crossprod(ys, w))
   diff <- ys - matrix(mean_y, np, m_out, byrow = TRUE)
   cov_y <- crossprod(diff * w, diff)
   list(ys = ys, mean = mean_y, cov = cov_y)
@@ -150,8 +150,8 @@ morie_ukfF <- function(f, h, Q, R, x0, P0, measurements, kappa = NULL) {
     x <- xp + as.numeric(K %*% innov)
     # P = Pp - K Pzz K'
     P <- Pp - K %*% Pzz %*% t(K)
-    # symmetrize
-    for (a in 1:(n - 1)) {
+    # symmetrize (guard n=1 to avoid 1:0 = c(1,0))
+    for (a in seq_len(n - 1)) {
       for (b in (a + 1):n) {
         v <- 0.5 * (P[a, b] + P[b, a])
         P[a, b] <- v
