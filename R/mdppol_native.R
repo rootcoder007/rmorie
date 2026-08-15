@@ -46,13 +46,13 @@ morie_mdppol <- function(P, R, gamma, tol = 1e-12, max_eval = 100000,
   max_eval <- as.integer(max_eval)
   max_improve <- as.integer(max_improve)
   
-  pol <- rep(0L, S)
+  pol <- rep(1L, S)
   if (!is.null(pi0)) {
     pi0v <- as.numeric(pi0)
     for (s in seq_len(S)) {
       a <- as.integer(pi0v[s])
       if (a < 0L || a >= A) stop(sprintf("pi0[%d] out of range", s))
-      pol[s] <- a
+      pol[s] <- a + 1L
     }
   }
   V <- rep(0, S)
@@ -85,7 +85,7 @@ morie_mdppol <- function(P, R, gamma, tol = 1e-12, max_eval = 100000,
       }
       best <- 1L
       best_val <- qs[1]
-      for (a in 2:A) {
+      for (a in seq_len(A)) {
         if (qs[a] > best_val) {
           best_val <- qs[a]
           best <- a
@@ -108,7 +108,7 @@ morie_mdppol <- function(P, R, gamma, tol = 1e-12, max_eval = 100000,
   
   list(
     estimate = V,
-    policy = as.numeric(pol),
+    policy = as.numeric(pol - 1L),
     q = Q,
     n_improve = as.integer(rounds),
     n_eval = as.integer(n_eval),
