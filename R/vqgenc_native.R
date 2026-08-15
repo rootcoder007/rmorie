@@ -141,7 +141,7 @@
   used <- length(unique(idx))
 
   list(
-    indices = as.integer(idx),
+    indices = as.integer(idx) - 1L,
     codes = codes,
     distance = dists,
     codebook_size = as.integer(k),
