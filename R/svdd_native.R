@@ -239,9 +239,12 @@ morie_svdd <- function(X, C = NULL, nu = NULL, kernel = "rbf",
     R2 = as.numeric(R2),
     radius = as.numeric(sqrt(R2)),
     center = center,
-    support_ = support,
-    boundary_ = boundary,
-    bounded_ = bounded,
+    # 0-based, matching the Python arm: which() is 1-based in R and the
+    # index sets are reported verbatim, so they must be shifted or every
+    # consumer reads the wrong observation.
+    support_ = support - 1L,
+    boundary_ = boundary - 1L,
+    bounded_ = bounded - 1L,
     n_support = length(support),
     degenerate = as.logical(degenerate),
     distance2 = d2,
