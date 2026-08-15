@@ -88,6 +88,27 @@
   low + (high - low) * u
 }
 
+# Bounded integer draw, mirroring _array_core _SplitMix64.integers():
+# raw 64-bit output MOD m (NOT floor(unif * m)), one stream position per
+# draw.  Exact for m < 2^26: every intermediate stays below 2^52.
+#' @keywords internal
+#' @noRd
+.ghc_int <- function(e, n = 1L, m) {
+  n <- as.integer(n)
+  if (n < 1L) return(integer(0))
+  idx <- e$i + seq_len(n)
+  e$i <- e$i + n
+  z <- .ghc_add64(list(hi = rep(e$s0[1], n), lo = rep(e$s0[2], n)),
+                  .ghc_mul64(list(hi = floor(idx / .ghc_M32),
+                                  lo = idx %% .ghc_M32), .GHC_GOLDEN))
+  z <- .ghc_mul64(.ghc_xor64(z, .ghc_shr64(z, 30)), .GHC_MIX1)
+  z <- .ghc_mul64(.ghc_xor64(z, .ghc_shr64(z, 27)), .GHC_MIX2)
+  z <- .ghc_xor64(z, .ghc_shr64(z, 31))
+  m <- as.numeric(m)
+  # (hi * 2^32 + lo) mod m, without ever forming the 64-bit value
+  (((z$hi %% m) * (.ghc_M32 %% m)) %% m + z$lo %% m) %% m
+}
+
 #' @keywords internal
 #' @noRd
 .ghc_norm <- function(e, n = 1L, loc = 0, scale = 1) {
