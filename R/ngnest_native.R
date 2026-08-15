@@ -151,7 +151,8 @@
       out[[length(out) + 1L]] <- list(
         lookback = lb,
         multiple = as.integer(mult),
-        block_set = as.integer(si),
+        # 0-based, matching the Python arm
+        block_set = as.integer(si) - 1L,
         forecast = as.numeric(fc),
         residual_norm = sqrt(sum(resid * resid))
       )
