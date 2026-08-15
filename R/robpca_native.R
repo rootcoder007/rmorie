@@ -24,8 +24,14 @@
 .robpca_eigh_desc <- function(C) {
   e <- eigen(C, symmetric = TRUE)
   ord <- order(e$values, decreasing = TRUE)
-  list(values = as.numeric(e$values[ord]),
-       vectors = t(e$vectors[, ord, drop = FALSE]))
+  Vm <- t(e$vectors[, ord, drop = FALSE])
+  # sign convention of the Python jacobi mirror: the largest-magnitude
+  # entry of each eigenvector is positive
+  for (j in seq_len(nrow(Vm))) {
+    m <- which.max(abs(Vm[j, ]))
+    if (Vm[j, m] < 0) Vm[j, ] <- -Vm[j, ]
+  }
+  list(values = as.numeric(e$values[ord]), vectors = Vm)
 }
 
 .robpca_det_from_chol <- function(C) {
@@ -88,9 +94,8 @@ univariate_mcd <- function(values, h = NULL, consistent = TRUE) {
     guard <- 0L
     while (length(pairs) < n_dirs && guard < 50L * n_dirs) {
       guard <- guard + 1L
-      u <- .ghc_unif(state, 2L)
-      i <- floor(u[1L] * n) + 1L
-      j <- floor(u[2L] * n) + 1L
+      i <- .ghc_int(state, 1L, n) + 1L
+      j <- .ghc_int(state, 1L, n) + 1L
       if (i == j) next
       key <- paste(min(i, j), max(i, j), sep = ",")
       if (exists(key, envir = seen, inherits = FALSE)) next
@@ -167,8 +172,7 @@ outlyingness <- function(X, h = NULL, n_dirs = 250L, seed = 17L) {
     target <- min(p + 1L, n)
     while (length(pick) < target && guard < 100L) {
       guard <- guard + 1L
-      u <- .ghc_unif(state, 1L)
-      i <- floor(u[1L] * n) + 1L
+      i <- .ghc_int(state, 1L, n) + 1L
       pick <- c(pick, i)
       pick <- unique(pick)
     }
@@ -429,10 +433,10 @@ morie_robpca <- function(X, k = NULL, alpha = 0.75, kmax = 10L,
 
   P0_sub <- P0[1L:k0, 1L:r1, drop = FALSE]
   load_r1 <- P2 %*% P0_sub
-  loadings <- load_r1 %*% V[1L:r1, , drop = FALSE]
+  loadings <- load_r1 %*% t(V[, 1L:r1, drop = FALSE])
 
   center_r1 <- mu1 + as.numeric(t(P0_sub) %*% mu5[1L:k0])
-  center <- mu0 + as.numeric(center_r1 %*% V[1L:r1, , drop = FALSE])
+  center <- mu0 + as.numeric(V[, 1L:r1, drop = FALSE] %*% center_r1)
 
   sd <- sqrt(rowSums(sweep(T ^ 2, 2, lam, "/")))
   fitted <- matrix(center, nrow = n, ncol = p, byrow = TRUE) + T %*% loadings
@@ -454,8 +458,8 @@ morie_robpca <- function(X, k = NULL, alpha = 0.75, kmax = 10L,
     rank = r0,
     subspace_rank = r1,
     outlyingness = outl,
-    h_subset = sort(best$idx),
-    reweighted_kept = keep,
+    h_subset = sort(best$idx) - 1L,   # 0-based, matching the Python arm
+    reweighted_kept = keep - 1L,
     consistency_factor = scale_factor,
     score_distance = sd,
     orthogonal_distance = od,
