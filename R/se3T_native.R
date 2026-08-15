@@ -251,3 +251,7 @@ morie_se3T_se3transformer <- morie_se3T_se3_attention
 
 # public names resolved by fn/_lazy_map.json
 morie_se3T_se3_transformer <- morie_se3T_se3_attention
+
+#' @rdname morie_se3T_rotation_matrix
+#' @export
+morie_se3T <- morie_se3T_rotation_matrix
