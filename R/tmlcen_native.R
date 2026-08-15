@@ -1,4 +1,3 @@
-```r
 # morie.fn -- function file (rootcoder007/morie)
 # Causal effect under censoring, by inverse probability of censoring
 # weighting.
@@ -51,6 +50,11 @@
 # doi:10.1007/978-3-319-65304-4, Sec. 8.5 "Causal Effect of Binary
 # Treatment on Interval Censored Time to Event" -- the data structure,
 # the coarsening C(o) = (L(o), R(o)], and the IPCW estimator above.
+#
+# Note on the ledger citation: its key "Stitelman-Lendle-vdL (2011)" does
+# not resolve to any paper; a bibliographic search returns the ltmle
+# software package instead. The two sources above are what this is built
+# from.
 
 # --- Private helpers (prefix .tmlcen_) ---------------------------------
 
@@ -114,6 +118,39 @@
   payload
 }
 
+.tmlcen_W_mat <- function(W, n) {
+  if (is.null(W) || length(W) == 0L) {
+    return(matrix(0, nrow = n, ncol = 0L))
+  }
+  if (is.data.frame(W)) {
+    W <- as.matrix(W)
+  }
+  if (is.vector(W) && !is.matrix(W)) {
+    W <- matrix(W, ncol = 1L)
+  }
+  Wm <- as.matrix(W)
+  if (is.null(dim(Wm)) || ncol(Wm) == 0L) {
+    Wm <- matrix(0, nrow = n, ncol = 0L)
+  }
+  if (nrow(Wm) != n) {
+    stop(sprintf("W has %d rows but data has %d", nrow(Wm), n))
+  }
+  Wm
+}
+
+.tmlcen_coerce_subject_list <- function(x, n) {
+  if (is.data.frame(x)) {
+    x <- as.matrix(x)
+  }
+  if (is.matrix(x)) {
+    return(lapply(seq_len(nrow(x)), function(i) as.numeric(x[i, ])))
+  }
+  if (is.list(x)) {
+    return(lapply(x, function(row) as.numeric(row)))
+  }
+  stop("expected a list of per-subject vectors or a matrix")
+}
+
 # --- Exposed functions (morie_ prefix) ---------------------------------
 
 # coarsen_interval: the interval (L, R] implied by one subject's
@@ -156,12 +193,7 @@ morie_censoring_survival <- function(times, censored, A = NULL, W = NULL,
     grid <- sort(unique(t))
   }
   grid <- as.numeric(grid)
-  if (is.null(W) || length(W) == 0L) {
-    Wm <- matrix(0, nrow = n, ncol = 0L)
-  } else {
-    Wm <- as.matrix(W)
-    if (ncol(Wm) == 0L) Wm <- matrix(0, nrow = n, ncol = 0L)
-  }
+  Wm <- .tmlcen_W_mat(W, n)
   if (is.null(A)) {
     av <- rep(0, n)
   } else {
@@ -188,7 +220,7 @@ morie_censoring_survival <- function(times, censored, A = NULL, W = NULL,
   b <- .tmlcen_logit_irls(Z, lab, 60L, ridge)
 
   haz <- function(kk, i) {
-    row <- c(1, as.numeric(kk), av[i],
+    row <- c(1.0, as.numeric(kk), av[i],
              if (ncol(Wm) > 0L) Wm[i, ] else numeric(0))
     .tmlcen_sigmoid(sum(b * row))
   }
@@ -206,33 +238,35 @@ morie_censoring_survival <- function(times, censored, A = NULL, W = NULL,
   list(G = G, grid = grid, b = b)
 }
 
-# ipcw_interval: Sec. 8.5's IPCW estimator
+# ipcw_interval: Sec. 8.5's IPCW estimator of Psi_a = int r(t) Fbar_a(t) dt
 morie_ipcw_interval <- function(W, A, times, deltas, a = 1.0, r = NULL,
                                 g = NULL, gc = NULL, ridge = 1e-8) {
   av <- as.numeric(A)
   n <- length(av)
-  Tm <- lapply(times, as.numeric)
-  Dm <- lapply(deltas, as.numeric)
+  Tm <- .tmlcen_coerce_subject_list(times, n)
+  Dm <- .tmlcen_coerce_subject_list(deltas, n)
   if (length(Tm) != n || length(Dm) != n) {
     stop(sprintf("ipcw_interval: %d treatments but %d monitoring rows and %d indicator rows",
                  n, length(Tm), length(Dm)))
   }
-  if (is.null(W) || length(W) == 0L) {
-    Wm <- matrix(0, nrow = n, ncol = 0L)
-  } else {
-    Wm <- as.matrix(W)
-    if (ncol(Wm) == 0L) Wm <- matrix(0, nrow = n, ncol = 0L)
-  }
+  Wm <- .tmlcen_W_mat(W, n)
   if (is.null(r)) {
-    r <- function(t) 1.0
+    r <- function(tt) 1.0
   }
 
   if (is.null(g)) {
-    rows_g <- if (ncol(Wm) > 0L) lapply(seq_len(n), function(i) Wm[i, ]) else NULL
+    if (ncol(Wm) > 0L) {
+      rows_g <- lapply(seq_len(n), function(i) Wm[i, ])
+    } else {
+      rows_g <- NULL
+    }
     Z <- .tmlcen_design(rows_g, n)
     bg <- .tmlcen_logit_irls(Z, av, 60L, ridge)
     gv <- .tmlcen_sigmoid(.tmlcen_matvec(Z, bg))
-    g <- sapply(seq_len(n), function(i) if (av[i] == 1.0) gv[i] else 1.0 - gv[i])
+    g <- numeric(n)
+    for (i in seq_len(n)) {
+      g[i] <- if (av[i] == 1.0) gv[i] else (1.0 - gv[i])
+    }
   } else {
     g <- as.numeric(g)
   }
@@ -260,17 +294,17 @@ morie_ipcw_interval <- function(W, A, times, deltas, a = 1.0, r = NULL,
   tot / n
 }
 
-# tmle_censoring: main entry point
-morie_tmlcen <- function(time, event, censor, treatment, covariates,
-                         kind = "right", grid = NULL, a = 1.0, r = NULL,
-                         g = NULL, gc = NULL, trim = 1e-3) {
+# tmle_censoring: causal survival under censoring
+morie_tmle_censoring <- function(time, event, censor, treatment, covariates,
+                                 kind = "right", grid = NULL, a = 1.0,
+                                 r = NULL, g = NULL, gc = NULL,
+                                 trim = 1e-3) {
   if (!(kind %in% .tmlcen_KINDS)) {
-    stop(sprintf("tmle_censoring: kind must be 'right' or 'interval', got '%s'", kind))
+    stop(sprintf("tmle_censoring: kind must be 'right' or 'interval', got %r", kind))
   }
-
   if (kind == "interval") {
-    psi <- morie_ipcw_interval(covariates, treatment, time, event, a = a,
-                               r = r, g = g, gc = gc)
+    psi <- morie_ipcw_interval(covariates, treatment, time, event, a = a, r = r,
+                               g = g, gc = gc)
     return(.tmlcen_RichResult(list(
       estimate = psi, psi = psi, a = a,
       n = length(as.numeric(treatment)),
@@ -283,32 +317,30 @@ morie_tmlcen <- function(time, event, censor, treatment, covariates,
   c <- as.numeric(censor)
   av <- as.numeric(treatment)
   n <- length(t)
-  for (nm in c("event", "censor", "treatment")) {
-    arr <- switch(nm, event = d, censor = c, treatment = av)
-    if (length(arr) != n) {
-      stop(sprintf("tmle_censoring: %d times but %d %s", n, length(arr), nm))
+
+  arrs <- list(event = d, censor = c, treatment = av)
+  for (nm in names(arrs)) {
+    if (length(arrs[[nm]]) != n) {
+      stop(sprintf("tmle_censoring: %d times but %d %s", n, length(arrs[[nm]]), nm))
     }
   }
-  if (any(d == 1.0 & c == 1.0)) {
-    stop("tmle_censoring: a subject cannot be both an event and censored at the same time")
+  for (i in seq_len(n)) {
+    if (d[i] == 1.0 && c[i] == 1.0) {
+      stop("tmle_censoring: a subject cannot be both an event and censored at the same time")
+    }
   }
-  if (is.null(covariates) || length(covariates) == 0L) {
-    Wm <- matrix(0, nrow = n, ncol = 0L)
-  } else {
-    Wm <- as.matrix(covariates)
-    if (ncol(Wm) == 0L) Wm <- matrix(0, nrow = n, ncol = 0L)
-  }
+  Wm <- .tmlcen_W_mat(covariates, n)
 
-  cs <- morie_censoring_survival(t, c, A = av, W = Wm, grid = grid)
-  G <- cs$G
-  grid <- cs$grid
+  G_grid <- morie_censoring_survival(t, c, A = av, W = Wm, grid = grid)
+  G <- G_grid$G
+  grid_use <- G_grid$grid
 
   rows <- list()
   lab <- c()
   wts <- c()
   for (i in seq_len(n)) {
-    for (kk in seq_along(grid)) {
-      tk <- grid[kk]
+    for (kk in seq_along(grid_use)) {
+      tk <- grid_use[kk]
       if (t[i] < tk) break
       gk <- max(G[[i]][kk], trim)
       row <- c(as.numeric(kk), av[i],
@@ -322,10 +354,10 @@ morie_tmlcen <- function(time, event, censor, treatment, covariates,
   bh <- .tmlcen_weighted_logit(Z, lab, wts)
 
   surv <- function(a_val, i) {
-    out <- numeric(length(grid))
+    out <- numeric(length(grid_use))
     cur <- 1.0
-    for (kk in seq_along(grid)) {
-      row <- c(1, as.numeric(kk), a_val,
+    for (kk in seq_along(grid_use)) {
+      row <- c(1.0, as.numeric(kk), a_val,
                if (ncol(Wm) > 0L) Wm[i, ] else numeric(0))
       h <- .tmlcen_sigmoid(sum(bh * row))
       cur <- cur * (1.0 - h)
@@ -334,10 +366,70 @@ morie_tmlcen <- function(time, event, censor, treatment, covariates,
     out
   }
 
-  s1_mat <- sapply(seq_len(n), function(i) surv(1.0, i))
-  s0_mat <- sapply(seq_len(n), function(i) surv(0.0, i))
-  s1 <- rowMeans(s1_mat)
-  s0 <- rowMeans(s0_mat)
+  s1_mat <- matrix(0, nrow = n, ncol = length(grid_use))
+  s0_mat <- matrix(0, nrow = n, ncol = length(grid_use))
+  for (i in seq_len(n)) {
+    s1_mat[i, ] <- surv(1.0, i)
+    s0_mat[i, ] <- surv(0.0, i)
+  }
+  s1 <- colMeans(s1_mat)
+  s0 <- colMeans(s0_mat)
 
-  bh_n <- .tmlcen_weighted_logit(Z, lab, rep(1.0, length(lab)))
-  rows_u <- lapply(rows, function(row) row[1:2
+  bh_n <- .tmlcen_weighted_logit(Z, lab, rep(1, length(lab)))
+
+  surv_n <- function(a_val, i) {
+    cur <- 1.0
+    for (kk in seq_along(grid_use)) {
+      row <- c(1.0, as.numeric(kk), a_val,
+               if (ncol(Wm) > 0L) Wm[i, ] else numeric(0))
+      cur <- cur * (1.0 - .tmlcen_sigmoid(sum(bh_n * row)))
+    }
+    cur
+  }
+  naive <- mean(sapply(seq_len(n), function(i) surv_n(1.0, i))) -
+           mean(sapply(seq_len(n), function(i) surv_n(0.0, i)))
+
+  rows_u <- lapply(rows, function(row) row[1:2])
+  Zu <- .tmlcen_design(rows_u, length(rows_u))
+  bh_u <- .tmlcen_weighted_logit(Zu, lab, rep(1, length(lab)))
+
+  surv_u <- function(a_val) {
+    cur <- 1.0
+    for (kk in seq_along(grid_use)) {
+      rrow <- c(1.0, as.numeric(kk), a_val)
+      cur <- cur * (1.0 - .tmlcen_sigmoid(sum(bh_u * rrow)))
+    }
+    cur
+  }
+  unadjusted <- surv_u(1.0) - surv_u(0.0)
+
+  max_weight <- max(sapply(seq_len(n), function(i) {
+    g_last <- G[[i]][length(G[[i]])]
+    1.0 / max(g_last, trim)
+  }))
+
+  .tmlcen_RichResult(list(
+    estimate = s1[length(s1)] - s0[length(s0)],
+    survival_treated = s1,
+    survival_control = s0,
+    grid = grid_use,
+    naive = naive,
+    unadjusted = unadjusted,
+    censoring_survival = G,
+    max_weight = max_weight,
+    n = n,
+    method = "IPCW survival difference, Hernan & Robins (2020) Ch. 17 Secs. 17.2 and 17.4"
+  ))
+}
+
+morie_cheatsheet <- function() {
+  paste0("tmlcen: censoring by IPCW. right = Gbar_c(k|A,W) = ",
+         "prod(1-lambda_C), weight person-time by 1/Gbar_c, hazard ",
+         "to survival by the product limit (H&R Ch.17). interval = ",
+         "Sec.8.5's (1/M) sum (1-Delta_m) r(C_m) I(A=a) / ",
+         "(gbar_c g), with L = max C_j st Delta=0 and R = min C_j ",
+         "st Delta=1.")
+}
+
+# compact alias per ledger/NAMING.md
+morie_tmlecensoring <- morie_tmle_censoring

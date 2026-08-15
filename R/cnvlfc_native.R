@@ -323,3 +323,7 @@ morie_cnvlfc <- cnvlfc_embed
 #' @rdname cnvlfc_embed
 #' @export
 morie_cnvlfc <- cnvlfc_embed
+
+#' @rdname cnvlfc_embed
+#' @export
+morie_cnvlfc <- cnvlfc_embed

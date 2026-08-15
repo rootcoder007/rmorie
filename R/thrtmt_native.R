@@ -167,3 +167,7 @@ morie_thrtmt <- thrtmt_blip_function
 #' @rdname thrtmt_blip_function
 #' @export
 morie_thrtmt <- thrtmt_blip_function
+
+#' @rdname thrtmt_blip_function
+#' @export
+morie_thrtmt <- thrtmt_blip_function
