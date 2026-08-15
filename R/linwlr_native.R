@@ -163,6 +163,21 @@ morie_linwlr <- function(y, A, W = NULL, propensity = NULL, method = "gest",
 
   p <- ncol(Wm)
 
+  # The blip is identified only through the treatment residual A - E[A|W].
+  # A propensity model that reproduces the treatment exactly makes that
+  # residual zero, the estimating equation 0 = 0, and psi whatever the ridge
+  # returns -- so the two arms would disagree on a meaningless number.
+  resid_a <- av - pi
+  scale_a <- if (length(av)) max(abs(av)) else 0
+  if (max(abs(resid_a)) <= 1e-9 * max(1, scale_a)) {
+    stop(paste0("morie_linwlr: the propensity model reproduces the treatment ",
+                "exactly, so A - E[A | W] is zero and the blip is ",
+                "UNIDENTIFIED -- any psi solves the estimating equation. This ",
+                "usually means the treatment was passed as one of its own ",
+                "covariates, or pi_covariates determines it. Supply a ",
+                "propensity that leaves variation in A."))
+  }
+
   if (method == "gest") {
     basis <- cbind(1, Wm)
     cen <- av - pi
