@@ -1,4 +1,3 @@
-```r
 # morie.fn -- function file (rootcoder007/morie)
 # YOLOX: anchor-free, decoupled head, dynamic label assignment.
 #
@@ -6,88 +5,67 @@
 # family: anchor-free prediction, decoupled heads, and advanced label
 # assignment. YOLOX integrates all three.
 #
-# **The coupled head is a measured harm, not a style preference.** One
-# branch predicting classification and localisation together is a
-# known conflict; the paper's own experiments show replacing the YOLO
-# head with a **lite decoupled head** -- a 1x1 convolution
-# to reduce channels, then two parallel branches of 3x3
-# convolutions -- improves AP, at a cost of 1.1 ms (11.6 vs 10.5 ms).
-# That trade is stated so it can be judged.
+# The coupled head is a measured harm: one branch predicting
+# classification and localisation together is a known conflict; a lite
+# decoupled head -- a 1x1 convolution to reduce channels, then two
+# parallel branches of 3x3 convolutions -- improves AP at a cost of
+# 1.1 ms (11.6 vs 10.5 ms).
 #
-# **Anchor-free removes tuned priors.** Instead of matching to
-# pre-clustered boxes, each location predicts four offsets
-# (l, t, r, b) from itself, decoded with the feature stride.
-# decode_box inverts encode_box exactly, which is the property
-# that makes the parametrisation usable at all.
+# Anchor-free removes tuned priors: each location predicts four offsets
+# (l, t, r, b) from itself, decoded with the feature stride. decode_box
+# inverts encode_box exactly.
 #
-# **Center sampling fixes a starvation problem.** Assigning only the
-# single center location as positive discards high-quality predictions
-# whose gradients would help and worsens the positive/negative
-# imbalance; the center 3x3 area is assigned positive
-# instead.
+# Center sampling: assigning only the single center location as
+# positive starves the model, so the center 3x3 area is assigned
+# positive instead.
 #
-# **SimOTA: dynamic top-k instead of optimal transport.** Label
-# assignment is posed globally as an optimal-transport problem in OTA,
-# which costs 25% extra training time -- for 300 epochs, expensive.
-# YOLOX approximates it: compute a cost per (ground truth, prediction)
-# pair, give each ground truth a **dynamic** k from the sum of its
-# top IoUs, and take its k cheapest predictions. No Sinkhorn-Knopp,
-# no extra solver hyperparameters, and 45.0 to 47.3 AP.
+# SimOTA: label assignment is posed globally as optimal transport in
+# OTA, which costs 25% extra training time. YOLOX approximates it:
+# compute a cost per (ground truth, prediction) pair, give each ground
+# truth a dynamic k from the sum of its top IoUs, and take its k
+# cheapest predictions. No Sinkhorn-Knopp, no extra hyperparameters,
+# 45.0 to 47.3 AP.
 #
 # References
 # ----------
 # Ge, Z., Liu, S., Wang, F., Li, Z. & Sun, J. (2021) "YOLOX: Exceeding
-# YOLO Series in 2021", arXiv:2107.08430. Sec. 2: the switch to an
-# anchor-free manner together with a decoupled head and the leading
-# label assignment strategy SimOTA; that the conflict between
-# classification and regression tasks is well known and the coupled
-# detection head may harm performance, with the lite decoupled head
-# built from a 1x1 convolution reducing channels followed by two
-# parallel branches of 3x3 convolutions and adding 1.1 ms (11.6 vs 10.5
-# ms); that the anchor-free version selects only ONE positive (the
-# center) per object and ignores other high-quality predictions, fixed
-# by assigning the center 3x3 area as positives ("center sampling");
-# and that OTA formulates assignment as an Optimal Transport problem but
-# costs 25% extra training time, so it is simplified to a dynamic top-k
-# strategy, SimOTA, which avoids the Sinkhorn-Knopp solver's
-# hyperparameters and raises AP from 45.0% to 47.3%.
+# YOLO Series in 2021", arXiv:2107.08430. Sec. 2.
 #
 # Ge, Z., Liu, S., Li, Z., Yoshie, O. & Sun, J. (2021) "OTA: Optimal
 # Transport Assignment for Object Detection", CVPR 2021, 303-312,
-# arXiv:2103.14259. The assignment being approximated.
+# arXiv:2103.14259.
 #
 # Tian, Z., Shen, C., Chen, H. & He, T. (2019) "FCOS: Fully
 # Convolutional One-Stage Object Detection", ICCV 2019, 9627-9636,
-# arXiv:1904.01355. Center sampling and the anchor-free parametrisation.
+# arXiv:1904.01355.
 
-.EPS <- 1e-12
+.yolovx_EPS <- 1e-12
 
-.yolovx_decoupled_head <- function(channels, reduced = 256, n_classes = 80) {
-  c_ <- as.integer(channels)
+morie_yolovx_decoupled_head <- function(channels, reduced=256,
+                                        n_classes=80) {
+  # 1x1 to reduce, then TWO parallel 3x3 branches.
+  c <- as.integer(channels)
   r <- as.integer(reduced)
-  if (c_ < 1L || r < 1L) {
+  if (c < 1L || r < 1L) {
     stop("yolovx: the channel counts must be positive")
   }
   n <- as.integer(n_classes)
-  reduce_p <- c_ * r
+  reduce_p <- c * r
   cls_p <- r * r * 9L + r * n
   reg_p <- r * r * 9L + r * (4L + 1L)
-  coupled_p <- c_ * (n + 5L) * 9L
-  list(
-    reduce_params = reduce_p,
-    cls_params = cls_p,
-    reg_params = reg_p,
-    total = reduce_p + cls_p + reg_p,
-    coupled_total = coupled_p,
-    branches = c("classification", "regression+objectness"),
-    extra_latency_ms = 1.1,
-    note = "measured cost 11.6 ms against 10.5 ms coupled, for a stated AP gain"
-  )
+  coupled_p <- c * (n + 5L) * 9L
+  list(reduce_params=reduce_p, cls_params=cls_p, reg_params=reg_p,
+       total=reduce_p + cls_p + reg_p, coupled_total=coupled_p,
+       branches=c("classification", "regression+objectness"),
+       extra_latency_ms=1.1,
+       note=paste0("measured cost 11.6 ms against 10.5 ms coupled, ",
+                   "for a stated AP gain"))
 }
 
-.yolovx_encode_box <- function(box, cx, cy, stride = 1.0) {
-  box <- as.numeric(box)
-  x0 <- box[1]; y0 <- box[2]; x1 <- box[3]; y1 <- box[4]
+morie_yolovx_encode_box <- function(box, cx, cy, stride=1.0) {
+  # Four distances from a location to the box sides.
+  b <- as.numeric(box)
+  x0 <- b[1L]; y0 <- b[2L]; x1 <- b[3L]; y1 <- b[4L]
   s <- as.numeric(stride)
   if (s <= 0.0) {
     stop("yolovx: the stride must be positive")
@@ -95,18 +73,17 @@
   px <- (as.numeric(cx) + 0.5) * s
   py <- (as.numeric(cy) + 0.5) * s
   if (!(x0 <= px && px <= x1 && y0 <= py && py <= y1)) {
-    stop("yolovx: the location is outside the box, so it cannot be a positive sample")
+    stop(paste0("yolovx: the location is outside the box, so it cannot ",
+                "be a positive sample"))
   }
-  list(
-    ltrb = c((px - x0) / s, (py - y0) / s, (x1 - px) / s, (y1 - py) / s),
-    center = c(px, py),
-    stride = s
-  )
+  list(ltrb=c((px - x0) / s, (py - y0) / s, (x1 - px) / s, (y1 - py) / s),
+       center=c(px, py), stride=s)
 }
 
-.yolovx_decode_box <- function(ltrb, cx, cy, stride = 1.0) {
-  v <- as.numeric(ltrb)
-  l <- v[1]; t <- v[2]; r <- v[3]; b <- v[4]
+morie_yolovx_decode_box <- function(ltrb, cx, cy, stride=1.0) {
+  # Back to corners. Inverts encode_box exactly.
+  v <- .s03vec(ltrb)
+  l <- v[1L]; t <- v[2L]; r <- v[3L]; b <- v[4L]
   s <- as.numeric(stride)
   px <- (as.numeric(cx) + 0.5) * s
   py <- (as.numeric(cy) + 0.5) * s
@@ -116,145 +93,141 @@
   c(px - l * s, py - t * s, px + r * s, py + b * s)
 }
 
-.yolovx_box_iou <- function(a, b) {
+morie_yolovx_box_iou <- function(a, b) {
+  # Intersection over union of two corner boxes.
   a <- as.numeric(a)
   b <- as.numeric(b)
-  ax0 <- a[1]; ay0 <- a[2]; ax1 <- a[3]; ay1 <- a[4]
-  bx0 <- b[1]; by0 <- b[2]; bx1 <- b[3]; by1 <- b[4]
-  ix <- max(0.0, min(ax1, bx1) - max(ax0, bx0))
-  iy <- max(0.0, min(ay1, by1) - max(ay0, by0))
+  ix <- max(0.0, min(a[3L], b[3L]) - max(a[1L], b[1L]))
+  iy <- max(0.0, min(a[4L], b[4L]) - max(a[2L], b[2L]))
   inter <- ix * iy
-  ua <- (ax1 - ax0) * (ay1 - ay0) + (bx1 - bx0) * (by1 - by0) - inter
-  if (ua > .EPS) inter / ua else 0.0
+  ua <- (a[3L] - a[1L]) * (a[4L] - a[2L]) +
+    (b[3L] - b[1L]) * (b[4L] - b[2L]) - inter
+  if (ua > .yolovx_EPS) inter / ua else 0.0
 }
 
-.yolovx_center_sampling <- function(box, grid_w, grid_h, stride = 1.0, radius = 1.5) {
-  box <- as.numeric(box)
-  x0 <- box[1]; y0 <- box[2]; x1 <- box[3]; y1 <- box[4]
+morie_yolovx_center_sampling <- function(box, grid_w, grid_h, stride=1.0,
+                                         radius=1.5) {
+  # The center 3x3 area is positive, not only the center cell. Grid
+  # coordinates are 0-based (i, j) to match the Python.
+  bx <- as.numeric(box)
+  x0 <- bx[1L]; y0 <- bx[2L]; x1 <- bx[3L]; y1 <- bx[4L]
   s <- as.numeric(stride)
   cx <- 0.5 * (x0 + x1)
   cy <- 0.5 * (y0 + y1)
-  gw <- as.integer(grid_w)
-  gh <- as.integer(grid_h)
-  rad <- as.numeric(radius)
-  if (gw < 0L || gh < 0L) {
-    stop("yolovx: grid_w and grid_h must be non-negative")
+  inside <- list()
+  center <- list()
+  seen_c <- character(0)
+  cand_keys <- character(0)
+  cand <- list()
+  for (j in seq_len(as.integer(grid_h)) - 1L) {
+    for (i in seq_len(as.integer(grid_w)) - 1L) {
+      px <- (i + 0.5) * s
+      py <- (j + 0.5) * s
+      is_in <- (x0 <= px && px <= x1 && y0 <= py && py <= y1)
+      is_ctr <- (abs(px - cx) <= as.numeric(radius) * s &&
+                 abs(py - cy) <= as.numeric(radius) * s)
+      if (is_in) {
+        inside <- c(inside, list(c(i, j)))
+      }
+      if (is_ctr) {
+        center <- c(center, list(c(i, j)))
+      }
+      if (is_in || is_ctr) {
+        key <- paste(i, j, sep=",")
+        if (!(key %in% cand_keys)) {
+          cand_keys <- c(cand_keys, key)
+          cand <- c(cand, list(c(i, j)))
+        }
+      }
+    }
   }
-  empty_mat <- matrix(integer(0), ncol = 2L)
-  if (gw == 0L || gh == 0L) {
-    inside <- empty_mat
-    center <- empty_mat
-  } else {
-    # Iterate in same order as Python: j outer, i inner, so the k-th
-    # position has i = k %% gw, j = k %/% gw (0-based).
-    k_idx <- seq_len(gh * gw) - 1L
-    ii <- k_idx %% gw
-    jj <- k_idx %/% gw
-    px <- (as.numeric(ii) + 0.5) * s
-    py <- (as.numeric(jj) + 0.5) * s
-    in_box_mask <- (x0 <= px) & (px <= x1) & (y0 <= py) & (py <= y1)
-    in_center_mask <- (abs(px - cx) <= rad * s) & (abs(py - cy) <= rad * s)
-    inside <- cbind(ii[in_box_mask], jj[in_box_mask])
-    center <- cbind(ii[in_center_mask], jj[in_center_mask])
+  # sorted set order: by (i, j)
+  if (length(cand) > 0L) {
+    ci <- vapply(cand, function(p) p[1L], numeric(1))
+    cj <- vapply(cand, function(p) p[2L], numeric(1))
+    cand <- cand[order(ci, cj)]
   }
-  cand <- unique(rbind(inside, center))
-  if (nrow(cand) > 0L) {
-    cand <- cand[order(cand[, 1L], cand[, 2L]), , drop = FALSE]
-  }
-  list(
-    in_box = inside,
-    in_center = center,
-    candidates = cand,
-    n_candidates = nrow(cand),
-    single_center = 1L,
-    note = "one positive per object starves the model of useful gradients"
-  )
+  list(in_box=inside, in_center=center, candidates=cand,
+       n_candidates=length(cand), single_center=1L,
+       note=paste0("one positive per object starves the model of ",
+                   "useful gradients"))
 }
 
-.yolovx_simota_assign <- function(costs, ious, top_q = 10, max_k = NULL) {
-  C <- as.matrix(costs)
-  storage.mode(C) <- "double"
-  I <- as.matrix(ious)
-  storage.mode(I) <- "double"
+morie_yolovx_simota_assign <- function(costs, ious, top_q=10, max_k=NULL) {
+  # Dynamic top-k, an approximation to optimal transport. k_g is the
+  # rounded sum of the q largest IoUs for that ground truth. Returns
+  # the assignment keyed by 0-based ground-truth index.
+  C <- .s03mat(costs)
+  I <- .s03mat(ious)
   G <- nrow(C)
   P <- ncol(C)
   if (nrow(I) != G || ncol(I) != P) {
     stop("yolovx: the cost and IoU matrices differ in shape")
   }
   q <- min(as.integer(top_q), P)
-  assign_list <- vector("list", G)
+  assign_ <- vector("list", G)
   ks <- integer(G)
   for (g in seq_len(G)) {
-    row_i <- I[g, ]
-    sorted_row <- sort(row_i, decreasing = TRUE)
-    top <- if (q == 0L) numeric(0) else sorted_row[seq_len(q)]
+    top <- sort(I[g, ], decreasing=TRUE)[seq_len(q)]
     kg <- max(1L, as.integer(round(sum(top))))
     if (!is.null(max_k)) {
       kg <- min(kg, as.integer(max_k))
     }
-    kg <- min(kg, P)
     ks[g] <- kg
-    row_c <- C[g, ]
-    order_g <- order(row_c)
-    if (kg == 0L) {
-      assign_list[[g]] <- integer(0)
-    } else {
-      # order_g is 1-based; subtract 1 to make indices 0-based like Python.
-      assign_list[[g]] <- as.integer(order_g[seq_len(kg)] - 1L)
-    }
+    order_ <- order(C[g, ])
+    assign_[[g]] <- sort(order_[seq_len(kg)])
   }
-  # owner[p] = 0-based ground truth index that "owns" prediction p,
-  # or NA_integer_ if unowned.
-  owner <- rep(NA_integer_, P)
+  # resolve contested predictions to the cheaper ground truth
+  owner <- list()  # keyed by prediction index (character)
   for (g in seq_len(G)) {
-    g0 <- g - 1L
-    for (p0 in assign_list[[g]]) {
-      p <- p0 + 1L
-      if (!is.na(owner[p])) {
-        a0 <- owner[p]
-        if (C[a0 + 1L, p] <= C[g, p]) {
-          # keep current owner
-        } else {
-          owner[p] <- g0
-        }
+    for (p in assign_[[g]]) {
+      pk <- as.character(p)
+      if (!is.null(owner[[pk]])) {
+        a <- owner[[pk]]
+        owner[[pk]] <- if (C[a, p] <= C[g, p]) a else g
       } else {
-        owner[p] <- g0
+        owner[[pk]] <- g
       }
     }
   }
-  final <- vector("list", G)
+  final <- list()
+  n_pos <- 0L
   for (g in seq_len(G)) {
-    g0 <- g - 1L
-    p0s <- assign_list[[g]]
-    if (length(p0s) == 0L) {
-      final[[g]] <- integer(0)
-    } else {
-      final[[g]] <- sort(p0s[!is.na(owner[p0s + 1L]) & owner[p0s + 1L] == g0])
-    }
+    kept <- sort(Filter(function(p) owner[[as.character(p)]] == g,
+                        assign_[[g]]))
+    final[[as.character(g - 1L)]] <- kept
+    n_pos <- n_pos + length(kept)
   }
-  contested <- 0L
-  for (p1 in seq_len(P)) {
-    cnt <- 0L
-    p0 <- p1 - 1L
-    for (g in seq_len(G)) {
-      if (p0 %in% assign_list[[g]]) cnt <- cnt + 1L
-    }
-    if (cnt > 1L) contested <- contested + 1L
-  }
-  n_pos <- sum(lengths(final))
-  list(
-    estimate = final,
-    assignment = final,
-    dynamic_k = as.integer(ks),
-    n_positives = n_pos,
-    contested = contested,
-    method = "SimOTA dynamic top-k; Ge et al. (2021)",
-    note = "k is DYNAMIC per ground truth, from the sum of its top IoUs -- no Sinkhorn, no extra hyperparameter"
-  )
+  # contested = predictions claimed by more than one ground truth
+  claim_counts <- table(unlist(assign_))
+  contested <- sum(claim_counts > 1)
+  list(estimate=final, assignment=final, dynamic_k=ks, n_positives=n_pos,
+       contested=as.integer(contested),
+       method="SimOTA dynamic top-k; Ge et al. (2021)",
+       note=paste0("k is DYNAMIC per ground truth, from the sum of its ",
+                   "top IoUs -- no Sinkhorn, no extra hyperparameter"))
 }
 
-.yolovx_cheatsheet <- function() {
+morie_yolovx_cheatsheet <- function() {
   paste0(
     "yolovx: fold three advances into YOLO. DECOUPLED HEAD -- ",
     "classification and localisation conflict in one branch; ",
-    "1x1 reduce then two parallel 3x3 branches
+    "1x1 reduce then two parallel 3x3 branches, +1.1 ms ",
+    "(11.6 vs 10.5) for an AP gain. ANCHOR-FREE -- each ",
+    "location predicts (l,t,r,b) with the stride, so ",
+    "decode inverts encode exactly and no clustered priors are ",
+    "tuned. CENTER SAMPLING -- one positive per object starves ",
+    "the model, so the center 3x3 is positive. SIMOTA -- OTA's ",
+    "optimal transport costs 25% extra training time, so ",
+    "approximate it with DYNAMIC top-k from the sum of top ",
+    "IoUs: 45.0 to 47.3 AP with no solver hyperparameters."
+  )
+}
+
+# compact alias per ledger/NAMING.md
+morie_yolovx_yoloxhead <- morie_yolovx_simota_assign
+# public names resolved by fn/_lazy_map.json
+morie_yolovx_yolo_decoupled_head <- morie_yolovx_simota_assign
+
+#' @export
+morie_yolovx <- morie_yolovx_simota_assign
