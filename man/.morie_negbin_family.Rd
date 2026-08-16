@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{theta}{Numeric; passed to \code{log}.}
-\item{link}{Defaults to \code{"log"}.}
+\item{link}{Carried through into a list the body builds. Defaults to \code{"log"}.}
 }
 \description{
 MASS::negative.binomial for the log link path used by glm.nb).

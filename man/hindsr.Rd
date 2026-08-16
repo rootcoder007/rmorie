@@ -15,7 +15,7 @@ hindsr(episodes, actions = NULL, goals = NULL, strategy = "future", k = 4L, tol 
 \item{k}{Passed to \code{._sample_goals}. Defaults to \code{4L}.}
 \item{tol}{Passed to \code{._sparse_reward}. Defaults to \code{1e-06}.}
 \item{reward_fn}{Optional; may be \code{NULL}. A function; the body checks with \code{is.function}.}
-\item{state_to_goal}{Defaults to \code{NULL}.}
+\item{state_to_goal}{The body requires: hindsr: state_to_goal must be callable.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0L}.}
 \item{history}{Optional; may be \code{NULL}. Passed to \code{._as_states}.}
 }

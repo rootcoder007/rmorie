@@ -212,7 +212,7 @@ random_walk_kernel <- function(scale = 1.0, n_moves = 1L) {
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.
 #' @param weight_rule One of \code{"general"}, \code{"mcmc"}. Defaults to \code{"mcmc"}.
 #' @param log_forward Defaults to \code{NULL}.
-#' @param log_backward Defaults to \code{NULL}.
+#' @param log_backward The body requires: log_backward densities (equation 12).
 #' @return A list with \code{estimate}, \code{mean}, \code{variance}, \code{particles}, \code{weights}, \code{log_norm_const}, \code{ess}, \code{ess_trace}, \code{resampled}, \code{accept_trace}, \code{ladder}, \code{n_particles}, \code{weight_rule}, \code{method}.
 #' @export
 smcsam <- function(log_gamma, initial, n_particles = 500L, ladder = NULL,

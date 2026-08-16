@@ -8,9 +8,9 @@
 .Fun(f, grad = NULL, hess = NULL, affine = FALSE)
 }
 \arguments{
-\item{f}{See Usage.}
-\item{grad}{Defaults to \code{NULL}.}
-\item{hess}{Defaults to \code{NULL}.}
+\item{f}{Carried through into a list the body builds.}
+\item{grad}{Carried through into a list the body builds.}
+\item{hess}{Carried through into a list the body builds.}
 \item{affine}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{

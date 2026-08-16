@@ -8,8 +8,8 @@
 .karpv_fnode(op, args)
 }
 \arguments{
-\item{op}{See Usage.}
-\item{args}{See Usage.}
+\item{op}{Carried through into a list the body builds.}
+\item{args}{Carried through into a list the body builds.}
 }
 \description{
 A step of the karpV_native implementation. Called by \code{.karpv_copy}, \code{.karpv_grow}, \code{.karpv_replace}. See the file header for the source the module follows.

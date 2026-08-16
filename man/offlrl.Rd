@@ -8,7 +8,7 @@
 offlrl(dataset, states = NULL, actions = NULL, alpha = 1, gamma = 0.99, variant = "H", backup = "max", policy = NULL, mu = NULL, lr = 0.5, iters = 2000, tol = 1e-12)
 }
 \arguments{
-\item{dataset}{See Usage.}
+\item{dataset}{The body requires: offlrl: dataset must be non-empty.}
 \item{states}{Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.}
 \item{actions}{Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.}
 \item{alpha}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}

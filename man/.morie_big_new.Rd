@@ -8,7 +8,7 @@
 .morie_big_new(sign, limbs)
 }
 \arguments{
-\item{sign}{See Usage.}
+\item{sign}{Carried through into a list the body builds.}
 \item{limbs}{A vector; its length is taken and its elements indexed.}
 }
 \description{

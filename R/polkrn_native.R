@@ -294,7 +294,7 @@ rbf_basis <- function(x, n_centres=5, width=NULL) {
 #' @param H_history Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.
 #' @param degree Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
 #' @param basis One of \code{"both"}, \code{"kernel"}, \code{"polynomial"}. Defaults to \code{"both"}.
-#' @param summary Defaults to \code{"cumulative"}.
+#' @param summary Carried through into a list the body builds. Defaults to \code{"cumulative"}.
 #' @param n_centres Defaults to \code{5}.
 #' @param width Defaults to \code{NULL}.
 #' @param kind Passed to \code{.polkrn_ip_weights_history}. Defaults to \code{"binary"}.

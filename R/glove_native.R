@@ -58,7 +58,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param corpus See Usage.
+#' @param corpus The body requires: glove: corpus must not be None.
 #' @return The value of \code{docs}, as built in the body.
 #' @export
 .glove_as_docs <- function(corpus) {

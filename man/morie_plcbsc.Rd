@@ -13,7 +13,7 @@ morie_plcbsc(y_treated, y_donors, t0, x_treated = NULL, x_donors = NULL, v = NUL
 \item{t0}{A count; the body uses it as \code{seq_len(...)}.}
 \item{x_treated}{Defaults to \code{NULL}.}
 \item{x_donors}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
-\item{v}{Defaults to \code{NULL}.}
+\item{v}{Carried through into a list the body builds.}
 \item{statistic}{One of \code{"effect"}, \code{"rmspe_ratio"}. Defaults to \code{"effect"}.}
 \item{...}{Passed through.}
 }

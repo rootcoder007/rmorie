@@ -144,7 +144,7 @@
 #'
 #' @param objective See Usage.
 #' @param x0 A vector; its length is taken.
-#' @param maxit Defaults to \code{NULL}.
+#' @param maxit Optional; may be \code{NULL}. Carried through into a list the body builds.
 #' @return A list with \code{x}, \code{value}.
 #' @export
 .ghc_minimize_nm <- function(objective, x0, maxit = NULL) {

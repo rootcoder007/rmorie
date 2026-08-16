@@ -12,7 +12,7 @@ t5enc_span_corruption(tokens, rate = 0.15, mean_span = 3, seed = 0, sentinel = "
 \item{rate}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.15}.}
 \item{mean_span}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{3}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
-\item{sentinel}{Defaults to \code{"<extra_id_\\\%d>"}.}
+\item{sentinel}{Defaults to \code{"<extra_id_\\\\\\\%d>"}.}
 }
 \description{
 A step of the t5enc_native implementation. Called by \code{morie_t5enc}. See the file header for the source the module follows.

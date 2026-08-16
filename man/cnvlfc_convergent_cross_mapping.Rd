@@ -8,10 +8,10 @@
 cnvlfc_convergent_cross_mapping(x, y, E = 2L, tau = 1L, ...)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
-\item{E}{Defaults to \code{2L}.}
-\item{tau}{Defaults to \code{1L}.}
+\item{x}{Carried through into a list the body builds.}
+\item{y}{Carried through into a list the body builds.}
+\item{E}{Carried through into a list the body builds. Defaults to \code{2L}.}
+\item{tau}{Carried through into a list the body builds. Defaults to \code{1L}.}
 \item{...}{Passed through.}
 }
 \description{

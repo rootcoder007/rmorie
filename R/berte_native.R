@@ -214,7 +214,7 @@ encoder_block <- function(X, Wq, Wk, Wv, Wo, W1, b1, W2, b2, n_heads,
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param blocks A vector; its length is taken.
-#' @param n_heads See Usage.
+#' @param n_heads Carried through into a list the body builds.
 #' @param pad_mask Defaults to \code{NULL}.
 #' @param pre_norm Coerced to logical by the body, with \code{as.logical}. Defaults to \code{FALSE}.
 #' @return A list with \code{estimate}, \code{output}, \code{attention}, \code{pooled}, \code{L}, \code{d}, \code{n_layers}, \code{n_heads}, \code{pre_norm}, \code{bidirectional}, \code{method}.

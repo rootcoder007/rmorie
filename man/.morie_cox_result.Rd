@@ -10,10 +10,10 @@
 \arguments{
 \item{t}{A vector; its length is taken and its elements indexed.}
 \item{e}{Numeric; passed to \code{sum}.}
-\item{X}{See Usage.}
+\item{X}{Carried through into a list the body builds.}
 \item{fit}{A list; the body reads \code{$beta}, \code{$converged}, \code{$I}, \code{$loglik}, \code{$n_iter} from it.}
 \item{label}{Character; passed to \code{tolower}.}
-\item{method}{See Usage.}
+\item{method}{Carried through into a list the body builds.}
 }
 \description{
 A step of the cox_native implementation. Called by \code{morie_breslow_tie_correction}, \code{morie_efron_tie_correction}. See the file header for the source the module follows.

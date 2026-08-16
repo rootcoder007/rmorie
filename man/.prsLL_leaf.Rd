@@ -8,7 +8,7 @@
 .prsLL_leaf(sym)
 }
 \arguments{
-\item{sym}{See Usage.}
+\item{sym}{Carried through into a list the body builds.}
 }
 \description{
 A step of the prsLL_native implementation. Called by \code{.prsLL_parse_rd}, \code{.prsLL_parse_table}. See the file header for the source the module follows.

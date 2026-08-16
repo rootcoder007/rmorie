@@ -98,7 +98,7 @@
 #' @param param Coerced to list by the body, with \code{as.list}.
 #' @param rewards A vector; its length is taken and its elements indexed.
 #' @param bs Coerced to numeric by the body, with \code{as.numeric}.
-#' @param traj See Usage.
+#' @param traj Carried through into a list the body builds.
 #' @return A list with \code{estimate}, \code{rewards}, \code{baseline}, \code{trajectory}, \code{n_trials}, \code{mean_reward_first}, \code{mean_reward_last}, \code{method}.
 #' @export
 .reinfc_finish <- function(param, rewards, bs, traj) {

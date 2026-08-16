@@ -2708,7 +2708,7 @@ VModes <- function(x, K = 3, alpha = 2000, tau = 0, init = "uniform",
 #' @param x See Usage.
 #' @param fs Defaults to \code{1}.
 #' @param scales Defaults to \code{NULL}.
-#' @param wavelet Defaults to \code{"mexh"}.
+#' @param wavelet The body requires: the signal has no wavelet energy at any scale. Defaults to \code{"mexh"}.
 #' @param w0 Defaults to \code{5}.
 #' @param min_prominence Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
 #' @return A list with \code{structures}, \code{n_structures}, \code{scalogram}, \code{scales}, \code{times}, \code{min_prominence}, \code{method}.
@@ -2856,7 +2856,7 @@ WtXcor <- function(x, y, wavelet = "db4", levels = 3, max_lag = 0) {
 #'
 #' @param x Passed to \code{.tf_need}.
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1}.
-#' @param nfreq Defaults to \code{NULL}.
+#' @param nfreq The body requires: nfreq must be >= 2.
 #' @return A list with \code{tfd}, \code{times}, \code{freqs}, \code{peak_freq}, \code{total_energy}, \code{method}.
 #' @export
 WvDist <- function(x, fs = 1, nfreq = NULL) {

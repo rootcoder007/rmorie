@@ -107,7 +107,7 @@ coord_update <- function(X, M, phi_x, C = NULL) {
 #' @param C Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param V Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param mode Compared against \code{"position"}. Defaults to \code{"position"}.
-#' @param phi_v Defaults to \code{NULL}.
+#' @param phi_v The body requires: egnnL: the momentum variant needs V and phi_v.
 #' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{H}, \code{X}, \code{V}, \code{messages}.
 #' @export

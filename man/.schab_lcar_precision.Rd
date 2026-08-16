@@ -10,7 +10,7 @@
 \arguments{
 \item{R}{A matrix; passed to \code{nrow}.}
 \item{rho}{Numeric; combined arithmetically in the body.}
-\item{sigma2}{Defaults to \code{1}.}
+\item{sigma2}{The body requires: `sigma2` must be positive. Defaults to \code{1}.}
 }
 \description{
 A step of the schab_glmm_shared implementation. Called by \code{spbayr}. See the file header for the source the module follows.

@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{model}{Coerced to character by the body, with \code{as.character}.}
-\item{k}{See Usage.}
+\item{k}{The body requires: ICC(1,1), ICC(1,k), ICC(2,1), ICC(2,k), ICC(3,1), ICC(3,k).}
 }
 \description{
 a form is accepted -- "ICC(2,k)", "2-k", "2k" -- and, because the paper labels its own table with the concrete number of judges (ICC(1,4) for k = 4), a trailing integer equal to k is read as the average-measure form.

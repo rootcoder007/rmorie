@@ -8,7 +8,7 @@
 .glove_as_docs(corpus)
 }
 \arguments{
-\item{corpus}{See Usage.}
+\item{corpus}{The body requires: glove: corpus must not be None.}
 }
 \description{
 A step of the glove_native implementation. Called by \code{cooccurrence}. See the file header for the source the module follows.

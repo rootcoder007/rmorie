@@ -10,7 +10,7 @@ super_learner(y, X, library = NULL, n_folds = 10, meta = "nnls", binary = NULL, 
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{X}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
-\item{library}{Defaults to \code{NULL}.}
+\item{library}{The body requires: flxipt: the library is empty.}
 \item{n_folds}{Passed to \code{.flxipt_folds}. Defaults to \code{10}.}
 \item{meta}{One of \code{"discrete"}, \code{"nnls"}. Defaults to \code{"nnls"}.}
 \item{binary}{Optional; may be \code{NULL}. A flag; the body branches on it.}

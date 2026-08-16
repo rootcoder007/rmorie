@@ -10,7 +10,7 @@
 \arguments{
 \item{basis}{Passed to \code{.ot_adj}.}
 \item{n}{Numeric; combined arithmetically in the body.}
-\item{si}{See Usage.}
+\item{si}{Carried through into a list the body builds.}
 \item{sj}{Numeric; combined arithmetically in the body.}
 }
 \description{

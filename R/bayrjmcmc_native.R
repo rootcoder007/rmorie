@@ -248,7 +248,7 @@ rj_log_acceptance <- function(logpost_from, logpost_to, log_j_from,
 #' @param seed Passed to \code{.unif_stream}. Defaults to \code{0L}.
 #' @param within Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param within_scale Passed to \code{.rw_within}. Defaults to \code{0.5}.
-#' @param within_weight Defaults to \code{1}.
+#' @param within_weight Carried through into a list the body builds. Defaults to \code{1}.
 #' @param move_weight Defaults to \code{1}.
 #' @param jacobian One of \code{"analytic"}, \code{"numeric"}. Defaults to \code{"analytic"}.
 #' @param keep_chain A flag; the body branches on it. Defaults to \code{TRUE}.

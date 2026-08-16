@@ -10,8 +10,8 @@ varcal_find_candidates(reads, reference, min_alt_count = 2, min_alt_fraction = 0
 \arguments{
 \item{reads}{Passed to \code{.varcal_norm_reads}.}
 \item{reference}{A vector; its length is taken.}
-\item{min_alt_count}{Defaults to \code{2}.}
-\item{min_alt_fraction}{Defaults to \code{0.05}.}
+\item{min_alt_count}{The body requires: varcal: min_alt_count must be at least 1. Defaults to \code{2}.}
+\item{min_alt_fraction}{The body requires: varcal: min_alt_fraction must lie in [0, 1]. Defaults to \code{0.05}.}
 \item{min_bq}{Defaults to \code{10}.}
 }
 \description{

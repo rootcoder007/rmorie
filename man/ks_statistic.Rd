@@ -10,7 +10,7 @@ ks_statistic(m, instruments, form = "sum", n_equality = 0L)
 \arguments{
 \item{m}{See Usage.}
 \item{instruments}{A list; the body reads \code{$instruments} from it.}
-\item{form}{Defaults to \code{"sum"}.}
+\item{form}{Carried through into a list the body builds. Defaults to \code{"sum"}.}
 \item{n_equality}{Defaults to \code{0L}.}
 }
 \description{

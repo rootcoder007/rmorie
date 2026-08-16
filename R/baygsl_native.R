@@ -49,7 +49,7 @@
 #' `logf` is the log of an unnormalised density; rng is the .ghc_rng
 #' environment so the chain stays reproducible.
 #'
-#' @param logf See Usage.
+#' @param logf The body requires: baygsl: the shrinkage loop did not terminate; is logf returning a constant or NaN?.
 #' @param x0 Numeric; combined arithmetically in the body.
 #' @param e Passed to \code{.baygsl_expo}.
 #' @param w Numeric; combined arithmetically in the body. Defaults to \code{1}.

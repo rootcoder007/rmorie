@@ -97,7 +97,7 @@
 #' @param k Passed to \code{._sample_goals}. Defaults to \code{4L}.
 #' @param tol Passed to \code{._sparse_reward}. Defaults to \code{1e-06}.
 #' @param reward_fn Optional; may be \code{NULL}. A function; the body checks with \code{is.function}.
-#' @param state_to_goal Defaults to \code{NULL}.
+#' @param state_to_goal The body requires: hindsr: state_to_goal must be callable.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0L}.
 #' @param history Optional; may be \code{NULL}. Passed to \code{._as_states}.
 #' @return A list with \code{estimate}, \code{transitions}, \code{n_transitions}, \code{n_original}, \code{n_relabelled}, \code{rewards}, \code{success_rate}, \code{strategy}, \code{k}, \code{n_episodes}, \code{method}.

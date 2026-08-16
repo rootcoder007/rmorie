@@ -11,7 +11,7 @@
 \item{coords}{Passed to \code{.schab_st_covariance_matrix}.}
 \item{times}{Passed to \code{.schab_st_covariance_matrix}.}
 \item{cov_fn}{Passed to \code{.schab_st_covariance_matrix}.}
-\item{tol}{Defaults to \code{NULL}.}
+\item{tol}{Optional; may be \code{NULL}. Carried through into a list the body builds.}
 }
 \description{
 eigendecomposition, not by sampling random coefficient vectors: the minimum eigenvalue IS the minimum of the quadratic form, so one eigensolve settles what no finite number of random draws can. Sec. 9.3 records that Gneiting (2002) found published covariance functions in Cressie and Huang (1999) to be invalid, so construction alone is not proof.

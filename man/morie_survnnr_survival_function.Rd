@@ -9,7 +9,7 @@ morie_survnnr_survival_function(fit_result, x, times = NULL)
 }
 \arguments{
 \item{fit_result}{Passed to \code{morie_survnnr_baseline_hazard}.}
-\item{x}{See Usage.}
+\item{x}{Carried through into a list the body builds.}
 \item{times}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{

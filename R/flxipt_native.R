@@ -323,7 +323,7 @@ cv_risk <- function(y, Z, loss = "l2") {
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param X Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
-#' @param library Defaults to \code{NULL}.
+#' @param library The body requires: flxipt: the library is empty.
 #' @param n_folds Passed to \code{.flxipt_folds}. Defaults to \code{10}.
 #' @param meta One of \code{"discrete"}, \code{"nnls"}. Defaults to \code{"nnls"}.
 #' @param binary Optional; may be \code{NULL}. A flag; the body branches on it.

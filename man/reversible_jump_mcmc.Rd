@@ -18,7 +18,7 @@ reversible_jump_mcmc(models, moves, init_model, init_theta = c(), n_iter = 10000
 \item{seed}{Passed to \code{.unif_stream}. Defaults to \code{0L}.}
 \item{within}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 \item{within_scale}{Passed to \code{.rw_within}. Defaults to \code{0.5}.}
-\item{within_weight}{Defaults to \code{1}.}
+\item{within_weight}{Carried through into a list the body builds. Defaults to \code{1}.}
 \item{move_weight}{Defaults to \code{1}.}
 \item{jacobian}{One of \code{"analytic"}, \code{"numeric"}. Defaults to \code{"analytic"}.}
 \item{keep_chain}{A flag; the body branches on it. Defaults to \code{TRUE}.}

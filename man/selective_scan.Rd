@@ -17,7 +17,7 @@ selective_scan(X, A, W_B, W_C, W_delta, delta_bias = NULL, b_B = NULL, b_C = NUL
 \item{b_B}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{b_C}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{b_delta}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
-\item{rule}{Defaults to \code{"zoh"}.}
+\item{rule}{Carried through into a list the body builds. Defaults to \code{"zoh"}.}
 \item{D_skip}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{

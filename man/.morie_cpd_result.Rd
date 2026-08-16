@@ -8,12 +8,12 @@
 .morie_cpd_result(title, summary_lines = list(), tables = list(), interpretation = "", warnings = "", payload = list())
 }
 \arguments{
-\item{title}{See Usage.}
-\item{summary_lines}{Defaults to \code{list()}.}
-\item{tables}{Defaults to \code{list()}.}
-\item{interpretation}{Defaults to \code{""}.}
-\item{warnings}{Defaults to \code{""}.}
-\item{payload}{Defaults to \code{list()}.}
+\item{title}{Carried through into a list the body builds.}
+\item{summary_lines}{Carried through into a list the body builds. Defaults to \code{list()}.}
+\item{tables}{Carried through into a list the body builds. Defaults to \code{list()}.}
+\item{interpretation}{Carried through into a list the body builds. Defaults to \code{""}.}
+\item{warnings}{Carried through into a list the body builds. Defaults to \code{""}.}
+\item{payload}{Carried through into a list the body builds. Defaults to \code{list()}.}
 }
 \description{
 A step of the cpd_analyze implementation. Called by \code{morie_cpd_all_analyses}. See the file header for the source the module follows.

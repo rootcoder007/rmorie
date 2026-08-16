@@ -9,7 +9,7 @@ instruction_prompt(symbolic, kind = "conversation")
 }
 \arguments{
 \item{symbolic}{A list; the body reads \code{$text} from it.}
-\item{kind}{Defaults to \code{"conversation"}.}
+\item{kind}{Carried through into a list the body builds. Defaults to \code{"conversation"}.}
 }
 \description{
 A step of the llavx_native implementation. Called by \code{morie_llavx}. See the file header for the source the module follows.

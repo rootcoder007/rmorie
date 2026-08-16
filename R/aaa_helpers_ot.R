@@ -302,7 +302,7 @@
 #'
 #' @param basis Passed to \code{.ot_adj}.
 #' @param n Numeric; combined arithmetically in the body.
-#' @param si See Usage.
+#' @param si Carried through into a list the body builds.
 #' @param sj Numeric; combined arithmetically in the body.
 #' @return Nothing; the function is called for its effect.
 #' @export

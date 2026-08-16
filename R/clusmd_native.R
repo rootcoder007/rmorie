@@ -299,10 +299,10 @@
 #' named list with the same names, so callers can use `result$size` or
 #' `result$payload$size` interchangeably, just like the Python arm.
 #'
-#' @param title See Usage.
-#' @param summary_lines Defaults to \code{list()}.
-#' @param tables Defaults to \code{list()}.
-#' @param interpretation Defaults to \code{""}.
+#' @param title Carried through into a list the body builds.
+#' @param summary_lines Carried through into a list the body builds. Defaults to \code{list()}.
+#' @param tables Carried through into a list the body builds. Defaults to \code{list()}.
+#' @param interpretation Carried through into a list the body builds. Defaults to \code{""}.
 #' @param warnings Coerced to character by the body, with \code{as.character}. Defaults to \code{character()}.
 #' @param payload A vector; its length is taken and its elements indexed. Defaults to \code{list()}.
 #' @return The value of \code{out}, as built in the body.

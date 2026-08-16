@@ -132,7 +132,7 @@
 #' transformation does not remove the bias, it makes it computable and
 #' O(h^2) everywhere including at the edge.
 #'
-#' @param kind Defaults to \code{"log"}.
+#' @param kind The body requires: kind must be 'log' or 'identity'. Defaults to \code{"log"}.
 #' @return Nothing; this branch always raises.
 #' @export
 .fz_transform <- function(kind = "log") {

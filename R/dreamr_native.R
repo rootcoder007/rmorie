@@ -116,7 +116,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param state See Usage.
+#' @param state Carried through into a list the body builds.
 #' @param action_model See Usage.
 #' @param transition See Usage.
 #' @param reward_model See Usage.

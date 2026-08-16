@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{p}{Numeric; passed to \code{sqrt}.}
-\item{task}{Defaults to \code{"regression"}.}
+\item{task}{The body requires: task must be 'regression' or 'classification'. Defaults to \code{"regression"}.}
 }
 \description{
 split. They cross at p = 9, where both give 3: below it the classification rule is larger, above it the regression rule is, by a widening margin (33 against 10 at p = 100). Both are tuning parameters, not laws.

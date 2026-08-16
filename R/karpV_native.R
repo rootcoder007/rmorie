@@ -165,8 +165,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param op See Usage.
-#' @param args See Usage.
+#' @param op Carried through into a list the body builds.
+#' @param args Carried through into a list the body builds.
 #' @return A list with \code{op}, \code{args}.
 #' @export
 .karpv_fnode <- function(op, args) list(op = op, args = args)
@@ -176,7 +176,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param term See Usage.
+#' @param term Carried through into a list the body builds.
 #' @return A list with \code{term}.
 #' @export
 .karpv_tnode <- function(term) list(term = term)
@@ -200,7 +200,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param op One of \code{"-"}, \code{"*"}, \code{"\\\\\\\%"}, \code{"+"}.
+#' @param op One of \code{"-"}, \code{"*"}, \code{"\\\\\\\\\\\\\\\%"}, \code{"+"}.
 #' @param vals A vector; indexed elementwise.
 #' @return Nothing; this branch always raises.
 #' @export
@@ -348,7 +348,7 @@ morie_karpV_ramped <- function(e, n, functions, terminals, erc, max_depth) {
 #' source it follows.
 #'
 #' @param node A list; the body reads \code{$args} from it.
-#' @param path See Usage.
+#' @param path Carried through into a list the body builds.
 #' @param out A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export

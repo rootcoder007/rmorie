@@ -507,9 +507,9 @@ morie_kamath_ch3_dante_cloze <- function(prompt = "Dante was born in [MASK]",
 #' for the source it follows.
 #'
 #' @param prompt Character; passed to \code{trimws}.
-#' @param filled See Usage.
+#' @param filled Carried through into a list the body builds.
 #' @param eq See Usage.
-#' @param template See Usage.
+#' @param template Carried through into a list the body builds.
 #' @return A list with \code{prompt}, \code{slot_filled}, \code{template}, \code{tokens}, \code{estimate}, \code{n}, \code{method}.
 #' @export
 .morie_km2_tmpl_result <- function(prompt, filled, eq, template) {

@@ -10,7 +10,7 @@ LooCv(X, y, classifier = NULL)
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
 \item{y}{A vector; its length is taken and its elements indexed.}
-\item{classifier}{Defaults to \code{NULL}.}
+\item{classifier}{The body requires: leaves one class; the classifier.}
 }
 \description{
 it is nearly unbiased, and it is deterministic -- there is only one way to leave one out, so unlike 5-fold it gives the same answer every time.  The cost is N fits and a high variance: the training sets differ by a single sample, so the errors are heavily correlated.

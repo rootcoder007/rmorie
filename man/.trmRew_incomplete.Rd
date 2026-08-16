@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{rules}{A vector; its length is taken.}
-\item{why}{See Usage.}
-\item{pair}{See Usage.}
+\item{why}{Carried through into a list the body builds.}
+\item{pair}{Carried through into a list the body builds.}
 }
 \description{
 A step of the trmRew_native implementation. Called by \code{morie_trmRew_complete}. See the file header for the source the module follows.

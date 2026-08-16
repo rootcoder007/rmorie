@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{mu}{A vector; its length is taken.}
-\item{family}{See Usage.}
+\item{family}{The body requires: `family` must be 'poisson', 'binomial' or 'gaussian'.}
 }
 \description{
 A step of the schab_glmm_shared implementation. Called by \code{.schab_conditional_variance}, \code{.schab_data_covariance}, \code{.schab_sigma_mu}. See the file header for the source the module follows.

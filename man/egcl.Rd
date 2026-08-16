@@ -17,7 +17,7 @@ egcl(H, X, phi_e, phi_x, phi_h, A = NULL, C = NULL, V = NULL, mode = "position",
 \item{C}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{V}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 \item{mode}{Compared against \code{"position"}. Defaults to \code{"position"}.}
-\item{phi_v}{Defaults to \code{NULL}.}
+\item{phi_v}{The body requires: egnnL: the momentum variant needs V and phi_v.}
 \item{dt}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{

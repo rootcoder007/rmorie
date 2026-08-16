@@ -9,7 +9,7 @@ preference_vector(nodes, focus, weight = 0.9)
 }
 \arguments{
 \item{nodes}{Coerced to list by the body, with \code{as.list}.}
-\item{focus}{See Usage.}
+\item{focus}{The body requires: tagRC: none of the focus nodes are in the graph.}
 \item{weight}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.9}.}
 }
 \description{

@@ -10,7 +10,7 @@ HomDeconv(y, cutoff, keep = "low")
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{cutoff}{Coerced to integer by the body, with \code{as.integer}.}
-\item{keep}{Defaults to \code{"low"}.}
+\item{keep}{Carried through into a list the body builds. Defaults to \code{"low"}.}
 }
 \description{
 IDFT.  Low quefrency estimates the slowly varying component (the vocal tract, the basic wavelet); high quefrency the excitation.

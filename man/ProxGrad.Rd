@@ -9,8 +9,8 @@ ProxGrad(f, grad_f, prox_g, x0, lr, n_iter = 200L, relaxation = 1)
 }
 \arguments{
 \item{f}{smooth part, reported only as the objective \' @param}
-\item{grad_f}{See Usage.}
-\item{prox_g}{See Usage.}
+\item{grad_f}{The body requires: grad_f returned the wrong length.}
+\item{prox_g}{The body requires: prox_g returned the wrong length.}
 \item{x0}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{lr}{Numeric; combined arithmetically in the body.}
 \item{n_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.}

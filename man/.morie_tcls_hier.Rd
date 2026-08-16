@@ -10,8 +10,8 @@
 \arguments{
 \item{p}{A vector; indexed elementwise.}
 \item{q}{A vector; indexed elementwise.}
-\item{hierarchy}{See Usage.}
-\item{domain}{See Usage.}
+\item{hierarchy}{The body requires: morie_tcls: hierarchy must have exactly one root, found.}
+\item{domain}{The body requires: is not a domain value.}
 }
 \description{
 A step of the tcls_native implementation. Called by \code{morie_emd}. See the file header for the source the module follows.

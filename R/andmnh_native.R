@@ -92,7 +92,7 @@ tukey_hanning_kernel <- function(x) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param kernel See Usage.
+#' @param kernel Carried through into a list the body builds.
 #' @return A list with \code{fun}, \code{const}, \code{name}.
 #' @export
 .check_kernel <- function(kernel) {
@@ -483,7 +483,7 @@ kernel_hac <- function(v, bandwidth, kernel = "qs", n_params = 0, n = NULL) {
 #' @param X Defaults to \code{NULL}.
 #' @param prewhiten A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param var_order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
-#' @param kernel Defaults to \code{"qs"}.
+#' @param kernel Carried through into a list the body builds. Defaults to \code{"qs"}.
 #' @param bandwidth Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param weights Defaults to \code{NULL}.
 #' @param n_params Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.

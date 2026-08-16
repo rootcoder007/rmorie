@@ -82,7 +82,7 @@
 #' source it follows.
 #'
 #' @param m A list; the body reads \code{$mu}, \code{$Sigma}, \code{$T} from it.
-#' @param alternative Defaults to \code{"two.sided"}.
+#' @param alternative The body requires: bad alternative. Defaults to \code{"two.sided"}.
 #' @return A list with \code{statistic}, \code{p.value}, \code{cor}, \code{z}.
 #' @export
 .morie_max_stat <- function(m, alternative = "two.sided") {

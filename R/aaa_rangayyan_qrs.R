@@ -831,7 +831,7 @@ EcgWaveShp <- function(qrsdur, stdev, rdur = NULL, sdur = NULL,
 #' @param qrs Coerced to integer by the body, with \code{as.integer}.
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param jofs Numeric; combined arithmetically in the body. Defaults to \code{0.06}.
-#' @param thresh Defaults to \code{0.1}.
+#' @param thresh Carried through into a list the body builds. Defaults to \code{0.1}.
 #' @return A list with \code{stdev}, \code{stslope}, \code{pattern}, \code{stdevmean}, \code{stslopemean}, \code{flagged}, \code{thresh}, \code{threshnote}, \code{jofs}, \code{fs}, \code{method}.
 #' @export
 ExerEcgSt <- function(x, qrs, fs, jofs = 0.060, thresh = 0.1) {
@@ -899,7 +899,7 @@ ExerEcgSt <- function(x, qrs, fs, jofs = 0.060, thresh = 0.1) {
 #'
 #' @param rr A vector; its length is taken and its elements indexed.
 #' @param fsr Numeric; combined arithmetically in the body. Defaults to \code{4}.
-#' @param bands Defaults to \code{"taskforce"}.
+#' @param bands The body requires: bands must be 'taskforce' or 'bianchi'. Defaults to \code{"taskforce"}.
 #' @return A list with \code{vlf}, \code{lf}, \code{hf}, \code{total}, \code{vlfpct}, \code{lfpct}, \code{hfpct}, \code{lfhf}, \code{bands}, \code{limits}, \code{fsr}, \code{n}, \code{method}.
 #' @export
 HrvFreq <- function(rr, fsr = 4, bands = "taskforce") {
@@ -1745,7 +1745,7 @@ ApneaEdr <- function(edr, spo2, fs, hours = NULL, mindur = 10, desat = 3) {
 #'
 #' @param rr Passed to \code{.morie_qrs_check}.
 #' @param fsr Defaults to \code{4}.
-#' @param bands Defaults to \code{"taskforce"}.
+#' @param bands Carried through into a list the body builds. Defaults to \code{"taskforce"}.
 #' @return A list with \code{lfhf}, \code{lf}, \code{hf}, \code{lfpct}, \code{hfpct}, \code{rrvar}, \code{bands}, \code{n}, \code{method}.
 #' @export
 LfHfRatio <- function(rr, fsr = 4, bands = "taskforce") {
@@ -1775,8 +1775,8 @@ LfHfRatio <- function(rr, fsr = 4, bands = "taskforce") {
 #' spectrum. An EVEN beat count is required or that is not an exact bin.
 #'
 #' @param twaves A vector; its length is taken.
-#' @param noiselo Defaults to \code{0.33}.
-#' @param noisehi Defaults to \code{0.45}.
+#' @param noiselo The body requires: noise band must satisfy 0 < noiselo < noisehi < 0.5. Defaults to \code{0.33}.
+#' @param noisehi The body requires: noise band must satisfy 0 < noiselo < noisehi < 0.5. Defaults to \code{0.45}.
 #' @return A list with \code{valt}, \code{kscore}, \code{altpower}, \code{noisemean}, \code{noisesd}, \code{nbeats}, \code{npoints}, \code{cyclesperbeat}, \code{present}, \code{method}.
 #' @export
 TwaSpectr <- function(twaves, noiselo = 0.33, noisehi = 0.45) {

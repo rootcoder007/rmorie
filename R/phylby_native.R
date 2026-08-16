@@ -531,10 +531,10 @@ morie_phylby_clade_credibility <- function(samples) {
 #' @param swap_every Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
 #' @param sample_every Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
 #' @param pi Passed to \code{.phylby_step}.
-#' @param rate Defaults to \code{1}.
+#' @param rate Carried through into a list the body builds. Defaults to \code{1}.
 #' @param branch_prior_mean Passed to \code{.phylby_step}. Defaults to \code{0.1}.
 #' @param partitions Optional; may be \code{NULL}. A vector; its length is taken.
-#' @param tree Defaults to \code{NULL}.
+#' @param tree Optional; may be \code{NULL}. Carried through into a list the body builds.
 #' @param n_runs Numeric; combined arithmetically in the body. Defaults to \code{2}.
 #' @param tune Passed to \code{.phylby_step}. Defaults to \code{1}.
 #' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0}.

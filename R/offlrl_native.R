@@ -103,7 +103,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param dataset See Usage.
+#' @param dataset The body requires: offlrl: dataset must be non-empty.
 #' @param states Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.
 #' @param actions Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.
 #' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{1}.

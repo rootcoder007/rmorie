@@ -68,8 +68,8 @@ e_gcn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param H See Usage.
-#' @param X See Usage.
+#' @param H Carried through into a list the body builds.
+#' @param X Carried through into a list the body builds.
 #' @param layers Coerced to integer by the body, with \code{as.integer}.
 #' @param phi_e See Usage.
 #' @param phi_x See Usage.

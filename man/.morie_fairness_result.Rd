@@ -8,13 +8,13 @@
 .morie_fairness_result(title, summary_lines = list(), tables = list(), sections = list(), warnings = character(0), interpretation = "", payload = list())
 }
 \arguments{
-\item{title}{See Usage.}
-\item{summary_lines}{Defaults to \code{list()}.}
-\item{tables}{Defaults to \code{list()}.}
-\item{sections}{Defaults to \code{list()}.}
-\item{warnings}{Defaults to \code{character(0)}.}
-\item{interpretation}{Defaults to \code{""}.}
-\item{payload}{Defaults to \code{list()}.}
+\item{title}{Carried through into a list the body builds.}
+\item{summary_lines}{Carried through into a list the body builds. Defaults to \code{list()}.}
+\item{tables}{Carried through into a list the body builds. Defaults to \code{list()}.}
+\item{sections}{Carried through into a list the body builds. Defaults to \code{list()}.}
+\item{warnings}{Carried through into a list the body builds. Defaults to \code{character(0)}.}
+\item{interpretation}{Carried through into a list the body builds. Defaults to \code{""}.}
+\item{payload}{Carried through into a list the body builds. Defaults to \code{list()}.}
 }
 \description{
 A step of the fairness_metrics implementation. Called by \code{morie_fairness_average_odds_difference}, \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity} and 4 others in the module. See the file header for the source the module follows.

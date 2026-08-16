@@ -15,10 +15,10 @@ CLogPz(z, A = 1, r = 0, a_k = complex(0), b_k = complex(0), c_k = complex(0), d_
 \item{b_k}{Coerced to complex by the body, with \code{as.complex}. Defaults to \code{complex(0)}.}
 \item{c_k}{Coerced to complex by the body, with \code{as.complex}. Defaults to \code{complex(0)}.}
 \item{d_k}{Coerced to complex by the body, with \code{as.complex}. Defaults to \code{complex(0)}.}
-\item{M_I}{Defaults to \code{NULL}.}
-\item{M_O}{Defaults to \code{NULL}.}
-\item{N_I}{Defaults to \code{NULL}.}
-\item{N_O}{Defaults to \code{NULL}.}
+\item{M_I}{Carried through into a list the body builds.}
+\item{M_O}{Carried through into a list the body builds.}
+\item{N_I}{Carried through into a list the body builds.}
+\item{N_O}{Carried through into a list the body builds.}
 }
 \description{
 Rangayyan (2024) eq. (4.68) with eq. (4.67).

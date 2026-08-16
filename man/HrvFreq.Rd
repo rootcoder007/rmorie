@@ -10,7 +10,7 @@ HrvFreq(rr, fsr = 4, bands = "taskforce")
 \arguments{
 \item{rr}{A vector; its length is taken and its elements indexed.}
 \item{fsr}{Numeric; combined arithmetically in the body. Defaults to \code{4}.}
-\item{bands}{Defaults to \code{"taskforce"}.}
+\item{bands}{The body requires: bands must be 'taskforce' or 'bianchi'. Defaults to \code{"taskforce"}.}
 }
 \description{
 request.  The RR series is a series of EVENTS, so it is interpolated onto a uniform grid before the periodogram; the mean is removed first so DC does not leak into VLF.

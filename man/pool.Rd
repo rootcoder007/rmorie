@@ -10,7 +10,7 @@ pool(token_vectors, mode = "mean", mask = NULL)
 \arguments{
 \item{token_vectors}{Passed to \code{.sbert_mat}.}
 \item{mode}{One of \code{"cls"}, \code{"max"}. Defaults to \code{"mean"}.}
-\item{mask}{Defaults to \code{NULL}.}
+\item{mask}{The body requires: sbert: the mask excludes every token.}
 }
 \description{
 A step of the sbert_native implementation. Called by \code{morie_geron_lenet5}. See the file header for the source the module follows.

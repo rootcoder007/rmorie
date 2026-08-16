@@ -26,17 +26,17 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param dataframe Defaults to \code{"rows"}.
-#' @param matrix Defaults to \code{"rowmajor"}.
-#' @param Date Defaults to \code{"ISO8601"}.
-#' @param POSIXt Defaults to \code{"string"}.
-#' @param factor Defaults to \code{"string"}.
-#' @param complex Defaults to \code{"string"}.
-#' @param raw Defaults to \code{"base64"}.
-#' @param null Defaults to \code{"list"}.
-#' @param na Defaults to \code{NULL}.
+#' @param dataframe Carried through into a list the body builds. Defaults to \code{"rows"}.
+#' @param matrix Carried through into a list the body builds. Defaults to \code{"rowmajor"}.
+#' @param Date Carried through into a list the body builds. Defaults to \code{"ISO8601"}.
+#' @param POSIXt Carried through into a list the body builds. Defaults to \code{"string"}.
+#' @param factor Carried through into a list the body builds. Defaults to \code{"string"}.
+#' @param complex Carried through into a list the body builds. Defaults to \code{"string"}.
+#' @param raw Carried through into a list the body builds. Defaults to \code{"base64"}.
+#' @param null Carried through into a list the body builds. Defaults to \code{"list"}.
+#' @param na Carried through into a list the body builds.
 #' @param auto_unbox A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @param digits Defaults to \code{4}.
+#' @param digits Carried through into a list the body builds. Defaults to \code{4}.
 #' @param force A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{o}, as built in the body.
 #' @export

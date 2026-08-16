@@ -27,7 +27,7 @@
 #'
 #' @param subject Character scalar naming the analysis subject.
 #' @param json Character scalar: a JSON object of options forwarded from the
-#'   CLI flags (default \code{"\\\{\\\}"}). Unknown keys are ignored.
+#'   CLI flags (default \code{"\\\\\\\{\\\\\\\}"}). Unknown keys are ignored.
 #' @return Invisibly, the analysis result (a list). As a side effect, prints
 #'   that result to \code{stdout} as JSON.
 #' @examples

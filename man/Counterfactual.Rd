@@ -12,8 +12,8 @@ Counterfactual(evidence, equations, exogenous, do, query, u_support = NULL)
 \item{equations}{See Usage.}
 \item{exogenous}{A vector; its length is taken.}
 \item{do}{A vector; indexed elementwise.}
-\item{query}{See Usage.}
-\item{u_support}{Defaults to \code{NULL}.}
+\item{query}{Carried through into a list the body builds.}
+\item{u_support}{The body requires: candidates is too large; pass a smaller u_support.}
 }
 \description{
 A step of the counterfactual implementation. No other function in the package calls it. See the file header for the source the module follows.

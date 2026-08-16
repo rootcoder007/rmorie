@@ -141,7 +141,7 @@ morie_kde2d <- function(x, y, h, n = 25, lims = c(range(x), range(y))) {
 #' MASS::negative.binomial for the log link path used by glm.nb).
 #'
 #' @param theta Numeric; passed to \code{log}.
-#' @param link Defaults to \code{"log"}.
+#' @param link Carried through into a list the body builds. Defaults to \code{"log"}.
 #' @return The value of \code{structure}.
 #' @export
 .morie_negbin_family <- function(theta, link = "log") {

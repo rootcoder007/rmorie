@@ -10,7 +10,7 @@ lsa_decompose(X, k_dim = NULL, how = "log_entropy")
 \arguments{
 \item{X}{See Usage.}
 \item{k_dim}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
-\item{how}{Defaults to \code{"log_entropy"}.}
+\item{how}{Carried through into a list the body builds. Defaults to \code{"log_entropy"}.}
 }
 \description{
 A step of the lsa_native implementation. Called by \code{morie_lsa}. See the file header for the source the module follows.
