@@ -37,3 +37,9 @@ is scored in nats and the other in squared pixels, so \code{alpha} is
 what makes the two comparable. Boxes are centre-form and converted
 to corners for the IoU.
 }
+\examples{
+model <- function(img) c(2, -1, 0.5, 0.4, 0.4, 0.3, 0.3)
+r <- morie_geron_classification_localization(array(0, c(4, 4)), model,
+                                             n_classes = 3)
+str(r, max.level = 1)
+}

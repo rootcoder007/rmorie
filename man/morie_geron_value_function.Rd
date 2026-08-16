@@ -30,3 +30,12 @@ against: the two must agree to solver tolerance on the same MDP.
 \code{pi} is either a length-n_states vector of 0-based action indices or
 an (n_states, n_actions) stochastic matrix; \code{s} is 0-based.
 }
+\examples{
+P <- array(0, c(2, 2, 2))
+P[1, , ] <- rbind(c(0.9, 0.1), c(0.2, 0.8))
+P[2, , ] <- rbind(c(0.5, 0.5), c(0.1, 0.9))
+R <- matrix(c(1, 0.5, 0.2, 0), 2, 2)
+pi <- rbind(c(0.5, 0.5), c(0.5, 0.5))
+r <- morie_geron_value_function(0L, pi, gamma = 0.9, P = P, R = R)
+str(r, max.level = 1)
+}

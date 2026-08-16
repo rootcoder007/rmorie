@@ -19,3 +19,9 @@ List with \code{gradient}, \code{hessian}, \code{p_hat}, \code{residuals},
 (1/m) X^T (p_hat - y) with the PSD Hessian (1/m) X^T diag(p(1-p)) X,
 which is what makes the cost convex.
 }
+\examples{
+set.seed(4)
+X <- cbind(1, rnorm(30))
+y <- rbinom(30, 1, plogis(X \%*\% c(-0.5, 1.5)))
+morie_geron_logistic_gradient(X, y, theta = c(0, 0))
+}

@@ -21,3 +21,8 @@ One stick-breaking draw is shared by every covariate value; the atoms are theta_
 Named list with G, kind, weights, K, note.
 }
 \keyword{internal}
+\examples{
+r <- morie_ddpest_single_weights(xs = c(0, 1), alpha = 1, K = 5,
+                                 atom_fn = function(x, h) h + 0.1 * x)
+str(r, max.level = 1)
+}

@@ -20,3 +20,10 @@ Split the pre-period in two and run the whole estimator inside it, where the tru
 A list with \code{estimate} and the change components.
 }
 \keyword{internal}
+\examples{
+set.seed(3)
+Y <- matrix(rnorm(48, 10), 8, 6)
+D <- rep(c(1, 0), 4)
+r <- morie_didfst_placebo_did(Y, D, event_time = 4)
+str(r, max.level = 1)
+}

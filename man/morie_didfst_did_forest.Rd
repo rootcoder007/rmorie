@@ -28,3 +28,13 @@ Heterogeneous ATT: DiD taken locally under forest weights
 A list with \code{tau}, \code{att_uniform} and the   evaluation metadata.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+n <- 60
+Y <- matrix(rnorm(n * 5, 10), n, 5)
+D <- rbinom(n, 1, 0.5)
+X <- matrix(rnorm(n * 2), n, 2)
+Y[D == 1, 4:5] <- Y[D == 1, 4:5] + 2 + X[D == 1, 1]
+r <- morie_didfst_did_forest(Y, D, X, event_time = 3, n_trees = 20L)
+str(r, max.level = 1)
+}

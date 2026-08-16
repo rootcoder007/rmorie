@@ -110,7 +110,9 @@ bilm_forward <- function(X, layers) {
   for (layer in layers) {
     Wxf <- layer$Wxf; Whf <- layer$Whf; bf <- layer$bf
     Wxb <- layer$Wxb; Whb <- layer$Whb; bb <- layer$bb
-    d <- length(Whf)
+    # hidden size = ROWS of Whf; length() of an R matrix counts every
+    # element, where the reference len() counts rows
+    d <- if (is.matrix(Whf)) nrow(Whf) else length(Whf)
     if (length(reps[[1]][[1]]) != 2L * d)
       stop("elmo: token dimension ", ncol(Xm),
            " but hidden dimension ", d,
@@ -124,7 +126,10 @@ bilm_forward <- function(X, layers) {
     }
     h <- rep(0, d); c <- rep(0, d)
     bwd <- vector("list", L)
-    for (t in seq_len(L):1) {
+    # rev(seq_len(L)): the colon after seq_len(L) coerced the whole
+    # vector to its first element and the backward pass only ever
+    # visited t = 1
+    for (t in rev(seq_len(L))) {
       r <- lstm_step(cur[[t]], h, c, Wxb, Whb, bb)
       h <- r$h; c <- r$c
       bwd[[t]] <- h

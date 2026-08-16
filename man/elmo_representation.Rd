@@ -20,3 +20,13 @@ A step of the elmo_native implementation. Called by \code{elmo}, \code{elmorepre
 A list with \code{estimate}, \code{elmo}, \code{layers}, \code{weights}, \code{gamma}, \code{n_layers}, \code{L}, \code{d}, \code{top_layer}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+d <- 2
+X <- matrix(rnorm(6, 0, 0.5), 3, d)
+mkw <- function() matrix(rnorm(d * 4 * d, 0, 0.3), d, 4 * d)
+layer <- list(Wxf = mkw(), Whf = mkw(), bf = rep(0, 4 * d),
+              Wxb = mkw(), Whb = mkw(), bb = rep(0, 4 * d))
+r <- elmo_representation(X, list(layer))
+str(r, max.level = 1)
+}

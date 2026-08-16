@@ -26,3 +26,14 @@ A step of the ffmFM_native implementation. Called by \code{field_aware_fm}, \cod
 A list with \code{estimate}, \code{W}, \code{loss_history}, \code{final_loss}, \code{k}, \code{n_parameters}, \code{n_parameters_fm}, \code{method}, \code{caveat}.
 }
 \keyword{internal}
+\examples{
+set.seed(3)
+rows <- list(list(list(0L, 1), list(2L, 1)),
+             list(list(1L, 1), list(3L, 1)),
+             list(list(0L, 1), list(3L, 1)),
+             list(list(1L, 1), list(2L, 1)))
+labels <- c(1, -1, 1, -1)
+r <- fit_ffm(rows, labels, fields = c(0L, 0L, 1L, 1L),
+             n_features = 4, n_fields = 2, k_dim = 2, epochs = 5)
+str(r, max.level = 1)
+}
