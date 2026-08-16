@@ -18,3 +18,6 @@ tandem duplication has its two halves swapped, an inversion has its second half 
 A character value.
 }
 \keyword{internal}
+\examples{
+morie_sv_dl_deletion_type_reference("ACGTACGTAA", "INV")
+}

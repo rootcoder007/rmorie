@@ -31,3 +31,12 @@ precision, recall, f1, macro_f1, n_classes, estimate, n, method.
 Orchestrates tokenise -> caller model -> softmax -> (optional) counted
 accuracy/confusion/precision/recall/F1.
 }
+\examples{
+model <- function(toks) {
+  s <- sum(toks \%in\% c("good", "great")) - sum(toks \%in\% c("bad", "awful"))
+  c(-s, s)
+}
+texts <- c("a good great film", "an awful bad mess")
+r <- morie_geron_sentiment_analysis(texts, model, y_true = c(1L, 0L))
+str(r, max.level = 1)
+}

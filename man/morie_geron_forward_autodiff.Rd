@@ -25,3 +25,12 @@ bespoke S3 class here, so \code{f} is called with plain numeric duals via
 \verb{.w4a_dual_*} helpers exposed to it. A finite-difference check runs
 alongside for an independent verification route.
 }
+\examples{
+f <- function(d) {
+  x <- d[[1]]; y <- d[[2]]
+  v <- x$value * y$value + x$value^2
+  g <- x$deriv * y$value + x$value * y$deriv + 2 * x$value * x$deriv
+  list(value = v, deriv = g)
+}
+morie_geron_forward_autodiff(f, c(1.5, -0.5))
+}

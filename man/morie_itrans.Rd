@@ -44,3 +44,16 @@ Wu, H., Wang, S., Ma, L. and Long, M., iTransformer, ICLR 2024
 becomes one token, so attention is N x N over variates rather than
 T x T over time.
 }
+\examples{
+set.seed(6)
+x <- list(rnorm(8), rnorm(8))
+r <- morie_itrans(x,
+                  wembed = matrix(rnorm(32, 0, 0.3), 4, 8), bembed = rep(0, 4),
+                  wq = matrix(rnorm(8, 0, 0.4), 2, 4),
+                  wk = matrix(rnorm(8, 0, 0.4), 2, 4),
+                  wv = matrix(rnorm(16, 0, 0.4), 4, 4),
+                  wffn1 = matrix(rnorm(16, 0, 0.4), 4, 4), bffn1 = rep(0, 4),
+                  wffn2 = matrix(rnorm(16, 0, 0.4), 4, 4), bffn2 = rep(0, 4),
+                  wproj = matrix(rnorm(8, 0, 0.4), 2, 4), bproj = rep(0, 2))
+str(r, max.level = 1)
+}

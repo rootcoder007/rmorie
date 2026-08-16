@@ -30,3 +30,14 @@ A step of the sv_dl_native implementation. No other function in the package call
 A list with \code{estimate}, \code{calls}, \code{n_calls}, \code{n_precise}, \code{insert_median}, \code{insert_sd}, \code{spread}, \code{orientation}, \code{n_sd}, \code{min_support}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(3)
+mk <- function(pos, gap) list(chrom1 = "chr1", pos1 = pos, strand1 = "+",
+                              chrom2 = "chr1", pos2 = pos + gap,
+                              strand2 = "-")
+conc <- lapply(seq(100, 4000, by = 150), function(p)
+  mk(p, 300 + sample(-20:20, 1)))
+del <- lapply(1:3, function(k) mk(5000 + 5 * k, 1500))
+r <- morie_sv_dl_structural_variant(c(conc, del))
+str(r, max.level = 1)
+}

@@ -19,3 +19,7 @@ List with \code{s},\code{a},\code{r},\code{s2},\code{done} (0-based indices as g
 \description{
 Validate a DQN replay buffer of (s, a, r, s2[, done]) rows (hmdqn)
 }
+\examples{
+buf <- list(c(0L, 1L, 1.0, 2L, FALSE), c(2L, 0L, 0.5, 1L, TRUE))
+morie_check_buffer(buf, n_states = 3L, n_actions = 2L, name = "demo")
+}

@@ -58,3 +58,15 @@ Pfister, T., Temporal Fusion Transformers, International Journal of
 Forecasting 37(4):1748-1764 (arXiv:1912.09363). All weights are
 caller-supplied.
 }
+\examples{
+set.seed(3)
+a <- rnorm(4)
+r <- morie_tftnet(a,
+                  w1 = matrix(rnorm(16, 0, 0.4), 4, 4), b1 = rep(0, 4),
+                  w2 = matrix(rnorm(16, 0, 0.4), 4, 4), b2 = rep(0, 4),
+                  w4 = matrix(rnorm(16, 0, 0.4), 4, 4), b4 = rep(0, 4),
+                  w5 = matrix(rnorm(16, 0, 0.4), 4, 4), b5 = rep(0, 4),
+                  wsel = matrix(rnorm(12, 0, 0.4), 3, 4), bsel = rep(0, 3),
+                  wq = matrix(rnorm(8, 0, 0.4), 2, 4), bq = rep(0, 2))
+str(r, max.level = 1)
+}

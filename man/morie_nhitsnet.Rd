@@ -35,3 +35,12 @@ caller-supplied linear map. That collapse is stated rather than
 hidden; the expressivity ratio r_l still governs the coefficient
 count, which is the hierarchical part the paper is about.
 }
+\examples{
+set.seed(2)
+y <- sin(2 * pi * (1:16) / 8)
+wf <- list(matrix(rnorm(2 * 8, 0, 0.3), 2, 8))
+wb <- list(matrix(rnorm(16 * 8, 0, 0.3), 16, 8))
+r <- morie_nhitsnet(y, horizon = 2, kernels = 2L, ratios = 1,
+                    wf = wf, wb = wb)
+str(r, max.level = 1)
+}

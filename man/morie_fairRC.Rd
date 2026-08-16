@@ -20,3 +20,7 @@ A step of the fairRC_native implementation. No other function in the package cal
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+prot <- c(rep(0L, 10), rep(1L, 10), rep(0L, 10), rep(1L, 10))
+morie_fairRC(prot, measure = "rND", step = 10)
+}

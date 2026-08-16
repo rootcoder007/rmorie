@@ -15,3 +15,8 @@ A \code{morie_bigint}.
 \description{
 Add two arbitrary-precision integers
 }
+\examples{
+a <- morie_bigint("99999999999999999999")
+b <- morie_bigint("1")
+as.character(morie_big_add(a, b))
+}

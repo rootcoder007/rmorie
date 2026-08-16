@@ -31,3 +31,13 @@ the 2D normalization are described in prose and implemented from it.
 Dropout is omitted: it is a training-time stochastic operation and
 this routine is evaluation-time and deterministic.
 }
+\examples{
+set.seed(5)
+x <- list(rnorm(8), rnorm(8))
+r <- morie_tsmixer(x,
+                   wtime = matrix(rnorm(64, 0, 0.3), 8, 8), btime = rep(0, 8),
+                   wfeat = matrix(rnorm(4, 0, 0.3), 2, 2), bfeat = rep(0, 2),
+                   wproj = matrix(rnorm(24, 0, 0.3), 3, 8), bproj = rep(0, 3),
+                   horizon = 3)
+str(r, max.level = 1)
+}

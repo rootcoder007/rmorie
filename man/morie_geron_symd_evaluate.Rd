@@ -17,3 +17,7 @@ Numeric scalar.
 \description{
 Evaluate a parsed tree against an environment (no eval/parse of R code)
 }
+\examples{
+t <- list("call", "sin", list("var", "x"))
+morie_geron_symd_evaluate(t, list(x = pi / 2))
+}

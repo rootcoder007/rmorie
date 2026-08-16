@@ -19,3 +19,7 @@ A step of the fairRC_native implementation. Called by \code{morie_fairRC}. See t
 The value of \code{.measure}.
 }
 \keyword{internal}
+\examples{
+prot <- c(rep(0L, 10), rep(1L, 10), rep(0L, 10), rep(1L, 10))
+rKL(prot, step = 10)
+}
