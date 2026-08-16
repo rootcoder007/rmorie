@@ -23,3 +23,6 @@ A fixed number of sweeps of the iteration printed under eq. (1.44),
 started from the book value N-hat_1 = 68. There is no convergence
 test, so both language arms take identical steps.
 }
+\examples{
+morie_repcn(pb = 1e-15, f = 0.1)
+}

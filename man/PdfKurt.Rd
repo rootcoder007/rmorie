@@ -20,3 +20,7 @@ book gives 3 for a Gaussian and defines the excess K\' = K - 3.
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+xg <- seq(-6, 6, by = 0.01)
+PdfKurt(x = xg, p = dnorm(xg))
+}

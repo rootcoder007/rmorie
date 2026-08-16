@@ -20,3 +20,7 @@ A step of the rangayyan_ch3 implementation. No other function in the package cal
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+xg <- seq(0, 20, by = 0.01)
+PdfSkew(x = xg, p = dgamma(xg, shape = 2))
+}

@@ -17,3 +17,6 @@ list(p0, p1, decoded, gamma, evidence)
 \description{
 R3 repetition-code bit posterior (MacKay 2003 eq. 1.18, p. 9)
 }
+\examples{
+morie_r3post(r = c(1L, 1L, 0L), f = 0.1)
+}

@@ -26,3 +26,6 @@ f(0) = f0 unless the sine argument is read as eta t/sqrt(G) + c. The
 default c here is the self-consistent one, sqrt(G)/eta times
 asin(2 f0 - 1); the printed value is returned as cbook.
 }
+\examples{
+morie_sexfsol(t = 10, g = 1000, f0 = 0.5)
+}

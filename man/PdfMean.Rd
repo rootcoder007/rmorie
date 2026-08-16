@@ -20,3 +20,6 @@ A step of the rangayyan_ch3 implementation. No other function in the package cal
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+PdfMean(x = seq(-4, 4, by = 0.01), p = dnorm(seq(-4, 4, by = 0.01)))
+}

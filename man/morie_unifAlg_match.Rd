@@ -27,3 +27,9 @@ algorithm, the occurs check, and the factorisation
 :math:`\theta = \delta \circ \sigma` reproduced above.
 }
 \keyword{internal}
+\examples{
+pat <- morie_unifAlg_app("f", morie_unifAlg_var("x"))
+sub <- morie_unifAlg_app("f", morie_unifAlg_const("a"))
+r <- morie_unifAlg_match(pat, sub)
+str(r, max.level = 1)
+}

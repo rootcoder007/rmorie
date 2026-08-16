@@ -19,3 +19,6 @@ list(total, model, data)
 \description{
 Two-part minimum-description-length message length (eq. 28.16-28.17, p. 352)
 }
+\examples{
+morie_mdlpost(ph = 0.25, pdh = 0.05, deltad = 0.01)
+}
