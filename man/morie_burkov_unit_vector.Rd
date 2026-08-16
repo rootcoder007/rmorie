@@ -14,3 +14,7 @@ morie_burkov_unit_vector
 A list with \code{unit}, \code{estimate}, \code{norm}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_burkov_unit_vector(V)
+}

@@ -19,3 +19,7 @@ Part of the rangayyan_ch3 implementation; see the file header for the source it 
 A list with \code{covariance}, \code{correlation}, \code{sd_x}, \code{sd_y}, \code{mean_x}, \code{mean_y}, \code{n}, \code{ddof}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+CovXY(V, V)
+}

@@ -41,3 +41,7 @@ Adaptive Survey Sampling", in Targeted Learning in Data Science,
 Springer, doi:10.1007/978-3-319-65304-4_29.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_tlsurvy_draw_sample(V)
+}

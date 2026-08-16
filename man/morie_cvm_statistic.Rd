@@ -21,3 +21,7 @@ Part of the bndsmw_native implementation; see the file header for the source it 
 A list with \code{statistic}, \code{per_instrument}, \code{form}, \code{n_instruments}, \code{method}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+morie_cvm_statistic(D, D)
+}

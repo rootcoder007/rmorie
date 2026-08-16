@@ -20,3 +20,7 @@ Numeric probability.
 \description{
 Equations 3.1 to 3.3 of Bilder & Loughin (2025).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_multinomial_pmf(V, V)
+}

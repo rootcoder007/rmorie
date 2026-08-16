@@ -18,3 +18,7 @@ one -- that is the whole reason to normalize rather than take the raw CCF.
 A list with \code{gamma}, \code{shifts}, \code{peak}, \code{peak_shift}, \code{normalized_per_shift}, \code{bounded_in_unit_interval}, \code{loud_beats_matching_without_normalization}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+NccfTpl(V, V)
+}

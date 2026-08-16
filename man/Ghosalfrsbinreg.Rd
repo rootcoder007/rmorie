@@ -34,3 +34,6 @@ grad_k = sum_i (y_i - p_i) phi_k(x_i).
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 10.4.3.
 }
+\examples{
+Ghosalfrsbinreg()
+}

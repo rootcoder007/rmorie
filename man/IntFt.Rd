@@ -19,3 +19,7 @@ the DC content, which 1/(jw) cannot represent because it blows up there.  It is 
 A list with \code{Y}, \code{omega}, \code{delta_weight}, \code{at_dc}, \code{dc_term_carried_by_the_delta}, \code{undefined_at_zero_without_the_delta}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+IntFt(V, V)
+}

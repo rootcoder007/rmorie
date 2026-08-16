@@ -38,3 +38,6 @@ for YouTube Recommendations", *RecSys 2016*, 191-198,
 doi:10.1145/2959100.2959190. The retrieval setting.
 }
 \keyword{internal}
+\examples{
+morie_twoT_cheatsheet()
+}

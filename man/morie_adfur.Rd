@@ -24,3 +24,7 @@ surface for the constant-only regression, tau = b0 + b1/n + b2/n^2;
 they are returned rather than a p-value, because interpolating a
 p-value would need a table the book does not print.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_adfur(V)
+}

@@ -18,3 +18,7 @@ Kamath Ch 2 encoder-decoder scaffolding (Eq 2.1-2.6)
 A list with \code{h}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_encoder_state(V, V)
+}

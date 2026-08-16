@@ -33,3 +33,6 @@ whose inputs were supplied).
 \description{
 Equations 3.6, 3.14, 3.15, 3.18, 3.21 of Brus (2022).
 }
+\examples{
+morie_si_estimators()
+}

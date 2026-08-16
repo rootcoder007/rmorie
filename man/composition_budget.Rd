@@ -17,3 +17,7 @@ Basic composition: k releases cost sum_i epsilon_i
 A list with \code{total_epsilon}, \code{n_releases},   \code{note}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+composition_budget(V)
+}

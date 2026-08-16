@@ -49,3 +49,7 @@ Gnanadesikan, R. & Kettenring, J. R. (1972). Robust estimates,
 residuals, and outlier detection with multiresponse data.
 Biometrics, 28(1), 81-124.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ogkcv(V)
+}

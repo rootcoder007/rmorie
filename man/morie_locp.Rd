@@ -37,3 +37,7 @@ Modelling and Its Applications. Chapman & Hall.  Hastie, T.,
 Tibshirani, R. and Friedman, J. (2009). The Elements of
 Statistical Learning, 2nd ed. Springer, Sec. 6.1.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_locp(V, V)
+}

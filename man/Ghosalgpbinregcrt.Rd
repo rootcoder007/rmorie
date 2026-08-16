@@ -31,3 +31,6 @@ Formula: eps_n = n^(-s/(2s+d)).
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, Theorems 11.20 and 11.22.
 }
+\examples{
+Ghosalgpbinregcrt()
+}

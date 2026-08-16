@@ -22,3 +22,7 @@ Parses source into a tree, applies derivative rules (sum, product,
 quotient, power, chain, sin/cos/exp/log/tanh/sqrt), constant-folds.
 When \code{at} is given, checks against a central finite difference.
 }
+\examples{
+S <- c("a", "b", "c")
+morie_geron_symbolic_diff(S)
+}

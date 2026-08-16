@@ -19,3 +19,7 @@ A list whose \code{t} holds the estimated true set-bit counts.
 \description{
 RAPPOR decode (Sec. 4)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_rappor_decode(V, V)
+}

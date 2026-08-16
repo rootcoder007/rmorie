@@ -31,3 +31,7 @@ VanRaden, P. M. (2008). Efficient methods to compute
 genomic predictions. Journal of Dairy Science, 91(11),
 4414-4423.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_vanr1(V)
+}

@@ -21,3 +21,7 @@ Part of the rangayyan_tf implementation; see the file header for the source it f
 A list with \code{tfd}, \code{times}, \code{freqs}, \code{sigma}, \code{maxlag}, \code{peak_freq}, \code{crossterm_ratio}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+ExpKerTfd(V)
+}

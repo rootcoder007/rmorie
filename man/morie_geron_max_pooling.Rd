@@ -21,3 +21,7 @@ List with \code{output}, \code{output_shape}, \code{argmax_indices},
 \code{argmax_indices} are 0-based positions inside the ROW-MAJOR flattened
 window, matching numpy's argmax on a C-ordered slice.
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_geron_max_pooling(M)
+}

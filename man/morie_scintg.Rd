@@ -28,3 +28,8 @@ Part of the scintg_native implementation; see the file header for the source it 
 A list with \code{estimate}, \code{embedding}, \code{R}, \code{Y}, \code{K}, \code{objective}, \code{history}, \code{n_rounds}, \code{theta}, \code{sigma}, \code{lam}, \code{diversity}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+morie_scintg(M, D)
+}

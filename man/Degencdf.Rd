@@ -14,3 +14,7 @@ Degenerate limiting distribution of the sample mean (Deshmukh eq. 10.3)
 A list with \code{cdf}, \code{mu}, \code{x}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Degencdf(V, V)
+}

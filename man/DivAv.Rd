@@ -18,3 +18,7 @@ m classes.  Averaging hides a badly separated PAIR behind well separated ones, s
 A list with \code{average}, \code{pairwise}, \code{minimum}, \code{worst_pair}, \code{n_classes}, \code{n_pairs}, \code{average_hides_the_worst_pair}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+DivAv(V, V)
+}

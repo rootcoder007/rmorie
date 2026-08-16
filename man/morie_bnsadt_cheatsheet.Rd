@@ -14,3 +14,6 @@ One-line summary of the bnsadt module
 A character scalar.
 }
 \keyword{internal}
+\examples{
+morie_bnsadt_cheatsheet()
+}

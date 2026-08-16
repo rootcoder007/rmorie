@@ -14,3 +14,7 @@ Chi-square goodness of fit -- eq. (4.2.1), p. 104
 A list with \code{statistic}, \code{df}, \code{p_value}, \code{k}, \code{n}, \code{contrib}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Chigof(V, V)
+}

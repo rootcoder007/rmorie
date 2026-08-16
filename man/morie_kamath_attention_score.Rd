@@ -18,3 +18,7 @@ Kamath Ch 2 attention chain (Eq 2.7-2.12, 2.15-2.16, 2.19)
 A list with \code{estimate}, \code{alpha}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_attention_score(V, V)
+}

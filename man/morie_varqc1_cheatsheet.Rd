@@ -26,3 +26,6 @@ A character scalar.
     1-38.
 }
 \keyword{internal}
+\examples{
+morie_varqc1_cheatsheet()
+}

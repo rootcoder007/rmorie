@@ -17,3 +17,7 @@ List with \code{y_hat} (0-based), \code{vote_counts}, \code{agreement},
 y_hat = mode of the L predicted labels; ties go to the lowest class
 index and are counted.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_hard_voting(V)
+}

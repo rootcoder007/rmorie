@@ -19,3 +19,7 @@ Normal-model imputation weight
 The log weight.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_mqtmpl_imputation_weights(V, V)
+}

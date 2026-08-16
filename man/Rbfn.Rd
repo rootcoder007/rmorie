@@ -23,3 +23,7 @@ Part of the rangayyan_class2 implementation; see the file header for the source 
 A list with \code{centers}, \code{weights}, \code{bias}, \code{predictions}, \code{queryvalues}, \code{mse}, \code{spread}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Rbfn(V, V)
+}

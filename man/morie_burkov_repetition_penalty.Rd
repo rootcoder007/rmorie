@@ -19,3 +19,8 @@ Divide positive logits of seen tokens by the penalty, multiply negative ones -- 
 A list with \code{penalised}, \code{estimate}, \code{penalty}, \code{tokens_hit}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_burkov_repetition_penalty(V, M)
+}

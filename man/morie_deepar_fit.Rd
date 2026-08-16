@@ -20,3 +20,7 @@ A linear autoregression stands in for the recurrent network: the scaling, the li
 A list with the fitted parameters and the same field   names as the Python arm.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_deepar_fit(V)
+}

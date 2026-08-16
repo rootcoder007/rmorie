@@ -15,3 +15,7 @@ List with \code{rmse}, \code{mse}, \code{mae}, \code{max_error}, \code{residuals
 \description{
 Root mean squared error (Geron Ch 2, morie.fn grrmse)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_rmse_grrmse(V, V)
+}

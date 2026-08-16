@@ -29,3 +29,7 @@ Span-corruption pretraining (drop contiguous spans, replace with
 numbered sentinels; target is the dropped spans) plus text-to-text
 framing of a supervised pair as \code{(prefix + source) -> target}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_t5(V)
+}

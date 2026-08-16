@@ -43,3 +43,7 @@ of the American Society for Information Science* 41(6), 391-407. The
 unsupervised alternative being displaced.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_dssm_collision_rate(V)
+}

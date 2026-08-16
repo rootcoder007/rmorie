@@ -24,3 +24,7 @@ Formula: \code{W_1 = int |F(t) - G(t)| dt}, equal to
 \references{
 Vallender, S. S. (1973). Theory Probab Appl 18:784-786.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Otws(V, V)
+}

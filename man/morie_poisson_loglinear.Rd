@@ -40,3 +40,6 @@ mean_ratio (as supplied).
 \description{
 Equations 4.1 to 4.7, 4.12, 4.15 of Bilder & Loughin (2025).
 }
+\examples{
+morie_poisson_loglinear()
+}

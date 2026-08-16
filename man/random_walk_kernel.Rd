@@ -18,3 +18,6 @@ Part of the smcsam_native implementation; see the file header for the source it 
 The value of \code{.smcsam_rwk}.
 }
 \keyword{internal}
+\examples{
+random_walk_kernel()
+}

@@ -20,3 +20,7 @@ mahalanobis_labels, estimate, n, method.
 \description{
 k-means assumption diagnostics (Geron Ch 8, morie.fn hmkmlim)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_kmeans_limits(V)
+}

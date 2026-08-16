@@ -20,3 +20,7 @@ defines the spectral MOMENTS of Section 6.4.4 but prints no spectral-entropy equ
 A list with \code{entropy}, \code{units}, \code{max_entropy}, \code{normalized}, \code{n_bins}, \code{probabilities}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+SpecEntropy(V)
+}

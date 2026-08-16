@@ -18,3 +18,7 @@ Equation (3.142), the inverse of equation (3.141). The two compose to the identi
 A list with the digital frequency \code{omega}, the round-trip   error against equation (3.141), and whether every result fell   strictly inside the open interval.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+BilinUnwarp(V)
+}

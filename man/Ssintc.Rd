@@ -34,3 +34,7 @@ observation i, iterate
 \references{
 Turnbull, B. W. (1976). JRSS B 38:290-295, equation (10).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ssintc(V, V)
+}

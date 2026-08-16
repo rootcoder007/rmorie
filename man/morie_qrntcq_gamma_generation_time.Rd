@@ -21,3 +21,6 @@ Part of the qrntcq_native implementation; see the file header for the source it 
 A list with \code{t}, \code{density}.
 }
 \keyword{internal}
+\examples{
+morie_qrntcq_gamma_generation_time()
+}

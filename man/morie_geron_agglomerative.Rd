@@ -21,3 +21,7 @@ Clusters are numbered by the index of their lowest-indexed member, so
 \code{labels} is deterministic regardless of merge order. \code{merges} entries
 are 0-based (min member of a, min member of b).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_agglomerative(V)
+}

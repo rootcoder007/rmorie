@@ -23,3 +23,7 @@ Hill, M. O. (1973), Ecology 54(2), 427-432, Equation (2)
 and Sect. 2.  Standard published form; the article is paywalled and
 was not read.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Hillq(V)
+}

@@ -17,3 +17,7 @@ Euclidean pairwise distance matrix (Geron Ch 7, morie.fn hmmds helper)
 The value of \code{.morie_gr_w4b_pairwise_distances}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_pairwise_distances(V)
+}

@@ -14,3 +14,7 @@ Modulated point-process intensity (Lawson eq. 6.3)
 A list with \code{intensity}, \code{total}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Intmod(V, V)
+}

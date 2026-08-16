@@ -17,3 +17,7 @@ Matrix (S, nA).
 \description{
 Combine value + advantage streams: Q = V + A - mean_a A (hmdldqn)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_dueling_q(V, V)
+}

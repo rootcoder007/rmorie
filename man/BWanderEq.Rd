@@ -20,3 +20,7 @@ Equation (3.134), applied sample by sample. Note the PLUS on the feedback term: 
 A list with the filtered record \code{y}, the value at the   requested index if one was asked for, and the parameters used.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+BWanderEq(V)
+}

@@ -21,3 +21,7 @@ List with theta, theta_gd, mse, r2, gap, eta, estimate, n, method.
 \description{
 Model-based least squares, closed form cross-checked against descent (Geron Ch 1, morie.fn hmmod)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_model_based(V, V)
+}

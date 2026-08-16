@@ -13,3 +13,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later ' Child-2019 sparse attention mask ' 
 A list with components \code{by}, \code{size}, \code{tensor}, \code{boolean}, \code{density}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_spqkv_sparse_attention(V)
+}

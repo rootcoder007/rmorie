@@ -32,3 +32,7 @@ Supervised windowing (\verb{y_\{t-w+1..t\}}) -> \verb{y_\{t+1\}}, ridge-regulari
 normal equations (min-norm solve), rolled forward recursively or
 fit directly per horizon step.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_time_series_forecast(V)
+}

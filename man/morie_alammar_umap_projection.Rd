@@ -18,3 +18,7 @@ simplified: exact k-NN, bisected sigma, full-batch descent)
 A list with \code{embedding}, \code{objective_initial}, \code{objective_final}, \code{objective_decreased}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_alammar_umap_projection(V)
+}

@@ -33,3 +33,7 @@ truncation lag \eqn{\lfloor 4(n/100)^{1/4}\rfloor}.
 \references{
 Phillips and Perron (1988), Biometrika 75:335-346.  Paywalled; the coded form, the pp_sum Bartlett kernel and the Dickey-Fuller tables were read from Trapletti and Hornik's tseries (R/test.R, src/ppsum.c), tarball tseries_0.10-62 from CRAN.  The p-value is interpolated in those tables, flat outside 1\%-99\%.
 }
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+Pptest(D)
+}

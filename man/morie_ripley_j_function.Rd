@@ -14,3 +14,7 @@ morie_ripley_j_function
 A list with \code{r}, \code{j}, \code{g}, \code{f}, \code{j_csr}, \code{lambda_est}, \code{n_defined}, \code{method}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_ripley_j_function(M)
+}

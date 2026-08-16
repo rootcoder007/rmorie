@@ -18,3 +18,7 @@ Part of the rangayyan_xfrm implementation; see the file header for the source it
 A list with \code{value}, \code{real}, \code{imag}, \code{angle}, \code{unit_modulus}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Euler(V)
+}

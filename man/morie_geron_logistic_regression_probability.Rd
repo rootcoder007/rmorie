@@ -17,3 +17,7 @@ List with \code{probability}, \code{logit}, \code{prediction}.
 \description{
 Logistic regression probability (Geron Eq 4-15, morie.fn grlogp)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_logistic_regression_probability(V, V)
+}

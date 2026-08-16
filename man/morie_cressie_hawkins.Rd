@@ -53,3 +53,7 @@ factor 0.704 at \code{|N(h)| = 2} is \code{0.457 + 0.494/2} exactly.
 Schabenberger O, Gotway CA (2005), Sec 4.4.2, eq (4.26),
 pp. 159-161. Cressie N, Hawkins DM (1980).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_cressie_hawkins(V, V)
+}

@@ -21,3 +21,7 @@ list with output_dim, dropped, same_padding, padded_dim, in_dim, k, p, s, estima
 \description{
 output_dim = floor((in_dim + 2p - k)/s) + 1.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_stride(V, V)
+}

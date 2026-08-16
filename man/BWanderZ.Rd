@@ -19,3 +19,7 @@ this form because the graphical method reads it directly -- numerator is the dis
 A list with \code{H}, \code{z}, \code{T}, \code{pole}, \code{max_difference_from_eq_3_132}, \code{forms_agree}, \code{numerator_is_the_distance_to_the_zero}, \code{denominator_is_the_distance_to_the_pole}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+BWanderZ(V)
+}

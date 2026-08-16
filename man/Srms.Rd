@@ -17,3 +17,7 @@ Srms(x)
 A list with \code{rms}, \code{ms}, \code{sd}, \code{mean}, \code{n}, \code{ddof}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Srms(V)
+}

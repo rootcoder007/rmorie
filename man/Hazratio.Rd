@@ -27,3 +27,7 @@ HR = exp(beta) with the interval formed on the LOG scale and exponentiated, so i
 \references{
 Klein, J. P. and Moeschberger, M. L. (2003). Survival Analysis, 2nd ed., Springer.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Hazratio(V, V)
+}

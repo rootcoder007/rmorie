@@ -42,3 +42,7 @@ doi:10.1109/MC.2009.263. The explicit-feedback factorisation this is
 adapted from.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_impFB(V)
+}

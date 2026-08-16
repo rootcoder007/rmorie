@@ -28,3 +28,7 @@ Formula: \code{lppd = sum_i log mean_s exp(ll_is)},
 Watanabe, S. (2010). JMLR 11:3571-3594; Vehtari, Gelman &
 Gabry (2017) Statist Comput 27:1413-1432.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Waicd(V)
+}

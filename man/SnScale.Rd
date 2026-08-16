@@ -19,3 +19,7 @@ list(estimate, raw, inner, correction, constant, n)
 \description{
 Rousseeuw & Croux (1993) Sn robust scale
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+SnScale(V)
+}

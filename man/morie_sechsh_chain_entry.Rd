@@ -19,3 +19,7 @@ h_i = H(h_{i-1} || e_i), or HMAC if a key is given. With a key the log writer do
 List with \code{hash} and \code{keyed} (and \code{note}   when keyed).
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_sechsh_chain_entry(V, V)
+}

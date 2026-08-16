@@ -14,3 +14,7 @@ J_beta = int_0^T [ d^p beta(t) / dt^p ]^2 dt.  Under the basis expansion (14.2) 
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Penmat(V, V)
+}

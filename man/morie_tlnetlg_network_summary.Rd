@@ -45,3 +45,7 @@ doi:10.1214/14-STS501.
 """
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_tlnetlg_network_summary(V)
+}

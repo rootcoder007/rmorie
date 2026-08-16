@@ -28,3 +28,7 @@ Mirrors Python \code{morie.fn.rdpcomp}.
 \references{
 Mironov, Talwar & Zhang (2019), arXiv:1908.10530.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_rdpcomp(V, V)
+}

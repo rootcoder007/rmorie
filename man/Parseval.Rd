@@ -17,3 +17,7 @@ the unnormalized forward transform of eq (3.80) the spectral sum is N times the 
 A list with \code{energy_time}, \code{energy_freq}, \code{psd}, \code{max_difference}, \code{holds}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Parseval(V)
+}

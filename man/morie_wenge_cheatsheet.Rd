@@ -27,3 +27,6 @@ doi:10.1037/a0020761.
 Pearl, J. (2001) "Direct and indirect effects", UAI 17, 411-420.
 }
 \keyword{internal}
+\examples{
+morie_wenge_cheatsheet()
+}

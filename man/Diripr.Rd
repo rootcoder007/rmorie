@@ -30,3 +30,7 @@ two categories this is exactly the beta-binomial.
 Gelman et al. (2013), Bayesian Data Analysis, 3rd ed.,
 CRC, ch. 3.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Diripr(V)
+}

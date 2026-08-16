@@ -19,3 +19,7 @@ Build a hash-chained audit log
 List with \code{hashes}, \code{head}, \code{n},   \code{head_hex}, \code{keyed}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_sechsh_build_chain(V)
+}

@@ -14,3 +14,7 @@ Fieller-Hartley-Pearson normal-scores correlation -- Sec. 11.5, p. 422
 A list with \code{statistic}, \code{zf}, \code{mean_zf}, \code{var_zf}, \code{z}, \code{p_value}, \code{scores}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Normcorr(V, V)
+}

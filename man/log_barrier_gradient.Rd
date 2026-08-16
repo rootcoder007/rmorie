@@ -18,3 +18,7 @@ log_barrier_gradient(fvals, jac)
 Numeric vector of length \code{ncol(jac)}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+log_barrier_gradient(V, V)
+}

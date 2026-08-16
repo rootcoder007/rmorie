@@ -14,3 +14,7 @@ Log-likelihood of independent observations (Lawson eq. 3.2)
 A list with \code{loglik}, \code{terms}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Loglksum(V)
+}

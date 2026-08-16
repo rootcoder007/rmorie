@@ -30,3 +30,7 @@ List with \code{G}, \code{D}, \code{value_history}, \code{samples}, \code{equili
 \description{
 GAN minimax training: linear generator vs logistic discriminator (hmgan)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_gan(V)
+}

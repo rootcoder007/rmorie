@@ -18,3 +18,7 @@ It is the statement that no combination of two signals carries more amplitude th
 A list with \code{lhs}, \code{rhs}, \code{holds}, \code{equality}, \code{norm_sum}, \code{norm_a}, \code{norm_b}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Triangle(V, V)
+}

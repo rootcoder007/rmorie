@@ -30,3 +30,6 @@ List with piecewise, spline, spline_or (as supplied).
 \description{
 Equations 6.34 to 6.37 of Bilder & Loughin (2025).
 }
+\examples{
+morie_spline_logit()
+}

@@ -14,3 +14,7 @@ Sukhatme scale test -- eq. (9.7.1), p. 323
 A list with \code{statistic}, \code{mean}, \code{var}, \code{z}, \code{p_value}, \code{phat}, \code{m}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Sukhatme(V, V)
+}

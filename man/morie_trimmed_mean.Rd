@@ -30,3 +30,7 @@ Winsorizing pulls them in to the nearest retained value instead, and
 the Winsorized variance is the ordinary sample variance of the
 Winsorized values (Wilcox sec. 2.4.5).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_trimmed_mean(V)
+}

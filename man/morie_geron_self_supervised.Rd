@@ -23,3 +23,7 @@ list with loss, task_losses, predictions, targets, r2, pretext, estimate, n, met
 \code{"denoise"}: corrupt inputs with deterministic LCG noise, reconstruct.
 A function may be passed instead: \code{pretext(X)} returning list(Xp, yp).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_self_supervised(V)
+}

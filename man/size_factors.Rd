@@ -17,3 +17,7 @@ The reference for each gene is its geometric mean across samples, and \code{s_j 
 Numeric vector of size factors, one per sample.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+size_factors(V)
+}

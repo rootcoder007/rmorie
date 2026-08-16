@@ -32,3 +32,8 @@ Callaway, B. and Sant'Anna, P. H. C. (2021).
 Difference-in-differences with multiple time periods. Journal of
 Econometrics, 225(2), 200-230.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+S <- c("a", "b", "c")
+morie_grouptimeatt(V, S)
+}

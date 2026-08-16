@@ -21,3 +21,7 @@ Part of the rangayyan_ccf implementation; see the file header for the source it 
 A list with \code{ccf}, \code{lags}, \code{peak}, \code{peak_lag}, \code{n}, \code{biased}, \code{normalized}, \code{positive_lag_means_y_trails_x}, \code{biased_keeps_nonnegative_definiteness}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+XCorr(V, V)
+}

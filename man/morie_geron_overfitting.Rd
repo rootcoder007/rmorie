@@ -20,3 +20,7 @@ List with \code{gap}, \code{gaps}, \code{ratio}, \code{overfitting},
 Generalisation gap E_val - E_train with the early-stopping point.
 \code{best_epoch} is 0-based, as in Python.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_overfitting(V, V)
+}

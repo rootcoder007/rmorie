@@ -26,3 +26,6 @@ Bernstein, D. J. (2005) "The Poly1305-AES message-authentication
 code", FSE 2005, LNCS 3557, 32-49, doi:10.1007/11502760_3.
 }
 \keyword{internal}
+\examples{
+morie_secaead_cheatsheet()
+}

@@ -18,3 +18,7 @@ Precision = TP / (TP + FP) (Geron Ch 3, hmpre)
 A list with \code{precision}, \code{tp}, \code{fp}, \code{fn}, \code{f1}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_precision_hm(V, V)
+}

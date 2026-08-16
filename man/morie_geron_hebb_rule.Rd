@@ -23,3 +23,7 @@ List with \code{dW}, \code{W}, \code{norm_before}, \code{norm_after},
 dW = eta X^T Y, a pure outer product with no error signal, which is
 why ||W|| grows without bound under repeated exposure.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_hebb_rule(V, V)
+}

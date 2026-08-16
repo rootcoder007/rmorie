@@ -28,3 +28,6 @@ A character scalar.
     Biology 20, 129. doi:10.1186/s13059-019-1727-y.
 }
 \keyword{internal}
+\examples{
+morie_longrd_cheatsheet()
+}

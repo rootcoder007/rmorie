@@ -20,3 +20,7 @@ only legitimate under joint stationarity and ergodicity.
 A list with \code{ccf}, \code{lags}, \code{means}, \code{mean_product}, \code{mean_removed}, \code{is_cross_covariance_when_mean_removed}, \code{expectation_estimated_by_time_average}, \code{requires_joint_stationarity_and_ergodicity}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+XCorrProc(V, V)
+}

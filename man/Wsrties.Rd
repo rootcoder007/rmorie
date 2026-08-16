@@ -14,3 +14,7 @@ Tie-corrected Var[T+] -- eqs. (5.7.10)-(5.7.11), p. 203
 A list with \code{var}, \code{var_uncorrected}, \code{correction}, \code{n}, \code{nzero}, \code{ties}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Wsrties(V)
+}

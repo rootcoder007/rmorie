@@ -18,3 +18,7 @@ Part of the gp_mvsml_ch9_14 implementation; see the file header for the source i
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_khatri_rao_rows(V, V)
+}

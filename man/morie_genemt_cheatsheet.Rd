@@ -35,3 +35,6 @@ Association and Population-Based Linkage Analyses", *American Journal
 of Human Genetics* 81(3), 559-575, doi:10.1086/519795.
 }
 \keyword{internal}
+\examples{
+morie_genemt_cheatsheet()
+}

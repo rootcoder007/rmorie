@@ -23,3 +23,7 @@ Part of the fgam_native implementation; see the file header for the source it fo
 A list with \code{estimate}, \code{fitted}, \code{residuals}, \code{coefficients}, \code{intercept}, \code{surface}, \code{surface_x}, \code{edf}, \code{r_squared}, \code{n_x}, \code{n_t}, \code{lam_x}, \code{lam_t}, \code{linear_deviation}, \code{n}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_fgam_functional_gam(V, V)
+}

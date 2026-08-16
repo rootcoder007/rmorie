@@ -19,3 +19,7 @@ Torch-style tensor construction (numpy/R-backed, no torch call) (Geron Ch 10, hm
 A list with \code{tensor}, \code{dtype}, \code{numpy_dtype}, \code{device}, \code{shape}, \code{ndim}, \code{itemsize}, \code{nbytes}, \code{strides}, \code{dtype_changed}, \code{on_device}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_pytorch_tensor(V)
+}

@@ -20,3 +20,7 @@ index, side, mean, sd, n)
 \description{
 Grubbs (1969) test that the most extreme observation is an outlier
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+GrubbsT(V)
+}

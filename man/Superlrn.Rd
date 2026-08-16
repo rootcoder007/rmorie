@@ -35,3 +35,7 @@ not be downloaded (the bepress endpoint returned an empty body); the
 construction is taken from Polley's dissertation, Super Learner, UC
 Berkeley (escholarship qt4qn0067v), fetched in full.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Superlrn(V, V)
+}

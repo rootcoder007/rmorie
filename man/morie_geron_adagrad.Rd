@@ -23,3 +23,7 @@ List with \code{theta}, \code{step}, \code{s}, \code{effective_lr}.
 \description{
 s <- s + g^2; step = -eta g / (sqrt(s) + eps).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_adagrad(V)
+}

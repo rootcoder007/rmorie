@@ -20,3 +20,7 @@ W_ij = ||s_i - s_j|| and U_ij = |Z_i - Z_j|, plus the regression slope beta = M2
 A list with \code{m1}, \code{m2}, \code{beta}, \code{sw2}, \code{s0}, \code{mean_attribute}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+MantelM2(V, V)
+}

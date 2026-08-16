@@ -45,3 +45,6 @@ local_mean_variance, twophase_strat, twophase_regr, s2_resid.
 \description{
 Equations 9.2, 9.3, 9.10, 11.5, 11.7, 11.8 of Brus (2022).
 }
+\examples{
+morie_balanced_twophase()
+}

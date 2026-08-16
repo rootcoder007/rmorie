@@ -34,3 +34,7 @@ Hu, Koren and Volinsky (2008), IEEE ICDM, 263-272,
 Equations (3), (4) and (5).  Read from the authors' own PDF at
 yifanhu.net/PUB/cf.pdf.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Alsmf(V)
+}

@@ -20,3 +20,6 @@ Part of the memb_native implementation; see the file header for the source it fo
 The value of \code{train}, as built in the body.
 }
 \keyword{internal}
+\examples{
+logistic_trainer()
+}

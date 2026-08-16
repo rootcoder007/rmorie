@@ -30,3 +30,7 @@ D_e = sum n_c n_k delta^2 / (n (n - 1)).
 Krippendorff (2004), Content Analysis: An Introduction to
 Its Methodology, 2nd ed., Sage, ch. 11.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Krpalp(V)
+}

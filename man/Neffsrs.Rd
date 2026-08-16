@@ -21,3 +21,7 @@ Kish, L. (1965), Survey Sampling, Wiley, Sect. 11.7.
 Standard published form; the monograph is not in the local corpus and
 was not read.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Neffsrs(V)
+}

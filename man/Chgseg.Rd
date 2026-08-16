@@ -26,3 +26,7 @@ Journal of the American Statistical Association 107(500),
 fetched-wave3/killick-fearnhead-eckley-2012-pelt-optimal-
 changepoint-linear-cost.pdf
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Chgseg(V)
+}

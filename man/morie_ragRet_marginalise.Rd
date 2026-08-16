@@ -19,3 +19,7 @@ Part of the ragRet_native implementation; see the file header for the source it 
 Nothing; this branch always raises.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_ragRet_marginalise(V, V)
+}

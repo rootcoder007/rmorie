@@ -23,3 +23,7 @@ Unlike \code{boxplot()}, the quartiles come from the ideal fourths.  With
 on the MEDIAN with a sample-size dependent multiplier
 \verb{(17.63 n - 23.64) / (7.74 n - 3.71)}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_boxplot_outliers(V)
+}

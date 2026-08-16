@@ -21,3 +21,7 @@ AIC = -2 log L + 2k, with AICc when \code{n} is given and n - k - 1 > 0
 (entries where it is not stay NA, as Python leaves them NaN).
 \code{best_index} is 0-based, as in Python.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_aic(V, V)
+}

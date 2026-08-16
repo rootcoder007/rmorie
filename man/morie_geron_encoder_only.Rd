@@ -36,3 +36,7 @@ List with \code{total_params}, \code{block_params}, \code{embedding_params},
 \description{
 Encoder-only transformer (BERT-family), resolved to exact param counts (hmencox)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_encoder_only(V)
+}

@@ -18,3 +18,7 @@ List with \code{estimate} (max error), \code{scales_int8}, \code{shared_const}.
 int8 codes for the block scales plus one shared fp32 constant. Rounding
 is banker's rounding in both languages.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_double_quantization(V)
+}

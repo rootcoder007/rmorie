@@ -32,3 +32,7 @@ rule-of-thumb bandwidth.
 Nadaraya (1964), Theory Probab. Appl. 9(1), 141-142,
 \doi{10.1137/1109020}; Watson (1964), Sankhya A 26(4), 359-372.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Naday(V, V)
+}

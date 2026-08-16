@@ -28,3 +28,7 @@ A list with the weights and the unbroken remainder.
     stick-breaking priors." JASA 96(453), 161-173.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_slbpdg_weights(V)
+}

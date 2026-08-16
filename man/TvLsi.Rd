@@ -18,3 +18,7 @@ y(n) = sum_m h(n, m) x(n - m). The convolution sum still holds instant by instan
 A list with \code{y}, \code{n}, \code{kernel_lengths}, \code{shift_invariant}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+TvLsi(V, V)
+}

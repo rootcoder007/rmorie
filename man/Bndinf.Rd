@@ -42,3 +42,8 @@ Journal of Statistical Planning and Inference 138(9), 2786-2807.
 equations (4.2) and (4.10) of Molinari, F. (2021), Handbook of
 Econometrics 7A (arXiv:2004.11751 pp. 89, 97).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+Bndinf(V, D)
+}

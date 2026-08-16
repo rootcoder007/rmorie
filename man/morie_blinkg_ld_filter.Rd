@@ -34,3 +34,7 @@ The kept marker indices, most significant first.
     studies." Biometrics 55(4), 997-1004.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_blinkg_ld_filter(V, V)
+}

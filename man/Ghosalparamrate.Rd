@@ -34,3 +34,6 @@ risk = K-hat/(n + 1) + sum_{k=K-hat}^{d-1} theta_k^2.
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 10.2.2.
 }
+\examples{
+Ghosalparamrate()
+}

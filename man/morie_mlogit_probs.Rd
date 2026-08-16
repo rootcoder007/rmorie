@@ -17,3 +17,7 @@ conditional odds ratios.
 Softmax probabilities (equation 5.3) and the conditional odds ratio
 exp(xb_m - xb_n) (equation 5.4). Mirrors ca5e3 / ca5e4.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_mlogit_probs(V)
+}

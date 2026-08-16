@@ -22,3 +22,7 @@ List with \code{theta}, \code{predict}, \code{fitted}, \code{residuals}, \code{t
 Ridge leaves the intercept unpenalised. The returned \code{predict} closure
 is frozen: new data needs a full retrain, which is what "offline" means.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_batch_learning(V, V)
+}

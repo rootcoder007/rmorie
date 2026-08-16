@@ -20,3 +20,7 @@ Part of the robpca_native implementation; see the file header for the source it 
 A list with \code{outl}, \code{exact_fit_direction}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+outlyingness(M)
+}

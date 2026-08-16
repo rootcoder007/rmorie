@@ -22,3 +22,7 @@ Part of the rangayyan_class2 implementation; see the file header for the source 
 A list with \code{hidden}, \code{cell}, \code{predictions}, \code{accuracy}, \code{readout}, \code{classes}, \code{method}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+Lstm(D)
+}

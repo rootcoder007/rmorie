@@ -24,3 +24,7 @@ is reported so a caller who supplied unnormalised proportions sees it.
 \references{
 Hyndman & Athanasopoulos, FPP3, Sec. 11.3.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Topdown(V, V)
+}

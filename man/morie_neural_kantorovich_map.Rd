@@ -37,3 +37,7 @@ Optimal transport mapping via input convex neural networks. In
 rearrangement of vector-valued functions. \emph{Communications on
 Pure and Applied Mathematics}, 44(4), 375-417.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_neural_kantorovich_map(V, V)
+}

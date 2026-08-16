@@ -24,3 +24,7 @@ tr(K H L H)/n^2 with RBF Gram matrices and the median-heuristic
 bandwidth, mirroring morie.fn.anmod.hsic. threshold is
 caller-supplied; no null distribution is simulated.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_hsicstat(V, V)
+}

@@ -29,3 +29,7 @@ Formula: with
 Zandieh, A., Daliri, M. & Han, I. (2024). arXiv:2406.03482,
 lemma 3.5.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Tqdist(V, V)
+}

@@ -33,3 +33,7 @@ Formula: release b unchanged with probability
 Warner, S. L. (1965). JASA 60:63-69; Dwork & Roth (2014),
 Found Trends Theor Comput Sci 9:211-407, section 3.2.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Rrand(V)
+}

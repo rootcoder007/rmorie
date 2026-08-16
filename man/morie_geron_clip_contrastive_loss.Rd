@@ -26,3 +26,7 @@ List with \code{loss}, \code{loss_i2t}, \code{loss_t2i}, \code{similarity},
 Mean of the image->text and text->image InfoNCE terms with diagonal
 targets. \verb{accuracy_*} compare 0-based argmax to the diagonal.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_clip_contrastive_loss(V, V)
+}

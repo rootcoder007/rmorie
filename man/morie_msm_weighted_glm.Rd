@@ -14,3 +14,7 @@ morie_msm_weighted_glm
 A list with \code{beta}, \code{fitted}, \code{eta}, \code{weights}, \code{family}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_msm_weighted_glm(V, V)
+}

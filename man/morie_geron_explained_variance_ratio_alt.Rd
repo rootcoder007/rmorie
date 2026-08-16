@@ -19,3 +19,7 @@ List with \code{explained_variance_ratio}, \code{explained_variance}, \code{sing
 \description{
 Explained variance ratio from the SVD of the centred data matrix (hmevr)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_explained_variance_ratio_alt(V)
+}

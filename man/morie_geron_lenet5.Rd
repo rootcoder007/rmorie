@@ -19,3 +19,6 @@ List with layers, total_parameters, output_shape, receptive_field, estimate, n, 
 \description{
 LeNet-5 architecture resolution (Geron Ch 12, morie.fn hmlnet)
 }
+\examples{
+morie_geron_lenet5()
+}

@@ -27,3 +27,7 @@ this does not depend on the observed targets at all.
 \references{
 Rasmussen & Williams (2006), eq. (2.24).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Gpvar(V, V)
+}

@@ -33,3 +33,7 @@ the book. The t test on n - 2 degrees of freedom and Fisher's z
 transform are NOT in that section; they are the standard published
 forms (Fisher, 1915, Biometrika 10(4), 507-521).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Pearsonr(V, V)
+}

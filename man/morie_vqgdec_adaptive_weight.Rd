@@ -43,3 +43,7 @@ Zhang, R., Isola, P., Efros, A. A., Shechtman, E. & Wang, O. (2018)
 Metric", CVPR 2018, 586-595, arXiv:1801.03924. The perceptual loss.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_vqgdec_adaptive_weight(V, V)
+}

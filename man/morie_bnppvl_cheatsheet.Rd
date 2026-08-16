@@ -30,3 +30,6 @@ A character scalar.
     measures." The Annals of Statistics 2(4), 615-629.
 }
 \keyword{internal}
+\examples{
+morie_bnppvl_cheatsheet()
+}

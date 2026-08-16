@@ -33,3 +33,7 @@ must return on a degenerate batch.
 \references{
 Gao, Yao & Chen (2021), SimCSE, EMNLP 2021:6894-6910.
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+Contse(M)
+}

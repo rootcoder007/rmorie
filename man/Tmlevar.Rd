@@ -34,3 +34,7 @@ is D*^2 - sigma^2. The plug-in variance it refines is the
 var.psi <- var(IC)/n of the CRAN package tmle 2.1.1 (Gruber & van der
 Laan), which was fetched and read.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Tmlevar(V)
+}

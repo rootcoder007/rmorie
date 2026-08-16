@@ -14,3 +14,7 @@ Kruskal-Wallis H -- eqs. (10.4.2)/(10.4.5)/(10.4.7), pp. 354-358
 A list with \code{statistic}, \code{h_raw}, \code{correction}, \code{df}, \code{p_value}, \code{rank_sums}, \code{rank_means}, \code{k}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Kwh(V)
+}

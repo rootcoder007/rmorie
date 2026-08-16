@@ -15,3 +15,7 @@ Object of class \code{morie_gr_dual}.
 \description{
 Forward-mode autodiff dual number (morie.fn grfad \code{Dual})
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_gr_dual(V)
+}

@@ -37,3 +37,7 @@ the one-step percentage bend location.  \code{morie_mom_estimator} drops
 values more than \code{bend} MADNs from the median and averages the rest.
 \code{morie_one_step_m} is the one-step M-estimator with Huber's Psi.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_harrell_davis(V)
+}

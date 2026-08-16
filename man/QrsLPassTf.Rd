@@ -18,3 +18,7 @@ equivalent finite form (sum_{k=0}^{5} z^-k)^2 / 32 so the apparent pole at z = 1
 A list with \code{freq}, \code{mag}, \code{phase}, \code{b}, \code{a}, \code{fs}, \code{fsnote}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+QrsLPassTf(V)
+}

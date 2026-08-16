@@ -18,3 +18,7 @@ list(edges, removed, nremoved, nkept, nnodes)
 do(X = x) deletes every edge into X and leaves every other
 structural equation untouched.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_dointerv(V, V)
+}

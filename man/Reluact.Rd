@@ -20,3 +20,7 @@ Formula: g(z) = max(0, z);  g'(z) = 1 if z > 0, else 0
 \references{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 10, Sect. 10.3.2 p. 388: g(z) = max(0, z), flat below the threshold and linear above it; Sect. 10.3.3 p. 389 gives the leaky variant with slope alpha below zero (the figure uses alpha = 0.1).  Read from the chapter PDF, not recalled.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Reluact(V)
+}

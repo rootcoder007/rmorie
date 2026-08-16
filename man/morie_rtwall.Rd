@@ -29,3 +29,7 @@ curves for severe acute respiratory syndrome reveal similar
 impacts of control measures. American Journal of Epidemiology,
 160(6), 509-516.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_rtwall(V, V)
+}

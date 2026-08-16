@@ -24,3 +24,6 @@ List with mean, variance, cost (as supplied).
 \description{
 Equations 4.1, 4.2, 4.4, 4.18 of Brus (2022).
 }
+\examples{
+morie_stsi_estimators()
+}

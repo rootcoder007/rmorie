@@ -35,3 +35,7 @@ Formula: f-hat(x*) = k(x*, X) (K + sigma^2 I)^(-1) Y.
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 2.4.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ghosalnpnormalreg(V, V)
+}

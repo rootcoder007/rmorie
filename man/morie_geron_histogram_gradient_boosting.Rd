@@ -33,3 +33,7 @@ List with prediction, train_mse, mse_history, baseline, trees, bins_used, bin_ed
 \description{
 Histogram-based gradient boosting, squared loss (Geron Ch 6, morie.fn hmhgb)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_histogram_gradient_boosting(V, V)
+}

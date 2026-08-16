@@ -28,3 +28,6 @@ Graph Convolutional Networks", ICLR 2017, arXiv:1609.02907. The model
 class being explained.
 }
 \keyword{internal}
+\examples{
+gnnEx_cheatsheet()
+}

@@ -30,3 +30,6 @@ A character scalar.
     defaults and the two split potentials.
 }
 \keyword{internal}
+\examples{
+morie_goldsc_cheatsheet()
+}

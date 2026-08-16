@@ -18,3 +18,7 @@ filter\\'s output the cross-correlation with the template.  Reversal is the whol
 A list with \code{h}, \code{template}, \code{n}, \code{energy}, \code{normalized}, \code{peak_index}, \code{time_reversed}, \code{output_is_the_cross_correlation}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+MfiltH(V)
+}

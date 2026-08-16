@@ -17,3 +17,7 @@ Part of the patchT_native implementation; see the file header for the source it 
 A list with \code{normalised}, \code{mean}, \code{sd}, \code{degenerate}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+instance_norm(V)
+}

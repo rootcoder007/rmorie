@@ -17,3 +17,7 @@ Part of the sarima_native implementation; see the file header for the source it 
 A list with \code{ma}, \code{sma}, \code{ar}, \code{sar}, \code{sigma2}, \code{loglik}, \code{aic}, \code{note}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+r_convention(D)
+}

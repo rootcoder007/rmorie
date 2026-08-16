@@ -23,3 +23,7 @@ Data, Chapter 2. Verified against the reference implementation in the
 CRAN package compositions 2.0-9, whose perturbe is acomp(x * y) --
 the elementwise product, then closed.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Perturb(V, V)
+}

@@ -17,3 +17,7 @@ choose WHICH layers to read and cannot alter the magnitude, which is gamma\\'s j
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+layer_weights(V)
+}

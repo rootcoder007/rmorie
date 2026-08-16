@@ -18,3 +18,7 @@ THE MEAN interval, not the mean of the reciprocals; the two differ whenever the 
 A list with \code{mfr}, \code{mean_idi}, \code{sd_idi}, \code{cv_idi}, \code{idi}, \code{n_discharges}, \code{mean_instantaneous_rate}, \code{duration}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+FiringRate(V)
+}

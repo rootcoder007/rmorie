@@ -20,3 +20,7 @@ OPTICS: reachability ordering and cluster extraction (Geron Ch 8, hmopt)
 A list with \code{ordering}, \code{reachability}, \code{reachability_plot}, \code{core_distances}, \code{labels}, \code{n_clusters}, \code{eps_cluster}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_optics(V)
+}

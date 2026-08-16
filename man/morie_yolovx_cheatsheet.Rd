@@ -27,3 +27,6 @@ Convolutional One-Stage Object Detection", ICCV 2019, 9627-9636,
 arXiv:1904.01355.
 }
 \keyword{internal}
+\examples{
+morie_yolovx_cheatsheet()
+}

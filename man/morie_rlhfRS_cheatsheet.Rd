@@ -29,3 +29,6 @@ A character scalar.
     evaluation of IR techniques." ACM TOIS 20(4), 422-446.
 }
 \keyword{internal}
+\examples{
+morie_rlhfRS_cheatsheet()
+}

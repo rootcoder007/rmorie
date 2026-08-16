@@ -29,3 +29,6 @@ A character scalar.
     Frontiers in Pharmacology 11, 565644.
 }
 \keyword{internal}
+\examples{
+morie_genmol_cheatsheet()
+}

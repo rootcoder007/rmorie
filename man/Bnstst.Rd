@@ -41,3 +41,7 @@ equation (6). \doi{10.1111/j.1468-0262.2004.00555.x}. Stoye, J.
 (2009). More on confidence intervals for partially identified
 parameters. Econometrica 77(4), 1299-1315. \doi{10.3982/ECTA7347}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Bnstst(V, V)
+}

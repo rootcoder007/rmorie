@@ -32,3 +32,6 @@ beta <- beta + step grad - decay beta.
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 10.4.4.
 }
+\examples{
+Ghosalfrspoireg()
+}

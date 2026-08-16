@@ -16,3 +16,7 @@ A list of integer vectors.
 All have the same size in a matroid, which is a consequence of
 exchange rather than an assumption.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_matroid_bases(V, V)
+}

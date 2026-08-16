@@ -18,3 +18,7 @@ tol * d[1] with tol = sqrt(.Machine$double.eps), i.e. ~1.49e-8 of the largest si
 The value of \code{%*%}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+MASS_ginv(V)
+}

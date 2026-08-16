@@ -18,3 +18,7 @@ This is the step that surprises: the quantity being minimized is the thing you k
 A list with \code{e}, \code{v_hat}, \code{n}, \code{input_power}, \code{output_power}, \code{power_reduction}, \code{error_is_the_output}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+AncOut(V, V)
+}

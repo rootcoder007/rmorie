@@ -27,3 +27,7 @@ List with \code{predictions}, \code{tree_predictions}, \code{train_score}, \code
 Split cost delegated to \code{morie_geron_cart_split_cost}; the deterministic
 baseline tree via \code{morie_geron_cart_algorithm}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_extra_trees(V, V)
+}

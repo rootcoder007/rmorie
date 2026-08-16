@@ -31,3 +31,6 @@ A character scalar.
     Oncology 32(22), 2380-2385.
 }
 \keyword{internal}
+\examples{
+morie_crsfst_cheatsheet()
+}

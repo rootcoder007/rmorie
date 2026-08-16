@@ -25,3 +25,6 @@ A character scalar.
     re-analyse, locate the crossing).
 }
 \keyword{internal}
+\examples{
+morie_tipsne_cheatsheet()
+}

@@ -25,3 +25,6 @@ A character scalar.
     doi:10.1089/cmb.2012.0021.
 }
 \keyword{internal}
+\examples{
+morie_metsem_cheatsheet()
+}

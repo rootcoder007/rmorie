@@ -23,3 +23,6 @@ A character scalar.
     Annals of Mathematics and Artificial Intelligence 61(3), 203-230.
 }
 \keyword{internal}
+\examples{
+morie_alfqud_cheatsheet()
+}

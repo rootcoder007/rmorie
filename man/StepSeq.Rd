@@ -18,3 +18,7 @@ u(0) = 1 -- the opposite of eq (3.27).
 A list with \code{u}, \code{n}, \code{shift}, \code{first_difference}, \code{value_at_origin}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+StepSeq(V)
+}

@@ -17,3 +17,7 @@ so it discards the phase and is NOT invertible -- the whole difference from the 
 A list with \code{cepstrum}, \code{log_magnitude}, \code{n}, \code{zero_bins}, \code{invertible}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Cepstrum(V)
+}

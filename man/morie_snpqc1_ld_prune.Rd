@@ -20,3 +20,7 @@ threshold. Returns kept SNP indices (1-based).
 The value of \code{keep}, as built in the body.
 }
 \keyword{internal}
+\examples{
+S <- c("a", "b", "c")
+morie_snpqc1_ld_prune(S)
+}

@@ -24,3 +24,6 @@ transfer-learning MSM across cohorts"; no paper of that title was
 located and the implementation follows Wager (2025).
 }
 \keyword{internal}
+\examples{
+morie_trnsfr_cheatsheet()
+}

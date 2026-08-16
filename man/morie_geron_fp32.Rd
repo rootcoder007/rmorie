@@ -15,3 +15,7 @@ List with \code{value}, \code{sign}, \code{exponent}, \code{mantissa}, \code{rec
 \description{
 IEEE-754 binary32 field decomposition, reconstructed exactly (hmfp32)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_fp32(V)
+}

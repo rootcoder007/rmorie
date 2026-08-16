@@ -20,3 +20,7 @@ ELU(z) = z for z >= 0, alpha * (exp(z) - 1) otherwise. The
 derivative below zero is a + alpha, which is why alpha = 1 is the
 only C1 member of the family.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_elu(V)
+}

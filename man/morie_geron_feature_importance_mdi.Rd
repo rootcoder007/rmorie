@@ -18,3 +18,7 @@ Per-tree impurity decreases normalised to sum 1, then averaged.
 \code{spread} is the ddof = 1 standard deviation; \code{ranking} is 0-based and
 stable (order(method = "radix") matches numpy's stable argsort).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_feature_importance_mdi(V)
+}

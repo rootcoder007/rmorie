@@ -17,3 +17,7 @@ list(odds, logodds, p1, bayesfactor)
 \description{
 Posterior odds from a likelihood ratio and prior odds (eq. 3.21, p. 53)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_postodds(V, V)
+}

@@ -18,3 +18,7 @@ CramerRao(fisher_info, var_estimate = NULL)
 A list with \code{bound}, \code{variance}, \code{se}, \code{information}, \code{k}, \code{efficiency}, \code{attained}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+CramerRao(V)
+}

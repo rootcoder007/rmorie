@@ -19,3 +19,7 @@ Gotway -- a fixed-string search for "polish" returns nothing; the book\\'s trend
 A list with \code{overall}, \code{row}, \code{col}, \code{residuals}, \code{fitted}, \code{abs_residual_sum}, \code{sweeps}, \code{resistant_to_outliers}, \code{nrow}, \code{ncol}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+MedPolish(M)
+}

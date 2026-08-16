@@ -14,3 +14,7 @@ Alias of \code{Rrand}. The generated stub for module locdp described the local m
 The value of \code{Rrand}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Locdp(V)
+}

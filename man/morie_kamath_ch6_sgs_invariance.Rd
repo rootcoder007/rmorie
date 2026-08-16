@@ -17,3 +17,7 @@ List with \code{estimate}, \code{per_pair}, \code{n_invariant}.
 \description{
 psi(original, counterfactual); 1 means unchanged.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_ch6_sgs_invariance(V, V)
+}

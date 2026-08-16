@@ -19,3 +19,7 @@ No native float16 in base R; the underflow/overflow analysis and the loss-scale 
 A list with \code{fp16_weights}, \code{overflow}, \code{weight_overflow}, \code{n_underflow}, \code{loss_scale}, \code{max_safe_loss_scale}, \code{recommended_loss_scale}, \code{memory_bytes_fp32}, \code{memory_bytes_fp16}, \code{fp16_max}, \code{fp16_min_normal}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_mixed_precision(V)
+}

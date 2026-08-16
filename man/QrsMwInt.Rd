@@ -19,3 +19,7 @@ multiple peaks.  The book found N = 30 at fs = 200 Hz, i.e. 150 ms, and supplyin
 A list with \code{y}, \code{nwin}, \code{widthsec}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+QrsMwInt(V)
+}

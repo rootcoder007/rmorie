@@ -14,3 +14,7 @@ Lilliefors test for normality -- Sec. 4.5, p. 126; Table O
 A list with \code{statistic}, \code{dcrit}, \code{reject}, \code{mean}, \code{sd}, \code{n}, \code{n_table}, \code{alpha}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Lillienorm(V)
+}

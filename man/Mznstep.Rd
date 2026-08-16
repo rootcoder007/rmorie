@@ -27,3 +27,7 @@ Schrittwieser et al. (2020), Nature 588, 604-609;
 arXiv:1911.08265, Methods (training targets) and Equation (3).  Read
 from the ar5iv rendering of the arXiv source.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Mznstep(V, V)
+}

@@ -18,3 +18,7 @@ Part of the comet_native implementation; see the file header for the source it f
 A list with \code{tau}, \code{concordant}, \code{discordant}, \code{n_segments}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+kendall_tau(V, V)
+}

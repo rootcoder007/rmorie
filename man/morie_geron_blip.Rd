@@ -22,3 +22,7 @@ ITC is symmetric InfoNCE over the cosine matrix / tau; ITM is binary
 cross-entropy of the matched pairs against the batch rotated by one;
 LM is the mean negative caption log-probability when supplied.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_blip(V, V)
+}

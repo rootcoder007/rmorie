@@ -20,3 +20,7 @@ Integer codes against a fixed level order; the codes are 0-based to
 match Python. Implies order AND equal spacing, which is why one-hot
 is the safer default for a linear model.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_ordinal_encoding(V)
+}

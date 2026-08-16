@@ -19,3 +19,7 @@ List with \code{prediction}, \code{per_instance_variance},
 Mean / median / hard-vote aggregation, with the across-predictor
 variance (ddof = 1, matching grbag) as the disagreement diagnostic.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_bagging_predictor(V)
+}

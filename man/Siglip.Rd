@@ -34,3 +34,7 @@ Formula:
 Zhai, Mustafa, Kolesnikov & Beyer (2023). ICCV 2023,
 equation (3).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Siglip(V, V)
+}

@@ -20,3 +20,7 @@ uniform grid this is the discrete convolution SCALED BY dt; dropping the dt is h
 A list with \code{y}, \code{t}, \code{dt}, \code{n}, \code{m}, \code{integral}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+ContConv(V, V)
+}

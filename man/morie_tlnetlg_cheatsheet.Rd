@@ -42,3 +42,6 @@ doi:10.1214/14-STS501.
 """
 }
 \keyword{internal}
+\examples{
+morie_tlnetlg_cheatsheet()
+}

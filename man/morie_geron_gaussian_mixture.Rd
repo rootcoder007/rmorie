@@ -29,3 +29,7 @@ List with \code{weights}, \code{means}, \code{covariances}, \code{responsibiliti
 \description{
 Gaussian mixture model fit via EM, log-space responsibilities (hmgmm)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_gaussian_mixture(V)
+}

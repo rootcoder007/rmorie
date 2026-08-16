@@ -18,3 +18,7 @@ Computes \code{|sum_j w_j exp(-i omega j)|} with the weight vector centred on it
 Numeric magnitude.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_crfflt_frequency_response(V, V)
+}

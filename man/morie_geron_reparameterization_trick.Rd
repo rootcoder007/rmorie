@@ -22,3 +22,7 @@ z = mu + exp(0.5 logvar) eps; the 0.5 is load-bearing. The LCG normal
 stream here CLAMPS u1 at 1e-12 before the log, unlike the grhei /
 grgrp / grdpmf streams, and always fills whole Box-Muller pairs.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_reparameterization_trick(V, V)
+}

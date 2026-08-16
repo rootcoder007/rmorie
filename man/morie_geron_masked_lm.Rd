@@ -32,3 +32,7 @@ List with loss, baseline_loss, perplexity, masked_positions, targets, probabilit
 \description{
 Mask positions via the shared LCG stream, not numpy PCG64 choice.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_masked_lm(V)
+}

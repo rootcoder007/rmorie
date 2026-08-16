@@ -30,3 +30,7 @@ marginal.
 Robbins (1956), Proc. 3rd Berkeley Symp. 1:157-163;
 Efron (2011), JASA 106(496):1602-1614.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Empbnp(V)
+}

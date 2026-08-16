@@ -19,3 +19,6 @@ Resolves the entry/middle(x8)/exit flow into concrete layers, shapes
 and parameter counts; separable convs cost k\emph{k}c_in + c_in\emph{c_out,
 batch norm 2}C trainable + 2*C non-trainable per layer.
 }
+\examples{
+morie_geron_xception()
+}

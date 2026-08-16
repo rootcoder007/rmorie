@@ -18,3 +18,7 @@ Part of the k02util implementation; see the file header for the source it follow
 The value of \code{stats::qt}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+k02tq(V, V)
+}

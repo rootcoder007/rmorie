@@ -21,3 +21,7 @@ list(inputs, target, spans) where spans is a list of c(start0, length) pairs (0-
 \description{
 T5 span-corruption masking (encoder input / decoder target / spans)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_span_corrupt(V)
+}

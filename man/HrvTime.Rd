@@ -17,3 +17,7 @@ define them; the definitions are the Task Force ones, Circulation 93(5):1043- 10
 A list with \code{sdnn}, \code{rmssd}, \code{nn50}, \code{pnn50}, \code{meannn}, \code{meanhr}, \code{n}, \code{units}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+HrvTime(V)
+}

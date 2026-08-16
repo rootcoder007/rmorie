@@ -33,3 +33,7 @@ a list with paired, species_paired, unpaired, n_paired,   n_unpaired, n_rows, n_
     Communications 13, 1265, doi:10.1038/s41467-022-28865-w
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_alfmpv_msa_pairing(V)
+}

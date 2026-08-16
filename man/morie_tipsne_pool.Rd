@@ -31,3 +31,7 @@ A list with the pooled estimate, standard error, degrees of   freedom, t statist
     re-analyse, locate the crossing).
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_tipsne_pool(V, V)
+}

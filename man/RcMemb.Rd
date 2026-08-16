@@ -21,3 +21,7 @@ Part of the rangayyan_phys implementation; see the file header for the source it
 A list with \code{t_ms}, \code{V_mV}, \code{tau_ms}, \code{V_steady_mV}, \code{input_resistance_MOhm}, \code{peak_mV}, \code{final_mV}, \code{V_rest_mV}, \code{units}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+RcMemb(V)
+}

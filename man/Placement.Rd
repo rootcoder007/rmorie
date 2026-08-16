@@ -14,3 +14,7 @@ Placements of Y among the X order statistics -- Sec. 2.11, p. 65
 A list with \code{placements}, \code{ranks}, \code{blocks}, \code{total}, \code{m}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Placement(V, V)
+}

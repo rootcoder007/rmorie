@@ -23,3 +23,7 @@ to trimmed means.  \code{morie_brunner_dette_munk} is the fully
 nonparametric rank-based alternative of Brunner, Dette and Munk
 (1997), which assumes nothing about the shapes of the distributions.
 }
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+morie_trimmed_mean_anova(D)
+}

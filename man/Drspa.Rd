@@ -36,3 +36,7 @@ multipliers, and spatial econometrics. International Regional
 Science Review 26(2), 153-166.  Sant'Anna, P. H. C. and Zhao, J.
 (2020). Journal of Econometrics 219(1), 101-122.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Drspa(V, V)
+}

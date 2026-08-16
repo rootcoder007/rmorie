@@ -20,3 +20,6 @@ Part of the qrntcq_native implementation; see the file header for the source it 
 A list with \code{estimate}, \code{optimal.t.R}, \code{efficacy.at.optimum}, \code{utility.at.optimum}, \code{curve}, \code{t.Q}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_qrntcq_optimal_duration()
+}

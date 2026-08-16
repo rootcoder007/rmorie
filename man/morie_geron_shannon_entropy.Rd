@@ -18,3 +18,7 @@ List with \code{entropy}, \code{proportions}, \code{classes}, \code{counts},
 \description{
 Shannon entropy (Geron Eq 5-3, morie.fn grent)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_shannon_entropy(V)
+}

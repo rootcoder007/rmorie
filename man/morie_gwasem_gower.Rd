@@ -17,3 +17,7 @@ Scales the relatedness matrix to sample variance 1 so that \code{sigma_a^2} is o
 Centred matrix.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_gwasem_gower(M)
+}

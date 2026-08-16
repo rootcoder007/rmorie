@@ -38,3 +38,7 @@ Altschul, S. F., Gish, W., Miller, W., Myers, E. W.
 and Lipman, D. J. (1990). Basic local alignment search tool.
 Journal of Molecular Biology, 215(3), 403-410.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_blastp(V, V)
+}

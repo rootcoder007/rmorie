@@ -36,3 +36,6 @@ estimate is the posterior mean sum_K K pi(K | y).
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 10.4.
 }
+\examples{
+Ghosalrndseriespr()
+}

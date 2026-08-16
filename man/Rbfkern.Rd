@@ -22,3 +22,7 @@ Formula: K(x_i, x_j) = exp(-gamma * ||x_i - x_j||^2)
 \references{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 8, Sect. 8.2.2 pp. 263-264.  The book prints the Gaussian kernel through its R implementation K.radial, which computes exp(-gamma * ||x1 - x2||^2); gamma, not a variance-style bandwidth, is the parameter the text discusses on p. 264.  The placeholder this replaced carried a 1/(2h^2) parameterization that the book does not use.  Read from the chapter PDF, not recalled.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Rbfkern(V)
+}

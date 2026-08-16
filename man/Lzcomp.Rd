@@ -27,3 +27,7 @@ parse; normalised, \code{C(s) log_a(n) / n}.
 Lempel, A. & Ziv, J. (1976). IEEE Trans Inform Theory
 22:75-81.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Lzcomp(V)
+}

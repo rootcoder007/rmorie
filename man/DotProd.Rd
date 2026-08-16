@@ -19,3 +19,7 @@ it normalizes to.  The book notes the means may be removed first (eq 3.97), whic
 A list with \code{dot_product}, \code{gamma}, \code{energy_x}, \code{energy_y}, \code{n}, \code{mean_removed}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+DotProd(V, V)
+}

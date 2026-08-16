@@ -20,3 +20,7 @@ resampled onto a uniform grid (4 Hz, comfortably above the 0.4 Hz top of the HF 
 The value of \code{fit}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+HrvAr(V)
+}

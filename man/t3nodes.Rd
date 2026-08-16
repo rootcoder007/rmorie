@@ -18,3 +18,6 @@ Part of the t3util implementation; see the file header for the source it follows
 A list with \code{u}, \code{w}.
 }
 \keyword{internal}
+\examples{
+t3nodes()
+}

@@ -19,3 +19,7 @@ Quoted from p. 569: sMAPE = (1/H) sum_t 200 |e_t| / (|y_t| +
 |yhat_t|). Note the 200: the symmetric denominator is the SUM of
 the magnitudes, not their average.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_smape(V, V)
+}

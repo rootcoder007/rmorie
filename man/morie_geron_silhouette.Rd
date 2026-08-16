@@ -21,3 +21,7 @@ s(i) = (b(i) - a(i)) / max(a(i), b(i)); a(i) mean distance to own
 cluster (self excluded), b(i) smallest mean distance to any other
 cluster. Singleton clusters score 0 by convention.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_silhouette(V, V)
+}

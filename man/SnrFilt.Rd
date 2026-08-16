@@ -18,3 +18,7 @@ known clean reference.  This penalises distortion as well as leftover noise -- c
 A list with \code{snr_db}, \code{residual_power}, \code{signal_power}, \code{residual}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+SnrFilt(V, V)
+}

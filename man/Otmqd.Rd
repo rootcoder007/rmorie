@@ -33,3 +33,7 @@ equal to \code{(1/n) sum_i min_k ||x_i - c_k||^2} -- Pollard (1982).
 Pollard, D. (1982). IEEE Transactions on Information Theory
 28(2):199-205. \doi{10.1109/TIT.1982.1056481}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Otmqd(V, V)
+}

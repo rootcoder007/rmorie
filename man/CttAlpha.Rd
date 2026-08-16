@@ -16,3 +16,7 @@ n_items, n)
 \description{
 Cronbach (1951) coefficient alpha
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+CttAlpha(M)
+}

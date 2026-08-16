@@ -23,3 +23,6 @@ Part of the rangayyan_ccf implementation; see the file header for the source it 
 A list with \code{x}, \code{t}, \code{n}, \code{fs}, \code{f1}, \code{f2}, \code{a1}, \code{a2}, \code{components_are_known_by_construction}, \code{method}.
 }
 \keyword{internal}
+\examples{
+SinCosTest()
+}

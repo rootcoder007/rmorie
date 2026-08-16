@@ -27,3 +27,6 @@ A character scalar.
     classification and prediction." IBM internal report.
 }
 \keyword{internal}
+\examples{
+morie_phacf3_cheatsheet()
+}

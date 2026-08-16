@@ -14,3 +14,7 @@ Natural indirect effect (Zheng & van der Laan 2012)
 A list with \code{estimate}, \code{se}, \code{mean_y11}, \code{mean_y10}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Nieff(V, V)
+}

@@ -33,3 +33,6 @@ phi_k(t) = sqrt(2) cos(k pi t).
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, Examples 11.4 and 11.16.
 }
+\examples{
+Ghosalseriesgp()
+}

@@ -19,3 +19,7 @@ for a real signal S(k) is even-symmetric about fs/2, so summing the whole period
 A list with \code{total_power}, \code{mean_frequency}, \code{median_frequency}, \code{variance}, \code{bandwidth}, \code{skewness}, \code{kurtosis}, \code{fm3}, \code{fm4}, \code{n_bins}, \code{uniformity}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+SpecMoments(V)
+}

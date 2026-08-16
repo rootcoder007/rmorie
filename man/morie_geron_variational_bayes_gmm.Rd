@@ -29,3 +29,7 @@ responsibility uses E[log pi_k] = psi(alpha_k) - psi(sum alpha) via
 \code{morie_geron_digamma}, which prunes unneeded components as
 alpha0 -> 0.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_variational_bayes_gmm(V)
+}

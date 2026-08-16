@@ -63,3 +63,7 @@ Schabenberger Ch 8, Sec 8.2.1, eq (8.1), pp. 422-423.
 Hughes-Oliver, Gonzalez-Farias, Lu and Chen (1998), Statistics &
 Probability Letters 40:267-278.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+spnst(V)
+}

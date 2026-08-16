@@ -46,3 +46,7 @@ doi:10.18653/v1/N19-1423. The single-token masking objective span
 corruption replaces.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+t5enc_format_regression(V)
+}

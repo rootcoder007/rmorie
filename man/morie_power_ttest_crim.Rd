@@ -43,3 +43,6 @@ with power from the Johnson-Kramer noncentral-t approximation,
 lambda equals n f squared (8.5) and R squared from f squared (8.7).
 Mirrors ca8e1 to ca8e7.
 }
+\examples{
+morie_power_ttest_crim()
+}

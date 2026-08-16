@@ -14,3 +14,7 @@ Spearman rank correlation -- Sec. 11.3, eq. (11.3.2), p. 407
 A list with \code{statistic}, \code{r_shortcut}, \code{sumd2}, \code{tied}, \code{var}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Spearrho(V, V)
+}

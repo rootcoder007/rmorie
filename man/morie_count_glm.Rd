@@ -39,3 +39,6 @@ rate ratio exp(b), offset prediction (6.7), quasi-Poisson theta and
 adjusted standard error, and the negative binomial variance mu plus
 mu squared alpha (6.8). Mirrors ca6e1 to ca6e8.
 }
+\examples{
+morie_count_glm()
+}

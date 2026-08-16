@@ -19,3 +19,7 @@ Part of the clrnt_native implementation; see the file header for the source it f
 A list with \code{afe}, \code{fold_underprediction}, \code{rmse}, \code{esf}, \code{average_esf}, \code{within_fold}, \code{beyond_fold}, \code{n}, \code{fold}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+prediction_accuracy(V, V)
+}

@@ -17,3 +17,7 @@ sample at every frequency.  Constant group delay is what "no phase distortion" m
 A list with \code{phase}, \code{omega}, \code{group_delay}, \code{slope}, \code{linear_phase}, \code{constant_group_delay}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+HannPh(V)
+}

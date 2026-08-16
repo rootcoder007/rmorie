@@ -32,3 +32,7 @@ Shuffle order via the shared LCG stream, not numpy PCG64. With
 batch_size == nrow(X) (the default) descent is full-batch and
 shuffle-independent, so the anchor is exact.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_linreg_pytorch(V, V)
+}

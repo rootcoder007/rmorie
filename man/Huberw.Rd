@@ -29,3 +29,7 @@ Huber (1964), Robust estimation of a location parameter,
 Annals of Mathematical Statistics 35(1):73-101.
 \doi{10.1214/aoms/1177703732}
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Huberw(V)
+}

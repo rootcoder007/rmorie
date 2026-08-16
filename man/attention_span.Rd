@@ -18,3 +18,7 @@ Part of the sasRec_native implementation; see the file header for the source it 
 A list with \code{mean_lookback}, \code{mass_on_last}, \code{effective_order}, \code{note}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+attention_span(M)
+}

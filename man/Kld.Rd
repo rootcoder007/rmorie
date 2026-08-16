@@ -18,3 +18,7 @@ NOTE THE ARGUMENT ORDER -- the book weights by the SECOND PDF, so its KLD(p1, p2
 A list with \code{kld}, \code{reversed}, \code{symmetric_sum}, \code{asymmetric}, \code{weighted_by_the_second_pdf}, \code{symmetric_sum_is_the_divergence_of_eq_10_115}, \code{nonnegative}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Kld(V, V)
+}

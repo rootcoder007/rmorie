@@ -39,3 +39,7 @@ Semiparametric Inference, Section 2.2.3 and Theorem 2.6. Fetched as
 the full text of the book.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Bootemp(V)
+}

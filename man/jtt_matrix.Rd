@@ -18,3 +18,6 @@ Part of the mafft_native implementation; see the file header for the source it f
 A list with \code{matrix}, \code{freqs}, \code{P}, \code{Q}, \code{pam}, \code{rate}.
 }
 \keyword{internal}
+\examples{
+jtt_matrix()
+}

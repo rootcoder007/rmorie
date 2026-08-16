@@ -30,3 +30,7 @@ with \code{morie_geron_silhouette}, and delegates compression to
 \code{morie_geron_autoencoder} (both from geron_ml_native.R / this
 shard).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_unsupervised_learning(V)
+}

@@ -18,3 +18,7 @@ difference of the LOG spectra.  Taking logs is what makes it scale-free -- a pur
 A list with \code{sem}, \code{log_difference}, \code{n_bins}, \code{mean_offset}, \code{shape_only}, \code{gain_change_only}, \code{zero_bins}, \code{scale_free}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Sem(V, V)
+}

@@ -18,3 +18,7 @@ to different parts of the complex; the mix has its peak reliably inside it.
 A list with \code{y2}, \code{w0}, \code{w1}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+QrsDerivMx(V, V)
+}

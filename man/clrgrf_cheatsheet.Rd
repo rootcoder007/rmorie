@@ -14,3 +14,6 @@ Part of the clrgrf_native implementation; see the file header for the source it 
 A character value.
 }
 \keyword{internal}
+\examples{
+clrgrf_cheatsheet()
+}

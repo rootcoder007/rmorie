@@ -18,3 +18,7 @@ The Kamath Ch 2 pretraining loss family (Eq 2.20-2.33)
 A list with \code{estimate}, \code{components}, \code{lambdas}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_kamath_ssl_loss(V)
+}

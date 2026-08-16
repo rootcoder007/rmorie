@@ -15,3 +15,7 @@ Nested list tree (see module header for node shapes).
 \description{
 Parse an arithmetic expression string into an R tree
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_symd_parse(V)
+}

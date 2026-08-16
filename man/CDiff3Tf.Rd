@@ -18,3 +18,7 @@ first-order difference in series with a two-point moving average, so it may be b
 A list with \code{H}, \code{z}, \code{T}, \code{cascade}, \code{max_difference}, \code{cascade_agrees}, \code{zeros}, \code{bandpass}, \code{is_first_difference_times_two_point_ma}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+CDiff3Tf(V)
+}

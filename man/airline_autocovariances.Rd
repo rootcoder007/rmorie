@@ -19,3 +19,7 @@ Part of the sarima_native implementation; see the file header for the source it 
 A list with \code{gamma}, \code{rho}, \code{rho_1}, \code{rho_12}, \code{nonzero_lags}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+airline_autocovariances(V, V)
+}

@@ -29,3 +29,6 @@ A character scalar.
     124-132.
 }
 \keyword{internal}
+\examples{
+morie_alf3df_cheatsheet()
+}

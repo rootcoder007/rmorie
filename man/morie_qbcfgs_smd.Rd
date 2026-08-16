@@ -39,3 +39,7 @@ The standardised mean difference.
     113(523), 1228-1242.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_qbcfgs_smd(V, V)
+}

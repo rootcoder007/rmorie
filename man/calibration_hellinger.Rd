@@ -18,3 +18,7 @@ Well defined at zeros and less brutal than KL where \eqn{p} is small -- the pape
 Numeric scalar, the Hellinger distance.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+calibration_hellinger(V, V)
+}

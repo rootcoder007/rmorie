@@ -19,3 +19,7 @@ when the swing since the LAST COUNTED TURN exceeds the threshold (100 microvolts
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+TurnsCount(V)
+}

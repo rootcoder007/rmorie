@@ -26,3 +26,6 @@ studies with a sustained exposure period", Mathematical Modelling
 problem and the weighted solution were first set out.
 }
 \keyword{internal}
+\examples{
+morie_tdcvar_cheatsheet()
+}

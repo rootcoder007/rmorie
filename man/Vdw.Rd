@@ -14,3 +14,7 @@ van der Waerden test -- Sec. 8.3.2, p. 301
 A list with \code{statistic}, \code{z}, \code{p_value}, \code{mean}, \code{var}, \code{scores}, \code{m}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Vdw(V, V)
+}

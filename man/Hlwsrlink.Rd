@@ -14,3 +14,7 @@ Hodges-Lehmann estimator and Walsh counting identity -- pp. 209-210
 A list with \code{estimate}, \code{tplus}, \code{tminus}, \code{nbelow}, \code{nequal}, \code{nabove}, \code{nwalsh}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Hlwsrlink(V)
+}

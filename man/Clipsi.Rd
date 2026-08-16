@@ -31,3 +31,7 @@ and the reported accuracy is how often that argmax is the diagonal.
 Radford et al. (2021), Learning Transferable Visual
 Models From Natural Language Supervision, ICML 139:8748-8763.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Clipsi(V, V)
+}

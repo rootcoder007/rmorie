@@ -17,3 +17,7 @@ morie_alammar_simcse_dropout_aug
 A list with \code{estimate}, \code{losses}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_alammar_simcse_dropout_aug(V, V)
+}

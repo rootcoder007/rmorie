@@ -34,3 +34,7 @@ ponytail: exact optimum by exhaustive search, capped at maxn tracks.
 The Hungarian algorithm the book names gives the same answer in
 O(n^3) -- swap it in if n ever exceeds a handful.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_trkassign(V)
+}

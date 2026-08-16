@@ -31,3 +31,7 @@ Stocking, M. L. and Lord, F. M. (1983). Developing a
 common metric in item response theory. Applied Psychological
 Measurement, 7, 201-210.  Weeks, J. P. (2010). JSS, 35(12).
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_linkqp(M, M)
+}

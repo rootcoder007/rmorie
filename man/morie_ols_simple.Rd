@@ -19,3 +19,7 @@ Slope, intercept, correlation and slope t-test computed exactly as
 Weisburd et al. (2022) equations 2.2 to 2.6. Mirrors morie.fn ca2e1
 to ca2e6.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_ols_simple(V, V)
+}

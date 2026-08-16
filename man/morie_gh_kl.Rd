@@ -22,3 +22,7 @@ Renormalises both inputs to sum to one and returns
 of \code{p}. Zeros in \code{q} are floored at \code{1e-300} rather
 than returning \code{Inf}, so the result is always finite.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_gh_kl(V, V)
+}

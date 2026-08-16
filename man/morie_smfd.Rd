@@ -23,3 +23,7 @@ Penalised least squares on a B-spline basis with a difference penalty on the coe
 A list with \code{estimate} (the effective dimension),   \code{coefficients}, \code{fitted}, \code{residuals},   \code{rss}, \code{hat_diagonal}, \code{effective_dimension},   \code{knots}, \code{degree}, \code{nseg}, \code{order},   \code{lam}, \code{n}, \code{p}, \code{sigma2}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_smfd(V, V)
+}

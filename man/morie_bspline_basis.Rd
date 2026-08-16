@@ -18,3 +18,7 @@ A matrix with one column per basis function.
 Equally spaced interior knots with boundary knots repeated
 \code{degree + 1} times, so the basis spans the interval and sums to one.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_bspline_basis(V)
+}

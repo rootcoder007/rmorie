@@ -18,3 +18,7 @@ parallel structure see the same input.
 A list with \code{s2}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+LsiPar2(V, V)
+}

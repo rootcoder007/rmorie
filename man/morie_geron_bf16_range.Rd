@@ -20,3 +20,7 @@ range diagnostics: bf16 shares fp32's exponent range, so overflow is
 rare and the cost is precision (machine epsilon 2^-7). NaN input is
 rejected here, unlike hmbf16.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_bf16_range(V)
+}

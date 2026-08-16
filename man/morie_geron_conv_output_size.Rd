@@ -23,3 +23,7 @@ List with \code{out_size}, \code{receptive_field}, \code{same_padding},
 out = floor((in + 2p - d(k-1) - 1)/s) + 1. \code{dropped_cells} counts the
 input columns no window ever covers.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_conv_output_size(V, V)
+}

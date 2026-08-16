@@ -23,3 +23,7 @@ estimate, n, method. lookup is a function(token_or_char_vector).
 Embedding table as a lookup (row i is the token's vector), LCG-init
 or a supplied pretrained matrix, plus the cosine-similarity matrix.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_word_embeddings(V)
+}

@@ -14,3 +14,7 @@ Mann-Whitney U -- Sec. 6.6, eqs. (6.6.1), (6.6.14), p. 260
 A list with \code{statistic}, \code{p_value}, \code{z}, \code{p_normal}, \code{mean}, \code{var}, \code{m}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Mwu(V, V)
+}

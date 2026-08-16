@@ -24,3 +24,7 @@ List with \code{tree}, \code{n_leaves}, \code{baseline_leaves}, \code{leaves_sav
 \description{
 Tree regularization: constrained vs unconstrained CART (hmdtr)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_tree_regularization(V, V)
+}

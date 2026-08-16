@@ -19,3 +19,7 @@ List with \code{activation}, \code{derivative}, \code{n_active},
 1 above zero, 0 below, \code{at_zero} exactly at zero. The derivative is
 zero almost everywhere, so the result carries that warning.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_heaviside(V)
+}

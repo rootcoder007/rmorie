@@ -17,3 +17,6 @@ Solves for the upper-tail quantile \code{z} of the standard normal at level \cod
 A named list with keys \code{threshold}, \code{z},   \code{alpha}, \code{note}.
 }
 \keyword{internal}
+\examples{
+morie_threshold()
+}

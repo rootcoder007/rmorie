@@ -38,3 +38,7 @@ add-one-smoothed bigram LM estimated on the target, giving a genuine
 cross-entropy in nats per token. \code{spans} entries are 0-based
 c(start, length).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_bart(V, V)
+}

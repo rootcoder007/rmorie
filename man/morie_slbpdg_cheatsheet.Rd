@@ -25,3 +25,6 @@ A character scalar.
     stick-breaking priors." JASA 96(453), 161-173.
 }
 \keyword{internal}
+\examples{
+morie_slbpdg_cheatsheet()
+}

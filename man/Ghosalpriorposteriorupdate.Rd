@@ -39,3 +39,7 @@ sequential accumulates the same terms one at a time.
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 1.3.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ghosalpriorposteriorupdate(V)
+}

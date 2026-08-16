@@ -17,3 +17,7 @@ A list with components \code{comm}, \code{sweeps}, \code{estimate}, \code{commun
 ' Source consulted: Blondel, Guillaume, Lambiotte and Lefebvre (2008), JSTAT
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+sgtcoml(M)
+}

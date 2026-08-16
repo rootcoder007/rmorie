@@ -30,3 +30,6 @@ ts_variance, s2_psu, true_variance (as supplied).
 \description{
 Equations 6.4, 6.9, 6.10, 7.2, 7.3, 7.7, 7.8, 7.13 of Brus (2022).
 }
+\examples{
+morie_cluster_twostage()
+}

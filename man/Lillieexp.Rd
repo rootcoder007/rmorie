@@ -14,3 +14,7 @@ Lilliefors test for exponentiality -- Sec. 4.6, p. 133; Table T
 A list with \code{statistic}, \code{dcrit}, \code{reject}, \code{mean}, \code{n}, \code{n_table}, \code{alpha}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Lillieexp(V)
+}

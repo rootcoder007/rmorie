@@ -20,3 +20,7 @@ Rotate each channel pair (2i, 2i+1) by \code{pos * theta_i}.
 The rotated vector.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_mistr_apply_rope(V, V)
+}

@@ -30,3 +30,8 @@ Chernozhukov, Hong and Tamer (2007) as given in equation (4.10) of
 Molinari, F. (2021), Handbook of Econometrics 7A (arXiv:2004.11751
 p. 97).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+Bnscnf(V, D)
+}

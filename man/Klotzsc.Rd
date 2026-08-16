@@ -14,3 +14,7 @@ Klotz normal-scores scale test -- eq. (9.5.1), p. 322
 A list with \code{statistic}, \code{mean}, \code{var}, \code{z}, \code{p_value}, \code{scores}, \code{m}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Klotzsc(V, V)
+}

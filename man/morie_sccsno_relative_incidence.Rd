@@ -28,3 +28,7 @@ Whitaker, H. J., Farrington, C. P., Spiessens, B. & Musonda, P.
 method", Statistics in Medicine 25, 1768-1797, doi:10.1002/sim.2302.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+morie_sccsno_relative_incidence(D)
+}

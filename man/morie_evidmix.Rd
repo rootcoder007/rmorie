@@ -17,3 +17,7 @@ list(evidence, terms, posterior)
 \description{
 Total evidence over a set of models (eq. 3.19, p. 53)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_evidmix(V, V)
+}

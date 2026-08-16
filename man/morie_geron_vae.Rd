@@ -19,3 +19,7 @@ loss_curve, params, beta, estimate, n, method.
 z = mu + sigma\emph{eps (reparameterisation trick), trained by gradient
 descent on the negative ELBO = recon MSE + beta}KL(q||N(0,I)).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_vae(V)
+}

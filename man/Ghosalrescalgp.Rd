@@ -33,3 +33,6 @@ Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, Example 11.11 and
 section 11.5.
 }
+\examples{
+Ghosalrescalgp()
+}

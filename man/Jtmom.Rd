@@ -14,3 +14,7 @@ JT null moments -- eqs. (10.6.2)-(10.6.3), pp. 365-366
 A list with \code{mean}, \code{mean_pairwise}, \code{var}, \code{sd}, \code{k}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Jtmom(V)
+}

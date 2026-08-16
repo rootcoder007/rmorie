@@ -32,3 +32,6 @@ so the expected mass on \link{0, t_max} is H0(t_max) = t_max.
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 13.3.2.
 }
+\examples{
+Ghosalbpcont()
+}

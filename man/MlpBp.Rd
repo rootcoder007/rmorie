@@ -24,3 +24,7 @@ Part of the rangayyan_class2 implementation; see the file header for the source 
 A list with \code{weights}, \code{offsets}, \code{predictions}, \code{outputs}, \code{classes}, \code{accuracy}, \code{mse}, \code{iterations}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+MlpBp(V, V)
+}

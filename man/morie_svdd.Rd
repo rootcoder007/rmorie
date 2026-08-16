@@ -25,3 +25,7 @@ Part of the svdd_native implementation; see the file header for the source it fo
 A list with \code{estimate}, \code{alpha}, \code{R2}, \code{radius}, \code{center}, \code{support_}, \code{boundary_}, \code{bounded_}, \code{n_support}, \code{degenerate}, \code{distance2}, \code{outlier_fraction}, \code{outlier_bound}, \code{decision}, \code{predict}, \code{C}, \code{kernel}, \code{gamma}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_svdd(V)
+}

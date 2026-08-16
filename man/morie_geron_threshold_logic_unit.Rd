@@ -19,3 +19,7 @@ List with \code{output} and \code{margin}.
 \description{
 h(x) = 1 iff w.x + b >= 0; one hyperplane only, so no XOR.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_threshold_logic_unit(V, V)
+}

@@ -18,3 +18,7 @@ Measures how well \code{E} preserves the pairwise squared distances of \code{A},
 A list with \code{worst_distortion}, \code{min_ratio},   \code{max_ratio}, \code{mean_ratio}, \code{n_pairs}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+distortion(V, V)
+}

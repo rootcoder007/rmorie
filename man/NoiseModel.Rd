@@ -18,3 +18,7 @@ uncorrelated, so the sample correlation is measured and both the observed and th
 A list with \code{y}, \code{mean_signal}, \code{mean_noise}, \code{mean_observed}, \code{mean_additive}, \code{variance_observed}, \code{variance_additive}, \code{covariance}, \code{correlation}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+NoiseModel(V, V)
+}

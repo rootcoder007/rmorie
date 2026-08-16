@@ -19,3 +19,7 @@ Reads are broken into k-mers; vertices are (k-1)-mers and each k-mer is an edge.
 A named list with keys matching the Python payload:   estimate, sequence, path, contigs, unambiguous,   length_is_lower_bound, branching, n_kmers, n_vertices, graph,   k, multiplicity, note, method.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+morie_asmnvr(D)
+}

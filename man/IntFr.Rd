@@ -17,3 +17,7 @@ book does.  The gain falls as frequency rises, so it is a lowpass, and it is unb
 A list with \code{H}, \code{omega}, \code{lowpass}, \code{dc_term_set_aside}, \code{gain_falls_nonlinearly_with_frequency}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+IntFr(V)
+}

@@ -14,3 +14,7 @@ Degrees must vanish relative to :math:`N`, and the network must be symmetric -- 
 A list with \code{max_degree}, \code{max_share}, \code{sparse}, \code{asymmetric_edges}, \code{symmetric}, \code{note}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+check_network_assumption(V)
+}

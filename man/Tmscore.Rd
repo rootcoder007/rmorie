@@ -29,3 +29,7 @@ Formula: \code{TM = (1/L_ref) sum_i 1/(1 + (d_i/d_0)^2)},
 Zhang, Y. & Skolnick, J. (2004). Proteins 57:702-710,
 equations (2) and (3).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Tmscore(V, V)
+}

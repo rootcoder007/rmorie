@@ -19,3 +19,7 @@ Equation (3.132): the first difference with a pole placed just inside the unit c
 A list with the transfer function \code{H} at the requested   points and the parameters it was built from.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+BWander(V)
+}

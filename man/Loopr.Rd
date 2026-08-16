@@ -28,3 +28,7 @@ Formula: with \code{M = min(0.2 S, 3 sqrt(S))}, substitute
 \references{
 Vehtari, Simpson, Gelman, Yao & Gabry (2024) JMLR 25:1-58.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Loopr(V)
+}

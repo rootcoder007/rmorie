@@ -35,3 +35,7 @@ says whether it collapses to a point.
 Black D (1948) \emph{Journal of Political Economy}
 56(1):23-34, \doi{10.1086/256633}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_median_voter_ci(V)
+}

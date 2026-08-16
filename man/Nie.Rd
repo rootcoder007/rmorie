@@ -29,3 +29,7 @@ Pearl, J. (2001). Direct and indirect effects.
 Proceedings of the Seventeenth Conference on Uncertainty in
 Artificial Intelligence, 411-420. Morgan Kaufmann.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Nie(V, V)
+}

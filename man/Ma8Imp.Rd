@@ -17,3 +17,6 @@ attenuation is poor -- the book notes no more than about -20 dB at most frequenc
 A list with \code{h}, \code{value}, \code{index}, \code{n_taps}, \code{sum}, \code{finite}, \code{equal_weights}, \code{attenuation_is_poor}, \code{method}.
 }
 \keyword{internal}
+\examples{
+Ma8Imp()
+}

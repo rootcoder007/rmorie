@@ -19,3 +19,7 @@ the frequency-domain route would need fine enough sampling to avoid wrap-around.
 A list with \code{y}, \code{t}, \code{peak_index}, \code{peak_time}, \code{peak_magnitude}, \code{dt}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+MfOutput(V, V)
+}

@@ -49,3 +49,8 @@ important, where STAMP explicitly privileges the last click;
 implemented in :mod:`narm`.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+S <- c("a", "b", "c")
+strec_mlp_cell(S, M)
+}

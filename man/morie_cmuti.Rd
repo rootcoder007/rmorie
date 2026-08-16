@@ -28,3 +28,7 @@ information. EPL, 88, 68003.  Linfoot, E. H. (1957). An
 informational measure of correlation. Information and Control,
 1, 85-89.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_cmuti(V, V)
+}

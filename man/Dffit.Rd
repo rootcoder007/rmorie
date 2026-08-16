@@ -29,3 +29,7 @@ The cut-off is the Belsley-Kuh-Welsch size-adjusted 2 sqrt(p/n).
 Belsley, Kuh & Welsch (1980), Regression Diagnostics,
 Wiley, ch. 2.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Dffit(V, V)
+}

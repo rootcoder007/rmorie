@@ -30,3 +30,7 @@ value = exp(-exponent).
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 13.4.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ghosalntrlevy(V, V)
+}

@@ -20,3 +20,7 @@ Aitchison (1986), The Statistical Analysis of Compositional
 Data, Chapter 4, where g(x) is the normalising constant of the
 centred log-ratio transform.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Compgeo(V)
+}

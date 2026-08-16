@@ -50,3 +50,6 @@ methods with standard errors; the inverse ln(OR) from d (0.551 and
 0.606 divisors); RR to OR and back; and point-biserial r to d and
 back. Mirrors ca11e15 to ca11e33.
 }
+\examples{
+morie_meta_convert()
+}

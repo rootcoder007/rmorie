@@ -21,3 +21,7 @@ List with predictions, predict, accuracy_per_output, accuracy, n_outputs, estima
 \description{
 Multioutput classification by k-NN vote (Geron Ch 3, morie.fn hmmto)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_multioutput(V, V)
+}

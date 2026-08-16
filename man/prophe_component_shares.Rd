@@ -17,3 +17,7 @@ Part of the prophe_native implementation; see the file header for the source it 
 A list with \code{sd}, \code{relative}, \code{ranked}, \code{note}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+prophe_component_shares(D)
+}

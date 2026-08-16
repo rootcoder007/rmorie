@@ -21,3 +21,7 @@ steps must use SEPARATE data: an error rate measured on the samples that trained
 A list with \code{error_rate}, \code{accuracy}, \code{errors}, \code{n}, \code{k}, \code{per_fold}, \code{stratified}, \code{train_and_test_must_be_separate}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+KFoldCv(V, V)
+}

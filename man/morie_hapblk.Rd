@@ -35,3 +35,7 @@ Gabriel, S. B. et al. (2002). The structure of
 haplotype blocks in the human genome. Science, 296(5576),
 2225-2229.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_hapblk(V)
+}

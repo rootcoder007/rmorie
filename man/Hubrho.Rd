@@ -27,3 +27,7 @@ Formula: rho(r) = r^2/2 if |r| <= k, else k(|r| - k/2).
 Huber (1964), Annals of Mathematical Statistics
 35(1):73-101. \doi{10.1214/aoms/1177703732}
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Hubrho(V)
+}

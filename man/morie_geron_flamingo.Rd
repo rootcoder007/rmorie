@@ -34,3 +34,7 @@ List with \code{output}, \code{visual_tokens}, \code{cross_attention}, \code{gat
 \description{
 Both attention stages delegated to \code{morie_geron_cross_attention}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_flamingo(V, V)
+}

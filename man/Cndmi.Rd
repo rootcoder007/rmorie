@@ -21,3 +21,7 @@ Cover & Thomas (2006), eq. (2.60)-(2.61), p. 23.
 \references{
 Cover & Thomas (2006), eq. (2.60).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Cndmi(V)
+}

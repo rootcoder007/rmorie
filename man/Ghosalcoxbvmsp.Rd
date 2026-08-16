@@ -33,3 +33,6 @@ Formula: -log PL(b) = sum over the event ordering of
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 12.3.3.
 }
+\examples{
+Ghosalcoxbvmsp()
+}

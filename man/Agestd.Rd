@@ -22,3 +22,7 @@ Formula: ASR = sum_i w_i r_i / sum_i w_i; var(ASR) = sum_i w_i^2 r_i / n_i / (su
 \references{
 Boyle and Parkin (1991), Statistical methods for registries, in Jensen et al (eds), Cancer Registration: Principles and Methods, IARC Scientific Publications 95. Not held locally; the direct standardisation estimator and its Poisson variance are the standard published forms.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Agestd(V, V)
+}

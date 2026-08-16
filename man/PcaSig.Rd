@@ -18,3 +18,7 @@ the same sources through different paths, so the channels are redundant; rotatin
 A list with \code{components}, \code{eigenvalues}, \code{eigenvectors}, \code{mean}, \code{covariance}, \code{varexplained}, \code{mse}, \code{method}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+PcaSig(M)
+}

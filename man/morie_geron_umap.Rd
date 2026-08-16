@@ -30,3 +30,7 @@ low-d kernel v = 1/(1+a*d^2b) fitted via \code{morie_geron_fit_ab},
 exact fuzzy cross-entropy minimised by gradient descent (gradient
 clipped at norm 4).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_umap(V)
+}

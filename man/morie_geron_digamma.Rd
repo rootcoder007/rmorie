@@ -15,3 +15,7 @@ Numeric vector.
 \description{
 Digamma psi(x) for x > 0 (recurrence + asymptotic series; no scipy dep)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_digamma(V)
+}

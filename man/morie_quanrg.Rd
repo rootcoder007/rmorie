@@ -29,3 +29,7 @@ Koenker, R. and Bassett, G. (1978). Regression
 quantiles. Econometrica, 46(1), 33-50.  Koenker, R. (2005).
 Quantile Regression. Cambridge University Press.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_quanrg(V)
+}

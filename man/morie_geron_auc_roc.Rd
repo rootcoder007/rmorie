@@ -20,3 +20,7 @@ List with \code{auc}, \code{fpr}, \code{tpr}, \code{thresholds}, \code{n_pos}, \
 Mid-ranks credit ties 0.5. ROC vertices are returned in descending
 threshold order, starting from (0, 0) with threshold Inf.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_auc_roc(V, V)
+}

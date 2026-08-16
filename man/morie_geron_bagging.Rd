@@ -35,3 +35,7 @@ Bootstrap indices come from the exact-integer LCG, index m using seed
 weak learner is a least-squares 1-split stump.
 }
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_bagging(V, V)
+}

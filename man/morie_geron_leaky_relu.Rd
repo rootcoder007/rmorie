@@ -19,3 +19,7 @@ List with \code{activation}, \code{derivative}, \code{n_leaky}, \code{alpha},
 max(alpha z, z) with alpha in [0, 1). alpha = 0 is a plain ReLU and
 is flagged, because that is the dying-unit case.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_leaky_relu(V)
+}

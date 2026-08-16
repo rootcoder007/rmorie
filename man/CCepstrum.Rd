@@ -17,3 +17,7 @@ The phase is unwrapped over k = 0..N/2 and mirrored by odd symmetry; the linear 
 A list with \code{cepstrum}, \code{log_magnitude}, \code{phase}, \code{detrended_phase}, \code{linear_phase_removed}, \code{delay_removed}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+CCepstrum(V)
+}

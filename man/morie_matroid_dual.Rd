@@ -17,3 +17,7 @@ A list of integer vectors.
 contains a basis of \eqn{M}. Duality is an involution, which the
 tests confirm by dualising twice.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_matroid_dual(V, V)
+}

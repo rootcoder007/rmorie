@@ -29,3 +29,7 @@ inside and 0 outside.
 Beaton, A. E. & Tukey, J. W. (1974). Technometrics
 16:147-185.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Tukrho(V)
+}

@@ -19,3 +19,7 @@ circle, z = exp(j omega T).  fs = NULL reads omega as normalized.
 A list with \code{X}, \code{z}, \code{omega}, \code{T}, \code{n}, \code{on_unit_circle}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+DtftZ(V, V)
+}

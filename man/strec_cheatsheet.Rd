@@ -43,3 +43,6 @@ important, where STAMP explicitly privileges the last click;
 implemented in :mod:`narm`.
 }
 \keyword{internal}
+\examples{
+strec_cheatsheet()
+}

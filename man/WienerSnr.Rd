@@ -18,3 +18,7 @@ stresses and this checks: zero where the signal is absent (nothing to restore), 
 A list with \code{W}, \code{snr}, \code{undetermined_bins}, \code{zero_where_signal_absent}, \code{unity_where_noise_absent}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+WienerSnr(V, V)
+}

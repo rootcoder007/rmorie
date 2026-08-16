@@ -39,3 +39,8 @@ A list with the hyperparameter draws, their posterior means   and standard devia
     Machine Learning." MIT Press, chapters 2 and 4.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_hyper2(V, M)
+}

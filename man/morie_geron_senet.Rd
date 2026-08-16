@@ -23,3 +23,7 @@ s = sigmoid(W2 ReLU(W1 GAP(x))); y = s * x. Squeeze is global average
 pooling over the spatial axes (input dims 1,2), excitation is a
 bottleneck MLP C -> C/r -> C.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_senet(V)
+}

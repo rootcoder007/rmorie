@@ -17,3 +17,7 @@ A constant phase is NOT a constant delay: the group delay is the derivative, whi
 A list with \code{phase}, \code{omega}, \code{constant}, \code{group_delay}, \code{constant_phase_is_not_constant_delay}, \code{sign_flips_for_negative_omega}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+IntPh(V)
+}

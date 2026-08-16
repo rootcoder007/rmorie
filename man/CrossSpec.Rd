@@ -18,3 +18,7 @@ MEAN-REMOVED records (Brillinger 2001, Ch. 7).  NOT in Schabenberger & Gotway --
 A list with \code{omega}, \code{cospectrum}, \code{quadrature}, \code{amplitude}, \code{phase}, \code{means_removed}, \code{raw_not_consistent}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+CrossSpec(V, V)
+}

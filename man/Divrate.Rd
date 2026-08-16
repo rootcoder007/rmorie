@@ -18,3 +18,7 @@ Formula: rate = n_divergent / n_total
 \references{
 Betancourt (2017), A Conceptual Introduction to Hamiltonian Monte Carlo, arXiv:1701.02434, Section 6.2: divergent transitions are 'extremely sensitive identifiers' of the pathological neighbourhoods a trajectory failed to explore. Verified against the paper.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Divrate(V)
+}

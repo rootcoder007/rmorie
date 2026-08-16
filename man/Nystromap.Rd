@@ -24,3 +24,7 @@ Formula: Q = K_nm * K_mm^- * K_nm',  m the retained subset of records
 \references{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 8: the Nystrom method for compressing a kernel matrix onto a retained subset of records; the implementation delegates to the chapter-8 Nystrom routine already verified against the book for this shelf.  Read from the chapter PDF, not recalled.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Nystromap(V, V)
+}

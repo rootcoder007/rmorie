@@ -43,3 +43,7 @@ Epidemiology Reports 7, 190-202, \doi{10.1007/s40471-020-00243-4}.
 Neither paper was in the local corpus; the estimator is ordinary
 least squares and the test is the standard Wald one.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Negctc(V, V)
+}

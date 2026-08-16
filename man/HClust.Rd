@@ -19,3 +19,7 @@ clusters together through a bridge of intermediate points -- while complete link
 A list with \code{history}, \code{labels}, \code{linkage}, \code{n}, \code{k}, \code{merge_distances}, \code{monotonic_merges}, \code{single_linkage_chains}, \code{linkage_changes_the_partition}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+HClust(V)
+}

@@ -26,3 +26,6 @@ List with prevalence, expected_tests, pi_group (as supplied).
 \description{
 Equations 6.1 to 6.3, 6.26, 6.32 of Bilder & Loughin (2025).
 }
+\examples{
+morie_diagnostic_prevalence()
+}

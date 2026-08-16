@@ -20,3 +20,7 @@ List with variances, sums of squares, r2, adj_r2, f_from_r2.
 Equations 2.11 to 2.17 of Weisburd et al. (2022). Mirrors ca2e11 to
 ca2e17.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_fit_indices(V, V)
+}

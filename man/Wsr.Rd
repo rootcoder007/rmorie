@@ -14,3 +14,7 @@ Wilcoxon signed-rank T+ -- Sec. 5.7, eqs. (5.7.1)/(5.7.9), p. 195
 A list with \code{statistic}, \code{tminus}, \code{n}, \code{nzero}, \code{mean}, \code{var}, \code{z}, \code{p_value}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Wsr(V)
+}

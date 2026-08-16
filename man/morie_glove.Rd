@@ -38,3 +38,7 @@ for online learning and stochastic optimization", JMLR 12, 2121-2159
 -- the AdaGrad the paper uses.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+morie_glove(D)
+}

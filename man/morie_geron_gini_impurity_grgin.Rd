@@ -16,3 +16,7 @@ List with \code{gini}, \code{proportions}, \code{classes}, \code{counts},
 \description{
 Gini impurity (Geron Eq 5-1, morie.fn grgin)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_gini_impurity_grgin(V)
+}

@@ -19,3 +19,7 @@ List with n_modes, collapse_score, mean_pairwise_distance, coverage, mode_labels
 \description{
 Mode-collapse diagnostics (Geron Ch 18, morie.fn hmmdc)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_mode_collapse(V)
+}

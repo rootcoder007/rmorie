@@ -33,3 +33,7 @@ Convolutional One-Stage Object Detection", ICCV 2019, 9627-9636,
 arXiv:1904.01355.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_yolovx_simota_assign(V, V)
+}

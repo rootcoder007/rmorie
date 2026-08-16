@@ -37,3 +37,7 @@ sampler: no cluster parameters are ever stored.
 MacEachern (1994), Commun. Statist. B 23(3):727-741;
 Neal (2000), J. Comput. Graph. Statist. 9(2):249-265, algorithm 3.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Crpcol(V)
+}

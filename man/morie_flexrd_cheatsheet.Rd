@@ -28,3 +28,6 @@ A character scalar.
     et Appliquees 5, 380-440.
 }
 \keyword{internal}
+\examples{
+morie_flexrd_cheatsheet()
+}

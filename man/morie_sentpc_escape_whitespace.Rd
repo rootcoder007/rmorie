@@ -18,3 +18,7 @@ Nothing is dropped, which is the whole point: the transform is invertible by str
 Character.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_sentpc_escape_whitespace(V)
+}

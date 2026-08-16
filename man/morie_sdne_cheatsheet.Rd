@@ -42,3 +42,6 @@ Tang, J., Qu, M., Wang, M., Zhang, M., Yan, J. & Mei, Q. (2015)
 shallow model whose two proximities this deepens.
 }
 \keyword{internal}
+\examples{
+morie_sdne_cheatsheet()
+}

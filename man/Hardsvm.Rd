@@ -14,3 +14,7 @@ Hardsvm(X, y, ...)
 A list with \code{beta}, \code{beta0}, \code{norm_beta}, \code{margin}, \code{street_width}, \code{objective}, \code{functional_margin}, \code{min_functional_margin}, \code{constraint_ok}, \code{alpha}, \code{support_vectors}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Hardsvm(V, V)
+}

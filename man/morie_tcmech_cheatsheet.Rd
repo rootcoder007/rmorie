@@ -29,3 +29,6 @@ A character scalar.
     privacy." arXiv:1603.01887.
 }
 \keyword{internal}
+\examples{
+morie_tcmech_cheatsheet()
+}

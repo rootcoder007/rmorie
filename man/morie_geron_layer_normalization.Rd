@@ -20,3 +20,7 @@ List with \code{output}, \code{normalized}, \code{mean}, \code{variance}.
 Per-row (x - mu)/sqrt(var + eps) with the POPULATION variance, then
 gamma / beta. No batch axis, unlike batch norm.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_layer_normalization(V)
+}

@@ -33,3 +33,6 @@ treatment selection as a weighted classification problem that the
 tree search rests on.
 }
 \keyword{internal}
+\examples{
+trclrn_cheatsheet()
+}

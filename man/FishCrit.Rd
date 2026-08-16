@@ -18,3 +18,7 @@ the same measure: that divides |m1 - m2| by (s1 + s2).  They rank features ident
 A list with \code{j}, \code{means}, \code{variances}, \code{normalized_distance}, \code{agrees_with_eq_10_112_ranking_only_for_equal_spread}, \code{is_not_eq_10_112}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+FishCrit(V, V)
+}

@@ -20,3 +20,7 @@ Formula: attach half-edges (stubs) uniformly at random in pairs; every vertex en
 \references{
 Bender and Canfield (1978), The asymptotic number of labeled graphs with given degree sequences, JCTA 24:296-307; Molloy and Reed (1995), A critical point for random graphs with a given degree sequence, Random Structures and Algorithms 6:161-180. Neither is held locally; uniform stub pairing is the standard published construction.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Configmodel(V)
+}

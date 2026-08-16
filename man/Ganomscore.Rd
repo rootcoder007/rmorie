@@ -25,3 +25,7 @@ Akcay, Atapour-Abarghouei and Breckon (2018),
 arXiv:1805.06725, equations (5) and (6), read from the ar5iv
 rendering of the arXiv source.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ganomscore(V, V)
+}

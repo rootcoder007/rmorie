@@ -14,3 +14,6 @@ Part of the snpeff_native implementation; see the file header for the source it 
 The value of \code{.SNPEFF_CODONS}, as built in the body.
 }
 \keyword{internal}
+\examples{
+codon_table()
+}

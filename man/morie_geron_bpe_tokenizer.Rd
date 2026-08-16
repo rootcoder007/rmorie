@@ -22,3 +22,7 @@ so the merge sequence is deterministic. Merging stops at the target
 vocabulary size or when no pair occurs more than once; when the target
 is below the base-symbol count no merge is performed at all.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_bpe_tokenizer(V)
+}

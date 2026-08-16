@@ -14,3 +14,7 @@ Joint likelihood of independent observations (Lawson eq. 3.1)
 A list with \code{likelihood}, \code{loglik}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Likprod(V)
+}

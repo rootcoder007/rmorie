@@ -22,3 +22,7 @@ Part of the bayreg2_native implementation; see the file header for the source it
 A list with \code{estimate}, \code{coefficients}, \code{std_error}, \code{weights}, \code{residuals}, \code{scale2}, \code{fitted}, \code{iterations}, \code{converged}, \code{nu}, \code{loglik}, \code{n}, \code{p}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_bayreg2_student_t_regression(V, V)
+}

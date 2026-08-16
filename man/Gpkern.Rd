@@ -37,3 +37,7 @@ compositional kernel search, ICML 2013, PMLR 28(3):1166-1174,
 arXiv:1302.4922; Rasmussen and Williams (2006), Gaussian Processes
 for Machine Learning, MIT Press, sect. 4.2.4.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Gpkern(V)
+}

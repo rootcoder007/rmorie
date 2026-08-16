@@ -21,3 +21,7 @@ Part of the perK_mixedcase_native implementation; see the file header for the so
 A list with \code{K}, \code{shape}, \code{period}, \code{lengthscale}, \code{variance}, \code{diag_is_variance}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_perK(V)
+}

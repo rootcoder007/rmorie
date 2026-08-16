@@ -19,3 +19,7 @@ responses.  Convolution commutes, so a filter chain may be reordered, and the re
 A list with \code{h}, \code{n_taps}, \code{value}, \code{index}, \code{commutes}, \code{longer_than_either_input}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+LsiSerH(V, V)
+}

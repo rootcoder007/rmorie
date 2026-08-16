@@ -18,3 +18,7 @@ Equation (3.140). On the unit circle the real part of the image vanishes exactly
 A list with the image \code{s}, the largest residual real part   and the gap between the direct evaluation and the closed form, so a   reader can see how exactly the two agree.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+BilinUnit(V)
+}

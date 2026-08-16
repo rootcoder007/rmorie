@@ -30,3 +30,6 @@ E_b the exposure in bin b; hazard = exp(f_b).
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 13.5.
 }
+\examples{
+Ghosalsmhazgp()
+}

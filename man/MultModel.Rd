@@ -18,3 +18,7 @@ system addresses.
 A list with \code{y}, \code{x}, \code{p}, \code{n}, \code{separable_by_log}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+MultModel(V, V)
+}

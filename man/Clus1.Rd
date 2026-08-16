@@ -34,3 +34,7 @@ Cochran (1977), Sampling Techniques, 3rd edition, Chapter
 so the standard published form is used; the finite-population factor
 (M - m)/M matches the convention of the sibling Cochran modules.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Clus1(V)
+}

@@ -20,3 +20,7 @@ the discrete inner product SCALED BY dt; dropping the dt turns an integral into 
 A list with \code{theta}, \code{integrand}, \code{discrete_sum}, \code{duration}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+ContProj(V, V)
+}

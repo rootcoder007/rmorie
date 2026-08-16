@@ -14,3 +14,7 @@ morie_ripley_l_function
 A list with \code{r}, \code{l}, \code{l_uncentred}, \code{k}, \code{lambda_est}, \code{method}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_ripley_l_function(M)
+}
