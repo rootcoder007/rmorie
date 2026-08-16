@@ -17,3 +17,11 @@ Flattening all the weights and biases into one vector. Kept because it is the th
 Numeric vector.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+X <- matrix(rnorm(60), 20, 3)
+y <- as.integer(X[, 1] + rnorm(20, 0, 0.3) > 0)
+net <- morie_propinf_train_fcnn(X, y, hidden = c(4L), epochs = 5L,
+                                seed = 1L)
+length(morie_propinf_flat_representation(net))
+}
