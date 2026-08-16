@@ -14,3 +14,6 @@ A step of the mehtad_native implementation. Called by \code{morie_mehtad}. See t
 A character value.
 }
 \keyword{internal}
+\examples{
+.mehtad_cheatsheet()
+}

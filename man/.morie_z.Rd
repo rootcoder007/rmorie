@@ -17,3 +17,7 @@ Part of the median_frames_dose_native implementation; see the file header for th
 The value of \code{stats::qnorm}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_z(V)
+}

@@ -19,3 +19,6 @@ A step of the s04core implementation. Called by \code{Icc12c}, \code{IccA}, \cod
 A list with \code{ms_r}, \code{ms_c}, \code{ms_e}, \code{k}, \code{n}.
 }
 \keyword{internal}
+\examples{
+.s4_icc_ms(y = c(1, 2, 3, 4, 5, 6, 7, 8), subject = c(1, 2, 3, 4, 5, 6, 7, 8), rater = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

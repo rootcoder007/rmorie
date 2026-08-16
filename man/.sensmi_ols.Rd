@@ -18,3 +18,7 @@ coefficients and the residuals in one list so callers do not refit.
 A list with \code{beta}, \code{resid}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.sensmi_ols(V, V)
+}

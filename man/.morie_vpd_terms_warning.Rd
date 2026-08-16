@@ -14,3 +14,7 @@ Internal helper: Morie Vpd Terms Warning
 The value of \code{invisible}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_vpd_terms_warning(V)
+}

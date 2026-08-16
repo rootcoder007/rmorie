@@ -31,3 +31,6 @@ of mixed-model association methods", Nature Genetics 46(2),
 100-106.
 }
 \keyword{internal}
+\examples{
+.regmlm_folds(n = 5L, k = 5L, scheme = 5L)
+}

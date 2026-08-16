@@ -18,3 +18,7 @@ vector sign-fixed so its largest-magnitude entry is positive, because the eigenp
 A list with \code{values}, \code{vectors}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.s03jacobi(M)
+}

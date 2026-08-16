@@ -14,3 +14,6 @@ The whole problem in one number: under any continuous prior the posterior probab
 A list with \code{probability} and \code{note}.
 }
 \keyword{internal}
+\examples{
+.dpgrf_continuous_prior_tie_probability()
+}

@@ -40,3 +40,6 @@ treatment selection as a weighted classification problem that the
 tree search rests on.
 }
 \keyword{internal}
+\examples{
+.trclrn_check(Y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), propensity = c(1, 2, 3, 4, 5, 6, 7, 8), min_propensity = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

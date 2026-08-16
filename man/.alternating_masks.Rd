@@ -30,3 +30,6 @@ Papamakarios, G. et al. (2021) "Normalizing Flows for Probabilistic
 Modeling and Inference", JMLR 22(57), 1-64, arXiv:1912.02762.
 }
 \keyword{internal}
+\examples{
+.alternating_masks(d = 5L, n_layers = 5L)
+}

@@ -17,3 +17,7 @@ A step of the painn_native implementation. Called by \code{dipole_moment}, \code
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.painn_vec(V)
+}

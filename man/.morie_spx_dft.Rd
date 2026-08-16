@@ -17,3 +17,7 @@ A step of the sp_fill implementation. Called by \code{CrossSpec}, \code{MsCoh}, 
 A list with \code{re}, \code{im}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_spx_dft(V)
+}

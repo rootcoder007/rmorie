@@ -17,3 +17,6 @@ A step of the rgs_native implementation. Called by \code{morie_rgs_functional_re
 The value of \code{w}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.rgs_grid_weights(n_t = 5L)
+}

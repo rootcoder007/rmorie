@@ -17,3 +17,7 @@ below 2^53, so the double arithmetic here is exact and matches the Python arm\\'
 The value of \code{function}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_bx_rng(V)
+}

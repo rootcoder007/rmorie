@@ -17,3 +17,7 @@ A step of the rangayyan_tf implementation. Called by \code{AtomTfd}. See the fil
 The value of \code{.morie_fsum}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tf_energy(V)
+}

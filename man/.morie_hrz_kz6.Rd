@@ -17,3 +17,7 @@ second-order kernel will NOT do: G_nz is a functional of DERIVATIVES of K_Z, tho
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_hrz_kz6(V)
+}

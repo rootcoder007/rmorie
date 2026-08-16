@@ -34,3 +34,6 @@ The value of \code{q}, as built in the body.
     measures." The Annals of Statistics 2(4), 615-629.
 }
 \keyword{internal}
+\examples{
+.bnppvl_empirical_start(u = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

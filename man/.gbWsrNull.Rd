@@ -14,3 +14,6 @@ Exact null pmf of T+ (subset-sum counting)
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.gbWsrNull(n = 5L)
+}

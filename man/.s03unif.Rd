@@ -18,3 +18,7 @@ A step of the helpers_s03 implementation. Called by \code{.s03normdraws}. See th
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.s03unif(V)
+}

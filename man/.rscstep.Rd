@@ -19,3 +19,6 @@ in Hubert, Debruyne and Rousseeuw (2018), arXiv 1709.07045, "COMPUTATION": from 
 A list with \code{idx}, \code{det}.
 }
 \keyword{internal}
+\examples{
+.rscstep(X = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), idx = list(a = 1, b = 2), h = 0.5)
+}

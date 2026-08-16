@@ -18,3 +18,7 @@ A step of the rangayyan_phys implementation. Called by \code{.bsapsd}, \code{Pcg
 A list with \code{re}, \code{im}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.bsafft(V, V)
+}

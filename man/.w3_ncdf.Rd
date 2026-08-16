@@ -17,3 +17,6 @@ Phi(z) = 1/2 (1 + sign(z) P(1/2, z^2/2)) is an identity, not an approximation, s
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.w3_ncdf(z = 5L)
+}

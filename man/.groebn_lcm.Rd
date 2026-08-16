@@ -18,3 +18,7 @@ A step of the groebn_native implementation. Called by \code{.groebn_spoly}. See 
 The value of \code{pmax}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.groebn_lcm(V, V)
+}

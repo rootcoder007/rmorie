@@ -18,3 +18,7 @@ A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_analogy},
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.wrd2v_cos(V, V)
+}

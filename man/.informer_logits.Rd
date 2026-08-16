@@ -28,3 +28,6 @@ Vaswani, A. et al. (2017) "Attention is all you need", Advances in
 Neural Information Processing Systems 30, arXiv:1706.03762.
 }
 \keyword{internal}
+\examples{
+.informer_logits(q = 0.5, K = 5L, scale = TRUE)
+}

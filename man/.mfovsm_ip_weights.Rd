@@ -33,3 +33,6 @@ Chapman & Hall/CRC, Sec. 12.5 (effect modification and marginal
 structural models) and Sec. 21.2 (the time-varying weights).
 }
 \keyword{internal}
+\examples{
+.mfovsm_ip_weights(ak = c(1, 2, 3, 4, 5, 6, 7, 8), den = c(1, 2, 3, 4, 5, 6, 7, 8), num = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

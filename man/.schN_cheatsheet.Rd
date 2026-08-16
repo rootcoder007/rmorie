@@ -14,3 +14,6 @@ A step of the schN_native implementation. No other function in the package calls
 A character value.
 }
 \keyword{internal}
+\examples{
+.schN_cheatsheet()
+}

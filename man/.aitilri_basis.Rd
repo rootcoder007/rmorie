@@ -17,3 +17,6 @@ Contrast matrix of the default Egozcue (2003) sequential binary partition
 a D-by-(D-1) numeric contrast matrix.
 }
 \keyword{internal}
+\examples{
+.aitilri_basis(D = 5L)
+}

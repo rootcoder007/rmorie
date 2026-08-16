@@ -14,3 +14,7 @@ Internal helper: Resolve Kernel
 The value of \code{stop}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.resolve_kernel(V)
+}

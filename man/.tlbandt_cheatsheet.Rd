@@ -36,3 +36,6 @@ doi:10.1016/0196-8858(85)90002-8. The reward-maximising tradition
 this departs from.
 }
 \keyword{internal}
+\examples{
+.tlbandt_cheatsheet()
+}

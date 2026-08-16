@@ -14,3 +14,6 @@ Gamma(shape = `h^(-1/2)`, scale = `v sqrt(h) + h`) density. NOT Chen\'s gamma ke
 A vector.
 }
 \keyword{internal}
+\examples{
+.morie_fauzi_agamma(x = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5)
+}

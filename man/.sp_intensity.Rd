@@ -18,3 +18,7 @@ Internal: first-order intensity lambda_hat = N(A) / nu(A), eq (3.8).
 Numeric scalar.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.sp_intensity(V, V)
+}

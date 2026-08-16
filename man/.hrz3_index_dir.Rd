@@ -19,3 +19,6 @@
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.hrz3_index_dir(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5)
+}

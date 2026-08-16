@@ -17,3 +17,6 @@ A step of the b2gpts implementation. Called by \code{Gppost}, \code{Gpreg}, \cod
 The value of \code{function}.
 }
 \keyword{internal}
+\examples{
+.b2se()
+}

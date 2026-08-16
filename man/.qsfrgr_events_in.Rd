@@ -38,3 +38,7 @@ A numeric value.
     Machine Learning Research 7, 983-999.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.qsfrgr_events_in(V, V)
+}

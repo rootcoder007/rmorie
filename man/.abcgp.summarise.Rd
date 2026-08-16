@@ -18,3 +18,7 @@ A step of the abcgp_native implementation. Called by \code{.abcgp.gabc_log_likel
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.abcgp.summarise(V, V)
+}

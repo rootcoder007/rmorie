@@ -29,3 +29,6 @@ Raton: Chapman & Hall/CRC, Sec. 21.2 for the product-over-time weights
 and Ch. 20 for why conditioning fails where weighting works.
 }
 \keyword{internal}
+\examples{
+.lggvls_quantile7(x = c(1, 2, 3, 4, 5, 6, 7, 8), q = 0.5)
+}

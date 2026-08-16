@@ -14,3 +14,8 @@ Internal helper: cross-fit ridge with per-fold GCV lambda
 The value of \code{pred}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.morie_dml_xfit_ridge_gcv(M, V)
+}

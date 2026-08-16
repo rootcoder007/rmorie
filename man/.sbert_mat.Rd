@@ -17,3 +17,7 @@ A step of the sbert_native implementation. Called by \code{pool}, \code{rank_by_
 Nothing; this branch always raises.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.sbert_mat(V)
+}

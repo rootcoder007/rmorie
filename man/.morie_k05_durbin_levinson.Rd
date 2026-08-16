@@ -18,3 +18,6 @@ A step of the k05_tranche1 implementation. Called by \code{morie_sample_pacf}. S
 The value of \code{phi}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_k05_durbin_levinson(r = c(1, 2, 3, 4, 5, 6, 7, 8), max_lag = 5L)
+}

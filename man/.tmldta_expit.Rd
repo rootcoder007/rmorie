@@ -17,3 +17,6 @@ A step of the tmldta_native implementation. Called by \code{.fit_g}, \code{.fit_
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.tmldta_expit(x = 5L)
+}

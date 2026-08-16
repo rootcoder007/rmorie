@@ -17,3 +17,7 @@ A step of the comet_native implementation. Called by \code{.comet_dist}, \code{k
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.comet_vec(V)
+}

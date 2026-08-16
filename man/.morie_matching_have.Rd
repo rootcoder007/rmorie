@@ -14,3 +14,7 @@ Internal helper: Morie Matching Have
 The value of \code{requireNamespace}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_matching_have(V)
+}

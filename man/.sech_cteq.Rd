@@ -18,3 +18,8 @@ A step of the sechsh_native implementation. Called by \code{morie_sechsh_verify_
 A logical value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.sech_cteq(V, M)
+}

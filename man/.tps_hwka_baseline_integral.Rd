@@ -14,3 +14,6 @@ Internal helper: Tps Hwka Baseline Integral
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.tps_hwka_baseline_integral(T_ = 5L, kind = 5L, alpha = 0.5)
+}

@@ -14,3 +14,6 @@ Exact null counts of U / shifted W by the (6.6.14) recursion
 The value of \code{counts}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.gbRankCounts(m = 5L, n = 5L)
+}

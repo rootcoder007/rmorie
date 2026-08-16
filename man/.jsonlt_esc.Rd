@@ -17,3 +17,6 @@ A step of the jsonlt_native implementation. Called by \code{.jsonlt_df_columns},
 A character value.
 }
 \keyword{internal}
+\examples{
+.jsonlt_esc(s = 5L)
+}

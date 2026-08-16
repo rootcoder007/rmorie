@@ -19,3 +19,7 @@ A step of the rangayyan_corr implementation. Called by \code{MfAcf}, \code{RefPa
 A list with \code{lags}, \code{values}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_rg_xcorr(V, V)
+}

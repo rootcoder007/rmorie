@@ -14,3 +14,7 @@ Internal helper: Tps Stoch Date Series
 The value of \code{sort}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tps_stoch_date_series(V)
+}

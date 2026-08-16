@@ -18,3 +18,7 @@ Internal: pairwise Euclidean distances between two coordinate sets.
 Numeric matrix (n by m).
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.sp_cross_dist(V, V)
+}

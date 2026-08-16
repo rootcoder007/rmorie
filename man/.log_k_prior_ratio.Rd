@@ -18,3 +18,7 @@ A step of the bayrjmcmc_native implementation. Called by \code{changepoint_rjmcm
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.log_k_prior_ratio(V, V)
+}

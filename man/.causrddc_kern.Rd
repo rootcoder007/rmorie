@@ -18,3 +18,6 @@ A step of the causrddc_native implementation. Called by \code{.causrddc_hc_sigma
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.causrddc_kern(u = 5L, kernel = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+}

@@ -17,3 +17,6 @@ A step of the rangayyan_tf implementation. Called by \code{EmdEns}. See the file
 The value of \code{.tf_lcg_step}.
 }
 \keyword{internal}
+\examples{
+.tf_lcg_seed(seed = 5L)
+}

@@ -19,3 +19,6 @@ A step of the clpopt_native implementation. Called by \code{simplex}. See the fi
 A list with \code{estimate}, \code{status}, \code{x}, \code{fun}, \code{rule}, \code{message}, \code{method}.
 }
 \keyword{internal}
+\examples{
+.clpopt_fail(st = 5L, rule = 5L, phase = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

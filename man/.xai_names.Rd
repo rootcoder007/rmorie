@@ -14,3 +14,6 @@ Internal helper: Xai Names
 The value of \code{nm}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.xai_names(feature_names = c("a", "b", "c"), d = 3L)
+}

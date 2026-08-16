@@ -14,3 +14,6 @@ Part of the droSPI_mixedcase_native implementation; see the file header for the 
 A character value.
 }
 \keyword{internal}
+\examples{
+.droSPI_cheatsheet()
+}

@@ -14,3 +14,6 @@ Internal helper: Safe Divide
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.safe_divide(num = c(1, 2, 3, 4, 5, 6, 7, 8), den = 5L)
+}

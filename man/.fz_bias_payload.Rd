@@ -17,3 +17,7 @@ A step of the fauzi_native implementation. Called by \code{morie_fauzi_b1_coeffi
 A list with \code{g_prime}, \code{g_double_prime}, \code{bias_order}, \code{contrast}, \code{transform}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.fz_bias_payload(D)
+}

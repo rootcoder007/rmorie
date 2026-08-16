@@ -36,3 +36,6 @@ doi:10.1007/978-1-4419-9782-1. The first book, which this one is a
 sequel to.
 }
 \keyword{internal}
+\examples{
+.tlroad_cheatsheet()
+}

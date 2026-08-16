@@ -14,3 +14,6 @@ Internal helper: Siu Llm Default Timeout
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+.siu_llm_default_timeout()
+}

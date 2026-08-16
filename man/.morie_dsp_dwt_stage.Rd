@@ -14,3 +14,6 @@ Internal helper: one DWT stage (periodic, downsample by 2)
 A list with \code{W}, \code{V}.
 }
 \keyword{internal}
+\examples{
+.morie_dsp_dwt_stage(v = c(1, 2, 3, 4, 5, 6, 7, 8), g = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5)
+}

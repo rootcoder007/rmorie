@@ -19,3 +19,6 @@ A step of the rangayyan_phys implementation. Called by \code{ApneaDet}, \code{Ca
 A list with \code{freqs}, \code{power}.
 }
 \keyword{internal}
+\examples{
+.bsapsd(x = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
+}

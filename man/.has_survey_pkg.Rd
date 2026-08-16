@@ -20,3 +20,6 @@ The value of \code{requireNamespace}.
   Fay (1989). Proc. SRM Section, ASA.
 }
 \keyword{internal}
+\examples{
+.has_survey_pkg()
+}

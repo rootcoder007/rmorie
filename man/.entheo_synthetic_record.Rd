@@ -14,3 +14,7 @@
 A list with \code{subject_id}, \code{condition_order}, \code{eeg}, \code{fmri}, \code{behavioural}, \code{.synthetic}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.entheo_synthetic_record(V)
+}

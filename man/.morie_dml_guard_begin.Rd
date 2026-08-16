@@ -14,3 +14,6 @@ DoubleML cross-fits through \pkg{future}. Three failure modes are guarded here, 
 An opaque state list for `.morie_dml_guard_end`.
 }
 \keyword{internal}
+\examples{
+.morie_dml_guard_begin()
+}

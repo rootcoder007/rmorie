@@ -17,3 +17,7 @@ A step of the causdidwd_native implementation. Called by \code{morie_two_way_fix
 The value of \code{cbind}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.causdidwd_with_intercept(V)
+}

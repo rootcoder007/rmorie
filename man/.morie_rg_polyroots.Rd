@@ -17,3 +17,7 @@ A step of the rangayyan_filt2 implementation. Called by \code{BwAnalog}, \code{B
 The value of \code{coefs}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_rg_polyroots(V)
+}

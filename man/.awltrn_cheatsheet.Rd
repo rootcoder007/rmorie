@@ -14,3 +14,6 @@ One-paragraph summary of the AOL vs OWL trade-off
 A character string.
 }
 \keyword{internal}
+\examples{
+.awltrn_cheatsheet()
+}

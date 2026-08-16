@@ -17,3 +17,7 @@ A step of the samdec_native implementation. Called by \code{dynamic_mask_head}. 
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.samdec_vec(V)
+}

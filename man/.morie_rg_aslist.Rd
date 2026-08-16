@@ -17,3 +17,7 @@ A step of the rangayyan_ch3 implementation. Called by \code{ContConv}, \code{Cov
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_rg_aslist(V)
+}

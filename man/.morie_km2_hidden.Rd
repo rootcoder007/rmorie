@@ -19,3 +19,6 @@ A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch
 The value of \code{v}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_km2_hidden(f = c(1, 2, 3, 4, 5, 6, 7, 8), c = c(1, 2, 3, 4, 5, 6, 7, 8), name = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

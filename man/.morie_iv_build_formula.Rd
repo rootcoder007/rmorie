@@ -14,3 +14,6 @@
 The value of \code{stats::as.formula}.
 }
 \keyword{internal}
+\examples{
+.morie_iv_build_formula(outcome = c(1, 2, 3, 4, 5, 6, 7, 8), endogenous = c(1, 2, 3, 4, 5, 6, 7, 8), instruments = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -14,3 +14,6 @@ Interpolates linearly in log(alpha) between the bracketing critical values. Outs
 A list with \code{p}, \code{bounded}.
 }
 \keyword{internal}
+\examples{
+.gof_p_from_crit(stat = 5L, crit = 5L, alpha = 0.5)
+}

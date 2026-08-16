@@ -17,3 +17,7 @@ A step of the funcal_native implementation. No other function in the package cal
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.funcal_first(V)
+}

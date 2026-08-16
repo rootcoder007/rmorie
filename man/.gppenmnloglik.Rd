@@ -23,3 +23,6 @@ A step of the helpers_gp_core implementation. Called by \code{Msm109}, \code{Msm
 A list with \code{loglik}, \code{penalty}, \code{penalized_loglik}.
 }
 \keyword{internal}
+\examples{
+.gppenmnloglik(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = 5L, beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5, lam = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

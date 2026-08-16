@@ -19,3 +19,6 @@ LCG-seeded Part of the geron_w4c_native implementation; see the file header for 
 A vector, from \code{sort}.
 }
 \keyword{internal}
+\examples{
+.morie_w4c_lcg_sample(n = 5L, k = 5L, seed = 5L)
+}

@@ -14,3 +14,6 @@ Internal helper: Tipping Point Result
 The value of \code{structure}.
 }
 \keyword{internal}
+\examples{
+.tipping_point_result(delta_values = c(1, 2, 3, 4, 5, 6, 7, 8), adjusted_estimates = c(1, 2, 3, 4, 5, 6, 7, 8), adjusted_p_values = c(1, 2, 3, 4, 5, 6, 7, 8), tipping_point = c(1, 2, 3, 4, 5, 6, 7, 8), original_estimate = c(1, 2, 3, 4, 5, 6, 7, 8), interpretation = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

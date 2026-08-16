@@ -19,3 +19,6 @@ so the neighbour itself falls strictly inside a truncated kernel\\'s support. Th
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+.schab_adaptive_bandwidth(distance_row = c(1, 2, 3, 4, 5, 6, 7, 8), n_neighbours = 5L)
+}

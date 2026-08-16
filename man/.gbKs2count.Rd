@@ -14,3 +14,6 @@ Lattice-path count for the two-sample KS tail
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.gbKs2count(m = 5L, n = 5L, d = 5L)
+}

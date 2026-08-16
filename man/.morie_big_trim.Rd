@@ -17,3 +17,7 @@ A step of the bigint_native implementation. Called by \code{.morie_big_add_abs},
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_big_trim(V)
+}

@@ -17,3 +17,7 @@ A step of the barerp_native implementation. Called by \code{barrier_method}, \co
 Nothing; this branch always raises.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.as_fun(D)
+}

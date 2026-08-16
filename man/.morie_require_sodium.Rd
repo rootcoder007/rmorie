@@ -14,3 +14,6 @@ Internal helper: Morie Require Sodium
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+.morie_require_sodium()
+}

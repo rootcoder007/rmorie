@@ -28,3 +28,6 @@ algorithm, the occurs check, and the factorisation
 :math:`\theta = \delta \circ \sigma` reproduced above.
 }
 \keyword{internal}
+\examples{
+.unifAlg_fail(sub = c(1, 2, 3, 4, 5, 6, 7, 8), why = c(1, 2, 3, 4, 5, 6, 7, 8), oc = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -23,3 +23,7 @@ A step of the cnvlfc_native implementation. Called by \code{.cnvlfc_ccm}, \code{
 A list with \code{rho}, \code{observed}, \code{predicted}, \code{n_predicted}, \code{library}, \code{E}, \code{tau}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.cnvlfc_cross_map(V, V)
+}

@@ -17,3 +17,6 @@ same rational approximation with the same coefficients, and the two agree bit fo
 The value of \code{qnorm}.
 }
 \keyword{internal}
+\examples{
+.forwsr_norm_ppf(p = 0.5)
+}

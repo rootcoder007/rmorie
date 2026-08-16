@@ -19,3 +19,6 @@ A step of the dist_native implementation. Called by \code{Pbeta}, \code{Pbinom},
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.morie_betainc(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, x = 5L)
+}

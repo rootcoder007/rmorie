@@ -19,3 +19,6 @@ A step of the Svyqtl implementation. Called by \code{Svyqtl}. See the file heade
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.svyqtl_inv(xs = c(1, 2, 3, 4, 5, 6, 7, 8), cum = c(1, 2, 3, 4, 5, 6, 7, 8), p = 0.5)
+}

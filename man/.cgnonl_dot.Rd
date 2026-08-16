@@ -18,3 +18,7 @@ A step of the cgnonl_native implementation. Called by \code{.cgnonl_exact_quadra
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.cgnonl_dot(V, V)
+}

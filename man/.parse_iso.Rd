@@ -14,3 +14,7 @@ Internal helper: Parse Iso
 The value of \code{suppressWarnings}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.parse_iso(V)
+}

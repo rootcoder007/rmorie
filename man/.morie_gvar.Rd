@@ -19,3 +19,7 @@ A step of the geron_ml_native implementation. Called by \code{.morie_gvar_wrap},
 The value of \code{e}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_gvar(V)
+}

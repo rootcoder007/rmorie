@@ -21,3 +21,6 @@ A step of the causrddc_native implementation. Called by \code{morie_causrddc}. S
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.causrddc_hc_sigma2(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5, p = 0.5, kernel = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+}

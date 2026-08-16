@@ -18,3 +18,7 @@ A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_chsel},
 The value of \code{M}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_bx_mat(V)
+}

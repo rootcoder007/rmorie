@@ -45,3 +45,6 @@ doi:10.1038/nature14236. The periodic-copy target network;
 implemented in dqnv.
 }
 \keyword{internal}
+\examples{
+.polyak_lag_halflife(tau = 0.5)
+}

@@ -18,3 +18,6 @@ A step of the ts_joseph implementation. Called by \code{morie_nhitsnet}. See the
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+.morie_jo_maxpool(v = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

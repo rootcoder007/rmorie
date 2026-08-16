@@ -19,3 +19,6 @@ A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_un
 A list with \code{alpha}, \code{ends}.
 }
 \keyword{internal}
+\examples{
+.morie_km2_forward(text = 5L, probs = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), maxlen = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

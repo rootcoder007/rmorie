@@ -14,3 +14,6 @@ Internal helper: Fuzzy Match Key
 Nothing; the function is called for its effect.
 }
 \keyword{internal}
+\examples{
+.fuzzy_match_key(key = 5L)
+}

@@ -19,3 +19,6 @@ A step of the sarima_native implementation. Called by \code{forecast}. See the f
 The value of \code{psi}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.sarima_psi_weights(ar = c(1, 2, 3, 4, 5, 6, 7, 8), ma = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5)
+}

@@ -18,3 +18,7 @@ A step of the snmtst_native implementation. Called by \code{identified_set}. See
 The value of \code{lv}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.snmtst_target(V, V)
+}

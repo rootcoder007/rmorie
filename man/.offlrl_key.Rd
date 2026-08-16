@@ -18,3 +18,7 @@ A step of the offlrl_native implementation. Called by \code{offlrl}. See the fil
 A character value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.offlrl_key(V, V)
+}

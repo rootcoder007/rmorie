@@ -18,3 +18,7 @@ A step of the boot_native implementation. Called by \code{morie_boot_ci}. See th
 The value of \code{.morie_norm_inter}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_ci_perc(V, V)
+}

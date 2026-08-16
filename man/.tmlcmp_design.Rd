@@ -42,3 +42,6 @@ for Non-Homogeneous Markov Chains Based on Censored Observations",
 Scandinavian Journal of Statistics 5(3), 141-150.
 }
 \keyword{internal}
+\examples{
+.tmlcmp_design(W = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), n = 5L)
+}

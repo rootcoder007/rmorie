@@ -17,3 +17,7 @@ A step of the helpers_s03 implementation. Called by \code{Autoint}, \code{Bertre
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.s03softmax(V)
+}

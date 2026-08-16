@@ -19,3 +19,7 @@ Mirrors clpopt._mat.
 The value of \code{do.call}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.clpopt_mat(V, V)
+}

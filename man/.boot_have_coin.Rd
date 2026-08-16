@@ -14,3 +14,6 @@ Internal helper: Boot Have Coin
 The value of \code{requireNamespace}.
 }
 \keyword{internal}
+\examples{
+.boot_have_coin()
+}

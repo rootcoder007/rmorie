@@ -18,3 +18,7 @@ A step of the sarima_native implementation. Called by \code{.filter_column}, \co
 A list with \code{T}, \code{R}, \code{r}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.sarima_state_space(V, V)
+}

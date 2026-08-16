@@ -14,3 +14,7 @@ Internal helper: Morie Rdd Bw Result
 A list with \code{bandwidth}, \code{method}, \code{details}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_rdd_bw_result(V, V)
+}

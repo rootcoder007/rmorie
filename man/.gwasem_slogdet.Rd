@@ -17,3 +17,7 @@ A step of the gwasem_native implementation. Called by \code{.gwasem_loglik}, \co
 A list with \code{sign}, \code{logdet}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.gwasem_slogdet(V)
+}

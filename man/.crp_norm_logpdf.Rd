@@ -19,3 +19,6 @@ A step of the crpcol implementation. Called by \code{.crp_collapsed_sweep}, \cod
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.crp_norm_logpdf(x = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8), var = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

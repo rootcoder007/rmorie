@@ -20,3 +20,6 @@ A step of the pibmd_native implementation. Called by \code{morie_pibmd_prior_inf
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.pibmd_kl_gaussian(mq = c(1, 2, 3, 4, 5, 6, 7, 8), sq2 = c(1, 2, 3, 4, 5, 6, 7, 8), mp = c(1, 2, 3, 4, 5, 6, 7, 8), sp2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

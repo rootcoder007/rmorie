@@ -19,3 +19,6 @@ A step of the rangayyan_phys implementation. Called by \code{CadSpec}, \code{Spe
 A list with \code{bandwidth_hz}, \code{q}.
 }
 \keyword{internal}
+\examples{
+.bsaqfactor(freqs = c(1, 2, 3, 4, 5, 6, 7, 8), power = c(1, 2, 3, 4, 5, 6, 7, 8), fpeak = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

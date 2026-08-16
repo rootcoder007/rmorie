@@ -17,3 +17,7 @@ A step of the helpers_ot implementation. Called by \code{.ot_sinkhorn}. See the 
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.ot_lse(V)
+}

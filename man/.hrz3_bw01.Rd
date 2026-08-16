@@ -17,3 +17,6 @@ marginals are exactly uniform on [0, 1], whose standard deviation is 1/sqrt(12),
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.hrz3_bw01(n = 5L)
+}

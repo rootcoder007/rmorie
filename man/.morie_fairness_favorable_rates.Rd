@@ -19,3 +19,6 @@ A step of the frns_metrics implementation. Called by \code{morie_fairness_bias_a
 The value of \code{rates}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_fairness_favorable_rates(outcome = c(1, 2, 3, 4, 5, 6, 7, 8), group = c("a", "b", "c"), favorable = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -14,3 +14,6 @@ A step of the funCA_native implementation. No other function in the package call
 A character value.
 }
 \keyword{internal}
+\examples{
+.funCA_cheatsheet()
+}

@@ -19,3 +19,6 @@ A step of the evpot implementation. Called by \code{Evpot}. See the file header 
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.gpd_nll(y = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5, xi = 5L)
+}

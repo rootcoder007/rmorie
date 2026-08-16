@@ -21,3 +21,6 @@ GEE with Poisson family and exchangeable working correlation (Liang & Zeger 1986
 A list with \code{coefficients}, \code{vbeta}, \code{alpha}, \code{phi}, \code{n_iter}, \code{converged}.
 }
 \keyword{internal}
+\examples{
+.morie_gee_poisson_exch(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), id = c("a", "b", "c"))
+}

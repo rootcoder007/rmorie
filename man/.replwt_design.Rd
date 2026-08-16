@@ -37,3 +37,7 @@ complex survey data, Journal of the American Statistical
 Association 83(401), 231-241, doi:10.1080/01621459.1988.10478591.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.replwt_design(V)
+}

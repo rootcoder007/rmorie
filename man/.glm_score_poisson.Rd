@@ -18,3 +18,6 @@ A step of the glm_native implementation. Called by \code{morie_glr_test}. See th
 A list with \code{z}, \code{kl}.
 }
 \keyword{internal}
+\examples{
+.glm_score_poisson(p0 = 5L, p1 = 5L)
+}

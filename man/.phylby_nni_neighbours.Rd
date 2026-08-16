@@ -17,3 +17,7 @@ A step of the phylby_native implementation. Called by \code{.phylby_step}, \code
 The value of \code{uniq}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.phylby_nni_neighbours(V)
+}

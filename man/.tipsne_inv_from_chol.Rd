@@ -28,3 +28,7 @@ The value of \code{out}, as built in the body.
     re-analyse, locate the crossing).
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.tipsne_inv_from_chol(M)
+}

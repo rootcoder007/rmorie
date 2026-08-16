@@ -14,3 +14,6 @@
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.ghc_mot_mu(coded = c(1, 2, 3, 4, 5, 6, 7, 8), L = 5L)
+}

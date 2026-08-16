@@ -18,3 +18,7 @@ A step of the mafft_native implementation. Called by \code{mafft_alignment}. See
 A list with \code{seqs}, \code{type}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.mafft_clean(V)
+}

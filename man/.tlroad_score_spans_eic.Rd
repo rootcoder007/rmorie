@@ -44,3 +44,6 @@ doi:10.1007/978-1-4419-9782-1. The first book, which this one is a
 sequel to.
 }
 \keyword{internal}
+\examples{
+.tlroad_score_spans_eic(A = c(1, 2, 3, 4, 5, 6, 7, 8), Y = c(1, 2, 3, 4, 5, 6, 7, 8), Q1 = c(1, 2, 3, 4, 5, 6, 7, 8), Q0 = c(1, 2, 3, 4, 5, 6, 7, 8), g = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

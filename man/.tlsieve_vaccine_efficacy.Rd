@@ -46,3 +46,7 @@ doi:10.2307/2533838. Sieve analysis.
 """
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tlsieve_vaccine_efficacy(V, V)
+}

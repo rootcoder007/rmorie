@@ -17,3 +17,7 @@ matrix or data frame, or a flat vector of even length in x, y order.
 A matrix, from \code{matrix}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.s03pairs(V)
+}

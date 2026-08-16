@@ -20,3 +20,6 @@ A step of the schab_rest_shared implementation. Called by \code{spkcrs}. See the
 A list with \code{D}, \code{K_11}, \code{K_22}, \code{r}.
 }
 \keyword{internal}
+\examples{
+.schab_dc_d(p1 = c(1, 2, 3, 4, 5, 6, 7, 8), p2 = c(1, 2, 3, 4, 5, 6, 7, 8), region = c(1, 2, 3, 4, 5, 6, 7, 8), r = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

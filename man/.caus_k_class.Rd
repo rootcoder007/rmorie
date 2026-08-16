@@ -20,3 +20,6 @@ least squares, and k = the Anderson-Rubin ratio is LIML. Keeping them one functi
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+.caus_k_class(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), Z = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

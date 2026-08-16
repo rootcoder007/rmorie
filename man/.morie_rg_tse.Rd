@@ -18,3 +18,6 @@ A step of the rangayyan_ccf implementation. Called by \code{.morie_rg_H}. See th
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_rg_tse(seg = c(1, 2, 3, 4, 5, 6, 7, 8), p = 0.5)
+}

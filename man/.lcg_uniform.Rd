@@ -18,3 +18,6 @@ not an LCG at all. Making the LCG exact would still have left the two arms on di
 The value of \code{.ghc_unif}.
 }
 \keyword{internal}
+\examples{
+.lcg_uniform(seed = 5L, n = 5L)
+}

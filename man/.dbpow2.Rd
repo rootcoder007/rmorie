@@ -17,3 +17,6 @@ A step of the wave implementation. Called by \code{Wave}, \code{Wvltdb}. See the
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.dbpow2(n = 5L)
+}

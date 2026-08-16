@@ -19,3 +19,6 @@ parameters (the Lilliefors construction; parameter-free for a fitted location-sc
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.rn_mc_p_fitted(d_obs = 5L, n = 5L, n_mc = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

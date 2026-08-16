@@ -18,3 +18,6 @@ A step of the helpers_s03 implementation. Called by \code{.cstat_uno}, \code{.dn
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.s03quantile7(v = c(1, 2, 3, 4, 5, 6, 7, 8), p = 0.5)
+}

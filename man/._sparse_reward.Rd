@@ -21,3 +21,6 @@ A step of the hindsr_native implementation. Called by \code{hindsr}. See the fil
 A numeric value.
 }
 \keyword{internal}
+\examples{
+._sparse_reward(s = c(1, 2, 3, 4, 5, 6, 7, 8), a = c(1, 2, 3, 4, 5, 6, 7, 8), s_next = c(1, 2, 3, 4, 5, 6, 7, 8), g = c(1, 2, 3, 4, 5, 6, 7, 8), tol = 0.5)
+}

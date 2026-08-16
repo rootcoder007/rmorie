@@ -14,3 +14,6 @@ A step of the tlctmle_native implementation. No other function in the package ca
 A character value.
 }
 \keyword{internal}
+\examples{
+.tlctmle_cheatsheet()
+}

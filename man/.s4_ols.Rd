@@ -18,3 +18,7 @@
 A list with \code{beta}, \code{fitted}, \code{resid}, \code{xtxinv}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.s4_ols(V, V)
+}

@@ -17,3 +17,6 @@ A step of the tmldyn_native implementation. Called by \code{.fluctuate}, \code{i
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.tmldyn_expit(z = 5L)
+}

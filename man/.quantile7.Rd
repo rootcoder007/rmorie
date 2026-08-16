@@ -18,3 +18,8 @@ A step of the bhltmsm_native implementation. Called by \code{treatment_weights}.
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+S <- c("a", "b", "c")
+.quantile7(S, V)
+}

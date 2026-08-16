@@ -18,3 +18,7 @@ A step of the b2info implementation. Called by \code{.b2ent}, \code{Difent}. See
 The value of \code{ifelse}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.b2xlogx(V)
+}

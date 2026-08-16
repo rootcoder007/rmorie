@@ -19,3 +19,6 @@ A step of the phylby_native implementation. Called by \code{.phylby_step}. See t
 The value of \code{parts}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.phylby_replace_branch(node = list(a = 1, b = 2), path = 5L, value = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

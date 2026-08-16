@@ -18,3 +18,7 @@ A step of the causrddm implementation. Called by \code{Rddmanip}. See the file h
 A list with \code{beta}, \code{mse}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.t4_poly4(V, V)
+}

@@ -42,3 +42,7 @@ reinforcement learning, planning and teaching", *Machine Learning* 8,
 293-321, doi:10.1007/BF00992699. Experience replay.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.dqnv_clip_reward(V)
+}

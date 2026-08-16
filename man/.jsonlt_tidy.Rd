@@ -17,3 +17,6 @@ A step of the jsonlt_native implementation. Called by \code{.jsonlt_num}. See th
 The value of \code{s}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.jsonlt_tidy(s = 5L)
+}

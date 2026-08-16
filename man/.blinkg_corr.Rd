@@ -33,3 +33,7 @@ A numeric value.
     studies." Biometrics 55(4), 997-1004.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.blinkg_corr(V, V)
+}

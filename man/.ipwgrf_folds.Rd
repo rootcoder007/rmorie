@@ -32,3 +32,7 @@ Crump, R. K., Hotz, V. J., Imbens, G. W. & Mitnik, O. A. (2009).
   effects.  Biometrika 96(1), 187-199, doi:10.1093/biomet/asn055.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.ipwgrf_folds(V, V)
+}

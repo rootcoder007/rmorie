@@ -14,3 +14,6 @@
 A list with \code{beta}, \code{se}, \code{vcov}, \code{residuals}.
 }
 \keyword{internal}
+\examples{
+.morie_did_ols_robust_se(X = 5L, y = 5L)
+}

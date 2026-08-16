@@ -19,3 +19,8 @@ A step of the helpers_s03 implementation. Called by \code{.btres_xtxinv}, \code{
 The value of \code{.s03cholsolve}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.s03ridgesolve(M, V)
+}

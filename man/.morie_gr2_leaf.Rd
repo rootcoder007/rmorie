@@ -18,3 +18,6 @@ A step of the geron_ml2_native implementation. Called by \code{.morie_gr2_grow}.
 A list with \code{leaf}, \code{value}, \code{proba}, \code{n}, \code{impurity}.
 }
 \keyword{internal}
+\examples{
+.morie_gr2_leaf(y = c(1, 2, 3, 4, 5, 6, 7, 8), criterion = 5L)
+}

@@ -17,3 +17,7 @@ A step of the geron_train_native implementation. Called by \code{.morie_gr_sym_d
 A logical value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_gr_sym_is_const(V)
+}

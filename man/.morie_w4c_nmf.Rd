@@ -21,3 +21,6 @@ A step of the geron_w4c_native implementation. Called by \code{morie_geron_nmf}.
 A list with \code{W}, \code{H}, \code{n_iter}.
 }
 \keyword{internal}
+\examples{
+.morie_w4c_nmf(X = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), k = 5L, max_iter = c(1, 2, 3, 4, 5, 6, 7, 8), tol = 0.5, seed = 5L)
+}

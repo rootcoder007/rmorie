@@ -17,3 +17,7 @@ in the active set iff its mask entry is 1; theta columns are always unmasked, hi
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.abcnnt_params(D)
+}

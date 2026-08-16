@@ -20,3 +20,6 @@ base-R fallback path. Extracted from the morie_dcc_multivariate_garch() optimise
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+.dccmd_negll(p = c(1, 2, 3, 4, 5, 6, 7, 8), Q_bar = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, Z = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

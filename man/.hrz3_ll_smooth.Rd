@@ -20,3 +20,6 @@ Local linear reproduces an affine function exactly, which is what makes an exact
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+.hrz3_ll_smooth(z = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), zq = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5)
+}

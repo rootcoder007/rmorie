@@ -33,3 +33,6 @@ Implicit Feedback Datasets", ICDM 2008, 263-272,
 doi:10.1109/ICDM.2008.22. The purely implicit alternative.
 }
 \keyword{internal}
+\examples{
+.svdpp_baseline(mu = c(1, 2, 3, 4, 5, 6, 7, 8), b_user = c(1, 2, 3, 4, 5, 6, 7, 8), b_item = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

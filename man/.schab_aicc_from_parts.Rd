@@ -19,3 +19,6 @@ mgwr.diagnostics.get_AICc Fotheringham et al. (2002) p. 61 eq (2.33) / p. 96 eq 
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.schab_aicc_from_parts(n = 5L, sigma2 = c(1, 2, 3, 4, 5, 6, 7, 8), tr_S = 5L)
+}

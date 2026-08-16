@@ -30,3 +30,7 @@ International Journal of Biostatistics 6(1), article 26,
 doi:10.2202/1557-4679.1260.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tmlcds_logit(V)
+}

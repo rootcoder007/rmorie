@@ -19,3 +19,6 @@ downward from n-1 and consuming one uniform per step, so the Python mirror repro
 The value of \code{idx}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_k05_permutation(n = 5L)
+}

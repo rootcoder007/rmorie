@@ -17,3 +17,7 @@ A step of the sctraj_native implementation. Called by \code{morie_sctraj}. See t
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.sctraj_non_outlier_range(V)
+}

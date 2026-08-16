@@ -14,3 +14,6 @@
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.atalib_slopes(n_heads = 5L)
+}

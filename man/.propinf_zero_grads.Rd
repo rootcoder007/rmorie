@@ -17,3 +17,7 @@ A step of the propinf_native implementation. Called by \code{.propinf_train_set_
 A list with \code{phis}, \code{psis}, \code{rho}.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.propinf_zero_grads(D)
+}

@@ -18,3 +18,6 @@ A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch
 The value of \code{p}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_km2_dist(p = 1, name = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

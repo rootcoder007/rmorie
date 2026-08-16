@@ -19,3 +19,6 @@ A step of the bhltmsm_native implementation. Called by \code{fit_msm}. See the f
 A matrix, from \code{solve}.
 }
 \keyword{internal}
+\examples{
+.wls_r(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

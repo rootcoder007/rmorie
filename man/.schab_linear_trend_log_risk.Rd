@@ -21,3 +21,6 @@ A step of the schab_glmm_shared implementation. No other function in the package
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.schab_linear_trend_log_risk(alpha = 0.5, u = c(1, 2, 3, 4, 5, 6, 7, 8), beta_t = c(1, 2, 3, 4, 5, 6, 7, 8), delta_i = c(0, 1, 0, 1, 1, 0, 1, 0), times = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -14,3 +14,7 @@ Detect the year column (OCC_YEAR or REPORT_YEAR).
 The terminal expression of the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tps_year_col(V)
+}

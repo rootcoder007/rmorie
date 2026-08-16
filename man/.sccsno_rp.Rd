@@ -27,3 +27,7 @@ Whitaker, H. J., Farrington, C. P., Spiessens, B. & Musonda, P.
 method", Statistics in Medicine 25, 1768-1797, doi:10.1002/sim.2302.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.sccsno_rp(V)
+}

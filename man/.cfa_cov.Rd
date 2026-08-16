@@ -17,3 +17,7 @@ A step of the cfafm2 implementation. Called by \code{Cfafm2}, \code{Cfaftr}. See
 The value of \code{S}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.cfa_cov(V)
+}

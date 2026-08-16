@@ -19,3 +19,7 @@ A step of the esl_native0 implementation. Called by \code{morie_esl_bootstrap_er
 A list with \code{X}, \code{y}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.esl_matrix(V, V)
+}

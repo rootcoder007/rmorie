@@ -21,3 +21,6 @@ Kernel-weighted least squares of \code{y} on powers of \code{x - x0}, with the s
 A list with \code{beta} (coefficients, intercept first) and   \code{V} (heteroskedasticity-robust covariance).
 }
 \keyword{internal}
+\examples{
+.morie_rdd_local_poly(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), x0 = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5)
+}

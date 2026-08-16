@@ -14,3 +14,6 @@ Internal helper: Wild Weights
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+.wild_weights(weight_distribution = 5L, n = 5L)
+}

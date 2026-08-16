@@ -19,3 +19,6 @@ P(F <= x) = I_{d1 x / (d1 x + d2)}(d1/2, d2/2)
 The value of \code{pbeta}.
 }
 \keyword{internal}
+\examples{
+.vcomp_f_cdf(x = 5L, d1 = c(1, 2, 3, 4, 5, 6, 7, 8), d2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

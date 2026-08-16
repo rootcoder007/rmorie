@@ -14,3 +14,6 @@ Part of the hbvMod_mixedcase_native implementation; see the file header for the 
 A character value.
 }
 \keyword{internal}
+\examples{
+.hbvMod_cheatsheet()
+}

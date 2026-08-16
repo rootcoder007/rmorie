@@ -14,3 +14,6 @@ One-line description of the method, in the same spirit as the Python \code{cheat
 Character string summarising interval mapping, LOD, the   single-marker threshold, ELOD and the 0.22 approximation.
 }
 \keyword{internal}
+\examples{
+.rqtmpl_morie_cheatsheet()
+}

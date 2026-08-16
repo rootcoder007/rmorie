@@ -20,3 +20,6 @@ A step of the k03volsv implementation. Called by \code{Volsv}. See the file head
 The value of \code{ll}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.k03_kalman_qll(y = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8), phi = 1, sig2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

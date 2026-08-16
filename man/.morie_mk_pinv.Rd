@@ -17,3 +17,7 @@ A step of the info_mackay implementation. Called by \code{morie_linevid}, \code{
 The value of \code{\%*\%}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_mk_pinv(V)
+}

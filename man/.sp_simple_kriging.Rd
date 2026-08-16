@@ -21,3 +21,6 @@ lambda = Sigma^-1 sigma; p = mu + sigma\' Sigma^-1 (Z - mu) (5.10); variance = s
 List with prediction, variance, weights, mu.
 }
 \keyword{internal}
+\examples{
+.sp_simple_kriging(coords = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8), target = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

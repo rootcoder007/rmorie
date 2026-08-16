@@ -17,3 +17,6 @@ variance 1, third moment 1, and deterministic, so both arms agree.
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.s03mammen(i = 5L)
+}

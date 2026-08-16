@@ -24,3 +24,6 @@ A step of the schab_gwr_shared implementation. Called by \code{.schab_mgwr_backf
 A list with \code{bandwidth}, \code{score}, \code{criterion}, \code{bounds}, \code{adaptive}.
 }
 \keyword{internal}
+\examples{
+.schab_select_bandwidth(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), coords = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

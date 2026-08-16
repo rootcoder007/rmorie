@@ -14,3 +14,6 @@ Internal helper: Morie Get Suggests
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+.morie_get_suggests()
+}

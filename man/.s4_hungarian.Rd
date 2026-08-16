@@ -17,3 +17,7 @@ Exact, # O(n^3). Ties broken by the first strictly improving index so both arms 
 The value of \code{ans}, as built in the body.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.s4_hungarian(M)
+}

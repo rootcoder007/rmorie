@@ -14,3 +14,7 @@
 A list with \code{b}, \code{a}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_dsp_butter(V, V)
+}

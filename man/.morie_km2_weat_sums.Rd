@@ -20,3 +20,6 @@ A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch
 The value of \code{list}.
 }
 \keyword{internal}
+\examples{
+.morie_km2_weat_sums(A_1 = c(1, 2, 3, 4, 5, 6, 7, 8), A_2 = c(1, 2, 3, 4, 5, 6, 7, 8), W_1 = c(1, 2, 3, 4, 5, 6, 7, 8), W_2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

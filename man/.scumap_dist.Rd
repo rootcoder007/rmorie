@@ -18,3 +18,7 @@ A step of the scumap_native implementation. No other function in the package cal
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.scumap_dist(V, V)
+}

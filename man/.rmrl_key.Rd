@@ -17,3 +17,6 @@ A step of the rmrl_native implementation. Called by \code{morie_rmrl}, \code{mor
 A character value.
 }
 \keyword{internal}
+\examples{
+.rmrl_key()
+}

@@ -14,3 +14,7 @@ Segments of length `nfft` with 50 percent overlap, Hamming window, averaged cros
 A list with \code{freq}, \code{spec}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_dsp_welch_csd(V)
+}

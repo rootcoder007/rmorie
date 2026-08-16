@@ -17,3 +17,7 @@ A step of the gwrcal_native implementation. Called by \code{morie_gwrcal}. See t
 The value of \code{D}, as built in the body.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.gwr_pairwise(M)
+}

@@ -19,3 +19,6 @@ A step of the causdidwd_native implementation. Called by \code{morie_etwfe}, \co
 A list with \code{y}, \code{u}, \code{t}, \code{n}.
 }
 \keyword{internal}
+\examples{
+.causdidwd_panel(Y = c(1, 2, 3, 4, 5, 6, 7, 8), unit = c(1, 2, 3, 4, 5, 6, 7, 8), period = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

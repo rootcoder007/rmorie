@@ -18,3 +18,7 @@ A step of the tmldta_native implementation. Called by \code{morie_tmldta}. See t
 The value of \code{lv}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.levels(V, V)
+}

@@ -48,3 +48,6 @@ doi:10.2307/2533838. Sieve analysis.
 """
 }
 \keyword{internal}
+\examples{
+.tlsieve_cause_specific_hazard(time = c(1, 2, 3, 4, 5, 6, 7, 8), event_type = c(1, 2, 3, 4, 5, 6, 7, 8), times = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

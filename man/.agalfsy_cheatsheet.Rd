@@ -14,3 +14,6 @@ A step of the agalfsy_native implementation. No other function in the package ca
 A character value.
 }
 \keyword{internal}
+\examples{
+.agalfsy_cheatsheet()
+}

@@ -18,3 +18,6 @@ A step of the abcgp_native implementation. Called by \code{.abcgp.sobol_sequence
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.abcgp.sobol_dir(dim = 5L, bits = 5L)
+}

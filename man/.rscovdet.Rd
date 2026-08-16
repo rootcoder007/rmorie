@@ -17,3 +17,7 @@
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.rscovdet(M)
+}

@@ -14,3 +14,7 @@ The three-step algorithm of IK (2012, REStud 79): (1) pilot density and conditio
 A list with \code{bandwidth}, \code{method}, \code{details}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_rdd_ik_native(V, V)
+}

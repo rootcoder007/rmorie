@@ -19,3 +19,6 @@ A step of the reinfc_native implementation. No other function in the package cal
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.reinfc_baseline_series(rewards = c(1, 2, 3, 4, 5, 6, 7, 8), baseline = 5L, gamma = 0.5)
+}

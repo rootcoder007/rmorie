@@ -37,3 +37,6 @@ Biometrics 30(1), 89-99, doi:10.2307/2529620, for the tie handling and the
 baseline cumulative hazard estimator used here.
 }
 \keyword{internal}
+\examples{
+.survnnr_c_index(times = c(1, 2, 3, 4, 5, 6, 7, 8), events = c(1, 2, 3, 4, 5, 6, 7, 8), risk = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

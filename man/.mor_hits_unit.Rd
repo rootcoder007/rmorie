@@ -17,3 +17,7 @@ A step of the hits_native implementation. Called by \code{morie_hits}. See the f
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.mor_hits_unit(V)
+}

@@ -14,3 +14,6 @@ Internal helper: Siu P Detect Language
 The terminal expression of the body.
 }
 \keyword{internal}
+\examples{
+.siu_p_detect_language(text = 5L)
+}

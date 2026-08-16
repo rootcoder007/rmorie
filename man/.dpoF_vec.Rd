@@ -18,3 +18,7 @@ A step of the dpoF_native implementation. Called by \code{morie_dpoF}, \code{opt
 The value of \code{v}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.dpoF_vec(V, V)
+}

@@ -17,3 +17,6 @@ Part of the droSPI_mixedcase_native implementation; see the file header for the 
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.drospi_as_z(h = 0.5)
+}

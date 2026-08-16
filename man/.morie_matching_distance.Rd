@@ -14,3 +14,6 @@
 The value of \code{stop}.
 }
 \keyword{internal}
+\examples{
+.morie_matching_distance(df = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), ps = list(a = 1, b = 2))
+}

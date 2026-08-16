@@ -20,3 +20,6 @@ A step of the schaben_native implementation. Called by \code{morie_cressie_hawki
 A list with \code{centres}, \code{idx}.
 }
 \keyword{internal}
+\examples{
+.morie_sb_groups(h = 0.5, bins = 5L, cutoff = 0.5, exact = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

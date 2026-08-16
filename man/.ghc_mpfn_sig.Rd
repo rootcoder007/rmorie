@@ -14,3 +14,6 @@
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+.ghc_mpfn_sig(x = 5L)
+}

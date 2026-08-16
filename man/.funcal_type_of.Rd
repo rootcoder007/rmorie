@@ -18,3 +18,6 @@ A step of the funcal_native implementation. Called by \code{morie_funcal_assign_
 A character value.
 }
 \keyword{internal}
+\examples{
+.funcal_type_of(n_query_side = 5L, n_target_side = 5L)
+}

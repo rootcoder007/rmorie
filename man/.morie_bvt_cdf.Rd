@@ -20,3 +20,6 @@ A step of the copula_native implementation. Called by \code{morie_copula_cdf}. S
 The value of \code{$}.
 }
 \keyword{internal}
+\examples{
+.morie_bvt_cdf(x = 5L, y = 5L, rho = 0.5, nu = 0.5)
+}

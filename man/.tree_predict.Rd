@@ -14,3 +14,8 @@ Accepts either the flat node table produced by the compiled kernel or the nested
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.tree_predict(D, V)
+}

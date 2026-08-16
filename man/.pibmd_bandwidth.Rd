@@ -17,3 +17,7 @@ A step of the pibmd_native implementation. Called by \code{.pibmd_kl_kde}. See t
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.pibmd_bandwidth(V)
+}

@@ -27,3 +27,6 @@ Technical Report CMU-CS-90-190, School of Computer Science, Carnegie
 Mellon University.
 }
 \keyword{internal}
+\examples{
+.ssmpar_cheatsheet()
+}

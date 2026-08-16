@@ -14,3 +14,6 @@
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_matching_result(matched_data = c(1, 2, 3, 4, 5, 6, 7, 8), n_treated = c(1, 2, 3, 4, 5, 6, 7, 8), n_matched_control = c(1, 2, 3, 4, 5, 6, 7, 8), match_pairs = c(1, 2, 3, 4, 5, 6, 7, 8), method = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

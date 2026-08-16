@@ -18,3 +18,7 @@ A step of the rouge_native implementation. Called by \code{morie_lcs_length}, \c
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.rouge_lcs_length(V, V)
+}

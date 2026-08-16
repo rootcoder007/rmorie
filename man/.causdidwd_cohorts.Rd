@@ -18,3 +18,7 @@ A step of the causdidwd_native implementation. Called by \code{morie_etwfe}, \co
 A list with \code{G}, \code{ts}, \code{order}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.causdidwd_cohorts(V, V)
+}

@@ -43,3 +43,6 @@ Recommendation", *ICDM 2018*, 197-206, arXiv:1808.09781. SASRec, the
 unpersonalised model being extended; implemented in :mod:`sasRec`.
 }
 \keyword{internal}
+\examples{
+.sse4r_parameter_count(n_users = c(1, 2, 3, 4, 5, 6, 7, 8), n_items = c(1, 2, 3, 4, 5, 6, 7, 8), user_dim = TRUE, item_dim = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

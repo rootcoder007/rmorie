@@ -21,3 +21,6 @@ A Gaussian kernel has unbounded support, so on the compact [0, 1]^2 a fixed shar
 A list with \code{f}, \code{mass}.
 }
 \keyword{internal}
+\examples{
+.hrz3_fxw_grid(u = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8), wq = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5)
+}

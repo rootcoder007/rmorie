@@ -19,3 +19,6 @@ the Python arm\\'s k_function; needed by Diggle-Chetwynd\\'s D(h).
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+.schab_k_border(p = 0.5, region = c(1, 2, 3, 4, 5, 6, 7, 8), r = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

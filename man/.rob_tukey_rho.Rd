@@ -18,3 +18,7 @@ A step of the robust_native implementation. Called by \code{.rob_s_scale}, \code
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.rob_tukey_rho(V, V)
+}

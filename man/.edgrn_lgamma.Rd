@@ -17,3 +17,7 @@ A step of the edgrn_native implementation. Called by \code{.edgrn_betainc}, \cod
 The value of \code{lgamma}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.edgrn_lgamma(V)
+}

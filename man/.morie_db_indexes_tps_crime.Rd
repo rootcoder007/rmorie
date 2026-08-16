@@ -14,3 +14,6 @@ Internal helper: Morie Db Indexes Tps Crime
 The value of \code{list}.
 }
 \keyword{internal}
+\examples{
+.morie_db_indexes_tps_crime()
+}

@@ -18,3 +18,8 @@ A step of the causal_molak implementation. Called by \code{.morie_ml_acyclic}, \
 The value of \code{lapply}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.morie_ml_children(M, V)
+}

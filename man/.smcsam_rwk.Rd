@@ -18,3 +18,7 @@ random_walk_kernel(scale, n_moves), performs n_moves of x\\' = x + Normal(0, sca
 The value of \code{function}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.smcsam_rwk(V, V)
+}

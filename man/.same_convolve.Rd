@@ -14,3 +14,7 @@ Internal helper: Same Convolve
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.same_convolve(V, V)
+}

@@ -21,3 +21,6 @@ A step of the schab_fit_shared implementation. Called by \code{spols}, \code{spw
 A list with \code{nugget}, \code{partial_sill}, \code{range}, \code{objective}, \code{converged}.
 }
 \keyword{internal}
+\examples{
+.schab_fit_semivariogram(lags = c(1, 2, 3, 4, 5, 6, 7, 8), ghat = c(1, 2, 3, 4, 5, 6, 7, 8), counts = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

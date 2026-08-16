@@ -26,3 +26,7 @@ indicator design over substituent positions, least-squares fitting,
 and the singularity that forces a constraint.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.frwil_prep(V, V)
+}

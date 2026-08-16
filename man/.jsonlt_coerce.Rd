@@ -18,3 +18,6 @@ A step of the jsonlt_native implementation. No other function in the package cal
 A character value.
 }
 \keyword{internal}
+\examples{
+.jsonlt_coerce(v = c(1, 2, 3, 4, 5, 6, 7, 8), t = 5L)
+}

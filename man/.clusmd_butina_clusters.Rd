@@ -38,3 +38,7 @@ coefficient on binary fingerprints is computed inline (c / (a + b - c))
 so this arm is independent of sasimi_native.R.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.clusmd_butina_clusters(V)
+}

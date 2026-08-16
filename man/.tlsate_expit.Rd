@@ -43,3 +43,7 @@ Statistics* 86(1), 4-29, doi:10.1162/003465304323023651. The
 sample/population distinction.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tlsate_expit(V)
+}

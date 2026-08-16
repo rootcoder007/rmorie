@@ -14,3 +14,6 @@
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+.bayfac_category(two_log_bf = 5L)
+}

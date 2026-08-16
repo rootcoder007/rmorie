@@ -21,3 +21,6 @@ A step of the schab_fit_shared implementation. No other function in the package 
 The value of \code{function}.
 }
 \keyword{internal}
+\examples{
+.schab_objective(kind = c(1, 2, 3, 4, 5, 6, 7, 8), lags = 5L, ghat = c(1, 2, 3, 4, 5, 6, 7, 8), counts = c(1, 2, 3, 4, 5, 6, 7, 8), model = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

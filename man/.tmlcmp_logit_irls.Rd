@@ -44,3 +44,7 @@ for Non-Homogeneous Markov Chains Based on Censored Observations",
 Scandinavian Journal of Statistics 5(3), 141-150.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.tmlcmp_logit_irls(M, M)
+}

@@ -14,3 +14,6 @@
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+.btblen_lam(t = 5L)
+}

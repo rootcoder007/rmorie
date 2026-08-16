@@ -14,3 +14,6 @@ Internal helper: Siu Load Manifest Raw
 The value of \code{tryCatch}.
 }
 \keyword{internal}
+\examples{
+.siu_load_manifest_raw()
+}

@@ -17,3 +17,7 @@ distribution-function estimator smooths with the kernel\\'s integral, not the ke
 The value of \code{stats::pnorm}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.fz_W(V)
+}

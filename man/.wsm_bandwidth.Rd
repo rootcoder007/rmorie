@@ -18,3 +18,7 @@ normal reference; "3.29" is 0.79 R n^(-1/5) with R the interquartile range; "3.3
 Nothing; this branch always raises.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.wsm_bandwidth(V)
+}

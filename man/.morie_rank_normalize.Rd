@@ -17,3 +17,7 @@ A step of the mcmc_native implementation. Called by \code{.morie_split_rhat}, \c
 A matrix, from \code{matrix}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.morie_rank_normalize(M)
+}

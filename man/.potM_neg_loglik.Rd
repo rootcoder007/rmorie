@@ -18,3 +18,7 @@ A step of the potM_mixedcase_native implementation. Called by \code{.potM_gpd_ml
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.potM_neg_loglik(V, V)
+}

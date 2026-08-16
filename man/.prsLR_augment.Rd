@@ -26,3 +26,7 @@ DeRemer, F. L. (1971) "Simple LR(k) grammars", Communications of the
 ACM 14(7), 453-460, doi:10.1145/362619.362625.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.prsLR_augment(D)
+}

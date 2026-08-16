@@ -14,3 +14,6 @@ A step of the hierF_native implementation. No other function in the package call
 A character value.
 }
 \keyword{internal}
+\examples{
+.hierF_cheatsheet()
+}

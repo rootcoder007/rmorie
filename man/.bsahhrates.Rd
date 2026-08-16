@@ -17,3 +17,6 @@ potential v in mV, modern sign convention, rest -65 mV.  Removable singularities
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+.bsahhrates(v = 5L)
+}

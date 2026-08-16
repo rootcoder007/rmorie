@@ -14,3 +14,6 @@ Internal helper: Fisher Z Ci
 A vector.
 }
 \keyword{internal}
+\examples{
+.fisher_z_ci(r = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, confidence = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

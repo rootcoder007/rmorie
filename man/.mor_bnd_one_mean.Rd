@@ -20,3 +20,6 @@ A step of the bndest_native implementation. Called by \code{morie_bndest}. See t
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+.mor_bnd_one_mean(yv = c(1, 2, 3, 4, 5, 6, 7, 8), seen = c(1, 2, 3, 4, 5, 6, 7, 8), k0 = c(1, 2, 3, 4, 5, 6, 7, 8), k1 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

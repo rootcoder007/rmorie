@@ -14,3 +14,6 @@ A step of the sarimax_native implementation. No other function in the package ca
 A character value.
 }
 \keyword{internal}
+\examples{
+.sarimax_cheatsheet()
+}

@@ -36,3 +36,6 @@ straight-through estimator this builds on.
 """
 }
 \keyword{internal}
+\examples{
+.vqgenc_cheatsheet()
+}

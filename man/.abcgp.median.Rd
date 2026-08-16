@@ -17,3 +17,7 @@ A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler}. S
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.abcgp.median(V)
+}

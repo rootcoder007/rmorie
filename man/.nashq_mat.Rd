@@ -18,3 +18,7 @@ A step of the nashq_native implementation. Called by \code{nash_equilibria_bimat
 The value of \code{M}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.nashq_mat(V, V)
+}

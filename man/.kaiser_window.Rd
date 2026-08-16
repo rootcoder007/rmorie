@@ -14,3 +14,6 @@ Internal helper: Kaiser Window
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.kaiser_window(N = 5L)
+}

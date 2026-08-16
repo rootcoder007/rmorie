@@ -14,3 +14,6 @@ Internal helper: Tps Has Ggplot2
 The value of \code{requireNamespace}.
 }
 \keyword{internal}
+\examples{
+.tps_has_ggplot2()
+}

@@ -17,3 +17,7 @@ A step of the tlnet1_native implementation. Called by \code{network_influence_va
 The value of \code{total}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tlnet1_count_edges(V)
+}

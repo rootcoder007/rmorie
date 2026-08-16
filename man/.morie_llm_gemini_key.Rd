@@ -14,3 +14,6 @@ Internal helper: Morie Llm Gemini Key
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+.morie_llm_gemini_key()
+}

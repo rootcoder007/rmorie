@@ -14,3 +14,6 @@ Internal helper: Siu Html To Text
 The value of \code{trimws}.
 }
 \keyword{internal}
+\examples{
+.siu_html_to_text(h = 0.5)
+}

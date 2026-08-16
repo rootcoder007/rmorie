@@ -19,3 +19,6 @@ A step of the prgrl_native implementation. Called by \code{easy_only_fit}, \code
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.prgrl_error(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

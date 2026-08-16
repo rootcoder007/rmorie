@@ -33,3 +33,7 @@ forecasting", *International Conference on Learning Representations*,
 arXiv:1905.10437. The doubly residual stack N-HiTS inherits.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.nhits_lstsq(V, V)
+}

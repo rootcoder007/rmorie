@@ -17,3 +17,7 @@ A step of the helpers_w3num implementation. Called by \code{.w3_ols}. See the fi
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.w3_inv_from_chol(M)
+}

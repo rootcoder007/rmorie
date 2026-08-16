@@ -17,3 +17,7 @@ A step of the smatch_native implementation. Called by \code{morie_smatch_sample_
 The value of \code{qnorm}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.smatch_qnorm(V)
+}

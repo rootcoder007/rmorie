@@ -17,3 +17,6 @@
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_normal_quantile(p = 0.5)
+}

@@ -20,3 +20,6 @@ A step of the geron_w4b_native implementation. Called by \code{morie_geron_multi
 A list with \code{output}, \code{attention}.
 }
 \keyword{internal}
+\examples{
+.morie_gr_w4b_sdpa(Q = 0.5, K = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

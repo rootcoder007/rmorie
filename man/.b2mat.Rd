@@ -17,3 +17,7 @@ A step of the b2ot implementation. Called by \code{.b2sinkhorn}, \code{Bottomup}
 The value of \code{m}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.b2mat(V)
+}

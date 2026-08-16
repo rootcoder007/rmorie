@@ -19,3 +19,6 @@ A step of the geron_train_native implementation. Called by \code{morie_geron_ddp
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+.morie_gr_lcg_normals(count = 5L, seed = 5L)
+}

@@ -18,3 +18,7 @@ A step of the twostg_native implementation. Called by \code{Twostg}. See the fil
 The value of \code{function}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_km_censoring(V, V)
+}

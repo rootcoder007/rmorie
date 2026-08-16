@@ -17,3 +17,7 @@ Validate a balanced panel
 A list with the matrix and its dimensions.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.panel(M)
+}

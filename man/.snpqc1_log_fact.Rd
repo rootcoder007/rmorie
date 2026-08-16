@@ -17,3 +17,7 @@ A step of the snpqc1_native implementation. Called by \code{morie_snpqc1_hwe_pva
 The value of \code{lgamma}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.snpqc1_log_fact(V)
+}

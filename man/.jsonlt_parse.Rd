@@ -17,3 +17,6 @@ A step of the jsonlt_native implementation. Called by \code{morie_jsonlt_from_js
 The value of \code{v}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.jsonlt_parse(txt = 5L)
+}

@@ -19,3 +19,6 @@ A step of the causal_molak implementation. Called by \code{.morie_ml_colliders},
 A logical value.
 }
 \keyword{internal}
+\examples{
+.morie_ml_adj(edges = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
+}

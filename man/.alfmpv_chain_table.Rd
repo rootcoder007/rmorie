@@ -29,3 +29,7 @@ A list with \code{species}, \code{evalue}, \code{identity}, \code{gaps}, \code{c
     Communications 13, 1265, doi:10.1038/s41467-022-28865-w
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.alfmpv_chain_table(V, V)
+}

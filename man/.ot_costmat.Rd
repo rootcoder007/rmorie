@@ -19,3 +19,7 @@ A step of the helpers_ot implementation. Called by \code{Otbarfree}, \code{Otker
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.ot_costmat(V, V)
+}

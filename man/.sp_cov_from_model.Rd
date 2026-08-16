@@ -18,3 +18,7 @@ C(h) = sill * R(h) for h > 0 and C(0) = nugget + sill: the nugget is a variance 
 Numeric object shaped like `h`.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.sp_cov_from_model(V)
+}

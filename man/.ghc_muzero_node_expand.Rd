@@ -14,3 +14,6 @@
 The value of \code{node}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.ghc_muzero_node_expand(node = c(1, 2, 3, 4, 5, 6, 7, 8), state = c(1, 2, 3, 4, 5, 6, 7, 8), prior = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -17,3 +17,7 @@ A step of the pelt_native implementation. Called by \code{.mor_pelt_core}, \code
 A list with \code{cs}, \code{css}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.mor_cp_tables(V)
+}

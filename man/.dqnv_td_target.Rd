@@ -44,3 +44,6 @@ reinforcement learning, planning and teaching", *Machine Learning* 8,
 293-321, doi:10.1007/BF00992699. Experience replay.
 }
 \keyword{internal}
+\examples{
+.dqnv_td_target(r = c(1, 2, 3, 4, 5, 6, 7, 8), s2 = 5L, Q_target = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

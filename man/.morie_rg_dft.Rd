@@ -17,3 +17,7 @@ A step of the rangayyan_cep implementation. Called by \code{CardioResp}, \code{C
 A list with \code{re}, \code{im}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_rg_dft(V)
+}

@@ -14,3 +14,6 @@ Internal helper: Arsau Lookup
 The value of \code{[[}.
 }
 \keyword{internal}
+\examples{
+.arsau_lookup(year_or_range = 5L, kind = 5L)
+}

@@ -14,3 +14,6 @@
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.aitcrg_inv(y = 5L, V = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+}

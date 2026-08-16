@@ -17,3 +17,7 @@ A step of the ecfp4_native implementation. Called by \code{.mor_fp_morgan}. See 
 A character value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.mor_fp_envkey(V)
+}

@@ -31,3 +31,7 @@ A logical value.
     classification and prediction." IBM internal report.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.phacf3_less(V, V)
+}

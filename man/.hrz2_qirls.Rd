@@ -14,3 +14,6 @@ Internal helper: fixed-iteration IRLS for the check loss
 The value of \code{beta}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.hrz2_qirls(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6, 7, 8), tau = 0.5)
+}

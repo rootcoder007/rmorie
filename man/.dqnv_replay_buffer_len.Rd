@@ -40,3 +40,7 @@ reinforcement learning, planning and teaching", *Machine Learning* 8,
 293-321, doi:10.1007/BF00992699. Experience replay.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.dqnv_replay_buffer_len(D)
+}

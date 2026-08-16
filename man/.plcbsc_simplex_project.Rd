@@ -17,3 +17,7 @@ A step of the plcbsc_native implementation. Called by \code{.plcbsc_synthetic_co
 The value of \code{pmax}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.plcbsc_simplex_project(V)
+}

@@ -28,3 +28,6 @@ DeRemer, F. L. (1971) "Simple LR(k) grammars", Communications of the
 ACM 14(7), 453-460, doi:10.1145/362619.362625.
 }
 \keyword{internal}
+\examples{
+.prsLR_first_seq(seq = c(1, 2, 3, 4, 5, 6, 7, 8), first = c(1, 2, 3, 4, 5, 6, 7, 8), nts = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -19,3 +19,6 @@ fallback. Extracted from the morie_garch_fit() optimiser closure so the paramete
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.garch_negll(p = c(1, 2, 3, 4, 5, 6, 7, 8), r = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
+}

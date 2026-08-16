@@ -18,3 +18,7 @@ A step of the cnvlfc_native implementation. Called by \code{.cnvlfc_cross_map}. 
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.cnvlfc_corr(V, V)
+}

@@ -18,3 +18,8 @@ A step of the safrl_native implementation. Called by \code{morie_safrl}. See the
 The value of \code{rows}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.safrl_mat(M, V)
+}

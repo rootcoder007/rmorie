@@ -18,3 +18,7 @@ A step of the e_div_native implementation. Called by \code{morie_e_div}. See the
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.mor_ed_dist(V, V)
+}

@@ -14,3 +14,7 @@ Pooled indicator vector: 1 where the i-th smallest is an X
 A vector.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.gbTagged(V, V)
+}

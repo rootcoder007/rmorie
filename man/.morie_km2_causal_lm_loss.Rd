@@ -19,3 +19,6 @@ A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_in
 A list with \code{loss}, \code{perplexity}, \code{token_losses}, \code{n_tokens}, \code{vocab_size}.
 }
 \keyword{internal}
+\examples{
+.morie_km2_causal_lm_loss(logits = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), targets = list(a = 1, b = 2))
+}

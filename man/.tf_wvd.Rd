@@ -19,3 +19,7 @@ A step of the rangayyan_tf implementation. Called by \code{Gtfd}, \code{WvDist}.
 A list with \code{tfd}, \code{freqs}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tf_wvd(V, V)
+}

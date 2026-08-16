@@ -17,3 +17,7 @@ A step of the reds_native implementation. Called by \code{.rn_mc_p_fitted}, \cod
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.rn_ks_stat(V)
+}

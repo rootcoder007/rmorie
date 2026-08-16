@@ -29,3 +29,6 @@ Whitaker, H. J., Farrington, C. P., Spiessens, B. & Musonda, P.
 method", Statistics in Medicine 25, 1768-1797, doi:10.1002/sim.2302.
 }
 \keyword{internal}
+\examples{
+.sccsno_risk(t = 5L, exposure = 5L, risk_periods = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+}

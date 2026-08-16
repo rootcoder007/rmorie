@@ -22,3 +22,6 @@ A step of the s04core implementation. Called by \code{Causmnde}, \code{Intmd4}, 
 A list with \code{cde}, \code{intref}, \code{intmed}, \code{pie}, \code{te}.
 }
 \keyword{internal}
+\examples{
+.s4_fourway(theta = 0.5, beta = 0.5, cbar = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

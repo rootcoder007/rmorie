@@ -34,3 +34,6 @@ The value of \code{p}, as built in the body.
     defaults and the two split potentials.
 }
 \keyword{internal}
+\examples{
+.goldsc_ipow(x = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

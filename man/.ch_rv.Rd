@@ -19,3 +19,7 @@ A step of the chzlt implementation. Called by \code{Chzlt}. See the file header 
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.ch_rv(V, V)
+}

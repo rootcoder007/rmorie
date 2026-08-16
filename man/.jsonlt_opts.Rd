@@ -28,3 +28,6 @@ A step of the jsonlt_native implementation. Called by \code{.jsonlt_ser_opts}, \
 The value of \code{o}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.jsonlt_opts()
+}

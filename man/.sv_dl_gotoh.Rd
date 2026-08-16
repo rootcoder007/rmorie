@@ -22,3 +22,7 @@ A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_gotoh_sco
 A list with \code{best}, \code{best_at}.
 }
 \keyword{internal}
+\examples{
+S <- c("a", "b", "c")
+.sv_dl_gotoh(S, S)
+}

@@ -18,3 +18,6 @@ A step of the climate_w511_native implementation. Called by \code{Qmds}. See the
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_qm_quant(sx = c(1, 2, 3, 4, 5, 6, 7, 8), p = 0.5)
+}

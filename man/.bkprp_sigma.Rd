@@ -14,3 +14,6 @@ Internal helper: Bkprp Sigma
 The value of \code{switch}.
 }
 \keyword{internal}
+\examples{
+.bkprp_sigma(z = c(1, 2, 3, 4, 5, 6, 7, 8), activation = 5L)
+}

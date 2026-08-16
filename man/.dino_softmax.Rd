@@ -19,3 +19,7 @@ A step of the dinmlt implementation. Called by \code{Dinmlt}, \code{Dinov2}. See
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.dino_softmax(V, V)
+}

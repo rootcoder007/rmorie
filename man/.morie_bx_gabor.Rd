@@ -19,3 +19,6 @@ dictionary is reproducible without an RNG
 A list with \code{atoms}, \code{params}.
 }
 \keyword{internal}
+\examples{
+.morie_bx_gabor(n = 5L, natoms = 5L)
+}

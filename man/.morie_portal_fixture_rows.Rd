@@ -14,3 +14,6 @@ Internal helper: Morie Portal Fixture Rows
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_portal_fixture_rows(fname = 5L)
+}

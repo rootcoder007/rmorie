@@ -14,3 +14,7 @@ Live PSDP ArcGIS exports use ISO 8601 (\code{2017-05-20T19:05:58.000Z}); the bun
 The value of \code{dt}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_tps_parse_datetime(V)
+}

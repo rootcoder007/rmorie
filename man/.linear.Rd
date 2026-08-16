@@ -19,3 +19,6 @@ A step of the mambss_native implementation. Called by \code{selective_scan}. See
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.linear(x = 5L, Wm = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), b = 5L)
+}

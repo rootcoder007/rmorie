@@ -18,3 +18,8 @@ A step of the mafft_native implementation. Called by \code{.mafft_nw}. See the f
 A list with \code{gs}, \code{ge}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+S <- c("a", "b", "c")
+.mafft_gap_profiles(S, V)
+}

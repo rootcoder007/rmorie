@@ -22,3 +22,6 @@ A step of the schab_rest_shared implementation. Called by \code{.schab_moving_wi
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.schab_krige_at(coords = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8), target = c(1, 2, 3, 4, 5, 6, 7, 8), sill = c(1, 2, 3, 4, 5, 6, 7, 8), rng = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

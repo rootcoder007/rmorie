@@ -14,3 +14,6 @@ Internal helper: Causal Have Sensitivitymv
 The value of \code{requireNamespace}.
 }
 \keyword{internal}
+\examples{
+.causal_have_sensitivitymv()
+}

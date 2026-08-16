@@ -14,3 +14,7 @@ Elementwise on a distance \code{d} (vector or matrix). \eqn{k(d) = a^2 (1 + \sqr
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.matern52(V)
+}

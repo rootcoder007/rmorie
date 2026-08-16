@@ -27,3 +27,7 @@ A vector, from \code{c}.
     5998-6008.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.alfomg_shape(V)
+}

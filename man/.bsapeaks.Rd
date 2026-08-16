@@ -20,3 +20,7 @@ A step of the rangayyan_phys implementation. Called by \code{CadAcou}, \code{Cad
 A list with \code{freqs}, \code{powers}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.bsapeaks(V, V)
+}

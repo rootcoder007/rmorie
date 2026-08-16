@@ -18,3 +18,6 @@ A step of the over_native implementation. Called by \code{.mor_ks_2samp}. See th
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.mor_ks_sf(d = 5L, n = 5L)
+}

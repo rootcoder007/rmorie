@@ -14,3 +14,6 @@ Internal helper: Tps Sp Lap
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.tps_sp_lap(F_ = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), dx = c(1, 2, 3, 4, 5, 6, 7, 8), dy = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

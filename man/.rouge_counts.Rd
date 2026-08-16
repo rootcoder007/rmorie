@@ -17,3 +17,7 @@ A step of the rouge_native implementation. Called by \code{morie_rouge_n}. See t
 The value of \code{table}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.rouge_counts(V)
+}

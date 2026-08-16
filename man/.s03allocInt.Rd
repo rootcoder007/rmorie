@@ -18,3 +18,6 @@ Deterministic: the units left over after flooring go to the largest fractional p
 The value of \code{base}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.s03allocInt(alloc = c(1, 2, 3, 4, 5, 6, 7, 8), m0 = 5L)
+}

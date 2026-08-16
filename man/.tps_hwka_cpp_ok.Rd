@@ -14,3 +14,6 @@ Internal helper: Tps Hwka Cpp Ok
 The value of \code{exists}.
 }
 \keyword{internal}
+\examples{
+.tps_hwka_cpp_ok()
+}

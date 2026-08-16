@@ -14,3 +14,7 @@ Internal helper: Entheo Extract Pair
 A list with \code{e_dmt}, \code{f_dmt}, \code{e_pcb}, \code{f_pcb}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.entheo_extract_pair(V, V)
+}

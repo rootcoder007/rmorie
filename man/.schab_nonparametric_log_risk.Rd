@@ -21,3 +21,6 @@ A step of the schab_glmm_shared implementation. No other function in the package
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.schab_nonparametric_log_risk(alpha = 0.5, u = c(1, 2, 3, 4, 5, 6, 7, 8), phi = 0.5, gamma = 0.5)
+}

@@ -19,3 +19,6 @@ A step of the funCA_native implementation. Called by \code{morie_funCA_functiona
 A list with \code{lam}, \code{phi}, \code{all}.
 }
 \keyword{internal}
+\examples{
+.funCA_fpca(C = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6, 7, 8), n_keep = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

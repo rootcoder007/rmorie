@@ -14,3 +14,6 @@ Internal helper: Siu P Parse Drid From Url
 The value of \code{as.integer}.
 }
 \keyword{internal}
+\examples{
+.siu_p_parse_drid_from_url(url = 5L)
+}

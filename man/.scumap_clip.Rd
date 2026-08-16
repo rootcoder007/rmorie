@@ -18,3 +18,6 @@ A step of the scumap_native implementation. Called by \code{morie_scumap_umap_si
 The value of \code{v}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.scumap_clip(v = 5L)
+}

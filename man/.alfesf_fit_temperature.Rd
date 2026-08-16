@@ -20,3 +20,8 @@ A step of the alfesf_native implementation. Called by \code{morie_alfesf_esmfold
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.alfesf_fit_temperature(M, V)
+}

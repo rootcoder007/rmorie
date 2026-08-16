@@ -14,3 +14,6 @@ A step of the fwxF_mixedcase_native implementation. No other function in the pac
 A character value.
 }
 \keyword{internal}
+\examples{
+.fwxF_cheatsheet()
+}

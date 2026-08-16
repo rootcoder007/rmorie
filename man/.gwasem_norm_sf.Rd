@@ -17,3 +17,7 @@ A step of the gwasem_native implementation. Called by \code{morie_gwasem}. See t
 The value of \code{pnorm}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.gwasem_norm_sf(V)
+}

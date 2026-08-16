@@ -17,3 +17,7 @@ A step of the linwlr_native implementation. Called by \code{.linwlr_logit_irls},
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.linwlr_sigmoid(V)
+}

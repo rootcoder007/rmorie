@@ -28,3 +28,6 @@ Szegedy, C. et al. (2015) "Going deeper with convolutions", CVPR 2015,
 1-9.
 }
 \keyword{internal}
+\examples{
+.resnxt_match_complexity(width = 5L, cardinality = c(1, 2, 3, 4, 5, 6, 7, 8), target_parameters = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

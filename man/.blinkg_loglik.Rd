@@ -33,3 +33,6 @@ A numeric value.
     studies." Biometrics 55(4), 997-1004.
 }
 \keyword{internal}
+\examples{
+.blinkg_loglik(rss = 5L, n = 5L)
+}

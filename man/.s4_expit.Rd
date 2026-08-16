@@ -17,3 +17,7 @@ A step of the s04core implementation. Called by \code{.s4_glmbin}, \code{.s4_tml
 The value of \code{ifelse}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.s4_expit(V)
+}

@@ -19,3 +19,6 @@ A step of the frns_metrics implementation. No other function in the package call
 The value of \code{rates}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.frns_favorable_rates(outcome = c(1, 2, 3, 4, 5, 6, 7, 8), group = c("a", "b", "c"), favorable = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

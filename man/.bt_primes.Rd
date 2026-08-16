@@ -17,3 +17,6 @@ A step of the btmult implementation. Called by \code{.bt_counts}. See the file h
 The value of \code{ps}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.bt_primes(m = 5L)
+}

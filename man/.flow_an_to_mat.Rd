@@ -29,3 +29,7 @@ Papamakarios, G. et al. (2021) "Normalizing Flows for Probabilistic
 Modeling and Inference", JMLR 22(57), 1-64, arXiv:1912.02762.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.flow_an_to_mat(V)
+}

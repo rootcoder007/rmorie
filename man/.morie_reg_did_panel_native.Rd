@@ -14,3 +14,6 @@ The `est_method = "reg"` estimand of `did::att_gt` / `DRDID::reg_did_panel`.
 A list with \code{att}, \code{IF}, \code{se}.
 }
 \keyword{internal}
+\examples{
+.morie_reg_did_panel_native(dy = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), D = 5L, X = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+}

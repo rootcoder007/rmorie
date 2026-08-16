@@ -21,3 +21,6 @@ A step of the schab_rest_shared implementation. Called by \code{spnst}. See the 
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.schab_practical_range(theta1 = 5L)
+}

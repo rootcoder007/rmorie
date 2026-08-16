@@ -18,3 +18,7 @@ A step of the groebn_native implementation. Called by \code{.groebn_buchberger},
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.groebn_leading_monomial(V)
+}

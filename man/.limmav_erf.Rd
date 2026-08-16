@@ -17,3 +17,6 @@ A step of the limmav_native implementation. Called by \code{morie_limmav}. See t
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.limmav_erf(x = 5L)
+}

@@ -18,3 +18,7 @@ A step of the pelt_native implementation. Called by \code{morie_binseg}, \code{m
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.mor_cp_segmeans(V, V)
+}

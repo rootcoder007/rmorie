@@ -33,3 +33,6 @@ prevention: an algorithm for detecting Salmonella outbreaks",
 Emerging Infectious Diseases 3(3), 395-400.
 }
 \keyword{internal}
+\examples{
+.surepi_baseline(counts = c(1, 2, 3, 4, 5, 6, 7, 8), t = 5L, lag = 5L, width = 5L, sigma_floor = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

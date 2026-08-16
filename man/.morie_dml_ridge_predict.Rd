@@ -14,3 +14,6 @@ Internal helper: ridge train/predict
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_dml_ridge_predict(Xtr = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), ytr = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), Xte = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+}

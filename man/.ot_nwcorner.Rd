@@ -18,3 +18,7 @@ A step of the helpers_ot implementation. Called by \code{.ot_emd}. See the file 
 A list with \code{T}, \code{basis}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.ot_nwcorner(V, V)
+}

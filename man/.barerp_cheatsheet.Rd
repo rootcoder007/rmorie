@@ -14,3 +14,6 @@ One-line cheatsheet
 Character string summarising the method.
 }
 \keyword{internal}
+\examples{
+.barerp_cheatsheet()
+}

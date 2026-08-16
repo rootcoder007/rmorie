@@ -18,3 +18,7 @@ A step of the s04core implementation. Called by \code{Nprphet}, \code{Winz}. See
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.s4_quantile7(V, V)
+}

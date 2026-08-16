@@ -18,3 +18,8 @@ A step of the causal_molak implementation. Called by \code{morie_docalc}. See th
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.morie_ml_cutout(M, V)
+}

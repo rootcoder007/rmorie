@@ -31,3 +31,7 @@ International Journal of Biostatistics 6(1), article 26,
 doi:10.2202/1557-4679.1260.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.tmlcds_lstsq(M, M)
+}

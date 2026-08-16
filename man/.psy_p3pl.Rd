@@ -20,3 +20,6 @@ with c > 0 the curve never reaches zero.
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.psy_p3pl(theta = c(1, 2, 3, 4, 5, 6, 7, 8), a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, cc = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

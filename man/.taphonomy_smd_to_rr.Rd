@@ -14,3 +14,6 @@ Internal helper: Taphonomy Smd To Rr
 The value of \code{rr}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.taphonomy_smd_to_rr(d = 5L)
+}

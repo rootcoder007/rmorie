@@ -17,3 +17,7 @@ A step of the andmnh_native implementation. Called by \code{.singular_value_adju
 A list with \code{u}, \code{s}, \code{v}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.svd_r(V)
+}

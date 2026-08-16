@@ -18,3 +18,6 @@ A step of the climate_w511_native implementation. Called by \code{Qmds}. See the
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_qm_ecdf(sx = 5L, v = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

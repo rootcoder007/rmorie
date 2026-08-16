@@ -18,3 +18,7 @@ A step of the fauzi_native implementation. Called by \code{.fz_cs_common}, \code
 The value of \code{x}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.fz_check_sample(V)
+}

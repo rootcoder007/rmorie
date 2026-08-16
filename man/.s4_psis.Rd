@@ -17,3 +17,7 @@ A step of the s04core implementation. Called by \code{Infcrt}, \code{Khatd}, \co
 A list with \code{lw}, \code{k}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.s4_psis(V)
+}

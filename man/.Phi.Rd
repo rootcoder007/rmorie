@@ -17,3 +17,7 @@ A step of the bayopt_native implementation. Called by \code{acquisition_gradient
 The value of \code{pnorm}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.Phi(V)
+}

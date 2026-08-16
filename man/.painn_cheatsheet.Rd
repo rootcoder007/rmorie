@@ -14,3 +14,6 @@ A step of the painn_native implementation. No other function in the package call
 A character value.
 }
 \keyword{internal}
+\examples{
+.painn_cheatsheet()
+}

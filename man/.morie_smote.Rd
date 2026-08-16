@@ -19,3 +19,6 @@ SMOTE (Chawla et al. 2002): synthesize minority-class points by linear interpola
 A list with \code{X_new}, \code{y_new}.
 }
 \keyword{internal}
+\examples{
+.morie_smote(X = c(1, 2, 3, 4, 5, 6, 7, 8), y_chr = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

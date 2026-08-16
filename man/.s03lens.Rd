@@ -18,3 +18,6 @@ Matern (1960) V_n(A, A; v) of eq. (3.4.4) p. 38, at n = 2.  Shared with Hcoreg.
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.s03lens(r = 5L, v = 5L)
+}

@@ -18,3 +18,7 @@ A step of the tmldyn_native implementation. Called by \code{morie_tmldyn}. See t
 The value of \code{lapply}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tmldyn_folds(V, V)
+}

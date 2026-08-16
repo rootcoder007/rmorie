@@ -17,3 +17,7 @@ A step of the tail1_core implementation. No other function in the package calls 
 The value of \code{stats::sd}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.t1_sd(V)
+}

@@ -17,3 +17,7 @@ A step of the grclus_native implementation. Called by \code{.grclus_as_graph}. S
 Nothing; this branch always raises.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.grclus_rows_to_mat(M)
+}

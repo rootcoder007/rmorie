@@ -19,3 +19,6 @@ A step of the htpfn implementation. Called by \code{Htpfn}. See the file header 
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+.htpfourier(s = c(1, 2, 3, 4, 5, 6, 7, 8), L = 5L, P = 0.5)
+}

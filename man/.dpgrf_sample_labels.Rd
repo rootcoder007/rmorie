@@ -20,3 +20,6 @@ Mirrors \code{urn.sample_urn}: at each step either start a new cluster with prob
 A list with \code{labels}, \code{counts},   \code{n_clusters}, \code{alpha}, \code{note}.
 }
 \keyword{internal}
+\examples{
+.dpgrf_sample_labels(n_regions = 5L, alpha = 0.05)
+}

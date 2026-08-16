@@ -17,3 +17,7 @@ A step of the snpqc1_native implementation. Called by \code{morie_snpqc1}, \code
 A list with \code{G}, \code{n}, \code{m}.
 }
 \keyword{internal}
+\examples{
+S <- c("a", "b", "c")
+.snpqc1_check(S)
+}

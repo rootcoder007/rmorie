@@ -20,3 +20,7 @@ A step of the rangayyan_tf implementation. Called by \code{CprWt}, \code{Cwt}. S
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tf_cwt(V, V)
+}

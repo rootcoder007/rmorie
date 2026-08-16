@@ -14,3 +14,7 @@ Internal helper: Otis Tps Toronto Seg By Year
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+.otis_tps_toronto_seg_by_year(D)
+}

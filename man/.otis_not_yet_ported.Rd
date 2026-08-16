@@ -14,3 +14,7 @@ Internal helper: Otis Not Yet Ported
 The value of \code{.otis_wrap}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.otis_not_yet_ported(V)
+}

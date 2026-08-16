@@ -18,3 +18,6 @@ Exact rationals (Fraction-equivalent) ------------------------------------------
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+.groebn_fr(num = 5L)
+}

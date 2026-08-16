@@ -19,3 +19,6 @@ A step of the gwrcal_native implementation. Called by \code{.gwr_criterion}. See
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.gwr_aic(n = 5L, sigma2 = 5L, tr_S = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -17,3 +17,6 @@ np.random.default_rng(seed) (_array_core _SplitMix64), so the draws here are bit
 The value of \code{e}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.wrd2v_rng(seed = 5L)
+}

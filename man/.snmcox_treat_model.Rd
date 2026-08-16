@@ -32,3 +32,7 @@ with time-varying treatments", Pharmacoepidemiology and Drug Safety 14(7),
 477-491, doi:10.1002/pds.1064.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.snmcox_treat_model(V, V)
+}

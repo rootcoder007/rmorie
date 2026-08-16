@@ -19,3 +19,6 @@ A step of the sarimax_native implementation. No other function in the package ca
 A list with \code{v}, \code{f}.
 }
 \keyword{internal}
+\examples{
+.filter_column(w = c(1, 2, 3, 4, 5, 6, 7, 8), ar = c(1, 2, 3, 4, 5, 6, 7, 8), ma = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

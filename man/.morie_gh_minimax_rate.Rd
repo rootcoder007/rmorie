@@ -19,3 +19,6 @@ A step of the ghosal_native implementation. Called by \code{Ghosalfrsdensity}, \
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_gh_minimax_rate(n = 5L, s = 5L)
+}

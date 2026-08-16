@@ -17,3 +17,7 @@ A step of the airl_native implementation. Called by \code{morie_soft_value_itera
 A character value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.state_key(V)
+}

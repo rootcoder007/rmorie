@@ -19,3 +19,6 @@ expectation is E[min(T, horizon)] under independent censoring.
 The value of \code{ifelse}.
 }
 \keyword{internal}
+\examples{
+.morie_cf_rmst_pseudo(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), horizon = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

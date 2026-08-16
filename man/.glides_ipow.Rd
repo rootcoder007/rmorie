@@ -36,3 +36,6 @@ The value of \code{p}, as built in the body.
     Journal of Computer-Aided Molecular Design 11(5), 425-445.
 }
 \keyword{internal}
+\examples{
+.glides_ipow(x = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}

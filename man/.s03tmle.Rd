@@ -21,3 +21,6 @@ Int. J. Biostatistics 2(1), art. 11).  The initial Qbar is fluctuated along the 
 A list with \code{psi}, \code{se}, \code{eps}, \code{g}, \code{q1}, \code{q0}, \code{inf}, \code{ey1}, \code{ey0}, \code{scale}, \code{shift}.
 }
 \keyword{internal}
+\examples{
+.s03tmle(y = 5L, D = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

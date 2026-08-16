@@ -17,3 +17,7 @@ A step of the dits16_native implementation. Called by \code{adaln_zero}, \code{d
 A vector, from \code{as.numeric}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.dits16_vec(V)
+}

@@ -17,3 +17,7 @@ A step of the secarg_native implementation. Called by \code{morie_secarg_prehash
 The value of \code{writeBin}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.le32(V)
+}

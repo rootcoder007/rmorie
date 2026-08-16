@@ -19,3 +19,6 @@ A step of the fauzi_native implementation. Called by \code{morie_fauzi_b2_coeffi
 The value of \code{seq}.
 }
 \keyword{internal}
+\examples{
+.fz_seq(from = 5L, to = 5L, n = 5L)
+}

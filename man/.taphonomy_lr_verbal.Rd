@@ -14,3 +14,6 @@ Internal helper: Taphonomy Lr Verbal
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+.taphonomy_lr_verbal(lr = 5L)
+}

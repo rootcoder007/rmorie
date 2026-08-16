@@ -20,3 +20,7 @@ gamma_hat(h) = 1 / (2 |N(h)|) * sum (Z(s_i) - Z(s_j))^2
 List with lag, gamma, n_pairs.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.sp_empirical_variogram(V, V)
+}

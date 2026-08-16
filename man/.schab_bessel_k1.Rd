@@ -19,3 +19,7 @@ A step of the schab_st_shared implementation. Called by \code{.schab_whittle_cov
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.schab_bessel_k1(V)
+}

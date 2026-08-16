@@ -18,3 +18,7 @@ A step of the shdsmw_native implementation. Called by \code{shrinkage_msm}. See 
 The value of \code{list}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.hist(V)
+}

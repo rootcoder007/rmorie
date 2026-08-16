@@ -14,3 +14,7 @@ Structure of `did::mboot`: draw Mammen(1993) two-point weights per unit, perturb
 A list with \code{se}, \code{boot}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_did_mboot(V)
+}

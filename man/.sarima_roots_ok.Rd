@@ -18,3 +18,7 @@ A step of the sarima_native implementation. Called by \code{.sarima_fit}, \code{
 A logical value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.sarima_roots_ok(V)
+}

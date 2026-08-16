@@ -20,3 +20,6 @@ A step of the qpdual_native implementation. Called by \code{morie_qpdual}. See t
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+.lmo(gradient = c(1, 2, 3, 4, 5, 6, 7, 8), domain = 5L, lower = c(1, 2, 3, 4, 5, 6, 7, 8), upper = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -19,3 +19,6 @@ A step of the esl_native implementation. Called by \code{morie_esl_em_gmm}, \cod
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_esl_logmvn(X = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), mu = c(1, 2, 3, 4, 5, 6, 7, 8), S = 5L)
+}

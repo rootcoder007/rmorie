@@ -32,3 +32,6 @@ here, and its reduction to the empirical estimator without
 censoring), and the time-dependent area under the curve.
 }
 \keyword{internal}
+\examples{
+.survroc_empirical(T = c(1, 2, 3, 4, 5, 6, 7, 8), E = c(1, 2, 3, 4, 5, 6, 7, 8), M = 5L, c = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5))
+}

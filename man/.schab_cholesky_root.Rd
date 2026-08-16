@@ -18,3 +18,6 @@ upper triangular U with Sigma = U\\'U; L is that U\\'.
 A matrix, from \code{t}.
 }
 \keyword{internal}
+\examples{
+.schab_cholesky_root(cov = matrix(c(4, 1, 0, 1, 3, 1, 0, 1, 2), nrow = 3))
+}

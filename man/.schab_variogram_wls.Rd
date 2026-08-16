@@ -19,3 +19,6 @@ A step of the schab_rest_shared implementation. Called by \code{.schab_moving_wi
 A list with \code{sill}, \code{range}, \code{converged}, \code{wls}.
 }
 \keyword{internal}
+\examples{
+.schab_variogram_wls(h = c(1, 2, 3, 4, 5, 6, 7, 8), gamma = c(1, 2, 3, 4, 5, 6, 7, 8), counts = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

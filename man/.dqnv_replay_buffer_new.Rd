@@ -40,3 +40,6 @@ reinforcement learning, planning and teaching", *Machine Learning* 8,
 293-321, doi:10.1007/BF00992699. Experience replay.
 }
 \keyword{internal}
+\examples{
+.dqnv_replay_buffer_new(capacity = 5L)
+}

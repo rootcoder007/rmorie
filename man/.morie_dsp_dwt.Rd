@@ -14,3 +14,7 @@ Returns list(W = list of detail vectors level 1..J, V = final smooth, filter, n_
 A list with \code{W}, \code{V}, \code{filter}, \code{n_levels}, \code{n}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_dsp_dwt(V)
+}

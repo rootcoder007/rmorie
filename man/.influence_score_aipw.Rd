@@ -14,3 +14,6 @@ Internal helper: Influence Score Aipw
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.influence_score_aipw(y = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8), ps = c(1, 2, 3, 4, 5, 6, 7, 8), mu1 = c(1, 2, 3, 4, 5, 6, 7, 8), mu0 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

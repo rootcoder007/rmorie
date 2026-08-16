@@ -17,3 +17,7 @@ Removes the random walk\'s drift \code{mu_hat = (x_T - x_1) / (T - 1)} from the 
 A list with \code{adjusted} (the detrended series) and   \code{drift} (the removed drift).
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.drift_adjust(V)
+}

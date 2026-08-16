@@ -20,3 +20,6 @@ A step of the k05_tranche1 implementation. Called by \code{morie_snht}. See the 
 A list with \code{tk}, \code{s}.
 }
 \keyword{internal}
+\examples{
+.morie_k05_tk(x = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, xbar = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5)
+}

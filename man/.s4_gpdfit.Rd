@@ -17,3 +17,7 @@ of # 30 + floor(sqrt(N)) points weighted by the profile likelihood -- no # optim
 A list with \code{k}, \code{sigma}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.s4_gpdfit(V)
+}

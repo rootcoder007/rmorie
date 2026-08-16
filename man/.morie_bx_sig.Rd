@@ -17,3 +17,7 @@ A step of the rangayyan_class2 implementation. Called by \code{Infomax}, \code{L
 The value of \code{ifelse}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_bx_sig(V)
+}

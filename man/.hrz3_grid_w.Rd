@@ -17,3 +17,6 @@ A step of the helpers_hrz3 implementation. Called by \code{Hrznpiv}, \code{Hrzti
 A list with \code{z}, \code{w}.
 }
 \keyword{internal}
+\examples{
+.hrz3_grid_w(m = 5L)
+}

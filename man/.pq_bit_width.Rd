@@ -26,3 +26,6 @@ complaints sample is the current worst case and it is seconds, not
 minutes.
 }
 \keyword{internal}
+\examples{
+.pq_bit_width(n = 5L)
+}

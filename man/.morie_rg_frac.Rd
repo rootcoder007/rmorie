@@ -18,3 +18,6 @@ A step of the rangayyan_class implementation. Called by \code{.morie_rg_asfrac},
 The value of \code{structure}.
 }
 \keyword{internal}
+\examples{
+.morie_rg_frac(n = 5L, d = 5L)
+}

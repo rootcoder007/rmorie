@@ -17,3 +17,6 @@ A step of the tail2_t02 implementation. Called by \code{FDiverg}. See the file h
 The value of \code{switch}.
 }
 \keyword{internal}
+\examples{
+.t2_named_f(key = 5L)
+}

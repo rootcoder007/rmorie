@@ -14,3 +14,6 @@ Probability of improvement (Snoek 2012, Equation 1)
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.probability_of_improvement(mu = c(1, 2, 3, 4, 5, 6, 7, 8), sd = c(1, 2, 3, 4, 5, 6, 7, 8), f_best = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

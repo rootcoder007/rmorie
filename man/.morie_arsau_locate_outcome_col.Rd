@@ -14,3 +14,6 @@ Internal helper: Morie Arsau Locate Outcome Col
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+.morie_arsau_locate_outcome_col(df = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), target = 5L)
+}

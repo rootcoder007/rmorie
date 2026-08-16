@@ -17,3 +17,7 @@ A step of the geron_w4d_native implementation. Called by \code{.morie_w4d_symd_d
 The value of \code{list}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_w4d_symd_num(V)
+}

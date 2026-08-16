@@ -19,3 +19,7 @@ B. K., Lessler, J. and Stuart, E. A. (2011), "Weight Trimming and Propensity Sco
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.mor_trim_weights(V)
+}

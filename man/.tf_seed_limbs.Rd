@@ -17,3 +17,6 @@ A step of the rangayyan_tf implementation. Called by \code{.tf_lcg_seed}. See th
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+.tf_seed_limbs(seed = 5L)
+}

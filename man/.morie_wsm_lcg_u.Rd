@@ -18,3 +18,6 @@ A step of the wasserman_native implementation. Called by \code{.morie_wsm_boot_r
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_wsm_lcg_u(count = 5L)
+}

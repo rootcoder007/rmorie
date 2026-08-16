@@ -17,3 +17,6 @@ and first two derivatives. The derivatives are what appear in the bias coefficie
 Nothing; this branch always raises.
 }
 \keyword{internal}
+\examples{
+.fz_transform()
+}

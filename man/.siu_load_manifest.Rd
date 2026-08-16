@@ -14,3 +14,6 @@ Internal helper: Siu Load Manifest
 The value of \code{m}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.siu_load_manifest()
+}

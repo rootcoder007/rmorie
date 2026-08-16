@@ -19,3 +19,6 @@ A step of the rangayyan_tf implementation. Called by \code{.tf_sift}, \code{Imf}
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.tf_spline(xs = c(1, 2, 3, 4, 5, 6, 7, 8), ys = c(1, 2, 3, 4, 5, 6, 7, 8), xq = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

@@ -19,3 +19,6 @@ Each unit that lands in the same leaf as x in tree t contributes 1 / (#units fro
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.orfgrf_forest_weights(trees = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), X = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), x = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

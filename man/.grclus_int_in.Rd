@@ -19,3 +19,6 @@ A step of the grclus_native implementation. Called by \code{.grclus_grow_partiti
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.grclus_int_in(e = c(1, 2, 3, 4, 5, 6, 7, 8), lo = 5L, hi = 5L)
+}

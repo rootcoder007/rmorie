@@ -18,3 +18,6 @@ split. They cross at p = 9, where both give 3: below it the classification rule 
 Nothing; this branch always raises.
 }
 \keyword{internal}
+\examples{
+.esl_mtry(p = 1)
+}

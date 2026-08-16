@@ -33,3 +33,7 @@ the Tanimoto distance the objectives are measured in; see
 morie.fn.sasimi.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tncomp_tanimoto(V, V)
+}

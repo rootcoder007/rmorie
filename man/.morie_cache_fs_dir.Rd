@@ -14,3 +14,6 @@ Internal helper: Morie Cache Fs Dir
 The value of \code{d}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_cache_fs_dir()
+}

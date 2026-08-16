@@ -19,3 +19,6 @@ A step of the limmav_native implementation. Called by \code{.limmav_ebayes}. See
 The value of \code{y}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.limmav_trigamma_inverse(x = 5L)
+}

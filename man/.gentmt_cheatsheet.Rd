@@ -24,3 +24,6 @@ A character value.
   Hernan M. A. & Robins J. M. (2020) Causal Inference: What If, Sec. 12.3.
 }
 \keyword{internal}
+\examples{
+.gentmt_cheatsheet()
+}

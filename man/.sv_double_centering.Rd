@@ -14,3 +14,6 @@ Internal helper: Sv Double Centering
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.sv_double_centering(D = 5L)
+}

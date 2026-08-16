@@ -14,3 +14,6 @@
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+.btwild_mult(u = 5L, kind = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

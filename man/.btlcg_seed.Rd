@@ -14,3 +14,6 @@
 The value of \code{s}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.btlcg_seed(seed = 5L)
+}

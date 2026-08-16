@@ -17,3 +17,7 @@ A step of the helpers_rouss implementation. Called by \code{Lmsreg}. See the fil
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.rsmedsq(V)
+}

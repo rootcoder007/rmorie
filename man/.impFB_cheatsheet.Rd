@@ -33,3 +33,6 @@ doi:10.1109/MC.2009.263. The explicit-feedback factorisation this is
 adapted from.
 }
 \keyword{internal}
+\examples{
+.impFB_cheatsheet()
+}

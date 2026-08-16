@@ -18,3 +18,6 @@ A step of the sarima_native implementation. Called by \code{forecast}. See the f
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.sarima_diff_poly(k = 5L, s = 5L)
+}

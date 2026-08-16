@@ -14,3 +14,6 @@ Weighted least squares of y on ((x - c)^0 ... (x - c)^p) using kernel weights K(
 A list with \code{beta}, \code{vcov}, \code{n}.
 }
 \keyword{internal}
+\examples{
+.morie_rdd_lp_nn(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), cutoff = 0.5, h = 0.5)
+}

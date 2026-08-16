@@ -14,3 +14,6 @@ Internal helper: Uof Wilson Ci
 A vector.
 }
 \keyword{internal}
+\examples{
+.uof_wilson_ci(k = 5L, n = 5L)
+}

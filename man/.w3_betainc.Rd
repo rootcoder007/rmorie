@@ -19,3 +19,6 @@ A step of the helpers_w3num implementation. Called by \code{.w3_t_sf}. See the f
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.w3_betainc(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, x = 5L)
+}

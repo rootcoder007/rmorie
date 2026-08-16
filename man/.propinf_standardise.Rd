@@ -17,3 +17,7 @@ A step of the propinf_native implementation. Called by \code{morie_propinf_prope
 A list with \code{feats}, \code{mu}, \code{sd}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.propinf_standardise(V)
+}

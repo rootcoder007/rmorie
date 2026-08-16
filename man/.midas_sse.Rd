@@ -14,3 +14,6 @@ Internal helper: Midas Sse
 The value of \code{if}.
 }
 \keyword{internal}
+\examples{
+.midas_sse(p = c(1, 2, 3, 4, 5, 6, 7, 8), X = 5L, Y = 5L, K = 5L)
+}

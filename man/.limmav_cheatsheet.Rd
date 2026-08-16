@@ -14,3 +14,6 @@ A step of the limmav_native implementation. No other function in the package cal
 A character value.
 }
 \keyword{internal}
+\examples{
+.limmav_cheatsheet()
+}

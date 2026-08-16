@@ -18,3 +18,7 @@ A step of the helpers_ot implementation. No other function in the package calls 
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.ot_frob(V, V)
+}

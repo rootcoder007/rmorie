@@ -21,3 +21,6 @@ Ridge regression with SVD path + k-fold CV lambda selection, then prediction -- 
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.morie_cv_ridge_predict(x_train = c(1, 2, 3, 4, 5, 6, 7, 8), z_train = c(1, 2, 3, 4, 5, 6, 7, 8), x_test = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

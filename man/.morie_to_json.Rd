@@ -14,3 +14,7 @@ Internal shim: prefer .s03json_toJSON, fall back to native
 The value of \code{morie_json_stringify}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_to_json(V)
+}

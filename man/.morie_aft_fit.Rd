@@ -23,3 +23,6 @@ A step of the aft_native implementation. Called by \code{.morie_aft_common}. See
 A list with \code{beta}, \code{log_sigma}, \code{loglik}, \code{cov}, \code{n_iter}, \code{converged}.
 }
 \keyword{internal}
+\examples{
+.morie_aft_fit(t = c(1, 2, 3, 4, 5, 6, 7, 8), e = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

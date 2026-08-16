@@ -17,3 +17,6 @@ A step of the benRea_native implementation. No other function in the package cal
 A list with \code{p}, \code{t}.
 }
 \keyword{internal}
+\examples{
+.parts_full(label = 5L)
+}

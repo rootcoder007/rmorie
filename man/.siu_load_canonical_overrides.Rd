@@ -14,3 +14,6 @@ Internal helper: Siu Load Canonical Overrides
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.siu_load_canonical_overrides()
+}

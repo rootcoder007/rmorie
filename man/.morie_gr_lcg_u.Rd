@@ -18,3 +18,6 @@ s <- (1664525 s + 1013904223) mod 2^32 `.morie_gr_lcg_u` returns the (s + 0.5)/2
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_gr_lcg_u(count = 5L, seed = 5L)
+}

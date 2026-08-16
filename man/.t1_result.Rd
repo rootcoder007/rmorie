@@ -17,3 +17,6 @@ A step of the tail1_core implementation. Called by \code{Admixq}, \code{Admmlass
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.t1_result()
+}

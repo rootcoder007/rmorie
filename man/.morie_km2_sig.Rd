@@ -17,3 +17,7 @@ A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_br
 The value of \code{ifelse}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_km2_sig(V)
+}

@@ -30,3 +30,6 @@ A matrix, from \code{matrix}.
     re-analyse, locate the crossing).
 }
 \keyword{internal}
+\examples{
+.tipsne_design(arm = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
+}

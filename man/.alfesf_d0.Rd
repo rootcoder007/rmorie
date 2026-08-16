@@ -17,3 +17,6 @@ goes negative and the published clamp at 0.5 applies -- which is why pTM on a ve
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+.alfesf_d0(n = 5L)
+}

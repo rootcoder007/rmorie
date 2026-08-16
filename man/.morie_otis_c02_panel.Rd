@@ -14,3 +14,6 @@ Internal helper: Morie Otis C02 Panel
 A data frame.
 }
 \keyword{internal}
+\examples{
+.morie_otis_c02_panel()
+}

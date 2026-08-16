@@ -18,3 +18,6 @@ by eulerian_path to enforce the "connected on its non-isolated vertices" half of
 A logical value.
 }
 \keyword{internal}
+\examples{
+.connected(edges = list(a = 1, b = 2), verts = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

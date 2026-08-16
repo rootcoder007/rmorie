@@ -14,3 +14,6 @@ Internal helper: Binary Power Required N
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.binary_power_required_n(p1 = 5L, p2 = 5L)
+}

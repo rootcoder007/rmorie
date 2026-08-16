@@ -17,3 +17,7 @@ A step of the phylby_native implementation. Called by \code{.phylby_nni_neighbou
 The value of \code{[}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.phylby_topology_key(V)
+}

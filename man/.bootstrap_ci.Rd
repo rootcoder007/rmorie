@@ -14,3 +14,7 @@ Internal helper: Bootstrap Ci
 A list with \code{se}, \code{ci_lo}, \code{ci_hi}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.bootstrap_ci(V, V)
+}

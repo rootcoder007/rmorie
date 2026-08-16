@@ -38,3 +38,6 @@ Sarwar, B., Karypis, G., Konstan, J. & Riedl, J. (2001)
 transpose of this.
 }
 \keyword{internal}
+\examples{
+.ucfR_cheatsheet()
+}

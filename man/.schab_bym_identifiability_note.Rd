@@ -14,3 +14,6 @@ A step of the schab_glmm_shared implementation. Called by \code{spbym}. See the 
 A character value.
 }
 \keyword{internal}
+\examples{
+.schab_bym_identifiability_note()
+}

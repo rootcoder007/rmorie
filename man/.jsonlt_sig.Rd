@@ -17,3 +17,7 @@ jsonlite\\'s digits = I(n). Anything else is decimal places.
 The value of \code{inherits}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.jsonlt_sig(V)
+}

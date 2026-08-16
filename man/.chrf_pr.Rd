@@ -18,3 +18,7 @@ A step of the chrF_native implementation. Called by \code{chrf_score}. See the f
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.chrf_pr(V, V)
+}

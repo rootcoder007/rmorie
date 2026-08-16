@@ -18,3 +18,7 @@ A step of the bigint_native implementation. Called by \code{morie_big_add}, \cod
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_big_cmp_abs(V, V)
+}

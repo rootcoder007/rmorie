@@ -17,3 +17,6 @@ A step of the tail2_t02 implementation. Called by \code{QnScale}. See the file h
 A numeric value.
 }
 \keyword{internal}
+\examples{
+.t2_qn_finite_c(n = 5L)
+}

@@ -14,3 +14,6 @@ A step of the mafft_native implementation. Called by \code{morie_mafft}. See the
 A character value.
 }
 \keyword{internal}
+\examples{
+.mafft_cheatsheet()
+}

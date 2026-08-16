@@ -17,3 +17,7 @@ A step of the Wfrep implementation. Called by \code{Svytbl}, \code{Wfrep}. See t
 One of two values, depending on the branch taken.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.wfrep_lab(V)
+}

@@ -17,3 +17,6 @@ product exceeds 2^53.
 The value of \code{function}.
 }
 \keyword{internal}
+\examples{
+.scumap_rng(seed = 5L)
+}

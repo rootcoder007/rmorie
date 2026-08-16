@@ -14,3 +14,6 @@ Replays the stored trees so callers can see the loss path without the fit having
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_gb_loss_path(fit = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

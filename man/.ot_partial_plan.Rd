@@ -20,3 +20,6 @@ column (Caffarelli and McCann 2010): the inequality-constrained problem becomes 
 A list with \code{T}, \code{cost}.
 }
 \keyword{internal}
+\examples{
+.ot_partial_plan(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, C = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L)
+}

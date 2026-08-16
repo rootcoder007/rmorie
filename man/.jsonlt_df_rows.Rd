@@ -18,3 +18,8 @@ A step of the jsonlt_native implementation. Called by \code{.jsonlt_cell}, \code
 A character value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.jsonlt_df_rows(M, V)
+}

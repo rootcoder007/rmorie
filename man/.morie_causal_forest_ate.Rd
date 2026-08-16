@@ -14,3 +14,6 @@ Internal helper: AIPW ATE over a target sample from forest nuisances
 A list with \code{ate}, \code{se}.
 }
 \keyword{internal}
+\examples{
+.morie_causal_forest_ate(nf = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), y = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

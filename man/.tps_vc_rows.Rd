@@ -14,3 +14,7 @@ Internal helper: Tps Vc Rows
 The value of \code{lapply}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tps_vc_rows(V)
+}

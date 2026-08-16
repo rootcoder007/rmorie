@@ -18,3 +18,7 @@ normalises so the weights within each treatment state add to unity, following Im
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_wmean(V, V)
+}

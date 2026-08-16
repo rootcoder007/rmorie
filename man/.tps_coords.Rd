@@ -14,3 +14,6 @@ Internal helper: Tps Coords
 A matrix, from \code{as.matrix}.
 }
 \keyword{internal}
+\examples{
+.tps_coords(df = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), lat_col = c(1, 2, 3, 4, 5, 6, 7, 8), lon_col = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

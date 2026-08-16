@@ -19,3 +19,6 @@ A step of the kamath_llm2_native implementation. Called by \code{.morie_km2_forw
 The value of \code{ends}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_km2_pieces_by_end(text = 5L, vocab = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), maxlen = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

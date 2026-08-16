@@ -37,3 +37,6 @@ being weighted; see :mod:`morie.fn.coxph` for the unweighted fit this
 must reduce to.
 }
 \keyword{internal}
+\examples{
+.svycox_prep(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8), strata = c(1, 2, 3, 4, 5, 6, 7, 8), cluster = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

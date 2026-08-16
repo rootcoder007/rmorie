@@ -36,3 +36,8 @@ software package instead. The two sources above are what this is built
 from.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.tmlcen_coerce_subject_list(M, V)
+}

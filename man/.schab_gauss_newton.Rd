@@ -25,3 +25,6 @@ A step of the schab_gn_shared implementation. Called by \code{.schab_fit_semivar
 A list with \code{theta}, \code{objective}, \code{converged}, \code{iterations}.
 }
 \keyword{internal}
+\examples{
+.schab_gauss_newton(lags = c(1, 2, 3, 4, 5, 6, 7, 8), ghat = c(1, 2, 3, 4, 5, 6, 7, 8), counts = c(1, 2, 3, 4, 5, 6, 7, 8), start = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

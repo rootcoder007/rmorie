@@ -18,3 +18,8 @@ A step of the schab_glmm_shared implementation. No other function in the package
 A numeric value.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+S <- c("a", "b", "c")
+.schab_apply_sum_to_zero(S, M)
+}

@@ -17,3 +17,7 @@ A step of the schab_rest_shared implementation. Called by \code{.schab_periodogr
 The value of \code{z}, as built in the body.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.schab_lattice_check(M)
+}

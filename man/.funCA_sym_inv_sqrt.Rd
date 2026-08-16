@@ -17,3 +17,6 @@ A step of the funCA_native implementation. Called by \code{morie_funCA_functiona
 The value of \code{\%*\%}.
 }
 \keyword{internal}
+\examples{
+.funCA_sym_inv_sqrt(M = 5L)
+}

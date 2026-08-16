@@ -14,3 +14,7 @@ Internal helper: Hrz Logit Newton
 A numeric value.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.hrz_logit_newton(M, M)
+}

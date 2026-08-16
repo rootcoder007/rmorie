@@ -17,3 +17,7 @@ A step of the causscd_native implementation. Called by \code{.causscd_simplex_fi
 The value of \code{pmax}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.causscd_project_simplex(V)
+}

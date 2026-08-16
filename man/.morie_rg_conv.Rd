@@ -18,3 +18,7 @@ A step of the rangayyan_xfrm implementation. Called by \code{CCepSum}, \code{Clo
 A vector, from \code{vapply}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_rg_conv(V, V)
+}

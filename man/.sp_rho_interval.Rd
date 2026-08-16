@@ -19,3 +19,6 @@ Internal: `.sp_rho_bounds` shrunk to a closed interval for optimisers.
 Numeric length-2 vector.
 }
 \keyword{internal}
+\examples{
+.sp_rho_interval(W = 5L)
+}

@@ -19,3 +19,6 @@ A step of the helpers_s03 implementation. Called by \code{.btnpqr_fit}, \code{.b
 The value of \code{.s03ridgesolve}.
 }
 \keyword{internal}
+\examples{
+.s03lstsq(X = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), y = 5L)
+}

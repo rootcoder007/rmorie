@@ -14,3 +14,7 @@ Internal helper: Morie Llm Messages
 The value of \code{list}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.morie_llm_messages(V)
+}

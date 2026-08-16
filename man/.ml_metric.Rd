@@ -14,3 +14,6 @@ Internal helper: Ml Metric
 The value of \code{switch}.
 }
 \keyword{internal}
+\examples{
+.ml_metric(name = 5L, y = c(1, 2, 3, 4, 5, 6, 7, 8), pred = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
