@@ -21,3 +21,10 @@ A step of the rangayyan_tf implementation. No other function in the package call
 A list with \code{sdw}, \code{scale_energy}, \code{scales}, \code{freqs}, \code{peak_scale}, \code{peak_freq}, \code{organised}, \code{band}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+fs <- 250
+tvec <- seq(0, 2, by = 1 / fs)
+ecg <- sin(2 * pi * 8 * tvec) + 0.2 * rnorm(length(tvec))
+CprWt(ecg, fs = fs)
+}

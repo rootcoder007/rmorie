@@ -17,3 +17,6 @@ A step of the rangayyan_tf implementation. Called by \code{.tf_cwt}. See the fil
 The value of \code{v}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.tf_support("morlet")
+}

@@ -25,3 +25,13 @@ gain, n_base, estimate, n, method.
 Meta-learner trained on out-of-fold base predictions (K-fold
 cross-prediction) to avoid the leakage of in-sample base predictions.
 }
+\examples{
+set.seed(6)
+X <- matrix(rnorm(80), 40, 2)
+y <- as.numeric(X[, 1] > 0)
+base <- function(Xtr, ytr, Xte) {
+  b <- qr.solve(cbind(1, as.matrix(Xtr)), as.numeric(ytr))
+  as.numeric(cbind(1, as.matrix(Xte)) \%*\% b)
+}
+morie_geron_stacking(X, y, base_models = list(base, base), k_folds = 3)
+}

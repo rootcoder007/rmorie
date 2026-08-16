@@ -19,3 +19,6 @@ A step of the rangayyan_tf implementation. Called by \code{.tf_cwt}. See the fil
 Nothing; this branch always raises.
 }
 \keyword{internal}
+\examples{
+.tf_mother("morlet", t = seq(-4, 4, by = 0.5))
+}

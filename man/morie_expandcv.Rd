@@ -23,3 +23,6 @@ lasttrainend)
 The training window GROWS: every fold starts at index 0, so no
 history is ever discarded.
 }
+\examples{
+morie_expandcv(n = 50, initial = 30, testsize = 5)
+}

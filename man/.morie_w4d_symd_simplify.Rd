@@ -17,3 +17,6 @@ A step of the geron_w4d_native implementation. Called by \code{morie_geron_symbo
 The value of \code{list}.
 }
 \keyword{internal}
+\examples{
+.morie_w4d_symd_simplify(list("add", list("num", 0), list("var", "x")))
+}

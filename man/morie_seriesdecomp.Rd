@@ -21,3 +21,8 @@ Quoted from the paper: "X_t = AvgPool(Padding(X)), X_s = X - X_t"
 Decomposition Transformers with Auto-Correlation for Long-Term
 Series Forecasting, NeurIPS 2021 (arXiv:2106.13008), eq. (1).
 }
+\examples{
+set.seed(3)
+x <- sin(2 * pi * (1:60) / 12) + rnorm(60, 0, 0.2)
+morie_seriesdecomp(x, kernel = 5L)
+}

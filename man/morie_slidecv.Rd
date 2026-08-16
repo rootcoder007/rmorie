@@ -24,3 +24,6 @@ A fixed-length training window slides forward, so old data drops
 out. Fold boundaries are half-open [start, end) index pairs,
 zero-based to match the Python arm.
 }
+\examples{
+morie_slidecv(n = 50, trainsize = 30, testsize = 5)
+}
