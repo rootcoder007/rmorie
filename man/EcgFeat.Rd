@@ -19,3 +19,13 @@ the PQ segment, not against zero: the PQ segment is the isoelectric reference th
 A list with \code{pamp}, \code{qamp}, \code{ramp}, \code{samp}, \code{tamp}, \code{qrsdur}, \code{pdur}, \code{tdur}, \code{prdur}, \code{qtdur}, \code{qrsdurmean}, \code{prdurmean}, \code{qtdurmean}, \code{rampmean}, \code{nbeats}, \code{fs}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(9)
+fs <- 200
+tv <- seq(0, 4, by = 1 / fs)
+ecg <- rep(0, length(tv))
+qrs <- round(seq(0.4, 3.8, by = 0.8) * fs)
+for (i in qrs) ecg[i:(i + 6)] <- c(0.1, 0.4, 1.2, -0.5, 0.1, 0.05, 0)
+ecg <- ecg + rnorm(length(tv), 0, 0.02)
+EcgFeat(ecg, qrs = qrs, fs = fs)
+}

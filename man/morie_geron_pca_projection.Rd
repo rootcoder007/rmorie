@@ -21,3 +21,8 @@ Centre, SVD, project on the first d right singular vectors; each
 component's sign is pinned so its largest-magnitude entry is positive,
 which makes the projection deterministic across BLAS builds.
 }
+\examples{
+set.seed(1)
+X <- matrix(rnorm(60), 20, 3)
+morie_geron_pca_projection(X, d = 2)
+}

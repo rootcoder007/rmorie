@@ -18,3 +18,10 @@ List with \code{gradient}, \code{class}, \code{gradient_norm}, \code{mean_error}
 Selects column \code{k} (0-based) of the grxeng gradient rather than
 recomputing it.
 }
+\examples{
+set.seed(3)
+X <- cbind(1, rnorm(15))
+Y <- diag(3)[sample(1:3, 15, replace = TRUE), ]
+Theta <- matrix(0, 2, 3)
+morie_geron_ch4_cross_entropy_gradient_vector(X, Y, Theta, k = 1)
+}
