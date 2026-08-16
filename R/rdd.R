@@ -275,25 +275,112 @@ morie_rdd_bandwidth_rot <- function(x, y, cutoff = 0) {
                        list(sd_x = sd_x, iqr_x = iqr_x))
 }
 
-#' Calonico-Cattaneo-Titiunik (CCT) MSE-optimal bandwidth
-#' @inheritParams morie_rdd_params
-#' @return A named list with elements \code{bandwidth}, \code{method}, \code{details}.
-#' @examples
-#' set.seed(1)
-#' x <- runif(400, -1, 1)
-#' y <- 0.3 * x + 1.0 * (x >= 0) + rnorm(400, sd = 0.3)
-#' bw <- morie_rdd_bandwidth_cct(x, y)
-#' bw$bandwidth
+#' Internal: weighted local polynomial fit at a point
+#'
+#' Kernel-weighted least squares of \code{y} on powers of
+#' \code{x - x0}, with the sandwich variance the CCT bandwidth needs.
+#' Mirrors the Python arm's \code{_local_poly_fit} term for term, so
+#' the two produce the same coefficients and the same \code{V}.
+#'
+#' @param x,y The running variable and the outcome, one side of the
+#'   cutoff.
+#' @param x0 The point to fit at -- the cutoff.
+#' @param h The bandwidth.
+#' @param p Polynomial order.
+#' @param kernel One of the names in \code{.morie_rdd_kernels}.
+#' @return A list with \code{beta} (coefficients, intercept first) and
+#'   \code{V} (heteroskedasticity-robust covariance).
+#' @keywords internal
+.morie_rdd_local_poly <- function(x, y, x0, h, p = 1L,
+                                  kernel = "triangular") {
+  kf <- .morie_rdd_kernels[[kernel]]
+  if (is.null(kf)) {
+    stop("unknown kernel '", kernel, "'; choose from ",
+         paste(names(.morie_rdd_kernels), collapse = ", "), ".",
+         call. = FALSE)
+  }
+  p <- as.integer(p)
+  u <- (x - x0) / h
+  kw <- kf(u) / h
+  X <- vapply(0:p, function(j) (x - x0)^j, numeric(length(x)))
+  if (is.null(dim(X))) X <- matrix(X, nrow = length(x))
+  XtWX <- crossprod(X, kw * X)
+  XtWX_inv <- tryCatch(solve(XtWX),
+                       error = function(e) .morie_ginv(XtWX))
+  beta <- as.numeric(XtWX_inv %*% crossprod(X, kw * y))
+  resid <- as.numeric(y - X %*% beta)
+  # The sandwich the Python arm forms: kw^2 * resid^2 in the meat, and
+  # sigma2 scaling it, with the degrees of freedom counted over the
+  # points the kernel actually gives weight to.
+  df <- max(sum(kw > 0) - (p + 1L), 1L)
+  sigma2 <- sum(kw * resid^2) / df
+  meat <- crossprod(X, (kw^2 * resid^2) * X)
+  V <- sigma2 * (XtWX_inv %*% meat %*% XtWX_inv)
+  list(beta = beta, V = V)
+}
+
+#' Calonico-Cattaneo-Titiunik MSE-optimal bandwidth
+#'
+#' The IK bandwidth is used as the pilot; the curvature difference
+#' across the cutoff gives the squared bias and the two one-sided
+#' intercept variances give the variance, and the MSE-optimal rule
+#' balances them. The polynomial order \code{p} enters everywhere --
+#' the curvature is read off the order \code{p + 1} fit and the rate is
+#' \eqn{n^{-1/(2p+3)}} -- which is why the previous implementation,
+#' delegating to IK and discarding \code{p}, could not answer for any
+#' order but the one IK assumes.
+#'
+#' @param x,y The running variable and the outcome.
+#' @param cutoff The threshold.
+#' @param kernel One of \code{"triangular"}, \code{"epanechnikov"},
+#'   \code{"uniform"}, \code{"gaussian"}.
+#' @param p Polynomial order for the local fit.
+#' @return A named list with \code{bandwidth}, \code{method} and
+#'   \code{details} carrying \code{h_mse}, \code{h_cer},
+#'   \code{bias_sq} and \code{variance}.
 #' @export
 morie_rdd_bandwidth_cct <- function(x, y, cutoff = 0,
                                     kernel = "triangular", p = 1) {
-  # The IK plug-in is the MSE-optimal rule this selector implements
-  # natively (CCT's mserd is its modern refinement; the two agree in
-  # rate and constant structure for p = 1).
+  x <- as.numeric(x); y <- as.numeric(y)
+  n <- length(x)
+  p <- as.integer(p)
   ik <- .morie_rdd_ik_native(x, y, cutoff, kernel)
-  .morie_rdd_bw_result(ik$bandwidth,
-                       "MSE-optimal plug-in (rmorie native)",
-                       details = ik$details %||% list())
+  h_pilot <- ik$bandwidth
+
+  left <- x < cutoff
+  right <- x >= cutoff
+
+  curvature <- function(xs, ys, h) {
+    if (length(xs) < p + 3L) return(0)
+    b <- .morie_rdd_local_poly(xs, ys, cutoff, h, p = p + 1L,
+                               kernel = kernel)$beta
+    if (length(b) > p + 1L) (p + 1) * b[p + 2L] else 0
+  }
+  var_side <- function(xs, ys, h) {
+    if (length(xs) < p + 2L)
+      return(if (length(ys)) sum((ys - mean(ys))^2) / length(ys) else 1)
+    .morie_rdd_local_poly(xs, ys, cutoff, h, p = p, kernel = kernel)$V[1, 1]
+  }
+
+  b_left  <- curvature(x[left], y[left], h_pilot)
+  b_right <- curvature(x[right], y[right], h_pilot)
+  bias_sq <- (b_right - b_left)^2
+  variance <- var_side(x[left], y[left], h_pilot) +
+    var_side(x[right], y[right], h_pilot)
+
+  h_mse <- if (bias_sq > 0) {
+    (variance / (2 * (p + 1) * bias_sq))^(1 / (2 * p + 3)) *
+      n^(-1 / (2 * p + 3))
+  } else {
+    h_pilot
+  }
+  x_range <- max(x) - min(x)
+  h_mse <- min(max(h_mse, x_range * 0.01), x_range * 0.5)
+  h_cer <- h_mse * n^(-p / (3 * (2 * p + 3)))
+
+  .morie_rdd_bw_result(h_mse, "CCT",
+                       list(h_mse = h_mse, h_cer = h_cer,
+                            bias_sq = bias_sq, variance = variance))
 }
 
 

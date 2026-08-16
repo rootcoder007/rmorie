@@ -882,6 +882,18 @@ hierarchical_bonferroni <- function(p_values_by_family, alpha = 0.05,
   if (!is.list(p_values_by_family)) {
     stop("p_values_by_family must be a list of numeric vectors")
   }
+  # Alpha recycling is not implemented: every family is tested at the
+  # full alpha and the gate closes on the first family with no
+  # rejection. Someone naming the argument is asking for the recycling
+  # by name, so they are told; the default is left quiet because it is
+  # the procedure that has always run here.
+  if (!missing(propagate_alpha) && isTRUE(propagate_alpha)) {
+    warning("hierarchical_bonferroni(): alpha propagation between ",
+            "families is not implemented; each family is tested at the ",
+            "full alpha and the gate closes on the first family with no ",
+            "rejection. The result records alpha_propagated = FALSE.",
+            call. = FALSE)
+  }
   n_families <- length(p_values_by_family)
   stages <- vector("list", 0L)
   all_rejected <- logical(0)
@@ -940,7 +952,8 @@ hierarchical_bonferroni <- function(p_values_by_family, alpha = 0.05,
     stages = stages,
     overall_rejected = all_rejected,
     method = "hierarchical_bonferroni",
-    alpha = alpha
+    alpha = alpha,
+    alpha_propagated = FALSE
   )
   class(out) <- c("morie_multiple_testing_result", "morie_rich_result", "list")
   out
