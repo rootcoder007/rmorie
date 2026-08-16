@@ -18,7 +18,7 @@
 #'   errors per White (1980) with the HC1 small-sample factor.
 #' @noRd
 .morie_iv_kclass_native <- function(y, X, Z, kappa = 1,
-                                    robust = TRUE) {
+                                    robust = TRUE, cluster = NULL) {
   n <- length(y)
   k <- ncol(X)
   ZtZ_inv <- tryCatch(solve(crossprod(Z)),
@@ -32,7 +32,30 @@
   beta <- as.numeric(A_inv %*% b)
   names(beta) <- colnames(X)
   resid <- as.numeric(y - X %*% beta)
-  if (robust) {
+  if (!is.null(cluster)) {
+    # Cluster-robust sandwich. Same bread as HC1, but the meat sums the
+    # score over each cluster before squaring it, so within-cluster
+    # correlation is carried instead of assumed away. Scores use the
+    # projected regressors, as the HC1 branch below does.
+    if (length(cluster) != n) {
+      stop("`cluster` has length ", length(cluster), "; expected ", n,
+           ", one per observation.", call. = FALSE)
+    }
+    g <- unique(cluster)
+    G <- length(g)
+    if (G < 2L) {
+      stop("cluster-robust errors need at least two clusters; got ", G,
+           ".", call. = FALSE)
+    }
+    meat <- matrix(0, k, k)
+    for (cl in g) {
+      idx <- which(cluster == cl)
+      s <- crossprod(PzX[idx, , drop = FALSE], resid[idx])
+      meat <- meat + tcrossprod(as.numeric(s))
+    }
+    correction <- (G / (G - 1)) * ((n - 1) / (n - k))
+    V <- correction * (A_inv %*% meat %*% A_inv)
+  } else if (robust) {
     # HC1 with projected scores (the 2SLS sandwich).
     meat <- crossprod(PzX, resid^2 * PzX) * n / (n - k)
     V <- A_inv %*% meat %*% A_inv
