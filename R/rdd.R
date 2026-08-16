@@ -262,10 +262,17 @@ morie_rdd_bandwidth_ik <- function(x, y, cutoff = 0,
 #' bw$bandwidth
 #' @export
 morie_rdd_bandwidth_rot <- function(x, y, cutoff = 0) {
-  sd_x  <- stats::sd(x)
   n     <- length(x)
-  h     <- 1.84 * sd_x * n^(-1 / 5)
-  .morie_rdd_bw_result(h, "Rule of thumb (Silverman)")
+  # np.std: population sd, divisor n, not stats::sd's n - 1.
+  sd_x  <- sqrt(sum((x - mean(x))^2) / n)
+  # np.percentile's default interpolation is R's quantile type 7.
+  qs    <- stats::quantile(x, c(0.25, 0.75), names = FALSE, type = 7)
+  iqr_x <- qs[2] - qs[1]
+  # Silverman's rule: the robust scale keeps a heavy tail from
+  # inflating the window.
+  h     <- 0.9 * min(sd_x, iqr_x / 1.349) * n^(-1 / 5)
+  .morie_rdd_bw_result(h, "ROT",
+                       list(sd_x = sd_x, iqr_x = iqr_x))
 }
 
 #' Calonico-Cattaneo-Titiunik (CCT) MSE-optimal bandwidth
