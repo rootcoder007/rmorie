@@ -532,22 +532,27 @@
   s
 }
 
-.s03json_num <- function(x) {
+.s03json_num <- function(x, digits = NULL) {
   if (is.na(x)) return("null")
   if (is.infinite(x)) return(if (x > 0) "1e999" else "-1e999")
+  if (!is.null(digits)) x <- round(x, as.integer(digits))
   if (x == as.integer(round(x)) && abs(x) < 2147483647)
     return(format(as.integer(round(x))))
-  # 17 significant digits round-trips a double exactly
+  if (!is.null(digits))
+    return(format(x, nsmall = 0L, scientific = FALSE, trim = TRUE))
+  # 17 significant digits round-trips a double exactly, which is what the
+  # default has to be: parity is checked on the written value, and a
+  # shortened number that still LOOKS right is the worst kind of wrong.
   format(x, digits = 17, scientific = FALSE, trim = TRUE)
 }
 
-.s03json_write_value <- function(x, auto_unbox = TRUE) {
+.s03json_write_value <- function(x, auto_unbox = TRUE, digits = NULL) {
   if (is.null(x)) return("null")
   if (is.data.frame(x)) {
     rows <- vapply(seq_len(nrow(x)), function(i) {
       parts <- vapply(names(x), function(nm)
         paste0("\"", .s03json_esc(nm), "\":",
-               .s03json_write_value(x[[nm]][i], TRUE)), character(1))
+               .s03json_write_value(x[[nm]][i], TRUE, digits)), character(1))
       paste0("{", paste(parts, collapse = ","), "}")
     }, character(1))
     return(paste0("[", paste(rows, collapse = ","), "]"))
@@ -557,23 +562,23 @@
     if (!is.null(nm) && all(nzchar(nm))) {
       parts <- vapply(seq_along(x), function(i)
         paste0("\"", .s03json_esc(nm[i]), "\":",
-               .s03json_write_value(x[[i]], auto_unbox)), character(1))
+               .s03json_write_value(x[[i]], auto_unbox, digits)), character(1))
       return(paste0("{", paste(parts, collapse = ","), "}"))
     }
-    parts <- vapply(x, function(v) .s03json_write_value(v, auto_unbox),
+    parts <- vapply(x, function(v) .s03json_write_value(v, auto_unbox, digits),
                     character(1))
     return(paste0("[", paste(parts, collapse = ","), "]"))
   }
   if (is.matrix(x)) {
     rows <- vapply(seq_len(nrow(x)), function(i)
-      .s03json_write_value(as.vector(x[i, ]), FALSE), character(1))
+      .s03json_write_value(as.vector(x[i, ]), FALSE, digits), character(1))
     return(paste0("[", paste(rows, collapse = ","), "]"))
   }
   n <- length(x)
   one <- function(v) {
     if (is.na(v)) return("null")
     if (is.logical(v)) return(if (v) "true" else "false")
-    if (is.numeric(v)) return(.s03json_num(as.numeric(v)))
+    if (is.numeric(v)) return(.s03json_num(as.numeric(v), digits))
     paste0("\"", .s03json_esc(as.character(v)), "\"")
   }
   if (n == 1L && auto_unbox) return(one(x))
@@ -581,8 +586,46 @@
                     collapse = ","), "]")
 }
 
-.s03json_toJSON <- function(x, auto_unbox = TRUE, ...)
-  .s03json_write_value(x, auto_unbox)
+# Indent a compact JSON string. Structural braces/brackets and commas only
+# -- anything inside a string literal is copied through untouched, so a
+# comma in a value never becomes a line break.
+.s03json_pretty <- function(txt, indent = 2L) {
+  ch <- strsplit(txt, "", fixed = TRUE)[[1]]
+  out <- character(0); depth <- 0L; instr <- FALSE; esc <- FALSE
+  pad <- function(d) paste(rep(" ", d * indent), collapse = "")
+  for (c0 in ch) {
+    if (instr) {
+      out <- c(out, c0)
+      if (esc) esc <- FALSE
+      else if (c0 == "\\") esc <- TRUE
+      else if (c0 == "\"") instr <- FALSE
+      next
+    }
+    if (c0 == "\"") { instr <- TRUE; out <- c(out, c0); next }
+    if (c0 == "{" || c0 == "[") {
+      depth <- depth + 1L
+      out <- c(out, c0, "\n", pad(depth))
+    } else if (c0 == "}" || c0 == "]") {
+      depth <- depth - 1L
+      out <- c(out, "\n", pad(depth), c0)
+    } else if (c0 == ",") {
+      out <- c(out, ",", "\n", pad(depth))
+    } else if (c0 == ":") {
+      out <- c(out, ": ")
+    } else out <- c(out, c0)
+  }
+  paste(out, collapse = "")
+}
+
+# digits: NULL keeps every significant digit (the default, and the only
+# choice that round-trips a double). A number rounds to that many DECIMAL
+# places, which is what jsonlite::toJSON does -- pass digits = 4 to
+# reproduce its default exactly.
+.s03json_toJSON <- function(x, auto_unbox = TRUE, digits = NULL,
+                            pretty = FALSE, ...) {
+  s <- .s03json_write_value(x, auto_unbox, digits)
+  if (isTRUE(pretty)) .s03json_pretty(s) else s
+}
 
 # ---- parser: recursive descent over the character vector
 .s03json_parse <- function(txt) {
@@ -683,8 +726,9 @@
   .s03json_parse(txt)
 }
 
-.s03json_write <- function(x, path, auto_unbox = TRUE, ...) {
-  writeLines(.s03json_toJSON(x, auto_unbox), path)
+.s03json_write <- function(x, path, auto_unbox = TRUE, digits = NULL,
+                           pretty = FALSE, ...) {
+  writeLines(.s03json_toJSON(x, auto_unbox, digits, pretty), path)
   invisible(path)
 }
 
