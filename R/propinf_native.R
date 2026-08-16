@@ -53,15 +53,19 @@ morie_propinf_train_fcnn <- function(X, y, hidden = c(8L, 4L), epochs = 40L,
   order <- seq_len(n) - 1L
   for (ep in seq_len(as.integer(epochs))) {
     for (i in n:2L) {
-      j <- as.integer(rnd() * (i))   # 0..i-1
+      # rnd is the LCG STATE, advanced by .propinf_rng_next; calling
+      # it as a function was the bug that stopped every training run
+      j <- as.integer(.propinf_rng_next(rnd) * (i))   # 0..i-1
       tmp <- order[i]
       order[i] <- order[j + 1L]
       order[j + 1L] <- tmp
     }
     for (start in seq(0L, n - 1L, by = as.integer(batch_size))) {
       chunk_idx <- order[(start + 1L):min(n, start + as.integer(batch_size))]
+      # W is a matrix; L$W[[1]] is its first ELEMENT, so the gradient
+      # buffer came out one column wide and every row write failed
       gW <- lapply(net, function(L) matrix(0, nrow = length(L$b),
-                                            ncol = length(L$W[[1]])))
+                                            ncol = ncol(L$W)))
       gb <- lapply(net, function(L) rep(0, length(L$b)))
       for (idx in chunk_idx) {
         acts_pre <- .propinf_forward(net, rows[[idx + 1L]])
@@ -79,7 +83,7 @@ morie_propinf_train_fcnn <- function(X, y, hidden = c(8L, 4L), epochs = 40L,
             nxt <- rep(0, length(a_in))
             for (i2 in seq_along(delta)) {
               d <- delta[[i2]]
-              wrow <- net[[t]]$W[[i2]]
+              wrow <- net[[t]]$W[i2, ]
               for (j2 in seq_along(a_in)) nxt[j2] <- nxt[j2] + d * wrow[j2]
             }
             delta <- as.list(ifelse(pre[[t - 1L]] > 0, nxt, 0))
@@ -88,8 +92,10 @@ morie_propinf_train_fcnn <- function(X, y, hidden = c(8L, 4L), epochs = 40L,
       }
       scale <- lr / as.numeric(length(chunk_idx))
       for (t in seq_along(net)) {
-        net[[t]]$W <- lapply(seq_along(net[[t]]$W), function(i2)
-          net[[t]]$W[[i2]] - scale * gW[[t]][i2, ])
+        # W and gW are conformable matrices; the lapply over
+        # seq_along(W) walked ELEMENTS and rebuilt W as a list, which
+        # is what broke the next epoch forward pass
+        net[[t]]$W <- net[[t]]$W - scale * gW[[t]]
         net[[t]]$b <- net[[t]]$b - scale * gb[[t]]
       }
     }
@@ -415,7 +421,9 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @return A numeric value.
 #' @export
 .propinf_normal <- function(rnd, scale = 1) {
-  u <- max(.propinf_rng_next(rnd$parent$dummy %||% rnd), 1e-12)  # placeholder
+  # Box-Muller from the module LCG stream; the placeholder indirection
+  # through rnd$parent$dummy never held anything.
+  u <- max(.propinf_rng_next(rnd), 1e-12)
   scale * sqrt(-2 * log(u)) * cos(2 * pi)
 }
 
