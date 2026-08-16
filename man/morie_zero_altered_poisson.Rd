@@ -46,3 +46,9 @@ These functions mirror, in R, the implementations in the Python package
 tests in \code{tests/testthat/}.
 }
 \keyword{models}
+\examples{
+set.seed(11)
+yp <- rpois(60, 2.5)
+yp <- yp[yp > 0]
+morie_zap_mle(yp)
+}

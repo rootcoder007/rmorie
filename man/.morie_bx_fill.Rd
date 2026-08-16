@@ -20,3 +20,8 @@ A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_nmfmu},
 The value of \code{m}, as built in the body.
 }
 \keyword{internal}
+\examples{
+e <- new.env(); e$s <- 0
+u <- function() { e$s <- e$s + 0.1; e$s }
+.morie_bx_fill(2L, 3L, u, function(v) round(v, 1))
+}

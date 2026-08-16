@@ -20,3 +20,6 @@ A step of the rangayyan_class2 implementation. Called by \code{CadPipe}, \code{P
 A list with \code{sensitivity}, \code{specificity}, \code{accuracy}.
 }
 \keyword{internal}
+\examples{
+.morie_bx_scores(tp = 40, tn = 45, fp = 5, fn = 10)
+}

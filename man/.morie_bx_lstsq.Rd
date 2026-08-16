@@ -19,3 +19,9 @@ A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_omp}, \
 The value of \code{.morie_bx_solve}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+A <- cbind(1, rnorm(10))
+y <- A \%*\% c(0.5, 1.2) + rnorm(10, 0, 0.1)
+.morie_bx_lstsq(A, as.numeric(y))
+}

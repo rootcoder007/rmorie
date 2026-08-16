@@ -21,3 +21,10 @@ A step of the rangayyan_phys implementation. No other function in the package ca
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+set.seed(6)
+fs <- 2000
+tv <- seq(0, 1, by = 1 / fs)
+snd <- sin(2 * pi * 400 * tv) * exp(-3 * tv) + 0.1 * rnorm(length(tv))
+CadAcou(snd, fs = fs)
+}

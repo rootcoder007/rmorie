@@ -19,3 +19,9 @@ A step of the rangayyan_phys implementation. No other function in the package ca
 A list with \code{env}, \code{step_s}.
 }
 \keyword{internal}
+\examples{
+set.seed(6)
+fs <- 200
+x <- abs(sin(2 * pi * 2 * seq(0, 2, by = 1 / fs))) + rnorm(401, 0, 0.05)
+.bsaenvelope(x, fs = fs, win_s = 0.1)
+}
