@@ -19,3 +19,8 @@ A step of the propinf_native implementation. Called by \code{morie_propinf_train
 The value of \code{net}, as built in the body.
 }
 \keyword{internal}
+\examples{
+rnd <- .propinf_rng(3L)
+net <- .propinf_init_net(3L, c(4L), rnd)
+length(net)
+}

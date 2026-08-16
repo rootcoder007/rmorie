@@ -14,3 +14,6 @@ ARE from derivatives and variances -- Theorem 13.2.2, eq. (13.2.1), p. 485
 A list with \code{are}, \code{check}, \code{efficacy}, \code{efficacy_star}.
 }
 \keyword{internal}
+\examples{
+Arepitman(deriv = 0.399, var = 1, deriv_star = 0.318, var_star = 1.05)
+}
