@@ -35,3 +35,8 @@ the token after \code{prefix} (a 0-based integer vector). The scorer is
 checked for normalisation, because an unnormalised one turns beam
 search into an arbitrary greedy walk. Emitted tokens are 0-based.
 }
+\examples{
+lp <- log(c(0.5, 0.3, 0.2))
+morie_geron_beam_search(function(s, prefix) lp, NULL, beam_width = 2, 
+    max_len = 3)
+}

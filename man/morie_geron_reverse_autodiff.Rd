@@ -18,3 +18,7 @@ Reverse-mode automatic differentiation, delegated to morie_geron_autograd (Geron
 A list with \code{gradient}, \code{grad}, \code{value}, \code{tape_size}, \code{n_passes}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_geron_reverse_autodiff(function(v) v[[1]] * v[[2]], c(3, 
+    4))
+}

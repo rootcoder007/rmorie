@@ -19,3 +19,8 @@ List with c_t, states, deltas, n_steps, estimate, n, method.
 \description{
 Memory-cell recurrence c_t = f(c_prev, x_t) (Geron Ch 13, morie.fn hmmcel)
 }
+\examples{
+leaky <- function(c, x) 0.5 * c + x
+x <- matrix(0:15, nrow = 4, byrow = TRUE)
+morie_geron_memory_cell(c(2, 4), c(1, 1), leaky)
+}

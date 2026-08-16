@@ -21,3 +21,6 @@ A step of the rangayyan_class implementation. No other function in the package c
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+Ppv(45, 10)
+}

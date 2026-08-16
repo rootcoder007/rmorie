@@ -34,3 +34,10 @@ List with \code{actor}, \code{critic}, \code{actor_target}, \code{critic_target}
 \description{
 Linear DDPG: TD critic, deterministic-policy-gradient actor, Polyak targets (hmddpg)
 }
+\examples{
+a <- morie_geron_distilbert(matrix(c(10, 0), 1, 2), matrix(c(0, 
+    0), 1, 2), c(1), alpha_mlm = 0, alpha_ce = 1, temperature = 1)
+env <- function(s, a) list(s, -((a - 1)^2), FALSE)
+morie_geron_ddpg(env, 0.5, c(0, 0), epochs = 1, lr = 0, ou_sigma = 0, 
+    s0 = 2)
+}

@@ -21,3 +21,6 @@ List with \code{gain}, \code{left_score}, \code{right_score},
 Gain = 0.5 [GL^2/(HL+l) + GR^2/(HR+l) - G^2/(H+l)] - gamma; a
 negative gain means prune.
 }
+\examples{
+morie_geron_xgboost_gain(3, 2, -1, 1.5, lam = 1, gamma = 0.2)
+}

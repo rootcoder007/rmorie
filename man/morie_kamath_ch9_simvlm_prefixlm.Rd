@@ -20,3 +20,7 @@ List with \code{estimate}, \code{per_sequence}, \code{n_suffix_tokens}.
 Summed -log p over the suffix, averaged over sequences. \code{T_p} is a
 0-BASED prefix length, so the suffix starts at column T_p.
 }
+\examples{
+morie_kamath_ch9_simvlm_prefixlm(NULL, matrix(c(0.5, 0.5, 0.5, 
+    0.25, 0.25, 0.5), 2), 1)
+}

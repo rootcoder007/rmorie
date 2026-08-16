@@ -15,3 +15,6 @@ List with \code{estimate}, \code{n_supported}, \code{n_facts}.
 \description{
 Supported facts / total facts. \code{facts} must be 0/1 or logical.
 }
+\examples{
+morie_kamath_ch7_faithfulness_metric(c(1, 0, 1, 1))
+}

@@ -18,3 +18,6 @@ is exactly 1, so |x| >= 1 is refused instead of diverging quietly.
 A list with \code{value}, \code{exact}, \code{error}, \code{error_bound}, \code{terms}, \code{method}.
 }
 \keyword{internal}
+\examples{
+LogSeries(0.5, terms = 60)
+}

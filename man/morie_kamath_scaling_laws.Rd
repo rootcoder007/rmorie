@@ -21,3 +21,6 @@ List with \code{estimate}, \code{reducible}, \code{irreducible}.
 \description{
 L(N) = (N_c/N)^alpha + L_inf, with the reducible part reported.
 }
+\examples{
+morie_kamath_scaling_laws(c(1e+06, 1e+08), 1e+10, 0.5, 0.1)
+}

@@ -19,3 +19,7 @@ List with \code{estimate}, \code{label}, \code{label_probs}, \code{logits}.
 \description{
 p(y|x) = exp(\verb{w_\{M(y)\}}.h_z) / sum over the LABEL words only.
 }
+\examples{
+morie_kamath_ch3_prompt_softmax_label(list(great = c(1, 0), terrible = c(0, 
+    1)), c(1, 0), list(pos = "great", neg = "terrible"))
+}

@@ -19,3 +19,8 @@ ONNX export trace: shape-traced graph validated on a concrete input (Geron App B
 A list with \code{nodes}, \code{graph}, \code{input_shape}, \code{output_shape}, \code{n_parameters}, \code{file}, \code{is_protobuf}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+m <- list(list(op = "Gemm", in_features = 3, out_features = 2), 
+    list(op = "Relu"))
+morie_geron_onnx_export(m, matrix(0, 1, 3))
+}

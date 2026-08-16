@@ -26,3 +26,8 @@ A step of the rangayyan_class implementation. No other function in the package c
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+xor <- matrix(c(0, 0, 0, 1, 1, 0, 1, 1), ncol = 2, byrow = TRUE)
+yx <- c(-1, 1, 1, -1)
+SvmKern(xor, yx, kernel = "rbf", gamma = 1, C = 10)
+}

@@ -17,3 +17,6 @@ morie_kamath_mixtral_moe
 A list with \code{output}, \code{gate}, \code{experts_evaluated}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_kamath_mixtral_moe(1, rbind(c(3, 1, 2)))
+}

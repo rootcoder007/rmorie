@@ -32,3 +32,6 @@ km142 calls km145: km145 -> \code{morie_kamath_ch9_mmllm_autoregressive}
 (-sum log p over one response), km142 -> \code{morie_kamath_ch9_itg_loss}
 (that sum over the (X, Y) corpus).
 }
+\examples{
+morie_kamath_ch9_mmllm_autoregressive(c(0.5, 0.25), NULL)
+}

@@ -25,3 +25,7 @@ it were a tree's would be quietly wrong.
 \references{
 Kruskal JB (1956) \emph{Proc AMS} 7(1):48-50.
 }
+\examples{
+K4E <- list(c(1, 2), c(2, 3), c(3, 4), c(4, 1), c(1, 3))
+morie_minimum_spanning_tree(K4E, 4, c(4, 1, 3, 2, 5))
+}

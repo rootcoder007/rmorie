@@ -22,3 +22,6 @@ List with \code{pi}, \code{Z}, \code{argmax} (0-based).
 pi_r = pi_ref exp(r/beta) / Z. Z is computed, and a supplied Z is checked
 rather than trusted.
 }
+\examples{
+morie_kamath_ch5_rlhf_optimal_policy(c(0.5, 0.5), c(1, 0), 0.5)
+}

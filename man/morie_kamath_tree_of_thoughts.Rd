@@ -30,3 +30,7 @@ List with \code{best_state}, \code{best_path}, \code{best_score}, \code{frontier
 \description{
 Beam search over model-scored thoughts; path scores accumulate.
 }
+\examples{
+morie_kamath_tree_of_thoughts("root", 2, 2, function(s, b) list(list(paste0(s, 
+    "a"), 1), list(paste0(s, "b"), 2)), beam = 1)
+}

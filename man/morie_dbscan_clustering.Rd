@@ -20,3 +20,8 @@ Native implementation: the metric the caller asks for is the metric used, and th
 Named list: \code{estimate} (the cluster count),   \code{labels} (0-based, \code{-1} for noise), \code{n_clusters},   \code{n_noise}, \code{core_sample_indices} (0-based, the core   points only), \code{eps}, \code{min_samples}, \code{metric},   \code{n} and \code{method}.
 }
 \keyword{internal}
+\examples{
+x <- rbind(matrix(rnorm(80, 0, 0.2), ncol = 2), matrix(rnorm(80, 
+    5, 0.2), ncol = 2))
+morie_dbscan_clustering(x, eps = 0.6, min_samples = 4L)
+}

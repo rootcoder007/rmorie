@@ -25,3 +25,6 @@ One sigmoid serves both Python modules exactly as km073 calls
 km072: km072 -> \code{morie_kamath_ch5_bradley_terry_pref} (named or function
 rewards), km073 -> \code{morie_kamath_ch5_pref_sigmoid_form} (a bare pair).
 }
+\examples{
+morie_kamath_ch5_bradley_terry_pref(c(a = 2, b = 0.5), "a", "b")
+}

@@ -19,3 +19,7 @@ List with \code{estimate} (signal-token count), \code{text}, \code{signal_tokens
 \description{
 (t, S_X) = LLM(P_X, F_T); the 2-element contract is enforced.
 }
+\examples{
+morie_kamath_ch9_llm_signal_tokens("p", "f", llm = function(p, 
+    f) list("hello", c(1, 2, 3)))
+}

@@ -24,3 +24,7 @@ List with \code{advantage}, \code{td_target}, \code{value_s}, \code{value_s_next
 \description{
 A = r + gamma (1 - done) V(s') - V(s). State indices are 0-based.
 }
+\examples{
+morie_geron_actor_critic_advantage(c(0, 1, 2), c(0, 1, 2), c(1, 
+    2, 0), c(1, -1, 0.5), 0.9, done = c(FALSE, TRUE, FALSE))
+}

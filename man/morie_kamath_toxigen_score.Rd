@@ -20,3 +20,6 @@ List with \code{estimate}, \code{toxic}, \code{threshold}.
 Accepts a bare probability, a named list carrying \code{toxic}, or a
 (p_benign, p_toxic) pair validated to sum to 1.
 }
+\examples{
+morie_kamath_toxigen_score("t", function(t) c(0.3, 0.7))
+}

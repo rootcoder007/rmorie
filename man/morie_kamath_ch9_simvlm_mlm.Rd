@@ -22,3 +22,7 @@ List with \code{estimate}, \code{per_position}, \code{n_image_regions}.
 Delegates the masked-token arithmetic to \code{morie_kamath_mlm_loss} (Ch 2,
 km022) exactly as the Python module imports it. \code{x_m} is 0-BASED.
 }
+\examples{
+morie_kamath_ch9_simvlm_mlm(NULL, c(0.5, 0.25, 0.5), matrix(c(1, 
+    2), 1), c(0, 2))
+}

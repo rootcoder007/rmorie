@@ -17,3 +17,8 @@ morie_kamath_multihead_head_i
 A list with \code{head}, \code{attention}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+X <- matrix(stats::rnorm(6), 3, 2)
+W <- lapply(1:3, function(i) matrix(stats::rnorm(4), 2, 2))
+morie_kamath_multihead_head_i(X, X, X, W[[1]], W[[2]], W[[3]])
+}

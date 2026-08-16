@@ -22,3 +22,7 @@ List with \code{w_new}, \code{delta_w}, \code{error}, \code{converged},
 \description{
 Perceptron (Hebb) learning rule (Geron Ch 10, morie.fn grhbb)
 }
+\examples{
+morie_geron_hebb_rule_grhbb(c(1, 2), c(1, 0), c(0, 1), matrix(c(0.5, 
+    0.5, 1, -1), 2, byrow = TRUE), 0.1)
+}

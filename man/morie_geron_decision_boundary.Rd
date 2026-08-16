@@ -20,3 +20,7 @@ List with \code{scores}, \code{signed_distance}, \code{labels},
 \description{
 Decision boundary for logistic regression theta^T x = 0 (hmdbd)
 }
+\examples{
+morie_geron_decision_boundary(c(-1, 1, 1), matrix(c(0, 0, 1, 
+    1, 0.5, 0.5), 3, 2, byrow = TRUE))
+}

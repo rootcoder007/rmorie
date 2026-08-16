@@ -20,3 +20,10 @@ List with \code{estimate}, \code{numerator}, \code{std}.
 (mean s over A_1 - mean s over A_2) / sd over the union. \code{ddof = 0} is
 numpy's default, i.e. the POPULATION standard deviation, not R's \code{sd()}.
 }
+\examples{
+W1 <- diag(2)
+W2 <- -diag(2)
+A1 <- diag(2)
+A2 <- matrix(c(1, 2, 1, 0), 2)
+morie_kamath_ch6_weat_effect_size(A1, A2, W1, W2)
+}

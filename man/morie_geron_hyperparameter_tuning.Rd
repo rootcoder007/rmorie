@@ -41,3 +41,9 @@ The grid branch is exact and deterministic (delegates to the existing
 morie_geron_cross_validation_score core). The random branch's candidate
 draws use the shared LCG stream, not numpy's PCG64 -- non-portable.
 }
+\examples{
+X <- matrix(c(1, 2, 3, 4), ncol = 1)
+y <- c(3, 6, 9, 12)
+morie_geron_hyperparameter_tuning(list(alpha = c(0, 1, 100)), 
+    X, y, K = 2)
+}

@@ -24,3 +24,8 @@ List with \code{estimate}, \code{argmin}, \code{losses}.
 L_txt-gen(LLM(P_X, F_T), t), minimised over the prompt candidates.
 \code{argmin} is 0-BASED.
 }
+\examples{
+morie_kamath_ch9_input_alignment_loss(list(matrix(c(1, 2), 1), 
+    matrix(0, 1, 2)), "ft", "t", llm = function(p, f) sum(p), 
+    loss_fn = function(pr, t) abs(pr - 1))
+}

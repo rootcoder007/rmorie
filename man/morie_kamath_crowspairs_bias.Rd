@@ -15,3 +15,6 @@ List with \code{estimate}, \code{score}, \code{bias_gap}, \code{n_ties}.
 \description{
 Share of minimal pairs whose stereotyping sentence scores higher.
 }
+\examples{
+morie_kamath_crowspairs_bias(c(-1, -3, -2), c(-2, -1, -2))
+}

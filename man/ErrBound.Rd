@@ -19,3 +19,6 @@ Kailath bound.  It pairs with GaussOverlap, NOT with Divergence: the divergence 
 A list with \code{bound}, \code{priors}, \code{bhattacharyya}, \code{tightest_at_equal_priors}, \code{bounds_the_optimal_classifier_not_yours}, \code{not_from_this_book}, \code{pairs_with_the_overlap_not_with_divergence}, \code{reference}, \code{method}.
 }
 \keyword{internal}
+\examples{
+ErrBound(0.5, 0.5, 1.4)
+}

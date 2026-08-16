@@ -26,3 +26,7 @@ convention; \code{reconstruction}, \code{recon_error} and
 \code{explained_variance_ratio} are sign-invariant and are what parity
 tests should assert.
 }
+\examples{
+morie_geron_autoencoder(matrix(c(0, 0, 1, 1.1, 2, 2.3, 3, 2.9), 
+    4, 2, byrow = TRUE), 1)
+}

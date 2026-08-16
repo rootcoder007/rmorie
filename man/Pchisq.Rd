@@ -19,3 +19,6 @@ A step of the dist_native implementation. Called by \code{.rsconsistency}. See t
 The value of \code{Pgamma}.
 }
 \keyword{internal}
+\examples{
+Pchisq(3.84, 1)
+}

@@ -14,3 +14,6 @@ morie_kamath_nsp_loss
 A list with \code{estimate}, \code{p_next}, \code{label}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_kamath_nsp_loss(0.8, "y", 0)
+}

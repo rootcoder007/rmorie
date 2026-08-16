@@ -25,3 +25,7 @@ List with \code{objective}, \code{mean_reward}, \code{kl}, \code{kl_terms},
 \description{
 J = mean r - beta mean(log pi - log pi_ref).
 }
+\examples{
+morie_geron_rlhf_reward_kl_objective(c(1, 0.5, -0.2), c(-0.5, 
+    -1, -0.3), c(-0.8, -0.9, -0.5), 0.2)
+}

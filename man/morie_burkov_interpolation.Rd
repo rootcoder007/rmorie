@@ -18,3 +18,6 @@ Linear interpolation of n-gram orders (Burkov Ch 2)
 A list with \code{estimate}, \code{probs}, \code{lambdas}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_burkov_interpolation(c(0.9, 0.1, 0.5), c(0.6, 0.3, 0.1))
+}

@@ -44,3 +44,6 @@ km046/km047/km048 share \verb{_fill_template}: km046 ->
 \code{morie_kamath_ch3_translate_prefix_prompt}, km048 ->
 \code{morie_kamath_ch3_cloze_prompt_template}.
 }
+\examples{
+morie_kamath_ch3_prefix_prompt_template("Loved it.", "great")
+}

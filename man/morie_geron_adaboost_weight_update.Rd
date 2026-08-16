@@ -22,3 +22,7 @@ w <- w exp(alpha \verb{1\{misclassified\}}), then renormalise. The weighted
 error BEFORE the update is reported so alpha can be checked against
 log((1-r)/r).
 }
+\examples{
+morie_geron_adaboost_weight_update(c(0, 0, 1, 1), c(0, 1, 1, 
+    1), rep(0.25, 4), log(3))
+}

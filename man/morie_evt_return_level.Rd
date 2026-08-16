@@ -17,3 +17,6 @@ GEV T-period return level (Coles 2001 eq. 3.4/3.10)
 The value of \code{morie_evt_gev_quantile}.
 }
 \keyword{internal}
+\examples{
+morie_evt_return_level(5, 1.5, 0.1, 100)
+}

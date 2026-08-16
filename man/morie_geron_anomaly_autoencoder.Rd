@@ -25,3 +25,8 @@ Flags rows whose squared reconstruction error exceeds \code{threshold};
 with no threshold the empirical \code{quantile} of the errors is used,
 which calibrates the detector on the data being scored.
 }
+\examples{
+zero <- function(A) matrix(0, nrow(as.matrix(A)), ncol(as.matrix(A)))
+morie_geron_anomaly_autoencoder(zero, matrix(c(0, 3, 1, 5), ncol = 1), 
+    quantile = 0.6)
+}

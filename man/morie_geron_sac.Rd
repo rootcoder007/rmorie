@@ -34,3 +34,8 @@ Tabular SAC: soft state value V(s) = sum_a pi(a|s)(Q(s,a) - alpha log pi(a|s)),
 soft critic update Q += lr*(target - Q), closed-form policy improvement
 pi(.|s) = softmax(Q(s,.)/alpha).
 }
+\examples{
+bandit <- list(n_states = 1L, n_actions = 2L, reset = function() 0L, 
+    step = function(a) list(0L, as.numeric(a), FALSE))
+morie_geron_sac(bandit, epochs = 30, lr = 0.5, alpha = 0.05)
+}

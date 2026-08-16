@@ -21,3 +21,6 @@ xbar^2(n) = alpha r^2(n) + (1-alpha) xbar^2(n-1).  Normalizing by the running po
 A list with \code{mu}, \code{power}, \code{power_prev}, \code{alpha}, \code{order}, \code{base_mu}, \code{method}.
 }
 \keyword{internal}
+\examples{
+LmsZhang(0.5, 4, 2, alpha = 0.02)
+}

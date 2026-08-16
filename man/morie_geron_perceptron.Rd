@@ -25,3 +25,7 @@ in index order for at most \code{n_iter} epochs, stopping the moment an
 epoch makes no mistake. Converges iff the classes are linearly
 separable, which is why XOR never converges.
 }
+\examples{
+morie_geron_perceptron(matrix(c(2, 1, 3, 2, -1, -2, -2, -1), 
+    nrow = 4, byrow = TRUE), c(1, 1, 0, 0), eta = 0.5, n_iter = 20)
+}

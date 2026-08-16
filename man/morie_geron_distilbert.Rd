@@ -35,3 +35,7 @@ Distillation KL (T^2-scaled) + MLM cross-entropy + optional cosine
 hidden-state term; architectures resolved via \code{morie_geron_encoder_only}
 (hmencox) for the real 12- vs 6-layer parameter reduction.
 }
+\examples{
+morie_geron_distilbert(matrix(c(2, 0), 1, 2), matrix(c(2, 0), 
+    1, 2), c(1, 2, 3), alpha_mlm = 0, alpha_ce = 1)
+}

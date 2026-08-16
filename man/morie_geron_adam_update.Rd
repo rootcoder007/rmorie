@@ -34,3 +34,6 @@ List with \code{theta_new}, \code{m_new}, \code{s_new}, \code{m_hat}, \code{s_ha
 Same kernel as \code{\link[=morie_geron_adam]{morie_geron_adam()}}; this mirrors gradmo's argument
 order and its POSITIVE \code{step} convention (theta_new = theta - step).
 }
+\examples{
+morie_geron_adam_update(1, 0.1, 0, 0, t = 1, eta = 0.001)
+}

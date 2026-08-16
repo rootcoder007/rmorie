@@ -20,3 +20,6 @@ used.  Equal weights are the worst choice for stopband attenuation -- a rectangl
 A list with \code{y}, \code{value}, \code{index}, \code{b}, \code{N}, \code{settled_from}, \code{dc_gain}, \code{equal_weights}, \code{delay_samples}, \code{method}.
 }
 \keyword{internal}
+\examples{
+MaFir(c(1, 2, 3, 4), N = 1)
+}

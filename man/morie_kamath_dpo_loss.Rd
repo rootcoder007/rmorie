@@ -18,3 +18,6 @@ List with \code{estimate}, \code{per_pair}, implicit rewards.
 Bradley-Terry loss on the beta-scaled policy/reference log-ratios; the
 BT core is \code{morie_alammar_reward_model_bt}.
 }
+\examples{
+morie_kamath_dpo_loss(-0.5, -1.5, -1, -1, 0.5)
+}

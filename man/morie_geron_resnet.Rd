@@ -21,3 +21,7 @@ List with \code{y}, \code{output}, \code{residual}, \code{skip},
 y = F(x) + x, optionally with a projected skip. dy/dx = I + dF/dx
 is what keeps a gradient path open through arbitrary depth.
 }
+\examples{
+a <- 0.5
+morie_geron_resnet(c(1, 2, 3), function(a) a * 0.5)
+}

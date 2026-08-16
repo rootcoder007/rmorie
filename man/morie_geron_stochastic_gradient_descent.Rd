@@ -35,3 +35,9 @@ One LCG-drawn sample per step, gradient 2 x_i (x_i^T theta - y_i);
 passing both \code{t0} and \code{t1} anneals the rate as t0/(t + t1). The
 sampled row indices are 0-based.
 }
+\examples{
+X <- matrix(c(1, 2, 1, 3, 1, 5, 1, 7), 4, byrow = TRUE)
+y <- c(2, 3, 6, 9)
+morie_geron_stochastic_gradient_descent(X, y, c(0, 0), 0.01, 
+    6, seed = 23)
+}

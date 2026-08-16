@@ -29,3 +29,9 @@ List with \code{theta}, \code{theta_init}, \code{loss_history}, \code{drift}, \c
 \description{
 Native SGD fine-tuning with frozen params, warmup and weight decay (hmfth)
 }
+\examples{
+task <- function(th, batch) list((th[1] - 3)^2, 2 * (th[1] - 
+    3))
+morie_geron_finetune_lm(task, list(1), epochs = 1, lr = 0.1, 
+    theta = 0)
+}

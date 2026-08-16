@@ -20,3 +20,7 @@ List with \code{estimate}, \code{per_layer_entropy}, \code{total_entropy}.
 -lam times the summed per-layer MEAN attention row entropy. Rows must sum
 to 1; 0 log 0 is taken as 0.
 }
+\examples{
+morie_kamath_ch6_ear_entropy_reg(list(matrix(c(0.5, 1, 0.5, 0), 
+    2)), lam = 2)
+}

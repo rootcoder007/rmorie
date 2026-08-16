@@ -22,3 +22,8 @@ List with \code{estimate}, \code{per_prompt}, \code{response_rate}.
 Mean supported-fact fraction over the prompts the model ANSWERED; a NULL
 response is skipped, not scored 0.
 }
+\examples{
+x <- c(1, 2, 3, 4)
+morie_kamath_ch6_factscore(function(x) if (x == "p2") NULL else paste0("r", 
+    x), list("p1", "p2", "p3"), function(r) c("f1", "f2"), c("f1"))
+}

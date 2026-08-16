@@ -17,3 +17,6 @@ numeric vector of probabilities
 \description{
 GEV distribution function (Coles 2001 eq. 3.2)
 }
+\examples{
+morie_evt_gev_cdf(6, 5, 1.5, 0.1)
+}

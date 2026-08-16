@@ -21,3 +21,7 @@ List with \code{estimate}, \code{penalised_reward}, \code{penalty}.
 \description{
 R = r_theta(x, y) - beta log(pi_RL / pi_SFT).
 }
+\examples{
+morie_kamath_ch5_reward_kl_penalty("x", "y", c(0.5, 0.25), c(0.25, 
+    0.5), 0.2, r_theta = 1)
+}

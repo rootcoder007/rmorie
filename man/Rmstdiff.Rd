@@ -29,3 +29,9 @@ RMST_1 - RMST_2 with standard error sqrt(V1 + V2), the two groups treated as ind
 \references{
 Klein, J. P. and Moeschberger, M. L. (2003). Survival Analysis, 2nd ed., Springer.
 }
+\examples{
+ST <- c(5, 6, 6, 2.5, 4, 4, 3, 3, 1, 2, 2, 3, 7, 8, 9, 10)
+SE <- c(1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1)
+g <- c(rep(0, 8), rep(1, 8))
+Rmstdiff(ST, SE, g)
+}

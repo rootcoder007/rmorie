@@ -19,3 +19,10 @@ List with h_t, z_t, r_t, h_tilde, estimate, n, method.
 \description{
 GRU cell forward step (Geron Ch 13, morie.fn hmgru)
 }
+\examples{
+W <- list(W_z = matrix(0, 2, 2), U_z = matrix(0, 2, 2), b_z = c(0, 
+    0), W_r = matrix(0, 2, 2), U_r = matrix(0, 2, 2), b_r = c(0, 
+    0), W_h = matrix(0, 2, 2), U_h = matrix(0, 2, 2), b_h = c(0, 
+    0))
+morie_geron_gru(c(0, 0), c(4, -2), W)
+}

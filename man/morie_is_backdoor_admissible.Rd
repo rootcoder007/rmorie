@@ -27,3 +27,7 @@ colliders, and that asymmetry is the whole algorithm.
 \references{
 Pearl J (2009) \emph{Causality}, 2nd ed., Sec 3.3.
 }
+\examples{
+A <- matrix(FALSE, 3, 3)
+morie_is_backdoor_admissible(A, 2, 3, integer(0))
+}

@@ -14,3 +14,6 @@ Internal helper: Morie Morphosource Key
 The value of \code{key}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_morphosource_key("explicit")
+}

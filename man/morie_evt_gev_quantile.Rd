@@ -17,3 +17,6 @@ GEV quantile (Coles 2001 eq. 3.4, non-exceedance p)
 A numeric value.
 }
 \keyword{internal}
+\examples{
+morie_evt_gev_quantile(0.9, 5, 1.5, 0.1)
+}

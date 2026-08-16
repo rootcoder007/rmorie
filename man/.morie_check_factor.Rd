@@ -14,3 +14,7 @@ Internal helper: Morie Check Factor
 The value of \code{x}, as built in the body.
 }
 \keyword{internal}
+\examples{
+of <- factor(c("lo", "hi", "lo"), levels = c("lo", "hi"), ordered = TRUE)
+.morie_check_factor(of, ordered = TRUE)
+}

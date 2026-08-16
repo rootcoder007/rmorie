@@ -25,3 +25,7 @@ List with \code{cost}, \code{impurity_left}, \code{impurity_right},
 J = (m_L/m) G_L + (m_R/m) G_R, with gini, entropy (log base 2) or mse
 impurity, plus the impurity decrease against the parent.
 }
+\examples{
+X <- matrix(c(1, 2, 3, 4), ncol = 1)
+morie_geron_cart_split_cost(X, c(0, 0, 1, 1), 0, 1.5)
+}

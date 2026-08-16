@@ -17,3 +17,6 @@ A \code{morie_bigint}.
 \description{
 Binary exponentiation.
 }
+\examples{
+morie_big_pow(2, 100)
+}

@@ -18,3 +18,7 @@ List with \code{estimate} (summed loss), \code{mean_loss}, \code{pair_accuracy}.
 Scores trajectory segment pairs with r_phi and hands the Bradley-Terry
 loss to \code{morie_alammar_reward_model_bt}.
 }
+\examples{
+morie_kamath_christiano_deep_rl_feedback(list(c("w1", "l1"), 
+    c("w2", "l2")), function(s) if (startsWith(s, "w")) 2 else 0.5)
+}

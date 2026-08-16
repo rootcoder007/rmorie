@@ -21,3 +21,6 @@ List with \code{estimate}, \code{answer}.
 \description{
 A = f(I, M; theta), with the model contract enforced.
 }
+\examples{
+morie_kamath_ch9_mm_instr_predict("I", "M", function(I, M) "ans")
+}

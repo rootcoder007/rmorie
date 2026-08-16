@@ -34,3 +34,7 @@ List with \code{theta_new}, \code{v_new}, \code{lookahead}, \code{gradient},
 Gradient evaluated at the look-ahead theta - eta beta v, then
 v = beta v + g and theta -= eta v.
 }
+\examples{
+morie_geron_nesterov_accelerated_gradient(c(1, -1), function(t) 2 * 
+    t, c(0, 0), 0.1, 0.9, n_steps = 3)
+}

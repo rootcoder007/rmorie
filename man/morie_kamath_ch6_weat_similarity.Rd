@@ -17,3 +17,8 @@ List with \code{estimate}, \code{mean_cos_W1}, \code{mean_cos_W2}.
 \description{
 s(a) = mean cos(a, W_1) - mean cos(a, W_2).
 }
+\examples{
+W1 <- diag(2)
+W2 <- -diag(2)
+morie_kamath_ch6_weat_similarity(c(1, 0), W1, W2)
+}

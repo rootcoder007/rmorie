@@ -28,3 +28,7 @@ km074 -> \code{morie_kamath_ch5_dpo_pref_substituted}, which carries Z
 explicitly and refuses to return unless the beta log Z terms cancel --
 the same assertion the Python module makes.
 }
+\examples{
+morie_kamath_ch5_dpo_pref_simplified(c(0.6, 0.4), c(0.5, 0.5), 
+    0.2)
+}

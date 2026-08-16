@@ -23,3 +23,7 @@ List with \code{prompt}, \code{tokens}, \code{n_triggers}.
 \description{
 Adversarial-trigger QA prompt (Kamath Eq 3.10)
 }
+\examples{
+morie_kamath_ch3_qa_trigger_template("Where?", "Paris.", "the", 
+    "Rome")
+}

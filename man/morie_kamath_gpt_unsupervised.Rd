@@ -19,3 +19,6 @@ GPT objectives and MoE (Eq 2.34-2.41)
 A list with \code{estimate}, \code{cross_entropy}, \code{context_size}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_kamath_gpt_unsupervised(c(0.5, 0.5))
+}

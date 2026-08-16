@@ -22,3 +22,6 @@ List with \code{theta}, \code{theta_new}, \code{scale_factors}.
 theta_i / s^(2i/d); the top frequencies move least. With \code{ramp} the old
 and new frequencies are blended linearly across the given band.
 }
+\examples{
+morie_kamath_yarn_context_extrapolation(10000, 4, 8)
+}

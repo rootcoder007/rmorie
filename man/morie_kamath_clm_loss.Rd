@@ -17,3 +17,6 @@ morie_kamath_clm_loss
 A list with \code{estimate}, \code{per_position}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_kamath_clm_loss(c(0.5, 0.25))
+}

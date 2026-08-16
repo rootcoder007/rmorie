@@ -22,3 +22,11 @@ Traces the model (\code{morie_geron_trace}), fuses consecutive
 "linear" ops into one matmul (exact, verified by replay), and under
 mode = "max-autotune" costs the fused product via the matrix-chain DP.
 }
+\examples{
+A2 <- diag(2) * 2
+B2 <- diag(2) * 3
+C2 <- diag(2) * 5
+morie_geron_torch_compile(list(list(kind = "linear", param = A2), 
+    list(kind = "linear", param = B2), list(kind = "linear", 
+        param = C2)), example_inputs = matrix(c(1, 1), 1, 2))
+}

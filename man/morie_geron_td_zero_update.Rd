@@ -35,3 +35,6 @@ List with \code{V}, \code{old_value}, \code{new_value}, \code{target},
 V(s) += alpha [r + gamma V(s') - V(s)]; \code{done} drops the bootstrap.
 States are 0-based.
 }
+\examples{
+morie_geron_td_zero_update(c(0, 1, -1), 0, 2, 0.5, 0.3, 0.9)
+}

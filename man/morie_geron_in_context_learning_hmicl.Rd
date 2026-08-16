@@ -30,3 +30,9 @@ List with prediction, prompt, log_probs, posterior, n_shot, candidates, estimate
 \description{
 In-context learning by prompt-conditioned scoring (Geron Ch 15, morie.fn hmicl)
 }
+\examples{
+scorer <- function(prompt, cand) as.numeric(lengths(regmatches(prompt, 
+    gregexpr(as.character(cand), prompt, fixed = TRUE))))
+ex <- list(list("a", "pos"), list("b", "pos"), list("c", "neg"))
+morie_geron_in_context_learning_hmicl(scorer, ex, "d")
+}

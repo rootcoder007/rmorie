@@ -23,3 +23,7 @@ List with \code{estimate}, \code{per_sample}.
 \description{
 Mean over samples of the squared L2 error between true and predicted noise.
 }
+\examples{
+morie_kamath_ch9_ldm_loss(matrix(c(1, 0, 2, 1), 2), NULL, NULL, 
+    eps_net = matrix(c(1, 0, 1, 0), 2))
+}

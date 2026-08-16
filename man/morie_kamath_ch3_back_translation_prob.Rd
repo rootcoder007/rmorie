@@ -25,3 +25,7 @@ List with \code{estimate}.
 P(t) = P_forward(t_hat|t) . P_backward(t|t_hat). The printed equation
 cannot be a round trip; the coherent reading is implemented, as in Python.
 }
+\examples{
+morie_kamath_ch3_back_translation_prob("a", "b", p_forward = 0.5, 
+    p_backward = 0.25)
+}

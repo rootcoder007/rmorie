@@ -17,3 +17,6 @@ morie_kamath_span_loss
 A list with \code{estimate}, \code{span_length}, \code{per_position}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_kamath_span_loss(c(1e-09, 0.5, 0.25, 1e-09), "x", 1, 2)
+}

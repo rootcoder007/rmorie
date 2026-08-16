@@ -20,3 +20,8 @@ One step of the Elman RNN (Burkov Ch 3)
 A list with \code{h}, \code{y}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_burkov_elman_rnn(c(1, 0.5), c(0.2, -0.1), rbind(c(0.5, 
+    0), c(0, 0.5)), rbind(c(1, 0), c(0, 1)), rbind(c(1, 1)), 
+    c(0, 0), 0.1)
+}

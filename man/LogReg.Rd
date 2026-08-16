@@ -21,3 +21,9 @@ the Bayes classifier it models the POSTERIOR directly and assumes nothing about 
 A list with \code{intercept}, \code{coefficients}, \code{w}, \code{fitted}, \code{predicted}, \code{loglik}, \code{iterations}, \code{converged}, \code{separable}, \code{ridge}, \code{training_accuracy}, \code{n}, \code{models_the_posterior_directly}, \code{no_gaussian_assumption}, \code{method}.
 }
 \keyword{internal}
+\examples{
+XC <- matrix(c(1, 1, 1.4, 0.8, 0.7, 1.3, 1.1, 1.6, 3, 3, 3.3, 
+    2.7, 2.6, 3.2, 3.1, 3.5), ncol = 2, byrow = TRUE)
+YC <- c(0, 0, 0, 0, 1, 1, 1, 1)
+LogReg(XC, YC)
+}

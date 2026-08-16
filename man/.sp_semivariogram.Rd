@@ -21,3 +21,7 @@ The nugget is a discontinuity AT the origin (Sec 4.3.6, p. 150).
 Numeric vector gamma(h).
 }
 \keyword{internal}
+\examples{
+lags <- (1:12) * 0.5
+.sp_semivariogram(lags, 0.3, 2, 6, "exponential")
+}

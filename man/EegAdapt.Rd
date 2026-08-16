@@ -22,3 +22,9 @@ A step of the rangayyan_ccf implementation. No other function in the package cal
 A list with \code{d}, \code{d_fixed_reference}, \code{times}, \code{boundaries}, \code{n_boundaries}, \code{threshold}, \code{median}, \code{mad}, \code{window}, \code{step}, \code{order}, \code{fs}, \code{reference_restarts_at_boundaries}, \code{robust_threshold}, \code{method}.
 }
 \keyword{internal}
+\examples{
+sine <- function(n, cycles_hz, fs = 100, amp = 1, phase = 0) {
+    amp * sin(2 * pi * cycles_hz * (seq_len(n) - 1L)/fs + phase)
+}
+EegAdapt(c(sine(200, 5), sine(200, 40)), 100, window = 60, step = 20)
+}

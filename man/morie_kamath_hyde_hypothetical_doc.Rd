@@ -29,3 +29,7 @@ List with \code{retrieved}, \code{similarities}, \code{hypothetical}, \code{esti
 \description{
 Embeds the model's fake answer and retrieves the top-k by cosine.
 }
+\examples{
+morie_kamath_hyde_hypothetical_doc("q", function(q) c(1, 0), 
+    list(d1 = c(1, 0), d2 = c(0, 1)), k = 1)
+}
