@@ -19,3 +19,7 @@ A step of the tldapar_native implementation. Called by \code{morie_tldapar}. See
 A list with \code{estimate}, \code{warning}.
 }
 \keyword{internal}
+\examples{
+r <- naive_reuse(function(idx) list(estimate = mean(idx)), n = 50)
+str(r, max.level = 1)
+}

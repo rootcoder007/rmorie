@@ -40,3 +40,14 @@ Methods in Medical Research 28(6), 1761-1780,
 doi:10.1177/0962280218774936.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+n <- 40
+D <- rnorm(n, 0, 0.6)
+y <- runif(n)
+qa <- runif(n)
+groups <- split(seq_len(n), rep(1:8, each = 5))
+r <- morie_tmlcic_variance_estimate(D, y, qa, groups, n,
+                                    design = "unmatched", target = "SATE")
+str(r, max.level = 1)
+}

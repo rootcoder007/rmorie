@@ -43,3 +43,15 @@ Methods in Medical Research 28(6), 1761-1780,
 doi:10.1177/0962280218774936.
 }
 \keyword{internal}
+\examples{
+set.seed(3)
+n <- 40
+W <- matrix(rnorm(n * 2), n, 2)
+A <- rep(c(0, 1), 20)
+y <- plogis(-0.3 + 0.8 * A + 0.5 * W[, 1] + rnorm(n, 0, 0.5))
+groups <- split(seq_len(n), rep(1:8, each = 5))
+r <- morie_tmlcic_adaptive_prespecification(y, A, W, groups,
+                                            design = "unmatched",
+                                            target = "SATE")
+str(r, max.level = 1)
+}
