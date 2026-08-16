@@ -14,3 +14,10 @@ Piecewise log-linear shedding curve (standard)
 A list with \code{rise_slope}, \code{rise_intercept}, \code{plateau_level}, \code{decay_slope}, \code{decay_intercept}, \code{peak_load}, \code{peak_day}, \code{n}, \code{n_rise}, \code{n_plateau}, \code{n_decay}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+days <- 0:14
+load <- 10^(c(seq(2, 6, length.out = 5), seq(5.8, 4, length.out = 5),
+              rep(3.9, 5)) + rnorm(15, 0, 0.05))
+Shedcurve(days, load, t_peak = 4, t_plateau = 9)
+}

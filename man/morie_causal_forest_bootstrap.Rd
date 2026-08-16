@@ -39,3 +39,12 @@ Wager S, Athey S (2018). Estimation and inference of
 heterogeneous treatment effects using random forests.
 \emph{JASA} 113(523), 1228-1242.
 }
+\examples{
+set.seed(2)
+n <- 100
+X <- matrix(rnorm(n * 2), n, 2)
+d <- rbinom(n, 1, 0.5)
+y <- 1 + X[, 1] + d * 0.8 + rnorm(n, 0, 0.3)
+r <- morie_causal_forest_bootstrap(y, d, X, B = 8L, n_trees = 15L)
+str(r, max.level = 1)
+}

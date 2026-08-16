@@ -39,3 +39,13 @@ violators, the exact L2 isotonic projection. Mirrors \code{morie.fn.htgcrf}.
 Robertson T, Wright FT, Dykstra RL (1988). \emph{Order
 Restricted Statistical Inference}. Wiley.
 }
+\examples{
+set.seed(4)
+n <- 120
+X <- matrix(rnorm(n * 2), n, 2)
+d <- rbinom(n, 1, 0.5)
+y <- 1 + X[, 1] + d * (0.5 + 0.5 * X[, 1]) + rnorm(n, 0, 0.3)
+r <- morie_monotone_causal_forest(y, d, X, monotone_feature = 1L,
+                                  n_trees = 20L)
+str(r, max.level = 1)
+}
