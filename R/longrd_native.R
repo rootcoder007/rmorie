@@ -201,8 +201,8 @@ morie_longrd_pileup <- function(draft, reads, match = 1, mismatch = -1,
 #'
 #' @param col A list; the body reads \code{$-}, \code{$A}, \code{$C}, \code{$G}, \code{$T} from it.
 #' @param draft_base Carried through into a list the body builds.
-#' @param min_depth See Usage.
-#' @param min_frac See Usage.
+#' @param min_depth Passed to \code{<}.
+#' @param min_frac Passed to \code{<}.
 #' @return The value of \code{list}.
 #' @export
 .longrd_call <- function(col, draft_base, min_depth, min_frac) {

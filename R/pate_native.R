@@ -42,7 +42,7 @@
 #' source it follows.
 #'
 #' @param teacher_predicts Coerced to list by the body, with \code{as.list}.
-#' @param rows See Usage.
+#' @param rows Passed to \code{predict}.
 #' @param n_classes Defaults to \code{NULL}.
 #' @return The value of \code{split}.
 #' @export
@@ -258,11 +258,11 @@ moments_accountant <- function(vote_counts, gamma, delta,
 #' @param queries Coerced to list by the body, with \code{as.list}.
 #' @param gamma Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
 #' @param delta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-05}.
-#' @param n_classes Defaults to \code{NULL}.
-#' @param student_train_fn Defaults to \code{NULL}.
+#' @param n_classes Passed to \code{teacher_votes}.
+#' @param student_train_fn Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param student_features Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
-#' @param lambdas Defaults to \code{NULL}.
+#' @param lambdas Passed to \code{moments_accountant}.
 #' @return A list with \code{estimate}, \code{labels}, \code{clean_labels}, \code{votes}, \code{agreement}, \code{epsilon}, \code{epsilon_accountant}, \code{epsilon_data_independent}, \code{accountant}, \code{delta}, \code{gamma}, \code{n_teachers}, \code{n_queries}, \code{student}, \code{note}, \code{method}.
 #' @export
 pate <- function(teacher_predicts, queries, gamma = 0.05,

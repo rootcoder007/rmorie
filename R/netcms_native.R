@@ -29,7 +29,7 @@
 #' @param s12 A vector; its length is taken and its elements indexed.
 #' @param lam Passed to \code{.netcms_soft}.
 #' @param beta A vector; indexed elementwise.
-#' @param tol See Usage.
+#' @param tol Passed to \code{<}.
 #' @param maxit A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export

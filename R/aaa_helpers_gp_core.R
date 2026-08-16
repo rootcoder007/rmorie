@@ -10,7 +10,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .gpflat <- function(x) as.numeric(unlist(x))
@@ -436,7 +436,7 @@
 #' @param beta0 Passed to \code{.gpmnloglik}.
 #' @param beta Passed to \code{.gpmnloglik}.
 #' @param lam Coerced to numeric by the body, with \code{as.numeric}.
-#' @param penalty Defaults to \code{"ridge"}.
+#' @param penalty Passed to \code{identical}. Defaults to \code{"ridge"}.
 #' @param baseline_last Passed to \code{.gpmnloglik}. Defaults to \code{TRUE}.
 #' @return A list with \code{loglik}, \code{penalty}, \code{penalized_loglik}.
 #' @export
@@ -557,7 +557,7 @@
 #' the source it follows.
 #'
 #' @param y_positive Passed to \code{.gpflat}.
-#' @param tol Defaults to \code{1e-12}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-12}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
 #' @return A numeric value.
 #' @export
@@ -610,9 +610,9 @@
 #' the source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
-#' @param X_E Defaults to \code{NULL}.
-#' @param X Defaults to \code{NULL}.
-#' @param X_EM Defaults to \code{NULL}.
+#' @param X_E Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param X Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param X_EM Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param Z_L Optional; may be \code{NULL}. Passed to \code{.gpmat}.
 #' @param L_g Optional; may be \code{NULL}. Passed to \code{.gpmat}.
 #' @return A list with \code{design}, \code{widths}, \code{n_columns}.

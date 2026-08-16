@@ -8,8 +8,8 @@
 .groebn_divides(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{Passed to \code{<=}.}
+\item{b}{Passed to \code{<=}.}
 }
 \description{
 A step of the groebn_native implementation. Called by \code{.groebn_divide}, \code{.groebn_reduce_basis}. See the file header for the source the module follows.

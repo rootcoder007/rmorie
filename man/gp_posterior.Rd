@@ -12,8 +12,8 @@ gp_posterior(X, y, Xs, kernel = "matern52", amplitude = 1, length_scale = 1, noi
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{Xs}{A matrix; passed to \code{as.matrix}.}
 \item{kernel}{Passed to \code{.kernel}. Defaults to \code{"matern52"}.}
-\item{amplitude}{Defaults to \code{1}.}
-\item{length_scale}{Defaults to \code{1}.}
+\item{amplitude}{Passed to \code{k}. Defaults to \code{1}.}
+\item{length_scale}{Passed to \code{k}. Defaults to \code{1}.}
 \item{noise}{The body requires: bayopt: noise must be non-negative. Defaults to \code{1e-08}.}
 \item{mean}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }

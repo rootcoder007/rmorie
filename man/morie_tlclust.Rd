@@ -10,9 +10,9 @@ morie_tlclust(Q_seq, H_seq, Y, cluster, ic = NULL)
 \arguments{
 \item{Q_seq}{A list; the body checks with \code{is.list}.}
 \item{H_seq}{See Usage.}
-\item{Y}{See Usage.}
-\item{cluster}{See Usage.}
-\item{ic}{Defaults to \code{NULL}.}
+\item{Y}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{cluster}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{ic}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the tlclust_native implementation. No other function in the package calls it. See the file header for the source the module follows.

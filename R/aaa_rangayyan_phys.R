@@ -116,10 +116,10 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param freqs See Usage.
+#' @param freqs Passed to \code{>=}.
 #' @param power A vector; indexed elementwise.
-#' @param lo See Usage.
-#' @param hi See Usage.
+#' @param lo Passed to \code{>=}.
+#' @param hi Passed to \code{<}.
 #' @return The value of \code{.morie_fsum}.
 #' @export
 .bsabandpow <- function(freqs, power, lo, hi) {
@@ -136,8 +136,8 @@
 #'
 #' @param freqs A vector; indexed elementwise.
 #' @param power A vector; its length is taken and its elements indexed.
-#' @param count Defaults to \code{3L}.
-#' @param minsep Defaults to \code{0}.
+#' @param count Passed to \code{>=}. Defaults to \code{3L}.
+#' @param minsep Passed to \code{>=}. Defaults to \code{0}.
 #' @return A list with \code{freqs}, \code{powers}.
 #' @export
 .bsapeaks <- function(freqs, power, count = 3L, minsep = 0) {
@@ -1828,7 +1828,7 @@ ErdErs <- function(eeg, fs, ref_window, active_window, band = c(8, 13)) {
 #'
 #' @param x Passed to \code{.bsapsd}.
 #' @param fs Numeric; combined arithmetically in the body.
-#' @param bands Defaults to \code{NULL}.
+#' @param bands Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A vector, from \code{c}.
 #' @export
 CadSpec <- function(x, fs, bands = NULL) {
@@ -2192,9 +2192,9 @@ OaeFeat <- function(oae, fs, noise_floor = NULL, bands = NULL) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param eeg See Usage.
-#' @param emg See Usage.
-#' @param gait See Usage.
+#' @param eeg Passed to \code{tremor}.
+#' @param emg Passed to \code{tremor}.
+#' @param gait Passed to \code{tremor}.
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param tremor_band A vector; indexed elementwise. Defaults to \code{c(3, 7)}.
 #' @return A list with \code{eeg_bands}, \code{eeg_beta_fraction}, \code{emg_tremor_fraction}, \code{emg_tremor_freq_hz}, \code{gait_tremor_fraction}, \code{gait_tremor_freq_hz}, \code{emg_form_factor}, \code{emg_turns_per_second}, \code{gait_rate_hz}, \code{gait_regularity}, \code{tremor_present}, \code{tremor_band_hz}, \code{fs_hz}, \code{units}, \code{method}.
@@ -3125,11 +3125,11 @@ VagFeat <- function(vag, fs, n_segments = 8) {
 #'
 #' cartilage pathology.
 #'
-#' @param vag See Usage.
-#' @param fs See Usage.
+#' @param vag Passed to \code{VagFeat}.
+#' @param fs Passed to \code{VagFeat}.
 #' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param bias Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param n_segments Defaults to \code{8}.
+#' @param n_segments Passed to \code{VagFeat}. Defaults to \code{8}.
 #' @return The value of \code{base}, as built in the body.
 #' @export
 VagKnee <- function(vag, fs, weights = NULL, bias = NULL, n_segments = 8) {

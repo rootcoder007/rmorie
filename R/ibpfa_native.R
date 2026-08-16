@@ -189,9 +189,9 @@ indian_buffet_factor <- sample_ibp
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param alpha See Usage.
-#' @param seed Defaults to \code{0L}.
+#' @param n Passed to \code{sample_ibp}.
+#' @param alpha Passed to \code{sample_ibp}.
+#' @param seed Passed to \code{sample_ibp}. Defaults to \code{0L}.
 #' @return The value of \code{sample_ibp}.
 #' @export
 morie_ibpfa <- function(n, alpha, seed = 0L) {

@@ -8,7 +8,7 @@
 wbwc_invert(tree, known, candidates, priors, sensitive = 0L, unknown = NULL)
 }
 \arguments{
-\item{tree}{See Usage.}
+\item{tree}{Passed to \code{tree_paths}.}
 \item{known}{See Usage.}
 \item{candidates}{A vector; its length is taken.}
 \item{priors}{A vector; indexed elementwise.}

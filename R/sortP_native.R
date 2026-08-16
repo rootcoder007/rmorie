@@ -110,7 +110,7 @@ choose_k <- function(graph_sizes, coverage = 0.6) {
 #' @param features A matrix; the body checks with \code{is.matrix}.
 #' @param adj Accepted by the signature and not used anywhere in the body.
 #' @param perm A vector; indexed elementwise.
-#' @param k_keep See Usage.
+#' @param k_keep Passed to \code{sort_pooling}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-09}.
 #' @return A list with \code{max_deviation}, \code{invariant}, \code{note}.
 #' @export

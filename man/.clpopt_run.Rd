@@ -12,7 +12,7 @@
 \item{basis}{A vector; its length is taken and its elements indexed.}
 \item{cols}{A vector; indexed elementwise.}
 \item{rule}{Compared against \code{"bland"}.}
-\item{blocked}{See Usage.}
+\item{blocked}{Passed to \code{\%in\%}.}
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{

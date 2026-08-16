@@ -14,11 +14,11 @@ policy_walk(T, observations, gamma, n_iter = 1000, delta = 0.25, alpha = 1, prio
 \item{n_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1000}.}
 \item{delta}{Numeric; combined arithmetically in the body. Defaults to \code{0.25}.}
 \item{alpha}{Passed to \code{.birl_log_likelihood}. Defaults to \code{1}.}
-\item{prior}{Defaults to \code{"uniform"}.}
-\item{scale}{Defaults to \code{1}.}
+\item{prior}{Passed to \code{log_prior}. Defaults to \code{"uniform"}.}
+\item{scale}{Passed to \code{log_prior}. Defaults to \code{1}.}
 \item{r_max}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body. Defaults to \code{1}.}
-\item{J}{Defaults to \code{0.1}.}
-\item{H}{Defaults to \code{0}.}
+\item{J}{Passed to \code{log_prior}. Defaults to \code{0.1}.}
+\item{H}{Passed to \code{log_prior}. Defaults to \code{0}.}
 \item{burn}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 \item{seed}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 \item{R0}{Optional; may be \code{NULL}. Iterated over elementwise, with \code{vapply}.}

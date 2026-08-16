@@ -20,6 +20,15 @@
 # silently in force for all three call sites.  The survivor is kept so
 # behaviour does not change, with tol exposed for callers that need a
 # tighter rank cut.
+#' .morie_ginv
+#'
+#' Internal helper in mass_native.R; see the file header for
+#' the source the module follows.
+#'
+#' @param X The body requires: 'X' must be a numeric matrix.
+#' @param tol Numeric; combined arithmetically in the body.
+#' @return The value of \code{if}.
+#' @export
 .morie_ginv <- function(X, tol = sqrt(.Machine$double.eps)) {
   if (length(dim(X)) > 2L || !is.numeric(X)) {
     stop("'X' must be a numeric matrix", call. = FALSE)
@@ -183,8 +192,8 @@ morie_kde2d <- function(x, y, h, n = 25, lims = c(range(x), range(y))) {
 #' @param mu Numeric; combined arithmetically in the body.
 #' @param n Numeric; combined arithmetically in the body. Defaults to \code{sum(weights)}.
 #' @param weights Numeric; combined arithmetically in the body.
-#' @param limit Defaults to \code{10}.
-#' @param eps Defaults to \code{.Machine$double.eps^0.25}.
+#' @param limit Passed to \code{<}. Defaults to \code{10}.
+#' @param eps Passed to \code{>}. Defaults to \code{.Machine$double.eps^0.25}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .morie_theta_ml <- function(y, mu, n = sum(weights), weights,

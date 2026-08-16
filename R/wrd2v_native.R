@@ -241,7 +241,7 @@ morie_wrd2v_subsample_probability <- function(counts, t=1e-5) {
 #'
 #' @param st A list; the body reads \code{$O}, \code{$W} from it.
 #' @param c See Usage.
-#' @param j See Usage.
+#' @param j Passed to \code{c}.
 #' @param size A count; the body uses it as \code{numeric(...)}.
 #' @param lr Numeric; combined arithmetically in the body.
 #' @param k A count; the body uses it as \code{seq_len(...)}.
@@ -480,9 +480,9 @@ morie_wrd2v_wrd2v <- function(corpus, size=16, window=5,
 #' excluded from the answer.
 #'
 #' @param vectors A vector; indexed elementwise.
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param c See Usage.
+#' @param a Passed to \code{c}.
+#' @param b Passed to \code{c}.
+#' @param c Passed to \code{c}.
 #' @param topn Numeric; passed to \code{min}. Defaults to \code{1}.
 #' @return The value of \code{lapply}.
 #' @export

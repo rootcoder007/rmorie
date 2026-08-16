@@ -11,7 +11,7 @@
 \item{y}{A vector; its length is taken and its elements indexed.}
 \item{off}{A vector; indexed elementwise.}
 \item{H}{A vector; indexed elementwise.}
-\item{rows}{Defaults to \code{NULL}.}
+\item{rows}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{obs_weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{

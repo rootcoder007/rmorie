@@ -10,7 +10,7 @@ laplace_marginal(log_joint, x_grid, theta)
 \arguments{
 \item{log_joint}{Accepted by the signature and not used anywhere in the body.}
 \item{x_grid}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{theta}{See Usage.}
+\item{theta}{Passed to \code{log_joint}.}
 }
 \description{
 A step of the inlasm_native implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -8,7 +8,7 @@
 .sensmi_ols(X, y)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{Passed to \code{cbind}.}
 \item{y}{Numeric; combined arithmetically in the body.}
 }
 \description{

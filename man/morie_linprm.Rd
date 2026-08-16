@@ -11,7 +11,7 @@ morie_linprm(c, A, b, tol = 1e-10, max_iter = 200)
 \item{c}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{A}{Iterated over elementwise, with \code{lapply}.}
 \item{b}{A vector; its length is taken and its elements indexed.}
-\item{tol}{Defaults to \code{1e-10}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-10}.}
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.}
 }
 \description{

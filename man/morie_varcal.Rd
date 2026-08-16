@@ -10,8 +10,8 @@ morie_varcal(reads, reference, scorer = NULL, min_quality = 10, ...)
 \arguments{
 \item{reads}{Passed to \code{.varcal_norm_reads}.}
 \item{reference}{Passed to \code{.varcal_chars}.}
-\item{scorer}{Defaults to \code{NULL}.}
-\item{min_quality}{Defaults to \code{10}.}
+\item{scorer}{Passed to \code{varcal_genotype_posterior}.}
+\item{min_quality}{Passed to \code{>=}. Defaults to \code{10}.}
 \item{...}{Passed through.}
 }
 \description{

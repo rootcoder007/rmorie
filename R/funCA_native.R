@@ -64,7 +64,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param M See Usage.
+#' @param M Passed to \code{eigen}.
 #' @return The value of \code{%*%}.
 #' @export
 .funCA_sym_inv_sqrt <- function(M) {
@@ -83,8 +83,8 @@
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param Y A matrix; passed to \code{as.matrix}.
-#' @param p Defaults to \code{NULL}.
-#' @param q Defaults to \code{NULL}.
+#' @param p Passed to \code{pick}.
+#' @param q Passed to \code{pick}.
 #' @return A list with \code{estimate}, \code{correlations}, \code{weights_x}, \code{weights_y}, \code{variates_x}, \code{variates_y}, \code{p}, \code{q}, \code{explained_x}, \code{explained_y}, \code{eigenvalues_x}, \code{eigenvalues_y}, \code{n}, \code{method}, \code{note}.
 #' @export
 morie_funCA_functional_cca <- function(X, Y, p = NULL, q = NULL) {

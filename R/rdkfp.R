@@ -19,8 +19,8 @@
 #' it follows.
 #'
 #' @param B A list; the body reads \code{$a}, \code{$i}, \code{$j} from it.
-#' @param minpath See Usage.
-#' @param maxpath See Usage.
+#' @param minpath Passed to \code{>=}.
+#' @param maxpath Passed to \code{<=}.
 #' @param branched A flag; the body branches on it.
 #' @return The value of \code{out}, as built in the body.
 #' @export

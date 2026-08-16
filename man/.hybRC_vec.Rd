@@ -8,7 +8,7 @@
 .hybRC_vec(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the hybRC_native implementation. Called by \code{weighted}. See the file header for the source the module follows.

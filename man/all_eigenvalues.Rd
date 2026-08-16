@@ -8,8 +8,8 @@
 all_eigenvalues(spec, theta)
 }
 \arguments{
-\item{spec}{See Usage.}
-\item{theta}{See Usage.}
+\item{spec}{Passed to \code{state_matrices}.}
+\item{theta}{Passed to \code{state_matrices}.}
 }
 \description{
 A step of the bats_native implementation. No other function in the package calls it. See the file header for the source the module follows.

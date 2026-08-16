@@ -19,8 +19,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Passed to \code{c}.
+#' @param b Passed to \code{c}.
 #' @return A vector, from \code{sort}.
 #' @export
 .t2_lvl <- function(a, b) sort(unique(c(a, b)))

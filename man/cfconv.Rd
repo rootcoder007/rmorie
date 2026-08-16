@@ -11,7 +11,7 @@ cfconv(X, R, filter_net, cutoff = 5, ...)
 \item{X}{Passed to \code{.schn_mat}.}
 \item{R}{Passed to \code{.schn_mat}.}
 \item{filter_net}{Accepted by the signature and not used anywhere in the body.}
-\item{cutoff}{Defaults to \code{5}.}
+\item{cutoff}{Passed to \code{cosine_cutoff}. Defaults to \code{5}.}
 \item{...}{Passed through.}
 }
 \description{

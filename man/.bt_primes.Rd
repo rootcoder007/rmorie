@@ -8,7 +8,7 @@
 .bt_primes(m)
 }
 \arguments{
-\item{m}{See Usage.}
+\item{m}{Passed to \code{<}.}
 }
 \description{
 A step of the btmult implementation. Called by \code{.bt_counts}. See the file header for the source the module follows.

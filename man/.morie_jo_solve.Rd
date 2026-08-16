@@ -8,7 +8,7 @@
 .morie_jo_solve(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
+\item{a}{Passed to \code{unlist}.}
 \item{b}{A vector; its length is taken.}
 }
 \description{

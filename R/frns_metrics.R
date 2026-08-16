@@ -74,8 +74,8 @@ NULL
 #' source it follows.
 #'
 #' @param outcome A vector; indexed elementwise.
-#' @param group See Usage.
-#' @param favorable See Usage.
+#' @param group Passed to \code{unique}.
+#' @param favorable Passed to \code{==}.
 #' @return The value of \code{rates}, as built in the body.
 #' @export
 .frns_favorable_rates <- function(outcome, group, favorable) {
@@ -132,8 +132,8 @@ NULL
 #'
 #' @param y_true A vector; indexed elementwise.
 #' @param y_pred A vector; indexed elementwise.
-#' @param group See Usage.
-#' @param favorable See Usage.
+#' @param group Passed to \code{unique}.
+#' @param favorable Passed to \code{==}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .frns_rates_from_labels <- function(y_true, y_pred, group, favorable) {
@@ -219,7 +219,7 @@ NULL
 #' source it follows.
 #'
 #' @param x Coerced to vector by the body, with \code{as.vector}.
-#' @param name See Usage.
+#' @param name Passed to \code{sprintf}.
 #' @return The value of \code{arr}, as built in the body.
 #' @export
 .morie_fairness_as_1d <- function(x, name) {
@@ -258,7 +258,7 @@ NULL
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param arr See Usage.
+#' @param arr Passed to \code{unique}.
 #' @return The value of \code{unique}.
 #' @export
 .morie_fairness_ordered_unique <- function(arr) {
@@ -274,7 +274,7 @@ NULL
 #'
 #' @param outcome A vector; indexed elementwise.
 #' @param group Passed to \code{.morie_fairness_ordered_unique}.
-#' @param favorable See Usage.
+#' @param favorable Passed to \code{==}.
 #' @return The value of \code{rates}, as built in the body.
 #' @export
 .morie_fairness_favorable_rates <- function(outcome, group, favorable) {
@@ -331,7 +331,7 @@ NULL
 #' @param y_true A vector; indexed elementwise.
 #' @param y_pred A vector; indexed elementwise.
 #' @param group Passed to \code{.morie_fairness_ordered_unique}.
-#' @param favorable See Usage.
+#' @param favorable Passed to \code{==}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_fairness_rates_from_labels <- function(y_true, y_pred, group, favorable) {

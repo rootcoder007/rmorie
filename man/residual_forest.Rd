@@ -10,13 +10,13 @@ residual_forest(y_res, w_res, X, at = NULL, n_trees = 200, min_leaf = 5, seed = 
 \arguments{
 \item{y_res}{A vector; its length is taken.}
 \item{w_res}{Numeric; combined arithmetically in the body.}
-\item{X}{See Usage.}
+\item{X}{Passed to \code{grow_forest}.}
 \item{at}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
-\item{n_trees}{Defaults to \code{200}.}
-\item{min_leaf}{Defaults to \code{5}.}
-\item{seed}{Defaults to \code{0}.}
-\item{alpha}{Defaults to \code{0.05}.}
-\item{pi}{Defaults to \code{0.5}.}
+\item{n_trees}{Passed to \code{grow_forest}. Defaults to \code{200}.}
+\item{min_leaf}{Passed to \code{grow_forest}. Defaults to \code{5}.}
+\item{seed}{Passed to \code{grow_forest}. Defaults to \code{0}.}
+\item{alpha}{Passed to \code{grow_forest}. Defaults to \code{0.05}.}
+\item{pi}{Passed to \code{grow_forest}. Defaults to \code{0.5}.}
 }
 \description{
 A step of the plrgrf_native implementation. Called by \code{morie_plrgrf}. See the file header for the source the module follows.

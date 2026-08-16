@@ -21,7 +21,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .s03vec <- function(x) {
@@ -312,7 +312,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
+#' @param z Passed to \code{>}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .s03relu <- function(z) if (z > 0) z else 0
@@ -543,7 +543,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p Passed to \code{qnorm}.
 #' @return The value of \code{qnorm}.
 #' @export
 .s03qnorm <- function(p) qnorm(p)
@@ -554,7 +554,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
+#' @param z Passed to \code{pnorm}.
 #' @return The value of \code{pnorm}.
 #' @export
 .s03pnorm <- function(z) pnorm(z)
@@ -577,7 +577,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{lgamma}.
 #' @return The value of \code{lgamma}.
 #' @export
 .s03lgamma <- function(x) lgamma(x)
@@ -671,7 +671,7 @@
 #' @param y A vector; indexed elementwise.
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.
 #' @param ridge Passed to \code{.s03ridgesolve}. Defaults to \code{1e-10}.
-#' @param tol Defaults to \code{1e-13}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-13}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
 .s03logit <- function(X, y, iters = 60L, ridge = 1e-10, tol = 1e-13) {
@@ -929,7 +929,7 @@
 #' source it follows.
 #'
 #' @param x Passed to \code{.s03json_toJSON}.
-#' @param path See Usage.
+#' @param path Passed to \code{writeLines}.
 #' @param auto_unbox Passed to \code{.s03json_toJSON}. Defaults to \code{TRUE}.
 #' @param digits Passed to \code{.s03json_toJSON}.
 #' @param pretty Passed to \code{.s03json_toJSON}. Defaults to \code{FALSE}.
@@ -949,7 +949,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param con See Usage.
+#' @param con Passed to \code{readLines}.
 #' @param ... Passed through.
 #' @return The value of \code{lapply}.
 #' @export

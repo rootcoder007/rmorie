@@ -11,7 +11,7 @@
 \item{x}{A vector; its length is taken and its elements indexed.}
 \item{y}{A vector; indexed elementwise.}
 \item{J}{Numeric; combined arithmetically in the body.}
-\item{side_of}{See Usage.}
+\item{side_of}{Passed to \code{>}.}
 }
 \description{
 A step of the causrddc_native implementation. Called by \code{morie_causrddc}. See the file header for the source the module follows.

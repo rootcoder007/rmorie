@@ -9,8 +9,8 @@ patchtst_encode(X, patch_len, stride = NULL, normalise = TRUE)
 }
 \arguments{
 \item{X}{Passed to \code{.patcht_mat}.}
-\item{patch_len}{See Usage.}
-\item{stride}{Defaults to \code{NULL}.}
+\item{patch_len}{Passed to \code{channel_independent_tokens}.}
+\item{stride}{Passed to \code{channel_independent_tokens}.}
 \item{normalise}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

@@ -62,7 +62,7 @@
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1.49e-08}.
-#' @param maxdepth Defaults to \code{50L}.
+#' @param maxdepth Passed to \code{>=}. Defaults to \code{50L}.
 #' @return The value of \code{rec}.
 #' @export
 .morie_rg_quad <- function(f, a, b, tol = 1.49e-8, maxdepth = 50L) {
@@ -100,8 +100,8 @@
 #' @param f Accepted by the signature and not used anywhere in the body.
 #' @param pdf A function; the body checks with \code{is.function}.
 #' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param lower Defaults to \code{-Inf}.
-#' @param upper Defaults to \code{Inf}.
+#' @param lower Passed to \code{is.finite}. Defaults to \code{-Inf}.
+#' @param upper Passed to \code{is.finite}. Defaults to \code{Inf}.
 #' @return The value of \code{.morie_rg_quad}.
 #' @export
 .morie_rg_pdfint <- function(f, pdf = NULL, x = NULL,
@@ -138,7 +138,7 @@
 #' source it follows.
 #'
 #' @param mass Numeric; combined arithmetically in the body.
-#' @param tol Defaults to \code{1e-06}.
+#' @param tol Passed to \code{<=}. Defaults to \code{1e-06}.
 #' @return A list with \code{pdf_mass}, \code{pdf_mass_ok}.
 #' @export
 .morie_rg_checkpdf <- function(mass, tol = 1e-6) {
@@ -819,10 +819,10 @@ ContConv <- function(x, h, dt = 1, t = NULL) {
 #' as an equivalent result.  Computed the other way round and compared
 #' against eq (3.30) rather than asserted equivalent.
 #'
-#' @param x See Usage.
-#' @param h See Usage.
-#' @param dt Defaults to \code{1}.
-#' @param t Defaults to \code{NULL}.
+#' @param x Passed to \code{ContConv}.
+#' @param h Passed to \code{ContConv}.
+#' @param dt Passed to \code{ContConv}. Defaults to \code{1}.
+#' @param t Passed to \code{ContConv}.
 #' @return The value of \code{swapped}, as built in the body.
 #' @export
 ContConvAlt <- function(x, h, dt = 1, t = NULL) {

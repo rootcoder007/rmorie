@@ -416,7 +416,7 @@ morie_geron_stacked_autoencoder_modules <- function(X, hidden_sizes = c(2), epoc
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param A See Usage.
+#' @param A Passed to \code{cbind}.
 #' @param t A matrix; passed to \code{\%*\%}.
 #' @return A list with \code{theta}, \code{fitted}.
 #' @export
@@ -1626,7 +1626,7 @@ morie_geron_symd_parse <- function(src) {
 #' the source it follows.
 #'
 #' @param t A vector; its length is taken and its elements indexed.
-#' @param v See Usage.
+#' @param v Passed to \code{all.equal}.
 #' @return A logical value.
 #' @export
 .morie_w4d_symd_eqnum <- function(t, v) length(t) == 2 && t[[1]] == "num" && isTRUE(all.equal(t[[2]], v, tolerance = 0))

@@ -95,7 +95,7 @@
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y Numeric; combined arithmetically in the body.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{25L}.
-#' @param tol Defaults to \code{1e-08}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
 #' @return A list with \code{beta}, \code{p_hat}, \code{converged}.
 #' @export
 .lggvls_logistic_fit <- function(X, y, max_iter = 25L, tol = 1e-8) {

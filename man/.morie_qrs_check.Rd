@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{x}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
-\item{least}{Defaults to \code{1L}.}
-\item{what}{Defaults to \code{"signal"}.}
+\item{least}{Passed to \code{<}. Defaults to \code{1L}.}
+\item{what}{Passed to \code{sprintf}. Defaults to \code{"signal"}.}
 }
 \description{
 A step of the rangayyan_qrs implementation. Called by \code{ApneaEdr}, \code{CPulseFeat}, \code{DicNotch} and 29 others in the module. See the file header for the source the module follows.

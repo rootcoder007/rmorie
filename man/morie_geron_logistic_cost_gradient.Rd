@@ -15,3 +15,9 @@ List with \code{gradient}, \code{grad_norm}, \code{probabilities}, \code{errors}
 \description{
 Logistic cost gradient (Geron Eq 4-18, morie.fn grlogg)
 }
+\examples{
+set.seed(5)
+X <- cbind(1, rnorm(30))
+y <- rbinom(30, 1, plogis(X \%*\% c(-0.2, 1)))
+morie_geron_logistic_cost_gradient(X, y, theta = c(0, 0.5))
+}

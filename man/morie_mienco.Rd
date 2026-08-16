@@ -8,7 +8,7 @@
 morie_mienco(summary, patches, other_patches, critic, estimator = "jsd")
 }
 \arguments{
-\item{summary}{See Usage.}
+\item{summary}{Passed to \code{critic}.}
 \item{patches}{A vector; its length is taken.}
 \item{other_patches}{A vector; its length is taken.}
 \item{critic}{Accepted by the signature and not used anywhere in the body.}

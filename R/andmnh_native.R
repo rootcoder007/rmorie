@@ -389,7 +389,7 @@ alpha_ar1 <- function(v, q = 2, weights = NULL) {
 #'
 #' @param v A matrix; passed to \code{as.matrix}.
 #' @param kernel Passed to \code{.check_kernel}. Defaults to \code{"qs"}.
-#' @param weights Defaults to \code{NULL}.
+#' @param weights Passed to \code{alpha_ar1}.
 #' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{bandwidth}, \code{alpha}, \code{fits}.
 #' @export
@@ -480,15 +480,15 @@ kernel_hac <- function(v, bandwidth, kernel = "qs", n_params = 0, n = NULL) {
 #' source it follows.
 #'
 #' @param e A matrix; passed to \code{as.matrix}.
-#' @param X Defaults to \code{NULL}.
+#' @param X Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param prewhiten A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param var_order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @param kernel Carried through into a list the body builds. Defaults to \code{"qs"}.
 #' @param bandwidth Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param weights Defaults to \code{NULL}.
+#' @param weights Passed to \code{automatic_bandwidth}.
 #' @param n_params Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param cap Numeric; combined arithmetically in the body. Defaults to \code{0.97}.
-#' @param adjust Defaults to \code{TRUE}.
+#' @param adjust Passed to \code{prewhiten_var}. Defaults to \code{TRUE}.
 #' @return The value of \code{structure}.
 #' @export
 andrews_monahan_hac <- function(e, X = NULL, prewhiten = TRUE,

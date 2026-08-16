@@ -8,9 +8,9 @@
 .b1_bound(v, lo, hi)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{lo}{See Usage.}
-\item{hi}{See Usage.}
+\item{v}{Passed to \code{pmax}.}
+\item{lo}{Passed to \code{pmax}.}
+\item{hi}{Passed to \code{pmin}.}
 }
 \description{
 A step of the b1_tmle implementation. Called by \code{.b1_logit}, \code{.b1_target}, \code{Comptml} and 3 others in the module. See the file header for the source the module follows.

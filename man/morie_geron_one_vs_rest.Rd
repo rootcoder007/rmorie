@@ -22,3 +22,10 @@ List with \code{predictions}, \code{scores}, \code{classes},
 \description{
 K classifiers, each class against the rest, argmax of the scores.
 }
+\examples{
+X <- matrix(c(1, 2, 1, 3, 1, 5, 1, 7), 4, byrow = TRUE)
+y <- c(2, 3, 6, 9)
+th <- c(0.5, 1.1)
+morie_geron_elastic_net_cost(X, y, th, 0.4, 0.6)
+morie_geron_one_vs_rest(X = X, y = y)
+}

@@ -13,7 +13,7 @@
 #' source it follows.
 #'
 #' @param X Optional; may be \code{NULL}. A matrix; passed to \code{dim}.
-#' @param name Defaults to \code{"X"}.
+#' @param name Passed to \code{sprintf}. Defaults to \code{"X"}.
 #' @return The value of \code{X}, as built in the body.
 #' @export
 .robpca_matrix <- function(X, name = "X") {
@@ -37,7 +37,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param C See Usage.
+#' @param C Passed to \code{eigen}.
 #' @return A list with \code{values}, \code{vectors}.
 #' @export
 .robpca_eigh_desc <- function(C) {
@@ -74,8 +74,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param mu See Usage.
+#' @param X Passed to \code{sweep}.
+#' @param mu Passed to \code{sweep}.
 #' @param C A matrix; passed to \code{solve}.
 #' @return A numeric value.
 #' @export
@@ -182,7 +182,7 @@ univariate_mcd <- function(values, h = NULL, consistent = TRUE) {
 #' source it follows.
 #'
 #' @param X Passed to \code{.robpca_matrix}.
-#' @param h Defaults to \code{NULL}.
+#' @param h Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param n_dirs Passed to \code{.robpca_directions}. Defaults to \code{250L}.
 #' @param seed Passed to \code{.robpca_directions}. Defaults to \code{17L}.
 #' @return A list with \code{outl}, \code{exact_fit_direction}.
@@ -252,7 +252,7 @@ outlyingness <- function(X, h = NULL, n_dirs = 250L, seed = 17L) {
 #' source it follows.
 #'
 #' @param rows A matrix; indexed by row and column.
-#' @param h See Usage.
+#' @param h Passed to \code{:}.
 #' @param n_start Coerced to integer by the body, with \code{as.integer}. Defaults to \code{250L}.
 #' @param seed Numeric; combined arithmetically in the body. Defaults to \code{17L}.
 #' @return The value of \code{best}, as built in the body.
@@ -333,8 +333,8 @@ outlyingness <- function(X, h = NULL, n_dirs = 250L, seed = 17L) {
 #'
 #' @param sd A vector; its length is taken and its elements indexed.
 #' @param od A vector; indexed elementwise.
-#' @param sd_cut See Usage.
-#' @param od_cut See Usage.
+#' @param sd_cut Passed to \code{>}.
+#' @param od_cut Passed to \code{>}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 classify_outliers <- function(sd, od, sd_cut, od_cut) {
@@ -476,7 +476,7 @@ classify_outliers <- function(sd, od, sd_cut, od_cut) {
 #' @param k Passed to \code{.robpca_choose_k}.
 #' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{0.75}.
 #' @param kmax Numeric; combined arithmetically in the body. Defaults to \code{10L}.
-#' @param n_dirs Defaults to \code{250L}.
+#' @param n_dirs Passed to \code{outlyingness}. Defaults to \code{250L}.
 #' @param n_start Passed to \code{.robpca_fast_mcd}. Defaults to \code{250L}.
 #' @param seed Passed to \code{.robpca_fast_mcd}. Defaults to \code{17L}.
 #' @param reweight A flag; the body branches on it. Defaults to \code{TRUE}.

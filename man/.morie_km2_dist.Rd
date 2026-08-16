@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{p}{A vector; its length is taken.}
-\item{name}{See Usage.}
+\item{name}{Passed to \code{sprintf}.}
 }
 \description{
 A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch3_prompt_label_mapping}, \code{morie_kamath_ch3_top1_prompt_metric}, \code{morie_kamath_ch5_rlhf_objective} and 1 others in the module. See the file header for the source the module follows.

@@ -411,7 +411,7 @@
 #' @param func Accepted by the signature and not used anywhere in the body.
 #' @param lower Coerced to numeric by the body, with \code{as.numeric}.
 #' @param upper Coerced to numeric by the body, with \code{as.numeric}.
-#' @param tol Defaults to \code{1e-04}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-04}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.
 #' @return A list with \code{x}, \code{value}.
 #' @export
@@ -476,7 +476,7 @@
 #' @param kernel Passed to \code{.schab_gwr_criterion}. Defaults to \code{"gaussian"}.
 #' @param criterion Passed to \code{.schab_gwr_criterion}. Defaults to \code{"cv"}.
 #' @param adaptive A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @param bounds Defaults to \code{NULL}.
+#' @param bounds Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param tol Passed to \code{.schab_golden_section}. Defaults to \code{1e-04}.
 #' @return A list with \code{bandwidth}, \code{score}, \code{criterion}, \code{bounds}, \code{adaptive}.
 #' @export
@@ -561,11 +561,11 @@
 #' @param kernel Passed to \code{.schab_gwr_fit}. Defaults to \code{"gaussian"}.
 #' @param criterion Passed to \code{.schab_select_bandwidth}. Defaults to \code{"aicc"}.
 #' @param adaptive A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @param tol Defaults to \code{1e-05}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-05}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.
 #' @param rss_score A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @param bws_same_times Defaults to \code{5L}.
-#' @param init_bandwidth Defaults to \code{NULL}.
+#' @param bws_same_times Passed to \code{>=}. Defaults to \code{5L}.
+#' @param init_bandwidth Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param standardize A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{bandwidths}, \code{at_search_boundary}, \code{standardized}, \code{y_centre}, \code{y_scale}, \code{x_centre}, \code{x_scale}, \code{params}, \code{fitted}, \code{resid}, \code{bandwidth_gwr}, \code{bandwidth_history}, \code{score_history}, \code{n_iter}, \code{converged}, \code{criterion}, \code{kernel}.
 #' @export

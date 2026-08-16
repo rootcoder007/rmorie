@@ -8,7 +8,7 @@
 .poissp_logdet_gen(A, rank_deficit = 0L)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{Passed to \code{eigen}.}
 \item{rank_deficit}{Numeric; combined arithmetically in the body. Defaults to \code{0L}.}
 }
 \description{

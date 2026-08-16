@@ -8,8 +8,8 @@
 efficiency_check(err_Q, err_g, delta, n, donsker = TRUE)
 }
 \arguments{
-\item{err_Q}{See Usage.}
-\item{err_g}{See Usage.}
+\item{err_Q}{Passed to \code{remainder_bound}.}
+\item{err_g}{Passed to \code{remainder_bound}.}
 \item{delta}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{n}{Coerced to integer by the body, with \code{as.integer}.}
 \item{donsker}{A flag; the body branches on it. Defaults to \code{TRUE}.}

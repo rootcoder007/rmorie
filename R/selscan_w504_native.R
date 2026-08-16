@@ -14,8 +14,8 @@
 #' @param pos A vector; its length is taken and its elements indexed.
 #' @param ehh A vector; indexed elementwise.
 #' @param core Numeric; combined arithmetically in the body.
-#' @param side See Usage.
-#' @param min_ehh See Usage.
+#' @param side Passed to \code{>}.
+#' @param min_ehh Passed to \code{<}.
 #' @return A list with \code{area}, \code{truncated}.
 #' @export
 .morie_ihh_side <- function(pos, ehh, core, side, min_ehh) {

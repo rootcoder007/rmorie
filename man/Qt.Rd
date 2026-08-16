@@ -9,7 +9,7 @@ Qt(p, df)
 }
 \arguments{
 \item{p}{Iterated over elementwise, with \code{vapply}.}
-\item{df}{See Usage.}
+\item{df}{Passed to \code{Pt}.}
 }
 \description{
 Without this, bisection lands on the cdf plateau around zero -- betainc\'s 1 - xb underflows for |v| < ~1e-8, the cdf sits at exactly 0.5 there, and both bisection and Newton are blind inside it.

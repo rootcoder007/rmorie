@@ -8,7 +8,7 @@
 CCepX(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{CCepstrum}.}
 }
 \description{
 important consideration": a 2-pi jump at nearly every bin means the spectrum is too coarsely sampled to track the phase.

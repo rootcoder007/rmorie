@@ -13,10 +13,10 @@
 #' NA = never), event time, and the treated-post indicator.
 #'
 #' @param data A vector; indexed elementwise.
-#' @param outcome See Usage.
-#' @param unit See Usage.
-#' @param time See Usage.
-#' @param treatment_time See Usage.
+#' @param outcome Passed to \code{c}.
+#' @param unit Passed to \code{c}.
+#' @param time Passed to \code{c}.
+#' @param treatment_time Passed to \code{c}.
 #' @return A list with \code{y}, \code{unit}, \code{time}, \code{g}, \code{rel}, \code{treated_post}.
 #' @export
 .morie_did_modern_frame <- function(data, outcome, unit, time,
@@ -133,8 +133,8 @@ morie_did_sun_abraham <- function(data, outcome, unit, time,
 #' cells by alternating projections; returns per-level lookups.
 #'
 #' @param y0 Numeric; combined arithmetically in the body.
-#' @param u0 See Usage.
-#' @param t0 See Usage.
+#' @param u0 Passed to \code{nlevels}.
+#' @param t0 Passed to \code{nlevels}.
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.
 #' @return A list with \code{a}, \code{g}.
 #' @export

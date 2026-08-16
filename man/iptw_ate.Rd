@@ -10,12 +10,12 @@ iptw_ate(y, A, H, library = NULL, n_folds = 10, meta = "nnls", trim = 0.01, ridg
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{A}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{H}{See Usage.}
-\item{library}{Defaults to \code{NULL}.}
-\item{n_folds}{Defaults to \code{10}.}
-\item{meta}{Defaults to \code{"nnls"}.}
-\item{trim}{Defaults to \code{0.01}.}
-\item{ridge}{Defaults to \code{1e-08}.}
+\item{H}{Passed to \code{flexible_iptw}.}
+\item{library}{Passed to \code{flexible_iptw}.}
+\item{n_folds}{Passed to \code{flexible_iptw}. Defaults to \code{10}.}
+\item{meta}{Passed to \code{flexible_iptw}. Defaults to \code{"nnls"}.}
+\item{trim}{Passed to \code{flexible_iptw}. Defaults to \code{0.01}.}
+\item{ridge}{Passed to \code{flexible_iptw}. Defaults to \code{1e-08}.}
 \item{level}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.}
 }
 \description{

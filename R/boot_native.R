@@ -30,7 +30,7 @@
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param R A count; the body uses it as \code{rep(...)}.
-#' @param strata Defaults to \code{NULL}.
+#' @param strata Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{output}, as built in the body.
 #' @export
 .morie_boot_index <- function(n, R, strata = NULL) {

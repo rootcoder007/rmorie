@@ -12,7 +12,7 @@
 \item{Aj}{A vector; indexed elementwise.}
 \item{Zj}{A matrix; passed to \code{as.matrix}.}
 \item{groups}{A vector; its length is taken.}
-\item{a}{See Usage.}
+\item{a}{Passed to \code{==}.}
 \item{trim}{Numeric; combined arithmetically in the body.}
 \item{ridge}{Numeric; passed to \code{max}.}
 \item{known_g}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}

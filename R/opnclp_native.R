@@ -24,7 +24,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .opnclp_vec <- function(v) as.numeric(unlist(v))
@@ -152,10 +152,10 @@ fit_power_law <- function(x, y) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x_a See Usage.
-#' @param y_a See Usage.
-#' @param x_b See Usage.
-#' @param y_b See Usage.
+#' @param x_a Passed to \code{fit_power_law}.
+#' @param y_a Passed to \code{fit_power_law}.
+#' @param x_b Passed to \code{fit_power_law}.
+#' @param y_b Passed to \code{fit_power_law}.
 #' @param label_a Defaults to \code{"A"}.
 #' @param label_b Defaults to \code{"B"}.
 #' @return The value of \code{out}, as built in the body.

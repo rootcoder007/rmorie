@@ -10,8 +10,8 @@ SpecEntropy(psd, freqs = NULL, fmin = NULL, fmax = NULL)
 \arguments{
 \item{psd}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{freqs}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
-\item{fmin}{Defaults to \code{NULL}.}
-\item{fmax}{Defaults to \code{NULL}.}
+\item{fmin}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{fmax}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 defines the spectral MOMENTS of Section 6.4.4 but prints no spectral-entropy equation, so this is said to be eq (3.11) applied to the PSD rather than quoted from the book.

@@ -12,7 +12,7 @@
 \item{M}{Passed to \code{.s03vec}.}
 \item{Y}{Passed to \code{.s03vec}.}
 \item{C}{Optional; may be \code{NULL}. Passed to \code{.s03mat}.}
-\item{who}{See Usage.}
+\item{who}{Passed to \code{paste0}.}
 }
 \description{
 A step of the ctde implementation. Called by \code{Ctde}, \code{Pnie}, \code{Tnie}. See the file header for the source the module follows.

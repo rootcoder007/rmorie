@@ -8,9 +8,9 @@
 estimator_score(hyp, src, ref, W, b = NULL)
 }
 \arguments{
-\item{hyp}{See Usage.}
-\item{src}{See Usage.}
-\item{ref}{See Usage.}
+\item{hyp}{Passed to \code{pooled_features}.}
+\item{src}{Passed to \code{pooled_features}.}
+\item{ref}{Passed to \code{pooled_features}.}
 \item{W}{A matrix; passed to \code{nrow}.}
 \item{b}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }

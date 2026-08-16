@@ -8,10 +8,10 @@
 .morie_gr_w4b_grid_search(param_grid, X, y, estimator = NULL, K = 3, score = NULL)
 }
 \arguments{
-\item{param_grid}{See Usage.}
+\item{param_grid}{Passed to \code{names}.}
 \item{X}{Passed to \code{.morie_gr_mat}.}
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{estimator}{Defaults to \code{NULL}.}
+\item{estimator}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{K}{Passed to \code{morie_geron_cross_validation_score}. Defaults to \code{3}.}
 \item{score}{Passed to \code{morie_geron_cross_validation_score}.}
 }

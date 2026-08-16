@@ -16,7 +16,7 @@
 #'
 #' @param yv A vector; its length is taken.
 #' @param Dv Numeric; combined arithmetically in the body.
-#' @param W See Usage.
+#' @param W Passed to \code{cbind}.
 #' @param g Numeric; combined arithmetically in the body.
 #' @param grid A vector; its length is taken and its elements indexed.
 #' @return A list with \code{F}, \code{IC}.

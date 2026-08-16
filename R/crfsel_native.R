@@ -44,7 +44,7 @@
 #' morie.fn.crfsel._depth_counts; element [[depth]] holds the counts at
 #' that depth, so the caller indexes by depth directly.
 #'
-#' @param tree See Usage.
+#' @param tree Passed to \code{walk}.
 #' @param max_depth A count; the body uses it as \code{seq_len(...)}.
 #' @param d A count; the body uses it as \code{numeric(...)}.
 #' @return The value of \code{counts}, as built in the body.
@@ -71,8 +71,8 @@
 #' @param W A vector; indexed elementwise.
 #' @param X A matrix; indexed by row and column.
 #' @param n_folds A count; the body uses it as \code{seq_len(...)}.
-#' @param n_trees See Usage.
-#' @param min_leaf See Usage.
+#' @param n_trees Passed to \code{grow_forest}.
+#' @param min_leaf Passed to \code{grow_forest}.
 #' @param seed Numeric; combined arithmetically in the body.
 #' @return A list with \code{m_hat}, \code{e_hat}.
 #' @export

@@ -55,7 +55,7 @@
 #' @param ys A vector; indexed elementwise.
 #' @param x0 Numeric; combined arithmetically in the body.
 #' @param q A count; the body uses it as \code{seq_len(...)}.
-#' @param degree See Usage.
+#' @param degree Passed to \code{==}.
 #' @param rho Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export

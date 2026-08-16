@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{ps}{Numeric; combined arithmetically in the body.}
-\item{t01}{See Usage.}
+\item{t01}{Passed to \code{==}.}
 \item{estimand}{The body requires: estimand must be ATE, ATT, or ATC.}
 }
 \description{

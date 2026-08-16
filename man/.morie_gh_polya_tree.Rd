@@ -11,7 +11,7 @@
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{grid}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{levels}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{6L}.}
-\item{a_fn}{Defaults to \code{NULL}.}
+\item{a_fn}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{lo}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{hi}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }

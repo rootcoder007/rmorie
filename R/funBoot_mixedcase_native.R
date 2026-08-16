@@ -21,7 +21,7 @@
 #' header for the source it follows.
 #'
 #' @param curves A matrix; indexed by row and column.
-#' @param statistic Defaults to \code{NULL}.
+#' @param statistic Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
 #' @param B Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500L}.
 #' @param metric Coerced to character by the body, with \code{as.character}. Defaults to \code{"l2"}.

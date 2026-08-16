@@ -79,7 +79,7 @@
 #' @param candidates A matrix; indexed by row and column.
 #' @param exclude_idx A vector; indexed elementwise.
 #' @param target_idx Numeric; combined arithmetically in the body.
-#' @param exclude_window See Usage.
+#' @param exclude_window Passed to \code{<=}.
 #' @return A list with \code{d}, \code{ord}, \code{keep}.
 #' @export
 .cnvlfc_euclid <- function(target, candidates, exclude_idx, target_idx,

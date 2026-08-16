@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{K}{A matrix; passed to \code{nrow}.}
-\item{g}{See Usage.}
+\item{g}{Passed to \code{>}.}
 }
 \description{
 throughout: ties are broken by the smaller index pair, so two implementations agree on the dendrogram, not merely on its quality.

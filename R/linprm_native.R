@@ -7,7 +7,7 @@
 #' @param c Coerced to numeric by the body, with \code{as.numeric}.
 #' @param A Iterated over elementwise, with \code{lapply}.
 #' @param b A vector; its length is taken and its elements indexed.
-#' @param tol Defaults to \code{1e-10}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-10}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
 #' @return A list with \code{x}, \code{y}, \code{s}, \code{iterations}, \code{gap}, \code{converged}, \code{mu_history}, \code{primal_residual}, \code{dual_residual}.
 #' @export

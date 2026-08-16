@@ -8,7 +8,7 @@
 .morie_tmle_expit(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{pmax}.}
 }
 \description{
 A step of the tmle_native implementation. Called by \code{morie_tmle_ate}, \code{morie_tmle_time_varying}. See the file header for the source the module follows.

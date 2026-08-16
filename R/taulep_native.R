@@ -13,7 +13,7 @@
 #' source it follows.
 #'
 #' @param e Passed to \code{.ghc_unif}.
-#' @param lam See Usage.
+#' @param lam Passed to \code{<=}.
 #' @return The value of \code{repeat}.
 #' @export
 .taulep_poisson <- function(e, lam) {

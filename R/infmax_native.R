@@ -86,8 +86,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param joint_scores See Usage.
-#' @param marginal_scores See Usage.
+#' @param joint_scores Passed to \code{unlist}.
+#' @param marginal_scores Passed to \code{unlist}.
 #' @return A list with \code{estimate}, \code{positive}, \code{negative}, \code{bounded}, \code{note}.
 #' @export
 .infmax_jsd_estimator <- function(joint_scores, marginal_scores) {
@@ -112,8 +112,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param joint_scores See Usage.
-#' @param marginal_scores See Usage.
+#' @param joint_scores Passed to \code{unlist}.
+#' @param marginal_scores Passed to \code{unlist}.
 #' @return A list with \code{estimate}, \code{log_sum_exp}, \code{negative_variance}, \code{bounded}, \code{note}.
 #' @export
 .infmax_dv_estimator <- function(joint_scores, marginal_scores) {

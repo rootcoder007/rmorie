@@ -62,7 +62,7 @@
 #' @param kn A vector; its length is taken and its elements indexed.
 #' @param degree A count; the body uses it as \code{seq_len(...)}.
 #' @param n_basis A count; the body uses it as \code{seq_len(...)}.
-#' @param tmax See Usage.
+#' @param tmax Passed to \code{>=}.
 #' @return The value of \code{[}.
 #' @export
 .funmix_bspline_row <- function(x, kn, degree, n_basis, tmax) {
@@ -126,7 +126,7 @@
 #' source it follows.
 #'
 #' @param A A matrix; passed to \code{chol}.
-#' @param b See Usage.
+#' @param b Passed to \code{forwardsolve}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .funmix_cholsolve <- function(A, b) {

@@ -11,10 +11,10 @@ smcopt(objective, initial, n_particles = 200, n_steps = 30, phi_max = 50, phi_mi
 \item{objective}{The body requires: smcopt: the objective was never evaluated.}
 \item{initial}{See Usage.}
 \item{n_particles}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.}
-\item{n_steps}{Defaults to \code{30}.}
-\item{phi_max}{Defaults to \code{50}.}
-\item{phi_min}{Defaults to \code{0.1}.}
-\item{kind}{Defaults to \code{"geometric"}.}
+\item{n_steps}{Passed to \code{annealing_ladder}. Defaults to \code{30}.}
+\item{phi_max}{Passed to \code{annealing_ladder}. Defaults to \code{50}.}
+\item{phi_min}{Passed to \code{annealing_ladder}. Defaults to \code{0.1}.}
+\item{kind}{Passed to \code{annealing_ladder}. Defaults to \code{"geometric"}.}
 \item{kernel}{Defaults to \code{NULL}.}
 \item{ess_threshold}{Defaults to \code{0.5}.}
 \item{scheme}{Defaults to \code{"systematic"}.}

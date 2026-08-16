@@ -12,7 +12,7 @@
 \item{target}{A vector; its length is taken.}
 \item{penalty}{Numeric; combined arithmetically in the body.}
 \item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000L}.}
-\item{tol}{Defaults to \code{1e-12}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-12}.}
 }
 \description{
 A step of the causscd_native implementation. Called by \code{time_weights}, \code{unit_weights}. See the file header for the source the module follows.

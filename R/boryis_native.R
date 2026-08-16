@@ -60,7 +60,7 @@
 #' @param u_b Numeric; combined arithmetically in the body.
 #' @param Xc Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000L}.
-#' @param tol Defaults to \code{1e-13}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-13}.
 #' @return A list with \code{a}, \code{lam}, \code{b}.
 #' @export
 .mor_bjs_solve <- function(obs, u_a, u_l, u_b, Xc, max_iter = 2000L,

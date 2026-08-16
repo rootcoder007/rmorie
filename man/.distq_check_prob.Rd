@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{next_probs}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{n_atoms}{See Usage.}
-\item{name}{See Usage.}
+\item{n_atoms}{Passed to \code{!=}.}
+\item{name}{Passed to \code{sprintf}.}
 }
 \description{
 A step of the distq_native implementation. No other function in the package calls it. See the file header for the source the module follows.

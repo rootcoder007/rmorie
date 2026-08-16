@@ -10,7 +10,7 @@ iou(a, b, threshold = 0.5)
 \arguments{
 \item{a}{Passed to \code{.sammkr_flat}.}
 \item{b}{Passed to \code{.sammkr_flat}.}
-\item{threshold}{Defaults to \code{0.5}.}
+\item{threshold}{Passed to \code{>}. Defaults to \code{0.5}.}
 }
 \description{
 A step of the sammkr_native implementation. Called by \code{rank_masks}. See the file header for the source the module follows.

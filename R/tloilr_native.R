@@ -162,7 +162,7 @@
 #' source it follows.
 #'
 #' @param B Coerced to numeric by the body, with \code{as.numeric}.
-#' @param tol Defaults to \code{1e-09}.
+#' @param tol Passed to \code{<=}. Defaults to \code{1e-09}.
 #' @return A list with \code{mass_at_zero}, \code{exceptional}, \code{n_at_zero}, \code{note}.
 #' @export
 .tloilr_exceptional_law <- function(B, tol = 1e-9) {

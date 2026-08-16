@@ -91,7 +91,7 @@
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y A vector; its length is taken.
 #' @param w Numeric; passed to \code{sqrt}.
-#' @param rcond See Usage.
+#' @param rcond Passed to \code{qr.solve}.
 #' @return A list with \code{coef}.
 #' @export
 .farmlmm_wls <- function(X, y, w, rcond) {
@@ -301,7 +301,7 @@ morie_farmlmm <- function(y, G, max_iter = 10L, threshold = NULL, seed = 0L) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{pnorm}.
 #' @return A numeric value.
 #' @export
 erf <- function(x) 2 * pnorm(x) - 1

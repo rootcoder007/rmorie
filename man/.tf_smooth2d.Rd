@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{tfd}{A matrix; indexed by row and column.}
-\item{tlen}{See Usage.}
-\item{flen}{See Usage.}
+\item{tlen}{Passed to \code{gauss}.}
+\item{flen}{Passed to \code{gauss}.}
 }
 \description{
 A step of the rangayyan_tf implementation. Called by \code{Gtfd}. See the file header for the source the module follows.

@@ -8,8 +8,8 @@
 .prsLL_union(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{Passed to \code{c}.}
+\item{b}{Passed to \code{c}.}
 }
 \description{
 A step of the prsLL_native implementation. Called by \code{.prsLL_first_seq}, \code{.prsLL_first_sets}, \code{.prsLL_follow_sets} and 2 others in the module. See the file header for the source the module follows.

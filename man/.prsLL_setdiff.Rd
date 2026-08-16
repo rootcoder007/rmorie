@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{a}{A vector; indexed elementwise.}
-\item{b}{See Usage.}
+\item{b}{Passed to \code{\%in\%}.}
 }
 \description{
 A step of the prsLL_native implementation. Called by \code{.prsLL_first_seq}, \code{.prsLL_follow_sets}, \code{.prsLL_ll1_table}. See the file header for the source the module follows.

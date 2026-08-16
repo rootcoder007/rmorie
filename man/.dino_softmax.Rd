@@ -10,7 +10,7 @@
 \arguments{
 \item{v}{A vector; its length is taken.}
 \item{tau}{Numeric; combined arithmetically in the body.}
-\item{center}{Defaults to \code{NULL}.}
+\item{center}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the dinmlt implementation. Called by \code{Dinmlt}, \code{Dinov2}. See the file header for the source the module follows.

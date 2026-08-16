@@ -172,11 +172,11 @@ adapted_pagerank <- function(adjacency, nodes, p = NULL, d = 0.7,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param triples See Usage.
-#' @param focus See Usage.
-#' @param d Defaults to \code{0.7}.
-#' @param weight Defaults to \code{0.9}.
-#' @param iters Defaults to \code{200}.
+#' @param triples Passed to \code{tripartite_graph}.
+#' @param focus Passed to \code{preference_vector}.
+#' @param d Passed to \code{adapted_pagerank}. Defaults to \code{0.7}.
+#' @param weight Passed to \code{preference_vector}. Defaults to \code{0.9}.
+#' @param iters Passed to \code{adapted_pagerank}. Defaults to \code{200}.
 #' @return A list with \code{estimate}, \code{ranking}, \code{difference}, \code{with_preference}, \code{without_preference}, \code{undifferenced_ranking}, \code{baseline_ranking}, \code{focus}, \code{n_nodes}, \code{method}, \code{note}.
 #' @export
 folkrank <- function(triples, focus, d = 0.7, weight = 0.9, iters = 200) {
@@ -233,11 +233,11 @@ tagawarerec <- folkrank
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param triples See Usage.
-#' @param focus See Usage.
-#' @param d Defaults to \code{0.7}.
-#' @param weight Defaults to \code{0.9}.
-#' @param iters Defaults to \code{200}.
+#' @param triples Passed to \code{folkrank}.
+#' @param focus Passed to \code{folkrank}.
+#' @param d Passed to \code{folkrank}. Defaults to \code{0.7}.
+#' @param weight Passed to \code{folkrank}. Defaults to \code{0.9}.
+#' @param iters Passed to \code{folkrank}. Defaults to \code{200}.
 #' @return The value of \code{folkrank}.
 #' @export
 morie_tagRC <- function(triples, focus, d = 0.7, weight = 0.9,

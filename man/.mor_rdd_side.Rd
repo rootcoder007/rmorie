@@ -8,7 +8,7 @@
 .mor_rdd_side(dm, ym, w)
 }
 \arguments{
-\item{dm}{See Usage.}
+\item{dm}{Passed to \code{cbind}.}
 \item{ym}{A matrix; passed to \code{\%*\%}.}
 \item{w}{A count; the body uses it as \code{rep(...)}.}
 }

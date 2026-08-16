@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{x}{A matrix; passed to \code{as.matrix}.}
-\item{what}{See Usage.}
+\item{what}{Passed to \code{sprintf}.}
 }
 \description{
 A step of the alfesf_native implementation. Called by \code{morie_alfesf_esmfold_confidence}. See the file header for the source the module follows.

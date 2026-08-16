@@ -31,7 +31,7 @@
 #' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
-#' @param name Defaults to \code{"x"}.
+#' @param name Passed to \code{sprintf}. Defaults to \code{"x"}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
 .morie_jo_vec <- function(x, name = "x") {
@@ -81,7 +81,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
+#' @param a Passed to \code{unlist}.
 #' @param b A vector; its length is taken.
 #' @return A vector, from \code{vapply}.
 #' @export
@@ -782,7 +782,7 @@ morie_tsregmat <- function(x, lags, horizon = 1L) {
 #'
 #' @param rows A matrix; passed to \code{nrow}.
 #' @param y Passed to \code{.morie_jo_ols}.
-#' @param newrow See Usage.
+#' @param newrow Passed to \code{c}.
 #' @return A numeric value.
 #' @export
 .morie_jo_fitpred <- function(rows, y, newrow) {
@@ -1190,7 +1190,7 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
+#' @param t Passed to \code{ifelse}.
 #' @return The value of \code{ifelse}.
 #' @export
 .morie_jo_elu <- function(t) ifelse(t > 0, t, expm1(t))
@@ -1200,7 +1200,7 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
+#' @param t Passed to \code{ifelse}.
 #' @return The value of \code{ifelse}.
 #' @export
 .morie_jo_relu <- function(t) ifelse(t > 0, t, 0)

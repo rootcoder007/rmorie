@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{log_prior}{Accepted by the signature and not used anywhere in the body.}
-\item{theta}{See Usage.}
-\item{theta_p}{See Usage.}
+\item{theta}{Passed to \code{log_prior}.}
+\item{theta_p}{Passed to \code{log_prior}.}
 \item{ll}{Numeric; combined arithmetically in the body.}
 \item{ll_p}{Numeric; combined arithmetically in the body.}
 \item{log_q}{Numeric; combined arithmetically in the body.}

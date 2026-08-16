@@ -8,11 +8,11 @@
 s6_layer(X, A, W_B, W_C, W_delta, ...)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{A}{See Usage.}
-\item{W_B}{See Usage.}
-\item{W_C}{See Usage.}
-\item{W_delta}{See Usage.}
+\item{X}{Passed to \code{selective_scan}.}
+\item{A}{Passed to \code{selective_scan}.}
+\item{W_B}{Passed to \code{selective_scan}.}
+\item{W_C}{Passed to \code{selective_scan}.}
+\item{W_delta}{Passed to \code{selective_scan}.}
 \item{...}{Passed through.}
 }
 \description{

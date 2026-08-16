@@ -30,14 +30,14 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param psi_of_P Defaults to \code{NULL}.
-#' @param basis Defaults to \code{NULL}.
-#' @param D Defaults to \code{NULL}.
-#' @param score Defaults to \code{NULL}.
-#' @param weights Defaults to \code{NULL}.
-#' @param h Defaults to \code{1e-05}.
-#' @param tol Defaults to \code{1e-04}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param psi_of_P Passed to \code{numerical_derivative}.
+#' @param basis Passed to \code{estimate_eic}.
+#' @param D Passed to \code{gradient_inner_product}.
+#' @param score Passed to \code{numerical_derivative}.
+#' @param weights Passed to \code{numerical_derivative}.
+#' @param h Passed to \code{numerical_derivative}. Defaults to \code{1e-05}.
+#' @param tol Passed to \code{verify_gradient}. Defaults to \code{1e-04}.
+#' @param ridge Passed to \code{estimate_eic}. Defaults to \code{1e-08}.
 #' @param mode One of \code{"deriv"}, \code{"grad"}, \code{"verify"}.
 #' @return The value of \code{estimate_eic}.
 #' @export
@@ -113,10 +113,10 @@ gradient_inner_product <- function(D, score, weights = NULL) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param psi_of_P See Usage.
+#' @param psi_of_P Passed to \code{numerical_derivative}.
 #' @param basis A matrix; passed to \code{as.matrix}.
 #' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param h Defaults to \code{1e-05}.
+#' @param h Passed to \code{numerical_derivative}. Defaults to \code{1e-05}.
 #' @param ridge A matrix; passed to \code{diag}. Defaults to \code{1e-08}.
 #' @return A list with \code{estimate}, \code{D}, \code{coefficients}, \code{n_directions}, \code{mean}, \code{method}, \code{note}.
 #' @export
@@ -152,11 +152,11 @@ estimate_eic <- function(psi_of_P, basis, weights = NULL, h = 1e-5,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param psi_of_P See Usage.
+#' @param psi_of_P Passed to \code{numerical_derivative}.
 #' @param D A vector; its length is taken.
-#' @param score See Usage.
+#' @param score Passed to \code{numerical_derivative}.
 #' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param h Defaults to \code{1e-05}.
+#' @param h Passed to \code{numerical_derivative}. Defaults to \code{1e-05}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-04}.
 #' @return A list with \code{derivative}, \code{inner_product}, \code{difference}, \code{verified}, \code{note}.
 #' @export

@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{vals}{A vector; its length is taken.}
-\item{name}{See Usage.}
+\item{name}{Passed to \code{sprintf}.}
 }
 \description{
 A step of the dreamr_native implementation. Called by \code{morie_dreamr_lambda_return}. See the file header for the source the module follows.

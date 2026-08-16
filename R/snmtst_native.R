@@ -197,12 +197,12 @@ identified_set <- function(beta, n_pre, n_post, M = 0.0, family = "SD",
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param beta See Usage.
-#' @param n_pre See Usage.
-#' @param n_post See Usage.
+#' @param beta Passed to \code{identified_set}.
+#' @param n_pre Passed to \code{identified_set}.
+#' @param n_post Passed to \code{identified_set}.
 #' @param Ms Iterated over elementwise, with \code{lapply}.
 #' @param family Carried through into a list the body builds. Defaults to \code{"SD"}.
-#' @param l_vec Defaults to \code{NULL}.
+#' @param l_vec Passed to \code{identified_set}.
 #' @return A list with \code{curve}, \code{family}, \code{M}, \code{width}.
 #' @export
 sensitivity_curve <- function(beta, n_pre, n_post, Ms, family = "SD",
@@ -223,14 +223,14 @@ sensitivity_curve <- function(beta, n_pre, n_post, Ms, family = "SD",
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param beta See Usage.
-#' @param n_pre See Usage.
-#' @param n_post See Usage.
+#' @param beta Passed to \code{identified_set}.
+#' @param n_pre Passed to \code{identified_set}.
+#' @param n_post Passed to \code{identified_set}.
 #' @param family Carried through into a list the body builds. Defaults to \code{"SD"}.
-#' @param l_vec Defaults to \code{NULL}.
+#' @param l_vec Passed to \code{identified_set}.
 #' @param sign One of \code{"negative"}, \code{"positive"}. Defaults to \code{"positive"}.
 #' @param M_max Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{10}.
-#' @param tol Defaults to \code{1e-09}.
+#' @param tol Passed to \code{>}. Defaults to \code{1e-09}.
 #' @return A list with \code{breakdown}, \code{family}, \code{sign}, \code{status}.
 #' @export
 breakdown_value <- function(beta, n_pre, n_post, family = "SD",
@@ -265,13 +265,13 @@ breakdown_value <- function(beta, n_pre, n_post, family = "SD",
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param beta See Usage.
+#' @param beta Passed to \code{identified_set}.
 #' @param sigma Coerced to numeric by the body, with \code{as.numeric}.
-#' @param n_pre See Usage.
-#' @param n_post See Usage.
-#' @param M Defaults to \code{0}.
+#' @param n_pre Passed to \code{identified_set}.
+#' @param n_post Passed to \code{identified_set}.
+#' @param M Passed to \code{identified_set}. Defaults to \code{0}.
 #' @param family Carried through into a list the body builds. Defaults to \code{"SD"}.
-#' @param l_vec Defaults to \code{NULL}.
+#' @param l_vec Passed to \code{identified_set}.
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
 #' @return A list with \code{estimate}, \code{lower}, \code{upper}, \code{identified_lower}, \code{identified_upper}, \code{M}, \code{family}, \code{level}, \code{conservative}, \code{method}.
 #' @export

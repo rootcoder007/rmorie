@@ -8,7 +8,7 @@
 .gwasem_slogdet(M)
 }
 \arguments{
-\item{M}{See Usage.}
+\item{M}{Passed to \code{svd}.}
 }
 \description{
 A step of the gwasem_native implementation. Called by \code{.gwasem_loglik}, \code{morie_gwasem_reml}. See the file header for the source the module follows.

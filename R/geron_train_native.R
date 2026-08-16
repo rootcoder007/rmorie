@@ -45,8 +45,8 @@
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param x See Usage.
-#' @param name See Usage.
+#' @param x Passed to \code{is.finite}.
+#' @param name Passed to \code{paste0}.
 #' @return Invisibly,a logical value.
 #' @export
 .morie_gr_fin <- function(x, name) {

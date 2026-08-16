@@ -40,7 +40,7 @@
 #' @param fn Accepted by the signature and not used anywhere in the body.
 #' @param d Numeric; combined arithmetically in the body.
 #' @param n_restarts Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8L}.
-#' @param seed Defaults to \code{0L}.
+#' @param seed Passed to \code{set.seed}. Defaults to \code{0L}.
 #' @param x0 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{beta}, \code{value}.
 #' @export

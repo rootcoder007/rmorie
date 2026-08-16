@@ -59,7 +59,7 @@
 #' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param T See Usage.
+#' @param T Passed to \code{rowSums}.
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.

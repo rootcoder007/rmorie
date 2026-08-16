@@ -10,8 +10,8 @@
 \arguments{
 \item{fn}{Accepted by the signature and not used anywhere in the body.}
 \item{x0}{A vector; its length is taken and its elements indexed.}
-\item{xatol}{Defaults to \code{1e-10}.}
-\item{fatol}{Defaults to \code{1e-10}.}
+\item{xatol}{Passed to \code{<=}. Defaults to \code{1e-10}.}
+\item{fatol}{Passed to \code{<=}. Defaults to \code{1e-10}.}
 \item{maxiter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{5000}.}
 }
 \description{

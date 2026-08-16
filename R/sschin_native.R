@@ -18,7 +18,7 @@
 #' source it follows.
 #'
 #' @param A A matrix; passed to \code{chol}.
-#' @param b See Usage.
+#' @param b Passed to \code{forwardsolve}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .sschin_cholsolve <- function(A, b) {
@@ -61,7 +61,7 @@
 #' @param e A vector; indexed elementwise.
 #' @param X A matrix; indexed by row and column.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100L}.
-#' @param tol Defaults to \code{1e-10}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-10}.
 #' @return A list with \code{beta}, \code{var}, \code{loglik}, \code{iterations}, \code{converged}.
 #' @export
 .sschin_cox_breslow <- function(t, e, X, max_iter = 100L, tol = 1e-10) {
@@ -123,7 +123,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pq See Usage.
+#' @param pq Passed to \code{qnorm}.
 #' @param df Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export

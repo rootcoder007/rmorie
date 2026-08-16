@@ -109,8 +109,8 @@ sasimi_fingerprint <- function(bits, n_bits = NULL) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fp_a See Usage.
-#' @param fp_b See Usage.
+#' @param fp_a Passed to \code{sasimi_fingerprint}.
+#' @param fp_b Passed to \code{sasimi_fingerprint}.
 #' @return A list with \code{a}, \code{b}, \code{c}, \code{union}.
 #' @export
 sasimi_counts <- function(fp_a, fp_b) {
@@ -147,8 +147,8 @@ sasimi_counts <- function(fp_a, fp_b) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fp_a See Usage.
-#' @param fp_b See Usage.
+#' @param fp_a Passed to \code{sasimi_counts}.
+#' @param fp_b Passed to \code{sasimi_counts}.
 #' @return A numeric value.
 #' @export
 sasimi_tanimoto <- function(fp_a, fp_b) {
@@ -164,8 +164,8 @@ sasimi_tanimoto <- function(fp_a, fp_b) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fp_a See Usage.
-#' @param fp_b See Usage.
+#' @param fp_a Passed to \code{sasimi_counts}.
+#' @param fp_b Passed to \code{sasimi_counts}.
 #' @return A numeric value.
 #' @export
 sasimi_dice <- function(fp_a, fp_b) {
@@ -181,8 +181,8 @@ sasimi_dice <- function(fp_a, fp_b) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fp_a See Usage.
-#' @param fp_b See Usage.
+#' @param fp_a Passed to \code{sasimi_counts}.
+#' @param fp_b Passed to \code{sasimi_counts}.
 #' @return A numeric value.
 #' @export
 sasimi_cosine <- function(fp_a, fp_b) {
@@ -201,8 +201,8 @@ sasimi_cosine <- function(fp_a, fp_b) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fp_a See Usage.
-#' @param fp_b See Usage.
+#' @param fp_a Passed to \code{sasimi_counts}.
+#' @param fp_b Passed to \code{sasimi_counts}.
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param beta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A numeric value.
@@ -293,7 +293,7 @@ sasimi_similarity_matrix <- function(fps, coefficient = "tanimoto") {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param query See Usage.
+#' @param query Passed to \code{sasimi_fingerprint}.
 #' @param fps A vector; its length is taken and its elements indexed.
 #' @param k Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
 #' @param coefficient Passed to \code{.sasimi_coef}. Defaults to \code{"tanimoto"}.
@@ -330,11 +330,11 @@ sasimi_nearest_neighbours <- function(query, fps, k = 5L, coefficient = "tanimot
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fp_a See Usage.
-#' @param fp_b See Usage.
+#' @param fp_a Passed to \code{sasimi_counts}.
+#' @param fp_b Passed to \code{sasimi_counts}.
 #' @param coefficient Passed to \code{.sasimi_coef}. Defaults to \code{"tanimoto"}.
-#' @param alpha Defaults to \code{NULL}.
-#' @param beta Defaults to \code{NULL}.
+#' @param alpha Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param beta Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{estimate}, \code{similarity}, \code{distance}, \code{bits_a}, \code{bits_b}, \code{bits_shared}, \code{coefficient}, \code{method}.
 #' @export
 morie_sasimi <- function(fp_a, fp_b, coefficient = "tanimoto",

@@ -8,8 +8,8 @@
 elmo_representation(X, layers, raw_weights = NULL, gamma = 1)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{layers}{See Usage.}
+\item{X}{Passed to \code{bilm_forward}.}
+\item{layers}{Passed to \code{bilm_forward}.}
 \item{raw_weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{gamma}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }

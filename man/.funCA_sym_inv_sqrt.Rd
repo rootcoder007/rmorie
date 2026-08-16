@@ -8,7 +8,7 @@
 .funCA_sym_inv_sqrt(M)
 }
 \arguments{
-\item{M}{See Usage.}
+\item{M}{Passed to \code{eigen}.}
 }
 \description{
 A step of the funCA_native implementation. Called by \code{morie_funCA_functional_cca}. See the file header for the source the module follows.

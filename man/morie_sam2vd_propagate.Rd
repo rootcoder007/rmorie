@@ -11,7 +11,7 @@ morie_sam2vd_propagate(frames, encoder, decoder, prompts = NULL, n_recent = 7, m
 \item{frames}{A vector; its length is taken and its elements indexed.}
 \item{encoder}{Accepted by the signature and not used anywhere in the body.}
 \item{decoder}{Accepted by the signature and not used anywhere in the body.}
-\item{prompts}{Defaults to \code{NULL}.}
+\item{prompts}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{n_recent}{Passed to \code{morie_sam2vd_memory_bank}. Defaults to \code{7}.}
 \item{m_prompted}{Passed to \code{morie_sam2vd_memory_bank}. Defaults to \code{1}.}
 }

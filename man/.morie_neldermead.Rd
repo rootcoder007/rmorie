@@ -8,7 +8,7 @@
 .morie_neldermead(f, x0, maxit = 400, tol = 1e-10)
 }
 \arguments{
-\item{f}{See Usage.}
+\item{f}{Passed to \code{apply}.}
 \item{x0}{A vector; its length is taken.}
 \item{maxit}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{400}.}
 \item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.}

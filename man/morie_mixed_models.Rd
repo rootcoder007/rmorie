@@ -57,3 +57,12 @@ These functions mirror, in R, the implementations in the Python package
 tests in \code{tests/testthat/}.
 }
 \keyword{models}
+\examples{
+set.seed(1)
+n <- 12; q <- 3
+X <- cbind(1, rnorm(n))
+Z <- diag(q)[sample(1:q, n, replace = TRUE), ]
+u <- rnorm(q, 0, 1)
+y <- as.numeric(X \%*\% c(1, 0.5) + Z \%*\% u + rnorm(n, 0, 0.3))
+morie_mme(X, Z, y, Sigma_inv = diag(q))
+}

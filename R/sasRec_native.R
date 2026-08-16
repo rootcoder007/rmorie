@@ -49,7 +49,7 @@ causal_mask <- function(n) {
 #' @param WQ See Usage.
 #' @param WK See Usage.
 #' @param WV See Usage.
-#' @param mask Defaults to \code{NULL}.
+#' @param mask Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{output}, \code{weights}, \code{note}.
 #' @export
 self_attention <- function(E, WQ, WK, WV, mask = NULL) {
@@ -113,7 +113,7 @@ attention_span <- function(weights, position = NULL) {
 #' @param state Coerced to numeric by the body, with \code{as.numeric}.
 #' @param item_embeddings See Usage.
 #' @param top_k Numeric; passed to \code{min}. Defaults to \code{5}.
-#' @param exclude Defaults to \code{numeric(0)}.
+#' @param exclude Passed to \code{unlist}. Defaults to \code{numeric(0)}.
 #' @return A list with \code{estimate}, \code{ranking}, \code{n_scored}, \code{method}.
 #' @export
 predict_next <- function(state, item_embeddings, top_k = 5, exclude = numeric(0)) {

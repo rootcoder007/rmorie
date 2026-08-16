@@ -10,9 +10,9 @@ WienerFilt(x, desired = NULL, order = 8, sd = NULL, seta = NULL, fs = 1)
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{desired}{The body requires: give either a desired signal (time-domain route,.}
-\item{order}{Defaults to \code{8}.}
-\item{sd}{Defaults to \code{NULL}.}
-\item{seta}{Defaults to \code{NULL}.}
+\item{order}{Passed to \code{Whopf}. Defaults to \code{8}.}
+\item{sd}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{seta}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{fs}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{

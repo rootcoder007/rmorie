@@ -13,7 +13,7 @@
 \item{b_ub}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{A_eq}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 \item{b_eq}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
-\item{lower}{See Usage.}
+\item{lower}{Passed to \code{ifelse}.}
 \item{upper}{A vector; indexed elementwise.}
 }
 \description{

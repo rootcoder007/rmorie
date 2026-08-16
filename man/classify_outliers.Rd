@@ -10,8 +10,8 @@ classify_outliers(sd, od, sd_cut, od_cut)
 \arguments{
 \item{sd}{A vector; its length is taken and its elements indexed.}
 \item{od}{A vector; indexed elementwise.}
-\item{sd_cut}{See Usage.}
-\item{od_cut}{See Usage.}
+\item{sd_cut}{Passed to \code{>}.}
+\item{od_cut}{Passed to \code{>}.}
 }
 \description{
 A step of the robpca_native implementation. Called by \code{morie_robpca}. See the file header for the source the module follows.

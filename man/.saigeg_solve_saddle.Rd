@@ -13,7 +13,7 @@
 \item{mu}{Passed to \code{.saigeg_cgf}.}
 \item{lo}{Numeric; combined arithmetically in the body. Defaults to \code{-50}.}
 \item{hi}{Numeric; combined arithmetically in the body. Defaults to \code{50}.}
-\item{tol}{Defaults to \code{1e-11}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-11}.}
 \item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.}
 }
 \description{

@@ -22,3 +22,8 @@ the jth variable are randomly permuted in the OOB observations and j new PE is c
 The value of \code{imp}, as built in the body.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+.rfcheck(M, M)
+.rfperm(trees = M, oob = M, X = M, Y = M, q = M)
+}

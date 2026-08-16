@@ -9,8 +9,8 @@ Qf(p, df1, df2)
 }
 \arguments{
 \item{p}{Iterated over elementwise, with \code{vapply}.}
-\item{df1}{See Usage.}
-\item{df2}{See Usage.}
+\item{df1}{Passed to \code{Pf}.}
+\item{df2}{Passed to \code{Pf}.}
 }
 \description{
 A step of the dist_native implementation. No other function in the package calls it. See the file header for the source the module follows.

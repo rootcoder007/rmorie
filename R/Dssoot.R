@@ -8,8 +8,8 @@
 #' it follows.
 #'
 #' @param y Passed to \code{.s03lstsq}.
-#' @param x1 See Usage.
-#' @param x2 Defaults to \code{NULL}.
+#' @param x1 Passed to \code{cbind}.
+#' @param x2 Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{.s03lstsq}.
 #' @export
 .dssoot_ols <- function(y, x1, x2 = NULL) {

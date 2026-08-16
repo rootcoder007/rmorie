@@ -239,8 +239,8 @@ rj_log_acceptance <- function(logpost_from, logpost_to, log_j_from,
 #' the source it follows.
 #'
 #' @param models A vector; its length is taken and its elements indexed.
-#' @param moves See Usage.
-#' @param init_model See Usage.
+#' @param moves Passed to \code{check_dimension_matching}.
+#' @param init_model Passed to \code{\%in\%}.
 #' @param init_theta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{c()}.
 #' @param n_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{10000L}.
 #' @param burn_in Numeric; combined arithmetically in the body. Defaults to \code{0L}.
@@ -571,7 +571,7 @@ birth_log_jacobian <- function(h_j, h_new_left, h_new_right) {
 #' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param beta Numeric; passed to \code{log}. Defaults to \code{200}.
 #' @param seed Passed to \code{.unif_stream}. Defaults to \code{0L}.
-#' @param cap Defaults to \code{0.9}.
+#' @param cap Passed to \code{changepoint_move_probabilities}. Defaults to \code{0.9}.
 #' @param use_likelihood A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param k_init A count; the body uses it as \code{seq_len(...)}. Defaults to \code{0L}.
 #' @param thin Numeric; combined arithmetically in the body. Defaults to \code{1L}.

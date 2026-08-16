@@ -8,10 +8,10 @@
 PhaseResp(b, a = NULL, fs = 1000, n_freqs = 512, unwrap = TRUE)
 }
 \arguments{
-\item{b}{See Usage.}
-\item{a}{Defaults to \code{NULL}.}
-\item{fs}{Defaults to \code{1000}.}
-\item{n_freqs}{Defaults to \code{512}.}
+\item{b}{Passed to \code{FreqResp}.}
+\item{a}{Passed to \code{FreqResp}.}
+\item{fs}{Passed to \code{FreqResp}. Defaults to \code{1000}.}
+\item{n_freqs}{Passed to \code{FreqResp}. Defaults to \code{512}.}
 \item{unwrap}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

@@ -33,7 +33,7 @@ MASS_ginv <- function(X, tol = sqrt(.Machine$double.eps)) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param M See Usage.
+#' @param M Passed to \code{svd}.
 #' @param rcond Numeric; combined arithmetically in the body. Defaults to \code{1e-15}.
 #' @return The value of \code{%*%}.
 #' @export
@@ -64,7 +64,7 @@ NULL
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .t1_vec <- function(x) as.numeric(unlist(x))

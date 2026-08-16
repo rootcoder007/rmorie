@@ -10,9 +10,9 @@ ngcf_propagate(E, adjacency, W1, W2, affinity = TRUE, slope = 0.2)
 \arguments{
 \item{E}{A matrix; indexed by row and column.}
 \item{adjacency}{A vector; indexed elementwise.}
-\item{W1}{See Usage.}
-\item{W2}{See Usage.}
-\item{affinity}{Defaults to \code{TRUE}.}
+\item{W1}{Passed to \code{ngcf_message}.}
+\item{W2}{Passed to \code{ngcf_message}.}
+\item{affinity}{Passed to \code{ngcf_message}. Defaults to \code{TRUE}.}
 \item{slope}{Passed to \code{.ngcf_leaky}. Defaults to \code{0.2}.}
 }
 \description{

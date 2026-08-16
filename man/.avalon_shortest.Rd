@@ -11,7 +11,7 @@
 \item{adj}{A vector; its length is taken and its elements indexed.}
 \item{src}{Numeric; combined arithmetically in the body.}
 \item{dst}{Numeric; combined arithmetically in the body.}
-\item{banned}{See Usage.}
+\item{banned}{Passed to \code{==}.}
 }
 \description{
 A step of the avalon_native implementation. Called by \code{morie_avalon_rings}. See the file header for the source the module follows.

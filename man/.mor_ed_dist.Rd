@@ -8,7 +8,7 @@
 .mor_ed_dist(z, alpha)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Passed to \code{dist}.}
 \item{alpha}{Numeric; combined arithmetically in the body.}
 }
 \description{

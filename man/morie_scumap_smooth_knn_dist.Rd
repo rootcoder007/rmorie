@@ -11,7 +11,7 @@ morie_scumap_smooth_knn_dist(distances, n_neighbors, rho = NULL, tol = 1e-05, ma
 \item{distances}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{n_neighbors}{Coerced to integer by the body, with \code{as.integer}.}
 \item{rho}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
-\item{tol}{Defaults to \code{1e-05}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-05}.}
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{64}.}
 \item{min_scale}{Numeric; combined arithmetically in the body. Defaults to \code{0.001}.}
 }

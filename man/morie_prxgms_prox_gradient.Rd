@@ -14,11 +14,11 @@ morie_prxgms_prox_gradient(fun, grad, prox, x0, L = 1, max.iter = 500L, tol = 1e
 \item{x0}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{L}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 \item{max.iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500L}.}
-\item{tol}{Defaults to \code{1e-10}.}
+\item{tol}{Passed to \code{<=}. Defaults to \code{1e-10}.}
 \item{accelerate}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 \item{backtrack}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 \item{eta}{Numeric; combined arithmetically in the body. Defaults to \code{2}.}
-\item{g.fun}{Defaults to \code{NULL}.}
+\item{g.fun}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the prxgms_native implementation. Called by \code{morie_prxgms_lasso_fista}. See the file header for the source the module follows.

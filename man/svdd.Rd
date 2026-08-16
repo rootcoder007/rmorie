@@ -12,7 +12,7 @@ svdd(X, C = 1, kernel = "linear", gamma = 1, tol = 1e-10, max_sweeps = 500L)
 \item{C}{Numeric; passed to \code{min}. Defaults to \code{1}.}
 \item{kernel}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"linear"}.}
 \item{gamma}{Passed to \code{.deep_svdd_kernel}. Defaults to \code{1}.}
-\item{tol}{Defaults to \code{1e-10}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-10}.}
 \item{max_sweeps}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500L}.}
 }
 \description{

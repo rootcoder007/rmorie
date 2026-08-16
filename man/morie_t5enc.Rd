@@ -8,7 +8,7 @@
 morie_t5enc(method = c("task_prefix", "span_corruption", "relative_bucket", "format_regression", "parse_prediction", "cheatsheet"), ...)
 }
 \arguments{
-\item{method}{Defaults to \code{c("task_prefix", "span_corruption", "relative_bucket", "format_regression",     "parse_prediction", "cheatsheet")}.}
+\item{method}{Passed to \code{match.arg}.}
 \item{...}{Passed through.}
 }
 \description{

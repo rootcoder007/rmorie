@@ -8,13 +8,13 @@
 fixed_length_ci(beta, sigma, n_pre, n_post, M = 0, family = "SD", l_vec = NULL, level = 0.95)
 }
 \arguments{
-\item{beta}{See Usage.}
+\item{beta}{Passed to \code{identified_set}.}
 \item{sigma}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{n_pre}{See Usage.}
-\item{n_post}{See Usage.}
-\item{M}{Defaults to \code{0}.}
+\item{n_pre}{Passed to \code{identified_set}.}
+\item{n_post}{Passed to \code{identified_set}.}
+\item{M}{Passed to \code{identified_set}. Defaults to \code{0}.}
 \item{family}{Carried through into a list the body builds. Defaults to \code{"SD"}.}
-\item{l_vec}{Defaults to \code{NULL}.}
+\item{l_vec}{Passed to \code{identified_set}.}
 \item{level}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.}
 }
 \description{

@@ -8,8 +8,8 @@
 .trclrn_check(Y, A, X, propensity, min_propensity)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{A}{See Usage.}
+\item{Y}{Passed to \code{unlist}.}
+\item{A}{Passed to \code{unlist}.}
 \item{X}{A matrix; passed to \code{as.matrix}.}
 \item{propensity}{Optional; may be \code{NULL}. A vector; its length is taken.}
 \item{min_propensity}{Coerced to numeric by the body, with \code{as.numeric}.}

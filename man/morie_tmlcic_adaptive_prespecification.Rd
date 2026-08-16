@@ -14,8 +14,8 @@ morie_tmlcic_adaptive_prespecification(y, A, W, groups, design, target, library 
 \item{groups}{Passed to \code{.tmlcic_cv_folds}.}
 \item{design}{Passed to \code{.tmlcic_cv_folds}.}
 \item{target}{Passed to \code{morie_tmlcic_influence_curve}.}
-\item{library}{Defaults to \code{NULL}.}
-\item{g_library}{Defaults to \code{NULL}.}
+\item{library}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{g_library}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{n_folds}{Passed to \code{.tmlcic_cv_folds}.}
 \item{ridge}{Passed to \code{morie_tmlcic_candidate_tmle}. Defaults to \code{1e-08}.}
 }

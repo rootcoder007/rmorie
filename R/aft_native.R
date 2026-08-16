@@ -19,7 +19,7 @@
 #' source it follows.
 #'
 #' @param z Numeric; combined arithmetically in the body.
-#' @param family See Usage.
+#' @param family Passed to \code{identical}.
 #' @return Nothing; this branch always raises.
 #' @export
 .morie_aft_log_dens_surv <- function(z, family) {
@@ -89,7 +89,7 @@
 #' source it follows.
 #'
 #' @param t A vector; its length is taken.
-#' @param e See Usage.
+#' @param e Passed to \code{>}.
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param family Passed to \code{.morie_aft_log_dens_surv}. Defaults to \code{"weibull"}.
 #' @param max_iter Carried through into a list the body builds. Defaults to \code{500L}.

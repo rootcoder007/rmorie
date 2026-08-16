@@ -8,7 +8,7 @@
 .phylby_replace_branch(node, path, value)
 }
 \arguments{
-\item{node}{See Usage.}
+\item{node}{Passed to \code{return}.}
 \item{path}{A vector; its length is taken and its elements indexed.}
 \item{value}{Passed to \code{.phylby_replace_branch}.}
 }

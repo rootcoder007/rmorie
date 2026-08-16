@@ -10,8 +10,8 @@ morie_survrsf_predict_tree(tree, x, random_variable = NULL, rng = NULL)
 \arguments{
 \item{tree}{A list; the body reads \code{$root} from it.}
 \item{x}{A vector; indexed elementwise.}
-\item{random_variable}{Defaults to \code{NULL}.}
-\item{rng}{Defaults to \code{NULL}.}
+\item{random_variable}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{rng}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the survrsf_native implementation. Called by \code{morie_survrsf_ensemble_chf}, \code{morie_survrsf_mortality}. See the file header for the source the module follows.

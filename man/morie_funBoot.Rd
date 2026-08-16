@@ -9,7 +9,7 @@ morie_funBoot(curves, statistic = NULL, alpha = 0.05, B = 500L, metric = "l2", s
 }
 \arguments{
 \item{curves}{A matrix; indexed by row and column.}
-\item{statistic}{Defaults to \code{NULL}.}
+\item{statistic}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{alpha}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}
 \item{B}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500L}.}
 \item{metric}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"l2"}.}

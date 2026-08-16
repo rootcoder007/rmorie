@@ -63,8 +63,8 @@
 #'
 #' @param Y A vector; indexed elementwise.
 #' @param D A vector; indexed elementwise.
-#' @param g See Usage.
-#' @param t See Usage.
+#' @param g Passed to \code{paste0}.
+#' @param t Passed to \code{paste0}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .causdiddc_cells <- function(Y, D, g, t) {

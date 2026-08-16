@@ -10,7 +10,7 @@
 \arguments{
 \item{yv}{A vector; its length is taken.}
 \item{Dv}{Numeric; combined arithmetically in the body.}
-\item{W}{See Usage.}
+\item{W}{Passed to \code{cbind}.}
 \item{g}{Numeric; combined arithmetically in the body.}
 \item{grid}{A vector; its length is taken and its elements indexed.}
 }

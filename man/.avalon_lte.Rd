@@ -8,8 +8,8 @@
 .avalon_lte(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{Passed to \code{utf8ToInt}.}
+\item{b}{Passed to \code{utf8ToInt}.}
 }
 \description{
 strings by whatever collation happens to be in force, and the canonical spelling of a path would depend on the machine.

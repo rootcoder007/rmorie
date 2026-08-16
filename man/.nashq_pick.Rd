@@ -10,8 +10,8 @@
 \arguments{
 \item{M}{A matrix; passed to \code{nrow}.}
 \item{A}{A vector; its length is taken.}
-\item{who}{See Usage.}
-\item{epsilon}{See Usage.}
+\item{who}{Passed to \code{==}.}
+\item{epsilon}{Passed to \code{<}.}
 \item{rng_e}{Passed to \code{.ghc_unif}.}
 }
 \description{

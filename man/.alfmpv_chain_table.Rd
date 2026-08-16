@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{chain}{A list; the body reads \code{$species} from it.}
-\item{idx}{See Usage.}
+\item{idx}{Passed to \code{sprintf}.}
 }
 \description{
 A step of the alfmpv_native implementation. Called by \code{morie_alfmpv_msa_pairing}. See the file header for the source the module follows.

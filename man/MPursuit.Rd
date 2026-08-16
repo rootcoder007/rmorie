@@ -11,7 +11,7 @@ MPursuit(x, dictionary = NULL, natoms = 20, tol = 1e-10, decaystop = NULL)
 \item{x}{A vector; its length is taken.}
 \item{dictionary}{Optional; may be \code{NULL}. Passed to \code{.morie_bx_mat}.}
 \item{natoms}{Numeric; passed to \code{min}. Defaults to \code{20}.}
-\item{tol}{Defaults to \code{1e-10}.}
+\item{tol}{Passed to \code{<=}. Defaults to \code{1e-10}.}
 \item{decaystop}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{

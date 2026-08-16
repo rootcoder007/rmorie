@@ -14,7 +14,7 @@ fit_fm(X, y, k_dim = 4, iters = 300, alpha = 0.02, lam = 0.01, seed = 0)
 \item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{300}.}
 \item{alpha}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.02}.}
 \item{lam}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.}
-\item{seed}{Defaults to \code{0}.}
+\item{seed}{Passed to \code{set.seed}. Defaults to \code{0}.}
 }
 \description{
 A step of the fmFM_native implementation. No other function in the package calls it. See the file header for the source the module follows.

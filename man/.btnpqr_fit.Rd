@@ -14,3 +14,8 @@
 The value of \code{b}, as built in the body.
 }
 \keyword{internal}
+\examples{
+X <- cbind(1, 1:20); y <- 1 + 0.4 * (1:20) + c(rep(0, 10), rep(1, 10))
+Btnpqr(X, y, 0.5, B = 20)$beta_hat
+.btnpqr_fit(Xm = X, yy = y, tau = X)
+}

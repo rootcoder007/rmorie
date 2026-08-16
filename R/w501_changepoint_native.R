@@ -54,7 +54,7 @@
 #' @param x A vector; its length is taken.
 #' @param cost Passed to \code{.w501_seg_cost}.
 #' @param penalty See Usage.
-#' @param min_seglen Defaults to \code{1L}.
+#' @param min_seglen Passed to \code{seq}. Defaults to \code{1L}.
 #' @return A list with \code{taus}, \code{Fn}.
 #' @export
 .w501_pelt_core <- function(x, cost, penalty, min_seglen = 1L) {

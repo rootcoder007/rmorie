@@ -218,16 +218,16 @@ fit_ffm <- function(rows, labels, fields, n_features, n_fields,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param rows See Usage.
-#' @param labels See Usage.
-#' @param fields See Usage.
-#' @param n_features See Usage.
-#' @param n_fields See Usage.
-#' @param k_dim Defaults to \code{4}.
-#' @param eta Defaults to \code{0.1}.
-#' @param lam Defaults to \code{2e-05}.
-#' @param epochs Defaults to \code{10}.
-#' @param seed Defaults to \code{0}.
+#' @param rows Passed to \code{fit_ffm}.
+#' @param labels Passed to \code{fit_ffm}.
+#' @param fields Passed to \code{fit_ffm}.
+#' @param n_features Passed to \code{fit_ffm}.
+#' @param n_fields Passed to \code{fit_ffm}.
+#' @param k_dim Passed to \code{fit_ffm}. Defaults to \code{4}.
+#' @param eta Passed to \code{fit_ffm}. Defaults to \code{0.1}.
+#' @param lam Passed to \code{fit_ffm}. Defaults to \code{2e-05}.
+#' @param epochs Passed to \code{fit_ffm}. Defaults to \code{10}.
+#' @param seed Passed to \code{fit_ffm}. Defaults to \code{0}.
 #' @return The value of \code{fit_ffm}.
 #' @export
 morie_ffmFM <- function(rows, labels, fields, n_features, n_fields,
@@ -243,16 +243,16 @@ morie_ffmFM <- function(rows, labels, fields, n_features, n_fields,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param rows See Usage.
-#' @param labels See Usage.
-#' @param fields See Usage.
-#' @param n_features See Usage.
-#' @param n_fields See Usage.
-#' @param k_dim Defaults to \code{4}.
-#' @param eta Defaults to \code{0.1}.
-#' @param lam Defaults to \code{2e-05}.
-#' @param epochs Defaults to \code{10}.
-#' @param seed Defaults to \code{0}.
+#' @param rows Passed to \code{fit_ffm}.
+#' @param labels Passed to \code{fit_ffm}.
+#' @param fields Passed to \code{fit_ffm}.
+#' @param n_features Passed to \code{fit_ffm}.
+#' @param n_fields Passed to \code{fit_ffm}.
+#' @param k_dim Passed to \code{fit_ffm}. Defaults to \code{4}.
+#' @param eta Passed to \code{fit_ffm}. Defaults to \code{0.1}.
+#' @param lam Passed to \code{fit_ffm}. Defaults to \code{2e-05}.
+#' @param epochs Passed to \code{fit_ffm}. Defaults to \code{10}.
+#' @param seed Passed to \code{fit_ffm}. Defaults to \code{0}.
 #' @return The value of \code{fit_ffm}.
 #' @export
 fieldawarefm <- function(rows, labels, fields, n_features, n_fields,
@@ -268,16 +268,16 @@ fieldawarefm <- function(rows, labels, fields, n_features, n_fields,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param rows See Usage.
-#' @param labels See Usage.
-#' @param fields See Usage.
-#' @param n_features See Usage.
-#' @param n_fields See Usage.
-#' @param k_dim Defaults to \code{4}.
-#' @param eta Defaults to \code{0.1}.
-#' @param lam Defaults to \code{2e-05}.
-#' @param epochs Defaults to \code{10}.
-#' @param seed Defaults to \code{0}.
+#' @param rows Passed to \code{fit_ffm}.
+#' @param labels Passed to \code{fit_ffm}.
+#' @param fields Passed to \code{fit_ffm}.
+#' @param n_features Passed to \code{fit_ffm}.
+#' @param n_fields Passed to \code{fit_ffm}.
+#' @param k_dim Passed to \code{fit_ffm}. Defaults to \code{4}.
+#' @param eta Passed to \code{fit_ffm}. Defaults to \code{0.1}.
+#' @param lam Passed to \code{fit_ffm}. Defaults to \code{2e-05}.
+#' @param epochs Passed to \code{fit_ffm}. Defaults to \code{10}.
+#' @param seed Passed to \code{fit_ffm}. Defaults to \code{0}.
 #' @return The value of \code{fit_ffm}.
 #' @export
 field_aware_fm <- function(rows, labels, fields, n_features, n_fields,

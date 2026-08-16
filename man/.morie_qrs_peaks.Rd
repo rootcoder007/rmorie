@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{g}{A vector; its length is taken and its elements indexed.}
-\item{th}{See Usage.}
+\item{th}{Passed to \code{<=}.}
 \item{m}{Numeric; combined arithmetically in the body.}
 }
 \description{

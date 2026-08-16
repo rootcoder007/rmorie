@@ -81,9 +81,9 @@ LsiSer <- function(x, h1, h2) {
 #' a second time -- the content of the equation is that the cascade IS a
 #' single filter, not that there are two ways to compute it.
 #'
-#' @param x See Usage.
-#' @param h1 See Usage.
-#' @param h2 See Usage.
+#' @param x Passed to \code{LsiSer}.
+#' @param h1 Passed to \code{LsiSer}.
+#' @param h2 Passed to \code{LsiSer}.
 #' @return A list with \code{y}, \code{h}, \code{s}, \code{equivalent}, \code{max_difference}, \code{method}.
 #' @export
 LsiSerY <- function(x, h1, h2) {
@@ -157,9 +157,9 @@ LsiPar2 <- function(x, h2) {
 #'
 #' impulse responses ADD where a cascade convolves them.
 #'
-#' @param x See Usage.
-#' @param h1 See Usage.
-#' @param h2 See Usage.
+#' @param x Passed to \code{LsiPar}.
+#' @param h1 Passed to \code{LsiPar}.
+#' @param h2 Passed to \code{LsiPar}.
 #' @return A list with \code{y}, \code{h}, \code{s1}, \code{s2}, \code{equivalent}, \code{max_difference}, \code{method}.
 #' @export
 LsiParY <- function(x, h1, h2) {
@@ -230,9 +230,9 @@ LtiProd <- function(x, h, s = NULL, omega = NULL, dt = 1) {
 #'
 #' two copies of one equation is how the two drift apart.
 #'
-#' @param x See Usage.
-#' @param h See Usage.
-#' @param npoints Defaults to \code{NULL}.
+#' @param x Passed to \code{CircConv}.
+#' @param h Passed to \code{CircConv}.
+#' @param npoints Passed to \code{CircConv}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
 PerConv <- function(x, h, npoints = NULL) {

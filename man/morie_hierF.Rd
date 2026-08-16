@@ -8,12 +8,12 @@
 morie_hierF(base, S, method = "shrink", residuals = NULL, W = NULL, ridge = 1e-10)
 }
 \arguments{
-\item{base}{See Usage.}
-\item{S}{See Usage.}
-\item{method}{Defaults to \code{"shrink"}.}
-\item{residuals}{Defaults to \code{NULL}.}
-\item{W}{Defaults to \code{NULL}.}
-\item{ridge}{Defaults to \code{1e-10}.}
+\item{base}{Passed to \code{mint_reconcile}.}
+\item{S}{Passed to \code{mint_reconcile}.}
+\item{method}{Passed to \code{mint_reconcile}. Defaults to \code{"shrink"}.}
+\item{residuals}{Passed to \code{mint_reconcile}.}
+\item{W}{Passed to \code{mint_reconcile}.}
+\item{ridge}{Passed to \code{mint_reconcile}. Defaults to \code{1e-10}.}
 }
 \description{
 A step of the hierF_native implementation. No other function in the package calls it. See the file header for the source the module follows.

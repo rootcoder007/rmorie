@@ -9,14 +9,14 @@ morie_clpopt(c, A_ub = NULL, b_ub = NULL, A_eq = NULL, b_eq = NULL, upper = NULL
 }
 \arguments{
 \item{c}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{A_ub}{Defaults to \code{NULL}.}
-\item{b_ub}{Defaults to \code{NULL}.}
-\item{A_eq}{Defaults to \code{NULL}.}
-\item{b_eq}{Defaults to \code{NULL}.}
-\item{upper}{Defaults to \code{NULL}.}
-\item{rule}{Defaults to \code{"bland"}.}
+\item{A_ub}{Passed to \code{standard_form}.}
+\item{b_ub}{Passed to \code{standard_form}.}
+\item{A_eq}{Passed to \code{standard_form}.}
+\item{b_eq}{Passed to \code{standard_form}.}
+\item{upper}{Passed to \code{standard_form}.}
+\item{rule}{Passed to \code{simplex}. Defaults to \code{"bland"}.}
 \item{maximise}{A flag; the body branches on it. Defaults to \code{FALSE}.}
-\item{max_iter}{Defaults to \code{10000}.}
+\item{max_iter}{Passed to \code{simplex}. Defaults to \code{10000}.}
 }
 \description{
 Mirrors clpopt.linprog.

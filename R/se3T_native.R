@@ -66,7 +66,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .se3T_vec <- function(x) {
@@ -266,9 +266,9 @@ morie_se3T_se3_attention <- function(positions, type0, type1, weights=NULL,
 #' source it follows.
 #'
 #' @param positions Passed to \code{.se3T_mat}.
-#' @param type0 See Usage.
+#' @param type0 Passed to \code{f}.
 #' @param type1 Passed to \code{.se3T_mat}.
-#' @param layer Defaults to \code{NULL}.
+#' @param layer Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param axis Passed to \code{morie_se3T_rotation_matrix}. Defaults to \code{c(0.3, -0.7, 0.4)}.
 #' @param angle Passed to \code{morie_se3T_rotation_matrix}. Defaults to \code{1.1}.
 #' @param translation Passed to \code{.se3T_vec}. Defaults to \code{c(2, -1, 0.5)}.

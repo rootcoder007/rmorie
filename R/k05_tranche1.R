@@ -346,7 +346,7 @@ morie_snht <- function(x, n_mc = 1999, seed = 0) {
 #'
 #' @param v Numeric; passed to \code{mean}.
 #' @param n Numeric; combined arithmetically in the body.
-#' @param max_lag See Usage.
+#' @param max_lag Passed to \code{:}.
 #' @return A vector, from \code{vapply}.
 #' @export
 .morie_k05_acvf <- function(v, n, max_lag) {

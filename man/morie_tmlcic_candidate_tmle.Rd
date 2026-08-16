@@ -14,7 +14,7 @@ morie_tmlcic_candidate_tmle(y, A, W, cand, g1, rows = NULL, eval_rows = NULL, ri
 \item{cand}{Passed to \code{.tmlcic_fit_working_model}.}
 \item{g1}{Accepted by the signature and not used anywhere in the body.}
 \item{rows}{Optional; may be \code{NULL}. Passed to \code{.tmlcic_fit_working_model}.}
-\item{eval_rows}{Defaults to \code{NULL}.}
+\item{eval_rows}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{ridge}{Passed to \code{.tmlcic_fit_working_model}. Defaults to \code{1e-08}.}
 \item{target_step}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }

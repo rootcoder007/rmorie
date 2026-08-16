@@ -38,7 +38,7 @@
 #' source it follows.
 #'
 #' @param A A matrix; passed to \code{chol}.
-#' @param b See Usage.
+#' @param b Passed to \code{forwardsolve}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .lcwphr_cholsolve <- function(A, b) {
@@ -56,7 +56,7 @@
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y Numeric; combined arithmetically in the body.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100L}.
-#' @param tol Defaults to \code{1e-11}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-11}.
 #' @param ridge_rel Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A list with \code{beta}, \code{fitted}.
 #' @export

@@ -175,8 +175,8 @@
 #' @param init_steps A count; the body uses it as \code{seq_len(...)}. Defaults to \code{0}.
 #' @param gamma_int Numeric; combined arithmetically in the body. Defaults to \code{0.99}.
 #' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0}.
-#' @param target Defaults to \code{NULL}.
-#' @param predictor Defaults to \code{NULL}.
+#' @param target Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param predictor Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param update A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{intrinsic_reward}, \code{raw_error}, \code{returns}, \code{mse}, \code{mean_first}, \code{mean_last}, \code{n}, \code{target}, \code{predictor}, \code{method}.
 #' @export

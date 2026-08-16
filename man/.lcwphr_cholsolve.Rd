@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{A}{A matrix; passed to \code{chol}.}
-\item{b}{See Usage.}
+\item{b}{Passed to \code{forwardsolve}.}
 }
 \description{
 A step of the lcwphr_native implementation. Called by \code{.lcwphr_logit_irls}. See the file header for the source the module follows.

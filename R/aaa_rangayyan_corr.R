@@ -269,11 +269,11 @@ Cohere <- function(x, y, fs = 1, nperseg = NULL, noverlap = NULL) {
 #'
 #' 0.5 magnitude coherence is 0.25 magnitude-squared coherence.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
-#' @param fs Defaults to \code{1}.
-#' @param nperseg Defaults to \code{NULL}.
-#' @param noverlap Defaults to \code{NULL}.
+#' @param x Passed to \code{Cohere}.
+#' @param y Passed to \code{Cohere}.
+#' @param fs Passed to \code{Cohere}. Defaults to \code{1}.
+#' @param nperseg Passed to \code{Cohere}.
+#' @param noverlap Passed to \code{Cohere}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
 Msc <- function(x, y, fs = 1, nperseg = NULL, noverlap = NULL) {
@@ -590,7 +590,7 @@ SigEnergy <- function(x = NULL, t = NULL, dt = 1, X = NULL, freqs = NULL) {
 #' @param X Coerced to complex by the body, with \code{as.complex}.
 #' @param H Coerced to complex by the body, with \code{as.complex}.
 #' @param freqs Coerced to numeric by the body, with \code{as.numeric}.
-#' @param t0 See Usage.
+#' @param t0 Passed to \code{MfPeak}.
 #' @param noise_power Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{ratio}, \code{bound}, \code{optimality}, \code{numerator}, \code{energy_h}, \code{energy_x}, \code{method}.
 #' @export
@@ -836,7 +836,7 @@ MfImpulse <- function(x, t0 = NULL, gain = 1, dt = 1) {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param gain Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @param dt Defaults to \code{1}.
+#' @param dt Passed to \code{MfImpulse}. Defaults to \code{1}.
 #' @return A list with \code{y}, \code{acf}, \code{lags}, \code{peak_index}, \code{peak_value}, \code{expected_peak}, \code{energy}, \code{max_difference}, \code{equals_acf}, \code{method}.
 #' @export
 MfAcf <- function(x, gain = 1, dt = 1) {
@@ -904,10 +904,10 @@ RefPattern <- function(amplitudes = NULL) {
 #'
 #' so it delegates.  What is specific here is the DFT caveat.
 #'
-#' @param X See Usage.
-#' @param freqs See Usage.
-#' @param t0 See Usage.
-#' @param gain Defaults to \code{1}.
+#' @param X Passed to \code{MfTf}.
+#' @param freqs Passed to \code{MfTf}.
+#' @param t0 Passed to \code{MfTf}.
+#' @param gain Passed to \code{MfTf}. Defaults to \code{1}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
 MfTfEeg <- function(X, freqs, t0, gain = 1) {
@@ -927,10 +927,10 @@ MfTfEeg <- function(X, freqs, t0, gain = 1) {
 #'
 #' is a reversed reference, the filtering is equivalent to correlation.
 #'
-#' @param x See Usage.
-#' @param t0 Defaults to \code{NULL}.
-#' @param gain Defaults to \code{1}.
-#' @param dt Defaults to \code{1}.
+#' @param x Passed to \code{MfImpulse}.
+#' @param t0 Passed to \code{MfImpulse}.
+#' @param gain Passed to \code{MfImpulse}. Defaults to \code{1}.
+#' @param dt Passed to \code{MfImpulse}. Defaults to \code{1}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
 MfImpEeg <- function(x, t0 = NULL, gain = 1, dt = 1) {
@@ -1525,7 +1525,7 @@ SeizCohere <- function(channels, fs, window, step = NULL, bands = NULL,
 #' @param resp Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param band A vector; indexed elementwise. Defaults to \code{c(0.15, 0.4)}.
-#' @param nperseg Defaults to \code{NULL}.
+#' @param nperseg Passed to \code{Cohere}.
 #' @return A list with \code{plv}, \code{mean_phase_difference}, \code{phase_difference}, \code{coherence_peak}, \code{coherence_mean}, \code{coherence}, \code{freqs}, \code{band}, \code{n}, \code{fs}, \code{method}.
 #' @export
 CardioResp <- function(ecg_rate, resp, fs, band = c(0.15, 0.40),

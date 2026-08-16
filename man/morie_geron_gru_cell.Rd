@@ -22,3 +22,9 @@ convention h = (1 - z) h_prev + z h_tilde (rather than the more common
 z h_prev + (1 - z) h_tilde), the gates act on the concatenation
 [h, x] and the candidate on [r * h, x], and there are no biases.
 }
+\examples{
+x_t <- c(0.5, -0.1)
+h_prev <- c(0.2, 0.3)
+Wz <- matrix(0.1, 2, 4); Wr <- matrix(0.1, 2, 4); W <- matrix(0.1, 2, 4)
+morie_geron_gru_cell(x_t, h_prev, Wz, Wr, W)
+}

@@ -14,7 +14,7 @@
 \item{c}{A vector; indexed elementwise.}
 \item{delta}{Numeric; combined arithmetically in the body.}
 \item{m}{A count; the body uses it as \code{seq_len(...)}.}
-\item{tol}{See Usage.}
+\item{tol}{Passed to \code{<}.}
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{

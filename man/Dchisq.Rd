@@ -8,9 +8,9 @@
 Dchisq(x, df, log = FALSE)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{Dgamma}.}
 \item{df}{Numeric; combined arithmetically in the body.}
-\item{log}{Defaults to \code{FALSE}.}
+\item{log}{Passed to \code{Dgamma}. Defaults to \code{FALSE}.}
 }
 \description{
 A step of the dist_native implementation. No other function in the package calls it. See the file header for the source the module follows.

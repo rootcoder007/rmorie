@@ -10,8 +10,8 @@
 \arguments{
 \item{T}{A vector; its length is taken and its elements indexed.}
 \item{E}{A vector; indexed elementwise.}
-\item{M}{See Usage.}
-\item{c}{See Usage.}
+\item{M}{Passed to \code{>}.}
+\item{c}{Passed to \code{>}.}
 \item{t}{Passed to \code{morie_survroc_kaplan_meier}.}
 }
 \description{

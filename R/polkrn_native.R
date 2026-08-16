@@ -69,8 +69,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param q See Usage.
+#' @param x Passed to \code{quantile}.
+#' @param q Passed to \code{quantile}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .polkrn_quantile7 <- function(x, q) {
@@ -153,7 +153,7 @@
 #' @param L_hist A vector; indexed elementwise.
 #' @param kind Accepted by the signature and not used anywhere in the body.
 #' @param stabilize A flag; the body branches on it.
-#' @param trim See Usage.
+#' @param trim Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{w}, \code{per_time}.
 #' @export
 .polkrn_ip_weights_history <- function(A_hist, L_hist, kind, stabilize, trim) {
@@ -295,8 +295,8 @@ rbf_basis <- function(x, n_centres=5, width=NULL) {
 #' @param degree Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
 #' @param basis One of \code{"both"}, \code{"kernel"}, \code{"polynomial"}. Defaults to \code{"both"}.
 #' @param summary Carried through into a list the body builds. Defaults to \code{"cumulative"}.
-#' @param n_centres Defaults to \code{5}.
-#' @param width Defaults to \code{NULL}.
+#' @param n_centres Passed to \code{rbf_basis}. Defaults to \code{5}.
+#' @param width Passed to \code{rbf_basis}.
 #' @param kind Passed to \code{.polkrn_ip_weights_history}. Defaults to \code{"binary"}.
 #' @param stabilize Passed to \code{.polkrn_ip_weights_history}. Defaults to \code{TRUE}.
 #' @param trim Passed to \code{.polkrn_ip_weights_history}.

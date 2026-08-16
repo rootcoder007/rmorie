@@ -153,7 +153,7 @@ pair_cost <- function(n, mode = "cross-encoder") {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param query See Usage.
+#' @param query Passed to \code{cosine_similarity}.
 #' @param corpus_embeddings Passed to \code{.sbert_mat}.
 #' @param top_k Numeric; passed to \code{min}. Defaults to \code{5}.
 #' @return A list with \code{ranking}, \code{n_corpus}, \code{forward_passes}, \code{note}.

@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{X}{A matrix; indexed by row and column.}
-\item{y}{See Usage.}
+\item{y}{Passed to \code{unique}.}
 }
 \description{
 A step of the rangayyan_class implementation. Called by \code{FishLda}, \code{Qda}, \code{SepIndex}. See the file header for the source the module follows.

@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{rule}{One of \code{"fletcher-reeves"}, \code{"polak-ribiere"}, \code{"polak-ribiere-plus"}.}
-\item{g_new}{See Usage.}
-\item{g_old}{See Usage.}
+\item{g_new}{Passed to \code{beta_fletcher_reeves}.}
+\item{g_old}{Passed to \code{beta_fletcher_reeves}.}
 }
 \description{
 A step of the cgnonl_native implementation. Called by \code{nonlinear_cg}. See the file header for the source the module follows.

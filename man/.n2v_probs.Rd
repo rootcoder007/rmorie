@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{nb}{A vector; indexed elementwise.}
-\item{prev}{See Usage.}
+\item{prev}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{cur}{See Usage.}
 \item{p}{Numeric; combined arithmetically in the body.}
 \item{q}{Numeric; combined arithmetically in the body.}

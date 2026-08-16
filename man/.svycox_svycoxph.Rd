@@ -15,7 +15,7 @@
 \item{strata}{Passed to \code{.svycox_prep}.}
 \item{cluster}{Passed to \code{.svycox_prep}.}
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.}
-\item{tol}{Defaults to \code{1e-09}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-09}.}
 }
 \description{
 A step of the svycox_native implementation. Called by \code{morie_svycox}. See the file header for the source the module follows.

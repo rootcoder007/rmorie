@@ -97,7 +97,7 @@
 #' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param offset Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25L}.
-#' @param tol Defaults to \code{1e-08}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
 #' @return A list with \code{coef}, \code{se}, \code{statistic}, \code{statistic_name}, \code{p_value}, \code{fitted}, \code{linear_predictor}, \code{residuals}, \code{deviance}, \code{null_deviance}, \code{df_residual}, \code{df_null}, \code{dispersion}, \code{pearson_chi2}, \code{aic}, \code{loglik}, \code{converged}, \code{family}, \code{n}, \code{k}, \code{vcov}, \code{method}.
 #' @export
 morie_glm <- function(y, X, family = "binomial", add_intercept = TRUE,

@@ -9,11 +9,11 @@ iterative_refine(alignment, scoring, tree = NULL, s_op = 2.4, max_iterate = 16L,
 }
 \arguments{
 \item{alignment}{Iterated over elementwise, with \code{vapply}.}
-\item{scoring}{See Usage.}
+\item{scoring}{Passed to \code{wsp_score}.}
 \item{tree}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
-\item{s_op}{Defaults to \code{2.4}.}
+\item{s_op}{Passed to \code{wsp_score}. Defaults to \code{2.4}.}
 \item{max_iterate}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{16L}.}
-\item{seq_type}{Defaults to \code{"aa"}.}
+\item{seq_type}{Passed to \code{find_homologous_segments}. Defaults to \code{"aa"}.}
 \item{use_fft}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 \item{...}{Passed through.}
 }

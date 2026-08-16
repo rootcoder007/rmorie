@@ -82,7 +82,7 @@
 #' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
-#' @param name See Usage.
+#' @param name Passed to \code{sprintf}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
 .dreamr_vec <- function(x, name) {
@@ -98,7 +98,7 @@
 #' source it follows.
 #'
 #' @param vals A vector; its length is taken.
-#' @param name See Usage.
+#' @param name Passed to \code{sprintf}.
 #' @return A list with \code{estimate}, \code{returns}, \code{n}, \code{method}.
 #' @export
 .dreamr_pack <- function(vals, name) {
@@ -117,11 +117,11 @@
 #' source it follows.
 #'
 #' @param state Carried through into a list the body builds.
-#' @param action_model See Usage.
-#' @param transition See Usage.
-#' @param reward_model See Usage.
+#' @param action_model Passed to \code{c}.
+#' @param transition Passed to \code{c}.
+#' @param reward_model Passed to \code{c}.
 #' @param horizon Coerced to integer by the body, with \code{as.integer}.
-#' @param value_model Defaults to \code{NULL}.
+#' @param value_model Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{estimate}, \code{states}, \code{actions}, \code{rewards}, \code{values}, \code{horizon}, \code{method}.
 #' @export
 morie_dreamr_imagine <- function(state, action_model, transition, reward_model,

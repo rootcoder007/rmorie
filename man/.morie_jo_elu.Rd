@@ -8,7 +8,7 @@
 .morie_jo_elu(t)
 }
 \arguments{
-\item{t}{See Usage.}
+\item{t}{Passed to \code{ifelse}.}
 }
 \description{
 A step of the ts_joseph implementation. Called by \code{morie_tftnet}. See the file header for the source the module follows.

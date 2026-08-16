@@ -11,8 +11,8 @@ BmiDec(y, C, a = NULL, procnoise = 1e-04, obsnoise = 0.01, p0 = 0.01)
 \item{y}{Passed to \code{.morie_bx_mat}.}
 \item{C}{Passed to \code{.morie_bx_mat}.}
 \item{a}{Optional; may be \code{NULL}. Passed to \code{.morie_bx_mat}.}
-\item{procnoise}{Defaults to \code{1e-04}.}
-\item{obsnoise}{Defaults to \code{0.01}.}
+\item{procnoise}{Passed to \code{cov}. Defaults to \code{1e-04}.}
+\item{obsnoise}{Passed to \code{cov}. Defaults to \code{0.01}.}
 \item{p0}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.}
 }
 \description{

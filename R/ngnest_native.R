@@ -53,9 +53,9 @@
 #' time, so its forecasts drifted from the spec.
 #'
 #' @param window A vector; its length is taken.
-#' @param H See Usage.
-#' @param blocks See Usage.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param H Passed to \code{nbeats_stack}.
+#' @param blocks Passed to \code{nbeats_stack}.
+#' @param ridge Passed to \code{nbeats_stack}. Defaults to \code{1e-08}.
 #' @return The value of \code{list}.
 #' @export
 .ngnest_nbeats_stack <- function(window, H, blocks, ridge = 1e-8) {
@@ -94,7 +94,7 @@
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param horizon Coerced to integer by the body, with \code{as.integer}.
 #' @param lookback_multiples Defaults to \code{c(2, 3, 4, 5, 6, 7)}.
-#' @param block_sets Defaults to \code{NULL}.
+#' @param block_sets Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param ridge Passed to \code{.ngnest_nbeats_stack}. Defaults to \code{1e-08}.
 #' @return The value of \code{out}, as built in the body.
 #' @export

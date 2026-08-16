@@ -22,3 +22,8 @@ Centre t+1 sampled with P(x) proportional to min_c ||x - c||^2 using
 the searchsorted-on-cumsum draw, one LCG uniform per centre. Indices
 are 0-based.
 }
+\examples{
+set.seed(3)
+X <- rbind(matrix(rnorm(20, 0), 10, 2), matrix(rnorm(20, 4), 10, 2))
+morie_geron_kmeans_pp_seeding(X, k = 2, seed = 1)
+}

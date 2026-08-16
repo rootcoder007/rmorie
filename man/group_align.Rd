@@ -11,8 +11,8 @@ group_align(group1, group2, scoring, weights1 = NULL, weights2 = NULL, s_op = 2.
 \item{group1}{Iterated over elementwise, with \code{vapply}.}
 \item{group2}{Iterated over elementwise, with \code{vapply}.}
 \item{scoring}{A list; the body reads \code{$matrix} from it.}
-\item{weights1}{Defaults to \code{NULL}.}
-\item{weights2}{Defaults to \code{NULL}.}
+\item{weights1}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{weights2}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{s_op}{Passed to \code{.mafft_nw}. Defaults to \code{2.4}.}
 \item{anchors}{Optional; may be \code{NULL}. Iterated over elementwise, with \code{lapply}.}
 }

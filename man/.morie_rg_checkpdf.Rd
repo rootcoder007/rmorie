@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{mass}{Numeric; combined arithmetically in the body.}
-\item{tol}{Defaults to \code{1e-06}.}
+\item{tol}{Passed to \code{<=}. Defaults to \code{1e-06}.}
 }
 \description{
 A step of the rangayyan_ch3 implementation. Called by \code{DiffEnt}, \code{PdfKurt}, \code{PdfMean} and 3 others in the module. See the file header for the source the module follows.

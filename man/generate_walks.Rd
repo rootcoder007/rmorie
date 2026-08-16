@@ -8,13 +8,13 @@
 generate_walks(adj, num_walks = 10, length = 10, p = 1, q = 1, seed = 0, weights = NULL)
 }
 \arguments{
-\item{adj}{See Usage.}
+\item{adj}{Passed to \code{names}.}
 \item{num_walks}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.}
 \item{length}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.}
 \item{p}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 \item{q}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 \item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
-\item{weights}{Defaults to \code{NULL}.}
+\item{weights}{Passed to \code{walk}.}
 }
 \description{
 A step of the node2v_native implementation. No other function in the package calls it. See the file header for the source the module follows.

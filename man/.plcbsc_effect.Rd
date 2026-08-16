@@ -11,7 +11,7 @@
 \item{gaps}{A vector; its length is taken and its elements indexed.}
 \item{t0}{A count; the body uses it as \code{seq_len(...)}.}
 \item{statistic}{Compared against \code{"effect"}.}
-\item{pre_gaps}{Defaults to \code{NULL}.}
+\item{pre_gaps}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the plcbsc_native implementation. Called by \code{morie_plcbsc}. See the file header for the source the module follows.

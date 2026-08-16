@@ -14,8 +14,8 @@ optimise_branch(make_tree, seqs, pi = NULL, u = 1, lo = 1e-06, hi = 10, tol = 1e
 \item{u}{Passed to \code{morie_phylml}. Defaults to \code{1}.}
 \item{lo}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-06}.}
 \item{hi}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{10}.}
-\item{tol}{Defaults to \code{1e-10}.}
-\item{max_iter}{Defaults to \code{200}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-10}.}
+\item{max_iter}{Passed to \code{:}. Defaults to \code{200}.}
 }
 \description{
 A step of the phylml_native implementation. No other function in the package calls it. See the file header for the source the module follows.

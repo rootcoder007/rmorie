@@ -10,7 +10,7 @@ synthesize_noisy(X, fraction = 0.1, feature_values = NULL, seed = 0)
 \arguments{
 \item{X}{A vector; indexed elementwise.}
 \item{fraction}{The body requires: memb: fraction must lie in [0, 1]. Defaults to \code{0.1}.}
-\item{feature_values}{Defaults to \code{NULL}.}
+\item{feature_values}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \description{

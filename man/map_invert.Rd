@@ -9,7 +9,7 @@ map_invert(model, y, known, candidates, err, priors, sensitive = 0L)
 }
 \arguments{
 \item{model}{Accepted by the signature and not used anywhere in the body.}
-\item{y}{See Usage.}
+\item{y}{Passed to \code{err}.}
 \item{known}{See Usage.}
 \item{candidates}{A vector; its length is taken.}
 \item{err}{Accepted by the signature and not used anywhere in the body.}

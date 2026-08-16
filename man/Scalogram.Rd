@@ -8,11 +8,11 @@
 Scalogram(x, fs = 1, scales = NULL, wavelet = "morlet", w0 = 5)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{fs}{Defaults to \code{1}.}
-\item{scales}{Defaults to \code{NULL}.}
-\item{wavelet}{Defaults to \code{"morlet"}.}
-\item{w0}{Defaults to \code{5}.}
+\item{x}{Passed to \code{Cwt}.}
+\item{fs}{Passed to \code{Cwt}. Defaults to \code{1}.}
+\item{scales}{Passed to \code{Cwt}.}
+\item{wavelet}{Passed to \code{Cwt}. Defaults to \code{"morlet"}.}
+\item{w0}{Passed to \code{Cwt}. Defaults to \code{5}.}
 }
 \description{
 A step of the rangayyan_tf implementation. Called by \code{CwtRidge}. See the file header for the source the module follows.

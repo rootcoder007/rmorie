@@ -12,7 +12,7 @@ morie_survrsf_best_split(X, times, events, features, min_deaths = 3, rule = "log
 \item{times}{A vector; its length is taken.}
 \item{events}{A vector; indexed elementwise.}
 \item{features}{See Usage.}
-\item{min_deaths}{Defaults to \code{3}.}
+\item{min_deaths}{Passed to \code{<}. Defaults to \code{3}.}
 \item{rule}{One of \code{"conserve"}, \code{"logrankrandom"}, \code{"logrankscore"}. Defaults to \code{"logrank"}.}
 \item{rng}{Optional; may be \code{NULL}. A list; the body reads \code{$randint} from it.}
 }

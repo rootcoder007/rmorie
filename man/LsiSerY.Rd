@@ -8,9 +8,9 @@
 LsiSerY(x, h1, h2)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{h1}{See Usage.}
-\item{h2}{See Usage.}
+\item{x}{Passed to \code{LsiSer}.}
+\item{h1}{Passed to \code{LsiSer}.}
+\item{h2}{Passed to \code{LsiSer}.}
 }
 \description{
 a second time -- the content of the equation is that the cascade IS a single filter, not that there are two ways to compute it.

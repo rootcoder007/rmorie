@@ -244,7 +244,7 @@ morie_alfrf2_ideal <- function(x, fixed, spacing = .alfrf2_ca_spacing,
 #' @param route The body requires: the denoiser route is prior or ideal.
 #' @param denoiser The body requires: the denoiser route is prior or ideal.
 #' @param x A matrix; passed to \code{nrow}.
-#' @param t See Usage.
+#' @param t Passed to \code{denoiser}.
 #' @param fixed Passed to \code{morie_alfrf2_ideal}.
 #' @param spacing Passed to \code{morie_alfrf2_ideal}.
 #' @param passes Passed to \code{morie_alfrf2_ideal}.

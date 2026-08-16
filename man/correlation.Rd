@@ -8,11 +8,11 @@
 correlation(group1, group2, weights1 = NULL, weights2 = NULL, seq_type = "aa", method = "fft")
 }
 \arguments{
-\item{group1}{See Usage.}
-\item{group2}{See Usage.}
-\item{weights1}{Defaults to \code{NULL}.}
-\item{weights2}{Defaults to \code{NULL}.}
-\item{seq_type}{Defaults to \code{"aa"}.}
+\item{group1}{Passed to \code{residue_vectors}.}
+\item{group2}{Passed to \code{residue_vectors}.}
+\item{weights1}{Passed to \code{residue_vectors}.}
+\item{weights2}{Passed to \code{residue_vectors}.}
+\item{seq_type}{Passed to \code{residue_vectors}. Defaults to \code{"aa"}.}
 \item{method}{One of \code{"direct"}, \code{"fft"}. Defaults to \code{"fft"}.}
 }
 \description{

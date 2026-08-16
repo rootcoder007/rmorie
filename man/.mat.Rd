@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{x}{A matrix; passed to \code{as.matrix}.}
-\item{name}{See Usage.}
+\item{name}{Passed to \code{stop}.}
 }
 \description{
 A step of the explor_native implementation. Called by \code{explor}. See the file header for the source the module follows.

@@ -12,7 +12,7 @@
 \item{candidates}{A matrix; indexed by row and column.}
 \item{exclude_idx}{A vector; indexed elementwise.}
 \item{target_idx}{Numeric; combined arithmetically in the body.}
-\item{exclude_window}{See Usage.}
+\item{exclude_window}{Passed to \code{<=}.}
 }
 \description{
 A step of the cnvlfc_native implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -8,7 +8,7 @@
 .causdidwd_with_intercept(rows)
 }
 \arguments{
-\item{rows}{See Usage.}
+\item{rows}{Passed to \code{cbind}.}
 }
 \description{
 A step of the causdidwd_native implementation. Called by \code{morie_two_way_fixed_effects}, \code{morie_two_way_mundlak}. See the file header for the source the module follows.

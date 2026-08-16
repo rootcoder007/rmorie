@@ -8,7 +8,7 @@
 term_weighting(X, how = "log_entropy")
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{Passed to \code{apply}.}
 \item{how}{One of \code{"raw"}, \code{"tfidf"}. Defaults to \code{"log_entropy"}.}
 }
 \description{

@@ -18,3 +18,8 @@ Part of the abundance_text_voting_native implementation; see the file header for
 The value of \code{seen}, as built in the body.
 }
 \keyword{internal}
+\examples{
+A <- matrix(FALSE, 3, 3)
+morie_is_backdoor_admissible(A, 2, 3, integer(0))
+.morie_descendants(A = A, start = A)
+}

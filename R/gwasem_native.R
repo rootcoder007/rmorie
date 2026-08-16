@@ -113,7 +113,7 @@ morie_gwasem_gower <- function(S) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param M See Usage.
+#' @param M Passed to \code{svd}.
 #' @return A list with \code{sign}, \code{logdet}.
 #' @export
 .gwasem_slogdet <- function(M) {
@@ -165,8 +165,8 @@ morie_gwasem_gower <- function(S) {
 #' @param evals Numeric; combined arithmetically in the body.
 #' @param evecs A matrix; passed to \code{t}.
 #' @param ml A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @param lo Defaults to \code{-10}.
-#' @param hi Defaults to \code{10}.
+#' @param lo Passed to \code{seq}. Defaults to \code{-10}.
+#' @param hi Passed to \code{seq}. Defaults to \code{10}.
 #' @param n_grid Numeric; combined arithmetically in the body. Defaults to \code{100L}.
 #' @param refine A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.
 #' @return A list with \code{delta}, \code{sigma_a2}, \code{sigma_e2}, \code{loglik}.

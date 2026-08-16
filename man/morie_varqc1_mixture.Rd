@@ -36,3 +36,10 @@ A list with the weights, means, Cholesky factors and the   log-likelihood trace.
     1-38.
 }
 \keyword{internal}
+\examples{
+FIELDS <- c("QD", "QUAL", "SOR", "FS", "MQ", "MQRankSum", "ReadPosRankSum")
+N <- 60L
+VCF <- matrix(0, N, 7)
+morie_varqc1(VCF, fields = FIELDS, mode = "snp")
+morie_varqc1_mixture(X = VCF)
+}

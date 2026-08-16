@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{X}{A matrix; passed to \code{nrow}.}
-\item{name}{See Usage.}
+\item{name}{Passed to \code{sprintf}.}
 }
 \description{
 A step of the svdd_native implementation. Called by \code{morie_svdd}. See the file header for the source the module follows.

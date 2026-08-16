@@ -10,7 +10,7 @@
 \arguments{
 \item{ar}{A vector; its length is taken and its elements indexed.}
 \item{ma}{A vector; its length is taken and its elements indexed.}
-\item{h}{See Usage.}
+\item{h}{Passed to \code{:}.}
 }
 \description{
 A step of the sarima_native implementation. Called by \code{forecast}. See the file header for the source the module follows.

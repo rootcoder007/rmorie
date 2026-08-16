@@ -22,3 +22,9 @@ Full attention with the structural biases added to the logits
 List with output, weights, method, note.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+spatial_bias(M, V)
+graphormer_attention(H = M, WQ = M, WK = M, WV = M, bias = M)
+}

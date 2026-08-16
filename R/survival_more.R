@@ -95,7 +95,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param ut See Usage.
+#' @param ut Passed to \code{<=}.
 #' @param H A vector; indexed elementwise.
 #' @param t Iterated over elementwise, with \code{vapply}.
 #' @return A vector, from \code{vapply}.

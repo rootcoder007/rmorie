@@ -12,11 +12,11 @@ pate(teacher_predicts, queries, gamma = 0.05, delta = 1e-05, n_classes = NULL, s
 \item{queries}{Coerced to list by the body, with \code{as.list}.}
 \item{gamma}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}
 \item{delta}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-05}.}
-\item{n_classes}{Defaults to \code{NULL}.}
-\item{student_train_fn}{Defaults to \code{NULL}.}
+\item{n_classes}{Passed to \code{teacher_votes}.}
+\item{student_train_fn}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{student_features}{Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.}
 \item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
-\item{lambdas}{Defaults to \code{NULL}.}
+\item{lambdas}{Passed to \code{moments_accountant}.}
 }
 \description{
 A step of the pate_native implementation. No other function in the package calls it. See the file header for the source the module follows.

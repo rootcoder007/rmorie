@@ -8,8 +8,8 @@
 .probe(text, pos, ctx, fn)
 }
 \arguments{
-\item{text}{See Usage.}
-\item{pos}{See Usage.}
+\item{text}{Passed to \code{fn}.}
+\item{pos}{Passed to \code{fn}.}
 \item{ctx}{A list; the body reads \code{$steps} from it.}
 \item{fn}{Accepted by the signature and not used anywhere in the body.}
 }

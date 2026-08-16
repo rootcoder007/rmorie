@@ -43,8 +43,8 @@ node2v_check_pq <- function(p, q) {
 #' source it follows.
 #'
 #' @param d_tx Coerced to integer by the body, with \code{as.integer}.
-#' @param p See Usage.
-#' @param q See Usage.
+#' @param p Passed to \code{node2v_check_pq}.
+#' @param q Passed to \code{node2v_check_pq}.
 #' @return Nothing; this branch always raises.
 #' @export
 alpha_pq <- function(d_tx, p, q) {
@@ -64,7 +64,7 @@ alpha_pq <- function(d_tx, p, q) {
 #' adjacency dict, restricted to 0/1/2.
 #'
 #' @param adj A vector; indexed elementwise.
-#' @param t See Usage.
+#' @param t Passed to \code{identical}.
 #' @param x Coerced to character by the body, with \code{as.character}.
 #' @return A numeric value.
 #' @export
@@ -84,9 +84,9 @@ alpha_pq <- function(d_tx, p, q) {
 #'
 #' @param adj A vector; indexed elementwise.
 #' @param t Optional; may be \code{NULL}. Passed to \code{.node2v_dist}.
-#' @param v See Usage.
-#' @param p See Usage.
-#' @param q See Usage.
+#' @param v Passed to \code{stop}.
+#' @param p Passed to \code{alpha_pq}.
+#' @param q Passed to \code{alpha_pq}.
 #' @param weights Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return A list with \code{nodes}, \code{probabilities}, \code{unnormalized}, \code{Z}.
 #' @export
@@ -128,13 +128,13 @@ transition_probabilities <- function(adj, t, v, p, q, weights = NULL) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param adj See Usage.
+#' @param adj Passed to \code{transition_probabilities}.
 #' @param start Coerced to character by the body, with \code{as.character}.
 #' @param length Coerced to integer by the body, with \code{as.integer}.
-#' @param p Defaults to \code{1}.
-#' @param q Defaults to \code{1}.
+#' @param p Passed to \code{transition_probabilities}. Defaults to \code{1}.
+#' @param q Passed to \code{transition_probabilities}. Defaults to \code{1}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
-#' @param weights Defaults to \code{NULL}.
+#' @param weights Passed to \code{transition_probabilities}.
 #' @return The value of \code{path}, as built in the body.
 #' @export
 walk <- function(adj, start, length, p = 1.0, q = 1.0, seed = 0,
@@ -170,13 +170,13 @@ walk <- function(adj, start, length, p = 1.0, q = 1.0, seed = 0,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param adj See Usage.
+#' @param adj Passed to \code{names}.
 #' @param num_walks Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
 #' @param length Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
 #' @param p Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param q Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
-#' @param weights Defaults to \code{NULL}.
+#' @param weights Passed to \code{walk}.
 #' @return A list with \code{estimate}, \code{walks}, \code{p}, \code{q}, \code{n_walks}, \code{length}, \code{method}, \code{note}.
 #' @export
 generate_walks <- function(adj, num_walks = 10, length = 10, p = 1.0,

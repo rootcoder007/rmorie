@@ -19,7 +19,7 @@
 \item{summary}{Passed to \code{.abcgp.synthetic_log_likelihood}.}
 \item{seed}{Passed to \code{.ghc_rng}.}
 \item{adaptive}{A flag; the body branches on it.}
-\item{xi}{See Usage.}
+\item{xi}{Passed to \code{<}.}
 \item{delta_s}{Coerced to integer by the body, with \code{as.integer}.}
 \item{n_alpha}{Coerced to integer by the body, with \code{as.integer}.}
 \item{max_sim}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}

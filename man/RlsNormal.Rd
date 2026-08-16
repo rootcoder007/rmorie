@@ -8,8 +8,8 @@
 RlsNormal(phi, theta)
 }
 \arguments{
-\item{phi}{See Usage.}
-\item{theta}{See Usage.}
+\item{phi}{Passed to \code{WienerHopf}.}
+\item{theta}{Passed to \code{WienerHopf}.}
 }
 \description{
 exponentially weighted correlations.  Solving it outright each sample is what the matrix inversion lemma exists to avoid.

@@ -128,7 +128,7 @@
 #' @param y A vector; its length is taken.
 #' @param X A matrix; passed to \code{ncol}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{25}.
-#' @param tol Defaults to \code{1e-08}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
 #' @return A list with \code{coef}, \code{fitted}.
 #' @export
 .mfovsm_logreg_fit <- function(y, X, max_iter = 25, tol = 1e-8) {
@@ -166,8 +166,8 @@
 #' source it follows.
 #'
 #' @param ak A vector; its length is taken.
-#' @param den See Usage.
-#' @param num See Usage.
+#' @param den Optional; may be \code{NULL}. Passed to \code{dens_of}.
+#' @param num Optional; may be \code{NULL}. Passed to \code{dens_of}.
 #' @param kind Accepted by the signature and not used anywhere in the body. Defaults to \code{"binary"}.
 #' @param stabilize A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{weights}, \code{fitted}.

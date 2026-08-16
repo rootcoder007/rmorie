@@ -11,7 +11,7 @@ morie_fda_basis_deriv(t, n_basis, p = 1L, kind = "fourier", period = NULL)
 \item{t}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{n_basis}{Coerced to integer by the body, with \code{as.integer}.}
 \item{p}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1L}.}
-\item{kind}{Defaults to \code{"fourier"}.}
+\item{kind}{Passed to \code{identical}. Defaults to \code{"fourier"}.}
 \item{period}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{

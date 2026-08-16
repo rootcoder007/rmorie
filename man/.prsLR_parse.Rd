@@ -11,7 +11,7 @@
 \item{g}{Passed to \code{.prsLR_build_tables}.}
 \item{tokens}{Coerced to character by the body, with \code{as.character}.}
 \item{method}{Passed to \code{.prsLR_build_tables}.}
-\item{tables}{See Usage.}
+\item{tables}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the prsLR_native implementation. Called by \code{morie_parse}, \code{morie_prsLR}. See the file header for the source the module follows.

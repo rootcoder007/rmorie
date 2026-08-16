@@ -9,7 +9,7 @@ Qpois(p, lambda)
 }
 \arguments{
 \item{p}{Iterated over elementwise, with \code{vapply}.}
-\item{lambda}{See Usage.}
+\item{lambda}{Passed to \code{Ppois}.}
 }
 \description{
 A step of the dist_native implementation. No other function in the package calls it. See the file header for the source the module follows.

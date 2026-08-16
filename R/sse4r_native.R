@@ -215,7 +215,7 @@
 #' @param sequence Passed to \code{.sse4r_personalise}.
 #' @param user_embedding Passed to \code{.sse4r_personalise}.
 #' @param item_table A matrix; passed to \code{as.matrix}.
-#' @param attend Defaults to \code{NULL}.
+#' @param attend Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param top_k Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
 #' @return A list with \code{estimate}, \code{top_k}, \code{scores}, \code{context}, \code{method}, \code{note}.
 #' @export

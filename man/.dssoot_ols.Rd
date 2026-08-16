@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{y}{Passed to \code{.s03lstsq}.}
-\item{x1}{See Usage.}
-\item{x2}{Defaults to \code{NULL}.}
+\item{x1}{Passed to \code{cbind}.}
+\item{x2}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the Dssoot implementation. Called by \code{Dssoot}. See the file header for the source the module follows.

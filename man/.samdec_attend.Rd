@@ -19,3 +19,9 @@ A step of the samdec_native implementation. Called by \code{two_way_block}. See 
 A list with \code{out}, \code{W}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+S <- c("a", "b", "c")
+dynamic_mask_head(S, M)
+.samdec_attend(Q = M, K = M, V = M)
+}

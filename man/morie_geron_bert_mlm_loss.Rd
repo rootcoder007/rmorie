@@ -22,3 +22,7 @@ List with \code{loss}, \code{mean_loss}, \code{perplexity},
 Cross-entropy on the masked positions only, the selected rows handed
 to \code{\link[=morie_geron_gpt_autoregressive_loss]{morie_geron_gpt_autoregressive_loss()}}.
 }
+\examples{
+lg <- matrix(c(2, 0.1, 0.1, 0.1, 2, 0.1), 2, 3, byrow = TRUE)
+morie_geron_bert_mlm_loss(lg, targets = c(1L, 2L), mask = c(1, 1))
+}

@@ -8,7 +8,7 @@
 .metsem_index(edges, k)
 }
 \arguments{
-\item{edges}{See Usage.}
+\item{edges}{Passed to \code{names}.}
 \item{k}{Numeric; combined arithmetically in the body.}
 }
 \description{

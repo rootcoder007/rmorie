@@ -99,9 +99,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param counts See Usage.
-#' @param threshold Defaults to \code{3}.
-#' @param sigma_floor Defaults to \code{1}.
+#' @param counts Passed to \code{surepi_ears_detect}.
+#' @param threshold Passed to \code{surepi_ears_detect}. Defaults to \code{3}.
+#' @param sigma_floor Passed to \code{surepi_ears_detect}. Defaults to \code{1}.
 #' @return The value of \code{surepi_ears_detect}.
 #' @export
 surepi_c1_mild <- function(counts, threshold = 3.0, sigma_floor = 1.0) {
@@ -115,9 +115,9 @@ surepi_c1_mild <- function(counts, threshold = 3.0, sigma_floor = 1.0) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param counts See Usage.
-#' @param threshold Defaults to \code{3}.
-#' @param sigma_floor Defaults to \code{1}.
+#' @param counts Passed to \code{surepi_ears_detect}.
+#' @param threshold Passed to \code{surepi_ears_detect}. Defaults to \code{3}.
+#' @param sigma_floor Passed to \code{surepi_ears_detect}. Defaults to \code{1}.
 #' @return The value of \code{surepi_ears_detect}.
 #' @export
 surepi_c2_medium <- function(counts, threshold = 3.0, sigma_floor = 1.0) {
@@ -131,9 +131,9 @@ surepi_c2_medium <- function(counts, threshold = 3.0, sigma_floor = 1.0) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param counts See Usage.
-#' @param threshold Defaults to \code{2}.
-#' @param sigma_floor Defaults to \code{1}.
+#' @param counts Passed to \code{surepi_ears_detect}.
+#' @param threshold Passed to \code{surepi_ears_detect}. Defaults to \code{2}.
+#' @param sigma_floor Passed to \code{surepi_ears_detect}. Defaults to \code{1}.
 #' @return The value of \code{surepi_ears_detect}.
 #' @export
 surepi_c3_ultra <- function(counts, threshold = 2.0, sigma_floor = 1.0) {

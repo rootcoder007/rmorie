@@ -223,8 +223,8 @@ WienerHopf <- function(phi, theta) {
 #' computed here by solving the system -- the inverse is never formed,
 #' which is both faster and better conditioned.
 #'
-#' @param phi See Usage.
-#' @param theta See Usage.
+#' @param phi Passed to \code{WienerHopf}.
+#' @param theta Passed to \code{WienerHopf}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
 WienerOpt <- function(phi, theta) {
@@ -244,7 +244,7 @@ WienerOpt <- function(phi, theta) {
 #' clamped: it means the supplied variance and covariances do not come
 #' from the same process.
 #'
-#' @param phi See Usage.
+#' @param phi Passed to \code{WienerHopf}.
 #' @param theta Coerced to numeric by the body, with \code{as.numeric}.
 #' @param var_d Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{j_min}, \code{w_o}, \code{var_d}, \code{explained}, \code{consistent}, \code{fraction_explained}, \code{method}.
@@ -450,9 +450,9 @@ Whopf <- function(x, d, order) {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param desired The body requires: give either a desired signal (time-domain route,.
-#' @param order Defaults to \code{8}.
-#' @param sd Defaults to \code{NULL}.
-#' @param seta Defaults to \code{NULL}.
+#' @param order Passed to \code{Whopf}. Defaults to \code{8}.
+#' @param sd Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param seta Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{y}, \code{W}, \code{route}, \code{fs}, \code{n}, \code{method}.
 #' @export
@@ -808,7 +808,7 @@ LmsZhang <- function(mu, order, r, alpha = 0.02, power_prev = NULL) {
 #' @param order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.
 #' @param mu Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.
 #' @param variable A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @param alpha Defaults to \code{0.02}.
+#' @param alpha Passed to \code{LmsZhang}. Defaults to \code{0.02}.
 #' @return A list with \code{e}, \code{output}, \code{y}, \code{final_weights}, \code{order}, \code{mu}, \code{variable_step}, \code{step_history}, \code{stable_bound}, \code{within_bound}, \code{input_power}, \code{output_power}, \code{power_reduction}, \code{converges_in_the_mean_only}, \code{method}.
 #' @export
 LmsFilt <- function(primary, reference, order = 8, mu = 0.01,
@@ -904,8 +904,8 @@ RlsObj <- function(errors, lam) {
 #' exponentially weighted correlations.  Solving it outright each sample
 #' is what the matrix inversion lemma exists to avoid.
 #'
-#' @param phi See Usage.
-#' @param theta See Usage.
+#' @param phi Passed to \code{WienerHopf}.
+#' @param theta Passed to \code{WienerHopf}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
 RlsNormal <- function(phi, theta) {
@@ -1190,7 +1190,7 @@ RlsLattice <- function(x, order = 4, lam = 0.98, delta = 0.01) {
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param reference Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.
-#' @param lam Defaults to \code{0.98}.
+#' @param lam Passed to \code{RlsFilt}. Defaults to \code{0.98}.
 #' @param settle Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param threshold Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{3}.
 #' @param window Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
@@ -1334,7 +1334,7 @@ Kalman <- function(z, F, H, Q, R, x0 = NULL, P0 = NULL) {
 #' @param Q A matrix; passed to \code{as.matrix}.
 #' @param R A matrix; passed to \code{as.matrix}.
 #' @param maxiter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000L}.
-#' @param tol Defaults to \code{1e-12}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-12}.
 #' @return A list with \code{P}, \code{K}, \code{iterations}, \code{change}, \code{converged}, \code{n}, \code{steady_state_is_the_wiener_solution}, \code{method}.
 #' @export
 Riccati <- function(F, H, Q, R, maxiter = 1000L, tol = 1e-12) {
@@ -1662,13 +1662,13 @@ PsdAcf <- function(x) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param primary See Usage.
+#' @param primary Passed to \code{LmsFilt}.
 #' @param reference Coerced to numeric by the body, with \code{as.numeric}.
-#' @param order Defaults to \code{8}.
-#' @param mu Defaults to \code{0.01}.
+#' @param order Passed to \code{LmsFilt}. Defaults to \code{8}.
+#' @param mu Passed to \code{LmsFilt}. Defaults to \code{0.01}.
 #' @param method One of \code{"lms"}, \code{"rls"}. Defaults to \code{"lms"}.
-#' @param lam Defaults to \code{0.98}.
-#' @param delta Defaults to \code{1}.
+#' @param lam Passed to \code{RlsFilt}. Defaults to \code{0.98}.
+#' @param delta Passed to \code{RlsFilt}. Defaults to \code{1}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
 Anc <- function(primary, reference, order = 8, mu = 0.01,
@@ -1714,8 +1714,8 @@ Anc <- function(primary, reference, order = 8, mu = 0.01,
 #' @param abdominal Coerced to numeric by the body, with \code{as.numeric}.
 #' @param chest Coerced to numeric by the body, with \code{as.numeric}.
 #' @param order Carried through into a list the body builds. Defaults to \code{32}.
-#' @param mu Defaults to \code{0.005}.
-#' @param method Defaults to \code{"lms"}.
+#' @param mu Passed to \code{Anc}. Defaults to \code{0.005}.
+#' @param method Passed to \code{Anc}. Defaults to \code{"lms"}.
 #' @return A list with \code{fetal}, \code{maternal_estimate}, \code{order}, \code{input_power}, \code{output_power}, \code{suppression_db}, \code{reference_leakage}, \code{single_reference}, \code{widrow_used_multiple_references}, \code{method}.
 #' @export
 FetalEcg <- function(abdominal, chest, order = 32, mu = 0.005,

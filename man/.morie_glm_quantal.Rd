@@ -13,7 +13,7 @@
 \item{n}{Numeric; passed to \code{sum}.}
 \item{link}{One of \code{"logit"}, \code{"probit"}.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100L}.}
-\item{tol}{Defaults to \code{1e-11}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-11}.}
 }
 \description{
 Part of the median_frames_dose_native implementation; see the file header for the source it follows.

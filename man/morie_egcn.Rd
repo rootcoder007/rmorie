@@ -11,11 +11,11 @@ morie_egcn(H, X, layers, phi_e, phi_x, phi_h, A = NULL, C = NULL)
 \item{H}{Carried through into a list the body builds.}
 \item{X}{Carried through into a list the body builds.}
 \item{layers}{Coerced to integer by the body, with \code{as.integer}.}
-\item{phi_e}{See Usage.}
-\item{phi_x}{See Usage.}
-\item{phi_h}{See Usage.}
-\item{A}{Defaults to \code{NULL}.}
-\item{C}{Defaults to \code{NULL}.}
+\item{phi_e}{Passed to \code{run_egnn}.}
+\item{phi_x}{Passed to \code{run_egnn}.}
+\item{phi_h}{Passed to \code{run_egnn}.}
+\item{A}{Passed to \code{run_egnn}.}
+\item{C}{Passed to \code{run_egnn}.}
 }
 \description{
 A step of the egcn_native implementation. No other function in the package calls it. See the file header for the source the module follows.

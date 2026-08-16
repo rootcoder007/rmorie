@@ -57,7 +57,7 @@
 #' @param W A vector; indexed elementwise.
 #' @param X A matrix; indexed by row and column.
 #' @param n_folds Passed to \code{.ipwgrf_folds}. Defaults to \code{5}.
-#' @param n_trees Defaults to \code{120}.
+#' @param n_trees Passed to \code{grow_forest}. Defaults to \code{120}.
 #' @param min_leaf Numeric; combined arithmetically in the body. Defaults to \code{5}.
 #' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A list with \code{mu1}, \code{mu0}, \code{e}.

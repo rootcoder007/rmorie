@@ -155,7 +155,7 @@ morie_vqgdec_adaptive_weight <- function(grad_rec, grad_gan,
 #'
 #' @param image Passed to \code{.vqgdec_to_matrix}.
 #' @param patch Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.
-#' @param scorer Defaults to \code{NULL}.
+#' @param scorer Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{scores}, \code{n_patches}, \code{mean}, \code{note}.
 #' @export
 morie_vqgdec_patch_discriminator <- function(image, patch = 4,
@@ -290,7 +290,7 @@ morie_vqgdec_sliding_windows <- function(height, width, window,
 #'
 #' @param indices Passed to \code{morie_vqgdec_decode_indices}.
 #' @param codebook Passed to \code{morie_vqgdec_decode_indices}.
-#' @param generator Defaults to \code{NULL}.
+#' @param generator Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param grad_rec Optional; may be \code{NULL}. Passed to \code{morie_vqgdec_adaptive_weight}.
 #' @param grad_gan Optional; may be \code{NULL}. Passed to \code{morie_vqgdec_adaptive_weight}.
 #' @return A list with \code{estimate}, \code{image}, \code{codes}, \code{n_tokens}, \code{adaptive_lambda}, \code{method}, \code{note}.

@@ -12,8 +12,8 @@
 \item{W}{A vector; indexed elementwise.}
 \item{X}{A matrix; indexed by row and column.}
 \item{n_folds}{A count; the body uses it as \code{seq_len(...)}.}
-\item{n_trees}{See Usage.}
-\item{min_leaf}{See Usage.}
+\item{n_trees}{Passed to \code{grow_forest}.}
+\item{min_leaf}{Passed to \code{grow_forest}.}
 \item{seed}{Numeric; combined arithmetically in the body.}
 }
 \description{

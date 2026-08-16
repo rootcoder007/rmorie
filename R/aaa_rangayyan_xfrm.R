@@ -206,10 +206,10 @@ Ctft <- function(x, t = NULL, omega = NULL, f = NULL, dt = NULL) {
 #'
 #' two can never drift apart.
 #'
-#' @param x See Usage.
-#' @param f See Usage.
-#' @param t Defaults to \code{NULL}.
-#' @param dt Defaults to \code{NULL}.
+#' @param x Passed to \code{Ctft}.
+#' @param f Passed to \code{Ctft}.
+#' @param t Passed to \code{Ctft}.
+#' @param dt Passed to \code{Ctft}.
 #' @return The value of \code{Ctft}.
 #' @export
 CtftF <- function(x, f, t = NULL, dt = NULL) {
@@ -224,11 +224,11 @@ CtftF <- function(x, f, t = NULL, dt = NULL) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param t Defaults to \code{NULL}.
-#' @param omega Defaults to \code{NULL}.
-#' @param f Defaults to \code{NULL}.
-#' @param dt Defaults to \code{NULL}.
+#' @param x Passed to \code{Ctft}.
+#' @param t Passed to \code{Ctft}.
+#' @param omega Passed to \code{Ctft}.
+#' @param f Passed to \code{Ctft}.
+#' @param dt Passed to \code{Ctft}.
 #' @return The value of \code{Ctft}.
 #' @export
 Fourier <- function(x, t = NULL, omega = NULL, f = NULL, dt = NULL) {
@@ -384,7 +384,7 @@ Dft <- function(x) {
 #'
 #' the folding frequency fs/2 are the two real-valued bins.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{Dft}.
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
@@ -788,9 +788,9 @@ EvenOdd <- function(x, n = NULL) {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
-#' @param omega See Usage.
+#' @param omega Passed to \code{Ctft}.
 #' @param t The body requires: eq. (4.59) needs x(t) != 0 and p(t) != 0 for all t.
-#' @param dt Defaults to \code{NULL}.
+#' @param dt Passed to \code{Ctft}.
 #' @return A list with \code{y}, \code{Yl}, \code{Xl}, \code{Pl}, \code{max_difference}, \code{additive}, \code{method}.
 #' @export
 LogFT <- function(x, p, omega, t = NULL, dt = NULL) {

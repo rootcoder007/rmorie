@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{v}{A matrix; passed to \code{nrow}.}
-\item{name}{See Usage.}
-\item{size}{See Usage.}
+\item{name}{Passed to \code{sprintf}.}
+\item{size}{Passed to \code{!=}.}
 }
 \description{
 A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch4_vera_forward}. See the file header for the source the module follows.

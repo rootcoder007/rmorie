@@ -14,7 +14,7 @@ trclrn_rule_value(Y, A, X, rule, propensity = NULL, method = "ipw", outcome_mode
 \item{rule}{Accepted by the signature and not used anywhere in the body.}
 \item{propensity}{Passed to \code{.trclrn_check}.}
 \item{method}{Compared against \code{"ipw"}. Defaults to \code{"ipw"}.}
-\item{outcome_model}{Defaults to \code{NULL}.}
+\item{outcome_model}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{min_propensity}{Passed to \code{.trclrn_check}. Defaults to \code{0.01}.}
 }
 \description{

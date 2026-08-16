@@ -2336,7 +2336,7 @@ morie_geron_credit_assignment <- function(trajectory, gamma = 0.95,
 #' @param X A matrix; indexed by row and column.
 #' @param y Passed to \code{morie_geron_cart_split_cost}.
 #' @param criterion Passed to \code{morie_geron_cart_split_cost}.
-#' @param min_samples_leaf See Usage.
+#' @param min_samples_leaf Passed to \code{<}.
 #' @return The value of \code{best}, as built in the body.
 #' @export
 .morie_gr2_best_split <- function(X, y, criterion, min_samples_leaf) {

@@ -9,7 +9,7 @@ decay_diagnostics(weights, alpha)
 }
 \arguments{
 \item{weights}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{alpha}{See Usage.}
+\item{alpha}{Passed to \code{truncation_error}.}
 }
 \description{
 A step of the slowdp_native implementation. No other function in the package calls it. See the file header for the source the module follows.

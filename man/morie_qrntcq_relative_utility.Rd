@@ -11,7 +11,7 @@ morie_qrntcq_relative_utility(t.R.a, t.R.b, t.Q = 3, generation.time = NULL, inf
 \item{t.R.a}{Numeric; combined arithmetically in the body.}
 \item{t.R.b}{Numeric; combined arithmetically in the body.}
 \item{t.Q}{Numeric; combined arithmetically in the body. Defaults to \code{3}.}
-\item{generation.time}{Defaults to \code{NULL}.}
+\item{generation.time}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{infected.fraction}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{

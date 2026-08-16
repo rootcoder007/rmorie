@@ -8,7 +8,7 @@
 Dbinom(x, size, prob, log = FALSE)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{round}.}
 \item{size}{Numeric; combined arithmetically in the body.}
 \item{prob}{Numeric; passed to \code{log}.}
 \item{log}{A flag; the body branches on it. Defaults to \code{FALSE}.}

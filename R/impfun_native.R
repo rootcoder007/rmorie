@@ -118,7 +118,7 @@
 #' source it follows.
 #'
 #' @param panels A vector; its length is taken and its elements indexed.
-#' @param study_snps See Usage.
+#' @param study_snps Passed to \code{unique}.
 #' @return A list with \code{scaffold}, \code{targets}, \code{union}, \code{intersection}, \code{kept_by_union}, \code{kept_by_intersection}, \code{gain}, \code{note}.
 #' @export
 merge_panels <- function(panels, study_snps) {

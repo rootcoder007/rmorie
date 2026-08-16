@@ -27,7 +27,7 @@
 #' source it follows.
 #'
 #' @param x A matrix; passed to \code{as.matrix}.
-#' @param name See Usage.
+#' @param name Passed to \code{stop}.
 #' @return The value of \code{lapply}.
 #' @export
 .mat <- function(x, name) {
@@ -293,18 +293,18 @@ icm <- explor
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param states See Usage.
-#' @param actions See Usage.
-#' @param next_states See Usage.
-#' @param n_actions Defaults to \code{NULL}.
-#' @param n_features Defaults to \code{8}.
-#' @param eta Defaults to \code{1}.
-#' @param beta Defaults to \code{0.2}.
-#' @param lr Defaults to \code{0.05}.
-#' @param epochs Defaults to \code{1}.
-#' @param features Defaults to \code{"inverse"}.
-#' @param discrete Defaults to \code{TRUE}.
-#' @param seed Defaults to \code{0}.
+#' @param states Passed to \code{explor}.
+#' @param actions Passed to \code{explor}.
+#' @param next_states Passed to \code{explor}.
+#' @param n_actions Passed to \code{explor}.
+#' @param n_features Passed to \code{explor}. Defaults to \code{8}.
+#' @param eta Passed to \code{explor}. Defaults to \code{1}.
+#' @param beta Passed to \code{explor}. Defaults to \code{0.2}.
+#' @param lr Passed to \code{explor}. Defaults to \code{0.05}.
+#' @param epochs Passed to \code{explor}. Defaults to \code{1}.
+#' @param features Passed to \code{explor}. Defaults to \code{"inverse"}.
+#' @param discrete Passed to \code{explor}. Defaults to \code{TRUE}.
+#' @param seed Passed to \code{explor}. Defaults to \code{0}.
 #' @return The value of \code{explor}.
 #' @export
 morie_explor <- function(states, actions, next_states, n_actions = NULL,

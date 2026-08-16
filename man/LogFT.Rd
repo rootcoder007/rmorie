@@ -10,9 +10,9 @@ LogFT(x, p, omega, t = NULL, dt = NULL)
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{p}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{omega}{See Usage.}
+\item{omega}{Passed to \code{Ctft}.}
 \item{t}{The body requires: eq. (4.59) needs x(t) != 0 and p(t) != 0 for all t.}
-\item{dt}{Defaults to \code{NULL}.}
+\item{dt}{Passed to \code{Ctft}.}
 }
 \description{
 Y_l(omega) = X_l(omega) + P_l(omega).  Eq (4.59) needs both factors nonzero, so zeros are rejected rather than yielding -Inf.

@@ -482,7 +482,7 @@
 #' @param lam Passed to \code{.scintg_correct_batch}. Defaults to \code{1}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
 #' @param cluster_iter Passed to \code{.scintg_maximum_diversity_clustering}. Defaults to \code{25}.
-#' @param tol Defaults to \code{1e-04}.
+#' @param tol Passed to \code{<=}. Defaults to \code{1e-04}.
 #' @param seed Passed to \code{.scintg_maximum_diversity_clustering}. Defaults to \code{0}.
 #' @param reference Passed to \code{.scintg_correct_batch}.
 #' @param diversity Passed to \code{.scintg_maximum_diversity_clustering}. Defaults to \code{"penalise"}.

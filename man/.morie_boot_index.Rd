@@ -10,7 +10,7 @@
 \arguments{
 \item{n}{A count; the body uses it as \code{seq_len(...)}.}
 \item{R}{A count; the body uses it as \code{rep(...)}.}
-\item{strata}{Defaults to \code{NULL}.}
+\item{strata}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the boot_native implementation. Called by \code{morie_boot}. See the file header for the source the module follows.

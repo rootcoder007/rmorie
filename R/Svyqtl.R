@@ -55,8 +55,8 @@ Svyqtl <- function(y, weights = NULL, quantile = 0.5) {
 #' it follows.
 #'
 #' @param xs A vector; its length is taken and its elements indexed.
-#' @param cum See Usage.
-#' @param p See Usage.
+#' @param cum Passed to \code{>=}.
+#' @param p Passed to \code{>=}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .svyqtl_inv <- function(xs, cum, p) {

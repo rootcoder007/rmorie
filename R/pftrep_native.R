@@ -65,11 +65,11 @@ particle_filter_simple <- function(y, n_particles, init, step, loglik,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Passed to \code{particle_filter_simple}.
 #' @param n_particles Coerced to integer by the body, with \code{as.integer}.
-#' @param init See Usage.
-#' @param step See Usage.
-#' @param loglik See Usage.
+#' @param init Passed to \code{particle_filter_simple}.
+#' @param step Passed to \code{particle_filter_simple}.
+#' @param loglik Passed to \code{particle_filter_simple}.
 #' @param n_reps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10L}.
 #' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0L}.
 #' @return A list with \code{estimate}, \code{loglik}, \code{logmeanexp}, \code{mean_loglik}, \code{jensen_gap}, \code{se}, \code{replicates}, \code{n_reps}, \code{n_particles}, \code{min_ess}, \code{mean_min_ess}, \code{method}.
@@ -101,7 +101,7 @@ replicated_pfilter <- function(y, n_particles, init, step, loglik,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Passed to \code{replicated_pfilter}.
 #' @param grid Coerced to numeric by the body, with \code{as.numeric}.
 #' @param make_model Accepted by the signature and not used anywhere in the body.
 #' @param n_particles Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.

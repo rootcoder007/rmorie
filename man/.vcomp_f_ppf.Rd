@@ -8,7 +8,7 @@
 .vcomp_f_ppf(p, d1, d2, iters = 300)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Passed to \code{<=}.}
 \item{d1}{Passed to \code{.vcomp_f_cdf}.}
 \item{d2}{Passed to \code{.vcomp_f_cdf}.}
 \item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{300}.}

@@ -20,3 +20,9 @@ List with \code{inertia}, \code{per_cluster_inertia}, \code{cluster_sizes},
 \description{
 k-means inertia (Geron Ch 9, morie.fn grkmo)
 }
+\examples{
+set.seed(3)
+X <- rbind(matrix(rnorm(20, 0), 10, 2), matrix(rnorm(20, 4), 10, 2))
+morie_geron_kmeans_objective(X, centroids = rbind(c(0, 0), c(4, 4)),
+                             labels = rep(c(0L, 1L), each = 10))
+}

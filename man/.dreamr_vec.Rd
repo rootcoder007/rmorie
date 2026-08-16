@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{name}{See Usage.}
+\item{name}{Passed to \code{sprintf}.}
 }
 \description{
 A step of the dreamr_native implementation. Called by \code{morie_dreamr_lambda_return}, \code{morie_dreamr_value_update}. See the file header for the source the module follows.

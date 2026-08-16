@@ -8,7 +8,7 @@
 .mehtad_vec(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Passed to \code{unlist}.}
 }
 \description{
 A step of the mehtad_native implementation. Called by \code{mehtad_residuals}. See the file header for the source the module follows.

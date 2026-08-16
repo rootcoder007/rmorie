@@ -11,7 +11,7 @@ smoothed_parameter(X, x0, h, kernel = "epanechnikov")
 \item{X}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{x0}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{h}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{kernel}{Defaults to \code{"epanechnikov"}.}
+\item{kernel}{Passed to \code{kernel_smooth}. Defaults to \code{"epanechnikov"}.}
 }
 \description{
 A step of the tlcvnp_native implementation. Called by \code{cv_tmle_smoothed}, \code{select_bandwidth}. See the file header for the source the module follows.

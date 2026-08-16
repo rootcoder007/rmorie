@@ -33,17 +33,17 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param lambdas Defaults to \code{NULL}.
-#' @param V Defaults to \code{5L}.
-#' @param seed Defaults to \code{0L}.
-#' @param lam Defaults to \code{1}.
-#' @param iters Defaults to \code{2000L}.
-#' @param step Defaults to \code{0.05}.
-#' @param max_order Defaults to \code{2L}.
-#' @param knots Defaults to \code{NULL}.
-#' @param intercept Defaults to \code{TRUE}.
+#' @param X Passed to \code{cv_select_lambda}.
+#' @param y Passed to \code{cv_select_lambda}.
+#' @param lambdas Passed to \code{cv_select_lambda}.
+#' @param V Passed to \code{cv_select_lambda}. Defaults to \code{5L}.
+#' @param seed Passed to \code{cv_select_lambda}. Defaults to \code{0L}.
+#' @param lam Passed to \code{hal_fit}. Defaults to \code{1}.
+#' @param iters Passed to \code{cv_select_lambda}. Defaults to \code{2000L}.
+#' @param step Passed to \code{cv_select_lambda}. Defaults to \code{0.05}.
+#' @param max_order Passed to \code{cv_select_lambda}. Defaults to \code{2L}.
+#' @param knots Passed to \code{hal_fit}.
+#' @param intercept Passed to \code{cv_select_lambda}. Defaults to \code{TRUE}.
 #' @param mode One of \code{"cv"}, \code{"norm"}, \code{"predict"}.
 #' @return The value of \code{hal_fit}.
 #' @export
@@ -141,13 +141,13 @@ variation_norm <- function(beta) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X Passed to \code{indicator_basis}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param lam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000L}.
 #' @param step Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
 #' @param max_order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.
-#' @param knots Defaults to \code{NULL}.
+#' @param knots Passed to \code{indicator_basis}.
 #' @param intercept A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{beta}, \code{intercept}, \code{columns}, \code{n_basis}, \code{variation_norm}, \code{lambda}, \code{mse}, \code{mse_history}, \code{max_order}, \code{method}, \code{note}.
 #' @export

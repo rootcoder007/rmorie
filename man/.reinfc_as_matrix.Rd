@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{x}{Optional; may be \code{NULL}. A matrix; passed to \code{dim}.}
-\item{name}{See Usage.}
+\item{name}{Passed to \code{sprintf}.}
 }
 \description{
 A step of the reinfc_native implementation. Called by \code{morie_reinfc}. See the file header for the source the module follows.

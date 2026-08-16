@@ -8,7 +8,7 @@
 .le64(n)
 }
 \arguments{
-\item{n}{See Usage.}
+\item{n}{Passed to \code{bitwAnd}.}
 }
 \description{
 A step of the secarg_native implementation. No other function in the package calls it. See the file header for the source the module follows.

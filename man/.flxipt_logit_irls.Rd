@@ -13,7 +13,7 @@
 \item{ridge}{Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.}
 \item{penalty}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.}
-\item{tol}{Defaults to \code{1e-08}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-08}.}
 }
 \description{
 A step of the flxipt_native implementation. Called by \code{.flxipt_fit}. See the file header for the source the module follows.

@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{yv}{A vector; its length is taken and its elements indexed.}
-\item{dv}{See Usage.}
+\item{dv}{Passed to \code{==}.}
 }
 \description{
 A step of the helpers_bnd implementation. Called by \code{.bnd_wc_ate}, \code{Bndngt}, \code{Bndnvg} and 2 others in the module. See the file header for the source the module follows.

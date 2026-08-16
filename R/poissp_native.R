@@ -153,7 +153,7 @@ morie_poissp_rho_bounds <- function(W) {
 #' @param Q A matrix; passed to \code{\%*\%}.
 #' @param constrain A flag; the body branches on it.
 #' @param iters Coerced to integer by the body, with \code{as.integer}.
-#' @param tol See Usage.
+#' @param tol Passed to \code{<}.
 #' @param ridge Passed to \code{.poissp_ridgesolve}.
 #' @return A list with \code{beta}, \code{u}, \code{m}, \code{eta}.
 #' @export
@@ -225,7 +225,7 @@ morie_poissp_rho_bounds <- function(W) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A Passed to \code{eigen}.
 #' @param rank_deficit Numeric; combined arithmetically in the body. Defaults to \code{0L}.
 #' @return A numeric value.
 #' @export

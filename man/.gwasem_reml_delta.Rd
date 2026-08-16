@@ -13,8 +13,8 @@
 \item{evals}{Numeric; combined arithmetically in the body.}
 \item{evecs}{A matrix; passed to \code{t}.}
 \item{ml}{A flag; the body branches on it. Defaults to \code{FALSE}.}
-\item{lo}{Defaults to \code{-10}.}
-\item{hi}{Defaults to \code{10}.}
+\item{lo}{Passed to \code{seq}. Defaults to \code{-10}.}
+\item{hi}{Passed to \code{seq}. Defaults to \code{10}.}
 \item{n_grid}{Numeric; combined arithmetically in the body. Defaults to \code{100L}.}
 \item{refine}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.}
 }

@@ -11,7 +11,7 @@
 \item{func}{Accepted by the signature and not used anywhere in the body.}
 \item{lower}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{upper}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{tol}{Defaults to \code{1e-04}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-04}.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.}
 }
 \description{

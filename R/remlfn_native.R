@@ -127,8 +127,8 @@
 #'
 #' @param fn Accepted by the signature and not used anywhere in the body.
 #' @param x0 A vector; its length is taken and its elements indexed.
-#' @param xatol Defaults to \code{1e-10}.
-#' @param fatol Defaults to \code{1e-10}.
+#' @param xatol Passed to \code{<=}. Defaults to \code{1e-10}.
+#' @param fatol Passed to \code{<=}. Defaults to \code{1e-10}.
 #' @param maxiter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{5000}.
 #' @return A list with \code{x}, \code{fun}, \code{nit}, \code{success}.
 #' @export

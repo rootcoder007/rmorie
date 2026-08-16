@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{x}{Numeric; passed to \code{sqrt}.}
-\item{tol}{Defaults to \code{1e-08}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-08}.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60}.}
 }
 \description{

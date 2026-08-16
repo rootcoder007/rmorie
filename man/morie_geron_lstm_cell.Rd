@@ -19,3 +19,12 @@ List with \code{h}, \code{c}, \code{f}, \code{i}, \code{g}, \code{o}, \code{forg
 \description{
 c = f c_prev + i g, h = o tanh(c); every gate acts on [h_prev, x_t].
 }
+\examples{
+x_t <- c(0.5, -0.1)
+h_prev <- c(0.2, 0.3); c_prev <- c(0.1, 0.1)
+Wf <- matrix(0.1, 2, 4); Wi <- matrix(0.1, 2, 4)
+Wg <- matrix(0.1, 2, 4); Wo <- matrix(0.1, 2, 4)
+morie_geron_lstm_cell(x_t, h_prev, c_prev, Wf, Wi, Wg, Wo,
+                      bf = rep(0, 2), bi = rep(0, 2),
+                      bg = rep(0, 2), bo = rep(0, 2))
+}

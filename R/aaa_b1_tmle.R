@@ -15,9 +15,9 @@ NULL
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
-#' @param lo See Usage.
-#' @param hi See Usage.
+#' @param v Passed to \code{pmax}.
+#' @param lo Passed to \code{pmax}.
+#' @param hi Passed to \code{pmin}.
 #' @return The value of \code{pmin}.
 #' @export
 .b1_bound <- function(v, lo, hi) pmin(hi, pmax(lo, v))
@@ -62,7 +62,7 @@ NULL
 #' @param g1W Passed to \code{.b1_bound}.
 #' @param gbound Numeric; combined arithmetically in the body. Defaults to \code{0.025}.
 #' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
-#' @param tol Defaults to \code{1e-12}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-12}.
 #' @return A list with \code{epsilon}, \code{QAstar}, \code{Q1star}, \code{Q0star}, \code{g1}, \code{g0}, \code{H1}, \code{H0}.
 #' @export
 .b1_target <- function(Y, A, QAW, Q1W, Q0W, g1W, gbound = 0.025,

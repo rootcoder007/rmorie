@@ -14,7 +14,7 @@ morie_glmbay_bayesian_glm(X, y, family = "binomial", prior_sd = 2.5, add_interce
 \item{prior_sd}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2.5}.}
 \item{add_intercept}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.}
-\item{tol}{Defaults to \code{1e-10}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-10}.}
 }
 \description{
 A step of the glmbay_native implementation. No other function in the package calls it. See the file header for the source the module follows.

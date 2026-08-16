@@ -12,7 +12,7 @@
 \item{X}{A matrix; passed to \code{as.matrix}.}
 \item{n_trees}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.}
 \item{min_leaf}{Passed to \code{.frfgrf_honesty_test}. Defaults to \code{5}.}
-\item{subsample_frac}{Defaults to \code{0.5}.}
+\item{subsample_frac}{Passed to \code{grow_forest}. Defaults to \code{0.5}.}
 \item{alpha}{Numeric; combined arithmetically in the body. Defaults to \code{0.05}.}
 \item{pi}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
 \item{seed}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}

@@ -52,7 +52,7 @@
 #' route, which never looks at them.
 #'
 #' @param chain A vector; indexed elementwise.
-#' @param name See Usage.
+#' @param name Passed to \code{sprintf}.
 #' @param n A count; the body uses it as \code{rep(...)}.
 #' @param default A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{v}, as built in the body.
@@ -74,7 +74,7 @@
 #' source it follows.
 #'
 #' @param chain A list; the body reads \code{$species} from it.
-#' @param idx See Usage.
+#' @param idx Passed to \code{sprintf}.
 #' @return A list with \code{species}, \code{evalue}, \code{identity}, \code{gaps}, \code{coverage}, \code{n}.
 #' @export
 .alfmpv_chain_table <- function(chain, idx) {
@@ -105,8 +105,8 @@
 #'
 #' @param tab A list; the body reads \code{$coverage}, \code{$gaps}, \code{$n} from it.
 #' @param mode One of \code{"colabfold"}, \code{"folddock"}.
-#' @param min_coverage See Usage.
-#' @param max_gap See Usage.
+#' @param min_coverage Passed to \code{>=}.
+#' @param max_gap Passed to \code{<=}.
 #' @return The value of \code{which}.
 #' @export
 .alfmpv_keep <- function(tab, mode, min_coverage, max_gap) {

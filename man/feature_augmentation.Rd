@@ -8,7 +8,7 @@
 feature_augmentation(base_output, consumer)
 }
 \arguments{
-\item{base_output}{See Usage.}
+\item{base_output}{Passed to \code{consumer}.}
 \item{consumer}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{

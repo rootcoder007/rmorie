@@ -101,7 +101,7 @@
 #'
 #' @param model A list; the body reads \code{$dt}, \code{$I0}, \code{$N}, \code{$S0} from it.
 #' @param data Coerced to numeric by the body, with \code{as.numeric}.
-#' @param priors See Usage.
+#' @param priors Passed to \code{gv}.
 #' @param n_iter Coerced to integer by the body, with \code{as.integer}.
 #' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @param step Numeric; combined arithmetically in the body. Defaults to \code{0.15}.

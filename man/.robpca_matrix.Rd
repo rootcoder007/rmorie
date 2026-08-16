@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{X}{Optional; may be \code{NULL}. A matrix; passed to \code{dim}.}
-\item{name}{Defaults to \code{"X"}.}
+\item{name}{Passed to \code{sprintf}. Defaults to \code{"X"}.}
 }
 \description{
 A step of the robpca_native implementation. Called by \code{morie_robpca}, \code{outlyingness}. See the file header for the source the module follows.

@@ -76,7 +76,7 @@
 #' the source it follows.
 #'
 #' @param p Numeric; passed to \code{sqrt}.
-#' @param kind Defaults to \code{"regression"}.
+#' @param kind Passed to \code{identical}. Defaults to \code{"regression"}.
 #' @return A numeric value.
 #' @export
 .rfmtry <- function(p, kind = "regression") {

@@ -10,7 +10,7 @@
 \arguments{
 \item{a}{A count; the body uses it as \code{seq_len(...)}.}
 \item{bd}{A list; the body reads \code{$i}, \code{$j} from it.}
-\item{minpath}{See Usage.}
+\item{minpath}{Passed to \code{>=}.}
 \item{maxpath}{A count; the body uses it as \code{seq_len(...)}.}
 \item{branched}{A flag; the body branches on it.}
 }

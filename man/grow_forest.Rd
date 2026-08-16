@@ -8,16 +8,16 @@
 grow_forest(X, y, W = NULL, kind = "double-sample", n_trees = 200L, subsample_frac = 0.5, min_leaf = 5L, alpha = 0.05, pi = 0.5, max_depth = 12L, seed = 0L, clusters = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{Passed to \code{honest_tree}.}
 \item{y}{A vector; its length is taken.}
-\item{W}{Defaults to \code{NULL}.}
-\item{kind}{Defaults to \code{"double-sample"}.}
+\item{W}{Passed to \code{honest_tree}.}
+\item{kind}{Passed to \code{honest_tree}. Defaults to \code{"double-sample"}.}
 \item{n_trees}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.}
 \item{subsample_frac}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
 \item{min_leaf}{Numeric; combined arithmetically in the body. Defaults to \code{5L}.}
-\item{alpha}{Defaults to \code{0.05}.}
-\item{pi}{Defaults to \code{0.5}.}
-\item{max_depth}{Defaults to \code{12L}.}
+\item{alpha}{Passed to \code{honest_tree}. Defaults to \code{0.05}.}
+\item{pi}{Passed to \code{honest_tree}. Defaults to \code{0.5}.}
+\item{max_depth}{Passed to \code{honest_tree}. Defaults to \code{12L}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0L}.}
 \item{clusters}{Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.}
 }

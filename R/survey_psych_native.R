@@ -251,7 +251,7 @@ morie_brr_variance <- function(estimates, full_estimate = NULL, fay_k = 0) {
 #' for the source it follows.
 #'
 #' @param a A vector; its length is taken.
-#' @param b See Usage.
+#' @param b Passed to \code{outer}.
 #' @param theta A vector; its length is taken.
 #' @return A numeric value.
 #' @export

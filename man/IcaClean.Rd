@@ -8,12 +8,12 @@
 IcaClean(X, ncomp = NULL, kurtosis = 3, drop = NULL, maxiter = 200, seed = 1)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{ncomp}{Defaults to \code{NULL}.}
+\item{X}{Passed to \code{IcaFix}.}
+\item{ncomp}{Passed to \code{IcaFix}.}
 \item{kurtosis}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{3}.}
 \item{drop}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
-\item{maxiter}{Defaults to \code{200}.}
-\item{seed}{Defaults to \code{1}.}
+\item{maxiter}{Passed to \code{IcaFix}. Defaults to \code{200}.}
+\item{seed}{Passed to \code{IcaFix}. Defaults to \code{1}.}
 }
 \description{
 A step of the rangayyan_class2 implementation. No other function in the package calls it. See the file header for the source the module follows.

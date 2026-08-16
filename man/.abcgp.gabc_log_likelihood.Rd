@@ -10,7 +10,7 @@
 \arguments{
 \item{sim}{Accepted by the signature and not used anywhere in the body.}
 \item{obs}{Passed to \code{.abcgp.summarise}.}
-\item{theta}{See Usage.}
+\item{theta}{Passed to \code{sim}.}
 \item{n_sim}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50}.}
 \item{epsilon}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{summary}{Passed to \code{.abcgp.summarise}.}

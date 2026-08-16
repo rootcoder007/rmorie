@@ -50,7 +50,7 @@
 #' @param x_i Passed to \code{.sqdist}.
 #' @param x_j Passed to \code{.sqdist}.
 #' @param phi_e Accepted by the signature and not used anywhere in the body.
-#' @param a_ij Defaults to \code{NULL}.
+#' @param a_ij Passed to \code{phi_e}.
 #' @return The value of \code{phi_e}.
 #' @export
 edge_message <- function(h_i, h_j, x_i, x_j, phi_e, a_ij = NULL) {
@@ -100,8 +100,8 @@ coord_update <- function(X, M, phi_x, C = NULL) {
 #'
 #' @param H A vector; its length is taken and its elements indexed.
 #' @param X A vector; indexed elementwise.
-#' @param phi_e See Usage.
-#' @param phi_x See Usage.
+#' @param phi_e Passed to \code{edge_message}.
+#' @param phi_x Passed to \code{coord_update}.
 #' @param phi_h Accepted by the signature and not used anywhere in the body.
 #' @param A Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param C Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
@@ -176,11 +176,11 @@ egcl <- function(H, X, phi_e, phi_x, phi_h, A = NULL, C = NULL,
 #' @param H Iterated over elementwise, with \code{lapply}.
 #' @param X Iterated over elementwise, with \code{lapply}.
 #' @param layers Coerced to integer by the body, with \code{as.integer}.
-#' @param phi_e See Usage.
-#' @param phi_x See Usage.
-#' @param phi_h See Usage.
-#' @param A Defaults to \code{NULL}.
-#' @param C Defaults to \code{NULL}.
+#' @param phi_e Passed to \code{egcl}.
+#' @param phi_x Passed to \code{egcl}.
+#' @param phi_h Passed to \code{egcl}.
+#' @param A Passed to \code{egcl}.
+#' @param C Passed to \code{egcl}.
 #' @return A list with \code{estimate}, \code{H}, \code{X}, \code{layers}, \code{method}, \code{note}.
 #' @export
 run_egnn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
@@ -204,15 +204,15 @@ run_egnn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param H See Usage.
+#' @param H Passed to \code{run_egnn}.
 #' @param X A vector; its length is taken and its elements indexed.
-#' @param phi_e See Usage.
-#' @param phi_x See Usage.
-#' @param phi_h See Usage.
+#' @param phi_e Passed to \code{run_egnn}.
+#' @param phi_x Passed to \code{run_egnn}.
+#' @param phi_h Passed to \code{run_egnn}.
 #' @param Q A vector; indexed elementwise.
 #' @param g A vector; indexed elementwise.
-#' @param layers Defaults to \code{2}.
-#' @param C Defaults to \code{NULL}.
+#' @param layers Passed to \code{run_egnn}. Defaults to \code{2}.
+#' @param C Passed to \code{run_egnn}.
 #' @return A list with \code{coordinate_error}, \code{feature_error}, \code{equivariant}, \code{invariant}, \code{note}.
 #' @export
 morie_egnnL_equivariance_error <- function(H, X, phi_e, phi_x, phi_h, Q, g,
@@ -280,14 +280,14 @@ morie_egnnL_equivariance_error <- function(H, X, phi_e, phi_x, phi_h, Q, g,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param H See Usage.
-#' @param X See Usage.
-#' @param layers See Usage.
-#' @param phi_e See Usage.
-#' @param phi_x See Usage.
-#' @param phi_h See Usage.
-#' @param A Defaults to \code{NULL}.
-#' @param C Defaults to \code{NULL}.
+#' @param H Passed to \code{run_egnn}.
+#' @param X Passed to \code{run_egnn}.
+#' @param layers Passed to \code{run_egnn}.
+#' @param phi_e Passed to \code{run_egnn}.
+#' @param phi_x Passed to \code{run_egnn}.
+#' @param phi_h Passed to \code{run_egnn}.
+#' @param A Passed to \code{run_egnn}.
+#' @param C Passed to \code{run_egnn}.
 #' @return The value of \code{run_egnn}.
 #' @export
 equivariantgnn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
@@ -302,14 +302,14 @@ equivariantgnn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param H See Usage.
-#' @param X See Usage.
-#' @param layers See Usage.
-#' @param phi_e See Usage.
-#' @param phi_x See Usage.
-#' @param phi_h See Usage.
-#' @param A Defaults to \code{NULL}.
-#' @param C Defaults to \code{NULL}.
+#' @param H Passed to \code{run_egnn}.
+#' @param X Passed to \code{run_egnn}.
+#' @param layers Passed to \code{run_egnn}.
+#' @param phi_e Passed to \code{run_egnn}.
+#' @param phi_x Passed to \code{run_egnn}.
+#' @param phi_h Passed to \code{run_egnn}.
+#' @param A Passed to \code{run_egnn}.
+#' @param C Passed to \code{run_egnn}.
 #' @return The value of \code{run_egnn}.
 #' @export
 egnn_layer <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
@@ -322,14 +322,14 @@ egnn_layer <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param H See Usage.
-#' @param X See Usage.
-#' @param layers See Usage.
-#' @param phi_e See Usage.
-#' @param phi_x See Usage.
-#' @param phi_h See Usage.
-#' @param A Defaults to \code{NULL}.
-#' @param C Defaults to \code{NULL}.
+#' @param H Passed to \code{run_egnn}.
+#' @param X Passed to \code{run_egnn}.
+#' @param layers Passed to \code{run_egnn}.
+#' @param phi_e Passed to \code{run_egnn}.
+#' @param phi_x Passed to \code{run_egnn}.
+#' @param phi_h Passed to \code{run_egnn}.
+#' @param A Passed to \code{run_egnn}.
+#' @param C Passed to \code{run_egnn}.
 #' @return The value of \code{run_egnn}.
 #' @export
 egnnlayer <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
@@ -344,14 +344,14 @@ egnnlayer <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param H See Usage.
-#' @param X See Usage.
-#' @param layers See Usage.
-#' @param phi_e See Usage.
-#' @param phi_x See Usage.
-#' @param phi_h See Usage.
-#' @param A Defaults to \code{NULL}.
-#' @param C Defaults to \code{NULL}.
+#' @param H Passed to \code{run_egnn}.
+#' @param X Passed to \code{run_egnn}.
+#' @param layers Passed to \code{run_egnn}.
+#' @param phi_e Passed to \code{run_egnn}.
+#' @param phi_x Passed to \code{run_egnn}.
+#' @param phi_h Passed to \code{run_egnn}.
+#' @param A Passed to \code{run_egnn}.
+#' @param C Passed to \code{run_egnn}.
 #' @return The value of \code{run_egnn}.
 #' @export
 morie_egnnL <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,

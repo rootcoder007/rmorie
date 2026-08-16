@@ -18,8 +18,8 @@ morie_rndnet(observations, n_hidden = 64, n_out = 8, lr = 0.05, clip = 5, normal
 \item{init_steps}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{0}.}
 \item{gamma_int}{Numeric; combined arithmetically in the body. Defaults to \code{0.99}.}
 \item{seed}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
-\item{target}{Defaults to \code{NULL}.}
-\item{predictor}{Defaults to \code{NULL}.}
+\item{target}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{predictor}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{update}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

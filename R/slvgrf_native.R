@@ -123,8 +123,8 @@ toc_curve <- function(scores, priority) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param scores See Usage.
-#' @param priority See Usage.
+#' @param scores Passed to \code{toc_curve}.
+#' @param priority Passed to \code{toc_curve}.
 #' @param weight Compared against \code{"qini"}. Defaults to \code{"autoc"}.
 #' @return A list with \code{estimate}, \code{weight}, \code{curve}, \code{n}.
 #' @export
@@ -148,8 +148,8 @@ rate <- function(scores, priority, weight = "autoc") {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param scores See Usage.
-#' @param priority See Usage.
+#' @param scores Passed to \code{rate}.
+#' @param priority Passed to \code{rate}.
 #' @return The value of \code{$}.
 #' @export
 autoc <- function(scores, priority) {
@@ -162,8 +162,8 @@ autoc <- function(scores, priority) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param scores See Usage.
-#' @param priority See Usage.
+#' @param scores Passed to \code{rate}.
+#' @param priority Passed to \code{rate}.
 #' @return The value of \code{$}.
 #' @export
 qini_coefficient <- function(scores, priority) {

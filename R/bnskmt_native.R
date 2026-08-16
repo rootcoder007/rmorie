@@ -102,10 +102,10 @@ hypercube_instruments <- function(X, n_levels = 3L) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param m See Usage.
+#' @param m Passed to \code{weighted_moments}.
 #' @param instruments A list; the body reads \code{$instruments} from it.
 #' @param form Carried through into a list the body builds. Defaults to \code{"sum"}.
-#' @param n_equality Defaults to \code{0L}.
+#' @param n_equality Passed to \code{S_function}. Defaults to \code{0L}.
 #' @return A list with \code{statistic}, \code{argmax}, \code{per_instrument}, \code{form}, \code{n_instruments}, \code{method}.
 #' @export
 ks_statistic <- function(m, instruments, form = "sum", n_equality = 0L) {
@@ -135,8 +135,8 @@ ks_statistic <- function(m, instruments, form = "sum", n_equality = 0L) {
 #'
 #' @param m A matrix; the body checks with \code{is.matrix}.
 #' @param instruments A list; the body reads \code{$instruments} from it.
-#' @param form Defaults to \code{"sum"}.
-#' @param n_equality Defaults to \code{0L}.
+#' @param form Passed to \code{S_function}. Defaults to \code{"sum"}.
+#' @param n_equality Passed to \code{S_function}. Defaults to \code{0L}.
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
 #' @param reps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
@@ -186,13 +186,13 @@ ks_critical_value <- function(m, instruments, form = "sum",
 #'
 #' @param moment_fn Accepted by the signature and not used anywhere in the body.
 #' @param theta_grid See Usage.
-#' @param X See Usage.
+#' @param X Passed to \code{hypercube_instruments}.
 #' @param form Carried through into a list the body builds. Defaults to \code{"sum"}.
-#' @param n_equality Defaults to \code{0L}.
+#' @param n_equality Passed to \code{ks_statistic}. Defaults to \code{0L}.
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
-#' @param n_levels Defaults to \code{2L}.
-#' @param reps Defaults to \code{100L}.
-#' @param seed Defaults to \code{0L}.
+#' @param n_levels Passed to \code{hypercube_instruments}. Defaults to \code{2L}.
+#' @param reps Passed to \code{ks_critical_value}. Defaults to \code{100L}.
+#' @param seed Passed to \code{ks_critical_value}. Defaults to \code{0L}.
 #' @return A list with \code{estimate}, \code{set}, \code{n_in_set}, \code{bounds}, \code{statistics}, \code{form}, \code{level}, \code{n_instruments}, \code{method}.
 #' @export
 ks_confidence_set <- function(moment_fn, theta_grid, X, form = "sum",
@@ -221,10 +221,10 @@ ks_confidence_set <- function(moment_fn, theta_grid, X, form = "sum",
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param m See Usage.
+#' @param m Passed to \code{weighted_moments}.
 #' @param instruments A list; the body reads \code{$instruments} from it.
 #' @param form Carried through into a list the body builds. Defaults to \code{"sum"}.
-#' @param n_equality Defaults to \code{0L}.
+#' @param n_equality Passed to \code{S_function}. Defaults to \code{0L}.
 #' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{statistic}, \code{per_instrument}, \code{form}, \code{n_instruments}, \code{method}.
 #' @export
@@ -258,10 +258,10 @@ cvm_statistic <- function(m, instruments, form = "sum", n_equality = 0L,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param m See Usage.
-#' @param instruments See Usage.
-#' @param form Defaults to \code{"sum"}.
-#' @param n_equality Defaults to \code{0L}.
+#' @param m Passed to \code{cvm_statistic}.
+#' @param instruments Passed to \code{cvm_statistic}.
+#' @param form Passed to \code{cvm_statistic}. Defaults to \code{"sum"}.
+#' @param n_equality Passed to \code{cvm_statistic}. Defaults to \code{0L}.
 #' @return A list with \code{cvm}, \code{ks}, \code{ratio_ks_over_cvm}, \code{argmax_instrument}, \code{note}.
 #' @export
 compare_forms <- function(m, instruments, form = "sum", n_equality = 0L) {

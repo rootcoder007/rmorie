@@ -11,12 +11,12 @@
 \item{X}{A matrix; indexed by row and column.}
 \item{y}{A vector; indexed elementwise.}
 \item{W}{A vector; indexed elementwise.}
-\item{arm}{See Usage.}
+\item{arm}{Passed to \code{==}.}
 \item{rows}{A vector; indexed elementwise.}
 \item{at_rows}{A vector; its length is taken and its elements indexed.}
-\item{n_trees}{See Usage.}
+\item{n_trees}{Passed to \code{grow_forest}.}
 \item{min_leaf}{Numeric; combined arithmetically in the body.}
-\item{seed}{See Usage.}
+\item{seed}{Passed to \code{grow_forest}.}
 }
 \description{
 A step of the itrgrf_native implementation. Called by \code{morie_itrgrf}. See the file header for the source the module follows.

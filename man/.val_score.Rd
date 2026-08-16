@@ -14,3 +14,10 @@ Internal helper: Val Score
 The value of \code{switch}.
 }
 \keyword{internal}
+\examples{
+df <- data.frame(age = c(20, 30, -1))
+rules <- list(age = list(type = "numeric", min = 0))
+res <- try(validate_schema(df, rules))
+if (!inherits(res, "try-error")) str(res, max.level = 1)
+.val_score(scoring = df, y_true = df, y_pred = df)
+}

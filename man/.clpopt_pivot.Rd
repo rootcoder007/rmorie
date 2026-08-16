@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{T}{A matrix; indexed by row and column.}
-\item{row}{See Usage.}
+\item{row}{Passed to \code{==}.}
 \item{col}{See Usage.}
 }
 \description{

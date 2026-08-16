@@ -54,7 +54,7 @@
 #' the stratified model, which needs the pieces without taking a step.
 #'
 #' @param ts A vector; indexed elementwise.
-#' @param es See Usage.
+#' @param es Passed to \code{==}.
 #' @param Xs A matrix; indexed by row and column.
 #' @param beta A matrix; passed to \code{\%*\%}.
 #' @param offs Numeric; combined arithmetically in the body.
@@ -119,7 +119,7 @@
 #' @param X A matrix; indexed by row and column.
 #' @param ties Passed to \code{.morie_cox_score}. Defaults to \code{"efron"}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.
-#' @param tol Defaults to \code{1e-09}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-09}.
 #' @param offset Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{beta}, \code{loglik}, \code{I}, \code{U}, \code{n_iter}, \code{converged}.
 #' @export
@@ -166,7 +166,7 @@
 #' source it follows.
 #'
 #' @param t A vector; its length is taken and its elements indexed.
-#' @param e See Usage.
+#' @param e Passed to \code{==}.
 #' @param X A matrix; passed to \code{\%*\%}.
 #' @param beta A matrix; passed to \code{\%*\%}.
 #' @param offset Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
@@ -192,7 +192,7 @@
 #' source it follows.
 #'
 #' @param t A vector; indexed elementwise.
-#' @param e See Usage.
+#' @param e Passed to \code{==}.
 #' @return A list with \code{times}, \code{survival}.
 #' @export
 .morie_km_estimate <- function(t, e) {

@@ -13,7 +13,7 @@ recommend(model, pos, u, n_items, top_k = 5L, activation = "sigmoid")
 \item{u}{Coerced to integer by the body, with \code{as.integer}.}
 \item{n_items}{Coerced to integer by the body, with \code{as.integer}.}
 \item{top_k}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.}
-\item{activation}{Defaults to \code{"sigmoid"}.}
+\item{activation}{Passed to \code{encode}. Defaults to \code{"sigmoid"}.}
 }
 \description{
 A step of the cdaeRC_native implementation. No other function in the package calls it. See the file header for the source the module follows.

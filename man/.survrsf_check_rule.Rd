@@ -8,7 +8,7 @@
 .survrsf_check_rule(rule)
 }
 \arguments{
-\item{rule}{See Usage.}
+\item{rule}{Passed to \code{\%in\%}.}
 }
 \description{
 A step of the survrsf_native implementation. Called by \code{morie_survrsf_best_split}, \code{morie_survrsf_forest}, \code{morie_survrsf_grow_tree}. See the file header for the source the module follows.

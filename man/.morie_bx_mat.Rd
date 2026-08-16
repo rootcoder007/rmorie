@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{M}{Optional; may be \code{NULL}. A matrix; passed to \code{nrow}.}
-\item{name}{Defaults to \code{"X"}.}
+\item{name}{Passed to \code{stop}. Defaults to \code{"X"}.}
 }
 \description{
 A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_chsel}, \code{BmiDec}, \code{BPursuit} and 18 others in the module. See the file header for the source the module follows.

@@ -42,7 +42,7 @@
 #' @param nx A count; the body uses it as \code{seq_len(...)}. Defaults to \code{12L}.
 #' @param ny A count; the body uses it as \code{seq_len(...)}. Defaults to \code{12L}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100L}.
-#' @param tol Defaults to \code{1e-11}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-11}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_strmkr_strauss_process <- function(coords, r, gamma = NULL,

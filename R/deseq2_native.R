@@ -380,7 +380,7 @@ dispersion_trend <- function(mu_bar, disp, max_iter = 10L, tol = 1e-6) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pr See Usage.
+#' @param pr Passed to \code{<}.
 #' @return A numeric value.
 #' @export
 .ghc_deseq2_norm_ppf <- function(pr) {

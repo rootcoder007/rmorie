@@ -32,7 +32,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param bounds See Usage.
+#' @param bounds Passed to \code{c}.
 #' @param lo Numeric; combined arithmetically in the body.
 #' @param hi Numeric; combined arithmetically in the body.
 #' @param n_grid Numeric; combined arithmetically in the body.

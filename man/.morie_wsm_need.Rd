@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{ok}{A flag; the body branches on it.}
-\item{msg}{See Usage.}
+\item{msg}{Passed to \code{stop}.}
 }
 \description{
 A step of the wasserman_native implementation. Called by \code{morie_bayes_factor_savage_dickey}, \code{morie_density}, \code{morie_sgt_closeness_centrality} and 58 others in the module. See the file header for the source the module follows.

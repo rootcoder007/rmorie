@@ -12,7 +12,7 @@
 \item{y}{Numeric; combined arithmetically in the body.}
 \item{lam}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.}
-\item{tol}{Defaults to \code{1e-12}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-12}.}
 }
 \description{
 A step of the causal implementation. Called by \code{.mor_om_fit_predict}, \code{.mor_ps_irls}. See the file header for the source the module follows.

@@ -10,7 +10,7 @@
 \arguments{
 \item{sigma2}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{df}{A vector; its length is taken.}
-\item{robust_floor}{Defaults to \code{1e-12}.}
+\item{robust_floor}{Passed to \code{>}. Defaults to \code{1e-12}.}
 }
 \description{
 A step of the limmav_native implementation. Called by \code{morie_limmav}. See the file header for the source the module follows.

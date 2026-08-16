@@ -87,7 +87,7 @@ t5enc_task_prefix <- function(task, text) {
 #' @param rate Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.15}.
 #' @param mean_span Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{3}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
-#' @param sentinel Defaults to \code{"<extra_id_\\\\\\\\\\\\\\\%d>"}.
+#' @param sentinel Passed to \code{sprintf}. Defaults to \code{"<extra_id_%d>"}.
 #' @return A list with \code{input}, \code{target}, \code{n_spans}, \code{corrupted_tokens}, \code{corruption_rate}, \code{target_shorter_by}, \code{note}.
 #' @export
 t5enc_span_corruption <- function(tokens, rate = 0.15, mean_span = 3.0,
@@ -291,7 +291,7 @@ t5 <- t5enc_span_corruption
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param method Defaults to \code{c("task_prefix", "span_corruption", "relative_bucket", "format_regression",     "parse_prediction", "cheatsheet")}.
+#' @param method Passed to \code{match.arg}.
 #' @param ... Passed through.
 #' @return The value of \code{switch}.
 #' @export

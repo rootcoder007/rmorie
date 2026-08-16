@@ -10,7 +10,7 @@
 \arguments{
 \item{v}{A vector; indexed elementwise.}
 \item{lo}{Numeric; combined arithmetically in the body.}
-\item{hi}{See Usage.}
+\item{hi}{Passed to \code{:}.}
 }
 \description{
 A step of the rangayyan_qrs implementation. Called by \code{DicNotch}, \code{EcgFeat}, \code{PpgFeat}. See the file header for the source the module follows.

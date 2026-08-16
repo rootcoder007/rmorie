@@ -8,7 +8,7 @@
 #'
 #' @param v A vector; its length is taken.
 #' @param tau Numeric; combined arithmetically in the body.
-#' @param center Defaults to \code{NULL}.
+#' @param center Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A numeric value.
 #' @export
 .dino_softmax <- function(v, tau, center = NULL) {

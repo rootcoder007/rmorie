@@ -118,10 +118,10 @@ favor_features <- function(X, omegas, kind = "positive", eps = 1e-6) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
-#' @param omegas See Usage.
-#' @param kind Defaults to \code{"positive"}.
+#' @param x Passed to \code{rbind}.
+#' @param y Passed to \code{rbind}.
+#' @param omegas Passed to \code{favor_features}.
+#' @param kind Passed to \code{favor_features}. Defaults to \code{"positive"}.
 #' @return The value of \code{.dot}.
 #' @export
 kernel_estimate <- function(x, y, omegas, kind = "positive") {
@@ -165,7 +165,7 @@ softmax_attention <- function(Q, K, V, causal = FALSE) {
 #' @param K A matrix; passed to \code{as.matrix}.
 #' @param V A matrix; passed to \code{as.matrix}.
 #' @param n_features Coerced to integer by the body, with \code{as.integer}. Defaults to \code{128L}.
-#' @param seed Defaults to \code{0L}.
+#' @param seed Passed to \code{draw_projections}. Defaults to \code{0L}.
 #' @param kind Carried through into a list the body builds. Defaults to \code{"positive"}.
 #' @param orthogonal A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param causal A flag; the body branches on it. Defaults to \code{FALSE}.

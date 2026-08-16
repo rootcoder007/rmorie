@@ -219,7 +219,7 @@
 #' the source it follows.
 #'
 #' @param cond A flag; the body branches on it.
-#' @param msg See Usage.
+#' @param msg Passed to \code{stop}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .morie_gr_need <- function(cond, msg) if (!cond) stop(msg, call. = FALSE)
@@ -231,7 +231,7 @@
 #' the source it follows.
 #'
 #' @param x A matrix; passed to \code{as.matrix}.
-#' @param name See Usage.
+#' @param name Passed to \code{paste0}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
 .morie_gr_mat <- function(x, name) {

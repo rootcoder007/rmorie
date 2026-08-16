@@ -12,7 +12,7 @@
 \item{e}{A vector; indexed elementwise.}
 \item{X}{A matrix; indexed by row and column.}
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100L}.}
-\item{tol}{Defaults to \code{1e-10}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-10}.}
 }
 \description{
 A step of the sschin_native implementation. Called by \code{morie_sschin_chained_imputation}. See the file header for the source the module follows.

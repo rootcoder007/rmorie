@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{P}{A matrix; indexed by row and column.}
-\item{axis}{See Usage.}
+\item{axis}{Passed to \code{==}.}
 \item{deg}{Numeric; combined arithmetically in the body.}
 }
 \description{

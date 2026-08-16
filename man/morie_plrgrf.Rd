@@ -13,9 +13,9 @@ morie_plrgrf(y, W, X, at = NULL, n_trees = 200, n_folds = 5, min_leaf = 5, seed 
 \item{X}{A matrix; passed to \code{as.matrix}.}
 \item{at}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 \item{n_trees}{Numeric; combined arithmetically in the body. Defaults to \code{200}.}
-\item{n_folds}{Defaults to \code{5}.}
-\item{min_leaf}{Defaults to \code{5}.}
-\item{seed}{Defaults to \code{0}.}
+\item{n_folds}{Passed to \code{local_centering}. Defaults to \code{5}.}
+\item{min_leaf}{Passed to \code{local_centering}. Defaults to \code{5}.}
+\item{seed}{Passed to \code{local_centering}. Defaults to \code{0}.}
 \item{center}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 \item{level}{Numeric; combined arithmetically in the body. Defaults to \code{0.95}.}
 }

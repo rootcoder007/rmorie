@@ -12,7 +12,7 @@ data_adaptive_parameter(define_on_training, estimate_on_holdout, n, V = 10L, see
 \item{estimate_on_holdout}{Accepted by the signature and not used anywhere in the body.}
 \item{n}{A count; the body uses it as \code{rep(...)}.}
 \item{V}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{10L}.}
-\item{seed}{Defaults to \code{0L}.}
+\item{seed}{Passed to \code{split_sample}. Defaults to \code{0L}.}
 }
 \description{
 A step of the tldapar_native implementation. No other function in the package calls it. See the file header for the source the module follows.

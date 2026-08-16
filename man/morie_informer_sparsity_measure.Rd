@@ -8,7 +8,7 @@
 morie_informer_sparsity_measure(q, K, measure = "exact", scale = NULL)
 }
 \arguments{
-\item{q}{See Usage.}
+\item{q}{Passed to \code{k.vec}.}
 \item{K}{Passed to \code{.informer_to_rows}.}
 \item{measure}{Compared against \code{"maxmean"}. Defaults to \code{"exact"}.}
 \item{scale}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}

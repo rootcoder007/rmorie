@@ -119,7 +119,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param old See Usage.
+#' @param old Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .morie_dp_unseed <- function(old) {

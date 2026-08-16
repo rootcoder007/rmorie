@@ -73,7 +73,7 @@ morie_metsem_kmers <- function(seq, k) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param edges See Usage.
+#' @param edges Passed to \code{names}.
 #' @param k Numeric; combined arithmetically in the body.
 #' @return A list with \code{out}, \code{inc}, \code{nodes}.
 #' @export
@@ -121,7 +121,7 @@ morie_metsem_graph <- function(reads, k) {
 #' source it follows.
 #'
 #' @param g A list; the body reads \code{$out} from it.
-#' @param v See Usage.
+#' @param v Passed to \code{\%in\%}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .metsem_outdeg <- function(g, v)
@@ -133,7 +133,7 @@ morie_metsem_graph <- function(reads, k) {
 #' source it follows.
 #'
 #' @param g A list; the body reads \code{$inc} from it.
-#' @param v See Usage.
+#' @param v Passed to \code{\%in\%}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .metsem_indeg <- function(g, v)

@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{key}{A vector; its length is taken.}
-\item{msg}{See Usage.}
+\item{msg}{Passed to \code{as.raw}.}
 }
 \description{
 .sech_sha256 and .sech_hmac defined there; this file is intended to be sourced together with sechsh_native.R.

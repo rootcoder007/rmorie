@@ -9,7 +9,7 @@ Counterfactual(evidence, equations, exogenous, do, query, u_support = NULL)
 }
 \arguments{
 \item{evidence}{A vector; indexed elementwise.}
-\item{equations}{See Usage.}
+\item{equations}{Passed to \code{names}.}
 \item{exogenous}{A vector; its length is taken.}
 \item{do}{A vector; indexed elementwise.}
 \item{query}{Carried through into a list the body builds.}

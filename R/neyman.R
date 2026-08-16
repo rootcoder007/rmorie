@@ -141,7 +141,7 @@ Neyman <- function(y, N_h, S_h, n) {
 #' land on the same integers.
 #'
 #' @param alloc A vector; its length is taken.
-#' @param m0 See Usage.
+#' @param m0 Passed to \code{round}.
 #' @return The value of \code{base}, as built in the body.
 #' @export
 .s03allocInt <- function(alloc, m0) {

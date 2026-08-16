@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{t}{A vector; its length is taken and its elements indexed.}
-\item{e}{See Usage.}
+\item{e}{Passed to \code{==}.}
 \item{X}{A matrix; passed to \code{\%*\%}.}
 \item{beta}{A matrix; passed to \code{\%*\%}.}
 \item{offset}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}

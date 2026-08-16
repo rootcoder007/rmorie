@@ -201,7 +201,7 @@
 #' @param X A matrix; passed to \code{nrow}.
 #' @param k A count; the body uses it as \code{matrix(...)}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}.
-#' @param tol See Usage.
+#' @param tol Passed to \code{<}.
 #' @param seed Numeric; combined arithmetically in the body.
 #' @return A list with \code{W}, \code{H}, \code{n_iter}.
 #' @export
@@ -956,7 +956,7 @@ morie_geron_one_shot <- function(model, example, query, verbalizer = NULL) {
 #' the source it follows.
 #'
 #' @param Xp A matrix; indexed by row and column.
-#' @param yp See Usage.
+#' @param yp Passed to \code{==}.
 #' @return The value of \code{function}.
 #' @export
 .morie_w4c_centroid_pair <- function(Xp, yp) {
@@ -1028,7 +1028,7 @@ morie_geron_one_vs_one_hm <- function(X, y, base_estimator = NULL, X_new = NULL)
 #' the source it follows.
 #'
 #' @param Xb A matrix; indexed by row and column.
-#' @param yb See Usage.
+#' @param yb Passed to \code{==}.
 #' @return The value of \code{function}.
 #' @export
 .morie_w4c_centroid_score <- function(Xb, yb) {
@@ -1498,8 +1498,8 @@ morie_geron_polynomial_features_hm <- function(X, degree, include_bias = TRUE, i
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param n See Usage.
-#' @param k See Usage.
+#' @param n Passed to \code{:}.
+#' @param k Passed to \code{==}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_w4c_combos_with_repl <- function(n, k) {
@@ -2173,7 +2173,7 @@ morie_geron_reverse_autodiff <- function(f, x) {
 #' @param y Passed to \code{morie_geron_cart_split_cost}.
 #' @param criterion Passed to \code{morie_geron_cart_split_cost}.
 #' @param columns See Usage.
-#' @param min_leaf See Usage.
+#' @param min_leaf Passed to \code{<}.
 #' @return The value of \code{best}, as built in the body.
 #' @export
 .morie_w4c_best_split <- function(X, y, criterion, columns, min_leaf) {

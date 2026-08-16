@@ -11,11 +11,11 @@ run_egnn(H, X, layers, phi_e, phi_x, phi_h, A = NULL, C = NULL)
 \item{H}{Iterated over elementwise, with \code{lapply}.}
 \item{X}{Iterated over elementwise, with \code{lapply}.}
 \item{layers}{Coerced to integer by the body, with \code{as.integer}.}
-\item{phi_e}{See Usage.}
-\item{phi_x}{See Usage.}
-\item{phi_h}{See Usage.}
-\item{A}{Defaults to \code{NULL}.}
-\item{C}{Defaults to \code{NULL}.}
+\item{phi_e}{Passed to \code{egcl}.}
+\item{phi_x}{Passed to \code{egcl}.}
+\item{phi_h}{Passed to \code{egcl}.}
+\item{A}{Passed to \code{egcl}.}
+\item{C}{Passed to \code{egcl}.}
 }
 \description{
 A step of the egnnL_native implementation. Called by \code{e_gcn}, \code{egnn_layer}, \code{egnnlayer} and 5 others in the module. See the file header for the source the module follows.

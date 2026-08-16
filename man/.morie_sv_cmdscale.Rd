@@ -18,3 +18,9 @@ Torgerson-Gower classical scaling. Double-centre the squared distance matrix to 
 An m by k matrix of coordinates, columns ordered by decreasing   eigenvalue.
 }
 \keyword{internal}
+\examples{
+Xt <- matrix(rnorm(20), 10, 2)
+Dt <- as.matrix(stats::dist(Xt))
+.morie_sv_bayes_mds(Dt, n_dims = 2L, n_samples = 200L, burn_in = 100L)
+.morie_sv_cmdscale(D = Dt)
+}

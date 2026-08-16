@@ -8,8 +8,8 @@
 .groebn_lcm(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{Passed to \code{pmax}.}
+\item{b}{Passed to \code{pmax}.}
 }
 \description{
 A step of the groebn_native implementation. Called by \code{.groebn_spoly}. See the file header for the source the module follows.

@@ -10,7 +10,7 @@
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{maxiter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.}
-\item{tol}{Defaults to \code{0.05}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{0.05}.}
 }
 \description{
 A step of the rangayyan_tf implementation. Called by \code{.tf_emd}, \code{Imf}. See the file header for the source the module follows.

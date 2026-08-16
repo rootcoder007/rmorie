@@ -11,8 +11,8 @@
 \item{pos}{A vector; its length is taken and its elements indexed.}
 \item{ehh}{A vector; indexed elementwise.}
 \item{core}{Numeric; combined arithmetically in the body.}
-\item{side}{See Usage.}
-\item{min_ehh}{See Usage.}
+\item{side}{Passed to \code{>}.}
+\item{min_ehh}{Passed to \code{<}.}
 }
 \description{
 stopping once the curve drops below min_ehh.  `truncated` stays TRUE when the curve never dropped that far before the data ran out, which is exactly the case where the integral understates iHH.

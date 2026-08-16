@@ -21,3 +21,10 @@ List with \code{value}, \code{d_loss}, \code{g_loss_nonsaturating},
 V = mean log D(x) + mean log(1 - D(G(z))) after clipping to
 [eps, 1-eps]; the accuracy uses the UNCLIPPED probabilities.
 }
+\examples{
+x <- matrix(c(1, 0, 0.5, 1), 2, byrow = TRUE)
+morie_geron_encoder_decoder_seq2seq(function(x) c(sum(x), 1), 
+    function(yp, cc, t) as.numeric(yp) * 0.5 + cc[1]/t, c(1, 
+        2, 3), 4)
+morie_geron_gan_minimax(real = x, fake = x, D_real = x, D_fake = x)
+}

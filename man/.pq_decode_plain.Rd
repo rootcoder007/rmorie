@@ -10,7 +10,7 @@
 \arguments{
 \item{buf}{A vector; indexed elementwise.}
 \item{pos}{Numeric; combined arithmetically in the body.}
-\item{ptype}{See Usage.}
+\item{ptype}{Passed to \code{==}.}
 \item{count}{A count; the body uses it as \code{seq_len(...)}.}
 \item{type_length}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 }

@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{R_delta}{A matrix; passed to \code{as.matrix}.}
-\item{tol}{Defaults to \code{NULL}.}
+\item{tol}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the schab_glmm_shared implementation. Called by \code{spbayr}. See the file header for the source the module follows.

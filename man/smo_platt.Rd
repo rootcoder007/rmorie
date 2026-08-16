@@ -11,7 +11,7 @@ smo_platt(y, K, C = 1, tol = 0.001, eps = 1e-05, max_passes = 200, seed = 0)
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{K}{A matrix; indexed by row and column.}
 \item{C}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
-\item{tol}{Defaults to \code{0.001}.}
+\item{tol}{Passed to \code{violates_kkt}. Defaults to \code{0.001}.}
 \item{eps}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-05}.}
 \item{max_passes}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.}
 \item{seed}{Passed to \code{.smoopt_make_rng}. Defaults to \code{0}.}

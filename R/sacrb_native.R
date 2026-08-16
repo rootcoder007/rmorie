@@ -396,7 +396,7 @@ morie_sacrb_bleu <- function(candidates, references, max_n = 4L,
 #' @param lowercase A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @param max_n Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.
 #' @param n_refs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1L}.
-#' @param version Defaults to \code{"morie-sacrb-1"}.
+#' @param version Passed to \code{paste0}. Defaults to \code{"morie-sacrb-1"}.
 #' @return A character value.
 #' @export
 .sacrb_signature <- function(tokenizer = "13a", lowercase = FALSE,

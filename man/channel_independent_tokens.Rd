@@ -10,7 +10,7 @@ channel_independent_tokens(X, patch_len, stride = NULL)
 \arguments{
 \item{X}{Passed to \code{.patcht_mat}.}
 \item{patch_len}{Coerced to integer by the body, with \code{as.integer}.}
-\item{stride}{Defaults to \code{NULL}.}
+\item{stride}{Passed to \code{patchify}.}
 }
 \description{
 A step of the patchT_native implementation. Called by \code{patchtst_encode}. See the file header for the source the module follows.

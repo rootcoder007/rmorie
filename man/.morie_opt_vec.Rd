@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{g}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{name}{Defaults to \code{"g"}.}
+\item{name}{Passed to \code{sprintf}. Defaults to \code{"g"}.}
 }
 \description{
 A step of the optim_native implementation. Called by \code{morie_adagrad}, \code{morie_adam}, \code{morie_adamw_step} and 5 others in the module. See the file header for the source the module follows.

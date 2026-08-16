@@ -8,7 +8,7 @@
 .rn_mc_p_fitted(d_obs, n, n_mc)
 }
 \arguments{
-\item{d_obs}{See Usage.}
+\item{d_obs}{Passed to \code{>=}.}
 \item{n}{See Usage.}
 \item{n_mc}{A count; the body uses it as \code{seq_len(...)}.}
 }

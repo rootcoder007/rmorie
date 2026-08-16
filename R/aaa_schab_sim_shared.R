@@ -46,7 +46,7 @@
 #' arithmetic, so they are clipped rather than allowed to make NaNs.
 #'
 #' @param cov A matrix; passed to \code{nrow}.
-#' @param tol Defaults to \code{NULL}.
+#' @param tol Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{%*%}.
 #' @export
 .schab_spectral_root <- function(cov, tol = NULL) {

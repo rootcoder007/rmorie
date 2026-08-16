@@ -8,8 +8,8 @@
 sasimi_cosine(fp_a, fp_b)
 }
 \arguments{
-\item{fp_a}{See Usage.}
-\item{fp_b}{See Usage.}
+\item{fp_a}{Passed to \code{sasimi_counts}.}
+\item{fp_b}{Passed to \code{sasimi_counts}.}
 }
 \description{
 A step of the sasimi_native implementation. No other function in the package calls it. See the file header for the source the module follows.

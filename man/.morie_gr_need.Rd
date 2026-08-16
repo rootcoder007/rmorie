@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{cond}{A flag; the body branches on it.}
-\item{msg}{See Usage.}
+\item{msg}{Passed to \code{stop}.}
 }
 \description{
 A step of the geron_ml_native implementation. Called by \code{.morie_gr_attend}, \code{.morie_gr_check_mdp}, \code{.morie_gr_conv2d_valid} and 396 others in the module. See the file header for the source the module follows.

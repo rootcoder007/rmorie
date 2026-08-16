@@ -8,14 +8,14 @@
 equivariantgnn(H, X, layers, phi_e, phi_x, phi_h, A = NULL, C = NULL)
 }
 \arguments{
-\item{H}{See Usage.}
-\item{X}{See Usage.}
-\item{layers}{See Usage.}
-\item{phi_e}{See Usage.}
-\item{phi_x}{See Usage.}
-\item{phi_h}{See Usage.}
-\item{A}{Defaults to \code{NULL}.}
-\item{C}{Defaults to \code{NULL}.}
+\item{H}{Passed to \code{run_egnn}.}
+\item{X}{Passed to \code{run_egnn}.}
+\item{layers}{Passed to \code{run_egnn}.}
+\item{phi_e}{Passed to \code{run_egnn}.}
+\item{phi_x}{Passed to \code{run_egnn}.}
+\item{phi_h}{Passed to \code{run_egnn}.}
+\item{A}{Passed to \code{run_egnn}.}
+\item{C}{Passed to \code{run_egnn}.}
 }
 \description{
 A step of the egnnL_native implementation. No other function in the package calls it. See the file header for the source the module follows.

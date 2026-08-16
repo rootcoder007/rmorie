@@ -8,7 +8,7 @@
 .forwsr_norm_ppf(p)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Passed to \code{>}.}
 }
 \description{
 same rational approximation with the same coefficients, and the two agree bit for bit. Bisecting on erf/pnorm instead lands on different sides of the root in the last ulp, which is enough to move the consistency factor and, through it, the deletion residual.

@@ -27,3 +27,8 @@ log2(T_enc) ceiling and the 0-based argmax. Queries come from the
 decoder and keys/values from the encoder, so no causal mask is
 needed.
 }
+\examples{
+a <- 0.5
+morie_geron_resnet(c(1, 2, 3), function(a) a * 0.5)
+morie_geron_cross_attention_report(dec_h = a, enc_h = a, W_Q = a, W_K = a, W_V = a)
+}

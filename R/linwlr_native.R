@@ -43,7 +43,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Zsrc See Usage.
+#' @param Zsrc Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param n A count; the body uses it as \code{matrix(...)}.
 #' @return The value of \code{cbind}.
 #' @export

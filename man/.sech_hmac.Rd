@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{key}{A vector; its length is taken.}
-\item{msg}{See Usage.}
+\item{msg}{Passed to \code{as.raw}.}
 }
 \description{
 A step of the sechsh_native implementation. Called by \code{morie_sechsh_chain_entry}. See the file header for the source the module follows.

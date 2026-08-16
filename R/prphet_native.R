@@ -137,7 +137,7 @@ morie_prphet_holiday_matrix <- function(t, holidays, lower = 0, upper = 0) {
 #'
 #' @param t Passed to \code{morie_prphet_trend_matrix}.
 #' @param cps A vector; its length is taken.
-#' @param seasonalities Defaults to \code{NULL}.
+#' @param seasonalities Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param holidays Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param holiday_window A vector; indexed elementwise. Defaults to \code{c(0, 0)}.
 #' @return A list with \code{X}, \code{cols}, \code{holiday.names}.

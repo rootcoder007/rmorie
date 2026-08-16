@@ -83,7 +83,7 @@
 #' @param p_u Coerced to numeric by the body, with \code{as.numeric}.
 #' @param q_i Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param activation Defaults to \code{"sigmoid"}.
+#' @param activation Passed to \code{identical}. Defaults to \code{"sigmoid"}.
 #' @return Nothing; this branch always raises.
 #' @export
 morie_ncfRS_gmf <- function(p_u, q_i, h = NULL, activation = "sigmoid") {

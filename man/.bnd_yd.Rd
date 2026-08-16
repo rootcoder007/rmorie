@@ -8,9 +8,9 @@
 .bnd_yd(y, D, name)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{D}{See Usage.}
-\item{name}{See Usage.}
+\item{y}{Passed to \code{unlist}.}
+\item{D}{Passed to \code{unlist}.}
+\item{name}{Passed to \code{paste0}.}
 }
 \description{
 A step of the helpers_bnd implementation. Called by \code{Bndmoq}, \code{Bndngt}, \code{Bndnpr} and 6 others in the module. See the file header for the source the module follows.

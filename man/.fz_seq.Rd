@@ -8,9 +8,9 @@
 .fz_seq(from, to, n)
 }
 \arguments{
-\item{from}{See Usage.}
-\item{to}{See Usage.}
-\item{n}{See Usage.}
+\item{from}{Passed to \code{seq}.}
+\item{to}{Passed to \code{seq}.}
+\item{n}{Passed to \code{seq}.}
 }
 \description{
 A step of the fauzi_native implementation. Called by \code{morie_fauzi_b2_coefficient}, \code{morie_fauzi_boundary_free_kde}, \code{morie_fauzi_cumulative_survival_1} and 7 others in the module. See the file header for the source the module follows.

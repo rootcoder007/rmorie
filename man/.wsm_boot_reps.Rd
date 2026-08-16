@@ -11,7 +11,7 @@
 \item{data}{A matrix; the body checks with \code{is.matrix}.}
 \item{statistic}{Accepted by the signature and not used anywhere in the body.}
 \item{B}{A count; the body uses it as \code{seq_len(...)}.}
-\item{seed}{See Usage.}
+\item{seed}{Passed to \code{set.seed}.}
 }
 \description{
 A step of the wsm_native implementation. Called by \code{morie_wsm_bootstrap}, \code{morie_wsm_plug_in}. See the file header for the source the module follows.

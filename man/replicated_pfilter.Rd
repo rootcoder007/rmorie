@@ -8,11 +8,11 @@
 replicated_pfilter(y, n_particles, init, step, loglik, n_reps = 10L, seed = 0L)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Passed to \code{particle_filter_simple}.}
 \item{n_particles}{Coerced to integer by the body, with \code{as.integer}.}
-\item{init}{See Usage.}
-\item{step}{See Usage.}
-\item{loglik}{See Usage.}
+\item{init}{Passed to \code{particle_filter_simple}.}
+\item{step}{Passed to \code{particle_filter_simple}.}
+\item{loglik}{Passed to \code{particle_filter_simple}.}
 \item{n_reps}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10L}.}
 \item{seed}{Numeric; combined arithmetically in the body. Defaults to \code{0L}.}
 }

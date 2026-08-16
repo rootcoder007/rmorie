@@ -62,3 +62,7 @@ These functions mirror, in R, the implementations in the Python package
 tests in \code{tests/testthat/}.
 }
 \keyword{models}
+\examples{
+morie_ordinal_probs(eta = c(-0.5, 0.2, 1.1),
+                    thresholds = c(-1, 0, 1))
+}

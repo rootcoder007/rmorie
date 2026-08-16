@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{name}{See Usage.}
+\item{name}{Passed to \code{sprintf}.}
 }
 \description{
 A step of the dpoF_native implementation. Called by \code{morie_dpoF}, \code{optimal_policy}. See the file header for the source the module follows.

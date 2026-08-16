@@ -8,8 +8,8 @@
 .t2_lvl(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{Passed to \code{c}.}
+\item{b}{Passed to \code{c}.}
 }
 \description{
 A step of the tail2_t01 implementation. Called by \code{KappaCoh}, \code{KappaWt}. See the file header for the source the module follows.

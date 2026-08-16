@@ -296,7 +296,7 @@ morie_bnsadt_fit <- function(x, sigma, family = "symmetric_step",
 #' denominator are both finite sums of normal increments, so this is
 #' exact rather than quadrature.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{>}.
 #' @param theta Numeric; combined arithmetically in the body.
 #' @param sigma Numeric; combined arithmetically in the body.
 #' @param family Passed to \code{.bnsadt_betas}.

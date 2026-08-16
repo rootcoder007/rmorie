@@ -225,7 +225,7 @@ morie_alfqud_text <- function(program) {
 #' @param targets Passed to \code{morie_alfqud_correctness}.
 #' @param n_reg Passed to \code{morie_alfqud_correctness}.
 #' @param lw Coerced to numeric by the body, with \code{as.numeric}.
-#' @param rf See Usage.
+#' @param rf Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A vector, from \code{c}.
 #' @export
 .alfqud_score <- function(program, inputs, targets, n_reg, lw, rf) {

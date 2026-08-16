@@ -10,7 +10,7 @@
 \arguments{
 \item{e}{Passed to \code{.karpv_unit}.}
 \item{node}{Passed to \code{.karpv_collect}.}
-\item{internal_bias}{See Usage.}
+\item{internal_bias}{Passed to \code{<}.}
 }
 \description{
 A step of the karpV_native implementation. Called by \code{morie_karpV}. See the file header for the source the module follows.

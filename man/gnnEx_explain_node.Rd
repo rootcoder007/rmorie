@@ -8,12 +8,12 @@
 gnnEx_explain_node(predict, adj, v, y, n_features, L = 2, iters = 300, lr = 0.1, size_coef = 0.005, entropy_coef = 1, seed = 0, penalize = TRUE)
 }
 \arguments{
-\item{predict}{See Usage.}
-\item{adj}{See Usage.}
+\item{predict}{Passed to \code{gnnEx_mask_objective}.}
+\item{adj}{Passed to \code{gnnEx_computation_graph}.}
 \item{v}{Coerced to character by the body, with \code{as.character}.}
-\item{y}{See Usage.}
+\item{y}{Passed to \code{gnnEx_mask_objective}.}
 \item{n_features}{Coerced to integer by the body, with \code{as.integer}.}
-\item{L}{Defaults to \code{2}.}
+\item{L}{Passed to \code{gnnEx_computation_graph}. Defaults to \code{2}.}
 \item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{300}.}
 \item{lr}{Numeric; combined arithmetically in the body. Defaults to \code{0.1}.}
 \item{size_coef}{Defaults to \code{0.005}.}

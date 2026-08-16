@@ -41,7 +41,7 @@
 #'
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
 #' @param K Coerced to integer by the body, with \code{as.integer}.
-#' @param rng Defaults to \code{NULL}.
+#' @param rng Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return A list with \code{weights}, \code{V}, \code{remaining}, \code{kept_mass}, \code{K}, \code{alpha}, \code{note}.
 #' @export
@@ -122,7 +122,7 @@ sticks_for_tolerance <- function(alpha, tol = 1e-3) {
 #' source it follows.
 #'
 #' @param weights Coerced to numeric by the body, with \code{as.numeric}.
-#' @param alpha See Usage.
+#' @param alpha Passed to \code{truncation_error}.
 #' @return A list with \code{realised_tail}, \code{expected_tail}, \code{ratio}, \code{largest_index}, \code{monotone}, \code{note}.
 #' @export
 decay_diagnostics <- function(weights, alpha) {
@@ -154,8 +154,8 @@ decay_diagnostics <- function(weights, alpha) {
 #'
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
 #' @param K Coerced to integer by the body, with \code{as.integer}.
-#' @param base_sampler Defaults to \code{NULL}.
-#' @param rng Defaults to \code{NULL}.
+#' @param base_sampler Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param rng Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @param renormalise A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{weights}, \code{atoms}, \code{discarded_mass}, \code{expected_discarded}, \code{renormalised}, \code{K}, \code{alpha}, \code{method}, \code{note}.

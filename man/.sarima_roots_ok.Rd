@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{coefs}{A vector; its length is taken.}
-\item{tol}{Defaults to \code{1.001}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1.001}.}
 }
 \description{
 A step of the sarima_native implementation. Called by \code{.sarima_fit}, \code{.sarimax_fit}. See the file header for the source the module follows.

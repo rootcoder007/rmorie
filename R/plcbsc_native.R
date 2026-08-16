@@ -38,7 +38,7 @@
 #' @param v Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5000}.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-12}.
-#' @param step Defaults to \code{NULL}.
+#' @param step Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{weights}, \code{loss}, \code{fitted}, \code{n_iter}, \code{converged}.
 #' @export
 .plcbsc_synthetic_control <- function(x_treated, x_donors, v = NULL,
@@ -154,7 +154,7 @@
 #' @param gaps A vector; its length is taken and its elements indexed.
 #' @param t0 A count; the body uses it as \code{seq_len(...)}.
 #' @param statistic Compared against \code{"effect"}.
-#' @param pre_gaps Defaults to \code{NULL}.
+#' @param pre_gaps Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A numeric value.
 #' @export
 .plcbsc_effect <- function(gaps, t0, statistic, pre_gaps = NULL) {
@@ -179,7 +179,7 @@
 #' @param y_treated Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y_donors Iterated over elementwise, with \code{lapply}.
 #' @param t0 A count; the body uses it as \code{seq_len(...)}.
-#' @param x_treated Defaults to \code{NULL}.
+#' @param x_treated Passed to \code{fit}.
 #' @param x_donors Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param v Carried through into a list the body builds.
 #' @param statistic One of \code{"effect"}, \code{"rmspe_ratio"}. Defaults to \code{"effect"}.

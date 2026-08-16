@@ -9,10 +9,10 @@ ngcf_stack_layers(E0, adjacency, Ws, affinity = TRUE, slope = 0.2)
 }
 \arguments{
 \item{E0}{A matrix; passed to \code{as.matrix}.}
-\item{adjacency}{See Usage.}
+\item{adjacency}{Passed to \code{ngcf_propagate}.}
 \item{Ws}{A vector; its length is taken.}
 \item{affinity}{Coerced to logical by the body, with \code{as.logical}. Defaults to \code{TRUE}.}
-\item{slope}{Defaults to \code{0.2}.}
+\item{slope}{Passed to \code{ngcf_propagate}. Defaults to \code{0.2}.}
 }
 \description{
 A step of the ngcf_native implementation. No other function in the package calls it. See the file header for the source the module follows.

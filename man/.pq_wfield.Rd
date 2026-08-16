@@ -10,7 +10,7 @@
 \arguments{
 \item{e}{Passed to \code{.pq_emit}.}
 \item{fid}{Numeric; combined arithmetically in the body.}
-\item{ttype}{See Usage.}
+\item{ttype}{Passed to \code{bitwOr}.}
 \item{last}{Numeric; combined arithmetically in the body.}
 }
 \description{

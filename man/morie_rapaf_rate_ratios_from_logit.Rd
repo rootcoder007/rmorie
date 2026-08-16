@@ -20,3 +20,8 @@ Fits a logistic regression to the case / control design matrix and returns the o
 A list with \code{rate_ratios}, \code{coef}, \code{note}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_rapaf_population_attributable_risk(V, V)
+morie_rapaf_rate_ratios_from_logit(case_counts = V, control_counts = V, design = V)
+}

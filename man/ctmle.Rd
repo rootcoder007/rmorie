@@ -12,8 +12,8 @@ ctmle(A, Y, Q1, Q0, W, g_models, V = 5L, seed = 0L, penalty = TRUE)
 \item{Y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{Q1}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{Q0}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{W}{See Usage.}
-\item{g_models}{See Usage.}
+\item{W}{Passed to \code{candidate_sequence}.}
+\item{g_models}{Passed to \code{candidate_sequence}.}
 \item{V}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.}
 \item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.}
 \item{penalty}{A flag; the body branches on it. Defaults to \code{TRUE}.}

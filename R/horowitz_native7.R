@@ -106,13 +106,13 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param w See Usage.
-#' @param eta See Usage.
+#' @param w Passed to \code{outer}.
+#' @param eta Passed to \code{outer}.
 #' @param grid_u Iterated over elementwise, with \code{vapply}.
 #' @param grid_z Iterated over elementwise, with \code{vapply}.
 #' @param nu_U Numeric; combined arithmetically in the body.
 #' @param nu_eps Numeric; combined arithmetically in the body.
-#' @param n_tau Defaults to \code{2001L}.
+#' @param n_tau Passed to \code{seq}. Defaults to \code{2001L}.
 #' @return A list with \code{f_U}, \code{f_eps}.
 #' @export
 .morie_hrz_deconvolve_pair <- function(w, eta, grid_u, grid_z, nu_U, nu_eps,

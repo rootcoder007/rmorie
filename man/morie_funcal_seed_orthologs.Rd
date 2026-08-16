@@ -11,9 +11,9 @@ morie_funcal_seed_orthologs(hits, evalue = 0.001, score = 60, query_cov = 0.2, t
 \item{hits}{See Usage.}
 \item{evalue}{The body requires: funcal: evalue must be positive and score non-negative. Defaults to \code{0.001}.}
 \item{score}{The body requires: funcal: evalue must be positive and score non-negative. Defaults to \code{60}.}
-\item{query_cov}{Defaults to \code{0.2}.}
-\item{target_cov}{Defaults to \code{0.2}.}
-\item{searcher}{Defaults to \code{"diamond"}.}
+\item{query_cov}{Passed to \code{<}. Defaults to \code{0.2}.}
+\item{target_cov}{Passed to \code{<}. Defaults to \code{0.2}.}
+\item{searcher}{Passed to \code{\%in\%}. Defaults to \code{"diamond"}.}
 }
 \description{
 A step of the funcal_native implementation. Called by \code{morie_funcal}. See the file header for the source the module follows.

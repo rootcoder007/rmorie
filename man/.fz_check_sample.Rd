@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{x}{A vector; its length is taken.}
-\item{min_n}{Defaults to \code{2L}.}
+\item{min_n}{Passed to \code{<}. Defaults to \code{2L}.}
 }
 \description{
 A step of the fauzi_native implementation. Called by \code{.fz_cs_common}, \code{morie_fauzi_boundary_free_kde}, \code{morie_fauzi_conditions_c1_c6} and 7 others in the module. See the file header for the source the module follows.

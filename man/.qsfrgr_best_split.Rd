@@ -13,7 +13,7 @@
 \item{event}{Passed to \code{morie_qsfrgr_logrank}.}
 \item{rows}{A vector; indexed elementwise.}
 \item{feats}{See Usage.}
-\item{min_leaf}{See Usage.}
+\item{min_leaf}{Passed to \code{<}.}
 \item{rule}{Compared against \code{"logrank"}.}
 }
 \description{

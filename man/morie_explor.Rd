@@ -8,18 +8,18 @@
 morie_explor(states, actions, next_states, n_actions = NULL, n_features = 8, eta = 1, beta = 0.2, lr = 0.05, epochs = 1, features = "inverse", discrete = TRUE, seed = 0)
 }
 \arguments{
-\item{states}{See Usage.}
-\item{actions}{See Usage.}
-\item{next_states}{See Usage.}
-\item{n_actions}{Defaults to \code{NULL}.}
-\item{n_features}{Defaults to \code{8}.}
-\item{eta}{Defaults to \code{1}.}
-\item{beta}{Defaults to \code{0.2}.}
-\item{lr}{Defaults to \code{0.05}.}
-\item{epochs}{Defaults to \code{1}.}
-\item{features}{Defaults to \code{"inverse"}.}
-\item{discrete}{Defaults to \code{TRUE}.}
-\item{seed}{Defaults to \code{0}.}
+\item{states}{Passed to \code{explor}.}
+\item{actions}{Passed to \code{explor}.}
+\item{next_states}{Passed to \code{explor}.}
+\item{n_actions}{Passed to \code{explor}.}
+\item{n_features}{Passed to \code{explor}. Defaults to \code{8}.}
+\item{eta}{Passed to \code{explor}. Defaults to \code{1}.}
+\item{beta}{Passed to \code{explor}. Defaults to \code{0.2}.}
+\item{lr}{Passed to \code{explor}. Defaults to \code{0.05}.}
+\item{epochs}{Passed to \code{explor}. Defaults to \code{1}.}
+\item{features}{Passed to \code{explor}. Defaults to \code{"inverse"}.}
+\item{discrete}{Passed to \code{explor}. Defaults to \code{TRUE}.}
+\item{seed}{Passed to \code{explor}. Defaults to \code{0}.}
 }
 \description{
 A step of the explor_native implementation. No other function in the package calls it. See the file header for the source the module follows.

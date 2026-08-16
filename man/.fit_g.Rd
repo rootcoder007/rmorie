@@ -10,8 +10,8 @@
 \arguments{
 \item{A}{A vector; its length is taken.}
 \item{W}{A matrix; passed to \code{ncol}.}
-\item{aL}{See Usage.}
-\item{aH}{See Usage.}
+\item{aL}{Passed to \code{==}.}
+\item{aH}{Passed to \code{==}.}
 \item{rows}{See Usage.}
 \item{ridge}{Accepted by the signature and not used anywhere in the body.}
 \item{trim}{Numeric; passed to \code{max}.}

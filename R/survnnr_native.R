@@ -41,7 +41,7 @@ ACTIVATIONS <- c("tanh", "relu", "identity")
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param v See Usage.
+#' @param v Passed to \code{tanh}.
 #' @param kind One of \code{"relu"}, \code{"tanh"}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
@@ -57,7 +57,7 @@ ACTIVATIONS <- c("tanh", "relu", "identity")
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param v See Usage.
+#' @param v Passed to \code{tanh}.
 #' @param kind One of \code{"relu"}, \code{"tanh"}.
 #' @return A numeric value.
 #' @export
@@ -76,7 +76,7 @@ ACTIVATIONS <- c("tanh", "relu", "identity")
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param d See Usage.
+#' @param d Passed to \code{c}.
 #' @param hidden Coerced to integer by the body, with \code{as.integer}.
 #' @param seed Passed to \code{.ghc_rng}.
 #' @return A list with \code{W}, \code{b}.
@@ -210,7 +210,7 @@ morie_survnnr_partial_loglik <- function(times, events, risk) {
 #' @param lr Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
 #' @param n_epochs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{400}.
 #' @param seed Passed to \code{.survnnr_init}. Defaults to \code{0}.
-#' @param tol Defaults to \code{1e-10}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-10}.
 #' @return A list with \code{estimate}, \code{W}, \code{b}, \code{activation}, \code{hidden}, \code{l2}, \code{loss_history}, \code{risk}, \code{centred_risk}, \code{coefficients}, \code{times}, \code{events}, \code{epochs}, \code{ties}, \code{scale_note}, \code{method}.
 #' @export
 morie_survnnr_fit <- function(X, times, events, hidden = c(),

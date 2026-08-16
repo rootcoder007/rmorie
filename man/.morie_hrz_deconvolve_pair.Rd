@@ -8,13 +8,13 @@
 .morie_hrz_deconvolve_pair(w, eta, grid_u, grid_z, nu_U, nu_eps, n_tau = 2001L)
 }
 \arguments{
-\item{w}{See Usage.}
-\item{eta}{See Usage.}
+\item{w}{Passed to \code{outer}.}
+\item{eta}{Passed to \code{outer}.}
 \item{grid_u}{Iterated over elementwise, with \code{vapply}.}
 \item{grid_z}{Iterated over elementwise, with \code{vapply}.}
 \item{nu_U}{Numeric; combined arithmetically in the body.}
 \item{nu_eps}{Numeric; combined arithmetically in the body.}
-\item{n_tau}{Defaults to \code{2001L}.}
+\item{n_tau}{Passed to \code{seq}. Defaults to \code{2001L}.}
 }
 \description{
 A step of the horowitz_native7 implementation. Called by \code{morie_panel_deconvolution}, \code{morie_panel_densities}, \code{morie_smoothed_fU}. See the file header for the source the module follows.

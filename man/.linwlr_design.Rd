@@ -8,7 +8,7 @@
 .linwlr_design(Zsrc, n)
 }
 \arguments{
-\item{Zsrc}{See Usage.}
+\item{Zsrc}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{n}{A count; the body uses it as \code{matrix(...)}.}
 }
 \description{

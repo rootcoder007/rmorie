@@ -8,14 +8,14 @@
 morie_tlheic(psi_of_P = NULL, basis = NULL, D = NULL, score = NULL, weights = NULL, h = 1e-05, tol = 1e-04, ridge = 1e-08, mode = c("estimate", "verify", "grad", "deriv"))
 }
 \arguments{
-\item{psi_of_P}{Defaults to \code{NULL}.}
-\item{basis}{Defaults to \code{NULL}.}
-\item{D}{Defaults to \code{NULL}.}
-\item{score}{Defaults to \code{NULL}.}
-\item{weights}{Defaults to \code{NULL}.}
-\item{h}{Defaults to \code{1e-05}.}
-\item{tol}{Defaults to \code{1e-04}.}
-\item{ridge}{Defaults to \code{1e-08}.}
+\item{psi_of_P}{Passed to \code{numerical_derivative}.}
+\item{basis}{Passed to \code{estimate_eic}.}
+\item{D}{Passed to \code{gradient_inner_product}.}
+\item{score}{Passed to \code{numerical_derivative}.}
+\item{weights}{Passed to \code{numerical_derivative}.}
+\item{h}{Passed to \code{numerical_derivative}. Defaults to \code{1e-05}.}
+\item{tol}{Passed to \code{verify_gradient}. Defaults to \code{1e-04}.}
+\item{ridge}{Passed to \code{estimate_eic}. Defaults to \code{1e-08}.}
 \item{mode}{One of \code{"deriv"}, \code{"grad"}, \code{"verify"}.}
 }
 \description{

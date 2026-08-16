@@ -8,7 +8,7 @@
 .s03qnorm(p)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Passed to \code{qnorm}.}
 }
 \description{
 A step of the helpers_s03 implementation. Called by \code{.drbsze_tquant}, \code{Btbca}, \code{Btcicor} and 20 others in the module. See the file header for the source the module follows.

@@ -9,8 +9,8 @@ alpha_pq(d_tx, p, q)
 }
 \arguments{
 \item{d_tx}{Coerced to integer by the body, with \code{as.integer}.}
-\item{p}{See Usage.}
-\item{q}{See Usage.}
+\item{p}{Passed to \code{node2v_check_pq}.}
+\item{q}{Passed to \code{node2v_check_pq}.}
 }
 \description{
 A step of the node2v_native implementation. Called by \code{transition_probabilities}. See the file header for the source the module follows.

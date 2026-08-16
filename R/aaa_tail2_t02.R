@@ -266,7 +266,7 @@ BrayCurt <- function(x, y, close = TRUE) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param key See Usage.
+#' @param key Passed to \code{switch}.
 #' @return The value of \code{switch}.
 #' @export
 .t2_named_f <- function(key) switch(key,
@@ -285,7 +285,7 @@ BrayCurt <- function(x, y, close = TRUE) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param key See Usage.
+#' @param key Passed to \code{switch}.
 #' @return The value of \code{switch}.
 #' @export
 .t2_named_inf <- function(key) switch(key,

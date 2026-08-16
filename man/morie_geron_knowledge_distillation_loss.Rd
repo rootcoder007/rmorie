@@ -36,3 +36,9 @@ the mirror image of Hinton's KL(teacher || student). Both directions
 are returned (\code{kl_student_teacher}, \code{kl_teacher_student}) but only the
 student-first one enters \code{loss}.
 }
+\examples{
+sl <- matrix(c(2, 0.5, 0.1, 0.2, 1.5, 0.3), 2, 3, byrow = TRUE)
+tl <- matrix(c(1.8, 0.6, 0.2, 0.1, 1.7, 0.4), 2, 3, byrow = TRUE)
+morie_geron_knowledge_distillation_loss(sl, tl, y = c(1L, 2L),
+                                        alpha = 0.5, T = 2)
+}

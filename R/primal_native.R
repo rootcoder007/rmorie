@@ -52,7 +52,7 @@
 #' @param theta Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param norm_K Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500}.
-#' @param tol Defaults to \code{1e-10}.
+#' @param tol Passed to \code{<=}. Defaults to \code{1e-10}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
 morie_primal <- function(K, Kt, prox_f_star, prox_g, x0, y0,
