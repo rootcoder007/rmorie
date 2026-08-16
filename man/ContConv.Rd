@@ -10,7 +10,7 @@ ContConv(x, h, dt = 1, t = NULL)
 \arguments{
 \item{x}{Passed to \code{.morie_rg_aslist}.}
 \item{h}{Passed to \code{.morie_rg_aslist}.}
-\item{dt}{Defaults to \code{1}.}
+\item{dt}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 \item{t}{Optional; may be \code{NULL}. Passed to \code{.morie_rg_aslist}.}
 }
 \description{

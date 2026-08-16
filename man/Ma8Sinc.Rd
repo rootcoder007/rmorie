@@ -8,7 +8,7 @@
 Ma8Sinc(omega)
 }
 \arguments{
-\item{omega}{See Usage.}
+\item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 pure delay of 7/2 samples.  The book states it "is equivalent to that in Equation 3.111", and both are recomputed and compared.  The delay is not an integer -- the price of an even-length filter.

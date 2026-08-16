@@ -11,8 +11,8 @@
 \item{times}{Passed to \code{.survroc_clean}.}
 \item{events}{Passed to \code{.survroc_clean}.}
 \item{marker}{Passed to \code{.survroc_clean}.}
-\item{c}{See Usage.}
-\item{t}{See Usage.}
+\item{c}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{t}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{route}{Compared against \code{"empirical"}.}
 }
 \description{

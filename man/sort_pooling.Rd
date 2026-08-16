@@ -8,9 +8,9 @@
 sort_pooling(features, k_keep, sort_channel = -1)
 }
 \arguments{
-\item{features}{See Usage.}
-\item{k_keep}{See Usage.}
-\item{sort_channel}{Defaults to \code{-1}.}
+\item{features}{A matrix; the body checks with \code{is.matrix}.}
+\item{k_keep}{Coerced to integer by the body, with \code{as.integer}.}
+\item{sort_channel}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{-1}.}
 }
 \description{
 A step of the sortP_native implementation. Called by \code{order_is_graph_determined}. See the file header for the source the module follows.

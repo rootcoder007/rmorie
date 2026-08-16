@@ -8,9 +8,9 @@
 SpecMoments(psd, fs = 1, freqs = NULL)
 }
 \arguments{
-\item{psd}{See Usage.}
-\item{fs}{Defaults to \code{1}.}
-\item{freqs}{Defaults to \code{NULL}.}
+\item{psd}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{freqs}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 for a real signal S(k) is even-symmetric about fs/2, so summing the whole period double-counts every frequency and pins the mean at fs/2 regardless of the signal.

@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{rows}{See Usage.}
-\item{ys}{See Usage.}
+\item{ys}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{w}{Numeric; combined arithmetically in the body.}
 }
 \description{

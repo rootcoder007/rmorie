@@ -10,8 +10,8 @@ EchoPsd(H, a, n_0, z)
 \arguments{
 \item{H}{A vector; its length is taken.}
 \item{a}{Numeric; combined arithmetically in the body.}
-\item{n_0}{See Usage.}
-\item{z}{See Usage.}
+\item{n_0}{Coerced to integer by the body, with \code{as.integer}.}
+\item{z}{Coerced to complex by the body, with \code{as.complex}.}
 }
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.

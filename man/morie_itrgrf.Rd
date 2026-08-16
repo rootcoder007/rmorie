@@ -8,15 +8,15 @@
 morie_itrgrf(y, W, X, cost = 0, n_trees = 150, min_leaf = 5, seed = 0, evaluate = "split", propensity = NULL, level = 0.95)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{W}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{W}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{X}{A matrix; passed to \code{as.matrix}.}
 \item{cost}{Passed to \code{.itrgrf_policy_from_tau}. Defaults to \code{0}.}
 \item{n_trees}{Passed to \code{.itrgrf_fit_arm}. Defaults to \code{150}.}
 \item{min_leaf}{Passed to \code{.itrgrf_fit_arm}. Defaults to \code{5}.}
 \item{seed}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 \item{evaluate}{One of \code{"in-sample"}, \code{"split"}. Defaults to \code{"split"}.}
-\item{propensity}{Defaults to \code{NULL}.}
+\item{propensity}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{level}{Numeric; combined arithmetically in the body. Defaults to \code{0.95}.}
 }
 \description{

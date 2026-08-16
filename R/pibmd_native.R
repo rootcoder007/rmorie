@@ -148,9 +148,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param samples See Usage.
+#' @param samples Coerced to numeric by the body, with \code{as.numeric}.
 #' @param prior A list; the body reads \code{$mean}, \code{$sd} from it.
-#' @param n_grid Defaults to \code{512L}.
+#' @param n_grid Coerced to integer by the body, with \code{as.integer}. Defaults to \code{512L}.
 #' @return A list with \code{estimate}, \code{kl_divergence}, \code{kl_divergence_kde}, \code{kl_divergence_reverse}, \code{kl_symmetric}, \code{shrinkage}, \code{bias_in_prior_sd}, \code{wasserstein_1}, \code{conflict_p_value}, \code{conflict_p_value_gaussian}, \code{conflict_p_value_empirical}, \code{posterior_mean}, \code{posterior_var}, \code{posterior_sd}, \code{prior_mean}, \code{prior_var}, \code{prior_sd}, \code{n_posterior}, \code{n_prior}, \code{moments_only}, \code{verdict}, \code{informativeness}, \code{method}, \code{note}.
 #' @export
 morie_pibmd_prior_informativeness_bias_diagnostic <- function(samples, prior,

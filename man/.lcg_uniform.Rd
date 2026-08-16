@@ -8,7 +8,7 @@
 .lcg_uniform(seed, n)
 }
 \arguments{
-\item{seed}{See Usage.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{n}{Passed to \code{.ghc_unif}.}
 }
 \description{

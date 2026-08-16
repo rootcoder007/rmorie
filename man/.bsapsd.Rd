@@ -8,7 +8,7 @@
 .bsapsd(x, fs, detrend = TRUE)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
 \item{detrend}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }

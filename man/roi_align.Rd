@@ -10,9 +10,9 @@ roi_align(features, box, out_size = 2L, stride = 1, samples = 2L)
 \arguments{
 \item{features}{Passed to \code{.masrcn_mat}.}
 \item{box}{A vector; indexed elementwise.}
-\item{out_size}{Defaults to \code{2L}.}
-\item{stride}{Defaults to \code{1}.}
-\item{samples}{Defaults to \code{2L}.}
+\item{out_size}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.}
+\item{stride}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{samples}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.}
 }
 \description{
 A step of the masrcn_native implementation. Called by \code{morie_masrcn}. See the file header for the source the module follows.

@@ -8,8 +8,8 @@
 WienerFreq(sxx, sxd)
 }
 \arguments{
-\item{sxx}{See Usage.}
-\item{sxd}{See Usage.}
+\item{sxx}{Coerced to complex by the body, with \code{as.complex}.}
+\item{sxd}{Coerced to complex by the body, with \code{as.complex}.}
 }
 \description{
 vanishes the ratio is undefined; returning zero there is a choice, and it is flagged so a caller can tell it apart from a genuine zero response.

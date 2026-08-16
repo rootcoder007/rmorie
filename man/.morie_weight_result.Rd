@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{weights}{A vector; its length is taken.}
-\item{propensity}{See Usage.}
+\item{propensity}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{method}{See Usage.}
 \item{estimand}{See Usage.}
 \item{call}{See Usage.}

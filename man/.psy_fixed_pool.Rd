@@ -8,8 +8,8 @@
 .psy_fixed_pool(yi, vi)
 }
 \arguments{
-\item{yi}{See Usage.}
-\item{vi}{See Usage.}
+\item{yi}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{vi}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the psycho_native implementation. Called by \code{.psy_dl}, \code{morie_psy_ma_paule_mandel}, \code{morie_psy_ma_reml}. See the file header for the source the module follows.

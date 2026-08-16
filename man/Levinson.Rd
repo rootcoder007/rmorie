@@ -8,8 +8,8 @@
 Levinson(acf, order = NULL)
 }
 \arguments{
-\item{acf}{See Usage.}
-\item{order}{Defaults to \code{NULL}.}
+\item{acf}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{order}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 gamma_i = -(1/eps_{i-1})[phi(i) + sum_j a_{i-1,j} phi(i-j)] a_{i,i} = gamma_i; a_{i,j} = a_{i-1,j} + gamma_i a_{i-1,i-j} eps_i = (1 - gamma_i^2) eps_{i-1} The book states the error is monotone and the model is stable exactly when every |gamma_i| < 1; both are checked, not trusted.

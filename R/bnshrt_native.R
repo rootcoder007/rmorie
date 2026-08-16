@@ -24,11 +24,11 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param beta See Usage.
-#' @param gamma See Usage.
+#' @param beta Coerced to numeric by the body, with \code{as.numeric}.
+#' @param gamma Coerced to numeric by the body, with \code{as.numeric}.
 #' @param x A matrix; passed to \code{as.matrix}.
-#' @param alpha See Usage.
-#' @param y0 See Usage.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
+#' @param y0 Coerced to integer by the body, with \code{as.integer}.
 #' @param link One of \code{"logit"}, \code{"probit"}. Defaults to \code{"logit"}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -126,8 +126,8 @@ morie_sequence_frequencies <- function(Y) {
 #' @param alpha_grid See Usage.
 #' @param y0_values Defaults to \code{c(0, 1)}.
 #' @param link Passed to \code{morie_sequence_probabilities}. Defaults to \code{"logit"}.
-#' @param tol Defaults to \code{1e-04}.
-#' @param iters Defaults to \code{4000L}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-04}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4000L}.
 #' @return A list with \code{discrepancy}, \code{feasible}, \code{weights}, \code{fitted}, \code{target}.
 #' @export
 morie_in_identified_set <- function(freq, beta, gamma, x, alpha_grid,
@@ -183,7 +183,7 @@ morie_in_identified_set <- function(freq, beta, gamma, x, alpha_grid,
 #' @param beta_grid See Usage.
 #' @param gamma_grid See Usage.
 #' @param alpha_grid Passed to \code{morie_in_identified_set}.
-#' @param beta_fixed Defaults to \code{NULL}.
+#' @param beta_fixed Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param link Passed to \code{morie_in_identified_set}. Defaults to \code{"logit"}.
 #' @param tol Passed to \code{morie_in_identified_set}. Defaults to \code{0.001}.
 #' @return A list with \code{estimate}, \code{set}, \code{n_feasible}, \code{beta_bounds}, \code{gamma_bounds}, \code{beta_width}, \code{gamma_width}, \code{point_identified}, \code{discrepancy}, \code{method}, \code{assumes}.

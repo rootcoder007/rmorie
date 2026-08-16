@@ -8,9 +8,9 @@
 .funkM_predict(mu, b_user, b_item, p_u, q_i)
 }
 \arguments{
-\item{mu}{See Usage.}
-\item{b_user}{See Usage.}
-\item{b_item}{See Usage.}
+\item{mu}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{b_user}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{b_item}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{p_u}{A vector; its length is taken.}
 \item{q_i}{A vector; its length is taken.}
 }

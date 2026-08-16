@@ -8,10 +8,10 @@
 valid_output_size(input_size, depth = 4L, convs_per_block = 2L, kernel = 3L)
 }
 \arguments{
-\item{input_size}{See Usage.}
+\item{input_size}{Coerced to integer by the body, with \code{as.integer}.}
 \item{depth}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{4L}.}
-\item{convs_per_block}{Defaults to \code{2L}.}
-\item{kernel}{Defaults to \code{3L}.}
+\item{convs_per_block}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.}
+\item{kernel}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.}
 }
 \description{
 A step of the unetbk_native implementation. No other function in the package calls it. See the file header for the source the module follows.

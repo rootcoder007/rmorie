@@ -8,9 +8,9 @@
 Whopf(x, d, order)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{d}{See Usage.}
-\item{order}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{d}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{order}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 cross-correlation vector from data and solve for the tap weights. The biased (1/N) ACF estimate is used, which is what makes Phi nonnegative-definite and so keeps the system solvable.

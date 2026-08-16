@@ -8,10 +8,10 @@
 XCorrCont(x, y, t, delays)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
-\item{t}{See Usage.}
-\item{delays}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{t}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{delays}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 samples that BOTH signals cover.  Long delays use less data, so the overlap fraction travels with the estimate.

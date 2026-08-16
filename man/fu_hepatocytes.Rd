@@ -9,7 +9,7 @@ fu_hepatocytes(log_pd, volume_ratio = 0.005)
 }
 \arguments{
 \item{log_pd}{Passed to \code{.clrnt_binding_term}.}
-\item{volume_ratio}{Defaults to \code{0.005}.}
+\item{volume_ratio}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.005}.}
 }
 \description{
 A step of the clrnt_native implementation. No other function in the package calls it. See the file header for the source the module follows.

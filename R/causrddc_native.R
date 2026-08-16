@@ -96,7 +96,7 @@
 #' @param p Numeric; combined arithmetically in the body.
 #' @param q Numeric; combined arithmetically in the body.
 #' @param kernel Passed to \code{.causrddc_kern}. Defaults to \code{"triangular"}.
-#' @param n_grid Defaults to \code{2001}.
+#' @param n_grid Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2001}.
 #' @return A list with \code{G}, \code{th}, \code{P}.
 #' @export
 .causrddc_kernel_constants <- function(p, q, kernel = "triangular", n_grid = 2001) {
@@ -254,7 +254,7 @@
 #' @param p Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param kernel Passed to \code{.causrddc_kernel_constants}. Defaults to \code{"triangular"}.
 #' @param s Numeric; combined arithmetically in the body. Defaults to \code{0}.
-#' @param prelim_order Defaults to \code{NULL}.
+#' @param prelim_order Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{h}, \code{h_unclamped}, \code{at_bound}, \code{C}, \code{B}, \code{V}, \code{f}, \code{mu_plus}, \code{mu_minus}.
 #' @export
 morie_causrddc_rd_bandwidth <- function(x, y, nu = 0, p = 1, kernel = "triangular", s = 0, prelim_order = NULL) {
@@ -346,8 +346,8 @@ morie_causrddc_rd_bandwidth <- function(x, y, nu = 0, p = 1, kernel = "triangula
 #'
 #' @param y A vector; its length is taken.
 #' @param x A vector; its length is taken and its elements indexed.
-#' @param treatment Defaults to \code{NULL}.
-#' @param cutoff Defaults to \code{0}.
+#' @param treatment Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param cutoff Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param nu Passed to \code{morie_causrddc_rd_bandwidth}. Defaults to \code{0}.
 #' @param p Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param q Optional; may be \code{NULL}. Passed to \code{morie_causrddc_rd_bandwidth}.
@@ -356,7 +356,7 @@ morie_causrddc_rd_bandwidth <- function(x, y, nu = 0, p = 1, kernel = "triangula
 #' @param kernel Passed to \code{morie_causrddc_rd_bandwidth}. Defaults to \code{"triangular"}.
 #' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{0.05}.
 #' @param vce One of \code{"hc"}, \code{"nn"}. Defaults to \code{"nn"}.
-#' @param J Defaults to \code{3}.
+#' @param J Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
 #' @return A list with \code{estimate}, \code{bias_corrected}, \code{se_conventional}, \code{se_robust}, \code{ci_conventional}, \code{ci_bias_corrected}, \code{ci_robust}, \code{pvalue_robust}, \code{h}, \code{b}, \code{rho}, \code{p}, \code{q}, \code{nu}, \code{kernel}, \code{vce}, \code{alpha}, \code{n}, \code{n_left}, \code{n_right}, \code{weights_conventional}, \code{weights_bias_corrected}, \code{fuzzy}, \code{method}.
 #' @export
 morie_causrddc <- function(y, x, treatment = NULL, cutoff = 0.0, nu = 0, p = 1, q = NULL, h = NULL, b = NULL, kernel = "triangular", alpha = 0.05, vce = "nn", J = 3) {

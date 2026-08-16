@@ -9,9 +9,9 @@
 }
 \arguments{
 \item{A}{Passed to \code{.tlstoch_vec}.}
-\item{delta}{See Usage.}
-\item{lower}{Defaults to \code{NULL}.}
-\item{upper}{Defaults to \code{NULL}.}
+\item{delta}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{lower}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{upper}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tlstoch_native implementation. Called by \code{.tlstoch_shift_tmle}, \code{.tlstoch_stochastic_estimand}. See the file header for the source the module follows.

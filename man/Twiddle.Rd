@@ -8,8 +8,8 @@
 Twiddle(npoints, power = 1)
 }
 \arguments{
-\item{npoints}{See Usage.}
-\item{power}{Defaults to \code{1}.}
+\item{npoints}{Coerced to integer by the body, with \code{as.integer}.}
+\item{power}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.}
 }
 \description{
 A step of the rangayyan_xfrm implementation. No other function in the package calls it. See the file header for the source the module follows.

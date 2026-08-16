@@ -10,8 +10,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param query See Usage.
-#' @param subject See Usage.
+#' @param query Coerced to character by the body, with \code{as.character}.
+#' @param subject Coerced to character by the body, with \code{as.character}.
 #' @param match Defaults to \code{5}.
 #' @param mismatch Defaults to \code{-4}.
 #' @param matrix Optional; may be \code{NULL}. A matrix; indexed by row and column.
@@ -60,8 +60,8 @@ morie_msp_exact <- function(query, subject, match = 5, mismatch = -4,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param query See Usage.
-#' @param subject See Usage.
+#' @param query Coerced to character by the body, with \code{as.character}.
+#' @param subject Coerced to character by the body, with \code{as.character}.
 #' @param w A count; the body uses it as \code{seq_len(...)}.
 #' @param mode One of \code{"exact"}, \code{"neighborhood"}. Defaults to \code{"exact"}.
 #' @param threshold Defaults to \code{NULL}.
@@ -166,20 +166,20 @@ extend_one <- function(qchars, schars, qi, si, w, sc, X) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param query See Usage.
-#' @param subjects See Usage.
+#' @param query Coerced to character by the body, with \code{as.character}.
+#' @param subjects Character; the body checks with \code{is.character}.
 #' @param w Numeric; combined arithmetically in the body. Defaults to \code{11L}.
 #' @param match Passed to \code{morie_word_hits}. Defaults to \code{5}.
 #' @param mismatch Passed to \code{morie_word_hits}. Defaults to \code{-4}.
-#' @param cutoff Defaults to \code{NULL}.
-#' @param X Defaults to \code{20}.
+#' @param cutoff Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param X Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{20}.
 #' @param word_mode Passed to \code{morie_word_hits}. Defaults to \code{"exact"}.
 #' @param threshold Passed to \code{morie_word_hits}.
 #' @param matrix Optional; may be \code{NULL}. A matrix; indexed by row and column.
 #' @param alphabet A vector; its length is taken. Defaults to \code{"ACGT"}.
 #' @param lam Optional; may be \code{NULL}. Passed to \code{morie_blast_pvalue}.
 #' @param K Optional; may be \code{NULL}. Passed to \code{morie_blast_pvalue}.
-#' @param max_hsps Defaults to \code{NULL}.
+#' @param max_hsps Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param letter_probs Defaults to \code{NULL}.
 #' @param pvalues A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{hsps}, \code{best_score}, \code{n_hsps}, \code{n_hits}, \code{w}, \code{cutoff}, \code{X}, \code{word_mode}, \code{lam}, \code{K}, \code{karlin_altschul}, \code{note}, \code{method}.
@@ -332,7 +332,7 @@ morie_blast_nucleotide <- morie_blstn
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{n}, as built in the body.
 #' @export
 lattice_check <- function(x) {
@@ -351,9 +351,9 @@ lattice_check <- function(x) {
 #'
 #' @param match Defaults to \code{5}.
 #' @param mismatch Defaults to \code{-4}.
-#' @param letter_probs Defaults to \code{NULL}.
+#' @param letter_probs Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param matrix Optional; may be \code{NULL}. A vector; indexed elementwise.
-#' @param subject_probs Defaults to \code{NULL}.
+#' @param subject_probs Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_score_distribution <- function(match = 5, mismatch = -4,
@@ -449,7 +449,7 @@ gcd_span <- function(scores) {
 #' @param letter_probs Passed to \code{morie_score_distribution}.
 #' @param matrix Passed to \code{morie_score_distribution}.
 #' @param subject_probs Passed to \code{morie_score_distribution}.
-#' @param max_terms Defaults to \code{1000}.
+#' @param max_terms Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000}.
 #' @param tol Defaults to \code{1e-12}.
 #' @param bound One of \code{"lower"}, \code{"mid"}, \code{"upper"}. Defaults to \code{"upper"}.
 #' @return A list with \code{lam}, \code{K}, \code{K_upper}, \code{K_lower}, \code{C}, \code{delta}, \code{terms}, \code{series}, \code{mean_score}, \code{distribution}.
@@ -525,9 +525,9 @@ morie_karlin_altschul <- function(dist = NULL, match = 5, mismatch = -4,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param score See Usage.
-#' @param m See Usage.
-#' @param n See Usage.
+#' @param score Coerced to numeric by the body, with \code{as.numeric}.
+#' @param m Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n Coerced to numeric by the body, with \code{as.numeric}.
 #' @param lam Numeric; combined arithmetically in the body.
 #' @param K Numeric; combined arithmetically in the body.
 #' @param c Numeric; combined arithmetically in the body. Defaults to \code{1L}.
@@ -555,15 +555,15 @@ morie_blast_pvalue <- function(score, m, n, lam, K, c = 1L) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param m See Usage.
-#' @param n See Usage.
-#' @param letter_freqs See Usage.
+#' @param m Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n Coerced to numeric by the body, with \code{as.numeric}.
+#' @param letter_freqs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param match Passed to \code{morie_msp_exact}. Defaults to \code{5}.
 #' @param mismatch Passed to \code{morie_msp_exact}. Defaults to \code{-4}.
 #' @param matrix Passed to \code{morie_msp_exact}.
 #' @param alphabet Character; passed to \code{strsplit}. Defaults to \code{"ACGT"}.
 #' @param n_sim A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
 #' @param quantiles A vector; indexed elementwise. Defaults to \code{c(0.2, 0.9)}.
 #' @return A list with \code{lam}, \code{K}, \code{scores}.
 #' @export

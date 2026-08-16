@@ -10,7 +10,7 @@
 \arguments{
 \item{x}{A vector; its length is taken.}
 \item{D}{A matrix; indexed by row and column.}
-\item{sparsity}{See Usage.}
+\item{sparsity}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{tol}{See Usage.}
 }
 \description{

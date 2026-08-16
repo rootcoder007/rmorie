@@ -9,9 +9,9 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Y See Usage.
-#' @param treated See Usage.
-#' @param t_post See Usage.
+#' @param Y Iterated over elementwise, with \code{lapply}.
+#' @param treated Coerced to logical by the body, with \code{as.logical}.
+#' @param t_post Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{rows}, \code{n}, \code{T}, \code{tr}, \code{t_post}.
 #' @export
 .causscd_grid <- function(Y, treated, t_post) {
@@ -68,7 +68,7 @@
 #' @param cols A vector; its length is taken and its elements indexed.
 #' @param target A vector; its length is taken.
 #' @param penalty Numeric; combined arithmetically in the body.
-#' @param iters Defaults to \code{2000L}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000L}.
 #' @param tol Defaults to \code{1e-12}.
 #' @return A list with \code{w}, \code{intercept}.
 #' @export

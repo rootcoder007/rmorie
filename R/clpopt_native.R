@@ -55,11 +55,11 @@ clpopt_pivots <- c("bland", "dantzig")
 #'
 #' Mirrors clpopt.standard_form.
 #'
-#' @param c See Usage.
+#' @param c Coerced to numeric by the body, with \code{as.numeric}.
 #' @param A_ub Optional; may be \code{NULL}. Passed to \code{.clpopt_mat}.
-#' @param b_ub Defaults to \code{NULL}.
+#' @param b_ub Coerced to numeric by the body, with \code{as.numeric}.
 #' @param A_eq Optional; may be \code{NULL}. Passed to \code{.clpopt_mat}.
-#' @param b_eq Defaults to \code{NULL}.
+#' @param b_eq Coerced to numeric by the body, with \code{as.numeric}.
 #' @param upper Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return A list with \code{A}, \code{b}, \code{c}, \code{n_original}, \code{n_slack}, \code{row_kinds}.
 #' @export
@@ -168,7 +168,7 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 #' @param cols A vector; indexed elementwise.
 #' @param rule Compared against \code{"bland"}.
 #' @param blocked See Usage.
-#' @param max_iter See Usage.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}.
 #' @return A character value.
 #' @export
 .clpopt_run <- function(T, basis, cols, rule, blocked, max_iter) {
@@ -282,12 +282,12 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param c See Usage.
+#' @param c Coerced to numeric by the body, with \code{as.numeric}.
 #' @param A Passed to \code{.clpopt_mat}.
-#' @param b See Usage.
+#' @param b Coerced to numeric by the body, with \code{as.numeric}.
 #' @param rule Passed to \code{.clpopt_run}. Defaults to \code{"bland"}.
 #' @param max_iter Passed to \code{.clpopt_run}. Defaults to \code{10000}.
-#' @param initial_basis Defaults to \code{NULL}.
+#' @param initial_basis Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{.clpopt_report}.
 #' @export
 simplex <- function(c, A, b, rule = "bland", max_iter = 10000,
@@ -422,7 +422,7 @@ simplex <- function(c, A, b, rule = "bland", max_iter = 10000,
 #'
 #' Mirrors clpopt.linprog.
 #'
-#' @param c See Usage.
+#' @param c Coerced to numeric by the body, with \code{as.numeric}.
 #' @param A_ub Defaults to \code{NULL}.
 #' @param b_ub Defaults to \code{NULL}.
 #' @param A_eq Defaults to \code{NULL}.

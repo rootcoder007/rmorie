@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{mu}{A vector; its length is taken.}
-\item{sigma2}{See Usage.}
+\item{sigma2}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{family}{Passed to \code{.schab_variance_function}.}
 \item{R}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }

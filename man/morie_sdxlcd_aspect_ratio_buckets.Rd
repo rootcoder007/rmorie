@@ -9,8 +9,8 @@ morie_sdxlcd_aspect_ratio_buckets(ratios, pixels = 1024 * 1024, multiple = 64)
 }
 \arguments{
 \item{ratios}{See Usage.}
-\item{pixels}{Defaults to \code{1024 * 1024}.}
-\item{multiple}{Defaults to \code{64}.}
+\item{pixels}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1024 * 1024}.}
+\item{multiple}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{64}.}
 }
 \description{
 A step of the sdxlcd_native implementation. No other function in the package calls it. See the file header for the source the module follows.

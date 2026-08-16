@@ -8,10 +8,10 @@
 RlsLattice(x, order = 4, lam = 0.98, delta = 0.01)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{order}{Defaults to \code{4}.}
-\item{lam}{Defaults to \code{0.98}.}
-\item{delta}{Defaults to \code{0.01}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{order}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.}
+\item{lam}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.98}.}
+\item{delta}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.}
 }
 \description{
 the fit at EVERY order up to the one requested -- an order need not be chosen in advance, which is the lattice\'s advantage over the direct form.  |gamma| < 1 at every stage is the stability condition, the same one as eq. (7.39).

@@ -8,10 +8,10 @@
 .sacrb_signature(tokenizer = "13a", lowercase = FALSE, max_n = 4L, n_refs = 1L, version = "morie-sacrb-1")
 }
 \arguments{
-\item{tokenizer}{Defaults to \code{"13a"}.}
+\item{tokenizer}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"13a"}.}
 \item{lowercase}{A flag; the body branches on it. Defaults to \code{FALSE}.}
-\item{max_n}{Defaults to \code{4L}.}
-\item{n_refs}{Defaults to \code{1L}.}
+\item{max_n}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.}
+\item{n_refs}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1L}.}
 \item{version}{Defaults to \code{"morie-sacrb-1"}.}
 }
 \description{

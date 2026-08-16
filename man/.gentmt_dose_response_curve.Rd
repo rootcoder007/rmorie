@@ -12,7 +12,7 @@
 \item{A}{Passed to \code{.gentmt_vec}.}
 \item{H}{Passed to \code{.gentmt_treatment_density}.}
 \item{doses}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
-\item{degree}{Defaults to \code{1}.}
+\item{degree}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.}
 }
 \description{
 A step of the gentmt_native implementation. Called by \code{morie_gentmt}. See the file header for the source the module follows.

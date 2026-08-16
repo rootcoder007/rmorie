@@ -97,7 +97,7 @@ Icc12c <- function(X, model = "2,k") {
 #' k = 4), a trailing integer equal to k is read as the average-measure
 #' form.
 #'
-#' @param model See Usage.
+#' @param model Coerced to character by the body, with \code{as.character}.
 #' @param k See Usage.
 #' @return The value of \code{s}, as built in the body.
 #' @export

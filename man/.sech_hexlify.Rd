@@ -8,7 +8,7 @@
 .sech_hexlify(bs)
 }
 \arguments{
-\item{bs}{See Usage.}
+\item{bs}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the sechsh_native implementation. Called by \code{morie_sechsh_build_chain}, \code{morie_sechsh_verify_inclusion}. See the file header for the source the module follows.

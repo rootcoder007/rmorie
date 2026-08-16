@@ -61,7 +61,7 @@ NULL
 #' @param Q0W Passed to \code{.b1_logit}.
 #' @param g1W Passed to \code{.b1_bound}.
 #' @param gbound Numeric; combined arithmetically in the body. Defaults to \code{0.025}.
-#' @param iters Defaults to \code{100}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
 #' @param tol Defaults to \code{1e-12}.
 #' @return A list with \code{epsilon}, \code{QAstar}, \code{Q1star}, \code{Q0star}, \code{g1}, \code{g0}, \code{H1}, \code{H0}.
 #' @export

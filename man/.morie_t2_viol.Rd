@@ -8,7 +8,7 @@
 .morie_t2_viol(constraints, x)
 }
 \arguments{
-\item{constraints}{See Usage.}
+\item{constraints}{Iterated over elementwise, with \code{vapply}.}
 \item{x}{See Usage.}
 }
 \description{

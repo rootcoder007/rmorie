@@ -11,7 +11,7 @@ reversible_jump_mcmc(models, moves, init_model, init_theta = c(), n_iter = 10000
 \item{models}{A vector; its length is taken and its elements indexed.}
 \item{moves}{See Usage.}
 \item{init_model}{See Usage.}
-\item{init_theta}{Defaults to \code{c()}.}
+\item{init_theta}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{c()}.}
 \item{n_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{10000L}.}
 \item{burn_in}{Numeric; combined arithmetically in the body. Defaults to \code{0L}.}
 \item{thin}{Numeric; combined arithmetically in the body. Defaults to \code{1L}.}

@@ -15,8 +15,8 @@ morie_in_identified_set(freq, beta, gamma, x, alpha_grid, y0_values = c(0, 1), l
 \item{alpha_grid}{See Usage.}
 \item{y0_values}{Defaults to \code{c(0, 1)}.}
 \item{link}{Passed to \code{morie_sequence_probabilities}. Defaults to \code{"logit"}.}
-\item{tol}{Defaults to \code{1e-04}.}
-\item{iters}{Defaults to \code{4000L}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-04}.}
+\item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4000L}.}
 }
 \description{
 A step of the bnshrt_native implementation. Called by \code{morie_identified_set}. See the file header for the source the module follows.

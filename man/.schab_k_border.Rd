@@ -10,7 +10,7 @@
 \arguments{
 \item{p}{A matrix; indexed by row and column.}
 \item{region}{A vector; indexed elementwise.}
-\item{r}{See Usage.}
+\item{r}{Iterated over elementwise, with \code{vapply}.}
 }
 \description{
 the Python arm\\'s k_function; needed by Diggle-Chetwynd\\'s D(h).

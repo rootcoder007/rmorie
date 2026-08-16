@@ -15,7 +15,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .linwlr_vec <- function(x) {
@@ -125,7 +125,7 @@
 #' source it follows.
 #'
 #' @param M A matrix; passed to \code{nrow}.
-#' @param rhs See Usage.
+#' @param rhs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param ridge Numeric; combined arithmetically in the body.
 #' @return A matrix, from \code{solve}.
 #' @export
@@ -215,7 +215,7 @@ morie_linwlr_blip <- function(a, w, psi) {
 #' @param y Passed to \code{.linwlr_vec}.
 #' @param A Passed to \code{.linwlr_vec}.
 #' @param W Optional; may be \code{NULL}. Passed to \code{.linwlr_mat}.
-#' @param propensity Defaults to \code{NULL}.
+#' @param propensity Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param method One of \code{"gest"}, \code{"wls"}. Defaults to \code{"gest"}.
 #' @param baseline Optional; may be \code{NULL}. Passed to \code{.linwlr_mat}.
 #' @param pi_covariates Optional; may be \code{NULL}. Passed to \code{.linwlr_mat}.

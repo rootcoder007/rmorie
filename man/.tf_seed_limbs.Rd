@@ -8,7 +8,7 @@
 .tf_seed_limbs(seed)
 }
 \arguments{
-\item{seed}{See Usage.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the rangayyan_tf implementation. Called by \code{.tf_lcg_seed}. See the file header for the source the module follows.

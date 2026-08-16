@@ -8,8 +8,8 @@
 LsiPar2(x, h2)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{h2}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{h2}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 parallel structure see the same input.

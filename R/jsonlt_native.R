@@ -176,7 +176,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param data See Usage.
+#' @param data Coerced to integer by the body, with \code{as.integer}.
 #' @return A character value.
 #' @export
 .jsonlt_b64 <- function(data) {
@@ -271,7 +271,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Coerced to numeric by the body, with \code{as.numeric}.
 #' @param o A list; the body reads \code{$digits}, \code{$POSIXt} from it.
 #' @return The value of \code{.jsonlt_esc}.
 #' @export
@@ -903,7 +903,7 @@ morie_jsonlt_flatten <- function(df, recursive = TRUE) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Numeric; the body checks with \code{is.numeric}.
 #' @return A character value.
 #' @export
 .jsonlt_rtype <- function(x) {

@@ -8,10 +8,10 @@
 morie_tsbF_tsb_forecast(y, alpha = 0.1, beta = 0.05, horizon = 1, init = "global", z0 = NULL, p0 = NULL, burn_in = 0)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{alpha}{Defaults to \code{0.1}.}
-\item{beta}{Defaults to \code{0.05}.}
-\item{horizon}{Defaults to \code{1}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.}
+\item{beta}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}
+\item{horizon}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.}
 \item{init}{Passed to \code{.tsbF_init}. Defaults to \code{"global"}.}
 \item{z0}{Passed to \code{.tsbF_init}.}
 \item{p0}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}

@@ -8,7 +8,7 @@
 .morie_rg_asfrac(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Coerced to character by the body, with \code{as.character}.}
 }
 \description{
 A step of the rangayyan_class implementation. Called by \code{Accuracy}. See the file header for the source the module follows.

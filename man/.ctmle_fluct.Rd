@@ -8,9 +8,9 @@
 .ctmle_fluct(Q, H, Y, iters = 60L)
 }
 \arguments{
-\item{Q}{See Usage.}
-\item{H}{See Usage.}
-\item{Y}{See Usage.}
+\item{Q}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{H}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{Y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.}
 }
 \description{

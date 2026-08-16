@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{count}{A count; the body uses it as \code{seq_len(...)}.}
-\item{seed}{Defaults to \code{13}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{13}.}
 }
 \description{
 A step of the wasserman_native implementation. Called by \code{.morie_wsm_boot_reps}, \code{morie_wasserman_gibbs_sampler}, \code{morie_wasserman_mcmc_metropolis} and 1 others in the module. See the file header for the source the module follows.

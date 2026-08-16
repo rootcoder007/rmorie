@@ -8,8 +8,8 @@
 outer_loop_schedule(alpha, C, examine_all)
 }
 \arguments{
-\item{alpha}{See Usage.}
-\item{C}{See Usage.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{C}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{examine_all}{A flag; the body branches on it.}
 }
 \description{

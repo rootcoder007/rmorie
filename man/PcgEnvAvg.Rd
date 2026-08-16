@@ -11,8 +11,8 @@ PcgEnvAvg(pcg, ecg, fs = 1000, cycle_len = NULL, envelope_smoothing = NULL)
 \item{pcg}{Passed to \code{.tf_need}.}
 \item{ecg}{Passed to \code{.tf_need}.}
 \item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{1000}.}
-\item{cycle_len}{Defaults to \code{NULL}.}
-\item{envelope_smoothing}{Defaults to \code{NULL}.}
+\item{cycle_len}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{envelope_smoothing}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 5.5.3 Part of the rangayyan_tf implementation; see the file header for the source it follows.

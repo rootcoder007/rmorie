@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{bits}{A matrix; indexed by row and column.}
-\item{n_bits}{Defaults to \code{NULL}.}
+\item{n_bits}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 Fingerprint normalisation -- mirror sasimi.fingerprint on the R side. --------------------------------------------------------------------------- Accepts an integer set, a numeric vector of indices, or a 0/1 sequence. Returns an integer vector of on-bit indices (sorted, deduped).

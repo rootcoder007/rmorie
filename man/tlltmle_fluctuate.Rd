@@ -8,11 +8,11 @@
 tlltmle_fluctuate(Q, H, Y, iters = 100, tol = 1e-10)
 }
 \arguments{
-\item{Q}{See Usage.}
-\item{H}{See Usage.}
-\item{Y}{See Usage.}
-\item{iters}{Defaults to \code{100}.}
-\item{tol}{Defaults to \code{1e-10}.}
+\item{Q}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{H}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{Y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-10}.}
 }
 \description{
 A step of the tlltmle_native implementation. Called by \code{tlltmle_ltmle}, \code{tlltmle_tmle_point}. See the file header for the source the module follows.

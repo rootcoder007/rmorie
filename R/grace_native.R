@@ -71,7 +71,7 @@
 #' source it follows.
 #'
 #' @param edges A vector; its length is taken and its elements indexed.
-#' @param p See Usage.
+#' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @param rng Passed to \code{.ghc_unif}.
 #' @return The value of \code{[}.
 #' @export
@@ -93,7 +93,7 @@
 #' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param p See Usage.
+#' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @param rng Passed to \code{.ghc_unif}.
 #' @return A list with \code{X}, \code{kept}, \code{n_masked}.
 #' @export
@@ -166,7 +166,7 @@
 #' @param U A matrix; indexed by row and column.
 #' @param V A matrix; indexed by row and column.
 #' @param i See Usage.
-#' @param tau Defaults to \code{0.5}.
+#' @param tau Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.
 #' @param intra A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A numeric value.
 #' @export

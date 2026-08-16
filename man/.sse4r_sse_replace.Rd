@@ -8,9 +8,9 @@
 .sse4r_sse_replace(indices, table_size, p = 0, seed = 0)
 }
 \arguments{
-\item{indices}{See Usage.}
-\item{table_size}{See Usage.}
-\item{p}{Defaults to \code{0}.}
+\item{indices}{Coerced to integer by the body, with \code{as.integer}.}
+\item{table_size}{Coerced to integer by the body, with \code{as.integer}.}
+\item{p}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
 }
 \description{

@@ -42,7 +42,7 @@
 #' source it follows.
 #'
 #' @param coords A matrix; passed to \code{as.matrix}.
-#' @param values See Usage.
+#' @param values Coerced to numeric by the body, with \code{as.numeric}.
 #' @param targets A matrix; passed to \code{as.matrix}.
 #' @param model Passed to \code{.krpkrg_gamma}. Defaults to \code{"spherical"}.
 #' @param nugget Passed to \code{.krpkrg_gamma}. Defaults to \code{0}.

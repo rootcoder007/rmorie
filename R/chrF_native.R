@@ -86,12 +86,12 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param hypothesis See Usage.
+#' @param hypothesis Coerced to character by the body, with \code{as.character}.
 #' @param reference A vector; its length is taken.
-#' @param n_char Defaults to \code{6L}.
+#' @param n_char Coerced to integer by the body, with \code{as.integer}. Defaults to \code{6L}.
 #' @param beta Numeric; combined arithmetically in the body. Defaults to \code{2}.
 #' @param remove_whitespace A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @param word_order Defaults to \code{0L}.
+#' @param word_order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
 #' @return The value of \code{best}, as built in the body.
 #' @export
 chrf_score <- function(hypothesis, reference, n_char = 6L, beta = 2.0,

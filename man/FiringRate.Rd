@@ -8,8 +8,8 @@
 FiringRate(times, fs = NULL)
 }
 \arguments{
-\item{times}{See Usage.}
-\item{fs}{Defaults to \code{NULL}.}
+\item{times}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fs}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 THE MEAN interval, not the mean of the reciprocals; the two differ whenever the intervals vary, and only the former equals discharges per unit time.  Both are returned.

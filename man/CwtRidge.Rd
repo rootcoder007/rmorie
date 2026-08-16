@@ -13,7 +13,7 @@ CwtRidge(x, fs = 1, scales = NULL, wavelet = "mexh", w0 = 5, min_prominence = 0.
 \item{scales}{Defaults to \code{NULL}.}
 \item{wavelet}{Defaults to \code{"mexh"}.}
 \item{w0}{Defaults to \code{5}.}
-\item{min_prominence}{Defaults to \code{0.1}.}
+\item{min_prominence}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.}
 }
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -8,8 +8,8 @@
 Euler(omega, t = 0)
 }
 \arguments{
-\item{omega}{See Usage.}
-\item{t}{Defaults to \code{0}.}
+\item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{t}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \description{
 A step of the rangayyan_xfrm implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -8,9 +8,9 @@
 .vqgenc_sequence_length(height, width, downsample = 16L)
 }
 \arguments{
-\item{height}{See Usage.}
-\item{width}{See Usage.}
-\item{downsample}{Defaults to \code{16L}.}
+\item{height}{Coerced to integer by the body, with \code{as.integer}.}
+\item{width}{Coerced to integer by the body, with \code{as.integer}.}
+\item{downsample}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{16L}.}
 }
 \description{
 A step of the vqgenc_native implementation. No other function in the package calls it. See the file header for the source the module follows.

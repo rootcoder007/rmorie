@@ -8,8 +8,8 @@
 morie_sccsno_build_intervals(start, end, exposure, event_times, risk_periods, age_breaks)
 }
 \arguments{
-\item{start}{See Usage.}
-\item{end}{See Usage.}
+\item{start}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{end}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{exposure}{Optional; may be \code{NULL}. Passed to \code{.sccsno_cuts}.}
 \item{event_times}{See Usage.}
 \item{risk_periods}{Passed to \code{.sccsno_rp}.}

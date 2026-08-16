@@ -87,8 +87,8 @@
 #' matches, the machine stays in u and pays 0.
 #'
 #' @param edges See Usage.
-#' @param u0 Defaults to \code{0}.
-#' @param terminal Defaults to \code{c()}.
+#' @param u0 Coerced to character by the body, with \code{as.character}. Defaults to \code{0}.
+#' @param terminal Coerced to character by the body, with \code{as.character}. Defaults to \code{c()}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
 morie_rmrl_reward_machine <- function(edges, u0=0, terminal=c()) {
@@ -121,7 +121,7 @@ morie_rmrl_reward_machine <- function(edges, u0=0, terminal=c()) {
 #' source it follows.
 #'
 #' @param machine A list; the body reads \code{$edges}, \code{$terminal} from it.
-#' @param u See Usage.
+#' @param u Coerced to character by the body, with \code{as.character}.
 #' @param sigma See Usage.
 #' @return A list with \code{u}, \code{reward}.
 #' @export
@@ -217,17 +217,17 @@ morie_rmrl_reward_machine_run <- function(machine, labels) {
 #' source it follows.
 #'
 #' @param machines A vector; its length is taken and its elements indexed.
-#' @param states See Usage.
-#' @param actions See Usage.
-#' @param step See Usage.
-#' @param label See Usage.
+#' @param states Coerced to list by the body, with \code{as.list}.
+#' @param actions Coerced to list by the body, with \code{as.list}.
+#' @param step A function; the body checks with \code{is.function}.
+#' @param label A function; the body checks with \code{is.function}.
 #' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{0.9}.
 #' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @param epsilon Passed to \code{.rmrl_eps_greedy}. Defaults to \code{0.1}.
 #' @param episodes A count; the body uses it as \code{seq_len(...)}. Defaults to \code{500}.
 #' @param horizon A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100}.
-#' @param start Defaults to \code{NULL}.
-#' @param dead_end Defaults to \code{NULL}.
+#' @param start Optional; may be \code{NULL}. A function; the body checks with \code{is.function}.
+#' @param dead_end A function; the body checks with \code{is.function}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @param task_order Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return A list with \code{estimate}, \code{q}, \code{policy}, \code{returns}, \code{mean_return_last}, \code{mean_return_first}, \code{n_qfunctions}, \code{episodes}, \code{method}.
@@ -377,8 +377,8 @@ morie_rmrl <- function(machines, states, actions, step, label, gamma=0.9,
 #' source it follows.
 #'
 #' @param machine A list; the body reads \code{$states}, \code{$terminal}, \code{$u0} from it.
-#' @param states See Usage.
-#' @param actions See Usage.
+#' @param states Coerced to list by the body, with \code{as.list}.
+#' @param actions Coerced to list by the body, with \code{as.list}.
 #' @param step See Usage.
 #' @param label See Usage.
 #' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{0.9}.
@@ -386,8 +386,8 @@ morie_rmrl <- function(machines, states, actions, step, label, gamma=0.9,
 #' @param epsilon Passed to \code{.rmrl_eps_greedy}. Defaults to \code{0.1}.
 #' @param episodes A count; the body uses it as \code{seq_len(...)}. Defaults to \code{500}.
 #' @param horizon A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100}.
-#' @param start Defaults to \code{NULL}.
-#' @param dead_end Defaults to \code{NULL}.
+#' @param start Optional; may be \code{NULL}. A function; the body checks with \code{is.function}.
+#' @param dead_end A function; the body checks with \code{is.function}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{q}, \code{returns}, \code{mean_return_last}, \code{mean_return_first}, \code{method}.
 #' @export

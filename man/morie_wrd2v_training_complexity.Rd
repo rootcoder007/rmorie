@@ -10,9 +10,9 @@ morie_wrd2v_training_complexity(architecture, D, V, N = NULL, C = NULL, hierarch
 \arguments{
 \item{architecture}{Compared against \code{"cbow"}.}
 \item{D}{Numeric; combined arithmetically in the body.}
-\item{V}{See Usage.}
-\item{N}{Defaults to \code{NULL}.}
-\item{C}{Defaults to \code{NULL}.}
+\item{V}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{N}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{C}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{hierarchical}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

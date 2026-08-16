@@ -11,8 +11,8 @@
 \item{Q}{Passed to \code{.tl1step_as_numvec}.}
 \item{H_fn}{See Usage.}
 \item{Y}{Passed to \code{.tl1step_as_numvec}.}
-\item{eps_max}{Defaults to \code{2}.}
-\item{steps}{Defaults to \code{400}.}
+\item{eps_max}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2}.}
+\item{steps}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{400}.}
 }
 \description{
 recomputed continuously from the current point (H_fn(Q_current)) rather than fixed at the start, which is what makes the submodel universal rather than local.

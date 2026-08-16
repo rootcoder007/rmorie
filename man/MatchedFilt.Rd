@@ -8,13 +8,13 @@
 MatchedFilt(ref, x = NULL, noise_psd = NULL, freqs = NULL, t0 = NULL, gain = 1, dt = 1)
 }
 \arguments{
-\item{ref}{See Usage.}
-\item{x}{Defaults to \code{NULL}.}
-\item{noise_psd}{Defaults to \code{NULL}.}
-\item{freqs}{Defaults to \code{NULL}.}
-\item{t0}{Defaults to \code{NULL}.}
-\item{gain}{Defaults to \code{1}.}
-\item{dt}{Defaults to \code{1}.}
+\item{ref}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{x}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{noise_psd}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{freqs}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{t0}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{gain}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{dt}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the rangayyan_corr implementation. No other function in the package calls it. See the file header for the source the module follows.

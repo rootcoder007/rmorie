@@ -8,11 +8,11 @@
 .sdpwts_objective(x, c_vec, F0, Fs, t)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{c_vec}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{c_vec}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{F0}{See Usage.}
 \item{Fs}{See Usage.}
-\item{t}{See Usage.}
+\item{t}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the sdpwts_native implementation. Called by \code{.sdpwts_centre}. See the file header for the source the module follows.

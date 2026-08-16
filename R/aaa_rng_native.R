@@ -94,7 +94,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param counter See Usage.
+#' @param counter Coerced to numeric by the body, with \code{as.numeric}.
 #' @param key A vector; indexed elementwise.
 #' @param rounds A count; the body uses it as \code{seq_len(...)}. Defaults to \code{.MORIE_PHILOX_ROUNDS}.
 #' @return The value of \code{ctr}, as built in the body.

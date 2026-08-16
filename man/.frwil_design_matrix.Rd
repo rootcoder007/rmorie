@@ -8,7 +8,7 @@
 .frwil_design_matrix(compounds, constraint = "reference")
 }
 \arguments{
-\item{compounds}{See Usage.}
+\item{compounds}{Iterated over elementwise, with \code{lapply}.}
 \item{constraint}{Compared against \code{"reference"}. Defaults to \code{"reference"}.}
 }
 \description{

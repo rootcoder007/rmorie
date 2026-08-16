@@ -8,10 +8,10 @@
 WidrowHoff(w, e, rvec, mu)
 }
 \arguments{
-\item{w}{See Usage.}
-\item{e}{See Usage.}
-\item{rvec}{See Usage.}
-\item{mu}{See Usage.}
+\item{w}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{e}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{rvec}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{mu}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 the book\'s equation and is kept; folding it into mu silently halves every step size a reader transcribes from the text.  The stability bound 0 < mu < 1/lambda_max is reported against the input power.

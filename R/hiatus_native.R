@@ -13,9 +13,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param beta See Usage.
+#' @param beta Coerced to numeric by the body, with \code{as.numeric}.
 #' @param nu A vector; its length is taken.
-#' @param mu See Usage.
+#' @param mu Coerced to numeric by the body, with \code{as.numeric}.
 #' @param sigma A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{b}, \code{nv}, \code{m}, \code{sg}, \code{n}.
 #' @export
@@ -59,9 +59,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param beta See Usage.
+#' @param beta Coerced to numeric by the body, with \code{as.numeric}.
 #' @param nu A vector; its length is taken.
-#' @param mu See Usage.
+#' @param mu Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 basic_reproduction_numbers <- function(beta, nu, mu) {
@@ -86,10 +86,10 @@ basic_reproduction_numbers <- function(beta, nu, mu) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param beta See Usage.
+#' @param beta Coerced to numeric by the body, with \code{as.numeric}.
 #' @param nu A vector; its length is taken.
-#' @param mu See Usage.
-#' @param strain Defaults to \code{0L}.
+#' @param mu Coerced to numeric by the body, with \code{as.numeric}.
+#' @param strain Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
 #' @return A list with \code{R0}, \code{S}, \code{I}.
 #' @export
 endemic_equilibrium <- function(beta, nu, mu, strain = 0L) {
@@ -112,8 +112,8 @@ endemic_equilibrium <- function(beta, nu, mu, strain = 0L) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param S See Usage.
-#' @param I See Usage.
+#' @param S Coerced to numeric by the body, with \code{as.numeric}.
+#' @param I Coerced to numeric by the body, with \code{as.numeric}.
 #' @param beta Passed to \code{._check}.
 #' @param nu Passed to \code{._check}.
 #' @param mu Passed to \code{._check}.
@@ -157,12 +157,12 @@ derivatives <- function(S, I, beta, nu, mu, sigma) {
 #' @param nu Passed to \code{._check}.
 #' @param mu Passed to \code{._check}.
 #' @param sigma Passed to \code{._check}.
-#' @param S0 Defaults to \code{NULL}.
-#' @param I0 Defaults to \code{NULL}.
+#' @param S0 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param I0 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param t_end Numeric; combined arithmetically in the body. Defaults to \code{2000}.
-#' @param dt Defaults to \code{0.05}.
-#' @param mutation Defaults to \code{0}.
-#' @param record_every Defaults to \code{100L}.
+#' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
+#' @param mutation Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
+#' @param record_every Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100L}.
 #' @return A list with \code{estimate}, \code{S}, \code{I}, \code{t}, \code{S_traj}, \code{I_traj}, \code{n_strains}, \code{R0}, \code{n_variables}, \code{n_variables_history_based}, \code{surviving}, \code{method}.
 #' @export
 .hiatus_simulate <- function(beta, nu, mu, sigma, S0 = NULL, I0 = NULL,
@@ -260,9 +260,9 @@ derivatives <- function(S, I, beta, nu, mu, sigma) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
-#' @param width Defaults to \code{2}.
-#' @param floor Defaults to \code{0}.
+#' @param n Coerced to integer by the body, with \code{as.integer}.
+#' @param width Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2}.
+#' @param floor Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 linear_strain_space <- function(n, width = 2.0, floor = 0.0) {

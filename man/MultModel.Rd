@@ -8,8 +8,8 @@
 MultModel(x, p)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{p}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{p}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 system addresses.

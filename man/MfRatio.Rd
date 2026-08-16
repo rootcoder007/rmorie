@@ -8,11 +8,11 @@
 MfRatio(X, H, freqs, t0, noise_power)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{H}{See Usage.}
-\item{freqs}{See Usage.}
+\item{X}{Coerced to complex by the body, with \code{as.complex}.}
+\item{H}{Coerced to complex by the body, with \code{as.complex}.}
+\item{freqs}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{t0}{See Usage.}
-\item{noise_power}{See Usage.}
+\item{noise_power}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 something Schwarz\'s inequality applies to; by eq (4.46) the ratio cannot exceed 2/P_eta_i, with equality exactly at eq (4.48).

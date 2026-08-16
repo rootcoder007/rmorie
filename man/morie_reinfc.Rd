@@ -11,16 +11,16 @@ morie_reinfc(reward_fn, x = NULL, w = NULL, p = NULL, mu = 0, sigma = 1, unit = 
 \item{reward_fn}{Passed to \code{.reinfc_run_gaussian}.}
 \item{x}{Optional; may be \code{NULL}. Passed to \code{.reinfc_as_matrix}.}
 \item{w}{Optional; may be \code{NULL}. Passed to \code{.reinfc_as_matrix}.}
-\item{p}{Defaults to \code{NULL}.}
-\item{mu}{Defaults to \code{0}.}
+\item{p}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{mu}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 \item{sigma}{Passed to \code{.reinfc_run_gaussian}. Defaults to \code{1}.}
 \item{unit}{One of \code{"bernoulli"}, \code{"gaussian"}. Defaults to \code{"bernoulli-logistic"}.}
 \item{baseline}{Passed to \code{.reinfc_run_gaussian}. Defaults to \code{"comparison"}.}
 \item{mode}{Compared against \code{"immediate"}. Defaults to \code{"immediate"}.}
-\item{alpha}{Defaults to \code{0.1}.}
-\item{gamma}{Defaults to \code{0.9}.}
-\item{rho}{Defaults to \code{0.1}.}
-\item{episode_length}{Defaults to \code{1}.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.}
+\item{gamma}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.9}.}
+\item{rho}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.}
+\item{episode_length}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.}
 \item{trials}{Passed to \code{.reinfc_run_gaussian}. Defaults to \code{100}.}
 \item{eligibility}{One of \code{"p"}, \code{"ybar"}. Defaults to \code{"p"}.}
 \item{rate_scaling}{Passed to \code{.reinfc_run_gaussian}. Defaults to \code{"sigma2"}.}

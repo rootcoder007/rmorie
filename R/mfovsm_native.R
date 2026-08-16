@@ -48,7 +48,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. A list; the body checks with \code{is.list}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .mfovsm_vec <- function(x) {
@@ -65,7 +65,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. A matrix; the body checks with \code{is.matrix}.
 #' @return A matrix, from \code{matrix}.
 #' @export
 .mfovsm_mat <- function(x) {
@@ -83,7 +83,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param obj See Usage.
+#' @param obj Optional; may be \code{NULL}. A list; the body checks with \code{is.list}.
 #' @param allow_one A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{list}.
 #' @export
@@ -255,7 +255,7 @@
 #' @param H Passed to \code{.mfovsm_hist}.
 #' @param v_in_numerator A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param contrast One of \code{"cumulative"}, \code{"everexposed"}, \code{"final"}. Defaults to \code{"cumulative"}.
-#' @param trim Defaults to \code{NULL}.
+#' @param trim Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{estimate}, \code{se}, \code{main_effect}, \code{main_effect_se}, \code{feature_effect}, \code{intercept}, \code{coef}, \code{vcov}, \code{weights}, \code{mean_weight}, \code{max_weight}, \code{effective_sample_size}, \code{exposure}, \code{v_in_numerator}, \code{n}, \code{n_times}, \code{contrast}, \code{method}.
 #' @export
 morie_mfovsm <- function(y, feature, A, H, v_in_numerator = TRUE,

@@ -11,7 +11,7 @@
 \item{X}{A matrix; passed to \code{nrow}.}
 \item{y}{Numeric; combined arithmetically in the body.}
 \item{ridge}{Numeric; passed to \code{max}. Defaults to \code{1e-10}.}
-\item{obs_weights}{Defaults to \code{NULL}.}
+\item{obs_weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tmlcic_native implementation. Called by \code{.tmlcic_fit_g}, \code{.tmlcic_fit_working_model}, \code{.tmlcic_hier_cluster_arm} and 1 others in the module. See the file header for the source the module follows.

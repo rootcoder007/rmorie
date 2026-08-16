@@ -10,10 +10,10 @@ Rbfn(X, y, ncenters = NULL, spread = 1, centers = NULL, ridge = 1e-08, query = N
 \arguments{
 \item{X}{Passed to \code{.morie_bx_mat}.}
 \item{y}{Passed to \code{.morie_bx_vec}.}
-\item{ncenters}{Defaults to \code{NULL}.}
+\item{ncenters}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{spread}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{centers}{Optional; may be \code{NULL}. Passed to \code{.morie_bx_mat}.}
-\item{ridge}{Defaults to \code{1e-08}.}
+\item{ridge}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-08}.}
 \item{query}{Optional; may be \code{NULL}. Passed to \code{.morie_bx_mat}.}
 }
 \description{

@@ -8,12 +8,12 @@
 .tlbandt_martingale_terms(A, Y, g, Q1, Q0, psi)
 }
 \arguments{
-\item{A}{See Usage.}
-\item{Y}{See Usage.}
-\item{g}{See Usage.}
-\item{Q1}{See Usage.}
-\item{Q0}{See Usage.}
-\item{psi}{See Usage.}
+\item{A}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{Y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{g}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{Q1}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{Q0}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{psi}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tlbandt_native implementation. No other function in the package calls it. See the file header for the source the module follows.

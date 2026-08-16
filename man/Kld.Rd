@@ -8,8 +8,8 @@
 Kld(p1, p2)
 }
 \arguments{
-\item{p1}{See Usage.}
-\item{p2}{See Usage.}
+\item{p1}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{p2}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 NOTE THE ARGUMENT ORDER -- the book weights by the SECOND PDF, so its KLD(p1, p2) is D_KL(p2 || p1) in standard notation, the REVERSE of what most texts and libraries mean by KL(p, q).  That is the single most likely way to get a wrong number out of this family. KLD is not symmetric, so swapping the arguments gives a different number; both are returned so the asymmetry is visible rather than a trap.  Their sum is exactly the divergence of eq (10.115).

@@ -22,8 +22,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param indices See Usage.
-#' @param bits See Usage.
+#' @param indices Optional; may be \code{NULL}. A list; the body checks with \code{is.list}.
+#' @param bits Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
 .tqpack_pack_indices <- function(indices, bits) {
@@ -108,9 +108,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param data See Usage.
-#' @param bits See Usage.
-#' @param count See Usage.
+#' @param data Optional; may be \code{NULL}. A list; the body checks with \code{is.list}.
+#' @param bits Coerced to integer by the body, with \code{as.integer}.
+#' @param count Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
 .tqpack_unpack_indices <- function(data, bits, count) {

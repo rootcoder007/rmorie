@@ -8,8 +8,8 @@
 phmmsr_striped_layout(length, vector_width = 4)
 }
 \arguments{
-\item{length}{See Usage.}
-\item{vector_width}{Defaults to \code{4}.}
+\item{length}{Coerced to integer by the body, with \code{as.integer}.}
+\item{vector_width}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.}
 }
 \description{
 A step of the phmmsr_native implementation. No other function in the package calls it. See the file header for the source the module follows.

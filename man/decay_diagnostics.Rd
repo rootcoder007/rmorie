@@ -8,7 +8,7 @@
 decay_diagnostics(weights, alpha)
 }
 \arguments{
-\item{weights}{See Usage.}
+\item{weights}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{alpha}{See Usage.}
 }
 \description{

@@ -13,7 +13,7 @@
 \item{off}{Numeric; passed to \code{sum}.}
 \item{Q}{A matrix; passed to \code{\%*\%}.}
 \item{constrain}{A flag; the body branches on it.}
-\item{iters}{See Usage.}
+\item{iters}{Coerced to integer by the body, with \code{as.integer}.}
 \item{tol}{See Usage.}
 \item{ridge}{Passed to \code{.poissp_ridgesolve}.}
 }

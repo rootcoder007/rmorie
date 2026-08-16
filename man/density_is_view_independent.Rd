@@ -10,8 +10,8 @@ density_is_view_independent(model, point, directions, tol = 1e-09)
 \arguments{
 \item{model}{See Usage.}
 \item{point}{Passed to \code{.nrfrad_vec}.}
-\item{directions}{See Usage.}
-\item{tol}{Defaults to \code{1e-09}.}
+\item{directions}{Iterated over elementwise, with \code{vapply}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-09}.}
 }
 \description{
 A step of the nrfrad_native implementation. No other function in the package calls it. See the file header for the source the module follows.

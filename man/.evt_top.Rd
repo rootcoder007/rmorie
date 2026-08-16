@@ -8,7 +8,7 @@
 .evt_top(x, k)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{k}{Numeric; combined arithmetically in the body.}
 }
 \description{

@@ -11,8 +11,8 @@ VfDetect(x, fs, win = 4, conc = 0.6, crest = 4)
 \item{x}{A vector; its length is taken and its elements indexed.}
 \item{fs}{Numeric; combined arithmetically in the body.}
 \item{win}{Numeric; combined arithmetically in the body. Defaults to \code{4}.}
-\item{conc}{Defaults to \code{0.6}.}
-\item{crest}{Defaults to \code{4}.}
+\item{conc}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.6}.}
+\item{crest}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{4}.}
 }
 \description{
 threshold, and no external primary source was verified here.  The rule below is therefore stated as what it is: a two-part heuristic from the two properties the book DOES assert -- no discrete QRS complexes (so the integrator crest factor is small) and quasi-sinusoidal 4-7 Hz activity (so the spectral concentration is high).

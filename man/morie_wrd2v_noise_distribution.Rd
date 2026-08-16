@@ -9,7 +9,7 @@ morie_wrd2v_noise_distribution(counts, power = 0.75)
 }
 \arguments{
 \item{counts}{A vector; indexed elementwise.}
-\item{power}{Defaults to \code{0.75}.}
+\item{power}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.75}.}
 }
 \description{
 A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_wrd2v}. See the file header for the source the module follows.

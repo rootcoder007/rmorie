@@ -8,8 +8,8 @@
 RunIntAll(x, t)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{t}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{t}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 sample, so any mass before it is unobserved and the constant of integration is arbitrary.  The discrete counterpart has a pole ON the unit circle at DC, which is why the book says it is seldom used for filtering.

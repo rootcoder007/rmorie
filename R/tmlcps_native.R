@@ -65,7 +65,7 @@
 #' @param xv A vector; its length is taken and its elements indexed.
 #' @param av A vector; indexed elementwise.
 #' @param fit Passed to \code{.smooth_at}.
-#' @param n_folds See Usage.
+#' @param n_folds Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{best_h}, as built in the body.
 #' @export
 .cv_bandwidth <- function(xv, av, fit, n_folds) {

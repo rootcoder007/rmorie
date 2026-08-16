@@ -10,7 +10,7 @@ morie_trnsfr_transport_weights(X, S, trim = 0.001, ridge = 1e-06)
 \arguments{
 \item{X}{Passed to \code{.s03mat}.}
 \item{S}{Passed to \code{.trnsfr_cohort}.}
-\item{trim}{Defaults to \code{0.001}.}
+\item{trim}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.001}.}
 \item{ridge}{Passed to \code{.s03logit}. Defaults to \code{1e-06}.}
 }
 \description{

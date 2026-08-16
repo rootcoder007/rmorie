@@ -11,8 +11,8 @@
 \item{coords}{A matrix; indexed by row and column.}
 \item{times}{A vector; its length is taken and its elements indexed.}
 \item{z}{A vector; its length is taken and its elements indexed.}
-\item{n_space_bins}{Defaults to \code{10L}.}
-\item{n_time_bins}{Defaults to \code{5L}.}
+\item{n_space_bins}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10L}.}
+\item{n_time_bins}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.}
 \item{max_dist}{Defaults to \code{NULL}.}
 \item{max_time}{Defaults to \code{NULL}.}
 }

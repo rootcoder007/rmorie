@@ -9,10 +9,10 @@ LogReg(X, y, maxiter = 100, tol = 1e-08, ridge = 1e-08)
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
-\item{y}{See Usage.}
-\item{maxiter}{Defaults to \code{100}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{maxiter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.}
 \item{tol}{Defaults to \code{1e-08}.}
-\item{ridge}{Defaults to \code{1e-08}.}
+\item{ridge}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-08}.}
 }
 \description{
 the Bayes classifier it models the POSTERIOR directly and assumes nothing about the shape of p(x|C), which is why it survives features that are plainly not Gaussian.  Perfectly separable classes have no finite maximum, so a small ridge is added and `separable` is reported -- without it the coefficients merely record where the optimizer stopped.

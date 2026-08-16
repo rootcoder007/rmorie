@@ -15,7 +15,7 @@ morie_informer_probsparse_attention(Q, K, V, factor = 5, measure = "maxmean", n_
 \item{measure}{Passed to \code{morie_informer_select_queries}. Defaults to \code{"maxmean"}.}
 \item{n_sample}{Passed to \code{morie_informer_select_queries}.}
 \item{seed}{Passed to \code{morie_informer_select_queries}. Defaults to \code{0}.}
-\item{scale}{Defaults to \code{NULL}.}
+\item{scale}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the informer_native implementation. No other function in the package calls it. See the file header for the source the module follows.

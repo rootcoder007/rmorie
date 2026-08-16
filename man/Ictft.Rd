@@ -8,10 +8,10 @@
 Ictft(X, t, omega = NULL, f = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{t}{See Usage.}
-\item{omega}{Defaults to \code{NULL}.}
-\item{f}{Defaults to \code{NULL}.}
+\item{X}{Coerced to complex by the body, with \code{as.complex}.}
+\item{t}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{omega}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{f}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 factor wrong scales the synthesis by 6.28, so the branch is explicit.

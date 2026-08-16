@@ -10,7 +10,7 @@ Swt(x, wavelet = "db4", levels = 3)
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}
 \item{wavelet}{Passed to \code{.tf_swt}. Defaults to \code{"db4"}.}
-\item{levels}{Defaults to \code{3}.}
+\item{levels}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.}
 }
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.

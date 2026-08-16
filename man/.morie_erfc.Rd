@@ -8,7 +8,7 @@
 .morie_erfc(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Iterated over elementwise, with \code{vapply}.}
 }
 \description{
 fraction of its own, and the tail comes straight from the CF branch of the incomplete gamma, which computes Q without forming 1 - P.

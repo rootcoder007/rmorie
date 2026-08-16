@@ -12,7 +12,7 @@
 #' the source it follows.
 #'
 #' @param histories A vector; its length is taken and its elements indexed.
-#' @param states Defaults to \code{.STATES}.
+#' @param states Coerced to character by the body, with \code{as.character}. Defaults to \code{.STATES}.
 #' @return A list with \code{cumulative}, \code{states}, \code{periods}, \code{note}.
 #' @export
 cumulative_episodes <- function(histories, states = .STATES) {
@@ -65,7 +65,7 @@ cumulative_episodes <- function(histories, states = .STATES) {
 #' @param propensities A vector; indexed elementwise.
 #' @param stabilise A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param marginal Optional; may be \code{NULL}. A vector; indexed elementwise.
-#' @param truncate Defaults to \code{NULL}.
+#' @param truncate Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{weights}, \code{raw}, \code{stabilised}, \code{truncated}, \code{n_truncated}, \code{note}.
 #' @export
 treatment_weights <- function(histories, propensities, stabilise = TRUE,
@@ -117,7 +117,7 @@ treatment_weights <- function(histories, propensities, stabilise = TRUE,
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param weights See Usage.
+#' @param weights Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{mean}, \code{max}, \code{min}, \code{effective_n}, \code{n}, \code{efficiency}, \code{mean_near_one}, \code{note}.
 #' @export
 weight_diagnostics <- function(weights) {
@@ -162,7 +162,7 @@ weight_diagnostics <- function(weights) {
 #'
 #' @param covariate_history A matrix; passed to \code{as.matrix}.
 #' @param treatment_history A matrix; passed to \code{as.matrix}.
-#' @param outcome Defaults to \code{NULL}.
+#' @param outcome Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 confounding_check <- function(covariate_history, treatment_history,
@@ -218,10 +218,10 @@ confounding_check <- function(covariate_history, treatment_history,
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param outcome See Usage.
+#' @param outcome Coerced to numeric by the body, with \code{as.numeric}.
 #' @param cumulative A matrix; passed to \code{as.matrix}.
-#' @param weights Defaults to \code{NULL}.
-#' @param states Defaults to \code{.STATES}.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param states Coerced to character by the body, with \code{as.character}. Defaults to \code{.STATES}.
 #' @return A list with \code{estimate}, \code{intercept}, \code{coefficients}, \code{se}, \code{per_episode}, \code{weighted}, \code{effective_n}, \code{method}, \code{note}.
 #' @export
 fit_msm <- function(outcome, cumulative, weights = NULL, states = .STATES) {

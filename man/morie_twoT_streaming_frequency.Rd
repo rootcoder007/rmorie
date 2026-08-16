@@ -10,8 +10,8 @@ morie_twoT_streaming_frequency(hits, n_steps, alpha = 0.05, init = NULL)
 \arguments{
 \item{hits}{Passed to \code{.twoT_get_items}.}
 \item{n_steps}{A count; the body uses it as \code{seq_len(...)}.}
-\item{alpha}{Defaults to \code{0.05}.}
-\item{init}{Defaults to \code{NULL}.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}
+\item{init}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the twoT_native implementation. No other function in the package calls it. See the file header for the source the module follows.

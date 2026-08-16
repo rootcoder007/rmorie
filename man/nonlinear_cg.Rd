@@ -10,10 +10,10 @@ nonlinear_cg(f, grad, x0, beta = "fletcher-reeves", restart = NULL, max_iter = N
 \arguments{
 \item{f}{See Usage.}
 \item{grad}{See Usage.}
-\item{x0}{See Usage.}
+\item{x0}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{beta}{Passed to \code{.cgnonl_beta}. Defaults to \code{"fletcher-reeves"}.}
 \item{restart}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
-\item{max_iter}{Defaults to \code{NULL}.}
+\item{max_iter}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.}
 \item{est}{Defaults to \code{NULL}.}
 \item{line_search}{Compared against \code{"exact-quadratic"}. Defaults to \code{"fletcher-reeves"}.}

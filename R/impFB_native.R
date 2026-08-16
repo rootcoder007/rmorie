@@ -46,7 +46,7 @@
 #' source it follows.
 #'
 #' @param r A matrix; passed to \code{as.matrix}.
-#' @param alpha Defaults to \code{40}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{40}.
 #' @return A numeric value.
 #' @export
 .impFB_confidence <- function(r, alpha = 40.0) {
@@ -114,7 +114,7 @@
 #' @param Y A matrix; indexed by row and column.
 #' @param C_row A vector; indexed elementwise.
 #' @param p_row Numeric; combined arithmetically in the body.
-#' @param lam See Usage.
+#' @param lam Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fast A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{.impFB_solve}.
 #' @export
@@ -151,7 +151,7 @@
 #' @param X A matrix; passed to \code{\%*\%}.
 #' @param Y A matrix; passed to \code{t}.
 #' @param alpha Passed to \code{.impFB_confidence}. Defaults to \code{40}.
-#' @param lam Defaults to \code{0.1}.
+#' @param lam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
 #' @return A numeric value.
 #' @export
 .impFB_cost <- function(R, X, Y, alpha = 40.0, lam = 0.1) {
@@ -171,10 +171,10 @@
 #' source it follows.
 #'
 #' @param R A matrix; passed to \code{as.matrix}.
-#' @param f Defaults to \code{8}.
+#' @param f Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.
 #' @param alpha Passed to \code{.impFB_confidence}. Defaults to \code{40}.
 #' @param lam Passed to \code{.impFB_als_step}. Defaults to \code{0.1}.
-#' @param iters Defaults to \code{15}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{15}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @param fast Passed to \code{.impFB_als_step}. Defaults to \code{TRUE}.
 #' @return The value of \code{result}, as built in the body.
@@ -239,8 +239,8 @@ morie_impFB <- function(R, f = 8, alpha = 40.0, lam = 0.1, iters = 15,
 #' @param Y A matrix; indexed by row and column.
 #' @param C_row A vector; indexed elementwise.
 #' @param p_row A vector; indexed elementwise.
-#' @param i See Usage.
-#' @param lam Defaults to \code{0.1}.
+#' @param i Coerced to integer by the body, with \code{as.integer}.
+#' @param lam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
 #' @return A list with \code{contributions}, \code{prediction}, \code{note}.
 #' @export
 .impFB_explain <- function(Y, C_row, p_row, i, lam = 0.1) {

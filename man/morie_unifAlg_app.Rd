@@ -8,7 +8,7 @@
 morie_unifAlg_app(symbol, ...)
 }
 \arguments{
-\item{symbol}{See Usage.}
+\item{symbol}{Coerced to character by the body, with \code{as.character}.}
 \item{...}{Passed through.}
 }
 \description{

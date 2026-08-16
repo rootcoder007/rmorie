@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{q}{Numeric; combined arithmetically in the body.}
-\item{K}{See Usage.}
+\item{K}{Iterated over elementwise, with \code{sapply}.}
 \item{scale}{Numeric; combined arithmetically in the body.}
 }
 \description{

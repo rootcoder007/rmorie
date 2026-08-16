@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
-\item{p}{See Usage.}
+\item{p}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{rng}{Passed to \code{.ghc_unif}.}
 }
 \description{

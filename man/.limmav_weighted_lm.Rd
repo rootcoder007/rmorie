@@ -11,7 +11,7 @@
 \item{y}{Passed to \code{.limmav_ols}.}
 \item{X}{Passed to \code{.limmav_ols}.}
 \item{w}{Passed to \code{.limmav_ols}.}
-\item{contrast}{See Usage.}
+\item{contrast}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the limmav_native implementation. Called by \code{morie_limmav}. See the file header for the source the module follows.

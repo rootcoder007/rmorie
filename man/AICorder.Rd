@@ -8,8 +8,8 @@
 AICorder(prediction_errors, n_samples, window = "hamming")
 }
 \arguments{
-\item{prediction_errors}{See Usage.}
-\item{n_samples}{See Usage.}
+\item{prediction_errors}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n_samples}{Coerced to integer by the body, with \code{as.integer}.}
 \item{window}{Character; passed to \code{tolower}. Defaults to \code{"hamming"}.}
 }
 \description{

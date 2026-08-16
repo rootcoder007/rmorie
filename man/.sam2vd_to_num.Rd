@@ -8,7 +8,7 @@
 .sam2vd_to_num(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Optional; may be \code{NULL}. A list; the body checks with \code{is.list}.}
 }
 \description{
 A step of the sam2vd_native implementation. Called by \code{morie_sam2vd_memory_attention}, \code{morie_sam2vd_propagate}, \code{morie_sam2vd_push_memory}. See the file header for the source the module follows.

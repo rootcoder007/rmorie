@@ -11,7 +11,7 @@ moments_accountant(vote_counts, gamma, delta, lambdas = NULL, data_dependent = T
 \item{vote_counts}{A vector; its length is taken.}
 \item{gamma}{Numeric; combined arithmetically in the body.}
 \item{delta}{Numeric; combined arithmetically in the body.}
-\item{lambdas}{Defaults to \code{NULL}.}
+\item{lambdas}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{data_dependent}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

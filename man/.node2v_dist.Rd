@@ -10,7 +10,7 @@
 \arguments{
 \item{adj}{A vector; indexed elementwise.}
 \item{t}{See Usage.}
-\item{x}{See Usage.}
+\item{x}{Coerced to character by the body, with \code{as.character}.}
 }
 \description{
 adjacency dict, restricted to 0/1/2.

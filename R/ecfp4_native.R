@@ -110,8 +110,8 @@
 #'
 #' @param a A count; the body uses it as \code{seq_len(...)}.
 #' @param bd A list; the body reads \code{$i}, \code{$j}, \code{$o} from it.
-#' @param invariants See Usage.
-#' @param radius See Usage.
+#' @param invariants Coerced to numeric by the body, with \code{as.numeric}.
+#' @param radius Coerced to integer by the body, with \code{as.integer}.
 #' @param nbits A count; the body uses it as \code{integer(...)}.
 #' @param use_bond_order A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{bits}, \code{count}, \code{ident}.

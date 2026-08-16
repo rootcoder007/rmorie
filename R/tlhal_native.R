@@ -75,7 +75,7 @@ morie_tlhal <- function(X, y, lambdas = NULL, V = 5L, seed = 0L,
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param knots Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
-#' @param max_order Defaults to \code{2L}.
+#' @param max_order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.
 #' @return A list with \code{design}, \code{columns}, \code{n_basis}, \code{max_order}.
 #' @export
 indicator_basis <- function(X, knots = NULL, max_order = 2L) {
@@ -127,7 +127,7 @@ indicator_basis <- function(X, knots = NULL, max_order = 2L) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param beta See Usage.
+#' @param beta Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 variation_norm <- function(beta) {
@@ -142,11 +142,11 @@ variation_norm <- function(beta) {
 #' source it follows.
 #'
 #' @param X See Usage.
-#' @param y See Usage.
-#' @param lam Defaults to \code{1}.
-#' @param iters Defaults to \code{2000L}.
-#' @param step Defaults to \code{0.05}.
-#' @param max_order Defaults to \code{2L}.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param lam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000L}.
+#' @param step Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
+#' @param max_order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.
 #' @param knots Defaults to \code{NULL}.
 #' @param intercept A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{beta}, \code{intercept}, \code{columns}, \code{n_basis}, \code{variation_norm}, \code{lambda}, \code{mse}, \code{mse_history}, \code{max_order}, \code{method}, \code{note}.
@@ -255,10 +255,10 @@ hal_predict <- function(model, X) {
 #' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param lambdas See Usage.
-#' @param V Defaults to \code{5L}.
-#' @param seed Defaults to \code{0L}.
+#' @param V Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.
 #' @param ... Passed through.
 #' @return A list with \code{lambda}, \code{cv_risks}, \code{note}.
 #' @export

@@ -8,7 +8,7 @@
 .ctmle_logit(p)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tlctmle_native implementation. Called by \code{ctmle}. See the file header for the source the module follows.

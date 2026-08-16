@@ -51,9 +51,9 @@ Hampw <- function(y, a = 2, b = 4, c = 8) {
 #' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param c See Usage.
+#' @param a Coerced to numeric by the body, with \code{as.numeric}.
+#' @param b Coerced to numeric by the body, with \code{as.numeric}.
+#' @param c Coerced to numeric by the body, with \code{as.numeric}.
 #' @param who See Usage.
 #' @return A vector, from \code{c}.
 #' @export

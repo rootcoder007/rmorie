@@ -9,7 +9,7 @@ DiracDelta(t, width = NULL)
 }
 \arguments{
 \item{t}{Passed to \code{.morie_rg_aslist}.}
-\item{width}{Defaults to \code{NULL}.}
+\item{width}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 generalized function has no pointwise value at the origin, so NA is returned there.  With width= the unit-area rectangle of Figure 3.10 is returned instead -- the approximating family, not the delta.

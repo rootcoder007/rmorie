@@ -9,9 +9,9 @@ PpgWtDen(ppg, fs = 100, wavelet = "db4", levels = 4, threshold_type = "soft")
 }
 \arguments{
 \item{ppg}{Passed to \code{.tf_need}.}
-\item{fs}{Defaults to \code{100}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{100}.}
 \item{wavelet}{Passed to \code{.tf_dwt}. Defaults to \code{"db4"}.}
-\item{levels}{Defaults to \code{4}.}
+\item{levels}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.}
 \item{threshold_type}{Defaults to \code{"soft"}.}
 }
 \description{

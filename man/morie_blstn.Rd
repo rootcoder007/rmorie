@@ -8,20 +8,20 @@
 morie_blstn(query, subjects, w = 11L, match = 5, mismatch = -4, cutoff = NULL, X = 20, word_mode = "exact", threshold = NULL, matrix = NULL, alphabet = "ACGT", lam = NULL, K = NULL, max_hsps = NULL, letter_probs = NULL, pvalues = TRUE)
 }
 \arguments{
-\item{query}{See Usage.}
-\item{subjects}{See Usage.}
+\item{query}{Coerced to character by the body, with \code{as.character}.}
+\item{subjects}{Character; the body checks with \code{is.character}.}
 \item{w}{Numeric; combined arithmetically in the body. Defaults to \code{11L}.}
 \item{match}{Passed to \code{morie_word_hits}. Defaults to \code{5}.}
 \item{mismatch}{Passed to \code{morie_word_hits}. Defaults to \code{-4}.}
-\item{cutoff}{Defaults to \code{NULL}.}
-\item{X}{Defaults to \code{20}.}
+\item{cutoff}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{X}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{20}.}
 \item{word_mode}{Passed to \code{morie_word_hits}. Defaults to \code{"exact"}.}
 \item{threshold}{Passed to \code{morie_word_hits}.}
 \item{matrix}{Optional; may be \code{NULL}. A matrix; indexed by row and column.}
 \item{alphabet}{A vector; its length is taken. Defaults to \code{"ACGT"}.}
 \item{lam}{Optional; may be \code{NULL}. Passed to \code{morie_blast_pvalue}.}
 \item{K}{Optional; may be \code{NULL}. Passed to \code{morie_blast_pvalue}.}
-\item{max_hsps}{Defaults to \code{NULL}.}
+\item{max_hsps}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{letter_probs}{Defaults to \code{NULL}.}
 \item{pvalues}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }

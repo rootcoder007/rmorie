@@ -8,10 +8,10 @@
 morie_vqgdec_adaptive_weight(grad_rec, grad_gan, delta = 1e-06, clip = 10000)
 }
 \arguments{
-\item{grad_rec}{See Usage.}
-\item{grad_gan}{See Usage.}
-\item{delta}{Defaults to \code{1e-06}.}
-\item{clip}{Defaults to \code{10000}.}
+\item{grad_rec}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{grad_gan}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{delta}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-06}.}
+\item{clip}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{10000}.}
 }
 \description{
 Balances the two losses at the decoder\'s last layer.

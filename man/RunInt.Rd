@@ -8,9 +8,9 @@
 RunInt(x, t, tau)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{t}{See Usage.}
-\item{tau}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{t}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{tau}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 The window is clipped at the start of the record, and how many windows that affects is reported rather than left to be discovered.

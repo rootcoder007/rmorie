@@ -8,9 +8,9 @@
 AmSig(x, fc, fs, conventional = FALSE, depth = 1)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{fc}{See Usage.}
-\item{fs}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fc}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{conventional}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 \item{depth}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }

@@ -10,16 +10,16 @@ simulate_outbreak(R0 = 2.5, dispersion = 0.16, n_initial = 20, trace_prob = 0.8,
 \arguments{
 \item{R0}{Defaults to \code{2.5}.}
 \item{dispersion}{Defaults to \code{0.16}.}
-\item{n_initial}{Defaults to \code{20}.}
-\item{trace_prob}{Defaults to \code{0.8}.}
-\item{delay_mean}{Defaults to \code{3.83}.}
-\item{delay_sd}{Defaults to \code{2.4}.}
+\item{n_initial}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.}
+\item{trace_prob}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.8}.}
+\item{delay_mean}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{3.83}.}
+\item{delay_sd}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2.4}.}
 \item{si_mean}{Defaults to \code{4.7}.}
 \item{si_sd}{Defaults to \code{2.9}.}
-\item{subclinical}{Defaults to \code{0}.}
-\item{max_cases}{Defaults to \code{5000}.}
-\item{max_weeks}{Defaults to \code{12}.}
-\item{seed}{Defaults to \code{0}.}
+\item{subclinical}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
+\item{max_cases}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5000}.}
+\item{max_weeks}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{12}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 \item{allow_presymptomatic}{Defaults to \code{TRUE}.}
 }
 \description{

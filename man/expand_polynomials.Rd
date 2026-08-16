@@ -8,9 +8,9 @@
 expand_polynomials(phi = numeric(0), Phi = numeric(0), theta = numeric(0), Theta = numeric(0), s = 12)
 }
 \arguments{
-\item{phi}{Defaults to \code{numeric(0)}.}
+\item{phi}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{numeric(0)}.}
 \item{Phi}{A vector; its length is taken. Defaults to \code{numeric(0)}.}
-\item{theta}{Defaults to \code{numeric(0)}.}
+\item{theta}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{numeric(0)}.}
 \item{Theta}{A vector; its length is taken. Defaults to \code{numeric(0)}.}
 \item{s}{Passed to \code{.sarima_seasonal_lift}. Defaults to \code{12}.}
 }

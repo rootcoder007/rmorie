@@ -8,8 +8,8 @@
 Snr(signal, noise, definition = "power")
 }
 \arguments{
-\item{signal}{See Usage.}
-\item{noise}{See Usage.}
+\item{signal}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{noise}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{definition}{One of \code{"peak"}, \code{"power"}. Defaults to \code{"power"}.}
 }
 \description{

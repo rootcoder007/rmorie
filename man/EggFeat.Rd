@@ -8,7 +8,7 @@
 EggFeat(egg, fs, normal_band = c(0.0333, 0.0667))
 }
 \arguments{
-\item{egg}{See Usage.}
+\item{egg}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
 \item{normal_band}{A vector; indexed elementwise. Defaults to \code{c(0.0333, 0.0667)}.}
 }

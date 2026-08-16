@@ -8,7 +8,7 @@
 xdeep_interaction_degree(layer_index)
 }
 \arguments{
-\item{layer_index}{See Usage.}
+\item{layer_index}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the xdeep_native implementation. No other function in the package calls it. See the file header for the source the module follows.

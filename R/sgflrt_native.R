@@ -161,7 +161,7 @@
 #' The working response is eta + (y - mu) / V(mu) and nothing else.
 #'
 #' @param family One of \code{"binomial"}, \code{"gaussian"}, \code{"poisson"}.
-#' @param disp Defaults to \code{1}.
+#' @param disp Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return Nothing; this branch always raises.
 #' @export
 .sgflrt_family <- function(family, disp = 1.0) {
@@ -214,7 +214,7 @@
 #' @param X A matrix; passed to \code{ncol}.
 #' @param Sig Passed to \code{.sgflrt_chol}.
 #' @param family Passed to \code{.sgflrt_family}.
-#' @param inner_iter See Usage.
+#' @param inner_iter Coerced to integer by the body, with \code{as.integer}.
 #' @param tol See Usage.
 #' @param disp Passed to \code{.sgflrt_family}. Defaults to \code{1}.
 #' @return A list with \code{lap}, \code{beta}, \code{u}, \code{mu}, \code{eta}, \code{loglik}, \code{w}, \code{L}, \code{v}.
@@ -301,18 +301,18 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param X Passed to \code{.sgflrt_rows}.
 #' @param coords Passed to \code{.sgflrt_rows}.
 #' @param family One of \code{"binomial"}, \code{"gaussian"}, \code{"poisson"}. Defaults to \code{"poisson"}.
 #' @param model Passed to \code{.sgflrt_corr}. Defaults to \code{"exponential"}.
-#' @param sigma2 Defaults to \code{NULL}.
-#' @param phi Defaults to \code{NULL}.
-#' @param kappa Defaults to \code{1.5}.
-#' @param nugget Defaults to \code{0}.
-#' @param dispersion Defaults to \code{NULL}.
+#' @param sigma2 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param phi Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param kappa Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1.5}.
+#' @param nugget Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
+#' @param dispersion Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param inner_iter Passed to \code{.sgflrt_laplace}. Defaults to \code{50L}.
-#' @param outer_cycles Defaults to \code{3L}.
+#' @param outer_cycles Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.
 #' @param tol Passed to \code{.sgflrt_laplace}. Defaults to \code{1e-10}.
 #' @return A list with \code{estimate}, \code{coefficients}, \code{std_error}, \code{z}, \code{spatial_effect}, \code{fitted}, \code{linear_predictor}, \code{sigma2}, \code{phi}, \code{dispersion}, \code{sigma2_at_lower_bound}, \code{spatial_signal}, \code{kappa}, \code{nugget}, \code{loglik}, \code{laplace_loglik}, \code{gls_identity_gap}, \code{covariance}, \code{family}, \code{model}, \code{n}, \code{p}, \code{d}, \code{min_distance}, \code{max_distance}, \code{method}, \code{note}.
 #' @export

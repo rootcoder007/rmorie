@@ -72,8 +72,8 @@ morie_tlgcmp <- function(strata = NULL, outcome_means = NULL,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param g See Usage.
-#' @param delta Defaults to \code{0.01}.
+#' @param g Coerced to numeric by the body, with \code{as.numeric}.
+#' @param delta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.
 #' @return A list with \code{min_g}, \code{max_g}, \code{worst}, \code{satisfied}, \code{delta}, \code{note}.
 #' @export
 positivity_check <- function(g, delta = 0.01) {
@@ -94,9 +94,9 @@ positivity_check <- function(g, delta = 0.01) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param strata See Usage.
-#' @param outcome_means See Usage.
-#' @param covariate_probs See Usage.
+#' @param strata Coerced to list by the body, with \code{as.list}.
+#' @param outcome_means Coerced to numeric by the body, with \code{as.numeric}.
+#' @param covariate_probs Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 g_computation <- function(strata, outcome_means, covariate_probs) {
@@ -157,10 +157,10 @@ sequential_g_formula <- function(Q_functions, L_supports, L_probs,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Y See Usage.
-#' @param A See Usage.
-#' @param L See Usage.
-#' @param a_star See Usage.
+#' @param Y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param A Coerced to numeric by the body, with \code{as.numeric}.
+#' @param L Coerced to character by the body, with \code{as.character}.
+#' @param a_star Coerced to numeric by the body, with \code{as.numeric}.
 #' @param strata_probs Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return The value of \code{tot}, as built in the body.
 #' @export

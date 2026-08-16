@@ -8,7 +8,7 @@
 WindowFn(N, window_type = "hamming")
 }
 \arguments{
-\item{N}{See Usage.}
+\item{N}{Coerced to integer by the body, with \code{as.integer}.}
 \item{window_type}{Defaults to \code{"hamming"}.}
 }
 \description{

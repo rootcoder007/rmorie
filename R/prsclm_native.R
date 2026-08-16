@@ -35,9 +35,9 @@
 #'
 #' @param sumstats A list; the body reads \code{$beta}, \code{$p}, \code{$position}, \code{$snp} from it.
 #' @param ld_ref Passed to \code{.prsclm_rows}.
-#' @param p_threshold Defaults to \code{NULL}.
-#' @param r2 Defaults to \code{0.1}.
-#' @param window Defaults to \code{250000}.
+#' @param p_threshold Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param r2 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
+#' @param window Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{250000}.
 #' @param genotypes Optional; may be \code{NULL}. Passed to \code{.prsclm_rows}.
 #' @param standardize A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{estimate}, \code{n_retained}, \code{thresholds}, \code{retained}, \code{score}, \code{score_threshold}, \code{scores_by_threshold}, \code{index_variants}, \code{index_variant_names}, \code{clump_of}, \code{clump_members}, \code{clump_sizes}, \code{index_is_most_significant}, \code{n_clumps}, \code{n_variants}, \code{n_individuals}, \code{r2}, \code{window}, \code{standardized}, \code{weights}, \code{method}, \code{note}.

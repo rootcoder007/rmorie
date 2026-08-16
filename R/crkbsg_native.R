@@ -120,8 +120,8 @@
 #' source it follows.
 #'
 #' @param coords Passed to \code{.crkbsg_rows}.
-#' @param y See Usage.
-#' @param z See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param z Coerced to numeric by the body, with \code{as.numeric}.
 #' @param s_predict Passed to \code{.crkbsg_rows}.
 #' @param cross_variogram Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @param coords_z Optional; may be \code{NULL}. Passed to \code{.crkbsg_rows}.

@@ -8,7 +8,7 @@
 .wsm_spread(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 range / 1.34). The divisor is 1.34 as the book prints it; 1.349 is the normal-theory value it rounds. Using the plain standard deviation is what makes the rule oversmooth skewed and long-tailed data -- one outlier moves the standard deviation a long way and the interquartile range hardly at all.

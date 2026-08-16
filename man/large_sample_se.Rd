@@ -8,8 +8,8 @@
 large_sample_se(theta, Theta, n)
 }
 \arguments{
-\item{theta}{See Usage.}
-\item{Theta}{See Usage.}
+\item{theta}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{Theta}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{n}{Numeric; combined arithmetically in the body.}
 }
 \description{

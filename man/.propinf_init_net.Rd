@@ -8,8 +8,8 @@
 .propinf_init_net(n_in, hidden, rnd)
 }
 \arguments{
-\item{n_in}{See Usage.}
-\item{hidden}{See Usage.}
+\item{n_in}{Coerced to integer by the body, with \code{as.integer}.}
+\item{hidden}{Coerced to integer by the body, with \code{as.integer}.}
 \item{rnd}{Passed to \code{.propinf_normal_lcg}.}
 }
 \description{

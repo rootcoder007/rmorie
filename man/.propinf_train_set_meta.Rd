@@ -13,9 +13,9 @@
 \item{phi_hidden}{Passed to \code{.propinf_deepsets_init}.}
 \item{repr_dim}{Passed to \code{.propinf_deepsets_init}.}
 \item{rho_hidden}{Passed to \code{.propinf_deepsets_init}.}
-\item{epochs}{See Usage.}
+\item{epochs}{Coerced to integer by the body, with \code{as.integer}.}
 \item{lr}{Passed to \code{.propinf_sgd_step}.}
-\item{seed}{See Usage.}
+\item{seed}{Coerced to integer by the body, with \code{as.integer}.}
 \item{context}{Passed to \code{.propinf_deepsets_init}. Defaults to \code{"paired"}.}
 }
 \description{

@@ -8,14 +8,14 @@
 morie_hibrid_hibrid_prediction(y, p1_geno, p2_geno, sigma2_sca = NULL, X = NULL, p1_new = NULL, p2_new = NULL, max_iter = 300L, tol = 1e-10)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{p1_geno}{Passed to \code{.hibrid_rows}.}
 \item{p2_geno}{Passed to \code{.hibrid_rows}.}
-\item{sigma2_sca}{Defaults to \code{NULL}.}
+\item{sigma2_sca}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{X}{Optional; may be \code{NULL}. Passed to \code{.hibrid_rows}.}
 \item{p1_new}{Optional; may be \code{NULL}. Passed to \code{.hibrid_rows}.}
 \item{p2_new}{Optional; may be \code{NULL}. Passed to \code{.hibrid_rows}.}
-\item{max_iter}{Defaults to \code{300L}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{300L}.}
 \item{tol}{Defaults to \code{1e-10}.}
 }
 \description{

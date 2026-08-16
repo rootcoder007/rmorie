@@ -12,7 +12,7 @@
 \item{H}{Passed to \code{.bprMF_predict}.}
 \item{pos}{A vector; indexed elementwise.}
 \item{n_items}{A count; the body uses it as \code{seq_len(...)}.}
-\item{lam}{Defaults to \code{0.01}.}
+\item{lam}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.}
 }
 \description{
 (seen, unseen) pairs per user; both the total BPR-Opt and the two pieces are returned so callers that want just the data loglik or just the penalty term can pull them out.

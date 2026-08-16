@@ -44,7 +44,7 @@
 #' Part of the matroid_optimisation_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param s See Usage.
+#' @param s Coerced to integer by the body, with \code{as.integer}.
 #' @return A character value.
 #' @export
 .morie_key <- function(s) paste(sort(as.integer(s)), collapse = ",")

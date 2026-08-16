@@ -9,8 +9,8 @@ WienerMin(phi, theta, var_d)
 }
 \arguments{
 \item{phi}{See Usage.}
-\item{theta}{See Usage.}
-\item{var_d}{See Usage.}
+\item{theta}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{var_d}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 happen for consistent statistics, so it is reported rather than clamped: it means the supplied variance and covariances do not come from the same process.

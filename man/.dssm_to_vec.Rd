@@ -8,7 +8,7 @@
 .dssm_to_vec(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Optional; may be \code{NULL}. Numeric; the body checks with \code{is.numeric}.}
 }
 \description{
 or anything that as.numeric() can flatten. Mirrors k.vec() on the Python side which is forgiving about list/array inputs.

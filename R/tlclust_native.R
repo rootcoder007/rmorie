@@ -31,7 +31,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Q_seq See Usage.
+#' @param Q_seq A list; the body checks with \code{is.list}.
 #' @param H_seq See Usage.
 #' @param Y See Usage.
 #' @param cluster See Usage.
@@ -69,7 +69,7 @@ morie_tlclust <- function(Q_seq, H_seq, Y, cluster, ic = NULL) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param ic See Usage.
+#' @param ic Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 naive_variance <- function(ic) {
@@ -87,8 +87,8 @@ naive_variance <- function(ic) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param ic See Usage.
-#' @param cluster See Usage.
+#' @param ic Coerced to numeric by the body, with \code{as.numeric}.
+#' @param cluster Coerced to character by the body, with \code{as.character}.
 #' @return A list with \code{se}, \code{n_clusters}, \code{cluster_sums}, \code{note}.
 #' @export
 cluster_variance <- function(ic, cluster) {
@@ -133,8 +133,8 @@ design_effect <- function(ic, cluster) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Q_final See Usage.
-#' @param weights Defaults to \code{NULL}.
+#' @param Q_final Coerced to numeric by the body, with \code{as.numeric}.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{psi}, \code{parametrization}, \code{note}.
 #' @export
 g_formula_pooled <- function(Q_final, weights = NULL) {

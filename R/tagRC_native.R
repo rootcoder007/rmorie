@@ -60,9 +60,9 @@ tripartite_graph <- function(triples) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param nodes See Usage.
+#' @param nodes Coerced to list by the body, with \code{as.list}.
 #' @param focus See Usage.
-#' @param weight Defaults to \code{0.9}.
+#' @param weight Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.9}.
 #' @return A list with \code{p}, \code{focus}, \code{mass}.
 #' @export
 preference_vector <- function(nodes, focus, weight = 0.9) {
@@ -96,11 +96,11 @@ preference_vector <- function(nodes, focus, weight = 0.9) {
 #' source it follows.
 #'
 #' @param adjacency A vector; indexed elementwise.
-#' @param nodes See Usage.
+#' @param nodes Coerced to list by the body, with \code{as.list}.
 #' @param p Optional; may be \code{NULL}. A vector; indexed elementwise.
-#' @param d Defaults to \code{0.7}.
-#' @param iters Defaults to \code{200}.
-#' @param tol Defaults to \code{1e-12}.
+#' @param d Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.7}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-12}.
 #' @return A list with \code{w}, \code{ranking}.
 #' @export
 adapted_pagerank <- function(adjacency, nodes, p = NULL, d = 0.7,

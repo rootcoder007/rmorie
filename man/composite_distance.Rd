@@ -14,7 +14,7 @@ composite_distance(tnf_a, tnf_b, cov_a = NULL, cov_b = NULL, len_a = NULL, len_b
 \item{cov_b}{Defaults to \code{NULL}.}
 \item{len_a}{Defaults to \code{NULL}.}
 \item{len_b}{Defaults to \code{NULL}.}
-\item{w_abundance}{Defaults to \code{0.5}.}
+\item{w_abundance}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.}
 }
 \description{
 A step of the metabd_native implementation. Called by \code{bin_contigs}, \code{morie_metabd}. See the file header for the source the module follows.

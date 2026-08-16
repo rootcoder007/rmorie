@@ -8,7 +8,7 @@
 .sccsno_rp(risk_periods)
 }
 \arguments{
-\item{risk_periods}{See Usage.}
+\item{risk_periods}{A matrix; the body checks with \code{is.matrix}.}
 }
 \description{
 A step of the sccsno_native implementation. Called by \code{morie_sccsno_build_intervals}, \code{morie_sccsno_fit}. See the file header for the source the module follows.

@@ -8,7 +8,7 @@
 .schab_reshape_like(values, template)
 }
 \arguments{
-\item{values}{See Usage.}
+\item{values}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{template}{A matrix; passed to \code{dim}.}
 }
 \description{

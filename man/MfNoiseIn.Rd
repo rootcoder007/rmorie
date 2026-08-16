@@ -8,7 +8,7 @@
 MfNoiseIn(power, freqs = NULL)
 }
 \arguments{
-\item{power}{See Usage.}
+\item{power}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{freqs}{Optional; may be \code{NULL}. A vector; its length is taken.}
 }
 \description{

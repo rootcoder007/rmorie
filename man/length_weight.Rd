@@ -8,7 +8,7 @@
 length_weight(length, l_min = 2500, l_ref = 1e+05)
 }
 \arguments{
-\item{length}{See Usage.}
+\item{length}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{l_min}{Numeric; combined arithmetically in the body. Defaults to \code{2500}.}
 \item{l_ref}{Numeric; combined arithmetically in the body. Defaults to \code{1e+05}.}
 }

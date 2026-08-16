@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{design}{A matrix; passed to \code{as.matrix}.}
-\item{values}{See Usage.}
+\item{values}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{nugget}{Passed to \code{.abcgp.mle_lengthscale}.}
-\item{lengthscale}{Defaults to \code{NULL}.}
+\item{lengthscale}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{kernel}{Passed to \code{.abcgp.mle_lengthscale}. Defaults to \code{"sqexp"}.}
-\item{tau2}{Defaults to \code{NULL}.}
+\item{tau2}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the abcgp_native implementation. Called by \code{.abcgp.history_match}. See the file header for the source the module follows.

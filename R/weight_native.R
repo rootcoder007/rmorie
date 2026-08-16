@@ -16,7 +16,7 @@
 #' source it follows.
 #'
 #' @param weights A vector; its length is taken.
-#' @param propensity See Usage.
+#' @param propensity Coerced to numeric by the body, with \code{as.numeric}.
 #' @param method See Usage.
 #' @param estimand See Usage.
 #' @param call See Usage.

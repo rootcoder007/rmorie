@@ -70,7 +70,7 @@ e_gcn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
 #'
 #' @param H See Usage.
 #' @param X See Usage.
-#' @param layers See Usage.
+#' @param layers Coerced to integer by the body, with \code{as.integer}.
 #' @param phi_e See Usage.
 #' @param phi_x See Usage.
 #' @param phi_h See Usage.

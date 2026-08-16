@@ -59,7 +59,7 @@ gflops <- function(tokens, depth, width, mlp_ratio = 4.0) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .dits16_vec <- function(x) {

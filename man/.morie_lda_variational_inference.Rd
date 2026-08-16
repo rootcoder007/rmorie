@@ -8,11 +8,11 @@
 .morie_lda_variational_inference(doc, alpha, beta, iters = 100, tol = 1e-08)
 }
 \arguments{
-\item{doc}{See Usage.}
+\item{doc}{Coerced to integer by the body, with \code{as.integer}.}
 \item{alpha}{A vector; its length is taken.}
 \item{beta}{A matrix; passed to \code{as.matrix}.}
 \item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100}.}
-\item{tol}{Defaults to \code{1e-08}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-08}.}
 }
 \description{
 A step of the lda_native implementation. Called by \code{.morie_lda_variational_em}. See the file header for the source the module follows.

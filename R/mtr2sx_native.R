@@ -87,10 +87,10 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param beta_x See Usage.
-#' @param se_x See Usage.
-#' @param beta_y See Usage.
-#' @param se_y See Usage.
+#' @param beta_x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param se_x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param beta_y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param se_y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param model One of \code{"fixed"}, \code{"multiplicative"}. Defaults to \code{"multiplicative"}.
 #' @param weights Compared against \code{"second_order"}. Defaults to \code{"first_order"}.
 #' @param theta Numeric; combined arithmetically in the body. Defaults to \code{0}.

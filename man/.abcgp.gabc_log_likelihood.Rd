@@ -16,7 +16,7 @@
 \item{summary}{Passed to \code{.abcgp.summarise}.}
 \item{kernel}{One of \code{"gaussian"}, \code{"uniform"}. Defaults to \code{"gaussian"}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
-\item{bootstrap}{Defaults to \code{25}.}
+\item{bootstrap}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25}.}
 }
 \description{
 A step of the abcgp_native implementation. Called by \code{.abcgp.history_match}. See the file header for the source the module follows.

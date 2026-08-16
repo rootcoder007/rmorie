@@ -8,11 +8,11 @@
 IirTf(b_k, a_k, z, N = NULL, M = NULL)
 }
 \arguments{
-\item{b_k}{See Usage.}
-\item{a_k}{See Usage.}
+\item{b_k}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{a_k}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{z}{Passed to \code{.morie_rg_polyz}.}
-\item{N}{Defaults to \code{NULL}.}
-\item{M}{Defaults to \code{NULL}.}
+\item{N}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{M}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 so a_k is a_1..a_M WITHOUT it; passing a vector that already carries a leading 1 silently doubles the order, so the denominator actually used comes back for checking.

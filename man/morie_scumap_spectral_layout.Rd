@@ -9,7 +9,7 @@ morie_scumap_spectral_layout(B, n_components = 2, laplacian = "normalised")
 }
 \arguments{
 \item{B}{A matrix; indexed by row and column.}
-\item{n_components}{Defaults to \code{2}.}
+\item{n_components}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.}
 \item{laplacian}{One of \code{"as_printed"}, \code{"normalised"}. Defaults to \code{"normalised"}.}
 }
 \description{

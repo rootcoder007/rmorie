@@ -8,7 +8,7 @@
 .flow_inverse(z, layers)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{layers}{Numeric; passed to \code{rev}.}
 }
 \description{

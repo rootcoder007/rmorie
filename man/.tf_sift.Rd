@@ -8,7 +8,7 @@
 .tf_sift(x, maxiter = 50L, tol = 0.05)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{maxiter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.}
 \item{tol}{Defaults to \code{0.05}.}
 }

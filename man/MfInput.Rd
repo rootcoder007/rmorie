@@ -8,9 +8,9 @@
 MfInput(x, omega, dt = 1)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{omega}{See Usage.}
-\item{dt}{Defaults to \code{1}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{dt}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 so it carries the sampling interval.

@@ -8,8 +8,8 @@
 PcgSyncAvg(cycles, fs = 1)
 }
 \arguments{
-\item{cycles}{See Usage.}
-\item{fs}{Defaults to \code{1}.}
+\item{cycles}{Iterated over elementwise, with \code{lapply}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 SPECTRA, not waveforms, and that is the point: successive PCG cycles are not sample-aligned -- a murmur is turbulent, its phase differs cycle to cycle -- so waveform averaging as in eq (3.96) would cancel exactly the murmur being measured.  Both are computed so the difference is visible.

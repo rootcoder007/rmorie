@@ -51,7 +51,7 @@ annealing_ladder <- function(n_steps, phi_max = 50.0, phi_min = 0.1,
 #'
 #' @param objective See Usage.
 #' @param initial See Usage.
-#' @param n_particles Defaults to \code{200}.
+#' @param n_particles Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
 #' @param n_steps Defaults to \code{30}.
 #' @param phi_max Defaults to \code{50}.
 #' @param phi_min Defaults to \code{0.1}.

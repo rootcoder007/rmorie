@@ -9,7 +9,7 @@ morie_secaead_chacha20(key, counter, nonce, data)
 }
 \arguments{
 \item{key}{Passed to \code{morie_secaead_chacha20_block}.}
-\item{counter}{See Usage.}
+\item{counter}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{nonce}{Passed to \code{morie_secaead_chacha20_block}.}
 \item{data}{Passed to \code{.secaead_as_bytes}.}
 }

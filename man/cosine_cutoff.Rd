@@ -8,8 +8,8 @@
 cosine_cutoff(r, cutoff = 5)
 }
 \arguments{
-\item{r}{See Usage.}
-\item{cutoff}{Defaults to \code{5}.}
+\item{r}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{cutoff}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{5}.}
 }
 \description{
 A step of the schN_native implementation. Called by \code{cfconv}. See the file header for the source the module follows.

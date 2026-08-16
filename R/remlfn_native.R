@@ -241,7 +241,7 @@
 #' @param y A vector; its length is taken.
 #' @param group A vector; its length is taken.
 #' @param tol Passed to \code{.remlfn_nelder_mead}. Defaults to \code{1e-10}.
-#' @param max_iter Defaults to \code{5000}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5000}.
 #' @param solver One of \code{"auto"}, \code{"closed"}, \code{"optim"}. Defaults to \code{"auto"}.
 #' @return A list with \code{sigma2_a}, \code{sigma2_e}, \code{mu}, \code{loglik}, \code{n_iter}, \code{converged}, \code{icc}, \code{a}, \code{N}, \code{closed_form}, \code{solver}, \code{method}.
 #' @export

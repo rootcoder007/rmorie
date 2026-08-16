@@ -8,7 +8,7 @@
 .kvmse_quantize(y, cb)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{cb}{See Usage.}
 }
 \description{

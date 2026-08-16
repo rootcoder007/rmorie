@@ -11,13 +11,13 @@ morie_scumap_umap_singlecell(X, n_neighbors = 15, min_dist = 0.1, n_components =
 \item{X}{Passed to \code{.scumap_matrix}.}
 \item{n_neighbors}{Passed to \code{morie_scumap_fuzzy_simplicial_set}. Defaults to \code{15}.}
 \item{min_dist}{Passed to \code{morie_scumap_fit_ab}. Defaults to \code{0.1}.}
-\item{n_components}{Defaults to \code{2}.}
+\item{n_components}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.}
 \item{n_epochs}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.}
 \item{learning_rate}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{spread}{Passed to \code{morie_scumap_fit_ab}. Defaults to \code{1}.}
-\item{negative_sample_rate}{Defaults to \code{5}.}
+\item{negative_sample_rate}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.}
 \item{init}{One of \code{"random"}, \code{"spectral"}. Defaults to \code{"spectral"}.}
-\item{seed}{Defaults to \code{0}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 \item{laplacian}{Passed to \code{morie_scumap_spectral_layout}. Defaults to \code{"normalised"}.}
 \item{a}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 \item{b}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}

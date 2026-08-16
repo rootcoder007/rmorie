@@ -8,10 +8,10 @@
 mask_units(n_units, rate = 0.3, seed = 0, block = 1)
 }
 \arguments{
-\item{n_units}{See Usage.}
-\item{rate}{Defaults to \code{0.3}.}
-\item{seed}{Defaults to \code{0}.}
-\item{block}{Defaults to \code{1}.}
+\item{n_units}{Coerced to integer by the body, with \code{as.integer}.}
+\item{rate}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.3}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
+\item{block}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.}
 }
 \description{
 A step of the ocrwit_native implementation. No other function in the package calls it. See the file header for the source the module follows.

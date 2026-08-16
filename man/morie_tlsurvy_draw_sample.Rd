@@ -8,7 +8,7 @@
 morie_tlsurvy_draw_sample(pi, seed = 0)
 }
 \arguments{
-\item{pi}{See Usage.}
+\item{pi}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
 }
 \description{

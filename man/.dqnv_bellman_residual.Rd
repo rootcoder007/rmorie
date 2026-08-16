@@ -11,7 +11,7 @@
 \item{Q}{A vector; its length is taken and its elements indexed.}
 \item{P}{A vector; indexed elementwise.}
 \item{R}{A vector; indexed elementwise.}
-\item{gamma}{Defaults to \code{0.99}.}
+\item{gamma}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.99}.}
 }
 \description{
 A step of the dqnv_native implementation. Called by \code{morie_dqnv}. See the file header for the source the module follows.

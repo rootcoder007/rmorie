@@ -9,8 +9,8 @@ StftParam(fs, desired_t_res, desired_f_res)
 }
 \arguments{
 \item{fs}{Numeric; combined arithmetically in the body.}
-\item{desired_t_res}{See Usage.}
-\item{desired_f_res}{See Usage.}
+\item{desired_t_res}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{desired_f_res}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.

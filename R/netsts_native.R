@@ -91,7 +91,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .netsts_vec <- function(y) {
@@ -126,7 +126,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h A vector; its length is taken.
 #' @param c A vector; its length is taken.
 #' @param W A matrix; indexed by row and column.
@@ -165,7 +165,7 @@
 #' @param X A vector; its length is taken and its elements indexed.
 #' @param W Passed to \code{.netsts_lstm_cell}.
 #' @param b Passed to \code{.netsts_lstm_cell}.
-#' @param hidden See Usage.
+#' @param hidden Coerced to integer by the body, with \code{as.integer}.
 #' @param forget_bias Passed to \code{.netsts_lstm_cell}. Defaults to \code{0}.
 #' @return A list with \code{hs}, \code{cs}, \code{gates}.
 #' @export
@@ -194,8 +194,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param forget_value See Usage.
-#' @param steps See Usage.
+#' @param forget_value Coerced to numeric by the body, with \code{as.numeric}.
+#' @param steps Coerced to integer by the body, with \code{as.integer}.
 #' @return A numeric value.
 #' @export
 .netsts_gradient_retention <- function(forget_value, steps) {
@@ -211,7 +211,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{z}, \code{mu}, \code{sd}.
 #' @export
 .netsts_standardize <- function(y) {
@@ -252,9 +252,9 @@
 #' source it follows.
 #'
 #' @param y Passed to \code{.netsts_vec}.
-#' @param horizon See Usage.
-#' @param hidden Defaults to \code{8}.
-#' @param n_lags Defaults to \code{4}.
+#' @param horizon Coerced to integer by the body, with \code{as.integer}.
+#' @param hidden Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.
+#' @param n_lags Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.
 #' @param strategy One of \code{"direct"}, \code{"recursive"}. Defaults to \code{"recursive"}.
 #' @param forget_bias Passed to \code{.netsts_lstm_run}. Defaults to \code{1}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.

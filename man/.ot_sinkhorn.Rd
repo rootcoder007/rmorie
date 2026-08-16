@@ -12,7 +12,7 @@
 \item{b}{A vector; its length is taken.}
 \item{C}{A matrix; indexed by row and column.}
 \item{eps}{Numeric; combined arithmetically in the body.}
-\item{n_iter}{Defaults to \code{200L}.}
+\item{n_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.}
 }
 \description{
 A step of the helpers_ot implementation. Called by \code{Otdiv}, \code{Otgws}, \code{Otker} and 2 others in the module. See the file header for the source the module follows.

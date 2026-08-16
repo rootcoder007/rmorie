@@ -8,8 +8,8 @@
 morie_qrF(y_true, y_pred, theta = 0.5)
 }
 \arguments{
-\item{y_true}{See Usage.}
-\item{y_pred}{See Usage.}
+\item{y_true}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{y_pred}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{theta}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
 }
 \description{

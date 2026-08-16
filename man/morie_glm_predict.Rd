@@ -12,7 +12,7 @@ morie_glm_predict(fit, X, add_intercept = TRUE, type = c("response", "link"), of
 \item{X}{A matrix; passed to \code{nrow}.}
 \item{add_intercept}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 \item{type}{Compared against \code{"link"}. Defaults to \code{c("response", "link")}.}
-\item{offset}{Defaults to \code{NULL}.}
+\item{offset}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the glm implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -8,8 +8,8 @@
 Divergence(m1, m2, C1, C2)
 }
 \arguments{
-\item{m1}{See Usage.}
-\item{m2}{See Usage.}
+\item{m1}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{m2}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{C1}{A matrix; passed to \code{as.matrix}.}
 \item{C2}{A matrix; passed to \code{as.matrix}.}
 }

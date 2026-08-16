@@ -14,7 +14,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 bartlett_kernel <- function(x) {
@@ -28,7 +28,7 @@ bartlett_kernel <- function(x) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 parzen_kernel <- function(x) {
@@ -63,7 +63,7 @@ quadratic_spectral_kernel <- function(x) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 tukey_hanning_kernel <- function(x) {
@@ -160,7 +160,7 @@ moment_vectors <- function(e, X) {
 #' source it follows.
 #'
 #' @param a Passed to \code{.svd_r}.
-#' @param cap Defaults to \code{0.97}.
+#' @param cap Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.97}.
 #' @return The value of \code{%*%}.
 #' @export
 .singular_value_adjust <- function(a, cap = 0.97) {
@@ -334,7 +334,7 @@ ar1_fit <- function(x) {
 #' source it follows.
 #'
 #' @param v A matrix; passed to \code{as.matrix}.
-#' @param q Defaults to \code{2}.
+#' @param q Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
 #' @param weights Optional; may be \code{NULL}. Compared against \code{"drop_first"}.
 #' @return A list with \code{alpha}, \code{fits}.
 #' @export
@@ -390,7 +390,7 @@ alpha_ar1 <- function(v, q = 2, weights = NULL) {
 #' @param v A matrix; passed to \code{as.matrix}.
 #' @param kernel Passed to \code{.check_kernel}. Defaults to \code{"qs"}.
 #' @param weights Defaults to \code{NULL}.
-#' @param n Defaults to \code{NULL}.
+#' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{bandwidth}, \code{alpha}, \code{fits}.
 #' @export
 automatic_bandwidth <- function(v, kernel = "qs", weights = NULL, n = NULL) {
@@ -415,10 +415,10 @@ automatic_bandwidth <- function(v, kernel = "qs", weights = NULL, n = NULL) {
 #' source it follows.
 #'
 #' @param v A matrix; passed to \code{as.matrix}.
-#' @param bandwidth See Usage.
+#' @param bandwidth Coerced to numeric by the body, with \code{as.numeric}.
 #' @param kernel Passed to \code{.check_kernel}. Defaults to \code{"qs"}.
 #' @param n_params Numeric; combined arithmetically in the body. Defaults to \code{0}.
-#' @param n Defaults to \code{NULL}.
+#' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A numeric value.
 #' @export
 kernel_hac <- function(v, bandwidth, kernel = "qs", n_params = 0, n = NULL) {
@@ -482,11 +482,11 @@ kernel_hac <- function(v, bandwidth, kernel = "qs", n_params = 0, n = NULL) {
 #' @param e A matrix; passed to \code{as.matrix}.
 #' @param X Defaults to \code{NULL}.
 #' @param prewhiten A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @param var_order Defaults to \code{1}.
+#' @param var_order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @param kernel Defaults to \code{"qs"}.
-#' @param bandwidth Defaults to \code{NULL}.
+#' @param bandwidth Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param weights Defaults to \code{NULL}.
-#' @param n_params Defaults to \code{NULL}.
+#' @param n_params Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param cap Numeric; combined arithmetically in the body. Defaults to \code{0.97}.
 #' @param adjust Defaults to \code{TRUE}.
 #' @return The value of \code{structure}.

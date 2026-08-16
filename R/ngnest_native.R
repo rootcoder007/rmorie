@@ -91,8 +91,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param horizon See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param horizon Coerced to integer by the body, with \code{as.integer}.
 #' @param lookback_multiples Defaults to \code{c(2, 3, 4, 5, 6, 7)}.
 #' @param block_sets Defaults to \code{NULL}.
 #' @param ridge Passed to \code{.ngnest_nbeats_stack}. Defaults to \code{1e-08}.

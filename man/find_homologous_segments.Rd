@@ -8,8 +8,8 @@
 find_homologous_segments(group1, group2, scoring, weights1 = NULL, weights2 = NULL, seq_type = "aa", window = 30L, n_peaks = 20L, threshold = 0.7, max_len = 150L, corr_method = "fft")
 }
 \arguments{
-\item{group1}{See Usage.}
-\item{group2}{See Usage.}
+\item{group1}{Iterated over elementwise, with \code{vapply}.}
+\item{group2}{Iterated over elementwise, with \code{vapply}.}
 \item{scoring}{A list; the body reads \code{$matrix} from it.}
 \item{weights1}{Defaults to \code{NULL}.}
 \item{weights2}{Defaults to \code{NULL}.}

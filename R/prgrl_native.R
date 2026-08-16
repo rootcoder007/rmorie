@@ -99,7 +99,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to vector by the body, with \code{as.vector}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .prgrl_to_vec <- function(x) {
@@ -112,7 +112,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param seed See Usage.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{function}.
 #' @export
 .prgrl_rng <- function(seed) {
@@ -271,8 +271,8 @@ is_curriculum <- function(weights, p = NULL, tol = 1e-12) {
 #' @param X A vector; indexed elementwise.
 #' @param y A vector; indexed elementwise.
 #' @param order A vector; its length is taken and its elements indexed.
-#' @param updates See Usage.
-#' @param w0 See Usage.
+#' @param updates Coerced to integer by the body, with \code{as.integer}.
+#' @param w0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{w}, as built in the body.
 #' @export
 .prgrl_perceptron <- function(X, y, order, updates, w0) {
@@ -334,7 +334,7 @@ is_curriculum <- function(weights, p = NULL, tol = 1e-12) {
 #' @param updates Passed to \code{.prgrl_perceptron}. Defaults to \code{200}.
 #' @param n_steps Defaults to \code{5}.
 #' @param seed Passed to \code{.prgrl_rng}. Defaults to \code{0}.
-#' @param n_repeats Defaults to \code{50}.
+#' @param n_repeats Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50}.
 #' @param order One of \code{"sampled"}, \code{"sorted"}. Defaults to \code{"sampled"}.
 #' @return A list with \code{estimate}, \code{curriculum_error}, \code{baseline_error}, \code{improvement}, \code{curriculum_errors}, \code{baseline_errors}, \code{held_out}, \code{updates}, \code{order}, \code{n_repeats}, \code{lambdas}, \code{weights}, \code{entropies}, \code{is_curriculum}, \code{n}, \code{method}, \code{note}.
 #' @export
@@ -458,9 +458,9 @@ prgrl <- function(X, y, difficulty, X_test = NULL, y_test = NULL,
 #' @param X_test Passed to \code{.prgrl_to_rows}.
 #' @param y_test Passed to \code{.prgrl_to_vec}.
 #' @param quantile Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
-#' @param updates Defaults to \code{200}.
+#' @param updates Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
 #' @param seed Passed to \code{.prgrl_rng}. Defaults to \code{0}.
-#' @param n_repeats Defaults to \code{50}.
+#' @param n_repeats Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50}.
 #' @return A list with \code{estimate}, \code{easy_only_error}, \code{all_examples_error}, \code{improvement}, \code{n_kept}, \code{n}, \code{method}, \code{note}.
 #' @export
 easy_only_fit <- function(X, y, difficulty, X_test, y_test, quantile = 0.5,

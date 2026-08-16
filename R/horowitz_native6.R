@@ -26,7 +26,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param beta See Usage.
+#' @param beta Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .morie_hrz_normalize_scale <- function(beta) {

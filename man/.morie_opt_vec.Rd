@@ -8,7 +8,7 @@
 .morie_opt_vec(g, name = "g")
 }
 \arguments{
-\item{g}{See Usage.}
+\item{g}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{name}{Defaults to \code{"g"}.}
 }
 \description{

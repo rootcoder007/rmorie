@@ -8,8 +8,8 @@
 AncInput(v, m)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{m}{See Usage.}
+\item{v}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{m}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 signal and the interference statistically independent; the sample correlation between them is returned so that premise is testable instead of assumed.

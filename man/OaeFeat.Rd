@@ -8,9 +8,9 @@
 OaeFeat(oae, fs, noise_floor = NULL, bands = NULL)
 }
 \arguments{
-\item{oae}{See Usage.}
+\item{oae}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
-\item{noise_floor}{Defaults to \code{NULL}.}
+\item{noise_floor}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{bands}{Optional; may be \code{NULL}. A vector; its length is taken.}
 }
 \description{

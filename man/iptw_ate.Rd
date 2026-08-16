@@ -8,15 +8,15 @@
 iptw_ate(y, A, H, library = NULL, n_folds = 10, meta = "nnls", trim = 0.01, ridge = 1e-08, level = 0.95)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{A}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{A}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{H}{See Usage.}
 \item{library}{Defaults to \code{NULL}.}
 \item{n_folds}{Defaults to \code{10}.}
 \item{meta}{Defaults to \code{"nnls"}.}
 \item{trim}{Defaults to \code{0.01}.}
 \item{ridge}{Defaults to \code{1e-08}.}
-\item{level}{Defaults to \code{0.95}.}
+\item{level}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.}
 }
 \description{
 A step of the flxipt_native implementation. No other function in the package calls it. See the file header for the source the module follows.

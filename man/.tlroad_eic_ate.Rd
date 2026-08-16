@@ -13,7 +13,7 @@
 \item{Q1}{Passed to \code{.tlroad_vec}.}
 \item{Q0}{Passed to \code{.tlroad_vec}.}
 \item{g}{Passed to \code{.tlroad_vec}.}
-\item{psi}{See Usage.}
+\item{psi}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tlroad_native implementation. Called by \code{.tlroad_solves_eic_equation}. See the file header for the source the module follows.

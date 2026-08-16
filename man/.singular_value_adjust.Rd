@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{a}{Passed to \code{.svd_r}.}
-\item{cap}{Defaults to \code{0.97}.}
+\item{cap}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.97}.}
 }
 \description{
 A step of the andmnh_native implementation. No other function in the package calls it. See the file header for the source the module follows.

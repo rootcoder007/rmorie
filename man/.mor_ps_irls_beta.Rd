@@ -10,8 +10,8 @@
 \arguments{
 \item{X}{A matrix; passed to \code{nrow}.}
 \item{y}{Numeric; combined arithmetically in the body.}
-\item{lam}{Defaults to \code{0}.}
-\item{max_iter}{Defaults to \code{200L}.}
+\item{lam}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.}
 \item{tol}{Defaults to \code{1e-12}.}
 }
 \description{

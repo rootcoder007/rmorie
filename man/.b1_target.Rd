@@ -15,7 +15,7 @@
 \item{Q0W}{Passed to \code{.b1_logit}.}
 \item{g1W}{Passed to \code{.b1_bound}.}
 \item{gbound}{Numeric; combined arithmetically in the body. Defaults to \code{0.025}.}
-\item{iters}{Defaults to \code{100}.}
+\item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.}
 \item{tol}{Defaults to \code{1e-12}.}
 }
 \description{

@@ -10,7 +10,7 @@
 \arguments{
 \item{y_positive}{Passed to \code{.gpflat}.}
 \item{tol}{Defaults to \code{1e-12}.}
-\item{max_iter}{Defaults to \code{200}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.}
 }
 \description{
 A step of the helpers_gp_core implementation. Called by \code{.gpzapbestsplit}, \code{Msm325}. See the file header for the source the module follows.

@@ -8,8 +8,8 @@
 morie_surxgb_aft_loss(y_lower, y_upper, u, sigma = 1, dist = "normal")
 }
 \arguments{
-\item{y_lower}{See Usage.}
-\item{y_upper}{See Usage.}
+\item{y_lower}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{y_upper}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{u}{Passed to \code{.surxgb_s}.}
 \item{sigma}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{dist}{Passed to \code{.surxgb_check_dist}. Defaults to \code{"normal"}.}

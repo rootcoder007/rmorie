@@ -8,10 +8,10 @@
 PzMag(l_k, r_k, N = NULL, M = NULL)
 }
 \arguments{
-\item{l_k}{See Usage.}
-\item{r_k}{See Usage.}
-\item{N}{Defaults to \code{NULL}.}
-\item{M}{Defaults to \code{NULL}.}
+\item{l_k}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{r_k}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{N}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{M}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 drives the response to nought, approaching a pole drives it up, and a pole ON the evaluation point makes it unbounded -- which is why a vanishing pole distance is refused rather than returning Inf.

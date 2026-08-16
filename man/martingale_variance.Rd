@@ -8,7 +8,7 @@
 martingale_variance(D)
 }
 \arguments{
-\item{D}{See Usage.}
+\item{D}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tlonts_native implementation. Called by \code{online_tmle_series}. See the file header for the source the module follows.

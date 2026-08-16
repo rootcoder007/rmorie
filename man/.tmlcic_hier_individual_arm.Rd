@@ -16,7 +16,7 @@
 \item{a}{See Usage.}
 \item{trim}{Numeric; combined arithmetically in the body.}
 \item{ridge}{Numeric; passed to \code{max}.}
-\item{known_g}{See Usage.}
+\item{known_g}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_tmle_hierarchical}. See the file header for the source the module follows.

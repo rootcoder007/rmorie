@@ -9,7 +9,7 @@ coherence(A, rank = NULL)
 }
 \arguments{
 \item{A}{Passed to \code{.meglt_mat}.}
-\item{rank}{Defaults to \code{NULL}.}
+\item{rank}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the meglt_native implementation. Called by \code{morie_meglt}. See the file header for the source the module follows.

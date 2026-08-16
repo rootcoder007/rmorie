@@ -8,8 +8,8 @@
 MfAcf(x, gain = 1, dt = 1)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{gain}{Defaults to \code{1}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{gain}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 \item{dt}{Defaults to \code{1}.}
 }
 \description{

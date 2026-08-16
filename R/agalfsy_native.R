@@ -164,10 +164,10 @@
 #' @param site Optional; may be \code{NULL}. Passed to \code{.agalfsy_coords}.
 #' @param policy Defaults to \code{NULL}.
 #' @param critic Defaults to \code{NULL}.
-#' @param max_steps Defaults to \code{600L}.
-#' @param min_steps Defaults to \code{300L}.
-#' @param window Defaults to \code{50L}.
-#' @param tol Defaults to \code{0.3}.
+#' @param max_steps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{600L}.
+#' @param min_steps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{300L}.
+#' @param window Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50L}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.3}.
 #' @param box Numeric; combined arithmetically in the body. Defaults to \code{18}.
 #' @param seed Defaults to \code{2}.
 #' @return A list with \code{estimate}, \code{pose}, \code{rmsd}, \code{rmsd_start}, \code{dcc}, \code{success}, \code{improved}, \code{steps}, \code{stop_reason}, \code{reward_total}, \code{trajectory}, \code{policy_kind}, \code{n_actions}, \code{translation_step}, \code{rotation_step_deg}, \code{box}, \code{method}, \code{note}.

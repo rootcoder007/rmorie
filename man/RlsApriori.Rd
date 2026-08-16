@@ -8,9 +8,9 @@
 RlsApriori(x, rvec, w_prev)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{rvec}{See Usage.}
-\item{w_prev}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{rvec}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{w_prev}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 made with the PREVIOUS weights.  Using the updated weights gives the a posteriori error, a different and always smaller quantity, and the recursion is not valid with it.

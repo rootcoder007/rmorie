@@ -8,7 +8,7 @@
 .schab_st_region_box(region)
 }
 \arguments{
-\item{region}{See Usage.}
+\item{region}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the schab_st_shared implementation. Called by \code{.schab_cstr_test}, \code{.schab_st_intensity}, \code{.schab_st_marginal_intensities}. See the file header for the source the module follows.

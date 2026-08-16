@@ -14,7 +14,7 @@ mafft_alignment(sequences, method = "FFT-NS-2", seq_type = NULL, raw_matrix = NU
 \item{raw_matrix}{Defaults to \code{NULL}.}
 \item{freqs}{Defaults to \code{NULL}.}
 \item{s_a}{Defaults to \code{0.06}.}
-\item{s_op}{Defaults to \code{2.4}.}
+\item{s_op}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2.4}.}
 \item{matrix}{Defaults to \code{"normalized"}.}
 \item{window}{Defaults to \code{30L}.}
 \item{n_peaks}{Defaults to \code{20L}.}

@@ -8,9 +8,9 @@
 FmSig(m, fc, fs, kf = 1, amplitude = 1)
 }
 \arguments{
-\item{m}{See Usage.}
-\item{fc}{See Usage.}
-\item{fs}{See Usage.}
+\item{m}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fc}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{kf}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{amplitude}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }

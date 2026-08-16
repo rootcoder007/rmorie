@@ -8,8 +8,8 @@
 SpecRes(n, fs = 1, window = "rectangular")
 }
 \arguments{
-\item{n}{See Usage.}
-\item{fs}{Defaults to \code{1}.}
+\item{n}{Coerced to integer by the body, with \code{as.integer}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 \item{window}{Character; passed to \code{tolower}. Defaults to \code{"rectangular"}.}
 }
 \description{

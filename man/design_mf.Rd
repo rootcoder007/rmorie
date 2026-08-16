@@ -8,10 +8,10 @@
 design_mf(u, i, n_users, n_items)
 }
 \arguments{
-\item{u}{See Usage.}
-\item{i}{See Usage.}
-\item{n_users}{See Usage.}
-\item{n_items}{See Usage.}
+\item{u}{Coerced to integer by the body, with \code{as.integer}.}
+\item{i}{Coerced to integer by the body, with \code{as.integer}.}
+\item{n_users}{Coerced to integer by the body, with \code{as.integer}.}
+\item{n_items}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 One indicator for the user, one for the item. The only non-zero interaction is then <v_u, v_i>.

@@ -10,10 +10,10 @@ ray_points(origin, direction, t_near, t_far, n_samples, seed = 0, stratified = T
 \arguments{
 \item{origin}{Passed to \code{.nrfrad_vec}.}
 \item{direction}{Passed to \code{.nrfrad_vec}.}
-\item{t_near}{See Usage.}
-\item{t_far}{See Usage.}
-\item{n_samples}{See Usage.}
-\item{seed}{Defaults to \code{0}.}
+\item{t_near}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{t_far}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n_samples}{Coerced to integer by the body, with \code{as.integer}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 \item{stratified}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

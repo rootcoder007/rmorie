@@ -187,7 +187,7 @@
 #' for the source it follows.
 #'
 #' @param logits A matrix; indexed by row and column.
-#' @param targets See Usage.
+#' @param targets Coerced to integer by the body, with \code{as.integer}.
 #' @param ignore_index Defaults to \code{-100L}.
 #' @return A list with \code{loss}, \code{perplexity}, \code{token_losses}, \code{n_tokens}, \code{vocab_size}.
 #' @export
@@ -219,8 +219,8 @@
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param x See Usage.
-#' @param gamma Defaults to \code{NULL}.
+#' @param x A matrix; the body checks with \code{is.matrix}.
+#' @param gamma Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param eps Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.
 #' @return A list with \code{tensor}, \code{rms}.
 #' @export
@@ -239,7 +239,7 @@
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param z See Usage.
+#' @param z Coerced to numeric by the body, with \code{as.numeric}.
 #' @param p Numeric; combined arithmetically in the body.
 #' @param T Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A list with \code{tensor}, \code{keep_mask}, \code{n_kept}.
@@ -711,7 +711,7 @@ morie_kamath_ch3_prefix_tuning_obj <- function(phi, x, y, h, Y_idx = NULL) {
 #' @param H_in A matrix; passed to \code{nrow}.
 #' @param W_down A matrix; passed to \code{as.matrix}.
 #' @param W_up A matrix; passed to \code{as.matrix}.
-#' @param f See Usage.
+#' @param f A function; the body checks with \code{is.function}.
 #' @return The value of \code{list}.
 #' @export
 .morie_km2_adapter_core <- function(H_o, H_in, W_down, W_up, f) {
@@ -767,9 +767,9 @@ morie_kamath_ch4_parallel_adapter <- function(H_o, H_i, W_down, W_up,
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param model See Usage.
-#' @param x See Usage.
-#' @param y See Usage.
+#' @param model A function; the body checks with \code{is.function}.
+#' @param x Coerced to list by the body, with \code{as.list}.
+#' @param y Iterated over elementwise, with \code{lapply}.
 #' @return The value of \code{list}.
 #' @export
 .morie_km2_seq_obj <- function(model, x, y) {
@@ -1036,7 +1036,7 @@ morie_kamath_ch4_loftq_objective <- function(W, Q, A, B) {
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param margins See Usage.
+#' @param margins Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{list}.
 #' @export
 .morie_km2_bt_loss <- function(margins) {
@@ -1307,8 +1307,8 @@ morie_kamath_ch5_pref_sigmoid_form <- function(r_star) {
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param pi_star See Usage.
-#' @param pi_ref See Usage.
+#' @param pi_star Coerced to numeric by the body, with \code{as.numeric}.
+#' @param pi_ref Coerced to numeric by the body, with \code{as.numeric}.
 #' @param beta Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
@@ -1696,7 +1696,7 @@ morie_kamath_ch6_cbs_variance <- function(W, A, p_a, p_prior, ddof = 0) {
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param items See Usage.
+#' @param items Coerced to list by the body, with \code{as.list}.
 #' @param scorer See Usage.
 #' @param name See Usage.
 #' @return A vector, from \code{vapply}.
@@ -1858,7 +1858,7 @@ morie_kamath_ch6_co_occurrence_bias <- function(w, A_i, A_j) {
 #' for the source it follows.
 #'
 #' @param word See Usage.
-#' @param outputs See Usage.
+#' @param outputs Iterated over elementwise, with \code{vapply}.
 #' @return A numeric value.
 #' @export
 .morie_km2_count_word <- function(word, outputs) {
@@ -1942,7 +1942,7 @@ morie_kamath_ch6_honest_score <- function(Yhat, k, hurtlex = NULL) {
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param A See Usage.
+#' @param A Coerced to list by the body, with \code{as.list}.
 #' @param E A vector; indexed elementwise.
 #' @param name See Usage.
 #' @return The value of \code{out}, as built in the body.
@@ -2097,8 +2097,8 @@ morie_kamath_ch6_log_prob_ratio_attr <- function(a_i, a_j, K = NULL, lam = 1) {
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param Yhat See Usage.
-#' @param c See Usage.
+#' @param Yhat Coerced to list by the body, with \code{as.list}.
+#' @param c A function; the body checks with \code{is.function}.
 #' @param name Defaults to \code{"Yhat"}.
 #' @return The value of \code{list}.
 #' @export
@@ -2194,7 +2194,7 @@ morie_kamath_ch6_lstm_chain_rule <- function(w_1_w_M) {
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param f See Usage.
+#' @param f Optional; may be \code{NULL}. A function; the body checks with \code{is.function}.
 #' @param c See Usage.
 #' @param name See Usage.
 #' @return The value of \code{v}, as built in the body.

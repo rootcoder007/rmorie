@@ -216,13 +216,13 @@ squared_exponential <- function(a, b, amplitude = 1, length_scale = 1) {
 #' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param Xs A matrix; passed to \code{as.matrix}.
 #' @param kernel Passed to \code{.kernel}. Defaults to \code{"matern52"}.
 #' @param amplitude Defaults to \code{1}.
 #' @param length_scale Defaults to \code{1}.
 #' @param noise Defaults to \code{1e-08}.
-#' @param mean Defaults to \code{NULL}.
+#' @param mean Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{mean}, \code{variance}, \code{sd}.
 #' @export
 gp_posterior <- function(X, y, Xs, kernel = "matern52", amplitude = 1,
@@ -277,13 +277,13 @@ gp_posterior <- function(X, y, Xs, kernel = "matern52", amplitude = 1,
 #' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param y See Usage.
-#' @param xs See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param xs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param kernel Passed to \code{.kernel}. Defaults to \code{"matern52"}.
 #' @param amplitude Passed to \code{.dkernel_dr2}. Defaults to \code{1}.
 #' @param length_scale Passed to \code{.lengths}. Defaults to \code{1}.
 #' @param noise Defaults to \code{1e-08}.
-#' @param mean Defaults to \code{NULL}.
+#' @param mean Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{grad_mu}, \code{grad_sd}, \code{mu}, \code{sd}.
 #' @export
 gp_posterior_gradient <- function(X, y, xs, kernel = "matern52",
@@ -457,10 +457,10 @@ acquisition_gradient <- function(gmu, gsd, mu, sd, best, acq = "ei",
 #' @param kappa Defaults to \code{2}.
 #' @param xi Defaults to \code{0}.
 #' @param starts Optional; may be \code{NULL}. A vector; its length is taken.
-#' @param n_starts Defaults to \code{8}.
-#' @param max_iter Defaults to \code{60}.
+#' @param n_starts Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{60}.
 #' @param tol Defaults to \code{1e-08}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
 #' @return A list with \code{x}, \code{acq}, \code{n_starts}, \code{evaluations}.
 #' @export
 maximise_acquisition <- function(X, y, best, box, acq = "ei",
@@ -541,9 +541,9 @@ maximise_acquisition <- function(X, y, best, box, acq = "ei",
 #' source it follows.
 #'
 #' @param f See Usage.
-#' @param bounds See Usage.
-#' @param n_iter Defaults to \code{20}.
-#' @param n_init Defaults to \code{5}.
+#' @param bounds Iterated over elementwise, with \code{lapply}.
+#' @param n_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.
+#' @param n_init Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
 #' @param acq One of \code{"ei"}, \code{"lcb"}, \code{"pi"}. Defaults to \code{"ei"}.
 #' @param kernel Defaults to \code{"matern52"}.
 #' @param amplitude Defaults to \code{1}.
@@ -551,10 +551,10 @@ maximise_acquisition <- function(X, y, best, box, acq = "ei",
 #' @param noise Defaults to \code{1e-08}.
 #' @param kappa Defaults to \code{2}.
 #' @param xi Defaults to \code{0}.
-#' @param n_candidates Defaults to \code{200}.
-#' @param seed Defaults to \code{0}.
+#' @param n_candidates Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
+#' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
 #' @param X0 Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
-#' @param y0 Defaults to \code{NULL}.
+#' @param y0 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param inner One of \code{"gradient"}, \code{"random"}. Defaults to \code{"gradient"}.
 #' @param n_starts Defaults to \code{8}.
 #' @return A list with \code{estimate}, \code{x_best}, \code{y_best}, \code{X}, \code{y}, \code{trace}, \code{acq}, \code{kernel}, \code{inner}, \code{n_eval}, \code{method}, \code{note}.

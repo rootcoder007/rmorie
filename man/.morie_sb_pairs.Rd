@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{coords}{A matrix; passed to \code{as.matrix}.}
-\item{z}{See Usage.}
+\item{z}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the schaben_native implementation. Called by \code{morie_cressie_hawkins}, \code{morie_matheron_estimator}, \code{morie_variogram_composite_likelihood}. See the file header for the source the module follows.

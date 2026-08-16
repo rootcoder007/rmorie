@@ -8,8 +8,8 @@
 hypercube_instruments(X, n_levels = 3L)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{n_levels}{Defaults to \code{3L}.}
+\item{X}{A matrix; the body checks with \code{is.matrix}.}
+\item{n_levels}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.}
 }
 \description{
 A step of the bnskmt_native implementation. Called by \code{ks_confidence_set}. See the file header for the source the module follows.

@@ -8,9 +8,9 @@
 VagFeat(vag, fs, n_segments = 8)
 }
 \arguments{
-\item{vag}{See Usage.}
+\item{vag}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
-\item{n_segments}{Defaults to \code{8}.}
+\item{n_segments}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.}
 }
 \description{
 A step of the rangayyan_phys implementation. Called by \code{VagKnee}. See the file header for the source the module follows.

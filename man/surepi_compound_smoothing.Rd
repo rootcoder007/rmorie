@@ -8,10 +8,10 @@
 surepi_compound_smoothing(values, current, passes = c(4, 2, 5, 3), multiplier = 2)
 }
 \arguments{
-\item{values}{See Usage.}
-\item{current}{See Usage.}
+\item{values}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{current}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{passes}{Numeric; passed to \code{max}. Defaults to \code{c(4, 2, 5, 3)}.}
-\item{multiplier}{Defaults to \code{2}.}
+\item{multiplier}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2}.}
 }
 \description{
 A step of the surepi_native implementation. No other function in the package calls it. See the file header for the source the module follows.

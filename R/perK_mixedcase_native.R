@@ -17,11 +17,11 @@
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param x1 See Usage.
-#' @param x2 Defaults to \code{NULL}.
-#' @param period Defaults to \code{1}.
-#' @param lengthscale Defaults to \code{1}.
-#' @param variance Defaults to \code{1}.
+#' @param x1 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param x2 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param period Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param lengthscale Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param variance Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{K}, \code{shape}, \code{period}, \code{lengthscale}, \code{variance}, \code{diag_is_variance}, \code{method}.
 #' @export
 morie_perK <- function(x1, x2 = NULL, period = 1, lengthscale = 1,

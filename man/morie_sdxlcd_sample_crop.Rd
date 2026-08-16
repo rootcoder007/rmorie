@@ -8,10 +8,10 @@
 morie_sdxlcd_sample_crop(height, width, target_h, target_w, rng)
 }
 \arguments{
-\item{height}{See Usage.}
-\item{width}{See Usage.}
-\item{target_h}{See Usage.}
-\item{target_w}{See Usage.}
+\item{height}{Coerced to integer by the body, with \code{as.integer}.}
+\item{width}{Coerced to integer by the body, with \code{as.integer}.}
+\item{target_h}{Coerced to integer by the body, with \code{as.integer}.}
+\item{target_w}{Coerced to integer by the body, with \code{as.integer}.}
 \item{rng}{Passed to \code{.ghc_unif}.}
 }
 \description{

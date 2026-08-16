@@ -8,14 +8,14 @@
 morie_lggvls(y, A, H, lag = 1, Y_hist = NULL, stabilize = TRUE, kind = "binary", trim = NULL, contrast = "cumulative")
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{A}{Passed to \code{.lggvls_as_history}.}
 \item{H}{Passed to \code{.lggvls_as_history}.}
 \item{lag}{Passed to \code{.lggvls_lagged_design}. Defaults to \code{1}.}
 \item{Y_hist}{Passed to \code{.lggvls_lagged_design}.}
 \item{stabilize}{Passed to \code{.lggvls_ip_weights}. Defaults to \code{TRUE}.}
 \item{kind}{Passed to \code{.lggvls_ip_weights}. Defaults to \code{"binary"}.}
-\item{trim}{Defaults to \code{NULL}.}
+\item{trim}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{contrast}{One of \code{"cumulative"}, \code{"everexposed"}, \code{"final"}. Defaults to \code{"cumulative"}.}
 }
 \description{

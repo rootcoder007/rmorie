@@ -33,7 +33,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param M See Usage.
+#' @param M A matrix; the body checks with \code{is.matrix}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .painn_mat <- function(M) {
@@ -205,7 +205,7 @@ dipole_moment <- function(charges, R, centre = NULL) {
 #' @param v Passed to \code{.painn_mat}.
 #' @param R Passed to \code{.painn_mat}.
 #' @param Q Passed to \code{.painn_mat}.
-#' @param tol Defaults to \code{1e-09}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-09}.
 #' @return A list with \code{scalar_error}, \code{vector_error}, \code{scalars_invariant}, \code{vectors_equivariant}, \code{note}.
 #' @export
 morie_painn_equivariance_error <- function(model, s, v, R, Q, tol = 1e-9) {

@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{ratings}{A matrix; indexed by row and column.}
-\item{n_users}{See Usage.}
-\item{n_items}{See Usage.}
+\item{n_users}{Coerced to integer by the body, with \code{as.integer}.}
+\item{n_items}{Coerced to integer by the body, with \code{as.integer}.}
 \item{bin_days}{Passed to \code{.timeRS_time_bin}. Defaults to \code{70}.}
 \item{n_bins}{Passed to \code{.timeRS_time_bin}. Defaults to \code{30}.}
-\item{epochs}{Defaults to \code{40}.}
+\item{epochs}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{40}.}
 \item{lr}{Numeric; combined arithmetically in the body. Defaults to \code{0.005}.}
 \item{reg}{Numeric; combined arithmetically in the body. Defaults to \code{0.02}.}
 \item{beta}{Passed to \code{.timeRS_deviation}. Defaults to \code{.timeRS_BETA}.}

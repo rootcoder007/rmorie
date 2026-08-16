@@ -8,11 +8,11 @@
 Ctft(x, t = NULL, omega = NULL, f = NULL, dt = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{t}{Defaults to \code{NULL}.}
-\item{omega}{Defaults to \code{NULL}.}
-\item{f}{Defaults to \code{NULL}.}
-\item{dt}{Defaults to \code{NULL}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{t}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{omega}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{f}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{dt}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 omega = 2 pi f.  Integrated over the supplied samples, so the limits are the duration of the signal.

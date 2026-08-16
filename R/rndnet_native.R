@@ -309,11 +309,11 @@ morie_rndnet <- function(observations, n_hidden=64, n_out=8, lr=0.05, clip=5.0,
 #' stream is episodic (truncated at each `done`), the intrinsic stream
 #' is non-episodic.
 #'
-#' @param reward_ext See Usage.
-#' @param reward_int See Usage.
+#' @param reward_ext Coerced to numeric by the body, with \code{as.numeric}.
+#' @param reward_int Coerced to numeric by the body, with \code{as.numeric}.
 #' @param gamma_ext Numeric; combined arithmetically in the body. Defaults to \code{0.999}.
 #' @param gamma_int Numeric; combined arithmetically in the body. Defaults to \code{0.99}.
-#' @param done Defaults to \code{NULL}.
+#' @param done Optional; may be \code{NULL}. Coerced to logical by the body, with \code{as.logical}.
 #' @return A list with \code{estimate}, \code{return_ext}, \code{return_int}, \code{return_total}, \code{gamma_ext}, \code{gamma_int}, \code{method}.
 #' @export
 morie_rndnet_combine_returns <- function(reward_ext, reward_int,

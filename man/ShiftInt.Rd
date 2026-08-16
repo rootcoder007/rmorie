@@ -11,8 +11,8 @@ ShiftInt(y, a, h, delta = 1, trim = NULL)
 \item{y}{Passed to \code{.morie_spx_chkv}.}
 \item{a}{Passed to \code{.morie_spx_chkv}.}
 \item{h}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
-\item{delta}{Defaults to \code{1}.}
-\item{trim}{Defaults to \code{NULL}.}
+\item{delta}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{trim}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 the BACK-shifted exposure.  Forward-shifting is the sign error this estimand invites.  Gaussian working model A|H ~ N(H\'gamma, tau^2), so w = exp{(delta/tau^2)(A - H\'gamma - delta/2)}.  Diaz & van der Laan (2012, 2018).  NOT in Schabenberger & Gotway.

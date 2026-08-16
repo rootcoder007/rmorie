@@ -13,7 +13,7 @@ Kalman(z, F, H, Q, R, x0 = NULL, P0 = NULL)
 \item{H}{A matrix; passed to \code{as.matrix}.}
 \item{Q}{A matrix; passed to \code{as.matrix}.}
 \item{R}{A matrix; passed to \code{as.matrix}.}
-\item{x0}{Defaults to \code{NULL}.}
+\item{x0}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{P0}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }
 \description{

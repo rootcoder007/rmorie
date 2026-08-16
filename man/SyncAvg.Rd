@@ -8,7 +8,7 @@
 SyncAvg(observations)
 }
 \arguments{
-\item{observations}{See Usage.}
+\item{observations}{Iterated over elementwise, with \code{lapply}.}
 }
 \description{
 into a signal sum that grows as M and a zero-mean noise sum that grows only as sqrt(M).  Dividing by M therefore shrinks the noise SD by 1/sqrt(M): an SNR gain of sqrt(M), or 10 log10(M) dB.

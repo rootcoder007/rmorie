@@ -8,7 +8,7 @@
 .labels(v, name)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Coerced to character by the body, with \code{as.character}.}
 \item{name}{See Usage.}
 }
 \description{

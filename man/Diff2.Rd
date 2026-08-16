@@ -8,9 +8,9 @@
 Diff2(x, T = 1, n = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{T}{Defaults to \code{1}.}
-\item{n}{Defaults to \code{NULL}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{T}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{n}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 with frequency, and the book notes it "may be realized as a cascade of two" first differences.  Both are computed and compared.

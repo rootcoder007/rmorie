@@ -8,11 +8,11 @@
 density_kink_test(V, kink, bandwidth, n_bins = 20L, order = 1L)
 }
 \arguments{
-\item{V}{See Usage.}
-\item{kink}{See Usage.}
-\item{bandwidth}{See Usage.}
-\item{n_bins}{Defaults to \code{20L}.}
-\item{order}{Defaults to \code{1L}.}
+\item{V}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{kink}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{bandwidth}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n_bins}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20L}.}
+\item{order}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1L}.}
 }
 \description{
 A step of the bnskt2_native implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -8,7 +8,7 @@
 .ot_hist(a, normalise = FALSE)
 }
 \arguments{
-\item{a}{See Usage.}
+\item{a}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{normalise}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{

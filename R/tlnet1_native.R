@@ -66,7 +66,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param values See Usage.
+#' @param values A matrix; the body checks with \code{is.matrix}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .tlnet1_vec <- function(values) {

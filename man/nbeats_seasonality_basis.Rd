@@ -11,7 +11,7 @@ nbeats_seasonality_basis(length, harmonics, offset = 0, period = NULL)
 \item{length}{A count; the body uses it as \code{seq_len(...)}.}
 \item{harmonics}{A count; the body uses it as \code{seq_len(...)}.}
 \item{offset}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
-\item{period}{Defaults to \code{NULL}.}
+\item{period}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the nbeats_native implementation. Called by \code{nbeats_block}. See the file header for the source the module follows.

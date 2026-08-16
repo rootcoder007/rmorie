@@ -8,15 +8,15 @@
 morie_prphet_fit(t, y, n_changepoints = 10L, changepoint_range = 0.8, changepoints = NULL, seasonalities = NULL, holidays = NULL, holiday_window = c(0, 0), changepoint_prior = 0.05, ridge = 1e-08)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{y}{See Usage.}
+\item{t}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{n_changepoints}{Passed to \code{.changepoints}. Defaults to \code{10L}.}
 \item{changepoint_range}{Passed to \code{.changepoints}. Defaults to \code{0.8}.}
 \item{changepoints}{Passed to \code{.changepoints}.}
 \item{seasonalities}{Optional; may be \code{NULL}. Passed to \code{morie_prphet_design}.}
 \item{holidays}{Passed to \code{morie_prphet_design}.}
 \item{holiday_window}{Passed to \code{morie_prphet_design}. Defaults to \code{c(0, 0)}.}
-\item{changepoint_prior}{Defaults to \code{0.05}.}
+\item{changepoint_prior}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}
 \item{ridge}{Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.}
 }
 \description{

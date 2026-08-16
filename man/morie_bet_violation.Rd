@@ -13,7 +13,7 @@ morie_bet_violation(theta, level = 0.95, lower_bound = 0, draws = 20000L, seed =
 \item{lower_bound}{Passed to \code{morie_coverage_by_region}. Defaults to \code{0}.}
 \item{draws}{Passed to \code{morie_coverage_by_region}. Defaults to \code{20000L}.}
 \item{seed}{Passed to \code{morie_coverage_by_region}. Defaults to \code{0}.}
-\item{grid}{Defaults to \code{NULL}.}
+\item{grid}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the bndpcb_native implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -8,11 +8,11 @@
 Acfseg(test, reference, lags = NULL, thp = 1, thf = 1)
 }
 \arguments{
-\item{test}{See Usage.}
-\item{reference}{See Usage.}
-\item{lags}{Defaults to \code{NULL}.}
-\item{thp}{Defaults to \code{1}.}
-\item{thf}{Defaults to \code{1}.}
+\item{test}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{reference}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{lags}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{thp}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{thf}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the rangayyan_adapt implementation. No other function in the package calls it. See the file header for the source the module follows.

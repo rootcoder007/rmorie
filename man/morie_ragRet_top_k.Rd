@@ -8,9 +8,9 @@
 morie_ragRet_top_k(query, corpus, k.top = 5L, metric = "inner_product")
 }
 \arguments{
-\item{query}{See Usage.}
-\item{corpus}{See Usage.}
-\item{k.top}{Defaults to \code{5L}.}
+\item{query}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{corpus}{Iterated over elementwise, with \code{lapply}.}
+\item{k.top}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.}
 \item{metric}{Compared against \code{"cosine"}. Defaults to \code{"inner_product"}.}
 }
 \description{

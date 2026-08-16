@@ -8,7 +8,7 @@
 .nhits_nhits_stack(window, horizon, blocks, ridge = 1e-08)
 }
 \arguments{
-\item{window}{See Usage.}
+\item{window}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{horizon}{Passed to \code{.nhits_nhits_block}.}
 \item{blocks}{A vector; its length is taken and its elements indexed.}
 \item{ridge}{Passed to \code{.nhits_nhits_block}. Defaults to \code{1e-08}.}

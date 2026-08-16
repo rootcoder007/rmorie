@@ -10,8 +10,8 @@ ShrinkPred(y, cluster, sigma2_u, sigma2_e)
 \arguments{
 \item{y}{Passed to \code{.morie_spx_chkv}.}
 \item{cluster}{Passed to \code{.morie_spx_chkv}.}
-\item{sigma2_u}{See Usage.}
-\item{sigma2_e}{See Usage.}
+\item{sigma2_u}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{sigma2_e}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 lambda_j = sigma2_e / (sigma2_e + n_j sigma2_u).  lambda depends on the CLUSTER\'S OWN SIZE; a common lambda over-shrinks the large clusters. Stein (1956); Morris (1983) JASA 78:47-55.  NOT in Schabenberger & Gotway -- a fixed-string search for "shrinkage" returns nothing.

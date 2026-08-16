@@ -8,13 +8,13 @@
 RatZ(gain, r, zeros_in, zeros_out, poles_in, poles_out, z = NULL)
 }
 \arguments{
-\item{gain}{See Usage.}
-\item{r}{See Usage.}
-\item{zeros_in}{See Usage.}
-\item{zeros_out}{See Usage.}
-\item{poles_in}{See Usage.}
-\item{poles_out}{See Usage.}
-\item{z}{Defaults to \code{NULL}.}
+\item{gain}{Coerced to complex by the body, with \code{as.complex}.}
+\item{r}{Coerced to integer by the body, with \code{as.integer}.}
+\item{zeros_in}{Coerced to complex by the body, with \code{as.complex}.}
+\item{zeros_out}{Coerced to complex by the body, with \code{as.complex}.}
+\item{poles_in}{Coerced to complex by the body, with \code{as.complex}.}
+\item{poles_out}{Coerced to complex by the body, with \code{as.complex}.}
+\item{z}{Optional; may be \code{NULL}. Coerced to complex by the body, with \code{as.complex}.}
 }
 \description{
 A step of the rangayyan_cep implementation. No other function in the package calls it. See the file header for the source the module follows.

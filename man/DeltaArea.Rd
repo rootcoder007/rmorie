@@ -10,7 +10,7 @@ DeltaArea(t = NULL, values = NULL, width = NULL)
 \arguments{
 \item{t}{Optional; may be \code{NULL}. Passed to \code{.morie_rg_gridint}.}
 \item{values}{Optional; may be \code{NULL}. Passed to \code{.morie_rg_gridint}.}
-\item{width}{Defaults to \code{NULL}.}
+\item{width}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 so the useful computation is the check on a candidate approximation.

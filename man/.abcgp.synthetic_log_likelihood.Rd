@@ -8,7 +8,7 @@
 .abcgp.synthetic_log_likelihood(draws, obs, epsilon = 0, summary = NULL)
 }
 \arguments{
-\item{draws}{See Usage.}
+\item{draws}{Iterated over elementwise, with \code{lapply}.}
 \item{obs}{Passed to \code{.abcgp.summarise}.}
 \item{epsilon}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 \item{summary}{Passed to \code{.abcgp.summarise}.}

@@ -10,8 +10,8 @@ morie_acigls(y, A, H, cluster, small_sample = TRUE)
 \arguments{
 \item{y}{A vector; its length is taken.}
 \item{A}{A matrix; indexed by row and column.}
-\item{H}{See Usage.}
-\item{cluster}{See Usage.}
+\item{H}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{cluster}{Coerced to character by the body, with \code{as.character}.}
 \item{small_sample}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

@@ -13,7 +13,7 @@
 \item{mu1}{A vector; indexed elementwise.}
 \item{mu0}{A vector; indexed elementwise.}
 \item{e}{A vector; indexed elementwise.}
-\item{trim}{Defaults to \code{0.02}.}
+\item{trim}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.02}.}
 }
 \description{
 A step of the ipwgrf_native implementation. Called by \code{morie_ipwgrf}. See the file header for the source the module follows.

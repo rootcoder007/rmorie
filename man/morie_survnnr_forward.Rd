@@ -10,7 +10,7 @@ morie_survnnr_forward(W, b, x, activation = "tanh")
 \arguments{
 \item{W}{A vector; its length is taken and its elements indexed.}
 \item{b}{A vector; indexed elementwise.}
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{activation}{Passed to \code{.survnnr_act}. Defaults to \code{"tanh"}.}
 }
 \description{

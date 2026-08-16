@@ -8,8 +8,8 @@
 .tloilr_resource_threshold(B, kappa)
 }
 \arguments{
-\item{B}{See Usage.}
-\item{kappa}{See Usage.}
+\item{B}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{kappa}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tloilr_native implementation. Called by \code{.tloilr_constrained_rule}. See the file header for the source the module follows.

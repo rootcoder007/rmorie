@@ -111,7 +111,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param method See Usage.
+#' @param method Coerced to character by the body, with \code{as.character}.
 #' @return A list with \code{method}, \code{order_sensitive}, \code{note}.
 #' @export
 is_order_sensitive <- function(method) {
@@ -134,7 +134,7 @@ is_order_sensitive <- function(method) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param scores See Usage.
+#' @param scores Iterated over elementwise, with \code{lapply}.
 #' @param weights Optional; may be \code{NULL}. Passed to \code{.hybRC_vec}.
 #' @return A list with \code{scores}, \code{ranking}, \code{partially_scored}, \code{note}.
 #' @export
@@ -187,7 +187,7 @@ weighted <- function(scores, weights = NULL) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param scores See Usage.
+#' @param scores Iterated over elementwise, with \code{lapply}.
 #' @param criterion See Usage.
 #' @param context Defaults to \code{NULL}.
 #' @return A list with \code{scores}, \code{chosen}, \code{ranking}, \code{note}.
@@ -219,8 +219,8 @@ switching <- function(scores, criterion, context = NULL) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param recommendations See Usage.
-#' @param top_k Defaults to \code{NULL}.
+#' @param recommendations Iterated over elementwise, with \code{lapply}.
+#' @param top_k Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{presented}, \code{n_sources}, \code{note}.
 #' @export
 mixed <- function(recommendations, top_k = NULL) {
@@ -299,8 +299,8 @@ feature_combination <- function(content_features, collaborative_features) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param primary See Usage.
-#' @param secondary See Usage.
+#' @param primary Coerced to list by the body, with \code{as.list}.
+#' @param secondary Coerced to list by the body, with \code{as.list}.
 #' @param tol Numeric; passed to \code{max}. Defaults to \code{1e-09}.
 #' @return A list with \code{ranking}, \code{tie_groups_broken}, \code{primary_respected}, \code{note}.
 #' @export

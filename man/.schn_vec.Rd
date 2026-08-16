@@ -8,7 +8,7 @@
 .schn_vec(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A list; the body checks with \code{is.list}.}
 }
 \description{
 A step of the schN_native implementation. No other function in the package calls it. See the file header for the source the module follows.

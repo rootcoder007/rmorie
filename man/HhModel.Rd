@@ -10,9 +10,9 @@ HhModel(duration = 30, dt = 0.01, I_ext = 10, stim_start = 5, stim_stop = 6, C_m
 \arguments{
 \item{duration}{Numeric; combined arithmetically in the body. Defaults to \code{30}.}
 \item{dt}{Numeric; combined arithmetically in the body. Defaults to \code{0.01}.}
-\item{I_ext}{Defaults to \code{10}.}
+\item{I_ext}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{10}.}
 \item{stim_start}{Numeric; combined arithmetically in the body. Defaults to \code{5}.}
-\item{stim_stop}{Defaults to \code{6}.}
+\item{stim_stop}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{6}.}
 \item{C_m}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{g_Na}{Numeric; combined arithmetically in the body. Defaults to \code{120}.}
 \item{g_K}{Numeric; combined arithmetically in the body. Defaults to \code{36}.}
@@ -20,7 +20,7 @@ HhModel(duration = 30, dt = 0.01, I_ext = 10, stim_start = 5, stim_stop = 6, C_m
 \item{E_Na}{Numeric; combined arithmetically in the body. Defaults to \code{50}.}
 \item{E_K}{Numeric; combined arithmetically in the body. Defaults to \code{-77}.}
 \item{E_L}{Numeric; combined arithmetically in the body. Defaults to \code{-54.387}.}
-\item{V0}{Defaults to \code{-65}.}
+\item{V0}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-65}.}
 }
 \description{
 A step of the rangayyan_phys implementation. No other function in the package calls it. See the file header for the source the module follows.

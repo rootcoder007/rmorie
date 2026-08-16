@@ -8,11 +8,11 @@
 morie_baytsm_dlm_local_level(y, V = 1, W = 0.1, m0 = 0, C0 = 1e+06)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{V}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{W}{Numeric; combined arithmetically in the body. Defaults to \code{0.1}.}
-\item{m0}{Defaults to \code{0}.}
-\item{C0}{Defaults to \code{1e+06}.}
+\item{m0}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
+\item{C0}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e+06}.}
 }
 \description{
 A step of the baytsm_native implementation. No other function in the package calls it. See the file header for the source the module follows.

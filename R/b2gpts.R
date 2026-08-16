@@ -26,7 +26,7 @@
 #' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param spec Defaults to \code{NULL}.
+#' @param spec Optional; may be \code{NULL}. A function; the body checks with \code{is.function}.
 #' @return The value of \code{function}.
 #' @export
 .b2se <- function(spec = NULL) {

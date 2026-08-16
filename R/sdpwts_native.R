@@ -67,7 +67,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param F0 A matrix; passed to \code{as.matrix}.
 #' @param Fs A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
@@ -99,7 +99,7 @@ sdpwts_lmi <- function(x, F0, Fs) {
 #' source it follows.
 #'
 #' @param M A matrix; passed to \code{as.matrix}.
-#' @param tol Defaults to \code{-1e-10}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-1e-10}.
 #' @return A list with \code{eigenvalues}, \code{min_eigenvalue}, \code{psd}, \code{strictly_feasible}.
 #' @export
 sdpwts_is_psd <- function(M, tol = -1e-10) {
@@ -147,8 +147,8 @@ sdpwts_barrier <- function(x, F0, Fs) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param m See Usage.
+#' @param t Coerced to numeric by the body, with \code{as.numeric}.
+#' @param m Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{gap}, \code{t}, \code{m}, \code{note}.
 #' @export
 sdpwts_central_path_gap <- function(t, m) {
@@ -168,11 +168,11 @@ sdpwts_central_path_gap <- function(t, m) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param c_vec See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param c_vec Coerced to numeric by the body, with \code{as.numeric}.
 #' @param F0 See Usage.
 #' @param Fs See Usage.
-#' @param t See Usage.
+#' @param t Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .sdpwts_objective <- function(x, c_vec, F0, Fs, t) {
@@ -187,13 +187,13 @@ sdpwts_central_path_gap <- function(t, m) {
 #'
 #' backtracking line search
 #'
-#' @param x0 See Usage.
+#' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param c_vec Passed to \code{.sdpwts_objective}.
 #' @param F0 Passed to \code{.sdpwts_objective}.
 #' @param Fs Passed to \code{.sdpwts_objective}.
 #' @param t Passed to \code{.sdpwts_objective}.
-#' @param iters Defaults to \code{200}.
-#' @param tol Defaults to \code{1e-12}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-12}.
 #' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.
 #' @return A list with \code{x}, \code{value}, \code{iterations}.
 #' @export
@@ -247,14 +247,14 @@ sdpwts_central_path_gap <- function(t, m) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param c See Usage.
+#' @param c Coerced to numeric by the body, with \code{as.numeric}.
 #' @param F0 A matrix; passed to \code{as.matrix}.
 #' @param Fs Passed to \code{.sdpwts_centre}.
-#' @param x0 See Usage.
-#' @param t0 Defaults to \code{1}.
-#' @param mu Defaults to \code{10}.
-#' @param tol Defaults to \code{1e-08}.
-#' @param max_outer Defaults to \code{60}.
+#' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param t0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param mu Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{10}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-08}.
+#' @param max_outer Coerced to integer by the body, with \code{as.integer}. Defaults to \code{60}.
 #' @return A list with \code{estimate}, \code{x}, \code{objective}, \code{gap}, \code{outer_iterations}, \code{path}, \code{m}, \code{min_eigenvalue}, \code{method}, \code{note}.
 #' @export
 sdpwts_solve_sdp <- function(c, F0, Fs, x0, t0 = 1.0, mu = 10.0,

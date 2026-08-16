@@ -12,7 +12,7 @@
 \item{t}{Numeric; combined arithmetically in the body.}
 \item{lag}{Numeric; combined arithmetically in the body.}
 \item{width}{Numeric; combined arithmetically in the body.}
-\item{sigma_floor}{See Usage.}
+\item{sigma_floor}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the surepi_native implementation. Called by \code{.surepi_stat}. See the file header for the source the module follows.

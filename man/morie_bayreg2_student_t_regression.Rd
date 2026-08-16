@@ -9,9 +9,9 @@ morie_bayreg2_student_t_regression(X, y, nu = 4, max_iter = 200, tol = 1e-10, ad
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
-\item{y}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{nu}{Numeric; combined arithmetically in the body. Defaults to \code{4}.}
-\item{max_iter}{Defaults to \code{200}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.}
 \item{tol}{Defaults to \code{1e-10}.}
 \item{add_intercept}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }

@@ -8,9 +8,9 @@
 BwSqLap(s, Omega_c, N)
 }
 \arguments{
-\item{s}{See Usage.}
-\item{Omega_c}{See Usage.}
-\item{N}{See Usage.}
+\item{s}{Coerced to complex by the body, with \code{as.complex}.}
+\item{Omega_c}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{N}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 filter until the N left-half-plane ones are selected by eq (3.138).

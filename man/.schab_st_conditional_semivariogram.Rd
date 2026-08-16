@@ -11,10 +11,10 @@
 \item{coords}{A matrix; indexed by row and column.}
 \item{times}{Numeric; combined arithmetically in the body.}
 \item{z}{A vector; indexed elementwise.}
-\item{at_time}{See Usage.}
-\item{n_bins}{Defaults to \code{10L}.}
+\item{at_time}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n_bins}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10L}.}
 \item{max_dist}{Defaults to \code{NULL}.}
-\item{tol}{Defaults to \code{0}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \description{
 A step of the schab_st_shared implementation. Called by \code{spstvg}. See the file header for the source the module follows.

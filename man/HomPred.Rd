@@ -8,8 +8,8 @@
 HomPred(y, cutoff)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{cutoff}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{cutoff}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 (|q| <= k and |q| > k); sharing the cutoff keeps q = 0 and q = k in both halves and the reconstruction fails.  And because the cepstra add (eq 4.66), exponentiating the sum gives the CIRCULAR convolution of the components -- reconstructing linearly leaves a wrap-around error that looks like a failure of the separation.

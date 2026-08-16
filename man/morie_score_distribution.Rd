@@ -10,9 +10,9 @@ morie_score_distribution(match = 5, mismatch = -4, letter_probs = NULL, matrix =
 \arguments{
 \item{match}{Defaults to \code{5}.}
 \item{mismatch}{Defaults to \code{-4}.}
-\item{letter_probs}{Defaults to \code{NULL}.}
+\item{letter_probs}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{matrix}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
-\item{subject_probs}{Defaults to \code{NULL}.}
+\item{subject_probs}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the blstn_native implementation. Called by \code{morie_karlin_altschul}. See the file header for the source the module follows.

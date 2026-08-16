@@ -8,11 +8,11 @@
 morie_sschin_chained_imputation(time, event, X, mi_iter = 5L, cycles = 10L, ties = "breslow")
 }
 \arguments{
-\item{time}{See Usage.}
-\item{event}{See Usage.}
+\item{time}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{event}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{X}{A matrix; passed to \code{as.matrix}.}
-\item{mi_iter}{Defaults to \code{5L}.}
-\item{cycles}{Defaults to \code{10L}.}
+\item{mi_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.}
+\item{cycles}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10L}.}
 \item{ties}{Compared against \code{"breslow"}. Defaults to \code{"breslow"}.}
 }
 \description{

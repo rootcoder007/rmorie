@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{d}{See Usage.}
-\item{hidden}{See Usage.}
+\item{hidden}{Coerced to integer by the body, with \code{as.integer}.}
 \item{seed}{Passed to \code{.ghc_rng}.}
 }
 \description{

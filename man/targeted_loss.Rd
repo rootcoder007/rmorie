@@ -8,8 +8,8 @@
 targeted_loss(Q_star, Y)
 }
 \arguments{
-\item{Q_star}{See Usage.}
-\item{Y}{See Usage.}
+\item{Q_star}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{Y}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tlctmle_native implementation. Called by \code{ctmle}. See the file header for the source the module follows.

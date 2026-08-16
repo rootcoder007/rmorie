@@ -8,9 +8,9 @@
 morie_truncated_normal_interval(x, level = 0.95, lower_bound = 0)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{level}{Defaults to \code{0.95}.}
-\item{lower_bound}{Defaults to \code{0}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{level}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.}
+\item{lower_bound}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \description{
 A step of the bndpcb_native implementation. Called by \code{morie_bet_proof_interval}. See the file header for the source the module follows.

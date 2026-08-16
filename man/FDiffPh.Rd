@@ -8,7 +8,7 @@
 FDiffPh(omega)
 }
 \arguments{
-\item{omega}{See Usage.}
+\item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 quarter turn from the j of eq (3.125).  A half-sample delay cannot be undone by shifting samples.

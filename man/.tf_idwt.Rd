@@ -8,7 +8,7 @@
 .tf_idwt(a, details, lengths, wavelet)
 }
 \arguments{
-\item{a}{See Usage.}
+\item{a}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{details}{A vector; its length is taken and its elements indexed.}
 \item{lengths}{A vector; indexed elementwise.}
 \item{wavelet}{Passed to \code{.tf_filters}.}

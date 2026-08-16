@@ -15,7 +15,7 @@
 \item{link_kind}{Optional; may be \code{NULL}. Passed to \code{.schab_pseudo_data}.}
 \item{sigma2}{Passed to \code{.schab_sigma_mu}. Defaults to \code{1}.}
 \item{R}{Passed to \code{.schab_sigma_mu}.}
-\item{max_iter}{Defaults to \code{100L}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100L}.}
 \item{tol}{Defaults to \code{1e-08}.}
 }
 \description{

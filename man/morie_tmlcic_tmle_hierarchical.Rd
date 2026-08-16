@@ -16,9 +16,9 @@ morie_tmlcic_tmle_hierarchical(y, A, E, W, cluster, arm = "both", weights = NULL
 \item{arm}{One of \code{"both"}, \code{"cluster"}, \code{"individual"}. Defaults to \code{"both"}.}
 \item{weights}{Passed to \code{morie_tmlcic_cluster_weights}.}
 \item{known_g}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
-\item{trim}{Defaults to \code{0.01}.}
+\item{trim}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.}
 \item{ridge}{Passed to \code{.tmlcic_hier_cluster_arm}. Defaults to \code{1e-08}.}
-\item{level}{Defaults to \code{0.95}.}
+\item{level}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.}
 }
 \description{
 A step of the tmlcic_native implementation. No other function in the package calls it. See the file header for the source the module follows.

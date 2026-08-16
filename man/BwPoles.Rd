@@ -8,9 +8,9 @@
 BwPoles(Omega_c, N, k = NULL)
 }
 \arguments{
-\item{Omega_c}{See Usage.}
-\item{N}{See Usage.}
-\item{k}{Defaults to \code{NULL}.}
+\item{Omega_c}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{N}{Coerced to integer by the body, with \code{as.integer}.}
+\item{k}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 apart, symmetric about the imaginary axis and never on it.  For odd N a pole falls on the real axis.  Complex poles come in conjugate pairs, which keeps the filter coefficients real.

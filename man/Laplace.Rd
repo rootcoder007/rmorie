@@ -8,9 +8,9 @@
 Laplace(h, t, s)
 }
 \arguments{
-\item{h}{See Usage.}
-\item{t}{See Usage.}
-\item{s}{See Usage.}
+\item{h}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{t}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{s}{Coerced to complex by the body, with \code{as.complex}.}
 }
 \description{
 is returned is the transform OF THE SAMPLED RECORD over the interval it covers, which is why the limits come back with it.

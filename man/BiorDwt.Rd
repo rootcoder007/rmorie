@@ -9,8 +9,8 @@ BiorDwt(x, wavelet = "bior2.2", levels = 3)
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}
-\item{wavelet}{Defaults to \code{"bior2.2"}.}
-\item{levels}{Defaults to \code{3}.}
+\item{wavelet}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"bior2.2"}.}
+\item{levels}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.}
 }
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.

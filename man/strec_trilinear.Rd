@@ -8,9 +8,9 @@
 strec_trilinear(a, b, c)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
-\item{c}{See Usage.}
+\item{a}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{b}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{c}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the strec_native implementation. Called by \code{strec_stamp_scores}. See the file header for the source the module follows.

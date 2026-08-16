@@ -8,10 +8,10 @@
 Glr(x, m, n = NULL, order = 4)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{m}{See Usage.}
-\item{n}{Defaults to \code{NULL}.}
-\item{order}{Defaults to \code{4}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{m}{Coerced to integer by the body, with \code{as.integer}.}
+\item{n}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{order}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.}
 }
 \description{
 GROWS from the start of the segment -- that is what separates GLR from the SEM and ACF methods.

@@ -59,8 +59,8 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param blip_estimate See Usage.
-#' @param delta Defaults to \code{0.1}.
+#' @param blip_estimate Coerced to numeric by the body, with \code{as.numeric}.
+#' @param delta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
 #' @param greedy A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return One of two values, depending on the branch taken.
 #' @export
@@ -85,13 +85,13 @@
 #' the source it follows.
 #'
 #' @param W A matrix; passed to \code{as.matrix}.
-#' @param Y1 See Usage.
-#' @param Y0 See Usage.
+#' @param Y1 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param Y0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param blip_fn See Usage.
 #' @param delta Passed to \code{.tlbandt_design_probability}. Defaults to \code{0.1}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @param greedy A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @param burn_in Defaults to \code{20L}.
+#' @param burn_in Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20L}.
 #' @return A list with \code{A}, \code{Y}, \code{g}, \code{history}, \code{greedy}, \code{min_g}, \code{max_g}, \code{note}.
 #' @export
 morie_tlbandt <- function(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0,
@@ -144,12 +144,12 @@ morie_tlbandt <- function(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0,
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param A See Usage.
-#' @param Y See Usage.
-#' @param g See Usage.
-#' @param Q1 See Usage.
-#' @param Q0 See Usage.
-#' @param psi See Usage.
+#' @param A Coerced to numeric by the body, with \code{as.numeric}.
+#' @param Y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param g Coerced to numeric by the body, with \code{as.numeric}.
+#' @param Q1 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param Q0 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param psi Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .tlbandt_martingale_terms <- function(A, Y, g, Q1, Q0, psi) {
@@ -177,8 +177,8 @@ morie_tlbandt <- function(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0,
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param D See Usage.
-#' @param level Defaults to \code{1.96}.
+#' @param D Coerced to numeric by the body, with \code{as.numeric}.
+#' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1.96}.
 #' @return A list with \code{se}, \code{half_width}, \code{T}, \code{note}.
 #' @export
 .tlbandt_sequential_ci <- function(D, level = 1.96) {
@@ -199,9 +199,9 @@ morie_tlbandt <- function(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0,
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Y See Usage.
-#' @param Y1 See Usage.
-#' @param Y0 See Usage.
+#' @param Y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param Y1 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param Y0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{cumulative_regret}, \code{mean_regret}, \code{note}.
 #' @export
 .tlbandt_regret <- function(Y, Y1, Y0) {

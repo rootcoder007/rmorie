@@ -8,8 +8,8 @@
 Comb(period_samples, fs = 1000, z = NULL)
 }
 \arguments{
-\item{period_samples}{See Usage.}
-\item{fs}{Defaults to \code{1000}.}
+\item{period_samples}{Coerced to integer by the body, with \code{as.integer}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1000}.}
 \item{z}{Optional; may be \code{NULL}. Passed to \code{.morie_rg_polyz}.}
 }
 \description{

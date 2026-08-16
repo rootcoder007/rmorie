@@ -8,8 +8,8 @@
 ObsReal(x, eta)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{eta}{See Usage.}
+\item{x}{A list; the body checks with \code{is.list}.}
+\item{eta}{Iterated over elementwise, with \code{lapply}.}
 }
 \description{
 averaging assumes.  A single x is read as the same signal repeated, which is the book\'s "identical and aligned" case.

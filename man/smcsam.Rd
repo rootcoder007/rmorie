@@ -10,13 +10,13 @@ smcsam(log_gamma, initial, n_particles = 500L, ladder = NULL, n_steps = 20L, ker
 \arguments{
 \item{log_gamma}{See Usage.}
 \item{initial}{See Usage.}
-\item{n_particles}{Defaults to \code{500L}.}
-\item{ladder}{Defaults to \code{NULL}.}
+\item{n_particles}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500L}.}
+\item{ladder}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{n_steps}{Defaults to \code{20L}.}
 \item{kernel}{Defaults to \code{NULL}.}
-\item{ess_threshold}{Defaults to \code{0.5}.}
+\item{ess_threshold}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.}
 \item{scheme}{Defaults to \code{"systematic"}.}
-\item{seed}{Defaults to \code{0L}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.}
 \item{weight_rule}{One of \code{"general"}, \code{"mcmc"}. Defaults to \code{"mcmc"}.}
 \item{log_forward}{Defaults to \code{NULL}.}
 \item{log_backward}{Defaults to \code{NULL}.}

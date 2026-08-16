@@ -8,7 +8,7 @@
 lemma4_bound(counts, gamma)
 }
 \arguments{
-\item{counts}{See Usage.}
+\item{counts}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{gamma}{Numeric; combined arithmetically in the body.}
 }
 \description{

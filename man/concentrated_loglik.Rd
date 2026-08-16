@@ -8,7 +8,7 @@
 concentrated_loglik(y, resid, omega)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{resid}{A vector; its length is taken.}
 \item{omega}{Numeric; combined arithmetically in the body.}
 }

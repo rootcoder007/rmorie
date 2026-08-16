@@ -9,7 +9,7 @@ DeltaLim(t, a)
 }
 \arguments{
 \item{t}{Passed to \code{.morie_rg_aslist}.}
-\item{a}{See Usage.}
+\item{a}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 negative for every a in (0,1), so the function diverges at t = 0 (NA, not a large finite number).  Its integral over [-L, L] is L^a, which tends to 1 as a -> 0 -- the unit-area property in the limit.

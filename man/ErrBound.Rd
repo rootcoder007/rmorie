@@ -8,9 +8,9 @@
 ErrBound(p1, p2, db)
 }
 \arguments{
-\item{p1}{See Usage.}
-\item{p2}{See Usage.}
-\item{db}{See Usage.}
+\item{p1}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{p2}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{db}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 Kailath bound.  It pairs with GaussOverlap, NOT with Divergence: the divergence does not bound the error this way, and substituting it would give a number that looks like a bound and is not one.  The bound is on the OPTIMAL classifier, a floor no real one can beat.

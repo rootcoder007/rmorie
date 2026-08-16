@@ -8,8 +8,8 @@
 nbeats_stack(window, horizon, blocks, ridge = 1e-08)
 }
 \arguments{
-\item{window}{See Usage.}
-\item{horizon}{See Usage.}
+\item{window}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{horizon}{Coerced to integer by the body, with \code{as.integer}.}
 \item{blocks}{See Usage.}
 \item{ridge}{Defaults to \code{1e-08}.}
 }

@@ -45,7 +45,7 @@ CV_SCHEMES <- c("kfold", "loo")
 #'
 #' @param p Numeric; combined arithmetically in the body.
 #' @param n See Usage.
-#' @param n_ridge Defaults to \code{5}.
+#' @param n_ridge Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
 #' @return A numeric value.
 #' @export
 .regmlm_lambda_grid <- function(p, n, n_ridge = 5) {
@@ -100,9 +100,9 @@ CV_SCHEMES <- c("kfold", "loo")
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n_markers See Usage.
-#' @param chromosomes Defaults to \code{NULL}.
-#' @param block_size Defaults to \code{1000}.
+#' @param n_markers Coerced to integer by the body, with \code{as.integer}.
+#' @param chromosomes Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param block_size Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000}.
 #' @return The value of \code{blocks}, as built in the body.
 #' @export
 make_blocks <- function(n_markers, chromosomes = NULL, block_size = 1000) {
@@ -227,7 +227,7 @@ level0_predictors <- function(G, y, blocks, n_ridge = 5) {
 #' @param y A vector; its length is taken and its elements indexed.
 #' @param cv Passed to \code{.regmlm_folds}. Defaults to \code{"kfold"}.
 #' @param k Passed to \code{.regmlm_folds}. Defaults to \code{5}.
-#' @param lam Defaults to \code{NULL}.
+#' @param lam Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{weights}, \code{prediction}, \code{out_of_fold}, \code{cv}, \code{lam}, \code{n_predictors}.
 #' @export
 level1_stack <- function(preds, y, cv = "kfold", k = 5, lam = NULL) {
@@ -273,9 +273,9 @@ level1_stack <- function(preds, y, cv = "kfold", k = 5, lam = NULL) {
 #' source it follows.
 #'
 #' @param preds A vector; indexed elementwise.
-#' @param meta See Usage.
+#' @param meta Iterated over elementwise, with \code{sapply}.
 #' @param weights A vector; indexed elementwise.
-#' @param chromosomes Defaults to \code{NULL}.
+#' @param chromosomes Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{loco}, \code{chromosomes}, \code{note}.
 #' @export
 loco_predictions <- function(preds, meta, weights, chromosomes = NULL) {
@@ -312,7 +312,7 @@ loco_predictions <- function(preds, meta, weights, chromosomes = NULL) {
 #'
 #' @param g A vector; its length is taken.
 #' @param y A vector; its length is taken.
-#' @param offset Defaults to \code{NULL}.
+#' @param offset Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param covariates A vector; its length is taken. Defaults to \code{list()}.
 #' @return A list with \code{beta}, \code{se}, \code{chisq}, \code{p_value}, \code{n}.
 #' @export

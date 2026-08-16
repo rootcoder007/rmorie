@@ -12,7 +12,7 @@
 \item{offset_logit}{A vector; indexed elementwise.}
 \item{H}{A vector; indexed elementwise.}
 \item{rows}{A vector; its length is taken.}
-\item{iters}{Defaults to \code{100}.}
+\item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.}
 \item{tol}{Defaults to \code{1e-12}.}
 }
 \description{

@@ -8,10 +8,10 @@
 Notch(notch_freq, bandwidth = NULL, fs = 1000, r = NULL, z = NULL)
 }
 \arguments{
-\item{notch_freq}{See Usage.}
-\item{bandwidth}{Defaults to \code{NULL}.}
-\item{fs}{Defaults to \code{1000}.}
-\item{r}{Defaults to \code{NULL}.}
+\item{notch_freq}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{bandwidth}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1000}.}
+\item{r}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{z}{Optional; may be \code{NULL}. Passed to \code{.morie_rg_polyz}.}
 }
 \description{

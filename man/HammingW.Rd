@@ -8,7 +8,7 @@
 HammingW(N)
 }
 \arguments{
-\item{N}{See Usage.}
+\item{N}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 the rectangle\'s largest sidelobe, about -43 dB, at the cost of a wider main lobe than the Hann.  It does NOT reach zero at the ends -- w(0) = 0.08 -- which matters when windows are overlapped and added.

@@ -8,7 +8,7 @@
 .netsts_standardize(y)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the netsts_native implementation. Called by \code{morie_netsts}. See the file header for the source the module follows.

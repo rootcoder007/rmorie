@@ -8,8 +8,8 @@
 .morie_likemc_poisll(observed, expected)
 }
 \arguments{
-\item{observed}{See Usage.}
-\item{expected}{See Usage.}
+\item{observed}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{expected}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the likemc_native implementation. Called by \code{morie_likemc}. See the file header for the source the module follows.

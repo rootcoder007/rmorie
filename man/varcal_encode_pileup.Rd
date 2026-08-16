@@ -13,7 +13,7 @@ varcal_encode_pileup(reads, reference, candidate, width = 21, height = 100, chan
 \item{candidate}{A list; the body reads \code{$position} from it.}
 \item{width}{Numeric; combined arithmetically in the body. Defaults to \code{21}.}
 \item{height}{Defaults to \code{100}.}
-\item{channels}{Defaults to \code{"base_quality_strand"}.}
+\item{channels}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"base_quality_strand"}.}
 }
 \description{
 A step of the varcal_native implementation. Called by \code{morie_varcal}. See the file header for the source the module follows.

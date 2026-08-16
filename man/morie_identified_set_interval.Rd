@@ -8,8 +8,8 @@
 morie_identified_set_interval(phi_hat, half_width)
 }
 \arguments{
-\item{phi_hat}{See Usage.}
-\item{half_width}{See Usage.}
+\item{phi_hat}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{half_width}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the bndbye_native implementation. Called by \code{morie_compare_sets}. See the file header for the source the module follows.

@@ -8,7 +8,7 @@
 .replwt_hadamard(order)
 }
 \arguments{
-\item{order}{See Usage.}
+\item{order}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the replwt_native implementation. Called by \code{.replwt_brr_weights}. See the file header for the source the module follows.

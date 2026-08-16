@@ -68,11 +68,11 @@
 #' reachable -- a zero inclusion probability makes the estimand
 #' unidentifiable for that stratum.
 #'
-#' @param V See Usage.
-#' @param n See Usage.
+#' @param V Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @param design One of \code{"proportional"}, \code{"uniform"}. Defaults to \code{"adaptive"}.
-#' @param influence Defaults to \code{NULL}.
-#' @param floor Defaults to \code{0.01}.
+#' @param influence Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param floor Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.
 #' @return A list with \code{pi}, \code{design}, \code{n_expected}, \code{N}, \code{min_pi}, \code{note}.
 #' @export
 morie_tlsurvy_inclusion_probabilities <- function(V, n, design="adaptive",
@@ -153,7 +153,7 @@ morie_tlsurvy_inclusion_probabilities <- function(V, n, design="adaptive",
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param pi See Usage.
+#' @param pi Coerced to numeric by the body, with \code{as.numeric}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return A list with \code{selected}, \code{n}, \code{fraction}.
 #' @export
@@ -181,10 +181,10 @@ morie_tlsurvy_draw_sample <- function(pi, seed=0) {
 #' Unbiased for the FULL-data mean, which is the quantity of interest --
 #' the sample is a computational device, not the population.
 #'
-#' @param values See Usage.
-#' @param pi See Usage.
-#' @param selected See Usage.
-#' @param N Defaults to \code{NULL}.
+#' @param values Coerced to numeric by the body, with \code{as.numeric}.
+#' @param pi Coerced to numeric by the body, with \code{as.numeric}.
+#' @param selected Coerced to integer by the body, with \code{as.integer}.
+#' @param N Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{estimate}, \code{se}, \code{n_used}, \code{N}.
 #' @export
 morie_tlsurvy_horvitz_thompson <- function(values, pi, selected, N=NULL) {
@@ -215,7 +215,7 @@ morie_tlsurvy_horvitz_thompson <- function(values, pi, selected, N=NULL) {
 #' it is flat the two coincide, and claiming otherwise would be claiming
 #' something for nothing.
 #'
-#' @param values See Usage.
+#' @param values Coerced to numeric by the body, with \code{as.numeric}.
 #' @param influence Passed to \code{morie_tlsurvy_inclusion_probabilities}.
 #' @param n Passed to \code{morie_tlsurvy_inclusion_probabilities}.
 #' @param seed Passed to \code{morie_tlsurvy_draw_sample}. Defaults to \code{0}.

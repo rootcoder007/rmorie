@@ -59,7 +59,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param p See Usage.
+#' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .tl1step_logit <- function(p) {
@@ -108,8 +108,8 @@
 #' @param Q Passed to \code{.tl1step_as_numvec}.
 #' @param H_fn See Usage.
 #' @param Y Passed to \code{.tl1step_as_numvec}.
-#' @param eps_max Defaults to \code{2}.
-#' @param steps Defaults to \code{400}.
+#' @param eps_max Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2}.
+#' @param steps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{400}.
 #' @return A list with \code{path}, \code{steps}, \code{d_epsilon}, \code{note}.
 #' @export
 .tl1step_build_ulfm <- function(Q, H_fn, Y, eps_max = 2.0, steps = 400) {
@@ -279,7 +279,7 @@
 #' @param Q Passed to \code{.tl1step_as_numvec}.
 #' @param H_fn See Usage.
 #' @param Y Passed to \code{.tl1step_as_numvec}.
-#' @param max_iter Defaults to \code{25}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25}.
 #' @param tol Defaults to \code{1e-08}.
 #' @return A list with \code{estimate}, \code{psi}, \code{iterations}, \code{Q_star}, \code{abs_score}, \code{method}.
 #' @export

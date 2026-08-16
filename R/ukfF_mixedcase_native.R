@@ -146,10 +146,10 @@
 #'
 #' @param f Passed to \code{.ukfF_ut}.
 #' @param h Passed to \code{.ukfF_ut}.
-#' @param Q See Usage.
+#' @param Q Coerced to numeric by the body, with \code{as.numeric}.
 #' @param R A matrix; passed to \code{as.matrix}.
-#' @param x0 See Usage.
-#' @param P0 See Usage.
+#' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param P0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param measurements See Usage.
 #' @param kappa Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return A list with \code{states}, \code{covariances}, \code{innovations}, \code{kappa}, \code{method}.

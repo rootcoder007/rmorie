@@ -9,8 +9,8 @@ KDelta(n, shift = 0, amplitude = 1)
 }
 \arguments{
 \item{n}{A vector; its length is taken.}
-\item{shift}{Defaults to \code{0}.}
-\item{amplitude}{Defaults to \code{1}.}
+\item{shift}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.}
+\item{amplitude}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 is an ordinary sequence, evaluable at the origin.

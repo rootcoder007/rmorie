@@ -8,7 +8,7 @@
 .chemsc_over(r, r1)
 }
 \arguments{
-\item{r}{See Usage.}
+\item{r}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{r1}{Numeric; combined arithmetically in the body.}
 }
 \description{

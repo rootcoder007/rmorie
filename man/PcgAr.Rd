@@ -8,9 +8,9 @@
 PcgAr(x, fs, order = NULL, segment = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{fs}{See Usage.}
-\item{order}{Defaults to \code{NULL}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{order}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{segment}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 }
 \description{

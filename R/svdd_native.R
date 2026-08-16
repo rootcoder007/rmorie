@@ -85,7 +85,7 @@
 #' @param C Numeric; combined arithmetically in the body.
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param tol See Usage.
-#' @param max_iter See Usage.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{alpha}, as built in the body.
 #' @export
 .morie_svdd_solve_dual <- function(K, C, n, tol, max_iter) {

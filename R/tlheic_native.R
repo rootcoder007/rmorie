@@ -65,8 +65,8 @@ morie_tlheic <- function(psi_of_P = NULL, basis = NULL, D = NULL,
 #' source it follows.
 #'
 #' @param psi_of_P See Usage.
-#' @param weights See Usage.
-#' @param score See Usage.
+#' @param weights Coerced to numeric by the body, with \code{as.numeric}.
+#' @param score Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
 #' @return A numeric value.
 #' @export
@@ -91,9 +91,9 @@ numerical_derivative <- function(psi_of_P, weights, score, h = 1e-5) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param D See Usage.
-#' @param score See Usage.
-#' @param weights Defaults to \code{NULL}.
+#' @param D Coerced to numeric by the body, with \code{as.numeric}.
+#' @param score Coerced to numeric by the body, with \code{as.numeric}.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 gradient_inner_product <- function(D, score, weights = NULL) {
@@ -115,7 +115,7 @@ gradient_inner_product <- function(D, score, weights = NULL) {
 #'
 #' @param psi_of_P See Usage.
 #' @param basis A matrix; passed to \code{as.matrix}.
-#' @param weights Defaults to \code{NULL}.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h Defaults to \code{1e-05}.
 #' @param ridge A matrix; passed to \code{diag}. Defaults to \code{1e-08}.
 #' @return A list with \code{estimate}, \code{D}, \code{coefficients}, \code{n_directions}, \code{mean}, \code{method}, \code{note}.
@@ -155,9 +155,9 @@ estimate_eic <- function(psi_of_P, basis, weights = NULL, h = 1e-5,
 #' @param psi_of_P See Usage.
 #' @param D A vector; its length is taken.
 #' @param score See Usage.
-#' @param weights Defaults to \code{NULL}.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h Defaults to \code{1e-05}.
-#' @param tol Defaults to \code{1e-04}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-04}.
 #' @return A list with \code{derivative}, \code{inner_product}, \code{difference}, \code{verified}, \code{note}.
 #' @export
 verify_gradient <- function(psi_of_P, D, score, weights = NULL,

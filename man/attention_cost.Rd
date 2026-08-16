@@ -8,10 +8,10 @@
 attention_cost(L, patch_len, stride = NULL, D = 1, channel_independent = TRUE)
 }
 \arguments{
-\item{L}{See Usage.}
-\item{patch_len}{See Usage.}
-\item{stride}{Defaults to \code{NULL}.}
-\item{D}{Defaults to \code{1}.}
+\item{L}{Coerced to integer by the body, with \code{as.integer}.}
+\item{patch_len}{Coerced to integer by the body, with \code{as.integer}.}
+\item{stride}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{D}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.}
 \item{channel_independent}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

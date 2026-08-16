@@ -13,7 +13,7 @@ strec_attention_weights(embeddings, W1, W2, W3, W0, b_a = NULL)
 \item{W2}{A matrix; indexed by row and column.}
 \item{W3}{A matrix; indexed by row and column.}
 \item{W0}{Numeric; combined arithmetically in the body.}
-\item{b_a}{Defaults to \code{NULL}.}
+\item{b_a}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the strec_native implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -110,9 +110,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
-#' @param c See Usage.
+#' @param a Coerced to numeric by the body, with \code{as.numeric}.
+#' @param b Coerced to numeric by the body, with \code{as.numeric}.
+#' @param c Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 strec_trilinear <- function(a, b, c) {
@@ -160,9 +160,9 @@ strec_session_average <- function(embeddings) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param m See Usage.
+#' @param m Coerced to numeric by the body, with \code{as.numeric}.
 #' @param W A matrix; passed to \code{nrow}.
-#' @param b Defaults to \code{NULL}.
+#' @param b Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param activation One of \code{"identity"}, \code{"tanh"}. Defaults to \code{"tanh"}.
 #' @return One of two values, depending on the branch taken.
 #' @export
@@ -199,7 +199,7 @@ strec_mlp_cell <- function(m, W, b = NULL, activation = "tanh") {
 #' @param W2 A matrix; indexed by row and column.
 #' @param W3 A matrix; indexed by row and column.
 #' @param W0 Numeric; combined arithmetically in the body.
-#' @param b_a Defaults to \code{NULL}.
+#' @param b_a Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{alpha}, \code{m_a}, \code{sum_alpha}, \code{m_s}, \code{note}.
 #' @export
 strec_attention_weights <- function(embeddings, W1, W2, W3, W0, b_a = NULL) {
@@ -316,8 +316,8 @@ strec_stamp_scores <- function(embeddings, item_table, Ws, Wt, bs = NULL, bt = N
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param probability See Usage.
-#' @param target_index See Usage.
+#' @param probability Coerced to numeric by the body, with \code{as.numeric}.
+#' @param target_index Coerced to integer by the body, with \code{as.integer}.
 #' @return A numeric value.
 #' @export
 strec_cross_entropy <- function(probability, target_index) {

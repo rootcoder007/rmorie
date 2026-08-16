@@ -8,7 +8,7 @@
 .tf_cwt(x, scales, wavelet = "morlet", w0 = 5)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{scales}{A vector; its length is taken and its elements indexed.}
 \item{wavelet}{Passed to \code{.tf_support}. Defaults to \code{"morlet"}.}
 \item{w0}{Passed to \code{.tf_mother}. Defaults to \code{5}.}

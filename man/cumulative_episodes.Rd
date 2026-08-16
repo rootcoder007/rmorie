@@ -9,7 +9,7 @@ cumulative_episodes(histories, states = .STATES)
 }
 \arguments{
 \item{histories}{A vector; its length is taken and its elements indexed.}
-\item{states}{Defaults to \code{.STATES}.}
+\item{states}{Coerced to character by the body, with \code{as.character}. Defaults to \code{.STATES}.}
 }
 \description{
 A step of the bhltmsm_native implementation. No other function in the package calls it. See the file header for the source the module follows.

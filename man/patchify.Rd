@@ -9,8 +9,8 @@ patchify(x, patch_len, stride = NULL)
 }
 \arguments{
 \item{x}{Passed to \code{.patcht_vec}.}
-\item{patch_len}{See Usage.}
-\item{stride}{Defaults to \code{NULL}.}
+\item{patch_len}{Coerced to integer by the body, with \code{as.integer}.}
+\item{stride}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the patchT_native implementation. Called by \code{channel_independent_tokens}, \code{channel_mixed_tokens}. See the file header for the source the module follows.

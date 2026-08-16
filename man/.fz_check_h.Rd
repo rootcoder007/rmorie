@@ -8,7 +8,7 @@
 .fz_check_h(h)
 }
 \arguments{
-\item{h}{See Usage.}
+\item{h}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the fauzi_native implementation. Called by \code{.fz_cs_common}, \code{morie_fauzi_boundary_free_kde}, \code{morie_fauzi_gamma_kde} and 5 others in the module. See the file header for the source the module follows.

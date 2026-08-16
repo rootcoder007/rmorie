@@ -8,7 +8,7 @@
 .s02z(confidence)
 }
 \arguments{
-\item{confidence}{See Usage.}
+\item{confidence}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the epirate implementation. Called by \code{Incrtio}, \code{Mhrate}, \code{Riskdf} and 1 others in the module. See the file header for the source the module follows.

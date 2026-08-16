@@ -77,7 +77,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param text See Usage.
+#' @param text Coerced to character by the body, with \code{as.character}.
 #' @param lowercase A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -107,7 +107,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param text See Usage.
+#' @param text Coerced to character by the body, with \code{as.character}.
 #' @param lowercase A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -258,8 +258,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param c See Usage.
-#' @param r See Usage.
+#' @param c Coerced to numeric by the body, with \code{as.numeric}.
+#' @param r Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .sacrb_brevity_penalty <- function(c, r) {
@@ -300,10 +300,10 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param candidates See Usage.
-#' @param references See Usage.
-#' @param max_n Defaults to \code{4L}.
-#' @param weights Defaults to \code{NULL}.
+#' @param candidates Coerced to character by the body, with \code{as.character}.
+#' @param references Iterated over elementwise, with \code{lapply}.
+#' @param max_n Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param tokenizer Passed to \code{.sacrb_tok}. Defaults to \code{"13a"}.
 #' @param lowercase Passed to \code{.sacrb_tok}. Defaults to \code{FALSE}.
 #' @return A list with \code{estimate}, \code{bleu}, \code{score}, \code{precisions}, \code{bp}, \code{candidate_length}, \code{reference_length}, \code{ratio}, \code{tokenizer}, \code{lowercase}, \code{max_n}, \code{signature}, \code{method}.
@@ -392,10 +392,10 @@ morie_sacrb_bleu <- function(candidates, references, max_n = 4L,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tokenizer Defaults to \code{"13a"}.
+#' @param tokenizer Coerced to character by the body, with \code{as.character}. Defaults to \code{"13a"}.
 #' @param lowercase A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @param max_n Defaults to \code{4L}.
-#' @param n_refs Defaults to \code{1L}.
+#' @param max_n Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.
+#' @param n_refs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1L}.
 #' @param version Defaults to \code{"morie-sacrb-1"}.
 #' @return A character value.
 #' @export

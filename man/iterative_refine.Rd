@@ -8,7 +8,7 @@
 iterative_refine(alignment, scoring, tree = NULL, s_op = 2.4, max_iterate = 16L, seq_type = "aa", use_fft = TRUE, ...)
 }
 \arguments{
-\item{alignment}{See Usage.}
+\item{alignment}{Iterated over elementwise, with \code{vapply}.}
 \item{scoring}{See Usage.}
 \item{tree}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
 \item{s_op}{Defaults to \code{2.4}.}

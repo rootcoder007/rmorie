@@ -10,7 +10,7 @@
 \arguments{
 \item{Zn}{A matrix; indexed by row and column.}
 \item{K}{A count; the body uses it as \code{seq_len(...)}.}
-\item{seed}{See Usage.}
+\item{seed}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the scintg_native implementation. Called by \code{.scintg_maximum_diversity_clustering}. See the file header for the source the module follows.

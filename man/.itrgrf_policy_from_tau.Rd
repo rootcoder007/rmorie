@@ -8,8 +8,8 @@
 .itrgrf_policy_from_tau(tau, cost = 0)
 }
 \arguments{
-\item{tau}{See Usage.}
-\item{cost}{Defaults to \code{0}.}
+\item{tau}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{cost}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \description{
 A step of the itrgrf_native implementation. Called by \code{morie_itrgrf}. See the file header for the source the module follows.

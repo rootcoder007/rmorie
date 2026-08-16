@@ -17,8 +17,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param epsilon See Usage.
-#' @param delta Defaults to \code{NULL}.
+#' @param epsilon Coerced to numeric by the body, with \code{as.numeric}.
+#' @param delta Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{epsilon}, \code{delta}.
 #' @export
 .morie_dp_check_budget <- function(epsilon, delta = NULL) {
@@ -56,8 +56,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param sensitivity See Usage.
-#' @param epsilon See Usage.
+#' @param sensitivity Coerced to numeric by the body, with \code{as.numeric}.
+#' @param epsilon Coerced to numeric by the body, with \code{as.numeric}.
 #' @param delta Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
@@ -77,9 +77,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param a Coerced to numeric by the body, with \code{as.numeric}.
+#' @param b Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{x}, \code{a}, \code{b}.
 #' @export
 .morie_dp_clip <- function(x, a, b) {
@@ -97,7 +97,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param seed See Usage.
+#' @param seed Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{old}, as built in the body.
 #' @export
 .morie_dp_seed <- function(seed) {

@@ -8,8 +8,8 @@
 .schab_smr(counts, expected)
 }
 \arguments{
-\item{counts}{See Usage.}
-\item{expected}{See Usage.}
+\item{counts}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{expected}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the schab_glmm_shared implementation. Called by \code{spbayr}, \code{spbym}. See the file header for the source the module follows.

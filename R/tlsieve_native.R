@@ -78,10 +78,10 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param time See Usage.
-#' @param event_type See Usage.
+#' @param time Coerced to numeric by the body, with \code{as.numeric}.
+#' @param event_type Coerced to integer by the body, with \code{as.integer}.
 #' @param times A vector; its length is taken and its elements indexed.
-#' @param weights Defaults to \code{NULL}.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{hazards}, \code{types}, \code{times}.
 #' @export
 .tlsieve_cause_specific_hazard <- function(time, event_type, times, weights = NULL) {
@@ -187,8 +187,8 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param F_vaccine See Usage.
-#' @param F_placebo See Usage.
+#' @param F_vaccine Coerced to numeric by the body, with \code{as.numeric}.
+#' @param F_placebo Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
 .tlsieve_vaccine_efficacy <- function(F_vaccine, F_placebo) {

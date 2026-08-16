@@ -8,7 +8,7 @@
 .tlstoch_vec(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tlstoch_native implementation. Called by \code{.tlstoch_density_ratio}, \code{.tlstoch_positivity_shift}, \code{.tlstoch_shift_regime} and 2 others in the module. See the file header for the source the module follows.

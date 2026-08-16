@@ -8,7 +8,7 @@
 .schn_mat(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{A matrix; the body checks with \code{is.matrix}.}
 }
 \description{
 A step of the schN_native implementation. Called by \code{cfconv}, \code{forces_from_energy}, \code{invariance_error}. See the file header for the source the module follows.

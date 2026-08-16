@@ -10,7 +10,7 @@ EcgEmgCpl(ecg, emg, qrs, fs)
 \arguments{
 \item{ecg}{A vector; its length is taken.}
 \item{emg}{A vector; its length is taken and its elements indexed.}
-\item{qrs}{See Usage.}
+\item{qrs}{Coerced to integer by the body, with \code{as.integer}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
 }
 \description{

@@ -10,9 +10,9 @@
 \arguments{
 \item{Sigma_S}{A matrix; passed to \code{as.matrix}.}
 \item{Sigma_nu}{A matrix; passed to \code{as.matrix}.}
-\item{nu}{See Usage.}
+\item{nu}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{X}{A matrix; passed to \code{as.matrix}.}
-\item{beta}{See Usage.}
+\item{beta}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the schab_glmm_shared implementation. Called by \code{.schab_fit_pseudo_likelihood}. See the file header for the source the module follows.

@@ -8,9 +8,9 @@
 morie_genemt_gene_covariates(n_markers, gene_length, ld_scores = NULL)
 }
 \arguments{
-\item{n_markers}{See Usage.}
-\item{gene_length}{See Usage.}
-\item{ld_scores}{Defaults to \code{NULL}.}
+\item{n_markers}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{gene_length}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{ld_scores}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the genemt_native implementation. No other function in the package calls it. See the file header for the source the module follows.

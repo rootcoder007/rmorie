@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{p}{Numeric; combined arithmetically in the body.}
-\item{q}{See Usage.}
+\item{q}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{base}{Passed to \code{.b2logb}. Defaults to \code{2}.}
 }
 \description{

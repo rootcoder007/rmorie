@@ -8,7 +8,7 @@
 .tf_mother(name, t, w0 = 5)
 }
 \arguments{
-\item{name}{See Usage.}
+\item{name}{Coerced to character by the body, with \code{as.character}.}
 \item{t}{A vector; its length is taken.}
 \item{w0}{Numeric; combined arithmetically in the body. Defaults to \code{5}.}
 }

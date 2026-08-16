@@ -9,9 +9,9 @@ edgrn_moderate_dispersion(gene_dispersions, common = NULL, prior_df = 10, df_res
 }
 \arguments{
 \item{gene_dispersions}{Passed to \code{.edgrn_vec}.}
-\item{common}{Defaults to \code{NULL}.}
-\item{prior_df}{Defaults to \code{10}.}
-\item{df_residual}{Defaults to \code{1}.}
+\item{common}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{prior_df}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{10}.}
+\item{df_residual}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the edgrn_native implementation. No other function in the package calls it. See the file header for the source the module follows.

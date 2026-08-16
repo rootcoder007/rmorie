@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{fit}{A list; the body reads \code{$alpha}, \code{$beta}, \code{$range} from it.}
-\item{compute}{See Usage.}
+\item{compute}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the opnclp_native implementation. No other function in the package calls it. See the file header for the source the module follows.

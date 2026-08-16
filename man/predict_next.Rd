@@ -8,7 +8,7 @@
 predict_next(state, item_embeddings, top_k = 5, exclude = numeric(0))
 }
 \arguments{
-\item{state}{See Usage.}
+\item{state}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{item_embeddings}{See Usage.}
 \item{top_k}{Numeric; passed to \code{min}. Defaults to \code{5}.}
 \item{exclude}{Defaults to \code{numeric(0)}.}

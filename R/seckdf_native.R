@@ -146,7 +146,7 @@ morie_seckdf_derive_context_keys <- function(ikm, contexts, salt = NULL,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param bs See Usage.
+#' @param bs Coerced to integer by the body, with \code{as.integer}.
 #' @return A character value.
 #' @export
 .kdf_hex <- function(bs) {

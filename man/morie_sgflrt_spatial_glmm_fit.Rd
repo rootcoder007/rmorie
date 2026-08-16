@@ -8,18 +8,18 @@
 morie_sgflrt_spatial_glmm_fit(y, X, coords, family = "poisson", model = "exponential", sigma2 = NULL, phi = NULL, kappa = 1.5, nugget = 0, dispersion = NULL, inner_iter = 50L, outer_cycles = 3L, tol = 1e-10)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{X}{Passed to \code{.sgflrt_rows}.}
 \item{coords}{Passed to \code{.sgflrt_rows}.}
 \item{family}{One of \code{"binomial"}, \code{"gaussian"}, \code{"poisson"}. Defaults to \code{"poisson"}.}
 \item{model}{Passed to \code{.sgflrt_corr}. Defaults to \code{"exponential"}.}
-\item{sigma2}{Defaults to \code{NULL}.}
-\item{phi}{Defaults to \code{NULL}.}
-\item{kappa}{Defaults to \code{1.5}.}
-\item{nugget}{Defaults to \code{0}.}
-\item{dispersion}{Defaults to \code{NULL}.}
+\item{sigma2}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{phi}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{kappa}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1.5}.}
+\item{nugget}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
+\item{dispersion}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{inner_iter}{Passed to \code{.sgflrt_laplace}. Defaults to \code{50L}.}
-\item{outer_cycles}{Defaults to \code{3L}.}
+\item{outer_cycles}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.}
 \item{tol}{Passed to \code{.sgflrt_laplace}. Defaults to \code{1e-10}.}
 }
 \description{

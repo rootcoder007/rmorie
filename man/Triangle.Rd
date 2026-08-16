@@ -8,8 +8,8 @@
 Triangle(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{b}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 It is the statement that no combination of two signals carries more amplitude than their amplitudes sum to -- the reason uncorrelated noise adds in POWER, not in amplitude.

@@ -8,8 +8,8 @@
 FetalEcg(abdominal, chest, order = 32, mu = 0.005, method = "lms")
 }
 \arguments{
-\item{abdominal}{See Usage.}
-\item{chest}{See Usage.}
+\item{abdominal}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{chest}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{order}{Defaults to \code{32}.}
 \item{mu}{Defaults to \code{0.005}.}
 \item{method}{Defaults to \code{"lms"}.}

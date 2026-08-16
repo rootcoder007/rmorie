@@ -36,12 +36,12 @@
 #' source it follows.
 #'
 #' @param coords Passed to \code{.strmkr_rows}.
-#' @param r See Usage.
-#' @param gamma Defaults to \code{NULL}.
-#' @param window Defaults to \code{NULL}.
+#' @param r Coerced to numeric by the body, with \code{as.numeric}.
+#' @param gamma Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param window Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param nx A count; the body uses it as \code{seq_len(...)}. Defaults to \code{12L}.
 #' @param ny A count; the body uses it as \code{seq_len(...)}. Defaults to \code{12L}.
-#' @param max_iter Defaults to \code{100L}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100L}.
 #' @param tol Defaults to \code{1e-11}.
 #' @return The value of \code{out}, as built in the body.
 #' @export

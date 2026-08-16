@@ -11,7 +11,7 @@ morie_sctraj_principal_curve(X, init, weights = NULL, max_iter = 15, tol = 0.001
 \item{X}{Passed to \code{.sctraj_matrix}.}
 \item{init}{A matrix; passed to \code{as.matrix}.}
 \item{weights}{Optional; may be \code{NULL}. A vector; its length is taken.}
-\item{max_iter}{Defaults to \code{15}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{15}.}
 \item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{0.001}.}
 \item{span}{Passed to \code{.sctraj_smooth}. Defaults to \code{0.4}.}
 \item{n_knots}{Defaults to \code{NULL}.}

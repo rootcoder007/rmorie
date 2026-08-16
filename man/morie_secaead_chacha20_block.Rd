@@ -9,9 +9,9 @@ morie_secaead_chacha20_block(key, counter, nonce, rounds = 20)
 }
 \arguments{
 \item{key}{Passed to \code{.secaead_as_bytes}.}
-\item{counter}{See Usage.}
+\item{counter}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{nonce}{Passed to \code{.secaead_as_bytes}.}
-\item{rounds}{Defaults to \code{20}.}
+\item{rounds}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.}
 }
 \description{
 original, which is what stops the block function being invertible.

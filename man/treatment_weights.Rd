@@ -12,7 +12,7 @@ treatment_weights(histories, propensities, stabilise = TRUE, marginal = NULL, tr
 \item{propensities}{A vector; indexed elementwise.}
 \item{stabilise}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 \item{marginal}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
-\item{truncate}{Defaults to \code{NULL}.}
+\item{truncate}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the bhltmsm_native implementation. No other function in the package calls it. See the file header for the source the module follows.

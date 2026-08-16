@@ -8,7 +8,7 @@
 .mienco_softplus(z)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the mienco_native implementation. Called by \code{.mienco_jsd_estimate}, \code{.mienco_prior_matching_loss}. See the file header for the source the module follows.

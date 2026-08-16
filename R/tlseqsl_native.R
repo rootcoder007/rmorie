@@ -107,7 +107,7 @@ morie_tlseqsl_cv_folds <- function(n, V=10, seed=0) {
 #' the source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param algorithm See Usage.
 #' @param V Passed to \code{morie_tlseqsl_cv_folds}. Defaults to \code{10}.
 #' @param loss Passed to \code{.tlseqsl_loss}. Defaults to \code{"squared"}.
@@ -270,7 +270,7 @@ morie_tlseqsl_ensemble_super_learner <- function(X, y, library, V=10,
 #' the source it follows.
 #'
 #' @param histories A vector; its length is taken and its elements indexed.
-#' @param outcomes See Usage.
+#' @param outcomes Coerced to numeric by the body, with \code{as.numeric}.
 #' @param library Passed to \code{morie_tlseqsl_ensemble_super_learner}.
 #' @param T Numeric; combined arithmetically in the body.
 #' @param V Passed to \code{morie_tlseqsl_ensemble_super_learner}. Defaults to \code{5}.

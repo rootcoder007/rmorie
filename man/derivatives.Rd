@@ -8,8 +8,8 @@
 derivatives(S, I, beta, nu, mu, sigma)
 }
 \arguments{
-\item{S}{See Usage.}
-\item{I}{See Usage.}
+\item{S}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{I}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{beta}{Passed to \code{._check}.}
 \item{nu}{Passed to \code{._check}.}
 \item{mu}{Passed to \code{._check}.}

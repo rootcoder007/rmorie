@@ -8,9 +8,9 @@
 LmsSqErr(x, rvec, w)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{rvec}{See Usage.}
-\item{w}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{rvec}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{w}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 checked against the square itself.  This is the INSTANTANEOUS squared error standing in for the expectation -- that substitution is the whole of LMS, and the reason the algorithm converges only in the mean.

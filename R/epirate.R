@@ -26,7 +26,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param confidence See Usage.
+#' @param confidence Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{unname}.
 #' @export
 .s02z <- function(confidence) {

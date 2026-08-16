@@ -8,7 +8,7 @@
 morie_sv_dl_build_sv_graph(pairs, median, sd, label, orientation = c("+", "-"), n_sd = 3, window = NULL)
 }
 \arguments{
-\item{pairs}{See Usage.}
+\item{pairs}{Iterated over elementwise, with \code{lapply}.}
 \item{median}{Numeric; combined arithmetically in the body.}
 \item{sd}{Numeric; combined arithmetically in the body.}
 \item{label}{A vector; indexed elementwise.}

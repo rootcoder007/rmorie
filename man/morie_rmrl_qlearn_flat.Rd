@@ -9,8 +9,8 @@ morie_rmrl_qlearn_flat(machine, states, actions, step, label, gamma = 0.9, alpha
 }
 \arguments{
 \item{machine}{A list; the body reads \code{$states}, \code{$terminal}, \code{$u0} from it.}
-\item{states}{See Usage.}
-\item{actions}{See Usage.}
+\item{states}{Coerced to list by the body, with \code{as.list}.}
+\item{actions}{Coerced to list by the body, with \code{as.list}.}
 \item{step}{See Usage.}
 \item{label}{See Usage.}
 \item{gamma}{Numeric; combined arithmetically in the body. Defaults to \code{0.9}.}
@@ -18,8 +18,8 @@ morie_rmrl_qlearn_flat(machine, states, actions, step, label, gamma = 0.9, alpha
 \item{epsilon}{Passed to \code{.rmrl_eps_greedy}. Defaults to \code{0.1}.}
 \item{episodes}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{500}.}
 \item{horizon}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100}.}
-\item{start}{Defaults to \code{NULL}.}
-\item{dead_end}{Defaults to \code{NULL}.}
+\item{start}{Optional; may be \code{NULL}. A function; the body checks with \code{is.function}.}
+\item{dead_end}{A function; the body checks with \code{is.function}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
 }
 \description{

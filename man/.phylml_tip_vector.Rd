@@ -8,7 +8,7 @@
 .phylml_tip_vector(base)
 }
 \arguments{
-\item{base}{See Usage.}
+\item{base}{Coerced to character by the body, with \code{as.character}.}
 }
 \description{
 A step of the phylml_native implementation. Called by \code{.phylml_prune}. See the file header for the source the module follows.

@@ -8,9 +8,9 @@
 TurnsCount(x, threshold = 100, window = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{threshold}{Passed to \code{.morie_rg_turns}. Defaults to \code{100}.}
-\item{window}{Defaults to \code{NULL}.}
+\item{window}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 when the swing since the LAST COUNTED TURN exceeds the threshold (100 microvolts in the book).  Measuring against the last counted turn rather than the previous sample is what makes it robust in noise, and what separates it from counting turning points.

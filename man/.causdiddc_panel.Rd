@@ -8,10 +8,10 @@
 .causdiddc_panel(Y, D, group, period)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{D}{See Usage.}
-\item{group}{See Usage.}
-\item{period}{See Usage.}
+\item{Y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{D}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{group}{Coerced to vector by the body, with \code{as.vector}.}
+\item{period}{Coerced to vector by the body, with \code{as.vector}.}
 }
 \description{
 A step of the causdiddc_native implementation. Called by \code{.causdiddc_did_m}, \code{.causdiddc_twfe}. See the file header for the source the module follows.

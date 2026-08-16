@@ -117,7 +117,7 @@
 #'
 #' @param sub See Usage.
 #' @param why See Usage.
-#' @param oc See Usage.
+#' @param oc Coerced to logical by the body, with \code{as.logical}.
 #' @return A list with \code{estimate}, \code{unified}, \code{mgu}, \code{reason}, \code{occurs_check}, \code{partial}, \code{n_bindings}, \code{method}.
 #' @export
 .unifAlg_fail <- function(sub, why, oc) {
@@ -141,7 +141,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param name See Usage.
+#' @param name Coerced to character by the body, with \code{as.character}.
 #' @return The value of \code{list}.
 #' @export
 morie_unifAlg_var <- function(name) {
@@ -154,7 +154,7 @@ morie_unifAlg_var <- function(name) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param symbol See Usage.
+#' @param symbol Coerced to character by the body, with \code{as.character}.
 #' @param ... Passed through.
 #' @return The value of \code{list}.
 #' @export
@@ -169,7 +169,7 @@ morie_unifAlg_app <- function(symbol, ...) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param symbol See Usage.
+#' @param symbol Coerced to character by the body, with \code{as.character}.
 #' @return The value of \code{list}.
 #' @export
 morie_unifAlg_const <- function(symbol) {
@@ -228,7 +228,7 @@ morie_unifAlg_variables <- function(t) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param name See Usage.
+#' @param name Coerced to character by the body, with \code{as.character}.
 #' @param t Passed to \code{morie_unifAlg_variables}.
 #' @return The value of \code{%in%}.
 #' @export

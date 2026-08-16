@@ -10,8 +10,8 @@ local_nuisance(target, W, weights, exclude = NULL, ridge = 1e-08)
 \arguments{
 \item{target}{A matrix; passed to \code{crossprod}.}
 \item{W}{A matrix; passed to \code{as.matrix}.}
-\item{weights}{See Usage.}
-\item{exclude}{Defaults to \code{NULL}.}
+\item{weights}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{exclude}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{ridge}{Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.}
 }
 \description{

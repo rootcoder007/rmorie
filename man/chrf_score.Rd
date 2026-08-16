@@ -8,12 +8,12 @@
 chrf_score(hypothesis, reference, n_char = 6L, beta = 2, remove_whitespace = TRUE, word_order = 0L)
 }
 \arguments{
-\item{hypothesis}{See Usage.}
+\item{hypothesis}{Coerced to character by the body, with \code{as.character}.}
 \item{reference}{A vector; its length is taken.}
-\item{n_char}{Defaults to \code{6L}.}
+\item{n_char}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{6L}.}
 \item{beta}{Numeric; combined arithmetically in the body. Defaults to \code{2}.}
 \item{remove_whitespace}{A flag; the body branches on it. Defaults to \code{TRUE}.}
-\item{word_order}{Defaults to \code{0L}.}
+\item{word_order}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.}
 }
 \description{
 A step of the chrF_native implementation. Called by \code{morie_chrF}. See the file header for the source the module follows.

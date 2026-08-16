@@ -8,7 +8,7 @@
 .schab_initial_mu(z, family)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{family}{See Usage.}
 }
 \description{

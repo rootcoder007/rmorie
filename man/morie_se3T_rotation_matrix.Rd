@@ -9,7 +9,7 @@ morie_se3T_rotation_matrix(axis, angle)
 }
 \arguments{
 \item{axis}{Passed to \code{.se3T_vec}.}
-\item{angle}{See Usage.}
+\item{angle}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the se3T_native implementation. Called by \code{morie_se3T_check_equivariance}. See the file header for the source the module follows.

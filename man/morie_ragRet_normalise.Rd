@@ -8,7 +8,7 @@
 morie_ragRet_normalise(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the ragRet_native implementation. Called by \code{morie_ragRet_top_k}. See the file header for the source the module follows.

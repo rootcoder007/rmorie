@@ -8,7 +8,7 @@
 IntFr(omega)
 }
 \arguments{
-\item{omega}{See Usage.}
+\item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 book does.  The gain falls as frequency rises, so it is a lowpass, and it is unbounded at w = 0 -- refused rather than returned as Inf.

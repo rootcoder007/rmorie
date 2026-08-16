@@ -11,7 +11,7 @@ QrsThresh(peaki, spki, npki, issignal)
 \item{peaki}{Numeric; combined arithmetically in the body.}
 \item{spki}{Numeric; combined arithmetically in the body.}
 \item{npki}{Numeric; combined arithmetically in the body.}
-\item{issignal}{See Usage.}
+\item{issignal}{Coerced to logical by the body, with \code{as.logical}.}
 }
 \description{
 recursive average, so the estimates track slow drift without being thrown by one artifact.  I1 sits a quarter of the way from noise up to signal; I2 is half of I1 and is reserved for search-back.

@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{distance}{Passed to \code{.schab_reshape_like}.}
-\item{bandwidth}{See Usage.}
+\item{bandwidth}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{kernel}{Compared against \code{"gaussian"}. Defaults to \code{"gaussian"}.}
 \item{normalized}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }

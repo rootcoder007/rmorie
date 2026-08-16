@@ -8,7 +8,7 @@
 jtt_matrix(pam = 200L, scale = 10)
 }
 \arguments{
-\item{pam}{Defaults to \code{200L}.}
+\item{pam}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{200L}.}
 \item{scale}{Numeric; combined arithmetically in the body. Defaults to \code{10}.}
 }
 \description{

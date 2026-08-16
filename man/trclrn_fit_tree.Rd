@@ -14,9 +14,9 @@ trclrn_fit_tree(Y, A, X, propensity = NULL, method = "ipw", outcome_model = NULL
 \item{propensity}{Passed to \code{.trclrn_check}.}
 \item{method}{Compared against \code{"augmented"}. Defaults to \code{"ipw"}.}
 \item{outcome_model}{Optional; may be \code{NULL}. Passed to \code{.trclrn_best_treatment}.}
-\item{max_depth}{Defaults to \code{3}.}
-\item{min_leaf}{Defaults to \code{10}.}
-\item{n_thresholds}{Defaults to \code{20}.}
+\item{max_depth}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.}
+\item{min_leaf}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.}
+\item{n_thresholds}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.}
 \item{min_propensity}{Passed to \code{.trclrn_check}. Defaults to \code{0.01}.}
 }
 \description{

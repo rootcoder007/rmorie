@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{y}{A vector; its length is taken.}
-\item{unit}{See Usage.}
-\item{time}{See Usage.}
+\item{unit}{Coerced to vector by the body, with \code{as.vector}.}
+\item{time}{Coerced to vector by the body, with \code{as.vector}.}
 }
 \description{
 are taken in sorted order, matching numpy\\'s unique().

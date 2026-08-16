@@ -8,8 +8,8 @@
 WienerOut(w, x)
 }
 \arguments{
-\item{w}{See Usage.}
-\item{x}{See Usage.}
+\item{w}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 the input.  The first M-1 outputs run on a partly empty delay line and are reported as unsettled rather than trimmed away.

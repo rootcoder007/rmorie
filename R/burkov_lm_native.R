@@ -109,7 +109,7 @@ morie_burkov_cosine_similarity <- function(x, y) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param name See Usage.
+#' @param name A function; the body checks with \code{is.function}.
 #' @return The value of \code{switch}.
 #' @export
 .morie_burkov_phi <- function(name) {

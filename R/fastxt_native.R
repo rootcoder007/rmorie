@@ -25,9 +25,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param word See Usage.
-#' @param n_min Defaults to \code{3}.
-#' @param n_max Defaults to \code{6}.
+#' @param word Coerced to character by the body, with \code{as.character}.
+#' @param n_min Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
+#' @param n_max Coerced to integer by the body, with \code{as.integer}. Defaults to \code{6}.
 #' @param boundary A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param whole_word A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{grams}, as built in the body.
@@ -103,7 +103,7 @@ word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
 #'
 #' @param g Passed to \code{.fnv1a}.
 #' @param gram_index A vector; indexed elementwise.
-#' @param hash_buckets See Usage.
+#' @param hash_buckets Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .gram_slot <- function(g, gram_index, hash_buckets) {
@@ -164,18 +164,18 @@ word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
 #' source it follows.
 #'
 #' @param corpus Passed to \code{.as_docs}.
-#' @param dim Defaults to \code{50}.
-#' @param n_min Defaults to \code{3}.
-#' @param n_max Defaults to \code{6}.
-#' @param window Defaults to \code{5}.
-#' @param epochs Defaults to \code{5}.
-#' @param lr Defaults to \code{0.05}.
-#' @param negative Defaults to \code{5}.
+#' @param dim Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50}.
+#' @param n_min Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
+#' @param n_max Coerced to integer by the body, with \code{as.integer}. Defaults to \code{6}.
+#' @param window Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
+#' @param epochs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
+#' @param lr Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
+#' @param negative Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
 #' @param min_count Defaults to \code{1}.
 #' @param boundary Defaults to \code{TRUE}.
 #' @param whole_word Defaults to \code{TRUE}.
 #' @param hash_buckets Optional; may be \code{NULL}. Passed to \code{.gram_slot}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{vectors}, \code{vocab}, \code{index}, \code{ngrams}, \code{ngram_index}, \code{Z}, \code{context}, \code{loss_history}, \code{final_loss}, \code{oov}, \code{n_vocab}, \code{n_ngrams}, \code{dim}, \code{n_min}, \code{n_max}, \code{hash_buckets}, \code{method}.
 #' @export
 fasttext <- function(corpus, dim = 50, n_min = 3, n_max = 6,

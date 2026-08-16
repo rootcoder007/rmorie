@@ -50,7 +50,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. Character; the body checks with \code{is.character}.
 #' @return A numeric value.
 #' @export
 .secaead_as_bytes <- function(x) {
@@ -221,9 +221,9 @@
 #' original, which is what stops the block function being invertible.
 #'
 #' @param key Passed to \code{.secaead_as_bytes}.
-#' @param counter See Usage.
+#' @param counter Coerced to numeric by the body, with \code{as.numeric}.
 #' @param nonce Passed to \code{.secaead_as_bytes}.
-#' @param rounds Defaults to \code{20}.
+#' @param rounds Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.
 #' @return The value of \code{.secaead_le_bytes}.
 #' @export
 morie_secaead_chacha20_block <- function(key, counter, nonce, rounds=20) {
@@ -261,7 +261,7 @@ morie_secaead_chacha20_block <- function(key, counter, nonce, rounds=20) {
 #' the source it follows.
 #'
 #' @param key Passed to \code{morie_secaead_chacha20_block}.
-#' @param counter See Usage.
+#' @param counter Coerced to numeric by the body, with \code{as.numeric}.
 #' @param nonce Passed to \code{morie_secaead_chacha20_block}.
 #' @param data Passed to \code{.secaead_as_bytes}.
 #' @return The value of \code{out}, as built in the body.

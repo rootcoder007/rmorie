@@ -9,7 +9,7 @@ infinitesimal_jackknife(preds, in_bag, n, s, correction = TRUE)
 }
 \arguments{
 \item{preds}{A vector; its length is taken.}
-\item{in_bag}{See Usage.}
+\item{in_bag}{A matrix; the body checks with \code{is.matrix}.}
 \item{n}{Numeric; combined arithmetically in the body.}
 \item{s}{Numeric; combined arithmetically in the body.}
 \item{correction}{A flag; the body branches on it. Defaults to \code{TRUE}.}

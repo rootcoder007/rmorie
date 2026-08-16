@@ -9,9 +9,9 @@ morie_mxetA(F, n_sim = 1, seed = 0, max_points = 100000L)
 }
 \arguments{
 \item{F}{A matrix; passed to \code{as.matrix}.}
-\item{n_sim}{Defaults to \code{1}.}
+\item{n_sim}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
-\item{max_points}{Defaults to \code{100000L}.}
+\item{max_points}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100000L}.}
 }
 \description{
 Part of the mxetA_mixedcase_native implementation; see the file header for the source it follows.

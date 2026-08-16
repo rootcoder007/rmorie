@@ -8,9 +8,9 @@
 .gpzapcpredict(theta_hat, mu_hat, threshold = 0.5)
 }
 \arguments{
-\item{theta_hat}{See Usage.}
-\item{mu_hat}{See Usage.}
-\item{threshold}{Defaults to \code{0.5}.}
+\item{theta_hat}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{mu_hat}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{threshold}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.}
 }
 \description{
 A step of the helpers_gp_core implementation. Called by \code{Msm329}. See the file header for the source the module follows.

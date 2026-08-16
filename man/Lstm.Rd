@@ -10,8 +10,8 @@ Lstm(sequences, labels = NULL, hidden = 8, ridge = 1e-06, seed = 1, weights = NU
 \arguments{
 \item{sequences}{A vector; its length is taken.}
 \item{labels}{Optional; may be \code{NULL}. Passed to \code{.morie_bx_vec}.}
-\item{hidden}{Defaults to \code{8}.}
-\item{ridge}{Defaults to \code{1e-06}.}
+\item{hidden}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.}
+\item{ridge}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-06}.}
 \item{seed}{Passed to \code{.morie_bx_rng}. Defaults to \code{1}.}
 \item{weights}{Optional; may be \code{NULL}. A list; the body reads \code{$bias} from it.}
 }

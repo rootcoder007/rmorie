@@ -8,7 +8,7 @@
 .tlltmle_logit(p)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tlltmle_native implementation. Called by \code{tlltmle_fluctuate}, \code{tlltmle_tmle_point}. See the file header for the source the module follows.

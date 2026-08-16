@@ -9,9 +9,9 @@
 }
 \arguments{
 \item{A}{Passed to \code{.tlstoch_vec}.}
-\item{delta}{See Usage.}
+\item{delta}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{W}{Optional; may be \code{NULL}. Passed to \code{.tlstoch_vec}.}
-\item{bins}{Defaults to \code{5}.}
+\item{bins}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.}
 }
 \description{
 A step of the tlstoch_native implementation. No other function in the package calls it. See the file header for the source the module follows.

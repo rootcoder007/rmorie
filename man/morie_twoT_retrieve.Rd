@@ -11,7 +11,7 @@ morie_twoT_retrieve(query_embedding, item_embeddings, probabilities = NULL, top_
 \item{query_embedding}{Passed to \code{.twoT_as_vec}.}
 \item{item_embeddings}{Passed to \code{.twoT_as_mat}.}
 \item{probabilities}{Optional; may be \code{NULL}. Passed to \code{.twoT_as_vec}.}
-\item{top_k}{Defaults to \code{5}.}
+\item{top_k}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.}
 \item{temperature}{Passed to \code{morie_twoT_corrected_logits}. Defaults to \code{1}.}
 }
 \description{

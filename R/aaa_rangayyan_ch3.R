@@ -10,7 +10,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .morie_rg_aslist <- function(x) {
@@ -98,8 +98,8 @@
 #' source it follows.
 #'
 #' @param f See Usage.
-#' @param pdf Defaults to \code{NULL}.
-#' @param x Defaults to \code{NULL}.
+#' @param pdf A function; the body checks with \code{is.function}.
+#' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param lower Defaults to \code{-Inf}.
 #' @param upper Defaults to \code{Inf}.
 #' @return The value of \code{.morie_rg_quad}.
@@ -293,7 +293,7 @@ PdfKurt <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
 #' inside the log, so unlike eq (3.11) the result may be negative.
 #'
 #' @param pdf Passed to \code{.morie_rg_pdfint}.
-#' @param x Defaults to \code{NULL}.
+#' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param lower Passed to \code{.morie_rg_pdfint}. Defaults to \code{-Inf}.
 #' @param upper Passed to \code{.morie_rg_pdfint}. Defaults to \code{Inf}.
 #' @return A vector, from \code{c}.
@@ -382,7 +382,7 @@ Srms <- function(x) {
 #' source it follows.
 #'
 #' @param p Passed to \code{.morie_rg_aslist}.
-#' @param levels Defaults to \code{NULL}.
+#' @param levels Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{entropy}, \code{units}, \code{levels}, \code{max_entropy}, \code{probabilities}, \code{method}.
 #' @export
 Shannon <- function(p, levels = NULL) {
@@ -486,7 +486,7 @@ MeanSum <- function(...) {
 #' source it follows.
 #'
 #' @param observations Passed to \code{.morie_rg_aslist}.
-#' @param index Defaults to \code{NULL}.
+#' @param index Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{mean}, \code{m}, \code{sd}, \code{se}, \code{method}.
 #' @export
 EnsMean <- function(observations, index = NULL) {
@@ -517,7 +517,7 @@ EnsMean <- function(observations, index = NULL) {
 #'
 #' signal, a filtered version of the M observations.
 #'
-#' @param observations See Usage.
+#' @param observations Iterated over elementwise, with \code{lapply}.
 #' @return A list with \code{average}, \code{sd}, \code{m}, \code{n}, \code{se}, \code{method}.
 #' @export
 EnsAvg <- function(observations) {
@@ -552,7 +552,7 @@ EnsAvg <- function(observations) {
 #'
 #' @param x Passed to \code{.morie_rg_aslist}.
 #' @param y Passed to \code{.morie_rg_aslist}.
-#' @param ddof Defaults to \code{0}.
+#' @param ddof Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
 #' @return A list with \code{covariance}, \code{correlation}, \code{sd_x}, \code{sd_y}, \code{mean_x}, \code{mean_y}, \code{n}, \code{ddof}, \code{method}.
 #' @export
 CovXY <- function(x, y, ddof = 0) {
@@ -585,7 +585,7 @@ CovXY <- function(x, y, ddof = 0) {
 #' is returned instead -- the approximating family, not the delta.
 #'
 #' @param t Passed to \code{.morie_rg_aslist}.
-#' @param width Defaults to \code{NULL}.
+#' @param width Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{delta}, \code{t}, \code{width}, \code{height}, \code{undefined_at_zero}, \code{method}.
 #' @export
 DiracDelta <- function(t, width = NULL) {
@@ -617,7 +617,7 @@ DiracDelta <- function(t, width = NULL) {
 #'
 #' @param t Optional; may be \code{NULL}. Passed to \code{.morie_rg_gridint}.
 #' @param values Optional; may be \code{NULL}. Passed to \code{.morie_rg_gridint}.
-#' @param width Defaults to \code{NULL}.
+#' @param width Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{area}, \code{unit_area}, \code{method}.
 #' @export
 DeltaArea <- function(t = NULL, values = NULL, width = NULL) {
@@ -659,7 +659,7 @@ DeltaArea <- function(t = NULL, values = NULL, width = NULL) {
 #' tends to 1 as a -> 0 -- the unit-area property in the limit.
 #'
 #' @param t Passed to \code{.morie_rg_aslist}.
-#' @param a See Usage.
+#' @param a Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{values}, \code{t}, \code{a}, \code{area_symmetric}, \code{half_width}, \code{method}.
 #' @export
 DeltaLim <- function(t, a) {
@@ -685,7 +685,7 @@ DeltaLim <- function(t, a) {
 #' separate definitions, not one sampled from the other.
 #'
 #' @param t Passed to \code{.morie_rg_aslist}.
-#' @param shift Defaults to \code{0}.
+#' @param shift Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{u}, \code{t}, \code{shift}, \code{value_at_origin}, \code{method}.
 #' @export
 Ustep <- function(t, shift = 0) {
@@ -705,10 +705,10 @@ Ustep <- function(t, shift = 0) {
 #' T1 < to < T2, else 0.  Both inequalities are strict, so an impulse
 #' sitting on a limit contributes nothing.
 #'
-#' @param x See Usage.
-#' @param t0 See Usage.
-#' @param lower See Usage.
-#' @param upper See Usage.
+#' @param x A function; the body checks with \code{is.function}.
+#' @param t0 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param lower Coerced to numeric by the body, with \code{as.numeric}.
+#' @param upper Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{value}, \code{inside}, \code{t0}, \code{lower}, \code{upper}, \code{method}.
 #' @export
 Sifting <- function(x, t0, lower, upper) {
@@ -774,7 +774,7 @@ DeltaDecomp <- function(x, t = NULL) {
 #'
 #' @param x Passed to \code{.morie_rg_aslist}.
 #' @param h Passed to \code{.morie_rg_aslist}.
-#' @param dt Defaults to \code{1}.
+#' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param t Optional; may be \code{NULL}. Passed to \code{.morie_rg_aslist}.
 #' @return A list with \code{y}, \code{t}, \code{dt}, \code{n}, \code{m}, \code{integral}, \code{method}.
 #' @export
@@ -843,8 +843,8 @@ ContConvAlt <- function(x, h, dt = 1, t = NULL) {
 #' is an ordinary sequence, evaluable at the origin.
 #'
 #' @param n A vector; its length is taken.
-#' @param shift Defaults to \code{0}.
-#' @param amplitude Defaults to \code{1}.
+#' @param shift Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
+#' @param amplitude Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{delta}, \code{n}, \code{shift}, \code{amplitude}, \code{method}.
 #' @export
 KDelta <- function(n, shift = 0, amplitude = 1) {
@@ -868,7 +868,7 @@ KDelta <- function(n, shift = 0, amplitude = 1) {
 #' u(0) = 1 -- the opposite of eq (3.27).
 #'
 #' @param n A vector; its length is taken.
-#' @param shift Defaults to \code{0}.
+#' @param shift Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
 #' @return A list with \code{u}, \code{n}, \code{shift}, \code{first_difference}, \code{value_at_origin}, \code{method}.
 #' @export
 StepSeq <- function(n, shift = 0) {

@@ -8,7 +8,7 @@
 .tloilr_constrained_rule(B, kappa)
 }
 \arguments{
-\item{B}{See Usage.}
+\item{B}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{kappa}{Passed to \code{.tloilr_resource_threshold}.}
 }
 \description{

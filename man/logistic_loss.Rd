@@ -8,8 +8,8 @@
 logistic_loss(y, phi_val)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{phi_val}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{phi_val}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the ffmFM_native implementation. Called by \code{fit_ffm}. See the file header for the source the module follows.

@@ -63,7 +63,7 @@
 #'
 #' @param x A vector; its length is taken.
 #' @param epsilon A vector; its length is taken. Defaults to \code{1}.
-#' @param seed Defaults to \code{NULL}.
+#' @param seed Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{y}, \code{epsilon}, \code{p}, \code{n}, \code{rng}.
 #' @export
 morie_locdp <- function(x, epsilon = 1.0, seed = NULL) {

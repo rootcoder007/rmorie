@@ -8,7 +8,7 @@
 morie_dmlqs(what = "dmpnn_message_pass", ...)
 }
 \arguments{
-\item{what}{Defaults to \code{"dmpnn_message_pass"}.}
+\item{what}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"dmpnn_message_pass"}.}
 \item{...}{Passed through.}
 }
 \description{

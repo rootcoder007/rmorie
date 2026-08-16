@@ -12,7 +12,7 @@ bert_encoder(X, blocks, n_heads, pad_mask = NULL, pre_norm = FALSE)
 \item{blocks}{A vector; its length is taken.}
 \item{n_heads}{See Usage.}
 \item{pad_mask}{Defaults to \code{NULL}.}
-\item{pre_norm}{Defaults to \code{FALSE}.}
+\item{pre_norm}{Coerced to logical by the body, with \code{as.logical}. Defaults to \code{FALSE}.}
 }
 \description{
 A step of the berte_native implementation. No other function in the package calls it. See the file header for the source the module follows.

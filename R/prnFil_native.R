@@ -60,7 +60,7 @@
 #'
 #' @param t Passed to \code{morie_prphet_fit}.
 #' @param y Passed to \code{morie_prphet_fit}.
-#' @param taus Defaults to \code{NULL}.
+#' @param taus Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n_changepoints Passed to \code{morie_prphet_fit}. Defaults to \code{15}.
 #' @param changepoint_range Passed to \code{morie_prphet_fit}. Defaults to \code{0.8}.
 #' @param seasonalities Passed to \code{morie_prphet_fit}.
@@ -146,8 +146,8 @@
 #' source it follows.
 #'
 #' @param fit A list; the body reads \code{$changepoints}, \code{$deltas}, \code{$k}, \code{$m}, \code{$t} from it.
-#' @param t_future See Usage.
-#' @param n_sims Defaults to \code{200}.
+#' @param t_future Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n_sims Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return The value of \code{sims}, as built in the body.
 #' @export
@@ -199,7 +199,7 @@
 #'
 #' @param fit Passed to \code{.prnFil_simulate_future_trend}.
 #' @param t_future A vector; its length is taken.
-#' @param level Defaults to \code{0.8}.
+#' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.8}.
 #' @param n_sims Passed to \code{.prnFil_simulate_future_trend}. Defaults to \code{200}.
 #' @param seed Passed to \code{.prnFil_simulate_future_trend}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{median}, \code{lower}, \code{upper}, \code{width}, \code{level}, \code{n_sims}, \code{note}, \code{method}.

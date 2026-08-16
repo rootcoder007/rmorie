@@ -8,9 +8,9 @@
 LsiSer(x, h1, h2)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{h1}{See Usage.}
-\item{h2}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{h1}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{h2}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 so one function; the equivalence in eq (3.44) is measured, not asserted -- filtering twice is compared against filtering once with h.

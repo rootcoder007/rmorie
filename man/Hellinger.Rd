@@ -8,8 +8,8 @@
 Hellinger(p1, p2)
 }
 \arguments{
-\item{p1}{See Usage.}
-\item{p2}{See Usage.}
+\item{p1}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{p2}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 morie.fn.helld.hellinger_dist; this is the same arithmetic, kept here because the R tree has no separate helld module.  Unlike the Bhattacharyya distance -ln BC, this is a TRUE METRIC: bounded in [0, 1], symmetric, and it satisfies the triangle inequality, which -ln BC does not.  That is the reason to reach for it -- anything needing a metric over distributions needs this and not D_B.  The 1/2 normalization is the usual one; unnormalized gives H^2 = 2(1 - BC), so the convention is reported rather than assumed.  NOT FROM RANGAYYAN (2024).

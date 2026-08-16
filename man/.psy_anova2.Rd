@@ -8,9 +8,9 @@
 .psy_anova2(y, subject, rater)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{subject}{See Usage.}
-\item{rater}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{subject}{Coerced to vector by the body, with \code{as.vector}.}
+\item{rater}{Coerced to vector by the body, with \code{as.vector}.}
 }
 \description{
 table. An unbalanced table makes the mean squares non-orthogonal and every downstream ICC ill-defined, so it is an error rather than a number from whatever cells happen to be present.

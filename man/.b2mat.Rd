@@ -8,7 +8,7 @@
 .b2mat(a)
 }
 \arguments{
-\item{a}{See Usage.}
+\item{a}{A matrix; the body checks with \code{is.matrix}.}
 }
 \description{
 A step of the b2ot implementation. Called by \code{.b2sinkhorn}, \code{Bottomup}, \code{Gppost} and 13 others in the module. See the file header for the source the module follows.

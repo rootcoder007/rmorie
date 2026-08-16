@@ -11,11 +11,11 @@ gaussian_approximation(log_lik, log_lik_d1, log_lik_d2, prior_mean, prior_precis
 \item{log_lik}{See Usage.}
 \item{log_lik_d1}{See Usage.}
 \item{log_lik_d2}{See Usage.}
-\item{prior_mean}{See Usage.}
-\item{prior_precision}{See Usage.}
-\item{x0}{Defaults to \code{0}.}
-\item{iters}{Defaults to \code{60}.}
-\item{tol}{Defaults to \code{1e-12}.}
+\item{prior_mean}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{prior_precision}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{x0}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
+\item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{60}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-12}.}
 }
 \description{
 A step of the inlasm_native implementation. No other function in the package calls it. See the file header for the source the module follows.

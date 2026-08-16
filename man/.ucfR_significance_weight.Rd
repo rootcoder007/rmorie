@@ -8,8 +8,8 @@
 .ucfR_significance_weight(n_common, threshold = 50)
 }
 \arguments{
-\item{n_common}{See Usage.}
-\item{threshold}{Defaults to \code{50}.}
+\item{n_common}{Coerced to integer by the body, with \code{as.integer}.}
+\item{threshold}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50}.}
 }
 \description{
 A step of the ucfR_native implementation. Called by \code{.ucfR_pearson}. See the file header for the source the module follows.

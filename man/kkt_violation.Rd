@@ -8,8 +8,8 @@
 kkt_violation(alpha, y, grad, C)
 }
 \arguments{
-\item{alpha}{See Usage.}
-\item{y}{See Usage.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{grad}{A vector; indexed elementwise.}
 \item{C}{Numeric; combined arithmetically in the body.}
 }

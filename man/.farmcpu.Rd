@@ -10,8 +10,8 @@
 \arguments{
 \item{y}{Passed to \code{.to_vec}.}
 \item{G}{Passed to \code{.farmlmm_to_mat}.}
-\item{max_iter}{Defaults to \code{10L}.}
-\item{threshold}{Defaults to \code{NULL}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10L}.}
+\item{threshold}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{seed}{Defaults to \code{0L}.}
 }
 \description{

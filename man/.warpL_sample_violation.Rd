@@ -8,12 +8,12 @@
 .warpL_sample_violation(score_positive, negative_scorer, n_labels, rng, margin = 1, max_draws = NULL)
 }
 \arguments{
-\item{score_positive}{See Usage.}
+\item{score_positive}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{negative_scorer}{See Usage.}
-\item{n_labels}{See Usage.}
+\item{n_labels}{Coerced to integer by the body, with \code{as.integer}.}
 \item{rng}{Passed to \code{.ghc_unif}.}
-\item{margin}{Defaults to \code{1}.}
-\item{max_draws}{Defaults to \code{NULL}.}
+\item{margin}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{max_draws}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the warpL_native implementation. Called by \code{morie_warpL_sample_violation}, \code{morie_warpL_warp_step}. See the file header for the source the module follows.

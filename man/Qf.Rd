@@ -8,7 +8,7 @@
 Qf(p, df1, df2)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Iterated over elementwise, with \code{vapply}.}
 \item{df1}{See Usage.}
 \item{df2}{See Usage.}
 }

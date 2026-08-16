@@ -8,8 +8,8 @@
 SigFeatures(x, fs = 1, threshold = 0)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{fs}{Defaults to \code{1}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 \item{threshold}{Defaults to \code{0}.}
 }
 \description{

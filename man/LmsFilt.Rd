@@ -8,10 +8,10 @@
 LmsFilt(primary, reference, order = 8, mu = 0.01, variable = FALSE, alpha = 0.02)
 }
 \arguments{
-\item{primary}{See Usage.}
-\item{reference}{See Usage.}
-\item{order}{Defaults to \code{8}.}
-\item{mu}{Defaults to \code{0.01}.}
+\item{primary}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{reference}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{order}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.}
+\item{mu}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.}
 \item{variable}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 \item{alpha}{Defaults to \code{0.02}.}
 }

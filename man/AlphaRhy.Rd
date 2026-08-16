@@ -8,10 +8,10 @@
 AlphaRhy(x, fs, band = c(8, 13), threshold = 0.3)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{fs}{See Usage.}
-\item{band}{Defaults to \code{c(8, 13)}.}
-\item{threshold}{Defaults to \code{0.3}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{band}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{c(8, 13)}.}
+\item{threshold}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.3}.}
 }
 \description{
 so the band is an argument, not a constant.  Both the band AND the amplitude have to be satisfied -- a lag in band with a tiny peak is not a rhythm.

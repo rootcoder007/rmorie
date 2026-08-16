@@ -233,7 +233,7 @@ morie_chemsc_hbond <- function(r, alpha, betas, smoothing = "gaussian",
 #' hair under one whenever the coordinate arithmetic put it a single bit
 #' on the wrong side.
 #'
-#' @param r See Usage.
+#' @param r Coerced to numeric by the body, with \code{as.numeric}.
 #' @param r1 Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export

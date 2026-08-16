@@ -10,11 +10,11 @@ morie_funBoot(curves, statistic = NULL, alpha = 0.05, B = 500L, metric = "l2", s
 \arguments{
 \item{curves}{A matrix; indexed by row and column.}
 \item{statistic}{Defaults to \code{NULL}.}
-\item{alpha}{Defaults to \code{0.05}.}
-\item{B}{Defaults to \code{500L}.}
-\item{metric}{Defaults to \code{"l2"}.}
-\item{smooth}{Defaults to \code{0}.}
-\item{seed}{Defaults to \code{0}.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}
+\item{B}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500L}.}
+\item{metric}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"l2"}.}
+\item{smooth}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \description{
 Part of the funBoot_mixedcase_native implementation; see the file header for the source it follows.

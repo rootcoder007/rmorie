@@ -13,7 +13,7 @@
 \item{kind}{Compared against \code{"propensity"}. Defaults to \code{"double-sample"}.}
 \item{min_leaf}{Defaults to \code{5}.}
 \item{seed}{Numeric; combined arithmetically in the body. Defaults to \code{11}.}
-\item{n_permutations}{Defaults to \code{3}.}
+\item{n_permutations}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.}
 }
 \description{
 A step of the frfgrf_native implementation. Called by \code{.frfgrf_forest_fit_check}. See the file header for the source the module follows.

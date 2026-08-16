@@ -204,7 +204,7 @@ morie_baysmplr_gibbs <- function(mean, cov_inv, x0, n_iter, e) {
 #' @param q Numeric; combined arithmetically in the body.
 #' @param p Numeric; combined arithmetically in the body.
 #' @param eps Numeric; combined arithmetically in the body.
-#' @param steps See Usage.
+#' @param steps Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{q}, \code{p}, \code{g}.
 #' @export
 .baysmplr_leapfrog <- function(grad, q, p, eps, steps) {

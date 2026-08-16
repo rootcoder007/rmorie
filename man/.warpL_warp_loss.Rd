@@ -8,11 +8,11 @@
 .warpL_warp_loss(score_positive, score_negative, estimated_rank, alphas, margin = 1)
 }
 \arguments{
-\item{score_positive}{See Usage.}
-\item{score_negative}{See Usage.}
-\item{estimated_rank}{See Usage.}
+\item{score_positive}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{score_negative}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{estimated_rank}{Coerced to integer by the body, with \code{as.integer}.}
 \item{alphas}{Passed to \code{.warpL_rank_weight}.}
-\item{margin}{Defaults to \code{1}.}
+\item{margin}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the warpL_native implementation. Called by \code{morie_warpL_warp_loss}, \code{morie_warpL_warp_step}. See the file header for the source the module follows.

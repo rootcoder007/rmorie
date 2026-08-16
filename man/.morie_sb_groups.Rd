@@ -10,7 +10,7 @@
 \arguments{
 \item{h}{A vector; indexed elementwise.}
 \item{bins}{Optional; may be \code{NULL}. A vector; its length is taken.}
-\item{cutoff}{See Usage.}
+\item{cutoff}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{exact}{A flag; the body branches on it.}
 }
 \description{

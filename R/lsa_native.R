@@ -74,7 +74,7 @@ term_weighting <- function(X, how = "log_entropy") {
 #' source it follows.
 #'
 #' @param X See Usage.
-#' @param k_dim Defaults to \code{NULL}.
+#' @param k_dim Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param how Defaults to \code{"log_entropy"}.
 #' @return A list with \code{estimate}, \code{T}, \code{S}, \code{D}, \code{k}, \code{full_rank}, \code{weighting}, \code{method}, \code{note}.
 #' @export
@@ -124,7 +124,7 @@ reconstruct <- function(model) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param query See Usage.
+#' @param query Coerced to numeric by the body, with \code{as.numeric}.
 #' @param model A list; the body reads \code{$S}, \code{$T} from it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -152,7 +152,7 @@ fold_in <- function(query, model) {
 #'
 #' @param q_hat A vector; indexed elementwise.
 #' @param model A list; the body reads \code{$D}, \code{$S} from it.
-#' @param top_k Defaults to \code{5}.
+#' @param top_k Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
 #' @return A list with \code{ranking}, \code{scores}, \code{n_documents}.
 #' @export
 cosine_ranking <- function(q_hat, model, top_k = 5) {

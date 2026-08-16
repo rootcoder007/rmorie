@@ -8,7 +8,7 @@
 .dits16_vec(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the dits16_native implementation. Called by \code{adaln_zero}, \code{dit_block}. See the file header for the source the module follows.

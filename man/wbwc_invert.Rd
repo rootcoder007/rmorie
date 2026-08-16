@@ -12,8 +12,8 @@ wbwc_invert(tree, known, candidates, priors, sensitive = 0L, unknown = NULL)
 \item{known}{See Usage.}
 \item{candidates}{A vector; its length is taken.}
 \item{priors}{A vector; indexed elementwise.}
-\item{sensitive}{Defaults to \code{0L}.}
-\item{unknown}{Defaults to \code{NULL}.}
+\item{sensitive}{Coerced to character by the body, with \code{as.character}. Defaults to \code{0L}.}
+\item{unknown}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the attrInf_native implementation. Called by \code{morie_attrInf}. See the file header for the source the module follows.

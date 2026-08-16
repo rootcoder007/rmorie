@@ -8,9 +8,9 @@
 .hampel_check(a, b, c, who)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
-\item{c}{See Usage.}
+\item{a}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{b}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{c}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{who}{See Usage.}
 }
 \description{

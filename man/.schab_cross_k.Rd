@@ -11,7 +11,7 @@
 \item{p1}{A matrix; indexed by row and column.}
 \item{p2}{A matrix; indexed by row and column.}
 \item{region}{A vector; indexed elementwise.}
-\item{r}{See Usage.}
+\item{r}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{correction}{One of \code{"none"}, \code{"ripley"}. Defaults to \code{"ripley"}.}
 }
 \description{

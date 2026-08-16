@@ -10,10 +10,10 @@ SparseCode(x, D, sparsity = NULL, lam = NULL, maxiter = 2000, tol = 1e-10)
 \arguments{
 \item{x}{A vector; its length is taken.}
 \item{D}{Passed to \code{.morie_bx_mat}.}
-\item{sparsity}{Defaults to \code{NULL}.}
-\item{lam}{Defaults to \code{NULL}.}
-\item{maxiter}{Defaults to \code{2000}.}
-\item{tol}{Defaults to \code{1e-10}.}
+\item{sparsity}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{lam}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{maxiter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-10}.}
 }
 \description{
 A step of the rangayyan_class2 implementation. No other function in the package calls it. See the file header for the source the module follows.

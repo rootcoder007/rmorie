@@ -10,7 +10,7 @@
 \arguments{
 \item{n}{Numeric; combined arithmetically in the body.}
 \item{s}{Numeric; combined arithmetically in the body.}
-\item{d}{Defaults to \code{1}.}
+\item{d}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{
 A step of the ghosal_native implementation. Called by \code{Ghosalfrsdensity}, \code{Ghosalgpdenscrt}, \code{morie_gp_density_rate} and 1 others in the module. See the file header for the source the module follows.

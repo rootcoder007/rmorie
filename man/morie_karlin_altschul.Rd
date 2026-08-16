@@ -14,7 +14,7 @@ morie_karlin_altschul(dist = NULL, match = 5, mismatch = -4, letter_probs = NULL
 \item{letter_probs}{Passed to \code{morie_score_distribution}.}
 \item{matrix}{Passed to \code{morie_score_distribution}.}
 \item{subject_probs}{Passed to \code{morie_score_distribution}.}
-\item{max_terms}{Defaults to \code{1000}.}
+\item{max_terms}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000}.}
 \item{tol}{Defaults to \code{1e-12}.}
 \item{bound}{One of \code{"lower"}, \code{"mid"}, \code{"upper"}. Defaults to \code{"upper"}.}
 }

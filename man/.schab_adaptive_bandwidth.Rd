@@ -8,8 +8,8 @@
 .schab_adaptive_bandwidth(distance_row, n_neighbours, eps = 1.0000001)
 }
 \arguments{
-\item{distance_row}{See Usage.}
-\item{n_neighbours}{See Usage.}
+\item{distance_row}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n_neighbours}{Coerced to integer by the body, with \code{as.integer}.}
 \item{eps}{Numeric; combined arithmetically in the body. Defaults to \code{1.0000001}.}
 }
 \description{

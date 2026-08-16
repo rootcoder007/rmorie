@@ -26,7 +26,7 @@
 #' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param a See Usage.
+#' @param a A matrix; the body checks with \code{is.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
 .b2mat <- function(a) {
@@ -79,8 +79,8 @@
 #' @param a Passed to \code{.b2close}.
 #' @param b Passed to \code{.b2close}.
 #' @param C Passed to \code{.b2mat}.
-#' @param epsilon See Usage.
-#' @param max_iter Defaults to \code{200L}.
+#' @param epsilon Coerced to numeric by the body, with \code{as.numeric}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @param trace A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{T}, \code{u}, \code{v}, \code{a}, \code{b}, \code{trace}.
 #' @export

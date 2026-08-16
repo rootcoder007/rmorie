@@ -8,7 +8,7 @@
 .mehtad_mat(X)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{A matrix; the body checks with \code{is.matrix}.}
 }
 \description{
 A step of the mehtad_native implementation. Called by \code{mehtad_residuals}. See the file header for the source the module follows.

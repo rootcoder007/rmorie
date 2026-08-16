@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{y}{A vector; its length is taken and its elements indexed.}
-\item{period}{See Usage.}
+\item{period}{Coerced to integer by the body, with \code{as.integer}.}
 \item{alpha}{Numeric; combined arithmetically in the body.}
 \item{beta}{Numeric; combined arithmetically in the body.}
 \item{gamma}{Numeric; combined arithmetically in the body.}

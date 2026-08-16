@@ -8,13 +8,13 @@
 morie_lcwphr_latent_class_weighted(y, A, H, K, trim = 0, stabilize = TRUE, max_iter = 500L, tol = 1e-11)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{A}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{A}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{H}{Passed to \code{.lcwphr_rows}.}
 \item{K}{A count; the body uses it as \code{seq_len(...)}.}
-\item{trim}{Defaults to \code{0}.}
+\item{trim}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 \item{stabilize}{A flag; the body branches on it. Defaults to \code{TRUE}.}
-\item{max_iter}{Defaults to \code{500L}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500L}.}
 \item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{1e-11}.}
 }
 \description{

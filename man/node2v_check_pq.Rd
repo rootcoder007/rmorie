@@ -8,8 +8,8 @@
 node2v_check_pq(p, q)
 }
 \arguments{
-\item{p}{See Usage.}
-\item{q}{See Usage.}
+\item{p}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{q}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the node2v_native implementation. Called by \code{alpha_pq}. See the file header for the source the module follows.

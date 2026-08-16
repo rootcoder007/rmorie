@@ -8,7 +8,7 @@
 .tlnet1_vec(values)
 }
 \arguments{
-\item{values}{See Usage.}
+\item{values}{A matrix; the body checks with \code{is.matrix}.}
 }
 \description{
 A step of the tlnet1_native implementation. Called by \code{friend_summary}, \code{network_influence_variance}. See the file header for the source the module follows.

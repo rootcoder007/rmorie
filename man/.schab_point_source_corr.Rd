@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{coords}{A matrix; passed to \code{as.matrix}.}
-\item{source}{See Usage.}
+\item{source}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{theta1}{Numeric; combined arithmetically in the body.}
 \item{theta2}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 \item{theta3}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}

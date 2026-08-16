@@ -109,11 +109,11 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param init One of \code{"global"}, \code{"known"}. Defaults to \code{"global"}.
-#' @param z0 Defaults to \code{NULL}.
-#' @param x0 Defaults to \code{NULL}.
-#' @param p0 Defaults to \code{NULL}.
+#' @param z0 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param x0 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param p0 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{first}, \code{Z}, \code{X}, \code{P}.
 #' @export
 .tsbF_init <- function(y, init = "global", z0 = NULL, x0 = NULL, p0 = NULL) {
@@ -178,7 +178,7 @@
 #' source it follows.
 #'
 #' @param seq A vector; its length is taken and its elements indexed.
-#' @param burn_in See Usage.
+#' @param burn_in Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{[}.
 #' @export
 .tsbF_burn <- function(seq, burn_in) {
@@ -199,10 +199,10 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param alpha Defaults to \code{0.1}.
-#' @param beta Defaults to \code{0.05}.
-#' @param horizon Defaults to \code{1}.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
+#' @param beta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
+#' @param horizon Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @param init Passed to \code{.tsbF_init}. Defaults to \code{"global"}.
 #' @param z0 Passed to \code{.tsbF_init}.
 #' @param p0 Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
@@ -272,9 +272,9 @@ morie_tsbF_tsb_forecast <- function(y, alpha = 0.1, beta = 0.05, horizon = 1,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param alpha Defaults to \code{0.1}.
-#' @param horizon Defaults to \code{1}.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
+#' @param horizon Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @param init Passed to \code{.tsbF_init}. Defaults to \code{"global"}.
 #' @param z0 Passed to \code{.tsbF_init}.
 #' @param x0 Passed to \code{.tsbF_init}.
@@ -371,7 +371,7 @@ morie_tsbF_sba_forecast <- function(y, alpha = 0.1, horizon = 1,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param adi_cut Defaults to \code{1.32}.
 #' @param cv2_cut Defaults to \code{0.49}.
 #' @return A list with \code{class}, \code{adi}, \code{cv2}, \code{n_positive}, \code{n}.

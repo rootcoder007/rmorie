@@ -10,10 +10,10 @@ AtomTfd(x, fs = 1, dictionary = "gabor", max_atoms = 8, nfreq = NULL, min_decay 
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}
 \item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
-\item{dictionary}{Defaults to \code{"gabor"}.}
-\item{max_atoms}{Defaults to \code{8}.}
+\item{dictionary}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"gabor"}.}
+\item{max_atoms}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.}
 \item{nfreq}{Defaults to \code{NULL}.}
-\item{min_decay}{Defaults to \code{0.001}.}
+\item{min_decay}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.001}.}
 }
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.

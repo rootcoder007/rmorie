@@ -44,9 +44,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param start See Usage.
-#' @param end See Usage.
-#' @param exposure See Usage.
+#' @param start Coerced to numeric by the body, with \code{as.numeric}.
+#' @param end Coerced to numeric by the body, with \code{as.numeric}.
+#' @param exposure Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param risk_periods A matrix; indexed by row and column.
 #' @param age_breaks See Usage.
 #' @return A vector, from \code{sort}.
@@ -103,7 +103,7 @@
 #' source it follows.
 #'
 #' @param t See Usage.
-#' @param exposure See Usage.
+#' @param exposure Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param risk_periods A matrix; indexed by row and column.
 #' @return A numeric value.
 #' @export
@@ -127,8 +127,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param start See Usage.
-#' @param end See Usage.
+#' @param start Coerced to numeric by the body, with \code{as.numeric}.
+#' @param end Coerced to numeric by the body, with \code{as.numeric}.
 #' @param exposure Optional; may be \code{NULL}. Passed to \code{.sccsno_cuts}.
 #' @param event_times See Usage.
 #' @param risk_periods Passed to \code{.sccsno_rp}.
@@ -200,7 +200,7 @@ morie_sccsno_build_intervals <- function(start, end, exposure, event_times,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param risk_periods See Usage.
+#' @param risk_periods A matrix; the body checks with \code{is.matrix}.
 #' @return The value of \code{rp}, as built in the body.
 #' @export
 .sccsno_rp <- function(risk_periods) {
@@ -336,8 +336,8 @@ morie_sccsno_loglik <- function(params, cells_by_person, n_risk, n_age) {
 #'
 #' @param cases See Usage.
 #' @param risk_periods Passed to \code{.sccsno_rp}.
-#' @param age_breaks Defaults to \code{c()}.
-#' @param iters Defaults to \code{100}.
+#' @param age_breaks Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{c()}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
 #' @param tol Defaults to \code{1e-10}.
 #' @param ridge A matrix; passed to \code{diag}. Defaults to \code{1e-10}.
 #' @return A list with \code{estimate}, \code{relative_incidence}, \code{log_ri}, \code{se_log_ri}, \code{age_effects}, \code{se_age}, \code{coef}, \code{se}, \code{loglik}, \code{n_cases}, \code{converged}, \code{iterations}, \code{n_risk_periods}, \code{n_age_bands}, \code{method}, \code{conditions_out}.
@@ -421,7 +421,7 @@ morie_sccsno_fit <- function(cases, risk_periods, age_breaks=c(),
 #' source it follows.
 #'
 #' @param fit A list; the body reads \code{$log_ri}, \code{$se_log_ri} from it.
-#' @param level Defaults to \code{0.95}.
+#' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
 #' @return A list with \code{intervals}, \code{level}.
 #' @export
 morie_sccsno_relative_incidence <- function(fit, level=0.95) {
@@ -444,8 +444,8 @@ morie_sccsno_relative_incidence <- function(fit, level=0.95) {
 #' source it follows.
 #'
 #' @param fit_with_pre A list; the body reads \code{$relative_incidence} from it.
-#' @param pre_index Defaults to \code{0}.
-#' @param tol Defaults to \code{0.25}.
+#' @param pre_index Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.25}.
 #' @return A list with \code{pre_exposure_ri}, \code{consistent_with_design}, \code{tolerance_log}, \code{interpretation}.
 #' @export
 morie_sccsno_check_assumptions <- function(fit_with_pre, pre_index=0,

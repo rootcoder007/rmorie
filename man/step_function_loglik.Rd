@@ -9,9 +9,9 @@ step_function_loglik(y, s, h, L)
 }
 \arguments{
 \item{y}{See Usage.}
-\item{s}{See Usage.}
+\item{s}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{h}{A vector; its length is taken and its elements indexed.}
-\item{L}{See Usage.}
+\item{L}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the bayrjmcmc_native implementation. Called by \code{changepoint_rjmcmc}. See the file header for the source the module follows.

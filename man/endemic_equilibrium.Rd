@@ -8,10 +8,10 @@
 endemic_equilibrium(beta, nu, mu, strain = 0L)
 }
 \arguments{
-\item{beta}{See Usage.}
+\item{beta}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{nu}{A vector; its length is taken.}
-\item{mu}{See Usage.}
-\item{strain}{Defaults to \code{0L}.}
+\item{mu}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{strain}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.}
 }
 \description{
 A step of the hiatus_native implementation. No other function in the package calls it. See the file header for the source the module follows.

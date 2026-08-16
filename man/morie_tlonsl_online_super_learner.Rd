@@ -8,7 +8,7 @@
 morie_tlonsl_online_super_learner(y, library, loss = "squared", burn_in = 5, lags = 1, eta = 1)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{library}{A vector; its length is taken and its elements indexed.}
 \item{loss}{Passed to \code{morie_tlonsl_sequential_risk}. Defaults to \code{"squared"}.}
 \item{burn_in}{Passed to \code{morie_tlonsl_sequential_risk}. Defaults to \code{5}.}

@@ -8,7 +8,7 @@
 HannPh(omega)
 }
 \arguments{
-\item{omega}{See Usage.}
+\item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 sample at every frequency.  Constant group delay is what "no phase distortion" means.

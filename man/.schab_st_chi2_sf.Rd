@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{x}{Numeric; passed to \code{log}.}
-\item{df}{See Usage.}
+\item{df}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 of the mapping and is easy to drop: Q(df/2, x) is a perfectly well-behaved number, just not this one.

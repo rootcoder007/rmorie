@@ -30,7 +30,7 @@
 #' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param df See Usage.
+#' @param df Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .t4_lccrit <- function(df) {

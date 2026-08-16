@@ -8,7 +8,7 @@
 .frfgrf_beta_min(d, alpha = 0.05, pi = 0.5)
 }
 \arguments{
-\item{d}{See Usage.}
+\item{d}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{alpha}{Numeric; combined arithmetically in the body. Defaults to \code{0.05}.}
 \item{pi}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
 }

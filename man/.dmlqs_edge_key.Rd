@@ -8,8 +8,8 @@
 .dmlqs_edge_key(v, w)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{w}{See Usage.}
+\item{v}{Coerced to character by the body, with \code{as.character}.}
+\item{w}{Coerced to character by the body, with \code{as.character}.}
 }
 \description{
 A step of the dmlqs_native implementation. Called by \code{.dmlqs_atom_readout}, \code{.dmlqs_message_pass}. See the file header for the source the module follows.

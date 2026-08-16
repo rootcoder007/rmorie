@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{x}{Passed to \code{.fz_check_sample}.}
-\item{t_grid}{See Usage.}
-\item{h}{See Usage.}
+\item{t_grid}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{h}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{transform}{Passed to \code{.fz_transform}.}
 }
 \description{

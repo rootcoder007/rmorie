@@ -8,7 +8,7 @@
 .potM_gpd_mle(exc)
 }
 \arguments{
-\item{exc}{See Usage.}
+\item{exc}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the potM_mixedcase_native implementation. Called by \code{morie_potM}. See the file header for the source the module follows.

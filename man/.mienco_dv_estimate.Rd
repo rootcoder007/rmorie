@@ -8,8 +8,8 @@
 .mienco_dv_estimate(paired, unpaired)
 }
 \arguments{
-\item{paired}{See Usage.}
-\item{unpaired}{See Usage.}
+\item{paired}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{unpaired}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the mienco_native implementation. Called by \code{morie_mienco}. See the file header for the source the module follows.

@@ -8,8 +8,8 @@
 Rms(x, window = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{window}{Defaults to \code{NULL}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{window}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 short-time RMS the book uses for EMG activity (Section 5.6).

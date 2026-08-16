@@ -8,7 +8,7 @@
 .tmldta_logit(p)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tmldta_native implementation. Called by \code{split_specific_tmle}. See the file header for the source the module follows.

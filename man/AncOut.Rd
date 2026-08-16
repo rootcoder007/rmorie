@@ -8,8 +8,8 @@
 AncOut(x, y)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 This is the step that surprises: the quantity being minimized is the thing you keep, because minimizing it drives y toward the interference and leaves the signal behind in e.

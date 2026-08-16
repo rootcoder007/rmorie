@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{g}{A list; the body reads \code{$start} from it.}
-\item{tokens}{See Usage.}
+\item{tokens}{Coerced to character by the body, with \code{as.character}.}
 \item{route}{Compared against \code{"table"}. Defaults to \code{"table"}.}
 }
 \description{

@@ -12,7 +12,7 @@
 \item{inputs}{Passed to \code{morie_alfqud_correctness}.}
 \item{targets}{Passed to \code{morie_alfqud_correctness}.}
 \item{n_reg}{Passed to \code{morie_alfqud_correctness}.}
-\item{lw}{See Usage.}
+\item{lw}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{rf}{See Usage.}
 }
 \description{

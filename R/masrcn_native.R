@@ -70,8 +70,8 @@
 #'
 #' @param features Passed to \code{.masrcn_mat}.
 #' @param box A vector; indexed elementwise.
-#' @param out_size Defaults to \code{2L}.
-#' @param stride Defaults to \code{1}.
+#' @param out_size Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.
+#' @param stride Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{pooled}, \code{quantised_box}, \code{quantisation_shift}, \code{caveat}.
 #' @export
 roi_pool <- function(features, box, out_size = 2L, stride = 1.0) {
@@ -119,9 +119,9 @@ roi_pool <- function(features, box, out_size = 2L, stride = 1.0) {
 #'
 #' @param features Passed to \code{.masrcn_mat}.
 #' @param box A vector; indexed elementwise.
-#' @param out_size Defaults to \code{2L}.
-#' @param stride Defaults to \code{1}.
-#' @param samples Defaults to \code{2L}.
+#' @param out_size Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.
+#' @param stride Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @param samples Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.
 #' @return A list with \code{pooled}, \code{exact_box}, \code{samples_per_bin}, \code{note}.
 #' @export
 roi_align <- function(features, box, out_size = 2L, stride = 1.0,
@@ -166,7 +166,7 @@ roi_align <- function(features, box, out_size = 2L, stride = 1.0,
 #' @param features See Usage.
 #' @param box See Usage.
 #' @param out_size Defaults to \code{2L}.
-#' @param stride Defaults to \code{1}.
+#' @param stride Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{feature_shift}, \code{input_pixel_shift}, \code{stride}, \code{note}.
 #' @export
 alignment_error <- function(features, box, out_size = 2L, stride = 1.0) {
@@ -229,9 +229,9 @@ mask_loss <- function(logits, target, decoupled = TRUE) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param l_cls See Usage.
-#' @param l_box See Usage.
-#' @param l_mask See Usage.
+#' @param l_cls Coerced to numeric by the body, with \code{as.numeric}.
+#' @param l_box Coerced to numeric by the body, with \code{as.numeric}.
+#' @param l_mask Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{total}, \code{cls}, \code{box}, \code{mask}, \code{note}.
 #' @export
 multitask_loss <- function(l_cls, l_box, l_mask) {

@@ -22,7 +22,7 @@
 #'
 #' @param f See Usage.
 #' @param grad_f See Usage.
-#' @param x0 See Usage.
+#' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param tol Defaults to \code{1e-06}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1000L}.
 #' @param full_output A flag; the body branches on it. Defaults to \code{FALSE}.

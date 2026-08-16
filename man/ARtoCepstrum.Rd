@@ -8,8 +8,8 @@
 ARtoCepstrum(a_coeffs, gain = NULL)
 }
 \arguments{
-\item{a_coeffs}{See Usage.}
-\item{gain}{Defaults to \code{NULL}.}
+\item{a_coeffs}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{gain}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 h(1) = -a1; h(n) = -a_n - sum_{k=1}^{n-1} (1 - k/n) a_k h(n-k) Going through the AR coefficients avoids the phase unwrapping the FFT cepstrum needs (Section 4.7.3).

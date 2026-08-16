@@ -8,7 +8,7 @@
 morie_sv_dl_insert_size_stats(pairs, orientation = NULL, spread = "mad")
 }
 \arguments{
-\item{pairs}{See Usage.}
+\item{pairs}{Iterated over elementwise, with \code{lapply}.}
 \item{orientation}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 \item{spread}{One of \code{"mad"}, \code{"sd"}. Defaults to \code{"mad"}.}
 }

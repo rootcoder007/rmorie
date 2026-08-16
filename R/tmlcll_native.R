@@ -107,7 +107,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. Numeric; the body checks with \code{is.numeric}.
 #' @return Nothing; this branch always raises.
 #' @export
 .tmlcll_vec <- function(x) {

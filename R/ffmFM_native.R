@@ -28,9 +28,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n_features See Usage.
-#' @param n_fields See Usage.
-#' @param k_dim See Usage.
+#' @param n_features Coerced to integer by the body, with \code{as.integer}.
+#' @param n_fields Coerced to integer by the body, with \code{as.integer}.
+#' @param k_dim Coerced to integer by the body, with \code{as.integer}.
 #' @param model One of \code{"ffm"}, \code{"fm"}. Defaults to \code{"ffm"}.
 #' @return One of two values, depending on the branch taken.
 #' @export
@@ -85,8 +85,8 @@ phi <- function(x, fields, W) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param phi_val See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param phi_val Coerced to numeric by the body, with \code{as.numeric}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 logistic_loss <- function(y, phi_val) {
@@ -106,13 +106,13 @@ logistic_loss <- function(y, phi_val) {
 #' @param rows A vector; its length is taken and its elements indexed.
 #' @param labels A vector; its length is taken and its elements indexed.
 #' @param fields A vector; indexed elementwise.
-#' @param n_features See Usage.
-#' @param n_fields See Usage.
-#' @param k_dim Defaults to \code{4}.
+#' @param n_features Coerced to integer by the body, with \code{as.integer}.
+#' @param n_fields Coerced to integer by the body, with \code{as.integer}.
+#' @param k_dim Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.
 #' @param eta Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
 #' @param lam Numeric; combined arithmetically in the body. Defaults to \code{2e-05}.
-#' @param epochs Defaults to \code{10}.
-#' @param seed Defaults to \code{0}.
+#' @param epochs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{W}, \code{loss_history}, \code{final_loss}, \code{k}, \code{n_parameters}, \code{n_parameters_fm}, \code{method}, \code{caveat}.
 #' @export
 fit_ffm <- function(rows, labels, fields, n_features, n_fields,

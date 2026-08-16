@@ -8,12 +8,12 @@
 optimise_branch(make_tree, seqs, pi = NULL, u = 1, lo = 1e-06, hi = 10, tol = 1e-10, max_iter = 200)
 }
 \arguments{
-\item{make_tree}{See Usage.}
+\item{make_tree}{A function; the body checks with \code{is.function}.}
 \item{seqs}{Passed to \code{morie_phylml}.}
 \item{pi}{Passed to \code{morie_phylml}.}
 \item{u}{Passed to \code{morie_phylml}. Defaults to \code{1}.}
-\item{lo}{Defaults to \code{1e-06}.}
-\item{hi}{Defaults to \code{10}.}
+\item{lo}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-06}.}
+\item{hi}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{10}.}
 \item{tol}{Defaults to \code{1e-10}.}
 \item{max_iter}{Defaults to \code{200}.}
 }

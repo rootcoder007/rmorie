@@ -9,10 +9,10 @@ kernel_hac(v, bandwidth, kernel = "qs", n_params = 0, n = NULL)
 }
 \arguments{
 \item{v}{A matrix; passed to \code{as.matrix}.}
-\item{bandwidth}{See Usage.}
+\item{bandwidth}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{kernel}{Passed to \code{.check_kernel}. Defaults to \code{"qs"}.}
 \item{n_params}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
-\item{n}{Defaults to \code{NULL}.}
+\item{n}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the andmnh_native implementation. Called by \code{andrews_monahan_hac}. See the file header for the source the module follows.

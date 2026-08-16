@@ -8,9 +8,9 @@
 morie_snpqc1_hwe_pvalue(n_hom_minor, n_het, n_hom_major, test = "exact")
 }
 \arguments{
-\item{n_hom_minor}{See Usage.}
-\item{n_het}{See Usage.}
-\item{n_hom_major}{See Usage.}
+\item{n_hom_minor}{Coerced to integer by the body, with \code{as.integer}.}
+\item{n_het}{Coerced to integer by the body, with \code{as.integer}.}
+\item{n_hom_major}{Coerced to integer by the body, with \code{as.integer}.}
 \item{test}{One of \code{"chisq"}, \code{"exact"}. Defaults to \code{"exact"}.}
 }
 \description{

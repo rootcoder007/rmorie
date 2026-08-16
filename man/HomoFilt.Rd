@@ -8,8 +8,8 @@
 HomoFilt(y, cutoff, keep = "low")
 }
 \arguments{
-\item{y}{See Usage.}
-\item{cutoff}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{cutoff}{Coerced to integer by the body, with \code{as.integer}.}
 \item{keep}{One of \code{"high"}, \code{"low"}. Defaults to \code{"low"}.}
 }
 \description{

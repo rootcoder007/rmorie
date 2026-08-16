@@ -8,8 +8,8 @@
 Notch60(fs, f0 = 60, z = NULL)
 }
 \arguments{
-\item{fs}{See Usage.}
-\item{f0}{Defaults to \code{60}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{f0}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{60}.}
 \item{z}{Optional; may be \code{NULL}. Passed to \code{.morie_rg_polyz}.}
 }
 \description{

@@ -128,9 +128,9 @@ resample <- function(weights, rng, scheme = "systematic") {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n_steps See Usage.
+#' @param n_steps Coerced to integer by the body, with \code{as.integer}.
 #' @param kind One of \code{"geometric"}, \code{"power"}, \code{"prior"}. Defaults to \code{"geometric"}.
-#' @param power Defaults to \code{1}.
+#' @param power Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return Nothing; this branch always raises.
 #' @export
 temperature_ladder <- function(n_steps, kind = "geometric", power = 1.0) {
@@ -160,8 +160,8 @@ temperature_ladder <- function(n_steps, kind = "geometric", power = 1.0) {
 #' Normal(0, scale^2) and returns the average accept rate over the inner
 #' moves.
 #'
-#' @param scale See Usage.
-#' @param n_moves See Usage.
+#' @param scale Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n_moves Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{function}.
 #' @export
 .smcsam_rwk <- function(scale, n_moves) {
@@ -203,13 +203,13 @@ random_walk_kernel <- function(scale = 1.0, n_moves = 1L) {
 #'
 #' @param log_gamma See Usage.
 #' @param initial See Usage.
-#' @param n_particles Defaults to \code{500L}.
-#' @param ladder Defaults to \code{NULL}.
+#' @param n_particles Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500L}.
+#' @param ladder Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n_steps Defaults to \code{20L}.
 #' @param kernel Defaults to \code{NULL}.
-#' @param ess_threshold Defaults to \code{0.5}.
+#' @param ess_threshold Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.
 #' @param scheme Defaults to \code{"systematic"}.
-#' @param seed Defaults to \code{0L}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.
 #' @param weight_rule One of \code{"general"}, \code{"mcmc"}. Defaults to \code{"mcmc"}.
 #' @param log_forward Defaults to \code{NULL}.
 #' @param log_backward Defaults to \code{NULL}.

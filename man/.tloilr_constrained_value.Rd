@@ -8,8 +8,8 @@
 .tloilr_constrained_value(Q1, Q0, kappa)
 }
 \arguments{
-\item{Q1}{See Usage.}
-\item{Q0}{See Usage.}
+\item{Q1}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{Q0}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{kappa}{Passed to \code{.tloilr_constrained_rule}.}
 }
 \description{

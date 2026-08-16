@@ -92,11 +92,11 @@
 #'
 #' @param y A vector; its length is taken.
 #' @param X A matrix; passed to \code{nrow}.
-#' @param family Defaults to \code{"binomial"}.
+#' @param family Coerced to character by the body, with \code{as.character}. Defaults to \code{"binomial"}.
 #' @param add_intercept A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @param weights Defaults to \code{NULL}.
-#' @param offset Defaults to \code{NULL}.
-#' @param max_iter Defaults to \code{25L}.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param offset Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25L}.
 #' @param tol Defaults to \code{1e-08}.
 #' @return A list with \code{coef}, \code{se}, \code{statistic}, \code{statistic_name}, \code{p_value}, \code{fitted}, \code{linear_predictor}, \code{residuals}, \code{deviance}, \code{null_deviance}, \code{df_residual}, \code{df_null}, \code{dispersion}, \code{pearson_chi2}, \code{aic}, \code{loglik}, \code{converged}, \code{family}, \code{n}, \code{k}, \code{vcov}, \code{method}.
 #' @export
@@ -220,7 +220,7 @@ morie_glm <- function(y, X, family = "binomial", add_intercept = TRUE,
 #' @param X A matrix; passed to \code{nrow}.
 #' @param add_intercept A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param type Compared against \code{"link"}. Defaults to \code{c("response", "link")}.
-#' @param offset Defaults to \code{NULL}.
+#' @param offset Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{.morie_glm_families()[[fit$family]]$linkinv}.
 #' @export
 morie_glm_predict <- function(fit, X, add_intercept = TRUE,

@@ -8,10 +8,10 @@
 .schab_nonparametric_log_risk(alpha, u, phi, gamma, delta = NULL)
 }
 \arguments{
-\item{alpha}{See Usage.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{u}{Numeric; combined arithmetically in the body.}
 \item{phi}{A vector; its length is taken.}
-\item{gamma}{See Usage.}
+\item{gamma}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{delta}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }
 \description{

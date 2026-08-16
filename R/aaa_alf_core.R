@@ -79,9 +79,9 @@ alfVn2 <- function(a) sum(a * a)
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Coerced to numeric by the body, with \code{as.numeric}.
 #' @param W A matrix; passed to \code{\%*\%}.
-#' @param b Defaults to \code{NULL}.
+#' @param b Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{o}, as built in the body.
 #' @export
 alfLin <- function(v, W, b = NULL) {
@@ -97,8 +97,8 @@ alfLin <- function(v, W, b = NULL) {
 #' population variance (divide by n), matching the Python arm.
 #'
 #' @param v A vector; its length is taken.
-#' @param g Defaults to \code{NULL}.
-#' @param b Defaults to \code{NULL}.
+#' @param g Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param b Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param eps Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
 #' @return The value of \code{o}, as built in the body.
 #' @export
@@ -121,7 +121,7 @@ alfLnorm <- function(v, g = NULL, b = NULL, eps = 1e-5) {
 #' source it follows.
 #'
 #' @param Tf A list; the body reads \code{$R}, \code{$t} from it.
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 alfRap <- function(Tf, x) as.numeric(Tf$R %*% as.numeric(x)) + as.numeric(Tf$t)
@@ -148,7 +148,7 @@ alfRinv <- function(Tf) {
 #' source it follows.
 #'
 #' @param Tf A list; the body reads \code{$R}, \code{$t} from it.
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 alfRinvap <- function(Tf, x) {

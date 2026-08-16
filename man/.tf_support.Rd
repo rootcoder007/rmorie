@@ -8,7 +8,7 @@
 .tf_support(name)
 }
 \arguments{
-\item{name}{See Usage.}
+\item{name}{Coerced to character by the body, with \code{as.character}.}
 }
 \description{
 A step of the rangayyan_tf implementation. Called by \code{.tf_cwt}. See the file header for the source the module follows.

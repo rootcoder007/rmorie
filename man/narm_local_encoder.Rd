@@ -9,7 +9,7 @@ narm_local_encoder(H, alpha)
 }
 \arguments{
 \item{H}{A matrix; passed to \code{as.matrix}.}
-\item{alpha}{See Usage.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the narm_native implementation. No other function in the package calls it. See the file header for the source the module follows.

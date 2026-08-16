@@ -8,9 +8,9 @@
 gradient_inner_product(D, score, weights = NULL)
 }
 \arguments{
-\item{D}{See Usage.}
-\item{score}{See Usage.}
-\item{weights}{Defaults to \code{NULL}.}
+\item{D}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{score}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tlheic_native implementation. Called by \code{morie_tlheic}, \code{verify_gradient}. See the file header for the source the module follows.

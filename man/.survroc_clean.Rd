@@ -8,9 +8,9 @@
 .survroc_clean(times, events, marker = NULL)
 }
 \arguments{
-\item{times}{See Usage.}
-\item{events}{See Usage.}
-\item{marker}{Defaults to \code{NULL}.}
+\item{times}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{events}{Coerced to integer by the body, with \code{as.integer}.}
+\item{marker}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the survroc_native implementation. Called by \code{.survroc_pair}, \code{morie_survroc}, \code{morie_survroc_kaplan_meier} and 1 others in the module. See the file header for the source the module follows.

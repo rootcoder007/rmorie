@@ -8,8 +8,8 @@
 Mahal(x, mu, C)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{mu}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{mu}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{C}{A matrix; passed to \code{as.matrix}.}
 }
 \description{

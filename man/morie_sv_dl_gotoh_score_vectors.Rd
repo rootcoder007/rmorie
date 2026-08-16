@@ -8,8 +8,8 @@
 morie_sv_dl_gotoh_score_vectors(consensus, ref, match = 1, mismatch = -2, gap_open = -4, gap_extend = -1)
 }
 \arguments{
-\item{consensus}{See Usage.}
-\item{ref}{See Usage.}
+\item{consensus}{Coerced to character by the body, with \code{as.character}.}
+\item{ref}{Coerced to character by the body, with \code{as.character}.}
 \item{match}{Passed to \code{.sv_dl_gotoh}. Defaults to \code{1}.}
 \item{mismatch}{Passed to \code{.sv_dl_gotoh}. Defaults to \code{-2}.}
 \item{gap_open}{Passed to \code{.sv_dl_gotoh}. Defaults to \code{-4}.}

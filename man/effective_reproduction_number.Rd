@@ -8,15 +8,15 @@
 effective_reproduction_number(R0, si_mean, si_sd, delay_mean, delay_sd, trace_prob, subclinical = 0, draws = 20000, seed = 0)
 }
 \arguments{
-\item{R0}{See Usage.}
-\item{si_mean}{See Usage.}
-\item{si_sd}{See Usage.}
-\item{delay_mean}{See Usage.}
-\item{delay_sd}{See Usage.}
-\item{trace_prob}{See Usage.}
-\item{subclinical}{Defaults to \code{0}.}
-\item{draws}{Defaults to \code{20000}.}
-\item{seed}{Defaults to \code{0}.}
+\item{R0}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{si_mean}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{si_sd}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{delay_mean}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{delay_sd}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{trace_prob}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{subclinical}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
+\item{draws}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{20000}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \description{
 A step of the ttrace_native implementation. No other function in the package calls it. See the file header for the source the module follows.

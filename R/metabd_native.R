@@ -55,8 +55,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param seq See Usage.
-#' @param kk Defaults to \code{4L}.
+#' @param seq Coerced to character by the body, with \code{as.character}.
+#' @param kk Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.
 #' @param canonical A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{frequency}, \code{vector}, \code{kmers}, \code{n_kmers}, \code{canonical}.
 #' @export
@@ -117,7 +117,7 @@ abundance_correlation <- function(cov_a, cov_b) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param length See Usage.
+#' @param length Coerced to numeric by the body, with \code{as.numeric}.
 #' @param l_min Numeric; combined arithmetically in the body. Defaults to \code{2500}.
 #' @param l_ref Numeric; combined arithmetically in the body. Defaults to \code{1e+05}.
 #' @return A list with \code{weight}, \code{length}, \code{below_minimum}.
@@ -144,7 +144,7 @@ length_weight <- function(length, l_min = 2500.0, l_ref = 100000.0) {
 #' @param cov_b Defaults to \code{NULL}.
 #' @param len_a Defaults to \code{NULL}.
 #' @param len_b Defaults to \code{NULL}.
-#' @param w_abundance Defaults to \code{0.5}.
+#' @param w_abundance Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.
 #' @return A list with \code{distance}, \code{composition}, \code{abundance}, \code{abundance_usable}, \code{confidence}, \code{effective_weight}, \code{note}.
 #' @export
 composite_distance <- function(tnf_a, tnf_b, cov_a = NULL, cov_b = NULL,
@@ -182,8 +182,8 @@ composite_distance <- function(tnf_a, tnf_b, cov_a = NULL, cov_b = NULL,
 #' @param tnfs Passed to \code{.metabd_mat}.
 #' @param coverages Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param lengths Optional; may be \code{NULL}. Passed to \code{.metabd_vec}.
-#' @param threshold Defaults to \code{0.15}.
-#' @param min_bin_size Defaults to \code{2e+05}.
+#' @param threshold Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.15}.
+#' @param min_bin_size Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2e+05}.
 #' @return A list with \code{estimate}, \code{bins}, \code{unbinned}, \code{n_bins}, \code{n_unbinned}, \code{method}, \code{note}.
 #' @export
 bin_contigs <- function(tnfs, coverages = NULL, lengths = NULL,

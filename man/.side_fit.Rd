@@ -10,9 +10,9 @@
 \arguments{
 \item{v}{A vector; its length is taken and its elements indexed.}
 \item{y}{A vector; indexed elementwise.}
-\item{k_pt}{See Usage.}
-\item{bandwidth}{See Usage.}
-\item{order}{See Usage.}
+\item{k_pt}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{bandwidth}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{order}{Coerced to integer by the body, with \code{as.integer}.}
 \item{side}{One of \code{"left"}, \code{"right"}.}
 \item{kernel}{Compared against \code{"triangular"}.}
 }

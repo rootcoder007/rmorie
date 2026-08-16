@@ -10,9 +10,9 @@
 \arguments{
 \item{cv}{A vector; its length is taken.}
 \item{A_ub}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
-\item{b_ub}{Defaults to \code{NULL}.}
+\item{b_ub}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{A_eq}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
-\item{b_eq}{Defaults to \code{NULL}.}
+\item{b_eq}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{lower}{See Usage.}
 \item{upper}{A vector; indexed elementwise.}
 }

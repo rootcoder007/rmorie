@@ -8,8 +8,8 @@
 LogSeries(x, terms = 20)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{terms}{Defaults to \code{20}.}
+\item{x}{Coerced to complex by the body, with \code{as.complex}.}
+\item{terms}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.}
 }
 \description{
 is exactly 1, so |x| >= 1 is refused instead of diverging quietly.

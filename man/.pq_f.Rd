@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{st}{A vector; indexed elementwise.}
-\item{id}{See Usage.}
+\item{id}{Coerced to character by the body, with \code{as.character}.}
 \item{default}{Defaults to \code{NULL}.}
 }
 \description{

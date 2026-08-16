@@ -8,7 +8,7 @@
 narm_attention_weights(h_t, H, A1, A2, v)
 }
 \arguments{
-\item{h_t}{See Usage.}
+\item{h_t}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{H}{A matrix; passed to \code{as.matrix}.}
 \item{A1}{A matrix; passed to \code{\%*\%}.}
 \item{A2}{A matrix; passed to \code{\%*\%}.}

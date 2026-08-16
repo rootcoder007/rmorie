@@ -8,11 +8,11 @@
 morie_sequence_probabilities(beta, gamma, x, alpha, y0, link = "logit")
 }
 \arguments{
-\item{beta}{See Usage.}
-\item{gamma}{See Usage.}
+\item{beta}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{gamma}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{x}{A matrix; passed to \code{as.matrix}.}
-\item{alpha}{See Usage.}
-\item{y0}{See Usage.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{y0}{Coerced to integer by the body, with \code{as.integer}.}
 \item{link}{One of \code{"logit"}, \code{"probit"}. Defaults to \code{"logit"}.}
 }
 \description{

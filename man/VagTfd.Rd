@@ -12,7 +12,7 @@ VagTfd(x, fs, natoms = 12, nfreq = 32, ntime = NULL, lag = 12)
 \item{fs}{Numeric; combined arithmetically in the body.}
 \item{natoms}{Defaults to \code{12}.}
 \item{nfreq}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{32}.}
-\item{ntime}{Defaults to \code{NULL}.}
+\item{ntime}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{lag}{Numeric; combined arithmetically in the body. Defaults to \code{12}.}
 }
 \description{

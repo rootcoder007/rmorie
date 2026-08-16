@@ -27,7 +27,7 @@
 #' Python\'s int has no such limit, so coercing here would break parity
 #' exactly where the asymptotics become interesting.
 #'
-#' @param n See Usage.
+#' @param n Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
 .morie_gh_n <- function(n) {
@@ -46,7 +46,7 @@
 #'
 #' @param n Numeric; combined arithmetically in the body.
 #' @param s Numeric; combined arithmetically in the body.
-#' @param d Defaults to \code{1}.
+#' @param d Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
 .morie_gh_minimax_rate <- function(n, s, d = 1) {
@@ -80,9 +80,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
-#' @param q See Usage.
-#' @param grid See Usage.
+#' @param p Coerced to numeric by the body, with \code{as.numeric}.
+#' @param q Coerced to numeric by the body, with \code{as.numeric}.
+#' @param grid Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .morie_gh_hellinger <- function(p, q, grid) {
@@ -97,12 +97,12 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param grid See Usage.
-#' @param levels Defaults to \code{6L}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param grid Coerced to numeric by the body, with \code{as.numeric}.
+#' @param levels Coerced to integer by the body, with \code{as.integer}. Defaults to \code{6L}.
 #' @param a_fn Defaults to \code{NULL}.
-#' @param lo Defaults to \code{NULL}.
-#' @param hi Defaults to \code{NULL}.
+#' @param lo Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param hi Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{ifelse}.
 #' @export
 .morie_gh_polya_tree <- function(x, grid, levels = 6L, a_fn = NULL,

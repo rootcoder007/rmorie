@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{seq}{A vector; its length is taken and its elements indexed.}
-\item{burn_in}{See Usage.}
+\item{burn_in}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the tsbF_native implementation. Called by \code{morie_tsbF_croston_forecast}, \code{morie_tsbF_tsb_forecast}. See the file header for the source the module follows.

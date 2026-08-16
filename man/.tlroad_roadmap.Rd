@@ -8,10 +8,10 @@
 .tlroad_roadmap(data_description, model_assumptions, target_name, estimator = "TMLE")
 }
 \arguments{
-\item{data_description}{See Usage.}
+\item{data_description}{Coerced to character by the body, with \code{as.character}.}
 \item{model_assumptions}{A vector; its length is taken.}
-\item{target_name}{See Usage.}
-\item{estimator}{Defaults to \code{"TMLE"}.}
+\item{target_name}{Coerced to character by the body, with \code{as.character}.}
+\item{estimator}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"TMLE"}.}
 }
 \description{
 A step of the tlroad_native implementation. No other function in the package calls it. See the file header for the source the module follows.

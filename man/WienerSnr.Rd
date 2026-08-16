@@ -8,8 +8,8 @@
 WienerSnr(sd, seta)
 }
 \arguments{
-\item{sd}{See Usage.}
-\item{seta}{See Usage.}
+\item{sd}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{seta}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 stresses and this checks: zero where the signal is absent (nothing to restore), unity where the noise is absent (nothing to suppress), and falling monotonically with the SNR in between.

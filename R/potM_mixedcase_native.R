@@ -49,7 +49,7 @@
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param exc See Usage.
+#' @param exc Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{sigma}, \code{xi}, \code{loglik}, \code{cov}, \code{converged}.
 #' @export
 .potM_gpd_mle <- function(exc) {
@@ -128,9 +128,9 @@
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param u Numeric; combined arithmetically in the body.
-#' @param return_periods Defaults to \code{c(10, 100)}.
+#' @param return_periods Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{c(10, 100)}.
 #' @return A list with \code{sigma}, \code{xi}, \code{loglik}, \code{cov}, \code{n_exceedances}, \code{n}, \code{rate}, \code{return_levels}, \code{threshold}, \code{converged}, \code{method}.
 #' @export
 morie_potM <- function(y, u, return_periods = c(10.0, 100.0)) {

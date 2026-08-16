@@ -9,7 +9,7 @@ TWaveDet(chans, qrs, fs, tdur = 0.16)
 }
 \arguments{
 \item{chans}{A vector; its length is taken.}
-\item{qrs}{See Usage.}
+\item{qrs}{Coerced to integer by the body, with \code{as.integer}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
 \item{tdur}{Numeric; combined arithmetically in the body. Defaults to \code{0.16}.}
 }

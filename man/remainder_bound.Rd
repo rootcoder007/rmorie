@@ -8,9 +8,9 @@
 remainder_bound(err_Q, err_g, delta)
 }
 \arguments{
-\item{err_Q}{See Usage.}
-\item{err_g}{See Usage.}
-\item{delta}{See Usage.}
+\item{err_Q}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{err_g}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{delta}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tlhaltm_native implementation. Called by \code{efficiency_check}, \code{morie_tlhaltm}. See the file header for the source the module follows.

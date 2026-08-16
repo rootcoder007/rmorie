@@ -8,7 +8,7 @@
 .morie_hrz_normalize_scale(beta)
 }
 \arguments{
-\item{beta}{See Usage.}
+\item{beta}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the horowitz_native6 implementation. Called by \code{morie_chen_transform}, \code{morie_transform_prediction}, \code{morie_transform_T_F}. See the file header for the source the module follows.

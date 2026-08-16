@@ -12,7 +12,7 @@ covariate_kink_test(V, Z, kink, bandwidth, order = 2L, kernel = "triangular")
 \item{Z}{Passed to \code{.side_fit}.}
 \item{kink}{Passed to \code{.side_fit}.}
 \item{bandwidth}{Passed to \code{.side_fit}.}
-\item{order}{Defaults to \code{2L}.}
+\item{order}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.}
 \item{kernel}{Passed to \code{.side_fit}. Defaults to \code{"triangular"}.}
 }
 \description{

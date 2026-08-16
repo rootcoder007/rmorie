@@ -8,9 +8,9 @@
 .timeRS_deviation(t, t_user, beta = .timeRS_BETA)
 }
 \arguments{
-\item{t}{See Usage.}
-\item{t_user}{See Usage.}
-\item{beta}{Defaults to \code{.timeRS_BETA}.}
+\item{t}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{t_user}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{beta}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{.timeRS_BETA}.}
 }
 \description{
 A step of the timeRS_native implementation. Called by \code{.timeRS_fit_time_bias}, \code{.timeRS_user_bias}, \code{morie_timeRS_deviation}. See the file header for the source the module follows.

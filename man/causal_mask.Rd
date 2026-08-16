@@ -8,7 +8,7 @@
 causal_mask(n)
 }
 \arguments{
-\item{n}{See Usage.}
+\item{n}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the sasRec_native implementation. Called by \code{self_attention}. See the file header for the source the module follows.

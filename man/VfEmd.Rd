@@ -10,8 +10,8 @@ VfEmd(ecg, fs = 250, n_imfs = 6, tol = 0.05)
 \arguments{
 \item{ecg}{Passed to \code{.tf_need}.}
 \item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{250}.}
-\item{n_imfs}{Defaults to \code{6}.}
-\item{tol}{Defaults to \code{0.05}.}
+\item{n_imfs}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{6}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}
 }
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it. See the file header for the source the module follows.

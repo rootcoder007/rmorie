@@ -13,7 +13,7 @@ morie_sv_dl_refine_breakpoint(call, reference, reads, k = 7, k_min = 3, min_spli
 \item{reads}{A vector; its length is taken and its elements indexed.}
 \item{k}{Passed to \code{morie_sv_dl_kmer_diagonals}. Defaults to \code{7}.}
 \item{k_min}{Passed to \code{morie_sv_dl_kmer_diagonals}. Defaults to \code{3}.}
-\item{min_split_support}{Defaults to \code{2}.}
+\item{min_split_support}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.}
 \item{max_length_diff}{Numeric; combined arithmetically in the body. Defaults to \code{0.1}.}
 \item{match}{Passed to \code{morie_sv_dl_gotoh_score_vectors}. Defaults to \code{1}.}
 \item{mismatch}{Passed to \code{morie_sv_dl_gotoh_score_vectors}. Defaults to \code{-2}.}

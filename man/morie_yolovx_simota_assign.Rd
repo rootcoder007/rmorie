@@ -10,8 +10,8 @@ morie_yolovx_simota_assign(costs, ious, top_q = 10, max_k = NULL)
 \arguments{
 \item{costs}{Passed to \code{.s03mat}.}
 \item{ious}{Passed to \code{.s03mat}.}
-\item{top_q}{Defaults to \code{10}.}
-\item{max_k}{Defaults to \code{NULL}.}
+\item{top_q}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.}
+\item{max_k}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 rounded sum of the q largest IoUs for that ground truth. Returns the assignment keyed by 0-based ground-truth index.

@@ -15,7 +15,7 @@
 #' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param n_levels Defaults to \code{3L}.
+#' @param n_levels Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.
 #' @return A list with \code{instruments}, \code{n_instruments}, \code{n_levels}, \code{note}.
 #' @export
 morie_hypercube_instruments <- function(X, n_levels = 3L) {
@@ -57,7 +57,7 @@ morie_hypercube_instruments <- function(X, n_levels = 3L) {
 #' source it follows.
 #'
 #' @param m A matrix; passed to \code{as.matrix}.
-#' @param g See Usage.
+#' @param g Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{mean}, \code{sd}, \code{n}.
 #' @export
 morie_weighted_moments <- function(m, g) {
@@ -87,9 +87,9 @@ morie_weighted_moments <- function(m, g) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param std_moments See Usage.
+#' @param std_moments Coerced to numeric by the body, with \code{as.numeric}.
 #' @param form One of \code{"max"}, \code{"sum"}. Defaults to \code{"sum"}.
-#' @param n_equality Defaults to \code{0L}.
+#' @param n_equality Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
 #' @return A numeric value.
 #' @export
 morie_S_function <- function(std_moments, form = "sum", n_equality = 0L) {
@@ -116,7 +116,7 @@ morie_S_function <- function(std_moments, form = "sum", n_equality = 0L) {
 #' @param instruments A list; the body reads \code{$instruments} from it.
 #' @param form Passed to \code{morie_S_function}. Defaults to \code{"sum"}.
 #' @param n_equality Passed to \code{morie_S_function}. Defaults to \code{0L}.
-#' @param weights Defaults to \code{NULL}.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{statistic}, \code{per_instrument}, \code{form}, \code{n_instruments}, \code{method}.
 #' @export
 morie_cvm_statistic <- function(m, instruments, form = "sum",
@@ -156,9 +156,9 @@ morie_cvm_statistic <- function(m, instruments, form = "sum",
 #' @param form Passed to \code{morie_S_function}. Defaults to \code{"sum"}.
 #' @param n_equality Passed to \code{morie_S_function}. Defaults to \code{0L}.
 #' @param level Numeric; combined arithmetically in the body. Defaults to \code{0.95}.
-#' @param reps Defaults to \code{200L}.
+#' @param reps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
-#' @param kappa Defaults to \code{NULL}.
+#' @param kappa Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{critical_value}, \code{kappa}, \code{reps}, \code{level}, \code{method}.
 #' @export
 morie_gms_critical_value <- function(m, instruments, form = "sum",

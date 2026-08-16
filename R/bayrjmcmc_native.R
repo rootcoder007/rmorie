@@ -15,7 +15,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param seed See Usage.
+#' @param seed Coerced to integer by the body, with \code{as.integer}.
 #' @param block Defaults to \code{8192L}.
 #' @return The value of \code{uni}, as built in the body.
 #' @export
@@ -241,7 +241,7 @@ rj_log_acceptance <- function(logpost_from, logpost_to, log_j_from,
 #' @param models A vector; its length is taken and its elements indexed.
 #' @param moves See Usage.
 #' @param init_model See Usage.
-#' @param init_theta Defaults to \code{c()}.
+#' @param init_theta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{c()}.
 #' @param n_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{10000L}.
 #' @param burn_in Numeric; combined arithmetically in the body. Defaults to \code{0L}.
 #' @param thin Numeric; combined arithmetically in the body. Defaults to \code{1L}.
@@ -420,9 +420,9 @@ bayrjmcmc <- reversible_jump_mcmc
 #' the source it follows.
 #'
 #' @param y See Usage.
-#' @param s See Usage.
+#' @param s Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h A vector; its length is taken and its elements indexed.
-#' @param L See Usage.
+#' @param L Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 step_function_loglik <- function(y, s, h, L) {
@@ -489,11 +489,11 @@ changepoint_move_probabilities <- function(lam, k_max, cap = 0.9) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param h_j See Usage.
-#' @param u See Usage.
-#' @param s_left See Usage.
-#' @param s_star See Usage.
-#' @param s_right See Usage.
+#' @param h_j Coerced to numeric by the body, with \code{as.numeric}.
+#' @param u Coerced to numeric by the body, with \code{as.numeric}.
+#' @param s_left Coerced to numeric by the body, with \code{as.numeric}.
+#' @param s_star Coerced to numeric by the body, with \code{as.numeric}.
+#' @param s_right Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{c}.
 #' @export
 birth_split_heights <- function(h_j, u, s_left, s_star, s_right) {
@@ -513,9 +513,9 @@ birth_split_heights <- function(h_j, u, s_left, s_star, s_right) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param h_j See Usage.
-#' @param h_new_left See Usage.
-#' @param h_new_right See Usage.
+#' @param h_j Coerced to numeric by the body, with \code{as.numeric}.
+#' @param h_new_left Coerced to numeric by the body, with \code{as.numeric}.
+#' @param h_new_right Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 birth_log_jacobian <- function(h_j, h_new_left, h_new_right) {
@@ -529,9 +529,9 @@ birth_log_jacobian <- function(h_j, h_new_left, h_new_right) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param s_left See Usage.
-#' @param s_mid See Usage.
-#' @param s_right See Usage.
+#' @param s_left Coerced to numeric by the body, with \code{as.numeric}.
+#' @param s_mid Coerced to numeric by the body, with \code{as.numeric}.
+#' @param s_right Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h_left Numeric; passed to \code{log}.
 #' @param h_right Numeric; passed to \code{log}.
 #' @return A numeric value.
@@ -562,7 +562,7 @@ birth_log_jacobian <- function(h_j, h_new_left, h_new_right) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param y Defaults to \code{numeric(0)}.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{numeric(0)}.
 #' @param L Numeric; passed to \code{log}. Defaults to \code{1}.
 #' @param n_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{40000L}.
 #' @param burn_in Numeric; combined arithmetically in the body. Defaults to \code{4000L}.

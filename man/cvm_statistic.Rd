@@ -12,7 +12,7 @@ cvm_statistic(m, instruments, form = "sum", n_equality = 0L, weights = NULL)
 \item{instruments}{A list; the body reads \code{$instruments} from it.}
 \item{form}{Defaults to \code{"sum"}.}
 \item{n_equality}{Defaults to \code{0L}.}
-\item{weights}{Defaults to \code{NULL}.}
+\item{weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the bnskmt_native implementation. Called by \code{compare_forms}. See the file header for the source the module follows.

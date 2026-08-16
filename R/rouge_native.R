@@ -91,7 +91,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param match See Usage.
+#' @param match Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n_cand Numeric; combined arithmetically in the body.
 #' @param n_ref Numeric; combined arithmetically in the body.
 #' @param beta Numeric; combined arithmetically in the body.
@@ -405,7 +405,7 @@ morie_rouge_w <- function(candidate, reference, alpha = 1.2, beta = 1.0) {
 #'
 #' @param candidate Passed to \code{morie_rouge_l}.
 #' @param reference Passed to \code{morie_rouge_l}.
-#' @param variant Defaults to \code{"L"}.
+#' @param variant Coerced to character by the body, with \code{as.character}. Defaults to \code{"L"}.
 #' @param n Passed to \code{morie_rouge_n}. Defaults to \code{1}.
 #' @param alpha Passed to \code{morie_rouge_w}. Defaults to \code{1.2}.
 #' @param beta Passed to \code{morie_rouge_l}. Defaults to \code{1}.

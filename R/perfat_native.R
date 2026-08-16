@@ -34,7 +34,7 @@
 #'
 #' @param m A count; the body uses it as \code{seq_len(...)}.
 #' @param d A count; the body uses it as \code{matrix(...)}.
-#' @param seed Defaults to \code{0L}.
+#' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
 #' @param orthogonal A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{[}.
 #' @export
@@ -164,7 +164,7 @@ softmax_attention <- function(Q, K, V, causal = FALSE) {
 #' @param Q A matrix; passed to \code{as.matrix}.
 #' @param K A matrix; passed to \code{as.matrix}.
 #' @param V A matrix; passed to \code{as.matrix}.
-#' @param n_features Defaults to \code{128L}.
+#' @param n_features Coerced to integer by the body, with \code{as.integer}. Defaults to \code{128L}.
 #' @param seed Defaults to \code{0L}.
 #' @param kind Defaults to \code{"positive"}.
 #' @param orthogonal A flag; the body branches on it. Defaults to \code{TRUE}.

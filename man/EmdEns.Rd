@@ -9,9 +9,9 @@ EmdEns(x, n_ensembles = 20, noise_std = 0.2, max_imfs = 8, seed = 0)
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}
-\item{n_ensembles}{Defaults to \code{20}.}
-\item{noise_std}{Defaults to \code{0.2}.}
-\item{max_imfs}{Defaults to \code{8}.}
+\item{n_ensembles}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.}
+\item{noise_std}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.2}.}
+\item{max_imfs}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.}
 \item{seed}{Passed to \code{.tf_lcg_seed}. Defaults to \code{0}.}
 }
 \description{

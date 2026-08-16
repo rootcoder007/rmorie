@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{mu}{Passed to \code{.schab_variance_function}.}
-\item{sigma2}{See Usage.}
+\item{sigma2}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{family}{Passed to \code{.schab_variance_function}.}
 }
 \description{

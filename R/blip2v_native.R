@@ -12,9 +12,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n_queries See Usage.
-#' @param dim See Usage.
-#' @param seed Defaults to \code{0}.
+#' @param n_queries Coerced to integer by the body, with \code{as.integer}.
+#' @param dim Coerced to integer by the body, with \code{as.integer}.
+#' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
 #' @param scale Numeric; combined arithmetically in the body. Defaults to \code{0.02}.
 #' @return A matrix, from \code{matrix}.
 #' @export
@@ -74,9 +74,9 @@ qformer_attend <- function(queries, image_features, WQ, WK, WV) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param qformer_params See Usage.
-#' @param frozen_vision_params See Usage.
-#' @param frozen_llm_params See Usage.
+#' @param qformer_params Coerced to numeric by the body, with \code{as.numeric}.
+#' @param frozen_vision_params Coerced to numeric by the body, with \code{as.numeric}.
+#' @param frozen_llm_params Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{trainable}, \code{total}, \code{fraction}, \code{frozen_fraction}, \code{note}.
 #' @export
 trainable_fraction <- function(qformer_params, frozen_vision_params,
@@ -97,8 +97,8 @@ trainable_fraction <- function(qformer_params, frozen_vision_params,
 #' source it follows.
 #'
 #' @param query_out A matrix; passed to \code{as.matrix}.
-#' @param text_out See Usage.
-#' @param temperature Defaults to \code{0.07}.
+#' @param text_out Coerced to numeric by the body, with \code{as.numeric}.
+#' @param temperature Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.07}.
 #' @return A list with \code{per_query_similarity}, \code{image_text_similarity}, \code{best_query}, \code{logit}, \code{note}.
 #' @export
 stage_one_objectives <- function(query_out, text_out, temperature = 0.07) {
@@ -129,7 +129,7 @@ stage_one_objectives <- function(query_out, text_out, temperature = 0.07) {
 #'
 #' @param query_out A matrix; passed to \code{as.matrix}.
 #' @param W A matrix; passed to \code{nrow}.
-#' @param b Defaults to \code{NULL}.
+#' @param b Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{estimate}, \code{soft_prompt}, \code{n_tokens}, \code{dim}, \code{method}, \code{note}.
 #' @export
 project_to_llm <- function(query_out, W, b = NULL) {

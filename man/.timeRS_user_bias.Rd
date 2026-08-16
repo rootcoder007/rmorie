@@ -8,8 +8,8 @@
 .timeRS_user_bias(b_u, alpha_u, t, t_user, per_day = NULL, beta = .timeRS_BETA)
 }
 \arguments{
-\item{b_u}{See Usage.}
-\item{alpha_u}{See Usage.}
+\item{b_u}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{alpha_u}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{t}{Passed to \code{.timeRS_deviation}.}
 \item{t_user}{Passed to \code{.timeRS_deviation}.}
 \item{per_day}{Optional; may be \code{NULL}. A vector; indexed elementwise.}

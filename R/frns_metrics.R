@@ -96,8 +96,8 @@ NULL
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param privileged See Usage.
-#' @param rates See Usage.
+#' @param privileged Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
+#' @param rates Iterated over elementwise, with \code{vapply}.
 #' @return A list with \code{privileged}, \code{warning}.
 #' @export
 .frns_resolve_privileged <- function(privileged, rates) {
@@ -218,7 +218,7 @@ NULL
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to vector by the body, with \code{as.vector}.
 #' @param name See Usage.
 #' @return The value of \code{arr}, as built in the body.
 #' @export
@@ -297,8 +297,8 @@ NULL
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param privileged See Usage.
-#' @param rates See Usage.
+#' @param privileged Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
+#' @param rates Iterated over elementwise, with \code{vapply}.
 #' @param warnings_env A list; the body reads \code{$w} from it.
 #' @return The value of \code{inferred}, as built in the body.
 #' @export

@@ -9,8 +9,8 @@ alfLnorm(v, g = NULL, b = NULL, eps = 1e-05)
 }
 \arguments{
 \item{v}{A vector; its length is taken.}
-\item{g}{Defaults to \code{NULL}.}
-\item{b}{Defaults to \code{NULL}.}
+\item{g}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{b}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{eps}{Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.}
 }
 \description{

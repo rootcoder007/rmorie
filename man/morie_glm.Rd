@@ -10,11 +10,11 @@ morie_glm(y, X, family = "binomial", add_intercept = TRUE, weights = NULL, offse
 \arguments{
 \item{y}{A vector; its length is taken.}
 \item{X}{A matrix; passed to \code{nrow}.}
-\item{family}{Defaults to \code{"binomial"}.}
+\item{family}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"binomial"}.}
 \item{add_intercept}{A flag; the body branches on it. Defaults to \code{TRUE}.}
-\item{weights}{Defaults to \code{NULL}.}
-\item{offset}{Defaults to \code{NULL}.}
-\item{max_iter}{Defaults to \code{25L}.}
+\item{weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{offset}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25L}.}
 \item{tol}{Defaults to \code{1e-08}.}
 }
 \description{

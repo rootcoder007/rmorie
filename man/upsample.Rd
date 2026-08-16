@@ -9,7 +9,7 @@ upsample(grid, factor = 2)
 }
 \arguments{
 \item{grid}{Passed to \code{.samdec_mat}.}
-\item{factor}{Defaults to \code{2}.}
+\item{factor}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.}
 }
 \description{
 A step of the samdec_native implementation. Called by \code{decode_mask}. See the file header for the source the module follows.

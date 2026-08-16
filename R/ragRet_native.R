@@ -16,7 +16,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 morie_ragRet_normalise <- function(v) {
@@ -31,9 +31,9 @@ morie_ragRet_normalise <- function(v) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param query See Usage.
-#' @param corpus See Usage.
-#' @param k.top Defaults to \code{5L}.
+#' @param query Coerced to numeric by the body, with \code{as.numeric}.
+#' @param corpus Iterated over elementwise, with \code{lapply}.
+#' @param k.top Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
 #' @param metric Compared against \code{"cosine"}. Defaults to \code{"inner_product"}.
 #' @return A list with \code{indices}, \code{scores}, \code{all_scores}, \code{metric}, \code{comparisons}, \code{note}.
 #' @export
@@ -67,10 +67,10 @@ morie_ragRet_top_k <- function(query, corpus, k.top = 5L,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param corpus See Usage.
-#' @param n.cells Defaults to \code{4L}.
-#' @param iters Defaults to \code{25L}.
-#' @param seed Defaults to \code{0L}.
+#' @param corpus Iterated over elementwise, with \code{lapply}.
+#' @param n.cells Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.
+#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25L}.
+#' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
 #' @return A list with \code{centroids}, \code{lists}, \code{assign}, \code{n.cells}, \code{n}, \code{note}.
 #' @export
 morie_ragRet_ivf_index <- function(corpus, n.cells = 4L, iters = 25L,
@@ -124,11 +124,11 @@ morie_ragRet_ivf_index <- function(corpus, n.cells = 4L, iters = 25L,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param query See Usage.
+#' @param query Coerced to numeric by the body, with \code{as.numeric}.
 #' @param corpus A vector; indexed elementwise.
 #' @param index A list; the body reads \code{$centroids}, \code{$lists}, \code{$n}, \code{$n.cells} from it.
-#' @param k.top Defaults to \code{5L}.
-#' @param nprobe Defaults to \code{1L}.
+#' @param k.top Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
+#' @param nprobe Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1L}.
 #' @param metric Passed to \code{morie_ragRet_top_k}. Defaults to \code{"inner_product"}.
 #' @return A list with \code{indices}, \code{scores}, \code{comparisons}, \code{probed}, \code{n.cells}, \code{fraction.scanned}, \code{note}.
 #' @export
@@ -161,8 +161,8 @@ morie_ragRet_ivf_search <- function(query, corpus, index, k.top = 5L,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param approximate See Usage.
-#' @param exact See Usage.
+#' @param approximate Coerced to integer by the body, with \code{as.integer}.
+#' @param exact Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{recall}, \code{hits}, \code{k}, \code{missed}.
 #' @export
 morie_ragRet_recall_at_k <- function(approximate, exact) {
@@ -180,8 +180,8 @@ morie_ragRet_recall_at_k <- function(approximate, exact) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param doc.scores See Usage.
-#' @param token.probs See Usage.
+#' @param doc.scores Coerced to numeric by the body, with \code{as.numeric}.
+#' @param token.probs Iterated over elementwise, with \code{lapply}.
 #' @param mode One of \code{"sequence"}, \code{"token"}. Defaults to \code{"sequence"}.
 #' @return Nothing; this branch always raises.
 #' @export

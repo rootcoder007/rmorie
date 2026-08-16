@@ -9,7 +9,7 @@ morie_prxgms_lasso_fista(A, b, lam, max.iter = 500L, tol = 1e-10, accelerate = T
 }
 \arguments{
 \item{A}{A matrix; passed to \code{as.matrix}.}
-\item{b}{See Usage.}
+\item{b}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{lam}{Numeric; combined arithmetically in the body.}
 \item{max.iter}{Passed to \code{morie_prxgms_prox_gradient}. Defaults to \code{500L}.}
 \item{tol}{Passed to \code{morie_prxgms_prox_gradient}. Defaults to \code{1e-10}.}

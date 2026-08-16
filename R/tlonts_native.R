@@ -68,9 +68,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param series See Usage.
+#' @param series Coerced to numeric by the body, with \code{as.numeric}.
 #' @param t Numeric; passed to \code{min}.
-#' @param lags Defaults to \code{2}.
+#' @param lags Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
 #' @return A vector, from \code{c}.
 #' @export
 lag_summary <- function(series, t, lags = 2) {
@@ -101,10 +101,10 @@ lag_summary <- function(series, t, lags = 2) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
-#' @param nodes See Usage.
-#' @param shift Defaults to \code{NULL}.
-#' @param prob Defaults to \code{NULL}.
+#' @param A Coerced to numeric by the body, with \code{as.numeric}.
+#' @param nodes Coerced to integer by the body, with \code{as.integer}.
+#' @param shift Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param prob Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{intervened}, \code{nodes}, \code{n_intervened}, \code{kind}.
 #' @export
 stochastic_intervention <- function(A, nodes, shift = NULL, prob = NULL) {
@@ -142,7 +142,7 @@ stochastic_intervention <- function(A, nodes, shift = NULL, prob = NULL) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param D See Usage.
+#' @param D Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{variance}, \code{se}, \code{T}, \code{note}.
 #' @export
 martingale_variance <- function(D) {
@@ -165,9 +165,9 @@ martingale_variance <- function(D) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param D See Usage.
-#' @param past See Usage.
-#' @param tol Defaults to \code{0.2}.
+#' @param D Coerced to numeric by the body, with \code{as.numeric}.
+#' @param past Coerced to numeric by the body, with \code{as.numeric}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.2}.
 #' @return A list with \code{correlation}, \code{is_martingale}, \code{note}.
 #' @export
 martingale_check <- function(D, past, tol = 0.2) {
@@ -196,13 +196,13 @@ martingale_check <- function(D, past, tol = 0.2) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Y See Usage.
-#' @param A See Usage.
+#' @param Y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param A Coerced to numeric by the body, with \code{as.numeric}.
 #' @param Z A matrix; indexed by row and column.
 #' @param Q_fn See Usage.
 #' @param g_fn See Usage.
-#' @param target_prob See Usage.
-#' @param burn_in Defaults to \code{10}.
+#' @param target_prob Coerced to numeric by the body, with \code{as.numeric}.
+#' @param burn_in Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
 #' @return A list with \code{estimate}, \code{psi}, \code{path}, \code{se}, \code{ci}, \code{T_scored}, \code{method}, \code{note}.
 #' @export
 online_tmle_series <- function(Y, A, Z, Q_fn, g_fn, target_prob, burn_in = 10) {

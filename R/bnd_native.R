@@ -33,9 +33,9 @@
 #'
 #' @param cv A vector; its length is taken.
 #' @param A_ub Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
-#' @param b_ub Defaults to \code{NULL}.
+#' @param b_ub Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param A_eq Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
-#' @param b_eq Defaults to \code{NULL}.
+#' @param b_eq Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param lower See Usage.
 #' @param upper A vector; indexed elementwise.
 #' @return A list with \code{status}, \code{x}, \code{fun}.

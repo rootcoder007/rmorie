@@ -8,8 +8,8 @@
 positivity_check(g, delta = 0.01)
 }
 \arguments{
-\item{g}{See Usage.}
-\item{delta}{Defaults to \code{0.01}.}
+\item{g}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{delta}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.}
 }
 \description{
 A step of the tlgcmp_native implementation. Called by \code{morie_tlgcmp}. See the file header for the source the module follows.

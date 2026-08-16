@@ -12,7 +12,7 @@
 \item{q}{Numeric; combined arithmetically in the body.}
 \item{p}{Numeric; combined arithmetically in the body.}
 \item{eps}{Numeric; combined arithmetically in the body.}
-\item{steps}{See Usage.}
+\item{steps}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the baysmplr_native implementation. Called by \code{.baysmplr_build_tree}, \code{morie_baysmplr_hmc}. See the file header for the source the module follows.

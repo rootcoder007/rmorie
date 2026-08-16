@@ -8,7 +8,7 @@
 .s03vdc(i, base = 2L)
 }
 \arguments{
-\item{i}{See Usage.}
+\item{i}{Coerced to integer by the body, with \code{as.integer}.}
 \item{base}{Numeric; combined arithmetically in the body. Defaults to \code{2L}.}
 }
 \description{

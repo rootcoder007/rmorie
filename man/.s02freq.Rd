@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{M}{A matrix; passed to \code{as.matrix}.}
-\item{freq}{Defaults to \code{NULL}.}
+\item{freq}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 phat = colMeans(X)/2.

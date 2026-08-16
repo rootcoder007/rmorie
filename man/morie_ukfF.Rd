@@ -10,10 +10,10 @@ morie_ukfF(f, h, Q, R, x0, P0, measurements, kappa = NULL)
 \arguments{
 \item{f}{Passed to \code{.ukfF_ut}.}
 \item{h}{Passed to \code{.ukfF_ut}.}
-\item{Q}{See Usage.}
+\item{Q}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{R}{A matrix; passed to \code{as.matrix}.}
-\item{x0}{See Usage.}
-\item{P0}{See Usage.}
+\item{x0}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{P0}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{measurements}{See Usage.}
 \item{kappa}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 }

@@ -10,7 +10,7 @@
 \arguments{
 \item{V}{A matrix; indexed by row and column.}
 \item{r}{A count; the body uses it as \code{seq_len(...)}.}
-\item{maxiter}{See Usage.}
+\item{maxiter}{Coerced to integer by the body, with \code{as.integer}.}
 \item{tol}{Numeric; combined arithmetically in the body.}
 \item{seed}{Passed to \code{.morie_bx_rng}.}
 \item{cost}{See Usage.}

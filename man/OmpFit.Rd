@@ -11,7 +11,7 @@ OmpFit(x, D, sparsity = NULL, tol = 1e-10)
 \item{x}{A vector; its length is taken.}
 \item{D}{Passed to \code{.morie_bx_mat}.}
 \item{sparsity}{Passed to \code{.morie_bx_omp}.}
-\item{tol}{Defaults to \code{1e-10}.}
+\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-10}.}
 }
 \description{
 orthogonalised variant.  Pati, Rezaiifar and Krishnaprasad, Proc. 27th Asilomar Conf., pp. 40-44, 1993.  Re-solving the whole active set after every pick keeps the residue orthogonal to it, so each atom is chosen at most once and k atoms give the best k-term fit on that support.

@@ -8,10 +8,10 @@
 NormDist(m1, m2, s1, s2)
 }
 \arguments{
-\item{m1}{See Usage.}
-\item{m2}{See Usage.}
-\item{s1}{See Usage.}
-\item{s2}{See Usage.}
+\item{m1}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{m2}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{s1}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{s2}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 the SUM of the SDs, not their quadrature sum -- this is not the Fisher criterion.  The book states the limitation: d_n = 0 whenever m1 = m2, however different the dispersions, so classes separated only by variance score zero.  The divergence has no such blind spot.

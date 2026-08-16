@@ -8,8 +8,8 @@
 LogSep(x, p)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{p}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{p}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 book states that side condition, so a zero is rejected rather than giving -Inf; a negative factor needs the complex-log route.

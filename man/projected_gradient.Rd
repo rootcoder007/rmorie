@@ -10,9 +10,9 @@ projected_gradient(f, grad, x0, project, step = NULL, rule = "backtracking", max
 \arguments{
 \item{f}{See Usage.}
 \item{grad}{See Usage.}
-\item{x0}{See Usage.}
+\item{x0}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{project}{See Usage.}
-\item{step}{Defaults to \code{NULL}.}
+\item{step}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{rule}{One of \code{"fista"}, \code{"fixed"}. Defaults to \code{"backtracking"}.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{2000}.}
 \item{tol}{Defaults to \code{1e-10}.}

@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{n}{A count; the body uses it as \code{seq_len(...)}.}
-\item{base}{Defaults to \code{2L}.}
+\item{base}{Iterated over elementwise, with \code{vapply}. Defaults to \code{2L}.}
 }
 \description{
 A step of the helpers_s03 implementation. Called by \code{.s03normdraws}. See the file header for the source the module follows.

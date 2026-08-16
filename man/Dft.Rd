@@ -8,7 +8,7 @@
 Dft(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 with no power-of-two requirement.  eq (3.85) is the same sum split into cos and sin parts, returned here so the two cannot disagree.

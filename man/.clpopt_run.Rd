@@ -13,7 +13,7 @@
 \item{cols}{A vector; indexed elementwise.}
 \item{rule}{Compared against \code{"bland"}.}
 \item{blocked}{See Usage.}
-\item{max_iter}{See Usage.}
+\item{max_iter}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the clpopt_native implementation. Called by \code{simplex}. See the file header for the source the module follows.

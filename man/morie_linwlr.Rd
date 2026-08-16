@@ -11,7 +11,7 @@ morie_linwlr(y, A, W = NULL, propensity = NULL, method = "gest", baseline = NULL
 \item{y}{Passed to \code{.linwlr_vec}.}
 \item{A}{Passed to \code{.linwlr_vec}.}
 \item{W}{Optional; may be \code{NULL}. Passed to \code{.linwlr_mat}.}
-\item{propensity}{Defaults to \code{NULL}.}
+\item{propensity}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{method}{One of \code{"gest"}, \code{"wls"}. Defaults to \code{"gest"}.}
 \item{baseline}{Optional; may be \code{NULL}. Passed to \code{.linwlr_mat}.}
 \item{pi_covariates}{Optional; may be \code{NULL}. Passed to \code{.linwlr_mat}.}

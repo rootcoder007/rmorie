@@ -8,8 +8,8 @@
 .morie_rg_evenodd(x, n = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{n}{Defaults to \code{NULL}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the rangayyan_xfrm implementation. Called by \code{EvenOdd}, \code{EvenPart}, \code{OddPart}. See the file header for the source the module follows.

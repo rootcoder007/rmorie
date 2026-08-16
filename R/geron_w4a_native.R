@@ -35,7 +35,7 @@
 #' the source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
-#' @param seed See Usage.
+#' @param seed Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{u}, as built in the body.
 #' @export
 .w4a_lcg_u <- function(n, seed) {

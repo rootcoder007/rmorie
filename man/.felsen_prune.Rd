@@ -8,7 +8,7 @@
 .felsen_prune(node, site, pi)
 }
 \arguments{
-\item{node}{See Usage.}
+\item{node}{Character; the body checks with \code{is.character}.}
 \item{site}{A vector; indexed elementwise.}
 \item{pi}{Passed to \code{.felsen_prune}.}
 }

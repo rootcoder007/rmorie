@@ -10,10 +10,10 @@ svdd(X, C = 1, kernel = "linear", gamma = 1, tol = 1e-10, max_sweeps = 500L)
 \arguments{
 \item{X}{A matrix; indexed by row and column.}
 \item{C}{Numeric; passed to \code{min}. Defaults to \code{1}.}
-\item{kernel}{Defaults to \code{"linear"}.}
+\item{kernel}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"linear"}.}
 \item{gamma}{Passed to \code{.deep_svdd_kernel}. Defaults to \code{1}.}
 \item{tol}{Defaults to \code{1e-10}.}
-\item{max_sweeps}{Defaults to \code{500L}.}
+\item{max_sweeps}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500L}.}
 }
 \description{
 A step of the deepSVDD_native implementation. No other function in the package calls it. See the file header for the source the module follows.

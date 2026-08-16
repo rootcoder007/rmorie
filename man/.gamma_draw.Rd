@@ -8,7 +8,7 @@
 .gamma_draw(shape, scale, e)
 }
 \arguments{
-\item{shape}{See Usage.}
+\item{shape}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{scale}{Passed to \code{.gamma_draw}.}
 \item{e}{Passed to \code{.ghc_unif}.}
 }

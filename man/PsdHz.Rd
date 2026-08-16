@@ -8,10 +8,10 @@
 PsdHz(psd, fs, n = NULL, bands = NULL)
 }
 \arguments{
-\item{psd}{See Usage.}
-\item{fs}{See Usage.}
-\item{n}{Defaults to \code{NULL}.}
-\item{bands}{Defaults to \code{NULL}.}
+\item{psd}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{fs}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{bands}{Optional; may be \code{NULL}. Iterated over elementwise, with \code{lapply}.}
 }
 \description{
 its bins times the bin width fs/N.  The bin width turns a density into a power; omitting it leaves a quantity that changes with the record length, so two band powers at different N are not comparable.

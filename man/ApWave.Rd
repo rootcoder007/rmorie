@@ -8,14 +8,14 @@
 ApWave(t, v_rest = -70, v_peak = 30, t_rise = 0.5, t_fall = 1, t_onset = 0, v_undershoot = NULL, t_recover = NULL)
 }
 \arguments{
-\item{t}{See Usage.}
+\item{t}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{v_rest}{Numeric; combined arithmetically in the body. Defaults to \code{-70}.}
 \item{v_peak}{Numeric; combined arithmetically in the body. Defaults to \code{30}.}
 \item{t_rise}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
 \item{t_fall}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{t_onset}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
-\item{v_undershoot}{Defaults to \code{NULL}.}
-\item{t_recover}{Defaults to \code{NULL}.}
+\item{v_undershoot}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{t_recover}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the rangayyan_phys implementation. No other function in the package calls it. See the file header for the source the module follows.

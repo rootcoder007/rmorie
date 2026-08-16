@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{beta}{A vector; indexed elementwise.}
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the sdcfst_native implementation. Called by \code{morie_sdcfst}. See the file header for the source the module follows.

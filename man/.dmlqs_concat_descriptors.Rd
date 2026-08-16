@@ -8,8 +8,8 @@
 .dmlqs_concat_descriptors(learned, descriptors)
 }
 \arguments{
-\item{learned}{See Usage.}
-\item{descriptors}{See Usage.}
+\item{learned}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{descriptors}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}. See the file header for the source the module follows.

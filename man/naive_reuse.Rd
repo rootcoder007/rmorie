@@ -9,7 +9,7 @@ naive_reuse(define_and_estimate, n, seed = 0L)
 }
 \arguments{
 \item{define_and_estimate}{See Usage.}
-\item{n}{See Usage.}
+\item{n}{Coerced to integer by the body, with \code{as.integer}.}
 \item{seed}{Defaults to \code{0L}.}
 }
 \description{

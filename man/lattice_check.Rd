@@ -8,7 +8,7 @@
 lattice_check(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the blstn_native implementation. Called by \code{morie_karlin_altschul}, \code{morie_score_distribution}. See the file header for the source the module follows.

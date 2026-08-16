@@ -133,7 +133,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pairs See Usage.
+#' @param pairs Iterated over elementwise, with \code{lapply}.
 #' @param orientation Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param spread One of \code{"mad"}, \code{"sd"}. Defaults to \code{"mad"}.
 #' @return A list with \code{median}, \code{sd}, \code{spread}, \code{orientation}, \code{n}.
@@ -260,7 +260,7 @@ morie_sv_dl_classify_pair <- function(p, median, sd, orientation=c("+", "-"),
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pairs See Usage.
+#' @param pairs Iterated over elementwise, with \code{lapply}.
 #' @param median Numeric; combined arithmetically in the body.
 #' @param sd Numeric; combined arithmetically in the body.
 #' @param label A vector; indexed elementwise.
@@ -406,7 +406,7 @@ morie_sv_dl_maximal_clique <- function(members, edges) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pairs See Usage.
+#' @param pairs Iterated over elementwise, with \code{lapply}.
 #' @param median Optional; may be \code{NULL}. Passed to \code{morie_sv_dl_classify_pair}.
 #' @param sd Optional; may be \code{NULL}. Passed to \code{morie_sv_dl_classify_pair}.
 #' @param orientation Optional; may be \code{NULL}. Passed to \code{morie_sv_dl_insert_size_stats}.
@@ -508,7 +508,7 @@ morie_sv_dl_paired_end_calls <- function(pairs, median=NULL, sd=NULL,
 #' tandem duplication has its two halves swapped, an inversion has its
 #' second half reverse complemented, a translocation gets both.
 #'
-#' @param ref See Usage.
+#' @param ref Coerced to character by the body, with \code{as.character}.
 #' @param sv_type One of \code{"DEL"}, \code{"DUP"}, \code{"INV"}.
 #' @return A character value.
 #' @export
@@ -542,10 +542,10 @@ morie_sv_dl_deletion_type_reference <- function(ref, sv_type) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param read See Usage.
-#' @param ref See Usage.
+#' @param read Coerced to character by the body, with \code{as.character}.
+#' @param ref Coerced to character by the body, with \code{as.character}.
 #' @param k Numeric; combined arithmetically in the body. Defaults to \code{7}.
-#' @param k_min Defaults to \code{3}.
+#' @param k_min Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
 #' @param require_half A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{[}.
 #' @export
@@ -618,8 +618,8 @@ morie_sv_dl_kmer_diagonals <- function(read, ref, k=7, k_min=3,
 #'
 #' places each read in a common frame. Returns list(consensus, start).
 #'
-#' @param reads See Usage.
-#' @param starts Defaults to \code{NULL}.
+#' @param reads Coerced to character by the body, with \code{as.character}.
+#' @param starts Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{consensus}, \code{start}.
 #' @export
 morie_sv_dl_split_read_consensus <- function(reads, starts=NULL) {
@@ -720,8 +720,8 @@ morie_sv_dl_split_read_consensus <- function(reads, starts=NULL) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param consensus See Usage.
-#' @param ref See Usage.
+#' @param consensus Coerced to character by the body, with \code{as.character}.
+#' @param ref Coerced to character by the body, with \code{as.character}.
 #' @param match Passed to \code{.sv_dl_gotoh}. Defaults to \code{1}.
 #' @param mismatch Passed to \code{.sv_dl_gotoh}. Defaults to \code{-2}.
 #' @param gap_open Passed to \code{.sv_dl_gotoh}. Defaults to \code{-4}.
@@ -796,7 +796,7 @@ morie_sv_dl_optimal_split <- function(f, r) {
 #' @param reads A vector; its length is taken and its elements indexed.
 #' @param k Passed to \code{morie_sv_dl_kmer_diagonals}. Defaults to \code{7}.
 #' @param k_min Passed to \code{morie_sv_dl_kmer_diagonals}. Defaults to \code{3}.
-#' @param min_split_support Defaults to \code{2}.
+#' @param min_split_support Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
 #' @param max_length_diff Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
 #' @param match Passed to \code{morie_sv_dl_gotoh_score_vectors}. Defaults to \code{1}.
 #' @param mismatch Passed to \code{morie_sv_dl_gotoh_score_vectors}. Defaults to \code{-2}.

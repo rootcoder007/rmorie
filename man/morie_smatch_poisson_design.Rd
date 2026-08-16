@@ -9,8 +9,8 @@ morie_smatch_poisson_design(cases, risk_periods, age_breaks = numeric(0))
 }
 \arguments{
 \item{cases}{See Usage.}
-\item{risk_periods}{See Usage.}
-\item{age_breaks}{Defaults to \code{numeric(0)}.}
+\item{risk_periods}{Iterated over elementwise, with \code{lapply}.}
+\item{age_breaks}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{numeric(0)}.}
 }
 \description{
 A step of the smatch_native implementation. Called by \code{morie_smatch_sccs_poisson_fit}. See the file header for the source the module follows.

@@ -73,9 +73,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param t_user See Usage.
-#' @param beta Defaults to \code{.timeRS_BETA}.
+#' @param t Coerced to numeric by the body, with \code{as.numeric}.
+#' @param t_user Coerced to numeric by the body, with \code{as.numeric}.
+#' @param beta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{.timeRS_BETA}.
 #' @return A numeric value.
 #' @export
 .timeRS_deviation <- function(t, t_user, beta = .timeRS_BETA) {
@@ -94,9 +94,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param bin_days Defaults to \code{70}.
-#' @param n_bins Defaults to \code{30}.
+#' @param t Coerced to numeric by the body, with \code{as.numeric}.
+#' @param bin_days Coerced to integer by the body, with \code{as.integer}. Defaults to \code{70}.
+#' @param n_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{30}.
 #' @return A numeric value.
 #' @export
 .timeRS_time_bin <- function(t, bin_days = 70, n_bins = 30) {
@@ -115,8 +115,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param b_u See Usage.
-#' @param alpha_u See Usage.
+#' @param b_u Coerced to numeric by the body, with \code{as.numeric}.
+#' @param alpha_u Coerced to numeric by the body, with \code{as.numeric}.
 #' @param t Passed to \code{.timeRS_deviation}.
 #' @param t_user Passed to \code{.timeRS_deviation}.
 #' @param per_day Optional; may be \code{NULL}. A vector; indexed elementwise.
@@ -150,7 +150,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param b_i See Usage.
+#' @param b_i Coerced to numeric by the body, with \code{as.numeric}.
 #' @param bins A vector; its length is taken and its elements indexed.
 #' @param t Passed to \code{.timeRS_time_bin}.
 #' @param bin_days Passed to \code{.timeRS_time_bin}. Defaults to \code{70}.
@@ -174,15 +174,15 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param mu See Usage.
+#' @param mu Coerced to numeric by the body, with \code{as.numeric}.
 #' @param b_u Passed to \code{.timeRS_user_bias}.
 #' @param alpha_u Passed to \code{.timeRS_user_bias}.
 #' @param t_user Passed to \code{.timeRS_user_bias}.
 #' @param b_i Passed to \code{.timeRS_item_bias}.
 #' @param item_bins A vector; its length is taken.
 #' @param t Passed to \code{.timeRS_user_bias}.
-#' @param p_u Defaults to \code{NULL}.
-#' @param q_i Defaults to \code{NULL}.
+#' @param p_u Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param q_i Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param per_day Passed to \code{.timeRS_user_bias}.
 #' @param bin_days Passed to \code{.timeRS_item_bias}. Defaults to \code{70}.
 #' @param beta Passed to \code{.timeRS_user_bias}. Defaults to \code{.timeRS_BETA}.
@@ -218,11 +218,11 @@
 #' source it follows.
 #'
 #' @param ratings A matrix; indexed by row and column.
-#' @param n_users See Usage.
-#' @param n_items See Usage.
+#' @param n_users Coerced to integer by the body, with \code{as.integer}.
+#' @param n_items Coerced to integer by the body, with \code{as.integer}.
 #' @param bin_days Passed to \code{.timeRS_time_bin}. Defaults to \code{70}.
 #' @param n_bins Passed to \code{.timeRS_time_bin}. Defaults to \code{30}.
-#' @param epochs Defaults to \code{40}.
+#' @param epochs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{40}.
 #' @param lr Numeric; combined arithmetically in the body. Defaults to \code{0.005}.
 #' @param reg Numeric; combined arithmetically in the body. Defaults to \code{0.02}.
 #' @param beta Passed to \code{.timeRS_deviation}. Defaults to \code{.timeRS_BETA}.

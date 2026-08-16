@@ -99,7 +99,7 @@ names(.MAFFT_PHAT) <- .MAFFT_AA
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param group See Usage.
+#' @param group Iterated over elementwise, with \code{vapply}.
 #' @param weights Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @param seq_type Compared against \code{"nt"}. Defaults to \code{"aa"}.
 #' @return A list with \code{vol}, \code{pol}.
@@ -276,7 +276,7 @@ correlation <- function(group1, group2, weights1 = NULL, weights2 = NULL,
 #'
 #' @param lags A vector; its length is taken and its elements indexed.
 #' @param c A vector; its length is taken.
-#' @param n_peaks See Usage.
+#' @param n_peaks Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{[}.
 #' @export
 .mafft_peaks <- function(lags, c, n_peaks) {
@@ -338,7 +338,7 @@ correlation <- function(group1, group2, weights1 = NULL, weights2 = NULL,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pam Defaults to \code{200L}.
+#' @param pam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{200L}.
 #' @param scale Numeric; combined arithmetically in the body. Defaults to \code{10}.
 #' @return A list with \code{matrix}, \code{freqs}, \code{P}, \code{Q}, \code{pam}, \code{rate}.
 #' @export
@@ -644,13 +644,13 @@ normalized_similarity_matrix <- function(raw_matrix = NULL, freqs = NULL,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param group1 See Usage.
-#' @param group2 See Usage.
+#' @param group1 Iterated over elementwise, with \code{vapply}.
+#' @param group2 Iterated over elementwise, with \code{vapply}.
 #' @param scoring A list; the body reads \code{$matrix} from it.
 #' @param weights1 Defaults to \code{NULL}.
 #' @param weights2 Defaults to \code{NULL}.
 #' @param s_op Passed to \code{.mafft_nw}. Defaults to \code{2.4}.
-#' @param anchors Defaults to \code{NULL}.
+#' @param anchors Optional; may be \code{NULL}. Iterated over elementwise, with \code{lapply}.
 #' @return The value of \code{.mafft_nw}.
 #' @export
 group_align <- function(group1, group2, scoring, weights1 = NULL, weights2 = NULL,
@@ -706,8 +706,8 @@ group_align <- function(group1, group2, scoring, weights1 = NULL, weights2 = NUL
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param group1 See Usage.
-#' @param group2 See Usage.
+#' @param group1 Iterated over elementwise, with \code{vapply}.
+#' @param group2 Iterated over elementwise, with \code{vapply}.
 #' @param scoring A list; the body reads \code{$matrix} from it.
 #' @param weights1 Defaults to \code{NULL}.
 #' @param weights2 Defaults to \code{NULL}.
@@ -1016,7 +1016,7 @@ progressive_align <- function(seqs, scoring, tree = NULL, seq_type = "aa",
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param alignment See Usage.
+#' @param alignment Iterated over elementwise, with \code{vapply}.
 #' @param scoring A list; the body reads \code{$matrix} from it.
 #' @param s_op Numeric; combined arithmetically in the body. Defaults to \code{2.4}.
 #' @param weights Defaults to \code{NULL}.
@@ -1080,7 +1080,7 @@ wsp_score <- function(alignment, scoring, s_op = 2.4, weights = NULL) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param alignment See Usage.
+#' @param alignment Iterated over elementwise, with \code{vapply}.
 #' @param scoring See Usage.
 #' @param tree Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @param s_op Defaults to \code{2.4}.
@@ -1158,7 +1158,7 @@ iterative_refine <- function(alignment, scoring, tree = NULL, s_op = 2.4,
 #' @param raw_matrix Defaults to \code{NULL}.
 #' @param freqs Defaults to \code{NULL}.
 #' @param s_a Defaults to \code{0.06}.
-#' @param s_op Defaults to \code{2.4}.
+#' @param s_op Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2.4}.
 #' @param matrix Defaults to \code{"normalized"}.
 #' @param window Defaults to \code{30L}.
 #' @param n_peaks Defaults to \code{20L}.

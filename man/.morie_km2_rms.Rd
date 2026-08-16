@@ -8,8 +8,8 @@
 .morie_km2_rms(x, gamma = NULL, eps = 1e-06)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{gamma}{Defaults to \code{NULL}.}
+\item{x}{A matrix; the body checks with \code{is.matrix}.}
+\item{gamma}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{eps}{Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.}
 }
 \description{

@@ -8,9 +8,9 @@
 birth_log_jacobian(h_j, h_new_left, h_new_right)
 }
 \arguments{
-\item{h_j}{See Usage.}
-\item{h_new_left}{See Usage.}
-\item{h_new_right}{See Usage.}
+\item{h_j}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{h_new_left}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{h_new_right}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the bayrjmcmc_native implementation. Called by \code{changepoint_rjmcmc}. See the file header for the source the module follows.

@@ -207,8 +207,8 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' @param M A matrix; indexed by row and column.
 #' @param n Numeric; combined arithmetically in the body.
 #' @param p A count; the body uses it as \code{seq_len(...)}.
-#' @param n_dirs See Usage.
-#' @param seed See Usage.
+#' @param n_dirs Coerced to integer by the body, with \code{as.integer}.
+#' @param seed Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{dirs}, \code{exhaustive}.
 #' @export
 .stahdo_subsample_dirs <- function(M, n, p, n_dirs, seed) {
@@ -259,8 +259,8 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' source it follows.
 #'
 #' @param p Passed to \code{.ghc_unif}.
-#' @param n_dirs See Usage.
-#' @param seed See Usage.
+#' @param n_dirs Coerced to integer by the body, with \code{as.integer}.
+#' @param seed Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .stahdo_random_dirs <- function(p, n_dirs, seed) {
@@ -338,7 +338,7 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' source it follows.
 #'
 #' @param r Numeric; combined arithmetically in the body.
-#' @param cutoff See Usage.
+#' @param cutoff Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{ifelse}.
 #' @export
 .stahdo_weight <- function(r, cutoff) {
@@ -423,7 +423,7 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' @param directions Passed to \code{.stahdo_outlyingness}. Defaults to \code{"subsample"}.
 #' @param n_directions Passed to \code{.stahdo_outlyingness}. Defaults to \code{500}.
 #' @param seed Passed to \code{.stahdo_outlyingness}. Defaults to \code{1}.
-#' @param cutoff Defaults to \code{NULL}.
+#' @param cutoff Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{estimate}, \code{location}, \code{scatter}, \code{outlyingness}, \code{weights}, \code{cutoff}, \code{n_directions}, \code{n_used}, \code{exhaustive}, \code{directions}, \code{n_downweighted}, \code{n}, \code{p}, \code{method}.
 #' @export
 .stahdo_stahel_donoho <- function(X, directions = "subsample",

@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{X}{A matrix; passed to \code{\%*\%}.}
-\item{beta}{See Usage.}
+\item{beta}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{link_kind}{Passed to \code{.schab_link}. Defaults to \code{"log"}.}
 }
 \description{

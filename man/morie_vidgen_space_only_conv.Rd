@@ -8,7 +8,7 @@
 morie_vidgen_space_only_conv(video, kernel)
 }
 \arguments{
-\item{video}{See Usage.}
+\item{video}{Iterated over elementwise, with \code{lapply}.}
 \item{kernel}{Passed to \code{.vidgen_mat}.}
 }
 \description{

@@ -9,8 +9,8 @@ morie_unclr_lr_impute(X, dl, n_iter, draw = NULL)
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
-\item{dl}{See Usage.}
-\item{n_iter}{See Usage.}
+\item{dl}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n_iter}{Coerced to integer by the body, with \code{as.integer}.}
 \item{draw}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 }
 \description{

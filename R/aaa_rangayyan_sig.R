@@ -8,8 +8,8 @@
 #' Hamming window -- the EFFECTIVE sample count after windowing, which
 #' is what distinguishes this from the textbook N log(sigma^2) + 2p.
 #'
-#' @param prediction_errors See Usage.
-#' @param n_samples See Usage.
+#' @param prediction_errors Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n_samples Coerced to integer by the body, with \code{as.integer}.
 #' @param window Character; passed to \code{tolower}. Defaults to \code{"hamming"}.
 #' @return A list with \code{order}, \code{criterion}, \code{n_effective}, \code{method}.
 #' @export
@@ -68,10 +68,10 @@ AICorder <- function(prediction_errors, n_samples, window = "hamming") {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1}.
-#' @param n_segments Defaults to \code{NULL}.
-#' @param segment_length Defaults to \code{NULL}.
+#' @param n_segments Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param segment_length Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{psd}, \code{freqs}, \code{n_segments}, \code{segment_length}, \code{method}.
 #' @export
 BartlettPSD <- function(x, fs = 1, n_segments = NULL,
@@ -117,8 +117,8 @@ BartlettPSD <- function(x, fs = 1, n_segments = NULL,
 #' through the AR coefficients avoids the phase unwrapping the FFT
 #' cepstrum needs (Section 4.7.3).
 #'
-#' @param a_coeffs See Usage.
-#' @param gain Defaults to \code{NULL}.
+#' @param a_coeffs Coerced to numeric by the body, with \code{as.numeric}.
+#' @param gain Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{cepstrum}, \code{c0}, \code{order}, \code{method}.
 #' @export
 ARtoCepstrum <- function(a_coeffs, gain = NULL) {

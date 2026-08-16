@@ -8,10 +8,10 @@
 PzForm(zeros, poles, z = NULL, gain = 1)
 }
 \arguments{
-\item{zeros}{See Usage.}
-\item{poles}{See Usage.}
-\item{z}{Defaults to \code{NULL}.}
-\item{gain}{Defaults to \code{1}.}
+\item{zeros}{Coerced to complex by the body, with \code{as.complex}.}
+\item{poles}{Coerced to complex by the body, with \code{as.complex}.}
+\item{z}{Optional; may be \code{NULL}. Coerced to complex by the body, with \code{as.complex}.}
+\item{gain}{Coerced to complex by the body, with \code{as.complex}. Defaults to \code{1}.}
 }
 \description{
 on the unit circle makes H undefined there; outside it, a causal system is unstable.  Both are reported.

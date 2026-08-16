@@ -55,7 +55,7 @@ morie_tlcvnp <- function(X, x0, bandwidths, kernel = "epanechnikov",
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param u See Usage.
+#' @param u Coerced to numeric by the body, with \code{as.numeric}.
 #' @param kernel One of \code{"epanechnikov"}, \code{"uniform"}. Defaults to \code{"epanechnikov"}.
 #' @return A numeric value.
 #' @export
@@ -77,9 +77,9 @@ kernel_smooth <- function(u, kernel = "epanechnikov") {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param x0 See Usage.
-#' @param h See Usage.
+#' @param X Coerced to numeric by the body, with \code{as.numeric}.
+#' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param h Coerced to numeric by the body, with \code{as.numeric}.
 #' @param kernel Defaults to \code{"epanechnikov"}.
 #' @return A list with \code{psi_h}, \code{se}, \code{h}, \code{n}, \code{influence_curve}, \code{note}.
 #' @export
@@ -109,8 +109,8 @@ smoothed_parameter <- function(X, x0, h, kernel = "epanechnikov") {
 #'
 #' @param true_density See Usage.
 #' @param x0 See Usage.
-#' @param h See Usage.
-#' @param smoothness Defaults to \code{2}.
+#' @param h Coerced to numeric by the body, with \code{as.numeric}.
+#' @param smoothness Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2}.
 #' @return A list with \code{bias_order}, \code{h}, \code{smoothness}, \code{note}.
 #' @export
 smoothing_bias <- function(true_density, x0, h, smoothness = 2.0) {
@@ -129,10 +129,10 @@ smoothing_bias <- function(true_density, x0, h, smoothness = 2.0) {
 #'
 #' @param X See Usage.
 #' @param x0 See Usage.
-#' @param bandwidths See Usage.
+#' @param bandwidths Coerced to numeric by the body, with \code{as.numeric}.
 #' @param kernel Defaults to \code{"epanechnikov"}.
 #' @param criterion One of \code{"lepski"}, \code{"smallest_se"}. Defaults to \code{"lepski"}.
-#' @param C Defaults to \code{1}.
+#' @param C Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{h}, \code{fit}, \code{criterion}, \code{all}, \code{note}.
 #' @export
 select_bandwidth <- function(X, x0, bandwidths,
@@ -179,12 +179,12 @@ select_bandwidth <- function(X, x0, bandwidths,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X Coerced to numeric by the body, with \code{as.numeric}.
 #' @param x0 See Usage.
 #' @param bandwidths See Usage.
 #' @param kernel Defaults to \code{"epanechnikov"}.
-#' @param V Defaults to \code{5L}.
-#' @param seed Defaults to \code{0L}.
+#' @param V Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.
 #' @return A list with \code{estimate}, \code{psi}, \code{se}, \code{ci}, \code{bandwidths}, \code{fold_estimates}, \code{V}, \code{method}, \code{note}.
 #' @export
 cv_tmle_smoothed <- function(X, x0, bandwidths, kernel = "epanechnikov",

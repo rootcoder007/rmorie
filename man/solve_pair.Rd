@@ -10,7 +10,7 @@ solve_pair(i, j, alpha, y, K, grad, C)
 \arguments{
 \item{i}{Passed to \code{.svmopt_bounds}.}
 \item{j}{Passed to \code{.svmopt_bounds}.}
-\item{alpha}{See Usage.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{y}{A vector; indexed elementwise.}
 \item{K}{A matrix; indexed by row and column.}
 \item{grad}{A vector; indexed elementwise.}

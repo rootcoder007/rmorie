@@ -164,7 +164,7 @@
 #' trade the book makes explicit.
 #'
 #' @param u Numeric; combined arithmetically in the body.
-#' @param m Defaults to \code{4L}.
+#' @param m Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.
 #' @return Nothing; this branch always raises.
 #' @export
 .fz_muller <- function(u, m = 4L) {
@@ -208,7 +208,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param h See Usage.
+#' @param h Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{h}, as built in the body.
 #' @export
 .fz_check_h <- function(h) {
@@ -534,8 +534,8 @@ morie_fauzi_boundary_free_kde <- function(x, grid = NULL, h = NULL,
 #' source it follows.
 #'
 #' @param x Passed to \code{.fz_check_sample}.
-#' @param t_grid See Usage.
-#' @param h See Usage.
+#' @param t_grid Coerced to numeric by the body, with \code{as.numeric}.
+#' @param h Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param transform Passed to \code{.fz_transform}.
 #' @return A list with \code{tr}, \code{tg}, \code{zx}, \code{zt}, \code{hh}, \code{n}.
 #' @export
@@ -658,8 +658,8 @@ morie_fauzi_cumulative_survival_2 <- function(x, t_grid, h = NULL,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param f_X See Usage.
+#' @param t Coerced to numeric by the body, with \code{as.numeric}.
+#' @param f_X Coerced to numeric by the body, with \code{as.numeric}.
 #' @param transform Passed to \code{.fz_transform}.
 #' @return A list with \code{tv}, \code{fx}, \code{tr}, \code{zt}, \code{gp}, \code{gpp}.
 #' @export

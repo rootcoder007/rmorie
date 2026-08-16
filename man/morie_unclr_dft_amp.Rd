@@ -8,7 +8,7 @@
 morie_unclr_dft_amp(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the unclr implementation. Called by \code{Fftperiod}. See the file header for the source the module follows.

@@ -8,8 +8,8 @@
 mixed(recommendations, top_k = NULL)
 }
 \arguments{
-\item{recommendations}{See Usage.}
-\item{top_k}{Defaults to \code{NULL}.}
+\item{recommendations}{Iterated over elementwise, with \code{lapply}.}
+\item{top_k}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the hybRC_native implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -11,7 +11,7 @@
 \item{target}{Passed to \code{.ucfR_pearson}.}
 \item{others}{A vector; its length is taken and its elements indexed.}
 \item{min_common}{Passed to \code{.ucfR_pearson}. Defaults to \code{2}.}
-\item{top_k}{Defaults to \code{NULL}.}
+\item{top_k}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{significance}{Passed to \code{.ucfR_pearson}. Defaults to \code{FALSE}.}
 }
 \description{

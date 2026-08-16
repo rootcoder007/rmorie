@@ -16,7 +16,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .gentmt_vec <- function(x) {
@@ -159,8 +159,8 @@
 #' @param y Passed to \code{.gentmt_vec}.
 #' @param A Passed to \code{.gentmt_vec}.
 #' @param H Passed to \code{.gentmt_treatment_density}.
-#' @param n_strata Defaults to \code{5}.
-#' @param degree Defaults to \code{1}.
+#' @param n_strata Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
+#' @param degree Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{se}, \code{stratum_slopes}, \code{stratum_sizes}, \code{stratum_se}, \code{gps_mean}, \code{n_strata}, \code{n}, \code{degree}.
 #' @export
 .gentmt_gps_subclassify <- function(y, A, H, n_strata = 5, degree = 1) {
@@ -227,7 +227,7 @@
 #' @param A Passed to \code{.gentmt_vec}.
 #' @param H Passed to \code{.gentmt_treatment_density}.
 #' @param doses Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
-#' @param degree Defaults to \code{1}.
+#' @param degree Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{se}, \code{doses}, \code{curve}, \code{slopes}, \code{coef}, \code{gps}, \code{n}, \code{degree}.
 #' @export
 .gentmt_dose_response_curve <- function(y, A, H, doses = NULL, degree = 1) {
@@ -306,7 +306,7 @@
 #' @param A Passed to \code{.gentmt_vec}.
 #' @param H Passed to \code{.gentmt_ip_weights}.
 #' @param method One of \code{"subclassify"}, \code{"weight"}. Defaults to \code{"weight"}.
-#' @param degree Defaults to \code{1}.
+#' @param degree Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @param n_strata Passed to \code{.gentmt_gps_subclassify}. Defaults to \code{5}.
 #' @param doses Passed to \code{.gentmt_dose_response_curve}.
 #' @param trim Passed to \code{.gentmt_ip_weights}.

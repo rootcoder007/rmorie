@@ -16,7 +16,7 @@
 \item{Q}{A matrix; indexed by row and column.}
 \item{lr}{Numeric; combined arithmetically in the body.}
 \item{reg}{Numeric; combined arithmetically in the body.}
-\item{factor}{Defaults to \code{NULL}.}
+\item{factor}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the funkM_native implementation. Called by \code{morie_funkM}. See the file header for the source the module follows.

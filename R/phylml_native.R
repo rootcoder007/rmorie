@@ -68,7 +68,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pi See Usage.
+#' @param pi Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{p}, as built in the body.
 #' @export
 .phylml_pi <- function(pi) {
@@ -97,7 +97,7 @@
 #'
 #' @param t Numeric; combined arithmetically in the body.
 #' @param pi Passed to \code{.phylml_pi}.
-#' @param u Defaults to \code{1}.
+#' @param u Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return The value of \code{M}, as built in the body.
 #' @export
 substitution_matrix <- function(t, pi = NULL, u = 1.0) {
@@ -122,7 +122,7 @@ substitution_matrix <- function(t, pi = NULL, u = 1.0) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param base See Usage.
+#' @param base Coerced to character by the body, with \code{as.character}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
 .phylml_tip_vector <- function(base) {
@@ -200,7 +200,7 @@ site_likelihood <- function(tree, seqs, site, pi = NULL, u = 1.0) {
 #' @param tree See Usage.
 #' @param seqs A vector; its length is taken.
 #' @param pi Passed to \code{.phylml_pi}.
-#' @param u Defaults to \code{1}.
+#' @param u Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
 morie_phylml <- function(tree, seqs, pi = NULL, u = 1.0) {
@@ -253,12 +253,12 @@ morie_phylml <- function(tree, seqs, pi = NULL, u = 1.0) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param make_tree See Usage.
+#' @param make_tree A function; the body checks with \code{is.function}.
 #' @param seqs Passed to \code{morie_phylml}.
 #' @param pi Passed to \code{morie_phylml}.
 #' @param u Passed to \code{morie_phylml}. Defaults to \code{1}.
-#' @param lo Defaults to \code{1e-06}.
-#' @param hi Defaults to \code{10}.
+#' @param lo Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-06}.
+#' @param hi Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{10}.
 #' @param tol Defaults to \code{1e-10}.
 #' @param max_iter Defaults to \code{200}.
 #' @return The value of \code{result}, as built in the body.

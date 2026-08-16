@@ -9,7 +9,7 @@ Shannon(p, levels = NULL)
 }
 \arguments{
 \item{p}{Passed to \code{.morie_rg_aslist}.}
-\item{levels}{Defaults to \code{NULL}.}
+\item{levels}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the rangayyan_ch3 implementation. No other function in the package calls it. See the file header for the source the module follows.

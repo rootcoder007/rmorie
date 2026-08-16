@@ -8,11 +8,11 @@
 morie_saigeg(y, G, X = NULL, mu = NULL, ratio = 1, two_sided = TRUE)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{G}{Passed to \code{.saigeg_score_statistic}.}
 \item{X}{Passed to \code{.saigeg_fit_null}.}
 \item{mu}{Optional; may be \code{NULL}. Passed to \code{.saigeg_score_statistic}.}
-\item{ratio}{Defaults to \code{1}.}
+\item{ratio}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 \item{two_sided}{Passed to \code{.saigeg_normal_pvalue}. Defaults to \code{TRUE}.}
 }
 \description{

@@ -8,10 +8,10 @@
 morie_mtr2sx(beta_x, se_x, beta_y, se_y, model = "multiplicative", weights = "first_order", theta = 0)
 }
 \arguments{
-\item{beta_x}{See Usage.}
-\item{se_x}{See Usage.}
-\item{beta_y}{See Usage.}
-\item{se_y}{See Usage.}
+\item{beta_x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{se_x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{beta_y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{se_y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{model}{One of \code{"fixed"}, \code{"multiplicative"}. Defaults to \code{"multiplicative"}.}
 \item{weights}{Compared against \code{"second_order"}. Defaults to \code{"first_order"}.}
 \item{theta}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}

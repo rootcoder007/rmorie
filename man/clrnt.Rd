@@ -16,8 +16,8 @@ clrnt(clint_in_vitro, cl_h = NULL, fu_blood = NULL, log_pd = NULL, fu_incubation
 \item{system}{Compared against \code{"microsomes"}. Defaults to \code{"hepatocytes"}.}
 \item{species}{Defaults to \code{"human"}.}
 \item{liver_model}{Defaults to \code{"well_stirred"}.}
-\item{protein}{Defaults to \code{1}.}
-\item{volume_ratio}{Defaults to \code{0.005}.}
+\item{protein}{Iterated over elementwise, with \code{vapply}. Defaults to \code{1}.}
+\item{volume_ratio}{Iterated over elementwise, with \code{vapply}. Defaults to \code{0.005}.}
 \item{cl_plasma}{Defaults to \code{NULL}.}
 \item{fu_plasma}{Defaults to \code{NULL}.}
 \item{blood_plasma_ratio}{Defaults to \code{NULL}.}

@@ -145,7 +145,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param layers See Usage.
 #' @return A list with \code{z}, \code{logdet}.
 #' @export
@@ -166,7 +166,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param z See Usage.
+#' @param z Coerced to numeric by the body, with \code{as.numeric}.
 #' @param layers Numeric; passed to \code{rev}.
 #' @return A list with \code{x}, \code{logdet}.
 #' @export
@@ -205,7 +205,7 @@
 #'
 #' @param X Passed to \code{.flow_an_to_mat}.
 #' @param layers Passed to \code{.log_prob}.
-#' @param threshold_quantile Defaults to \code{0.95}.
+#' @param threshold_quantile Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
 #' @param reference Optional; may be \code{NULL}. Passed to \code{.flow_an_to_mat}.
 #' @return A list with \code{estimate}, \code{score}, \code{threshold}, \code{flag}, \code{n_flagged}, \code{n}, \code{quantile}, \code{self_referenced}, \code{log_likelihood}, \code{method}.
 #' @export

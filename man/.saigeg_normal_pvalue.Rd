@@ -8,8 +8,8 @@
 .saigeg_normal_pvalue(s, variance, two_sided = TRUE)
 }
 \arguments{
-\item{s}{See Usage.}
-\item{variance}{See Usage.}
+\item{s}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{variance}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{two_sided}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

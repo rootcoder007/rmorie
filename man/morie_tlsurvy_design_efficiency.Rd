@@ -8,7 +8,7 @@
 morie_tlsurvy_design_efficiency(values, influence, n, seed = 0)
 }
 \arguments{
-\item{values}{See Usage.}
+\item{values}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{influence}{Passed to \code{morie_tlsurvy_inclusion_probabilities}.}
 \item{n}{Passed to \code{morie_tlsurvy_inclusion_probabilities}.}
 \item{seed}{Passed to \code{morie_tlsurvy_draw_sample}. Defaults to \code{0}.}

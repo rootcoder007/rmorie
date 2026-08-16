@@ -21,7 +21,7 @@ morie_default_workflow_map <- function() {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param script_map See Usage.
+#' @param script_map Character; the body checks with \code{is.character}.
 #' @return The value of \code{script_map}, as built in the body.
 #' @export
 validate_workflow_map <- function(script_map) {

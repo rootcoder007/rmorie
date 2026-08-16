@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{Xtr}{A matrix; passed to \code{as.matrix}.}
-\item{ytr}{See Usage.}
+\item{ytr}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{alpha}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 }
 \description{

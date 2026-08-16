@@ -198,11 +198,11 @@ seasonal_harmonics <- function(m, k = NULL) {
 #'
 #' @param periods A vector; its length is taken and its elements indexed. Defaults to \code{numeric(0)}.
 #' @param harmonics Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
-#' @param use_box_cox Defaults to \code{FALSE}.
-#' @param use_trend Defaults to \code{TRUE}.
-#' @param damped Defaults to \code{FALSE}.
-#' @param p Defaults to \code{0L}.
-#' @param q Defaults to \code{0L}.
+#' @param use_box_cox Coerced to logical by the body, with \code{as.logical}. Defaults to \code{FALSE}.
+#' @param use_trend Coerced to logical by the body, with \code{as.logical}. Defaults to \code{TRUE}.
+#' @param damped Coerced to logical by the body, with \code{as.logical}. Defaults to \code{FALSE}.
+#' @param p Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
+#' @param q Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
 #' @return The value of \code{structure}.
 #' @export
 BatsSpec <- function(periods = numeric(0), harmonics = NULL,
@@ -590,7 +590,7 @@ is_forecastable <- function(spec, theta, tol = 1e-8) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param resid A vector; its length is taken.
 #' @param omega Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
@@ -673,7 +673,7 @@ concentrated_loglik <- function(y, resid, omega) {
 #' @param y See Usage.
 #' @param spec A list; the body reads \code{$use_box_cox} from it.
 #' @param long_run_b Defaults to \code{0}.
-#' @param maxiter Defaults to \code{2000}.
+#' @param maxiter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000}.
 #' @return A list with \code{theta}, \code{x0}, \code{resid}, \code{fitted}, \code{loglik}, \code{omega}, \code{aic}, \code{n_par}.
 #' @export
 .fit_spec <- function(y, spec, long_run_b = 0, maxiter = 2000) {

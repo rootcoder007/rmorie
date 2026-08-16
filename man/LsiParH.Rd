@@ -8,9 +8,9 @@
 LsiParH(h_1, h_2, n = NULL)
 }
 \arguments{
-\item{h_1}{See Usage.}
-\item{h_2}{See Usage.}
-\item{n}{Defaults to \code{NULL}.}
+\item{h_1}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{h_2}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 result is as long as the LONGER branch -- not longer, the contrast with the series case where the lengths add.

@@ -115,8 +115,8 @@
 #' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param Y See Usage.
-#' @param basis Defaults to \code{NULL}.
+#' @param Y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param basis Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param n_x A count; the body uses it as \code{seq_len(...)}. Defaults to \code{6}.
 #' @param n_t A count; the body uses it as \code{seq_len(...)}. Defaults to \code{6}.
 #' @param lam_x Numeric; combined arithmetically in the body. Defaults to \code{1}.

@@ -10,7 +10,7 @@
 \arguments{
 \item{G}{Passed to \code{.farmlmm_to_mat}.}
 \item{K}{A matrix; passed to \code{\%*\%}.}
-\item{marker}{See Usage.}
+\item{marker}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the farmlmm_native implementation. No other function in the package calls it. See the file header for the source the module follows.

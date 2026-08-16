@@ -102,7 +102,7 @@ Wave <- function(y, wavelet = "db2", level = NULL) {
 #' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param name See Usage.
+#' @param name Coerced to character by the body, with \code{as.character}.
 #' @return Nothing; this branch always raises.
 #' @export
 .dbfilter <- function(name) {

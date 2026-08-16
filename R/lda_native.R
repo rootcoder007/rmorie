@@ -75,7 +75,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param gamma See Usage.
+#' @param gamma Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 .morie_lda_e_log_theta <- function(gamma) {
@@ -93,11 +93,11 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param doc See Usage.
+#' @param doc Coerced to integer by the body, with \code{as.integer}.
 #' @param alpha A vector; its length is taken.
 #' @param beta A matrix; passed to \code{as.matrix}.
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100}.
-#' @param tol Defaults to \code{1e-08}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-08}.
 #' @return A list with \code{phi}, \code{gamma}, \code{iterations}, \code{converged}, \code{K}, \code{N}, \code{topic_proportions}.
 #' @export
 .morie_lda_variational_inference <- function(doc, alpha, beta, iters=100, tol=1e-8) {
@@ -156,11 +156,11 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param doc See Usage.
+#' @param doc Coerced to integer by the body, with \code{as.integer}.
 #' @param alpha A vector; its length is taken.
 #' @param beta A matrix; passed to \code{as.matrix}.
 #' @param phi A matrix; indexed by row and column.
-#' @param gamma See Usage.
+#' @param gamma Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{val}, as built in the body.
 #' @export
 .morie_lda_elbo <- function(doc, alpha, beta, phi, gamma) {
@@ -198,14 +198,14 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param docs See Usage.
+#' @param docs Iterated over elementwise, with \code{lapply}.
 #' @param K A count; the body uses it as \code{seq_len(...)}.
 #' @param V A count; the body uses it as \code{matrix(...)}.
 #' @param alpha Passed to \code{.morie_lda_variational_inference}. Defaults to \code{0.1}.
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{30}.
 #' @param inner Passed to \code{.morie_lda_variational_inference}. Defaults to \code{50}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
-#' @param tol Defaults to \code{1e-06}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-06}.
 #' @return A list with \code{estimate}, \code{beta}, \code{elbo_history}, \code{final_elbo}, \code{K}, \code{V}, \code{n_docs}, \code{iterations}, \code{method}.
 #' @export
 .morie_lda_variational_em <- function(docs, K, V, alpha=0.1, iters=30, inner=50,
@@ -263,7 +263,7 @@
 #' source it follows.
 #'
 #' @param beta A matrix; passed to \code{as.matrix}.
-#' @param n_top Defaults to \code{5}.
+#' @param n_top Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
 #' @param vocab Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export

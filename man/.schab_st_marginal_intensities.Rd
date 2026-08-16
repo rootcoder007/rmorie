@@ -9,11 +9,11 @@
 }
 \arguments{
 \item{points}{A matrix; passed to \code{as.matrix}.}
-\item{times}{See Usage.}
+\item{times}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{region}{Passed to \code{.schab_st_region_box}.}
 \item{time_interval}{A vector; indexed elementwise.}
-\item{n_space_bins}{Defaults to \code{4L}.}
-\item{n_time_bins}{Defaults to \code{4L}.}
+\item{n_space_bins}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.}
+\item{n_time_bins}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.}
 }
 \description{
 A step of the schab_st_shared implementation. Called by \code{spstp}. See the file header for the source the module follows.

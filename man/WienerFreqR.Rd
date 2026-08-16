@@ -8,9 +8,9 @@
 WienerFreqR(W, sxx, sxd)
 }
 \arguments{
-\item{W}{See Usage.}
-\item{sxx}{See Usage.}
-\item{sxd}{See Usage.}
+\item{W}{Coerced to complex by the body, with \code{as.complex}.}
+\item{sxx}{Coerced to complex by the body, with \code{as.complex}.}
+\item{sxd}{Coerced to complex by the body, with \code{as.complex}.}
 }
 \description{
 no information about W and are listed, not silently satisfied.

@@ -8,7 +8,7 @@
 .tl1step_logit(p)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tl1step_native implementation. Called by \code{.tl1step_build_ulfm}, \code{.tl1step_is_universal}. See the file header for the source the module follows.

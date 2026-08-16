@@ -8,7 +8,7 @@
 Ppois(q, lambda, lower_tail = TRUE)
 }
 \arguments{
-\item{q}{See Usage.}
+\item{q}{Iterated over elementwise, with \code{vapply}.}
 \item{lambda}{Passed to \code{.morie_gammainc_p}.}
 \item{lower_tail}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }

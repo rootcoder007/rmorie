@@ -9,7 +9,7 @@ skipgram_pairs(walks, window = 2)
 }
 \arguments{
 \item{walks}{See Usage.}
-\item{window}{Defaults to \code{2}.}
+\item{window}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.}
 }
 \description{
 A step of the node2v_native implementation. No other function in the package calls it. See the file header for the source the module follows.

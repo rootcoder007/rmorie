@@ -8,8 +8,8 @@
 .tloilr_blip(Q1, Q0)
 }
 \arguments{
-\item{Q1}{See Usage.}
-\item{Q0}{See Usage.}
+\item{Q1}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{Q0}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the tloilr_native implementation. Called by \code{.tloilr_constrained_value}. See the file header for the source the module follows.

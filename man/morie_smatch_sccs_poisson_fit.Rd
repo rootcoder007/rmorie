@@ -11,7 +11,7 @@ morie_smatch_sccs_poisson_fit(cases, risk_periods, age_breaks = numeric(0), iter
 \item{cases}{Passed to \code{morie_smatch_poisson_design}.}
 \item{risk_periods}{Passed to \code{morie_smatch_poisson_design}.}
 \item{age_breaks}{Passed to \code{morie_smatch_poisson_design}. Defaults to \code{numeric(0)}.}
-\item{iters}{Defaults to \code{200}.}
+\item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.}
 \item{tol}{Defaults to \code{1e-12}.}
 \item{ridge}{A matrix; passed to \code{diag}. Defaults to \code{1e-09}.}
 }

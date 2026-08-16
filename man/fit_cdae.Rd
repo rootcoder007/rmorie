@@ -9,14 +9,14 @@ fit_cdae(pos, n_users, n_items, k_dim = 8L, q = 0.2, alpha = 0.05, lam = 0.01, i
 }
 \arguments{
 \item{pos}{A vector; indexed elementwise.}
-\item{n_users}{See Usage.}
-\item{n_items}{See Usage.}
-\item{k_dim}{Defaults to \code{8L}.}
-\item{q}{Defaults to \code{0.2}.}
-\item{alpha}{Defaults to \code{0.05}.}
-\item{lam}{Defaults to \code{0.01}.}
-\item{iters}{Defaults to \code{30L}.}
-\item{n_neg}{Defaults to \code{5L}.}
+\item{n_users}{Coerced to integer by the body, with \code{as.integer}.}
+\item{n_items}{Coerced to integer by the body, with \code{as.integer}.}
+\item{k_dim}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8L}.}
+\item{q}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.2}.}
+\item{alpha}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}
+\item{lam}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.}
+\item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{30L}.}
+\item{n_neg}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
 \item{activation}{Passed to \code{.cdae_dact}. Defaults to \code{"sigmoid"}.}
 \item{init_scale}{Numeric; combined arithmetically in the body. Defaults to \code{0.1}.}

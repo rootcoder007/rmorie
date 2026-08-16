@@ -8,8 +8,8 @@
 MdlOrder(errors, n_samples)
 }
 \arguments{
-\item{errors}{See Usage.}
-\item{n_samples}{See Usage.}
+\item{errors}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n_samples}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 per parameter is log(N), larger than AIC\'s 2 for any N > 7, so MDL picks the same order or a lower one -- and unlike AIC it is consistent.  AIC is returned alongside for comparison.

@@ -13,11 +13,11 @@
 \item{cols}{A vector; its length is taken and its elements indexed.}
 \item{cv}{A vector; indexed elementwise.}
 \item{H}{A vector; indexed elementwise.}
-\item{delta}{See Usage.}
-\item{lam}{See Usage.}
-\item{nu}{See Usage.}
-\item{feasible}{See Usage.}
-\item{recovery}{See Usage.}
+\item{delta}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{lam}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{nu}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{feasible}{Coerced to logical by the body, with \code{as.logical}.}
+\item{recovery}{Coerced to logical by the body, with \code{as.logical}.}
 }
 \description{
 A step of the safrl_native implementation. Called by \code{morie_safrl}. See the file header for the source the module follows.

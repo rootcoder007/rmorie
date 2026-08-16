@@ -94,7 +94,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param values See Usage.
+#' @param values Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @param consistent A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A vector, from \code{c}.
@@ -253,7 +253,7 @@ outlyingness <- function(X, h = NULL, n_dirs = 250L, seed = 17L) {
 #'
 #' @param rows A matrix; indexed by row and column.
 #' @param h See Usage.
-#' @param n_start Defaults to \code{250L}.
+#' @param n_start Coerced to integer by the body, with \code{as.integer}. Defaults to \code{250L}.
 #' @param seed Numeric; combined arithmetically in the body. Defaults to \code{17L}.
 #' @return The value of \code{best}, as built in the body.
 #' @export

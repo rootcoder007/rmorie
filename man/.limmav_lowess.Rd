@@ -11,7 +11,7 @@
 \item{x}{A vector; its length is taken and its elements indexed.}
 \item{y}{A vector; its length is taken and its elements indexed.}
 \item{span}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
-\item{iterations}{Defaults to \code{3}.}
+\item{iterations}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.}
 }
 \description{
 A step of the limmav_native implementation. Called by \code{.limmav_voom_weights}. See the file header for the source the module follows.

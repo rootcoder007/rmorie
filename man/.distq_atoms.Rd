@@ -8,9 +8,9 @@
 .distq_atoms(v_min, v_max, n_atoms)
 }
 \arguments{
-\item{v_min}{See Usage.}
-\item{v_max}{See Usage.}
-\item{n_atoms}{See Usage.}
+\item{v_min}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{v_max}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n_atoms}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 v_min) / (n_atoms - 1), and the spacing. n must be at least 2 and v_max > v_min.

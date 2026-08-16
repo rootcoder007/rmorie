@@ -8,7 +8,7 @@
 .morie_erf(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Iterated over elementwise, with \code{vapply}.}
 }
 \description{
 A step of the dist_native implementation. No other function in the package calls it. See the file header for the source the module follows.

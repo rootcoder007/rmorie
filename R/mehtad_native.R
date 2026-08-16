@@ -35,7 +35,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X A matrix; the body checks with \code{is.matrix}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .mehtad_mat <- function(X) {
@@ -105,7 +105,7 @@ mehtad_residuals <- function(A, b, c, x, y, s) {
 #'
 #' @param v A vector; its length is taken and its elements indexed.
 #' @param dv A vector; indexed elementwise.
-#' @param eta Defaults to \code{0.9995}.
+#' @param eta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.9995}.
 #' @return A numeric value.
 #' @export
 max_step <- function(v, dv, eta = 0.9995) {
@@ -125,9 +125,9 @@ max_step <- function(v, dv, eta = 0.9995) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param mu See Usage.
-#' @param mu_affine See Usage.
-#' @param nu Defaults to \code{3}.
+#' @param mu Coerced to numeric by the body, with \code{as.numeric}.
+#' @param mu_affine Coerced to numeric by the body, with \code{as.numeric}.
+#' @param nu Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{3}.
 #' @return A list with \code{sigma}, \code{ratio}, \code{nu}, \code{approximation}, \code{note}.
 #' @export
 centering_parameter <- function(mu, mu_affine, nu = 3.0) {
@@ -153,7 +153,7 @@ centering_parameter <- function(mu, mu_affine, nu = 3.0) {
 #'
 #' @param A A matrix; passed to \code{as.matrix}.
 #' @param d A count; the body uses it as \code{rep(...)}.
-#' @param rhs See Usage.
+#' @param rhs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-11}.
 #' @return The value of \code{backsolve}.
 #' @export
@@ -175,11 +175,11 @@ centering_parameter <- function(mu, mu_affine, nu = 3.0) {
 #' source it follows.
 #'
 #' @param A A matrix; passed to \code{as.matrix}.
-#' @param x See Usage.
-#' @param s See Usage.
-#' @param rp See Usage.
-#' @param rd See Usage.
-#' @param rc See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param s Coerced to numeric by the body, with \code{as.numeric}.
+#' @param rp Coerced to numeric by the body, with \code{as.numeric}.
+#' @param rd Coerced to numeric by the body, with \code{as.numeric}.
+#' @param rc Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{dx}, \code{dy}, \code{ds}.
 #' @export
 newton_direction <- function(A, x, s, rp, rd, rc) {
@@ -204,10 +204,10 @@ newton_direction <- function(A, x, s, rp, rd, rc) {
 #' source it follows.
 #'
 #' @param A A matrix; passed to \code{as.matrix}.
-#' @param b See Usage.
-#' @param c See Usage.
-#' @param tol Defaults to \code{1e-09}.
-#' @param max_iter Defaults to \code{100L}.
+#' @param b Coerced to numeric by the body, with \code{as.numeric}.
+#' @param c Coerced to numeric by the body, with \code{as.numeric}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-09}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100L}.
 #' @param nu Defaults to \code{3}.
 #' @param eta Defaults to \code{0.9995}.
 #' @param corrector A flag; the body branches on it. Defaults to \code{TRUE}.

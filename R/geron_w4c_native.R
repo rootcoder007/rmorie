@@ -28,7 +28,7 @@
 #' the source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
-#' @param seed See Usage.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_w4c_lcgvec <- function(n, seed) {
@@ -49,7 +49,7 @@
 #' morie.fn._lcg_normal (hmncsn / hmpemb-style helpers).
 #'
 #' @param n A count; the body uses it as \code{numeric(...)}.
-#' @param seed See Usage.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_w4c_lcg_normal <- function(n, seed) {
@@ -96,7 +96,7 @@
 #'
 #' @param n Numeric; combined arithmetically in the body.
 #' @param k A count; the body uses it as \code{seq_len(...)}.
-#' @param seed See Usage.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{sort}.
 #' @export
 .morie_w4c_lcg_sample <- function(n, k, seed) {
@@ -2413,7 +2413,7 @@ morie_geron_relu <- function(z, leaky = 0.0) {
 #' the source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
-#' @param seed See Usage.
+#' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_w4c_bootstrap <- function(n, seed) {

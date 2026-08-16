@@ -8,9 +8,9 @@
 CDiff3(x, T = 1, n = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{T}{Defaults to \code{1}.}
-\item{n}{Defaults to \code{NULL}.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{T}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
+\item{n}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 controls the noise amplification.  The book warns the price is accuracy -- the approximation to d/dt "is poor after about fs/10".

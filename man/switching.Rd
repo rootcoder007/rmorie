@@ -8,7 +8,7 @@
 switching(scores, criterion, context = NULL)
 }
 \arguments{
-\item{scores}{See Usage.}
+\item{scores}{Iterated over elementwise, with \code{lapply}.}
 \item{criterion}{See Usage.}
 \item{context}{Defaults to \code{NULL}.}
 }

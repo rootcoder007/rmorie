@@ -13,8 +13,8 @@
 #' reads the same sum as delayed, weighted copies of h; those copies are
 #' returned so the overlap of Figure 3.19 is visible.
 #'
-#' @param x See Usage.
-#' @param h See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param h Coerced to numeric by the body, with \code{as.numeric}.
 #' @param causal A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{y}, \code{n}, \code{n_x}, \code{n_h}, \code{contributions}, \code{commutes}, \code{causal}, \code{method}.
 #' @export
@@ -49,9 +49,9 @@ LinConv <- function(x, h, causal = TRUE) {
 #' asserted -- filtering twice is compared against filtering once with
 #' h.
 #'
-#' @param x See Usage.
-#' @param h1 See Usage.
-#' @param h2 See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param h1 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param h2 Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{s}, \code{y}, \code{h}, \code{y_via_combined}, \code{max_difference}, \code{equivalent}, \code{method}.
 #' @export
 LsiSer <- function(x, h1, h2) {
@@ -103,9 +103,9 @@ LsiSerY <- function(x, h1, h2) {
 #' The shorter response is zero-extended before the addition; truncating
 #' instead would silently drop the tail of the longer filter.
 #'
-#' @param x See Usage.
-#' @param h1 See Usage.
-#' @param h2 See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param h1 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param h2 Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{s1}, \code{s2}, \code{y}, \code{h}, \code{y_via_combined}, \code{max_difference}, \code{equivalent}, \code{method}.
 #' @export
 LsiPar <- function(x, h1, h2) {
@@ -137,8 +137,8 @@ LsiPar <- function(x, h1, h2) {
 #'
 #' parallel structure see the same input.
 #'
-#' @param x See Usage.
-#' @param h2 See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param h2 Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{s2}, \code{n}, \code{method}.
 #' @export
 LsiPar2 <- function(x, h2) {
@@ -178,11 +178,11 @@ LsiParY <- function(x, h1, h2) {
 #' and omega domains.  s = j omega recovers the frequency-domain form,
 #' so one function covers both.
 #'
-#' @param x See Usage.
-#' @param h See Usage.
-#' @param s Defaults to \code{NULL}.
-#' @param omega Defaults to \code{NULL}.
-#' @param dt Defaults to \code{1}.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param h Coerced to numeric by the body, with \code{as.numeric}.
+#' @param s Optional; may be \code{NULL}. Coerced to complex by the body, with \code{as.complex}.
+#' @param omega Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{y}, \code{Y}, \code{X}, \code{H}, \code{XH}, \code{s}, \code{max_difference}, \code{holds}, \code{method}.
 #' @export
 LtiProd <- function(x, h, s = NULL, omega = NULL, dt = 1) {
@@ -250,9 +250,9 @@ PerConv <- function(x, h, npoints = NULL) {
 #' large-carrier form A(1 + m) cos(wc t), which is a different model; it
 #' is available under conventional=TRUE rather than substituted.
 #'
-#' @param x See Usage.
-#' @param fc See Usage.
-#' @param fs See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fc Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param conventional A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @param depth Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A list with \code{y}, \code{carrier}, \code{demodulated}, \code{fc}, \code{fs}, \code{suppressed_carrier}, \code{baseband_gain}, \code{image_frequency}, \code{method}.
@@ -292,9 +292,9 @@ AmSig <- function(x, fc, fs, conventional = FALSE, depth = 1) {
 #' m. The phase integral is trapezoidal; a plain running sum biases it
 #' by half a sample of m at each end, which drifts over a long record.
 #'
-#' @param m See Usage.
-#' @param fc See Usage.
-#' @param fs See Usage.
+#' @param m Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fc Coerced to numeric by the body, with \code{as.numeric}.
+#' @param fs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param kf Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param amplitude Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A list with \code{y}, \code{phase}, \code{instantaneous_frequency}, \code{fc}, \code{fs}, \code{kf}, \code{max_instantaneous_frequency}, \code{min_instantaneous_frequency}, \code{aliases}, \code{method}.
@@ -338,8 +338,8 @@ FmSig <- function(m, fc, fs, kf = 1, amplitude = 1) {
 #' no single transfer function describes it -- the contrast with eq
 #' (3.36) is the point.
 #'
-#' @param x See Usage.
-#' @param h See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
+#' @param h A list; the body checks with \code{is.list}.
 #' @return A list with \code{y}, \code{n}, \code{kernel_lengths}, \code{shift_invariant}, \code{method}.
 #' @export
 TvLsi <- function(x, h) {

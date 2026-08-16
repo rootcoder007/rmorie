@@ -8,8 +8,8 @@
 SnrFilt(clean, filtered)
 }
 \arguments{
-\item{clean}{See Usage.}
-\item{filtered}{See Usage.}
+\item{clean}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{filtered}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 known clean reference.  This penalises distortion as well as leftover noise -- comparing only noise power would flatter an over-smoothing filter.

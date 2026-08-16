@@ -8,8 +8,8 @@
 build_sequence(visual_tokens, text_embeddings)
 }
 \arguments{
-\item{visual_tokens}{See Usage.}
-\item{text_embeddings}{See Usage.}
+\item{visual_tokens}{Iterated over elementwise, with \code{lapply}.}
+\item{text_embeddings}{Iterated over elementwise, with \code{lapply}.}
 }
 \description{
 A step of the llavx_native implementation. Called by \code{morie_llavx}. See the file header for the source the module follows.

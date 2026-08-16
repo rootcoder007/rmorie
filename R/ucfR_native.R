@@ -65,8 +65,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param ratings_a See Usage.
-#' @param ratings_b See Usage.
+#' @param ratings_a Coerced to list by the body, with \code{as.list}.
+#' @param ratings_b Coerced to list by the body, with \code{as.list}.
 #' @return A list with \code{items}, \code{n}, \code{a}, \code{b}, \code{note}.
 #' @export
 .ucfR_co_rated <- function(ratings_a, ratings_b) {
@@ -90,8 +90,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n_common See Usage.
-#' @param threshold Defaults to \code{50}.
+#' @param n_common Coerced to integer by the body, with \code{as.integer}.
+#' @param threshold Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50}.
 #' @return A numeric value.
 #' @export
 .ucfR_significance_weight <- function(n_common, threshold = 50) {
@@ -109,8 +109,8 @@
 #'
 #' @param ratings_a Passed to \code{.ucfR_co_rated}.
 #' @param ratings_b Passed to \code{.ucfR_co_rated}.
-#' @param min_common Defaults to \code{2}.
-#' @param significance Defaults to \code{FALSE}.
+#' @param min_common Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
+#' @param significance Coerced to logical by the body, with \code{as.logical}. Defaults to \code{FALSE}.
 #' @param threshold Passed to \code{.ucfR_significance_weight}. Defaults to \code{50}.
 #' @return A list with \code{w}, \code{n_common}, \code{degenerate}, \code{significance_applied}.
 #' @export
@@ -149,7 +149,7 @@
 #' @param target Passed to \code{.ucfR_pearson}.
 #' @param others A vector; its length is taken and its elements indexed.
 #' @param min_common Passed to \code{.ucfR_pearson}. Defaults to \code{2}.
-#' @param top_k Defaults to \code{NULL}.
+#' @param top_k Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param significance Passed to \code{.ucfR_pearson}. Defaults to \code{FALSE}.
 #' @return A list with \code{neighbours}, \code{n}, \code{note}.
 #' @export
@@ -190,7 +190,7 @@
 #'
 #' @param target Passed to \code{.ucfR_neighbours}.
 #' @param others A vector; indexed elementwise.
-#' @param item See Usage.
+#' @param item Coerced to character by the body, with \code{as.character}.
 #' @param min_common Passed to \code{.ucfR_neighbours}. Defaults to \code{2}.
 #' @param top_k Passed to \code{.ucfR_neighbours}.
 #' @param significance Passed to \code{.ucfR_neighbours}. Defaults to \code{FALSE}.

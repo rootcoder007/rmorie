@@ -9,9 +9,9 @@ morie_exp3(x, gamma_, T = NULL, seed = 0)
 }
 \arguments{
 \item{x}{A matrix; indexed by row and column.}
-\item{gamma_}{See Usage.}
-\item{T}{Defaults to \code{NULL}.}
-\item{seed}{Defaults to \code{0}.}
+\item{gamma_}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{T}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \description{
 A step of the exp3_native implementation. No other function in the package calls it. See the file header for the source the module follows.

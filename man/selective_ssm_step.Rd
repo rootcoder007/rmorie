@@ -8,7 +8,7 @@
 selective_ssm_step(x, h, A, B, C, delta, rule = "zoh")
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{h}{A vector; its length is taken and its elements indexed.}
 \item{A}{A vector; its length is taken.}
 \item{B}{See Usage.}

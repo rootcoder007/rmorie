@@ -8,11 +8,11 @@
 PzPhase(z_0, alpha_k, beta_k, N = NULL, M = NULL)
 }
 \arguments{
-\item{z_0}{See Usage.}
-\item{alpha_k}{See Usage.}
-\item{beta_k}{See Usage.}
-\item{N}{Defaults to \code{NULL}.}
-\item{M}{Defaults to \code{NULL}.}
+\item{z_0}{Coerced to complex by the body, with \code{as.complex}.}
+\item{alpha_k}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{beta_k}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{N}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{M}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 poles at the origin that balance the orders; dropping it is easy, since it vanishes when N = M, and leaves the phase wrong by a multiple of angle(z_0) whenever they differ.

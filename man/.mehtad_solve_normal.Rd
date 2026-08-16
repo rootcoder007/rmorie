@@ -10,7 +10,7 @@
 \arguments{
 \item{A}{A matrix; passed to \code{as.matrix}.}
 \item{d}{A count; the body uses it as \code{rep(...)}.}
-\item{rhs}{See Usage.}
+\item{rhs}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{ridge}{Numeric; combined arithmetically in the body. Defaults to \code{1e-11}.}
 }
 \description{

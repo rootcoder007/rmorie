@@ -10,7 +10,7 @@ phmmsr_search_pipeline(sequences, profile, msv_threshold = 0.02, mu = 10, lam = 
 \arguments{
 \item{sequences}{A vector; its length is taken and its elements indexed.}
 \item{profile}{See Usage.}
-\item{msv_threshold}{Defaults to \code{0.02}.}
+\item{msv_threshold}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.02}.}
 \item{mu}{Defaults to \code{10}.}
 \item{lam}{Defaults to \code{0.7}.}
 \item{full_score}{Defaults to \code{NULL}.}

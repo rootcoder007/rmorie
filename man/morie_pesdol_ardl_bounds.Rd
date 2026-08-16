@@ -8,7 +8,7 @@
 morie_pesdol_ardl_bounds(y, x, p = 1, q = 1)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{x}{A matrix; passed to \code{as.matrix}.}
 \item{p}{Numeric; passed to \code{max}. Defaults to \code{1}.}
 \item{q}{Numeric; passed to \code{max}. Defaults to \code{1}.}

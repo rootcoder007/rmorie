@@ -66,7 +66,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .tlroad_vec <- function(x) {
@@ -79,10 +79,10 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param data_description See Usage.
+#' @param data_description Coerced to character by the body, with \code{as.character}.
 #' @param model_assumptions A vector; its length is taken.
-#' @param target_name See Usage.
-#' @param estimator Defaults to \code{"TMLE"}.
+#' @param target_name Coerced to character by the body, with \code{as.character}.
+#' @param estimator Coerced to character by the body, with \code{as.character}. Defaults to \code{"TMLE"}.
 #' @return A list with \code{steps}, \code{data}, \code{model}, \code{target}, \code{estimator}, \code{note}.
 #' @export
 .tlroad_roadmap <- function(data_description, model_assumptions, target_name,
@@ -117,7 +117,7 @@
 #' @param Q1 Passed to \code{.tlroad_vec}.
 #' @param Q0 Passed to \code{.tlroad_vec}.
 #' @param g Passed to \code{.tlroad_vec}.
-#' @param psi See Usage.
+#' @param psi Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .tlroad_eic_ate <- function(A, Y, Q1, Q0, g, psi) {
@@ -228,7 +228,7 @@
 #' @param Q0 Passed to \code{.tlroad_eic_ate}.
 #' @param g Passed to \code{.tlroad_eic_ate}.
 #' @param psi Passed to \code{.tlroad_eic_ate}.
-#' @param tol Defaults to \code{1e-08}.
+#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-08}.
 #' @return A list with \code{estimate}, \code{mean_eic}, \code{solved}, \code{se}, \code{ci}, \code{method}.
 #' @export
 .tlroad_solves_eic_equation <- function(A, Y, Q1, Q0, g, psi, tol = 1e-8) {

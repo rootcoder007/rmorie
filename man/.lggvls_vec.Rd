@@ -8,7 +8,7 @@
 .lggvls_vec(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the lggvls_native implementation. No other function in the package calls it. See the file header for the source the module follows.

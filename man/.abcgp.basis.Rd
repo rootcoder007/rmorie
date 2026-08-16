@@ -8,7 +8,7 @@
 .abcgp.basis(theta)
 }
 \arguments{
-\item{theta}{See Usage.}
+\item{theta}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
 A step of the abcgp_native implementation. Called by \code{.abcgp.gp_predict}. See the file header for the source the module follows.

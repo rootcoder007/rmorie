@@ -8,8 +8,8 @@
 morie_ncfRS_mlp_layers(p_u, q_i, Ws, bs)
 }
 \arguments{
-\item{p_u}{See Usage.}
-\item{q_i}{See Usage.}
+\item{p_u}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{q_i}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{Ws}{A vector; its length is taken and its elements indexed.}
 \item{bs}{A vector; indexed elementwise.}
 }

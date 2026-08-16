@@ -11,7 +11,7 @@ synthesize_noisy(X, fraction = 0.1, feature_values = NULL, seed = 0)
 \item{X}{A vector; indexed elementwise.}
 \item{fraction}{Defaults to \code{0.1}.}
 \item{feature_values}{Defaults to \code{NULL}.}
-\item{seed}{Defaults to \code{0}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \description{
 A step of the memb_native implementation. Called by \code{morie_memb}. See the file header for the source the module follows.

@@ -8,9 +8,9 @@
 IntFt(X, omega, X0 = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{omega}{See Usage.}
-\item{X0}{Defaults to \code{NULL}.}
+\item{X}{Coerced to complex by the body, with \code{as.complex}.}
+\item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{X0}{Optional; may be \code{NULL}. Coerced to complex by the body, with \code{as.complex}.}
 }
 \description{
 the DC content, which 1/(jw) cannot represent because it blows up there.  It is returned as its WEIGHT, pi X(0); a delta has no value at a point.

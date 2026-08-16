@@ -8,7 +8,7 @@
 .tf_dbname(wavelet)
 }
 \arguments{
-\item{wavelet}{See Usage.}
+\item{wavelet}{Coerced to character by the body, with \code{as.character}.}
 }
 \description{
 A step of the rangayyan_tf implementation. Called by \code{.tf_filters}, \code{WtVar}. See the file header for the source the module follows.

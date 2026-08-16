@@ -8,7 +8,7 @@
 morie_timesfm_causal_mask(n_patches)
 }
 \arguments{
-\item{n_patches}{See Usage.}
+\item{n_patches}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{
 A step of the timesfm_native implementation. No other function in the package calls it. See the file header for the source the module follows.

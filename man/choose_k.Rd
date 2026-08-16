@@ -8,8 +8,8 @@
 choose_k(graph_sizes, coverage = 0.6)
 }
 \arguments{
-\item{graph_sizes}{See Usage.}
-\item{coverage}{Defaults to \code{0.6}.}
+\item{graph_sizes}{Coerced to integer by the body, with \code{as.integer}.}
+\item{coverage}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.6}.}
 }
 \description{
 A step of the sortP_native implementation. No other function in the package calls it. See the file header for the source the module follows.

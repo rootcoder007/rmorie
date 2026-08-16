@@ -27,7 +27,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
+#' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{writeBin}.
 #' @export
 .le32 <- function(n) {
@@ -351,7 +351,7 @@ morie_secarg_parameter_advice <- function(profile = "first") {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param bs See Usage.
+#' @param bs Coerced to integer by the body, with \code{as.integer}.
 #' @return A character value.
 #' @export
 .secarg_hexlify <- function(bs) {

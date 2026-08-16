@@ -65,8 +65,8 @@ NULL
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Coerced to numeric by the body, with \code{as.numeric}.
+#' @param b Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
@@ -91,7 +91,7 @@ NULL
 #'
 #' @param z A vector; its length is taken.
 #' @param y A vector; its length is taken.
-#' @param zq See Usage.
+#' @param zq Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{vapply}.
 #' @export

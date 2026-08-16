@@ -64,8 +64,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param iterates See Usage.
-#' @param burn_in Defaults to \code{0}.
+#' @param iterates Iterated over elementwise, with \code{lapply}.
+#' @param burn_in Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
 #' @return A list with \code{average}, \code{n_averaged}, \code{burn_in}.
 #' @export
 morie_polyak <- function(iterates, burn_in = 0) {
@@ -102,9 +102,9 @@ morie_polyak <- function(iterates, burn_in = 0) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param prev See Usage.
-#' @param new See Usage.
-#' @param decay Defaults to \code{0.999}.
+#' @param prev Coerced to numeric by the body, with \code{as.numeric}.
+#' @param new Coerced to numeric by the body, with \code{as.numeric}.
+#' @param decay Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.999}.
 #' @return A numeric value.
 #' @export
 .polyak_running_average <- function(prev, new, decay = 0.999) {
@@ -130,9 +130,9 @@ morie_polyak <- function(iterates, burn_in = 0) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param target See Usage.
-#' @param online See Usage.
-#' @param tau Defaults to \code{0.001}.
+#' @param target Coerced to numeric by the body, with \code{as.numeric}.
+#' @param online Coerced to numeric by the body, with \code{as.numeric}.
+#' @param tau Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.001}.
 #' @return A numeric value.
 #' @export
 .polyak_soft_update <- function(target, online, tau = 0.001) {
@@ -158,10 +158,10 @@ morie_polyak <- function(iterates, burn_in = 0) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param target See Usage.
-#' @param online See Usage.
-#' @param step See Usage.
-#' @param C Defaults to \code{10000}.
+#' @param target Coerced to numeric by the body, with \code{as.numeric}.
+#' @param online Coerced to numeric by the body, with \code{as.numeric}.
+#' @param step Coerced to integer by the body, with \code{as.integer}.
+#' @param C Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10000}.
 #' @return A list, whose contents depend on the branch taken; across the branches its names are \code{target}, \code{copied}.
 #' @export
 .polyak_hard_update <- function(target, online, step, C = 10000) {
@@ -185,7 +185,7 @@ morie_polyak <- function(iterates, burn_in = 0) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tau See Usage.
+#' @param tau Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{halflife}, \code{approx}, \code{tau}, \code{note}.
 #' @export
 .polyak_lag_halflife <- function(tau) {

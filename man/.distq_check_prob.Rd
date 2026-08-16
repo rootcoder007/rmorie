@@ -8,7 +8,7 @@
 .distq_check_prob(next_probs, n_atoms, name)
 }
 \arguments{
-\item{next_probs}{See Usage.}
+\item{next_probs}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{n_atoms}{See Usage.}
 \item{name}{See Usage.}
 }
