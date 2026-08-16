@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{A}{A matrix; passed to \code{nrow}.}
-\item{b}{See Usage.}
+\item{b}{Passed to \code{cbind}.}
 }
 \description{
 A step of the nashq_native implementation. Called by \code{.nashq_indifference}. See the file header for the source the module follows.

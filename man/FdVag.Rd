@@ -10,8 +10,8 @@ FdVag(x, fs, fmin = 100, fmax = 500, nperseg = NULL)
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fs}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{fmin}{Defaults to \code{100}.}
-\item{fmax}{Defaults to \code{500}.}
+\item{fmin}{Passed to \code{FdPsd}. Defaults to \code{100}.}
+\item{fmax}{Passed to \code{FdPsd}. Defaults to \code{500}.}
 \item{nperseg}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{

@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{regime}{Optional; may be \code{NULL}. A matrix; indexed by row and column.}
-\item{n}{See Usage.}
+\item{n}{Passed to \code{==}.}
 }
 \description{
 A step of the tmldyn_native implementation. Called by \code{morie_tmldyn}. See the file header for the source the module follows.

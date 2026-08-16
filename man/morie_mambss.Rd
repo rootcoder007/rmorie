@@ -8,17 +8,17 @@
 morie_mambss(X, A, W_B, W_C, W_delta, delta_bias = NULL, b_B = NULL, b_C = NULL, b_delta = 0, rule = "zoh", D_skip = NULL)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{A}{See Usage.}
-\item{W_B}{See Usage.}
-\item{W_C}{See Usage.}
-\item{W_delta}{See Usage.}
-\item{delta_bias}{Defaults to \code{NULL}.}
-\item{b_B}{Defaults to \code{NULL}.}
-\item{b_C}{Defaults to \code{NULL}.}
-\item{b_delta}{Defaults to \code{0}.}
-\item{rule}{Defaults to \code{"zoh"}.}
-\item{D_skip}{Defaults to \code{NULL}.}
+\item{X}{Passed to \code{selective_scan}.}
+\item{A}{Passed to \code{selective_scan}.}
+\item{W_B}{Passed to \code{selective_scan}.}
+\item{W_C}{Passed to \code{selective_scan}.}
+\item{W_delta}{Passed to \code{selective_scan}.}
+\item{delta_bias}{Passed to \code{selective_scan}.}
+\item{b_B}{Passed to \code{selective_scan}.}
+\item{b_C}{Passed to \code{selective_scan}.}
+\item{b_delta}{Passed to \code{selective_scan}. Defaults to \code{0}.}
+\item{rule}{Passed to \code{selective_scan}. Defaults to \code{"zoh"}.}
+\item{D_skip}{Passed to \code{selective_scan}.}
 }
 \description{
 A step of the mambss_native implementation. No other function in the package calls it. See the file header for the source the module follows.

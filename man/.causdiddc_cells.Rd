@@ -10,8 +10,8 @@
 \arguments{
 \item{Y}{A vector; indexed elementwise.}
 \item{D}{A vector; indexed elementwise.}
-\item{g}{See Usage.}
-\item{t}{See Usage.}
+\item{g}{Passed to \code{paste0}.}
+\item{t}{Passed to \code{paste0}.}
 }
 \description{
 A step of the causdiddc_native implementation. Called by \code{.causdiddc_did_m}. See the file header for the source the module follows.

@@ -11,8 +11,8 @@ morie_agalfsy_rl_pose_search(receptor, ligand, site = NULL, policy = NULL, criti
 \item{receptor}{Passed to \code{.agalfsy_coords}.}
 \item{ligand}{Passed to \code{.agalfsy_coords}.}
 \item{site}{Optional; may be \code{NULL}. Passed to \code{.agalfsy_coords}.}
-\item{policy}{Defaults to \code{NULL}.}
-\item{critic}{Defaults to \code{NULL}.}
+\item{policy}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{critic}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{max_steps}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{600L}.}
 \item{min_steps}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{300L}.}
 \item{window}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50L}.}

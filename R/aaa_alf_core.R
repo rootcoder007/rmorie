@@ -29,7 +29,7 @@ alfSigm <- function(x) ifelse(x >= 0, 1 / (1 + exp(-x)), exp(x) / (1 + exp(x)))
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{ifelse}.
 #' @return The value of \code{ifelse}.
 #' @export
 alfRelu <- function(x) ifelse(x > 0, x, 0)
@@ -227,8 +227,8 @@ alfOnehot <- function(x, bins) {
 #' source it follows.
 #'
 #' @param y Numeric; combined arithmetically in the body.
-#' @param p See Usage.
-#' @param eps Defaults to \code{1e-12}.
+#' @param p Passed to \code{pmax}.
+#' @param eps Passed to \code{pmax}. Defaults to \code{1e-12}.
 #' @return A numeric value.
 #' @export
 alfXent <- function(y, p, eps = 1e-12) {

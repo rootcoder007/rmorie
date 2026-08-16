@@ -11,8 +11,8 @@
 \item{D}{Passed to \code{.mor_did_panel}.}
 \item{unit}{Passed to \code{.mor_did_panel}.}
 \item{time}{Passed to \code{.mor_did_panel}.}
-\item{units}{Defaults to \code{NULL}.}
-\item{periods}{Defaults to \code{NULL}.}
+\item{units}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{periods}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the cssant_native implementation. Called by \code{morie_boryis}, \code{morie_cssant}. See the file header for the source the module follows.

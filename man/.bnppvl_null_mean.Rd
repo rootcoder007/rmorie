@@ -10,7 +10,7 @@
 \arguments{
 \item{nullq}{Accepted by the signature and not used anywhere in the body.}
 \item{j}{Numeric; combined arithmetically in the body.}
-\item{level}{See Usage.}
+\item{level}{Passed to \code{bitwShiftL}.}
 }
 \description{
 of the parent interval that the guess assigns to the left child, which is the paper\\'s equation (6). A guess that is flat over the parent gives exactly a half, the symmetric case.

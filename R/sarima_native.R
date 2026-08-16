@@ -148,7 +148,7 @@ expand_polynomials <- function(phi = numeric(0), Phi = numeric(0),
 #' source it follows.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
-#' @param lags See Usage.
+#' @param lags Passed to \code{unlist}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 sample_acf <- function(x, lags) {
@@ -225,7 +225,7 @@ moment_estimate <- function(rho) .sarima_invert_rho(rho)
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param w See Usage.
+#' @param w Passed to \code{sample_acf}.
 #' @param s Coerced to integer by the body, with \code{as.integer}. Defaults to \code{12}.
 #' @return A list with \code{estimate}, \code{theta}, \code{Theta}, \code{r_1}, \code{r_s}, \code{method}.
 #' @export
@@ -364,7 +364,7 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
 #' source it follows.
 #'
 #' @param coefs A vector; its length is taken.
-#' @param tol Defaults to \code{1.001}.
+#' @param tol Passed to \code{<}. Defaults to \code{1.001}.
 #' @return A logical value.
 #' @export
 .sarima_roots_ok <- function(coefs, tol = 1.001) {
@@ -390,7 +390,7 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
 #' restart-until-stuck shape as the Python arm\'s call to
 #' _sci_core.minimize(method="Nelder-Mead").
 #'
-#' @param fn See Usage.
+#' @param fn Passed to \code{apply}.
 #' @param x0 A vector; its length is taken and its elements indexed.
 #' @param maxit A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.
 #' @return A list with \code{x}, \code{fun}, \code{success}.
@@ -467,7 +467,7 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
 #' @param seasonal_order A vector; indexed elementwise. Defaults to \code{c(0, 1, 1)}.
 #' @param s Passed to \code{.sarima_package}. Defaults to \code{12}.
 #' @param method One of \code{"css"}, \code{"moment"}, \code{"uls"}. Defaults to \code{"ml"}.
-#' @param start Defaults to \code{NULL}.
+#' @param start Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{.sarima_package}.
 #' @export
 .sarima_fit <- function(y, order = c(0, 1, 1), seasonal_order = c(0, 1, 1), s = 12,
@@ -622,7 +622,7 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
 #'
 #' @param ar A vector; its length is taken and its elements indexed.
 #' @param ma A vector; its length is taken and its elements indexed.
-#' @param h See Usage.
+#' @param h Passed to \code{:}.
 #' @return The value of \code{psi}, as built in the body.
 #' @export
 .sarima_psi_weights <- function(ar, ma, h) {

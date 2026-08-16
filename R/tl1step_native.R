@@ -86,7 +86,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .tl1step_as_numvec <- function(x) {
@@ -280,7 +280,7 @@
 #' @param H_fn Accepted by the signature and not used anywhere in the body.
 #' @param Y Passed to \code{.tl1step_as_numvec}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25}.
-#' @param tol Defaults to \code{1e-08}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
 #' @return A list with \code{estimate}, \code{psi}, \code{iterations}, \code{Q_star}, \code{abs_score}, \code{method}.
 #' @export
 .tl1step_iterative_tmle <- function(Q, H_fn, Y, max_iter = 25, tol = 1e-8) {

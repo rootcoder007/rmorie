@@ -143,7 +143,7 @@ morie_evt_gev_mle <- function(x) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param H See Usage.
+#' @param H Passed to \code{eigen}.
 #' @return The value of \code{%*%}.
 #' @export
 MASS_ginv_fallback <- function(H) {

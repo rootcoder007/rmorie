@@ -12,7 +12,7 @@ AtomTfd(x, fs = 1, dictionary = "gabor", max_atoms = 8, nfreq = NULL, min_decay 
 \item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{dictionary}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"gabor"}.}
 \item{max_atoms}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.}
-\item{nfreq}{Defaults to \code{NULL}.}
+\item{nfreq}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{min_decay}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.001}.}
 }
 \description{

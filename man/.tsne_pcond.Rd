@@ -10,7 +10,7 @@
 \arguments{
 \item{D2}{A matrix; indexed by row and column.}
 \item{perp}{Numeric; passed to \code{log}.}
-\item{tol}{Defaults to \code{1e-05}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-05}.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60}.}
 }
 \description{

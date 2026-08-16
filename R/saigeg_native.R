@@ -114,7 +114,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{pnorm}.
 #' @return The value of \code{pnorm}.
 #' @export
 .saigeg_pnorm <- function(x) {
@@ -309,7 +309,7 @@
 #' @param mu Passed to \code{.saigeg_cgf}.
 #' @param lo Numeric; combined arithmetically in the body. Defaults to \code{-50}.
 #' @param hi Numeric; combined arithmetically in the body. Defaults to \code{50}.
-#' @param tol Defaults to \code{1e-11}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-11}.
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
 #' @return A numeric value.
 #' @export

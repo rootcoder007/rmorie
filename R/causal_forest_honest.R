@@ -17,7 +17,7 @@
 #' for the source it follows.
 #'
 #' @param y A vector; indexed elementwise.
-#' @param d See Usage.
+#' @param d Passed to \code{==}.
 #' @return A numeric value.
 #' @export
 .morie_cf_tau <- function(y, d) {

@@ -12,7 +12,7 @@
 \item{y}{Numeric; combined arithmetically in the body.}
 \item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.}
 \item{ridge}{Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.}
-\item{tol}{Defaults to \code{1e-13}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-13}.}
 \item{penalty}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \description{

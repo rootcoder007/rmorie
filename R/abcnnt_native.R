@@ -68,8 +68,8 @@
 #' source it follows.
 #'
 #' @param layer A list; the body reads \code{$b1}, \code{$ba}, \code{$bm}, \code{$dim_t}, \code{$dim_x}, \code{$hidden}, \code{$M1}, \code{$M2}, \code{$W1}, \code{$Wa}, \code{$Wm} from it.
-#' @param x See Usage.
-#' @param t See Usage.
+#' @param x Passed to \code{c}.
+#' @param t Passed to \code{c}.
 #' @return A list with \code{mu}, \code{al}, \code{h}.
 #' @export
 .abcnnt_layer_stats <- function(layer, x, t) {

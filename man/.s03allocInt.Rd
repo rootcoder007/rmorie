@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{alloc}{A vector; its length is taken.}
-\item{m0}{See Usage.}
+\item{m0}{Passed to \code{round}.}
 }
 \description{
 Deterministic: the units left over after flooring go to the largest fractional parts, ties broken by the lower stratum index, so both language arms land on the same integers.

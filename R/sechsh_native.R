@@ -205,7 +205,7 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param bytes See Usage.
+#' @param bytes Passed to \code{as.raw}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .sech_sha256 <- function(bytes) {
@@ -290,7 +290,7 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
 #' source it follows.
 #'
 #' @param key A vector; its length is taken.
-#' @param msg See Usage.
+#' @param msg Passed to \code{as.raw}.
 #' @return The value of \code{.sech_sha256}.
 #' @export
 .sech_hmac <- function(key, msg) {

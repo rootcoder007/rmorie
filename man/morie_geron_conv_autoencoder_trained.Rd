@@ -50,3 +50,8 @@ comparing \code{compression_ratio} against \code{final_loss}.
 \code{morie_geron_convolutional_autoencoder} on the first image, exactly
 as the Python module cross-checks itself against grcae.
 }
+\examples{
+Q <- matrix(c(0, 1, 2, -1), nrow = 2, byrow = TRUE)
+morie_geron_q_learning(Q, 0, 1, 0.5, 1, 0.5, 0.9)
+morie_geron_conv_autoencoder_trained(X = Q)
+}

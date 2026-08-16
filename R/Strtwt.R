@@ -55,7 +55,7 @@ Strtwt <- function(A, H = NULL, S = NULL) {
 #'
 #' @param X Optional; may be \code{NULL}. Passed to \code{.s03mat}.
 #' @param n A count; the body uses it as \code{matrix(...)}.
-#' @param nm See Usage.
+#' @param nm Passed to \code{sprintf}.
 #' @return The value of \code{M}, as built in the body.
 #' @export
 .strtwt_cols <- function(X, n, nm) {

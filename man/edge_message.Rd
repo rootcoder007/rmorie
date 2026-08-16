@@ -13,7 +13,7 @@ edge_message(h_i, h_j, x_i, x_j, phi_e, a_ij = NULL)
 \item{x_i}{Passed to \code{.sqdist}.}
 \item{x_j}{Passed to \code{.sqdist}.}
 \item{phi_e}{Accepted by the signature and not used anywhere in the body.}
-\item{a_ij}{Defaults to \code{NULL}.}
+\item{a_ij}{Passed to \code{phi_e}.}
 }
 \description{
 makes the message invariant.

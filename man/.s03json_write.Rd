@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{x}{Passed to \code{.s03json_toJSON}.}
-\item{path}{See Usage.}
+\item{path}{Passed to \code{writeLines}.}
 \item{auto_unbox}{Passed to \code{.s03json_toJSON}. Defaults to \code{TRUE}.}
 \item{digits}{Passed to \code{.s03json_toJSON}.}
 \item{pretty}{Passed to \code{.s03json_toJSON}. Defaults to \code{FALSE}.}

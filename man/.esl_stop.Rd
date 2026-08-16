@@ -9,9 +9,9 @@
 }
 \arguments{
 \item{y}{A vector; its length is taken.}
-\item{depth}{See Usage.}
-\item{max_depth}{See Usage.}
-\item{min_node}{See Usage.}
+\item{depth}{Passed to \code{>=}.}
+\item{max_depth}{Passed to \code{>=}.}
+\item{min_node}{Passed to \code{<=}.}
 }
 \description{
 A step of the esl_native0 implementation. Called by \code{.esl_grow}. See the file header for the source the module follows.

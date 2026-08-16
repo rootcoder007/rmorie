@@ -8,9 +8,9 @@
 morie_ibpfa(n, alpha, seed = 0L)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{alpha}{See Usage.}
-\item{seed}{Defaults to \code{0L}.}
+\item{n}{Passed to \code{sample_ibp}.}
+\item{alpha}{Passed to \code{sample_ibp}.}
+\item{seed}{Passed to \code{sample_ibp}. Defaults to \code{0L}.}
 }
 \description{
 A step of the ibpfa_native implementation. No other function in the package calls it. See the file header for the source the module follows.

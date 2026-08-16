@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{t}{A vector; its length is taken and its elements indexed.}
-\item{v}{See Usage.}
+\item{v}{Passed to \code{all.equal}.}
 }
 \description{
 A step of the geron_w4d_native implementation. Called by \code{.morie_w4d_symd_simplify}. See the file header for the source the module follows.

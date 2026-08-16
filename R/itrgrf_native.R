@@ -128,12 +128,12 @@
 #' @param X A matrix; indexed by row and column.
 #' @param y A vector; indexed elementwise.
 #' @param W A vector; indexed elementwise.
-#' @param arm See Usage.
+#' @param arm Passed to \code{==}.
 #' @param rows A vector; indexed elementwise.
 #' @param at_rows A vector; its length is taken and its elements indexed.
-#' @param n_trees See Usage.
+#' @param n_trees Passed to \code{grow_forest}.
 #' @param min_leaf Numeric; combined arithmetically in the body.
-#' @param seed See Usage.
+#' @param seed Passed to \code{grow_forest}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .itrgrf_fit_arm <- function(X, y, W, arm, rows, at_rows, n_trees,

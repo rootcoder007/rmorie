@@ -11,7 +11,7 @@
 \item{u}{A vector; its length is taken.}
 \item{v}{A vector; its length is taken.}
 \item{z}{Passed to \code{.hrz3_kmat}.}
-\item{wq}{See Usage.}
+\item{wq}{Passed to \code{outer}.}
 \item{h}{Numeric; combined arithmetically in the body.}
 }
 \description{

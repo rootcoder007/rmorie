@@ -61,7 +61,7 @@
 #' ponytail: fold into a shared native optimizer when the stats::optim
 #' sweep reaches the 680 call sites.
 #'
-#' @param f See Usage.
+#' @param f Passed to \code{apply}.
 #' @param x0 A vector; its length is taken.
 #' @param maxit A count; the body uses it as \code{seq_len(...)}. Defaults to \code{400}.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
@@ -121,7 +121,7 @@
 #' the source it follows.
 #'
 #' @param evidence A vector; indexed elementwise.
-#' @param equations See Usage.
+#' @param equations Passed to \code{names}.
 #' @param exogenous A vector; its length is taken.
 #' @param do A vector; indexed elementwise.
 #' @param query Carried through into a list the body builds.

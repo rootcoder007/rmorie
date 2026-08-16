@@ -66,7 +66,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{pnorm}.
 #' @return The value of \code{pnorm}.
 #' @export
 .genemt_norm_cdf <- function(x) {

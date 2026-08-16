@@ -18,3 +18,7 @@ List with \code{embeddings}, \code{vocab_size}, \code{dim}, \code{n_unique},
 \description{
 Embedding table lookup (Geron Ch 16, morie.fn gremb)
 }
+\examples{
+E <- matrix(seq(0.1, 1.2, by = 0.1), 4, 3)
+morie_geron_embedding_lookup(ids = c(1L, 3L, 2L), E = E)
+}

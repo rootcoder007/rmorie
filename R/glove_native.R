@@ -185,8 +185,8 @@ cooccurrence <- function(corpus, window = 10, harmonic = TRUE, min_count = 1) {
 #' @param Wt A matrix; indexed by row and column.
 #' @param b A vector; indexed elementwise.
 #' @param bt A vector; indexed elementwise.
-#' @param x_max Defaults to \code{100}.
-#' @param alpha Defaults to \code{0.75}.
+#' @param x_max Passed to \code{glove_weight}. Defaults to \code{100}.
+#' @param alpha Passed to \code{glove_weight}. Defaults to \code{0.75}.
 #' @return The value of \code{total}, as built in the body.
 #' @export
 glove_loss <- function(X, W, Wt, b, bt, x_max = 100.0, alpha = 0.75) {
@@ -214,7 +214,7 @@ glove_loss <- function(X, W, Wt, b, bt, x_max = 100.0, alpha = 0.75) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param corpus See Usage.
+#' @param corpus Passed to \code{cooccurrence}.
 #' @param dim Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50}.
 #' @param window Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
 #' @param epochs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25}.
@@ -222,7 +222,7 @@ glove_loss <- function(X, W, Wt, b, bt, x_max = 100.0, alpha = 0.75) {
 #' @param x_max Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{100}.
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.75}.
 #' @param harmonic Coerced to logical by the body, with \code{as.logical}. Defaults to \code{TRUE}.
-#' @param min_count Defaults to \code{1}.
+#' @param min_count Passed to \code{cooccurrence}. Defaults to \code{1}.
 #' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
 #' @param combine One of \code{"concat"}, \code{"sum"}, \code{"w"}, \code{"wtilde"}. Defaults to \code{"sum"}.
 #' @return A list with \code{estimate}, \code{vectors}, \code{vocab}, \code{index}, \code{W}, \code{W_tilde}, \code{b}, \code{b_tilde}, \code{cooccurrence}, \code{loss_history}, \code{running_loss}, \code{final_loss}, \code{n_vocab}, \code{n_pairs}, \code{dim}, \code{window}, \code{harmonic}, \code{x_max}, \code{alpha}, \code{combine}, \code{method}.

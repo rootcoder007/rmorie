@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{v}{A list; the body checks with \code{is.list}.}
-\item{name}{See Usage.}
+\item{name}{Passed to \code{sprintf}.}
 }
 \description{
 A step of the safrl_native implementation. Called by \code{morie_safrl}. See the file header for the source the module follows.

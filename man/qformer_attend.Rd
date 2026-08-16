@@ -11,7 +11,7 @@ qformer_attend(queries, image_features, WQ, WK, WV)
 \item{queries}{A matrix; passed to \code{as.matrix}.}
 \item{image_features}{A matrix; passed to \code{as.matrix}.}
 \item{WQ}{A matrix; passed to \code{nrow}.}
-\item{WK}{See Usage.}
+\item{WK}{Passed to \code{proj}.}
 \item{WV}{A matrix; passed to \code{ncol}.}
 }
 \description{

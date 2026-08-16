@@ -8,9 +8,9 @@
 tokenize(x, bins, context = NULL, add_eos = TRUE, pad_to = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{mean_scale}.}
 \item{bins}{A list; the body reads \code{$n_bins} from it.}
-\item{context}{Defaults to \code{NULL}.}
+\item{context}{Passed to \code{mean_scale}.}
 \item{add_eos}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 \item{pad_to}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }

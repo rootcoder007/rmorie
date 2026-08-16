@@ -11,7 +11,7 @@
 \item{y_true}{A vector; indexed elementwise.}
 \item{y_pred}{A vector; indexed elementwise.}
 \item{group}{Passed to \code{.morie_fairness_ordered_unique}.}
-\item{favorable}{See Usage.}
+\item{favorable}{Passed to \code{==}.}
 }
 \description{
 A step of the frns_metrics implementation. Called by \code{morie_fairness_average_odds_difference}, \code{morie_fairness_equalized_odds}. See the file header for the source the module follows.

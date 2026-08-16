@@ -68,7 +68,7 @@
 #' the source it follows.
 #'
 #' @param pts Passed to \code{.rkmeans_mean}.
-#' @param tol Defaults to \code{1e-10}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-10}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
@@ -109,7 +109,7 @@
 #'
 #' @param pts Passed to \code{.rkmeans_mean}.
 #' @param c_val Numeric; combined arithmetically in the body.
-#' @param tol Defaults to \code{1e-10}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-10}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
 #' @return The value of \code{m}, as built in the body.
 #' @export

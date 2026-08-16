@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{data}{A vector; indexed elementwise.}
-\item{outcome}{See Usage.}
-\item{unit}{See Usage.}
-\item{time}{See Usage.}
-\item{treatment_time}{See Usage.}
+\item{outcome}{Passed to \code{c}.}
+\item{unit}{Passed to \code{c}.}
+\item{time}{Passed to \code{c}.}
+\item{treatment_time}{Passed to \code{c}.}
 }
 \description{
 NA = never), event time, and the treated-post indicator.

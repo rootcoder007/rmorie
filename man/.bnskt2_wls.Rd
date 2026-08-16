@@ -8,7 +8,7 @@
 .bnskt2_wls(rows, ys, w)
 }
 \arguments{
-\item{rows}{See Usage.}
+\item{rows}{Passed to \code{do.call}.}
 \item{ys}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{w}{Numeric; combined arithmetically in the body.}
 }

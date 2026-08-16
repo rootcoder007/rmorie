@@ -11,7 +11,7 @@
 \item{X}{A matrix; passed to \code{ncol}.}
 \item{y}{Numeric; combined arithmetically in the body.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100L}.}
-\item{tol}{Defaults to \code{1e-10}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-10}.}
 \item{ridge}{Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.}
 }
 \description{

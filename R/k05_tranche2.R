@@ -73,10 +73,10 @@ morie_sobel_test <- function(a, b, se_a, se_b, variant = "sobel") {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
+#' @param a Passed to \code{rep_to}.
 #' @param b Coerced to numeric by the body, with \code{as.numeric}.
-#' @param c Defaults to \code{NULL}.
-#' @param upper Defaults to \code{NULL}.
+#' @param c Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param upper Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{a}, \code{b}, \code{c}, \code{u}, \code{n}.
 #' @export
 .morie_k05_item_params <- function(a, b, c = NULL, upper = NULL) {
@@ -368,7 +368,7 @@ morie_tarone_ware <- function(time, event, group, weight = "tarone-ware") {
 #' source it follows.
 #'
 #' @param times A vector; its length is taken and its elements indexed.
-#' @param e_times See Usage.
+#' @param e_times Passed to \code{>=}.
 #' @param how One of \code{"identity"}, \code{"log"}, \code{"rank"}.
 #' @return The value of \code{out}, as built in the body.
 #' @export

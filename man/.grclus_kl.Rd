@@ -15,7 +15,7 @@
 \item{tolerance}{Numeric; combined arithmetically in the body.}
 \item{boundary}{A flag; the body branches on it.}
 \item{max_passes}{Coerced to integer by the body, with \code{as.integer}.}
-\item{patience}{See Usage.}
+\item{patience}{Passed to \code{>=}.}
 }
 \description{
 A step of the grclus_native implementation. Called by \code{.grclus_bisect}. See the file header for the source the module follows.

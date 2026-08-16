@@ -197,7 +197,7 @@ site_likelihood <- function(tree, seqs, site, pi = NULL, u = 1.0) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tree See Usage.
+#' @param tree Passed to \code{site_likelihood}.
 #' @param seqs A vector; its length is taken.
 #' @param pi Passed to \code{.phylml_pi}.
 #' @param u Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
@@ -259,8 +259,8 @@ morie_phylml <- function(tree, seqs, pi = NULL, u = 1.0) {
 #' @param u Passed to \code{morie_phylml}. Defaults to \code{1}.
 #' @param lo Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-06}.
 #' @param hi Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{10}.
-#' @param tol Defaults to \code{1e-10}.
-#' @param max_iter Defaults to \code{200}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-10}.
+#' @param max_iter Passed to \code{:}. Defaults to \code{200}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
 optimise_branch <- function(make_tree, seqs, pi = NULL, u = 1.0, lo = 1e-6, hi = 10.0,

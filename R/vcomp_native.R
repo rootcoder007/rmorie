@@ -29,7 +29,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p Passed to \code{<=}.
 #' @param d1 Passed to \code{.vcomp_f_cdf}.
 #' @param d2 Passed to \code{.vcomp_f_cdf}.
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{300}.

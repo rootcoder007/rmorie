@@ -115,7 +115,7 @@
 #' @param y A vector; its length is taken and its elements indexed.
 #' @param off A vector; indexed elementwise.
 #' @param H A vector; indexed elementwise.
-#' @param rows Defaults to \code{NULL}.
+#' @param rows Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param obs_weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{eps}, as built in the body.
 #' @export
@@ -247,7 +247,7 @@ morie_tmlcic_default_library <- function(p, interactions=TRUE) {
 #' @param cand Passed to \code{.tmlcic_fit_working_model}.
 #' @param g1 Accepted by the signature and not used anywhere in the body.
 #' @param rows Optional; may be \code{NULL}. Passed to \code{.tmlcic_fit_working_model}.
-#' @param eval_rows Defaults to \code{NULL}.
+#' @param eval_rows Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param ridge Passed to \code{.tmlcic_fit_working_model}. Defaults to \code{1e-08}.
 #' @param target_step A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{q1}, \code{q0}, \code{qa}, \code{info}.
@@ -492,8 +492,8 @@ morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
 #' @param groups Passed to \code{.tmlcic_cv_folds}.
 #' @param design Passed to \code{.tmlcic_cv_folds}.
 #' @param target Passed to \code{morie_tmlcic_influence_curve}.
-#' @param library Defaults to \code{NULL}.
-#' @param g_library Defaults to \code{NULL}.
+#' @param library Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param g_library Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param n_folds Passed to \code{.tmlcic_cv_folds}.
 #' @param ridge Passed to \code{morie_tmlcic_candidate_tmle}. Defaults to \code{1e-08}.
 #' @return A list with \code{q_candidate}, \code{q_risks}, \code{q_names}, \code{g_candidate}, \code{g_risks}, \code{g_names}, \code{gfit}, \code{n_folds}.
@@ -748,7 +748,7 @@ morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
 #'
 #' @param v A vector; indexed elementwise.
 #' @param groups A vector; its length is taken and its elements indexed.
-#' @param name See Usage.
+#' @param name Passed to \code{sprintf}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .tmlcic_one_per_cluster <- function(v, groups, name) {
@@ -776,7 +776,7 @@ morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
 #' @param Aj A vector; indexed elementwise.
 #' @param Zj A matrix; passed to \code{as.matrix}.
 #' @param groups A vector; its length is taken.
-#' @param a See Usage.
+#' @param a Passed to \code{==}.
 #' @param trim Numeric; combined arithmetically in the body.
 #' @param ridge Numeric; passed to \code{max}.
 #' @param known_g Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
@@ -825,7 +825,7 @@ morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
 #' @param Zi A matrix; passed to \code{as.matrix}.
 #' @param alpha A vector; indexed elementwise.
 #' @param groups A vector; its length is taken.
-#' @param a See Usage.
+#' @param a Passed to \code{==}.
 #' @param trim Numeric; combined arithmetically in the body.
 #' @param ridge Numeric; passed to \code{max}.
 #' @param known_g Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.

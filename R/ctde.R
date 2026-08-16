@@ -63,7 +63,7 @@ Ctde <- function(X, M, Y, m, C = NULL, a = 1, astar = 0) {
 #' @param M Passed to \code{.s03vec}.
 #' @param Y Passed to \code{.s03vec}.
 #' @param C Optional; may be \code{NULL}. Passed to \code{.s03mat}.
-#' @param who See Usage.
+#' @param who Passed to \code{paste0}.
 #' @return A list with \code{beta}, \code{theta}, \code{cbar}, \code{n}.
 #' @export
 .med_fit <- function(X, M, Y, C, who) {

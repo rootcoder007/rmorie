@@ -10,8 +10,8 @@ xdeep_xdeepfm_score(x_linear, w_linear, X0, Ws, w_cin, dnn_output = 0, w_dnn = 1
 \arguments{
 \item{x_linear}{Passed to \code{.xdeep_to_vec}.}
 \item{w_linear}{Passed to \code{.xdeep_to_vec}.}
-\item{X0}{See Usage.}
-\item{Ws}{See Usage.}
+\item{X0}{Passed to \code{xdeep_cin}.}
+\item{Ws}{Passed to \code{xdeep_cin}.}
 \item{w_cin}{Passed to \code{.xdeep_to_vec}.}
 \item{dnn_output}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 \item{w_dnn}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}

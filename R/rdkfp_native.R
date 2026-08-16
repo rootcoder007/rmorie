@@ -19,7 +19,7 @@
 #'
 #' ordering because every tuple compared shares a length
 #'
-#' @param v See Usage.
+#' @param v Passed to \code{sprintf}.
 #' @return A character value.
 #' @export
 .mor_rdk_key <- function(v) paste(sprintf("%06d", v), collapse = "")
@@ -32,7 +32,7 @@
 #'
 #' @param a A count; the body uses it as \code{seq_len(...)}.
 #' @param bd A list; the body reads \code{$i}, \code{$j} from it.
-#' @param minpath See Usage.
+#' @param minpath Passed to \code{>=}.
 #' @param maxpath A count; the body uses it as \code{seq_len(...)}.
 #' @param branched A flag; the body branches on it.
 #' @return The value of \code{out}, as built in the body.

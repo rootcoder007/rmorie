@@ -165,8 +165,8 @@ morie_rnacov_parse <- function(s) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Passed to \code{==}.
+#' @param b Passed to \code{==}.
 #' @return A logical value.
 #' @export
 .rnacov_can_pair <- function(a, b) {

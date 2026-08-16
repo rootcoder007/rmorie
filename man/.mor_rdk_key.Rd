@@ -8,7 +8,7 @@
 .mor_rdk_key(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Passed to \code{sprintf}.}
 }
 \description{
 ordering because every tuple compared shares a length

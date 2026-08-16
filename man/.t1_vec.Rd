@@ -8,7 +8,7 @@
 .t1_vec(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{unlist}.}
 }
 \description{
 A step of the tail1_core implementation. Called by \code{.ecfp_percol}, \code{Admmlasso}, \code{Advielbo} and 154 others in the module. See the file header for the source the module follows.

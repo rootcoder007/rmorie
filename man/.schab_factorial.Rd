@@ -8,7 +8,7 @@
 .schab_factorial(p)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Passed to \code{<}.}
 }
 \description{
 A step of the schab_hermite_shared implementation. Called by \code{.schab_indicator_coefficients}. See the file header for the source the module follows.

@@ -10,7 +10,7 @@ morie_likemc(model, data, priors, n_iter, seed = 1, step = 0.15, burn = 0)
 \arguments{
 \item{model}{A list; the body reads \code{$dt}, \code{$I0}, \code{$N}, \code{$S0} from it.}
 \item{data}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{priors}{See Usage.}
+\item{priors}{Passed to \code{gv}.}
 \item{n_iter}{Coerced to integer by the body, with \code{as.integer}.}
 \item{seed}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.}
 \item{step}{Numeric; combined arithmetically in the body. Defaults to \code{0.15}.}

@@ -165,7 +165,7 @@ varcal_pileup_column <- function(reads, position, reference) {
 #' @param reference A vector; its length is taken.
 #' @param min_alt_count The body requires: varcal: min_alt_count must be at least 1. Defaults to \code{2}.
 #' @param min_alt_fraction The body requires: varcal: min_alt_fraction must lie in [0, 1]. Defaults to \code{0.05}.
-#' @param min_bq Defaults to \code{10}.
+#' @param min_bq Passed to \code{>=}. Defaults to \code{10}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 varcal_find_candidates <- function(reads, reference, min_alt_count = 2,
@@ -229,7 +229,7 @@ varcal_find_candidates <- function(reads, reference, min_alt_count = 2,
 #' @param reference A vector; its length is taken and its elements indexed.
 #' @param candidate A list; the body reads \code{$position} from it.
 #' @param width Numeric; combined arithmetically in the body. Defaults to \code{21}.
-#' @param height Defaults to \code{100}.
+#' @param height Passed to \code{>=}. Defaults to \code{100}.
 #' @param channels Coerced to character by the body, with \code{as.character}. Defaults to \code{"base_quality_strand"}.
 #' @return A list with \code{reference_row}, \code{read_rows}, \code{n_reads}, \code{width}, \code{centre}, \code{channels}, \code{channel_set}, \code{note}.
 #' @export
@@ -370,8 +370,8 @@ varcal_genotype_posterior <- function(image, scorer = NULL, prior = NULL) {
 #'
 #' @param reads Passed to \code{.varcal_norm_reads}.
 #' @param reference Passed to \code{.varcal_chars}.
-#' @param scorer Defaults to \code{NULL}.
-#' @param min_quality Defaults to \code{10}.
+#' @param scorer Passed to \code{varcal_genotype_posterior}.
+#' @param min_quality Passed to \code{>=}. Defaults to \code{10}.
 #' @param ... Passed through.
 #' @return A list with \code{estimate}, \code{candidates}, \code{n_candidates}, \code{calls}, \code{n_called}, \code{method}.
 #' @export
@@ -412,7 +412,7 @@ morie_varcal <- function(reads, reference, scorer = NULL, min_quality = 10.0,
 #'
 #' @param called See Usage.
 #' @param truth See Usage.
-#' @param candidates Defaults to \code{NULL}.
+#' @param candidates Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 varcal_evaluate <- function(called, truth, candidates = NULL) {

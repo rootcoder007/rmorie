@@ -11,8 +11,8 @@ nbeats_forecast(y, horizon, lookback = NULL, blocks = NULL, ridge = 1e-08)
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{horizon}{Coerced to integer by the body, with \code{as.integer}.}
 \item{lookback}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
-\item{blocks}{Defaults to \code{NULL}.}
-\item{ridge}{Defaults to \code{1e-08}.}
+\item{blocks}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{ridge}{Passed to \code{nbeats_stack}. Defaults to \code{1e-08}.}
 }
 \description{
 A step of the nbeats_native implementation. No other function in the package calls it. See the file header for the source the module follows.

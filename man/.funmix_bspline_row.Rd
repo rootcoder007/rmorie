@@ -12,7 +12,7 @@
 \item{kn}{A vector; its length is taken and its elements indexed.}
 \item{degree}{A count; the body uses it as \code{seq_len(...)}.}
 \item{n_basis}{A count; the body uses it as \code{seq_len(...)}.}
-\item{tmax}{See Usage.}
+\item{tmax}{Passed to \code{>=}.}
 }
 \description{
 A step of the funmix_native implementation. Called by \code{morie_funmix_functional_mixture}. See the file header for the source the module follows.

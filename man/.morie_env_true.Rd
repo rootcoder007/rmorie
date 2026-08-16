@@ -8,7 +8,7 @@
 .morie_env_true(name)
 }
 \arguments{
-\item{name}{See Usage.}
+\item{name}{Passed to \code{Sys.getenv}.}
 }
 \description{
 A step of the exec_guard implementation. Called by \code{.morie_exec_disabled}. See the file header for the source the module follows.

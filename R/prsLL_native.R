@@ -53,8 +53,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Passed to \code{c}.
+#' @param b Passed to \code{c}.
 #' @return The value of \code{unique}.
 #' @export
 .prsLL_union <- function(a, b) unique(c(a, b))
@@ -65,7 +65,7 @@
 #' source it follows.
 #'
 #' @param a A vector; indexed elementwise.
-#' @param b See Usage.
+#' @param b Passed to \code{\%in\%}.
 #' @return The value of \code{[}.
 #' @export
 .prsLL_setdiff <- function(a, b) a[!(a %in% b)]
@@ -75,8 +75,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Passed to \code{\%in\%}.
+#' @param b Passed to \code{\%in\%}.
 #' @return A logical value.
 #' @export
 .prsLL_subset <- function(a, b) all(a %in% b)
@@ -237,7 +237,7 @@
 #'
 #' @param seq See Usage.
 #' @param first A vector; indexed elementwise.
-#' @param nts See Usage.
+#' @param nts Passed to \code{\%in\%}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .prsLL_first_seq <- function(seq, first, nts) {
@@ -264,7 +264,7 @@
 #'
 #' @param seq Coerced to character by the body, with \code{as.character}.
 #' @param g Passed to \code{.prsLL_first_sets}.
-#' @param first Defaults to \code{NULL}.
+#' @param first Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{.prsLL_first_seq}.
 #' @export
 .prsLL_first_of <- function(seq, g, first = NULL) {
@@ -279,7 +279,7 @@
 #' source it follows.
 #'
 #' @param g A list; the body reads \code{$rules}, \code{$start} from it.
-#' @param first Defaults to \code{NULL}.
+#' @param first Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{follow}, as built in the body.
 #' @export
 .prsLL_follow_sets <- function(g, first = NULL) {
@@ -517,8 +517,8 @@
 #' source it follows.
 #'
 #' @param table A vector; indexed elementwise.
-#' @param A See Usage.
-#' @param a See Usage.
+#' @param A Passed to \code{paste}.
+#' @param a Passed to \code{paste}.
 #' @return The value of \code{[[}.
 #' @export
 .prsLL_pick <- function(table, A, a) {

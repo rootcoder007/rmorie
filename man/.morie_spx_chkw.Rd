@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{w}{A matrix; passed to \code{as.matrix}.}
-\item{n}{See Usage.}
+\item{n}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{zero_diag}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

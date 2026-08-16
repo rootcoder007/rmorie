@@ -10,7 +10,7 @@ morie_posterior_hpd(theta_set, level = 0.95, conditional_prior = NULL, n_grid = 
 \arguments{
 \item{theta_set}{Passed to \code{morie_conditional_prior_uniform}.}
 \item{level}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.}
-\item{conditional_prior}{Defaults to \code{NULL}.}
+\item{conditional_prior}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{n_grid}{Passed to \code{morie_conditional_prior_uniform}. Defaults to \code{401L}.}
 }
 \description{

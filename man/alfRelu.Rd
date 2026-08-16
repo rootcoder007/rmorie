@@ -8,7 +8,7 @@
 alfRelu(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{ifelse}.}
 }
 \description{
 A step of the alf_core implementation. Called by \code{Alfevo}, \code{Alfplddt}, \code{Alfstrtr}. See the file header for the source the module follows.

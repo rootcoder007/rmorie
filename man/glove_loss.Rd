@@ -13,8 +13,8 @@ glove_loss(X, W, Wt, b, bt, x_max = 100, alpha = 0.75)
 \item{Wt}{A matrix; indexed by row and column.}
 \item{b}{A vector; indexed elementwise.}
 \item{bt}{A vector; indexed elementwise.}
-\item{x_max}{Defaults to \code{100}.}
-\item{alpha}{Defaults to \code{0.75}.}
+\item{x_max}{Passed to \code{glove_weight}. Defaults to \code{100}.}
+\item{alpha}{Passed to \code{glove_weight}. Defaults to \code{0.75}.}
 }
 \description{
 A step of the glove_native implementation. Called by \code{morie_glove}. See the file header for the source the module follows.

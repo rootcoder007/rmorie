@@ -8,8 +8,8 @@
 CorrDot(x, y)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
+\item{x}{Passed to \code{DotProd}.}
+\item{y}{Passed to \code{DotProd}.}
 }
 \description{
 A step of the rangayyan_ccf implementation. No other function in the package calls it. See the file header for the source the module follows.

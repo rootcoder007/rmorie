@@ -66,7 +66,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .tmlcmp_vec <- function(x) {
@@ -115,7 +115,7 @@
 #' @param des A matrix; passed to \code{nrow}.
 #' @param a Numeric; combined arithmetically in the body.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{25}.
-#' @param tol Defaults to \code{1e-08}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
 #' @return The value of \code{b}, as built in the body.
 #' @export
 .tmlcmp_logit_irls <- function(des, a, max_iter=25, tol=1e-8) {

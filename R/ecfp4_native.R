@@ -204,10 +204,10 @@
 #' source it follows.
 #'
 #' @param a A count; the body uses it as \code{rep(...)}.
-#' @param numhs See Usage.
-#' @param charge See Usage.
-#' @param inring See Usage.
-#' @param isotope_delta See Usage.
+#' @param numhs Passed to \code{col}.
+#' @param charge Passed to \code{col}.
+#' @param inring Passed to \code{col}.
+#' @param isotope_delta Passed to \code{col}.
 #' @return A list with \code{numhs}, \code{charge}, \code{inring}, \code{isotope_delta}.
 #' @export
 .mor_fp_defaults <- function(a, numhs, charge, inring, isotope_delta) {

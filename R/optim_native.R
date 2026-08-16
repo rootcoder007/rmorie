@@ -15,7 +15,7 @@
 #' source it follows.
 #'
 #' @param g Coerced to numeric by the body, with \code{as.numeric}.
-#' @param name Defaults to \code{"g"}.
+#' @param name Passed to \code{sprintf}. Defaults to \code{"g"}.
 #' @return The value of \code{a}, as built in the body.
 #' @export
 .morie_opt_vec <- function(g, name = "g") {

@@ -13,7 +13,7 @@
 \item{targets}{Passed to \code{morie_alfqud_correctness}.}
 \item{n_reg}{Passed to \code{morie_alfqud_correctness}.}
 \item{lw}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{rf}{See Usage.}
+\item{rf}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the alfqud_native implementation. Called by \code{.alfqud_bfs}, \code{.alfqud_mcts}. See the file header for the source the module follows.

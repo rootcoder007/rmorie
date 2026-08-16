@@ -78,7 +78,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param q See Usage.
+#' @param q Passed to \code{k.vec}.
 #' @param K Passed to \code{.informer_to_rows}.
 #' @param measure Compared against \code{"maxmean"}. Defaults to \code{"exact"}.
 #' @param scale Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.

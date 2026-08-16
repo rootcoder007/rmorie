@@ -250,7 +250,7 @@ DELTA_MAX <- 1000.0
 #' log p(r), with p(r) the standard normal so log p(r) = -r.r/2.
 #'
 #' @param logp Accepted by the signature and not used anywhere in the body.
-#' @param theta See Usage.
+#' @param theta Passed to \code{logp}.
 #' @param r Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
@@ -292,7 +292,7 @@ leapfrog <- function(theta, r, eps, grad) {
 #'
 #' @param theta A vector; its length is taken.
 #' @param logp Passed to \code{.joint}.
-#' @param grad See Usage.
+#' @param grad Passed to \code{leapfrog}.
 #' @param rnd Accepted by the signature and not used anywhere in the body.
 #' @param eps Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param max_doublings Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
@@ -381,15 +381,15 @@ no_u_turn <- function(theta_minus, theta_plus, r_minus, r_plus) {
 #' the candidate sample t_p, and the tree\'s bookkeeping (count,
 #' indicator, summed alpha, alpha normaliser).
 #'
-#' @param theta See Usage.
-#' @param r See Usage.
+#' @param theta Passed to \code{leapfrog}.
+#' @param r Passed to \code{leapfrog}.
 #' @param logu Numeric; combined arithmetically in the body.
 #' @param v Numeric; combined arithmetically in the body.
 #' @param j Numeric; combined arithmetically in the body.
 #' @param eps Numeric; combined arithmetically in the body.
 #' @param logp Passed to \code{.joint}.
-#' @param grad See Usage.
-#' @param rnd See Usage.
+#' @param grad Passed to \code{leapfrog}.
+#' @param rnd Passed to \code{build_tree}.
 #' @param joint0 Numeric; combined arithmetically in the body.
 #' @return A list, whose contents depend on the branch taken; across the branches its names are \code{tm}, \code{rm}, \code{tp}, \code{rp}, \code{t_p}, \code{n}, \code{s}, \code{alpha}, \code{na}.
 #' @export

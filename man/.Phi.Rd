@@ -8,7 +8,7 @@
 .Phi(z)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Passed to \code{pnorm}.}
 }
 \description{
 A step of the bayopt_native implementation. Called by \code{acquisition_gradient}, \code{expected_improvement}, \code{probability_of_improvement}. See the file header for the source the module follows.

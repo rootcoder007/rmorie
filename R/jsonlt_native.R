@@ -76,7 +76,7 @@
 #'
 #' jsonlite\'s digits = I(n). Anything else is decimal places.
 #'
-#' @param digits See Usage.
+#' @param digits Passed to \code{inherits}.
 #' @return The value of \code{inherits}.
 #' @export
 .jsonlt_sig <- function(digits) inherits(digits, "AsIs")
@@ -91,7 +91,7 @@
 #' with the same format string, so the bytes match; each language\'s own
 #' float-to-string would put them one ulp apart and call it a failure.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{is.nan}.
 #' @param digits Optional; may be \code{NULL}. Passed to \code{.jsonlt_sig}.
 #' @return The value of \code{.jsonlt_tidy}.
 #' @export
@@ -322,7 +322,7 @@
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @param o A list; the body reads \code{$auto_unbox}, \code{$complex}, \code{$digits} from it.
-#' @param unbox_ok See Usage.
+#' @param unbox_ok Passed to \code{&&}.
 #' @return A character value.
 #' @export
 .jsonlt_atomic <- function(x, o, unbox_ok) {
@@ -557,7 +557,7 @@ morie_jsonlt_unbox <- function(x) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param txt See Usage.
+#' @param txt Passed to \code{paste}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
 .jsonlt_parse <- function(txt) {
@@ -780,11 +780,11 @@ morie_jsonlt_from_json <- function(txt, simplifyVector = TRUE,
 #'
 #' walks characters instead of running a regex over the text.
 #'
-#' @param txt See Usage.
+#' @param txt Passed to \code{paste}.
 #' @param open_pad Accepted by the signature and not used anywhere in the body.
 #' @param close_pad Accepted by the signature and not used anywhere in the body.
 #' @param comma_pad Accepted by the signature and not used anywhere in the body.
-#' @param colon_txt See Usage.
+#' @param colon_txt Passed to \code{c}.
 #' @param keep_ws A flag; the body branches on it.
 #' @return A character value.
 #' @export

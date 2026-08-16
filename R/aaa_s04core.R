@@ -39,9 +39,9 @@ NULL
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
-#' @param lo See Usage.
-#' @param hi See Usage.
+#' @param v Passed to \code{pmax}.
+#' @param lo Passed to \code{pmax}.
+#' @param hi Passed to \code{pmin}.
 #' @return The value of \code{pmin}.
 #' @export
 .s4_clip <- function(v, lo, hi) pmin(pmax(v, lo), hi)
@@ -92,7 +92,7 @@ NULL
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{unlist}.
 #' @return A numeric value.
 #' @export
 .s4_order <- function(x) order(as.numeric(unlist(x)), seq_along(unlist(x))) - 1L
@@ -103,7 +103,7 @@ NULL
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .s4_rank_avg <- function(x) as.numeric(rank(as.numeric(unlist(x)), ties.method = "average"))
@@ -236,7 +236,7 @@ NULL
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Passed to \code{>=}.
 #' @return The value of \code{ifelse}.
 #' @export
 .s4_sgn <- function(v) ifelse(v >= 0, 1, -1)

@@ -166,12 +166,12 @@ chrF <- chrf_score
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param hypothesis See Usage.
-#' @param reference See Usage.
-#' @param n_char Defaults to \code{6L}.
-#' @param beta Defaults to \code{2}.
-#' @param remove_whitespace Defaults to \code{TRUE}.
-#' @param word_order Defaults to \code{0L}.
+#' @param hypothesis Passed to \code{chrf_score}.
+#' @param reference Passed to \code{chrf_score}.
+#' @param n_char Passed to \code{chrf_score}. Defaults to \code{6L}.
+#' @param beta Passed to \code{chrf_score}. Defaults to \code{2}.
+#' @param remove_whitespace Passed to \code{chrf_score}. Defaults to \code{TRUE}.
+#' @param word_order Passed to \code{chrf_score}. Defaults to \code{0L}.
 #' @return The value of \code{chrf_score}.
 #' @export
 morie_chrF <- function(hypothesis, reference, n_char = 6L, beta = 2.0,

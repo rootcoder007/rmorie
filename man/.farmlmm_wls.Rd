@@ -11,7 +11,7 @@
 \item{X}{A matrix; passed to \code{nrow}.}
 \item{y}{A vector; its length is taken.}
 \item{w}{Numeric; passed to \code{sqrt}.}
-\item{rcond}{See Usage.}
+\item{rcond}{Passed to \code{qr.solve}.}
 }
 \description{
 A step of the farmlmm_native implementation. Called by \code{.fixed_effect_scan}. See the file header for the source the module follows.

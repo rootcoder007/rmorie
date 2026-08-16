@@ -479,9 +479,9 @@
 #' @param c Numeric; combined arithmetically in the body.
 #' @param p Numeric; combined arithmetically in the body.
 #' @param n_quad Passed to \code{.schab_gauss_legendre}. Defaults to \code{40L}.
-#' @param rtol Defaults to \code{1e-10}.
-#' @param max_panels Defaults to \code{20000L}.
-#' @param quiet_runs Defaults to \code{4L}.
+#' @param rtol Passed to \code{<}. Defaults to \code{1e-10}.
+#' @param max_panels Passed to \code{<}. Defaults to \code{20000L}.
+#' @param quiet_runs Passed to \code{>=}. Defaults to \code{4L}.
 #' @return A list with \code{value}, \code{upper}, \code{last_rel}, \code{tail_bound}.
 #' @export
 .schab_st_hankel_panels <- function(hval, kval, theta, c, p, n_quad = 40L,
@@ -725,7 +725,7 @@
 #' @param z A vector; indexed elementwise.
 #' @param at_time Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10L}.
-#' @param max_dist Defaults to \code{NULL}.
+#' @param max_dist Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{gamma}, \code{counts}, \code{n_at_time}, \code{lags}, \code{edges}.
 #' @export

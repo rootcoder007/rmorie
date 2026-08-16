@@ -391,7 +391,7 @@ Basmat <- function(t, n_basis, kind = "fourier", period = NULL) {
 #' @param t Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n_basis Coerced to integer by the body, with \code{as.integer}.
 #' @param p A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1L}.
-#' @param kind Defaults to \code{"fourier"}.
+#' @param kind Passed to \code{identical}. Defaults to \code{"fourier"}.
 #' @param period Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export

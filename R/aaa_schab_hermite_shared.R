@@ -48,7 +48,7 @@
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param p See Usage.
+#' @param p Passed to \code{<}.
 #' @return The value of \code{prod}.
 #' @export
 .schab_factorial <- function(p) {

@@ -12,7 +12,7 @@ self_attention(E, WQ, WK, WV, mask = NULL)
 \item{WQ}{See Usage.}
 \item{WK}{See Usage.}
 \item{WV}{See Usage.}
-\item{mask}{Defaults to \code{NULL}.}
+\item{mask}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the sasRec_native implementation. No other function in the package calls it. See the file header for the source the module follows.
@@ -21,3 +21,8 @@ A step of the sasRec_native implementation. No other function in the package cal
 A list with \code{output}, \code{weights}, \code{note}.
 }
 \keyword{internal}
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+attention_span(M)
+self_attention(E = M, WQ = M, WK = M, WV = M)
+}

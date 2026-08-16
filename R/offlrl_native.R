@@ -54,7 +54,7 @@
 #' @param d Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param S See Usage.
 #' @param A See Usage.
-#' @param name See Usage.
+#' @param name Passed to \code{stop}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .offlrl_as_dist <- function(d, S, A, name) {
@@ -91,8 +91,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param s See Usage.
-#' @param a See Usage.
+#' @param s Passed to \code{paste0}.
+#' @param a Passed to \code{paste0}.
 #' @return A character value.
 #' @export
 .offlrl_key <- function(s, a) paste0(s, "\r", a)
@@ -114,7 +114,7 @@
 #' @param mu Passed to \code{.offlrl_as_dist}.
 #' @param lr Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.
 #' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000}.
-#' @param tol Defaults to \code{1e-12}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-12}.
 #' @return A list with \code{estimate}, \code{q}, \code{value}, \code{greedy}, \code{behavior}, \code{counts}, \code{penalty}, \code{bellman_error}, \code{objective}, \code{alpha}, \code{variant}, \code{backup}, \code{n_transitions}, \code{method}.
 #' @export
 offlrl <- function(dataset, states = NULL, actions = NULL, alpha = 1.0,

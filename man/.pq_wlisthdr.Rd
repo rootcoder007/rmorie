@@ -10,7 +10,7 @@
 \arguments{
 \item{e}{Passed to \code{.pq_emit}.}
 \item{size}{Passed to \code{.pq_wvarint}.}
-\item{etype}{See Usage.}
+\item{etype}{Passed to \code{bitwOr}.}
 }
 \description{
 A step of the parquet implementation. Called by \code{.pq_wlistbin}, \code{.pq_wlisti32}, \code{.pq_wliststruct}. See the file header for the source the module follows.

@@ -97,7 +97,7 @@ Btmult <- function(n, B = 200L, rng = 2L, exhaustive = FALSE) {
 #' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param m See Usage.
+#' @param m Passed to \code{<}.
 #' @return The value of \code{ps}, as built in the body.
 #' @export
 .bt_primes <- function(m) {

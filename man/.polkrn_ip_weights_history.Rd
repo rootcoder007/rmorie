@@ -12,7 +12,7 @@
 \item{L_hist}{A vector; indexed elementwise.}
 \item{kind}{Accepted by the signature and not used anywhere in the body.}
 \item{stabilize}{A flag; the body branches on it.}
-\item{trim}{See Usage.}
+\item{trim}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the polkrn_native implementation. Called by \code{morie_polkrn}. See the file header for the source the module follows.

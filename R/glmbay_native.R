@@ -48,7 +48,7 @@
 #' @param prior_sd Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2.5}.
 #' @param add_intercept A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
-#' @param tol Defaults to \code{1e-10}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-10}.
 #' @return A list with \code{estimate}, \code{coefficients}, \code{posterior_sd}, \code{std_error}, \code{ci_lower}, \code{ci_upper}, \code{fitted}, \code{linear_predictor}, \code{loglik}, \code{log_prior}, \code{log_marginal}, \code{log_det_hessian}, \code{iterations}, \code{converged}, \code{family}, \code{prior_sd}, \code{n}, \code{p}, \code{method}, \code{note}.
 #' @export
 morie_glmbay_bayesian_glm <- function(X, y, family = "binomial",

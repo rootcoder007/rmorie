@@ -74,7 +74,7 @@
 #' @param x A vector; its length is taken.
 #' @param cost Passed to \code{.mor_cp_cost}.
 #' @param penalty See Usage.
-#' @param min_seglen See Usage.
+#' @param min_seglen Passed to \code{seq.int}.
 #' @return A list with \code{taus}, \code{objective}.
 #' @export
 .mor_pelt_core <- function(x, cost, penalty, min_seglen) {

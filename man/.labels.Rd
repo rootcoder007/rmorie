@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{v}{Coerced to character by the body, with \code{as.character}.}
-\item{name}{See Usage.}
+\item{name}{Passed to \code{paste0}.}
 }
 \description{
 A step of the randIE_native implementation. Called by \code{morie_randIE_interventional_mean}, \code{morie_randIE_mediator_distribution}. See the file header for the source the module follows.

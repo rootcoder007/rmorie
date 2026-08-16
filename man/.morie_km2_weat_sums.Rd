@@ -10,8 +10,8 @@
 \arguments{
 \item{A_1}{A matrix; passed to \code{as.matrix}.}
 \item{A_2}{A matrix; passed to \code{as.matrix}.}
-\item{W_1}{See Usage.}
-\item{W_2}{See Usage.}
+\item{W_1}{Passed to \code{apply}.}
+\item{W_2}{Passed to \code{apply}.}
 }
 \description{
 A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch6_weat_effect_size}, \code{morie_kamath_ch6_weat_function}. See the file header for the source the module follows.

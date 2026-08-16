@@ -10,11 +10,11 @@ morie_regmlm(G, y, chromosomes = NULL, block_size = 1000, n_ridge = 5, cv = "kfo
 \arguments{
 \item{G}{A matrix; passed to \code{nrow}.}
 \item{y}{A vector; its length is taken.}
-\item{chromosomes}{Defaults to \code{NULL}.}
-\item{block_size}{Defaults to \code{1000}.}
-\item{n_ridge}{Defaults to \code{5}.}
-\item{cv}{Defaults to \code{"kfold"}.}
-\item{k}{Defaults to \code{5}.}
+\item{chromosomes}{Passed to \code{make_blocks}.}
+\item{block_size}{Passed to \code{make_blocks}. Defaults to \code{1000}.}
+\item{n_ridge}{Passed to \code{level0_predictors}. Defaults to \code{5}.}
+\item{cv}{Passed to \code{level1_stack}. Defaults to \code{"kfold"}.}
+\item{k}{Passed to \code{level1_stack}. Defaults to \code{5}.}
 }
 \description{
 A step of the regmlm_native implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -109,7 +109,7 @@
 #' source it follows.
 #'
 #' @param friends A vector; indexed elementwise.
-#' @param i See Usage.
+#' @param i Passed to \code{setdiff}.
 #' @return The value of \code{setdiff}.
 #' @export
 .tlnet1_fset <- function(friends, i) {

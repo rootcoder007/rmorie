@@ -11,7 +11,7 @@
 \item{route}{The body requires: the denoiser route is prior or ideal.}
 \item{denoiser}{The body requires: the denoiser route is prior or ideal.}
 \item{x}{A matrix; passed to \code{nrow}.}
-\item{t}{See Usage.}
+\item{t}{Passed to \code{denoiser}.}
 \item{fixed}{Passed to \code{morie_alfrf2_ideal}.}
 \item{spacing}{Passed to \code{morie_alfrf2_ideal}.}
 \item{passes}{Passed to \code{morie_alfrf2_ideal}.}

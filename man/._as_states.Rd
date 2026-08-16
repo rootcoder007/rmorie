@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{seq}{Iterated over elementwise, with \code{lapply}.}
-\item{name}{See Usage.}
+\item{name}{Passed to \code{sprintf}.}
 }
 \description{
 A step of the hindsr_native implementation. Called by \code{hindsr}. See the file header for the source the module follows.

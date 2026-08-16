@@ -8,7 +8,7 @@
 .pq_column_values(con, cm, num_rows, maxdef, typelen)
 }
 \arguments{
-\item{con}{See Usage.}
+\item{con}{Passed to \code{seek}.}
 \item{cm}{Passed to \code{.pq_f}.}
 \item{num_rows}{A count; the body uses it as \code{seq_len(...)}.}
 \item{maxdef}{Passed to \code{.pq_bit_width}.}

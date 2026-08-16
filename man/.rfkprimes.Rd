@@ -8,7 +8,7 @@
 .rfkprimes(k)
 }
 \arguments{
-\item{k}{See Usage.}
+\item{k}{Passed to \code{<}.}
 }
 \description{
 A step of the rfkrn implementation. Called by \code{Rfkrn}. See the file header for the source the module follows.

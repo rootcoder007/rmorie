@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{Xp}{A matrix; indexed by row and column.}
-\item{yp}{See Usage.}
+\item{yp}{Passed to \code{==}.}
 }
 \description{
 A step of the geron_w4c_native implementation. No other function in the package calls it. See the file header for the source the module follows.

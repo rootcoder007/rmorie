@@ -8,11 +8,11 @@
 .morie_binchoice_fit(X, y, link = "probit", max_iter = 100L, tol = 1e-09)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{Passed to \code{cbind}.}
 \item{y}{Numeric; combined arithmetically in the body.}
 \item{link}{Compared against \code{"probit"}. Defaults to \code{"probit"}.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100L}.}
-\item{tol}{Defaults to \code{1e-09}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-09}.}
 }
 \description{
 probabilities. stats::pnorm/dnorm are used as the normal CDF and density -- arithmetic primitives, in the same sense as exp() -- not as a model-fitting delegate.

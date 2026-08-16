@@ -69,10 +69,10 @@ discretize_zoh <- function(delta, A, B, rule = "zoh") {
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h A vector; its length is taken and its elements indexed.
 #' @param A A vector; its length is taken.
-#' @param B See Usage.
+#' @param B Passed to \code{discretize_zoh}.
 #' @param C A vector; its length is taken.
-#' @param delta See Usage.
-#' @param rule Defaults to \code{"zoh"}.
+#' @param delta Passed to \code{discretize_zoh}.
+#' @param rule Passed to \code{discretize_zoh}. Defaults to \code{"zoh"}.
 #' @return A list with \code{h}, \code{y}.
 #' @export
 selective_ssm_step <- function(x, h, A, B, C, delta, rule = "zoh") {
@@ -216,11 +216,11 @@ gated_rnn_equivalent <- function(x, w, b = 0.0) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param A See Usage.
-#' @param W_B See Usage.
-#' @param W_C See Usage.
-#' @param W_delta See Usage.
+#' @param X Passed to \code{selective_scan}.
+#' @param A Passed to \code{selective_scan}.
+#' @param W_B Passed to \code{selective_scan}.
+#' @param W_C Passed to \code{selective_scan}.
+#' @param W_delta Passed to \code{selective_scan}.
 #' @param ... Passed through.
 #' @return The value of \code{$}.
 #' @export
@@ -250,17 +250,17 @@ mambassmstep <- selective_ssm_step
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param A See Usage.
-#' @param W_B See Usage.
-#' @param W_C See Usage.
-#' @param W_delta See Usage.
-#' @param delta_bias Defaults to \code{NULL}.
-#' @param b_B Defaults to \code{NULL}.
-#' @param b_C Defaults to \code{NULL}.
-#' @param b_delta Defaults to \code{0}.
-#' @param rule Defaults to \code{"zoh"}.
-#' @param D_skip Defaults to \code{NULL}.
+#' @param X Passed to \code{selective_scan}.
+#' @param A Passed to \code{selective_scan}.
+#' @param W_B Passed to \code{selective_scan}.
+#' @param W_C Passed to \code{selective_scan}.
+#' @param W_delta Passed to \code{selective_scan}.
+#' @param delta_bias Passed to \code{selective_scan}.
+#' @param b_B Passed to \code{selective_scan}.
+#' @param b_C Passed to \code{selective_scan}.
+#' @param b_delta Passed to \code{selective_scan}. Defaults to \code{0}.
+#' @param rule Passed to \code{selective_scan}. Defaults to \code{"zoh"}.
+#' @param D_skip Passed to \code{selective_scan}.
 #' @return The value of \code{selective_scan}.
 #' @export
 morie_mambss <- function(X, A, W_B, W_C, W_delta, delta_bias = NULL,

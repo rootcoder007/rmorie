@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{h}{Numeric; combined arithmetically in the body.}
-\item{model}{See Usage.}
+\item{model}{Passed to \code{switch}.}
 \item{nugget}{Numeric; combined arithmetically in the body.}
 \item{psill}{Numeric; combined arithmetically in the body.}
 \item{rng}{Numeric; passed to \code{max}.}

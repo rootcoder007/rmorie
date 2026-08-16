@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{mu}{A vector; its length is taken.}
-\item{kind}{See Usage.}
+\item{kind}{Passed to \code{identical}.}
 }
 \description{
 A step of the schab_glmm_shared implementation. Called by \code{.schab_mu_eta}, \code{.schab_predict_glm}, \code{.schab_pseudo_data} and 1 others in the module. See the file header for the source the module follows.

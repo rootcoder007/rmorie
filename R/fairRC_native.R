@@ -65,7 +65,7 @@ cutoffs <- function(N, step = 10) {
 #'
 #' @param protected A vector; its length is taken and its elements indexed.
 #' @param measure One of \code{"rKL"}, \code{"rND"}.
-#' @param step See Usage.
+#' @param step Passed to \code{cutoffs}.
 #' @return The value of \code{tot}, as built in the body.
 #' @export
 .raw <- function(protected, measure, step) {
@@ -123,7 +123,7 @@ normalizer <- function(protected, measure = "rND", step = 10) {
 #' @param measure Passed to \code{.raw}.
 #' @param step Passed to \code{.raw}.
 #' @param normalize A flag; the body branches on it.
-#' @param caveat Defaults to \code{NULL}.
+#' @param caveat Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{pay}, as built in the body.
 #' @export
 .measure <- function(protected, measure, step, normalize,
@@ -248,10 +248,10 @@ fairnessrec <- rND
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param protected See Usage.
+#' @param protected Passed to \code{rND}.
 #' @param measure One of \code{"rKL"}, \code{"rND"}. Defaults to \code{"rND"}.
-#' @param step Defaults to \code{10}.
-#' @param normalize Defaults to \code{TRUE}.
+#' @param step Passed to \code{rND}. Defaults to \code{10}.
+#' @param normalize Passed to \code{rND}. Defaults to \code{TRUE}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 morie_fairRC <- function(protected, measure = "rND", step = 10,

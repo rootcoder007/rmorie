@@ -26,7 +26,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
+#' @param z Passed to \code{dist}.
 #' @param alpha Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export

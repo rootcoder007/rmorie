@@ -11,7 +11,7 @@ morie_sse4r(sequence, user_embedding, item_table, attend = NULL, top_k = 3)
 \item{sequence}{Passed to \code{.sse4r_personalise}.}
 \item{user_embedding}{Passed to \code{.sse4r_personalise}.}
 \item{item_table}{A matrix; passed to \code{as.matrix}.}
-\item{attend}{Defaults to \code{NULL}.}
+\item{attend}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{top_k}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.}
 }
 \description{

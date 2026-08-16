@@ -8,8 +8,8 @@
 .pmfsc_key(a, b)
 }
 \arguments{
-\item{a}{See Usage.}
-\item{b}{See Usage.}
+\item{a}{Passed to \code{paste0}.}
+\item{b}{Passed to \code{paste0}.}
 }
 \description{
 A step of the pmfsc_native implementation. Called by \code{morie_pmfsc_derive}, \code{morie_pmfsc_score}. See the file header for the source the module follows.

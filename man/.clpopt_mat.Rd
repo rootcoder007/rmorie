@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{A}{A matrix; indexed by row and column.}
-\item{name}{See Usage.}
-\item{ncol}{Defaults to \code{NULL}.}
+\item{name}{Passed to \code{sprintf}.}
+\item{ncol}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 Mirrors clpopt._mat.

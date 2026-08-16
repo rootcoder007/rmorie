@@ -10,7 +10,7 @@ stick_breaking(alpha, K, rng = NULL, seed = 0)
 \arguments{
 \item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{K}{Coerced to integer by the body, with \code{as.integer}.}
-\item{rng}{Defaults to \code{NULL}.}
+\item{rng}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
 }
 \description{

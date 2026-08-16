@@ -14,11 +14,11 @@
 \item{kernel}{Passed to \code{.schab_gwr_fit}. Defaults to \code{"gaussian"}.}
 \item{criterion}{Passed to \code{.schab_select_bandwidth}. Defaults to \code{"aicc"}.}
 \item{adaptive}{A flag; the body branches on it. Defaults to \code{FALSE}.}
-\item{tol}{Defaults to \code{1e-05}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-05}.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.}
 \item{rss_score}{A flag; the body branches on it. Defaults to \code{FALSE}.}
-\item{bws_same_times}{Defaults to \code{5L}.}
-\item{init_bandwidth}{Defaults to \code{NULL}.}
+\item{bws_same_times}{Passed to \code{>=}. Defaults to \code{5L}.}
+\item{init_bandwidth}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{standardize}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

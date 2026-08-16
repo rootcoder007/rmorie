@@ -13,7 +13,7 @@
 \item{X}{A matrix; indexed by row and column.}
 \item{ties}{Passed to \code{.morie_cox_score}. Defaults to \code{"efron"}.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.}
-\item{tol}{Defaults to \code{1e-09}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-09}.}
 \item{offset}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{

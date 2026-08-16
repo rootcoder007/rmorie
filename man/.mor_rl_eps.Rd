@@ -11,7 +11,7 @@
 \item{e}{Passed to \code{.ghc_unif}.}
 \item{Qs}{Passed to \code{.mor_rl_greedy}.}
 \item{A}{Numeric; combined arithmetically in the body.}
-\item{epsilon}{See Usage.}
+\item{epsilon}{Passed to \code{<}.}
 }
 \description{
 A step of the qlearn_native implementation. Called by \code{morie_qlearn}, \code{morie_sarsa}. See the file header for the source the module follows.

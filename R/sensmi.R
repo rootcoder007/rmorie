@@ -6,7 +6,7 @@
 #'
 #' coefficients and the residuals in one list so callers do not refit.
 #'
-#' @param X See Usage.
+#' @param X Passed to \code{cbind}.
 #' @param y Numeric; combined arithmetically in the body.
 #' @return A list with \code{beta}, \code{resid}.
 #' @export

@@ -11,16 +11,16 @@ mafft_alignment(sequences, method = "FFT-NS-2", seq_type = NULL, raw_matrix = NU
 \item{sequences}{Passed to \code{.mafft_clean}.}
 \item{method}{One of \code{"FFT-NS-2"}, \code{"FFT-NS-i"}, \code{"NW-NS-2"}. Defaults to \code{"FFT-NS-2"}.}
 \item{seq_type}{Passed to \code{.mafft_clean}.}
-\item{raw_matrix}{Defaults to \code{NULL}.}
-\item{freqs}{Defaults to \code{NULL}.}
-\item{s_a}{Defaults to \code{0.06}.}
+\item{raw_matrix}{Passed to \code{normalized_similarity_matrix}.}
+\item{freqs}{Passed to \code{normalized_similarity_matrix}.}
+\item{s_a}{Passed to \code{normalized_similarity_matrix}. Defaults to \code{0.06}.}
 \item{s_op}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2.4}.}
 \item{matrix}{Carried through into a list the body builds. Defaults to \code{"normalized"}.}
 \item{window}{Carried through into a list the body builds. Defaults to \code{30L}.}
 \item{n_peaks}{Carried through into a list the body builds. Defaults to \code{20L}.}
 \item{threshold}{Carried through into a list the body builds. Defaults to \code{0.7}.}
 \item{max_len}{Carried through into a list the body builds. Defaults to \code{150L}.}
-\item{max_iterate}{Defaults to \code{16L}.}
+\item{max_iterate}{Passed to \code{iterative_refine}. Defaults to \code{16L}.}
 }
 \description{
 A step of the mafft_native implementation. Called by \code{morie_mafft}. See the file header for the source the module follows.

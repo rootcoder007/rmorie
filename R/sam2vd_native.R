@@ -277,7 +277,7 @@ morie_sam2vd_memory_attention <- function(frame_features, bank, current_frame,
 #' @param frames A vector; its length is taken and its elements indexed.
 #' @param encoder Accepted by the signature and not used anywhere in the body.
 #' @param decoder Accepted by the signature and not used anywhere in the body.
-#' @param prompts Defaults to \code{NULL}.
+#' @param prompts Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param n_recent Passed to \code{morie_sam2vd_memory_bank}. Defaults to \code{7}.
 #' @param m_prompted Passed to \code{morie_sam2vd_memory_bank}. Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{masks}, \code{conditioned}, \code{n_frames}, \code{first_frame_is_sam}, \code{method}, \code{note}.

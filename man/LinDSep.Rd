@@ -8,8 +8,8 @@
 LinDSep(X, y)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
+\item{X}{Passed to \code{FishLda}.}
+\item{y}{Passed to \code{FishLda}.}
 }
 \description{
 means is optimal only for equal priors AND equal variances, so the error-minimizing cut is the default and the midpoint is reported beside it.  Both errors are resubstitution errors -- measured on the data that chose the cut -- so they are optimistic; Section 10.10.3 is the book\'s warning, and KFoldCv or LooCv gives an honest figure.

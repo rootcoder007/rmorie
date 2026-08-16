@@ -14,7 +14,7 @@
 #' source it follows.
 #'
 #' @param seq Iterated over elementwise, with \code{lapply}.
-#' @param name See Usage.
+#' @param name Passed to \code{sprintf}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 ._as_states <- function(seq, name) {
@@ -35,7 +35,7 @@
 #' @param a Accepted by the signature and not used anywhere in the body.
 #' @param s_next A vector; its length is taken and its elements indexed.
 #' @param g A vector; its length is taken and its elements indexed.
-#' @param tol See Usage.
+#' @param tol Passed to \code{>}.
 #' @return A numeric value.
 #' @export
 ._sparse_reward <- function(s, a, s_next, g, tol) {

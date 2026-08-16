@@ -11,7 +11,7 @@ predict_next(state, item_embeddings, top_k = 5, exclude = numeric(0))
 \item{state}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{item_embeddings}{See Usage.}
 \item{top_k}{Numeric; passed to \code{min}. Defaults to \code{5}.}
-\item{exclude}{Defaults to \code{numeric(0)}.}
+\item{exclude}{Passed to \code{unlist}. Defaults to \code{numeric(0)}.}
 }
 \description{
 A step of the sasRec_native implementation. No other function in the package calls it. See the file header for the source the module follows.

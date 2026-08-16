@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{Z}{A matrix; passed to \code{tcrossprod}.}
-\item{kernel}{See Usage.}
+\item{kernel}{Passed to \code{identical}.}
 \item{gamma}{Numeric; combined arithmetically in the body.}
 }
 \description{

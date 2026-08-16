@@ -23,3 +23,10 @@ E-step responsibilities from \code{\link[=morie_geron_gmm_log_likelihood]{morie_
 the weighted pi / mu / Sigma updates, with the monotonicity of the
 log-likelihood asserted.
 }
+\examples{
+set.seed(2)
+X <- rbind(matrix(rnorm(20, 0), 10, 2), matrix(rnorm(20, 3), 10, 2))
+morie_geron_gmm_em_step(X, pi = c(0.5, 0.5),
+                        means = rbind(c(0, 0), c(3, 3)),
+                        covars = list(diag(2), diag(2)))
+}

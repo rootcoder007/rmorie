@@ -8,9 +8,9 @@
 alignment_error(features, box, out_size = 2L, stride = 1)
 }
 \arguments{
-\item{features}{See Usage.}
-\item{box}{See Usage.}
-\item{out_size}{Defaults to \code{2L}.}
+\item{features}{Passed to \code{roi_pool}.}
+\item{box}{Passed to \code{roi_pool}.}
+\item{out_size}{Passed to \code{roi_pool}. Defaults to \code{2L}.}
 \item{stride}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{

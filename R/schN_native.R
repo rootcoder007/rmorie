@@ -100,7 +100,7 @@ cosine_cutoff <- function(r, cutoff = 5.0) {
 #' @param X Passed to \code{.schn_mat}.
 #' @param R Passed to \code{.schn_mat}.
 #' @param filter_net Accepted by the signature and not used anywhere in the body.
-#' @param cutoff Defaults to \code{5}.
+#' @param cutoff Passed to \code{cosine_cutoff}. Defaults to \code{5}.
 #' @param ... Passed through.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -160,10 +160,10 @@ forces_from_energy <- function(energy_fn, R, h = 1e-5) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param energy_fn See Usage.
+#' @param energy_fn Passed to \code{forces_from_energy}.
 #' @param R Passed to \code{.schn_mat}.
 #' @param Q Passed to \code{.schn_mat}.
-#' @param g Defaults to \code{NULL}.
+#' @param g Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{energy_error}, \code{force_error}, \code{energy_invariant}, \code{forces_equivariant}, \code{note}.
 #' @export
 invariance_error <- function(energy_fn, R, Q, g = NULL) {

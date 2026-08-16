@@ -8,8 +8,8 @@
 sasimi_tversky(fp_a, fp_b, alpha = 1, beta = 1)
 }
 \arguments{
-\item{fp_a}{See Usage.}
-\item{fp_b}{See Usage.}
+\item{fp_a}{Passed to \code{sasimi_counts}.}
+\item{fp_b}{Passed to \code{sasimi_counts}.}
 \item{alpha}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 \item{beta}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }

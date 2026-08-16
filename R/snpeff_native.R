@@ -85,7 +85,7 @@ translate <- function(seq, to_stop = FALSE) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param effect See Usage.
+#' @param effect Passed to \code{\%in\%}.
 #' @return A character value.
 #' @export
 .snpeff_impact <- function(effect) {
@@ -136,8 +136,8 @@ translate <- function(seq, to_stop = FALSE) {
 #' @param ref A vector; its length is taken.
 #' @param alt A vector; its length is taken.
 #' @param cds_start Numeric; combined arithmetically in the body. Defaults to \code{0}.
-#' @param upstream Defaults to \code{5000}.
-#' @param downstream Defaults to \code{5000}.
+#' @param upstream Passed to \code{<=}. Defaults to \code{5000}.
+#' @param downstream Passed to \code{<=}. Defaults to \code{5000}.
 #' @param transcript_len Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{.snpeff_pack}.
 #' @export
@@ -231,8 +231,8 @@ annotate_variant <- function(cds, pos, ref, alt, cds_start = 0,
 #' @param cds Coerced to character by the body, with \code{as.character}.
 #' @param variants A vector; its length is taken and its elements indexed.
 #' @param cds_start Numeric; combined arithmetically in the body. Defaults to \code{0}.
-#' @param upstream Defaults to \code{5000}.
-#' @param downstream Defaults to \code{5000}.
+#' @param upstream Passed to \code{annotate_variant}. Defaults to \code{5000}.
+#' @param downstream Passed to \code{annotate_variant}. Defaults to \code{5000}.
 #' @param transcript_len Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{estimate}, \code{annotations}, \code{effect_counts}, \code{impact_counts}, \code{n_variants}, \code{protein}, \code{method}, \code{note}.
 #' @export

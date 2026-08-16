@@ -14,7 +14,7 @@ MlpBp(X, y, hidden = 4, eta = 0.5, alpha = 0.9, maxiter = 500, tol = 1e-04, seed
 \item{eta}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
 \item{alpha}{Numeric; combined arithmetically in the body. Defaults to \code{0.9}.}
 \item{maxiter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{500}.}
-\item{tol}{Defaults to \code{1e-04}.}
+\item{tol}{Passed to \code{<=}. Defaults to \code{1e-04}.}
 \item{seed}{Passed to \code{.morie_bx_rng}. Defaults to \code{1}.}
 }
 \description{

@@ -10,13 +10,13 @@ ks_confidence_set(moment_fn, theta_grid, X, form = "sum", n_equality = 0L, level
 \arguments{
 \item{moment_fn}{Accepted by the signature and not used anywhere in the body.}
 \item{theta_grid}{See Usage.}
-\item{X}{See Usage.}
+\item{X}{Passed to \code{hypercube_instruments}.}
 \item{form}{Carried through into a list the body builds. Defaults to \code{"sum"}.}
-\item{n_equality}{Defaults to \code{0L}.}
+\item{n_equality}{Passed to \code{ks_statistic}. Defaults to \code{0L}.}
 \item{level}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.}
-\item{n_levels}{Defaults to \code{2L}.}
-\item{reps}{Defaults to \code{100L}.}
-\item{seed}{Defaults to \code{0L}.}
+\item{n_levels}{Passed to \code{hypercube_instruments}. Defaults to \code{2L}.}
+\item{reps}{Passed to \code{ks_critical_value}. Defaults to \code{100L}.}
+\item{seed}{Passed to \code{ks_critical_value}. Defaults to \code{0L}.}
 }
 \description{
 A step of the bnskmt_native implementation. No other function in the package calls it. See the file header for the source the module follows.

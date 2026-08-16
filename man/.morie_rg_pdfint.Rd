@@ -11,8 +11,8 @@
 \item{f}{Accepted by the signature and not used anywhere in the body.}
 \item{pdf}{A function; the body checks with \code{is.function}.}
 \item{x}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
-\item{lower}{Defaults to \code{-Inf}.}
-\item{upper}{Defaults to \code{Inf}.}
+\item{lower}{Passed to \code{is.finite}. Defaults to \code{-Inf}.}
+\item{upper}{Passed to \code{is.finite}. Defaults to \code{Inf}.}
 }
 \description{
 A step of the rangayyan_ch3 implementation. Called by \code{DiffEnt}, \code{PdfKurt}, \code{PdfMean} and 3 others in the module. See the file header for the source the module follows.

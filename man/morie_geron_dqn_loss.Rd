@@ -21,3 +21,9 @@ List with \code{loss}, \code{targets}, \code{predictions}, \code{td_errors},
 \description{
 DQN bootstrap MSE loss (Geron Ch 19, morie.fn grdqnl)
 }
+\examples{
+Q <- matrix(0.5, 4, 2)
+Qt <- matrix(0.5, 4, 2)
+batch <- list(c(0L, 0L, 1, 1L, 0L), c(1L, 1L, 0, 2L, 1L))
+morie_geron_dqn_loss(Q, Qt, batch, gamma = 0.9)
+}

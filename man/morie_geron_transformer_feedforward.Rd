@@ -25,3 +25,9 @@ List with \code{output}, \code{hidden}, \code{d_model}, \code{d_ff},
 FFN(x) = relu(x W1 + b1) W2 + b2, routed through
 \code{\link[=morie_geron_linear_layer_forward]{morie_geron_linear_layer_forward()}} with the transposed weights.
 }
+\examples{
+x <- matrix(c(0.5, -0.2, 0.1, 0.4), 2, 2)
+W1 <- matrix(0.1, 2, 4); b1 <- rep(0, 4)
+W2 <- matrix(0.1, 4, 2); b2 <- rep(0, 2)
+morie_geron_transformer_feedforward(x, W1, b1, W2, b2)
+}

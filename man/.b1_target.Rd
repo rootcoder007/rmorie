@@ -16,7 +16,7 @@
 \item{g1W}{Passed to \code{.b1_bound}.}
 \item{gbound}{Numeric; combined arithmetically in the body. Defaults to \code{0.025}.}
 \item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.}
-\item{tol}{Defaults to \code{1e-12}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-12}.}
 }
 \description{
 A step of the b1_tmle implementation. Called by \code{Comptml}, \code{Tmleboot}, \code{Tmleor} and 3 others in the module. See the file header for the source the module follows.

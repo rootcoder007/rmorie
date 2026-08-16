@@ -12,8 +12,8 @@ memb(target_predict, shadow_data, eval_in, eval_out, train_fn = NULL, attack_tra
 \item{shadow_data}{See Usage.}
 \item{eval_in}{A vector; indexed elementwise.}
 \item{eval_out}{A vector; indexed elementwise.}
-\item{train_fn}{Defaults to \code{NULL}.}
-\item{attack_train_fn}{Defaults to \code{NULL}.}
+\item{train_fn}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{attack_train_fn}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{n_shadow}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{sort_features}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 \item{threshold}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.}

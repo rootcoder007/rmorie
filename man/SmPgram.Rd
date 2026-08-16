@@ -8,7 +8,7 @@
 SmPgram(y, span = 3L)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Passed to \code{Pgram}.}
 \item{span}{Numeric; combined arithmetically in the body. Defaults to \code{3L}.}
 }
 \description{

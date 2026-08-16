@@ -15,8 +15,8 @@
 #' @param yv Numeric; combined arithmetically in the body.
 #' @param ygrid A vector; its length is taken and its elements indexed.
 #' @param T A vector; indexed elementwise.
-#' @param y2 See Usage.
-#' @param y1 See Usage.
+#' @param y2 Passed to \code{<}.
+#' @param y1 Passed to \code{>}.
 #' @return The value of \code{[}.
 #' @export
 .hrztf_tn_at <- function(yv, ygrid, T, y2, y1) {

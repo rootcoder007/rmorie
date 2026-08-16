@@ -62,8 +62,8 @@
 #' @param D Passed to \code{.mor_did_panel}.
 #' @param unit Passed to \code{.mor_did_panel}.
 #' @param time Passed to \code{.mor_did_panel}.
-#' @param units Defaults to \code{NULL}.
-#' @param periods Defaults to \code{NULL}.
+#' @param units Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param periods Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{g}, \code{Dm}, \code{units}, \code{periods}.
 #' @export
 .mor_did_first <- function(D, unit, time, units = NULL, periods = NULL) {

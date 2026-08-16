@@ -114,8 +114,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param summary See Usage.
+#' @param x Passed to \code{summary}.
+#' @param summary Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .abcgp.summarise <- function(x, summary) {
@@ -448,7 +448,7 @@
 #'
 #' @param sim Accepted by the signature and not used anywhere in the body.
 #' @param obs Passed to \code{.abcgp.summarise}.
-#' @param theta See Usage.
+#' @param theta Passed to \code{sim}.
 #' @param n_sim A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50}.
 #' @param epsilon Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param summary Passed to \code{.abcgp.summarise}.
@@ -589,8 +589,8 @@
 #' source it follows.
 #'
 #' @param log_prior Accepted by the signature and not used anywhere in the body.
-#' @param theta See Usage.
-#' @param theta_p See Usage.
+#' @param theta Passed to \code{log_prior}.
+#' @param theta_p Passed to \code{log_prior}.
 #' @param ll Numeric; combined arithmetically in the body.
 #' @param ll_p Numeric; combined arithmetically in the body.
 #' @param log_q Numeric; combined arithmetically in the body.
@@ -608,7 +608,7 @@
 #' source it follows.
 #'
 #' @param alphas A vector; its length is taken.
-#' @param tau See Usage.
+#' @param tau Passed to \code{<=}.
 #' @param n_grid A count; the body uses it as \code{seq_len(...)}. Defaults to \code{101}.
 #' @return A numeric value.
 #' @export
@@ -728,7 +728,7 @@
 #' @param summary Passed to \code{.abcgp.synthetic_log_likelihood}.
 #' @param seed Passed to \code{.ghc_rng}.
 #' @param adaptive A flag; the body branches on it.
-#' @param xi See Usage.
+#' @param xi Passed to \code{<}.
 #' @param delta_s Coerced to integer by the body, with \code{as.integer}.
 #' @param n_alpha Coerced to integer by the body, with \code{as.integer}.
 #' @param max_sim Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.

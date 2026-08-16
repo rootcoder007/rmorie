@@ -11,9 +11,9 @@ composite_distance(tnf_a, tnf_b, cov_a = NULL, cov_b = NULL, len_a = NULL, len_b
 \item{tnf_a}{Passed to \code{.metabd_vec}.}
 \item{tnf_b}{Passed to \code{.metabd_vec}.}
 \item{cov_a}{Optional; may be \code{NULL}. Passed to \code{.metabd_vec}.}
-\item{cov_b}{Defaults to \code{NULL}.}
-\item{len_a}{Defaults to \code{NULL}.}
-\item{len_b}{Defaults to \code{NULL}.}
+\item{cov_b}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{len_a}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{len_b}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{w_abundance}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.}
 }
 \description{

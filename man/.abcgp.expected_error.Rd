@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{alphas}{A vector; its length is taken.}
-\item{tau}{See Usage.}
+\item{tau}{Passed to \code{<=}.}
 \item{n_grid}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{101}.}
 }
 \description{

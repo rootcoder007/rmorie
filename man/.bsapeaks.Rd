@@ -10,8 +10,8 @@
 \arguments{
 \item{freqs}{A vector; indexed elementwise.}
 \item{power}{A vector; its length is taken and its elements indexed.}
-\item{count}{Defaults to \code{3L}.}
-\item{minsep}{Defaults to \code{0}.}
+\item{count}{Passed to \code{>=}. Defaults to \code{3L}.}
+\item{minsep}{Passed to \code{>=}. Defaults to \code{0}.}
 }
 \description{
 A step of the rangayyan_phys implementation. Called by \code{CadAcou}, \code{CadSpec}, \code{InfantCry} and 6 others in the module. See the file header for the source the module follows.

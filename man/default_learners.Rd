@@ -8,7 +8,7 @@
 default_learners(p, ridge_penalties = c(0, 1, 10))
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Passed to \code{>=}.}
 \item{ridge_penalties}{Defaults to \code{c(0, 1, 10)}.}
 }
 \description{

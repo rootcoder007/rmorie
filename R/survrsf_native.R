@@ -81,7 +81,7 @@ morie_survrsf_rule_status <- function(rule=NULL) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param rule See Usage.
+#' @param rule Passed to \code{\%in\%}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .survrsf_check_rule <- function(rule) {
@@ -195,7 +195,7 @@ morie_survrsf_nelson_aalen <- function(times, events) {
 #' the source it follows.
 #'
 #' @param na A list; the body reads \code{$chf}, \code{$time} from it.
-#' @param t See Usage.
+#' @param t Passed to \code{<=}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .survrsf_chf_at <- function(na, t) {
@@ -436,7 +436,7 @@ morie_survrsf_conserve_statistic <- function(times, events, group) {
 #' @param times A vector; its length is taken.
 #' @param events A vector; indexed elementwise.
 #' @param features See Usage.
-#' @param min_deaths Defaults to \code{3}.
+#' @param min_deaths Passed to \code{<}. Defaults to \code{3}.
 #' @param rule One of \code{"conserve"}, \code{"logrankrandom"}, \code{"logrankscore"}. Defaults to \code{"logrank"}.
 #' @param rng Optional; may be \code{NULL}. A list; the body reads \code{$randint} from it.
 #' @return The value of \code{best}, as built in the body.
@@ -562,8 +562,8 @@ morie_survrsf_grow_tree <- function(X, times, events, mtry=NULL,
 #'
 #' @param tree A list; the body reads \code{$root} from it.
 #' @param x A vector; indexed elementwise.
-#' @param random_variable Defaults to \code{NULL}.
-#' @param rng Defaults to \code{NULL}.
+#' @param random_variable Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param rng Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{node}, as built in the body.
 #' @export
 morie_survrsf_predict_tree <- function(tree, x, random_variable=NULL,

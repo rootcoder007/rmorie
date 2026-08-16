@@ -8,7 +8,7 @@
 .morie_gh_trapz(xx, yy)
 }
 \arguments{
-\item{xx}{See Usage.}
+\item{xx}{Passed to \code{diff}.}
 \item{yy}{See Usage.}
 }
 \description{

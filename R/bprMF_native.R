@@ -355,7 +355,7 @@
 #' @param u Coerced to integer by the body, with \code{as.integer}.
 #' @param n_items A count; the body uses it as \code{seq_len(...)}.
 #' @param top_k Numeric; passed to \code{min}. Defaults to \code{5L}.
-#' @param exclude Defaults to \code{integer(0)}.
+#' @param exclude Passed to \code{unique}. Defaults to \code{integer(0)}.
 #' @return A list with \code{ranking}, \code{n_scored}.
 #' @export
 .bprMF_recommend <- function(W, H, u, n_items, top_k = 5L,

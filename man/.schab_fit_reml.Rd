@@ -15,7 +15,7 @@
 \item{start_ratio}{Passed to \code{.schab_logit}. Defaults to \code{0.1}.}
 \item{start_range}{Optional; may be \code{NULL}. Numeric; passed to \code{log}.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.}
-\item{tol}{Defaults to \code{1e-10}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-10}.}
 }
 \description{
 A step of the schab_reml_shared implementation. Called by \code{spreml}. See the file header for the source the module follows.

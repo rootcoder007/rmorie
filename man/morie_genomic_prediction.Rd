@@ -49,3 +49,8 @@ These functions mirror, in R, the implementations in the Python package
 tests in \code{tests/testthat/}.
 }
 \keyword{models}
+\examples{
+set.seed(1)
+M <- matrix(rbinom(60, 2, 0.4), 10, 6)
+morie_grm(M)
+}

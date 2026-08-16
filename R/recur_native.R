@@ -19,7 +19,7 @@
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param strata Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.
-#' @param tol Defaults to \code{1e-09}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-09}.
 #' @param offset Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{beta}, \code{se}, \code{cov}, \code{loglik}, \code{n_iter}, \code{n_events}.
 #' @export

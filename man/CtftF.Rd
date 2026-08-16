@@ -8,10 +8,10 @@
 CtftF(x, f, t = NULL, dt = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{f}{See Usage.}
-\item{t}{Defaults to \code{NULL}.}
-\item{dt}{Defaults to \code{NULL}.}
+\item{x}{Passed to \code{Ctft}.}
+\item{f}{Passed to \code{Ctft}.}
+\item{t}{Passed to \code{Ctft}.}
+\item{dt}{Passed to \code{Ctft}.}
 }
 \description{
 two can never drift apart.

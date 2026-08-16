@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{v}{Numeric; combined arithmetically in the body.}
-\item{ptype}{See Usage.}
-\item{converted}{See Usage.}
+\item{ptype}{Passed to \code{==}.}
+\item{converted}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 the two agree on the epoch value; without this a DATE column came back as a bare day count while nanoparquet handed the caller a Date, which is a silent factor-of-86400 trap for anyone swapping the engines.

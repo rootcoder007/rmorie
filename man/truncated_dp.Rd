@@ -10,8 +10,8 @@ truncated_dp(alpha, K, base_sampler = NULL, rng = NULL, seed = 0, renormalise = 
 \arguments{
 \item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{K}{Coerced to integer by the body, with \code{as.integer}.}
-\item{base_sampler}{Defaults to \code{NULL}.}
-\item{rng}{Defaults to \code{NULL}.}
+\item{base_sampler}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{rng}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
 \item{renormalise}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }

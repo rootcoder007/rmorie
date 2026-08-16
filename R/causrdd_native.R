@@ -36,7 +36,7 @@
 #'
 #' the intercept (the boundary value that the RDD contrast uses)
 #'
-#' @param dm See Usage.
+#' @param dm Passed to \code{cbind}.
 #' @param ym A matrix; passed to \code{\%*\%}.
 #' @param w A count; the body uses it as \code{rep(...)}.
 #' @return A list with \code{a}, \code{b}, \code{v}.

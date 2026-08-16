@@ -8,8 +8,8 @@
 detokenize(tokens, bins, scale)
 }
 \arguments{
-\item{tokens}{See Usage.}
-\item{bins}{See Usage.}
+\item{tokens}{Passed to \code{dequantize}.}
+\item{bins}{Passed to \code{dequantize}.}
 \item{scale}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{

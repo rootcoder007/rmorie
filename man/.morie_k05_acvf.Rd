@@ -10,7 +10,7 @@
 \arguments{
 \item{v}{Numeric; passed to \code{mean}.}
 \item{n}{Numeric; combined arithmetically in the body.}
-\item{max_lag}{See Usage.}
+\item{max_lag}{Passed to \code{:}.}
 }
 \description{
 A step of the k05_tranche1 implementation. Called by \code{morie_sample_acf}, \code{morie_sample_pacf}. See the file header for the source the module follows.

@@ -19,3 +19,7 @@ List with \code{loss}, \code{margin}, \code{implicit_reward_chosen},
 \description{
 L = mean log(1 + exp(-beta * [(lp_w - ref_w) - (lp_l - ref_l)])).
 }
+\examples{
+morie_geron_dpo_loss(logp_w = -1.2, logp_l = -2.5,
+                     logp_ref_w = -1.4, logp_ref_l = -2.2, beta = 0.1)
+}

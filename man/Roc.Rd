@@ -10,7 +10,7 @@ Roc(scores, labels, positive = 1)
 \arguments{
 \item{scores}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{labels}{A vector; its length is taken.}
-\item{positive}{Defaults to \code{1}.}
+\item{positive}{Passed to \code{==}. Defaults to \code{1}.}
 }
 \description{
 rule, which for tied scores is exactly the Mann-Whitney statistic -- the probability a random diseased subject outscores a random healthy one, ties counted as half.  Summing rectangles instead biases the area whenever scores tie, which they do whenever a classifier emits a class rather than a probability.

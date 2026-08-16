@@ -33,9 +33,9 @@
 #'
 #' @param Q_seq A list; the body checks with \code{is.list}.
 #' @param H_seq See Usage.
-#' @param Y See Usage.
-#' @param cluster See Usage.
-#' @param ic Defaults to \code{NULL}.
+#' @param Y Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param cluster Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param ic Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list, whose contents depend on the branch taken; across the branches its names are \code{estimate}, \code{psi}, \code{se_clustered}, \code{se_naive}, \code{ci}, \code{n_clusters}, \code{design_effect}, \code{method}, \code{note}, \code{naive}, \code{pooled}, \code{sequential}.
 #' @export
 morie_tlclust <- function(Q_seq, H_seq, Y, cluster, ic = NULL) {
@@ -115,8 +115,8 @@ cluster_variance <- function(ic, cluster) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param ic See Usage.
-#' @param cluster See Usage.
+#' @param ic Passed to \code{naive_variance}.
+#' @param cluster Passed to \code{cluster_variance}.
 #' @return A list with \code{se_naive}, \code{se_clustered}, \code{ratio}, \code{note}.
 #' @export
 design_effect <- function(ic, cluster) {

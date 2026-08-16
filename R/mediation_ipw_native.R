@@ -18,11 +18,11 @@
 #' density -- arithmetic primitives, in the same sense as exp() -- not
 #' as a model-fitting delegate.
 #'
-#' @param X See Usage.
+#' @param X Passed to \code{cbind}.
 #' @param y Numeric; combined arithmetically in the body.
 #' @param link Compared against \code{"probit"}. Defaults to \code{"probit"}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100L}.
-#' @param tol Defaults to \code{1e-09}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-09}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .morie_binchoice_fit <- function(X, y, link = "probit",

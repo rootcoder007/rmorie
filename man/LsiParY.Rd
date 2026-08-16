@@ -8,9 +8,9 @@
 LsiParY(x, h1, h2)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{h1}{See Usage.}
-\item{h2}{See Usage.}
+\item{x}{Passed to \code{LsiPar}.}
+\item{h1}{Passed to \code{LsiPar}.}
+\item{h2}{Passed to \code{LsiPar}.}
 }
 \description{
 impulse responses ADD where a cascade convolves them.

@@ -43,9 +43,9 @@
 #' @param X A matrix; indexed by row and column.
 #' @param y A vector; indexed elementwise.
 #' @param indices A vector; its length is taken and its elements indexed.
-#' @param min_leaf See Usage.
+#' @param min_leaf Accepted by the signature and not used anywhere in the body.
 #' @param alpha Accepted by the signature and not used anywhere in the body.
-#' @param max_depth See Usage.
+#' @param max_depth Accepted by the signature and not used anywhere in the body.
 #' @param e Passed to \code{.ghc_unif}.
 #' @return The value of \code{build}.
 #' @export
@@ -165,7 +165,7 @@
 #' @param X Passed to \code{.grow_one_tree}.
 #' @param y A vector; its length is taken.
 #' @param W Accepted by the signature and not used anywhere in the body.
-#' @param kind Defaults to \code{"double-sample"}.
+#' @param kind Passed to \code{identical}. Defaults to \code{"double-sample"}.
 #' @param n_trees Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
 #' @param min_leaf Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
@@ -342,11 +342,11 @@ orthogonal_moment <- function(y_res, t_res, weights) {
 #' @param Y A vector; its length is taken and its elements indexed.
 #' @param T A vector; indexed elementwise.
 #' @param X Passed to \code{.orfgrf_forest_weights}.
-#' @param W See Usage.
+#' @param W Passed to \code{local_nuisance}.
 #' @param x Passed to \code{.orfgrf_forest_weights}.
 #' @param trees Passed to \code{.orfgrf_forest_weights}.
 #' @param residualize The body requires: orfgrf: residualize must be local or global, got. Defaults to \code{"local"}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param ridge Passed to \code{local_nuisance}. Defaults to \code{1e-08}.
 #' @param leave_one_out A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{theta}, \code{den}, \code{w}.
 #' @export
@@ -401,9 +401,9 @@ orf_estimate <- function(Y, T, X, W, x, trees,
 #' @param max_depth Coerced to integer by the body, with \code{as.integer}. Defaults to \code{12}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param residualize Carried through into a list the body builds. Defaults to \code{"local"}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param ridge Passed to \code{orf_estimate}. Defaults to \code{1e-08}.
 #' @param kind Passed to \code{.orfgrf_grow_forest}. Defaults to \code{"double-sample"}.
-#' @param leave_one_out Defaults to \code{TRUE}.
+#' @param leave_one_out Passed to \code{orf_estimate}. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{theta}, \code{denominator}, \code{n}, \code{n_trees}, \code{residualize}, \code{n_controls}, \code{n_features}, \code{orthogonal}, \code{method}.
 #' @export
 orthogonal_random_forest <- function(Y, T, X, W, x_eval = NULL,

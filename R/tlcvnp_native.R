@@ -33,12 +33,12 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param x0 See Usage.
-#' @param bandwidths See Usage.
-#' @param kernel Defaults to \code{"epanechnikov"}.
-#' @param V Defaults to \code{5L}.
-#' @param seed Defaults to \code{0L}.
+#' @param X Passed to \code{cv_tmle_smoothed}.
+#' @param x0 Passed to \code{cv_tmle_smoothed}.
+#' @param bandwidths Passed to \code{cv_tmle_smoothed}.
+#' @param kernel Passed to \code{cv_tmle_smoothed}. Defaults to \code{"epanechnikov"}.
+#' @param V Passed to \code{cv_tmle_smoothed}. Defaults to \code{5L}.
+#' @param seed Passed to \code{cv_tmle_smoothed}. Defaults to \code{0L}.
 #' @return The value of \code{cv_tmle_smoothed}.
 #' @export
 morie_tlcvnp <- function(X, x0, bandwidths, kernel = "epanechnikov",
@@ -80,7 +80,7 @@ kernel_smooth <- function(u, kernel = "epanechnikov") {
 #' @param X Coerced to numeric by the body, with \code{as.numeric}.
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h Coerced to numeric by the body, with \code{as.numeric}.
-#' @param kernel Defaults to \code{"epanechnikov"}.
+#' @param kernel Passed to \code{kernel_smooth}. Defaults to \code{"epanechnikov"}.
 #' @return A list with \code{psi_h}, \code{se}, \code{h}, \code{n}, \code{influence_curve}, \code{note}.
 #' @export
 smoothed_parameter <- function(X, x0, h, kernel = "epanechnikov") {
@@ -127,10 +127,10 @@ smoothing_bias <- function(true_density, x0, h, smoothness = 2.0) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param x0 See Usage.
+#' @param X Passed to \code{smoothed_parameter}.
+#' @param x0 Passed to \code{smoothed_parameter}.
 #' @param bandwidths Coerced to numeric by the body, with \code{as.numeric}.
-#' @param kernel Defaults to \code{"epanechnikov"}.
+#' @param kernel Passed to \code{smoothed_parameter}. Defaults to \code{"epanechnikov"}.
 #' @param criterion One of \code{"lepski"}, \code{"smallest_se"}. Defaults to \code{"lepski"}.
 #' @param C Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{h}, \code{fit}, \code{criterion}, \code{all}, \code{note}.
@@ -180,9 +180,9 @@ select_bandwidth <- function(X, x0, bandwidths,
 #' source it follows.
 #'
 #' @param X Coerced to numeric by the body, with \code{as.numeric}.
-#' @param x0 See Usage.
-#' @param bandwidths See Usage.
-#' @param kernel Defaults to \code{"epanechnikov"}.
+#' @param x0 Passed to \code{select_bandwidth}.
+#' @param bandwidths Passed to \code{select_bandwidth}.
+#' @param kernel Passed to \code{select_bandwidth}. Defaults to \code{"epanechnikov"}.
 #' @param V Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.
 #' @return A list with \code{estimate}, \code{psi}, \code{se}, \code{ci}, \code{bandwidths}, \code{fold_estimates}, \code{V}, \code{method}, \code{note}.

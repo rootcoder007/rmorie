@@ -8,7 +8,7 @@
 .bnppvl_cell(u, q, k)
 }
 \arguments{
-\item{u}{See Usage.}
+\item{u}{Passed to \code{<=}.}
 \item{q}{A vector; indexed elementwise.}
 \item{k}{A count; the body uses it as \code{seq_len(...)}.}
 }

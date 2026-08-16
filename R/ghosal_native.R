@@ -66,7 +66,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param xx See Usage.
+#' @param xx Passed to \code{diff}.
 #' @param yy See Usage.
 #' @return A numeric value.
 #' @export
@@ -100,7 +100,7 @@
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param grid Coerced to numeric by the body, with \code{as.numeric}.
 #' @param levels Coerced to integer by the body, with \code{as.integer}. Defaults to \code{6L}.
-#' @param a_fn Defaults to \code{NULL}.
+#' @param a_fn Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param lo Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param hi Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{ifelse}.

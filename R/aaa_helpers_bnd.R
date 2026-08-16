@@ -9,9 +9,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
-#' @param D See Usage.
-#' @param name See Usage.
+#' @param y Passed to \code{unlist}.
+#' @param D Passed to \code{unlist}.
+#' @param name Passed to \code{paste0}.
 #' @return A list with \code{y}, \code{d}.
 #' @export
 .bnd_yd <- function(y, D, name) {
@@ -31,7 +31,7 @@
 #' source it follows.
 #'
 #' @param yv A vector; its length is taken and its elements indexed.
-#' @param dv See Usage.
+#' @param dv Passed to \code{==}.
 #' @return A list with \code{p1}, \code{m1}, \code{p0}, \code{m0}.
 #' @export
 .bnd_cellmeans <- function(yv, dv) {
@@ -108,7 +108,7 @@
 #' source it follows.
 #'
 #' @param moments A matrix; passed to \code{as.matrix}.
-#' @param name See Usage.
+#' @param name Passed to \code{paste0}.
 #' @return A list with \code{yl}, \code{yu}.
 #' @export
 .bnd_interval <- function(moments, name) {

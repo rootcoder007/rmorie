@@ -35,7 +35,7 @@ query_tokens <- function(n_queries, dim, seed = 0, scale = 0.02) {
 #' @param queries A matrix; passed to \code{as.matrix}.
 #' @param image_features A matrix; passed to \code{as.matrix}.
 #' @param WQ A matrix; passed to \code{nrow}.
-#' @param WK See Usage.
+#' @param WK Passed to \code{proj}.
 #' @param WV A matrix; passed to \code{ncol}.
 #' @return A list with \code{output}, \code{weights}, \code{n_queries}, \code{n_patches}, \code{compression}, \code{note}.
 #' @export

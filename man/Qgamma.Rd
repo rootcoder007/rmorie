@@ -9,8 +9,8 @@ Qgamma(p, shape, rate = 1)
 }
 \arguments{
 \item{p}{Iterated over elementwise, with \code{vapply}.}
-\item{shape}{See Usage.}
-\item{rate}{Defaults to \code{1}.}
+\item{shape}{Passed to \code{Pgamma}.}
+\item{rate}{Passed to \code{Pgamma}. Defaults to \code{1}.}
 }
 \description{
 A step of the dist_native implementation. Called by \code{Qchisq}. See the file header for the source the module follows.

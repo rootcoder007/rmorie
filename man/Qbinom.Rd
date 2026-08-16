@@ -9,8 +9,8 @@ Qbinom(p, size, prob)
 }
 \arguments{
 \item{p}{Iterated over elementwise, with \code{vapply}.}
-\item{size}{See Usage.}
-\item{prob}{See Usage.}
+\item{size}{Passed to \code{<}.}
+\item{prob}{Passed to \code{Pbinom}.}
 }
 \description{
 A step of the dist_native implementation. No other function in the package calls it. See the file header for the source the module follows.

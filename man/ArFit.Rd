@@ -8,8 +8,8 @@
 ArFit(x, order, fs = 1, nfreq = 256)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{order}{See Usage.}
+\item{x}{Passed to \code{Lpc}.}
+\item{order}{Passed to \code{Lpc}.}
 \item{fs}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 \item{nfreq}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{256}.}
 }

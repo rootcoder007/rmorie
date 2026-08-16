@@ -12,7 +12,7 @@
 \item{ys}{A vector; indexed elementwise.}
 \item{x0}{Numeric; combined arithmetically in the body.}
 \item{q}{A count; the body uses it as \code{seq_len(...)}.}
-\item{degree}{See Usage.}
+\item{degree}{Passed to \code{==}.}
 \item{rho}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 }
 \description{

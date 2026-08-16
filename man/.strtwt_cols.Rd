@@ -10,7 +10,7 @@
 \arguments{
 \item{X}{Optional; may be \code{NULL}. Passed to \code{.s03mat}.}
 \item{n}{A count; the body uses it as \code{matrix(...)}.}
-\item{nm}{See Usage.}
+\item{nm}{Passed to \code{sprintf}.}
 }
 \description{
 A step of the Strtwt implementation. Called by \code{Strtwt}. See the file header for the source the module follows.

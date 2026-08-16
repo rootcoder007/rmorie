@@ -11,7 +11,7 @@ nbeats_stack(window, horizon, blocks, ridge = 1e-08)
 \item{window}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{horizon}{Coerced to integer by the body, with \code{as.integer}.}
 \item{blocks}{See Usage.}
-\item{ridge}{Defaults to \code{1e-08}.}
+\item{ridge}{Passed to \code{nbeats_block}. Defaults to \code{1e-08}.}
 }
 \description{
 A step of the nbeats_native implementation. Called by \code{.ngnest_nbeats_stack}, \code{nbeats_forecast}. See the file header for the source the module follows.

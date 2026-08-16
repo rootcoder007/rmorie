@@ -8,7 +8,7 @@
 .s4_order(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{unlist}.}
 }
 \description{
 A step of the s04core implementation. No other function in the package calls it. See the file header for the source the module follows.

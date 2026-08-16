@@ -14,7 +14,7 @@ CoxPL(time, event, X, beta = NULL, max_iter = 50L, tol = 1e-10)
 \item{X}{A matrix; passed to \code{nrow}.}
 \item{beta}{Optional; may be \code{NULL}. A vector; its length is taken.}
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50L}.}
-\item{tol}{Defaults to \code{1e-10}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-10}.}
 }
 \description{
 fitted \\' \\' Breslow handling of tied event times.  When beta is NULL the partial \\' likelihood is maximised by Newton-Raphson from zero. Checked against \\' survival::coxph(ties = "breslow"). \\' \\' @param time follow-up times \\' @param event 1 for an observed event, 0 for right censoring \\' @param X covariate matrix, no intercept column \\' @param beta coefficients to evaluate at, or NULL to fit \\'

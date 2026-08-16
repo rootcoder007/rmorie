@@ -24,7 +24,7 @@
 #' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
-#' @param name Defaults to \code{"x"}.
+#' @param name Passed to \code{sprintf}. Defaults to \code{"x"}.
 #' @param minlen Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
@@ -560,7 +560,7 @@
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param maxiter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.
-#' @param tol Defaults to \code{0.05}.
+#' @param tol Passed to \code{<}. Defaults to \code{0.05}.
 #' @return A list with \code{imf}, \code{iterations}, \code{converged}.
 #' @export
 .tf_sift <- function(x, maxiter = 50L, tol = 0.05) {
@@ -704,7 +704,7 @@
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Numeric; combined arithmetically in the body.
-#' @param nfreq Defaults to \code{NULL}.
+#' @param nfreq Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{tfd}, \code{freqs}.
 #' @export
 .tf_wvd <- function(x, fs, nfreq = NULL) {
@@ -733,8 +733,8 @@
 #' source it follows.
 #'
 #' @param tfd A matrix; indexed by row and column.
-#' @param tlen See Usage.
-#' @param flen See Usage.
+#' @param tlen Passed to \code{gauss}.
+#' @param flen Passed to \code{gauss}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .tf_smooth2d <- function(tfd, tlen, flen) {
@@ -772,7 +772,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Passed to \code{Mod}.
 #' @return The value of \code{.morie_fsum}.
 #' @export
 .tf_energy <- function(v) .morie_fsum(Mod(v)^2)
@@ -1022,7 +1022,7 @@ BiorDwt <- function(x, wavelet = "bior2.2", levels = 3) {
 #' @param x Passed to \code{.tf_need}.
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param sigma Numeric; combined arithmetically in the body. Defaults to \code{1}.
-#' @param nfreq Defaults to \code{NULL}.
+#' @param nfreq Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param maxlag Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{tfd}, \code{times}, \code{freqs}, \code{sigma}, \code{maxlag}, \code{peak_freq}, \code{crossterm_ratio}, \code{method}.
 #' @export
@@ -1230,7 +1230,7 @@ Cwt <- function(x, fs = 1, wavelet = "morlet", scales = NULL, w0 = 5) {
 #' @param x Passed to \code{.tf_need}.
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param kernel Coerced to character by the body, with \code{as.character}. Defaults to \code{"spwvd"}.
-#' @param nfreq Defaults to \code{NULL}.
+#' @param nfreq Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param tsmooth Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param fsmooth Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{tfd}, \code{times}, \code{freqs}, \code{kernel}, \code{tsmooth}, \code{fsmooth}, \code{peak_freq}, \code{crossterm_ratio}, \code{method}.
@@ -1326,7 +1326,7 @@ OrthFilt <- function(order = 4) {
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param dictionary Coerced to character by the body, with \code{as.character}. Defaults to \code{"gabor"}.
 #' @param max_atoms Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.
-#' @param nfreq Defaults to \code{NULL}.
+#' @param nfreq Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param min_decay Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.001}.
 #' @return A list with \code{tfd}, \code{times}, \code{freqs}, \code{atoms}, \code{n_atoms}, \code{decay}, \code{residual_energy}, \code{explained}, \code{peak_freq}, \code{method}.
 #' @export
@@ -1804,7 +1804,7 @@ VfEmd <- function(ecg, fs = 250, n_imfs = 6, tol = 0.05) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{WtEnergy}.
 #' @param wavelet Coerced to character by the body, with \code{as.character}. Defaults to \code{"db4"}.
 #' @param levels Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
 #' @param base Coerced to character by the body, with \code{as.character}. Defaults to \code{"e"}.
@@ -1950,7 +1950,7 @@ EmdSpec <- function(x, fs = 1, max_imfs = 8, nfreq = 32, tol = 0.05) {
 #' @param rr_intervals Passed to \code{.tf_need}.
 #' @param fs_resamp Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{4}.
 #' @param window_len Coerced to integer by the body, with \code{as.integer}. Defaults to \code{64}.
-#' @param noverlap Defaults to \code{NULL}.
+#' @param noverlap Passed to \code{Spectrogram}.
 #' @param standard Coerced to character by the body, with \code{as.character}. Defaults to \code{"taskforce"}.
 #' @return A list with \code{times}, \code{vlf}, \code{lf}, \code{hf}, \code{total_power}, \code{lf_hf_ratio}, \code{lf_percent}, \code{hf_percent}, \code{bands}, \code{standard}, \code{mean_rr}, \code{mean_hr}, \code{resampled}, \code{fs_resamp}, \code{method}.
 #' @export
@@ -2270,7 +2270,7 @@ PcgEnvAvg <- function(pcg, ecg, fs = 1000, cycle_len = NULL,
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{100}.
 #' @param wavelet Passed to \code{.tf_dwt}. Defaults to \code{"db4"}.
 #' @param levels Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.
-#' @param threshold_type Defaults to \code{"soft"}.
+#' @param threshold_type Passed to \code{WtThresh}. Defaults to \code{"soft"}.
 #' @return A list with \code{denoised}, \code{artifact}, \code{threshold}, \code{sigma}, \code{artifact_energy}, \code{snr_improvement_db}, \code{approx_energy}, \code{levels}, \code{wavelet}, \code{fs}, \code{method}.
 #' @export
 PpgWtDen <- function(ppg, fs = 100, wavelet = "db4", levels = 4,
@@ -2308,11 +2308,11 @@ PpgWtDen <- function(ppg, fs = 100, wavelet = "db4", levels = 4,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param fs Defaults to \code{1}.
-#' @param scales Defaults to \code{NULL}.
-#' @param wavelet Defaults to \code{"morlet"}.
-#' @param w0 Defaults to \code{5}.
+#' @param x Passed to \code{Cwt}.
+#' @param fs Passed to \code{Cwt}. Defaults to \code{1}.
+#' @param scales Passed to \code{Cwt}.
+#' @param wavelet Passed to \code{Cwt}. Defaults to \code{"morlet"}.
+#' @param w0 Passed to \code{Cwt}. Defaults to \code{5}.
 #' @return A list with \code{scalogram}, \code{scales}, \code{freqs}, \code{times}, \code{energy_per_scale}, \code{total_energy}, \code{ridge}, \code{method}.
 #' @export
 Scalogram <- function(x, fs = 1, scales = NULL, wavelet = "morlet", w0 = 5) {
@@ -2705,11 +2705,11 @@ VModes <- function(x, K = 3, alpha = 2000, tau = 0, init = "uniform",
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param fs Defaults to \code{1}.
-#' @param scales Defaults to \code{NULL}.
+#' @param x Passed to \code{Scalogram}.
+#' @param fs Passed to \code{Scalogram}. Defaults to \code{1}.
+#' @param scales Passed to \code{Scalogram}.
 #' @param wavelet The body requires: the signal has no wavelet energy at any scale. Defaults to \code{"mexh"}.
-#' @param w0 Defaults to \code{5}.
+#' @param w0 Passed to \code{Scalogram}. Defaults to \code{5}.
 #' @param min_prominence Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
 #' @return A list with \code{structures}, \code{n_structures}, \code{scalogram}, \code{scales}, \code{times}, \code{min_prominence}, \code{method}.
 #' @export
@@ -3140,7 +3140,7 @@ WtVar <- function(x, wavelet = "db1", levels = 3) {
 #' source it follows.
 #'
 #' @param n Optional; may be \code{NULL}. A vector; its length is taken.
-#' @param default Defaults to \code{NULL}.
+#' @param default Passed to \code{return}.
 #' @return The value of \code{idx}, as built in the body.
 #' @export
 .tf_echo_idx <- function(n, default = NULL) {

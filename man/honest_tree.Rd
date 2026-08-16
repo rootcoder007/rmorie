@@ -15,9 +15,9 @@ honest_tree(X, y, W = NULL, kind = "double-sample", min_leaf = 5L, alpha = 0.05,
 \item{min_leaf}{Numeric; combined arithmetically in the body. Defaults to \code{5L}.}
 \item{alpha}{Passed to \code{._best_split}. Defaults to \code{0.05}.}
 \item{pi}{Numeric; passed to \code{max}. Defaults to \code{0.5}.}
-\item{max_depth}{Defaults to \code{12L}.}
+\item{max_depth}{Passed to \code{>=}. Defaults to \code{12L}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0L}.}
-\item{subsample}{Defaults to \code{NULL}.}
+\item{subsample}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the hntfst_native implementation. Called by \code{.frfgrf_honesty_test}, \code{grow_forest}, \code{honest_forest}. See the file header for the source the module follows.

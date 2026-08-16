@@ -120,7 +120,7 @@ Infcrv <- function(estimator, F, x, eps = 1e-3) {
 #' it follows.
 #'
 #' @param estimator One of \code{"mean"}, \code{"median"}, \code{"var"}.
-#' @param who See Usage.
+#' @param who Passed to \code{paste0}.
 #' @return Nothing; this branch always raises.
 #' @export
 .if_resolve <- function(estimator, who) {

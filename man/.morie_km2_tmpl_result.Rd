@@ -10,7 +10,7 @@
 \arguments{
 \item{prompt}{Character; passed to \code{trimws}.}
 \item{filled}{Carried through into a list the body builds.}
-\item{eq}{See Usage.}
+\item{eq}{Passed to \code{sprintf}.}
 \item{template}{Carried through into a list the body builds.}
 }
 \description{

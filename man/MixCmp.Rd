@@ -10,8 +10,8 @@ MixCmp(X, ncomp = NULL, maxiter = 200, seed = 1)
 \arguments{
 \item{X}{Passed to \code{.morie_bx_mat}.}
 \item{ncomp}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
-\item{maxiter}{Defaults to \code{200}.}
-\item{seed}{Defaults to \code{1}.}
+\item{maxiter}{Passed to \code{IcaFix}. Defaults to \code{200}.}
+\item{seed}{Passed to \code{IcaFix}. Defaults to \code{1}.}
 }
 \description{
 of the same data -- uncorrelated, independent, nonnegative-parts -- and which to use is empirical, so reconstruct with each and measure.  NMF runs on the nonnegatively shifted mixture, as eq (9.46) requires.

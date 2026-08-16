@@ -13,7 +13,7 @@ morie_lbfgsm(fun, x0, grad, m = 10, max_iter = 200, tol = 1e-08, c1 = 1e-04, c2 
 \item{grad}{Accepted by the signature and not used anywhere in the body.}
 \item{m}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.}
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.}
-\item{tol}{Defaults to \code{1e-08}.}
+\item{tol}{Passed to \code{<=}. Defaults to \code{1e-08}.}
 \item{c1}{Numeric; combined arithmetically in the body. Defaults to \code{1e-04}.}
 \item{c2}{Numeric; combined arithmetically in the body. Defaults to \code{0.9}.}
 \item{max_ls}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{60}.}

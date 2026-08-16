@@ -348,7 +348,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param v See Usage.
+#' @param v Passed to \code{>}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .propinf_relu <- function(v) if (v > 0) v else 0
@@ -588,7 +588,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' the source it follows.
 #'
 #' @param net Iterated over elementwise, with \code{lapply}.
-#' @param metric Defaults to \code{NULL}.
+#' @param metric Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{.propinf_flat_representation_internal}.
 #' @export
 .propinf_sorted_representation_internal <- function(net, metric = NULL) {

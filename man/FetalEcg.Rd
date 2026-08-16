@@ -11,8 +11,8 @@ FetalEcg(abdominal, chest, order = 32, mu = 0.005, method = "lms")
 \item{abdominal}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{chest}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{order}{Carried through into a list the body builds. Defaults to \code{32}.}
-\item{mu}{Defaults to \code{0.005}.}
-\item{method}{Defaults to \code{"lms"}.}
+\item{mu}{Passed to \code{Anc}. Defaults to \code{0.005}.}
+\item{method}{Passed to \code{Anc}. Defaults to \code{"lms"}.}
 }
 \description{
 A step of the rangayyan_adapt implementation. No other function in the package calls it. See the file header for the source the module follows.

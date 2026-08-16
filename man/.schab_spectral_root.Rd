@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{cov}{A matrix; passed to \code{nrow}.}
-\item{tol}{Defaults to \code{NULL}.}
+\item{tol}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 only come from rounding on a matrix positive semi-definite in exact arithmetic, so they are clipped rather than allowed to make NaNs.

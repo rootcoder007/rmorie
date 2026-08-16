@@ -23,3 +23,10 @@ List with \code{output}, \code{head_outputs}, \code{attention_weights},
 h heads of width d_model/h, each through the shared attention kernel,
 concatenated then mixed by WO.
 }
+\examples{
+set.seed(6)
+Q <- matrix(rnorm(8), 2, 4); K <- Q; V <- Q
+W <- diag(4)
+morie_geron_multi_head_attention(Q, K, V, WQ = W, WK = W, WV = W,
+                                 WO = W, h = 2)
+}

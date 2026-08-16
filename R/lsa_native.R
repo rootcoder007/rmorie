@@ -32,7 +32,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X Passed to \code{apply}.
 #' @param how One of \code{"raw"}, \code{"tfidf"}. Defaults to \code{"log_entropy"}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -73,7 +73,7 @@ term_weighting <- function(X, how = "log_entropy") {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X Passed to \code{term_weighting}.
 #' @param k_dim Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param how Carried through into a list the body builds. Defaults to \code{"log_entropy"}.
 #' @return A list with \code{estimate}, \code{T}, \code{S}, \code{D}, \code{k}, \code{full_rank}, \code{weighting}, \code{method}, \code{note}.
@@ -201,11 +201,11 @@ lsa <- lsa_decompose
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param k_dim Defaults to \code{NULL}.
-#' @param how Defaults to \code{"log_entropy"}.
-#' @param query Defaults to \code{NULL}.
-#' @param top_k Defaults to \code{5L}.
+#' @param X Passed to \code{lsa_decompose}.
+#' @param k_dim Passed to \code{lsa_decompose}.
+#' @param how Passed to \code{lsa_decompose}. Defaults to \code{"log_entropy"}.
+#' @param query Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param top_k Passed to \code{cosine_ranking}. Defaults to \code{5L}.
 #' @return The value of \code{lsa_decompose}.
 #' @export
 morie_lsa <- function(X, k_dim = NULL, how = "log_entropy", query = NULL,

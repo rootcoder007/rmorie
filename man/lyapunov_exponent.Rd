@@ -8,13 +8,13 @@
 lyapunov_exponent(y, embedding = NULL, tau = NULL, dt = 1, fit = NULL, min_sep = NULL, max_steps = NULL, method = "rosenstein", k = NULL)
 }
 \arguments{
-\item{y}{See Usage.}
-\item{embedding}{Defaults to \code{NULL}.}
-\item{tau}{Defaults to \code{NULL}.}
+\item{y}{Passed to \code{divergence_curve}.}
+\item{embedding}{Passed to \code{divergence_curve}.}
+\item{tau}{Passed to \code{divergence_curve}.}
 \item{dt}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{fit}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
-\item{min_sep}{Defaults to \code{NULL}.}
-\item{max_steps}{Defaults to \code{NULL}.}
+\item{min_sep}{Passed to \code{divergence_curve}.}
+\item{max_steps}{Passed to \code{divergence_curve}.}
 \item{method}{One of \code{"rosenstein"}, \code{"sato"}, \code{"sato_k"}. Defaults to \code{"rosenstein"}.}
 \item{k}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 }

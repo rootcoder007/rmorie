@@ -145,7 +145,7 @@
 #' source it follows.
 #'
 #' @param x Numeric; passed to \code{sqrt}.
-#' @param tol Defaults to \code{1e-08}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60}.
 #' @return The value of \code{y}, as built in the body.
 #' @export
@@ -225,7 +225,7 @@
 #'
 #' @param sigma2 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param df A vector; its length is taken.
-#' @param robust_floor Defaults to \code{1e-12}.
+#' @param robust_floor Passed to \code{>}. Defaults to \code{1e-12}.
 #' @return A list with \code{d0}, \code{s0_sq}, \code{s2_post}, \code{df_total}, \code{no_gene_variation}.
 #' @export
 .limmav_ebayes <- function(sigma2, df, robust_floor = 1e-12) {

@@ -11,8 +11,8 @@
 \item{pos}{A vector; its length is taken and its elements indexed.}
 \item{ehh}{A vector; indexed elementwise.}
 \item{core}{Numeric; combined arithmetically in the body.}
-\item{side}{See Usage.}
-\item{min_ehh}{See Usage.}
+\item{side}{Passed to \code{>}.}
+\item{min_ehh}{Passed to \code{<}.}
 }
 \description{
 trapezoid area outward from the core, INCLUDING the segment that ends at the first marker below min_ehh.

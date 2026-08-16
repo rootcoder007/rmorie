@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{e}{Passed to \code{.ghc_unif}.}
-\item{lam}{See Usage.}
+\item{lam}{Passed to \code{<=}.}
 }
 \description{
 A step of the taulep_native implementation. Called by \code{morie_taulep}. See the file header for the source the module follows.

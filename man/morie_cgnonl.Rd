@@ -8,17 +8,17 @@
 morie_cgnonl(f, grad, x0, beta = "fletcher-reeves", restart = NULL, max_iter = NULL, tol = 1e-10, est = NULL, line_search = "fletcher-reeves", hess_vec = NULL, keep_path = FALSE)
 }
 \arguments{
-\item{f}{See Usage.}
-\item{grad}{See Usage.}
-\item{x0}{See Usage.}
-\item{beta}{Defaults to \code{"fletcher-reeves"}.}
-\item{restart}{Defaults to \code{NULL}.}
-\item{max_iter}{Defaults to \code{NULL}.}
-\item{tol}{Defaults to \code{1e-10}.}
-\item{est}{Defaults to \code{NULL}.}
-\item{line_search}{Defaults to \code{"fletcher-reeves"}.}
-\item{hess_vec}{Defaults to \code{NULL}.}
-\item{keep_path}{Defaults to \code{FALSE}.}
+\item{f}{Passed to \code{nonlinear_cg}.}
+\item{grad}{Passed to \code{nonlinear_cg}.}
+\item{x0}{Passed to \code{nonlinear_cg}.}
+\item{beta}{Passed to \code{nonlinear_cg}. Defaults to \code{"fletcher-reeves"}.}
+\item{restart}{Passed to \code{nonlinear_cg}.}
+\item{max_iter}{Passed to \code{nonlinear_cg}.}
+\item{tol}{Passed to \code{nonlinear_cg}. Defaults to \code{1e-10}.}
+\item{est}{Passed to \code{nonlinear_cg}.}
+\item{line_search}{Passed to \code{nonlinear_cg}. Defaults to \code{"fletcher-reeves"}.}
+\item{hess_vec}{Passed to \code{nonlinear_cg}.}
+\item{keep_path}{Passed to \code{nonlinear_cg}. Defaults to \code{FALSE}.}
 }
 \description{
 A step of the cgnonl_native implementation. No other function in the package calls it. See the file header for the source the module follows.

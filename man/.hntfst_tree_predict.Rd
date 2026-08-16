@@ -8,8 +8,8 @@
 .hntfst_tree_predict(tree, x)
 }
 \arguments{
-\item{tree}{See Usage.}
-\item{x}{See Usage.}
+\item{tree}{Passed to \code{leaf_of}.}
+\item{x}{Passed to \code{leaf_of}.}
 }
 \description{
 A step of the hntfst_native implementation. Called by \code{honest_forest}. See the file header for the source the module follows.

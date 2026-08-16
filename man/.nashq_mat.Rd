@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{M}{A matrix; passed to \code{nrow}.}
-\item{name}{See Usage.}
+\item{name}{Passed to \code{sprintf}.}
 }
 \description{
 A step of the nashq_native implementation. Called by \code{nash_equilibria_bimatrix}, \code{stage_game_type}. See the file header for the source the module follows.

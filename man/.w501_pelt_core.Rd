@@ -11,7 +11,7 @@
 \item{x}{A vector; its length is taken.}
 \item{cost}{Passed to \code{.w501_seg_cost}.}
 \item{penalty}{See Usage.}
-\item{min_seglen}{Defaults to \code{1L}.}
+\item{min_seglen}{Passed to \code{seq}. Defaults to \code{1L}.}
 }
 \description{
 Part of the w501_changepoint_native implementation; see the file header for the source it follows.

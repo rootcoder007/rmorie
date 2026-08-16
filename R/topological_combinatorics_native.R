@@ -21,7 +21,7 @@
 #' Part of the topological_combinatorics_native implementation; see the
 #' file header for the source it follows.
 #'
-#' @param v See Usage.
+#' @param v Passed to \code{paste}.
 #' @return A character value.
 #' @export
 .morie_face_key <- function(v) paste(v, collapse = ",")

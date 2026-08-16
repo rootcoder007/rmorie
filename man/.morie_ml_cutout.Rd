@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{edges}{A matrix; indexed by row and column.}
-\item{sources}{See Usage.}
+\item{sources}{Passed to \code{\%in\%}.}
 }
 \description{
 A step of the causal_molak implementation. Called by \code{morie_docalc}. See the file header for the source the module follows.

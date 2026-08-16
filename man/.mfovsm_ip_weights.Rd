@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{ak}{A vector; its length is taken.}
-\item{den}{See Usage.}
-\item{num}{See Usage.}
+\item{den}{Optional; may be \code{NULL}. Passed to \code{dens_of}.}
+\item{num}{Optional; may be \code{NULL}. Passed to \code{dens_of}.}
 \item{kind}{Accepted by the signature and not used anywhere in the body. Defaults to \code{"binary"}.}
 \item{stabilize}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }

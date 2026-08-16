@@ -8,13 +8,13 @@
 morie_tlhaltm(rate_Q = NULL, rate_g = NULL, n = NULL, err_Q = NULL, err_g = NULL, delta = NULL, donsker = TRUE, mode = c("rate", "remainder", "efficiency", "split"))
 }
 \arguments{
-\item{rate_Q}{Defaults to \code{NULL}.}
-\item{rate_g}{Defaults to \code{NULL}.}
-\item{n}{Defaults to \code{NULL}.}
-\item{err_Q}{Defaults to \code{NULL}.}
-\item{err_g}{Defaults to \code{NULL}.}
-\item{delta}{Defaults to \code{NULL}.}
-\item{donsker}{Defaults to \code{TRUE}.}
+\item{rate_Q}{Passed to \code{rate_condition}.}
+\item{rate_g}{Passed to \code{rate_condition}.}
+\item{n}{Passed to \code{rate_condition}.}
+\item{err_Q}{Passed to \code{remainder_bound}.}
+\item{err_g}{Passed to \code{remainder_bound}.}
+\item{delta}{Passed to \code{remainder_bound}.}
+\item{donsker}{Passed to \code{efficiency_check}. Defaults to \code{TRUE}.}
 \item{mode}{One of \code{"rate"}, \code{"remainder"}, \code{"split"}.}
 }
 \description{

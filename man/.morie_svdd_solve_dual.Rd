@@ -11,7 +11,7 @@
 \item{K}{A matrix; indexed by row and column.}
 \item{C}{Numeric; combined arithmetically in the body.}
 \item{n}{A count; the body uses it as \code{seq_len(...)}.}
-\item{tol}{See Usage.}
+\item{tol}{Passed to \code{<=}.}
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{

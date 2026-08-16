@@ -8,11 +8,11 @@
 morie_lsa(X, k_dim = NULL, how = "log_entropy", query = NULL, top_k = 5L)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{k_dim}{Defaults to \code{NULL}.}
-\item{how}{Defaults to \code{"log_entropy"}.}
-\item{query}{Defaults to \code{NULL}.}
-\item{top_k}{Defaults to \code{5L}.}
+\item{X}{Passed to \code{lsa_decompose}.}
+\item{k_dim}{Passed to \code{lsa_decompose}.}
+\item{how}{Passed to \code{lsa_decompose}. Defaults to \code{"log_entropy"}.}
+\item{query}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{top_k}{Passed to \code{cosine_ranking}. Defaults to \code{5L}.}
 }
 \description{
 A step of the lsa_native implementation. No other function in the package calls it. See the file header for the source the module follows.

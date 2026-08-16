@@ -14,7 +14,7 @@
 \item{lambda}{Passed to \code{.morie_coord_descent_cpp}.}
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000L}.}
 \item{tol}{Passed to \code{.morie_coord_descent_cpp}. Defaults to \code{1e-06}.}
-\item{warm}{Defaults to \code{NULL}.}
+\item{warm}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 Elastic-net coordinate descent on standardized covariates -- the shared core behind morie_penalized_regression() and morie_regularization_path() (replacing their glmnet delegation). Returns coefficients on the ORIGINAL scale plus intercept. `warm` optionally seeds beta (standardized scale) for path fits.

@@ -8,11 +8,11 @@
 .jsonlt_walk(txt, open_pad, close_pad, comma_pad, colon_txt, keep_ws)
 }
 \arguments{
-\item{txt}{See Usage.}
+\item{txt}{Passed to \code{paste}.}
 \item{open_pad}{Accepted by the signature and not used anywhere in the body.}
 \item{close_pad}{Accepted by the signature and not used anywhere in the body.}
 \item{comma_pad}{Accepted by the signature and not used anywhere in the body.}
-\item{colon_txt}{See Usage.}
+\item{colon_txt}{Passed to \code{c}.}
 \item{keep_ws}{A flag; the body branches on it.}
 }
 \description{

@@ -8,9 +8,9 @@
 PdMonitor(eeg, emg, gait, fs, tremor_band = c(3, 7))
 }
 \arguments{
-\item{eeg}{See Usage.}
-\item{emg}{See Usage.}
-\item{gait}{See Usage.}
+\item{eeg}{Passed to \code{tremor}.}
+\item{emg}{Passed to \code{tremor}.}
+\item{gait}{Passed to \code{tremor}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
 \item{tremor_band}{A vector; indexed elementwise. Defaults to \code{c(3, 7)}.}
 }

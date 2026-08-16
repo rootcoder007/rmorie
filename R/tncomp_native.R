@@ -140,11 +140,11 @@ distance_matrix <- function(fps) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fps See Usage.
+#' @param fps Passed to \code{distance_matrix}.
 #' @param k Coerced to integer by the body, with \code{as.integer}.
 #' @param objective Compared against \code{"maxmin"}.
 #' @param seed Passed to \code{.tncomp_seed}.
-#' @param D Defaults to \code{NULL}.
+#' @param D Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{chosen}, \code{M}.
 #' @export
 .tncomp_select <- function(fps, k, objective, seed = NULL, D = NULL) {
@@ -211,9 +211,9 @@ maxsum_selection <- function(fps, k, seed = NULL) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fps See Usage.
+#' @param fps Passed to \code{distance_matrix}.
 #' @param subset Coerced to integer by the body, with \code{as.integer}.
-#' @param D Defaults to \code{NULL}.
+#' @param D Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{min_distance}, \code{mean_distance}, \code{max_distance}, \code{n_pairs}.
 #' @export
 diversity <- function(fps, subset, D = NULL) {

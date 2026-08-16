@@ -11,8 +11,8 @@
 \item{y}{A vector; its length is taken and its elements indexed.}
 \item{w}{A vector; indexed elementwise.}
 \item{e}{A vector; indexed elementwise.}
-\item{keep}{Defaults to \code{NULL}.}
-\item{weights}{Defaults to \code{NULL}.}
+\item{keep}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{weights}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the tmlefp_native implementation. Called by \code{morie_tmlefp}. See the file header for the source the module follows.

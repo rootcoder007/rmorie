@@ -8,8 +8,8 @@
 design_effect(ic, cluster)
 }
 \arguments{
-\item{ic}{See Usage.}
-\item{cluster}{See Usage.}
+\item{ic}{Passed to \code{naive_variance}.}
+\item{cluster}{Passed to \code{cluster_variance}.}
 }
 \description{
 A step of the tlclust_native implementation. No other function in the package calls it. See the file header for the source the module follows.

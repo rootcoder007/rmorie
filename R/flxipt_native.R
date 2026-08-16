@@ -62,7 +62,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p Passed to \code{>=}.
 #' @param ridge_penalties Defaults to \code{c(0, 1, 10)}.
 #' @return The value of \code{lib}, as built in the body.
 #' @export
@@ -99,7 +99,7 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
 #' @param penalty Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
-#' @param tol Defaults to \code{1e-08}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
 #' @return The value of \code{b}, as built in the body.
 #' @export
 .flxipt_logit_irls <- function(X, y, ridge = 1e-10, penalty = 0,
@@ -240,7 +240,7 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #' @param Z A matrix; passed to \code{nrow}.
 #' @param y A matrix; passed to \code{crossprod}.
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{8000}.
-#' @param tol Defaults to \code{1e-14}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-14}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .flxipt_nnls_simplex <- function(Z, y, iters = 8000, tol = 1e-14) {
@@ -420,12 +420,12 @@ super_learner <- function(y, X, library = NULL, n_folds = 10,
 #' source it follows.
 #'
 #' @param A Coerced to numeric by the body, with \code{as.numeric}.
-#' @param H See Usage.
-#' @param library Defaults to \code{NULL}.
-#' @param n_folds Defaults to \code{10}.
-#' @param meta Defaults to \code{"nnls"}.
+#' @param H Passed to \code{super_learner}.
+#' @param library Passed to \code{super_learner}.
+#' @param n_folds Passed to \code{super_learner}. Defaults to \code{10}.
+#' @param meta Passed to \code{super_learner}. Defaults to \code{"nnls"}.
 #' @param trim Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param ridge Passed to \code{super_learner}. Defaults to \code{1e-08}.
 #' @param stabilize A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{propensity}, \code{weights}, \code{estimate}, \code{sl_weights}, \code{cv_risk}, \code{cv_risk_ensemble}, \code{best_candidate}, \code{max_weight}, \code{min_propensity}, \code{max_propensity}, \code{n}, \code{trim}, \code{stabilized}, \code{library}, \code{method}.
 #' @export
@@ -476,12 +476,12 @@ flexible_iptw <- function(A, H, library = NULL, n_folds = 10,
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param A Coerced to numeric by the body, with \code{as.numeric}.
-#' @param H See Usage.
-#' @param library Defaults to \code{NULL}.
-#' @param n_folds Defaults to \code{10}.
-#' @param meta Defaults to \code{"nnls"}.
-#' @param trim Defaults to \code{0.01}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param H Passed to \code{flexible_iptw}.
+#' @param library Passed to \code{flexible_iptw}.
+#' @param n_folds Passed to \code{flexible_iptw}. Defaults to \code{10}.
+#' @param meta Passed to \code{flexible_iptw}. Defaults to \code{"nnls"}.
+#' @param trim Passed to \code{flexible_iptw}. Defaults to \code{0.01}.
+#' @param ridge Passed to \code{flexible_iptw}. Defaults to \code{1e-08}.
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
 #' @return A list with \code{estimate}, \code{se}, \code{ci}, \code{mean_treated}, \code{mean_control}, \code{propensity}, \code{weights}, \code{sl_weights}, \code{cv_risk}, \code{best_candidate}, \code{max_weight}, \code{min_propensity}, \code{n}, \code{level}, \code{method}.
 #' @export

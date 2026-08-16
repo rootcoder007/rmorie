@@ -11,9 +11,9 @@ mint_reconcile(base, S, method = "shrink", residuals = NULL, W = NULL, ridge = 1
 \item{base}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{S}{A matrix; passed to \code{as.matrix}.}
 \item{method}{Carried through into a list the body builds. Defaults to \code{"shrink"}.}
-\item{residuals}{Defaults to \code{NULL}.}
-\item{W}{Defaults to \code{NULL}.}
-\item{ridge}{Defaults to \code{1e-10}.}
+\item{residuals}{Passed to \code{mint_P}.}
+\item{W}{Passed to \code{mint_P}.}
+\item{ridge}{Passed to \code{mint_P}. Defaults to \code{1e-10}.}
 }
 \description{
 A step of the hierF_native implementation. Called by \code{morie_hierF}. See the file header for the source the module follows.

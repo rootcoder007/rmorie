@@ -252,7 +252,7 @@ fit_cdae <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,
 #' @param u Coerced to integer by the body, with \code{as.integer}.
 #' @param n_items Coerced to integer by the body, with \code{as.integer}.
 #' @param top_k Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
-#' @param activation Defaults to \code{"sigmoid"}.
+#' @param activation Passed to \code{encode}. Defaults to \code{"sigmoid"}.
 #' @return A list with \code{ranking}, \code{n_scored}.
 #' @export
 recommend <- function(model, pos, u, n_items, top_k = 5L,
@@ -280,18 +280,18 @@ recommend <- function(model, pos, u, n_items, top_k = 5L,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param pos See Usage.
-#' @param n_users See Usage.
-#' @param n_items See Usage.
-#' @param k_dim Defaults to \code{8L}.
-#' @param q Defaults to \code{0.2}.
-#' @param alpha Defaults to \code{0.05}.
-#' @param lam Defaults to \code{0.01}.
-#' @param iters Defaults to \code{30L}.
-#' @param n_neg Defaults to \code{5L}.
-#' @param seed Defaults to \code{0}.
-#' @param activation Defaults to \code{"sigmoid"}.
-#' @param init_scale Defaults to \code{0.1}.
+#' @param pos Passed to \code{fit_cdae}.
+#' @param n_users Passed to \code{fit_cdae}.
+#' @param n_items Passed to \code{fit_cdae}.
+#' @param k_dim Passed to \code{fit_cdae}. Defaults to \code{8L}.
+#' @param q Passed to \code{fit_cdae}. Defaults to \code{0.2}.
+#' @param alpha Passed to \code{fit_cdae}. Defaults to \code{0.05}.
+#' @param lam Passed to \code{fit_cdae}. Defaults to \code{0.01}.
+#' @param iters Passed to \code{fit_cdae}. Defaults to \code{30L}.
+#' @param n_neg Passed to \code{fit_cdae}. Defaults to \code{5L}.
+#' @param seed Passed to \code{fit_cdae}. Defaults to \code{0}.
+#' @param activation Passed to \code{fit_cdae}. Defaults to \code{"sigmoid"}.
+#' @param init_scale Passed to \code{fit_cdae}. Defaults to \code{0.1}.
 #' @return The value of \code{fit_cdae}.
 #' @export
 morie_cdaeRC <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,

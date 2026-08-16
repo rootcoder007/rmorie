@@ -23,7 +23,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Passed to \code{round}.
 #' @param lo Coerced to integer by the body, with \code{as.integer}.
 #' @param hi Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{v}, as built in the body.
@@ -75,9 +75,9 @@ normalise_bbox <- function(box, width, height, scale = 1000) {
 #'
 #' @param boxes A matrix; indexed by row and column.
 #' @param segment_ids Coerced to list by the body, with \code{as.list}.
-#' @param width See Usage.
-#' @param height See Usage.
-#' @param scale Defaults to \code{1000}.
+#' @param width Passed to \code{normalise_bbox}.
+#' @param height Passed to \code{normalise_bbox}.
+#' @param scale Passed to \code{normalise_bbox}. Defaults to \code{1000}.
 #' @return A list with \code{segment_boxes}, \code{per_token}, \code{n_segments}, \code{note}.
 #' @export
 segment_layout_boxes <- function(boxes, segment_ids, width, height,
@@ -163,9 +163,9 @@ mask_units <- function(n_units, rate = 0.3, seed = 0, block = 1) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param box See Usage.
-#' @param width See Usage.
-#' @param height See Usage.
+#' @param box Passed to \code{normalise_bbox}.
+#' @param width Passed to \code{normalise_bbox}.
+#' @param height Passed to \code{normalise_bbox}.
 #' @param patch_grid Coerced to integer by the body, with \code{as.integer}. Defaults to \code{14}.
 #' @return A vector, from \code{sort}.
 #' @export
@@ -187,11 +187,11 @@ patch_of_box <- function(box, width, height, patch_grid = 14) {
 #' source it follows.
 #'
 #' @param text_boxes A vector; its length is taken and its elements indexed.
-#' @param masked_patches See Usage.
-#' @param width See Usage.
-#' @param height See Usage.
-#' @param patch_grid Defaults to \code{14}.
-#' @param masked_text Defaults to \code{list()}.
+#' @param masked_patches Passed to \code{unlist}.
+#' @param width Passed to \code{patch_of_box}.
+#' @param height Passed to \code{patch_of_box}.
+#' @param patch_grid Passed to \code{patch_of_box}. Defaults to \code{14}.
+#' @param masked_text Passed to \code{unlist}. Defaults to \code{list()}.
 #' @return A list with \code{estimate}, \code{labels}, \code{patches}, \code{n_examples}, \code{positive_rate}, \code{method}, \code{note}.
 #' @export
 word_patch_alignment <- function(text_boxes, masked_patches, width,

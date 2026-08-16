@@ -14,3 +14,13 @@ Internal helper: d-separation of x and y given z (Bayes-Ball)
 The terminal expression of the body.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+z <- rnorm(400)
+x <- rbinom(400, 1, plogis(z))
+y <- 0.8 * x + z + rnorm(400)
+df <- data.frame(z = z, x = x, y = y)
+g <- morie_dag(c("z -> x", "z -> y", "x -> y"), "x", "y")
+morie_dag_estimate(g, df, method = "backdoor.linear")
+.morie_dag_dsep(g = g, x = x, y = y, z = z)
+}

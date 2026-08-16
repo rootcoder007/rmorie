@@ -11,7 +11,7 @@
 \item{A}{Numeric; passed to \code{max}.}
 \item{B}{Numeric; passed to \code{max}.}
 \item{selection}{One of \code{"best_for_agent"}, \code{"first"}, \code{"global_optimal"}.}
-\item{agent}{See Usage.}
+\item{agent}{Passed to \code{==}.}
 \item{tol}{Numeric; combined arithmetically in the body.}
 }
 \description{

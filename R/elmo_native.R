@@ -176,8 +176,8 @@ elmo_mix <- function(reps, raw_weights, gamma = 1, position = NULL) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param layers See Usage.
+#' @param X Passed to \code{bilm_forward}.
+#' @param layers Passed to \code{bilm_forward}.
 #' @param raw_weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param gamma Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{elmo}, \code{layers}, \code{weights}, \code{gamma}, \code{n_layers}, \code{L}, \code{d}, \code{top_layer}, \code{method}.
@@ -222,10 +222,10 @@ elmo_representation <- function(X, layers, raw_weights = NULL,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param layers See Usage.
-#' @param raw_weights Defaults to \code{NULL}.
-#' @param gamma Defaults to \code{1}.
+#' @param X Passed to \code{elmo_representation}.
+#' @param layers Passed to \code{elmo_representation}.
+#' @param raw_weights Passed to \code{elmo_representation}.
+#' @param gamma Passed to \code{elmo_representation}. Defaults to \code{1}.
 #' @return The value of \code{elmo_representation}.
 #' @export
 elmorepresentation <- function(X, layers, raw_weights = NULL,
@@ -240,10 +240,10 @@ elmorepresentation <- function(X, layers, raw_weights = NULL,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param layers See Usage.
-#' @param raw_weights Defaults to \code{NULL}.
-#' @param gamma Defaults to \code{1}.
+#' @param X Passed to \code{elmo_representation}.
+#' @param layers Passed to \code{elmo_representation}.
+#' @param raw_weights Passed to \code{elmo_representation}.
+#' @param gamma Passed to \code{elmo_representation}. Defaults to \code{1}.
 #' @return The value of \code{elmo_representation}.
 #' @export
 elmo <- function(X, layers, raw_weights = NULL, gamma = 1) {
@@ -257,10 +257,10 @@ elmo <- function(X, layers, raw_weights = NULL, gamma = 1) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param layers See Usage.
-#' @param raw_weights Defaults to \code{NULL}.
-#' @param gamma Defaults to \code{1}.
+#' @param X Passed to \code{elmo_representation}.
+#' @param layers Passed to \code{elmo_representation}.
+#' @param raw_weights Passed to \code{elmo_representation}.
+#' @param gamma Passed to \code{elmo_representation}. Defaults to \code{1}.
 #' @return The value of \code{elmo_representation}.
 #' @export
 morie_elmo <- function(X, layers, raw_weights = NULL, gamma = 1) {

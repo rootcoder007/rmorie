@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{n}{Optional; may be \code{NULL}. A vector; its length is taken.}
-\item{default}{Defaults to \code{NULL}.}
+\item{default}{Passed to \code{return}.}
 }
 \description{
 A step of the rangayyan_tf implementation. Called by \code{EchoCep}, \code{EchoImp}, \code{EchoSig}. See the file header for the source the module follows.

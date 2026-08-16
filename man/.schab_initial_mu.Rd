@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{z}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{family}{See Usage.}
+\item{family}{Passed to \code{identical}.}
 }
 \description{
 A step of the schab_glmm_shared implementation. Called by \code{.schab_fit_pseudo_likelihood}. See the file header for the source the module follows.

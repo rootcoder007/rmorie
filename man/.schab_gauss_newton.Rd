@@ -15,7 +15,7 @@
 \item{model}{Passed to \code{.sp_semivariogram}. Defaults to \code{"exponential"}.}
 \item{kind}{Passed to \code{.schab_gn_weights}. Defaults to \code{"wls"}.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.}
-\item{tol}{Defaults to \code{1e-12}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-12}.}
 \item{max_halvings}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{40L}.}
 }
 \description{

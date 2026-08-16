@@ -130,11 +130,11 @@ attention_weights <- function(Q, K, n_heads, pad_mask = NULL, causal = FALSE) {
 #' source it follows.
 #'
 #' @param Q A matrix; passed to \code{nrow}.
-#' @param K See Usage.
+#' @param K Passed to \code{attention_weights}.
 #' @param V A matrix; indexed by row and column.
 #' @param n_heads Numeric; combined arithmetically in the body.
-#' @param pad_mask Defaults to \code{NULL}.
-#' @param causal Defaults to \code{FALSE}.
+#' @param pad_mask Passed to \code{attention_weights}.
+#' @param causal Passed to \code{attention_weights}. Defaults to \code{FALSE}.
 #' @return A list with \code{out}, \code{weights}.
 #' @export
 multi_head_attention <- function(Q, K, V, n_heads, pad_mask = NULL,
@@ -159,20 +159,20 @@ multi_head_attention <- function(Q, K, V, n_heads, pad_mask = NULL,
 #' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param Wq See Usage.
-#' @param Wk See Usage.
-#' @param Wv See Usage.
-#' @param Wo See Usage.
-#' @param W1 See Usage.
-#' @param b1 See Usage.
-#' @param W2 See Usage.
-#' @param b2 See Usage.
-#' @param n_heads See Usage.
-#' @param pad_mask Defaults to \code{NULL}.
-#' @param gain1 Defaults to \code{NULL}.
-#' @param bias1 Defaults to \code{NULL}.
-#' @param gain2 Defaults to \code{NULL}.
-#' @param bias2 Defaults to \code{NULL}.
+#' @param Wq Passed to \code{apply}.
+#' @param Wk Passed to \code{apply}.
+#' @param Wv Passed to \code{apply}.
+#' @param Wo Passed to \code{apply}.
+#' @param W1 Passed to \code{apply}.
+#' @param b1 Passed to \code{apply}.
+#' @param W2 Passed to \code{apply}.
+#' @param b2 Passed to \code{apply}.
+#' @param n_heads Passed to \code{multi_head_attention}.
+#' @param pad_mask Passed to \code{multi_head_attention}.
+#' @param gain1 Passed to \code{apply}.
+#' @param bias1 Passed to \code{apply}.
+#' @param gain2 Passed to \code{apply}.
+#' @param bias2 Passed to \code{apply}.
 #' @param pre_norm A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{out}, \code{weights}.
 #' @export
@@ -215,7 +215,7 @@ encoder_block <- function(X, Wq, Wk, Wv, Wo, W1, b1, W2, b2, n_heads,
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param blocks A vector; its length is taken.
 #' @param n_heads Carried through into a list the body builds.
-#' @param pad_mask Defaults to \code{NULL}.
+#' @param pad_mask Passed to \code{encoder_block}.
 #' @param pre_norm Coerced to logical by the body, with \code{as.logical}. Defaults to \code{FALSE}.
 #' @return A list with \code{estimate}, \code{output}, \code{attention}, \code{pooled}, \code{L}, \code{d}, \code{n_layers}, \code{n_heads}, \code{pre_norm}, \code{bidirectional}, \code{method}.
 #' @export

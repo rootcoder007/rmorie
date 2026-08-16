@@ -20,7 +20,7 @@ NULL
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .t4_vec <- function(x) as.numeric(unlist(x))
@@ -46,7 +46,7 @@ NULL
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{rank}.
 #' @return The value of \code{rank}.
 #' @export
 .t4_ranks <- function(x) rank(x, ties.method = "average")
@@ -57,7 +57,7 @@ NULL
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{table}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .t4_tiecounts <- function(x) as.numeric(table(x))

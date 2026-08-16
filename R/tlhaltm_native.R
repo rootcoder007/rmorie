@@ -30,13 +30,13 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param rate_Q Defaults to \code{NULL}.
-#' @param rate_g Defaults to \code{NULL}.
-#' @param n Defaults to \code{NULL}.
-#' @param err_Q Defaults to \code{NULL}.
-#' @param err_g Defaults to \code{NULL}.
-#' @param delta Defaults to \code{NULL}.
-#' @param donsker Defaults to \code{TRUE}.
+#' @param rate_Q Passed to \code{rate_condition}.
+#' @param rate_g Passed to \code{rate_condition}.
+#' @param n Passed to \code{rate_condition}.
+#' @param err_Q Passed to \code{remainder_bound}.
+#' @param err_g Passed to \code{remainder_bound}.
+#' @param delta Passed to \code{remainder_bound}.
+#' @param donsker Passed to \code{efficiency_check}. Defaults to \code{TRUE}.
 #' @param mode One of \code{"rate"}, \code{"remainder"}, \code{"split"}.
 #' @return The value of \code{efficiency_check}.
 #' @export
@@ -102,8 +102,8 @@ remainder_bound <- function(err_Q, err_g, delta) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param err_Q See Usage.
-#' @param err_g See Usage.
+#' @param err_Q Passed to \code{remainder_bound}.
+#' @param err_g Passed to \code{remainder_bound}.
 #' @param delta Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @param donsker A flag; the body branches on it. Defaults to \code{TRUE}.

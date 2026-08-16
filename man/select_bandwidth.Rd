@@ -8,10 +8,10 @@
 select_bandwidth(X, x0, bandwidths, kernel = "epanechnikov", criterion = "lepski", C = 1)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{x0}{See Usage.}
+\item{X}{Passed to \code{smoothed_parameter}.}
+\item{x0}{Passed to \code{smoothed_parameter}.}
 \item{bandwidths}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{kernel}{Defaults to \code{"epanechnikov"}.}
+\item{kernel}{Passed to \code{smoothed_parameter}. Defaults to \code{"epanechnikov"}.}
 \item{criterion}{One of \code{"lepski"}, \code{"smallest_se"}. Defaults to \code{"lepski"}.}
 \item{C}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }

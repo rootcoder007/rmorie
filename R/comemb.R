@@ -11,7 +11,7 @@
 #' walk -- the reduction that pins this function.
 #'
 #' @param nb A vector; indexed elementwise.
-#' @param prev See Usage.
+#' @param prev Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param cur See Usage.
 #' @param p Numeric; combined arithmetically in the body.
 #' @param q Numeric; combined arithmetically in the body.

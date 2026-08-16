@@ -14,3 +14,8 @@ Internal helper: Tps Stoch Neg Loglik Hawkes
 A numeric value.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+.tps_stoch_result(V, V)
+.tps_stoch_neg_loglik_hawkes(params = V, t = V, T_window = V)
+}

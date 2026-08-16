@@ -30,8 +30,8 @@ clpopt_pivots <- c("bland", "dantzig")
 #' Mirrors clpopt._mat.
 #'
 #' @param A A matrix; indexed by row and column.
-#' @param name See Usage.
-#' @param ncol Defaults to \code{NULL}.
+#' @param name Passed to \code{sprintf}.
+#' @param ncol Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{do.call}.
 #' @export
 .clpopt_mat <- function(A, name, ncol = NULL) {
@@ -139,7 +139,7 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 #' source it follows.
 #'
 #' @param T A matrix; indexed by row and column.
-#' @param row See Usage.
+#' @param row Passed to \code{==}.
 #' @param col See Usage.
 #' @return The value of \code{T}, as built in the body.
 #' @export
@@ -167,7 +167,7 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 #' @param basis A vector; its length is taken and its elements indexed.
 #' @param cols A vector; indexed elementwise.
 #' @param rule Compared against \code{"bland"}.
-#' @param blocked See Usage.
+#' @param blocked Passed to \code{\%in\%}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}.
 #' @return A character value.
 #' @export
@@ -255,7 +255,7 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 #'
 #' @param st Compared against \code{"cycling"}.
 #' @param rule Compared against \code{"dantzig"}.
-#' @param phase See Usage.
+#' @param phase Passed to \code{sprintf}.
 #' @return A list with \code{estimate}, \code{status}, \code{x}, \code{fun}, \code{rule}, \code{message}, \code{method}.
 #' @export
 .clpopt_fail <- function(st, rule, phase) {
@@ -423,14 +423,14 @@ simplex <- function(c, A, b, rule = "bland", max_iter = 10000,
 #' Mirrors clpopt.linprog.
 #'
 #' @param c Coerced to numeric by the body, with \code{as.numeric}.
-#' @param A_ub Defaults to \code{NULL}.
-#' @param b_ub Defaults to \code{NULL}.
-#' @param A_eq Defaults to \code{NULL}.
-#' @param b_eq Defaults to \code{NULL}.
-#' @param upper Defaults to \code{NULL}.
-#' @param rule Defaults to \code{"bland"}.
+#' @param A_ub Passed to \code{standard_form}.
+#' @param b_ub Passed to \code{standard_form}.
+#' @param A_eq Passed to \code{standard_form}.
+#' @param b_eq Passed to \code{standard_form}.
+#' @param upper Passed to \code{standard_form}.
+#' @param rule Passed to \code{simplex}. Defaults to \code{"bland"}.
 #' @param maximise A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @param max_iter Defaults to \code{10000}.
+#' @param max_iter Passed to \code{simplex}. Defaults to \code{10000}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_clpopt <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,

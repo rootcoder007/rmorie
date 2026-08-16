@@ -12,8 +12,8 @@ morie_ipcw_interval(W, A, times, deltas, a = 1, r = NULL, g = NULL, gc = NULL, r
 \item{A}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{times}{Passed to \code{.tmlcen_coerce_subject_list}.}
 \item{deltas}{Passed to \code{.tmlcen_coerce_subject_list}.}
-\item{a}{Defaults to \code{1}.}
-\item{r}{Defaults to \code{NULL}.}
+\item{a}{Passed to \code{!=}. Defaults to \code{1}.}
+\item{r}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{g}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 \item{gc}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 \item{ridge}{Passed to \code{.tmlcen_logit_irls}. Defaults to \code{1e-08}.}

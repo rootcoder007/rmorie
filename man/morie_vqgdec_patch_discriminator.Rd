@@ -10,7 +10,7 @@ morie_vqgdec_patch_discriminator(image, patch = 4, scorer = NULL)
 \arguments{
 \item{image}{Passed to \code{.vqgdec_to_matrix}.}
 \item{patch}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.}
-\item{scorer}{Defaults to \code{NULL}.}
+\item{scorer}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 dense signal about local texture.

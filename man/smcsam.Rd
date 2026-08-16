@@ -12,13 +12,13 @@ smcsam(log_gamma, initial, n_particles = 500L, ladder = NULL, n_steps = 20L, ker
 \item{initial}{Accepted by the signature and not used anywhere in the body.}
 \item{n_particles}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500L}.}
 \item{ladder}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
-\item{n_steps}{Defaults to \code{20L}.}
-\item{kernel}{Defaults to \code{NULL}.}
+\item{n_steps}{Passed to \code{temperature_ladder}. Defaults to \code{20L}.}
+\item{kernel}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{ess_threshold}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.}
-\item{scheme}{Defaults to \code{"systematic"}.}
+\item{scheme}{Passed to \code{resample}. Defaults to \code{"systematic"}.}
 \item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.}
 \item{weight_rule}{One of \code{"general"}, \code{"mcmc"}. Defaults to \code{"mcmc"}.}
-\item{log_forward}{Defaults to \code{NULL}.}
+\item{log_forward}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{log_backward}{The body requires: log_backward densities (equation 12).}
 }
 \description{

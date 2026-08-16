@@ -8,7 +8,7 @@
 erf(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{pnorm}.}
 }
 \description{
 A step of the farmlmm_native implementation. No other function in the package calls it. See the file header for the source the module follows.

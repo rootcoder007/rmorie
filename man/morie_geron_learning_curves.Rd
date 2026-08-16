@@ -21,3 +21,10 @@ List with \code{train_sizes}, \code{train_rmse}, \code{val_rmse},
 OLS refit (normal equation) on growing prefixes of the training half;
 the split is the FIRST m - n_val rows, no shuffling.
 }
+\examples{
+X <- matrix(c(1, 2, 1, 3, 1, 5, 1, 7), 4, byrow = TRUE)
+y <- c(2, 3, 6, 9)
+th <- c(0.5, 1.1)
+morie_geron_elastic_net_cost(X, y, th, 0.4, 0.6)
+morie_geron_learning_curves(X = X, y = y)
+}

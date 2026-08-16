@@ -371,7 +371,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param f See Usage.
+#' @param f Passed to \code{names}.
 #' @param order Passed to \code{.groebn_key}. Defaults to \code{"lex"}.
 #' @return The value of \code{[}.
 #' @export
@@ -535,8 +535,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Passed to \code{<=}.
+#' @param b Passed to \code{<=}.
 #' @return A logical value.
 #' @export
 .groebn_divides <- function(a, b) {
@@ -549,8 +549,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Passed to \code{pmax}.
+#' @param b Passed to \code{pmax}.
 #' @return The value of \code{pmax}.
 #' @export
 .groebn_lcm <- function(a, b) {
@@ -791,7 +791,7 @@
 #' @param f Passed to \code{.groebn_normal_form}.
 #' @param F Passed to \code{.groebn_buchberger}.
 #' @param order Passed to \code{.groebn_buchberger}. Defaults to \code{"lex"}.
-#' @param basis Defaults to \code{NULL}.
+#' @param basis Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{estimate}, \code{member}, \code{remainder}, \code{order}, \code{basis}, \code{method}.
 #' @export
 .groebn_ideal_member <- function(f, F, order = "lex", basis = NULL) {

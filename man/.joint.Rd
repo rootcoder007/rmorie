@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{logp}{Accepted by the signature and not used anywhere in the body.}
-\item{theta}{See Usage.}
+\item{theta}{Passed to \code{logp}.}
 \item{r}{Numeric; combined arithmetically in the body.}
 }
 \description{

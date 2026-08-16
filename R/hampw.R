@@ -54,7 +54,7 @@ Hampw <- function(y, a = 2, b = 4, c = 8) {
 #' @param a Coerced to numeric by the body, with \code{as.numeric}.
 #' @param b Coerced to numeric by the body, with \code{as.numeric}.
 #' @param c Coerced to numeric by the body, with \code{as.numeric}.
-#' @param who See Usage.
+#' @param who Passed to \code{paste0}.
 #' @return A vector, from \code{c}.
 #' @export
 .hampel_check <- function(a, b, c, who) {

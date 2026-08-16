@@ -8,10 +8,10 @@
 .bsabandpow(freqs, power, lo, hi)
 }
 \arguments{
-\item{freqs}{See Usage.}
+\item{freqs}{Passed to \code{>=}.}
 \item{power}{A vector; indexed elementwise.}
-\item{lo}{See Usage.}
-\item{hi}{See Usage.}
+\item{lo}{Passed to \code{>=}.}
+\item{hi}{Passed to \code{<}.}
 }
 \description{
 A step of the rangayyan_phys implementation. Called by \code{ApneaDet}, \code{CadAcou}, \code{CadSpec} and 7 others in the module. See the file header for the source the module follows.

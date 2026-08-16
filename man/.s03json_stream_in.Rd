@@ -8,7 +8,7 @@
 .s03json_stream_in(con, ...)
 }
 \arguments{
-\item{con}{See Usage.}
+\item{con}{Passed to \code{readLines}.}
 \item{...}{Passed through.}
 }
 \description{

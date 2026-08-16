@@ -10,7 +10,7 @@ switching(scores, criterion, context = NULL)
 \arguments{
 \item{scores}{Iterated over elementwise, with \code{lapply}.}
 \item{criterion}{Accepted by the signature and not used anywhere in the body.}
-\item{context}{Defaults to \code{NULL}.}
+\item{context}{Passed to \code{criterion}.}
 }
 \description{
 A step of the hybRC_native implementation. No other function in the package calls it. See the file header for the source the module follows.

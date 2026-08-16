@@ -8,7 +8,7 @@
 .ocrwit_clip_int(v, lo, hi)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Passed to \code{round}.}
 \item{lo}{Coerced to integer by the body, with \code{as.integer}.}
 \item{hi}{Coerced to integer by the body, with \code{as.integer}.}
 }

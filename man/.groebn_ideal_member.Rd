@@ -11,7 +11,7 @@
 \item{f}{Passed to \code{.groebn_normal_form}.}
 \item{F}{Passed to \code{.groebn_buchberger}.}
 \item{order}{Passed to \code{.groebn_buchberger}. Defaults to \code{"lex"}.}
-\item{basis}{Defaults to \code{NULL}.}
+\item{basis}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 Ideal membership ---------------------------------------------------------------------------

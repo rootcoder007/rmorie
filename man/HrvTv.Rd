@@ -11,7 +11,7 @@ HrvTv(rr_intervals, fs_resamp = 4, window_len = 64, noverlap = NULL, standard = 
 \item{rr_intervals}{Passed to \code{.tf_need}.}
 \item{fs_resamp}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{4}.}
 \item{window_len}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{64}.}
-\item{noverlap}{Defaults to \code{NULL}.}
+\item{noverlap}{Passed to \code{Spectrogram}.}
 \item{standard}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"taskforce"}.}
 }
 \description{

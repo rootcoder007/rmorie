@@ -8,7 +8,7 @@
 .morie_pinv(M, rcond = 1e-15)
 }
 \arguments{
-\item{M}{See Usage.}
+\item{M}{Passed to \code{svd}.}
 \item{rcond}{Numeric; combined arithmetically in the body. Defaults to \code{1e-15}.}
 }
 \description{

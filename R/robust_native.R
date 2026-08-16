@@ -126,7 +126,7 @@
 #' @param X A matrix; indexed by row and column.
 #' @param y A matrix; passed to \code{crossprod}.
 #' @param n_subsets A count; the body uses it as \code{seq_len(...)}.
-#' @param seed See Usage.
+#' @param seed Passed to \code{set.seed}.
 #' @return A list with \code{beta}, \code{scale}.
 #' @export
 .rob_s_reg <- function(X, y, n_subsets, seed) {

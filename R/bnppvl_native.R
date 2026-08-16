@@ -102,7 +102,7 @@
 #'
 #' @param nullq Accepted by the signature and not used anywhere in the body.
 #' @param j Numeric; combined arithmetically in the body.
-#' @param level See Usage.
+#' @param level Passed to \code{bitwShiftL}.
 #' @return A numeric value.
 #' @export
 .bnppvl_null_mean <- function(nullq, j, level) {
@@ -240,7 +240,7 @@ morie_bnppvl_log_prior <- function(q, m, c = 2.5, schedule = "cubic",
 #' linear scan, not a bisection: k is 2^m with m small by construction,
 #' and a scan visits the cells in one fixed order in both arms.
 #'
-#' @param u See Usage.
+#' @param u Passed to \code{<=}.
 #' @param q A vector; indexed elementwise.
 #' @param k A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{k}, as built in the body.

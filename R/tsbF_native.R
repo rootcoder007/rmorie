@@ -372,8 +372,8 @@ morie_tsbF_sba_forecast <- function(y, alpha = 0.1, horizon = 1,
 #' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
-#' @param adi_cut Defaults to \code{1.32}.
-#' @param cv2_cut Defaults to \code{0.49}.
+#' @param adi_cut Passed to \code{<=}. Defaults to \code{1.32}.
+#' @param cv2_cut Passed to \code{<=}. Defaults to \code{0.49}.
 #' @return A list with \code{class}, \code{adi}, \code{cv2}, \code{n_positive}, \code{n}.
 #' @export
 morie_tsbF_demand_classification <- function(y, adi_cut = 1.32, cv2_cut = 0.49) {

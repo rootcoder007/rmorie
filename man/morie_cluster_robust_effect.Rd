@@ -25,3 +25,14 @@ correction and a \code{t(G-1)} reference. Mirrors \code{morie.fn.clstcr}.
 Cameron AC, Miller DL (2015). \emph{Journal of Human
 Resources} 50(2), 317-372.
 }
+\examples{
+n <- 3000
+x <- stats::rnorm(n)
+e <- pmin(pmax(1/(1 + exp(-x)), 0.05), 0.95)
+tr <- as.numeric(stats::runif(n) < e)
+y <- x + stats::rnorm(n) + 3 * tr
+L <- stats::rnorm(n)
+a <- as.numeric(stats::runif(n) < 1/(1 + exp(-1.5 * L)))
+morie_g_formula(y, a, L)
+morie_cluster_robust_effect(y = y, d = a, cluster = e)
+}

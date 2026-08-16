@@ -14,9 +14,9 @@
 \item{c}{Numeric; combined arithmetically in the body.}
 \item{p}{Numeric; combined arithmetically in the body.}
 \item{n_quad}{Passed to \code{.schab_gauss_legendre}. Defaults to \code{40L}.}
-\item{rtol}{Defaults to \code{1e-10}.}
-\item{max_panels}{Defaults to \code{20000L}.}
-\item{quiet_runs}{Defaults to \code{4L}.}
+\item{rtol}{Passed to \code{<}. Defaults to \code{1e-10}.}
+\item{max_panels}{Passed to \code{<}. Defaults to \code{20000L}.}
+\item{quiet_runs}{Passed to \code{>=}. Defaults to \code{4L}.}
 }
 \description{
 A step of the schab_st_shared implementation. Called by \code{.schab_st_jones_zhang}. See the file header for the source the module follows.

@@ -83,13 +83,13 @@ morie_cause_specific_hazard <- function(time, event_type, X, cause = 1,
 #' header for the source it follows.
 #'
 #' @param t A vector; indexed elementwise.
-#' @param e See Usage.
+#' @param e Passed to \code{==}.
 #' @param X A matrix; indexed by row and column.
-#' @param competing See Usage.
+#' @param competing Passed to \code{&}.
 #' @param Gfun Accepted by the signature and not used anywhere in the body.
 #' @param Gi Numeric; combined arithmetically in the body.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.
-#' @param tol Defaults to \code{1e-09}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-09}.
 #' @return A list with \code{beta}, \code{loglik}, \code{I}, \code{U}.
 #' @export
 .morie_fg_newton <- function(t, e, X, competing, Gfun, Gi, max_iter = 50L,

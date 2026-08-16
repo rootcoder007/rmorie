@@ -10,7 +10,7 @@
 \arguments{
 \item{pts}{Passed to \code{.rkmeans_mean}.}
 \item{c_val}{Numeric; combined arithmetically in the body.}
-\item{tol}{Defaults to \code{1e-10}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-10}.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.}
 }
 \description{

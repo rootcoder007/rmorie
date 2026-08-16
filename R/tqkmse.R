@@ -84,7 +84,7 @@
 #' it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
-#' @param cb See Usage.
+#' @param cb Passed to \code{outer}.
 #' @return A numeric value.
 #' @export
 .kvmse_quantize <- function(y, cb) {

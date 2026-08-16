@@ -9,7 +9,7 @@
 #' source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
-#' @param name See Usage.
+#' @param name Passed to \code{sprintf}.
 #' @return The value of \code{X}, as built in the body.
 #' @export
 .morie_svdd_mat <- function(X, name) {
@@ -84,7 +84,7 @@
 #' @param K A matrix; indexed by row and column.
 #' @param C Numeric; combined arithmetically in the body.
 #' @param n A count; the body uses it as \code{seq_len(...)}.
-#' @param tol See Usage.
+#' @param tol Passed to \code{<=}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{alpha}, as built in the body.
 #' @export

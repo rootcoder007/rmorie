@@ -11,7 +11,7 @@
 \item{x}{A vector; its length is taken.}
 \item{cost}{Passed to \code{.mor_cp_cost}.}
 \item{penalty}{See Usage.}
-\item{min_seglen}{See Usage.}
+\item{min_seglen}{Passed to \code{seq.int}.}
 }
 \description{
 A step of the pelt_native implementation. Called by \code{morie_pelt}. See the file header for the source the module follows.

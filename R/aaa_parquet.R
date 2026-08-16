@@ -152,7 +152,7 @@
 #' source it follows.
 #'
 #' @param e A list; the body reads \code{$pos} from it.
-#' @param ttype See Usage.
+#' @param ttype Passed to \code{==}.
 #' @return Nothing; this branch always raises.
 #' @export
 .pq_scalar <- function(e, ttype) {
@@ -366,7 +366,7 @@
 #'
 #' @param e Passed to \code{.pq_emit}.
 #' @param fid Numeric; combined arithmetically in the body.
-#' @param ttype See Usage.
+#' @param ttype Passed to \code{bitwOr}.
 #' @param last Numeric; combined arithmetically in the body.
 #' @return The value of \code{fid}, as built in the body.
 #' @export
@@ -443,7 +443,7 @@
 #'
 #' @param e Passed to \code{.pq_emit}.
 #' @param size Passed to \code{.pq_wvarint}.
-#' @param etype See Usage.
+#' @param etype Passed to \code{bitwOr}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .pq_wlisthdr <- function(e, size, etype) {
@@ -727,7 +727,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
+#' @param n Passed to \code{>}.
 #' @return The value of \code{w}, as built in the body.
 #' @export
 .pq_bit_width <- function(n) {
@@ -749,7 +749,7 @@
 #' @param pos Numeric; combined arithmetically in the body.
 #' @param width A count; the body uses it as \code{seq_len(...)}.
 #' @param count A count; the body uses it as \code{rep(...)}.
-#' @param end See Usage.
+#' @param end Passed to \code{<=}.
 #' @return A list with \code{values}, \code{pos}.
 #' @export
 .pq_read_rle <- function(buf, pos, width, count, end) {
@@ -831,7 +831,7 @@
 #'
 #' @param buf A vector; indexed elementwise.
 #' @param pos Numeric; combined arithmetically in the body.
-#' @param ptype See Usage.
+#' @param ptype Passed to \code{==}.
 #' @param count A count; the body uses it as \code{seq_len(...)}.
 #' @param type_length Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return Nothing; this branch always raises.
@@ -913,7 +913,7 @@
 #' source it follows.
 #'
 #' @param vals Iterated over elementwise, with \code{vapply}.
-#' @param ptype See Usage.
+#' @param ptype Passed to \code{==}.
 #' @param converted Accepted by the signature and not used anywhere in the body.
 #' @return The value of \code{vals}, as built in the body.
 #' @export
@@ -946,8 +946,8 @@
 #' engines.
 #'
 #' @param v Numeric; combined arithmetically in the body.
-#' @param ptype See Usage.
-#' @param converted See Usage.
+#' @param ptype Passed to \code{==}.
+#' @param converted Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
 .pq_apply_logical <- function(v, ptype, converted) {
@@ -974,7 +974,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param con See Usage.
+#' @param con Passed to \code{seek}.
 #' @param size Numeric; combined arithmetically in the body.
 #' @return The value of \code{.pq_struct}.
 #' @export
@@ -999,7 +999,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param con See Usage.
+#' @param con Passed to \code{seek}.
 #' @param cm Passed to \code{.pq_f}.
 #' @param num_rows A count; the body uses it as \code{seq_len(...)}.
 #' @param maxdef Passed to \code{.pq_bit_width}.
@@ -1305,7 +1305,7 @@ morie_read_parquet <- function(path, columns = NULL) {
 #' source it follows.
 #'
 #' @param values A vector; its length is taken and its elements indexed.
-#' @param ptype See Usage.
+#' @param ptype Passed to \code{==}.
 #' @return Nothing; this branch always raises.
 #' @export
 .pq_encode_plain <- function(values, ptype) {
@@ -1355,7 +1355,7 @@ morie_read_parquet <- function(path, columns = NULL) {
 #' source it follows.
 #'
 #' @param levels A vector; its length is taken.
-#' @param width See Usage.
+#' @param width Passed to \code{==}.
 #' @return A vector, from \code{c}.
 #' @export
 .pq_encode_levels <- function(levels, width) {

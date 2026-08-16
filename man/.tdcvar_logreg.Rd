@@ -11,7 +11,7 @@
 \item{X}{A matrix; passed to \code{nrow}.}
 \item{y}{Numeric; combined arithmetically in the body.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{25L}.}
-\item{tol}{Defaults to \code{1e-08}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-08}.}
 }
 \description{
 A step of the tdcvar_native implementation. Called by \code{.tdcvar_ip_weights_history}. See the file header for the source the module follows.

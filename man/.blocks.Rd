@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{covariate_history}{Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.}
-\item{n}{See Usage.}
+\item{n}{Passed to \code{!=}.}
 }
 \description{
 A step of the tmldyn_native implementation. Called by \code{morie_tmldyn}. See the file header for the source the module follows.

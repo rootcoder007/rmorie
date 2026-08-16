@@ -263,10 +263,10 @@ strec_attention_weights <- function(embeddings, W1, W2, W3, W0, b_a = NULL) {
 #'
 #' @param embeddings Passed to \code{.strec_as_rows}.
 #' @param item_table Passed to \code{.strec_as_rows}.
-#' @param Ws See Usage.
-#' @param Wt See Usage.
-#' @param bs Defaults to \code{NULL}.
-#' @param bt Defaults to \code{NULL}.
+#' @param Ws Passed to \code{strec_mlp_cell}.
+#' @param Wt Passed to \code{strec_mlp_cell}.
+#' @param bs Passed to \code{strec_mlp_cell}.
+#' @param bt Passed to \code{strec_mlp_cell}.
 #' @param attention Optional; may be \code{NULL}. A list; the body reads \code{$m_a} from it.
 #' @return A list with \code{estimate}, \code{ranking}, \code{probability}, \code{score}, \code{h_s}, \code{h_t}, \code{attention_used}, \code{model}, \code{method}, \code{note}.
 #' @export

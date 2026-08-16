@@ -8,16 +8,16 @@
 morie_hetgnn(H, edges, types, metapaths, a_vec, W_node, W_sem, b_sem, q_sem, slope = 0.2)
 }
 \arguments{
-\item{H}{See Usage.}
-\item{edges}{See Usage.}
-\item{types}{See Usage.}
-\item{metapaths}{See Usage.}
-\item{a_vec}{See Usage.}
-\item{W_node}{See Usage.}
-\item{W_sem}{See Usage.}
-\item{b_sem}{See Usage.}
-\item{q_sem}{See Usage.}
-\item{slope}{Defaults to \code{0.2}.}
+\item{H}{Passed to \code{han_forward}.}
+\item{edges}{Passed to \code{han_forward}.}
+\item{types}{Passed to \code{han_forward}.}
+\item{metapaths}{Passed to \code{han_forward}.}
+\item{a_vec}{Passed to \code{han_forward}.}
+\item{W_node}{Passed to \code{han_forward}.}
+\item{W_sem}{Passed to \code{han_forward}.}
+\item{b_sem}{Passed to \code{han_forward}.}
+\item{q_sem}{Passed to \code{han_forward}.}
+\item{slope}{Passed to \code{han_forward}. Defaults to \code{0.2}.}
 }
 \description{
 A step of the hetgnn_native implementation. No other function in the package calls it. See the file header for the source the module follows.

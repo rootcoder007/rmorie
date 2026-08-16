@@ -8,7 +8,7 @@
 .t4_tiecounts(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{table}.}
 }
 \description{
 A step of the tail4_core implementation. Called by \code{.t4_kendalltaub}, \code{Mktest}. See the file header for the source the module follows.

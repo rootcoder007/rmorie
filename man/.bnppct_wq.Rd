@@ -10,7 +10,7 @@
 \arguments{
 \item{ys_sorted}{A vector; its length is taken and its elements indexed.}
 \item{weights}{A vector; indexed elementwise.}
-\item{q}{See Usage.}
+\item{q}{Passed to \code{>=}.}
 }
 \description{
 weight reaches q. The inverse of the weighted ECDF, which is a step function, so nothing is interpolated between the steps.

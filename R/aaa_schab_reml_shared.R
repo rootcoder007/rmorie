@@ -186,7 +186,7 @@
 #' @param start_ratio Passed to \code{.schab_logit}. Defaults to \code{0.1}.
 #' @param start_range Optional; may be \code{NULL}. Numeric; passed to \code{log}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.
-#' @param tol Defaults to \code{1e-10}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-10}.
 #' @return A list with \code{nugget_ratio}, \code{range}, \code{sigma2}, \code{nugget}, \code{partial_sill}, \code{beta}, \code{neg2_restricted_loglik}, \code{converged}.
 #' @export
 .schab_fit_reml <- function(coords, z, X, model = "exponential",

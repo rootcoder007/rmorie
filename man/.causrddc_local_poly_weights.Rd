@@ -13,7 +13,7 @@
 \item{p}{Numeric; combined arithmetically in the body.}
 \item{nu}{Numeric; combined arithmetically in the body.}
 \item{kernel}{Passed to \code{.causrddc_kern}. Defaults to \code{"triangular"}.}
-\item{side}{Defaults to \code{1}.}
+\item{side}{Passed to \code{>}. Defaults to \code{1}.}
 }
 \description{
 A step of the causrddc_native implementation. Called by \code{morie_causrddc}. See the file header for the source the module follows.

@@ -8,7 +8,7 @@
 .morie_datasette_get_json(url, timeout = 60)
 }
 \arguments{
-\item{url}{See Usage.}
+\item{url}{Passed to \code{url}.}
 \item{timeout}{Accepted by the signature and not used anywhere in the body. Defaults to \code{60}.}
 }
 \description{

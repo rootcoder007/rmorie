@@ -10,7 +10,7 @@ meta_level(model_builder, consumer, data)
 \arguments{
 \item{model_builder}{Accepted by the signature and not used anywhere in the body.}
 \item{consumer}{Accepted by the signature and not used anywhere in the body.}
-\item{data}{See Usage.}
+\item{data}{Passed to \code{model_builder}.}
 }
 \description{
 A step of the hybRC_native implementation. No other function in the package calls it. See the file header for the source the module follows.

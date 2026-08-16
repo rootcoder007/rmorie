@@ -8,7 +8,7 @@
 .forwsr_solve(A, b)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{Passed to \code{cbind}.}
 \item{b}{A vector; its length is taken.}
 }
 \description{

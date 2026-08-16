@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{table}{See Usage.}
-\item{key}{See Usage.}
-\item{what}{See Usage.}
+\item{key}{Passed to \code{==}.}
+\item{what}{Passed to \code{stop}.}
 }
 \description{
 A step of the goldsc_native implementation. Called by \code{morie_goldsc_vdw}. See the file header for the source the module follows.

@@ -176,7 +176,7 @@
 #' implementations agree on the dendrogram, not merely on its quality.
 #'
 #' @param K A matrix; passed to \code{nrow}.
-#' @param g See Usage.
+#' @param g Passed to \code{>}.
 #' @return A list with \code{lab}, \code{groups}.
 #' @export
 .cmlmer_upgma <- function(K, g) {

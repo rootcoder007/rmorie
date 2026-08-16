@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{outcome}{A vector; indexed elementwise.}
-\item{group}{See Usage.}
-\item{favorable}{See Usage.}
+\item{group}{Passed to \code{unique}.}
+\item{favorable}{Passed to \code{==}.}
 }
 \description{
 A step of the frns_metrics implementation. No other function in the package calls it. See the file header for the source the module follows.

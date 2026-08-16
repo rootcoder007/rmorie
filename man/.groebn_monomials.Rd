@@ -8,7 +8,7 @@
 .groebn_monomials(f, order = "lex")
 }
 \arguments{
-\item{f}{See Usage.}
+\item{f}{Passed to \code{names}.}
 \item{order}{Passed to \code{.groebn_key}. Defaults to \code{"lex"}.}
 }
 \description{

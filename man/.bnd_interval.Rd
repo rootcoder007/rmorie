@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{moments}{A matrix; passed to \code{as.matrix}.}
-\item{name}{See Usage.}
+\item{name}{Passed to \code{paste0}.}
 }
 \description{
 A step of the helpers_bnd implementation. Called by \code{Bndinf}, \code{Bnsiii}. See the file header for the source the module follows.

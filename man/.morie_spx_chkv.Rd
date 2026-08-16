@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{name}{Defaults to \code{"x"}.}
+\item{name}{Passed to \code{sprintf}. Defaults to \code{"x"}.}
 }
 \description{
 A step of the sp_fill implementation. Called by \code{CrossSpec}, \code{LisaClust}, \code{LisaI} and 16 others in the module. See the file header for the source the module follows.

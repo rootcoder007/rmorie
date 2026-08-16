@@ -14,11 +14,11 @@ bayopt(f, bounds, n_iter = 20, n_init = 5, acq = "ei", kernel = "matern52", ampl
 \item{n_init}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.}
 \item{acq}{One of \code{"ei"}, \code{"lcb"}, \code{"pi"}. Defaults to \code{"ei"}.}
 \item{kernel}{Carried through into a list the body builds. Defaults to \code{"matern52"}.}
-\item{amplitude}{Defaults to \code{1}.}
-\item{length_scale}{Defaults to \code{1}.}
-\item{noise}{Defaults to \code{1e-08}.}
-\item{kappa}{Defaults to \code{2}.}
-\item{xi}{Defaults to \code{0}.}
+\item{amplitude}{Passed to \code{maximise_acquisition}. Defaults to \code{1}.}
+\item{length_scale}{Passed to \code{maximise_acquisition}. Defaults to \code{1}.}
+\item{noise}{Passed to \code{maximise_acquisition}. Defaults to \code{1e-08}.}
+\item{kappa}{Passed to \code{maximise_acquisition}. Defaults to \code{2}.}
+\item{xi}{Passed to \code{maximise_acquisition}. Defaults to \code{0}.}
 \item{n_candidates}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.}
 \item{seed}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.}
 \item{X0}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}

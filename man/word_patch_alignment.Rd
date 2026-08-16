@@ -9,11 +9,11 @@ word_patch_alignment(text_boxes, masked_patches, width, height, patch_grid = 14,
 }
 \arguments{
 \item{text_boxes}{A vector; its length is taken and its elements indexed.}
-\item{masked_patches}{See Usage.}
-\item{width}{See Usage.}
-\item{height}{See Usage.}
-\item{patch_grid}{Defaults to \code{14}.}
-\item{masked_text}{Defaults to \code{list()}.}
+\item{masked_patches}{Passed to \code{unlist}.}
+\item{width}{Passed to \code{patch_of_box}.}
+\item{height}{Passed to \code{patch_of_box}.}
+\item{patch_grid}{Passed to \code{patch_of_box}. Defaults to \code{14}.}
+\item{masked_text}{Passed to \code{unlist}. Defaults to \code{list()}.}
 }
 \description{
 A step of the ocrwit_native implementation. No other function in the package calls it. See the file header for the source the module follows.

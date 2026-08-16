@@ -304,7 +304,7 @@
 #' source it follows.
 #'
 #' @param w A matrix; passed to \code{as.matrix}.
-#' @param n See Usage.
+#' @param n Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param zero_diag A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{W}, as built in the body.
 #' @export
@@ -328,7 +328,7 @@
 #' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
-#' @param name Defaults to \code{"x"}.
+#' @param name Passed to \code{sprintf}. Defaults to \code{"x"}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
 .morie_spx_chkv <- function(x, name = "x") {
@@ -873,7 +873,7 @@ Pgram <- function(y) {
 #' Series, 2nd edn, Ch. 8.  The window is CIRCULAR; a truncating window
 #' would bias both ends.
 #'
-#' @param y See Usage.
+#' @param y Passed to \code{Pgram}.
 #' @param span Numeric; combined arithmetically in the body. Defaults to \code{3L}.
 #' @return A list with \code{omega}, \code{smoothed}, \code{raw}, \code{span}, \code{equivalent_df}, \code{circular_window}, \code{n}, \code{method}.
 #' @export

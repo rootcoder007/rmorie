@@ -8,7 +8,7 @@
 Qchisq(p, df)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Passed to \code{Qgamma}.}
 \item{df}{Numeric; combined arithmetically in the body.}
 }
 \description{

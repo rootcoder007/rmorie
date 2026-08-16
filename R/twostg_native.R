@@ -51,7 +51,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param s See Usage.
+#' @param s Passed to \code{pmin}.
 #' @return A numeric value.
 #' @export
 .morie_xi_ph <- function(s) 1 / (1 + exp(pmax(pmin(s, 30), -30)))
@@ -61,7 +61,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param s See Usage.
+#' @param s Passed to \code{pmin}.
 #' @return A numeric value.
 #' @export
 .morie_dxi_ph <- function(s) {

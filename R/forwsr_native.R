@@ -80,7 +80,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A Passed to \code{cbind}.
 #' @param b A vector; its length is taken.
 #' @return A vector, from \code{vapply}.
 #' @export
@@ -110,7 +110,7 @@
 #' sides of the root in the last ulp, which is enough to move the
 #' consistency factor and, through it, the deletion residual.
 #'
-#' @param p See Usage.
+#' @param p Passed to \code{>}.
 #' @return The value of \code{qnorm}.
 #' @export
 .forwsr_norm_ppf <- function(p) {

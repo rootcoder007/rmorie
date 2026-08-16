@@ -24,3 +24,10 @@ List with \code{loss}, \code{per_sample}, \code{target}, \code{x_noisy},
 \description{
 L = mean w ||eps/sigma - s_theta(x0 + sigma eps)||^2.
 }
+\examples{
+X <- matrix(c(1, 2, 1, 3, 1, 5, 1, 7), 4, byrow = TRUE)
+y <- c(2, 3, 6, 9)
+morie_geron_minibatch_gradient_descent(X, y, c(0, 0), 0.02, 2, 
+    5, seed = 3)
+morie_geron_score_matching_loss(x0 = X, sigma = y, eps = X, score_pred = X)
+}

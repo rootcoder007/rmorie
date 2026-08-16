@@ -9,7 +9,7 @@ morie_qrntcq_optimal_duration(t.Q = 3, generation.time = NULL, t.max = 20, step 
 }
 \arguments{
 \item{t.Q}{Numeric; combined arithmetically in the body. Defaults to \code{3}.}
-\item{generation.time}{Defaults to \code{NULL}.}
+\item{generation.time}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{t.max}{Numeric; combined arithmetically in the body. Defaults to \code{20}.}
 \item{step}{Numeric; combined arithmetically in the body. Defaults to \code{0.25}.}
 }

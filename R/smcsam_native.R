@@ -46,7 +46,7 @@ ess <- function(weights) {
 #' hand-written loop.
 #'
 #' @param cum A vector; its length is taken and its elements indexed.
-#' @param u See Usage.
+#' @param u Passed to \code{<}.
 #' @return The value of \code{lo}, as built in the body.
 #' @export
 .smcsam_pick <- function(cum, u) {
@@ -205,13 +205,13 @@ random_walk_kernel <- function(scale = 1.0, n_moves = 1L) {
 #' @param initial Accepted by the signature and not used anywhere in the body.
 #' @param n_particles Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500L}.
 #' @param ladder Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param n_steps Defaults to \code{20L}.
-#' @param kernel Defaults to \code{NULL}.
+#' @param n_steps Passed to \code{temperature_ladder}. Defaults to \code{20L}.
+#' @param kernel Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param ess_threshold Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.
-#' @param scheme Defaults to \code{"systematic"}.
+#' @param scheme Passed to \code{resample}. Defaults to \code{"systematic"}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.
 #' @param weight_rule One of \code{"general"}, \code{"mcmc"}. Defaults to \code{"mcmc"}.
-#' @param log_forward Defaults to \code{NULL}.
+#' @param log_forward Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param log_backward The body requires: log_backward densities (equation 12).
 #' @return A list with \code{estimate}, \code{mean}, \code{variance}, \code{particles}, \code{weights}, \code{log_norm_const}, \code{ess}, \code{ess_trace}, \code{resampled}, \code{accept_trace}, \code{ladder}, \code{n_particles}, \code{weight_rule}, \code{method}.
 #' @export

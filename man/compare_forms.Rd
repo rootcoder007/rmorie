@@ -8,10 +8,10 @@
 compare_forms(m, instruments, form = "sum", n_equality = 0L)
 }
 \arguments{
-\item{m}{See Usage.}
-\item{instruments}{See Usage.}
-\item{form}{Defaults to \code{"sum"}.}
-\item{n_equality}{Defaults to \code{0L}.}
+\item{m}{Passed to \code{cvm_statistic}.}
+\item{instruments}{Passed to \code{cvm_statistic}.}
+\item{form}{Passed to \code{cvm_statistic}. Defaults to \code{"sum"}.}
+\item{n_equality}{Passed to \code{cvm_statistic}. Defaults to \code{0L}.}
 }
 \description{
 A step of the bnskmt_native implementation. No other function in the package calls it. See the file header for the source the module follows.

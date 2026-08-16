@@ -10,7 +10,7 @@ morie_sctraj_minimum_spanning_tree(D, clusters, ends = NULL)
 \arguments{
 \item{D}{A matrix; indexed by row and column.}
 \item{clusters}{Coerced to character by the body, with \code{as.character}.}
-\item{ends}{Defaults to \code{NULL}.}
+\item{ends}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 With ends given, the tree is built on the non-terminal clusters and each terminal is attached to its nearest non-terminal neighbour.

@@ -111,7 +111,7 @@ morie_wasserstein_test <- function(x, y, B = 999L, cdf = NULL) {
 #' source it follows.
 #'
 #' @param Z A matrix; passed to \code{tcrossprod}.
-#' @param kernel See Usage.
+#' @param kernel Passed to \code{identical}.
 #' @param gamma Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export

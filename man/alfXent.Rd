@@ -9,8 +9,8 @@ alfXent(y, p, eps = 1e-12)
 }
 \arguments{
 \item{y}{Numeric; combined arithmetically in the body.}
-\item{p}{See Usage.}
-\item{eps}{Defaults to \code{1e-12}.}
+\item{p}{Passed to \code{pmax}.}
+\item{eps}{Passed to \code{pmax}. Defaults to \code{1e-12}.}
 }
 \description{
 A step of the alf_core implementation. Called by \code{Alfdgram}, \code{Alfplddt}. See the file header for the source the module follows.

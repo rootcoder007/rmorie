@@ -10,7 +10,7 @@
 \arguments{
 \item{logits}{A matrix; indexed by row and column.}
 \item{targets}{Coerced to integer by the body, with \code{as.integer}.}
-\item{ignore_index}{Defaults to \code{-100L}.}
+\item{ignore_index}{Passed to \code{!=}. Defaults to \code{-100L}.}
 }
 \description{
 A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_instruction_tuning_loss}, \code{morie_kamath_llava_visual_instruction}. See the file header for the source the module follows.

@@ -46,7 +46,7 @@ summing_matrix <- function(groups, n_bottom) {
 #'
 #' @param y A vector; indexed elementwise.
 #' @param S A matrix; passed to \code{nrow}.
-#' @param tol Defaults to \code{1e-09}.
+#' @param tol Passed to \code{<=}. Defaults to \code{1e-09}.
 #' @return A logical value.
 #' @export
 is_coherent <- function(y, S, tol = 1e-9) {
@@ -187,9 +187,9 @@ mint_P <- function(S, W = NULL, method = "shrink", residuals = NULL,
 #' @param base Coerced to numeric by the body, with \code{as.numeric}.
 #' @param S A matrix; passed to \code{as.matrix}.
 #' @param method Carried through into a list the body builds. Defaults to \code{"shrink"}.
-#' @param residuals Defaults to \code{NULL}.
-#' @param W Defaults to \code{NULL}.
-#' @param ridge Defaults to \code{1e-10}.
+#' @param residuals Passed to \code{mint_P}.
+#' @param W Passed to \code{mint_P}.
+#' @param ridge Passed to \code{mint_P}. Defaults to \code{1e-10}.
 #' @return A list with \code{estimate}, \code{reconciled}, \code{bottom}, \code{base}, \code{P}, \code{S}, \code{method}, \code{shrinkage}, \code{n_series}, \code{n_bottom}, \code{coherent}, \code{ps_identity_error}, \code{adjustment}, \code{cite}, \code{method_detail}.
 #' @export
 mint_reconcile <- function(base, S, method = "shrink", residuals = NULL,
@@ -228,12 +228,12 @@ hierarchical_forecast <- mint_reconcile
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param base See Usage.
-#' @param S See Usage.
-#' @param method Defaults to \code{"shrink"}.
-#' @param residuals Defaults to \code{NULL}.
-#' @param W Defaults to \code{NULL}.
-#' @param ridge Defaults to \code{1e-10}.
+#' @param base Passed to \code{mint_reconcile}.
+#' @param S Passed to \code{mint_reconcile}.
+#' @param method Passed to \code{mint_reconcile}. Defaults to \code{"shrink"}.
+#' @param residuals Passed to \code{mint_reconcile}.
+#' @param W Passed to \code{mint_reconcile}.
+#' @param ridge Passed to \code{mint_reconcile}. Defaults to \code{1e-10}.
 #' @return The value of \code{mint_reconcile}.
 #' @export
 morie_hierF <- function(base, S, method = "shrink", residuals = NULL,

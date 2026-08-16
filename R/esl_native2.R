@@ -58,9 +58,9 @@
 #' @param y A vector; its length is taken and its elements indexed.
 #' @param C Numeric; passed to \code{min}. Defaults to \code{1}.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{0.001}.
-#' @param max_passes Defaults to \code{50L}.
-#' @param max_iter Defaults to \code{10000L}.
-#' @param seed Defaults to \code{0L}.
+#' @param max_passes Passed to \code{<}. Defaults to \code{50L}.
+#' @param max_iter Passed to \code{<}. Defaults to \code{10000L}.
+#' @param seed Passed to \code{set.seed}. Defaults to \code{0L}.
 #' @return A list with \code{alpha}, \code{b}, \code{n_iter}, \code{converged}.
 #' @export
 .morie_smo <- function(K, y, C = 1, tol = 1e-3, max_passes = 50L,

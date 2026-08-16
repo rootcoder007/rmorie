@@ -15,7 +15,7 @@ projected_gradient(f, grad, x0, project, step = NULL, rule = "backtracking", max
 \item{step}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{rule}{One of \code{"fista"}, \code{"fixed"}. Defaults to \code{"backtracking"}.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{2000}.}
-\item{tol}{Defaults to \code{1e-10}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-10}.}
 }
 \description{
 A step of the pgdsdg_native implementation. No other function in the package calls it. See the file header for the source the module follows.

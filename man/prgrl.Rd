@@ -14,7 +14,7 @@ prgrl(X, y, difficulty, X_test = NULL, y_test = NULL, updates = 200, n_steps = 5
 \item{X_test}{Optional; may be \code{NULL}. Passed to \code{.prgrl_to_rows}.}
 \item{y_test}{Passed to \code{.prgrl_to_vec}.}
 \item{updates}{Passed to \code{.prgrl_perceptron}. Defaults to \code{200}.}
-\item{n_steps}{Defaults to \code{5}.}
+\item{n_steps}{Passed to \code{curriculum_schedule}. Defaults to \code{5}.}
 \item{seed}{Passed to \code{.prgrl_rng}. Defaults to \code{0}.}
 \item{n_repeats}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50}.}
 \item{order}{One of \code{"sampled"}, \code{"sorted"}. Defaults to \code{"sampled"}.}

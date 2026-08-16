@@ -8,8 +8,8 @@
 .abcgp.summarise(x, summary)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{summary}{See Usage.}
+\item{x}{Passed to \code{summary}.}
+\item{summary}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the abcgp_native implementation. Called by \code{.abcgp.gabc_log_likelihood}, \code{.abcgp.mw_sampler}, \code{.abcgp.synthetic_log_likelihood}. See the file header for the source the module follows.

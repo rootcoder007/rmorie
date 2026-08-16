@@ -8,9 +8,9 @@
 PerConv(x, h, npoints = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{h}{See Usage.}
-\item{npoints}{Defaults to \code{NULL}.}
+\item{x}{Passed to \code{CircConv}.}
+\item{h}{Passed to \code{CircConv}.}
+\item{npoints}{Passed to \code{CircConv}.}
 }
 \description{
 two copies of one equation is how the two drift apart.

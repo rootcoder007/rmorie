@@ -8,7 +8,7 @@
 .snpeff_impact(effect)
 }
 \arguments{
-\item{effect}{See Usage.}
+\item{effect}{Passed to \code{\%in\%}.}
 }
 \description{
 A step of the snpeff_native implementation. Called by \code{.snpeff_pack}. See the file header for the source the module follows.

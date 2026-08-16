@@ -10,9 +10,9 @@ transition_probabilities(adj, t, v, p, q, weights = NULL)
 \arguments{
 \item{adj}{A vector; indexed elementwise.}
 \item{t}{Optional; may be \code{NULL}. Passed to \code{.node2v_dist}.}
-\item{v}{See Usage.}
-\item{p}{See Usage.}
-\item{q}{See Usage.}
+\item{v}{Passed to \code{stop}.}
+\item{p}{Passed to \code{alpha_pq}.}
+\item{q}{Passed to \code{alpha_pq}.}
 \item{weights}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 }
 \description{

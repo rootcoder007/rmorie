@@ -12,8 +12,8 @@ morie_qrntcq_efficacy_test_and_release(t.Q, t.T, t.R, false.negative, generation
 \item{t.T}{Carried through into a list the body builds.}
 \item{t.R}{Passed to \code{morie_qrntcq_quarantine_efficacy}.}
 \item{false.negative}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{generation.time}{Defaults to \code{NULL}.}
-\item{t.R.positive}{Defaults to \code{NULL}.}
+\item{generation.time}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{t.R.positive}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the qrntcq_native implementation. No other function in the package calls it. See the file header for the source the module follows.

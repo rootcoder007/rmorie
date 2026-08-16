@@ -8,7 +8,7 @@
 .dnnact(name, z)
 }
 \arguments{
-\item{name}{See Usage.}
+\item{name}{Passed to \code{identical}.}
 \item{z}{Passed to \code{.s03sigmoid}.}
 }
 \description{

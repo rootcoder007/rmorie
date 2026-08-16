@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{M}{A matrix; indexed by row and column.}
-\item{name}{See Usage.}
+\item{name}{Passed to \code{sprintf}.}
 }
 \description{
 A step of the safrl_native implementation. Called by \code{morie_safrl}. See the file header for the source the module follows.

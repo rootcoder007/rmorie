@@ -78,7 +78,7 @@
 #' source it follows.
 #'
 #' @param n Coerced to integer by the body, with \code{as.integer}.
-#' @param scheme Defaults to \code{"reciprocal"}.
+#' @param scheme Passed to \code{identical}. Defaults to \code{"reciprocal"}.
 #' @return The value of \code{a}, as built in the body.
 #' @export
 .warpL_alpha_weights <- function(n, scheme = "reciprocal") {

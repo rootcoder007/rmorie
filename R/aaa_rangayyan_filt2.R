@@ -720,7 +720,7 @@ CDiff3Ph <- function(omega) {
 #'
 #' highpass character is visible.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{FDiff}.
 #' @param T Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
@@ -1302,10 +1302,10 @@ BwDigital <- function(Omega_c = NULL, N = NULL, T = 1, fc = NULL,
 #' filter is actually run over data.  The feedback is SUBTRACTED, as in
 #' eq (3.68), and a_k is a_1..a_N without the leading a_0 = 1.
 #'
-#' @param x See Usage.
-#' @param b_k See Usage.
-#' @param a_k Defaults to \code{NULL}.
-#' @param n Defaults to \code{NULL}.
+#' @param x Passed to \code{IirDiff}.
+#' @param b_k Passed to \code{IirDiff}.
+#' @param a_k Passed to \code{IirDiff}.
+#' @param n Passed to \code{IirDiff}.
 #' @return The value of \code{IirDiff}.
 #' @export
 IirDiffGen <- function(x, b_k, a_k = NULL, n = NULL) {
@@ -1686,10 +1686,10 @@ FreqResp <- function(b, a = NULL, fs = 1000, n_freqs = 512) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param b See Usage.
-#' @param a Defaults to \code{NULL}.
-#' @param fs Defaults to \code{1000}.
-#' @param n_freqs Defaults to \code{512}.
+#' @param b Passed to \code{FreqResp}.
+#' @param a Passed to \code{FreqResp}.
+#' @param fs Passed to \code{FreqResp}. Defaults to \code{1000}.
+#' @param n_freqs Passed to \code{FreqResp}. Defaults to \code{512}.
 #' @param unwrap A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{f}, \code{phase}, \code{wrapped}, \code{unwrapped}, \code{unwrap}, \code{fs}, \code{defined}, \code{n_undefined}, \code{phase_undefined_where_the_response_vanishes}, \code{wrapping_is_an_arctangent_artifact}, \code{method}.
 #' @export
@@ -1810,7 +1810,7 @@ GrpDelay <- function(b, a = NULL, fs = 1000, n_freqs = 512) {
 #' @param cutoff_hz Coerced to numeric by the body, with \code{as.numeric}.
 #' @param order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1000}.
-#' @param z Defaults to \code{NULL}.
+#' @param z Passed to \code{BwDigital}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
 BwLp <- function(cutoff_hz, order = 4, fs = 1000, z = NULL) {
@@ -2015,7 +2015,7 @@ BlackmanW <- function(N) {
 #' that choice explicit.
 #'
 #' @param N Coerced to integer by the body, with \code{as.integer}.
-#' @param window_type Defaults to \code{"hamming"}.
+#' @param window_type Passed to \code{\%in\%}. Defaults to \code{"hamming"}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
 WindowFn <- function(N, window_type = "hamming") {

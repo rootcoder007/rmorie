@@ -128,7 +128,7 @@ morie_seckdf_derive_context_keys <- function(ikm, contexts, salt = NULL,
 #' be sourced together with sechsh_native.R.
 #'
 #' @param key A vector; its length is taken.
-#' @param msg See Usage.
+#' @param msg Passed to \code{as.raw}.
 #' @return The value of \code{.sech_sha256}.
 #' @export
 .kdf_hmac <- function(key, msg) {

@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{pts}{A vector; its length is taken and its elements indexed.}
-\item{min_sep}{See Usage.}
+\item{min_sep}{Passed to \code{<=}.}
 }
 \description{
 A step of the lyapun_native implementation. Called by \code{divergence_curve}. See the file header for the source the module follows.

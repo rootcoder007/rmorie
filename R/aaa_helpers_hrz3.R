@@ -268,7 +268,7 @@ NULL
 #' @param u A vector; its length is taken.
 #' @param v A vector; its length is taken.
 #' @param z Passed to \code{.hrz3_kmat}.
-#' @param wq See Usage.
+#' @param wq Passed to \code{outer}.
 #' @param h Numeric; combined arithmetically in the body.
 #' @return A list with \code{f}, \code{mass}.
 #' @export

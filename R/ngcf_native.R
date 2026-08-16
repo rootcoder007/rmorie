@@ -137,9 +137,9 @@ ngcf_message <- function(e_i, e_u, W1, W2, p_ui, affinity=TRUE) {
 #'
 #' @param E A matrix; indexed by row and column.
 #' @param adjacency A vector; indexed elementwise.
-#' @param W1 See Usage.
-#' @param W2 See Usage.
-#' @param affinity Defaults to \code{TRUE}.
+#' @param W1 Passed to \code{ngcf_message}.
+#' @param W2 Passed to \code{ngcf_message}.
+#' @param affinity Passed to \code{ngcf_message}. Defaults to \code{TRUE}.
 #' @param slope Passed to \code{.ngcf_leaky}. Defaults to \code{0.2}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -174,10 +174,10 @@ ngcf_propagate <- function(E, adjacency, W1, W2, affinity=TRUE, slope=0.2) {
 #' source it follows.
 #'
 #' @param E0 A matrix; passed to \code{as.matrix}.
-#' @param adjacency See Usage.
+#' @param adjacency Passed to \code{ngcf_propagate}.
 #' @param Ws A vector; its length is taken.
 #' @param affinity Coerced to logical by the body, with \code{as.logical}. Defaults to \code{TRUE}.
-#' @param slope Defaults to \code{0.2}.
+#' @param slope Passed to \code{ngcf_propagate}. Defaults to \code{0.2}.
 #' @return A list with \code{estimate}, \code{final}, \code{layers}, \code{n_layers}, \code{affinity}, \code{method}, \code{note}.
 #' @export
 ngcf_stack_layers <- function(E0, adjacency, Ws, affinity=TRUE, slope=0.2) {

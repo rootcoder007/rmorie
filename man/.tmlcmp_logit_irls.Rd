@@ -11,7 +11,7 @@
 \item{des}{A matrix; passed to \code{nrow}.}
 \item{a}{Numeric; combined arithmetically in the body.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{25}.}
-\item{tol}{Defaults to \code{1e-08}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-08}.}
 }
 \description{
 A step of the tmlcmp_native implementation. Called by \code{morie_tmlcmp}. See the file header for the source the module follows.

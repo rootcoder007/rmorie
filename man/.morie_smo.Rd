@@ -12,9 +12,9 @@
 \item{y}{A vector; its length is taken and its elements indexed.}
 \item{C}{Numeric; passed to \code{min}. Defaults to \code{1}.}
 \item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{0.001}.}
-\item{max_passes}{Defaults to \code{50L}.}
-\item{max_iter}{Defaults to \code{10000L}.}
-\item{seed}{Defaults to \code{0L}.}
+\item{max_passes}{Passed to \code{<}. Defaults to \code{50L}.}
+\item{max_iter}{Passed to \code{<}. Defaults to \code{10000L}.}
+\item{seed}{Passed to \code{set.seed}. Defaults to \code{0L}.}
 }
 \description{
 A step of the esl_native2 implementation. Called by \code{morie_esl_svc}, \code{morie_esl_svm_kernel}. See the file header for the source the module follows.

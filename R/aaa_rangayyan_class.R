@@ -164,7 +164,7 @@ format.morie_frac <- function(x, ...) paste0(x$n, "/", x$d)
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{format}.
 #' @param ... Passed through.
 #' @return The value of \code{cat}.
 #' @export
@@ -182,7 +182,7 @@ print.morie_frac <- function(x, ...) cat(format(x), "\n")
 #' the source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param mu See Usage.
+#' @param mu Passed to \code{sweep}.
 #' @return The value of \code{%*%}.
 #' @export
 .morie_rg_scatter <- function(X, mu) {
@@ -198,7 +198,7 @@ print.morie_frac <- function(x, ...) cat(format(x), "\n")
 #' the source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
-#' @param y See Usage.
+#' @param y Passed to \code{unique}.
 #' @return A list with \code{order}, \code{groups}.
 #' @export
 .morie_rg_groups <- function(X, y) {
@@ -353,7 +353,7 @@ Ppv <- function(tp, fp = NULL, prevalence = NULL, sensitivity = NULL,
 #' @param fp The body requires: give a 2x2 table or all four of tp, tn, fp, fn.
 #' @param fn The body requires: give a 2x2 table or all four of tp, tn, fp, fn.
 #' @param prevalence Optional; may be \code{NULL}. Passed to \code{.morie_rg_asfrac}.
-#' @param kind Defaults to \code{NULL}.
+#' @param kind Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param exact A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{accuracy}, \code{kind}, \code{raw_accuracy}, \code{weighted_accuracy}, \code{balanced_accuracy}, \code{sensitivity}, \code{specificity}, \code{prevalence}, \code{test_set_prevalence}, \code{counts}, \code{n}, \code{exact}, \code{prior_weighted}, \code{balanced_is_eq_10_102_at_one_half}, \code{eq_10_103_is_eq_10_102_at_the_test_set_prevalence}, \code{method}.
 #' @export
@@ -486,7 +486,7 @@ Accuracy <- function(table = NULL, tp = NULL, tn = NULL, fp = NULL,
 #'
 #' @param scores Coerced to numeric by the body, with \code{as.numeric}.
 #' @param labels A vector; its length is taken.
-#' @param positive Defaults to \code{1}.
+#' @param positive Passed to \code{==}. Defaults to \code{1}.
 #' @return A list with \code{fpf}, \code{tpf}, \code{sensitivity}, \code{one_minus_specificity}, \code{thresholds}, \code{auc}, \code{az}, \code{mann_whitney}, \code{trapezoidal_equals_mann_whitney}, \code{n_positive}, \code{n_negative}, \code{best_index}, \code{best_operating_point}, \code{ties_counted_as_half}, \code{method}.
 #' @export
 Roc <- function(scores, labels, positive = 1) {
@@ -1289,8 +1289,8 @@ LinDisc <- function(x, weights, w0 = NULL) {
 #' data that chose the cut -- so they are optimistic; Section 10.10.3 is
 #' the book\'s warning, and KFoldCv or LooCv gives an honest figure.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
+#' @param X Passed to \code{FishLda}.
+#' @param y Passed to \code{FishLda}.
 #' @return A list with \code{w}, \code{threshold}, \code{midpoint_threshold}, \code{classes}, \code{first_class_is_above}, \code{training_errors}, \code{midpoint_errors}, \code{training_accuracy}, \code{n}, \code{projected}, \code{midpoint_optimal_only_for_equal_priors_and_spread}, \code{resubstitution_error_is_optimistic}, \code{method}.
 #' @export
 LinDSep <- function(X, y) {
@@ -1584,7 +1584,7 @@ Qda <- function(X, y, query, priors = NULL) {
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param maxiter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
-#' @param tol Defaults to \code{1e-08}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
 #' @param ridge Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-08}.
 #' @return A list with \code{intercept}, \code{coefficients}, \code{w}, \code{fitted}, \code{predicted}, \code{loglik}, \code{iterations}, \code{converged}, \code{separable}, \code{ridge}, \code{training_accuracy}, \code{n}, \code{models_the_posterior_directly}, \code{no_gaussian_assumption}, \code{method}.
 #' @export
@@ -1649,7 +1649,7 @@ LogReg <- function(X, y, maxiter = 100, tol = 1e-8, ridge = 1e-8) {
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param k Coerced to integer by the body, with \code{as.integer}.
 #' @param maxiter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
-#' @param tol Defaults to \code{1e-10}.
+#' @param tol Passed to \code{<=}. Defaults to \code{1e-10}.
 #' @param init Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{labels}, \code{centroids}, \code{wcss}, \code{k}, \code{sizes}, \code{iterations}, \code{converged}, \code{local_minimum_only}, \code{depends_on_the_starting_centroids}, \code{unsupervised_groups_need_not_be_the_classes}, \code{method}.
 #' @export
@@ -1865,7 +1865,7 @@ HClust <- function(X, linkage = "single", k = NULL) {
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param y A vector; its length is taken and its elements indexed.
 #' @param k Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
-#' @param classifier Defaults to \code{NULL}.
+#' @param classifier Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param stratified A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{error_rate}, \code{accuracy}, \code{errors}, \code{n}, \code{k}, \code{per_fold}, \code{stratified}, \code{train_and_test_must_be_separate}, \code{method}.
 #' @export

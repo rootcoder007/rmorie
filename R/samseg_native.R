@@ -49,7 +49,7 @@
 #' source it follows.
 #'
 #' @param points Iterated over elementwise, with \code{lapply}.
-#' @param labels See Usage.
+#' @param labels Passed to \code{unlist}.
 #' @param dim Passed to \code{.samseg_pos_enc}. Defaults to \code{8}.
 #' @param type_embeddings Defaults to \code{NULL}.
 #' @return A list with \code{tokens}, \code{n_prompts}, \code{sparse}, \code{note}.
@@ -157,8 +157,8 @@ amortised_cost <- function(encoder_ms, decoder_ms, n_prompts) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param image_embedding See Usage.
-#' @param prompt_tokens See Usage.
+#' @param image_embedding Passed to \code{decoder}.
+#' @param prompt_tokens Passed to \code{decoder}.
 #' @param decoder The body requires: samseg: the decoder returned no mask; the task requires a valid mask for ANY prompt.
 #' @param multimask Coerced to logical by the body, with \code{as.logical}. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{masks}, \code{n_masks}, \code{multimask}, \code{method}, \code{note}.

@@ -11,9 +11,9 @@
 \item{X}{A matrix; indexed by row and column.}
 \item{y}{Outcome vector.}
 \item{indices}{A vector; its length is taken and its elements indexed.}
-\item{min_leaf}{See Usage.}
+\item{min_leaf}{Accepted by the signature and not used anywhere in the body.}
 \item{alpha}{Accepted by the signature and not used anywhere in the body.}
-\item{max_depth}{See Usage.}
+\item{max_depth}{Accepted by the signature and not used anywhere in the body.}
 \item{e}{Passed to \code{.ghc_unif}.}
 \item{leaf}{Row indices of the leaf half.}
 \item{idxs}{Row indices in this node.}

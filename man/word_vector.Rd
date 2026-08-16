@@ -8,13 +8,13 @@
 word_vector(word, Z, gram_index, n_min = 3, n_max = 6, boundary = TRUE, whole_word = TRUE, hash_buckets = NULL)
 }
 \arguments{
-\item{word}{See Usage.}
+\item{word}{Passed to \code{subwords}.}
 \item{Z}{A matrix; indexed by row and column.}
 \item{gram_index}{Passed to \code{.gram_slot}.}
-\item{n_min}{Defaults to \code{3}.}
-\item{n_max}{Defaults to \code{6}.}
-\item{boundary}{Defaults to \code{TRUE}.}
-\item{whole_word}{Defaults to \code{TRUE}.}
+\item{n_min}{Passed to \code{subwords}. Defaults to \code{3}.}
+\item{n_max}{Passed to \code{subwords}. Defaults to \code{6}.}
+\item{boundary}{Passed to \code{subwords}. Defaults to \code{TRUE}.}
+\item{whole_word}{Passed to \code{subwords}. Defaults to \code{TRUE}.}
 \item{hash_buckets}{Passed to \code{.gram_slot}.}
 }
 \description{

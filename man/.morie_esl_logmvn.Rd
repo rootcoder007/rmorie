@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{X}{A matrix; passed to \code{ncol}.}
-\item{mu}{See Usage.}
+\item{mu}{Passed to \code{sweep}.}
 \item{S}{A matrix; passed to \code{chol}.}
 }
 \description{

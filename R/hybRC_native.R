@@ -76,7 +76,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .hybRC_vec <- function(x) {
@@ -189,7 +189,7 @@ weighted <- function(scores, weights = NULL) {
 #'
 #' @param scores Iterated over elementwise, with \code{lapply}.
 #' @param criterion Accepted by the signature and not used anywhere in the body.
-#' @param context Defaults to \code{NULL}.
+#' @param context Passed to \code{criterion}.
 #' @return A list with \code{scores}, \code{chosen}, \code{ranking}, \code{note}.
 #' @export
 switching <- function(scores, criterion, context = NULL) {
@@ -338,7 +338,7 @@ cascade <- function(primary, secondary, tol = 1e-9) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param base_output See Usage.
+#' @param base_output Passed to \code{consumer}.
 #' @param consumer Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{result}, \code{note}.
 #' @export
@@ -357,7 +357,7 @@ feature_augmentation <- function(base_output, consumer) {
 #'
 #' @param model_builder Accepted by the signature and not used anywhere in the body.
 #' @param consumer Accepted by the signature and not used anywhere in the body.
-#' @param data See Usage.
+#' @param data Passed to \code{model_builder}.
 #' @return A list with \code{estimate}, \code{result}, \code{model}, \code{method}, \code{note}.
 #' @export
 meta_level <- function(model_builder, consumer, data) {

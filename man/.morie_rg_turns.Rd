@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{seg}{A vector; its length is taken and its elements indexed.}
-\item{threshold}{See Usage.}
+\item{threshold}{Passed to \code{>}.}
 }
 \description{
 A step of the rangayyan_stat implementation. Called by \code{TurnsCount}. See the file header for the source the module follows.

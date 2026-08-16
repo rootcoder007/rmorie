@@ -9,7 +9,7 @@ purity_completeness(bins, truth)
 }
 \arguments{
 \item{bins}{See Usage.}
-\item{truth}{See Usage.}
+\item{truth}{Passed to \code{unlist}.}
 }
 \description{
 A step of the metabd_native implementation. Called by \code{morie_metabd}. See the file header for the source the module follows.

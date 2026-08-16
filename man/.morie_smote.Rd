@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{X}{A matrix; indexed by row and column.}
-\item{y_chr}{See Usage.}
+\item{y_chr}{Passed to \code{table}.}
 \item{k}{Passed to \code{.morie_knn_index}.}
 }
 \description{

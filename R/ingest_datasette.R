@@ -39,7 +39,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param url See Usage.
+#' @param url Passed to \code{url}.
 #' @param timeout Accepted by the signature and not used anywhere in the body. Defaults to \code{60}.
 #' @return The value of \code{.s03json_fromJSON}.
 #' @export

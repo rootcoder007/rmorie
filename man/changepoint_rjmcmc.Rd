@@ -17,7 +17,7 @@ changepoint_rjmcmc(y = numeric(0), L = 1, n_iter = 40000L, burn_in = 4000L, lam 
 \item{alpha}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{beta}{Numeric; passed to \code{log}. Defaults to \code{200}.}
 \item{seed}{Passed to \code{.unif_stream}. Defaults to \code{0L}.}
-\item{cap}{Defaults to \code{0.9}.}
+\item{cap}{Passed to \code{changepoint_move_probabilities}. Defaults to \code{0.9}.}
 \item{use_likelihood}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 \item{k_init}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{0L}.}
 \item{thin}{Numeric; combined arithmetically in the body. Defaults to \code{1L}.}

@@ -10,8 +10,8 @@ ks_critical_value(m, instruments, form = "sum", n_equality = 0L, level = 0.95, r
 \arguments{
 \item{m}{A matrix; the body checks with \code{is.matrix}.}
 \item{instruments}{A list; the body reads \code{$instruments} from it.}
-\item{form}{Defaults to \code{"sum"}.}
-\item{n_equality}{Defaults to \code{0L}.}
+\item{form}{Passed to \code{S_function}. Defaults to \code{"sum"}.}
+\item{n_equality}{Passed to \code{S_function}. Defaults to \code{0L}.}
 \item{level}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.}
 \item{reps}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.}
 \item{seed}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.}

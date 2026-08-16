@@ -8,10 +8,10 @@
 ContConvAlt(x, h, dt = 1, t = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{h}{See Usage.}
-\item{dt}{Defaults to \code{1}.}
-\item{t}{Defaults to \code{NULL}.}
+\item{x}{Passed to \code{ContConv}.}
+\item{h}{Passed to \code{ContConv}.}
+\item{dt}{Passed to \code{ContConv}. Defaults to \code{1}.}
+\item{t}{Passed to \code{ContConv}.}
 }
 \description{
 as an equivalent result.  Computed the other way round and compared against eq (3.30) rather than asserted equivalent.

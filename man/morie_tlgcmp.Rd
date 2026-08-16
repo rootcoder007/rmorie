@@ -8,19 +8,19 @@
 morie_tlgcmp(strata = NULL, outcome_means = NULL, covariate_probs = NULL, Q_functions = NULL, L_supports = NULL, L_probs = NULL, rule = NULL, Y = NULL, A = NULL, L = NULL, a_star = NULL, g = NULL, delta = 0.01, mode = c("point", "sequential", "counterfactual", "positivity"))
 }
 \arguments{
-\item{strata}{Defaults to \code{NULL}.}
-\item{outcome_means}{Defaults to \code{NULL}.}
-\item{covariate_probs}{Defaults to \code{NULL}.}
-\item{Q_functions}{Defaults to \code{NULL}.}
-\item{L_supports}{Defaults to \code{NULL}.}
-\item{L_probs}{Defaults to \code{NULL}.}
-\item{rule}{Defaults to \code{NULL}.}
-\item{Y}{Defaults to \code{NULL}.}
-\item{A}{Defaults to \code{NULL}.}
-\item{L}{Defaults to \code{NULL}.}
-\item{a_star}{Defaults to \code{NULL}.}
-\item{g}{Defaults to \code{NULL}.}
-\item{delta}{Defaults to \code{0.01}.}
+\item{strata}{Passed to \code{g_computation}.}
+\item{outcome_means}{Passed to \code{g_computation}.}
+\item{covariate_probs}{Passed to \code{g_computation}.}
+\item{Q_functions}{Passed to \code{sequential_g_formula}.}
+\item{L_supports}{Passed to \code{sequential_g_formula}.}
+\item{L_probs}{Passed to \code{sequential_g_formula}.}
+\item{rule}{Passed to \code{sequential_g_formula}.}
+\item{Y}{Passed to \code{counterfactual_mean}.}
+\item{A}{Passed to \code{counterfactual_mean}.}
+\item{L}{Passed to \code{counterfactual_mean}.}
+\item{a_star}{Passed to \code{counterfactual_mean}.}
+\item{g}{Passed to \code{positivity_check}.}
+\item{delta}{Passed to \code{positivity_check}. Defaults to \code{0.01}.}
 \item{mode}{One of \code{"counterfactual"}, \code{"positivity"}, \code{"sequential"}.}
 }
 \description{

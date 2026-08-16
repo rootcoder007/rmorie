@@ -364,11 +364,11 @@ test_variant <- function(g, y, offset = NULL, covariates = list()) {
 #'
 #' @param G A matrix; passed to \code{nrow}.
 #' @param y A vector; its length is taken.
-#' @param chromosomes Defaults to \code{NULL}.
-#' @param block_size Defaults to \code{1000}.
-#' @param n_ridge Defaults to \code{5}.
-#' @param cv Defaults to \code{"kfold"}.
-#' @param k Defaults to \code{5}.
+#' @param chromosomes Passed to \code{make_blocks}.
+#' @param block_size Passed to \code{make_blocks}. Defaults to \code{1000}.
+#' @param n_ridge Passed to \code{level0_predictors}. Defaults to \code{5}.
+#' @param cv Passed to \code{level1_stack}. Defaults to \code{"kfold"}.
+#' @param k Passed to \code{level1_stack}. Defaults to \code{5}.
 #' @return A list with \code{estimate}, \code{blocks}, \code{n_blocks}, \code{level0}, \code{level1}, \code{loco}, \code{chromosomes}, \code{n_predictors}, \code{reduction}, \code{method}.
 #' @export
 morie_regmlm <- function(G, y, chromosomes = NULL, block_size = 1000, n_ridge = 5,

@@ -165,7 +165,7 @@
 #'
 #' @param U A matrix; indexed by row and column.
 #' @param V A matrix; indexed by row and column.
-#' @param i See Usage.
+#' @param i Passed to \code{!=}.
 #' @param tau Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.
 #' @param intra A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A numeric value.

@@ -8,7 +8,7 @@
 .tmlcmp_vec(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the tmlcmp_native implementation. Called by \code{cause_specific_hazards}, \code{morie_tmlcmp}. See the file header for the source the module follows.

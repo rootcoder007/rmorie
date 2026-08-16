@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{z}{Numeric; combined arithmetically in the body.}
-\item{family}{See Usage.}
+\item{family}{Passed to \code{identical}.}
 }
 \description{
 A step of the aft_native implementation. Called by \code{.morie_aft_fit}, \code{morie_aft_residuals}. See the file header for the source the module follows.

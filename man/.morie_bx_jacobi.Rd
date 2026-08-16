@@ -10,7 +10,7 @@
 \arguments{
 \item{S}{A matrix; passed to \code{nrow}.}
 \item{sweeps}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.}
-\item{tol}{Defaults to \code{1e-12}.}
+\item{tol}{Passed to \code{<=}. Defaults to \code{1e-12}.}
 }
 \description{
 included, without the deflation error of power iteration

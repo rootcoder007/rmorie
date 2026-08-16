@@ -19,3 +19,7 @@ List with \code{clipped}, \code{total_norm}, \code{clipped_norm},
 g *= min(1, c / (||g|| + 1e-12)) -- the norm is capped and the
 direction preserved, so the cosine with the original is 1.
 }
+\examples{
+g <- list(matrix(c(3, -4, 1, 2), 2, 2), c(0.5, -0.5))
+morie_geron_gradient_clipping_grgcl(g, c = 1)
+}

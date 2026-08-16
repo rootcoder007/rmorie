@@ -8,7 +8,7 @@
 .vidgen_vec(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{unlist}.}
 }
 \description{
 A step of the vidgen_native implementation. Called by \code{morie_vidgen_reconstruction_guidance}. See the file header for the source the module follows.

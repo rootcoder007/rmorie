@@ -9,11 +9,11 @@ morie_dreamr_imagine(state, action_model, transition, reward_model, horizon, val
 }
 \arguments{
 \item{state}{Carried through into a list the body builds.}
-\item{action_model}{See Usage.}
-\item{transition}{See Usage.}
-\item{reward_model}{See Usage.}
+\item{action_model}{Passed to \code{c}.}
+\item{transition}{Passed to \code{c}.}
+\item{reward_model}{Passed to \code{c}.}
 \item{horizon}{Coerced to integer by the body, with \code{as.integer}.}
-\item{value_model}{Defaults to \code{NULL}.}
+\item{value_model}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the dreamr_native implementation. Called by \code{morie_dreamr}. See the file header for the source the module follows.

@@ -88,7 +88,7 @@ FormFactor <- function(x) {
 #' the source it follows.
 #'
 #' @param seg A vector; its length is taken and its elements indexed.
-#' @param threshold See Usage.
+#' @param threshold Passed to \code{>}.
 #' @return A list with \code{turns}, \code{positions}.
 #' @export
 .morie_rg_turns <- function(seg, threshold) {
@@ -332,8 +332,8 @@ ObsReal <- function(x, eta) {
 #'
 #' @param psd Coerced to numeric by the body, with \code{as.numeric}.
 #' @param freqs Coerced to numeric by the body, with \code{as.numeric}.
-#' @param fmin Defaults to \code{NULL}.
-#' @param fmax Defaults to \code{NULL}.
+#' @param fmin Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param fmax Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{fd}, \code{beta}, \code{hurst}, \code{slope}, \code{intercept}, \code{n_bins}, \code{r_squared}, \code{in_range}, \code{band}, \code{method}.
 #' @export
 FdPsd <- function(psd, freqs, fmin = NULL, fmax = NULL) {
@@ -405,8 +405,8 @@ FdPsd <- function(psd, freqs, fmin = NULL, fmax = NULL) {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}.
-#' @param fmin Defaults to \code{100}.
-#' @param fmax Defaults to \code{500}.
+#' @param fmin Passed to \code{FdPsd}. Defaults to \code{100}.
+#' @param fmax Passed to \code{FdPsd}. Defaults to \code{500}.
 #' @param nperseg Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
@@ -477,8 +477,8 @@ KatzFd <- function(x, dt = 1) {
 #'
 #' @param psd Coerced to numeric by the body, with \code{as.numeric}.
 #' @param freqs Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param fmin Defaults to \code{NULL}.
-#' @param fmax Defaults to \code{NULL}.
+#' @param fmin Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param fmax Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{entropy}, \code{units}, \code{max_entropy}, \code{normalized}, \code{n_bins}, \code{probabilities}, \code{method}.
 #' @export
 SpecEntropy <- function(psd, freqs = NULL, fmin = NULL, fmax = NULL) {
@@ -562,7 +562,7 @@ FiringRate <- function(times, fs = NULL) {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @param threshold Defaults to \code{0}.
+#' @param threshold Passed to \code{TurnsCount}. Defaults to \code{0}.
 #' @return A list with \code{mean}, \code{sd}, \code{rms}, \code{zero_crossings}, \code{zcr}, \code{turns}, \code{activity}, \code{mobility}, \code{form_factor}, \code{spectral_centroid}, \code{spectral_bandwidth}, \code{spectral_entropy}, \code{n}, \code{fs}, \code{method}.
 #' @export
 SigFeatures <- function(x, fs = 1, threshold = 0) {

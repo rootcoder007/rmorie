@@ -155,11 +155,11 @@ prophe_cheatsheet <- function() {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
-#' @param y See Usage.
-#' @param seasonalities Defaults to \code{NULL}.
-#' @param holidays Defaults to \code{NULL}.
-#' @param holiday_window Defaults to \code{c(0, 0)}.
+#' @param t Passed to \code{prophe_additive_components}.
+#' @param y Passed to \code{prophe_additive_components}.
+#' @param seasonalities Passed to \code{prophe_additive_components}.
+#' @param holidays Passed to \code{prophe_additive_components}.
+#' @param holiday_window Passed to \code{prophe_additive_components}. Defaults to \code{c(0, 0)}.
 #' @param ... Passed through.
 #' @return The value of \code{prophe_additive_components}.
 #' @export

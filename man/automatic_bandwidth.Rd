@@ -10,7 +10,7 @@ automatic_bandwidth(v, kernel = "qs", weights = NULL, n = NULL)
 \arguments{
 \item{v}{A matrix; passed to \code{as.matrix}.}
 \item{kernel}{Passed to \code{.check_kernel}. Defaults to \code{"qs"}.}
-\item{weights}{Defaults to \code{NULL}.}
+\item{weights}{Passed to \code{alpha_ar1}.}
 \item{n}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{

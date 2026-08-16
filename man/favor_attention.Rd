@@ -12,7 +12,7 @@ favor_attention(Q, K, V, n_features = 128L, seed = 0L, kind = "positive", orthog
 \item{K}{A matrix; passed to \code{as.matrix}.}
 \item{V}{A matrix; passed to \code{as.matrix}.}
 \item{n_features}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{128L}.}
-\item{seed}{Defaults to \code{0L}.}
+\item{seed}{Passed to \code{draw_projections}. Defaults to \code{0L}.}
 \item{kind}{Carried through into a list the body builds. Defaults to \code{"positive"}.}
 \item{orthogonal}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 \item{causal}{A flag; the body branches on it. Defaults to \code{FALSE}.}

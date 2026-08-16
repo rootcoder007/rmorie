@@ -13,7 +13,7 @@
 \item{z}{A vector; indexed elementwise.}
 \item{at_time}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{n_bins}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10L}.}
-\item{max_dist}{Defaults to \code{NULL}.}
+\item{max_dist}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \description{

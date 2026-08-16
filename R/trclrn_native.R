@@ -65,8 +65,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param Y See Usage.
-#' @param A See Usage.
+#' @param Y Passed to \code{unlist}.
+#' @param A Passed to \code{unlist}.
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param propensity Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param min_propensity Coerced to numeric by the body, with \code{as.numeric}.
@@ -132,7 +132,7 @@
 #' @param rule Accepted by the signature and not used anywhere in the body.
 #' @param propensity Passed to \code{.trclrn_check}.
 #' @param method Compared against \code{"ipw"}. Defaults to \code{"ipw"}.
-#' @param outcome_model Defaults to \code{NULL}.
+#' @param outcome_model Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param min_propensity Passed to \code{.trclrn_check}. Defaults to \code{0.01}.
 #' @return A numeric value.
 #' @export

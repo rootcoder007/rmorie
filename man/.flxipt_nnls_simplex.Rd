@@ -11,7 +11,7 @@
 \item{Z}{A matrix; passed to \code{nrow}.}
 \item{y}{A matrix; passed to \code{crossprod}.}
 \item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{8000}.}
-\item{tol}{Defaults to \code{1e-14}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-14}.}
 }
 \description{
 Accelerated projected gradient with step from the largest eigenvalue of the Gram matrix (estimated by power iteration).

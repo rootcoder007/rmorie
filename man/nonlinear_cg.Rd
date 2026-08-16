@@ -8,14 +8,14 @@
 nonlinear_cg(f, grad, x0, beta = "fletcher-reeves", restart = NULL, max_iter = NULL, tol = 1e-10, est = NULL, line_search = "fletcher-reeves", hess_vec = NULL, keep_path = FALSE)
 }
 \arguments{
-\item{f}{See Usage.}
-\item{grad}{See Usage.}
+\item{f}{Passed to \code{line_search_fr}.}
+\item{grad}{Passed to \code{line_search_fr}.}
 \item{x0}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{beta}{Passed to \code{.cgnonl_beta}. Defaults to \code{"fletcher-reeves"}.}
 \item{restart}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 \item{max_iter}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.}
-\item{est}{Defaults to \code{NULL}.}
+\item{est}{Passed to \code{line_search_fr}.}
 \item{line_search}{Compared against \code{"exact-quadratic"}. Defaults to \code{"fletcher-reeves"}.}
 \item{hess_vec}{Optional; may be \code{NULL}. Passed to \code{.cgnonl_exact_quadratic_step}.}
 \item{keep_path}{A flag; the body branches on it. Defaults to \code{FALSE}.}

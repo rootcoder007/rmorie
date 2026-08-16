@@ -11,7 +11,7 @@
 \item{y}{A vector; its length is taken.}
 \item{X}{A matrix; passed to \code{ncol}.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{25}.}
-\item{tol}{Defaults to \code{1e-08}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-08}.}
 }
 \description{
 A step of the mfovsm_native implementation. Called by \code{.mfovsm_ip_weights}. See the file header for the source the module follows.

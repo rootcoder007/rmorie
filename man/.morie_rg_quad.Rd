@@ -12,7 +12,7 @@
 \item{a}{Numeric; combined arithmetically in the body.}
 \item{b}{Numeric; combined arithmetically in the body.}
 \item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{1.49e-08}.}
-\item{maxdepth}{Defaults to \code{50L}.}
+\item{maxdepth}{Passed to \code{>=}. Defaults to \code{50L}.}
 }
 \description{
 two languages agree to their shared tolerance rather than to whatever a black-box integrator happens to do.

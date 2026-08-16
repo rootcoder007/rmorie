@@ -68,7 +68,7 @@
 #' source it follows.
 #'
 #' @param y A vector; its length is taken and its elements indexed.
-#' @param x See Usage.
+#' @param x Passed to \code{diff}.
 #' @return A numeric value.
 #' @export
 .fz_trapz <- function(y, x) sum(diff(x) * (y[-1L] + y[-length(y)])) / 2
@@ -79,9 +79,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param from See Usage.
-#' @param to See Usage.
-#' @param n See Usage.
+#' @param from Passed to \code{seq}.
+#' @param to Passed to \code{seq}.
+#' @param n Passed to \code{seq}.
 #' @return The value of \code{seq}.
 #' @export
 .fz_seq <- function(from, to, n) seq(from, to, length.out = n)
@@ -188,7 +188,7 @@
 #' source it follows.
 #'
 #' @param x A vector; its length is taken.
-#' @param min_n Defaults to \code{2L}.
+#' @param min_n Passed to \code{<}. Defaults to \code{2L}.
 #' @return The value of \code{x}, as built in the body.
 #' @export
 .fz_check_sample <- function(x, min_n = 2L) {

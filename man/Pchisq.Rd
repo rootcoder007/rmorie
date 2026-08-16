@@ -8,9 +8,9 @@
 Pchisq(q, df, lower_tail = TRUE)
 }
 \arguments{
-\item{q}{See Usage.}
+\item{q}{Passed to \code{Pgamma}.}
 \item{df}{Numeric; combined arithmetically in the body.}
-\item{lower_tail}{Defaults to \code{TRUE}.}
+\item{lower_tail}{Passed to \code{Pgamma}. Defaults to \code{TRUE}.}
 }
 \description{
 A step of the dist_native implementation. Called by \code{.rsconsistency}. See the file header for the source the module follows.

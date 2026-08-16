@@ -10,7 +10,7 @@
 \arguments{
 \item{A}{A matrix; indexed by row and column.}
 \item{x}{Carried through into a list the body builds.}
-\item{Z}{See Usage.}
+\item{Z}{Passed to \code{\%in\%}.}
 }
 \description{
 Part of the abundance_text_voting_native implementation; see the file header for the source it follows.

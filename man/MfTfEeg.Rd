@@ -8,10 +8,10 @@
 MfTfEeg(X, freqs, t0, gain = 1)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{freqs}{See Usage.}
-\item{t0}{See Usage.}
-\item{gain}{Defaults to \code{1}.}
+\item{X}{Passed to \code{MfTf}.}
+\item{freqs}{Passed to \code{MfTf}.}
+\item{t0}{Passed to \code{MfTf}.}
+\item{gain}{Passed to \code{MfTf}. Defaults to \code{1}.}
 }
 \description{
 4.6.2, so it delegates.  What is specific here is the DFT caveat.

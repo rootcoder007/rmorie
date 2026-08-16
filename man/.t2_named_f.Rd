@@ -8,7 +8,7 @@
 .t2_named_f(key)
 }
 \arguments{
-\item{key}{See Usage.}
+\item{key}{Passed to \code{switch}.}
 }
 \description{
 A step of the tail2_t02 implementation. Called by \code{FDiverg}. See the file header for the source the module follows.

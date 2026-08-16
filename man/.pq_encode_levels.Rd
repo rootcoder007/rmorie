@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{levels}{A vector; its length is taken.}
-\item{width}{See Usage.}
+\item{width}{Passed to \code{==}.}
 }
 \description{
 A step of the parquet implementation. Called by \code{morie_write_parquet}. See the file header for the source the module follows.

@@ -193,7 +193,7 @@ project_ball <- function(x, radius = 1.0, centre = NULL) {
 #' @param step Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param rule One of \code{"fista"}, \code{"fixed"}. Defaults to \code{"backtracking"}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{2000}.
-#' @param tol Defaults to \code{1e-10}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-10}.
 #' @return A list with \code{estimate}, \code{x}, \code{fun}, \code{iterations}, \code{history}, \code{step}, \code{rule}, \code{n_backtracks}, \code{fixed_point_residual}, \code{converged}, \code{monotone}, \code{method}.
 #' @export
 projected_gradient <- function(f, grad, x0, project, step = NULL,

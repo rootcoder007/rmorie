@@ -57,7 +57,7 @@
 #' source it follows.
 #'
 #' @param covariate_history Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.
-#' @param n See Usage.
+#' @param n Passed to \code{!=}.
 #' @return A list with \code{L0}, \code{L1}.
 #' @export
 .blocks <- function(covariate_history, n) {
@@ -324,7 +324,7 @@ exceptional_law_share <- function(blips, tol = 0.01) {
 #' @param H A vector; indexed elementwise.
 #' @param rows A vector; its length is taken.
 #' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
-#' @param tol Defaults to \code{1e-12}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-12}.
 #' @return The value of \code{e}, as built in the body.
 #' @export
 .fluctuate <- function(outcome, offset_logit, H, rows, iters = 100,
@@ -398,7 +398,7 @@ rule_value_seq <- function(y, L0, A0, L1, A1, d0, d1, g0, g1,
 #' source it follows.
 #'
 #' @param regime Optional; may be \code{NULL}. A matrix; indexed by row and column.
-#' @param n See Usage.
+#' @param n Passed to \code{==}.
 #' @return Nothing; this branch always raises.
 #' @export
 .coerce_regime <- function(regime, n) {

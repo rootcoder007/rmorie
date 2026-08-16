@@ -13,7 +13,7 @@
 \item{H}{A vector; indexed elementwise.}
 \item{rows}{A vector; its length is taken.}
 \item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.}
-\item{tol}{Defaults to \code{1e-12}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-12}.}
 }
 \description{
 A step of the tmldyn_native implementation. Called by \code{morie_tmldyn}. See the file header for the source the module follows.
@@ -22,3 +22,8 @@ A step of the tmldyn_native implementation. Called by \code{morie_tmldyn}. See t
 The value of \code{e}, as built in the body.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+exceptional_law_share(V)
+.fluctuate(outcome = V, offset_logit = V, H = V, rows = V)
+}

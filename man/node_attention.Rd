@@ -8,7 +8,7 @@
 node_attention(h_i, neighbours, H, a_vec, W, slope = 0.2)
 }
 \arguments{
-\item{h_i}{See Usage.}
+\item{h_i}{Passed to \code{proj}.}
 \item{neighbours}{A vector; its length is taken and its elements indexed.}
 \item{H}{A vector; indexed elementwise.}
 \item{a_vec}{Numeric; combined arithmetically in the body.}

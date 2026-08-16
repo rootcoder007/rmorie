@@ -8,11 +8,11 @@
 morie_comet(hyp, src, ref, W, b = NULL)
 }
 \arguments{
-\item{hyp}{See Usage.}
-\item{src}{See Usage.}
-\item{ref}{See Usage.}
-\item{W}{See Usage.}
-\item{b}{Defaults to \code{NULL}.}
+\item{hyp}{Passed to \code{estimator_score}.}
+\item{src}{Passed to \code{estimator_score}.}
+\item{ref}{Passed to \code{estimator_score}.}
+\item{W}{Passed to \code{estimator_score}.}
+\item{b}{Passed to \code{estimator_score}.}
 }
 \description{
 A step of the comet_native implementation. No other function in the package calls it. See the file header for the source the module follows.

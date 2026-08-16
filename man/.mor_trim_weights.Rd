@@ -8,7 +8,7 @@
 .mor_trim_weights(w, weight_trim = NULL, side = "upper")
 }
 \arguments{
-\item{w}{See Usage.}
+\item{w}{Passed to \code{return}.}
 \item{weight_trim}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{side}{One of \code{"both"}, \code{"upper"}. Defaults to \code{"upper"}.}
 }

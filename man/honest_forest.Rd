@@ -10,14 +10,14 @@ honest_forest(X, y, W = NULL, kind = "double-sample", n_trees = 200L, subsample_
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{W}{Defaults to \code{NULL}.}
+\item{W}{Passed to \code{honest_tree}.}
 \item{kind}{Compared against \code{"adaptive"}. Defaults to \code{"double-sample"}.}
 \item{n_trees}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.}
 \item{subsample_frac}{Numeric; combined arithmetically in the body. Defaults to \code{0.5}.}
 \item{min_leaf}{Numeric; combined arithmetically in the body. Defaults to \code{5L}.}
-\item{alpha}{Defaults to \code{0.05}.}
-\item{pi}{Defaults to \code{0.5}.}
-\item{max_depth}{Defaults to \code{12L}.}
+\item{alpha}{Passed to \code{honest_tree}. Defaults to \code{0.05}.}
+\item{pi}{Passed to \code{honest_tree}. Defaults to \code{0.5}.}
+\item{max_depth}{Passed to \code{honest_tree}. Defaults to \code{12L}.}
 \item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0L}.}
 \item{at}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
 \item{level}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.}

@@ -8,7 +8,7 @@
 .survnnr_dact(v, kind)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Passed to \code{tanh}.}
 \item{kind}{One of \code{"relu"}, \code{"tanh"}.}
 }
 \description{

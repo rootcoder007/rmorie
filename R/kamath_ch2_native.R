@@ -28,7 +28,7 @@
 #' the source it follows.
 #'
 #' @param p A vector; its length is taken.
-#' @param name See Usage.
+#' @param name Passed to \code{sprintf}.
 #' @return The value of \code{p}, as built in the body.
 #' @export
 .morie_km_probs <- function(p, name) {

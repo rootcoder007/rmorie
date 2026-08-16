@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{name}{Defaults to \code{"x"}.}
+\item{name}{Passed to \code{sprintf}. Defaults to \code{"x"}.}
 \item{minlen}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.}
 }
 \description{

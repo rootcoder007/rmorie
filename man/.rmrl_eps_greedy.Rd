@@ -10,7 +10,7 @@
 \arguments{
 \item{row}{A vector; indexed elementwise.}
 \item{A}{A vector; its length is taken and its elements indexed.}
-\item{epsilon}{See Usage.}
+\item{epsilon}{Passed to \code{<}.}
 \item{rng}{Passed to \code{.ghc_unif}.}
 }
 \description{

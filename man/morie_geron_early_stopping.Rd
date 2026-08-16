@@ -33,3 +33,10 @@ Runs every one of \code{n_iter} batch-GD steps (gradient from the shared
 MSE core) and rolls back to the argmin validation RMSE, not the first
 uptick. \code{best_iteration} is 0-based.
 }
+\examples{
+set.seed(1)
+Xtr <- cbind(1, rnorm(40)); ytr <- Xtr \%*\% c(0.5, 1.2) + rnorm(40, 0, 0.2)
+Xv <- cbind(1, rnorm(20));  yv <- Xv \%*\% c(0.5, 1.2) + rnorm(20, 0, 0.2)
+morie_geron_early_stopping(Xtr, as.numeric(ytr), Xv, as.numeric(yv),
+                           n_iter = 50, eta = 0.05)
+}

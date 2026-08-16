@@ -8,7 +8,7 @@
 .scumap_clip(v, lim = 4)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Passed to \code{>}.}
 \item{lim}{Numeric; combined arithmetically in the body. Defaults to \code{4}.}
 }
 \description{

@@ -10,7 +10,7 @@
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{what}{Defaults to \code{"X"}.}
+\item{what}{Passed to \code{sprintf}. Defaults to \code{"X"}.}
 }
 \description{
 A step of the esl_native0 implementation. Called by \code{morie_esl_bootstrap_err}, \code{morie_esl_random_forest}, \code{morie_esl_residual_variance}. See the file header for the source the module follows.

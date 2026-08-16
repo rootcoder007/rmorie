@@ -58,7 +58,7 @@
 #' @param p Numeric; combined arithmetically in the body.
 #' @param nu Numeric; combined arithmetically in the body.
 #' @param kernel Passed to \code{.causrddc_kern}. Defaults to \code{"triangular"}.
-#' @param side Defaults to \code{1}.
+#' @param side Passed to \code{>}. Defaults to \code{1}.
 #' @return A list with \code{w}, \code{omega}.
 #' @export
 .causrddc_local_poly_weights <- function(x, h, p, nu, kernel = "triangular", side = 1) {
@@ -133,7 +133,7 @@
 #'
 #' @param x A vector; indexed elementwise.
 #' @param y A vector; indexed elementwise.
-#' @param side See Usage.
+#' @param side Passed to \code{>}.
 #' @param order Numeric; combined arithmetically in the body.
 #' @param deriv Numeric; combined arithmetically in the body.
 #' @return A list with \code{deriv}, \code{sigma2}.
@@ -172,7 +172,7 @@
 #' @param x A vector; its length is taken and its elements indexed.
 #' @param y A vector; indexed elementwise.
 #' @param J Numeric; combined arithmetically in the body.
-#' @param side_of See Usage.
+#' @param side_of Passed to \code{>}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .causrddc_nn_sigma2 <- function(x, y, J, side_of) {

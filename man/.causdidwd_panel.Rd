@@ -8,9 +8,9 @@
 .causdidwd_panel(Y, unit, period)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{unit}{See Usage.}
-\item{period}{See Usage.}
+\item{Y}{Passed to \code{unlist}.}
+\item{unit}{Passed to \code{unlist}.}
+\item{period}{Passed to \code{unlist}.}
 }
 \description{
 A step of the causdidwd_native implementation. Called by \code{morie_etwfe}, \code{morie_imputation}, \code{morie_two_way_fixed_effects} and 1 others in the module. See the file header for the source the module follows.

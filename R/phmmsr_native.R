@@ -234,11 +234,11 @@ phmmsr_sparse_rescale <- function(values, floor = 1e-30, target = 1.0) {
 #' source it follows.
 #'
 #' @param sequences A vector; its length is taken and its elements indexed.
-#' @param profile See Usage.
+#' @param profile Passed to \code{phmmsr_msv_score}.
 #' @param msv_threshold Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.02}.
-#' @param mu Defaults to \code{10}.
-#' @param lam Defaults to \code{0.7}.
-#' @param full_score Defaults to \code{NULL}.
+#' @param mu Passed to \code{phmmsr_gumbel_pvalue}. Defaults to \code{10}.
+#' @param lam Passed to \code{phmmsr_msv_score}. Defaults to \code{0.7}.
+#' @param full_score Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{estimate}, \code{passed}, \code{msv_scores}, \code{discarded}, \code{survivor_fraction}, \code{full_scores}, \code{method}, \code{note}.
 #' @export
 phmmsr_search_pipeline <- function(sequences, profile, msv_threshold = 0.02,

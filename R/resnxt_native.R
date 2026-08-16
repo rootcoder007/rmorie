@@ -62,7 +62,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Passed to \code{pmax}.
 #' @return The value of \code{pmax}.
 #' @export
 .resnxt_relu <- function(v) {

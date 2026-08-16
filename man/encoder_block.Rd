@@ -9,20 +9,20 @@ encoder_block(X, Wq, Wk, Wv, Wo, W1, b1, W2, b2, n_heads, pad_mask = NULL, gain1
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
-\item{Wq}{See Usage.}
-\item{Wk}{See Usage.}
-\item{Wv}{See Usage.}
-\item{Wo}{See Usage.}
-\item{W1}{See Usage.}
-\item{b1}{See Usage.}
-\item{W2}{See Usage.}
-\item{b2}{See Usage.}
-\item{n_heads}{See Usage.}
-\item{pad_mask}{Defaults to \code{NULL}.}
-\item{gain1}{Defaults to \code{NULL}.}
-\item{bias1}{Defaults to \code{NULL}.}
-\item{gain2}{Defaults to \code{NULL}.}
-\item{bias2}{Defaults to \code{NULL}.}
+\item{Wq}{Passed to \code{apply}.}
+\item{Wk}{Passed to \code{apply}.}
+\item{Wv}{Passed to \code{apply}.}
+\item{Wo}{Passed to \code{apply}.}
+\item{W1}{Passed to \code{apply}.}
+\item{b1}{Passed to \code{apply}.}
+\item{W2}{Passed to \code{apply}.}
+\item{b2}{Passed to \code{apply}.}
+\item{n_heads}{Passed to \code{multi_head_attention}.}
+\item{pad_mask}{Passed to \code{multi_head_attention}.}
+\item{gain1}{Passed to \code{apply}.}
+\item{bias1}{Passed to \code{apply}.}
+\item{gain2}{Passed to \code{apply}.}
+\item{bias2}{Passed to \code{apply}.}
 \item{pre_norm}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{

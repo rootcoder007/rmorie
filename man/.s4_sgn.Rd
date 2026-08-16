@@ -8,7 +8,7 @@
 .s4_sgn(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Passed to \code{>=}.}
 }
 \description{
 A step of the s04core implementation. Called by \code{.s4_rnd}, \code{Tqhs}. See the file header for the source the module follows.

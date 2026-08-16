@@ -17,3 +17,10 @@ List with \code{cost}, \code{per_instance}, \code{probabilities}, \code{accuracy
 \description{
 Softmax cross-entropy cost (morie.fn grxent)
 }
+\examples{
+set.seed(7)
+X <- cbind(1, rnorm(20))
+Y <- diag(3)[sample(1:3, 20, replace = TRUE), ]
+theta <- matrix(0, 2, 3)
+morie_geron_softmax_cross_entropy_cost(X, Y, theta)
+}

@@ -8,8 +8,8 @@
 span_f1(pred, gold)
 }
 \arguments{
-\item{pred}{See Usage.}
-\item{gold}{See Usage.}
+\item{pred}{Passed to \code{extract_spans}.}
+\item{gold}{Passed to \code{extract_spans}.}
 }
 \description{
 A step of the benRea_native implementation. Called by \code{ner_decode}. See the file header for the source the module follows.

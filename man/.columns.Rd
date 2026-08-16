@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{X}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
-\item{n}{See Usage.}
+\item{n}{Passed to \code{!=}.}
 }
 \description{
 A step of the sarimax_native implementation. Called by \code{.sarimax_fit}. See the file header for the source the module follows.

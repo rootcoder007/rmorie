@@ -8,9 +8,9 @@
 .morie_hrz_nw(x, y, grid, h)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{outer}.}
 \item{y}{A matrix; passed to \code{\%*\%}.}
-\item{grid}{See Usage.}
+\item{grid}{Passed to \code{outer}.}
 \item{h}{Numeric; combined arithmetically in the body.}
 }
 \description{

@@ -109,7 +109,7 @@ Rfkrn <- function(X, D = 256L, kernel = "rbf", gamma = 0.5) {
 #' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param k See Usage.
+#' @param k Passed to \code{<}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .rfkprimes <- function(k) {

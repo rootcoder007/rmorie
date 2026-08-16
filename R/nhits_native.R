@@ -242,7 +242,7 @@
 #' @param y Passed to \code{.nhits_vec}.
 #' @param horizon Coerced to integer by the body, with \code{as.integer}.
 #' @param lookback Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @param blocks Defaults to \code{NULL}.
+#' @param blocks Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param ridge Passed to \code{.nhits_nhits_stack}. Defaults to \code{1e-08}.
 #' @return A list with \code{estimate}, \code{forecast}, \code{residual}, \code{blocks}, \code{lookback}, \code{horizon}, \code{n}, \code{total_knots}, \code{dense_parameters}, \code{residual_norm}, \code{n_blocks}, \code{method}.
 #' @export

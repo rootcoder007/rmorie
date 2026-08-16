@@ -8,7 +8,7 @@
 .surxgb_check_dist(dist)
 }
 \arguments{
-\item{dist}{See Usage.}
+\item{dist}{Passed to \code{\%in\%}.}
 }
 \description{
 A step of the surxgb_native implementation. Called by \code{morie_surxgb_aft_loss}, \code{morie_surxgb_boost}, \code{morie_surxgb_cdf} and 3 others in the module. See the file header for the source the module follows.

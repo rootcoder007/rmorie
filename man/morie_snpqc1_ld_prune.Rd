@@ -11,7 +11,7 @@ morie_snpqc1_ld_prune(genotypes, window = 50, step = 5, r2 = 0.2)
 \item{genotypes}{Passed to \code{.snpqc1_check}.}
 \item{window}{Numeric; combined arithmetically in the body. Defaults to \code{50}.}
 \item{step}{Numeric; combined arithmetically in the body. Defaults to \code{5}.}
-\item{r2}{Defaults to \code{0.2}.}
+\item{r2}{Passed to \code{>}. Defaults to \code{0.2}.}
 }
 \description{
 threshold. Returns kept SNP indices (1-based).

@@ -8,10 +8,10 @@
 ks_statistic(m, instruments, form = "sum", n_equality = 0L)
 }
 \arguments{
-\item{m}{See Usage.}
+\item{m}{Passed to \code{weighted_moments}.}
 \item{instruments}{A list; the body reads \code{$instruments} from it.}
 \item{form}{Carried through into a list the body builds. Defaults to \code{"sum"}.}
-\item{n_equality}{Defaults to \code{0L}.}
+\item{n_equality}{Passed to \code{S_function}. Defaults to \code{0L}.}
 }
 \description{
 A step of the bnskmt_native implementation. Called by \code{compare_forms}, \code{ks_confidence_set}. See the file header for the source the module follows.

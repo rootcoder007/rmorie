@@ -8,15 +8,15 @@
 morie_egnnL_equivariance_error(H, X, phi_e, phi_x, phi_h, Q, g, layers = 2, C = NULL)
 }
 \arguments{
-\item{H}{See Usage.}
+\item{H}{Passed to \code{run_egnn}.}
 \item{X}{A vector; its length is taken and its elements indexed.}
-\item{phi_e}{See Usage.}
-\item{phi_x}{See Usage.}
-\item{phi_h}{See Usage.}
+\item{phi_e}{Passed to \code{run_egnn}.}
+\item{phi_x}{Passed to \code{run_egnn}.}
+\item{phi_h}{Passed to \code{run_egnn}.}
 \item{Q}{A vector; indexed elementwise.}
 \item{g}{A vector; indexed elementwise.}
-\item{layers}{Defaults to \code{2}.}
-\item{C}{Defaults to \code{NULL}.}
+\item{layers}{Passed to \code{run_egnn}. Defaults to \code{2}.}
+\item{C}{Passed to \code{run_egnn}.}
 }
 \description{
 A step of the egnnL_native implementation. No other function in the package calls it. See the file header for the source the module follows.

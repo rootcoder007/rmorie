@@ -23,3 +23,10 @@ List with \code{log_likelihood}, \code{per_sample},
 log L = sum_i logsumexp_k [log pi_k + log N(x_i | mu_k, Sigma_k)],
 the component densities computed through a Cholesky solve.
 }
+\examples{
+set.seed(2)
+X <- rbind(matrix(rnorm(20, 0), 10, 2), matrix(rnorm(20, 3), 10, 2))
+morie_geron_gmm_log_likelihood(X, pi = c(0.5, 0.5),
+                               means = rbind(c(0, 0), c(3, 3)),
+                               covars = list(diag(2), diag(2)))
+}

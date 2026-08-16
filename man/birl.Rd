@@ -11,17 +11,17 @@ birl(T, observations, gamma = 0.9, n_iter = 1000, delta = 0.25, alpha = 1, prior
 \item{T}{Passed to \code{.mdp}.}
 \item{observations}{Iterated over elementwise, with \code{lapply}.}
 \item{gamma}{Passed to \code{.mdp}. Defaults to \code{0.9}.}
-\item{n_iter}{Defaults to \code{1000}.}
+\item{n_iter}{Passed to \code{policy_walk}. Defaults to \code{1000}.}
 \item{delta}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.25}.}
 \item{alpha}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 \item{prior}{Carried through into a list the body builds. Defaults to \code{"uniform"}.}
-\item{scale}{Defaults to \code{1}.}
-\item{r_max}{Defaults to \code{1}.}
-\item{J}{Defaults to \code{0.1}.}
-\item{H}{Defaults to \code{0}.}
-\item{burn}{Defaults to \code{NULL}.}
-\item{seed}{Defaults to \code{0}.}
-\item{R0}{Defaults to \code{NULL}.}
+\item{scale}{Passed to \code{policy_walk}. Defaults to \code{1}.}
+\item{r_max}{Passed to \code{policy_walk}. Defaults to \code{1}.}
+\item{J}{Passed to \code{policy_walk}. Defaults to \code{0.1}.}
+\item{H}{Passed to \code{policy_walk}. Defaults to \code{0}.}
+\item{burn}{Passed to \code{policy_walk}.}
+\item{seed}{Passed to \code{policy_walk}. Defaults to \code{0}.}
+\item{R0}{Passed to \code{policy_walk}.}
 }
 \description{
 A step of the birl_native implementation. No other function in the package calls it. See the file header for the source the module follows.

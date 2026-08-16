@@ -13,7 +13,7 @@
 \item{pi}{Passed to \code{morie_phylml}.}
 \item{rate}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{branch_prior_mean}{Numeric; combined arithmetically in the body. Defaults to \code{0.1}.}
-\item{partitions}{Defaults to \code{NULL}.}
+\item{partitions}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{rates}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 \item{temperature}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 }

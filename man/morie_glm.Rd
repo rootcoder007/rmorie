@@ -15,7 +15,7 @@ morie_glm(y, X, family = "binomial", add_intercept = TRUE, weights = NULL, offse
 \item{weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{offset}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25L}.}
-\item{tol}{Defaults to \code{1e-08}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-08}.}
 }
 \description{
 A step of the glm implementation. No other function in the package calls it. See the file header for the source the module follows.

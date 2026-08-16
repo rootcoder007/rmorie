@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{B}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{tol}{Defaults to \code{1e-09}.}
+\item{tol}{Passed to \code{<=}. Defaults to \code{1e-09}.}
 }
 \description{
 A step of the tloilr_native implementation. No other function in the package calls it. See the file header for the source the module follows.

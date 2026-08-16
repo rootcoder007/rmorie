@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{e}{A list; the body reads \code{$pos} from it.}
-\item{ttype}{See Usage.}
+\item{ttype}{Passed to \code{==}.}
 }
 \description{
 A step of the parquet implementation. Called by \code{.pq_list}, \code{.pq_map}, \code{.pq_struct}. See the file header for the source the module follows.
