@@ -147,8 +147,34 @@ naive_bootstrap <- function(data, estimator, B = 200L, seed = 0L) {
 #' @export
 targeted_bootstrap <- function(P_star_sampler, estimator, B = 200L,
                                seed = 0L) {
-  morie_tlboot(data = NULL, estimator = estimator, B = B,
-               seed = seed, method = "targeted")
+  if (!is.function(P_star_sampler)) {
+    stop("tlboot: P_star_sampler must be a function of one argument, ",
+         "the random stream.", call. = FALSE)
+  }
+  if (!is.function(estimator)) {
+    stop("tlboot: estimator must be a function of one dataset.",
+         call. = FALSE)
+  }
+  B <- as.integer(B)
+  if (length(B) != 1L || is.na(B) || B < 2L) {
+    stop("tlboot: B must be at least 2, so a standard deviation ",
+         "exists.", call. = FALSE)
+  }
+  e <- .ghc_rng(as.numeric(seed))
+  out <- numeric(B)
+  for (b in seq_len(B)) {
+    out[b] <- as.numeric(estimator(P_star_sampler(e)))
+  }
+  m <- sum(out) / B
+  sd <- sqrt(sum((out - m)^2) / (B - 1L))
+  list(
+    estimate = m, mean = m, se = sd,
+    replicates = out, B = B,
+    method = paste("targeted bootstrap from the fitted P_n^*;",
+                   "van der Laan & Rose (2018) Chap. 28"),
+    note = paste("designed to be consistent for the first two moments",
+                 "of the sampling distribution")
+  )
 }
 
 #' multiplier_bootstrap
