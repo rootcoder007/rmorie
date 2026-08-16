@@ -21,3 +21,14 @@ A step of the rangayyan_phys implementation. No other function in the package ca
 A list with \code{eeg_bands}, \code{eeg_beta_fraction}, \code{emg_tremor_fraction}, \code{emg_tremor_freq_hz}, \code{gait_tremor_fraction}, \code{gait_tremor_freq_hz}, \code{emg_form_factor}, \code{emg_turns_per_second}, \code{gait_rate_hz}, \code{gait_regularity}, \code{tremor_present}, \code{tremor_band_hz}, \code{fs_hz}, \code{units}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+fs <- 100
+tv <- seq(0, 10, by = 1 / fs)
+eeg <- rnorm(length(tv))
+emg <- sin(2 * pi * 5 * tv) + 0.3 * rnorm(length(tv))
+gait <- sin(2 * pi * 1 * tv) + 0.1 * sin(2 * pi * 5 * tv) +
+  0.1 * rnorm(length(tv))
+r <- PdMonitor(eeg, emg, gait, fs = fs)
+str(r, max.level = 1)
+}

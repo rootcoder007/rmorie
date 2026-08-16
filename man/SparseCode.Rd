@@ -22,3 +22,11 @@ A step of the rangayyan_class2 implementation. No other function in the package 
 A list with \code{alpha}, \code{support}, \code{reconstruction}, \code{residual}, \code{error}, \code{energyratio}, \code{mode}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(7)
+D <- matrix(rnorm(16 * 8), 16, 8)
+D <- sweep(D, 1, sqrt(rowSums(D^2)), "/")
+x <- D[3, ] * 1.5 - D[10, ] * 0.7
+r <- SparseCode(x, D, sparsity = 2)
+str(r, max.level = 1)
+}

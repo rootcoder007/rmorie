@@ -20,3 +20,12 @@ A step of the rangayyan_phys implementation. No other function in the package ca
 A vector, from \code{c}.
 }
 \keyword{internal}
+\examples{
+set.seed(4)
+fs <- 2000
+tv <- seq(0, 0.5, by = 1 / fs)
+pcg <- sin(2 * pi * 80 * tv) + 0.5 * sin(2 * pi * 220 * tv) +
+  0.05 * rnorm(length(tv))
+r <- ValvePcg(pcg, fs = fs, n_peaks = 2)
+str(r, max.level = 1)
+}

@@ -26,3 +26,20 @@ A step of the rangayyan_class2 implementation. No other function in the package 
 A list with \code{fetal}, \code{maternal}, \code{fetalrow}, \code{maternalrow}, \code{peaks}, \code{W}, \code{H}, \code{error}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+fs <- 250
+tv <- seq(0, 4, by = 1 / fs)
+n <- length(tv)
+mat <- rep(0, n)
+for (b in seq(0.4, 3.8, by = 0.8)) {
+  i <- round(b * fs); mat[i:(i + 4)] <- c(0.3, 1.2, -0.4, 0.1, 0)
+}
+fet <- rep(0, n)
+for (b in seq(0.3, 3.9, by = 0.45)) {
+  i <- round(b * fs); fet[i:(i + 2)] <- c(0.2, 0.5, 0)
+}
+x <- mat + fet + 0.02 * rnorm(n)
+r <- FecgNmf(x, fs = fs, nwin = 64, rank = 4)
+str(r, max.level = 1)
+}

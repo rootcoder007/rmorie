@@ -21,3 +21,10 @@ the BACK-shifted exposure.  Forward-shifting is the sign error this estimand inv
 A list with \code{psi}, \code{naive_mean}, \code{weights}, \code{max_weight}, \code{mean_weight}, \code{tau2}, \code{gamma}, \code{delta}, \code{weight_uses_back_shifted_density}, \code{gaussian_working_model}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(7)
+h <- matrix(rnorm(30), 30, 1)
+a <- 0.5 * h[, 1] + rnorm(30)
+y <- a + h[, 1] + rnorm(30, 0, 0.3)
+ShiftInt(y, a, h, delta = 0.5)
+}

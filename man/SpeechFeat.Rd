@@ -21,3 +21,12 @@ A step of the rangayyan_phys implementation. No other function in the package ca
 A list with \code{formants_hz}, \code{formant_bandwidths_hz}, \code{formant_powers}, \code{f0_hz}, \code{pitch_period_ms}, \code{voiced}, \code{voicing_strength}, \code{voicing_threshold}, \code{zero_crossing_rate}, \code{order}, \code{ar_coeffs}, \code{prediction_error}, \code{freq_hz}, \code{lpc_psd}, \code{fs_hz}, \code{units}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(5)
+fs <- 8000
+tv <- seq(0, 0.3, by = 1 / fs)
+speech <- sin(2 * pi * 120 * tv) + 0.5 * sin(2 * pi * 700 * tv) +
+  0.3 * sin(2 * pi * 1200 * tv) + 0.02 * rnorm(length(tv))
+r <- SpeechFeat(speech, fs = fs)
+str(r, max.level = 1)
+}

@@ -21,3 +21,8 @@ A step of the rangayyan_tf implementation. Called by \code{PpgWtDen}. See the fi
 A list with \code{denoised}, \code{threshold}, \code{sigma}, \code{n_zeroed}, \code{n_coeffs}, \code{sparsity}, \code{noise_removed}, \code{threshold_type}, \code{wavelet}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(7)
+x <- sin(2 * pi * (1:128) / 16) + rnorm(128, 0, 0.3)
+str(WtThresh(x, wavelet = "db4", levels = 3), max.level = 1)
+}

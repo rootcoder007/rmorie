@@ -20,3 +20,13 @@ intervals of Section 4.9.  PEPC = PEP + 0.4 HR and ETC = ET + 1.6 HR are the rat
 A list with \code{upstroke}, \code{percussion}, \code{notch}, \code{dicwave}, \code{pep}, \code{et}, \code{pepc}, \code{etc}, \code{peppmean}, \code{etmean}, \code{pepcmean}, \code{etcmean}, \code{hr}, \code{fs}, \code{normpepc}, \code{normetcmale}, \code{normetcfemale}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+fs <- 250
+tv <- seq(0, 2, by = 1 / fs)
+ph <- (tv \%\% 0.8) / 0.8
+cp <- exp(-((ph - 0.25) / 0.12)^2) + 0.35 * exp(-((ph - 0.55) / 0.05)^2)
+qrs <- round(seq(0.05, 1.95, by = 0.8) * fs)
+r <- CPulseFeat(cp, fs = fs, qrs = qrs)
+str(r, max.level = 1)
+}

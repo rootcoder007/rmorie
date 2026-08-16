@@ -20,3 +20,11 @@ A step of the rangayyan_phys implementation. No other function in the package ca
 A list with \code{rate_breaths_per_min}, \code{mean_period_s}, \code{sd_period_s}, \code{regularity_cv}, \code{depth}, \code{mean_ti_s}, \code{mean_te_s}, \code{ie_ratio}, \code{breaths}, \code{n_breaths}, \code{signal_type}, \code{fs_hz}, \code{units}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(4)
+fs <- 25
+tv <- seq(0, 30, by = 1 / fs)
+resp <- sin(2 * pi * 0.25 * tv) + 0.05 * rnorm(length(tv))
+r <- RespFeat(resp, fs = fs, signal_type = "flow")
+str(r, max.level = 1)
+}

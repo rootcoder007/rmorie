@@ -18,3 +18,11 @@ eigenvalues, so power iteration runs on 2I - L_sym and the values are mapped bac
 A list with \code{labels}, \code{sizes}, \code{eigenvalues}, \code{fiedler}, \code{degree}, \code{smallest_eigenvalues_not_largest}, \code{k}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+A <- matrix(0, 6, 6)
+A[1, 2] <- A[2, 3] <- A[1, 3] <- 1
+A[4, 5] <- A[5, 6] <- A[4, 6] <- 1
+A[3, 4] <- 0.05
+A <- A + t(A)
+SpecClust(A, k = 2L)
+}

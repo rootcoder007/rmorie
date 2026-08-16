@@ -22,3 +22,9 @@ A step of the rangayyan_class2 implementation. No other function in the package 
 A list with \code{dictionary}, \code{coefficients}, \code{error}, \code{iterations}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(5)
+Y <- matrix(rnorm(16 * 30), 16, 30)
+r <- KsvdFit(Y, natoms = 8, sparsity = 3, maxiter = 4)
+str(r, max.level = 1)
+}

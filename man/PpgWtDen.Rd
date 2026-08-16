@@ -21,3 +21,10 @@ A step of the rangayyan_tf implementation. No other function in the package call
 A list with \code{denoised}, \code{artifact}, \code{threshold}, \code{sigma}, \code{artifact_energy}, \code{snr_improvement_db}, \code{approx_energy}, \code{levels}, \code{wavelet}, \code{fs}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(4)
+fs <- 100
+tv <- seq(0, 5, by = 1 / fs)
+ppg <- sin(2 * pi * 1.2 * tv) + 0.2 * rnorm(length(tv))
+str(PpgWtDen(ppg, fs = fs), max.level = 1)
+}

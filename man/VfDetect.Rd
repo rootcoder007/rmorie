@@ -21,3 +21,11 @@ threshold, and no external primary source was verified here.  The rule below is 
 A list with \code{flag}, \code{domfreq}, \code{concentration}, \code{crest}, \code{rate}, \code{conc}, \code{crestmax}, \code{nwin}, \code{fraction}, \code{win}, \code{fs}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(6)
+fs <- 250
+tv <- seq(0, 8, by = 1 / fs)
+vf <- sin(2 * pi * 5 * tv + 2 * sin(2 * pi * 0.3 * tv))
+r <- VfDetect(vf, fs = fs)
+str(r, max.level = 1)
+}

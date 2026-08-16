@@ -19,3 +19,9 @@ formula, Sec. 1.3.2, and is reproduced term for term.  The variance is derived f
 A list with \code{i}, \code{expectation}, \code{variance}, \code{z}, \code{p_value}, \code{s0}, \code{tr_mw}, \code{k}, \code{n}, \code{not_minus_one_over_n_minus_one}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+W <- matrix(0, 6, 6)
+W[abs(row(W) - col(W)) == 1] <- 1
+MoranRes(rnorm(6), W)
+}

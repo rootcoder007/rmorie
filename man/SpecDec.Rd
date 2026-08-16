@@ -19,3 +19,6 @@ SpecDec(draft, target, gamma = 4L)
 A list with \code{alpha}, \code{tv_distance}, \code{expected_tokens}, \code{gamma}, \code{max_tokens}, \code{deterministic_expectation_not_a_sampled_run}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+SpecDec(draft = c(0.5, 0.3, 0.2), target = c(0.4, 0.4, 0.2), gamma = 4L)
+}

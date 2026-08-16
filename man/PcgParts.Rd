@@ -20,3 +20,20 @@ ECG and the carotid pulse because S1 and S2 are not reliably the loudest events 
 A list with \code{s1}, \code{s2}, \code{systole}, \code{diastole}, \code{systolerms}, \code{diastolerms}, \code{fs}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(3)
+fs <- 250
+tv <- seq(0, 3, by = 1 / fs)
+n <- length(tv)
+ecg <- rep(0, n)
+for (b in seq(0.4, 2.8, by = 0.8)) {
+  i <- round(b * fs); ecg[i:(i + 5)] <- c(0.2, 1.2, -0.5, 0.1, 0.05, 0)
+}
+ecg <- ecg + 0.01 * rnorm(n)
+ph <- ((tv - 0.45) \%\% 0.8) / 0.8
+cp <- exp(-((ph - 0.25) / 0.12)^2) + 0.35 * exp(-((ph - 0.55) / 0.05)^2)
+pcg <- sin(2 * pi * 60 * tv) * exp(-((tv \%\% 0.8) / 0.06)) +
+  0.02 * rnorm(n)
+r <- PcgParts(pcg, ecg, cp, fs = fs)
+str(r, max.level = 1)
+}

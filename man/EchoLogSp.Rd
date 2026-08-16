@@ -21,3 +21,6 @@ A step of the rangayyan_tf implementation. No other function in the package call
 A list with \code{Y_hat}, \code{echo_log}, \code{series}, \code{series_valid}, \code{series_error}, \code{omega}, \code{a}, \code{n_0}, \code{n_terms}, \code{method}.
 }
 \keyword{internal}
+\examples{
+EchoLogSp(a = 0.5, n_0 = 8L, omega = seq(0, pi, length.out = 16))
+}

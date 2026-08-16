@@ -20,3 +20,10 @@ accuracy quoted for it means nothing unless the test patterns were unseen. Proto
 A list with \code{accuracy}, \code{sensitivity}, \code{specificity}, \code{weightedaccuracy}, \code{confusion}, \code{predictions}, \code{folds}, \code{prevalence}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+F <- rbind(matrix(rnorm(60, 0), 30, 2), matrix(rnorm(60, 1.5), 30, 2))
+y <- rep(c(0L, 1L), each = 30)
+r <- CadPipe(F, y, k = 5)
+str(r, max.level = 1)
+}

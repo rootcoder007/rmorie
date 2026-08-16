@@ -22,3 +22,12 @@ A step of the rangayyan_phys implementation. No other function in the package ca
 A list with \code{f0_track_hz}, \code{t_track_s}, \code{melody}, \code{melody_units}, \code{mean_f0_hz}, \code{sd_f0_hz}, \code{min_f0_hz}, \code{max_f0_hz}, \code{f0_range_semitones}, \code{voiced_fraction}, \code{in_common_band_fraction}, \code{high_pitched}, \code{formants_hz}, \code{window_ms}, \code{n_windows}, \code{fs_hz}, \code{flat_tolerance}, \code{units}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+fs <- 8000
+tv <- seq(0, 0.5, by = 1 / fs)
+cry <- sin(2 * pi * 450 * tv) * (1 + 0.2 * sin(2 * pi * 5 * tv)) +
+  0.05 * rnorm(length(tv))
+r <- InfantCry(cry, fs = fs)
+str(r, max.level = 1)
+}

@@ -19,3 +19,11 @@ Alternation every other beat is a period of exactly two beats, so it lands on 0.
 A list with \code{valt}, \code{kscore}, \code{altpower}, \code{noisemean}, \code{noisesd}, \code{nbeats}, \code{npoints}, \code{cyclesperbeat}, \code{present}, \code{method}.
 }
 \keyword{internal}
+\examples{
+set.seed(5)
+base <- exp(-((1:40 - 20) / 8)^2)
+tw <- lapply(1:16, function(k) base * (1 + 0.05 * (-1)^k) +
+                                0.01 * rnorm(40))
+r <- TwaSpectr(tw)
+str(r, max.level = 1)
+}
