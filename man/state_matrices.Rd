@@ -18,3 +18,8 @@ A step of the bats_native implementation. Called by \code{all_eigenvalues}, \cod
 A list with \code{w}, \code{fmat}, \code{g}.
 }
 \keyword{internal}
+\examples{
+spec <- BatsSpec()
+theta <- rep(0.1, n_free(spec))
+state_matrices(spec, theta)
+}

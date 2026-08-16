@@ -32,3 +32,12 @@ Zhao Q, Small DS, Bhattacharya BB (2019). Sensitivity analysis for
 inverse probability weighting estimators via the percentile
 bootstrap. \emph{JRSS-B} 81(4), 735-761.
 }
+\examples{
+set.seed(2)
+n <- 120
+X <- matrix(rnorm(n * 2), n, 2)
+d <- rbinom(n, 1, plogis(0.5 * X[, 1]))
+y <- 1 + X[, 1] + 0.8 * d + rnorm(n, 0, 0.5)
+r <- morie_tmle_sensitivity(y, d, X)
+str(r, max.level = 1)
+}

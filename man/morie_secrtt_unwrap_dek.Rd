@@ -19,3 +19,11 @@ The envelope bounds offline compromise; an attacker who can call the KEK is boun
 List with \code{dek}, \code{kek_id}, \code{audited}.
 }
 \keyword{internal}
+\examples{
+seed <- as.raw(1:32)
+dek <- morie_secrtt_generate_dek(seed, record_id = 7L)$dek
+kek <- as.raw(rev(1:32))
+w <- morie_secrtt_wrap_dek(dek, kek, nonce = as.raw(1:12))
+u <- morie_secrtt_unwrap_dek(w, kek)
+identical(u$dek, dek)
+}

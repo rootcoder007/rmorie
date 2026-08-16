@@ -20,3 +20,6 @@ Boyd equation 11.13: \code{ceiling(log(m/(eps t0)) / log(mu))}, clamped to be no
 Non-negative integer.
 }
 \keyword{internal}
+\examples{
+centering_steps(m = 4, eps = 1e-8, t0 = 1, mu = 10)
+}

@@ -31,3 +31,9 @@ Boyd Algorithm 11.1, the logarithmic barrier method of Frisch (1956) equation 5.
 A named list mirroring the Python RichResult payload:   \code{x}, \code{fun}, \code{gap}, \code{t}, \code{lambda_},   \code{slack}, \code{outer}, \code{newton}, \code{decrement},   \code{history}, \code{centering}, \code{converged}, plus   \code{steps_predicted}, \code{method}, \code{note} on the   multi-step path.
 }
 \keyword{internal}
+\examples{
+f0 <- function(x) sum(x^2)
+cons <- list(function(x) 1 - x[1])
+r <- barrier_method(f0, cons, x0 = c(2, 0))
+r$x
+}

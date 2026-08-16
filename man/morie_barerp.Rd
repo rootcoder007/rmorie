@@ -14,3 +14,9 @@ morie_barerp
 The value of \code{barrier_method}.
 }
 \keyword{internal}
+\examples{
+f0 <- function(x) sum(x^2)
+cons <- list(function(x) 1 - x[1])
+r <- morie_barerp(f0, cons, x0 = c(2, 0))
+r$x
+}

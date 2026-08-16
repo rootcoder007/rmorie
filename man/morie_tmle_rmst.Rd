@@ -36,3 +36,13 @@ randomized trials with right censored outcomes through covariate
 adjustment. \emph{Journal of Biopharmaceutical Statistics} 19(6),
 1099-1131.
 }
+\examples{
+set.seed(4)
+n <- 150
+W <- matrix(rnorm(n * 2), n, 2)
+a <- rbinom(n, 1, 0.5)
+tt <- rexp(n, rate = exp(-0.5 * a - 0.3 * W[, 1]))
+ev <- rbinom(n, 1, 0.8)
+r <- morie_tmle_rmst(tt, ev, a, W)
+str(r, max.level = 1)
+}

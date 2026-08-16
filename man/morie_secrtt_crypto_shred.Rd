@@ -18,3 +18,11 @@ A partial rotation leaves records readable under the other KEK, so the scope has
 List with \code{kek_id}, \code{records_shredded},   \code{indices}, \code{still_recoverable}, \code{complete},   \code{note}.
 }
 \keyword{internal}
+\examples{
+seed <- as.raw(1:32)
+dek <- morie_secrtt_generate_dek(seed, record_id = 7L)$dek
+kek <- as.raw(rev(1:32))
+w1 <- morie_secrtt_wrap_dek(dek, kek, nonce = as.raw(1:12), kek_id = "kek-1")
+w2 <- morie_secrtt_wrap_dek(dek, kek, nonce = as.raw(2:13), kek_id = "kek-2")
+morie_secrtt_crypto_shred("kek-1", list(w1, w2))
+}

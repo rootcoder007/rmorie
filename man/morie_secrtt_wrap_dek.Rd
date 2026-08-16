@@ -21,3 +21,10 @@ The KEK id is bound into the AAD, so a wrapped DEK cannot be replayed under a di
 List with \code{wrapped}, \code{tag}, \code{nonce},   \code{kek_id}, \code{wrapped_hex}, \code{note}.
 }
 \keyword{internal}
+\examples{
+seed <- as.raw(1:32)
+dek <- morie_secrtt_generate_dek(seed, record_id = 7L)$dek
+kek <- as.raw(rev(1:32))
+w <- morie_secrtt_wrap_dek(dek, kek, nonce = as.raw(1:12))
+w$kek_id
+}

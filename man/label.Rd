@@ -17,3 +17,7 @@ A step of the bats_native implementation. Called by \code{morie_bats}, \code{mor
 A character value.
 }
 \keyword{internal}
+\examples{
+spec <- BatsSpec(periods = c(4), use_trend = TRUE)
+label(spec)
+}
