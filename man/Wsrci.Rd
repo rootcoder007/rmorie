@@ -1,0 +1,16 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{Wsrci}
+\alias{Wsrci}
+\title{Walsh-average confidence interval -- Sec. 5.7.5, pp. 207-209}
+\usage{
+Wsrci(x, tcrit)
+}
+\description{
+Walsh-average confidence interval -- Sec. 5.7.5, pp. 207-209
+}
+\value{
+A list with \code{lower}, \code{upper}, \code{coverage}, \code{tail}, \code{nwalsh}, \code{n}, \code{tcrit}, \code{estimate}.
+}
+\keyword{internal}
