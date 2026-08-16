@@ -16,3 +16,8 @@ A tape node.
 Group generic supporting \verb{+ - * / ^} and unary minus for
 \code{\link[=morie_geron_autograd]{morie_geron_autograd()}} leaves.
 }
+\examples{
+x <- .morie_gvar(2)
+y <- x * x + 3 * x
+y$value
+}

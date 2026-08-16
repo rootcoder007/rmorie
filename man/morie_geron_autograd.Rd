@@ -22,3 +22,8 @@ exists, which is an error rather than a silent zero. Leaves support
 \code{\link[=morie_gvar_relu]{morie_gvar_relu()}} / \code{\link[=morie_gvar_sigmoid]{morie_gvar_sigmoid()}}. One backward sweep fills
 every leaf's gradient at the cost of one forward pass.
 }
+\examples{
+loss <- function(p) p[[1]] * p[[1]] + 3 * p[[2]]
+r <- morie_geron_autograd(loss, c(2, 1))
+str(r, max.level = 1)
+}

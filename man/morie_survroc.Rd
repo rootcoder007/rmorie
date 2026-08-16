@@ -32,3 +32,9 @@ here, and its reduction to the empirical estimator without
 censoring), and the time-dependent area under the curve.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+tt <- rexp(40); ev <- rbinom(40, 1, 0.7)
+mk <- -log(tt) + rnorm(40, 0, 0.3)
+str(morie_survroc(tt, ev, mk, t = 1), max.level = 1)
+}

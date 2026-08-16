@@ -17,3 +17,8 @@ A tape node.
 \description{
 Group generic for \code{exp}, \code{log}, \code{sqrt}, \code{tanh}, \code{sin}, \code{cos}.
 }
+\examples{
+x <- .morie_gvar(2)
+y <- exp(x)
+y$value
+}

@@ -31,3 +31,16 @@ List with \code{output}, \code{attention_output}, \code{attention_weights},
 \description{
 h = LN(x + MHA(x)); y = LN(h + FFN(h)).
 }
+\examples{
+set.seed(2)
+X <- matrix(rnorm(12), 3, 4)
+h1 <- matrix(rnorm(8, 0, 0.4), 4, 2)
+mha <- list(WQ = list(h1, h1), WK = list(h1, h1), WV = list(h1, h1),
+            WO = matrix(rnorm(16, 0, 0.4), 4, 4),
+            gamma = rep(1, 4), beta = rep(0, 4))
+ffn <- list(W1 = matrix(rnorm(32, 0, 0.4), 4, 8),
+            W2 = matrix(rnorm(32, 0, 0.4), 8, 4),
+            gamma = rep(1, 4), beta = rep(0, 4))
+r <- morie_geron_transformer_encoder_block(X, mha, ffn)
+str(r, max.level = 1)
+}
