@@ -19,3 +19,10 @@ A step of the tldapar_native implementation. Called by \code{morie_tldapar}. See
 A list with \code{psi}, \code{se}, \code{ci}, \code{mean_ic}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+ests <- rnorm(5, 1, 0.1)
+ics <- lapply(1:5, function(v) rnorm(10, 0, 0.5))
+r <- cv_tmle(ests, ics, n = 50)
+str(r, max.level = 1)
+}

@@ -46,3 +46,6 @@ Koren, Y. (2008) "Factorization Meets the Neighborhood", *KDD \'08*,
 implemented in :mod:`svdpp`.
 }
 \keyword{internal}
+\examples{
+morie_timeRS_user_bias(b_u = 0.2, alpha_u = 0.05, t = 300, t_user = 200)
+}

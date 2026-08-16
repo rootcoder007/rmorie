@@ -27,3 +27,11 @@ DeRemer, F. L. (1971) "Simple LR(k) grammars", Communications of the
 ACM 14(7), 453-460, doi:10.1145/362619.362625.
 }
 \keyword{internal}
+\examples{
+g <- list(rules = list(list("E", list("E", "+", "T")),
+                       list("E", list("T")),
+                       list("T", list("id"))),
+          start = "E")
+r <- morie_conflicts(g)
+str(r, max.level = 1)
+}

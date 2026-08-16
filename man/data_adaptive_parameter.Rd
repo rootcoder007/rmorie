@@ -21,3 +21,14 @@ A step of the tldapar_native implementation. No other function in the package ca
 A list with \code{estimate}, \code{psi}, \code{fold_estimates}, \code{fold_parameters}, \code{se}, \code{ci}, \code{V}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+x <- rnorm(50, 1)
+def <- function(train) mean(x[train]) > 1
+est <- function(p, hold) {
+  v <- if (p) x[hold] else -x[hold]
+  list(estimate = mean(v), ic = v - mean(v))
+}
+r <- data_adaptive_parameter(def, est, n = 50, V = 5)
+str(r, max.level = 1)
+}

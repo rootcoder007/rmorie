@@ -44,3 +44,15 @@ Methods in Medical Research 28(6), 1761-1780,
 doi:10.1177/0962280218774936.
 }
 \keyword{internal}
+\examples{
+set.seed(5)
+nc <- 10
+sz <- 4
+cluster <- rep(seq_len(nc), each = sz)
+E <- rep(rep(c(0, 1), nc / 2), each = sz)
+W <- matrix(rnorm(nc * sz * 2), nc * sz, 2)
+A <- E
+y <- plogis(-0.3 + 0.8 * E + 0.4 * W[, 1] + rnorm(nc * sz, 0, 0.5))
+r <- morie_tmlcic_tmle_hierarchical(y, A, E, W, cluster)
+str(r, max.level = 1)
+}

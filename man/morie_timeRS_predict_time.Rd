@@ -52,3 +52,13 @@ Koren, Y. (2008) "Factorization Meets the Neighborhood", *KDD \'08*,
 implemented in :mod:`svdpp`.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+ratings <- cbind(sample(0:4, 60, TRUE), sample(0:5, 60, TRUE),
+                 runif(60, 0, 2000), sample(1:5, 60, TRUE))
+fit <- morie_timeRS_fit_time_bias(ratings, n_users = 5, n_items = 6,
+                                  epochs = 10)
+morie_timeRS_predict_time(fit$mu, fit$b_u[1], fit$alpha_u[1],
+                          fit$t_user[1], fit$b_i[2], fit$item_bins[[2]],
+                          t = 500)
+}

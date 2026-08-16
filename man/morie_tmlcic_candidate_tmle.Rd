@@ -42,3 +42,13 @@ Methods in Medical Research 28(6), 1761-1780,
 doi:10.1177/0962280218774936.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+n <- 40
+W <- matrix(rnorm(n * 2), n, 2)
+A <- rbinom(n, 1, 0.5)
+y <- plogis(-0.3 + 0.8 * A + 0.5 * W[, 1] + rnorm(n, 0, 0.5))
+cand <- list(name = "W1", cols = 0L, interact = FALSE)
+r <- morie_tmlcic_candidate_tmle(y, A, W, cand, g1 = function(i) 0.5)
+str(r, max.level = 1)
+}
