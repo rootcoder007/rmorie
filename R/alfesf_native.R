@@ -17,7 +17,7 @@
 #' source it follows.
 #'
 #' @param x A matrix; passed to \code{as.matrix}.
-#' @param what See Usage.
+#' @param what Passed to \code{sprintf}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
 .alfesf_rows <- function(x, what) {

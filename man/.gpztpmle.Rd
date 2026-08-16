@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{y_positive}{Passed to \code{.gpflat}.}
-\item{tol}{Defaults to \code{1e-12}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-12}.}
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.}
 }
 \description{

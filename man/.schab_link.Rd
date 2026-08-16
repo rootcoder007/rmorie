@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{x}{Numeric; passed to \code{exp}.}
-\item{kind}{See Usage.}
+\item{kind}{Passed to \code{identical}.}
 \item{inverse}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{

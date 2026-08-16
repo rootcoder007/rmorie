@@ -23,3 +23,11 @@ through a model instead of filtering a stationary record.  P is symmetrized each
 A list with \code{states}, \code{covariances}, \code{gains}, \code{innovations}, \code{n}, \code{state_dim}, \code{obs_dim}, \code{p_symmetry_error}, \code{p_symmetrized}, \code{joseph_form}, \code{method}.
 }
 \keyword{internal}
+\examples{
+F <- matrix(0.9)
+H <- matrix(1)
+Q <- matrix(0.1)
+R <- matrix(1)
+Riccati(F, H, Q, R)
+Kalman(z = F, F = F, H = H, Q = Q, R = R)
+}

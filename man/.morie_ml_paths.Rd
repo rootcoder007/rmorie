@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{x}{Carried through into a list the body builds.}
-\item{y}{See Usage.}
+\item{y}{Passed to \code{==}.}
 \item{children}{A vector; indexed elementwise.}
 \item{parents}{A vector; indexed elementwise.}
 }

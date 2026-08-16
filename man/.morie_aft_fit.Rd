@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{t}{A vector; its length is taken.}
-\item{e}{See Usage.}
+\item{e}{Passed to \code{>}.}
 \item{X}{A matrix; passed to \code{as.matrix}.}
 \item{family}{Passed to \code{.morie_aft_log_dens_surv}. Defaults to \code{"weibull"}.}
 \item{max_iter}{Carried through into a list the body builds. Defaults to \code{500L}.}

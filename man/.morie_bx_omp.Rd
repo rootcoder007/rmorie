@@ -11,7 +11,7 @@
 \item{x}{A vector; its length is taken.}
 \item{D}{A matrix; indexed by row and column.}
 \item{sparsity}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
-\item{tol}{See Usage.}
+\item{tol}{Passed to \code{<=}.}
 }
 \description{
 A step of the rangayyan_class2 implementation. Called by \code{DictCode}, \code{KsvdFit}, \code{OmpFit}. See the file header for the source the module follows.

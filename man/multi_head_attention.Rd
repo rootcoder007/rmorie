@@ -9,11 +9,11 @@ multi_head_attention(Q, K, V, n_heads, pad_mask = NULL, causal = FALSE)
 }
 \arguments{
 \item{Q}{A matrix; passed to \code{nrow}.}
-\item{K}{See Usage.}
+\item{K}{Passed to \code{attention_weights}.}
 \item{V}{A matrix; indexed by row and column.}
 \item{n_heads}{Numeric; combined arithmetically in the body.}
-\item{pad_mask}{Defaults to \code{NULL}.}
-\item{causal}{Defaults to \code{FALSE}.}
+\item{pad_mask}{Passed to \code{attention_weights}.}
+\item{causal}{Passed to \code{attention_weights}. Defaults to \code{FALSE}.}
 }
 \description{
 A step of the berte_native implementation. Called by \code{encoder_block}. See the file header for the source the module follows.

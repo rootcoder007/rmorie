@@ -12,7 +12,7 @@ morie_estimate_aipw(data, treatment, outcome, covariates, propensity_col = NULL,
 \item{treatment}{Passed to \code{morie_estimate_propensity_scores}.}
 \item{outcome}{See Usage.}
 \item{covariates}{Passed to \code{morie_estimate_propensity_scores}.}
-\item{propensity_col}{Defaults to \code{NULL}.}
+\item{propensity_col}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{outcome_model}{Passed to \code{.mor_om_fit_predict}. Defaults to \code{c("linear", "logistic")}.}
 \item{trim}{Passed to \code{.mor_trim_ps}. Defaults to \code{c(0.01, 0.99)}.}
 \item{trim_type}{Passed to \code{.mor_trim_ps}. Defaults to \code{"value"}.}

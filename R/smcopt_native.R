@@ -52,10 +52,10 @@ annealing_ladder <- function(n_steps, phi_max = 50.0, phi_min = 0.1,
 #' @param objective The body requires: smcopt: the objective was never evaluated.
 #' @param initial See Usage.
 #' @param n_particles Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
-#' @param n_steps Defaults to \code{30}.
-#' @param phi_max Defaults to \code{50}.
-#' @param phi_min Defaults to \code{0.1}.
-#' @param kind Defaults to \code{"geometric"}.
+#' @param n_steps Passed to \code{annealing_ladder}. Defaults to \code{30}.
+#' @param phi_max Passed to \code{annealing_ladder}. Defaults to \code{50}.
+#' @param phi_min Passed to \code{annealing_ladder}. Defaults to \code{0.1}.
+#' @param kind Passed to \code{annealing_ladder}. Defaults to \code{"geometric"}.
 #' @param kernel Defaults to \code{NULL}.
 #' @param ess_threshold Defaults to \code{0.5}.
 #' @param scheme Defaults to \code{"systematic"}.

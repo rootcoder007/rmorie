@@ -10,7 +10,7 @@
 \arguments{
 \item{v}{A vector; indexed elementwise.}
 \item{lo}{Numeric; combined arithmetically in the body.}
-\item{hi}{See Usage.}
+\item{hi}{Passed to \code{:}.}
 }
 \description{
 exactly as Python\\'s max(range(...), key=...).

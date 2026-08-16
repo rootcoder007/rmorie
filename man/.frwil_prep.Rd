@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{compounds}{Iterated over elementwise, with \code{lapply}.}
-\item{activity}{See Usage.}
+\item{activity}{Passed to \code{unlist}.}
 }
 \description{
 A step of the frwil_native implementation. Called by \code{.frwil_free_wilson}. See the file header for the source the module follows.

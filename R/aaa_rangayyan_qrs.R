@@ -14,7 +14,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Passed to \code{c}.
 #' @param k A count; the body uses it as \code{rep(...)}.
 #' @return A vector, from \code{c}.
 #' @export
@@ -104,7 +104,7 @@
 #' neighbours on each side.
 #'
 #' @param g A vector; its length is taken and its elements indexed.
-#' @param th See Usage.
+#' @param th Passed to \code{<=}.
 #' @param m Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -231,8 +231,8 @@
 #' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param least Defaults to \code{1L}.
-#' @param what Defaults to \code{"signal"}.
+#' @param least Passed to \code{<}. Defaults to \code{1L}.
+#' @param what Passed to \code{sprintf}. Defaults to \code{"signal"}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
 .morie_qrs_check <- function(x, least = 1L, what = "signal") {
@@ -290,7 +290,7 @@
 #'
 #' @param v A vector; indexed elementwise.
 #' @param lo Numeric; combined arithmetically in the body.
-#' @param hi See Usage.
+#' @param hi Passed to \code{:}.
 #' @return A numeric value.
 #' @export
 .morie_qrs_argmax <- function(v, lo, hi) {
@@ -307,7 +307,7 @@
 #'
 #' @param v A vector; indexed elementwise.
 #' @param lo Numeric; combined arithmetically in the body.
-#' @param hi See Usage.
+#' @param hi Passed to \code{:}.
 #' @return A numeric value.
 #' @export
 .morie_qrs_argmin <- function(v, lo, hi) {
@@ -1429,7 +1429,7 @@ PLineNotch <- function(x, fs, f0 = 60, harmonics = 1) {
 #'
 #' @param ppg A vector; its length is taken and its elements indexed.
 #' @param fs Numeric; combined arithmetically in the body.
-#' @param mwin Defaults to \code{16}.
+#' @param mwin Passed to \code{DicNotch}. Defaults to \code{16}.
 #' @return A list with \code{systolic}, \code{notch}, \code{diastolic}, \code{onset}, \code{amplitude}, \code{ac}, \code{dc}, \code{pi}, \code{rate}, \code{fs}, \code{method}.
 #' @export
 PpgFeat <- function(ppg, fs, mwin = 16) {
@@ -1744,7 +1744,7 @@ ApneaEdr <- function(edr, spo2, fs, hours = NULL, mindur = 10, desat = 3) {
 #' read bare.
 #'
 #' @param rr Passed to \code{.morie_qrs_check}.
-#' @param fsr Defaults to \code{4}.
+#' @param fsr Passed to \code{HrvFreq}. Defaults to \code{4}.
 #' @param bands Carried through into a list the body builds. Defaults to \code{"taskforce"}.
 #' @return A list with \code{lfhf}, \code{lf}, \code{hf}, \code{lfpct}, \code{hfpct}, \code{rrvar}, \code{bands}, \code{n}, \code{method}.
 #' @export

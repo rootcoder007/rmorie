@@ -8,10 +8,10 @@
 causscd(Y, treated, t_post, zeta = NULL)
 }
 \arguments{
-\item{Y}{See Usage.}
-\item{treated}{See Usage.}
-\item{t_post}{See Usage.}
-\item{zeta}{Defaults to \code{NULL}.}
+\item{Y}{Passed to \code{sdid}.}
+\item{treated}{Passed to \code{sdid}.}
+\item{t_post}{Passed to \code{sdid}.}
+\item{zeta}{Passed to \code{sdid}.}
 }
 \description{
 A step of the causscd_native implementation. Called by \code{morie_causscd}. See the file header for the source the module follows.

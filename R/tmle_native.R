@@ -20,7 +20,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{pmax}.
 #' @return A numeric value.
 #' @export
 .morie_tmle_expit <- function(x) 1 / (1 + exp(-pmin(pmax(x, -35), 35)))
@@ -32,7 +32,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X Passed to \code{cbind}.
 #' @param y A vector; indexed elementwise.
 #' @param fit_rows See Usage.
 #' @return The value of \code{as.vector}.

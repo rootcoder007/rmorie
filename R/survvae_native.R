@@ -142,7 +142,7 @@
 #' times per restart, each time from the current point -- exactly
 #' mirroring the "for _ in range(6)" loop in fit().
 #'
-#' @param objective See Usage.
+#' @param objective Passed to \code{optim}.
 #' @param x0 A vector; its length is taken.
 #' @param maxit Optional; may be \code{NULL}. Carried through into a list the body builds.
 #' @return A list with \code{x}, \code{value}.

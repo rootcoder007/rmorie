@@ -12,7 +12,7 @@
 \item{ag}{A list; the body reads \code{$rules} from it.}
 \item{first}{Passed to \code{.prsLR_first_seq}.}
 \item{nts}{Passed to \code{.prsLR_first_seq}.}
-\item{k}{See Usage.}
+\item{k}{Passed to \code{==}.}
 }
 \description{
 A step of the prsLR_native implementation. Called by \code{.prsLR_canonical_collection}, \code{.prsLR_goto}, \code{morie_closure}. See the file header for the source the module follows.

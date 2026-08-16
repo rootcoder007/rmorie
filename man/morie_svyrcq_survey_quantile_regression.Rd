@@ -14,8 +14,8 @@ morie_svyrcq_survey_quantile_regression(X, y, tau = 0.5, weights = NULL, add_int
 \item{weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 \item{add_intercept}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.}
-\item{tol}{Defaults to \code{1e-10}.}
-\item{eps}{Defaults to \code{1e-06}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-10}.}
+\item{eps}{Passed to \code{pmax}. Defaults to \code{1e-06}.}
 }
 \description{
 A step of the svyrcq_native implementation. No other function in the package calls it. See the file header for the source the module follows.

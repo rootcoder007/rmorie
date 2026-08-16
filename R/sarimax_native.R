@@ -54,8 +54,8 @@ ROOT_TOL <- 1.001
 #' the source it follows.
 #'
 #' @param w A vector; its length is taken.
-#' @param ar See Usage.
-#' @param ma See Usage.
+#' @param ar Passed to \code{css}.
+#' @param ma Passed to \code{css}.
 #' @return A list with \code{v}, \code{f}.
 #' @export
 .residual_column <- function(w, ar, ma) {
@@ -129,7 +129,7 @@ profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
 #' the source it follows.
 #'
 #' @param X Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
-#' @param n See Usage.
+#' @param n Passed to \code{!=}.
 #' @return The value of \code{cols}, as built in the body.
 #' @export
 .columns <- function(X, n) {
@@ -274,7 +274,7 @@ aic <- function(loglik, n_par) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param loglik See Usage.
+#' @param loglik Passed to \code{aic}.
 #' @param n_par Coerced to integer by the body, with \code{as.integer}.
 #' @param n Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -291,7 +291,7 @@ aicc <- function(loglik, n_par, n) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param d See Usage.
+#' @param d Passed to \code{c}.
 #' @param D Accepted by the signature and not used anywhere in the body.
 #' @param s Coerced to integer by the body, with \code{as.integer}.
 #' @return One of two values, depending on the branch taken.

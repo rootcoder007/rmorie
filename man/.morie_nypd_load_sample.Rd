@@ -8,7 +8,7 @@
 .morie_nypd_load_sample(which = c("arrests", "complaint"))
 }
 \arguments{
-\item{which}{Defaults to \code{c("arrests", "complaint")}.}
+\item{which}{Passed to \code{match.arg}.}
 }
 \description{
 A step of the nypd_analyze implementation. Called by \code{morie_nypd_all_analyses}. See the file header for the source the module follows.

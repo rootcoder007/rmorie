@@ -149,7 +149,7 @@
 #' @param y Numeric; combined arithmetically in the body.
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.
 #' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
-#' @param tol Defaults to \code{1e-13}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-13}.
 #' @param penalty Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export

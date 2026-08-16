@@ -12,8 +12,8 @@ variable_importance(X, Y, screen, effect, V = 5L, seed = 0L)
 \item{Y}{Accepted by the signature and not used anywhere in the body.}
 \item{screen}{Accepted by the signature and not used anywhere in the body.}
 \item{effect}{Accepted by the signature and not used anywhere in the body.}
-\item{V}{Defaults to \code{5L}.}
-\item{seed}{Defaults to \code{0L}.}
+\item{V}{Passed to \code{split_sample}. Defaults to \code{5L}.}
+\item{seed}{Passed to \code{split_sample}. Defaults to \code{0L}.}
 }
 \description{
 A step of the tldapar_native implementation. Called by \code{morie_tldapar}. See the file header for the source the module follows.

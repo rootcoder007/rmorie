@@ -9,12 +9,12 @@ flexible_iptw(A, H, library = NULL, n_folds = 10, meta = "nnls", trim = 0.01, ri
 }
 \arguments{
 \item{A}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{H}{See Usage.}
-\item{library}{Defaults to \code{NULL}.}
-\item{n_folds}{Defaults to \code{10}.}
-\item{meta}{Defaults to \code{"nnls"}.}
+\item{H}{Passed to \code{super_learner}.}
+\item{library}{Passed to \code{super_learner}.}
+\item{n_folds}{Passed to \code{super_learner}. Defaults to \code{10}.}
+\item{meta}{Passed to \code{super_learner}. Defaults to \code{"nnls"}.}
 \item{trim}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.}
-\item{ridge}{Defaults to \code{1e-08}.}
+\item{ridge}{Passed to \code{super_learner}. Defaults to \code{1e-08}.}
 \item{stabilize}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{

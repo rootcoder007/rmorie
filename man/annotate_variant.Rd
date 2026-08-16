@@ -13,8 +13,8 @@ annotate_variant(cds, pos, ref, alt, cds_start = 0, upstream = 5000, downstream 
 \item{ref}{A vector; its length is taken.}
 \item{alt}{A vector; its length is taken.}
 \item{cds_start}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
-\item{upstream}{Defaults to \code{5000}.}
-\item{downstream}{Defaults to \code{5000}.}
+\item{upstream}{Passed to \code{<=}. Defaults to \code{5000}.}
+\item{downstream}{Passed to \code{<=}. Defaults to \code{5000}.}
 \item{transcript_len}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{

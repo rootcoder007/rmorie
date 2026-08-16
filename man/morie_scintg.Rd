@@ -16,7 +16,7 @@ morie_scintg(Z, batches, K = NULL, sigma = 0.1, theta = 2, lam = 1, max_iter = 1
 \item{lam}{Passed to \code{.scintg_correct_batch}. Defaults to \code{1}.}
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.}
 \item{cluster_iter}{Passed to \code{.scintg_maximum_diversity_clustering}. Defaults to \code{25}.}
-\item{tol}{Defaults to \code{1e-04}.}
+\item{tol}{Passed to \code{<=}. Defaults to \code{1e-04}.}
 \item{seed}{Passed to \code{.scintg_maximum_diversity_clustering}. Defaults to \code{0}.}
 \item{reference}{Passed to \code{.scintg_correct_batch}.}
 \item{diversity}{Passed to \code{.scintg_maximum_diversity_clustering}. Defaults to \code{"penalise"}.}

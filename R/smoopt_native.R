@@ -211,7 +211,7 @@ compute_threshold <- function(i1, i2, a1_new, a2_new, alpha, y, E, K, b,
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param K A matrix; indexed by row and column.
 #' @param C Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @param tol Defaults to \code{0.001}.
+#' @param tol Passed to \code{violates_kkt}. Defaults to \code{0.001}.
 #' @param eps Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-05}.
 #' @param max_passes Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
 #' @param seed Passed to \code{.smoopt_make_rng}. Defaults to \code{0}.

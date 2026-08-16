@@ -417,7 +417,7 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #'
 #' @param adj A vector; its length is taken and its elements indexed.
 #' @param vw A vector; indexed elementwise.
-#' @param target See Usage.
+#' @param target Passed to \code{<}.
 #' @param seed Passed to \code{.ghc_rng}.
 #' @param greedy A flag; the body branches on it.
 #' @param n_starts Optional; may be \code{NULL}. A count; the body uses it as \code{seq_len(...)}.
@@ -493,7 +493,7 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #' @param tolerance Numeric; combined arithmetically in the body.
 #' @param boundary A flag; the body branches on it.
 #' @param max_passes Coerced to integer by the body, with \code{as.integer}.
-#' @param patience See Usage.
+#' @param patience Passed to \code{>=}.
 #' @return A list with \code{parts}, \code{cut}.
 #' @export
 .grclus_kl <- function(adj, vw, parts, target, tolerance, boundary,

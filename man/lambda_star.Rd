@@ -10,7 +10,7 @@ lambda_star(dist, hi = 20, tol = 1e-14, max_iter = 300)
 \arguments{
 \item{dist}{A vector; indexed elementwise.}
 \item{hi}{Numeric; combined arithmetically in the body. Defaults to \code{20}.}
-\item{tol}{Defaults to \code{1e-14}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-14}.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{300}.}
 }
 \description{

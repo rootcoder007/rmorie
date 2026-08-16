@@ -19,3 +19,8 @@ A step of the geron_ml_native implementation. Called by \code{morie_geron_convol
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+X <- matrix(c(1, 2, 3, 4), ncol = 1)
+morie_geron_cart_split_cost(X, c(0, 0, 1, 1), 0, 1.5)
+.morie_gr_conv2d_valid(Z = X, K = X, s = X)
+}

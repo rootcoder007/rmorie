@@ -13,10 +13,10 @@
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param X See Usage.
+#' @param X Passed to \code{cbind}.
 #' @param y Numeric; combined arithmetically in the body.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100L}.
-#' @param tol Defaults to \code{1e-09}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-09}.
 #' @return The value of \code{as.vector}.
 #' @export
 .morie_logit_fit <- function(X, y, max_iter = 100L, tol = 1e-9) {
@@ -63,7 +63,7 @@
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param X See Usage.
+#' @param X Passed to \code{cbind}.
 #' @param y A matrix; passed to \code{crossprod}.
 #' @param lam Numeric; combined arithmetically in the body. Defaults to \code{0.001}.
 #' @return A matrix, from \code{solve}.

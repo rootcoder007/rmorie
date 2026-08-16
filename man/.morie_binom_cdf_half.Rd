@@ -8,7 +8,7 @@
 .morie_binom_cdf_half(k, n)
 }
 \arguments{
-\item{k}{See Usage.}
+\item{k}{Passed to \code{<}.}
 \item{n}{Numeric; combined arithmetically in the body.}
 }
 \description{

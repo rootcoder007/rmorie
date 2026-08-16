@@ -8,10 +8,10 @@
 .morie_k05_item_params(a, b, c = NULL, upper = NULL)
 }
 \arguments{
-\item{a}{See Usage.}
+\item{a}{Passed to \code{rep_to}.}
 \item{b}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{c}{Defaults to \code{NULL}.}
-\item{upper}{Defaults to \code{NULL}.}
+\item{c}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{upper}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the k05_tranche2 implementation. Called by \code{morie_tcc}, \code{morie_test_information}. See the file header for the source the module follows.

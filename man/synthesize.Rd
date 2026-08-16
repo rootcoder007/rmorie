@@ -16,7 +16,7 @@ synthesize(target_predict, c, n_features, feature_values = NULL, k_max = NULL, k
 \item{k_min}{Numeric; passed to \code{max}. Defaults to \code{1L}.}
 \item{conf_min}{The body requires: memb: conf_min must lie in (0, 1). Defaults to \code{0.8}.}
 \item{iter_max}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1000L}.}
-\item{rej_max}{Defaults to \code{10L}.}
+\item{rej_max}{Passed to \code{>}. Defaults to \code{10L}.}
 \item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \description{

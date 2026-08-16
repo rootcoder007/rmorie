@@ -9,7 +9,7 @@ sample_acf(x, lags)
 }
 \arguments{
 \item{x}{A vector; its length is taken and its elements indexed.}
-\item{lags}{See Usage.}
+\item{lags}{Passed to \code{unlist}.}
 }
 \description{
 A step of the sarima_native implementation. Called by \code{preliminary_estimates}. See the file header for the source the module follows.

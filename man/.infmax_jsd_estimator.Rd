@@ -8,8 +8,8 @@
 .infmax_jsd_estimator(joint_scores, marginal_scores)
 }
 \arguments{
-\item{joint_scores}{See Usage.}
-\item{marginal_scores}{See Usage.}
+\item{joint_scores}{Passed to \code{unlist}.}
+\item{marginal_scores}{Passed to \code{unlist}.}
 }
 \description{
 A step of the infmax_native implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -107,7 +107,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p Passed to \code{pmax}.
 #' @return A numeric value.
 #' @export
 .tlsate_logit <- function(p) {

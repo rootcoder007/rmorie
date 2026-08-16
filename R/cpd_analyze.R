@@ -40,7 +40,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param which Defaults to \code{c("crime", "arrests")}.
+#' @param which Passed to \code{match.arg}. Defaults to \code{c("crime", "arrests")}.
 #' @return The value of \code{utils::read.csv}.
 #' @export
 .morie_cpd_load_sample <- function(which = c("crime", "arrests")) {

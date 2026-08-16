@@ -8,8 +8,8 @@
 sasimi_counts(fp_a, fp_b)
 }
 \arguments{
-\item{fp_a}{See Usage.}
-\item{fp_b}{See Usage.}
+\item{fp_a}{Passed to \code{sasimi_fingerprint}.}
+\item{fp_b}{Passed to \code{sasimi_fingerprint}.}
 }
 \description{
 A step of the sasimi_native implementation. Called by \code{morie_sasimi}, \code{sasimi_cosine}, \code{sasimi_dice} and 2 others in the module. See the file header for the source the module follows.

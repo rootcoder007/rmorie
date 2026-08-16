@@ -341,8 +341,8 @@ Qnorm <- function(p, mean = 0, sd = 1, lower_tail = TRUE) {
 #' uniform k, so the stream is stable when n changes
 #'
 #' @param n Passed to \code{.morie_random_uniform}.
-#' @param mean Defaults to \code{0}.
-#' @param sd Defaults to \code{1}.
+#' @param mean Passed to \code{Qnorm}. Defaults to \code{0}.
+#' @param sd Passed to \code{Qnorm}. Defaults to \code{1}.
 #' @param seed Passed to \code{.morie_random_uniform}. Defaults to \code{0}.
 #' @param stream Passed to \code{.morie_random_uniform}. Defaults to \code{0}.
 #' @return The value of \code{Qnorm}.
@@ -414,7 +414,7 @@ Qexp <- function(p, rate = 1) {
 #' source it follows.
 #'
 #' @param n Passed to \code{.morie_random_uniform}.
-#' @param rate Defaults to \code{1}.
+#' @param rate Passed to \code{Qexp}. Defaults to \code{1}.
 #' @param seed Passed to \code{.morie_random_uniform}. Defaults to \code{0}.
 #' @param stream Passed to \code{.morie_random_uniform}. Defaults to \code{0}.
 #' @return The value of \code{Qexp}.
@@ -473,8 +473,8 @@ Pgamma <- function(q, shape, rate = 1, lower_tail = TRUE) {
 #' source it follows.
 #'
 #' @param p Iterated over elementwise, with \code{vapply}.
-#' @param shape See Usage.
-#' @param rate Defaults to \code{1}.
+#' @param shape Passed to \code{Pgamma}.
+#' @param rate Passed to \code{Pgamma}. Defaults to \code{1}.
 #' @return A vector, from \code{vapply}.
 #' @export
 Qgamma <- function(p, shape, rate = 1) {
@@ -492,9 +492,9 @@ Qgamma <- function(p, shape, rate = 1) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{Dgamma}.
 #' @param df Numeric; combined arithmetically in the body.
-#' @param log Defaults to \code{FALSE}.
+#' @param log Passed to \code{Dgamma}. Defaults to \code{FALSE}.
 #' @return The value of \code{Dgamma}.
 #' @export
 Dchisq <- function(x, df, log = FALSE) Dgamma(x, df / 2, 0.5, log)
@@ -504,9 +504,9 @@ Dchisq <- function(x, df, log = FALSE) Dgamma(x, df / 2, 0.5, log)
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param q See Usage.
+#' @param q Passed to \code{Pgamma}.
 #' @param df Numeric; combined arithmetically in the body.
-#' @param lower_tail Defaults to \code{TRUE}.
+#' @param lower_tail Passed to \code{Pgamma}. Defaults to \code{TRUE}.
 #' @return The value of \code{Pgamma}.
 #' @export
 Pchisq <- function(q, df, lower_tail = TRUE) {
@@ -518,7 +518,7 @@ Pchisq <- function(q, df, lower_tail = TRUE) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p Passed to \code{Qgamma}.
 #' @param df Numeric; combined arithmetically in the body.
 #' @return The value of \code{Qgamma}.
 #' @export
@@ -532,7 +532,7 @@ Qchisq <- function(p, df) Qgamma(p, df / 2, 0.5)
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{round}.
 #' @param lambda Numeric; passed to \code{log}.
 #' @param log A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return One of two values, depending on the branch taken.
@@ -577,7 +577,7 @@ Ppois <- function(q, lambda, lower_tail = TRUE) {
 #' source it follows.
 #'
 #' @param p Iterated over elementwise, with \code{vapply}.
-#' @param lambda See Usage.
+#' @param lambda Passed to \code{Ppois}.
 #' @return A vector, from \code{vapply}.
 #' @export
 Qpois <- function(p, lambda) {
@@ -596,7 +596,7 @@ Qpois <- function(p, lambda) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{round}.
 #' @param size Numeric; combined arithmetically in the body.
 #' @param prob Numeric; passed to \code{log}.
 #' @param log A flag; the body branches on it. Defaults to \code{FALSE}.
@@ -655,8 +655,8 @@ Pbinom <- function(q, size, prob, lower_tail = TRUE) {
 #' source it follows.
 #'
 #' @param p Iterated over elementwise, with \code{vapply}.
-#' @param size See Usage.
-#' @param prob See Usage.
+#' @param size Passed to \code{<}.
+#' @param prob Passed to \code{Pbinom}.
 #' @return A vector, from \code{vapply}.
 #' @export
 Qbinom <- function(p, size, prob) {
@@ -715,8 +715,8 @@ Pbeta <- function(q, shape1, shape2, lower_tail = TRUE) {
 #' source it follows.
 #'
 #' @param p Iterated over elementwise, with \code{vapply}.
-#' @param shape1 See Usage.
-#' @param shape2 See Usage.
+#' @param shape1 Passed to \code{Pbeta}.
+#' @param shape2 Passed to \code{Pbeta}.
 #' @return A vector, from \code{vapply}.
 #' @export
 Qbeta <- function(p, shape1, shape2) {
@@ -775,7 +775,7 @@ Pt <- function(q, df, lower_tail = TRUE) {
 #' 0.5 there, and both bisection and Newton are blind inside it.
 #'
 #' @param p Iterated over elementwise, with \code{vapply}.
-#' @param df See Usage.
+#' @param df Passed to \code{Pt}.
 #' @return A vector, from \code{vapply}.
 #' @export
 Qt <- function(p, df) {
@@ -824,8 +824,8 @@ Pf <- function(q, df1, df2, lower_tail = TRUE) {
 #' source it follows.
 #'
 #' @param p Iterated over elementwise, with \code{vapply}.
-#' @param df1 See Usage.
-#' @param df2 See Usage.
+#' @param df1 Passed to \code{Pf}.
+#' @param df2 Passed to \code{Pf}.
 #' @return A vector, from \code{vapply}.
 #' @export
 Qf <- function(p, df1, df2) {

@@ -9,9 +9,9 @@
 }
 \arguments{
 \item{window}{A vector; its length is taken.}
-\item{H}{See Usage.}
-\item{blocks}{See Usage.}
-\item{ridge}{Defaults to \code{1e-08}.}
+\item{H}{Passed to \code{nbeats_stack}.}
+\item{blocks}{Passed to \code{nbeats_stack}.}
+\item{ridge}{Passed to \code{nbeats_stack}. Defaults to \code{1e-08}.}
 }
 \description{
 does (morie.fn.ngnest imports nbeats_stack from morie.fn.nbeats). The local copy that used to live here normalised trend time by (lb - 1) rather than lb and built the Fourier basis on max(H, lb) with 1-based time, so its forecasts drifted from the spec.

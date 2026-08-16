@@ -9,7 +9,7 @@ merge_panels(panels, study_snps)
 }
 \arguments{
 \item{panels}{A vector; its length is taken and its elements indexed.}
-\item{study_snps}{See Usage.}
+\item{study_snps}{Passed to \code{unique}.}
 }
 \description{
 A step of the impfun_native implementation. No other function in the package calls it. See the file header for the source the module follows.

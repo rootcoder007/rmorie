@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{v}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{name}{Defaults to \code{"x"}.}
+\item{name}{Passed to \code{stop}. Defaults to \code{"x"}.}
 }
 \description{
 A step of the rangayyan_class2 implementation. Called by \code{Ahi}, \code{BPursuit}, \code{CadPipe} and 14 others in the module. See the file header for the source the module follows.

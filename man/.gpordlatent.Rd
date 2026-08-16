@@ -9,9 +9,9 @@
 }
 \arguments{
 \item{n}{A count; the body uses it as \code{seq_len(...)}.}
-\item{X_E}{Defaults to \code{NULL}.}
-\item{X}{Defaults to \code{NULL}.}
-\item{X_EM}{Defaults to \code{NULL}.}
+\item{X_E}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{X}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{X_EM}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{Z_L}{Optional; may be \code{NULL}. Passed to \code{.gpmat}.}
 \item{L_g}{Optional; may be \code{NULL}. Passed to \code{.gpmat}.}
 }

@@ -14,7 +14,7 @@
 #'
 #' @param D2 A matrix; indexed by row and column.
 #' @param perp Numeric; passed to \code{log}.
-#' @param tol Defaults to \code{1e-05}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-05}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60}.
 #' @return The value of \code{P}, as built in the body.
 #' @export

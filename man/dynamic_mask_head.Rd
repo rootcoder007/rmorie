@@ -10,7 +10,7 @@ dynamic_mask_head(output_token, image_grid_vectors, mlp = NULL)
 \arguments{
 \item{output_token}{Passed to \code{.samdec_vec}.}
 \item{image_grid_vectors}{A matrix; passed to \code{as.matrix}.}
-\item{mlp}{Defaults to \code{NULL}.}
+\item{mlp}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the samdec_native implementation. Called by \code{decode_mask}. See the file header for the source the module follows.

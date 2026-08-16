@@ -12,7 +12,7 @@ sdid(Y, treated, t_post, method = "sdid", zeta = NULL)
 \item{treated}{Passed to \code{.causscd_grid}.}
 \item{t_post}{A count; the body uses it as \code{seq_len(...)}.}
 \item{method}{One of \code{"did"}, \code{"sc"}, \code{"sdid"}. Defaults to \code{"sdid"}.}
-\item{zeta}{Defaults to \code{NULL}.}
+\item{zeta}{Passed to \code{unit_weights}.}
 }
 \description{
 A step of the causscd_native implementation. Called by \code{causscd}. See the file header for the source the module follows.

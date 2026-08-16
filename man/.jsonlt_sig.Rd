@@ -8,7 +8,7 @@
 .jsonlt_sig(digits)
 }
 \arguments{
-\item{digits}{See Usage.}
+\item{digits}{Passed to \code{inherits}.}
 }
 \description{
 jsonlite\\'s digits = I(n). Anything else is decimal places.

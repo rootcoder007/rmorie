@@ -8,10 +8,10 @@
 compare_scaling(x_a, y_a, x_b, y_b, label_a = "A", label_b = "B")
 }
 \arguments{
-\item{x_a}{See Usage.}
-\item{y_a}{See Usage.}
-\item{x_b}{See Usage.}
-\item{y_b}{See Usage.}
+\item{x_a}{Passed to \code{fit_power_law}.}
+\item{y_a}{Passed to \code{fit_power_law}.}
+\item{x_b}{Passed to \code{fit_power_law}.}
+\item{y_b}{Passed to \code{fit_power_law}.}
 \item{label_a}{Defaults to \code{"A"}.}
 \item{label_b}{Defaults to \code{"B"}.}
 }

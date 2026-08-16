@@ -35,3 +35,12 @@ List with \code{x_prev}, \code{mean}, \code{noise_term}, \code{eps_coef},
 \description{
 \verb{x_\{t-1\}} = (x_t - ((1-a_t)/sqrt(1-ab_t)) eps) / sqrt(a_t) + sigma z.
 }
+\examples{
+alpha <- rep(0.98, 10)
+alpha_bar <- cumprod(alpha)
+morie_geron_ddpm_reverse_step(c(0.4, -0.2, 0.9), t = 3,
+                              eps_pred = c(0.1, -0.05, 0.2),
+                              alpha = alpha, alpha_bar = alpha_bar,
+                              sigma = sqrt(1 - alpha[4]),
+                              z = c(0.3, -0.1, 0.2))
+}

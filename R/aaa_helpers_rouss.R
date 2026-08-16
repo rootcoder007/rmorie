@@ -268,7 +268,7 @@
 #'
 #' @param n Numeric; combined arithmetically in the body.
 #' @param k A count; the body uses it as \code{seq_len(...)}.
-#' @param cap Defaults to \code{NULL}.
+#' @param cap Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{repeat}.
 #' @export
 .rscombos <- function(n, k, cap = NULL) {
@@ -516,7 +516,7 @@
 #' @param n Numeric; combined arithmetically in the body.
 #' @param k A count; the body uses it as \code{seq_len(...)}.
 #' @param want Numeric; combined arithmetically in the body.
-#' @param max_walk Defaults to \code{5e+06}.
+#' @param max_walk Passed to \code{>}. Defaults to \code{5e+06}.
 #' @return The value of \code{repeat}.
 #' @export
 .rscombosstride <- function(n, k, want, max_walk = 5000000) {

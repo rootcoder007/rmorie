@@ -8,7 +8,7 @@
 starting_models(d, D, s)
 }
 \arguments{
-\item{d}{See Usage.}
+\item{d}{Passed to \code{c}.}
 \item{D}{Accepted by the signature and not used anywhere in the body.}
 \item{s}{Coerced to integer by the body, with \code{as.integer}.}
 }

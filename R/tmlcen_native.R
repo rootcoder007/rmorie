@@ -193,7 +193,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param payload See Usage.
+#' @param payload Passed to \code{class}.
 #' @return The value of \code{payload}, as built in the body.
 #' @export
 .tmlcen_RichResult <- function(payload) {
@@ -377,8 +377,8 @@ morie_censoring_survival <- function(times, censored, A = NULL, W = NULL,
 #' @param A Coerced to numeric by the body, with \code{as.numeric}.
 #' @param times Passed to \code{.tmlcen_coerce_subject_list}.
 #' @param deltas Passed to \code{.tmlcen_coerce_subject_list}.
-#' @param a Defaults to \code{1}.
-#' @param r Defaults to \code{NULL}.
+#' @param a Passed to \code{!=}. Defaults to \code{1}.
+#' @param r Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param g Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param gc Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param ridge Passed to \code{.tmlcen_logit_irls}. Defaults to \code{1e-08}.

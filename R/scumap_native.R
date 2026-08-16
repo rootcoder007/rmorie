@@ -82,7 +82,7 @@
 #' @param distances Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n_neighbors Coerced to integer by the body, with \code{as.integer}.
 #' @param rho Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
-#' @param tol Defaults to \code{1e-05}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-05}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{64}.
 #' @param min_scale Numeric; combined arithmetically in the body. Defaults to \code{0.001}.
 #' @return A list with \code{sigma}, \code{rho}.
@@ -327,7 +327,7 @@ morie_scumap_fit_ab <- function(min_dist=0.1, spread=1.0, n_grid=300,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Passed to \code{>}.
 #' @param lim Numeric; combined arithmetically in the body. Defaults to \code{4}.
 #' @return The value of \code{v}, as built in the body.
 #' @export

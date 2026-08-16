@@ -8,7 +8,7 @@
 .b2margerr(T, a, b)
 }
 \arguments{
-\item{T}{See Usage.}
+\item{T}{Passed to \code{rowSums}.}
 \item{a}{Numeric; combined arithmetically in the body.}
 \item{b}{Numeric; combined arithmetically in the body.}
 }

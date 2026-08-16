@@ -11,7 +11,7 @@
 \item{n}{Numeric; combined arithmetically in the body.}
 \item{k}{A count; the body uses it as \code{seq_len(...)}.}
 \item{want}{Numeric; combined arithmetically in the body.}
-\item{max_walk}{Defaults to \code{5e+06}.}
+\item{max_walk}{Passed to \code{>}. Defaults to \code{5e+06}.}
 }
 \description{
 the same order -- while spreading the seeds over the whole index range the way random draws would.

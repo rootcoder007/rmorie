@@ -8,9 +8,9 @@
 .hdb_points_under(node, children, n)
 }
 \arguments{
-\item{node}{See Usage.}
+\item{node}{Passed to \code{c}.}
 \item{children}{A vector; indexed elementwise.}
-\item{n}{See Usage.}
+\item{n}{Passed to \code{<}.}
 }
 \description{
 A step of the hdbsc_native implementation. Called by \code{morie_hdbsc}. See the file header for the source the module follows.

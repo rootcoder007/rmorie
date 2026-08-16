@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{cb}{See Usage.}
+\item{cb}{Passed to \code{outer}.}
 }
 \description{
 A step of the tqkmse implementation. Called by \code{Kvmse}, \code{Kvquant}, \code{Vcquant}. See the file header for the source the module follows.

@@ -79,7 +79,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
+#' @param t Passed to \code{>=}.
 #' @param age_breaks See Usage.
 #' @return The value of \code{j}, as built in the body.
 #' @export
@@ -102,7 +102,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t See Usage.
+#' @param t Passed to \code{<}.
 #' @param exposure Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param risk_periods A matrix; indexed by row and column.
 #' @return A numeric value.
@@ -338,7 +338,7 @@ morie_sccsno_loglik <- function(params, cells_by_person, n_risk, n_age) {
 #' @param risk_periods Passed to \code{.sccsno_rp}.
 #' @param age_breaks Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{c()}.
 #' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
-#' @param tol Defaults to \code{1e-10}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-10}.
 #' @param ridge A matrix; passed to \code{diag}. Defaults to \code{1e-10}.
 #' @return A list with \code{estimate}, \code{relative_incidence}, \code{log_ri}, \code{se_log_ri}, \code{age_effects}, \code{se_age}, \code{coef}, \code{se}, \code{loglik}, \code{n_cases}, \code{converged}, \code{iterations}, \code{n_risk_periods}, \code{n_age_bands}, \code{method}, \code{conditions_out}.
 #' @export

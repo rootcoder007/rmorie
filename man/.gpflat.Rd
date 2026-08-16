@@ -8,7 +8,7 @@
 .gpflat(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{unlist}.}
 }
 \description{
 A step of the helpers_gp_core implementation. Called by \code{.gpblueblup}, \code{.gpbrier}, \code{.gpconf} and 17 others in the module. See the file header for the source the module follows.

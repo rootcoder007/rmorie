@@ -8,7 +8,7 @@
 .schab_objective(kind, lags, ghat, counts, model)
 }
 \arguments{
-\item{kind}{See Usage.}
+\item{kind}{Passed to \code{identical}.}
 \item{lags}{A vector; indexed elementwise.}
 \item{ghat}{A vector; indexed elementwise.}
 \item{counts}{A vector; indexed elementwise.}

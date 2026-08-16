@@ -8,7 +8,7 @@
 .anm_resid(x, y)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{outer}.}
 \item{y}{A matrix; passed to \code{\%*\%}.}
 }
 \description{

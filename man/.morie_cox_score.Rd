@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{ts}{A vector; indexed elementwise.}
-\item{es}{See Usage.}
+\item{es}{Passed to \code{==}.}
 \item{Xs}{A matrix; indexed by row and column.}
 \item{beta}{A matrix; passed to \code{\%*\%}.}
 \item{offs}{Numeric; combined arithmetically in the body.}

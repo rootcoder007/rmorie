@@ -21,3 +21,12 @@ symmetrized every sample: in exact arithmetic the update preserves symmetry, in 
 A list with \code{e}, \code{output}, \code{y}, \code{final_weights}, \code{P}, \code{order}, \code{lam}, \code{delta}, \code{memory}, \code{p_symmetry_error}, \code{p_symmetrized}, \code{input_power}, \code{output_power}, \code{power_reduction}, \code{method}.
 }
 \keyword{internal}
+\examples{
+sine_a <- function(n, cycles, amp = 1, phase = 0) amp * sin(2 * 
+    pi * cycles * (0:(n - 1))/n + phase)
+n <- 400
+v <- sine_a(256, 3)
+ref <- sine_a(n, 61)
+Anc(v + 0.8 * ref, ref, order = 4, mu = 0.005)
+RlsFilt(primary = ref, reference = ref)
+}

@@ -11,7 +11,7 @@ LogReg(X, y, maxiter = 100, tol = 1e-08, ridge = 1e-08)
 \item{X}{A matrix; passed to \code{as.matrix}.}
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{maxiter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.}
-\item{tol}{Defaults to \code{1e-08}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-08}.}
 \item{ridge}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-08}.}
 }
 \description{

@@ -8,11 +8,11 @@
 CwtRidge(x, fs = 1, scales = NULL, wavelet = "mexh", w0 = 5, min_prominence = 0.1)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{fs}{Defaults to \code{1}.}
-\item{scales}{Defaults to \code{NULL}.}
+\item{x}{Passed to \code{Scalogram}.}
+\item{fs}{Passed to \code{Scalogram}. Defaults to \code{1}.}
+\item{scales}{Passed to \code{Scalogram}.}
 \item{wavelet}{The body requires: the signal has no wavelet energy at any scale. Defaults to \code{"mexh"}.}
-\item{w0}{Defaults to \code{5}.}
+\item{w0}{Passed to \code{Scalogram}. Defaults to \code{5}.}
 \item{min_prominence}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.}
 }
 \description{

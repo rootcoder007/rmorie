@@ -335,7 +335,7 @@ morie_geron_hf_trainer <- function(model, args = list(), train_ds, eval_ds = NUL
 #' the source it follows.
 #'
 #' @param x A vector; its length is taken.
-#' @param w See Usage.
+#' @param w Passed to \code{tapply}.
 #' @param minlength A count; the body uses it as \code{numeric(...)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -376,7 +376,7 @@ morie_geron_hf_trainer <- function(model, args = list(), train_ds, eval_ds = NUL
 #' @param grad Numeric; passed to \code{sum}.
 #' @param hess Numeric; passed to \code{sum}.
 #' @param n_bins Numeric; combined arithmetically in the body.
-#' @param min_leaf See Usage.
+#' @param min_leaf Passed to \code{>=}.
 #' @return A list with \code{gain}, \code{feature}, \code{bin0}.
 #' @export
 .morie_gr_w4b_hgb_best_split <- function(binned, grad, hess, n_bins, min_leaf) {
@@ -653,10 +653,10 @@ morie_geron_hidden_layers_heuristic <- function(model, X, y, max_layers = 10, mi
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param param_grid See Usage.
+#' @param param_grid Passed to \code{names}.
 #' @param X Passed to \code{.morie_gr_mat}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
-#' @param estimator Defaults to \code{NULL}.
+#' @param estimator Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param K Passed to \code{morie_geron_cross_validation_score}. Defaults to \code{3}.
 #' @param score Passed to \code{morie_geron_cross_validation_score}.
 #' @return A list with \code{best_params}, \code{best_score}, \code{results}, \code{n_candidates}, \code{n_fits}, \code{estimate}, \code{n}, \code{method}.

@@ -21,3 +21,10 @@ equality constraint sum a_i y_i = 0 that single-coordinate updates cannot
 A list with \code{a}, \code{b}, \code{it}.
 }
 \keyword{internal}
+\examples{
+XC <- matrix(c(1, 1, 1.4, 0.8, 0.7, 1.3, 1.1, 1.6, 3, 3, 3.3, 
+    2.7, 2.6, 3.2, 3.1, 3.5), ncol = 2, byrow = TRUE)
+YC <- c(0, 0, 0, 0, 1, 1, 1, 1)
+FishLda(XC, YC)
+.morie_rg_smo(K = XC, ys = XC, Cv = XC, maxiter = YC, tol = XC)
+}

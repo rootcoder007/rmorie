@@ -8,7 +8,7 @@
 .depth_counts(tree, max_depth, d)
 }
 \arguments{
-\item{tree}{See Usage.}
+\item{tree}{Passed to \code{walk}.}
 \item{max_depth}{A count; the body uses it as \code{seq_len(...)}.}
 \item{d}{A count; the body uses it as \code{numeric(...)}.}
 }

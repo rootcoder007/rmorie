@@ -11,7 +11,7 @@
 \item{a}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{b}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{c}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{who}{See Usage.}
+\item{who}{Passed to \code{paste0}.}
 }
 \description{
 A step of the hampw implementation. Called by \code{Hampel}, \code{Hampw}. See the file header for the source the module follows.

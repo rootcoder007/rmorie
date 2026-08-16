@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{fit}{A list; the body reads \code{$coefficients}, \code{$groups}, \code{$n_positions} from it.}
-\item{compound}{See Usage.}
+\item{compound}{Passed to \code{unlist}.}
 }
 \description{
 A step of the frwil_native implementation. No other function in the package calls it. See the file header for the source the module follows.

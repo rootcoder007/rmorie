@@ -8,11 +8,11 @@
 .tncomp_select(fps, k, objective, seed = NULL, D = NULL)
 }
 \arguments{
-\item{fps}{See Usage.}
+\item{fps}{Passed to \code{distance_matrix}.}
 \item{k}{Coerced to integer by the body, with \code{as.integer}.}
 \item{objective}{Compared against \code{"maxmin"}.}
 \item{seed}{Passed to \code{.tncomp_seed}.}
-\item{D}{Defaults to \code{NULL}.}
+\item{D}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the tncomp_native implementation. Called by \code{maxmin_selection}, \code{maxsum_selection}, \code{morie_tncomp}. See the file header for the source the module follows.

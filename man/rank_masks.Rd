@@ -9,8 +9,8 @@ rank_masks(masks, predicted_iou, target = NULL)
 }
 \arguments{
 \item{masks}{A vector; its length is taken.}
-\item{predicted_iou}{See Usage.}
-\item{target}{Defaults to \code{NULL}.}
+\item{predicted_iou}{Passed to \code{unlist}.}
+\item{target}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the sammkr_native implementation. No other function in the package calls it. See the file header for the source the module follows.

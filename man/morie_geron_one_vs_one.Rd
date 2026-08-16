@@ -23,3 +23,10 @@ List with \code{predictions}, \code{votes}, \code{classes}, \code{pairs},
 K(K-1)/2 pairwise duels; a positive score votes for the SECOND class
 of the pair, ties in the vote count go to the lowest class index.
 }
+\examples{
+X <- matrix(c(1, 2, 1, 3, 1, 5, 1, 7), 4, byrow = TRUE)
+y <- c(2, 3, 6, 9)
+th <- c(0.5, 1.1)
+morie_geron_elastic_net_cost(X, y, th, 0.4, 0.6)
+morie_geron_one_vs_one(X = X, y = y)
+}

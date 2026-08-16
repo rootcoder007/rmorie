@@ -12,7 +12,7 @@
 \item{a}{Accepted by the signature and not used anywhere in the body.}
 \item{s_next}{A vector; its length is taken and its elements indexed.}
 \item{g}{A vector; its length is taken and its elements indexed.}
-\item{tol}{See Usage.}
+\item{tol}{Passed to \code{>}.}
 }
 \description{
 A step of the hindsr_native implementation. Called by \code{hindsr}. See the file header for the source the module follows.

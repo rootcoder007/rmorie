@@ -20,7 +20,7 @@
 #' the source it follows.
 #'
 #' @param x A matrix; passed to \code{as.matrix}.
-#' @param what See Usage.
+#' @param what Passed to \code{sprintf}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
 .agalfsy_coords <- function(x, what) {
@@ -75,7 +75,7 @@
 #' the source it follows.
 #'
 #' @param P A matrix; indexed by row and column.
-#' @param axis See Usage.
+#' @param axis Passed to \code{==}.
 #' @param deg Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -162,8 +162,8 @@
 #' @param receptor Passed to \code{.agalfsy_coords}.
 #' @param ligand Passed to \code{.agalfsy_coords}.
 #' @param site Optional; may be \code{NULL}. Passed to \code{.agalfsy_coords}.
-#' @param policy Defaults to \code{NULL}.
-#' @param critic Defaults to \code{NULL}.
+#' @param policy Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param critic Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param max_steps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{600L}.
 #' @param min_steps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{300L}.
 #' @param window Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50L}.

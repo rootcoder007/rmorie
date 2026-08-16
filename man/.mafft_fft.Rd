@@ -8,7 +8,7 @@
 .mafft_fft(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{fft}.}
 }
 \description{
 A step of the mafft_native implementation. Called by \code{.mafft_xcorr_fft}. See the file header for the source the module follows.

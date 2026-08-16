@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{friends}{A vector; indexed elementwise.}
-\item{i}{See Usage.}
+\item{i}{Passed to \code{setdiff}.}
 }
 \description{
 A step of the tlnet1_native implementation. Called by \code{.tlnet1_count_edges}, \code{check_network_assumption}, \code{friend_summary} and 1 others in the module. See the file header for the source the module follows.

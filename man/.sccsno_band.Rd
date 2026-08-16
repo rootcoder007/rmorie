@@ -8,7 +8,7 @@
 .sccsno_band(t, age_breaks)
 }
 \arguments{
-\item{t}{See Usage.}
+\item{t}{Passed to \code{>=}.}
 \item{age_breaks}{See Usage.}
 }
 \description{

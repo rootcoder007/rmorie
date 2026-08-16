@@ -10,7 +10,7 @@
 \arguments{
 \item{ps}{A vector; its length is taken.}
 \item{trim}{Optional; may be \code{NULL}. A vector; indexed elementwise. Defaults to \code{c(0.1, 0.9)}.}
-\item{trim_type}{Defaults to \code{"value"}.}
+\item{trim_type}{Passed to \code{identical}. Defaults to \code{"value"}.}
 }
 \description{
 CHANGES THE ESTIMAND.  The result is no longer the ATE on the whole sample but the ATE on the retained subpopulation -- which is the entire point of their Sec. 5, since that subpopulation is the one the data can actually identify.  The estimators report n_discarded and an estimand note whenever this route is taken.

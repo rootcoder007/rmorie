@@ -332,7 +332,7 @@ is_curriculum <- function(weights, p = NULL, tol = 1e-12) {
 #' @param X_test Optional; may be \code{NULL}. Passed to \code{.prgrl_to_rows}.
 #' @param y_test Passed to \code{.prgrl_to_vec}.
 #' @param updates Passed to \code{.prgrl_perceptron}. Defaults to \code{200}.
-#' @param n_steps Defaults to \code{5}.
+#' @param n_steps Passed to \code{curriculum_schedule}. Defaults to \code{5}.
 #' @param seed Passed to \code{.prgrl_rng}. Defaults to \code{0}.
 #' @param n_repeats Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50}.
 #' @param order One of \code{"sampled"}, \code{"sorted"}. Defaults to \code{"sampled"}.

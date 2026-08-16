@@ -8,15 +8,15 @@
 build_tree(theta, r, logu, v, j, eps, logp, grad, rnd, joint0)
 }
 \arguments{
-\item{theta}{See Usage.}
-\item{r}{See Usage.}
+\item{theta}{Passed to \code{leapfrog}.}
+\item{r}{Passed to \code{leapfrog}.}
 \item{logu}{Numeric; combined arithmetically in the body.}
 \item{v}{Numeric; combined arithmetically in the body.}
 \item{j}{Numeric; combined arithmetically in the body.}
 \item{eps}{Numeric; combined arithmetically in the body.}
 \item{logp}{Passed to \code{.joint}.}
-\item{grad}{See Usage.}
-\item{rnd}{See Usage.}
+\item{grad}{Passed to \code{leapfrog}.}
+\item{rnd}{Passed to \code{build_tree}.}
 \item{joint0}{Numeric; combined arithmetically in the body.}
 }
 \description{

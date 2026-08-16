@@ -43,7 +43,7 @@ PRIORS <- c("uniform", "gaussian", "laplacian", "ising")
 #' source it follows.
 #'
 #' @param A A matrix; passed to \code{nrow}.
-#' @param b See Usage.
+#' @param b Passed to \code{cbind}.
 #' @return A numeric value.
 #' @export
 .solve <- function(A, b) {
@@ -183,7 +183,7 @@ policy_iteration <- function(T, R, gamma, policy = NULL, max_iter = 200) {
 #' @param r_max Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @param J Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
 #' @param H Numeric; combined arithmetically in the body. Defaults to \code{0}.
-#' @param neighbours Defaults to \code{NULL}.
+#' @param neighbours Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A numeric value.
 #' @export
 log_prior <- function(R, prior = "uniform", scale = 1, r_max = NULL,
@@ -233,11 +233,11 @@ log_prior <- function(R, prior = "uniform", scale = 1, r_max = NULL,
 #' @param n_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1000}.
 #' @param delta Numeric; combined arithmetically in the body. Defaults to \code{0.25}.
 #' @param alpha Passed to \code{.birl_log_likelihood}. Defaults to \code{1}.
-#' @param prior Defaults to \code{"uniform"}.
-#' @param scale Defaults to \code{1}.
+#' @param prior Passed to \code{log_prior}. Defaults to \code{"uniform"}.
+#' @param scale Passed to \code{log_prior}. Defaults to \code{1}.
 #' @param r_max Optional; may be \code{NULL}. Numeric; combined arithmetically in the body. Defaults to \code{1}.
-#' @param J Defaults to \code{0.1}.
-#' @param H Defaults to \code{0}.
+#' @param J Passed to \code{log_prior}. Defaults to \code{0.1}.
+#' @param H Passed to \code{log_prior}. Defaults to \code{0}.
 #' @param burn Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param R0 Optional; may be \code{NULL}. Iterated over elementwise, with \code{vapply}.
@@ -313,17 +313,17 @@ policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
 #' @param T Passed to \code{.mdp}.
 #' @param observations Iterated over elementwise, with \code{lapply}.
 #' @param gamma Passed to \code{.mdp}. Defaults to \code{0.9}.
-#' @param n_iter Defaults to \code{1000}.
+#' @param n_iter Passed to \code{policy_walk}. Defaults to \code{1000}.
 #' @param delta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.25}.
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param prior Carried through into a list the body builds. Defaults to \code{"uniform"}.
-#' @param scale Defaults to \code{1}.
-#' @param r_max Defaults to \code{1}.
-#' @param J Defaults to \code{0.1}.
-#' @param H Defaults to \code{0}.
-#' @param burn Defaults to \code{NULL}.
-#' @param seed Defaults to \code{0}.
-#' @param R0 Defaults to \code{NULL}.
+#' @param scale Passed to \code{policy_walk}. Defaults to \code{1}.
+#' @param r_max Passed to \code{policy_walk}. Defaults to \code{1}.
+#' @param J Passed to \code{policy_walk}. Defaults to \code{0.1}.
+#' @param H Passed to \code{policy_walk}. Defaults to \code{0}.
+#' @param burn Passed to \code{policy_walk}.
+#' @param seed Passed to \code{policy_walk}. Defaults to \code{0}.
+#' @param R0 Passed to \code{policy_walk}.
 #' @return A list with \code{estimate}, \code{reward_mean}, \code{reward_sd}, \code{policy}, \code{V}, \code{Q}, \code{samples}, \code{acceptance}, \code{policy_iterations}, \code{n_proposals}, \code{n_samples}, \code{prior}, \code{alpha}, \code{delta}, \code{method}, \code{note}.
 #' @export
 birl <- function(T, observations, gamma = 0.9, n_iter = 1000, delta = 0.25,

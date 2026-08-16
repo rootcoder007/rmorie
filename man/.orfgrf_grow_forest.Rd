@@ -11,7 +11,7 @@
 \item{X}{Passed to \code{.grow_one_tree}.}
 \item{y}{A vector; its length is taken.}
 \item{W}{Accepted by the signature and not used anywhere in the body.}
-\item{kind}{Defaults to \code{"double-sample"}.}
+\item{kind}{Passed to \code{identical}. Defaults to \code{"double-sample"}.}
 \item{n_trees}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.}
 \item{min_leaf}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.}
 \item{alpha}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}

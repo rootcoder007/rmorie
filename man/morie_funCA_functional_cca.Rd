@@ -10,8 +10,8 @@ morie_funCA_functional_cca(X, Y, p = NULL, q = NULL)
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
 \item{Y}{A matrix; passed to \code{as.matrix}.}
-\item{p}{Defaults to \code{NULL}.}
-\item{q}{Defaults to \code{NULL}.}
+\item{p}{Passed to \code{pick}.}
+\item{q}{Passed to \code{pick}.}
 }
 \description{
 A step of the funCA_native implementation. No other function in the package calls it. See the file header for the source the module follows.

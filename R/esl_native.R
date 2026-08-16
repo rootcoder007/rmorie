@@ -11,7 +11,7 @@
 #' source it follows.
 #'
 #' @param X A matrix; passed to \code{ncol}.
-#' @param mu See Usage.
+#' @param mu Passed to \code{sweep}.
 #' @param S A matrix; passed to \code{chol}.
 #' @return A numeric value.
 #' @export

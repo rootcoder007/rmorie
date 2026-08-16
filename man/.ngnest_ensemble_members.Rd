@@ -11,7 +11,7 @@
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{horizon}{Coerced to integer by the body, with \code{as.integer}.}
 \item{lookback_multiples}{Defaults to \code{c(2, 3, 4, 5, 6, 7)}.}
-\item{block_sets}{Defaults to \code{NULL}.}
+\item{block_sets}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{ridge}{Passed to \code{.ngnest_nbeats_stack}. Defaults to \code{1e-08}.}
 }
 \description{

@@ -8,8 +8,8 @@
 rate(scores, priority, weight = "autoc")
 }
 \arguments{
-\item{scores}{See Usage.}
-\item{priority}{See Usage.}
+\item{scores}{Passed to \code{toc_curve}.}
+\item{priority}{Passed to \code{toc_curve}.}
 \item{weight}{Compared against \code{"qini"}. Defaults to \code{"autoc"}.}
 }
 \description{

@@ -10,7 +10,7 @@
 \arguments{
 \item{v}{A vector; indexed elementwise.}
 \item{groups}{A vector; its length is taken and its elements indexed.}
-\item{name}{See Usage.}
+\item{name}{Passed to \code{sprintf}.}
 }
 \description{
 A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_tmle_hierarchical}. See the file header for the source the module follows.

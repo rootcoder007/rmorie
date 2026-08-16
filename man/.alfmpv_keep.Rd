@@ -10,8 +10,8 @@
 \arguments{
 \item{tab}{A list; the body reads \code{$coverage}, \code{$gaps}, \code{$n} from it.}
 \item{mode}{One of \code{"colabfold"}, \code{"folddock"}.}
-\item{min_coverage}{See Usage.}
-\item{max_gap}{See Usage.}
+\item{min_coverage}{Passed to \code{>=}.}
+\item{max_gap}{Passed to \code{<=}.}
 }
 \description{
 A step of the alfmpv_native implementation. No other function in the package calls it. See the file header for the source the module follows.

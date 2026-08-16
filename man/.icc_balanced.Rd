@@ -10,7 +10,7 @@
 \arguments{
 \item{y}{Passed to \code{.s03vec}.}
 \item{group}{Passed to \code{.s03vec}.}
-\item{who}{See Usage.}
+\item{who}{Passed to \code{paste0}.}
 }
 \description{
 A step of the icc1 implementation. Called by \code{Icc1}, \code{Icc2}, \code{Icc3}. See the file header for the source the module follows.

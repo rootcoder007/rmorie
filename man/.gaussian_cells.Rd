@@ -8,7 +8,7 @@
 .gaussian_cells(bounds, lo, hi, n_grid)
 }
 \arguments{
-\item{bounds}{See Usage.}
+\item{bounds}{Passed to \code{c}.}
 \item{lo}{Numeric; combined arithmetically in the body.}
 \item{hi}{Numeric; combined arithmetically in the body.}
 \item{n_grid}{Numeric; combined arithmetically in the body.}

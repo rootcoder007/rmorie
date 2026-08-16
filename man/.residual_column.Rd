@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{w}{A vector; its length is taken.}
-\item{ar}{See Usage.}
-\item{ma}{See Usage.}
+\item{ar}{Passed to \code{css}.}
+\item{ma}{Passed to \code{css}.}
 }
 \description{
 A step of the sarimax_native implementation. No other function in the package calls it. See the file header for the source the module follows.

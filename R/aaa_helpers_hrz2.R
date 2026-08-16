@@ -10,6 +10,19 @@
 # tolerance-based early exit and no random restart, so the same inputs
 # give the same answer in every language this is mirrored into -- which
 # is the whole point.
+#' .hrz_coord_min
+#'
+#' Internal helper in aaa_helpers_hrz2.R; see the file header for
+#' the source the module follows.
+#'
+#' @param fun Accepted by the signature and not used anywhere in the body.
+#' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param niter See Usage. Defaults to \code{12L}.
+#' @param delta See Usage. Defaults to \code{1}.
+#' @param shrink See Usage. Defaults to \code{0.5}.
+#' @param steps See Usage. Defaults to \code{3L}.
+#' @return A list with \code{par}, \code{value}.
+#' @export
 .hrz_coord_min <- function(fun, x0, niter = 12L, delta = 1, shrink = 0.5,
                            steps = 3L) {
   x <- as.numeric(x0)
@@ -41,6 +54,19 @@
 #' @noRd
 # Fixed iteration count and NO tolerance early exit, so the Python and
 # R arms take exactly the same path.
+#' .hrz2_qirls
+#'
+#' Internal helper in aaa_helpers_hrz2.R; see the file header for
+#' the source the module follows.
+#'
+#' @param X A matrix; passed to \code{ncol}.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param w Numeric; combined arithmetically in the body.
+#' @param tau Numeric; combined arithmetically in the body.
+#' @param niter See Usage. Defaults to \code{40L}.
+#' @param eps See Usage. Defaults to \code{0.001}.
+#' @return The value of \code{beta}, as built in the body.
+#' @export
 .hrz2_qirls <- function(X, y, w, tau, niter = 40L, eps = 1e-3) {
   X <- as.matrix(X)
   p <- ncol(X)

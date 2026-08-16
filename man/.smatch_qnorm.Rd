@@ -8,7 +8,7 @@
 .smatch_qnorm(p)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Passed to \code{qnorm}.}
 }
 \description{
 A step of the smatch_native implementation. Called by \code{morie_smatch_sample_size}. See the file header for the source the module follows.

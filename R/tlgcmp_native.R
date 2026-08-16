@@ -31,19 +31,19 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param strata Defaults to \code{NULL}.
-#' @param outcome_means Defaults to \code{NULL}.
-#' @param covariate_probs Defaults to \code{NULL}.
-#' @param Q_functions Defaults to \code{NULL}.
-#' @param L_supports Defaults to \code{NULL}.
-#' @param L_probs Defaults to \code{NULL}.
-#' @param rule Defaults to \code{NULL}.
-#' @param Y Defaults to \code{NULL}.
-#' @param A Defaults to \code{NULL}.
-#' @param L Defaults to \code{NULL}.
-#' @param a_star Defaults to \code{NULL}.
-#' @param g Defaults to \code{NULL}.
-#' @param delta Defaults to \code{0.01}.
+#' @param strata Passed to \code{g_computation}.
+#' @param outcome_means Passed to \code{g_computation}.
+#' @param covariate_probs Passed to \code{g_computation}.
+#' @param Q_functions Passed to \code{sequential_g_formula}.
+#' @param L_supports Passed to \code{sequential_g_formula}.
+#' @param L_probs Passed to \code{sequential_g_formula}.
+#' @param rule Passed to \code{sequential_g_formula}.
+#' @param Y Passed to \code{counterfactual_mean}.
+#' @param A Passed to \code{counterfactual_mean}.
+#' @param L Passed to \code{counterfactual_mean}.
+#' @param a_star Passed to \code{counterfactual_mean}.
+#' @param g Passed to \code{positivity_check}.
+#' @param delta Passed to \code{positivity_check}. Defaults to \code{0.01}.
 #' @param mode One of \code{"counterfactual"}, \code{"positivity"}, \code{"sequential"}.
 #' @return The value of \code{g_computation}.
 #' @export

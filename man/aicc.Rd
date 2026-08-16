@@ -8,7 +8,7 @@
 aicc(loglik, n_par, n)
 }
 \arguments{
-\item{loglik}{See Usage.}
+\item{loglik}{Passed to \code{aic}.}
 \item{n_par}{Coerced to integer by the body, with \code{as.integer}.}
 \item{n}{Numeric; combined arithmetically in the body.}
 }

@@ -104,7 +104,7 @@
 #'
 #' @param seq A vector; its length is taken.
 #' @param first A vector; indexed elementwise.
-#' @param nts See Usage.
+#' @param nts Passed to \code{\%in\%}.
 #' @return The value of \code{unique}.
 #' @export
 .prsLR_first_seq <- function(seq, first, nts) {
@@ -239,7 +239,7 @@
 #' @param ag A list; the body reads \code{$rules} from it.
 #' @param first Passed to \code{.prsLR_first_seq}.
 #' @param nts Passed to \code{.prsLR_first_seq}.
-#' @param k See Usage.
+#' @param k Passed to \code{==}.
 #' @return A vector, from \code{sort}.
 #' @export
 .prsLR_closure <- function(items, ag, first, nts, k) {
@@ -295,7 +295,7 @@
 #' source it follows.
 #'
 #' @param state See Usage.
-#' @param sym See Usage.
+#' @param sym Passed to \code{==}.
 #' @param ag A list; the body reads \code{$rules} from it.
 #' @param first Passed to \code{.prsLR_closure}.
 #' @param nts Passed to \code{.prsLR_closure}.
@@ -533,7 +533,7 @@
 #' @param g Passed to \code{.prsLR_build_tables}.
 #' @param tokens Coerced to character by the body, with \code{as.character}.
 #' @param method Passed to \code{.prsLR_build_tables}.
-#' @param tables See Usage.
+#' @param tables Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return Nothing; this branch always raises.
 #' @export
 .prsLR_parse <- function(g, tokens, method, tables) {

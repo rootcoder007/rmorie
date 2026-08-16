@@ -10,7 +10,7 @@
 \arguments{
 \item{x}{A vector; its length is taken and its elements indexed.}
 \item{o}{A list; the body reads \code{$auto_unbox}, \code{$complex}, \code{$digits} from it.}
-\item{unbox_ok}{See Usage.}
+\item{unbox_ok}{Passed to \code{&&}.}
 }
 \description{
 A step of the jsonlt_native implementation. Called by \code{.jsonlt_cell}, \code{.jsonlt_encode}, \code{.jsonlt_ser}. See the file header for the source the module follows.

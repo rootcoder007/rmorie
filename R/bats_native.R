@@ -451,9 +451,9 @@ bats_filter <- function(z, spec, theta, x0, long_run_b = 0) {
 #' source it follows.
 #'
 #' @param z A vector; its length is taken.
-#' @param spec See Usage.
-#' @param theta See Usage.
-#' @param long_run_b Defaults to \code{0}.
+#' @param spec Passed to \code{n_states}.
+#' @param theta Passed to \code{bats_filter}.
+#' @param long_run_b Passed to \code{bats_filter}. Defaults to \code{0}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 fit_seed_state <- function(z, spec, theta, long_run_b = 0) {
@@ -508,7 +508,7 @@ fit_seed_state <- function(z, spec, theta, long_run_b = 0) {
 #' source it follows.
 #'
 #' @param spec Passed to \code{.flatten_carry}.
-#' @param theta See Usage.
+#' @param theta Passed to \code{bats_filter}.
 #' @return A list with \code{w}, \code{fmat}, \code{g}.
 #' @export
 state_matrices <- function(spec, theta) {
@@ -537,9 +537,9 @@ state_matrices <- function(spec, theta) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param spec See Usage.
-#' @param theta See Usage.
-#' @param tol Defaults to \code{1e-06}.
+#' @param spec Passed to \code{state_matrices}.
+#' @param theta Passed to \code{state_matrices}.
+#' @param tol Passed to \code{>=}. Defaults to \code{1e-06}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 spectral_radius <- function(spec, theta, tol = 1e-6) {
@@ -557,8 +557,8 @@ spectral_radius <- function(spec, theta, tol = 1e-6) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param spec See Usage.
-#' @param theta See Usage.
+#' @param spec Passed to \code{state_matrices}.
+#' @param theta Passed to \code{state_matrices}.
 #' @return A vector, from \code{sort}.
 #' @export
 all_eigenvalues <- function(spec, theta) {
@@ -575,8 +575,8 @@ all_eigenvalues <- function(spec, theta) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param spec See Usage.
-#' @param theta See Usage.
+#' @param spec Passed to \code{spectral_radius}.
+#' @param theta Passed to \code{spectral_radius}.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A logical value.
 #' @export
@@ -670,9 +670,9 @@ concentrated_loglik <- function(y, resid, omega) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param y See Usage.
+#' @param y Passed to \code{box_cox}.
 #' @param spec A list; the body reads \code{$use_box_cox} from it.
-#' @param long_run_b Defaults to \code{0}.
+#' @param long_run_b Passed to \code{fit_seed_state}. Defaults to \code{0}.
 #' @param maxiter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000}.
 #' @return A list with \code{theta}, \code{x0}, \code{resid}, \code{fitted}, \code{loglik}, \code{omega}, \code{aic}, \code{n_par}.
 #' @export
@@ -728,8 +728,8 @@ concentrated_loglik <- function(y, resid, omega) {
 #'
 #' @param spec A list; the body reads \code{$harmonics}, \code{$p}, \code{$periods}, \code{$q}, \code{$use_trend} from it.
 #' @param theta Passed to \code{.unpack}.
-#' @param x0 See Usage.
-#' @param z See Usage.
+#' @param x0 Passed to \code{bats_filter}.
+#' @param z Passed to \code{bats_filter}.
 #' @param h A count; the body uses it as \code{seq_len(...)}.
 #' @param long_run_b Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return The value of \code{out}, as built in the body.

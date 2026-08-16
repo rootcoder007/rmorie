@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{y0}{Numeric; combined arithmetically in the body.}
-\item{u0}{See Usage.}
-\item{t0}{See Usage.}
+\item{u0}{Passed to \code{nlevels}.}
+\item{t0}{Passed to \code{nlevels}.}
 \item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.}
 }
 \description{

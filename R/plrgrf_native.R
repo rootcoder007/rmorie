@@ -72,9 +72,9 @@
 #' @param y A vector; indexed elementwise.
 #' @param train See Usage.
 #' @param at_rows A vector; its length is taken and its elements indexed.
-#' @param n_trees See Usage.
-#' @param min_leaf See Usage.
-#' @param seed See Usage.
+#' @param n_trees Passed to \code{grow_forest}.
+#' @param min_leaf Passed to \code{grow_forest}.
+#' @param seed Passed to \code{grow_forest}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .plrgrf_forest_predict <- function(X, y, train, at_rows, n_trees, min_leaf, seed) {
@@ -130,13 +130,13 @@ local_centering <- function(y, W, X, n_folds = 5, n_trees = 100,
 #'
 #' @param y_res A vector; its length is taken.
 #' @param w_res Numeric; combined arithmetically in the body.
-#' @param X See Usage.
+#' @param X Passed to \code{grow_forest}.
 #' @param at Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
-#' @param n_trees Defaults to \code{200}.
-#' @param min_leaf Defaults to \code{5}.
-#' @param seed Defaults to \code{0}.
-#' @param alpha Defaults to \code{0.05}.
-#' @param pi Defaults to \code{0.5}.
+#' @param n_trees Passed to \code{grow_forest}. Defaults to \code{200}.
+#' @param min_leaf Passed to \code{grow_forest}. Defaults to \code{5}.
+#' @param seed Passed to \code{grow_forest}. Defaults to \code{0}.
+#' @param alpha Passed to \code{grow_forest}. Defaults to \code{0.05}.
+#' @param pi Passed to \code{grow_forest}. Defaults to \code{0.5}.
 #' @return A list with \code{tau}, \code{info}.
 #' @export
 residual_forest <- function(y_res, w_res, X, at = NULL, n_trees = 200,
@@ -180,9 +180,9 @@ residual_forest <- function(y_res, w_res, X, at = NULL, n_trees = 200,
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param at Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param n_trees Numeric; combined arithmetically in the body. Defaults to \code{200}.
-#' @param n_folds Defaults to \code{5}.
-#' @param min_leaf Defaults to \code{5}.
-#' @param seed Defaults to \code{0}.
+#' @param n_folds Passed to \code{local_centering}. Defaults to \code{5}.
+#' @param min_leaf Passed to \code{local_centering}. Defaults to \code{5}.
+#' @param seed Passed to \code{local_centering}. Defaults to \code{0}.
 #' @param center A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param level Numeric; combined arithmetically in the body. Defaults to \code{0.95}.
 #' @return A list with \code{estimate}, \code{tau}, \code{se}, \code{ci}, \code{m_hat}, \code{e_hat}, \code{y_residual}, \code{w_residual}, \code{centered}, \code{n}, \code{n_trees}, \code{ate}, \code{level}, \code{method}.

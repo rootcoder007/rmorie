@@ -81,9 +81,9 @@
 #' source it follows.
 #'
 #' @param y A vector; its length is taken.
-#' @param depth See Usage.
-#' @param max_depth See Usage.
-#' @param min_node See Usage.
+#' @param depth Passed to \code{>=}.
+#' @param max_depth Passed to \code{>=}.
+#' @param min_node Passed to \code{<=}.
 #' @return A logical value.
 #' @export
 .esl_stop <- function(y, depth, max_depth, min_node) {
@@ -193,7 +193,7 @@
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
-#' @param what Defaults to \code{"X"}.
+#' @param what Passed to \code{sprintf}. Defaults to \code{"X"}.
 #' @return A list with \code{X}, \code{y}.
 #' @export
 .esl_matrix <- function(X, y, what = "X") {

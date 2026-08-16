@@ -12,7 +12,7 @@
 \item{y}{Passed to \code{morie_geron_cart_split_cost}.}
 \item{criterion}{Passed to \code{morie_geron_cart_split_cost}.}
 \item{columns}{See Usage.}
-\item{min_leaf}{See Usage.}
+\item{min_leaf}{Passed to \code{<}.}
 }
 \description{
 A step of the geron_w4c_native implementation. Called by \code{.morie_w4c_grow}. See the file header for the source the module follows.

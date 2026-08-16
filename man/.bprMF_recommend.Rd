@@ -13,7 +13,7 @@
 \item{u}{Coerced to integer by the body, with \code{as.integer}.}
 \item{n_items}{A count; the body uses it as \code{seq_len(...)}.}
 \item{top_k}{Numeric; passed to \code{min}. Defaults to \code{5L}.}
-\item{exclude}{Defaults to \code{integer(0)}.}
+\item{exclude}{Passed to \code{unique}. Defaults to \code{integer(0)}.}
 }
 \description{
 A step of the bprMF_native implementation. Called by \code{bpr_recommend_R}. See the file header for the source the module follows.

@@ -9,9 +9,9 @@ ner_decode(emissions, types, decoder = "viterbi", transition_scores = NULL, gold
 }
 \arguments{
 \item{emissions}{A matrix; passed to \code{as.matrix}.}
-\item{types}{See Usage.}
+\item{types}{Passed to \code{bio_labels}.}
 \item{decoder}{One of \code{"greedy"}, \code{"viterbi"}. Defaults to \code{"viterbi"}.}
-\item{transition_scores}{Defaults to \code{NULL}.}
+\item{transition_scores}{Passed to \code{viterbi_decode}.}
 \item{gold}{Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.}
 }
 \description{

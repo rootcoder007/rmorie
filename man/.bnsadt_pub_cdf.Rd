@@ -8,7 +8,7 @@
 .bnsadt_pub_cdf(x, theta, sigma, family, params)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{>}.}
 \item{theta}{Numeric; combined arithmetically in the body.}
 \item{sigma}{Numeric; combined arithmetically in the body.}
 \item{family}{Passed to \code{.bnsadt_betas}.}

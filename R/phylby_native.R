@@ -96,7 +96,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param node See Usage.
+#' @param node Passed to \code{return}.
 #' @param path A vector; its length is taken and its elements indexed.
 #' @param value Passed to \code{.phylby_replace_branch}.
 #' @return The value of \code{parts}, as built in the body.
@@ -120,7 +120,7 @@
 #' source it follows.
 #'
 #' @param node A vector; its length is taken and its elements indexed.
-#' @param path Defaults to \code{integer(0)}.
+#' @param path Passed to \code{c}. Defaults to \code{integer(0)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .phylby_branch_paths <- function(node, path = integer(0)) {
@@ -145,7 +145,7 @@
 #' source it follows.
 #'
 #' @param node A vector; its length is taken and its elements indexed.
-#' @param path Defaults to \code{integer(0)}.
+#' @param path Passed to \code{c}. Defaults to \code{integer(0)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .phylby_subtrees <- function(node, path = integer(0)) {
@@ -254,7 +254,7 @@
 #' @param pi Passed to \code{morie_phylml}.
 #' @param rate Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param branch_prior_mean Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
-#' @param partitions Defaults to \code{NULL}.
+#' @param partitions Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param rates Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param temperature Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A list with \code{loglik}, \code{logprior}, \code{logpost}.

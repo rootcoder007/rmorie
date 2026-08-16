@@ -155,7 +155,7 @@ CCepstrum <- function(x) {
 #' important consideration": a 2-pi jump at nearly every bin means the
 #' spectrum is too coarsely sampled to track the phase.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{CCepstrum}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
 CCepX <- function(x) {

@@ -62,7 +62,7 @@
 #' source it follows.
 #'
 #' @param symbol Carried through into a list the body builds.
-#' @param args See Usage.
+#' @param args Passed to \code{c}.
 #' @return The value of \code{do.call}.
 #' @export
 .trmRew_app <- function(symbol, args) {
@@ -246,7 +246,7 @@ morie_trmRew_normal_form <- function(t, rules, strategy="innermost",
 #' source it follows.
 #'
 #' @param precedence Optional; may be \code{NULL}. A vector; indexed elementwise.
-#' @param sym See Usage.
+#' @param sym Passed to \code{\%in\%}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .trmRew_prec <- function(precedence, sym) {

@@ -122,7 +122,7 @@ morie_qsfrgr_logrank <- function(time, event, left, right) {
 #' @param event Passed to \code{morie_qsfrgr_logrank}.
 #' @param rows A vector; indexed elementwise.
 #' @param feats See Usage.
-#' @param min_leaf See Usage.
+#' @param min_leaf Passed to \code{<}.
 #' @param rule Compared against \code{"logrank"}.
 #' @return The value of \code{best}, as built in the body.
 #' @export

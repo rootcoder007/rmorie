@@ -20,7 +20,7 @@
 #' the source it follows.
 #'
 #' @param ok A flag; the body branches on it.
-#' @param msg See Usage.
+#' @param msg Passed to \code{stop}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .morie_wsm_need <- function(ok, msg) if (!isTRUE(ok)) stop(msg, call. = FALSE)
@@ -747,7 +747,7 @@ morie_wasserman_chi_sq_gof <- function(observed, expected) {
 #' the source it follows.
 #'
 #' @param y A vector; its length is taken and its elements indexed.
-#' @param x See Usage.
+#' @param x Passed to \code{diff}.
 #' @return A numeric value.
 #' @export
 .morie_wsm_trapz <- function(y, x) {

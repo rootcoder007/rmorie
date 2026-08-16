@@ -8,11 +8,11 @@
 .survroc_empirical(T, E, M, c, t)
 }
 \arguments{
-\item{T}{See Usage.}
-\item{E}{See Usage.}
+\item{T}{Passed to \code{<}.}
+\item{E}{Passed to \code{==}.}
 \item{M}{A vector; indexed elementwise.}
-\item{c}{See Usage.}
-\item{t}{See Usage.}
+\item{c}{Passed to \code{>}.}
+\item{t}{Passed to \code{<}.}
 }
 \description{
 A step of the survroc_native implementation. Called by \code{.survroc_pair}. See the file header for the source the module follows.

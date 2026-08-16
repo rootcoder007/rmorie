@@ -10,7 +10,7 @@
 \arguments{
 \item{protected}{A vector; its length is taken and its elements indexed.}
 \item{measure}{One of \code{"rKL"}, \code{"rND"}.}
-\item{step}{See Usage.}
+\item{step}{Passed to \code{cutoffs}.}
 }
 \description{
 A step of the fairRC_native implementation. Called by \code{.measure}, \code{normalizer}. See the file header for the source the module follows.

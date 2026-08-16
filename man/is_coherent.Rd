@@ -10,7 +10,7 @@ is_coherent(y, S, tol = 1e-09)
 \arguments{
 \item{y}{A vector; indexed elementwise.}
 \item{S}{A matrix; passed to \code{nrow}.}
-\item{tol}{Defaults to \code{1e-09}.}
+\item{tol}{Passed to \code{<=}. Defaults to \code{1e-09}.}
 }
 \description{
 A step of the hierF_native implementation. Called by \code{mint_reconcile}. See the file header for the source the module follows.

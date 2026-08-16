@@ -8,7 +8,7 @@
 .schab_gn_weights(kind, fitted, counts)
 }
 \arguments{
-\item{kind}{See Usage.}
+\item{kind}{Passed to \code{identical}.}
 \item{fitted}{A vector; its length is taken.}
 \item{counts}{Numeric; combined arithmetically in the body.}
 }

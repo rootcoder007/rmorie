@@ -53,8 +53,8 @@
 #' source it follows.
 #'
 #' @param next_probs Coerced to numeric by the body, with \code{as.numeric}.
-#' @param n_atoms See Usage.
-#' @param name See Usage.
+#' @param n_atoms Passed to \code{!=}.
+#' @param name Passed to \code{sprintf}.
 #' @return The value of \code{p}, as built in the body.
 #' @export
 .distq_check_prob <- function(next_probs, n_atoms, name) {

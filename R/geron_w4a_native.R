@@ -23,7 +23,7 @@
 #' the source it follows.
 #'
 #' @param cond A flag; the body branches on it.
-#' @param msg See Usage.
+#' @param msg Passed to \code{stop}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .w4a_need <- function(cond, msg) if (!isTRUE(cond)) stop(msg, call. = FALSE)

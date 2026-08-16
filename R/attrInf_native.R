@@ -94,8 +94,8 @@
 #' all match (R\'s == coerces); int vs str does not (mirrors Python: 1
 #' == "1" is False, and isTRUE(1 == "1") is FALSE in R).
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param b Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A logical value.
 #' @export
 .attrInf_eq <- function(a, b) {
@@ -383,7 +383,7 @@ confusion_error <- function(C, labels = NULL) {
 #' the source it follows.
 #'
 #' @param model Accepted by the signature and not used anywhere in the body.
-#' @param y See Usage.
+#' @param y Passed to \code{err}.
 #' @param known See Usage.
 #' @param candidates A vector; its length is taken.
 #' @param err Accepted by the signature and not used anywhere in the body.
@@ -421,7 +421,7 @@ map_invert <- function(model, y, known, candidates, err, priors,
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param tree See Usage.
+#' @param tree Passed to \code{tree_paths}.
 #' @param known See Usage.
 #' @param candidates A vector; its length is taken.
 #' @param priors A vector; indexed elementwise.

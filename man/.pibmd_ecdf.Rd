@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{sorted_v}{A vector; its length is taken.}
-\item{x}{See Usage.}
+\item{x}{Passed to \code{<=}.}
 }
 \description{
 A step of the pibmd_native implementation. Called by \code{morie_pibmd_prior_informativeness_bias_diagnostic}. See the file header for the source the module follows.

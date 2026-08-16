@@ -8,7 +8,7 @@
 .tmlcen_RichResult(payload)
 }
 \arguments{
-\item{payload}{See Usage.}
+\item{payload}{Passed to \code{class}.}
 }
 \description{
 A step of the tmlcen_native implementation. Called by \code{morie_tmle_censoring}. See the file header for the source the module follows.

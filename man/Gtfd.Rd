@@ -11,7 +11,7 @@ Gtfd(x, fs = 1, kernel = "spwvd", nfreq = NULL, tsmooth = NULL, fsmooth = NULL)
 \item{x}{Passed to \code{.tf_need}.}
 \item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{kernel}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"spwvd"}.}
-\item{nfreq}{Defaults to \code{NULL}.}
+\item{nfreq}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{tsmooth}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{fsmooth}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }

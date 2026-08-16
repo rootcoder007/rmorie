@@ -8,12 +8,12 @@
 morie_chrF(hypothesis, reference, n_char = 6L, beta = 2, remove_whitespace = TRUE, word_order = 0L)
 }
 \arguments{
-\item{hypothesis}{See Usage.}
-\item{reference}{See Usage.}
-\item{n_char}{Defaults to \code{6L}.}
-\item{beta}{Defaults to \code{2}.}
-\item{remove_whitespace}{Defaults to \code{TRUE}.}
-\item{word_order}{Defaults to \code{0L}.}
+\item{hypothesis}{Passed to \code{chrf_score}.}
+\item{reference}{Passed to \code{chrf_score}.}
+\item{n_char}{Passed to \code{chrf_score}. Defaults to \code{6L}.}
+\item{beta}{Passed to \code{chrf_score}. Defaults to \code{2}.}
+\item{remove_whitespace}{Passed to \code{chrf_score}. Defaults to \code{TRUE}.}
+\item{word_order}{Passed to \code{chrf_score}. Defaults to \code{0L}.}
 }
 \description{
 A step of the chrF_native implementation. No other function in the package calls it. See the file header for the source the module follows.

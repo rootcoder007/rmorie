@@ -10,9 +10,9 @@
 \arguments{
 \item{X}{A matrix; indexed by row and column.}
 \item{y}{A vector; its length is taken and its elements indexed.}
-\item{id}{See Usage.}
+\item{id}{Passed to \code{factor}.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.}
-\item{tol}{Defaults to \code{1e-08}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-08}.}
 }
 \description{
 GEE with Poisson family and exchangeable working correlation (Liang & Zeger 1986) -- the geepack::geeglm surface used by the OTIS batch module. Fisher scoring on the working model, moment estimate of the exchangeable alpha, robust (sandwich) covariance.

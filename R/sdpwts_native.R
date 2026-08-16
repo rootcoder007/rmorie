@@ -119,9 +119,9 @@ sdpwts_is_psd <- function(M, tol = -1e-10) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param F0 See Usage.
-#' @param Fs See Usage.
+#' @param x Passed to \code{sdpwts_lmi}.
+#' @param F0 Passed to \code{sdpwts_lmi}.
+#' @param Fs Passed to \code{sdpwts_lmi}.
 #' @return A list with \code{value}, \code{feasible}, \code{min_eigenvalue}, \code{eigenvalues}.
 #' @export
 sdpwts_barrier <- function(x, F0, Fs) {
@@ -170,8 +170,8 @@ sdpwts_central_path_gap <- function(t, m) {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param c_vec Coerced to numeric by the body, with \code{as.numeric}.
-#' @param F0 See Usage.
-#' @param Fs See Usage.
+#' @param F0 Passed to \code{sdpwts_barrier}.
+#' @param Fs Passed to \code{sdpwts_barrier}.
 #' @param t Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
@@ -304,9 +304,9 @@ sdpwts_solve_sdp <- function(c, F0, Fs, x0, t0 = 1.0, mu = 10.0,
 #' source it follows.
 #'
 #' @param A A matrix; passed to \code{as.matrix}.
-#' @param t0 Defaults to \code{1}.
-#' @param mu Defaults to \code{10}.
-#' @param tol Defaults to \code{1e-09}.
+#' @param t0 Passed to \code{sdpwts_solve_sdp}. Defaults to \code{1}.
+#' @param mu Passed to \code{sdpwts_solve_sdp}. Defaults to \code{10}.
+#' @param tol Passed to \code{sdpwts_solve_sdp}. Defaults to \code{1e-09}.
 #' @return A list with \code{estimate}, \code{t}, \code{lambda_min}, \code{error}, \code{outer_iterations}, \code{gap}, \code{method}, \code{note}.
 #' @export
 sdpwts_min_eigenvalue_sdp <- function(A, t0 = 1.0, mu = 10.0,

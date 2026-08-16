@@ -10,7 +10,7 @@
 \arguments{
 \item{st}{Compared against \code{"cycling"}.}
 \item{rule}{Compared against \code{"dantzig"}.}
-\item{phase}{See Usage.}
+\item{phase}{Passed to \code{sprintf}.}
 }
 \description{
 A step of the clpopt_native implementation. Called by \code{simplex}. See the file header for the source the module follows.

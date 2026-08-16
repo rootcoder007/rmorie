@@ -14,7 +14,7 @@ extend_one(qchars, schars, qi, si, w, sc, X)
 \item{si}{Numeric; combined arithmetically in the body.}
 \item{w}{A count; the body uses it as \code{seq_len(...)}.}
 \item{sc}{Accepted by the signature and not used anywhere in the body.}
-\item{X}{See Usage.}
+\item{X}{Passed to \code{>}.}
 }
 \description{
 A step of the blstn_native implementation. Called by \code{morie_blstn}. See the file header for the source the module follows.

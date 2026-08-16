@@ -8,17 +8,17 @@
 morie_tlhal(X, y, lambdas = NULL, V = 5L, seed = 0L, lam = 1, iters = 2000L, step = 0.05, max_order = 2L, knots = NULL, intercept = TRUE, mode = c("fit", "predict", "cv", "norm"))
 }
 \arguments{
-\item{X}{See Usage.}
-\item{y}{See Usage.}
-\item{lambdas}{Defaults to \code{NULL}.}
-\item{V}{Defaults to \code{5L}.}
-\item{seed}{Defaults to \code{0L}.}
-\item{lam}{Defaults to \code{1}.}
-\item{iters}{Defaults to \code{2000L}.}
-\item{step}{Defaults to \code{0.05}.}
-\item{max_order}{Defaults to \code{2L}.}
-\item{knots}{Defaults to \code{NULL}.}
-\item{intercept}{Defaults to \code{TRUE}.}
+\item{X}{Passed to \code{cv_select_lambda}.}
+\item{y}{Passed to \code{cv_select_lambda}.}
+\item{lambdas}{Passed to \code{cv_select_lambda}.}
+\item{V}{Passed to \code{cv_select_lambda}. Defaults to \code{5L}.}
+\item{seed}{Passed to \code{cv_select_lambda}. Defaults to \code{0L}.}
+\item{lam}{Passed to \code{hal_fit}. Defaults to \code{1}.}
+\item{iters}{Passed to \code{cv_select_lambda}. Defaults to \code{2000L}.}
+\item{step}{Passed to \code{cv_select_lambda}. Defaults to \code{0.05}.}
+\item{max_order}{Passed to \code{cv_select_lambda}. Defaults to \code{2L}.}
+\item{knots}{Passed to \code{hal_fit}.}
+\item{intercept}{Passed to \code{cv_select_lambda}. Defaults to \code{TRUE}.}
 \item{mode}{One of \code{"cv"}, \code{"norm"}, \code{"predict"}.}
 }
 \description{

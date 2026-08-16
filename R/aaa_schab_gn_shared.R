@@ -75,7 +75,7 @@
 #' approximation (4.33), Var[gamma_hat(h_m)] = 2 gamma^2 / |N(h_m)|,
 #' whose reciprocal is the weight in (4.34).
 #'
-#' @param kind See Usage.
+#' @param kind Passed to \code{identical}.
 #' @param fitted A vector; its length is taken.
 #' @param counts Numeric; combined arithmetically in the body.
 #' @return The value of \code{ifelse}.
@@ -118,7 +118,7 @@
 #' @param model Passed to \code{.sp_semivariogram}. Defaults to \code{"exponential"}.
 #' @param kind Passed to \code{.schab_gn_weights}. Defaults to \code{"wls"}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.
-#' @param tol Defaults to \code{1e-12}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-12}.
 #' @param max_halvings A count; the body uses it as \code{seq_len(...)}. Defaults to \code{40L}.
 #' @return A list with \code{theta}, \code{objective}, \code{converged}, \code{iterations}.
 #' @export

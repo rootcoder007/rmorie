@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{x}{A matrix; passed to \code{as.matrix}.}
-\item{what}{See Usage.}
+\item{what}{Passed to \code{sprintf}.}
 }
 \description{
 A step of the agalfsy_native implementation. Called by \code{morie_agalfsy_rl_pose_search}. See the file header for the source the module follows.

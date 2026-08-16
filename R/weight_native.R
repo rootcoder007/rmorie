@@ -61,7 +61,7 @@ print.morie_weight <- function(x, ...) {
 #' source it follows.
 #'
 #' @param ps Numeric; combined arithmetically in the body.
-#' @param t01 See Usage.
+#' @param t01 Passed to \code{==}.
 #' @param estimand The body requires: estimand must be ATE, ATT, or ATC.
 #' @return The value of \code{switch}.
 #' @export
@@ -347,7 +347,7 @@ morie_weight_super <- function(data, treatment, covariates,
 #'
 #' @param A A matrix; indexed by row and column.
 #' @param b Numeric; combined arithmetically in the body.
-#' @param tol Defaults to \code{1e-10}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-10}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{2000L}.
 #' @return The value of \code{x}, as built in the body.
 #' @export

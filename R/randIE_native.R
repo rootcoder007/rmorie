@@ -17,7 +17,7 @@
 #' source it follows.
 #'
 #' @param v Coerced to character by the body, with \code{as.character}.
-#' @param name See Usage.
+#' @param name Passed to \code{paste0}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .labels <- function(v, name) {

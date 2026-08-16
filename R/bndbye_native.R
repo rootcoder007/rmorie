@@ -50,7 +50,7 @@ morie_conditional_prior_uniform <- function(theta_set, n_grid = 401L) {
 #'
 #' @param theta_set Passed to \code{morie_conditional_prior_uniform}.
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
-#' @param conditional_prior Defaults to \code{NULL}.
+#' @param conditional_prior Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param n_grid Passed to \code{morie_conditional_prior_uniform}. Defaults to \code{401L}.
 #' @return A list with \code{lower}, \code{upper}, \code{width}, \code{level}, \code{covered}, \code{n_grid_points}, \code{method}.
 #' @export

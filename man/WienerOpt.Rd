@@ -8,8 +8,8 @@
 WienerOpt(phi, theta)
 }
 \arguments{
-\item{phi}{See Usage.}
-\item{theta}{See Usage.}
+\item{phi}{Passed to \code{WienerHopf}.}
+\item{theta}{Passed to \code{WienerHopf}.}
 }
 \description{
 computed here by solving the system -- the inverse is never formed, which is both faster and better conditioned.

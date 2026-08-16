@@ -19,7 +19,7 @@ offlrl(dataset, states = NULL, actions = NULL, alpha = 1, gamma = 0.99, variant 
 \item{mu}{Passed to \code{.offlrl_as_dist}.}
 \item{lr}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.}
 \item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000}.}
-\item{tol}{Defaults to \code{1e-12}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-12}.}
 }
 \description{
 A step of the offlrl_native implementation. No other function in the package calls it. See the file header for the source the module follows.

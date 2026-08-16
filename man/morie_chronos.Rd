@@ -8,11 +8,11 @@
 morie_chronos(x, bins, context = NULL, add_eos = TRUE, pad_to = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{bins}{See Usage.}
-\item{context}{Defaults to \code{NULL}.}
-\item{add_eos}{Defaults to \code{TRUE}.}
-\item{pad_to}{Defaults to \code{NULL}.}
+\item{x}{Passed to \code{tokenize}.}
+\item{bins}{Passed to \code{tokenize}.}
+\item{context}{Passed to \code{tokenize}.}
+\item{add_eos}{Passed to \code{tokenize}. Defaults to \code{TRUE}.}
+\item{pad_to}{Passed to \code{tokenize}.}
 }
 \description{
 A step of the chronos_native implementation. No other function in the package calls it. See the file header for the source the module follows.

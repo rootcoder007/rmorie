@@ -16,7 +16,7 @@
 \item{sigma2}{Passed to \code{.schab_sigma_mu}. Defaults to \code{1}.}
 \item{R}{Passed to \code{.schab_sigma_mu}.}
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100L}.}
-\item{tol}{Defaults to \code{1e-08}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-08}.}
 }
 \description{
 A step of the schab_glmm_shared implementation. Called by \code{sppql}. See the file header for the source the module follows.

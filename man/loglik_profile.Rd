@@ -8,7 +8,7 @@
 loglik_profile(y, grid, make_model, n_particles = 200L, n_reps = 5L, seed = 0L)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Passed to \code{replicated_pfilter}.}
 \item{grid}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{make_model}{Accepted by the signature and not used anywhere in the body.}
 \item{n_particles}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.}

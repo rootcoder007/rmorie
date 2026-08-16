@@ -9,7 +9,7 @@ encode_point_prompt(points, labels, dim = 8, type_embeddings = NULL)
 }
 \arguments{
 \item{points}{Iterated over elementwise, with \code{lapply}.}
-\item{labels}{See Usage.}
+\item{labels}{Passed to \code{unlist}.}
 \item{dim}{Passed to \code{.samseg_pos_enc}. Defaults to \code{8}.}
 \item{type_embeddings}{Defaults to \code{NULL}.}
 }

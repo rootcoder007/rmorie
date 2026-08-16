@@ -200,7 +200,7 @@ attack_dataset <- function(model_predict, in_X, in_y, out_X, out_y) {
 #' @param k_min Numeric; passed to \code{max}. Defaults to \code{1L}.
 #' @param conf_min The body requires: memb: conf_min must lie in (0, 1). Defaults to \code{0.8}.
 #' @param iter_max A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1000L}.
-#' @param rej_max Defaults to \code{10L}.
+#' @param rej_max Passed to \code{>}. Defaults to \code{10L}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return Nothing; the function is called for its effect.
 #' @export
@@ -308,7 +308,7 @@ synthesize_marginals <- function(X, n, seed = 0) {
 #'
 #' @param X A vector; indexed elementwise.
 #' @param fraction The body requires: memb: fraction must lie in [0, 1]. Defaults to \code{0.1}.
-#' @param feature_values Defaults to \code{NULL}.
+#' @param feature_values Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -385,8 +385,8 @@ precision_recall <- function(pred, truth) {
 #' @param shadow_data See Usage.
 #' @param eval_in A vector; indexed elementwise.
 #' @param eval_out A vector; indexed elementwise.
-#' @param train_fn Defaults to \code{NULL}.
-#' @param attack_train_fn Defaults to \code{NULL}.
+#' @param train_fn Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param attack_train_fn Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param n_shadow Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param sort_features A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @param threshold Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.

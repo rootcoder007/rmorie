@@ -103,9 +103,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param node See Usage.
+#' @param node Passed to \code{c}.
 #' @param children A vector; indexed elementwise.
-#' @param n See Usage.
+#' @param n Passed to \code{<}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .hdb_points_under <- function(node, children, n) {

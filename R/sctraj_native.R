@@ -63,7 +63,7 @@
 #' source it follows.
 #'
 #' @param A A matrix; passed to \code{nrow}.
-#' @param b See Usage.
+#' @param b Passed to \code{cbind}.
 #' @return A numeric value.
 #' @export
 .sctraj_solve <- function(A, b) {
@@ -189,7 +189,7 @@ morie_sctraj_cluster_distances <- function(X, labels, cov="full",
 #'
 #' @param D A matrix; indexed by row and column.
 #' @param clusters Coerced to character by the body, with \code{as.character}.
-#' @param ends Defaults to \code{NULL}.
+#' @param ends Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{edges}, \code{adjacency}, \code{nodes}.
 #' @export
 morie_sctraj_minimum_spanning_tree <- function(D, clusters, ends=NULL) {

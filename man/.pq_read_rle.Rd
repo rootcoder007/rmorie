@@ -12,7 +12,7 @@
 \item{pos}{Numeric; combined arithmetically in the body.}
 \item{width}{A count; the body uses it as \code{seq_len(...)}.}
 \item{count}{A count; the body uses it as \code{rep(...)}.}
-\item{end}{See Usage.}
+\item{end}{Passed to \code{<=}.}
 }
 \description{
 A step of the parquet implementation. Called by \code{.pq_column_values}. See the file header for the source the module follows.

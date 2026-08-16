@@ -9,9 +9,9 @@ morie_wrd2v_analogy(vectors, a, b, c, topn = 1)
 }
 \arguments{
 \item{vectors}{A vector; indexed elementwise.}
-\item{a}{See Usage.}
-\item{b}{See Usage.}
-\item{c}{See Usage.}
+\item{a}{Passed to \code{c}.}
+\item{b}{Passed to \code{c}.}
+\item{c}{Passed to \code{c}.}
 \item{topn}{Numeric; passed to \code{min}. Defaults to \code{1}.}
 }
 \description{

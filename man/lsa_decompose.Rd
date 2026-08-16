@@ -8,7 +8,7 @@
 lsa_decompose(X, k_dim = NULL, how = "log_entropy")
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{Passed to \code{term_weighting}.}
 \item{k_dim}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{how}{Carried through into a list the body builds. Defaults to \code{"log_entropy"}.}
 }

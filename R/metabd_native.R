@@ -44,7 +44,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .metabd_vec <- function(v) as.numeric(unlist(v))
@@ -141,9 +141,9 @@ length_weight <- function(length, l_min = 2500.0, l_ref = 100000.0) {
 #' @param tnf_a Passed to \code{.metabd_vec}.
 #' @param tnf_b Passed to \code{.metabd_vec}.
 #' @param cov_a Optional; may be \code{NULL}. Passed to \code{.metabd_vec}.
-#' @param cov_b Defaults to \code{NULL}.
-#' @param len_a Defaults to \code{NULL}.
-#' @param len_b Defaults to \code{NULL}.
+#' @param cov_b Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param len_a Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param len_b Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param w_abundance Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.
 #' @return A list with \code{distance}, \code{composition}, \code{abundance}, \code{abundance_usable}, \code{confidence}, \code{effective_weight}, \code{note}.
 #' @export
@@ -227,7 +227,7 @@ bin_contigs <- function(tnfs, coverages = NULL, lengths = NULL,
 #' source it follows.
 #'
 #' @param bins See Usage.
-#' @param truth See Usage.
+#' @param truth Passed to \code{unlist}.
 #' @return A list with \code{per_bin}, \code{mean_purity}, \code{mean_completeness}, \code{note}.
 #' @export
 purity_completeness <- function(bins, truth) {

@@ -16,8 +16,8 @@ FAIL <- NA_integer_
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param text See Usage.
-#' @param pos See Usage.
+#' @param text Passed to \code{fn}.
+#' @param pos Passed to \code{fn}.
 #' @param ctx A list; the body reads \code{$steps} from it.
 #' @param fn Accepted by the signature and not used anywhere in the body.
 #' @return The value of \code{fn}.
@@ -201,7 +201,7 @@ morie_prsPEG_parse <- function(expr, text, full = TRUE) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param expr See Usage.
+#' @param expr Passed to \code{attr}.
 #' @param text A vector; its length is taken.
 #' @param full A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{matched}, \code{end}, \code{steps}, \code{memo.entries}, \code{memoised}, \code{method}.

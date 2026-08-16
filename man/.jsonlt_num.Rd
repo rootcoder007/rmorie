@@ -8,7 +8,7 @@
 .jsonlt_num(x, digits)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{is.nan}.}
 \item{digits}{Optional; may be \code{NULL}. Passed to \code{.jsonlt_sig}.}
 }
 \description{

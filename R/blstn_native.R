@@ -132,7 +132,7 @@ morie_word_hits <- function(query, subject, w, mode = "exact",
 #' @param si Numeric; combined arithmetically in the body.
 #' @param w A count; the body uses it as \code{seq_len(...)}.
 #' @param sc Accepted by the signature and not used anywhere in the body.
-#' @param X See Usage.
+#' @param X Passed to \code{>}.
 #' @return A list with \code{score}, \code{qs}, \code{ss}, \code{length}.
 #' @export
 extend_one <- function(qchars, schars, qi, si, w, sc, X) {
@@ -180,7 +180,7 @@ extend_one <- function(qchars, schars, qi, si, w, sc, X) {
 #' @param lam Optional; may be \code{NULL}. Passed to \code{morie_blast_pvalue}.
 #' @param K Optional; may be \code{NULL}. Passed to \code{morie_blast_pvalue}.
 #' @param max_hsps Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @param letter_probs Defaults to \code{NULL}.
+#' @param letter_probs Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param pvalues A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{hsps}, \code{best_score}, \code{n_hsps}, \code{n_hits}, \code{w}, \code{cutoff}, \code{X}, \code{word_mode}, \code{lam}, \code{K}, \code{karlin_altschul}, \code{note}, \code{method}.
 #' @export
@@ -393,7 +393,7 @@ morie_score_distribution <- function(match = 5, mismatch = -4,
 #'
 #' @param dist A vector; indexed elementwise.
 #' @param hi Numeric; combined arithmetically in the body. Defaults to \code{20}.
-#' @param tol Defaults to \code{1e-14}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-14}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{300}.
 #' @return A numeric value.
 #' @export
@@ -450,7 +450,7 @@ gcd_span <- function(scores) {
 #' @param matrix Passed to \code{morie_score_distribution}.
 #' @param subject_probs Passed to \code{morie_score_distribution}.
 #' @param max_terms Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000}.
-#' @param tol Defaults to \code{1e-12}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-12}.
 #' @param bound One of \code{"lower"}, \code{"mid"}, \code{"upper"}. Defaults to \code{"upper"}.
 #' @return A list with \code{lam}, \code{K}, \code{K_upper}, \code{K_lower}, \code{C}, \code{delta}, \code{terms}, \code{series}, \code{mean_score}, \code{distribution}.
 #' @export

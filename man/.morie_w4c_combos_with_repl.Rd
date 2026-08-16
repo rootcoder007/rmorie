@@ -8,8 +8,8 @@
 .morie_w4c_combos_with_repl(n, k)
 }
 \arguments{
-\item{n}{See Usage.}
-\item{k}{See Usage.}
+\item{n}{Passed to \code{:}.}
+\item{k}{Passed to \code{==}.}
 }
 \description{
 order Part of the geron_w4c_native implementation; see the file header for the source it follows.

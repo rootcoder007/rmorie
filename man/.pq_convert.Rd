@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{vals}{Iterated over elementwise, with \code{vapply}.}
-\item{ptype}{See Usage.}
+\item{ptype}{Passed to \code{==}.}
 \item{converted}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{

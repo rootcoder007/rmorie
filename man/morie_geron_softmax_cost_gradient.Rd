@@ -15,3 +15,10 @@ List with \code{gradient}, \code{probabilities}, \code{gradient_norm}.
 \description{
 grad = (1/m) X^T (P_hat - Y); its columns sum to zero.
 }
+\examples{
+set.seed(7)
+X <- cbind(1, rnorm(20))
+Y <- diag(3)[sample(1:3, 20, replace = TRUE), ]
+theta <- matrix(0, 2, 3)
+morie_geron_softmax_cost_gradient(X, Y, theta)
+}

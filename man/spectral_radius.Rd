@@ -8,9 +8,9 @@
 spectral_radius(spec, theta, tol = 1e-06)
 }
 \arguments{
-\item{spec}{See Usage.}
-\item{theta}{See Usage.}
-\item{tol}{Defaults to \code{1e-06}.}
+\item{spec}{Passed to \code{state_matrices}.}
+\item{theta}{Passed to \code{state_matrices}.}
+\item{tol}{Passed to \code{>=}. Defaults to \code{1e-06}.}
 }
 \description{
 A step of the bats_native implementation. Called by \code{.fit_spec}, \code{is_forecastable}, \code{morie_bats}. See the file header for the source the module follows.

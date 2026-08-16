@@ -18,7 +18,7 @@ bcq(dataset, states = NULL, actions = NULL, tau = 0.3, gamma = 0.99, lr = 0.5, i
 \item{loss}{One of \code{"huber"}, \code{"squared"}. Defaults to \code{"huber"}.}
 \item{huber_c}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{behavior}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
-\item{tol}{Defaults to \code{1e-12}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-12}.}
 }
 \description{
 A step of the bcq_native implementation. Called by \code{morie_bcq}. See the file header for the source the module follows.

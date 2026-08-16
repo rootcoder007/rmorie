@@ -8,7 +8,7 @@
 .avalon_sortkeys(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Passed to \code{unique}.}
 }
 \description{
 A step of the avalon_native implementation. Called by \code{morie_avalon_features}. See the file header for the source the module follows.

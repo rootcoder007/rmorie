@@ -18,8 +18,8 @@ inv_logit <- function(x) {
 #' source it follows.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
-#' @param rate Defaults to \code{0.02}.
-#' @param codes Defaults to \code{c(97L, 98L, 99L, 997L, 998L, 999L)}.
+#' @param rate Passed to \code{<=}. Defaults to \code{0.02}.
+#' @param codes Passed to \code{sample}.
 #' @return The value of \code{x}, as built in the body.
 #' @export
 inject_special_codes <- function(x, rate = 0.02, codes = c(97L, 98L, 99L, 997L, 998L, 999L)) {

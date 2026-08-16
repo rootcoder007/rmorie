@@ -25,7 +25,7 @@
 #' it follows.
 #'
 #' @param nn A vector; its length is taken.
-#' @param grid See Usage.
+#' @param grid Passed to \code{findInterval}.
 #' @return A numeric value.
 #' @export
 .csrnn_G <- function(nn, grid) {

@@ -8,7 +8,7 @@
 .pq_read_footer(con, size)
 }
 \arguments{
-\item{con}{See Usage.}
+\item{con}{Passed to \code{seek}.}
 \item{size}{Numeric; combined arithmetically in the body.}
 }
 \description{

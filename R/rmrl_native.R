@@ -180,7 +180,7 @@ morie_rmrl_reward_machine_run <- function(machine, labels) {
 #'
 #' @param row A vector; indexed elementwise.
 #' @param A A vector; its length is taken and its elements indexed.
-#' @param epsilon See Usage.
+#' @param epsilon Passed to \code{<}.
 #' @param rng Passed to \code{.ghc_unif}.
 #' @return The value of \code{[[}.
 #' @export

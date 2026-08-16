@@ -8,7 +8,7 @@
 .morie_face_key(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Passed to \code{paste}.}
 }
 \description{
 Part of the topological_combinatorics_native implementation; see the file header for the source it follows.

@@ -8,7 +8,7 @@
 .goldsc_inner(p)
 }
 \arguments{
-\item{p}{See Usage.}
+\item{p}{Passed to \code{switch}.}
 }
 \description{
 A step of the goldsc_native implementation. Called by \code{.goldsc_pair}. See the file header for the source the module follows.

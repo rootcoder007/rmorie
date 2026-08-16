@@ -8,7 +8,7 @@
 print.morie_frac(x, ...)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{format}.}
 \item{...}{Passed through.}
 }
 \description{

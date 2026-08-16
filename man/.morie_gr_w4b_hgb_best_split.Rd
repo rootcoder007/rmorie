@@ -12,7 +12,7 @@
 \item{grad}{Numeric; passed to \code{sum}.}
 \item{hess}{Numeric; passed to \code{sum}.}
 \item{n_bins}{Numeric; combined arithmetically in the body.}
-\item{min_leaf}{See Usage.}
+\item{min_leaf}{Passed to \code{>=}.}
 }
 \description{
 A step of the geron_w4b_native implementation. Called by \code{.morie_gr_w4b_hgb_grow}. See the file header for the source the module follows.

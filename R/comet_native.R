@@ -63,9 +63,9 @@ pooled_features <- function(hyp, src, ref) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param hyp See Usage.
-#' @param src See Usage.
-#' @param ref See Usage.
+#' @param hyp Passed to \code{pooled_features}.
+#' @param src Passed to \code{pooled_features}.
+#' @param ref Passed to \code{pooled_features}.
 #' @param W A matrix; passed to \code{nrow}.
 #' @param b Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{estimate}, \code{score}, \code{method}, \code{note}.
@@ -194,11 +194,11 @@ comet <- estimator_score
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param hyp See Usage.
-#' @param src See Usage.
-#' @param ref See Usage.
-#' @param W See Usage.
-#' @param b Defaults to \code{NULL}.
+#' @param hyp Passed to \code{estimator_score}.
+#' @param src Passed to \code{estimator_score}.
+#' @param ref Passed to \code{estimator_score}.
+#' @param W Passed to \code{estimator_score}.
+#' @param b Passed to \code{estimator_score}.
 #' @return The value of \code{estimator_score}.
 #' @export
 morie_comet <- function(hyp, src, ref, W, b = NULL) {

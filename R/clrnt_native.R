@@ -205,8 +205,8 @@ prediction_accuracy <- function(predicted, observed, fold = 2.0) {
 #' source it follows.
 #'
 #' @param clint_in_vitro A vector; its length is taken.
-#' @param cl_h Defaults to \code{NULL}.
-#' @param fu_blood Defaults to \code{NULL}.
+#' @param cl_h Passed to \code{spread}.
+#' @param fu_blood Passed to \code{spread}.
 #' @param log_pd The body requires: clrnt: give either fu_incubation or log_pd so equations 1-2 can estimate it.
 #' @param fu_incubation The body requires: clrnt: give either fu_incubation or log_pd so equations 1-2 can estimate it.
 #' @param system Compared against \code{"microsomes"}. Defaults to \code{"hepatocytes"}.
@@ -214,11 +214,11 @@ prediction_accuracy <- function(predicted, observed, fold = 2.0) {
 #' @param liver_model Carried through into a list the body builds. Defaults to \code{"well_stirred"}.
 #' @param protein Iterated over elementwise, with \code{vapply}. Defaults to \code{1}.
 #' @param volume_ratio Iterated over elementwise, with \code{vapply}. Defaults to \code{0.005}.
-#' @param cl_plasma Defaults to \code{NULL}.
+#' @param cl_plasma Passed to \code{spread}.
 #' @param fu_plasma The body requires: clrnt: plasma clearance needs fu_plasma too.
-#' @param blood_plasma_ratio Defaults to \code{NULL}.
-#' @param charge Defaults to \code{"neutral"}.
-#' @param fold Defaults to \code{2}.
+#' @param blood_plasma_ratio Passed to \code{spread}.
+#' @param charge Passed to \code{blood_from_plasma}. Defaults to \code{"neutral"}.
+#' @param fold Passed to \code{prediction_accuracy}. Defaults to \code{2}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 clrnt <- function(clint_in_vitro, cl_h = NULL, fu_blood = NULL,
@@ -313,21 +313,21 @@ clearance_intrinsic <- clrnt
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param clint_in_vitro See Usage.
-#' @param cl_h Defaults to \code{NULL}.
-#' @param fu_blood Defaults to \code{NULL}.
-#' @param log_pd Defaults to \code{NULL}.
-#' @param fu_incubation Defaults to \code{NULL}.
-#' @param system Defaults to \code{"hepatocytes"}.
-#' @param species Defaults to \code{"human"}.
-#' @param liver_model Defaults to \code{"well_stirred"}.
-#' @param protein Defaults to \code{1}.
-#' @param volume_ratio Defaults to \code{0.005}.
-#' @param cl_plasma Defaults to \code{NULL}.
-#' @param fu_plasma Defaults to \code{NULL}.
-#' @param blood_plasma_ratio Defaults to \code{NULL}.
-#' @param charge Defaults to \code{"neutral"}.
-#' @param fold Defaults to \code{2}.
+#' @param clint_in_vitro Passed to \code{clrnt}.
+#' @param cl_h Passed to \code{clrnt}.
+#' @param fu_blood Passed to \code{clrnt}.
+#' @param log_pd Passed to \code{clrnt}.
+#' @param fu_incubation Passed to \code{clrnt}.
+#' @param system Passed to \code{clrnt}. Defaults to \code{"hepatocytes"}.
+#' @param species Passed to \code{clrnt}. Defaults to \code{"human"}.
+#' @param liver_model Passed to \code{clrnt}. Defaults to \code{"well_stirred"}.
+#' @param protein Passed to \code{clrnt}. Defaults to \code{1}.
+#' @param volume_ratio Passed to \code{clrnt}. Defaults to \code{0.005}.
+#' @param cl_plasma Passed to \code{clrnt}.
+#' @param fu_plasma Passed to \code{clrnt}.
+#' @param blood_plasma_ratio Passed to \code{clrnt}.
+#' @param charge Passed to \code{clrnt}. Defaults to \code{"neutral"}.
+#' @param fold Passed to \code{clrnt}. Defaults to \code{2}.
 #' @return The value of \code{clrnt}.
 #' @export
 morie_clrnt <- function(clint_in_vitro, cl_h = NULL, fu_blood = NULL,

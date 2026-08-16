@@ -8,8 +8,8 @@
 .offlrl_key(s, a)
 }
 \arguments{
-\item{s}{See Usage.}
-\item{a}{See Usage.}
+\item{s}{Passed to \code{paste0}.}
+\item{a}{Passed to \code{paste0}.}
 }
 \description{
 A step of the offlrl_native implementation. Called by \code{offlrl}. See the file header for the source the module follows.

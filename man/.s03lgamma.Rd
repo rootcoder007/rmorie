@@ -8,7 +8,7 @@
 .s03lgamma(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{lgamma}.}
 }
 \description{
 A step of the helpers_s03 implementation. Called by \code{.sgflrt_corr}, \code{Vbnpc}, \code{Vinfer}. See the file header for the source the module follows.

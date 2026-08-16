@@ -8,7 +8,7 @@
 DftX(x, fs = 1)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{Dft}.}
 \item{fs}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{

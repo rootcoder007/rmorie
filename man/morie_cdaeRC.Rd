@@ -8,18 +8,18 @@
 morie_cdaeRC(pos, n_users, n_items, k_dim = 8L, q = 0.2, alpha = 0.05, lam = 0.01, iters = 30L, n_neg = 5L, seed = 0, activation = "sigmoid", init_scale = 0.1)
 }
 \arguments{
-\item{pos}{See Usage.}
-\item{n_users}{See Usage.}
-\item{n_items}{See Usage.}
-\item{k_dim}{Defaults to \code{8L}.}
-\item{q}{Defaults to \code{0.2}.}
-\item{alpha}{Defaults to \code{0.05}.}
-\item{lam}{Defaults to \code{0.01}.}
-\item{iters}{Defaults to \code{30L}.}
-\item{n_neg}{Defaults to \code{5L}.}
-\item{seed}{Defaults to \code{0}.}
-\item{activation}{Defaults to \code{"sigmoid"}.}
-\item{init_scale}{Defaults to \code{0.1}.}
+\item{pos}{Passed to \code{fit_cdae}.}
+\item{n_users}{Passed to \code{fit_cdae}.}
+\item{n_items}{Passed to \code{fit_cdae}.}
+\item{k_dim}{Passed to \code{fit_cdae}. Defaults to \code{8L}.}
+\item{q}{Passed to \code{fit_cdae}. Defaults to \code{0.2}.}
+\item{alpha}{Passed to \code{fit_cdae}. Defaults to \code{0.05}.}
+\item{lam}{Passed to \code{fit_cdae}. Defaults to \code{0.01}.}
+\item{iters}{Passed to \code{fit_cdae}. Defaults to \code{30L}.}
+\item{n_neg}{Passed to \code{fit_cdae}. Defaults to \code{5L}.}
+\item{seed}{Passed to \code{fit_cdae}. Defaults to \code{0}.}
+\item{activation}{Passed to \code{fit_cdae}. Defaults to \code{"sigmoid"}.}
+\item{init_scale}{Passed to \code{fit_cdae}. Defaults to \code{0.1}.}
 }
 \description{
 A step of the cdaeRC_native implementation. No other function in the package calls it. See the file header for the source the module follows.

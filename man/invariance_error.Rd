@@ -8,10 +8,10 @@
 invariance_error(energy_fn, R, Q, g = NULL)
 }
 \arguments{
-\item{energy_fn}{See Usage.}
+\item{energy_fn}{Passed to \code{forces_from_energy}.}
 \item{R}{Passed to \code{.schn_mat}.}
 \item{Q}{Passed to \code{.schn_mat}.}
-\item{g}{Defaults to \code{NULL}.}
+\item{g}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the schN_native implementation. No other function in the package calls it. See the file header for the source the module follows.

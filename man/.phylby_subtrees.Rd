@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{node}{A vector; its length is taken and its elements indexed.}
-\item{path}{Defaults to \code{integer(0)}.}
+\item{path}{Passed to \code{c}. Defaults to \code{integer(0)}.}
 }
 \description{
 A step of the phylby_native implementation. Called by \code{.phylby_nni_neighbours}. See the file header for the source the module follows.

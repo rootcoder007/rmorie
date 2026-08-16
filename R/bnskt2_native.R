@@ -13,7 +13,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param rows See Usage.
+#' @param rows Passed to \code{do.call}.
 #' @param ys Coerced to numeric by the body, with \code{as.numeric}.
 #' @param w Numeric; combined arithmetically in the body.
 #' @return A list with \code{coef}.

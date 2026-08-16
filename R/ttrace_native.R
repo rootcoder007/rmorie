@@ -131,19 +131,19 @@ serial_interval_draw <- function(mean, sd, e, allow_presymptomatic = TRUE) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param R0 Defaults to \code{2.5}.
-#' @param dispersion Defaults to \code{0.16}.
+#' @param R0 Passed to \code{negbinom_offspring}. Defaults to \code{2.5}.
+#' @param dispersion Passed to \code{negbinom_offspring}. Defaults to \code{0.16}.
 #' @param n_initial Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.
 #' @param trace_prob Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.8}.
 #' @param delay_mean Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{3.83}.
 #' @param delay_sd Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2.4}.
-#' @param si_mean Defaults to \code{4.7}.
-#' @param si_sd Defaults to \code{2.9}.
+#' @param si_mean Passed to \code{serial_interval_draw}. Defaults to \code{4.7}.
+#' @param si_sd Passed to \code{serial_interval_draw}. Defaults to \code{2.9}.
 #' @param subclinical Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param max_cases Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5000}.
 #' @param max_weeks Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{12}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
-#' @param allow_presymptomatic Defaults to \code{TRUE}.
+#' @param allow_presymptomatic Passed to \code{serial_interval_draw}. Defaults to \code{TRUE}.
 #' @return A list with \code{controlled}, \code{total_cases}, \code{weekly}, \code{hit_cap}, \code{extinct}.
 #' @export
 simulate_outbreak <- function(R0 = 2.5, dispersion = 0.16,
@@ -335,8 +335,8 @@ contact_tracing_yield <- probability_of_control
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param reps Defaults to \code{200}.
-#' @param seed Defaults to \code{0}.
+#' @param reps Passed to \code{probability_of_control}. Defaults to \code{200}.
+#' @param seed Passed to \code{probability_of_control}. Defaults to \code{0}.
 #' @param ... Passed through.
 #' @return The value of \code{probability_of_control}.
 #' @export

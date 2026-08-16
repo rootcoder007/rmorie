@@ -9,10 +9,10 @@
 }
 \arguments{
 \item{a}{A count; the body uses it as \code{rep(...)}.}
-\item{numhs}{See Usage.}
-\item{charge}{See Usage.}
-\item{inring}{See Usage.}
-\item{isotope_delta}{See Usage.}
+\item{numhs}{Passed to \code{col}.}
+\item{charge}{Passed to \code{col}.}
+\item{inring}{Passed to \code{col}.}
+\item{isotope_delta}{Passed to \code{col}.}
 }
 \description{
 A step of the ecfp4_native implementation. Called by \code{morie_ecfp4}, \code{morie_ecfp6}. See the file header for the source the module follows.

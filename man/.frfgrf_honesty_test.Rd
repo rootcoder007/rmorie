@@ -8,10 +8,10 @@
 .frfgrf_honesty_test(X, y, kind = "double-sample", min_leaf = 5, seed = 11, n_permutations = 3)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{Passed to \code{honest_tree}.}
 \item{y}{A vector; indexed elementwise.}
 \item{kind}{Compared against \code{"propensity"}. Defaults to \code{"double-sample"}.}
-\item{min_leaf}{Defaults to \code{5}.}
+\item{min_leaf}{Passed to \code{honest_tree}. Defaults to \code{5}.}
 \item{seed}{Numeric; combined arithmetically in the body. Defaults to \code{11}.}
 \item{n_permutations}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.}
 }

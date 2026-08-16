@@ -14,7 +14,7 @@
 \item{kappa}{Numeric; combined arithmetically in the body.}
 \item{lam}{Numeric; combined arithmetically in the body.}
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.}
-\item{tol}{Defaults to \code{1e-11}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-11}.}
 }
 \description{
 A step of the schab_glmm_shared implementation. Called by \code{spbym}. See the file header for the source the module follows.

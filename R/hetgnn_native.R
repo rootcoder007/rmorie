@@ -57,7 +57,7 @@ metapath_neighbours <- function(edges, types, metapath) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param h_i See Usage.
+#' @param h_i Passed to \code{proj}.
 #' @param neighbours A vector; its length is taken and its elements indexed.
 #' @param H A vector; indexed elementwise.
 #' @param a_vec Numeric; combined arithmetically in the body.
@@ -141,15 +141,15 @@ semantic_attention <- function(Z_per_metapath, W, b, q) {
 #' source it follows.
 #'
 #' @param H A matrix; indexed by row and column.
-#' @param edges See Usage.
-#' @param types See Usage.
+#' @param edges Passed to \code{metapath_neighbours}.
+#' @param types Passed to \code{metapath_neighbours}.
 #' @param metapaths A vector; indexed elementwise.
-#' @param a_vec See Usage.
+#' @param a_vec Passed to \code{node_attention}.
 #' @param W_node A matrix; passed to \code{nrow}.
-#' @param W_sem See Usage.
-#' @param b_sem See Usage.
-#' @param q_sem See Usage.
-#' @param slope Defaults to \code{0.2}.
+#' @param W_sem Passed to \code{semantic_attention}.
+#' @param b_sem Passed to \code{semantic_attention}.
+#' @param q_sem Passed to \code{semantic_attention}.
+#' @param slope Passed to \code{node_attention}. Defaults to \code{0.2}.
 #' @return A list with \code{estimate}, \code{embeddings}, \code{semantic_weights}, \code{per_metapath}, \code{method}, \code{note}.
 #' @export
 han_forward <- function(H, edges, types, metapaths, a_vec, W_node,
@@ -204,16 +204,16 @@ heterogeneous_gnn <- han_forward
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param H See Usage.
-#' @param edges See Usage.
-#' @param types See Usage.
-#' @param metapaths See Usage.
-#' @param a_vec See Usage.
-#' @param W_node See Usage.
-#' @param W_sem See Usage.
-#' @param b_sem See Usage.
-#' @param q_sem See Usage.
-#' @param slope Defaults to \code{0.2}.
+#' @param H Passed to \code{han_forward}.
+#' @param edges Passed to \code{han_forward}.
+#' @param types Passed to \code{han_forward}.
+#' @param metapaths Passed to \code{han_forward}.
+#' @param a_vec Passed to \code{han_forward}.
+#' @param W_node Passed to \code{han_forward}.
+#' @param W_sem Passed to \code{han_forward}.
+#' @param b_sem Passed to \code{han_forward}.
+#' @param q_sem Passed to \code{han_forward}.
+#' @param slope Passed to \code{han_forward}. Defaults to \code{0.2}.
 #' @return The value of \code{han_forward}.
 #' @export
 morie_hetgnn <- function(H, edges, types, metapaths, a_vec, W_node,

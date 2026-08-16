@@ -59,7 +59,7 @@ Icc1 <- function(y, cluster) {
 #'
 #' @param y Passed to \code{.s03vec}.
 #' @param group Passed to \code{.s03vec}.
-#' @param who See Usage.
+#' @param who Passed to \code{paste0}.
 #' @return A list with \code{rows}, \code{n}, \code{k}.
 #' @export
 .icc_balanced <- function(y, group, who) {

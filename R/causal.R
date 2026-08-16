@@ -195,7 +195,7 @@ NULL
 #' @param y Numeric; combined arithmetically in the body.
 #' @param lam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
-#' @param tol Defaults to \code{1e-12}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-12}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
 .mor_ps_irls_beta <- function(X, y, lam = 0, max_iter = 200L, tol = 1e-12) {
@@ -365,7 +365,7 @@ NULL
 #' and Hernan, M. A. (2008), American Journal of Epidemiology 168(6),
 #' 656-664.
 #'
-#' @param w See Usage.
+#' @param w Passed to \code{return}.
 #' @param weight_trim Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param side One of \code{"both"}, \code{"upper"}. Defaults to \code{"upper"}.
 #' @return One of two values, depending on the branch taken.
@@ -409,7 +409,7 @@ NULL
 #'
 #' @param ps A vector; its length is taken.
 #' @param trim Optional; may be \code{NULL}. A vector; indexed elementwise. Defaults to \code{c(0.1, 0.9)}.
-#' @param trim_type Defaults to \code{"value"}.
+#' @param trim_type Passed to \code{identical}. Defaults to \code{"value"}.
 #' @return A logical value.
 #' @export
 .mor_ps_keep <- function(ps, trim = c(0.1, 0.9), trim_type = "value") {
@@ -750,7 +750,7 @@ morie_estimate_atc <- function(data, treatment, outcome, covariates,
 #' @param treatment Passed to \code{morie_estimate_propensity_scores}.
 #' @param outcome See Usage.
 #' @param covariates Passed to \code{morie_estimate_propensity_scores}.
-#' @param propensity_col Defaults to \code{NULL}.
+#' @param propensity_col Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param outcome_model Passed to \code{.mor_om_fit_predict}. Defaults to \code{c("linear", "logistic")}.
 #' @param trim Passed to \code{.mor_trim_ps}. Defaults to \code{c(0.01, 0.99)}.
 #' @param trim_type Passed to \code{.mor_trim_ps}. Defaults to \code{"value"}.
@@ -1634,6 +1634,15 @@ morie_causal_robust_se <- function(model,
 # interchangeable. Both were defined as morie_hajek_mean and
 # survey_native.R sorts later, so this one never ran; it is
 # scoped rather than left as a name that silently loses.
+#' .causal_hajek_weighted_mean
+#'
+#' Internal helper in causal.R; see the file header for
+#' the source the module follows.
+#'
+#' @param y A vector; its length is taken.
+#' @param weights The body requires: All weights must be > 0.
+#' @return A list with \code{mean}, \code{se}, \code{ci_lower}, \code{ci_upper}.
+#' @export
 .causal_hajek_weighted_mean <- function(y, weights) {
   y <- as.numeric(y); w <- as.numeric(weights)
   if (length(y) != length(w))

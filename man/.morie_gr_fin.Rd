@@ -8,8 +8,8 @@
 .morie_gr_fin(x, name)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{name}{See Usage.}
+\item{x}{Passed to \code{is.finite}.}
+\item{name}{Passed to \code{paste0}.}
 }
 \description{
 A step of the geron_train_native implementation. Called by \code{.morie_gr_attend}, \code{.morie_gr_check_mdp}, \code{.morie_gr_mse_core} and 105 others in the module. See the file header for the source the module follows.

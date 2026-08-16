@@ -9,11 +9,11 @@ phmmsr_search_pipeline(sequences, profile, msv_threshold = 0.02, mu = 10, lam = 
 }
 \arguments{
 \item{sequences}{A vector; its length is taken and its elements indexed.}
-\item{profile}{See Usage.}
+\item{profile}{Passed to \code{phmmsr_msv_score}.}
 \item{msv_threshold}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.02}.}
-\item{mu}{Defaults to \code{10}.}
-\item{lam}{Defaults to \code{0.7}.}
-\item{full_score}{Defaults to \code{NULL}.}
+\item{mu}{Passed to \code{phmmsr_gumbel_pvalue}. Defaults to \code{10}.}
+\item{lam}{Passed to \code{phmmsr_msv_score}. Defaults to \code{0.7}.}
+\item{full_score}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the phmmsr_native implementation. No other function in the package calls it. See the file header for the source the module follows.

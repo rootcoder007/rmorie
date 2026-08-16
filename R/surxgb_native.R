@@ -52,7 +52,7 @@ morie_surxgb_DISTRIBUTIONS <- c("normal", "logistic", "extreme")
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param dist See Usage.
+#' @param dist Passed to \code{\%in\%}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .surxgb_check_dist <- function(dist) {

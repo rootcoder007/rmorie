@@ -10,7 +10,7 @@ PpgFeat(ppg, fs, mwin = 16)
 \arguments{
 \item{ppg}{A vector; its length is taken and its elements indexed.}
 \item{fs}{Numeric; combined arithmetically in the body.}
-\item{mwin}{Defaults to \code{16}.}
+\item{mwin}{Passed to \code{DicNotch}. Defaults to \code{16}.}
 }
 \description{
 book gives for the carotid pulse in Section 4.3.5 (eqs 4.22, 4.23), because the PPG pulse shape mirrors the carotid pulse.  The perfusion index says how much of the reading is pulsatile blood volume rather than static tissue absorption.

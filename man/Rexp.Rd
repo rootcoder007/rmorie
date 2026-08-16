@@ -9,7 +9,7 @@ Rexp(n, rate = 1, seed = 0, stream = 0)
 }
 \arguments{
 \item{n}{Passed to \code{.morie_random_uniform}.}
-\item{rate}{Defaults to \code{1}.}
+\item{rate}{Passed to \code{Qexp}. Defaults to \code{1}.}
 \item{seed}{Passed to \code{.morie_random_uniform}. Defaults to \code{0}.}
 \item{stream}{Passed to \code{.morie_random_uniform}. Defaults to \code{0}.}
 }

@@ -8,7 +8,7 @@
 .pdcoin_nuisance(y, Zx, e, bandwidth)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Passed to \code{diff}.}
 \item{Zx}{A matrix; passed to \code{ncol}.}
 \item{e}{A vector; its length is taken and its elements indexed.}
 \item{bandwidth}{Passed to \code{.nw_lrv}.}

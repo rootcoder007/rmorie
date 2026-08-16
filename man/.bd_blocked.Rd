@@ -10,7 +10,7 @@
 \arguments{
 \item{p}{A vector; its length is taken and its elements indexed.}
 \item{d}{A vector; indexed elementwise.}
-\item{Z}{See Usage.}
+\item{Z}{Passed to \code{\%in\%}.}
 \item{ch}{Passed to \code{.bd_desc}.}
 }
 \description{

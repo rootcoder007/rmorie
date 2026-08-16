@@ -18,3 +18,11 @@ A step of the rangayyan_adapt implementation. Called by \code{PcgSeg}, \code{Wie
 The value of \code{out}, as built in the body.
 }
 \keyword{internal}
+\examples{
+F <- matrix(0.9)
+H <- matrix(1)
+Q <- matrix(0.1)
+R <- matrix(1)
+Riccati(F, H, Q, R)
+.morie_rg_solve(A = F, b = F)
+}

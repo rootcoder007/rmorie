@@ -8,7 +8,7 @@
 morie_timesfm(history, predictor, horizon, input_patch_len, output_patch_len)
 }
 \arguments{
-\item{history}{See Usage.}
+\item{history}{Passed to \code{unlist}.}
 \item{predictor}{Accepted by the signature and not used anywhere in the body.}
 \item{horizon}{Passed to \code{morie_timesfm_rollout_steps}.}
 \item{input_patch_len}{Coerced to integer by the body, with \code{as.integer}.}

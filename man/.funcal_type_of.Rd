@@ -8,8 +8,8 @@
 .funcal_type_of(n_query_side, n_target_side)
 }
 \arguments{
-\item{n_query_side}{See Usage.}
-\item{n_target_side}{See Usage.}
+\item{n_query_side}{Passed to \code{<=}.}
+\item{n_target_side}{Passed to \code{<=}.}
 }
 \description{
 A step of the funcal_native implementation. Called by \code{morie_funcal_assign_orthologs}. See the file header for the source the module follows.

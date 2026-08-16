@@ -11,7 +11,7 @@ BwLp(cutoff_hz, order = 4, fs = 1000, z = NULL)
 \item{cutoff_hz}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{order}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.}
 \item{fs}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1000}.}
-\item{z}{Defaults to \code{NULL}.}
+\item{z}{Passed to \code{BwDigital}.}
 }
 \description{
 eq (3.137), keep the left-half-plane ones by eq (3.138), apply the bilinear transform of eq (3.139) to reach eq (3.143).  Prewarping is done here; without it the realized cutoff sits below the request.

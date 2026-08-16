@@ -15,7 +15,7 @@ morie_strmkr_strauss_process(coords, r, gamma = NULL, window = NULL, nx = 12L, n
 \item{nx}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{12L}.}
 \item{ny}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{12L}.}
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100L}.}
-\item{tol}{Defaults to \code{1e-11}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-11}.}
 }
 \description{
 A step of the strmkr_native implementation. No other function in the package calls it. See the file header for the source the module follows.

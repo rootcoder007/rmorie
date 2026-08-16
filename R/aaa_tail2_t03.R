@@ -278,7 +278,7 @@ CramerRao <- function(fisher_info, var_estimate = NULL) {
 #' @param X A matrix; passed to \code{nrow}.
 #' @param beta Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50L}.
-#' @param tol Defaults to \code{1e-10}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-10}.
 #' @return A list with \code{loglik}, \code{score}, \code{information}, \code{coefficients}, \code{vcov}, \code{se}, \code{n}, \code{n_event}, \code{iterations}, \code{converged}, \code{method}.
 #' @export
 CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
@@ -339,7 +339,7 @@ CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
 #' source it follows.
 #'
 #' @param constraints Iterated over elementwise, with \code{vapply}.
-#' @param x See Usage.
+#' @param x Passed to \code{g}.
 #' @return A vector, from \code{vapply}.
 #' @export
 .morie_t2_viol <- function(constraints, x)

@@ -11,7 +11,7 @@
 \item{fn}{Accepted by the signature and not used anywhere in the body.}
 \item{d}{Numeric; combined arithmetically in the body.}
 \item{n_restarts}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8L}.}
-\item{seed}{Defaults to \code{0L}.}
+\item{seed}{Passed to \code{set.seed}. Defaults to \code{0L}.}
 \item{x0}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{

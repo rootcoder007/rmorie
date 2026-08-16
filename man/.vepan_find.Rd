@@ -8,8 +8,8 @@
 .vepan_find(s, ch)
 }
 \arguments{
-\item{s}{See Usage.}
-\item{ch}{See Usage.}
+\item{s}{Passed to \code{regexpr}.}
+\item{ch}{Passed to \code{regexpr}.}
 }
 \description{
 A step of the vepan_native implementation. Called by \code{.vepan_coding_terms}. See the file header for the source the module follows.

@@ -8,7 +8,7 @@
 .morie_ensure_exec_allowed(feature = "dynamic execution")
 }
 \arguments{
-\item{feature}{Defaults to \code{"dynamic execution"}.}
+\item{feature}{Passed to \code{sprintf}. Defaults to \code{"dynamic execution"}.}
 }
 \description{
 of every sink that spawns an external process.

@@ -10,7 +10,7 @@
 \arguments{
 \item{U}{A matrix; indexed by row and column.}
 \item{V}{A matrix; indexed by row and column.}
-\item{i}{See Usage.}
+\item{i}{Passed to \code{!=}.}
 \item{tau}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.}
 \item{intra}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }

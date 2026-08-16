@@ -22,7 +22,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .painn_vec <- function(v) as.numeric(unlist(v))
@@ -201,7 +201,7 @@ dipole_moment <- function(charges, R, centre = NULL) {
 #' source it follows.
 #'
 #' @param model Accepted by the signature and not used anywhere in the body.
-#' @param s See Usage.
+#' @param s Passed to \code{model}.
 #' @param v Passed to \code{.painn_mat}.
 #' @param R Passed to \code{.painn_mat}.
 #' @param Q Passed to \code{.painn_mat}.

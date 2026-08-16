@@ -11,8 +11,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a1 See Usage.
-#' @param a2 See Usage.
+#' @param a1 Passed to \code{==}.
+#' @param a2 Passed to \code{==}.
 #' @param fr A vector; indexed elementwise.
 #' @param theta Numeric; combined arithmetically in the body.
 #' @return A numeric value.

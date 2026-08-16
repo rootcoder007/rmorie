@@ -8,8 +8,8 @@
 .forsnp_locus(a1, a2, fr, theta)
 }
 \arguments{
-\item{a1}{See Usage.}
-\item{a2}{See Usage.}
+\item{a1}{Passed to \code{==}.}
+\item{a2}{Passed to \code{==}.}
 \item{fr}{A vector; indexed elementwise.}
 \item{theta}{Numeric; combined arithmetically in the body.}
 }

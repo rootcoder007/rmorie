@@ -12,7 +12,7 @@
 \item{s12}{A vector; its length is taken and its elements indexed.}
 \item{lam}{Passed to \code{.netcms_soft}.}
 \item{beta}{A vector; indexed elementwise.}
-\item{tol}{See Usage.}
+\item{tol}{Passed to \code{<}.}
 \item{maxit}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{

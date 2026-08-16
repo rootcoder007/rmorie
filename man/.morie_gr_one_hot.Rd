@@ -19,3 +19,6 @@ A step of the geron_train_native implementation. Called by \code{.morie_gr_gradi
 The value of \code{Y}, as built in the body.
 }
 \keyword{internal}
+\examples{
+.morie_gr_one_hot(Y = c(0L, 2L, 1L), K = 3L, m = 3L)
+}

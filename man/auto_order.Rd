@@ -23,3 +23,8 @@ A step of the sarimax_native implementation. No other function in the package ca
 A list with \code{estimate}, \code{aic}, \code{fit}, \code{order}, \code{seasonal_order}, \code{constant}, \code{steps}, \code{n_models_tried}, \code{tried}, \code{s}, \code{search_method}, \code{differencing_note}, \code{method}.
 }
 \keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+aic(V, V)
+auto_order(y = V)
+}

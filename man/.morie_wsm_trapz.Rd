@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{y}{A vector; its length is taken and its elements indexed.}
-\item{x}{See Usage.}
+\item{x}{Passed to \code{diff}.}
 }
 \description{
 A step of the wasserman_native implementation. Called by \code{morie_wasserman_entropy}, \code{morie_wasserman_kullback_leibler}, \code{morie_wasserman_posterior} and 1 others in the module. See the file header for the source the module follows.

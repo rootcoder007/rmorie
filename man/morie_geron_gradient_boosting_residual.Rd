@@ -33,3 +33,10 @@ sorted unique values of each feature, first minimum wins) is fitted to
 r unless \code{learner} is supplied; F_new = F_prev + nu * h. The stump's
 \code{feature} index is 0-based.
 }
+\examples{
+X <- matrix(c(1, 2, 1, 3, 1, 5, 1, 7), 4, byrow = TRUE)
+y <- c(2, 3, 6, 9)
+morie_geron_minibatch_gradient_descent(X, y, c(0, 0), 0.02, 2, 
+    5, seed = 3)
+morie_geron_gradient_boosting_residual(X = X, y = y, F_prev = y)
+}

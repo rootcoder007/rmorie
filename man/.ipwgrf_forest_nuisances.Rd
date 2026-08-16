@@ -12,7 +12,7 @@
 \item{W}{A vector; indexed elementwise.}
 \item{X}{A matrix; indexed by row and column.}
 \item{n_folds}{Passed to \code{.ipwgrf_folds}. Defaults to \code{5}.}
-\item{n_trees}{Defaults to \code{120}.}
+\item{n_trees}{Passed to \code{grow_forest}. Defaults to \code{120}.}
 \item{min_leaf}{Numeric; combined arithmetically in the body. Defaults to \code{5}.}
 \item{seed}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 }

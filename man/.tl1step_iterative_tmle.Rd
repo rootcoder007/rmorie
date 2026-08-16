@@ -12,7 +12,7 @@
 \item{H_fn}{Accepted by the signature and not used anywhere in the body.}
 \item{Y}{Passed to \code{.tl1step_as_numvec}.}
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25}.}
-\item{tol}{Defaults to \code{1e-08}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-08}.}
 }
 \description{
 within each iteration and recomputed between them -- a sequence of jumps rather than a path.

@@ -13,7 +13,7 @@
 \item{Sig}{Passed to \code{.sgflrt_chol}.}
 \item{family}{Passed to \code{.sgflrt_family}.}
 \item{inner_iter}{Coerced to integer by the body, with \code{as.integer}.}
-\item{tol}{See Usage.}
+\item{tol}{Passed to \code{<}.}
 \item{disp}{Passed to \code{.sgflrt_family}. Defaults to \code{1}.}
 }
 \description{

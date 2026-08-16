@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{g}{A list; the body reads \code{$out} from it.}
-\item{v}{See Usage.}
+\item{v}{Passed to \code{\%in\%}.}
 }
 \description{
 A step of the metsem_native implementation. Called by \code{.metsem_walk}, \code{morie_metsem}, \code{morie_metsem_unitigs}. See the file header for the source the module follows.
@@ -29,3 +29,12 @@ One of two values, depending on the branch taken.
     doi:10.1089/cmb.2012.0021.
 }
 \keyword{internal}
+\examples{
+ABUNDANT <- "ACGTACGGTCAGTTGCAAGT"
+RARE <- "TTGCCATGAACCGGTTAACA"
+READS <- c(rep(ABUNDANT, 4L), RARE)
+K <- 7L
+g <- morie_metsem_graph(READS, K)
+morie_metsem_unitigs(g)
+.metsem_outdeg(g = g, v = K)
+}

@@ -153,11 +153,11 @@ morie_survroc_kaplan_meier <- function(times, events, at = NULL) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param T See Usage.
-#' @param E See Usage.
+#' @param T Passed to \code{<}.
+#' @param E Passed to \code{==}.
 #' @param M A vector; indexed elementwise.
-#' @param c See Usage.
-#' @param t See Usage.
+#' @param c Passed to \code{>}.
+#' @param t Passed to \code{<}.
 #' @return A vector, from \code{c}.
 #' @export
 .survroc_empirical <- function(T, E, M, c, t) {
@@ -182,8 +182,8 @@ morie_survroc_kaplan_meier <- function(times, events, at = NULL) {
 #'
 #' @param T A vector; its length is taken and its elements indexed.
 #' @param E A vector; indexed elementwise.
-#' @param M See Usage.
-#' @param c See Usage.
+#' @param M Passed to \code{>}.
+#' @param c Passed to \code{>}.
 #' @param t Passed to \code{morie_survroc_kaplan_meier}.
 #' @return A vector, from \code{c}.
 #' @export

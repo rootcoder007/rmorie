@@ -465,8 +465,8 @@ NccfTpl <- function(x, template) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
-#' @param y See Usage.
+#' @param x Passed to \code{DotProd}.
+#' @param y Passed to \code{DotProd}.
 #' @return A list with \code{gamma}, \code{dot_product}, \code{norms}, \code{pearson}, \code{is_a_cosine_not_an_agreement}, \code{unity_for_a_positive_rescaling}, \code{method}.
 #' @export
 CorrDot <- function(x, y) {

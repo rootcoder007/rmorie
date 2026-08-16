@@ -12,8 +12,8 @@
 \item{mu}{Numeric; combined arithmetically in the body.}
 \item{n}{Numeric; combined arithmetically in the body. Defaults to \code{sum(weights)}.}
 \item{weights}{Numeric; combined arithmetically in the body.}
-\item{limit}{Defaults to \code{10}.}
-\item{eps}{Defaults to \code{.Machine$double.eps^0.25}.}
+\item{limit}{Passed to \code{<}. Defaults to \code{10}.}
+\item{eps}{Passed to \code{>}. Defaults to \code{.Machine$double.eps^0.25}.}
 }
 \description{
 A step of the mass_native implementation. Called by \code{morie_glm_nb}. See the file header for the source the module follows.

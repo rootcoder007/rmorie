@@ -22,7 +22,7 @@
 #' @param X A matrix; passed to \code{ncol}.
 #' @param y Numeric; combined arithmetically in the body.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100L}.
-#' @param tol Defaults to \code{1e-10}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-10}.
 #' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A list with \code{beta}, \code{fitted}, \code{separated}.
 #' @export

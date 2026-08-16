@@ -36,7 +36,7 @@
 #' @param b_ub Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param A_eq Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param b_eq Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param lower See Usage.
+#' @param lower Passed to \code{ifelse}.
 #' @param upper A vector; indexed elementwise.
 #' @return A list with \code{status}, \code{x}, \code{fun}.
 #' @export

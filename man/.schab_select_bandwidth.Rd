@@ -14,7 +14,7 @@
 \item{kernel}{Passed to \code{.schab_gwr_criterion}. Defaults to \code{"gaussian"}.}
 \item{criterion}{Passed to \code{.schab_gwr_criterion}. Defaults to \code{"cv"}.}
 \item{adaptive}{A flag; the body branches on it. Defaults to \code{FALSE}.}
-\item{bounds}{Defaults to \code{NULL}.}
+\item{bounds}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{tol}{Passed to \code{.schab_golden_section}. Defaults to \code{1e-04}.}
 }
 \description{

@@ -145,7 +145,7 @@ rgemgf <- function(emg, force, fs, window = NULL, turn_threshold = 100) {
 #' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{>=}.
 #' @return A numeric value.
 #' @export
 .rgemgf_zcr <- function(x) {

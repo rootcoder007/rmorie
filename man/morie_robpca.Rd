@@ -12,7 +12,7 @@ morie_robpca(X, k = NULL, alpha = 0.75, kmax = 10L, n_dirs = 250L, n_start = 250
 \item{k}{Passed to \code{.robpca_choose_k}.}
 \item{alpha}{Numeric; combined arithmetically in the body. Defaults to \code{0.75}.}
 \item{kmax}{Numeric; combined arithmetically in the body. Defaults to \code{10L}.}
-\item{n_dirs}{Defaults to \code{250L}.}
+\item{n_dirs}{Passed to \code{outlyingness}. Defaults to \code{250L}.}
 \item{n_start}{Passed to \code{.robpca_fast_mcd}. Defaults to \code{250L}.}
 \item{seed}{Passed to \code{.robpca_fast_mcd}. Defaults to \code{17L}.}
 \item{reweight}{A flag; the body branches on it. Defaults to \code{TRUE}.}

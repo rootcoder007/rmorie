@@ -92,8 +92,8 @@ morie_vepan_PICK_ORDER <- c("canonical", "protein_coding",
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param lo See Usage.
-#' @param hi See Usage.
+#' @param lo Passed to \code{>=}.
+#' @param hi Passed to \code{>=}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .vepan_seqrange <- function(lo, hi) {
@@ -107,8 +107,8 @@ morie_vepan_PICK_ORDER <- c("canonical", "protein_coding",
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param s See Usage.
-#' @param ch See Usage.
+#' @param s Passed to \code{regexpr}.
+#' @param ch Passed to \code{regexpr}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .vepan_find <- function(s, ch) {
@@ -752,8 +752,8 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 #' @param variant Passed to \code{.vepan_variant}.
 #' @param transcripts Iterated over elementwise, with \code{lapply}.
 #' @param genome Coerced to character by the body, with \code{as.character}.
-#' @param upstream Defaults to \code{5000}.
-#' @param downstream Defaults to \code{5000}.
+#' @param upstream Passed to \code{<}. Defaults to \code{5000}.
+#' @param downstream Passed to \code{<}. Defaults to \code{5000}.
 #' @return The value of \code{[}.
 #' @export
 morie_vepan_annotate <- function(variant, transcripts, genome,

@@ -11,7 +11,7 @@
 \item{X}{A matrix; passed to \code{nrow}.}
 \item{k}{A count; the body uses it as \code{matrix(...)}.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}.}
-\item{tol}{See Usage.}
+\item{tol}{Passed to \code{<}.}
 \item{seed}{Numeric; combined arithmetically in the body.}
 }
 \description{

@@ -10,8 +10,8 @@ FdPsd(psd, freqs, fmin = NULL, fmax = NULL)
 \arguments{
 \item{psd}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{freqs}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{fmin}{Defaults to \code{NULL}.}
-\item{fmax}{Defaults to \code{NULL}.}
+\item{fmin}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{fmax}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 signal H = (beta-1)/2, FD = (5-beta)/2.  beta is MINUS the slope of log10 P against log10 f.  The DC bin is dropped: log(0) is undefined and DC carries the mean, not the scaling.

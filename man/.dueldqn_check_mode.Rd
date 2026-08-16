@@ -8,7 +8,7 @@
 .dueldqn_check_mode(mode)
 }
 \arguments{
-\item{mode}{See Usage.}
+\item{mode}{Passed to \code{\%in\%}.}
 }
 \description{
 A step of the dueldqn_native implementation. Called by \code{dueling_aggregate}. See the file header for the source the module follows.

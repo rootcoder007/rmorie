@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{a}{A vector; its length is taken.}
-\item{b}{See Usage.}
+\item{b}{Passed to \code{outer}.}
 \item{theta}{A vector; its length is taken.}
 }
 \description{

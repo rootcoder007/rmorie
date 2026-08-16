@@ -9,7 +9,7 @@ morie_alfbnp_af3_sample(n_atoms = NULL, denoiser = NULL, clean = NULL, steps = 2
 }
 \arguments{
 \item{n_atoms}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
-\item{denoiser}{Defaults to \code{NULL}.}
+\item{denoiser}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{clean}{Optional; may be \code{NULL}. Passed to \code{.alfbnp_clean_list}.}
 \item{steps}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20L}.}
 \item{sigma_data}{Compared against \code{"fit"}. Defaults to \code{16}.}

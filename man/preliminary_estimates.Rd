@@ -8,7 +8,7 @@
 preliminary_estimates(w, s = 12)
 }
 \arguments{
-\item{w}{See Usage.}
+\item{w}{Passed to \code{sample_acf}.}
 \item{s}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{12}.}
 }
 \description{

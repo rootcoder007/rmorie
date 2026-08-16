@@ -10,7 +10,7 @@
 \arguments{
 \item{st}{A list; the body reads \code{$O}, \code{$W} from it.}
 \item{c}{See Usage.}
-\item{j}{See Usage.}
+\item{j}{Passed to \code{c}.}
 \item{size}{A count; the body uses it as \code{numeric(...)}.}
 \item{lr}{Numeric; combined arithmetically in the body.}
 \item{k}{A count; the body uses it as \code{seq_len(...)}.}

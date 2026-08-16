@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{cum}{A vector; its length is taken and its elements indexed.}
-\item{u}{See Usage.}
+\item{u}{Passed to \code{<}.}
 }
 \description{
 findInterval has the same effect but is documented to return the leftmost interval, so we keep our own to mirror the Python arm\\'s hand-written loop.

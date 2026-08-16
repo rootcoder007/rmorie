@@ -17,8 +17,8 @@ fasttext(corpus, dim = 50, n_min = 3, n_max = 6, window = 5, epochs = 5, lr = 0.
 \item{lr}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.}
 \item{negative}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.}
 \item{min_count}{The body requires: word(s) above min_count=. Defaults to \code{1}.}
-\item{boundary}{Defaults to \code{TRUE}.}
-\item{whole_word}{Defaults to \code{TRUE}.}
+\item{boundary}{Passed to \code{subwords}. Defaults to \code{TRUE}.}
+\item{whole_word}{Passed to \code{subwords}. Defaults to \code{TRUE}.}
 \item{hash_buckets}{Optional; may be \code{NULL}. Passed to \code{.gram_slot}.}
 \item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }

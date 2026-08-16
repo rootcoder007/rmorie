@@ -86,8 +86,8 @@
 #' strings by whatever collation happens to be in force, and the
 #' canonical spelling of a path would depend on the machine.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Passed to \code{utf8ToInt}.
+#' @param b Passed to \code{utf8ToInt}.
 #' @return A logical value.
 #' @export
 .avalon_lte <- function(a, b) {
@@ -106,7 +106,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Passed to \code{unique}.
 #' @return A vector, from \code{sort}.
 #' @export
 .avalon_sortkeys <- function(v) sort(unique(v), method = "radix")
@@ -341,7 +341,7 @@ morie_avalon_h <- function(el, arom, chg, hexp, bonds) {
 #' @param adj A vector; its length is taken and its elements indexed.
 #' @param src Numeric; combined arithmetically in the body.
 #' @param dst Numeric; combined arithmetically in the body.
-#' @param banned See Usage.
+#' @param banned Passed to \code{==}.
 #' @return A vector, from \code{rev}.
 #' @export
 .avalon_shortest <- function(adj, src, dst, banned) {
@@ -413,7 +413,7 @@ morie_avalon_rings <- function(n, bonds, closures) {
 #'
 #' @param adj A vector; indexed elementwise.
 #' @param n A count; the body uses it as \code{rep(...)}.
-#' @param maxpath See Usage.
+#' @param maxpath Passed to \code{>=}.
 #' @param ty A vector; indexed elementwise.
 #' @return The value of \code{unique}.
 #' @export

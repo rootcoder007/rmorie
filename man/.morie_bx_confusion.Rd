@@ -8,8 +8,8 @@
 .morie_bx_confusion(true, pred)
 }
 \arguments{
-\item{true}{See Usage.}
-\item{pred}{See Usage.}
+\item{true}{Passed to \code{==}.}
+\item{pred}{Passed to \code{==}.}
 }
 \description{
 A step of the rangayyan_class2 implementation. Called by \code{CadPipe}, \code{PvcBayes}. See the file header for the source the module follows.

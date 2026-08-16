@@ -117,7 +117,7 @@
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y Numeric; combined arithmetically in the body.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{25L}.
-#' @param tol Defaults to \code{1e-08}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
 .tdcvar_logreg <- function(X, y, max_iter=25L, tol=1e-8) {

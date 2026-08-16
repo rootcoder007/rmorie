@@ -10,7 +10,7 @@ CadSpec(x, fs, bands = NULL)
 \arguments{
 \item{x}{Passed to \code{.bsapsd}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
-\item{bands}{Defaults to \code{NULL}.}
+\item{bands}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the rangayyan_phys implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -8,11 +8,11 @@
 morie_tagRC(triples, focus, d = 0.7, weight = 0.9, iters = 200)
 }
 \arguments{
-\item{triples}{See Usage.}
-\item{focus}{See Usage.}
-\item{d}{Defaults to \code{0.7}.}
-\item{weight}{Defaults to \code{0.9}.}
-\item{iters}{Defaults to \code{200}.}
+\item{triples}{Passed to \code{folkrank}.}
+\item{focus}{Passed to \code{folkrank}.}
+\item{d}{Passed to \code{folkrank}. Defaults to \code{0.7}.}
+\item{weight}{Passed to \code{folkrank}. Defaults to \code{0.9}.}
+\item{iters}{Passed to \code{folkrank}. Defaults to \code{200}.}
 }
 \description{
 A step of the tagRC_native implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -11,7 +11,7 @@ morie_funcal_assign_orthologs(seeds, groups, taxa = NULL, target_taxa = NULL, ta
 \item{seeds}{A vector; indexed elementwise.}
 \item{groups}{A vector; indexed elementwise.}
 \item{taxa}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
-\item{target_taxa}{Defaults to \code{NULL}.}
+\item{target_taxa}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{target_types}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 }
 \description{

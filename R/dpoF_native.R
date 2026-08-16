@@ -77,7 +77,7 @@
 #' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
-#' @param name See Usage.
+#' @param name Passed to \code{sprintf}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
 .dpoF_vec <- function(x, name) {

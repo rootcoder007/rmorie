@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{precedence}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
-\item{sym}{See Usage.}
+\item{sym}{Passed to \code{\%in\%}.}
 }
 \description{
 A step of the trmRew_native implementation. Called by \code{morie_trmRew_lpo_greater}. See the file header for the source the module follows.

@@ -10,8 +10,8 @@
 \arguments{
 \item{spec}{A list; the body reads \code{$harmonics}, \code{$p}, \code{$periods}, \code{$q}, \code{$use_trend} from it.}
 \item{theta}{Passed to \code{.unpack}.}
-\item{x0}{See Usage.}
-\item{z}{See Usage.}
+\item{x0}{Passed to \code{bats_filter}.}
+\item{z}{Passed to \code{bats_filter}.}
 \item{h}{A count; the body uses it as \code{seq_len(...)}.}
 \item{long_run_b}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 }

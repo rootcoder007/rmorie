@@ -35,7 +35,7 @@
 #' the source it follows.
 #'
 #' @param x Numeric; passed to \code{exp}.
-#' @param kind See Usage.
+#' @param kind Passed to \code{identical}.
 #' @param inverse A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return Nothing; this branch always raises.
 #' @export
@@ -62,7 +62,7 @@
 #' the source it follows.
 #'
 #' @param mu A vector; its length is taken.
-#' @param kind See Usage.
+#' @param kind Passed to \code{identical}.
 #' @return Nothing; this branch always raises.
 #' @export
 .schab_link_derivative <- function(mu, kind) {
@@ -370,7 +370,7 @@
 #' the source it follows.
 #'
 #' @param z Coerced to numeric by the body, with \code{as.numeric}.
-#' @param family See Usage.
+#' @param family Passed to \code{identical}.
 #' @return The value of \code{z}, as built in the body.
 #' @export
 .schab_initial_mu <- function(z, family) {
@@ -398,7 +398,7 @@
 #' @param sigma2 Passed to \code{.schab_sigma_mu}. Defaults to \code{1}.
 #' @param R Passed to \code{.schab_sigma_mu}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100L}.
-#' @param tol Defaults to \code{1e-08}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
 #' @return A list with \code{beta}, \code{S}, \code{mu}, \code{sigma2}, \code{cov_beta}, \code{se_beta}, \code{Sigma_nu}, \code{pseudo_data}, \code{n_iter}, \code{converged}, \code{link}, \code{family}.
 #' @export
 .schab_fit_pseudo_likelihood <- function(z, X, Sigma_S, family = "poisson",
@@ -805,7 +805,7 @@
 #' @param kappa Numeric; combined arithmetically in the body.
 #' @param lam Numeric; combined arithmetically in the body.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
-#' @param tol Defaults to \code{1e-11}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-11}.
 #' @return A list with \code{u}, \code{v}, \code{x}, \code{relative_risk}, \code{fitted}, \code{n_iter}, \code{converged}, \code{sum_v}, \code{fitted_total}, \code{observed_total}, \code{log_posterior}.
 #' @export
 .schab_bym_map <- function(y, c_exp, adjacency, kappa, lam, max_iter = 200L,
@@ -936,7 +936,7 @@
 #' the source it follows.
 #'
 #' @param R_delta A matrix; passed to \code{as.matrix}.
-#' @param tol Defaults to \code{NULL}.
+#' @param tol Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{A}, \code{e}, \code{n_constraints}, \code{rank_deficiency}.
 #' @export
 .schab_null_space_constraints <- function(R_delta, tol = NULL) {

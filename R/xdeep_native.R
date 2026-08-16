@@ -199,8 +199,8 @@ xdeep_interaction_degree <- function(layer_index) {
 #'
 #' @param x_linear Passed to \code{.xdeep_to_vec}.
 #' @param w_linear Passed to \code{.xdeep_to_vec}.
-#' @param X0 See Usage.
-#' @param Ws See Usage.
+#' @param X0 Passed to \code{xdeep_cin}.
+#' @param Ws Passed to \code{xdeep_cin}.
 #' @param w_cin Passed to \code{.xdeep_to_vec}.
 #' @param dnn_output Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param w_dnn Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.

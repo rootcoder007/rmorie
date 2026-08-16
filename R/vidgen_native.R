@@ -76,7 +76,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .vidgen_vec <- function(x) {
@@ -298,7 +298,7 @@ morie_vidgen_attention_cost <- function(frames, spatial_positions) {
 #' @param observed Iterated over elementwise, with \code{lapply}.
 #' @param index Coerced to integer by the body, with \code{as.integer}.
 #' @param weight Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2}.
-#' @param downsample Defaults to \code{NULL}.
+#' @param downsample Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{estimate}, \code{gradient}, \code{error}, \code{weight}, \code{guided_frames}, \code{method}, \code{note}.
 #' @export
 morie_vidgen_reconstruction_guidance <- function(x_hat, observed, index,

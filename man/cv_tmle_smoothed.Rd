@@ -9,9 +9,9 @@ cv_tmle_smoothed(X, x0, bandwidths, kernel = "epanechnikov", V = 5L, seed = 0L)
 }
 \arguments{
 \item{X}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{x0}{See Usage.}
-\item{bandwidths}{See Usage.}
-\item{kernel}{Defaults to \code{"epanechnikov"}.}
+\item{x0}{Passed to \code{select_bandwidth}.}
+\item{bandwidths}{Passed to \code{select_bandwidth}.}
+\item{kernel}{Passed to \code{select_bandwidth}. Defaults to \code{"epanechnikov"}.}
 \item{V}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.}
 \item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.}
 }

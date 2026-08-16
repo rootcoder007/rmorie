@@ -8,8 +8,8 @@
 .robpca_mahalanobis(X, mu, C)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{mu}{See Usage.}
+\item{X}{Passed to \code{sweep}.}
+\item{mu}{Passed to \code{sweep}.}
 \item{C}{A matrix; passed to \code{solve}.}
 }
 \description{

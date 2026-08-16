@@ -155,7 +155,7 @@
 #' source it follows.
 #'
 #' @param x Carried through into a list the body builds.
-#' @param y See Usage.
+#' @param y Passed to \code{==}.
 #' @param children A vector; indexed elementwise.
 #' @param parents A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
@@ -194,7 +194,7 @@
 #'
 #' @param path A vector; its length is taken and its elements indexed.
 #' @param dirs A vector; indexed elementwise.
-#' @param z See Usage.
+#' @param z Passed to \code{\%in\%}.
 #' @param children Passed to \code{.morie_ml_desc}.
 #' @return A logical value.
 #' @export
@@ -248,7 +248,7 @@
 #' source it follows.
 #'
 #' @param edges A matrix; indexed by row and column.
-#' @param targets See Usage.
+#' @param targets Passed to \code{\%in\%}.
 #' @return The value of \code{[}.
 #' @export
 .morie_ml_cutin <- function(edges, targets) {
@@ -263,7 +263,7 @@
 #' source it follows.
 #'
 #' @param edges A matrix; indexed by row and column.
-#' @param sources See Usage.
+#' @param sources Passed to \code{\%in\%}.
 #' @return The value of \code{[}.
 #' @export
 .morie_ml_cutout <- function(edges, sources) {
@@ -292,8 +292,8 @@
 #' source it follows.
 #'
 #' @param edges A matrix; indexed by row and column.
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Passed to \code{==}.
+#' @param b Passed to \code{==}.
 #' @return A logical value.
 #' @export
 .morie_ml_adj <- function(edges, a, b) {

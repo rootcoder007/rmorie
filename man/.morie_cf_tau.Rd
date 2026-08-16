@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{y}{A vector; indexed elementwise.}
-\item{d}{See Usage.}
+\item{d}{Passed to \code{==}.}
 }
 \description{
 A step of the causal_forest_honest implementation. Called by \code{.morie_cf_grow}. See the file header for the source the module follows.

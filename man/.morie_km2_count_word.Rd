@@ -8,7 +8,7 @@
 .morie_km2_count_word(word, outputs)
 }
 \arguments{
-\item{word}{See Usage.}
+\item{word}{Passed to \code{==}.}
 \item{outputs}{Iterated over elementwise, with \code{vapply}.}
 }
 \description{

@@ -69,13 +69,13 @@ subwords <- function(word, n_min = 3, n_max = 6, boundary = TRUE,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param word See Usage.
+#' @param word Passed to \code{subwords}.
 #' @param Z A matrix; indexed by row and column.
 #' @param gram_index Passed to \code{.gram_slot}.
-#' @param n_min Defaults to \code{3}.
-#' @param n_max Defaults to \code{6}.
-#' @param boundary Defaults to \code{TRUE}.
-#' @param whole_word Defaults to \code{TRUE}.
+#' @param n_min Passed to \code{subwords}. Defaults to \code{3}.
+#' @param n_max Passed to \code{subwords}. Defaults to \code{6}.
+#' @param boundary Passed to \code{subwords}. Defaults to \code{TRUE}.
+#' @param whole_word Passed to \code{subwords}. Defaults to \code{TRUE}.
 #' @param hash_buckets Passed to \code{.gram_slot}.
 #' @return A list with \code{v}, \code{hit}.
 #' @export
@@ -172,8 +172,8 @@ word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
 #' @param lr Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
 #' @param negative Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
 #' @param min_count The body requires: word(s) above min_count=. Defaults to \code{1}.
-#' @param boundary Defaults to \code{TRUE}.
-#' @param whole_word Defaults to \code{TRUE}.
+#' @param boundary Passed to \code{subwords}. Defaults to \code{TRUE}.
+#' @param whole_word Passed to \code{subwords}. Defaults to \code{TRUE}.
 #' @param hash_buckets Optional; may be \code{NULL}. Passed to \code{.gram_slot}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{vectors}, \code{vocab}, \code{index}, \code{ngrams}, \code{ngram_index}, \code{Z}, \code{context}, \code{loss_history}, \code{final_loss}, \code{oov}, \code{n_vocab}, \code{n_ngrams}, \code{dim}, \code{n_min}, \code{n_max}, \code{hash_buckets}, \code{method}.
@@ -336,19 +336,19 @@ fasttext <- function(corpus, dim = 50, n_min = 3, n_max = 6,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param corpus See Usage.
-#' @param dim Defaults to \code{50}.
-#' @param n_min Defaults to \code{3}.
-#' @param n_max Defaults to \code{6}.
-#' @param window Defaults to \code{5}.
-#' @param epochs Defaults to \code{5}.
-#' @param lr Defaults to \code{0.05}.
-#' @param negative Defaults to \code{5}.
-#' @param min_count Defaults to \code{1}.
-#' @param boundary Defaults to \code{TRUE}.
-#' @param whole_word Defaults to \code{TRUE}.
-#' @param hash_buckets Defaults to \code{NULL}.
-#' @param seed Defaults to \code{0}.
+#' @param corpus Passed to \code{fasttext}.
+#' @param dim Passed to \code{fasttext}. Defaults to \code{50}.
+#' @param n_min Passed to \code{fasttext}. Defaults to \code{3}.
+#' @param n_max Passed to \code{fasttext}. Defaults to \code{6}.
+#' @param window Passed to \code{fasttext}. Defaults to \code{5}.
+#' @param epochs Passed to \code{fasttext}. Defaults to \code{5}.
+#' @param lr Passed to \code{fasttext}. Defaults to \code{0.05}.
+#' @param negative Passed to \code{fasttext}. Defaults to \code{5}.
+#' @param min_count Passed to \code{fasttext}. Defaults to \code{1}.
+#' @param boundary Passed to \code{fasttext}. Defaults to \code{TRUE}.
+#' @param whole_word Passed to \code{fasttext}. Defaults to \code{TRUE}.
+#' @param hash_buckets Passed to \code{fasttext}.
+#' @param seed Passed to \code{fasttext}. Defaults to \code{0}.
 #' @return The value of \code{fasttext}.
 #' @export
 morie_fastxt <- function(corpus, dim = 50, n_min = 3, n_max = 6,

@@ -202,7 +202,7 @@ Wave <- function(y, wavelet = "db2", level = NULL) {
 #' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param n See Usage.
+#' @param n Passed to \code{>=}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .dbpow2 <- function(n) {

@@ -8,7 +8,7 @@
 .smatch_pnorm(z)
 }
 \arguments{
-\item{z}{See Usage.}
+\item{z}{Passed to \code{pnorm}.}
 }
 \description{
 A step of the smatch_native implementation. No other function in the package calls it. See the file header for the source the module follows.

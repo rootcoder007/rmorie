@@ -10,7 +10,7 @@
 \arguments{
 \item{path}{A vector; its length is taken and its elements indexed.}
 \item{dirs}{A vector; indexed elementwise.}
-\item{z}{See Usage.}
+\item{z}{Passed to \code{\%in\%}.}
 \item{children}{Passed to \code{.morie_ml_desc}.}
 }
 \description{

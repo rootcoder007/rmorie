@@ -8,7 +8,7 @@
 .morie_qrs_pad(v, k)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Passed to \code{c}.}
 \item{k}{A count; the body uses it as \code{rep(...)}.}
 }
 \description{

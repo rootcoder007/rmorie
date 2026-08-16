@@ -76,7 +76,7 @@
 #' source it follows.
 #'
 #' @param M A matrix; indexed by row and column.
-#' @param name See Usage.
+#' @param name Passed to \code{sprintf}.
 #' @return The value of \code{rows}, as built in the body.
 #' @export
 .safrl_mat <- function(M, name) {
@@ -115,7 +115,7 @@
 #' source it follows.
 #'
 #' @param v A list; the body checks with \code{is.list}.
-#' @param name See Usage.
+#' @param name Passed to \code{sprintf}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .safrl_vec <- function(v, name) {
@@ -198,7 +198,7 @@
 #' @param c A vector; indexed elementwise.
 #' @param delta Numeric; combined arithmetically in the body.
 #' @param m A count; the body uses it as \code{seq_len(...)}.
-#' @param tol See Usage.
+#' @param tol Passed to \code{<}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{lam}, \code{nu}.
 #' @export
@@ -474,7 +474,7 @@ morie_safrl <- function(g, H, B = NULL, c = NULL, delta = 0.01,
 #' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{0.9}.
 #' @param start Optional; may be \code{NULL}. A function; the body checks with \code{is.function}.
 #' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5000}.
-#' @param tol Defaults to \code{1e-14}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-14}.
 #' @return A list with \code{estimate}, \code{J}, \code{J_C}, \code{gamma}, \code{method}.
 #' @export
 morie_safrl_cmdp_returns <- function(policy, states, actions, step,

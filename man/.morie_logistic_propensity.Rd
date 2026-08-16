@@ -14,3 +14,18 @@ Internal helper: Morie Logistic Propensity
 The value of \code{pmax}.
 }
 \keyword{internal}
+\examples{
+set.seed(2026)
+n <- 200L
+df <- data.frame(
+  D   = rbinom(n, 1, 0.4),
+  age = rnorm(n, 50, 10),
+  bmi = rnorm(n, 27, 4)
+)
+df$age[df$D == 1] <- df$age[df$D == 1] + 3 # deliberate imbalance
+mrm_standardised_difference(df,
+  treatment_col = "D",
+  covariates = c("age", "bmi")
+)
+.morie_logistic_propensity(D = df, X = df)
+}

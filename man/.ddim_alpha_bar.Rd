@@ -8,7 +8,7 @@
 .ddim_alpha_bar(t, T)
 }
 \arguments{
-\item{t}{See Usage.}
+\item{t}{Passed to \code{f}.}
 \item{T}{Numeric; combined arithmetically in the body.}
 }
 \description{

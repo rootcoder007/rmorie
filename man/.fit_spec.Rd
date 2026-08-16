@@ -8,9 +8,9 @@
 .fit_spec(y, spec, long_run_b = 0, maxiter = 2000)
 }
 \arguments{
-\item{y}{See Usage.}
+\item{y}{Passed to \code{box_cox}.}
 \item{spec}{A list; the body reads \code{$use_box_cox} from it.}
-\item{long_run_b}{Defaults to \code{0}.}
+\item{long_run_b}{Passed to \code{fit_seed_state}. Defaults to \code{0}.}
 \item{maxiter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000}.}
 }
 \description{

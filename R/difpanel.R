@@ -211,7 +211,7 @@ morie_sibtest <- function(x, group, matching = NULL, min_per_cell = 2L,
 #'
 #' Returns L11^2, lambda_i and sigma^2_i.
 #'
-#' @param y See Usage.
+#' @param y Passed to \code{diff}.
 #' @param Zx A matrix; passed to \code{ncol}.
 #' @param e A vector; its length is taken and its elements indexed.
 #' @param bandwidth Passed to \code{.nw_lrv}.

@@ -1,5 +1,16 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+#' .morie_dbscan_native
+#'
+#' Internal helper in dbscl.R; see the file header for
+#' the source the module follows.
+#'
+#' @param x A matrix; indexed by row and column.
+#' @param eps See Usage. Defaults to \code{0.5}.
+#' @param min_samples See Usage. Defaults to \code{5L}.
+#' @param metric See Usage. Defaults to \code{"euclidean"}.
+#' @return A list with \code{labels}, \code{core}.
+#' @export
 .morie_dbscan_native <- function(x, eps = 0.5, min_samples = 5L,
                                  metric = "euclidean") {
   metrics <- c("euclidean", "manhattan", "chebyshev")

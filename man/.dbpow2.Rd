@@ -8,7 +8,7 @@
 .dbpow2(n)
 }
 \arguments{
-\item{n}{See Usage.}
+\item{n}{Passed to \code{>=}.}
 }
 \description{
 A step of the wave implementation. Called by \code{Wave}, \code{Wvltdb}. See the file header for the source the module follows.

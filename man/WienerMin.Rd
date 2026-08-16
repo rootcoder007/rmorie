@@ -8,7 +8,7 @@
 WienerMin(phi, theta, var_d)
 }
 \arguments{
-\item{phi}{See Usage.}
+\item{phi}{Passed to \code{WienerHopf}.}
 \item{theta}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{var_d}{Coerced to numeric by the body, with \code{as.numeric}.}
 }

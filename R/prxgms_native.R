@@ -40,11 +40,11 @@ morie_prxgms_soft_threshold <- function(v, tau) {
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param L Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param max.iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500L}.
-#' @param tol Defaults to \code{1e-10}.
+#' @param tol Passed to \code{<=}. Defaults to \code{1e-10}.
 #' @param accelerate A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param backtrack A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @param eta Numeric; combined arithmetically in the body. Defaults to \code{2}.
-#' @param g.fun Defaults to \code{NULL}.
+#' @param g.fun Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{estimate}, \code{x}, \code{fun}, \code{objective}, \code{iterations}, \code{L}, \code{accelerated}, \code{converged}, \code{method}.
 #' @export
 morie_prxgms_prox_gradient <- function(fun, grad, prox, x0, L = 1,

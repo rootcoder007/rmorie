@@ -8,11 +8,11 @@
 morie_sasimi(fp_a, fp_b, coefficient = "tanimoto", alpha = NULL, beta = NULL)
 }
 \arguments{
-\item{fp_a}{See Usage.}
-\item{fp_b}{See Usage.}
+\item{fp_a}{Passed to \code{sasimi_counts}.}
+\item{fp_b}{Passed to \code{sasimi_counts}.}
 \item{coefficient}{Passed to \code{.sasimi_coef}. Defaults to \code{"tanimoto"}.}
-\item{alpha}{Defaults to \code{NULL}.}
-\item{beta}{Defaults to \code{NULL}.}
+\item{alpha}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{beta}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the sasimi_native implementation. No other function in the package calls it. See the file header for the source the module follows.

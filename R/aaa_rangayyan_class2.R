@@ -23,7 +23,7 @@
 #' the source it follows.
 #'
 #' @param v Coerced to numeric by the body, with \code{as.numeric}.
-#' @param name Defaults to \code{"x"}.
+#' @param name Passed to \code{stop}. Defaults to \code{"x"}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_bx_vec <- function(v, name = "x") {
@@ -44,7 +44,7 @@
 #' the source it follows.
 #'
 #' @param M Optional; may be \code{NULL}. A matrix; passed to \code{nrow}.
-#' @param name Defaults to \code{"X"}.
+#' @param name Passed to \code{stop}. Defaults to \code{"X"}.
 #' @return The value of \code{M}, as built in the body.
 #' @export
 .morie_bx_mat <- function(M, name = "X") {
@@ -239,7 +239,7 @@
 #'
 #' @param S A matrix; passed to \code{nrow}.
 #' @param sweeps A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.
-#' @param tol Defaults to \code{1e-12}.
+#' @param tol Passed to \code{<=}. Defaults to \code{1e-12}.
 #' @return A list with \code{values}, \code{vectors}.
 #' @export
 .morie_bx_jacobi <- function(S, sweeps = 60L, tol = 1e-12) {
@@ -377,7 +377,7 @@
 #' @param maxiter Coerced to integer by the body, with \code{as.integer}.
 #' @param tol Numeric; combined arithmetically in the body.
 #' @param seed Passed to \code{.morie_bx_rng}.
-#' @param cost See Usage.
+#' @param cost Passed to \code{identical}.
 #' @return A list with \code{W}, \code{H}, \code{error}, \code{iterations}.
 #' @export
 .morie_bx_nmfmu <- function(V, r, maxiter, tol, seed, cost) {
@@ -438,7 +438,7 @@
 #' @param x A vector; its length is taken.
 #' @param D A matrix; indexed by row and column.
 #' @param sparsity Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @param tol See Usage.
+#' @param tol Passed to \code{<=}.
 #' @return A list with \code{coefficients}, \code{support}, \code{residual}.
 #' @export
 .morie_bx_omp <- function(x, D, sparsity, tol) {
@@ -655,8 +655,8 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param true See Usage.
-#' @param pred See Usage.
+#' @param true Passed to \code{==}.
+#' @param pred Passed to \code{==}.
 #' @return A list with \code{tp}, \code{tn}, \code{fp}, \code{fn}.
 #' @export
 .morie_bx_confusion <- function(true, pred) {
@@ -715,7 +715,7 @@
 #' @param eta Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{0.9}.
 #' @param maxiter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{500}.
-#' @param tol Defaults to \code{1e-04}.
+#' @param tol Passed to \code{<=}. Defaults to \code{1e-04}.
 #' @param seed Passed to \code{.morie_bx_rng}. Defaults to \code{1}.
 #' @return A list with \code{weights}, \code{offsets}, \code{predictions}, \code{outputs}, \code{classes}, \code{accuracy}, \code{mse}, \code{iterations}, \code{method}.
 #' @export
@@ -1131,7 +1131,7 @@ BciChSel <- function(trials, nselect, rank = 4, maxiter = 200, tol = 1e-8,
 #' @param D Passed to \code{.morie_bx_mat}.
 #' @param lam Numeric; combined arithmetically in the body. Defaults to \code{0.01}.
 #' @param maxiter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{2000}.
-#' @param tol Defaults to \code{1e-10}.
+#' @param tol Passed to \code{<=}. Defaults to \code{1e-10}.
 #' @return A list with \code{alpha}, \code{support}, \code{reconstruction}, \code{residual}, \code{l1norm}, \code{objective}, \code{iterations}, \code{method}.
 #' @export
 BPursuit <- function(x, D, lam = 0.01, maxiter = 2000, tol = 1e-10) {
@@ -1783,7 +1783,7 @@ SeizDict <- function(signals, labels, iterations = 7, atoms = NULL,
 #' @param X Passed to \code{.morie_bx_mat}.
 #' @param ncomp Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param maxiter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
-#' @param tol Defaults to \code{1e-08}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
 #' @param seed Passed to \code{.morie_bx_rng}. Defaults to \code{1}.
 #' @return A list with \code{sources}, \code{unmixing}, \code{mixing}, \code{whitening}, \code{mean}, \code{iterations}, \code{method}.
 #' @export
@@ -1893,12 +1893,12 @@ IcaFix <- function(X, ncomp = NULL, maxiter = 200, tol = 1e-8, seed = 1) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param X See Usage.
-#' @param ncomp Defaults to \code{NULL}.
+#' @param X Passed to \code{IcaFix}.
+#' @param ncomp Passed to \code{IcaFix}.
 #' @param kurtosis Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{3}.
 #' @param drop Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @param maxiter Defaults to \code{200}.
-#' @param seed Defaults to \code{1}.
+#' @param maxiter Passed to \code{IcaFix}. Defaults to \code{200}.
+#' @param seed Passed to \code{IcaFix}. Defaults to \code{1}.
 #' @return A list with \code{clean}, \code{components}, \code{kurtosis}, \code{artifacts}, \code{mixing}, \code{removedpower}, \code{method}.
 #' @export
 IcaClean <- function(X, ncomp = NULL, kurtosis = 3, drop = NULL,
@@ -1962,7 +1962,7 @@ IcaClean <- function(X, ncomp = NULL, kurtosis = 3, drop = NULL,
 #' @param ncomp Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param eta Numeric; combined arithmetically in the body. Defaults to \code{0.05}.
 #' @param maxiter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{300}.
-#' @param tol Defaults to \code{1e-08}.
+#' @param tol Passed to \code{<=}. Defaults to \code{1e-08}.
 #' @param seed Passed to \code{.morie_bx_rng}. Defaults to \code{1}.
 #' @return A list with \code{sources}, \code{unmixing}, \code{whitening}, \code{mean}, \code{iterations}, \code{change}, \code{method}.
 #' @export
@@ -2449,7 +2449,7 @@ Lstm <- function(sequences, labels = NULL, hidden = 8, ridge = 1e-6,
 #' @param x A vector; its length is taken.
 #' @param dictionary Optional; may be \code{NULL}. Passed to \code{.morie_bx_mat}.
 #' @param natoms Numeric; passed to \code{min}. Defaults to \code{20}.
-#' @param tol Defaults to \code{1e-10}.
+#' @param tol Passed to \code{<=}. Defaults to \code{1e-10}.
 #' @param decaystop Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{coefficients}, \code{atoms}, \code{indices}, \code{residual}, \code{reconstruction}, \code{decay}, \code{energyratio}, \code{parameters}, \code{method}.
 #' @export
@@ -2539,8 +2539,8 @@ MPursuit <- function(x, dictionary = NULL, natoms = 20, tol = 1e-10,
 #' @param y Passed to \code{.morie_bx_mat}.
 #' @param C Passed to \code{.morie_bx_mat}.
 #' @param a Optional; may be \code{NULL}. Passed to \code{.morie_bx_mat}.
-#' @param procnoise Defaults to \code{1e-04}.
-#' @param obsnoise Defaults to \code{0.01}.
+#' @param procnoise Passed to \code{cov}. Defaults to \code{1e-04}.
+#' @param obsnoise Passed to \code{cov}. Defaults to \code{0.01}.
 #' @param p0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.
 #' @return A list with \code{states}, \code{innovations}, \code{gain}, \code{predicted}, \code{method}.
 #' @export
@@ -2832,8 +2832,8 @@ PcaSig <- function(X, ncomp = NULL) {
 #'
 #' @param X Passed to \code{.morie_bx_mat}.
 #' @param ncomp Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @param maxiter Defaults to \code{200}.
-#' @param seed Defaults to \code{1}.
+#' @param maxiter Passed to \code{IcaFix}. Defaults to \code{200}.
+#' @param seed Passed to \code{IcaFix}. Defaults to \code{1}.
 #' @return A list with \code{error}, \code{best}, \code{components}, \code{rank}, \code{method}.
 #' @export
 MixCmp <- function(X, ncomp = NULL, maxiter = 200, seed = 1) {
@@ -3190,7 +3190,7 @@ SparseCode <- function(x, D, sparsity = NULL, lam = NULL, maxiter = 2000,
 #'
 #' @param x A vector; its length is taken.
 #' @param fs Numeric; combined arithmetically in the body.
-#' @param natoms Defaults to \code{12}.
+#' @param natoms Passed to \code{MPursuit}. Defaults to \code{12}.
 #' @param nfreq A count; the body uses it as \code{seq_len(...)}. Defaults to \code{32}.
 #' @param ntime Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param lag Numeric; combined arithmetically in the body. Defaults to \code{12}.

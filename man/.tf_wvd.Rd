@@ -10,7 +10,7 @@
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fs}{Numeric; combined arithmetically in the body.}
-\item{nfreq}{Defaults to \code{NULL}.}
+\item{nfreq}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the rangayyan_tf implementation. Called by \code{Gtfd}, \code{WvDist}. See the file header for the source the module follows.

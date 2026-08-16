@@ -92,9 +92,9 @@
 #' @param min_leaf Numeric; combined arithmetically in the body. Defaults to \code{5L}.
 #' @param alpha Passed to \code{._best_split}. Defaults to \code{0.05}.
 #' @param pi Numeric; passed to \code{max}. Defaults to \code{0.5}.
-#' @param max_depth Defaults to \code{12L}.
+#' @param max_depth Passed to \code{>=}. Defaults to \code{12L}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0L}.
-#' @param subsample Defaults to \code{NULL}.
+#' @param subsample Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{tree}, \code{info}.
 #' @export
 honest_tree <- function(X, y, W = NULL, kind = "double-sample",
@@ -199,8 +199,8 @@ leaf_of <- function(tree, x) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tree See Usage.
-#' @param x See Usage.
+#' @param tree Passed to \code{leaf_of}.
+#' @param x Passed to \code{leaf_of}.
 #' @return The value of \code{$}.
 #' @export
 .hntfst_tree_predict <- function(tree, x) {
@@ -254,14 +254,14 @@ infinitesimal_jackknife <- function(preds, in_bag, n, s,
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
-#' @param W Defaults to \code{NULL}.
+#' @param W Passed to \code{honest_tree}.
 #' @param kind Compared against \code{"adaptive"}. Defaults to \code{"double-sample"}.
 #' @param n_trees Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @param subsample_frac Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @param min_leaf Numeric; combined arithmetically in the body. Defaults to \code{5L}.
-#' @param alpha Defaults to \code{0.05}.
-#' @param pi Defaults to \code{0.5}.
-#' @param max_depth Defaults to \code{12L}.
+#' @param alpha Passed to \code{honest_tree}. Defaults to \code{0.05}.
+#' @param pi Passed to \code{honest_tree}. Defaults to \code{0.5}.
+#' @param max_depth Passed to \code{honest_tree}. Defaults to \code{12L}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0L}.
 #' @param at Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
@@ -353,16 +353,16 @@ honest_forest <- function(X, y, W = NULL, kind = "double-sample",
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
+#' @param X Passed to \code{honest_tree}.
 #' @param y A vector; its length is taken.
-#' @param W Defaults to \code{NULL}.
-#' @param kind Defaults to \code{"double-sample"}.
+#' @param W Passed to \code{honest_tree}.
+#' @param kind Passed to \code{honest_tree}. Defaults to \code{"double-sample"}.
 #' @param n_trees Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @param subsample_frac Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @param min_leaf Numeric; combined arithmetically in the body. Defaults to \code{5L}.
-#' @param alpha Defaults to \code{0.05}.
-#' @param pi Defaults to \code{0.5}.
-#' @param max_depth Defaults to \code{12L}.
+#' @param alpha Passed to \code{honest_tree}. Defaults to \code{0.05}.
+#' @param pi Passed to \code{honest_tree}. Defaults to \code{0.5}.
+#' @param max_depth Passed to \code{honest_tree}. Defaults to \code{12L}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0L}.
 #' @param clusters Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
 #' @return A list with \code{trees}, \code{bags}, \code{s}.
@@ -417,7 +417,7 @@ grow_forest <- function(X, y, W = NULL, kind = "double-sample",
 #'
 #' @param trees A vector; its length is taken.
 #' @param X A matrix; passed to \code{as.matrix}.
-#' @param x See Usage.
+#' @param x Passed to \code{leaf_of}.
 #' @return A numeric value.
 #' @export
 forest_weights <- function(trees, X, x) {
@@ -450,20 +450,20 @@ honest_random_forest <- honest_forest
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param X See Usage.
-#' @param y See Usage.
-#' @param W Defaults to \code{NULL}.
-#' @param kind Defaults to \code{"double-sample"}.
-#' @param n_trees Defaults to \code{200L}.
-#' @param subsample_frac Defaults to \code{0.5}.
-#' @param min_leaf Defaults to \code{5L}.
-#' @param alpha Defaults to \code{0.05}.
-#' @param pi Defaults to \code{0.5}.
-#' @param max_depth Defaults to \code{12L}.
-#' @param seed Defaults to \code{0L}.
-#' @param at Defaults to \code{NULL}.
-#' @param level Defaults to \code{0.95}.
-#' @param correction Defaults to \code{TRUE}.
+#' @param X Passed to \code{honest_forest}.
+#' @param y Passed to \code{honest_forest}.
+#' @param W Passed to \code{honest_forest}.
+#' @param kind Passed to \code{honest_forest}. Defaults to \code{"double-sample"}.
+#' @param n_trees Passed to \code{honest_forest}. Defaults to \code{200L}.
+#' @param subsample_frac Passed to \code{honest_forest}. Defaults to \code{0.5}.
+#' @param min_leaf Passed to \code{honest_forest}. Defaults to \code{5L}.
+#' @param alpha Passed to \code{honest_forest}. Defaults to \code{0.05}.
+#' @param pi Passed to \code{honest_forest}. Defaults to \code{0.5}.
+#' @param max_depth Passed to \code{honest_forest}. Defaults to \code{12L}.
+#' @param seed Passed to \code{honest_forest}. Defaults to \code{0L}.
+#' @param at Passed to \code{honest_forest}.
+#' @param level Passed to \code{honest_forest}. Defaults to \code{0.95}.
+#' @param correction Passed to \code{honest_forest}. Defaults to \code{TRUE}.
 #' @return The value of \code{honest_forest}.
 #' @export
 morie_hntfst <- function(X, y, W = NULL, kind = "double-sample",

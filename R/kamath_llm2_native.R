@@ -91,7 +91,7 @@
 #' for the source it follows.
 #'
 #' @param p A vector; its length is taken.
-#' @param name See Usage.
+#' @param name Passed to \code{sprintf}.
 #' @return The value of \code{p}, as built in the body.
 #' @export
 .morie_km2_dist <- function(p, name) {
@@ -188,7 +188,7 @@
 #'
 #' @param logits A matrix; indexed by row and column.
 #' @param targets Coerced to integer by the body, with \code{as.integer}.
-#' @param ignore_index Defaults to \code{-100L}.
+#' @param ignore_index Passed to \code{!=}. Defaults to \code{-100L}.
 #' @return A list with \code{loss}, \code{perplexity}, \code{token_losses}, \code{n_tokens}, \code{vocab_size}.
 #' @export
 .morie_km2_causal_lm_loss <- function(logits, targets, ignore_index = -100L) {
@@ -512,7 +512,7 @@ morie_kamath_ch3_dante_cloze <- function(prompt = "Dante was born in [MASK]",
 #'
 #' @param prompt Character; passed to \code{trimws}.
 #' @param filled Carried through into a list the body builds.
-#' @param eq See Usage.
+#' @param eq Passed to \code{sprintf}.
 #' @param template Carried through into a list the body builds.
 #' @return A list with \code{prompt}, \code{slot_filled}, \code{template}, \code{tokens}, \code{estimate}, \code{n}, \code{method}.
 #' @export
@@ -962,8 +962,8 @@ morie_kamath_ch4_krona_output <- function(X, W, A_k, B_k, s) {
 #' for the source it follows.
 #'
 #' @param v A matrix; passed to \code{nrow}.
-#' @param name See Usage.
-#' @param size See Usage.
+#' @param name Passed to \code{sprintf}.
+#' @param size Passed to \code{!=}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
 .morie_km2_diag <- function(v, name, size) {
@@ -1495,7 +1495,7 @@ morie_kamath_ch6_alignscore_total_loss <- function(L_3way, L_bin, L_reg,
 #'
 #' @param a A matrix; passed to \code{\%*\%}.
 #' @param W A matrix; passed to \code{as.matrix}.
-#' @param name See Usage.
+#' @param name Passed to \code{sprintf}.
 #' @return A numeric value.
 #' @export
 .morie_km2_cos_mean <- function(a, W, name) {
@@ -1535,8 +1535,8 @@ morie_kamath_ch6_alignscore_total_loss <- function(L_3way, L_bin, L_reg,
 #'
 #' @param A_1 A matrix; passed to \code{as.matrix}.
 #' @param A_2 A matrix; passed to \code{as.matrix}.
-#' @param W_1 See Usage.
-#' @param W_2 See Usage.
+#' @param W_1 Passed to \code{apply}.
+#' @param W_2 Passed to \code{apply}.
 #' @return The value of \code{list}.
 #' @export
 .morie_km2_weat_sums <- function(A_1, A_2, W_1, W_2) {
@@ -1701,8 +1701,8 @@ morie_kamath_ch6_cbs_variance <- function(W, A, p_a, p_prior, ddof = 0) {
 #' for the source it follows.
 #'
 #' @param items Coerced to list by the body, with \code{as.list}.
-#' @param scorer See Usage.
-#' @param name See Usage.
+#' @param scorer Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param name Passed to \code{sprintf}.
 #' @return A vector, from \code{vapply}.
 #' @export
 .morie_km2_log_probs <- function(items, scorer, name) {
@@ -1861,7 +1861,7 @@ morie_kamath_ch6_co_occurrence_bias <- function(w, A_i, A_j) {
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
-#' @param word See Usage.
+#' @param word Passed to \code{==}.
 #' @param outputs Iterated over elementwise, with \code{vapply}.
 #' @return A numeric value.
 #' @export
@@ -2103,7 +2103,7 @@ morie_kamath_ch6_log_prob_ratio_attr <- function(a_i, a_j, K = NULL, lam = 1) {
 #'
 #' @param Yhat Coerced to list by the body, with \code{as.list}.
 #' @param c A function; the body checks with \code{is.function}.
-#' @param name Defaults to \code{"Yhat"}.
+#' @param name Passed to \code{sprintf}. Defaults to \code{"Yhat"}.
 #' @return The value of \code{list}.
 #' @export
 .morie_km2_tox_scores <- function(Yhat, c, name = "Yhat") {
@@ -2199,8 +2199,8 @@ morie_kamath_ch6_lstm_chain_rule <- function(w_1_w_M) {
 #' for the source it follows.
 #'
 #' @param f Optional; may be \code{NULL}. A function; the body checks with \code{is.function}.
-#' @param c See Usage.
-#' @param name See Usage.
+#' @param c Passed to \code{f}.
+#' @param name Passed to \code{sprintf}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
 .morie_km2_hidden <- function(f, c, name) {

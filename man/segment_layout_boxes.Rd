@@ -10,9 +10,9 @@ segment_layout_boxes(boxes, segment_ids, width, height, scale = 1000)
 \arguments{
 \item{boxes}{A matrix; indexed by row and column.}
 \item{segment_ids}{Coerced to list by the body, with \code{as.list}.}
-\item{width}{See Usage.}
-\item{height}{See Usage.}
-\item{scale}{Defaults to \code{1000}.}
+\item{width}{Passed to \code{normalise_bbox}.}
+\item{height}{Passed to \code{normalise_bbox}.}
+\item{scale}{Passed to \code{normalise_bbox}. Defaults to \code{1000}.}
 }
 \description{
 A step of the ocrwit_native implementation. No other function in the package calls it. See the file header for the source the module follows.

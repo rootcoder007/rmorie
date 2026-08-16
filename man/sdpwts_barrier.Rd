@@ -8,9 +8,9 @@
 sdpwts_barrier(x, F0, Fs)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{F0}{See Usage.}
-\item{Fs}{See Usage.}
+\item{x}{Passed to \code{sdpwts_lmi}.}
+\item{F0}{Passed to \code{sdpwts_lmi}.}
+\item{Fs}{Passed to \code{sdpwts_lmi}.}
 }
 \description{
 A step of the sdpwts_native implementation. Called by \code{.sdpwts_objective}. See the file header for the source the module follows.

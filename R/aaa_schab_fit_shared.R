@@ -86,7 +86,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param kind See Usage.
+#' @param kind Passed to \code{identical}.
 #' @param lags A vector; indexed elementwise.
 #' @param ghat A vector; indexed elementwise.
 #' @param counts A vector; indexed elementwise.

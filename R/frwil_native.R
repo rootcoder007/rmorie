@@ -60,7 +60,7 @@ CONSTRAINTS <- c("reference", "sum_zero")
 #' source it follows.
 #'
 #' @param compounds Iterated over elementwise, with \code{lapply}.
-#' @param activity See Usage.
+#' @param activity Passed to \code{unlist}.
 #' @return A list with \code{C}, \code{y}, \code{k}.
 #' @export
 .frwil_prep <- function(compounds, activity) {
@@ -289,7 +289,7 @@ CONSTRAINTS <- c("reference", "sum_zero")
 #' source it follows.
 #'
 #' @param fit A list; the body reads \code{$coefficients}, \code{$groups}, \code{$n_positions} from it.
-#' @param compound See Usage.
+#' @param compound Passed to \code{unlist}.
 #' @return The value of \code{total}, as built in the body.
 #' @export
 .frwil_predict_activity <- function(fit, compound) {

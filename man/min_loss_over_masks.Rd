@@ -9,7 +9,7 @@ min_loss_over_masks(predictions, target, loss_fn)
 }
 \arguments{
 \item{predictions}{A vector; its length is taken.}
-\item{target}{See Usage.}
+\item{target}{Passed to \code{loss_fn}.}
 \item{loss_fn}{Accepted by the signature and not used anywhere in the body.}
 }
 \description{

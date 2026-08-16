@@ -10,7 +10,7 @@
 \arguments{
 \item{x}{A vector; indexed elementwise.}
 \item{y}{A vector; indexed elementwise.}
-\item{side}{See Usage.}
+\item{side}{Passed to \code{>}.}
 \item{order}{Numeric; combined arithmetically in the body.}
 \item{deriv}{Numeric; combined arithmetically in the body.}
 }

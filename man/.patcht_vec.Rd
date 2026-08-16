@@ -8,7 +8,7 @@
 .patcht_vec(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Passed to \code{unlist}.}
 }
 \description{
 A step of the patchT_native implementation. Called by \code{instance_norm}, \code{patchify}. See the file header for the source the module follows.

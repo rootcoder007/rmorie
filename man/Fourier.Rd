@@ -8,11 +8,11 @@
 Fourier(x, t = NULL, omega = NULL, f = NULL, dt = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{t}{Defaults to \code{NULL}.}
-\item{omega}{Defaults to \code{NULL}.}
-\item{f}{Defaults to \code{NULL}.}
-\item{dt}{Defaults to \code{NULL}.}
+\item{x}{Passed to \code{Ctft}.}
+\item{t}{Passed to \code{Ctft}.}
+\item{omega}{Passed to \code{Ctft}.}
+\item{f}{Passed to \code{Ctft}.}
+\item{dt}{Passed to \code{Ctft}.}
 }
 \description{
 A step of the rangayyan_xfrm implementation. No other function in the package calls it. See the file header for the source the module follows.

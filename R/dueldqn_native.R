@@ -20,7 +20,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param mode See Usage.
+#' @param mode Passed to \code{\%in\%}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 .dueldqn_check_mode <- function(mode) {

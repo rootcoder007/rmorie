@@ -108,9 +108,9 @@ ANNOTATION_SOURCES <- c("name", "kegg_pathway", "kegg_module", "go", "ec",
 #' @param hits See Usage.
 #' @param evalue The body requires: funcal: evalue must be positive and score non-negative. Defaults to \code{0.001}.
 #' @param score The body requires: funcal: evalue must be positive and score non-negative. Defaults to \code{60}.
-#' @param query_cov Defaults to \code{0.2}.
-#' @param target_cov Defaults to \code{0.2}.
-#' @param searcher Defaults to \code{"diamond"}.
+#' @param query_cov Passed to \code{<}. Defaults to \code{0.2}.
+#' @param target_cov Passed to \code{<}. Defaults to \code{0.2}.
+#' @param searcher Passed to \code{\%in\%}. Defaults to \code{"diamond"}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
 morie_funcal_seed_orthologs <- function(hits, evalue = 1e-3, score = 60.0,
@@ -162,8 +162,8 @@ morie_funcal_seed_orthologs <- function(hits, evalue = 1e-3, score = 60.0,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n_query_side See Usage.
-#' @param n_target_side See Usage.
+#' @param n_query_side Passed to \code{<=}.
+#' @param n_target_side Passed to \code{<=}.
 #' @return A character value.
 #' @export
 .funcal_type_of <- function(n_query_side, n_target_side) {
@@ -181,7 +181,7 @@ morie_funcal_seed_orthologs <- function(hits, evalue = 1e-3, score = 60.0,
 #' @param seeds A vector; indexed elementwise.
 #' @param groups A vector; indexed elementwise.
 #' @param taxa Optional; may be \code{NULL}. A vector; indexed elementwise.
-#' @param target_taxa Defaults to \code{NULL}.
+#' @param target_taxa Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param target_types Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export

@@ -20,3 +20,8 @@ LOF = mean(lrd(neighbour)) / lrd(x) with reachability smoothing.
 Neighbour indices are 0-based and come from a STABLE sort of the
 distance matrix (numpy argsort kind="stable" == order(method="radix")).
 }
+\examples{
+set.seed(4)
+X <- rbind(matrix(rnorm(30), 15, 2), c(6, 6))
+morie_geron_local_outlier_factor(X, k = 5)
+}

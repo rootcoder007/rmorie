@@ -34,9 +34,9 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Y See Usage.
-#' @param unit See Usage.
-#' @param period See Usage.
+#' @param Y Passed to \code{unlist}.
+#' @param unit Passed to \code{unlist}.
+#' @param period Passed to \code{unlist}.
 #' @return A list with \code{y}, \code{u}, \code{t}, \code{n}.
 #' @export
 .causdidwd_panel <- function(Y, unit, period) {
@@ -80,7 +80,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param rows See Usage.
+#' @param rows Passed to \code{cbind}.
 #' @return The value of \code{cbind}.
 #' @export
 .causdidwd_with_intercept <- function(rows) {

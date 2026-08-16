@@ -215,7 +215,7 @@
 #' @param n_dw Passed to \code{.plsa_check}.
 #' @param K A count; the body uses it as \code{seq_len(...)}.
 #' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
-#' @param tol Defaults to \code{1e-08}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{P_z}, \code{P_d_given_z}, \code{P_w_given_z}, \code{loglik_history}, \code{final_loglik}, \code{iterations}, \code{K}, \code{n_docs}, \code{vocab}, \code{n_parameters}, \code{method}, \code{caveat}.
 #' @export
@@ -368,6 +368,17 @@ e_step <- function(n_dw, Pz, Pd_z, Pw_z) .plsa_e_step(n_dw, Pz, Pd_z, Pw_z)
 #' @return The value of \code{.plsa_m_step}.
 #' @export
 m_step <- function(n_dw, post, K) .plsa_m_step(n_dw, post, K)
+#' .plsa_log_likelihood
+#'
+#' Internal helper in plsa_native.R; see the file header for
+#' the source the module follows.
+#'
+#' @param n_dw Passed to \code{.plsa_check}.
+#' @param Pz Passed to \code{.plsa_joint_probability}.
+#' @param Pd_z Passed to \code{.plsa_joint_probability}.
+#' @param Pw_z Passed to \code{.plsa_joint_probability}.
+#' @return The value of \code{sum}.
+#' @export
 .plsa_log_likelihood <- function(n_dw, Pz, Pd_z, Pw_z) .plsa_log_likelihood(n_dw, Pz, Pd_z, Pw_z)
 #' joint_probability
 #'

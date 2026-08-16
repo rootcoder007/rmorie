@@ -19,7 +19,7 @@ morie_primal(K, Kt, prox_f_star, prox_g, x0, y0, tau = NULL, sigma = NULL, theta
 \item{theta}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{norm_K}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500}.}
-\item{tol}{Defaults to \code{1e-10}.}
+\item{tol}{Passed to \code{<=}. Defaults to \code{1e-10}.}
 }
 \description{
 A step of the primal_native implementation. Called by \code{morie_tv_denoise_1d}. See the file header for the source the module follows.

@@ -268,7 +268,7 @@
 #' @param H Passed to \code{.trupek_matvec}.
 #' @param delta Passed to \code{.trupek_boundary}.
 #' @param tol Numeric; passed to \code{max}.
-#' @param maxit See Usage.
+#' @param maxit Passed to \code{>}.
 #' @return A list with \code{s}, \code{why}.
 #' @export
 .trupek_steihaug <- function(g, H, delta, tol, maxit) {
@@ -316,7 +316,7 @@
 #' @param H A matrix; indexed by row and column.
 #' @param delta Numeric; combined arithmetically in the body.
 #' @param tol Numeric; combined arithmetically in the body.
-#' @param maxit See Usage.
+#' @param maxit Passed to \code{>}.
 #' @return A list with \code{s}, \code{lambda}, \code{why}.
 #' @export
 .trupek_exact <- function(g, H, delta, tol, maxit) {

@@ -8,7 +8,7 @@
 morie_phylml(tree, seqs, pi = NULL, u = 1)
 }
 \arguments{
-\item{tree}{See Usage.}
+\item{tree}{Passed to \code{site_likelihood}.}
 \item{seqs}{A vector; its length is taken.}
 \item{pi}{Passed to \code{.phylml_pi}.}
 \item{u}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}

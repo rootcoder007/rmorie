@@ -54,8 +54,8 @@
 #' @param e Passed to \code{.baygsl_expo}.
 #' @param w Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param max_steps Numeric; combined arithmetically in the body. Defaults to \code{50L}.
-#' @param lower Defaults to \code{.baygsl_NEG_INF}.
-#' @param upper Defaults to \code{.baygsl_POS_INF}.
+#' @param lower Passed to \code{>}. Defaults to \code{.baygsl_NEG_INF}.
+#' @param upper Passed to \code{<}. Defaults to \code{.baygsl_POS_INF}.
 #' @return Nothing; this branch always raises.
 #' @export
 .baygsl_slice_1d <- function(logf, x0, e, w = 1.0, max_steps = 50L,

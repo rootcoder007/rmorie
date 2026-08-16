@@ -8,8 +8,8 @@
 is_forecastable(spec, theta, tol = 1e-08)
 }
 \arguments{
-\item{spec}{See Usage.}
-\item{theta}{See Usage.}
+\item{spec}{Passed to \code{spectral_radius}.}
+\item{theta}{Passed to \code{spectral_radius}.}
 \item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.}
 }
 \description{

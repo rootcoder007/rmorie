@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{chain}{A vector; indexed elementwise.}
-\item{name}{See Usage.}
+\item{name}{Passed to \code{sprintf}.}
 \item{n}{A count; the body uses it as \code{rep(...)}.}
 \item{default}{A count; the body uses it as \code{rep(...)}.}
 }

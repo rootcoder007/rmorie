@@ -162,7 +162,7 @@ upsample <- function(grid, factor = 2) {
 #'
 #' @param output_token Passed to \code{.samdec_vec}.
 #' @param image_grid_vectors A matrix; passed to \code{as.matrix}.
-#' @param mlp Defaults to \code{NULL}.
+#' @param mlp Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{logits}, \code{probability}, \code{weights}, \code{note}.
 #' @export
 dynamic_mask_head <- function(output_token, image_grid_vectors,
@@ -319,12 +319,12 @@ decode_mask <- function(prompt_tokens, image_tokens, grid_shape,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param prompt_tokens See Usage.
-#' @param image_tokens See Usage.
-#' @param grid_shape See Usage.
-#' @param n_blocks Defaults to \code{2}.
-#' @param upsample_factor Defaults to \code{2}.
-#' @param output_index Defaults to \code{0}.
+#' @param prompt_tokens Passed to \code{decode_mask}.
+#' @param image_tokens Passed to \code{decode_mask}.
+#' @param grid_shape Passed to \code{decode_mask}.
+#' @param n_blocks Passed to \code{decode_mask}. Defaults to \code{2}.
+#' @param upsample_factor Passed to \code{decode_mask}. Defaults to \code{2}.
+#' @param output_index Passed to \code{decode_mask}. Defaults to \code{0}.
 #' @return The value of \code{decode_mask}.
 #' @export
 morie_samdec <- function(prompt_tokens, image_tokens, grid_shape,

@@ -8,7 +8,7 @@
 .sschin_t_quantile(pq, df)
 }
 \arguments{
-\item{pq}{See Usage.}
+\item{pq}{Passed to \code{qnorm}.}
 \item{df}{Numeric; combined arithmetically in the body.}
 }
 \description{

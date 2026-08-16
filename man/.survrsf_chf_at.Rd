@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{na}{A list; the body reads \code{$chf}, \code{$time} from it.}
-\item{t}{See Usage.}
+\item{t}{Passed to \code{<=}.}
 }
 \description{
 A step of the survrsf_native implementation. Called by \code{morie_survrsf_conservation_check}, \code{morie_survrsf_conservation_residuals}, \code{morie_survrsf_ensemble_chf} and 1 others in the module. See the file header for the source the module follows.

@@ -158,7 +158,7 @@ morie_matheron_estimator <- function(coords, z, bins = NULL, cutoff = NULL,
 #' the source it follows.
 #'
 #' @param h Numeric; combined arithmetically in the body.
-#' @param model See Usage.
+#' @param model Passed to \code{switch}.
 #' @param nugget Numeric; combined arithmetically in the body.
 #' @param psill Numeric; combined arithmetically in the body.
 #' @param rng Numeric; passed to \code{max}.

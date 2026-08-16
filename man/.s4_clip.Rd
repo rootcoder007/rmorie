@@ -8,9 +8,9 @@
 .s4_clip(v, lo, hi)
 }
 \arguments{
-\item{v}{See Usage.}
-\item{lo}{See Usage.}
-\item{hi}{See Usage.}
+\item{v}{Passed to \code{pmax}.}
+\item{lo}{Passed to \code{pmax}.}
+\item{hi}{Passed to \code{pmin}.}
 }
 \description{
 A step of the s04core implementation. Called by \code{.s4_glmbin}, \code{.s4_tmle}, \code{.tmlmpi_cdf_bank} and 25 others in the module. See the file header for the source the module follows.

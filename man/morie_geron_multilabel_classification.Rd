@@ -22,3 +22,10 @@ List with \code{predictions}, \code{per_label_f1},
 Strict \code{>} thresholding per label; per-label F1 via
 \code{\link[=morie_geron_f1_score]{morie_geron_f1_score()}}, plus the micro F1 over pooled counts.
 }
+\examples{
+x <- matrix(c(1, 0, 0.5, 1), 2, byrow = TRUE)
+morie_geron_encoder_decoder_seq2seq(function(x) c(sum(x), 1), 
+    function(yp, cc, t) as.numeric(yp) * 0.5 + cc[1]/t, c(1, 
+        2, 3), 4)
+morie_geron_multilabel_classification(X = x, Y = x)
+}

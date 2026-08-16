@@ -8,12 +8,12 @@
 morie_tlcvnp(X, x0, bandwidths, kernel = "epanechnikov", V = 5L, seed = 0L)
 }
 \arguments{
-\item{X}{See Usage.}
-\item{x0}{See Usage.}
-\item{bandwidths}{See Usage.}
-\item{kernel}{Defaults to \code{"epanechnikov"}.}
-\item{V}{Defaults to \code{5L}.}
-\item{seed}{Defaults to \code{0L}.}
+\item{X}{Passed to \code{cv_tmle_smoothed}.}
+\item{x0}{Passed to \code{cv_tmle_smoothed}.}
+\item{bandwidths}{Passed to \code{cv_tmle_smoothed}.}
+\item{kernel}{Passed to \code{cv_tmle_smoothed}. Defaults to \code{"epanechnikov"}.}
+\item{V}{Passed to \code{cv_tmle_smoothed}. Defaults to \code{5L}.}
+\item{seed}{Passed to \code{cv_tmle_smoothed}. Defaults to \code{0L}.}
 }
 \description{
 A step of the tlcvnp_native implementation. No other function in the package calls it. See the file header for the source the module follows.

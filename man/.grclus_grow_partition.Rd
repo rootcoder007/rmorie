@@ -10,7 +10,7 @@
 \arguments{
 \item{adj}{A vector; its length is taken and its elements indexed.}
 \item{vw}{A vector; indexed elementwise.}
-\item{target}{See Usage.}
+\item{target}{Passed to \code{<}.}
 \item{seed}{Passed to \code{.ghc_rng}.}
 \item{greedy}{A flag; the body branches on it.}
 \item{n_starts}{Optional; may be \code{NULL}. A count; the body uses it as \code{seq_len(...)}.}

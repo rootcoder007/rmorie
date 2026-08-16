@@ -18,7 +18,7 @@
 #' source it follows.
 #'
 #' @param Qs A vector; indexed elementwise.
-#' @param A See Usage.
+#' @param A Passed to \code{seq.int}.
 #' @return The value of \code{b}, as built in the body.
 #' @export
 .mor_rl_greedy <- function(Qs, A) {
@@ -35,7 +35,7 @@
 #'
 #' @param row A vector; indexed elementwise.
 #' @param S A count; the body uses it as \code{seq_len(...)}.
-#' @param u See Usage.
+#' @param u Passed to \code{<=}.
 #' @return The value of \code{S}, as built in the body.
 #' @export
 .mor_rl_sample_row <- function(row, S, u) {
@@ -57,7 +57,7 @@
 #' @param e Passed to \code{.ghc_unif}.
 #' @param Qs Passed to \code{.mor_rl_greedy}.
 #' @param A Numeric; combined arithmetically in the body.
-#' @param epsilon See Usage.
+#' @param epsilon Passed to \code{<}.
 #' @return The value of \code{.mor_rl_greedy}.
 #' @export
 .mor_rl_eps <- function(e, Qs, A, epsilon) {

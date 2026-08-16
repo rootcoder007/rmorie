@@ -8,10 +8,10 @@
 MfImpEeg(x, t0 = NULL, gain = 1, dt = 1)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{t0}{Defaults to \code{NULL}.}
-\item{gain}{Defaults to \code{1}.}
-\item{dt}{Defaults to \code{1}.}
+\item{x}{Passed to \code{MfImpulse}.}
+\item{t0}{Passed to \code{MfImpulse}.}
+\item{gain}{Passed to \code{MfImpulse}. Defaults to \code{1}.}
+\item{dt}{Passed to \code{MfImpulse}. Defaults to \code{1}.}
 }
 \description{
 is a reversed reference, the filtering is equivalent to correlation.

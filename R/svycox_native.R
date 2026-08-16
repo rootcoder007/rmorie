@@ -225,7 +225,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param A See Usage.
+#' @param A Passed to \code{cbind}.
 #' @param b A vector; its length is taken.
 #' @return A vector, from \code{sapply}.
 #' @export
@@ -291,7 +291,7 @@
 #' @param contrib A matrix; indexed by row and column.
 #' @param w A vector; its length is taken and its elements indexed.
 #' @param h A vector; indexed elementwise.
-#' @param c See Usage.
+#' @param c Passed to \code{paste}.
 #' @param p A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{V}, as built in the body.
 #' @export
@@ -372,7 +372,7 @@
 #' @param strata Passed to \code{.svycox_prep}.
 #' @param cluster Passed to \code{.svycox_prep}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
-#' @param tol Defaults to \code{1e-09}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-09}.
 #' @return A list with \code{estimate}, \code{coefficients}, \code{hazard_ratios}, \code{std_errors}, \code{model_std_errors}, \code{vcov}, \code{information}, \code{score}, \code{design_effect}, \code{z}, \code{n}, \code{n_events}, \code{n_iterations}, \code{ties}, \code{method}.
 #' @export
 .svycox_svycoxph <- function(time, event, X, weights = NULL, strata = NULL,

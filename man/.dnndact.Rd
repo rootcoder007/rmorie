@@ -8,8 +8,8 @@
 .dnndact(name, z, g)
 }
 \arguments{
-\item{name}{See Usage.}
-\item{z}{See Usage.}
+\item{name}{Passed to \code{identical}.}
+\item{z}{Passed to \code{>}.}
 \item{g}{Numeric; combined arithmetically in the body.}
 }
 \description{

@@ -8,7 +8,7 @@
 .tl1step_as_numvec(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{unlist}.}
 }
 \description{
 A step of the tl1step_native implementation. Called by \code{.tl1step_build_ulfm}, \code{.tl1step_is_universal}, \code{.tl1step_iterative_tmle} and 1 others in the module. See the file header for the source the module follows.

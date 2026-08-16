@@ -13,8 +13,8 @@
 \item{e}{Passed to \code{.baygsl_expo}.}
 \item{w}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{max_steps}{Numeric; combined arithmetically in the body. Defaults to \code{50L}.}
-\item{lower}{Defaults to \code{.baygsl_NEG_INF}.}
-\item{upper}{Defaults to \code{.baygsl_POS_INF}.}
+\item{lower}{Passed to \code{>}. Defaults to \code{.baygsl_NEG_INF}.}
+\item{upper}{Passed to \code{<}. Defaults to \code{.baygsl_POS_INF}.}
 }
 \description{
 `logf` is the log of an unnormalised density; rng is the .ghc_rng environment so the chain stays reproducible.

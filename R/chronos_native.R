@@ -176,9 +176,9 @@ dequantize <- function(tokens, bins) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{mean_scale}.
 #' @param bins A list; the body reads \code{$n_bins} from it.
-#' @param context Defaults to \code{NULL}.
+#' @param context Passed to \code{mean_scale}.
 #' @param add_eos A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param pad_to Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{estimate}, \code{tokens}, \code{scale}, \code{n_clipped}, \code{clipped_fraction}, \code{vocab_size}, \code{method}, \code{ignores}.
@@ -205,8 +205,8 @@ tokenize <- function(x, bins, context = NULL, add_eos = TRUE, pad_to = NULL) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param tokens See Usage.
-#' @param bins See Usage.
+#' @param tokens Passed to \code{dequantize}.
+#' @param bins Passed to \code{dequantize}.
 #' @param scale Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
@@ -261,11 +261,11 @@ forecast_summary <- function(token_probs, bins, quantiles = c(0.1, 0.5, 0.9)) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
-#' @param bins See Usage.
-#' @param context Defaults to \code{NULL}.
-#' @param add_eos Defaults to \code{TRUE}.
-#' @param pad_to Defaults to \code{NULL}.
+#' @param x Passed to \code{tokenize}.
+#' @param bins Passed to \code{tokenize}.
+#' @param context Passed to \code{tokenize}.
+#' @param add_eos Passed to \code{tokenize}. Defaults to \code{TRUE}.
+#' @param pad_to Passed to \code{tokenize}.
 #' @return The value of \code{tokenize}.
 #' @export
 morie_chronos <- function(x, bins, context = NULL, add_eos = TRUE,

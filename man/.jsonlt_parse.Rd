@@ -8,7 +8,7 @@
 .jsonlt_parse(txt)
 }
 \arguments{
-\item{txt}{See Usage.}
+\item{txt}{Passed to \code{paste}.}
 }
 \description{
 A step of the jsonlt_native implementation. Called by \code{morie_jsonlt_from_json}. See the file header for the source the module follows.

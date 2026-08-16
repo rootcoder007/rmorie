@@ -10,7 +10,7 @@
 \arguments{
 \item{adj}{A vector; indexed elementwise.}
 \item{n}{A count; the body uses it as \code{rep(...)}.}
-\item{maxpath}{See Usage.}
+\item{maxpath}{Passed to \code{>=}.}
 \item{ty}{A vector; indexed elementwise.}
 }
 \description{

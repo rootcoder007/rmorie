@@ -79,7 +79,7 @@ morie_arch_lm_test <- function(r, q = 1L, demean = TRUE) {
 #' parameters (the Lilliefors construction; parameter-free for a fitted
 #' location-scale family).
 #'
-#' @param d_obs See Usage.
+#' @param d_obs Passed to \code{>=}.
 #' @param n See Usage.
 #' @param n_mc A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.

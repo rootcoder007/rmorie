@@ -122,7 +122,7 @@ design_mf <- function(u, i, n_users, n_items) {
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{300}.
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.02}.
 #' @param lam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.
-#' @param seed Defaults to \code{0}.
+#' @param seed Passed to \code{set.seed}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{w0}, \code{w}, \code{V}, \code{mse_history}, \code{final_mse}, \code{k}, \code{n_features}, \code{method}.
 #' @export
 fit_fm <- function(X, y, k_dim = 4, iters = 300, alpha = 0.02,

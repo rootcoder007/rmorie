@@ -137,7 +137,7 @@
 #' source it follows.
 #'
 #' @param sorted_v A vector; its length is taken.
-#' @param x See Usage.
+#' @param x Passed to \code{<=}.
 #' @return A numeric value.
 #' @export
 .pibmd_ecdf <- function(sorted_v, x) sum(sorted_v <= x) / length(sorted_v)

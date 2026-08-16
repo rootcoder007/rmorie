@@ -237,7 +237,7 @@ Dnnmt <- function(X, Y, layers, heads = NULL, activation = "relu",
 #' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param name See Usage.
+#' @param name Passed to \code{identical}.
 #' @param z Passed to \code{.s03sigmoid}.
 #' @return Nothing; this branch always raises.
 #' @export
@@ -256,8 +256,8 @@ Dnnmt <- function(X, Y, layers, heads = NULL, activation = "relu",
 #' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param name See Usage.
-#' @param z See Usage.
+#' @param name Passed to \code{identical}.
+#' @param z Passed to \code{>}.
 #' @param g Numeric; combined arithmetically in the body.
 #' @return Nothing; this branch always raises.
 #' @export

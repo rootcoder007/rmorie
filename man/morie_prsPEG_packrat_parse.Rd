@@ -8,7 +8,7 @@
 morie_prsPEG_packrat_parse(expr, text, full = TRUE)
 }
 \arguments{
-\item{expr}{See Usage.}
+\item{expr}{Passed to \code{attr}.}
 \item{text}{A vector; its length is taken.}
 \item{full}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }

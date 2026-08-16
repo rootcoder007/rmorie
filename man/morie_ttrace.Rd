@@ -8,8 +8,8 @@
 morie_ttrace(reps = 200, seed = 0, ...)
 }
 \arguments{
-\item{reps}{Defaults to \code{200}.}
-\item{seed}{Defaults to \code{0}.}
+\item{reps}{Passed to \code{probability_of_control}. Defaults to \code{200}.}
+\item{seed}{Passed to \code{probability_of_control}. Defaults to \code{0}.}
 \item{...}{Passed through.}
 }
 \description{

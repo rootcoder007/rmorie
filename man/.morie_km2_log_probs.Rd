@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{items}{Coerced to list by the body, with \code{as.list}.}
-\item{scorer}{See Usage.}
-\item{name}{See Usage.}
+\item{scorer}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{name}{Passed to \code{sprintf}.}
 }
 \description{
 A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch6_cat_metric}, \code{morie_kamath_ch6_pll}. See the file header for the source the module follows.

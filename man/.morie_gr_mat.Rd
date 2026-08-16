@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{x}{A matrix; passed to \code{as.matrix}.}
-\item{name}{See Usage.}
+\item{name}{Passed to \code{paste0}.}
 }
 \description{
 A step of the geron_ml_native implementation. Called by \code{.morie_gr_lsa}, \code{.morie_gr_w4b_grid_search}, \code{.morie_w4c_centroid_pair} and 82 others in the module. See the file header for the source the module follows.

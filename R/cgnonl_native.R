@@ -64,8 +64,8 @@ beta_polak_ribiere <- function(g_new, g_old, plus = FALSE) {
 #' source it follows.
 #'
 #' @param rule One of \code{"fletcher-reeves"}, \code{"polak-ribiere"}, \code{"polak-ribiere-plus"}.
-#' @param g_new See Usage.
-#' @param g_old See Usage.
+#' @param g_new Passed to \code{beta_fletcher_reeves}.
+#' @param g_old Passed to \code{beta_fletcher_reeves}.
 #' @return Nothing; this branch always raises.
 #' @export
 .cgnonl_beta <- function(rule, g_new, g_old) {
@@ -216,14 +216,14 @@ line_search_fr <- function(f, grad, x, p, f0, g0, est = NULL,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param f See Usage.
-#' @param grad See Usage.
+#' @param f Passed to \code{line_search_fr}.
+#' @param grad Passed to \code{line_search_fr}.
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param beta Passed to \code{.cgnonl_beta}. Defaults to \code{"fletcher-reeves"}.
 #' @param restart Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @param max_iter Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
-#' @param est Defaults to \code{NULL}.
+#' @param est Passed to \code{line_search_fr}.
 #' @param line_search Compared against \code{"exact-quadratic"}. Defaults to \code{"fletcher-reeves"}.
 #' @param hess_vec Optional; may be \code{NULL}. Passed to \code{.cgnonl_exact_quadratic_step}.
 #' @param keep_path A flag; the body branches on it. Defaults to \code{FALSE}.
@@ -324,17 +324,17 @@ cgnonl <- nonlinear_cg
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param f See Usage.
-#' @param grad See Usage.
-#' @param x0 See Usage.
-#' @param beta Defaults to \code{"fletcher-reeves"}.
-#' @param restart Defaults to \code{NULL}.
-#' @param max_iter Defaults to \code{NULL}.
-#' @param tol Defaults to \code{1e-10}.
-#' @param est Defaults to \code{NULL}.
-#' @param line_search Defaults to \code{"fletcher-reeves"}.
-#' @param hess_vec Defaults to \code{NULL}.
-#' @param keep_path Defaults to \code{FALSE}.
+#' @param f Passed to \code{nonlinear_cg}.
+#' @param grad Passed to \code{nonlinear_cg}.
+#' @param x0 Passed to \code{nonlinear_cg}.
+#' @param beta Passed to \code{nonlinear_cg}. Defaults to \code{"fletcher-reeves"}.
+#' @param restart Passed to \code{nonlinear_cg}.
+#' @param max_iter Passed to \code{nonlinear_cg}.
+#' @param tol Passed to \code{nonlinear_cg}. Defaults to \code{1e-10}.
+#' @param est Passed to \code{nonlinear_cg}.
+#' @param line_search Passed to \code{nonlinear_cg}. Defaults to \code{"fletcher-reeves"}.
+#' @param hess_vec Passed to \code{nonlinear_cg}.
+#' @param keep_path Passed to \code{nonlinear_cg}. Defaults to \code{FALSE}.
 #' @return The value of \code{nonlinear_cg}.
 #' @export
 morie_cgnonl <- function(f, grad, x0, beta = "fletcher-reeves",

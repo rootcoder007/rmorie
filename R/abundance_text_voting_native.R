@@ -504,7 +504,7 @@ morie_face_smooth <- function(Y, argvals = NULL, n_basis = 12L, degree = 3L,
 #'
 #' @param A A matrix; indexed by row and column.
 #' @param x Carried through into a list the body builds.
-#' @param Z See Usage.
+#' @param Z Passed to \code{\%in\%}.
 #' @return The value of \code{setdiff}.
 #' @export
 .morie_reachable <- function(A, x, Z) {

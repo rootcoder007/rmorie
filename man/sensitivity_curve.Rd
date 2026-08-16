@@ -8,12 +8,12 @@
 sensitivity_curve(beta, n_pre, n_post, Ms, family = "SD", l_vec = NULL)
 }
 \arguments{
-\item{beta}{See Usage.}
-\item{n_pre}{See Usage.}
-\item{n_post}{See Usage.}
+\item{beta}{Passed to \code{identified_set}.}
+\item{n_pre}{Passed to \code{identified_set}.}
+\item{n_post}{Passed to \code{identified_set}.}
 \item{Ms}{Iterated over elementwise, with \code{lapply}.}
 \item{family}{Carried through into a list the body builds. Defaults to \code{"SD"}.}
-\item{l_vec}{Defaults to \code{NULL}.}
+\item{l_vec}{Passed to \code{identified_set}.}
 }
 \description{
 A step of the snmtst_native implementation. No other function in the package calls it. See the file header for the source the module follows.

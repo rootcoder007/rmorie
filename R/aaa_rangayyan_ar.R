@@ -160,8 +160,8 @@ LpcSynth <- function(a, excitation, gain = 1, initial = NULL) {
 #' spectrum from P+1 parameters.  That smoothness is also the trap: the
 #' model can only make P/2 peaks, so extra resonances merge silently.
 #'
-#' @param x See Usage.
-#' @param order See Usage.
+#' @param x Passed to \code{Lpc}.
+#' @param order Passed to \code{Lpc}.
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param nfreq Coerced to integer by the body, with \code{as.integer}. Defaults to \code{256}.
 #' @return The value of \code{fit}, as built in the body.
@@ -669,9 +669,9 @@ stats_free_interp <- function(beats, values, grid) {
 #' individually and in normalized units so no interpretation has to rest
 #' on the ratio alone.
 #'
-#' @param rr See Usage.
-#' @param order Defaults to \code{16}.
-#' @param fs Defaults to \code{4}.
+#' @param rr Passed to \code{HrvAr}.
+#' @param order Passed to \code{HrvAr}. Defaults to \code{16}.
+#' @param fs Passed to \code{HrvAr}. Defaults to \code{4}.
 #' @return A list with \code{lf_hf_ratio}, \code{lf}, \code{hf}, \code{vlf}, \code{total_power}, \code{lf_nu}, \code{hf_nu}, \code{order}, \code{bands}, \code{interpretation_caveat}, \code{method}.
 #' @export
 HrvRatio <- function(rr, order = 16, fs = 4) {

@@ -119,8 +119,8 @@ morie_pmfsc_bin <- function(r, r_max, n_bins) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param a See Usage.
-#' @param b See Usage.
+#' @param a Passed to \code{paste0}.
+#' @param b Passed to \code{paste0}.
 #' @return A character value.
 #' @export
 .pmfsc_key <- function(a, b) paste0(a, "|", b)

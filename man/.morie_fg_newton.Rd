@@ -9,13 +9,13 @@
 }
 \arguments{
 \item{t}{A vector; indexed elementwise.}
-\item{e}{See Usage.}
+\item{e}{Passed to \code{==}.}
 \item{X}{A matrix; indexed by row and column.}
-\item{competing}{See Usage.}
+\item{competing}{Passed to \code{&}.}
 \item{Gfun}{Accepted by the signature and not used anywhere in the body.}
 \item{Gi}{Numeric; combined arithmetically in the body.}
 \item{max_iter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.}
-\item{tol}{Defaults to \code{1e-09}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-09}.}
 }
 \description{
 Part of the competing_risks_native implementation; see the file header for the source it follows.

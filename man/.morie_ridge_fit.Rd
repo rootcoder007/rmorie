@@ -8,7 +8,7 @@
 .morie_ridge_fit(X, y, lam = 0.001)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{Passed to \code{cbind}.}
 \item{y}{A matrix; passed to \code{crossprod}.}
 \item{lam}{Numeric; combined arithmetically in the body. Defaults to \code{0.001}.}
 }

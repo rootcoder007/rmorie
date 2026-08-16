@@ -11,7 +11,7 @@
 \item{X}{A matrix; indexed by row and column.}
 \item{y}{A matrix; passed to \code{crossprod}.}
 \item{n_subsets}{A count; the body uses it as \code{seq_len(...)}.}
-\item{seed}{See Usage.}
+\item{seed}{Passed to \code{set.seed}.}
 }
 \description{
 local IRLS refinement. Non-convex objective, so the subsets are the global search and the refinement the local one.

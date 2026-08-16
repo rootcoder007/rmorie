@@ -74,3 +74,10 @@ These functions mirror, in R, the implementations in the Python package
 tests in \code{tests/testthat/}.
 }
 \keyword{models}
+\examples{
+n <- 12
+A <- matrix(rnorm(n * 6), nrow = n)
+G <- morie_grm(A) + diag(0.3, n)
+morie_chol_lower(G)
+morie_multitrait(Y = G, Z = G, G = G, Sigma_T = G, R_T = G)
+}

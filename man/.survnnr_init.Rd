@@ -8,7 +8,7 @@
 .survnnr_init(d, hidden, seed)
 }
 \arguments{
-\item{d}{See Usage.}
+\item{d}{Passed to \code{c}.}
 \item{hidden}{Coerced to integer by the body, with \code{as.integer}.}
 \item{seed}{Passed to \code{.ghc_rng}.}
 }

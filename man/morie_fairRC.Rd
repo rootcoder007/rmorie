@@ -8,10 +8,10 @@
 morie_fairRC(protected, measure = "rND", step = 10, normalize = TRUE)
 }
 \arguments{
-\item{protected}{See Usage.}
+\item{protected}{Passed to \code{rND}.}
 \item{measure}{One of \code{"rKL"}, \code{"rND"}. Defaults to \code{"rND"}.}
-\item{step}{Defaults to \code{10}.}
-\item{normalize}{Defaults to \code{TRUE}.}
+\item{step}{Passed to \code{rND}. Defaults to \code{10}.}
+\item{normalize}{Passed to \code{rND}. Defaults to \code{TRUE}.}
 }
 \description{
 A step of the fairRC_native implementation. No other function in the package calls it. See the file header for the source the module follows.

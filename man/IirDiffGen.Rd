@@ -8,10 +8,10 @@
 IirDiffGen(x, b_k, a_k = NULL, n = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{b_k}{See Usage.}
-\item{a_k}{Defaults to \code{NULL}.}
-\item{n}{Defaults to \code{NULL}.}
+\item{x}{Passed to \code{IirDiff}.}
+\item{b_k}{Passed to \code{IirDiff}.}
+\item{a_k}{Passed to \code{IirDiff}.}
+\item{n}{Passed to \code{IirDiff}.}
 }
 \description{
 filter is actually run over data.  The feedback is SUBTRACTED, as in eq (3.68), and a_k is a_1..a_N without the leading a_0 = 1.

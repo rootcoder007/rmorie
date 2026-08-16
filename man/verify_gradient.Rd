@@ -8,11 +8,11 @@
 verify_gradient(psi_of_P, D, score, weights = NULL, h = 1e-05, tol = 1e-04)
 }
 \arguments{
-\item{psi_of_P}{See Usage.}
+\item{psi_of_P}{Passed to \code{numerical_derivative}.}
 \item{D}{A vector; its length is taken.}
-\item{score}{See Usage.}
+\item{score}{Passed to \code{numerical_derivative}.}
 \item{weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
-\item{h}{Defaults to \code{1e-05}.}
+\item{h}{Passed to \code{numerical_derivative}. Defaults to \code{1e-05}.}
 \item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-04}.}
 }
 \description{

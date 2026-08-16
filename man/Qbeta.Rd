@@ -9,8 +9,8 @@ Qbeta(p, shape1, shape2)
 }
 \arguments{
 \item{p}{Iterated over elementwise, with \code{vapply}.}
-\item{shape1}{See Usage.}
-\item{shape2}{See Usage.}
+\item{shape1}{Passed to \code{Pbeta}.}
+\item{shape2}{Passed to \code{Pbeta}.}
 }
 \description{
 A step of the dist_native implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -12,7 +12,7 @@ CardioResp(ecg_rate, resp, fs, band = c(0.15, 0.4), nperseg = NULL)
 \item{resp}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fs}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{band}{A vector; indexed elementwise. Defaults to \code{c(0.15, 0.4)}.}
-\item{nperseg}{Defaults to \code{NULL}.}
+\item{nperseg}{Passed to \code{Cohere}.}
 }
 \description{
 A step of the rangayyan_corr implementation. No other function in the package calls it. See the file header for the source the module follows.

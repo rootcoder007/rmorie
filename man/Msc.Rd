@@ -8,11 +8,11 @@
 Msc(x, y, fs = 1, nperseg = NULL, noverlap = NULL)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{y}{See Usage.}
-\item{fs}{Defaults to \code{1}.}
-\item{nperseg}{Defaults to \code{NULL}.}
-\item{noverlap}{Defaults to \code{NULL}.}
+\item{x}{Passed to \code{Cohere}.}
+\item{y}{Passed to \code{Cohere}.}
+\item{fs}{Passed to \code{Cohere}. Defaults to \code{1}.}
+\item{nperseg}{Passed to \code{Cohere}.}
+\item{noverlap}{Passed to \code{Cohere}.}
 }
 \description{
 0.5 magnitude coherence is 0.25 magnitude-squared coherence.

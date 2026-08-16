@@ -23,7 +23,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param name See Usage.
+#' @param name Passed to \code{Sys.getenv}.
 #' @return The value of \code{%in%}.
 #' @export
 .morie_env_true <- function(name) {
@@ -51,7 +51,7 @@
 #'
 #' every sink that spawns an external process.
 #'
-#' @param feature Defaults to \code{"dynamic execution"}.
+#' @param feature Passed to \code{sprintf}. Defaults to \code{"dynamic execution"}.
 #' @return Invisibly,a logical value.
 #' @export
 .morie_ensure_exec_allowed <- function(feature = "dynamic execution") {
@@ -82,8 +82,8 @@
 #' file; provenance is the caller\'s responsibility. Feed it only .rds
 #' files you trust.
 #'
-#' @param path See Usage.
-#' @param feature Defaults to \code{"reading an .rds file"}.
+#' @param path Passed to \code{readRDS}.
+#' @param feature Passed to \code{sprintf}. Defaults to \code{"reading an .rds file"}.
 #' @return The value of \code{readRDS}.
 #' @export
 .morie_safe_readRDS <- function(path, feature = "reading an .rds file") {

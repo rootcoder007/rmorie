@@ -11,7 +11,7 @@ ExpKerTfd(x, fs = 1, sigma = 1, nfreq = NULL, maxlag = NULL)
 \item{x}{Passed to \code{.tf_need}.}
 \item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 \item{sigma}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
-\item{nfreq}{Defaults to \code{NULL}.}
+\item{nfreq}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{maxlag}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{

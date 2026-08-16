@@ -9,7 +9,7 @@ outlyingness(X, h = NULL, n_dirs = 250L, seed = 17L)
 }
 \arguments{
 \item{X}{Passed to \code{.robpca_matrix}.}
-\item{h}{Defaults to \code{NULL}.}
+\item{h}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{n_dirs}{Passed to \code{.robpca_directions}. Defaults to \code{250L}.}
 \item{seed}{Passed to \code{.robpca_directions}. Defaults to \code{17L}.}
 }

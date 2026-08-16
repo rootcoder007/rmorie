@@ -20,7 +20,7 @@
 #' source it follows.
 #'
 #' @param x A matrix; passed to \code{as.matrix}.
-#' @param what See Usage.
+#' @param what Passed to \code{sprintf}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
 .alfbnp_atoms <- function(x, what) {
@@ -142,7 +142,7 @@
 #' source it follows.
 #'
 #' @param n_atoms Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @param denoiser Defaults to \code{NULL}.
+#' @param denoiser Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param clean Optional; may be \code{NULL}. Passed to \code{.alfbnp_clean_list}.
 #' @param steps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20L}.
 #' @param sigma_data Compared against \code{"fit"}. Defaults to \code{16}.

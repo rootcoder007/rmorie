@@ -8,7 +8,7 @@
 .sarima_minimize_nm(fn, x0, maxit = 200L)
 }
 \arguments{
-\item{fn}{See Usage.}
+\item{fn}{Passed to \code{apply}.}
 \item{x0}{A vector; its length is taken and its elements indexed.}
 \item{maxit}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.}
 }

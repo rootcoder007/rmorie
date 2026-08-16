@@ -19,3 +19,10 @@ A step of the geron_train_native implementation. Called by \code{morie_geron_ch4
 A list with \code{X}, \code{P}, \code{Yh}, \code{G}.
 }
 \keyword{internal}
+\examples{
+set.seed(7)
+X <- cbind(1, rnorm(20))
+Y <- diag(3)[sample(1:3, 20, replace = TRUE), ]
+theta <- matrix(0, 2, 3)
+.morie_gr_gradient_matrix(X, Y, theta)
+}

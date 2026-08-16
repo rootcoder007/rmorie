@@ -12,7 +12,7 @@
 \item{y}{A vector; indexed elementwise.}
 \item{iters}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.}
 \item{ridge}{Passed to \code{.s03ridgesolve}. Defaults to \code{1e-10}.}
-\item{tol}{Defaults to \code{1e-13}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-13}.}
 }
 \description{
 which for the canonical link is exactly IRLS, beta <- beta + (X\\' W X)^-1 X\\' (y - p), W = diag(p (1 - p)).

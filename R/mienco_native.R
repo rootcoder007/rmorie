@@ -114,7 +114,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param summary See Usage.
+#' @param summary Passed to \code{critic}.
 #' @param patches A vector; its length is taken.
 #' @param other_patches A vector; its length is taken.
 #' @param critic Accepted by the signature and not used anywhere in the body.

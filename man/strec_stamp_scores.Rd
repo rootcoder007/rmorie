@@ -10,10 +10,10 @@ strec_stamp_scores(embeddings, item_table, Ws, Wt, bs = NULL, bt = NULL, attenti
 \arguments{
 \item{embeddings}{Passed to \code{.strec_as_rows}.}
 \item{item_table}{Passed to \code{.strec_as_rows}.}
-\item{Ws}{See Usage.}
-\item{Wt}{See Usage.}
-\item{bs}{Defaults to \code{NULL}.}
-\item{bt}{Defaults to \code{NULL}.}
+\item{Ws}{Passed to \code{strec_mlp_cell}.}
+\item{Wt}{Passed to \code{strec_mlp_cell}.}
+\item{bs}{Passed to \code{strec_mlp_cell}.}
+\item{bt}{Passed to \code{strec_mlp_cell}.}
 \item{attention}{Optional; may be \code{NULL}. A list; the body reads \code{$m_a} from it.}
 }
 \description{

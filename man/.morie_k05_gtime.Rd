@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{times}{A vector; its length is taken and its elements indexed.}
-\item{e_times}{See Usage.}
+\item{e_times}{Passed to \code{>=}.}
 \item{how}{One of \code{"identity"}, \code{"log"}, \code{"rank"}.}
 }
 \description{

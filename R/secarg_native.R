@@ -41,7 +41,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n See Usage.
+#' @param n Passed to \code{bitwAnd}.
 #' @return The value of \code{writeBin}.
 #' @export
 .le64 <- function(n) {

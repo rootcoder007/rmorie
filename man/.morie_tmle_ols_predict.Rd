@@ -8,7 +8,7 @@
 .morie_tmle_ols_predict(X, y, fit_rows)
 }
 \arguments{
-\item{X}{See Usage.}
+\item{X}{Passed to \code{cbind}.}
 \item{y}{A vector; indexed elementwise.}
 \item{fit_rows}{See Usage.}
 }

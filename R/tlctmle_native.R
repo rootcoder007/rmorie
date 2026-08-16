@@ -31,15 +31,15 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param A See Usage.
-#' @param Y See Usage.
-#' @param Q1 See Usage.
-#' @param Q0 See Usage.
-#' @param W See Usage.
-#' @param g_models See Usage.
-#' @param V Defaults to \code{5L}.
-#' @param seed Defaults to \code{0L}.
-#' @param penalty Defaults to \code{TRUE}.
+#' @param A Passed to \code{ctmle}.
+#' @param Y Passed to \code{ctmle}.
+#' @param Q1 Passed to \code{ctmle}.
+#' @param Q0 Passed to \code{ctmle}.
+#' @param W Passed to \code{ctmle}.
+#' @param g_models Passed to \code{ctmle}.
+#' @param V Passed to \code{ctmle}. Defaults to \code{5L}.
+#' @param seed Passed to \code{ctmle}. Defaults to \code{0L}.
+#' @param penalty Passed to \code{ctmle}. Defaults to \code{TRUE}.
 #' @return The value of \code{ctmle}.
 #' @export
 morie_tlctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L,
@@ -209,8 +209,8 @@ instrument_penalty <- function(g_small, g_large) {
 #' @param Y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param Q1 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param Q0 Coerced to numeric by the body, with \code{as.numeric}.
-#' @param W See Usage.
-#' @param g_models See Usage.
+#' @param W Passed to \code{candidate_sequence}.
+#' @param g_models Passed to \code{candidate_sequence}.
 #' @param V Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.
 #' @param penalty A flag; the body branches on it. Defaults to \code{TRUE}.

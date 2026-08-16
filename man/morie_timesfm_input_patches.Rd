@@ -8,7 +8,7 @@
 morie_timesfm_input_patches(x, patch_len, pad_value = 0)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{unlist}.}
 \item{patch_len}{Coerced to integer by the body, with \code{as.integer}.}
 \item{pad_value}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }

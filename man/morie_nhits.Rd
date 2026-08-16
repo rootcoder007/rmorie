@@ -11,7 +11,7 @@ morie_nhits(y, horizon, lookback = NULL, blocks = NULL, ridge = 1e-08)
 \item{y}{Passed to \code{.nhits_vec}.}
 \item{horizon}{Coerced to integer by the body, with \code{as.integer}.}
 \item{lookback}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
-\item{blocks}{Defaults to \code{NULL}.}
+\item{blocks}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{ridge}{Passed to \code{.nhits_nhits_stack}. Defaults to \code{1e-08}.}
 }
 \description{

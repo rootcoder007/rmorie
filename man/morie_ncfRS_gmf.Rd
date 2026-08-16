@@ -11,7 +11,7 @@ morie_ncfRS_gmf(p_u, q_i, h = NULL, activation = "sigmoid")
 \item{p_u}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{q_i}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{h}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
-\item{activation}{Defaults to \code{"sigmoid"}.}
+\item{activation}{Passed to \code{identical}. Defaults to \code{"sigmoid"}.}
 }
 \description{
 A step of the ncfRS_native implementation. Called by \code{morie_ncfRS_fit_gmf}. See the file header for the source the module follows.

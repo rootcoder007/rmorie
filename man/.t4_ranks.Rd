@@ -8,7 +8,7 @@
 .t4_ranks(x)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{rank}.}
 }
 \description{
 A step of the tail4_core implementation. Called by \code{Pettitt}. See the file header for the source the module follows.

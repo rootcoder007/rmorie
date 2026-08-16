@@ -9,8 +9,8 @@ channel_mixed_tokens(X, patch_len, stride = NULL)
 }
 \arguments{
 \item{X}{Passed to \code{.patcht_mat}.}
-\item{patch_len}{See Usage.}
-\item{stride}{Defaults to \code{NULL}.}
+\item{patch_len}{Passed to \code{patchify}.}
+\item{stride}{Passed to \code{patchify}.}
 }
 \description{
 A step of the patchT_native implementation. No other function in the package calls it. See the file header for the source the module follows.

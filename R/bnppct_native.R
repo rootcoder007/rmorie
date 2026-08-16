@@ -149,7 +149,7 @@ morie_bnppct_quantile <- function(q, w, mu, s2, lo = NULL, hi = NULL) {
 #'
 #' @param ys_sorted A vector; its length is taken and its elements indexed.
 #' @param weights A vector; indexed elementwise.
-#' @param q See Usage.
+#' @param q Passed to \code{>=}.
 #' @return The value of \code{[}.
 #' @export
 .bnppct_wq <- function(ys_sorted, weights, q) {

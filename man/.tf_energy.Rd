@@ -8,7 +8,7 @@
 .tf_energy(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Passed to \code{Mod}.}
 }
 \description{
 A step of the rangayyan_tf implementation. Called by \code{AtomTfd}. See the file header for the source the module follows.

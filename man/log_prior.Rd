@@ -14,7 +14,7 @@ log_prior(R, prior = "uniform", scale = 1, r_max = NULL, J = 0.1, H = 0, neighbo
 \item{r_max}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 \item{J}{Numeric; combined arithmetically in the body. Defaults to \code{0.1}.}
 \item{H}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
-\item{neighbours}{Defaults to \code{NULL}.}
+\item{neighbours}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the birl_native implementation. Called by \code{.abcgp.alpha_terms}, \code{.abcgp.mw_sampler}, \code{abcnnt} and 1 others in the module. See the file header for the source the module follows.

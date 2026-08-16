@@ -10,7 +10,7 @@ morie_qrntcq_quarantine_efficacy(t.Q, t.R, generation.time = NULL, t.E = 0)
 \arguments{
 \item{t.Q}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{t.R}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{generation.time}{Defaults to \code{NULL}.}
+\item{generation.time}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{t.E}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \description{

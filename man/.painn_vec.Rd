@@ -8,7 +8,7 @@
 .painn_vec(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Passed to \code{unlist}.}
 }
 \description{
 A step of the painn_native implementation. Called by \code{dipole_moment}, \code{gated_update}, \code{scalar_vector_message}. See the file header for the source the module follows.

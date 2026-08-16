@@ -33,7 +33,7 @@
 #' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. A matrix; passed to \code{dim}.
-#' @param name See Usage.
+#' @param name Passed to \code{sprintf}.
 #' @return The value of \code{x_mat}, as built in the body.
 #' @export
 .reinfc_as_matrix <- function(x, name) {

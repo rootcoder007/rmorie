@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{symbol}{Carried through into a list the body builds.}
-\item{args}{See Usage.}
+\item{args}{Passed to \code{c}.}
 }
 \description{
 A step of the trmRew_native implementation. Called by \code{.trmRew_rename}, \code{morie_trmRew_replace_at}. See the file header for the source the module follows.

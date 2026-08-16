@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{estimator}{One of \code{"mean"}, \code{"median"}, \code{"var"}.}
-\item{who}{See Usage.}
+\item{who}{Passed to \code{paste0}.}
 }
 \description{
 A step of the infcrv implementation. Called by \code{Btvinf}, \code{Infcrv}. See the file header for the source the module follows.

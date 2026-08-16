@@ -8,7 +8,7 @@
 .morie_cpd_load_sample(which = c("crime", "arrests"))
 }
 \arguments{
-\item{which}{Defaults to \code{c("crime", "arrests")}.}
+\item{which}{Passed to \code{match.arg}. Defaults to \code{c("crime", "arrests")}.}
 }
 \description{
 A step of the cpd_analyze implementation. Called by \code{morie_cpd_all_analyses}. See the file header for the source the module follows.

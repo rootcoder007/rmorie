@@ -12,7 +12,7 @@ morie_bayreg2_student_t_regression(X, y, nu = 4, max_iter = 200, tol = 1e-10, ad
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{nu}{Numeric; combined arithmetically in the body. Defaults to \code{4}.}
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.}
-\item{tol}{Defaults to \code{1e-10}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-10}.}
 \item{add_intercept}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

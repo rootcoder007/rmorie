@@ -21,8 +21,8 @@
 #' @param shape Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2.83}.
 #' @param scale Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1.86}.
 #' @param grid Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param t.max Defaults to \code{30}.
-#' @param n Defaults to \code{3001L}.
+#' @param t.max Passed to \code{seq}. Defaults to \code{30}.
+#' @param n Passed to \code{seq}. Defaults to \code{3001L}.
 #' @return A list with \code{t}, \code{density}.
 #' @export
 morie_qrntcq_gamma_generation_time <- function(shape = 2.83, scale = 1.86,
@@ -82,7 +82,7 @@ morie_qrntcq_gamma_generation_time <- function(shape = 2.83, scale = 1.86,
 #'
 #' @param t.Q Coerced to numeric by the body, with \code{as.numeric}.
 #' @param t.R Coerced to numeric by the body, with \code{as.numeric}.
-#' @param generation.time Defaults to \code{NULL}.
+#' @param generation.time Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param t.E Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{efficacy}, \code{prevented.mass}, \code{remaining.mass}, \code{t.Q}, \code{t.R}, \code{max.attainable}, \code{pre.quarantine.mass}.
 #' @export
@@ -119,8 +119,8 @@ morie_qrntcq_quarantine_efficacy <- function(t.Q, t.R,
 #' @param t.T Carried through into a list the body builds.
 #' @param t.R Passed to \code{morie_qrntcq_quarantine_efficacy}.
 #' @param false.negative Coerced to numeric by the body, with \code{as.numeric}.
-#' @param generation.time Defaults to \code{NULL}.
-#' @param t.R.positive Defaults to \code{NULL}.
+#' @param generation.time Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param t.R.positive Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{efficacy}, \code{efficacy.detained}, \code{efficacy.released}, \code{false.negative}, \code{t.T}, \code{t.R}, \code{bound}, \code{note}.
 #' @export
 morie_qrntcq_efficacy_test_and_release <- function(t.Q, t.T, t.R,
@@ -172,7 +172,7 @@ morie_qrntcq_utility <- function(efficacy, days.in.quarantine) {
 #' @param t.R.a Numeric; combined arithmetically in the body.
 #' @param t.R.b Numeric; combined arithmetically in the body.
 #' @param t.Q Numeric; combined arithmetically in the body. Defaults to \code{3}.
-#' @param generation.time Defaults to \code{NULL}.
+#' @param generation.time Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param infected.fraction Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{relative.utility}, \code{utility.a}, \code{utility.b}, \code{efficacy.a}, \code{efficacy.b}, \code{independent.of.infected.fraction}, \code{note}.
 #' @export
@@ -200,7 +200,7 @@ morie_qrntcq_relative_utility <- function(t.R.a, t.R.b, t.Q = 3,
 #' source it follows.
 #'
 #' @param t.Q Numeric; combined arithmetically in the body. Defaults to \code{3}.
-#' @param generation.time Defaults to \code{NULL}.
+#' @param generation.time Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param t.max Numeric; combined arithmetically in the body. Defaults to \code{20}.
 #' @param step Numeric; combined arithmetically in the body. Defaults to \code{0.25}.
 #' @return A list with \code{estimate}, \code{optimal.t.R}, \code{efficacy.at.optimum}, \code{utility.at.optimum}, \code{curve}, \code{t.Q}, \code{method}.

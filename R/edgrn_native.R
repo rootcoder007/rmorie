@@ -11,7 +11,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{lgamma}.
 #' @return The value of \code{lgamma}.
 #' @export
 .edgrn_lgamma <- function(x) lgamma(x)

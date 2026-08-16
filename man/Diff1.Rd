@@ -8,7 +8,7 @@
 Diff1(x, T = 1)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{FDiff}.}
 \item{T}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \description{

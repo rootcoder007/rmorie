@@ -23,7 +23,7 @@
 #' @param f Accepted by the signature and not used anywhere in the body.
 #' @param grad_f Accepted by the signature and not used anywhere in the body.
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
-#' @param tol Defaults to \code{1e-06}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-06}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1000L}.
 #' @param full_output A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{x}, as built in the body.

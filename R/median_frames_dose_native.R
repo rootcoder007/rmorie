@@ -28,7 +28,7 @@
 #' Part of the median_frames_dose_native implementation; see the file
 #' header for the source it follows.
 #'
-#' @param k See Usage.
+#' @param k Passed to \code{<}.
 #' @param n Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
@@ -174,7 +174,7 @@ morie_optimal_overlap_weight <- function(var_a, var_b) {
 #'
 #' @param y A vector; indexed elementwise.
 #' @param w A vector; indexed elementwise.
-#' @param mask See Usage.
+#' @param mask Passed to \code{any}.
 #' @return A vector, from \code{c}.
 #' @export
 .morie_domain_total <- function(y, w, mask) {
@@ -296,7 +296,7 @@ morie_dual_frame_total <- function(frame_a, frame_b, overlap_a, overlap_b,
 #' @param n Numeric; passed to \code{sum}.
 #' @param link One of \code{"logit"}, \code{"probit"}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100L}.
-#' @param tol Defaults to \code{1e-11}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-11}.
 #' @return A list with \code{beta}, \code{cov}, \code{converged}, \code{fitted}.
 #' @export
 .morie_glm_quantal <- function(X, k, n, link, max_iter = 100L, tol = 1e-11) {

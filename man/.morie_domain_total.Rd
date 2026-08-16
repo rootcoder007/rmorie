@@ -10,7 +10,7 @@
 \arguments{
 \item{y}{A vector; indexed elementwise.}
 \item{w}{A vector; indexed elementwise.}
-\item{mask}{See Usage.}
+\item{mask}{Passed to \code{any}.}
 }
 \description{
 Part of the median_frames_dose_native implementation; see the file header for the source it follows.

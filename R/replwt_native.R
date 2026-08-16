@@ -358,7 +358,7 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #' @param estimator Accepted by the signature and not used anywhere in the body.
 #' @param d A list; the body reads \code{$weights} from it.
 #' @param rep A list; the body reads \code{$method}, \code{$scale}, \code{$weights} from it.
-#' @param values Defaults to \code{NULL}.
+#' @param values Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{estimate}, \code{theta}, \code{variance}, \code{std_error}, \code{replicates}, \code{n_replicates}, \code{method}.
 #' @export
 .replwt_replicate_variance <- function(estimator, d, rep, values = NULL) {

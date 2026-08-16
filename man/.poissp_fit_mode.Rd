@@ -14,7 +14,7 @@
 \item{Q}{A matrix; passed to \code{\%*\%}.}
 \item{constrain}{A flag; the body branches on it.}
 \item{iters}{Coerced to integer by the body, with \code{as.integer}.}
-\item{tol}{See Usage.}
+\item{tol}{Passed to \code{<}.}
 \item{ridge}{Passed to \code{.poissp_ridgesolve}.}
 }
 \description{

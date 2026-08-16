@@ -207,7 +207,7 @@ morie_backdoor_adjustment <- function(x, y, z, at = NULL) {
 #' source it follows.
 #'
 #' @param x Carried through into a list the body builds.
-#' @param y See Usage.
+#' @param y Passed to \code{==}.
 #' @param ch A vector; indexed elementwise.
 #' @param pa A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
@@ -244,7 +244,7 @@ morie_backdoor_adjustment <- function(x, y, z, at = NULL) {
 #'
 #' @param p A vector; its length is taken and its elements indexed.
 #' @param d A vector; indexed elementwise.
-#' @param Z See Usage.
+#' @param Z Passed to \code{\%in\%}.
 #' @param ch Passed to \code{.bd_desc}.
 #' @return A logical value.
 #' @export
@@ -697,7 +697,7 @@ morie_hsic <- function(a, b) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{outer}.
 #' @param y A matrix; passed to \code{\%*\%}.
 #' @return A numeric value.
 #' @export

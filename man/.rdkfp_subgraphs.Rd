@@ -9,8 +9,8 @@
 }
 \arguments{
 \item{B}{A list; the body reads \code{$a}, \code{$i}, \code{$j} from it.}
-\item{minpath}{See Usage.}
-\item{maxpath}{See Usage.}
+\item{minpath}{Passed to \code{>=}.}
+\item{maxpath}{Passed to \code{<=}.}
 \item{branched}{A flag; the body branches on it.}
 }
 \description{

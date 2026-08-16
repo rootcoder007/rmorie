@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{M}{A matrix; passed to \code{chol}.}
-\item{b}{See Usage.}
+\item{b}{Passed to \code{forwardsolve}.}
 }
 \description{
 A step of the smatch_native implementation. Called by \code{morie_smatch_sccs_poisson_fit}. See the file header for the source the module follows.

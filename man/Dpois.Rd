@@ -8,7 +8,7 @@
 Dpois(x, lambda, log = FALSE)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Passed to \code{round}.}
 \item{lambda}{Numeric; passed to \code{log}.}
 \item{log}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }

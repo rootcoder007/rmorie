@@ -14,7 +14,7 @@ Accuracy(table = NULL, tp = NULL, tn = NULL, fp = NULL, fn = NULL, prevalence = 
 \item{fp}{The body requires: give a 2x2 table or all four of tp, tn, fp, fn.}
 \item{fn}{The body requires: give a 2x2 table or all four of tp, tn, fp, fn.}
 \item{prevalence}{Optional; may be \code{NULL}. Passed to \code{.morie_rg_asfrac}.}
-\item{kind}{Defaults to \code{NULL}.}
+\item{kind}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{exact}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \description{

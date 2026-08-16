@@ -10,7 +10,7 @@ SigFeatures(x, fs = 1, threshold = 0)
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fs}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
-\item{threshold}{Defaults to \code{0}.}
+\item{threshold}{Passed to \code{TurnsCount}. Defaults to \code{0}.}
 }
 \description{
 computed by the function that owns its definition so the vector cannot disagree with the individual measures.  threshold defaults to 0 (every direction change counts); pass the book\'s 100 microvolts for a real EMG record or the count is dominated by noise.

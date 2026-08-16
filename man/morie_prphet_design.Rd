@@ -10,7 +10,7 @@ morie_prphet_design(t, cps, seasonalities = NULL, holidays = NULL, holiday_windo
 \arguments{
 \item{t}{Passed to \code{morie_prphet_trend_matrix}.}
 \item{cps}{A vector; its length is taken.}
-\item{seasonalities}{Defaults to \code{NULL}.}
+\item{seasonalities}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{holidays}{Optional; may be \code{NULL}. A vector; its length is taken.}
 \item{holiday_window}{A vector; indexed elementwise. Defaults to \code{c(0, 0)}.}
 }

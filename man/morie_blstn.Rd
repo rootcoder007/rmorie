@@ -22,7 +22,7 @@ morie_blstn(query, subjects, w = 11L, match = 5, mismatch = -4, cutoff = NULL, X
 \item{lam}{Optional; may be \code{NULL}. Passed to \code{morie_blast_pvalue}.}
 \item{K}{Optional; may be \code{NULL}. Passed to \code{morie_blast_pvalue}.}
 \item{max_hsps}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
-\item{letter_probs}{Defaults to \code{NULL}.}
+\item{letter_probs}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 \item{pvalues}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \description{

@@ -19,9 +19,9 @@ orthogonal_random_forest(Y, T, X, W, x_eval = NULL, n_trees = 100, min_leaf = 5,
 \item{max_depth}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{12}.}
 \item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 \item{residualize}{Carried through into a list the body builds. Defaults to \code{"local"}.}
-\item{ridge}{Defaults to \code{1e-08}.}
+\item{ridge}{Passed to \code{orf_estimate}. Defaults to \code{1e-08}.}
 \item{kind}{Passed to \code{.orfgrf_grow_forest}. Defaults to \code{"double-sample"}.}
-\item{leave_one_out}{Defaults to \code{TRUE}.}
+\item{leave_one_out}{Passed to \code{orf_estimate}. Defaults to \code{TRUE}.}
 }
 \description{
 A step of the orfgrf_native implementation. No other function in the package calls it. See the file header for the source the module follows.

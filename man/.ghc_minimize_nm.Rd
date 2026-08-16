@@ -8,7 +8,7 @@
 .ghc_minimize_nm(objective, x0, maxit = NULL)
 }
 \arguments{
-\item{objective}{See Usage.}
+\item{objective}{Passed to \code{optim}.}
 \item{x0}{A vector; its length is taken.}
 \item{maxit}{Optional; may be \code{NULL}. Carried through into a list the body builds.}
 }

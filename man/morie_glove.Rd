@@ -8,7 +8,7 @@
 morie_glove(corpus, dim = 50, window = 10, epochs = 25, lr = 0.05, x_max = 100, alpha = 0.75, harmonic = TRUE, min_count = 1, seed = 0, combine = "sum")
 }
 \arguments{
-\item{corpus}{See Usage.}
+\item{corpus}{Passed to \code{cooccurrence}.}
 \item{dim}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50}.}
 \item{window}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.}
 \item{epochs}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25}.}
@@ -16,7 +16,7 @@ morie_glove(corpus, dim = 50, window = 10, epochs = 25, lr = 0.05, x_max = 100, 
 \item{x_max}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{100}.}
 \item{alpha}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.75}.}
 \item{harmonic}{Coerced to logical by the body, with \code{as.logical}. Defaults to \code{TRUE}.}
-\item{min_count}{Defaults to \code{1}.}
+\item{min_count}{Passed to \code{cooccurrence}. Defaults to \code{1}.}
 \item{seed}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.}
 \item{combine}{One of \code{"concat"}, \code{"sum"}, \code{"w"}, \code{"wtilde"}. Defaults to \code{"sum"}.}
 }

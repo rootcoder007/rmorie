@@ -163,9 +163,9 @@ roi_align <- function(features, box, out_size = 2L, stride = 1.0,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param features See Usage.
-#' @param box See Usage.
-#' @param out_size Defaults to \code{2L}.
+#' @param features Passed to \code{roi_pool}.
+#' @param box Passed to \code{roi_pool}.
+#' @param out_size Passed to \code{roi_pool}. Defaults to \code{2L}.
 #' @param stride Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{feature_shift}, \code{input_pixel_shift}, \code{stride}, \code{note}.
 #' @export

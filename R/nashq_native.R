@@ -20,7 +20,7 @@
 #' source it follows.
 #'
 #' @param M A matrix; passed to \code{nrow}.
-#' @param name See Usage.
+#' @param name Passed to \code{sprintf}.
 #' @return The value of \code{M}, as built in the body.
 #' @export
 .nashq_mat <- function(M, name) {
@@ -42,7 +42,7 @@
 #' source it follows.
 #'
 #' @param A A matrix; passed to \code{nrow}.
-#' @param b See Usage.
+#' @param b Passed to \code{cbind}.
 #' @return The value of \code{[}.
 #' @export
 .nashq_solve <- function(A, b) {
@@ -277,7 +277,7 @@ stage_game_type <- function(A, B, tol = 1e-9) {
 #' @param A Numeric; passed to \code{max}.
 #' @param B Numeric; passed to \code{max}.
 #' @param selection One of \code{"best_for_agent"}, \code{"first"}, \code{"global_optimal"}.
-#' @param agent See Usage.
+#' @param agent Passed to \code{==}.
 #' @param tol Numeric; combined arithmetically in the body.
 #' @return The value of \code{[[}.
 #' @export
@@ -325,8 +325,8 @@ stage_game_type <- function(A, B, tol = 1e-9) {
 #'
 #' @param M A matrix; passed to \code{nrow}.
 #' @param A A vector; its length is taken.
-#' @param who See Usage.
-#' @param epsilon See Usage.
+#' @param who Passed to \code{==}.
+#' @param epsilon Passed to \code{<}.
 #' @param rng_e Passed to \code{.ghc_unif}.
 #' @return One of two values, depending on the branch taken.
 #' @export

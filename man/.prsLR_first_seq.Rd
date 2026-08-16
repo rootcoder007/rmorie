@@ -10,7 +10,7 @@
 \arguments{
 \item{seq}{A vector; its length is taken.}
 \item{first}{A vector; indexed elementwise.}
-\item{nts}{See Usage.}
+\item{nts}{Passed to \code{\%in\%}.}
 }
 \description{
 A step of the prsLR_native implementation. Called by \code{.prsLR_closure}, \code{.prsLR_first_sets}, \code{.prsLR_follow_sets}. See the file header for the source the module follows.

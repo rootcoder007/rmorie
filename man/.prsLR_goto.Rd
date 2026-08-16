@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{state}{See Usage.}
-\item{sym}{See Usage.}
+\item{sym}{Passed to \code{==}.}
 \item{ag}{A list; the body reads \code{$rules} from it.}
 \item{first}{Passed to \code{.prsLR_closure}.}
 \item{nts}{Passed to \code{.prsLR_closure}.}

@@ -69,7 +69,7 @@
 #' @param target A vector; its length is taken.
 #' @param penalty Numeric; combined arithmetically in the body.
 #' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000L}.
-#' @param tol Defaults to \code{1e-12}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-12}.
 #' @return A list with \code{w}, \code{intercept}.
 #' @export
 .causscd_simplex_fit <- function(cols, target, penalty, iters = 2000L, tol = 1e-12) {
@@ -201,7 +201,7 @@ time_weights <- function(Y, treated, t_post) {
 #' @param treated Passed to \code{.causscd_grid}.
 #' @param t_post A count; the body uses it as \code{seq_len(...)}.
 #' @param method One of \code{"did"}, \code{"sc"}, \code{"sdid"}. Defaults to \code{"sdid"}.
-#' @param zeta Defaults to \code{NULL}.
+#' @param zeta Passed to \code{unit_weights}.
 #' @return A list with \code{estimate}, \code{tau}, \code{unit_weights}, \code{time_weights}, \code{zeta}, \code{delta_treated}, \code{delta_control}, \code{method_name}, \code{n_treated}, \code{n_control}, \code{t_pre}, \code{t_post}, \code{method}, \code{note}.
 #' @export
 sdid <- function(Y, treated, t_post, method = "sdid", zeta = NULL) {
@@ -269,10 +269,10 @@ sdid <- function(Y, treated, t_post, method = "sdid", zeta = NULL) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Y See Usage.
-#' @param treated See Usage.
-#' @param t_post See Usage.
-#' @param zeta Defaults to \code{NULL}.
+#' @param Y Passed to \code{sdid}.
+#' @param treated Passed to \code{sdid}.
+#' @param t_post Passed to \code{sdid}.
+#' @param zeta Passed to \code{sdid}.
 #' @return The value of \code{p}, as built in the body.
 #' @export
 causscd <- function(Y, treated, t_post, zeta = NULL) {
@@ -290,10 +290,10 @@ causscd <- function(Y, treated, t_post, zeta = NULL) {
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param Y See Usage.
-#' @param treated See Usage.
-#' @param t_post See Usage.
-#' @param zeta Defaults to \code{NULL}.
+#' @param Y Passed to \code{causscd}.
+#' @param treated Passed to \code{causscd}.
+#' @param t_post Passed to \code{causscd}.
+#' @param zeta Passed to \code{causscd}.
 #' @return The value of \code{causscd}.
 #' @export
 morie_causscd <- function(Y, treated, t_post, zeta = NULL) {

@@ -7,7 +7,7 @@
 #' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param t See Usage.
+#' @param t Passed to \code{f}.
 #' @param T Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export

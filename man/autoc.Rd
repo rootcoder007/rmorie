@@ -8,8 +8,8 @@
 autoc(scores, priority)
 }
 \arguments{
-\item{scores}{See Usage.}
-\item{priority}{See Usage.}
+\item{scores}{Passed to \code{rate}.}
+\item{priority}{Passed to \code{rate}.}
 }
 \description{
 A step of the slvgrf_native implementation. No other function in the package calls it. See the file header for the source the module follows.

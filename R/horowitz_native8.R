@@ -57,9 +57,9 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{outer}.
 #' @param y A matrix; passed to \code{\%*\%}.
-#' @param grid See Usage.
+#' @param grid Passed to \code{outer}.
 #' @param h Numeric; combined arithmetically in the body.
 #' @return The value of \code{ifelse}.
 #' @export

@@ -11,7 +11,7 @@
 \item{contrib}{A matrix; indexed by row and column.}
 \item{w}{A vector; its length is taken and its elements indexed.}
 \item{h}{A vector; indexed elementwise.}
-\item{c}{See Usage.}
+\item{c}{Passed to \code{paste}.}
 \item{p}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \description{

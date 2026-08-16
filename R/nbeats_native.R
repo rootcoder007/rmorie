@@ -79,9 +79,9 @@ nbeats_lstsq <- function(X, y, ridge = 1e-8) {
 #' @param window A vector; its length is taken.
 #' @param horizon Coerced to integer by the body, with \code{as.integer}.
 #' @param kind One of \code{"generic"}, \code{"seasonality"}, \code{"trend"}. Defaults to \code{"generic"}.
-#' @param degree Defaults to \code{2}.
-#' @param harmonics Defaults to \code{3}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param degree Passed to \code{nbeats_trend_basis}. Defaults to \code{2}.
+#' @param harmonics Passed to \code{nbeats_seasonality_basis}. Defaults to \code{3}.
+#' @param ridge Passed to \code{nbeats_lstsq}. Defaults to \code{1e-08}.
 #' @return A list with \code{backcast}, \code{forecast}, \code{theta}.
 #' @export
 nbeats_block <- function(window, horizon, kind = "generic", degree = 2,
@@ -119,7 +119,7 @@ nbeats_block <- function(window, horizon, kind = "generic", degree = 2,
 #' @param window Coerced to numeric by the body, with \code{as.numeric}.
 #' @param horizon Coerced to integer by the body, with \code{as.integer}.
 #' @param blocks See Usage.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param ridge Passed to \code{nbeats_block}. Defaults to \code{1e-08}.
 #' @return A list with \code{forecast}, \code{residual}, \code{trace}.
 #' @export
 nbeats_stack <- function(window, horizon, blocks, ridge = 1e-8) {
@@ -148,8 +148,8 @@ nbeats_stack <- function(window, horizon, blocks, ridge = 1e-8) {
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param horizon Coerced to integer by the body, with \code{as.integer}.
 #' @param lookback Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @param blocks Defaults to \code{NULL}.
-#' @param ridge Defaults to \code{1e-08}.
+#' @param blocks Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param ridge Passed to \code{nbeats_stack}. Defaults to \code{1e-08}.
 #' @return A list with \code{estimate}, \code{forecast}, \code{residual}, \code{backcast}, \code{blocks}, \code{lookback}, \code{horizon}, \code{n}, \code{residual_norm}, \code{window_norm}, \code{n_blocks}, \code{method}.
 #' @export
 nbeats_forecast <- function(y, horizon, lookback = NULL, blocks = NULL, ridge = 1e-8) {

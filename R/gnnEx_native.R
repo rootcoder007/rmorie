@@ -148,7 +148,7 @@ gnnEx_conditional_entropy <- function(probs) {
 #' source it follows.
 #'
 #' @param predict Accepted by the signature and not used anywhere in the body.
-#' @param edges See Usage.
+#' @param edges Passed to \code{predict}.
 #' @param edge_logits Passed to \code{.gnnEx_sig}.
 #' @param feature_logits Passed to \code{.gnnEx_sig}.
 #' @param y Coerced to integer by the body, with \code{as.integer}.
@@ -186,12 +186,12 @@ gnnEx_mask_objective <- function(predict, edges, edge_logits, feature_logits, y,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param predict See Usage.
-#' @param adj See Usage.
+#' @param predict Passed to \code{gnnEx_mask_objective}.
+#' @param adj Passed to \code{gnnEx_computation_graph}.
 #' @param v Coerced to character by the body, with \code{as.character}.
-#' @param y See Usage.
+#' @param y Passed to \code{gnnEx_mask_objective}.
 #' @param n_features Coerced to integer by the body, with \code{as.integer}.
-#' @param L Defaults to \code{2}.
+#' @param L Passed to \code{gnnEx_computation_graph}. Defaults to \code{2}.
 #' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{300}.
 #' @param lr Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
 #' @param size_coef Defaults to \code{0.005}.

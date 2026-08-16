@@ -8,7 +8,7 @@
 .morie_w4d_fit_predict(A, t)
 }
 \arguments{
-\item{A}{See Usage.}
+\item{A}{Passed to \code{cbind}.}
 \item{t}{A matrix; passed to \code{\%*\%}.}
 }
 \description{

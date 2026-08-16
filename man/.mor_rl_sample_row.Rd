@@ -10,7 +10,7 @@
 \arguments{
 \item{row}{A vector; indexed elementwise.}
 \item{S}{A count; the body uses it as \code{seq_len(...)}.}
-\item{u}{See Usage.}
+\item{u}{Passed to \code{<=}.}
 }
 \description{
 _sample_row); returns a 1-based state index

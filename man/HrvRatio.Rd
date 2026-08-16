@@ -8,9 +8,9 @@
 HrvRatio(rr, order = 16, fs = 4)
 }
 \arguments{
-\item{rr}{See Usage.}
-\item{order}{Defaults to \code{16}.}
-\item{fs}{Defaults to \code{4}.}
+\item{rr}{Passed to \code{HrvAr}.}
+\item{order}{Passed to \code{HrvAr}. Defaults to \code{16}.}
+\item{fs}{Passed to \code{HrvAr}. Defaults to \code{4}.}
 }
 \description{
 that reading is contested -- HF is reasonably vagal, but LF reflects both branches plus the baroreflex.  The components are returned individually and in normalized units so no interpretation has to rest on the ratio alone.

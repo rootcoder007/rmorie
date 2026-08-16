@@ -9,7 +9,7 @@ teacher_votes(teacher_predicts, rows, n_classes = NULL)
 }
 \arguments{
 \item{teacher_predicts}{Coerced to list by the body, with \code{as.list}.}
-\item{rows}{See Usage.}
+\item{rows}{Passed to \code{predict}.}
 \item{n_classes}{Defaults to \code{NULL}.}
 }
 \description{

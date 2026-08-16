@@ -17,7 +17,7 @@ morie_safrl_cmdp_returns(policy, states, actions, step, reward, costs, gamma = 0
 \item{gamma}{Numeric; combined arithmetically in the body. Defaults to \code{0.9}.}
 \item{start}{Optional; may be \code{NULL}. A function; the body checks with \code{is.function}.}
 \item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5000}.}
-\item{tol}{Defaults to \code{1e-14}.}
+\item{tol}{Passed to \code{<}. Defaults to \code{1e-14}.}
 }
 \description{
 A step of the safrl_native implementation. No other function in the package calls it. See the file header for the source the module follows.

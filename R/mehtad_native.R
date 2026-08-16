@@ -49,7 +49,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v See Usage.
+#' @param v Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .mehtad_vec <- function(v) as.numeric(unlist(v))
@@ -208,8 +208,8 @@ newton_direction <- function(A, x, s, rp, rd, rc) {
 #' @param c Coerced to numeric by the body, with \code{as.numeric}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-09}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100L}.
-#' @param nu Defaults to \code{3}.
-#' @param eta Defaults to \code{0.9995}.
+#' @param nu Passed to \code{centering_parameter}. Defaults to \code{3}.
+#' @param eta Passed to \code{max_step}. Defaults to \code{0.9995}.
 #' @param corrector A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{x}, \code{y}, \code{s}, \code{mu}, \code{objective}, \code{dual_objective}, \code{iterations}, \code{corrector}, \code{primal_residual}, \code{dual_residual}, \code{converged}, \code{method}, \code{note}.
 #' @export

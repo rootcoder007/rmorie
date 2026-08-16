@@ -9,10 +9,10 @@ progressive_align(seqs, scoring, tree = NULL, seq_type = "aa", s_op = 2.4, use_f
 }
 \arguments{
 \item{seqs}{A vector; its length is taken and its elements indexed.}
-\item{scoring}{See Usage.}
-\item{tree}{Defaults to \code{NULL}.}
-\item{seq_type}{Defaults to \code{"aa"}.}
-\item{s_op}{Defaults to \code{2.4}.}
+\item{scoring}{Passed to \code{find_homologous_segments}.}
+\item{tree}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{seq_type}{Passed to \code{find_homologous_segments}. Defaults to \code{"aa"}.}
+\item{s_op}{Passed to \code{group_align}. Defaults to \code{2.4}.}
 \item{use_fft}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 \item{...}{Passed through.}
 }

@@ -116,8 +116,8 @@
 #'
 #' @param A A vector; its length is taken.
 #' @param W A matrix; passed to \code{ncol}.
-#' @param aL See Usage.
-#' @param aH See Usage.
+#' @param aL Passed to \code{==}.
+#' @param aH Passed to \code{==}.
 #' @param rows See Usage.
 #' @param ridge Accepted by the signature and not used anywhere in the body.
 #' @param trim Numeric; passed to \code{max}.

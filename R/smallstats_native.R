@@ -39,7 +39,7 @@ NULL
 #' statistic log(R/S) / log(n).
 #'
 #' @param x A vector; its length is taken and its elements indexed.
-#' @param d Defaults to \code{50L}.
+#' @param d Passed to \code{divisors}. Defaults to \code{50L}.
 #' @return A numeric value.
 #' @export
 .morie_hurst_rs <- function(x, d = 50L) {
@@ -223,7 +223,7 @@ NULL
 #' balance. Returns rows to append (X_new, y_new).
 #'
 #' @param X A matrix; indexed by row and column.
-#' @param y_chr See Usage.
+#' @param y_chr Passed to \code{table}.
 #' @param k Passed to \code{.morie_knn_index}.
 #' @return A list with \code{X_new}, \code{y_new}.
 #' @export
@@ -268,7 +268,7 @@ NULL
 #' @param lambda Passed to \code{.morie_coord_descent_cpp}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000L}.
 #' @param tol Passed to \code{.morie_coord_descent_cpp}. Defaults to \code{1e-06}.
-#' @param warm Defaults to \code{NULL}.
+#' @param warm Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{beta}, \code{beta_std}, \code{intercept}, \code{n_iter}.
 #' @export
 .morie_coord_descent <- function(X, y, alpha, lambda,
@@ -395,9 +395,9 @@ NULL
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param y A vector; its length is taken and its elements indexed.
-#' @param id See Usage.
+#' @param id Passed to \code{factor}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.
-#' @param tol Defaults to \code{1e-08}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
 #' @return A list with \code{coefficients}, \code{vbeta}, \code{alpha}, \code{phi}, \code{n_iter}, \code{converged}.
 #' @export
 .morie_gee_poisson_exch <- function(X, y, id, max_iter = 50L, tol = 1e-8) {

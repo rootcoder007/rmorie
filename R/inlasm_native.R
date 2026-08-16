@@ -137,7 +137,7 @@ skewness_correction <- function(third_derivative, precision) {
 #'
 #' @param log_joint Accepted by the signature and not used anywhere in the body.
 #' @param x_grid Coerced to numeric by the body, with \code{as.numeric}.
-#' @param theta See Usage.
+#' @param theta Passed to \code{log_joint}.
 #' @return A list with \code{x}, \code{density}, \code{mean}, \code{sd}, \code{log_scale}.
 #' @export
 laplace_marginal <- function(log_joint, x_grid, theta) {

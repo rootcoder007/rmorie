@@ -215,7 +215,7 @@
 #' @param Sig Passed to \code{.sgflrt_chol}.
 #' @param family Passed to \code{.sgflrt_family}.
 #' @param inner_iter Coerced to integer by the body, with \code{as.integer}.
-#' @param tol See Usage.
+#' @param tol Passed to \code{<}.
 #' @param disp Passed to \code{.sgflrt_family}. Defaults to \code{1}.
 #' @return A list with \code{lap}, \code{beta}, \code{u}, \code{mu}, \code{eta}, \code{loglik}, \code{w}, \code{L}, \code{v}.
 #' @export

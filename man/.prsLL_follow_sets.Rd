@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{g}{A list; the body reads \code{$rules}, \code{$start} from it.}
-\item{first}{Defaults to \code{NULL}.}
+\item{first}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the prsLL_native implementation. Called by \code{.prsLL_ll1_table}. See the file header for the source the module follows.

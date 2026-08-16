@@ -8,8 +8,8 @@
 .polkrn_quantile7(x, q)
 }
 \arguments{
-\item{x}{See Usage.}
-\item{q}{See Usage.}
+\item{x}{Passed to \code{quantile}.}
+\item{q}{Passed to \code{quantile}.}
 }
 \description{
 A step of the polkrn_native implementation. Called by \code{rbf_basis}. See the file header for the source the module follows.

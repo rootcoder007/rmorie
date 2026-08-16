@@ -8,16 +8,16 @@
 morie_tldapar(n, V = 10L, seed = 0L, define_on_training = NULL, estimate_on_holdout = NULL, fold_estimates = NULL, fold_ics = NULL, effect = NULL, screen = NULL, reuse_fn = NULL, mode = c("split", "combine", "vimp", "reuse"))
 }
 \arguments{
-\item{n}{See Usage.}
-\item{V}{Defaults to \code{10L}.}
-\item{seed}{Defaults to \code{0L}.}
+\item{n}{Passed to \code{split_sample}.}
+\item{V}{Passed to \code{split_sample}. Defaults to \code{10L}.}
+\item{seed}{Passed to \code{split_sample}. Defaults to \code{0L}.}
 \item{define_on_training}{Accepted by the signature and not used anywhere in the body.}
 \item{estimate_on_holdout}{Accepted by the signature and not used anywhere in the body.}
-\item{fold_estimates}{Defaults to \code{NULL}.}
-\item{fold_ics}{Defaults to \code{NULL}.}
-\item{effect}{Defaults to \code{NULL}.}
-\item{screen}{Defaults to \code{NULL}.}
-\item{reuse_fn}{Defaults to \code{NULL}.}
+\item{fold_estimates}{Passed to \code{cv_tmle}.}
+\item{fold_ics}{Passed to \code{cv_tmle}.}
+\item{effect}{Passed to \code{variable_importance}.}
+\item{screen}{Passed to \code{variable_importance}.}
+\item{reuse_fn}{Passed to \code{naive_reuse}.}
 \item{mode}{One of \code{"combine"}, \code{"reuse"}, \code{"split"}.}
 }
 \description{

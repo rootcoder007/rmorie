@@ -24,3 +24,8 @@ List with \code{x_t}, \code{noise}, \code{signal_coef}, \code{noise_coef}, \code
 \description{
 x_t = sqrt(alpha_bar_t) x_0 + sqrt(1 - alpha_bar_t) eps.
 }
+\examples{
+x0 <- c(0.5, -0.3, 1.2)
+alpha_bar <- cumprod(rep(0.98, 10))
+morie_geron_ddpm_forward_process(x0, t = 5, alpha_bar = alpha_bar, seed = 1)
+}

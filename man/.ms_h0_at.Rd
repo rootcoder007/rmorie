@@ -8,7 +8,7 @@
 .ms_h0_at(ut, H, t)
 }
 \arguments{
-\item{ut}{See Usage.}
+\item{ut}{Passed to \code{<=}.}
 \item{H}{A vector; indexed elementwise.}
 \item{t}{Iterated over elementwise, with \code{vapply}.}
 }

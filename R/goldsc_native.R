@@ -82,7 +82,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p Passed to \code{switch}.
 #' @return The value of \code{switch}.
 #' @export
 .goldsc_outer <- function(p)
@@ -94,7 +94,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p Passed to \code{switch}.
 #' @return The value of \code{switch}.
 #' @export
 .goldsc_inner <- function(p)
@@ -200,8 +200,8 @@ morie_goldsc_split <- function(r, r0, eps, outer = c(4, 8),
 #' source it follows.
 #'
 #' @param table See Usage.
-#' @param key See Usage.
-#' @param what See Usage.
+#' @param key Passed to \code{==}.
+#' @param what Passed to \code{stop}.
 #' @return Nothing; this branch always raises.
 #' @export
 .goldsc_lookup <- function(table, key, what) {

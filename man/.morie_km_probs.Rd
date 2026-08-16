@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{p}{A vector; its length is taken.}
-\item{name}{See Usage.}
+\item{name}{Passed to \code{sprintf}.}
 }
 \description{
 A step of the kamath_ch2_native implementation. Called by \code{morie_kamath_clm_loss}, \code{morie_kamath_gpt_unsupervised}, \code{morie_kamath_mlm_loss} and 1 others in the module. See the file header for the source the module follows.

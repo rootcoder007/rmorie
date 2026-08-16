@@ -12,7 +12,7 @@
 \item{measure}{Passed to \code{.raw}.}
 \item{step}{Passed to \code{.raw}.}
 \item{normalize}{A flag; the body branches on it.}
-\item{caveat}{Defaults to \code{NULL}.}
+\item{caveat}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the fairRC_native implementation. Called by \code{rKL}, \code{rND}, \code{rRD}. See the file header for the source the module follows.

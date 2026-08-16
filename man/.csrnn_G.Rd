@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{nn}{A vector; its length is taken.}
-\item{grid}{See Usage.}
+\item{grid}{Passed to \code{findInterval}.}
 }
 \description{
 A step of the csrnn implementation. Called by \code{morie_csr_nn_test}. See the file header for the source the module follows.

@@ -12,7 +12,7 @@
 \item{H}{A matrix; indexed by row and column.}
 \item{delta}{Numeric; combined arithmetically in the body.}
 \item{tol}{Numeric; combined arithmetically in the body.}
-\item{maxit}{See Usage.}
+\item{maxit}{Passed to \code{>}.}
 }
 \description{
 A step of the trupek_native implementation. Called by \code{.trupek_sub}. See the file header for the source the module follows.

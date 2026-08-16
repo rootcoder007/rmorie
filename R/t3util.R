@@ -81,7 +81,7 @@ t3bfs <- function(A, s) {
 #' See the file header for the source the module follows.
 #' it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{ifelse}.
 #' @return The value of \code{ifelse}.
 #' @export
 t3relu <- function(x) ifelse(x > 0, x, 0)

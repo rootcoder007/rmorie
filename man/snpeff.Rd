@@ -11,8 +11,8 @@ snpeff(cds, variants, cds_start = 0, upstream = 5000, downstream = 5000, transcr
 \item{cds}{Coerced to character by the body, with \code{as.character}.}
 \item{variants}{A vector; its length is taken and its elements indexed.}
 \item{cds_start}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
-\item{upstream}{Defaults to \code{5000}.}
-\item{downstream}{Defaults to \code{5000}.}
+\item{upstream}{Passed to \code{annotate_variant}. Defaults to \code{5000}.}
+\item{downstream}{Passed to \code{annotate_variant}. Defaults to \code{5000}.}
 \item{transcript_len}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \description{

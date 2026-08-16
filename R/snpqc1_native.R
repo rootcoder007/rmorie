@@ -228,8 +228,8 @@ morie_snpqc1_heterozygosity <- function(genotypes) {
 #'
 #' @param x_genotypes Passed to \code{.snpqc1_check}.
 #' @param reported_sex Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @param male_min Defaults to \code{0.8}.
-#' @param female_max Defaults to \code{0.2}.
+#' @param male_min Passed to \code{>}. Defaults to \code{0.8}.
+#' @param female_max Passed to \code{<}. Defaults to \code{0.2}.
 #' @return The value of \code{res}, as built in the body.
 #' @export
 morie_snpqc1_sex_check <- function(x_genotypes, reported_sex=NULL,
@@ -496,7 +496,7 @@ morie_snpqc1_kinship_matrix <- function(genotypes) {
 #' @param genotypes Passed to \code{.snpqc1_check}.
 #' @param window Numeric; combined arithmetically in the body. Defaults to \code{50}.
 #' @param step Numeric; combined arithmetically in the body. Defaults to \code{5}.
-#' @param r2 Defaults to \code{0.2}.
+#' @param r2 Passed to \code{>}. Defaults to \code{0.2}.
 #' @return The value of \code{keep}, as built in the body.
 #' @export
 morie_snpqc1_ld_prune <- function(genotypes, window=50, step=5, r2=0.2) {

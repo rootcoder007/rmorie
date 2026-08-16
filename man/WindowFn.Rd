@@ -9,7 +9,7 @@ WindowFn(N, window_type = "hamming")
 }
 \arguments{
 \item{N}{Coerced to integer by the body, with \code{as.integer}.}
-\item{window_type}{Defaults to \code{"hamming"}.}
+\item{window_type}{Passed to \code{\%in\%}. Defaults to \code{"hamming"}.}
 }
 \description{
 whose transform has sidelobes that leak energy from strong components into neighbouring bins; a tapered window trades a wider main lobe for lower sidelobes.  The rectangular window is included because it is the default -- doing nothing is choosing it -- and naming it makes that choice explicit.

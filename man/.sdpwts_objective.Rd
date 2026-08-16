@@ -10,8 +10,8 @@
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{c_vec}{Coerced to numeric by the body, with \code{as.numeric}.}
-\item{F0}{See Usage.}
-\item{Fs}{See Usage.}
+\item{F0}{Passed to \code{sdpwts_barrier}.}
+\item{Fs}{Passed to \code{sdpwts_barrier}.}
 \item{t}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{

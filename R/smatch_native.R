@@ -26,7 +26,7 @@
 #' source it follows.
 #'
 #' @param M A matrix; passed to \code{chol}.
-#' @param b See Usage.
+#' @param b Passed to \code{forwardsolve}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .smatch_cholsolve <- function(M, b) {
@@ -128,7 +128,7 @@ morie_smatch_poisson_design <- function(cases, risk_periods, age_breaks = numeri
 #' @param risk_periods Passed to \code{morie_smatch_poisson_design}.
 #' @param age_breaks Passed to \code{morie_smatch_poisson_design}. Defaults to \code{numeric(0)}.
 #' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
-#' @param tol Defaults to \code{1e-12}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-12}.
 #' @param ridge A matrix; passed to \code{diag}. Defaults to \code{1e-09}.
 #' @return A list with \code{estimate}, \code{relative_incidence}, \code{log_ri}, \code{age_effects}, \code{individual_effects}, \code{coef}, \code{converged}, \code{iterations}, \code{n_rows}, \code{n_people}, \code{method}, \code{identical_to}.
 #' @export
@@ -178,7 +178,7 @@ morie_smatch_sccs_poisson_fit <- function(cases, risk_periods, age_breaks = nume
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p See Usage.
+#' @param p Passed to \code{qnorm}.
 #' @return The value of \code{qnorm}.
 #' @export
 .smatch_qnorm <- function(p) qnorm(p)
@@ -189,7 +189,7 @@ morie_smatch_sccs_poisson_fit <- function(cases, risk_periods, age_breaks = nume
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param z See Usage.
+#' @param z Passed to \code{pnorm}.
 #' @return The value of \code{pnorm}.
 #' @export
 .smatch_pnorm <- function(z) pnorm(z)

@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}
-\item{mu}{See Usage.}
+\item{mu}{Passed to \code{sweep}.}
 }
 \description{
 A step of the rangayyan_class implementation. Called by \code{FishLda}, \code{SepIndex}. See the file header for the source the module follows.

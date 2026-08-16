@@ -8,7 +8,7 @@
 .metabd_vec(v)
 }
 \arguments{
-\item{v}{See Usage.}
+\item{v}{Passed to \code{unlist}.}
 }
 \description{
 A step of the metabd_native implementation. Called by \code{abundance_correlation}, \code{bin_contigs}, \code{composite_distance}. See the file header for the source the module follows.

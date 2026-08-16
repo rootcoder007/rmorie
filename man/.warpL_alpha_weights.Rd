@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{n}{Coerced to integer by the body, with \code{as.integer}.}
-\item{scheme}{Defaults to \code{"reciprocal"}.}
+\item{scheme}{Passed to \code{identical}. Defaults to \code{"reciprocal"}.}
 }
 \description{
 A step of the warpL_native implementation. Called by \code{morie_warpL_alpha_weights}. See the file header for the source the module follows.

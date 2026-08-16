@@ -14,7 +14,7 @@ morie_sv_dl_build_sv_graph(pairs, median, sd, label, orientation = c("+", "-"), 
 \item{label}{A vector; indexed elementwise.}
 \item{orientation}{Accepted by the signature and not used anywhere in the body. Defaults to \code{c("+", "-")}.}
 \item{n_sd}{Numeric; combined arithmetically in the body. Defaults to \code{3}.}
-\item{window}{Defaults to \code{NULL}.}
+\item{window}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \description{
 A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_paired_end_calls}. See the file header for the source the module follows.

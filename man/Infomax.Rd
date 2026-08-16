@@ -12,7 +12,7 @@ Infomax(X, ncomp = NULL, eta = 0.05, maxiter = 300, tol = 1e-08, seed = 1)
 \item{ncomp}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 \item{eta}{Numeric; combined arithmetically in the body. Defaults to \code{0.05}.}
 \item{maxiter}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{300}.}
-\item{tol}{Defaults to \code{1e-08}.}
+\item{tol}{Passed to \code{<=}. Defaults to \code{1e-08}.}
 \item{seed}{Passed to \code{.morie_bx_rng}. Defaults to \code{1}.}
 }
 \description{

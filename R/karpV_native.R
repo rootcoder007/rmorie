@@ -368,7 +368,7 @@ morie_karpV_ramped <- function(e, n, functions, terminals, erc, max_depth) {
 #'
 #' @param e Passed to \code{.karpv_unit}.
 #' @param node Passed to \code{.karpv_collect}.
-#' @param internal_bias See Usage.
+#' @param internal_bias Passed to \code{<}.
 #' @return The value of \code{$}.
 #' @export
 .karpv_pick_point <- function(e, node, internal_bias) {

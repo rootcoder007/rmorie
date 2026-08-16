@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{x}{A vector; its length is taken.}
-\item{w}{See Usage.}
+\item{w}{Passed to \code{tapply}.}
 \item{minlength}{A count; the body uses it as \code{numeric(...)}.}
 }
 \description{

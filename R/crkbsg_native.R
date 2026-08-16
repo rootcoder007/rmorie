@@ -79,7 +79,7 @@
 #' symmetric but NOT positive definite -- the Lagrange rows see to that
 #' -- so a Cholesky solve is not available.
 #'
-#' @param A See Usage.
+#' @param A Passed to \code{cbind}.
 #' @param b A vector; its length is taken.
 #' @return The value of \code{x}, as built in the body.
 #' @export

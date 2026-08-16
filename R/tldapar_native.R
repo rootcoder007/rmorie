@@ -28,16 +28,16 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param n See Usage.
-#' @param V Defaults to \code{10L}.
-#' @param seed Defaults to \code{0L}.
+#' @param n Passed to \code{split_sample}.
+#' @param V Passed to \code{split_sample}. Defaults to \code{10L}.
+#' @param seed Passed to \code{split_sample}. Defaults to \code{0L}.
 #' @param define_on_training Accepted by the signature and not used anywhere in the body.
 #' @param estimate_on_holdout Accepted by the signature and not used anywhere in the body.
-#' @param fold_estimates Defaults to \code{NULL}.
-#' @param fold_ics Defaults to \code{NULL}.
-#' @param effect Defaults to \code{NULL}.
-#' @param screen Defaults to \code{NULL}.
-#' @param reuse_fn Defaults to \code{NULL}.
+#' @param fold_estimates Passed to \code{cv_tmle}.
+#' @param fold_ics Passed to \code{cv_tmle}.
+#' @param effect Passed to \code{variable_importance}.
+#' @param screen Passed to \code{variable_importance}.
+#' @param reuse_fn Passed to \code{naive_reuse}.
 #' @param mode One of \code{"combine"}, \code{"reuse"}, \code{"split"}.
 #' @return The value of \code{variable_importance}.
 #' @export
@@ -101,7 +101,7 @@ split_sample <- function(n, V = 10L, seed = 0L) {
 #' @param estimate_on_holdout Accepted by the signature and not used anywhere in the body.
 #' @param n A count; the body uses it as \code{rep(...)}.
 #' @param V A count; the body uses it as \code{seq_len(...)}. Defaults to \code{10L}.
-#' @param seed Defaults to \code{0L}.
+#' @param seed Passed to \code{split_sample}. Defaults to \code{0L}.
 #' @return A list with \code{estimate}, \code{psi}, \code{fold_estimates}, \code{fold_parameters}, \code{se}, \code{ci}, \code{V}, \code{method}, \code{note}.
 #' @export
 data_adaptive_parameter <- function(define_on_training,
@@ -169,8 +169,8 @@ cv_tmle <- function(fold_estimates, fold_ics, n) {
 #' @param Y Accepted by the signature and not used anywhere in the body.
 #' @param screen Accepted by the signature and not used anywhere in the body.
 #' @param effect Accepted by the signature and not used anywhere in the body.
-#' @param V Defaults to \code{5L}.
-#' @param seed Defaults to \code{0L}.
+#' @param V Passed to \code{split_sample}. Defaults to \code{5L}.
+#' @param seed Passed to \code{split_sample}. Defaults to \code{0L}.
 #' @return A list with \code{estimate}, \code{importance}, \code{V}, \code{method}.
 #' @export
 variable_importance <- function(X, Y, screen, effect, V = 5L,

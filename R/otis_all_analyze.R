@@ -55,6 +55,14 @@ NULL
   res
 }
 
+#' .otis_year_col
+#'
+#' Internal helper in otis_all_analyze.R; see the file header for
+#' the source the module follows.
+#'
+#' @param df Passed to \code{names}.
+#' @return Nothing; called for its effect.
+#' @export
 .otis_year_col <- function(df) {
   for (c in c("EndFiscalYear", "Year")) {
     if (c %in% names(df)) return(c)

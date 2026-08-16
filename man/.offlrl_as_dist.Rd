@@ -11,7 +11,7 @@
 \item{d}{Optional; may be \code{NULL}. A vector; indexed elementwise.}
 \item{S}{See Usage.}
 \item{A}{See Usage.}
-\item{name}{See Usage.}
+\item{name}{Passed to \code{stop}.}
 }
 \description{
 A step of the offlrl_native implementation. Called by \code{offlrl}. See the file header for the source the module follows.

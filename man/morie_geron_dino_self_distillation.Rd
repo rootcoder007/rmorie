@@ -30,3 +30,8 @@ List with \code{loss}, \code{teacher_probs}, \code{student_probs},
 L = -mean_i sum_k P_teacher(k) log P_student(k), teacher sharpened by
 \code{tau_t} and optionally centred.
 }
+\examples{
+sl <- matrix(c(2, 0.5, 0.1, 0.2, 1.5, 0.3), 2, 3, byrow = TRUE)
+tl <- matrix(c(1.8, 0.6, 0.2, 0.1, 1.7, 0.4), 2, 3, byrow = TRUE)
+morie_geron_dino_self_distillation(sl, tl, tau_s = 0.1, tau_t = 0.04)
+}

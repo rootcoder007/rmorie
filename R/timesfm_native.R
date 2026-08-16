@@ -36,7 +36,7 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param x See Usage.
+#' @param x Passed to \code{unlist}.
 #' @param patch_len Coerced to integer by the body, with \code{as.integer}.
 #' @param pad_value Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{patches}, \code{n_patches}, \code{patch_len}, \code{n_padded}, \code{L}, \code{note}.
@@ -131,7 +131,7 @@ morie_timesfm_horizon_plan <- function(horizon, input_patch_len,
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param history See Usage.
+#' @param history Passed to \code{unlist}.
 #' @param predictor Accepted by the signature and not used anywhere in the body.
 #' @param horizon Passed to \code{morie_timesfm_rollout_steps}.
 #' @param input_patch_len Coerced to integer by the body, with \code{as.integer}.
