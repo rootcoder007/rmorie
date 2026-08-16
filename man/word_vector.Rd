@@ -24,3 +24,6 @@ Part of the fastxt_native implementation; see the file header for the source it 
 A list with \code{v}, \code{hit}.
 }
 \keyword{internal}
+\examples{
+word_vector(word = 5L, Z = c(1, 2, 3, 4, 5, 6, 7, 8), gram_index = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)))
+}

@@ -44,3 +44,6 @@ doi:10.1038/s41586-018-0414-6, for the steady-state model this
 generalises.
 }
 \keyword{internal}
+\examples{
+morie_velocity(u = c(1, 2, 3, 4, 5, 6, 7, 8), s = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5, gamma = 0.5)
+}

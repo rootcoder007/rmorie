@@ -34,3 +34,15 @@ A list with the draws, the acceptance rate and the settings.
   Geyer, C.J. (1992) Statist. Sci. 7(4), 473-483.
 }
 \keyword{internal}
+\examples{
+MU3 <- c(1, -0.5, 2)
+Q3 <- matrix(c(2, 0.6, 0.1, 0.6, 1.5, -0.3, 0.1, -0.3, 1.2), 
+    3, 3, byrow = TRUE)
+e <- .ghc_rng(13)
+e <- .ghc_rng(13)
+e <- .ghc_rng(13)
+e <- .ghc_rng(13)
+e <- .ghc_rng(13)
+e <- .ghc_rng(13)
+morie_baysmplr_gibbs(MU3, Q3, c(0, 0, 0), 60L, e)
+}

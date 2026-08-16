@@ -35,3 +35,6 @@ Vaupel, Manton and Stallard (1979), Demography 16(3),
 439-454; Klein (1992), Biometrics 48, 795-806; Balan and Putter
 (2019), frailtyEM, Journal of Statistical Software 90(7).
 }
+\examples{
+Shfrm(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8), cluster = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

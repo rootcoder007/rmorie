@@ -35,3 +35,6 @@ Formula: \code{e_ij = LeakyReLU(a'[W h_i || W h_j])},
 Velickovic et al. (2018). Graph attention networks. ICLR
 2018, equations (1)-(4).
 }
+\examples{
+Gat(A = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), W = 5L, a = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

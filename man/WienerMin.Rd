@@ -19,3 +19,6 @@ happen for consistent statistics, so it is reported rather than clamped: it mean
 A list with \code{j_min}, \code{w_o}, \code{var_d}, \code{explained}, \code{consistent}, \code{fraction_explained}, \code{method}.
 }
 \keyword{internal}
+\examples{
+WienerMin(phi = 0.5, theta = 0.5, var_d = 5L)
+}

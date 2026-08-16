@@ -20,3 +20,6 @@ samples that BOTH signals cover.  Long delays use less data, so the overlap frac
 A list with \code{ccf}, \code{delays}, \code{overlap_fraction}, \code{interpolated}, \code{trapezoidal}, \code{long_delays_use_less_data}, \code{method}.
 }
 \keyword{internal}
+\examples{
+XCorrCont(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8), delays = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

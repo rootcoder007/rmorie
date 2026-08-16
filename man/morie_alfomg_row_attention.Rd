@@ -30,3 +30,19 @@ A list with the attention weights and the attended output.
     5998-6008.
 }
 \keyword{internal}
+\examples{
+S <- 3L
+R <- 4L
+C <- 3L
+CZ <- 5L
+MSA <- lapply(0:(S - 1L), function(k) lapply(0:(R - 1L), function(i) vapply(0:(C - 
+    1L), function(a) ((k * 37 + i * 11 + a * 5)%%17)/8 - 1, numeric(1))))
+PAIR <- lapply(0:(R - 1L), function(i) lapply(0:(R - 1L), function(j) vapply(0:(CZ - 
+    1L), function(d) ((i * 13 + j * 7 + d * 3)%%11)/10 - 0.5, 
+    numeric(1))))
+WB <- vapply(0:(CZ - 1L), function(d) ((d * 5 + 3)%%7)/6 - 0.5, 
+    numeric(1))
+b1 <- morie_alfomg_bias(PAIR, WB)
+d <- 0
+morie_alfomg_row_attention(MSA, b1)
+}

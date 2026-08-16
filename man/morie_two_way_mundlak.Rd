@@ -14,3 +14,6 @@ Sec. 3: adding the unit-specific time averages \eqn{\bar X_i}{Xbar_i} and the pe
 A list with \code{coef} (no intercept), \code{full}   (intercept, X, unit-avg, period-avg), \code{n_columns},   \code{method}, \code{identical_to}.
 }
 \keyword{internal}
+\examples{
+morie_two_way_mundlak(Y = c(1, 2, 3, 4, 5, 6, 7, 8), unit = c(1, 2, 3, 4, 5, 6, 7, 8), period = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

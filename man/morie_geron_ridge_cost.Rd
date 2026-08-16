@@ -22,3 +22,6 @@ MSE + (alpha/2) ||theta||^2 with the intercept coefficient left
 unpenalised. \code{intercept_index} is 0-based, as in Python; pass NULL
 to penalise every coefficient.
 }
+\examples{
+morie_geron_ridge_cost(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), theta = 0.5, alpha = 0.5)
+}

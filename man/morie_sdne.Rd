@@ -51,3 +51,6 @@ Tang, J., Qu, M., Wang, M., Zhang, M., Yan, J. & Mei, Q. (2015)
 shallow model whose two proximities this deepens.
 }
 \keyword{internal}
+\examples{
+morie_sdne(adjacency = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), reconstruction = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), embeddings = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+}

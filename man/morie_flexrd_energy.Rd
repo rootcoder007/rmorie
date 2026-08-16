@@ -35,3 +35,6 @@ The energy.
     et Appliquees 5, 380-440.
 }
 \keyword{internal}
+\examples{
+morie_flexrd_energy(rec = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), lig = c(1, 2, 3, 4, 5, 6, 7, 8), rec_r = c(1, 2, 3, 4, 5, 6, 7, 8), lig_r = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

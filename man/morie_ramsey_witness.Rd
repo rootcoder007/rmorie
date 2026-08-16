@@ -20,3 +20,6 @@ A bound \eqn{R(k,l) > n} is proved by exhibiting a colouring of
 one by exhaustive search over cliques, which is the only honest way
 to accept a witness.
 }
+\examples{
+morie_ramsey_witness(colouring = 5L, k = 5L, l = 5L)
+}

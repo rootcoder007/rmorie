@@ -37,3 +37,9 @@ A list with the total, the per-contact energies and the count.
     defaults and the two split potentials.
 }
 \keyword{internal}
+\examples{
+RAD <- list(list("C", 1.9), list("N", 1.7), list("O", 1.6))
+DEP <- list(list("C", 0.15), list("N", 0.16), list("O", 0.2))
+morie_goldsc_vdw(list(list(3.4, "C", "C"), list(5, "C", "N")), 
+    RAD, DEP)
+}

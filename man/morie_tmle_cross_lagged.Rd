@@ -46,3 +46,6 @@ database; the citation appears to be fabricated and has been
 replaced with the three verifiable sources above.
 }
 \keyword{internal}
+\examples{
+morie_tmle_cross_lagged(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

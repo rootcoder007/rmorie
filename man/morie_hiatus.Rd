@@ -26,3 +26,6 @@ Part of the hiatus_native implementation; see the file header for the source it 
 The value of \code{.hiatus_simulate}.
 }
 \keyword{internal}
+\examples{
+morie_hiatus(beta = 0.5, nu = 0.5, mu = 5L, sigma = 0.5)
+}

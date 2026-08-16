@@ -36,3 +36,9 @@ A list with the total, the per-bond contributions and the   three class subtotal
     Journal of Computer-Aided Molecular Design 11(5), 425-445.
 }
 \keyword{internal}
+\examples{
+HBN <- list(list("neutral_neutral", 1), list("neutral_charged", 
+    0.8), list("charged_charged", 0.6), list("neutral_neutral", 
+    0.4))
+morie_glides_hbond(HBN)
+}

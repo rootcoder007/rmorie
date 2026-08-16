@@ -46,3 +46,6 @@ representations by mutual information estimation and maximization",
 :mod:`mienco`.
 }
 \keyword{internal}
+\examples{
+morie_pair_loss(U = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8), i = 5L)
+}

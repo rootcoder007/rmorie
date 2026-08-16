@@ -31,3 +31,6 @@ Foundations and Trends in Machine Learning 3(1), Sect. 6.4 and
 Sect. 3.1.1.  Standard published form; the monograph is not in the
 local corpus and was not read.
 }
+\examples{
+Admmlasso(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)
+}

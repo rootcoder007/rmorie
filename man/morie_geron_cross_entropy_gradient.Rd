@@ -18,3 +18,6 @@ List with \code{gradient}, \code{probabilities}, \code{cost}, \code{grad_norm},
 the gradient sums to zero -- \code{column_sum_max_abs} measures exactly
 that and the parity test asserts it is ~0.
 }
+\examples{
+morie_geron_cross_entropy_gradient(X = 5L, Y = 5L, theta = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

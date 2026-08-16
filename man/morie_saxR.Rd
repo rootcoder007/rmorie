@@ -30,3 +30,6 @@ letter using equiprobable Gaussian breakpoints.
 Lin, J., Keogh, E., Lonardi, S. and Chiu, B. (2003). A
 symbolic representation of time series. DMKD 2003.
 }
+\examples{
+morie_saxR(x = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), window = 3L, alphabet = 5L)
+}

@@ -32,3 +32,6 @@ Formula: \code{NDE = E[Y(1, M_0) - Y(0, M_0)]},
 \references{
 Zheng, W. & van der Laan, M. J. (2012). IJB 8(1):1-40.
 }
+\examples{
+TmlMd(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), M = 5L, Cc = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

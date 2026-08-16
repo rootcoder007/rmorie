@@ -19,3 +19,15 @@ Raw fitness: sum of absolute errors over the fitness cases
 the summed absolute error, or Inf if the tree misbehaves.
 }
 \keyword{internal}
+\examples{
+cases_for <- function(f, lo = -1, hi = 1, n = 21) lapply(0:(n - 
+    1), function(i) {
+    x <- lo + (hi - lo) * i/(n - 1)
+    list(x, f(x))
+})
+QUAD <- cases_for(function(x) x * x + x + 1)
+t <- .karpv_fnode("+", list(.karpv_fnode("+", list(.karpv_fnode("*", 
+    list(.karpv_tnode("x"), .karpv_tnode("x"))), .karpv_tnode("x"))), 
+    .karpv_tnode(1)))
+morie_karpV_raw_fitness(t, QUAD, "x")
+}

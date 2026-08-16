@@ -29,3 +29,6 @@ spatial parameter is searched and the rest follows in closed form.
 Ordinary least squares on the lag model is inconsistent, which is
 why the lag version exists at all.
 }
+\examples{
+morie_spatial_lag_model(y = 5L, X = 5L, W = 5L)
+}

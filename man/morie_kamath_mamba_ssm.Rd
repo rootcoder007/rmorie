@@ -22,3 +22,6 @@ List with \code{y}, \code{states}, \code{A_bar}, \code{estimate}.
 \description{
 h_t = exp(dt A) \verb{h_\{t-1\}} + dt B x_t; y_t = C . h_t, with a DIAGONAL A.
 }
+\examples{
+morie_kamath_mamba_ssm(x = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), B = c(1, 2, 3, 4, 5, 6, 7, 8), C = c(1, 2, 3, 4, 5, 6, 7, 8), delta = 0.5)
+}

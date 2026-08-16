@@ -45,3 +45,6 @@ A list with the volume in both units, the three terms, the   tissue free fractio
     Disposition 47(12), 1380-1387.
 }
 \keyword{internal}
+\examples{
+morie_vdcal("CCO", 0.02, fut = 0.005)
+}

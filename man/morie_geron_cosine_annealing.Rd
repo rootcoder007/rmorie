@@ -22,3 +22,6 @@ eta_t = eta_min + 0.5 (eta_max - eta_min) (1 + cos(pi t / T)):
 smooth at both ends, leaving eta_max and reaching eta_min with zero
 slope.
 }
+\examples{
+morie_geron_cosine_annealing(t = 5L, T = 5L, eta_max = 5L)
+}

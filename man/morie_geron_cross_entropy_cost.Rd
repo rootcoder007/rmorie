@@ -24,3 +24,6 @@ so the log is never taken of an underflowed probability. \code{Y} is
 either a vector of 0-based class labels or an (m, K) matrix of row
 distributions.
 }
+\examples{
+morie_geron_cross_entropy_cost(X = 5L, Y = 5L, theta = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

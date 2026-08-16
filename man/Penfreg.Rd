@@ -14,3 +14,6 @@ With the spectral decomposition P = Gamma D Gamma\', X* = X Gamma and beta* = Ga
 A list with \code{beta}, \code{beta_star}, \code{Gamma}, \code{eigenvalues}, \code{X_star}, \code{mu}, \code{fitted}, \code{residuals}, \code{sse}, \code{penalty}, \code{objective}, \code{rank}.
 }
 \keyword{internal}
+\examples{
+Penfreg(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), P = 0.5, lam = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

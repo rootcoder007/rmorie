@@ -34,3 +34,6 @@ A sorted character vector.
     multiply-and-xor hash used to fold a feature into a bit.
 }
 \keyword{internal}
+\examples{
+morie_avalon_features("CCC", 5L, "path")
+}

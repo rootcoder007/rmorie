@@ -28,3 +28,6 @@ their own value, so the collector never sees the truth.  Raw counts
 are biased towards uniform, hence the debiased estimate that
 inverts the transition matrix.
 }
+\examples{
+morie_local_dp_randomised_response(truth = list(a = 1, b = 2), k = 5L, epsilon = 5L)
+}

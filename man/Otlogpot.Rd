@@ -23,3 +23,6 @@ Peyre & Cuturi (2019), eq. (4.30)-(4.31), so \verb{f = eps log u}.
 \references{
 Peyre & Cuturi (2019), eq. (4.31).
 }
+\examples{
+Otlogpot(u = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L)
+}

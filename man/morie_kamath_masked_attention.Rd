@@ -17,3 +17,6 @@ morie_kamath_masked_attention
 A list with \code{output}, \code{attention}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
+\examples{
+morie_kamath_masked_attention(Q = 0.5, K = 5L, V = 5L, M = 5L)
+}

@@ -25,3 +25,6 @@ Inner-product distortion and tail bound for TurboQuant blocks
 A list with the variance, rmse, relative error, tail bound,   the constant, the block dimensions, and the route, tail and   assumption each carries. bits_needed is present when delta is given.
 }
 \keyword{internal}
+\examples{
+morie_tqipb(4L, norm_sq = 9, d = 512L, eps = 0.05, delta = 0.01)
+}

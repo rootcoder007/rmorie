@@ -41,3 +41,6 @@ imports km103's \verb{_softmax_logits}/\verb{_hidden}: km103 ->
 \code{morie_kamath_ch6_affect_lm} (the same, shifted by beta V g(e)).
 \code{argmax} is 0-BASED.
 }
+\examples{
+morie_kamath_ch6_lstm_softmax_word(U = 5L, f = 5L, c_t_1 = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
+}

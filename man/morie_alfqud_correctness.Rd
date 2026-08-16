@@ -29,3 +29,14 @@ An integer count.
     Annals of Mathematics and Artificial Intelligence 61(3), 203-230.
 }
 \keyword{internal}
+\examples{
+IN <- list(c(2, 1), c(1, 2), c(5, 3))
+TGT <- lapply(IN, sort)
+ACTS <- list(list("mov", list("M", 0), list("R", 0)), list("cmp", 
+    list("M", 1), list("M", 0)), list("cmovl", list("M", 1), 
+    list("M", 0)), list("cmovl", list("R", 0), list("M", 1)), 
+    list("mov", list("M", 1), list("R", 0)), list("cmovg", list("M", 
+        0), list("M", 1)))
+SOLN <- ACTS[1:4]
+morie_alfqud_correctness(SOLN, IN, TGT, 1L)
+}

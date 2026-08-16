@@ -34,3 +34,12 @@ A list with the fingerprint, the bits set, the triangles that   produced them, a
     classification and prediction." IBM internal report.
 }
 \keyword{internal}
+\examples{
+FS <- c("donor", "acceptor", "hydrophobic", "aromatic")
+EDGES <- c(2, 4.5, 7, 10, 14)
+SPACE <- morie_phacf3_space(FS, length(EDGES) - 1L, EDGES)
+MOL <- list(list(0, 0, 0, "donor"), list(3, 0, 0, "acceptor"), 
+    list(0, 4, 0, "hydrophobic"), list(2, 2, 5, "aromatic"), 
+    list(-3, 1, 2, "donor"), list(6, -2, 1, "acceptor"))
+morie_phacf3(MOL, FS, EDGES, "binary", SPACE)
+}

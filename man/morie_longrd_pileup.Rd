@@ -33,3 +33,9 @@ A list with the columns and the insertion counts.
     Biology 20, 129. doi:10.1186/s13059-019-1727-y.
 }
 \keyword{internal}
+\examples{
+TRUTH <- "ACGTTTTGACCA"
+DRAFT <- "ACGTTTGACCA"
+READS <- c(TRUTH, TRUTH, TRUTH, "ACGTTTTGACGA", TRUTH)
+morie_longrd_pileup(DRAFT, READS)
+}

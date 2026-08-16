@@ -52,3 +52,6 @@ important, where STAMP explicitly privileges the last click;
 implemented in :mod:`narm`.
 }
 \keyword{internal}
+\examples{
+strec_stamp_scores(embeddings = 5L, item_table = c(1, 2, 3, 4, 5, 6, 7, 8), Ws = c(1, 2, 3, 4, 5, 6, 7, 8), Wt = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

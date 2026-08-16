@@ -20,3 +20,6 @@ Round the relaxation and report what it gives
 A list with x, feasible, violations, note.
 }
 \keyword{internal}
+\examples{
+morie_miprgr_round_relaxation(x = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8), integer_vars = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

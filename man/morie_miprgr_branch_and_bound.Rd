@@ -20,3 +20,6 @@ Branch and bound (Dakin 1965 Fig. 2, marked list)
 A list with the incumbent, the relaxation node count, the   number of nodes pruned, the maximum length of the marked list,   and the root relaxation value.
 }
 \keyword{internal}
+\examples{
+morie_miprgr_branch_and_bound(A = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8), c = c(1, 2, 3, 4, 5, 6, 7, 8), integer_vars = c("a", "b", "c"))
+}

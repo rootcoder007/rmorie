@@ -36,3 +36,6 @@ Lin, D. Y., Wei, L. J., Yang, I. & Ying, Z. (2000). JRSS
 B 62(4):711-730; van der Laan, M. J. & Rubin, D. (2006). IJB
 2(1):11.
 }
+\examples{
+Tmlrec(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

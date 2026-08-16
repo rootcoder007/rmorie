@@ -50,3 +50,6 @@ of ChIP-Seq (MACS), Genome Biology 9(9), R137. Dynamic lambda
 and Poisson p-value, Methods, Peak detection. Local source:
 library/pdf/fetched-wave3/Zhang-2008-MACS-GenomeBiology.pdf.
 }
+\examples{
+Chipsq(count = c(1, 2, 3, 4, 5, 6, 7, 8), width = 5L, lambda_bg = 5L)
+}

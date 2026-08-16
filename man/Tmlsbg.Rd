@@ -36,3 +36,6 @@ Chernozhukov, V., Demirer, M., Duflo, E. &
 Fernandez-Val, I. (2025). Econometrica 93(4):1121-1164; van der
 Laan, M. J. & Rubin, D. (2006). IJB 2(1):11.
 }
+\examples{
+Tmlsbg(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), subgroup = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

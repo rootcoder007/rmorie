@@ -14,3 +14,6 @@ Epidemic log-autoregression (Lawson eq. 18.3)
 A list with \code{logf}, \code{f}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Epiar(beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta1 = c(1, 2, 3, 4, 5, 6, 7, 8), i_lag = c(1, 2, 3, 4, 5, 6, 7, 8), b1 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

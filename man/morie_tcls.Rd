@@ -44,3 +44,6 @@ Li, N., Li, T., & Venkatasubramanian, S. (2007).
 t-Closeness: privacy beyond k-anonymity and l-diversity. ICDE,
 106-115.
 }
+\examples{
+morie_tcls(X = c(1, 2, 3, 4, 5, 6, 7, 8), quasi_ids = c(1, 2, 3, 4, 5, 6, 7, 8), sensitive = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
