@@ -14,3 +14,7 @@ Anderson-Darling W_n^2 -- eq. (4.7.1), p. 138; Table 4.7.1, p. 140
 A list with \code{statistic}, \code{astar}, \code{crit}, \code{reject}, \code{z}, \code{n}, \code{case}, \code{alpha}.
 }
 \keyword{internal}
+\examples{
+set.seed(2)
+Adtest(rnorm(30), cdf = pnorm)
+}

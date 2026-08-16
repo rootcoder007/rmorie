@@ -29,3 +29,8 @@ complaints sample is the current worst case and it is seconds, not
 minutes.
 }
 \keyword{internal}
+\examples{
+w <- .pq_writer()
+.pq_wlisti32(w, fid = 1L, vals = c(1L, 2L, 3L), last = 0L)
+do.call(c, w$parts)
+}

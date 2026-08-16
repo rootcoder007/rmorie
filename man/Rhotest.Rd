@@ -14,3 +14,6 @@ Test of zero Spearman correlation -- Secs. 11.3.2-11.3.3, pp. 412-413
 A list with \code{z}, \code{p_normal}, \code{t}, \code{df}, \code{p_value}, \code{var}, \code{n}.
 }
 \keyword{internal}
+\examples{
+Rhotest(r = 0.45, n = 20)
+}

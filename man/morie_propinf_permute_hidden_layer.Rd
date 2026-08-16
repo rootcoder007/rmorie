@@ -19,3 +19,15 @@ Section 5 of the paper: layer \code{t} becomes sigma(h_t) and the next layer\'s 
 A permuted copy of the network.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+X <- matrix(rnorm(60), 20, 3)
+y <- as.integer(X[, 1] > 0)
+net <- morie_propinf_train_fcnn(X, y, hidden = c(4L), epochs = 5L,
+                                seed = 1L)
+p1 <- morie_propinf_fcnn_predict(net, X[1:3, , drop = FALSE])
+net2 <- morie_propinf_permute_hidden_layer(net, t = 0,
+                                           sigma = c(1L, 0L, 3L, 2L))
+p2 <- morie_propinf_fcnn_predict(net2, X[1:3, , drop = FALSE])
+all.equal(p1, p2)
+}
