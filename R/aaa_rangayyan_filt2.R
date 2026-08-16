@@ -553,6 +553,22 @@ Diff2 <- function(x, T = 1, n = NULL) {
 
 # ---------------------------------------------- the baseline-wander filter
 
+#' Baseline-wander removal as a transfer function
+#'
+#' Equation (3.132): the first difference with a pole placed just inside
+#' the unit circle at direct current. The pole nearly cancels the zero
+#' away from direct current, so the baseline goes without the wholesale
+#' high-frequency boost that the bare first difference of equation
+#' (3.123) inflicts. A pole exactly at one would cancel the zero
+#' outright and is refused.
+#'
+#' @param z A point or vector of points in the z plane; zero is a pole of
+#'   any causal transfer function and is refused.
+#' @param T The sampling interval, which must be positive.
+#' @param pole The pole radius, at least zero and strictly below one.
+#' @return A list with the transfer function \code{H} at the requested
+#'   points and the parameters it was built from.
+#' @export
 BWander <- function(z, T = 1, pole = 0.995) {
   # eq (3.132): the first difference with a pole just inside the unit
   # circle at DC.  The pole nearly cancels the zero away from DC, so the
@@ -607,6 +623,23 @@ BWanderZ <- function(z, T = 1, pole = 0.995) {
   )
 }
 
+#' Baseline-wander removal as a difference equation
+#'
+#' Equation (3.134), applied sample by sample. Note the PLUS on the
+#' feedback term: the pole's coefficient is already on the right-hand
+#' side, so this does not carry the minus sign of the general form in
+#' equation (3.68). Taking the sign from equation (3.68) instead puts the
+#' pole at minus the radius -- a highpass at Nyquist rather than at
+#' direct current, which is the opposite of what the filter is for.
+#'
+#' @param x The input record, at least one sample.
+#' @param T The sampling interval, which must be positive.
+#' @param pole The pole radius, at least zero and strictly below one.
+#' @param n Optional zero-based index whose filtered value is wanted; it
+#'   must lie inside the record.
+#' @return A list with the filtered record \code{y}, the value at the
+#'   requested index if one was asked for, and the parameters used.
+#' @export
 BWanderEq <- function(x, T = 1, pole = 0.995, n = NULL) {
   # eq (3.134).  Note the PLUS on the feedback: the pole's coefficient is
   # already on the right-hand side, so this does NOT carry the minus of
@@ -713,6 +746,28 @@ BwPoles <- function(Omega_c, N, k = NULL) {
   )
 }
 
+#' The analog Butterworth transfer function from its left-half-plane poles
+#'
+#' Equation (3.138), built from the N left-half-plane poles ONLY -- the
+#' right-half-plane poles of the magnitude-squared function belong to the
+#' unstable mirror and taking them would produce a filter that blows up.
+#' With no gain supplied the constant normalises the direct-current gain
+#' to one, which makes it the cutoff raised to the order.
+#'
+#' The denominator coefficients are real to rounding because the poles
+#' arrive in conjugate pairs; the largest imaginary residue is returned
+#' so that claim can be checked rather than trusted.
+#'
+#' @param Omega_c The cutoff, which must be positive.
+#' @param N The filter order, at least one.
+#' @param G The overall gain, or NULL to normalise the gain at direct
+#'   current to one.
+#' @param s Optional points at which to evaluate the transfer function; a
+#'   pole is refused rather than returned as an infinity.
+#' @return A list with the poles, the real denominator coefficients, the
+#'   gain, the transfer function where it was asked for, and the
+#'   imaginary residue that shows the coefficients really are real.
+#' @export
 BwAnalog <- function(Omega_c, N, G = NULL, s = NULL) {
   # eq (3.138): built from the N LEFT-half-plane poles only.  With no gain
   # given, G normalizes the DC gain to unity, which makes it Omega_c^N.
@@ -752,6 +807,22 @@ BwAnalog <- function(Omega_c, N, G = NULL, s = NULL) {
 
 # ------------------------------------------------ the bilinear transformation
 
+#' The bilinear transformation from the z plane to the s plane
+#'
+#' Maps the whole left half-plane into the unit disc, so a stable analog
+#' filter always yields a stable digital one. Impulse invariance does not
+#' have that property -- it aliases -- and the price paid here instead is
+#' the frequency warping of equations (3.141) and (3.142). The point
+#' z = -1 maps to an infinite analog frequency and is refused.
+#'
+#' @param z A point or vector of points in the z plane; zero is outside
+#'   the domain.
+#' @param T The sampling interval, which must be positive.
+#' @return A list with the image \code{s}, the inputs, and the three
+#'   properties that make the transformation worth using: that it maps
+#'   the left half-plane into the unit disc, that stability is preserved
+#'   and that nothing aliases.
+#' @export
 Bilinear <- function(z, T = 1) {
   # eq (3.139): maps the whole left half-plane into the unit disc, so a
   # stable analog filter always yields a stable digital one -- unlike
@@ -775,6 +846,20 @@ Bilinear <- function(z, T = 1) {
   )
 }
 
+#' The unit circle maps onto the imaginary axis and nowhere else
+#'
+#' Equation (3.140). On the unit circle the real part of the image
+#' vanishes exactly, so the mapping carries the unit circle onto the
+#' imaginary axis. The residual real part is computed and returned rather
+#' than assumed away, because it is the check that the mapping is doing
+#' what it claims.
+#'
+#' @param omega A digital frequency or vector of them, in radians.
+#' @param T The sampling interval, which must be positive.
+#' @return A list with the image \code{s}, the largest residual real part
+#'   and the gap between the direct evaluation and the closed form, so a
+#'   reader can see how exactly the two agree.
+#' @export
 BilinUnit <- function(omega, T = 1) {
   # eq (3.140): on the unit circle sigma vanishes exactly, so the
   # imaginary axis maps onto the unit circle and nowhere else.  The
@@ -799,6 +884,21 @@ BilinUnit <- function(omega, T = 1) {
   )
 }
 
+#' Prewarp a digital cutoff before handing it to an analog design
+#'
+#' Equation (3.141). The mapping is nonlinear, so a digital cutoff cannot
+#' be given to an analog design unchanged: skipping this step puts the
+#' realised cutoff BELOW the one asked for, and increasingly so towards
+#' Nyquist. A digital frequency of pi maps to an infinite analog
+#' frequency and is refused rather than clipped.
+#'
+#' @param omega A digital frequency or vector of them, strictly inside
+#'   minus pi to pi.
+#' @param T The sampling interval, which must be positive.
+#' @return A list with the analog frequency \code{Omega} and flags
+#'   recording that the map is nonlinear, that prewarping is required and
+#'   that the compression is severe near Nyquist.
+#' @export
 BilinWarp <- function(omega, T = 1) {
   # eq (3.141): the prewarping step.  Nonlinear, so a digital cutoff
   # cannot be handed to an analog design unchanged; skipping it puts the
@@ -821,6 +921,20 @@ BilinWarp <- function(omega, T = 1) {
   )
 }
 
+#' Undo the prewarping: analog frequency back to digital
+#'
+#' Equation (3.142), the inverse of equation (3.141). The two compose to
+#' the identity and the round-trip error is returned as evidence rather
+#' than asserted. Every finite analog frequency lands strictly inside the
+#' open interval from minus pi to pi, which is what makes the inverse
+#' well defined.
+#'
+#' @param Omega An analog frequency or vector of them.
+#' @param T The sampling interval, which must be positive.
+#' @return A list with the digital frequency \code{omega}, the round-trip
+#'   error against equation (3.141), and whether every result fell
+#'   strictly inside the open interval.
+#' @export
 BilinUnwarp <- function(Omega, T = 1) {
   # eq (3.142): the inverse of eq (3.141); the two compose to the
   # identity, which is checked.  Every finite analog frequency lands
@@ -1406,6 +1520,20 @@ HannW <- function(N) {
   )
 }
 
+#' The Blackman window
+#'
+#' A third cosine term buys much deeper sidelobes than the Hamming window
+#' -- about minus fifty-eight decibels -- at the cost of a main lobe half
+#' again as wide. Resolution against leakage is the trade every window
+#' makes and none escapes; this one sits at the leakage end of it.
+#'
+#' @param N The window length, at least one. A length of one is the
+#'   degenerate window and is returned as such rather than divided by
+#'   zero.
+#' @return A list with the window \code{w}, its length, its sum, its two
+#'   endpoints and its coherent gain, together with the note that it has
+#'   the widest main lobe of the three classical windows.
+#' @export
 BlackmanW <- function(N) {
   # w(n) = 0.42 - 0.5 cos(2 pi n/(N-1)) + 0.08 cos(4 pi n/(N-1)).  A third
   # cosine buys much deeper sidelobes than the Hamming, about -58 dB, at
