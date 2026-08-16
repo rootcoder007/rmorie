@@ -15,3 +15,7 @@ morie_big_cmp(a, b)
 \description{
 Compare two arbitrary-precision integers
 }
+\examples{
+morie_big_cmp(morie_bigint("123456789012345678901234567890"),
+              morie_bigint("123456789012345678901234567891"))
+}

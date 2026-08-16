@@ -19,3 +19,8 @@ Numeric vector length m.
 \description{
 Log density of a multivariate normal at every row of X (hmgmm)
 }
+\examples{
+set.seed(1)
+X <- matrix(rnorm(20), 10, 2)
+morie_gmm_log_pdf(X, mu = c(0, 0), Sigma = diag(2))
+}

@@ -17,3 +17,8 @@ Schoolbook multiplication carrying row by row, which keeps every
 intermediate below \eqn{10^{12} + 10^6} and so exactly representable
 as a double.
 }
+\examples{
+a <- morie_bigint("123456789")
+b <- morie_bigint("987654321")
+as.character(morie_big_mul(a, b))
+}

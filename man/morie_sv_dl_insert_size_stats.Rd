@@ -19,3 +19,12 @@ A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_paired_en
 A list with \code{median}, \code{sd}, \code{spread}, \code{orientation}, \code{n}.
 }
 \keyword{internal}
+\examples{
+set.seed(1)
+mk <- function(pos, gap) list(chrom1 = "chr1", pos1 = pos, strand1 = "+",
+                              chrom2 = "chr1", pos2 = pos + gap,
+                              strand2 = "-")
+pairs <- lapply(seq(100, 4000, by = 150), function(p)
+  mk(p, 300 + sample(-20:20, 1)))
+morie_sv_dl_insert_size_stats(pairs)
+}

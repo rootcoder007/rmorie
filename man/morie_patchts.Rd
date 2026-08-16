@@ -29,3 +29,8 @@ Transformer backbone" -- Nie, Y., Nguyen, N. H., Sinthong, P. and
 Kalagnanam, J., A Time Series is Worth 64 Words, ICLR 2023
 (arXiv:2211.14730), sec. 3.1.
 }
+\examples{
+set.seed(1)
+x <- sin(2 * pi * (1:48) / 12) + rnorm(48, 0, 0.1)
+str(morie_patchts(x, patchlen = 8, stride = 4), max.level = 1)
+}

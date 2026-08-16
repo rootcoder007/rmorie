@@ -20,3 +20,11 @@ Each op is a list(kind=..., param=...) for "linear"/"bias", list(kind=...)
 for "relu"/"tanh"/"sigmoid", or a plain R function. Records observed
 input/output shapes.
 }
+\examples{
+set.seed(4)
+model <- list(list(kind = "linear", param = matrix(rnorm(6, 0, 0.5), 2, 3)),
+              list(kind = "relu"),
+              list(kind = "linear", param = matrix(rnorm(3, 0, 0.5), 3, 1)))
+r <- morie_geron_trace(model, matrix(rnorm(8), 4, 2))
+str(r, max.level = 1)
+}

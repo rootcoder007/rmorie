@@ -17,3 +17,7 @@ A list with \code{quotient} (a \code{morie_bigint}) and \code{remainder}.
 \description{
 Divide an arbitrary-precision integer by a small whole number
 }
+\examples{
+r <- morie_big_divmod_small(morie_bigint("1000000000000000000007"), 7L)
+str(r, max.level = 1)
+}

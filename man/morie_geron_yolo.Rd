@@ -28,3 +28,13 @@ Decodes an (S,S,B\emph{5+C) prediction tensor (tx,ty,tw,th,conf per box,
 shared class probs per cell), score = conf}class_prob, greedy
 per-class NMS at iou_threshold.
 }
+\examples{
+set.seed(6)
+model <- function(img) {
+  P <- array(0, c(2, 2, 7))
+  P[1, 1, ] <- c(0.5, 0.5, 0.3, 0.3, 0.9, 3, -3)
+  P
+}
+r <- morie_geron_yolo(array(0, c(4, 4, 1)), model, n_boxes = 1)
+str(r, max.level = 1)
+}

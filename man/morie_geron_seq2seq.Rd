@@ -28,3 +28,14 @@ enc(src) -> z (context vector); dec(z, prefix) -> next-token scores.
 Runs teacher-forced cross-entropy against tgt and a free-running
 greedy decode.
 }
+\examples{
+enc <- function(src) as.numeric(src)
+dec <- function(z, prefix) {
+  k <- length(prefix)
+  sc <- rep(-4, 4)
+  sc[(k \%\% 4) + 1] <- 4
+  sc
+}
+r <- morie_geron_seq2seq(c(0.5, 0.1), c(0L, 1L, 2L), enc, dec)
+str(r, max.level = 1)
+}

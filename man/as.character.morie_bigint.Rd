@@ -14,3 +14,6 @@ as.character.morie_bigint
 A character value.
 }
 \keyword{internal}
+\examples{
+as.character(morie_bigint("123456789012345678901234567890"))
+}

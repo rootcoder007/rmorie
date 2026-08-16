@@ -32,3 +32,20 @@ with TiDE, TMLR 2023 (arXiv:2304.08424). The paper states the
 residual block and the global linear residual in prose rather than
 as numbered equations; both are implemented from that prose.
 }
+\examples{
+set.seed(4)
+y <- rnorm(6)
+enc <- list(w1 = matrix(rnorm(36, 0, 0.3), 6, 6), b1 = rep(0, 6),
+            w2 = matrix(rnorm(36, 0, 0.3), 6, 6), b2 = rep(0, 6),
+            wskip = diag(6))
+dec <- list(w1 = matrix(rnorm(36, 0, 0.3), 6, 6), b1 = rep(0, 6),
+            w2 = matrix(rnorm(24, 0, 0.3), 4, 6), b2 = rep(0, 4),
+            wskip = matrix(rnorm(24, 0, 0.3), 4, 6))
+tdec <- list(w1 = matrix(rnorm(4, 0, 0.3), 2, 2), b1 = rep(0, 2),
+             w2 = matrix(rnorm(2, 0, 0.3), 1, 2), b2 = 0,
+             wskip = matrix(rnorm(2, 0, 0.3), 1, 2))
+r <- morie_tide(y, feats = NULL, fproj = NULL, enc = enc, dec = dec,
+                tdec = tdec,
+                wglobal = matrix(rnorm(12, 0, 0.3), 2, 6), horizon = 2)
+str(r, max.level = 1)
+}

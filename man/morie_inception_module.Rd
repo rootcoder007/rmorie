@@ -17,3 +17,7 @@ List with \code{branch_1x1}, \code{branch_3x3}, \code{branch_5x5}, \code{branch_
 \description{
 GoogLeNet/Inception parameter count, module by module (hmgoog)
 }
+\examples{
+morie_inception_module(in_ch = 192, o1 = 64, r3 = 96, o3 = 128,
+                       r5 = 16, o5 = 32, pp = 32)
+}
